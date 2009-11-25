@@ -69,13 +69,6 @@ public class U0030000 extends AForm implements ISoft
     }
 
     @Override
-    public int wGetMode()
-    {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
     public String wGetName()
     {
         // TODO Auto-generated method stub

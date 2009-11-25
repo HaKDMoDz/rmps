@@ -90,13 +90,6 @@ public interface ISoft extends IRmps
     int MODE_APPLET = 3;
 
     /**
-     * 程序启动模式<br />
-     * 
-     * @return
-     */
-    int wGetMode();
-
-    /**
      * 当前系统的代码编码名称
      * 
      * @return 当前系统的代码编码名称

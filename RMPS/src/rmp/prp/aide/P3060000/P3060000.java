@@ -173,17 +173,6 @@ public class P3060000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wGetMode()
-     */
-    @Override
-    public int wGetMode()
-    {
-        return 0;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see rmp.face.ISoft#wGetName()
      */
     @Override

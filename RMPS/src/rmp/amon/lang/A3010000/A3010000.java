@@ -7,6 +7,15 @@
  */
 package rmp.amon.lang.A3010000;
 
+import com.amonsoft.bean.WForm;
+import com.amonsoft.rmps.prp.ISoft;
+
+import cons.CfgCons;
+import cons.EnvCons;
+import cons.SysCons;
+import cons.amon.lang.A3010000.ConstUI;
+import cons.id.ComnCons;
+
 import java.awt.Container;
 import java.awt.image.BufferedImage;
 import java.util.Properties;
@@ -14,17 +23,16 @@ import java.util.Properties;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 
-import rmp.Rmps;
 import rmp.amon.lang.A3010000.v.MainPanel;
 import rmp.amon.lang.A3010000.v.MiniPanel;
 import rmp.amon.lang.A3010000.v.NormPanel;
 import rmp.amon.lang.A3010000.v.SubMenu;
 import rmp.amon.lang.A3010000.v.TailPanel;
 import rmp.comn.info.C1010000.C1010000;
-import com.amonsoft.rmps.prp.ISoft;
+
+
+import rmp.Rmps;
 import rmp.prp.Prps;
-import rmp.ui.form.AForm;
-import rmp.ui.form.FForm;
 import rmp.user.UserInfo;
 import rmp.util.BeanUtil;
 import rmp.util.EnvUtil;
@@ -32,11 +40,6 @@ import rmp.util.FileUtil;
 import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.RmpsUtil;
-import cons.CfgCons;
-import cons.EnvCons;
-import cons.SysCons;
-import cons.amon.lang.A3010000.ConstUI;
-import cons.id.ComnCons;
 
 /**
  * <ul>
@@ -51,7 +54,7 @@ import cons.id.ComnCons;
  * </ul>
  * @author Amon
  */
-public class A3010000 extends AForm implements ISoft
+public class A3010000 extends WForm implements ISoft
 {
     // ////////////////////////////////////////////////////////////////////////
     // 控制变量区域
@@ -62,8 +65,7 @@ public class A3010000 extends AForm implements ISoft
     /** 当前运行状态标记：参见AppCons.APP_MODE_*** */
     private static int appMode;
     /** 程序主窗口 */
-    private static AForm softAForm;
-    private static FForm softFForm;
+    private static WForm winForm;
     /** 语言资源 */
     private static Properties langRes;
     /** RMPS系统运行目录 */
@@ -106,9 +108,10 @@ public class A3010000 extends AForm implements ISoft
     public boolean wInit()
     {
         // 实例化主窗口
-        softFForm = new FForm();
-        softFForm.wInit();
-        softFForm.setSoft(this);
+        winForm = new WForm();
+        winForm.wInit(false);
+        winForm.setVisible(true);
+//        winForm.setSoft(this);
 
         return true;
     }
@@ -180,17 +183,6 @@ public class A3010000 extends AForm implements ISoft
     public BufferedImage wGetIconImage(int type)
     {
         return BeanUtil.getLogoImage();
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see rmp.face.ISoft#wGetMode()
-     */
-    @Override
-    public int wGetMode()
-    {
-        return appMode;
     }
 
     /*
@@ -391,7 +383,7 @@ public class A3010000 extends AForm implements ISoft
      */
     public static Container getForm()
     {
-        return appMode == MODE_APPLET ? softAForm : softFForm;
+        return winForm;
     }
 
     /**
@@ -463,20 +455,12 @@ public class A3010000 extends AForm implements ISoft
         }
 
         // 小程序处理
-        if (appMode == MODE_APPLET)
+        winForm.setContentPane(mp_MainPanel);
+        winForm.pack();
+        winForm.center(null);
+        if (!winForm.isVisible())
         {
-            softAForm.setContentPane(mp_MainPanel);
-        }
-        // 主程序处理
-        else
-        {
-            softFForm.setContentPane(mp_MainPanel);
-            softFForm.pack();
-            softFForm.center();
-            if (!softFForm.isVisible())
-            {
-                softFForm.setVisible(true);
-            }
+            winForm.setVisible(true);
         }
         return mp_MainPanel;
     }
@@ -493,21 +477,12 @@ public class A3010000 extends AForm implements ISoft
             mp_MiniPanel.wInit();
         }
 
-        // 小程序处理
-        if (appMode == MODE_APPLET)
+        winForm.setContentPane(mp_MiniPanel);
+        winForm.pack();
+        winForm.center(null);
+        if (!winForm.isVisible())
         {
-            softAForm.setContentPane(mp_MiniPanel);
-        }
-        // 主程序处理
-        else
-        {
-            softFForm.setContentPane(mp_MiniPanel);
-            softFForm.pack();
-            softFForm.center();
-            if (!softFForm.isVisible())
-            {
-                softFForm.setVisible(true);
-            }
+            winForm.setVisible(true);
         }
         return mp_MiniPanel;
     }
@@ -525,20 +500,12 @@ public class A3010000 extends AForm implements ISoft
         }
 
         // 小程序处理
-        if (appMode == MODE_APPLET)
+        winForm.setContentPane(np_NormPanel);
+        winForm.pack();
+        winForm.center(null);
+        if (!winForm.isVisible())
         {
-            softAForm.setContentPane(np_NormPanel);
-        }
-        // 主程序处理
-        else
-        {
-            softFForm.setContentPane(np_NormPanel);
-            softFForm.pack();
-            softFForm.center();
-            if (!softFForm.isVisible())
-            {
-                softFForm.setVisible(true);
-            }
+            winForm.setVisible(true);
         }
         return np_NormPanel;
     }
@@ -567,8 +534,11 @@ public class A3010000 extends AForm implements ISoft
      * 
      * @see java.applet.Applet#init()
      */
+    @Override
     public void init()
     {
+        super.init();
+
         // 启动模式标记
         appMode = MODE_APPLET;
         // 运行目录标记
@@ -578,8 +548,6 @@ public class A3010000 extends AForm implements ISoft
         ui.wInit();
         RmpsUtil.setUserInfo(ui);
 
-        // 承载窗口引用
-        softAForm = this;
         // 显示主窗口 启动应用程序
         wShowView(VIEW_NORM);
     }
@@ -638,8 +606,6 @@ public class A3010000 extends AForm implements ISoft
         soft.wShowView(VIEW_NORM);
 
         // 承载窗口引用
-        softFForm.setDefaultCloseOperation(FForm.EXIT_ON_CLOSE);
+        winForm.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }
-    /** serialVersionUID */
-    private static final long serialVersionUID = -2695755298919659629L;
 }

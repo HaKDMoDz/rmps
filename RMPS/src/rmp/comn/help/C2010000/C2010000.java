@@ -113,18 +113,6 @@ public class C2010000 implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wGetMode()
-     */
-    @Override
-    public int wGetMode()
-    {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see rmp.face.ISoft#wGetName()
      */
     @Override

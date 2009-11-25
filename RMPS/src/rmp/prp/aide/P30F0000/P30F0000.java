@@ -234,17 +234,6 @@ public class P30F0000 implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wGetMode()
-     */
-    @ Override
-    public int wGetMode()
-    {
-        return appMode;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see rmp.face.ISoft#wGetName()
      */
     @ Override

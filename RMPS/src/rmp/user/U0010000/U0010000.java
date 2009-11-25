@@ -188,17 +188,6 @@ public class U0010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wGetMode()
-     */
-    @Override
-    public int wGetMode()
-    {
-        return appMode;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see rmp.face.ISoft#wGetName()
      */
     @Override

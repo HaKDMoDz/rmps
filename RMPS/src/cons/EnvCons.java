@@ -72,45 +72,13 @@ public interface EnvCons
     /** Windows平台：系统启动目录 */
     String WINDOWS_SYSROOT = "SystemRoot";
     // ========================================================================
-    // 软件运行变量
-    // ========================================================================
-    /** 默认数据读取缓冲区大小为8192字节 */
-    int COMN_BUFF_SIZE = 8192;
-    /** 系统文件路径分隔符 */
-    String COMN_SP_FILE = "/";                                        // File.separator;
-    /** 系统参数元素分隔符 */
-    String COMN_SP_PATH = File.pathSeparator;
-    /** 数据存放文件名 */
-    String COMN_DATA_BASE = "amon";
-    /** 当前数据版本信息 */
-    String COMN_DBSVERSION = "8";
-    /** JRE版本信息 */
-    String COMN_JREVERSION = "1.6";
-    /** 日志输出文件名 */
-    String COMN_LOGS_FILE = "exception_{0}.log";
-    /** RMPS根目录标记 */
-    String COMN_PATH_RMPS = "$" + COMN_SP_FILE;
-    /** 插件软件目录标记 */
-    String COMN_PATH_SOFT = "#" + COMN_SP_FILE;
-    /** 当前运行目录标记 */
-    String COMN_PATH_HOME = "." + COMN_SP_FILE;
-    /** 网络加载目录标记 */
-    String COMN_PATH_JNLP = SysCons.HOMEPAGE + "jnlp/";
-    /** 插件配置文件 */
-    String COMN_PLUG_FILE = "plugin.xml";
-    /** 系统皮肤配置文件名 */
-    String COMN_SKIN_FILE = "skin.xml";
-    /** 关于软件资源前缀字符 */
-    String COMN_SOFT_INFO = "info_{0}" + SysCons.EXTS_INFO;
-    /** 软件语言资源前缀字符 */
-    String COMN_SOFT_LANG = "lang_{0}" + SysCons.EXTS_LANG;
-    // ========================================================================
     // 0级：软件运行环境变量
     // ========================================================================
+    String FOLDER0_DATA = "dat";
     /** 帮助目录 */
     String FOLDER0_HELP = "help";
     /** 运行时类库目录 */
-    String FOLDER0_LIBS = "libs";
+    String FOLDER0_LIBS = "lib";
     /** 界面皮肤目录 */
     String FOLDER0_SKIN = "skin";
     /** 相关工具目录 */
@@ -255,6 +223,39 @@ public interface EnvCons
     String FOLDER4_IDIOICON = "idio";
     /** 软件图标目录 */
     String FOLDER4_SOFTICON = "soft";
+    // ========================================================================
+    // 软件运行变量
+    // ========================================================================
+    /** 默认数据读取缓冲区大小为8192字节 */
+    int COMN_BUFF_SIZE = 8192;
+    /** 系统文件路径分隔符 */
+    String COMN_SP_FILE = "/";
+    /** 系统参数元素分隔符 */
+    String COMN_SP_PATH = File.pathSeparator;
+    /** 数据存放文件名 */
+    String COMN_DATA_BASE = "amon";
+    /** 当前数据版本信息 */
+    String COMN_DBSVERSION = "8";
+    /** JRE版本信息 */
+    String COMN_JREVERSION = "1.6";
+    /** 日志输出文件名 */
+    String COMN_LOGS_FILE = "exception_{0}.log";
+    /** RMPS根目录标记 */
+    String COMN_PATH_RMPS = "$" + COMN_SP_FILE;
+    /** 插件软件目录标记 */
+    String COMN_PATH_SOFT = "#" + COMN_SP_FILE;
+    /** 当前运行目录标记 */
+    String COMN_PATH_HOME = FOLDER0_DATA + COMN_SP_FILE + "." + COMN_SP_FILE;
+    /** 网络加载目录标记 */
+    String COMN_PATH_JNLP = SysCons.HOMEPAGE + "jnlp/";
+    /** 插件配置文件 */
+    String COMN_PLUG_FILE = "plugin.xml";
+    /** 系统皮肤配置文件名 */
+    String COMN_SKIN_FILE = "skin.xml";
+    /** 关于软件资源前缀字符 */
+    String COMN_SOFT_INFO = "info_{0}" + SysCons.EXTS_INFO;
+    /** 软件语言资源前缀字符 */
+    String COMN_SOFT_LANG = "lang_{0}" + SysCons.EXTS_LANG;
     // ========================================================================
     // 软件升级变量
     // ========================================================================

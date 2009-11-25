@@ -187,6 +187,33 @@ public class WForm extends javax.swing.JApplet
         }
     }
 
+    public void pack()
+    {
+        if (appForm != null)
+        {
+            appForm.pack();
+        }
+    }
+
+    public void center(javax.swing.JComponent component)
+    {
+        int x = 0;
+        int y = 0;
+        java.awt.Dimension dim;
+        if (component != null)
+        {
+            java.awt.Point pnt = component.getLocationOnScreen();
+            x = pnt.x;
+            y = pnt.y;
+            dim = component.getSize();
+        }
+        else
+        {
+            dim = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        }
+        setLocation(x + (dim.width - getWidth()) >> 1, y + (dim.height - getHeight()) >> 1);
+    }
+
     public void setUndecorated(boolean undecorated)
     {
         if (appForm != null)
