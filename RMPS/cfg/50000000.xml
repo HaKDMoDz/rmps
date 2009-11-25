@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment/>
+    <entry key="#">#</entry>
+    <entry key="?">?</entry>
+    <entry key="？">?</entry>
+    <entry key=".">.</entry>
+    <entry key="。">.</entry>
+    <entry key="..">..</entry>
+    <entry key="。。">..</entry>
+    <entry key=".。">..</entry>
+    <entry key="。.">..</entry>
+    <entry key="1">1</entry>
+    <entry key="１">1</entry>
+    <entry key="2">2</entry>
+    <entry key="２">2</entry>
+    <entry key="3">3</entry>
+    <entry key="３">3</entry>
+    <entry key="4">4</entry>
+    <entry key="４">4</entry>
+    <entry key="5">5</entry>
+    <entry key="５">5</entry>
+    <entry key="6">6</entry>
+    <entry key="６">6</entry>
+    <entry key="7">7</entry>
+    <entry key="７">7</entry>
+    <entry key="8">8</entry>
+    <entry key="８">8</entry>
+    <entry key="9">9</entry>
+    <entry key="９">9</entry>
+    <entry key="0">0</entry>
+    <entry key="０">0</entry>
+    <entry key="/">/</entry>
+    <entry key="$">$</entry>
+    <entry key="￥">$</entry>
+    <entry key="&gt;">&gt;</entry>
+    <entry key="》">&gt;</entry>
+    <entry key="&gt;&gt;">&gt;&gt;</entry>
+    <entry key="》》">&gt;&gt;</entry>
+    <entry key="》》">&gt;&gt;</entry>
+    <entry key="&lt;">&lt;</entry>
+    <entry key="《">&lt;</entry>
+    <entry key="&lt;&lt;">&lt;&lt;</entry>
+    <entry key="《《">&lt;&lt;</entry>
+</properties>
