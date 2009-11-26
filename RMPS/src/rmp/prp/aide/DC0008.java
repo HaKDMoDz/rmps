@@ -6,7 +6,6 @@
  * CopyRight:      Amon (C) 2007 Winshine ( Amonsoft@gmail.com / http://www.amonsoft.cn ).
  * Description:    
  */
-
 package rmp.prp.aide;
 
 import java.sql.ResultSet;
@@ -31,18 +30,7 @@ import cons.prp.aide.extparse.DB0008;
  * <br>
  * TODO: 使用说明
  * </ul>
- * <p>
- * 版本： RMPS V1.0.0.0
- * </p>
- * <p>
- * 作者： Amon
- * </p>
- * <p>
- * 日期： 2007-7-15 下午04:44:45
- * </p>
- * <p>
- * 团队： WinShine开发团队
- * </p>
+ * @author Amon
  */
 public final class DC0008
 {
@@ -167,7 +155,7 @@ public final class DC0008
             }
             rest.close();
         }
-        catch(SQLException exp)
+        catch (SQLException exp)
         {
             LogUtil.exception(exp);
         }
@@ -186,7 +174,7 @@ public final class DC0008
      * @throws SQLException
      */
     public static int updateBaseMeta(DBAccess dba, String apartKey, String cfgValue, String idioMark)
-        throws SQLException
+            throws SQLException
     {
         LogUtil.log("数据库基本表格数据配置：（" + apartKey + "、" + cfgValue + "）");
         dba.reset();

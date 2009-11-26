@@ -126,6 +126,7 @@ public class BeanUtil
      * @param wText
      * @param isHash
      */
+    @Deprecated
     public static void setWText(AbstractButton c, String wText)
     {
         if (wText == null)
@@ -155,6 +156,7 @@ public class BeanUtil
      * @param wText
      * @param isHash
      */
+    @Deprecated
     public static void setWText(JTextComponent c, String wText)
     {
         if (wText == null)
@@ -170,6 +172,7 @@ public class BeanUtil
      * @param wText
      * @param isHash
      */
+    @Deprecated
     public static void setWText(JLabel c, String wText)
     {
         if (wText == null)
@@ -199,6 +202,7 @@ public class BeanUtil
      * @param wTips
      * @param isHash
      */
+    @Deprecated
     public static void setWTips(JComponent c, String wTips)
     {
         if (wTips == null)

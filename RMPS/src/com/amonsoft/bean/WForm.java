@@ -120,6 +120,16 @@ public class WForm extends javax.swing.JApplet
     }
 
     @Override
+    public java.awt.Container getContentPane()
+    {
+        if (appForm != null)
+        {
+            return appForm.isUndecorated() ? appPane : appForm.getContentPane();
+        }
+        return getRootPane().getContentPane();
+    }
+
+    @Override
     public void setContentPane(java.awt.Container contentPane)
     {
         if (appForm != null)

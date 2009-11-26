@@ -56,7 +56,7 @@ public final class LangUtil
             InputStream inStream = null;
             try
             {
-                inStream = new FileInputStream(new File(EnvCons.FOLDER0_LANG, StringUtil.format(code, EnvCons.COMN_SOFT_LANG)));
+                inStream = new FileInputStream(new File(EnvCons.FOLDER0_LANG, StringUtil.format(EnvCons.COMN_SOFT_LANG, code)));
                 langRes.load(inStream);
             }
             catch (IOException ex)

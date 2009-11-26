@@ -41,10 +41,6 @@ public class StdPlug_In extends javax.swing.JPanel
     // ////////////////////////////////////////////////////////////////////////
     // 构造函数区域
     // ////////////////////////////////////////////////////////////////////////
-    static
-    {
-    }
-
     /**
      * 默认构造函数
      */
@@ -118,6 +114,8 @@ public class StdPlug_In extends javax.swing.JPanel
         vsg.addComponent(pl_Soft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vsg.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         layout.setVerticalGroup(vsg);
+
+        pm_Menu = new javax.swing.JPopupMenu();
 
         // 帮助菜单
         mi_HelpItem = new javax.swing.JMenuItem();

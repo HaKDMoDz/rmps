@@ -495,6 +495,7 @@ public class P3050000 extends AForm implements ISoft
      * 
      * @see java.applet.Applet#init()
      */
+    @Override
     public void init()
     {
         // 启动模式标记

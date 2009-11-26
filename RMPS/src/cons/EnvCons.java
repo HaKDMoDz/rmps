@@ -88,7 +88,7 @@ public interface EnvCons
     /** 语言资源目录 */
     String FOLDER0_LANG = "language";
     /** 插件目录 */
-    String FOLDER0_PLUS = "plugins";
+    String FOLDER0_PLUS = "plug-ins";
     // ========================================================================
     // 1级：用户数据文件夹变量
     // ========================================================================
@@ -253,9 +253,9 @@ public interface EnvCons
     /** 系统皮肤配置文件名 */
     String COMN_SKIN_FILE = "skin.xml";
     /** 关于软件资源前缀字符 */
-    String COMN_SOFT_INFO = "{0}_info" + SysCons.EXTS_INFO;
+    String COMN_SOFT_INFO = "{0}_info.properties";
     /** 软件语言资源前缀字符 */
-    String COMN_SOFT_LANG = "{0}_lang" + SysCons.EXTS_LANG;
+    String COMN_SOFT_LANG = "{0}_lang.properties";
     // ========================================================================
     // 软件升级变量
     // ========================================================================

@@ -43,10 +43,20 @@ public class StdPanel extends javax.swing.JPanel
     /**
      * @return
      */
-    public boolean wInit()
+    public boolean wInitView()
     {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        return true;
+    }
+
+    public boolean wInitLang()
+    {
+        return true;
+    }
+
+    public boolean wInitData()
+    {
         return true;
     }
 
@@ -71,6 +81,4 @@ public class StdPanel extends javax.swing.JPanel
     // ////////////////////////////////////////////////////////////////////////
     // 界面组件区域
     // ////////////////////////////////////////////////////////////////////////
-    /** serialVersionUID */
-    private static final long serialVersionUID = 730826188734915473L;
 }
