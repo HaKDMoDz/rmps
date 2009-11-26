@@ -7,10 +7,6 @@
  */
 package com.amonsoft.rmps.imp.b;
 
-import com.amonsoft.bean.IProcess;
-import com.amonsoft.rmps.imp.*;
-import java.io.File;
-
 /**
  * <ul>
  * <li>功能说明：</li>
@@ -50,7 +46,7 @@ public interface ISession
      * 发送文件
      * @param file
      */
-    void send(File file);
+    void send(java.io.File file);
 
     /**
      * 获取不同消息中新行信息

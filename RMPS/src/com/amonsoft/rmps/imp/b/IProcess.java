@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package com.amonsoft.bean;
+package com.amonsoft.rmps.imp.b;
 
 /**
  * <ul>

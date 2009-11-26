@@ -7,9 +7,6 @@
  */
 package com.amonsoft.util;
 
-import rmp.util.*;
-import cons.EnvCons;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,37 +43,16 @@ public final class LangUtil
      * @param code
      * @return
      */
-    public static LangUtil initLang(String code)
+    public static LangUtil initLang(String path) throws IOException
     {
-        LangUtil langUtill = langList.get(code);
+        LangUtil langUtill = langList.get(path);
         if (langUtill == null)
         {
             // 读取语言资源
             Properties langRes = new Properties();
-            InputStream inStream = null;
-            try
-            {
-                inStream = new FileInputStream(new File(EnvCons.FOLDER0_LANG, StringUtil.format(EnvCons.COMN_SOFT_LANG, code)));
-                langRes.load(inStream);
-            }
-            catch (IOException ex)
-            {
-                LogUtil.exception(ex);
-            }
-            finally
-            {
-                if (inStream != null)
-                {
-                    try
-                    {
-                        inStream.close();
-                    }
-                    catch (IOException ex)
-                    {
-                        LogUtil.exception(ex);
-                    }
-                }
-            }
+            InputStream inStream = new FileInputStream(path);
+            langRes.load(inStream);
+            inStream.close();
             langUtill = new LangUtil(langRes);
         }
 
@@ -109,7 +85,7 @@ public final class LangUtil
         msgRes = getMesg(msgRes, msgDef);
 
         // 快捷字符替换
-        if (CheckUtil.isValidate(msgRes))
+        if (null != msgRes)
         {
             int si = msgRes.indexOf('&');
             if (si >= 0)
@@ -153,7 +129,7 @@ public final class LangUtil
         }
 
         // 快捷字符替换
-        if (CheckUtil.isValidate(msgRes))
+        if (null != msgRes)
         {
             int si = msgRes.indexOf('&');
             if (si >= 0)

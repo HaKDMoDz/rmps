@@ -7,10 +7,7 @@
  */
 package com.amonsoft.rmps.imp.v;
 
-import com.amonsoft.rmps.imp.b.*;
-import com.amonsoft.rmps.imp.*;
 import com.amonsoft.rmps.imp.b.IContact;
-import java.util.List;
 
 /**
  * <ul>
@@ -32,5 +29,5 @@ public interface IAccount
 
     IContact getContact(String user);
 
-    List<IContact> getContact();
+    java.util.List<IContact> getContact();
 }

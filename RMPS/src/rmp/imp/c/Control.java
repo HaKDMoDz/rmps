@@ -9,7 +9,7 @@ package rmp.imp.c;
 
 import com.amonsoft.rmps.imp.c.IControl;
 import com.amonsoft.rmps.imp.b.IMessage;
-import com.amonsoft.bean.IProcess;
+import com.amonsoft.rmps.imp.b.IProcess;
 import com.amonsoft.rmps.imp.m.IService;
 import com.amonsoft.rmps.imp.b.ISession;
 import java.io.FileInputStream;

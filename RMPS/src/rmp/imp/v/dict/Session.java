@@ -10,7 +10,7 @@ package rmp.imp.v.dict;
 import com.amonsoft.rmps.imp.b.IContact;
 import com.amonsoft.rmps.imp.b.IMessage;
 import com.amonsoft.rmps.imp.b.IMimeMessage;
-import com.amonsoft.bean.IProcess;
+import com.amonsoft.rmps.imp.b.IProcess;
 import java.io.File;
 import rmp.imp._comn.ASession;
 

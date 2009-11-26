@@ -7,9 +7,6 @@
  */
 package com.amonsoft.rmps.imp.b;
 
-import com.amonsoft.rmps.imp.b.IMessage;
-import java.awt.Color;
-
 /**
  * <ul>
  * <li>功能说明：</li>
@@ -58,9 +55,9 @@ public interface IMimeMessage extends IMessage
 
     void setUnderline(boolean underline);
 
-    Color getFontColor();
+    java.awt.Color getFontColor();
 
-    void setFontColor(Color color);
+    void setFontColor(java.awt.Color color);
 
     String getFontName();
 

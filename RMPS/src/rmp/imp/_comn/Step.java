@@ -7,7 +7,8 @@
  */
 package rmp.imp._comn;
 
-import com.amonsoft.bean.IProcess;
+import com.amonsoft.rmps.imp.b.IProcess;
+
 
 /**
  * <ul>
