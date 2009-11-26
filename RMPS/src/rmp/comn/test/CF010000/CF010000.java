@@ -37,6 +37,7 @@ import cons.EnvCons;
 import cons.SysCons;
 import cons.comn.test.CF010000.ConstUI;
 import cons.id.ComnCons;
+import com.amonsoft.util.LangUtil;
 
 /**
  * <ul>
@@ -80,6 +81,7 @@ public class CF010000 extends AForm implements ISoft
     private TailPanel tp_TailPanel;
     /** 级联菜单 */
     private SubMenu sm_SubMenu;
+    private LangUtil langUtil;
 
     // ////////////////////////////////////////////////////////////////////////
     // 构造函数区域
@@ -116,12 +118,13 @@ public class CF010000 extends AForm implements ISoft
      * @see rmp.face.ISoft#dispose()
      */
     @Override
-    public void wDispose()
+    public boolean wClosing()
     {
         mp_MiniPanel = null;
         np_NormPanel = null;
         mp_MainPanel = null;
         tp_TailPanel = null;
+        return true;
     }
 
     /*
@@ -143,7 +146,7 @@ public class CF010000 extends AForm implements ISoft
     @Override
     public String wGetDescription()
     {
-        return Prps.getMesg(ConstUI.RES_DESCRIPTION);
+        return langUtil.getMesg(ConstUI.RES_DESCRIPTION, "");
     }
 
     /*
@@ -187,7 +190,7 @@ public class CF010000 extends AForm implements ISoft
     @Override
     public String wGetName()
     {
-        return Prps.getMesg(ConstUI.RES_NAME);
+        return langUtil.getMesg(ConstUI.RES_NAME, "");
     }
 
     /*
@@ -206,9 +209,10 @@ public class CF010000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#getTitle()
      */
+    @Override
     public String wGetTitle()
     {
-        return Prps.getMesg(ConstUI.RES_TITLE);
+        return langUtil.getMesg(ConstUI.RES_TITLE, "");
     }
 
     /*
@@ -228,7 +232,7 @@ public class CF010000 extends AForm implements ISoft
      * @see rmp.face.ISoft#initSoftMenu(javax.swing.JMenu)
      */
     @Override
-    public boolean wInitMenu(JMenu menu)
+    public boolean wShowMenu(JMenu menu)
     {
         if (sm_SubMenu == null)
         {
@@ -244,7 +248,7 @@ public class CF010000 extends AForm implements ISoft
      * @see rmp.face.ISoft#initSoftTail(javax.swing.JPanel)
      */
     @Override
-    public boolean wInitTail(JPanel view)
+    public boolean wShowTail(JPanel view)
     {
         if (tp_TailPanel == null)
         {
@@ -337,10 +341,10 @@ public class CF010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wStart()
+     * @see rmp.face.ISoft#wIconified()
      */
     @Override
-    public boolean wStart()
+    public boolean wIconified()
     {
         return true;
     }
@@ -348,10 +352,10 @@ public class CF010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wStop()
+     * @see rmp.face.ISoft#wDeiconified()
      */
     @Override
-    public boolean wStop()
+    public boolean wDeiconified()
     {
         return true;
     }

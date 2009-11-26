@@ -179,7 +179,7 @@ public class MiniPanel extends javax.swing.JPanel
             return;
         }
         ms_MainSoft.firePropertyChanged(CfgCons.SIGN_IN, new K1SV1S(un, pw), CfgCons.SIGN_IN);
-        ms_MainSoft.wDispose();
+        ms_MainSoft.wClosing();
     }
     private javax.swing.JButton bt_Cancel;
     private javax.swing.JButton bt_SingIn;

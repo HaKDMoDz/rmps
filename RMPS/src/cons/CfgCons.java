@@ -60,4 +60,6 @@ public interface CfgCons
     String SIGN_ERR = "signErr";
     /** 修改口令 */
     String SIGN_PWD = "signPwd";
+    String DEF_TRUE = "true";
+    String DEF_FALSE = "false";
 }

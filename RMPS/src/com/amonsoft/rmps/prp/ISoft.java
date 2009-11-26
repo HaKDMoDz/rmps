@@ -8,7 +8,6 @@
 package com.amonsoft.rmps.prp;
 
 import com.amonsoft.rmps.IRmps;
-import java.awt.image.BufferedImage;
 
 /**
  * <ul>
@@ -32,54 +31,6 @@ import java.awt.image.BufferedImage;
  */
 public interface ISoft extends IRmps
 {
-    String ARGS_WEB_START = "JavaWebStart";
-
-    /**
-     * 初始化软件快捷式弹出菜单 <br />
-     * 说明：系统会在用户每次事件过程中调用一次此方法，以响应不同的用户事件
-     * 
-     * @param menu
-     * @return 菜单初始化结果，系统根据此返回值来决定快捷菜单是否需要显示
-     */
-    boolean wInitMenu(javax.swing.JMenu menu);
-
-    /**
-     * 初始化内嵌式快捷面板 <br />
-     * 说明：系统会在用户每次事件过程中调用一次此方法，以响应不同的用户事件
-     * 
-     * @param view
-     * @return
-     */
-    boolean wInitTail(javax.swing.JPanel view);
-
-    /**
-     * 当前系统的简短描述信息
-     * 
-     * @return
-     */
-    String wGetDescription();
-
-    /**
-     * 当前系统的网络首页
-     * 
-     * @return
-     */
-    String wGetHomepage();
-    int ICON_LOGO0016 = 0;
-    int ICON_LOGO0032 = 1;
-    int ICON_LOGO0048 = 2;
-    int ICON_LOGO0096 = 3;
-    int ICON_LOGO0128 = 4;
-    int ICON_LOGO0256 = 5;
-
-    /**
-     * 当前系统的Logo图标
-     * 
-     * @param type 图标文件类型
-     * @return
-     */
-    BufferedImage wGetIconImage(int type);
-
     /** 启动模式：标准插件模式 */
     int MODE_PLUGINS = 0;
     /** 启动模式：独立程序模式 */
@@ -88,27 +39,92 @@ public interface ISoft extends IRmps
     int MODE_WEB_START = 2;
     /** 启动模式：脚本程序模式 */
     int MODE_APPLET = 3;
+    String ARGS_WEB_START = "JavaWebStart";
+//
+//    /**
+//     * 界面布局初始化
+//     * @return
+//     */
+//    boolean wInitView();
+//
+//    /**
+//     * 界面语言初始化
+//     * @return
+//     */
+//    boolean wInitLang();
+//
+//    /**
+//     * 界面数据初始化
+//     * @return
+//     */
+//    boolean wInitData();
 
     /**
      * 当前系统的代码编码名称
-     * 
+     *
      * @return 当前系统的代码编码名称
      */
     String wGetName();
 
     /**
      * 当前系统的显示名称信息
-     * 
+     *
      * @return 当前系统的名称信息
      */
     String wGetTitle();
 
     /**
+     * 当前系统的Logo图标
+     *
+     * @param type 图标文件类型
+     * @return
+     */
+    java.awt.image.BufferedImage wGetIconImage(int type);
+    int ICON_LOGO0016 = 0;
+    int ICON_LOGO0032 = 1;
+    int ICON_LOGO0048 = 2;
+    int ICON_LOGO0096 = 3;
+    int ICON_LOGO0128 = 4;
+    int ICON_LOGO0256 = 5;
+
+    /**
+     * 当前系统的简短描述信息
+     *
+     * @return
+     */
+    String wGetDescription();
+
+    /**
      * 当前系统的版本信息
-     * 
+     *
      * @return 当前系统的版本信息
      */
     String wGetVersion();
+
+    /**
+     * 初始化软件快捷式弹出菜单 <br />
+     * 说明：系统会在用户每次事件过程中调用一次此方法，以响应不同的用户事件
+     * 
+     * @param menu
+     * @return 菜单初始化结果，系统根据此返回值来决定快捷菜单是否需要显示
+     */
+    boolean wShowMenu(javax.swing.JMenu menu);
+
+    /**
+     * 初始化内嵌式快捷面板 <br />
+     * 说明：系统会在用户每次事件过程中调用一次此方法，以响应不同的用户事件
+     * 
+     * @param view
+     * @return
+     */
+    boolean wShowTail(javax.swing.JPanel view);
+
+    /**
+     * 当前系统的网络首页
+     * 
+     * @return
+     */
+    String wGetHomepage();
 
     /**
      * 显示软件帮助信息
@@ -119,9 +135,13 @@ public interface ISoft extends IRmps
      * 显示关于软件信息
      */
     void wShowInfo();
-    // ----------------------------------------------------
-    // 系统常用功能标记
-    // ----------------------------------------------------
+
+    /**
+     * 显示软件指定的模式状态，如查寻、新增、更新、删除或者迷你、普通、高级等模式，以供有选择的响应外部调用。
+     * 
+     * @param modelIdx 要显示的模式状态标记ID，{@link cons.SysCons}
+     */
+    javax.swing.JPanel wShowView(int modelIdx);
     /** 内嵌面板 */
     int VIEW_TAIL = 0;
     /** 迷你面板 */
@@ -134,28 +154,21 @@ public interface ISoft extends IRmps
     int VIEW_STEP = VIEW_MAIN + 1;
 
     /**
-     * 显示软件指定的模式状态，如查寻、新增、更新、删除或者迷你、普通、高级等模式，以供有选择的响应外部调用。
-     * 
-     * @param modelIdx 要显示的模式状态标记ID，{@link cons.SysCons}
-     */
-    javax.swing.JPanel wShowView(int modelIdx);
-
-    /**
      * 销毁当前构件所占用的内在空间
      * 
      * @return 内在空间是否正常释放：true释放正常；false释放异常
      */
-    void wDispose();
+    boolean wClosing();
 
     /**
      * @return TODO
      */
-    boolean wStart();
+    boolean wIconified();
 
     /**
      * @return TODO
      */
-    boolean wStop();
+    boolean wDeiconified();
 
     /**
      * 获取RMPS系统运行目录

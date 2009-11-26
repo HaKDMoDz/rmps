@@ -28,9 +28,9 @@ import rmp.ui.form.AForm;
 public class U0030000 extends AForm implements ISoft
 {
     @Override
-    public void wDispose()
+    public boolean wClosing()
     {
-        // TODO Auto-generated method stub
+        return true;
     }
 
     @Override
@@ -97,14 +97,14 @@ public class U0030000 extends AForm implements ISoft
     }
 
     @Override
-    public boolean wInitMenu(JMenu menu)
+    public boolean wShowMenu(JMenu menu)
     {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean wInitTail(JPanel view)
+    public boolean wShowTail(JPanel view)
     {
         // TODO Auto-generated method stub
         return false;
@@ -142,13 +142,13 @@ public class U0030000 extends AForm implements ISoft
     }
 
     @Override
-    public boolean wStart()
+    public boolean wIconified()
     {
         return true;
     }
 
     @Override
-    public boolean wStop()
+    public boolean wDeiconified()
     {
         return true;
     }

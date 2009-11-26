@@ -6,7 +6,6 @@
  * CopyRight:      Amon (C) 2007 Winshine ( Amonsoft@gmail.com / http://www.amonsoft.cn ).
  * Description:    
  */
-
 package rmp.prp.aide.extparse;
 
 import java.awt.Component;
@@ -54,6 +53,7 @@ import cons.SysCons;
 import cons.id.PrpCons;
 import cons.prp.aide.extparse.ConstUI;
 import cons.prp.aide.extparse.LangRes;
+import com.amonsoft.util.LangUtil;
 
 /**
  * <ul>
@@ -80,7 +80,6 @@ public class Extparse extends AForm implements ISoft
 {
     /**  */
     private static final long serialVersionUID = 1L;
-
     // ////////////////////////////////////////////////////////////////////////
     // 控制变量区域
     // ////////////////////////////////////////////////////////////////////////
@@ -88,24 +87,22 @@ public class Extparse extends AForm implements ISoft
     // 逻辑控制区域
     // ----------------------------------------------------
     /** 当前运行状态标记：参见AppCons.APP_MODE_*** */
-    private static int        appMode;
-
+    private static int appMode;
     /** 程序主窗口 */
-    private static AForm      softAForm;
-    private static FForm      softFForm;
-
+    private static AForm softAForm;
+    private static FForm softFForm;
     /** 语言资源 */
     private static Properties langRes;
     /** RMPS系统运行目录 */
-    private static String     baseFolder       = "";
+    private static String baseFolder = "";
     /** 插件程序运行目录 */
-    private static String     plusFolder       = "";
-
+    private static String plusFolder = "";
     // ----------------------------------------------------
     // 界面显示区域
     // ----------------------------------------------------
     /** 当前显示后台数据 */
-    private ExtsBaseData      me_BaseData;
+    private ExtsBaseData me_BaseData;
+    private LangUtil langUtil;
 
     // ////////////////////////////////////////////////////////////////////////
     // 接口实现区域
@@ -122,7 +119,7 @@ public class Extparse extends AForm implements ISoft
      * 
      * @see rmp.face.WRmps#init()
      */
-    @ Override
+    @Override
     public boolean wInit()
     {
         // 实例化主窗口
@@ -139,10 +136,11 @@ public class Extparse extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#dispose()
      */
-    @ Override
-    public void wDispose()
+    @Override
+    public boolean wClosing()
     {
         Rmps.exit(0, true, true);
+        return true;
     }
 
     /*
@@ -150,7 +148,7 @@ public class Extparse extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#getBaseFolder()
      */
-    @ Override
+    @Override
     public String wGetBaseFolder()
     {
         return baseFolder;
@@ -161,7 +159,7 @@ public class Extparse extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#setBaseFolder(java.lang.String)
      */
-    @ Override
+    @Override
     public void wSetBaseFolder(String folder)
     {
         baseFolder = folder;
@@ -172,10 +170,10 @@ public class Extparse extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#getSoftDescription()
      */
-    @ Override
+    @Override
     public String wGetDescription()
     {
-        return Prps.getMesg(ConstUI.RES_DESCRIPTION);
+        return langUtil.getMesg(ConstUI.RES_DESCRIPTION, "");
     }
 
     /*
@@ -183,7 +181,7 @@ public class Extparse extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#getHomepage()
      */
-    @ Override
+    @Override
     public String wGetHomepage()
     {
         return ConstUI.URL_SOFT;
@@ -194,7 +192,7 @@ public class Extparse extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#getSoftLogo()
      */
-    @ Override
+    @Override
     public BufferedImage wGetIconImage(int type)
     {
         return BeanUtil.getLogoImage();
@@ -205,7 +203,7 @@ public class Extparse extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#getSystemID()
      */
-    @ Override
+    @Override
     public int wCode()
     {
         return PrpCons.P3010000_I;
@@ -216,10 +214,10 @@ public class Extparse extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#getSystemName()
      */
-    @ Override
+    @Override
     public String wGetName()
     {
-        return Prps.getMesg(ConstUI.RES_NAME);
+        return langUtil.getMesg(ConstUI.RES_NAME, "");
     }
 
     /*
@@ -227,7 +225,7 @@ public class Extparse extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wGetPlusFolder()
      */
-    @ Override
+    @Override
     public String wGetPlusFolder()
     {
         return plusFolder;
@@ -238,7 +236,7 @@ public class Extparse extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wSetPlusFolder(java.lang.String)
      */
-    @ Override
+    @Override
     public void wSetPlusFolder(String folder)
     {
         plusFolder = folder;
@@ -249,9 +247,10 @@ public class Extparse extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#getTitle()
      */
+    @Override
     public String wGetTitle()
     {
-        return Prps.getMesg(ConstUI.RES_TITLE);
+        return langUtil.getMesg(ConstUI.RES_TITLE, "");
     }
 
     /*
@@ -259,7 +258,7 @@ public class Extparse extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#getSystemVersion()
      */
-    @ Override
+    @Override
     public String wGetVersion()
     {
         return null;
@@ -270,8 +269,8 @@ public class Extparse extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#initSoftMenu(javax.swing.JMenu)
      */
-    @ Override
-    public boolean wInitMenu(JMenu menu)
+    @Override
+    public boolean wShowMenu(JMenu menu)
     {
         return false;
     }
@@ -281,8 +280,8 @@ public class Extparse extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#initSoftTail(javax.swing.JPanel)
      */
-    @ Override
-    public boolean wInitTail(JPanel view)
+    @Override
+    public boolean wShowTail(JPanel view)
     {
         return false;
     }
@@ -292,7 +291,7 @@ public class Extparse extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wShowHelp()
      */
-    @ Override
+    @Override
     public void wShowHelp()
     {
         EnvUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
@@ -303,7 +302,7 @@ public class Extparse extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wShowInfo()
      */
-    @ Override
+    @Override
     public void wShowInfo()
     {
         C1010000.setInfo(getInfoPath());
@@ -315,7 +314,7 @@ public class Extparse extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wShowView(int)
      */
-    @ Override
+    @Override
     public javax.swing.JPanel wShowView(int modelIdx)
     {
         switch (modelIdx)
@@ -324,19 +323,19 @@ public class Extparse extends AForm implements ISoft
             case VIEW_TAIL:
                 return showTail();
 
-                // 显示迷你模式
+            // 显示迷你模式
             case VIEW_MINI:
                 return showMini();
 
-                // 显示正常模式
+            // 显示正常模式
             case VIEW_NORM:
                 return showNorm();
 
-                // 显示高级模式
+            // 显示高级模式
             case VIEW_MAIN:
                 return showMain();
 
-                // 显示向导模式
+            // 显示向导模式
             case VIEW_STEP:
                 return showStep();
 
@@ -348,10 +347,10 @@ public class Extparse extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wStart()
+     * @see rmp.face.ISoft#wIconified()
      */
-    @ Override
-    public boolean wStart()
+    @Override
+    public boolean wIconified()
     {
         return true;
     }
@@ -359,10 +358,10 @@ public class Extparse extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wStop()
+     * @see rmp.face.ISoft#wDeiconified()
      */
-    @ Override
-    public boolean wStop()
+    @Override
+    public boolean wDeiconified()
     {
         return true;
     }
@@ -384,7 +383,7 @@ public class Extparse extends AForm implements ISoft
             {
                 FileUtil.readLangRes(langRes, EnvCons.PATH_P3010000, EnvCons.COMN_SOFT_LANG);
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 LogUtil.exception(exp);
                 MesgUtil.showMessageDialog(getForm(), exp.getMessage());
@@ -531,7 +530,7 @@ public class Extparse extends AForm implements ISoft
      * @param iconName
      */
     public static void readEnvImage(final WIconLabel imgLbl, final String folder, final String iconName,
-        final String postfix)
+            final String postfix)
     {
         // 创建线程
         Thread thread = new Thread(new Runnable()
@@ -545,7 +544,7 @@ public class Extparse extends AForm implements ISoft
                 {
                     bi = ImageUtil.readPngImage(filePath);
                 }
-                catch(IOException exp)
+                catch (IOException exp)
                 {
                     LogUtil.exception(exp);
                     String arg1 = Extparse.getMesg(LangRes.MESG_INIT_0010);
@@ -1158,7 +1157,6 @@ public class Extparse extends AForm implements ISoft
 
         return dg_ExtsForm;
     }
-
     // ////////////////////////////////////////////////////////////////////////
     // 系统全局变量区域
     // ////////////////////////////////////////////////////////////////////////
@@ -1187,18 +1185,15 @@ public class Extparse extends AForm implements ISoft
     private SoftPanel sp_SoftPanel;
     /** 向导后缀管理面板 */
     private StepPanel sp_StepPanel;
-
     // ----------------------------------------------------
     // 子窗口对象区域
     // ----------------------------------------------------
     /** 分页信息窗口 */
-    private DForm     dg_ItemForm;
-
+    private DForm dg_ItemForm;
     /** 后缀管理窗口 */
-    private DForm     dg_ExtsForm;
-
+    private DForm dg_ExtsForm;
     /** 系统菜单 */
-    private MainMenu  mm_MainMenu;
+    private MainMenu mm_MainMenu;
 
     public void init()
     {

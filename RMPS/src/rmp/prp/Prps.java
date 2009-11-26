@@ -7,6 +7,7 @@
  */
 package rmp.prp;
 
+import com.amonsoft.bean.WForm;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -18,7 +19,6 @@ import java.util.Properties;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
@@ -37,7 +37,6 @@ import rmp.prp.v.SubMenu;
 import rmp.util.BeanUtil;
 import rmp.util.CheckUtil;
 import rmp.util.EnvUtil;
-import rmp.util.FileUtil;
 import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.RmpsUtil;
@@ -48,6 +47,8 @@ import cons.prp.ConstUI;
 import cons.prp.LangRes;
 import cons.prp.Plugins;
 import com.amonsoft.skin.ISkin;
+import javax.swing.WindowConstants;
+import com.amonsoft.util.LangUtil;
 
 /**
  * <ul>
@@ -59,7 +60,7 @@ import com.amonsoft.skin.ISkin;
  * </ul>
  * @author Amon
  */
-public class Prps extends JFrame
+public class Prps extends WForm
 {
     /** 软件 */
     private static ISoft currSoft;
@@ -67,6 +68,10 @@ public class Prps extends JFrame
     private static Properties langRes;
     /** 关于软件 */
     private static C1010000 softInfo;
+    /**
+     * 语言资源
+     */
+    private LangUtil langUtil;
 
     // ////////////////////////////////////////////////////////////////////////
     // 构造函数区域
@@ -78,98 +83,91 @@ public class Prps extends JFrame
     {
     }
 
-    /**
-     * @return
-     */
-    public boolean wInit()
-    {
-        // 系统托盘图标
-        C3010000.getInstance();
-
-        // 关于软件
-        softInfo = new C1010000();
-        softInfo.wInit();
-
-        ica();
-        icb();
-        icc();
-        icd();
-        ice();
-        ita();
-
-        // 窗口属性设置
-        setAlwaysOnTop("true".equalsIgnoreCase(RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_WND_EVERTOP)));
-        Dimension f = getSize();
-        Dimension s = Toolkit.getDefaultToolkit().getScreenSize();
-        setLocation(s.width - f.width - 30, 30);
-        setIconImage(BeanUtil.getLogoImage());
-        setTitle(Prps.getMesg(LangRes.TITLE_FRAME));
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        setVisible(true);
-
-        C3010000.regester("prp", this);
-
-        return true;
-    }
-
     // ////////////////////////////////////////////////////////////////////////
     // 界面初始化区域
     // ////////////////////////////////////////////////////////////////////////
     /**
-     * 主窗口界面初始化
+     * 界面布局初始化
      */
-    private void ica()
+    public void initView()
     {
-        javax.swing.JPanel amonPanel = (javax.swing.JPanel) getContentPane();
-        amonPanel.setName(ISkin.CONTAINER);
-
         mb_RmpsMenu = new javax.swing.JMenuBar();
+        pl_HeadPane = new javax.swing.JPanel();
+        pl_FootPane = new javax.swing.JPanel();
+        tp_BodyPane = new javax.swing.JTabbedPane();
+
+        initFileView();
+        initToolView();
+        initHelpView();
+
         setJMenuBar(mb_RmpsMenu);
 
-        tp_SoftPane = new javax.swing.JTabbedPane();
-        tp_SoftPane.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-        tp_SoftPane.setFocusable(false);
+        tp_BodyPane.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
-        javax.swing.JSeparator sp_01 = new javax.swing.JSeparator();
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        hpg.addComponent(pl_HeadPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        hpg.addComponent(pl_FootPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        hpg.addComponent(tp_BodyPane, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE);
+        layout.setHorizontalGroup(hpg);
 
-        pa_PublicAd = new rmp.comn.rmps.C4010000.C4010000();
-        pa_PublicAd.wInit();
-        pa_PublicAd.wShowView(ISoft.VIEW_NORM);
+        javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
+        vsg.addComponent(pl_HeadPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg.addComponent(tp_BodyPane, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg.addComponent(pl_FootPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        layout.setVerticalGroup(vsg);
+    }
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(amonPanel);
-        amonPanel.setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                pa_PublicAd.getAd(), javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE).addComponent(sp_01,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE).addComponent(tp_SoftPane,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addContainerGap().addComponent(tp_SoftPane,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp_01,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(pa_PublicAd.getAd(),
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)));
+    /**
+     * 界面语言初始化
+     */
+    public void initLang()
+    {
+        langUtil = LangUtil.initLang("10000000");
+        initFileLang();
+        initToolLang();
+        initHelpLang();
+    }
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        pack();
+    /**
+     * 界面数据初始化
+     */
+    public void initData()
+    {
+        // 窗口属性设置
+        setAlwaysOnTop(CfgCons.DEF_TRUE.equalsIgnoreCase(RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_WND_EVERTOP)));
+        Dimension f = getSize();
+        Dimension s = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation(s.width - f.width - 30, 30);
+        setIconImage(BeanUtil.getLogoImage());
+        setTitle(langUtil.getMesg(LangRes.TITLE_FRAME, "Amon个人助理"));
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        setVisible(true);
+
+        Thread t = new Thread()
+        {
+            @Override
+            public void run()
+            {
+                initPlug_Ins();
+            }
+        };
+        t.start();
     }
 
     /**
      * 文件菜单初始化
      */
-    private void icb()
+    private void initFileView()
     {
         mu_FileMenu = new javax.swing.JMenu();
-        mu_FileMenu.setText("文件(F)");
-        mu_FileMenu.setMnemonic('F');
         mb_RmpsMenu.add(mu_FileMenu);
 
         // 窗口隐藏
         mi_HideItem = new javax.swing.JMenuItem();
-        mi_HideItem.setText("隐藏窗口(H)");
-        mi_HideItem.setMnemonic('H');
         mi_HideItem.addActionListener(new java.awt.event.ActionListener()
         {
             @Override
@@ -178,14 +176,11 @@ public class Prps extends JFrame
                 mi_HideItem_Handler(evt);
             }
         });
-        mi_HideItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E,
-                java.awt.event.InputEvent.CTRL_MASK));
+        mi_HideItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         mu_FileMenu.add(mi_HideItem);
 
         // 系统退出
         mi_ExitItem = new javax.swing.JMenuItem();
-        mi_ExitItem.setText("系统退出(X)");
-        mi_ExitItem.setMnemonic('X');
         mi_ExitItem.addActionListener(new java.awt.event.ActionListener()
         {
             @Override
@@ -194,19 +189,16 @@ public class Prps extends JFrame
                 mi_ExitItem_Handler(evt);
             }
         });
-        mi_ExitItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q,
-                java.awt.event.InputEvent.CTRL_MASK));
+        mi_ExitItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         mu_FileMenu.add(mi_ExitItem);
     }
 
     /**
      * 工具菜单初始化
      */
-    private void icc()
+    private void initToolView()
     {
         mu_ToolMenu = new javax.swing.JMenu();
-        mu_ToolMenu.setText("工具(T)");
-        mu_ToolMenu.setMnemonic('T');
         mb_RmpsMenu.add(mu_ToolMenu);
 
         // 窗口属性
@@ -218,8 +210,6 @@ public class Prps extends JFrame
 
         // 系统风格
         mi_LfSystem = new javax.swing.JCheckBoxMenuItem();
-        mi_LfSystem.setText("系统风格(F)");
-        mi_LfSystem.setMnemonic('F');
         mi_LfSystem.addActionListener(new java.awt.event.ActionListener()
         {
             @Override
@@ -236,21 +226,15 @@ public class Prps extends JFrame
 
         // 界面风格
         mu_BasicGui = new javax.swing.JMenu();
-        mu_BasicGui.setText("基本风格(B)");
-        mu_BasicGui.setMnemonic('B');
         mu_ToolMenu.add(mu_BasicGui);
 
         // Synth风格
         mu_SynthGui = new javax.swing.JMenu();
-        mu_SynthGui.setText("定制风格(S)");
-        mu_SynthGui.setMnemonic('S');
         mu_ToolMenu.add(mu_SynthGui);
 
         mu_ToolMenu.addSeparator();
 
         mi_LgSystem = new javax.swing.JCheckBoxMenuItem();
-        mi_LgSystem.setText("系统语言(G)");
-        mi_LgSystem.setMnemonic('G');
         mi_LgSystem.addActionListener(new java.awt.event.ActionListener()
         {
             @Override
@@ -267,21 +251,19 @@ public class Prps extends JFrame
 
         // 界面语言
         mu_LangMenu = new javax.swing.JMenu();
-        mu_LangMenu.setText("界面语言(L)");
-        mu_LangMenu.setMnemonic('L');
         mu_ToolMenu.add(mu_LangMenu);
 
         // 界面风格
-        initSkin();
+        initAbleSkin();
 
         // 界面语言
-        initLang();
+        initAbleLang();
     }
 
     /**
      * 帮助菜单初始化
      */
-    private void icd()
+    private void initHelpView()
     {
         mu_HelpMenu = new javax.swing.JMenu();
         mu_HelpMenu.setText("帮助(H)");
@@ -367,33 +349,95 @@ public class Prps extends JFrame
         mi_InfoItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         mu_HelpMenu.add(mi_InfoItem);
     }
+    // ////////////////////////////////////////////////////////////////////////
+    // 多语言显示区域
+    // ////////////////////////////////////////////////////////////////////////
 
     /**
-     * 构件面板显示
+     * 文件菜单
      */
-    private void ice()
+    private void initFileLang()
     {
-        Thread t = new Thread()
-        {
-            public void run()
-            {
-                loadPlugins();
-            }
-        };
-        t.start();
+        // 文件菜单
+        BeanUtil.setWText(mu_FileMenu, langUtil.getMesg(LangRes.MENU_TEXT_FILEMENU, ""));
+        BeanUtil.setWTips(mu_FileMenu, langUtil.getMesg(LangRes.MENU_TIPS_FILEMENU, ""));
+
+        // 系统退出
+        BeanUtil.setWText(mi_HideItem, langUtil.getMesg(LangRes.MENU_TEXT_HIDEITEM, ""));
+        BeanUtil.setWTips(mi_HideItem, langUtil.getMesg(LangRes.MENU_TIPS_HIDEITEM, ""));
+
+        // 系统退出
+        BeanUtil.setWText(mi_ExitItem, langUtil.getMesg(LangRes.MENU_TEXT_EXITITEM, ""));
+        BeanUtil.setWTips(mi_ExitItem, langUtil.getMesg(LangRes.MENU_TIPS_EXITITEM, ""));
+    }
+
+    /**
+     * 工具菜单
+     */
+    private void initToolLang()
+    {
+        // 工具菜单
+        BeanUtil.setWText(mu_ToolMenu, langUtil.getMesg(LangRes.MENU_TEXT_TOOLMENU, ""));
+        BeanUtil.setWTips(mu_ToolMenu, langUtil.getMesg(LangRes.MENU_TIPS_TOOLMENU, ""));
+
+        // 系统风格
+        BeanUtil.setWText(mi_LfSystem, langUtil.getMesg(LangRes.MENU_TEXT_LFSYSTEM, ""));
+        BeanUtil.setWTips(mi_LfSystem, langUtil.getMesg(LangRes.MENU_TIPS_LFSYSTEM, ""));
+
+        // 界面风格
+        BeanUtil.setWText(mu_BasicGui, langUtil.getMesg(LangRes.MENU_TEXT_BASICGUI, ""));
+        BeanUtil.setWTips(mu_BasicGui, langUtil.getMesg(LangRes.MENU_TIPS_BASICGUI, ""));
+
+        // 界面风格
+        BeanUtil.setWText(mu_SynthGui, langUtil.getMesg(LangRes.MENU_TEXT_SYNTHGUI, ""));
+        BeanUtil.setWTips(mu_SynthGui, langUtil.getMesg(LangRes.MENU_TIPS_SYNTHGUI, ""));
+
+        // 系统语言
+        BeanUtil.setWText(mi_LgSystem, langUtil.getMesg(LangRes.MENU_TEXT_LGSYSTEM, ""));
+        BeanUtil.setWTips(mi_LgSystem, langUtil.getMesg(LangRes.MENU_TIPS_LGSYSTEM, ""));
+
+        // 界面语言
+        BeanUtil.setWText(mu_LangMenu, langUtil.getMesg(LangRes.MENU_TEXT_LANGMENU, ""));
+        BeanUtil.setWTips(mu_LangMenu, langUtil.getMesg(LangRes.MENU_TIPS_LANGMENU, ""));
+    }
+
+    /**
+     * 帮助菜单
+     */
+    private void initHelpLang()
+    {
+        // 帮助菜单
+        BeanUtil.setWText(mu_HelpMenu, langUtil.getMesg(LangRes.MENU_TEXT_HELPMENU, ""));
+        BeanUtil.setWTips(mu_HelpMenu, langUtil.getMesg(LangRes.MENU_TIPS_HELPMENU, ""));
+
+        // 使用帮助
+        BeanUtil.setWText(mi_HelpItem, langUtil.getMesg(LangRes.MENU_TEXT_HELPITEM, ""));
+        BeanUtil.setWTips(mi_HelpItem, langUtil.getMesg(LangRes.MENU_TIPS_HELPITEM, ""));
+
+        // 软件首页
+        BeanUtil.setWText(mi_HomePage, langUtil.getMesg(LangRes.MENU_TEXT_HOMEPAGE, ""));
+        BeanUtil.setWTips(mi_HomePage, langUtil.getMesg(LangRes.MENU_TIPS_HOMEPAGE, ""));
+
+        // 检测更新
+        BeanUtil.setWText(mi_ChckUpdt, langUtil.getMesg(LangRes.MENU_TEXT_CHCKUPDT, ""));
+        BeanUtil.setWTips(mi_ChckUpdt, langUtil.getMesg(LangRes.MENU_TIPS_CHCKUPDT, ""));
+
+        // 关于软件
+        BeanUtil.setWText(mi_InfoItem, langUtil.getMesg(LangRes.MENU_TEXT_INFOITEM, ""));
+        BeanUtil.setWTips(mi_InfoItem, langUtil.getMesg(LangRes.MENU_TIPS_INFOITEM, ""));
     }
 
     /**
      * 界面语言菜单初始化
      */
-    private void initLang()
+    private void initAbleLang()
     {
         ButtonGroup bg = new ButtonGroup();
         bg.add(mi_LgSystem);
 
         // 语言资源菜单数量
         int num = 0;
-        String t = Prps.getMesg(ConstUI.LANGUAGE_NUM);
+        String t = langUtil.getMesg(ConstUI.LANGUAGE_NUM, "");
         if (CheckUtil.isValidate(t))
         {
             try
@@ -403,13 +447,14 @@ public class Prps extends JFrame
             catch (NumberFormatException exp)
             {
                 LogUtil.exception(exp);
-                MesgUtil.showMessageDialog(this, Prps.getMesg(LangRes.MESG_OTHR_0003));
+                MesgUtil.showMessageDialog(this, langUtil.getMesg(LangRes.MESG_OTHR_0003, ""));
             }
         }
 
         // 事件侦听器
         java.awt.event.ActionListener al = new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 mi_LangItem_Handler(evt);
@@ -423,9 +468,9 @@ public class Prps extends JFrame
         {
             cbItem = new javax.swing.JCheckBoxMenuItem();
             cbItem.addActionListener(al);
-            BeanUtil.setWText(cbItem, Prps.getMesg(ConstUI.LANGUAGE_TXT + i));
-            BeanUtil.setWTips(cbItem, Prps.getMesg(ConstUI.LANGUAGE_TIP + i));
-            langId = Prps.getMesg(ConstUI.LANGUAGE_KEY + i);
+            BeanUtil.setWText(cbItem, langUtil.getMesg(ConstUI.LANGUAGE_TXT + i, ""));
+            BeanUtil.setWTips(cbItem, langUtil.getMesg(ConstUI.LANGUAGE_TIP + i, ""));
+            langId = langUtil.getMesg(ConstUI.LANGUAGE_KEY + i, "");
             if (RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_LANG_ID).equals(langId))
             {
                 cbItem.setSelected(true);
@@ -439,7 +484,7 @@ public class Prps extends JFrame
     /**
      * 界面风格菜单初始化
      */
-    private void initSkin()
+    private void initAbleSkin()
     {
         // 基本界面风格菜单初始化
         ButtonGroup bg = new ButtonGroup();
@@ -447,7 +492,7 @@ public class Prps extends JFrame
 
         // 子菜单项目数量
         int num = 0;
-        String t = Prps.getMesg(ConstUI.SKIN_BASIC_NUM);
+        String t = langUtil.getMesg(ConstUI.SKIN_BASIC_NUM, "");
         if (CheckUtil.isValidate(t))
         {
             try
@@ -457,7 +502,7 @@ public class Prps extends JFrame
             catch (NumberFormatException exp)
             {
                 LogUtil.exception(exp);
-                MesgUtil.showMessageDialog(this, Prps.getMesg(LangRes.MESG_OTHR_0001));
+                MesgUtil.showMessageDialog(this, langUtil.getMesg(LangRes.MESG_OTHR_0001, ""));
             }
         }
 
@@ -477,9 +522,9 @@ public class Prps extends JFrame
         {
             cbItem = new javax.swing.JCheckBoxMenuItem();
             cbItem.addActionListener(al1);
-            BeanUtil.setWText(cbItem, Prps.getMesg(ConstUI.SKIN_BASIC_TXT + i));
-            BeanUtil.setWTips(cbItem, Prps.getMesg(ConstUI.SKIN_BASIC_TIP + i));
-            skinName = Prps.getMesg(ConstUI.SKIN_BASIC_KEY + i);
+            BeanUtil.setWText(cbItem, langUtil.getMesg(ConstUI.SKIN_BASIC_TXT + i, ""));
+            BeanUtil.setWTips(cbItem, langUtil.getMesg(ConstUI.SKIN_BASIC_TIP + i, ""));
+            skinName = langUtil.getMesg(ConstUI.SKIN_BASIC_KEY + i, "");
             if (RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_LNF_NAME, "default").equals(skinName))
             {
                 cbItem.setSelected(true);
@@ -490,7 +535,7 @@ public class Prps extends JFrame
         }
 
         // 定制界面风格菜单初始化
-        t = Prps.getMesg(ConstUI.SKIN_SYNTH_NUM);
+        t = langUtil.getMesg(ConstUI.SKIN_SYNTH_NUM, "");
         if (CheckUtil.isValidate(t))
         {
             try
@@ -500,7 +545,7 @@ public class Prps extends JFrame
             catch (NumberFormatException exp)
             {
                 LogUtil.exception(exp);
-                MesgUtil.showMessageDialog(this, Prps.getMesg(LangRes.MESG_OTHR_0002));
+                MesgUtil.showMessageDialog(this, langUtil.getMesg(LangRes.MESG_OTHR_0002, ""));
             }
         }
         java.awt.event.ActionListener al2 = new java.awt.event.ActionListener()
@@ -514,9 +559,9 @@ public class Prps extends JFrame
         {
             cbItem = new javax.swing.JCheckBoxMenuItem();
             cbItem.addActionListener(al2);
-            BeanUtil.setWText(cbItem, Prps.getMesg(ConstUI.SKIN_SYNTH_TXT + i));
-            BeanUtil.setWTips(cbItem, Prps.getMesg(ConstUI.SKIN_SYNTH_TIP + i));
-            skinName = Prps.getMesg(ConstUI.SKIN_SYNTH_KEY + i);
+            BeanUtil.setWText(cbItem, langUtil.getMesg(ConstUI.SKIN_SYNTH_TXT + i, ""));
+            BeanUtil.setWTips(cbItem, langUtil.getMesg(ConstUI.SKIN_SYNTH_TIP + i, ""));
+            skinName = langUtil.getMesg(ConstUI.SKIN_SYNTH_KEY + i, "");
             if (RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_LNF_NAME, "default").equals(skinName))
             {
                 cbItem.setSelected(true);
@@ -527,104 +572,33 @@ public class Prps extends JFrame
         }
     }
 
-    // ////////////////////////////////////////////////////////////////////////
-    // 多语言显示区域
-    // ////////////////////////////////////////////////////////////////////////
-    /**
-     * 界面语言显示
-     */
-    private void ita()
-    {
-        // ------------------------------------------------
-        // 文件菜单
-        // ------------------------------------------------
-        BeanUtil.setWText(mu_FileMenu, Prps.getMesg(LangRes.MENU_TEXT_FILEMENU));
-        BeanUtil.setWTips(mu_FileMenu, Prps.getMesg(LangRes.MENU_TIPS_FILEMENU));
-
-        // 系统退出
-        BeanUtil.setWText(mi_HideItem, Prps.getMesg(LangRes.MENU_TEXT_HIDEITEM));
-        BeanUtil.setWTips(mi_HideItem, Prps.getMesg(LangRes.MENU_TIPS_HIDEITEM));
-
-        // 系统退出
-        BeanUtil.setWText(mi_ExitItem, Prps.getMesg(LangRes.MENU_TEXT_EXITITEM));
-        BeanUtil.setWTips(mi_ExitItem, Prps.getMesg(LangRes.MENU_TIPS_EXITITEM));
-
-        // ------------------------------------------------
-        // 工具菜单
-        // ------------------------------------------------
-        BeanUtil.setWText(mu_ToolMenu, Prps.getMesg(LangRes.MENU_TEXT_TOOLMENU));
-        BeanUtil.setWTips(mu_ToolMenu, Prps.getMesg(LangRes.MENU_TIPS_TOOLMENU));
-
-        // 系统风格
-        BeanUtil.setWText(mi_LfSystem, Prps.getMesg(LangRes.MENU_TEXT_LFSYSTEM));
-        BeanUtil.setWTips(mi_LfSystem, Prps.getMesg(LangRes.MENU_TIPS_LFSYSTEM));
-
-        // 界面风格
-        BeanUtil.setWText(mu_BasicGui, Prps.getMesg(LangRes.MENU_TEXT_BASICGUI));
-        BeanUtil.setWTips(mu_BasicGui, Prps.getMesg(LangRes.MENU_TIPS_BASICGUI));
-
-        // 界面风格
-        BeanUtil.setWText(mu_SynthGui, Prps.getMesg(LangRes.MENU_TEXT_SYNTHGUI));
-        BeanUtil.setWTips(mu_SynthGui, Prps.getMesg(LangRes.MENU_TIPS_SYNTHGUI));
-
-        // 系统语言
-        BeanUtil.setWText(mi_LgSystem, Prps.getMesg(LangRes.MENU_TEXT_LGSYSTEM));
-        BeanUtil.setWTips(mi_LgSystem, Prps.getMesg(LangRes.MENU_TIPS_LGSYSTEM));
-
-        // 界面语言
-        BeanUtil.setWText(mu_LangMenu, Prps.getMesg(LangRes.MENU_TEXT_LANGMENU));
-        BeanUtil.setWTips(mu_LangMenu, Prps.getMesg(LangRes.MENU_TIPS_LANGMENU));
-
-        // ------------------------------------------------
-        // 帮助菜单
-        // ------------------------------------------------
-        BeanUtil.setWText(mu_HelpMenu, Prps.getMesg(LangRes.MENU_TEXT_HELPMENU));
-        BeanUtil.setWTips(mu_HelpMenu, Prps.getMesg(LangRes.MENU_TIPS_HELPMENU));
-
-        // 使用帮助
-        BeanUtil.setWText(mi_HelpItem, Prps.getMesg(LangRes.MENU_TEXT_HELPITEM));
-        BeanUtil.setWTips(mi_HelpItem, Prps.getMesg(LangRes.MENU_TIPS_HELPITEM));
-
-        // 软件首页
-        BeanUtil.setWText(mi_HomePage, Prps.getMesg(LangRes.MENU_TEXT_HOMEPAGE));
-        BeanUtil.setWTips(mi_HomePage, Prps.getMesg(LangRes.MENU_TIPS_HOMEPAGE));
-
-        // 检测更新
-        BeanUtil.setWText(mi_ChckUpdt, Prps.getMesg(LangRes.MENU_TEXT_CHCKUPDT));
-        BeanUtil.setWTips(mi_ChckUpdt, Prps.getMesg(LangRes.MENU_TIPS_CHCKUPDT));
-
-        // 关于软件
-        BeanUtil.setWText(mi_InfoItem, Prps.getMesg(LangRes.MENU_TEXT_INFOITEM));
-        BeanUtil.setWTips(mi_InfoItem, Prps.getMesg(LangRes.MENU_TIPS_INFOITEM));
-    }
-
     /**
      * 插件初始化
      */
-    private void loadPlugins()
+    private void initPlug_Ins()
     {
         LogUtil.log("插件加载：开始...");
 
         // 标准插件面板
         StdPanel std = new StdPanel();
         std.wInit();
-        tp_SoftPane.add(new JScrollPane(std));
-        tp_SoftPane.setIconAt(0, new ImageIcon(BeanUtil.getLogoImage()));
-        tp_SoftPane.setToolTipTextAt(0, Prps.getMesg(LangRes.TABS_00));
+        tp_BodyPane.add(new JScrollPane(std));
+        tp_BodyPane.setIconAt(0, new ImageIcon(BeanUtil.getLogoImage()));
+        tp_BodyPane.setToolTipTextAt(0, langUtil.getMesg(LangRes.TABS_00, ""));
 
         // 独立插件面板
         ExePanel exe = new ExePanel();
         exe.wInit();
-        tp_SoftPane.add(new JScrollPane(exe));
-        tp_SoftPane.setIconAt(1, new ImageIcon(BeanUtil.getLogoImage()));
-        tp_SoftPane.setToolTipTextAt(1, Prps.getMesg(LangRes.TABS_01));
+        tp_BodyPane.add(new JScrollPane(exe));
+        tp_BodyPane.setIconAt(1, new ImageIcon(BeanUtil.getLogoImage()));
+        tp_BodyPane.setToolTipTextAt(1, langUtil.getMesg(LangRes.TABS_01, ""));
 
         // 网络插件面板
         NetPanel net = new NetPanel();
         net.wInit();
-        tp_SoftPane.add(new JScrollPane(net));
-        tp_SoftPane.setIconAt(2, new ImageIcon(BeanUtil.getLogoImage()));
-        tp_SoftPane.setToolTipTextAt(2, Prps.getMesg(LangRes.TABS_02));
+        tp_BodyPane.add(new JScrollPane(net));
+        tp_BodyPane.setIconAt(2, new ImageIcon(BeanUtil.getLogoImage()));
+        tp_BodyPane.setToolTipTextAt(2, langUtil.getMesg(LangRes.TABS_02, ""));
 
         // 插件目录对象获取
         File plugin = new File(EnvCons.FOLDER0_PLUS);
@@ -792,45 +766,6 @@ public class Prps extends JFrame
     }
 
     /**
-     * 语言资源查询
-     * 
-     * @param mesgId 语言资源索引
-     * @return 语言资源内容
-     */
-    public static String getMesg(String mesgId)
-    {
-        if (langRes == null)
-        {
-            langRes = new Properties();
-
-            // 语言资源信息读取
-            try
-            {
-                FileUtil.readLangRes(langRes, EnvCons.PATH_PRP, EnvCons.COMN_SOFT_LANG);
-            }
-            catch (Exception exp)
-            {
-                LogUtil.exception(exp);
-                MesgUtil.showMessageDialog(null, exp.getMessage());
-            }
-        }
-        return langRes.getProperty(mesgId);
-    }
-
-    /**
-     * 语言资源查询
-     * 
-     * @param mesgId 语言资源索引
-     * @param defMesg 默认语言资源
-     * @return 语言资源内容
-     */
-    public static String getMesg(String mesgId, String defMesg)
-    {
-        String v = getMesg(mesgId);
-        return v != null ? v : defMesg;
-    }
-
-    /**
      * 获取关于软件的引用
      * 
      * @return
@@ -979,7 +914,7 @@ public class Prps extends JFrame
             javax.swing.JCheckBoxMenuItem jcb = (javax.swing.JCheckBoxMenuItem) obj;
             RmpsUtil.getUserInfo().setCfg(CfgCons.CFG_LANG_ID, (String) jcb.getClientProperty(ConstUI.PROP_LANGNAME));
             langRes = null;
-            ita();
+            initFileLang();
         }
     }
 
@@ -1003,7 +938,7 @@ public class Prps extends JFrame
     {
         RmpsUtil.getUserInfo().setCfg(CfgCons.CFG_LANG_NAME, "system");
         langRes = null;
-        ita();
+        initFileLang();
     }
 
     /**
@@ -1032,13 +967,13 @@ public class Prps extends JFrame
             // pa_PublicAd.wShowModel(AppCons.MODE_MINI + pa_PublicAd.wCode());
             boolean isNew = RmpsUtil.checkUpdate(EnvCons.PRPS_SOFTEDIT, ConstUI.VER_SOFT);
             // pa_PublicAd.wShowModel(AppCons.MODE_NORM + pa_PublicAd.wCode());
-            MesgUtil.showMessageDialog(this, Prps.getMesg(isNew ? LangRes.MESG_OTHR_0008 : LangRes.MESG_OTHR_0007));
+            MesgUtil.showMessageDialog(this, langUtil.getMesg(isNew ? LangRes.MESG_OTHR_0008 : LangRes.MESG_OTHR_0007, ""));
         }
         catch (Exception exp)
         {
             LogUtil.exception(exp);
             // pa_PublicAd.wShowModel(AppCons.MODE_NORM + pa_PublicAd.wCode());
-            MesgUtil.showMessageDialog(this, Prps.getMesg(LangRes.MESG_OTHR_0006));
+            MesgUtil.showMessageDialog(this, langUtil.getMesg(LangRes.MESG_OTHR_0006, ""));
         }
     }
 
@@ -1064,8 +999,9 @@ public class Prps extends JFrame
     private javax.swing.JMenu mu_LangMenu;
     private javax.swing.JMenu mu_BasicGui;
     private javax.swing.JMenu mu_SynthGui;
-    private rmp.comn.rmps.C4010000.C4010000 pa_PublicAd;
-    private javax.swing.JTabbedPane tp_SoftPane;
+    private javax.swing.JPanel pl_FootPane;
+    private javax.swing.JPanel pl_HeadPane;
+    private javax.swing.JTabbedPane tp_BodyPane;
     private javax.swing.JMenuItem mi_ExitItem;
     private javax.swing.JMenuItem mi_HelpItem;
     private javax.swing.JMenuItem mi_HideItem;

@@ -9,7 +9,7 @@ package rmp.prp.v;
 
 import javax.swing.BoxLayout;
 
-import rmp.prp.b.ExePlugin;
+import rmp.prp.b.ExePlug_In;
 import rmp.prp.m.WExeItem;
 
 /**
@@ -61,7 +61,7 @@ public class ExePanel extends javax.swing.JPanel
      */
     public boolean addPlugin(WExeItem item)
     {
-        ExePlugin softItem = new ExePlugin(item);
+        ExePlug_In softItem = new ExePlug_In(item);
         softItem.wInit();
         this.add(softItem);
 

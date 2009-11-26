@@ -10,7 +10,7 @@ package rmp.prp.v;
 import javax.swing.BoxLayout;
 
 import com.amonsoft.rmps.prp.ISoft;
-import rmp.prp.b.StdPlugin;
+import rmp.prp.b.StdPlug_In;
 
 /**
  * <ul>
@@ -61,8 +61,8 @@ public class StdPanel extends javax.swing.JPanel
      */
     public boolean addPlugin(ISoft soft)
     {
-        StdPlugin stdPlugin = new StdPlugin();
-        stdPlugin.wInit();
+        StdPlug_In stdPlugin = new StdPlug_In();
+        stdPlugin.wInitView();
         stdPlugin.setSoft(soft);
         this.add(stdPlugin);
 

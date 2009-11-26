@@ -226,6 +226,9 @@ public final class Rmps
         LogUtil.log("系统启动：应用程序启动！");
 
         Prps prp = new Prps();
-        return prp.wInit();
+        prp.initView();
+        prp.initLang();
+        prp.initData();
+        return true;
     }
 }

@@ -36,6 +36,7 @@ import cons.EnvCons;
 import cons.SysCons;
 import cons.amon.code.A1010000.ConstUI;
 import cons.id.AmonCons;
+import com.amonsoft.util.LangUtil;
 
 /**
  * <ul>
@@ -77,6 +78,7 @@ public class A1010000 extends AForm implements ISoft
     private NormPanel np_NormPanel;
     /** 内嵌面板 */
     private TailPanel tp_TailPanel;
+    private LangUtil langUtil;
 
     /**
      * 
@@ -107,9 +109,10 @@ public class A1010000 extends AForm implements ISoft
      * @see rmp.face.ISoft#dispose()
      */
     @Override
-    public void wDispose()
+    public boolean wClosing()
     {
         Rmps.exit(0, false, false);
+        return true;
     }
 
     /*
@@ -131,7 +134,7 @@ public class A1010000 extends AForm implements ISoft
     @Override
     public String wGetDescription()
     {
-        return Prps.getMesg(ConstUI.RES_DESCRIPTION);
+        return langUtil.getMesg(ConstUI.RES_DESCRIPTION, "");
     }
 
     /*
@@ -175,7 +178,7 @@ public class A1010000 extends AForm implements ISoft
     @Override
     public String wGetName()
     {
-        return Prps.getMesg(ConstUI.RES_NAME);
+        return langUtil.getMesg(ConstUI.RES_NAME, "");
     }
 
     /*
@@ -208,7 +211,7 @@ public class A1010000 extends AForm implements ISoft
     @Override
     public String wGetTitle()
     {
-        return Prps.getMesg(ConstUI.RES_TITLE);
+        return langUtil.getMesg(ConstUI.RES_TITLE, "");
     }
 
     /*
@@ -228,7 +231,7 @@ public class A1010000 extends AForm implements ISoft
      * @see rmp.face.ISoft#initMenu(javax.swing.JMenu)
      */
     @Override
-    public boolean wInitMenu(JMenu menu)
+    public boolean wShowMenu(JMenu menu)
     {
         return false;
     }
@@ -239,7 +242,7 @@ public class A1010000 extends AForm implements ISoft
      * @see rmp.face.ISoft#initTail(javax.swing.JPanel)
      */
     @Override
-    public boolean wInitTail(JPanel view)
+    public boolean wShowTail(JPanel view)
     {
         if (tp_TailPanel == null)
         {
@@ -321,10 +324,10 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wStart()
+     * @see rmp.face.ISoft#wIconified()
      */
     @Override
-    public boolean wStart()
+    public boolean wIconified()
     {
         return true;
     }
@@ -332,10 +335,10 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wStop()
+     * @see rmp.face.ISoft#wDeiconified()
      */
     @Override
-    public boolean wStop()
+    public boolean wDeiconified()
     {
         return true;
     }

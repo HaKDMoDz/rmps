@@ -40,6 +40,7 @@ import cons.EnvCons;
 import cons.SysCons;
 import cons.id.PrpCons;
 import cons.prp.aide.P30F0000.ConstUI;
+import com.amonsoft.util.LangUtil;
 
 /**
  * <ul>
@@ -71,33 +72,31 @@ public class P30F0000 implements ISoft
     // 逻辑控制区域
     // ----------------------------------------------------
     /** 当前运行状态标记：参见AppCons.APP_MODE_*** */
-    private static int        appMode;
-
+    private static int appMode;
     /** 程序主窗口 */
-    private static FForm      softFForm;
-
+    private static FForm softFForm;
     /** 语言资源 */
     private static Properties langRes;
     /** RMPS系统运行目录 */
-    private static String     baseFolder = "";
+    private static String baseFolder = "";
     /** 插件程序运行目录 */
-    private static String     plusFolder = "";
-
+    private static String plusFolder = "";
     // ----------------------------------------------------
     // 界面显示区域
     // ----------------------------------------------------
     /** 高级面板 */
-    private MainPanel         mp_MainPanel;
+    private MainPanel mp_MainPanel;
     /** 迷你面板 */
-    private MiniPanel         mp_MiniPanel;
+    private MiniPanel mp_MiniPanel;
     /** 正常面板 */
-    private NormPanel         np_NormPanel;
+    private NormPanel np_NormPanel;
     /**  */
-    private StepPanel         sp_StepPanel;
+    private StepPanel sp_StepPanel;
     /** 内嵌面板 */
-    private TailPanel         tp_TailPanel;
+    private TailPanel tp_TailPanel;
     /** 级联菜单 */
-    private SubMenu           sm_SubMenu;
+    private SubMenu sm_SubMenu;
+    private LangUtil langUtil;
 
     // ////////////////////////////////////////////////////////////////////////
     // 构造函数区域
@@ -117,7 +116,7 @@ public class P30F0000 implements ISoft
      * 
      * @see rmp.face.WRmps#wInit()
      */
-    @ Override
+    @Override
     public boolean wInit()
     {
         // 实例化主窗口
@@ -137,10 +136,10 @@ public class P30F0000 implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wDispose()
+     * @see rmp.face.ISoft#wClosing()
      */
-    @ Override
-    public void wDispose()
+    @Override
+    public boolean wClosing()
     {
         mp_MiniPanel = null;
         np_NormPanel = null;
@@ -150,6 +149,7 @@ public class P30F0000 implements ISoft
         softFForm.setVisible(false);
 
         Rmps.exit(0, true, true);
+        return true;
     }
 
     /*
@@ -157,7 +157,7 @@ public class P30F0000 implements ISoft
      * 
      * @see rmp.face.ISoft#wGetBaseFolder()
      */
-    @ Override
+    @Override
     public String wGetBaseFolder()
     {
         return baseFolder;
@@ -168,10 +168,10 @@ public class P30F0000 implements ISoft
      * 
      * @see rmp.face.ISoft#wGetDescription()
      */
-    @ Override
+    @Override
     public String wGetDescription()
     {
-        return Prps.getMesg(ConstUI.RES_DESCRIPTION);
+        return langUtil.getMesg(ConstUI.RES_DESCRIPTION, "");
     }
 
     /*
@@ -179,7 +179,7 @@ public class P30F0000 implements ISoft
      * 
      * @see rmp.face.ISoft#wGetHomepage()
      */
-    @ Override
+    @Override
     public String wGetHomepage()
     {
         return ConstUI.URL_SOFT;
@@ -190,7 +190,7 @@ public class P30F0000 implements ISoft
      * 
      * @see rmp.face.ISoft#wCode()
      */
-    @ Override
+    @Override
     public int wCode()
     {
         return PrpCons.P30F0000_I;
@@ -201,7 +201,7 @@ public class P30F0000 implements ISoft
      * 
      * @see rmp.face.ISoft#wGetIcon()
      */
-    @ Override
+    @Override
     public BufferedImage wGetIconImage(int type)
     {
         try
@@ -224,7 +224,7 @@ public class P30F0000 implements ISoft
                     return BeanUtil.getLogoImage();
             }
         }
-        catch(Exception exp)
+        catch (Exception exp)
         {
             LogUtil.exception(exp);
             return null;
@@ -236,10 +236,10 @@ public class P30F0000 implements ISoft
      * 
      * @see rmp.face.ISoft#wGetName()
      */
-    @ Override
+    @Override
     public String wGetName()
     {
-        return Prps.getMesg(ConstUI.RES_NAME);
+        return langUtil.getMesg(ConstUI.RES_NAME, "");
     }
 
     /*
@@ -247,7 +247,7 @@ public class P30F0000 implements ISoft
      * 
      * @see rmp.face.ISoft#wGetPlusFolder()
      */
-    @ Override
+    @Override
     public String wGetPlusFolder()
     {
         return plusFolder;
@@ -258,10 +258,10 @@ public class P30F0000 implements ISoft
      * 
      * @see rmp.face.ISoft#wGetTitle()
      */
-    @ Override
+    @Override
     public String wGetTitle()
     {
-        return Prps.getMesg(ConstUI.RES_TITLE);
+        return langUtil.getMesg(ConstUI.RES_TITLE, "");
     }
 
     /*
@@ -269,7 +269,7 @@ public class P30F0000 implements ISoft
      * 
      * @see rmp.face.ISoft#wGetVersion()
      */
-    @ Override
+    @Override
     public String wGetVersion()
     {
         return ConstUI.VER_CODE;
@@ -278,10 +278,10 @@ public class P30F0000 implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wInitMenu(javax.swing.JMenu)
+     * @see rmp.face.ISoft#wShowMenu(javax.swing.JMenu)
      */
-    @ Override
-    public boolean wInitMenu(JMenu menu)
+    @Override
+    public boolean wShowMenu(JMenu menu)
     {
         if (sm_SubMenu == null)
         {
@@ -294,10 +294,10 @@ public class P30F0000 implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wInitTail(javax.swing.JPanel)
+     * @see rmp.face.ISoft#wShowTail(javax.swing.JPanel)
      */
-    @ Override
-    public boolean wInitTail(JPanel view)
+    @Override
+    public boolean wShowTail(JPanel view)
     {
         if (tp_TailPanel == null)
         {
@@ -312,7 +312,7 @@ public class P30F0000 implements ISoft
      * 
      * @see rmp.face.ISoft#wSetBaseFolder(java.lang.String)
      */
-    @ Override
+    @Override
     public void wSetBaseFolder(String folder)
     {
         baseFolder = folder;
@@ -323,7 +323,7 @@ public class P30F0000 implements ISoft
      * 
      * @see rmp.face.ISoft#wSetPlusFolder(java.lang.String)
      */
-    @ Override
+    @Override
     public void wSetPlusFolder(String folder)
     {
         plusFolder = folder;
@@ -334,7 +334,7 @@ public class P30F0000 implements ISoft
      * 
      * @see rmp.face.ISoft#wShowHelp()
      */
-    @ Override
+    @Override
     public void wShowHelp()
     {
         EnvUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
@@ -345,7 +345,7 @@ public class P30F0000 implements ISoft
      * 
      * @see rmp.face.ISoft#wShowInfo()
      */
-    @ Override
+    @Override
     public void wShowInfo()
     {
         C1010000.setInfo(getInfoPath());
@@ -357,7 +357,7 @@ public class P30F0000 implements ISoft
      * 
      * @see rmp.face.ISoft#wShowView(int)
      */
-    @ Override
+    @Override
     public javax.swing.JPanel wShowView(int modelIdx)
     {
         switch (modelIdx)
@@ -366,19 +366,19 @@ public class P30F0000 implements ISoft
             case VIEW_TAIL:
                 return showTail();
 
-                // 显示迷你模式
+            // 显示迷你模式
             case VIEW_MINI:
                 return showMini();
 
-                // 显示正常模式
+            // 显示正常模式
             case VIEW_NORM:
                 return showNorm();
 
-                // 显示高级模式
+            // 显示高级模式
             case VIEW_MAIN:
                 return showMain();
 
-                // 显示向导模式
+            // 显示向导模式
             case VIEW_STEP:
                 return showStep();
 
@@ -390,10 +390,10 @@ public class P30F0000 implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wStart()
+     * @see rmp.face.ISoft#wIconified()
      */
-    @ Override
-    public boolean wStart()
+    @Override
+    public boolean wIconified()
     {
         return true;
     }
@@ -401,10 +401,10 @@ public class P30F0000 implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wStop()
+     * @see rmp.face.ISoft#wDeiconified()
      */
-    @ Override
-    public boolean wStop()
+    @Override
+    public boolean wDeiconified()
     {
         showStep();
         return true;
@@ -450,7 +450,7 @@ public class P30F0000 implements ISoft
             {
                 FileUtil.readLangRes(langRes, EnvCons.PATH_P30F0000, EnvCons.COMN_SOFT_LANG);
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 LogUtil.exception(exp);
                 MesgUtil.showMessageDialog(getForm(), exp.getMessage());
@@ -685,7 +685,6 @@ public class P30F0000 implements ISoft
         C3010000.getInstance();
         C3010000.regester("P30F0000", softFForm);
     }
-
     /** serialVersionUID */
     private static final long serialVersionUID = 794114790060892683L;
 }

@@ -36,6 +36,7 @@ import cons.EnvCons;
 import cons.SysCons;
 import cons.comn.info.C1010000.ConstUI;
 import cons.id.ComnCons;
+import com.amonsoft.util.LangUtil;
 
 /**
  * <ul>
@@ -56,26 +57,24 @@ public class C1010000 extends AForm implements ISoft
     // 逻辑控制区域
     // ----------------------------------------------------
     /** 当前运行状态标记：参见AppCons.APP_MODE_*** */
-    private static int        appMode;
-
+    private static int appMode;
     /** 程序主窗口 */
-    private static AForm      softAForm;
-    private static FForm      softFForm;
-
+    private static AForm softAForm;
+    private static FForm softFForm;
     /** 语言资源 */
     private static Properties langRes;
     /** RMPS系统运行目录 */
-    private static String     baseFolder = "";
+    private static String baseFolder = "";
     /** 插件程序运行目录 */
-    private static String     plusFolder = "";
-
+    private static String plusFolder = "";
     // ----------------------------------------------------
     // 界面显示区域
     // ----------------------------------------------------
-    private NormPanel         np_NormPanel;
-    private MiniPanel         mp_MiniPanel;
-    private MainPanel         mp_MainPanel;
-    private TailPanel         tp_TailPanel;
+    private NormPanel np_NormPanel;
+    private MiniPanel mp_MiniPanel;
+    private MainPanel mp_MainPanel;
+    private TailPanel tp_TailPanel;
+    private LangUtil langUtil;
 
     // ////////////////////////////////////////////////////////////////////////
     // 构造函数区域
@@ -92,7 +91,7 @@ public class C1010000 extends AForm implements ISoft
      * 
      * @see rmp.face.WRmps#init()
      */
-    @ Override
+    @Override
     public boolean wInit()
     {
         // 实例化主窗口
@@ -108,9 +107,10 @@ public class C1010000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#dispose()
      */
-    @ Override
-    public void wDispose()
+    @Override
+    public boolean wClosing()
     {
+        return true;
     }
 
     /*
@@ -118,7 +118,7 @@ public class C1010000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#getBaseFolder()
      */
-    @ Override
+    @Override
     public String wGetBaseFolder()
     {
         return baseFolder;
@@ -129,7 +129,7 @@ public class C1010000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#setBaseFolder(java.lang.String)
      */
-    @ Override
+    @Override
     public void wSetBaseFolder(String folder)
     {
         baseFolder = folder;
@@ -140,10 +140,10 @@ public class C1010000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#getSoftDescription()
      */
-    @ Override
+    @Override
     public String wGetDescription()
     {
-        return Prps.getMesg(ConstUI.RES_DESCRIPTION);
+        return langUtil.getMesg(ConstUI.RES_DESCRIPTION, "");
     }
 
     /*
@@ -151,7 +151,7 @@ public class C1010000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#getHomepage()
      */
-    @ Override
+    @Override
     public String wGetHomepage()
     {
         return ConstUI.URL_SOFT;
@@ -162,7 +162,7 @@ public class C1010000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#getSoftLogo()
      */
-    @ Override
+    @Override
     public BufferedImage wGetIconImage(int type)
     {
         return BeanUtil.getLogoImage();
@@ -173,7 +173,7 @@ public class C1010000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#getSystemID()
      */
-    @ Override
+    @Override
     public int wCode()
     {
         return ComnCons.C0000000_I;
@@ -184,7 +184,7 @@ public class C1010000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#getSystemName()
      */
-    @ Override
+    @Override
     public String wGetName()
     {
         return ConstUI.RES_NAME;
@@ -195,7 +195,7 @@ public class C1010000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wGetPlusFolder()
      */
-    @ Override
+    @Override
     public String wGetPlusFolder()
     {
         return plusFolder;
@@ -206,7 +206,7 @@ public class C1010000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wSetPlusFolder(java.lang.String)
      */
-    @ Override
+    @Override
     public void wSetPlusFolder(String folder)
     {
         plusFolder = folder;
@@ -217,9 +217,10 @@ public class C1010000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#getTitle()
      */
+    @Override
     public String wGetTitle()
     {
-        return Prps.getMesg(ConstUI.RES_TITLE);
+        return langUtil.getMesg(ConstUI.RES_TITLE, "");
     }
 
     /*
@@ -227,7 +228,7 @@ public class C1010000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#getSystemVersion()
      */
-    @ Override
+    @Override
     public String wGetVersion()
     {
         return ConstUI.VER_CODE;
@@ -238,8 +239,8 @@ public class C1010000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#initSoftMenu(javax.swing.JMenu)
      */
-    @ Override
-    public boolean wInitMenu(JMenu menu)
+    @Override
+    public boolean wShowMenu(JMenu menu)
     {
         return false;
     }
@@ -249,8 +250,8 @@ public class C1010000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#initSoftTail(javax.swing.JPanel)
      */
-    @ Override
-    public boolean wInitTail(JPanel view)
+    @Override
+    public boolean wShowTail(JPanel view)
     {
         if (tp_TailPanel == null)
         {
@@ -265,7 +266,7 @@ public class C1010000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wShowHelp()
      */
-    @ Override
+    @Override
     public void wShowHelp()
     {
         EnvUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
@@ -276,7 +277,7 @@ public class C1010000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wShowInfo()
      */
-    @ Override
+    @Override
     public void wShowInfo()
     {
         C1010000.setInfo(getInfoPath());
@@ -288,7 +289,7 @@ public class C1010000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wShowView(int)
      */
-    @ Override
+    @Override
     public javax.swing.JPanel wShowView(int modelIdx)
     {
         switch (modelIdx)
@@ -297,19 +298,19 @@ public class C1010000 extends AForm implements ISoft
             case VIEW_TAIL:
                 return showTail();
 
-                // 显示迷你模式
+            // 显示迷你模式
             case VIEW_MINI:
                 return showMini();
 
-                // 显示正常模式
+            // 显示正常模式
             case VIEW_NORM:
                 return showNorm();
 
-                // 显示高级模式
+            // 显示高级模式
             case VIEW_MAIN:
                 return showMain();
 
-                // 显示向导模式
+            // 显示向导模式
             case VIEW_STEP:
                 return showStep();
 
@@ -321,10 +322,10 @@ public class C1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wStart()
+     * @see rmp.face.ISoft#wIconified()
      */
-    @ Override
-    public boolean wStart()
+    @Override
+    public boolean wIconified()
     {
         return true;
     }
@@ -332,10 +333,10 @@ public class C1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wStop()
+     * @see rmp.face.ISoft#wDeiconified()
      */
-    @ Override
-    public boolean wStop()
+    @Override
+    public boolean wDeiconified()
     {
         return true;
     }
@@ -370,7 +371,7 @@ public class C1010000 extends AForm implements ISoft
             {
                 FileUtil.readLangRes(langRes, EnvCons.PATH_C1010000, EnvCons.COMN_SOFT_LANG);
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 LogUtil.exception(exp);
                 MesgUtil.showMessageDialog(getForm(), exp.getMessage());
@@ -733,7 +734,6 @@ public class C1010000 extends AForm implements ISoft
         // 承载窗口引用
         softFForm.setDefaultCloseOperation(FForm.EXIT_ON_CLOSE);
     }
-
     /** serialVersionUID */
     private static final long serialVersionUID = 7909489858120935421L;
 }

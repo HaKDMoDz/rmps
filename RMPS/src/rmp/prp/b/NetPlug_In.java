@@ -10,9 +10,8 @@ package rmp.prp.b;
 import java.awt.Color;
 import java.awt.Cursor;
 
-import rmp.prp.m.WExeItem;
+import rmp.prp.m.WNetItem;
 import rmp.util.BeanUtil;
-import rmp.util.CheckUtil;
 import rmp.util.EnvUtil;
 import rmp.util.LogUtil;
 
@@ -20,19 +19,20 @@ import rmp.util.LogUtil;
  * <ul>
  * <li>功能说明：</li>
  * <br />
- * 独立插件对象
+ * 网络插件对象
  * <li>使用说明：</li>
  * <br />
+ * TODO: 使用说明
  * </ul>
  * @author Amon
  */
-public class ExePlugin extends javax.swing.JPanel
+public class NetPlug_In extends javax.swing.JPanel
 {
     // ////////////////////////////////////////////////////////////////////////
     // 逻辑控制区域
     // ////////////////////////////////////////////////////////////////////////
     /** 用户添加对象 */
-    private WExeItem item;
+    private WNetItem item;
     /** 内嵌面板边框 */
     private javax.swing.border.Border border;
 
@@ -42,9 +42,8 @@ public class ExePlugin extends javax.swing.JPanel
     /**
      * 默认构造函数
      */
-    public ExePlugin(WExeItem item)
+    public NetPlug_In()
     {
-        this.item = item;
     }
 
     // ////////////////////////////////////////////////////////////////////////
@@ -103,9 +102,6 @@ public class ExePlugin extends javax.swing.JPanel
      */
     private void ita()
     {
-        this.lb_ItemLabl.setIcon(item.getSoftIcon());
-        BeanUtil.setWText(lb_ItemLabl, item.getSoftName());
-        BeanUtil.setWTips(lb_ItemLabl, item.getSoftDesp());
     }
 
     // ////////////////////////////////////////////////////////////////////////
@@ -118,23 +114,8 @@ public class ExePlugin extends javax.swing.JPanel
      */
     private void lb_ItemLabl_Handler(java.awt.event.MouseEvent evt)
     {
-        LogUtil.log("独立程序启动：" + item.getSoftPath());
-        if (CheckUtil.isValidate(item.getSoftArgs()))
-        {
-            LogUtil.log("    启动参数：" + item.getSoftArgs());
-            if (item.getSoftPath().toLowerCase().endsWith(".jar"))
-            {
-                EnvUtil.run("javaw -jar " + item.getSoftPath() + " " + item.getSoftArgs());
-            }
-            else
-            {
-                EnvUtil.run(item.getSoftPath() + " " + item.getSoftArgs());
-            }
-        }
-        else
-        {
-            EnvUtil.open(item.getSoftPath());
-        }
+        LogUtil.log("网络程序启动：" + item.getHref());
+        EnvUtil.browse(item.getHref());
     }
 
     // ////////////////////////////////////////////////////////////////////////
@@ -145,12 +126,12 @@ public class ExePlugin extends javax.swing.JPanel
      * 
      * @return
      */
-    public boolean setItem(WExeItem item)
+    public boolean setItem(WNetItem item)
     {
         this.item = item;
-        this.lb_ItemLabl.setIcon(item.getSoftIcon());
-        BeanUtil.setWText(lb_ItemLabl, item.getSoftName());
-        BeanUtil.setWTips(lb_ItemLabl, item.getSoftDesp());
+        this.lb_ItemLabl.setIcon(item.getIcon());
+        BeanUtil.setWText(lb_ItemLabl, item.getTitle());
+        BeanUtil.setWTips(lb_ItemLabl, item.getDescription());
         return true;
     }
     // ////////////////////////////////////////////////////////////////////////
@@ -158,5 +139,5 @@ public class ExePlugin extends javax.swing.JPanel
     // ////////////////////////////////////////////////////////////////////////
     private javax.swing.JLabel lb_ItemLabl;
     /** serialVersionUID */
-    private static final long serialVersionUID = -1626657301618057008L;
+    private static final long serialVersionUID = -5735877669516238196L;
 }

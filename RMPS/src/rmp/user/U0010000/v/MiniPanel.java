@@ -194,7 +194,7 @@ public class MiniPanel extends JPanel implements IView
         }
 
         ms_MainSoft.firePropertyChanged(CfgCons.SIGN_UP, new K1SV1S(un, p1), CfgCons.SIGN_UP);
-        ms_MainSoft.wDispose();
+        ms_MainSoft.wClosing();
     }
     private javax.swing.JButton bt_Cancel;
     private javax.swing.JButton bt_Create;

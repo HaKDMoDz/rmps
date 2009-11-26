@@ -39,6 +39,7 @@ import cons.EnvCons;
 import cons.SysCons;
 import cons.comn.rmps.C4010000.ConstUI;
 import cons.id.ComnCons;
+import com.amonsoft.util.LangUtil;
 
 /**
  * <ul>
@@ -85,6 +86,7 @@ public class C4010000 extends AForm implements ISoft
     private SubMenu sm_SubMenu;
     /** 当前显示面板 */
     private javax.swing.JPanel vp_CurrPanel;
+    private LangUtil langUtil;
 
     // ////////////////////////////////////////////////////////////////////////
     // 构造函数区域
@@ -113,11 +115,12 @@ public class C4010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wDispose()
+     * @see rmp.face.ISoft#wClosing()
      */
     @Override
-    public void wDispose()
+    public boolean wClosing()
     {
+        return true;
     }
 
     /*
@@ -139,7 +142,7 @@ public class C4010000 extends AForm implements ISoft
     @Override
     public String wGetDescription()
     {
-        return Prps.getMesg(ConstUI.RES_DESCRIPTION);
+        return langUtil.getMesg(ConstUI.RES_DESCRIPTION, "");
     }
 
     /*
@@ -183,7 +186,7 @@ public class C4010000 extends AForm implements ISoft
     @Override
     public String wGetName()
     {
-        return Prps.getMesg(ConstUI.RES_NAME);
+        return langUtil.getMesg(ConstUI.RES_NAME, "");
     }
 
     /*
@@ -205,7 +208,7 @@ public class C4010000 extends AForm implements ISoft
     @Override
     public String wGetTitle()
     {
-        return Prps.getMesg(ConstUI.RES_TITLE);
+        return langUtil.getMesg(ConstUI.RES_TITLE, "");
     }
 
     /*
@@ -222,10 +225,10 @@ public class C4010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wInitMenu(javax.swing.JMenu)
+     * @see rmp.face.ISoft#wShowMenu(javax.swing.JMenu)
      */
     @Override
-    public boolean wInitMenu(JMenu menu)
+    public boolean wShowMenu(JMenu menu)
     {
         if (sm_SubMenu == null)
         {
@@ -238,10 +241,10 @@ public class C4010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wInitTail(javax.swing.JPanel)
+     * @see rmp.face.ISoft#wShowTail(javax.swing.JPanel)
      */
     @Override
-    public boolean wInitTail(JPanel view)
+    public boolean wShowTail(JPanel view)
     {
         if (tp_TailPanel == null)
         {
@@ -334,10 +337,10 @@ public class C4010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wStart()
+     * @see rmp.face.ISoft#wIconified()
      */
     @Override
-    public boolean wStart()
+    public boolean wIconified()
     {
         return true;
     }
@@ -345,10 +348,10 @@ public class C4010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wStop()
+     * @see rmp.face.ISoft#wDeiconified()
      */
     @Override
-    public boolean wStop()
+    public boolean wDeiconified()
     {
         return true;
     }

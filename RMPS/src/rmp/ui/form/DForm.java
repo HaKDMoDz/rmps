@@ -275,7 +275,7 @@ public class DForm extends JDialog
     {
         if (ms_MainSoft != null)
         {
-            ms_MainSoft.wDispose();
+            ms_MainSoft.wClosing();
         }
     }
 
@@ -286,7 +286,7 @@ public class DForm extends JDialog
     {
         if (ms_MainSoft != null)
         {
-            ms_MainSoft.wStop();
+            ms_MainSoft.wDeiconified();
         }
     }
 
@@ -297,7 +297,7 @@ public class DForm extends JDialog
     {
         if (ms_MainSoft != null)
         {
-            ms_MainSoft.wStart();
+            ms_MainSoft.wIconified();
         }
     }
 
@@ -311,6 +311,4 @@ public class DForm extends JDialog
         int y = (size.height - getHeight()) >> 1;
         setLocation(x, y);
     }
-    /** serialVersionUID */
-    private static final long serialVersionUID = 7810209068083202977L;
 }

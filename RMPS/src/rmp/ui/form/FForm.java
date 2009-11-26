@@ -335,7 +335,7 @@ public class FForm extends JFrame implements WBean
     {
         if (ms_MainSoft != null)
         {
-            ms_MainSoft.wDispose();
+            ms_MainSoft.wClosing();
         }
     }
 
@@ -348,7 +348,7 @@ public class FForm extends JFrame implements WBean
     {
         if (ms_MainSoft != null)
         {
-            ms_MainSoft.wStop();
+            ms_MainSoft.wDeiconified();
         }
     }
 
@@ -359,9 +359,7 @@ public class FForm extends JFrame implements WBean
     {
         if (ms_MainSoft != null)
         {
-            ms_MainSoft.wStart();
+            ms_MainSoft.wIconified();
         }
     }
-    /** serialVersionUID */
-    private static final long serialVersionUID = 4063288289187214441L;
 }

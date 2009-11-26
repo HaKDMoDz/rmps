@@ -144,7 +144,7 @@ public class MiniPanel extends JPanel implements IView
     private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt)
     {
         ms_MainSoft.firePropertyChanged(CfgCons.SIGN_PWD, null, CfgCons.SIGN_OUT);
-        ms_MainSoft.wDispose();
+        ms_MainSoft.wClosing();
     }
 
     /**
@@ -176,7 +176,7 @@ public class MiniPanel extends JPanel implements IView
             return;
         }
         ms_MainSoft.firePropertyChanged(CfgCons.SIGN_PWD, new K1SV1S(p0, p1), CfgCons.SIGN_PWD);
-        ms_MainSoft.wDispose();
+        ms_MainSoft.wClosing();
     }
     private javax.swing.JButton bt_Cancel;
     private javax.swing.JButton bt_Change;

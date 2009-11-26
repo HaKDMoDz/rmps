@@ -82,8 +82,9 @@ public class A2010000 extends AForm implements ISoft
      * @see rmp.face.ISoft#dispose()
      */
     @Override
-    public void wDispose()
+    public boolean wClosing()
     {
+        return true;
     }
 
     /*
@@ -202,7 +203,7 @@ public class A2010000 extends AForm implements ISoft
      * @see rmp.face.ISoft#initMenu(javax.swing.JMenu)
      */
     @Override
-    public boolean wInitMenu(JMenu menu)
+    public boolean wShowMenu(JMenu menu)
     {
         return false;
     }
@@ -213,7 +214,7 @@ public class A2010000 extends AForm implements ISoft
      * @see rmp.face.ISoft#initTail(javax.swing.JPanel)
      */
     @Override
-    public boolean wInitTail(JPanel view)
+    public boolean wShowTail(JPanel view)
     {
         if (tp_TailPanel == null)
         {
@@ -292,10 +293,10 @@ public class A2010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wStart()
+     * @see rmp.face.ISoft#wIconified()
      */
     @Override
-    public boolean wStart()
+    public boolean wIconified()
     {
         return true;
     }
@@ -303,10 +304,10 @@ public class A2010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wStop()
+     * @see rmp.face.ISoft#wDeiconified()
      */
     @Override
-    public boolean wStop()
+    public boolean wDeiconified()
     {
         return true;
     }

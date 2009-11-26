@@ -210,7 +210,7 @@ public final class UserInfo implements IRmps
      */
     public void setDefault()
     {
-        uid = 1000000;
+        uid = 60000000;
         ucp.clear();
         ucp.setProperty(CfgCons.CFG_LANG_NAME, "中国");
         ucp.setProperty(CfgCons.CFG_LANG_ID, "zh_CN");

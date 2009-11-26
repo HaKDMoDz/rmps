@@ -245,7 +245,7 @@ public interface EnvCons
     /** 插件软件目录标记 */
     String COMN_PATH_SOFT = "#" + COMN_SP_FILE;
     /** 当前运行目录标记 */
-    String COMN_PATH_HOME = FOLDER0_DATA + COMN_SP_FILE + "." + COMN_SP_FILE;
+    String COMN_PATH_HOME = FOLDER0_DATA + COMN_SP_FILE;
     /** 网络加载目录标记 */
     String COMN_PATH_JNLP = SysCons.HOMEPAGE + "jnlp/";
     /** 插件配置文件 */
@@ -253,9 +253,9 @@ public interface EnvCons
     /** 系统皮肤配置文件名 */
     String COMN_SKIN_FILE = "skin.xml";
     /** 关于软件资源前缀字符 */
-    String COMN_SOFT_INFO = "info_{0}" + SysCons.EXTS_INFO;
+    String COMN_SOFT_INFO = "{0}_info" + SysCons.EXTS_INFO;
     /** 软件语言资源前缀字符 */
-    String COMN_SOFT_LANG = "lang_{0}" + SysCons.EXTS_LANG;
+    String COMN_SOFT_LANG = "{0}_lang" + SysCons.EXTS_LANG;
     // ========================================================================
     // 软件升级变量
     // ========================================================================

@@ -187,6 +187,14 @@ public class WForm extends javax.swing.JApplet
         }
     }
 
+    public final void setAlwaysOnTop(boolean alwaysOnTop) throws SecurityException
+    {
+        if (appForm != null)
+        {
+            appForm.setAlwaysOnTop(alwaysOnTop);
+        }
+    }
+
     public void pack()
     {
         if (appForm != null)

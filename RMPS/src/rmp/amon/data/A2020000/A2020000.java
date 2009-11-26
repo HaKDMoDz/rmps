@@ -6,7 +6,6 @@
  * CopyRight:      Amon (C) 2007 Winshine ( Amonsoft@gmail.com / http://www.amonsoft.cn ).
  * Description:    
  */
-
 package rmp.amon.data.A2020000;
 
 import java.awt.image.BufferedImage;
@@ -51,7 +50,7 @@ public class A2020000 extends AForm implements ISoft
      * 
      * @see rmp.face.WRmps#wInit()
      */
-    @ Override
+    @Override
     public boolean wInit()
     {
         return false;
@@ -60,11 +59,12 @@ public class A2020000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wDispose()
+     * @see rmp.face.ISoft#wClosing()
      */
-    @ Override
-    public void wDispose()
+    @Override
+    public boolean wClosing()
     {
+        return true;
     }
 
     /*
@@ -72,7 +72,7 @@ public class A2020000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wGetBaseFolder()
      */
-    @ Override
+    @Override
     public String wGetBaseFolder()
     {
         return null;
@@ -83,7 +83,7 @@ public class A2020000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wGetDescription()
      */
-    @ Override
+    @Override
     public String wGetDescription()
     {
         return null;
@@ -94,7 +94,7 @@ public class A2020000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wGetHomepage()
      */
-    @ Override
+    @Override
     public String wGetHomepage()
     {
         return null;
@@ -105,7 +105,7 @@ public class A2020000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wCode()
      */
-    @ Override
+    @Override
     public int wCode()
     {
         return 0;
@@ -116,7 +116,7 @@ public class A2020000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wGetIcon()
      */
-    @ Override
+    @Override
     public BufferedImage wGetIconImage(int type)
     {
         return null;
@@ -127,7 +127,7 @@ public class A2020000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wGetName()
      */
-    @ Override
+    @Override
     public String wGetName()
     {
         return null;
@@ -138,7 +138,7 @@ public class A2020000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wGetPlusFolder()
      */
-    @ Override
+    @Override
     public String wGetPlusFolder()
     {
         return null;
@@ -149,7 +149,7 @@ public class A2020000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wGetTitle()
      */
-    @ Override
+    @Override
     public String wGetTitle()
     {
         return null;
@@ -160,7 +160,7 @@ public class A2020000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wGetVersion()
      */
-    @ Override
+    @Override
     public String wGetVersion()
     {
         return null;
@@ -169,10 +169,10 @@ public class A2020000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wInitMenu(javax.swing.JMenu)
+     * @see rmp.face.ISoft#wShowMenu(javax.swing.JMenu)
      */
-    @ Override
-    public boolean wInitMenu(JMenu menu)
+    @Override
+    public boolean wShowMenu(JMenu menu)
     {
         return false;
     }
@@ -180,10 +180,10 @@ public class A2020000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wInitTail(javax.swing.JPanel)
+     * @see rmp.face.ISoft#wShowTail(javax.swing.JPanel)
      */
-    @ Override
-    public boolean wInitTail(JPanel view)
+    @Override
+    public boolean wShowTail(JPanel view)
     {
         return false;
     }
@@ -193,7 +193,7 @@ public class A2020000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wSetBaseFolder(java.lang.String)
      */
-    @ Override
+    @Override
     public void wSetBaseFolder(String folder)
     {
     }
@@ -203,7 +203,7 @@ public class A2020000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wSetPlusFolder(java.lang.String)
      */
-    @ Override
+    @Override
     public void wSetPlusFolder(String folder)
     {
     }
@@ -213,7 +213,7 @@ public class A2020000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wShowHelp()
      */
-    @ Override
+    @Override
     public void wShowHelp()
     {
     }
@@ -223,7 +223,7 @@ public class A2020000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wShowInfo()
      */
-    @ Override
+    @Override
     public void wShowInfo()
     {
     }
@@ -233,7 +233,7 @@ public class A2020000 extends AForm implements ISoft
      * 
      * @see rmp.face.ISoft#wShowView(int)
      */
-    @ Override
+    @Override
     public javax.swing.JPanel wShowView(int modelIdx)
     {
         switch (modelIdx)
@@ -242,19 +242,19 @@ public class A2020000 extends AForm implements ISoft
             case VIEW_TAIL:
                 return showTail();
 
-                // 显示迷你模式
+            // 显示迷你模式
             case VIEW_MINI:
                 return showMini();
 
-                // 显示正常模式
+            // 显示正常模式
             case VIEW_NORM:
                 return showNorm();
 
-                // 显示高级模式
+            // 显示高级模式
             case VIEW_MAIN:
                 return showMain();
 
-                // 显示向导模式
+            // 显示向导模式
             case VIEW_STEP:
                 return showStep();
 
@@ -266,10 +266,10 @@ public class A2020000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wStart()
+     * @see rmp.face.ISoft#wIconified()
      */
-    @ Override
-    public boolean wStart()
+    @Override
+    public boolean wIconified()
     {
         return true;
     }
@@ -277,10 +277,10 @@ public class A2020000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wStop()
+     * @see rmp.face.ISoft#wDeiconified()
      */
-    @ Override
-    public boolean wStop()
+    @Override
+    public boolean wDeiconified()
     {
         return true;
     }
@@ -331,7 +331,6 @@ public class A2020000 extends AForm implements ISoft
     {
         return null;
     }
-
     /**  */
     private static final long serialVersionUID = 465580527845582157L;
 }
