@@ -13,7 +13,7 @@ import com.amonsoft.rmps.prp.ISoft;
 import cons.CfgCons;
 import cons.EnvCons;
 import cons.SysCons;
-import cons.amon.lang.A3010000.ConstUI;
+import cons.comn.lang.A3010000.ConstUI;
 import cons.id.ComnCons;
 
 import java.awt.Container;

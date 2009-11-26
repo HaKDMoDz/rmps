@@ -21,7 +21,7 @@ import rmp.util.FileUtil;
 import rmp.util.LogUtil;
 import rmp.util.StringUtil;
 import cons.SysCons;
-import cons.amon.lang.A3010000.ConstUI;
+import cons.comn.lang.A3010000.ConstUI;
 
 /**
  * <ul>
