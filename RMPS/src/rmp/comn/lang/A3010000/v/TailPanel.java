@@ -5,10 +5,9 @@
  * Description:
  *
  */
-package rmp.amon.lang.A3010000.v;
+package rmp.comn.lang.A3010000.v;
 
-import rmp.amon.lang.A3010000.A3010000;
-import rmp.face.WBean;
+import rmp.comn.lang.A3010000.A3010000;
 
 /**
  * <ul>
@@ -21,22 +20,21 @@ import rmp.face.WBean;
  * </ul>
  * @author Amon
  */
-public class MiniPanel extends javax.swing.JPanel implements WBean
+public class TailPanel
 {
     /**
      * @param soft
+     * @param tailPanel
      */
-    public MiniPanel(A3010000 soft)
+    public TailPanel(A3010000 soft, javax.swing.JPanel tailPanel)
     {
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see rmp.face.WRmps#wInit()
+    /**
+     * @return
      */
     public boolean wInit()
     {
-        return false;
+        return true;
     }
 }

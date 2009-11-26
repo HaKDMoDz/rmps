@@ -5,9 +5,9 @@
  * Description:
  *
  */
-package rmp.amon.lang.A3010000.v;
+package rmp.comn.lang.A3010000.v;
 
-import rmp.amon.lang.A3010000.A3010000;
+import rmp.comn.lang.A3010000.A3010000;
 
 /**
  * <ul>

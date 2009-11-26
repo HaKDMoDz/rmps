@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package rmp.amon.lang.A3010000;
+package rmp.comn.lang.A3010000;
 
 import com.amonsoft.bean.WForm;
 import com.amonsoft.rmps.prp.ISoft;
@@ -23,11 +23,11 @@ import java.util.Properties;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 
-import rmp.amon.lang.A3010000.v.MainPanel;
-import rmp.amon.lang.A3010000.v.MiniPanel;
-import rmp.amon.lang.A3010000.v.NormPanel;
-import rmp.amon.lang.A3010000.v.SubMenu;
-import rmp.amon.lang.A3010000.v.TailPanel;
+import rmp.comn.lang.A3010000.v.MainPanel;
+import rmp.comn.lang.A3010000.v.MiniPanel;
+import rmp.comn.lang.A3010000.v.NormPanel;
+import rmp.comn.lang.A3010000.v.SubMenu;
+import rmp.comn.lang.A3010000.v.TailPanel;
 import rmp.comn.info.C1010000.C1010000;
 
 

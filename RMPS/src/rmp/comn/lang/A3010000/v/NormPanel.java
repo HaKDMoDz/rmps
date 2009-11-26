@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package rmp.amon.lang.A3010000.v;
+package rmp.comn.lang.A3010000.v;
 
 import java.io.File;
 import java.util.Arrays;
@@ -15,8 +15,8 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
-import rmp.amon.lang.A3010000.A3010000;
-import rmp.amon.lang.A3010000.t.Util;
+import rmp.comn.lang.A3010000.A3010000;
+import rmp.comn.lang.A3010000.t.Util;
 import rmp.bean.FilesFilter;
 import rmp.bean.K1IV2S;
 import rmp.face.WBean;

@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package rmp.amon.lang.A3010000.t;
+package rmp.comn.lang.A3010000.t;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
