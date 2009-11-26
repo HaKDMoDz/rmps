@@ -15,7 +15,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
-import rmp.comn.lang.C5010000.A3010000;
+import rmp.comn.lang.C5010000.C5010000;
 import rmp.comn.lang.C5010000.t.Util;
 import rmp.bean.FilesFilter;
 import rmp.bean.K1IV2S;
@@ -66,7 +66,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
     /**
      * @param soft
      */
-    public NormPanel(A3010000 soft)
+    public NormPanel(C5010000 soft)
     {
     }
 

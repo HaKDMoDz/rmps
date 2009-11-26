@@ -7,7 +7,7 @@
  */
 package rmp.comn.lang.C5010000.v;
 
-import rmp.comn.lang.C5010000.A3010000;
+import rmp.comn.lang.C5010000.C5010000;
 
 /**
  * <ul>
@@ -26,7 +26,7 @@ public class SubMenu
      * @param soft
      * @param menu
      */
-    public SubMenu(A3010000 soft, javax.swing.JMenu menu)
+    public SubMenu(C5010000 soft, javax.swing.JMenu menu)
     {
     }
 

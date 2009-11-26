@@ -7,7 +7,7 @@
  */
 package rmp.comn.lang.C5010000.v;
 
-import rmp.comn.lang.C5010000.A3010000;
+import rmp.comn.lang.C5010000.C5010000;
 
 /**
  * <ul>
@@ -26,7 +26,7 @@ public class TailPanel
      * @param soft
      * @param tailPanel
      */
-    public TailPanel(A3010000 soft, javax.swing.JPanel tailPanel)
+    public TailPanel(C5010000 soft, javax.swing.JPanel tailPanel)
     {
     }
 

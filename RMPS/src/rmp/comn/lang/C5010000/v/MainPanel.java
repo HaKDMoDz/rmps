@@ -7,7 +7,7 @@
  */
 package rmp.comn.lang.C5010000.v;
 
-import rmp.comn.lang.C5010000.A3010000;
+import rmp.comn.lang.C5010000.C5010000;
 import rmp.face.WBean;
 
 /**
@@ -26,7 +26,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
     /**
      * @param soft
      */
-    public MainPanel(A3010000 soft)
+    public MainPanel(C5010000 soft)
     {
     }
 
