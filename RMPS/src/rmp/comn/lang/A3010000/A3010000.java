@@ -9,38 +9,32 @@ package rmp.comn.lang.A3010000;
 
 import com.amonsoft.bean.WForm;
 import com.amonsoft.rmps.prp.ISoft;
-
+import com.amonsoft.util.LangUtil;
 import cons.CfgCons;
 import cons.EnvCons;
 import cons.SysCons;
 import cons.comn.lang.A3010000.ConstUI;
 import cons.id.ComnCons;
-
-import java.awt.Container;
 import java.awt.image.BufferedImage;
 import java.util.Properties;
-
 import javax.swing.JMenu;
 import javax.swing.JPanel;
-
+import rmp.Rmps;
+import rmp.comn.info.C1010000.C1010000;
 import rmp.comn.lang.A3010000.v.MainPanel;
 import rmp.comn.lang.A3010000.v.MiniPanel;
 import rmp.comn.lang.A3010000.v.NormPanel;
 import rmp.comn.lang.A3010000.v.SubMenu;
 import rmp.comn.lang.A3010000.v.TailPanel;
-import rmp.comn.info.C1010000.C1010000;
-
-
-import rmp.Rmps;
 import rmp.prp.Prps;
 import rmp.user.UserInfo;
 import rmp.util.BeanUtil;
 import rmp.util.EnvUtil;
 import rmp.util.FileUtil;
-import com.amonsoft.util.LangUtil;
 import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.RmpsUtil;
+
 
 /**
  * <ul>
@@ -65,8 +59,6 @@ public class A3010000 extends WForm implements ISoft
     // ----------------------------------------------------
     /** 当前运行状态标记：参见AppCons.APP_MODE_*** */
     private static int appMode;
-    /** 程序主窗口 */
-    private static WForm winForm;
     /** 语言资源 */
     private static Properties langRes;
     /** RMPS系统运行目录 */
@@ -110,9 +102,8 @@ public class A3010000 extends WForm implements ISoft
     public boolean wInit()
     {
         // 实例化主窗口
-        winForm = new WForm();
-        winForm.wInit(false);
-        winForm.setVisible(true);
+        super.wInit(false);
+        setVisible(true);
 //        winForm.setSoft(this);
 
         return true;
@@ -380,16 +371,6 @@ public class A3010000 extends WForm implements ISoft
     }
 
     /**
-     * 软件主窗口获取
-     * 
-     * @return 软件主窗口
-     */
-    public static Container getForm()
-    {
-        return winForm;
-    }
-
-    /**
      * 语言资源查询
      * 
      * @param mesgId 语言资源索引
@@ -409,7 +390,7 @@ public class A3010000 extends WForm implements ISoft
             catch (Exception exp)
             {
                 LogUtil.exception(exp);
-                MesgUtil.showMessageDialog(getForm(), exp.getMessage());
+                MesgUtil.showMessageDialog(null, exp.getMessage());
             }
         }
         return langRes.getProperty(mesgId);
@@ -458,12 +439,12 @@ public class A3010000 extends WForm implements ISoft
         }
 
         // 小程序处理
-        winForm.setContentPane(mp_MainPanel);
-        winForm.pack();
-        winForm.center(null);
-        if (!winForm.isVisible())
+        setContentPane(mp_MainPanel);
+        pack();
+        center(null);
+        if (!isVisible())
         {
-            winForm.setVisible(true);
+            setVisible(true);
         }
         return mp_MainPanel;
     }
@@ -480,12 +461,12 @@ public class A3010000 extends WForm implements ISoft
             mp_MiniPanel.wInit();
         }
 
-        winForm.setContentPane(mp_MiniPanel);
-        winForm.pack();
-        winForm.center(null);
-        if (!winForm.isVisible())
+        setContentPane(mp_MiniPanel);
+        pack();
+        center(null);
+        if (!isVisible())
         {
-            winForm.setVisible(true);
+            setVisible(true);
         }
         return mp_MiniPanel;
     }
@@ -503,12 +484,12 @@ public class A3010000 extends WForm implements ISoft
         }
 
         // 小程序处理
-        winForm.setContentPane(np_NormPanel);
-        winForm.pack();
-        winForm.center(null);
-        if (!winForm.isVisible())
+        setContentPane(np_NormPanel);
+        pack();
+        center(null);
+        if (!isVisible())
         {
-            winForm.setVisible(true);
+            setVisible(true);
         }
         return np_NormPanel;
     }
@@ -609,6 +590,6 @@ public class A3010000 extends WForm implements ISoft
         soft.wShowView(VIEW_NORM);
 
         // 承载窗口引用
-        winForm.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        soft.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }
 }

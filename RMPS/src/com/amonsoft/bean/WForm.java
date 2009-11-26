@@ -8,6 +8,7 @@
 package com.amonsoft.bean;
 
 import com.amonsoft.skin.ISkin;
+import java.awt.event.WindowEvent;
 
 /**
  * <ul>
@@ -35,13 +36,61 @@ public class WForm extends javax.swing.JApplet
     {
         if (!applet)
         {
-            appForm = new javax.swing.JFrame();
+            appForm = new javax.swing.JFrame()
+            {
+                @Override
+                protected void processWindowEvent(java.awt.event.WindowEvent evt)
+                {
+                    switch (evt.getID())
+                    {
+                        // 窗口关闭事件
+                        case WindowEvent.WINDOW_CLOSING:
+                            if (wExit())
+                            {
+                                super.processWindowEvent(evt);
+                            }
+                            break;
+                        // 窗口最小化事件
+                        case WindowEvent.WINDOW_ICONIFIED:
+                            if (wHide())
+                            {
+                                super.processWindowEvent(evt);
+                            }
+                            break;
+                        // 窗口最大化事件
+                        case WindowEvent.WINDOW_DEICONIFIED:
+                            if (wView())
+                            {
+                                super.processWindowEvent(evt);
+                            }
+                            break;
+                        default:
+                            super.processWindowEvent(evt);
+                            break;
+                    }
+                }
+            };
             appForm.getContentPane().setName(ISkin.CONTAINER);
         }
         else
         {
             getContentPane().setName(ISkin.CONTAINER);
         }
+        return true;
+    }
+
+    protected boolean wExit()
+    {
+        return true;
+    }
+
+    protected boolean wHide()
+    {
+        return true;
+    }
+
+    protected boolean wView()
+    {
         return true;
     }
 

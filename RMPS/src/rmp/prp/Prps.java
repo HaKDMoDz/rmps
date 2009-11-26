@@ -11,11 +11,14 @@ import com.amonsoft.bean.WForm;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.HashMap;
 import java.util.Properties;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
@@ -139,8 +142,15 @@ public class Prps extends WForm
      */
     public void initLang()
     {
-        // 语言资源初始化
-        langUtil = LangUtil.initLang("10000000");
+        try
+        {
+            // 语言资源初始化
+            langUtil = LangUtil.initLang("10000000");
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(Prps.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         // 设置窗口标题
         setTitle(langUtil.getMesg(LangRes.TITLE_FRAME, "Amon Test"));
