@@ -135,7 +135,6 @@ public final class RmpsUtil
      */
     public static void loadMenu(JMenu m)
     {
-        ;
     }
 
     /**
@@ -143,7 +142,6 @@ public final class RmpsUtil
      */
     public static void loadMenu(JMenuBar b)
     {
-        ;
     }
 
     private static void loadMenu(JMenu menu, Element node)

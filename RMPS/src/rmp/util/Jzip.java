@@ -28,7 +28,7 @@ import java.util.zip.ZipOutputStream;
  * </ul>
  * @author Amon
  */
-public final class ZipUtil
+public final class Jzip
 {
     private static byte[] buff;
 

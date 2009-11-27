@@ -315,7 +315,7 @@ public final class EnvUtil
     {
         int uid = RmpsUtil.getUserInfo().getUserID();
         String zip = uid + EnvCons.PATH_BAK + EnvCons.COMN_SP_FILE + "amon.backup";
-        ZipUtil.zip(zip, uid + EnvCons.COMN_SP_FILE + "rmp.wsc", uid + EnvCons.PATH_DAT);
+        Jzip.zip(zip, uid + EnvCons.COMN_SP_FILE + "rmp.wsc", uid + EnvCons.PATH_DAT);
     }
 
     /**
