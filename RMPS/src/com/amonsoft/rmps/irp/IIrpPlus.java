@@ -7,18 +7,17 @@
  */
 package com.amonsoft.rmps.irp;
 
-import com.amonsoft.rmps.IRmps;
-
 /**
  * <ul>
  * <li>功能说明：</li>
  * <br />
- * RMPS系统入口
+ * TODO:
  * <li>使用说明：</li>
  * <br />
+ * TODO:
  * </ul>
  * @author yihaodian
  */
-public interface IImps extends IRmps
+public interface IIrpPlus
 {
 }
