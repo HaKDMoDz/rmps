@@ -8,7 +8,7 @@
 package rmp.comn.info.C1010000.v;
 
 import rmp.comn.info.C1010000.C1010000;
-import com.amonsoft.rmps.prp.ISoft;
+import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.ui.link.WLinkLabel;
 import rmp.util.BeanUtil;
 import cons.comn.info.C1010000.ConstUI;
@@ -27,14 +27,14 @@ import cons.comn.info.C1010000.LangRes;
  */
 public class TailPanel
 {
-    // private ISoft soft;
+    // private IPrpPlus soft;
     private javax.swing.JPanel tailPanel;
 
     /**
      * @param soft
      * @param view
      */
-    public TailPanel(ISoft soft, javax.swing.JPanel view)
+    public TailPanel(IPrpPlus soft, javax.swing.JPanel view)
     {
         // this.soft = soft;
         this.tailPanel = view;

@@ -7,7 +7,7 @@
  */
 package rmp.prp.b;
 
-import com.amonsoft.rmps.prp.ISoft;
+import com.amonsoft.rmps.prp.IPrpPlus;
 import cons.EnvCons;
 import cons.prp.ConstUI;
 import rmp.prp.Prps;
@@ -36,7 +36,7 @@ public class StdPlug_In extends javax.swing.JPanel
     /** 语言资源对象 */
     private LangUtil langUtil;
     /** 标准插件对象 */
-    private ISoft soft;
+    private IPrpPlus soft;
 
     // ////////////////////////////////////////////////////////////////////////
     // 构造函数区域
@@ -270,10 +270,10 @@ public class StdPlug_In extends javax.swing.JPanel
      * 
      * @return
      */
-    public boolean setSoft(ISoft soft)
+    public boolean setSoft(IPrpPlus soft)
     {
         this.soft = soft;
-        lb_Soft.setIcon(new javax.swing.ImageIcon(soft.wGetIconImage(ISoft.ICON_LOGO0016)));
+        lb_Soft.setIcon(new javax.swing.ImageIcon(soft.wGetIconImage(IPrpPlus.ICON_LOGO0016)));
 //        setSoftMenuVisible(soft.wShowMenu(m));
         langUtil.setWText(lb_Soft, "", soft.wGetTitle());
         langUtil.setWTips(lb_Soft, "", soft.wGetDescription());
@@ -411,7 +411,7 @@ public class StdPlug_In extends javax.swing.JPanel
     private void mi_MiniView_Handler(java.awt.event.ActionEvent evt)
     {
         LogUtil.log("标准插件启动：" + Prps.getCurrSoft().wGetName());
-        Prps.getCurrSoft().wShowView(ISoft.VIEW_MINI);
+        Prps.getCurrSoft().wShowView(IPrpPlus.VIEW_MINI);
     }
 
     /**
@@ -422,7 +422,7 @@ public class StdPlug_In extends javax.swing.JPanel
     private void mi_NormView_Handler(java.awt.event.ActionEvent evt)
     {
         LogUtil.log("标准插件启动：" + Prps.getCurrSoft().wGetName());
-        Prps.getCurrSoft().wShowView(ISoft.VIEW_NORM);
+        Prps.getCurrSoft().wShowView(IPrpPlus.VIEW_NORM);
     }
 
     /**
@@ -433,7 +433,7 @@ public class StdPlug_In extends javax.swing.JPanel
     private void mi_MainView_Handler(java.awt.event.ActionEvent evt)
     {
         LogUtil.log("标准插件启动：" + Prps.getCurrSoft().wGetName());
-        Prps.getCurrSoft().wShowView(ISoft.VIEW_MAIN);
+        Prps.getCurrSoft().wShowView(IPrpPlus.VIEW_MAIN);
     }
 
     /**

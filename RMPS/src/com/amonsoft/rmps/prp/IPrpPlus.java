@@ -29,7 +29,7 @@ import com.amonsoft.rmps.IRmps;
  * </ul>
  * @author Amon
  */
-public interface ISoft extends IRmps
+public interface IPrpPlus extends IRmps
 {
     /** 启动模式：标准插件模式 */
     int MODE_PLUGINS = 0;

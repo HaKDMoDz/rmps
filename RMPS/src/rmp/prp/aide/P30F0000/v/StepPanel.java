@@ -13,7 +13,7 @@ import java.util.EventObject;
 
 import rmp.bean.K1SV1S;
 import rmp.face.WBackCall;
-import com.amonsoft.rmps.prp.ISoft;
+import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.aide.P30F0000.P30F0000;
 import rmp.prp.aide.P30F0000.t.Util;
 import rmp.ui.text.WTextArea;
@@ -87,7 +87,7 @@ public class StepPanel extends javax.swing.JPanel implements WBackCall
         try
         {
             Util.getUserData().signIn(kv.getK(), kv.getV());
-            ms_MainSoft.wShowView(ISoft.VIEW_NORM);
+            ms_MainSoft.wShowView(IPrpPlus.VIEW_NORM);
         }
         catch(Exception exp)
         {
@@ -148,7 +148,7 @@ public class StepPanel extends javax.swing.JPanel implements WBackCall
         U0000000 u000 = new U0000000((javax.swing.JFrame)P30F0000.getForm());
         u000.wInit();
         u000.register(CfgCons.SIGN_IN, this);
-        u000.wShowView(ISoft.VIEW_MINI);
+        u000.wShowView(IPrpPlus.VIEW_MINI);
     }
 
     private javax.swing.JButton bt_Login;

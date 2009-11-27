@@ -20,7 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
 import rmp.face.WBean;
-import com.amonsoft.rmps.prp.ISoft;
+import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.util.EnvUtil;
 import com.amonsoft.skin.ISkin;
 
@@ -38,7 +38,7 @@ import com.amonsoft.skin.ISkin;
 public class FForm extends JFrame implements WBean
 {
     /** 标准插件 */
-    private ISoft ms_MainSoft;
+    private IPrpPlus ms_MainSoft;
     /** 系统标题 */
     private FHead mb_MainMenu;
     /** 用户菜单 */
@@ -302,7 +302,7 @@ public class FForm extends JFrame implements WBean
     /**
      * @return
      */
-    public ISoft getSoft()
+    public IPrpPlus getSoft()
     {
         return ms_MainSoft;
     }
@@ -310,14 +310,14 @@ public class FForm extends JFrame implements WBean
     /**
      * @param soft
      */
-    public void setSoft(ISoft soft)
+    public void setSoft(IPrpPlus soft)
     {
         this.ms_MainSoft = soft;
         setResizable(false);
         if (soft != null)
         {
             setTitle(soft.wGetTitle());
-            setIconImage(soft.wGetIconImage(ISoft.ICON_LOGO0016));
+            setIconImage(soft.wGetIconImage(IPrpPlus.ICON_LOGO0016));
         }
         else
         {

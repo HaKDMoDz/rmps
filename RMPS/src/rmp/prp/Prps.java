@@ -26,7 +26,7 @@ import javax.swing.SwingUtilities;
 import rmp.Rmps;
 import rmp.bean.FilesFilter;
 import rmp.comn.info.C1010000.C1010000;
-import com.amonsoft.rmps.prp.ISoft;
+import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.m.WExeItem;
 import rmp.prp.m.WNetItem;
 import rmp.prp.t.Util;
@@ -63,7 +63,7 @@ import rmp.util.BeanUtil;
 public class Prps extends WForm
 {
     /** 软件 */
-    private static ISoft currSoft;
+    private static IPrpPlus currSoft;
     /** 软件语言资源 */
     private static Properties langRes;
     /** 关于软件 */
@@ -699,9 +699,9 @@ public class Prps extends WForm
                         Object obj = urlCl.loadClass(plusMap.get(Plugins.NODE_PLUS_PATH)).newInstance();
                         LogUtil.log("插件加载：插件启动程序初始化成功！");
 
-                        if (obj instanceof ISoft)
+                        if (obj instanceof IPrpPlus)
                         {
-                            ISoft soft = (ISoft) obj;
+                            IPrpPlus soft = (IPrpPlus) obj;
                             soft.wInit();
                             soft.wSetPlusFolder(currFile.getPath());
                             std.addPlugin(soft);
@@ -769,7 +769,7 @@ public class Prps extends WForm
     /**
      * @return the currSoft
      */
-    public static ISoft getCurrSoft()
+    public static IPrpPlus getCurrSoft()
     {
         return currSoft;
     }
@@ -777,7 +777,7 @@ public class Prps extends WForm
     /**
      * @param currSoft the currSoft to set
      */
-    public static void setCurrSoft(ISoft currSoft)
+    public static void setCurrSoft(IPrpPlus currSoft)
     {
         Prps.currSoft = currSoft;
     }
@@ -917,7 +917,7 @@ public class Prps extends WForm
     private void mi_InfoItem_Handler(java.awt.event.ActionEvent evt)
     {
         C1010000.setInfo(getInfoPath());
-        softInfo.wShowView(ISoft.VIEW_MAIN);
+        softInfo.wShowView(IPrpPlus.VIEW_MAIN);
     }
 
     /**

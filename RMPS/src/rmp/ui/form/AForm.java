@@ -15,7 +15,7 @@ import javax.swing.JApplet;
 import javax.swing.JMenuBar;
 
 import rmp.face.WBean;
-import com.amonsoft.rmps.prp.ISoft;
+import com.amonsoft.rmps.prp.IPrpPlus;
 import com.amonsoft.skin.ISkin;
 
 /**
@@ -30,7 +30,7 @@ import com.amonsoft.skin.ISkin;
 public class AForm extends JApplet implements WBean
 {
     /** 标准插件 */
-    private ISoft ms_MainSoft;
+    private IPrpPlus ms_MainSoft;
     /** 用户菜单 */
     private JMenuBar mb_UserMenu;
 
@@ -86,7 +86,7 @@ public class AForm extends JApplet implements WBean
     /**
      * @return
      */
-    public ISoft getSoft()
+    public IPrpPlus getSoft()
     {
         return ms_MainSoft;
     }
@@ -94,7 +94,7 @@ public class AForm extends JApplet implements WBean
     /**
      * @param soft
      */
-    public void setSoft(ISoft soft)
+    public void setSoft(IPrpPlus soft)
     {
         this.ms_MainSoft = soft;
     }

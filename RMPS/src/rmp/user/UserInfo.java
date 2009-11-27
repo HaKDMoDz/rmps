@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import com.amonsoft.rmps.IRmps;
-import com.amonsoft.rmps.prp.ISoft;
+import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.util.LogUtil;
 import cons.CfgCons;
 import cons.EnvCons;
@@ -114,7 +114,7 @@ public final class UserInfo implements IRmps
      */
     public boolean loadCfg(String baseFolder, int appMode)
     {
-        if (appMode == ISoft.MODE_APPLICATION)
+        if (appMode == IPrpPlus.MODE_APPLICATION)
         {
             StringBuffer ucf = new StringBuffer(baseFolder).append(uid).append(EnvCons.COMN_SP_FILE).append("rmp.wsc");
             FileInputStream fis = null;

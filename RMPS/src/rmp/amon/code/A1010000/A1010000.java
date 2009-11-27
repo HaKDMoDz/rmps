@@ -20,7 +20,7 @@ import rmp.amon.code.A1010000.v.MiniPanel;
 import rmp.amon.code.A1010000.v.NormPanel;
 import rmp.amon.code.A1010000.v.TailPanel;
 import rmp.comn.info.C1010000.C1010000;
-import com.amonsoft.rmps.prp.ISoft;
+import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.Prps;
 import rmp.ui.form.AForm;
 import rmp.ui.form.FForm;
@@ -48,7 +48,7 @@ import com.amonsoft.util.LangUtil;
  * </ul>
  * @author Amon
  */
-public class A1010000 extends AForm implements ISoft
+public class A1010000 extends AForm implements IPrpPlus
 {
     // ////////////////////////////////////////////////////////////////////////
     // 控制变量区域
@@ -106,7 +106,7 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#dispose()
+     * @see rmp.face.IPrpPlus#dispose()
      */
     @Override
     public boolean wClosing()
@@ -118,7 +118,7 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#getBaseFolder()
+     * @see rmp.face.IPrpPlus#getBaseFolder()
      */
     @Override
     public String wGetBaseFolder()
@@ -129,7 +129,7 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#getDescription()
+     * @see rmp.face.IPrpPlus#getDescription()
      */
     @Override
     public String wGetDescription()
@@ -140,7 +140,7 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#getHomepage()
+     * @see rmp.face.IPrpPlus#getHomepage()
      */
     @Override
     public String wGetHomepage()
@@ -151,7 +151,7 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#getID()
+     * @see rmp.face.IPrpPlus#getID()
      */
     @Override
     public int wCode()
@@ -162,7 +162,7 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#getIcon()
+     * @see rmp.face.IPrpPlus#getIcon()
      */
     @Override
     public BufferedImage wGetIconImage(int type)
@@ -173,7 +173,7 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#getName()
+     * @see rmp.face.IPrpPlus#getName()
      */
     @Override
     public String wGetName()
@@ -184,7 +184,7 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wGetPlusFolder()
+     * @see rmp.face.IPrpPlus#wGetPlusFolder()
      */
     @Override
     public String wGetPlusFolder()
@@ -195,7 +195,7 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wSetPlusFolder(java.lang.String)
+     * @see rmp.face.IPrpPlus#wSetPlusFolder(java.lang.String)
      */
     @Override
     public void wSetPlusFolder(String folder)
@@ -206,7 +206,7 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#getTitle()
+     * @see rmp.face.IPrpPlus#getTitle()
      */
     @Override
     public String wGetTitle()
@@ -217,7 +217,7 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#getVersion()
+     * @see rmp.face.IPrpPlus#getVersion()
      */
     @Override
     public String wGetVersion()
@@ -228,7 +228,7 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#initMenu(javax.swing.JMenu)
+     * @see rmp.face.IPrpPlus#initMenu(javax.swing.JMenu)
      */
     @Override
     public boolean wShowMenu(JMenu menu)
@@ -239,7 +239,7 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#initTail(javax.swing.JPanel)
+     * @see rmp.face.IPrpPlus#initTail(javax.swing.JPanel)
      */
     @Override
     public boolean wShowTail(JPanel view)
@@ -255,7 +255,7 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#setBaseFolder(java.lang.String)
+     * @see rmp.face.IPrpPlus#setBaseFolder(java.lang.String)
      */
     @Override
     public void wSetBaseFolder(String folder)
@@ -266,7 +266,7 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wShowHelp()
+     * @see rmp.face.IPrpPlus#wShowHelp()
      */
     @Override
     public void wShowHelp()
@@ -277,7 +277,7 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wShowInfo()
+     * @see rmp.face.IPrpPlus#wShowInfo()
      */
     @Override
     public void wShowInfo()
@@ -289,7 +289,7 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wShowView(int)
+     * @see rmp.face.IPrpPlus#wShowView(int)
      */
     @Override
     public javax.swing.JPanel wShowView(int modelIdx)
@@ -324,7 +324,7 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wIconified()
+     * @see rmp.face.IPrpPlus#wIconified()
      */
     @Override
     public boolean wIconified()
@@ -335,7 +335,7 @@ public class A1010000 extends AForm implements ISoft
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.ISoft#wDeiconified()
+     * @see rmp.face.IPrpPlus#wDeiconified()
      */
     @Override
     public boolean wDeiconified()

@@ -8,7 +8,7 @@
 package rmp.amon.code.A1010000.v;
 
 import rmp.amon.code.A1010000.A1010000;
-import com.amonsoft.rmps.prp.ISoft;
+import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.ui.link.WLinkLabel;
 
 /**
@@ -23,13 +23,13 @@ import rmp.ui.link.WLinkLabel;
  */
 public class TailPanel
 {
-    private ISoft soft;
+    private IPrpPlus soft;
     private javax.swing.JPanel tailPanel;
 
     /**
      * @param tailPanel
      */
-    public TailPanel(ISoft soft, javax.swing.JPanel tailPanel)
+    public TailPanel(IPrpPlus soft, javax.swing.JPanel tailPanel)
     {
         this.soft = soft;
         this.tailPanel = tailPanel;

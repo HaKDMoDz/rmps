@@ -33,7 +33,7 @@ import rmp.bean.K1SV1S;
 import rmp.bean.K1SV2S;
 import rmp.bean.WTreeCellRenderer;
 import rmp.face.WBackCall;
-import com.amonsoft.rmps.prp.ISoft;
+import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.aide.P30F0000.P30F0000;
 import rmp.prp.aide.P30F0000.b.AreaBean;
 import rmp.prp.aide.P30F0000.b.DateBean;
@@ -1135,7 +1135,7 @@ public class NormPanel extends javax.swing.JPanel implements WBackCall
         U0020000 u002 = new U0020000();
         u002.wInit();
         u002.register(CfgCons.SIGN_PWD, this);
-        u002.wShowView(ISoft.VIEW_MINI);
+        u002.wShowView(IPrpPlus.VIEW_MINI);
     }
 
     /**
@@ -1441,7 +1441,7 @@ public class NormPanel extends javax.swing.JPanel implements WBackCall
         {
             hp_HistForm.setVisible(false);
         }
-        ms_MainSoft.wShowView(ISoft.VIEW_STEP);
+        ms_MainSoft.wShowView(IPrpPlus.VIEW_STEP);
     }
 
     /**

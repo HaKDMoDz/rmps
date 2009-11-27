@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 
-import com.amonsoft.rmps.prp.ISoft;
+import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.ui.form.AForm;
 
 /**
@@ -25,7 +25,7 @@ import rmp.ui.form.AForm;
  * </ul>
  * @author Amon
  */
-public class U0030000 extends AForm implements ISoft
+public class U0030000 extends AForm implements IPrpPlus
 {
     @Override
     public boolean wClosing()
