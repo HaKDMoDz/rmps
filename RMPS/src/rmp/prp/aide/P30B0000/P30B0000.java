@@ -8,6 +8,7 @@
 package rmp.prp.aide.P30B0000;
 
 import com.amonsoft.bean.WForm;
+import com.amonsoft.cons.ConsSys;
 import java.awt.image.BufferedImage;
 import java.util.Properties;
 
@@ -501,10 +502,11 @@ public class P30B0000 extends WForm implements IPrpPlus
      * 
      * @see java.applet.Applet#init()
      */
+    @Override
     public void init()
     {
         // 启动模式标记
-        appMode = MODE_APPLET;
+        appMode = ConsSys.MODE_APPLET;
         // 运行目录标记
         baseFolder = EnvCons.COMN_PATH_JNLP;
 
@@ -524,14 +526,7 @@ public class P30B0000 extends WForm implements IPrpPlus
     public static void main(String[] args)
     {
         // 启动模式标记
-        for (String str : args)
-        {
-            if (SysCons.ARGS_WEBSTART.equalsIgnoreCase(str))
-            {
-                appMode = MODE_WEB_START;
-                break;
-            }
-        }
+        appMode = getAppMode(args);
         // 运行目录标记
         baseFolder = EnvCons.COMN_PATH_HOME;
 
@@ -568,6 +563,4 @@ public class P30B0000 extends WForm implements IPrpPlus
         soft.wInitView();
         soft.wShowView(VIEW_NORM);
     }
-    /** serialVersionUID */
-    private static final long serialVersionUID = -8583790901322584219L;
 }

@@ -7,6 +7,7 @@
  */
 package rmp.comn.tray.C3010000;
 
+import com.amonsoft.cons.ConsSys;
 import java.awt.image.BufferedImage;
 import java.util.Properties;
 
@@ -673,7 +674,7 @@ public class C3010000 implements IPrpPlus
         }
 
         // 3、 用户配置加载
-        if (!ui.loadCfg(baseFolder, MODE_APPLICATION))
+        if (!ui.loadCfg(baseFolder, ConsSys.MODE_APPLICATION))
         {
             System.exit(0);
             return;

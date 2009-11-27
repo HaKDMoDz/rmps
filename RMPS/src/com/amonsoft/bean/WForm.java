@@ -7,6 +7,7 @@
  */
 package com.amonsoft.bean;
 
+import com.amonsoft.cons.ConsSys;
 import com.amonsoft.skin.ISkin;
 import java.awt.event.WindowEvent;
 
@@ -25,12 +26,6 @@ public class WForm extends javax.swing.JApplet
     private WHead appHead;
     private javax.swing.JFrame appForm;
     private javax.swing.JPanel appPane;
-
-    @Override
-    public void init()
-    {
-        wInit(true);
-    }
 
     public boolean wInit(boolean applet)
     {
@@ -305,6 +300,24 @@ public class WForm extends javax.swing.JApplet
                 getContentPane().add(appPane, java.awt.BorderLayout.CENTER);
             }
         }
+    }
+
+    /**
+     * 根据启动参数获取运行模式
+     * @param args
+     * @return
+     */
+    protected static int getAppMode(String[] args)
+    {
+        // 启动模式标记
+        for (String str : args)
+        {
+            if ("WebStart".equalsIgnoreCase(str))
+            {
+                return ConsSys.MODE_WEBSTART;
+            }
+        }
+        return ConsSys.MODE_APPLICATION;
     }
 
     class WHead extends javax.swing.JPanel

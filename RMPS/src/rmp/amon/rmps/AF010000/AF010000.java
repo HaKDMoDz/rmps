@@ -8,7 +8,7 @@
 package rmp.amon.rmps.AF010000;
 
 import com.amonsoft.bean.WForm;
-import java.awt.Container;
+import com.amonsoft.cons.ConsSys;
 import java.awt.image.BufferedImage;
 import java.util.Properties;
 
@@ -518,7 +518,7 @@ public class AF010000 extends WForm implements IPrpPlus
     public void init()
     {
         // 启动模式标记
-        appMode = MODE_APPLET;
+        appMode = ConsSys.MODE_APPLET;
         // 运行目录标记
         baseFolder = EnvCons.COMN_PATH_JNLP;
 
@@ -538,15 +538,7 @@ public class AF010000 extends WForm implements IPrpPlus
     public static void main(String[] args)
     {
         // 启动模式标记
-        appMode = MODE_APPLICATION;
-        for (String str : args)
-        {
-            if (ARGS_WEB_START.equalsIgnoreCase(str))
-            {
-                appMode = MODE_WEB_START;
-                break;
-            }
-        }
+        appMode = appMode = getAppMode(args);
         // 运行目录标记
         baseFolder = EnvCons.COMN_PATH_HOME;
 
@@ -583,6 +575,4 @@ public class AF010000 extends WForm implements IPrpPlus
         soft.wInitView();
         soft.wShowView(VIEW_NORM);
     }
-    /** serialVersionUID */
-    private static final long serialVersionUID = -8358171837555608773L;
 }

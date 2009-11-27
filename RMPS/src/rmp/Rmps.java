@@ -7,13 +7,13 @@
  */
 package rmp;
 
+import com.amonsoft.cons.ConsSys;
 import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.plaf.synth.SynthLookAndFeel;
 
-import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.Prps;
 import rmp.user.UserInfo;
 import rmp.util.EnvUtil;
@@ -145,7 +145,7 @@ public final class Rmps
     {
         LogUtil.log("系统启动：用户配置数据信息加载！");
 
-        RmpsUtil.getUserInfo().loadCfg(EnvCons.COMN_PATH_HOME, IPrpPlus.MODE_APPLICATION);
+        RmpsUtil.getUserInfo().loadCfg(EnvCons.COMN_PATH_HOME, ConsSys.MODE_APPLICATION);
 
         return true;
     }

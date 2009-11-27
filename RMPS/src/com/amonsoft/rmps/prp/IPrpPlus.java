@@ -29,16 +29,6 @@ package com.amonsoft.rmps.prp;
  */
 public interface IPrpPlus
 {
-    /** 启动模式：标准插件模式 */
-    int MODE_PLUGINS = 0;
-    /** 启动模式：独立程序模式 */
-    int MODE_APPLICATION = 1;
-    /** 启动模式：网络加载模式 */
-    int MODE_WEB_START = 2;
-    /** 启动模式：脚本程序模式 */
-    int MODE_APPLET = 3;
-    String ARGS_WEB_START = "JavaWebStart";
-
     /**
      * 界面布局初始化
      * @return

@@ -8,8 +8,8 @@
 package rmp.amon.code.A1010000;
 
 import com.amonsoft.bean.WForm;
+import com.amonsoft.cons.ConsSys;
 import java.awt.image.BufferedImage;
-import java.util.Properties;
 
 import javax.swing.JMenu;
 import javax.swing.JPanel;
@@ -25,9 +25,7 @@ import rmp.prp.Prps;
 import rmp.user.UserInfo;
 import rmp.util.BeanUtil;
 import rmp.util.EnvUtil;
-import rmp.util.FileUtil;
 import rmp.util.LogUtil;
-import rmp.util.MesgUtil;
 import rmp.util.RmpsUtil;
 import cons.CfgCons;
 import cons.EnvCons;
@@ -56,12 +54,12 @@ public class A1010000 extends WForm implements IPrpPlus
     // ----------------------------------------------------
     /** 当前运行状态标记：参见AppCons.APP_MODE_*** */
     private static int appMode;
-    /** 语言资源 */
-    private static Properties langRes;
     /** RMPS系统运行目录 */
     private static String baseFolder = "";
     /** 插件程序运行目录 */
     private static String plusFolder = "";
+    /**语言资源*/
+    private static LangUtil langUtil;
     // ----------------------------------------------------
     // 界面显示区域
     // ----------------------------------------------------
@@ -73,7 +71,6 @@ public class A1010000 extends WForm implements IPrpPlus
     private NormPanel np_NormPanel;
     /** 内嵌面板 */
     private TailPanel tp_TailPanel;
-    private LangUtil langUtil;
 
     /**
      * 
@@ -85,20 +82,19 @@ public class A1010000 extends WForm implements IPrpPlus
     @Override
     public boolean wInitView()
     {
-        wInit(false);
         return true;
     }
 
     @Override
     public boolean wInitLang()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return true;
     }
 
     @Override
     public boolean wInitData()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return true;
     }
 
     /*
@@ -355,39 +351,12 @@ public class A1010000 extends WForm implements IPrpPlus
      * 语言资源查询
      * 
      * @param mesgId 语言资源索引
-     * @return 语言资源内容
-     */
-    public static String getMesg(String mesgId)
-    {
-        if (langRes == null)
-        {
-            langRes = new Properties();
-
-            // 语言资源信息读取
-            try
-            {
-                FileUtil.readLangRes(langRes, EnvCons.PATH_A1010000, EnvCons.COMN_SOFT_LANG);
-            }
-            catch (Exception exp)
-            {
-                LogUtil.exception(exp);
-                MesgUtil.showMessageDialog(null, exp.getMessage());
-            }
-        }
-        return langRes.getProperty(mesgId);
-    }
-
-    /**
-     * 语言资源查询
-     * 
-     * @param mesgId 语言资源索引
      * @param defMesg 默认语言资源
      * @return 语言资源内容
      */
-    public static String getMesg(String mesgId, String defMesg)
+    public static LangUtil getLangUtil()
     {
-        String v = getMesg(mesgId);
-        return v != null ? v : defMesg;
+        return langUtil;
     }
 
     /**
@@ -475,10 +444,13 @@ public class A1010000 extends WForm implements IPrpPlus
      * 
      * @see java.applet.Applet#init()
      */
+    @Override
     public void init()
     {
+        wInit(true);
+
         // 启动模式标记
-        appMode = MODE_APPLET;
+        appMode = ConsSys.MODE_APPLET;
         // 运行目录标记
         baseFolder = EnvCons.COMN_PATH_JNLP;
 
@@ -495,16 +467,8 @@ public class A1010000 extends WForm implements IPrpPlus
      */
     public static void main(String[] args)
     {
-        // 启动模式标记
-        appMode = MODE_APPLICATION;
-        for (String str : args)
-        {
-            if (SysCons.ARGS_WEBSTART.equalsIgnoreCase(str))
-            {
-                appMode = MODE_WEB_START;
-                break;
-            }
-        }
+        appMode = getAppMode(args);
+
         // 运算目录标记
         baseFolder = EnvCons.COMN_PATH_HOME;
 

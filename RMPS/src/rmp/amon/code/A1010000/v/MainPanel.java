@@ -32,7 +32,6 @@ import rmp.bean.K1IV3S;
 import rmp.bean.K1SV2S;
 import rmp.face.WBean;
 import rmp.prp.aide.P3050000.m.SecureKey;
-import rmp.util.BeanUtil;
 import rmp.util.CheckUtil;
 import rmp.util.FileUtil;
 import rmp.util.HashUtil;
@@ -445,66 +444,66 @@ public class MainPanel extends javax.swing.JPanel implements WBean
     private void ita()
     {
         // 来源文件
-        BeanUtil.setWText(lb_CSrcFile, A1010000.getMesg(LangRes.LABL_TEXT_SRCFILE));
-        BeanUtil.setWTips(lb_CSrcFile, A1010000.getMesg(LangRes.LABL_TIPS_SRCFILE));
+        A1010000.getLangUtil().setWText(lb_CSrcFile, LangRes.LABL_TEXT_SRCFILE, "");
+        A1010000.getLangUtil().setWTips(lb_CSrcFile, LangRes.LABL_TIPS_SRCFILE, "");
 
-        BeanUtil.setWText(tf_CSrcFile, A1010000.getMesg(LangRes.FILD_TEXT_CSRCFILE));
-        BeanUtil.setWTips(tf_CSrcFile, A1010000.getMesg(LangRes.FILD_TIPS_CSRCFILE));
+        A1010000.getLangUtil().setWText(tf_CSrcFile, LangRes.FILD_TEXT_CSRCFILE, "");
+        A1010000.getLangUtil().setWTips(tf_CSrcFile, LangRes.FILD_TIPS_CSRCFILE, "");
 
-        BeanUtil.setWText(bt_CSrcFile, A1010000.getMesg(LangRes.BUTN_TEXT_SRCFILE));
-        BeanUtil.setWTips(bt_CSrcFile, A1010000.getMesg(LangRes.BUTN_TIPS_SRCFILE));
+        A1010000.getLangUtil().setWText(bt_CSrcFile, LangRes.BUTN_TEXT_SRCFILE, "");
+        A1010000.getLangUtil().setWTips(bt_CSrcFile, LangRes.BUTN_TIPS_SRCFILE, "");
 
         // 输出文件
-        BeanUtil.setWText(lb_CDstFile, A1010000.getMesg(LangRes.LABL_TEXT_DSTFILE));
-        BeanUtil.setWTips(lb_CDstFile, A1010000.getMesg(LangRes.LABL_TIPS_DSTFILE));
+        A1010000.getLangUtil().setWText(lb_CDstFile, LangRes.LABL_TEXT_DSTFILE, "");
+        A1010000.getLangUtil().setWTips(lb_CDstFile, LangRes.LABL_TIPS_DSTFILE, "");
 
-        BeanUtil.setWText(tf_CDstFile, A1010000.getMesg(LangRes.FILD_TEXT_DSTFILE));
-        BeanUtil.setWTips(tf_CDstFile, A1010000.getMesg(LangRes.FILD_TIPS_DSTFILE));
+        A1010000.getLangUtil().setWText(tf_CDstFile, LangRes.FILD_TEXT_DSTFILE, "");
+        A1010000.getLangUtil().setWTips(tf_CDstFile, LangRes.FILD_TIPS_DSTFILE, "");
 
-        BeanUtil.setWText(bt_CDstFile, A1010000.getMesg(LangRes.BUTN_TEXT_DSTFILE));
-        BeanUtil.setWTips(bt_CDstFile, A1010000.getMesg(LangRes.BUTN_TIPS_DSTFILE));
+        A1010000.getLangUtil().setWText(bt_CDstFile, LangRes.BUTN_TEXT_DSTFILE, "");
+        A1010000.getLangUtil().setWTips(bt_CDstFile, LangRes.BUTN_TIPS_DSTFILE, "");
 
         // 日志
-        BeanUtil.setWText(lb_Log, A1010000.getMesg(LangRes.LABL_TEXT_LOG));
-        BeanUtil.setWTips(lb_Log, A1010000.getMesg(LangRes.LABL_TIPS_LOG));
+        A1010000.getLangUtil().setWText(lb_Log, LangRes.LABL_TEXT_LOG, "");
+        A1010000.getLangUtil().setWTips(lb_Log, LangRes.LABL_TIPS_LOG, "");
 
-        BeanUtil.setWText(ck_LogMultiLine, A1010000.getMesg(LangRes.CHCK_TEXT_LOG1));
-        BeanUtil.setWTips(ck_LogMultiLine, A1010000.getMesg(LangRes.CHCK_TIPS_LOG1));
+        A1010000.getLangUtil().setWText(ck_LogMultiLine, LangRes.CHCK_TEXT_LOG1, "");
+        A1010000.getLangUtil().setWTips(ck_LogMultiLine, LangRes.CHCK_TIPS_LOG1, "");
 
-        BeanUtil.setWText(ck_LogSingleLine, A1010000.getMesg(LangRes.CHCK_TEXT_LOG2));
-        BeanUtil.setWTips(ck_LogSingleLine, A1010000.getMesg(LangRes.CHCK_TIPS_LOG2));
+        A1010000.getLangUtil().setWText(ck_LogSingleLine, LangRes.CHCK_TEXT_LOG2, "");
+        A1010000.getLangUtil().setWTips(ck_LogSingleLine, LangRes.CHCK_TIPS_LOG2, "");
 
-        BeanUtil.setWText(ck_LogExceptions, A1010000.getMesg(LangRes.CHCK_TEXT_LOG3));
-        BeanUtil.setWTips(ck_LogExceptions, A1010000.getMesg(LangRes.CHCK_TIPS_LOG3));
+        A1010000.getLangUtil().setWText(ck_LogExceptions, LangRes.CHCK_TEXT_LOG3, "");
+        A1010000.getLangUtil().setWTips(ck_LogExceptions, LangRes.CHCK_TIPS_LOG3, "");
 
         // 注释
-        BeanUtil.setWText(lb_Cmt, A1010000.getMesg(LangRes.LABL_TEXT_CMT));
-        BeanUtil.setWTips(lb_Cmt, A1010000.getMesg(LangRes.LABL_TIPS_CMT));
+        A1010000.getLangUtil().setWText(lb_Cmt, LangRes.LABL_TEXT_CMT, "");
+        A1010000.getLangUtil().setWTips(lb_Cmt, LangRes.LABL_TIPS_CMT, "");
 
-        BeanUtil.setWText(ck_CmtDocument, A1010000.getMesg(LangRes.CHCK_TEXT_CMT1));
-        BeanUtil.setWTips(ck_CmtDocument, A1010000.getMesg(LangRes.CHCK_TIPS_CMT1));
+        A1010000.getLangUtil().setWText(ck_CmtDocument, LangRes.CHCK_TEXT_CMT1, "");
+        A1010000.getLangUtil().setWTips(ck_CmtDocument, LangRes.CHCK_TIPS_CMT1, "");
 
-        BeanUtil.setWText(ck_CmtMultiLine, A1010000.getMesg(LangRes.CHCK_TEXT_CMT2));
-        BeanUtil.setWTips(ck_CmtMultiLine, A1010000.getMesg(LangRes.CHCK_TIPS_CMT2));
+        A1010000.getLangUtil().setWText(ck_CmtMultiLine, LangRes.CHCK_TEXT_CMT2, "");
+        A1010000.getLangUtil().setWTips(ck_CmtMultiLine, LangRes.CHCK_TIPS_CMT2, "");
 
-        BeanUtil.setWText(ck_CmtSingleLine, A1010000.getMesg(LangRes.CHCK_TEXT_CMT3));
-        BeanUtil.setWTips(ck_CmtSingleLine, A1010000.getMesg(LangRes.CHCK_TIPS_CMT3));
+        A1010000.getLangUtil().setWText(ck_CmtSingleLine, LangRes.CHCK_TEXT_CMT3, "");
+        A1010000.getLangUtil().setWTips(ck_CmtSingleLine, LangRes.CHCK_TIPS_CMT3, "");
 
         // 格式
-        BeanUtil.setWText(lb_Fmt, A1010000.getMesg(LangRes.LABL_TEXT_FMT));
-        BeanUtil.setWTips(lb_Fmt, A1010000.getMesg(LangRes.LABL_TIPS_FMT));
+        A1010000.getLangUtil().setWText(lb_Fmt, LangRes.LABL_TEXT_FMT, "");
+        A1010000.getLangUtil().setWTips(lb_Fmt, LangRes.LABL_TIPS_FMT, "");
 
-        BeanUtil.setWText(ck_FmtSpaceChar, A1010000.getMesg(LangRes.CHCK_TEXT_FMT1));
-        BeanUtil.setWTips(ck_FmtSpaceChar, A1010000.getMesg(LangRes.CHCK_TIPS_FMT1));
+        A1010000.getLangUtil().setWText(ck_FmtSpaceChar, LangRes.CHCK_TEXT_FMT1, "");
+        A1010000.getLangUtil().setWTips(ck_FmtSpaceChar, LangRes.CHCK_TIPS_FMT1, "");
 
-        BeanUtil.setWText(ck_FmtBlankLine, A1010000.getMesg(LangRes.CHCK_TEXT_FMT2));
-        BeanUtil.setWTips(ck_FmtBlankLine, A1010000.getMesg(LangRes.CHCK_TIPS_FMT2));
+        A1010000.getLangUtil().setWText(ck_FmtBlankLine, LangRes.CHCK_TEXT_FMT2, "");
+        A1010000.getLangUtil().setWTips(ck_FmtBlankLine, LangRes.CHCK_TIPS_FMT2, "");
 
-        BeanUtil.setWText(ck_FmtReturnTrip, A1010000.getMesg(LangRes.CHCK_TEXT_FMT3));
-        BeanUtil.setWTips(ck_FmtReturnTrip, A1010000.getMesg(LangRes.CHCK_TIPS_FMT3));
+        A1010000.getLangUtil().setWText(ck_FmtReturnTrip, LangRes.CHCK_TEXT_FMT3, "");
+        A1010000.getLangUtil().setWTips(ck_FmtReturnTrip, LangRes.CHCK_TIPS_FMT3, "");
 
         // 结果信息
-        BeanUtil.setWTips(ta_InfoArea, A1010000.getMesg(LangRes.AREA_TIPS_INFOAREA));
+        A1010000.getLangUtil().setWTips(ta_InfoArea, LangRes.AREA_TIPS_INFOAREA, "");
 
         tf_CSrcFile.setText("D:\\rmps\\rmp\\src");
         tf_CDstFile.setText("D:\\rmps\\pub\\src");
@@ -516,46 +515,46 @@ public class MainPanel extends javax.swing.JPanel implements WBean
     private void itb()
     {
         // 转换方式
-        BeanUtil.setWText(lb_CipherTp, A1010000.getMesg(LangRes.LABL_TEXT_CIPHERTP));
-        BeanUtil.setWTips(lb_CipherTp, A1010000.getMesg(LangRes.LABL_TIPS_CIPHERTP));
+        A1010000.getLangUtil().setWText(lb_CipherTp, LangRes.LABL_TEXT_CIPHERTP, "");
+        A1010000.getLangUtil().setWTips(lb_CipherTp, LangRes.LABL_TIPS_CIPHERTP, "");
 
         cm_CipherTp = new DefaultComboBoxModel();
-        cm_CipherTp.addElement(new K1SV2S("0", A1010000.getMesg(LangRes.COMB_TEXT_ENCIPHER), A1010000.getMesg(LangRes.COMB_TIPS_ENCIPHER)));
-        cm_CipherTp.addElement(new K1SV2S("1", A1010000.getMesg(LangRes.COMB_TEXT_DECIPHER), A1010000.getMesg(LangRes.COMB_TIPS_DECIPHER)));
+        cm_CipherTp.addElement(new K1SV2S("0", LangRes.COMB_TEXT_ENCIPHER, LangRes.COMB_TIPS_ENCIPHER));
+        cm_CipherTp.addElement(new K1SV2S("1", LangRes.COMB_TEXT_DECIPHER, LangRes.COMB_TIPS_DECIPHER));
         cb_CipherTp.setModel(cm_CipherTp);
 
         // 分块大小
-        BeanUtil.setWText(tf_CharSize, A1010000.getMesg(LangRes.FILD_TEXT_CHARSIZE));
-        BeanUtil.setWTips(tf_CharSize, A1010000.getMesg(LangRes.FILD_TIPS_CHARSIZE));
+        A1010000.getLangUtil().setWText(tf_CharSize, LangRes.FILD_TEXT_CHARSIZE, "");
+        A1010000.getLangUtil().setWTips(tf_CharSize, LangRes.FILD_TIPS_CHARSIZE, "");
 
         // 密码算法
-        BeanUtil.setWText(lb_CipherNm, A1010000.getMesg(LangRes.LABL_TEXT_CIPHERNM));
-        BeanUtil.setWTips(lb_CipherNm, A1010000.getMesg(LangRes.LABL_TIPS_CIPHERNM));
+        A1010000.getLangUtil().setWText(lb_CipherNm, LangRes.LABL_TEXT_CIPHERNM, "");
+        A1010000.getLangUtil().setWTips(lb_CipherNm, LangRes.LABL_TIPS_CIPHERNM, "");
 
         cm_CipherNm = new DefaultComboBoxModel();
         cm_CipherNm.addElement(new K1IV3S(16, "AES", "AES", "AES"));
         cb_CipherNm.setModel(cm_CipherNm);
 
         // 用户口令
-        BeanUtil.setWText(lb_UserPwds, A1010000.getMesg(LangRes.LABL_TEXT_USERPWDS));
-        BeanUtil.setWTips(lb_UserPwds, A1010000.getMesg(LangRes.LABL_TIPS_USERPWDS));
+        A1010000.getLangUtil().setWText(lb_UserPwds, LangRes.LABL_TEXT_USERPWDS, "");
+        A1010000.getLangUtil().setWTips(lb_UserPwds, LangRes.LABL_TIPS_USERPWDS, "");
 
-        BeanUtil.setWText(tf_UserPwds, A1010000.getMesg(LangRes.FILD_TEXT_USERPWDS));
-        BeanUtil.setWTips(tf_UserPwds, A1010000.getMesg(LangRes.FILD_TIPS_USERPWDS));
+        A1010000.getLangUtil().setWText(tf_UserPwds, LangRes.FILD_TEXT_USERPWDS, "");
+        A1010000.getLangUtil().setWTips(tf_UserPwds, LangRes.FILD_TIPS_USERPWDS, "");
 
         // 随机口令
-        BeanUtil.setWText(ck_RandomKey, A1010000.getMesg(LangRes.CHCK_TEXT_RANDOMKEY));
-        BeanUtil.setWTips(ck_RandomKey, A1010000.getMesg(LangRes.CHCK_TIPS_RANDOMKEY));
+        A1010000.getLangUtil().setWText(ck_RandomKey, LangRes.CHCK_TEXT_RANDOMKEY, "");
+        A1010000.getLangUtil().setWTips(ck_RandomKey, LangRes.CHCK_TIPS_RANDOMKEY, "");
 
         // 来源文件
-        BeanUtil.setWText(lb_SSrcFile, A1010000.getMesg(LangRes.LABL_TEXT_SRCFILE));
-        BeanUtil.setWTips(lb_SSrcFile, A1010000.getMesg(LangRes.LABL_TIPS_SRCFILE));
+        A1010000.getLangUtil().setWText(lb_SSrcFile, LangRes.LABL_TEXT_SRCFILE, "");
+        A1010000.getLangUtil().setWTips(lb_SSrcFile, LangRes.LABL_TIPS_SRCFILE, "");
 
-        BeanUtil.setWText(tf_SSrcFile, A1010000.getMesg(LangRes.FILD_TEXT_SSRCFILE));
-        BeanUtil.setWTips(tf_SSrcFile, A1010000.getMesg(LangRes.FILD_TIPS_SSRCFILE));
+        A1010000.getLangUtil().setWText(tf_SSrcFile, LangRes.FILD_TEXT_SSRCFILE, "");
+        A1010000.getLangUtil().setWTips(tf_SSrcFile, LangRes.FILD_TIPS_SSRCFILE, "");
 
-        BeanUtil.setWText(bt_SSrcFile, A1010000.getMesg(LangRes.BUTN_TEXT_SRCFILE));
-        BeanUtil.setWTips(bt_SSrcFile, A1010000.getMesg(LangRes.BUTN_TIPS_SRCFILE));
+        A1010000.getLangUtil().setWText(bt_SSrcFile, LangRes.BUTN_TEXT_SRCFILE, "");
+        A1010000.getLangUtil().setWTips(bt_SSrcFile, LangRes.BUTN_TIPS_SRCFILE, "");
     }
 
     /**
@@ -564,16 +563,16 @@ public class MainPanel extends javax.swing.JPanel implements WBean
     private void itc()
     {
         // 注释清理
-        BeanUtil.setWText(rb_Comment, A1010000.getMesg(LangRes.RBTN_TEXT_COMMENT));
-        BeanUtil.setWTips(rb_Comment, A1010000.getMesg(LangRes.RBTN_TIPS_COMMENT));
+        A1010000.getLangUtil().setWText(rb_Comment, LangRes.RBTN_TEXT_COMMENT, "");
+        A1010000.getLangUtil().setWTips(rb_Comment, LangRes.RBTN_TIPS_COMMENT, "");
 
         // 代码安全
-        BeanUtil.setWText(rb_CodeSec, A1010000.getMesg(LangRes.RBTN_TEXT_CODESEC));
-        BeanUtil.setWTips(rb_CodeSec, A1010000.getMesg(LangRes.RBTN_TIPS_CODESEC));
+        A1010000.getLangUtil().setWText(rb_CodeSec, LangRes.RBTN_TEXT_CODESEC, "");
+        A1010000.getLangUtil().setWTips(rb_CodeSec, LangRes.RBTN_TIPS_CODESEC, "");
 
         // 按钮
-        BeanUtil.setWText(bt_DoCipher, A1010000.getMesg(LangRes.BUTN_TEXT_COMMENT));
-        BeanUtil.setWTips(bt_DoCipher, A1010000.getMesg(LangRes.BUTN_TIPS_COMMENT));
+        A1010000.getLangUtil().setWText(bt_DoCipher, LangRes.BUTN_TEXT_COMMENT, "");
+        A1010000.getLangUtil().setWTips(bt_DoCipher, LangRes.BUTN_TIPS_COMMENT, "");
     }
 
     // ////////////////////////////////////////////////////////////////////////
@@ -601,7 +600,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         // 文件打开出错
         if (JFileChooser.ERROR_OPTION == status)
         {
-            MesgUtil.showMessageDialog(this, A1010000.getMesg(LangRes.MESG_0008));
+            MesgUtil.showMessageDialog(this, LangRes.MESG_0008);
             return;
         }
 
@@ -633,7 +632,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         // 文件打开出错
         if (JFileChooser.ERROR_OPTION == status)
         {
-            MesgUtil.showMessageDialog(this, A1010000.getMesg(LangRes.MESG_0008));
+            MesgUtil.showMessageDialog(this, LangRes.MESG_0008);
             return;
         }
 
@@ -687,7 +686,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         // 文件打开出错
         if (JFileChooser.ERROR_OPTION == status)
         {
-            MesgUtil.showMessageDialog(this, A1010000.getMesg(LangRes.MESG_0008));
+            MesgUtil.showMessageDialog(this, LangRes.MESG_0008);
             return;
         }
 
@@ -740,8 +739,8 @@ public class MainPanel extends javax.swing.JPanel implements WBean
             cl_CardLayout.show(pl_CardPanel, "secpanel");
 
             // 运算
-            BeanUtil.setWText(bt_DoCipher, A1010000.getMesg(LangRes.BUTN_TEXT_CODESEC));
-            BeanUtil.setWTips(bt_DoCipher, A1010000.getMesg(LangRes.BUTN_TIPS_CODESEC));
+            A1010000.getLangUtil().setWText(bt_DoCipher, LangRes.BUTN_TEXT_CODESEC, "");
+            A1010000.getLangUtil().setWTips(bt_DoCipher, LangRes.BUTN_TIPS_CODESEC, "");
         }
     }
 
@@ -755,8 +754,8 @@ public class MainPanel extends javax.swing.JPanel implements WBean
             cl_CardLayout.show(pl_CardPanel, "cmtpanel");
 
             // 按钮
-            BeanUtil.setWText(bt_DoCipher, A1010000.getMesg(LangRes.BUTN_TEXT_COMMENT));
-            BeanUtil.setWTips(bt_DoCipher, A1010000.getMesg(LangRes.BUTN_TIPS_COMMENT));
+            A1010000.getLangUtil().setWText(bt_DoCipher, LangRes.BUTN_TEXT_COMMENT, "");
+            A1010000.getLangUtil().setWTips(bt_DoCipher, LangRes.BUTN_TIPS_COMMENT, "");
         }
     }
 
@@ -774,7 +773,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         // 来源文件路径为空检测
         if (!CheckUtil.isValidate(tf_CSrcFile.getText()))
         {
-            MesgUtil.showMessageDialog(this, A1010000.getMesg(LangRes.MESG_0001));
+            MesgUtil.showMessageDialog(this, LangRes.MESG_0001);
             this.bt_CSrcFile.requestFocus();
             return;
         }
@@ -783,7 +782,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         srcFilePath = new File(tf_CSrcFile.getText());
         if (!srcFilePath.exists())
         {
-            MesgUtil.showMessageDialog(this, A1010000.getMesg(LangRes.MESG_0001));
+            MesgUtil.showMessageDialog(this, LangRes.MESG_0001);
             this.bt_CSrcFile.requestFocus();
             return;
         }
@@ -791,7 +790,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         // 目标文件路径为空检测
         if (!CheckUtil.isValidate(tf_CDstFile.getText()))
         {
-            MesgUtil.showMessageDialog(this, A1010000.getMesg(LangRes.MESG_0003));
+            MesgUtil.showMessageDialog(this, LangRes.MESG_0003);
             this.bt_CDstFile.requestFocus();
             return;
         }
@@ -800,7 +799,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         dstFilePath = new File(tf_CDstFile.getText());
         if (!dstFilePath.exists())
         {
-            MesgUtil.showMessageDialog(this, A1010000.getMesg(LangRes.MESG_0004));
+            MesgUtil.showMessageDialog(this, LangRes.MESG_0004);
             this.bt_CDstFile.requestFocus();
             return;
         }
@@ -850,7 +849,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         b |= comment.isTrimReturnTrip();
         if (!b)
         {
-            MesgUtil.showMessageDialog(this, A1010000.getMesg(LangRes.MESG_0005));
+            MesgUtil.showMessageDialog(this, LangRes.MESG_0005);
             return;
         }
 
@@ -858,7 +857,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         List<File> fileList = Util.listFiles(srcFilePath);
         if (fileList == null || fileList.size() < 1)
         {
-            MesgUtil.showMessageDialog(this, A1010000.getMesg(LangRes.MESG_0006));
+            MesgUtil.showMessageDialog(this, LangRes.MESG_0006);
             return;
         }
 
@@ -888,14 +887,14 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         }
 
         date = dateFormat.format(calendar.getTime());
-        date = A1010000.getMesg(LangRes.AREA_TEXT_INFOAREA).replace("{now}", date);
+        date = A1010000.getLangUtil().getMesg(LangRes.AREA_TEXT_INFOAREA, "").replace("{now}", date);
         date = date.replace("{sum}", Integer.toString(fileList.size()));
         date = date.replace("{sec}", Integer.toString(sec));
         date = date.replace("{fail}", Integer.toString(fail));
         ta_InfoArea.append('\n' + date);
 
         // 提示处理成功
-        MesgUtil.showMessageDialog(this, A1010000.getMesg(LangRes.MESG_0009));
+        MesgUtil.showMessageDialog(this, LangRes.MESG_0009);
     }
 
     /**
@@ -1084,7 +1083,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         }
         catch (Exception exp)
         {
-            MesgUtil.showMessageDialog(this, A1010000.getMesg(LangRes.MESG_0007));
+            MesgUtil.showMessageDialog(this, LangRes.MESG_0007);
             LogUtil.exception(exp);
             return false;
         }
@@ -1426,7 +1425,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         }
 
         // 提示处理成功
-        MesgUtil.showMessageDialog(this, A1010000.getMesg(LangRes.MESG_0010));
+        MesgUtil.showMessageDialog(this, LangRes.MESG_0010);
     }
 
     /**
@@ -1562,7 +1561,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         }
 
         // 提示处理成功
-        MesgUtil.showMessageDialog(this, A1010000.getMesg(LangRes.MESG_0011));
+        MesgUtil.showMessageDialog(this, LangRes.MESG_0011);
     }
     // ////////////////////////////////////////////////////////////////////////
     // 界面变量区域

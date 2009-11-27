@@ -8,6 +8,7 @@
 package rmp.comn.lang.C5010000;
 
 import com.amonsoft.bean.WForm;
+import com.amonsoft.cons.ConsSys;
 import com.amonsoft.rmps.prp.IPrpPlus;
 import com.amonsoft.util.LangUtil;
 import cons.CfgCons;
@@ -491,7 +492,7 @@ public class C5010000 extends WForm implements IPrpPlus
         super.init();
 
         // 启动模式标记
-        appMode = MODE_APPLET;
+        appMode = ConsSys.MODE_APPLET;
         // 运行目录标记
         baseFolder = EnvCons.COMN_PATH_JNLP;
 
@@ -511,15 +512,7 @@ public class C5010000 extends WForm implements IPrpPlus
     public static void main(String[] args)
     {
         // 启动模式标记
-        appMode = MODE_APPLICATION;
-        for (String str : args)
-        {
-            if (ARGS_WEB_START.equalsIgnoreCase(str))
-            {
-                appMode = MODE_WEB_START;
-                break;
-            }
-        }
+        appMode = appMode = getAppMode(args);
         // 运行目录标记
         baseFolder = EnvCons.COMN_PATH_HOME;
 
