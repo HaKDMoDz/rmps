@@ -20,13 +20,13 @@ import rmp.comn.lang.C5010000.C5010000;
  * </ul>
  * @author Amon
  */
-public class SubMenu
+public class QuickMenu
 {
     /**
      * @param soft
      * @param menu
      */
-    public SubMenu(C5010000 soft, javax.swing.JMenu menu)
+    public QuickMenu(C5010000 soft, javax.swing.JMenu menu)
     {
     }
 

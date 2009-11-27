@@ -16,7 +16,6 @@ import cons.SysCons;
 import cons.comn.lang.A3010000.ConstUI;
 import cons.id.ComnCons;
 import java.awt.image.BufferedImage;
-import java.util.Properties;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 import rmp.Rmps;
@@ -24,15 +23,13 @@ import rmp.comn.info.C1010000.C1010000;
 import rmp.comn.lang.C5010000.v.MainPanel;
 import rmp.comn.lang.C5010000.v.MiniPanel;
 import rmp.comn.lang.C5010000.v.NormPanel;
-import rmp.comn.lang.C5010000.v.SubMenu;
+import rmp.comn.lang.C5010000.v.QuickMenu;
 import rmp.comn.lang.C5010000.v.TailPanel;
 import rmp.prp.Prps;
 import rmp.user.UserInfo;
 import rmp.util.BeanUtil;
 import rmp.util.EnvUtil;
-import rmp.util.FileUtil;
 import rmp.util.LogUtil;
-import rmp.util.MesgUtil;
 import rmp.util.RmpsUtil;
 
 /**
@@ -58,12 +55,14 @@ public class C5010000 extends WForm implements IPrpPlus
     // ----------------------------------------------------
     /** 当前运行状态标记：参见AppCons.APP_MODE_*** */
     private static int appMode;
-    /** 语言资源 */
-    private static Properties langRes;
     /** RMPS系统运行目录 */
     private static String baseFolder = "";
     /** 插件程序运行目录 */
     private static String plusFolder = "";
+    /**
+     * 语言资源
+     */
+    private static LangUtil langUtil;
     // ----------------------------------------------------
     // 界面显示区域
     // ----------------------------------------------------
@@ -76,8 +75,7 @@ public class C5010000 extends WForm implements IPrpPlus
     /** 内嵌面板 */
     private TailPanel tp_TailPanel;
     /** 级联菜单 */
-    private SubMenu sm_SubMenu;
-    private LangUtil langUtil;
+    private QuickMenu qm_QuickMenu;
 
     // ////////////////////////////////////////////////////////////////////////
     // 构造函数区域
@@ -95,24 +93,19 @@ public class C5010000 extends WForm implements IPrpPlus
     @Override
     public boolean wInitView()
     {
-        // 实例化主窗口
-        super.wInit(false);
-        setVisible(true);
-//        winForm.setSoft(this);
-
         return true;
     }
 
     @Override
     public boolean wInitLang()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return true;
     }
 
     @Override
     public boolean wInitData()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return true;
     }
 
     /*
@@ -237,10 +230,10 @@ public class C5010000 extends WForm implements IPrpPlus
     @Override
     public boolean wShowMenu(JMenu menu)
     {
-        if (sm_SubMenu == null)
+        if (qm_QuickMenu == null)
         {
-            sm_SubMenu = new SubMenu(this, menu);
-            sm_SubMenu.wInit();
+            qm_QuickMenu = new QuickMenu(this, menu);
+            qm_QuickMenu.wInit();
         }
         return false;
     }
@@ -380,39 +373,12 @@ public class C5010000 extends WForm implements IPrpPlus
      * 语言资源查询
      * 
      * @param mesgId 语言资源索引
-     * @return 语言资源内容
-     */
-    public static String getMesg(String mesgId)
-    {
-        if (langRes == null)
-        {
-            langRes = new Properties();
-
-            // 语言资源信息读取
-            try
-            {
-                FileUtil.readLangRes(langRes, EnvCons.PATH_A3010000, EnvCons.COMN_SOFT_LANG);
-            }
-            catch (Exception exp)
-            {
-                LogUtil.exception(exp);
-                MesgUtil.showMessageDialog(null, exp.getMessage());
-            }
-        }
-        return langRes.getProperty(mesgId);
-    }
-
-    /**
-     * 语言资源查询
-     * 
-     * @param mesgId 语言资源索引
      * @param defMesg 默认语言资源
      * @return 语言资源内容
      */
-    public static String getMesg(String mesgId, String defMesg)
+    public static String getMesg(String msgRes, String msgDef)
     {
-        String v = getMesg(mesgId);
-        return v != null ? v : defMesg;
+        return langUtil.getMesg(msgRes, msgDef);
     }
 
     /**
@@ -519,11 +485,6 @@ public class C5010000 extends WForm implements IPrpPlus
     // ////////////////////////////////////////////////////////////////////////
     // 系统启动区域
     // ////////////////////////////////////////////////////////////////////////
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.applet.Applet#init()
-     */
     @Override
     public void init()
     {
@@ -592,10 +553,10 @@ public class C5010000 extends WForm implements IPrpPlus
 
         // 5、引用应用对象
         C5010000 soft = new C5010000();
-        soft.wInitView();
         soft.wShowView(VIEW_NORM);
-
-        // 承载窗口引用
+        soft.wInitView();
+        soft.wInitLang();
+        soft.wInitData();
         soft.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }
 }
