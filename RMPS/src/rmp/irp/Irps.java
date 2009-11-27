@@ -25,7 +25,7 @@ import rmp.irp.v.live.Live;
  * </ul>
  * @author Amon
  */
-public class Imps
+public class Irps
 {
     private static HashMap<String, IAccount> accounts;
 

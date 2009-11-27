@@ -11,7 +11,7 @@ import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.b.IStatus;
-import rmp.irp.Imps;
+import rmp.irp.Irps;
 
 /**
  * <ul>
@@ -46,7 +46,7 @@ public class Root implements IService
         if ("exit".equals(tmp))
         {
             session.send("再见……");
-            Imps.exit(0);
+            Irps.exit(0);
         }
 
         if (tmp.indexOf("step ") == 0)
@@ -60,12 +60,12 @@ public class Root implements IService
             tmp = arr[2];
             if ("online".equals(tmp))
             {
-                Imps.step(arr[1], IStatus.LINE);
+                Irps.step(arr[1], IStatus.LINE);
                 return;
             }
             if ("offline".equals(tmp))
             {
-                Imps.step(arr[1], IStatus.DOWN);
+                Irps.step(arr[1], IStatus.DOWN);
             }
             return;
         }
