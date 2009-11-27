@@ -8,7 +8,7 @@
 package rmp.irp.v.live;
 
 import net.sf.jml.message.MsnInstantMessage;
-import rmp.irp._comn.AMessage;
+import rmp.irp.comn.AMessage;
 
 /**
  * <ul>

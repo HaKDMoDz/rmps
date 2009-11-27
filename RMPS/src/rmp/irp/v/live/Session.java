@@ -15,7 +15,7 @@ import net.sf.jml.MsnMessenger;
 import net.sf.jml.MsnSwitchboard;
 import net.sf.jml.message.MsnControlMessage;
 import net.sf.jml.message.MsnInstantMessage;
-import rmp.irp._comn.ASession;
+import rmp.irp.comn.ASession;
 
 /**
  * <ul>

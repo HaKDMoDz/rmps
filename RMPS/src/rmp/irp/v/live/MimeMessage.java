@@ -9,7 +9,7 @@ package rmp.irp.v.live;
 
 import java.awt.Color;
 import net.sf.jml.message.MsnInstantMessage;
-import rmp.irp._comn.AMimeMessage;
+import rmp.irp.comn.AMimeMessage;
 
 /**
  * <ul>

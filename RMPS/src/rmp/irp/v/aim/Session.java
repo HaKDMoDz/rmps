@@ -11,7 +11,7 @@ import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IMimeMessage;
 import java.io.File;
-import rmp.irp._comn.ASession;
+import rmp.irp.comn.ASession;
 
 /**
  * <ul>

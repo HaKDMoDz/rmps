@@ -8,7 +8,7 @@
 package rmp.irp.v.xmpp;
 
 import java.awt.Color;
-import rmp.irp._comn.AMimeMessage;
+import rmp.irp.comn.AMimeMessage;
 
 /**
  * <ul>

@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import rmp.irp._comn.ASession;
+import rmp.irp.comn.ASession;
 
 /**
  * <ul>

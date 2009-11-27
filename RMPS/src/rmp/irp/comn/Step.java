@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package rmp.irp._comn;
+package rmp.irp.comn;
 
 import com.amonsoft.rmps.irp.b.IProcess;
 

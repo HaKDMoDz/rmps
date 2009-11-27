@@ -14,7 +14,7 @@ import cons.irp.ConsEnv;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import rmp.irp._comn.Step;
+import rmp.irp.comn.Step;
 import rmp.util.Logs;
 import twitter4j.DirectMessage;
 import twitter4j.Query;

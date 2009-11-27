@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.XMPPException;
-import rmp.irp._comn.ASession;
+import rmp.irp.comn.ASession;
 
 /**
  * <ul>

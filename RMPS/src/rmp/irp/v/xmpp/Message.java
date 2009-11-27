@@ -7,7 +7,7 @@
  */
 package rmp.irp.v.xmpp;
 
-import rmp.irp._comn.AMessage;
+import rmp.irp.comn.AMessage;
 
 /**
  * <ul>
