@@ -1209,7 +1209,7 @@ public class StepPanel extends javax.swing.JPanel
             tf_NoteHead.requestFocus();
             return false;
         }
-        if (!CheckUtil.isValidateLength(t, PrpCons.P3040118_SIZE))
+        if (!CheckUtil.isValidate(t, PrpCons.P3040118_SIZE))
         {
             MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A02),
                     PrpCons.P3040118_SIZE));
@@ -1217,7 +1217,7 @@ public class StepPanel extends javax.swing.JPanel
             return false;
         }
         t = ta_NoteInfo.getText();
-        if (!CheckUtil.isValidateLength(t, PrpCons.P3040119_SIZE))
+        if (!CheckUtil.isValidate(t, PrpCons.P3040119_SIZE))
         {
             MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A02),
                     PrpCons.P3040118_SIZE));
@@ -1237,7 +1237,7 @@ public class StepPanel extends javax.swing.JPanel
     {
         String t = tf_sy.getText();
         // 年份
-        if (!CheckUtil.isValidateLength(t, PrpCons.P3040106_SIZE))
+        if (!CheckUtil.isValidate(t, PrpCons.P3040106_SIZE))
         {
             MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A04),
                     PrpCons.P3040106_SIZE));
@@ -1255,7 +1255,7 @@ public class StepPanel extends javax.swing.JPanel
         if (tf_sm.isEnabled())
         {
             t = tf_sm.getText();
-            if (!CheckUtil.isValidateLength(t, PrpCons.P3040107_SIZE))
+            if (!CheckUtil.isValidate(t, PrpCons.P3040107_SIZE))
             {
                 MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A06),
                         PrpCons.P3040107_SIZE));
@@ -1274,7 +1274,7 @@ public class StepPanel extends javax.swing.JPanel
         if (tf_sw.isEnabled())
         {
             t = tf_sw.getText();
-            if (!CheckUtil.isValidateLength(t, PrpCons.P3040109_SIZE))
+            if (!CheckUtil.isValidate(t, PrpCons.P3040109_SIZE))
             {
                 MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0A),
                         PrpCons.P3040109_SIZE));
@@ -1293,7 +1293,7 @@ public class StepPanel extends javax.swing.JPanel
         if (tf_sd.isEnabled())
         {
             t = tf_sd.getText();
-            if (!CheckUtil.isValidateLength(t, PrpCons.P3040108_SIZE))
+            if (!CheckUtil.isValidate(t, PrpCons.P3040108_SIZE))
             {
                 MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A08),
                         PrpCons.P3040108_SIZE));
@@ -1312,7 +1312,7 @@ public class StepPanel extends javax.swing.JPanel
         if (tf_sz.isEnabled())
         {
             t = tf_sz.getText();
-            if (!CheckUtil.isValidateLength(t, PrpCons.P304010A_SIZE))
+            if (!CheckUtil.isValidate(t, PrpCons.P304010A_SIZE))
             {
                 MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0C),
                         PrpCons.P304010A_SIZE));
@@ -1343,7 +1343,7 @@ public class StepPanel extends javax.swing.JPanel
             tf_fy.requestFocus();
             return false;
         }
-        if (!CheckUtil.isValidateLength(t, PrpCons.P304010C_SIZE))
+        if (!CheckUtil.isValidate(t, PrpCons.P304010C_SIZE))
         {
             tf_fy.requestFocus();
             return false;
@@ -1366,7 +1366,7 @@ public class StepPanel extends javax.swing.JPanel
     private boolean ive()
     {
         String t = tf_fm.getText();
-        if (!CheckUtil.isValidateLength(t, PrpCons.P304010D_SIZE))
+        if (!CheckUtil.isValidate(t, PrpCons.P304010D_SIZE))
         {
             tf_fm.requestFocus();
             return false;
@@ -1411,7 +1411,7 @@ public class StepPanel extends javax.swing.JPanel
     {
         String t = tf_ey.getText();
         // 年份
-        if (!CheckUtil.isValidateLength(t, PrpCons.P3040106_SIZE))
+        if (!CheckUtil.isValidate(t, PrpCons.P3040106_SIZE))
         {
             MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A04),
                     PrpCons.P3040106_SIZE));
@@ -1429,7 +1429,7 @@ public class StepPanel extends javax.swing.JPanel
         if (tf_em.isEnabled())
         {
             t = tf_em.getText();
-            if (!CheckUtil.isValidateLength(t, PrpCons.P3040107_SIZE))
+            if (!CheckUtil.isValidate(t, PrpCons.P3040107_SIZE))
             {
                 MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A06),
                         PrpCons.P3040107_SIZE));
@@ -1448,7 +1448,7 @@ public class StepPanel extends javax.swing.JPanel
         if (tf_ew.isEnabled())
         {
             t = tf_ew.getText();
-            if (!CheckUtil.isValidateLength(t, PrpCons.P3040109_SIZE))
+            if (!CheckUtil.isValidate(t, PrpCons.P3040109_SIZE))
             {
                 MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0A),
                         PrpCons.P3040109_SIZE));
@@ -1467,7 +1467,7 @@ public class StepPanel extends javax.swing.JPanel
         if (tf_ed.isEnabled())
         {
             t = tf_ed.getText();
-            if (!CheckUtil.isValidateLength(t, PrpCons.P3040108_SIZE))
+            if (!CheckUtil.isValidate(t, PrpCons.P3040108_SIZE))
             {
                 MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A08),
                         PrpCons.P3040108_SIZE));
@@ -1486,7 +1486,7 @@ public class StepPanel extends javax.swing.JPanel
         if (tf_ez.isEnabled())
         {
             t = tf_ez.getText();
-            if (!CheckUtil.isValidateLength(t, PrpCons.P304010A_SIZE))
+            if (!CheckUtil.isValidate(t, PrpCons.P304010A_SIZE))
             {
                 MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0C),
                         PrpCons.P304010A_SIZE));

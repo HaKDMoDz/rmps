@@ -193,7 +193,7 @@ public class MetaBean extends javax.swing.JPanel implements WProp
             tf_KeysName.requestFocus();
             return;
         }
-        if (!CheckUtil.isValidateLength(keysName, PrpCons.P30F0107_SIZE))
+        if (!CheckUtil.isValidate(keysName, PrpCons.P30F0107_SIZE))
         {
             // 长度不能超过256个字符
             MesgUtil.showMessageDialog(this, StringUtil.format(P30F0000.getMesg(LangRes.P30F6A16), ""
@@ -203,7 +203,7 @@ public class MetaBean extends javax.swing.JPanel implements WProp
         }
 
         String keysMeta = ta_KeysMeta.getText();
-        if (!CheckUtil.isValidateLength(keysMeta, PrpCons.P30F0108_SIZE))
+        if (!CheckUtil.isValidate(keysMeta, PrpCons.P30F0108_SIZE))
         {
             // 长度不能超过2048个字符
             MesgUtil.showMessageDialog(this, StringUtil.format(P30F0000.getMesg(LangRes.P30F6A17), ""

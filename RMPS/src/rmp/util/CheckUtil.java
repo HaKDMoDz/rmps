@@ -65,7 +65,7 @@ public final class CheckUtil
      * @param length
      * @return true字符串长度在指定长度之间
      */
-    public static boolean isValidateLength(String text, int length)
+    public static boolean isValidate(String text, int length)
     {
         if (text == null)
         {
@@ -97,7 +97,7 @@ public final class CheckUtil
      * @param maxLen
      * @return
      */
-    public static boolean isValidateLength(String text, int minLen, int maxLen)
+    public static boolean isValidate(String text, int minLen, int maxLen)
     {
         int len = text.length();
         return (minLen <= len) && (len <= maxLen);
