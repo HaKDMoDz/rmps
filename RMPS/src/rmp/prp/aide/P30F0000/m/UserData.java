@@ -6,9 +6,9 @@
  * CopyRight:      Amon (C) 2007 Winshine ( Amonsoft@gmail.com / http://www.amonsoft.cn ).
  * Description:    
  */
-
 package rmp.prp.aide.P30F0000.m;
 
+import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -27,8 +27,6 @@ import rmp.util.HashUtil;
 import rmp.util.LogUtil;
 import rmp.util.RmpsUtil;
 import rmp.util.StringUtil;
-
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 
 import cons.SysCons;
 import cons.db.PrpCons;
@@ -59,23 +57,23 @@ import cons.prp.aide.P30F0000.LangRes;
 public class UserData extends DefaultTableModel implements Serializable
 {
     /** 文件是否被修改过 */
-    private boolean        modified;
+    private boolean modified;
     /** 类别索引(P30F0105) */
-    private String         typeHash;
+    private String typeHash;
     /** 口令索引(P30F0103) */
-    private String         keysHash;
+    private String keysHash;
     /** 当前记录索引(P30F0104) */
-    private String         currHash;
+    private String currHash;
     /** 口令标题(P30F0107) */
-    private String         keysName;
+    private String keysName;
     /** 关键搜索(P30F0108) */
-    private String         keysMeta;
+    private String keysMeta;
     /** 创建日期 */
-    private Date           dateTime;
+    private Date dateTime;
     /** 共用属性列表 */
     private List<PropItem> ls_ItemList;
     /** 用户登录信息 */
-    private UserKeys       uk_UserKeys;
+    private UserKeys uk_UserKeys;
 
     /**
      * 
@@ -99,7 +97,7 @@ public class UserData extends DefaultTableModel implements Serializable
      * 
      * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
      */
-    public Class< ? > getColumnClass(int columnIndex)
+    public Class<?> getColumnClass(int columnIndex)
     {
         return columnIndex == 0 ? Integer.class : PropItem.class;
     }
@@ -325,7 +323,7 @@ public class UserData extends DefaultTableModel implements Serializable
             keysName = null;
             return true;
         }
-        catch(Exception exp)
+        catch (Exception exp)
         {
             LogUtil.exception(exp);
             return false;
@@ -352,7 +350,7 @@ public class UserData extends DefaultTableModel implements Serializable
         {
             delete(dba);
         }
-        catch(Exception exp)
+        catch (Exception exp)
         {
             LogUtil.exception(exp);
         }
@@ -650,7 +648,7 @@ public class UserData extends DefaultTableModel implements Serializable
 
             return keys.toString();
         }
-        catch(Exception exp)
+        catch (Exception exp)
         {
             LogUtil.exception(exp);
             return keys.toString();
@@ -732,7 +730,6 @@ public class UserData extends DefaultTableModel implements Serializable
         dba.addParam(PrpCons.P30F010A, "");// 相关说明
         dba.executeInsert();
     }
-
     /** serialVersionUID */
     private static final long serialVersionUID = -7751147050913819559L;
 
