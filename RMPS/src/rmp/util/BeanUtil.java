@@ -48,33 +48,6 @@ public class BeanUtil
     {
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see rmp.face.WRmps#init()
-     */
-    public boolean init()
-    {
-        return true;
-    }
-
-    /**
-     * @return
-     */
-    public static Border getEtchedBorder()
-    {
-        return BorderFactory.createEtchedBorder();
-    }
-
-    /**
-     * @param c
-     * @return
-     */
-    public static Border createLineBorder(Color c)
-    {
-        return BorderFactory.createLineBorder(c);
-    }
-
     /**
      * 获得系统图标，返回对象总是一个BufferedImage实例，并且保证不为空
      * 

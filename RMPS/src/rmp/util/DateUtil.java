@@ -9,8 +9,6 @@ package rmp.util;
 
 import java.util.Calendar;
 
-import com.amonsoft.rmps.IRmps;
-
 /**
  * <ul>
  * <li>功能说明：</li>
@@ -24,15 +22,8 @@ import com.amonsoft.rmps.IRmps;
  */
 public final class DateUtil
 {
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see rmp.face.IRmps#init()
-     */
-    public boolean wInit()
+    private DateUtil()
     {
-        return true;
     }
 
     /**

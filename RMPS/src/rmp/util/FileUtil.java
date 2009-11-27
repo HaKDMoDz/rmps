@@ -266,8 +266,7 @@ public final class FileUtil
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException
      */
-    public static BufferedReader getReader(String filePath, String charsetName) throws FileNotFoundException,
-            UnsupportedEncodingException
+    public static BufferedReader getReader(String filePath, String charsetName) throws FileNotFoundException, UnsupportedEncodingException
     {
         return getReader(new File(filePath), charsetName);
     }
@@ -281,8 +280,7 @@ public final class FileUtil
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException
      */
-    public static BufferedReader getReader(File filePath, String charsetName) throws FileNotFoundException,
-            UnsupportedEncodingException
+    public static BufferedReader getReader(File filePath, String charsetName) throws FileNotFoundException, UnsupportedEncodingException
     {
         // Stream对象
         FileInputStream fis = new FileInputStream(filePath);
@@ -332,8 +330,7 @@ public final class FileUtil
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException
      */
-    public static BufferedWriter getWriter(String filePath, String charsetName) throws FileNotFoundException,
-            UnsupportedEncodingException
+    public static BufferedWriter getWriter(String filePath, String charsetName) throws FileNotFoundException, UnsupportedEncodingException
     {
         return getWriter(new File(filePath), charsetName);
     }
@@ -347,8 +344,7 @@ public final class FileUtil
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException
      */
-    public static BufferedWriter getWriter(File filePath, String charsetName) throws FileNotFoundException,
-            UnsupportedEncodingException
+    public static BufferedWriter getWriter(File filePath, String charsetName) throws FileNotFoundException, UnsupportedEncodingException
     {
         FileOutputStream fos = new FileOutputStream(filePath);
         OutputStreamWriter osw = new OutputStreamWriter(fos, charsetName);

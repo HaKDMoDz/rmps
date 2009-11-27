@@ -31,7 +31,6 @@ import net.sf.image4j.codec.ico.ICODecoder;
 import net.sf.image4j.codec.ico.ICOEncoder;
 import net.sf.image4j.codec.ico.ICOImage;
 import rmp.bean.FilesFilter;
-import com.amonsoft.rmps.IRmps;
 
 //import com.sun.jimi.core.Jimi;
 
@@ -68,14 +67,8 @@ public final class ImageUtil
      */
     public static final int LAYOUT_CENTER = 3;
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see rmp.face.IRmps#init()
-     */
-    public boolean wInit()
+    private ImageUtil()
     {
-        return true;
     }
 
     /**
@@ -564,8 +557,7 @@ public final class ImageUtil
      * @param type
      * @return
      */
-    public static boolean drawImage(Graphics2D g2d, Image image, int gx, int gy, int gw, int gh, ImageObserver io,
-            int type)
+    public static boolean drawImage(Graphics2D g2d, Image image, int gx, int gy, int gw, int gh, ImageObserver io, int type)
     {
         boolean drawOk = false;
 
