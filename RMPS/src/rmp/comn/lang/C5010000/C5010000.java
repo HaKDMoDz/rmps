@@ -35,7 +35,6 @@ import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.RmpsUtil;
 
-
 /**
  * <ul>
  * <li>功能说明：</li>
@@ -93,13 +92,8 @@ public class C5010000 extends WForm implements IPrpPlus
     // ////////////////////////////////////////////////////////////////////////
     // 接口实现区域
     // ////////////////////////////////////////////////////////////////////////
-    /*
-     * (non-Javadoc)
-     * 
-     * @see rmp.face.WRmps#wInit()
-     */
     @Override
-    public boolean wInit()
+    public boolean wInitView()
     {
         // 实例化主窗口
         super.wInit(false);
@@ -107,6 +101,18 @@ public class C5010000 extends WForm implements IPrpPlus
 //        winForm.setSoft(this);
 
         return true;
+    }
+
+    @Override
+    public boolean wInitLang()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean wInitData()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     /*
@@ -586,7 +592,7 @@ public class C5010000 extends WForm implements IPrpPlus
 
         // 5、引用应用对象
         C5010000 soft = new C5010000();
-        soft.wInit();
+        soft.wInitView();
         soft.wShowView(VIEW_NORM);
 
         // 承载窗口引用

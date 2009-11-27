@@ -8,7 +8,6 @@
 package rmp.prp.aide.P30B0000.v;
 
 import rmp.prp.aide.P30B0000.m.DataModel;
-import rmp.ui.form.DForm;
 
 /**
  * <ul>
@@ -46,7 +45,4 @@ public class ViewPanel extends javax.swing.JPanel
     {
     }
     private javax.swing.JTable table;
-    private DForm dForm;
-    /**  */
-    private static final long serialVersionUID = -7789499354504078218L;
 }

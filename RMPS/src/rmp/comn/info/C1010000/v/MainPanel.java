@@ -16,7 +16,6 @@ import javax.swing.ImageIcon;
 
 import rmp.comn.info.C1010000.C1010000;
 import rmp.face.WBean;
-import rmp.ui.form.FForm;
 import rmp.ui.link.WLinkLabel;
 import rmp.util.BeanUtil;
 import rmp.util.CheckUtil;
@@ -37,8 +36,6 @@ import cons.comn.info.C1010000.LangRes;
  */
 public class MainPanel extends javax.swing.JPanel implements WBean
 {
-    /** serialVersionUID */
-    private static final long serialVersionUID = 4398323057649267436L;
     private C1010000 me_MainSoft;
 
     // ////////////////////////////////////////////////////////////////////////
@@ -282,9 +279,9 @@ public class MainPanel extends javax.swing.JPanel implements WBean
      */
     private void bt_ExitButn_Handler(java.awt.event.ActionEvent evt)
     {
-        FForm fForm = (FForm) C1010000.getForm();
-        fForm.setVisible(false);
-        fForm.dispose();
+//        FForm fForm = (FForm) C1010000.getForm();
+//        fForm.setVisible(false);
+//        fForm.dispose();
     }
     private javax.swing.JButton bt_ExitButn;
     private javax.swing.JLabel lb_SoftEdit;

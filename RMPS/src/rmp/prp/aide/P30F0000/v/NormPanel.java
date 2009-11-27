@@ -1133,7 +1133,7 @@ public class NormPanel extends javax.swing.JPanel implements WBackCall
     private void mi_ChangePwdsActionPerformed(java.awt.event.ActionEvent evt)
     {
         U0020000 u002 = new U0020000();
-        u002.wInit();
+        u002.wInitView();
         u002.register(CfgCons.SIGN_PWD, this);
         u002.wShowView(IPrpPlus.VIEW_MINI);
     }
@@ -1360,7 +1360,7 @@ public class NormPanel extends javax.swing.JPanel implements WBackCall
      */
     private void mi_SystemExitActionPerformed(java.awt.event.ActionEvent evt)
     {
-        P30F0000.getForm().setVisible(false);
+//        P30F0000.getForm().setVisible(false);
         Rmps.exit(0, true, true);
     }
 

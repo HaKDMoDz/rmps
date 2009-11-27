@@ -155,6 +155,14 @@ public class WForm extends javax.swing.JApplet
         }
     }
 
+    public void toFront()
+    {
+        if (appForm != null)
+        {
+            appForm.toFront();
+        }
+    }
+
     @Override
     public void setJMenuBar(javax.swing.JMenuBar menubar)
     {

@@ -56,7 +56,6 @@ public class HistPanel extends JDialog implements WBean
 
     public HistPanel(UserData userData)
     {
-        super(P30F0000.getForm());
         this.ud_UserData = userData;
     }
 

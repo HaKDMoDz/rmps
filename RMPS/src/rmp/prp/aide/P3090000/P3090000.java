@@ -7,7 +7,7 @@
  */
 package rmp.prp.aide.P3090000;
 
-import java.awt.Container;
+import com.amonsoft.bean.WForm;
 import java.awt.image.BufferedImage;
 import java.util.Properties;
 
@@ -23,8 +23,6 @@ import rmp.prp.aide.P3090000.v.MiniPanel;
 import rmp.prp.aide.P3090000.v.NormPanel;
 import rmp.prp.aide.P3090000.v.SubMenu;
 import rmp.prp.aide.P3090000.v.TailPanel;
-import rmp.ui.form.AForm;
-import rmp.ui.form.FForm;
 import rmp.user.UserInfo;
 import rmp.util.BeanUtil;
 import rmp.util.EnvUtil;
@@ -48,7 +46,7 @@ import com.amonsoft.util.LangUtil;
  * </ul>
  * @author Amon
  */
-public class P3090000 extends AForm implements IPrpPlus
+public class P3090000 extends WForm implements IPrpPlus
 {
     // ////////////////////////////////////////////////////////////////////////
     // 控制变量区域
@@ -58,9 +56,6 @@ public class P3090000 extends AForm implements IPrpPlus
     // ----------------------------------------------------
     /** 当前运行状态标记：参见AppCons.APP_MODE_*** */
     private static int appMode;
-    /** 程序主窗口 */
-    private static AForm softAForm;
-    private static FForm softFForm;
     /** 语言资源 */
     private static Properties langRes;
     /** RMPS系统运行目录 */
@@ -98,13 +93,21 @@ public class P3090000 extends AForm implements IPrpPlus
      * @see rmp.face.WRmps#wInit()
      */
     @Override
-    public boolean wInit()
+    public boolean wInitView()
     {
-        softFForm = new FForm();
-        softFForm.wInit();
-        softFForm.setSoft(this);
-
         return true;
+    }
+
+    @Override
+    public boolean wInitLang()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean wInitData()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     /*
@@ -366,16 +369,6 @@ public class P3090000 extends AForm implements IPrpPlus
     }
 
     /**
-     * 软件主窗口获取
-     * 
-     * @return 软件主窗口
-     */
-    public static Container getForm()
-    {
-        return appMode == MODE_APPLET ? softAForm : softFForm;
-    }
-
-    /**
      * 语言资源查询
      * 
      * @param mesgId 语言资源索引
@@ -395,7 +388,7 @@ public class P3090000 extends AForm implements IPrpPlus
             catch (Exception exp)
             {
                 LogUtil.exception(exp);
-                MesgUtil.showMessageDialog(getForm(), exp.getMessage());
+                MesgUtil.showMessageDialog(null, exp.getMessage());
             }
         }
         return langRes.getProperty(mesgId);
@@ -425,21 +418,12 @@ public class P3090000 extends AForm implements IPrpPlus
             mp_MainPanel.wInit();
         }
 
-        // 小程序处理
-        if (appMode == MODE_APPLET)
+        setContentPane(mp_MainPanel);
+        pack();
+        center(null);
+        if (!isVisible())
         {
-            softAForm.setContentPane(mp_MainPanel);
-        }
-        // 主程序处理
-        else
-        {
-            softFForm.setContentPane(mp_MainPanel);
-            softFForm.pack();
-            softFForm.center();
-            if (!softFForm.isVisible())
-            {
-                softFForm.setVisible(true);
-            }
+            setVisible(true);
         }
         return mp_MainPanel;
     }
@@ -455,21 +439,12 @@ public class P3090000 extends AForm implements IPrpPlus
             mp_MiniPanel.wInit();
         }
 
-        // 小程序处理
-        if (appMode == MODE_APPLET)
+        setContentPane(mp_MiniPanel);
+        pack();
+        center(null);
+        if (!isVisible())
         {
-            softAForm.setContentPane(mp_MainPanel);
-        }
-        // 主程序处理
-        else
-        {
-            softFForm.setContentPane(mp_MiniPanel);
-            softFForm.pack();
-            softFForm.center();
-            if (!softFForm.isVisible())
-            {
-                softFForm.setVisible(true);
-            }
+            setVisible(true);
         }
         return mp_MiniPanel;
     }
@@ -485,21 +460,12 @@ public class P3090000 extends AForm implements IPrpPlus
             np_NormPanel.wInit();
         }
 
-        // 小程序处理
-        if (appMode == MODE_APPLET)
+        setContentPane(np_NormPanel);
+        pack();
+        center(null);
+        if (!isVisible())
         {
-            softAForm.setContentPane(np_NormPanel);
-        }
-        // 主程序处理
-        else
-        {
-            softFForm.setContentPane(np_NormPanel);
-            softFForm.pack();
-            softFForm.center();
-            if (!softFForm.isVisible())
-            {
-                softFForm.setVisible(true);
-            }
+            setVisible(true);
         }
         return np_NormPanel;
     }
@@ -536,8 +502,6 @@ public class P3090000 extends AForm implements IPrpPlus
         ui.wInit();
         RmpsUtil.setUserInfo(ui);
 
-        // 承载窗口引用
-        softAForm = this;
         // 显示主窗口 启动应用程序
         wShowView(VIEW_MAIN);
     }
@@ -590,11 +554,8 @@ public class P3090000 extends AForm implements IPrpPlus
 
         // 5、引用应用对象
         P3090000 soft = new P3090000();
-        soft.wInit();
+        soft.wInitView();
         soft.wShowView(VIEW_MAIN);
-
-        // 承载窗口引用
-        softFForm.setDefaultCloseOperation(FForm.EXIT_ON_CLOSE);
     }
     /** serialVersionUID */
     private static final long serialVersionUID = -4086232165561006902L;

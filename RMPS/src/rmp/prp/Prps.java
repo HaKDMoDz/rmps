@@ -702,7 +702,7 @@ public class Prps extends WForm
                         if (obj instanceof IPrpPlus)
                         {
                             IPrpPlus soft = (IPrpPlus) obj;
-                            soft.wInit();
+                            soft.wInitView();
                             soft.wSetPlusFolder(currFile.getPath());
                             std.addPlugin(soft);
                             LogUtil.log("插件加载：标准插件加载成功 － " + soft.wGetTitle());

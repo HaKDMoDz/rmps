@@ -1200,7 +1200,7 @@ public class MainPanel extends javax.swing.JPanel implements IView
             sp_StepPanel = new StepPanel();
             sp_StepPanel.wInit();
 
-            javax.swing.JFrame frame = (javax.swing.JFrame) P3060000.getForm();
+            javax.swing.JFrame frame = null;
             dg_StepForm = new javax.swing.JDialog(frame);
             dg_StepForm.getContentPane().add(sp_StepPanel);
             dg_StepForm.pack();

@@ -358,7 +358,7 @@ public class CodeData extends AbstractTableModel
 
         if (this.endChar < this.sttChar)
         {
-            MesgUtil.showMessageDialog(P3030000.getForm(), P3030000.getMesg(LangRes.MESG_0005));
+            MesgUtil.showMessageDialog(null, P3030000.getMesg(LangRes.MESG_0005));
         }
     }
 

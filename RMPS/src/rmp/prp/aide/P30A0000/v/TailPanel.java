@@ -7,17 +7,17 @@
  */
 package rmp.prp.aide.P30A0000.v;
 
+import com.amonsoft.bean.WForm;
 import com.amonsoft.rmps.prp.v.IView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import rmp.comn.tray.C3010000.C3010000;
+import javax.swing.WindowConstants;
 import rmp.prp.aide.P30A0000.P30A0000;
 import rmp.prp.aide.P30A0000.m.DataModel;
 import rmp.prp.aide.P30A0000.t.Util;
-import rmp.ui.form.DForm;
 import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
 
@@ -171,13 +171,13 @@ public class TailPanel implements IView
                 layout.createSequentialGroup().addContainerGap().addComponent(sp_DataList,
                 javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE).addContainerGap()));
 
-        df_DataView = new DForm(C3010000.queryRef("prp"));
-        df_DataView.wInit();
+        df_DataView = new WForm();
+        df_DataView.wInit(false);
         df_DataView.setContentPane(viewPanel);
         df_DataView.pack();
-        df_DataView.center();
+        df_DataView.center(null);
         df_DataView.setVisible(true);
-        df_DataView.setDefaultCloseOperation(DForm.DISPOSE_ON_CLOSE);
+        df_DataView.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     // ----------------------------------------------------
@@ -255,5 +255,5 @@ public class TailPanel implements IView
     private javax.swing.JButton bt_QueryNow;
     /** 结果显示表格 */
     private javax.swing.JTable tb_DataList;
-    private DForm df_DataView;
+    private WForm df_DataView;
 }

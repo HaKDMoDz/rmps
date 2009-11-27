@@ -14,7 +14,6 @@ import java.util.EventObject;
 import rmp.bean.K1SV1S;
 import rmp.face.WBackCall;
 import com.amonsoft.rmps.prp.IPrpPlus;
-import rmp.prp.aide.P30F0000.P30F0000;
 import rmp.prp.aide.P30F0000.t.Util;
 import rmp.user.UserInfo;
 import rmp.user.U0000000.U0000000;
@@ -62,16 +61,16 @@ public class UserPanel implements WBackCall
         // 已存在用户注册信息的情况下,显示用户登录界面
         if (ui.getCfg(cons.prp.aide.P30F0000.ConstUI.CFG_USER) != null)
         {
-            U0000000 u000 = new U0000000((javax.swing.JFrame)P30F0000.getForm());
-            u000.wInit();
+            U0000000 u000 = new U0000000();
+            u000.wInitView();
             u000.register(CfgCons.SIGN_IN, this);
             u000.wShowView(IPrpPlus.VIEW_MINI);
         }
         // 不存在用户注册信息的情况下,显示用户注册界面
         else
         {
-            U0010000 u001 = new U0010000((javax.swing.JFrame)P30F0000.getForm());
-            u001.wInit();
+            U0010000 u001 = new U0010000();
+            u001.wInitView();
             u001.register(CfgCons.SIGN_UP, this);
             u001.wShowView(IPrpPlus.VIEW_MINI);
         }

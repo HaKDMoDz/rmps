@@ -15,7 +15,6 @@ import javax.swing.ImageIcon;
 
 import rmp.comn.info.C1010000.C1010000;
 import rmp.face.WBean;
-import rmp.ui.form.FForm;
 import rmp.ui.link.WLinkLabel;
 import rmp.util.LogUtil;
 import cons.comn.info.C1010000.ConstUI;
@@ -32,9 +31,6 @@ import cons.comn.info.C1010000.ConstUI;
  */
 public class Style002 extends javax.swing.JPanel implements WBean
 {
-    /** serialVersionUID */
-    private static final long serialVersionUID = 9126605563552825851L;
-
     // ////////////////////////////////////////////////////////////////////////
     // 构造函数区域
     // ////////////////////////////////////////////////////////////////////////
@@ -222,9 +218,9 @@ public class Style002 extends javax.swing.JPanel implements WBean
      */
     private void bt_ExitButn_Handler(java.awt.event.ActionEvent evt)
     {
-        FForm fForm = (FForm) C1010000.getForm();
-        fForm.setVisible(false);
-        fForm.dispose();
+//        FForm fForm = (FForm) C1010000.getForm();
+//        fForm.setVisible(false);
+//        fForm.dispose();
     }
     private javax.swing.JButton bt_ExitButn;
     private javax.swing.JLabel lb_SoftEdit;

@@ -7,15 +7,15 @@
  */
 package rmp.prp.aide.P3030000.v;
 
-import rmp.comn.tray.C3010000.C3010000;
+import com.amonsoft.bean.WForm;
 import rmp.prp.aide.P3030000.P3030000;
 import rmp.prp.aide.P3030000.m.CodeData;
-import rmp.ui.form.DForm;
 import rmp.util.BeanUtil;
 import rmp.util.CheckUtil;
 import rmp.util.MesgUtil;
 import cons.prp.aide.P3030000.ConstUI;
 import cons.prp.aide.P3030000.LangRes;
+import javax.swing.WindowConstants;
 
 /**
  * <ul>
@@ -134,13 +134,13 @@ public class TailPanel
                 layout.createSequentialGroup().addContainerGap().addComponent(sp_DataList,
                 javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE).addContainerGap()));
 
-        df_Dialog = new DForm(C3010000.queryRef("prp"));
-        df_Dialog.wInit();
+        df_Dialog = new WForm();
+        df_Dialog.wInit(false);
         df_Dialog.setContentPane(viewPanel);
         df_Dialog.setTitle(ms_MainSoft.wGetTitle());
         df_Dialog.pack();
-        df_Dialog.center();
-        df_Dialog.setDefaultCloseOperation(DForm.DISPOSE_ON_CLOSE);
+        df_Dialog.center(null);
+        df_Dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     // ----------------------------------------------------
@@ -277,5 +277,5 @@ public class TailPanel
     /** 结果显示表格 */
     private javax.swing.JTable tb_DataList;
     /** 查询结果显示对话框 */
-    private DForm df_Dialog;
+    private WForm df_Dialog;
 }

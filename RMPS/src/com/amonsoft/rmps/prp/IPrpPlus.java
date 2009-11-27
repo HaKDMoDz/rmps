@@ -7,8 +7,6 @@
  */
 package com.amonsoft.rmps.prp;
 
-import com.amonsoft.rmps.IRmps;
-
 /**
  * <ul>
  * <li>功能说明：</li>
@@ -29,7 +27,7 @@ import com.amonsoft.rmps.IRmps;
  * </ul>
  * @author Amon
  */
-public interface IPrpPlus extends IRmps
+public interface IPrpPlus
 {
     /** 启动模式：标准插件模式 */
     int MODE_PLUGINS = 0;
@@ -40,24 +38,30 @@ public interface IPrpPlus extends IRmps
     /** 启动模式：脚本程序模式 */
     int MODE_APPLET = 3;
     String ARGS_WEB_START = "JavaWebStart";
-//
-//    /**
-//     * 界面布局初始化
-//     * @return
-//     */
-//    boolean wInitView();
-//
-//    /**
-//     * 界面语言初始化
-//     * @return
-//     */
-//    boolean wInitLang();
-//
-//    /**
-//     * 界面数据初始化
-//     * @return
-//     */
-//    boolean wInitData();
+
+    /**
+     * 界面布局初始化
+     * @return
+     */
+    boolean wInitView();
+
+    /**
+     * 界面语言初始化
+     * @return
+     */
+    boolean wInitLang();
+
+    /**
+     * 界面数据初始化
+     * @return
+     */
+    boolean wInitData();
+
+    /**
+     * 
+     * @return
+     */
+    int wCode();
 
     /**
      * 当前系统的代码编码名称

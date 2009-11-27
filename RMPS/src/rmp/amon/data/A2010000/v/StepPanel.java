@@ -11,7 +11,6 @@ import java.sql.Connection;
 
 import javax.swing.DefaultComboBoxModel;
 
-import rmp.amon.data.A2010000.A2010000;
 import rmp.amon.data.A2010000.b.WDataBase;
 import rmp.amon.data.A2010000.t.Util;
 import rmp.bean.K1SV1S;
@@ -84,7 +83,7 @@ public class StepPanel extends javax.swing.JPanel
         cm_DBKind.addElement(new K1SV1S("5", "时间数据"));
         cb_DBKind.setModel(cm_DBKind);
 
-        dg_DForm = new javax.swing.JDialog((javax.swing.JFrame) A2010000.getForm());
+        dg_DForm = new javax.swing.JDialog();
         dg_DForm.setResizable(false);
         dg_DForm.setContentPane(this);
         dg_DForm.pack();

@@ -447,7 +447,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
             String userText = this.tf_SttField.getText();
             if (userText.length() < 1)
             {
-                MesgUtil.showMessageDialog(P3030000.getForm(), P3030000.getMesg(LangRes.MESG_0001));
+                MesgUtil.showMessageDialog(null, P3030000.getMesg(LangRes.MESG_0001));
                 this.tf_SttField.requestFocus();
                 return;
             }
@@ -562,7 +562,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
             String userText = this.tf_SttField.getText();
             if (userText.length() < 1)
             {
-                MesgUtil.showMessageDialog(P3030000.getForm(), P3030000.getMesg(LangRes.MESG_0001));
+                MesgUtil.showMessageDialog(null, P3030000.getMesg(LangRes.MESG_0001));
                 this.tf_SttField.requestFocus();
                 return;
             }
@@ -587,7 +587,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         // 两者不能同时为空
         if (sttChar.length() < 1 && endChar.length() < 1)
         {
-            MesgUtil.showMessageDialog(P3030000.getForm(), P3030000.getMesg(LangRes.MESG_0002));
+            MesgUtil.showMessageDialog(null, P3030000.getMesg(LangRes.MESG_0002));
             this.tf_SttField.requestFocus();
             return;
         }
@@ -608,7 +608,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         catch (NumberFormatException exp)
         {
             LogUtil.exception(exp);
-            MesgUtil.showMessageDialog(P3030000.getForm(), P3030000.getMesg(LangRes.MESG_0003));
+            MesgUtil.showMessageDialog(null, P3030000.getMesg(LangRes.MESG_0003));
             this.tf_SttField.requestFocus();
             return;
         }
@@ -620,7 +620,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         catch (NumberFormatException exp)
         {
             LogUtil.exception(exp);
-            MesgUtil.showMessageDialog(P3030000.getForm(), P3030000.getMesg(LangRes.MESG_0004));
+            MesgUtil.showMessageDialog(null, P3030000.getMesg(LangRes.MESG_0004));
             this.tf_EndField.requestFocus();
             return;
         }

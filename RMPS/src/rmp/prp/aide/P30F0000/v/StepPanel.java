@@ -145,8 +145,8 @@ public class StepPanel extends javax.swing.JPanel implements WBackCall
      */
     private void bt_LoginActionPerformed(java.awt.event.ActionEvent evt)
     {
-        U0000000 u000 = new U0000000((javax.swing.JFrame)P30F0000.getForm());
-        u000.wInit();
+        U0000000 u000 = new U0000000();
+        u000.wInitView();
         u000.register(CfgCons.SIGN_IN, this);
         u000.wShowView(IPrpPlus.VIEW_MINI);
     }

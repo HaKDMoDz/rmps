@@ -96,13 +96,8 @@ public class C3010000 implements IPrpPlus
     {
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see rmp.face.WRmps#wInit()
-     */
     @Override
-    public boolean wInit()
+    public boolean wInitView()
     {
         // 系统不支持托盘图标时，直接返回
         if (!Util.isTraySupport())
@@ -144,6 +139,18 @@ public class C3010000 implements IPrpPlus
         showNorm();
 
         return true;
+    }
+
+    @Override
+    public boolean wInitLang()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean wInitData()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     /*
@@ -508,7 +515,7 @@ public class C3010000 implements IPrpPlus
         if (rt_RmpsTray == null)
         {
             rt_RmpsTray = new C3010000();
-            rt_RmpsTray.wInit();
+            rt_RmpsTray.wInitView();
         }
         return rt_RmpsTray;
     }
@@ -681,7 +688,7 @@ public class C3010000 implements IPrpPlus
 
         // 5、引用应用对象
         C3010000 soft = new C3010000();
-        soft.wInit();
+        soft.wInitView();
 
         // 6、显示主窗口 启动应用程序
         soft.wShowView(VIEW_NORM);

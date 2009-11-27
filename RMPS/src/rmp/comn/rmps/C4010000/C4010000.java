@@ -7,7 +7,7 @@
  */
 package rmp.comn.rmps.C4010000;
 
-import java.awt.Container;
+import com.amonsoft.bean.WForm;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Properties;
@@ -25,8 +25,6 @@ import rmp.comn.rmps.C4010000.v.SubMenu;
 import rmp.comn.rmps.C4010000.v.TailPanel;
 import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.Prps;
-import rmp.ui.form.AForm;
-import rmp.ui.form.FForm;
 import rmp.user.UserInfo;
 import rmp.util.BeanUtil;
 import rmp.util.EnvUtil;
@@ -40,6 +38,7 @@ import cons.SysCons;
 import cons.comn.rmps.C4010000.ConstUI;
 import cons.id.ComnCons;
 import com.amonsoft.util.LangUtil;
+import javax.swing.WindowConstants;
 
 /**
  * <ul>
@@ -52,7 +51,7 @@ import com.amonsoft.util.LangUtil;
  * </ul>
  * @author Amon
  */
-public class C4010000 extends AForm implements IPrpPlus
+public class C4010000 extends WForm implements IPrpPlus
 {
     // ////////////////////////////////////////////////////////////////////////
     // 控制变量区域
@@ -62,9 +61,6 @@ public class C4010000 extends AForm implements IPrpPlus
     // ----------------------------------------------------
     /** 当前运行状态标记：参见AppCons.APP_MODE_*** */
     private static int appMode;
-    /** 程序主窗口 */
-    private static AForm softAForm;
-    private static FForm softFForm;
     /** 语言资源 */
     private static Properties langRes;
     /** RMPS系统运行目录 */
@@ -101,15 +97,22 @@ public class C4010000 extends AForm implements IPrpPlus
     // ////////////////////////////////////////////////////////////////////////
     // 接口实现区域
     // ////////////////////////////////////////////////////////////////////////
-    /*
-     * (non-Javadoc)
-     * 
-     * @see rmp.face.WRmps#wInit()
-     */
     @Override
-    public boolean wInit()
+    public boolean wInitView()
     {
-        return true;
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean wInitLang()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean wInitData()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     /*
@@ -370,16 +373,6 @@ public class C4010000 extends AForm implements IPrpPlus
     }
 
     /**
-     * 软件主窗口获取
-     * 
-     * @return 软件主窗口
-     */
-    public static Container getForm()
-    {
-        return appMode == MODE_APPLET ? softAForm : softFForm;
-    }
-
-    /**
      * 语言资源查询
      * 
      * @param mesgId 语言资源索引
@@ -399,7 +392,7 @@ public class C4010000 extends AForm implements IPrpPlus
             catch (Exception exp)
             {
                 LogUtil.exception(exp);
-                MesgUtil.showMessageDialog(getForm(), exp.getMessage());
+                MesgUtil.showMessageDialog(null, exp.getMessage());
             }
         }
         return langRes.getProperty(mesgId);
@@ -560,11 +553,9 @@ public class C4010000 extends AForm implements IPrpPlus
         ui.wInit();
         RmpsUtil.setUserInfo(ui);
 
-        // 承载窗口引用
-        softAForm = this;
         // 显示主窗口 启动应用程序
         wShowView(VIEW_NORM);
-        addTo(softAForm.getContentPane());
+        addTo(getContentPane());
     }
 
     /**
@@ -616,16 +607,16 @@ public class C4010000 extends AForm implements IPrpPlus
 
         // 5、引用应用对象
         C4010000 soft = new C4010000();
-        soft.wInit();
+        soft.wInitView();
 
-        softFForm.setSoft(soft);
+//        setSoft(soft);
         // 承载窗口引用
-        softFForm.setDefaultCloseOperation(FForm.EXIT_ON_CLOSE);
+        soft.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         // 显示主窗口 启动应用程序
         soft.wShowView(VIEW_MINI);
-        soft.addTo(softFForm.getContentPane());
+//        soft.addTo(getContentPane());
         // 居中显示
-        softFForm.center();
+        soft.center(null);
     }
     /** serialVersionUID */
     private static final long serialVersionUID = -1295916310944266939L;

@@ -7,6 +7,7 @@
  */
 package rmp.comn.help.C2010000;
 
+import com.amonsoft.bean.WForm;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JMenu;
@@ -24,19 +25,24 @@ import com.amonsoft.rmps.prp.IPrpPlus;
  * </ul>
  * @author Amon
  */
-public class C2010000 implements IPrpPlus
+public class C2010000 extends WForm implements IPrpPlus
 {
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see rmp.face.WRmps#wInit()
-     */
     @Override
-    public boolean wInit()
+    public boolean wInitView()
     {
-        // TODO Auto-generated method stub
-        return false;
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean wInitLang()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean wInitData()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     /*

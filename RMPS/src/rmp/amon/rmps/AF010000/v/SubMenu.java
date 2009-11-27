@@ -7,9 +7,8 @@
  */
 package rmp.amon.rmps.AF010000.v;
 
+import javax.swing.WindowConstants;
 import rmp.amon.rmps.AF010000.AF010000;
-import rmp.comn.tray.C3010000.C3010000;
-import rmp.ui.form.DForm;
 
 /**
  * <ul>
@@ -74,15 +73,6 @@ public class SubMenu
     private void icb()
     {
         javax.swing.JPanel viewPanel = new javax.swing.JPanel();
-
-        fm_Dialog = new DForm(C3010000.queryRef("prp"));
-        fm_Dialog.wInit();
-        fm_Dialog.setContentPane(viewPanel);
-        fm_Dialog.pack();
-        fm_Dialog.center();
-        fm_Dialog.setResizable(false);
-        fm_Dialog.setVisible(true);
-        fm_Dialog.setDefaultCloseOperation(DForm.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -110,5 +100,4 @@ public class SubMenu
         itb();
     }
     private javax.swing.JMenuItem mi_Config;
-    private DForm fm_Dialog;
 }

@@ -7,13 +7,13 @@
  */
 package rmp.user.U0030000;
 
+import com.amonsoft.bean.WForm;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 
 import com.amonsoft.rmps.prp.IPrpPlus;
-import rmp.ui.form.AForm;
 
 /**
  * <ul>
@@ -25,8 +25,26 @@ import rmp.ui.form.AForm;
  * </ul>
  * @author Amon
  */
-public class U0030000 extends AForm implements IPrpPlus
+public class U0030000 extends WForm implements IPrpPlus
 {
+    @Override
+    public boolean wInitView()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean wInitLang()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean wInitData()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
     @Override
     public boolean wClosing()
     {
@@ -152,6 +170,4 @@ public class U0030000 extends AForm implements IPrpPlus
     {
         return true;
     }
-    /**  */
-    private static final long serialVersionUID = 888962056649493365L;
 }

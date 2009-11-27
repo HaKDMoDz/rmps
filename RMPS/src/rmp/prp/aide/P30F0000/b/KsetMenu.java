@@ -12,7 +12,6 @@ package rmp.prp.aide.P30F0000.b;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 
-import com.amonsoft.rmps.IRmps;
 import rmp.prp.aide.P30F0000.P30F0000;
 import rmp.prp.aide.P30F0000.t.Util;
 import rmp.util.BeanUtil;
@@ -297,7 +296,7 @@ public class KsetMenu
 
     private void mi_SizeMoreActionPerformed(java.awt.event.ActionEvent evt)
     {
-        String s = MesgUtil.showInputDialog(P30F0000.getForm(), LangRes.P30F6A1D, "" + keySize);
+        String s = MesgUtil.showInputDialog(null, LangRes.P30F6A1D, "" + keySize);
         if (s == null)
         {
             return;
@@ -305,7 +304,7 @@ public class KsetMenu
         s = s.trim();
         if (s.length() < 1)
         {
-            MesgUtil.showMessageDialog(P30F0000.getForm(), LangRes.P30F6A1F);
+            MesgUtil.showMessageDialog(null, LangRes.P30F6A1F);
             return;
         }
 
@@ -316,7 +315,7 @@ public class KsetMenu
         catch(NumberFormatException exp)
         {
             LogUtil.exception(exp);
-            MesgUtil.showMessageDialog(P30F0000.getForm(), LangRes.P30F6A1E);
+            MesgUtil.showMessageDialog(null, LangRes.P30F6A1E);
             keySize = 8;
             mi_SizeDeft.setSelected(true);
         }

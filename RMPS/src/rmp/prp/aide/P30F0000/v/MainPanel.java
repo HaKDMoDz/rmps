@@ -52,7 +52,4 @@ public class MainPanel extends javax.swing.JPanel implements WBean
     {
         return true;
     }
-
-    /** serialVersionUID */
-    private static final long serialVersionUID = -2572033710010451434L;
 }
