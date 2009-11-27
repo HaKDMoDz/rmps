@@ -16,7 +16,7 @@ import rmp.util.CheckUtil;
 import rmp.util.LogUtil;
 
 
-import cons.ims.a.ConstUI;
+import cons.irp.a.ConstUI;
 
 /**
  * <ul>

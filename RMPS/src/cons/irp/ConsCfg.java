@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package cons.imp;
+package cons.irp;
 
 /**
  * <ul>

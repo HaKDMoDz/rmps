@@ -7,7 +7,7 @@
  * Description:    
  */
 
-package cons.ims.a;
+package cons.irp.a;
 
 /**
  * <ul>

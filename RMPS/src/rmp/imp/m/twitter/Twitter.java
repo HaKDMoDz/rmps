@@ -10,7 +10,7 @@ package rmp.imp.m.twitter;
 import com.amonsoft.rmps.imp.b.IMessage;
 import com.amonsoft.rmps.imp.m.IService;
 import com.amonsoft.rmps.imp.b.ISession;
-import cons.imp.ConsEnv;
+import cons.irp.ConsEnv;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
