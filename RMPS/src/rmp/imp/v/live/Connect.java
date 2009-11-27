@@ -7,7 +7,7 @@
  */
 package rmp.imp.v.live;
 
-import com.amonsoft.rmps.imp.v.IConnect;
+import com.amonsoft.rmps.irp.v.IConnect;
 
 /**
  * <ul>

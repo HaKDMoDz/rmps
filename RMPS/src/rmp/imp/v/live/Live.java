@@ -7,10 +7,10 @@
  */
 package rmp.imp.v.live;
 
-import com.amonsoft.rmps.imp.v.IAccount;
-import com.amonsoft.rmps.imp.v.IConnect;
-import com.amonsoft.rmps.imp.b.IContact;
-import com.amonsoft.rmps.imp.b.IStatus;
+import com.amonsoft.rmps.irp.v.IAccount;
+import com.amonsoft.rmps.irp.v.IConnect;
+import com.amonsoft.rmps.irp.b.IContact;
+import com.amonsoft.rmps.irp.b.IStatus;
 import cons.irp.ConsEnv;
 import java.io.PrintWriter;
 import java.util.Date;

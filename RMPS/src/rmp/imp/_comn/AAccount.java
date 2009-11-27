@@ -7,8 +7,8 @@
  */
 package rmp.imp._comn;
 
-import com.amonsoft.rmps.imp.v.IAccount;
-import com.amonsoft.rmps.imp.b.IContact;
+import com.amonsoft.rmps.irp.v.IAccount;
+import com.amonsoft.rmps.irp.b.IContact;
 import java.util.List;
 
 /**

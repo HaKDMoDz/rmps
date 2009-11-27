@@ -7,11 +7,11 @@
  */
 package rmp.imp.c;
 
-import com.amonsoft.rmps.imp.c.IControl;
-import com.amonsoft.rmps.imp.b.IMessage;
-import com.amonsoft.rmps.imp.b.IProcess;
-import com.amonsoft.rmps.imp.m.IService;
-import com.amonsoft.rmps.imp.b.ISession;
+import com.amonsoft.rmps.irp.c.IControl;
+import com.amonsoft.rmps.irp.b.IMessage;
+import com.amonsoft.rmps.irp.b.IProcess;
+import com.amonsoft.rmps.irp.m.IService;
+import com.amonsoft.rmps.irp.b.ISession;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Enumeration;

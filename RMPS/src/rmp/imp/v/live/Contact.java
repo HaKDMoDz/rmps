@@ -7,7 +7,7 @@
  */
 package rmp.imp.v.live;
 
-import com.amonsoft.rmps.imp.b.IContact;
+import com.amonsoft.rmps.irp.b.IContact;
 import net.sf.jml.MsnContact;
 
 /**

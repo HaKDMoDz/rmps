@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package com.amonsoft.rmps.imp.b;
+package com.amonsoft.rmps.irp.b;
 
 /**
  * <ul>

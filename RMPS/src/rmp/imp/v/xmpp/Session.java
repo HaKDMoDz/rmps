@@ -7,9 +7,9 @@
  */
 package rmp.imp.v.xmpp;
 
-import com.amonsoft.rmps.imp.b.IContact;
-import com.amonsoft.rmps.imp.b.IMessage;
-import com.amonsoft.rmps.imp.b.IMimeMessage;
+import com.amonsoft.rmps.irp.b.IContact;
+import com.amonsoft.rmps.irp.b.IMessage;
+import com.amonsoft.rmps.irp.b.IMimeMessage;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;

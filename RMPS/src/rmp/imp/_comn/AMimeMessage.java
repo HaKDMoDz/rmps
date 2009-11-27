@@ -7,7 +7,7 @@
  */
 package rmp.imp._comn;
 
-import com.amonsoft.rmps.imp.b.IMimeMessage;
+import com.amonsoft.rmps.irp.b.IMimeMessage;
 
 /**
  * <ul>

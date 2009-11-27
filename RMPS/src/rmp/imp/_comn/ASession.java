@@ -7,8 +7,8 @@
  */
 package rmp.imp._comn;
 
-import com.amonsoft.rmps.imp.b.IProcess;
-import com.amonsoft.rmps.imp.b.ISession;
+import com.amonsoft.rmps.irp.b.IProcess;
+import com.amonsoft.rmps.irp.b.ISession;
 import java.util.HashMap;
 
 /**

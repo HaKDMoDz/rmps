@@ -5,10 +5,10 @@
  * Description:
  *
  */
-package com.amonsoft.rmps.imp.c;
+package com.amonsoft.rmps.irp.c;
 
-import com.amonsoft.rmps.imp.b.ISession;
-import com.amonsoft.rmps.imp.b.IMessage;
+import com.amonsoft.rmps.irp.b.ISession;
+import com.amonsoft.rmps.irp.b.IMessage;
 
 /**
  * <ul>

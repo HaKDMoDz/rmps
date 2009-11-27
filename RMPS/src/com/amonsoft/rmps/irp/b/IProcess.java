@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package com.amonsoft.rmps.imp.v;
+package com.amonsoft.rmps.irp.b;
 
 /**
  * <ul>
@@ -17,29 +17,29 @@ package com.amonsoft.rmps.imp.v;
  * </ul>
  * @author Amon
  */
-public interface IConnect
+public interface IProcess
 {
-    /**
-     * 加载用户配置信息
-     * @return
-     */
-    boolean load();
+    int KEYCODE = 0;
+    int COMMAND = 1;
+    int CONTENT = 2;
 
     /**
-     * 获取登录用户
+     * 获取当前功能标记
      * @return
      */
-    String getUser();
+    int getFunc();
+
+    void setFunc(int func);
 
     /**
-     * 获取登录口令
+     * 获取当前操作标记
      * @return
      */
-    String getPwds();
+    int getStep();
 
-    /**
-     * 获取用户邮件
-     * @return
-     */
-    String getMail();
+    void setStep(int step);
+
+    int getType();
+
+    void setType(int type);
 }

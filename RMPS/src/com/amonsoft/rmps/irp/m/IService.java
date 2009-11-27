@@ -5,9 +5,10 @@
  * Description:
  *
  */
-package com.amonsoft.rmps.imp.v;
+package com.amonsoft.rmps.irp.m;
 
-import com.amonsoft.rmps.imp.b.IContact;
+import com.amonsoft.rmps.irp.b.ISession;
+import com.amonsoft.rmps.irp.b.IMessage;
 
 /**
  * <ul>
@@ -19,15 +20,11 @@ import com.amonsoft.rmps.imp.b.IContact;
  * </ul>
  * @author Amon
  */
-public interface IAccount
+public interface IService
 {
-    void exit();
+    void doInit(ISession session, IMessage message);
 
-    void sign(int status);
+    void doHelp(ISession session, IMessage message);
 
-    IConnect getConnect();
-
-    IContact getContact(String user);
-
-    java.util.List<IContact> getContact();
+    void doDeal(ISession session, IMessage message);
 }

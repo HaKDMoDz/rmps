@@ -3,9 +3,11 @@
  * Compiler:       JDK1.6.0
  * CopyRight:      &copy; 2007 Amon &reg; Winshine ( Amon@amonsoft.cn / http://amonsoft.cn ).
  * Description:
- *
+ *    
  */
-package com.amonsoft.rmps.imp.b;
+package com.amonsoft.rmps.irp;
+
+import com.amonsoft.rmps.IRmps;
 
 /**
  * <ul>
@@ -15,15 +17,8 @@ package com.amonsoft.rmps.imp.b;
  * <li>使用说明：</li>
  * <br />
  * </ul>
- * @author Amon
+ * @author yihaodian
  */
-public interface IContact
+public interface IImps extends IRmps
 {
-    String getDisplayName();
-
-    String getEmail();
-
-    String getStatus();
-
-    String getPersonalMessage();
 }

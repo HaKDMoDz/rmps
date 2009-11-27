@@ -7,7 +7,7 @@
  */
 package rmp.imp._comn;
 
-import com.amonsoft.rmps.imp.b.IMessage;
+import com.amonsoft.rmps.irp.b.IMessage;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import rmp.util.Logs;

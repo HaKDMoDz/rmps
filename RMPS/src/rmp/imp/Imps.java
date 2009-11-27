@@ -7,8 +7,8 @@
  */
 package rmp.imp;
 
-import com.amonsoft.rmps.imp.b.IStatus;
-import com.amonsoft.rmps.imp.v.IAccount;
+import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.rmps.irp.v.IAccount;
 
 import cons.irp.ConsEnv;
 

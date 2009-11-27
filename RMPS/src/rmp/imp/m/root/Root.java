@@ -7,10 +7,10 @@
  */
 package rmp.imp.m.root;
 
-import com.amonsoft.rmps.imp.b.IMessage;
-import com.amonsoft.rmps.imp.m.IService;
-import com.amonsoft.rmps.imp.b.ISession;
-import com.amonsoft.rmps.imp.b.IStatus;
+import com.amonsoft.rmps.irp.b.IMessage;
+import com.amonsoft.rmps.irp.m.IService;
+import com.amonsoft.rmps.irp.b.ISession;
+import com.amonsoft.rmps.irp.b.IStatus;
 import rmp.imp.Imps;
 
 /**

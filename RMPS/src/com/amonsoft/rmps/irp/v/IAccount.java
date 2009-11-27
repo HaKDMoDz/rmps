@@ -3,11 +3,11 @@
  * Compiler:       JDK1.6.0
  * CopyRight:      &copy; 2007 Amon &reg; Winshine ( Amon@amonsoft.cn / http://amonsoft.cn ).
  * Description:
- *    
+ *
  */
-package com.amonsoft.rmps.imp;
+package com.amonsoft.rmps.irp.v;
 
-import com.amonsoft.rmps.IRmps;
+import com.amonsoft.rmps.irp.b.IContact;
 
 /**
  * <ul>
@@ -17,8 +17,17 @@ import com.amonsoft.rmps.IRmps;
  * <li>使用说明：</li>
  * <br />
  * </ul>
- * @author yihaodian
+ * @author Amon
  */
-public interface IImps extends IRmps
+public interface IAccount
 {
+    void exit();
+
+    void sign(int status);
+
+    IConnect getConnect();
+
+    IContact getContact(String user);
+
+    java.util.List<IContact> getContact();
 }

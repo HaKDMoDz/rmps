@@ -9,10 +9,10 @@ package rmp.imp.v.fetion;
 
 //import cn.edu.ctgu.ghl.fetion.FetionEvent;
 //import cn.edu.ctgu.ghl.fetion.IFetionEventListener;
-import com.amonsoft.rmps.imp.v.IAccount;
-import com.amonsoft.rmps.imp.v.IConnect;
-import com.amonsoft.rmps.imp.b.IContact;
-import com.amonsoft.rmps.imp.b.IStatus;
+import com.amonsoft.rmps.irp.v.IAccount;
+import com.amonsoft.rmps.irp.v.IConnect;
+import com.amonsoft.rmps.irp.b.IContact;
+import com.amonsoft.rmps.irp.b.IStatus;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;

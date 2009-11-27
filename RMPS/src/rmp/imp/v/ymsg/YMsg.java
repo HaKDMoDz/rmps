@@ -7,10 +7,10 @@
  */
 package rmp.imp.v.ymsg;
 
-import com.amonsoft.rmps.imp.v.IAccount;
-import com.amonsoft.rmps.imp.v.IConnect;
-import com.amonsoft.rmps.imp.b.IContact;
-import com.amonsoft.rmps.imp.b.IStatus;
+import com.amonsoft.rmps.irp.v.IAccount;
+import com.amonsoft.rmps.irp.v.IConnect;
+import com.amonsoft.rmps.irp.b.IContact;
+import com.amonsoft.rmps.irp.b.IStatus;
 import java.awt.Toolkit;
 import java.util.List;
 import rmp.util.Logs;

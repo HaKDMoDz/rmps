@@ -7,9 +7,9 @@
  */
 package rmp.imp.v.ssh;
 
-import com.amonsoft.rmps.imp.b.IContact;
-import com.amonsoft.rmps.imp.b.IMessage;
-import com.amonsoft.rmps.imp.b.IMimeMessage;
+import com.amonsoft.rmps.irp.b.IContact;
+import com.amonsoft.rmps.irp.b.IMessage;
+import com.amonsoft.rmps.irp.b.IMimeMessage;
 import java.io.File;
 import rmp.imp._comn.ASession;
 

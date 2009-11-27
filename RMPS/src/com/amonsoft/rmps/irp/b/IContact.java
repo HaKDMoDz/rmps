@@ -5,10 +5,7 @@
  * Description:
  *
  */
-package com.amonsoft.rmps.imp.m;
-
-import com.amonsoft.rmps.imp.b.ISession;
-import com.amonsoft.rmps.imp.b.IMessage;
+package com.amonsoft.rmps.irp.b;
 
 /**
  * <ul>
@@ -20,11 +17,13 @@ import com.amonsoft.rmps.imp.b.IMessage;
  * </ul>
  * @author Amon
  */
-public interface IService
+public interface IContact
 {
-    void doInit(ISession session, IMessage message);
+    String getDisplayName();
 
-    void doHelp(ISession session, IMessage message);
+    String getEmail();
 
-    void doDeal(ISession session, IMessage message);
+    String getStatus();
+
+    String getPersonalMessage();
 }
