@@ -29,7 +29,7 @@ import rmp.util.LogUtil;
  * </ul>
  * @author Amon
  */
-public class ExePlug_In extends javax.swing.JPanel
+public class ExePlus extends javax.swing.JPanel
 {
     // ////////////////////////////////////////////////////////////////////////
     // 逻辑控制区域
@@ -45,7 +45,7 @@ public class ExePlug_In extends javax.swing.JPanel
     /**
      * 默认构造函数
      */
-    public ExePlug_In(WExeItem item)
+    public ExePlus(WExeItem item)
     {
         this.item = item;
     }
@@ -142,7 +142,7 @@ public class ExePlug_In extends javax.swing.JPanel
             }
             catch (Exception ex)
             {
-                Logger.getLogger(ExePlug_In.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ExePlus.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

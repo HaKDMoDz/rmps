@@ -28,7 +28,7 @@ import rmp.util.LogUtil;
  * </ul>
  * @author Amon
  */
-public class NetPlug_In extends javax.swing.JPanel
+public class NetPlus extends javax.swing.JPanel
 {
     // ////////////////////////////////////////////////////////////////////////
     // 逻辑控制区域
@@ -44,7 +44,7 @@ public class NetPlug_In extends javax.swing.JPanel
     /**
      * 默认构造函数
      */
-    public NetPlug_In()
+    public NetPlus()
     {
     }
 
@@ -123,7 +123,7 @@ public class NetPlug_In extends javax.swing.JPanel
         }
         catch (Exception ex)
         {
-            Logger.getLogger(NetPlug_In.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NetPlus.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
