@@ -31,7 +31,7 @@ import rmp.comn.lang.C5010000.v.TailPanel;
 import rmp.prp.Prps;
 import rmp.user.UserInfo;
 import rmp.util.BeanUtil;
-import rmp.util.DeskUtil;
+import com.amonsoft.util.DeskUtil;
 import rmp.util.LogUtil;
 import rmp.util.RmpsUtil;
 

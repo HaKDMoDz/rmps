@@ -27,7 +27,7 @@ import rmp.util.CheckUtil;
 import rmp.util.FileUtil;
 import rmp.util.LogUtil;
 import cons.comn.info.C1010000.ConstUI;
-import rmp.util.DeskUtil;
+import com.amonsoft.util.DeskUtil;
 
 /**
  * <ul>

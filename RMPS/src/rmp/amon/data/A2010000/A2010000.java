@@ -34,7 +34,7 @@ import cons.CfgCons;
 import cons.EnvCons;
 import cons.SysCons;
 import cons.id.AmonCons;
-import rmp.util.DeskUtil;
+import com.amonsoft.util.DeskUtil;
 
 /**
  * <ul>

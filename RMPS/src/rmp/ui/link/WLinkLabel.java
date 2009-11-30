@@ -19,7 +19,7 @@ import javax.swing.JLabel;
 
 import rmp.util.CheckUtil;
 import cons.ui.ConstUI;
-import rmp.util.DeskUtil;
+import com.amonsoft.util.DeskUtil;
 
 /**
  * <ul>

@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import rmp.prp.m.WNetItem;
 import rmp.util.BeanUtil;
-import rmp.util.DeskUtil;
+import com.amonsoft.util.DeskUtil;
 import rmp.util.LogUtil;
 
 /**

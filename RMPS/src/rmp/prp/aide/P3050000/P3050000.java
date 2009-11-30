@@ -37,7 +37,7 @@ import cons.id.PrpCons;
 import cons.prp.aide.P3050000.ConstUI;
 import cryptix.jce.provider.CryptixCrypto;
 import com.amonsoft.util.LangUtil;
-import rmp.util.DeskUtil;
+import com.amonsoft.util.DeskUtil;
 
 /**
  * <ul>

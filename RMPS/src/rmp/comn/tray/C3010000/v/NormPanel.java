@@ -16,7 +16,7 @@ import rmp.util.MesgUtil;
 import cons.EnvCons;
 import cons.SysCons;
 import cons.comn.tray.C3010000.LangRes;
-import rmp.util.DeskUtil;
+import com.amonsoft.util.DeskUtil;
 
 /**
  * <ul>

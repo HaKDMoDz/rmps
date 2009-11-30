@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import rmp.prp.m.WExeItem;
 import rmp.util.BeanUtil;
 import rmp.util.CheckUtil;
-import rmp.util.DeskUtil;
+import com.amonsoft.util.DeskUtil;
 import rmp.util.EnvUtil;
 import rmp.util.LogUtil;
 

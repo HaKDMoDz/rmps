@@ -37,7 +37,7 @@ import cons.SysCons;
 import cons.comn.info.C1010000.ConstUI;
 import cons.id.ComnCons;
 import com.amonsoft.util.LangUtil;
-import rmp.util.DeskUtil;
+import com.amonsoft.util.DeskUtil;
 
 /**
  * <ul>

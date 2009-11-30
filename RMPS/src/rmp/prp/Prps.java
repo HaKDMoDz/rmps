@@ -48,7 +48,7 @@ import com.amonsoft.skin.ISkin;
 import javax.swing.WindowConstants;
 import com.amonsoft.util.LangUtil;
 import rmp.util.BeanUtil;
-import rmp.util.DeskUtil;
+import com.amonsoft.util.DeskUtil;
 
 /**
  * <ul>

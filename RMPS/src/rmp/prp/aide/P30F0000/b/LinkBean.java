@@ -26,7 +26,7 @@ import rmp.util.EnvUtil;
 import rmp.util.MesgUtil;
 import cons.prp.aide.P30F0000.ConstUI;
 import cons.prp.aide.P30F0000.LangRes;
-import rmp.util.DeskUtil;
+import com.amonsoft.util.DeskUtil;
 
 /**
  * <ul>
