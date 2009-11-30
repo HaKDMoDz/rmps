@@ -179,7 +179,7 @@ public class Prps extends WForm
             @Override
             public void run()
             {
-                initPlug_Ins();
+                initPlus();
             }
         };
         t.start();
@@ -595,7 +595,7 @@ public class Prps extends WForm
     /**
      * 插件初始化
      */
-    private void initPlug_Ins()
+    private void initPlus()
     {
         LogUtil.log("插件加载：开始...");
 
