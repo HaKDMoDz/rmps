@@ -145,7 +145,7 @@ public class Prps extends WForm
         try
         {
             // 语言资源初始化
-            langUtil = LangUtil.initLang("10000000");
+            langUtil = LangUtil.initLang(EnvCons.FOLDER0_LANG+"/10000000_lang.properties");
         }
         catch (IOException ex)
         {

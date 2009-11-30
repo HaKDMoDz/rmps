@@ -8,7 +8,7 @@
  */
 package rmp.prp.aide.P30F0000.m;
 
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
+import com.sun.xml.messaging.saaj.util.ByteOutputStream;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.ResultSet;
