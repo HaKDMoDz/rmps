@@ -70,7 +70,7 @@ public class Prps extends WForm
     /**
      * 语言资源
      */
-    private LangUtil langUtil;
+    private static LangUtil langUtil;
 
     // ////////////////////////////////////////////////////////////////////////
     // 构造函数区域
@@ -765,6 +765,17 @@ public class Prps extends WForm
     // ////////////////////////////////////////////////////////////////////////
     // 类接口区域
     // ////////////////////////////////////////////////////////////////////////
+    /**
+     * 
+     * @param msgRes
+     * @param msgDef
+     * @return
+     */
+    public static String getMesg(String msgRes, String msgDef)
+    {
+        return langUtil.getMesg(msgRes, msgDef);
+    }
+
     /**
      * @return the currSoft
      */
