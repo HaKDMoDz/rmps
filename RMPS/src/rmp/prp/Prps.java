@@ -29,7 +29,6 @@ import rmp.comn.info.C1010000.C1010000;
 import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.m.ExeItem;
 import rmp.prp.m.NetItem;
-import rmp.prp.t.Util;
 import rmp.prp.v.ExePanel;
 import rmp.prp.v.NetPanel;
 import rmp.prp.v.StdPanel;

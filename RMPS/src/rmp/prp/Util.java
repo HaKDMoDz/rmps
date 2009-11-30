@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package rmp.prp.t;
+package rmp.prp;
 
 import java.io.File;
 import java.util.HashMap;
@@ -36,7 +36,7 @@ public final class Util
     /**
      * @return
      */
-    public static HashMap<String, String> readPlus(File xmlFile)
+    static HashMap<String, String> readPlus(File xmlFile)
     {
         LogUtil.log("插件加载：配置文件读取 － " + xmlFile.getPath());
 
