@@ -20,7 +20,7 @@ import javax.swing.ImageIcon;
  * </ul>
  * @author Amon
  */
-public class WExeItem
+public class ExeItem
 {
     private ImageIcon softIcon;
     private String softName;

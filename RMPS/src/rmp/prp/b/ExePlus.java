@@ -12,7 +12,7 @@ import java.awt.Cursor;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import rmp.prp.m.WExeItem;
+import rmp.prp.m.ExeItem;
 import rmp.util.BeanUtil;
 import rmp.util.CheckUtil;
 import com.amonsoft.util.DeskUtil;
@@ -35,7 +35,7 @@ public class ExePlus extends javax.swing.JPanel
     // 逻辑控制区域
     // ////////////////////////////////////////////////////////////////////////
     /** 用户添加对象 */
-    private WExeItem item;
+    private ExeItem item;
     /** 内嵌面板边框 */
     private javax.swing.border.Border border;
 
@@ -45,7 +45,7 @@ public class ExePlus extends javax.swing.JPanel
     /**
      * 默认构造函数
      */
-    public ExePlus(WExeItem item)
+    public ExePlus(ExeItem item)
     {
         this.item = item;
     }
@@ -155,7 +155,7 @@ public class ExePlus extends javax.swing.JPanel
      * 
      * @return
      */
-    public boolean setItem(WExeItem item)
+    public boolean setItem(ExeItem item)
     {
         this.item = item;
         this.lb_ItemLabl.setIcon(item.getSoftIcon());

@@ -27,8 +27,8 @@ import rmp.Rmps;
 import rmp.bean.FilesFilter;
 import rmp.comn.info.C1010000.C1010000;
 import com.amonsoft.rmps.prp.IPrpPlus;
-import rmp.prp.m.WExeItem;
-import rmp.prp.m.WNetItem;
+import rmp.prp.m.ExeItem;
+import rmp.prp.m.NetItem;
 import rmp.prp.t.Util;
 import rmp.prp.v.ExePanel;
 import rmp.prp.v.NetPanel;
@@ -715,7 +715,7 @@ public class Prps extends WForm
                     LogUtil.log("------------------------------------------------------------");
                     LogUtil.log("插件加载：独立插件加载！");
 
-                    WExeItem item = new WExeItem();
+                    ExeItem item = new ExeItem();
                     File itemFile = new File(currFile, plusMap.get(Plugins.NODE_EXEC_ICON));
                     if (itemFile.exists() && itemFile.isFile() && itemFile.canRead())
                     {
@@ -737,7 +737,7 @@ public class Prps extends WForm
                     LogUtil.log("------------------------------------------------------------");
                     LogUtil.log("插件加载：网络插件加载！");
 
-                    WNetItem item = new WNetItem();
+                    NetItem item = new NetItem();
                     File itemFile = new File(currFile, plusMap.get(Plugins.NODE_JNLP_ICON));
                     if (itemFile.exists() && itemFile.isFile() && itemFile.canRead())
                     {

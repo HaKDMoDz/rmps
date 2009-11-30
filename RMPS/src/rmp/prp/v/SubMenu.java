@@ -132,7 +132,6 @@ public class SubMenu
      */
     private void ita()
     {
-        ;
     }
 
     /**
@@ -140,7 +139,6 @@ public class SubMenu
      */
     private void itb()
     {
-        ;
     }
 
     // ////////////////////////////////////////////////////////////////////////

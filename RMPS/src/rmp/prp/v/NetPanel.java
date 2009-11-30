@@ -10,7 +10,7 @@ package rmp.prp.v;
 import javax.swing.BoxLayout;
 
 import rmp.prp.b.NetPlus;
-import rmp.prp.m.WNetItem;
+import rmp.prp.m.NetItem;
 
 /**
  * <ul>
@@ -60,7 +60,7 @@ public class NetPanel extends javax.swing.JPanel
      * @param soft
      * @return
      */
-    public boolean addPlugin(WNetItem item)
+    public boolean addPlugin(NetItem item)
     {
         NetPlus netItem = new NetPlus();
         netItem.wInit();

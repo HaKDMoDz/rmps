@@ -12,7 +12,7 @@ import java.awt.Cursor;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import rmp.prp.m.WNetItem;
+import rmp.prp.m.NetItem;
 import rmp.util.BeanUtil;
 import com.amonsoft.util.DeskUtil;
 import rmp.util.LogUtil;
@@ -34,7 +34,7 @@ public class NetPlus extends javax.swing.JPanel
     // 逻辑控制区域
     // ////////////////////////////////////////////////////////////////////////
     /** 用户添加对象 */
-    private WNetItem item;
+    private NetItem item;
     /** 内嵌面板边框 */
     private javax.swing.border.Border border;
 
@@ -135,7 +135,7 @@ public class NetPlus extends javax.swing.JPanel
      * 
      * @return
      */
-    public boolean setItem(WNetItem item)
+    public boolean setItem(NetItem item)
     {
         this.item = item;
         this.lb_ItemLabl.setIcon(item.getIcon());

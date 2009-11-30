@@ -20,7 +20,7 @@ import javax.swing.ImageIcon;
  * </ul>
  * @author Amon
  */
-public class WNetItem
+public class NetItem
 {
     private ImageIcon icon;
     private String href;
