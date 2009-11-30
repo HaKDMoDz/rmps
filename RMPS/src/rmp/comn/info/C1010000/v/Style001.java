@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -22,10 +24,10 @@ import rmp.face.WBean;
 import rmp.ui.icon.WIconLabel;
 import rmp.ui.link.WLinkLabel;
 import rmp.util.CheckUtil;
-import rmp.util.EnvUtil;
 import rmp.util.FileUtil;
 import rmp.util.LogUtil;
 import cons.comn.info.C1010000.ConstUI;
+import rmp.util.DeskUtil;
 
 /**
  * <ul>
@@ -291,7 +293,14 @@ public class Style001 extends javax.swing.JPanel implements WBean
      */
     private void ll_SoftMail_Handler(java.awt.event.MouseEvent evt)
     {
-        EnvUtil.mail(ll_SoftMail.getLinkUrl());
+        try
+        {
+            DeskUtil.mail(ll_SoftMail.getLinkUrl());
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(Style001.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -299,7 +308,14 @@ public class Style001 extends javax.swing.JPanel implements WBean
      */
     private void ll_SoftSite_Handler(java.awt.event.MouseEvent evt)
     {
-        EnvUtil.browse(ll_SoftSite.getLinkUrl());
+        try
+        {
+            DeskUtil.browse(ll_SoftSite.getLinkUrl());
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(Style001.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     /** 关闭窗口按钮 */
     private JButton bt_ExitButn;

@@ -13,11 +13,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 import rmp.util.CheckUtil;
-import rmp.util.EnvUtil;
 import cons.ui.ConstUI;
+import rmp.util.DeskUtil;
 
 /**
  * <ul>
@@ -31,9 +33,6 @@ import cons.ui.ConstUI;
  */
 public class WLinkLabel extends JLabel
 {
-    /**  */
-    private static final long serialVersionUID = 1363632283600471859L;
-
     /**
      * 
      */
@@ -81,9 +80,17 @@ public class WLinkLabel extends JLabel
             {
                 listener = new MouseAdapter()
                 {
+                    @Override
                     public void mouseClicked(MouseEvent evt)
                     {
-                        openLinkUrl(linkUrl);
+                        try
+                        {
+                            openLinkUrl(linkUrl);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.getLogger(WLinkLabel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 };
             }
@@ -99,7 +106,7 @@ public class WLinkLabel extends JLabel
      * @param linkUrl
      * @return
      */
-    public boolean openLinkUrl(String linkUrl)
+    public boolean openLinkUrl(String linkUrl) throws Exception
     {
         if (!CheckUtil.isValidate(linkUrl))
         {
@@ -108,11 +115,11 @@ public class WLinkLabel extends JLabel
 
         if (linkUrl.toLowerCase().startsWith("mailto:"))
         {
-            EnvUtil.mail(linkUrl);
+            DeskUtil.mail(linkUrl);
         }
         else
         {
-            EnvUtil.browse(linkUrl);
+            DeskUtil.browse(linkUrl);
         }
         return true;
     }

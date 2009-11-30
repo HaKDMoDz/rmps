@@ -35,7 +35,6 @@ import rmp.prp.v.NetPanel;
 import rmp.prp.v.StdPanel;
 import rmp.prp.v.SubMenu;
 import rmp.util.CheckUtil;
-import rmp.util.EnvUtil;
 import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.RmpsUtil;
@@ -49,6 +48,7 @@ import com.amonsoft.skin.ISkin;
 import javax.swing.WindowConstants;
 import com.amonsoft.util.LangUtil;
 import rmp.util.BeanUtil;
+import rmp.util.DeskUtil;
 
 /**
  * <ul>
@@ -66,8 +66,8 @@ public class Prps extends WForm
     private static IPrpPlus currSoft;
     /** 软件语言资源 */
     private static Properties langRes;
-    /** 关于软件 */
-    private static C1010000 softInfo;
+    /**相关插件列表*/
+    private static HashMap<String, IPrpPlus> plusList;
     /**
      * 语言资源
      */
@@ -145,7 +145,7 @@ public class Prps extends WForm
         try
         {
             // 语言资源初始化
-            langUtil = LangUtil.initLang(EnvCons.FOLDER0_LANG+"/10000000_lang.properties");
+            langUtil = LangUtil.initLang(EnvCons.FOLDER0_LANG + "/10000000_lang.properties");
         }
         catch (IOException ex)
         {
@@ -624,7 +624,7 @@ public class Prps extends WForm
         File plugin = new File(EnvCons.FOLDER0_PLUS);
         if (plugin == null || !plugin.exists() || !plugin.isDirectory() || !plugin.canRead())
         {
-            //std.addPlugin(softInfo);
+            //std.addPlus(softInfo);
             LogUtil.log("插件加载：插件目录不可访问！");
             return;
         }
@@ -635,7 +635,7 @@ public class Prps extends WForm
         File[] softList = plugin.listFiles(ff);
         if (softList == null || softList.length < 1)
         {
-            //std.addPlugin(softInfo);
+            //std.addPlus(softInfo);
             LogUtil.log("插件加载：无可用插件！");
             return;
         }
@@ -704,7 +704,7 @@ public class Prps extends WForm
                             IPrpPlus soft = (IPrpPlus) obj;
                             soft.wInitView();
                             soft.wSetPlusFolder(currFile.getPath());
-                            std.addPlugin(soft);
+                            std.addPlus(soft);
                             LogUtil.log("插件加载：标准插件加载成功 － " + soft.wGetTitle());
                         }
                     }
@@ -860,12 +860,13 @@ public class Prps extends WForm
      */
     private void mi_HelpItem_Handler(java.awt.event.ActionEvent evt)
     {
-        boolean opened = EnvUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
-
-        if (!opened)
+        try
         {
-            String mesg = "";
-            MesgUtil.showMessageDialog(this, mesg);
+            DeskUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
+        }
+        catch (Exception exp)
+        {
+            MesgUtil.showMessageDialog(this, exp.getLocalizedMessage());
         }
     }
 
@@ -884,15 +885,14 @@ public class Prps extends WForm
      */
     private void mi_HomePage_Handler(java.awt.event.ActionEvent evt)
     {
-        Thread t = new Thread()
+        try
         {
-            @Override
-            public void run()
-            {
-                homePage();
-            }
-        };
-        t.start();
+            DeskUtil.browse(ConstUI.URL_SOFT);
+        }
+        catch (Exception exp)
+        {
+            MesgUtil.showMessageDialog(null, exp.getLocalizedMessage());
+        }
     }
 
     /**
@@ -902,10 +902,14 @@ public class Prps extends WForm
      */
     private void mi_IdeaItem_Handler(java.awt.event.ActionEvent evt)
     {
-        boolean b = EnvUtil.mail("mailto:Amon.CT@163.com");
-        if (!b)
+        try
         {
-            MesgUtil.showMessageDialog(this, "系统错误：无法启动您的电子邮件客户端，请您手动启动！");
+            DeskUtil.mail("mailto:Amon.CT@163.com");
+        }
+        catch (Exception exp)
+        {
+            //系统错误：无法启动您的电子邮件客户端，请您手动启动！
+            MesgUtil.showMessageDialog(null, exp.getLocalizedMessage());
         }
     }
 
@@ -916,8 +920,12 @@ public class Prps extends WForm
      */
     private void mi_InfoItem_Handler(java.awt.event.ActionEvent evt)
     {
-        C1010000.setInfo(getInfoPath());
-        softInfo.wShowView(IPrpPlus.VIEW_MAIN);
+        IPrpPlus plus = plusList.get("C1010000");
+        if (plus != null)
+        {
+            plus.wShowView(IPrpPlus.VIEW_MAIN);
+        }
+        //C1010000.setInfo(getInfoPath());
     }
 
     /**
@@ -993,19 +1001,6 @@ public class Prps extends WForm
             LogUtil.exception(exp);
             // pa_PublicAd.wShowModel(AppCons.MODE_NORM + pa_PublicAd.wCode());
             MesgUtil.showMessageDialog(this, langUtil.getMesg(LangRes.MESG_OTHR_0006, ""));
-        }
-    }
-
-    /**
-     * 访问首页
-     */
-    private void homePage()
-    {
-        boolean ok = EnvUtil.browse(ConstUI.URL_SOFT);
-        if (!ok)
-        {
-            String mesg = "";
-            MesgUtil.showMessageDialog(null, mesg);
         }
     }
     // ////////////////////////////////////////////////////////////////////////

@@ -10,11 +10,13 @@ package rmp.prp.b;
 import com.amonsoft.rmps.prp.IPrpPlus;
 import cons.EnvCons;
 import cons.prp.ConstUI;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import rmp.prp.Prps;
 import cons.prp.LangRes;
 import rmp.comn.tray.C3010000.C3010000;
-import rmp.util.EnvUtil;
 import com.amonsoft.util.LangUtil;
+import rmp.util.DeskUtil;
 import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.RmpsUtil;
@@ -29,7 +31,7 @@ import rmp.util.RmpsUtil;
  * </ul>
  * @author Amon
  */
-public class StdPlug_In extends javax.swing.JPanel
+public class StdPlus extends javax.swing.JPanel
 {
     /**Tail面板是否处于展开状态*/
     private boolean expanded;
@@ -44,7 +46,7 @@ public class StdPlug_In extends javax.swing.JPanel
     /**
      * 默认构造函数
      */
-    public StdPlug_In()
+    public StdPlus()
     {
     }
 
@@ -389,7 +391,14 @@ public class StdPlug_In extends javax.swing.JPanel
      */
     private void mi_HomePage_Handler(java.awt.event.ActionEvent evt)
     {
-        EnvUtil.browse(Prps.getCurrSoft().wGetHomepage());
+        try
+        {
+            DeskUtil.browse(Prps.getCurrSoft().wGetHomepage());
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(StdPlus.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

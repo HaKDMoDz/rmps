@@ -12,6 +12,8 @@ import com.amonsoft.cons.ConsSys;
 import java.awt.image.BufferedImage;
 import java.util.Properties;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 
@@ -26,7 +28,6 @@ import rmp.prp.aide.P3080000.v.SubMenu;
 import rmp.prp.aide.P3080000.v.TailPanel;
 import rmp.user.UserInfo;
 import rmp.util.BeanUtil;
-import rmp.util.EnvUtil;
 import rmp.util.FileUtil;
 import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
@@ -37,6 +38,7 @@ import cons.SysCons;
 import cons.id.PrpCons;
 import cons.prp.aide.P3080000.ConstUI;
 import com.amonsoft.util.LangUtil;
+import rmp.util.DeskUtil;
 
 /**
  * <ul>
@@ -282,7 +284,14 @@ public class P3080000 extends WForm implements IPrpPlus
     @Override
     public void wShowHelp()
     {
-        EnvUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
+        try
+        {
+            DeskUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(P3080000.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /*

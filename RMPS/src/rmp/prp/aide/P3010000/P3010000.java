@@ -11,6 +11,8 @@ import com.amonsoft.bean.WForm;
 import java.awt.image.BufferedImage;
 import java.util.Properties;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 
@@ -31,6 +33,7 @@ import cons.SysCons;
 import cons.id.PrpCons;
 import cons.prp.aide.P3010000.ConstUI;
 import com.amonsoft.util.LangUtil;
+import rmp.util.DeskUtil;
 
 /**
  * <ul>
@@ -246,7 +249,14 @@ public class P3010000 extends WForm implements IPrpPlus
     @Override
     public void wShowHelp()
     {
-        EnvUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
+        try
+        {
+            DeskUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(P3010000.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /*

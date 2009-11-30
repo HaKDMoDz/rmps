@@ -7,6 +7,8 @@
  */
 package rmp.comn.tray.C3010000.v;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import rmp.Rmps;
 import rmp.comn.tray.C3010000.C3010000;
 import rmp.util.EnvUtil;
@@ -14,6 +16,7 @@ import rmp.util.MesgUtil;
 import cons.EnvCons;
 import cons.SysCons;
 import cons.comn.tray.C3010000.LangRes;
+import rmp.util.DeskUtil;
 
 /**
  * <ul>
@@ -164,12 +167,13 @@ public class NormPanel
      */
     private void mi_HelpTops_Handler(java.awt.event.ActionEvent evt)
     {
-        boolean opened = EnvUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
-
-        if (!opened)
+        try
         {
-            String mesg = "";
-            MesgUtil.showMessageDialog(null, mesg);
+            DeskUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(NormPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -178,11 +182,13 @@ public class NormPanel
      */
     private void mi_HomePage_Handle(java.awt.event.ActionEvent evt)
     {
-        boolean ok = EnvUtil.browse(SysCons.HOMEPAGE);
-        if (!ok)
+        try
         {
-            String mesg = "";
-            MesgUtil.showMessageDialog(null, mesg);
+            DeskUtil.browse(SysCons.HOMEPAGE);
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(NormPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

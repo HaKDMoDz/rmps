@@ -10,9 +10,11 @@ package rmp.prp.b;
 import java.awt.Color;
 import java.awt.Cursor;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import rmp.prp.m.WNetItem;
 import rmp.util.BeanUtil;
-import rmp.util.EnvUtil;
+import rmp.util.DeskUtil;
 import rmp.util.LogUtil;
 
 /**
@@ -115,7 +117,14 @@ public class NetPlug_In extends javax.swing.JPanel
     private void lb_ItemLabl_Handler(java.awt.event.MouseEvent evt)
     {
         LogUtil.log("网络程序启动：" + item.getHref());
-        EnvUtil.browse(item.getHref());
+        try
+        {
+            DeskUtil.browse(item.getHref());
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(NetPlug_In.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // ////////////////////////////////////////////////////////////////////////

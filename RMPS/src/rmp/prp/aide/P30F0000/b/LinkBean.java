@@ -11,6 +11,8 @@ package rmp.prp.aide.P30F0000.b;
 
 import java.awt.Cursor;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 import rmp.prp.aide.P30F0000.P30F0000;
@@ -24,6 +26,7 @@ import rmp.util.EnvUtil;
 import rmp.util.MesgUtil;
 import cons.prp.aide.P30F0000.ConstUI;
 import cons.prp.aide.P30F0000.LangRes;
+import rmp.util.DeskUtil;
 
 /**
  * <ul>
@@ -314,8 +317,14 @@ public class LinkBean extends javax.swing.JPanel implements WProp
         {
             return;
         }
-
-        EnvUtil.browse(url);
+        try
+        {
+            DeskUtil.browse(url);
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(LinkBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private javax.swing.JButton    bt_CopyData;

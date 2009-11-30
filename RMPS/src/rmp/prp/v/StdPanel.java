@@ -10,7 +10,7 @@ package rmp.prp.v;
 import javax.swing.BoxLayout;
 
 import com.amonsoft.rmps.prp.IPrpPlus;
-import rmp.prp.b.StdPlug_In;
+import rmp.prp.b.StdPlus;
 
 /**
  * <ul>
@@ -69,9 +69,9 @@ public class StdPanel extends javax.swing.JPanel
      * @param soft
      * @return
      */
-    public boolean addPlugin(IPrpPlus soft)
+    public boolean addPlus(IPrpPlus soft)
     {
-        StdPlug_In stdPlugin = new StdPlug_In();
+        StdPlus stdPlugin = new StdPlus();
         stdPlugin.wInitView();
         stdPlugin.setSoft(soft);
         this.add(stdPlugin);

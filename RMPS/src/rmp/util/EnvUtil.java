@@ -7,10 +7,8 @@
  */
 package rmp.util;
 
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.Desktop.Action;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
@@ -19,7 +17,6 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URI;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -230,41 +227,6 @@ public final class EnvUtil
     }
 
     /**
-     * 网络浏览
-     * 
-     * @param url
-     * @return
-     */
-    public static boolean browse(String url)
-    {
-        // 桌面支持性判断
-        if (!Desktop.isDesktopSupported())
-        {
-            return false;
-        }
-
-        // 指定事件可用性判断
-        Desktop desktop = Desktop.getDesktop();
-        if (!desktop.isSupported(Action.BROWSE))
-        {
-            return false;
-        }
-
-        // 浏览指定地址
-        try
-        {
-            desktop.browse(new URI(url));
-            return true;
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
-            MesgUtil.showMessageDialog(null, StringUtil.format(LangRes.MESG_INET_0001, url, exp.getMessage()));
-            return false;
-        }
-    }
-
-    /**
      * 关闭数据库，将内在中数据回写到数据文件中
      * 
      * @return 数据库是否成功关闭：true成功；false失败
@@ -435,87 +397,6 @@ public final class EnvUtil
         }
     }
 
-    /**
-     * 发送电子邮件
-     * 
-     * @param mailto
-     * @return
-     */
-    public static boolean mail(String mailto)
-    {
-        LogUtil.log(mailto);
-
-        // 桌面支持性判断
-        if (!Desktop.isDesktopSupported())
-        {
-            return false;
-        }
-
-        // 指定事件可用性判断
-        Desktop desktop = Desktop.getDesktop();
-        if (!desktop.isSupported(Action.MAIL))
-        {
-            return false;
-        }
-
-        // 发送邮件
-        try
-        {
-            if (!mailto.toLowerCase().startsWith("mailto:"))
-            {
-                mailto = "mailto:" + mailto;
-            }
-            desktop.mail(new URI(mailto));
-            return true;
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
-            return false;
-        }
-    }
-
-    /**
-     * 打开指定的程序
-     * 
-     * @param fileName
-     */
-    public static boolean open(String fileName)
-    {
-        LogUtil.log(fileName);
-
-        // 文件存在性检测
-        File readme = new File(fileName);
-        if (!readme.exists())
-        {
-            return false;
-        }
-
-        // 桌面支持性判断
-        if (!Desktop.isDesktopSupported())
-        {
-            return false;
-        }
-
-        // 指定事件可用性判断
-        Desktop desktop = Desktop.getDesktop();
-        if (!desktop.isSupported(Action.OPEN))
-        {
-            return false;
-        }
-
-        // 打开文件
-        try
-        {
-            desktop.open(readme);
-            return true;
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
-            return false;
-        }
-    }
 
     /**
      * 运行命令或程序

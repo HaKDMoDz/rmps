@@ -13,6 +13,8 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Properties;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 
@@ -26,7 +28,6 @@ import rmp.user.U0000000.v.NormPanel;
 import rmp.user.U0000000.v.SubMenu;
 import rmp.user.U0000000.v.TailPanel;
 import rmp.util.BeanUtil;
-import rmp.util.EnvUtil;
 import rmp.util.FileUtil;
 import rmp.util.ImageUtil;
 import rmp.util.LogUtil;
@@ -37,6 +38,7 @@ import cons.EnvCons;
 import cons.id.PrpCons;
 import cons.user.U0000000.ConstUI;
 import com.amonsoft.util.LangUtil;
+import rmp.util.DeskUtil;
 
 /**
  * <ul>
@@ -301,7 +303,14 @@ public class U0000000 extends WForm implements IPrpPlus
     @Override
     public void wShowHelp()
     {
-        EnvUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
+        try
+        {
+            DeskUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(U0000000.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /*

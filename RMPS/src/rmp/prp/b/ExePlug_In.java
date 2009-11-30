@@ -10,9 +10,12 @@ package rmp.prp.b;
 import java.awt.Color;
 import java.awt.Cursor;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import rmp.prp.m.WExeItem;
 import rmp.util.BeanUtil;
 import rmp.util.CheckUtil;
+import rmp.util.DeskUtil;
 import rmp.util.EnvUtil;
 import rmp.util.LogUtil;
 
@@ -133,7 +136,14 @@ public class ExePlug_In extends javax.swing.JPanel
         }
         else
         {
-            EnvUtil.open(item.getSoftPath());
+            try
+            {
+                DeskUtil.open(item.getSoftPath());
+            }
+            catch (Exception ex)
+            {
+                Logger.getLogger(ExePlug_In.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

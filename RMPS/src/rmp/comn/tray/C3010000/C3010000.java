@@ -11,6 +11,8 @@ import com.amonsoft.cons.ConsSys;
 import java.awt.image.BufferedImage;
 import java.util.Properties;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
@@ -27,7 +29,6 @@ import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.Prps;
 import rmp.user.UserInfo;
 import rmp.util.BeanUtil;
-import rmp.util.EnvUtil;
 import rmp.util.FileUtil;
 import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
@@ -39,6 +40,7 @@ import cons.comn.tray.C3010000.ConstUI;
 import cons.comn.tray.C3010000.LangRes;
 import cons.id.ComnCons;
 import com.amonsoft.util.LangUtil;
+import rmp.util.DeskUtil;
 
 /**
  * <ul>
@@ -326,7 +328,14 @@ public class C3010000 implements IPrpPlus
     @Override
     public void wShowHelp()
     {
-        EnvUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
+        try
+        {
+            DeskUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(C3010000.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /*

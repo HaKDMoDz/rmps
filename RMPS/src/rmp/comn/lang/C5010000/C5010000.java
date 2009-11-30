@@ -17,6 +17,8 @@ import cons.SysCons;
 import cons.comn.lang.A3010000.ConstUI;
 import cons.id.ComnCons;
 import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 import rmp.Rmps;
@@ -29,7 +31,7 @@ import rmp.comn.lang.C5010000.v.TailPanel;
 import rmp.prp.Prps;
 import rmp.user.UserInfo;
 import rmp.util.BeanUtil;
-import rmp.util.EnvUtil;
+import rmp.util.DeskUtil;
 import rmp.util.LogUtil;
 import rmp.util.RmpsUtil;
 
@@ -285,7 +287,14 @@ public class C5010000 extends WForm implements IPrpPlus
     @Override
     public void wShowHelp()
     {
-        EnvUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
+        try
+        {
+            DeskUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(C5010000.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /*

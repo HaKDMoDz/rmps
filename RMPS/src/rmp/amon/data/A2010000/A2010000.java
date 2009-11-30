@@ -12,6 +12,8 @@ import com.amonsoft.cons.ConsSys;
 import java.awt.image.BufferedImage;
 import java.util.Properties;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 
@@ -24,7 +26,6 @@ import rmp.comn.info.C1010000.C1010000;
 import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.Prps;
 import rmp.user.UserInfo;
-import rmp.util.EnvUtil;
 import rmp.util.FileUtil;
 import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
@@ -33,6 +34,7 @@ import cons.CfgCons;
 import cons.EnvCons;
 import cons.SysCons;
 import cons.id.AmonCons;
+import rmp.util.DeskUtil;
 
 /**
  * <ul>
@@ -254,7 +256,14 @@ public class A2010000 extends WForm implements IPrpPlus
     @Override
     public void wShowHelp()
     {
-        EnvUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
+        try
+        {
+            DeskUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(A2010000.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /*
