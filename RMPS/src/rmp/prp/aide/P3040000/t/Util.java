@@ -99,13 +99,11 @@ public final class Util
 
         // 数据库操作对象
         DBAccess dba = new DBAccess();
-        if (!dba.wInit())
-        {
-            return dataList;
-        }
 
         try
         {
+            dba.wInit();
+
             // 查询条件拼接
             dba.addTable(PrpCons.P3040100);
             dba.addColumn("*");
@@ -216,7 +214,7 @@ public final class Util
         }
         finally
         {
-            dba.closeConnection();
+            dba.close();
         }
         return dataList;
     }
@@ -238,13 +236,11 @@ public final class Util
 
         // 数据库操作对象
         DBAccess dba = new DBAccess();
-        if (!dba.wInit())
-        {
-            return dataList;
-        }
 
         try
         {
+            dba.wInit();
+
             // 查询条件拼接
             dba.addTable(PrpCons.P3040100);
             dba.addColumn("*");
@@ -358,7 +354,7 @@ public final class Util
         }
         finally
         {
-            dba.closeConnection();
+            dba.close();
         }
         return dataList;
     }

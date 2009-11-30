@@ -22,7 +22,6 @@ import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.Prps;
 import rmp.user.UserInfo;
 import rmp.util.BeanUtil;
-import rmp.util.EnvUtil;
 import rmp.util.FileUtil;
 import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
@@ -94,7 +93,6 @@ public class P3010000 extends WForm implements IPrpPlus
     @Override
     public boolean wClosing()
     {
-        EnvUtil.shutdownDataBase();
         return true;
     }
 

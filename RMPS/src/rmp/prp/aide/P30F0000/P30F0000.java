@@ -21,14 +21,6 @@ import rmp.comn.info.C1010000.C1010000;
 import rmp.comn.tray.C3010000.C3010000;
 import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.Prps;
-import rmp.prp.aide.P30F0000.t.Util;
-import rmp.prp.aide.P30F0000.v.MainPanel;
-import rmp.prp.aide.P30F0000.v.MiniPanel;
-import rmp.prp.aide.P30F0000.v.NormPanel;
-import rmp.prp.aide.P30F0000.v.StepPanel;
-import rmp.prp.aide.P30F0000.v.SubMenu;
-import rmp.prp.aide.P30F0000.v.TailPanel;
-import rmp.prp.aide.P30F0000.v.UserPanel;
 import rmp.user.UserInfo;
 import rmp.util.BeanUtil;
 import rmp.util.FileUtil;
@@ -84,18 +76,6 @@ public class P30F0000 extends WForm implements IPrpPlus
     // ----------------------------------------------------
     // 界面显示区域
     // ----------------------------------------------------
-    /** 高级面板 */
-    private MainPanel mp_MainPanel;
-    /** 迷你面板 */
-    private MiniPanel mp_MiniPanel;
-    /** 正常面板 */
-    private NormPanel np_NormPanel;
-    /**  */
-    private StepPanel sp_StepPanel;
-    /** 内嵌面板 */
-    private TailPanel tp_TailPanel;
-    /** 级联菜单 */
-    private SubMenu sm_SubMenu;
     private LangUtil langUtil;
 
     // ////////////////////////////////////////////////////////////////////////
@@ -119,13 +99,7 @@ public class P30F0000 extends WForm implements IPrpPlus
     @Override
     public boolean wInitView()
     {
-        Util.initTypeData();
-        UserPanel up = new UserPanel();
-        if (!up.wInit())
-        {
-            return false;
-        }
-        return up.isValidate();
+        return true;
     }
 
     @Override
@@ -148,14 +122,6 @@ public class P30F0000 extends WForm implements IPrpPlus
     @Override
     public boolean wClosing()
     {
-        mp_MiniPanel = null;
-        np_NormPanel = null;
-        mp_MainPanel = null;
-        tp_TailPanel = null;
-
-        setVisible(false);
-
-        Rmps.exit(0, true, true);
         return true;
     }
 
@@ -290,11 +256,6 @@ public class P30F0000 extends WForm implements IPrpPlus
     @Override
     public boolean wShowMenu(JMenu menu)
     {
-        if (sm_SubMenu == null)
-        {
-            sm_SubMenu = new SubMenu(this, menu);
-            sm_SubMenu.wInit();
-        }
         return true;
     }
 
@@ -306,11 +267,6 @@ public class P30F0000 extends WForm implements IPrpPlus
     @Override
     public boolean wShowTail(JPanel view)
     {
-        if (tp_TailPanel == null)
-        {
-            tp_TailPanel = new TailPanel(this, view);
-            tp_TailPanel.wInit();
-        }
         return true;
     }
 
@@ -498,21 +454,7 @@ public class P30F0000 extends WForm implements IPrpPlus
      */
     private javax.swing.JPanel showMain()
     {
-        // 面板实例化
-        if (mp_MainPanel == null)
-        {
-            mp_MainPanel = new MainPanel(this);
-            mp_MainPanel.wInit();
-        }
-
-        setContentPane(mp_MainPanel);
-        pack();
-        center(null);
-        if (!isVisible())
-        {
-            setVisible(true);
-        }
-        return mp_MainPanel;
+        return null;
     }
 
     /**
@@ -520,21 +462,7 @@ public class P30F0000 extends WForm implements IPrpPlus
      */
     private javax.swing.JPanel showMini()
     {
-        // 面板实例化
-        if (mp_MiniPanel == null)
-        {
-            mp_MiniPanel = new MiniPanel(this);
-            mp_MiniPanel.wInit();
-        }
-
-        setContentPane(mp_MiniPanel);
-        pack();
-        center(null);
-        if (!isVisible())
-        {
-            setVisible(true);
-        }
-        return mp_MiniPanel;
+        return null;
     }
 
     /**
@@ -542,21 +470,7 @@ public class P30F0000 extends WForm implements IPrpPlus
      */
     private javax.swing.JPanel showNorm()
     {
-        // 面板实例化
-        if (np_NormPanel == null)
-        {
-            np_NormPanel = new NormPanel(this);
-            np_NormPanel.wInit();
-        }
-
-        setContentPane(np_NormPanel);
-        pack();
-        center(null);
-        if (!isVisible())
-        {
-            setVisible(true);
-        }
-        return np_NormPanel;
+        return null;
     }
 
     /**
@@ -564,20 +478,7 @@ public class P30F0000 extends WForm implements IPrpPlus
      */
     private javax.swing.JPanel showStep()
     {
-        if (sp_StepPanel == null)
-        {
-            sp_StepPanel = new StepPanel(this);
-            sp_StepPanel.wInit();
-        }
-
-        setContentPane(sp_StepPanel);
-        pack();
-        center(null);
-        if (!isVisible())
-        {
-            setVisible(true);
-        }
-        return sp_StepPanel;
+        return null;
     }
 
     /**

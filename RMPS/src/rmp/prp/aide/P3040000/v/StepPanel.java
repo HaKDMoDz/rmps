@@ -2039,10 +2039,7 @@ public class StepPanel extends javax.swing.JPanel
 
         try
         {
-            if (!dba.wInit())
-            {
-                return;
-            }
+            dba.wInit();
 
             dba.addTable(PrpCons.P3040100);
             dba.addParam(PrpCons.P3040101, "0", false);
@@ -2083,7 +2080,7 @@ public class StepPanel extends javax.swing.JPanel
         }
         finally
         {
-            dba.closeConnection();
+            dba.close();
         }
     }
     // ////////////////////////////////////////////////////////////////////////
