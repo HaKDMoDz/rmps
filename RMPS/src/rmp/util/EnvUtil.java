@@ -23,10 +23,8 @@ import java.security.NoSuchAlgorithmException;
 import javax.swing.AbstractAction;
 import javax.swing.Timer;
 
-import rmp.io.db.DBAccess;
 import cons.EnvCons;
 import cons.SysCons;
-import cons.ui.LangRes;
 
 /**
  * <ul>
@@ -227,50 +225,6 @@ public final class EnvUtil
     }
 
     /**
-     * 关闭数据库，将内在中数据回写到数据文件中
-     * 
-     * @return 数据库是否成功关闭：true成功；false失败
-     */
-    public static boolean shutdownDataBase()
-    {
-        if (!DBAccess.isOpened())
-        {
-            return true;
-        }
-        LogUtil.log("数据库关闭：开始....");
-
-        // 创建数据库操作对象
-        DBAccess dba = new DBAccess();
-
-        // 数据库清理
-        try
-        {
-            // 启动事务
-            if (dba.wInit())
-            {
-                LogUtil.log("数据库关闭：SHUTDOWN...");
-                // 执行数据库关闭
-                dba.execute("SHUTDOWN");
-
-                LogUtil.log("数据库关闭：关闭成功！");
-                return true;
-            }
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
-            MesgUtil.showMessageDialog(null, StringUtil.format(LangRes.MESG_EXIT_0001, exp.getMessage()));
-        }
-        finally
-        {
-            // 事务提交
-            dba.closeConnection();
-        }
-
-        return false;
-    }
-
-    /**
      * 数据备份
      */
     public static void backupDatabase() throws Exception
@@ -278,49 +232,6 @@ public final class EnvUtil
         int uid = RmpsUtil.getUserInfo().getUserID();
         String zip = uid + EnvCons.PATH_BAK + EnvCons.COMN_SP_FILE + "amon.backup";
         Jzip.zip(zip, uid + EnvCons.COMN_SP_FILE + "rmp.wsc", uid + EnvCons.PATH_DAT);
-    }
-
-    /**
-     * 数据恢复
-     */
-    public static void pickupDatabase() throws Exception
-    {
-        // 目标备份文件
-        File backFile = new File(EnvUtil.getUserDir() + EnvCons.PATH_BAK, "amon.backup");
-        // 数据库数据文件
-        File dataFile = new File(EnvUtil.getUserDir() + EnvCons.PATH_BAK, "amon.script");
-
-        try
-        {
-            // 关闭数据库，内在数据回写
-            if (!shutdownDataBase())
-            {
-                MesgUtil.showMessageDialog(null, LangRes.MESG_PICK_0004);
-                return;
-            }
-
-            // 文件复制
-            String errMsg = FileUtil.copyFile(backFile, dataFile, true);
-            if (errMsg != null)
-            {
-                errMsg = StringUtil.format(LangRes.MESG_PICK_0002, errMsg);
-                MesgUtil.showMessageDialog(null, errMsg);
-                return;
-            }
-
-            // 恢复结果提示信息
-            MesgUtil.showMessageDialog(null, LangRes.MESG_PICK_0001);
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
-            String mesg = StringUtil.format(LangRes.MESG_PICK_0003, LangRes.MESG_INIT_0001);
-            MesgUtil.showMessageDialog(null, mesg);
-        }
-
-        // 资源释放
-        dataFile = null;
-        backFile = null;
     }
 
     /**

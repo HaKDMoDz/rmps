@@ -95,7 +95,7 @@ public final class Rmps
         }
 
         LogUtil.log("系统退出：关闭数据连接");
-        EnvUtil.shutdownDataBase();
+//        EnvUtil.shutdownDataBase();
 
         if (backup)
         {

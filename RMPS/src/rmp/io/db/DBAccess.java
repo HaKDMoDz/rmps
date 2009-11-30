@@ -16,10 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rmp.util.CheckUtil;
-import rmp.util.EnvUtil;
 import rmp.util.LogUtil;
-import cons.EnvCons;
-import cons.SqlCons;
 
 /**
  * <ul>
@@ -33,65 +30,23 @@ import cons.SqlCons;
  */
 public class DBAccess
 {
-    // ////////////////////////////////////////////////////////////////////////
-    // 内部成员变量
-    // ////////////////////////////////////////////////////////////////////////
-    /** 数据源连接 */
-    private Connection conn;
-    /** 数据库操作 */
-    private Statement stat;
-    /** 数据KEY-VALUE对持有变量 */
-    private List<String> paramList;
-    /** 符号持有变量 */
-    private List<String> signList;
-    /** 数据插入时数据列表（以逗号“,”分隔符区分） */
-    private List<String> valueList;
-    /** 当前要操作的字段名称（列表（以逗号“,”分隔符区分）） */
-    private StringBuffer columList;
-    /** 当前要操作的表格名称（列表（以逗号“,”分隔符区分）） */
-    private StringBuffer tableList;
-    /** 数据库操作时的关联条件列表（以逗号“,”分隔符区分） */
-    private StringBuffer whereList;
-    /** 数据库查寻时的排序依据（列表（以逗号“,”分隔符区分）） */
-    private StringBuffer orderList;
-    /** 数据源路径 */
-    private final static String dbPath;
-
-    /**
-     * 一次性数据库驱动加载
-     */
-    static
-    {
-        dbPath = EnvUtil.getUserDir() + EnvCons.PATH_DAT + EnvCons.COMN_SP_FILE + EnvCons.COMN_DATA_BASE;
-
-        try
-        {
-            // 加载数据库驱动
-            Class.forName(SqlCons.DBCS_JDBC_DRV);
-        }
-        catch (ClassNotFoundException exp)
-        {
-            LogUtil.exception(exp);
-        }
-    }
-
     /**
      * 默认构造函数，事务默认自动提交
-     * 
-     * @param dbPath 数据库或者数据源路径，绝对或相对路径，系统不作详细区分
      */
     public DBAccess()
     {
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see rmp.face.WRmps#init()
+    /**
+     * 在保持同一个连接的基础上，重新设置查寻SQL语句，以进行新的数据库操作
      */
-    public boolean wInit()
+    public void wInit() throws SQLException
     {
-        LogUtil.log("数据源操作：连接数据源 － " + dbPath);
+        if (conn == null || conn.isClosed())
+        {
+            conn = DriverManager.getConnection("jdbc:hsqldb:file:amon");
+        }
+        stat = conn.createStatement();
 
         // 参数列表
         paramList = new ArrayList<String>();
@@ -99,6 +54,7 @@ public class DBAccess
         signList = new ArrayList<String>();
         // 数据列表
         valueList = new ArrayList<String>();
+
         // 字段缓冲
         columList = new StringBuffer();
         // 表格缓冲
@@ -107,52 +63,26 @@ public class DBAccess
         whereList = new StringBuffer();
         // 排序依据缓冲
         orderList = new StringBuffer();
+    }
 
-        try
-        {
-            // 连接数据源
-            conn = DriverManager.getConnection(SqlCons.DBCS_CONN_STR + dbPath);
-            // 操作状态
-            stat = conn.createStatement();
-            LogUtil.log("数据源操作：数据源连接成功。");
+    public void reset()
+    {
+        this.paramList.clear();
+        this.signList.clear();
+        this.valueList.clear();
 
-            opened = true;
-            return true;
-        }
-        catch (Exception sqle)
-        {
-            LogUtil.exception(sqle);
-            conn = null;
-            stat = null;
-            return false;
-        }
+        this.columList.delete(0, columList.length());
+        this.tableList.delete(0, tableList.length());
+        this.whereList.delete(0, whereList.length());
+        this.orderList.delete(0, orderList.length());
     }
 
     /**
      * 关闭数据库
-     * 
      * @throws SQLException
      */
-    public void closeConnection()
+    public void close()
     {
-        // Statement 关闭
-        if (stat != null)
-        {
-            try
-            {
-                stat.close();
-            }
-            catch (SQLException exp)
-            {
-                LogUtil.exception(exp);
-            }
-            finally
-            {
-                stat = null;
-                LogUtil.log("数据源操作：关闭Statement...");
-            }
-        }
-
         // Connection 关闭
         if (conn != null)
         {
@@ -167,16 +97,45 @@ public class DBAccess
             finally
             {
                 conn = null;
-                LogUtil.log("数据源操作：关闭Connection...");
             }
         }
+    }
 
-        LogUtil.log("数据源操作：数据源关闭成功。");
+    /**
+     * 关闭数据库
+     */
+    public static void exit()
+    {
+        try
+        {
+            if (conn == null || conn.isClosed())
+            {
+                conn = DriverManager.getConnection("jdbc:hsqldb:file:amon");
+            }
+            Statement stat = conn.createStatement();
+            stat.execute("SHUTDOWN");
+            stat.close();
+        }
+        catch (SQLException exp)
+        {
+            LogUtil.exception(exp);
+        }
+        finally
+        {
+            try
+            {
+                conn.close();
+            }
+            catch (SQLException ex)
+            {
+                LogUtil.exception(ex);
+            }
+        }
     }
 
     /**
      * 添加要使用的表格
-     * 
+     *
      * @param table
      */
     public void addTable(String table)
@@ -188,15 +147,29 @@ public class DBAccess
     }
 
     /**
+     * 添加要使用的表格
+     * @param table 表格名称
+     * @param alias 表格别名
+     */
+    public void addTable(String table, String alias)
+    {
+        if (CheckUtil.isValidate(table))
+        {
+            tableList.append(", ").append(table).append(" AS ").append(alias);
+        }
+    }
+
+    /**
      * 添加带连接的表格
-     * 
+     *
      * @param tableLeft
      * @param tableRight
-     * @param joinStyle 详细参见：<br />
-     *        cons.SysCons.DB0008.DBCS_JOIN_CROSS<br />
-     *        cons.SysCons.DB0008.DBCS_JOIN_FULL<br />
-     *        cons.SysCons.DB0008.DBCS_JOIN_LEFT<br />
-     *        cons.SysCons.DB0008.DBCS_JOIN_RIGHT<br />
+     * @param joinStyle
+     *            详细参见：<br>
+     *            cons.SysCons.DB0008.DBCS_JOIN_CROSS<br>
+     *            cons.SysCons.DB0008.DBCS_JOIN_FULL<br>
+     *            cons.SysCons.DB0008.DBCS_JOIN_LEFT<br>
+     *            cons.SysCons.DB0008.DBCS_JOIN_RIGHT<br>
      */
     public void addTable(String tableLeft, String tableRight, String joinStyle)
     {
@@ -205,14 +178,15 @@ public class DBAccess
 
     /**
      * 添加带连接的表格
-     * 
+     *
      * @param tableLeft
      * @param tableRight
-     * @param joinStyle 详细参见：<br />
-     *        cons.SysCons.DB0008.DBCS_JOIN_CROSS<br />
-     *        cons.SysCons.DB0008.DBCS_JOIN_FULL<br />
-     *        cons.SysCons.DB0008.DBCS_JOIN_LEFT<br />
-     *        cons.SysCons.DB0008.DBCS_JOIN_RIGHT<br />
+     * @param joinStyle
+     *            详细参见：<br>
+     *            cons.SysCons.DB0008.DBCS_JOIN_CROSS<br>
+     *            cons.SysCons.DB0008.DBCS_JOIN_FULL<br>
+     *            cons.SysCons.DB0008.DBCS_JOIN_LEFT<br>
+     *            cons.SysCons.DB0008.DBCS_JOIN_RIGHT<br>
      * @param columnLeft
      * @param columnRight
      */
@@ -224,12 +198,12 @@ public class DBAccess
 
     /**
      * 添加查寻字段
-     * 
+     *
      * <pre>
      * SELECT colname1, colname2, ... FROM tablename
      * </pre>
-     * 
-     * @param colname 对于于要查寻的表格的相关字段
+     *
+     * @param colname 对应于要查寻的表格的相关字段
      */
     public void addColumn(String colname)
     {
@@ -240,12 +214,45 @@ public class DBAccess
     }
 
     /**
-     * 数据更新：添加数据库操作的KEY-VALUE对。
-     * 
+     * 添加查寻字段
+     *
      * <pre>
-     * UPDATE SET key1=value1, key2=value2 ... 
+     * SELECT colname1 AS a, colname2 AS b, ... FROM tablename
      * </pre>
-     * 
+     *
+     * @param colname 对应于要查寻的表格的相关字段
+     * @param alias 字段别名
+     */
+    public void addColumn(String colname, String alias)
+    {
+        if (CheckUtil.isValidate(colname))
+        {
+            columList.append(", ").append(colname).append(" AS ").append(alias);
+        }
+    }
+
+    /**
+     * 数据更新：添加数据库操作的KEY-VALUE对。
+     *
+     * <pre>
+     * UPDATE SET key1=value1, key2=value2 ...
+     * </pre>
+     *
+     * @param key 数据库字段名
+     * @param value 对应字段的值
+     */
+    public void addParam(String key, long value)
+    {
+        addParam(key, "=", value);
+    }
+
+    /**
+     * 数据更新：添加数据库操作的KEY-VALUE对。
+     *
+     * <pre>
+     * UPDATE SET key1=value1, key2=value2 ...
+     * </pre>
+     *
      * @param key 数据库字段名
      * @param value 对应字段的值
      */
@@ -256,11 +263,11 @@ public class DBAccess
 
     /**
      * 数据更新：添加数据库操作的KEY-VALUE对。
-     * 
+     *
      * <pre>
-     * UPDATE SET key1=value1, key2=value2 ... 
+     * UPDATE SET key1=value1, key2=value2 ...
      * </pre>
-     * 
+     *
      * @param key 数据库字段名
      * @param value 对应字段的值
      * @param isLiteral 当前字段是否为纯文本，true为纯文本，false为其它格式。
@@ -272,7 +279,19 @@ public class DBAccess
 
     /**
      * 数据更新：添加数据库操作的KEY-VALUE对。
-     * 
+     *
+     * @param param 数据库字段名
+     * @param sign 运算操作符
+     * @param value 对应字段的值
+     */
+    public void addParam(String param, String sign, String value)
+    {
+        addParam(param, sign, value, true);
+    }
+
+    /**
+     * 数据更新：添加数据库操作的KEY-VALUE对。
+     *
      * @param param 数据库字段名
      * @param sign 运算操作符
      * @param value 对应字段的值
@@ -285,14 +304,12 @@ public class DBAccess
             paramList.add(param);
             signList.add(sign);
 
-            // 特殊字符替换
-            if (value != null)
-            {
-                value = value.replace("'", "''");
-            }
-
             // 值信息处理
-            if (isLiteral)
+            if (value == null)
+            {
+                valueList.add("NULL");
+            }
+            else if (isLiteral)
             {
                 valueList.add(" '" + value + "'");
             }
@@ -304,8 +321,21 @@ public class DBAccess
     }
 
     /**
+     *
+     * @param param
+     * @param sign
+     * @param value
+     */
+    public void addParam(String param, String sign, long value)
+    {
+        paramList.add(param);
+        signList.add(sign);
+        valueList.add(Long.toString(value));
+    }
+
+    /**
      * 用户自定义关联条件
-     * 
+     *
      * @param where
      */
     public void addWhere(String where)
@@ -313,13 +343,18 @@ public class DBAccess
         whereList.append(" AND (").append(where).append(") ");
     }
 
+    public void addWhere(String key, long value)
+    {
+        addWhere(key, "=", value);
+    }
+
     /**
      * 添加WHERE查寻条件，默认运算符为等号“=”，默认值为纯文本
-     * 
+     *
      * <pre>
      * UPDATE tablename SET ... WHERE key1=value1 AND key2=value2 ...
      * </pre>
-     * 
+     *
      * @param key 参照数据库表格字段名
      * @param value 参照值
      */
@@ -330,11 +365,11 @@ public class DBAccess
 
     /**
      * 添加WHERE查寻条件，默认运算符为等号“=”
-     * 
+     *
      * <pre>
      * UPDATE tablename SET ... WHERE key1=value1 AND key2=value2 ...
      * </pre>
-     * 
+     *
      * @param key 参照数据库表格字段名
      * @param value 参照值
      * @param isLiteral 是否为纯文本字符串，true为纯文本，false为非文本
@@ -344,13 +379,21 @@ public class DBAccess
         addWhere(key, "=", value, isLiteral);
     }
 
+    public void addWhere(String key, String sign, long value)
+    {
+        if (CheckUtil.isValidate(key))
+        {
+            whereList.append(" AND ").append(key).append(" ").append(sign).append(" ").append(value);
+        }
+    }
+
     /**
      * 添加WHERE查寻条件
-     * 
+     *
      * <pre>
      * UPDATE tablename SET ... WHERE key1=value1 AND key2=value2 ...
      * </pre>
-     * 
+     *
      * @param key 参照数据库表格字段名
      * @param sign 参照运算符，如+、-、=、!=等
      * @param value 参照值
@@ -377,36 +420,93 @@ public class DBAccess
 
     /**
      * 默认升序排序
-     * 
+     *
      * @param key
      */
     public void addSort(String key)
     {
-        addSort(key, "ASC");
+        addSort(key, true);
     }
 
     /**
      * 添加排序依据
-     * 
+     *
      * <pre>
      * SELECT * FROM tablename WHERE ... ORDER BY key1 value1, key2 value2, ...
      * </pre>
-     * 
+     *
      * @param key 参照数据库表格字段
      * @param value 排序方法:ASC表示升序;DESC表示降序
      */
-    public void addSort(String key, String value)
+    public void addSort(String key, boolean asc)
     {
-        if (CheckUtil.isValidate(key) && CheckUtil.isValidate(value))
+        if (CheckUtil.isValidate(key))
         {
             orderList.append(", ").append(key);
-            orderList.append(" ").append(value);
+            orderList.append(" ").append(asc ? "ASC" : "DESC");
         }
     }
 
     /**
+     *
+     * @param sql
+     * @throws SQLException
+     */
+    public void addBatch(String sql) throws SQLException
+    {
+        stat.addBatch(sql);
+    }
+
+    /**
+     * 数据复制
+     * @param f
+     * @param t
+     * @throws SQLException
+     */
+    public void addCopyBatch(String t, String f) throws SQLException
+    {
+        stat.addBatch(getCopySQL(t, f));
+    }
+
+    /**
+     *
+     * @throws SQLException
+     */
+    public void addDeleteBatch() throws SQLException
+    {
+        stat.addBatch(getDeleteSQL());
+    }
+
+    /**
+     *
+     * @throws SQLException
+     */
+    public void addInsertBatch() throws SQLException
+    {
+        stat.addBatch(getInsertSQL());
+    }
+
+    public void addUpdateBatch() throws SQLException
+    {
+        stat.addBatch(getUpdateSQL());
+    }
+
+    /**
+     *
+     * @throws SQLException
+     */
+    public void executeBatch() throws SQLException
+    {
+        stat.executeBatch();
+    }
+
+    public void executeCopy()
+    {
+    }
+
+    /**
      * 其它相关的数据库操作，如COMMIT、HSQL专有的SHUTDOWN等。
-     * 
+     *
      * @param sql 要执行的SQL语句
      * @return 当前操作是否成功
      * @throws SQLException
@@ -416,7 +516,6 @@ public class DBAccess
         boolean success = false;
         if (stat != null)
         {
-            LogUtil.log("数据库操作：其它操作 - " + sql);
             success = stat.execute(sql);
         }
         return success;
@@ -424,7 +523,7 @@ public class DBAccess
 
     /**
      * 数据库查寻
-     * 
+     *
      * @return 查寻结果集
      * @throws SQLException
      */
@@ -435,7 +534,7 @@ public class DBAccess
 
     /**
      * 数据库查寻
-     * 
+     *
      * @param sql 查寻语句
      * @return 查寻结果集
      * @throws SQLException
@@ -445,7 +544,6 @@ public class DBAccess
         ResultSet rest = null;
         if (stat != null)
         {
-            LogUtil.log("数据库操作：数据查寻 - " + sql);
             rest = stat.executeQuery(sql);
         }
         return rest;
@@ -453,7 +551,7 @@ public class DBAccess
 
     /**
      * 数据库更新
-     * 
+     *
      * @return 当前操作所影响的行数
      * @throws SQLException
      */
@@ -464,7 +562,7 @@ public class DBAccess
 
     /**
      * 数据库更新
-     * 
+     *
      * @param sql 更新语句
      * @return 当前操作所影响的行数
      * @throws SQLException
@@ -474,7 +572,6 @@ public class DBAccess
         int recSize = -1;
         if (stat != null && CheckUtil.isValidate(sql))
         {
-            LogUtil.log("数据库操作：数据更新 - " + sql);
             recSize = stat.executeUpdate(sql);
         }
         return recSize;
@@ -482,7 +579,7 @@ public class DBAccess
 
     /**
      * 数据库插入
-     * 
+     *
      * @return 当前操作所影响的行数
      * @throws SQLException
      */
@@ -501,7 +598,6 @@ public class DBAccess
         int recSize = -1;
         if (stat != null && CheckUtil.isValidate(sql))
         {
-            LogUtil.log("数据库操作：数据插入 - " + sql);
             recSize = stat.executeUpdate(sql);
         }
         return recSize;
@@ -509,7 +605,7 @@ public class DBAccess
 
     /**
      * 数据库删除
-     * 
+     *
      * @return
      * @throws SQLException
      */
@@ -528,30 +624,46 @@ public class DBAccess
         int recSize = -1;
         if (stat != null && CheckUtil.isValidate(sql))
         {
-            LogUtil.log("数据库操作：数据删除 - " + sql);
             recSize = stat.executeUpdate(sql);
         }
         return recSize;
     }
 
-    /**
-     * 在保持同一个连接的基础上，重新设置查寻SQL语句，以进行新的数据库操作
-     */
-    public void reset()
+    private String getCopySQL(String t, String f)
     {
-        this.paramList.clear();
-        this.signList.clear();
-        this.valueList.clear();
+        StringBuffer sqlBuf = new StringBuffer();
 
-        this.columList.delete(0, columList.length());
-        this.tableList.delete(0, tableList.length());
-        this.whereList.delete(0, whereList.length());
-        this.orderList.delete(0, orderList.length());
+        // 插入目标
+        sqlBuf.append("INSERT INTO ").append(t).append(" (");
+        int j = paramList.size() - 1;
+        for (int i = 0; i < j; i += 1)
+        {
+            sqlBuf.append(paramList.get(i)).append(", ");
+        }
+        sqlBuf.append(paramList.get(j)).append(") ");
+
+        // 复制来源
+        sqlBuf.append("SELECT");
+        j = valueList.size() - 1;
+        for (int i = 0; i < j; i += 1)
+        {
+            sqlBuf.append(valueList.get(i)).append(", ");
+        }
+        sqlBuf.append(valueList.get(j));
+
+        sqlBuf.append("FROM ").append(f);
+        // 查寻关联条件拼接
+        if (whereList.length() > 0)
+        {
+            sqlBuf.append(" WHERE ").append(whereList.substring(5));
+        }
+
+        return sqlBuf.toString();
     }
 
     /**
      * 获取数据库查寻SQL语句
-     * 
+     *
      * @return SQL语句，若操作表格为空，则返回空语句
      */
     private String getSelectSQL()
@@ -590,12 +702,13 @@ public class DBAccess
             sqlBuf.append(" ORDER BY ").append(orderList.substring(2));
         }
 
+        LogUtil.log(sqlBuf.toString());
         return sqlBuf.toString();
     }
 
     /**
      * 获取数据库更新SQL语句
-     * 
+     *
      * @return SQL语句，若操作表格为空，则返回空语句
      */
     private String getUpdateSQL()
@@ -629,12 +742,13 @@ public class DBAccess
         {
             sqlBuf.append(" WHERE ").append(whereList.substring(5));
         }
+        LogUtil.log(sqlBuf.toString());
         return sqlBuf.toString();
     }
 
     /**
      * 获取数据库插入SQL语句
-     * 
+     *
      * @return SQL语句，若操作表格为空，则返回空语句
      */
     private String getInsertSQL()
@@ -672,12 +786,13 @@ public class DBAccess
         sqlBuf.append(valueList.get(idx));
         sqlBuf.append(")");
 
+        LogUtil.log(sqlBuf.toString());
         return sqlBuf.toString();
     }
 
     /**
      * 获取数据库删除SQL语句
-     * 
+     *
      * @return SQL语句，若操作表格为空，则返回空语句
      */
     private String getDeleteSQL()
@@ -696,18 +811,28 @@ public class DBAccess
         // 关联条件拼接
         sqlBuf.append(" WHERE ").append(whereList.substring(5));
 
+        LogUtil.log(sqlBuf.toString());
         return sqlBuf.toString();
     }
-
-    /**
-     * 数据源是否已经打开
-     * 
-     * @return
-     */
-    public static boolean isOpened()
-    {
-        return opened;
-    }
-    /** 数据源是否已经打开 */
-    private static boolean opened;
+    // ////////////////////////////////////////////////////////////////////////
+    // 内部成员变量
+    // ////////////////////////////////////////////////////////////////////////
+    /** 数据源连接 */
+    private static Connection conn;
+    /** 数据库操作 */
+    private Statement stat;
+    /** 数据KEY-VALUE对持有变量 */
+    private List<String> paramList;
+    /** 符号持有变量 */
+    private List<String> signList;
+    /** 数据插入时数据列表（以逗号“,”分隔符区分） */
+    private List<String> valueList;
+    /** 当前要操作的字段名称（列表（以逗号“,”分隔符区分）） */
+    private StringBuffer columList;
+    /** 当前要操作的表格名称（列表（以逗号“,”分隔符区分）） */
+    private StringBuffer tableList;
+    /** 数据库操作时的关联条件列表（以逗号“,”分隔符区分） */
+    private StringBuffer whereList;
+    /** 数据库查寻时的排序依据（列表（以逗号“,”分隔符区分）） */
+    private StringBuffer orderList;
 }
