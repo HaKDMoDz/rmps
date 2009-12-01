@@ -149,6 +149,20 @@ public class Control implements IControl
                 return;
             }
             msg = command.getProperty(msg, "");
+            // 上级目录
+            if ("..".equals(msg))
+            {
+                int func = process.getFunc();
+                int step = process.getStep();
+                func &= 0;
+
+                return;
+            }
+            // 顶级目录
+            if ("/".equals(msg))
+            {
+                return;
+            }
             // 使用帮助
             if ("?".equals(msg))
             {
@@ -174,6 +188,8 @@ public class Control implements IControl
             // 用户选择功能
             if (numReg.matcher(msg).matches())
             {
+                int step = process.getFunc();
+                step |= Integer.parseInt(msg);
             }
         }
 

@@ -9,7 +9,6 @@ package rmp.irp.comn;
 
 import com.amonsoft.rmps.irp.b.IProcess;
 
-
 /**
  * <ul>
  * <li>功能说明：</li>
@@ -24,6 +23,13 @@ public class Process implements IProcess
     private int func;
     private int step;
     private int type;
+
+    Process()
+    {
+        func = 0x50000000;
+        step = 0;
+        type = KEYCODE;
+    }
 
     /**
      * @return the func
