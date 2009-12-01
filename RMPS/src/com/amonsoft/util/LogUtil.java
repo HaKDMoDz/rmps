@@ -105,11 +105,6 @@ public final class LogUtil
         }
     }
 
-    public static void log(Object obj)
-    {
-        log(obj.toString());
-    }
-
     /**
      * 常规信息写出
      * 

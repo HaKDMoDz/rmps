@@ -126,14 +126,14 @@ public class Live extends MsnAdapter implements IAccount
     @Override
     public void exceptionCaught(MsnMessenger messenger, Throwable throwable)
     {
-        LogUtil.log(new Date());
+        LogUtil.log(new Date().toString());
         LogUtil.log(throwable.toString());
     }
 
     @Override
     public void loginCompleted(MsnMessenger messenger)
     {
-        LogUtil.log(new Date());
+        LogUtil.log(new Date().toString());
         LogUtil.log("loginCompleted.");
 
         Control.getInstance().loginCompleted(session);
@@ -142,7 +142,7 @@ public class Live extends MsnAdapter implements IAccount
     @Override
     public void logout(MsnMessenger messenger)
     {
-        LogUtil.log(new Date());
+        LogUtil.log(new Date().toString());
         LogUtil.log("logout.");
 
         Control.getInstance().willLogout(session);
@@ -151,10 +151,10 @@ public class Live extends MsnAdapter implements IAccount
     @Override
     public void instantMessageReceived(MsnSwitchboard switchboard, MsnInstantMessage message, MsnContact friend)
     {
-        LogUtil.log(new Date());
+        LogUtil.log(new Date().toString());
         LogUtil.log("instantMessageReceived - ");
-        LogUtil.log(friend.getEmail());
-        LogUtil.log(message);
+        LogUtil.log(friend.getEmail().getEmailAddress());
+        LogUtil.log(message.getContent());
 
         session.switchboard = switchboard;
         session.contact.contact = friend;
@@ -168,9 +168,9 @@ public class Live extends MsnAdapter implements IAccount
     @Override
     public void systemMessageReceived(MsnMessenger messenger, MsnSystemMessage message)
     {
-        LogUtil.log(new Date());
+        LogUtil.log(new Date().toString());
         LogUtil.log("systemMessageReceived - ");
-        LogUtil.log(message);
+        LogUtil.log(message.getContent());
 
         session.messenger = messenger;
         Control.getInstance().systemMessageReceived(session, null);
@@ -179,9 +179,9 @@ public class Live extends MsnAdapter implements IAccount
     @Override
     public void controlMessageReceived(MsnSwitchboard switchboard, MsnControlMessage message, MsnContact contact)
     {
-        LogUtil.log(new Date());
+        LogUtil.log(new Date().toString());
         LogUtil.log("controlMessageReceived");
-        LogUtil.log(message);
+        LogUtil.log(message.getContentType());
 
         session.switchboard = switchboard;
         session.contact.contact = contact;
@@ -191,10 +191,10 @@ public class Live extends MsnAdapter implements IAccount
     @Override
     public void datacastMessageReceived(MsnSwitchboard switchboard, MsnDatacastMessage message, MsnContact friend)
     {
-        LogUtil.log(new Date());
+        LogUtil.log(new Date().toString());
         LogUtil.log("datacastMessageReceived - ");
-        LogUtil.log(friend.getEmail());
-        LogUtil.log(message);
+        LogUtil.log(friend.getEmail().getEmailAddress());
+        LogUtil.log(message.getContentType());
 
         Control.getInstance().datacastMessageReceived(session, null);
     }
@@ -202,85 +202,85 @@ public class Live extends MsnAdapter implements IAccount
     @Override
     public void unknownMessageReceived(MsnSwitchboard switchboard, MsnUnknownMessage message, MsnContact friend)
     {
-        LogUtil.log(new Date());
+        LogUtil.log(new Date().toString());
         LogUtil.log("unknownMessageReceived - ");
-        LogUtil.log(friend.getEmail());
-        LogUtil.log(message);
+        LogUtil.log(friend.getEmail().getEmailAddress());
+        LogUtil.log(message.getContent());
 
     }
 
     @Override
     public void contactListInitCompleted(MsnMessenger messenger)
     {
-        LogUtil.log(new Date());
+        LogUtil.log(new Date().toString());
         LogUtil.log("contactListInitCompleted.");
     }
 
     @Override
     public void contactListSyncCompleted(MsnMessenger messenger)
     {
-        LogUtil.log(new Date());
+        LogUtil.log(new Date().toString());
         LogUtil.log("contactListSyncCompleted.");
     }
 
     @Override
     public void contactStatusChanged(MsnMessenger messenger, MsnContact friend)
     {
-        LogUtil.log(new Date());
+        LogUtil.log(new Date().toString());
         LogUtil.log("contactStatusChanged - ");
-        LogUtil.log(friend.getEmail());
+        LogUtil.log(friend.getEmail().getEmailAddress());
     }
 
     @Override
     public void ownerStatusChanged(MsnMessenger messenger)
     {
-        LogUtil.log(new Date());
+        LogUtil.log(new Date().toString());
         LogUtil.log("ownerStatusChanged.");
     }
 
     @Override
     public void contactAddedMe(MsnMessenger messenger, MsnContact friend)
     {
-        LogUtil.log(new Date());
+        LogUtil.log(new Date().toString());
         LogUtil.log("contactAddedMe - ");
-        LogUtil.log(friend.getEmail());
+        LogUtil.log(friend.getEmail().getEmailAddress());
     }
 
     @Override
     public void contactRemovedMe(MsnMessenger messenger, MsnContact friend)
     {
-        LogUtil.log(new Date());
+        LogUtil.log(new Date().toString());
         LogUtil.log("contactRemovedMe - ");
-        LogUtil.log(friend.getEmail());
+        LogUtil.log(friend.getEmail().getEmailAddress());
     }
 
     @Override
     public void switchboardClosed(MsnSwitchboard switchboard)
     {
-        LogUtil.log(new Date());
+        LogUtil.log(new Date().toString());
         LogUtil.log("switchboardClosed.");
     }
 
     @Override
     public void switchboardStarted(MsnSwitchboard switchboard)
     {
-        LogUtil.log(new Date());
+        LogUtil.log(new Date().toString());
         LogUtil.log("switchboardStarted.");
     }
 
     @Override
     public void contactJoinSwitchboard(MsnSwitchboard switchboard, MsnContact friend)
     {
-        LogUtil.log(new Date());
+        LogUtil.log(new Date().toString());
         LogUtil.log("contactJoinSwitchboard - ");
-        LogUtil.log(friend.getEmail());
+        LogUtil.log(friend.getEmail().getEmailAddress());
     }
 
     @Override
     public void contactLeaveSwitchboard(MsnSwitchboard switchboard, MsnContact friend)
     {
-        LogUtil.log(new Date());
+        LogUtil.log(new Date().toString());
         LogUtil.log("contactLeaveSwitchboard - ");
-        LogUtil.log(friend.getEmail());
+        LogUtil.log(friend.getEmail().getEmailAddress());
     }
 }

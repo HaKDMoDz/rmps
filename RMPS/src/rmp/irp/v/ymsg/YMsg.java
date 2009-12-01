@@ -69,7 +69,7 @@ public class YMsg implements IAccount, SessionListener
                 }
                 catch (Exception exp)
                 {
-                    LogUtil.log(exp);
+                    LogUtil.exception(exp);
                 }
                 break;
             case IStatus.DOWN:

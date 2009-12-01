@@ -43,10 +43,6 @@ public final class Rmps
      */
     public static void main(String[] args)
     {
-        UserInfo ui = new UserInfo("Amon", "amon");
-        ui.wInit();
-        RmpsUtil.setUserInfo(ui);
-
         // 1、 启动系统日志
         LogUtil.wInit();
 
@@ -57,14 +53,19 @@ public final class Rmps
             return;
         }
 
-        // 3、 用户配置加载
+        // 3、用户登录
+        UserInfo ui = new UserInfo("Amon", "amon");
+        ui.wInit();
+        RmpsUtil.setUserInfo(ui);
+
+        // 4、 用户配置加载
         if (!initCfg())
         {
             System.exit(0);
             return;
         }
 
-        // 4、 应用界面风格
+        // 5、 应用界面风格
         if (!initLnF(ui.getCfg(CfgCons.CFG_LNF_TYPE), ui.getCfg(CfgCons.CFG_LNF_NAME)))
         {
             System.exit(0);
@@ -166,7 +167,7 @@ public final class Rmps
         type = type.trim();
 
         // 使用当前系统界面样式
-        if ("".equals(type) || ISkin.LF_TYPE_SYSTEM.equalsIgnoreCase(type))
+        if (type.length() < 1 || ISkin.LF_TYPE_SYSTEM.equalsIgnoreCase(type))
         {
             name = UIManager.getSystemLookAndFeelClassName();
         }

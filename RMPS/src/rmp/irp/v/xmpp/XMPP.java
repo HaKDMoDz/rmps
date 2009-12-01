@@ -91,7 +91,7 @@ public class XMPP implements IAccount, ConnectionListener, MessageListener, Pack
                 }
                 catch (XMPPException exp)
                 {
-                    LogUtil.log(exp);
+                    LogUtil.exception(exp);
                 }
                 break;
             case IStatus.DOWN:
