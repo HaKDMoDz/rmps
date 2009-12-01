@@ -56,7 +56,7 @@ public class StepPanel extends javax.swing.JPanel
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.ui.frm.FViewPanel#init()
+     * @see rmp.ui.frm.FViewPanel#wInit()
      */
     public boolean wInit()
     {

@@ -48,7 +48,7 @@ public final class Rmps
         RmpsUtil.setUserInfo(ui);
 
         // 1、 启动系统日志
-        LogUtil.init();
+        LogUtil.wInit();
 
         // 2、 运行环境检测
         if (!checkJre())
@@ -110,7 +110,7 @@ public final class Rmps
         }
 
         LogUtil.log("系统退出：完毕！\r\n--------------------------------------------------\r\n\r\n");
-        LogUtil.exit();
+        LogUtil.wExit();
 
         System.exit(status);
     }

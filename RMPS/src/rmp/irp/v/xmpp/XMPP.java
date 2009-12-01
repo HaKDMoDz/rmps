@@ -25,7 +25,7 @@ import org.jivesoftware.smack.filter.PacketFilter;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smack.packet.Presence;
-import rmp.util.Logs;
+import rmp.util.LogUtil;
 
 /**
  * <ul>
@@ -91,7 +91,7 @@ public class XMPP implements IAccount, ConnectionListener, MessageListener, Pack
                 }
                 catch (XMPPException exp)
                 {
-                    Logs.log(exp);
+                    LogUtil.log(exp);
                 }
                 break;
             case IStatus.DOWN:
@@ -123,48 +123,48 @@ public class XMPP implements IAccount, ConnectionListener, MessageListener, Pack
     @Override
     public void connectionClosed()
     {
-        Logs.log("connectionClosed");
+        LogUtil.log("connectionClosed");
     }
 
     @Override
     public void connectionClosedOnError(Exception arg0)
     {
-        Logs.log("connectionClosedOnError");
+        LogUtil.log("connectionClosedOnError");
     }
 
     @Override
     public void reconnectingIn(int arg0)
     {
-        Logs.log("reconnectingIn");
+        LogUtil.log("reconnectingIn");
     }
 
     @Override
     public void reconnectionSuccessful()
     {
-        Logs.log("reconnectionSuccessful");
+        LogUtil.log("reconnectionSuccessful");
     }
 
     @Override
     public void reconnectionFailed(Exception arg0)
     {
-        Logs.log("reconnectionFailed");
+        LogUtil.log("reconnectionFailed");
     }
 
     @Override
     public void processMessage(Chat arg0, Message arg1)
     {
-        Logs.log("processMessage");
+        LogUtil.log("processMessage");
     }
 
     @Override
     public void processPacket(Packet arg0)
     {
-        Logs.log("processPacket");
+        LogUtil.log("processPacket");
     }
 
     @Override
     public void chatCreated(Chat arg0, boolean arg1)
     {
-        Logs.log("chatCreated");
+        LogUtil.log("chatCreated");
     }
 }

@@ -21,7 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import rmp.irp.m.root.Root;
-import rmp.util.Logs;
+import rmp.util.LogUtil;
 import rmp.util.StringUtil;
 
 /**
@@ -165,61 +165,61 @@ public class Control implements IControl
     @Override
     public void systemMessageReceived(ISession session, IMessage message)
     {
-        Logs.log("systemMessageReceived:" + message.getContent());
+        LogUtil.log("systemMessageReceived:" + message.getContent());
     }
 
     @Override
     public void controlMessageReceived(ISession session, IMessage message)
     {
-        Logs.log("controlMessageReceived:" + message.getContent());
+        LogUtil.log("controlMessageReceived:" + message.getContent());
     }
 
     @Override
     public void datacastMessageReceived(ISession session, IMessage message)
     {
-        Logs.log("datacastMessageReceived:");
+        LogUtil.log("datacastMessageReceived:");
     }
 
     @Override
     public void unknownMessageReceived(ISession session, IMessage message)
     {
-        Logs.log("unknownMessageReceived:");
+        LogUtil.log("unknownMessageReceived:");
     }
 
     @Override
     public void contactListInitCompleted(ISession session)
     {
-        Logs.log("contactListInitCompleted:");
+        LogUtil.log("contactListInitCompleted:");
     }
 
     @Override
     public void contactListSyncCompleted(ISession session)
     {
-        Logs.log("contactListSyncCompleted:");
+        LogUtil.log("contactListSyncCompleted:");
     }
 
     @Override
     public void contactStatusChanged()
     {
-        Logs.log("contactStatusChanged:");
+        LogUtil.log("contactStatusChanged:");
     }
 
     @Override
     public void contactAddedMe()
     {
-        Logs.log("contactAddedMe:");
+        LogUtil.log("contactAddedMe:");
     }
 
     @Override
     public void contactRemovedMe()
     {
-        Logs.log("contactRemovedMe:");
+        LogUtil.log("contactRemovedMe:");
     }
 
     @Override
     public void sessionClosed(ISession session)
     {
-        Logs.log("switchboardClosed:");
+        LogUtil.log("switchboardClosed:");
     }
 
     @Override
@@ -245,13 +245,13 @@ public class Control implements IControl
     @Override
     public void contactJoinMeeting()
     {
-        Logs.log("contactJoinSwitchboard:");
+        LogUtil.log("contactJoinSwitchboard:");
     }
 
     @Override
     public void contactLeaveMeeting()
     {
-        Logs.log("contactLeaveSwitchboard:");
+        LogUtil.log("contactLeaveSwitchboard:");
     }
 
     /**

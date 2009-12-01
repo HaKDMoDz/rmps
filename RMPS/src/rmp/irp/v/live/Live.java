@@ -11,8 +11,6 @@ import com.amonsoft.rmps.irp.v.IAccount;
 import com.amonsoft.rmps.irp.v.IConnect;
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IStatus;
-import cons.irp.ConsEnv;
-import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 import net.sf.jml.MsnContact;
@@ -28,7 +26,7 @@ import net.sf.jml.message.MsnInstantMessage;
 import net.sf.jml.message.MsnSystemMessage;
 import net.sf.jml.message.MsnUnknownMessage;
 import rmp.irp.c.Control;
-import rmp.util.Logs;
+import rmp.util.LogUtil;
 
 /**
  * <ul>
@@ -44,7 +42,6 @@ public class Live extends MsnAdapter implements IAccount
     private Connect connect;
     private MsnMessenger messenger;
     private Session session;
-    private PrintWriter printer;
 
     public Live()
     {
@@ -67,7 +64,6 @@ public class Live extends MsnAdapter implements IAccount
                     connect.load();
 
                     session = new Session();
-                    printer = Logs.getLog(ConsEnv.IM_LIVE, connect.getMail(), "abc");
                 }
                 catch (Exception exp)
                 {
@@ -94,8 +90,7 @@ public class Live extends MsnAdapter implements IAccount
                 break;
             case IStatus.DOWN:
                 messenger.logout();
-                printer.flush();
-                printer.close();
+                LogUtil.wExit();
                 break;
             default:
                 break;
@@ -131,15 +126,15 @@ public class Live extends MsnAdapter implements IAccount
     @Override
     public void exceptionCaught(MsnMessenger messenger, Throwable throwable)
     {
-        printer.print(new Date());
-        printer.println(throwable);
+        LogUtil.log(new Date());
+        LogUtil.log(throwable.toString());
     }
 
     @Override
     public void loginCompleted(MsnMessenger messenger)
     {
-        printer.print(new Date());
-        printer.println("loginCompleted.");
+        LogUtil.log(new Date());
+        LogUtil.log("loginCompleted.");
 
         Control.getInstance().loginCompleted(session);
     }
@@ -147,8 +142,8 @@ public class Live extends MsnAdapter implements IAccount
     @Override
     public void logout(MsnMessenger messenger)
     {
-        printer.print(new Date());
-        printer.println("logout.");
+        LogUtil.log(new Date());
+        LogUtil.log("logout.");
 
         Control.getInstance().willLogout(session);
     }
@@ -156,10 +151,10 @@ public class Live extends MsnAdapter implements IAccount
     @Override
     public void instantMessageReceived(MsnSwitchboard switchboard, MsnInstantMessage message, MsnContact friend)
     {
-        printer.print(new Date());
-        printer.print("instantMessageReceived - ");
-        printer.println(friend.getEmail());
-        printer.println(message);
+        LogUtil.log(new Date());
+        LogUtil.log("instantMessageReceived - ");
+        LogUtil.log(friend.getEmail());
+        LogUtil.log(message);
 
         session.switchboard = switchboard;
         session.contact.contact = friend;
@@ -173,9 +168,9 @@ public class Live extends MsnAdapter implements IAccount
     @Override
     public void systemMessageReceived(MsnMessenger messenger, MsnSystemMessage message)
     {
-        printer.print(new Date());
-        printer.print("systemMessageReceived - ");
-        printer.println(message);
+        LogUtil.log(new Date());
+        LogUtil.log("systemMessageReceived - ");
+        LogUtil.log(message);
 
         session.messenger = messenger;
         Control.getInstance().systemMessageReceived(session, null);
@@ -184,9 +179,9 @@ public class Live extends MsnAdapter implements IAccount
     @Override
     public void controlMessageReceived(MsnSwitchboard switchboard, MsnControlMessage message, MsnContact contact)
     {
-        printer.print(new Date());
-        printer.println("controlMessageReceived");
-        printer.println(message);
+        LogUtil.log(new Date());
+        LogUtil.log("controlMessageReceived");
+        LogUtil.log(message);
 
         session.switchboard = switchboard;
         session.contact.contact = contact;
@@ -196,10 +191,10 @@ public class Live extends MsnAdapter implements IAccount
     @Override
     public void datacastMessageReceived(MsnSwitchboard switchboard, MsnDatacastMessage message, MsnContact friend)
     {
-        printer.print(new Date());
-        printer.print("datacastMessageReceived - ");
-        printer.println(friend.getEmail());
-        printer.println(message);
+        LogUtil.log(new Date());
+        LogUtil.log("datacastMessageReceived - ");
+        LogUtil.log(friend.getEmail());
+        LogUtil.log(message);
 
         Control.getInstance().datacastMessageReceived(session, null);
     }
@@ -207,85 +202,85 @@ public class Live extends MsnAdapter implements IAccount
     @Override
     public void unknownMessageReceived(MsnSwitchboard switchboard, MsnUnknownMessage message, MsnContact friend)
     {
-        printer.print(new Date());
-        printer.print("unknownMessageReceived - ");
-        printer.println(friend.getEmail());
-        printer.println(message);
+        LogUtil.log(new Date());
+        LogUtil.log("unknownMessageReceived - ");
+        LogUtil.log(friend.getEmail());
+        LogUtil.log(message);
 
     }
 
     @Override
     public void contactListInitCompleted(MsnMessenger messenger)
     {
-        printer.print(new Date());
-        printer.println("contactListInitCompleted.");
+        LogUtil.log(new Date());
+        LogUtil.log("contactListInitCompleted.");
     }
 
     @Override
     public void contactListSyncCompleted(MsnMessenger messenger)
     {
-        printer.print(new Date());
-        printer.println("contactListSyncCompleted.");
+        LogUtil.log(new Date());
+        LogUtil.log("contactListSyncCompleted.");
     }
 
     @Override
     public void contactStatusChanged(MsnMessenger messenger, MsnContact friend)
     {
-        printer.print(new Date());
-        printer.print("contactStatusChanged - ");
-        printer.println(friend.getEmail());
+        LogUtil.log(new Date());
+        LogUtil.log("contactStatusChanged - ");
+        LogUtil.log(friend.getEmail());
     }
 
     @Override
     public void ownerStatusChanged(MsnMessenger messenger)
     {
-        printer.print(new Date());
-        printer.println("ownerStatusChanged.");
+        LogUtil.log(new Date());
+        LogUtil.log("ownerStatusChanged.");
     }
 
     @Override
     public void contactAddedMe(MsnMessenger messenger, MsnContact friend)
     {
-        printer.print(new Date());
-        printer.print("contactAddedMe - ");
-        printer.println(friend.getEmail());
+        LogUtil.log(new Date());
+        LogUtil.log("contactAddedMe - ");
+        LogUtil.log(friend.getEmail());
     }
 
     @Override
     public void contactRemovedMe(MsnMessenger messenger, MsnContact friend)
     {
-        printer.print(new Date());
-        printer.print("contactRemovedMe - ");
-        printer.println(friend.getEmail());
+        LogUtil.log(new Date());
+        LogUtil.log("contactRemovedMe - ");
+        LogUtil.log(friend.getEmail());
     }
 
     @Override
     public void switchboardClosed(MsnSwitchboard switchboard)
     {
-        printer.print(new Date());
-        printer.println("switchboardClosed.");
+        LogUtil.log(new Date());
+        LogUtil.log("switchboardClosed.");
     }
 
     @Override
     public void switchboardStarted(MsnSwitchboard switchboard)
     {
-        printer.print(new Date());
-        printer.println("switchboardStarted.");
+        LogUtil.log(new Date());
+        LogUtil.log("switchboardStarted.");
     }
 
     @Override
     public void contactJoinSwitchboard(MsnSwitchboard switchboard, MsnContact friend)
     {
-        printer.print(new Date());
-        printer.print("contactJoinSwitchboard - ");
-        printer.println(friend.getEmail());
+        LogUtil.log(new Date());
+        LogUtil.log("contactJoinSwitchboard - ");
+        LogUtil.log(friend.getEmail());
     }
 
     @Override
     public void contactLeaveSwitchboard(MsnSwitchboard switchboard, MsnContact friend)
     {
-        printer.print(new Date());
-        printer.print("contactLeaveSwitchboard - ");
-        printer.println(friend.getEmail());
+        LogUtil.log(new Date());
+        LogUtil.log("contactLeaveSwitchboard - ");
+        LogUtil.log(friend.getEmail());
     }
 }

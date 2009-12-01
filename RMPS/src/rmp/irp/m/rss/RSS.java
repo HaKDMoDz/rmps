@@ -17,7 +17,7 @@ import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 import java.net.URL;
-import rmp.util.Logs;
+import rmp.util.LogUtil;
 
 /**
  * <ul>
@@ -78,7 +78,7 @@ public class RSS implements IService
         }
         catch (Exception exp)
         {
-            Logs.log(exp);
+            LogUtil.exception(exp);
         }
     }
 

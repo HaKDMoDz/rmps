@@ -56,7 +56,7 @@ public final class FileUtil
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.IRmps#init()
+     * @see rmp.face.IRmps#wInit()
      */
     public boolean wInit()
     {

@@ -43,7 +43,7 @@ public final class LogUtil
      * 
      * @return
      */
-    public static boolean init()
+    public static boolean wInit()
     {
         try
         {
@@ -87,7 +87,7 @@ public final class LogUtil
      * 
      * @return
      */
-    public static boolean exit()
+    public static boolean wExit()
     {
         if (logStream != null)
         {
@@ -109,6 +109,11 @@ public final class LogUtil
             log(exp.toString());
             exp.printStackTrace();
         }
+    }
+
+    public static void log(Object obj)
+    {
+        log(obj.toString());
     }
 
     /**

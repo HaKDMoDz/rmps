@@ -536,7 +536,7 @@ public class Testsoft extends WForm implements IPrpPlus
     /*
      * (non-Javadoc)
      * 
-     * @see java.applet.Applet#init()
+     * @see java.applet.Applet#wInit()
      */
     @Override
     public void init()
@@ -571,7 +571,7 @@ public class Testsoft extends WForm implements IPrpPlus
         RmpsUtil.setUserInfo(ui);
 
         // 1、 启动系统日志
-        LogUtil.init();
+        LogUtil.wInit();
 
         // 2、 运行环境检测
         if (!Rmps.checkJre())

@@ -24,7 +24,7 @@ import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
-import rmp.util.Logs;
+import rmp.util.LogUtil;
 
 /**
  * <ul>
@@ -627,7 +627,7 @@ public class Fetion implements IAccount//, IFetionEventListener
     {
         if (connect.getUser().length() == 0)
         {
-            Logs.log("CellPhone/Fetion ID field should not be empty.");
+            LogUtil.log("CellPhone/Fetion ID field should not be empty.");
             return;
         }
         URLConnection connection = null;
@@ -651,7 +651,7 @@ public class Fetion implements IAccount//, IFetionEventListener
             }
             catch (Exception ex)
             {
-                Logs.log("Init Web Error:\n");
+                LogUtil.log("Init Web Error:\n");
                 in = new InputStreamReader(httpconn.getErrorStream(), "utf-8");
                 return;
             }
@@ -676,13 +676,13 @@ public class Fetion implements IAccount//, IFetionEventListener
             sipc_proxy = sipc_proxy.substring(0, sipc_proxy.indexOf("</sipc-proxy>")).trim();
             connect.setProxy(sipc_proxy);
 
-            Logs.log("sipc-proxy:[" + sipc_proxy + "]\n");
+            LogUtil.log("sipc-proxy:[" + sipc_proxy + "]\n");
             String ssi_app_sign_in = res.substring(res.indexOf("<ssi-app-sign-in>") + 17);
             ssi_app_sign_in = ssi_app_sign_in.substring(0, ssi_app_sign_in.indexOf("</ssi-app-sign-in>"));
-            Logs.log("ssi-app-sign-in:[" + ssi_app_sign_in + "]\n");
+            LogUtil.log("ssi-app-sign-in:[" + ssi_app_sign_in + "]\n");
             String ssi_app_sign_out = res.substring(res.indexOf("<ssi-app-sign-out>") + 18);
             ssi_app_sign_out = ssi_app_sign_out.substring(0, ssi_app_sign_out.indexOf("</ssi-app-sign-out>"));
-            Logs.log("ssi-app-sign-out:[" + ssi_app_sign_out + "]\n");
+            LogUtil.log("ssi-app-sign-out:[" + ssi_app_sign_out + "]\n");
 
             if ((connect.getUser().length() == 11) && (connect.getUser().charAt(0) == '1') && (((connect.getUser().charAt(1) == '3') || (connect.getUser().charAt(1) == '5'))))
             {
@@ -716,7 +716,7 @@ public class Fetion implements IAccount//, IFetionEventListener
             }
             catch (Exception ex)
             {
-                Logs.log("Init get sip Web Error:\n");
+                LogUtil.log("Init get sip Web Error:\n");
                 in = new InputStreamReader(httpconn.getErrorStream(), "utf-8");
                 return;
             }
@@ -738,20 +738,20 @@ public class Fetion implements IAccount//, IFetionEventListener
 
             this.sid = res.substring(res.indexOf("<Sid>") + 5);
             this.sid = this.sid.substring(0, this.sid.indexOf("</Sid>")).trim();
-            Logs.log("sid:[" + this.sid + "]\n");
+            LogUtil.log("sid:[" + this.sid + "]\n");
             if (this.sid.length() < 2)
             {
-                Logs.log("CellPhone/Fetion ID is not exist\n");
+                LogUtil.log("CellPhone/Fetion ID is not exist\n");
                 return;
             }
             res = res.substring(res.indexOf("<User>"));
             String uri = res.substring(res.indexOf("<Uri>") + 5);
             uri = uri.substring(0, uri.indexOf("</Uri>")).trim();
-            Logs.log("uri:[" + uri + "]\n");
+            LogUtil.log("uri:[" + uri + "]\n");
         }
         catch (Exception e)
         {
-            Logs.log("Init Button Excetion:\n" + e.toString() + "\n");
+            LogUtil.log("Init Button Excetion:\n" + e.toString() + "\n");
         }
     }
     DataInputStream dataIn;

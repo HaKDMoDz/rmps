@@ -13,7 +13,7 @@ import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IStatus;
 import java.awt.Toolkit;
 import java.util.List;
-import rmp.util.Logs;
+import rmp.util.LogUtil;
 import ymsg.network.event.SessionChatEvent;
 import ymsg.network.event.SessionConferenceEvent;
 import ymsg.network.event.SessionErrorEvent;
@@ -69,7 +69,7 @@ public class YMsg implements IAccount, SessionListener
                 }
                 catch (Exception exp)
                 {
-                    Logs.log(exp);
+                    LogUtil.log(exp);
                 }
                 break;
             case IStatus.DOWN:
@@ -79,7 +79,7 @@ public class YMsg implements IAccount, SessionListener
                 }
                 catch (Exception exp)
                 {
-                    Logs.log(exp);
+                    LogUtil.exception(exp);
                 }
                 break;
             default:
@@ -127,17 +127,17 @@ public class YMsg implements IAccount, SessionListener
         {
             messenger.sendMessage(arg0.getFrom(), arg0.getMessage());
         }
-        catch (Exception ex)
+        catch (Exception exp)
         {
-            Logs.log(ex);
+            LogUtil.exception(exp);
         }
         try
         {
             messenger.sendChatMessage(arg0.getMessage());
         }
-        catch (Exception ex)
+        catch (Exception exp)
         {
-            Logs.log(ex);
+            LogUtil.exception(exp);
         }
     }
 

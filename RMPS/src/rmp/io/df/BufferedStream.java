@@ -145,7 +145,7 @@ public class BufferedStream
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.InitShow#init()
+     * @see rmp.face.InitShow#wInit()
      */
     public boolean init()
     {

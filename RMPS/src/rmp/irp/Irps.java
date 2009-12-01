@@ -15,6 +15,7 @@ import cons.irp.ConsEnv;
 import java.util.HashMap;
 
 import rmp.irp.v.live.Live;
+import rmp.util.LogUtil;
 
 /**
  * <ul>
@@ -34,6 +35,8 @@ public class Irps
      */
     public static void main(String[] args)
     {
+        LogUtil.wInit();
+
         accounts = new HashMap<String, IAccount>();
         IAccount account;
 

@@ -32,7 +32,7 @@ import java.io.InputStreamReader;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
-import rmp.util.Logs;
+import rmp.util.LogUtil;
 
 /**
  * <ul>
@@ -84,7 +84,7 @@ public class AIM implements IAccount, JaimEventListener
                 }
                 catch (Exception exp)
                 {
-                    Logs.log(exp);
+                    LogUtil.exception(exp);
                 }
                 break;
             case IStatus.DOWN:
@@ -94,7 +94,7 @@ public class AIM implements IAccount, JaimEventListener
                 }
                 catch (Exception exp)
                 {
-                    Logs.log(exp);
+                    LogUtil.exception(exp);
                 }
                 break;
             default:

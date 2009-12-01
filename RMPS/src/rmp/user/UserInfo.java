@@ -60,7 +60,7 @@ public final class UserInfo implements IRmps
     /*
      * (non-Javadoc)
      * 
-     * @see rmp.face.IRmps#init()
+     * @see rmp.face.IRmps#wInit()
      */
     @Override
     public boolean wInit()

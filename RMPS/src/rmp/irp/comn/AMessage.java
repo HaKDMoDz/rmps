@@ -10,7 +10,7 @@ package rmp.irp.comn;
 import com.amonsoft.rmps.irp.b.IMessage;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
-import rmp.util.Logs;
+import rmp.util.LogUtil;
 import rmp.util.Util;
 
 /**
@@ -151,7 +151,7 @@ public abstract class AMessage implements IMessage
                 }
                 catch (UnsupportedEncodingException exp)
                 {
-                    Logs.log(exp);
+                    LogUtil.exception(exp);
                 }
             }
             if (useDefaultEncoding)

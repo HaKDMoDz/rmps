@@ -509,7 +509,7 @@ public class P30F0000 extends WForm implements IPrpPlus
         RmpsUtil.setUserInfo(ui);
 
         // 1、 启动系统日志
-        LogUtil.init();
+        LogUtil.wInit();
 
         // 2、 运行环境检测
         if (!Rmps.checkJre())
