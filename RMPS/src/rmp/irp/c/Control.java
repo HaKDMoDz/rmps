@@ -49,7 +49,7 @@ public class Control implements IControl
         try
         {
             command = new Properties();
-            command.loadFromXML(new FileInputStream("dat/cfg.xml"));
+            command.loadFromXML(new FileInputStream("cfg/50000000.xml"));
 
             StringBuffer reg = new StringBuffer("^[");
             Enumeration<?> enums = command.propertyNames();
