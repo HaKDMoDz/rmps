@@ -24,7 +24,7 @@ import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>

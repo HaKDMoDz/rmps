@@ -17,7 +17,7 @@ import cons.prp.LangRes;
 import rmp.comn.tray.C3010000.C3010000;
 import com.amonsoft.util.LangUtil;
 import com.amonsoft.util.DeskUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.RmpsUtil;
 

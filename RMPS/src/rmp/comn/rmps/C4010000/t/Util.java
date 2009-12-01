@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import rmp.util.CheckUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import rmp.util.RmpsUtil;
 import cons.CfgCons;
 import cons.EnvCons;

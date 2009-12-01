@@ -32,7 +32,7 @@ import java.io.InputStreamReader;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>

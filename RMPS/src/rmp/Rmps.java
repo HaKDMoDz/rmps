@@ -17,7 +17,7 @@ import javax.swing.plaf.synth.SynthLookAndFeel;
 import rmp.prp.Prps;
 import rmp.user.UserInfo;
 import rmp.util.EnvUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.RmpsUtil;
 import rmp.util.StringUtil;

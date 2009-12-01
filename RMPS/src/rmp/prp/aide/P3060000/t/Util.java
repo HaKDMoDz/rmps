@@ -17,7 +17,7 @@ import java.util.Stack;
 import rmp.bean.K1SV2S;
 import rmp.prp.aide.P3060000.b.WOperator;
 import rmp.util.CheckUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import rmp.util.StringUtil;
 import cons.prp.aide.P3060000.ConstUI;
 import cons.prp.aide.P3060000.LangRes;

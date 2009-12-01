@@ -32,7 +32,7 @@ import rmp.prp.Prps;
 import rmp.user.UserInfo;
 import rmp.util.BeanUtil;
 import com.amonsoft.util.DeskUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import rmp.util.RmpsUtil;
 
 /**

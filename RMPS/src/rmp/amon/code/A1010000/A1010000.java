@@ -26,7 +26,7 @@ import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.Prps;
 import rmp.user.UserInfo;
 import rmp.util.BeanUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import rmp.util.RmpsUtil;
 import cons.CfgCons;
 import cons.EnvCons;

@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import rmp.util.FileUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import rmp.util.StringUtil;
 import cons.SysCons;
 import cons.comn.lang.A3010000.ConstUI;

@@ -7,6 +7,7 @@
  */
 package rmp.util;
 
+import com.amonsoft.util.LogUtil;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;

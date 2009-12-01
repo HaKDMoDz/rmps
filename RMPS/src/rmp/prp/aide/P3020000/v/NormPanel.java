@@ -17,7 +17,7 @@ import rmp.prp.aide.P3020000.m.DataModel;
 import rmp.prp.aide.P3020000.t.Util;
 import rmp.util.BeanUtil;
 import rmp.util.CheckUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.StringUtil;
 import cons.ui.LangRes;

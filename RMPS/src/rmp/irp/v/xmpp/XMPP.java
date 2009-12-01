@@ -25,7 +25,7 @@ import org.jivesoftware.smack.filter.PacketFilter;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smack.packet.Presence;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>

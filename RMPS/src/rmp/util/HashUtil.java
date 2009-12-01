@@ -7,6 +7,7 @@
  */
 package rmp.util;
 
+import com.amonsoft.util.LogUtil;
 import java.security.MessageDigest;
 import java.security.Provider;
 import java.security.Security;

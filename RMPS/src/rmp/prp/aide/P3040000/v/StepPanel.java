@@ -15,7 +15,7 @@ import rmp.prp.aide.P3040000.t.Util;
 import rmp.util.BeanUtil;
 import rmp.util.CheckUtil;
 import rmp.util.HashUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.StringUtil;
 import cons.SysCons;

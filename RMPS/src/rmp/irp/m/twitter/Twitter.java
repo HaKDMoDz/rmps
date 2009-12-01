@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import rmp.irp.comn.Step;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import twitter4j.DirectMessage;
 import twitter4j.Query;
 import twitter4j.QueryResult;

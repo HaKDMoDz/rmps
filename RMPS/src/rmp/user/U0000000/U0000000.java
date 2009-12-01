@@ -30,7 +30,7 @@ import rmp.user.U0000000.v.TailPanel;
 import rmp.util.BeanUtil;
 import rmp.util.FileUtil;
 import rmp.util.ImageUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.RmpsUtil;
 import cons.CfgCons;

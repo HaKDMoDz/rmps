@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 import rmp.util.ImageUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import cons.EnvCons;
 import cons.prp.aide.P3040000.ConstUI;
 

@@ -15,7 +15,7 @@ import rmp.amon.data.A2010000.b.WDataBase;
 import rmp.amon.data.A2010000.t.Util;
 import rmp.bean.K1SV1S;
 import rmp.util.CheckUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import cons.db.AmonCons;
 
 /**

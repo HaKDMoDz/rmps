@@ -28,7 +28,7 @@ import rmp.prp.aide.P3050000.b.ItemBean;
 import rmp.prp.aide.P3050000.m.CRC64;
 import rmp.prp.aide.P3050000.m.SecureKey;
 import rmp.util.BeanUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.StringUtil;
 import cons.prp.aide.P3050000.ConstUI;

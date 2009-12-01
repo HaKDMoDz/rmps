@@ -26,7 +26,7 @@ import net.sf.jml.message.MsnInstantMessage;
 import net.sf.jml.message.MsnSystemMessage;
 import net.sf.jml.message.MsnUnknownMessage;
 import rmp.irp.c.Control;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>

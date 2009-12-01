@@ -11,7 +11,7 @@ import java.awt.GridLayout;
 
 import rmp.amon.rmps.AF010000.AF010000;
 import rmp.util.BeanUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>

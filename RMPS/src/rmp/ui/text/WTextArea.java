@@ -17,7 +17,7 @@ import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
 import rmp.face.WBean;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>

@@ -34,7 +34,7 @@ import rmp.prp.v.NetPanel;
 import rmp.prp.v.StdPanel;
 import rmp.prp.v.SubMenu;
 import rmp.util.CheckUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.RmpsUtil;
 import cons.CfgCons;

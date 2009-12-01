@@ -24,7 +24,7 @@ import rmp.prp.aide.P3040000.t.Util;
 import rmp.util.BeanUtil;
 import rmp.util.DateUtil;
 import rmp.util.ImageUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import cons.EnvCons;
 import cons.prp.aide.P3040000.ConstUI;
 import cons.prp.aide.P3040000.LangRes;

@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import rmp.prp.m.NetItem;
 import rmp.util.BeanUtil;
 import com.amonsoft.util.DeskUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>

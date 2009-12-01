@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rmp.util.CheckUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>

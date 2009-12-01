@@ -17,7 +17,7 @@ import rmp.util.BeanUtil;
 import rmp.util.CheckUtil;
 import com.amonsoft.util.DeskUtil;
 import rmp.util.EnvUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>

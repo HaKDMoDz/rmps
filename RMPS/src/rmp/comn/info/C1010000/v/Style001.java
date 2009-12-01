@@ -25,7 +25,7 @@ import rmp.ui.icon.WIconLabel;
 import rmp.ui.link.WLinkLabel;
 import rmp.util.CheckUtil;
 import rmp.util.FileUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import cons.comn.info.C1010000.ConstUI;
 import com.amonsoft.util.DeskUtil;
 

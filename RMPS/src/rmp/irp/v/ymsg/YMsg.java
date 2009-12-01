@@ -13,7 +13,7 @@ import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IStatus;
 import java.awt.Toolkit;
 import java.util.List;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import ymsg.network.event.SessionChatEvent;
 import ymsg.network.event.SessionConferenceEvent;
 import ymsg.network.event.SessionErrorEvent;

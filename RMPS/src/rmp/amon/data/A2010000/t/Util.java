@@ -22,7 +22,7 @@ import rmp.amon.data.A2010000.b.KVItem;
 import rmp.amon.data.A2010000.b.WDataBase;
 import rmp.util.CheckUtil;
 import rmp.util.FileUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import rmp.util.StringUtil;
 import cons.SysCons;
 import cons.amon.data.A2010000.ConstUI;

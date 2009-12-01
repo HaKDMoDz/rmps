@@ -7,6 +7,7 @@
  */
 package rmp.util;
 
+import com.amonsoft.util.LogUtil;
 import java.awt.Component;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

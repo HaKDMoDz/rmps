@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package rmp.util;
+package com.amonsoft.util;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,9 +14,7 @@ import java.io.PrintStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import cons.EnvCons;
-import cons.SysCons;
+import rmp.util.StringUtil;
 
 /**
  * <ul>
@@ -47,12 +45,8 @@ public final class LogUtil
     {
         try
         {
-            // 当前日期获取
-            String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-
             // 创建日志文件对象
-            String name = EnvCons.COMN_LOGS_FILE.replace("{0}", date);
-            File logFile = new File(EnvUtil.getUserDir() + EnvCons.PATH_LOG, name);
+            File logFile = new File("log", "exception_" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + ".log");
 
             // 错误日志文件是否存在
             if (!logFile.exists())
@@ -72,7 +66,7 @@ public final class LogUtil
             }
 
             // 创建文本输出流，在原数据的基本上进行扩展写出
-            logStream = new PrintStream(new FileOutputStream(logFile, true), true, SysCons.FILE_ENCODING);
+            logStream = new PrintStream(new FileOutputStream(logFile, true), true, "UTF-8");
             return true;
         }
         catch (IOException exp)

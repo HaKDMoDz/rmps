@@ -21,7 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import rmp.irp.m.root.Root;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import rmp.util.StringUtil;
 
 /**

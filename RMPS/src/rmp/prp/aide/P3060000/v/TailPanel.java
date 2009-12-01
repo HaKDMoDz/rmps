@@ -11,7 +11,7 @@ import rmp.prp.aide.P3060000.P3060000;
 import rmp.prp.aide.P3060000.t.Util;
 import rmp.util.BeanUtil;
 import rmp.util.CheckUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
 import cons.prp.aide.P3060000.LangRes;
 

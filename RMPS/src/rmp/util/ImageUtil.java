@@ -7,6 +7,7 @@
  */
 package rmp.util;
 
+import com.amonsoft.util.LogUtil;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Graphics2D;

@@ -13,7 +13,7 @@ import com.amonsoft.rmps.irp.b.ISession;
 import java.util.HashMap;
 
 import rmp.util.CheckUtil;
-import rmp.util.LogUtil;
+import com.amonsoft.util.LogUtil;
 
 
 import cons.irp.a.ConstUI;
