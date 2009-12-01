@@ -154,13 +154,16 @@ public class Control implements IControl
             {
                 int func = process.getFunc();
                 int step = process.getStep();
-                func &= 0;
-
+                process.setFunc(func & ~(1 << (8 - step)));
+                process.setStep(step - 1);
                 return;
             }
             // 顶级目录
             if ("/".equals(msg))
             {
+                process.setFunc(IProcess.DEFFUNC);
+                process.setStep(IProcess.DEFSTEP);
+                process.setType(IProcess.DEFTYPE);
                 return;
             }
             // 使用帮助

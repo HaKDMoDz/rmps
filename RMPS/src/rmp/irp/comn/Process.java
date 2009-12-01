@@ -26,9 +26,9 @@ public class Process implements IProcess
 
     Process()
     {
-        func = 0x50000000;
-        step = 0;
-        type = KEYCODE;
+        func = DEFFUNC;
+        step = DEFSTEP;
+        type = DEFTYPE;
     }
 
     /**

@@ -22,6 +22,9 @@ public interface IProcess
     int KEYCODE = 0;
     int COMMAND = 1;
     int CONTENT = 2;
+    int DEFFUNC = 0x50000000;
+    int DEFSTEP = 0;
+    int DEFTYPE = KEYCODE;
 
     /**
      * 获取当前功能标记
