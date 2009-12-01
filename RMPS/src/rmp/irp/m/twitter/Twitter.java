@@ -14,7 +14,7 @@ import cons.irp.ConsEnv;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import rmp.irp.comn.Step;
+import rmp.irp.comn.Process;
 import com.amonsoft.util.LogUtil;
 import twitter4j.DirectMessage;
 import twitter4j.Query;
@@ -49,6 +49,24 @@ public class Twitter implements IService
     }
 
     @Override
+    public int getCode()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String getName()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String getDescription()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
     public void doInit(ISession session, IMessage message)
     {
         String msg = "选择您要进行的操作：";
@@ -71,7 +89,7 @@ public class Twitter implements IService
     public void doDeal(ISession session, IMessage message)
     {
         // 判断用户会话信息是否存在
-        Step step = (Step) session.getAttribute(ConsEnv.SESSION);
+        Process step = (Process) session.getAttribute(ConsEnv.SESSION);
         if (step == null)
         {
             return;

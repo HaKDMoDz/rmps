@@ -84,8 +84,8 @@ public class Live extends MsnAdapter implements IAccount
                 messenger.addListener(this);
                 messenger.login();
                 messenger.getOwner().setInitStatus(MsnUserStatus.ONLINE);
-                messenger.getOwner().setDisplayName("小木");
-                messenger.getOwner().getDisplayName();
+//                messenger.getOwner().setDisplayName("小木");
+//                messenger.getOwner().getDisplayName();
                 break;
             case IStatus.DOWN:
                 messenger.logout();

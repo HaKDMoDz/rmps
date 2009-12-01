@@ -13,15 +13,12 @@ import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.rmps.irp.b.ISession;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import rmp.irp.m.root.Root;
 import com.amonsoft.util.LogUtil;
+import java.util.Iterator;
 import rmp.util.StringUtil;
 
 /**
@@ -37,8 +34,9 @@ public class Control implements IControl
 {
     private static Control control;
     private static Properties command;
-    private static HashMap<String, IService> services;
+    private static HashMap<Integer, IService> services;
     private static Pattern keyReg;
+    private static Pattern numReg;
 
     private Control()
     {
@@ -48,22 +46,40 @@ public class Control implements IControl
     {
         try
         {
+            // 提供服务加载
+            services = new HashMap<Integer, IService>();
             command = new Properties();
+            command.loadFromXML(new FileInputStream("dat/60000000/irp/irp.xml"));
+            Iterator<String> sets = command.stringPropertyNames().iterator();
+            String key;
+            Object obj;
+            while (sets.hasNext())
+            {
+                key = sets.next();
+                obj = Class.forName(command.getProperty(key)).newInstance();
+                if (obj instanceof IService)
+                {
+                    services.put(Integer.parseInt(key), (IService) obj);
+                }
+            }
+
+            // 系统命令加载
+            command.clear();
             command.loadFromXML(new FileInputStream("cfg/50000000.xml"));
 
+            // 正则表达式
             StringBuffer reg = new StringBuffer("^[");
-            Enumeration<?> enums = command.propertyNames();
-            while (enums.hasMoreElements())
+            sets = command.stringPropertyNames().iterator();
+            while (sets.hasNext())
             {
-                reg.append(enums.nextElement());
+                reg.append(sets.next());
             }
             keyReg = Pattern.compile(reg.append("]{1,2}$").toString());
-
-            services = new HashMap<String, IService>();
+            numReg = Pattern.compile("^\\d*[０１２３４５６７８９]*$");
         }
-        catch (IOException ex)
+        catch (Exception exp)
         {
-            Logger.getLogger(Control.class.getName()).log(Level.SEVERE, null, ex);
+            LogUtil.exception(exp);
         }
     }
 
@@ -111,17 +127,25 @@ public class Control implements IControl
             return;
         }
 
-        IProcess step = session.getProcess();
-        if (step.getType() == IProcess.KEYCODE)
+        // 判断是否为管理人员
+        boolean root = "amon.wk@live.com".equalsIgnoreCase(session.getContact().getEmail());
+        // 管理人员处理方式
+        if (root)
+        {
+            IService service = services.get(00000000);
+            if (service == null)
+            {
+                service = new Root();
+            }
+            service.doDeal(session, message);
+        }
+
+        IProcess process = session.getProcess();
+        if (process.getType() == IProcess.KEYCODE)
         {
             if (!keyReg.matcher(msg.trim()).matches())
             {
-                return;
-            }
-            // 空白信息
-            if (msg.trim().length() < 1)
-            {
-                session.send("空白信息。。。");
+                showHelp(session);
                 return;
             }
             msg = command.getProperty(msg, "");
@@ -146,16 +170,11 @@ public class Control implements IControl
             {
                 return;
             }
-        }
 
-        if ("amon.wk@live.com".equalsIgnoreCase(session.getContact().getEmail()))
-        {
-            IService service = services.get("");
-            if (service == null)
+            // 用户选择功能
+            if (numReg.matcher(msg).matches())
             {
-                service = new Root();
             }
-            service.doDeal(session, message);
         }
 
         // 具体功能分析
@@ -262,6 +281,16 @@ public class Control implements IControl
     {
         StringBuffer msg = new StringBuffer();
         appendPath(session, msg);
+        msg.append("1、我的应用").append(session.netLine());
+        msg.append("2、生活服务").append(session.netLine());
+        msg.append("3、网络工具").append(session.netLine());
+        msg.append("4、信息检索").append(session.netLine());
+        msg.append("5、休闲娱乐").append(session.netLine());
+        msg.append("6、财务证券").append(session.netLine());
+        msg.append("7、新闻资讯").append(session.netLine());
+        msg.append("8、").append(session.netLine());
+        msg.append("9、").append(session.netLine());
+        msg.append("0、配置管理").append(session.netLine());
         appendCopy(session, msg);
         session.send(msg.toString());
     }
@@ -274,6 +303,14 @@ public class Control implements IControl
      */
     private StringBuffer appendPath(ISession session, StringBuffer message)
     {
+        IProcess process = session.getProcess();
+        message.append('/').append(process.getStep()).append(':');
+        IService service = services.get(process.getFunc());
+        if (service != null)
+        {
+            message.append(service.getName());
+        }
+        message.append(session.netLine()).append("------------------------------").append(session.netLine());
         return message;
     }
 

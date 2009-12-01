@@ -53,7 +53,7 @@ public abstract class ASession implements ISession
     {
         if (process == null)
         {
-            process = new Step();
+            process = new Process();
         }
         return process;
     }

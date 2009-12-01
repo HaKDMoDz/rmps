@@ -19,7 +19,7 @@ import com.amonsoft.rmps.irp.b.IProcess;
  * </ul>
  * @author Amon
  */
-public class Step implements IProcess
+public class Process implements IProcess
 {
     private int func;
     private int step;

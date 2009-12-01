@@ -30,6 +30,24 @@ import cons.irp.a.ConstUI;
 public class Weather implements IService
 {
     @Override
+    public int getCode()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String getName()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String getDescription()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
     public void doInit(ISession session, IMessage message)
     {
         throw new UnsupportedOperationException("Not supported yet.");

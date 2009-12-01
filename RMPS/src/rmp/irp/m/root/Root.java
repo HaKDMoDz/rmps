@@ -29,6 +29,24 @@ public class Root implements IService
     }
 
     @Override
+    public int getCode()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String getName()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String getDescription()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
     public void doInit(ISession session, IMessage message)
     {
     }
