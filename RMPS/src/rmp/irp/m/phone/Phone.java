@@ -19,9 +19,14 @@ import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.util.LogUtil;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import rmp.irp.c.Control;
 import rmp.util.StringUtil;
@@ -40,18 +45,32 @@ import rmp.util.StringUtil;
 public class Phone implements IService
 {
     private static Properties ipCfg;
-    private static Pattern v4Ptn;
+    private static Pattern phone;
 
     @Override
     public boolean wInit()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try
+        {
+            ipCfg = new Properties();
+            ipCfg.loadFromXML(new FileInputStream(new File("cfg", getCode() + ".xml")));
+
+            phone = Pattern.compile("^1[3|5|8][0-9]\\d{4,8}$/");
+
+            LogUtil.log(getName() + " 初始化成功！");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(Phone.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 
     @Override
-    public int getCode()
+    public String getCode()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "phone";
     }
 
     @Override
@@ -84,8 +103,60 @@ public class Phone implements IService
         try
         {
             String key = message.getContent();
+            StringBuffer msg = new StringBuffer();
+
             // 地址校验
-            if (!v4Ptn.matcher(key).matches())
+            if (!phone.matcher(key).matches())
+            {
+                Control.appendPath(session, msg);
+                msg.append("请输入11位手机号码或其前7位！");
+                Control.appendCopy(session, msg);
+                session.send(msg.toString());
+                return;
+            }
+
+            // 链接地址初始化
+            URL url = new URL(ipCfg.getProperty("path") + '?' + StringUtil.format(ipCfg.getProperty("args"), key));
+            URLConnection conn = url.openConnection();
+            conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
+            conn.setUseCaches(false);
+            conn.setDoInput(true);
+
+            // 读取返回结果
+            DataInputStream dis = new DataInputStream(conn.getInputStream());
+            byte d[] = new byte[dis.available()];
+            dis.read(d);
+            String data = new String(d, "gb2312");
+
+            // 结果信息格式化
+            String[] temp = data.split("'");
+            Control.appendPath(session, msg);
+            msg.append("号码段：").append(temp[1]).append(session.newLine());
+            msg.append("归属地：").append(temp[3]).append(' ').append(temp[5]).append(session.newLine());
+            msg.append("卡类型：").append(temp[7]).append(session.newLine());
+            msg.append("区　号：").append(temp[9]).append(session.newLine());
+            Control.appendCopy(session, msg);
+
+            // 发送结果信息
+            session.send(msg.toString());
+
+            // 设置下一次操作状态
+            IProcess process = session.getProcess();
+            process.setType(IProcess.CONTENT);
+        }
+        catch (Exception exp)
+        {
+            LogUtil.exception(exp);
+        }
+    }
+
+    public void dd(ISession session, IMessage message)
+    {
+        try
+        {
+            String key = message.getContent();
+            // 地址校验
+            if (!phone.matcher(key).matches())
             {
                 session.send("您输入的IP地址不是一个合适的IPV4地址，请重新输入！");
                 return;

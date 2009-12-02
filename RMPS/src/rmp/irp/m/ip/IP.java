@@ -13,6 +13,7 @@ import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.util.LogUtil;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.net.URL;
 import java.net.URLConnection;
@@ -46,7 +47,7 @@ public class IP implements IService
         try
         {
             ipCfg = new Properties();
-            ipCfg.loadFromXML(new FileInputStream("cfg/ip.xml"));
+            ipCfg.loadFromXML(new FileInputStream(new File("cfg", getCode() + ".xml")));
 
             v4Ptn = Pattern.compile("(?<![\\d\\.])((25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)\\.){3}(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)(?![\\d\\.])");
 
@@ -61,9 +62,9 @@ public class IP implements IService
     }
 
     @Override
-    public int getCode()
+    public String getCode()
     {
-        return 0;
+        return "ip";
     }
 
     @Override

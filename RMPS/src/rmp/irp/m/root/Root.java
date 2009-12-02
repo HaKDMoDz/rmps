@@ -37,7 +37,7 @@ public class Root implements IService
     }
 
     @Override
-    public int getCode()
+    public String getCode()
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }

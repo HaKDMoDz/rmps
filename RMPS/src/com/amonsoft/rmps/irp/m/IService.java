@@ -24,7 +24,7 @@ public interface IService
 {
     boolean wInit();
 
-    int getCode();
+    String getCode();
 
     String getName();
 
