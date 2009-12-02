@@ -43,7 +43,7 @@ public abstract class ASession implements ISession
     }
 
     @Override
-    public String netLine()
+    public String newLine()
     {
         return "\n";
     }

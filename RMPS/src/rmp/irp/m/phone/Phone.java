@@ -117,10 +117,10 @@ public class Phone implements IService
             String[] temp = data.split("\"");
             StringBuffer msg = new StringBuffer();
             Control.appendPath(session, msg);
-            msg.append("IP地址：").append(temp[1]).append(session.netLine());
-            msg.append("国　家：").append(temp[3]).append(session.netLine());
-            msg.append("地　区：").append(temp[5]).append(session.netLine());
-            msg.append("运营商：").append(temp[9]).append(session.netLine());
+            msg.append("IP地址：").append(temp[1]).append(session.newLine());
+            msg.append("国　家：").append(temp[3]).append(session.newLine());
+            msg.append("地　区：").append(temp[5]).append(session.newLine());
+            msg.append("运营商：").append(temp[9]).append(session.newLine());
             Control.appendCopy(session, msg);
 
             // 发送结果信息

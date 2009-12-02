@@ -55,7 +55,7 @@ public class Session extends ASession
     }
 
     @Override
-    public String netLine()
+    public String newLine()
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }

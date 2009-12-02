@@ -52,7 +52,7 @@ public interface ISession
      * 获取不同消息中新行信息
      * @return
      */
-    String netLine();
+    String newLine();
 
     /**
      * 获取会话联系人

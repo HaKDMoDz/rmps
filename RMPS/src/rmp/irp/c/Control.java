@@ -277,17 +277,17 @@ public class Control implements IControl
     {
         StringBuffer msg = new StringBuffer();
         appendPath(session, msg);
-        msg.append("1:").append(session.netLine());
-        msg.append("2:").append(session.netLine());
-        msg.append("3:").append(session.netLine());
-        msg.append("4:").append(session.netLine());
-        msg.append("5:").append(session.netLine());
-        msg.append("6:").append(session.netLine());
-        msg.append("7:").append(session.netLine());
-        msg.append("8:").append(session.netLine());
-        msg.append("9:").append(session.netLine());
-        msg.append("0:使用帮助").append(session.netLine());
-        msg.append(session.netLine());
+        msg.append("1:").append(session.newLine());
+        msg.append("2:").append(session.newLine());
+        msg.append("3:").append(session.newLine());
+        msg.append("4:").append(session.newLine());
+        msg.append("5:").append(session.newLine());
+        msg.append("6:").append(session.newLine());
+        msg.append("7:").append(session.newLine());
+        msg.append("8:").append(session.newLine());
+        msg.append("9:").append(session.newLine());
+        msg.append("0:使用帮助").append(session.newLine());
+        msg.append(session.newLine());
 
         session.send(appendCopy(session, msg).toString());
     }
@@ -317,16 +317,16 @@ public class Control implements IControl
     {
         StringBuffer msg = new StringBuffer();
         appendPath(session, msg);
-        msg.append("1、我的应用").append(session.netLine());
-        msg.append("2、生活服务").append(session.netLine());
-        msg.append("3、网络工具").append(session.netLine());
-        msg.append("4、信息检索").append(session.netLine());
-        msg.append("5、休闲娱乐").append(session.netLine());
-        msg.append("6、财务证券").append(session.netLine());
-        msg.append("7、新闻资讯").append(session.netLine());
-        msg.append("8、").append(session.netLine());
-        msg.append("9、").append(session.netLine());
-        msg.append("0、配置管理").append(session.netLine());
+        msg.append("1、我的应用").append(session.newLine());
+        msg.append("2、生活服务").append(session.newLine());
+        msg.append("3、网络工具").append(session.newLine());
+        msg.append("4、信息检索").append(session.newLine());
+        msg.append("5、休闲娱乐").append(session.newLine());
+        msg.append("6、财务证券").append(session.newLine());
+        msg.append("7、新闻资讯").append(session.newLine());
+        msg.append("8、").append(session.newLine());
+        msg.append("9、").append(session.newLine());
+        msg.append("0、配置管理").append(session.newLine());
         appendCopy(session, msg);
         session.send(msg.toString());
     }
@@ -346,8 +346,8 @@ public class Control implements IControl
         {
             message.append(service.getName());
         }
-        message.append(session.netLine()).append("------------------------------");
-        message.append(session.netLine()).append(session.netLine());
+        message.append(session.newLine()).append("------------------------------");
+        message.append(session.newLine()).append(session.newLine());
         return message;
     }
 
@@ -359,8 +359,8 @@ public class Control implements IControl
      */
     public static StringBuffer appendCopy(ISession session, StringBuffer message)
     {
-        message.append(session.netLine()).append("------------------------------");
-        message.append(session.netLine()).append("© Amonsoft @ http://amonsoft.cn/");
+        message.append(session.newLine()).append("------------------------------");
+        message.append(session.newLine()).append("© Amonsoft @ http://amonsoft.cn/");
         return message;
     }
 }
