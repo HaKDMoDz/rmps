@@ -12,13 +12,13 @@ import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.rmps.irp.b.ISession;
+import com.amonsoft.util.LogUtil;
 import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.regex.Pattern;
-import rmp.irp.m.root.Root;
-import com.amonsoft.util.LogUtil;
 import java.util.Iterator;
+import rmp.irp.m.root.Root;
 import rmp.util.StringUtil;
 
 /**
@@ -53,15 +53,22 @@ public class Control implements IControl
             Iterator<String> sets = command.stringPropertyNames().iterator();
             String key;
             Object obj;
+            IService ims;
             while (sets.hasNext())
             {
                 key = sets.next();
                 obj = Class.forName(command.getProperty(key)).newInstance();
                 if (obj instanceof IService)
                 {
-                    services.put(Integer.parseInt(key), (IService) obj);
+                    ims = (IService) obj;
+                    if (ims.wInit())
+                    {
+                        services.put(Integer.parseInt(key), ims);
+                    }
                 }
             }
+
+            LogUtil.log("IM支持服务加载成功！");
 
             // 系统命令加载
             command.clear();
@@ -76,6 +83,8 @@ public class Control implements IControl
             }
             keyReg = Pattern.compile(reg.append("]{1,2}$").toString());
             numReg = Pattern.compile("^\\d*[０１２３４５６７８９]*$");
+
+            LogUtil.log("IM服务初始化成功！");
         }
         catch (Exception exp)
         {
@@ -169,7 +178,7 @@ public class Control implements IControl
             // 使用帮助
             if ("?".equals(msg))
             {
-                showHelp(session);
+                services.get(process.getFunc()).doHelp(session, message);
                 return;
             }
             // 问题汇报
@@ -191,13 +200,16 @@ public class Control implements IControl
             // 用户选择功能
             if (numReg.matcher(msg).matches())
             {
-                int step = process.getFunc();
-                step |= Integer.parseInt(msg);
+//                int step = process.getFunc();
+//                step |= Integer.parseInt(msg);
+                process.setFunc(Integer.parseInt(msg));
+                services.get(process.getFunc()).doInit(session, message);
+                return;
             }
         }
 
-        // 具体功能分析
-        session.send(message);
+        // 提供具体的服务
+        services.get(process.getFunc()).doDeal(session, message);
     }
 
     @Override
@@ -292,6 +304,11 @@ public class Control implements IControl
         LogUtil.log("contactLeaveSwitchboard:");
     }
 
+    @Override
+    public void exceptionCaught(ISession session)
+    {
+    }
+
     /**
      * 显示使用帮助
      * @param session
@@ -320,7 +337,7 @@ public class Control implements IControl
      * @param message
      * @return
      */
-    private StringBuffer appendPath(ISession session, StringBuffer message)
+    public static StringBuffer appendPath(ISession session, StringBuffer message)
     {
         IProcess process = session.getProcess();
         message.append('/').append(process.getStep()).append(':');
@@ -329,7 +346,8 @@ public class Control implements IControl
         {
             message.append(service.getName());
         }
-        message.append(session.netLine()).append("------------------------------").append(session.netLine());
+        message.append(session.netLine()).append("------------------------------");
+        message.append(session.netLine()).append(session.netLine());
         return message;
     }
 
@@ -339,16 +357,10 @@ public class Control implements IControl
      * @param message
      * @return
      */
-    public StringBuffer appendCopy(ISession session, StringBuffer message)
+    public static StringBuffer appendCopy(ISession session, StringBuffer message)
     {
         message.append(session.netLine()).append("------------------------------");
         message.append(session.netLine()).append("@ Amonsoft http://amonsoft.cn/");
         return message;
-    }
-
-    @Override
-    public void exceptionCaught(ISession session)
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

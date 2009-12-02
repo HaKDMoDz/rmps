@@ -22,12 +22,14 @@ import com.amonsoft.rmps.irp.b.IMessage;
  */
 public interface IService
 {
+    boolean wInit();
+
     int getCode();
 
     String getName();
 
     String getDescription();
-    
+
     void doInit(ISession session, IMessage message);
 
     void doHelp(ISession session, IMessage message);

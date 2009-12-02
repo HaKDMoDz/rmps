@@ -10,6 +10,7 @@ package rmp.irp.m.facebook;
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.rmps.irp.b.ISession;
+import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>
@@ -22,6 +23,13 @@ import com.amonsoft.rmps.irp.b.ISession;
  */
 public class Facebook implements IService
 {
+    @Override
+    public boolean wInit()
+    {
+        LogUtil.log(getName() + " 初始化成功！");
+        return true;
+    }
+
     @Override
     public int getCode()
     {

@@ -30,6 +30,13 @@ import cons.irp.a.ConstUI;
 public class Weather implements IService
 {
     @Override
+    public boolean wInit()
+    {
+        LogUtil.log(getName() + " 初始化成功！");
+        return true;
+    }
+
+    @Override
     public int getCode()
     {
         throw new UnsupportedOperationException("Not supported yet.");

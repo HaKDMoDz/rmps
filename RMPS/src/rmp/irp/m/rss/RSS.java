@@ -30,7 +30,8 @@ import com.amonsoft.util.LogUtil;
  */
 public class RSS implements IService
 {
-    public void init()
+    @Override
+    public boolean wInit()
     {
         try
         {
@@ -75,10 +76,13 @@ public class RSS implements IService
                     }
                 }
             }
+            LogUtil.log(getName() + " 初始化成功！");
+            return true;
         }
         catch (Exception exp)
         {
             LogUtil.exception(exp);
+            return false;
         }
     }
 

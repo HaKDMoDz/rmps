@@ -43,7 +43,7 @@ import org.apache.http.util.EntityUtils;
  *
  * @author yihaodian
  */
-public class Http
+public class HttpUtil
 {
     public void get()
     {
@@ -123,14 +123,13 @@ public class Http
             }
             catch (IOException ex)
             {
-                Logger.getLogger(Http.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HttpUtil.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
-    public void post()
+    public void post(String path, int port, String args)
     {
-
         HttpParams params = new BasicHttpParams();
         HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
         HttpProtocolParams.setContentCharset(params, "UTF-8");
@@ -150,7 +149,7 @@ public class Http
 
         HttpContext context = new BasicHttpContext(null);
 
-        HttpHost host = new HttpHost("localhost", 8080);
+        HttpHost host = new HttpHost(path, port);
 
         DefaultHttpClientConnection conn = new DefaultHttpClientConnection();
         ConnectionReuseStrategy connStrategy = new DefaultConnectionReuseStrategy();
@@ -214,7 +213,7 @@ public class Http
             }
             catch (IOException ex)
             {
-                Logger.getLogger(Http.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HttpUtil.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

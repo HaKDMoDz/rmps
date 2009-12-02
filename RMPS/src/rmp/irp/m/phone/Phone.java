@@ -1,21 +1,26 @@
 /*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/*
  * Project:        RMPS
  * Compiler:       JDK1.6.0
  * CopyRight:      &copy; 2007 Amon &reg; Winshine ( Amon@amonsoft.cn / http://amonsoft.cn ).
  * Description:
- *
+ *    
  */
-package rmp.irp.m.ip;
+package rmp.irp.m.phone;
 
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
-import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.rmps.irp.b.ISession;
+import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.util.LogUtil;
 import java.io.DataInputStream;
-import java.io.FileInputStream;
+import java.io.DataOutputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.Properties;
 import java.util.regex.Pattern;
 import rmp.irp.c.Control;
@@ -25,69 +30,52 @@ import rmp.util.StringUtil;
  * <ul>
  * <li>功能说明：</li>
  * <br />
- * IP地址查询
+ * TODO:
  * <li>使用说明：</li>
  * <br />
+ * TODO:
  * </ul>
- * @author Amon
+ * @author yihaodian
  */
-public class IP implements IService
+public class Phone implements IService
 {
     private static Properties ipCfg;
     private static Pattern v4Ptn;
 
-    public IP()
-    {
-    }
-
     @Override
     public boolean wInit()
     {
-        try
-        {
-            ipCfg = new Properties();
-            ipCfg.loadFromXML(new FileInputStream("cfg/ip.xml"));
-
-            v4Ptn = Pattern.compile("(?<![\\d\\.])((25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)\\.){3}(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)(?![\\d\\.])");
-
-            LogUtil.log(getName() + " 初始化成功！");
-            return true;
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
-            return false;
-        }
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public int getCode()
     {
-        return 0;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public String getName()
     {
-        return "IP";
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public String getDescription()
     {
-        return "";
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void doInit(ISession session, IMessage message)
     {
-        session.send("Welcome to IP:");
-        session.getProcess().setType(IProcess.CONTENT);
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void doHelp(ISession session, IMessage message)
     {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -104,17 +92,26 @@ public class IP implements IService
             }
 
             // 链接地址初始化
-            URL url = new URL(ipCfg.getProperty("path") + '?' + StringUtil.format(ipCfg.getProperty("args"), key));
-            URLConnection conn = url.openConnection();
+            URL url = new URL(ipCfg.getProperty("path"));
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
             conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
-            conn.setUseCaches(false);
+            conn.setDoOutput(true);
             conn.setDoInput(true);
+
+            // 发送POST信息
+            DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
+            dos.write(StringUtil.format(ipCfg.getProperty("args"), key).getBytes());
+            dos.flush();
+            dos.close();
 
             // 读取返回结果
             DataInputStream dis = new DataInputStream(conn.getInputStream());
             byte d[] = new byte[dis.available()];
             dis.read(d);
             String data = new String(d, "gb2312");
+
+            conn.disconnect();
 
             // 结果信息格式化
             String[] temp = data.split("\"");

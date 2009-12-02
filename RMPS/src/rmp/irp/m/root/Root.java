@@ -11,6 +11,7 @@ import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.util.LogUtil;
 import rmp.irp.Irps;
 
 /**
@@ -26,6 +27,13 @@ public class Root implements IService
 {
     public Root()
     {
+    }
+
+    @Override
+    public boolean wInit()
+    {
+        LogUtil.log(getName() + " 初始化成功！");
+        return true;
     }
 
     @Override

@@ -35,6 +35,13 @@ public class Twitter implements IService
 {
     private twitter4j.Twitter messenger;
 
+    @Override
+    public boolean wInit()
+    {
+        LogUtil.log(getName() + " 初始化成功！");
+        return true;
+    }
+
     public void sign(int status)
     {
         try
