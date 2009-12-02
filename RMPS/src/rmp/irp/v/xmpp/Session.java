@@ -77,6 +77,11 @@ public class Session extends ASession
     }
 
     @Override
+    public void reset()
+    {
+    }
+
+    @Override
     public IContact getContact()
     {
         return null;

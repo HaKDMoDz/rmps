@@ -1,0 +1,86 @@
+2009-12-2 11:31:17	loginCompleted.
+2009-12-2 11:31:17	IP 初始化成功！
+2009-12-2 11:31:17	IM支持服务加载成功！
+2009-12-2 11:31:17	IM服务初始化成功！
+2009-12-2 11:31:17	systemMessageReceived:null
+2009-12-2 11:31:17	exceptionCaught:java.lang.NullPointerException
+2009-12-2 11:31:18	contactListSyncCompleted.
+2009-12-2 11:31:18	ownerStatusChanged.
+2009-12-2 11:31:19	contactListInitCompleted.
+2009-12-2 11:31:19	contactStatusChanged from amonsoft@live.com
+2009-12-2 11:31:19	contactStatusChanged from amonsoft@live.com
+2009-12-2 11:31:19	contactStatusChanged from amon.hm@live.com
+2009-12-2 11:31:19	contactStatusChanged from amon.hm@live.com
+2009-12-2 11:31:19	contactStatusChanged from amon.rg@live.com
+2009-12-2 11:31:19	contactStatusChanged from amon.rg@live.com
+2009-12-2 11:31:20	contactStatusChanged from amon.wk@live.com
+2009-12-2 11:31:20	contactStatusChanged from amon.wk@live.com
+2009-12-2 11:31:30	contactStatusChanged from amon.wk@live.com
+2009-12-2 11:31:40	contactStatusChanged from amon.wk@live.com
+2009-12-2 11:31:40	contactStatusChanged from amon.wk@live.com
+2009-12-2 11:32:02	switchboardStarted.
+2009-12-2 11:32:02	instantMessageReceived from amon.wk@live.com:ko
+2009-12-2 11:32:18	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 11:32:18	exceptionCaught:java.lang.NullPointerException
+2009-12-2 11:32:19	instantMessageReceived from amon.wk@live.com:222.73.115.178
+2009-12-2 11:32:30	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 11:32:30	exceptionCaught:java.lang.NullPointerException
+2009-12-2 11:32:30	instantMessageReceived from amon.wk@live.com:9
+2009-12-2 11:32:36	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 11:32:36	exceptionCaught:java.lang.NullPointerException
+2009-12-2 11:32:38	instantMessageReceived from amon.wk@live.com:222.73.115.178
+2009-12-2 11:32:56	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 11:32:56	exceptionCaught:java.lang.NullPointerException
+2009-12-2 11:32:59	instantMessageReceived from amon.wk@live.com:127.0.0.1
+2009-12-2 11:33:02	contactLeaveSwitchboard from amon.wk@live.com
+2009-12-2 11:33:02	switchboardClosed.
+2009-12-2 11:33:27	switchboardStarted.
+2009-12-2 11:33:27	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 11:33:27	exceptionCaught:java.lang.NullPointerException
+2009-12-2 11:33:28	instantMessageReceived from amon.wk@live.com:127.0.0.1
+2009-12-2 11:38:39	switchboardClosed.
+2009-12-2 12:00:11	contactStatusChanged from amon.wk@live.com
+2009-12-2 12:43:04	contactStatusChanged from amon.wk@live.com
+2009-12-2 12:44:46	switchboardStarted.
+2009-12-2 12:44:46	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 12:44:46	exceptionCaught:java.lang.NullPointerException
+2009-12-2 12:44:48	instantMessageReceived from amon.wk@live.com:127.0.0.1
+2009-12-2 12:44:59	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 12:44:59	exceptionCaught:java.lang.NullPointerException
+2009-12-2 12:45:01	instantMessageReceived from amon.wk@live.com:192.18.0.1
+2009-12-2 12:45:12	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 12:45:12	exceptionCaught:java.lang.NullPointerException
+2009-12-2 12:45:14	instantMessageReceived from amon.wk@live.com:192.0.0.1
+2009-12-2 12:46:21	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 12:46:21	exceptionCaught:java.lang.NullPointerException
+2009-12-2 12:46:23	instantMessageReceived from amon.wk@live.com:60.23
+2009-12-2 12:48:10	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 12:48:10	exceptionCaught:java.lang.NullPointerException
+2009-12-2 12:48:13	instantMessageReceived from amon.wk@live.com:52.30.10.30
+2009-12-2 12:48:23	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 12:48:23	exceptionCaught:java.lang.NullPointerException
+2009-12-2 12:48:25	instantMessageReceived from amon.wk@live.com:51.30.10.30
+2009-12-2 12:48:37	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 12:48:37	exceptionCaught:java.lang.NullPointerException
+2009-12-2 12:48:38	instantMessageReceived from amon.wk@live.com:50.30.10.30
+2009-12-2 12:48:45	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 12:48:45	exceptionCaught:java.lang.NullPointerException
+2009-12-2 12:48:45	instantMessageReceived from amon.wk@live.com:53.30.10.30
+2009-12-2 12:48:53	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 12:48:53	exceptionCaught:java.lang.NullPointerException
+2009-12-2 12:48:53	instantMessageReceived from amon.wk@live.com:66.30.10.30
+2009-12-2 12:51:03	instantMessageReceived from amon.wk@live.com:~
+2009-12-2 12:52:20	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 12:52:20	exceptionCaught:java.lang.NullPointerException
+2009-12-2 12:52:22	instantMessageReceived from amon.wk@live.com:66.66.66.66
+2009-12-2 12:52:29	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 12:52:29	exceptionCaught:java.lang.NullPointerException
+2009-12-2 12:52:32	instantMessageReceived from amon.wk@live.com:166.66.66.66
+2009-12-2 12:52:52	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 12:52:52	exceptionCaught:java.lang.NullPointerException
+2009-12-2 12:52:53	instantMessageReceived from amon.wk@live.com:220.181.31.8
+2009-12-2 12:53:05	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 12:53:05	exceptionCaught:java.lang.NullPointerException
+2009-12-2 12:53:06	instantMessageReceived from amon.wk@live.com:exit
+2009-12-2 12:53:06	switchboardClosed.
+2009-12-2 12:53:06	logout.

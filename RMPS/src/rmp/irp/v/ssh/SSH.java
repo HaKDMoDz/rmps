@@ -8,12 +8,9 @@
 package rmp.irp.v.ssh;
 
 import com.amonsoft.rmps.irp.b.IContact;
-import com.amonsoft.rmps.irp.b.IMessage;
-import com.amonsoft.rmps.irp.b.IMimeMessage;
-
-import java.io.File;
-
-import rmp.irp.comn.ASession;
+import com.amonsoft.rmps.irp.v.IAccount;
+import com.amonsoft.rmps.irp.v.IConnect;
+import java.util.List;
 
 /**
  * <ul>
@@ -24,52 +21,34 @@ import rmp.irp.comn.ASession;
  * </ul>
  * @author Amon
  */
-public class SSH extends ASession
+public class SSH implements IAccount
 {
     @Override
-    public void send()
+    public void exit()
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void send(String message)
+    public void sign(int status)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void send(IMessage message)
+    public IConnect getConnect()
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void send(IMimeMessage message)
+    public IContact getContact(String user)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void send(File file)
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public IContact getContact()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public IMessage createMessage()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public IMimeMessage createMimeMessage()
+    public List<IContact> getContact()
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }

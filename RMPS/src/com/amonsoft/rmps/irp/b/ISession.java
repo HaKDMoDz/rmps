@@ -49,6 +49,11 @@ public interface ISession
     void send(java.io.File file);
 
     /**
+     * 重置Session
+     */
+    void reset();
+
+    /**
      * 获取不同消息中新行信息
      * @return
      */

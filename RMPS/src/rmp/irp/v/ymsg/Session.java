@@ -76,6 +76,11 @@ public class Session extends ASession
     }
 
     @Override
+    public void reset()
+    {
+    }
+
+    @Override
     public String newLine()
     {
         throw new UnsupportedOperationException("Not supported yet.");
