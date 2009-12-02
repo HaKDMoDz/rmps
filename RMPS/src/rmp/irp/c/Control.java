@@ -360,7 +360,7 @@ public class Control implements IControl
     public static StringBuffer appendCopy(ISession session, StringBuffer message)
     {
         message.append(session.netLine()).append("------------------------------");
-        message.append(session.netLine()).append("@ Amonsoft http://amonsoft.cn/");
+        message.append(session.netLine()).append("© Amonsoft @ http://amonsoft.cn/");
         return message;
     }
 }

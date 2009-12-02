@@ -96,10 +96,15 @@ public class IP implements IService
         try
         {
             String key = message.getContent();
+            StringBuffer msg = new StringBuffer();
+
             // 地址校验
             if (!v4Ptn.matcher(key).matches())
             {
-                session.send("您输入的IP地址不是一个合适的IPV4地址，请重新输入！");
+                Control.appendPath(session, msg);
+                msg.append("您输入的IP地址不是一个合适的IPV4地址，请重新输入！");
+                Control.appendCopy(session, msg);
+                session.send(msg.toString());
                 return;
             }
 
@@ -118,7 +123,6 @@ public class IP implements IService
 
             // 结果信息格式化
             String[] temp = data.split("\"");
-            StringBuffer msg = new StringBuffer();
             Control.appendPath(session, msg);
             msg.append("IP地址：").append(temp[1]).append(session.netLine());
             msg.append("国　家：").append(temp[3]).append(session.netLine());
