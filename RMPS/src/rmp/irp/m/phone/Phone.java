@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * Project:        RMPS
  * Compiler:       JDK1.6.0
  * CopyRight:      &copy; 2007 Amon &reg; Winshine ( Amon@amonsoft.cn / http://amonsoft.cn ).
@@ -25,8 +20,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import rmp.irp.c.Control;
 import rmp.util.StringUtil;
@@ -44,7 +37,7 @@ import rmp.util.StringUtil;
  */
 public class Phone implements IService
 {
-    private static Properties ipCfg;
+    private static Properties isCfg;
     private static Pattern phone;
 
     @Override
@@ -52,17 +45,17 @@ public class Phone implements IService
     {
         try
         {
-            ipCfg = new Properties();
-            ipCfg.loadFromXML(new FileInputStream(new File("cfg", getCode() + ".xml")));
+            isCfg = new Properties();
+            isCfg.loadFromXML(new FileInputStream(new File("cfg", getCode() + ".xml")));
 
-            phone = Pattern.compile("^1[3|5|8][0-9]\\d{4,8}$/");
+            phone = Pattern.compile("^1[3|5|8][0-9]\\d{4,8}$");
 
             LogUtil.log(getName() + " 初始化成功！");
             return true;
         }
-        catch (Exception ex)
+        catch (Exception exp)
         {
-            Logger.getLogger(Phone.class.getName()).log(Level.SEVERE, null, ex);
+            LogUtil.exception(exp);
             return false;
         }
     }
@@ -76,19 +69,20 @@ public class Phone implements IService
     @Override
     public String getName()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "Phone";
     }
 
     @Override
     public String getDescription()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "Phone";
     }
 
     @Override
     public void doInit(ISession session, IMessage message)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        session.send("Welcome to Phone:");
+        session.getProcess().setType(IProcess.CONTENT);
     }
 
     @Override
@@ -116,7 +110,7 @@ public class Phone implements IService
             }
 
             // 链接地址初始化
-            URL url = new URL(ipCfg.getProperty("path") + '?' + StringUtil.format(ipCfg.getProperty("args"), key));
+            URL url = new URL(isCfg.getProperty("path") + '?' + StringUtil.format(isCfg.getProperty("args"), key));
             URLConnection conn = url.openConnection();
             conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
             conn.setUseCaches(false);
@@ -163,7 +157,7 @@ public class Phone implements IService
             }
 
             // 链接地址初始化
-            URL url = new URL(ipCfg.getProperty("path"));
+            URL url = new URL(isCfg.getProperty("path"));
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
@@ -172,7 +166,7 @@ public class Phone implements IService
 
             // 发送POST信息
             DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-            dos.write(StringUtil.format(ipCfg.getProperty("args"), key).getBytes());
+            dos.write(StringUtil.format(isCfg.getProperty("args"), key).getBytes());
             dos.flush();
             dos.close();
 

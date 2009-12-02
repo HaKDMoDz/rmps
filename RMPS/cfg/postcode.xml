@@ -2,7 +2,6 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
     <comment/>
-    <entry key="8">rmp.irp.m.phone.Phone</entry>
-    <entry key="9">rmp.irp.m.ip.IP</entry>
+    <entry key="path">http://php.tech.sina.com.cn/iframe/download/download_srv.php</entry>
+    <entry key="args">action=bst_postcode&amp;city={0}</entry>
 </properties>
-    

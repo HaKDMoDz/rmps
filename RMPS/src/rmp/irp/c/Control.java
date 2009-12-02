@@ -150,7 +150,7 @@ public class Control implements IControl
         }
 
         IProcess process = session.getProcess();
-        if (process.getType() == IProcess.KEYCODE)
+        if (process.getType() >= IProcess.KEYCODE)
         {
             if (!keyReg.matcher(msg.trim()).matches())
             {

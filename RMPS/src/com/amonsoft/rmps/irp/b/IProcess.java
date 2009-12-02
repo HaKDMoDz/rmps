@@ -19,8 +19,17 @@ package com.amonsoft.rmps.irp.b;
  */
 public interface IProcess
 {
+    /**
+     * 功能切换关键字
+     */
     int KEYCODE = 0;
+    /**
+     * 命令执行文本
+     */
     int COMMAND = 1;
+    /**
+     * 用户内容文本
+     */
     int CONTENT = 2;
     int DEFFUNC = 0x50000000;
     int DEFSTEP = 0;

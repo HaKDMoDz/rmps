@@ -3,5 +3,5 @@
 <properties>
     <comment/>
     <entry key="path">http://php.tech.sina.com.cn/iframe/download/download_srv.php</entry>
-    <entry key="args">action=bst_ms&code={0}</entry>
+    <entry key="args">action=bst_ms&amp;code={0}</entry>
 </properties>
