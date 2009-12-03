@@ -366,8 +366,8 @@ public class Control implements IControl
     public static StringBuffer appendPage(ISession session, StringBuffer message)
     {
         IProcess proc = session.getProcess();
-        message.append(session.newLine()).append("共 ").append(proc.getMost()).append(" 页，当前第 ");
-        message.append(proc.getStep() + 1).append(" 页，您可以使用<<、<、>或>>进行翻页查看。").append(session.newLine());
+        message.append(session.newLine()).append(StringUtil.format("第 {0}/{1} 页，", proc.getStep() + 1, proc.getMost()));
+        message.append("您可以使用<<、<、>或>>进行翻页查看。").append(session.newLine());
         return message;
     }
 }
