@@ -23,6 +23,7 @@ public class Process implements IProcess
     private int func;
     private int step;
     private int type;
+    private int most;
 
     Process()
     {
@@ -83,5 +84,25 @@ public class Process implements IProcess
     public void setType(int type)
     {
         this.type = type;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public int getMost()
+    {
+        return most;
+    }
+
+    /**
+     * 
+     * @param most
+     */
+    @Override
+    public void setMost(int most)
+    {
+        this.most = most;
     }
 }

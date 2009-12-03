@@ -84,3 +84,114 @@
 2009-12-2 12:53:06	instantMessageReceived from amon.wk@live.com:exit
 2009-12-2 12:53:06	switchboardClosed.
 2009-12-2 12:53:06	logout.
+2009-12-2 18:24:35	loginCompleted.
+2009-12-2 18:24:35	IP 初始化成功！
+2009-12-2 18:24:35	IM支持服务加载成功！
+2009-12-2 18:24:35	IM服务初始化成功！
+2009-12-2 18:24:35	systemMessageReceived:null
+2009-12-2 18:24:35	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:24:36	contactListSyncCompleted.
+2009-12-2 18:24:37	ownerStatusChanged.
+2009-12-2 18:24:37	contactStatusChanged from amon.wk@live.com
+2009-12-2 18:24:37	contactStatusChanged from amon.wk@live.com
+2009-12-2 18:24:37	contactListInitCompleted.
+2009-12-2 18:25:20	switchboardStarted.
+2009-12-2 18:25:21	instantMessageReceived from amon.wk@live.com:hi
+2009-12-2 18:25:22	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 18:25:22	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:25:23	instantMessageReceived from amon.wk@live.com:exit
+2009-12-2 18:25:23	switchboardClosed.
+2009-12-2 18:25:23	logout.
+2009-12-2 18:25:46	loginCompleted.
+2009-12-2 18:25:46	IP 初始化成功！
+2009-12-2 18:25:46	IM支持服务加载成功！
+2009-12-2 18:25:46	IM服务初始化成功！
+2009-12-2 18:25:46	systemMessageReceived:null
+2009-12-2 18:25:46	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:25:46	contactListSyncCompleted.
+2009-12-2 18:25:47	ownerStatusChanged.
+2009-12-2 18:25:47	contactStatusChanged from amon.wk@live.com
+2009-12-2 18:25:47	contactStatusChanged from amon.wk@live.com
+2009-12-2 18:25:47	contactListInitCompleted.
+2009-12-2 18:26:05	switchboardStarted.
+2009-12-2 18:26:06	instantMessageReceived from amon.wk@live.com:exit
+2009-12-2 18:26:06	switchboardClosed.
+2009-12-2 18:26:06	logout.
+2009-12-2 18:26:52	loginCompleted.
+2009-12-2 18:26:52	IP 初始化成功！
+2009-12-2 18:26:52	Phone 初始化成功！
+2009-12-2 18:26:52	IM支持服务加载成功！
+2009-12-2 18:26:52	IM服务初始化成功！
+2009-12-2 18:26:52	systemMessageReceived:null
+2009-12-2 18:26:52	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:26:53	contactListSyncCompleted.
+2009-12-2 18:26:53	ownerStatusChanged.
+2009-12-2 18:26:53	contactStatusChanged from amon.wk@live.com
+2009-12-2 18:26:53	contactStatusChanged from amon.wk@live.com
+2009-12-2 18:26:53	contactListInitCompleted.
+2009-12-2 18:27:21	switchboardStarted.
+2009-12-2 18:27:21	instantMessageReceived from amon.wk@live.com:hi
+2009-12-2 18:27:23	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 18:27:23	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:27:24	instantMessageReceived from amon.wk@live.com:8
+2009-12-2 18:27:27	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 18:27:27	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:27:28	instantMessageReceived from amon.wk@live.com:1880213
+2009-12-2 18:27:35	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 18:27:35	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:27:39	instantMessageReceived from amon.wk@live.com:1880213
+2009-12-2 18:27:45	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 18:27:45	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:27:49	instantMessageReceived from amon.wk@live.com:1358570
+2009-12-2 18:27:52	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 18:27:52	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:27:55	instantMessageReceived from amon.wk@live.com:13585709149
+2009-12-2 18:28:31	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 18:28:31	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:28:31	instantMessageReceived from amon.wk@live.com:exit
+2009-12-2 18:28:31	switchboardClosed.
+2009-12-2 18:28:31	logout.
+2009-12-2 18:29:00	loginCompleted.
+2009-12-2 18:29:00	IP 初始化成功！
+2009-12-2 18:29:00	Phone 初始化成功！
+2009-12-2 18:29:00	IM支持服务加载成功！
+2009-12-2 18:29:00	IM服务初始化成功！
+2009-12-2 18:29:00	systemMessageReceived:null
+2009-12-2 18:29:00	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:29:00	contactListSyncCompleted.
+2009-12-2 18:29:00	ownerStatusChanged.
+2009-12-2 18:29:01	contactStatusChanged from amon.wk@live.com
+2009-12-2 18:29:01	contactStatusChanged from amon.wk@live.com
+2009-12-2 18:29:01	contactListInitCompleted.
+2009-12-2 18:29:10	switchboardStarted.
+2009-12-2 18:29:10	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 18:29:10	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:29:10	instantMessageReceived from amon.wk@live.com:????
+2009-12-2 18:29:15	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 18:29:15	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:29:15	instantMessageReceived from amon.wk@live.com:8
+2009-12-2 18:29:18	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 18:29:18	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:29:20	instantMessageReceived from amon.wk@live.com:1880213
+2009-12-2 18:29:20	java.lang.ArrayIndexOutOfBoundsException: 3
+2009-12-2 18:29:32	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 18:29:32	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:29:35	instantMessageReceived from amon.wk@live.com:1358570
+2009-12-2 18:29:59	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 18:29:59	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:30:04	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 18:30:04	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:30:09	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 18:30:09	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:30:10	instantMessageReceived from amon.wk@live.com:1381804
+2009-12-2 18:31:11	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 18:31:11	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:31:12	instantMessageReceived from amon.wk@live.com:9
+2009-12-2 18:31:21	controlMessageReceived:text/x-msmsgscontrol
+2009-12-2 18:31:21	exceptionCaught:java.lang.NullPointerException
+2009-12-2 18:31:22	instantMessageReceived from amon.wk@live.com:..
+2009-12-2 18:36:22	switchboardClosed.
+2009-12-2 19:02:31	switchboardStarted.
+2009-12-2 19:02:31	instantMessageReceived from amon.wk@live.com:exit
+2009-12-2 19:02:31	switchboardClosed.
+2009-12-2 19:02:31	logout.

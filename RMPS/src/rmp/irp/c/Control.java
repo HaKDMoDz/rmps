@@ -150,14 +150,15 @@ public class Control implements IControl
         }
 
         IProcess process = session.getProcess();
-        if (process.getType() >= IProcess.KEYCODE)
+        msg = command.getProperty(msg, "");
+        if (msg.length() > 0 && msg.length() < 3)
         {
-            if (!keyReg.matcher(msg.trim()).matches())
-            {
-                showHelp(session);
-                return;
-            }
-            msg = command.getProperty(msg, "");
+//            if (!keyReg.matcher(msg.trim()).matches())
+//            {
+//                showHelp(session);
+//                return;
+//            }
+            //msg = command.getProperty(msg, "");
             // 上级目录
             if ("..".equals(msg))
             {
@@ -195,6 +196,30 @@ public class Control implements IControl
             if ("$".equals(msg))
             {
                 return;
+            }
+
+            if (">".equals(msg))
+            {
+                process.setStep(process.getStep() + 1);
+                process.setType(IProcess.COMMAND);
+            }
+
+            if ("<".equals(msg))
+            {
+                process.setStep(process.getStep() - 1);
+                process.setType(IProcess.COMMAND);
+            }
+
+            if (">>".equals(msg))
+            {
+                process.setStep(process.getMost() - 1);
+                process.setType(IProcess.COMMAND);
+            }
+
+            if ("<<".equals(msg))
+            {
+                process.setStep(0);
+                process.setType(IProcess.COMMAND);
             }
 
             // 用户选择功能
@@ -275,21 +300,11 @@ public class Control implements IControl
     @Override
     public void sessionOpened(ISession session)
     {
-        StringBuffer msg = new StringBuffer();
-        appendPath(session, msg);
-        msg.append("1:").append(session.newLine());
-        msg.append("2:").append(session.newLine());
-        msg.append("3:").append(session.newLine());
-        msg.append("4:").append(session.newLine());
-        msg.append("5:").append(session.newLine());
-        msg.append("6:").append(session.newLine());
-        msg.append("7:").append(session.newLine());
-        msg.append("8:").append(session.newLine());
-        msg.append("9:").append(session.newLine());
-        msg.append("0:使用帮助").append(session.newLine());
-        msg.append(session.newLine());
-
-        session.send(appendCopy(session, msg).toString());
+        IService serv = services.get(0);
+        if (serv != null)
+        {
+            serv.doInit(session, null);
+        }
     }
 
     @Override
@@ -307,28 +322,6 @@ public class Control implements IControl
     @Override
     public void exceptionCaught(ISession session)
     {
-    }
-
-    /**
-     * 显示使用帮助
-     * @param session
-     */
-    private void showHelp(ISession session)
-    {
-        StringBuffer msg = new StringBuffer();
-        appendPath(session, msg);
-        msg.append("1、我的应用").append(session.newLine());
-        msg.append("2、生活服务").append(session.newLine());
-        msg.append("3、网络工具").append(session.newLine());
-        msg.append("4、信息检索").append(session.newLine());
-        msg.append("5、休闲娱乐").append(session.newLine());
-        msg.append("6、财务证券").append(session.newLine());
-        msg.append("7、新闻资讯").append(session.newLine());
-        msg.append("8、").append(session.newLine());
-        msg.append("9、").append(session.newLine());
-        msg.append("0、配置管理").append(session.newLine());
-        appendCopy(session, msg);
-        session.send(msg.toString());
     }
 
     /**
@@ -361,6 +354,20 @@ public class Control implements IControl
     {
         message.append(session.newLine()).append("------------------------------");
         message.append(session.newLine()).append("© Amonsoft @ http://amonsoft.cn/");
+        return message;
+    }
+
+    /**
+     * 
+     * @param session
+     * @param message
+     * @return
+     */
+    public static StringBuffer appendPage(ISession session, StringBuffer message)
+    {
+        IProcess proc = session.getProcess();
+        message.append(session.newLine()).append("共 ").append(proc.getMost()).append(" 页，当前第 ");
+        message.append(proc.getStep() + 1).append(" 页，您可以使用<<、<、>或>>进行翻页查看。").append(session.newLine());
         return message;
     }
 }

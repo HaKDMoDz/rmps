@@ -54,4 +54,12 @@ public interface IProcess
     int getType();
 
     void setType(int type);
+
+    /**
+     * 最大操作步数
+     * @return
+     */
+    int getMost();
+
+    void setMost(int most);
 }
