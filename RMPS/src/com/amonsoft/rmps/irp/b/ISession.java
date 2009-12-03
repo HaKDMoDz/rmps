@@ -31,6 +31,11 @@ public interface ISession
     void send(String message);
 
     /**
+     * @param message
+     */
+    public void send(String message, boolean useCopy);
+
+    /**
      * 发送Message消息
      * @param message
      */

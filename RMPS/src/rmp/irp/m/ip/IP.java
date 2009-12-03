@@ -17,9 +17,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import rmp.irp.c.Control;
 import rmp.util.StringUtil;
 
 /**
@@ -36,6 +38,8 @@ public class IP implements IService
 {
     private static Properties isCfg;
     private static Pattern v4Ptn;
+    private static Pattern paPtn;
+    private static Pattern piPtn;
 
     public IP()
     {
@@ -50,6 +54,9 @@ public class IP implements IService
             isCfg.loadFromXML(new FileInputStream(new File("cfg", getCode() + ".xml")));
 
             v4Ptn = Pattern.compile("(?<![\\d\\.])((25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)\\.){3}(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)(?![\\d\\.])");
+
+            paPtn = Pattern.compile("(\\(\")(.*?)(\"\\))");
+            piPtn = Pattern.compile("\"(.*?)\"");
 
             LogUtil.log(getName() + " 初始化成功！");
             return true;
@@ -102,10 +109,7 @@ public class IP implements IService
             // 地址校验
             if (!v4Ptn.matcher(key).matches())
             {
-                Control.appendPath(session, msg);
-                msg.append("您输入的IP地址不是一个合适的IPV4地址，请重新输入！");
-                Control.appendCopy(session, msg);
-                session.send(msg.toString());
+                session.send("您输入的IP地址不是一个合适的IPV4地址，请重新输入！");
                 return;
             }
 
@@ -122,25 +126,48 @@ public class IP implements IService
             dis.read(d);
             String data = new String(d, "gb2312");
 
-            // 结果信息格式化
-            String[] temp = data.split("\"");
-            Control.appendPath(session, msg);
-            msg.append("IP地址：").append(temp[1]).append(session.newLine());
-            msg.append("国　家：").append(temp[3]).append(session.newLine());
-            msg.append("地　区：").append(temp[5]).append(session.newLine());
-            msg.append("运营商：").append(temp[9]).append(session.newLine());
-            Control.appendCopy(session, msg);
+            Matcher matcher = paPtn.matcher(data);
+            if (matcher.find())
+            {
+                // 发送结果信息
+                showData(session, msg, matcher.group());
 
-            // 发送结果信息
-            session.send(msg.toString());
-
-            // 设置下一次操作状态
-            IProcess process = session.getProcess();
-            process.setType(IProcess.CONTENT);
+                // 设置下一次操作状态
+                IProcess process = session.getProcess();
+                process.setType(IProcess.CONTENT);
+            }
+            else
+            {
+                session.send("");
+            }
         }
         catch (Exception exp)
         {
             LogUtil.exception(exp);
         }
+    }
+
+    private void showData(ISession session, StringBuffer message, String data)
+    {
+        List<String> list = new ArrayList<String>();
+        Matcher matcher = piPtn.matcher(data);
+        while (matcher.find())
+        {
+            list.add(matcher.group().replaceAll("^\"|\"$", ""));
+        }
+
+        if (list.size() != 5)
+        {
+            message.append("数据查询错误，请重试！");
+        }
+        else
+        {
+            // 结果信息格式化
+            message.append("IP地址：").append(list.get(1)).append(session.newLine());
+            message.append("国　家：").append(list.get(3)).append(session.newLine());
+            message.append("地　区：").append(list.get(5)).append(session.newLine());
+            message.append("运营商：").append(list.get(9)).append(session.newLine());
+        }
+        session.send(message.toString());
     }
 }

@@ -38,6 +38,12 @@ public class Session extends ASession
     }
 
     @Override
+    public void send(String message, boolean useCopy)
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
     public void send(IMessage message)
     {
         throw new UnsupportedOperationException("Not supported yet.");

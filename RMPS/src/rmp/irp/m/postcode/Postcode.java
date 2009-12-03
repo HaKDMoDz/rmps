@@ -114,7 +114,7 @@ public class Postcode implements IService
             // 地址校验
             if (!CheckUtil.isValidate(key))
             {
-                showTips(session, msg);
+                session.send("请输入您要查询的国家、地区或城市的名称或拼音！");
                 return;
             }
 
@@ -124,24 +124,20 @@ public class Postcode implements IService
                 List<String> list = (List<String>) session.getAttribute(getCode() + "_m");
                 if (list == null || list.size() < 1)
                 {
-                    showTips(session, msg);
+                    session.send("请输入您要查询的国家、地区或城市的名称或拼音！");
                     return;
                 }
 
                 step = proc.getStep();
                 if (step <= -1)
                 {
-                    Control.appendPath(session, msg);
-                    msg.append("已经是第一页！");
-                    Control.appendCopy(session, msg);
-                    session.send(msg.toString());
+                    session.send("已经是第一页！");
+                    proc.setStep(-1);
                 }
                 else if (step >= proc.getMost())
                 {
-                    Control.appendPath(session, msg);
-                    msg.append("已经是最后一页！");
-                    Control.appendCopy(session, msg);
-                    session.send(msg.toString());
+                    session.send("已经是最后一页！");
+                    proc.setStep(proc.getMost());
                 }
                 else
                 {
@@ -177,7 +173,7 @@ public class Postcode implements IService
 
                 if (list.size() < 1)
                 {
-                    showTips(session, msg);
+                    session.send("请输入您要查询的国家、地区或城市的名称或拼音！");
                 }
                 else
                 {
@@ -192,19 +188,6 @@ public class Postcode implements IService
         {
             LogUtil.exception(exp);
         }
-    }
-
-    /**
-     * 显示提示信息
-     * @param session
-     * @param message
-     */
-    private void showTips(ISession session, StringBuffer message)
-    {
-        Control.appendPath(session, message);
-        message.append("请输入您要查询的国家、地区或城市的名称或拼音！");
-        Control.appendCopy(session, message);
-        session.send(message.toString());
     }
 
     private void showData(ISession session, StringBuffer message, String data)

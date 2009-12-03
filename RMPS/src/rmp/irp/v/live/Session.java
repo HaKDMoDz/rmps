@@ -15,6 +15,7 @@ import net.sf.jml.MsnMessenger;
 import net.sf.jml.MsnSwitchboard;
 import net.sf.jml.message.MsnControlMessage;
 import net.sf.jml.message.MsnInstantMessage;
+import rmp.irp.c.Control;
 import rmp.irp.comn.ASession;
 
 /**
@@ -44,9 +45,19 @@ public class Session extends ASession
     }
 
     @Override
-    public void send(String text)
+    public void send(String message)
     {
-        switchboard.sendText(text);
+        send(message, true);
+    }
+
+    @Override
+    public void send(String message, boolean useCopy)
+    {
+        StringBuffer msg = new StringBuffer();
+        Control.appendPath(this, msg);
+        msg.append(message);
+        Control.appendCopy(this, msg);
+        switchboard.sendText(msg.toString());
     }
 
     @Override

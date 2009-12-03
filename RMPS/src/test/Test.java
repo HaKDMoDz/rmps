@@ -23,8 +23,8 @@ public class Test
 {
     public static void main(String[] args)
     {
-        Pattern p = Pattern.compile("'(.*?)'");
-        Matcher m = p.matcher("['200000','021','上海','上海','上海']");
+        Pattern p = Pattern.compile("(\\(')(.*?)('\\))");
+        Matcher m = p.matcher("var ILData = new Array(\"203.110.178.182\",\"中国\", \"上海市\", \"\", \"数讯信息\"); if (typeof(ILData_callback) != \"undefined\") { ILData_callback(); }");
         while (m.find())
         {
             System.out.println(m.group().replaceAll("^'|'$", ""));
