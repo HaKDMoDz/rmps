@@ -21,7 +21,7 @@ import rmp.face.WBean;
 import rmp.util.CheckUtil;
 import rmp.util.MesgUtil;
 import rmp.util.StringUtil;
-import cons.amon.data.A2010000.ConstUI;
+import cons.comn.amon.data.A2010000.ConstUI;
 
 /**
  * <ul>

@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package cons.amon.code.A1010000;
+package cons.comn.amon.code.A1010000;
 
 /**
  * <ul>

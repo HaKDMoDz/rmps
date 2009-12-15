@@ -39,7 +39,7 @@ import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.StringUtil;
 import cons.SysCons;
-import cons.amon.code.A1010000.LangRes;
+import cons.comn.amon.code.A1010000.LangRes;
 
 /**
  * <ul>

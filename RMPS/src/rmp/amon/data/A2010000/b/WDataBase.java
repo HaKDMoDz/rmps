@@ -8,7 +8,7 @@
 package rmp.amon.data.A2010000.b;
 
 import rmp.util.StringUtil;
-import cons.amon.data.A2010000.ConstUI;
+import cons.comn.amon.data.A2010000.ConstUI;
 
 /**
  * <ul>

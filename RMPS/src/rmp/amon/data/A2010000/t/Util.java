@@ -25,7 +25,7 @@ import rmp.util.FileUtil;
 import com.amonsoft.util.LogUtil;
 import rmp.util.StringUtil;
 import cons.SysCons;
-import cons.amon.data.A2010000.ConstUI;
+import cons.comn.amon.data.A2010000.ConstUI;
 import cons.db.AmonCons;
 
 /**

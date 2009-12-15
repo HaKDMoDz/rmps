@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package cons.amon.data.A2010000;
+package cons.comn.amon.user.A0010000;
 
 /**
  * <ul>
@@ -18,6 +18,6 @@ package cons.amon.data.A2010000;
  * </ul>
  * @author Amon
  */
-public interface LangRes
+public interface ConstUI
 {
 }

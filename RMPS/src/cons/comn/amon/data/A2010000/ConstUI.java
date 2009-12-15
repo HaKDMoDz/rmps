@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package cons.amon.data.A2010000;
+package cons.comn.amon.data.A2010000;
 
 /**
  * <ul>

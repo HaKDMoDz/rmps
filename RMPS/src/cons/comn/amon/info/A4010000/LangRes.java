@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package cons.amon.rmps.AF010000;
+package cons.comn.amon.info.A4010000;
 
 /**
  * <ul>

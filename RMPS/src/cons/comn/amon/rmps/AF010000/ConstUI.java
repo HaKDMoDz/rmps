@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package cons.amon.rmps.AF010000;
+package cons.comn.amon.rmps.AF010000;
 
 import cons.SysCons;
 import cons.id.AmonCons;
