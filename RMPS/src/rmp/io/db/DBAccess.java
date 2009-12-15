@@ -463,9 +463,9 @@ public class DBAccess
      * @param t
      * @throws SQLException
      */
-    public void addCopyBatch(String t, String f) throws SQLException
+    public void addBackupBatch(String t, String f) throws SQLException
     {
-        stat.addBatch(getCopySQL(t, f));
+        stat.addBatch(getBackupSQL(t, f));
     }
 
     /**
@@ -500,7 +500,7 @@ public class DBAccess
         stat.executeBatch();
     }
 
-    public void executeCopy()
+    public void executeBackup()
     {
     }
 
@@ -629,7 +629,7 @@ public class DBAccess
         return recSize;
     }
 
-    private String getCopySQL(String t, String f)
+    private String getBackupSQL(String t, String f)
     {
         StringBuffer sqlBuf = new StringBuffer();
 
