@@ -10,7 +10,6 @@ package rmp.util;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-import com.amonsoft.rmps.IRmps;
 import cons.SysCons;
 
 /**
