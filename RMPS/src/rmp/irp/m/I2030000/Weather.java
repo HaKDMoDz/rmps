@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package rmp.irp.m.weather;
+package rmp.irp.m.I2030000;
 
 import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.rmps.irp.b.IMessage;
