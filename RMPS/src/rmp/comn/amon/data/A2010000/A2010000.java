@@ -22,7 +22,7 @@ import rmp.comn.amon.data.A2010000.v.MainPanel;
 import rmp.comn.amon.data.A2010000.v.MiniPanel;
 import rmp.comn.amon.data.A2010000.v.NormPanel;
 import rmp.comn.amon.data.A2010000.v.TailPanel;
-import rmp.comn.info.C1010000.C1010000;
+import rmp.comn.C1010000.C1010000;
 import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.Prps;
 import rmp.comn.user.UserInfo;

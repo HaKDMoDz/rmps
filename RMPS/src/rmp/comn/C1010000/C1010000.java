@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package rmp.comn.info.C1010000;
+package rmp.comn.C1010000;
 
 import com.amonsoft.bean.WForm;
 import com.amonsoft.cons.ConsSys;
@@ -19,10 +19,10 @@ import javax.swing.JMenu;
 import javax.swing.JPanel;
 
 import rmp.Rmps;
-import rmp.comn.info.C1010000.v.MainPanel;
-import rmp.comn.info.C1010000.v.MiniPanel;
-import rmp.comn.info.C1010000.v.NormPanel;
-import rmp.comn.info.C1010000.v.TailPanel;
+import rmp.comn.C1010000.v.MainPanel;
+import rmp.comn.C1010000.v.MiniPanel;
+import rmp.comn.C1010000.v.NormPanel;
+import rmp.comn.C1010000.v.TailPanel;
 import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.Prps;
 import rmp.comn.user.UserInfo;

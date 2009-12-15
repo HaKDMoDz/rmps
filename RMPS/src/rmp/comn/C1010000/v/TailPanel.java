@@ -5,9 +5,9 @@
  * Description:
  *
  */
-package rmp.comn.info.C1010000.v;
+package rmp.comn.C1010000.v;
 
-import rmp.comn.info.C1010000.C1010000;
+import rmp.comn.C1010000.C1010000;
 import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.ui.link.WLinkLabel;
 import rmp.util.BeanUtil;

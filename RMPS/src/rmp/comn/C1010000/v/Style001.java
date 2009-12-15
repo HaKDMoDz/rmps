@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package rmp.comn.info.C1010000.v;
+package rmp.comn.C1010000.v;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;

@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package rmp.comn.info.C1010000.v;
+package rmp.comn.C1010000.v;
 
 import java.io.FileInputStream;
 import java.util.HashMap;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-import rmp.comn.info.C1010000.C1010000;
+import rmp.comn.C1010000.C1010000;
 import rmp.face.WBean;
 import rmp.ui.link.WLinkLabel;
 import com.amonsoft.util.LogUtil;

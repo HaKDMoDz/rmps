@@ -19,7 +19,7 @@ import javax.swing.JMenu;
 import javax.swing.JPanel;
 
 import rmp.Rmps;
-import rmp.comn.info.C1010000.C1010000;
+import rmp.comn.C1010000.C1010000;
 import rmp.comn.rmps.C4010000.t.Util;
 import rmp.comn.rmps.C4010000.v.MainPanel;
 import rmp.comn.rmps.C4010000.v.MiniPanel;
