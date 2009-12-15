@@ -74,7 +74,7 @@ public class I2020000 implements IService
     @Override
     public String getCode()
     {
-        return "postcode";
+        return "52020000";
     }
 
     @Override

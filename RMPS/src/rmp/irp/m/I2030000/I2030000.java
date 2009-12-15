@@ -15,14 +15,13 @@ import java.util.HashMap;
 import rmp.util.CheckUtil;
 import com.amonsoft.util.LogUtil;
 
-
 import cons.irp.a.ConstUI;
 
 /**
  * <ul>
  * <li>功能说明：</li>
  * <br />
- * 天气预报
+ * 身份查询
  * <li>使用说明：</li>
  * <br />
  * </ul>

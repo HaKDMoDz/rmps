@@ -71,7 +71,7 @@ public class I7010000 implements IService
     @Override
     public String getCode()
     {
-        return "ip";
+        return "57010000";
     }
 
     @Override

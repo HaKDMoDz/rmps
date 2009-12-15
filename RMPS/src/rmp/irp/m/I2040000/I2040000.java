@@ -63,7 +63,7 @@ public class I2040000 implements IService
     @Override
     public String getCode()
     {
-        return "phone";
+        return "52040000";
     }
 
     @Override
