@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package rmp.irp.m.facebook;
+package rmp.irp.m.I7030000;
 
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.m.IService;
