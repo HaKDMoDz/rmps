@@ -19,7 +19,6 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 
 import rmp.bean.CipherKey;
-import com.amonsoft.rmps.IRmps;
 import cons.SysCons;
 import cryptix.jce.provider.CryptixCrypto;
 
@@ -41,16 +40,6 @@ public final class HashUtil
      */
     private HashUtil()
     {
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see rmp.face.IRmps#wInit()
-     */
-    public boolean wInit()
-    {
-        return true;
     }
 
     /**
@@ -106,30 +95,6 @@ public final class HashUtil
     {
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT-0:00"));
         return StringUtil.encodeLong(cal.getTimeInMillis(), bigCase);
-    }
-
-    /**
-     * 根据指定的语言字符串，获取其唯一的标记信息ID
-     * 
-     * @param language 语言字符串，如:English,简体中文,日本語……等。
-     * @return 语言为空时，返回结果为NULL其它情况下为一个非空字符串
-     */
-    public static String getLanguageID(String language)
-    {
-        // 若字符串为空，长度为0,则不进行Hash操作
-        if (language == null || language.length() < 1)
-        {
-            return null;
-        }
-
-        int hash = 0;
-        byte bk[] = StringUtil.getBytes(language);
-        for (int i = 0, len = bk.length; i < len; ++i)
-        {
-            hash *= 16777619;
-            hash ^= bk[i];
-        }
-        return StringUtil.encodeInt(hash, false);
     }
 
     /**

@@ -26,7 +26,7 @@ import rmp.prp.aide.Testsoft.v.MiniPanel;
 import rmp.prp.aide.Testsoft.v.NormPanel;
 import rmp.prp.aide.Testsoft.v.SubMenu;
 import rmp.prp.aide.Testsoft.v.TailPanel;
-import rmp.user.UserInfo;
+import rmp.comn.user.UserInfo;
 import rmp.util.BeanUtil;
 import rmp.util.FileUtil;
 import rmp.util.ImageUtil;

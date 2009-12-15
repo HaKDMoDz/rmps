@@ -5,54 +5,47 @@
  * Description:
  *
  */
-package rmp.comn.tray.C3010000;
+package rmp.comn.user.U0020000;
 
+import com.amonsoft.bean.WForm;
 import com.amonsoft.cons.ConsSys;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 import java.util.Properties;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 
 import rmp.Rmps;
-import rmp.comn.info.C1010000.C1010000;
-import rmp.comn.tray.C3010000.t.Util;
-import rmp.comn.tray.C3010000.v.MainPanel;
-import rmp.comn.tray.C3010000.v.MiniPanel;
-import rmp.comn.tray.C3010000.v.NormPanel;
-import rmp.comn.tray.C3010000.v.SubMenu;
-import rmp.comn.tray.C3010000.v.TailPanel;
+import rmp.face.WBackCall;
 import com.amonsoft.rmps.prp.IPrpPlus;
-import rmp.prp.Prps;
 import rmp.comn.user.UserInfo;
+import rmp.comn.user.U0020000.v.MainPanel;
+import rmp.comn.user.U0020000.v.MiniPanel;
+import rmp.comn.user.U0020000.v.NormPanel;
 import rmp.util.BeanUtil;
 import rmp.util.FileUtil;
+import rmp.util.ImageUtil;
 import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.RmpsUtil;
 import cons.CfgCons;
 import cons.EnvCons;
-import cons.SysCons;
-import cons.comn.tray.C3010000.ConstUI;
-import cons.comn.tray.C3010000.LangRes;
-import cons.id.ComnCons;
+import cons.id.PrpCons;
+import cons.user.U0020000.ConstUI;
 import com.amonsoft.util.LangUtil;
-import com.amonsoft.util.DeskUtil;
 
 /**
  * <ul>
  * <li>功能说明：</li>
  * <br />
- * 系统托盘
+ * 信息修改
  * <li>使用说明：</li>
  * <br />
  * </ul>
  * @author Amon
  */
-public class C3010000 implements IPrpPlus
+public class U0020000 extends WForm implements IPrpPlus
 {
     // ////////////////////////////////////////////////////////////////////////
     // 控制变量区域
@@ -60,33 +53,10 @@ public class C3010000 implements IPrpPlus
     // ----------------------------------------------------
     // 逻辑控制区域
     // ----------------------------------------------------
-    /** 窗口列表管理对象 */
-    private static java.util.HashMap<String, JFrame> hm_FormList;
-    /** 系统唯一全局变量 */
-    private static C3010000 rt_RmpsTray;
-    /** 托盘图标对象 */
-    private java.awt.TrayIcon ti_TrayIcon;
-    /** 托盘弹出菜单 */
-    private java.awt.PopupMenu pm_PopsMenu;
-    /** 语言资源 */
-    private static Properties langRes;
-    /** RMPS系统运行目录 */
-    private static String baseFolder = "";
-    /** 插件程序运行目录 */
-    private static String plusFolder = "";
-    // ----------------------------------------------------
-    // 界面显示区域
-    // ----------------------------------------------------
-    /** 高级面板 */
-    private MainPanel mp_MainPanel;
-    /** 迷你面板 */
-    private MiniPanel mp_MiniPanel;
-    /** 正常面板 */
-    private NormPanel np_NormPanel;
-    /** 内嵌面板 */
-    private TailPanel tp_TailPanel;
-    /** 级联菜单 */
-    private SubMenu sm_SubMenu;
+    /** 当前运行状态标记：参见AppCons.APP_MODE_*** */
+    private static int appMode;
+    private static HashMap<String, WBackCall> hm_PropList;
+    private boolean validate;
     private LangUtil langUtil;
 
     // ////////////////////////////////////////////////////////////////////////
@@ -95,51 +65,27 @@ public class C3010000 implements IPrpPlus
     /**
      * 默认构造函数
      */
-    private C3010000()
+    public U0020000()
     {
     }
 
+    /**
+     * @param form
+     */
+    public U0020000(javax.swing.JFrame form)
+    {
+        softFForm = form;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see rmp.face.WRmps#wInit()
+     */
     @Override
     public boolean wInitView()
     {
-        // 系统不支持托盘图标时，直接返回
-        if (!Util.isTraySupport())
-        {
-            return true;
-        }
-
-        // 获取系统托盘的引用
-        java.awt.SystemTray iconTray = java.awt.SystemTray.getSystemTray();
-
-        pm_PopsMenu = new java.awt.PopupMenu();
-
-        // 创建托盘图标对象
-        String mesg = RmpsUtil.getUserInfo().getCfg(ConstUI.CFG_USERMESG, LangRes.TRAY_TIPS_ICONTRAY);
-        ti_TrayIcon = new java.awt.TrayIcon(wGetIconImage(IPrpPlus.ICON_LOGO0016), mesg, pm_PopsMenu);
-        ti_TrayIcon.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                if (evt.getClickCount() > 1)
-                {
-                    ti_TrayIcon_Handler(evt);
-                }
-            }
-        });
-
-        // 添加图标到系统托盘
-        try
-        {
-            iconTray.add(ti_TrayIcon);
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
-            return false;
-        }
-
-        showNorm();
+        super.wInit(false);
 
         return true;
     }
@@ -208,7 +154,7 @@ public class C3010000 implements IPrpPlus
     @Override
     public int wCode()
     {
-        return ComnCons.C0010000_I;
+        return PrpCons.U0020000_I;
     }
 
     /*
@@ -219,7 +165,31 @@ public class C3010000 implements IPrpPlus
     @Override
     public BufferedImage wGetIconImage(int type)
     {
-        return BeanUtil.getLogoImage();
+        try
+        {
+            switch (type)
+            {
+                case ICON_LOGO0016:
+                    return ImageUtil.readJarImage(EnvCons.PATH_U0020000, "logo10.png");
+                case ICON_LOGO0032:
+                    return ImageUtil.readJarImage(EnvCons.PATH_U0020000, "logo20.png");
+                case ICON_LOGO0048:
+                    return ImageUtil.readJarImage(EnvCons.PATH_U0020000, "logo30.png");
+                case ICON_LOGO0096:
+                    return ImageUtil.readJarImage(EnvCons.PATH_U0020000, "logo60.png");
+                case ICON_LOGO0128:
+                    return ImageUtil.readJarImage(EnvCons.PATH_U0020000, "logo80.png");
+                case ICON_LOGO0256:
+                    return ImageUtil.readJarImage(EnvCons.PATH_U0020000, "logo00.png");
+                default:
+                    return BeanUtil.getLogoImage();
+            }
+        }
+        catch (Exception exp)
+        {
+            LogUtil.exception(exp);
+            return null;
+        }
     }
 
     /*
@@ -274,12 +244,7 @@ public class C3010000 implements IPrpPlus
     @Override
     public boolean wShowMenu(JMenu menu)
     {
-        if (sm_SubMenu == null)
-        {
-            sm_SubMenu = new SubMenu(this, menu);
-            sm_SubMenu.wInit();
-        }
-        return true;
+        return false;
     }
 
     /*
@@ -290,12 +255,7 @@ public class C3010000 implements IPrpPlus
     @Override
     public boolean wShowTail(JPanel view)
     {
-        if (tp_TailPanel == null)
-        {
-            tp_TailPanel = new TailPanel(this, view);
-            tp_TailPanel.wInit();
-        }
-        return true;
+        return false;
     }
 
     /*
@@ -328,14 +288,6 @@ public class C3010000 implements IPrpPlus
     @Override
     public void wShowHelp()
     {
-        try
-        {
-            DeskUtil.open(EnvCons.FOLDER0_HELP + EnvCons.COMN_SP_FILE + "index.html");
-        }
-        catch (Exception ex)
-        {
-            Logger.getLogger(C3010000.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /*
@@ -346,8 +298,6 @@ public class C3010000 implements IPrpPlus
     @Override
     public void wShowInfo()
     {
-        C1010000.setInfo(getInfoPath());
-        Prps.getSoftInfo().wShowView(VIEW_NORM);
     }
 
     /*
@@ -411,123 +361,13 @@ public class C3010000 implements IPrpPlus
     // 模块接口区域
     // ////////////////////////////////////////////////////////////////////////
     /**
-     * 注册JFrame对象的引用
+     * 程序当前运行方式：Application、Applet、Web Start
      * 
      * @return
      */
-    public static void regester(String name, javax.swing.JFrame form)
+    public static int getAppMode()
     {
-        if (hm_FormList == null)
-        {
-            hm_FormList = new java.util.HashMap<String, javax.swing.JFrame>();
-        }
-        hm_FormList.put(name, form);
-    }
-
-    /**
-     * 获取指定名称的JFrame对象的引用
-     * 
-     * @param name
-     * @return
-     */
-    public static javax.swing.JFrame queryRef(String name)
-    {
-        if (hm_FormList == null)
-        {
-            return null;
-        }
-        return hm_FormList.get(name);
-    }
-
-    /**
-     * 使所有Frame对象窗口不可见
-     */
-    public static void hideAllFrame()
-    {
-        if (hm_FormList != null)
-        {
-            for (String s : hm_FormList.keySet())
-            {
-                hm_FormList.get(s).setVisible(false);
-            }
-        }
-    }
-
-    /**
-     * 使指定名称的Frame对象窗口不可见
-     * 
-     * @param name
-     */
-    public static void hideFrame(String name)
-    {
-        if (hm_FormList != null)
-        {
-            hm_FormList.get(name).setVisible(false);
-        }
-    }
-
-    /**
-     * 使所有Frame对象窗口可见
-     */
-    public static void showAllFrame()
-    {
-        if (hm_FormList != null)
-        {
-            for (String s : hm_FormList.keySet())
-            {
-                hm_FormList.get(s).setVisible(true);
-            }
-        }
-    }
-
-    /**
-     * 使指定名称的Frame对象窗口可见
-     * 
-     * @param name
-     */
-    public static void showFrame(String name)
-    {
-        if (hm_FormList != null)
-        {
-            hm_FormList.get(name).setVisible(true);
-        }
-    }
-
-    /**
-     * 显示系统托盘消息提示
-     * 
-     * @param caption 消息标题
-     * @param text 消息内容
-     * @param messageType 消息类型：错误、警告、消息、默认等
-     */
-    public void displayMessage(String caption, String text, java.awt.TrayIcon.MessageType messageType)
-    {
-        ti_TrayIcon.displayMessage(caption, text, messageType);
-    }
-
-    /**
-     * 系统托盘快捷提示变更
-     * 
-     * @param tooltip
-     */
-    public void changeTooltips(String tooltip)
-    {
-        ti_TrayIcon.setToolTip(tooltip);
-    }
-
-    /**
-     * 软件主窗口获取
-     * 
-     * @return 软件主窗口
-     */
-    public static C3010000 getInstance()
-    {
-        if (rt_RmpsTray == null)
-        {
-            rt_RmpsTray = new C3010000();
-            rt_RmpsTray.wInitView();
-        }
-        return rt_RmpsTray;
+        return appMode;
     }
 
     /**
@@ -545,7 +385,7 @@ public class C3010000 implements IPrpPlus
             // 语言资源信息读取
             try
             {
-                FileUtil.readLangRes(langRes, EnvCons.PATH_C3010000, EnvCons.COMN_SOFT_LANG);
+                FileUtil.readLangRes(langRes, EnvCons.PATH_U0020000, EnvCons.COMN_SOFT_LANG);
             }
             catch (Exception exp)
             {
@@ -570,17 +410,51 @@ public class C3010000 implements IPrpPlus
     }
 
     /**
-     * 获取关于信息语言资源路径
+     * 注册回馈对象引用
      * 
-     * @return
+     * @param key
+     * @param backCall
      */
-    private static String getInfoPath()
+    public void register(String key, WBackCall backCall)
     {
-        StringBuffer sb = new StringBuffer();
-        sb.append(EnvCons.PATH_CF010000).append(EnvCons.COMN_SP_FILE);
-        sb.append(EnvCons.COMN_SOFT_INFO).append(RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_LANG_ID));
-        sb.append(SysCons.EXTS_INFO);
-        return sb.toString();
+        if (hm_PropList == null)
+        {
+            hm_PropList = new HashMap<String, WBackCall>();
+        }
+        hm_PropList.put(key, backCall);
+    }
+
+    /**
+     * 指定回馈对象信息回馈
+     * 
+     * @param key
+     */
+    public void firePropertyChanged(String key, Object value, String property)
+    {
+        if (hm_PropList != null)
+        {
+            WBackCall backCall = hm_PropList.get(key);
+            if (backCall != null)
+            {
+                backCall.wAction(null, value, property);
+            }
+        }
+    }
+
+    /**
+     * @return the validate
+     */
+    public boolean isValidate()
+    {
+        return validate;
+    }
+
+    /**
+     * @param validate the validate to set
+     */
+    public void setValidate(boolean validate)
+    {
+        this.validate = validate;
     }
 
     // ////////////////////////////////////////////////////////////////////////
@@ -594,10 +468,18 @@ public class C3010000 implements IPrpPlus
         // 面板实例化
         if (mp_MainPanel == null)
         {
-            mp_MainPanel = new MainPanel(this, pm_PopsMenu);
+            mp_MainPanel = new MainPanel(this);
+            mp_MainPanel.wInit();
         }
-        mp_MainPanel.wInit();
-        return null;
+
+        setContentPane(mp_MainPanel);
+        pack();
+        center(null);
+        if (!isVisible())
+        {
+            setVisible(true);
+        }
+        return mp_MainPanel;
     }
 
     /**
@@ -608,10 +490,18 @@ public class C3010000 implements IPrpPlus
         // 面板实例化
         if (mp_MiniPanel == null)
         {
-            mp_MiniPanel = new MiniPanel(this, pm_PopsMenu);
+            mp_MiniPanel = new MiniPanel(this);
+            mp_MiniPanel.wInit();
         }
-        mp_MiniPanel.wInit();
-        return null;
+
+        setContentPane(mp_MiniPanel);
+        pack();
+        center(null);
+        if (!isVisible())
+        {
+            setVisible(true);
+        }
+        return mp_MiniPanel;
     }
 
     /**
@@ -622,10 +512,18 @@ public class C3010000 implements IPrpPlus
         // 面板实例化
         if (np_NormPanel == null)
         {
-            np_NormPanel = new NormPanel(this, pm_PopsMenu);
+            np_NormPanel = new NormPanel(this);
+            np_NormPanel.wInit();
         }
-        np_NormPanel.wInit();
-        return null;
+
+        setContentPane(np_NormPanel);
+        pack();
+        center(null);
+        if (!isVisible())
+        {
+            setVisible(true);
+        }
+        return np_NormPanel;
     }
 
     /**
@@ -644,23 +542,30 @@ public class C3010000 implements IPrpPlus
         return null;
     }
 
-    /**
-     * 窗口显示隐藏事件处理
-     * 
-     * @param evt
-     */
-    private void ti_TrayIcon_Handler(java.awt.event.MouseEvent evt)
-    {
-        javax.swing.JFrame prps = queryRef("prp");
-        if (prps != null)
-        {
-            prps.setVisible(!prps.isVisible());
-        }
-    }
-
     // ////////////////////////////////////////////////////////////////////////
     // 系统启动区域
     // ////////////////////////////////////////////////////////////////////////
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.applet.Applet#wInit()
+     */
+    @Override
+    public void init()
+    {
+        // 启动模式标记
+        appMode = ConsSys.MODE_APPLET;
+        // 运行目录标记
+        baseFolder = EnvCons.COMN_PATH_JNLP;
+
+        UserInfo ui = new UserInfo("Amon", "amon");
+        ui.wInit();
+        RmpsUtil.setUserInfo(ui);
+
+        // 显示主窗口 启动应用程序
+        wShowView(VIEW_NORM);
+    }
+
     /**
      * 主程序启动入口
      * 
@@ -668,12 +573,17 @@ public class C3010000 implements IPrpPlus
      */
     public static void main(String[] args)
     {
+        // 启动模式标记
+        appMode = getAppMode(args);
         // 运行目录标记
         baseFolder = EnvCons.COMN_PATH_HOME;
 
         UserInfo ui = new UserInfo("Amon", "amon");
         ui.wInit();
         RmpsUtil.setUserInfo(ui);
+
+        // 1、 启动系统日志
+        LogUtil.wInit();
 
         // 2、 运行环境检测
         if (!Rmps.checkJre())
@@ -683,7 +593,7 @@ public class C3010000 implements IPrpPlus
         }
 
         // 3、 用户配置加载
-        if (!ui.loadCfg(baseFolder, ConsSys.MODE_APPLICATION))
+        if (!ui.loadCfg(baseFolder, appMode))
         {
             System.exit(0);
             return;
@@ -697,10 +607,29 @@ public class C3010000 implements IPrpPlus
         }
 
         // 5、引用应用对象
-        C3010000 soft = new C3010000();
+        U0020000 soft = new U0020000();
         soft.wInitView();
-
-        // 6、显示主窗口 启动应用程序
-        soft.wShowView(VIEW_NORM);
+        soft.wShowView(VIEW_MINI);
     }
+    // ////////////////////////////////////////////////////////////////////////
+    // 界面组件区域
+    // ////////////////////////////////////////////////////////////////////////
+    private static javax.swing.JFrame softFForm;
+    /** 语言资源 */
+    private static Properties langRes;
+    /** RMPS系统运行目录 */
+    private static String baseFolder = "";
+    /** 插件程序运行目录 */
+    private static String plusFolder = "";
+    // ----------------------------------------------------
+    // 界面显示区域
+    // ----------------------------------------------------
+    /** 高级面板 */
+    private MainPanel mp_MainPanel;
+    /** 迷你面板 */
+    private MiniPanel mp_MiniPanel;
+    /** 正常面板 */
+    private NormPanel np_NormPanel;
+    /** serialVersionUID */
+    private static final long serialVersionUID = 2257215283270460795L;
 }

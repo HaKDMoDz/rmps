@@ -20,7 +20,7 @@ import rmp.comn.lang.C5010000.t.Util;
 import rmp.bean.FilesFilter;
 import rmp.bean.K1IV2S;
 import rmp.face.WBean;
-import rmp.user.UserInfo;
+import rmp.comn.user.UserInfo;
 import rmp.util.CheckUtil;
 import rmp.util.FileUtil;
 import rmp.util.MesgUtil;

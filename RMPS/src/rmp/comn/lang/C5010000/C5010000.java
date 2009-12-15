@@ -29,7 +29,7 @@ import rmp.comn.lang.C5010000.v.NormPanel;
 import rmp.comn.lang.C5010000.v.QuickMenu;
 import rmp.comn.lang.C5010000.v.TailPanel;
 import rmp.prp.Prps;
-import rmp.user.UserInfo;
+import rmp.comn.user.UserInfo;
 import rmp.util.BeanUtil;
 import com.amonsoft.util.DeskUtil;
 import com.amonsoft.util.LogUtil;

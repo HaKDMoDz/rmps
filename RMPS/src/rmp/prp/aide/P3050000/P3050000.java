@@ -24,7 +24,7 @@ import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.Prps;
 import rmp.prp.aide.P3050000.v.NormPanel;
 import rmp.prp.aide.P3050000.v.TailPanel;
-import rmp.user.UserInfo;
+import rmp.comn.user.UserInfo;
 import rmp.util.BeanUtil;
 import rmp.util.FileUtil;
 import com.amonsoft.util.LogUtil;

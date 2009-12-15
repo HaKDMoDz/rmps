@@ -26,7 +26,7 @@ import rmp.prp.aide.P30C0000.v.MiniPanel;
 import rmp.prp.aide.P30C0000.v.NormPanel;
 import rmp.prp.aide.P30C0000.v.SubMenu;
 import rmp.prp.aide.P30C0000.v.TailPanel;
-import rmp.user.UserInfo;
+import rmp.comn.user.UserInfo;
 import rmp.util.BeanUtil;
 import rmp.util.FileUtil;
 import com.amonsoft.util.LogUtil;

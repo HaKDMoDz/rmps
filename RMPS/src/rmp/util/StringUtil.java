@@ -16,10 +16,9 @@ import cons.SysCons;
  * <ul>
  * <li>功能说明：</li>
  * <br />
- * TODO: 功能说明
+ * 字符串处理类
  * <li>使用说明：</li>
  * <br />
- * TODO: 使用说明
  * </ul>
  * @author Amon
  */
@@ -30,16 +29,6 @@ public final class StringUtil
      */
     private StringUtil()
     {
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see rmp.face.IRmps#init()
-     */
-    public boolean wInit()
-    {
-        return true;
     }
 
     /**

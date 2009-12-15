@@ -21,7 +21,7 @@ import rmp.comn.info.C1010000.C1010000;
 import rmp.comn.tray.C3010000.C3010000;
 import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.Prps;
-import rmp.user.UserInfo;
+import rmp.comn.user.UserInfo;
 import rmp.util.BeanUtil;
 import rmp.util.FileUtil;
 import rmp.util.ImageUtil;

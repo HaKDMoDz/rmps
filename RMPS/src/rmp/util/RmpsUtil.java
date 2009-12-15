@@ -21,7 +21,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 
 import com.amonsoft.rmps.IRmps;
-import rmp.user.UserInfo;
+import rmp.comn.user.UserInfo;
 import cons.SysCons;
 import org.dom4j.Document;
 import org.dom4j.Node;
