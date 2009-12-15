@@ -36,7 +36,7 @@ import rmp.util.RmpsUtil;
 import cons.CfgCons;
 import cons.EnvCons;
 import cons.id.PrpCons;
-import cons.user.U0000000.ConstUI;
+import cons.comn.user.U0000000.ConstUI;
 import com.amonsoft.util.LangUtil;
 import com.amonsoft.util.DeskUtil;
 

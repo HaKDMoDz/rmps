@@ -15,7 +15,7 @@ import rmp.comn.user.U0020000.U0020000;
 import rmp.util.BeanUtil;
 import rmp.util.MesgUtil;
 import cons.CfgCons;
-import cons.user.U0020000.LangRes;
+import cons.comn.user.U0020000.LangRes;
 
 /**
  * <ul>

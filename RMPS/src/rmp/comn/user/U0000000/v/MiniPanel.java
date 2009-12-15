@@ -13,7 +13,7 @@ import rmp.comn.user.U0000000.U0000000;
 import rmp.util.BeanUtil;
 import rmp.util.MesgUtil;
 import cons.CfgCons;
-import cons.user.U0000000.LangRes;
+import cons.comn.user.U0000000.LangRes;
 
 /**
  * <ul>

@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package cons.user.U0010000;
+package cons.comn.user.U0010000;
 
 /**
  * <ul>
