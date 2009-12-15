@@ -35,7 +35,7 @@ import rmp.util.StringUtil;
  * </ul>
  * @author yihaodian
  */
-public class Phone implements IService
+public class I2040000 implements IService
 {
     private static Properties isCfg;
     private static Pattern phone;
