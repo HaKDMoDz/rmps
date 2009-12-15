@@ -5,7 +5,7 @@
  * Description:
  *    
  */
-package rmp.irp.m.phone;
+package rmp.irp.m.I2040000;
 
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
@@ -28,10 +28,10 @@ import rmp.util.StringUtil;
  * <ul>
  * <li>功能说明：</li>
  * <br />
- * TODO:
+ * 号码归属
  * <li>使用说明：</li>
  * <br />
- * TODO:
+ * 手机号码归属地查询
  * </ul>
  * @author yihaodian
  */
