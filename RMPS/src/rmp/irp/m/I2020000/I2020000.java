@@ -30,6 +30,7 @@ import rmp.util.StringUtil;
  * <ul>
  * <li>功能说明：</li>
  * <br />
+ * 邮政编码
  * TODO:
  * <li>使用说明：</li>
  * <br />
@@ -37,7 +38,7 @@ import rmp.util.StringUtil;
  * </ul>
  * @author yihaodian
  */
-public class Postcode implements IService
+public class I2020000 implements IService
 {
     private static Properties isCfg;
     /**
