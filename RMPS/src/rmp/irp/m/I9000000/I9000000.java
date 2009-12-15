@@ -28,7 +28,7 @@ import rmp.irp.c.Control;
  * </ul>
  * @author yihaodian
  */
-public class Help implements IService
+public class I9000000 implements IService
 {
     @Override
     public boolean wInit()
