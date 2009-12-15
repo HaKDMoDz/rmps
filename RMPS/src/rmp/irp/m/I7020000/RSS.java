@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package rmp.irp.m.rss;
+package rmp.irp.m.I7020000;
 
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.m.IService;
