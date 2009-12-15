@@ -10,7 +10,7 @@
  * Description:
  *    
  */
-package rmp.irp.m.help;
+package rmp.irp.m.I9000000;
 
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.ISession;
