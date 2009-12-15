@@ -26,13 +26,13 @@ import twitter4j.TwitterException;
  * <ul>
  * <li>功能说明：</li>
  * <br />
- * Twitter
+ * I7040000
  * <li>使用说明：</li>
  * <br />
  * </ul>
  * @author Amon
  */
-public class Twitter implements IService
+public class I7040000 implements IService
 {
     private twitter4j.Twitter messenger;
 
@@ -140,7 +140,7 @@ public class Twitter implements IService
                 }
                 catch (TwitterException ex)
                 {
-                    Logger.getLogger(Twitter.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(I7040000.class.getName()).log(Level.SEVERE, null, ex);
                 }
             case ConsFun.STEP_3:
                 try
@@ -154,7 +154,7 @@ public class Twitter implements IService
                 }
                 catch (TwitterException ex)
                 {
-                    Logger.getLogger(Twitter.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(I7040000.class.getName()).log(Level.SEVERE, null, ex);
                 }
             default:
                 // 容错处理，显示使用帮助
