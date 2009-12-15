@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package rmp.irp.m.ip;
+package rmp.irp.m.I7010000;
 
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
