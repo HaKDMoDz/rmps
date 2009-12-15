@@ -23,12 +23,13 @@ import com.amonsoft.util.LogUtil;
  * <ul>
  * <li>功能说明：</li>
  * <br />
+ * 在线阅读
  * <li>使用说明：</li>
  * <br />
  * </ul>
  * @author Amon
  */
-public class RSS implements IService
+public class I7020000 implements IService
 {
     @Override
     public boolean wInit()
