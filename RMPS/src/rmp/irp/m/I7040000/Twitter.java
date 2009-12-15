@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package rmp.irp.m.twitter;
+package rmp.irp.m.I7040000;
 
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.m.IService;
@@ -26,6 +26,7 @@ import twitter4j.TwitterException;
  * <ul>
  * <li>功能说明：</li>
  * <br />
+ * Twitter
  * <li>使用说明：</li>
  * <br />
  * </ul>

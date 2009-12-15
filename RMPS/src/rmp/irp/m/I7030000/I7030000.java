@@ -16,12 +16,13 @@ import com.amonsoft.util.LogUtil;
  * <ul>
  * <li>功能说明：</li>
  * <br />
+ * I7030000
  * <li>使用说明：</li>
  * <br />
  * </ul>
  * @author Amon
  */
-public class Facebook implements IService
+public class I7030000 implements IService
 {
     @Override
     public boolean wInit()

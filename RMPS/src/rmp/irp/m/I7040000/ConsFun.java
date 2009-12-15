@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package rmp.irp.m.twitter;
+package rmp.irp.m.I7040000;
 
 /**
  * <ul>
