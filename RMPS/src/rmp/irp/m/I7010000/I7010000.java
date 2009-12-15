@@ -34,14 +34,14 @@ import rmp.util.StringUtil;
  * </ul>
  * @author Amon
  */
-public class IP implements IService
+public class I7010000 implements IService
 {
     private static Properties isCfg;
     private static Pattern v4Ptn;
     private static Pattern paPtn;
     private static Pattern piPtn;
 
-    public IP()
+    public I7010000()
     {
     }
 
