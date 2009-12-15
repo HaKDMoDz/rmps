@@ -22,12 +22,13 @@ import cons.irp.a.ConstUI;
  * <ul>
  * <li>功能说明：</li>
  * <br />
+ * 天气预报
  * <li>使用说明：</li>
  * <br />
  * </ul>
  * @author Amon
  */
-public class Weather implements IService
+public class I2030000 implements IService
 {
     @Override
     public boolean wInit()
