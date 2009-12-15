@@ -5,7 +5,7 @@
  * Description:
  *    
  */
-package rmp.irp.m.postcode;
+package rmp.irp.m.I2020000;
 
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
