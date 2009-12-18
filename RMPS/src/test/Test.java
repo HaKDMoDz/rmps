@@ -7,8 +7,15 @@
  */
 package test;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.io.File;
+import org.jivesoftware.smack.Chat;
+import org.jivesoftware.smack.ConnectionConfiguration;
+import org.jivesoftware.smack.MessageListener;
+import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.packet.Message;
+import org.jivesoftware.smackx.filetransfer.FileTransfer;
+import org.jivesoftware.smackx.filetransfer.FileTransferManager;
+import org.jivesoftware.smackx.filetransfer.OutgoingFileTransfer;
 
 /**
  * <ul>
@@ -21,22 +28,86 @@ import java.util.regex.Pattern;
  */
 public class Test
 {
+    /**
+     * @param args
+     */
     public static void main(String[] args)
     {
-        Pattern p = Pattern.compile("(\\(')(.*?)('\\))");
-        Matcher m = p.matcher("var ILData = new Array(\"203.110.178.182\",\"中国\", \"上海市\", \"\", \"数讯信息\"); if (typeof(ILData_callback) != \"undefined\") { ILData_callback(); }");
-        while (m.find())
+
+        String user = "amon.rg";
+        String host = "meebo.org";
+        int port = 5222;
+        String username = "Amon.CT";
+        String password = "!~g_OQ5;";
+        ConnectionConfiguration config = new ConnectionConfiguration(host, port);
+        config.setCompressionEnabled(true);
+        config.setSASLAuthenticationEnabled(true);
+
+        XMPPConnection connection = new XMPPConnection(config);
+
+        try
         {
-            System.out.println(m.group().replaceAll("^'|'$", ""));
+            connection.connect();
+
+            connection.login(username, password);
+
+            //sendFile(user, getFile(), connection);
+            sendTextMessage(user, connection);
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            connection.disconnect();
+        }
+
+
     }
 
-    public static void aa()
+    public static File getFile()
     {
-//        Context cx = Context.enter();
-//        Scriptable scope = cx.initStandardObjects();
-//        Object result = cx.evaluateString(scope, "var I_SUCCESS = 1;var pc_data = ['200000','021','上海','上海','上海'];var pc_data1 = [['101600','0316','三河','河北','三河'],['054100','0319','沙河','河北','沙河'],['152000','0458','绥化','黑龙江','绥化'],['211900','0527','泗洪','江苏','泗洪'],['251600','0531','商河','山东','商河'],['364200','0597','上杭','福建','上杭'],['526200','0758','四会','广东','四会'],['629200','0825','射洪','四川','射洪']];", null, 1, null);
-//        Scriptable obj = (Scriptable) scope.get("pc_data", scope);
-//        System.out.println(obj);
+        File file = new File("D:/test.jpg");
+        return file;
+    }
+
+//发送文件
+    public static void sendFile(String user, File file, XMPPConnection connection) throws Exception
+    {
+        FileTransferManager manager = new FileTransferManager(connection);
+        OutgoingFileTransfer transfer = manager.createOutgoingFileTransfer(user);
+        long timeOut = 1000000;
+        long sleepMin = 3000;
+        long spTime = 0;
+        int rs = 0;
+
+        transfer.sendFile(file, "pls re file!");
+        rs = transfer.getStatus().compareTo(FileTransfer.Status.complete);
+        while (rs != 0)
+        {
+            rs = transfer.getStatus().compareTo(FileTransfer.Status.complete);
+            spTime = spTime + sleepMin;
+            if (spTime > timeOut)
+            {
+                return;
+            }
+            Thread.sleep(sleepMin);
+        }
+
+    }
+
+//发送文本
+    public static void sendTextMessage(String user, XMPPConnection connection) throws Exception
+    {
+        Chat chat = connection.getChatManager().createChat(user, new MessageListener()
+        {
+            @Override
+            public void processMessage(Chat chat, Message message)
+            {
+                System.out.println("Received message: " + message);
+            }
+        });
+        chat.sendMessage("Hi Test Send Message........!");
     }
 }

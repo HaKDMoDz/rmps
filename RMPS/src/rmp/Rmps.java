@@ -14,7 +14,6 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.plaf.synth.SynthLookAndFeel;
 
-import rmp.prp.Prps;
 import rmp.comn.user.UserInfo;
 import rmp.util.EnvUtil;
 import com.amonsoft.util.LogUtil;
@@ -25,6 +24,7 @@ import cons.CfgCons;
 import cons.EnvCons;
 import cons.ui.LangRes;
 import com.amonsoft.skin.ISkin;
+import rmp.irp.Irps;
 
 /**
  * <ul>
@@ -226,10 +226,11 @@ public final class Rmps
     {
         LogUtil.log("系统启动：应用程序启动！");
 
-        Prps prp = new Prps();
-        prp.initView();
-        prp.initLang();
-        prp.initData();
+//        Prps prp = new Prps();
+//        prp.initView();
+//        prp.initLang();
+//        prp.initData();
+        Irps.main(null);
         return true;
     }
 }

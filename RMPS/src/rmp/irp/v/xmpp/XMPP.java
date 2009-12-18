@@ -46,6 +46,7 @@ public class XMPP implements IAccount, ConnectionListener, MessageListener, Pack
 
     public XMPP()
     {
+        XMPPConnection.DEBUG_ENABLED = true;
     }
 
     @Override
@@ -65,40 +66,44 @@ public class XMPP implements IAccount, ConnectionListener, MessageListener, Pack
                 try
                 {
                     ConnectionConfiguration config = new ConnectionConfiguration(connect.getServer(), connect.getPort(), connect.getServer());
+//                    config.setCompressionEnabled(true);
+//                    config.setSASLAuthenticationEnabled(true);
+
                     messenger = new XMPPConnection(config);
                     messenger.connect();
                     messenger.login(connect.getUser(), connect.getPwds());
 
-                    Presence presence = new Presence(Presence.Type.available);
-                    presence.setStatus("I'm Coming...");
-                    messenger.sendPacket(presence);
+//                    Presence presence = new Presence(Presence.Type.available);
+//                    presence.setStatus("I'm Coming...");
+//                    messenger.sendPacket(presence);
 
-                    PacketFilter filter = new PacketFilter()
-                    {
-                        @Override
-                        public boolean accept(Packet arg0)
-                        {
-                            return true;
-                        }
-                    };
-                    messenger.addConnectionListener(this);
-                    messenger.addPacketListener(this, filter);
-                    messenger.addPacketWriterListener(this, filter);
+//                    PacketFilter filter = new PacketFilter()
+//                    {
+//                        @Override
+//                        public boolean accept(Packet arg0)
+//                        {
+//                            return true;
+//                        }
+//                    };
+//                    messenger.addConnectionListener(this);
+//                    messenger.addPacketListener(this, filter);
+//                    messenger.addPacketWriterListener(this, filter);
 
-                    ChatManager chatmanager = messenger.getChatManager();
-                    chatmanager.addChatListener(this);
-                    Chat newChat = chatmanager.createChat("amonyao", this);
-                    newChat.sendMessage("haha");
+                    Chat chat = messenger.getChatManager().createChat("amon.rg@jabber.org", this);
+                    chat.sendMessage("haha");
                 }
                 catch (XMPPException exp)
                 {
                     LogUtil.exception(exp);
                 }
                 break;
+
             case IStatus.AWAY:
                 Presence presence = new Presence(Presence.Type.unavailable);
                 presence.setStatus("Gone fishing");
                 messenger.sendPacket(presence);
+                break;
+
             case IStatus.DOWN:
                 messenger.disconnect();
                 break;
@@ -167,7 +172,8 @@ public class XMPP implements IAccount, ConnectionListener, MessageListener, Pack
     @Override
     public void processMessage(Chat arg0, Message arg1)
     {
-        LogUtil.log("processMessage");
+        System.out.println(arg1.getBody());
+        //LogUtil.log("processMessage");
     }
 
     @Override
