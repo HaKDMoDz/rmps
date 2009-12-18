@@ -42,4 +42,16 @@ public interface IConnect
      * @return
      */
     String getMail();
+
+    /**
+     * 获取服务器路径
+     * @return
+     */
+    String getServer();
+
+    /**
+     * 获取服务器端口
+     * @return
+     */
+    int getPort();
 }

@@ -28,7 +28,7 @@ import rmp.irp.comn.ASession;
  */
 public class Session extends ASession
 {
-    Chat chat;
+    Chat session;
 
     @Override
     public void send()
@@ -40,7 +40,7 @@ public class Session extends ASession
     {
         try
         {
-            chat.sendMessage(message);
+            session.sendMessage(message);
         }
         catch (XMPPException ex)
         {
@@ -51,7 +51,6 @@ public class Session extends ASession
     @Override
     public void send(String message, boolean useCopy)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -61,7 +60,7 @@ public class Session extends ASession
         {
             if (message instanceof Message)
             {
-                chat.sendMessage(((Message) message).message);
+                session.sendMessage(((Message) message).message);
             }
         }
         catch (XMPPException ex)
@@ -73,13 +72,11 @@ public class Session extends ASession
     @Override
     public void send(IMimeMessage message)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void send(File file)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -102,6 +99,6 @@ public class Session extends ASession
     @Override
     public IMimeMessage createMimeMessage()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return null;
     }
 }

@@ -14,8 +14,8 @@ import cons.irp.ConsEnv;
 
 import java.util.HashMap;
 
-import rmp.irp.v.live.Live;
 import com.amonsoft.util.LogUtil;
+import rmp.irp.v.meebo.Meebo;
 
 /**
  * <ul>
@@ -40,7 +40,7 @@ public class Irps
         accounts = new HashMap<String, IAccount>();
         IAccount account;
 
-        account = new Live();
+        account = new Meebo();
         account.sign(IStatus.INIT);
         account.sign(IStatus.LINE);
         accounts.put(ConsEnv.IM_LIVE, account);

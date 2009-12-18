@@ -26,6 +26,8 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smack.packet.Presence;
 import com.amonsoft.util.LogUtil;
+import java.util.ArrayList;
+import org.jivesoftware.smack.RosterEntry;
 
 /**
  * <ul>
@@ -38,7 +40,7 @@ import com.amonsoft.util.LogUtil;
  */
 public class XMPP implements IAccount, ConnectionListener, MessageListener, PacketListener, ChatManagerListener
 {
-    private Connect connect;
+    protected IConnect connect;
     private XMPPConnection messenger;
     private Session session;
 
@@ -68,7 +70,7 @@ public class XMPP implements IAccount, ConnectionListener, MessageListener, Pack
                     messenger.login(connect.getUser(), connect.getPwds());
 
                     Presence presence = new Presence(Presence.Type.available);
-                    presence.setStatus("Gone fishing");
+                    presence.setStatus("I'm Coming...");
                     messenger.sendPacket(presence);
 
                     PacketFilter filter = new PacketFilter()
@@ -84,8 +86,8 @@ public class XMPP implements IAccount, ConnectionListener, MessageListener, Pack
                     messenger.addPacketWriterListener(this, filter);
 
                     ChatManager chatmanager = messenger.getChatManager();
-                    chatmanager.addChatListener(null);
-                    Chat newChat = chatmanager.createChat("amon@jabber.org", this);
+                    chatmanager.addChatListener(this);
+                    Chat newChat = chatmanager.createChat("amonyao", this);
                     newChat.sendMessage("haha");
                 }
                 catch (XMPPException exp)
@@ -93,6 +95,10 @@ public class XMPP implements IAccount, ConnectionListener, MessageListener, Pack
                     LogUtil.exception(exp);
                 }
                 break;
+            case IStatus.AWAY:
+                Presence presence = new Presence(Presence.Type.unavailable);
+                presence.setStatus("Gone fishing");
+                messenger.sendPacket(presence);
             case IStatus.DOWN:
                 messenger.disconnect();
                 break;
@@ -121,6 +127,10 @@ public class XMPP implements IAccount, ConnectionListener, MessageListener, Pack
     @Override
     public List<IContact> getContact()
     {
+        List<IContact> list = new ArrayList<IContact>();
+        for (RosterEntry re : messenger.getRoster().getEntries())
+        {
+        }
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

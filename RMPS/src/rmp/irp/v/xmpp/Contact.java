@@ -5,11 +5,11 @@
  * Description:
  *
  */
-package rmp.irp.v.live;
+package rmp.irp.v.xmpp;
 
 import com.amonsoft.rmps.irp.b.ICatalog;
 import com.amonsoft.rmps.irp.b.IContact;
-import net.sf.jml.MsnContact;
+import org.jivesoftware.smack.RosterEntry;
 
 /**
  * <ul>
@@ -22,30 +22,35 @@ import net.sf.jml.MsnContact;
  */
 public class Contact implements IContact
 {
-    MsnContact contact;
+    private RosterEntry contact;
+
+    public Contact(RosterEntry contact)
+    {
+        this.contact = contact;
+    }
 
     @Override
     public String getDisplayName()
     {
-        return contact.getDisplayName();
+        return contact.getName();
     }
 
     @Override
     public String getEmail()
     {
-        return contact.getEmail().getEmailAddress();
+        return contact.getUser();
     }
 
     @Override
     public String getStatus()
     {
-        return contact.getStatus().getStatus();
+        return contact.getStatus().toString();
     }
 
     @Override
     public String getPersonalMessage()
     {
-        return contact.getPersonalMessage();
+        return "";
     }
 
     @Override

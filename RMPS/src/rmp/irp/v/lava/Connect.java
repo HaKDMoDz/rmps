@@ -43,4 +43,16 @@ public class Connect implements IConnect
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public String getServer()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public int getPort()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

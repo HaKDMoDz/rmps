@@ -11,25 +11,12 @@ package com.amonsoft.rmps.irp.b;
  * <ul>
  * <li>功能说明：</li>
  * <br />
- * RMPS系统入口
+ * 用户所属目录
  * <li>使用说明：</li>
  * <br />
  * </ul>
  * @author Amon
  */
-public interface IContact
+public interface ICatalog
 {
-    String getDisplayName();
-
-    String getEmail();
-
-    String getStatus();
-
-    String getPersonalMessage();
-
-    /**
-     * 获取用户所属的组
-     * @return
-     */
-    ICatalog[] getGroups();
 }

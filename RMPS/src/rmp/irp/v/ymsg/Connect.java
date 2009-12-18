@@ -52,4 +52,16 @@ public class Connect implements IConnect
     {
         return user;
     }
+
+    @Override
+    public String getServer()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public int getPort()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

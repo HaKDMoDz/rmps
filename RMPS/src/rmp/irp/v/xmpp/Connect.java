@@ -59,6 +59,7 @@ public class Connect implements IConnect
     /**
      * @return the server
      */
+    @Override
     public String getServer()
     {
         return server;
@@ -75,6 +76,7 @@ public class Connect implements IConnect
     /**
      * @return the port
      */
+    @Override
     public int getPort()
     {
         return port;
