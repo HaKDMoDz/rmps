@@ -57,8 +57,7 @@ public class XMPP implements IAccount, ConnectionListener, MessageListener, Pack
         switch (status)
         {
             case IStatus.INIT:
-                connect = new Connect();
-                connect.load();
+                getConnect();
                 break;
             case IStatus.LINE:
                 try
@@ -105,6 +104,11 @@ public class XMPP implements IAccount, ConnectionListener, MessageListener, Pack
     @Override
     public IConnect getConnect()
     {
+        if (connect == null)
+        {
+            connect = new Connect();
+            connect.load();
+        }
         return connect;
     }
 

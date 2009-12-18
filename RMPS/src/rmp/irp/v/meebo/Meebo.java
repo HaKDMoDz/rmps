@@ -5,7 +5,7 @@
  * Description:
  *
  */
-package rmp.irp.v.gtalk;
+package rmp.irp.v.meebo;
 
 import com.amonsoft.rmps.irp.v.IConnect;
 import rmp.irp.v.xmpp.XMPP;
@@ -19,7 +19,7 @@ import rmp.irp.v.xmpp.XMPP;
  * </ul>
  * @author Amon
  */
-public class GTalk extends XMPP
+public class Meebo extends XMPP
 {
     private Connect connect;
 
