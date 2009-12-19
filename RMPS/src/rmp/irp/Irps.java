@@ -15,6 +15,7 @@ import cons.irp.ConsEnv;
 import java.util.HashMap;
 
 import com.amonsoft.util.LogUtil;
+import rmp.irp.v.gtalk.GTalk;
 import rmp.irp.v.meebo.Meebo;
 import rmp.irp.v.xmpp.XMPP;
 
@@ -41,7 +42,7 @@ public class Irps
         accounts = new HashMap<String, IAccount>();
         IAccount account;
 
-        account = new XMPP();
+        account = new GTalk();
         account.sign(IStatus.INIT);
         account.sign(IStatus.LINE);
         accounts.put(ConsEnv.IM_LIVE, account);

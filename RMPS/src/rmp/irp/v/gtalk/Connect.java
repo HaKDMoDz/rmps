@@ -24,7 +24,7 @@ public class Connect implements IConnect
     private String pwds;
     private String host;
     private String server;
-    private int port = 5222;
+    private int port;
     private int priority = 10;
 
     public Connect()

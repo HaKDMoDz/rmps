@@ -21,8 +21,6 @@ import rmp.irp.v.xmpp.XMPP;
  */
 public class GTalk extends XMPP
 {
-    private Connect connect;
-
     @Override
     public IConnect getConnect()
     {

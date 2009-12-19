@@ -13,7 +13,6 @@ import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IStatus;
 import java.util.List;
 import org.jivesoftware.smack.Chat;
-import org.jivesoftware.smack.ChatManager;
 import org.jivesoftware.smack.ChatManagerListener;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.ConnectionListener;
@@ -73,24 +72,25 @@ public class XMPP implements IAccount, ConnectionListener, MessageListener, Pack
                     messenger.connect();
                     messenger.login(connect.getUser(), connect.getPwds());
 
-//                    Presence presence = new Presence(Presence.Type.available);
-//                    presence.setStatus("I'm Coming...");
-//                    messenger.sendPacket(presence);
+                    Presence presence = new Presence(Presence.Type.available);
+                    presence.setStatus("I'm Coming...");
+                    messenger.sendPacket(presence);
 
-//                    PacketFilter filter = new PacketFilter()
-//                    {
-//                        @Override
-//                        public boolean accept(Packet arg0)
-//                        {
-//                            return true;
-//                        }
-//                    };
-//                    messenger.addConnectionListener(this);
-//                    messenger.addPacketListener(this, filter);
-//                    messenger.addPacketWriterListener(this, filter);
+                    PacketFilter filter = new PacketFilter()
+                    {
+                        @Override
+                        public boolean accept(Packet arg0)
+                        {
+                            return true;
+                        }
+                    };
+                    messenger.addConnectionListener(this);
+                    messenger.addPacketListener(this, filter);
+                    messenger.addPacketWriterListener(this, filter);
 
-                    Chat chat = messenger.getChatManager().createChat("amon.rg@jabber.org", this);
+                    Chat chat = messenger.getChatManager().createChat("amon.hm@gmail.com", this);
                     chat.sendMessage("haha");
+                    chat.addMessageListener(this);
                 }
                 catch (XMPPException exp)
                 {
@@ -172,14 +172,14 @@ public class XMPP implements IAccount, ConnectionListener, MessageListener, Pack
     @Override
     public void processMessage(Chat arg0, Message arg1)
     {
-        System.out.println(arg1.getBody());
+        System.out.println("processMessage:" + arg1.getBody());
         //LogUtil.log("processMessage");
     }
 
     @Override
     public void processPacket(Packet arg0)
     {
-        LogUtil.log("processPacket");
+        LogUtil.log("processPacket：" + arg0);
     }
 
     @Override
