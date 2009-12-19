@@ -22,13 +22,17 @@ public class Connect implements IConnect
 {
     private String user;
     private String pwds;
-    private String server = "meebo.org";
-    private int port = 5222;
+    private String host;
+    private int port;
+    private String server;
     private int priority = 10;
 
     @Override
     public boolean load()
     {
+        host = "meebo.org";
+        port = 5222;
+        server = "meebo.org";
         user = "Amon.CT";
         pwds = "!~g_OQ5;";
         return true;
@@ -53,8 +57,26 @@ public class Connect implements IConnect
     }
 
     /**
+     * @return the host
+     */
+    @Override
+    public String getHost()
+    {
+        return host;
+    }
+
+    /**
+     * @param host the host to set
+     */
+    public void setHost(String host)
+    {
+        this.host = host;
+    }
+
+    /**
      * @return the server
      */
+    @Override
     public String getServer()
     {
         return server;
@@ -71,6 +93,7 @@ public class Connect implements IConnect
     /**
      * @return the port
      */
+    @Override
     public int getPort()
     {
         return port;

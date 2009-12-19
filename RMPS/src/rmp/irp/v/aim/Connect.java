@@ -22,12 +22,15 @@ public class Connect implements IConnect
 {
     private String user;
     private String pwds;
-    private String server = "toc.oscar.aol.com";
-    private int port = 9898;
+    private String host;
+    private int port;
+    private String server;
 
     @Override
     public boolean load()
     {
+        host = "toc.oscar.aol.com";
+        port = 9898;
         user = "amon.ct@mail.com";
         pwds = "cEl6soOa";
         return true;
@@ -51,9 +54,24 @@ public class Connect implements IConnect
         return user;
     }
 
+    @Override
+    public String getHost()
+    {
+        return host;
+    }
+
+    /**
+     * @param host
+     */
+    public void setHost(String host)
+    {
+        this.host = host;
+    }
+
     /**
      * @return the server
      */
+    @Override
     public String getServer()
     {
         return server;
@@ -70,6 +88,7 @@ public class Connect implements IConnect
     /**
      * @return the port
      */
+    @Override
     public int getPort()
     {
         return port;

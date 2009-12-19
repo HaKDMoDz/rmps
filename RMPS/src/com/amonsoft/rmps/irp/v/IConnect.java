@@ -44,13 +44,19 @@ public interface IConnect
     String getMail();
 
     /**
-     * 获取服务器路径
+     * 获取服务名称
+     * @return
+     */
+    String getHost();
+
+    /**
+     * 获取服务路径
      * @return
      */
     String getServer();
 
     /**
-     * 获取服务器端口
+     * 获取服务端口
      * @return
      */
     int getPort();

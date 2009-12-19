@@ -22,6 +22,7 @@ public class Connect implements IConnect
 {
     private String user;
     private String pwds;
+    private String host;
     private String version;
     private String sysCfg;
     private String sipCfg;
@@ -52,6 +53,35 @@ public class Connect implements IConnect
 
     @Override
     public String getMail()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    /**
+     * @return the host
+     */
+    @Override
+    public String getHost()
+    {
+        return host;
+    }
+
+    /**
+     * @param host the host to set
+     */
+    public void setHost(String host)
+    {
+        this.host = host;
+    }
+
+    @Override
+    public String getServer()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public int getPort()
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -118,17 +148,5 @@ public class Connect implements IConnect
     public void setVersion(String version)
     {
         this.version = version;
-    }
-
-    @Override
-    public String getServer()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public int getPort()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

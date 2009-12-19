@@ -53,15 +53,31 @@ public class Connect implements IConnect
         return user;
     }
 
+    /**
+     * @return the host
+     */
+    @Override
+    public String getHost()
+    {
+        return "";
+    }
+
+    /**
+     * @param host the host to set
+     */
+    public void setHost(String host)
+    {
+    }
+
     @Override
     public String getServer()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "";
     }
 
     @Override
     public int getPort()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return 0;
     }
 }

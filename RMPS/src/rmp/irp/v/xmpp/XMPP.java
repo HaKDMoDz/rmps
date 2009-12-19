@@ -65,7 +65,7 @@ public class XMPP implements IAccount, ConnectionListener, MessageListener, Pack
             case IStatus.LINE:
                 try
                 {
-                    ConnectionConfiguration config = new ConnectionConfiguration(connect.getServer(), connect.getPort(), connect.getServer());
+                    ConnectionConfiguration config = new ConnectionConfiguration(connect.getHost(), connect.getPort(), connect.getServer());
 //                    config.setCompressionEnabled(true);
 //                    config.setSASLAuthenticationEnabled(true);
 

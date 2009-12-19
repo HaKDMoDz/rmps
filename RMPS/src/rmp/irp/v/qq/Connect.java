@@ -44,6 +44,22 @@ public class Connect implements IConnect
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * @return the host
+     */
+    @Override
+    public String getHost()
+    {
+        return "";
+    }
+
+    /**
+     * @param host the host to set
+     */
+    public void setHost(String host)
+    {
+    }
+
     @Override
     public String getServer()
     {

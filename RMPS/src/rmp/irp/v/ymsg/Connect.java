@@ -53,6 +53,15 @@ public class Connect implements IConnect
         return user;
     }
 
+    /**
+     * @return the host
+     */
+    @Override
+    public String getHost()
+    {
+        return "";
+    }
+
     @Override
     public String getServer()
     {

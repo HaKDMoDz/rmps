@@ -22,7 +22,8 @@ public class Connect implements IConnect
 {
     private String user;
     private String pwds;
-    private String server = "jabber.org";
+    private String host;
+    private String server;
     private int port = 5222;
     private int priority = 10;
 
@@ -33,8 +34,11 @@ public class Connect implements IConnect
     @Override
     public boolean load()
     {
-        user = "Amon.CT@jabber.org";
-        pwds = "Amon123";
+        setHost("talk.google.com");
+        port = 5222;
+        server = "gmail.com";
+        user = "Amon.CT@gmail.com";
+        pwds = "qTrH2e3oXk";
         return true;
     }
 
@@ -57,8 +61,26 @@ public class Connect implements IConnect
     }
 
     /**
+     * @return the host
+     */
+    @Override
+    public String getHost()
+    {
+        return host;
+    }
+
+    /**
+     * @param host the host to set
+     */
+    public void setHost(String host)
+    {
+        this.host = host;
+    }
+
+    /**
      * @return the server
      */
+    @Override
     public String getServer()
     {
         return server;
@@ -75,6 +97,7 @@ public class Connect implements IConnect
     /**
      * @return the port
      */
+    @Override
     public int getPort()
     {
         return port;
