@@ -14,9 +14,9 @@ import java.util.Properties;
 
 import rmp.util.CheckUtil;
 import com.amonsoft.util.LogUtil;
-import rmp.util.RmpsUtil;
 import cons.CfgCons;
 import cons.EnvCons;
+import rmp.Rmps;
 
 /**
  * <ul>
@@ -98,7 +98,7 @@ public final class Util
             // 使用默认资源文件
             StringBuffer defAdFilePath = new StringBuffer(EnvCons.FOLDER0_LANG);
             defAdFilePath.append(EnvCons.PATH_C4010000).append(EnvCons.COMN_SP_FILE);
-            defAdFilePath.append("pbad_").append(RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_LANG_ID)).append(".wad");
+            defAdFilePath.append("pbad_").append(Rmps.getUser().getCfg(CfgCons.CFG_LANG_ID)).append(".wad");
             adFilePath = new File(defAdFilePath.toString());
 
             // 默认资源文件也不存在的情况下，直接返回

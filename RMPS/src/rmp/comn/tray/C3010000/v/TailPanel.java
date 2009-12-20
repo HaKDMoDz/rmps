@@ -11,9 +11,9 @@ import java.awt.FlowLayout;
 
 import rmp.comn.tray.C3010000.C3010000;
 import rmp.comn.tray.C3010000.t.Util;
-import rmp.util.RmpsUtil;
 import cons.comn.tray.C3010000.ConstUI;
 import cons.comn.tray.C3010000.LangRes;
+import rmp.Rmps;
 
 /**
  * <ul>
@@ -155,7 +155,7 @@ public class TailPanel
         String mesg = tf_TrayTips.getText().trim();
         ms_MainSoft.displayMessage(LangRes.TITLE_MESSAGE_CHANGE, mesg, java.awt.TrayIcon.MessageType.INFO);
         ms_MainSoft.changeTooltips(mesg);
-        RmpsUtil.getUserInfo().setCfg(ConstUI.CFG_USERMESG, mesg.length() > 0 ? mesg : LangRes.TRAY_TIPS_ICONTRAY);
+        Rmps.getUser().setCfg(ConstUI.CFG_USERMESG, mesg.length() > 0 ? mesg : LangRes.TRAY_TIPS_ICONTRAY);
     }
     /** 查询按钮 */
     private javax.swing.JButton bt_TrayTips;
