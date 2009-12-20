@@ -18,7 +18,6 @@ import javax.swing.JPanel;
 
 import rmp.Rmps;
 import rmp.comn.C1010000.C1010000;
-import rmp.comn.tray.C3010000.C3010000;
 import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.Prps;
 import rmp.comn.user.UserInfo;
@@ -27,7 +26,6 @@ import rmp.util.FileUtil;
 import rmp.util.ImageUtil;
 import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
-import rmp.util.RmpsUtil;
 import cons.CfgCons;
 import cons.EnvCons;
 import cons.SysCons;
@@ -441,7 +439,7 @@ public class P30F0000 extends WForm implements IPrpPlus
     {
         StringBuffer sb = new StringBuffer();
         sb.append(EnvCons.PATH_CF010000).append(EnvCons.COMN_SP_FILE);
-        sb.append(EnvCons.COMN_SOFT_INFO).append(RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_LANG_ID));
+        sb.append(EnvCons.COMN_SOFT_INFO).append(Rmps.getUser().getCfg(CfgCons.CFG_LANG_ID));
         sb.append(SysCons.EXTS_INFO);
         return sb.toString();
     }
@@ -506,7 +504,7 @@ public class P30F0000 extends WForm implements IPrpPlus
 
         UserInfo ui = new UserInfo("Amon", "amon");
         ui.wInit();
-        RmpsUtil.setUserInfo(ui);
+        Rmps.setUser(ui);
 
         // 1、 启动系统日志
         LogUtil.wInit();
@@ -526,7 +524,7 @@ public class P30F0000 extends WForm implements IPrpPlus
         }
 
         // 4、 应用界面风格
-        if (!Rmps.initLnF(ui.getCfg(CfgCons.CFG_LNF_TYPE), ui.getCfg(CfgCons.CFG_LNF_NAME)))
+        if (!Rmps.initLnF())
         {
             System.exit(0);
             return;
@@ -544,7 +542,7 @@ public class P30F0000 extends WForm implements IPrpPlus
         }
 
         // 系统托盘
-        C3010000.getInstance();
+        //C3010000.getInstance();
 //        C3010000.regester("P30F0000", softFForm);
     }
 }

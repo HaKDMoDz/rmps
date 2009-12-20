@@ -28,8 +28,6 @@ import rmp.util.FileUtil;
 import rmp.util.ImageUtil;
 import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
-import rmp.util.RmpsUtil;
-import cons.CfgCons;
 import cons.EnvCons;
 import cons.id.PrpCons;
 import cons.comn.user.U0020000.ConstUI;
@@ -560,7 +558,7 @@ public class U0020000 extends WForm implements IPrpPlus
 
         UserInfo ui = new UserInfo("Amon", "amon");
         ui.wInit();
-        RmpsUtil.setUserInfo(ui);
+        Rmps.setUser(ui);
 
         // 显示主窗口 启动应用程序
         wShowView(VIEW_NORM);
@@ -580,7 +578,7 @@ public class U0020000 extends WForm implements IPrpPlus
 
         UserInfo ui = new UserInfo("Amon", "amon");
         ui.wInit();
-        RmpsUtil.setUserInfo(ui);
+        Rmps.setUser(ui);
 
         // 1、 启动系统日志
         LogUtil.wInit();
@@ -600,7 +598,7 @@ public class U0020000 extends WForm implements IPrpPlus
         }
 
         // 4、 应用界面风格
-        if (!Rmps.initLnF(ui.getCfg(CfgCons.CFG_LNF_TYPE), ui.getCfg(CfgCons.CFG_LNF_NAME)))
+        if (!Rmps.initLnF())
         {
             System.exit(0);
             return;

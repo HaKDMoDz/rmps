@@ -14,7 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import rmp.prp.Prps;
 import cons.prp.LangRes;
-import rmp.comn.tray.C3010000.C3010000;
 import com.amonsoft.util.LangUtil;
 import com.amonsoft.util.DeskUtil;
 import com.amonsoft.util.LogUtil;
@@ -450,7 +449,7 @@ public class StdPlus extends javax.swing.JPanel
      */
     private void checkUpdate()
     {
-        javax.swing.JFrame frm = (javax.swing.JFrame) C3010000.queryRef("prp");
+        javax.swing.JFrame frm = null;//(javax.swing.JFrame) C3010000.queryRef("prp");
         try
         {
             boolean isNew = RmpsUtil.checkUpdate(EnvCons.PRPS_SOFTEDIT, ConstUI.VER_SOFT);

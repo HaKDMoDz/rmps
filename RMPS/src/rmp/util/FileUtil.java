@@ -28,10 +28,10 @@ import java.util.Properties;
 import javax.swing.JFileChooser;
 
 import rmp.bean.FilesFilter;
-import com.amonsoft.rmps.IRmps;
 import cons.CfgCons;
 import cons.EnvCons;
 import cons.ui.LangRes;
+import rmp.Rmps;
 
 /**
  * <ul>
@@ -522,7 +522,7 @@ public final class FileUtil
     {
         StringBuffer sb = new StringBuffer();
         sb.append(EnvCons.PATH_RES).append(path).append(EnvCons.COMN_SP_FILE);
-        sb.append(StringUtil.format(name, RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_LANG_ID)));
+        sb.append(StringUtil.format(name, Rmps.getUser().getCfg(CfgCons.CFG_LANG_ID)));
         return FileUtil.class.getResource(sb.toString());
     }
 
@@ -535,7 +535,7 @@ public final class FileUtil
     {
         StringBuffer sb = new StringBuffer();
         sb.append(EnvCons.PATH_RES).append(path).append(EnvCons.COMN_SP_FILE);
-        sb.append(StringUtil.format(name, RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_LANG_ID)));
+        sb.append(StringUtil.format(name, Rmps.getUser().getCfg(CfgCons.CFG_LANG_ID)));
         LogUtil.log("系统语言资源加载：" + sb.toString());
         return FileUtil.class.getResourceAsStream(sb.toString());
     }

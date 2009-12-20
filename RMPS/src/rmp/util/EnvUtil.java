@@ -26,6 +26,7 @@ import javax.swing.Timer;
 
 import cons.EnvCons;
 import cons.SysCons;
+import rmp.Rmps;
 
 /**
  * <ul>
@@ -89,7 +90,7 @@ public final class EnvUtil
      */
     public static String getUserDir()
     {
-        return "" + RmpsUtil.getUserInfo().getUserID();
+        return "" + Rmps.getUser().getUserID();
     }
 
     // ----------------------------------------------------
@@ -230,7 +231,7 @@ public final class EnvUtil
      */
     public static void backupDatabase() throws Exception
     {
-        int uid = RmpsUtil.getUserInfo().getUserID();
+        int uid = Rmps.getUser().getUserID();
         String zip = uid + EnvCons.PATH_BAK + EnvCons.COMN_SP_FILE + "amon.backup";
         Jzip.zip(zip, uid + EnvCons.COMN_SP_FILE + "rmp.wsc", uid + EnvCons.PATH_DAT);
     }

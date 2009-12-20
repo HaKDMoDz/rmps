@@ -29,7 +29,6 @@ import rmp.util.BeanUtil;
 import rmp.util.FileUtil;
 import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
-import rmp.util.RmpsUtil;
 import cons.CfgCons;
 import cons.EnvCons;
 import cons.SysCons;
@@ -424,7 +423,7 @@ public class P3050000 extends WForm implements IPrpPlus
     {
         StringBuffer sb = new StringBuffer();
         sb.append(EnvCons.PATH_P3050000).append(EnvCons.COMN_SP_FILE);
-        sb.append(EnvCons.COMN_SOFT_INFO).append(RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_LANG_ID));
+        sb.append(EnvCons.COMN_SOFT_INFO).append(Rmps.getUser().getCfg(CfgCons.CFG_LANG_ID));
         sb.append(SysCons.EXTS_INFO);
         return sb.toString();
     }
@@ -501,7 +500,7 @@ public class P3050000 extends WForm implements IPrpPlus
 
         UserInfo ui = new UserInfo("Amon", "amon");
         ui.wInit();
-        RmpsUtil.setUserInfo(ui);
+        Rmps.setUser(ui);
 
         // 显示主窗口 启动应用程序
         wShowView(VIEW_NORM);
@@ -519,7 +518,7 @@ public class P3050000 extends WForm implements IPrpPlus
 
         UserInfo ui = new UserInfo("Amon", "amon");
         ui.wInit();
-        RmpsUtil.setUserInfo(ui);
+        Rmps.setUser(ui);
 
         // 1、 启动系统日志
         LogUtil.wInit();
@@ -539,7 +538,7 @@ public class P3050000 extends WForm implements IPrpPlus
         }
 
         // 4、 应用界面风格
-        if (!Rmps.initLnF(ui.getCfg(CfgCons.CFG_LNF_TYPE), ui.getCfg(CfgCons.CFG_LNF_NAME)))
+        if (!Rmps.initLnF())
         {
             System.exit(0);
             return;
@@ -550,6 +549,4 @@ public class P3050000 extends WForm implements IPrpPlus
         soft.wInitView();
         soft.wShowView(VIEW_MINI);
     }
-    /** serialVersionUID */
-    private static final long serialVersionUID = 4623903530200603927L;
 }

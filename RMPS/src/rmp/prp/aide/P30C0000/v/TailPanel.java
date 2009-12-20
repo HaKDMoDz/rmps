@@ -12,7 +12,6 @@ import java.net.UnknownHostException;
 import java.util.EventObject;
 import java.util.HashMap;
 
-import rmp.comn.tray.C3010000.C3010000;
 import rmp.face.WBackCall;
 import rmp.prp.aide.P30C0000.P30C0000;
 import rmp.prp.aide.P30C0000.t.Util;
@@ -82,7 +81,7 @@ public class TailPanel implements WBackCall
         catch(UnknownHostException exp)
         {
             LogUtil.exception(exp);
-            MesgUtil.showMessageDialog(C3010000.queryRef("prp"), "获取本机IP地址出错，请重新尝试！");
+            //MesgUtil.showMessageDialog(C3010000.queryRef("prp"), "获取本机IP地址出错，请重新尝试！");
         }
     }
 
@@ -199,12 +198,12 @@ public class TailPanel implements WBackCall
                 sb.append("物理地址：").append(dataList.get(1));
                 sb.append("</html>");
             }
-            MesgUtil.showMessageDialog(C3010000.queryRef("prp"), sb.toString());
+            //MesgUtil.showMessageDialog(C3010000.queryRef("prp"), sb.toString());
         }
         catch(Exception exp)
         {
             LogUtil.exception(exp);
-            MesgUtil.showMessageDialog(C3010000.queryRef("prp"), "IP地址查询出错，请重新查询");
+            //MesgUtil.showMessageDialog(C3010000.queryRef("prp"), "IP地址查询出错，请重新查询");
         }
     }
 

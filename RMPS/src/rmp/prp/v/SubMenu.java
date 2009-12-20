@@ -8,8 +8,8 @@
 package rmp.prp.v;
 
 import rmp.prp.Prps;
-import rmp.util.RmpsUtil;
 import cons.CfgCons;
+import rmp.Rmps;
 
 /**
  * <ul>
@@ -87,7 +87,7 @@ public class SubMenu
         // 总在最上
         mi_EverTop = new javax.swing.JCheckBoxMenuItem();
         mi_EverTop.setText("总在最上");
-        mi_EverTop.setSelected("true".equalsIgnoreCase(RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_WND_EVERTOP)));
+        mi_EverTop.setSelected("true".equalsIgnoreCase(Rmps.getUser().getCfg(CfgCons.CFG_WND_EVERTOP)));
         mi_EverTop.addActionListener(new java.awt.event.ActionListener()
         {
             @Override
@@ -107,7 +107,7 @@ public class SubMenu
         // 总在最上
         mi_EverTop = new javax.swing.JCheckBoxMenuItem();
         mi_EverTop.setText("总在最上");
-        mi_EverTop.setSelected("true".equalsIgnoreCase(RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_WND_EVERTOP)));
+        mi_EverTop.setSelected("true".equalsIgnoreCase(Rmps.getUser().getCfg(CfgCons.CFG_WND_EVERTOP)));
         mi_EverTop.addActionListener(new java.awt.event.ActionListener()
         {
             @Override
@@ -153,7 +153,7 @@ public class SubMenu
     {
         boolean b = mi_EverTop.isSelected();
         prps.setAlwaysOnTop(b);
-        RmpsUtil.getUserInfo().setCfg(CfgCons.CFG_WND_EVERTOP, Boolean.toString(b));
+        Rmps.getUser().setCfg(CfgCons.CFG_WND_EVERTOP, Boolean.toString(b));
     }
     /** 总在最上 */
     private javax.swing.JCheckBoxMenuItem mi_EverTop;

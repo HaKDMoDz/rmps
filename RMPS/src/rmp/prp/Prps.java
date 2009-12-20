@@ -128,7 +128,7 @@ public class Prps extends WForm
         layout.setVerticalGroup(vsg);
 
         // 窗口属性设置
-        setAlwaysOnTop(CfgCons.DEF_TRUE.equalsIgnoreCase(RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_WND_EVERTOP)));
+        setAlwaysOnTop(CfgCons.DEF_TRUE.equalsIgnoreCase(Rmps.getUser().getCfg(CfgCons.CFG_WND_EVERTOP)));
         pack();
         Dimension f = getSize();
         Dimension s = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -248,7 +248,7 @@ public class Prps extends WForm
                 mi_LfSystem_Handler(evt);
             }
         });
-        if (ISkin.LF_TYPE_SYSTEM.equals(RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_LNF_TYPE)))
+        if (ISkin.LF_TYPE_SYSTEM.equals(Rmps.getUser().getCfg(CfgCons.CFG_LNF_TYPE)))
         {
             mi_LfSystem.setSelected(true);
         }
@@ -267,7 +267,7 @@ public class Prps extends WForm
                 mi_LgSystem_Handler(evt);
             }
         });
-        if (ISkin.LF_TYPE_SYSTEM.equals(RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_LNF_TYPE)))
+        if (ISkin.LF_TYPE_SYSTEM.equals(Rmps.getUser().getCfg(CfgCons.CFG_LNF_TYPE)))
         {
             mi_LfSystem.setSelected(true);
         }
@@ -486,7 +486,7 @@ public class Prps extends WForm
             langUtil.setWText(cbItem, ConstUI.LANGUAGE_TXT + i, "");
             langUtil.setWTips(cbItem, ConstUI.LANGUAGE_TIP + i, "");
             langId = langUtil.getMesg(ConstUI.LANGUAGE_KEY + i, "");
-            if (RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_LANG_ID).equals(langId))
+            if (Rmps.getUser().getCfg(CfgCons.CFG_LANG_ID).equals(langId))
             {
                 cbItem.setSelected(true);
             }
@@ -543,7 +543,7 @@ public class Prps extends WForm
             langUtil.setWText(cbItem, ConstUI.SKIN_BASIC_TXT + i, "");
             langUtil.setWTips(cbItem, ConstUI.SKIN_BASIC_TIP + i, "");
             skinName = langUtil.getMesg(ConstUI.SKIN_BASIC_KEY + i, "");
-            if (RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_LNF_NAME, "default").equals(skinName))
+            if (Rmps.getUser().getCfg(CfgCons.CFG_LNF_NAME, "default").equals(skinName))
             {
                 cbItem.setSelected(true);
             }
@@ -581,7 +581,7 @@ public class Prps extends WForm
             langUtil.setWText(cbItem, ConstUI.SKIN_SYNTH_TXT + i, "");
             langUtil.setWTips(cbItem, ConstUI.SKIN_SYNTH_TIP + i, "");
             skinName = langUtil.getMesg(ConstUI.SKIN_SYNTH_KEY + i, "");
-            if (RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_LNF_NAME, "default").equals(skinName))
+            if (Rmps.getUser().getCfg(CfgCons.CFG_LNF_NAME, "default").equals(skinName))
             {
                 cbItem.setSelected(true);
             }
@@ -811,7 +811,7 @@ public class Prps extends WForm
     {
         StringBuffer sb = new StringBuffer();
         sb.append(EnvCons.PATH_PRP).append(EnvCons.COMN_SP_FILE);
-        sb.append(EnvCons.COMN_SOFT_INFO).append(RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_LANG_ID));
+        sb.append(EnvCons.COMN_SOFT_INFO).append(Rmps.getUser().getCfg(CfgCons.CFG_LANG_ID));
         sb.append(SysCons.EXTS_INFO);
         return sb.toString();
     }
@@ -830,7 +830,8 @@ public class Prps extends WForm
         if (obj instanceof javax.swing.JCheckBoxMenuItem)
         {
             javax.swing.JCheckBoxMenuItem jbi = (javax.swing.JCheckBoxMenuItem) obj;
-            Rmps.initLnF(ISkin.LF_TYPE_BASIC, (String) jbi.getClientProperty(ConstUI.PROP_SKINNAME));
+            Rmps.getUser().setCfg(ISkin.LF_TYPE_BASIC, (String) jbi.getClientProperty(ConstUI.PROP_SKINNAME));
+            Rmps.initLnF();
             SwingUtilities.updateComponentTreeUI(this);
         }
     }
@@ -949,7 +950,7 @@ public class Prps extends WForm
         if (obj instanceof javax.swing.JCheckBoxMenuItem)
         {
             javax.swing.JCheckBoxMenuItem jcb = (javax.swing.JCheckBoxMenuItem) obj;
-            RmpsUtil.getUserInfo().setCfg(CfgCons.CFG_LANG_ID, (String) jcb.getClientProperty(ConstUI.PROP_LANGNAME));
+            Rmps.getUser().setCfg(CfgCons.CFG_LANG_ID, (String) jcb.getClientProperty(ConstUI.PROP_LANGNAME));
             langRes = null;
             initFileLang();
         }
@@ -962,7 +963,7 @@ public class Prps extends WForm
      */
     private void mi_LfSystem_Handler(java.awt.event.ActionEvent evt)
     {
-        Rmps.initLnF(ISkin.LF_TYPE_SYSTEM, "");
+        Rmps.initLnF();
         SwingUtilities.updateComponentTreeUI(this);
     }
 
@@ -973,7 +974,7 @@ public class Prps extends WForm
      */
     private void mi_LgSystem_Handler(java.awt.event.ActionEvent evt)
     {
-        RmpsUtil.getUserInfo().setCfg(CfgCons.CFG_LANG_NAME, "system");
+        Rmps.getUser().setCfg(CfgCons.CFG_LANG_NAME, "system");
         langRes = null;
         initFileLang();
     }
@@ -989,7 +990,7 @@ public class Prps extends WForm
         if (obj instanceof javax.swing.JCheckBoxMenuItem)
         {
             javax.swing.JCheckBoxMenuItem jbi = (javax.swing.JCheckBoxMenuItem) obj;
-            Rmps.initLnF(ISkin.LF_TYPE_SYNTH, (String) jbi.getClientProperty(ConstUI.PROP_SKINNAME));
+            Rmps.initLnF();
             SwingUtilities.updateComponentTreeUI(this);
         }
     }

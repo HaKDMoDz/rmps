@@ -14,8 +14,8 @@ import rmp.prp.aide.P3090000.t.Util;
 import rmp.util.CheckUtil;
 import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
-import rmp.util.RmpsUtil;
 import cons.prp.aide.P3090000.ConstUI;
+import rmp.Rmps;
 
 /**
  * <ul>
@@ -212,7 +212,7 @@ public final class SubMenu
             return;
         }
         city = city.trim();
-        RmpsUtil.getUserInfo().setCfg(ConstUI.CFG_CITY, city);
+        Rmps.getUser().setCfg(ConstUI.CFG_CITY, city);
         LogUtil.log("用户切换城市：" + city);
 
         Util.firePropertyChanged("tailPanel");
