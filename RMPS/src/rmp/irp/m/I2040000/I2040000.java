@@ -82,7 +82,7 @@ public class I2040000 implements IService
     public void doInit(ISession session, IMessage message)
     {
         session.send("Welcome to Phone:");
-        session.getProcess().setType(IProcess.CONTENT);
+        session.getProcess().setType(IProcess.TYPE_CONTENT);
     }
 
     @Override
@@ -136,7 +136,7 @@ public class I2040000 implements IService
 
             // 设置下一次操作状态
             IProcess process = session.getProcess();
-            process.setType(IProcess.CONTENT);
+            process.setType(IProcess.TYPE_CONTENT);
         }
         catch (Exception exp)
         {
@@ -193,7 +193,7 @@ public class I2040000 implements IService
 
             // 设置下一次操作状态
             IProcess process = session.getProcess();
-            process.setType(IProcess.CONTENT);
+            process.setType(IProcess.TYPE_CONTENT);
         }
         catch (Exception exp)
         {

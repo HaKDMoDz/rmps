@@ -171,9 +171,9 @@ public class Control implements IControl
             // 顶级目录
             if ("/".equals(msg))
             {
-                process.setFunc(IProcess.DEFFUNC);
-                process.setStep(IProcess.DEFSTEP);
-                process.setType(IProcess.DEFTYPE);
+                process.setFunc(IProcess.FUNC_DEFAULT);
+                process.setStep(IProcess.STEP_DEFAULT);
+                process.setType(IProcess.TYPE_DEFAULT);
                 return;
             }
             // 使用帮助
@@ -201,25 +201,25 @@ public class Control implements IControl
             if (">".equals(msg))
             {
                 process.setStep(process.getStep() + 1);
-                process.setType(IProcess.COMMAND);
+                process.setType(IProcess.TYPE_COMMAND);
             }
 
             if ("<".equals(msg))
             {
                 process.setStep(process.getStep() - 1);
-                process.setType(IProcess.COMMAND);
+                process.setType(IProcess.TYPE_COMMAND);
             }
 
             if (">>".equals(msg))
             {
                 process.setStep(process.getMost() - 1);
-                process.setType(IProcess.COMMAND);
+                process.setType(IProcess.TYPE_COMMAND);
             }
 
             if ("<<".equals(msg))
             {
                 process.setStep(0);
-                process.setType(IProcess.COMMAND);
+                process.setType(IProcess.TYPE_COMMAND);
             }
 
             // 用户选择功能

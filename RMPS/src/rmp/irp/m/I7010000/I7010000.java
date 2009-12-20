@@ -90,7 +90,7 @@ public class I7010000 implements IService
     public void doInit(ISession session, IMessage message)
     {
         session.send("Welcome to IP:");
-        session.getProcess().setType(IProcess.CONTENT);
+        session.getProcess().setType(IProcess.TYPE_CONTENT);
     }
 
     @Override
@@ -134,7 +134,7 @@ public class I7010000 implements IService
 
                 // 设置下一次操作状态
                 IProcess process = session.getProcess();
-                process.setType(IProcess.CONTENT);
+                process.setType(IProcess.TYPE_CONTENT);
             }
             else
             {

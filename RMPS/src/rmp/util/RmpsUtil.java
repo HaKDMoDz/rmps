@@ -20,8 +20,6 @@ import javax.swing.JPopupMenu;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 
-import com.amonsoft.rmps.IRmps;
-import rmp.comn.user.UserInfo;
 import cons.SysCons;
 import org.dom4j.Document;
 import org.dom4j.Node;
@@ -39,40 +37,11 @@ import org.dom4j.io.SAXReader;
  */
 public final class RmpsUtil
 {
-    /** 当前登录用户信息 */
-    private static UserInfo userInfo;
-
     /**
      * 
      */
     private RmpsUtil()
     {
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see rmp.face.IRmps#init()
-     */
-    public boolean wInit()
-    {
-        return true;
-    }
-
-    /**
-     * @return the userInfo
-     */
-    public static UserInfo getUserInfo()
-    {
-        return userInfo;
-    }
-
-    /**
-     * @param userInfo the userInfo to set
-     */
-    public static void setUserInfo(UserInfo userInfo)
-    {
-        RmpsUtil.userInfo = userInfo;
     }
 
     /**

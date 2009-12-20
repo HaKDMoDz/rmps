@@ -120,7 +120,7 @@ public class I2020000 implements IService
             }
 
             // 翻页命令
-            if (proc.getType() == IProcess.COMMAND)
+            if (proc.getType() == IProcess.TYPE_COMMAND)
             {
                 List<String> list = (List<String>) session.getAttribute(getCode() + "_m");
                 if (list == null || list.size() < 1)
@@ -183,7 +183,7 @@ public class I2020000 implements IService
                 }
             }
             // 设置下一次操作状态
-            proc.setType(IProcess.CONTENT);
+            proc.setType(IProcess.TYPE_CONTENT);
         }
         catch (Exception exp)
         {

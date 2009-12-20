@@ -19,21 +19,7 @@ package com.amonsoft.rmps.irp.b;
  */
 public interface IProcess
 {
-    /**
-     * 功能切换关键字
-     */
-    int KEYCODE = 0;
-    /**
-     * 命令执行文本
-     */
-    int COMMAND = 1;
-    /**
-     * 用户内容文本
-     */
-    int CONTENT = 2;
-    int DEFFUNC = 0x50000000;
-    int DEFSTEP = 0;
-    int DEFTYPE = KEYCODE;
+    int FUNC_DEFAULT = 0x50000000;
 
     /**
      * 获取当前功能标记
@@ -42,6 +28,7 @@ public interface IProcess
     int getFunc();
 
     void setFunc(int func);
+    int STEP_DEFAULT = 0;
 
     /**
      * 获取当前操作标记
@@ -50,6 +37,22 @@ public interface IProcess
     int getStep();
 
     void setStep(int step);
+    /**
+     * 默认
+     */
+    int TYPE_DEFAULT = 0;
+    /**
+     * 功能切换关键字
+     */
+    int TYPE_KEYCODE = 1;
+    /**
+     * 命令执行文本
+     */
+    int TYPE_COMMAND = 2;
+    /**
+     * 用户内容文本
+     */
+    int TYPE_CONTENT = 4;
 
     int getType();
 

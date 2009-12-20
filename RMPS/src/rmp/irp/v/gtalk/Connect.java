@@ -34,7 +34,7 @@ public class Connect implements IConnect
     @Override
     public boolean load()
     {
-        setHost("talk.google.com");
+        host = "talk.google.com";
         port = 5222;
         server = "gmail.com";
         user = "Amon.CT@gmail.com";

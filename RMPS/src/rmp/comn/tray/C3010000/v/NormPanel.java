@@ -235,6 +235,4 @@ public class NormPanel
     private java.awt.MenuItem mi_ShowForm;
     /** 显示窗口 */
     private java.awt.MenuItem mi_Seperator;
-    /** serialVersionUID */
-    private static final long serialVersionUID = 1773860656392217122L;
 }

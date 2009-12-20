@@ -27,9 +27,9 @@ public class Process implements IProcess
 
     Process()
     {
-        func = DEFFUNC;
-        step = DEFSTEP;
-        type = DEFTYPE;
+        func = FUNC_DEFAULT;
+        step = STEP_DEFAULT;
+        type = TYPE_DEFAULT;
     }
 
     /**
