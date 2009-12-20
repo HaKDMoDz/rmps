@@ -24,10 +24,10 @@ import rmp.comn.user.UserInfo;
 import rmp.util.CheckUtil;
 import rmp.util.FileUtil;
 import rmp.util.MesgUtil;
-import rmp.util.RmpsUtil;
 import rmp.util.StringUtil;
 import cons.CfgCons;
 import cons.EnvCons;
+import rmp.Rmps;
 
 /**
  * <ul>
@@ -451,7 +451,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         // 已有语言资源读取
         // ------------------------------------------------
         // 语言资源路径
-        UserInfo us = RmpsUtil.getUserInfo();
+        UserInfo us = Rmps.getUser();
         StringBuilder filePath = new StringBuilder();
         filePath.append(EnvCons.FOLDER0_LANG).append(EnvCons.COMN_SP_FILE);
         filePath.append(EnvCons.FOLDER1_PRP).append(EnvCons.COMN_SP_FILE);

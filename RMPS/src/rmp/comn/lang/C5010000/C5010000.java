@@ -33,7 +33,6 @@ import rmp.comn.user.UserInfo;
 import rmp.util.BeanUtil;
 import com.amonsoft.util.DeskUtil;
 import com.amonsoft.util.LogUtil;
-import rmp.util.RmpsUtil;
 
 /**
  * <ul>
@@ -400,7 +399,7 @@ public class C5010000 extends WForm implements IPrpPlus
     {
         StringBuffer sb = new StringBuffer();
         sb.append(EnvCons.PATH_CF010000).append(EnvCons.COMN_SP_FILE);
-        sb.append(EnvCons.COMN_SOFT_INFO).append(RmpsUtil.getUserInfo().getCfg(CfgCons.CFG_LANG_ID));
+        sb.append(EnvCons.COMN_SOFT_INFO).append(Rmps.getUser().getCfg(CfgCons.CFG_LANG_ID));
         sb.append(SysCons.EXTS_INFO);
         return sb.toString();
     }
@@ -507,7 +506,7 @@ public class C5010000 extends WForm implements IPrpPlus
 
         UserInfo ui = new UserInfo("Amon", "amon");
         ui.wInit();
-        RmpsUtil.setUserInfo(ui);
+        Rmps.setUser(ui);
 
         // 显示主窗口 启动应用程序
         wShowView(VIEW_NORM);
@@ -527,7 +526,7 @@ public class C5010000 extends WForm implements IPrpPlus
 
         UserInfo ui = new UserInfo("Amon", "amon");
         ui.wInit();
-        RmpsUtil.setUserInfo(ui);
+        Rmps.setUser(ui);
 
         // 1、 启动系统日志
         LogUtil.wInit();
@@ -547,7 +546,7 @@ public class C5010000 extends WForm implements IPrpPlus
         }
 
         // 4、 应用界面风格
-        if (!Rmps.initLnF(ui.getCfg(CfgCons.CFG_LNF_TYPE), ui.getCfg(CfgCons.CFG_LNF_NAME)))
+        if (!Rmps.initLnF())
         {
             System.exit(0);
             return;
