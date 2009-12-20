@@ -18,6 +18,7 @@ import com.amonsoft.rmps.IRmps;
 import com.amonsoft.util.LogUtil;
 import cons.CfgCons;
 import cons.EnvCons;
+import rmp.util.EnvUtil;
 
 /**
  * <ul>
@@ -32,7 +33,7 @@ import cons.EnvCons;
 public final class UserInfo implements IRmps
 {
     /** 用户唯一标记ID */
-    private int uid;
+    private String uid;
     /** 用户登录名称 */
     private String unm;
     /** 用户登录口令 */
@@ -92,7 +93,7 @@ public final class UserInfo implements IRmps
      * 
      * @return
      */
-    public int getUserID()
+    public String getUserID()
     {
         return uid;
     }
@@ -116,11 +117,10 @@ public final class UserInfo implements IRmps
     {
         if (appMode == ConsSys.MODE_APPLICATION)
         {
-            StringBuffer ucf = new StringBuffer(baseFolder).append(uid).append(EnvCons.COMN_SP_FILE).append("rmp.wsc");
             FileInputStream fis = null;
             try
             {
-                fis = new FileInputStream(ucf.toString());
+                fis = new FileInputStream(EnvUtil.getPath(baseFolder, uid, "rmp.wsc"));
                 ucp.load(fis);
             }
             catch (Exception exp)
@@ -210,7 +210,7 @@ public final class UserInfo implements IRmps
      */
     public void setDefault()
     {
-        uid = 60000000;
+        uid = "60000000";
         ucp.clear();
         ucp.setProperty(CfgCons.CFG_LANG_NAME, "中国");
         ucp.setProperty(CfgCons.CFG_LANG_ID, "zh_CN");

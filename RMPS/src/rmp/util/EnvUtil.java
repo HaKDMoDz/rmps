@@ -54,6 +54,16 @@ public final class EnvUtil
     {
     }
 
+    public static String getPath(String... name)
+    {
+        StringBuffer sb = new StringBuffer();
+        for (String temp : name)
+        {
+            sb.append(EnvCons.COMN_SP_FILE).append(temp);
+        }
+        return sb.substring(EnvCons.COMN_SP_FILE.length());
+    }
+
     // ////////////////////////////////////////////////////////////////////////
     // 系统文件路径
     // ////////////////////////////////////////////////////////////////////////
@@ -231,9 +241,9 @@ public final class EnvUtil
      */
     public static void backupDatabase() throws Exception
     {
-        int uid = Rmps.getUser().getUserID();
-        String zip = uid + EnvCons.PATH_BAK + EnvCons.COMN_SP_FILE + "amon.backup";
-        Jzip.zip(zip, uid + EnvCons.COMN_SP_FILE + "rmp.wsc", uid + EnvCons.PATH_DAT);
+        String uid = Rmps.getUser().getUserID();
+        String zip = EnvUtil.getPath(EnvCons.FOLDER0_BAK, uid, "amon.backup");
+        Jzip.zip(zip, EnvUtil.getPath(EnvCons.FOLDER0_DATA, uid));
     }
 
     /**
@@ -309,7 +319,6 @@ public final class EnvUtil
             return null;
         }
     }
-
 
     /**
      * 运行命令或程序

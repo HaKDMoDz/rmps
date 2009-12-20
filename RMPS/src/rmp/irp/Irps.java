@@ -9,15 +9,10 @@ package rmp.irp;
 
 import com.amonsoft.rmps.irp.b.IStatus;
 import com.amonsoft.rmps.irp.v.IAccount;
-
-import cons.irp.ConsEnv;
-
-import java.util.HashMap;
-
 import com.amonsoft.util.LogUtil;
+import cons.irp.ConsEnv;
+import java.util.HashMap;
 import rmp.irp.v.gtalk.GTalk;
-import rmp.irp.v.meebo.Meebo;
-import rmp.irp.v.xmpp.XMPP;
 
 /**
  * <ul>
@@ -31,6 +26,26 @@ import rmp.irp.v.xmpp.XMPP;
 public class Irps
 {
     private static HashMap<String, IAccount> accounts;
+    private static java.awt.MenuItem irpsItem;
+
+    public static void init(java.awt.Menu menu)
+    {
+        if (menu == null)
+        {
+            return;
+        }
+
+        irpsItem = new java.awt.MenuItem("启动");
+        irpsItem.addActionListener(new java.awt.event.ActionListener()
+        {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                main(null);
+            }
+        });
+        menu.add(irpsItem);
+    }
 
     /**
      * @param args the command line arguments

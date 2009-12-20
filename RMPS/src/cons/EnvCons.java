@@ -74,6 +74,8 @@ public interface EnvCons
     // ========================================================================
     // 0级：软件运行环境变量
     // ========================================================================
+    /** 数据备份目录 */
+    String FOLDER0_BAK = "bak";
     String FOLDER0_DATA = "dat";
     /** 帮助目录 */
     String FOLDER0_HELP = "help";
@@ -94,8 +96,6 @@ public interface EnvCons
     // ========================================================================
     /** Amon专用目录 */
     String FOLDER1_AMON = "amon";
-    /** 数据备份目录 */
-    String FOLDER1_BAK = "bak";
     /** INFO系统目录 */
     String FOLDER1_COMN = "comn";
     /** 数据目录 */
@@ -273,7 +273,7 @@ public interface EnvCons
     /** 系统资源目录 */
     String PATH_RES = "/res";
     // 公共目录
-    String PATH_BAK = COMN_SP_FILE + FOLDER1_BAK;
+    String PATH_BAK = COMN_SP_FILE + FOLDER0_BAK;
     String PATH_DAT = COMN_SP_FILE + FOLDER1_DAT;
     String PATH_LOG = COMN_SP_FILE + FOLDER1_LOG;
     String PATH_TMP = COMN_SP_FILE + FOLDER1_TMP;

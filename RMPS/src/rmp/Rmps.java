@@ -28,6 +28,7 @@ import com.amonsoft.util.DeskUtil;
 import com.amonsoft.util.LangUtil;
 import cons.SysCons;
 import java.util.HashMap;
+import rmp.irp.Irps;
 
 /**
  * <ul>
@@ -41,6 +42,7 @@ import java.util.HashMap;
  */
 public final class Rmps
 {
+    private static Tray tray;
     /** 当前登录用户信息 */
     private static UserInfo user;
     private static LangUtil lang;
@@ -199,6 +201,7 @@ public final class Rmps
                 lang = LangUtil.initLang(file.getPath());
                 return true;
             }
+            LogUtil.log("系统启动：RMPS语言资源文件不存在!");
             return false;
         }
         catch (IOException exp)
@@ -217,8 +220,11 @@ public final class Rmps
     {
         LogUtil.log("系统启动：用户配置数据信息加载！");
 
-        user = new UserInfo("Amon", "amon");
-        user.wInit();
+        if (user == null)
+        {
+            user = new UserInfo("Amon", "amon");
+            user.wInit();
+        }
         user.loadCfg(EnvCons.COMN_PATH_HOME, ConsSys.MODE_APPLICATION);
 
         return true;
@@ -230,22 +236,25 @@ public final class Rmps
      */
     public static boolean initLnF()
     {
-        String type = user.getCfg(CfgCons.CFG_LNF_TYPE);//界面风格类别
-        String name = user.getCfg(CfgCons.CFG_LNF_NAME);//界面风格名称
-        if (type == null)
+        if (user == null)
         {
-            type = ISkin.LF_TYPE_SYSTEM;
+            return false;
         }
-        type = type.trim();
+
+        String type = user.getCfg(CfgCons.CFG_LNF_TYPE, ISkin.LF_TYPE_SYSTEM);//界面风格类别
+        String name;//界面风格名称
 
         // 使用当前系统界面样式
-        if (type.length() < 1 || ISkin.LF_TYPE_SYSTEM.equalsIgnoreCase(type))
+        if (type == null || type.length() < 1 || ISkin.LF_TYPE_SYSTEM.equalsIgnoreCase(type))
         {
             name = UIManager.getSystemLookAndFeelClassName();
         }
+        else
+        {
+            name = user.getCfg(CfgCons.CFG_LNF_NAME);
+        }
 
         LogUtil.log("系统启动：当前使用界面风格信息 (" + type + ", " + name + ")");
-        user.setUserSkin(type, name);
 
         try
         {
@@ -298,12 +307,11 @@ public final class Rmps
     {
         LogUtil.log("系统启动：应用程序启动！");
 
-        Tray tray = new Tray();
+        tray = new Tray();
         tray.initView();
         tray.initLang();
         tray.initData();
 
-        //Irps.main(null);
         return true;
     }
 
@@ -316,24 +324,23 @@ public final class Rmps
         private java.awt.TrayIcon ti_TrayIcon;
         /** 托盘弹出菜单 */
         private java.awt.PopupMenu pm_PopsMenu;
+        private javax.swing.JDialog lb_LogoForm;
         /** PRPS菜单 */
-        private java.awt.Menu mi_PrpsForm;
+        java.awt.Menu mi_PrpsMenu;
         /** ERPS菜单 */
-        private java.awt.Menu mi_ErpsForm;
+        java.awt.Menu mi_ErpsMenu;
         /** WRPS菜单 */
-        private java.awt.Menu mi_WrpsForm;
+        java.awt.Menu mi_WrpsMenu;
         /** MRPS菜单 */
-        private java.awt.Menu mi_MrpsForm;
+        java.awt.Menu mi_MrpsMenu;
         /** IRPS菜单 */
-        private java.awt.Menu mi_IrpsForm;
+        java.awt.Menu mi_IrpsMenu;
         /** 系统退出 */
         private java.awt.MenuItem mi_RmpsExit;
         /** 帮助菜单 */
         private java.awt.MenuItem mi_HelpTops;
         /** 软件首页 */
         private java.awt.MenuItem mi_HomePage;
-        /** 显示窗口 */
-        private java.awt.MenuItem mi_Seperator;
 
         public Tray()
         {
@@ -372,28 +379,28 @@ public final class Rmps
             pm_PopsMenu.addSeparator();
 
             // PRPS菜单
-            mi_PrpsForm = new java.awt.Menu();
-            pm_PopsMenu.add(mi_PrpsForm);
+            mi_PrpsMenu = new java.awt.Menu();
+            pm_PopsMenu.add(mi_PrpsMenu);
 
             // ERPS菜单
-            mi_ErpsForm = new java.awt.Menu();
-            pm_PopsMenu.add(mi_ErpsForm);
+            mi_ErpsMenu = new java.awt.Menu();
+            pm_PopsMenu.add(mi_ErpsMenu);
 
             // WRPS菜单
-            mi_WrpsForm = new java.awt.Menu();
-            pm_PopsMenu.add(mi_WrpsForm);
+            mi_WrpsMenu = new java.awt.Menu();
+            pm_PopsMenu.add(mi_WrpsMenu);
 
             // MRPS菜单
-            mi_MrpsForm = new java.awt.Menu();
-            pm_PopsMenu.add(mi_MrpsForm);
+            mi_MrpsMenu = new java.awt.Menu();
+            pm_PopsMenu.add(mi_MrpsMenu);
 
             // IRPS菜单
-            mi_IrpsForm = new java.awt.Menu();
-            pm_PopsMenu.add(mi_IrpsForm);
+            mi_IrpsMenu = new java.awt.Menu();
+            Irps.init(mi_IrpsMenu);
+            pm_PopsMenu.add(mi_IrpsMenu);
 
             // 分隔符
-            mi_Seperator = new java.awt.MenuItem("-");
-            pm_PopsMenu.add(mi_Seperator);
+            pm_PopsMenu.addSeparator();
 
             // 系统退出菜单
             mi_RmpsExit = new java.awt.MenuItem();
@@ -432,26 +439,41 @@ public final class Rmps
                     LogUtil.exception(exp);
                     return;
                 }
+                return;
             }
-            else
+
+            lb_LogoForm = new javax.swing.JDialog();
+            lb_LogoForm.setUndecorated(true);
+            lb_LogoForm.getContentPane().setLayout(new java.awt.BorderLayout());
+            final javax.swing.JLabel l = new javax.swing.JLabel("adfadf");//new javax.swing.ImageIcon(getLogo(32)));
+            lb_LogoForm.getContentPane().add(l);
+            l.addMouseListener(new java.awt.event.MouseAdapter()
             {
-            }
+                @Override
+                public void mouseReleased(java.awt.event.MouseEvent evt)
+                {
+                    if (evt.isPopupTrigger())
+                    {
+                        pm_PopsMenu.show(lb_LogoForm, evt.getX() + 1, evt.getY() + 1);
+                    }
+                }
+            });
+            lb_LogoForm.setSize(32, 32);
+            lb_LogoForm.setVisible(true);
         }
 
         public void initLang()
         {
-            try
-            {
-                java.io.File file = new java.io.File(EnvCons.FOLDER0_LANG, "rmps.properties");
-                if (file.exists())
-                {
-                    LangUtil.initLang(EnvCons.FOLDER0_LANG + "rmps.properties");
-                }
-            }
-            catch (IOException exp)
-            {
-                LogUtil.exception(exp);
-            }
+            mi_HelpTops.setLabel(lang.getMesg("", "使用帮助"));
+            mi_HomePage.setLabel(lang.getMesg("", "软件首页"));
+
+            mi_PrpsMenu.setLabel(lang.getMesg("", "PRP"));
+            mi_ErpsMenu.setLabel(lang.getMesg("", "ERP"));
+            mi_WrpsMenu.setLabel(lang.getMesg("", "WRP"));
+            mi_MrpsMenu.setLabel(lang.getMesg("", "MRP"));
+            mi_IrpsMenu.setLabel(lang.getMesg("", "IRP"));
+
+            mi_RmpsExit.setLabel(lang.getMesg("", "退出系统"));
         }
 
         public void initData()
