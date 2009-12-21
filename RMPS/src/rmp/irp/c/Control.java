@@ -19,6 +19,7 @@ import java.util.Properties;
 import java.util.regex.Pattern;
 import java.util.Iterator;
 import rmp.irp.m.root.Root;
+import rmp.util.EnvUtil;
 import rmp.util.StringUtil;
 
 /**
@@ -49,7 +50,7 @@ public class Control implements IControl
             // 提供服务加载
             services = new HashMap<Integer, IService>();
             command = new Properties();
-            command.loadFromXML(new FileInputStream("dat/60000000/irp/irp.xml"));
+            command.loadFromXML(new FileInputStream(EnvUtil.getDataPath("irp", "irp.xml")));
             Iterator<String> sets = command.stringPropertyNames().iterator();
             String key;
             Object obj;
@@ -137,7 +138,7 @@ public class Control implements IControl
         }
 
         // 判断是否为管理人员
-        boolean root = "amon.wk@live.com".equalsIgnoreCase(session.getContact().getEmail());
+        boolean root = "amon.wk@live.com".equalsIgnoreCase(session.getContact().getEmail()) || "amon.wk@gmail.com".equalsIgnoreCase(session.getContact().getEmail());
         // 管理人员处理方式
         if (root)
         {

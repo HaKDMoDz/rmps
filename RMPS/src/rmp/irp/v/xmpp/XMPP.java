@@ -13,8 +13,6 @@ import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IStatus;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManagerListener;
 import org.jivesoftware.smack.ConnectionConfiguration;
@@ -227,7 +225,6 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
             return;
         }
         Control.getInstance().unknownMessageReceived(session, new Message(null));
-        System.out.println("rooooooo");
     }
 
     @Override

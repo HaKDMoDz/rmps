@@ -31,7 +31,6 @@ import rmp.util.StringUtil;
  * <li>功能说明：</li>
  * <br />
  * 邮政编码
- * TODO:
  * <li>使用说明：</li>
  * <br />
  * TODO:
