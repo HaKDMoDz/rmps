@@ -17,7 +17,9 @@ import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.regex.Pattern;
-import java.util.Iterator;
+import org.dom4j.Document;
+import org.dom4j.Node;
+import org.dom4j.io.SAXReader;
 import rmp.irp.m.I9000000.I9000000;
 import rmp.util.EnvUtil;
 import rmp.util.StringUtil;
@@ -34,7 +36,7 @@ import rmp.util.StringUtil;
 public class Control implements IControl
 {
     private static Control control;
-    private static Properties command;
+    private static HashMap<String, String> command;
     private static Properties manager;
     private static HashMap<String, IService> services;
     private static Pattern numReg;
@@ -47,45 +49,55 @@ public class Control implements IControl
     {
         try
         {
+            SAXReader saxr = new SAXReader();
+            Document document = saxr.read(new FileInputStream(EnvUtil.getDataPath("irp", "50000000.xml")));
+
             // 提供服务加载
             services = new HashMap<String, IService>();
-            command = new Properties();
-            command.loadFromXML(new FileInputStream(EnvUtil.getDataPath("irp", "irp.xml")));
-            Iterator<String> sets = command.stringPropertyNames().iterator();
+            command = new HashMap<String, String>();
+            Node node;
             String key;
-            Object obj;
-            IService ims;
-            while (sets.hasNext())
+            for (Object obj1 : document.selectNodes("/irps/item[@id='映像']/map"))
             {
-                key = sets.next();
-                obj = Class.forName(command.getProperty(key)).newInstance();
-                if (obj instanceof IService)
+                if (!(obj1 instanceof Node))
                 {
-                    ims = (IService) obj;
-                    if (ims.wInit())
-                    {
-                        services.put(key, ims);
-                    }
+                    continue;
                 }
+                node = (Node) obj1;
+                node.getText();
             }
+            Object obj2;
+            IService ims;
+//            for (Object obj1 : document.selectNodes("/irps/item[@id='服务']/map"))
+//            {
+//                if (!(obj1 instanceof Node))
+//                {
+//                    continue;
+//                }
+//                node = (Node) obj1;
+//                obj = Class.forName(command.getProperty(key)).newInstance();
+//                if (obj instanceof IService)
+//                {
+//                    ims = (IService) obj;
+//                    if (ims.wInit())
+//                    {
+//                        services.put(key, ims);
+//                    }
+//                }
+//            }
 
             // 基本功能
             services.put("", new I9000000());
 
             LogUtil.log("IM支持服务加载成功！");
 
-            // 系统命令加载
-            command.clear();
-            command.loadFromXML(new FileInputStream("cfg/50000000.xml"));
-
             manager = new Properties();
 
             // 正则表达式
             StringBuffer reg = new StringBuffer("^[");
-            sets = command.stringPropertyNames().iterator();
-            while (sets.hasNext())
+            for (String t : command.keySet())
             {
-                reg.append(sets.next());
+                reg.append(t);
             }
 //            keyReg = Pattern.compile(reg.append("]{1,2}$").toString());
 //            numReg = Pattern.compile("^\\d*[０１２３４５６７８９]*$");
@@ -155,7 +167,7 @@ public class Control implements IControl
         }
 
         IProcess process = session.getProcess();
-        tmp = command.getProperty(tmp, "");
+        tmp = command.get(tmp);
         // 优先处理命令
         if (tmp.length() == 1)
         {
@@ -183,7 +195,6 @@ public class Control implements IControl
                 services.get("").doInit(session, message);
                 return;
             }
-            return;
         }
 
         // 功能选择事件
@@ -301,7 +312,7 @@ public class Control implements IControl
     @Override
     public void sessionOpened(ISession session)
     {
-        IService serv = services.get(0);
+        IService serv = services.get(IProcess.FUNC_DEFAULT);
         if (serv != null)
         {
             serv.doInit(session, null);
@@ -334,12 +345,13 @@ public class Control implements IControl
     public static StringBuffer appendPath(ISession session, StringBuffer message)
     {
         IProcess process = session.getProcess();
-        message.append('/').append(process.getStep()).append(':');
+        message.append("当前操作：/").append(process.getStep()).append('（');
         IService service = services.get(process.getFunc());
         if (service != null)
         {
             message.append(service.getName());
         }
+        message.append("）：");
         message.append(session.newLine()).append("------------------------------");
         message.append(session.newLine()).append(session.newLine());
         return message;

@@ -8,6 +8,13 @@
 package test;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.Node;
+import org.dom4j.io.SAXReader;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.MessageListener;
@@ -33,7 +40,24 @@ public class Test
      */
     public static void main(String[] args)
     {
+        try
+        {
+            SAXReader saxr = new SAXReader();
+            Document document = saxr.read(new FileInputStream("dat/60000000/irp/50000000.xml"));
+            Element element = document.getRootElement();
+            for (Object obj1 : element.elements("item[@id='映像']/map"))
+            {
+                Node node = (Node) obj1;
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
+    public void bb()
+    {
         String user = "amon.rg";
         String host = "meebo.org";
         int port = 5222;
