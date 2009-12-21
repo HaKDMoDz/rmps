@@ -22,7 +22,7 @@ import rmp.util.CheckUtil;
  */
 public class Process implements IProcess
 {
-    Pattern keyReg;
+    private Pattern keyReg;
     private StringBuffer func;
     private int step;
     private int type;
@@ -33,6 +33,8 @@ public class Process implements IProcess
         func = new StringBuffer(FUNC_DEFAULT);
         step = STEP_DEFAULT;
         type = TYPE_DEFAULT;
+
+        keyReg = Pattern.compile("^(..)?/?(../)*\\d*$");
     }
 
     /**
@@ -48,11 +50,16 @@ public class Process implements IProcess
      * @param func the func to set
      */
     @Override
-    public void setFunc(String func)
+    public boolean setFunc(String func)
     {
+        if (!keyReg.matcher(func).matches())
+        {
+            return false;
+        }
+
         if (!CheckUtil.isValidate(func))
         {
-            return;
+            return true;
         }
 
         char c = func.charAt(0);
@@ -62,14 +69,14 @@ public class Process implements IProcess
         if (c == '/')
         {
             this.func.delete(0, l).append(func.substring(1));
-            return;
+            return true;
         }
 
         // 以数字开始，表示向下加载
         if (c != '.')
         {
             this.func.append(func);
-            return;
+            return true;
         }
 
         // 以.开始，表示相对路径
@@ -84,6 +91,7 @@ public class Process implements IProcess
             }
         }
         this.func.append(func.substring(i + 2));
+        return true;
     }
 
     /**

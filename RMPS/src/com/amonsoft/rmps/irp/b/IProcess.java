@@ -27,7 +27,7 @@ public interface IProcess
      */
     String getFunc();
 
-    void setFunc(String func);
+    boolean setFunc(String func);
     int STEP_DEFAULT = 0;
 
     /**

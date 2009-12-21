@@ -36,7 +36,6 @@ public class Control implements IControl
     private static Properties command;
     private static Properties manager;
     private static HashMap<String, IService> services;
-    private static Pattern keyReg;
     private static Pattern numReg;
 
     private Control()
@@ -84,7 +83,6 @@ public class Control implements IControl
             }
 //            keyReg = Pattern.compile(reg.append("]{1,2}$").toString());
 //            numReg = Pattern.compile("^\\d*[０１２３４５６７８９]*$");
-            keyReg = Pattern.compile("^(..)?/?(../)*\\d*$");
 
             LogUtil.log("IM服务初始化成功！");
         }
@@ -164,16 +162,19 @@ public class Control implements IControl
             // 问题汇报
             if ("#".equals(msg))
             {
+                services.get("").doInit(session, message);
                 return;
             }
             // 发表留言
             if ("@".equals(msg))
             {
+                services.get("").doInit(session, message);
                 return;
             }
             // 邀请作者
             if ("$".equals(msg))
             {
+                services.get("").doInit(session, message);
                 return;
             }
             return;
@@ -182,40 +183,14 @@ public class Control implements IControl
         // 功能选择事件
         if ((process.getType() & IProcess.TYPE_KEYCODE) != 0)
         {
-            if (!keyReg.matcher(tmp).matches())
+            if (!process.setFunc(tmp))
             {
                 services.get(IProcess.FUNC_DEFAULT).doDeal(session, message);
                 return;
             }
-            process.setFunc(tmp);
 
-            // 上级目录
-            if ("..".equals(msg))
-            {
-//                int func = process.getFunc();
-//                int step = process.getStep();
-//                process.setFunc(func & ~(1 << (8 - step)));
-//                process.setStep(step - 1);
-                return;
-            }
-            // 顶级目录
-            if ("/".equals(msg))
-            {
-                process.setFunc(IProcess.FUNC_DEFAULT);
-                process.setStep(IProcess.STEP_DEFAULT);
-                process.setType(IProcess.TYPE_DEFAULT);
-                return;
-            }
-
-            // 用户选择功能
-            if (numReg.matcher(msg).matches())
-            {
-//                int step = process.getFunc();
-//                step |= Integer.parseInt(msg);
-                process.setFunc(msg);
-                services.get(process.getFunc()).doInit(session, message);
-                return;
-            }
+            // 选择功能初始化
+            services.get(process.getFunc()).doInit(session, message);
             return;
         }
 
@@ -389,11 +364,6 @@ public class Control implements IControl
         message.append(session.newLine()).append(StringUtil.format("第 {0}/{1} 页，", proc.getStep() + 1, proc.getMost()));
         message.append("您可以使用<<、<、>或>>进行翻页查看。").append(session.newLine());
         return message;
-    }
-
-    private boolean changePath()
-    {
-        return true;
     }
 
     private boolean processKeycode()
