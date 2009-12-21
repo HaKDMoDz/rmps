@@ -49,6 +49,7 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
 
     public XMPP()
     {
+        XMPPConnection.DEBUG_ENABLED = true;
     }
 
     @Override
@@ -224,6 +225,11 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
             org.jivesoftware.smack.packet.Message message = (org.jivesoftware.smack.packet.Message) packet;
             message.getFrom();
             Control.getInstance().instantMessageReceived(session, new Message(message));
+            return;
+        }
+
+        if (packet instanceof org.jivesoftware.smack.packet.RosterPacket)
+        {
             return;
         }
         Control.getInstance().unknownMessageReceived(session, new Message(null));
