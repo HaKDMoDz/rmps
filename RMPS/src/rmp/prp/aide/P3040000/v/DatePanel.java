@@ -44,7 +44,7 @@ public class DatePanel extends JPanel
     {
         try
         {
-            bi_BgImage = ImageUtil.readJarImage(EnvCons.PATH_P3040000, ConstUI.PATH_BG);
+            //bi_BgImage = ImageUtil.readJarImage(EnvCons.PATH_P3040000, ConstUI.PATH_BG);
         }
         catch (Exception exp)
         {

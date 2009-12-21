@@ -11,9 +11,7 @@ import com.amonsoft.bean.WForm;
 import com.amonsoft.cons.ConsSys;
 import com.amonsoft.rmps.prp.IPrpPlus;
 import com.amonsoft.util.LangUtil;
-import cons.CfgCons;
 import cons.EnvCons;
-import cons.SysCons;
 import cons.comn.lang.A3010000.ConstUI;
 import cons.id.ComnCons;
 import java.awt.image.BufferedImage;
@@ -33,6 +31,7 @@ import rmp.comn.user.UserInfo;
 import rmp.util.BeanUtil;
 import com.amonsoft.util.DeskUtil;
 import com.amonsoft.util.LogUtil;
+import rmp.util.EnvUtil;
 
 /**
  * <ul>
@@ -304,7 +303,7 @@ public class C5010000 extends WForm implements IPrpPlus
     @Override
     public void wShowInfo()
     {
-        C1010000.setInfo(getInfoPath());
+        C1010000.setInfo(EnvUtil.getLangPath(EnvCons.COMN_SOFT_INFO, "C5010000", baseFolder));
         Prps.getSoftInfo().wShowView(VIEW_NORM);
     }
 
@@ -388,20 +387,6 @@ public class C5010000 extends WForm implements IPrpPlus
     public static String getMesg(String msgRes, String msgDef)
     {
         return langUtil.getMesg(msgRes, msgDef);
-    }
-
-    /**
-     * 获取关于信息语言资源路径
-     * 
-     * @return
-     */
-    private static String getInfoPath()
-    {
-        StringBuffer sb = new StringBuffer();
-        sb.append(EnvCons.PATH_CF010000).append(EnvCons.COMN_SP_FILE);
-        sb.append(EnvCons.COMN_SOFT_INFO).append(Rmps.getUser().getCfg(CfgCons.CFG_LANG_ID));
-        sb.append(SysCons.EXTS_INFO);
-        return sb.toString();
     }
 
     // ////////////////////////////////////////////////////////////////////////

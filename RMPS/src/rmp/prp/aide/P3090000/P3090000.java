@@ -36,6 +36,7 @@ import cons.id.PrpCons;
 import cons.prp.aide.P3090000.ConstUI;
 import com.amonsoft.util.LangUtil;
 import com.amonsoft.util.DeskUtil;
+import rmp.util.EnvUtil;
 
 /**
  * <ul>
@@ -391,7 +392,7 @@ public class P3090000 extends WForm implements IPrpPlus
             // 语言资源信息读取
             try
             {
-                FileUtil.readLangRes(langRes, EnvCons.PATH_P3090000, EnvCons.COMN_SOFT_LANG);
+                FileUtil.readLangRes(langRes, EnvUtil.getLangPath(EnvCons.COMN_SOFT_LANG, PrpCons.P3090000_S, baseFolder));
             }
             catch (Exception exp)
             {

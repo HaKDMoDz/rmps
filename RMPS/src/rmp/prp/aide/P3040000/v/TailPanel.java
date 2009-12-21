@@ -77,12 +77,12 @@ public class TailPanel implements WBackCall
     {
         try
         {
-            ii_PrevImgD = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000, "ld.png"));
-            ii_PrevImgE = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000, "le.png"));
-            ii_PrevImgP = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000, "lp.png"));
-            ii_NextImgD = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000, "rd.png"));
-            ii_NextImgE = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000, "re.png"));
-            ii_NextImgP = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000, "rp.png"));
+//            ii_PrevImgD = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000, "ld.png"));
+//            ii_PrevImgE = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000, "le.png"));
+//            ii_PrevImgP = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000, "lp.png"));
+//            ii_NextImgD = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000, "rd.png"));
+//            ii_NextImgE = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000, "re.png"));
+//            ii_NextImgP = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000, "rp.png"));
         }
         catch (Exception exp)
         {

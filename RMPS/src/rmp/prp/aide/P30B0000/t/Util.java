@@ -302,7 +302,7 @@ public final class Util
     private static InputStream getSoapInputStream(String soapName, String soapAction, String... soapArgs)
             throws Exception
     {
-        String strSoap = SoapUtil.getSoapRequest(EnvCons.PATH_P30B0000, soapName, soapArgs);
+        String strSoap = SoapUtil.getSoapRequest("EnvCons.PATH_P30B0000", soapName, soapArgs);
 
         URL url = new URL(ConstUI.SOAP_POST);
         URLConnection conn = url.openConnection();

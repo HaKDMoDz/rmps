@@ -637,7 +637,7 @@ public final class ImageUtil
     public static URL getResource(String path, String name)
     {
         StringBuffer sb = new StringBuffer();
-        sb.append(EnvCons.PATH_RES).append(path).append(EnvCons.COMN_SP_FILE).append(name);
+        sb.append(EnvCons.FOLDER0_SKIN).append(path).append(EnvCons.COMN_SP_FILE).append(name);
         LogUtil.log("系统语言资源加载：" + sb.toString());
         return FileUtil.class.getResource(sb.toString());
     }
@@ -650,7 +650,7 @@ public final class ImageUtil
     public static InputStream getResourceAsStream(String path, String name)
     {
         StringBuffer sb = new StringBuffer();
-        sb.append(EnvCons.PATH_RES).append(path).append(EnvCons.COMN_SP_FILE).append(name);
+        sb.append(EnvCons.FOLDER0_SKIN).append(path).append(EnvCons.COMN_SP_FILE).append(name);
         LogUtil.log("系统语言资源加载：" + sb.toString());
         return FileUtil.class.getResourceAsStream(sb.toString());
     }

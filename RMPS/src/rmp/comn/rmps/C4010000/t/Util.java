@@ -97,7 +97,7 @@ public final class Util
         {
             // 使用默认资源文件
             StringBuffer defAdFilePath = new StringBuffer(EnvCons.FOLDER0_LANG);
-            defAdFilePath.append(EnvCons.PATH_C4010000).append(EnvCons.COMN_SP_FILE);
+            defAdFilePath.append("").append(EnvCons.COMN_SP_FILE);
             defAdFilePath.append("pbad_").append(Rmps.getUser().getCfg(CfgCons.CFG_LANG_ID)).append(".wad");
             adFilePath = new File(defAdFilePath.toString());
 

@@ -521,7 +521,7 @@ public final class FileUtil
     public static URL getResource(String path, String name)
     {
         StringBuffer sb = new StringBuffer();
-        sb.append(EnvCons.PATH_RES).append(path).append(EnvCons.COMN_SP_FILE);
+        sb.append(EnvCons.FOLDER0_SKIN).append(path).append(EnvCons.COMN_SP_FILE);
         sb.append(StringUtil.format(name, Rmps.getUser().getCfg(CfgCons.CFG_LANG_ID)));
         return FileUtil.class.getResource(sb.toString());
     }
@@ -534,7 +534,7 @@ public final class FileUtil
     public static InputStream getResourceAsStream(String path, String name)
     {
         StringBuffer sb = new StringBuffer();
-        sb.append(EnvCons.PATH_RES).append(path).append(EnvCons.COMN_SP_FILE);
+        sb.append(EnvCons.FOLDER0_SKIN).append(path).append(EnvCons.COMN_SP_FILE);
         sb.append(StringUtil.format(name, Rmps.getUser().getCfg(CfgCons.CFG_LANG_ID)));
         LogUtil.log("系统语言资源加载：" + sb.toString());
         return FileUtil.class.getResourceAsStream(sb.toString());
@@ -545,8 +545,9 @@ public final class FileUtil
      * @param resPath
      * @param resName
      */
-    public static void readLangRes(Properties langRes, String resPath, String resName) throws Exception
+    public static void readLangRes(Properties langRes, String resPath) throws Exception
     {
+        String resName = "";
         // 读取语言资源
         InputStream inStream = null;
         try

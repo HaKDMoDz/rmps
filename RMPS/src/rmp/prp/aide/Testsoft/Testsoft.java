@@ -27,9 +27,7 @@ import rmp.prp.aide.Testsoft.v.NormPanel;
 import rmp.prp.aide.Testsoft.v.SubMenu;
 import rmp.prp.aide.Testsoft.v.TailPanel;
 import rmp.comn.user.UserInfo;
-import rmp.util.BeanUtil;
 import rmp.util.FileUtil;
-import rmp.util.ImageUtil;
 import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
 import cons.EnvCons;
@@ -37,6 +35,7 @@ import cons.id.PrpCons;
 import cons.prp.aide.Testsoft.ConstUI;
 import com.amonsoft.util.LangUtil;
 import com.amonsoft.util.DeskUtil;
+import rmp.util.EnvUtil;
 
 /**
  * <ul>
@@ -183,31 +182,32 @@ public class Testsoft extends WForm implements IPrpPlus
     @Override
     public BufferedImage wGetIconImage(int type)
     {
-        try
-        {
-            switch (type)
-            {
-                case ICON_LOGO0016:
-                    return ImageUtil.readJarImage(EnvCons.PATH_AF010000, "logo10.png");
-                case ICON_LOGO0032:
-                    return ImageUtil.readJarImage(EnvCons.PATH_AF010000, "logo20.png");
-                case ICON_LOGO0048:
-                    return ImageUtil.readJarImage(EnvCons.PATH_AF010000, "logo30.png");
-                case ICON_LOGO0096:
-                    return ImageUtil.readJarImage(EnvCons.PATH_AF010000, "logo60.png");
-                case ICON_LOGO0128:
-                    return ImageUtil.readJarImage(EnvCons.PATH_AF010000, "logo80.png");
-                case ICON_LOGO0256:
-                    return ImageUtil.readJarImage(EnvCons.PATH_AF010000, "logo00.png");
-                default:
-                    return BeanUtil.getLogoImage();
-            }
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
-            return null;
-        }
+//        try
+//        {
+//            switch (type)
+//            {
+//                case ICON_LOGO0016:
+//                    return ImageUtil.readJarImage(EnvCons.PATH_AF010000, "logo10.png");
+//                case ICON_LOGO0032:
+//                    return ImageUtil.readJarImage(EnvCons.PATH_AF010000, "logo20.png");
+//                case ICON_LOGO0048:
+//                    return ImageUtil.readJarImage(EnvCons.PATH_AF010000, "logo30.png");
+//                case ICON_LOGO0096:
+//                    return ImageUtil.readJarImage(EnvCons.PATH_AF010000, "logo60.png");
+//                case ICON_LOGO0128:
+//                    return ImageUtil.readJarImage(EnvCons.PATH_AF010000, "logo80.png");
+//                case ICON_LOGO0256:
+//                    return ImageUtil.readJarImage(EnvCons.PATH_AF010000, "logo00.png");
+//                default:
+//                    return BeanUtil.getLogoImage();
+//            }
+//        }
+//        catch (Exception exp)
+//        {
+//            LogUtil.exception(exp);
+//            return null;
+//        }
+        return null;
     }
 
     /*
@@ -413,7 +413,7 @@ public class Testsoft extends WForm implements IPrpPlus
             // 语言资源信息读取
             try
             {
-                FileUtil.readLangRes(langRes, EnvCons.PATH_CF010000, EnvCons.COMN_SOFT_LANG);
+                FileUtil.readLangRes(langRes, EnvUtil.getLangPath(EnvCons.COMN_SOFT_LANG, "testsoft", baseFolder));
             }
             catch (Exception exp)
             {

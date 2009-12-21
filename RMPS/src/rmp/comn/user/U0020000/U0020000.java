@@ -32,6 +32,7 @@ import cons.EnvCons;
 import cons.id.PrpCons;
 import cons.comn.user.U0020000.ConstUI;
 import com.amonsoft.util.LangUtil;
+import rmp.util.EnvUtil;
 
 /**
  * <ul>
@@ -163,31 +164,32 @@ public class U0020000 extends WForm implements IPrpPlus
     @Override
     public BufferedImage wGetIconImage(int type)
     {
-        try
-        {
-            switch (type)
-            {
-                case ICON_LOGO0016:
-                    return ImageUtil.readJarImage(EnvCons.PATH_U0020000, "logo10.png");
-                case ICON_LOGO0032:
-                    return ImageUtil.readJarImage(EnvCons.PATH_U0020000, "logo20.png");
-                case ICON_LOGO0048:
-                    return ImageUtil.readJarImage(EnvCons.PATH_U0020000, "logo30.png");
-                case ICON_LOGO0096:
-                    return ImageUtil.readJarImage(EnvCons.PATH_U0020000, "logo60.png");
-                case ICON_LOGO0128:
-                    return ImageUtil.readJarImage(EnvCons.PATH_U0020000, "logo80.png");
-                case ICON_LOGO0256:
-                    return ImageUtil.readJarImage(EnvCons.PATH_U0020000, "logo00.png");
-                default:
-                    return BeanUtil.getLogoImage();
-            }
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
-            return null;
-        }
+//        try
+//        {
+//            switch (type)
+//            {
+//                case ICON_LOGO0016:
+//                    return ImageUtil.readJarImage(EnvCons.PATH_U0020000, "logo10.png");
+//                case ICON_LOGO0032:
+//                    return ImageUtil.readJarImage(EnvCons.PATH_U0020000, "logo20.png");
+//                case ICON_LOGO0048:
+//                    return ImageUtil.readJarImage(EnvCons.PATH_U0020000, "logo30.png");
+//                case ICON_LOGO0096:
+//                    return ImageUtil.readJarImage(EnvCons.PATH_U0020000, "logo60.png");
+//                case ICON_LOGO0128:
+//                    return ImageUtil.readJarImage(EnvCons.PATH_U0020000, "logo80.png");
+//                case ICON_LOGO0256:
+//                    return ImageUtil.readJarImage(EnvCons.PATH_U0020000, "logo00.png");
+//                default:
+//                    return BeanUtil.getLogoImage();
+//            }
+//        }
+//        catch (Exception exp)
+//        {
+//            LogUtil.exception(exp);
+//            return null;
+//        }
+        return null;
     }
 
     /*
@@ -383,7 +385,7 @@ public class U0020000 extends WForm implements IPrpPlus
             // 语言资源信息读取
             try
             {
-                FileUtil.readLangRes(langRes, EnvCons.PATH_U0020000, EnvCons.COMN_SOFT_LANG);
+                FileUtil.readLangRes(langRes, EnvUtil.getLangPath(EnvCons.COMN_SOFT_LANG, "U0020000", baseFolder));
             }
             catch (Exception exp)
             {

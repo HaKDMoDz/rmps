@@ -30,13 +30,12 @@ import rmp.util.BeanUtil;
 import rmp.util.FileUtil;
 import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
-import cons.CfgCons;
 import cons.EnvCons;
-import cons.SysCons;
 import cons.comn.info.C1010000.ConstUI;
 import cons.id.ComnCons;
 import com.amonsoft.util.LangUtil;
 import com.amonsoft.util.DeskUtil;
+import rmp.util.EnvUtil;
 
 /**
  * <ul>
@@ -287,7 +286,7 @@ public class C1010000 extends WForm implements IPrpPlus
     @Override
     public void wShowInfo()
     {
-        C1010000.setInfo(getInfoPath());
+        C1010000.setInfo(EnvUtil.getLangPath(EnvCons.COMN_SOFT_INFO, "C1010000", baseFolder));
         Prps.getSoftInfo().wShowView(VIEW_NORM);
     }
 
@@ -366,7 +365,7 @@ public class C1010000 extends WForm implements IPrpPlus
             // 语言资源信息读取
             try
             {
-                FileUtil.readLangRes(langRes, EnvCons.PATH_C1010000, EnvCons.COMN_SOFT_LANG);
+                FileUtil.readLangRes(langRes, EnvUtil.getLangPath(EnvCons.COMN_SOFT_LANG, ComnCons.C0000000_S, baseFolder));
             }
             catch (Exception exp)
             {
@@ -527,20 +526,6 @@ public class C1010000 extends WForm implements IPrpPlus
         // }
         // }
         return propMap;
-    }
-
-    /**
-     * 获取关于信息语言资源路径
-     * 
-     * @return
-     */
-    private static String getInfoPath()
-    {
-        StringBuffer sb = new StringBuffer();
-        sb.append(EnvCons.PATH_C1010000).append(EnvCons.COMN_SP_FILE);
-        sb.append(EnvCons.COMN_SOFT_INFO).append(Rmps.getUser().getCfg(CfgCons.CFG_LANG_ID));
-        sb.append(SysCons.EXTS_INFO);
-        return sb.toString();
     }
 
     // ////////////////////////////////////////////////////////////////////////

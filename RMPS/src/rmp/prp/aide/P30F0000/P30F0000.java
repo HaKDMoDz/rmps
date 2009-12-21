@@ -21,18 +21,15 @@ import rmp.comn.C1010000.C1010000;
 import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.Prps;
 import rmp.comn.user.UserInfo;
-import rmp.util.BeanUtil;
 import rmp.util.FileUtil;
-import rmp.util.ImageUtil;
 import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
-import cons.CfgCons;
 import cons.EnvCons;
-import cons.SysCons;
 import cons.id.PrpCons;
 import cons.prp.aide.P30F0000.ConstUI;
 import com.amonsoft.util.LangUtil;
 import com.amonsoft.util.DeskUtil;
+import rmp.util.EnvUtil;
 
 /**
  * <ul>
@@ -175,31 +172,32 @@ public class P30F0000 extends WForm implements IPrpPlus
     @Override
     public BufferedImage wGetIconImage(int type)
     {
-        try
-        {
-            switch (type)
-            {
-                case ICON_LOGO0016:
-                    return ImageUtil.readJarImage(EnvCons.PATH_P30F0000, "logo10.png");
-                case ICON_LOGO0032:
-                    return ImageUtil.readJarImage(EnvCons.PATH_P30F0000, "logo20.png");
-                case ICON_LOGO0048:
-                    return ImageUtil.readJarImage(EnvCons.PATH_P30F0000, "logo30.png");
-                case ICON_LOGO0096:
-                    return ImageUtil.readJarImage(EnvCons.PATH_P30F0000, "logo60.png");
-                case ICON_LOGO0128:
-                    return ImageUtil.readJarImage(EnvCons.PATH_P30F0000, "logo80.png");
-                case ICON_LOGO0256:
-                    return ImageUtil.readJarImage(EnvCons.PATH_P30F0000, "logo00.png");
-                default:
-                    return BeanUtil.getLogoImage();
-            }
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
-            return null;
-        }
+//        try
+//        {
+//            switch (type)
+//            {
+//                case ICON_LOGO0016:
+//                    return ImageUtil.readJarImage(EnvCons.PATH_P30F0000, "logo10.png");
+//                case ICON_LOGO0032:
+//                    return ImageUtil.readJarImage(EnvCons.PATH_P30F0000, "logo20.png");
+//                case ICON_LOGO0048:
+//                    return ImageUtil.readJarImage(EnvCons.PATH_P30F0000, "logo30.png");
+//                case ICON_LOGO0096:
+//                    return ImageUtil.readJarImage(EnvCons.PATH_P30F0000, "logo60.png");
+//                case ICON_LOGO0128:
+//                    return ImageUtil.readJarImage(EnvCons.PATH_P30F0000, "logo80.png");
+//                case ICON_LOGO0256:
+//                    return ImageUtil.readJarImage(EnvCons.PATH_P30F0000, "logo00.png");
+//                default:
+//                    return BeanUtil.getLogoImage();
+//            }
+//        }
+//        catch (Exception exp)
+//        {
+//            LogUtil.exception(exp);
+//            return null;
+//        }
+        return null;
     }
 
     /*
@@ -316,7 +314,7 @@ public class P30F0000 extends WForm implements IPrpPlus
     @Override
     public void wShowInfo()
     {
-        C1010000.setInfo(getInfoPath());
+        C1010000.setInfo("");
         Prps.getSoftInfo().wShowView(VIEW_NORM);
     }
 
@@ -406,7 +404,7 @@ public class P30F0000 extends WForm implements IPrpPlus
             // 语言资源信息读取
             try
             {
-                FileUtil.readLangRes(langRes, EnvCons.PATH_P30F0000, EnvCons.COMN_SOFT_LANG);
+                FileUtil.readLangRes(langRes, EnvUtil.getLangPath(EnvCons.COMN_SOFT_INFO, PrpCons.P30F0000_S, baseFolder));
             }
             catch (Exception exp)
             {
@@ -428,20 +426,6 @@ public class P30F0000 extends WForm implements IPrpPlus
     {
         String v = getMesg(mesgId);
         return v != null ? v : defMesg;
-    }
-
-    /**
-     * 获取关于信息语言资源路径
-     * 
-     * @return
-     */
-    private static String getInfoPath()
-    {
-        StringBuffer sb = new StringBuffer();
-        sb.append(EnvCons.PATH_CF010000).append(EnvCons.COMN_SP_FILE);
-        sb.append(EnvCons.COMN_SOFT_INFO).append(Rmps.getUser().getCfg(CfgCons.CFG_LANG_ID));
-        sb.append(SysCons.EXTS_INFO);
-        return sb.toString();
     }
 
     // ////////////////////////////////////////////////////////////////////////

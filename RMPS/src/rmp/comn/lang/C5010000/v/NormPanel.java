@@ -20,14 +20,10 @@ import rmp.comn.lang.C5010000.t.Util;
 import rmp.bean.FilesFilter;
 import rmp.bean.K1IV2S;
 import rmp.face.WBean;
-import rmp.comn.user.UserInfo;
 import rmp.util.CheckUtil;
 import rmp.util.FileUtil;
 import rmp.util.MesgUtil;
 import rmp.util.StringUtil;
-import cons.CfgCons;
-import cons.EnvCons;
-import rmp.Rmps;
 
 /**
  * <ul>
@@ -451,14 +447,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         // 已有语言资源读取
         // ------------------------------------------------
         // 语言资源路径
-        UserInfo us = Rmps.getUser();
-        StringBuilder filePath = new StringBuilder();
-        filePath.append(EnvCons.FOLDER0_LANG).append(EnvCons.COMN_SP_FILE);
-        filePath.append(EnvCons.FOLDER1_PRP).append(EnvCons.COMN_SP_FILE);
-        filePath.append(EnvCons.FOLDER2_AIDE).append(EnvCons.COMN_SP_FILE);
-        filePath.append(tpltList.get(0)).append(EnvCons.COMN_SP_FILE);
-        filePath.append(StringUtil.format(EnvCons.COMN_SOFT_LANG, us.getCfg(CfgCons.CFG_LANG_ID)));
-        langPath = filePath.toString();
+        langPath = "";
 
         // 语言资源读取
         File langFile = new File(langPath);

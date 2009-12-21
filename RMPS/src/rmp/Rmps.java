@@ -29,6 +29,7 @@ import com.amonsoft.util.LangUtil;
 import cons.SysCons;
 import java.util.HashMap;
 import rmp.irp.Irps;
+import rmp.util.Jzip;
 
 /**
  * <ul>
@@ -152,7 +153,7 @@ public final class Rmps
         {
             try
             {
-                EnvUtil.backupDatabase();
+                EnvUtil.backupUserData();
             }
             catch (Exception exp)
             {

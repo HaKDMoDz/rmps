@@ -56,12 +56,56 @@ public final class EnvUtil
 
     public static String getPath(String... name)
     {
+        if (name == null || name.length == 0)
+        {
+            return "";
+        }
+        if (name.length == 1)
+        {
+            return name[0];
+        }
+        if (name.length == 2)
+        {
+            return name[0] + EnvCons.COMN_SP_FILE + name[1];
+        }
+
         StringBuffer sb = new StringBuffer();
         for (String temp : name)
         {
             sb.append(EnvCons.COMN_SP_FILE).append(temp);
         }
         return sb.substring(EnvCons.COMN_SP_FILE.length());
+    }
+
+    public static String getBackPath(String... name)
+    {
+        StringBuffer sb = new StringBuffer();
+        sb.append(EnvCons.FOLDER0_BACK).append(EnvCons.COMN_SP_FILE).append(Rmps.getUser().getUserID());
+        for (String temp : name)
+        {
+            sb.append(EnvCons.COMN_SP_FILE).append(temp);
+        }
+        return sb.toString();
+    }
+
+    public static String getDataPath(String... name)
+    {
+        StringBuffer sb = new StringBuffer();
+        sb.append(EnvCons.FOLDER0_DATA).append(EnvCons.COMN_SP_FILE).append(Rmps.getUser().getUserID());
+        for (String temp : name)
+        {
+            sb.append(EnvCons.COMN_SP_FILE).append(temp);
+        }
+        return sb.toString();
+    }
+
+    public static String getLangPath(String path, String code, String base)
+    {
+        if (!CheckUtil.isValidate(base))
+        {
+            base = EnvCons.FOLDER0_LANG;
+        }
+        return new StringBuffer(base).append(EnvCons.COMN_SP_FILE).append(StringUtil.format(path, code)).toString();
     }
 
     // ////////////////////////////////////////////////////////////////////////
@@ -101,49 +145,6 @@ public final class EnvUtil
     public static String getUserDir()
     {
         return "" + Rmps.getUser().getUserID();
-    }
-
-    // ----------------------------------------------------
-    // 用户四级数据目录
-    // ----------------------------------------------------
-    /**
-     * 公司图标目录
-     * 
-     * @return
-     */
-    public static String getIconCorpDir()
-    {
-        return EnvUtil.getUserDir() + EnvCons.PATH_P3010000 + EnvCons.COMN_SP_FILE + EnvCons.FOLDER4_CORPICON;
-    }
-
-    /**
-     * 文件图标目录
-     * 
-     * @return
-     */
-    public static String getIconFileDir()
-    {
-        return EnvUtil.getUserDir() + EnvCons.PATH_P3010000 + EnvCons.COMN_SP_FILE + EnvCons.FOLDER4_FILEICON;
-    }
-
-    /**
-     * 个人图标目录
-     * 
-     * @return
-     */
-    public static String getIconIdioDir()
-    {
-        return EnvUtil.getUserDir() + EnvCons.PATH_P3010000 + EnvCons.COMN_SP_FILE + EnvCons.FOLDER4_IDIOICON;
-    }
-
-    /**
-     * 软件图标目录
-     * 
-     * @return
-     */
-    public static String getIconSoftDir()
-    {
-        return EnvUtil.getUserDir() + EnvCons.PATH_P3010000 + EnvCons.COMN_SP_FILE + EnvCons.FOLDER4_SOFTICON;
     }
 
     /**
@@ -239,11 +240,9 @@ public final class EnvUtil
     /**
      * 数据备份
      */
-    public static void backupDatabase() throws Exception
+    public static void backupUserData() throws Exception
     {
-        String uid = Rmps.getUser().getUserID();
-        String zip = EnvUtil.getPath(EnvCons.FOLDER0_BAK, uid, "amon.backup");
-        Jzip.zip(zip, EnvUtil.getPath(EnvCons.FOLDER0_DATA, uid));
+        Jzip.zip(EnvUtil.getBackPath("amon.backup"), EnvUtil.getDataPath());
     }
 
     /**

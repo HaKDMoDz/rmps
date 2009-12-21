@@ -43,8 +43,8 @@ public class WTreeCellRenderer extends javax.swing.JLabel implements TreeCellRen
     {
         try
         {
-            collapsedIcon = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_PRP, "treec.png"));
-            expandedIcon = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_PRP, "treee.png"));
+            collapsedIcon = new ImageIcon(ImageUtil.readJarImage(EnvCons.FOLDER1_PRP, "treec.png"));
+            expandedIcon = new ImageIcon(ImageUtil.readJarImage(EnvCons.FOLDER1_PRP, "treee.png"));
         }
         catch (Exception exp)
         {

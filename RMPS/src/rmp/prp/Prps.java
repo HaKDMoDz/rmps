@@ -39,7 +39,6 @@ import rmp.util.MesgUtil;
 import rmp.util.RmpsUtil;
 import cons.CfgCons;
 import cons.EnvCons;
-import cons.SysCons;
 import cons.prp.ConstUI;
 import cons.prp.LangRes;
 import cons.prp.Plugins;
@@ -800,20 +799,6 @@ public class Prps extends WForm
     public static C1010000 getSoftInfo()
     {
         return null;
-    }
-
-    /**
-     * 获取关于信息语言资源路径
-     * 
-     * @return
-     */
-    private static String getInfoPath()
-    {
-        StringBuffer sb = new StringBuffer();
-        sb.append(EnvCons.PATH_PRP).append(EnvCons.COMN_SP_FILE);
-        sb.append(EnvCons.COMN_SOFT_INFO).append(Rmps.getUser().getCfg(CfgCons.CFG_LANG_ID));
-        sb.append(SysCons.EXTS_INFO);
-        return sb.toString();
     }
 
     // ////////////////////////////////////////////////////////////////////////
