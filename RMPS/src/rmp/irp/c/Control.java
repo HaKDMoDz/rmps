@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Properties;
 import java.util.regex.Pattern;
 import java.util.Iterator;
+import rmp.irp.m.I9000000.I9000000;
 import rmp.util.EnvUtil;
 import rmp.util.StringUtil;
 
@@ -68,11 +69,16 @@ public class Control implements IControl
                 }
             }
 
+            // 基本功能
+            services.put("", new I9000000());
+
             LogUtil.log("IM支持服务加载成功！");
 
             // 系统命令加载
             command.clear();
             command.loadFromXML(new FileInputStream("cfg/50000000.xml"));
+
+            manager = new Properties();
 
             // 正则表达式
             StringBuffer reg = new StringBuffer("^[");

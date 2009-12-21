@@ -12,7 +12,7 @@ import com.amonsoft.rmps.irp.v.IAccount;
 import com.amonsoft.util.LogUtil;
 import cons.irp.ConsEnv;
 import java.util.HashMap;
-import rmp.irp.v.meebo.Meebo;
+import rmp.irp.v.gtalk.GTalk;
 
 /**
  * <ul>
@@ -57,7 +57,7 @@ public class Irps
         accounts = new HashMap<String, IAccount>();
         IAccount account;
 
-        account = new Meebo();
+        account = new GTalk();
         account.sign(IStatus.INIT);
         account.sign(IStatus.SIGN);
         accounts.put(ConsEnv.IM_LIVE, account);
