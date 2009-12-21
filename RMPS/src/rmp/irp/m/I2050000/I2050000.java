@@ -35,37 +35,35 @@ public class I2050000 implements IService
     @Override
     public boolean wInit()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return true;
     }
 
     @Override
     public String getCode()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "I2050000";
     }
 
     @Override
     public String getName()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "度量转换";
     }
 
     @Override
     public String getDescription()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "度量转换";
     }
 
     @Override
     public void doInit(ISession session, IMessage message)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void doHelp(ISession session, IMessage message)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
