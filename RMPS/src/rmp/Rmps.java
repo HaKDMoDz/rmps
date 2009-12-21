@@ -29,7 +29,6 @@ import com.amonsoft.util.LangUtil;
 import cons.SysCons;
 import java.util.HashMap;
 import rmp.irp.Irps;
-import rmp.util.Jzip;
 
 /**
  * <ul>
@@ -465,8 +464,8 @@ public final class Rmps
 
         public void initLang()
         {
-            mi_HelpTops.setLabel(lang.getMesg("", "使用帮助"));
-            mi_HomePage.setLabel(lang.getMesg("", "软件首页"));
+            mi_HelpTops.setLabel(lang.getMesg("", "Help"));
+            mi_HomePage.setLabel(lang.getMesg("", "Homepage"));
 
             mi_PrpsMenu.setLabel(lang.getMesg("", "PRP"));
             mi_ErpsMenu.setLabel(lang.getMesg("", "ERP"));
@@ -474,7 +473,7 @@ public final class Rmps
             mi_MrpsMenu.setLabel(lang.getMesg("", "MRP"));
             mi_IrpsMenu.setLabel(lang.getMesg("", "IRP"));
 
-            mi_RmpsExit.setLabel(lang.getMesg("", "退出系统"));
+            mi_RmpsExit.setLabel(lang.getMesg("", "Exit"));
         }
 
         public void initData()

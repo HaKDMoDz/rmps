@@ -15,6 +15,7 @@ import cons.EnvCons;
 import cons.comn.lang.A3010000.ConstUI;
 import cons.id.ComnCons;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JMenu;
@@ -60,9 +61,7 @@ public class C5010000 extends WForm implements IPrpPlus
     private static String baseFolder = "";
     /** 插件程序运行目录 */
     private static String plusFolder = "";
-    /**
-     * 语言资源
-     */
+    /** 语言资源 */
     private static LangUtil langUtil;
     // ----------------------------------------------------
     // 界面显示区域
@@ -94,13 +93,22 @@ public class C5010000 extends WForm implements IPrpPlus
     @Override
     public boolean wInitView()
     {
-        return true;
+        return wInit(false);
     }
 
     @Override
     public boolean wInitLang()
     {
-        return true;
+        try
+        {
+            langUtil = LangUtil.initLang(EnvUtil.getLangPath(EnvCons.COMN_SOFT_LANG, "C5010000", baseFolder));
+            return true;
+        }
+        catch (IOException exp)
+        {
+            LogUtil.exception(exp);
+            return false;
+        }
     }
 
     @Override
@@ -453,7 +461,7 @@ public class C5010000 extends WForm implements IPrpPlus
         setContentPane(np_NormPanel);
         pack();
         center(null);
-        if (!isVisible())
+//        if (!isVisible())
         {
             setVisible(true);
         }
@@ -539,10 +547,10 @@ public class C5010000 extends WForm implements IPrpPlus
 
         // 5、引用应用对象
         C5010000 soft = new C5010000();
-        soft.wShowView(VIEW_NORM);
         soft.wInitView();
         soft.wInitLang();
         soft.wInitData();
+        soft.wShowView(VIEW_NORM);
         soft.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }
 }

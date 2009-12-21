@@ -182,10 +182,9 @@ public final class UserInfo implements IRmps
     {
         LogUtil.log("用户配置数据保存！");
 
-        File ucf = new File(uid + EnvCons.COMN_SP_FILE + "rmp.wsc");
         try
         {
-            ucp.store(new FileOutputStream(ucf), "User:" + uid);
+            ucp.store(new FileOutputStream(EnvUtil.getDataPath("rmp.wsc")), "User:" + uid);
         }
         catch (Exception exp)
         {
