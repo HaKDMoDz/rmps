@@ -31,6 +31,7 @@ import org.jivesoftware.smack.RosterListener;
 import org.jivesoftware.smack.SASLAuthentication;
 import org.jivesoftware.smack.filter.PacketFilter;
 import rmp.irp.c.Control;
+import rmp.util.CheckUtil;
 
 /**
  * <ul>
@@ -223,7 +224,12 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
         if (packet instanceof org.jivesoftware.smack.packet.Message)
         {
             org.jivesoftware.smack.packet.Message message = (org.jivesoftware.smack.packet.Message) packet;
-            message.getFrom();
+            if (session.session == null)
+            {
+                session.session = messenger.getChatManager().createChat(message.getFrom(), this);
+                Contact contact = new Contact(messenger.getRoster().getEntry(getUser(message.getFrom())));
+                session.contact = contact;
+            }
             Control.getInstance().instantMessageReceived(session, new Message(message));
             return;
         }
@@ -263,5 +269,18 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
     public void presenceChanged(Presence prsnc)
     {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    private String getUser(String from)
+    {
+        if (CheckUtil.isValidate(from))
+        {
+            int i = from.indexOf('/');
+            if (i > 0)
+            {
+                from = from.substring(0, i);
+            }
+        }
+        return from;
     }
 }

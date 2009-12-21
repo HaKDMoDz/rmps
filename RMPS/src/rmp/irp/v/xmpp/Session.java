@@ -10,9 +10,8 @@ package rmp.irp.v.xmpp;
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IMimeMessage;
+import com.amonsoft.util.LogUtil;
 import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.XMPPException;
 import rmp.irp.comn.ASession;
@@ -29,6 +28,7 @@ import rmp.irp.comn.ASession;
 public class Session extends ASession
 {
     Chat session;
+    IContact contact;
 
     @Override
     public void send()
@@ -42,9 +42,9 @@ public class Session extends ASession
         {
             session.sendMessage(message);
         }
-        catch (XMPPException ex)
+        catch (XMPPException exp)
         {
-            Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
+            LogUtil.exception(exp);
         }
     }
 
@@ -63,9 +63,9 @@ public class Session extends ASession
                 session.sendMessage(((Message) message).message);
             }
         }
-        catch (XMPPException ex)
+        catch (XMPPException exp)
         {
-            Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
+            LogUtil.exception(exp);
         }
     }
 
@@ -87,7 +87,7 @@ public class Session extends ASession
     @Override
     public IContact getContact()
     {
-        return null;
+        return contact;
     }
 
     @Override
