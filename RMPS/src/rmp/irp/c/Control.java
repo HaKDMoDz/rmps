@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.Properties;
 import java.util.regex.Pattern;
 import java.util.Iterator;
-import rmp.irp.m.root.Root;
 import rmp.util.EnvUtil;
 import rmp.util.StringUtil;
 
@@ -35,7 +34,8 @@ public class Control implements IControl
 {
     private static Control control;
     private static Properties command;
-    private static HashMap<Integer, IService> services;
+    private static Properties manager;
+    private static HashMap<String, IService> services;
     private static Pattern keyReg;
     private static Pattern numReg;
 
@@ -48,7 +48,7 @@ public class Control implements IControl
         try
         {
             // 提供服务加载
-            services = new HashMap<Integer, IService>();
+            services = new HashMap<String, IService>();
             command = new Properties();
             command.loadFromXML(new FileInputStream(EnvUtil.getDataPath("irp", "irp.xml")));
             Iterator<String> sets = command.stringPropertyNames().iterator();
@@ -64,7 +64,7 @@ public class Control implements IControl
                     ims = (IService) obj;
                     if (ims.wInit())
                     {
-                        services.put(Integer.parseInt(key), ims);
+                        services.put(key, ims);
                     }
                 }
             }
@@ -82,8 +82,9 @@ public class Control implements IControl
             {
                 reg.append(sets.next());
             }
-            keyReg = Pattern.compile(reg.append("]{1,2}$").toString());
-            numReg = Pattern.compile("^\\d*[０１２３４５６７８９]*$");
+//            keyReg = Pattern.compile(reg.append("]{1,2}$").toString());
+//            numReg = Pattern.compile("^\\d*[０１２３４５６７８９]*$");
+            keyReg = Pattern.compile("^(..)?/?(../)*\\d*$");
 
             LogUtil.log("IM服务初始化成功！");
         }
@@ -120,6 +121,7 @@ public class Control implements IControl
     @Override
     public void instantMessageReceived(ISession session, IMessage message)
     {
+        // 发送正在输入状态
         session.send();
 
         String msg = message.getContent();
@@ -129,54 +131,30 @@ public class Control implements IControl
             session.send("无法确认您输入的内容，可不要考验阿木的智商哟！:)");
             return;
         }
-
         // 无意义消息文本
-        if (msg.trim().length() < 1)
+        String tmp = msg.trim();
+        if (tmp.length() < 1)
         {
-            session.send(StringUtil.format("您好像只输入了 {0} 个空格，请问您想做什么？:-o", "" + msg.length()));
+            session.send(StringUtil.format(":-o 您好像只输入了 {0} 个空格……", "" + msg.length()));
             return;
         }
 
-        // 判断是否为管理人员
-        boolean root = "amon.wk@live.com".equalsIgnoreCase(session.getContact().getEmail()) || "amon.wk@gmail.com".equalsIgnoreCase(session.getContact().getEmail());
         // 管理人员处理方式
-        if (root)
+        if (manager.get(session.getContact().getEmail().toLowerCase()) != null)
         {
-            IService service = services.get(00000000);
-            if (service == null)
-            {
-                service = new Root();
-            }
-            service.doDeal(session, message);
+//            IService service = services.get(00000000);
+//            if (service == null)
+//            {
+//                service = new Root();
+//            }
+//            service.doDeal(session, message);
         }
 
         IProcess process = session.getProcess();
-        msg = command.getProperty(msg, "");
-        if (msg.length() > 0 && msg.length() < 3)
+        tmp = command.getProperty(tmp, "");
+        // 优先处理命令
+        if (tmp.length() == 1)
         {
-//            if (!keyReg.matcher(msg.trim()).matches())
-//            {
-//                showHelp(session);
-//                return;
-//            }
-            //msg = command.getProperty(msg, "");
-            // 上级目录
-            if ("..".equals(msg))
-            {
-                int func = process.getFunc();
-                int step = process.getStep();
-                process.setFunc(func & ~(1 << (8 - step)));
-                process.setStep(step - 1);
-                return;
-            }
-            // 顶级目录
-            if ("/".equals(msg))
-            {
-                process.setFunc(IProcess.FUNC_DEFAULT);
-                process.setStep(IProcess.STEP_DEFAULT);
-                process.setType(IProcess.TYPE_DEFAULT);
-                return;
-            }
             // 使用帮助
             if ("?".equals(msg))
             {
@@ -198,7 +176,52 @@ public class Control implements IControl
             {
                 return;
             }
+            return;
+        }
 
+        // 功能选择事件
+        if ((process.getType() & IProcess.TYPE_KEYCODE) != 0)
+        {
+            if (!keyReg.matcher(tmp).matches())
+            {
+                services.get(IProcess.FUNC_DEFAULT).doDeal(session, message);
+                return;
+            }
+            process.setFunc(tmp);
+
+            // 上级目录
+            if ("..".equals(msg))
+            {
+//                int func = process.getFunc();
+//                int step = process.getStep();
+//                process.setFunc(func & ~(1 << (8 - step)));
+//                process.setStep(step - 1);
+                return;
+            }
+            // 顶级目录
+            if ("/".equals(msg))
+            {
+                process.setFunc(IProcess.FUNC_DEFAULT);
+                process.setStep(IProcess.STEP_DEFAULT);
+                process.setType(IProcess.TYPE_DEFAULT);
+                return;
+            }
+
+            // 用户选择功能
+            if (numReg.matcher(msg).matches())
+            {
+//                int step = process.getFunc();
+//                step |= Integer.parseInt(msg);
+                process.setFunc(msg);
+                services.get(process.getFunc()).doInit(session, message);
+                return;
+            }
+            return;
+        }
+
+        // 命令录入事件
+        if ((process.getType() & IProcess.TYPE_COMMAND) != 0)
+        {
             if (">".equals(msg))
             {
                 process.setStep(process.getStep() + 1);
@@ -222,19 +245,15 @@ public class Control implements IControl
                 process.setStep(0);
                 process.setType(IProcess.TYPE_COMMAND);
             }
-
-            // 用户选择功能
-            if (numReg.matcher(msg).matches())
-            {
-//                int step = process.getFunc();
-//                step |= Integer.parseInt(msg);
-                process.setFunc(Integer.parseInt(msg));
-                services.get(process.getFunc()).doInit(session, message);
-                return;
-            }
+            return;
         }
 
-        // 提供具体的服务
+        // 内容输入事件
+//        if ((process.getType() & IProcess.TYPE_CONTENT) != 0)
+//        {
+//            services.get(process.getFunc()).doDeal(session, message);
+//            return;
+//        }
         services.get(process.getFunc()).doDeal(session, message);
     }
 
@@ -370,5 +389,25 @@ public class Control implements IControl
         message.append(session.newLine()).append(StringUtil.format("第 {0}/{1} 页，", proc.getStep() + 1, proc.getMost()));
         message.append("您可以使用<<、<、>或>>进行翻页查看。").append(session.newLine());
         return message;
+    }
+
+    private boolean changePath()
+    {
+        return true;
+    }
+
+    private boolean processKeycode()
+    {
+        return true;
+    }
+
+    private boolean processCommand()
+    {
+        return true;
+    }
+
+    private boolean processContent()
+    {
+        return true;
     }
 }

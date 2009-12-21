@@ -50,7 +50,7 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
 
     public XMPP()
     {
-        XMPPConnection.DEBUG_ENABLED = true;
+        //XMPPConnection.DEBUG_ENABLED = true;
     }
 
     @Override
@@ -67,7 +67,7 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
                 getConnect();
                 session = new Session();
                 break;
-            case IStatus.LINE:
+            case IStatus.SIGN:
                 try
                 {
                     ConnectionConfiguration config = new ConnectionConfiguration(connect.getHost(), connect.getPort(), connect.getServer());
@@ -238,6 +238,7 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
         {
             return;
         }
+
         Control.getInstance().unknownMessageReceived(session, new Message(null));
     }
 

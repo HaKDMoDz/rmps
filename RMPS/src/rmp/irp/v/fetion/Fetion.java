@@ -63,7 +63,7 @@ public class Fetion implements IAccount//, IFetionEventListener
 
                 initF();
                 break;
-            case IStatus.LINE:
+            case IStatus.SIGN:
                 System.out.println(login(connect.getProxy(), connect.getPwds()));
                 break;
             case IStatus.DOWN:

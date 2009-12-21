@@ -24,25 +24,29 @@ public interface IStatus
      */
     int INIT = 0;
     /**
+     * 登录
+     */
+    int SIGN = 1;
+    /**
      * 在线
      */
-    int LINE = 1;
+    int LINE = 2;
     /**
      * 空闲
      */
-    int IDLE = 2;
+    int IDLE = 3;
     /**
      * 离开
      */
-    int AWAY = 3;
+    int AWAY = 4;
     /**
      * 隐身
      */
-    int HIDE = 4;
+    int HIDE = 5;
     /**
      * 离线
      */
-    int DOWN = 5;
+    int DOWN = 6;
     /**
      * 忙碌
      */

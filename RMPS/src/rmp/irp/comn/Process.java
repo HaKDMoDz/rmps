@@ -8,6 +8,8 @@
 package rmp.irp.comn;
 
 import com.amonsoft.rmps.irp.b.IProcess;
+import java.util.regex.Pattern;
+import rmp.util.CheckUtil;
 
 /**
  * <ul>
@@ -20,14 +22,15 @@ import com.amonsoft.rmps.irp.b.IProcess;
  */
 public class Process implements IProcess
 {
-    private int func;
+    Pattern keyReg;
+    private StringBuffer func;
     private int step;
     private int type;
     private int most;
 
     Process()
     {
-        func = FUNC_DEFAULT;
+        func = new StringBuffer(FUNC_DEFAULT);
         step = STEP_DEFAULT;
         type = TYPE_DEFAULT;
     }
@@ -36,18 +39,51 @@ public class Process implements IProcess
      * @return the func
      */
     @Override
-    public int getFunc()
+    public String getFunc()
     {
-        return func;
+        return func.toString();
     }
 
     /**
      * @param func the func to set
      */
     @Override
-    public void setFunc(int func)
+    public void setFunc(String func)
     {
-        this.func = func;
+        if (!CheckUtil.isValidate(func))
+        {
+            return;
+        }
+
+        char c = func.charAt(0);
+
+        // 以/开始，表示使用绝对路径
+        int l = this.func.length();
+        if (c == '/')
+        {
+            this.func.delete(0, l).append(func.substring(1));
+            return;
+        }
+
+        // 以数字开始，表示向下加载
+        if (c != '.')
+        {
+            this.func.append(func);
+            return;
+        }
+
+        // 以.开始，表示相对路径
+        int i = 0;
+        while (l > 0)
+        {
+            i = func.indexOf("..", i);
+            if (i >= 0)
+            {
+                l -= 1;
+                this.func.deleteCharAt(l);
+            }
+        }
+        this.func.append(func.substring(i + 2));
     }
 
     /**

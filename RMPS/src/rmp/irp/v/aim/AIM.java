@@ -61,7 +61,7 @@ public class AIM implements IAccount, JaimEventListener
         {
             case IStatus.INIT:
                 break;
-            case IStatus.LINE:
+            case IStatus.SIGN:
                 Connect conn = new Connect();
                 conn.load();
                 connect = conn;

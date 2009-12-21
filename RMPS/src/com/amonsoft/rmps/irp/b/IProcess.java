@@ -19,15 +19,15 @@ package com.amonsoft.rmps.irp.b;
  */
 public interface IProcess
 {
-    int FUNC_DEFAULT = 0x50000000;
+    String FUNC_DEFAULT = "";
 
     /**
      * 获取当前功能标记
      * @return
      */
-    int getFunc();
+    String getFunc();
 
-    void setFunc(int func);
+    void setFunc(String func);
     int STEP_DEFAULT = 0;
 
     /**

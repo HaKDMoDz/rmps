@@ -68,7 +68,7 @@ public class Live extends MsnAdapter implements IAccount
                     LogUtil.exception(exp);
                 }
                 break;
-            case IStatus.LINE:
+            case IStatus.SIGN:
 
                 messenger = MsnMessengerFactory.createMsnMessenger(connect.getUser(), connect.getPwds());
                 messenger.setSupportedProtocol(new MsnProtocol[]

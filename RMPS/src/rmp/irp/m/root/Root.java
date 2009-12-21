@@ -86,7 +86,7 @@ public class Root implements IService
             tmp = arr[2];
             if ("online".equals(tmp))
             {
-                Irps.step(arr[1], IStatus.LINE);
+                Irps.step(arr[1], IStatus.SIGN);
                 return;
             }
             if ("offline".equals(tmp))

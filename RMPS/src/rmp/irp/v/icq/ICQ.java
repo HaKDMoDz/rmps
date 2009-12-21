@@ -57,7 +57,7 @@ public class ICQ implements IAccount, ClientConnListener, FlapPacketListener, Sn
         {
             case IStatus.INIT:
                 break;
-            case IStatus.LINE:
+            case IStatus.SIGN:
                 Connect conn = new Connect();
                 conn.load();
                 connect = conn;

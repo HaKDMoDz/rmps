@@ -104,7 +104,7 @@ public class I7040000 implements IService
         }
 
         // 判断是不为当前功能
-        if (step.getFunc() != ConsFun.FUNCTION)
+        if (step.getFunc() != ConsFun.FUNCTION + "")
         {
             return;
         }

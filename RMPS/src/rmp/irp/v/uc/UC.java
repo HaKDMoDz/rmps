@@ -43,7 +43,7 @@ public class UC implements IAccount
                 connect = new Connect();
                 connect.load();
                 break;
-            case IStatus.LINE:
+            case IStatus.SIGN:
                 break;
             case IStatus.DOWN:
                 break;

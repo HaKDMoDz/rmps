@@ -59,7 +59,7 @@ public class YMsg implements IAccount, SessionListener
                 connect = new Connect();
                 connect.load();
                 break;
-            case IStatus.LINE:
+            case IStatus.SIGN:
                 try
                 {
                     messenger = new ymsg.network.Session();
