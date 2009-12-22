@@ -45,16 +45,37 @@ public class I2050000 implements IService
     {
         try
         {
+            prop = new HashMap<String, String>();
+            decs = new HashMap<String, BigDecimal>();
+
             Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
-            Element element = (Element) document.selectSingleNode("/I2050000/item");
-            if (element != null)
+
+            // 支持单位初始化
+            Element ele = (Element) document.selectSingleNode("/I2050000/item");
+            StringBuffer tmp = new StringBuffer();
+            String sid;
+            for (Object obj1 : document.selectNodes("/I2050000/item"))
             {
-                //path = element.getText();
-            }
-            element = (Element) document.selectSingleNode("/irps/item/map[@key='args']");
-            if (element != null)
-            {
-                //args = element.getText();
+                ele = (Element) obj1;
+                sid = ele.attributeValue("id");
+
+                // 进制转换
+                for (Object obj2 : ele.selectNodes("keys/map"))
+                {
+                    ele = (Element) obj2;
+                    prop.put(ele.attributeValue("key"), ele.getText());
+                    tmp.append('、').append(ele.attributeValue("key"));
+                }
+
+                prop.put(sid, tmp.substring(1));
+                tmp.delete(0, tmp.length());
+
+                // 转换单位
+                for (Object obj2 : ele.selectNodes("unit/map"))
+                {
+                    ele = (Element) obj2;
+                    decs.put(ele.attributeValue("key"), new BigDecimal(ele.getText()));
+                }
             }
             return true;
         }
@@ -68,7 +89,7 @@ public class I2050000 implements IService
     @Override
     public String getCode()
     {
-        return "I2050000";
+        return "52050000";
     }
 
     @Override
@@ -96,25 +117,22 @@ public class I2050000 implements IService
     @Override
     public void doDeal(ISession session, IMessage message)
     {
+        // 用户原始输入消息
         String msg = message.getContent();
+        // 消息字符串转化
+        //String txt = msg.trim().toLowerCase();
 
-        if (!CheckUtil.isValidate(msg))
+        // 判断是否指定转换目标
+        String[] arr = msg.split("[=＝]");
+        String tmp = arr[0];
+        if (!CheckUtil.isValidate(tmp))
         {
-            return;
-        }
-        String txt = msg.trim().toLowerCase();
-
-        String[] tplt = txt.split("[=＝]");
-
-        String temp = tplt[0];
-        if (!CheckUtil.isValidate(temp))
-        {
-            session.send("请输入要来源单位！");
+            session.send("请输入转换来源单位！");
             return;
         }
 
         // 获取来源单位，并判断输入是否正确
-        String uUnit = tplt[0].replaceAll(reg, "");
+        String uUnit = arr[0].replaceAll(reg, "");
         String tUnit = prop.get(uUnit.toLowerCase());
         if (!CheckUtil.isValidate(tUnit))
         {
@@ -122,24 +140,24 @@ public class I2050000 implements IService
             return;
         }
         // 判断输入数字的合法性
-        temp = tplt[0].replace(uUnit, "");
-        if (!Pattern.matches(reg + '$', temp))
+        tmp = arr[0].replace(uUnit, "");
+        if (!Pattern.matches(reg + '$', tmp))
         {
             session.send("小木无法辨认您输入的数字，请重新输入。");
             return;
         }
-        BigDecimal dec1 = new BigDecimal(temp).multiply(decs.get(tUnit));
+        BigDecimal dec1 = new BigDecimal(tmp).multiply(decs.get(tUnit));
 
         // 判断用户是否直接输入结果单位
         HashMap<String, BigDecimal> map;
-        if (tplt.length != 2)
+        if (arr.length != 2)
         {
             map = decs;
         }
         else
         {
-            temp = tplt[1];
-            if (!CheckUtil.isValidate(tplt[1]))
+            tmp = arr[1];
+            if (!CheckUtil.isValidate(arr[1]))
             {
                 // 没有输入目标单位的情况下，输出所有单位
                 map = decs;
@@ -147,7 +165,7 @@ public class I2050000 implements IService
             else
             {
                 // 输入目标单位的情况下，判断目标单位的正确性
-                uUnit = temp.replaceAll("[?？]", "").trim();
+                uUnit = tmp.replaceAll("[?？]", "").trim();
                 tUnit = prop.get(uUnit.toLowerCase());
                 if (!CheckUtil.isValidate(tUnit))
                 {
@@ -157,11 +175,13 @@ public class I2050000 implements IService
 
                 // 仅保留目标单位
                 map = new HashMap<String, BigDecimal>();
-                map.put(temp, decs.get(tUnit));
+                map.put(tmp, decs.get(tUnit));
             }
         }
 
-        session.send(tplt[0]);
+        session.send(arr[0]);
+
+        // 其它单位处理
         if (step != Constant.STEP_WD)
         {
             for (String key : map.keySet())
@@ -172,15 +192,15 @@ public class I2050000 implements IService
             return;
         }
 
-        // 温度
+        // 温度特殊处理
         double c;
         double f;
         double k;
         double ra;
         double re;
-        if ("摄氏度".equals(temp))
+        if ("摄氏度".equals(tmp))
         {
-            c = Double.parseDouble(temp);
+            c = Double.parseDouble(tmp);
             if (c < -273.15)
             {
                 session.send("摄氏度不能低于-273.15。");
@@ -191,9 +211,9 @@ public class I2050000 implements IService
             ra = k * 1.8;
             re = c / 1.25;
         }
-        else if ("华氏度".equals(temp))
+        else if ("华氏度".equals(tmp))
         {
-            f = Double.parseDouble(temp);
+            f = Double.parseDouble(tmp);
             if (f < -459.666666)
             {
                 session.send("华氏度不能低于-459.666666。");
@@ -204,9 +224,9 @@ public class I2050000 implements IService
             ra = k * 1.8;
             re = c / 1.25;
         }
-        if ("开氏度".equals(temp))
+        if ("开氏度".equals(tmp))
         {
-            k = Double.parseDouble(temp);
+            k = Double.parseDouble(tmp);
             if (k < 0)
             {
                 session.send("开氏度不能低于0。");
@@ -217,9 +237,9 @@ public class I2050000 implements IService
             ra = k * 1.8;
             re = c / 1.25;
         }
-        if ("兰氏度".equals(temp))
+        if ("兰氏度".equals(tmp))
         {
-            ra = Double.parseDouble(temp);
+            ra = Double.parseDouble(tmp);
             if (ra < 0)
             {
                 session.send("兰氏度不能低于0。");
@@ -230,9 +250,9 @@ public class I2050000 implements IService
             f = 32 + (c * 9 / 5);
             re = c / 1.25;
         }
-        if ("列氏度".equals(temp))
+        if ("列氏度".equals(tmp))
         {
-            re = Double.parseDouble(temp);
+            re = Double.parseDouble(tmp);
             if (re < -218.5199999999)
             {
                 session.send("列氏度不能低于-218.5199999999。");

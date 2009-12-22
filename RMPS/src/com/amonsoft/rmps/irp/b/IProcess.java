@@ -53,6 +53,10 @@ public interface IProcess
      * 用户内容文本
      */
     int TYPE_CONTENT = 4;
+    /**
+     * 不需要响应
+     */
+    int TYPE_NACTION = 8;
 
     int getType();
 
