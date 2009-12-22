@@ -34,7 +34,7 @@ public class Process implements IProcess
         step = STEP_DEFAULT;
         type = TYPE_DEFAULT;
 
-        keyReg = Pattern.compile("^(..)?/?(../)*\\d*$");
+        keyReg = Pattern.compile("^([\\.。]{2})?([/／]{1})?([\\.。]{2}[/／]{1})*\\d*$");
     }
 
     /**

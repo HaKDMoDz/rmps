@@ -19,7 +19,7 @@ import java.util.HashMap;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import rmp.irp.m.I9000000.I9000000;
+import rmp.irp.m.help.Help;
 import rmp.util.EnvUtil;
 import rmp.util.StringUtil;
 
@@ -47,7 +47,7 @@ public class Control implements IControl
     {
         try
         {
-            Document document = new SAXReader().read(new FileInputStream(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, "50000000.xml")));
+            Document document = new SAXReader().read(new FileInputStream(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, "irps.xml")));
 
             Element ele;
 
@@ -101,7 +101,9 @@ public class Control implements IControl
             }
 
             // 基本功能
-            services.put("", new I9000000());
+            Help help = new Help();
+            help.wInit();
+            services.put("", help);
 
             LogUtil.log("IM服务初始化成功！");
         }
@@ -168,89 +170,95 @@ public class Control implements IControl
         }
 
         IProcess process = session.getProcess();
-        if ((process.getType() & IProcess.TYPE_NACTION) == 0)
+        // 会话锁定事件
+        if ((process.getType() & IProcess.TYPE_NACTION) != 0)
         {
-            tmp = command.get(tmp);
-            // 优先处理命令
-            if (tmp != null)
+            services.get(process.getFunc()).doDeal(session, message);
+            return;
+        }
+
+        tmp = command.get(tmp);
+        // 优先处理命令
+        if (tmp != null)
+        {
+            // 使用帮助
+            if ("?".equals(msg))
             {
-                // 使用帮助
-                if ("?".equals(msg))
-                {
-                    services.get(process.getFunc()).doHelp(session, message);
-                    return;
-                }
-                // 问题汇报
-                if ("#".equals(msg))
-                {
-                    services.get("").doInit(session, message);
-                    return;
-                }
-                // 发表留言
-                if ("@".equals(msg))
-                {
-                    services.get("").doInit(session, message);
-                    return;
-                }
-                // 邀请作者
-                if ("$".equals(msg))
-                {
-                    services.get("").doInit(session, message);
-                    return;
-                }
+                services.get(process.getFunc()).doHelp(session, message);
+                return;
+            }
+            // 问题汇报
+            if ("#".equals(msg))
+            {
+                services.get("").doInit(session, message);
+                return;
+            }
+            // 发表留言
+            if ("@".equals(msg))
+            {
+                services.get("").doInit(session, message);
+                return;
+            }
+            // 邀请作者
+            if ("$".equals(msg))
+            {
+                services.get("").doInit(session, message);
+                return;
+            }
+        }
 
-                // 功能选择事件
-                if ((process.getType() & IProcess.TYPE_KEYCODE) != 0)
-                {
-                    if (!process.setFunc(tmp))
-                    {
-                        services.get(IProcess.FUNC_DEFAULT).doDeal(session, message);
-                        return;
-                    }
-
-                    // 选择功能初始化
-                    services.get(process.getFunc()).doInit(session, message);
-                    return;
-                }
-
-                // 命令录入事件
-                if ((process.getType() & IProcess.TYPE_COMMAND) != 0)
-                {
-                    if (">".equals(msg))
-                    {
-                        process.setStep(process.getStep() + 1);
-                        process.setType(IProcess.TYPE_COMMAND);
-                    }
-
-                    if ("<".equals(msg))
-                    {
-                        process.setStep(process.getStep() - 1);
-                        process.setType(IProcess.TYPE_COMMAND);
-                    }
-
-                    if (">>".equals(msg))
-                    {
-                        process.setStep(process.getMost() - 1);
-                        process.setType(IProcess.TYPE_COMMAND);
-                    }
-
-                    if ("<<".equals(msg))
-                    {
-                        process.setStep(0);
-                        process.setType(IProcess.TYPE_COMMAND);
-                    }
-                    return;
-                }
+        // 功能选择事件
+        if ((process.getType() & IProcess.TYPE_KEYCODE) != 0)
+        {
+            if (!process.setFunc(tmp))
+            {
+                services.get(IProcess.FUNC_DEFAULT).doDeal(session, message);
+                return;
             }
 
-            // 内容输入事件
-//        if ((process.getType() & IProcess.TYPE_CONTENT) != 0)
-//        {
-//            services.get(process.getFunc()).doDeal(session, message);
-//            return;
-//        }
+            // 选择功能初始化
+            services.get(process.getFunc()).doInit(session, message);
+            return;
         }
-        services.get(process.getFunc()).doDeal(session, message);
+
+        // 命令录入事件
+        if ((process.getType() & IProcess.TYPE_COMMAND) != 0)
+        {
+            if (">".equals(msg))
+            {
+                process.setStep(process.getStep() + 1);
+                process.setType(IProcess.TYPE_COMMAND);
+            }
+
+            if ("<".equals(msg))
+            {
+                process.setStep(process.getStep() - 1);
+                process.setType(IProcess.TYPE_COMMAND);
+            }
+
+            if (">>".equals(msg))
+            {
+                process.setStep(process.getMost() - 1);
+                process.setType(IProcess.TYPE_COMMAND);
+            }
+
+            if ("<<".equals(msg))
+            {
+                process.setStep(0);
+                process.setType(IProcess.TYPE_COMMAND);
+            }
+            return;
+        }
+
+        // 内容输入事件
+        if ((process.getType() & IProcess.TYPE_CONTENT) != 0)
+        {
+            services.get(process.getFunc()).doDeal(session, message);
+            return;
+        }
+
+        // 容错处理
+        services.get(IProcess.FUNC_DEFAULT).doDeal(session, message);
     }
 
     @Override

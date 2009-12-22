@@ -3,9 +3,9 @@
  * Compiler:       JDK1.6.0
  * CopyRight:      &copy; 2007 Amon &reg; Winshine ( Amon@amonsoft.cn / http://amonsoft.cn ).
  * Description:
- *    
+ *
  */
-package rmp.irp.m.I9000000;
+package rmp.irp.m.help;
 
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
@@ -17,13 +17,13 @@ import rmp.irp.c.Control;
  * <ul>
  * <li>功能说明：</li>
  * <br />
- * 配置管理
+ * 欢迎屏幕
  * <li>使用说明：</li>
  * <br />
  * </ul>
  * @author yihaodian
  */
-public class I9000000 implements IService
+public class Help implements IService
 {
     @Override
     public boolean wInit()
@@ -34,7 +34,7 @@ public class I9000000 implements IService
     @Override
     public String getCode()
     {
-        return "59000000";
+        return "help";
     }
 
     @Override
