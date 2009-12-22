@@ -19,6 +19,7 @@ import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -42,7 +43,8 @@ public class I2040000 implements IService
 {
     private static String path;
     private static String args;
-    private static Pattern phone;
+    private static Pattern mpPtn;
+    private static Pattern msPtn;
 
     @Override
     public boolean wInit()
@@ -61,7 +63,8 @@ public class I2040000 implements IService
                 args = element.getText();
             }
 
-            phone = Pattern.compile("^1[3|5|8][0-9]\\d{4,8}$");
+            msPtn = Pattern.compile("^\\+(86)?\\s?");
+            mpPtn = Pattern.compile("^1[3|5|8][0-9]\\d{4,8}$");
 
             LogUtil.log(getName() + " 初始化成功！");
             return true;
@@ -109,21 +112,32 @@ public class I2040000 implements IService
     {
         try
         {
-            String key = message.getContent();
+            String txt = message.getContent().trim();
             StringBuffer msg = new StringBuffer();
 
             // 地址校验
-            if (!phone.matcher(key).matches())
+            Matcher m = msPtn.matcher(txt);
+            if (!m.find())
             {
                 Control.appendPath(session, msg);
-                msg.append("请输入11位手机号码或其前7位！");
+                msg.append("请以加号（+＋）起始，输入您要查询的11位手机号码或其前7位！");
+                Control.appendCopy(session, msg);
+                session.send(msg.toString());
+                return;
+            }
+
+            txt = txt.replace(m.group(), "");
+            if (!mpPtn.matcher(txt).matches())
+            {
+                Control.appendPath(session, msg);
+                msg.append("请以加号（+＋）起始，输入您要查询的11位手机号码或其前7位！");
                 Control.appendCopy(session, msg);
                 session.send(msg.toString());
                 return;
             }
 
             // 链接地址初始化
-            URL url = new URL(path + '?' + StringUtil.format(args, key));
+            URL url = new URL(path + '?' + StringUtil.format(args, txt));
             URLConnection conn = url.openConnection();
             conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
             conn.setUseCaches(false);
@@ -173,7 +187,7 @@ public class I2040000 implements IService
         {
             String key = message.getContent();
             // 地址校验
-            if (!phone.matcher(key).matches())
+            if (!mpPtn.matcher(key).matches())
             {
                 session.send("您输入的IP地址不是一个合适的IPV4地址，请重新输入！");
                 return;

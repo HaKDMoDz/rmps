@@ -120,9 +120,7 @@ public class I2020000 implements IService
         try
         {
             String key = message.getContent();
-            StringBuffer msg = new StringBuffer();
             IProcess proc = session.getProcess();
-            int step;
 
             // 地址校验
             if (!CheckUtil.isValidate(key))
@@ -131,68 +129,38 @@ public class I2020000 implements IService
                 return;
             }
 
-            // 翻页命令
-            if (proc.getType() == IProcess.TYPE_COMMAND)
-            {
-                List<String> list = (List<String>) session.getAttribute(getCode() + "_m");
-                if (list == null || list.size() < 1)
-                {
-                    session.send("请输入您要查询的国家、地区或城市的名称或拼音！");
-                    return;
-                }
+            // 链接地址初始化
+            URL url = new URL(path + '?' + StringUtil.format(args, key));
+            URLConnection conn = url.openConnection();
+            conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
+            conn.setUseCaches(false);
+            conn.setDoInput(true);
 
-                step = proc.getStep();
-                if (step <= -1)
-                {
-                    session.send("已经是第一页！");
-                    proc.setStep(-1);
-                }
-                else if (step >= proc.getMost())
-                {
-                    session.send("已经是最后一页！");
-                    proc.setStep(proc.getMost());
-                }
-                else
-                {
-                    showData(session, msg, list.get(step));
-                }
+            // 读取返回结果
+            DataInputStream dis = new DataInputStream(conn.getInputStream());
+            byte d[] = new byte[dis.available()];
+            dis.read(d);
+            String data = new String(d, "gb2312");
+
+            // 保存用户查询结果
+            Matcher matcher = paPtn.matcher(data);
+            List<String> list = new ArrayList<String>();
+            while (matcher.find())
+            {
+                list.add(matcher.group());
+            }
+            proc.setStep(IProcess.STEP_DEFAULT);
+            proc.setMost(list.size());
+            session.setAttribute(getCode() + "_m", list);
+
+            if (list.size() < 1)
+            {
+                session.send("请输入您要查询的国家、地区或城市的名称或拼音！");
             }
             else
             {
-                // 链接地址初始化
-                URL url = new URL(path + '?' + StringUtil.format(args, key));
-                URLConnection conn = url.openConnection();
-                conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
-                conn.setUseCaches(false);
-                conn.setDoInput(true);
-
-                // 读取返回结果
-                DataInputStream dis = new DataInputStream(conn.getInputStream());
-                byte d[] = new byte[dis.available()];
-                dis.read(d);
-                String data = new String(d, "gb2312");
-
-                // 保存用户查询结果
-                Matcher matcher = paPtn.matcher(data);
-                List<String> list = new ArrayList<String>();
-                while (matcher.find())
-                {
-                    list.add(matcher.group());
-                }
-                step = 0;
-                proc.setStep(step);
-                proc.setMost(list.size());
-                session.setAttribute(getCode() + "_m", list);
-
-                if (list.size() < 1)
-                {
-                    session.send("请输入您要查询的国家、地区或城市的名称或拼音！");
-                }
-                else
-                {
-                    // 发送结果信息
-                    showData(session, msg, list.get(step));
-                }
+                // 发送结果信息
+                showData(session, list.get(proc.getStep()));
             }
 
             // 设置下一次操作状态
@@ -210,6 +178,32 @@ public class I2020000 implements IService
     @Override
     public void doStep(ISession session, IMessage message)
     {
+        IProcess proc = session.getProcess();
+        List<String> list = (List<String>) session.getAttribute(getCode() + "_m");
+        if (list == null || list.size() < 1)
+        {
+            session.send("请输入您要查询的国家、地区或城市的名称或拼音！");
+            proc.setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
+            proc.setStep(IProcess.STEP_DEFAULT);
+            return;
+        }
+
+        int step = proc.getStep();
+        if (step <= -1)
+        {
+            session.send("已经是第一页！");
+            proc.setStep(IProcess.STEP_DEFAULT);
+            return;
+        }
+
+        if (step >= proc.getMost())
+        {
+            session.send("已经是最后一页！");
+            proc.setStep(proc.getMost());
+            return;
+        }
+
+        showData(session, list.get(step));
     }
 
     @Override
@@ -217,8 +211,9 @@ public class I2020000 implements IService
     {
     }
 
-    private void showData(ISession session, StringBuffer message, String data)
+    private void showData(ISession session, String data)
     {
+        StringBuffer message = new StringBuffer();
         Control.appendPath(session, message);
 
         // 结果信息格式化

@@ -373,7 +373,7 @@ public class Control implements IControl
     public static StringBuffer appendPath(ISession session, StringBuffer message)
     {
         IProcess process = session.getProcess();
-        message.append("当前操作：/").append(process.getStep()).append('（');
+        message.append("当前操作：/").append(process.getFunc()).append('（');
         IService service = services.get(process.getFunc());
         if (service != null)
         {
