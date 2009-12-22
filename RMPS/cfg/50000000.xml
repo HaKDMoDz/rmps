@@ -1,46 +1,46 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-    <comment/>
-    <entry key="#">#</entry>
-    <entry key="?">?</entry>
-    <entry key="？">?</entry>
-    <entry key=".">.</entry>
-    <entry key="。">.</entry>
-    <entry key="..">..</entry>
-    <entry key="。。">..</entry>
-    <entry key=".。">..</entry>
-    <entry key="。.">..</entry>
-    <entry key="1">1</entry>
-    <entry key="１">1</entry>
-    <entry key="2">2</entry>
-    <entry key="２">2</entry>
-    <entry key="3">3</entry>
-    <entry key="３">3</entry>
-    <entry key="4">4</entry>
-    <entry key="４">4</entry>
-    <entry key="5">5</entry>
-    <entry key="５">5</entry>
-    <entry key="6">6</entry>
-    <entry key="６">6</entry>
-    <entry key="7">7</entry>
-    <entry key="７">7</entry>
-    <entry key="8">8</entry>
-    <entry key="８">8</entry>
-    <entry key="9">9</entry>
-    <entry key="９">9</entry>
-    <entry key="0">0</entry>
-    <entry key="０">0</entry>
-    <entry key="/">/</entry>
-    <entry key="$">$</entry>
-    <entry key="￥">$</entry>
-    <entry key="&gt;">&gt;</entry>
-    <entry key="》">&gt;</entry>
-    <entry key="&gt;&gt;">&gt;&gt;</entry>
-    <entry key="》》">&gt;&gt;</entry>
-    <entry key="》》">&gt;&gt;</entry>
-    <entry key="&lt;">&lt;</entry>
-    <entry key="《">&lt;</entry>
-    <entry key="&lt;&lt;">&lt;&lt;</entry>
-    <entry key="《《">&lt;&lt;</entry>
-</properties>
+<?xml version="1.0" encoding="UTF-8"?>
+<irps>
+    <item id="映像">
+        <map key="#">#</map>
+        <map key="?">?</map>
+        <map key="？">?</map>
+        <map key=".">.</map>
+        <map key="。">.</map>
+        <map key="..">..</map>
+        <map key="。。">..</map>
+        <map key=".。">..</map>
+        <map key="。.">..</map>
+        <map key="1">1</map>
+        <map key="１">1</map>
+        <map key="2">2</map>
+        <map key="２">2</map>
+        <map key="3">3</map>
+        <map key="３">3</map>
+        <map key="4">4</map>
+        <map key="４">4</map>
+        <map key="5">5</map>
+        <map key="５">5</map>
+        <map key="6">6</map>
+        <map key="６">6</map>
+        <map key="7">7</map>
+        <map key="７">7</map>
+        <map key="8">8</map>
+        <map key="８">8</map>
+        <map key="9">9</map>
+        <map key="９">9</map>
+        <map key="0">0</map>
+        <map key="０">0</map>
+        <map key="/">/</map>
+        <map key="$">$</map>
+        <map key="￥">$</map>
+        <map key="&gt;">&gt;</map>
+        <map key="》">&gt;</map>
+        <map key="&gt;&gt;">&gt;&gt;</map>
+        <map key="》》">&gt;&gt;</map>
+        <map key="》》">&gt;&gt;</map>
+        <map key="&lt;">&lt;</map>
+        <map key="《">&lt;</map>
+        <map key="&lt;&lt;">&lt;&lt;</map>
+        <map key="《《">&lt;&lt;</map>
+    </item>
+</irps>

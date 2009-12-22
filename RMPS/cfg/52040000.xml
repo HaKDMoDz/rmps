@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-    <comment/>
-    <entry key="path">http://php.tech.sina.com.cn/iframe/download/download_srv.php</entry>
-    <entry key="args">action=bst_ms&amp;code={0}</entry>
-</properties>
+<?xml version="1.0" encoding="UTF-8"?>
+<irps>
+    <item>
+        <map key="path">http://php.tech.sina.com.cn/iframe/download/download_srv.php</map>
+        <map key="args">action=bst_ms&amp;code={0}</map>
+    </item>
+</irps>

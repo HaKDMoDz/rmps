@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-    <comment/>
-    <entry key="path">http://counter.sina.com.cn/ip</entry>
-    <entry key="args">ip={0}</entry>
-</properties>
+<?xml version="1.0" encoding="UTF-8"?>
+<irps>
+    <item>
+        <map key="path">http://counter.sina.com.cn/ip</map>
+        <map key="args">ip={0}</map>
+    </item>
+</irps>
