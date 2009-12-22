@@ -12,18 +12,21 @@ import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.util.LogUtil;
+import cons.EnvCons;
 import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import rmp.irp.c.Control;
 import rmp.util.CheckUtil;
+import rmp.util.EnvUtil;
 import rmp.util.StringUtil;
 
 /**
@@ -39,7 +42,8 @@ import rmp.util.StringUtil;
  */
 public class I2020000 implements IService
 {
-    private static Properties isCfg;
+    private static String path;
+    private static String args;
     /**
      * 数据列表匹配
      */
@@ -54,8 +58,17 @@ public class I2020000 implements IService
     {
         try
         {
-            isCfg = new Properties();
-            isCfg.loadFromXML(new FileInputStream(new File("cfg", getCode() + ".xml")));
+            Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
+            Element element = (Element) document.selectSingleNode("/irps/item/map[@key='path']");
+            if (element != null)
+            {
+                path = element.getText();
+            }
+            element = (Element) document.selectSingleNode("/irps/item/map[@key='args']");
+            if (element != null)
+            {
+                args = element.getText();
+            }
 
             paPtn = Pattern.compile("(\\[')(.*?)('\\])");
             piPtn = Pattern.compile("'(.*?)'");
@@ -147,7 +160,7 @@ public class I2020000 implements IService
             else
             {
                 // 链接地址初始化
-                URL url = new URL(isCfg.getProperty("path") + '?' + StringUtil.format(isCfg.getProperty("args"), key));
+                URL url = new URL(path + '?' + StringUtil.format(args, key));
                 URLConnection conn = url.openConnection();
                 conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
                 conn.setUseCaches(false);

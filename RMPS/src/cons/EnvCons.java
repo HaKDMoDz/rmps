@@ -102,8 +102,8 @@ public interface EnvCons
     String FOLDER1_DAT = "dat";
     /** ERP系统数据目录 */
     String FOLDER1_ERP = "erp";
-    /** IMS系统数据目录 */
-    String FOLDER1_IMS = "ims";
+    /** IRP系统数据目录 */
+    String FOLDER1_IRP = "irp";
     /** 日志输出目录 */
     String FOLDER1_LOG = "log";
     /** MRP系统目录 */

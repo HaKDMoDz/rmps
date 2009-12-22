@@ -30,6 +30,7 @@ import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.RosterListener;
 import org.jivesoftware.smack.SASLAuthentication;
 import org.jivesoftware.smack.filter.PacketFilter;
+import org.jivesoftware.smack.packet.RosterPacket;
 import rmp.irp.c.Control;
 import rmp.util.CheckUtil;
 
@@ -198,14 +199,28 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
     public void processPacket(Packet packet)
     {
         LogUtil.log("processPacket：" + packet);
+
+        if (packet instanceof org.jivesoftware.smack.packet.Message)
+        {
+            org.jivesoftware.smack.packet.Message message = (org.jivesoftware.smack.packet.Message) packet;
+            if (session.session == null)
+            {
+                session.session = messenger.getChatManager().createChat(message.getFrom(), this);
+                Contact contact = new Contact(messenger.getRoster().getEntry(getUser(message.getFrom())));
+                session.contact = contact;
+            }
+            Control.getInstance().instantMessageReceived(session, new Message(message));
+            return;
+        }
+
         if (packet instanceof Presence)
         {
-            Presence p = (Presence) packet;  //shouldn't be a problem since we are filtering for presence packets.
+            Presence p = (Presence) packet;
             if (p.getType() == Presence.Type.available)
             {
                 Control.getInstance().loginCompleted(session);
             }
-            // only listen to presence requests
+
             if (p.getType() == Presence.Type.subscribe)
             {
                 try
@@ -221,21 +236,13 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
             return;
         }
 
-        if (packet instanceof org.jivesoftware.smack.packet.Message)
-        {
-            org.jivesoftware.smack.packet.Message message = (org.jivesoftware.smack.packet.Message) packet;
-            if (session.session == null)
-            {
-                session.session = messenger.getChatManager().createChat(message.getFrom(), this);
-                Contact contact = new Contact(messenger.getRoster().getEntry(getUser(message.getFrom())));
-                session.contact = contact;
-            }
-            Control.getInstance().instantMessageReceived(session, new Message(message));
-            return;
-        }
-
         if (packet instanceof org.jivesoftware.smack.packet.RosterPacket)
         {
+            RosterPacket rp = (org.jivesoftware.smack.packet.RosterPacket) packet;
+            for (org.jivesoftware.smack.packet.RosterPacket.Item item : rp.getRosterItems())
+            {
+                LogUtil.log(item.getUser());
+            }
             return;
         }
 

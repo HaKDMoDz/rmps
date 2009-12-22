@@ -12,16 +12,19 @@ import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.util.LogUtil;
+import cons.EnvCons;
 import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+import rmp.util.EnvUtil;
 import rmp.util.StringUtil;
 
 /**
@@ -36,7 +39,8 @@ import rmp.util.StringUtil;
  */
 public class I7010000 implements IService
 {
-    private static Properties isCfg;
+    private static String path;
+    private static String args;
     private static Pattern v4Ptn;
     private static Pattern paPtn;
     private static Pattern piPtn;
@@ -50,8 +54,17 @@ public class I7010000 implements IService
     {
         try
         {
-            isCfg = new Properties();
-            isCfg.loadFromXML(new FileInputStream(new File("cfg", getCode() + ".xml")));
+            Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
+            Element element = (Element) document.selectSingleNode("/irps/item/map[@key='path']");
+            if (element != null)
+            {
+                path = element.getText();
+            }
+            element = (Element) document.selectSingleNode("/irps/item/map[@key='args']");
+            if (element != null)
+            {
+                args = element.getText();
+            }
 
             v4Ptn = Pattern.compile("(?<![\\d\\.])((25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)\\.){3}(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)(?![\\d\\.])");
 
@@ -114,7 +127,7 @@ public class I7010000 implements IService
             }
 
             // 链接地址初始化
-            URL url = new URL(isCfg.getProperty("path") + '?' + StringUtil.format(isCfg.getProperty("args"), key));
+            URL url = new URL(path + '?' + StringUtil.format(args, key));
             URLConnection conn = url.openConnection();
             conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
             conn.setUseCaches(false);

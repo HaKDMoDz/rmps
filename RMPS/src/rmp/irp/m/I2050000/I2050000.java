@@ -10,10 +10,18 @@ package rmp.irp.m.I2050000;
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
+import com.amonsoft.util.LogUtil;
+import cons.EnvCons;
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.regex.Pattern;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import rmp.util.CheckUtil;
+import rmp.util.EnvUtil;
 
 /**
  * <ul>
@@ -35,7 +43,26 @@ public class I2050000 implements IService
     @Override
     public boolean wInit()
     {
-        return true;
+        try
+        {
+            Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
+            Element element = (Element) document.selectSingleNode("/I2050000/item");
+            if (element != null)
+            {
+                //path = element.getText();
+            }
+            element = (Element) document.selectSingleNode("/irps/item/map[@key='args']");
+            if (element != null)
+            {
+                //args = element.getText();
+            }
+            return true;
+        }
+        catch (DocumentException exp)
+        {
+            LogUtil.exception(exp);
+            return false;
+        }
     }
 
     @Override

@@ -12,16 +12,19 @@ import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.util.LogUtil;
+import cons.EnvCons;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Properties;
 import java.util.regex.Pattern;
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import rmp.irp.c.Control;
+import rmp.util.EnvUtil;
 import rmp.util.StringUtil;
 
 /**
@@ -37,7 +40,8 @@ import rmp.util.StringUtil;
  */
 public class I2040000 implements IService
 {
-    private static Properties isCfg;
+    private static String path;
+    private static String args;
     private static Pattern phone;
 
     @Override
@@ -45,8 +49,17 @@ public class I2040000 implements IService
     {
         try
         {
-            isCfg = new Properties();
-            isCfg.loadFromXML(new FileInputStream(new File("cfg", getCode() + ".xml")));
+            Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
+            Element element = (Element) document.selectSingleNode("/irps/item/map[@key='path']");
+            if (element != null)
+            {
+                path = element.getText();
+            }
+            element = (Element) document.selectSingleNode("/irps/item/map[@key='args']");
+            if (element != null)
+            {
+                args = element.getText();
+            }
 
             phone = Pattern.compile("^1[3|5|8][0-9]\\d{4,8}$");
 
@@ -110,7 +123,7 @@ public class I2040000 implements IService
             }
 
             // 链接地址初始化
-            URL url = new URL(isCfg.getProperty("path") + '?' + StringUtil.format(isCfg.getProperty("args"), key));
+            URL url = new URL(path + '?' + StringUtil.format(args, key));
             URLConnection conn = url.openConnection();
             conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
             conn.setUseCaches(false);
@@ -157,7 +170,7 @@ public class I2040000 implements IService
             }
 
             // 链接地址初始化
-            URL url = new URL(isCfg.getProperty("path"));
+            URL url = new URL(path);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
@@ -166,7 +179,7 @@ public class I2040000 implements IService
 
             // 发送POST信息
             DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-            dos.write(StringUtil.format(isCfg.getProperty("args"), key).getBytes());
+            dos.write(StringUtil.format(args, key).getBytes());
             dos.flush();
             dos.close();
 

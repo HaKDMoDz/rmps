@@ -13,6 +13,7 @@ import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.util.LogUtil;
+import cons.EnvCons;
 import java.io.FileInputStream;
 import java.util.HashMap;
 import org.dom4j.Document;
@@ -46,29 +47,32 @@ public class Control implements IControl
     {
         try
         {
-            SAXReader saxr = new SAXReader();
-            Document document = saxr.read(new FileInputStream(EnvUtil.getDataPath("irp", "50000000.xml")));
+            Document document = new SAXReader().read(new FileInputStream(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, "50000000.xml")));
 
             Element ele;
 
             // 键盘映射
+            LogUtil.log("键盘映射加载");
             command = new HashMap<String, String>();
             for (Object obj : document.selectNodes("/irps/item[@id='映像']/map"))
             {
                 if (obj instanceof Element)
                 {
                     ele = (Element) obj;
+                    LogUtil.log(ele.getText());
                     command.put(ele.attributeValue("key"), ele.getText());
                 }
             }
 
             // 管理账号
+            LogUtil.log("管理账号加载");
             manager = new HashMap<String, String>();
             for (Object obj : document.selectNodes("/irps/item[@id='管理']/map"))
             {
                 if (obj instanceof Element)
                 {
                     ele = (Element) obj;
+                    LogUtil.log(ele.getText());
                     manager.put(ele.getText(), ele.attributeValue("key"));
                 }
             }
@@ -76,11 +80,14 @@ public class Control implements IControl
             // 提供服务
             IService ims;
             services = new HashMap<String, IService>();
-            for (Object obj : document.selectNodes("/irps/item[@id='管理']/map"))
+            LogUtil.log("提供服务加载");
+            for (Object obj : document.selectNodes("/irps/item[@id='服务']/map"))
             {
                 if (obj instanceof Element)
                 {
                     ele = (Element) obj;
+                    LogUtil.log(ele.getText());
+
                     obj = Class.forName(ele.getText()).newInstance();
                     if (obj instanceof IService)
                     {
