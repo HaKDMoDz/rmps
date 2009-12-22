@@ -160,6 +160,16 @@ public class I7010000 implements IService
         }
     }
 
+    @Override
+    public void doStep(ISession session, IMessage message)
+    {
+    }
+
+    @Override
+    public void doExit(ISession session, IMessage message)
+    {
+    }
+
     private void showData(ISession session, StringBuffer message, String data)
     {
         List<String> list = new ArrayList<String>();

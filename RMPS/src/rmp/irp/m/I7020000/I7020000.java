@@ -122,4 +122,14 @@ public class I7020000 implements IService
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public void doStep(ISession session, IMessage message)
+    {
+    }
+
+    @Override
+    public void doExit(ISession session, IMessage message)
+    {
+    }
 }

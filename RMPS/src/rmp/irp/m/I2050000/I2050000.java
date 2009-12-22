@@ -8,6 +8,7 @@
 package rmp.irp.m.I2050000;
 
 import com.amonsoft.rmps.irp.b.IMessage;
+import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.util.LogUtil;
@@ -107,6 +108,9 @@ public class I2050000 implements IService
     @Override
     public void doInit(ISession session, IMessage message)
     {
+        session.send("Welcome!");
+        session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
+        session.getProcess().setStep(IProcess.STEP_DEFAULT);
     }
 
     @Override
@@ -263,5 +267,15 @@ public class I2050000 implements IService
             f = 32 + (c * 9 / 5);
             ra = k * 1.8;
         }
+    }
+
+    @Override
+    public void doStep(ISession session, IMessage message)
+    {
+    }
+
+    @Override
+    public void doExit(ISession session, IMessage message)
+    {
     }
 }

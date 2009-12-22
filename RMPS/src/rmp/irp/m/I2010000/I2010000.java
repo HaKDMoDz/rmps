@@ -157,4 +157,14 @@ public class I2010000 implements IService
             }
         }
     }
+
+    @Override
+    public void doStep(ISession session, IMessage message)
+    {
+    }
+
+    @Override
+    public void doExit(ISession session, IMessage message)
+    {
+    }
 }

@@ -95,13 +95,13 @@ public class I2040000 implements IService
     public void doInit(ISession session, IMessage message)
     {
         session.send("Welcome to Phone:");
-        session.getProcess().setType(IProcess.TYPE_CONTENT);
+        session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
+        session.getProcess().setStep(IProcess.STEP_DEFAULT);
     }
 
     @Override
     public void doHelp(ISession session, IMessage message)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -155,6 +155,16 @@ public class I2040000 implements IService
         {
             LogUtil.exception(exp);
         }
+    }
+
+    @Override
+    public void doStep(ISession session, IMessage message)
+    {
+    }
+
+    @Override
+    public void doExit(ISession session, IMessage message)
+    {
     }
 
     public void dd(ISession session, IMessage message)

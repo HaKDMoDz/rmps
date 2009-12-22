@@ -162,4 +162,14 @@ public class I7040000 implements IService
                 break;
         }
     }
+
+    @Override
+    public void doStep(ISession session, IMessage message)
+    {
+    }
+
+    @Override
+    public void doExit(ISession session, IMessage message)
+    {
+    }
 }

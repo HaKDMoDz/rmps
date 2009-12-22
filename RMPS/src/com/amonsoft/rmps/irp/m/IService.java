@@ -35,4 +35,8 @@ public interface IService
     void doHelp(ISession session, IMessage message);
 
     void doDeal(ISession session, IMessage message);
+
+    void doStep(ISession session, IMessage message);
+
+    void doExit(ISession session, IMessage message);
 }

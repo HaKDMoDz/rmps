@@ -80,4 +80,14 @@ public class I9000000 implements IService
 
         session.getProcess().setType(IProcess.TYPE_KEYCODE);
     }
+
+    @Override
+    public void doStep(ISession session, IMessage message)
+    {
+    }
+
+    @Override
+    public void doExit(ISession session, IMessage message)
+    {
+    }
 }

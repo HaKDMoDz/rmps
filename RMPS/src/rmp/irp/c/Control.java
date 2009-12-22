@@ -182,25 +182,25 @@ public class Control implements IControl
         if (tmp != null)
         {
             // 使用帮助
-            if ("?".equals(msg))
+            if ("?".equals(tmp))
             {
                 services.get(process.getFunc()).doHelp(session, message);
                 return;
             }
             // 问题汇报
-            if ("#".equals(msg))
+            if ("#".equals(tmp))
             {
                 services.get("").doInit(session, message);
                 return;
             }
             // 发表留言
-            if ("@".equals(msg))
+            if ("@".equals(tmp))
             {
                 services.get("").doInit(session, message);
                 return;
             }
             // 邀请作者
-            if ("$".equals(msg))
+            if ("$".equals(tmp))
             {
                 services.get("").doInit(session, message);
                 return;
@@ -210,15 +210,19 @@ public class Control implements IControl
         // 功能选择事件
         if ((process.getType() & IProcess.TYPE_KEYCODE) != 0)
         {
-            if (!process.setFunc(tmp))
+            if (process.setFunc(msg))
             {
-                services.get(IProcess.FUNC_DEFAULT).doDeal(session, message);
+                // 选择功能初始化
+                services.get(process.getFunc()).doInit(session, message);
                 return;
             }
 
-            // 选择功能初始化
-            services.get(process.getFunc()).doInit(session, message);
-            return;
+            // 判断是否继续
+            if (process.getType() <= IProcess.TYPE_KEYCODE)
+            {
+                services.get(process.getFunc()).doDeal(session, message);
+                return;
+            }
         }
 
         // 命令录入事件
@@ -227,27 +231,39 @@ public class Control implements IControl
             if (">".equals(msg))
             {
                 process.setStep(process.getStep() + 1);
-                process.setType(IProcess.TYPE_COMMAND);
+                services.get(process.getFunc()).doStep(session, message);
+                return;
             }
 
             if ("<".equals(msg))
             {
                 process.setStep(process.getStep() - 1);
-                process.setType(IProcess.TYPE_COMMAND);
+                services.get(process.getFunc()).doStep(session, message);
+                return;
             }
 
             if (">>".equals(msg))
             {
                 process.setStep(process.getMost() - 1);
-                process.setType(IProcess.TYPE_COMMAND);
+                services.get(process.getFunc()).doStep(session, message);
+                return;
             }
 
             if ("<<".equals(msg))
             {
                 process.setStep(0);
-                process.setType(IProcess.TYPE_COMMAND);
+                services.get(process.getFunc()).doStep(session, message);
+                return;
             }
-            return;
+
+            // 自定义命令
+            services.get(process.getFunc()).doDeal(session, message);
+
+            // 判断是否继续
+            if (process.getType() <= IProcess.TYPE_COMMAND)
+            {
+                return;
+            }
         }
 
         // 内容输入事件

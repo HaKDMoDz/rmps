@@ -61,4 +61,14 @@ public class I0000000 implements IService
     public void doDeal(ISession session, IMessage message)
     {
     }
+
+    @Override
+    public void doStep(ISession session, IMessage message)
+    {
+    }
+
+    @Override
+    public void doExit(ISession session, IMessage message)
+    {
+    }
 }

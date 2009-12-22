@@ -105,13 +105,13 @@ public class I2020000 implements IService
     public void doInit(ISession session, IMessage message)
     {
         session.send("您可以输入任意一个国家国家、地区或城市的名称或者拼音！");
-        session.getProcess().setStep(0);
+        session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
+        session.getProcess().setStep(IProcess.STEP_DEFAULT);
     }
 
     @Override
     public void doHelp(ISession session, IMessage message)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -194,13 +194,27 @@ public class I2020000 implements IService
                     showData(session, msg, list.get(step));
                 }
             }
+
             // 设置下一次操作状态
-            proc.setType(IProcess.TYPE_CONTENT);
+            session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_COMMAND | IProcess.TYPE_CONTENT);
         }
         catch (Exception exp)
         {
             LogUtil.exception(exp);
+
+            // 设置下一次操作状态
+            session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
         }
+    }
+
+    @Override
+    public void doStep(ISession session, IMessage message)
+    {
+    }
+
+    @Override
+    public void doExit(ISession session, IMessage message)
+    {
     }
 
     private void showData(ISession session, StringBuffer message, String data)
