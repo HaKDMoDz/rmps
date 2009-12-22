@@ -15,10 +15,8 @@ import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.util.LogUtil;
 import java.io.FileInputStream;
 import java.util.HashMap;
-import java.util.Properties;
-import java.util.regex.Pattern;
 import org.dom4j.Document;
-import org.dom4j.Node;
+import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import rmp.irp.m.I9000000.I9000000;
 import rmp.util.EnvUtil;
@@ -37,9 +35,8 @@ public class Control implements IControl
 {
     private static Control control;
     private static HashMap<String, String> command;
-    private static Properties manager;
+    private static HashMap<String, String> manager;
     private static HashMap<String, IService> services;
-    private static Pattern numReg;
 
     private Control()
     {
@@ -52,55 +49,52 @@ public class Control implements IControl
             SAXReader saxr = new SAXReader();
             Document document = saxr.read(new FileInputStream(EnvUtil.getDataPath("irp", "50000000.xml")));
 
-            // 提供服务加载
-            services = new HashMap<String, IService>();
+            Element ele;
+
+            // 键盘映射
             command = new HashMap<String, String>();
-            Node node;
-            String key;
-            for (Object obj1 : document.selectNodes("/irps/item[@id='映像']/map"))
+            for (Object obj : document.selectNodes("/irps/item[@id='映像']/map"))
             {
-                if (!(obj1 instanceof Node))
+                if (obj instanceof Element)
                 {
-                    continue;
+                    ele = (Element) obj;
+                    command.put(ele.attributeValue("key"), ele.getText());
                 }
-                node = (Node) obj1;
-                node.getText();
             }
-            Object obj2;
+
+            // 管理账号
+            manager = new HashMap<String, String>();
+            for (Object obj : document.selectNodes("/irps/item[@id='管理']/map"))
+            {
+                if (obj instanceof Element)
+                {
+                    ele = (Element) obj;
+                    manager.put(ele.getText(), ele.attributeValue("key"));
+                }
+            }
+
+            // 提供服务
             IService ims;
-//            for (Object obj1 : document.selectNodes("/irps/item[@id='服务']/map"))
-//            {
-//                if (!(obj1 instanceof Node))
-//                {
-//                    continue;
-//                }
-//                node = (Node) obj1;
-//                obj = Class.forName(command.getProperty(key)).newInstance();
-//                if (obj instanceof IService)
-//                {
-//                    ims = (IService) obj;
-//                    if (ims.wInit())
-//                    {
-//                        services.put(key, ims);
-//                    }
-//                }
-//            }
+            services = new HashMap<String, IService>();
+            for (Object obj : document.selectNodes("/irps/item[@id='管理']/map"))
+            {
+                if (obj instanceof Element)
+                {
+                    ele = (Element) obj;
+                    obj = Class.forName(ele.getText()).newInstance();
+                    if (obj instanceof IService)
+                    {
+                        ims = (IService) obj;
+                        if (ims.wInit())
+                        {
+                            services.put(ele.attributeValue("key"), ims);
+                        }
+                    }
+                }
+            }
 
             // 基本功能
             services.put("", new I9000000());
-
-            LogUtil.log("IM支持服务加载成功！");
-
-            manager = new Properties();
-
-            // 正则表达式
-            StringBuffer reg = new StringBuffer("^[");
-            for (String t : command.keySet())
-            {
-                reg.append(t);
-            }
-//            keyReg = Pattern.compile(reg.append("]{1,2}$").toString());
-//            numReg = Pattern.compile("^\\d*[０１２３４５６７８９]*$");
 
             LogUtil.log("IM服务初始化成功！");
         }
