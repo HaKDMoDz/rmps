@@ -103,7 +103,8 @@ public class I7010000 implements IService
     public void doInit(ISession session, IMessage message)
     {
         session.send("Welcome to IP:");
-        session.getProcess().setType(IProcess.TYPE_CONTENT);
+        session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
+        session.getProcess().setStep(IProcess.STEP_DEFAULT);
     }
 
     @Override
@@ -158,6 +159,8 @@ public class I7010000 implements IService
         {
             LogUtil.exception(exp);
         }
+
+        session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
     }
 
     @Override
@@ -186,10 +189,10 @@ public class I7010000 implements IService
         else
         {
             // 结果信息格式化
-            message.append("IP地址：").append(list.get(1)).append(session.newLine());
-            message.append("国　家：").append(list.get(3)).append(session.newLine());
-            message.append("地　区：").append(list.get(5)).append(session.newLine());
-            message.append("运营商：").append(list.get(9)).append(session.newLine());
+            message.append("IP地址：").append(list.get(0)).append(session.newLine());
+            message.append("国　家：").append(list.get(1)).append(session.newLine());
+            message.append("地　区：").append(list.get(2)).append(session.newLine());
+            message.append("运营商：").append(list.get(4)).append(session.newLine());
         }
         session.send(message.toString());
     }
