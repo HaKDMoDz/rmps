@@ -9,6 +9,7 @@ package rmp.irp.comn;
 
 import com.amonsoft.rmps.irp.b.IProcess;
 import java.util.regex.Pattern;
+import rmp.irp.c.Control;
 import rmp.util.CheckUtil;
 
 /**
@@ -23,14 +24,14 @@ import rmp.util.CheckUtil;
 public class Process implements IProcess
 {
     private Pattern keyReg;
-    private StringBuffer func;
+    private String func;
     private int step;
     private int type;
     private int most;
 
     Process()
     {
-        func = new StringBuffer(FUNC_DEFAULT);
+        func = FUNC_DEFAULT;
         step = STEP_DEFAULT;
         type = TYPE_DEFAULT;
 
@@ -43,7 +44,7 @@ public class Process implements IProcess
     @Override
     public String getFunc()
     {
-        return func.toString();
+        return func;
     }
 
     /**
@@ -52,45 +53,58 @@ public class Process implements IProcess
     @Override
     public boolean setFunc(String func)
     {
+        // 判断参数是否为空
+        if (!CheckUtil.isValidate(func))
+        {
+            return false;
+        }
+
+        // 判断是否为功能代码
         if (!keyReg.matcher(func).matches())
         {
             return false;
         }
 
-        if (!CheckUtil.isValidate(func))
+        func = func.replace('。', '.').replace('／', '/');
+        StringBuffer tmp = new StringBuffer();
+
+        // 是否基于当前路径
+        if (func.charAt(0) != '/')
         {
-            return true;
+            tmp.append(this.func);
         }
 
-        char c = func.charAt(0);
-
-        // 以/开始，表示使用绝对路径
-        int l = this.func.length();
-        if (c == '/')
-        {
-            this.func.delete(0, l).append(func.substring(1));
-            return true;
-        }
-
-        // 以数字开始，表示向下加载
-        if (c != '.')
-        {
-            this.func.append(func);
-            return true;
-        }
-
-        // 以.开始，表示相对路径
+        // 向上切换
         int i = 0;
+        int l = tmp.length();
         while (l > 0)
         {
-            i = func.indexOf("..", i);
-            if (i >= 0)
+            i = func.indexOf("../", i) + 3;
+            if (i < 3)
             {
-                l -= 1;
-                this.func.deleteCharAt(l);
+                break;
+            }
+            tmp.deleteCharAt(--l);
+        }
+
+        // 去除斜杠
+        i = func.lastIndexOf('/');
+        if (i >= 0)
+        {
+            func = func.substring(i + 1);
+        }
+
+        // 向下切换
+        for (char c : func.toCharArray())
+        {
+            tmp.append(c);
+            if (Control.getService(tmp.toString()) == null)
+            {
+                tmp.deleteCharAt(tmp.length() - 1);
+                break;
             }
         }
-        this.func.append(func.substring(i + 2));
+        this.func = tmp.toString();
         return true;
     }
 

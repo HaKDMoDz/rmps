@@ -34,14 +34,21 @@
         <map key="$">$</map>
         <map key="￥">$</map>
         <map key="&gt;">&gt;</map>
+        <map key="〉">&gt;</map>
         <map key="》">&gt;</map>
         <map key="&gt;&gt;">&gt;&gt;</map>
+        <map key="〉〉">&gt;&gt;</map>
+        <map key="〉》">&gt;&gt;</map>
         <map key="》》">&gt;&gt;</map>
-        <map key="》》">&gt;&gt;</map>
+        <map key="》〉">&gt;&gt;</map>
         <map key="&lt;">&lt;</map>
+        <map key="〈">&lt;</map>
         <map key="《">&lt;</map>
         <map key="&lt;&lt;">&lt;&lt;</map>
+        <map key="〈〈">&lt;&lt;</map>
+        <map key="〈《">&lt;&lt;</map>
         <map key="《《">&lt;&lt;</map>
+        <map key="《〈">&lt;&lt;</map>
     </item>
     <item id="管理">
         <map key="live">amon.ct@live.com</map>

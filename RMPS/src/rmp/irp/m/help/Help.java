@@ -52,6 +52,7 @@ public class Help implements IService
     @Override
     public void doInit(ISession session, IMessage message)
     {
+        session.send("kakaka");
         session.getProcess().setType(IProcess.TYPE_KEYCODE);
     }
 

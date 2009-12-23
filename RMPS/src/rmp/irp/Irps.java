@@ -13,6 +13,7 @@ import com.amonsoft.util.LogUtil;
 import cons.irp.ConsEnv;
 import java.util.HashMap;
 import rmp.irp.v.gtalk.GTalk;
+import rmp.irp.v.meebo.Meebo;
 
 /**
  * <ul>
@@ -35,13 +36,32 @@ public class Irps
             return;
         }
 
-        irpsItem = new java.awt.MenuItem("启动");
+        main(null);
+
+        irpsItem = new java.awt.MenuItem("GTalk");
         irpsItem.addActionListener(new java.awt.event.ActionListener()
         {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                main(null);
+                IAccount account = new GTalk();
+                account.sign(IStatus.INIT);
+                account.sign(IStatus.SIGN);
+                accounts.put(ConsEnv.IM_LIVE, account);
+            }
+        });
+        menu.add(irpsItem);
+
+        irpsItem = new java.awt.MenuItem("meebo");
+        irpsItem.addActionListener(new java.awt.event.ActionListener()
+        {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                IAccount account = new Meebo();
+                account.sign(IStatus.INIT);
+                account.sign(IStatus.SIGN);
+                accounts.put(ConsEnv.IM_LIVE, account);
             }
         });
         menu.add(irpsItem);
@@ -55,12 +75,12 @@ public class Irps
         LogUtil.wInit();
 
         accounts = new HashMap<String, IAccount>();
-        IAccount account;
+//        IAccount account;
 
-        account = new GTalk();
-        account.sign(IStatus.INIT);
-        account.sign(IStatus.SIGN);
-        accounts.put(ConsEnv.IM_LIVE, account);
+//        account = new GTalk();
+//        account.sign(IStatus.INIT);
+//        account.sign(IStatus.SIGN);
+//        accounts.put(ConsEnv.IM_LIVE, account);
 
 //        account = new Fetion();
 //        account.sign(IStatus.INIT);

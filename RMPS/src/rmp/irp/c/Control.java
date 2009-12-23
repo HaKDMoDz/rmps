@@ -228,28 +228,28 @@ public class Control implements IControl
         // 命令录入事件
         if ((process.getType() & IProcess.TYPE_COMMAND) != 0)
         {
-            if (">".equals(msg))
+            if (">".equals(tmp))
             {
                 process.setStep(process.getStep() + 1);
                 services.get(process.getFunc()).doStep(session, message);
                 return;
             }
 
-            if ("<".equals(msg))
+            if ("<".equals(tmp))
             {
                 process.setStep(process.getStep() - 1);
                 services.get(process.getFunc()).doStep(session, message);
                 return;
             }
 
-            if (">>".equals(msg))
+            if (">>".equals(tmp))
             {
                 process.setStep(process.getMost() - 1);
                 services.get(process.getFunc()).doStep(session, message);
                 return;
             }
 
-            if ("<<".equals(msg))
+            if ("<<".equals(tmp))
             {
                 process.setStep(0);
                 services.get(process.getFunc()).doStep(session, message);
@@ -365,6 +365,16 @@ public class Control implements IControl
     }
 
     /**
+     * 获取给定的服务对象
+     * @param code
+     * @return
+     */
+    public static IService getService(String code)
+    {
+        return services != null ? services.get(code) : null;
+    }
+
+    /**
      * 添加路径信息
      * @param session
      * @param message
@@ -407,7 +417,7 @@ public class Control implements IControl
     public static StringBuffer appendPage(ISession session, StringBuffer message)
     {
         IProcess proc = session.getProcess();
-        message.append(session.newLine()).append(StringUtil.format("第 {0}/{1} 页，", proc.getStep() + 1, proc.getMost()));
+        message.append(session.newLine()).append(StringUtil.format("当前第 {0}/{1} 页，", proc.getStep() + 1, proc.getMost()));
         message.append("您可以使用<<、<、>或>>进行翻页查看。").append(session.newLine());
         return message;
     }

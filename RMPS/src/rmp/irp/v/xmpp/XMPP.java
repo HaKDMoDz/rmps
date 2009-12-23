@@ -203,6 +203,8 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
         if (packet instanceof org.jivesoftware.smack.packet.Message)
         {
             org.jivesoftware.smack.packet.Message message = (org.jivesoftware.smack.packet.Message) packet;
+            LogUtil.log(message.getBody());
+
             if (session.session == null)
             {
                 session.session = messenger.getChatManager().createChat(message.getFrom(), this);
@@ -215,17 +217,19 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
 
         if (packet instanceof Presence)
         {
-            Presence p = (Presence) packet;
-            if (p.getType() == Presence.Type.available)
+            Presence presence = (Presence) packet;
+            LogUtil.log(presence.getType().name());
+
+            if (presence.getType() == Presence.Type.available)
             {
                 Control.getInstance().loginCompleted(session);
             }
 
-            if (p.getType() == Presence.Type.subscribe)
+            if (presence.getType() == Presence.Type.subscribe)
             {
                 try
                 {
-                    messenger.getRoster().createEntry(p.getFrom(), p.getFrom(), null);
+                    messenger.getRoster().createEntry(presence.getFrom(), presence.getFrom(), null);
                     Control.getInstance().contactAddedMe();
                 }
                 catch (XMPPException exp)
@@ -252,7 +256,7 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
     @Override
     public void chatCreated(Chat arg0, boolean arg1)
     {
-        LogUtil.log("chatCreated");
+        LogUtil.log("chatCreated:" + arg1);
     }
 
     @Override
