@@ -66,6 +66,7 @@
         <map key="25">rmp.irp.m.I2050000.I2050000</map>
         <map key="7" comment="IP查询">rmp.irp.m.I7000000.I7000000</map>
         <map key="71" comment="IP查询">rmp.irp.m.I7010000.I7010000</map>
+        <map key="72" comment="在线阅读">rmp.irp.m.I7020000.I7020000</map>
         <map key="9" comment="配置管理">rmp.irp.m.I9000000.I9000000</map>
     </item>
 </irps>

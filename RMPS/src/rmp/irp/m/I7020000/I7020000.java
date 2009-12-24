@@ -8,16 +8,19 @@
 package rmp.irp.m.I7020000;
 
 import com.amonsoft.rmps.irp.b.IMessage;
+import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.sun.syndication.feed.synd.SyndCategory;
-import com.sun.syndication.feed.synd.SyndEnclosure;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 import java.net.URL;
 import com.amonsoft.util.LogUtil;
+import java.util.HashMap;
+import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * <ul>
@@ -31,105 +34,158 @@ import com.amonsoft.util.LogUtil;
  */
 public class I7020000 implements IService
 {
+    private static Pattern ckPtn;
+    private HashMap<String, String> rssList;
+
     @Override
     public boolean wInit()
     {
-        try
-        {
-            // 指定Rss源
-            URL feedUrl = new URL("http://amonsoft.com/blog/feed.php");
-
-            // 得到SyndFeed对象，即得到Rss源里的所有信息
-            SyndFeedInput input = new SyndFeedInput();
-            SyndFeed feed = input.build(new XmlReader(feedUrl));
-
-            // 循环生理Rss子项列表
-            for (Object object : feed.getEntries())
-            {
-                if (object instanceof SyndEntry)
-                {
-                    SyndEntry entry = (SyndEntry) object;
-                    // 标题、连接地址、标题简介、时间是一个Rss源项最基本的组成部分
-                    System.out.println("标题：" + entry.getTitle());
-                    System.out.println("连接地址：" + entry.getLink());
-                    System.out.println("标题简介：" + entry.getDescription().getValue());
-                    System.out.println("发布时间：" + entry.getPublishedDate());
-                    System.out.println("标题的作者：" + entry.getAuthor());
-
-                    // 此标题所属的范畴
-                    for (Object obj2 : entry.getCategories())
-                    {
-                        if (obj2 instanceof SyndCategory)
-                        {
-                            SyndCategory category = (SyndCategory) obj2;
-                            System.out.println("此标题所属的范畴：" + category.getName());
-                        }
-                    }
-
-                    // 得到流媒体播放文件的信息列表
-                    for (Object obj3 : entry.getEnclosures())
-                    {
-                        if (obj3 instanceof SyndEnclosure)
-                        {
-                            SyndEnclosure enclosure = (SyndEnclosure) obj3;
-                            System.out.println("流媒体播放文件：" + enclosure.getUrl());
-                        }
-                    }
-                }
-            }
-            LogUtil.log(getName() + " 初始化成功！");
-            return true;
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
-            return false;
-        }
+        rssList = new HashMap<String, String>(10);
+        rssList.put("", "http://amonsoft.com/blog/feed.php");
+        ckPtn = Pattern.compile("^\\*[\\d０１２３４５６７８９]?$");
+        LogUtil.log(getName() + " 初始化成功！");
+        return true;
     }
 
     @Override
     public String getCode()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "57020000";
     }
 
     @Override
     public String getName()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "RSS Reader";
     }
 
     @Override
     public String getDescription()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "迷你RSS阅读器";
     }
 
     @Override
     public void doInit(ISession session, IMessage message)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        session.send("欢迎使用RSS阅读器！");
+        session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_COMMAND);
     }
 
     @Override
     public void doHelp(ISession session, IMessage message)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        session.send("请以星号（*）起始输入您要查看的RSS频道号码！");
+        session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_COMMAND);
     }
 
     @Override
     public void doDeal(ISession session, IMessage message)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String txt = message.getContent();
+        String tmp = txt.trim();
+        if (!ckPtn.matcher(tmp).matches())
+        {
+            doHelp(session, message);
+            return;
+        }
+
+        // 显示RSS频道菜单列表
+        if ("*".equals(tmp))
+        {
+            listRss(session, message);
+            return;
+        }
+
+        // 用户选择了一个RSS频道
+        session.getProcess().setStep(IProcess.STEP_DEFAULT);
+        readRss(session, message, rssList.get(""));
     }
 
     @Override
     public void doStep(ISession session, IMessage message)
     {
+        // 列表查看状态
+        if (Constant.OPERATE_LIST.equals(session.getAttribute(Constant.OPERATE)))
+        {
+            listRss(session, message);
+            return;
+        }
+        // 内容阅读状态
+        if (Constant.OPERATE_READ.equals(session.getAttribute(Constant.OPERATE)))
+        {
+            listRss(session, message);
+            return;
+        }
+        // 列表编辑状态
+        if (Constant.OPERATE_EDIT.equals(session.getAttribute(Constant.OPERATE)))
+        {
+            readRss(session, message, rssList.get(""));
+            return;
+        }
     }
 
     @Override
     public void doExit(ISession session, IMessage message)
     {
+    }
+
+    /**
+     * 显示RSS列表
+     * @param session
+     * @param message
+     */
+    private void listRss(ISession session, IMessage message)
+    {
+    }
+
+    /**
+     * 读取RSS信息
+     * @param session
+     * @param message
+     */
+    private void readRss(ISession session, IMessage message, String channel)
+    {
+        try
+        {
+            IProcess proc = session.getProcess();
+            if (proc.getStep() < 0)
+            {
+                session.send("已是第一页！");
+                return;
+            }
+            if (proc.getStep() >= proc.getMost())
+            {
+                session.send("已是最后一页！");
+                return;
+            }
+
+            SyndFeed feed = new SyndFeedInput().build(new XmlReader(new URL(channel)));
+            List list = feed.getEntries();
+            Object obj = list.get(proc.getStep());
+            StringBuffer msg = new StringBuffer();
+            if (obj instanceof SyndEntry)
+            {
+                SyndEntry item = (SyndEntry) obj;
+                // 标题、连接地址、标题简介、时间是一个Rss源项最基本的组成部分
+                msg.append("标题：").append(item.getTitle()).append(session.newLine());
+                msg.append("作者：").append(item.getAuthor()).append(session.newLine());
+                msg.append("发布日期：").append(item.getPublishedDate()).append(session.newLine());
+                msg.append("类别划分：");
+                for (Object obj2 : item.getCategories())
+                {
+                    if (obj2 instanceof SyndCategory)
+                    {
+                        msg.append(((SyndCategory) obj2).getName()).append('、');
+                    }
+                }
+                msg.deleteCharAt(msg.length() - 1).append(session.newLine());
+                msg.append("内容摘要：").append(item.getDescription().getValue()).append(session.newLine());
+            }
+        }
+        catch (Exception exp)
+        {
+            LogUtil.exception(exp);
+        }
     }
 }
