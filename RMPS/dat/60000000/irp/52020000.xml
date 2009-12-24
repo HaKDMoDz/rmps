@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <irps>
-    <item>
-        <map key="path">http://php.tech.sina.com.cn/iframe/download/download_srv.php</map>
-        <map key="args">action=bst_postcode&amp;city={0}</map>
-    </item>
+    <I2020000>
+        <item id="配置">
+            <map key="path">http://php.tech.sina.com.cn/iframe/download/download_srv.php</map>
+            <map key="args">action=bst_postcode&amp;city={0}</map>
+        </item>
+        <item id="资源">
+        </item>
+    </I2020000>
 </irps>

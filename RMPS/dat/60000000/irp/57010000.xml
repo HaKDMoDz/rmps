@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <irps>
-    <item>
-        <map key="path">http://counter.sina.com.cn/ip</map>
-        <map key="args">ip={0}</map>
-    </item>
+    <I7010000>
+        <item id="配置">
+            <map key="path">http://counter.sina.com.cn/ip</map>
+            <map key="args">ip={0}</map>
+        </item>
+        <item id="资源"></item>
+    </I7010000>
 </irps>
