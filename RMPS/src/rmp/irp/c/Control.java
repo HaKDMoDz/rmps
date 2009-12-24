@@ -375,62 +375,7 @@ public class Control implements IControl
     }
 
     /**
-     * 添加路径信息
-     * @param session
-     * @param message
-     * @return
-     */
-    public static StringBuffer appendPath(ISession session, StringBuffer message)
-    {
-        IProcess process = session.getProcess();
-        message.append("您当前的操作：/").append(process.getFunc()).append('（');
-        IService service = services.get(process.getFunc());
-        if (service != null)
-        {
-            message.append(service.getName());
-        }
-        message.append("）：");
-        message.append(session.newLine()).append("------------------------------");
-        message.append(session.newLine()).append(session.newLine());
-        return message;
-    }
-
-    /**
-     * 添加路径信息
-     * @param session
-     * @param message
-     * @return
-     */
-    public static StringBuffer insertPath(ISession session, StringBuffer message)
-    {
-        IProcess process = session.getProcess();
-        message.insert(0, session.newLine()).insert(0, session.newLine());
-        message.insert(0, session.newLine()).insert(0, "------------------------------");
-        message.insert(0, "）：");
-        IService service = services.get(process.getFunc());
-        if (service != null)
-        {
-            message.insert(0, service.getName());
-        }
-        message.insert(0, process.getFunc()).append('（').insert(0, "您当前的操作：/");
-        return message;
-    }
-
-    /**
-     * 添加版权信息
-     * @param session
-     * @param message
-     * @return
-     */
-    public static StringBuffer appendCopy(ISession session, StringBuffer message)
-    {
-        message.append(session.newLine()).append("------------------------------");
-        message.append(session.newLine()).append("© Amonsoft @ http://amonsoft.com/");
-        return message;
-    }
-
-    /**
-     * 
+     *
      * @param session
      * @param message
      * @return

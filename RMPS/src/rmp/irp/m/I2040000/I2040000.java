@@ -119,20 +119,14 @@ public class I2040000 implements IService
             Matcher m = msPtn.matcher(txt);
             if (!m.find())
             {
-                Control.appendPath(session, msg);
-                msg.append("请以加号（+＋）起始，输入您要查询的11位手机号码或其前7位！");
-                Control.appendCopy(session, msg);
-                session.send(msg.toString());
+                session.send("请以加号（+＋）起始，输入您要查询的11位手机号码或其前7位！");
                 return;
             }
 
             txt = txt.replace(m.group(), "");
             if (!mpPtn.matcher(txt).matches())
             {
-                Control.appendPath(session, msg);
-                msg.append("请以加号（+＋）起始，输入您要查询的11位手机号码或其前7位！");
-                Control.appendCopy(session, msg);
-                session.send(msg.toString());
+                session.send("请以加号（+＋）起始，输入您要查询的11位手机号码或其前7位！");
                 return;
             }
 
@@ -151,12 +145,10 @@ public class I2040000 implements IService
 
             // 结果信息格式化
             String[] temp = data.split("'");
-            Control.appendPath(session, msg);
             msg.append("号码段：").append(temp[1]).append(session.newLine());
             msg.append("归属地：").append(temp[3]).append(' ').append(temp[5]).append(session.newLine());
             msg.append("卡类型：").append(temp[7]).append(session.newLine());
             msg.append("区　号：").append(temp[9]).append(session.newLine());
-            Control.appendCopy(session, msg);
 
             // 发送结果信息
             session.send(msg.toString());
@@ -218,12 +210,10 @@ public class I2040000 implements IService
             // 结果信息格式化
             String[] temp = data.split("\"");
             StringBuffer msg = new StringBuffer();
-            Control.appendPath(session, msg);
             msg.append("IP地址：").append(temp[1]).append(session.newLine());
             msg.append("国　家：").append(temp[3]).append(session.newLine());
             msg.append("地　区：").append(temp[5]).append(session.newLine());
             msg.append("运营商：").append(temp[9]).append(session.newLine());
-            Control.appendCopy(session, msg);
 
             // 发送结果信息
             session.send(msg.toString());

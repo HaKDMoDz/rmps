@@ -64,7 +64,6 @@ public class I9000000 implements IService
     public void doDeal(ISession session, IMessage message)
     {
         StringBuffer msg = new StringBuffer();
-        Control.appendPath(session, msg);
         msg.append("0、我的应用").append(session.newLine());
         msg.append("1、新闻资讯").append(session.newLine());
         msg.append("2、生活服务").append(session.newLine());
@@ -75,7 +74,6 @@ public class I9000000 implements IService
         msg.append("7、科学教育").append(session.newLine());
         msg.append("8、功能扩展").append(session.newLine());
         msg.append("9、配置管理").append(session.newLine());
-        Control.appendCopy(session, msg);
         session.send(msg.toString());
 
         session.getProcess().setType(IProcess.TYPE_KEYCODE);

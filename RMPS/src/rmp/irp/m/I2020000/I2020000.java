@@ -214,7 +214,6 @@ public class I2020000 implements IService
     private void showData(ISession session, String data)
     {
         StringBuffer message = new StringBuffer();
-        Control.appendPath(session, message);
 
         // 结果信息格式化
         Matcher matcher = piPtn.matcher(data);
@@ -235,8 +234,6 @@ public class I2020000 implements IService
             message.append("区　号：").append(list.get(1)).append(session.newLine());
             message.append("所在地：").append(list.get(2)).append(' ').append(list.get(3)).append(session.newLine());
         }
-        Control.appendPage(session, message);
-        Control.appendCopy(session, message);
-        session.send(message.toString());
+        session.send(Control.appendPage(session, message).toString());
     }
 }

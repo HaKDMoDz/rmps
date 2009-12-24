@@ -15,7 +15,6 @@ import net.sf.jml.MsnMessenger;
 import net.sf.jml.MsnSwitchboard;
 import net.sf.jml.message.MsnControlMessage;
 import net.sf.jml.message.MsnInstantMessage;
-import rmp.irp.c.Control;
 import rmp.irp.comn.ASession;
 
 /**
@@ -51,13 +50,9 @@ public class Session extends ASession
     }
 
     @Override
-    public void send(String message, boolean useCopy)
+    public void send(String message, boolean literal)
     {
-        StringBuffer msg = new StringBuffer();
-        Control.appendPath(this, msg);
-        msg.append(message);
-        Control.appendCopy(this, msg);
-        switchboard.sendText(msg.toString());
+        switchboard.sendText(literal ? appendCopy(this, appendPath(this, new StringBuffer()).append(message)).toString() : message);
     }
 
     @Override
@@ -70,7 +65,18 @@ public class Session extends ASession
     }
 
     @Override
+    public void send(IMessage message, boolean literal)
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
     public void send(IMimeMessage message)
+    {
+    }
+
+    @Override
+    public void send(IMimeMessage message, boolean literal)
     {
     }
 

@@ -33,7 +33,7 @@ public interface ISession
     /**
      * @param message
      */
-    public void send(String message, boolean useCopy);
+    public void send(String message, boolean literal);
 
     /**
      * 发送Message消息
@@ -42,10 +42,22 @@ public interface ISession
     void send(IMessage message);
 
     /**
+     * 发送Message消息
+     * @param message
+     */
+    void send(IMessage message, boolean literal);
+
+    /**
      * 发送多媒体消息
      * @param message
      */
     void send(IMimeMessage message);
+
+    /**
+     * 发送多媒体消息
+     * @param message
+     */
+    void send(IMimeMessage message, boolean literal);
 
     /**
      * 发送文件

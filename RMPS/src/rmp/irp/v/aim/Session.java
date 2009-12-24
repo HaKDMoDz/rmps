@@ -37,7 +37,7 @@ public class Session extends ASession
     }
 
     @Override
-    public void send(String message, boolean useCopy)
+    public void send(String message, boolean literal)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -49,7 +49,19 @@ public class Session extends ASession
     }
 
     @Override
+    public void send(IMessage message, boolean literal)
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
     public void send(IMimeMessage message)
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void send(IMimeMessage message, boolean literal)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }

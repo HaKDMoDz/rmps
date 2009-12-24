@@ -9,7 +9,10 @@ package rmp.irp.comn;
 
 import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
+import com.amonsoft.rmps.irp.m.IService;
 import java.util.HashMap;
+import rmp.irp.c.Control;
+import rmp.util.StringUtil;
 
 /**
  * <ul>
@@ -56,5 +59,39 @@ public abstract class ASession implements ISession
             process = new Process();
         }
         return process;
+    }
+
+    /**
+     * 添加路径信息
+     * @param session
+     * @param message
+     * @return
+     */
+    protected static StringBuffer appendPath(ISession session, StringBuffer message)
+    {
+        IProcess process = session.getProcess();
+        message.append("您当前的操作：/").append(process.getFunc()).append('（');
+        IService service = Control.getService(process.getFunc());
+        if (service != null)
+        {
+            message.append(service.getName());
+        }
+        message.append("）：");
+        message.append(session.newLine()).append("------------------------------");
+        message.append(session.newLine()).append(session.newLine());
+        return message;
+    }
+
+    /**
+     * 添加版权信息
+     * @param session
+     * @param message
+     * @return
+     */
+    protected static StringBuffer appendCopy(ISession session, StringBuffer message)
+    {
+        message.append(session.newLine()).append("------------------------------");
+        message.append(session.newLine()).append("© Amonsoft @ http://amonsoft.com/");
+        return message;
     }
 }
