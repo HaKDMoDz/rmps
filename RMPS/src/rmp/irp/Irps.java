@@ -105,17 +105,8 @@ public class Irps
         LogUtil.wInit();
 
         accounts = new HashMap<String, IAccount>();
-//        IAccount account;
-
-//        account = new GTalk();
-//        account.sign(IStatus.INIT);
-//        account.sign(IStatus.SIGN);
-//        accounts.put(ConsEnv.IM_LIVE, account);
-
-//        account = new Fetion();
-//        account.sign(IStatus.INIT);
-//        account.sign(IStatus.LINE);
-//        accounts.put(ConsEnv.IM_FETION, account);
+		
+		java.security.Security.addProvider(new cryptix.jce.provider.CryptixCrypto());
     }
 
     public static void exit(int status)

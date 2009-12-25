@@ -16,7 +16,7 @@ package cons.irp;
  * </ul>
  * @author Amon
  */
-public class LangRes
+public interface LangRes
 {
     String I0000000 = "";
 }

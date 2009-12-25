@@ -198,12 +198,10 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
     @Override
     public void processPacket(Packet packet)
     {
-        LogUtil.log("processPacket：" + packet);
-
         if (packet instanceof org.jivesoftware.smack.packet.Message)
         {
             org.jivesoftware.smack.packet.Message message = (org.jivesoftware.smack.packet.Message) packet;
-            LogUtil.log(message.getBody());
+            LogUtil.log("XMPP: processPacket:Message－(" + message.getFrom() + ")" + message.getBody());
 
             if (session.session == null)
             {
@@ -218,7 +216,7 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
         if (packet instanceof Presence)
         {
             Presence presence = (Presence) packet;
-            LogUtil.log(presence.getType().name());
+            LogUtil.log("XMPP: processPacket:Presence－" + presence.getType().name());
 
             if (presence.getType() == Presence.Type.available)
             {
@@ -242,6 +240,7 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
 
         if (packet instanceof org.jivesoftware.smack.packet.RosterPacket)
         {
+            LogUtil.log("XMPP: processPacket:RosterPacket");
             RosterPacket rp = (org.jivesoftware.smack.packet.RosterPacket) packet;
             for (org.jivesoftware.smack.packet.RosterPacket.Item item : rp.getRosterItems())
             {
@@ -250,6 +249,7 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
             return;
         }
 
+        LogUtil.log("XMPP: processPacket:unknownMessage");
         Control.getInstance().unknownMessageReceived(session, new Message(null));
     }
 

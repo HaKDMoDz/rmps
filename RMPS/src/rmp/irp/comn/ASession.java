@@ -90,7 +90,7 @@ public abstract class ASession implements ISession
      */
     protected static StringBuffer appendCopy(ISession session, StringBuffer message)
     {
-        if (message.lastIndexOf(session.newLine()) + 1 != message.length() - session.newLine().length())
+        if (message.lastIndexOf(session.newLine()) != message.length() - session.newLine().length())
         {
             message.append(session.newLine());
         }

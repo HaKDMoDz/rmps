@@ -16,6 +16,8 @@ package cons.irp;
  * </ul>
  * @author Amon
  */
-public class ConsCfg
+public interface ConsCfg
 {
+    String IRPS_NAME_EN = "Atom";
+    String IRPS_NAME_CN = "小木";
 }

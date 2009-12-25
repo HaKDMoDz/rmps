@@ -47,32 +47,33 @@ public class Control implements IControl
     {
         try
         {
+            LogUtil.log("IRPS：Control 初始化……");
             Document document = new SAXReader().read(new FileInputStream(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, "irps.xml")));
 
             Element ele;
 
             // 键盘映射
-            LogUtil.log("键盘映射加载");
+            LogUtil.log("IRPS：键盘映射加载……");
             command = new HashMap<String, String>();
             for (Object obj : document.selectNodes("/irps/item[@id='配置']/map"))
             {
                 if (obj instanceof Element)
                 {
                     ele = (Element) obj;
-                    LogUtil.log(ele.getText());
+                    LogUtil.log(ele.attributeValue("key") + " - " + ele.getText());
                     command.put(ele.attributeValue("key"), ele.getText());
                 }
             }
 
             // 管理账号
-            LogUtil.log("管理账号加载");
+            LogUtil.log("IRPS：管理账号加载……");
             manager = new HashMap<String, String>();
             for (Object obj : document.selectNodes("/irps/item[@id='管理']/map"))
             {
                 if (obj instanceof Element)
                 {
                     ele = (Element) obj;
-                    LogUtil.log(ele.getText());
+                    LogUtil.log("IRPS：" + ele.getText());
                     manager.put(ele.getText(), ele.attributeValue("key"));
                 }
             }
@@ -80,7 +81,7 @@ public class Control implements IControl
             // 提供服务
             IService ims;
             services = new HashMap<String, IService>();
-            LogUtil.log("提供服务加载");
+            LogUtil.log("IRPS：提供服务加载……");
             for (Object obj : document.selectNodes("/irps/item[@id='服务']/map"))
             {
                 if (obj instanceof Element)
@@ -105,7 +106,7 @@ public class Control implements IControl
             help.wInit();
             services.put("", help);
 
-            LogUtil.log("IM服务初始化成功！");
+            LogUtil.log("IRPS：Control 初始化成功！");
         }
         catch (Exception exp)
         {
@@ -181,6 +182,12 @@ public class Control implements IControl
         // 优先处理命令
         if (tmp != null)
         {
+            // 显示菜单
+            if ("*".equals(tmp))
+            {
+                services.get(process.getFunc()).doMenu(session, message);
+                return;
+            }
             // 使用帮助
             if ("?".equals(tmp))
             {
@@ -228,12 +235,6 @@ public class Control implements IControl
         // 命令录入事件
         if ((process.getType() & IProcess.TYPE_COMMAND) != 0)
         {
-            if ("*".equals(tmp))
-            {
-                services.get(process.getFunc()).doMenu(session, message);
-                return;
-            }
-
             if (">".equals(tmp))
             {
                 process.setStep(process.getStep() + 1);

@@ -45,7 +45,7 @@ public final class LogUtil
         try
         {
             // 创建日志文件对象
-            File logFile = new File("log", "exception_" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + ".log");
+            File logFile = new File("D:\\log", "exception_" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + ".log");
 
             // 错误日志文件是否存在
             if (!logFile.exists())

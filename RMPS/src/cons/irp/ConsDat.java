@@ -16,6 +16,6 @@ package cons.irp;
  * </ul>
  * @author Amon
  */
-public class ConsDat
+public interface ConsDat
 {
 }

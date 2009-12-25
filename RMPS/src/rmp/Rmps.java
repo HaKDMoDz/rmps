@@ -305,13 +305,14 @@ public final class Rmps
      */
     public static boolean startApp()
     {
-        LogUtil.log("系统启动：应用程序启动！");
+        LogUtil.log("系统启动：应用程序启动……");
 
         tray = new Tray();
         tray.initView();
         tray.initLang();
         tray.initData();
 
+        LogUtil.log("系统启动：应用程序启动成功！");
         return true;
     }
 
