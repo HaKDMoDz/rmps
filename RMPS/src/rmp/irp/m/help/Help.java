@@ -65,16 +65,26 @@ public class Help implements IService
     public void doDeal(ISession session, IMessage message)
     {
         StringBuffer msg = new StringBuffer();
-        msg.append("0、我的应用").append(session.newLine());
-        msg.append("1、新闻资讯").append(session.newLine());
-        msg.append("2、生活服务").append(session.newLine());
-        msg.append("3、财经证券").append(session.newLine());
-        msg.append("4、在线办公").append(session.newLine());
-        msg.append("5、信息检索").append(session.newLine());
-        msg.append("6、休闲娱乐").append(session.newLine());
-        msg.append("7、科学教育").append(session.newLine());
-        msg.append("8、功能扩展").append(session.newLine());
-        msg.append("9、配置管理").append(session.newLine());
+        String func = session.getProcess().getFunc();
+        IService serv;
+        for (int i = 0; i < 10; i += 1)
+        {
+            serv = Control.getService(func + i);
+            if (serv != null)
+            {
+                msg.append(func + i).append('、').append(serv.getName()).append(session.newLine());
+            }
+        }
+//        msg.append("0、我的应用").append(session.newLine());
+//        msg.append("1、新闻资讯").append(session.newLine());
+//        msg.append("2、生活服务").append(session.newLine());
+//        msg.append("3、财经证券").append(session.newLine());
+//        msg.append("4、在线办公").append(session.newLine());
+//        msg.append("5、信息检索").append(session.newLine());
+//        msg.append("6、休闲娱乐").append(session.newLine());
+//        msg.append("7、科学教育").append(session.newLine());
+//        msg.append("8、功能扩展").append(session.newLine());
+//        msg.append("9、配置管理").append(session.newLine());
         session.send(msg.toString());
 
         session.getProcess().setType(IProcess.TYPE_KEYCODE);

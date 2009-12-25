@@ -60,13 +60,15 @@
         <map key="gtalk">amon.ct@gmail.com</map>
     </item>
     <item id="服务">
-        <map key="2">rmp.irp.m.I2000000.I2000000</map>
+        <map key="0" comment="IP查询">rmp.irp.m.I7010000.I7010000</map>
+        <map key="1" comment="邮政编码">rmp.irp.m.I2020000.I2020000</map>
+        <!--map key="2">rmp.irp.m.I2000000.I2000000</map>
         <map key="22" comment="邮政编码">rmp.irp.m.I2020000.I2020000</map>
         <map key="24">rmp.irp.m.I2040000.I2040000</map>
         <map key="25">rmp.irp.m.I2050000.I2050000</map>
         <map key="7" comment="IP查询">rmp.irp.m.I7000000.I7000000</map>
         <map key="71" comment="IP查询">rmp.irp.m.I7010000.I7010000</map>
         <map key="72" comment="在线阅读">rmp.irp.m.I7020000.I7020000</map>
-        <map key="9" comment="配置管理">rmp.irp.m.I9000000.I9000000</map>
+        <map key="9" comment="配置管理">rmp.irp.m.I9000000.I9000000</map-->
     </item>
 </irps>

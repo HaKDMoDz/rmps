@@ -90,6 +90,7 @@ public abstract class ASession implements ISession
      */
     protected static StringBuffer appendCopy(ISession session, StringBuffer message)
     {
+        message.append(session.newLine());
         message.append(session.newLine()).append("------------------------------");
         message.append(session.newLine()).append("© Amonsoft @ http://amonsoft.com/");
         return message;

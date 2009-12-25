@@ -88,7 +88,7 @@ public interface IControl
 
     void contactStatusChanged();
 
-    void contactAddedMe();
+    void contactAddedMe(ISession session);
 
     void contactRemovedMe();
 

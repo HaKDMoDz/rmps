@@ -54,7 +54,7 @@ public class Control implements IControl
             // 键盘映射
             LogUtil.log("键盘映射加载");
             command = new HashMap<String, String>();
-            for (Object obj : document.selectNodes("/irps/item[@id='映像']/map"))
+            for (Object obj : document.selectNodes("/irps/item[@id='配置']/map"))
             {
                 if (obj instanceof Element)
                 {
@@ -320,8 +320,9 @@ public class Control implements IControl
     }
 
     @Override
-    public void contactAddedMe()
+    public void contactAddedMe(ISession session)
     {
+        session.send("您好，小木为您服务！");
         LogUtil.log("contactAddedMe:");
     }
 

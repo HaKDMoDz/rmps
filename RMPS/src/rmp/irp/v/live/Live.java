@@ -214,6 +214,8 @@ public class Live extends MsnAdapter implements IAccount
     @Override
     public void contactAddedMe(MsnMessenger messenger, MsnContact friend)
     {
+        messenger.addFriend(friend.getEmail(), "irps");
+        Control.getInstance().contactAddedMe(session);
         LogUtil.log("contactAddedMe from " + friend.getEmail().getEmailAddress());
     }
 

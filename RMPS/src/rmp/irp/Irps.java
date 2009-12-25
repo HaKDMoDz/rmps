@@ -13,6 +13,8 @@ import com.amonsoft.util.LogUtil;
 import cons.irp.ConsEnv;
 import java.util.HashMap;
 import rmp.irp.v.gtalk.GTalk;
+import rmp.irp.v.jabber.Jabber;
+import rmp.irp.v.live.Live;
 import rmp.irp.v.meebo.Meebo;
 
 /**
@@ -38,6 +40,20 @@ public class Irps
 
         main(null);
 
+        irpsItem = new java.awt.MenuItem("MSN");
+        irpsItem.addActionListener(new java.awt.event.ActionListener()
+        {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                IAccount account = new Live();
+                account.sign(IStatus.INIT);
+                account.sign(IStatus.SIGN);
+                accounts.put(ConsEnv.IM_LIVE, account);
+            }
+        });
+        menu.add(irpsItem);
+
         irpsItem = new java.awt.MenuItem("GTalk");
         irpsItem.addActionListener(new java.awt.event.ActionListener()
         {
@@ -59,6 +75,20 @@ public class Irps
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 IAccount account = new Meebo();
+                account.sign(IStatus.INIT);
+                account.sign(IStatus.SIGN);
+                accounts.put(ConsEnv.IM_LIVE, account);
+            }
+        });
+        menu.add(irpsItem);
+
+        irpsItem = new java.awt.MenuItem("jabber");
+        irpsItem.addActionListener(new java.awt.event.ActionListener()
+        {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                IAccount account = new Jabber();
                 account.sign(IStatus.INIT);
                 account.sign(IStatus.SIGN);
                 accounts.put(ConsEnv.IM_LIVE, account);

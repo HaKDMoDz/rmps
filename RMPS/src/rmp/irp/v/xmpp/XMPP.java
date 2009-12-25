@@ -81,7 +81,7 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
                     messenger.login(connect.getUser(), connect.getPwds());
 
                     Presence presence = new Presence(Presence.Type.available);
-                    presence.setStatus("I'm Coming...");
+                    presence.setStatus("小木为您服务！");
                     messenger.sendPacket(presence);
 
                     PacketFilter filter = new PacketFilter()
@@ -230,7 +230,7 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
                 try
                 {
                     messenger.getRoster().createEntry(presence.getFrom(), presence.getFrom(), null);
-                    Control.getInstance().contactAddedMe();
+                    Control.getInstance().contactAddedMe(session);
                 }
                 catch (XMPPException exp)
                 {

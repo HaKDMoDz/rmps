@@ -55,12 +55,12 @@ public class I7010000 implements IService
         try
         {
             Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
-            Element element = (Element) document.selectSingleNode("/irps/item/map[@key='path']");
+            Element element = (Element) document.selectSingleNode("/irps/I7010000/item[@id='配置']/map[@key='path']");
             if (element != null)
             {
                 path = element.getText();
             }
-            element = (Element) document.selectSingleNode("/irps/item/map[@key='args']");
+            element = (Element) document.selectSingleNode("/irps/I7010000/item[@id='配置']/map[@key='args']");
             if (element != null)
             {
                 args = element.getText();
@@ -90,13 +90,13 @@ public class I7010000 implements IService
     @Override
     public String getName()
     {
-        return "IP";
+        return "IP 查询";
     }
 
     @Override
     public String getDescription()
     {
-        return "";
+        return "IP 查询";
     }
 
     @Override

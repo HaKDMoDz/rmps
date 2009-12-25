@@ -59,12 +59,12 @@ public class I2020000 implements IService
         try
         {
             Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
-            Element element = (Element) document.selectSingleNode("/irps/item/map[@key='path']");
+            Element element = (Element) document.selectSingleNode("/irps/I2020000/item[@id='配置']/map[@key='path']");
             if (element != null)
             {
                 path = element.getText();
             }
-            element = (Element) document.selectSingleNode("/irps/item/map[@key='args']");
+            element = (Element) document.selectSingleNode("/irps/I2020000/item[@id='配置']/map[@key='args']");
             if (element != null)
             {
                 args = element.getText();
@@ -92,13 +92,13 @@ public class I2020000 implements IService
     @Override
     public String getName()
     {
-        return "postcode";
+        return "邮政编码";
     }
 
     @Override
     public String getDescription()
     {
-        return "postcode";
+        return "邮政编码查询";
     }
 
     @Override
@@ -149,6 +149,9 @@ public class I2020000 implements IService
             {
                 list.add(matcher.group());
             }
+
+            // 设置下一次操作状态
+            proc.setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_COMMAND | IProcess.TYPE_CONTENT);
             proc.setStep(IProcess.STEP_DEFAULT);
             proc.setMost(list.size());
             session.setAttribute(getCode() + "_m", list);
@@ -162,9 +165,6 @@ public class I2020000 implements IService
                 // 发送结果信息
                 showData(session, list.get(proc.getStep()));
             }
-
-            // 设置下一次操作状态
-            session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_COMMAND | IProcess.TYPE_CONTENT);
         }
         catch (Exception exp)
         {
@@ -183,7 +183,7 @@ public class I2020000 implements IService
         if (list == null || list.size() < 1)
         {
             session.send("请输入您要查询的国家、地区或城市的名称或拼音！");
-            proc.setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
+            session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
             proc.setStep(IProcess.STEP_DEFAULT);
             return;
         }
@@ -203,6 +203,7 @@ public class I2020000 implements IService
             return;
         }
 
+        session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_COMMAND | IProcess.TYPE_CONTENT);
         showData(session, list.get(step));
     }
 
