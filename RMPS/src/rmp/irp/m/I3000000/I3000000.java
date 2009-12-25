@@ -52,6 +52,11 @@ public class I3000000 implements IService
     }
 
     @Override
+    public void doMenu(ISession session, IMessage message)
+    {
+    }
+
+    @Override
     public void doHelp(ISession session, IMessage message)
     {
     }

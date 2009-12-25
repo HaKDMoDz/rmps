@@ -24,7 +24,6 @@ import java.util.regex.Pattern;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import rmp.irp.c.Control;
 import rmp.util.EnvUtil;
 import rmp.util.StringUtil;
 
@@ -100,6 +99,11 @@ public class I2040000 implements IService
         session.send("Welcome to Phone:");
         session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
         session.getProcess().setStep(IProcess.STEP_DEFAULT);
+    }
+
+    @Override
+    public void doMenu(ISession session, IMessage message)
+    {
     }
 
     @Override

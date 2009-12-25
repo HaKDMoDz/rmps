@@ -38,9 +38,15 @@ public class Session extends ASession
     @Override
     public void send(String message)
     {
+        send(message, true);
+    }
+
+    @Override
+    public void send(String message, boolean literal)
+    {
         try
         {
-            session.sendMessage(message);
+            session.sendMessage(literal ? appendCopy(this, appendPath(this, new StringBuffer()).append(message)).toString() : message);
         }
         catch (XMPPException exp)
         {
@@ -49,12 +55,13 @@ public class Session extends ASession
     }
 
     @Override
-    public void send(String message, boolean literal)
+    public void send(IMessage message)
     {
+        send(message, true);
     }
 
     @Override
-    public void send(IMessage message)
+    public void send(IMessage message, boolean literal)
     {
         try
         {
@@ -70,14 +77,9 @@ public class Session extends ASession
     }
 
     @Override
-    public void send(IMessage message, boolean literal)
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
     public void send(IMimeMessage message)
     {
+        send(message, true);
     }
 
     @Override

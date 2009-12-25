@@ -57,6 +57,23 @@ public class Help implements IService
     }
 
     @Override
+    public void doMenu(ISession session, IMessage message)
+    {
+        StringBuffer msg = new StringBuffer();
+        String func = session.getProcess().getFunc();
+        IService serv;
+        for (int i = 0; i < 10; i += 1)
+        {
+            serv = Control.getService(func + i);
+            if (serv != null)
+            {
+                msg.append(func + i).append('、').append(serv.getName()).append(session.newLine());
+            }
+        }
+        session.send(msg.toString());
+    }
+
+    @Override
     public void doHelp(ISession session, IMessage message)
     {
     }

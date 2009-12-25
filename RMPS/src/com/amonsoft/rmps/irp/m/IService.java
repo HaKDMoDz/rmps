@@ -32,6 +32,8 @@ public interface IService
 
     void doInit(ISession session, IMessage message);
 
+    void doMenu(ISession session, IMessage message);
+
     void doHelp(ISession session, IMessage message);
 
     void doDeal(ISession session, IMessage message);

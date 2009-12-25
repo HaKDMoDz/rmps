@@ -73,6 +73,11 @@ public class I7020000 implements IService
     }
 
     @Override
+    public void doMenu(ISession session, IMessage message)
+    {
+    }
+
+    @Override
     public void doHelp(ISession session, IMessage message)
     {
         session.send("请以星号（*）起始输入您要查看的RSS频道号码！");

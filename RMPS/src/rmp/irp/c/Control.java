@@ -188,7 +188,7 @@ public class Control implements IControl
                 return;
             }
             // 问题汇报
-            if ("#".equals(tmp))
+            if ("&".equals(tmp))
             {
                 services.get("").doInit(session, message);
                 return;
@@ -228,6 +228,12 @@ public class Control implements IControl
         // 命令录入事件
         if ((process.getType() & IProcess.TYPE_COMMAND) != 0)
         {
+            if ("*".equals(tmp))
+            {
+                services.get(process.getFunc()).doMenu(session, message);
+                return;
+            }
+
             if (">".equals(tmp))
             {
                 process.setStep(process.getStep() + 1);

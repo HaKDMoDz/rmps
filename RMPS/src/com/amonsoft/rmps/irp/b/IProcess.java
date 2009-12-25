@@ -28,6 +28,15 @@ public interface IProcess
     String getFunc();
 
     boolean setFunc(String func);
+    String ITEM_DEFAULT = "";
+
+    /**
+     * 获取当前选项标记
+     * @return
+     */
+    String getItem();
+
+    boolean setItem(String item);
     int STEP_DEFAULT = 0;
 
     /**

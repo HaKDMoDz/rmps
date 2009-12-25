@@ -108,6 +108,18 @@ public class Process implements IProcess
         return true;
     }
 
+    @Override
+    public String getItem()
+    {
+        return "";
+    }
+
+    @Override
+    public boolean setItem(String item)
+    {
+        return true;
+    }
+
     /**
      * @return the step
      */

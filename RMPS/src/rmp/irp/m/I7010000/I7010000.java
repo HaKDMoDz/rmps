@@ -108,6 +108,11 @@ public class I7010000 implements IService
     }
 
     @Override
+    public void doMenu(ISession session, IMessage message)
+    {
+    }
+
+    @Override
     public void doHelp(ISession session, IMessage message)
     {
     }
@@ -118,17 +123,18 @@ public class I7010000 implements IService
         try
         {
             String key = message.getContent();
+            String tmp = key.trim();
             StringBuffer msg = new StringBuffer();
 
             // 地址校验
-            if (!v4Ptn.matcher(key).matches())
+            if (!v4Ptn.matcher(tmp).matches())
             {
                 session.send("您输入的IP地址不是一个合适的IPV4地址，请重新输入！");
                 return;
             }
 
             // 链接地址初始化
-            URL url = new URL(path + '?' + StringUtil.format(args, key));
+            URL url = new URL(path + '?' + StringUtil.format(args, tmp));
             URLConnection conn = url.openConnection();
             conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
             conn.setUseCaches(false);

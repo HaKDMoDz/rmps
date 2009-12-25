@@ -58,6 +58,12 @@ public class Session extends ASession
     @Override
     public void send(IMessage message)
     {
+        send(message, true);
+    }
+
+    @Override
+    public void send(IMessage message, boolean literal)
+    {
         if (message instanceof Message)
         {
             switchboard.sendMessage(((Message) message).message);
@@ -65,14 +71,9 @@ public class Session extends ASession
     }
 
     @Override
-    public void send(IMessage message, boolean literal)
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
     public void send(IMimeMessage message)
     {
+        send(message, true);
     }
 
     @Override
