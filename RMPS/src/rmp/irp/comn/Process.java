@@ -25,6 +25,7 @@ public class Process implements IProcess
 {
     private Pattern keyReg;
     private String func;
+    private String item;
     private int step;
     private int type;
     private int most;
@@ -35,7 +36,7 @@ public class Process implements IProcess
         step = STEP_DEFAULT;
         type = TYPE_DEFAULT;
 
-        keyReg = Pattern.compile("^([\\.。]{2})?([/／]{1})?([\\.。]{2}[/／]{1})*\\d*$");
+        keyReg = Pattern.compile("^([\\.。]{2})?([/／]{1})?([\\.。]{2}[/／]{1})*[\\d０１２３４５６７８９]*$");
     }
 
     /**
@@ -111,12 +112,13 @@ public class Process implements IProcess
     @Override
     public String getItem()
     {
-        return "";
+        return item;
     }
 
     @Override
     public boolean setItem(String item)
     {
+        this.item = item;
         return true;
     }
 
