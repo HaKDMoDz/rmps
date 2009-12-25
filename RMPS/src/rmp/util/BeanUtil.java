@@ -230,4 +230,15 @@ public class BeanUtil
         // Scroll the area into view.
         viewport.scrollRectToVisible(rect);
     }
+
+    /**
+     * 判断两个对象是否相同
+     * @param a
+     * @param b
+     * @return
+     */
+    public static boolean equals(Object a, Object b)
+    {
+        return (a == null) ? (b == null) : a.equals(b);
+    }
 }
