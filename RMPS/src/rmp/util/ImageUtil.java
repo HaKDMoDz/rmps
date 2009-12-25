@@ -7,6 +7,7 @@
  */
 package rmp.util;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 import java.awt.AWTException;
 import java.awt.Color;
@@ -298,7 +299,7 @@ public final class ImageUtil
         int d = (m >> 3) << 3;
         // 图像需要进行缩放处理
         BufferedImage bufImg = ImageUtil.scaleImage(icon.getImage(), d, d, true);
-        String fullName = fileName + StringUtil.lPad(Integer.toHexString(d), 4, '0') + SysCons.EXTS_ICON;
+        String fullName = fileName + CharUtil.lPad(Integer.toHexString(d), 4, '0') + SysCons.EXTS_ICON;
 
         // 图像存储
         boolean b = ImageIO.write(bufImg, SysCons.FILE_IMAGETYPE, new File(dstPath, fullName));
@@ -364,7 +365,7 @@ public final class ImageUtil
                 cz0048 = curIco.getWidth();
                 cz0128 = cz0048;
                 // 图像文件名称组成
-                tmpName = fileName + StringUtil.lPad(Integer.toHexString(cz0048), 4, '0') + SysCons.EXTS_ICON;
+                tmpName = fileName + CharUtil.lPad(Integer.toHexString(cz0048), 4, '0') + SysCons.EXTS_ICON;
 
                 // 图像文件保存
                 b = ImageIO.write(curIco.getImage(), SysCons.FILE_IMAGETYPE, new File(dstPath, tmpName));

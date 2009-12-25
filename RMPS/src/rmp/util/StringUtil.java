@@ -7,7 +7,7 @@
  */
 package rmp.util;
 
-import java.util.Arrays;
+import com.amonsoft.util.CharUtil;
 import java.util.StringTokenizer;
 
 import cons.SysCons;
@@ -401,78 +401,6 @@ public final class StringUtil
     }
 
     /**
-     * 左填充指定字符，使原字符串达到指定的长度
-     * 
-     * @param s
-     * @param length
-     * @param c
-     * @return
-     */
-    public static String lPad(String s, int length, char c)
-    {
-        if (length <= s.length())
-        {
-            return s;
-        }
-
-        char[] pad = new char[length - s.length()];
-        Arrays.fill(pad, c);
-        return new String(pad) + s;
-    }
-
-    /**
-     * 去除左空白
-     * 
-     * @param s
-     * @return
-     */
-    public static String lTrim(String s)
-    {
-        return lTrim(s, " ");
-    }
-
-    /**
-     * @param s
-     * @param c
-     * @return
-     */
-    public static String lTrim(String s, String c)
-    {
-        return (s != null) ? s.replaceAll("^[\\s" + c + "]+", c) : s;
-    }
-
-    /**
-     * 右填充指定字符，使原字符串达到指定的长度
-     * 
-     * @param s
-     * @param length
-     * @param c
-     * @return
-     */
-    public static String rPad(String s, int length, char c)
-    {
-        if (length <= s.length())
-        {
-            return s;
-        }
-
-        char[] pad = new char[length - s.length()];
-        Arrays.fill(pad, c);
-        return s + new String(pad);
-    }
-
-    /**
-     * 去除右空白
-     * 
-     * @param s
-     * @return
-     */
-    public static String rTrim(String s)
-    {
-        return (s != null) ? s.replaceAll("[\\s　]+$", "") : s;
-    }
-
-    /**
      * @param orgText 源字符串
      * @param srcText 待替换字符串
      * @param dstText 目标字符串
@@ -769,7 +697,7 @@ public final class StringUtil
             }
 
             // 宽字符到转换码转换
-            sb.append("\\u").append(StringUtil.lPad(Integer.toHexString(tmp), 4, '0'));
+            sb.append("\\u").append(CharUtil.lPad(Integer.toHexString(tmp), 4, '0'));
         }
 
         return sb.toString();
@@ -881,7 +809,7 @@ public final class StringUtil
         StringTokenizer st = new StringTokenizer(ver, delim);
         while (st.hasMoreTokens())
         {
-            sb.append(delim).append(lPad(st.nextToken(), width, '0'));
+            sb.append(delim).append(CharUtil.lPad(st.nextToken(), width, '0'));
         }
         return sb.substring(delim.length());
     }

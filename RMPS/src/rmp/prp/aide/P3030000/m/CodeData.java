@@ -7,12 +7,12 @@
  */
 package rmp.prp.aide.P3030000.m;
 
+import com.amonsoft.util.CharUtil;
 import javax.swing.table.AbstractTableModel;
 
 import rmp.bean.K1SV1S;
 import rmp.prp.aide.P3030000.P3030000;
 import rmp.util.MesgUtil;
-import rmp.util.StringUtil;
 import cons.prp.aide.P3030000.ConstUI;
 import cons.prp.aide.P3030000.LangRes;
 
@@ -72,6 +72,7 @@ public class CodeData extends AbstractTableModel
      * 
      * @see javax.swing.table.AbstractTableModel#getColumnName(int)
      */
+    @Override
     public String getColumnName(int column)
     {
         if (column == 0)
@@ -430,7 +431,7 @@ public class CodeData extends AbstractTableModel
 
         if (fixLength)
         {
-            v = StringUtil.lPad(v, ConstUI.COMN_SIZE_MODE16, '0');
+            v = CharUtil.lPad(v, ConstUI.COMN_SIZE_MODE16, '0');
         }
 
         v = P3030000.getMesg(LangRes.COMN_PFIX_MODE16) + v;
@@ -457,7 +458,7 @@ public class CodeData extends AbstractTableModel
 
         if (fixLength)
         {
-            v = StringUtil.lPad(v, ConstUI.COMN_SIZE_MODE10, '0');
+            v = CharUtil.lPad(v, ConstUI.COMN_SIZE_MODE10, '0');
         }
 
         v = P3030000.getMesg(LangRes.COMN_PFIX_MODE10) + v;
@@ -484,7 +485,7 @@ public class CodeData extends AbstractTableModel
 
         if (fixLength)
         {
-            v = StringUtil.lPad(v, ConstUI.COMN_SIZE_MODE08, '0');
+            v = CharUtil.lPad(v, ConstUI.COMN_SIZE_MODE08, '0');
         }
 
         v = P3030000.getMesg(LangRes.COMN_PFIX_MODE08) + v;
@@ -511,7 +512,7 @@ public class CodeData extends AbstractTableModel
 
         if (fixLength)
         {
-            v = StringUtil.lPad(v, ConstUI.COMN_SIZE_MODE02, '0');
+            v = CharUtil.lPad(v, ConstUI.COMN_SIZE_MODE02, '0');
         }
 
         v = P3030000.getMesg(LangRes.COMN_PFIX_MODE02) + v;

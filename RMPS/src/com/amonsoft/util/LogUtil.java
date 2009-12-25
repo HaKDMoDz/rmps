@@ -14,7 +14,6 @@ import java.io.PrintStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import rmp.util.StringUtil;
 
 /**
  * <ul>
@@ -208,7 +207,7 @@ public final class LogUtil
 
             if (l)
             {
-                t = StringUtil.lPad(t, f, p);
+                t = CharUtil.lPad(t, f, p);
             }
 
             i += 1;
@@ -271,7 +270,7 @@ public final class LogUtil
 
             if (l)
             {
-                t = StringUtil.lPad(t, f, p);
+                t = CharUtil.lPad(t, f, p);
             }
 
             i += 1;
