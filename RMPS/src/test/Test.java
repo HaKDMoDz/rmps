@@ -23,6 +23,7 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smackx.filetransfer.FileTransfer;
 import org.jivesoftware.smackx.filetransfer.FileTransferManager;
 import org.jivesoftware.smackx.filetransfer.OutgoingFileTransfer;
+import rmp.util.HttpUtil;
 
 /**
  * <ul>
@@ -42,17 +43,11 @@ public class Test
     {
         try
         {
-            SAXReader saxr = new SAXReader();
-            Document document = saxr.read(new FileInputStream("dat/60000000/irp/50000000.xml"));
-            Element element = document.getRootElement();
-            for (Object obj1 : element.elements("item[@id='映像']/map"))
-            {
-                Node node = (Node) obj1;
-            }
+            System.out.println(HttpUtil.request("http://www.id5.cn/dtcheck/parse.jsp?idNum=412828198108013319", "gb2312"));
         }
-        catch (Exception ex)
+        catch (Exception exp)
         {
-            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(exp);
         }
     }
 

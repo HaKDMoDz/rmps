@@ -15,6 +15,7 @@ import com.amonsoft.util.LogUtil;
 import cons.EnvCons;
 import java.io.File;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 import org.dom4j.Document;
@@ -46,38 +47,42 @@ public class I2050000 implements IService
     {
         try
         {
+            LogUtil.log("度量转换初始化……");
             prop = new HashMap<String, String>();
             decs = new HashMap<String, BigDecimal>();
 
             Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
 
             // 支持单位初始化
-            Element ele = (Element) document.selectSingleNode("/I2050000/item");
             StringBuffer tmp = new StringBuffer();
             String sid;
-            for (Object obj1 : document.selectNodes("/I2050000/item"))
+            Element e1;
+            Element e2;
+            for (Object t1 : document.selectNodes("/irps/I2050000/item"))
             {
-                ele = (Element) obj1;
-                sid = ele.attributeValue("id");
+                e1 = (Element) t1;
+                sid = e1.attributeValue("id");
+                LogUtil.log("正在处理：" + sid);
 
                 // 进制转换
-                for (Object obj2 : ele.selectNodes("keys/map"))
+                for (Object t2 : e1.selectNodes("keys/map"))
                 {
-                    ele = (Element) obj2;
-                    prop.put(ele.attributeValue("key"), ele.getText());
-                    tmp.append('、').append(ele.attributeValue("key"));
+                    e2 = (Element) t2;
+                    prop.put(e2.attributeValue("key"), e2.getText());
+                    tmp.append('、').append(e2.attributeValue("key"));
                 }
 
                 prop.put(sid, tmp.substring(1));
                 tmp.delete(0, tmp.length());
 
                 // 转换单位
-                for (Object obj2 : ele.selectNodes("unit/map"))
+                for (Object t2 : e1.selectNodes("unit/map"))
                 {
-                    ele = (Element) obj2;
-                    decs.put(ele.attributeValue("key"), new BigDecimal(ele.getText()));
+                    e2 = (Element) t2;
+                    decs.put(e2.attributeValue("key"), new BigDecimal(e2.getText()));
                 }
             }
+            LogUtil.log("度量转换初始化成功！");
             return true;
         }
         catch (DocumentException exp)
@@ -127,13 +132,13 @@ public class I2050000 implements IService
     public void doDeal(ISession session, IMessage message)
     {
         // 用户原始输入消息
-        String msg = message.getContent();
+        String txt = message.getContent();
         // 消息字符串转化
-        //String txt = msg.trim().toLowerCase();
+        String tmp = txt.trim().toLowerCase();
 
         // 判断是否指定转换目标
-        String[] arr = msg.split("[=＝]");
-        String tmp = arr[0];
+        String[] arr = tmp.split("[=＝]");
+        tmp = arr[0];
         if (!CheckUtil.isValidate(tmp))
         {
             session.send("请输入转换来源单位！");
@@ -155,7 +160,7 @@ public class I2050000 implements IService
             session.send("小木无法辨认您输入的数字，请重新输入。");
             return;
         }
-        BigDecimal dec1 = new BigDecimal(tmp).multiply(decs.get(tUnit));
+        BigDecimal dec1 = new BigDecimal(tmp, new MathContext(7)).multiply(decs.get(tUnit));
 
         // 判断用户是否直接输入结果单位
         HashMap<String, BigDecimal> map;
@@ -188,7 +193,8 @@ public class I2050000 implements IService
             }
         }
 
-        session.send(arr[0]);
+        StringBuffer msg = new StringBuffer();
+        msg.append(arr[0]);
 
         // 其它单位处理
         if (step != Constant.STEP_WD)
@@ -196,8 +202,9 @@ public class I2050000 implements IService
             for (String key : map.keySet())
             {
                 BigDecimal dec2 = map.get(key);
-                session.send("=" + dec1.divide(dec2) + uUnit);
+                msg.append(session.newLine()).append("=" + dec1.divide(dec2, 7, 0) + uUnit);
             }
+            session.send(msg.toString());
             return;
         }
 

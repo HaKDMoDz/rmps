@@ -8,8 +8,11 @@
 package rmp.util;
 
 import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.Socket;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.http.ConnectionReuseStrategy;
@@ -45,6 +48,38 @@ import org.apache.http.util.EntityUtils;
  */
 public class HttpUtil
 {
+    /**
+     * 直接请求网络地址
+     * @param url 页面地址
+     * @param set 编码方案
+     * @return
+     * @throws Exception
+     */
+    public static String request(String url, String set) throws Exception
+    {
+        HttpURLConnection conn = (HttpURLConnection) (new URL(url).openConnection());
+        //conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
+        conn.setUseCaches(true);
+        conn.setDoInput(true);
+        conn.setDoOutput(true);
+        conn.setRequestMethod("POST");
+
+        // 读取返回结果
+        DataInputStream dis = new DataInputStream(conn.getInputStream());
+        int c = 1024;
+        int i = 0;
+        int j = dis.available();
+        System.out.println(j);
+        byte b[] = new byte[j];
+        while (j > 0)
+        {
+            dis.read(b, i, j > c ? c : j);
+            j -= c;
+            i += c;
+        }
+        return new String(b, set);
+    }
+
     public void get()
     {
         HttpParams params = new BasicHttpParams();
@@ -128,11 +163,11 @@ public class HttpUtil
         }
     }
 
-    public void post(String path, int port, String args)
+    public void post(String path, int port, String args, String charset)
     {
         HttpParams params = new BasicHttpParams();
         HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
-        HttpProtocolParams.setContentCharset(params, "UTF-8");
+        HttpProtocolParams.setContentCharset(params, charset);
         HttpProtocolParams.setUserAgent(params, "HttpComponents/1.1");
         HttpProtocolParams.setUseExpectContinue(params, true);
 
