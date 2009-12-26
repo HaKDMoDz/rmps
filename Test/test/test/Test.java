@@ -8,13 +8,7 @@
 package test;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.Node;
-import org.dom4j.io.SAXReader;
+
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.MessageListener;
@@ -23,6 +17,7 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smackx.filetransfer.FileTransfer;
 import org.jivesoftware.smackx.filetransfer.FileTransferManager;
 import org.jivesoftware.smackx.filetransfer.OutgoingFileTransfer;
+
 import rmp.util.HttpUtil;
 
 /**
@@ -32,6 +27,7 @@ import rmp.util.HttpUtil;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class Test
@@ -70,7 +66,7 @@ public class Test
 
             connection.login(username, password);
 
-            //sendFile(user, getFile(), connection);
+            // sendFile(user, getFile(), connection);
             sendTextMessage(user, connection);
         }
         catch (Exception e)
@@ -82,7 +78,6 @@ public class Test
             connection.disconnect();
         }
 
-
     }
 
     public static File getFile()
@@ -91,7 +86,7 @@ public class Test
         return file;
     }
 
-//发送文件
+    // 发送文件
     public static void sendFile(String user, File file, XMPPConnection connection) throws Exception
     {
         FileTransferManager manager = new FileTransferManager(connection);
@@ -116,7 +111,7 @@ public class Test
 
     }
 
-//发送文本
+    // 发送文本
     public static void sendTextMessage(String user, XMPPConnection connection) throws Exception
     {
         Chat chat = connection.getChatManager().createChat(user, new MessageListener()
