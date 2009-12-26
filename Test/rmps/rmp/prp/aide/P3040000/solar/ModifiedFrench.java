@@ -34,9 +34,8 @@ public class ModifiedFrench extends SolarDate
 
     public static long toFixed(long l, int i, int j)
     {
-        return (((((French.EPOCH - 1L) + 365L * (l - 1L) + ProtoDate.quotient(l - 1L, 4D)) - ProtoDate.quotient(l - 1L,
-            100D)) + ProtoDate.quotient(l - 1L, 400D)) - ProtoDate.quotient(l - 1L, 4000D))
-            + (long)(30 * (i - 1)) + (long)j;
+        return (((((French.EPOCH - 1L) + 365L * (l - 1L) + ProtoDate.quotient(l - 1L, 4D)) - ProtoDate.quotient(l - 1L, 100D)) + ProtoDate.quotient(l - 1L, 400D)) - ProtoDate.quotient(l - 1L, 4000D))
+                + (long) (30 * (i - 1)) + (long) j;
     }
 
     public long toFixed()
@@ -48,8 +47,8 @@ public class ModifiedFrench extends SolarDate
     {
         long l1 = 1L + ProtoDate.quotient((l - French.EPOCH) + 2L, 365.24225000000001D);
         super.year = l >= toFixed(l1, 1, 1) ? l1 : l1 - 1L;
-        super.month = 1 + (int)ProtoDate.quotient(l - toFixed(super.year, 1, 1), 30D);
-        super.day = (int)((l - toFixed(super.year, super.month, 1)) + 1L);
+        super.month = 1 + (int) ProtoDate.quotient(l - toFixed(super.year, 1, 1), 30D);
+        super.day = (int) ((l - toFixed(super.year, super.month, 1)) + 1L);
     }
 
     public static boolean isLeapYear(long l)

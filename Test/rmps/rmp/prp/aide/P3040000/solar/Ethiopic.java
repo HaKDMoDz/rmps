@@ -48,16 +48,15 @@ public class Ethiopic extends SolarDate
     public void fromFixed(long l)
     {
         Coptic coptic = new Coptic((l + Coptic.EPOCH) - EPOCH);
-        super.month = ((SolarDate)(coptic)).month;
-        super.day = ((SolarDate)(coptic)).day;
-        super.year = ((SolarDate)(coptic)).year;
+        super.month = ((SolarDate) (coptic)).month;
+        super.day = ((SolarDate) (coptic)).day;
+        super.year = ((SolarDate) (coptic)).year;
     }
 
     public String format()
     {
-        return MessageFormat.format("{0}, {1} {2} {3,number,#} E.E.", new Object[]{
-            ProtoDate.nameFromDayOfWeek(toFixed(), dayOfWeekNames), new Integer(super.day),
-            ProtoDate.nameFromMonth(super.month, monthNames), new Long(super.year)});
+        return MessageFormat.format("{0}, {1} {2} {3,number,#} E.E.", new Object[]
+        { ProtoDate.nameFromDayOfWeek(toFixed(), dayOfWeekNames), new Integer(super.day), ProtoDate.nameFromMonth(super.month, monthNames), new Long(super.year) });
     }
 
     public boolean equals(Object obj)
@@ -68,11 +67,12 @@ public class Ethiopic extends SolarDate
             return internalEquals(obj);
     }
 
-    public static final long   EPOCH            = Julian.toFixed(Julian.CE(8L), 8, 29);
-    public static final String dayOfWeekNames[] = {"Ihud", "Sanyo", "Maksanyo", "Rob", "Hamus", "Arb", "Kidamme"};
-    public static final String monthNames[]     = {"Maskaram", "Teqemt", "Kehdar", "Takhsas", "Ter", "Yakatit",
-        "Magabit", "Miyazya", "Genbot", "Sane", "Hamle", "Nahase", "Paguemen"};
+    public static final long EPOCH = Julian.toFixed(Julian.CE(8L), 8, 29);
+    public static final String dayOfWeekNames[] =
+    { "Ihud", "Sanyo", "Maksanyo", "Rob", "Hamus", "Arb", "Kidamme" };
+    public static final String monthNames[] =
+    { "Maskaram", "Teqemt", "Kehdar", "Takhsas", "Ter", "Yakatit", "Magabit", "Miyazya", "Genbot", "Sane", "Hamle", "Nahase", "Paguemen" };
 
     /** serialVersionUID */
-    private static final long  serialVersionUID = -6918653972141090114L;
+    private static final long serialVersionUID = -6918653972141090114L;
 }

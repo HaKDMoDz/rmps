@@ -7,28 +7,30 @@
  */
 package rmp;
 
-import com.amonsoft.cons.ConsSys;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.plaf.synth.SynthLookAndFeel;
 
 import rmp.comn.user.UserInfo;
+import rmp.irp.Irps;
 import rmp.util.EnvUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.StringUtil;
-import cons.CfgCons;
-import cons.EnvCons;
-import cons.ui.LangRes;
+
+import com.amonsoft.cons.ConsSys;
 import com.amonsoft.skin.ISkin;
 import com.amonsoft.util.DeskUtil;
 import com.amonsoft.util.LangUtil;
+import com.amonsoft.util.LogUtil;
+
+import cons.CfgCons;
+import cons.EnvCons;
 import cons.SysCons;
-import java.util.HashMap;
-import rmp.irp.Irps;
+import cons.ui.LangRes;
 
 /**
  * <ul>
@@ -38,6 +40,7 @@ import rmp.irp.Irps;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public final class Rmps
@@ -146,7 +149,7 @@ public final class Rmps
         }
 
         LogUtil.log("系统退出：关闭数据连接");
-//        EnvUtil.shutdownDataBase();
+        // EnvUtil.shutdownDataBase();
 
         if (backup)
         {
@@ -189,6 +192,7 @@ public final class Rmps
 
     /**
      * 环境初始化
+     * 
      * @return
      */
     public static boolean initEnv()
@@ -232,6 +236,7 @@ public final class Rmps
 
     /**
      * 加载用户当前界面方案
+     * 
      * @return 界面方案是否加载成功：true加载成功
      */
     public static boolean initLnF()
@@ -241,8 +246,8 @@ public final class Rmps
             return false;
         }
 
-        String type = user.getCfg(CfgCons.CFG_LNF_TYPE, ISkin.LF_TYPE_SYSTEM);//界面风格类别
-        String name;//界面风格名称
+        String type = user.getCfg(CfgCons.CFG_LNF_TYPE, ISkin.LF_TYPE_SYSTEM);// 界面风格类别
+        String name;// 界面风格名称
 
         // 使用当前系统界面样式
         if (type == null || type.length() < 1 || ISkin.LF_TYPE_SYSTEM.equalsIgnoreCase(type))
@@ -446,7 +451,8 @@ public final class Rmps
             lb_LogoForm = new javax.swing.JDialog();
             lb_LogoForm.setUndecorated(true);
             lb_LogoForm.getContentPane().setLayout(new java.awt.BorderLayout());
-            final javax.swing.JLabel l = new javax.swing.JLabel("adfadf");//new javax.swing.ImageIcon(getLogo(32)));
+            final javax.swing.JLabel l = new javax.swing.JLabel("adfadf");// new
+                                                                          // javax.swing.ImageIcon(getLogo(32)));
             lb_LogoForm.getContentPane().add(l);
             l.addMouseListener(new java.awt.event.MouseAdapter()
             {
@@ -483,7 +489,7 @@ public final class Rmps
 
         /**
          * 窗口显示隐藏事件处理
-         *
+         * 
          * @param evt
          */
         private void ti_TrayIcon_Handler(java.awt.event.MouseEvent evt)

@@ -7,21 +7,19 @@
  */
 package rmp.util;
 
-import com.amonsoft.util.LogUtil;
-import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
-import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JViewport;
-import javax.swing.border.Border;
 import javax.swing.text.JTextComponent;
+
+import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>
@@ -32,6 +30,7 @@ import javax.swing.text.JTextComponent;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class BeanUtil
@@ -233,6 +232,7 @@ public class BeanUtil
 
     /**
      * 判断两个对象是否相同
+     * 
      * @param a
      * @param b
      * @return

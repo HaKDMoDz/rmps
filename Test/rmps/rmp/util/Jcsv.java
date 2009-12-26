@@ -16,7 +16,8 @@ package rmp.util;
  * <br />
  * TODO:
  * </ul>
- * @author yihaodian
+ * 
+ * @author Amon
  */
 public class Jcsv
 {

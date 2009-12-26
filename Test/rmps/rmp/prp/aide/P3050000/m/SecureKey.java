@@ -20,6 +20,7 @@ import javax.crypto.spec.SecretKeySpec;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public final class SecureKey implements Key
@@ -34,9 +35,12 @@ public final class SecureKey implements Key
     /**
      * 构造函数
      * 
-     * @param alg 密码算法
-     * @param pwd 用户口令
-     * @param len 密钥长度
+     * @param alg
+     *            密码算法
+     * @param pwd
+     *            用户口令
+     * @param len
+     *            密钥长度
      */
     public SecureKey(String alg, byte[] pwd, int len)
     {
@@ -60,9 +64,12 @@ public final class SecureKey implements Key
     /**
      * 用户口令初始化
      * 
-     * @param algorithm 加密算法名称
-     * @param userPwd 用户口令
-     * @param keySize 密钥长度
+     * @param algorithm
+     *            加密算法名称
+     * @param userPwd
+     *            用户口令
+     * @param keySize
+     *            密钥长度
      * @return
      */
     public static final SecretKey initKeys(String algorithm, byte[] userPwd, int keySize)

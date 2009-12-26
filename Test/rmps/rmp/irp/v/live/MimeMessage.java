@@ -8,6 +8,7 @@
 package rmp.irp.v.live;
 
 import java.awt.Color;
+
 import net.sf.jml.message.MsnInstantMessage;
 import rmp.irp.comn.AMimeMessage;
 
@@ -18,6 +19,7 @@ import rmp.irp.comn.AMimeMessage;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class MimeMessage extends AMimeMessage

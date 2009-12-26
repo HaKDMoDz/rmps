@@ -18,6 +18,7 @@ import com.amonsoft.rmps.irp.m.IService;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class I6000000 implements IService

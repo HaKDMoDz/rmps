@@ -19,6 +19,7 @@ import cons.id.PrpCons;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public interface ConstUI
@@ -52,9 +53,7 @@ public interface ConstUI
     // ////////////////////////////////////////////////////////////////////////
     /** 组件名称 */
     String[] RECORD_PROP_NAME =
-    {
-        "info", "text", "pwds", "link", "mail", "area", "date", "meta"
-    };
+    { "info", "text", "pwds", "link", "mail", "area", "date", "meta" };
     /** 信息 */
     int RECORD_TYPE_INFO = 0;
     /** 文本 */

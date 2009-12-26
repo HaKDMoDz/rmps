@@ -17,6 +17,7 @@ package rmp.face;
  * 对于每一个系统构件类来说，其不需要继承自任何其它构件类，而仅需要实现此接口即可，
  * 在其构造器中提供一个构造器使用其参数为对FListPanel的引用，当显示指定的系统时， 仅需要对FListPanel的引用进行布局管理及构件的处理即可。
  * </ul>
+ * 
  * @author Amon
  */
 public interface WListShow extends WShow

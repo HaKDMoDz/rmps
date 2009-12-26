@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class ExeItem
@@ -37,7 +38,8 @@ public class ExeItem
     }
 
     /**
-     * @param softIcon the softIcon to set
+     * @param softIcon
+     *            the softIcon to set
      */
     public void setSoftIcon(ImageIcon softIcon)
     {
@@ -53,7 +55,8 @@ public class ExeItem
     }
 
     /**
-     * @param softName the softName to set
+     * @param softName
+     *            the softName to set
      */
     public void setSoftName(String softName)
     {
@@ -69,7 +72,8 @@ public class ExeItem
     }
 
     /**
-     * @param softDesp the softDesp to set
+     * @param softDesp
+     *            the softDesp to set
      */
     public void setSoftDesp(String softDesp)
     {
@@ -85,7 +89,8 @@ public class ExeItem
     }
 
     /**
-     * @param softPath the softPath to set
+     * @param softPath
+     *            the softPath to set
      */
     public void setSoftPath(String softPath)
     {
@@ -101,7 +106,8 @@ public class ExeItem
     }
 
     /**
-     * @param softArgs the softArgs to set
+     * @param softArgs
+     *            the softArgs to set
      */
     public void setSoftArgs(String softArgs)
     {

@@ -9,11 +9,12 @@ package rmp.prp.b;
 
 import java.awt.Color;
 import java.awt.Cursor;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import rmp.prp.m.NetItem;
 import rmp.util.BeanUtil;
+
 import com.amonsoft.util.DeskUtil;
 import com.amonsoft.util.LogUtil;
 
@@ -26,6 +27,7 @@ import com.amonsoft.util.LogUtil;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class NetPlus extends javax.swing.JPanel
@@ -93,10 +95,8 @@ public class NetPlus extends javax.swing.JPanel
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                lb_ItemLabl, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addComponent(lb_ItemLabl).addGap(1)));
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_ItemLabl, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE));
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addComponent(lb_ItemLabl).addGap(1)));
     }
 
     /**
@@ -143,6 +143,7 @@ public class NetPlus extends javax.swing.JPanel
         BeanUtil.setWTips(lb_ItemLabl, item.getDescription());
         return true;
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 界面组件区域
     // ////////////////////////////////////////////////////////////////////////

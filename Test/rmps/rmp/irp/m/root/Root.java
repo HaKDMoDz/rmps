@@ -7,12 +7,13 @@
  */
 package rmp.irp.m.root;
 
+import rmp.irp.Irps;
+
 import com.amonsoft.rmps.irp.b.IMessage;
-import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.util.LogUtil;
-import rmp.irp.Irps;
 
 /**
  * <ul>
@@ -21,6 +22,7 @@ import rmp.irp.Irps;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class Root implements IService

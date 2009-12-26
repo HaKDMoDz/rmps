@@ -26,6 +26,7 @@ import javax.swing.tree.TreeCellRenderer;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class CellRender extends JLabel implements ListCellRenderer, TableCellRenderer, TreeCellRenderer
@@ -52,12 +53,12 @@ public class CellRender extends JLabel implements ListCellRenderer, TableCellRen
     /*
      * (non-Javadoc)
      * 
-     * @see javax.swing.ListCellRenderer#getListCellRendererComponent(javax.swing.JList,
-     *      java.lang.Object, int, boolean, boolean)
+     * @see
+     * javax.swing.ListCellRenderer#getListCellRendererComponent(javax.swing
+     * .JList, java.lang.Object, int, boolean, boolean)
      */
     @Override
-    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
-            boolean cellHasFocus)
+    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
     {
         setOpaque(true);
 
@@ -104,12 +105,12 @@ public class CellRender extends JLabel implements ListCellRenderer, TableCellRen
     /*
      * (non-Javadoc)
      * 
-     * @see javax.swing.table.TableCellRenderer#getTableCellRendererComponent(javax.swing.JTable,
-     *      java.lang.Object, boolean, boolean, int, int)
+     * @see
+     * javax.swing.table.TableCellRenderer#getTableCellRendererComponent(javax
+     * .swing.JTable, java.lang.Object, boolean, boolean, int, int)
      */
     @Override
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-            int row, int column)
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
     {
         // 前景及背景颜色设置
         if (isSelected)
@@ -161,12 +162,12 @@ public class CellRender extends JLabel implements ListCellRenderer, TableCellRen
     /*
      * (non-Javadoc)
      * 
-     * @see javax.swing.tree.TreeCellRenderer#getTreeCellRendererComponent(javax.swing.JTree,
-     *      java.lang.Object, boolean, boolean, boolean, int, boolean)
+     * @see
+     * javax.swing.tree.TreeCellRenderer#getTreeCellRendererComponent(javax.
+     * swing.JTree, java.lang.Object, boolean, boolean, boolean, int, boolean)
      */
     @Override
-    public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded,
-            boolean leaf, int row, boolean hasFocus)
+    public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus)
     {
         // TODO Auto-generated method stub
         return null;

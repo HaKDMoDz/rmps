@@ -74,12 +74,12 @@ public class Chinese extends LunarDate
     -*/
     public static long toFixed(long l, int i, int j, boolean flag, int k)
     {
-        long l1 = (long)Math.floor((double)EPOCH + ((double)((l - 1L) * 60L + (long)(i - 1)) + 0.5D) * 365.242189D);
+        long l1 = (long) Math.floor((double) EPOCH + ((double) ((l - 1L) * 60L + (long) (i - 1)) + 0.5D) * 365.242189D);
         long l2 = newYearOnOrBefore(l1);
-        long l3 = newMoonOnOrAfter(l2 + (long)(29 * (j - 1)));
+        long l3 = newMoonOnOrAfter(l2 + (long) (29 * (j - 1)));
         Chinese chinese = new Chinese(l3);
         long l4 = j != chinese.month || flag != chinese.leapMonth ? newMoonOnOrAfter(l3 + 1L) : l3;
-        return (l4 + (long)k) - 1L;
+        return (l4 + (long) k) - 1L;
     }
 
     public long toFixed()
@@ -160,14 +160,13 @@ public class Chinese extends LunarDate
         long l3 = newMoonOnOrAfter(l1 + 1L);
         long l4 = newMoonBefore(l2 + 1L);
         long l5 = newMoonBefore(l + 1L);
-        boolean flag = Math.round((double)(l4 - l3) / 29.530588853000001D) == 12L;
-        month = (int)ProtoDate.adjustedMod(Math.round((double)(l5 - l3) / 29.530588853000001D)
-            - (long)(!flag || !hasPriorLeapMonth(l3, l5) ? 0 : 1), 12L);
+        boolean flag = Math.round((double) (l4 - l3) / 29.530588853000001D) == 12L;
+        month = (int) ProtoDate.adjustedMod(Math.round((double) (l5 - l3) / 29.530588853000001D) - (long) (!flag || !hasPriorLeapMonth(l3, l5) ? 0 : 1), 12L);
         leapMonth = flag && hasNoMajorSolarTerm(l5) && !hasPriorLeapMonth(l3, newMoonBefore(l5));
-        long l6 = (long)Math.floor((1.5D - (double)month / 12D) + (double)(l - EPOCH) / 365.242189D);
+        long l6 = (long) Math.floor((1.5D - (double) month / 12D) + (double) (l - EPOCH) / 365.242189D);
         cycle = ProtoDate.quotient(l6 - 1L, 60D) + 1L;
-        year = (int)ProtoDate.adjustedMod(l6, 60L);
-        day = (int)((l - l5) + 1L);
+        year = (int) ProtoDate.adjustedMod(l6, 60L);
+        day = (int) ((l - l5) + 1L);
     }
 
     public void fromArray(int ai[])
@@ -195,7 +194,7 @@ public class Chinese extends LunarDate
     {
         double d = ProtoDate.estimatePriorSolarLongitude(midnightInChina(l + 1L), ConstUI.WINTER);
         long l1;
-        for (l1 = (long)(Math.floor(d) - 1.0D); ConstUI.WINTER > ProtoDate.solarLongitude(midnightInChina(l1 + 1L)); l1++)
+        for (l1 = (long) (Math.floor(d) - 1.0D); ConstUI.WINTER > ProtoDate.solarLongitude(midnightInChina(l1 + 1L)); l1++)
             ;
         return l1;
     }
@@ -207,8 +206,7 @@ public class Chinese extends LunarDate
         long l3 = newMoonOnOrAfter(l1 + 1L);
         long l4 = newMoonOnOrAfter(l3 + 1L);
         long l5 = newMoonBefore(l2 + 1L);
-        if (Math.round((double)(l5 - l3) / 29.530588853000001D) == 12L
-            && (hasNoMajorSolarTerm(l3) || hasNoMajorSolarTerm(l4)))
+        if (Math.round((double) (l5 - l3) / 29.530588853000001D) == 12L && (hasNoMajorSolarTerm(l3) || hasNoMajorSolarTerm(l4)))
             return newMoonOnOrAfter(l4 + 1L);
         else
             return l4;
@@ -232,7 +230,7 @@ public class Chinese extends LunarDate
 
     public static long dayNameOnOrBefore(ChineseName chinesename, long l)
     {
-        return l - ProtoDate.mod(l + (long)nameDifference(chinesename, sexagesimalName(15L)), 60L);
+        return l - ProtoDate.mod(l + (long) nameDifference(chinesename, sexagesimalName(15L)), 60L);
     }
 
     /*-
@@ -249,7 +247,7 @@ public class Chinese extends LunarDate
     public static int currentMajorSolarTerm(long l)
     {
         double d = ProtoDate.solarLongitude(ProtoDate.universalFromStandard(l, chineseLocation(l)));
-        return (int)ProtoDate.adjustedMod(2L + ProtoDate.quotient(d, ProtoDate.deg(30D)), 12L);
+        return (int) ProtoDate.adjustedMod(2L + ProtoDate.quotient(d, ProtoDate.deg(30D)), 12L);
     }
 
     /*-
@@ -280,7 +278,7 @@ public class Chinese extends LunarDate
     public static int currentMinorSolarTerm(long l)
     {
         double d = ProtoDate.solarLongitude(midnightInChina(l));
-        return (int)ProtoDate.adjustedMod(3L + ProtoDate.quotient(d - ProtoDate.deg(15D), ProtoDate.deg(30D)), 12L);
+        return (int) ProtoDate.adjustedMod(3L + ProtoDate.quotient(d - ProtoDate.deg(15D), ProtoDate.deg(30D)), 12L);
     }
 
     /*-
@@ -301,9 +299,7 @@ public class Chinese extends LunarDate
     -*/
     public static double minorSolarTermOnOrAfter(long l)
     {
-        double d = ProtoDate.mod(
-            30D * Math.ceil((ProtoDate.solarLongitude(midnightInChina(l)) - ProtoDate.deg(15D)) / 30D)
-                + ProtoDate.deg(15D), 360D);
+        double d = ProtoDate.mod(30D * Math.ceil((ProtoDate.solarLongitude(midnightInChina(l)) - ProtoDate.deg(15D)) / 30D) + ProtoDate.deg(15D), 360D);
         return solarLongitudeOnOrAfter(l, d);
     }
 
@@ -323,7 +319,7 @@ public class Chinese extends LunarDate
     public static long newMoonBefore(long l)
     {
         double d = ProtoDate.newMoonBefore(midnightInChina(l));
-        return (long)Math.floor(ProtoDate.standardFromUniversal(d, chineseLocation(d)));
+        return (long) Math.floor(ProtoDate.standardFromUniversal(d, chineseLocation(d)));
     }
 
     /*-
@@ -342,7 +338,7 @@ public class Chinese extends LunarDate
     public static long newMoonOnOrAfter(long l)
     {
         double d = ProtoDate.newMoonAfter(midnightInChina(l));
-        return (long)Math.floor(ProtoDate.standardFromUniversal(d, chineseLocation(d)));
+        return (long) Math.floor(ProtoDate.standardFromUniversal(d, chineseLocation(d)));
     }
 
     /*-
@@ -385,9 +381,9 @@ public class Chinese extends LunarDate
     {
         try
         {
-            return new ChineseName((int)ProtoDate.adjustedMod(l, 10L), (int)ProtoDate.adjustedMod(l, 12L));
+            return new ChineseName((int) ProtoDate.adjustedMod(l, 10L), (int) ProtoDate.adjustedMod(l, 12L));
         }
-        catch(Exception _ex)
+        catch (Exception _ex)
         {
             return new ChineseName();
         }
@@ -413,7 +409,7 @@ public class Chinese extends LunarDate
     -*/
     public static ChineseName nameOfMonth(int i, int j)
     {
-        long l = 12L * (long)(i - 1) + (long)(j - 1);
+        long l = 12L * (long) (i - 1) + (long) (j - 1);
         return sexagesimalName(l + 15L);
     }
 
@@ -431,9 +427,8 @@ public class Chinese extends LunarDate
 
     public static final Location beijing(double d)
     {
-        long l = Gregorian.yearFromFixed((long)Math.floor(d));
-        return new Location("Beijing, China", ProtoDate.deg(39.549999999999997D), ProtoDate.angle(116D, 25D, 0.0D),
-            ProtoDate.mt(43.5D), l >= 1929L ? 8D : 7.7611111111111111D);
+        long l = Gregorian.yearFromFixed((long) Math.floor(d));
+        return new Location("Beijing, China", ProtoDate.deg(39.549999999999997D), ProtoDate.angle(116D, 25D, 0.0D), ProtoDate.mt(43.5D), l >= 1929L ? 8D : 7.7611111111111111D);
     }
 
     public static final Location chineseLocation(double d)
@@ -443,10 +438,9 @@ public class Chinese extends LunarDate
 
     public static final Location tokyo(double d)
     {
-        long l = Gregorian.yearFromFixed((long)Math.floor(d));
+        long l = Gregorian.yearFromFixed((long) Math.floor(d));
         if (l < 1888L)
-            return new Location("Tokyo, Japan", ProtoDate.deg(35.700000000000003D), ProtoDate.angle(139D, 46D, 0.0D),
-                ProtoDate.mt(24D), 9.3177777777777777D);
+            return new Location("Tokyo, Japan", ProtoDate.deg(35.700000000000003D), ProtoDate.angle(139D, 46D, 0.0D), ProtoDate.mt(24D), 9.3177777777777777D);
         else
             return new Location("Tokyo, Japan", ProtoDate.deg(35D), ProtoDate.deg(135D), ProtoDate.mt(0.0D), 9D);
     }
@@ -507,20 +501,20 @@ public class Chinese extends LunarDate
     {
         long l1 = (l - Gregorian.yearFromFixed(EPOCH)) + 1L;
         long l2 = ProtoDate.quotient(l1 - 1L, 60D) + 1L;
-        int i = (int)ProtoDate.adjustedMod(l1, 60L);
+        int i = (int) ProtoDate.adjustedMod(l1, 60L);
         return toFixed(l2, i, 5, false, 5);
     }
 
     public static long qingMing(long l)
     {
-        return (long)Math.floor(minorSolarTermOnOrAfter(Gregorian.toFixed(l, 3, 30)));
+        return (long) Math.floor(minorSolarTermOnOrAfter(Gregorian.toFixed(l, 3, 30)));
     }
 
     public static long age(Chinese chinese, long l) throws Exception
     {
         Chinese chinese1 = new Chinese(l);
         if (l >= chinese.toFixed())
-            return 60L * (chinese1.cycle - chinese.cycle) + (long)(chinese1.year - chinese.year) + 1L;
+            return 60L * (chinese1.cycle - chinese.cycle) + (long) (chinese1.year - chinese.year) + 1L;
         else
             throw new Exception();
     }
@@ -657,29 +651,26 @@ public class Chinese extends LunarDate
             return true;
         if (!(obj instanceof Chinese))
             return false;
-        Chinese chinese = (Chinese)obj;
-        return chinese.cycle == cycle && chinese.year == year && chinese.month == month
-            && chinese.leapMonth == leapMonth && chinese.day == day;
+        Chinese chinese = (Chinese) obj;
+        return chinese.cycle == cycle && chinese.year == year && chinese.month == month && chinese.leapMonth == leapMonth && chinese.day == day;
     }
 
-    public long                cycle;
-    public int                 year;
-    public int                 month;
-    public boolean             leapMonth;
-    public int                 day;
-    public static final long   EPOCH             = Gregorian.toFixed(-2636L, 2, 15);
-    public static final int    DAY_NAME_EPOCH    = 15;
-    public static final int    MONTH_NAME_EPOCH  = 3;
-    public static final String yearStemNames[]   = {P3040000.getMesg(LangRes.P3041B01),
-        P3040000.getMesg(LangRes.P3041B04), P3040000.getMesg(LangRes.P3041B07), P3040000.getMesg(LangRes.P3041B0A),
-        P3040000.getMesg(LangRes.P3041B0D), P3040000.getMesg(LangRes.P3041B10), P3040000.getMesg(LangRes.P3041B13),
-        P3040000.getMesg(LangRes.P3041B16), P3040000.getMesg(LangRes.P3041B19), P3040000.getMesg(LangRes.P3041B1C)};
-    public static final String yearBranchNames[] = {P3040000.getMesg(LangRes.P3041B1F),
-        P3040000.getMesg(LangRes.P3041B22), P3040000.getMesg(LangRes.P3041B25), P3040000.getMesg(LangRes.P3041B28),
-        P3040000.getMesg(LangRes.P3041B2B), P3040000.getMesg(LangRes.P3041B2E), P3040000.getMesg(LangRes.P3041B31),
-        P3040000.getMesg(LangRes.P3041B34), P3040000.getMesg(LangRes.P3041B37), P3040000.getMesg(LangRes.P3041B3A),
-        P3040000.getMesg(LangRes.P3041B3D), P3040000.getMesg(LangRes.P3041B40)};
+    public long cycle;
+    public int year;
+    public int month;
+    public boolean leapMonth;
+    public int day;
+    public static final long EPOCH = Gregorian.toFixed(-2636L, 2, 15);
+    public static final int DAY_NAME_EPOCH = 15;
+    public static final int MONTH_NAME_EPOCH = 3;
+    public static final String yearStemNames[] =
+    { P3040000.getMesg(LangRes.P3041B01), P3040000.getMesg(LangRes.P3041B04), P3040000.getMesg(LangRes.P3041B07), P3040000.getMesg(LangRes.P3041B0A), P3040000.getMesg(LangRes.P3041B0D),
+            P3040000.getMesg(LangRes.P3041B10), P3040000.getMesg(LangRes.P3041B13), P3040000.getMesg(LangRes.P3041B16), P3040000.getMesg(LangRes.P3041B19), P3040000.getMesg(LangRes.P3041B1C) };
+    public static final String yearBranchNames[] =
+    { P3040000.getMesg(LangRes.P3041B1F), P3040000.getMesg(LangRes.P3041B22), P3040000.getMesg(LangRes.P3041B25), P3040000.getMesg(LangRes.P3041B28), P3040000.getMesg(LangRes.P3041B2B),
+            P3040000.getMesg(LangRes.P3041B2E), P3040000.getMesg(LangRes.P3041B31), P3040000.getMesg(LangRes.P3041B34), P3040000.getMesg(LangRes.P3041B37), P3040000.getMesg(LangRes.P3041B3A),
+            P3040000.getMesg(LangRes.P3041B3D), P3040000.getMesg(LangRes.P3041B40) };
 
     /** serialVersionUID */
-    private static final long  serialVersionUID  = 8443707750522695735L;
+    private static final long serialVersionUID = 8443707750522695735L;
 }

@@ -53,13 +53,13 @@ public abstract class SolarDate extends LunarDate
 
     protected boolean internalEquals(Object obj)
     {
-        SolarDate standarddate = (SolarDate)obj;
+        SolarDate standarddate = (SolarDate) obj;
         if (this == obj)
             return true;
         return standarddate.year == year && standarddate.month == month && standarddate.day == day;
     }
 
     public long year;
-    public int  month;
-    public int  day;
+    public int month;
+    public int day;
 }

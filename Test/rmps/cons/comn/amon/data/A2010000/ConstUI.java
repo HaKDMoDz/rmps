@@ -14,6 +14,7 @@ package cons.comn.amon.data.A2010000;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public interface ConstUI

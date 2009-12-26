@@ -16,6 +16,7 @@ package rmp.prp.aide.P3050000.m;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class CRC64 implements java.util.zip.Checksum

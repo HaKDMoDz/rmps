@@ -16,6 +16,7 @@ import com.amonsoft.rmps.irp.v.IConnect;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class Connect implements IConnect
@@ -29,8 +30,8 @@ public class Connect implements IConnect
     @Override
     public boolean load()
     {
-        this.user = "477730617";//554448785
-        this.pwds = "2PResMaI";//vjSY9EUY
+        this.user = "477730617";// 554448785
+        this.pwds = "2PResMaI";// vjSY9EUY
         server = "login.oscar.aol.com";
         return true;
     }
@@ -63,7 +64,8 @@ public class Connect implements IConnect
     }
 
     /**
-     * @param host the host to set
+     * @param host
+     *            the host to set
      */
     public void setHost(String host)
     {
@@ -80,7 +82,8 @@ public class Connect implements IConnect
     }
 
     /**
-     * @param server the server to set
+     * @param server
+     *            the server to set
      */
     public void setServer(String server)
     {
@@ -97,7 +100,8 @@ public class Connect implements IConnect
     }
 
     /**
-     * @param port the port to set
+     * @param port
+     *            the port to set
      */
     public void setPort(int port)
     {

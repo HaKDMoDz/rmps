@@ -7,7 +7,6 @@
  */
 package rmp.prp;
 
-import com.amonsoft.bean.WForm;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -16,37 +15,40 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.HashMap;
 import java.util.Properties;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 
 import rmp.Rmps;
 import rmp.bean.FilesFilter;
 import rmp.comn.C1010000.C1010000;
-import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.m.ExeItem;
 import rmp.prp.m.NetItem;
 import rmp.prp.v.ExePanel;
 import rmp.prp.v.NetPanel;
 import rmp.prp.v.StdPanel;
 import rmp.prp.v.SubMenu;
+import rmp.util.BeanUtil;
 import rmp.util.CheckUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.RmpsUtil;
+
+import com.amonsoft.bean.WForm;
+import com.amonsoft.rmps.prp.IPrpPlus;
+import com.amonsoft.skin.ISkin;
+import com.amonsoft.util.DeskUtil;
+import com.amonsoft.util.LangUtil;
+import com.amonsoft.util.LogUtil;
+
 import cons.CfgCons;
 import cons.EnvCons;
 import cons.prp.ConstUI;
 import cons.prp.LangRes;
 import cons.prp.Plugins;
-import com.amonsoft.skin.ISkin;
-import javax.swing.WindowConstants;
-import com.amonsoft.util.LangUtil;
-import rmp.util.BeanUtil;
-import com.amonsoft.util.DeskUtil;
 
 /**
  * <ul>
@@ -56,6 +58,7 @@ import com.amonsoft.util.DeskUtil;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class Prps extends WForm
@@ -64,7 +67,7 @@ public class Prps extends WForm
     private static IPrpPlus currSoft;
     /** 软件语言资源 */
     private static Properties langRes;
-    /**相关插件列表*/
+    /** 相关插件列表 */
     private static HashMap<String, IPrpPlus> plusList;
     /**
      * 语言资源
@@ -313,8 +316,7 @@ public class Prps extends WForm
                 mi_HomePage_Handler(evt);
             }
         });
-        mi_HomePage.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_HOME,
-                java.awt.event.InputEvent.CTRL_MASK));
+        mi_HomePage.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_HOME, java.awt.event.InputEvent.CTRL_MASK));
         mu_HelpMenu.add(mi_HomePage);
 
         // 我有建议
@@ -365,6 +367,7 @@ public class Prps extends WForm
         mi_InfoItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         mu_HelpMenu.add(mi_InfoItem);
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 多语言显示区域
     // ////////////////////////////////////////////////////////////////////////
@@ -622,7 +625,7 @@ public class Prps extends WForm
         File plugin = new File(EnvCons.FOLDER0_PLUS);
         if (plugin == null || !plugin.exists() || !plugin.isDirectory() || !plugin.canRead())
         {
-            //std.addPlus(softInfo);
+            // std.addPlus(softInfo);
             LogUtil.log("插件加载：插件目录不可访问！");
             return;
         }
@@ -633,16 +636,14 @@ public class Prps extends WForm
         File[] softList = plugin.listFiles(ff);
         if (softList == null || softList.length < 1)
         {
-            //std.addPlus(softInfo);
+            // std.addPlus(softInfo);
             LogUtil.log("插件加载：无可用插件！");
             return;
         }
 
         ff.setFilesModel(FilesFilter.FILE_ONLY);
         ff.setTextInclude(new String[]
-                {
-                    ".jar"
-                });
+        { ".jar" });
 
         try
         {
@@ -690,9 +691,7 @@ public class Prps extends WForm
 
                         LogUtil.log("\t文档路径：" + softFile.toURI().toURL().toString());
                         URLClassLoader urlCl = new URLClassLoader(new URL[]
-                                {
-                                    softFile.toURI().toURL()
-                                });
+                        { softFile.toURI().toURL() });
                         LogUtil.log("\t程序入口：" + plusMap.get(Plugins.NODE_PLUS_PATH));
                         Object obj = urlCl.loadClass(plusMap.get(Plugins.NODE_PLUS_PATH)).newInstance();
                         LogUtil.log("插件加载：插件启动程序初始化成功！");
@@ -784,7 +783,8 @@ public class Prps extends WForm
     }
 
     /**
-     * @param currSoft the currSoft to set
+     * @param currSoft
+     *            the currSoft to set
      */
     public static void setCurrSoft(IPrpPlus currSoft)
     {
@@ -904,7 +904,7 @@ public class Prps extends WForm
         }
         catch (Exception exp)
         {
-            //系统错误：无法启动您的电子邮件客户端，请您手动启动！
+            // 系统错误：无法启动您的电子邮件客户端，请您手动启动！
             MesgUtil.showMessageDialog(null, exp.getLocalizedMessage());
         }
     }
@@ -921,7 +921,7 @@ public class Prps extends WForm
         {
             plus.wShowView(IPrpPlus.VIEW_MAIN);
         }
-        //C1010000.setInfo(getInfoPath());
+        // C1010000.setInfo(getInfoPath());
     }
 
     /**
@@ -999,6 +999,7 @@ public class Prps extends WForm
             MesgUtil.showMessageDialog(this, langUtil.getMesg(LangRes.MESG_OTHR_0006, ""));
         }
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 界面变量区域
     // ////////////////////////////////////////////////////////////////////////

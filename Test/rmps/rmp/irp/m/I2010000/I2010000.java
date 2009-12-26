@@ -7,12 +7,13 @@
  */
 package rmp.irp.m.I2010000;
 
-import com.amonsoft.rmps.irp.m.IService;
-import com.amonsoft.rmps.irp.b.IMessage;
-import com.amonsoft.rmps.irp.b.ISession;
 import java.util.HashMap;
 
 import rmp.util.CheckUtil;
+
+import com.amonsoft.rmps.irp.b.IMessage;
+import com.amonsoft.rmps.irp.b.ISession;
+import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.util.LogUtil;
 
 import cons.irp.a.ConstUI;
@@ -25,6 +26,7 @@ import cons.irp.a.ConstUI;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class I2010000 implements IService
@@ -86,18 +88,24 @@ public class I2010000 implements IService
             HashMap<Integer, String> dataList = rmp.prp.aide.P3090000.t.Util.getWeatherByCity(command);
 
             // 注册天气图标
-//            message.registerEmoticon(ConstUI.P3090000_DAY11, StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
-//                    dataList.get(8)));
-//            message.registerEmoticon(ConstUI.P3090000_DAY12, StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
-//                    dataList.get(9)));
-//            message.registerEmoticon(ConstUI.P3090000_DAY21, StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
-//                    dataList.get(15)));
-//            message.registerEmoticon(ConstUI.P3090000_DAY22, StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
-//                    dataList.get(16)));
-//            message.registerEmoticon(ConstUI.P3090000_DAY31, StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
-//                    dataList.get(20)));
-//            message.registerEmoticon(ConstUI.P3090000_DAY32, StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
-//                    dataList.get(21)));
+            // message.registerEmoticon(ConstUI.P3090000_DAY11,
+            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // dataList.get(8)));
+            // message.registerEmoticon(ConstUI.P3090000_DAY12,
+            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // dataList.get(9)));
+            // message.registerEmoticon(ConstUI.P3090000_DAY21,
+            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // dataList.get(15)));
+            // message.registerEmoticon(ConstUI.P3090000_DAY22,
+            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // dataList.get(16)));
+            // message.registerEmoticon(ConstUI.P3090000_DAY31,
+            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // dataList.get(20)));
+            // message.registerEmoticon(ConstUI.P3090000_DAY32,
+            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // dataList.get(21)));
 
             // 分段发送天气信息
             StringBuffer sb = new StringBuffer("\r\n");

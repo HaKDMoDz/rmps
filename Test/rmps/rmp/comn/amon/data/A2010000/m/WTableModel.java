@@ -19,8 +19,10 @@ import javax.swing.table.DefaultTableModel;
 import rmp.comn.amon.data.A2010000.b.WDataBase;
 import rmp.comn.amon.data.A2010000.t.Util;
 import rmp.util.CheckUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.StringUtil;
+
+import com.amonsoft.util.LogUtil;
+
 import cons.db.AmonCons;
 
 /**
@@ -30,6 +32,7 @@ import cons.db.AmonCons;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class WTableModel extends DefaultTableModel
@@ -43,10 +46,7 @@ public class WTableModel extends DefaultTableModel
     public WTableModel()
     {
         nameList = new String[]
-                {
-                    "索引", "表格标记", "中文名称", "数据类型", "数据长度", "是否主键", "是否为空", "是否唯一", "默认数据", "参考外键", "类别标记",
-                    "所属系统", "创建者", "数据版本", "表格描述", "更新日期", "提交日期"
-                };
+        { "索引", "表格标记", "中文名称", "数据类型", "数据长度", "是否主键", "是否为空", "是否唯一", "默认数据", "参考外键", "类别标记", "所属系统", "创建者", "数据版本", "表格描述", "更新日期", "提交日期" };
         dataList = new ArrayList<String[]>();
     }
 
@@ -118,7 +118,7 @@ public class WTableModel extends DefaultTableModel
      * (non-Javadoc)
      * 
      * @see javax.swing.table.DefaultTableModel#setValueAt(java.lang.Object,
-     *      int, int)
+     * int, int)
      */
     public void setValueAt(Object value, int rowIndex, int columnIndex)
     {
@@ -217,6 +217,7 @@ public class WTableModel extends DefaultTableModel
             }
         }
     }
+
     /** serialVersionUID */
     private static final long serialVersionUID = -657512102410414086L;
 }

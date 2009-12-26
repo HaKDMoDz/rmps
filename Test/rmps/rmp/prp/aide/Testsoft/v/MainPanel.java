@@ -20,6 +20,7 @@ import rmp.prp.aide.Testsoft.Testsoft;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class MainPanel extends javax.swing.JPanel implements WBackCall
@@ -98,11 +99,9 @@ public class MainPanel extends javax.swing.JPanel implements WBackCall
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(pl_InfoPanel,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE).addContainerGap()));
+                layout.createSequentialGroup().addContainerGap().addComponent(pl_InfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(pl_InfoPanel,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE).addContainerGap()));
+                layout.createSequentialGroup().addContainerGap().addComponent(pl_InfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE).addContainerGap()));
     }
 
     // ----------------------------------------------------
@@ -115,6 +114,7 @@ public class MainPanel extends javax.swing.JPanel implements WBackCall
     private void ita()
     {
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 事件处理区域
     // ////////////////////////////////////////////////////////////////////////

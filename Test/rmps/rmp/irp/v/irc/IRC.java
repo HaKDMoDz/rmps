@@ -7,11 +7,11 @@
  */
 package rmp.irp.v.irc;
 
-import com.amonsoft.rmps.irp.v.IConnect;
+import java.util.List;
+
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.v.IAccount;
-
-import java.util.List;
+import com.amonsoft.rmps.irp.v.IConnect;
 
 /**
  * <ul>
@@ -20,6 +20,7 @@ import java.util.List;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class IRC implements IAccount

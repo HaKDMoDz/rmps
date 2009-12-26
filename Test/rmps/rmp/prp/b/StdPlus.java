@@ -7,18 +7,21 @@
  */
 package rmp.prp.b;
 
-import com.amonsoft.rmps.prp.IPrpPlus;
-import cons.EnvCons;
-import cons.prp.ConstUI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import rmp.prp.Prps;
-import cons.prp.LangRes;
-import com.amonsoft.util.LangUtil;
-import com.amonsoft.util.DeskUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.RmpsUtil;
+
+import com.amonsoft.rmps.prp.IPrpPlus;
+import com.amonsoft.util.DeskUtil;
+import com.amonsoft.util.LangUtil;
+import com.amonsoft.util.LogUtil;
+
+import cons.EnvCons;
+import cons.prp.ConstUI;
+import cons.prp.LangRes;
 
 /**
  * <ul>
@@ -28,11 +31,12 @@ import rmp.util.RmpsUtil;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class StdPlus extends javax.swing.JPanel
 {
-    /**Tail面板是否处于展开状态*/
+    /** Tail面板是否处于展开状态 */
     private boolean expanded;
     /** 语言资源对象 */
     private LangUtil langUtil;
@@ -111,7 +115,7 @@ public class StdPlus extends javax.swing.JPanel
 
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addComponent(pl_Info, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        //vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED);
+        // vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED);
         vsg.addComponent(pl_Soft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vsg.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         layout.setVerticalGroup(vsg);
@@ -275,7 +279,7 @@ public class StdPlus extends javax.swing.JPanel
     {
         this.soft = soft;
         lb_Soft.setIcon(new javax.swing.ImageIcon(soft.wGetIconImage(IPrpPlus.ICON_LOGO0016)));
-//        setSoftMenuVisible(soft.wShowMenu(m));
+        // setSoftMenuVisible(soft.wShowMenu(m));
         langUtil.setWText(lb_Soft, "", soft.wGetTitle());
         langUtil.setWTips(lb_Soft, "", soft.wGetDescription());
         return true;
@@ -294,7 +298,9 @@ public class StdPlus extends javax.swing.JPanel
         // 显示状态判断
         expanded = !expanded;
         pl_Soft.setVisible(expanded);
-//        tl_TreeLabl.setToolTipText(selected ? langUtil.getMesg(LangRes.BUTN_TIPS_PANEBUTN_X, "") : langUtil.getMesg(LangRes.BUTN_TIPS_PANEBUTN_C, ""));
+        // tl_TreeLabl.setToolTipText(selected ?
+        // langUtil.getMesg(LangRes.BUTN_TIPS_PANEBUTN_X, "") :
+        // langUtil.getMesg(LangRes.BUTN_TIPS_PANEBUTN_C, ""));
 
         // 构件显示
         expanded = soft.wShowTail(pl_Soft);
@@ -321,23 +327,26 @@ public class StdPlus extends javax.swing.JPanel
     private void bt_SoftButn_Handler(java.awt.event.ActionEvent evt)
     {
         // 显示状态判断
-//        boolean b = !tl_TreeLabl.isSelected();
-//        tl_TreeLabl.setSelected(b);
-//        pl_Soft.setVisible(b);
-//        tl_TreeLabl.setToolTipText(b ? langUtil.getMesg(LangRes.BUTN_TIPS_PANEBUTN_X, "") : langUtil.getMesg(LangRes.BUTN_TIPS_PANEBUTN_C, ""));
+        // boolean b = !tl_TreeLabl.isSelected();
+        // tl_TreeLabl.setSelected(b);
+        // pl_Soft.setVisible(b);
+        // tl_TreeLabl.setToolTipText(b ?
+        // langUtil.getMesg(LangRes.BUTN_TIPS_PANEBUTN_X, "") :
+        // langUtil.getMesg(LangRes.BUTN_TIPS_PANEBUTN_C, ""));
 
         // 构件显示
-//        b = soft.wShowTail(pl_Soft);
-//        if (!b)
-//        {
-//            if (lb_Tree == null)
-//            {
-//                lb_Tree = new javax.swing.JLabel(langUtil.getMesg(LangRes.LABL_TEXT_INFOLABL, ""));
-//                pl_Soft.setLayout(new java.awt.FlowLayout());
-//            }
-//            pl_Soft.removeAll();
-//            pl_Soft.add(lb_Tree);
-//        }
+        // b = soft.wShowTail(pl_Soft);
+        // if (!b)
+        // {
+        // if (lb_Tree == null)
+        // {
+        // lb_Tree = new
+        // javax.swing.JLabel(langUtil.getMesg(LangRes.LABL_TEXT_INFOLABL, ""));
+        // pl_Soft.setLayout(new java.awt.FlowLayout());
+        // }
+        // pl_Soft.removeAll();
+        // pl_Soft.add(lb_Tree);
+        // }
 
         // 记录当前软件
         Prps.setCurrSoft(soft);
@@ -357,7 +366,7 @@ public class StdPlus extends javax.swing.JPanel
 
     /**
      * 帮助菜单事件处理
-     *
+     * 
      * @param evt
      */
     private void mi_HelpItem_Handler(java.awt.event.ActionEvent evt)
@@ -367,7 +376,7 @@ public class StdPlus extends javax.swing.JPanel
 
     /**
      * 检测更新事件处理
-     *
+     * 
      * @param evt
      */
     private void mi_ChckUpdt_Handler(java.awt.event.ActionEvent evt)
@@ -385,7 +394,7 @@ public class StdPlus extends javax.swing.JPanel
 
     /**
      * 软件首页事件处理
-     *
+     * 
      * @param evt
      */
     private void mi_HomePage_Handler(java.awt.event.ActionEvent evt)
@@ -402,7 +411,7 @@ public class StdPlus extends javax.swing.JPanel
 
     /**
      * 关于菜单事件处理
-     *
+     * 
      * @param evt
      */
     private void mi_InfoItem_Handler(java.awt.event.ActionEvent evt)
@@ -413,7 +422,7 @@ public class StdPlus extends javax.swing.JPanel
 
     /**
      * 迷你窗口事件处理
-     *
+     * 
      * @param evt
      */
     private void mi_MiniView_Handler(java.awt.event.ActionEvent evt)
@@ -424,7 +433,7 @@ public class StdPlus extends javax.swing.JPanel
 
     /**
      * 正常窗口事件处理
-     *
+     * 
      * @param evt
      */
     private void mi_NormView_Handler(java.awt.event.ActionEvent evt)
@@ -435,7 +444,7 @@ public class StdPlus extends javax.swing.JPanel
 
     /**
      * 高级窗口事件处理
-     *
+     * 
      * @param evt
      */
     private void mi_MainView_Handler(java.awt.event.ActionEvent evt)
@@ -449,7 +458,8 @@ public class StdPlus extends javax.swing.JPanel
      */
     private void checkUpdate()
     {
-        javax.swing.JFrame frm = null;//(javax.swing.JFrame) C3010000.queryRef("prp");
+        javax.swing.JFrame frm = null;// (javax.swing.JFrame)
+                                      // C3010000.queryRef("prp");
         try
         {
             boolean isNew = RmpsUtil.checkUpdate(EnvCons.PRPS_SOFTEDIT, ConstUI.VER_SOFT);
@@ -461,6 +471,7 @@ public class StdPlus extends javax.swing.JPanel
             MesgUtil.showMessageDialog(frm, langUtil.getMesg(LangRes.MESG_OTHR_0006, ""));
         }
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 界面变量区域
     // ////////////////////////////////////////////////////////////////////////

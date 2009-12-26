@@ -18,6 +18,7 @@ import rmp.prp.aide.P30B0000.m.DataModel;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class ViewPanel extends javax.swing.JPanel
@@ -44,5 +45,6 @@ public class ViewPanel extends javax.swing.JPanel
     private void ita()
     {
     }
+
     private javax.swing.JTable table;
 }

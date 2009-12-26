@@ -39,11 +39,10 @@ public class OldHinduLunar extends LunarDate
 
     public static long toFixed(long l, int i, boolean flag, int j)
     {
-        double d = (double)(12L * l - 1L) * 30.43822337962963D;
-        double d1 = 29.530581807581694D * (double)(ProtoDate.quotient(d, 29.530581807581694D) + 1L);
-        return (long)Math.floor((double)OldHinduSolar.EPOCH + d1 + 29.530581807581694D
-            * (double)(flag || Math.ceil((d1 - d) / 0.90764157204793605D) > (double)i ? i - 1 : i) + (double)(j - 1)
-            * 0.9843527269193898D + 0.75D);
+        double d = (double) (12L * l - 1L) * 30.43822337962963D;
+        double d1 = 29.530581807581694D * (double) (ProtoDate.quotient(d, 29.530581807581694D) + 1L);
+        return (long) Math.floor((double) OldHinduSolar.EPOCH + d1 + 29.530581807581694D * (double) (flag || Math.ceil((d1 - d) / 0.90764157204793605D) > (double) i ? i - 1 : i) + (double) (j - 1)
+                * 0.9843527269193898D + 0.75D);
     }
 
     public long toFixed()
@@ -53,13 +52,12 @@ public class OldHinduLunar extends LunarDate
 
     public void fromFixed(long l)
     {
-        double d = (double)OldHinduSolar.dayCount(l) + 0.25D;
+        double d = (double) OldHinduSolar.dayCount(l) + 0.25D;
         double d1 = d - ProtoDate.mod(d, 29.530581807581694D);
-        leapMonth = ProtoDate.mod(d1, 30.43822337962963D) <= 0.90764157204793605D
-            && ProtoDate.mod(d1, 30.43822337962963D) > 0.0D;
-        month = 1 + (int)ProtoDate.mod(Math.ceil(d1 / 30.43822337962963D), 12D);
-        day = 1 + (int)ProtoDate.mod(ProtoDate.quotient(d, 0.9843527269193898D), 30L);
-        year = (long)Math.ceil((d1 + 30.43822337962963D) / 365.25868055555554D) - 1L;
+        leapMonth = ProtoDate.mod(d1, 30.43822337962963D) <= 0.90764157204793605D && ProtoDate.mod(d1, 30.43822337962963D) > 0.0D;
+        month = 1 + (int) ProtoDate.mod(Math.ceil(d1 / 30.43822337962963D), 12D);
+        day = 1 + (int) ProtoDate.mod(ProtoDate.quotient(d, 0.9843527269193898D), 30L);
+        year = (long) Math.ceil((d1 + 30.43822337962963D) / 365.25868055555554D) - 1L;
     }
 
     public void fromArray(int ai[])
@@ -72,7 +70,7 @@ public class OldHinduLunar extends LunarDate
 
     public static boolean isLeapYear(long l)
     {
-        return ProtoDate.mod((double)l * 365.25868055555554D - 30.43822337962963D, 29.530581807581694D) >= 18.638882943006465D;
+        return ProtoDate.mod((double) l * 365.25868055555554D - 30.43822337962963D, 29.530581807581694D) >= 18.638882943006465D;
     }
 
     protected String toStringFields()
@@ -82,9 +80,8 @@ public class OldHinduLunar extends LunarDate
 
     public String format()
     {
-        return MessageFormat.format("{0}, {1} {2}{3} {4,number,#} K.Y.", new Object[]{
-            ProtoDate.nameFromDayOfWeek(toFixed(), dayOfWeekNames), new Integer(day),
-            ProtoDate.nameFromMonth(month, monthNames), leapMonth ? " II" : "", new Long(year)});
+        return MessageFormat.format("{0}, {1} {2}{3} {4,number,#} K.Y.", new Object[]
+        { ProtoDate.nameFromDayOfWeek(toFixed(), dayOfWeekNames), new Integer(day), ProtoDate.nameFromMonth(month, monthNames), leapMonth ? " II" : "", new Long(year) });
     }
 
     public boolean equals(Object obj)
@@ -93,22 +90,21 @@ public class OldHinduLunar extends LunarDate
             return true;
         if (!(obj instanceof OldHinduLunar))
             return false;
-        OldHinduLunar oldhindulunar = (OldHinduLunar)obj;
-        return oldhindulunar.year == year && oldhindulunar.month == month && oldhindulunar.leapMonth == leapMonth
-            && oldhindulunar.day == day;
+        OldHinduLunar oldhindulunar = (OldHinduLunar) obj;
+        return oldhindulunar.year == year && oldhindulunar.month == month && oldhindulunar.leapMonth == leapMonth && oldhindulunar.day == day;
     }
 
-    public long                year;
-    public int                 month;
-    public boolean             leapMonth;
-    public int                 day;
+    public long year;
+    public int month;
+    public boolean leapMonth;
+    public int day;
     public static final double ARYA_LUNAR_MONTH = 29.530581807581694D;
-    public static final double ARYA_LUNAR_DAY   = 0.9843527269193898D;
-    public static final String dayOfWeekNames[] = {"Ravivara", "Chandravara", "Mangalavara", "Buddhavara",
-        "Brihaspatvara", "Sukravara", "Sanivara"};
-    public static final String monthNames[]     = {"Chaitra", "Vaisakha", "Jyaishtha", "Ashadha", "Sravana",
-        "Bhadrapada", "Asvina", "Kartika", "Margasirsha", "Pausha", "Magha", "Phalguna"};
+    public static final double ARYA_LUNAR_DAY = 0.9843527269193898D;
+    public static final String dayOfWeekNames[] =
+    { "Ravivara", "Chandravara", "Mangalavara", "Buddhavara", "Brihaspatvara", "Sukravara", "Sanivara" };
+    public static final String monthNames[] =
+    { "Chaitra", "Vaisakha", "Jyaishtha", "Ashadha", "Sravana", "Bhadrapada", "Asvina", "Kartika", "Margasirsha", "Pausha", "Magha", "Phalguna" };
 
     /** serialVersionUID */
-    private static final long  serialVersionUID = 6452632135091841020L;
+    private static final long serialVersionUID = 6452632135091841020L;
 }

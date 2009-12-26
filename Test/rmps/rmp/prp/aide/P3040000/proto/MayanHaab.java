@@ -38,8 +38,8 @@ public class MayanHaab extends ProtoDate
     public void fromFixed(long l)
     {
         long l1 = ProtoDate.mod(l - EPOCH, 365L);
-        day = (int)ProtoDate.mod(l1, 20L);
-        month = 1 + (int)ProtoDate.quotient(l1, 20D);
+        day = (int) ProtoDate.mod(l1, 20L);
+        month = 1 + (int) ProtoDate.quotient(l1, 20D);
     }
 
     public void fromArray(int ai[])
@@ -55,7 +55,7 @@ public class MayanHaab extends ProtoDate
 
     public static long onOrBefore(MayanHaab mayanhaab, long l)
     {
-        return l - ProtoDate.mod(l - EPOCH - (long)ordinal(mayanhaab), 365L);
+        return l - ProtoDate.mod(l - EPOCH - (long) ordinal(mayanhaab), 365L);
     }
 
     protected String toStringFields()
@@ -65,8 +65,8 @@ public class MayanHaab extends ProtoDate
 
     public String format()
     {
-        return MessageFormat.format("{0} {1}", new Object[]{new Integer(day),
-            ProtoDate.nameFromMonth(month, monthNames)});
+        return MessageFormat.format("{0} {1}", new Object[]
+        { new Integer(day), ProtoDate.nameFromMonth(month, monthNames) });
     }
 
     public boolean equals(Object obj)
@@ -75,21 +75,21 @@ public class MayanHaab extends ProtoDate
             return true;
         if (!(obj instanceof MayanHaab))
             return false;
-        MayanHaab mayanhaab = (MayanHaab)obj;
+        MayanHaab mayanhaab = (MayanHaab) obj;
         return mayanhaab.month == month && mayanhaab.day == day;
     }
 
-    public int                 month;
-    public int                 day;
-    public static final long   EPOCH;
-    public static final String monthNames[]     = {"Pop", "Uo", "Zip", "Zotz", "Tzec", "Xul", "Yaxkin", "Mol", "Chen",
-        "Yax", "Zac", "Ceh", "Mac", "Kankin", "Muan", "Pax", "Kayab", "Cumku", "Uayeb"};
+    public int month;
+    public int day;
+    public static final long EPOCH;
+    public static final String monthNames[] =
+    { "Pop", "Uo", "Zip", "Zotz", "Tzec", "Xul", "Yaxkin", "Mol", "Chen", "Yax", "Zac", "Ceh", "Mac", "Kankin", "Muan", "Pax", "Kayab", "Cumku", "Uayeb" };
 
     static
     {
-        EPOCH = MayanLongCount.EPOCH - (long)ordinal(new MayanHaab(18, 8));
+        EPOCH = MayanLongCount.EPOCH - (long) ordinal(new MayanHaab(18, 8));
     }
 
     /** serialVersionUID */
-    private static final long  serialVersionUID = 101609239783409778L;
+    private static final long serialVersionUID = 101609239783409778L;
 }

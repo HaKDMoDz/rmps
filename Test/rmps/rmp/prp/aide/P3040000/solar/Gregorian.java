@@ -36,9 +36,8 @@ public class Gregorian extends SolarDate
 
     public static long toFixed(long l, int i, int j)
     {
-        return ((365L * (l - 1L) + ProtoDate.quotient(l - 1L, 4D)) - ProtoDate.quotient(l - 1L, 100D))
-            + ProtoDate.quotient(l - 1L, 400D) + ProtoDate.quotient(367 * i - 362, 12D)
-            + (long)(i > 2 ? isLeapYear(l) ? -1 : -2 : 0) + (long)j;
+        return ((365L * (l - 1L) + ProtoDate.quotient(l - 1L, 4D)) - ProtoDate.quotient(l - 1L, 100D)) + ProtoDate.quotient(l - 1L, 400D) + ProtoDate.quotient(367 * i - 362, 12D)
+                + (long) (i > 2 ? isLeapYear(l) ? -1 : -2 : 0) + (long) j;
     }
 
     public long toFixed()
@@ -50,26 +49,26 @@ public class Gregorian extends SolarDate
     {
         super.year = yearFromFixed(l);
         long l1 = l - toFixed(super.year, 1, 1);
-        int i = l >= toFixed(super.year, 3, 1) ? ((int)(isLeapYear(super.year) ? 1 : 2)) : 0;
-        super.month = (int)ProtoDate.quotient(12L * (l1 + (long)i) + 373L, 367D);
-        super.day = (int)((l - toFixed(super.year, super.month, 1)) + 1L);
+        int i = l >= toFixed(super.year, 3, 1) ? ((int) (isLeapYear(super.year) ? 1 : 2)) : 0;
+        super.month = (int) ProtoDate.quotient(12L * (l1 + (long) i) + 373L, 367D);
+        super.day = (int) ((l - toFixed(super.year, super.month, 1)) + 1L);
     }
 
     public static long altFixedFromGregorian(long l, int i, int j)
     {
         long l1 = ProtoDate.adjustedMod(i - 2, 12);
         long l2 = l + ProtoDate.quotient(i + 9, 12D);
-        return ((-306L + 365L * (l2 - 1L) + ProtoDate.quotient(l2 - 1L, 4D)) - ProtoDate.quotient(l2 - 1L, 100D))
-            + ProtoDate.quotient(l2 - 1L, 400D) + ProtoDate.quotient(3L * l1 - 1L, 5D) + 30L * (l1 - 1L) + (long)j;
+        return ((-306L + 365L * (l2 - 1L) + ProtoDate.quotient(l2 - 1L, 4D)) - ProtoDate.quotient(l2 - 1L, 100D)) + ProtoDate.quotient(l2 - 1L, 400D) + ProtoDate.quotient(3L * l1 - 1L, 5D) + 30L
+                * (l1 - 1L) + (long) j;
     }
 
     public void altGregorianFromFixed(long l)
     {
         long l1 = yearFromFixed(l + 306L);
         long l2 = l - toFixed(l1 - 1L, 3, 1);
-        super.month = (int)ProtoDate.adjustedMod(ProtoDate.quotient(5L * l2 + 155L, 153D) + 2L, 12L);
+        super.month = (int) ProtoDate.adjustedMod(ProtoDate.quotient(5L * l2 + 155L, 153D) + 2L, 12L);
         super.year = l1 - ProtoDate.quotient(super.month + 9, 12D);
-        super.day = (int)((1L + l) - toFixed(super.year, super.month, 1));
+        super.day = (int) ((1L + l) - toFixed(super.year, super.month, 1));
     }
 
     public static boolean isLeapYear(long l)
@@ -104,8 +103,7 @@ public class Gregorian extends SolarDate
     public static long altGregorianYearFromFixed(long l)
     {
         long l1 = ProtoDate.quotient((l - 1L) + 2L, 365.24250000000001D);
-        long l2 = ((1L + 365L * l1 + ProtoDate.quotient(l1, 4D)) - ProtoDate.quotient(l1, 100D))
-            + ProtoDate.quotient(l1, 400D);
+        long l2 = ((1L + 365L * l1 + ProtoDate.quotient(l1, 4D)) - ProtoDate.quotient(l1, 100D)) + ProtoDate.quotient(l1, 400D);
         if (l < l2)
             return l1;
         else
@@ -185,9 +183,8 @@ public class Gregorian extends SolarDate
 
     public String format()
     {
-        return MessageFormat.format("{0}, {1} {2} {3,number,#}", new Object[]{
-            ProtoDate.nameFromDayOfWeek(toFixed(), dayOfWeekNames), new Integer(super.day),
-            ProtoDate.nameFromMonth(super.month, monthNames), new Long(super.year)});
+        return MessageFormat.format("{0}, {1} {2} {3,number,#}", new Object[]
+        { ProtoDate.nameFromDayOfWeek(toFixed(), dayOfWeekNames), new Integer(super.day), ProtoDate.nameFromMonth(super.month, monthNames), new Long(super.year) });
     }
 
     public boolean equals(Object obj)
@@ -198,12 +195,12 @@ public class Gregorian extends SolarDate
             return internalEquals(obj);
     }
 
-    public static final long   EPOCH            = 1L;
-    public static final String dayOfWeekNames[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
-        "Saturday"                              };
-    public static final String monthNames[]     = {"January", "February", "March", "April", "May", "June", "July",
-        "August", "September", "October", "November", "December"};
+    public static final long EPOCH = 1L;
+    public static final String dayOfWeekNames[] =
+    { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+    public static final String monthNames[] =
+    { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
 
     /** serialVersionUID */
-    private static final long  serialVersionUID = 5763572875106047177L;
+    private static final long serialVersionUID = 5763572875106047177L;
 }

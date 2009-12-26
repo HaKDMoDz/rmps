@@ -19,6 +19,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.amonsoft.util.LogUtil;
+
 import cons.prp.Plugins;
 
 /**
@@ -29,6 +30,7 @@ import cons.prp.Plugins;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public final class Util

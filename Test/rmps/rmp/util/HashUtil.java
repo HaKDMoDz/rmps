@@ -7,7 +7,6 @@
  */
 package rmp.util;
 
-import com.amonsoft.util.LogUtil;
 import java.security.MessageDigest;
 import java.security.Provider;
 import java.security.Security;
@@ -19,6 +18,9 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 
 import rmp.bean.CipherKey;
+
+import com.amonsoft.util.LogUtil;
+
 import cons.SysCons;
 import cryptix.jce.provider.CryptixCrypto;
 
@@ -31,6 +33,7 @@ import cryptix.jce.provider.CryptixCrypto;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public final class HashUtil
@@ -45,8 +48,10 @@ public final class HashUtil
     /**
      * 字符串信息摘要，并以掩码结果显示，默认使用MD5摘要算法对指定的字符串进行数据摘要
      * 
-     * @param text 要进行数据摘要的原字符串
-     * @param bigCase 返回结果字符串是否使用大写字符，true大写，false小写
+     * @param text
+     *            要进行数据摘要的原字符串
+     * @param bigCase
+     *            返回结果字符串是否使用大写字符，true大写，false小写
      * @return 字符串信息摘要结果
      */
     public static String digest(String text, boolean bigCase)
@@ -57,8 +62,10 @@ public final class HashUtil
     /**
      * 信息摘要，按正常结果显示
      * 
-     * @param text 等进行摘要的字符串
-     * @param hash 信息摘要算法
+     * @param text
+     *            等进行摘要的字符串
+     * @param hash
+     *            信息摘要算法
      * @return 字符串信息摘要结果
      */
     public static byte[] digest(String text, String hash)
@@ -88,7 +95,8 @@ public final class HashUtil
      * 此方法用要用于表格主键的生成。 C# 计算开始时间：1601年1月1日12：00：00 Java计算开始时间：1970年1月1日00：00：00
      * 时间相关数值为： 116444736000000000
      * 
-     * @param bigCase 返回字符串是否大写
+     * @param bigCase
+     *            返回字符串是否大写
      * @return
      */
     public static String getCurrTimeHex(boolean bigCase)
@@ -192,8 +200,10 @@ public final class HashUtil
     /**
      * 数据流加密
      * 
-     * @param text 明文数据
-     * @param key 用户口令
+     * @param text
+     *            明文数据
+     * @param key
+     *            用户口令
      * @return 密文数据
      */
     public static String encrypt(String text, byte[] key)
@@ -205,8 +215,10 @@ public final class HashUtil
     /**
      * 数据流解密
      * 
-     * @param text 密文数据
-     * @param key 用户口令
+     * @param text
+     *            密文数据
+     * @param key
+     *            用户口令
      * @return 明文数据
      */
     public static String decrypt(String text, byte[] key)
@@ -218,16 +230,22 @@ public final class HashUtil
     /**
      * 数据流加解密
      * 
-     * @param cipherMode 加密模式，其值为：Cipher.ENCRYPT_MODE或者Cipher.DECRYPT_MODE
-     * @param algorithm 加密算法名称
-     * @param mode 加密模式，如CBC、EBC等
-     * @param padding 扩充模式
-     * @param provider 加密算法提供者
-     * @param text 等加密文本
-     * @param key 加密口令
+     * @param cipherMode
+     *            加密模式，其值为：Cipher.ENCRYPT_MODE或者Cipher.DECRYPT_MODE
+     * @param algorithm
+     *            加密算法名称
+     * @param mode
+     *            加密模式，如CBC、EBC等
+     * @param padding
+     *            扩充模式
+     * @param provider
+     *            加密算法提供者
+     * @param text
+     *            等加密文本
+     * @param key
+     *            加密口令
      */
-    public static byte[] cipher(int cipherMode, String algorithm, String mode, String padding, String provider,
-            String text, byte[] key)
+    public static byte[] cipher(int cipherMode, String algorithm, String mode, String padding, String provider, String text, byte[] key)
     {
         try
         {
@@ -268,8 +286,10 @@ public final class HashUtil
     /**
      * 根据当前输入ID生成符合条件的下一个用户ID
      * 
-     * @param lastID 用于生成特定ID的上一个ID。
-     * @param idType ID类别：1表示内部员工ID；2表示商业伙伴ID；其它表示系统用户ID
+     * @param lastID
+     *            用于生成特定ID的上一个ID。
+     * @param idType
+     *            ID类别：1表示内部员工ID；2表示商业伙伴ID；其它表示系统用户ID
      * @return
      */
     public static String nextUserID(String lastID, int idType)
@@ -287,12 +307,12 @@ public final class HashUtil
                     id = "a0000000";
                 }
             }
-            break;
+                break;
             // 商业伙伴
             case 2:
             {
             }
-            break;
+                break;
             // 默认类型
             default:
             {
@@ -342,9 +362,12 @@ public final class HashUtil
     /**
      * 由用户指定的口令字符串空间随机生成复合用户要求的定长字符
      * 
-     * @param sets 口令字符空间
-     * @param size 生成随机口令长度
-     * @param noRepeat 生成口令是否不可重复
+     * @param sets
+     *            口令字符空间
+     * @param size
+     *            生成随机口令长度
+     * @param noRepeat
+     *            生成口令是否不可重复
      * @return
      * @throws Exception
      */
@@ -360,9 +383,12 @@ public final class HashUtil
     /**
      * 由用户指定的口令字符串空间随机生成复合用户要求的定长字符
      * 
-     * @param sets 口令字符空间
-     * @param size 生成随机口令长度
-     * @param noRepeat 生成口令是否不可重复
+     * @param sets
+     *            口令字符空间
+     * @param size
+     *            生成随机口令长度
+     * @param noRepeat
+     *            生成口令是否不可重复
      * @return
      * @throws Exception
      */

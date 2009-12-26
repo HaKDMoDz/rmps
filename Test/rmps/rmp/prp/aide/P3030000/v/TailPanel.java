@@ -7,15 +7,18 @@
  */
 package rmp.prp.aide.P3030000.v;
 
-import com.amonsoft.bean.WForm;
+import javax.swing.WindowConstants;
+
 import rmp.prp.aide.P3030000.P3030000;
 import rmp.prp.aide.P3030000.m.CodeData;
 import rmp.util.BeanUtil;
 import rmp.util.CheckUtil;
 import rmp.util.MesgUtil;
+
+import com.amonsoft.bean.WForm;
+
 import cons.prp.aide.P3030000.ConstUI;
 import cons.prp.aide.P3030000.LangRes;
-import javax.swing.WindowConstants;
 
 /**
  * <ul>
@@ -26,6 +29,7 @@ import javax.swing.WindowConstants;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class TailPanel
@@ -128,11 +132,9 @@ public class TailPanel
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(viewPanel);
         viewPanel.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(sp_DataList,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE).addContainerGap()));
+                layout.createSequentialGroup().addContainerGap().addComponent(sp_DataList, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(sp_DataList,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE).addContainerGap()));
+                layout.createSequentialGroup().addContainerGap().addComponent(sp_DataList, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE).addContainerGap()));
 
         df_Dialog = new WForm();
         df_Dialog.wInit(false);
@@ -267,6 +269,7 @@ public class TailPanel
         tm_DataList.setUsrChar(userData);
         tm_DataList.fireTableDataChanged();
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 界面构件区域
     // ////////////////////////////////////////////////////////////////////////

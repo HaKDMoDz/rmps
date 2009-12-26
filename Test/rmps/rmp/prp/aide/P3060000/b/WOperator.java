@@ -18,6 +18,7 @@ import cons.prp.aide.P3060000.ConstUI;
  * <br />
  * 本类用于封装各个运算符及其级别信息，用户只需要指定运算符，系统会根据内部设定的运算符优先级对其进行封装。
  * </ul>
+ * 
  * @author Amon
  */
 public class WOperator
@@ -58,7 +59,8 @@ public class WOperator
     /**
      * 设置运算符
      * 
-     * @param s the s to set
+     * @param s
+     *            the s to set
      */
     public void setS(String s)
     {

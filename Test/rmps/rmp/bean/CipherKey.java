@@ -18,6 +18,7 @@ import javax.crypto.SecretKey;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public final class CipherKey implements SecretKey
@@ -82,7 +83,8 @@ public final class CipherKey implements SecretKey
     }
 
     /**
-     * @param ivSize the ivSize to set
+     * @param ivSize
+     *            the ivSize to set
      */
     public void setIvSize(int ivSize)
     {
@@ -90,7 +92,8 @@ public final class CipherKey implements SecretKey
     }
 
     /**
-     * @param algorithm the algorithm to set
+     * @param algorithm
+     *            the algorithm to set
      */
     public void setAlgorithm(String algorithm)
     {
@@ -98,7 +101,8 @@ public final class CipherKey implements SecretKey
     }
 
     /**
-     * @param format the format to set
+     * @param format
+     *            the format to set
      */
     public void setFormat(String format)
     {
@@ -122,7 +126,8 @@ public final class CipherKey implements SecretKey
     }
 
     /**
-     * @param cdSize the cdSize to set
+     * @param cdSize
+     *            the cdSize to set
      */
     public void setCdSize(int cdSize)
     {

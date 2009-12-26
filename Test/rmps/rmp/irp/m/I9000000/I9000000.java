@@ -11,7 +11,6 @@ import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
-import rmp.irp.c.Control;
 
 /**
  * <ul>
@@ -21,7 +20,8 @@ import rmp.irp.c.Control;
  * <li>使用说明：</li>
  * <br />
  * </ul>
- * @author yihaodian
+ * 
+ * @author Amon
  */
 public class I9000000 implements IService
 {

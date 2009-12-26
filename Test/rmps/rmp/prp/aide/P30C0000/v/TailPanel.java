@@ -17,8 +17,10 @@ import rmp.prp.aide.P30C0000.P30C0000;
 import rmp.prp.aide.P30C0000.t.Util;
 import rmp.util.BeanUtil;
 import rmp.util.CheckUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
+
+import com.amonsoft.util.LogUtil;
+
 import cons.prp.aide.P30C0000.LangRes;
 
 /**
@@ -30,6 +32,7 @@ import cons.prp.aide.P30C0000.LangRes;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class TailPanel implements WBackCall
@@ -70,7 +73,7 @@ public class TailPanel implements WBackCall
      * 
      * @see rmp.face.WBackCall#wAction(java.util.EventObject, java.lang.Object)
      */
-    @ Override
+    @Override
     public void wAction(EventObject event, Object object, String property)
     {
         try
@@ -78,10 +81,11 @@ public class TailPanel implements WBackCall
             InetAddress inetAddr = InetAddress.getLocalHost();
             tf_INetAddr.setText(inetAddr.getHostAddress());
         }
-        catch(UnknownHostException exp)
+        catch (UnknownHostException exp)
         {
             LogUtil.exception(exp);
-            //MesgUtil.showMessageDialog(C3010000.queryRef("prp"), "获取本机IP地址出错，请重新尝试！");
+            // MesgUtil.showMessageDialog(C3010000.queryRef("prp"),
+            // "获取本机IP地址出错，请重新尝试！");
         }
     }
 
@@ -198,12 +202,14 @@ public class TailPanel implements WBackCall
                 sb.append("物理地址：").append(dataList.get(1));
                 sb.append("</html>");
             }
-            //MesgUtil.showMessageDialog(C3010000.queryRef("prp"), sb.toString());
+            // MesgUtil.showMessageDialog(C3010000.queryRef("prp"),
+            // sb.toString());
         }
-        catch(Exception exp)
+        catch (Exception exp)
         {
             LogUtil.exception(exp);
-            //MesgUtil.showMessageDialog(C3010000.queryRef("prp"), "IP地址查询出错，请重新查询");
+            // MesgUtil.showMessageDialog(C3010000.queryRef("prp"),
+            // "IP地址查询出错，请重新查询");
         }
     }
 
@@ -211,7 +217,7 @@ public class TailPanel implements WBackCall
     // 界面构件区域
     // ////////////////////////////////////////////////////////////////////////
     /** 查询按钮 */
-    private javax.swing.JButton    bt_INetAddr;
+    private javax.swing.JButton bt_INetAddr;
     /** 用户输入文本框 */
     private javax.swing.JTextField tf_INetAddr;
 }

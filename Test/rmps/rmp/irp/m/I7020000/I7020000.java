@@ -7,20 +7,21 @@
  */
 package rmp.irp.m.I7020000;
 
+import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.regex.Pattern;
+
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
-import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.rmps.irp.b.ISession;
+import com.amonsoft.rmps.irp.m.IService;
+import com.amonsoft.util.LogUtil;
 import com.sun.syndication.feed.synd.SyndCategory;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
-import java.net.URL;
-import com.amonsoft.util.LogUtil;
-import java.util.HashMap;
-import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * <ul>
@@ -30,6 +31,7 @@ import java.util.regex.Pattern;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class I7020000 implements IService
@@ -137,6 +139,7 @@ public class I7020000 implements IService
 
     /**
      * 显示RSS列表
+     * 
      * @param session
      * @param message
      */
@@ -146,6 +149,7 @@ public class I7020000 implements IService
 
     /**
      * 读取RSS信息
+     * 
      * @param session
      * @param message
      */

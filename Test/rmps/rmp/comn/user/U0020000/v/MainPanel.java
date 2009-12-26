@@ -7,10 +7,11 @@
  */
 package rmp.comn.user.U0020000.v;
 
-import com.amonsoft.rmps.prp.v.IView;
 import javax.swing.JPanel;
 
 import rmp.comn.user.U0020000.U0020000;
+
+import com.amonsoft.rmps.prp.v.IView;
 
 /**
  * <ul>
@@ -21,6 +22,7 @@ import rmp.comn.user.U0020000.U0020000;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class MainPanel extends JPanel implements IView

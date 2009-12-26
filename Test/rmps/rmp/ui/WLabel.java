@@ -24,6 +24,7 @@ import javax.swing.KeyStroke;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class WLabel extends JLabel
@@ -65,6 +66,7 @@ public class WLabel extends JLabel
                 {
                     wActionPerformed(evt);
                 }
+
                 private static final long serialVersionUID = 7881709680364466655L;
             });
         }
@@ -107,6 +109,7 @@ public class WLabel extends JLabel
             al.actionPerformed(evt);
         }
     }
+
     /** serialVersionUID */
     private static final long serialVersionUID = 4443006603494652878L;
 }

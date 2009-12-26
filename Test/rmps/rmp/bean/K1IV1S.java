@@ -18,6 +18,7 @@ import java.io.Serializable;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class K1IV1S implements Serializable, Cloneable
@@ -54,7 +55,8 @@ public class K1IV1S implements Serializable, Cloneable
     }
 
     /**
-     * @param k the k to set
+     * @param k
+     *            the k to set
      */
     public void setK(int k)
     {
@@ -70,7 +72,8 @@ public class K1IV1S implements Serializable, Cloneable
     }
 
     /**
-     * @param v the v to set
+     * @param v
+     *            the v to set
      */
     public void setV(String v)
     {
@@ -114,6 +117,7 @@ public class K1IV1S implements Serializable, Cloneable
     {
         return v;
     }
+
     /** serialVersionUID */
     private static final long serialVersionUID = -6047857216561464032L;
 }

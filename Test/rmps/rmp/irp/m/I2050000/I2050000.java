@@ -7,23 +7,27 @@
  */
 package rmp.irp.m.I2050000;
 
-import com.amonsoft.rmps.irp.b.IMessage;
-import com.amonsoft.rmps.irp.b.IProcess;
-import com.amonsoft.rmps.irp.b.ISession;
-import com.amonsoft.rmps.irp.m.IService;
-import com.amonsoft.util.LogUtil;
-import cons.EnvCons;
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.HashMap;
 import java.util.regex.Pattern;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+
 import rmp.util.CheckUtil;
 import rmp.util.EnvUtil;
+
+import com.amonsoft.rmps.irp.b.IMessage;
+import com.amonsoft.rmps.irp.b.IProcess;
+import com.amonsoft.rmps.irp.b.ISession;
+import com.amonsoft.rmps.irp.m.IService;
+import com.amonsoft.util.LogUtil;
+
+import cons.EnvCons;
 
 /**
  * <ul>
@@ -33,6 +37,7 @@ import rmp.util.EnvUtil;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class I2050000 implements IService

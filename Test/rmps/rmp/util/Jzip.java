@@ -7,7 +7,6 @@
  */
 package rmp.util;
 
-import com.amonsoft.util.LogUtil;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -18,6 +17,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
+import com.amonsoft.util.LogUtil;
+
 /**
  * <ul>
  * <li>功能说明：</li>
@@ -27,6 +28,7 @@ import java.util.zip.ZipOutputStream;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public final class Jzip

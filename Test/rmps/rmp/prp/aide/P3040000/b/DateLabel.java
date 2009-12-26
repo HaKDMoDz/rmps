@@ -21,6 +21,7 @@ import cons.prp.aide.P3040000.ConstUI;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class DateLabel extends javax.swing.JLabel
@@ -71,7 +72,8 @@ public class DateLabel extends javax.swing.JLabel
     /**
      * 设置标签是否被选择
      * 
-     * @param b true标签被选择
+     * @param b
+     *            true标签被选择
      */
     public void setSelected(boolean b)
     {
@@ -96,7 +98,8 @@ public class DateLabel extends javax.swing.JLabel
     }
 
     /**
-     * @param today the today to set
+     * @param today
+     *            the today to set
      */
     public void setToday(boolean today)
     {

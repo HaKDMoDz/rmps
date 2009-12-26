@@ -7,8 +7,9 @@
  */
 package rmp.prp.aide.P3060000.v;
 
-import com.amonsoft.rmps.prp.v.IView;
 import rmp.prp.aide.P3060000.P3060000;
+
+import com.amonsoft.rmps.prp.v.IView;
 
 /**
  * <ul>
@@ -19,6 +20,7 @@ import rmp.prp.aide.P3060000.P3060000;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class NormPanel extends javax.swing.JPanel implements IView
@@ -40,6 +42,7 @@ public class NormPanel extends javax.swing.JPanel implements IView
     {
         return false;
     }
+
     /** serialVersionUID */
     private static final long serialVersionUID = -1432820299355253606L;
 }

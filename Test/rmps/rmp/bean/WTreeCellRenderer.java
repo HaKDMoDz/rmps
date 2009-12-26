@@ -15,7 +15,9 @@ import javax.swing.JTree;
 import javax.swing.tree.TreeCellRenderer;
 
 import rmp.util.ImageUtil;
+
 import com.amonsoft.util.LogUtil;
+
 import cons.EnvCons;
 
 /**
@@ -27,6 +29,7 @@ import cons.EnvCons;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class WTreeCellRenderer extends javax.swing.JLabel implements TreeCellRenderer
@@ -53,8 +56,7 @@ public class WTreeCellRenderer extends javax.swing.JLabel implements TreeCellRen
     }
 
     @Override
-    public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded,
-            boolean leaf, int row, boolean hasFocus)
+    public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus)
     {
         this.setOpaque(true);
         setFont(tree.getFont());
@@ -97,7 +99,8 @@ public class WTreeCellRenderer extends javax.swing.JLabel implements TreeCellRen
     }
 
     /**
-     * @param collapsedIcon the collapsedIcon to set
+     * @param collapsedIcon
+     *            the collapsedIcon to set
      */
     public static void setCollapsedIcon(ImageIcon collapsedIcon)
     {
@@ -113,12 +116,14 @@ public class WTreeCellRenderer extends javax.swing.JLabel implements TreeCellRen
     }
 
     /**
-     * @param expandedIcon the expandedIcon to set
+     * @param expandedIcon
+     *            the expandedIcon to set
      */
     public static void setExpandedIcon(ImageIcon expandedIcon)
     {
         WTreeCellRenderer.expandedIcon = expandedIcon;
     }
+
     /** serialVersionUID */
     private static final long serialVersionUID = -8588227466731676154L;
 }

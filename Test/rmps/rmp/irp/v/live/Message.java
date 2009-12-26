@@ -17,6 +17,7 @@ import rmp.irp.comn.AMessage;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class Message extends AMessage

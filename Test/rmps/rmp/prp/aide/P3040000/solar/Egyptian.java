@@ -36,7 +36,7 @@ public class Egyptian extends SolarDate
 
     public static long toFixed(long l, int i, int j)
     {
-        return (EPOCH + 365L * (l - 1L) + (long)(30 * (i - 1)) + (long)j) - 1L;
+        return (EPOCH + 365L * (l - 1L) + (long) (30 * (i - 1)) + (long) j) - 1L;
     }
 
     public long toFixed()
@@ -48,14 +48,14 @@ public class Egyptian extends SolarDate
     {
         long l1 = l - EPOCH;
         super.year = 1L + ProtoDate.quotient(l1, 365D);
-        super.month = (int)(1L + ProtoDate.quotient(ProtoDate.mod(l1, 365L), 30D));
-        super.day = (int)((l1 - 365L * (super.year - 1L) - (long)(30 * (super.month - 1))) + 1L);
+        super.month = (int) (1L + ProtoDate.quotient(ProtoDate.mod(l1, 365L), 30D));
+        super.day = (int) ((l1 - 365L * (super.year - 1L) - (long) (30 * (super.month - 1))) + 1L);
     }
 
     public String format()
     {
-        return MessageFormat.format("{0} {1} {2,number,#}", new Object[]{new Integer(super.day),
-            ProtoDate.nameFromMonth(super.month, monthNames), new Long(super.year)});
+        return MessageFormat.format("{0} {1} {2,number,#}", new Object[]
+        { new Integer(super.day), ProtoDate.nameFromMonth(super.month, monthNames), new Long(super.year) });
     }
 
     public boolean equals(Object obj)
@@ -66,10 +66,10 @@ public class Egyptian extends SolarDate
             return internalEquals(obj);
     }
 
-    public static final long   EPOCH            = ProtoDate.fixedFromJD(1448638D);
-    public static final String monthNames[]     = {"Thoth", "Phaophi", "Athyr", "Choiak", "Tybi", "Mechir",
-        "Phamenoth", "Pharmuthi", "Pachon", "Payni", "Epiphi", "Mesori", "Epagomenai"};
+    public static final long EPOCH = ProtoDate.fixedFromJD(1448638D);
+    public static final String monthNames[] =
+    { "Thoth", "Phaophi", "Athyr", "Choiak", "Tybi", "Mechir", "Phamenoth", "Pharmuthi", "Pachon", "Payni", "Epiphi", "Mesori", "Epagomenai" };
 
     /** serialVersionUID */
-    private static final long  serialVersionUID = -6576823410651813935L;
+    private static final long serialVersionUID = -6576823410651813935L;
 }

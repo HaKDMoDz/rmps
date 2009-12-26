@@ -39,8 +39,7 @@ public class Julian extends SolarDate
     public static long toFixed(long l, int i, int j)
     {
         long l1 = l >= 0L ? l : l + 1L;
-        return (EPOCH - 1L) + 365L * (l1 - 1L) + ProtoDate.quotient(l1 - 1L, 4D)
-            + ProtoDate.quotient(367 * i - 362, 12D) + (long)(i > 2 ? isLeapYear(l) ? -1 : -2 : 0) + (long)j;
+        return (EPOCH - 1L) + 365L * (l1 - 1L) + ProtoDate.quotient(l1 - 1L, 4D) + ProtoDate.quotient(367 * i - 362, 12D) + (long) (i > 2 ? isLeapYear(l) ? -1 : -2 : 0) + (long) j;
     }
 
     public long toFixed()
@@ -53,9 +52,9 @@ public class Julian extends SolarDate
         long l1 = ProtoDate.quotient(4L * (l - EPOCH) + 1464L, 1461D);
         super.year = l1 > 0L ? l1 : l1 - 1L;
         long l2 = l - toFixed(super.year, 1, 1);
-        int i = l >= toFixed(super.year, 3, 1) ? ((int)(isLeapYear(super.year) ? 1 : 2)) : 0;
-        super.month = (int)ProtoDate.quotient(12L * (l2 + (long)i) + 373L, 367D);
-        super.day = (int)((l - toFixed(super.year, super.month, 1)) + 1L);
+        int i = l >= toFixed(super.year, 3, 1) ? ((int) (isLeapYear(super.year) ? 1 : 2)) : 0;
+        super.month = (int) ProtoDate.quotient(12L * (l2 + (long) i) + 373L, 367D);
+        super.day = (int) ((l - toFixed(super.year, super.month, 1)) + 1L);
     }
 
     public static long BCE(long l)
@@ -70,14 +69,14 @@ public class Julian extends SolarDate
 
     public static boolean isLeapYear(long l)
     {
-        return ProtoDate.mod(l, 4L) == (long)(l <= 0L ? 3 : 0);
+        return ProtoDate.mod(l, 4L) == (long) (l <= 0L ? 3 : 0);
     }
 
     public static Vector<Long> inGregorian(int i, int j, long l)
     {
         long l1 = Gregorian.toFixed(l, 1, 1);
         long l2 = Gregorian.toFixed(l, 12, 31);
-        long l3 = ((SolarDate)(new Julian(l1))).year;
+        long l3 = ((SolarDate) (new Julian(l1))).year;
         long l4 = l3 != -1L ? l3 + 1L : 1L;
         long l5 = toFixed(l3, i, j);
         long l6 = toFixed(l4, i, j);
@@ -96,9 +95,8 @@ public class Julian extends SolarDate
 
     public String format()
     {
-        return MessageFormat.format("{0} {1} {2,number,#} {3}", new Object[]{new Integer(super.day),
-            ProtoDate.nameFromMonth(super.month, Gregorian.monthNames),
-            new Long(super.year >= 0L ? super.year : -super.year), super.year >= 0L ? "C.E." : "B.C.E."});
+        return MessageFormat.format("{0} {1} {2,number,#} {3}", new Object[]
+        { new Integer(super.day), ProtoDate.nameFromMonth(super.month, Gregorian.monthNames), new Long(super.year >= 0L ? super.year : -super.year), super.year >= 0L ? "C.E." : "B.C.E." });
     }
 
     public boolean equals(Object obj)
@@ -109,7 +107,7 @@ public class Julian extends SolarDate
             return internalEquals(obj);
     }
 
-    public static final long  EPOCH            = Gregorian.toFixed(0L, 12, 30);
+    public static final long EPOCH = Gregorian.toFixed(0L, 12, 30);
 
     /** serialVersionUID */
     private static final long serialVersionUID = -3704317648739602537L;

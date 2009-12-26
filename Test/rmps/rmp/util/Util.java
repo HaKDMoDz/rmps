@@ -8,13 +8,14 @@
 package rmp.util;
 
 /**
- *
- * @author yihaodian
+ * 
+ * @author Amon
  */
 public class Util
 {
     /**
      * 判断两个对象是否相同
+     * 
      * @param a
      * @param b
      * @return

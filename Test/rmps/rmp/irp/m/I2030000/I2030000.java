@@ -7,27 +7,29 @@
  */
 package rmp.irp.m.I2030000;
 
-import com.amonsoft.rmps.irp.m.IService;
-import com.amonsoft.rmps.irp.b.IMessage;
-import com.amonsoft.rmps.irp.b.IProcess;
-import com.amonsoft.rmps.irp.b.ISession;
-import java.util.HashMap;
-
-import rmp.util.CheckUtil;
-import com.amonsoft.util.LogUtil;
-import cons.EnvCons;
-
-import cons.irp.a.ConstUI;
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+
+import rmp.util.CheckUtil;
 import rmp.util.EnvUtil;
 import rmp.util.HttpUtil;
 import rmp.util.StringUtil;
+
+import com.amonsoft.rmps.irp.b.IMessage;
+import com.amonsoft.rmps.irp.b.IProcess;
+import com.amonsoft.rmps.irp.b.ISession;
+import com.amonsoft.rmps.irp.m.IService;
+import com.amonsoft.util.LogUtil;
+
+import cons.EnvCons;
+import cons.irp.a.ConstUI;
 
 /**
  * <ul>
@@ -37,6 +39,7 @@ import rmp.util.StringUtil;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class I2030000 implements IService
@@ -138,9 +141,7 @@ public class I2030000 implements IService
             if (l1.size() == 4)
             {
                 String[] title =
-                {
-                    "发 证 地：", "出生日期：", "性　　别：", "18位号码："
-                };
+                { "发 证 地：", "出生日期：", "性　　别：", "18位号码：" };
                 for (int t = 0; t < title.length; t += 1)
                 {
                     List l2 = ((Element) l1.get(t)).selectNodes("td");
@@ -180,18 +181,24 @@ public class I2030000 implements IService
             HashMap<Integer, String> dataList = rmp.prp.aide.P3090000.t.Util.getWeatherByCity(command);
 
             // 注册天气图标
-//            message.registerEmoticon(ConstUI.P3090000_DAY11, StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
-//                    dataList.get(8)));
-//            message.registerEmoticon(ConstUI.P3090000_DAY12, StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
-//                    dataList.get(9)));
-//            message.registerEmoticon(ConstUI.P3090000_DAY21, StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
-//                    dataList.get(15)));
-//            message.registerEmoticon(ConstUI.P3090000_DAY22, StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
-//                    dataList.get(16)));
-//            message.registerEmoticon(ConstUI.P3090000_DAY31, StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
-//                    dataList.get(20)));
-//            message.registerEmoticon(ConstUI.P3090000_DAY32, StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
-//                    dataList.get(21)));
+            // message.registerEmoticon(ConstUI.P3090000_DAY11,
+            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // dataList.get(8)));
+            // message.registerEmoticon(ConstUI.P3090000_DAY12,
+            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // dataList.get(9)));
+            // message.registerEmoticon(ConstUI.P3090000_DAY21,
+            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // dataList.get(15)));
+            // message.registerEmoticon(ConstUI.P3090000_DAY22,
+            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // dataList.get(16)));
+            // message.registerEmoticon(ConstUI.P3090000_DAY31,
+            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // dataList.get(20)));
+            // message.registerEmoticon(ConstUI.P3090000_DAY32,
+            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // dataList.get(21)));
 
             // 分段发送天气信息
             StringBuffer sb = new StringBuffer("\r\n");

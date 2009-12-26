@@ -17,6 +17,7 @@ import java.io.Serializable;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public final class K1SV1S implements Serializable, Cloneable
@@ -37,8 +38,10 @@ public final class K1SV1S implements Serializable, Cloneable
     /**
      * 默认构造器
      * 
-     * @param key key值
-     * @param value value值
+     * @param key
+     *            key值
+     * @param value
+     *            value值
      */
     public K1SV1S(String key, String value)
     {
@@ -55,7 +58,8 @@ public final class K1SV1S implements Serializable, Cloneable
     }
 
     /**
-     * @param k the k to set
+     * @param k
+     *            the k to set
      */
     public final void setK(String k)
     {
@@ -71,7 +75,8 @@ public final class K1SV1S implements Serializable, Cloneable
     }
 
     /**
-     * @param v the v to set
+     * @param v
+     *            the v to set
      */
     public final void setV(String v)
     {

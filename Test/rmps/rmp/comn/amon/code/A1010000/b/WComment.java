@@ -16,6 +16,7 @@ package rmp.comn.amon.code.A1010000.b;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class WComment
@@ -39,7 +40,8 @@ public class WComment
     }
 
     /**
-     * @param delLogMultiLine the delLogMultiLine to set
+     * @param delLogMultiLine
+     *            the delLogMultiLine to set
      */
     public void setDelLogMultiLine(boolean delLogMultiLine)
     {
@@ -55,7 +57,8 @@ public class WComment
     }
 
     /**
-     * @param delLogSingleLine the delLogSingleLine to set
+     * @param delLogSingleLine
+     *            the delLogSingleLine to set
      */
     public void setDelLogSingleLine(boolean delLogSingleLine)
     {
@@ -71,7 +74,8 @@ public class WComment
     }
 
     /**
-     * @param delLogExceptions the delLogExceptions to set
+     * @param delLogExceptions
+     *            the delLogExceptions to set
      */
     public void setDelLogExceptions(boolean delLogExceptions)
     {
@@ -87,7 +91,8 @@ public class WComment
     }
 
     /**
-     * @param delCmtDocument the delCmtDocument to set
+     * @param delCmtDocument
+     *            the delCmtDocument to set
      */
     public void setDelCmtDocument(boolean delCmtDocument)
     {
@@ -103,7 +108,8 @@ public class WComment
     }
 
     /**
-     * @param delCmtMultiLine the delCmtMultiLine to set
+     * @param delCmtMultiLine
+     *            the delCmtMultiLine to set
      */
     public void setDelCmtMultiLine(boolean delCmtMultiLine)
     {
@@ -119,7 +125,8 @@ public class WComment
     }
 
     /**
-     * @param delCmtSingleLine the delCmtSingleLine to set
+     * @param delCmtSingleLine
+     *            the delCmtSingleLine to set
      */
     public void setDelCmtSingleLine(boolean delCmtSingleLine)
     {
@@ -135,7 +142,8 @@ public class WComment
     }
 
     /**
-     * @param trimSpaceChar the trimSpaceChar to set
+     * @param trimSpaceChar
+     *            the trimSpaceChar to set
      */
     public void setTrimSpaceChar(boolean trimSpaceChar)
     {
@@ -151,7 +159,8 @@ public class WComment
     }
 
     /**
-     * @param trimBlankLine the trimBlankLine to set
+     * @param trimBlankLine
+     *            the trimBlankLine to set
      */
     public void setTrimBlankLine(boolean trimBlankLine)
     {
@@ -167,7 +176,8 @@ public class WComment
     }
 
     /**
-     * @param trimReturnTrip the trimReturnTrip to set
+     * @param trimReturnTrip
+     *            the trimReturnTrip to set
      */
     public void setTrimReturnTrip(boolean trimReturnTrip)
     {

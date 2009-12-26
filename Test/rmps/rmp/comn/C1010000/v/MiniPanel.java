@@ -23,6 +23,7 @@ import cons.comn.info.C1010000.LangRes;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class MiniPanel extends javax.swing.JPanel implements WBean
@@ -150,25 +151,18 @@ public class MiniPanel extends javax.swing.JPanel implements WBean
         this.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(p,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE).addComponent(sp_DespInfo,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addComponent(lt_SoftSite).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(lt_SoftMail)).addComponent(
-                lt_SoftName, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE).addComponent(lt_Copyright,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(p, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE).addComponent(sp_DespInfo,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE).addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                layout.createSequentialGroup().addComponent(lt_SoftSite).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(lt_SoftMail)).addComponent(
+                                lt_SoftName, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE).addComponent(lt_Copyright, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
+                        .addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(lt_SoftName).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(lt_Copyright).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp_DespInfo,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lt_SoftMail).addComponent(lt_SoftSite)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(p,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap()));
+                layout.createSequentialGroup().addContainerGap().addComponent(lt_SoftName).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(lt_Copyright)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp_DespInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lt_SoftMail).addComponent(lt_SoftSite)).addPreferredGap(
+                                javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(p, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap()));
     }
 
     /**
@@ -189,10 +183,11 @@ public class MiniPanel extends javax.swing.JPanel implements WBean
      */
     private void bt_ExitButn_Handler(java.awt.event.ActionEvent evt)
     {
-//        FForm fForm = (FForm) C1010000.getForm();
-//        fForm.setVisible(false);
-//        fForm.dispose();
+        // FForm fForm = (FForm) C1010000.getForm();
+        // fForm.setVisible(false);
+        // fForm.dispose();
     }
+
     private javax.swing.JButton bt_ExitButn;
     private javax.swing.JLabel lt_Copyright;
     private javax.swing.JLabel lt_SoftName;

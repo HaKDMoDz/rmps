@@ -23,6 +23,7 @@ import cons.prp.aide.P30A0000.ConstUI;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class DataModel extends AbstractTableModel
@@ -34,7 +35,7 @@ public class DataModel extends AbstractTableModel
      * 
      * @see javax.swing.table.TableModel#getColumnCount()
      */
-    @ Override
+    @Override
     public int getColumnCount()
     {
         return 10;
@@ -79,7 +80,7 @@ public class DataModel extends AbstractTableModel
      * 
      * @see javax.swing.table.TableModel#getRowCount()
      */
-    @ Override
+    @Override
     public int getRowCount()
     {
         return dataList != null ? dataList.size() : 0;
@@ -90,7 +91,7 @@ public class DataModel extends AbstractTableModel
      * 
      * @see javax.swing.table.TableModel#getValueAt(int, int)
      */
-    @ Override
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex)
     {
         if (dataList == null)

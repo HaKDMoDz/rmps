@@ -19,6 +19,7 @@ import java.awt.Paint;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public interface WViewShow extends WShow
@@ -26,8 +27,10 @@ public interface WViewShow extends WShow
     /**
      * 设置背景的显示图像
      * 
-     * @param image 显示图像
-     * @param layout 图像显示方式
+     * @param image
+     *            显示图像
+     * @param layout
+     *            图像显示方式
      * @return
      */
     Image setBackgroundImage(Image image, int layout);
@@ -35,7 +38,8 @@ public interface WViewShow extends WShow
     /**
      * 设置背景的渐变颜色
      * 
-     * @param paint 渐变颜色对象
+     * @param paint
+     *            渐变颜色对象
      * @return
      */
     Paint setBackgroundPaint(Paint paint);

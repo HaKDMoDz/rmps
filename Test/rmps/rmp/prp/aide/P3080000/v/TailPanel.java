@@ -30,6 +30,7 @@ import cons.prp.aide.P3080000.ConstUI;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class TailPanel extends javax.swing.JPanel implements WBackCall
@@ -50,16 +51,16 @@ public class TailPanel extends javax.swing.JPanel implements WBackCall
     /** 定时器 */
     private javax.swing.Timer tm_Timer;
     /** 背景图片 */
-    private BufferedImage bi_am;         // 上午
-    private BufferedImage bi_bg;         // 背景
-    private BufferedImage bi_gmt;        // 时区
-    private BufferedImage bi_hl;         // 高亮
-    private BufferedImage bi_pm;         // 下午
-    private BufferedImage bi_tc;         // 秒针
-    private BufferedImage[] bi_nn;         // 数值
-    private BufferedImage[] bi_wk;         // 星期
-    private BufferedImage[] bi_tz;         // 时区
-    private BufferedImage[] bi_pa;         // 正负
+    private BufferedImage bi_am; // 上午
+    private BufferedImage bi_bg; // 背景
+    private BufferedImage bi_gmt; // 时区
+    private BufferedImage bi_hl; // 高亮
+    private BufferedImage bi_pm; // 下午
+    private BufferedImage bi_tc; // 秒针
+    private BufferedImage[] bi_nn; // 数值
+    private BufferedImage[] bi_wk; // 星期
+    private BufferedImage[] bi_tz; // 时区
+    private BufferedImage[] bi_pa; // 正负
 
     // ////////////////////////////////////////////////////////////////////////
     // 构造函数区域
@@ -273,9 +274,7 @@ public class TailPanel extends javax.swing.JPanel implements WBackCall
         // 星期
         sb.append("星期：");
         String[] w =
-        {
-            "日", "一", "二", "三", "四", "五", "六"
-        };
+        { "日", "一", "二", "三", "四", "五", "六" };
         sb.append(w[cl_Calendar.get(java.util.Calendar.DAY_OF_WEEK) - 1]);
         sb.append("<br />");
         // 时刻
@@ -358,6 +357,7 @@ public class TailPanel extends javax.swing.JPanel implements WBackCall
     private void ita()
     {
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 界面组件区域
     // ////////////////////////////////////////////////////////////////////////

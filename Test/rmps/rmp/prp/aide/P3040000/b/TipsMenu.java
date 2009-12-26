@@ -25,6 +25,7 @@ import rmp.bean.K1IV2S;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class TipsMenu extends JPopupMenu
@@ -120,6 +121,7 @@ public class TipsMenu extends JPopupMenu
         }
         startIdx += s1;
     }
+
     /**  */
     private static final long serialVersionUID = -4912572279773671885L;
 }

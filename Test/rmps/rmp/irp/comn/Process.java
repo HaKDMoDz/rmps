@@ -7,10 +7,12 @@
  */
 package rmp.irp.comn;
 
-import com.amonsoft.rmps.irp.b.IProcess;
 import java.util.regex.Pattern;
+
 import rmp.irp.c.Control;
 import rmp.util.CheckUtil;
+
+import com.amonsoft.rmps.irp.b.IProcess;
 
 /**
  * <ul>
@@ -19,6 +21,7 @@ import rmp.util.CheckUtil;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class Process implements IProcess
@@ -49,7 +52,8 @@ public class Process implements IProcess
     }
 
     /**
-     * @param func the func to set
+     * @param func
+     *            the func to set
      */
     @Override
     public boolean setFunc(String func)
@@ -132,7 +136,8 @@ public class Process implements IProcess
     }
 
     /**
-     * @param step the step to set
+     * @param step
+     *            the step to set
      */
     @Override
     public void setStep(int step)
@@ -150,7 +155,8 @@ public class Process implements IProcess
     }
 
     /**
-     * @param type the type to set
+     * @param type
+     *            the type to set
      */
     @Override
     public void setType(int type)
@@ -159,7 +165,7 @@ public class Process implements IProcess
     }
 
     /**
-     *
+     * 
      * @return
      */
     @Override

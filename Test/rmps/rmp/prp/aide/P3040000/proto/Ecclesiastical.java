@@ -25,16 +25,14 @@ public abstract class Ecclesiastical extends ProtoDate
 
     public static long altOrthodoxEaster(long l)
     {
-        long l1 = (354L * l + 30L * ProtoDate.quotient(7L * l - 8L, 19D) + ProtoDate.quotient(l, 4D))
-            - ProtoDate.quotient(l, 19D) - 272L;
+        long l1 = (354L * l + 30L * ProtoDate.quotient(7L * l - 8L, 19D) + ProtoDate.quotient(l, 4D)) - ProtoDate.quotient(l, 19D) - 272L;
         return ProtoDate.kDayAfter(l1, 0);
     }
 
     public static long easter(long l)
     {
         long l1 = 1L + ProtoDate.quotient(l, 100D);
-        long l2 = ProtoDate.mod(((14L + 11L * ProtoDate.mod(l, 19L)) - ProtoDate.quotient(3L * l1, 4D))
-            + ProtoDate.quotient(5L + 8L * l1, 25D), 30L);
+        long l2 = ProtoDate.mod(((14L + 11L * ProtoDate.mod(l, 19L)) - ProtoDate.quotient(3L * l1, 4D)) + ProtoDate.quotient(5L + 8L * l1, 25D), 30L);
         long l3 = l2 != 0L && (l2 != 1L || ProtoDate.mod(l, 19L) <= 10L) ? l2 : l2 + 1L;
         long l4 = Gregorian.toFixed(l, 4, 19) - l3;
         return ProtoDate.kDayAfter(l4, 0);
@@ -49,8 +47,7 @@ public abstract class Ecclesiastical extends ProtoDate
     {
         long l1 = Gregorian.toFixed(l, 1, 1);
         double d = ProtoDate.solarLongitudeAfter(l1, ConstUI.SPRING);
-        long l2 = (long)Math.floor(ProtoDate.apparentFromLocal(ProtoDate.localFromUniversal(ProtoDate.lunarPhaseAfter(
-            d, ConstUI.FULL), ConstUI.JERUSALEM)));
+        long l2 = (long) Math.floor(ProtoDate.apparentFromLocal(ProtoDate.localFromUniversal(ProtoDate.lunarPhaseAfter(d, ConstUI.FULL), ConstUI.JERUSALEM)));
         return ProtoDate.kDayAfter(l2, 0);
     }
 

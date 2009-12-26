@@ -16,6 +16,7 @@ import com.amonsoft.rmps.irp.v.IConnect;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class Connect implements IConnect
@@ -63,7 +64,8 @@ public class Connect implements IConnect
     }
 
     /**
-     * @param host the host to set
+     * @param host
+     *            the host to set
      */
     public void setHost(String host)
     {

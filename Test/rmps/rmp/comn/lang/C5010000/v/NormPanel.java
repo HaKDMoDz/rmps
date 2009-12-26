@@ -15,10 +15,10 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
-import rmp.comn.lang.C5010000.C5010000;
-import rmp.comn.lang.C5010000.t.Util;
 import rmp.bean.FilesFilter;
 import rmp.bean.K1IV2S;
+import rmp.comn.lang.C5010000.C5010000;
+import rmp.comn.lang.C5010000.t.Util;
 import rmp.face.WBean;
 import rmp.util.CheckUtil;
 import rmp.util.FileUtil;
@@ -34,6 +34,7 @@ import rmp.util.StringUtil;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class NormPanel extends javax.swing.JPanel implements WBean
@@ -229,53 +230,45 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         this.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addComponent(tf_FilePath, javax.swing.GroupLayout.DEFAULT_SIZE, 249,
-                Short.MAX_VALUE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_FilePath).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_ReadData)).addGroup(
-                layout.createSequentialGroup().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addComponent(lb_Module).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(cb_Module,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addGroup(
-                layout.createSequentialGroup().addComponent(lb_Field).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(cb_Field,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addGroup(
-                layout.createSequentialGroup().addComponent(lb_LangHash).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_LangHash,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_Create).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(
-                bt_Delete)).addComponent(lb_LangText).addComponent(sp1,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp2,
-                javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addComponent(bt_Insert).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_SaveData))).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                layout.createSequentialGroup().addComponent(tf_FilePath, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE).addPreferredGap(
+                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_FilePath).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(
+                                        bt_ReadData)).addGroup(
+                                layout.createSequentialGroup().addGroup(
+                                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+                                                layout.createSequentialGroup().addComponent(lb_Module).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(cb_Module,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addGroup(
+                                                layout.createSequentialGroup().addComponent(lb_Field).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(cb_Field,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addGroup(
+                                                layout.createSequentialGroup().addComponent(lb_LangHash).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_LangHash,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
+                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_Create).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(bt_Delete)).addComponent(lb_LangText).addComponent(sp1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp2, javax.swing.GroupLayout.PREFERRED_SIZE, 98,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)).addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                layout.createSequentialGroup().addComponent(bt_Insert).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_SaveData)))
+                        .addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_ReadData).addComponent(bt_FilePath).addComponent(tf_FilePath, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false).addGroup(
-                layout.createSequentialGroup().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_Module).addComponent(cb_Module, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(
-                lb_Field).addComponent(cb_Field, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(
-                lb_LangHash).addComponent(tf_LangHash, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(bt_Create).addComponent(bt_Delete)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(lb_LangText).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp1,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addComponent(sp2)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE,
-                Short.MAX_VALUE).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_SaveData).addComponent(bt_Insert)).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_ReadData).addComponent(bt_FilePath).addComponent(tf_FilePath,
+                                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
+                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false).addGroup(
+                                layout.createSequentialGroup().addGroup(
+                                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_Module).addComponent(cb_Module, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(
+                                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_Field).addComponent(cb_Field,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
+                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_LangHash).addComponent(tf_LangHash,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(bt_Create)
+                                                        .addComponent(bt_Delete)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(lb_LangText).addPreferredGap(
+                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)).addComponent(sp2)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_SaveData).addComponent(bt_Insert)).addContainerGap()));
     }
 
     /**
@@ -324,9 +317,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         // ------------------------------------------------
         FilesFilter ff = new FilesFilter();
         ff.setTextInclude(new String[]
-                {
-                    ".wsc"
-                });
+        { ".wsc" });
         ff.setInclude(false);
         File tpltFile = FileUtil.showSingleFileOpen(this, false, ff);
         if (tpltFile == null || !tpltFile.exists() || !tpltFile.canRead())
@@ -523,6 +514,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
             }
         }
     }
+
     /** 新增一条语言资源 */
     private javax.swing.JButton bt_Create;
     /** 删除用户选择的一条语言资源 */

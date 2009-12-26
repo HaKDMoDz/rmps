@@ -20,6 +20,7 @@ import rmp.prp.m.ExeItem;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class ExePanel extends javax.swing.JPanel
@@ -67,6 +68,7 @@ public class ExePanel extends javax.swing.JPanel
 
         return true;
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 界面组件区域
     // ////////////////////////////////////////////////////////////////////////

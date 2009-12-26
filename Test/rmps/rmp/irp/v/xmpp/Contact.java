@@ -7,9 +7,10 @@
  */
 package rmp.irp.v.xmpp;
 
+import org.jivesoftware.smack.RosterEntry;
+
 import com.amonsoft.rmps.irp.b.ICatalog;
 import com.amonsoft.rmps.irp.b.IContact;
-import org.jivesoftware.smack.RosterEntry;
 
 /**
  * <ul>
@@ -18,6 +19,7 @@ import org.jivesoftware.smack.RosterEntry;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class Contact implements IContact

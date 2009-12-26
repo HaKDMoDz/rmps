@@ -38,7 +38,7 @@ public class ISO extends LunarDate
 
     public static long toFixed(long l, int i, int j)
     {
-        return ProtoDate.nthKDay(i, 0, Gregorian.toFixed(l - 1L, 12, 28)) + (long)j;
+        return ProtoDate.nthKDay(i, 0, Gregorian.toFixed(l - 1L, 12, 28)) + (long) j;
     }
 
     public long toFixed()
@@ -50,8 +50,8 @@ public class ISO extends LunarDate
     {
         long l1 = Gregorian.yearFromFixed(l - 3L);
         year = l < toFixed(l1 + 1L, 1, 1) ? l1 : l1 + 1L;
-        week = (int)ProtoDate.quotient(l - toFixed(year, 1, 1), 7D) + 1;
-        day = (int)ProtoDate.adjustedMod(l, 7L);
+        week = (int) ProtoDate.quotient(l - toFixed(year, 1, 1), 7D) + 1;
+        day = (int) ProtoDate.adjustedMod(l, 7L);
     }
 
     public void fromArray(int ai[])
@@ -68,8 +68,8 @@ public class ISO extends LunarDate
 
     public String format()
     {
-        return MessageFormat.format("{0}, Week {1}, {2,number,#}", new Object[]{
-            ProtoDate.nameFromDayOfWeek(toFixed(), Gregorian.dayOfWeekNames), new Integer(week), new Long(year)});
+        return MessageFormat.format("{0}, Week {1}, {2,number,#}", new Object[]
+        { ProtoDate.nameFromDayOfWeek(toFixed(), Gregorian.dayOfWeekNames), new Integer(week), new Long(year) });
     }
 
     public boolean equals(Object obj)
@@ -78,13 +78,13 @@ public class ISO extends LunarDate
             return true;
         if (!(obj instanceof ISO))
             return false;
-        ISO iso = (ISO)obj;
+        ISO iso = (ISO) obj;
         return iso.year == year && iso.week == week && iso.day == day;
     }
 
-    public long               year;
-    public int                week;
-    public int                day;
+    public long year;
+    public int week;
+    public int day;
 
     /** serialVersionUID */
     private static final long serialVersionUID = -5713176521546385225L;

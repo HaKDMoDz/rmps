@@ -14,8 +14,8 @@ import rmp.face.WBean;
  * <li>功能说明：</li>
  * <br />
  * TODO: 功能说明
- * <li>使用说明：</li>
- * <br />
+ * <li>使用说明：</li> <br />
+ * 
  * @author Amon
  */
 public class MainPanel extends javax.swing.JPanel implements WBean
@@ -36,6 +36,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
     {
         return false;
     }
+
     /** serialVersionUID */
     private static final long serialVersionUID = -7218830846338602225L;
 }

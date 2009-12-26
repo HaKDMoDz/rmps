@@ -18,6 +18,7 @@ import cons.id.PrpCons;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public interface ConstUI
@@ -144,11 +145,8 @@ public interface ConstUI
     String EXPT_SOFTICON = "softicon" + SysCons.EXTS_PICT;
     /** 图像存取顺序 */
     String[] ICON_ORDR =
-    {
-        SysCons.ICON_SIZE_0048, SysCons.ICON_SIZE_0032, SysCons.ICON_SIZE_0024,
-        SysCons.ICON_SIZE_0016, SysCons.ICON_SIZE_0256, SysCons.ICON_SIZE_0128, SysCons.ICON_SIZE_0096,
-        SysCons.ICON_SIZE_0080, SysCons.ICON_SIZE_0072, SysCons.ICON_SIZE_0064
-    };
+    { SysCons.ICON_SIZE_0048, SysCons.ICON_SIZE_0032, SysCons.ICON_SIZE_0024, SysCons.ICON_SIZE_0016, SysCons.ICON_SIZE_0256, SysCons.ICON_SIZE_0128, SysCons.ICON_SIZE_0096, SysCons.ICON_SIZE_0080,
+            SysCons.ICON_SIZE_0072, SysCons.ICON_SIZE_0064 };
     // ////////////////////////////////////////////////////////////////////////
     // 向导操作步骤
     // ////////////////////////////////////////////////////////////////////////

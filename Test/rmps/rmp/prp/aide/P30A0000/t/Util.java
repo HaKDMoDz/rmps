@@ -23,8 +23,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import rmp.util.FileUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.StringUtil;
+
+import com.amonsoft.util.LogUtil;
+
 import cons.EnvCons;
 import cons.SysCons;
 import cons.prp.aide.P30A0000.ConstUI;
@@ -37,6 +39,7 @@ import cons.prp.aide.P30A0000.ConstUI;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public final class Util
@@ -74,14 +77,16 @@ public final class Util
      * String(21)：第三天天气趋势结束图片名称<br />
      * String(22)：城市或地区的介绍<br />
      * 
-     * @param sttCity 出发城市（中文城市名称或缩写、空则默认：上海）
-     * @param endCity 抵达城市（中文城市名称或缩写、空则默认：北京）
-     * @param theDate 出发日期（String 格式：yyyy-MM-dd，如：2007-07-02，空则默认当天）
+     * @param sttCity
+     *            出发城市（中文城市名称或缩写、空则默认：上海）
+     * @param endCity
+     *            抵达城市（中文城市名称或缩写、空则默认：北京）
+     * @param theDate
+     *            出发日期（String 格式：yyyy-MM-dd，如：2007-07-02，空则默认当天）
      * @return 字符串 用,分割
      * @throws Exception
      */
-    public static List<HashMap<String, String>> getDomesticAirlinesTime(String sttCity, String endCity, String theDate)
-            throws Exception
+    public static List<HashMap<String, String>> getDomesticAirlinesTime(String sttCity, String endCity, String theDate) throws Exception
     {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         dbf.setNamespaceAware(true);
@@ -155,9 +160,12 @@ public final class Util
     /**
      * 用户把SOAP请求发送给服务器端，并返回服务器点返回的输入流
      * 
-     * @param sttCity 出发城市（中文城市名称或缩写、空则默认：上海）
-     * @param endCity 抵达城市（中文城市名称或缩写、空则默认：北京）
-     * @param theDate 出发日期（String 格式：yyyy-MM-dd，如：2007-07-02，空则默认当天）
+     * @param sttCity
+     *            出发城市（中文城市名称或缩写、空则默认：上海）
+     * @param endCity
+     *            抵达城市（中文城市名称或缩写、空则默认：北京）
+     * @param theDate
+     *            出发日期（String 格式：yyyy-MM-dd，如：2007-07-02，空则默认当天）
      * @return 服务器端返回的输入流，供客户端读取
      * @throws Exception
      */
@@ -188,7 +196,8 @@ public final class Util
     /**
      * 获取SOAP的请求头，并替换其中的标志符号为用户输入的城市
      * 
-     * @param city 用户输入的城市名称
+     * @param city
+     *            用户输入的城市名称
      * @return 客户将要发送给服务器的SOAP请求
      * @throws Exception
      */

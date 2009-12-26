@@ -12,11 +12,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import rmp.Rmps;
 import rmp.util.CheckUtil;
+
 import com.amonsoft.util.LogUtil;
+
 import cons.CfgCons;
 import cons.EnvCons;
-import rmp.Rmps;
 
 /**
  * <ul>
@@ -27,6 +29,7 @@ import rmp.Rmps;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public final class Util
@@ -77,7 +80,8 @@ public final class Util
     }
 
     /**
-     * @param adFilePath the adFilePath to set
+     * @param adFilePath
+     *            the adFilePath to set
      */
     public static void setAdFilePath(File adFilePath)
     {

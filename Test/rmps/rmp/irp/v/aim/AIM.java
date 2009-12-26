@@ -7,10 +7,18 @@
  */
 package rmp.irp.v.aim;
 
-import com.amonsoft.rmps.irp.v.IAccount;
-import com.amonsoft.rmps.irp.v.IConnect;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
+
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.rmps.irp.v.IAccount;
+import com.amonsoft.rmps.irp.v.IConnect;
+import com.amonsoft.util.LogUtil;
 import com.wilko.jaim.Buddy;
 import com.wilko.jaim.BuddyUpdateTocResponse;
 import com.wilko.jaim.ConfigTocResponse;
@@ -26,13 +34,6 @@ import com.wilko.jaim.JaimEventListener;
 import com.wilko.jaim.LoginCompleteTocResponse;
 import com.wilko.jaim.TocResponse;
 import com.wilko.jaim.Utils;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.List;
-import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>
@@ -41,6 +42,7 @@ import com.amonsoft.util.LogUtil;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class AIM implements IAccount, JaimEventListener
@@ -70,17 +72,19 @@ public class AIM implements IAccount, JaimEventListener
                 {
                     messenger = new JaimConnection(conn.getServer(), conn.getPort());
                     // Send debugging to standard output
-                    //messenger.setDebug(true);
+                    // messenger.setDebug(true);
                     messenger.connect();
                     messenger.addEventListener(this);
-                    // Must watch at least one buddy or you will not appear on buddy listings
+                    // Must watch at least one buddy or you will not appear on
+                    // buddy listings
                     messenger.watchBuddy("unknownbuddy1212");
                     messenger.logIn(conn.getUser(), conn.getPwds(), 50000);
                     // Set Deny None
                     messenger.addBlock("");
-//                    messenger.setInfo("This buddy is using <a href=\"http://jaimlib.sourceforge.net\">Jaim</a>.");
-//                    messenger.setIdle(60);      // Pretend we have been idle for a minute
-//                    messenger.setAway("I am away right now");
+                    // messenger.setInfo("This buddy is using <a href=\"http://jaimlib.sourceforge.net\">Jaim</a>.");
+                    // messenger.setIdle(60); // Pretend we have been idle for a
+                    // minute
+                    // messenger.setAway("I am away right now");
                 }
                 catch (Exception exp)
                 {
@@ -217,8 +221,9 @@ public class AIM implements IAccount, JaimEventListener
             System.out.println("We have been warned by " + er.getEvilBy());
             try
             {
-                messenger.sendEvil(er.getEvilBy(), false);     // Let's warn them back
-                messenger.addBlock(er.getEvilBy());          // And block them
+                messenger.sendEvil(er.getEvilBy(), false); // Let's warn them
+                                                           // back
+                messenger.addBlock(er.getEvilBy()); // And block them
             }
             catch (Exception e)
             {

@@ -22,8 +22,10 @@ import rmp.comn.amon.data.A2010000.b.KVItem;
 import rmp.comn.amon.data.A2010000.b.WDataBase;
 import rmp.util.CheckUtil;
 import rmp.util.FileUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.StringUtil;
+
+import com.amonsoft.util.LogUtil;
+
 import cons.SysCons;
 import cons.comn.amon.data.A2010000.ConstUI;
 import cons.db.AmonCons;
@@ -35,6 +37,7 @@ import cons.db.AmonCons;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class Util
@@ -50,9 +53,12 @@ public class Util
      * 特殊数据：bit、timestamp、uniqueidentifier<br>
      * 用户数据：<br>
      * 
-     * @param conn 数据库连接
-     * @param sid 系统标记
-     * @param key 数据库类型
+     * @param conn
+     *            数据库连接
+     * @param sid
+     *            系统标记
+     * @param key
+     *            数据库类型
      * @return
      */
     public static String exportDBM(Connection conn, String sid, String key)
@@ -119,9 +125,7 @@ public class Util
     private static String exportAsHSQLDB(ResultSet rest) throws SQLException
     {
         final String[] TYPE =
-        {
-            "VARCHAR", "CHAR", "NUMBERIC", "INTEGER", "DATA", "TIMESTAMP"
-        };
+        { "VARCHAR", "CHAR", "NUMBERIC", "INTEGER", "DATA", "TIMESTAMP" };
         StringBuffer sbTbl = new StringBuffer();
         StringBuffer sbKey = new StringBuffer();
 
@@ -321,7 +325,8 @@ public class Util
     /**
      * 获取与指定数据库数据源的连接
      * 
-     * @param wdb 数据库连接对象信息
+     * @param wdb
+     *            数据库连接对象信息
      * @return
      */
     public static Connection getConnection(WDataBase wdb)

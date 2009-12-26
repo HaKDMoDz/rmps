@@ -7,9 +7,10 @@
  */
 package rmp.irp.v.live;
 
+import net.sf.jml.MsnContact;
+
 import com.amonsoft.rmps.irp.b.ICatalog;
 import com.amonsoft.rmps.irp.b.IContact;
-import net.sf.jml.MsnContact;
 
 /**
  * <ul>
@@ -18,6 +19,7 @@ import net.sf.jml.MsnContact;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class Contact implements IContact

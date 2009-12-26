@@ -31,6 +31,7 @@ import cons.comn.rmps.C4010000.ConstUI;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class NormPanel extends javax.swing.JPanel implements WBean
@@ -280,6 +281,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
     private void scrollT2B(Graphics2D g2d)
     {
     }
+
     /** serialVersionUID */
     private static final long serialVersionUID = -865685488754467026L;
 }

@@ -7,9 +7,10 @@
  */
 package rmp.prp.aide.P3050000.v;
 
-import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.aide.P3050000.P3050000;
 import rmp.ui.link.WLinkLabel;
+
+import com.amonsoft.rmps.prp.IPrpPlus;
 
 /**
  * <ul>
@@ -20,6 +21,7 @@ import rmp.ui.link.WLinkLabel;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class TailPanel

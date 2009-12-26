@@ -7,11 +7,8 @@
  */
 package rmp.irp.v.live;
 
-import com.amonsoft.rmps.irp.v.IAccount;
-import com.amonsoft.rmps.irp.v.IConnect;
-import com.amonsoft.rmps.irp.b.IContact;
-import com.amonsoft.rmps.irp.b.IStatus;
 import java.util.List;
+
 import net.sf.jml.MsnContact;
 import net.sf.jml.MsnMessenger;
 import net.sf.jml.MsnProtocol;
@@ -25,6 +22,11 @@ import net.sf.jml.message.MsnInstantMessage;
 import net.sf.jml.message.MsnSystemMessage;
 import net.sf.jml.message.MsnUnknownMessage;
 import rmp.irp.c.Control;
+
+import com.amonsoft.rmps.irp.b.IContact;
+import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.rmps.irp.v.IAccount;
+import com.amonsoft.rmps.irp.v.IConnect;
 import com.amonsoft.util.LogUtil;
 
 /**
@@ -34,6 +36,7 @@ import com.amonsoft.util.LogUtil;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class Live extends MsnAdapter implements IAccount
@@ -72,20 +75,14 @@ public class Live extends MsnAdapter implements IAccount
 
                 messenger = MsnMessengerFactory.createMsnMessenger(connect.getUser(), connect.getPwds());
                 messenger.setSupportedProtocol(new MsnProtocol[]
-                        {
-                            MsnProtocol.MSNP12,
-                            MsnProtocol.MSNP11,
-                            MsnProtocol.MSNP10,
-                            MsnProtocol.MSNP9,
-                            MsnProtocol.MSNP8
-                        });
+                { MsnProtocol.MSNP12, MsnProtocol.MSNP11, MsnProtocol.MSNP10, MsnProtocol.MSNP9, MsnProtocol.MSNP8 });
                 // messenger.setLogIncoming(true);
                 // messenger.setLogOutgoing(true);
                 messenger.addListener(this);
                 messenger.login();
                 messenger.getOwner().setInitStatus(MsnUserStatus.ONLINE);
-//                messenger.getOwner().setDisplayName("小木");
-//                messenger.getOwner().getDisplayName();
+                // messenger.getOwner().setDisplayName("小木");
+                // messenger.getOwner().getDisplayName();
                 break;
             case IStatus.DOWN:
                 messenger.logout();

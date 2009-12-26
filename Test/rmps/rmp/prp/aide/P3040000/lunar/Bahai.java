@@ -40,7 +40,7 @@ public class Bahai extends LunarDate
 
     public static long toFixed(long l, int i, int j, int k, int i1)
     {
-        long l1 = ((361L * (l - 1L) + (long)(19 * (i - 1)) + (long)j) - 1L) + Gregorian.yearFromFixed(EPOCH);
+        long l1 = ((361L * (l - 1L) + (long) (19 * (i - 1)) + (long) j) - 1L) + Gregorian.yearFromFixed(EPOCH);
         long l2;
         if (k == 0)
             l2 = 342L;
@@ -48,7 +48,7 @@ public class Bahai extends LunarDate
             l2 = Gregorian.isLeapYear(l1 + 1L) ? 347 : '\u015A';
         else
             l2 = 19 * (k - 1);
-        return Gregorian.toFixed(l1, 3, 20) + l2 + (long)i1;
+        return Gregorian.toFixed(l1, 3, 20) + l2 + (long) i1;
     }
 
     public long toFixed()
@@ -60,18 +60,18 @@ public class Bahai extends LunarDate
     {
         long l1 = Gregorian.yearFromFixed(l);
         long l2 = Gregorian.yearFromFixed(EPOCH);
-        long l3 = l1 - l2 - (long)(l > Gregorian.toFixed(l1, 3, 20) ? 0 : 1);
+        long l3 = l1 - l2 - (long) (l > Gregorian.toFixed(l1, 3, 20) ? 0 : 1);
         major = 1L + ProtoDate.quotient(l3, 361D);
-        cycle = 1 + (int)ProtoDate.quotient(ProtoDate.mod(l3, 361L), 19D);
-        year = 1 + (int)ProtoDate.mod(l3, 19L);
+        cycle = 1 + (int) ProtoDate.quotient(ProtoDate.mod(l3, 361L), 19D);
+        year = 1 + (int) ProtoDate.mod(l3, 19L);
         long l4 = l - toFixed(major, cycle, year, 1, 1);
         if (l >= toFixed(major, cycle, year, 19, 1))
             month = 19;
         else if (l >= toFixed(major, cycle, year, 0, 1))
             month = 0;
         else
-            month = (int)(1L + ProtoDate.quotient(l4, 19D));
-        day = (int)((l + 1L) - toFixed(major, cycle, year, month, 1));
+            month = (int) (1L + ProtoDate.quotient(l4, 19D));
+        day = (int) ((l + 1L) - toFixed(major, cycle, year, month, 1));
     }
 
     public void fromArray(int ai[])
@@ -102,10 +102,9 @@ public class Bahai extends LunarDate
 
     public String format()
     {
-        return MessageFormat.format("{0}, {1} {2}, {3} of Vahid {4}, Kull-i-Shay {5} B.E.", new Object[]{
-            ProtoDate.nameFromDayOfWeek(toFixed(), dayOfWeekNames), ProtoDate.nameFromNumber(day, dayOfMonthNames),
-            ProtoDate.nameFromMonth(month + 1, monthNames), ProtoDate.nameFromNumber(year, yearNames),
-            new Integer(cycle), new Long(major)});
+        return MessageFormat.format("{0}, {1} {2}, {3} of Vahid {4}, Kull-i-Shay {5} B.E.", new Object[]
+        { ProtoDate.nameFromDayOfWeek(toFixed(), dayOfWeekNames), ProtoDate.nameFromNumber(day, dayOfMonthNames), ProtoDate.nameFromMonth(month + 1, monthNames),
+                ProtoDate.nameFromNumber(year, yearNames), new Integer(cycle), new Long(major) });
     }
 
     public boolean equals(Object obj)
@@ -114,28 +113,26 @@ public class Bahai extends LunarDate
             return true;
         if (!(obj instanceof Bahai))
             return false;
-        Bahai bahai = (Bahai)obj;
-        return bahai.major == major && bahai.cycle == cycle && bahai.year == year && bahai.month == month
-            && bahai.day == day;
+        Bahai bahai = (Bahai) obj;
+        return bahai.major == major && bahai.cycle == cycle && bahai.year == year && bahai.month == month && bahai.day == day;
     }
 
-    public long                major;
-    public int                 cycle;
-    public int                 year;
-    public int                 month;
-    public int                 day;
-    public static final long   EPOCH             = Gregorian.toFixed(1844L, 3, 21);
-    public static final int    AYYAM_I_HA        = 0;
-    public static final String dayOfWeekNames[]  = {"Jamal", "Kamal", "Fidal", "`Idal", "Istijlal", "Istiqlal", "Jalal"};
-    public static final String dayOfMonthNames[] = {"Baha'", "Jalal", "Jamal", "`Azamat", "Nur", "Rahmat", "Kalimat",
-        "Kamal", "Asma'", "`Izzat", "Mashiyyat", "`Ilm", "Qudrat", "Qawl", "Masa'il", "Sharaf", "Sultan", "Mulk",
-        "`Ala'"                                  };
-    public static final String monthNames[]      = {"Ayyam-i-Ha", "Baha'", "Jalal", "Jamal", "`Azamat", "Nur",
-        "Rahmat", "Kalimat", "Kamal", "Asma'", "`Izzat", "Mashiyyat", "`Ilm", "Qudrat", "Qawl", "Masa'il", "Sharaf",
-        "Sultan", "Mulk", "`Ala'"                };
-    public static final String yearNames[]       = {"Alif", "Ba'", "Ab", "Dal", "Bab", "Vav", "Abad", "Jad", "Baha'",
-        "Hubb", "Bahhaj", "Javab", "Ahad", "Vahhab", "Vidad", "Badi'", "Bahi", "Abha", "Vahid"};
+    public long major;
+    public int cycle;
+    public int year;
+    public int month;
+    public int day;
+    public static final long EPOCH = Gregorian.toFixed(1844L, 3, 21);
+    public static final int AYYAM_I_HA = 0;
+    public static final String dayOfWeekNames[] =
+    { "Jamal", "Kamal", "Fidal", "`Idal", "Istijlal", "Istiqlal", "Jalal" };
+    public static final String dayOfMonthNames[] =
+    { "Baha'", "Jalal", "Jamal", "`Azamat", "Nur", "Rahmat", "Kalimat", "Kamal", "Asma'", "`Izzat", "Mashiyyat", "`Ilm", "Qudrat", "Qawl", "Masa'il", "Sharaf", "Sultan", "Mulk", "`Ala'" };
+    public static final String monthNames[] =
+    { "Ayyam-i-Ha", "Baha'", "Jalal", "Jamal", "`Azamat", "Nur", "Rahmat", "Kalimat", "Kamal", "Asma'", "`Izzat", "Mashiyyat", "`Ilm", "Qudrat", "Qawl", "Masa'il", "Sharaf", "Sultan", "Mulk", "`Ala'" };
+    public static final String yearNames[] =
+    { "Alif", "Ba'", "Ab", "Dal", "Bab", "Vav", "Abad", "Jad", "Baha'", "Hubb", "Bahhaj", "Javab", "Ahad", "Vahhab", "Vidad", "Badi'", "Bahi", "Abha", "Vahid" };
 
     /** serialVersionUID */
-    private static final long  serialVersionUID  = 6612815110842006429L;
+    private static final long serialVersionUID = 6612815110842006429L;
 }

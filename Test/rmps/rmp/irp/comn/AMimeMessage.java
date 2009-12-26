@@ -16,6 +16,7 @@ import com.amonsoft.rmps.irp.b.IMimeMessage;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public abstract class AMimeMessage extends AMessage implements IMimeMessage

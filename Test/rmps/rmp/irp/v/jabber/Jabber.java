@@ -11,8 +11,9 @@
  */
 package rmp.irp.v.jabber;
 
-import com.amonsoft.rmps.irp.v.IConnect;
 import rmp.irp.v.xmpp.XMPP;
+
+import com.amonsoft.rmps.irp.v.IConnect;
 
 /**
  * <ul>
@@ -21,6 +22,7 @@ import rmp.irp.v.xmpp.XMPP;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class Jabber extends XMPP

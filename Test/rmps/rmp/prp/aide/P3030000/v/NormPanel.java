@@ -14,8 +14,10 @@ import rmp.face.WBean;
 import rmp.prp.aide.P3030000.P3030000;
 import rmp.prp.aide.P3030000.m.CodeData;
 import rmp.util.BeanUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
+
+import com.amonsoft.util.LogUtil;
+
 import cons.prp.aide.P3030000.LangRes;
 
 /**
@@ -25,6 +27,7 @@ import cons.prp.aide.P3030000.LangRes;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class NormPanel extends javax.swing.JPanel implements WBean
@@ -92,29 +95,21 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         this.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(modePanel1,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(sp2,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE).addComponent(userPanel1,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(bt_Query).addComponent(viewPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(modePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE).addGroup(
+                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                layout.createSequentialGroup().addGroup(
+                                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(sp2, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                                                .addComponent(userPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)).addPreferredGap(
+                                        javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
+                                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(bt_Query).addComponent(viewPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(modePanel1,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(userPanel1,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(bt_Query)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(viewPanel1,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(sp2, javax.swing.GroupLayout.DEFAULT_SIZE,
-                208, Short.MAX_VALUE)).addContainerGap()));
+                layout.createSequentialGroup().addContainerGap().addComponent(modePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                        javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(userPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(bt_Query)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(viewPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(sp2, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)).addContainerGap()));
     }
 
     /**
@@ -341,18 +336,14 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         viewPanel.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(ck_ColumnCH).addComponent(ck_Column16).addComponent(ck_Column10).addComponent(ck_Column08).addComponent(
-                ck_Column02).addComponent(ck_FixedSize).addComponent(sp1, javax.swing.GroupLayout.DEFAULT_SIZE,
-                71, Short.MAX_VALUE)).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(ck_ColumnCH).addComponent(ck_Column16).addComponent(ck_Column10).addComponent(ck_Column08)
+                                .addComponent(ck_Column02).addComponent(ck_FixedSize).addComponent(sp1, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addComponent(ck_ColumnCH).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(ck_Column16).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(ck_Column10).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(ck_Column08).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(ck_Column02).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(sp1,
-                javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(ck_FixedSize)));
+                layout.createSequentialGroup().addComponent(ck_ColumnCH).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(ck_Column16).addPreferredGap(
+                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(ck_Column10).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(ck_Column08)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(ck_Column02).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(sp1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ck_FixedSize)));
 
         return viewPanel;
     }
@@ -625,6 +616,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
             return;
         }
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 界面变量区域
     // ////////////////////////////////////////////////////////////////////////

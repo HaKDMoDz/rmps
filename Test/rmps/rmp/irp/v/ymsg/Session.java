@@ -7,14 +7,16 @@
  */
 package rmp.irp.v.ymsg;
 
-import com.amonsoft.rmps.irp.b.IContact;
-import com.amonsoft.rmps.irp.b.IMessage;
-import com.amonsoft.rmps.irp.b.IMimeMessage;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import rmp.irp.comn.ASession;
+
+import com.amonsoft.rmps.irp.b.IContact;
+import com.amonsoft.rmps.irp.b.IMessage;
+import com.amonsoft.rmps.irp.b.IMimeMessage;
 
 /**
  * <ul>
@@ -23,6 +25,7 @@ import rmp.irp.comn.ASession;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class Session extends ASession

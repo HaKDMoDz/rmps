@@ -13,10 +13,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-import rmp.util.ImageUtil;
 import com.amonsoft.util.LogUtil;
-import cons.EnvCons;
-import cons.prp.aide.P3040000.ConstUI;
 
 /**
  * <ul>
@@ -27,6 +24,7 @@ import cons.prp.aide.P3040000.ConstUI;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class DatePanel extends JPanel
@@ -44,7 +42,8 @@ public class DatePanel extends JPanel
     {
         try
         {
-            //bi_BgImage = ImageUtil.readJarImage(EnvCons.PATH_P3040000, ConstUI.PATH_BG);
+            // bi_BgImage = ImageUtil.readJarImage(EnvCons.PATH_P3040000,
+            // ConstUI.PATH_BG);
         }
         catch (Exception exp)
         {
@@ -75,6 +74,7 @@ public class DatePanel extends JPanel
         g.drawImage(bi_BgImage, x, y, this);
 
     }
+
     /** serialVersionUID */
     private static final long serialVersionUID = -1586233476753939906L;
 }

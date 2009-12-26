@@ -7,14 +7,17 @@
  */
 package rmp.irp.v.xmpp;
 
+import java.io.File;
+
+import org.jivesoftware.smack.Chat;
+import org.jivesoftware.smack.XMPPException;
+
+import rmp.irp.comn.ASession;
+
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IMimeMessage;
 import com.amonsoft.util.LogUtil;
-import java.io.File;
-import org.jivesoftware.smack.Chat;
-import org.jivesoftware.smack.XMPPException;
-import rmp.irp.comn.ASession;
 
 /**
  * <ul>
@@ -23,6 +26,7 @@ import rmp.irp.comn.ASession;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class Session extends ASession

@@ -8,9 +8,11 @@
 package rmp.comn.C1010000.v;
 
 import rmp.comn.C1010000.C1010000;
-import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.ui.link.WLinkLabel;
 import rmp.util.BeanUtil;
+
+import com.amonsoft.rmps.prp.IPrpPlus;
+
 import cons.comn.info.C1010000.ConstUI;
 import cons.comn.info.C1010000.LangRes;
 
@@ -23,6 +25,7 @@ import cons.comn.info.C1010000.LangRes;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class TailPanel
@@ -113,6 +116,7 @@ public class TailPanel
         ll_SoftMail.setAutoOpenLink(true);
         ll_SoftMail.setLinkUrl("mailto:" + ConstUI.URL_MAIL);
     }
+
     private javax.swing.JLabel lb_DespInfo;
     private WLinkLabel ll_SoftMail;
     private WLinkLabel ll_SoftSite;

@@ -7,32 +7,35 @@
  */
 package rmp.irp.v.xmpp;
 
-import com.amonsoft.rmps.irp.v.IAccount;
-import com.amonsoft.rmps.irp.v.IConnect;
-import com.amonsoft.rmps.irp.b.IContact;
-import com.amonsoft.rmps.irp.b.IStatus;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManagerListener;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.ConnectionListener;
 import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.PacketListener;
-import org.jivesoftware.smack.XMPPConnection;
-import org.jivesoftware.smack.XMPPException;
-import org.jivesoftware.smack.packet.Packet;
-import org.jivesoftware.smack.packet.Presence;
-import com.amonsoft.util.LogUtil;
-import java.util.ArrayList;
 import org.jivesoftware.smack.Roster;
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.RosterListener;
 import org.jivesoftware.smack.SASLAuthentication;
+import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.filter.PacketFilter;
+import org.jivesoftware.smack.packet.Packet;
+import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.RosterPacket;
+
 import rmp.irp.c.Control;
 import rmp.util.CheckUtil;
+
+import com.amonsoft.rmps.irp.b.IContact;
+import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.rmps.irp.v.IAccount;
+import com.amonsoft.rmps.irp.v.IConnect;
+import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>
@@ -41,6 +44,7 @@ import rmp.util.CheckUtil;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class XMPP implements IAccount, ConnectionListener, PacketListener, RosterListener, MessageListener, ChatManagerListener
@@ -51,7 +55,7 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
 
     public XMPP()
     {
-        //XMPPConnection.DEBUG_ENABLED = true;
+        // XMPPConnection.DEBUG_ENABLED = true;
     }
 
     @Override
@@ -72,8 +76,8 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
                 try
                 {
                     ConnectionConfiguration config = new ConnectionConfiguration(connect.getHost(), connect.getPort(), connect.getServer());
-//                    config.setCompressionEnabled(true);
-//                    config.setSASLAuthenticationEnabled(true);
+                    // config.setCompressionEnabled(true);
+                    // config.setSASLAuthenticationEnabled(true);
 
                     messenger = new XMPPConnection(config);
                     messenger.connect();
@@ -98,11 +102,13 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
                     Roster roster = messenger.getRoster();
                     roster.setSubscriptionMode(Roster.SubscriptionMode.accept_all);
                     roster.addRosterListener(this);
-//                    messenger.addPacketWriterListener(this, filter);
+                    // messenger.addPacketWriterListener(this, filter);
 
                     messenger.getChatManager().addChatListener(this);
-//                    Chat chat = messenger.getChatManager().createChat("amon.hm@gmail.com", this);
-//                    chat.sendMessage("haha");
+                    // Chat chat =
+                    // messenger.getChatManager().createChat("amon.hm@gmail.com",
+                    // this);
+                    // chat.sendMessage("haha");
                 }
                 catch (XMPPException exp)
                 {

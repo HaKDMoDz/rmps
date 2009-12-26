@@ -25,6 +25,7 @@ import cons.prp.aide.P3020000.ConstUI;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public final class Util
@@ -41,16 +42,20 @@ public final class Util
      * 文件重命名<br />
      * 此处不能使用trim()方法，用户输入空格也做为命名字符
      * 
-     * @param srcFilePath 重命名原文件夹路径
-     * @param dstFilePath 重命名目标文件夹路径
-     * @param ruleText 命名规则
-     * @param nameList 文件名称列表
-     * @param doRename 是否进行文件命名：true文件命名，false仅预览结果
+     * @param srcFilePath
+     *            重命名原文件夹路径
+     * @param dstFilePath
+     *            重命名目标文件夹路径
+     * @param ruleText
+     *            命名规则
+     * @param nameList
+     *            文件名称列表
+     * @param doRename
+     *            是否进行文件命名：true文件命名，false仅预览结果
      * @throws Exception
      * @return
      */
-    public static boolean reNameFile(String srcFilePath, String dstFilePath, String ruleText, List<FileBean> nameList,
-            boolean doRename) throws Exception
+    public static boolean reNameFile(String srcFilePath, String dstFilePath, String ruleText, List<FileBean> nameList, boolean doRename) throws Exception
     {
         // 重命名公式检测与校正
         reviseRule(ruleText);
@@ -297,9 +302,12 @@ public final class Util
     /**
      * 进行文件重命名
      * 
-     * @param srcFilePath 重命名原文件夹路径
-     * @param dstFilePath 重命名目标文件夹路径
-     * @param nameList 文件名称列表
+     * @param srcFilePath
+     *            重命名原文件夹路径
+     * @param dstFilePath
+     *            重命名目标文件夹路径
+     * @param nameList
+     *            文件名称列表
      */
     public static void doRename(String srcFilePath, String dstFilePath, List<FileBean> nameList)
     {
@@ -310,9 +318,12 @@ public final class Util
     /**
      * 临时命名，避免文件命名冲突
      * 
-     * @param srcFilePath 重命名原文件夹路径
-     * @param dstFilePath 重命名目标文件夹路径
-     * @param nameList 文件名称列表
+     * @param srcFilePath
+     *            重命名原文件夹路径
+     * @param dstFilePath
+     *            重命名目标文件夹路径
+     * @param nameList
+     *            文件名称列表
      */
     private static void tempNamed(String srcFilePath, String dstFilePath, List<FileBean> nameList)
     {
@@ -326,9 +337,12 @@ public final class Util
     /**
      * 正式文件命名
      * 
-     * @param srcFilePath 重命名原文件夹路径
-     * @param dstFilePath 重命名目标文件夹路径
-     * @param nameList 文件名称列表
+     * @param srcFilePath
+     *            重命名原文件夹路径
+     * @param dstFilePath
+     *            重命名目标文件夹路径
+     * @param nameList
+     *            文件名称列表
      */
     private static void realNamed(String srcFilePath, String dstFilePath, List<FileBean> nameList)
     {

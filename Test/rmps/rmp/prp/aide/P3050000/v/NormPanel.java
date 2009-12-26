@@ -7,7 +7,6 @@
  */
 package rmp.prp.aide.P3050000.v;
 
-import com.amonsoft.rmps.prp.v.IView;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,9 +27,12 @@ import rmp.prp.aide.P3050000.b.ItemBean;
 import rmp.prp.aide.P3050000.m.CRC64;
 import rmp.prp.aide.P3050000.m.SecureKey;
 import rmp.util.BeanUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.StringUtil;
+
+import com.amonsoft.rmps.prp.v.IView;
+import com.amonsoft.util.LogUtil;
+
 import cons.prp.aide.P3050000.ConstUI;
 import cons.prp.aide.P3050000.LangRes;
 
@@ -43,6 +45,7 @@ import cons.prp.aide.P3050000.LangRes;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class NormPanel extends javax.swing.JPanel implements IView
@@ -240,29 +243,19 @@ public class NormPanel extends javax.swing.JPanel implements IView
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_FilePanel);
         pl_FilePanel.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addComponent(lb_SrcfList).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE).addComponent(bt_AddFiles,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_DelFiles,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addComponent(sp_SrcfList,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE).addGroup(
-                layout.createSequentialGroup().addComponent(lb_DstfList).addContainerGap()).addComponent(sp_DstfList,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE));
+                layout.createSequentialGroup().addComponent(lb_SrcfList).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE).addComponent(bt_AddFiles,
+                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
+                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_DelFiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                        javax.swing.GroupLayout.PREFERRED_SIZE)).addComponent(sp_SrcfList, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE).addGroup(
+                layout.createSequentialGroup().addComponent(lb_DstfList).addContainerGap()).addComponent(sp_DstfList, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SrcfList).addComponent(bt_DelFiles, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(
-                bt_AddFiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp_SrcfList,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(lb_DstfList).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp_DstfList,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SrcfList).addComponent(bt_DelFiles, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(bt_AddFiles, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(
+                        sp_SrcfList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
+                        javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(lb_DstfList).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp_DstfList,
+                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)));
     }
 
     /**
@@ -303,18 +296,13 @@ public class NormPanel extends javax.swing.JPanel implements IView
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_TextPanel);
         pl_TextPanel.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addComponent(lb_SrctArea).addContainerGap(158, Short.MAX_VALUE)).addComponent(sp_SrctArea, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE).addGroup(
-                layout.createSequentialGroup().addComponent(lb_DsttArea).addContainerGap()).addComponent(sp_DsttArea,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE));
+                layout.createSequentialGroup().addComponent(lb_SrctArea).addContainerGap(158, Short.MAX_VALUE)).addComponent(sp_SrctArea, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                .addGroup(layout.createSequentialGroup().addComponent(lb_DsttArea).addContainerGap()).addComponent(sp_DsttArea, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addComponent(lb_SrctArea).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp_SrctArea,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(lb_DsttArea).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp_DsttArea,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)));
+                layout.createSequentialGroup().addComponent(lb_SrctArea).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp_SrctArea,
+                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
+                        javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(lb_DsttArea).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp_DsttArea,
+                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)));
     }
 
     /**
@@ -385,41 +373,29 @@ public class NormPanel extends javax.swing.JPanel implements IView
         this.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(sp01,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE).addComponent(pl_ModePanel,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE).addGroup(
-                layout.createSequentialGroup().addComponent(cb_CipherTp, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(cb_CipherNm, 0, 100,
-                Short.MAX_VALUE)).addComponent(pl_UserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 230,
-                Short.MAX_VALUE).addComponent(pl_CardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 230,
-                Short.MAX_VALUE).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addComponent(pb_ProcStat, javax.swing.GroupLayout.DEFAULT_SIZE, 96,
-                Short.MAX_VALUE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_EnCipher).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_DeCipher))).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(sp01, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE).addComponent(pl_ModePanel,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE).addGroup(
+                                layout.createSequentialGroup().addComponent(cb_CipherTp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(cb_CipherNm, 0, 100, Short.MAX_VALUE))
+                                .addComponent(pl_UserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE).addComponent(pl_CardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 230,
+                                        Short.MAX_VALUE).addGroup(
+                                        javax.swing.GroupLayout.Alignment.TRAILING,
+                                        layout.createSequentialGroup().addComponent(pb_ProcStat, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE).addPreferredGap(
+                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_EnCipher).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(bt_DeCipher))).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(pl_ModePanel,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(cb_CipherTp,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(cb_CipherNm,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp01,
-                javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(pl_UserPanel,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(pl_CardPanel,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE,
-                Short.MAX_VALUE).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_DeCipher).addComponent(bt_EnCipher)).addComponent(pb_ProcStat, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addContainerGap()));
+                layout.createSequentialGroup().addContainerGap().addComponent(pl_ModePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                        javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(cb_CipherTp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(cb_CipherNm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp01, javax.swing.GroupLayout.PREFERRED_SIZE,
+                        10, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(pl_UserPanel,
+                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
+                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(pl_CardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                        javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_DeCipher).addComponent(bt_EnCipher)).addComponent(pb_ProcStat,
+                                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addContainerGap()));
     }
 
     /**
@@ -1375,10 +1351,14 @@ public class NormPanel extends javax.swing.JPanel implements IView
     /**
      * 密码算法实例化
      * 
-     * @param algorithm 密码算法名称
-     * @param userPwd 用户口令
-     * @param mode 密码模式
-     * @param keySize 口令长度需求
+     * @param algorithm
+     *            密码算法名称
+     * @param userPwd
+     *            用户口令
+     * @param mode
+     *            密码模式
+     * @param keySize
+     *            口令长度需求
      * @return
      */
     private Cipher initCipher(String algorithm, byte[] userPwd, int mode, int keySize)
@@ -1702,8 +1682,10 @@ public class NormPanel extends javax.swing.JPanel implements IView
     /**
      * 文件密码运算
      * 
-     * @param cipher 算法实例
-     * @param srcFile 明文数据文件
+     * @param cipher
+     *            算法实例
+     * @param srcFile
+     *            明文数据文件
      * @return 密文数据文件
      * @throws Exception
      */
@@ -1771,7 +1753,8 @@ public class NormPanel extends javax.swing.JPanel implements IView
     /**
      * 由明文文件路径获得对应密文文件路径
      * 
-     * @param srcFile 明文文件路径
+     * @param srcFile
+     *            明文文件路径
      * @return
      */
     private File getEncryptFile(K1SV2S kvItem)
@@ -1815,6 +1798,7 @@ public class NormPanel extends javax.swing.JPanel implements IView
         }
         return dstFile;
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 界面变量区域
     // ////////////////////////////////////////////////////////////////////////

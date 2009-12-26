@@ -18,6 +18,7 @@ import cons.SysCons;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public interface ConstUI
@@ -36,10 +37,10 @@ public interface ConstUI
     // ----------------------------------------------------
     String PROP_SKINNAME = "skinname";
     /** 基本界面风格 */
-    String SKIN_BASIC_NUM = "basic_num";     // 风格数量
-    String SKIN_BASIC_TXT = "basic_txt";     // 显示名称
-    String SKIN_BASIC_TIP = "basic_tip";     // 快捷提示
-    String SKIN_BASIC_KEY = "basic_key";     // 类路径
+    String SKIN_BASIC_NUM = "basic_num"; // 风格数量
+    String SKIN_BASIC_TXT = "basic_txt"; // 显示名称
+    String SKIN_BASIC_TIP = "basic_tip"; // 快捷提示
+    String SKIN_BASIC_KEY = "basic_key"; // 类路径
     /** 定制界面风格 */
     String SKIN_SYNTH_NUM = "synth_num";
     String SKIN_SYNTH_TXT = "synth_txt";

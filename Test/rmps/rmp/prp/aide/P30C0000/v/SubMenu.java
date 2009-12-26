@@ -19,11 +19,12 @@ import rmp.prp.aide.P30C0000.t.Util;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class SubMenu
 {
-    private P30C0000          ms_MainSoft;
+    private P30C0000 ms_MainSoft;
     private javax.swing.JMenu mm_MainMenu;
 
     /**
@@ -58,7 +59,7 @@ public class SubMenu
         mi_INetAddr.setText("我的地址");
         mi_INetAddr.addActionListener(new java.awt.event.ActionListener()
         {
-            @ Override
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 mi_INetAddr_Handler(evt);

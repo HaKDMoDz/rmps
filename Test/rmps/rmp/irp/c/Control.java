@@ -7,21 +7,25 @@
  */
 package rmp.irp.c;
 
-import com.amonsoft.rmps.irp.c.IControl;
-import com.amonsoft.rmps.irp.b.IMessage;
-import com.amonsoft.rmps.irp.b.IProcess;
-import com.amonsoft.rmps.irp.m.IService;
-import com.amonsoft.rmps.irp.b.ISession;
-import com.amonsoft.util.LogUtil;
-import cons.EnvCons;
 import java.io.FileInputStream;
 import java.util.HashMap;
+
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+
 import rmp.irp.m.help.Help;
 import rmp.util.EnvUtil;
 import rmp.util.StringUtil;
+
+import com.amonsoft.rmps.irp.b.IMessage;
+import com.amonsoft.rmps.irp.b.IProcess;
+import com.amonsoft.rmps.irp.b.ISession;
+import com.amonsoft.rmps.irp.c.IControl;
+import com.amonsoft.rmps.irp.m.IService;
+import com.amonsoft.util.LogUtil;
+
+import cons.EnvCons;
 
 /**
  * <ul>
@@ -108,7 +112,8 @@ public class Control implements IControl
             services.put("", help);
 
             LogUtil.log("IRPS：Control 初始化成功！");
-        } catch (Exception exp)
+        }
+        catch (Exception exp)
         {
             LogUtil.exception(exp);
         }

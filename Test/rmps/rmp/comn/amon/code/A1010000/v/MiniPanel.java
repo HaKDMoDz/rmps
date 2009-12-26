@@ -36,6 +36,7 @@ import rmp.face.WBean;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class MiniPanel extends javax.swing.JPanel implements WBean
@@ -80,8 +81,7 @@ public class MiniPanel extends javax.swing.JPanel implements WBean
 
     private void b_Handler(java.awt.event.ActionEvent evt)
     {
-        int option = JOptionPane.showConfirmDialog(this,
-                "此代码清除操作将直接在代码源文件上进行，所有改变无法恢复。系统无法保证所有操作都是正常的，请先备份您的源程序代码！\n确定要进行下一步么？");
+        int option = JOptionPane.showConfirmDialog(this, "此代码清除操作将直接在代码源文件上进行，所有改变无法恢复。系统无法保证所有操作都是正常的，请先备份您的源程序代码！\n确定要进行下一步么？");
         if (option != JOptionPane.YES_OPTION)
         {
             return;
@@ -249,5 +249,6 @@ public class MiniPanel extends javax.swing.JPanel implements WBean
         BufferedWriter bw = new BufferedWriter(osw);
         return bw;
     }
+
     private javax.swing.JButton b;
 }

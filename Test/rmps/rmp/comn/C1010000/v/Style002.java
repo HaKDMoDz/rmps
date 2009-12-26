@@ -16,7 +16,9 @@ import javax.swing.ImageIcon;
 import rmp.comn.C1010000.C1010000;
 import rmp.face.WBean;
 import rmp.ui.link.WLinkLabel;
+
 import com.amonsoft.util.LogUtil;
+
 import cons.comn.info.C1010000.ConstUI;
 
 /**
@@ -27,6 +29,7 @@ import cons.comn.info.C1010000.ConstUI;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class Style002 extends javax.swing.JPanel implements WBean
@@ -173,35 +176,30 @@ public class Style002 extends javax.swing.JPanel implements WBean
         this.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_SoftName).addComponent(lb_SoftEdit).addComponent(lb_SoftMail).addComponent(lb_SoftSite)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lt_SoftName).addComponent(lt_SoftEdit).addComponent(lt_SoftMail)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE).addComponent(
-                pl_SoftIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addComponent(lt_SoftSite)).addContainerGap()).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addContainerGap(232, Short.MAX_VALUE).addComponent(bt_ExitButn).addGap(
-                10, 10, 10)).addGroup(
-                layout.createSequentialGroup().addGap(10, 10, 10).addComponent(sp_DespInfo,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE).addContainerGap(12, Short.MAX_VALUE)));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_SoftName).addComponent(lb_SoftEdit).addComponent(lb_SoftMail).addComponent(lb_SoftSite))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+                                        layout.createSequentialGroup().addGroup(
+                                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lt_SoftName).addComponent(lt_SoftEdit).addComponent(lt_SoftMail))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE).addComponent(pl_SoftIcon,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lt_SoftSite)).addContainerGap()).addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                layout.createSequentialGroup().addContainerGap(232, Short.MAX_VALUE).addComponent(bt_ExitButn).addGap(10, 10, 10)).addGroup(
+                layout.createSequentialGroup().addGap(10, 10, 10).addComponent(sp_DespInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE).addContainerGap(12, Short.MAX_VALUE)));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SoftName).addComponent(lt_SoftName)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SoftEdit).addComponent(lt_SoftEdit)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SoftMail).addComponent(lt_SoftMail))).addComponent(pl_SoftIcon,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SoftSite).addComponent(lt_SoftSite)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp_DespInfo, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE,
-                Short.MAX_VALUE).addComponent(bt_ExitButn).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+                                layout.createSequentialGroup().addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SoftName).addComponent(lt_SoftName))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SoftEdit).addComponent(lt_SoftEdit)).addPreferredGap(
+                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SoftMail).addComponent(lt_SoftMail))).addComponent(pl_SoftIcon,
+                                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
+                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SoftSite).addComponent(lt_SoftSite)).addPreferredGap(
+                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp_DespInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                        javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bt_ExitButn).addContainerGap()));
     }
 
     /**
@@ -218,10 +216,11 @@ public class Style002 extends javax.swing.JPanel implements WBean
      */
     private void bt_ExitButn_Handler(java.awt.event.ActionEvent evt)
     {
-//        FForm fForm = (FForm) C1010000.getForm();
-//        fForm.setVisible(false);
-//        fForm.dispose();
+        // FForm fForm = (FForm) C1010000.getForm();
+        // fForm.setVisible(false);
+        // fForm.dispose();
     }
+
     private javax.swing.JButton bt_ExitButn;
     private javax.swing.JLabel lb_SoftEdit;
     private javax.swing.JLabel lt_SoftLogo;

@@ -27,6 +27,7 @@ import cons.prp.aide.P3060000.LangRes;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class StepPanel extends javax.swing.JPanel implements WBean
@@ -98,17 +99,15 @@ public class StepPanel extends javax.swing.JPanel implements WBean
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 javax.swing.GroupLayout.Alignment.TRAILING,
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(sp_StepTree,
-                javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280,
-                Short.MAX_VALUE).addGroup(
-                layout.createSequentialGroup().addComponent(bt_LastStep).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_NextStep))).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(sp_StepTree, javax.swing.GroupLayout.Alignment.LEADING,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE).addGroup(
+                                layout.createSequentialGroup().addComponent(bt_LastStep).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_NextStep)))
+                        .addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addContainerGap().addComponent(sp_StepTree,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_NextStep).addComponent(bt_LastStep)).addContainerGap()));
+                layout.createSequentialGroup().addContainerGap().addComponent(sp_StepTree, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE).addPreferredGap(
+                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_NextStep).addComponent(bt_LastStep)).addContainerGap()));
     }
 
     /**
@@ -197,6 +196,7 @@ public class StepPanel extends javax.swing.JPanel implements WBean
         // 树结构变更
         treeMode.nodeStructureChanged(rootNode);
     }
+
     /** 显示上一步计算 */
     private javax.swing.JButton bt_LastStep;
     /** 显示下一步计算 */

@@ -22,7 +22,6 @@ import org.w3c.dom.Element;
 
 import rmp.face.WBackCall;
 import rmp.util.SoapUtil;
-import cons.EnvCons;
 import cons.SysCons;
 import cons.prp.aide.P30B0000.ConstUI;
 
@@ -34,6 +33,7 @@ import cons.prp.aide.P30B0000.ConstUI;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public final class Util
@@ -121,8 +121,10 @@ public final class Util
      * KM:里程(KM)<br />
      * UseDate:历时<br />
      * 
-     * @param s 发车站<br />
-     * @param e 到达站（支持第一个字匹配模糊查询），空字符串默认发车站上海和到达站北京
+     * @param s
+     *            发车站<br />
+     * @param e
+     *            到达站（支持第一个字匹配模糊查询），空字符串默认发车站上海和到达站北京
      * @return
      * @throws Exception
      */
@@ -158,7 +160,8 @@ public final class Util
      * String(8)=历时<br />
      * String(9)=空字符串(备用)<br />
      * 
-     * @param code 车次代号字符串，空字符串默认上海到北京D32次
+     * @param code
+     *            车次代号字符串，空字符串默认上海到北京D32次
      * @return
      * @throws Exception
      */
@@ -192,7 +195,8 @@ public final class Util
      * KM:里程(KM)<br />
      * UseDate:历时<br />
      * 
-     * @param code 车次代号字符串，空字符串默认上海到北京D32次
+     * @param code
+     *            车次代号字符串，空字符串默认上海到北京D32次
      * @return
      * @throws Exception
      */
@@ -292,15 +296,18 @@ public final class Util
     /**
      * 用户把SOAP请求发送给服务器端，并返回服务器点返回的输入流
      * 
-     * @param uid 当前用户标记
-     * @param sttCity 出发城市（中文城市名称或缩写、空则默认：上海）
-     * @param endCity 抵达城市（中文城市名称或缩写、空则默认：北京）
-     * @param theDate 出发日期（String 格式：yyyy-MM-dd，如：2007-07-02，空则默认当天）
+     * @param uid
+     *            当前用户标记
+     * @param sttCity
+     *            出发城市（中文城市名称或缩写、空则默认：上海）
+     * @param endCity
+     *            抵达城市（中文城市名称或缩写、空则默认：北京）
+     * @param theDate
+     *            出发日期（String 格式：yyyy-MM-dd，如：2007-07-02，空则默认当天）
      * @return 服务器端返回的输入流，供客户端读取
      * @throws Exception
      */
-    private static InputStream getSoapInputStream(String soapName, String soapAction, String... soapArgs)
-            throws Exception
+    private static InputStream getSoapInputStream(String soapName, String soapAction, String... soapArgs) throws Exception
     {
         String strSoap = SoapUtil.getSoapRequest("EnvCons.PATH_P30B0000", soapName, soapArgs);
 

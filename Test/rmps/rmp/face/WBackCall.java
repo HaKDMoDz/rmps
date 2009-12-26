@@ -18,6 +18,7 @@ import java.util.EventObject;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public interface WBackCall
@@ -27,7 +28,8 @@ public interface WBackCall
      * 
      * @param event
      * @param object
-     * @param property TODO
+     * @param property
+     *            TODO
      */
     void wAction(EventObject event, Object object, String property);
 }

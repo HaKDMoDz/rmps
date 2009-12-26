@@ -11,7 +11,6 @@ import java.awt.Component;
 
 import javax.swing.JOptionPane;
 
-import com.amonsoft.rmps.IRmps;
 import cons.ui.LangRes;
 
 /**
@@ -23,6 +22,7 @@ import cons.ui.LangRes;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public final class MesgUtil
@@ -47,8 +47,10 @@ public final class MesgUtil
     /**
      * 显示文本输入对话框
      * 
-     * @param comp 父窗口对象
-     * @param mesg 提示信息
+     * @param comp
+     *            父窗口对象
+     * @param mesg
+     *            提示信息
      * @return 用户输入数据
      */
     public static String showInputDialog(Component comp, String mesg)
@@ -72,9 +74,12 @@ public final class MesgUtil
     /**
      * 显示提示信息对话框
      * 
-     * @param comp 对话框的父窗口
-     * @param mesg 待显示的提示信息
-     * @param isHash 当前字符串是否为Hash索引：true是，false不是。
+     * @param comp
+     *            对话框的父窗口
+     * @param mesg
+     *            待显示的提示信息
+     * @param isHash
+     *            当前字符串是否为Hash索引：true是，false不是。
      */
     public static void showMessageDialog(Component comp, String mesg)
     {
@@ -85,15 +90,17 @@ public final class MesgUtil
     /**
      * 显示确认对话框，并返回用户选择的状态，0表示用户选择了确定，1表示用户选择了拒绝
      * 
-     * @param comp 对话框的父窗口
-     * @param mesg 待显示的提示信息
-     * @param isHash 当前字符串是否为Hash索引：true是，false不是。
+     * @param comp
+     *            对话框的父窗口
+     * @param mesg
+     *            待显示的提示信息
+     * @param isHash
+     *            当前字符串是否为Hash索引：true是，false不是。
      * @return
      */
     public static int showConfirmDialog(Component comp, String mesg)
     {
         mesg = "<html><body>" + mesg + "</body></html>";
-        return JOptionPane.showConfirmDialog(comp, mesg, LangRes.TITLE_MESSAGE, JOptionPane.YES_NO_OPTION,
-                JOptionPane.INFORMATION_MESSAGE);
+        return JOptionPane.showConfirmDialog(comp, mesg, LangRes.TITLE_MESSAGE, JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
     }
 }

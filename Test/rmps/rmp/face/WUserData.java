@@ -16,6 +16,7 @@ package rmp.face;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public abstract class WUserData implements WData

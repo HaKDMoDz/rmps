@@ -20,6 +20,7 @@ import rmp.bean.CellRender;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class WeekPanel extends javax.swing.JPanel
@@ -70,11 +71,9 @@ public class WeekPanel extends javax.swing.JPanel
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(sp_WeekTble,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE).addContainerGap()));
+                layout.createSequentialGroup().addContainerGap().addComponent(sp_WeekTble, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(sp_WeekTble,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE).addContainerGap()));
+                layout.createSequentialGroup().addContainerGap().addComponent(sp_WeekTble, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE).addContainerGap()));
     }
 
     /**
@@ -83,6 +82,7 @@ public class WeekPanel extends javax.swing.JPanel
     private void ita()
     {
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 事件处理区域
     // ////////////////////////////////////////////////////////////////////////

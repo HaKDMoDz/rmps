@@ -16,6 +16,7 @@ package rmp.prp.aide.P3020000.b;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class FileBean
@@ -62,7 +63,8 @@ public class FileBean
     }
 
     /**
-     * @param srcName the srcName to set
+     * @param srcName
+     *            the srcName to set
      */
     public void setSrcName(String srcName)
     {
@@ -78,7 +80,8 @@ public class FileBean
     }
 
     /**
-     * @param dstName the dstName to set
+     * @param dstName
+     *            the dstName to set
      */
     public void setDstName(String dstName)
     {
@@ -94,7 +97,8 @@ public class FileBean
     }
 
     /**
-     * @param tmpName the tmpName to set
+     * @param tmpName
+     *            the tmpName to set
      */
     public void setTmpName(String tmpName)
     {

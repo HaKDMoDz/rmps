@@ -16,6 +16,7 @@ import com.amonsoft.rmps.irp.v.IConnect;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class Connect implements IConnect
@@ -67,7 +68,8 @@ public class Connect implements IConnect
     }
 
     /**
-     * @param host the host to set
+     * @param host
+     *            the host to set
      */
     public void setHost(String host)
     {
@@ -95,7 +97,8 @@ public class Connect implements IConnect
     }
 
     /**
-     * @param sysCfg the sysCfg to set
+     * @param sysCfg
+     *            the sysCfg to set
      */
     public void setSysCfg(String sysCfg)
     {
@@ -111,7 +114,8 @@ public class Connect implements IConnect
     }
 
     /**
-     * @param sipCfg the sipCfg to set
+     * @param sipCfg
+     *            the sipCfg to set
      */
     public void setSipCfg(String sipCfg)
     {
@@ -127,7 +131,8 @@ public class Connect implements IConnect
     }
 
     /**
-     * @param proxy the proxy to set
+     * @param proxy
+     *            the proxy to set
      */
     public void setProxy(String proxy)
     {
@@ -143,7 +148,8 @@ public class Connect implements IConnect
     }
 
     /**
-     * @param version the version to set
+     * @param version
+     *            the version to set
      */
     public void setVersion(String version)
     {

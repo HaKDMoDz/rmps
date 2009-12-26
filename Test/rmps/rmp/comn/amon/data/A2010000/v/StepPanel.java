@@ -11,11 +11,13 @@ import java.sql.Connection;
 
 import javax.swing.DefaultComboBoxModel;
 
+import rmp.bean.K1SV1S;
 import rmp.comn.amon.data.A2010000.b.WDataBase;
 import rmp.comn.amon.data.A2010000.t.Util;
-import rmp.bean.K1SV1S;
 import rmp.util.CheckUtil;
+
 import com.amonsoft.util.LogUtil;
+
 import cons.db.AmonCons;
 
 /**
@@ -25,6 +27,7 @@ import cons.db.AmonCons;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class StepPanel extends javax.swing.JPanel
@@ -162,29 +165,28 @@ public class StepPanel extends javax.swing.JPanel
         pl_Filed.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_DBKind).addComponent(lb_DBSize).addComponent(lb_IsPK).addComponent(lb_IsNL).addComponent(lb_IsUK).addComponent(lb_DefValue).addComponent(lb_FKey)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(cb_DBKind,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(tf_DBSize,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(ck_IsPK).addComponent(ck_IsNL).addComponent(
-                ck_IsUK).addComponent(tf_FKey, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE).addComponent(tf_DefValue, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_DBKind).addComponent(lb_DBSize).addComponent(lb_IsPK).addComponent(lb_IsNL).addComponent(
+                                lb_IsUK).addComponent(lb_DefValue).addComponent(lb_FKey)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(cb_DBKind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(tf_DBSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(ck_IsPK).addComponent(ck_IsNL).addComponent(ck_IsUK).addComponent(tf_FKey, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                210, Short.MAX_VALUE).addComponent(tf_DefValue, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_DBKind).addComponent(cb_DBKind, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_DBSize).addComponent(tf_DBSize, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_IsPK).addComponent(ck_IsPK)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_IsNL).addComponent(ck_IsNL)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_IsUK).addComponent(ck_IsUK)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_DefValue).addComponent(tf_DefValue, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_FKey).addComponent(tf_FKey, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_DBKind).addComponent(cb_DBKind, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_DBSize).addComponent(tf_DBSize, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_IsPK).addComponent(ck_IsPK)).addPreferredGap(
+                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_IsNL).addComponent(ck_IsNL)).addPreferredGap(
+                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_IsUK).addComponent(ck_IsUK)).addPreferredGap(
+                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_DefValue).addComponent(tf_DefValue, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_FKey).addComponent(tf_FKey, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))));
     }
 
     /**
@@ -260,56 +262,44 @@ public class StepPanel extends javax.swing.JPanel
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(pl_Filed,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(sp_SLine, javax.swing.GroupLayout.Alignment.TRAILING,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_Sid).addComponent(lb_SName).addComponent(lb_SKind).addComponent(lb_SSystem).addComponent(
-                lb_SCreater).addComponent(lb_SVer).addComponent(lb_SDesp)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(tf_Sid,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(cb_SKind,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(cb_SSystem,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(sp_SDesp,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE).addComponent(tf_SCreater,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE).addComponent(tf_SVer,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE).addComponent(tf_SName,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))).addComponent(bt_Update,
-                javax.swing.GroupLayout.Alignment.TRAILING)).addContainerGap()));
+                layout.createSequentialGroup().addContainerGap()
+                        .addGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(pl_Filed, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(sp_SLine, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        280, Short.MAX_VALUE)
+                                        .addGroup(
+                                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                                layout.createSequentialGroup().addGroup(
+                                                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_Sid).addComponent(lb_SName).addComponent(lb_SKind)
+                                                                .addComponent(lb_SSystem).addComponent(lb_SCreater).addComponent(lb_SVer).addComponent(lb_SDesp)).addPreferredGap(
+                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(tf_Sid, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(cb_SKind,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(
+                                                                cb_SSystem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(sp_SDesp, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE).addComponent(tf_SCreater,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE).addComponent(tf_SVer, javax.swing.GroupLayout.DEFAULT_SIZE, 210,
+                                                                        Short.MAX_VALUE).addComponent(tf_SName, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))).addComponent(bt_Update,
+                                                javax.swing.GroupLayout.Alignment.TRAILING)).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_Sid).addComponent(tf_Sid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SName).addComponent(tf_SName, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SKind).addComponent(cb_SKind, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SSystem).addComponent(cb_SSystem, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SCreater).addComponent(tf_SCreater, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SVer).addComponent(tf_SVer, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_SDesp).addComponent(sp_SDesp, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp_SLine,
-                javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(pl_Filed,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE,
-                Short.MAX_VALUE).addComponent(bt_Update).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_Sid).addComponent(tf_Sid, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SName).addComponent(tf_SName, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SKind).addComponent(cb_SKind, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SSystem).addComponent(cb_SSystem, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SCreater).addComponent(tf_SCreater, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SVer).addComponent(tf_SVer, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_SDesp).addComponent(sp_SDesp, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(
+                        sp_SLine, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(
+                        pl_Filed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
+                        javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(bt_Update).addContainerGap()));
     }
 
     /**
@@ -355,8 +345,7 @@ public class StepPanel extends javax.swing.JPanel
             kvItem = (K1SV1S) cb_DBKind.getSelectedItem();
             sqlUpdate.append(AmonCons.A2010103).append(" = '").append(kvItem.getK()).append("', ");
             String size = tf_DBSize.getText();
-            sqlUpdate.append(AmonCons.A2010104).append(" = '").append(CheckUtil.isValidate(size) ? size : "0").append(
-                    "', ");
+            sqlUpdate.append(AmonCons.A2010104).append(" = '").append(CheckUtil.isValidate(size) ? size : "0").append("', ");
             sqlUpdate.append(AmonCons.A2010105).append(" = '").append(ck_IsPK.isSelected() ? '1' : '0').append("', ");
             sqlUpdate.append(AmonCons.A2010106).append(" = '").append(ck_IsNL.isSelected() ? '1' : '0').append("', ");
             sqlUpdate.append(AmonCons.A2010107).append(" = '").append(ck_IsUK.isSelected() ? '1' : '0').append("', ");
@@ -444,6 +433,7 @@ public class StepPanel extends javax.swing.JPanel
     {
         return true;
     }
+
     private javax.swing.JButton bt_Update;
     private javax.swing.JComboBox cb_SKind;
     private javax.swing.JComboBox cb_SSystem;
@@ -487,7 +477,8 @@ public class StepPanel extends javax.swing.JPanel
     }
 
     /**
-     * @param isUpdate the isUpdate to set
+     * @param isUpdate
+     *            the isUpdate to set
      */
     public void setUpdate(boolean isUpdate)
     {

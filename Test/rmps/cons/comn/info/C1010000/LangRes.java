@@ -15,6 +15,7 @@ package cons.comn.info.C1010000;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public interface LangRes

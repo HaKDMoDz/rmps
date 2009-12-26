@@ -7,19 +7,21 @@
  */
 package rmp.prp.aide.P30A0000.v;
 
-import com.amonsoft.bean.WForm;
-import com.amonsoft.rmps.prp.v.IView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.WindowConstants;
+
 import rmp.prp.aide.P30A0000.P30A0000;
 import rmp.prp.aide.P30A0000.m.DataModel;
 import rmp.prp.aide.P30A0000.t.Util;
-import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
+
+import com.amonsoft.bean.WForm;
+import com.amonsoft.rmps.prp.v.IView;
+import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>
@@ -30,6 +32,7 @@ import rmp.util.MesgUtil;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class TailPanel implements IView
@@ -165,11 +168,9 @@ public class TailPanel implements IView
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(viewPanel);
         viewPanel.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(sp_DataList,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE).addContainerGap()));
+                layout.createSequentialGroup().addContainerGap().addComponent(sp_DataList, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(sp_DataList,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE).addContainerGap()));
+                layout.createSequentialGroup().addContainerGap().addComponent(sp_DataList, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE).addContainerGap()));
 
         df_DataView = new WForm();
         df_DataView.wInit(false);
@@ -242,6 +243,7 @@ public class TailPanel implements IView
             LogUtil.exception(exp);
         }
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 界面组件区域
     // ////////////////////////////////////////////////////////////////////////

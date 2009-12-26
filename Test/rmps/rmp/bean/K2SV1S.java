@@ -18,6 +18,7 @@ import java.io.Serializable;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public final class K2SV1S implements Serializable, Cloneable
@@ -60,7 +61,8 @@ public final class K2SV1S implements Serializable, Cloneable
     }
 
     /**
-     * @param k1 the k1 to set
+     * @param k1
+     *            the k1 to set
      */
     public void setK1(String k1)
     {
@@ -76,7 +78,8 @@ public final class K2SV1S implements Serializable, Cloneable
     }
 
     /**
-     * @param k2 the k2 to set
+     * @param k2
+     *            the k2 to set
      */
     public void setK2(String k2)
     {
@@ -92,7 +95,8 @@ public final class K2SV1S implements Serializable, Cloneable
     }
 
     /**
-     * @param v the v to set
+     * @param v
+     *            the v to set
      */
     public void setV(String v)
     {

@@ -7,9 +7,10 @@
  */
 package rmp.irp.comn;
 
-import com.amonsoft.rmps.irp.v.IAccount;
-import com.amonsoft.rmps.irp.b.IContact;
 import java.util.List;
+
+import com.amonsoft.rmps.irp.b.IContact;
+import com.amonsoft.rmps.irp.v.IAccount;
 
 /**
  * <ul>
@@ -18,6 +19,7 @@ import java.util.List;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public abstract class AAccount implements IAccount

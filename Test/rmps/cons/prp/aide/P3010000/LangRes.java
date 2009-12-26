@@ -15,6 +15,7 @@ package cons.prp.aide.P3010000;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public interface LangRes
@@ -257,17 +258,11 @@ public interface LangRes
     // .html";
     /** 文件打开保存对话框后缀类型：仅PNG格式文件 */
     String[] FILE_FILTER_IMG =
-    {
-        "13010F07"
-    };
+    { "13010F07" };
     String[] FILE_FILTER_IMG_DSP =
-    {
-        "13010F08"
-    };
+    { "13010F08" };
     String[] FILE_FILTER_IMG_REG =
-    {
-        "13010F09"
-    };
+    { "13010F09" };
     // .png";
     /** 文件打开保存对话框后缀类型：仅PNG格式文件 */
     String FILE_FILTER_PNG = "13010F0A";

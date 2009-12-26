@@ -15,6 +15,7 @@ package rmp.irp.m.I2050000;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public interface Constant

@@ -74,7 +74,7 @@ public class Balinese extends ProtoDate
 
     public static int dayFromFixed(long l)
     {
-        return (int)ProtoDate.mod(l - EPOCH, 210L);
+        return (int) ProtoDate.mod(l - EPOCH, 210L);
     }
 
     public static boolean luangFromFixed(long l)
@@ -132,7 +132,7 @@ public class Balinese extends ProtoDate
 
     public static int weekFromFixed(long l)
     {
-        return (int)ProtoDate.quotient(dayFromFixed(l), 7D) + 1;
+        return (int) ProtoDate.quotient(dayFromFixed(l), 7D) + 1;
     }
 
     public static long onOrBefore(Balinese balinese, long l)
@@ -143,17 +143,17 @@ public class Balinese extends ProtoDate
         int i1 = ProtoDate.mod(i + 14 + 15 * (k - i), 35);
         int j1 = j + 36 * (i1 - j);
         int k1 = dayFromFixed(0L);
-        return l - ProtoDate.mod((l + (long)k1) - (long)j1, 210L);
+        return l - ProtoDate.mod((l + (long) k1) - (long) j1, 210L);
     }
 
     public static int day(Balinese balinese)
     {
-        return (int)((onOrBefore(balinese, EPOCH + 209L) - EPOCH) + 1L);
+        return (int) ((onOrBefore(balinese, EPOCH + 209L) - EPOCH) + 1L);
     }
 
     public static int week(Balinese balinese)
     {
-        return (int)(ProtoDate.quotient(day(balinese) - 1, 7D) + 1L);
+        return (int) (ProtoDate.quotient(day(balinese) - 1, 7D) + 1L);
     }
 
     public static Vector<Long> positionsInInterval(int i, int j, int k, long l, long l1)
@@ -162,7 +162,7 @@ public class Balinese extends ProtoDate
         long l2 = l;
         do
         {
-            l2 += ProtoDate.mod((long)i - l - (long)k - 1L, j);
+            l2 += ProtoDate.mod((long) i - l - (long) k - 1L, j);
             if (l2 <= l1)
             {
                 fixedvector.add(l2);
@@ -194,20 +194,18 @@ public class Balinese extends ProtoDate
 
     protected String toStringFields()
     {
-        return "luang=" + luang + ",dwiwara=" + dwiwara + ",triwara=" + triwara + ",caturwara=" + caturwara
-            + ",pancawara=" + pancawara + ",sadwara=" + sadwara + ",saptawara=" + saptawara + ",asatawara=" + asatawara
-            + ",sangawara=" + sangawara + ",dasawara=" + dasawara;
+        return "luang=" + luang + ",dwiwara=" + dwiwara + ",triwara=" + triwara + ",caturwara=" + caturwara + ",pancawara=" + pancawara + ",sadwara=" + sadwara + ",saptawara=" + saptawara
+                + ",asatawara=" + asatawara + ",sangawara=" + sangawara + ",dasawara=" + dasawara;
     }
 
     public String format()
     {
-        return MessageFormat.format("{0}{1} {2} {3} {4} {5} {6} {7} {8} {9}", new Object[]{luang ? "Luang " : "",
-            ProtoDate.nameFromNumber(dwiwara, dwiwaraNames), ProtoDate.nameFromNumber(triwara, triwaraNames),
-            ProtoDate.nameFromNumber(caturwara, caturwaraNames), ProtoDate.nameFromNumber(pancawara, pancawaraNames),
-            ProtoDate.nameFromNumber(sadwara, sadwaraNames), ProtoDate.nameFromNumber(saptawara, saptawaraNames),
-            ProtoDate.nameFromNumber(asatawara, asatawaraNames), ProtoDate.nameFromNumber(sangawara, sangawaraNames),
-            ProtoDate.nameFromNumber(dasawara, dasawaraNames)})
-            + MessageFormat.format(" ({0})", new Object[]{ProtoDate.nameFromNumber(week(this), weekNames)});
+        return MessageFormat.format("{0}{1} {2} {3} {4} {5} {6} {7} {8} {9}", new Object[]
+        { luang ? "Luang " : "", ProtoDate.nameFromNumber(dwiwara, dwiwaraNames), ProtoDate.nameFromNumber(triwara, triwaraNames), ProtoDate.nameFromNumber(caturwara, caturwaraNames),
+                ProtoDate.nameFromNumber(pancawara, pancawaraNames), ProtoDate.nameFromNumber(sadwara, sadwaraNames), ProtoDate.nameFromNumber(saptawara, saptawaraNames),
+                ProtoDate.nameFromNumber(asatawara, asatawaraNames), ProtoDate.nameFromNumber(sangawara, sangawaraNames), ProtoDate.nameFromNumber(dasawara, dasawaraNames) })
+                + MessageFormat.format(" ({0})", new Object[]
+                { ProtoDate.nameFromNumber(week(this), weekNames) });
     }
 
     public boolean equals(Object obj)
@@ -216,43 +214,48 @@ public class Balinese extends ProtoDate
             return true;
         if (!(obj instanceof Balinese))
             return false;
-        Balinese balinese = (Balinese)obj;
-        return balinese.luang == luang && balinese.dwiwara == dwiwara && balinese.triwara == triwara
-            && balinese.caturwara == caturwara && balinese.pancawara == pancawara && balinese.sadwara == sadwara
-            && balinese.saptawara == saptawara && balinese.asatawara == asatawara && balinese.sangawara == sangawara
-            && balinese.dasawara == dasawara;
+        Balinese balinese = (Balinese) obj;
+        return balinese.luang == luang && balinese.dwiwara == dwiwara && balinese.triwara == triwara && balinese.caturwara == caturwara && balinese.pancawara == pancawara
+                && balinese.sadwara == sadwara && balinese.saptawara == saptawara && balinese.asatawara == asatawara && balinese.sangawara == sangawara && balinese.dasawara == dasawara;
     }
 
-    public boolean             luang;
-    public int                 dwiwara;
-    public int                 triwara;
-    public int                 caturwara;
-    public int                 pancawara;
-    public int                 sadwara;
-    public int                 saptawara;
-    public int                 asatawara;
-    public int                 sangawara;
-    public int                 dasawara;
-    public static final long   EPOCH            = ProtoDate.fixedFromJD(146D);
-    private static final int   pancawaraI[]     = {5, 9, 7, 4, 8};
-    private static final int   saptawaraJ[]     = {5, 4, 3, 7, 8, 6, 9};
-    public static final String dwiwaraNames[]   = {"Menga", "Pepet"};
-    public static final String triwaraNames[]   = {"Pasah", "Beteng", "Kajeng"};
-    public static final String caturwaraNames[] = {"Sri", "Laba", "Jaya", "Menala"};
-    public static final String pancawaraNames[] = {"Umanis", "Paing", "Pon", "Wage", "Keliwon"};
-    public static final String sadwaraNames[]   = {"Tungleh", "Aryang", "Urukung", "Paniron", "Was", "Maulu"};
-    public static final String saptawaraNames[] = {"Redite", "Coma", "Anggara", "Buda", "Wraspati", "Sukra",
-        "Saniscara"                             };
-    public static final String asatawaraNames[] = {"Sri", "Indra", "Guru", "Yama", "Ludra", "Brahma", "Kala", "Uma"};
-    public static final String sangawaraNames[] = {"Dangu", "Jangur", "Gigis", "Nohan", "Ogan", "Erangan", "Urungan",
-        "Tulus", "Dadi"                         };
-    public static final String dasawaraNames[]  = {"Pandita", "Pati", "Suka", "Duka", "Sri", "Manuh", "Manusa", "Raja",
-        "Dewa", "Raksasa"                       };
-    public static final String weekNames[]      = {"Sinta", "Landep", "Ukir", "Kulantir", "Taulu", "Gumbreg", "Wariga",
-        "Warigadian", "Jukungwangi", "Sungsang", "Dunggulan", "Kuningan", "Langkir", "Medangsia", "Pujut", "Pahang",
-        "Krulut", "Merakih", "Tambir", "Medangkungan", "Matal", "Uye", "Menail", "Parangbakat", "Bala", "Ugu",
-        "Wayang", "Kelawu", "Dukut", "Watugunung"};
+    public boolean luang;
+    public int dwiwara;
+    public int triwara;
+    public int caturwara;
+    public int pancawara;
+    public int sadwara;
+    public int saptawara;
+    public int asatawara;
+    public int sangawara;
+    public int dasawara;
+    public static final long EPOCH = ProtoDate.fixedFromJD(146D);
+    private static final int pancawaraI[] =
+    { 5, 9, 7, 4, 8 };
+    private static final int saptawaraJ[] =
+    { 5, 4, 3, 7, 8, 6, 9 };
+    public static final String dwiwaraNames[] =
+    { "Menga", "Pepet" };
+    public static final String triwaraNames[] =
+    { "Pasah", "Beteng", "Kajeng" };
+    public static final String caturwaraNames[] =
+    { "Sri", "Laba", "Jaya", "Menala" };
+    public static final String pancawaraNames[] =
+    { "Umanis", "Paing", "Pon", "Wage", "Keliwon" };
+    public static final String sadwaraNames[] =
+    { "Tungleh", "Aryang", "Urukung", "Paniron", "Was", "Maulu" };
+    public static final String saptawaraNames[] =
+    { "Redite", "Coma", "Anggara", "Buda", "Wraspati", "Sukra", "Saniscara" };
+    public static final String asatawaraNames[] =
+    { "Sri", "Indra", "Guru", "Yama", "Ludra", "Brahma", "Kala", "Uma" };
+    public static final String sangawaraNames[] =
+    { "Dangu", "Jangur", "Gigis", "Nohan", "Ogan", "Erangan", "Urungan", "Tulus", "Dadi" };
+    public static final String dasawaraNames[] =
+    { "Pandita", "Pati", "Suka", "Duka", "Sri", "Manuh", "Manusa", "Raja", "Dewa", "Raksasa" };
+    public static final String weekNames[] =
+    { "Sinta", "Landep", "Ukir", "Kulantir", "Taulu", "Gumbreg", "Wariga", "Warigadian", "Jukungwangi", "Sungsang", "Dunggulan", "Kuningan", "Langkir", "Medangsia", "Pujut", "Pahang", "Krulut",
+            "Merakih", "Tambir", "Medangkungan", "Matal", "Uye", "Menail", "Parangbakat", "Bala", "Ugu", "Wayang", "Kelawu", "Dukut", "Watugunung" };
 
     /** serialVersionUID */
-    private static final long  serialVersionUID = 5988795538354770214L;
+    private static final long serialVersionUID = 5988795538354770214L;
 }

@@ -7,37 +7,37 @@
  */
 package rmp.comn.user.U0000000;
 
-import com.amonsoft.bean.WForm;
-import com.amonsoft.cons.ConsSys;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Properties;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 
 import rmp.Rmps;
-import rmp.face.WBackCall;
-import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.comn.user.UserInfo;
 import rmp.comn.user.U0000000.v.MainPanel;
 import rmp.comn.user.U0000000.v.MiniPanel;
 import rmp.comn.user.U0000000.v.NormPanel;
 import rmp.comn.user.U0000000.v.SubMenu;
 import rmp.comn.user.U0000000.v.TailPanel;
-import rmp.util.BeanUtil;
-import rmp.util.FileUtil;
-import rmp.util.ImageUtil;
-import com.amonsoft.util.LogUtil;
-import rmp.util.MesgUtil;
-import cons.EnvCons;
-import cons.id.PrpCons;
-import cons.comn.user.U0000000.ConstUI;
-import com.amonsoft.util.LangUtil;
-import com.amonsoft.util.DeskUtil;
+import rmp.face.WBackCall;
 import rmp.util.EnvUtil;
+import rmp.util.FileUtil;
+import rmp.util.MesgUtil;
+
+import com.amonsoft.bean.WForm;
+import com.amonsoft.cons.ConsSys;
+import com.amonsoft.rmps.prp.IPrpPlus;
+import com.amonsoft.util.DeskUtil;
+import com.amonsoft.util.LangUtil;
+import com.amonsoft.util.LogUtil;
+
+import cons.EnvCons;
+import cons.comn.user.U0000000.ConstUI;
+import cons.id.PrpCons;
 
 /**
  * <ul>
@@ -47,6 +47,7 @@ import rmp.util.EnvUtil;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class U0000000 extends WForm implements IPrpPlus
@@ -169,31 +170,31 @@ public class U0000000 extends WForm implements IPrpPlus
     @Override
     public BufferedImage wGetIconImage(int type)
     {
-//        try
-//        {
-//            switch (type)
-//            {
-//                case ICON_LOGO0016:
-//                    return ImageUtil.readJarImage(EnvCons.PATH_U0000000, "logo10.png");
-//                case ICON_LOGO0032:
-//                    return ImageUtil.readJarImage(EnvCons.PATH_U0000000, "logo20.png");
-//                case ICON_LOGO0048:
-//                    return ImageUtil.readJarImage(EnvCons.PATH_U0000000, "logo30.png");
-//                case ICON_LOGO0096:
-//                    return ImageUtil.readJarImage(EnvCons.PATH_U0000000, "logo60.png");
-//                case ICON_LOGO0128:
-//                    return ImageUtil.readJarImage(EnvCons.PATH_U0000000, "logo80.png");
-//                case ICON_LOGO0256:
-//                    return ImageUtil.readJarImage(EnvCons.PATH_U0000000, "logo00.png");
-//                default:
-//                    return BeanUtil.getLogoImage();
-//            }
-//        }
-//        catch (Exception exp)
-//        {
-//            LogUtil.exception(exp);
-//            return null;
-//        }
+        // try
+        // {
+        // switch (type)
+        // {
+        // case ICON_LOGO0016:
+        // return ImageUtil.readJarImage(EnvCons.PATH_U0000000, "logo10.png");
+        // case ICON_LOGO0032:
+        // return ImageUtil.readJarImage(EnvCons.PATH_U0000000, "logo20.png");
+        // case ICON_LOGO0048:
+        // return ImageUtil.readJarImage(EnvCons.PATH_U0000000, "logo30.png");
+        // case ICON_LOGO0096:
+        // return ImageUtil.readJarImage(EnvCons.PATH_U0000000, "logo60.png");
+        // case ICON_LOGO0128:
+        // return ImageUtil.readJarImage(EnvCons.PATH_U0000000, "logo80.png");
+        // case ICON_LOGO0256:
+        // return ImageUtil.readJarImage(EnvCons.PATH_U0000000, "logo00.png");
+        // default:
+        // return BeanUtil.getLogoImage();
+        // }
+        // }
+        // catch (Exception exp)
+        // {
+        // LogUtil.exception(exp);
+        // return null;
+        // }
         return null;
     }
 
@@ -337,19 +338,19 @@ public class U0000000 extends WForm implements IPrpPlus
             case VIEW_TAIL:
                 return showTail();
 
-            // 显示迷你模式
+                // 显示迷你模式
             case VIEW_MINI:
                 return showMini();
 
-            // 显示正常模式
+                // 显示正常模式
             case VIEW_NORM:
                 return showNorm();
 
-            // 显示高级模式
+                // 显示高级模式
             case VIEW_MAIN:
                 return showMain();
 
-            // 显示向导模式
+                // 显示向导模式
             case VIEW_STEP:
                 return showStep();
 
@@ -396,7 +397,8 @@ public class U0000000 extends WForm implements IPrpPlus
     /**
      * 语言资源查询
      * 
-     * @param mesgId 语言资源索引
+     * @param mesgId
+     *            语言资源索引
      * @return 语言资源内容
      */
     public static String getMesg(String mesgId)
@@ -422,8 +424,10 @@ public class U0000000 extends WForm implements IPrpPlus
     /**
      * 语言资源查询
      * 
-     * @param mesgId 语言资源索引
-     * @param defMesg 默认语言资源
+     * @param mesgId
+     *            语言资源索引
+     * @param defMesg
+     *            默认语言资源
      * @return 语言资源内容
      */
     public static String getMesg(String mesgId, String defMesg)
@@ -441,7 +445,8 @@ public class U0000000 extends WForm implements IPrpPlus
     }
 
     /**
-     * @param validate the validate to set
+     * @param validate
+     *            the validate to set
      */
     public void setValidate(boolean validate)
     {
@@ -634,6 +639,7 @@ public class U0000000 extends WForm implements IPrpPlus
         soft.wInitView();
         soft.wShowView(VIEW_MINI);
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 界面组件区域
     // ////////////////////////////////////////////////////////////////////////

@@ -18,8 +18,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import rmp.util.FileUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.StringUtil;
+
+import com.amonsoft.util.LogUtil;
+
 import cons.SysCons;
 import cons.comn.lang.A3010000.ConstUI;
 
@@ -32,6 +34,7 @@ import cons.comn.lang.A3010000.ConstUI;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public final class Util
@@ -162,8 +165,7 @@ public final class Util
     /**
      * @param langProp
      */
-    public static void saveLangProp(List<String> tpltList, HashMap<String, String> langProp, String propFilePath,
-            String javaFilePath)
+    public static void saveLangProp(List<String> tpltList, HashMap<String, String> langProp, String propFilePath, String javaFilePath)
     {
         String[] keys = new String[langProp.size()];
         langProp.keySet().toArray(keys);
@@ -302,9 +304,12 @@ public final class Util
     }
 
     /**
-     * @param sid 软件ID前四位，例如C0FF
-     * @param mid 模块ID，仅1位数字
-     * @param fid 片段ID，仅1位数字
+     * @param sid
+     *            软件ID前四位，例如C0FF
+     * @param mid
+     *            模块ID，仅1位数字
+     * @param fid
+     *            片段ID，仅1位数字
      */
     public static String getLangID(String sid, int mid, int fid, int idx)
     {

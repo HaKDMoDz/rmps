@@ -7,8 +7,9 @@
  */
 package rmp.prp.aide.P3080000.v;
 
-import com.amonsoft.rmps.prp.v.IView;
 import rmp.prp.aide.P3080000.P3080000;
+
+import com.amonsoft.rmps.prp.v.IView;
 
 /**
  * <ul>
@@ -19,6 +20,7 @@ import rmp.prp.aide.P3080000.P3080000;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class NormPanel extends javax.swing.JPanel implements IView

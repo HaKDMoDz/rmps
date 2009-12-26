@@ -17,6 +17,7 @@ import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
 import rmp.face.WBean;
+
 import com.amonsoft.util.LogUtil;
 
 /**
@@ -28,6 +29,7 @@ import com.amonsoft.util.LogUtil;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class WTextArea extends JTextArea implements WBean, ClipboardOwner
@@ -88,8 +90,9 @@ public class WTextArea extends JTextArea implements WBean, ClipboardOwner
     /*
      * (non-Javadoc)
      * 
-     * @see java.awt.datatransfer.ClipboardOwner#lostOwnership(java.awt.datatransfer.Clipboard,
-     *      java.awt.datatransfer.Transferable)
+     * @see
+     * java.awt.datatransfer.ClipboardOwner#lostOwnership(java.awt.datatransfer
+     * .Clipboard, java.awt.datatransfer.Transferable)
      */
     @Override
     public void lostOwnership(Clipboard clipboard, Transferable contents)
@@ -139,6 +142,7 @@ public class WTextArea extends JTextArea implements WBean, ClipboardOwner
             LogUtil.exception(exp);
         }
     }
+
     /** serialVersionUID */
     private static final long serialVersionUID = -5369858175289599108L;
 }

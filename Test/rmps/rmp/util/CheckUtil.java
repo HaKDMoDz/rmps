@@ -16,6 +16,7 @@ package rmp.util;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public final class CheckUtil
@@ -34,7 +35,8 @@ public final class CheckUtil
     /**
      * 数据有效性验证，数据为NULL或者有效长度小于的情况下返回false，其它情况下返回true
      * 
-     * @param value 待进行有效性判断的字符串
+     * @param value
+     *            待进行有效性判断的字符串
      * @return 字符串是否为空：true字符串为有效字符串；false字符串为无效字符串
      */
     public static boolean isValidate(String text)
@@ -77,8 +79,10 @@ public final class CheckUtil
     /**
      * 判定指定的字符串长度是否大于指定的长度。
      * 
-     * @param text 待判定的字符串
-     * @param maxLen 字符串的最大长度限制
+     * @param text
+     *            待判定的字符串
+     * @param maxLen
+     *            字符串的最大长度限制
      * @return 判定结果：true表示大于指定长度，false表示不大于指定长度
      */
     public static boolean isTooLong(String text, int maxLen)

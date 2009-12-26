@@ -30,6 +30,7 @@ import cons.comn.amon.data.A2010000.ConstUI;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class NormPanel extends javax.swing.JPanel implements WBean
@@ -182,38 +183,35 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         this.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_DBType).addComponent(lb_DBPath).addComponent(lb_DBTable)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(cb_DBType,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addComponent(tf_DBPath,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_DBPath)).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addComponent(tf_DBTable,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_Select).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(
-                bt_Create).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_Update).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_Delete).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(
-                bt_Export)))).addComponent(sp_DBView, javax.swing.GroupLayout.DEFAULT_SIZE, 388,
-                Short.MAX_VALUE)).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                layout.createSequentialGroup().addGroup(
+                                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_DBType).addComponent(lb_DBPath).addComponent(lb_DBTable))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(cb_DBType, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addGroup(
+                                                        javax.swing.GroupLayout.Alignment.TRAILING,
+                                                        layout.createSequentialGroup().addComponent(tf_DBPath, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE).addPreferredGap(
+                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_DBPath)).addGroup(
+                                                        javax.swing.GroupLayout.Alignment.TRAILING,
+                                                        layout.createSequentialGroup().addComponent(tf_DBTable, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE).addPreferredGap(
+                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_Select).addPreferredGap(
+                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_Create).addPreferredGap(
+                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_Update).addPreferredGap(
+                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_Delete).addPreferredGap(
+                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_Export)))).addComponent(sp_DBView,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_DBType).addComponent(cb_DBType, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_DBPath).addComponent(bt_DBPath).addComponent(tf_DBPath, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_DBTable).addComponent(bt_Export).addComponent(bt_Delete).addComponent(bt_Update).addComponent(bt_Create).addComponent(bt_Select).addComponent(tf_DBTable, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp_DBView,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_DBType).addComponent(cb_DBType, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_DBPath).addComponent(bt_DBPath).addComponent(tf_DBPath,
+                                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
+                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_DBTable).addComponent(bt_Export).addComponent(bt_Delete).addComponent(bt_Update)
+                                .addComponent(bt_Create).addComponent(bt_Select).addComponent(tf_DBTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp_DBView,
+                        javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE).addContainerGap()));
     }
 
     /**
@@ -378,6 +376,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
 
         tm_DBView.viewData(db_DataBase, sid);
     }
+
     private javax.swing.JButton bt_Create;
     private javax.swing.JButton bt_DBPath;
     private javax.swing.JButton bt_Delete;

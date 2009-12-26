@@ -9,13 +9,15 @@ package rmp.prp.aide.P3090000.v;
 
 import javax.swing.ButtonGroup;
 
+import rmp.Rmps;
 import rmp.prp.aide.P3090000.P3090000;
 import rmp.prp.aide.P3090000.t.Util;
 import rmp.util.CheckUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
+
+import com.amonsoft.util.LogUtil;
+
 import cons.prp.aide.P3090000.ConstUI;
-import rmp.Rmps;
 
 /**
  * <ul>
@@ -26,12 +28,13 @@ import rmp.Rmps;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public final class SubMenu
 {
     /** 主应用程序 */
-    private P3090000          ms_MainSoft;
+    private P3090000 ms_MainSoft;
     /** 主级联菜单 */
     private javax.swing.JMenu mm_MainMenu;
 
@@ -73,7 +76,7 @@ public final class SubMenu
         item.setSelected(true);
         item.addActionListener(new java.awt.event.ActionListener()
         {
-            @ Override
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 mm_Days0_Handler(evt);
@@ -87,7 +90,7 @@ public final class SubMenu
         item.setText("明日");
         item.addActionListener(new java.awt.event.ActionListener()
         {
-            @ Override
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 mm_Days1_Handler(evt);
@@ -101,7 +104,7 @@ public final class SubMenu
         item.setText("后日");
         item.addActionListener(new java.awt.event.ActionListener()
         {
-            @ Override
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 mm_Days2_Handler(evt);
@@ -124,7 +127,7 @@ public final class SubMenu
         item.setText("立即更新");
         item.addActionListener(new java.awt.event.ActionListener()
         {
-            @ Override
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 mm_Updt_Handler(evt);
@@ -146,7 +149,7 @@ public final class SubMenu
         item.setText("选择城市");
         item.addActionListener(new java.awt.event.ActionListener()
         {
-            @ Override
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 mm_City_Handler(evt);

@@ -15,6 +15,7 @@ import java.net.Socket;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.apache.http.ConnectionReuseStrategy;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -43,22 +44,25 @@ import org.apache.http.protocol.RequestUserAgent;
 import org.apache.http.util.EntityUtils;
 
 /**
- *
- * @author yihaodian
+ * 
+ * @author Amon
  */
 public class HttpUtil
 {
     /**
      * 直接请求网络地址
-     * @param url 页面地址
-     * @param set 编码方案
+     * 
+     * @param url
+     *            页面地址
+     * @param set
+     *            编码方案
      * @return
      * @throws Exception
      */
     public static String request(String url, String set) throws Exception
     {
         HttpURLConnection conn = (HttpURLConnection) (new URL(url).openConnection());
-        //conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
+        // conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
         conn.setUseCaches(true);
         conn.setDoInput(true);
         conn.setDoOutput(true);
@@ -112,11 +116,7 @@ public class HttpUtil
         {
 
             String[] targets =
-            {
-                "/",
-                "/servlets-examples/servlet/RequestInfoExample",
-                "/somewhere%20in%20pampa"
-            };
+            { "/", "/servlets-examples/servlet/RequestInfoExample", "/somewhere%20in%20pampa" };
 
             for (int i = 0; i < targets.length; i++)
             {
@@ -196,15 +196,8 @@ public class HttpUtil
         {
 
             HttpEntity[] requestBodies =
-            {
-                new StringEntity(
-                "This is the first test request", "UTF-8"),
-                new ByteArrayEntity(
-                "This is the second test request".getBytes("UTF-8")),
-                new InputStreamEntity(
-                new ByteArrayInputStream(
-                "This is the third test request (will be chunked)".getBytes("UTF-8")), -1)
-            };
+            { new StringEntity("This is the first test request", "UTF-8"), new ByteArrayEntity("This is the second test request".getBytes("UTF-8")),
+                    new InputStreamEntity(new ByteArrayInputStream("This is the third test request (will be chunked)".getBytes("UTF-8")), -1) };
 
             for (int i = 0; i < requestBodies.length; i++)
             {
@@ -213,8 +206,7 @@ public class HttpUtil
                     Socket socket = new Socket(host.getHostName(), host.getPort());
                     conn.bind(socket, params);
                 }
-                BasicHttpEntityEnclosingRequest request = new BasicHttpEntityEnclosingRequest("POST",
-                        "/servlets-examples/servlet/RequestInfoExample");
+                BasicHttpEntityEnclosingRequest request = new BasicHttpEntityEnclosingRequest("POST", "/servlets-examples/servlet/RequestInfoExample");
                 request.setEntity(requestBodies[i]);
                 System.out.println(">> Request URI: " + request.getRequestLine().getUri());
 

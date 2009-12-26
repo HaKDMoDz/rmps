@@ -7,8 +7,9 @@
  */
 package rmp.prp.aide.P30C0000.v;
 
-import com.amonsoft.rmps.prp.v.IView;
 import rmp.prp.aide.P30C0000.P30C0000;
+
+import com.amonsoft.rmps.prp.v.IView;
 
 /**
  * <ul>
@@ -19,6 +20,7 @@ import rmp.prp.aide.P30C0000.P30C0000;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class MiniPanel extends javax.swing.JPanel implements IView
@@ -35,7 +37,7 @@ public class MiniPanel extends javax.swing.JPanel implements IView
      * 
      * @see rmp.face.WRmps#wInit()
      */
-    @ Override
+    @Override
     public boolean wInit()
     {
         return false;

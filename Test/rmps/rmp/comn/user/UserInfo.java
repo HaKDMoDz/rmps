@@ -7,18 +7,18 @@
  */
 package rmp.comn.user;
 
-import com.amonsoft.cons.ConsSys;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import rmp.util.EnvUtil;
+
+import com.amonsoft.cons.ConsSys;
 import com.amonsoft.rmps.IRmps;
 import com.amonsoft.util.LogUtil;
+
 import cons.CfgCons;
-import cons.EnvCons;
-import rmp.util.EnvUtil;
 
 /**
  * <ul>
@@ -28,6 +28,7 @@ import rmp.util.EnvUtil;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public final class UserInfo implements IRmps
@@ -218,8 +219,10 @@ public final class UserInfo implements IRmps
     /**
      * 设置用户配置皮肤信息
      * 
-     * @param type 风格类型
-     * @param name 风格名称
+     * @param type
+     *            风格类型
+     * @param name
+     *            风格名称
      * @return
      */
     public void setUserSkin(String type, String name)
@@ -229,7 +232,8 @@ public final class UserInfo implements IRmps
     }
 
     /**
-     * @param unm the unm to set
+     * @param unm
+     *            the unm to set
      */
     public void setUserName(String unm)
     {
@@ -237,7 +241,8 @@ public final class UserInfo implements IRmps
     }
 
     /**
-     * @param pwd the pwd to set
+     * @param pwd
+     *            the pwd to set
      */
     public void setUserPwds(String pwd)
     {
@@ -245,7 +250,8 @@ public final class UserInfo implements IRmps
     }
 
     /**
-     * @param slt the slt to set
+     * @param slt
+     *            the slt to set
      */
     public void setSlt(String slt)
     {

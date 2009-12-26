@@ -17,13 +17,13 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPopupMenu;
 
+import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
-
-import cons.SysCons;
-import org.dom4j.Document;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
+
+import cons.SysCons;
 
 /**
  * <ul>
@@ -33,6 +33,7 @@ import org.dom4j.io.SAXReader;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public final class RmpsUtil
@@ -47,8 +48,10 @@ public final class RmpsUtil
     /**
      * 检测指定软件的版本更新信息
      * 
-     * @param sid 软件标记ID
-     * @param ver 当前软件版本信息
+     * @param sid
+     *            软件标记ID
+     * @param ver
+     *            当前软件版本信息
      * @return
      * @throws IOException
      * @throws MalformedURLException

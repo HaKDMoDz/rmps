@@ -20,6 +20,7 @@ import rmp.util.MesgUtil;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class MiniPanel extends javax.swing.JPanel implements WBean
@@ -89,13 +90,12 @@ public class MiniPanel extends javax.swing.JPanel implements WBean
         pl_UserPanel.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addContainerGap().addComponent(tf_CharCode,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_CharCode).addContainerGap()));
+                layout.createSequentialGroup().addContainerGap().addComponent(tf_CharCode, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE).addPreferredGap(
+                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_CharCode).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_CharCode).addComponent(tf_CharCode, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_CharCode).addComponent(tf_CharCode, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))));
     }
 
     /**
@@ -177,6 +177,7 @@ public class MiniPanel extends javax.swing.JPanel implements WBean
             return;
         }
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 界面构件区域
     // ////////////////////////////////////////////////////////////////////////

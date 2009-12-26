@@ -7,30 +7,32 @@
  */
 package rmp.prp.aide.P3010000;
 
-import com.amonsoft.bean.WForm;
 import java.awt.image.BufferedImage;
 import java.util.Properties;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 
 import rmp.Rmps;
 import rmp.comn.C1010000.C1010000;
-import com.amonsoft.rmps.prp.IPrpPlus;
-import rmp.prp.Prps;
 import rmp.comn.user.UserInfo;
+import rmp.prp.Prps;
 import rmp.util.BeanUtil;
+import rmp.util.EnvUtil;
 import rmp.util.FileUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
+
+import com.amonsoft.bean.WForm;
+import com.amonsoft.rmps.prp.IPrpPlus;
+import com.amonsoft.util.DeskUtil;
+import com.amonsoft.util.LangUtil;
+import com.amonsoft.util.LogUtil;
+
 import cons.EnvCons;
 import cons.id.PrpCons;
 import cons.prp.aide.P3010000.ConstUI;
-import com.amonsoft.util.LangUtil;
-import com.amonsoft.util.DeskUtil;
-import rmp.util.EnvUtil;
 
 /**
  * <ul>
@@ -40,6 +42,7 @@ import rmp.util.EnvUtil;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class P3010000 extends WForm implements IPrpPlus
@@ -281,19 +284,19 @@ public class P3010000 extends WForm implements IPrpPlus
             case VIEW_TAIL:
                 return showTail();
 
-            // 显示迷你模式
+                // 显示迷你模式
             case VIEW_MINI:
                 return showMini();
 
-            // 显示正常模式
+                // 显示正常模式
             case VIEW_NORM:
                 return showNorm();
 
-            // 显示高级模式
+                // 显示高级模式
             case VIEW_MAIN:
                 return showMain();
 
-            // 显示向导模式
+                // 显示向导模式
             case VIEW_STEP:
                 return showStep();
 
@@ -340,7 +343,8 @@ public class P3010000 extends WForm implements IPrpPlus
     /**
      * 语言资源查询
      * 
-     * @param mesgId 语言资源索引
+     * @param mesgId
+     *            语言资源索引
      * @return 语言资源内容
      */
     public static String getMesg(String mesgId)
@@ -366,8 +370,10 @@ public class P3010000 extends WForm implements IPrpPlus
     /**
      * 语言资源查询
      * 
-     * @param mesgId 语言资源索引
-     * @param defMesg 默认语言资源
+     * @param mesgId
+     *            语言资源索引
+     * @param defMesg
+     *            默认语言资源
      * @return 语言资源内容
      */
     public static String getMesg(String mesgId, String defMesg)

@@ -1,4 +1,3 @@
-
 package rmp.prp.aide.P3040000.proto;
 
 import java.io.Serializable;
@@ -268,10 +267,8 @@ public abstract class ProtoDate implements Cloneable, Serializable
         for (int i = 0; i < ConstUI.LLON_ARGSLUNARELONGATION.length; i++)
         {
             double d9 = ConstUI.LLON_ARGSSOLARANOMALY[i];
-            d8 += ConstUI.LLON_SINECOEFFICIENTS[i]
-                * Math.pow(d7, Math.abs(d9))
-                * sinDegrees(ConstUI.LLON_ARGSLUNARELONGATION[i] * d3 + d9 * d4 + ConstUI.LLON_ARGSLUNARANOMALY[i] * d5
-                    + ConstUI.LLON_ARGSMOONFROMNODE[i] * d6);
+            d8 += ConstUI.LLON_SINECOEFFICIENTS[i] * Math.pow(d7, Math.abs(d9))
+                    * sinDegrees(ConstUI.LLON_ARGSLUNARELONGATION[i] * d3 + d9 * d4 + ConstUI.LLON_ARGSLUNARANOMALY[i] * d5 + ConstUI.LLON_ARGSMOONFROMNODE[i] * d6);
         }
 
         double d10 = (deg(1.0D) / 1000000D) * d8;
@@ -288,12 +285,12 @@ public abstract class ProtoDate implements Cloneable, Serializable
 
     public static final double currentMoment()
     {
-        return (double)Gregorian.toFixed(1970L, 1, 1) + (double)System.currentTimeMillis() / 86400000D;
+        return (double) Gregorian.toFixed(1970L, 1, 1) + (double) System.currentTimeMillis() / 86400000D;
     }
 
     public static final long currentDate()
     {
-        return (long)currentMoment();
+        return (long) currentMoment();
     }
 
     /*-
@@ -330,12 +327,12 @@ public abstract class ProtoDate implements Cloneable, Serializable
 
     public static final int mod(int i, int j)
     {
-        return (int)((double)i - (double)j * Math.floor((double)i / (double)j));
+        return (int) ((double) i - (double) j * Math.floor((double) i / (double) j));
     }
 
     public static final long mod(long l, long l1)
     {
-        return (long)((double)l - (double)l1 * Math.floor((double)l / (double)l1));
+        return (long) ((double) l - (double) l1 * Math.floor((double) l / (double) l1));
     }
 
     /*-
@@ -346,7 +343,7 @@ public abstract class ProtoDate implements Cloneable, Serializable
     -*/
     public static final long quotient(double d, double d1)
     {
-        return (long)Math.floor(d / d1);
+        return (long) Math.floor(d / d1);
     }
 
     /*-
@@ -390,7 +387,7 @@ public abstract class ProtoDate implements Cloneable, Serializable
     -*/
     public static final long kDayOnOrBefore(long l, int i)
     {
-        return l - dayOfWeekFromFixed(l - (long)i);
+        return l - dayOfWeekFromFixed(l - (long) i);
     }
 
     /*-
@@ -457,9 +454,9 @@ public abstract class ProtoDate implements Cloneable, Serializable
     public static final long nthKDay(int i, int j, long l)
     {
         if (i > 0)
-            return kDayBefore(l, j) + (long)(7 * i);
+            return kDayBefore(l, j) + (long) (7 * i);
         else
-            return kDayAfter(l, j) + (long)(7 * i);
+            return kDayAfter(l, j) + (long) (7 * i);
     }
 
     public static final long firstKDay(int i, long l)
@@ -690,7 +687,7 @@ public abstract class ProtoDate implements Cloneable, Serializable
 
     public static final double midday(long l, Location location)
     {
-        return standardFromLocal(localFromApparent((double)l + hr(12D)), location);
+        return standardFromLocal(localFromApparent((double) l + hr(12D)), location);
     }
 
     public static final double midnight(long l, Location location)
@@ -728,7 +725,7 @@ public abstract class ProtoDate implements Cloneable, Serializable
     -*/
     public static final long fixedFromJD(double d)
     {
-        return (long)Math.floor(momentFromJD(d));
+        return (long) Math.floor(momentFromJD(d));
     }
 
     public static final double jdFromFixed(long l)
@@ -738,12 +735,12 @@ public abstract class ProtoDate implements Cloneable, Serializable
 
     public static final long fixedFromMJD(double d)
     {
-        return (long)Math.floor(d + 678576D);
+        return (long) Math.floor(d + 678576D);
     }
 
     public static final double mjdFromFixed(long l)
     {
-        return (double)(l - 0xa5ab0L);
+        return (double) (l - 0xa5ab0L);
     }
 
     public static final double direction(Location location, Location location1)
@@ -796,9 +793,9 @@ public abstract class ProtoDate implements Cloneable, Serializable
         double d1;
         try
         {
-            d1 = momentFromDepression((double)l + 0.25D, location, d);
+            d1 = momentFromDepression((double) l + 0.25D, location, d);
         }
-        catch(Exception _ex)
+        catch (Exception _ex)
         {
             d1 = l;
         }
@@ -811,11 +808,11 @@ public abstract class ProtoDate implements Cloneable, Serializable
         double d1;
         try
         {
-            d1 = momentFromDepression((double)l + 0.75D, location, d);
+            d1 = momentFromDepression((double) l + 0.75D, location, d);
         }
-        catch(Exception _ex)
+        catch (Exception _ex)
         {
-            d1 = (double)l + 0.98999999999999999D;
+            d1 = (double) l + 0.98999999999999999D;
         }
         double d2 = momentFromDepression(d1, location, d);
         return standardFromLocal(d2, location);
@@ -935,11 +932,11 @@ public abstract class ProtoDate implements Cloneable, Serializable
     -*/
     public static final double ephemerisCorrection(double d)
     {
-        long l = Gregorian.yearFromFixed((long)Math.floor(d));
-        double d1 = (double)difference(Gregorian.toFixed(1900L, 1, 1), Gregorian.toFixed(l, 7, 1)) / 36525D;
+        long l = Gregorian.yearFromFixed((long) Math.floor(d));
+        double d1 = (double) difference(Gregorian.toFixed(1900L, 1, 1), Gregorian.toFixed(l, 7, 1)) / 36525D;
         double d2;
         if (l >= 1988L && l <= 2019L)
-            d2 = (double)(l - 1933L) / 86400D;
+            d2 = (double) (l - 1933L) / 86400D;
         else if (l >= 1900L && l <= 1987L)
             d2 = poly(d1, ConstUI.EC_COEFF19TH);
         else if (l >= 1800L && l <= 1899L)
@@ -952,7 +949,7 @@ public abstract class ProtoDate implements Cloneable, Serializable
         }
         else
         {
-            double d3 = hr(12D) + (double)difference(Gregorian.toFixed(1810L, 1, 1), Gregorian.toFixed(l, 1, 1));
+            double d3 = hr(12D) + (double) difference(Gregorian.toFixed(1810L, 1, 1), Gregorian.toFixed(l, 1, 1));
             return ((d3 * d3) / 41048480D - 15D) / 86400D;
         }
         return d2;
@@ -998,10 +995,9 @@ public abstract class ProtoDate implements Cloneable, Serializable
         double d4 = poly(d1, ConstUI.ET_COEFFECCENTRICITY);
         double d5 = obliquity(d);
         double d6 = square(tanDegrees(d5 / 2D));
-        double d7 = 0.15915494309189535D * (d6 * sinDegrees(2D * d2) + -2D * d4 * sinDegrees(d3) + 4D * d4 * d6
-            * sinDegrees(d3) * cosDegrees(2D * d2) + -0.5D * d6 * d6 * sinDegrees(4D * d2) + -1.25D * d4 * d4
-            * sinDegrees(2D * d3));
-        return (double)signum(d7) * Math.min(Math.abs(d7), hr(12D));
+        double d7 = 0.15915494309189535D * (d6 * sinDegrees(2D * d2) + -2D * d4 * sinDegrees(d3) + 4D * d4 * d6 * sinDegrees(d3) * cosDegrees(2D * d2) + -0.5D * d6 * d6 * sinDegrees(4D * d2) + -1.25D
+                * d4 * d4 * sinDegrees(2D * d3));
+        return (double) signum(d7) * Math.min(Math.abs(d7), hr(12D));
     }
 
     /*-
@@ -1054,8 +1050,7 @@ public abstract class ProtoDate implements Cloneable, Serializable
     public static final double aberration(double d)
     {
         double d1 = julianCenturies(d);
-        return deg(9.7399999999999996E-005D) * cosDegrees(deg(177.63D) + deg(35999.018479999999D) * d1)
-            - deg(0.0055750000000000001D);
+        return deg(9.7399999999999996E-005D) * cosDegrees(deg(177.63D) + deg(35999.018479999999D) * d1) - deg(0.0055750000000000001D);
     }
 
     /*-
@@ -1123,10 +1118,7 @@ public abstract class ProtoDate implements Cloneable, Serializable
         double d7 = poly(d1, ConstUI.NM_COEFFCAPOMEGA);
         double d8 = -0.00017000000000000001D * sinDegrees(d7);
         for (int i = 0; i < ConstUI.NM_SINECOEFF.length; i++)
-            d8 += ConstUI.NM_SINECOEFF[i]
-                * Math.pow(d3, ConstUI.NM_EFACTOR[i])
-                * sinDegrees(ConstUI.NM_SOLARCOEFF[i] * d4 + ConstUI.NM_LUNARCOEFF[i] * d5 + ConstUI.NM_MOONCOEFF[i]
-                    * d6);
+            d8 += ConstUI.NM_SINECOEFF[i] * Math.pow(d3, ConstUI.NM_EFACTOR[i]) * sinDegrees(ConstUI.NM_SOLARCOEFF[i] * d4 + ConstUI.NM_LUNARCOEFF[i] * d5 + ConstUI.NM_MOONCOEFF[i] * d6);
 
         double d9 = 0.0D;
         for (int j = 0; j < ConstUI.NM_ADDCONST.length; j++)
@@ -1196,18 +1188,13 @@ public abstract class ProtoDate implements Cloneable, Serializable
         for (int i = 0; i < ConstUI.LLAT_ARGSLUNARELONGATION.length; i++)
         {
             double d9 = ConstUI.LLAT_ARGSSOLARANOMALY[i];
-            d8 += ConstUI.LLAT_SINECOEFFICIENTS[i]
-                * Math.pow(d7, Math.abs(d9))
-                * sinDegrees(ConstUI.LLAT_ARGSLUNARELONGATION[i] * d3 + d9 * d4 + ConstUI.LLAT_ARGSLUNARANOMALY[i] * d5
-                    + ConstUI.LLAT_ARGSMOONNODE[i] * d6);
+            d8 += ConstUI.LLAT_SINECOEFFICIENTS[i] * Math.pow(d7, Math.abs(d9))
+                    * sinDegrees(ConstUI.LLAT_ARGSLUNARELONGATION[i] * d3 + d9 * d4 + ConstUI.LLAT_ARGSLUNARANOMALY[i] * d5 + ConstUI.LLAT_ARGSMOONNODE[i] * d6);
         }
 
         d8 *= deg(1.0D) / 1000000D;
-        double d10 = (deg(175D) / 1000000D)
-            * (sinDegrees(deg(119.75D) + d1 * 131.84899999999999D + d6) + sinDegrees((deg(119.75D) + d1 * 131.84899999999999D)
-                - d6));
-        double d11 = (deg(-2235D) / 1000000D) * sinDegrees(d2) + (deg(127D) / 1000000D) * sinDegrees(d2 - d5)
-            + (deg(-115D) / 1000000D) * sinDegrees(d2 + d5);
+        double d10 = (deg(175D) / 1000000D) * (sinDegrees(deg(119.75D) + d1 * 131.84899999999999D + d6) + sinDegrees((deg(119.75D) + d1 * 131.84899999999999D) - d6));
+        double d11 = (deg(-2235D) / 1000000D) * sinDegrees(d2) + (deg(127D) / 1000000D) * sinDegrees(d2 - d5) + (deg(-115D) / 1000000D) * sinDegrees(d2 + d5);
         double d12 = (deg(382D) / 1000000D) * sinDegrees(deg(313.44999999999999D) + d1 * deg(481266.484D));
         return mod(d8 + d10 + d11 + d12, 360D);
     }
@@ -1219,8 +1206,7 @@ public abstract class ProtoDate implements Cloneable, Serializable
         double d3 = obliquity(d);
         double d4 = lunarLongitude(d);
         double d5 = lunarLatitude(d);
-        double d6 = arcTanDegrees((sinDegrees(d4) * cosDegrees(d3) - tanDegrees(d5) * sinDegrees(d3)) / cosDegrees(d4),
-            (int)quotient(d4, deg(90D)) + 1);
+        double d6 = arcTanDegrees((sinDegrees(d4) * cosDegrees(d3) - tanDegrees(d5) * sinDegrees(d3)) / cosDegrees(d4), (int) quotient(d4, deg(90D)) + 1);
         double d7 = arcSinDegrees(sinDegrees(d5) * cosDegrees(d3) + cosDegrees(d5) * sinDegrees(d3) * sinDegrees(d4));
         double d8 = siderealFromMoment(d);
         double d9 = mod((d8 + d2) - d6, 360D);
@@ -1242,13 +1228,12 @@ public abstract class ProtoDate implements Cloneable, Serializable
         double d1 = lunarPhase(d);
         double d2 = lunarAltitude(d, location);
         double d3 = arcCosDegrees(cosDegrees(lunarLatitude(d)) * cosDegrees(d1));
-        return ConstUI.NEW < d1 && d1 < ConstUI.FIRST_QUARTER && deg(10.6D) <= d3 && d3 <= deg(90D)
-            && d2 > deg(4.0999999999999996D);
+        return ConstUI.NEW < d1 && d1 < ConstUI.FIRST_QUARTER && deg(10.6D) <= d3 && d3 <= deg(90D) && d2 > deg(4.0999999999999996D);
     }
 
     public static final long phasisOnOrBefore(long l, Location location) throws Exception
     {
-        long l1 = (long)((double)l - Math.floor((lunarPhase(l) / deg(360D)) * 29.530588853000001D));
+        long l1 = (long) ((double) l - Math.floor((lunarPhase(l) / deg(360D)) * 29.530588853000001D));
         long l2 = l - l1 > 3L || visibleCrescent(l, location) ? l1 - 2L : l1 - 30L;
         long l3;
         for (l3 = l2; !visibleCrescent(l3, location); l3++)
@@ -1264,7 +1249,7 @@ public abstract class ProtoDate implements Cloneable, Serializable
 
     public static final String nameFromNumber(long l, String as[])
     {
-        return as[(int)adjustedMod(l, as.length) - 1];
+        return as[(int) adjustedMod(l, as.length) - 1];
     }
 
     public static final String nameFromDayOfWeek(long l, String as[])

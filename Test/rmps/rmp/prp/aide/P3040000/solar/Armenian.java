@@ -47,16 +47,15 @@ public class Armenian extends SolarDate
     public void fromFixed(long l)
     {
         Egyptian egyptian = new Egyptian((l + Egyptian.EPOCH) - 0x312e3L);
-        super.year = ((SolarDate)(egyptian)).year;
-        super.month = ((SolarDate)(egyptian)).month;
-        super.day = ((SolarDate)(egyptian)).day;
+        super.year = ((SolarDate) (egyptian)).year;
+        super.month = ((SolarDate) (egyptian)).month;
+        super.day = ((SolarDate) (egyptian)).day;
     }
 
     public String format()
     {
-        return MessageFormat.format("{0}, {1} {2} {3,number,#}", new Object[]{
-            ProtoDate.nameFromDayOfWeek(toFixed(), dayOfWeekNames), new Integer(super.day),
-            ProtoDate.nameFromMonth(super.month, monthNames), new Long(super.year)});
+        return MessageFormat.format("{0}, {1} {2} {3,number,#}", new Object[]
+        { ProtoDate.nameFromDayOfWeek(toFixed(), dayOfWeekNames), new Integer(super.day), ProtoDate.nameFromMonth(super.month, monthNames), new Long(super.year) });
     }
 
     public boolean equals(Object obj)
@@ -67,12 +66,12 @@ public class Armenian extends SolarDate
             return internalEquals(obj);
     }
 
-    public static final long   EPOCH            = 0x312e3L;
-    public static final String dayOfWeekNames[] = {"Miashabathi", "Erkoushabathi", "Erekhshabathi", "Chorekhshabathi",
-        "Hingshabathi", "Urbath", "Shabath"     };
-    public static final String monthNames[]     = {"Nawasardi", "Hori", "Sahmi", "Tre", "Kaloch", "Arach", "Mehekani",
-        "Areg", "Ahekani", "Mareri", "Margach", "Hrotich", "Aweleach"};
+    public static final long EPOCH = 0x312e3L;
+    public static final String dayOfWeekNames[] =
+    { "Miashabathi", "Erkoushabathi", "Erekhshabathi", "Chorekhshabathi", "Hingshabathi", "Urbath", "Shabath" };
+    public static final String monthNames[] =
+    { "Nawasardi", "Hori", "Sahmi", "Tre", "Kaloch", "Arach", "Mehekani", "Areg", "Ahekani", "Mareri", "Margach", "Hrotich", "Aweleach" };
 
     /** serialVersionUID */
-    private static final long  serialVersionUID = 5637062491755009633L;
+    private static final long serialVersionUID = 5637062491755009633L;
 }

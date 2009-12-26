@@ -18,6 +18,7 @@ import cons.prp.aide.P3040000.ConstUI;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class WeekLabel extends JLabel
@@ -40,6 +41,7 @@ public class WeekLabel extends JLabel
 
         return true;
     }
+
     /** serialVersionUID */
     private static final long serialVersionUID = 7475561024725110543L;
 }

@@ -16,6 +16,7 @@ package rmp.face;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public abstract class WBaseData implements WData
@@ -42,7 +43,8 @@ public abstract class WBaseData implements WData
     }
 
     /**
-     * @param metaExist the metaExist to set
+     * @param metaExist
+     *            the metaExist to set
      */
     public void setMetaExist(boolean metaExist)
     {

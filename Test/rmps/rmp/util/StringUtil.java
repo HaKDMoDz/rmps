@@ -7,8 +7,9 @@
  */
 package rmp.util;
 
-import com.amonsoft.util.CharUtil;
 import java.util.StringTokenizer;
+
+import com.amonsoft.util.CharUtil;
 
 import cons.SysCons;
 
@@ -20,6 +21,7 @@ import cons.SysCons;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public final class StringUtil
@@ -34,8 +36,10 @@ public final class StringUtil
     /**
      * 按正常十六进制将字节数组转换为可以显示的字符串数据
      * 
-     * @param v 等进行转换的字节数组
-     * @param bigCase 返回结果字符串是否使用大写字符，true大写，false小写
+     * @param v
+     *            等进行转换的字节数组
+     * @param bigCase
+     *            返回结果字符串是否使用大写字符，true大写，false小写
      * @return
      */
     public static String bytesToString(byte[] v, boolean bigCase)
@@ -46,8 +50,10 @@ public final class StringUtil
     /**
      * 指定转换参考码内的可显示字符串数据
      * 
-     * @param c 字节转换参考码，其长度不能小于16
-     * @param v 待转换的字节数组
+     * @param c
+     *            字节转换参考码，其长度不能小于16
+     * @param v
+     *            待转换的字节数组
      * @return
      */
     public static String bytesToString(char[] c, byte[] v)
@@ -77,10 +83,14 @@ public final class StringUtil
     /**
      * 将指定的十进制整型数据转换为指定进制的数据格式
      * 
-     * @param i 有待进行进制转换的十进制整型数值
-     * @param shift 目标进制间位进制所占Bit位数，如16进制占4Bit等
-     * @param bigCase 是否转换后的字符串格式使用大写格式（在需要的情况下），true大写，false小写
-     * @param append 是否需要左端补0显示，true左端补0显示，false，左端不补0显示
+     * @param i
+     *            有待进行进制转换的十进制整型数值
+     * @param shift
+     *            目标进制间位进制所占Bit位数，如16进制占4Bit等
+     * @param bigCase
+     *            是否转换后的字符串格式使用大写格式（在需要的情况下），true大写，false小写
+     * @param append
+     *            是否需要左端补0显示，true左端补0显示，false，左端不补0显示
      * @return 格式化转换后的字符串数据
      */
     public static String intToString(int i, int shift, boolean bigCase, boolean append)
@@ -191,8 +201,10 @@ public final class StringUtil
     /**
      * 生成指定的图像文件名称
      * 
-     * @param i 待转换的整形数值
-     * @param bigCase 是否使用大写字符：true:大写；false:小写
+     * @param i
+     *            待转换的整形数值
+     * @param bigCase
+     *            是否使用大写字符：true:大写；false:小写
      * @return
      */
     public static String encodeInt(int i, boolean bigCase)
@@ -242,8 +254,10 @@ public final class StringUtil
     /**
      * 此方法目前主要用于时间的格式转化，用于生成指定格式的时间，数据表格主键。
      * 
-     * @param l 待转换的整形数值
-     * @param bigCase 是否使用大写字符：true:大写；false:小写
+     * @param l
+     *            待转换的整形数值
+     * @param bigCase
+     *            是否使用大写字符：true:大写；false:小写
      * @return
      */
     public static String encodeLong(long l, boolean bigCase)
@@ -316,10 +330,14 @@ public final class StringUtil
     /**
      * 格式化带有参数的字符串为适当的形式
      * 
-     * @param srcStr 源字符串
-     * @param srcHash 源字符串是否为索引值
-     * @param argHash 参数列表是否为索引值
-     * @param args 字符串参数列表
+     * @param srcStr
+     *            源字符串
+     * @param srcHash
+     *            源字符串是否为索引值
+     * @param argHash
+     *            参数列表是否为索引值
+     * @param args
+     *            字符串参数列表
      * @return
      */
     public static final String format(String srcStr, String... args)
@@ -360,7 +378,8 @@ public final class StringUtil
     /**
      * 字符串转换为字节数组，此方法根据字符的Unicode码转换成相应的字符，对应字符的低字节前置， 如字符‘A’转换后的结果为[65][0]
      * 
-     * @param text 待进行字节转换的字符串
+     * @param text
+     *            待进行字节转换的字符串
      * @return 转换后的结果
      */
     public static byte[] getBytes(String text)
@@ -387,7 +406,8 @@ public final class StringUtil
      * 数据更新或者新增时，用户输入字符串中存在数据库关键字符（如单引号 ' ），
      * 这种情况下会造成数据库更新或者新增异常，此方法主要用于用户输入字符到数据库合法字符的转换。
      * 
-     * @param text 待转换的用户输入字符
+     * @param text
+     *            待转换的用户输入字符
      * @return 数据库允许的字符
      */
     public static String toDBText(String text)
@@ -401,9 +421,12 @@ public final class StringUtil
     }
 
     /**
-     * @param orgText 源字符串
-     * @param srcText 待替换字符串
-     * @param dstText 目标字符串
+     * @param orgText
+     *            源字符串
+     * @param srcText
+     *            待替换字符串
+     * @param dstText
+     *            目标字符串
      * @return
      */
     public static String replace(String orgText, String srcText, String dstText)
@@ -412,9 +435,12 @@ public final class StringUtil
     }
 
     /**
-     * @param orgBuf 源字符串
-     * @param srcText 待替换字符串
-     * @param dstText 目标字符串
+     * @param orgBuf
+     *            源字符串
+     * @param srcText
+     *            待替换字符串
+     * @param dstText
+     *            目标字符串
      * @return
      */
     public static StringBuffer replace(StringBuffer orgBuf, String srcText, String dstText)
@@ -446,10 +472,14 @@ public final class StringUtil
     /**
      * 把字符串orgText中所有处于sText与eText之间的字符数据（包含标记字符串）替换为目标字符串dstText
      * 
-     * @param orgText 源字符串
-     * @param sText 起始标记字符串
-     * @param eText 结束标记字符串
-     * @param dstText 目标字符串
+     * @param orgText
+     *            源字符串
+     * @param sText
+     *            起始标记字符串
+     * @param eText
+     *            结束标记字符串
+     * @param dstText
+     *            目标字符串
      * @return 替换后的字符串
      */
     public static String replace(String orgText, String sText, String eText, String dstText)
@@ -667,7 +697,8 @@ public final class StringUtil
     /**
      * Unicode转换到Unicode转换码
      * 
-     * @param uniStr Unicode正常字符串
+     * @param uniStr
+     *            Unicode正常字符串
      * @return
      */
     public static String unicode2UnicodeEsc(String uniStr)
@@ -706,7 +737,8 @@ public final class StringUtil
     /**
      * Unicode转换码到Unicode字符
      * 
-     * @param escStr Unicode转换码字符串
+     * @param escStr
+     *            Unicode转换码字符串
      * @return
      * @throws Exception
      */

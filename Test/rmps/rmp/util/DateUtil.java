@@ -18,6 +18,7 @@ import java.util.Calendar;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public final class DateUtil
@@ -29,10 +30,14 @@ public final class DateUtil
     /**
      * 转换指定的日期、时间字符串为日期
      * 
-     * @param datetime 日期时间字符串
-     * @param datesp 日期分隔字符
-     * @param timesp 时间分隔字符
-     * @param dtsp 日期与时间的分隔字符
+     * @param datetime
+     *            日期时间字符串
+     * @param datesp
+     *            日期分隔字符
+     * @param timesp
+     *            时间分隔字符
+     * @param dtsp
+     *            日期与时间的分隔字符
      * @return Calendar日期格式
      */
     public static Calendar stringToDate(String datetime, char datesp, char timesp, char dtsp) throws Exception
@@ -166,13 +171,16 @@ public final class DateUtil
     /**
      * 获取指定年月日是一周中的第几天（即星期几），默认一周中第一天为星期日，其后依次为
      * 星期一、星期二、星期三、星期四、星期五、星期六，并分别用0,1,2,3,4,5,6来表示。
-     * 指定年月日是一周中的第几天的计算公式通常为蔡勒公式，其定义如下： W = [C/4] - 2C + Y + [Y/4] + [13 * (M+1) /
-     * 5] + D - 1 W表示一周中的第几天（即星期几）， C是当前年份所对应的世纪数减一， Y是当前年份的后两位， M是要计算的月份，
+     * 指定年月日是一周中的第几天的计算公式通常为蔡勒公式，其定义如下： W = [C/4] - 2C + Y + [Y/4] + [13 * (M+1)
+     * / 5] + D - 1 W表示一周中的第几天（即星期几）， C是当前年份所对应的世纪数减一， Y是当前年份的后两位， M是要计算的月份，
      * D是要计算的日数。 公式说明： 1月和2月要按上一年的13月和14月来算，这时C和Y均应按上一年所对应的年份来取值。
      * 
-     * @param year 要计算的年份信息
-     * @param month 要计算的月份信息
-     * @param day 要计算的日期信息
+     * @param year
+     *            要计算的年份信息
+     * @param month
+     *            要计算的月份信息
+     * @param day
+     *            要计算的日期信息
      * @return 指定年月日所对应的一周中的第几天（即星期几），一周中的第一天为星期日，以数值0表示
      */
     public static int dayInWeek(int year, int month, int day)
@@ -212,8 +220,10 @@ public final class DateUtil
     /**
      * 获得指定年份的月份里包含有多少天数。
      * 
-     * @param year 要计算天数的年份
-     * @param month 要计算天数的月份
+     * @param year
+     *            要计算天数的年份
+     * @param month
+     *            要计算天数的月份
      * @return
      */
     public static int daysOfMonth(int year, int month)
@@ -229,13 +239,13 @@ public final class DateUtil
             case 10:
             case 12:
                 return 31;
-            // 四、六、九、十一月份分别为30天
+                // 四、六、九、十一月份分别为30天
             case 4:
             case 6:
             case 9:
             case 11:
                 return 30;
-            // 二月份平年为28天，润年为29年
+                // 二月份平年为28天，润年为29年
             case 2:
                 int days = 28;
                 if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
@@ -278,9 +288,7 @@ public final class DateUtil
     {
         int total = 0;
         int[] days =
-        {
-            0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
-        };
+        { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
         if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
         {
             days[2] = 29;
@@ -296,9 +304,12 @@ public final class DateUtil
     /**
      * 计算指定的日期所在周是一年中的第几周
      * 
-     * @param year 年份
-     * @param month 月份
-     * @param day 日期
+     * @param year
+     *            年份
+     * @param month
+     *            月份
+     * @param day
+     *            日期
      * @return 对应周为一年中第几周
      */
     public static int weekInYear(int year, int month, int day)

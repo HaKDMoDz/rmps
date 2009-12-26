@@ -20,6 +20,7 @@ import rmp.bean.K1SV1S;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class DataModel extends AbstractTableModel
@@ -86,6 +87,7 @@ public class DataModel extends AbstractTableModel
     {
         this.nameList = list;
     }
+
     /** serialVersionUID */
     private static final long serialVersionUID = 4864552477900497236L;
 }

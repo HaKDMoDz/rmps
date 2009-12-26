@@ -41,7 +41,7 @@ public class Hebrew extends SolarDate
 
     public static long toFixed(long l, int i, int j)
     {
-        long l1 = (newYear(l) + (long)j) - 1L;
+        long l1 = (newYear(l) + (long) j) - 1L;
         if (i < 7)
         {
             for (int k = 7; k <= lastMonthOfYear(l); k++)
@@ -74,7 +74,7 @@ public class Hebrew extends SolarDate
         int i = l >= toFixed(super.year, 1, 1) ? 1 : 7;
         for (super.month = i; l > toFixed(super.year, super.month, lastDayOfMonth(super.month, super.year)); super.month++)
             ;
-        super.day = (int)((1L + l) - toFixed(super.year, super.month, 1));
+        super.day = (int) ((1L + l) - toFixed(super.year, super.month, 1));
     }
 
     public static boolean isLeapYear(long l)
@@ -89,21 +89,20 @@ public class Hebrew extends SolarDate
 
     public static int lastDayOfMonth(int i, long l)
     {
-        return i != 2 && i != 4 && i != 6 && i != 10 && i != 13 && (i != 12 || isLeapYear(l))
-            && (i != 8 || hasLongMarheshvan(l)) && (i != 9 || !hasShortKislev(l)) ? 30 : 29;
+        return i != 2 && i != 4 && i != 6 && i != 10 && i != 13 && (i != 12 || isLeapYear(l)) && (i != 8 || hasLongMarheshvan(l)) && (i != 9 || !hasShortKislev(l)) ? 30 : 29;
     }
 
     public static double moment(int i, long l)
     {
         long l1 = i >= 7 ? l : l + 1L;
-        long l2 = (long)(i - 7) + ProtoDate.quotient(235L * l1 - 234L, 19D);
-        return ((double)EPOCH - 0.033796296296296297D) + (double)l2 * (29D + ProtoDate.hr(12D) + 0.030594135802469134D);
+        long l2 = (long) (i - 7) + ProtoDate.quotient(235L * l1 - 234L, 19D);
+        return ((double) EPOCH - 0.033796296296296297D) + (double) l2 * (29D + ProtoDate.hr(12D) + 0.030594135802469134D);
     }
 
     public static long calendarElapsedDays(long l)
     {
         long l1 = ProtoDate.quotient(235L * l - 234L, 19D);
-        double d = 12084D + 13753D * (double)l1;
+        double d = 12084D + 13753D * (double) l1;
         long l2 = 29L * l1 + ProtoDate.quotient(d, 25920D);
         if (ProtoDate.mod(3L * (l2 + 1L), 7L) < 3L)
             return l2 + 1L;
@@ -113,7 +112,7 @@ public class Hebrew extends SolarDate
 
     public static long newYear(long l)
     {
-        return EPOCH + calendarElapsedDays(l) + (long)newYearDelay(l);
+        return EPOCH + calendarElapsedDays(l) + (long) newYearDelay(l);
     }
 
     public static int newYearDelay(long l)
@@ -128,7 +127,7 @@ public class Hebrew extends SolarDate
 
     public static int daysInYear(long l)
     {
-        return (int)(newYear(l + 1L) - newYear(l));
+        return (int) (newYear(l + 1L) - newYear(l));
     }
 
     public static boolean hasLongMarheshvan(long l)
@@ -176,13 +175,12 @@ public class Hebrew extends SolarDate
         double d = ProtoDate.solarLongitudeAfter(l1, ConstUI.SPRING);
         try
         {
-            long l2 = ProtoDate.phasisOnOrBefore((long)Math.floor(d) + 10L, ConstUI.JERUSALEM);
-            double d1 = ProtoDate.universalFromStandard(ProtoDate.sunset(l2 + 14L, ConstUI.JERUSALEM),
-                ConstUI.JERUSALEM);
+            long l2 = ProtoDate.phasisOnOrBefore((long) Math.floor(d) + 10L, ConstUI.JERUSALEM);
+            double d1 = ProtoDate.universalFromStandard(ProtoDate.sunset(l2 + 14L, ConstUI.JERUSALEM), ConstUI.JERUSALEM);
             long l3 = d >= d1 ? ProtoDate.phasisOnOrBefore(l2 + 45L, ConstUI.JERUSALEM) : l2;
             return l3 + 13L;
         }
-        catch(Exception _ex)
+        catch (Exception _ex)
         {
             return 0L;
         }
@@ -193,7 +191,8 @@ public class Hebrew extends SolarDate
         long l1 = l - passover(Gregorian.yearFromFixed(l));
         int ai[];
         if (l1 >= 1L && l1 <= 49L)
-            ai = (new int[]{(int)ProtoDate.quotient(l1, 7D), (int)ProtoDate.mod(l1, 7L)});
+            ai = (new int[]
+            { (int) ProtoDate.quotient(l1, 7D), (int) ProtoDate.mod(l1, 7L) });
         else
             throw new Exception();
         return ai;
@@ -228,7 +227,7 @@ public class Hebrew extends SolarDate
     public static Vector<Long> birkathHaHama(long l)
     {
         Vector<Long> fixedvector = Coptic.inGregorian(7, 30, l);
-        if (fixedvector.size() != 0 && ProtoDate.mod(((SolarDate)(new Coptic(fixedvector.get(0)))).year, 28L) == 17L)
+        if (fixedvector.size() != 0 && ProtoDate.mod(((SolarDate) (new Coptic(fixedvector.get(0)))).year, 28L) == 17L)
             return fixedvector;
         else
             return new Vector<Long>();
@@ -251,17 +250,17 @@ public class Hebrew extends SolarDate
 
     public static long birthday(Hebrew hebrew, long l)
     {
-        if (((SolarDate)(hebrew)).month == lastMonthOfYear(((SolarDate)(hebrew)).year))
-            return toFixed(l, lastMonthOfYear(l), ((SolarDate)(hebrew)).day);
+        if (((SolarDate) (hebrew)).month == lastMonthOfYear(((SolarDate) (hebrew)).year))
+            return toFixed(l, lastMonthOfYear(l), ((SolarDate) (hebrew)).day);
         else
-            return (toFixed(l, ((SolarDate)(hebrew)).month, 1) + (long)((SolarDate)(hebrew)).day) - 1L;
+            return (toFixed(l, ((SolarDate) (hebrew)).month, 1) + (long) ((SolarDate) (hebrew)).day) - 1L;
     }
 
     public static Vector<Long> birthdayInGregorian(Hebrew hebrew, long l)
     {
         long l1 = Gregorian.toFixed(l, 1, 1);
         long l2 = Gregorian.toFixed(l, 12, 31);
-        long l3 = ((SolarDate)(new Hebrew(l1))).year;
+        long l3 = ((SolarDate) (new Hebrew(l1))).year;
         long l4 = birthday(hebrew, l3);
         long l5 = birthday(hebrew, l3 + 1L);
         Vector<Long> fixedvector = new Vector<Long>(1, 1);
@@ -275,18 +274,16 @@ public class Hebrew extends SolarDate
     public static long yahrzeit(Hebrew hebrew, long l)
     {
         long l1;
-        if (((SolarDate)(hebrew)).month == 8 && ((SolarDate)(hebrew)).day == 30
-            && !hasLongMarheshvan(((SolarDate)(hebrew)).year + 1L))
+        if (((SolarDate) (hebrew)).month == 8 && ((SolarDate) (hebrew)).day == 30 && !hasLongMarheshvan(((SolarDate) (hebrew)).year + 1L))
             l1 = toFixed(l, 9, 1) - 1L;
-        else if (((SolarDate)(hebrew)).month == 9 && ((SolarDate)(hebrew)).day == 30
-            && hasShortKislev(((SolarDate)(hebrew)).year + 1L))
+        else if (((SolarDate) (hebrew)).month == 9 && ((SolarDate) (hebrew)).day == 30 && hasShortKislev(((SolarDate) (hebrew)).year + 1L))
             l1 = toFixed(l, 10, 1) - 1L;
-        else if (((SolarDate)(hebrew)).month == 13)
-            l1 = toFixed(l, lastMonthOfYear(l), ((SolarDate)(hebrew)).day);
-        else if (((SolarDate)(hebrew)).day == 30 && ((SolarDate)(hebrew)).month == 12 && !isLeapYear(l))
+        else if (((SolarDate) (hebrew)).month == 13)
+            l1 = toFixed(l, lastMonthOfYear(l), ((SolarDate) (hebrew)).day);
+        else if (((SolarDate) (hebrew)).day == 30 && ((SolarDate) (hebrew)).month == 12 && !isLeapYear(l))
             l1 = toFixed(l, 11, 30);
         else
-            l1 = (toFixed(l, ((SolarDate)(hebrew)).month, 1) + (long)((SolarDate)(hebrew)).day) - 1L;
+            l1 = (toFixed(l, ((SolarDate) (hebrew)).month, 1) + (long) ((SolarDate) (hebrew)).day) - 1L;
         return l1;
     }
 
@@ -294,7 +291,7 @@ public class Hebrew extends SolarDate
     {
         long l1 = Gregorian.toFixed(l, 1, 1);
         long l2 = Gregorian.toFixed(l, 12, 31);
-        long l3 = ((SolarDate)(new Hebrew(l1))).year;
+        long l3 = ((SolarDate) (new Hebrew(l1))).year;
         long l4 = yahrzeit(hebrew, l3);
         long l5 = yahrzeit(hebrew, l3 + 1L);
         Vector<Long> fixedvector = new Vector<Long>(1, 1);
@@ -307,10 +304,9 @@ public class Hebrew extends SolarDate
 
     public String format()
     {
-        return MessageFormat.format("{0}, {1} {2} {3,number,#} A.M.", new Object[]{
-            ProtoDate.nameFromDayOfWeek(toFixed(), dayOfWeekNames), new Integer(super.day),
-            ProtoDate.nameFromMonth(super.month, isLeapYear(super.year) ? leapYearMonthNames : monthNames),
-            new Long(super.year)});
+        return MessageFormat.format("{0}, {1} {2} {3,number,#} A.M.", new Object[]
+        { ProtoDate.nameFromDayOfWeek(toFixed(), dayOfWeekNames), new Integer(super.day), ProtoDate.nameFromMonth(super.month, isLeapYear(super.year) ? leapYearMonthNames : monthNames),
+                new Long(super.year) });
     }
 
     public boolean equals(Object obj)
@@ -321,16 +317,16 @@ public class Hebrew extends SolarDate
             return internalEquals(obj);
     }
 
-    public static final int    TISHRI               = 7;
-    public static final int    NISAN                = 1;
-    public static final long   EPOCH                = Julian.toFixed(Julian.BCE(3761L), 10, 7);
-    public static final String dayOfWeekNames[]     = {"yom rishon", "yom sheni", "yom shelishi", "yom revi`i",
-        "yom hamishi", "yom shishi", "yom shabbat"  };
-    public static final String monthNames[]         = {"Nisan", "Iyyar", "Sivan", "Tammuz", "Av", "Elul", "Tishri",
-        "Marheshvan", "Kislev", "Tevet", "Shevat", "Adar"};
-    public static final String leapYearMonthNames[] = {"Nisan", "Iyyar", "Sivan", "Tammuz", "Av", "Elul", "Tishri",
-        "Marheshvan", "Kislev", "Tevet", "Shevat", "Adar I", "Adar II"};
+    public static final int TISHRI = 7;
+    public static final int NISAN = 1;
+    public static final long EPOCH = Julian.toFixed(Julian.BCE(3761L), 10, 7);
+    public static final String dayOfWeekNames[] =
+    { "yom rishon", "yom sheni", "yom shelishi", "yom revi`i", "yom hamishi", "yom shishi", "yom shabbat" };
+    public static final String monthNames[] =
+    { "Nisan", "Iyyar", "Sivan", "Tammuz", "Av", "Elul", "Tishri", "Marheshvan", "Kislev", "Tevet", "Shevat", "Adar" };
+    public static final String leapYearMonthNames[] =
+    { "Nisan", "Iyyar", "Sivan", "Tammuz", "Av", "Elul", "Tishri", "Marheshvan", "Kislev", "Tevet", "Shevat", "Adar I", "Adar II" };
 
     /** serialVersionUID */
-    private static final long  serialVersionUID     = 6903103842316234718L;
+    private static final long serialVersionUID = 6903103842316234718L;
 }

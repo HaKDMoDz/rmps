@@ -14,6 +14,7 @@ package rmp.irp.m.I7040000;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public interface ConsFun

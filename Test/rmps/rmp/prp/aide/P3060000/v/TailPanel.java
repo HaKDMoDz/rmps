@@ -11,8 +11,10 @@ import rmp.prp.aide.P3060000.P3060000;
 import rmp.prp.aide.P3060000.t.Util;
 import rmp.util.BeanUtil;
 import rmp.util.CheckUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
+
+import com.amonsoft.util.LogUtil;
+
 import cons.prp.aide.P3060000.LangRes;
 
 /**
@@ -22,6 +24,7 @@ import cons.prp.aide.P3060000.LangRes;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class TailPanel
@@ -142,6 +145,7 @@ public class TailPanel
             tf_UserExps.requestFocus();
         }
     }
+
     private javax.swing.JTextField tf_UserExps;
     private javax.swing.JButton bt_ButnExec;
 }

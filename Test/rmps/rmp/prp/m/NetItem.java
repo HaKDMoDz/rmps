@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class NetItem
@@ -38,7 +39,8 @@ public class NetItem
     }
 
     /**
-     * @param href the href to set
+     * @param href
+     *            the href to set
      */
     public void setHref(String href)
     {
@@ -54,7 +56,8 @@ public class NetItem
     }
 
     /**
-     * @param icon the icon to set
+     * @param icon
+     *            the icon to set
      */
     public void setIcon(ImageIcon icon)
     {
@@ -70,7 +73,8 @@ public class NetItem
     }
 
     /**
-     * @param name the name to set
+     * @param name
+     *            the name to set
      */
     public void setName(String name)
     {
@@ -86,7 +90,8 @@ public class NetItem
     }
 
     /**
-     * @param title the title to set
+     * @param title
+     *            the title to set
      */
     public void setTitle(String title)
     {
@@ -102,7 +107,8 @@ public class NetItem
     }
 
     /**
-     * @param vendor the vendor to set
+     * @param vendor
+     *            the vendor to set
      */
     public void setVendor(String vendor)
     {
@@ -118,7 +124,8 @@ public class NetItem
     }
 
     /**
-     * @param description the description to set
+     * @param description
+     *            the description to set
      */
     public void setDescription(String description)
     {

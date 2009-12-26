@@ -7,8 +7,6 @@
  */
 package rmp.util;
 
-import com.amonsoft.util.CharUtil;
-import com.amonsoft.util.LogUtil;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -34,7 +32,8 @@ import net.sf.image4j.codec.ico.ICOEncoder;
 import net.sf.image4j.codec.ico.ICOImage;
 import rmp.bean.FilesFilter;
 
-//import com.sun.jimi.core.Jimi;
+import com.amonsoft.util.CharUtil;
+import com.amonsoft.util.LogUtil;
 
 import cons.EnvCons;
 import cons.SysCons;
@@ -48,6 +47,7 @@ import cons.SysCons;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public final class ImageUtil
@@ -117,10 +117,14 @@ public final class ImageUtil
     /**
      * 读取系统中默认的PNG格式的图像文件，并以图像原大小返回
      * 
-     * @param iconFile 待读取的图像文件
-     * @param widh 返回图像的宽度
-     * @param high 返回图像的高度
-     * @param scal 是否保持图像的纵横比，true:保持；false:不保持
+     * @param iconFile
+     *            待读取的图像文件
+     * @param widh
+     *            返回图像的宽度
+     * @param high
+     *            返回图像的高度
+     * @param scal
+     *            是否保持图像的纵横比，true:保持；false:不保持
      * @return
      * @throws IOException
      */
@@ -153,7 +157,8 @@ public final class ImageUtil
     /**
      * 读取JAR包中的图像信息
      * 
-     * @param path 相对于Jar包的路径信息
+     * @param path
+     *            相对于Jar包的路径信息
      * @return
      * @throws IOException
      */
@@ -202,17 +207,20 @@ public final class ImageUtil
         }
 
         // 其它文件读取
-//        return Jimi.getImage(filePath);
+        // return Jimi.getImage(filePath);
         return null;
     }
 
     /**
      * 读取指定的Ico图像文件，并返回与需求大小最相近且不大于需求大小的图像。
      * 
-     * @param fileName Ico图像文件路径。
-     * @param defSize 用户需求大小，返回的图像大小与此大小相近但不大于此大小。
+     * @param fileName
+     *            Ico图像文件路径。
+     * @param defSize
+     *            用户需求大小，返回的图像大小与此大小相近但不大于此大小。
      * @return 缓冲图像
-     * @throws IOException 文件存取异常
+     * @throws IOException
+     *             文件存取异常
      */
     public static BufferedImage readIcoImage(String fileName, int defSize) throws IOException
     {
@@ -290,7 +298,7 @@ public final class ImageUtil
         }
 
         // 其它图像处理方式
-        ImageIcon icon = null;//new ImageIcon(Jimi.getImage(srcFile));
+        ImageIcon icon = null;// new ImageIcon(Jimi.getImage(srcFile));
         int w = icon.getIconWidth();
         int h = icon.getIconHeight();
         // 求宽高中的最大值
@@ -410,8 +418,10 @@ public final class ImageUtil
     /**
      * 保存指定的图像到指定的文件中去。
      * 
-     * @param image 待保存的图像数据
-     * @param iconFile 目标图像文件
+     * @param image
+     *            待保存的图像数据
+     * @param iconFile
+     *            目标图像文件
      * @return 图像是否保存成功，成功返回true，失败返回false
      * @throws IOException
      */
@@ -452,9 +462,7 @@ public final class ImageUtil
         // 文件名过滤器
         FilesFilter filter = new FilesFilter();
         filter.setTextInclude(new String[]
-                {
-                    pngName
-                });
+        { pngName });
         filter.setInclude(true);
 
         // 符合指定条件的文件列表
@@ -497,10 +505,14 @@ public final class ImageUtil
     /**
      * 图像缩放处理
      * 
-     * @param image 待进行缩放处理的图像
-     * @param widh 目标图像宽度
-     * @param high 目标图像高度
-     * @param scal 是否保持纵横比，true保持，false不保持
+     * @param image
+     *            待进行缩放处理的图像
+     * @param widh
+     *            目标图像宽度
+     * @param high
+     *            目标图像高度
+     * @param scal
+     *            是否保持纵横比，true保持，false不保持
      * @return
      */
     public static BufferedImage scaleImage(Image image, int widh, int high, boolean scal)

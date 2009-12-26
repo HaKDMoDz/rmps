@@ -7,7 +7,6 @@
  */
 package rmp.util;
 
-import com.amonsoft.util.LogUtil;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -24,9 +23,12 @@ import java.security.NoSuchAlgorithmException;
 import javax.swing.AbstractAction;
 import javax.swing.Timer;
 
+import rmp.Rmps;
+
+import com.amonsoft.util.LogUtil;
+
 import cons.EnvCons;
 import cons.SysCons;
-import rmp.Rmps;
 
 /**
  * <ul>
@@ -37,6 +39,7 @@ import rmp.Rmps;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public final class EnvUtil

@@ -18,6 +18,7 @@ import rmp.ui.link.WLinkLabel;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class TailPanel
@@ -95,6 +96,7 @@ public class TailPanel
     private void ita()
     {
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 事件处理区域
     // ////////////////////////////////////////////////////////////////////////

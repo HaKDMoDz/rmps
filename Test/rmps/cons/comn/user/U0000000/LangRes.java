@@ -16,6 +16,7 @@ package cons.comn.user.U0000000;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public interface LangRes

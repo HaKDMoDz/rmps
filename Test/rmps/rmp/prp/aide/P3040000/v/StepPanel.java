@@ -15,9 +15,11 @@ import rmp.prp.aide.P3040000.t.Util;
 import rmp.util.BeanUtil;
 import rmp.util.CheckUtil;
 import rmp.util.HashUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.StringUtil;
+
+import com.amonsoft.util.LogUtil;
+
 import cons.SysCons;
 import cons.db.PrpCons;
 import cons.prp.aide.P3040000.ConstUI;
@@ -32,6 +34,7 @@ import cons.prp.aide.P3040000.LangRes;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class StepPanel extends javax.swing.JPanel
@@ -134,23 +137,17 @@ public class StepPanel extends javax.swing.JPanel
         this.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addComponent(bt_PrevStep).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_NextStep).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_ExitButn)).addComponent(
-                pl_CardPanl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                Short.MAX_VALUE).addComponent(ta_NoteInfo)).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                layout.createSequentialGroup().addComponent(bt_PrevStep).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_NextStep).addPreferredGap(
+                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_ExitButn)).addComponent(pl_CardPanl, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(ta_NoteInfo)).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(ta_NoteInfo,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(pl_CardPanl,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE,
-                Short.MAX_VALUE).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_ExitButn).addComponent(bt_NextStep).addComponent(bt_PrevStep)).addContainerGap()));
+                layout.createSequentialGroup().addContainerGap().addComponent(ta_NoteInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                        javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(pl_CardPanl, javax.swing.GroupLayout.PREFERRED_SIZE,
+                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_ExitButn).addComponent(bt_NextStep).addComponent(bt_PrevStep)).addContainerGap()));
     }
 
     /**
@@ -174,20 +171,15 @@ public class StepPanel extends javax.swing.JPanel
         p.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(sp1,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE).addGroup(
-                layout.createSequentialGroup().addComponent(lb_NoteHead).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_NoteHead,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)).addComponent(lb_NoteInfo)).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(sp1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE).addGroup(
+                                layout.createSequentialGroup().addComponent(lb_NoteHead).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_NoteHead,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)).addComponent(lb_NoteInfo)).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_NoteHead).addComponent(tf_NoteHead, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(lb_NoteInfo).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp1,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
-                Short.MAX_VALUE)));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_NoteHead).addComponent(tf_NoteHead, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(
+                        lb_NoteInfo).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         pl_CardPanl.add(ConstUI.CARD_STEP + ConstUI.STEP_NOTE, p);
     }
@@ -246,42 +238,30 @@ public class StepPanel extends javax.swing.JPanel
         p.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_sd).addComponent(lb_sm).addComponent(lb_sy)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(tf_sy,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(tf_sm,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(tf_sd,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_sw).addComponent(lb_sz)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(tf_sw,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(tf_sz,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE))).addGroup(
-                layout.createSequentialGroup().addGap(10, 10, 10).addComponent(lb_ts))).addContainerGap(
-                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+                                layout.createSequentialGroup().addContainerGap().addGroup(
+                                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_sd).addComponent(lb_sm).addComponent(lb_sy)).addPreferredGap(
+                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(tf_sy, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(tf_sm, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(tf_sd, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_sw).addComponent(lb_sz)).addPreferredGap(
+                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(tf_sw, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(tf_sz, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))).addGroup(
+                                layout.createSequentialGroup().addGap(10, 10, 10).addComponent(lb_ts))).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(lb_ts).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_sy).addComponent(tf_sy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_sm).addComponent(tf_sm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lb_sw).addComponent(tf_sw,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_sd).addComponent(tf_sd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lb_sz).addComponent(tf_sz,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
-                Short.MAX_VALUE)));
+                layout.createSequentialGroup().addContainerGap().addComponent(lb_ts).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_sy).addComponent(tf_sy, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_sm).addComponent(tf_sm, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lb_sw).addComponent(tf_sw, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_sd).addComponent(tf_sd, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lb_sz).addComponent(tf_sz, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         pl_CardPanl.add(ConstUI.CARD_STEP + ConstUI.STEP_SDATE, p);
     }
@@ -349,28 +329,21 @@ public class StepPanel extends javax.swing.JPanel
         p.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_fy,
-                javax.swing.GroupLayout.Alignment.TRAILING).addComponent(lb_ty,
-                javax.swing.GroupLayout.Alignment.TRAILING)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(rb_y1).addComponent(
-                tf_fy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addGroup(
-                layout.createSequentialGroup().addComponent(rb_y2).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_ny,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addGap(4, 4, 4).addComponent(lb_ny)).addComponent(rb_y3)).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_fy, javax.swing.GroupLayout.Alignment.TRAILING).addComponent(lb_ty,
+                                javax.swing.GroupLayout.Alignment.TRAILING)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(rb_y1).addComponent(tf_fy, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addGroup(
+                                layout.createSequentialGroup().addComponent(rb_y2).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_ny,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(4, 4, 4).addComponent(lb_ny))
+                                .addComponent(rb_y3)).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(lb_ty).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_fy).addComponent(tf_fy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_y1).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(rb_y2).addComponent(tf_ny, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lb_ny)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_y3).addContainerGap(
-                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                layout.createSequentialGroup().addContainerGap().addComponent(lb_ty).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_fy).addComponent(tf_fy, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_y1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(rb_y2).addComponent(tf_ny, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lb_ny)).addPreferredGap(
+                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_y3).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         pl_CardPanl.add(ConstUI.CARD_STEP + ConstUI.STEP_FYEAR, p);
     }
@@ -438,28 +411,21 @@ public class StepPanel extends javax.swing.JPanel
         p.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_fm,
-                javax.swing.GroupLayout.Alignment.TRAILING).addComponent(lb_tm,
-                javax.swing.GroupLayout.Alignment.TRAILING)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(rb_m1).addComponent(
-                tf_fm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addGroup(
-                layout.createSequentialGroup().addComponent(rb_m2).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_nm,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addGap(4, 4, 4).addComponent(lb_nm)).addComponent(rb_m3)).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_fm, javax.swing.GroupLayout.Alignment.TRAILING).addComponent(lb_tm,
+                                javax.swing.GroupLayout.Alignment.TRAILING)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(rb_m1).addComponent(tf_fm, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addGroup(
+                                layout.createSequentialGroup().addComponent(rb_m2).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_nm,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(4, 4, 4).addComponent(lb_nm))
+                                .addComponent(rb_m3)).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(lb_tm).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_fm).addComponent(tf_fm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_m1).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(rb_m2).addComponent(tf_nm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lb_nm)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_m3).addContainerGap(
-                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                layout.createSequentialGroup().addContainerGap().addComponent(lb_tm).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_fm).addComponent(tf_fm, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_m1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(rb_m2).addComponent(tf_nm, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lb_nm)).addPreferredGap(
+                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_m3).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         pl_CardPanl.add(ConstUI.CARD_STEP + ConstUI.STEP_FMONTH, p);
     }
@@ -526,28 +492,21 @@ public class StepPanel extends javax.swing.JPanel
         p.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_fd,
-                javax.swing.GroupLayout.Alignment.TRAILING).addComponent(lb_td,
-                javax.swing.GroupLayout.Alignment.TRAILING)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(rb_d1).addComponent(
-                tf_fd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addGroup(
-                layout.createSequentialGroup().addComponent(rb_d2).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_nd,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addGap(4, 4, 4).addComponent(lb_nd)).addComponent(rb_d3)).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_fd, javax.swing.GroupLayout.Alignment.TRAILING).addComponent(lb_td,
+                                javax.swing.GroupLayout.Alignment.TRAILING)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(rb_d1).addComponent(tf_fd, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addGroup(
+                                layout.createSequentialGroup().addComponent(rb_d2).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_nd,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(4, 4, 4).addComponent(lb_nd))
+                                .addComponent(rb_d3)).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(lb_td).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_fd).addComponent(tf_fd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_d1).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(rb_d2).addComponent(tf_nd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lb_nd)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_d3).addContainerGap(
-                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                layout.createSequentialGroup().addContainerGap().addComponent(lb_td).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_fd).addComponent(tf_fd, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_d1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(rb_d2).addComponent(tf_nd, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lb_nd)).addPreferredGap(
+                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_d3).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         pl_CardPanl.add(ConstUI.CARD_STEP + ConstUI.STEP_FDATE, p);
     }
@@ -615,28 +574,21 @@ public class StepPanel extends javax.swing.JPanel
         p.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_fz,
-                javax.swing.GroupLayout.Alignment.TRAILING).addComponent(lb_tz,
-                javax.swing.GroupLayout.Alignment.TRAILING)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(rb_z1).addComponent(
-                tf_fz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addGroup(
-                layout.createSequentialGroup().addComponent(rb_z2).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_nz,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addGap(4, 4, 4).addComponent(lb_nz)).addComponent(rb_z3)).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_fz, javax.swing.GroupLayout.Alignment.TRAILING).addComponent(lb_tz,
+                                javax.swing.GroupLayout.Alignment.TRAILING)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(rb_z1).addComponent(tf_fz, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addGroup(
+                                layout.createSequentialGroup().addComponent(rb_z2).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_nz,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(4, 4, 4).addComponent(lb_nz))
+                                .addComponent(rb_z3)).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(lb_tz).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_fz).addComponent(tf_fz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_z1).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(rb_z2).addComponent(tf_nz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lb_nz)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_z3).addContainerGap(
-                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                layout.createSequentialGroup().addContainerGap().addComponent(lb_tz).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_fz).addComponent(tf_fz, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_z1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(rb_z2).addComponent(tf_nz, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lb_nz)).addPreferredGap(
+                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_z3).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         pl_CardPanl.add(ConstUI.CARD_STEP + ConstUI.STEP_FWEEKOFMONTH, p);
     }
@@ -704,28 +656,21 @@ public class StepPanel extends javax.swing.JPanel
         p.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_fw,
-                javax.swing.GroupLayout.Alignment.TRAILING).addComponent(lb_tw,
-                javax.swing.GroupLayout.Alignment.TRAILING)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(rb_w1).addComponent(
-                tf_fw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addGroup(
-                layout.createSequentialGroup().addComponent(rb_w2).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_nw,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addGap(4, 4, 4).addComponent(lb_nw)).addComponent(rb_w3)).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_fw, javax.swing.GroupLayout.Alignment.TRAILING).addComponent(lb_tw,
+                                javax.swing.GroupLayout.Alignment.TRAILING)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(rb_w1).addComponent(tf_fw, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addGroup(
+                                layout.createSequentialGroup().addComponent(rb_w2).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_nw,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addGap(4, 4, 4).addComponent(lb_nw))
+                                .addComponent(rb_w3)).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(lb_tw).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_fw).addComponent(tf_fw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_w1).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(rb_w2).addComponent(tf_nw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lb_nw)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_w3).addContainerGap(
-                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                layout.createSequentialGroup().addContainerGap().addComponent(lb_tw).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_fw).addComponent(tf_fw, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_w1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(rb_w2).addComponent(tf_nw, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lb_nw)).addPreferredGap(
+                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(rb_w3).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         pl_CardPanl.add(ConstUI.CARD_STEP + ConstUI.STEP_FWEEKOFYEAR, p);
     }
@@ -784,42 +729,30 @@ public class StepPanel extends javax.swing.JPanel
         p.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_ed).addComponent(lb_em).addComponent(lb_ey)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(tf_ey,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(tf_em,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(tf_ed,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_ew).addComponent(lb_ez)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(tf_ew,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(tf_ez,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE))).addGroup(
-                layout.createSequentialGroup().addGap(10, 10, 10).addComponent(lb_te))).addContainerGap(
-                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+                                layout.createSequentialGroup().addContainerGap().addGroup(
+                                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_ed).addComponent(lb_em).addComponent(lb_ey)).addPreferredGap(
+                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(tf_ey, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(tf_em, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(tf_ed, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_ew).addComponent(lb_ez)).addPreferredGap(
+                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(tf_ew, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(tf_ez, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))).addGroup(
+                                layout.createSequentialGroup().addGap(10, 10, 10).addComponent(lb_te))).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(lb_te).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_ey).addComponent(tf_ey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_em).addComponent(tf_em, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lb_ew).addComponent(tf_ew,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_ed).addComponent(tf_ed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lb_ez).addComponent(tf_ez,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
-                Short.MAX_VALUE)));
+                layout.createSequentialGroup().addContainerGap().addComponent(lb_te).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_ey).addComponent(tf_ey, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_em).addComponent(tf_em, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lb_ew).addComponent(tf_ew, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_ed).addComponent(tf_ed, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lb_ez).addComponent(tf_ez, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         pl_CardPanl.add(ConstUI.CARD_STEP + ConstUI.STEP_EDATE, p);
     }
@@ -845,20 +778,15 @@ public class StepPanel extends javax.swing.JPanel
         p.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(sp1,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE).addGroup(
-                layout.createSequentialGroup().addComponent(lb_LinkAddr).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_LinkAddr,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)).addComponent(lb_IdioMark)).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(sp1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE).addGroup(
+                                layout.createSequentialGroup().addComponent(lb_LinkAddr).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_LinkAddr,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)).addComponent(lb_IdioMark)).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_LinkAddr).addComponent(tf_LinkAddr, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(lb_IdioMark).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp1,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
-                Short.MAX_VALUE)));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_LinkAddr).addComponent(tf_LinkAddr, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(
+                        lb_IdioMark).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         pl_CardPanl.add(ConstUI.CARD_STEP + ConstUI.STEP_DESP, p);
     }
@@ -1211,16 +1139,14 @@ public class StepPanel extends javax.swing.JPanel
         }
         if (!CheckUtil.isValidate(t, PrpCons.P3040118_SIZE))
         {
-            MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A02),
-                    PrpCons.P3040118_SIZE));
+            MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A02), PrpCons.P3040118_SIZE));
             tf_NoteHead.requestFocus();
             return false;
         }
         t = ta_NoteInfo.getText();
         if (!CheckUtil.isValidate(t, PrpCons.P3040119_SIZE))
         {
-            MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A02),
-                    PrpCons.P3040118_SIZE));
+            MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A02), PrpCons.P3040118_SIZE));
             ta_NoteInfo.requestFocus();
             return false;
         }
@@ -1239,8 +1165,7 @@ public class StepPanel extends javax.swing.JPanel
         // 年份
         if (!CheckUtil.isValidate(t, PrpCons.P3040106_SIZE))
         {
-            MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A04),
-                    PrpCons.P3040106_SIZE));
+            MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A04), PrpCons.P3040106_SIZE));
             tf_sm.requestFocus();
             return false;
         }
@@ -1257,8 +1182,7 @@ public class StepPanel extends javax.swing.JPanel
             t = tf_sm.getText();
             if (!CheckUtil.isValidate(t, PrpCons.P3040107_SIZE))
             {
-                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A06),
-                        PrpCons.P3040107_SIZE));
+                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A06), PrpCons.P3040107_SIZE));
                 tf_sm.requestFocus();
                 return false;
             }
@@ -1276,8 +1200,7 @@ public class StepPanel extends javax.swing.JPanel
             t = tf_sw.getText();
             if (!CheckUtil.isValidate(t, PrpCons.P3040109_SIZE))
             {
-                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0A),
-                        PrpCons.P3040109_SIZE));
+                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0A), PrpCons.P3040109_SIZE));
                 tf_sw.requestFocus();
                 return false;
             }
@@ -1295,8 +1218,7 @@ public class StepPanel extends javax.swing.JPanel
             t = tf_sd.getText();
             if (!CheckUtil.isValidate(t, PrpCons.P3040108_SIZE))
             {
-                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A08),
-                        PrpCons.P3040108_SIZE));
+                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A08), PrpCons.P3040108_SIZE));
                 tf_sd.requestFocus();
                 return false;
             }
@@ -1314,8 +1236,7 @@ public class StepPanel extends javax.swing.JPanel
             t = tf_sz.getText();
             if (!CheckUtil.isValidate(t, PrpCons.P304010A_SIZE))
             {
-                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0C),
-                        PrpCons.P304010A_SIZE));
+                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0C), PrpCons.P304010A_SIZE));
                 tf_sz.requestFocus();
                 return false;
             }
@@ -1413,8 +1334,7 @@ public class StepPanel extends javax.swing.JPanel
         // 年份
         if (!CheckUtil.isValidate(t, PrpCons.P3040106_SIZE))
         {
-            MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A04),
-                    PrpCons.P3040106_SIZE));
+            MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A04), PrpCons.P3040106_SIZE));
             tf_em.requestFocus();
             return false;
         }
@@ -1431,8 +1351,7 @@ public class StepPanel extends javax.swing.JPanel
             t = tf_em.getText();
             if (!CheckUtil.isValidate(t, PrpCons.P3040107_SIZE))
             {
-                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A06),
-                        PrpCons.P3040107_SIZE));
+                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A06), PrpCons.P3040107_SIZE));
                 tf_em.requestFocus();
                 return false;
             }
@@ -1450,8 +1369,7 @@ public class StepPanel extends javax.swing.JPanel
             t = tf_ew.getText();
             if (!CheckUtil.isValidate(t, PrpCons.P3040109_SIZE))
             {
-                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0A),
-                        PrpCons.P3040109_SIZE));
+                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0A), PrpCons.P3040109_SIZE));
                 tf_ew.requestFocus();
                 return false;
             }
@@ -1469,8 +1387,7 @@ public class StepPanel extends javax.swing.JPanel
             t = tf_ed.getText();
             if (!CheckUtil.isValidate(t, PrpCons.P3040108_SIZE))
             {
-                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A08),
-                        PrpCons.P3040108_SIZE));
+                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A08), PrpCons.P3040108_SIZE));
                 tf_ed.requestFocus();
                 return false;
             }
@@ -1488,8 +1405,7 @@ public class StepPanel extends javax.swing.JPanel
             t = tf_ez.getText();
             if (!CheckUtil.isValidate(t, PrpCons.P304010A_SIZE))
             {
-                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0C),
-                        PrpCons.P304010A_SIZE));
+                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0C), PrpCons.P304010A_SIZE));
                 tf_ez.requestFocus();
                 return false;
             }
@@ -2083,6 +1999,7 @@ public class StepPanel extends javax.swing.JPanel
             dba.close();
         }
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 界面视图构件区域
     // ////////////////////////////////////////////////////////////////////////

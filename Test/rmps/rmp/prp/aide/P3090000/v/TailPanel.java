@@ -17,15 +17,17 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.util.EventObject;
 
+import rmp.Rmps;
 import rmp.face.WBackCall;
 import rmp.prp.aide.P3090000.P3090000;
 import rmp.prp.aide.P3090000.t.Util;
 import rmp.util.ImageUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.StringUtil;
+
+import com.amonsoft.util.LogUtil;
+
 import cons.EnvCons;
 import cons.prp.aide.P3090000.ConstUI;
-import rmp.Rmps;
 
 /**
  * <ul>
@@ -35,6 +37,7 @@ import rmp.Rmps;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class TailPanel extends javax.swing.JPanel implements WBackCall
@@ -43,25 +46,25 @@ public class TailPanel extends javax.swing.JPanel implements WBackCall
     // 逻辑控制区域
     // ////////////////////////////////////////////////////////////////////////
     /** 主应用程序 */
-    private P3090000                           ms_MainSoft;
+    private P3090000 ms_MainSoft;
     /** 内嵌面板 */
-    private javax.swing.JPanel                 tp_TailPanel;
+    private javax.swing.JPanel tp_TailPanel;
     /** 天气数据信息 */
     private java.util.HashMap<Integer, String> hm_DataList;
     /** 白天背景 */
-    private BufferedImage                      bi_WeatherL;
+    private BufferedImage bi_WeatherL;
     /** 分晓背景 */
     // private BufferedImage bi_WeatherD;
     /** 夜间背景 */
     // private BufferedImage bi_WeatherN;
     /** 高亮背景 */
-    private BufferedImage                      bi_WeatherH;
+    private BufferedImage bi_WeatherH;
     /** 天气趋势开始图片名称 */
-    private BufferedImage                      bi_WeatherS;
+    private BufferedImage bi_WeatherS;
     /** 天气趋势结束图片名称 */
-    private BufferedImage                      bi_WeatherE;
+    private BufferedImage bi_WeatherE;
     /** 定时器 */
-    private javax.swing.Timer                  tm_Timer;
+    private javax.swing.Timer tm_Timer;
 
     // ////////////////////////////////////////////////////////////////////////
     // 构造函数区域
@@ -130,7 +133,7 @@ public class TailPanel extends javax.swing.JPanel implements WBackCall
      * 
      * @see rmp.face.WBackCall#wAction(java.util.EventObject, java.lang.Object)
      */
-    @ Override
+    @Override
     public void wAction(EventObject event, Object object, String property)
     {
         readWeatherInfo();
@@ -145,7 +148,7 @@ public class TailPanel extends javax.swing.JPanel implements WBackCall
     {
         super.paintComponent(g);
 
-        Graphics2D g2d = (Graphics2D)g;
+        Graphics2D g2d = (Graphics2D) g;
 
         // 绘制背景
         BufferedImage bi = bi_WeatherL;
@@ -224,28 +227,28 @@ public class TailPanel extends javax.swing.JPanel implements WBackCall
     {
         this.addMouseListener(new java.awt.event.MouseListener()
         {
-            @ Override
+            @Override
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
             }
 
-            @ Override
+            @Override
             public void mouseEntered(java.awt.event.MouseEvent evt)
             {
                 showTips();
             }
 
-            @ Override
+            @Override
             public void mouseExited(java.awt.event.MouseEvent evt)
             {
             }
 
-            @ Override
+            @Override
             public void mousePressed(java.awt.event.MouseEvent evt)
             {
             }
 
-            @ Override
+            @Override
             public void mouseReleased(java.awt.event.MouseEvent evt)
             {
             }
@@ -275,12 +278,10 @@ public class TailPanel extends javax.swing.JPanel implements WBackCall
             hm_DataList = Util.getWeatherByCity(Rmps.getUser().getCfg(ConstUI.CFG_CITY, ""));
 
             // 读取天气状况图标
-            bi_WeatherS = ImageUtil.readImage(EnvCons.FOLDER0_TPLT
-                + StringUtil.format(ConstUI.BG_ICON, hm_DataList.get(Util.getTheDate() + 3)));
-            bi_WeatherE = ImageUtil.readImage(EnvCons.FOLDER0_TPLT
-                + StringUtil.format(ConstUI.BG_ICON, hm_DataList.get(Util.getTheDate() + 4)));
+            bi_WeatherS = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.BG_ICON, hm_DataList.get(Util.getTheDate() + 3)));
+            bi_WeatherE = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.BG_ICON, hm_DataList.get(Util.getTheDate() + 4)));
         }
-        catch(Exception exp)
+        catch (Exception exp)
         {
             LogUtil.exception(exp);
         }

@@ -7,16 +7,15 @@
  */
 package rmp.comn.rmps.C4010000;
 
-import com.amonsoft.bean.WForm;
-import com.amonsoft.cons.ConsSys;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Properties;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JMenu;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import rmp.Rmps;
 import rmp.comn.C1010000.C1010000;
@@ -26,20 +25,23 @@ import rmp.comn.rmps.C4010000.v.MiniPanel;
 import rmp.comn.rmps.C4010000.v.NormPanel;
 import rmp.comn.rmps.C4010000.v.SubMenu;
 import rmp.comn.rmps.C4010000.v.TailPanel;
-import com.amonsoft.rmps.prp.IPrpPlus;
-import rmp.prp.Prps;
 import rmp.comn.user.UserInfo;
+import rmp.prp.Prps;
 import rmp.util.BeanUtil;
+import rmp.util.EnvUtil;
 import rmp.util.FileUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
+
+import com.amonsoft.bean.WForm;
+import com.amonsoft.cons.ConsSys;
+import com.amonsoft.rmps.prp.IPrpPlus;
+import com.amonsoft.util.DeskUtil;
+import com.amonsoft.util.LangUtil;
+import com.amonsoft.util.LogUtil;
+
 import cons.EnvCons;
 import cons.comn.rmps.C4010000.ConstUI;
 import cons.id.ComnCons;
-import com.amonsoft.util.LangUtil;
-import javax.swing.WindowConstants;
-import com.amonsoft.util.DeskUtil;
-import rmp.util.EnvUtil;
 
 /**
  * <ul>
@@ -50,6 +52,7 @@ import rmp.util.EnvUtil;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class C4010000 extends WForm implements IPrpPlus
@@ -324,19 +327,19 @@ public class C4010000 extends WForm implements IPrpPlus
             case VIEW_TAIL:
                 return showTail();
 
-            // 显示迷你模式
+                // 显示迷你模式
             case VIEW_MINI:
                 return showMini();
 
-            // 显示正常模式
+                // 显示正常模式
             case VIEW_NORM:
                 return showNorm();
 
-            // 显示高级模式
+                // 显示高级模式
             case VIEW_MAIN:
                 return showMain();
 
-            // 显示向导模式
+                // 显示向导模式
             case VIEW_STEP:
                 return showStep();
 
@@ -383,7 +386,8 @@ public class C4010000 extends WForm implements IPrpPlus
     /**
      * 语言资源查询
      * 
-     * @param mesgId 语言资源索引
+     * @param mesgId
+     *            语言资源索引
      * @return 语言资源内容
      */
     public static String getMesg(String mesgId)
@@ -409,8 +413,10 @@ public class C4010000 extends WForm implements IPrpPlus
     /**
      * 语言资源查询
      * 
-     * @param mesgId 语言资源索引
-     * @param defMesg 默认语言资源
+     * @param mesgId
+     *            语言资源索引
+     * @param defMesg
+     *            默认语言资源
      * @return 语言资源内容
      */
     public static String getMesg(String mesgId, String defMesg)
@@ -597,15 +603,16 @@ public class C4010000 extends WForm implements IPrpPlus
         C4010000 soft = new C4010000();
         soft.wInitView();
 
-//        setSoft(soft);
+        // setSoft(soft);
         // 承载窗口引用
         soft.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         // 显示主窗口 启动应用程序
         soft.wShowView(VIEW_MINI);
-//        soft.addTo(getContentPane());
+        // soft.addTo(getContentPane());
         // 居中显示
         soft.center(null);
     }
+
     /** serialVersionUID */
     private static final long serialVersionUID = -1295916310944266939L;
 }

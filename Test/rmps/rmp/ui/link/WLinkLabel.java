@@ -12,14 +12,16 @@ import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JLabel;
 
 import rmp.util.CheckUtil;
-import cons.ui.ConstUI;
+
 import com.amonsoft.util.DeskUtil;
+
+import cons.ui.ConstUI;
 
 /**
  * <ul>
@@ -29,6 +31,7 @@ import com.amonsoft.util.DeskUtil;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class WLinkLabel extends JLabel
@@ -62,7 +65,8 @@ public class WLinkLabel extends JLabel
     }
 
     /**
-     * @param linkUrl the linkUrl to set
+     * @param linkUrl
+     *            the linkUrl to set
      */
     public void setLinkUrl(String linkUrl)
     {
@@ -123,6 +127,7 @@ public class WLinkLabel extends JLabel
         }
         return true;
     }
+
     /** 链接地址 */
     private String linkUrl;
     /**  */

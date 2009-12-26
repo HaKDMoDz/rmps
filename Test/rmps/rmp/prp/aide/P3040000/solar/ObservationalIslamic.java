@@ -39,11 +39,10 @@ public class ObservationalIslamic extends Islamic
         long l1;
         try
         {
-            long l2 = Islamic.EPOCH
-                + (long)Math.floor(((double)((l - 1L) * 12L + (long)i) - 0.5D) * 29.530588853000001D);
-            l1 = (ProtoDate.phasisOnOrBefore(l2, ISLAMIC_LOCALE) + (long)j) - 1L;
+            long l2 = Islamic.EPOCH + (long) Math.floor(((double) ((l - 1L) * 12L + (long) i) - 0.5D) * 29.530588853000001D);
+            l1 = (ProtoDate.phasisOnOrBefore(l2, ISLAMIC_LOCALE) + (long) j) - 1L;
         }
-        catch(Exception _ex)
+        catch (Exception _ex)
         {
             l1 = 0L;
         }
@@ -60,13 +59,13 @@ public class ObservationalIslamic extends Islamic
         try
         {
             long l1 = ProtoDate.phasisOnOrBefore(l, ISLAMIC_LOCALE);
-            long l2 = Math.round((double)(l1 - Islamic.EPOCH) / 29.530588853000001D);
+            long l2 = Math.round((double) (l1 - Islamic.EPOCH) / 29.530588853000001D);
             super.year = ProtoDate.quotient(l2, 12D) + 1L;
-            super.month = (int)(ProtoDate.mod(l2, 12L) + 1L);
-            super.day = (int)((l - l1) + 1L);
+            super.month = (int) (ProtoDate.mod(l2, 12L) + 1L);
+            super.day = (int) ((l - l1) + 1L);
             return;
         }
-        catch(Exception _ex)
+        catch (Exception _ex)
         {
             return;
         }
@@ -77,11 +76,10 @@ public class ObservationalIslamic extends Islamic
 
     static
     {
-        CAIRO = new Location("Cairo, Egypt", ProtoDate.deg(30.100000000000001D), ProtoDate.deg(31.300000000000001D),
-            ProtoDate.mt(200D), 2D);
+        CAIRO = new Location("Cairo, Egypt", ProtoDate.deg(30.100000000000001D), ProtoDate.deg(31.300000000000001D), ProtoDate.mt(200D), 2D);
         ISLAMIC_LOCALE = CAIRO;
     }
 
     /** serialVersionUID */
-    private static final long    serialVersionUID = 2794363507261911993L;
+    private static final long serialVersionUID = 2794363507261911993L;
 }

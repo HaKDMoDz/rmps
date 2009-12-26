@@ -7,20 +7,23 @@
  */
 package rmp.irp.m.I7040000;
 
-import com.amonsoft.rmps.irp.b.IMessage;
-import com.amonsoft.rmps.irp.m.IService;
-import com.amonsoft.rmps.irp.b.ISession;
-import cons.irp.ConsEnv;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import rmp.irp.comn.Process;
-import com.amonsoft.util.LogUtil;
 import twitter4j.DirectMessage;
 import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Tweet;
 import twitter4j.TwitterException;
+
+import com.amonsoft.rmps.irp.b.IMessage;
+import com.amonsoft.rmps.irp.b.ISession;
+import com.amonsoft.rmps.irp.m.IService;
+import com.amonsoft.util.LogUtil;
+
+import cons.irp.ConsEnv;
 
 /**
  * <ul>
@@ -30,6 +33,7 @@ import twitter4j.TwitterException;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class I7040000 implements IService
@@ -154,7 +158,7 @@ public class I7040000 implements IService
                     QueryResult result = messenger.search(query);
                     for (Tweet tweet : result.getTweets())
                     {
-                        //print(tweet.getFromUser() + ":" + tweet.getText());
+                        // print(tweet.getFromUser() + ":" + tweet.getText());
                     }
                 }
                 catch (TwitterException ex)

@@ -7,11 +7,12 @@
  */
 package rmp.irp.m.help;
 
+import rmp.irp.c.Control;
+
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
-import rmp.irp.c.Control;
 
 /**
  * <ul>
@@ -21,7 +22,8 @@ import rmp.irp.c.Control;
  * <li>使用说明：</li>
  * <br />
  * </ul>
- * @author yihaodian
+ * 
+ * @author Amon
  */
 public class Help implements IService
 {
@@ -92,16 +94,16 @@ public class Help implements IService
                 msg.append(func + i).append('、').append(serv.getName()).append(session.newLine());
             }
         }
-//        msg.append("0、我的应用").append(session.newLine());
-//        msg.append("1、新闻资讯").append(session.newLine());
-//        msg.append("2、生活服务").append(session.newLine());
-//        msg.append("3、财经证券").append(session.newLine());
-//        msg.append("4、在线办公").append(session.newLine());
-//        msg.append("5、信息检索").append(session.newLine());
-//        msg.append("6、休闲娱乐").append(session.newLine());
-//        msg.append("7、科学教育").append(session.newLine());
-//        msg.append("8、功能扩展").append(session.newLine());
-//        msg.append("9、配置管理").append(session.newLine());
+        // msg.append("0、我的应用").append(session.newLine());
+        // msg.append("1、新闻资讯").append(session.newLine());
+        // msg.append("2、生活服务").append(session.newLine());
+        // msg.append("3、财经证券").append(session.newLine());
+        // msg.append("4、在线办公").append(session.newLine());
+        // msg.append("5、信息检索").append(session.newLine());
+        // msg.append("6、休闲娱乐").append(session.newLine());
+        // msg.append("7、科学教育").append(session.newLine());
+        // msg.append("8、功能扩展").append(session.newLine());
+        // msg.append("9、配置管理").append(session.newLine());
         session.send(msg.toString());
 
         session.getProcess().setType(IProcess.TYPE_KEYCODE);

@@ -7,11 +7,13 @@
  */
 package rmp.irp.comn;
 
-import com.amonsoft.rmps.irp.b.IMessage;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
-import com.amonsoft.util.LogUtil;
+
 import rmp.util.Util;
+
+import com.amonsoft.rmps.irp.b.IMessage;
+import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>
@@ -20,6 +22,7 @@ import rmp.util.Util;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public abstract class AMessage implements IMessage
@@ -67,7 +70,8 @@ public abstract class AMessage implements IMessage
     }
 
     /**
-     * @param content the content to set
+     * @param content
+     *            the content to set
      */
     @Override
     public void setContent(String content)
@@ -89,7 +93,8 @@ public abstract class AMessage implements IMessage
     }
 
     /**
-     * @param contentType the contentType to set
+     * @param contentType
+     *            the contentType to set
      */
     @Override
     public void setContentType(String contentType)
@@ -107,7 +112,8 @@ public abstract class AMessage implements IMessage
     }
 
     /**
-     * @param encoding the encoding to set
+     * @param encoding
+     *            the encoding to set
      */
     @Override
     public void setEncoding(String encoding)
@@ -164,7 +170,8 @@ public abstract class AMessage implements IMessage
     }
 
     /**
-     * @param rawData the rawData to set
+     * @param rawData
+     *            the rawData to set
      */
     public void setRawData(byte[] rawData)
     {
@@ -181,7 +188,8 @@ public abstract class AMessage implements IMessage
     }
 
     /**
-     * @param subject the subject to set
+     * @param subject
+     *            the subject to set
      */
     @Override
     public void setSubject(String subject)

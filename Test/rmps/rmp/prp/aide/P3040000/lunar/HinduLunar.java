@@ -49,14 +49,10 @@ public class HinduLunar extends LunarDate
 
     public long toFixed()
     {
-        double d = (double)OldHinduSolar.EPOCH + 365.2587564814815D
-            * ((double)(year + 3044L) + (double)(month - 1) / 12D);
-        long l = (long)Math.floor(d
-            - (1.0D / ProtoDate.deg(360D))
-            * 365.2587564814815D
-            * (ProtoDate.mod((HinduSolar.solarLongitude(d) - (double)(month - 1) * ProtoDate.deg(30D))
-                + ProtoDate.deg(180D), ProtoDate.deg(360D)) - 180D));
-        int i = lunarDay((double)l + 0.25D);
+        double d = (double) OldHinduSolar.EPOCH + 365.2587564814815D * ((double) (year + 3044L) + (double) (month - 1) / 12D);
+        long l = (long) Math.floor(d - (1.0D / ProtoDate.deg(360D)) * 365.2587564814815D
+                * (ProtoDate.mod((HinduSolar.solarLongitude(d) - (double) (month - 1) * ProtoDate.deg(30D)) + ProtoDate.deg(180D), ProtoDate.deg(360D)) - 180D));
+        int i = lunarDay((double) l + 0.25D);
         long l1;
         if (i > 3 && i < 27)
         {
@@ -70,8 +66,8 @@ public class HinduLunar extends LunarDate
             else
                 l1 = ProtoDate.mod(i - 15, 30) + 15;
         }
-        long l2 = (l + (long)day) - l1;
-        long l3 = (l2 - (long)ProtoDate.mod((lunarDay((double)l2 + 0.25D) - day) + 15, 30)) + 15L;
+        long l2 = (l + (long) day) - l1;
+        long l3 = (l2 - (long) ProtoDate.mod((lunarDay((double) l2 + 0.25D) - day) + 15, 30)) + 15L;
         long l4;
         for (l4 = l3 - 1L; !onOrBefore(this, new HinduLunar(l4)); l4++)
             ;
@@ -88,7 +84,7 @@ public class HinduLunar extends LunarDate
         int i = HinduSolar.zodiac(d1);
         leapMonth = i == HinduSolar.zodiac(d2);
         month = ProtoDate.adjustedMod(i + 1, 12);
-        year = HinduSolar.calendarYear(d2) - 3044L - (long)(!leapMonth || month != 1 ? 0 : -1);
+        year = HinduSolar.calendarYear(d2) - 3044L - (long) (!leapMonth || month != 1 ? 0 : -1);
     }
 
     public void fromArray(int ai[])
@@ -121,19 +117,17 @@ public class HinduLunar extends LunarDate
     public static boolean onOrBefore(HinduLunar hindulunar, HinduLunar hindulunar1)
     {
         return hindulunar.year < hindulunar1.year
-            || hindulunar.year == hindulunar1.year
-            && (hindulunar.month < hindulunar1.month || hindulunar.month == hindulunar1.month
-                && (hindulunar.leapMonth && !hindulunar1.leapMonth || hindulunar.leapMonth == hindulunar1.leapMonth
-                    && (hindulunar.day < hindulunar1.day || hindulunar.day == hindulunar1.day
-                        && (!hindulunar.leapDay || hindulunar1.leapDay))));
+                || hindulunar.year == hindulunar1.year
+                && (hindulunar.month < hindulunar1.month || hindulunar.month == hindulunar1.month
+                        && (hindulunar.leapMonth && !hindulunar1.leapMonth || hindulunar.leapMonth == hindulunar1.leapMonth
+                                && (hindulunar.day < hindulunar1.day || hindulunar.day == hindulunar1.day && (!hindulunar.leapDay || hindulunar1.leapDay))));
     }
 
     public static double lunarDayAfter(double d, double d1)
     {
         double d2 = Math.pow(2D, -17D);
         double d3 = (d1 - 1.0D) * 12D;
-        double d4 = d + 0.0027777777777777779D * ProtoDate.mod(d3 - lunarPhase(d), ProtoDate.deg(360D))
-            * 29.530587946071719D;
+        double d4 = d + 0.0027777777777777779D * ProtoDate.mod(d3 - lunarPhase(d), ProtoDate.deg(360D)) * 29.530587946071719D;
         double d5 = Math.max(d, d4 - 2D);
         double d6 = d4 + 2D;
         double d7 = d5;
@@ -150,8 +144,7 @@ public class HinduLunar extends LunarDate
 
     public static double lunarLongitude(double d)
     {
-        return HinduSolar.truePosition(d, 27.321674162683866D, 0.088888888888888892D, 27.554597974680476D,
-            0.010416666666666666D);
+        return HinduSolar.truePosition(d, 27.321674162683866D, 0.088888888888888892D, 27.554597974680476D, 0.010416666666666666D);
     }
 
     public static double lunarPhase(double d)
@@ -161,13 +154,13 @@ public class HinduLunar extends LunarDate
 
     public static int lunarDay(double d)
     {
-        return (int)ProtoDate.quotient(lunarPhase(d), ProtoDate.deg(12D)) + 1;
+        return (int) ProtoDate.quotient(lunarPhase(d), ProtoDate.deg(12D)) + 1;
     }
 
     public static int lunarStation(long l)
     {
         double d = HinduSolar.sunrise(l);
-        return (int)ProtoDate.quotient(lunarLongitude(d), ProtoDate.deg(800D) / 60D) + 1;
+        return (int) ProtoDate.quotient(lunarLongitude(d), ProtoDate.deg(800D) / 60D) + 1;
     }
 
     public static long newYear(long l)
@@ -175,9 +168,9 @@ public class HinduLunar extends LunarDate
         long l1 = Gregorian.toFixed(l, 1, 1);
         double d = HinduSolar.solarLongitudeAfter(l1, ProtoDate.deg(330D));
         double d1 = lunarDayAfter(d, 1.0D);
-        long l2 = (long)Math.floor(d1);
+        long l2 = (long) Math.floor(d1);
         double d2 = HinduSolar.sunrise(l2);
-        return l2 + (long)(d1 >= d2 && lunarDay(HinduSolar.sunrise(l2 + 1L)) != 2 ? 1 : 0);
+        return l2 + (long) (d1 >= d2 && lunarDay(HinduSolar.sunrise(l2 + 1L)) != 2 ? 1 : 0);
     }
 
     public static int karana(int i)
@@ -192,8 +185,7 @@ public class HinduLunar extends LunarDate
 
     public static int yoga(long l)
     {
-        return (int)Math.floor(ProtoDate.mod(((HinduSolar.solarLongitude(l) + lunarLongitude(l)) * 60D) / 800D,
-            ProtoDate.deg(27D))) + 1;
+        return (int) Math.floor(ProtoDate.mod(((HinduSolar.solarLongitude(l) + lunarLongitude(l)) * 60D) / 800D, ProtoDate.deg(27D))) + 1;
     }
 
     public static Vector<Long> sacredWednesdaysInGregorian(long l)
@@ -222,10 +214,9 @@ public class HinduLunar extends LunarDate
 
     public String format()
     {
-        return MessageFormat.format("{0}, {1}{2} {3}{4} {5,number,#} V.E.", new Object[]{
-            ProtoDate.nameFromDayOfWeek(toFixed(), OldHinduLunar.dayOfWeekNames), new Integer(day),
-            leapDay ? " II" : "", ProtoDate.nameFromMonth(month, OldHinduLunar.monthNames), leapMonth ? " II" : "",
-            new Long(year)});
+        return MessageFormat.format("{0}, {1}{2} {3}{4} {5,number,#} V.E.", new Object[]
+        { ProtoDate.nameFromDayOfWeek(toFixed(), OldHinduLunar.dayOfWeekNames), new Integer(day), leapDay ? " II" : "", ProtoDate.nameFromMonth(month, OldHinduLunar.monthNames),
+                leapMonth ? " II" : "", new Long(year) });
     }
 
     public boolean equals(Object obj)
@@ -234,21 +225,20 @@ public class HinduLunar extends LunarDate
             return true;
         if (!(obj instanceof HinduLunar))
             return false;
-        HinduLunar hindulunar = (HinduLunar)obj;
-        return hindulunar.year == year && hindulunar.month == month && hindulunar.leapMonth == leapMonth
-            && hindulunar.day == day && hindulunar.leapDay == leapDay;
+        HinduLunar hindulunar = (HinduLunar) obj;
+        return hindulunar.year == year && hindulunar.month == month && hindulunar.leapMonth == leapMonth && hindulunar.day == day && hindulunar.leapDay == leapDay;
     }
 
-    public long                year;
-    public int                 month;
-    public boolean             leapMonth;
-    public int                 day;
-    public boolean             leapDay;
-    public static final int    LUNAR_ERA         = 3044;
-    public static final double SYNODIC_MONTH     = 29.530587946071719D;
-    public static final double SIDEREAL_MONTH    = 27.321674162683866D;
+    public long year;
+    public int month;
+    public boolean leapMonth;
+    public int day;
+    public boolean leapDay;
+    public static final int LUNAR_ERA = 3044;
+    public static final double SYNODIC_MONTH = 29.530587946071719D;
+    public static final double SIDEREAL_MONTH = 27.321674162683866D;
     public static final double ANOMALISTIC_MONTH = 27.554597974680476D;
 
     /** serialVersionUID */
-    private static final long  serialVersionUID  = -5860669173503488740L;
+    private static final long serialVersionUID = -5860669173503488740L;
 }

@@ -8,6 +8,7 @@
 package rmp.irp.v.xmpp;
 
 import java.awt.Color;
+
 import rmp.irp.comn.AMimeMessage;
 
 /**
@@ -17,6 +18,7 @@ import rmp.irp.comn.AMimeMessage;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class MimeMessage extends AMimeMessage

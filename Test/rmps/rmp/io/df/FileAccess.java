@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 
 import com.amonsoft.util.LogUtil;
+
 import cons.SysCons;
 
 /**
@@ -21,6 +22,7 @@ import cons.SysCons;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public abstract class FileAccess
@@ -84,7 +86,8 @@ public abstract class FileAccess
     /**
      * 获得当前系统使用的数据文件的路径
      * 
-     * @param fileExts 指定的文件后缀名称
+     * @param fileExts
+     *            指定的文件后缀名称
      * @return
      */
     protected abstract String getFilePath(String fileExts);
@@ -92,7 +95,8 @@ public abstract class FileAccess
     /**
      * 文件头信息读取，此方法默认仅读取文档签名字段、应用系统字段及文档版本信息字段（默认包含文档是否使用 加密字段）。
      * 
-     * @param bStream 文档读取流
+     * @param bStream
+     *            文档读取流
      */
     protected boolean readHead(BufferedStream bStream)
     {

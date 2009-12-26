@@ -20,6 +20,7 @@ import rmp.prp.aide.P3040000.P3040000;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class MainPanel extends javax.swing.JPanel implements WBean

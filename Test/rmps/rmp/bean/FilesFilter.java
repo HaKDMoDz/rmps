@@ -17,6 +17,7 @@ import java.io.File;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public final class FilesFilter extends javax.swing.filechooser.FileFilter implements java.io.FileFilter
@@ -36,7 +37,8 @@ public final class FilesFilter extends javax.swing.filechooser.FileFilter implem
     /**
      * 文件过滤器构造函数
      * 
-     * @param incText 过滤文件所包含的字符信息
+     * @param incText
+     *            过滤文件所包含的字符信息
      */
     public FilesFilter(String[] incText)
     {
@@ -146,13 +148,12 @@ public final class FilesFilter extends javax.swing.filechooser.FileFilter implem
         isInclude = false;
         matchCase = false;
         strInclude = new String[]
-                {
-                    ""
-                };
+        { "" };
     }
 
     /**
-     * @param fcDespText the fcDespText to set
+     * @param fcDespText
+     *            the fcDespText to set
      */
     public void setDescription(String[] fcDespText)
     {
@@ -168,7 +169,8 @@ public final class FilesFilter extends javax.swing.filechooser.FileFilter implem
     }
 
     /**
-     * @param textInclude The textInclude to set.
+     * @param textInclude
+     *            The textInclude to set.
      */
     public void setTextInclude(String[] textInclude)
     {
@@ -184,7 +186,8 @@ public final class FilesFilter extends javax.swing.filechooser.FileFilter implem
     }
 
     /**
-     * @param filesModel the filesModel to set
+     * @param filesModel
+     *            the filesModel to set
      */
     public void setFilesModel(int filesModel)
     {
@@ -202,7 +205,8 @@ public final class FilesFilter extends javax.swing.filechooser.FileFilter implem
     }
 
     /**
-     * @param isInclude The isSuffix to set.
+     * @param isInclude
+     *            The isSuffix to set.
      */
     public void setInclude(boolean isInclude)
     {
@@ -218,7 +222,8 @@ public final class FilesFilter extends javax.swing.filechooser.FileFilter implem
     }
 
     /**
-     * @param showHidden The showHidden to set.
+     * @param showHidden
+     *            The showHidden to set.
      */
     public void setShowHidden(boolean showHidden)
     {
@@ -234,12 +239,14 @@ public final class FilesFilter extends javax.swing.filechooser.FileFilter implem
     }
 
     /**
-     * @param matchCase The matchCase to set.
+     * @param matchCase
+     *            The matchCase to set.
      */
     public void setMatchCase(boolean matchCase)
     {
         this.matchCase = matchCase;
     }
+
     /** 是否显示隐藏文件（夹），true：显示隐藏文件（夹），false：不显示隐藏文件夹 */
     private boolean showHidden = false;
     /** 文件过滤方式 */

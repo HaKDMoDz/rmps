@@ -40,14 +40,14 @@ import cons.prp.aide.extparse.DB0008;
  */
 public class DU8000
 {
-    private static final String      DRV_A = "org.hsqldb.jdbcDriver";
-    private static final String      CON_A = "jdbc:hsqldb:file:E:\\rmps\\rmp\\1000000\\bak\\amon";
-    private static final String      DRV_B = "org.hsqldb.jdbcDriver";
-    private static final String      CON_B = "jdbc:hsqldb:file:E:\\rmps\\rmp\\1000000\\dat\\amon";
+    private static final String DRV_A = "org.hsqldb.jdbcDriver";
+    private static final String CON_A = "jdbc:hsqldb:file:E:\\rmps\\rmp\\1000000\\bak\\amon";
+    private static final String DRV_B = "org.hsqldb.jdbcDriver";
+    private static final String CON_B = "jdbc:hsqldb:file:E:\\rmps\\rmp\\1000000\\dat\\amon";
 
-    private static Connection        conA;
-    private static Statement         staA;
-    private static Connection        conB;
+    private static Connection conA;
+    private static Statement staA;
+    private static Connection conB;
     private static PreparedStatement staB;
 
     public static void main(String[] args)
@@ -86,7 +86,7 @@ public class DU8000
             closeConnectionA();
 
         }
-        catch(Exception exp)
+        catch (Exception exp)
         {
             exp.printStackTrace();
         }
@@ -100,7 +100,7 @@ public class DU8000
             conA = DriverManager.getConnection(con);// , user, password);
             staA = conA.createStatement();
         }
-        catch(Exception exp)
+        catch (Exception exp)
         {
             exp.printStackTrace();
         }
@@ -113,7 +113,7 @@ public class DU8000
             Class.forName(drv);
             conB = DriverManager.getConnection(con);// , user, password);
         }
-        catch(Exception exp)
+        catch (Exception exp)
         {
             exp.printStackTrace();
         }
@@ -128,7 +128,7 @@ public class DU8000
                 staA.close();
             }
         }
-        catch(Exception exp)
+        catch (Exception exp)
         {
             exp.printStackTrace();
         }
@@ -140,7 +140,7 @@ public class DU8000
                 conA.close();
             }
         }
-        catch(Exception exp)
+        catch (Exception exp)
         {
             exp.printStackTrace();
         }
@@ -155,7 +155,7 @@ public class DU8000
                 staB.close();
             }
         }
-        catch(Exception exp)
+        catch (Exception exp)
         {
             exp.printStackTrace();
         }
@@ -167,7 +167,7 @@ public class DU8000
                 conB.close();
             }
         }
-        catch(Exception exp)
+        catch (Exception exp)
         {
             exp.printStackTrace();
         }

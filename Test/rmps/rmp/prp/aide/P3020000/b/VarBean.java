@@ -17,6 +17,7 @@ import cons.prp.aide.P3020000.ConstUI;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class VarBean
@@ -31,7 +32,8 @@ public class VarBean
     /**
      * 参数数据结构
      * 
-     * @param p 用户变量标记，可选为：\ / :
+     * @param p
+     *            用户变量标记，可选为：\ / :
      */
     public VarBean(char p)
     {
@@ -46,27 +48,19 @@ public class VarBean
         if (cVar == '\\')
         {
             regn = new char[]
-                    {
-                        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-                        'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
-                    };
+            { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
             return true;
         }
         if (cVar == '/')
         {
             regn = new char[]
-                    {
-                        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
-                        's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-                    };
+            { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
             return true;
         }
         if (cVar == ':')
         {
             regn = new char[]
-                    {
-                        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
-                    };
+            { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
             return true;
         }
 
@@ -111,16 +105,14 @@ public class VarBean
     /**
      * 设置变量取值字符区域
      * 
-     * @param regn the regn to set
+     * @param regn
+     *            the regn to set
      */
     public void setRegn(String regn) throws Exception
     {
         char[] fbdn = new char[]
-        {
-            ConstUI.EXPS_MAT_ALL, ConstUI.EXPS_MAT_ONE, ConstUI.EXPS_VAR_UPP,
-            ConstUI.EXPS_VAR_LOW, ConstUI.EXPS_VAR_NUM, ConstUI.EXPS_CTR_UPP, ConstUI.EXPS_CTR_LOW,
-            ConstUI.EXPS_CTR_FND, ConstUI.EXPS_OPT_PMS
-        };
+        { ConstUI.EXPS_MAT_ALL, ConstUI.EXPS_MAT_ONE, ConstUI.EXPS_VAR_UPP, ConstUI.EXPS_VAR_LOW, ConstUI.EXPS_VAR_NUM, ConstUI.EXPS_CTR_UPP, ConstUI.EXPS_CTR_LOW, ConstUI.EXPS_CTR_FND,
+                ConstUI.EXPS_OPT_PMS };
         for (char t : fbdn)
         {
             if (regn.indexOf(t) > 0)

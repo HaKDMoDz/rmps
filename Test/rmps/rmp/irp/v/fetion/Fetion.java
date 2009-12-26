@@ -9,10 +9,6 @@ package rmp.irp.v.fetion;
 
 //import cn.edu.ctgu.ghl.fetion.FetionEvent;
 //import cn.edu.ctgu.ghl.fetion.IFetionEventListener;
-import com.amonsoft.rmps.irp.v.IAccount;
-import com.amonsoft.rmps.irp.v.IConnect;
-import com.amonsoft.rmps.irp.b.IContact;
-import com.amonsoft.rmps.irp.b.IStatus;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -24,6 +20,11 @@ import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.amonsoft.rmps.irp.b.IContact;
+import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.rmps.irp.v.IAccount;
+import com.amonsoft.rmps.irp.v.IConnect;
 import com.amonsoft.util.LogUtil;
 
 /**
@@ -33,9 +34,10 @@ import com.amonsoft.util.LogUtil;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
-public class Fetion implements IAccount//, IFetionEventListener
+public class Fetion implements IAccount// , IFetionEventListener
 {
     private Connect connect;
 
@@ -90,27 +92,29 @@ public class Fetion implements IAccount//, IFetionEventListener
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-//    @Override
-//    public void process(FetionEvent e)
-//    {
-//        if (e.getFirstLine() != null && e.getFirstLine().startsWith("M") && e.getBody() != null)
-//        {
-//            messenger.sendSms2SelfPhone(e.toString());
-//            if (e.getBody().trim().startsWith("cmd"))
-//            {
-//                System.out.println("excute[" + e.getBody().trim().substring(3) + "]");
-//                try
-//                {
-//                    Runtime.getRuntime().exec(e.getBody().trim().substring(3));
-//                }
-//                catch (IOException e1)
-//                {
-//                    // TODO Auto-generated catch block
-//                    e1.printStackTrace();
-//                }
-//            }
-//        }
-//    }
+
+    // @Override
+    // public void process(FetionEvent e)
+    // {
+    // if (e.getFirstLine() != null && e.getFirstLine().startsWith("M") &&
+    // e.getBody() != null)
+    // {
+    // messenger.sendSms2SelfPhone(e.toString());
+    // if (e.getBody().trim().startsWith("cmd"))
+    // {
+    // System.out.println("excute[" + e.getBody().trim().substring(3) + "]");
+    // try
+    // {
+    // Runtime.getRuntime().exec(e.getBody().trim().substring(3));
+    // }
+    // catch (IOException e1)
+    // {
+    // // TODO Auto-generated catch block
+    // e1.printStackTrace();
+    // }
+    // }
+    // }
+    // }
 
     public static String byteArrayToHexString(byte[] b)
     {
@@ -325,7 +329,8 @@ public class Fetion implements IAccount//, IFetionEventListener
             String response = MD5Encode(md5Str);
             debugStr = debugStr + "response=MD5(\"" + md5Str + "\")=" + response + "\n";
             addDebugStr(debugStr);
-            this.sendData = "R fetion.com.cn SIP-C/2.0\r\nF: " + this.sid + "\r\n" + "I: 1\r\n" + "Q: 2 R\r\n" + "A: Digest response=\"" + response + "\",cnonce=\"7036EA07568E7C4D6D49FD76141062FE\"\r\n" + "L: " + args.length() + "\r\n\r\n" + args;
+            this.sendData = "R fetion.com.cn SIP-C/2.0\r\nF: " + this.sid + "\r\n" + "I: 1\r\n" + "Q: 2 R\r\n" + "A: Digest response=\"" + response
+                    + "\",cnonce=\"7036EA07568E7C4D6D49FD76141062FE\"\r\n" + "L: " + args.length() + "\r\n\r\n" + args;
 
             addSendStr(this.sendData);
             SendData();
@@ -386,16 +391,16 @@ public class Fetion implements IAccount//, IFetionEventListener
                 switch (element.NType)
                 {
                     case 1:
-                        //this.mFrame.updatePersonalInfoShow(append);
+                        // this.mFrame.updatePersonalInfoShow(append);
                         System.out.println(append);
                         break;
                     case 2:
-                        //this.mFrame.updateContactsShow(append);
+                        // this.mFrame.updateContactsShow(append);
                         System.out.println(append);
                         break;
                     case 3:
                     case 4:
-                        //this.mFrame.updateContactsDetail(append);
+                        // this.mFrame.updateContactsDetail(append);
                         System.out.println(append);
                 }
 
@@ -405,7 +410,7 @@ public class Fetion implements IAccount//, IFetionEventListener
                 switch (this.getData.charAt(0))
                 {
                     case 'M':
-                        //this.mFrame.ProcessMessge(this.getData, append);
+                        // this.mFrame.ProcessMessge(this.getData, append);
                         System.out.println(getData);
                         System.out.println(append);
                         replyM(this.getData);
@@ -641,7 +646,8 @@ public class Fetion implements IAccount//, IFetionEventListener
             connection.setRequestProperty("Content-Type", "text/plain");
             connection.setRequestProperty("charset", "utf-8");
             OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream(), "utf-8");
-            out.write("<config><user mobile-no=\"13585709149\" /><client type=\"PC\" version=\"2.1.0.0\" platform=\"W5.1\" /><servers version=\"0\" /><service-no version=\"0\" /><parameters version=\"0\" /><hints version=\"0\" /><http-applications version=\"0\" /></config>");
+            out
+                    .write("<config><user mobile-no=\"13585709149\" /><client type=\"PC\" version=\"2.1.0.0\" platform=\"W5.1\" /><servers version=\"0\" /><service-no version=\"0\" /><parameters version=\"0\" /><hints version=\"0\" /><http-applications version=\"0\" /></config>");
             out.flush();
             out.close();
             InputStreamReader in;
@@ -754,6 +760,7 @@ public class Fetion implements IAccount//, IFetionEventListener
             LogUtil.log("Init Button Excetion:\n" + e.toString() + "\n");
         }
     }
+
     DataInputStream dataIn;
     DataOutputStream dataOut;
     Socket socket;
@@ -768,8 +775,6 @@ public class Fetion implements IAccount//, IFetionEventListener
     ArrayList<IDataType> Commands = new ArrayList();
     ArrayList<IDataType> Commands2 = new ArrayList();
     private static final String[] hexDigits =
-    {
-        "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"
-    };
+    { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F" };
     int Q1 = 2;
 }

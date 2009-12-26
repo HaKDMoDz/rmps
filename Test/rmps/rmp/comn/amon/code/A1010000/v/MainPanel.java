@@ -25,19 +25,21 @@ import javax.crypto.Cipher;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 
+import rmp.bean.K1IV3S;
+import rmp.bean.K1SV2S;
 import rmp.comn.amon.code.A1010000.A1010000;
 import rmp.comn.amon.code.A1010000.b.WComment;
 import rmp.comn.amon.code.A1010000.m.Util;
-import rmp.bean.K1IV3S;
-import rmp.bean.K1SV2S;
 import rmp.face.WBean;
 import rmp.prp.aide.P3050000.m.SecureKey;
 import rmp.util.CheckUtil;
 import rmp.util.FileUtil;
 import rmp.util.HashUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.StringUtil;
+
+import com.amonsoft.util.LogUtil;
+
 import cons.SysCons;
 import cons.comn.amon.code.A1010000.LangRes;
 
@@ -49,6 +51,7 @@ import cons.comn.amon.code.A1010000.LangRes;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class MainPanel extends javax.swing.JPanel implements WBean
@@ -217,39 +220,39 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         pl_CmtPanel.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addGap(62, 62, 62).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                ck_LogMultiLine).addComponent(ck_CmtDocument).addComponent(ck_FmtSpaceChar)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                ck_LogSingleLine).addComponent(ck_CmtMultiLine).addComponent(ck_FmtBlankLine)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                ck_LogExceptions).addComponent(ck_CmtSingleLine).addComponent(ck_FmtReturnTrip))).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                lb_CSrcFile).addComponent(lb_CDstFile).addComponent(lb_Log).addComponent(lb_Cmt).addComponent(lb_Fmt)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                tf_CDstFile, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE).addComponent(
-                tf_CSrcFile, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                bt_CSrcFile, javax.swing.GroupLayout.Alignment.TRAILING).addComponent(bt_CDstFile,
-                javax.swing.GroupLayout.Alignment.TRAILING))).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(sp_InfoArea,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+                                layout.createSequentialGroup().addGap(62, 62, 62).addGroup(
+                                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(ck_LogMultiLine).addComponent(ck_CmtDocument).addComponent(ck_FmtSpaceChar))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(ck_LogSingleLine).addComponent(ck_CmtMultiLine).addComponent(
+                                                        ck_FmtBlankLine)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(ck_LogExceptions).addComponent(ck_CmtSingleLine).addComponent(
+                                                        ck_FmtReturnTrip))).addGroup(
+                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                layout.createSequentialGroup().addContainerGap().addGroup(
+                                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_CSrcFile).addComponent(lb_CDstFile).addComponent(lb_Log).addComponent(
+                                                lb_Cmt).addComponent(lb_Fmt)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(tf_CDstFile, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                                                .addComponent(tf_CSrcFile, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)).addPreferredGap(
+                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(bt_CSrcFile, javax.swing.GroupLayout.Alignment.TRAILING).addComponent(
+                                                bt_CDstFile, javax.swing.GroupLayout.Alignment.TRAILING))).addGroup(
+                                layout.createSequentialGroup().addContainerGap().addComponent(sp_InfoArea, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_CSrcFile).addComponent(bt_CSrcFile).addComponent(tf_CSrcFile, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_CDstFile).addComponent(bt_CDstFile).addComponent(tf_CDstFile, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_Log).addComponent(ck_LogMultiLine).addComponent(ck_LogSingleLine).addComponent(ck_LogExceptions)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_Cmt).addComponent(ck_CmtDocument).addComponent(ck_CmtMultiLine).addComponent(ck_CmtSingleLine)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_Fmt).addComponent(ck_FmtSpaceChar).addComponent(ck_FmtBlankLine).addComponent(ck_FmtReturnTrip)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(sp_InfoArea,
-                javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_CSrcFile).addComponent(bt_CSrcFile).addComponent(tf_CSrcFile,
+                                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
+                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_CDstFile).addComponent(bt_CDstFile).addComponent(tf_CDstFile,
+                                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
+                        javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_Log).addComponent(ck_LogMultiLine).addComponent(ck_LogSingleLine).addComponent(
+                                ck_LogExceptions)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_Cmt).addComponent(ck_CmtDocument).addComponent(ck_CmtMultiLine).addComponent(
+                                ck_CmtSingleLine)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_Fmt).addComponent(ck_FmtSpaceChar).addComponent(ck_FmtBlankLine).addComponent(
+                                ck_FmtReturnTrip)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(sp_InfoArea, javax.swing.GroupLayout.PREFERRED_SIZE, 80,
+                        javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
     }
 
     /**
@@ -323,38 +326,32 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         pl_SecPanel.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_CipherTp).addComponent(lb_CipherNm).addComponent(lb_UserPwds).addComponent(lb_SSrcFile)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addComponent(cb_CipherTp, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_CharSize,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addComponent(cb_CipherNm,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addComponent(tf_UserPwds, javax.swing.GroupLayout.DEFAULT_SIZE, 145,
-                Short.MAX_VALUE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(ck_RandomKey)).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addComponent(tf_SSrcFile, javax.swing.GroupLayout.DEFAULT_SIZE, 143,
-                Short.MAX_VALUE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_SSrcFile))).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_CipherTp).addComponent(lb_CipherNm).addComponent(lb_UserPwds).addComponent(lb_SSrcFile))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+                                        layout.createSequentialGroup().addComponent(cb_CipherTp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_CharSize,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addComponent(cb_CipherNm,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addGroup(
+                                        javax.swing.GroupLayout.Alignment.TRAILING,
+                                        layout.createSequentialGroup().addComponent(tf_UserPwds, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE).addPreferredGap(
+                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(ck_RandomKey)).addGroup(
+                                        javax.swing.GroupLayout.Alignment.TRAILING,
+                                        layout.createSequentialGroup().addComponent(tf_SSrcFile, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE).addPreferredGap(
+                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_SSrcFile))).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_CipherTp).addComponent(cb_CipherTp, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(
-                tf_CharSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_CipherNm).addComponent(cb_CipherNm, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_UserPwds).addComponent(ck_RandomKey).addComponent(tf_UserPwds, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SSrcFile).addComponent(bt_SSrcFile).addComponent(tf_SSrcFile, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addContainerGap(
-                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_CipherTp).addComponent(cb_CipherTp, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(tf_CharSize, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_CipherNm).addComponent(cb_CipherNm, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_UserPwds).addComponent(ck_RandomKey).addComponent(tf_UserPwds,
+                                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
+                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_SSrcFile).addComponent(bt_SSrcFile).addComponent(tf_SSrcFile,
+                                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addContainerGap(
+                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
     }
 
     /**
@@ -422,17 +419,13 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 javax.swing.GroupLayout.Alignment.TRAILING,
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(pl_CardPanel,
-                javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300,
-                Short.MAX_VALUE).addComponent(pl_UserPanel, javax.swing.GroupLayout.Alignment.LEADING,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE).addComponent(bt_DoCipher)).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(pl_CardPanel, javax.swing.GroupLayout.Alignment.LEADING,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE).addComponent(pl_UserPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                279, Short.MAX_VALUE).addComponent(bt_DoCipher)).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(pl_UserPanel,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(pl_CardPanel,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(bt_DoCipher).addContainerGap()));
+                layout.createSequentialGroup().addContainerGap().addComponent(pl_UserPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                        javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(pl_CardPanel, javax.swing.GroupLayout.DEFAULT_SIZE,
+                        200, Short.MAX_VALUE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(bt_DoCipher).addContainerGap()));
     }
 
     // ----------------------------------------------------
@@ -1275,10 +1268,14 @@ public class MainPanel extends javax.swing.JPanel implements WBean
     /**
      * 创建加密算法
      * 
-     * @param algorithm 加密算法
-     * @param userPwd 用户口令
-     * @param mode 加密模式
-     * @param keySize 密钥大小
+     * @param algorithm
+     *            加密算法
+     * @param userPwd
+     *            用户口令
+     * @param mode
+     *            加密模式
+     * @param keySize
+     *            密钥大小
      * @return
      * @throws Exception
      */
@@ -1293,9 +1290,12 @@ public class MainPanel extends javax.swing.JPanel implements WBean
     /**
      * 由文件到文本加密
      * 
-     * @param cipher 加密算法对象
-     * @param srcFile 来源数据文档
-     * @param blockSize 加密结果分块大小
+     * @param cipher
+     *            加密算法对象
+     * @param srcFile
+     *            来源数据文档
+     * @param blockSize
+     *            加密结果分块大小
      */
     private void file2Text(Cipher cipher, File srcFile, int blockSize)
     {
@@ -1431,8 +1431,10 @@ public class MainPanel extends javax.swing.JPanel implements WBean
     /**
      * 由文本到文件加密
      * 
-     * @param cipher 加密算法对象
-     * @param srcFile 来源数据文档
+     * @param cipher
+     *            加密算法对象
+     * @param srcFile
+     *            来源数据文档
      */
     private void text2File(Cipher cipher, File srcFile)
     {
@@ -1563,6 +1565,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         // 提示处理成功
         MesgUtil.showMessageDialog(this, LangRes.MESG_0011);
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 界面变量区域
     // ////////////////////////////////////////////////////////////////////////

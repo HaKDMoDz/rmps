@@ -7,8 +7,9 @@
  */
 package rmp.prp.aide.P30A0000.v;
 
-import com.amonsoft.rmps.prp.v.IView;
 import rmp.prp.aide.P30A0000.P30A0000;
+
+import com.amonsoft.rmps.prp.v.IView;
 
 /**
  * <ul>
@@ -19,6 +20,7 @@ import rmp.prp.aide.P30A0000.P30A0000;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class MainPanel extends javax.swing.JPanel implements IView

@@ -30,14 +30,13 @@ public class Location implements Cloneable, Serializable
 
     public String toString()
     {
-        return getClass().getName() + "[latitude=" + latitude + ",longitude=" + longitude + ",elevation=" + elevation
-            + ",zone=" + zone + "]";
+        return getClass().getName() + "[latitude=" + latitude + ",longitude=" + longitude + ",elevation=" + elevation + ",zone=" + zone + "]";
     }
 
     public String format()
     {
-        return MessageFormat.format("{0}: lat {1} long {2} elev {3} zone {4}", new Object[]{new String(name),
-            new Double(latitude), new Double(longitude), new Double(elevation), new Double(zone)});
+        return MessageFormat.format("{0}: lat {1} long {2} elev {3} zone {4}", new Object[]
+        { new String(name), new Double(latitude), new Double(longitude), new Double(elevation), new Double(zone) });
     }
 
     public boolean equals(Object obj)
@@ -46,22 +45,18 @@ public class Location implements Cloneable, Serializable
             return true;
         if (!(obj instanceof Location))
             return false;
-        Location location = (Location)obj;
-        return location.latitude == latitude && location.longitude == longitude && location.elevation == elevation
-            && location.zone == zone;
+        Location location = (Location) obj;
+        return location.latitude == latitude && location.longitude == longitude && location.elevation == elevation && location.zone == zone;
     }
 
-    public String                name;
-    public double                latitude;
-    public double                longitude;
-    public double                elevation;
-    public double                zone;
-    public static final Location URBANA           = new Location("Urbana, IL, USA", 40.100000000000001D,
-                                                      -88.200000000000003D, ProtoDate.mt(225D), -6D);
-    public static final Location LOS_ANGELES      = new Location("Los Angeles, CA, USA",
-                                                      ProtoDate.angle(34D, 4D, 0.0D),
-                                                      -ProtoDate.angle(118D, 15D, 0.0D), ProtoDate.mt(0.0D), -8D);
+    public String name;
+    public double latitude;
+    public double longitude;
+    public double elevation;
+    public double zone;
+    public static final Location URBANA = new Location("Urbana, IL, USA", 40.100000000000001D, -88.200000000000003D, ProtoDate.mt(225D), -6D);
+    public static final Location LOS_ANGELES = new Location("Los Angeles, CA, USA", ProtoDate.angle(34D, 4D, 0.0D), -ProtoDate.angle(118D, 15D, 0.0D), ProtoDate.mt(0.0D), -8D);
 
     /** serialVersionUID */
-    private static final long    serialVersionUID = -1934464804193388070L;
+    private static final long serialVersionUID = -1934464804193388070L;
 }

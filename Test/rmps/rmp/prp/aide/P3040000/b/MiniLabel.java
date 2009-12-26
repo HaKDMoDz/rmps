@@ -24,6 +24,7 @@ import cons.prp.aide.P3040000.ConstUI;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class MiniLabel extends javax.swing.JLabel
@@ -95,7 +96,8 @@ public class MiniLabel extends javax.swing.JLabel
     /**
      * 设置标签是否被选择
      * 
-     * @param b true标签被选择
+     * @param b
+     *            true标签被选择
      */
     public void setSelected(boolean b)
     {
@@ -120,12 +122,14 @@ public class MiniLabel extends javax.swing.JLabel
     }
 
     /**
-     * @param today the today to set
+     * @param today
+     *            the today to set
      */
     public void setToday(boolean today)
     {
         this.today = today;
     }
+
     /** serialVersionUID */
     private static final long serialVersionUID = 7917408151923162878L;
 }

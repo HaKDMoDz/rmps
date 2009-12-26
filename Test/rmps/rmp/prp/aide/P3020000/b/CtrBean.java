@@ -17,6 +17,7 @@ import cons.prp.aide.P3020000.ConstUI;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class CtrBean
@@ -47,7 +48,8 @@ public class CtrBean
     }
 
     /**
-     * @param ctr the vCtr to set
+     * @param ctr
+     *            the vCtr to set
      */
     public void setVCtr(char ctr)
     {
@@ -63,7 +65,8 @@ public class CtrBean
     }
 
     /**
-     * @param indx the indx to set
+     * @param indx
+     *            the indx to set
      */
     public void setIndx(int indx)
     {
@@ -79,7 +82,8 @@ public class CtrBean
     }
 
     /**
-     * @param last the last to set
+     * @param last
+     *            the last to set
      */
     public void setLast(boolean last)
     {

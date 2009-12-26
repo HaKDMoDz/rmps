@@ -9,14 +9,15 @@ package rmp.prp.b;
 
 import java.awt.Color;
 import java.awt.Cursor;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import rmp.prp.m.ExeItem;
 import rmp.util.BeanUtil;
 import rmp.util.CheckUtil;
-import com.amonsoft.util.DeskUtil;
 import rmp.util.EnvUtil;
+
+import com.amonsoft.util.DeskUtil;
 import com.amonsoft.util.LogUtil;
 
 /**
@@ -27,6 +28,7 @@ import com.amonsoft.util.LogUtil;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class ExePlus extends javax.swing.JPanel
@@ -95,10 +97,8 @@ public class ExePlus extends javax.swing.JPanel
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                lb_ItemLabl, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addComponent(lb_ItemLabl).addGap(1)));
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_ItemLabl, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE));
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addComponent(lb_ItemLabl).addGap(1)));
     }
 
     /**
@@ -163,6 +163,7 @@ public class ExePlus extends javax.swing.JPanel
         BeanUtil.setWTips(lb_ItemLabl, item.getSoftDesp());
         return true;
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 界面组件区域
     // ////////////////////////////////////////////////////////////////////////

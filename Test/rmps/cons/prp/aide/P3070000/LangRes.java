@@ -16,6 +16,7 @@ package cons.prp.aide.P3070000;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public interface LangRes

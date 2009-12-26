@@ -7,12 +7,12 @@
  */
 package rmp.comn.amon.info.A4010000;
 
-import com.amonsoft.bean.WForm;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 
+import com.amonsoft.bean.WForm;
 import com.amonsoft.rmps.prp.IPrpPlus;
 
 /**
@@ -24,6 +24,7 @@ import com.amonsoft.rmps.prp.IPrpPlus;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class A4010000 extends WForm implements IPrpPlus
@@ -252,19 +253,19 @@ public class A4010000 extends WForm implements IPrpPlus
             case VIEW_TAIL:
                 return showTail();
 
-            // 显示迷你模式
+                // 显示迷你模式
             case VIEW_MINI:
                 return showMini();
 
-            // 显示正常模式
+                // 显示正常模式
             case VIEW_NORM:
                 return showNorm();
 
-            // 显示高级模式
+                // 显示高级模式
             case VIEW_MAIN:
                 return showMain();
 
-            // 显示向导模式
+                // 显示向导模式
             case VIEW_STEP:
                 return showStep();
 
@@ -342,6 +343,7 @@ public class A4010000 extends WForm implements IPrpPlus
     {
         // TODO Auto-generated method stub
     }
+
     /** serialVersionUID */
     private static final long serialVersionUID = 5278592270347444945L;
 }

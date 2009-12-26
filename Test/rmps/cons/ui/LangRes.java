@@ -16,6 +16,7 @@ package cons.ui;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public interface LangRes

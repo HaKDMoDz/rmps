@@ -7,19 +7,14 @@
  */
 package rmp.comn.lang.C5010000;
 
-import com.amonsoft.bean.WForm;
-import com.amonsoft.cons.ConsSys;
-import com.amonsoft.rmps.prp.IPrpPlus;
-import com.amonsoft.util.LangUtil;
-import cons.EnvCons;
-import cons.comn.lang.A3010000.ConstUI;
-import cons.id.ComnCons;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JMenu;
 import javax.swing.JPanel;
+
 import rmp.Rmps;
 import rmp.comn.C1010000.C1010000;
 import rmp.comn.lang.C5010000.v.MainPanel;
@@ -27,12 +22,21 @@ import rmp.comn.lang.C5010000.v.MiniPanel;
 import rmp.comn.lang.C5010000.v.NormPanel;
 import rmp.comn.lang.C5010000.v.QuickMenu;
 import rmp.comn.lang.C5010000.v.TailPanel;
-import rmp.prp.Prps;
 import rmp.comn.user.UserInfo;
+import rmp.prp.Prps;
 import rmp.util.BeanUtil;
-import com.amonsoft.util.DeskUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.EnvUtil;
+
+import com.amonsoft.bean.WForm;
+import com.amonsoft.cons.ConsSys;
+import com.amonsoft.rmps.prp.IPrpPlus;
+import com.amonsoft.util.DeskUtil;
+import com.amonsoft.util.LangUtil;
+import com.amonsoft.util.LogUtil;
+
+import cons.EnvCons;
+import cons.comn.lang.A3010000.ConstUI;
+import cons.id.ComnCons;
 
 /**
  * <ul>
@@ -45,6 +49,7 @@ import rmp.util.EnvUtil;
  * 2）、生成语言资源事项：<br />
  * a)片段标记后两位为00的ID仅用于存放当前片段中语言资源的数量，不能用于语言资源内容存放；<br />
  * </ul>
+ * 
  * @author Amon
  */
 public class C5010000 extends WForm implements IPrpPlus
@@ -329,19 +334,19 @@ public class C5010000 extends WForm implements IPrpPlus
             case VIEW_TAIL:
                 return showTail();
 
-            // 显示迷你模式
+                // 显示迷你模式
             case VIEW_MINI:
                 return showMini();
 
-            // 显示正常模式
+                // 显示正常模式
             case VIEW_NORM:
                 return showNorm();
 
-            // 显示高级模式
+                // 显示高级模式
             case VIEW_MAIN:
                 return showMain();
 
-            // 显示向导模式
+                // 显示向导模式
             case VIEW_STEP:
                 return showStep();
 
@@ -388,8 +393,10 @@ public class C5010000 extends WForm implements IPrpPlus
     /**
      * 语言资源查询
      * 
-     * @param mesgId 语言资源索引
-     * @param defMesg 默认语言资源
+     * @param mesgId
+     *            语言资源索引
+     * @param defMesg
+     *            默认语言资源
      * @return 语言资源内容
      */
     public static String getMesg(String msgRes, String msgDef)
@@ -461,7 +468,7 @@ public class C5010000 extends WForm implements IPrpPlus
         setContentPane(np_NormPanel);
         pack();
         center(null);
-//        if (!isVisible())
+        // if (!isVisible())
         {
             setVisible(true);
         }

@@ -16,6 +16,7 @@ package rmp.comn.amon.data.A2010000.v;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class TailPanel

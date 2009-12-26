@@ -18,6 +18,7 @@ import rmp.comn.lang.C5010000.C5010000;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class QuickMenu

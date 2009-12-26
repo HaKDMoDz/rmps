@@ -18,6 +18,7 @@ import rmp.comn.user.U0000000.U0000000;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class MainPanel extends javax.swing.JPanel
@@ -38,6 +39,7 @@ public class MainPanel extends javax.swing.JPanel
     {
         return true;
     }
+
     /** serialVersionUID */
     private static final long serialVersionUID = -7856853095342646734L;
 }

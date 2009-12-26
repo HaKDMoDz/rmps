@@ -30,6 +30,7 @@ import rmp.face.WBean;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class MiniPanel extends javax.swing.JPanel implements WBean
@@ -157,6 +158,7 @@ public class MiniPanel extends javax.swing.JPanel implements WBean
     {
         this.repaint();
     }
+
     /** serialVersionUID */
     private static final long serialVersionUID = -7993652455405271416L;
 }

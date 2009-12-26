@@ -15,6 +15,7 @@ package rmp.prp.aide.Testsoft.b;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class TestBean

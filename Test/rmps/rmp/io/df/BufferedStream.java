@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 import com.amonsoft.util.LogUtil;
+
 import cons.EnvCons;
 
 /**
@@ -24,6 +25,7 @@ import cons.EnvCons;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class BufferedStream
@@ -95,8 +97,10 @@ public class BufferedStream
     /**
      * 构造函数
      * 
-     * @param filePath 进行数据存取的目标文件路径
-     * @param acesMode 标记目标文件的读取写权限，其参数说明见RandomAccessFile构造函数中的说明
+     * @param filePath
+     *            进行数据存取的目标文件路径
+     * @param acesMode
+     *            标记目标文件的读取写权限，其参数说明见RandomAccessFile构造函数中的说明
      */
     public BufferedStream(String filePath, String acesMode)
     {
@@ -106,8 +110,10 @@ public class BufferedStream
     /**
      * 构造函数，创建一个指定缓冲区大小的文档流
      * 
-     * @param filePath 进行数据存取的目标文件路径
-     * @param buffSize 缓冲区的大小
+     * @param filePath
+     *            进行数据存取的目标文件路径
+     * @param buffSize
+     *            缓冲区的大小
      */
     public BufferedStream(String filePath, String acesMode, int buffSize)
     {
@@ -119,8 +125,10 @@ public class BufferedStream
     /**
      * 创建一个使用默认大小缓冲区的文档流
      * 
-     * @param destFile 要进行读写操作的目标文件
-     * @param acesMode 标记目标文件的读取写权限，其参数说明见RandomAccessFile构造函数中的说明
+     * @param destFile
+     *            要进行读写操作的目标文件
+     * @param acesMode
+     *            标记目标文件的读取写权限，其参数说明见RandomAccessFile构造函数中的说明
      */
     public BufferedStream(File destFile, String acesMode)
     {
@@ -130,10 +138,13 @@ public class BufferedStream
     /**
      * 创建一个使用指定大小缓冲区的文档流
      * 
-     * @param destFile 要进行读写操作的目标文件
-     * @param acesMode 标记目标文件的读取写权限，其参数说明见RandomAccessFile构造函数中的说明
-     * @param buffSize 使用的缓冲区的大小，建议大于2048字节，当缓冲区过小时会造成频繁的磁盘读写操作影响性能，
-     *        当缓冲区过大时会造成不必要的空间浪费。
+     * @param destFile
+     *            要进行读写操作的目标文件
+     * @param acesMode
+     *            标记目标文件的读取写权限，其参数说明见RandomAccessFile构造函数中的说明
+     * @param buffSize
+     *            使用的缓冲区的大小，建议大于2048字节，当缓冲区过小时会造成频繁的磁盘读写操作影响性能，
+     *            当缓冲区过大时会造成不必要的空间浪费。
      */
     public BufferedStream(File destFile, String acesMode, int buffSize)
     {
@@ -209,7 +220,8 @@ public class BufferedStream
      * 读取一个Boolean值
      * 
      * @return boolean 返回一个boolean值
-     * @throws IOException 文件存取异常
+     * @throws IOException
+     *             文件存取异常
      */
     public boolean readBoolean() throws IOException
     {
@@ -249,7 +261,8 @@ public class BufferedStream
      * 读取一个字节数据，并以无符号Int格式数据返回
      * 
      * @return int 返回读取的值
-     * @throws IOException 读取文件时抛出
+     * @throws IOException
+     *             读取文件时抛出
      */
     public int readUByte() throws IOException
     {
@@ -259,7 +272,8 @@ public class BufferedStream
     /**
      * 读取指定的字节到目标字节数组中去
      * 
-     * @param v 目标数组
+     * @param v
+     *            目标数组
      * @return
      * @throws IOException
      */
@@ -271,9 +285,12 @@ public class BufferedStream
     /**
      * 读取指定长度的字节数据到指定偏移量的字节数组中去
      * 
-     * @param v 读取数据的存放数组
-     * @param off 指定数组的偏移量信息
-     * @param len 待读取的字节长度
+     * @param v
+     *            读取数据的存放数组
+     * @param off
+     *            指定数组的偏移量信息
+     * @param len
+     *            待读取的字节长度
      * @return 实际读取的字节长度
      * @throws IOException
      */
@@ -441,9 +458,11 @@ public class BufferedStream
     /**
      * 读取一个单字节字符串数据
      * 
-     * @param len 读取的字符串的长度
+     * @param len
+     *            读取的字符串的长度
      * @return 实际读取的字符串数据
-     * @throws IOException 文件存取异常
+     * @throws IOException
+     *             文件存取异常
      */
     public String readString1(int len) throws IOException
     {
@@ -466,8 +485,10 @@ public class BufferedStream
     /**
      * 写入一个boolean数值，true:则写入1 false：写入0
      * 
-     * @param b 写入数据的标识值
-     * @throws IOException 处理过程中抛出
+     * @param b
+     *            写入数据的标识值
+     * @throws IOException
+     *             处理过程中抛出
      */
     public void writeBoolean(boolean v) throws IOException
     {
@@ -488,8 +509,10 @@ public class BufferedStream
     /**
      * 写入一个字节数据，此处的S、U仅是相对于读取一个字节时的标记，后台写入数据并无区别
      * 
-     * @param b 待写入的字节数据
-     * @throws IOException 文件存取异常
+     * @param b
+     *            待写入的字节数据
+     * @throws IOException
+     *             文件存取异常
      */
     public void writeSByte(byte v) throws IOException
     {
@@ -510,8 +533,10 @@ public class BufferedStream
     /**
      * 写入一个字节数据，此处的S、U仅是相对于读取一个字节时的标记，后台写入数据并无区别
      * 
-     * @param i 待写入的整形数据
-     * @throws IOException 文件存取异常
+     * @param i
+     *            待写入的整形数据
+     * @throws IOException
+     *             文件存取异常
      */
     public void writeUByte(int v) throws IOException
     {
@@ -521,9 +546,11 @@ public class BufferedStream
     /**
      * 写入指定的字节级数，并返回实际写入的字节数量
      * 
-     * @param v 待写入的字节数组
+     * @param v
+     *            待写入的字节数组
      * @return 实际写入的字节数量
-     * @throws IOException 文件存取异常
+     * @throws IOException
+     *             文件存取异常
      */
     public void writeBytes(byte[] v) throws IOException
     {
@@ -533,11 +560,15 @@ public class BufferedStream
     /**
      * 从当前文件流位置开始，写入指定的字节数组中从指定偏移地址开始指定长度的字节数组，并返回实际 写入的字节数量
      * 
-     * @param v 待写入的字节数组
-     * @param off 待写入字节数组的偏移量
-     * @param len 待写入字节数组的字节数量
+     * @param v
+     *            待写入的字节数组
+     * @param off
+     *            待写入字节数组的偏移量
+     * @param len
+     *            待写入字节数组的字节数量
      * @return 实际写入的字节个数
-     * @throws IOException 文件存取异常
+     * @throws IOException
+     *             文件存取异常
      */
     public int writeBytes(byte[] v, int off, int len) throws IOException
     {
@@ -608,7 +639,8 @@ public class BufferedStream
     /**
      * 写入一个单字节字符数组数据
      * 
-     * @param v 待写入的字符单字节数组
+     * @param v
+     *            待写入的字符单字节数组
      * @throws IOException
      */
     public int writeChars1(char[] v) throws IOException
@@ -619,9 +651,12 @@ public class BufferedStream
     /**
      * 写入一个单字节字符数组数据
      * 
-     * @param v 待写入的字符单字节数组
-     * @param off 数组的起始偏移地址
-     * @param len 写入字符的个数
+     * @param v
+     *            待写入的字符单字节数组
+     * @param off
+     *            数组的起始偏移地址
+     * @param len
+     *            写入字符的个数
      * @throws IOException
      */
     public int writeChars1(char[] v, int off, int len) throws IOException
@@ -682,8 +717,10 @@ public class BufferedStream
     /**
      * 写入单字节字符串数据
      * 
-     * @param v 待写入的字符串数据
-     * @throws IOException 文件存取异常
+     * @param v
+     *            待写入的字符串数据
+     * @throws IOException
+     *             文件存取异常
      */
     public int writeString1(String v) throws IOException
     {
@@ -696,8 +733,10 @@ public class BufferedStream
     /**
      * 修改指定位置的处的布尔数据值为指定的状态
      * 
-     * @param p 待修改数据相对于文档起始位置的偏移量
-     * @param v 目标布尔数据
+     * @param p
+     *            待修改数据相对于文档起始位置的偏移量
+     * @param v
+     *            目标布尔数据
      * @throws IOException
      */
     public void modifyBoolean(long p, boolean v) throws IOException
@@ -724,8 +763,10 @@ public class BufferedStream
     /**
      * 修改指定位置的无符号字节数据为指定的数值
      * 
-     * @param p 待修改数据相对于文档起始位置的偏移量
-     * @param v 目标无符号数据值
+     * @param p
+     *            待修改数据相对于文档起始位置的偏移量
+     * @param v
+     *            目标无符号数据值
      * @throws IOException
      */
     public void modifySByte(long p, byte v) throws IOException
@@ -736,8 +777,10 @@ public class BufferedStream
     /**
      * 修改指定位置的有符号字节数据为指定的数值
      * 
-     * @param p 待修改数据相对于文档起始位置的偏移量
-     * @param v 目标有符号数据值
+     * @param p
+     *            待修改数据相对于文档起始位置的偏移量
+     * @param v
+     *            目标有符号数据值
      * @throws IOException
      */
     public void modifyUByte(long p, int v) throws IOException
@@ -764,8 +807,10 @@ public class BufferedStream
     /**
      * 从指定位置起始替换指定长度的字节数据
      * 
-     * @param p 修改起始位置
-     * @param v 待替换的字节数组
+     * @param p
+     *            修改起始位置
+     * @param v
+     *            待替换的字节数组
      * @return 实际修改的字节个数
      * @throws IOException
      */
@@ -777,8 +822,10 @@ public class BufferedStream
     /**
      * 从指定位置起始替换指定长度的字节数据
      * 
-     * @param p 修改起始位置
-     * @param v 待替换的字节数组
+     * @param p
+     *            修改起始位置
+     * @param v
+     *            待替换的字节数组
      * @param off
      * @param len
      * @return
@@ -1210,7 +1257,8 @@ public class BufferedStream
      * 读取一个双字节的字符
      * 
      * @return 实际读取的字符数据
-     * @throws IOException 文件存取异常
+     * @throws IOException
+     *             文件存取异常
      */
     public char readIChar() throws IOException
     {
@@ -1221,7 +1269,8 @@ public class BufferedStream
      * 读取有符号Short数据
      * 
      * @return 实际读取的有符号Short数据
-     * @throws IOException 文件存取异常
+     * @throws IOException
+     *             文件存取异常
      */
     public short readISShort() throws IOException
     {
@@ -1232,7 +1281,8 @@ public class BufferedStream
      * 读取无符号Short数据
      * 
      * @return 实际读取的无符号Short数据
-     * @throws IOException 文件存取异常
+     * @throws IOException
+     *             文件存取异常
      */
     public int readIUShort() throws IOException
     {
@@ -1256,7 +1306,8 @@ public class BufferedStream
      * 读取长度为四字节的整形数据
      * 
      * @return 实际读取的整形数值
-     * @throws IOException 文件存取异常
+     * @throws IOException
+     *             文件存取异常
      */
     public int readIInt() throws IOException
     {
@@ -1282,7 +1333,8 @@ public class BufferedStream
      * 读取长度为8字节的长整形数据
      * 
      * @return 实际读取的长整形数值
-     * @throws IOException 文件存取异常
+     * @throws IOException
+     *             文件存取异常
      */
     public long readILong() throws IOException
     {
@@ -1333,7 +1385,8 @@ public class BufferedStream
     /**
      * 读取指定长度个字符数据，并以字符数组的形式返回
      * 
-     * @param l 待读取的字符个数
+     * @param l
+     *            待读取的字符个数
      * @return
      */
     public char[] readIChars(int l) throws IOException
@@ -1350,9 +1403,11 @@ public class BufferedStream
     /**
      * 读取双字节数据到指定的大小的字符数组中去
      * 
-     * @param v 目标字符数组
+     * @param v
+     *            目标字符数组
      * @return 实际读取的字符长度
-     * @throws IOException 文件存取异常
+     * @throws IOException
+     *             文件存取异常
      */
     public int readIChars(char[] v) throws IOException
     {
@@ -1362,11 +1417,15 @@ public class BufferedStream
     /**
      * 读取指定长度的双字节数据到指定的字符数组中去，并从指定位置起存放
      * 
-     * @param v 目标字符数组
-     * @param off 目标字符数组偏移量
-     * @param len 待读取字符长度
+     * @param v
+     *            目标字符数组
+     * @param off
+     *            目标字符数组偏移量
+     * @param len
+     *            待读取字符长度
      * @return 实际读取的字符长度
-     * @throws IOException 文件存取异常
+     * @throws IOException
+     *             文件存取异常
      */
     public int readIChars(char[] v, int off, int len) throws IOException
     {
@@ -1656,9 +1715,11 @@ public class BufferedStream
     /**
      * 读取指定长度的双字节字符串
      * 
-     * @param len 待读取的字符串长度
+     * @param len
+     *            待读取的字符串长度
      * @return 实际读取的字符串
-     * @throws IOException 文件存取异常
+     * @throws IOException
+     *             文件存取异常
      */
     public String readIString(int l) throws IOException
     {
@@ -1785,9 +1846,11 @@ public class BufferedStream
     /**
      * 按Inter方式写入字符串数组，并返回写入字符个数
      * 
-     * @param v 待写入的字符数组
+     * @param v
+     *            待写入的字符数组
      * @return 实际写入字符个数
-     * @throws IOException 文件存取异常
+     * @throws IOException
+     *             文件存取异常
      */
     public int writeIChars(char[] v) throws IOException
     {
@@ -2752,7 +2815,8 @@ public class BufferedStream
      * 文档写出数据流定位，清除指定偏移量之后的数据，并根据需要判断是否将指定偏移量之前的数据写出到文件
      * 
      * @param pos
-     * @param isRead 当前文档流是否为读取定位，true为读取定位，false为写入定位
+     * @param isRead
+     *            当前文档流是否为读取定位，true为读取定位，false为写入定位
      * @throws IOException
      */
     public void seek(long pos, boolean isRead) throws IOException
@@ -2791,7 +2855,8 @@ public class BufferedStream
     /**
      * 定位到当前文件的结尾处
      * 
-     * @param isRead 当前文档流是否为读取定位，true为读取定位，false为写入定位
+     * @param isRead
+     *            当前文档流是否为读取定位，true为读取定位，false为写入定位
      * @throws IOException
      */
     public void seekEnd(boolean isRead) throws IOException
@@ -2803,7 +2868,8 @@ public class BufferedStream
      * 由当前位置向前或向后跳转指定长度个字节
      * 
      * @param l
-     * @param isRead 当前文档流是否为读取定位，true为读取定位，false为写入定位
+     * @param isRead
+     *            当前文档流是否为读取定位，true为读取定位，false为写入定位
      */
     public void skip(int l, boolean isRead) throws IOException
     {
@@ -2822,10 +2888,13 @@ public class BufferedStream
     /**
      * 在当前数据流中，从当前位置开始以指定数值填充指定长度字节
      * 
-     * @param v 要填充的数值
-     * @param len 填充的长度
+     * @param v
+     *            要填充的数值
+     * @param len
+     *            填充的长度
      * @return 实际填充的字节长度
-     * @throws IOException 处理过程中抛出
+     * @throws IOException
+     *             处理过程中抛出
      */
     public int fill(byte v, int len) throws IOException
     {
@@ -2934,7 +3003,8 @@ public class BufferedStream
     }
 
     /**
-     * @param ciphered The ciphered to set.
+     * @param ciphered
+     *            The ciphered to set.
      */
     public void setUseCipher(boolean ciphered)
     {
@@ -3110,8 +3180,10 @@ public class BufferedStream
     /**
      * 将指定的流中当前读取位置开始读取指定长度的字节数据到当前操作流中去
      * 
-     * @param bStream 要进行数据连接的文档流
-     * @param len 要读取的字节的长度，为负值时表示当指定流的当前位置到文档的结尾的所有字节
+     * @param bStream
+     *            要进行数据连接的文档流
+     * @param len
+     *            要读取的字节的长度，为负值时表示当指定流的当前位置到文档的结尾的所有字节
      * @return
      * @throws IOException
      */

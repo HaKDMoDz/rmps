@@ -24,6 +24,7 @@ import cons.prp.aide.P3040000.LangRes;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class SubMenu
@@ -175,6 +176,7 @@ public class SubMenu
         BeanUtil.setWText(mi_NextYear, P3040000.getMesg(LangRes.P304460D));
         BeanUtil.setWTips(mi_NextYear, P3040000.getMesg(LangRes.P304460E));
     }
+
     private javax.swing.JMenuItem mi_NextMonth;
     private javax.swing.JMenuItem mi_NextYear;
     private javax.swing.JMenuItem mi_PrevMonth;

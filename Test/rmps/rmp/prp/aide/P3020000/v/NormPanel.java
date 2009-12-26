@@ -17,9 +17,11 @@ import rmp.prp.aide.P3020000.m.DataModel;
 import rmp.prp.aide.P3020000.t.Util;
 import rmp.util.BeanUtil;
 import rmp.util.CheckUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.StringUtil;
+
+import com.amonsoft.util.LogUtil;
+
 import cons.ui.LangRes;
 
 /**
@@ -31,6 +33,7 @@ import cons.ui.LangRes;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class NormPanel extends javax.swing.JPanel implements WBean
@@ -145,31 +148,24 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         this.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(sp,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE).addGroup(
-                layout.createSequentialGroup().addComponent(lb_FilePath).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_FilePath,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_FilePath)).addGroup(
-                layout.createSequentialGroup().addComponent(lb_RuleFild).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_RuleFild,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)).addComponent(lb_NameList).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addComponent(bt_PrevButn).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_RenmButn))).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE).addGroup(
+                                layout.createSequentialGroup().addComponent(lb_FilePath).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_FilePath,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_FilePath))
+                                .addGroup(
+                                        layout.createSequentialGroup().addComponent(lb_RuleFild).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_RuleFild,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)).addComponent(lb_NameList).addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                        layout.createSequentialGroup().addComponent(bt_PrevButn).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_RenmButn)))
+                        .addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_FilePath).addComponent(bt_FilePath).addComponent(tf_FilePath, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_RuleFild).addComponent(tf_RuleFild, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(lb_NameList).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp,
-                javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE,
-                Short.MAX_VALUE).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_RenmButn).addComponent(bt_PrevButn)).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_FilePath).addComponent(bt_FilePath).addComponent(tf_FilePath,
+                                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
+                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_RuleFild).addComponent(tf_RuleFild, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(
+                        lb_NameList).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp, javax.swing.GroupLayout.PREFERRED_SIZE, 201,
+                        javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_RenmButn).addComponent(bt_PrevButn)).addContainerGap()));
     }
 
     /**
@@ -348,6 +344,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
 
         return true;
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 界面组件区域
     // ////////////////////////////////////////////////////////////////////////

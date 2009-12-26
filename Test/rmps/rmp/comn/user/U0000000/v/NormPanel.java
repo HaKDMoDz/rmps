@@ -18,6 +18,7 @@ import rmp.comn.user.U0000000.U0000000;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class NormPanel extends javax.swing.JPanel
@@ -119,32 +120,27 @@ public class NormPanel extends javax.swing.JPanel
         pl_SignPanl.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_uti).addComponent(lb_pwd).addComponent(lb_unm)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addComponent(uti, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(lc_IdCode)).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(pwd,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE).addComponent(unm,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lk_Create,
-                javax.swing.GroupLayout.Alignment.TRAILING).addComponent(lk_Forget,
-                javax.swing.GroupLayout.Alignment.TRAILING)))).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_uti).addComponent(lb_pwd).addComponent(lb_unm)).addPreferredGap(
+                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+                                layout.createSequentialGroup().addComponent(uti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(lc_IdCode)).addGroup(
+                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                layout.createSequentialGroup().addGroup(
+                                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(pwd, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                                                .addComponent(unm, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(
+                                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lk_Create, javax.swing.GroupLayout.Alignment.TRAILING).addComponent(
+                                                        lk_Forget, javax.swing.GroupLayout.Alignment.TRAILING)))).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_unm).addComponent(lk_Create).addComponent(unm, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_pwd).addComponent(lk_Forget).addComponent(pwd, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_uti).addComponent(uti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lc_IdCode)).addContainerGap(
-                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_unm).addComponent(lk_Create).addComponent(unm, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_pwd).addComponent(lk_Forget).addComponent(pwd, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_uti).addComponent(uti, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(lc_IdCode)).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
+                        Short.MAX_VALUE)));
     }
 
     /**
@@ -158,10 +154,8 @@ public class NormPanel extends javax.swing.JPanel
 
         javax.swing.GroupLayout pl_LogoPanlLayout = new javax.swing.GroupLayout(pl_LogoPanl);
         pl_LogoPanl.setLayout(pl_LogoPanlLayout);
-        pl_LogoPanlLayout.setHorizontalGroup(pl_LogoPanlLayout.createParallelGroup(
-                javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 300, Short.MAX_VALUE));
-        pl_LogoPanlLayout.setVerticalGroup(pl_LogoPanlLayout.createParallelGroup(
-                javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 48, Short.MAX_VALUE));
+        pl_LogoPanlLayout.setHorizontalGroup(pl_LogoPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 300, Short.MAX_VALUE));
+        pl_LogoPanlLayout.setVerticalGroup(pl_LogoPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 48, Short.MAX_VALUE));
 
         bt_Cancel.setMnemonic('C');
         bt_Cancel.setText("取消(C)");
@@ -194,19 +188,18 @@ public class NormPanel extends javax.swing.JPanel
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                pl_LogoPanl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGroup(
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(pl_LogoPanl, javax.swing.GroupLayout.DEFAULT_SIZE,
+                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGroup(
                 javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addContainerGap().addComponent(lk_Status).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE).addComponent(bt_SignIn).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_Cancel).addContainerGap()).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(pl_SignPanl,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addContainerGap()));
+                layout.createSequentialGroup().addContainerGap().addComponent(lk_Status).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE).addComponent(
+                        bt_SignIn).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_Cancel).addContainerGap()).addGroup(
+                layout.createSequentialGroup().addContainerGap().addComponent(pl_SignPanl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addComponent(pl_LogoPanl, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(pl_SignPanl,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_Cancel).addComponent(bt_SignIn).addComponent(lk_Status)).addContainerGap()));
+                layout.createSequentialGroup().addComponent(pl_LogoPanl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(pl_SignPanl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                Short.MAX_VALUE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_Cancel).addComponent(bt_SignIn).addComponent(lk_Status)).addContainerGap()));
     }
 
     /**
@@ -246,6 +239,7 @@ public class NormPanel extends javax.swing.JPanel
     private void lk_StatusMouseClicked(java.awt.event.MouseEvent evt)
     {
     }
+
     private javax.swing.JLabel lb_pwd;
     private javax.swing.JLabel lb_unm;
     private javax.swing.JLabel lb_uti;

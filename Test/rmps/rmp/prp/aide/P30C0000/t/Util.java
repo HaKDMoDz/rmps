@@ -36,6 +36,7 @@ import cons.prp.aide.P30C0000.ConstUI;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public final class Util
@@ -94,7 +95,8 @@ public final class Util
      * String(0)：IP地址<br />
      * String(1)：查询结果或提示信息<br />
      * 
-     * @param city 用户输入的城市名称
+     * @param city
+     *            用户输入的城市名称
      * @return 字符串 用,分割
      * @throws Exception
      */
@@ -142,7 +144,8 @@ public final class Util
     /**
      * 用户把SOAP请求发送给服务器端，并返回服务器点返回的输入流
      * 
-     * @param city 用户输入的城市名称
+     * @param city
+     *            用户输入的城市名称
      * @return 服务器端返回的输入流，供客户端读取
      * @throws Exception
      */
@@ -173,7 +176,8 @@ public final class Util
     /**
      * 获取SOAP的请求头，并替换其中的标志符号为用户输入的城市
      * 
-     * @param city 用户输入的城市名称
+     * @param city
+     *            用户输入的城市名称
      * @return 客户将要发送给服务器的SOAP请求
      * @throws Exception
      */

@@ -8,8 +8,9 @@
 package rmp.comn.amon.code.A1010000.v;
 
 import rmp.comn.amon.code.A1010000.A1010000;
-import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.ui.link.WLinkLabel;
+
+import com.amonsoft.rmps.prp.IPrpPlus;
 
 /**
  * <ul>
@@ -19,6 +20,7 @@ import rmp.ui.link.WLinkLabel;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class TailPanel
@@ -71,5 +73,6 @@ public class TailPanel
     private void ita()
     {
     }
+
     private WLinkLabel ll_LinkLabl;
 }

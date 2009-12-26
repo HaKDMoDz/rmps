@@ -18,6 +18,7 @@ import com.amonsoft.rmps.prp.v.IView;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class MainPanel extends javax.swing.JPanel implements IView
@@ -39,6 +40,7 @@ public class MainPanel extends javax.swing.JPanel implements IView
     {
         return false;
     }
+
     /** serialVersionUID */
     private static final long serialVersionUID = -1905002626552646200L;
 }

@@ -7,15 +7,18 @@
  */
 package rmp.irp;
 
-import com.amonsoft.rmps.irp.b.IStatus;
-import com.amonsoft.rmps.irp.v.IAccount;
-import com.amonsoft.util.LogUtil;
-import cons.irp.ConsEnv;
 import java.util.HashMap;
+
 import rmp.irp.v.gtalk.GTalk;
 import rmp.irp.v.jabber.Jabber;
 import rmp.irp.v.live.Live;
 import rmp.irp.v.meebo.Meebo;
+
+import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.rmps.irp.v.IAccount;
+import com.amonsoft.util.LogUtil;
+
+import cons.irp.ConsEnv;
 
 /**
  * <ul>
@@ -24,6 +27,7 @@ import rmp.irp.v.meebo.Meebo;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class Irps
@@ -98,15 +102,16 @@ public class Irps
     }
 
     /**
-     * @param args the command line arguments
+     * @param args
+     *            the command line arguments
      */
     public static void main(String[] args)
     {
         LogUtil.wInit();
 
         accounts = new HashMap<String, IAccount>();
-		
-		java.security.Security.addProvider(new cryptix.jce.provider.CryptixCrypto());
+
+        java.security.Security.addProvider(new cryptix.jce.provider.CryptixCrypto());
     }
 
     public static void exit(int status)

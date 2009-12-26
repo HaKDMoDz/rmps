@@ -7,12 +7,14 @@
  */
 package rmp.prp.aide.P3030000.m;
 
-import com.amonsoft.util.CharUtil;
 import javax.swing.table.AbstractTableModel;
 
 import rmp.bean.K1SV1S;
 import rmp.prp.aide.P3030000.P3030000;
 import rmp.util.MesgUtil;
+
+import com.amonsoft.util.CharUtil;
+
 import cons.prp.aide.P3030000.ConstUI;
 import cons.prp.aide.P3030000.LangRes;
 
@@ -25,6 +27,7 @@ import cons.prp.aide.P3030000.LangRes;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class CodeData extends AbstractTableModel
@@ -52,9 +55,7 @@ public class CodeData extends AbstractTableModel
     /** 当前列索引 */
     private int cellIndx = 0;
     /** 用户输入字符 */
-    private char[] usrChar =
-    {
-    };
+    private char[] usrChar = {};
     /** 起始字符 */
     private char sttChar = 1;
     /** 结束字符 */
@@ -218,7 +219,8 @@ public class CodeData extends AbstractTableModel
     }
 
     /**
-     * @param charModel the charModel to set
+     * @param charModel
+     *            the charModel to set
      */
     public void setCharModel(boolean charModel)
     {
@@ -229,7 +231,8 @@ public class CodeData extends AbstractTableModel
     // 用户接口区域
     // ////////////////////////////////////////////////////////////////////////
     /**
-     * @param showColCh the showColCh to set
+     * @param showColCh
+     *            the showColCh to set
      */
     public void setShowColCh(boolean showColCh)
     {
@@ -241,7 +244,8 @@ public class CodeData extends AbstractTableModel
     }
 
     /**
-     * @param showCol16 the showCol16 to set
+     * @param showCol16
+     *            the showCol16 to set
      */
     public void setShowCol16(boolean showCol16)
     {
@@ -253,7 +257,8 @@ public class CodeData extends AbstractTableModel
     }
 
     /**
-     * @param showCol10 the showCol10 to set
+     * @param showCol10
+     *            the showCol10 to set
      */
     public void setShowCol10(boolean showCol10)
     {
@@ -265,7 +270,8 @@ public class CodeData extends AbstractTableModel
     }
 
     /**
-     * @param showCol08 the showCol08 to set
+     * @param showCol08
+     *            the showCol08 to set
      */
     public void setShowCol08(boolean showCol08)
     {
@@ -277,7 +283,8 @@ public class CodeData extends AbstractTableModel
     }
 
     /**
-     * @param showCol02 the showCol02 to set
+     * @param showCol02
+     *            the showCol02 to set
      */
     public void setShowCol02(boolean showCol02)
     {
@@ -289,7 +296,8 @@ public class CodeData extends AbstractTableModel
     }
 
     /**
-     * @param fixLength the fixLength to set
+     * @param fixLength
+     *            the fixLength to set
      */
     public void setFixLength(boolean fixLength)
     {
@@ -297,7 +305,8 @@ public class CodeData extends AbstractTableModel
     }
 
     /**
-     * @param usrChar the usrChar to set
+     * @param usrChar
+     *            the usrChar to set
      */
     public void setUsrChar(String userText)
     {
@@ -305,7 +314,8 @@ public class CodeData extends AbstractTableModel
     }
 
     /**
-     * @param sttChar the sttChar to set
+     * @param sttChar
+     *            the sttChar to set
      */
     public void setSttChar(String sttChar)
     {
@@ -332,7 +342,8 @@ public class CodeData extends AbstractTableModel
     }
 
     /**
-     * @param endChar the endChar to set
+     * @param endChar
+     *            the endChar to set
      */
     public void setEndChar(String endChar)
     {
@@ -384,21 +395,13 @@ public class CodeData extends AbstractTableModel
         else if (tmp <= 32)
         {
             String[] CTRL =
-            {
-                "NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", "BS", "TAB", "LF", "VT", "FF",
-                "CR", "SO", "SI", "DLE", "DC1", "DC2", "DC3", "DC4", "NAK", "SYN", "ETB", "CAN", "EM", "SUB", "ESC",
-                "FS", "GS", "RS", "US", " "
-            };
+            { "NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL", "BS", "TAB", "LF", "VT", "FF", "CR", "SO", "SI", "DLE", "DC1", "DC2", "DC3", "DC4", "NAK", "SYN", "ETB", "CAN", "EM", "SUB",
+                    "ESC", "FS", "GS", "RS", "US", " " };
             String[] TIPS =
-            {
-                "null", "start of heading", "start of text", "end of text", "end of transmission",
-                "enquiry", "acknowledge", "bell", "backspace", "horizontal tab", "line feed, NL new line",
-                "vertical tab", "form feed, NP new page", "carriage return", "shift out", "shift in",
-                "data link escape", "device control 1", "device control 2", "device control 3", "device control 4",
-                "negative acknowledge", "synchronous idle", "end of trans. block", "cancel", "end of medium",
-                "substitute", "escape", "file separator", "group separator", "record separator", "unit separator",
-                "space"
-            };
+            { "null", "start of heading", "start of text", "end of text", "end of transmission", "enquiry", "acknowledge", "bell", "backspace", "horizontal tab", "line feed, NL new line",
+                    "vertical tab", "form feed, NP new page", "carriage return", "shift out", "shift in", "data link escape", "device control 1", "device control 2", "device control 3",
+                    "device control 4", "negative acknowledge", "synchronous idle", "end of trans. block", "cancel", "end of medium", "substitute", "escape", "file separator", "group separator",
+                    "record separator", "unit separator", "space" };
 
             kv.setK(TIPS[tmp]);
             kv.setV(CTRL[tmp]);

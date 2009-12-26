@@ -21,6 +21,7 @@ import rmp.prp.m.NetItem;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class NetPanel extends javax.swing.JPanel
@@ -69,6 +70,7 @@ public class NetPanel extends javax.swing.JPanel
 
         return true;
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 界面组件区域
     // ////////////////////////////////////////////////////////////////////////

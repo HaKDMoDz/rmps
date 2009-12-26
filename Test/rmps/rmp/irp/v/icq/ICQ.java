@@ -7,11 +7,6 @@
  */
 package rmp.irp.v.icq;
 
-import com.amonsoft.rmps.irp.v.IConnect;
-import com.amonsoft.rmps.irp.b.IContact;
-import com.amonsoft.rmps.irp.b.IStatus;
-import com.amonsoft.rmps.irp.v.IAccount;
-
 import java.util.List;
 
 import net.kano.joscar.flap.ClientFlapConn;
@@ -31,6 +26,11 @@ import net.kano.joscar.snac.SnacPacketListener;
 import net.kano.joscar.snac.SnacResponseEvent;
 import net.kano.joscar.snaccmd.DefaultClientFactoryList;
 
+import com.amonsoft.rmps.irp.b.IContact;
+import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.rmps.irp.v.IAccount;
+import com.amonsoft.rmps.irp.v.IConnect;
+
 /**
  * <ul>
  * <li>功能说明：</li>
@@ -38,6 +38,7 @@ import net.kano.joscar.snaccmd.DefaultClientFactoryList;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class ICQ implements IAccount, ClientConnListener, FlapPacketListener, SnacPacketListener, ConnProcessorExceptionHandler

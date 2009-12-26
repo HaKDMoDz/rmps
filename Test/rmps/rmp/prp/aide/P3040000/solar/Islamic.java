@@ -39,8 +39,7 @@ public class Islamic extends SolarDate
 
     public static long toFixed(long l, int i, int j)
     {
-        return ((long)(j + 29 * (i - 1)) + ProtoDate.quotient(6 * i - 1, 11D) + (l - 1L) * 354L
-            + ProtoDate.quotient(3L + 11L * l, 30D) + EPOCH) - 1L;
+        return ((long) (j + 29 * (i - 1)) + ProtoDate.quotient(6 * i - 1, 11D) + (l - 1L) * 354L + ProtoDate.quotient(3L + 11L * l, 30D) + EPOCH) - 1L;
     }
 
     public long toFixed()
@@ -52,8 +51,8 @@ public class Islamic extends SolarDate
     {
         super.year = ProtoDate.quotient(30L * (l - EPOCH) + 10646L, 10631D);
         long l1 = l - toFixed(super.year, 1, 1);
-        super.month = (int)ProtoDate.quotient(11L * l1 + 330L, 325D);
-        super.day = (int)((1L + l) - toFixed(super.year, super.month, 1));
+        super.month = (int) ProtoDate.quotient(11L * l1 + 330L, 325D);
+        super.day = (int) ((1L + l) - toFixed(super.year, super.month, 1));
     }
 
     public static boolean isLeapYear(long l)
@@ -65,10 +64,8 @@ public class Islamic extends SolarDate
     {
         double d = ProtoDate.universalFromStandard(ProtoDate.midday(l, location), location);
         double d1 = location.latitude;
-        double d2 = ProtoDate.arcSinDegrees(ProtoDate.sinDegrees(ProtoDate.obliquity(d))
-            * ProtoDate.sinDegrees(ProtoDate.solarLongitude(d)));
-        double d3 = ProtoDate.arcSinDegrees(ProtoDate.sinDegrees(d1) * ProtoDate.sinDegrees(d2)
-            + ProtoDate.cosDegrees(d1) * ProtoDate.cosDegrees(d2));
+        double d2 = ProtoDate.arcSinDegrees(ProtoDate.sinDegrees(ProtoDate.obliquity(d)) * ProtoDate.sinDegrees(ProtoDate.solarLongitude(d)));
+        double d3 = ProtoDate.arcSinDegrees(ProtoDate.sinDegrees(d1) * ProtoDate.sinDegrees(d2) + ProtoDate.cosDegrees(d1) * ProtoDate.cosDegrees(d2));
         double d4 = ProtoDate.arcTanDegrees(ProtoDate.tanDegrees(d3) / (1.0D + 2D * ProtoDate.tanDegrees(d3)), 1);
         return ProtoDate.dusk(l, location, -d4);
     }
@@ -77,7 +74,7 @@ public class Islamic extends SolarDate
     {
         long l1 = Gregorian.toFixed(l, 1, 1);
         long l2 = Gregorian.toFixed(l, 12, 31);
-        long l3 = ((SolarDate)(new Islamic(l1))).year;
+        long l3 = ((SolarDate) (new Islamic(l1))).year;
         long l4 = toFixed(l3, i, j);
         long l5 = toFixed(l3 + 1L, i, j);
         long l6 = toFixed(l3 + 2L, i, j);
@@ -98,9 +95,8 @@ public class Islamic extends SolarDate
 
     public String format()
     {
-        return MessageFormat.format("{0}, {1} {2} {3,number,#} A.H.", new Object[]{
-            ProtoDate.nameFromDayOfWeek(toFixed(), dayOfWeekNames), new Integer(super.day),
-            ProtoDate.nameFromMonth(super.month, monthNames), new Long(super.year)});
+        return MessageFormat.format("{0}, {1} {2} {3,number,#} A.H.", new Object[]
+        { ProtoDate.nameFromDayOfWeek(toFixed(), dayOfWeekNames), new Integer(super.day), ProtoDate.nameFromMonth(super.month, monthNames), new Long(super.year) });
     }
 
     public boolean equals(Object obj)
@@ -111,14 +107,13 @@ public class Islamic extends SolarDate
             return internalEquals(obj);
     }
 
-    public static final long     EPOCH            = Julian.toFixed(Julian.CE(622L), 7, 16);
-    public static final Location MECCA            = new Location("Mecca, Saudi Arabia", ProtoDate.angle(21D, 25D, 24D),
-                                                      ProtoDate.angle(39D, 49D, 24D), ProtoDate.mt(1000D), 2D);
-    public static final String   dayOfWeekNames[] = {"yaum al-ahad", "yaum al-ithnayna", "yaum ath-thalatha'",
-        "yaum al-arba`a'", "yaum al-hamis", "yaum al-jum`a", "yaum as-sabt"};
-    public static final String   monthNames[]     = {"Muharram", "Safar", "Rabi I", "Rabi II", "Jumada I", "Jumada II",
-        "Rajab", "Sha`ban", "Ramadan", "Shawwal", "Dhu al-Qa`da", "Dhu al-Hijja"};
+    public static final long EPOCH = Julian.toFixed(Julian.CE(622L), 7, 16);
+    public static final Location MECCA = new Location("Mecca, Saudi Arabia", ProtoDate.angle(21D, 25D, 24D), ProtoDate.angle(39D, 49D, 24D), ProtoDate.mt(1000D), 2D);
+    public static final String dayOfWeekNames[] =
+    { "yaum al-ahad", "yaum al-ithnayna", "yaum ath-thalatha'", "yaum al-arba`a'", "yaum al-hamis", "yaum al-jum`a", "yaum as-sabt" };
+    public static final String monthNames[] =
+    { "Muharram", "Safar", "Rabi I", "Rabi II", "Jumada I", "Jumada II", "Rajab", "Sha`ban", "Ramadan", "Shawwal", "Dhu al-Qa`da", "Dhu al-Hijja" };
 
     /** serialVersionUID */
-    private static final long    serialVersionUID = 4293425095578663038L;
+    private static final long serialVersionUID = 4293425095578663038L;
 }

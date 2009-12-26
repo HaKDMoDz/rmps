@@ -7,12 +7,13 @@
  */
 package rmp.irp.comn;
 
+import java.util.HashMap;
+
+import rmp.irp.c.Control;
+
 import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
-import java.util.HashMap;
-import rmp.irp.c.Control;
-import rmp.util.StringUtil;
 
 /**
  * <ul>
@@ -21,6 +22,7 @@ import rmp.util.StringUtil;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public abstract class ASession implements ISession
@@ -63,6 +65,7 @@ public abstract class ASession implements ISession
 
     /**
      * 添加路径信息
+     * 
      * @param session
      * @param message
      * @return
@@ -84,6 +87,7 @@ public abstract class ASession implements ISession
 
     /**
      * 添加版权信息
+     * 
      * @param session
      * @param message
      * @return

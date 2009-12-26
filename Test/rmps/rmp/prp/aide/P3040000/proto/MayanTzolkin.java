@@ -39,8 +39,8 @@ public class MayanTzolkin extends ProtoDate
     public void fromFixed(long l)
     {
         long l1 = (l - EPOCH) + 1L;
-        number = (int)ProtoDate.adjustedMod(l1, 13L);
-        name = (int)ProtoDate.adjustedMod(l1, 20L);
+        number = (int) ProtoDate.adjustedMod(l1, 13L);
+        name = (int) ProtoDate.adjustedMod(l1, 20L);
     }
 
     public void fromArray(int ai[])
@@ -56,13 +56,13 @@ public class MayanTzolkin extends ProtoDate
 
     public static long onOrBefore(MayanTzolkin mayantzolkin, long l)
     {
-        return l - ProtoDate.mod(l - EPOCH - (long)ordinal(mayantzolkin), 260L);
+        return l - ProtoDate.mod(l - EPOCH - (long) ordinal(mayantzolkin), 260L);
     }
 
     public static long calendarRoundOnOrBefore(MayanHaab mayanhaab, MayanTzolkin mayantzolkin, long l) throws Exception
     {
-        long l1 = (long)MayanHaab.ordinal(mayanhaab) + MayanHaab.EPOCH;
-        long l2 = (long)ordinal(mayantzolkin) + EPOCH;
+        long l1 = (long) MayanHaab.ordinal(mayanhaab) + MayanHaab.EPOCH;
+        long l2 = (long) ordinal(mayantzolkin) + EPOCH;
         long l3 = l2 - l1;
         long l4;
         if (ProtoDate.mod(l3, 5L) == 0L)
@@ -79,8 +79,8 @@ public class MayanTzolkin extends ProtoDate
 
     public String format()
     {
-        return MessageFormat
-            .format("{0} {1}", new Object[]{new Integer(number), ProtoDate.nameFromNumber(name, names)});
+        return MessageFormat.format("{0} {1}", new Object[]
+        { new Integer(number), ProtoDate.nameFromNumber(name, names) });
     }
 
     public boolean equals(Object obj)
@@ -89,21 +89,21 @@ public class MayanTzolkin extends ProtoDate
             return true;
         if (!(obj instanceof MayanTzolkin))
             return false;
-        MayanTzolkin mayantzolkin = (MayanTzolkin)obj;
+        MayanTzolkin mayantzolkin = (MayanTzolkin) obj;
         return mayantzolkin.number == number && mayantzolkin.name == name;
     }
 
-    public int                 number;
-    public int                 name;
-    public static final long   EPOCH;
-    public static final String names[]          = {"Imix", "Ik", "Akbal", "Kan", "Chicchan", "Cimi", "Manik", "Lamat",
-        "Muluc", "Oc", "Chuen", "Eb", "Ben", "Ix", "Men", "Cib", "Caban", "Etznab", "Cauac", "Ahau"};
+    public int number;
+    public int name;
+    public static final long EPOCH;
+    public static final String names[] =
+    { "Imix", "Ik", "Akbal", "Kan", "Chicchan", "Cimi", "Manik", "Lamat", "Muluc", "Oc", "Chuen", "Eb", "Ben", "Ix", "Men", "Cib", "Caban", "Etznab", "Cauac", "Ahau" };
 
     static
     {
-        EPOCH = MayanLongCount.EPOCH - (long)ordinal(new MayanTzolkin(4, 20));
+        EPOCH = MayanLongCount.EPOCH - (long) ordinal(new MayanTzolkin(4, 20));
     }
 
     /** serialVersionUID */
-    private static final long  serialVersionUID = -5212719614175376937L;
+    private static final long serialVersionUID = -5212719614175376937L;
 }

@@ -7,15 +7,17 @@
  */
 package rmp.irp.v.live;
 
-import com.amonsoft.rmps.irp.b.IContact;
-import com.amonsoft.rmps.irp.b.IMessage;
-import com.amonsoft.rmps.irp.b.IMimeMessage;
 import java.io.File;
+
 import net.sf.jml.MsnMessenger;
 import net.sf.jml.MsnSwitchboard;
 import net.sf.jml.message.MsnControlMessage;
 import net.sf.jml.message.MsnInstantMessage;
 import rmp.irp.comn.ASession;
+
+import com.amonsoft.rmps.irp.b.IContact;
+import com.amonsoft.rmps.irp.b.IMessage;
+import com.amonsoft.rmps.irp.b.IMimeMessage;
 
 /**
  * <ul>
@@ -24,6 +26,7 @@ import rmp.irp.comn.ASession;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class Session extends ASession

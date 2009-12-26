@@ -7,12 +7,12 @@
  */
 package rmp.comn.user.U0030000;
 
-import com.amonsoft.bean.WForm;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 
+import com.amonsoft.bean.WForm;
 import com.amonsoft.rmps.prp.IPrpPlus;
 
 /**
@@ -23,6 +23,7 @@ import com.amonsoft.rmps.prp.IPrpPlus;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class U0030000 extends WForm implements IPrpPlus

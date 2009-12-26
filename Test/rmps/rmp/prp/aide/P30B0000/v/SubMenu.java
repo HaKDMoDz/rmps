@@ -7,11 +7,12 @@
  */
 package rmp.prp.aide.P30B0000.v;
 
-import com.amonsoft.rmps.prp.v.IMenu;
 import java.awt.event.ActionEvent;
 
 import rmp.prp.aide.P30B0000.P30B0000;
 import rmp.prp.aide.P30B0000.t.Util;
+
+import com.amonsoft.rmps.prp.v.IMenu;
 
 /**
  * <ul>
@@ -22,6 +23,7 @@ import rmp.prp.aide.P30B0000.t.Util;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class SubMenu implements IMenu
@@ -127,6 +129,7 @@ public class SubMenu implements IMenu
         mi_M4.setText("站点信息");
         mi_M5.setText("数据版本");
     }
+
     private javax.swing.JMenuItem mi_M1;
     private javax.swing.JMenuItem mi_M2;
     private javax.swing.JMenuItem mi_M3;

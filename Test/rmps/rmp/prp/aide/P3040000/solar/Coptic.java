@@ -38,7 +38,7 @@ public class Coptic extends SolarDate
 
     public static long toFixed(long l, int i, int j)
     {
-        return (EPOCH - 1L) + 365L * (l - 1L) + ProtoDate.quotient(l, 4D) + (long)(30 * (i - 1)) + (long)j;
+        return (EPOCH - 1L) + 365L * (l - 1L) + ProtoDate.quotient(l, 4D) + (long) (30 * (i - 1)) + (long) j;
     }
 
     public long toFixed()
@@ -49,8 +49,8 @@ public class Coptic extends SolarDate
     public void fromFixed(long l)
     {
         super.year = ProtoDate.quotient(4L * (l - EPOCH) + 1463L, 1461D);
-        super.month = 1 + (int)ProtoDate.quotient(l - toFixed(super.year, 1, 1), 30D);
-        super.day = (int)((l + 1L) - toFixed(super.year, super.month, 1));
+        super.month = 1 + (int) ProtoDate.quotient(l - toFixed(super.year, 1, 1), 30D);
+        super.day = (int) ((l + 1L) - toFixed(super.year, super.month, 1));
     }
 
     public static boolean isLeapYear(long l)
@@ -62,7 +62,7 @@ public class Coptic extends SolarDate
     {
         long l1 = Gregorian.toFixed(l, 1, 1);
         long l2 = Gregorian.toFixed(l, 12, 31);
-        long l3 = ((SolarDate)(new Coptic(l1))).year;
+        long l3 = ((SolarDate) (new Coptic(l1))).year;
         long l4 = toFixed(l3, i, j);
         long l5 = toFixed(l3 + 1L, i, j);
         Vector<Long> fixedvector = new Vector<Long>(1, 1);
@@ -80,9 +80,8 @@ public class Coptic extends SolarDate
 
     public String format()
     {
-        return MessageFormat.format("{0}, {1} {2} {3,number,#} A.M.", new Object[]{
-            ProtoDate.nameFromDayOfWeek(toFixed(), dayOfWeekNames), new Integer(super.day),
-            ProtoDate.nameFromMonth(super.month, monthNames), new Long(super.year)});
+        return MessageFormat.format("{0}, {1} {2} {3,number,#} A.M.", new Object[]
+        { ProtoDate.nameFromDayOfWeek(toFixed(), dayOfWeekNames), new Integer(super.day), ProtoDate.nameFromMonth(super.month, monthNames), new Long(super.year) });
     }
 
     public boolean equals(Object obj)
@@ -93,12 +92,12 @@ public class Coptic extends SolarDate
             return internalEquals(obj);
     }
 
-    public static final long   EPOCH            = Julian.toFixed(Julian.CE(284L), 8, 29);
-    public static final String dayOfWeekNames[] = {"Tkyriaka", "Pesnau", "Pshoment", "Peftoou", "Ptiou", "Psoou",
-        "Psabbaton"                             };
-    public static final String monthNames[]     = {"Tut", "Babah", "Hatur", "Kiyahk", "Tubah", "Amshir", "Baramhat",
-        "Baramundah", "Bashans", "Ba'unah", "Abib", "Misra", "al-Nasi"};
+    public static final long EPOCH = Julian.toFixed(Julian.CE(284L), 8, 29);
+    public static final String dayOfWeekNames[] =
+    { "Tkyriaka", "Pesnau", "Pshoment", "Peftoou", "Ptiou", "Psoou", "Psabbaton" };
+    public static final String monthNames[] =
+    { "Tut", "Babah", "Hatur", "Kiyahk", "Tubah", "Amshir", "Baramhat", "Baramundah", "Bashans", "Ba'unah", "Abib", "Misra", "al-Nasi" };
 
     /** serialVersionUID */
-    private static final long  serialVersionUID = -5975146782521992805L;
+    private static final long serialVersionUID = -5975146782521992805L;
 }

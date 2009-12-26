@@ -23,6 +23,7 @@ import javax.swing.JTextField;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class WCalField extends JTextField
@@ -120,6 +121,7 @@ public class WCalField extends JTextField
             g.drawString(operator, i.left + m.left, (getSize().height - i.bottom + h) >> 1);
         }
     }
+
     /** serialVersionUID */
     private static final long serialVersionUID = -4374162950893688067L;
 }

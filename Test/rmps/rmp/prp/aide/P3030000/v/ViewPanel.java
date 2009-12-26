@@ -20,6 +20,7 @@ import cons.prp.aide.P3030000.ConstUI;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class ViewPanel extends javax.swing.JPanel
@@ -110,11 +111,9 @@ public class ViewPanel extends javax.swing.JPanel
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(sp_DataList,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE).addContainerGap()));
+                layout.createSequentialGroup().addContainerGap().addComponent(sp_DataList, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addComponent(sp_DataList,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE).addContainerGap()));
+                layout.createSequentialGroup().addContainerGap().addComponent(sp_DataList, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE).addContainerGap()));
     }
 
     /**
@@ -123,6 +122,7 @@ public class ViewPanel extends javax.swing.JPanel
     private void ita()
     {
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 界面构件区域
     // ////////////////////////////////////////////////////////////////////////

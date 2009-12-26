@@ -7,13 +7,9 @@
  */
 package rmp.irp.v.ymsg;
 
-import com.amonsoft.rmps.irp.v.IAccount;
-import com.amonsoft.rmps.irp.v.IConnect;
-import com.amonsoft.rmps.irp.b.IContact;
-import com.amonsoft.rmps.irp.b.IStatus;
 import java.awt.Toolkit;
 import java.util.List;
-import com.amonsoft.util.LogUtil;
+
 import ymsg.network.event.SessionChatEvent;
 import ymsg.network.event.SessionConferenceEvent;
 import ymsg.network.event.SessionErrorEvent;
@@ -25,6 +21,12 @@ import ymsg.network.event.SessionListener;
 import ymsg.network.event.SessionNewMailEvent;
 import ymsg.network.event.SessionNotifyEvent;
 
+import com.amonsoft.rmps.irp.b.IContact;
+import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.rmps.irp.v.IAccount;
+import com.amonsoft.rmps.irp.v.IConnect;
+import com.amonsoft.util.LogUtil;
+
 /**
  * <ul>
  * <li>功能说明：</li>
@@ -32,6 +34,7 @@ import ymsg.network.event.SessionNotifyEvent;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class YMsg implements IAccount, SessionListener

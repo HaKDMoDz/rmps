@@ -19,6 +19,7 @@ import rmp.prp.aide.P3020000.P3020000;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class MiniPanel extends javax.swing.JPanel implements WBean
@@ -65,6 +66,7 @@ public class MiniPanel extends javax.swing.JPanel implements WBean
     private void ita()
     {
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 界面组件区域
     // ////////////////////////////////////////////////////////////////////////

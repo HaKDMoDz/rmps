@@ -44,14 +44,11 @@ public class HinduSolar extends SolarDate
 
     public long toFixed()
     {
-        long l = ((long)Math
-            .floor(((double)(super.year + 3179L) + (double)(super.month - 1) / 12D) * 365.2587564814815D)
-            + OldHinduSolar.EPOCH + (long)super.day) - 1L;
+        long l = ((long) Math.floor(((double) (super.year + 3179L) + (double) (super.month - 1) / 12D) * 365.2587564814815D) + OldHinduSolar.EPOCH + (long) super.day) - 1L;
         double d = ProtoDate.deg(360D) / 365.2587564814815D;
-        double d1 = (double)(super.month - 1) * ProtoDate.deg(30D) + (double)(super.day - 1) * d;
-        double d2 = ProtoDate.mod((solarLongitude((double)l + 0.25D) - d1) + ProtoDate.deg(180D), 360D)
-            - ProtoDate.deg(180D);
-        long l1 = l - (long)Math.ceil(d2 / d);
+        double d1 = (double) (super.month - 1) * ProtoDate.deg(30D) + (double) (super.day - 1) * d;
+        double d2 = ProtoDate.mod((solarLongitude((double) l + 0.25D) - d1) + ProtoDate.deg(180D), 360D) - ProtoDate.deg(180D);
+        long l1 = l - (long) Math.ceil(d2 / d);
         long l2;
         for (l2 = l1 - 2L; !onOrBefore(this, new HinduSolar(l2)); l2++)
             ;
@@ -63,25 +60,25 @@ public class HinduSolar extends SolarDate
         double d = sunrise(l + 1L);
         super.month = zodiac(d);
         super.year = calendarYear(d) - 3179L;
-        long l1 = l - 3L - (long)ProtoDate.mod(Math.floor(solarLongitude(d)), ProtoDate.deg(30D));
+        long l1 = l - 3L - (long) ProtoDate.mod(Math.floor(solarLongitude(d)), ProtoDate.deg(30D));
         long l2;
         for (l2 = l1; zodiac(sunrise(1L + l2)) != super.month; l2++)
             ;
-        super.day = (int)((l - l2) + 1L);
+        super.day = (int) ((l - l2) + 1L);
     }
 
     public static double hinduSineTable(int i)
     {
-        double d = 3438D * ProtoDate.sinDegrees(((double)i * 225D) / 60D);
-        double d1 = 0.215D * (double)ProtoDate.signum(d) * (double)ProtoDate.signum(Math.abs(d) - 1716D);
-        return (double)Math.round(d + d1) / 3438D;
+        double d = 3438D * ProtoDate.sinDegrees(((double) i * 225D) / 60D);
+        double d1 = 0.215D * (double) ProtoDate.signum(d) * (double) ProtoDate.signum(Math.abs(d) - 1716D);
+        return (double) Math.round(d + d1) / 3438D;
     }
 
     public static double hinduSine(double d)
     {
         double d1 = (d * 60D) / 225D;
         double d2 = ProtoDate.mod(d1, 1.0D);
-        return d2 * hinduSineTable((int)Math.ceil(d1)) + (1.0D - d2) * hinduSineTable((int)Math.floor(d1));
+        return d2 * hinduSineTable((int) Math.ceil(d1)) + (1.0D - d2) * hinduSineTable((int) Math.floor(d1));
     }
 
     public static double hinduArcsin(double d)
@@ -93,7 +90,7 @@ public class HinduSolar extends SolarDate
         for (i = 0; d > hinduSineTable(i); i++)
             ;
         double d1 = hinduSineTable(i - 1);
-        double d2 = 3.75D * ((double)(i - 1) + (d - d1) / (hinduSineTable(i) - d1));
+        double d2 = 3.75D * ((double) (i - 1) + (d - d1) / (hinduSineTable(i) - d1));
         if (flag)
             d2 = -d2;
         return d2;
@@ -120,21 +117,20 @@ public class HinduSolar extends SolarDate
 
     public static int zodiac(double d)
     {
-        return (int)ProtoDate.quotient(solarLongitude(d), ProtoDate.deg(30D)) + 1;
+        return (int) ProtoDate.quotient(solarLongitude(d), ProtoDate.deg(30D)) + 1;
     }
 
     public static boolean onOrBefore(HinduSolar hindusolar, HinduSolar hindusolar1)
     {
-        return ((SolarDate)(hindusolar)).year < ((SolarDate)(hindusolar1)).year
-            || ((SolarDate)(hindusolar)).year == ((SolarDate)(hindusolar1)).year
-            && (((SolarDate)(hindusolar)).month < ((SolarDate)(hindusolar1)).month || ((SolarDate)(hindusolar)).month == ((SolarDate)(hindusolar1)).month
-                && ((SolarDate)(hindusolar)).day <= ((SolarDate)(hindusolar1)).day);
+        return ((SolarDate) (hindusolar)).year < ((SolarDate) (hindusolar1)).year
+                || ((SolarDate) (hindusolar)).year == ((SolarDate) (hindusolar1)).year
+                && (((SolarDate) (hindusolar)).month < ((SolarDate) (hindusolar1)).month || ((SolarDate) (hindusolar)).month == ((SolarDate) (hindusolar1)).month
+                        && ((SolarDate) (hindusolar)).day <= ((SolarDate) (hindusolar1)).day);
     }
 
     public static long calendarYear(double d)
     {
-        return Math.round((d - (double)OldHinduSolar.EPOCH) / 365.2587564814815D - solarLongitude(d)
-            / ProtoDate.deg(360D));
+        return Math.round((d - (double) OldHinduSolar.EPOCH) / 365.2587564814815D - solarLongitude(d) / ProtoDate.deg(360D));
     }
 
     public static double equationOfTime(long l)
@@ -156,18 +152,14 @@ public class HinduSolar extends SolarDate
 
     public static double tropicalLongitude(long l)
     {
-        long l1 = (long)Math.floor(l - OldHinduSolar.EPOCH);
-        double d = ProtoDate.deg(27D)
-            - Math
-                .abs(ProtoDate.deg(54D)
-                    - ProtoDate.mod(ProtoDate.deg(27D) + ProtoDate.deg(108D) * 3.8024793772721099E-007D * (double)l1,
-                        108D));
+        long l1 = (long) Math.floor(l - OldHinduSolar.EPOCH);
+        double d = ProtoDate.deg(27D) - Math.abs(ProtoDate.deg(54D) - ProtoDate.mod(ProtoDate.deg(27D) + ProtoDate.deg(108D) * 3.8024793772721099E-007D * (double) l1, 108D));
         return ProtoDate.mod(solarLongitude(l) - d, 360D);
     }
 
     public static double risingSign(long l)
     {
-        int i = (int)ProtoDate.mod(ProtoDate.quotient(tropicalLongitude(l), ProtoDate.deg(30D)), 6L);
+        int i = (int) ProtoDate.mod(ProtoDate.quotient(tropicalLongitude(l), ProtoDate.deg(30D)), 6L);
         return rs[i];
     }
 
@@ -176,7 +168,7 @@ public class HinduSolar extends SolarDate
         double d = ProtoDate.deg(360D) / 365.2587564814815D;
         double d1 = meanPosition(l, 365.25878920258134D);
         double d2 = 0.03888888888888889D - Math.abs(hinduSine(d1)) / 1080D;
-        int i = (int)ProtoDate.quotient(d1, ProtoDate.deg(225D) / 60D);
+        int i = (int) ProtoDate.quotient(d1, ProtoDate.deg(225D) / 60D);
         double d3 = hinduSineTable(i + 1) - hinduSineTable(i);
         double d4 = d3 * -15D * d2;
         return d * (d4 + 1.0D);
@@ -189,9 +181,8 @@ public class HinduSolar extends SolarDate
 
     public static double sunrise(long l)
     {
-        return (double)l + 0.25D + (UJJAIN.longitude - HINDU_LOCALE.longitude) / ProtoDate.deg(360D)
-            + equationOfTime(l) + (0.99726968985094955D / ProtoDate.deg(360D))
-            * (ascensionalDifference(l, HINDU_LOCALE) + 0.25D * solarSiderealDifference(l));
+        return (double) l + 0.25D + (UJJAIN.longitude - HINDU_LOCALE.longitude) / ProtoDate.deg(360D) + equationOfTime(l) + (0.99726968985094955D / ProtoDate.deg(360D))
+                * (ascensionalDifference(l, HINDU_LOCALE) + 0.25D * solarSiderealDifference(l));
     }
 
     public static double altSunrise(long l)
@@ -199,9 +190,9 @@ public class HinduSolar extends SolarDate
         try
         {
             double d = ProtoDate.sunrise(l, UJJAIN);
-            return 0.00069444444444444436D * (double)Math.round(d * 24D * 60D);
+            return 0.00069444444444444436D * (double) Math.round(d * 24D * 60D);
         }
-        catch(Exception _ex)
+        catch (Exception _ex)
         {
             return 0.0D;
         }
@@ -233,10 +224,9 @@ public class HinduSolar extends SolarDate
 
     public String format()
     {
-        return MessageFormat.format("{0}, {1} {2} {3,number,#} S.E.", new Object[]{
-            ProtoDate.nameFromDayOfWeek(toFixed(), OldHinduSolar.dayOfWeekNames), new Integer(super.day),
-            ProtoDate.nameFromMonth(ProtoDate.adjustedMod(super.month + 1, 12), OldHinduLunar.monthNames),
-            new Long(super.year)});
+        return MessageFormat.format("{0}, {1} {2} {3,number,#} S.E.", new Object[]
+        { ProtoDate.nameFromDayOfWeek(toFixed(), OldHinduSolar.dayOfWeekNames), new Integer(super.day), ProtoDate.nameFromMonth(ProtoDate.adjustedMod(super.month + 1, 12), OldHinduLunar.monthNames),
+                new Long(super.year) });
     }
 
     public boolean equals(Object obj)
@@ -247,23 +237,22 @@ public class HinduSolar extends SolarDate
             return internalEquals(obj);
     }
 
-    public static final double   SIDEREAL_YEAR    = 365.2587564814815D;
-    public static final double   CREATION;
-    public static final double   ANOMALISTIC_YEAR = 365.25878920258134D;
-    public static final int      SOLAR_ERA        = 3179;
+    public static final double SIDEREAL_YEAR = 365.2587564814815D;
+    public static final double CREATION;
+    public static final double ANOMALISTIC_YEAR = 365.25878920258134D;
+    public static final int SOLAR_ERA = 3179;
     public static final Location UJJAIN;
     public static final Location HINDU_LOCALE;
-    private static final double  rs[]             = {0.92777777777777781D, 0.99722222222222223D, 1.075D, 1.075D,
-        0.99722222222222223D, 0.92777777777777781D};
+    private static final double rs[] =
+    { 0.92777777777777781D, 0.99722222222222223D, 1.075D, 1.075D, 0.99722222222222223D, 0.92777777777777781D };
 
     static
     {
-        CREATION = (double)OldHinduSolar.EPOCH - 714402296627D;
-        UJJAIN = new Location("Ujjain, India", ProtoDate.angle(23D, 9D, 0.0D), ProtoDate.angle(75D, 46D, 0.0D),
-            ProtoDate.mt(0.0D), 5.0512222222222221D);
+        CREATION = (double) OldHinduSolar.EPOCH - 714402296627D;
+        UJJAIN = new Location("Ujjain, India", ProtoDate.angle(23D, 9D, 0.0D), ProtoDate.angle(75D, 46D, 0.0D), ProtoDate.mt(0.0D), 5.0512222222222221D);
         HINDU_LOCALE = UJJAIN;
     }
 
     /** serialVersionUID */
-    private static final long    serialVersionUID = -694089942794432377L;
+    private static final long serialVersionUID = -694089942794432377L;
 }

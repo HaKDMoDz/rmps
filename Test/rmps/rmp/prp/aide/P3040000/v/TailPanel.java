@@ -23,9 +23,9 @@ import rmp.prp.aide.P3040000.solar.Gregorian;
 import rmp.prp.aide.P3040000.t.Util;
 import rmp.util.BeanUtil;
 import rmp.util.DateUtil;
-import rmp.util.ImageUtil;
+
 import com.amonsoft.util.LogUtil;
-import cons.EnvCons;
+
 import cons.prp.aide.P3040000.ConstUI;
 import cons.prp.aide.P3040000.LangRes;
 
@@ -38,6 +38,7 @@ import cons.prp.aide.P3040000.LangRes;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class TailPanel implements WBackCall
@@ -77,12 +78,24 @@ public class TailPanel implements WBackCall
     {
         try
         {
-//            ii_PrevImgD = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000, "ld.png"));
-//            ii_PrevImgE = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000, "le.png"));
-//            ii_PrevImgP = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000, "lp.png"));
-//            ii_NextImgD = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000, "rd.png"));
-//            ii_NextImgE = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000, "re.png"));
-//            ii_NextImgP = new ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000, "rp.png"));
+            // ii_PrevImgD = new
+            // ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000,
+            // "ld.png"));
+            // ii_PrevImgE = new
+            // ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000,
+            // "le.png"));
+            // ii_PrevImgP = new
+            // ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000,
+            // "lp.png"));
+            // ii_NextImgD = new
+            // ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000,
+            // "rd.png"));
+            // ii_NextImgE = new
+            // ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000,
+            // "re.png"));
+            // ii_NextImgP = new
+            // ImageIcon(ImageUtil.readJarImage(EnvCons.PATH_P3040000,
+            // "rp.png"));
         }
         catch (Exception exp)
         {
@@ -407,9 +420,7 @@ public class TailPanel implements WBackCall
         lb_YearLabl.setText(Util.getYear() + "-" + Util.getMonth());
         lb_DateLabl.setText(Integer.toString(Util.getDay()));
         String[] week =
-        {
-            "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"
-        };
+        { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
         lb_WeekLabl.setText(week[DateUtil.dayInWeek(Util.getYear(), Util.getMonth(), Util.getDay())]);
         lb_LunarLbl.setText(new Chinese(new Gregorian(Util.getYear(), Util.getMonth(), Util.getDay()).toFixed()).format());
     }
@@ -442,6 +453,7 @@ public class TailPanel implements WBackCall
         dl_LastDays = dl_DaysLabl[day1Week + Util.getDay()];
         dl_LastDays.setSelected(true);
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 界面变量区域
     // ////////////////////////////////////////////////////////////////////////

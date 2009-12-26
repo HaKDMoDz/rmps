@@ -15,6 +15,7 @@ package rmp.comn.test.CF010000.b;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class TestBean

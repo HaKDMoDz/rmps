@@ -16,6 +16,7 @@ package cons.comn.amon.data.A2010000;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public interface LangRes

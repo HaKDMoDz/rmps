@@ -17,7 +17,9 @@ import rmp.face.WBackCall;
 import rmp.io.db.DBAccess;
 import rmp.prp.aide.P3040000.P3040000;
 import rmp.util.DateUtil;
+
 import com.amonsoft.util.LogUtil;
+
 import cons.db.PrpCons;
 import cons.prp.aide.P3040000.ConstUI;
 import cons.prp.aide.P3040000.LangRes;
@@ -30,6 +32,7 @@ import cons.prp.aide.P3040000.LangRes;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public final class Util
@@ -402,7 +405,8 @@ public final class Util
     }
 
     /**
-     * @param hm_PropList the hm_PropList to set
+     * @param hm_PropList
+     *            the hm_PropList to set
      */
     public static void setPropList(HashMap<String, WBackCall> hm_PropList)
     {
@@ -460,7 +464,8 @@ public final class Util
     }
 
     /**
-     * @param year the year to set
+     * @param year
+     *            the year to set
      */
     public static void setYear(int year)
     {
@@ -504,7 +509,8 @@ public final class Util
     }
 
     /**
-     * @param month the month to set
+     * @param month
+     *            the month to set
      */
     public static void setMonth(int month)
     {
@@ -552,7 +558,8 @@ public final class Util
     }
 
     /**
-     * @param day the day to set
+     * @param day
+     *            the day to set
      */
     public static void setDay(int day)
     {
@@ -575,7 +582,8 @@ public final class Util
     /**
      * 获得公元纪元日期，格式为：yyyy-MM-dd
      * 
-     * @param day 在某月份视图下，用户鼠标经过某个日期时，显示提示信息的日期
+     * @param day
+     *            在某月份视图下，用户鼠标经过某个日期时，显示提示信息的日期
      * @return
      */
     public static String getDate(int date)
@@ -627,7 +635,8 @@ public final class Util
     }
 
     /**
-     * @param weekOfYear the weekOfYear to set
+     * @param weekOfYear
+     *            the weekOfYear to set
      */
     public static void setWeekOfYear(int weekOfYear)
     {
@@ -643,7 +652,8 @@ public final class Util
     }
 
     /**
-     * @param weekOfMonth the weekOfMonth to set
+     * @param weekOfMonth
+     *            the weekOfMonth to set
      */
     public static void setWeekOfMonth(int weekOfMonth)
     {

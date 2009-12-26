@@ -11,7 +11,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.amonsoft.rmps.prp.v.IMenu;
 import rmp.util.BeanUtil;
 
 /**
@@ -23,6 +22,7 @@ import rmp.util.BeanUtil;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class WPopupMenu
@@ -151,6 +151,7 @@ public class WPopupMenu
         BeanUtil.setWTips(menu, menuTips);
         return menu;
     }
+
     /** 皮肤列表 */
     private javax.swing.JMenu mu_SkinList;
     /** 视图模式 */

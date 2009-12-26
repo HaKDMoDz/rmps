@@ -35,6 +35,7 @@ import cons.prp.aide.P3040000.LangRes;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class MiniPanel extends javax.swing.JPanel implements WBean
@@ -226,21 +227,19 @@ public class MiniPanel extends javax.swing.JPanel implements WBean
         this.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(pl_DatePanel,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGroup(
-                layout.createSequentialGroup().addComponent(bt_PrevYear).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_PrevMnth).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(
-                lb_CurrDate, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_NextMnth).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(
-                bt_NextYear))).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(pl_DatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                Short.MAX_VALUE).addGroup(
+                                layout.createSequentialGroup().addComponent(bt_PrevYear).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_PrevMnth).addPreferredGap(
+                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(lb_CurrDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        Short.MAX_VALUE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_NextMnth).addPreferredGap(
+                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_NextYear))).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER).addComponent(lb_CurrDate,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_PrevYear).addComponent(bt_PrevMnth).addComponent(bt_NextYear).addComponent(bt_NextMnth))).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(pl_DatePanel,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER).addComponent(lb_CurrDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.PREFERRED_SIZE).addGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_PrevYear).addComponent(bt_PrevMnth).addComponent(bt_NextYear).addComponent(
+                                        bt_NextMnth))).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(pl_DatePanel, javax.swing.GroupLayout.DEFAULT_SIZE,
+                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addContainerGap()));
     }
 
     /**
@@ -483,6 +482,7 @@ public class MiniPanel extends javax.swing.JPanel implements WBean
         };
         SwingUtilities.invokeLater(run);
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 公共方法区域
     // ////////////////////////////////////////////////////////////////////////

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rmp.util.CheckUtil;
+
 import com.amonsoft.util.LogUtil;
 
 /**
@@ -26,6 +27,7 @@ import com.amonsoft.util.LogUtil;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class DBAccess
@@ -79,6 +81,7 @@ public class DBAccess
 
     /**
      * 关闭数据库
+     * 
      * @throws SQLException
      */
     public void close()
@@ -135,7 +138,7 @@ public class DBAccess
 
     /**
      * 添加要使用的表格
-     *
+     * 
      * @param table
      */
     public void addTable(String table)
@@ -148,8 +151,11 @@ public class DBAccess
 
     /**
      * 添加要使用的表格
-     * @param table 表格名称
-     * @param alias 表格别名
+     * 
+     * @param table
+     *            表格名称
+     * @param alias
+     *            表格别名
      */
     public void addTable(String table, String alias)
     {
@@ -161,7 +167,7 @@ public class DBAccess
 
     /**
      * 添加带连接的表格
-     *
+     * 
      * @param tableLeft
      * @param tableRight
      * @param joinStyle
@@ -178,7 +184,7 @@ public class DBAccess
 
     /**
      * 添加带连接的表格
-     *
+     * 
      * @param tableLeft
      * @param tableRight
      * @param joinStyle
@@ -198,12 +204,13 @@ public class DBAccess
 
     /**
      * 添加查寻字段
-     *
+     * 
      * <pre>
      * SELECT colname1, colname2, ... FROM tablename
      * </pre>
-     *
-     * @param colname 对应于要查寻的表格的相关字段
+     * 
+     * @param colname
+     *            对应于要查寻的表格的相关字段
      */
     public void addColumn(String colname)
     {
@@ -215,13 +222,15 @@ public class DBAccess
 
     /**
      * 添加查寻字段
-     *
+     * 
      * <pre>
      * SELECT colname1 AS a, colname2 AS b, ... FROM tablename
      * </pre>
-     *
-     * @param colname 对应于要查寻的表格的相关字段
-     * @param alias 字段别名
+     * 
+     * @param colname
+     *            对应于要查寻的表格的相关字段
+     * @param alias
+     *            字段别名
      */
     public void addColumn(String colname, String alias)
     {
@@ -233,13 +242,15 @@ public class DBAccess
 
     /**
      * 数据更新：添加数据库操作的KEY-VALUE对。
-     *
+     * 
      * <pre>
      * UPDATE SET key1=value1, key2=value2 ...
      * </pre>
-     *
-     * @param key 数据库字段名
-     * @param value 对应字段的值
+     * 
+     * @param key
+     *            数据库字段名
+     * @param value
+     *            对应字段的值
      */
     public void addParam(String key, long value)
     {
@@ -248,13 +259,15 @@ public class DBAccess
 
     /**
      * 数据更新：添加数据库操作的KEY-VALUE对。
-     *
+     * 
      * <pre>
      * UPDATE SET key1=value1, key2=value2 ...
      * </pre>
-     *
-     * @param key 数据库字段名
-     * @param value 对应字段的值
+     * 
+     * @param key
+     *            数据库字段名
+     * @param value
+     *            对应字段的值
      */
     public void addParam(String key, String value)
     {
@@ -263,14 +276,17 @@ public class DBAccess
 
     /**
      * 数据更新：添加数据库操作的KEY-VALUE对。
-     *
+     * 
      * <pre>
      * UPDATE SET key1=value1, key2=value2 ...
      * </pre>
-     *
-     * @param key 数据库字段名
-     * @param value 对应字段的值
-     * @param isLiteral 当前字段是否为纯文本，true为纯文本，false为其它格式。
+     * 
+     * @param key
+     *            数据库字段名
+     * @param value
+     *            对应字段的值
+     * @param isLiteral
+     *            当前字段是否为纯文本，true为纯文本，false为其它格式。
      */
     public void addParam(String key, String value, boolean isLiteral)
     {
@@ -279,10 +295,13 @@ public class DBAccess
 
     /**
      * 数据更新：添加数据库操作的KEY-VALUE对。
-     *
-     * @param param 数据库字段名
-     * @param sign 运算操作符
-     * @param value 对应字段的值
+     * 
+     * @param param
+     *            数据库字段名
+     * @param sign
+     *            运算操作符
+     * @param value
+     *            对应字段的值
      */
     public void addParam(String param, String sign, String value)
     {
@@ -291,11 +310,15 @@ public class DBAccess
 
     /**
      * 数据更新：添加数据库操作的KEY-VALUE对。
-     *
-     * @param param 数据库字段名
-     * @param sign 运算操作符
-     * @param value 对应字段的值
-     * @param isLiteral 当前字段是否为纯文本，true为纯文本，false为其它格式。
+     * 
+     * @param param
+     *            数据库字段名
+     * @param sign
+     *            运算操作符
+     * @param value
+     *            对应字段的值
+     * @param isLiteral
+     *            当前字段是否为纯文本，true为纯文本，false为其它格式。
      */
     public void addParam(String param, String sign, String value, boolean isLiteral)
     {
@@ -321,7 +344,7 @@ public class DBAccess
     }
 
     /**
-     *
+     * 
      * @param param
      * @param sign
      * @param value
@@ -335,7 +358,7 @@ public class DBAccess
 
     /**
      * 用户自定义关联条件
-     *
+     * 
      * @param where
      */
     public void addWhere(String where)
@@ -350,13 +373,15 @@ public class DBAccess
 
     /**
      * 添加WHERE查寻条件，默认运算符为等号“=”，默认值为纯文本
-     *
+     * 
      * <pre>
      * UPDATE tablename SET ... WHERE key1=value1 AND key2=value2 ...
      * </pre>
-     *
-     * @param key 参照数据库表格字段名
-     * @param value 参照值
+     * 
+     * @param key
+     *            参照数据库表格字段名
+     * @param value
+     *            参照值
      */
     public void addWhere(String key, String value)
     {
@@ -365,14 +390,17 @@ public class DBAccess
 
     /**
      * 添加WHERE查寻条件，默认运算符为等号“=”
-     *
+     * 
      * <pre>
      * UPDATE tablename SET ... WHERE key1=value1 AND key2=value2 ...
      * </pre>
-     *
-     * @param key 参照数据库表格字段名
-     * @param value 参照值
-     * @param isLiteral 是否为纯文本字符串，true为纯文本，false为非文本
+     * 
+     * @param key
+     *            参照数据库表格字段名
+     * @param value
+     *            参照值
+     * @param isLiteral
+     *            是否为纯文本字符串，true为纯文本，false为非文本
      */
     public void addWhere(String key, String value, boolean isLiteral)
     {
@@ -389,15 +417,19 @@ public class DBAccess
 
     /**
      * 添加WHERE查寻条件
-     *
+     * 
      * <pre>
      * UPDATE tablename SET ... WHERE key1=value1 AND key2=value2 ...
      * </pre>
-     *
-     * @param key 参照数据库表格字段名
-     * @param sign 参照运算符，如+、-、=、!=等
-     * @param value 参照值
-     * @param isLiteral 是否为纯文本字符串，true为纯文本，false为非文本
+     * 
+     * @param key
+     *            参照数据库表格字段名
+     * @param sign
+     *            参照运算符，如+、-、=、!=等
+     * @param value
+     *            参照值
+     * @param isLiteral
+     *            是否为纯文本字符串，true为纯文本，false为非文本
      */
     public void addWhere(String key, String sign, String value, boolean isLiteral)
     {
@@ -420,7 +452,7 @@ public class DBAccess
 
     /**
      * 默认升序排序
-     *
+     * 
      * @param key
      */
     public void addSort(String key)
@@ -430,13 +462,15 @@ public class DBAccess
 
     /**
      * 添加排序依据
-     *
+     * 
      * <pre>
      * SELECT * FROM tablename WHERE ... ORDER BY key1 value1, key2 value2, ...
      * </pre>
-     *
-     * @param key 参照数据库表格字段
-     * @param value 排序方法:ASC表示升序;DESC表示降序
+     * 
+     * @param key
+     *            参照数据库表格字段
+     * @param value
+     *            排序方法:ASC表示升序;DESC表示降序
      */
     public void addSort(String key, boolean asc)
     {
@@ -448,7 +482,7 @@ public class DBAccess
     }
 
     /**
-     *
+     * 
      * @param sql
      * @throws SQLException
      */
@@ -459,6 +493,7 @@ public class DBAccess
 
     /**
      * 数据复制
+     * 
      * @param f
      * @param t
      * @throws SQLException
@@ -469,7 +504,7 @@ public class DBAccess
     }
 
     /**
-     *
+     * 
      * @throws SQLException
      */
     public void addDeleteBatch() throws SQLException
@@ -478,7 +513,7 @@ public class DBAccess
     }
 
     /**
-     *
+     * 
      * @throws SQLException
      */
     public void addInsertBatch() throws SQLException
@@ -492,7 +527,7 @@ public class DBAccess
     }
 
     /**
-     *
+     * 
      * @throws SQLException
      */
     public void executeBatch() throws SQLException
@@ -506,8 +541,9 @@ public class DBAccess
 
     /**
      * 其它相关的数据库操作，如COMMIT、HSQL专有的SHUTDOWN等。
-     *
-     * @param sql 要执行的SQL语句
+     * 
+     * @param sql
+     *            要执行的SQL语句
      * @return 当前操作是否成功
      * @throws SQLException
      */
@@ -523,7 +559,7 @@ public class DBAccess
 
     /**
      * 数据库查寻
-     *
+     * 
      * @return 查寻结果集
      * @throws SQLException
      */
@@ -534,8 +570,9 @@ public class DBAccess
 
     /**
      * 数据库查寻
-     *
-     * @param sql 查寻语句
+     * 
+     * @param sql
+     *            查寻语句
      * @return 查寻结果集
      * @throws SQLException
      */
@@ -551,7 +588,7 @@ public class DBAccess
 
     /**
      * 数据库更新
-     *
+     * 
      * @return 当前操作所影响的行数
      * @throws SQLException
      */
@@ -562,8 +599,9 @@ public class DBAccess
 
     /**
      * 数据库更新
-     *
-     * @param sql 更新语句
+     * 
+     * @param sql
+     *            更新语句
      * @return 当前操作所影响的行数
      * @throws SQLException
      */
@@ -579,7 +617,7 @@ public class DBAccess
 
     /**
      * 数据库插入
-     *
+     * 
      * @return 当前操作所影响的行数
      * @throws SQLException
      */
@@ -605,7 +643,7 @@ public class DBAccess
 
     /**
      * 数据库删除
-     *
+     * 
      * @return
      * @throws SQLException
      */
@@ -663,7 +701,7 @@ public class DBAccess
 
     /**
      * 获取数据库查寻SQL语句
-     *
+     * 
      * @return SQL语句，若操作表格为空，则返回空语句
      */
     private String getSelectSQL()
@@ -708,7 +746,7 @@ public class DBAccess
 
     /**
      * 获取数据库更新SQL语句
-     *
+     * 
      * @return SQL语句，若操作表格为空，则返回空语句
      */
     private String getUpdateSQL()
@@ -748,7 +786,7 @@ public class DBAccess
 
     /**
      * 获取数据库插入SQL语句
-     *
+     * 
      * @return SQL语句，若操作表格为空，则返回空语句
      */
     private String getInsertSQL()
@@ -792,7 +830,7 @@ public class DBAccess
 
     /**
      * 获取数据库删除SQL语句
-     *
+     * 
      * @return SQL语句，若操作表格为空，则返回空语句
      */
     private String getDeleteSQL()
@@ -814,6 +852,7 @@ public class DBAccess
         LogUtil.log(sqlBuf.toString());
         return sqlBuf.toString();
     }
+
     // ////////////////////////////////////////////////////////////////////////
     // 内部成员变量
     // ////////////////////////////////////////////////////////////////////////

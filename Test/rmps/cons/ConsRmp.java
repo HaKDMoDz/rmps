@@ -16,7 +16,8 @@ package cons;
  * <br />
  * TODO:
  * </ul>
- * @author yihaodian
+ * 
+ * @author Amon
  */
 public interface ConsRmp
 {

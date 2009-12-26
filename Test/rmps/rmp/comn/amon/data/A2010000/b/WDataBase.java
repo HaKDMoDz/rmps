@@ -19,16 +19,17 @@ import cons.comn.amon.data.A2010000.ConstUI;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class WDataBase
 {
     /** JDBC数据库驱动 */
-    private String driver   = ConstUI.HSQLDB_DRV;
+    private String driver = ConstUI.HSQLDB_DRV;
     /** 数据库连接地址 */
-    private String url      = StringUtil.format(ConstUI.HSQLDB_URL, "1000000/dat/amon");
+    private String url = StringUtil.format(ConstUI.HSQLDB_URL, "1000000/dat/amon");
     /** 数据库访问用户 */
-    private String user     = "";
+    private String user = "";
     /** 数据库用户口令 */
     private String password = "";
 
@@ -41,7 +42,8 @@ public class WDataBase
     }
 
     /**
-     * @param driver the driver to set
+     * @param driver
+     *            the driver to set
      */
     public void setDriver(String driver)
     {
@@ -57,7 +59,8 @@ public class WDataBase
     }
 
     /**
-     * @param url the url to set
+     * @param url
+     *            the url to set
      */
     public void setUrl(String url)
     {
@@ -73,7 +76,8 @@ public class WDataBase
     }
 
     /**
-     * @param user the user to set
+     * @param user
+     *            the user to set
      */
     public void setUser(String user)
     {
@@ -89,7 +93,8 @@ public class WDataBase
     }
 
     /**
-     * @param password the password to set
+     * @param password
+     *            the password to set
      */
     public void setPassword(String password)
     {

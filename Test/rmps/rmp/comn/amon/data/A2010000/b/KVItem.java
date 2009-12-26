@@ -16,6 +16,7 @@ package rmp.comn.amon.data.A2010000.b;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class KVItem
@@ -55,7 +56,8 @@ public class KVItem
     }
 
     /**
-     * @param k the k to set
+     * @param k
+     *            the k to set
      */
     public void setK(String k)
     {
@@ -71,7 +73,8 @@ public class KVItem
     }
 
     /**
-     * @param v the v to set
+     * @param v
+     *            the v to set
      */
     public void setV(String v)
     {
@@ -114,7 +117,8 @@ public class KVItem
     }
 
     /**
-     * @param s the s to set
+     * @param s
+     *            the s to set
      */
     public void setS(boolean s)
     {

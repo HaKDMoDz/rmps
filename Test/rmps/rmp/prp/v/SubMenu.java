@@ -7,9 +7,9 @@
  */
 package rmp.prp.v;
 
+import rmp.Rmps;
 import rmp.prp.Prps;
 import cons.CfgCons;
-import rmp.Rmps;
 
 /**
  * <ul>
@@ -20,6 +20,7 @@ import rmp.Rmps;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class SubMenu
@@ -38,7 +39,8 @@ public class SubMenu
     // 构造函数区域
     // ////////////////////////////////////////////////////////////////////////
     /**
-     * @param menu 级联菜单对象
+     * @param menu
+     *            级联菜单对象
      */
     public SubMenu(Prps prps, javax.swing.JMenu menu)
     {
@@ -47,7 +49,8 @@ public class SubMenu
     }
 
     /**
-     * @param menu 级联菜单对象
+     * @param menu
+     *            级联菜单对象
      */
     public SubMenu(Prps prps, javax.swing.JPopupMenu menu)
     {
@@ -155,6 +158,7 @@ public class SubMenu
         prps.setAlwaysOnTop(b);
         Rmps.getUser().setCfg(CfgCons.CFG_WND_EVERTOP, Boolean.toString(b));
     }
+
     /** 总在最上 */
     private javax.swing.JCheckBoxMenuItem mi_EverTop;
     /** 禁止移动 */

@@ -19,6 +19,7 @@ import cons.id.PrpCons;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public interface ConstUI
@@ -56,8 +57,5 @@ public interface ConstUI
     String SOAP_ACTION = "http://WebXml.com.cn/getDomesticAirlinesTime";
     /** 数据列表项 */
     String[] DATA_ITEM =
-    {
-        "", "Company", "AirlineCode", "StartDrome", "ArriveDrome", "StartTime", "ArriveTime",
-        "Mode", "AirlineStop", "Week"
-    };
+    { "", "Company", "AirlineCode", "StartDrome", "ArriveDrome", "StartTime", "ArriveTime", "Mode", "AirlineStop", "Week" };
 }

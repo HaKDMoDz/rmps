@@ -35,6 +35,7 @@ import cons.prp.aide.P3090000.ConstUI;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public final class Util
@@ -45,7 +46,7 @@ public final class Util
     /** 调用此模型并且需要回馈的对象 */
     private static HashMap<String, WBackCall> hm_PropList;
     /** 查看指定天气状况 */
-    private static int                        theDate = 5;
+    private static int theDate = 5;
 
     // ////////////////////////////////////////////////////////////////////////
     // 构造函数区域
@@ -115,7 +116,8 @@ public final class Util
      * String(21)：第三天天气趋势结束图片名称<br />
      * String(22)：城市或地区的介绍<br />
      * 
-     * @param city 用户输入的城市名称
+     * @param city
+     *            用户输入的城市名称
      * @return 字符串 用,分割
      * @throws Exception
      */
@@ -163,7 +165,8 @@ public final class Util
     /**
      * 用户把SOAP请求发送给服务器端，并返回服务器点返回的输入流
      * 
-     * @param city 用户输入的城市名称
+     * @param city
+     *            用户输入的城市名称
      * @return 服务器端返回的输入流，供客户端读取
      * @throws Exception
      */
@@ -194,7 +197,8 @@ public final class Util
     /**
      * 获取SOAP的请求头，并替换其中的标志符号为用户输入的城市
      * 
-     * @param city 用户输入的城市名称
+     * @param city
+     *            用户输入的城市名称
      * @return 客户将要发送给服务器的SOAP请求
      * @throws Exception
      */
@@ -222,7 +226,8 @@ public final class Util
     /**
      * 设置查看天气信息：今天0；明天：1；后天2；其它：0
      * 
-     * @param theDate the theDate to set
+     * @param theDate
+     *            the theDate to set
      */
     public static void setTheDate(int theDate)
     {

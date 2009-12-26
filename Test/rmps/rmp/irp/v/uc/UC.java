@@ -7,12 +7,12 @@
  */
 package rmp.irp.v.uc;
 
-import com.amonsoft.rmps.irp.v.IConnect;
+import java.util.List;
+
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IStatus;
 import com.amonsoft.rmps.irp.v.IAccount;
-
-import java.util.List;
+import com.amonsoft.rmps.irp.v.IConnect;
 
 /**
  * <ul>
@@ -21,6 +21,7 @@ import java.util.List;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class UC implements IAccount

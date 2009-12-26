@@ -7,7 +7,6 @@
  */
 package rmp.comn.user.U0010000.v;
 
-import com.amonsoft.rmps.prp.v.IView;
 import javax.swing.JPanel;
 
 import rmp.Rmps;
@@ -15,6 +14,9 @@ import rmp.bean.K1SV1S;
 import rmp.comn.user.U0010000.U0010000;
 import rmp.util.BeanUtil;
 import rmp.util.MesgUtil;
+
+import com.amonsoft.rmps.prp.v.IView;
+
 import cons.CfgCons;
 import cons.comn.user.U0010000.LangRes;
 
@@ -27,6 +29,7 @@ import cons.comn.user.U0010000.LangRes;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public class MiniPanel extends JPanel implements IView
@@ -93,33 +96,28 @@ public class MiniPanel extends JPanel implements IView
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                lb_UserName).addComponent(lb_RenewPwd).addComponent(lb_ReputPwd)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                tf_UserName, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE).addComponent(
-                pf_RenewPwd, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE).addComponent(
-                pf_ReputPwd, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addComponent(bt_Create).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_Cancel))).addContainerGap()));
+        layout
+                .setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+                        layout.createSequentialGroup().addContainerGap().addGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+                                        layout.createSequentialGroup().addGroup(
+                                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_UserName).addComponent(lb_RenewPwd).addComponent(lb_ReputPwd))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                                                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(tf_UserName, javax.swing.GroupLayout.DEFAULT_SIZE, 194,
+                                                                Short.MAX_VALUE).addComponent(pf_RenewPwd, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE).addComponent(pf_ReputPwd,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))).addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                        layout.createSequentialGroup().addComponent(bt_Create).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_Cancel)))
+                                .addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_UserName).addComponent(tf_UserName, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_RenewPwd).addComponent(pf_RenewPwd, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_ReputPwd).addComponent(pf_ReputPwd, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE,
-                Short.MAX_VALUE).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_Cancel).addComponent(bt_Create)).addContainerGap()));
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_UserName).addComponent(tf_UserName, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_RenewPwd).addComponent(pf_RenewPwd, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_ReputPwd).addComponent(pf_ReputPwd, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_Cancel).addComponent(bt_Create)).addContainerGap()));
     }
 
     /**
@@ -196,6 +194,7 @@ public class MiniPanel extends JPanel implements IView
         ms_MainSoft.firePropertyChanged(CfgCons.SIGN_UP, new K1SV1S(un, p1), CfgCons.SIGN_UP);
         ms_MainSoft.wClosing();
     }
+
     private javax.swing.JButton bt_Cancel;
     private javax.swing.JButton bt_Create;
     private javax.swing.JLabel lb_RenewPwd;

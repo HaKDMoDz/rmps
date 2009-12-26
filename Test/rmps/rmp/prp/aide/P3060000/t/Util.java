@@ -17,8 +17,10 @@ import java.util.Stack;
 import rmp.bean.K1SV2S;
 import rmp.prp.aide.P3060000.b.WOperator;
 import rmp.util.CheckUtil;
-import com.amonsoft.util.LogUtil;
 import rmp.util.StringUtil;
+
+import com.amonsoft.util.LogUtil;
+
 import cons.prp.aide.P3060000.ConstUI;
 import cons.prp.aide.P3060000.LangRes;
 
@@ -47,6 +49,7 @@ import cons.prp.aide.P3060000.LangRes;
  * 4、运算步骤的最后一步用户可以根据需要选择是否显示，原因：<br />
  * 在运算过程中额外添加了一对小括号“”，见流程说明2，此步骤是否存在不影响结果的显示。<br />
  * </ul>
+ * 
  * @author Amon
  */
 public final class Util
@@ -200,12 +203,15 @@ public final class Util
     /**
      * 计算指定表格式的值
      * 
-     * @param exps 表达式
-     * @param scale 计算精度
-     * @param stepList 计算步骤列表，记录每一步的计算方法，为NULL时表示不记录运算步骤。<br />
-     *        k:当前要进行计算的步骤；<br />
-     *        v1:将进行计算的运算单元；<br />
-     *        v2:单元运算结果；<br />
+     * @param exps
+     *            表达式
+     * @param scale
+     *            计算精度
+     * @param stepList
+     *            计算步骤列表，记录每一步的计算方法，为NULL时表示不记录运算步骤。<br />
+     *            k:当前要进行计算的步骤；<br />
+     *            v1:将进行计算的运算单元；<br />
+     *            v2:单元运算结果；<br />
      * @return
      */
     public static String calculate(String exps, int scale, List<K1SV2S> stepList) throws Exception
@@ -251,79 +257,78 @@ public final class Util
         // 左括号
         final String[] LBT_EXP =
         {
-            //
-            ConstUI.OPR_SLB_EXP,//
-            ConstUI.OPR_MLB_EXP,//
-            ConstUI.OPR_LLB_EXP,//
+        //
+                ConstUI.OPR_SLB_EXP,//
+                ConstUI.OPR_MLB_EXP,//
+                ConstUI.OPR_LLB_EXP,//
         };
         final int[] LBT_INT =
         {
-            //
-            ConstUI.OPR_SLB_INT,//
-            ConstUI.OPR_MLB_INT,//
-            ConstUI.OPR_LLB_INT,//
+        //
+                ConstUI.OPR_SLB_INT,//
+                ConstUI.OPR_MLB_INT,//
+                ConstUI.OPR_LLB_INT,//
         };
         // 右括号
         final String[] RBT_EXP =
         {
-            //
-            ConstUI.OPR_SRB_EXP,//
-            ConstUI.OPR_MRB_EXP,//
-            ConstUI.OPR_LRB_EXP,//
+        //
+                ConstUI.OPR_SRB_EXP,//
+                ConstUI.OPR_MRB_EXP,//
+                ConstUI.OPR_LRB_EXP,//
         };
         final int[] RBT_INT =
         {
-            //
-            ConstUI.OPR_SRB_INT,//
-            ConstUI.OPR_MRB_INT,//
-            ConstUI.OPR_LRB_INT,//
+        //
+                ConstUI.OPR_SRB_INT,//
+                ConstUI.OPR_MRB_INT,//
+                ConstUI.OPR_LRB_INT,//
         };
 
         // 操作符
         final String[] OPR_EXP =
         {
-            //
-            ConstUI.OPR_ADD_EXP,// 加
-            ConstUI.OPR_SUB_EXP,// 减
-            ConstUI.OPR_MUL_EXP,// 乘
-            ConstUI.OPR_DIV_EXP,// 除
-            ConstUI.OPR_MOD_EXP,// 取模
-            ConstUI.OPR_POW_EXP,// 次幂
-            ConstUI.OPR_ROT_EXP,// 方根
-            ConstUI.OPR_LOG_EXP,// 10对数
-            ConstUI.OPR_LNE_EXP,// 自然对数
-            ConstUI.OPR_FAC_EXP,// 阶乘
-            ConstUI.OPR_SIN_EXP,//
-            ConstUI.OPR_COS_EXP,//
-            ConstUI.OPR_TAN_EXP,//
-            ConstUI.OPR_SEC_EXP,//
-            ConstUI.OPR_CSC_EXP,//
-            ConstUI.OPR_COT_EXP,//
+        //
+                ConstUI.OPR_ADD_EXP,// 加
+                ConstUI.OPR_SUB_EXP,// 减
+                ConstUI.OPR_MUL_EXP,// 乘
+                ConstUI.OPR_DIV_EXP,// 除
+                ConstUI.OPR_MOD_EXP,// 取模
+                ConstUI.OPR_POW_EXP,// 次幂
+                ConstUI.OPR_ROT_EXP,// 方根
+                ConstUI.OPR_LOG_EXP,// 10对数
+                ConstUI.OPR_LNE_EXP,// 自然对数
+                ConstUI.OPR_FAC_EXP,// 阶乘
+                ConstUI.OPR_SIN_EXP,//
+                ConstUI.OPR_COS_EXP,//
+                ConstUI.OPR_TAN_EXP,//
+                ConstUI.OPR_SEC_EXP,//
+                ConstUI.OPR_CSC_EXP,//
+                ConstUI.OPR_COT_EXP,//
         };
         final int[] OPR_INT =
         {
-            //
-            ConstUI.OPR_ADD_INT,// 加
-            ConstUI.OPR_SUB_INT,// 减
-            ConstUI.OPR_MUL_INT,// 乘
-            ConstUI.OPR_DIV_INT,// 除
-            ConstUI.OPR_MOD_INT,// 取模
-            ConstUI.OPR_POW_INT,// 次幂
-            ConstUI.OPR_ROT_INT,// 方根
-            ConstUI.OPR_LOG_INT,// 10对数
-            ConstUI.OPR_LNE_INT,// 自然对数
-            ConstUI.OPR_FAC_INT,// 阶乘
-            ConstUI.OPR_SIN_INT,//
-            ConstUI.OPR_COS_INT,//
-            ConstUI.OPR_TAN_INT,//
-            ConstUI.OPR_SEC_INT,//
-            ConstUI.OPR_CSC_INT,//
-            ConstUI.OPR_COT_INT,//
+        //
+                ConstUI.OPR_ADD_INT,// 加
+                ConstUI.OPR_SUB_INT,// 减
+                ConstUI.OPR_MUL_INT,// 乘
+                ConstUI.OPR_DIV_INT,// 除
+                ConstUI.OPR_MOD_INT,// 取模
+                ConstUI.OPR_POW_INT,// 次幂
+                ConstUI.OPR_ROT_INT,// 方根
+                ConstUI.OPR_LOG_INT,// 10对数
+                ConstUI.OPR_LNE_INT,// 自然对数
+                ConstUI.OPR_FAC_INT,// 阶乘
+                ConstUI.OPR_SIN_INT,//
+                ConstUI.OPR_COS_INT,//
+                ConstUI.OPR_TAN_INT,//
+                ConstUI.OPR_SEC_INT,//
+                ConstUI.OPR_CSC_INT,//
+                ConstUI.OPR_COT_INT,//
         };
 
         // 循环处理每一个表达式字符
-        NEXT_O:
-        for (char c : expBuf)
+        NEXT_O: for (char c : expBuf)
         {
             // 负号
             if (lastIsOpr && (c == '-' || c == '+'))
@@ -430,8 +435,7 @@ public final class Util
                     WOperator o;
 
                     // 循环处理每一个操作符
-                    NEXT_I:
-                    while (true)
+                    NEXT_I: while (true)
                     {
                         o = oprStack.peek();
                         for (int m = 0, n = LBT_EXP.length; m < n; m += 1)
@@ -523,9 +527,12 @@ public final class Util
     /**
      * 双目运算符运算
      * 
-     * @param opr 操作符
-     * @param scale 计算精度
-     * @param opds 操作数
+     * @param opr
+     *            操作符
+     * @param scale
+     *            计算精度
+     * @param opds
+     *            操作数
      * @return
      */
     private static K1SV2S calculate(String exps, int scale) throws Exception

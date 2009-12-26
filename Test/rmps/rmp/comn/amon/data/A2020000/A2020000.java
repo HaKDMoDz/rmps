@@ -8,12 +8,12 @@
  */
 package rmp.comn.amon.data.A2020000;
 
-import com.amonsoft.bean.WForm;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 
+import com.amonsoft.bean.WForm;
 import com.amonsoft.rmps.prp.IPrpPlus;
 
 /**
@@ -249,19 +249,19 @@ public class A2020000 extends WForm implements IPrpPlus
             case VIEW_TAIL:
                 return showTail();
 
-            // 显示迷你模式
+                // 显示迷你模式
             case VIEW_MINI:
                 return showMini();
 
-            // 显示正常模式
+                // 显示正常模式
             case VIEW_NORM:
                 return showNorm();
 
-            // 显示高级模式
+                // 显示高级模式
             case VIEW_MAIN:
                 return showMain();
 
-            // 显示向导模式
+                // 显示向导模式
             case VIEW_STEP:
                 return showStep();
 

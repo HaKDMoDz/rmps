@@ -50,8 +50,7 @@ public class Roman extends LunarDate
             l1 = Julian.toFixed(l, i, nonesOfMonth(i));
         else if (j == 3)
             l1 = Julian.toFixed(l, i, idesOfMonth(i));
-        return (l1 - (long)k) + (long)(!Julian.isLeapYear(l) || i != 3 || j != 1 || k > 16 || k < 6 ? 1 : 0)
-            + (long)(flag ? 1 : 0);
+        return (l1 - (long) k) + (long) (!Julian.isLeapYear(l) || i != 3 || j != 1 || k > 16 || k < 6 ? 1 : 0) + (long) (flag ? 1 : 0);
     }
 
     public long toFixed()
@@ -62,9 +61,9 @@ public class Roman extends LunarDate
     public void fromFixed(long l)
     {
         Julian julian = new Julian(l);
-        int i = ((SolarDate)(julian)).month;
-        int j = ((SolarDate)(julian)).day;
-        long l1 = ((SolarDate)(julian)).year;
+        int i = ((SolarDate) (julian)).month;
+        int j = ((SolarDate) (julian)).day;
+        long l1 = ((SolarDate) (julian)).year;
         int k = ProtoDate.adjustedMod(i + 1, 12);
         long l2 = k != 1 ? l1 : l1 + 1L;
         long l3 = toFixed(l2, k, 1, 1, false);
@@ -100,7 +99,7 @@ public class Roman extends LunarDate
             year = l2;
             month = k;
             event = 1;
-            count = (int)((l3 - l) + 1L);
+            count = (int) ((l3 - l) + 1L);
             leapDay = false;
             return;
         }
@@ -150,10 +149,9 @@ public class Roman extends LunarDate
 
     public String format()
     {
-        return MessageFormat.format("{0}{1} {2}, {3,number,#} {4}", new Object[]{
-            leapDay ? "ante diem bis vi " : ProtoDate.nameFromNumber(count, countNames),
-            ProtoDate.nameFromNumber(event, eventNames), ProtoDate.nameFromMonth(month, Gregorian.monthNames),
-            new Long(year >= 0L ? year : -year), year >= 0L ? "C.E." : "B.C.E."});
+        return MessageFormat.format("{0}{1} {2}, {3,number,#} {4}", new Object[]
+        { leapDay ? "ante diem bis vi " : ProtoDate.nameFromNumber(count, countNames), ProtoDate.nameFromNumber(event, eventNames), ProtoDate.nameFromMonth(month, Gregorian.monthNames),
+                new Long(year >= 0L ? year : -year), year >= 0L ? "C.E." : "B.C.E." });
     }
 
     public boolean equals(Object obj)
@@ -162,25 +160,24 @@ public class Roman extends LunarDate
             return true;
         if (!(obj instanceof Roman))
             return false;
-        Roman roman = (Roman)obj;
-        return roman.year == year && roman.month == month && roman.event == event && roman.count == count
-            && roman.leapDay == leapDay;
+        Roman roman = (Roman) obj;
+        return roman.year == year && roman.month == month && roman.event == event && roman.count == count && roman.leapDay == leapDay;
     }
 
-    public long                year;
-    public int                 month;
-    public int                 event;
-    public int                 count;
-    public boolean             leapDay;
-    public static final int    KALENDS          = 1;
-    public static final int    NONES            = 2;
-    public static final int    IDES             = 3;
-    public static final String countNames[]     = {"", "pridie ", "ante diem iii ", "ante diem iv ", "ante diem v ",
-        "ante diem vi ", "ante diem vii ", "ante diem viii ", "ante diem ix ", "ante diem x ", "ante diem xi ",
-        "ante diem xii ", "ante diem xiii ", "ante diem xiv ", "ante diem xv ", "ante diem xvi ", "ante diem xvii ",
-        "ante diem xviii ", "ante diem xix "    };
-    public static final String eventNames[]     = {"Kalends", "Nones", "Ides"};
+    public long year;
+    public int month;
+    public int event;
+    public int count;
+    public boolean leapDay;
+    public static final int KALENDS = 1;
+    public static final int NONES = 2;
+    public static final int IDES = 3;
+    public static final String countNames[] =
+    { "", "pridie ", "ante diem iii ", "ante diem iv ", "ante diem v ", "ante diem vi ", "ante diem vii ", "ante diem viii ", "ante diem ix ", "ante diem x ", "ante diem xi ", "ante diem xii ",
+            "ante diem xiii ", "ante diem xiv ", "ante diem xv ", "ante diem xvi ", "ante diem xvii ", "ante diem xviii ", "ante diem xix " };
+    public static final String eventNames[] =
+    { "Kalends", "Nones", "Ides" };
 
     /** serialVersionUID */
-    private static final long  serialVersionUID = -8671979783772688456L;
+    private static final long serialVersionUID = -8671979783772688456L;
 }

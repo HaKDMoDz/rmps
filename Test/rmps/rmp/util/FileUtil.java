@@ -7,7 +7,6 @@
  */
 package rmp.util;
 
-import com.amonsoft.util.LogUtil;
 import java.awt.Component;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -27,11 +26,14 @@ import java.util.Properties;
 
 import javax.swing.JFileChooser;
 
+import rmp.Rmps;
 import rmp.bean.FilesFilter;
+
+import com.amonsoft.util.LogUtil;
+
 import cons.CfgCons;
 import cons.EnvCons;
 import cons.ui.LangRes;
-import rmp.Rmps;
 
 /**
  * <ul>
@@ -42,6 +44,7 @@ import rmp.Rmps;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public final class FileUtil
@@ -91,8 +94,10 @@ public final class FileUtil
     /**
      * @param srcFile
      * @param dstFile
-     * @param overWrite 若目标文件存在的情况下，是滞覆盖目标文件：true覆盖目标文件；false不覆盖
-     * @param delSrc 文件移动后，是否要删除源文件：true删除；false不删除
+     * @param overWrite
+     *            若目标文件存在的情况下，是滞覆盖目标文件：true覆盖目标文件；false不覆盖
+     * @param delSrc
+     *            文件移动后，是否要删除源文件：true删除；false不删除
      * @return
      * @throws IOException
      */
@@ -228,7 +233,8 @@ public final class FileUtil
     /**
      * 由指定的文件路径创建缓冲字符数据输入流，并以数据文件默认的编码方案对数据流进行编码
      * 
-     * @param filePath 要创建字符数据输入流的文件路径
+     * @param filePath
+     *            要创建字符数据输入流的文件路径
      * @return 缓冲字符数据输入流
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException
@@ -241,7 +247,8 @@ public final class FileUtil
     /**
      * 由指定的文件对象创建缓冲字符数据输入流，并以数据文件默认的编码方案对数据流进行编码
      * 
-     * @param filePath 要创建字符数据输入流的文件对象
+     * @param filePath
+     *            要创建字符数据输入流的文件对象
      * @return 缓冲字符数据输入流
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException
@@ -261,8 +268,10 @@ public final class FileUtil
     /**
      * 由指定的文件路径创建缓冲字符数据输入流，并以指定的编码方案对数据流进行编码
      * 
-     * @param filePath 要创建字符数据输入流的文件路径
-     * @param charsetName 字符编码集
+     * @param filePath
+     *            要创建字符数据输入流的文件路径
+     * @param charsetName
+     *            字符编码集
      * @return 缓冲字符数据输入流
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException
@@ -275,8 +284,10 @@ public final class FileUtil
     /**
      * 由指定的文件对象创建缓冲字符数据输入流，并以指定的编码方案对数据流进行编码
      * 
-     * @param filePath 要创建数据输入流的来源文件
-     * @param charsetName 字符编码集
+     * @param filePath
+     *            要创建数据输入流的来源文件
+     * @param charsetName
+     *            字符编码集
      * @return 缓冲字符数据输入流
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException
@@ -296,7 +307,8 @@ public final class FileUtil
     /**
      * 由指定的文件路径创建缓冲字符数据输出流，并以系统默认的编码方案对数据流进行编码
      * 
-     * @param filePath 要创建缓冲字符输出流的文件路径
+     * @param filePath
+     *            要创建缓冲字符输出流的文件路径
      * @return 缓冲字符输出流
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException
@@ -309,7 +321,8 @@ public final class FileUtil
     /**
      * 由指定的文件对象创建缓冲字符数据输出流，并以系统默认的编码方案对数据流进行编码
      * 
-     * @param filePath 要创建缓冲字符输出流的文件对象
+     * @param filePath
+     *            要创建缓冲字符输出流的文件对象
      * @return 缓冲字符输出流
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException
@@ -325,8 +338,10 @@ public final class FileUtil
     /**
      * 由指定的文件路径创建缓冲字符数据输出流，并以指定的编码方案对数据流进行编码
      * 
-     * @param filePath 要创建缓冲字符输出流的文件路径
-     * @param charsetName 字符编码集
+     * @param filePath
+     *            要创建缓冲字符输出流的文件路径
+     * @param charsetName
+     *            字符编码集
      * @return 缓冲字符输出流
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException
@@ -339,8 +354,10 @@ public final class FileUtil
     /**
      * 由指定的文件对象创建缓冲字符数据输出流，并以指定的编码方案对数据流进行编码
      * 
-     * @param filePath 要创建缓冲字符输出流的文件对象
-     * @param charsetName 字符编码集
+     * @param filePath
+     *            要创建缓冲字符输出流的文件对象
+     * @param charsetName
+     *            字符编码集
      * @return 缓冲字符输出流
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException

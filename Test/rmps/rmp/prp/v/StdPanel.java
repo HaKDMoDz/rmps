@@ -9,8 +9,9 @@ package rmp.prp.v;
 
 import javax.swing.BoxLayout;
 
-import com.amonsoft.rmps.prp.IPrpPlus;
 import rmp.prp.b.StdPlus;
+
+import com.amonsoft.rmps.prp.IPrpPlus;
 
 /**
  * <ul>
@@ -20,6 +21,7 @@ import rmp.prp.b.StdPlus;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class StdPanel extends javax.swing.JPanel

@@ -14,6 +14,7 @@ package rmp.irp.v.fetion;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 class IDataType
