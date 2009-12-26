@@ -16,7 +16,8 @@ package com.amonsoft.rmps.irp;
  * <br />
  * TODO:
  * </ul>
- * @author yihaodian
+ * 
+ * @author Amon
  */
 public interface IIrpPlus
 {

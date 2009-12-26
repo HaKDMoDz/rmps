@@ -16,6 +16,7 @@ package com.amonsoft.skin;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public interface ISkin

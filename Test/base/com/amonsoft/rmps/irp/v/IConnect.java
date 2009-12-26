@@ -15,48 +15,56 @@ package com.amonsoft.rmps.irp.v;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public interface IConnect
 {
     /**
      * 加载用户配置信息
+     * 
      * @return
      */
     boolean load();
 
     /**
      * 获取登录用户
+     * 
      * @return
      */
     String getUser();
 
     /**
      * 获取登录口令
+     * 
      * @return
      */
     String getPwds();
 
     /**
      * 获取用户邮件
+     * 
      * @return
      */
     String getMail();
 
     /**
      * 获取服务名称
+     * 
      * @return
      */
     String getHost();
 
     /**
      * 获取服务路径
+     * 
      * @return
      */
     String getServer();
 
     /**
      * 获取服务端口
+     * 
      * @return
      */
     int getPort();

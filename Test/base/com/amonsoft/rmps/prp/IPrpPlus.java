@@ -25,24 +25,28 @@ package com.amonsoft.rmps.prp;
  * </pre>
  * 
  * </ul>
+ * 
  * @author Amon
  */
 public interface IPrpPlus
 {
     /**
      * 界面布局初始化
+     * 
      * @return
      */
     boolean wInitView();
 
     /**
      * 界面语言初始化
+     * 
      * @return
      */
     boolean wInitLang();
 
     /**
      * 界面数据初始化
+     * 
      * @return
      */
     boolean wInitData();
@@ -55,25 +59,27 @@ public interface IPrpPlus
 
     /**
      * 当前系统的代码编码名称
-     *
+     * 
      * @return 当前系统的代码编码名称
      */
     String wGetName();
 
     /**
      * 当前系统的显示名称信息
-     *
+     * 
      * @return 当前系统的名称信息
      */
     String wGetTitle();
 
     /**
      * 当前系统的Logo图标
-     *
-     * @param type 图标文件类型
+     * 
+     * @param type
+     *            图标文件类型
      * @return
      */
     java.awt.image.BufferedImage wGetIconImage(int type);
+
     int ICON_LOGO0016 = 0;
     int ICON_LOGO0032 = 1;
     int ICON_LOGO0048 = 2;
@@ -83,14 +89,14 @@ public interface IPrpPlus
 
     /**
      * 当前系统的简短描述信息
-     *
+     * 
      * @return
      */
     String wGetDescription();
 
     /**
      * 当前系统的版本信息
-     *
+     * 
      * @return 当前系统的版本信息
      */
     String wGetVersion();
@@ -133,9 +139,11 @@ public interface IPrpPlus
     /**
      * 显示软件指定的模式状态，如查寻、新增、更新、删除或者迷你、普通、高级等模式，以供有选择的响应外部调用。
      * 
-     * @param modelIdx 要显示的模式状态标记ID，{@link cons.SysCons}
+     * @param modelIdx
+     *            要显示的模式状态标记ID，{@link cons.SysCons}
      */
     javax.swing.JPanel wShowView(int modelIdx);
+
     /** 内嵌面板 */
     int VIEW_TAIL = 0;
     /** 迷你面板 */

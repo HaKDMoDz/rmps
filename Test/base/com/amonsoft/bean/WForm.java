@@ -7,9 +7,10 @@
  */
 package com.amonsoft.bean;
 
+import java.awt.event.WindowEvent;
+
 import com.amonsoft.cons.ConsSys;
 import com.amonsoft.skin.ISkin;
-import java.awt.event.WindowEvent;
 
 /**
  * <ul>
@@ -19,7 +20,8 @@ import java.awt.event.WindowEvent;
  * <li>使用说明：</li>
  * <br />
  * </ul>
- * @author yihaodian
+ * 
+ * @author Amon
  */
 public class WForm extends javax.swing.JApplet
 {
@@ -92,7 +94,7 @@ public class WForm extends javax.swing.JApplet
     /**
      * 设置最大化按钮是否显示<br />
      * 默认不显示
-     *
+     * 
      * @param b
      */
     public void setMaxButtonVisible(boolean b)
@@ -103,7 +105,7 @@ public class WForm extends javax.swing.JApplet
     /**
      * 设置菜单按钮是否显示<br />
      * 默认不显示
-     *
+     * 
      * @param b
      */
     public void setMenuButtonVisible(boolean b)
@@ -114,7 +116,7 @@ public class WForm extends javax.swing.JApplet
     /**
      * 设置最小化按钮是否显示<br />
      * 默认显示
-     *
+     * 
      * @param b
      */
     public void setMinButtonVisible(boolean b)
@@ -304,6 +306,7 @@ public class WForm extends javax.swing.JApplet
 
     /**
      * 根据启动参数获取运行模式
+     * 
      * @param args
      * @return
      */
@@ -334,7 +337,7 @@ public class WForm extends javax.swing.JApplet
 
         /*
          * (non-Javadoc)
-         *
+         * 
          * @see rmp.face.WRmps#wInit()
          */
         public boolean wInit()
@@ -398,12 +401,12 @@ public class WForm extends javax.swing.JApplet
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt)
                 {
-//                if (form == null)
-//                {
-//                    form = new FMenu(ff);
-//                    form.wInit();
-//                }
-//                fm.show(lb_MenuLabl, 0, lb_MenuLabl.getSize().height);
+                    // if (form == null)
+                    // {
+                    // form = new FMenu(ff);
+                    // form.wInit();
+                    // }
+                    // fm.show(lb_MenuLabl, 0, lb_MenuLabl.getSize().height);
                 }
 
                 @Override
@@ -493,7 +496,7 @@ public class WForm extends javax.swing.JApplet
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt)
                 {
-//                ff.wExit();
+                    // ff.wExit();
                 }
 
                 @Override
@@ -548,32 +551,33 @@ public class WForm extends javax.swing.JApplet
         private void initLang()
         {
             // 系统图标
-            //lb_Icon.setIcon(new javax.swing.ImageIcon(BeanUtil.getLogoImage()));
+            // lb_Icon.setIcon(new
+            // javax.swing.ImageIcon(BeanUtil.getLogoImage()));
 
             // 菜单按钮
-            //lb_Menu.setIcon(new ImageIcon(""));
+            // lb_Menu.setIcon(new ImageIcon(""));
             lb_Menu.setText("+");
             lb_Menu.setToolTipText("快捷菜单");
 
             // 最小化按钮
-            //lb_Exit.setIcon(new ImageIcon(""));
+            // lb_Exit.setIcon(new ImageIcon(""));
             lb_Exit.setText("_");
             lb_Exit.setToolTipText("隐藏窗口");
 
             // 最大化按钮
-            //lb_Full.setIcon(new ImageIcon(""));
+            // lb_Full.setIcon(new ImageIcon(""));
             lb_Full.setText("□");
             lb_Full.setToolTipText("还原窗口");
 
             // 退出按钮
-            //lb_Exit.setIcon(new ImageIcon(""));
+            // lb_Exit.setIcon(new ImageIcon(""));
             lb_Exit.setText("×");
             lb_Exit.setToolTipText("关闭窗口");
         }
 
         /**
          * 添加用户级联菜单
-         *
+         * 
          * @param menu
          */
         public void addMenu(javax.swing.JMenu menu)
@@ -583,7 +587,7 @@ public class WForm extends javax.swing.JApplet
 
         /**
          * 添加用户菜单项
-         *
+         * 
          * @param item
          */
         public void addMenuItem(javax.swing.JMenuItem item)
@@ -594,7 +598,7 @@ public class WForm extends javax.swing.JApplet
         /**
          * 设置退出按钮是否显示<br />
          * 默认显示
-         *
+         * 
          * @param b
          */
         public void setExitButtonVisible(boolean b)
@@ -605,7 +609,7 @@ public class WForm extends javax.swing.JApplet
         /**
          * 设置最大化按钮是否显示<br />
          * 默认不显示
-         *
+         * 
          * @param b
          */
         public void setMaxButtonVisible(boolean b)
@@ -616,7 +620,7 @@ public class WForm extends javax.swing.JApplet
         /**
          * 设置菜单按钮是否显示<br />
          * 默认不显示
-         *
+         * 
          * @param b
          */
         public void setMenuButtonVisible(boolean b)
@@ -627,7 +631,7 @@ public class WForm extends javax.swing.JApplet
         /**
          * 设置最小化按钮是否显示<br />
          * 默认显示
-         *
+         * 
          * @param b
          */
         public void setMinButtonVisible(boolean b)
@@ -651,6 +655,7 @@ public class WForm extends javax.swing.JApplet
             lb_Text.setText(title);
             lb_Text.setToolTipText(title);
         }
+
         /** 窗口初始位置 */
         private java.awt.Point p;
         /** 鼠标点击位置 */

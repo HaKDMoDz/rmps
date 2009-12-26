@@ -24,6 +24,7 @@ import java.util.Date;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public final class LogUtil
@@ -145,7 +146,8 @@ public final class LogUtil
      * 以指定进制输出字符串数组
      * 
      * @param b
-     * @param radio 进制信息
+     * @param radio
+     *            进制信息
      */
     public static final void log(byte[] b, int radio)
     {
@@ -157,7 +159,8 @@ public final class LogUtil
      * 
      * @param b
      * @param radio
-     * @param length 每行输出元素个数
+     * @param length
+     *            每行输出元素个数
      */
     public static final void log(byte[] b, int radio, int length)
     {
@@ -165,10 +168,14 @@ public final class LogUtil
     }
 
     /**
-     * @param b 等输出字节数组
-     * @param radio 输出字节进制
-     * @param length 每行输出元素个数
-     * @param lpad 是否需要左填充
+     * @param b
+     *            等输出字节数组
+     * @param radio
+     *            输出字节进制
+     * @param length
+     *            每行输出元素个数
+     * @param lpad
+     *            是否需要左填充
      */
     public static final void log(byte[] b, int radio, int length, boolean lpad)
     {
@@ -176,13 +183,20 @@ public final class LogUtil
     }
 
     /**
-     * @param a 待输出字节数组
-     * @param r 输出字节进制
-     * @param l 是否需要左填充
-     * @param f 左填充后显示长度
-     * @param p 左填充字符信息
-     * @param s 元素输出分隔符
-     * @param n 每行输出元素个数
+     * @param a
+     *            待输出字节数组
+     * @param r
+     *            输出字节进制
+     * @param l
+     *            是否需要左填充
+     * @param f
+     *            左填充后显示长度
+     * @param p
+     *            左填充字符信息
+     * @param s
+     *            元素输出分隔符
+     * @param n
+     *            每行输出元素个数
      */
     public static final void log(byte[] a, int r, boolean l, int f, char p, String s, int n)
     {
@@ -240,12 +254,18 @@ public final class LogUtil
     }
 
     /**
-     * @param a 待输出字节数组
-     * @param l 是否需要左填充
-     * @param f 左填充后显示长度
-     * @param p 左填充字符信息
-     * @param s 元素输出分隔符
-     * @param n 每行输出元素个数
+     * @param a
+     *            待输出字节数组
+     * @param l
+     *            是否需要左填充
+     * @param f
+     *            左填充后显示长度
+     * @param p
+     *            左填充字符信息
+     * @param s
+     *            元素输出分隔符
+     * @param n
+     *            每行输出元素个数
      */
     public static final void log(String[] a, boolean l, int f, char p, String s, int n)
     {
@@ -294,6 +314,7 @@ public final class LogUtil
             log(o.toString());
         }
     }
+
     /** 日期格式化对象 */
     private static DateFormat dateFormat = DateFormat.getDateTimeInstance();
     /** 日志输出流 */

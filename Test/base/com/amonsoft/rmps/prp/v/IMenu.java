@@ -16,6 +16,7 @@ package com.amonsoft.rmps.prp.v;
  * <br />
  * TODO: 使用说明
  * </ul>
+ * 
  * @author Amon
  */
 public interface IMenu

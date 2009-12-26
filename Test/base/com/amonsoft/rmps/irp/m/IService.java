@@ -7,8 +7,8 @@
  */
 package com.amonsoft.rmps.irp.m;
 
-import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.b.IMessage;
+import com.amonsoft.rmps.irp.b.ISession;
 
 /**
  * <ul>
@@ -18,6 +18,7 @@ import com.amonsoft.rmps.irp.b.IMessage;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public interface IService

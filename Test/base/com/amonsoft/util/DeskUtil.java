@@ -21,13 +21,14 @@ import java.net.URI;
  * <br />
  * TODO:
  * </ul>
- * @author yihaodian
+ * 
+ * @author Amon
  */
 public class DeskUtil
 {
     /**
      * 网络浏览
-     *
+     * 
      * @param url
      * @return
      */
@@ -53,7 +54,7 @@ public class DeskUtil
 
     /**
      * 打开指定的程序
-     *
+     * 
      * @param fileName
      */
     public static boolean open(String fileName) throws Exception
@@ -85,7 +86,7 @@ public class DeskUtil
 
     /**
      * 发送电子邮件
-     *
+     * 
      * @param mailto
      * @return
      */

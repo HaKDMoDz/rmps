@@ -21,7 +21,8 @@ package com.amonsoft.cons;
  * <br />
  * TODO:
  * </ul>
- * @author yihaodian
+ * 
+ * @author Amon
  */
 public interface ConsSys
 {

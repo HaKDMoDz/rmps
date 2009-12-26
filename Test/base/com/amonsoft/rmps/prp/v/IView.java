@@ -15,7 +15,8 @@ package com.amonsoft.rmps.prp.v;
  * <li>使用说明：</li>
  * <br />
  * </ul>
- * @author yihaodian
+ * 
+ * @author Amon
  */
 public interface IView
 {

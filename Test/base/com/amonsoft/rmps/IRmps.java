@@ -15,6 +15,7 @@ package com.amonsoft.rmps;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public interface IRmps
@@ -34,7 +35,7 @@ public interface IRmps
 
     /**
      * 返回RMPS应用的唯一代码，其中包括当前系统所属的应用、模块，及当前系统的系统ID，其值参见SysCons中定义。
-     *
+     * 
      * @return 当前系统的唯一标记ID，{@link cons.SysCons}
      */
     int wCode();

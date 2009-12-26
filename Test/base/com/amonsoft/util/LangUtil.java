@@ -20,17 +20,19 @@ import java.util.Properties;
  * <li>使用说明：</li>
  * <br />
  * </ul>
- * @author yihaodian
+ * 
+ * @author Amon
  */
 public final class LangUtil
 {
-    /**当前使用的语言资源*/
+    /** 当前使用的语言资源 */
     private Properties currLang;
-    /**系统存在的语言资源*/
+    /** 系统存在的语言资源 */
     private static HashMap<String, LangUtil> langList = new HashMap<String, LangUtil>();
 
     /**
      * 私有构造函数
+     * 
      * @param prop
      */
     private LangUtil(Properties prop)
@@ -40,6 +42,7 @@ public final class LangUtil
 
     /**
      * 获取一个语言资源实例
+     * 
      * @param code
      * @return
      */
@@ -61,8 +64,9 @@ public final class LangUtil
 
     /**
      * 语言资源查询
-     *
-     * @param mesgId 语言资源索引
+     * 
+     * @param mesgId
+     *            语言资源索引
      * @return 语言资源内容
      */
     public String getMesg(String msgRes, String msgDef)
@@ -72,6 +76,7 @@ public final class LangUtil
 
     /**
      * 设置给定按钮的语言信息
+     * 
      * @param c
      * @param wText
      * @param isHash

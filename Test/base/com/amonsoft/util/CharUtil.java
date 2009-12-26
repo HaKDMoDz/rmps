@@ -16,15 +16,13 @@ import java.util.Arrays;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public class CharUtil
 {
     private static final char[] HEX_DIGITS =
-    {
-        '0', '1', '2', '3', '4', '5',
-        '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
-    };
+    { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
     public static String toHex(byte b)
     {
@@ -48,7 +46,7 @@ public class CharUtil
 
     /**
      * 左填充指定字符，使原字符串达到指定的长度
-     *
+     * 
      * @param s
      * @param length
      * @param c
@@ -68,7 +66,7 @@ public class CharUtil
 
     /**
      * 去除左空白
-     *
+     * 
      * @param s
      * @return
      */
@@ -89,7 +87,7 @@ public class CharUtil
 
     /**
      * 右填充指定字符，使原字符串达到指定的长度
-     *
+     * 
      * @param s
      * @param length
      * @param c
@@ -109,7 +107,7 @@ public class CharUtil
 
     /**
      * 去除右空白
-     *
+     * 
      * @param s
      * @return
      */

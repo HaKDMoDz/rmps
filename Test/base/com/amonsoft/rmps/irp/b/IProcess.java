@@ -15,6 +15,7 @@ package com.amonsoft.rmps.irp.b;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public interface IProcess
@@ -23,29 +24,35 @@ public interface IProcess
 
     /**
      * 获取当前功能标记
+     * 
      * @return
      */
     String getFunc();
 
     boolean setFunc(String func);
+
     String ITEM_DEFAULT = "";
 
     /**
      * 获取当前选项标记
+     * 
      * @return
      */
     String getItem();
 
     boolean setItem(String item);
+
     int STEP_DEFAULT = 0;
 
     /**
      * 获取当前操作标记
+     * 
      * @return
      */
     int getStep();
 
     void setStep(int step);
+
     /**
      * 默认
      */
@@ -73,6 +80,7 @@ public interface IProcess
 
     /**
      * 最大操作步数
+     * 
      * @return
      */
     int getMost();

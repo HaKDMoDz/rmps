@@ -17,7 +17,8 @@ import com.amonsoft.rmps.IRmps;
  * <li>使用说明：</li>
  * <br />
  * </ul>
- * @author yihaodian
+ * 
+ * @author Amon
  */
 public interface IErps extends IRmps
 {

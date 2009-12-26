@@ -15,30 +15,35 @@ package com.amonsoft.rmps.irp.b;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public interface IMimeMessage extends IMessage
 {
     /**
      * 获取消息内容是否为粗体
+     * 
      * @return
      */
     boolean isBold();
 
     /**
      * 设置消息内容是否为粗体
+     * 
      * @param bold
      */
     void setBold(boolean bold);
 
     /**
      * 获取消息内容是否为斜体
+     * 
      * @return
      */
     boolean isItalic();
 
     /**
      * 设置消息内容是否为斜体
+     * 
      * @param italic
      */
     void setItalic(boolean italic);

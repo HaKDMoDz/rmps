@@ -15,6 +15,7 @@ package com.amonsoft.rmps.irp.b;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public interface IContact
@@ -29,6 +30,7 @@ public interface IContact
 
     /**
      * 获取用户所属的组
+     * 
      * @return
      */
     ICatalog[] getGroups();

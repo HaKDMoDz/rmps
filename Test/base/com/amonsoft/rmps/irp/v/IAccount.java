@@ -17,6 +17,7 @@ import com.amonsoft.rmps.irp.b.IContact;
  * <li>使用说明：</li>
  * <br />
  * </ul>
+ * 
  * @author Amon
  */
 public interface IAccount
