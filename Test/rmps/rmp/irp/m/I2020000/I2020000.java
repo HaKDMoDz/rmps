@@ -21,7 +21,6 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import rmp.irp.c.Control;
-import rmp.util.CheckUtil;
 import rmp.util.EnvUtil;
 import rmp.util.StringUtil;
 
@@ -29,6 +28,7 @@ import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.EnvCons;
@@ -133,7 +133,7 @@ public class I2020000 implements IService
             IProcess proc = session.getProcess();
 
             // 地址校验
-            if (!CheckUtil.isValidate(key))
+            if (!CharUtil.isValidate(key))
             {
                 session.send("请输入您要查询的国家、地区或城市的名称或拼音！");
                 return;

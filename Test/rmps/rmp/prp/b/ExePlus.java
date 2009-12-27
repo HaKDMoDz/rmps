@@ -14,9 +14,9 @@ import java.util.logging.Logger;
 
 import rmp.prp.m.ExeItem;
 import rmp.util.BeanUtil;
-import rmp.util.CheckUtil;
 import rmp.util.EnvUtil;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.DeskUtil;
 import com.amonsoft.util.LogUtil;
 
@@ -122,7 +122,7 @@ public class ExePlus extends javax.swing.JPanel
     private void lb_ItemLabl_Handler(java.awt.event.MouseEvent evt)
     {
         LogUtil.log("独立程序启动：" + item.getSoftPath());
-        if (CheckUtil.isValidate(item.getSoftArgs()))
+        if (CharUtil.isValidate(item.getSoftArgs()))
         {
             LogUtil.log("    启动参数：" + item.getSoftArgs());
             if (item.getSoftPath().toLowerCase().endsWith(".jar"))

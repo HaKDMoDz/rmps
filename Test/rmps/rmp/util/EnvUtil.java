@@ -25,6 +25,7 @@ import javax.swing.Timer;
 
 import rmp.Rmps;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.EnvCons;
@@ -104,7 +105,7 @@ public final class EnvUtil
 
     public static String getLangPath(String path, String code, String base)
     {
-        if (!CheckUtil.isValidate(base))
+        if (!CharUtil.isValidate(base))
         {
             base = EnvCons.FOLDER0_LANG;
         }

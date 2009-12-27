@@ -22,10 +22,10 @@ import rmp.bean.K1SV2S;
 import rmp.prp.aide.P3060000.P3060000;
 import rmp.prp.aide.P3060000.t.Util;
 import rmp.util.BeanUtil;
-import rmp.util.CheckUtil;
 import rmp.util.MesgUtil;
 
 import com.amonsoft.rmps.prp.v.IView;
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.prp.aide.P3060000.ConstUI;
@@ -955,7 +955,7 @@ public class MainPanel extends javax.swing.JPanel implements IView
     private void bt_ButtonS6_Handler(java.awt.event.ActionEvent evt)
     {
         String exps = ta_UserForm.getText();
-        if (!CheckUtil.isValidate(exps))
+        if (!CharUtil.isValidate(exps))
         {
             MesgUtil.showMessageDialog(this, P3060000.getMesg(LangRes.P3067A01));
             ta_UserForm.requestFocus();

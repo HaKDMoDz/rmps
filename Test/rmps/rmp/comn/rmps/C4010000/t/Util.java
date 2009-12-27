@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.util.Properties;
 
 import rmp.Rmps;
-import rmp.util.CheckUtil;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.CfgCons;
@@ -55,7 +55,7 @@ public final class Util
 
         int i = (int) (Math.random() * adInfoKeys.length);
         String t = adInfoProp.getProperty(adInfoKeys[i].toString());
-        if (!CheckUtil.isValidate(t))
+        if (!CharUtil.isValidate(t))
         {
             t = "为了您和他人，请支持公益广告！";
         }

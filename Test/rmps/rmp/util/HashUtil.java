@@ -19,6 +19,7 @@ import javax.crypto.spec.IvParameterSpec;
 
 import rmp.bean.CipherKey;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.SysCons;
@@ -71,7 +72,7 @@ public final class HashUtil
     public static byte[] digest(String text, String hash)
     {
         // 参数为不空检测
-        if (CheckUtil.isValidate(text) && CheckUtil.isValidate(hash))
+        if (CharUtil.isValidate(text) && CharUtil.isValidate(hash))
         {
             try
             {
@@ -302,7 +303,7 @@ public final class HashUtil
             case 1:
             {
                 // 默认标记
-                if (!CheckUtil.isValidate(lastID))
+                if (!CharUtil.isValidate(lastID))
                 {
                     id = "a0000000";
                 }
@@ -317,7 +318,7 @@ public final class HashUtil
             default:
             {
                 // 默认标记
-                if (!CheckUtil.isValidate(lastID))
+                if (!CharUtil.isValidate(lastID))
                 {
                     id = "10000000";
                     break;

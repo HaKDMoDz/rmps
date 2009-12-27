@@ -7,8 +7,8 @@
  */
 package rmp.util;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.Socket;
@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.axis.utils.ByteArrayOutputStream;
 import org.apache.http.ConnectionReuseStrategy;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -62,33 +63,30 @@ public class HttpUtil
     public static String request(String url, String set) throws Exception
     {
         HttpURLConnection conn = (HttpURLConnection) (new URL(url).openConnection());
-        // conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
+        conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
         conn.setUseCaches(true);
         conn.setDoInput(true);
         conn.setDoOutput(true);
         conn.setRequestMethod("POST");
 
         // 读取返回结果
-        DataInputStream dis = new DataInputStream(conn.getInputStream());
-        int c = 1024;
-        int i = 0;
-        int j = dis.available();
-        System.out.println(j);
-        byte b[] = new byte[j];
-        while (j > 0)
+        BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] b = new byte[1024];
+        int i = bis.read(b);
+        while (i >= 0)
         {
-            dis.read(b, i, j > c ? c : j);
-            j -= c;
-            i += c;
+            bos.write(b, 0, i);
+            i = bis.read(b);
         }
-        return new String(b, set);
+        return new String(bos.toByteArray(), set);
     }
 
-    public void get()
+    public static void get(String url, String path, int port, String charset)
     {
         HttpParams params = new BasicHttpParams();
         HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
-        HttpProtocolParams.setContentCharset(params, "UTF-8");
+        HttpProtocolParams.setContentCharset(params, charset);
         HttpProtocolParams.setUserAgent(params, "HttpComponents/1.1");
         HttpProtocolParams.setUseExpectContinue(params, true);
 
@@ -104,7 +102,7 @@ public class HttpUtil
         HttpRequestExecutor httpexecutor = new HttpRequestExecutor();
 
         HttpContext context = new BasicHttpContext(null);
-        HttpHost host = new HttpHost("localhost", 8080);
+        HttpHost host = new HttpHost(url, port);
 
         DefaultHttpClientConnection conn = new DefaultHttpClientConnection();
         ConnectionReuseStrategy connStrategy = new DefaultConnectionReuseStrategy();
@@ -114,41 +112,34 @@ public class HttpUtil
 
         try
         {
-
-            String[] targets =
-            { "/", "/servlets-examples/servlet/RequestInfoExample", "/somewhere%20in%20pampa" };
-
-            for (int i = 0; i < targets.length; i++)
+            if (!conn.isOpen())
             {
-                if (!conn.isOpen())
-                {
-                    Socket socket = new Socket(host.getHostName(), host.getPort());
-                    conn.bind(socket, params);
-                }
-                BasicHttpRequest request = new BasicHttpRequest("GET", targets[i]);
-                System.out.println(">> Request URI: " + request.getRequestLine().getUri());
+                Socket socket = new Socket(host.getHostName(), host.getPort());
+                conn.bind(socket, params);
+            }
+            BasicHttpRequest request = new BasicHttpRequest("GET", path);
 
-                request.setParams(params);
-                httpexecutor.preProcess(request, httpproc, context);
-                HttpResponse response = httpexecutor.execute(request, conn, context);
-                response.setParams(params);
-                httpexecutor.postProcess(response, httpproc, context);
+            request.setParams(params);
+            httpexecutor.preProcess(request, httpproc, context);
+            HttpResponse response = httpexecutor.execute(request, conn, context);
+            response.setParams(params);
+            httpexecutor.postProcess(response, httpproc, context);
 
-                System.out.println("<< Response: " + response.getStatusLine());
-                System.out.println(EntityUtils.toString(response.getEntity()));
-                System.out.println("==============");
-                if (!connStrategy.keepAlive(response, context))
-                {
-                    conn.close();
-                }
-                else
-                {
-                    System.out.println("Connection kept alive...");
-                }
+            System.out.println("<< Response: " + response.getStatusLine());
+            System.out.println(EntityUtils.toString(response.getEntity()));
+            System.out.println("==============");
+            if (!connStrategy.keepAlive(response, context))
+            {
+                conn.close();
+            }
+            else
+            {
+                System.out.println("Connection kept alive...");
             }
         }
         catch (Exception exp)
         {
+            System.out.println(exp.getMessage());
         }
         finally
         {

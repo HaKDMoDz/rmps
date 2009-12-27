@@ -16,9 +16,9 @@ import java.util.Stack;
 
 import rmp.bean.K1SV2S;
 import rmp.prp.aide.P3060000.b.WOperator;
-import rmp.util.CheckUtil;
 import rmp.util.StringUtil;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.prp.aide.P3060000.ConstUI;
@@ -67,7 +67,7 @@ public final class Util
      */
     public static int calculate(String exps) throws Exception
     {
-        if (!CheckUtil.isValidate(exps))
+        if (!CharUtil.isValidate(exps))
         {
             return 0;
         }

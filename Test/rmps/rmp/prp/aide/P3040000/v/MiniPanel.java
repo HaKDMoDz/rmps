@@ -22,8 +22,10 @@ import rmp.prp.aide.P3040000.lunar.Chinese;
 import rmp.prp.aide.P3040000.solar.Gregorian;
 import rmp.prp.aide.P3040000.t.Util;
 import rmp.util.BeanUtil;
-import rmp.util.CheckUtil;
 import rmp.util.DateUtil;
+
+import com.amonsoft.util.CharUtil;
+
 import cons.prp.aide.P3040000.LangRes;
 
 /**
@@ -350,7 +352,7 @@ public class MiniPanel extends javax.swing.JPanel implements WBean
     private void dl_DaysLablMouseEntered(java.awt.event.MouseEvent evt)
     {
         MiniLabel label = (MiniLabel) evt.getSource();
-        if (!CheckUtil.isValidate(label.getText()))
+        if (!CharUtil.isValidate(label.getText()))
         {
             return;
         }

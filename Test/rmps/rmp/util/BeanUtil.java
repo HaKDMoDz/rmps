@@ -19,6 +19,7 @@ import javax.swing.JTable;
 import javax.swing.JViewport;
 import javax.swing.text.JTextComponent;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 /**
@@ -108,7 +109,7 @@ public class BeanUtil
         }
 
         // 快捷字符替换
-        if (CheckUtil.isValidate(wText))
+        if (CharUtil.isValidate(wText))
         {
             int si = wText.indexOf('&');
             if (si >= 0)
@@ -154,7 +155,7 @@ public class BeanUtil
         }
 
         // 快捷字符替换
-        if (CheckUtil.isValidate(wText))
+        if (CharUtil.isValidate(wText))
         {
             int si = wText.indexOf('&');
             if (si >= 0)

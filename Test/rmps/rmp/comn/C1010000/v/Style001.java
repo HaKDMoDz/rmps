@@ -23,9 +23,9 @@ import javax.swing.JTextArea;
 import rmp.face.WBean;
 import rmp.ui.icon.WIconLabel;
 import rmp.ui.link.WLinkLabel;
-import rmp.util.CheckUtil;
 import rmp.util.FileUtil;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.DeskUtil;
 import com.amonsoft.util.LogUtil;
 
@@ -81,7 +81,7 @@ public class Style001 extends javax.swing.JPanel implements WBean
             {
                 // 读取一行信息,并显示
                 text = br.readLine();
-                if (!CheckUtil.isValidate(text))
+                if (!CharUtil.isValidate(text))
                 {
                     break;
                 }

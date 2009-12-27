@@ -32,12 +32,12 @@ import rmp.comn.amon.code.A1010000.b.WComment;
 import rmp.comn.amon.code.A1010000.m.Util;
 import rmp.face.WBean;
 import rmp.prp.aide.P3050000.m.SecureKey;
-import rmp.util.CheckUtil;
 import rmp.util.FileUtil;
 import rmp.util.HashUtil;
 import rmp.util.MesgUtil;
 import rmp.util.StringUtil;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.SysCons;
@@ -764,7 +764,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
     private void delComment()
     {
         // 来源文件路径为空检测
-        if (!CheckUtil.isValidate(tf_CSrcFile.getText()))
+        if (!CharUtil.isValidate(tf_CSrcFile.getText()))
         {
             MesgUtil.showMessageDialog(this, LangRes.MESG_0001);
             this.bt_CSrcFile.requestFocus();
@@ -781,7 +781,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         }
 
         // 目标文件路径为空检测
-        if (!CheckUtil.isValidate(tf_CDstFile.getText()))
+        if (!CharUtil.isValidate(tf_CDstFile.getText()))
         {
             MesgUtil.showMessageDialog(this, LangRes.MESG_0003);
             this.bt_CDstFile.requestFocus();
@@ -1172,7 +1172,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         }
 
         // 分块大小检测
-        if (!CheckUtil.isValidate(tf_CharSize.getText()))
+        if (!CharUtil.isValidate(tf_CharSize.getText()))
         {
             tf_CharSize.setText("8192");
         }
@@ -1193,7 +1193,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
             tf_UserPwds.setText(createPwds());
         }
         // 用户输入口令校验
-        else if (!CheckUtil.isValidate(tf_UserPwds.getText()))
+        else if (!CharUtil.isValidate(tf_UserPwds.getText()))
         {
             MesgUtil.showMessageDialog(this, "请输入您要进行密码算法的口令，或者选择使用随机口令!");
             this.tf_UserPwds.requestFocus();
@@ -1201,7 +1201,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         }
 
         // 文件路径检测
-        if (!CheckUtil.isValidate(tf_SSrcFile.getText()))
+        if (!CharUtil.isValidate(tf_SSrcFile.getText()))
         {
             MesgUtil.showMessageDialog(this, "请选择您进行密码转换处理的文件！");
             this.bt_SSrcFile.requestFocus();
@@ -1500,7 +1500,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
         {
             // 字符空间
             String text = bufReader.readLine();
-            if (!CheckUtil.isValidate(text))
+            if (!CharUtil.isValidate(text))
             {
                 return;
             }

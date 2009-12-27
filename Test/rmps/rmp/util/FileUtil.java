@@ -29,6 +29,7 @@ import javax.swing.JFileChooser;
 import rmp.Rmps;
 import rmp.bean.FilesFilter;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.CfgCons;
@@ -215,7 +216,7 @@ public final class FileUtil
 
         // 文件名不合法
         String t = file.getName().trim();
-        if (!CheckUtil.isValidate(t))
+        if (!CharUtil.isValidate(t))
         {
             return null;
         }

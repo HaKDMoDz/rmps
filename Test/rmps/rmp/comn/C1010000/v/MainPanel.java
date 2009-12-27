@@ -18,8 +18,8 @@ import rmp.comn.C1010000.C1010000;
 import rmp.face.WBean;
 import rmp.ui.link.WLinkLabel;
 import rmp.util.BeanUtil;
-import rmp.util.CheckUtil;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.comn.info.C1010000.ConstUI;
@@ -120,7 +120,7 @@ public class MainPanel extends javax.swing.JPanel implements WBean
             tip = propMap.get(ConstUI.INFO_LOGO00_TIPS);
             lt_SoftLogo.setToolTipText(tip);
             txt = propMap.get(ConstUI.INFO_LOGO00_PATH);
-            if (CheckUtil.isValidate(txt))
+            if (CharUtil.isValidate(txt))
             {
                 LogUtil.log("图标资源：" + txt);
                 File file;

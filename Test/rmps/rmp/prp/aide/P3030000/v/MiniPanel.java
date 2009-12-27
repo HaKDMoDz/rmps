@@ -9,8 +9,9 @@ package rmp.prp.aide.P3030000.v;
 
 import rmp.face.WBean;
 import rmp.prp.aide.P3030000.P3030000;
-import rmp.util.CheckUtil;
 import rmp.util.MesgUtil;
+
+import com.amonsoft.util.CharUtil;
 
 /**
  * <ul>
@@ -158,7 +159,7 @@ public class MiniPanel extends javax.swing.JPanel implements WBean
     private void queryData()
     {
         String text = this.tf_CharCode.getText();
-        if (!CheckUtil.isValidate(text))
+        if (!CharUtil.isValidate(text))
         {
             MesgUtil.showMessageDialog(this, "查询内容不能为空，请重新输入！");
             this.tf_CharCode.requestFocus();

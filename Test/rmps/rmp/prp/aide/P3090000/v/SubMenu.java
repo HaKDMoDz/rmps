@@ -12,9 +12,9 @@ import javax.swing.ButtonGroup;
 import rmp.Rmps;
 import rmp.prp.aide.P3090000.P3090000;
 import rmp.prp.aide.P3090000.t.Util;
-import rmp.util.CheckUtil;
 import rmp.util.MesgUtil;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.prp.aide.P3090000.ConstUI;
@@ -210,7 +210,7 @@ public final class SubMenu
     {
         // 提示用户输入城市信息
         String city = MesgUtil.showInputDialog(null, "请输入您要切换的城市的名称：");
-        if (!CheckUtil.isValidate(city))
+        if (!CharUtil.isValidate(city))
         {
             return;
         }

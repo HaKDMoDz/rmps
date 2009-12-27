@@ -18,9 +18,11 @@ import rmp.comn.amon.data.A2010000.b.WDataBase;
 import rmp.comn.amon.data.A2010000.m.WTableModel;
 import rmp.comn.amon.data.A2010000.t.Util;
 import rmp.face.WBean;
-import rmp.util.CheckUtil;
 import rmp.util.MesgUtil;
 import rmp.util.StringUtil;
+
+import com.amonsoft.util.CharUtil;
+
 import cons.comn.amon.data.A2010000.ConstUI;
 
 /**
@@ -242,7 +244,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         }
 
         String url = tf_DBPath.getText();
-        if (!CheckUtil.isValidate(url))
+        if (!CharUtil.isValidate(url))
         {
             MesgUtil.showMessageDialog(this, "请选择或输入数据库服务器地址或路径！");
             tf_DBPath.requestFocus();
@@ -309,7 +311,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         }
 
         String url = tf_DBPath.getText();
-        if (!CheckUtil.isValidate(url))
+        if (!CharUtil.isValidate(url))
         {
             MesgUtil.showMessageDialog(this, "请选择或输入数据库服务器地址或路径！");
             tf_DBPath.requestFocus();
@@ -353,7 +355,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         }
 
         String url = tf_DBPath.getText();
-        if (!CheckUtil.isValidate(url))
+        if (!CharUtil.isValidate(url))
         {
             MesgUtil.showMessageDialog(this, "请选择或输入数据库服务器地址或路径！");
             tf_DBPath.requestFocus();
@@ -361,7 +363,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         }
 
         String sid = tf_DBTable.getText();
-        if (!CheckUtil.isValidate(sid))
+        if (!CharUtil.isValidate(sid))
         {
             MesgUtil.showMessageDialog(this, "请输入您要查看的数据表格名称ID！");
             tf_DBTable.requestFocus();

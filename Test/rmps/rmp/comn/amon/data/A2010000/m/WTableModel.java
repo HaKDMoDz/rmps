@@ -18,9 +18,9 @@ import javax.swing.table.DefaultTableModel;
 
 import rmp.comn.amon.data.A2010000.b.WDataBase;
 import rmp.comn.amon.data.A2010000.t.Util;
-import rmp.util.CheckUtil;
 import rmp.util.StringUtil;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.db.AmonCons;
@@ -155,7 +155,7 @@ public class WTableModel extends DefaultTableModel
     private void getRowList(Connection conn, String sid)
     {
         String sqlSelect = "SELECT * FROM " + AmonCons.A2010100;
-        if (CheckUtil.isValidate(sid))
+        if (CharUtil.isValidate(sid))
         {
             if (sid.length() > 6)
             {

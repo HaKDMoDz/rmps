@@ -16,9 +16,9 @@ import rmp.face.WBackCall;
 import rmp.prp.aide.P30C0000.P30C0000;
 import rmp.prp.aide.P30C0000.t.Util;
 import rmp.util.BeanUtil;
-import rmp.util.CheckUtil;
 import rmp.util.MesgUtil;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.prp.aide.P30C0000.LangRes;
@@ -179,7 +179,7 @@ public class TailPanel implements WBackCall
     private void queryData()
     {
         String text = this.tf_INetAddr.getText();
-        if (!CheckUtil.isValidate(text))
+        if (!CharUtil.isValidate(text))
         {
             MesgUtil.showMessageDialog(tp_TailPanel, "查询内容不能为空，请重新输入！");
             this.tf_INetAddr.requestFocus();

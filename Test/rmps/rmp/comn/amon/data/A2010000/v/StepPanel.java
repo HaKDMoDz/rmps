@@ -14,8 +14,8 @@ import javax.swing.DefaultComboBoxModel;
 import rmp.bean.K1SV1S;
 import rmp.comn.amon.data.A2010000.b.WDataBase;
 import rmp.comn.amon.data.A2010000.t.Util;
-import rmp.util.CheckUtil;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.db.AmonCons;
@@ -345,7 +345,7 @@ public class StepPanel extends javax.swing.JPanel
             kvItem = (K1SV1S) cb_DBKind.getSelectedItem();
             sqlUpdate.append(AmonCons.A2010103).append(" = '").append(kvItem.getK()).append("', ");
             String size = tf_DBSize.getText();
-            sqlUpdate.append(AmonCons.A2010104).append(" = '").append(CheckUtil.isValidate(size) ? size : "0").append("', ");
+            sqlUpdate.append(AmonCons.A2010104).append(" = '").append(CharUtil.isValidate(size) ? size : "0").append("', ");
             sqlUpdate.append(AmonCons.A2010105).append(" = '").append(ck_IsPK.isSelected() ? '1' : '0').append("', ");
             sqlUpdate.append(AmonCons.A2010106).append(" = '").append(ck_IsNL.isSelected() ? '1' : '0').append("', ");
             sqlUpdate.append(AmonCons.A2010107).append(" = '").append(ck_IsUK.isSelected() ? '1' : '0').append("', ");
@@ -369,7 +369,7 @@ public class StepPanel extends javax.swing.JPanel
             kvItem = (K1SV1S) cb_DBKind.getSelectedItem();
             sqlUpdate.append('\'').append(kvItem.getK()).append("', ");
             String size = tf_DBSize.getText();
-            sqlUpdate.append(CheckUtil.isValidate(size) ? size : "0").append(", ");
+            sqlUpdate.append(CharUtil.isValidate(size) ? size : "0").append(", ");
             sqlUpdate.append('\'').append(ck_IsPK.isSelected() ? '1' : '0').append("', ");
             sqlUpdate.append('\'').append(ck_IsNL.isSelected() ? '1' : '0').append("', ");
             sqlUpdate.append('\'').append(ck_IsUK.isSelected() ? '1' : '0').append("', ");

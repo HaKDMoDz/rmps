@@ -13,8 +13,10 @@ import java.util.List;
 
 import rmp.prp.aide.P3020000.b.FileBean;
 import rmp.prp.aide.P3020000.b.VarBean;
-import rmp.util.CheckUtil;
 import rmp.util.StringUtil;
+
+import com.amonsoft.util.CharUtil;
+
 import cons.prp.aide.P3020000.ConstUI;
 
 /**
@@ -99,7 +101,7 @@ public final class Util
     public static boolean reviseRule(String ruleText) throws Exception
     {
         // 表达式合法性检测
-        if (!CheckUtil.isValidate(ruleText))
+        if (!CharUtil.isValidate(ruleText))
         {
             throw new Exception("命名表达式不能为空！");
         }

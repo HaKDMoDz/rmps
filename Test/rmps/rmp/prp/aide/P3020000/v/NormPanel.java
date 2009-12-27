@@ -16,10 +16,10 @@ import rmp.prp.aide.P3020000.P3020000;
 import rmp.prp.aide.P3020000.m.DataModel;
 import rmp.prp.aide.P3020000.t.Util;
 import rmp.util.BeanUtil;
-import rmp.util.CheckUtil;
 import rmp.util.MesgUtil;
 import rmp.util.StringUtil;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.ui.LangRes;
@@ -329,13 +329,13 @@ public class NormPanel extends javax.swing.JPanel implements WBean
     private boolean checkInput()
     {
         // // 命名文件夹选择是否为空
-        // if (!CheckUtil.isValidate(tf_FilePath.getText()))
+        // if (!CharUtil.isValidate(tf_FilePath.getText()))
         // {
         // MesgUtil.showMessageDialog(this, "请选择重命名目标文件或文件夹！");
         // return false;
         // }
         // 命名规则输入是否为空
-        if (!CheckUtil.isValidate(tf_RuleFild.getText()))
+        if (!CharUtil.isValidate(tf_RuleFild.getText()))
         {
             MesgUtil.showMessageDialog(this, "重命名表达式不能为空！");
             this.tf_RuleFild.requestFocus();

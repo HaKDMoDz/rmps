@@ -17,8 +17,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JLabel;
 
-import rmp.util.CheckUtil;
-
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.DeskUtil;
 
 import cons.ui.ConstUI;
@@ -112,7 +111,7 @@ public class WLinkLabel extends JLabel
      */
     public boolean openLinkUrl(String linkUrl) throws Exception
     {
-        if (!CheckUtil.isValidate(linkUrl))
+        if (!CharUtil.isValidate(linkUrl))
         {
             return false;
         }

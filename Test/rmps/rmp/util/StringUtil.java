@@ -342,7 +342,7 @@ public final class StringUtil
      */
     public static final String format(String srcStr, String... args)
     {
-        if (!CheckUtil.isValidate(srcStr))
+        if (!CharUtil.isValidate(srcStr))
         {
             return "";
         }
@@ -362,7 +362,7 @@ public final class StringUtil
      */
     public static final String format(String srcStr, long... args)
     {
-        if (!CheckUtil.isValidate(srcStr))
+        if (!CharUtil.isValidate(srcStr))
         {
             return "";
         }
@@ -822,12 +822,12 @@ public final class StringUtil
      */
     public static String regVer(String ver, String delim, int width)
     {
-        if (!CheckUtil.isValidate(ver))
+        if (!CharUtil.isValidate(ver))
         {
             ver = "1.0.0.0";
         }
 
-        if (!CheckUtil.isValidate(delim))
+        if (!CharUtil.isValidate(delim))
         {
             delim = ".";
         }

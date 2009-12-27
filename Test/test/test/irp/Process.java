@@ -1,11 +1,4 @@
-/*
- * Project:        RMPS
- * Compiler:       JDK1.6.0
- * CopyRight:      &copy; 2007 Amon &reg; Winshine ( Amon@amonsoft.cn / http://amonsoft.cn ).
- * Description:
- *
- */
-package rmp.irp.comn;
+package test.irp;
 
 import java.util.regex.Pattern;
 
@@ -18,11 +11,14 @@ import com.amonsoft.util.CharUtil;
  * <ul>
  * <li>功能说明：</li>
  * <br />
+ * TODO:
  * <li>使用说明：</li>
  * <br />
+ * TODO:
  * </ul>
  * 
- * @author Amon
+ * @author amon
+ * 
  */
 public class Process implements IProcess
 {

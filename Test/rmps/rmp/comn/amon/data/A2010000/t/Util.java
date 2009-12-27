@@ -20,10 +20,10 @@ import java.util.ArrayList;
 
 import rmp.comn.amon.data.A2010000.b.KVItem;
 import rmp.comn.amon.data.A2010000.b.WDataBase;
-import rmp.util.CheckUtil;
 import rmp.util.FileUtil;
 import rmp.util.StringUtil;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.SysCons;
@@ -64,7 +64,7 @@ public class Util
     public static String exportDBM(Connection conn, String sid, String key)
     {
         String sqlSelect = "SELECT * FROM " + AmonCons.A2010100;
-        if (CheckUtil.isValidate(sid))
+        if (CharUtil.isValidate(sid))
         {
             if (sid.length() > 6)
             {
@@ -172,7 +172,7 @@ public class Util
             }
             // 默认数据
             tmp1 = rest.getString(AmonCons.A2010108);
-            if (CheckUtil.isValidate(tmp1))
+            if (CharUtil.isValidate(tmp1))
             {
                 sbTbl.append(" DEFAULT " + tmp1);
             }
@@ -332,7 +332,7 @@ public class Util
     public static Connection getConnection(WDataBase wdb)
     {
         // 连接信息对象为空判断
-        if (wdb == null || !CheckUtil.isValidate(wdb.getUrl()))
+        if (wdb == null || !CharUtil.isValidate(wdb.getUrl()))
         {
             return null;
         }
@@ -341,13 +341,13 @@ public class Util
         try
         {
             // 驱动加载
-            if (CheckUtil.isValidate(wdb.getDriver()))
+            if (CharUtil.isValidate(wdb.getDriver()))
             {
                 Class.forName(wdb.getDriver());
             }
 
             // 创建会话
-            if (CheckUtil.isValidate(wdb.getUser()))
+            if (CharUtil.isValidate(wdb.getUser()))
             {
                 conn = DriverManager.getConnection(wdb.getUrl(), wdb.getUser(), wdb.getPassword());
             }

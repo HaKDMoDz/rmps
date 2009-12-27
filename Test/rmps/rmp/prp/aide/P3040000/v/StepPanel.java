@@ -13,11 +13,11 @@ import rmp.io.db.DBAccess;
 import rmp.prp.aide.P3040000.P3040000;
 import rmp.prp.aide.P3040000.t.Util;
 import rmp.util.BeanUtil;
-import rmp.util.CheckUtil;
 import rmp.util.HashUtil;
 import rmp.util.MesgUtil;
 import rmp.util.StringUtil;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.SysCons;
@@ -1131,20 +1131,20 @@ public class StepPanel extends javax.swing.JPanel
     private boolean ivb()
     {
         String t = tf_NoteHead.getText();
-        if (!CheckUtil.isValidate(t))
+        if (!CharUtil.isValidate(t))
         {
             MesgUtil.showMessageDialog(this, P3040000.getMesg(LangRes.P3049A01));
             tf_NoteHead.requestFocus();
             return false;
         }
-        if (!CheckUtil.isValidate(t, PrpCons.P3040118_SIZE))
+        if (!CharUtil.isValidate(t, PrpCons.P3040118_SIZE))
         {
             MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A02), PrpCons.P3040118_SIZE));
             tf_NoteHead.requestFocus();
             return false;
         }
         t = ta_NoteInfo.getText();
-        if (!CheckUtil.isValidate(t, PrpCons.P3040119_SIZE))
+        if (!CharUtil.isValidate(t, PrpCons.P3040119_SIZE))
         {
             MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A02), PrpCons.P3040118_SIZE));
             ta_NoteInfo.requestFocus();
@@ -1163,7 +1163,7 @@ public class StepPanel extends javax.swing.JPanel
     {
         String t = tf_sy.getText();
         // 年份
-        if (!CheckUtil.isValidate(t, PrpCons.P3040106_SIZE))
+        if (!CharUtil.isValidate(t, PrpCons.P3040106_SIZE))
         {
             MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A04), PrpCons.P3040106_SIZE));
             tf_sm.requestFocus();
@@ -1180,7 +1180,7 @@ public class StepPanel extends javax.swing.JPanel
         if (tf_sm.isEnabled())
         {
             t = tf_sm.getText();
-            if (!CheckUtil.isValidate(t, PrpCons.P3040107_SIZE))
+            if (!CharUtil.isValidate(t, PrpCons.P3040107_SIZE))
             {
                 MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A06), PrpCons.P3040107_SIZE));
                 tf_sm.requestFocus();
@@ -1198,7 +1198,7 @@ public class StepPanel extends javax.swing.JPanel
         if (tf_sw.isEnabled())
         {
             t = tf_sw.getText();
-            if (!CheckUtil.isValidate(t, PrpCons.P3040109_SIZE))
+            if (!CharUtil.isValidate(t, PrpCons.P3040109_SIZE))
             {
                 MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0A), PrpCons.P3040109_SIZE));
                 tf_sw.requestFocus();
@@ -1216,7 +1216,7 @@ public class StepPanel extends javax.swing.JPanel
         if (tf_sd.isEnabled())
         {
             t = tf_sd.getText();
-            if (!CheckUtil.isValidate(t, PrpCons.P3040108_SIZE))
+            if (!CharUtil.isValidate(t, PrpCons.P3040108_SIZE))
             {
                 MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A08), PrpCons.P3040108_SIZE));
                 tf_sd.requestFocus();
@@ -1234,7 +1234,7 @@ public class StepPanel extends javax.swing.JPanel
         if (tf_sz.isEnabled())
         {
             t = tf_sz.getText();
-            if (!CheckUtil.isValidate(t, PrpCons.P304010A_SIZE))
+            if (!CharUtil.isValidate(t, PrpCons.P304010A_SIZE))
             {
                 MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0C), PrpCons.P304010A_SIZE));
                 tf_sz.requestFocus();
@@ -1259,12 +1259,12 @@ public class StepPanel extends javax.swing.JPanel
     private boolean ivd()
     {
         String t = tf_fy.getText();
-        if (!CheckUtil.isValidate(t))
+        if (!CharUtil.isValidate(t))
         {
             tf_fy.requestFocus();
             return false;
         }
-        if (!CheckUtil.isValidate(t, PrpCons.P304010C_SIZE))
+        if (!CharUtil.isValidate(t, PrpCons.P304010C_SIZE))
         {
             tf_fy.requestFocus();
             return false;
@@ -1287,7 +1287,7 @@ public class StepPanel extends javax.swing.JPanel
     private boolean ive()
     {
         String t = tf_fm.getText();
-        if (!CheckUtil.isValidate(t, PrpCons.P304010D_SIZE))
+        if (!CharUtil.isValidate(t, PrpCons.P304010D_SIZE))
         {
             tf_fm.requestFocus();
             return false;
@@ -1332,7 +1332,7 @@ public class StepPanel extends javax.swing.JPanel
     {
         String t = tf_ey.getText();
         // 年份
-        if (!CheckUtil.isValidate(t, PrpCons.P3040106_SIZE))
+        if (!CharUtil.isValidate(t, PrpCons.P3040106_SIZE))
         {
             MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A04), PrpCons.P3040106_SIZE));
             tf_em.requestFocus();
@@ -1349,7 +1349,7 @@ public class StepPanel extends javax.swing.JPanel
         if (tf_em.isEnabled())
         {
             t = tf_em.getText();
-            if (!CheckUtil.isValidate(t, PrpCons.P3040107_SIZE))
+            if (!CharUtil.isValidate(t, PrpCons.P3040107_SIZE))
             {
                 MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A06), PrpCons.P3040107_SIZE));
                 tf_em.requestFocus();
@@ -1367,7 +1367,7 @@ public class StepPanel extends javax.swing.JPanel
         if (tf_ew.isEnabled())
         {
             t = tf_ew.getText();
-            if (!CheckUtil.isValidate(t, PrpCons.P3040109_SIZE))
+            if (!CharUtil.isValidate(t, PrpCons.P3040109_SIZE))
             {
                 MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0A), PrpCons.P3040109_SIZE));
                 tf_ew.requestFocus();
@@ -1385,7 +1385,7 @@ public class StepPanel extends javax.swing.JPanel
         if (tf_ed.isEnabled())
         {
             t = tf_ed.getText();
-            if (!CheckUtil.isValidate(t, PrpCons.P3040108_SIZE))
+            if (!CharUtil.isValidate(t, PrpCons.P3040108_SIZE))
             {
                 MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A08), PrpCons.P3040108_SIZE));
                 tf_ed.requestFocus();
@@ -1403,7 +1403,7 @@ public class StepPanel extends javax.swing.JPanel
         if (tf_ez.isEnabled())
         {
             t = tf_ez.getText();
-            if (!CheckUtil.isValidate(t, PrpCons.P304010A_SIZE))
+            if (!CharUtil.isValidate(t, PrpCons.P304010A_SIZE))
             {
                 MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0C), PrpCons.P304010A_SIZE));
                 tf_ez.requestFocus();
@@ -1487,7 +1487,7 @@ public class StepPanel extends javax.swing.JPanel
             // 提示月份
             case ConstUI.STEP_FMONTH:
                 // 月份不为空，则进行日期输入界面
-                if (CheckUtil.isValidate(tf_fm.getText()))
+                if (CharUtil.isValidate(tf_fm.getText()))
                 {
                     tf_fw.setText("");
                     if (!ive())
@@ -1507,7 +1507,7 @@ public class StepPanel extends javax.swing.JPanel
                 break;
             case ConstUI.STEP_FDATE:
                 // 日期不为空，则进入结束日期输入界面
-                if (CheckUtil.isValidate(tf_fd.getText()))
+                if (CharUtil.isValidate(tf_fd.getText()))
                 {
                     tf_fz.setText("");
                     if (!ivf())
@@ -1596,11 +1596,11 @@ public class StepPanel extends javax.swing.JPanel
                 break;
             // 结束日期
             case ConstUI.STEP_EDATE:
-                if (CheckUtil.isValidate(tf_fw.getText()))
+                if (CharUtil.isValidate(tf_fw.getText()))
                 {
                     currStep -= 1;
                 }
-                else if (CheckUtil.isValidate(tf_fz.getText()))
+                else if (CharUtil.isValidate(tf_fz.getText()))
                 {
                     currStep = ConstUI.STEP_FWEEKOFMONTH;
                 }
@@ -1846,7 +1846,7 @@ public class StepPanel extends javax.swing.JPanel
     private void tf_smFocusLost(java.awt.event.FocusEvent evt)
     {
         String t = tf_sm.getText();
-        if (!CheckUtil.isValidate(t))
+        if (!CharUtil.isValidate(t))
         {
             tf_sw.setEnabled(true);
             return;
@@ -1864,7 +1864,7 @@ public class StepPanel extends javax.swing.JPanel
     private void tf_swFocusLost(java.awt.event.FocusEvent evt)
     {
         String t = tf_sw.getText();
-        if (!CheckUtil.isValidate(t))
+        if (!CharUtil.isValidate(t))
         {
             tf_sm.setEnabled(true);
             tf_sz.setEnabled(true);
@@ -1885,7 +1885,7 @@ public class StepPanel extends javax.swing.JPanel
     private void tf_szFocusLost(java.awt.event.FocusEvent evt)
     {
         String t = tf_sz.getText();
-        if (!CheckUtil.isValidate(t))
+        if (!CharUtil.isValidate(t))
         {
             tf_sw.setEnabled(true);
             return;
@@ -1900,7 +1900,7 @@ public class StepPanel extends javax.swing.JPanel
     private void tf_emFocusLost(java.awt.event.FocusEvent evt)
     {
         String t = tf_em.getText();
-        if (!CheckUtil.isValidate(t))
+        if (!CharUtil.isValidate(t))
         {
             tf_ew.setEnabled(true);
             return;
@@ -1915,7 +1915,7 @@ public class StepPanel extends javax.swing.JPanel
     private void tf_ewFocusLost(java.awt.event.FocusEvent evt)
     {
         String t = tf_ew.getText();
-        if (!CheckUtil.isValidate(t))
+        if (!CharUtil.isValidate(t))
         {
             tf_em.setEnabled(true);
             tf_ez.setEnabled(true);
@@ -1934,7 +1934,7 @@ public class StepPanel extends javax.swing.JPanel
     private void tf_ezFocusLost(java.awt.event.FocusEvent evt)
     {
         String t = tf_ez.getText();
-        if (!CheckUtil.isValidate(t))
+        if (!CharUtil.isValidate(t))
         {
             tf_ew.setEnabled(true);
             return;

@@ -9,6 +9,8 @@ package rmp.util;
 
 import java.util.Calendar;
 
+import com.amonsoft.util.CharUtil;
+
 /**
  * <ul>
  * <li>功能说明：</li>
@@ -43,7 +45,7 @@ public final class DateUtil
     public static Calendar stringToDate(String datetime, char datesp, char timesp, char dtsp) throws Exception
     {
         // 若指定日期时间字符串为空，则直接返回当前时间
-        if (!CheckUtil.isValidate(datetime))
+        if (!CharUtil.isValidate(datetime))
         {
             return Calendar.getInstance();
         }
@@ -62,7 +64,7 @@ public final class DateUtil
         Calendar cal = Calendar.getInstance();
 
         // 日期信息解析
-        if (CheckUtil.isValidate(date))
+        if (CharUtil.isValidate(date))
         {
             // 读取日期分隔符在日期字符串中位置信息
             int f = date.indexOf(datesp);
@@ -95,26 +97,26 @@ public final class DateUtil
             }
 
             // 年份信息读取
-            if (CheckUtil.isValidate(y))
+            if (CharUtil.isValidate(y))
             {
                 cal.set(Calendar.YEAR, Integer.parseInt(y));
             }
 
             // 月份信息读取
-            if (CheckUtil.isValidate(m))
+            if (CharUtil.isValidate(m))
             {
                 cal.set(Calendar.MONTH, Integer.parseInt(m) - 1);
             }
 
             // 日期信息读取
-            if (CheckUtil.isValidate(d))
+            if (CharUtil.isValidate(d))
             {
                 cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(d));
             }
         }
 
         // 时间信息解析
-        if (CheckUtil.isValidate(time))
+        if (CharUtil.isValidate(time))
         {
             // 读取日期分隔符在日期字符串中位置信息
             int f = time.indexOf(timesp);
@@ -147,19 +149,19 @@ public final class DateUtil
             }
 
             // 年份信息读取
-            if (CheckUtil.isValidate(h))
+            if (CharUtil.isValidate(h))
             {
                 cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(h));
             }
 
             // 月份信息读取
-            if (CheckUtil.isValidate(m))
+            if (CharUtil.isValidate(m))
             {
                 cal.set(Calendar.MINUTE, Integer.parseInt(m));
             }
 
             // 日期信息读取
-            if (CheckUtil.isValidate(s))
+            if (CharUtil.isValidate(s))
             {
                 cal.set(Calendar.SECOND, Integer.parseInt(s));
             }

@@ -29,12 +29,12 @@ import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.RosterPacket;
 
 import rmp.irp.c.Control;
-import rmp.util.CheckUtil;
 
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IStatus;
 import com.amonsoft.rmps.irp.v.IAccount;
 import com.amonsoft.rmps.irp.v.IConnect;
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 /**
@@ -291,7 +291,7 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
 
     private String getUser(String from)
     {
-        if (CheckUtil.isValidate(from))
+        if (CharUtil.isValidate(from))
         {
             int i = from.indexOf('/');
             if (i > 0)

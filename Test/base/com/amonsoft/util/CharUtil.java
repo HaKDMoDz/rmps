@@ -115,4 +115,60 @@ public class CharUtil
     {
         return (s != null) ? s.replaceAll("[\\s　]+$", "") : s;
     }
+
+    /**
+     * 数据有效性验证，数据为NULL或者有效长度小于的情况下返回false，其它情况下返回true
+     * 
+     * @param value
+     *            待进行有效性判断的字符串
+     * @return 字符串是否为空：true字符串为有效字符串；false字符串为无效字符串
+     */
+    public static boolean isValidate(String text)
+    {
+        return (text != null && text.trim().length() > 0);
+    }
+
+    /**
+     * 数组有效性验证，数组为NULL或者数组长度小于1的情况下返回false，其它情况下返回true
+     * 
+     * @param value
+     * @return
+     */
+    public static boolean isValidate(String[] value)
+    {
+        if (value == null || value.length < 1)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * 字符串是否在指定长度之间(含NULL)
+     * 
+     * @param text
+     * @param length
+     * @return true字符串长度在指定长度之间
+     */
+    public static boolean isValidate(String text, int length)
+    {
+        if (text == null)
+        {
+            return true;
+        }
+        return text.length() <= length;
+    }
+
+    /**
+     * @param text
+     * @param minLen
+     * @param maxLen
+     * @return
+     */
+    public static boolean isValidate(String text, int minLen, int maxLen)
+    {
+        int len = text.length();
+        return (minLen <= len) && (len <= maxLen);
+    }
 }

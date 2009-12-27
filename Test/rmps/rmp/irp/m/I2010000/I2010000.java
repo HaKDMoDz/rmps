@@ -9,11 +9,10 @@ package rmp.irp.m.I2010000;
 
 import java.util.HashMap;
 
-import rmp.util.CheckUtil;
-
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.irp.a.ConstUI;
@@ -79,7 +78,7 @@ public class I2010000 implements IService
         try
         {
             String command = message.getContent();
-            if (!CheckUtil.isValidate(command))
+            if (!CharUtil.isValidate(command))
             {
                 command = "上海";
             }

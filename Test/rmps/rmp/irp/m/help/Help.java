@@ -27,6 +27,10 @@ import com.amonsoft.rmps.irp.m.IService;
  */
 public class Help implements IService
 {
+    private static String init;
+    private static String menu;
+    private static String help;
+
     @Override
     public boolean wInit()
     {
@@ -54,30 +58,57 @@ public class Help implements IService
     @Override
     public void doInit(ISession session, IMessage message)
     {
-        session.send("kakaka");
+        if (init == null)
+        {
+            StringBuffer msg = new StringBuffer();
+            msg.append("您好，小木为您服务！");
+            init = msg.toString();
+        }
+        session.send(init);
         session.getProcess().setType(IProcess.TYPE_KEYCODE);
     }
 
     @Override
     public void doMenu(ISession session, IMessage message)
     {
-        StringBuffer msg = new StringBuffer();
-        String func = session.getProcess().getFunc();
-        IService serv;
-        for (int i = 0; i < 10; i += 1)
+        if (menu == null)
         {
-            serv = Control.getService(func + i);
-            if (serv != null)
+            StringBuffer msg = new StringBuffer();
+            String func = session.getProcess().getFunc();
+            IService serv;
+            for (int i = 0; i < 10; i += 1)
             {
-                msg.append(func + i).append('、').append(serv.getName()).append(session.newLine());
+                serv = Control.getService(func + i);
+                if (serv != null)
+                {
+                    msg.append(func + i).append('、').append(serv.getName()).append(session.newLine());
+                }
             }
+            msg.append("您可以通过数字键0-9选择您要进行的操作！");
+            menu = msg.toString();
         }
-        session.send(msg.toString());
+        session.send(menu);
     }
 
     @Override
     public void doHelp(ISession session, IMessage message)
     {
+        if (help == null)
+        {
+            StringBuffer msg = new StringBuffer();
+            msg.append("您只要通过数字键即可以获得小木为您提供的所有服务！").append(session.newLine());
+            msg.append("并且在使用的过程，为您提供以下的快捷键功能：").append(session.newLine());
+            msg.append("?或？ 获取当前服务的帮助信息；").append(session.newLine());
+            msg.append("*或＊ 显示当前服务的选项菜单；").append(session.newLine());
+            msg.append("/或／ 跳转到最顶层服务菜单；").append(session.newLine());
+            msg.append("..   跳转到上一层服务菜单；").append(session.newLine());
+            msg.append("数字  跳转到下一层服务菜单；").append(session.newLine());
+            //msg.append("#数字 选择当前服务的功能选项；").append(session.newLine());
+            msg.append("&    向作者汇报错误信息；").append(session.newLine());
+            msg.append("@    给作者留言；");
+            help = msg.toString();
+        }
+        session.send(help);
     }
 
     @Override

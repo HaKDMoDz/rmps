@@ -7,26 +7,24 @@
  */
 package rmp.irp.m.I7010000;
 
-import java.io.DataInputStream;
 import java.io.File;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import rmp.util.EnvUtil;
+import rmp.util.HttpUtil;
 import rmp.util.StringUtil;
 
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.EnvCons;
@@ -47,8 +45,6 @@ public class I7010000 implements IService
     private static String path;
     private static String args;
     private static Pattern v4Ptn;
-    private static Pattern paPtn;
-    private static Pattern piPtn;
 
     public I7010000()
     {
@@ -72,9 +68,6 @@ public class I7010000 implements IService
             }
 
             v4Ptn = Pattern.compile("(?<![\\d\\.])((25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)\\.){3}(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)(?![\\d\\.])");
-
-            paPtn = Pattern.compile("(\\(\")(.*?)(\"\\))");
-            piPtn = Pattern.compile("\"(.*?)\"");
 
             LogUtil.log(getName() + " 初始化成功！");
             return true;
@@ -129,7 +122,6 @@ public class I7010000 implements IService
         {
             String key = message.getContent();
             String tmp = key.trim();
-            StringBuffer msg = new StringBuffer();
 
             // 地址校验
             if (!v4Ptn.matcher(tmp).matches())
@@ -138,33 +130,47 @@ public class I7010000 implements IService
                 return;
             }
 
-            // 链接地址初始化
-            URL url = new URL(path + '?' + StringUtil.format(args, tmp));
-            URLConnection conn = url.openConnection();
-            conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
-            conn.setUseCaches(false);
-            conn.setDoInput(true);
-
-            // 读取返回结果
-            DataInputStream dis = new DataInputStream(conn.getInputStream());
-            byte d[] = new byte[dis.available()];
-            dis.read(d);
-            String data = new String(d, "gb2312");
-
-            Matcher matcher = paPtn.matcher(data);
-            if (matcher.find())
+            // 页面数据请求
+            String xml = HttpUtil.request(path + '?' + StringUtil.format(args, tmp), "gb2312");
+            if (!CharUtil.isValidate(xml))
             {
-                // 发送结果信息
-                showData(session, msg, matcher.group());
+                return;
+            }
 
-                // 设置下一次操作状态
-                IProcess process = session.getProcess();
-                process.setType(IProcess.TYPE_CONTENT);
+            StringBuffer msg = new StringBuffer();
+            msg.append("IP地址：").append(tmp).append(session.newLine());
+
+            int i = xml.indexOf("<ul onmouseup=\"javascript:callclip(cresult);\">");
+            int j = xml.indexOf("</ul>", i) + 5;
+            int m = xml.indexOf("<li style=\"margin-top:-16px;margin-left:-12px;\">");
+            int n = xml.indexOf("</div>", m);
+            Document doc = DocumentHelper.parseText(xml.substring(i, j).replace("&nbsp;", " "));
+            List<?> l = doc.selectNodes("/ul/li");
+            Element e;
+            if (l.size() > 2)
+            {
+                tmp = ((Element) l.get(2)).getText();
+                String[] arr = tmp.split(" ");
+                msg.append("国家地区：").append(arr[1]).append(session.newLine());
+                msg.append("运 营 商：").append(arr[2]).append(session.newLine());
             }
             else
             {
-                session.send("");
+                msg.append("国家地区：").append(session.newLine());
+                msg.append("运 营 商：").append(session.newLine());
             }
+
+            doc = DocumentHelper.parseText("<ul>" + xml.substring(m, n) + "</ul>");
+            for (Object o : doc.selectNodes("/ul/li"))
+            {
+                e = (Element) o;
+                msg.append(e.getText()).append(session.newLine());
+            }
+            session.send(msg.toString());
+
+            // 设置下一次操作状态
+            IProcess process = session.getProcess();
+            process.setType(IProcess.TYPE_CONTENT);
         }
         catch (Exception exp)
         {
@@ -182,29 +188,5 @@ public class I7010000 implements IService
     @Override
     public void doExit(ISession session, IMessage message)
     {
-    }
-
-    private void showData(ISession session, StringBuffer message, String data)
-    {
-        List<String> list = new ArrayList<String>();
-        Matcher matcher = piPtn.matcher(data);
-        while (matcher.find())
-        {
-            list.add(matcher.group().replaceAll("^\"|\"$", ""));
-        }
-
-        if (list.size() != 5)
-        {
-            message.append("数据查询错误，请重试！");
-        }
-        else
-        {
-            // 结果信息格式化
-            message.append("IP地址：").append(list.get(0)).append(session.newLine());
-            message.append("国　家：").append(list.get(1)).append(session.newLine());
-            message.append("地　区：").append(list.get(2)).append(session.newLine());
-            message.append("运营商：").append(list.get(4)).append(session.newLine());
-        }
-        session.send(message.toString());
     }
 }

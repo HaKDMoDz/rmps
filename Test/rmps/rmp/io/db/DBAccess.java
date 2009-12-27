@@ -15,8 +15,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import rmp.util.CheckUtil;
-
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 /**
@@ -143,7 +142,7 @@ public class DBAccess
      */
     public void addTable(String table)
     {
-        if (CheckUtil.isValidate(table))
+        if (CharUtil.isValidate(table))
         {
             tableList.append(", ").append(table);
         }
@@ -159,7 +158,7 @@ public class DBAccess
      */
     public void addTable(String table, String alias)
     {
-        if (CheckUtil.isValidate(table))
+        if (CharUtil.isValidate(table))
         {
             tableList.append(", ").append(table).append(" AS ").append(alias);
         }
@@ -214,7 +213,7 @@ public class DBAccess
      */
     public void addColumn(String colname)
     {
-        if (CheckUtil.isValidate(colname))
+        if (CharUtil.isValidate(colname))
         {
             columList.append(", ").append(colname);
         }
@@ -234,7 +233,7 @@ public class DBAccess
      */
     public void addColumn(String colname, String alias)
     {
-        if (CheckUtil.isValidate(colname))
+        if (CharUtil.isValidate(colname))
         {
             columList.append(", ").append(colname).append(" AS ").append(alias);
         }
@@ -322,7 +321,7 @@ public class DBAccess
      */
     public void addParam(String param, String sign, String value, boolean isLiteral)
     {
-        if (CheckUtil.isValidate(param))
+        if (CharUtil.isValidate(param))
         {
             paramList.add(param);
             signList.add(sign);
@@ -409,7 +408,7 @@ public class DBAccess
 
     public void addWhere(String key, String sign, long value)
     {
-        if (CheckUtil.isValidate(key))
+        if (CharUtil.isValidate(key))
         {
             whereList.append(" AND ").append(key).append(" ").append(sign).append(" ").append(value);
         }
@@ -433,7 +432,7 @@ public class DBAccess
      */
     public void addWhere(String key, String sign, String value, boolean isLiteral)
     {
-        if (CheckUtil.isValidate(key) && value != null && CheckUtil.isValidate(sign))
+        if (CharUtil.isValidate(key) && value != null && CharUtil.isValidate(sign))
         {
             whereList.append(" AND ").append(key);
             whereList.append(" ").append(sign);
@@ -474,7 +473,7 @@ public class DBAccess
      */
     public void addSort(String key, boolean asc)
     {
-        if (CheckUtil.isValidate(key))
+        if (CharUtil.isValidate(key))
         {
             orderList.append(", ").append(key);
             orderList.append(" ").append(asc ? "ASC" : "DESC");
@@ -608,7 +607,7 @@ public class DBAccess
     public int executeUpdate(String sql) throws SQLException
     {
         int recSize = -1;
-        if (stat != null && CheckUtil.isValidate(sql))
+        if (stat != null && CharUtil.isValidate(sql))
         {
             recSize = stat.executeUpdate(sql);
         }
@@ -634,7 +633,7 @@ public class DBAccess
     public int executeInsert(String sql) throws SQLException
     {
         int recSize = -1;
-        if (stat != null && CheckUtil.isValidate(sql))
+        if (stat != null && CharUtil.isValidate(sql))
         {
             recSize = stat.executeUpdate(sql);
         }
@@ -660,7 +659,7 @@ public class DBAccess
     public int executeDelete(String sql) throws SQLException
     {
         int recSize = -1;
-        if (stat != null && CheckUtil.isValidate(sql))
+        if (stat != null && CharUtil.isValidate(sql))
         {
             recSize = stat.executeUpdate(sql);
         }

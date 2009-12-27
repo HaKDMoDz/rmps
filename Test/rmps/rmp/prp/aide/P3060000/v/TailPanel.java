@@ -10,9 +10,9 @@ package rmp.prp.aide.P3060000.v;
 import rmp.prp.aide.P3060000.P3060000;
 import rmp.prp.aide.P3060000.t.Util;
 import rmp.util.BeanUtil;
-import rmp.util.CheckUtil;
 import rmp.util.MesgUtil;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.prp.aide.P3060000.LangRes;
@@ -127,7 +127,7 @@ public class TailPanel
     private void doCalculate()
     {
         String t = tf_UserExps.getText().trim();
-        if (!CheckUtil.isValidate(t))
+        if (!CharUtil.isValidate(t))
         {
             MesgUtil.showMessageDialog(pl_TailPanel, "请输入您要计算的表达式！");
             tf_UserExps.requestFocus();

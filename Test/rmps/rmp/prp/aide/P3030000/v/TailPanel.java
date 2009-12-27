@@ -12,10 +12,10 @@ import javax.swing.WindowConstants;
 import rmp.prp.aide.P3030000.P3030000;
 import rmp.prp.aide.P3030000.m.CodeData;
 import rmp.util.BeanUtil;
-import rmp.util.CheckUtil;
 import rmp.util.MesgUtil;
 
 import com.amonsoft.bean.WForm;
+import com.amonsoft.util.CharUtil;
 
 import cons.prp.aide.P3030000.ConstUI;
 import cons.prp.aide.P3030000.LangRes;
@@ -196,7 +196,7 @@ public class TailPanel
     private void queryData()
     {
         String text = this.tf_CharCode.getText();
-        if (!CheckUtil.isValidate(text))
+        if (!CharUtil.isValidate(text))
         {
             MesgUtil.showMessageDialog(tp_TailPanel, "查询内容不能为空，请重新输入！");
             this.tf_CharCode.requestFocus();

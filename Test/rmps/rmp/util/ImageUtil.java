@@ -195,7 +195,7 @@ public final class ImageUtil
     public static Image readExtImage(String filePath) throws IOException
     {
         // 参数为空判断
-        if (!CheckUtil.isValidate(filePath))
+        if (!CharUtil.isValidate(filePath))
         {
             return null;
         }

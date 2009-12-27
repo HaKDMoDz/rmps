@@ -20,10 +20,11 @@ import rmp.bean.K1IV2S;
 import rmp.comn.lang.C5010000.C5010000;
 import rmp.comn.lang.C5010000.t.Util;
 import rmp.face.WBean;
-import rmp.util.CheckUtil;
 import rmp.util.FileUtil;
 import rmp.util.MesgUtil;
 import rmp.util.StringUtil;
+
+import com.amonsoft.util.CharUtil;
 
 /**
  * <ul>
@@ -346,7 +347,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
     {
         // 用户输入数据完整性检测
         String hash = tf_LangHash.getText();
-        if (!CheckUtil.isValidate(hash))
+        if (!CharUtil.isValidate(hash))
         {
             MesgUtil.showMessageDialog(this, "请输入语言资源标记！");
             tf_LangHash.requestFocus();

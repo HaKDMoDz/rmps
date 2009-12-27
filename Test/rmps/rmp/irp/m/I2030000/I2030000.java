@@ -17,7 +17,6 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import rmp.util.CheckUtil;
 import rmp.util.EnvUtil;
 import rmp.util.HttpUtil;
 import rmp.util.StringUtil;
@@ -26,6 +25,7 @@ import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.EnvCons;
@@ -105,12 +105,14 @@ public class I2030000 implements IService
     @Override
     public void doMenu(ISession session, IMessage message)
     {
+        session.send("请输入一个15或18号的身份证号码，或输入服务代码切换其它服务！");
         session.getProcess().setType(IProcess.TYPE_KEYCODE);
     }
 
     @Override
     public void doHelp(ISession session, IMessage message)
     {
+        session.send("服务信息完善中……");
     }
 
     @Override
@@ -137,17 +139,17 @@ public class I2030000 implements IService
 
             // 处理结果并显示
             StringBuffer msg = new StringBuffer();
-            List l1 = doc.selectNodes("/table/tr");
+            List<?> l1 = doc.selectNodes("/table/tr");
             if (l1.size() == 4)
             {
                 String[] title =
                 { "发 证 地：", "出生日期：", "性　　别：", "18位号码：" };
                 for (int t = 0; t < title.length; t += 1)
                 {
-                    List l2 = ((Element) l1.get(t)).selectNodes("td");
+                    List<?> l2 = ((Element) l1.get(t)).selectNodes("td");
                     if (l2.size() == 2)
                     {
-                        msg.append(title[t]).append(((Element) l1.get(1)).getTextTrim()).append(session.newLine());
+                        msg.append(title[t]).append(((Element) l2.get(1)).getTextTrim()).append(session.newLine());
                     }
                 }
             }
@@ -172,7 +174,7 @@ public class I2030000 implements IService
         try
         {
             String command = message.getContent();
-            if (!CheckUtil.isValidate(command))
+            if (!CharUtil.isValidate(command))
             {
                 command = "上海";
             }

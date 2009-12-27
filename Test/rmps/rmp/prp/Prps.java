@@ -33,13 +33,13 @@ import rmp.prp.v.NetPanel;
 import rmp.prp.v.StdPanel;
 import rmp.prp.v.SubMenu;
 import rmp.util.BeanUtil;
-import rmp.util.CheckUtil;
 import rmp.util.MesgUtil;
 import rmp.util.RmpsUtil;
 
 import com.amonsoft.bean.WForm;
 import com.amonsoft.rmps.prp.IPrpPlus;
 import com.amonsoft.skin.ISkin;
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.DeskUtil;
 import com.amonsoft.util.LangUtil;
 import com.amonsoft.util.LogUtil;
@@ -455,7 +455,7 @@ public class Prps extends WForm
         // 语言资源菜单数量
         int num = 0;
         String t = langUtil.getMesg(ConstUI.LANGUAGE_NUM, "");
-        if (CheckUtil.isValidate(t))
+        if (CharUtil.isValidate(t))
         {
             try
             {
@@ -512,7 +512,7 @@ public class Prps extends WForm
         // 子菜单项目数量
         int num = 0;
         String t = langUtil.getMesg(ConstUI.SKIN_BASIC_NUM, "");
-        if (CheckUtil.isValidate(t))
+        if (CharUtil.isValidate(t))
         {
             try
             {
@@ -556,7 +556,7 @@ public class Prps extends WForm
 
         // 定制界面风格菜单初始化
         t = langUtil.getMesg(ConstUI.SKIN_SYNTH_NUM, "");
-        if (CheckUtil.isValidate(t))
+        if (CharUtil.isValidate(t))
         {
             try
             {

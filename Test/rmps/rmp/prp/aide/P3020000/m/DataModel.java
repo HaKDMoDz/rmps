@@ -14,7 +14,9 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import rmp.prp.aide.P3020000.b.FileBean;
-import rmp.util.CheckUtil;
+
+import com.amonsoft.util.CharUtil;
+
 import cons.prp.aide.P3020000.LangRes;
 
 /**
@@ -114,7 +116,7 @@ public class DataModel extends AbstractTableModel
         fileList.clear();
 
         // 路径合法性判断
-        if (!CheckUtil.isValidate(filePath))
+        if (!CharUtil.isValidate(filePath))
         {
             return false;
         }

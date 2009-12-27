@@ -7,18 +7,16 @@
  */
 package test;
 
-import java.io.File;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
 
-import org.jivesoftware.smack.Chat;
-import org.jivesoftware.smack.ConnectionConfiguration;
-import org.jivesoftware.smack.MessageListener;
-import org.jivesoftware.smack.XMPPConnection;
-import org.jivesoftware.smack.packet.Message;
-import org.jivesoftware.smackx.filetransfer.FileTransfer;
-import org.jivesoftware.smackx.filetransfer.FileTransferManager;
-import org.jivesoftware.smackx.filetransfer.OutgoingFileTransfer;
+import rmp.irp.m.I7010000.I7010000;
+import test.irp.Message;
+import test.irp.Session;
 
-import rmp.util.HttpUtil;
+import com.amonsoft.rmps.irp.m.IService;
 
 /**
  * <ul>
@@ -37,91 +35,32 @@ public class Test
      */
     public static void main(String[] args)
     {
+        String t = "<ul onmouseup=\"javascript:callclip(cresult);\"><li>・<font color=\"blue\">本站主数据</font>:www.123cha.com</li>"
+                + "<li>・<font color=\"blue\">本站辅数据</font>:还没人提交数据</li><li>・<font color=\"blue\">参考数据一</font>:上海市有线通</li>" + "<li>・<font color=\"blue\">参考数据二</font>:上海市有线通</li>"
+                + "<li>[查询提供] www.123cha.com</li>"
+
+                + "        </ul>";
         try
         {
-            System.out.println(HttpUtil.request("http://www.id5.cn/dtcheck/parse.jsp?idNum=412828198108013319", "gb2312"));
+            Document doc = DocumentHelper.parseText(t);
+            for (Object obj : doc.selectNodes("/ul/li"))
+            {
+                System.out.println(((Element) obj).getText());
+            }
         }
-        catch (Exception exp)
+        catch (DocumentException e)
         {
-            System.out.println(exp);
-        }
-    }
-
-    public void bb()
-    {
-        String user = "amon.rg";
-        String host = "meebo.org";
-        int port = 5222;
-        String username = "Amon.CT";
-        String password = "!~g_OQ5;";
-        ConnectionConfiguration config = new ConnectionConfiguration(host, port);
-        config.setCompressionEnabled(true);
-        config.setSASLAuthenticationEnabled(true);
-
-        XMPPConnection connection = new XMPPConnection(config);
-
-        try
-        {
-            connection.connect();
-
-            connection.login(username, password);
-
-            // sendFile(user, getFile(), connection);
-            sendTextMessage(user, connection);
-        }
-        catch (Exception e)
-        {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        finally
-        {
-            connection.disconnect();
-        }
-
     }
 
-    public static File getFile()
+    public static void test()
     {
-        File file = new File("D:/test.jpg");
-        return file;
-    }
-
-    // 发送文件
-    public static void sendFile(String user, File file, XMPPConnection connection) throws Exception
-    {
-        FileTransferManager manager = new FileTransferManager(connection);
-        OutgoingFileTransfer transfer = manager.createOutgoingFileTransfer(user);
-        long timeOut = 1000000;
-        long sleepMin = 3000;
-        long spTime = 0;
-        int rs = 0;
-
-        transfer.sendFile(file, "pls re file!");
-        rs = transfer.getStatus().compareTo(FileTransfer.Status.complete);
-        while (rs != 0)
-        {
-            rs = transfer.getStatus().compareTo(FileTransfer.Status.complete);
-            spTime = spTime + sleepMin;
-            if (spTime > timeOut)
-            {
-                return;
-            }
-            Thread.sleep(sleepMin);
-        }
-
-    }
-
-    // 发送文本
-    public static void sendTextMessage(String user, XMPPConnection connection) throws Exception
-    {
-        Chat chat = connection.getChatManager().createChat(user, new MessageListener()
-        {
-            @Override
-            public void processMessage(Chat chat, Message message)
-            {
-                System.out.println("Received message: " + message);
-            }
-        });
-        chat.sendMessage("Hi Test Send Message........!");
+        Session session = new Session();
+        Message message = new Message("118.132.166.12");
+        IService s = new I7010000();
+        s.doInit(session, message);
+        s.doDeal(session, message);
     }
 }
