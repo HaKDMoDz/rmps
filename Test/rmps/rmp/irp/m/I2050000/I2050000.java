@@ -123,7 +123,13 @@ public class I2050000 implements IService
     @Override
     public void doInit(ISession session, IMessage message)
     {
-        session.send("Welcome!");
+        StringBuffer msg = new StringBuffer();
+        msg.append("欢迎使用《度量转换》服务！").append(session.newLine());
+        msg.append("　　度量转换目前支持长度、面积、体积、重量、能量、压力、温度等单位的转换。").append(session.newLine());
+        msg.append("　　您可以通过如下的方式使用此服务：").append(session.newLine());
+        msg.append("　　1、直接输入数字及单位：如1米；").append(session.newLine());
+        msg.append("　　2、数字与待转换单位=?目标转换单位：如1米=?寸；").append(session.newLine());
+        session.send(msg.toString());
         session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
         session.getProcess().setStep(IProcess.STEP_DEFAULT);
     }
@@ -216,7 +222,14 @@ public class I2050000 implements IService
                 tUnit = k.get(tmp.toLowerCase());
                 if (!CharUtil.isValidate(tUnit))
                 {
-                    session.send("公式输入错误，正确的输入格式示例如下：\n1米=?寸");
+                    if (CharUtil.isValidate(tmp))
+                    {
+                        session.send(CharUtil.format("小木暂时还不知道{0}是什么度量单位，请确认您输入的是否正确？", tmp));
+                    }
+                    else
+                    {
+                        session.send("公式输入错误，正确的输入格式示例如下：\n1米=?寸");
+                    }
                     return;
                 }
 

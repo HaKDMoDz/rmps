@@ -192,14 +192,6 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
     public void processMessage(Chat chat, org.jivesoftware.smack.packet.Message message)
     {
         LogUtil.log("processMessage");
-        try
-        {
-            chat.sendMessage(message.getBody());
-        }
-        catch (XMPPException e)
-        {
-            LogUtil.exception(e);
-        }
     }
 
     @Override

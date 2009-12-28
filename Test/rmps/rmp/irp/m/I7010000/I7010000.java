@@ -87,19 +87,26 @@ public class I7010000 implements IService
     @Override
     public String getName()
     {
-        return "IP 查询";
+        return "ＩＰ查询";
     }
 
     @Override
     public String getDescription()
     {
-        return "IP 查询";
+        return "ＩＰ查询";
     }
 
     @Override
     public void doInit(ISession session, IMessage message)
     {
-        session.send("Welcome to IP:");
+        StringBuffer msg = new StringBuffer();
+        msg.append("欢迎使用《ＩＰ查询》服务！").append(session.newLine());
+        msg.append("　　ＩＰ查询目前支持国内及国外的IP地址查询，并且支持IPv4地IPv6地址的转换。").append(session.newLine());
+        msg.append("　　您可以通过如下的方式使用此服务：").append(session.newLine());
+        msg.append("　　1、直接输入您的查询的IPv4地址：如127.0.0.1；").append(session.newLine());
+        msg.append("　　2、输入您要查询的网站域名：如www.amonsoft.com；").append(session.newLine());
+
+        session.send(msg.toString());
         session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
         session.getProcess().setStep(IProcess.STEP_DEFAULT);
     }
@@ -130,7 +137,7 @@ public class I7010000 implements IService
             }
 
             // 页面数据请求
-            String xml = HttpUtil.request(path + '?' + CharUtil.format(args, tmp), "GET", "gb2312");
+            String xml = HttpUtil.request(path + '?' + CharUtil.format(args, tmp), "POST", "gb2312");
             if (!CharUtil.isValidate(xml))
             {
                 return;

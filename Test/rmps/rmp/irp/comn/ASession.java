@@ -80,7 +80,7 @@ public abstract class ASession implements ISession
             message.append(service.getName());
         }
         message.append("）：");
-        message.append(session.newLine()).append("------------------------------");
+        message.append(session.newLine()).append("---------------------------------");
         message.append(session.newLine()).append(session.newLine());
         return message;
     }
@@ -98,7 +98,7 @@ public abstract class ASession implements ISession
         {
             message.append(session.newLine());
         }
-        message.append(session.newLine()).append("------------------------------");
+        message.append(session.newLine()).append("---------------------------------");
         message.append(session.newLine()).append("© Amonsoft @ http://amonsoft.com/");
         return message;
     }

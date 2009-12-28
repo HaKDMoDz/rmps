@@ -103,7 +103,7 @@ public class Help implements IService
             msg.append("/或／ 跳转到最顶层服务菜单；").append(session.newLine());
             msg.append("..   跳转到上一层服务菜单；").append(session.newLine());
             msg.append("数字  跳转到下一层服务菜单；").append(session.newLine());
-            //msg.append("#数字 选择当前服务的功能选项；").append(session.newLine());
+            // msg.append("#数字 选择当前服务的功能选项；").append(session.newLine());
             msg.append("&    向作者汇报错误信息；").append(session.newLine());
             msg.append("@    给作者留言；");
             help = msg.toString();
@@ -135,8 +135,9 @@ public class Help implements IService
         // msg.append("7、科学教育").append(session.newLine());
         // msg.append("8、功能扩展").append(session.newLine());
         // msg.append("9、配置管理").append(session.newLine());
-        session.send(msg.toString());
 
+        Control.appendHelp(session, msg);
+        session.send(msg.toString());
         session.getProcess().setType(IProcess.TYPE_KEYCODE);
     }
 

@@ -401,7 +401,8 @@ public class Control implements IControl
 
     public static StringBuffer appendHelp(ISession session, StringBuffer message)
     {
-        return message.append("? 使用帮助；* 显示菜单；& 报告错误").append(session.newLine());
+        message.append("请输入对应的数字以选择您要使用的服务！").append(session.newLine());
+        return message.append("其它：?使用帮助；*显示菜单；&报告错误；").append(session.newLine());
     }
 
     /**
