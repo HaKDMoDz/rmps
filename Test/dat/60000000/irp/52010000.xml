@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<irps>
+	<I2010000>
+		<item id="配置">
+			<map key="北京" comment="beijing">
+				<map key="北京">beijing</map>
+			</map>
+			<map key="上海" comment="shanghai">
+				<map key="上海">shanghai</map>
+			</map>
+			<map key="天津" comment="tianjin">
+				<map key="天津">tianjin</map>
+			</map>
+			<map key="重庆" comment="chongqing">
+				<map key="重庆">chongqing</map>
+			</map>
+			<map key="黑龙江" comment="heilongjiang">
+				<map key="哈尔滨">haerbin</map>
+				<map key="齐齐哈尔">qiqihaer</map>
+				<map key="牡丹江">mudanjiang</map>
+				<map key="佳木斯">jiamusi</map>
+				<map key="绥化">suihua</map>
+				<map key="黑河">heihe</map>
+				<map key="大兴安岭">daxinganling</map>
+				<map key="伊春">yichun</map>
+				<map key="大庆">daqing</map>
+				<map key="七台河">qitaihe</map>
+				<map key="鸡西">jixi</map>
+				<map key="鹤岗">hegang</map>
+				<map key="双鸭山">shuangyashan</map>
+			</map>
+			<map key="吉林" comment="jilin">
+				<map key="长春">changchun</map>
+				<map key="吉林">jilin</map>
+				<map key="延吉">yanji</map>
+				<map key="四平">siping</map>
+				<map key="通化">tonghua</map>
+				<map key="白城">baicheng</map>
+				<map key="辽源">liaoyuan</map>
+				<map key="松原">songyuan</map>
+				<map key="白山">baishan</map>
+			</map>
+			<map key="辽宁" comment="liaoning">
+				<map key="沈阳">shenyang</map>
+				<map key="大连">dalian</map>
+				<map key="鞍山">anshan</map>
+				<map key="抚顺">fushun</map>
+				<map key="本溪">benxi</map>
+				<map key="丹东">dandong</map>
+				<map key="锦州">jinzhou</map>
+				<map key="营口">yingkou</map>
+				<map key="阜新">fuxin</map>
+				<map key="辽阳">liaoyang</map>
+				<map key="铁岭">tieling</map>
+				<map key="朝阳">chaoyang</map>
+				<map key="盘锦">panjin</map>
+				<map key="葫芦岛">huludao</map>
+			</map>
+			<map key="内蒙古" comment="neimenggu">
+				<map key="呼和浩特">huhehaote</map>
+				<map key="包头">baotou</map>
+				<map key="乌海">wuhai</map>
+				<map key="乌兰察布">wulanchabu</map>
+				<map key="通辽">tongliao</map>
+				<map key="赤峰">chifeng</map>
+				<map key="鄂尔多斯">eerduosi</map>
+				<map key="巴彦淖尔">bayannaoer</map>
+				<map key="锡林郭勒盟">xilinguolemeng</map>
+				<map key="呼伦贝尔">hulunbeier</map>
+				<map key="兴安盟">xinganmeng</map>
+				<map key="阿拉善盟">alashanmeng</map>
+			</map>
+			<map key="河北" comment="hebei">
+				<map key="石家庄">shijiazhuang</map>
+				<map key="保定">baoding</map>
+				<map key="张家口">zhangjiakou</map>
+				<map key="承德">chengde</map>
+				<map key="唐山">tangshan</map>
+				<map key="廊坊">langfang</map>
+				<map key="沧州">cangzhou</map>
+				<map key="衡水">hengshui</map>
+				<map key="邢台">xingtai</map>
+				<map key="邯郸">handan</map>
+				<map key="秦皇岛">qinhuangdao</map>
+			</map>
+			<map key="山西" comment="shanxi">
+				<map key="太原">taiyuan</map>
+				<map key="大同">datong</map>
+				<map key="阳泉">yangquan</map>
+				<map key="晋中">jinzhong</map>
+				<map key="长治">changzhi</map>
+				<map key="晋城">jincheng</map>
+				<map key="临汾">linfen</map>
+				<map key="运城">yuncheng</map>
+				<map key="朔州">shuozhou</map>
+				<map key="忻州">xinzhou</map>
+				<map key="吕梁">luliang</map>
+			</map>
+			<map key="陕西" comment="shanxi">
+				<map key="西安">xian</map>
+				<map key="咸阳">xianyang</map>
+				<map key="延安">yanan</map>
+				<map key="榆林">yulin</map>
+				<map key="渭南">weinan</map>
+				<map key="商洛">shangluo</map>
+				<map key="安康">ankang</map>
+				<map key="汉中">hanzhong</map>
+				<map key="宝鸡">baoji</map>
+				<map key="铜川">tongchuan</map>
+			</map>
+			<map key="山东" comment="shandong">
+				<map key="济南">jinan</map>
+				<map key="青岛">qingdao</map>
+				<map key="淄博">zibo</map>
+				<map key="德州">dezhou</map>
+				<map key="烟台">yantai</map>
+				<map key="潍坊">weifang</map>
+				<map key="济宁">jining</map>
+				<map key="泰安">taian</map>
+				<map key="临沂">linyi</map>
+				<map key="菏泽">heze</map>
+				<map key="滨州">binzhou</map>
+				<map key="东营">dongying</map>
+				<map key="威海">weihai</map>
+				<map key="枣庄">zaozhuang</map>
+				<map key="日照">rizhao</map>
+				<map key="莱芜">laiwu</map>
+				<map key="聊城">liaocheng</map>
+			</map>
+			<map key="新疆" comment="xinjiang">
+				<map key="乌鲁木齐">wulumuqi</map>
+				<map key="克拉玛依">kelamayi</map>
+				<map key="石河子">shihezi</map>
+				<map key="昌吉">changji</map>
+				<map key="吐鲁番">tulufan</map>
+				<map key="巴音郭楞">bayinguoleng</map>
+				<map key="阿拉尔">alaer</map>
+				<map key="阿克苏">akesu</map>
+				<map key="喀什">kashi</map>
+				<map key="伊犁">yili</map>
+				<map key="塔城">tacheng</map>
+				<map key="哈密">hami</map>
+				<map key="和田">hetian</map>
+				<map key="阿勒泰">aletai</map>
+				<map key="克州">kezhou</map>
+				<map key="博尔塔拉">boertala</map>
+			</map>
+			<map key="西藏" comment="xicang">
+				<map key="拉萨">lasa</map>
+				<map key="日喀则">rikaze</map>
+				<map key="山南">shannan</map>
+				<map key="林芝">linzhi</map>
+				<map key="昌都">changdu</map>
+				<map key="那曲">naqu</map>
+				<map key="阿里">ali</map>
+			</map>
+			<map key="青海" comment="qinghai">
+				<map key="西宁">xining</map>
+				<map key="海东">haidong</map>
+				<map key="黄南">huangnan</map>
+				<map key="海南">hainan</map>
+				<map key="果洛">guoluo</map>
+				<map key="玉树">yushu</map>
+				<map key="海西">haixi</map>
+				<map key="海北">haibei</map>
+			</map>
+			<map key="甘肃" comment="gansu">
+				<map key="兰州">lanzhou</map>
+				<map key="定西">dingxi</map>
+				<map key="平凉">pingliang</map>
+				<map key="庆阳">qingyang</map>
+				<map key="武威">wuwei</map>
+				<map key="金昌">jinchang</map>
+				<map key="张掖">zhangye</map>
+				<map key="酒泉">jiuquan</map>
+				<map key="天水">tianshui</map>
+				<map key="陇南">longnan</map>
+				<map key="临夏">linxia</map>
+				<map key="甘南">gannan</map>
+				<map key="白银">baiyin</map>
+			</map>
+			<map key="宁夏" comment="ningxia">
+				<map key="银川">yinchuan</map>
+				<map key="石嘴山">shizuishan</map>
+				<map key="吴忠">wuzhong</map>
+				<map key="固原">guyuan</map>
+				<map key="中卫">zhongwei</map>
+			</map>
+			<map key="河南" comment="henan">
+				<map key="郑州">zhengzhou</map>
+				<map key="安阳">anyang</map>
+				<map key="新乡">xinxiang</map>
+				<map key="许昌">xuchang</map>
+				<map key="平顶山">pingdingshan</map>
+				<map key="信阳">xinyang</map>
+				<map key="南阳">nanyang</map>
+				<map key="开封">kaifeng</map>
+				<map key="洛阳">luoyang</map>
+				<map key="商丘">shangqiu</map>
+				<map key="焦作">jiaozuo</map>
+				<map key="鹤壁">hebi</map>
+				<map key="濮阳">puyang</map>
+				<map key="周口">zhoukou</map>
+				<map key="漯河">luohe</map>
+				<map key="驻马店">zhumadian</map>
+				<map key="三门峡">sanmenxia</map>
+				<map key="济源">jiyuan</map>
+			</map>
+			<map key="江苏" comment="jiangsu">
+				<map key="南京">nanjing</map>
+				<map key="无锡">wuxi</map>
+				<map key="镇江">zhenjiang</map>
+				<map key="苏州">suzhou</map>
+				<map key="南通">nantong</map>
+				<map key="扬州">yangzhou</map>
+				<map key="盐城">yancheng</map>
+				<map key="徐州">xuzhou</map>
+				<map key="淮安">huaian</map>
+				<map key="连云港">lianyungang</map>
+				<map key="常州">changzhou</map>
+				<map key="泰州">taizhou</map>
+				<map key="宿迁">suqian</map>
+			</map>
+			<map key="湖北" comment="hubei">
+				<map key="武汉">wuhan</map>
+				<map key="襄樊">xiangfan</map>
+				<map key="鄂州">ezhou</map>
+				<map key="孝感">xiaogan</map>
+				<map key="黄冈">huanggang</map>
+				<map key="黄石">huangshi</map>
+				<map key="咸宁">xianning</map>
+				<map key="荆州">jingzhou</map>
+				<map key="宜昌">yichang</map>
+				<map key="恩施">enshi</map>
+				<map key="十堰">shiyan</map>
+				<map key="神农架">shennongjia</map>
+				<map key="随州">suizhou</map>
+				<map key="荆门">jingmen</map>
+				<map key="天门">tianmen</map>
+				<map key="仙桃">xiantao</map>
+				<map key="潜江">qianjiang</map>
+			</map>
+			<map key="浙江" comment="zhejiang">
+				<map key="杭州">hangzhou</map>
+				<map key="湖州">huzhou</map>
+				<map key="嘉兴">jiaxing</map>
+				<map key="宁波">ningbo</map>
+				<map key="绍兴">shaoxing</map>
+				<map key="台州">taizhou</map>
+				<map key="温州">wenzhou</map>
+				<map key="丽水">lishui</map>
+				<map key="金华">jinhua</map>
+				<map key="衢州">quzhou</map>
+				<map key="舟山">zhoushan</map>
+			</map>
+			<map key="安徽" comment="anhui">
+				<map key="合肥">hefei</map>
+				<map key="蚌埠">bangbu</map>
+				<map key="芜湖">wuhu</map>
+				<map key="淮南">huainan</map>
+				<map key="马鞍山">maanshan</map>
+				<map key="安庆">anqing</map>
+				<map key="宿州">suzhou</map>
+				<map key="阜阳">fuyang</map>
+				<map key="亳州">bozhou</map>
+				<map key="黄山">huangshan</map>
+				<map key="滁州">chuzhou</map>
+				<map key="淮北">huaibei</map>
+				<map key="铜陵">tongling</map>
+				<map key="宣城">xuancheng</map>
+				<map key="六安">liuan</map>
+				<map key="巢湖">chaohu</map>
+				<map key="池州">chizhou</map>
+			</map>
+			<map key="福建" comment="fujian">
+				<map key="福州">fuzhou</map>
+				<map key="厦门">xiamen</map>
+				<map key="宁德">ningde</map>
+				<map key="莆田">putian</map>
+				<map key="泉州">quanzhou</map>
+				<map key="漳州">zhangzhou</map>
+				<map key="龙岩">longyan</map>
+				<map key="三明">sanming</map>
+				<map key="南平">nanping</map>
+			</map>
+			<map key="江西" comment="jiangxi">
+				<map key="南昌">nanchang</map>
+				<map key="九江">jiujiang</map>
+				<map key="上饶">shangrao</map>
+				<map key="抚州">fuzhou</map>
+				<map key="宜春">yichun</map>
+				<map key="吉安">jian</map>
+				<map key="赣州">ganzhou</map>
+				<map key="景德镇">jingdezhen</map>
+				<map key="萍乡">pingxiang</map>
+				<map key="新余">xinyu</map>
+				<map key="鹰潭">yingtan</map>
+			</map>
+			<map key="湖南" comment="hunan">
+				<map key="长沙">changsha</map>
+				<map key="湘潭">xiangtan</map>
+				<map key="株洲">zhuzhou</map>
+				<map key="衡阳">hengyang</map>
+				<map key="郴州">chenzhou</map>
+				<map key="常德">changde</map>
+				<map key="益阳">yiyang</map>
+				<map key="娄底">loudi</map>
+				<map key="邵阳">shaoyang</map>
+				<map key="岳阳">yueyang</map>
+				<map key="张家界">zhangjiajie</map>
+				<map key="怀化">huaihua</map>
+				<map key="黔阳">qianyang</map>
+				<map key="永州">yongzhou</map>
+				<map key="湘西">xiangxi</map>
+			</map>
+			<map key="贵州" comment="guizhou">
+				<map key="贵阳">guiyang</map>
+				<map key="遵义">zunyi</map>
+				<map key="安顺">anshun</map>
+				<map key="都匀">duyun</map>
+				<map key="凯里">kaili</map>
+				<map key="铜仁">tongren</map>
+				<map key="毕节">bijie</map>
+				<map key="六盘水">liupanshui</map>
+				<map key="黔西">qianxi</map>
+			</map>
+			<map key="四川" comment="sichuan">
+				<map key="成都">chengdu</map>
+				<map key="攀枝花">panzhihua</map>
+				<map key="自贡">zigong</map>
+				<map key="绵阳">mianyang</map>
+				<map key="南充">nanchong</map>
+				<map key="达州">dazhou</map>
+				<map key="遂宁">suining</map>
+				<map key="广安">guangan</map>
+				<map key="巴中">bazhong</map>
+				<map key="泸州">luzhou</map>
+				<map key="宜宾">yibin</map>
+				<map key="内江">neijiang</map>
+				<map key="资阳">ziyang</map>
+				<map key="乐山">leshan</map>
+				<map key="眉山">meishan</map>
+				<map key="凉山">liangshan</map>
+				<map key="雅安">yaan</map>
+				<map key="甘孜">ganzi</map>
+				<map key="阿坝">aba</map>
+				<map key="德阳">deyang</map>
+				<map key="广元">guangyuan</map>
+			</map>
+			<map key="广东" comment="guangdong">
+				<map key="广州">guangzhou</map>
+				<map key="韶关">shaoguan</map>
+				<map key="惠州">huizhou</map>
+				<map key="梅州">meizhou</map>
+				<map key="汕头">shantou</map>
+				<map key="深圳">shenzhen</map>
+				<map key="珠海">zhuhai</map>
+				<map key="佛山">fushan</map>
+				<map key="肇庆">zhaoqing</map>
+				<map key="湛江">zhanjiang</map>
+				<map key="江门">jiangmen</map>
+				<map key="河源">heyuan</map>
+				<map key="清远">qingyuan</map>
+				<map key="云浮">yunfu</map>
+				<map key="潮州">chaozhou</map>
+				<map key="东莞">dongguan</map>
+				<map key="中山">zhongshan</map>
+				<map key="阳江">yangjiang</map>
+				<map key="揭阳">jieyang</map>
+				<map key="茂名">maoming</map>
+				<map key="汕尾">shanwei</map>
+				<map key="东沙岛">dongshadao</map>
+			</map>
+			<map key="云南" comment="yunnan">
+				<map key="昆明">kunming</map>
+				<map key="大理">dali</map>
+				<map key="红河">honghe</map>
+				<map key="曲靖">qujing</map>
+				<map key="保山">baoshan</map>
+				<map key="文山">wenshan</map>
+				<map key="玉溪">yuxi</map>
+				<map key="楚雄">chuxiong</map>
+				<map key="思茅">simao</map>
+				<map key="昭通">zhaotong</map>
+				<map key="临沧">lincang</map>
+				<map key="怒江">nujiang</map>
+				<map key="迪庆">diqing</map>
+				<map key="丽江">lijiang</map>
+				<map key="德宏">dehong</map>
+				<map key="西双版纳">xishuangbanna</map>
+			</map>
+			<map key="广西" comment="guangxi">
+				<map key="南宁">nanning</map>
+				<map key="崇左">chongzuo</map>
+				<map key="柳州">liuzhou</map>
+				<map key="来宾">laibin</map>
+				<map key="桂林">guilin</map>
+				<map key="梧州">wuzhou</map>
+				<map key="贺州">hezhou</map>
+				<map key="贵港">guigang</map>
+				<map key="玉林">yulin</map>
+				<map key="百色">baise</map>
+				<map key="钦州">qinzhou</map>
+				<map key="河池">hechi</map>
+				<map key="北海">beihai</map>
+				<map key="防城港">fangchenggang</map>
+			</map>
+			<map key="海南" comment="hainan">
+				<map key="海口">haikou</map>
+				<map key="琼山">qiongshan</map>
+				<map key="三亚">sanya</map>
+				<map key="东方">dongfang</map>
+				<map key="临高">lingao</map>
+				<map key="澄迈">chengmai</map>
+				<map key="儋州">danzhou</map>
+				<map key="昌江">changjiang</map>
+				<map key="白沙">baisha</map>
+				<map key="琼中">qiongzhong</map>
+				<map key="定安">dingan</map>
+				<map key="屯昌">tunchang</map>
+				<map key="琼海">qionghai</map>
+				<map key="文昌">wenchang</map>
+				<map key="清兰">qinglan</map>
+				<map key="保亭">baoting</map>
+				<map key="万宁">wanning</map>
+				<map key="陵水">lingshui</map>
+				<map key="西沙">xisha</map>
+				<map key="珊瑚岛">shanhudao</map>
+				<map key="永署礁">yongshujiao</map>
+				<map key="南沙岛">nanshadao</map>
+				<map key="乐东">ledong</map>
+				<map key="通什">tongshi</map>
+			</map>
+			<map key="香港" comment="xianggang">
+				<map key="香港">xianggang</map>
+			</map>
+			<map key="澳门" comment="aomen">
+				<map key="澳门">aomen</map>
+			</map>
+			<map key="台湾" comment="taiwan">
+				<map key="台北">taibei</map>
+				<map key="高雄">gaoxiong</map>
+				<map key="台南">tainan</map>
+				<map key="台中">taizhong</map>
+				<map key="桃园">taoyuan</map>
+				<map key="新竹">xinzhu</map>
+				<map key="宜兰">yilan</map>
+				<map key="澎湖">penghu</map>
+				<map key="嘉义">jiayi</map>
+				<map key="花莲">hualian</map>
+				<map key="台东">taidong</map>
+				<map key="基隆">jilong</map>
+			</map>
+		</item>
+	</I2010000>
+</irps>

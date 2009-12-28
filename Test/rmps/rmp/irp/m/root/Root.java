@@ -41,19 +41,19 @@ public class Root implements IService
     @Override
     public String getCode()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "";
     }
 
     @Override
     public String getName()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "";
     }
 
     @Override
     public String getDescription()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "";
     }
 
     @Override
@@ -74,14 +74,18 @@ public class Root implements IService
     @Override
     public void doDeal(ISession session, IMessage message)
     {
-        String msg = message.getContent();
-        String tmp = msg.toLowerCase();
+        String txt = message.getContent();
+        String tmp = txt.toLowerCase();
         if ("exit".equals(tmp))
         {
             session.send("再见……");
             Irps.exit(0);
+            return;
         }
-
+        if ("52010000".equals(tmp))
+        {
+            return;
+        }
         if (tmp.indexOf("step ") == 0)
         {
             String[] arr = tmp.toLowerCase().split(" ");
@@ -111,6 +115,11 @@ public class Root implements IService
 
     @Override
     public void doExit(ISession session, IMessage message)
+    {
+    }
+
+    @Override
+    public void doRoot(ISession session, IMessage message)
     {
     }
 }

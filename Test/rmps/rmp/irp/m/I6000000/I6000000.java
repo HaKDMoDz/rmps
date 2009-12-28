@@ -76,4 +76,9 @@ public class I6000000 implements IService
     public void doExit(ISession session, IMessage message)
     {
     }
+
+    @Override
+    public void doRoot(ISession session, IMessage message)
+    {
+    }
 }

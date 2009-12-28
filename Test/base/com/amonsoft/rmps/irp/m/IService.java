@@ -42,4 +42,6 @@ public interface IService
     void doStep(ISession session, IMessage message);
 
     void doExit(ISession session, IMessage message);
+
+    void doRoot(ISession session, IMessage message);
 }

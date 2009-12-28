@@ -137,6 +137,11 @@ public class I7020000 implements IService
     {
     }
 
+    @Override
+    public void doRoot(ISession session, IMessage message)
+    {
+    }
+
     /**
      * 显示RSS列表
      * 

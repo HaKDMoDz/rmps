@@ -8,9 +8,7 @@
 package rmp.irp.m.I2040000;
 
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.File;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.regex.Matcher;
@@ -182,58 +180,8 @@ public class I2040000 implements IService
     {
     }
 
-    public void dd(ISession session, IMessage message)
+    @Override
+    public void doRoot(ISession session, IMessage message)
     {
-        try
-        {
-            String key = message.getContent();
-            // 地址校验
-            if (!mpPtn.matcher(key).matches())
-            {
-                session.send("您输入的IP地址不是一个合适的IPV4地址，请重新输入！");
-                return;
-            }
-
-            // 链接地址初始化
-            URL url = new URL(path);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
-            conn.setDoOutput(true);
-            conn.setDoInput(true);
-
-            // 发送POST信息
-            DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-            dos.write(CharUtil.format(args, key).getBytes());
-            dos.flush();
-            dos.close();
-
-            // 读取返回结果
-            DataInputStream dis = new DataInputStream(conn.getInputStream());
-            byte d[] = new byte[dis.available()];
-            dis.read(d);
-            String data = new String(d, "gb2312");
-
-            conn.disconnect();
-
-            // 结果信息格式化
-            String[] temp = data.split("\"");
-            StringBuffer msg = new StringBuffer();
-            msg.append("IP地址：").append(temp[1]).append(session.newLine());
-            msg.append("国　家：").append(temp[3]).append(session.newLine());
-            msg.append("地　区：").append(temp[5]).append(session.newLine());
-            msg.append("运营商：").append(temp[9]).append(session.newLine());
-
-            // 发送结果信息
-            session.send(msg.toString());
-
-            // 设置下一次操作状态
-            IProcess process = session.getProcess();
-            process.setType(IProcess.TYPE_CONTENT);
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
-        }
     }
 }

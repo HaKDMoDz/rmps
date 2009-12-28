@@ -220,6 +220,11 @@ public class I2020000 implements IService
     {
     }
 
+    @Override
+    public void doRoot(ISession session, IMessage message)
+    {
+    }
+
     private void showData(ISession session, String data)
     {
         StringBuffer message = new StringBuffer();

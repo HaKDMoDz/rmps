@@ -137,7 +137,7 @@ public class I7010000 implements IService
             }
 
             // 页面数据请求
-            String xml = HttpUtil.request(path + '?' + CharUtil.format(args, tmp), "POST", "gb2312");
+            String xml = HttpUtil.request(path + '?' + CharUtil.format(args, tmp), "GET", "gb2312");
             if (!CharUtil.isValidate(xml))
             {
                 return;
@@ -193,6 +193,11 @@ public class I7010000 implements IService
 
     @Override
     public void doExit(ISession session, IMessage message)
+    {
+    }
+
+    @Override
+    public void doRoot(ISession session, IMessage message)
     {
     }
 }
