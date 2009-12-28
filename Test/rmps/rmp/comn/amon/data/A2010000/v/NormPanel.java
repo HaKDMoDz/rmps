@@ -19,7 +19,6 @@ import rmp.comn.amon.data.A2010000.m.WTableModel;
 import rmp.comn.amon.data.A2010000.t.Util;
 import rmp.face.WBean;
 import rmp.util.MesgUtil;
-import rmp.util.StringUtil;
 
 import com.amonsoft.util.CharUtil;
 
@@ -254,7 +253,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         if (ConstUI.HSQLDB_KEY.equals(obj))
         {
             db_DataBase.setDriver(ConstUI.HSQLDB_DRV);
-            db_DataBase.setUrl(StringUtil.format(ConstUI.HSQLDB_URL, url));
+            db_DataBase.setUrl(CharUtil.format(ConstUI.HSQLDB_URL, url));
         }
 
         Connection conn = Util.getConnection(db_DataBase);
@@ -321,7 +320,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         if (ConstUI.HSQLDB_KEY.equals(obj))
         {
             db_DataBase.setDriver(ConstUI.HSQLDB_DRV);
-            db_DataBase.setUrl(StringUtil.format(ConstUI.HSQLDB_URL, url));
+            db_DataBase.setUrl(CharUtil.format(ConstUI.HSQLDB_URL, url));
         }
 
         tm_DBView.viewData(db_DataBase, tf_DBTable.getText());
@@ -373,7 +372,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         if (ConstUI.HSQLDB_KEY.equals(obj))
         {
             db_DataBase.setDriver(ConstUI.HSQLDB_DRV);
-            db_DataBase.setUrl(StringUtil.format(ConstUI.HSQLDB_URL, url));
+            db_DataBase.setUrl(CharUtil.format(ConstUI.HSQLDB_URL, url));
         }
 
         tm_DBView.viewData(db_DataBase, sid);

@@ -16,7 +16,6 @@ import java.util.Stack;
 
 import rmp.bean.K1SV2S;
 import rmp.prp.aide.P3060000.b.WOperator;
-import rmp.util.StringUtil;
 
 import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
@@ -335,7 +334,7 @@ public final class Util
             {
                 if (oprBuf.length() != 0)
                 {
-                    throw new Exception(StringUtil.format(LangRes.P3061A01, oprBuf.toString()));
+                    throw new Exception(CharUtil.format(LangRes.P3061A01, oprBuf.toString()));
                 }
                 lastIsOpr = false;
                 numBuf.append(c);
@@ -347,7 +346,7 @@ public final class Util
             {
                 if (oprBuf.length() != 0)
                 {
-                    throw new Exception(StringUtil.format(LangRes.P3061A01, oprBuf.toString()));
+                    throw new Exception(CharUtil.format(LangRes.P3061A01, oprBuf.toString()));
                 }
                 lastIsOpr = false;
                 numBuf.append(c);
@@ -359,7 +358,7 @@ public final class Util
             {
                 if (oprBuf.length() != 0)
                 {
-                    throw new Exception(StringUtil.format(LangRes.P3061A01, oprBuf.toString()));
+                    throw new Exception(CharUtil.format(LangRes.P3061A01, oprBuf.toString()));
                 }
                 lastIsOpr = false;
                 BigDecimal e = new BigDecimal(Math.E).setScale(scale, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
@@ -375,7 +374,7 @@ public final class Util
             {
                 if (oprBuf.length() != 0)
                 {
-                    throw new Exception(StringUtil.format(LangRes.P3061A01, oprBuf.toString()));
+                    throw new Exception(CharUtil.format(LangRes.P3061A01, oprBuf.toString()));
                 }
                 lastIsOpr = false;
                 BigDecimal e = new BigDecimal(Math.PI).setScale(scale, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
@@ -455,7 +454,7 @@ public final class Util
                                     }
                                     break NEXT_I;
                                 }
-                                throw new Exception(StringUtil.format("您输入的表达式不正确：{0}与{1}不匹配！", LBT_EXP[m], tmpOpr));
+                                throw new Exception(CharUtil.format("您输入的表达式不正确：{0}与{1}不匹配！", LBT_EXP[m], tmpOpr));
                             }
                         }
 
@@ -636,7 +635,7 @@ public final class Util
             catch (ArithmeticException exp)
             {
                 LogUtil.exception(exp);
-                throw new Exception(StringUtil.format("次幂时，指数{0}应为一个整数！", rOpd.toString()));
+                throw new Exception(CharUtil.format("次幂时，指数{0}应为一个整数！", rOpd.toString()));
             }
         }
 

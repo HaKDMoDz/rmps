@@ -19,10 +19,10 @@ import rmp.comn.user.UserInfo;
 import rmp.irp.Irps;
 import rmp.util.EnvUtil;
 import rmp.util.MesgUtil;
-import rmp.util.StringUtil;
 
 import com.amonsoft.cons.ConsSys;
 import com.amonsoft.skin.ISkin;
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.DeskUtil;
 import com.amonsoft.util.LangUtil;
 import com.amonsoft.util.LogUtil;
@@ -297,7 +297,7 @@ public final class Rmps
         catch (Exception exp)
         {
             LogUtil.exception(exp);
-            String msg = StringUtil.format(LangRes.MESG_INIT_0006, LangRes.MESG_INIT_0000);
+            String msg = CharUtil.format(LangRes.MESG_INIT_0006, LangRes.MESG_INIT_0000);
             MesgUtil.showMessageDialog(null, msg);
         }
         return true;

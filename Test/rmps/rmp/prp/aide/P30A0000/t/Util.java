@@ -23,8 +23,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import rmp.util.FileUtil;
-import rmp.util.StringUtil;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.EnvCons;
@@ -172,7 +172,7 @@ public final class Util
     private static InputStream getSoapInputStream(String sttCity, String endCity, String theDate) throws Exception
     {
         String strSoap = getSoapRequest(EnvCons.FOLDER0_TPLT + ConstUI.SOAP_FILE);
-        strSoap = StringUtil.format(strSoap, sttCity, endCity, theDate);
+        strSoap = CharUtil.format(strSoap, sttCity, endCity, theDate);
 
         URL url = new URL(ConstUI.SOAP_POST);
         URLConnection conn = url.openConnection();

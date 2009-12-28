@@ -18,7 +18,6 @@ import javax.swing.table.DefaultTableModel;
 
 import rmp.comn.amon.data.A2010000.b.WDataBase;
 import rmp.comn.amon.data.A2010000.t.Util;
-import rmp.util.StringUtil;
 
 import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
@@ -162,9 +161,9 @@ public class WTableModel extends DefaultTableModel
                 sid = sid.substring(0, 6);
             }
             sid += '%';
-            sqlSelect += StringUtil.format(" WHERE {0} LIKE '{1}'", AmonCons.A2010101, sid);
+            sqlSelect += CharUtil.format(" WHERE {0} LIKE '{1}'", AmonCons.A2010101, sid);
         }
-        sqlSelect += StringUtil.format(" ORDER BY {0} ASC", AmonCons.A2010101);
+        sqlSelect += CharUtil.format(" ORDER BY {0} ASC", AmonCons.A2010101);
 
         Statement stat = null;
         ResultSet rest = null;

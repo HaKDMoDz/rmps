@@ -328,54 +328,6 @@ public final class StringUtil
     }
 
     /**
-     * 格式化带有参数的字符串为适当的形式
-     * 
-     * @param srcStr
-     *            源字符串
-     * @param srcHash
-     *            源字符串是否为索引值
-     * @param argHash
-     *            参数列表是否为索引值
-     * @param args
-     *            字符串参数列表
-     * @return
-     */
-    public static final String format(String srcStr, String... args)
-    {
-        if (!CharUtil.isValidate(srcStr))
-        {
-            return "";
-        }
-
-        int i = 0;
-        for (String c : args)
-        {
-            srcStr = srcStr.replace("{" + (i++) + "}", c);
-        }
-        return srcStr;
-    }
-
-    /**
-     * @param srcStr
-     * @param args
-     * @return
-     */
-    public static final String format(String srcStr, long... args)
-    {
-        if (!CharUtil.isValidate(srcStr))
-        {
-            return "";
-        }
-
-        int i = 0;
-        for (long c : args)
-        {
-            srcStr = srcStr.replace("{" + (i++) + "}", Long.toString(c));
-        }
-        return srcStr;
-    }
-
-    /**
      * 字符串转换为字节数组，此方法根据字符的Unicode码转换成相应的字符，对应字符的低字节前置， 如字符‘A’转换后的结果为[65][0]
      * 
      * @param text
@@ -384,7 +336,7 @@ public final class StringUtil
      */
     public static byte[] getBytes(String text)
     {
-        if (text == null && text.length() < 1)
+        if (text == null || text.length() < 1)
         {
             return null;
         }

@@ -21,12 +21,12 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import rmp.util.EnvUtil;
-import rmp.util.StringUtil;
 
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.EnvCons;
@@ -140,7 +140,7 @@ public class I2040000 implements IService
             }
 
             // 链接地址初始化
-            URL url = new URL(path + '?' + StringUtil.format(args, txt));
+            URL url = new URL(path + '?' + CharUtil.format(args, txt));
             URLConnection conn = url.openConnection();
             conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
             conn.setUseCaches(false);
@@ -204,7 +204,7 @@ public class I2040000 implements IService
 
             // 发送POST信息
             DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-            dos.write(StringUtil.format(args, key).getBytes());
+            dos.write(CharUtil.format(args, key).getBytes());
             dos.flush();
             dos.close();
 

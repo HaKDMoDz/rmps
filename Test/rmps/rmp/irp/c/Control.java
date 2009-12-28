@@ -16,13 +16,13 @@ import org.dom4j.io.SAXReader;
 
 import rmp.irp.m.help.Help;
 import rmp.util.EnvUtil;
-import rmp.util.StringUtil;
 
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.c.IControl;
 import com.amonsoft.rmps.irp.m.IService;
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.EnvCons;
@@ -160,7 +160,7 @@ public class Control implements IControl
         String tmp = msg.trim();
         if (tmp.length() < 1)
         {
-            session.send(StringUtil.format(":-o 您好像只输入了 {0} 个空格……", "" + msg.length()));
+            session.send(CharUtil.format(":-o 您好像只输入了 {0} 个空格……", "" + msg.length()));
             return;
         }
 
@@ -397,7 +397,7 @@ public class Control implements IControl
     public static StringBuffer appendPage(ISession session, StringBuffer message)
     {
         IProcess proc = session.getProcess();
-        message.append(session.newLine()).append(StringUtil.format("当前第 {0}/{1} 页，", proc.getStep() + 1, proc.getMost()));
+        message.append(session.newLine()).append(CharUtil.format("当前第 {0}/{1} 页，", proc.getStep() + 1, proc.getMost()));
         message.append("您可以使用<<、<、>或>>进行翻页查看。").append(session.newLine());
         return message;
     }

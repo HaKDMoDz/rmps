@@ -15,7 +15,6 @@ import rmp.prp.aide.P3040000.t.Util;
 import rmp.util.BeanUtil;
 import rmp.util.HashUtil;
 import rmp.util.MesgUtil;
-import rmp.util.StringUtil;
 
 import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
@@ -1139,14 +1138,14 @@ public class StepPanel extends javax.swing.JPanel
         }
         if (!CharUtil.isValidate(t, PrpCons.P3040118_SIZE))
         {
-            MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A02), PrpCons.P3040118_SIZE));
+            MesgUtil.showMessageDialog(this, CharUtil.format(P3040000.getMesg(LangRes.P3049A02), PrpCons.P3040118_SIZE));
             tf_NoteHead.requestFocus();
             return false;
         }
         t = ta_NoteInfo.getText();
         if (!CharUtil.isValidate(t, PrpCons.P3040119_SIZE))
         {
-            MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A02), PrpCons.P3040118_SIZE));
+            MesgUtil.showMessageDialog(this, CharUtil.format(P3040000.getMesg(LangRes.P3049A02), PrpCons.P3040118_SIZE));
             ta_NoteInfo.requestFocus();
             return false;
         }
@@ -1165,7 +1164,7 @@ public class StepPanel extends javax.swing.JPanel
         // 年份
         if (!CharUtil.isValidate(t, PrpCons.P3040106_SIZE))
         {
-            MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A04), PrpCons.P3040106_SIZE));
+            MesgUtil.showMessageDialog(this, CharUtil.format(P3040000.getMesg(LangRes.P3049A04), PrpCons.P3040106_SIZE));
             tf_sm.requestFocus();
             return false;
         }
@@ -1182,7 +1181,7 @@ public class StepPanel extends javax.swing.JPanel
             t = tf_sm.getText();
             if (!CharUtil.isValidate(t, PrpCons.P3040107_SIZE))
             {
-                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A06), PrpCons.P3040107_SIZE));
+                MesgUtil.showMessageDialog(this, CharUtil.format(P3040000.getMesg(LangRes.P3049A06), PrpCons.P3040107_SIZE));
                 tf_sm.requestFocus();
                 return false;
             }
@@ -1200,7 +1199,7 @@ public class StepPanel extends javax.swing.JPanel
             t = tf_sw.getText();
             if (!CharUtil.isValidate(t, PrpCons.P3040109_SIZE))
             {
-                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0A), PrpCons.P3040109_SIZE));
+                MesgUtil.showMessageDialog(this, CharUtil.format(P3040000.getMesg(LangRes.P3049A0A), PrpCons.P3040109_SIZE));
                 tf_sw.requestFocus();
                 return false;
             }
@@ -1218,7 +1217,7 @@ public class StepPanel extends javax.swing.JPanel
             t = tf_sd.getText();
             if (!CharUtil.isValidate(t, PrpCons.P3040108_SIZE))
             {
-                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A08), PrpCons.P3040108_SIZE));
+                MesgUtil.showMessageDialog(this, CharUtil.format(P3040000.getMesg(LangRes.P3049A08), PrpCons.P3040108_SIZE));
                 tf_sd.requestFocus();
                 return false;
             }
@@ -1236,7 +1235,7 @@ public class StepPanel extends javax.swing.JPanel
             t = tf_sz.getText();
             if (!CharUtil.isValidate(t, PrpCons.P304010A_SIZE))
             {
-                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0C), PrpCons.P304010A_SIZE));
+                MesgUtil.showMessageDialog(this, CharUtil.format(P3040000.getMesg(LangRes.P3049A0C), PrpCons.P304010A_SIZE));
                 tf_sz.requestFocus();
                 return false;
             }
@@ -1334,7 +1333,7 @@ public class StepPanel extends javax.swing.JPanel
         // 年份
         if (!CharUtil.isValidate(t, PrpCons.P3040106_SIZE))
         {
-            MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A04), PrpCons.P3040106_SIZE));
+            MesgUtil.showMessageDialog(this, CharUtil.format(P3040000.getMesg(LangRes.P3049A04), PrpCons.P3040106_SIZE));
             tf_em.requestFocus();
             return false;
         }
@@ -1351,7 +1350,7 @@ public class StepPanel extends javax.swing.JPanel
             t = tf_em.getText();
             if (!CharUtil.isValidate(t, PrpCons.P3040107_SIZE))
             {
-                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A06), PrpCons.P3040107_SIZE));
+                MesgUtil.showMessageDialog(this, CharUtil.format(P3040000.getMesg(LangRes.P3049A06), PrpCons.P3040107_SIZE));
                 tf_em.requestFocus();
                 return false;
             }
@@ -1369,7 +1368,7 @@ public class StepPanel extends javax.swing.JPanel
             t = tf_ew.getText();
             if (!CharUtil.isValidate(t, PrpCons.P3040109_SIZE))
             {
-                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0A), PrpCons.P3040109_SIZE));
+                MesgUtil.showMessageDialog(this, CharUtil.format(P3040000.getMesg(LangRes.P3049A0A), PrpCons.P3040109_SIZE));
                 tf_ew.requestFocus();
                 return false;
             }
@@ -1387,7 +1386,7 @@ public class StepPanel extends javax.swing.JPanel
             t = tf_ed.getText();
             if (!CharUtil.isValidate(t, PrpCons.P3040108_SIZE))
             {
-                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A08), PrpCons.P3040108_SIZE));
+                MesgUtil.showMessageDialog(this, CharUtil.format(P3040000.getMesg(LangRes.P3049A08), PrpCons.P3040108_SIZE));
                 tf_ed.requestFocus();
                 return false;
             }
@@ -1405,7 +1404,7 @@ public class StepPanel extends javax.swing.JPanel
             t = tf_ez.getText();
             if (!CharUtil.isValidate(t, PrpCons.P304010A_SIZE))
             {
-                MesgUtil.showMessageDialog(this, StringUtil.format(P3040000.getMesg(LangRes.P3049A0C), PrpCons.P304010A_SIZE));
+                MesgUtil.showMessageDialog(this, CharUtil.format(P3040000.getMesg(LangRes.P3049A0C), PrpCons.P304010A_SIZE));
                 tf_ez.requestFocus();
                 return false;
             }
@@ -1662,7 +1661,7 @@ public class StepPanel extends javax.swing.JPanel
      */
     private void rb_y2ActionPerformed(java.awt.event.ActionEvent evt)
     {
-        tf_fy.setText(StringUtil.format(ConstUI.FORMULA_Y_N, tf_ny.getText(), "" + Util.getYear()));
+        tf_fy.setText(CharUtil.format(ConstUI.FORMULA_Y_N, tf_ny.getText(), "" + Util.getYear()));
         tf_fy.setEditable(false);
     }
 
@@ -1689,7 +1688,7 @@ public class StepPanel extends javax.swing.JPanel
             t = "1";
             tf_ny.setText(t);
         }
-        tf_fy.setText(StringUtil.format(ConstUI.FORMULA_Y_N, "" + Util.getYear(), t));
+        tf_fy.setText(CharUtil.format(ConstUI.FORMULA_Y_N, "" + Util.getYear(), t));
     }
 
     /**
@@ -1706,7 +1705,7 @@ public class StepPanel extends javax.swing.JPanel
      */
     private void rb_m2ActionPerformed(java.awt.event.ActionEvent evt)
     {
-        tf_fm.setText(StringUtil.format(ConstUI.FORMULA_M_N, tf_nm.getText(), "" + Util.getMonth()));
+        tf_fm.setText(CharUtil.format(ConstUI.FORMULA_M_N, tf_nm.getText(), "" + Util.getMonth()));
         tf_fm.setEditable(false);
     }
 
@@ -1746,7 +1745,7 @@ public class StepPanel extends javax.swing.JPanel
      */
     private void rb_d2ActionPerformed(java.awt.event.ActionEvent evt)
     {
-        tf_fd.setText(StringUtil.format(ConstUI.FORMULA_D_N, tf_nd.getText(), "" + Util.getDay()));
+        tf_fd.setText(CharUtil.format(ConstUI.FORMULA_D_N, tf_nd.getText(), "" + Util.getDay()));
         tf_fd.setEditable(false);
     }
 
@@ -1786,7 +1785,7 @@ public class StepPanel extends javax.swing.JPanel
      */
     private void rb_w2ActionPerformed(java.awt.event.ActionEvent evt)
     {
-        tf_fw.setText(StringUtil.format(ConstUI.FORMULA_W_N, tf_nw.getText(), "1"));
+        tf_fw.setText(CharUtil.format(ConstUI.FORMULA_W_N, tf_nw.getText(), "1"));
         tf_fw.setEditable(false);
     }
 
@@ -1819,7 +1818,7 @@ public class StepPanel extends javax.swing.JPanel
      */
     private void rb_z2ActionPerformed(java.awt.event.ActionEvent evt)
     {
-        tf_fz.setText(StringUtil.format(ConstUI.FORMULA_Z_N, tf_nz.getText(), "1"));
+        tf_fz.setText(CharUtil.format(ConstUI.FORMULA_Z_N, tf_nz.getText(), "1"));
         tf_fz.setEditable(false);
     }
 

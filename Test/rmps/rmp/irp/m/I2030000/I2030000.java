@@ -18,14 +18,13 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import rmp.util.EnvUtil;
-import rmp.util.HttpUtil;
-import rmp.util.StringUtil;
 
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.util.CharUtil;
+import com.amonsoft.util.HttpUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.EnvCons;
@@ -130,7 +129,7 @@ public class I2030000 implements IService
             }
 
             // 发起页面请求
-            String xml = HttpUtil.request(path + '?' + StringUtil.format(args, key), "gb2312");
+            String xml = HttpUtil.request(path + '?' + CharUtil.format(args, key), "POST", "gb2312");
             int i = xml.indexOf("<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"fontcolor\">");
             int j = xml.indexOf("</table>", i) + 8;
             xml = xml.substring(i, j);
@@ -184,22 +183,22 @@ public class I2030000 implements IService
 
             // 注册天气图标
             // message.registerEmoticon(ConstUI.P3090000_DAY11,
-            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // CharUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
             // dataList.get(8)));
             // message.registerEmoticon(ConstUI.P3090000_DAY12,
-            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // CharUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
             // dataList.get(9)));
             // message.registerEmoticon(ConstUI.P3090000_DAY21,
-            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // CharUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
             // dataList.get(15)));
             // message.registerEmoticon(ConstUI.P3090000_DAY22,
-            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // CharUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
             // dataList.get(16)));
             // message.registerEmoticon(ConstUI.P3090000_DAY31,
-            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // CharUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
             // dataList.get(20)));
             // message.registerEmoticon(ConstUI.P3090000_DAY32,
-            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // CharUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
             // dataList.get(21)));
 
             // 分段发送天气信息

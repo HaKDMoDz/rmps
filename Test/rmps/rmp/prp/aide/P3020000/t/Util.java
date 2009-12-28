@@ -13,7 +13,6 @@ import java.util.List;
 
 import rmp.prp.aide.P3020000.b.FileBean;
 import rmp.prp.aide.P3020000.b.VarBean;
-import rmp.util.StringUtil;
 
 import com.amonsoft.util.CharUtil;
 
@@ -331,7 +330,7 @@ public final class Util
     {
         for (FileBean bean : nameList)
         {
-            bean.setTmpName(StringUtil.format(ConstUI.FILE_NAME_TEMP, "" + System.nanoTime()));
+            bean.setTmpName(CharUtil.format(ConstUI.FILE_NAME_TEMP, "" + System.nanoTime()));
             new File(srcFilePath, bean.getSrcName()).renameTo(new File(dstFilePath, bean.getTmpName()));
         }
     }

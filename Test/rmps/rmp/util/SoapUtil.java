@@ -20,6 +20,8 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.amonsoft.util.CharUtil;
+
 /**
  * <ul>
  * <li>功能说明：</li>
@@ -215,6 +217,6 @@ public final class SoapUtil
         br.close();
         is.close();
 
-        return StringUtil.format(sb.toString(), soapArgs);
+        return CharUtil.format(sb.toString(), soapArgs);
     }
 }

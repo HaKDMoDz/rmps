@@ -20,6 +20,7 @@ import java.util.List;
 import rmp.util.FileUtil;
 import rmp.util.StringUtil;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.SysCons;
@@ -196,7 +197,7 @@ public final class Util
                     // Java语言文件
                     bwj.write(ConstUI.LANGRES_M_SIGN);
                     bwj.newLine();
-                    tmp = StringUtil.format(ConstUI.LANGRES_M_DESP, mid, tpltList.get(1 + Integer.parseInt(mid, 16)));
+                    tmp = CharUtil.format(ConstUI.LANGRES_M_DESP, mid, tpltList.get(1 + Integer.parseInt(mid, 16)));
                     bwj.write(tmp);
                     bwj.newLine();
                     bwj.write(ConstUI.LANGRES_M_SIGN);
@@ -205,7 +206,7 @@ public final class Util
                     // 语言资源文件
                     bwp.write(ConstUI.COMMENT_M_SIGN);
                     bwp.newLine();
-                    tmp = StringUtil.format(ConstUI.COMMENT_M_DESP, mid, tpltList.get(1 + Integer.parseInt(mid, 16)));
+                    tmp = CharUtil.format(ConstUI.COMMENT_M_DESP, mid, tpltList.get(1 + Integer.parseInt(mid, 16)));
                     bwp.write(StringUtil.unicode2UnicodeEsc(tmp));
                     bwp.newLine();
                     bwp.write(ConstUI.COMMENT_M_SIGN);
@@ -220,7 +221,7 @@ public final class Util
                     // Java语言文件
                     bwj.write(ConstUI.LANGRES_F_SIGN);
                     bwj.newLine();
-                    tmp = StringUtil.format(ConstUI.LANGRES_F_DESP, fid, tpltList.get(17 + Integer.parseInt(fid, 16)));
+                    tmp = CharUtil.format(ConstUI.LANGRES_F_DESP, fid, tpltList.get(17 + Integer.parseInt(fid, 16)));
                     bwj.write(tmp);
                     bwj.newLine();
                     bwj.write(ConstUI.LANGRES_F_SIGN);
@@ -229,7 +230,7 @@ public final class Util
                     // 语言资源文件
                     bwp.write(ConstUI.COMMENT_F_SIGN);
                     bwp.newLine();
-                    tmp = StringUtil.format(ConstUI.COMMENT_F_DESP, fid, tpltList.get(17 + Integer.parseInt(fid, 16)));
+                    tmp = CharUtil.format(ConstUI.COMMENT_F_DESP, fid, tpltList.get(17 + Integer.parseInt(fid, 16)));
                     bwp.write(StringUtil.unicode2UnicodeEsc(tmp));
                     bwp.newLine();
                     bwp.write(ConstUI.COMMENT_F_SIGN);
@@ -237,7 +238,7 @@ public final class Util
                 }
 
                 // Java语言文件
-                bwj.write(StringUtil.format(ConstUI.LANGRES_L_SIGN, key));
+                bwj.write(CharUtil.format(ConstUI.LANGRES_L_SIGN, key));
                 bwj.write(langProp.get(key));
                 bwj.newLine();
 

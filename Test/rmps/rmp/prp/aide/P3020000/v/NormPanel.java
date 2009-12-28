@@ -17,7 +17,6 @@ import rmp.prp.aide.P3020000.m.DataModel;
 import rmp.prp.aide.P3020000.t.Util;
 import rmp.util.BeanUtil;
 import rmp.util.MesgUtil;
-import rmp.util.StringUtil;
 
 import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
@@ -210,7 +209,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         if (JFileChooser.ERROR_OPTION == stat)
         {
             LogUtil.log("文件系统操作：文件打开错误！！！");
-            String mesg = StringUtil.format(LangRes.MESG_OTHR_0008, LangRes.MESG_INIT_0007);
+            String mesg = CharUtil.format(LangRes.MESG_OTHR_0008, LangRes.MESG_INIT_0007);
             MesgUtil.showMessageDialog(this, mesg);
             return;
         }

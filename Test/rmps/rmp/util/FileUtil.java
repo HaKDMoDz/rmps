@@ -107,19 +107,19 @@ public final class FileUtil
         // 源文件不存在
         if (!srcFile.exists())
         {
-            return StringUtil.format(LangRes.MESG_FILE_0001, srcFile.getPath());
+            return CharUtil.format(LangRes.MESG_FILE_0001, srcFile.getPath());
         }
 
         // 源文件不是一个文件
         if (!srcFile.isFile())
         {
-            return StringUtil.format(LangRes.MESG_FILE_0002, srcFile.getPath());
+            return CharUtil.format(LangRes.MESG_FILE_0002, srcFile.getPath());
         }
 
         // 源文件不可读
         if (!srcFile.canRead())
         {
-            return StringUtil.format(LangRes.MESG_FILE_0003, srcFile.getPath());
+            return CharUtil.format(LangRes.MESG_FILE_0003, srcFile.getPath());
         }
 
         // 若目标文件不存在，则创建
@@ -130,19 +130,19 @@ public final class FileUtil
         // 若目标文件存在，且不覆盖目标文件的情况
         else if (!overWrite)
         {
-            return StringUtil.format(LangRes.MESG_FILE_0004, dstFile.getPath());
+            return CharUtil.format(LangRes.MESG_FILE_0004, dstFile.getPath());
         }
 
         // 若目标文件不是一个文件，则直接返回
         if (!dstFile.isFile())
         {
-            return StringUtil.format(LangRes.MESG_FILE_0002, dstFile.getPath());
+            return CharUtil.format(LangRes.MESG_FILE_0002, dstFile.getPath());
         }
 
         // 目标文件不可写
         if (!dstFile.canWrite())
         {
-            return StringUtil.format(LangRes.MESG_FILE_0005, dstFile.getPath());
+            return CharUtil.format(LangRes.MESG_FILE_0005, dstFile.getPath());
         }
 
         LogUtil.log("文件拷贝：源文件 － " + srcFile.getPath() + "; 汇文件 － " + dstFile.getPath());
@@ -184,7 +184,7 @@ public final class FileUtil
         // 删除来源文件
         if (delSrc && !srcFile.delete())
         {
-            return StringUtil.format(LangRes.MESG_FILE_0006, srcFile.getPath());
+            return CharUtil.format(LangRes.MESG_FILE_0006, srcFile.getPath());
         }
         srcFile = null;
 
@@ -464,7 +464,7 @@ public final class FileUtil
         if (JFileChooser.ERROR_OPTION == stat)
         {
             LogUtil.log("文件系统操作：文件打开错误！！！");
-            String mesg = StringUtil.format(LangRes.MESG_OTHR_0008, LangRes.MESG_INIT_0007);
+            String mesg = CharUtil.format(LangRes.MESG_OTHR_0008, LangRes.MESG_INIT_0007);
             MesgUtil.showMessageDialog(comp, mesg);
             return null;
         }
@@ -522,7 +522,7 @@ public final class FileUtil
         if (JFileChooser.ERROR_OPTION == stat)
         {
             LogUtil.log("文件系统操作：文件打开错误！！！");
-            String mesg = StringUtil.format(LangRes.MESG_OTHR_0008, LangRes.MESG_INIT_0007);
+            String mesg = CharUtil.format(LangRes.MESG_OTHR_0008, LangRes.MESG_INIT_0007);
             MesgUtil.showMessageDialog(comp, mesg);
             return null;
         }
@@ -540,7 +540,7 @@ public final class FileUtil
     {
         StringBuffer sb = new StringBuffer();
         sb.append(EnvCons.FOLDER0_SKIN).append(path).append(EnvCons.COMN_SP_FILE);
-        sb.append(StringUtil.format(name, Rmps.getUser().getCfg(CfgCons.CFG_LANG_ID)));
+        sb.append(CharUtil.format(name, Rmps.getUser().getCfg(CfgCons.CFG_LANG_ID)));
         return FileUtil.class.getResource(sb.toString());
     }
 
@@ -553,7 +553,7 @@ public final class FileUtil
     {
         StringBuffer sb = new StringBuffer();
         sb.append(EnvCons.FOLDER0_SKIN).append(path).append(EnvCons.COMN_SP_FILE);
-        sb.append(StringUtil.format(name, Rmps.getUser().getCfg(CfgCons.CFG_LANG_ID)));
+        sb.append(CharUtil.format(name, Rmps.getUser().getCfg(CfgCons.CFG_LANG_ID)));
         LogUtil.log("系统语言资源加载：" + sb.toString());
         return FileUtil.class.getResourceAsStream(sb.toString());
     }

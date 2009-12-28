@@ -109,7 +109,7 @@ public final class EnvUtil
         {
             base = EnvCons.FOLDER0_LANG;
         }
-        return new StringBuffer(base).append(EnvCons.COMN_SP_FILE).append(StringUtil.format(path, code)).toString();
+        return new StringBuffer(base).append(EnvCons.COMN_SP_FILE).append(CharUtil.format(path, code)).toString();
     }
 
     // ////////////////////////////////////////////////////////////////////////

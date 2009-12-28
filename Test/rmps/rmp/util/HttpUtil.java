@@ -50,38 +50,6 @@ import org.apache.http.util.EntityUtils;
  */
 public class HttpUtil
 {
-    /**
-     * 直接请求网络地址
-     * 
-     * @param url
-     *            页面地址
-     * @param set
-     *            编码方案
-     * @return
-     * @throws Exception
-     */
-    public static String request(String url, String set) throws Exception
-    {
-        HttpURLConnection conn = (HttpURLConnection) (new URL(url).openConnection());
-        conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
-        conn.setUseCaches(true);
-        conn.setDoInput(true);
-        conn.setDoOutput(true);
-        conn.setRequestMethod("POST");
-
-        // 读取返回结果
-        BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        byte[] b = new byte[1024];
-        int i = bis.read(b);
-        while (i >= 0)
-        {
-            bos.write(b, 0, i);
-            i = bis.read(b);
-        }
-        return new String(bos.toByteArray(), set);
-    }
-
     public static void get(String url, String path, int port, String charset)
     {
         HttpParams params = new BasicHttpParams();

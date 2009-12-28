@@ -22,8 +22,8 @@ import rmp.face.WBackCall;
 import rmp.prp.aide.P3090000.P3090000;
 import rmp.prp.aide.P3090000.t.Util;
 import rmp.util.ImageUtil;
-import rmp.util.StringUtil;
 
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.EnvCons;
@@ -278,8 +278,8 @@ public class TailPanel extends javax.swing.JPanel implements WBackCall
             hm_DataList = Util.getWeatherByCity(Rmps.getUser().getCfg(ConstUI.CFG_CITY, ""));
 
             // 读取天气状况图标
-            bi_WeatherS = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.BG_ICON, hm_DataList.get(Util.getTheDate() + 3)));
-            bi_WeatherE = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.BG_ICON, hm_DataList.get(Util.getTheDate() + 4)));
+            bi_WeatherS = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.BG_ICON, hm_DataList.get(Util.getTheDate() + 3)));
+            bi_WeatherE = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.BG_ICON, hm_DataList.get(Util.getTheDate() + 4)));
         }
         catch (Exception exp)
         {

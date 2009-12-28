@@ -22,7 +22,6 @@ import org.dom4j.io.SAXReader;
 
 import rmp.irp.c.Control;
 import rmp.util.EnvUtil;
-import rmp.util.StringUtil;
 
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
@@ -140,7 +139,7 @@ public class I2020000 implements IService
             }
 
             // 链接地址初始化
-            URL url = new URL(path + '?' + StringUtil.format(args, key));
+            URL url = new URL(path + '?' + CharUtil.format(args, key));
             URLConnection conn = url.openConnection();
             conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
             conn.setUseCaches(false);

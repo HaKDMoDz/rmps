@@ -88,22 +88,22 @@ public class I2010000 implements IService
 
             // 注册天气图标
             // message.registerEmoticon(ConstUI.P3090000_DAY11,
-            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // CharUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
             // dataList.get(8)));
             // message.registerEmoticon(ConstUI.P3090000_DAY12,
-            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // CharUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
             // dataList.get(9)));
             // message.registerEmoticon(ConstUI.P3090000_DAY21,
-            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // CharUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
             // dataList.get(15)));
             // message.registerEmoticon(ConstUI.P3090000_DAY22,
-            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // CharUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
             // dataList.get(16)));
             // message.registerEmoticon(ConstUI.P3090000_DAY31,
-            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // CharUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
             // dataList.get(20)));
             // message.registerEmoticon(ConstUI.P3090000_DAY32,
-            // StringUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
+            // CharUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
             // dataList.get(21)));
 
             // 分段发送天气信息

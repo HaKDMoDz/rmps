@@ -171,4 +171,28 @@ public class CharUtil
         int len = text.length();
         return (minLen <= len) && (len <= maxLen);
     }
+
+    /**
+     * 格式化带有参数的字符串为适当的形式
+     * 
+     * @param text
+     *            源字符串
+     * @param args
+     *            字符串参数列表
+     * @return
+     */
+    public static final String format(String text, Object... args)
+    {
+        if (!CharUtil.isValidate(text))
+        {
+            return "";
+        }
+
+        int i = 0;
+        for (Object o : args)
+        {
+            text = text.replace("{" + (i++) + "}", o != null ? o.toString() : "");
+        }
+        return text;
+    }
 }

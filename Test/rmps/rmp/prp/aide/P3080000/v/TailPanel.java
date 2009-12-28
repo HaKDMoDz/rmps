@@ -18,7 +18,9 @@ import rmp.face.WBackCall;
 import rmp.prp.aide.P3080000.P3080000;
 import rmp.prp.aide.P3080000.t.Util;
 import rmp.util.ImageUtil;
-import rmp.util.StringUtil;
+
+import com.amonsoft.util.CharUtil;
+
 import cons.EnvCons;
 import cons.prp.aide.P3080000.ConstUI;
 
@@ -86,31 +88,31 @@ public class TailPanel extends javax.swing.JPanel implements WBackCall
         cl_Calendar = java.util.Calendar.getInstance();
 
         // 背景图片初始化
-        bi_am = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.PATH_PICT, "am"));// 上午
-        bi_bg = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.PATH_PICT, "bg"));// 背景
-        bi_pm = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.PATH_PICT, "pm"));// 下午
-        bi_gmt = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.PATH_PICT, "gmt"));// 时区
-        bi_hl = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.PATH_PICT, "hl"));// 高亮
-        bi_tc = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.PATH_PICT, "tc"));// 秒针
+        bi_am = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.PATH_PICT, "am"));// 上午
+        bi_bg = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.PATH_PICT, "bg"));// 背景
+        bi_pm = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.PATH_PICT, "pm"));// 下午
+        bi_gmt = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.PATH_PICT, "gmt"));// 时区
+        bi_hl = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.PATH_PICT, "hl"));// 高亮
+        bi_tc = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.PATH_PICT, "tc"));// 秒针
         bi_pa = new BufferedImage[3];
-        bi_pa[0] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.PATH_PICT, "sn"));// 无
-        bi_pa[1] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.PATH_PICT, "s+"));// 正号
-        bi_pa[2] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.PATH_PICT, "s-"));// 负号
+        bi_pa[0] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.PATH_PICT, "sn"));// 无
+        bi_pa[1] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.PATH_PICT, "s+"));// 正号
+        bi_pa[2] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.PATH_PICT, "s-"));// 负号
         bi_nn = new BufferedImage[10];
         bi_tz = new BufferedImage[10];
         bi_wk = new BufferedImage[7];
         for (int i = 0; i < 7; i += 1)
         {
-            bi_wk[i] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.PATH_PICT, "w" + i));// 星期
-            bi_nn[i] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.PATH_PICT, "n" + i));// 数值
-            bi_tz[i] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.PATH_PICT, "s" + i));// 数值
+            bi_wk[i] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.PATH_PICT, "w" + i));// 星期
+            bi_nn[i] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.PATH_PICT, "n" + i));// 数值
+            bi_tz[i] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.PATH_PICT, "s" + i));// 数值
         }
-        bi_nn[7] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.PATH_PICT, "n7"));// 数值
-        bi_nn[8] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.PATH_PICT, "n8"));// 数值
-        bi_nn[9] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.PATH_PICT, "n9"));// 数值
-        bi_tz[7] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.PATH_PICT, "s7"));// 数值
-        bi_tz[8] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.PATH_PICT, "s8"));// 数值
-        bi_tz[9] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + StringUtil.format(ConstUI.PATH_PICT, "s9"));// 数值
+        bi_nn[7] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.PATH_PICT, "n7"));// 数值
+        bi_nn[8] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.PATH_PICT, "n8"));// 数值
+        bi_nn[9] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.PATH_PICT, "n9"));// 数值
+        bi_tz[7] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.PATH_PICT, "s7"));// 数值
+        bi_tz[8] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.PATH_PICT, "s8"));// 数值
+        bi_tz[9] = ImageUtil.readImage(EnvCons.FOLDER0_TPLT + CharUtil.format(ConstUI.PATH_PICT, "s9"));// 数值
 
         // 界面初始化
         ica();

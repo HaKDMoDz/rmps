@@ -16,7 +16,9 @@ import rmp.bean.K1SV2S;
 import rmp.face.WBean;
 import rmp.prp.aide.P3060000.P3060000;
 import rmp.util.BeanUtil;
-import rmp.util.StringUtil;
+
+import com.amonsoft.util.CharUtil;
+
 import cons.prp.aide.P3060000.ConstUI;
 import cons.prp.aide.P3060000.LangRes;
 
@@ -177,17 +179,17 @@ public class StepPanel extends javax.swing.JPanel implements WBean
         String t;
 
         // 三级节点
-        t = StringUtil.format(ConstUI.TAG_FONT, kvItem.getV2());
-        DefaultMutableTreeNode node3 = new DefaultMutableTreeNode(StringUtil.format(ConstUI.TAG_HTML, ConstUI.TAG_STEP + t));
+        t = CharUtil.format(ConstUI.TAG_FONT, kvItem.getV2());
+        DefaultMutableTreeNode node3 = new DefaultMutableTreeNode(CharUtil.format(ConstUI.TAG_HTML, ConstUI.TAG_STEP + t));
 
         // 二级节点
-        t = StringUtil.format(ConstUI.TAG_FONT, kvItem.getV1());
-        DefaultMutableTreeNode node2 = new DefaultMutableTreeNode(StringUtil.format(ConstUI.TAG_HTML, t));
+        t = CharUtil.format(ConstUI.TAG_FONT, kvItem.getV1());
+        DefaultMutableTreeNode node2 = new DefaultMutableTreeNode(CharUtil.format(ConstUI.TAG_HTML, t));
         node2.add(node3);
 
         // 一级节点
         t = kvItem.getK().replace(kvItem.getV1(), t);
-        DefaultMutableTreeNode node1 = new DefaultMutableTreeNode(StringUtil.format(ConstUI.TAG_HTML, ConstUI.TAG_STEP + t));
+        DefaultMutableTreeNode node1 = new DefaultMutableTreeNode(CharUtil.format(ConstUI.TAG_HTML, ConstUI.TAG_STEP + t));
         node1.add(currIndx != stepList.size() ? node2 : node3);
 
         // 根节点

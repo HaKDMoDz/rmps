@@ -7,7 +7,8 @@
  */
 package rmp.comn.amon.data.A2010000.b;
 
-import rmp.util.StringUtil;
+import com.amonsoft.util.CharUtil;
+
 import cons.comn.amon.data.A2010000.ConstUI;
 
 /**
@@ -27,7 +28,7 @@ public class WDataBase
     /** JDBC数据库驱动 */
     private String driver = ConstUI.HSQLDB_DRV;
     /** 数据库连接地址 */
-    private String url = StringUtil.format(ConstUI.HSQLDB_URL, "1000000/dat/amon");
+    private String url = CharUtil.format(ConstUI.HSQLDB_URL, "1000000/dat/amon");
     /** 数据库访问用户 */
     private String user = "";
     /** 数据库用户口令 */

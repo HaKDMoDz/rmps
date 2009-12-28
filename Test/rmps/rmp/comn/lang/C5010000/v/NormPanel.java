@@ -22,7 +22,6 @@ import rmp.comn.lang.C5010000.t.Util;
 import rmp.face.WBean;
 import rmp.util.FileUtil;
 import rmp.util.MesgUtil;
-import rmp.util.StringUtil;
 
 import com.amonsoft.util.CharUtil;
 
@@ -445,7 +444,7 @@ public class NormPanel extends javax.swing.JPanel implements WBean
         File langFile = new File(langPath);
         if (!langFile.exists() || !langFile.canWrite())
         {
-            MesgUtil.showMessageDialog(this, StringUtil.format("语言资源文件 “{0}” 不存在", langPath));
+            MesgUtil.showMessageDialog(this, CharUtil.format("语言资源文件 “{0}” 不存在", langPath));
             return;
         }
         if (langProp == null)

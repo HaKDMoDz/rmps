@@ -31,6 +31,7 @@ import rmp.util.MesgUtil;
 import rmp.util.StringUtil;
 
 import com.amonsoft.rmps.prp.v.IView;
+import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.LogUtil;
 
 import cons.prp.aide.P3050000.ConstUI;
@@ -1088,7 +1089,7 @@ public class NormPanel extends javax.swing.JPanel implements IView
         LogUtil.log("加密算法：" + kvItem.getV3() + "、口令长度：" + kvItem.getK());
         if (userPwd.length > keySize)
         {
-            String mesg = StringUtil.format(P3050000.getMesg(LangRes.MESG_UPDT_0303), kvItem.getV1(), "" + keySize);
+            String mesg = CharUtil.format(P3050000.getMesg(LangRes.MESG_UPDT_0303), kvItem.getV1(), "" + keySize);
             MesgUtil.showMessageDialog(this, mesg);
             this.tf_UserPwds.requestFocus();
             return;
@@ -1196,7 +1197,7 @@ public class NormPanel extends javax.swing.JPanel implements IView
         LogUtil.log("加密算法：" + kvItem.getV3() + "、口令长度：" + kvItem.getK());
         if (userPwd.length > keySize)
         {
-            String mesg = StringUtil.format(P3050000.getMesg(LangRes.MESG_UPDT_0303), kvItem.getV1(), "" + keySize);
+            String mesg = CharUtil.format(P3050000.getMesg(LangRes.MESG_UPDT_0303), kvItem.getV1(), "" + keySize);
             MesgUtil.showMessageDialog(this, mesg);
             this.tf_UserPwds.requestFocus();
             return;
@@ -1291,7 +1292,7 @@ public class NormPanel extends javax.swing.JPanel implements IView
         // 数据文件是否存在判断
         if (!dataFile.exists())
         {
-            kvItem.setV2(StringUtil.format(LangRes.MESG_CHCK_0101, dataFile.getPath()));
+            kvItem.setV2(CharUtil.format(LangRes.MESG_CHCK_0101, dataFile.getPath()));
             return false;
         }
         // 数据文件是否为文档判断
@@ -1342,7 +1343,7 @@ public class NormPanel extends javax.swing.JPanel implements IView
         catch (Exception exp)
         {
             LogUtil.exception(exp);
-            String mesg = StringUtil.format(P3050000.getMesg(LangRes.MESG_UPDT_0101), algorithm);
+            String mesg = CharUtil.format(P3050000.getMesg(LangRes.MESG_UPDT_0101), algorithm);
             MesgUtil.showMessageDialog(this, mesg);
             return null;
         }
@@ -1372,7 +1373,7 @@ public class NormPanel extends javax.swing.JPanel implements IView
         catch (Exception exp)
         {
             LogUtil.exception(exp);
-            String mesg = StringUtil.format(P3050000.getMesg(LangRes.MESG_UPDT_0302), algorithm);
+            String mesg = CharUtil.format(P3050000.getMesg(LangRes.MESG_UPDT_0302), algorithm);
             MesgUtil.showMessageDialog(this, mesg);
             return null;
         }
