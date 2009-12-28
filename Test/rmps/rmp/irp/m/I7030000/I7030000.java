@@ -16,7 +16,7 @@ import com.amonsoft.util.LogUtil;
  * <ul>
  * <li>功能说明：</li>
  * <br />
- * I7030000
+ * Facebook
  * <li>使用说明：</li>
  * <br />
  * </ul>

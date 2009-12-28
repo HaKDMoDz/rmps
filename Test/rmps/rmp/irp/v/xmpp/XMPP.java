@@ -9,6 +9,7 @@ package rmp.irp.v.xmpp;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 import org.jivesoftware.smack.Chat;
@@ -51,7 +52,7 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
 {
     protected IConnect connect;
     private XMPPConnection messenger;
-    private Session session;
+    private HashMap<String, Session> sessions;
 
     public XMPP()
     {
@@ -70,7 +71,7 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
         {
             case IStatus.INIT:
                 getConnect();
-                session = new Session();
+                sessions = new HashMap<String, Session>();
                 break;
             case IStatus.SIGN:
                 try
@@ -204,15 +205,24 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
     @Override
     public void processPacket(Packet packet)
     {
+        String user = packet.getFrom();
+        Session session = sessions.get(user);
+        if (session == null)
+        {
+            session = new Session();
+            sessions.put(user, session);
+        }
+
         if (packet instanceof org.jivesoftware.smack.packet.Message)
         {
             org.jivesoftware.smack.packet.Message message = (org.jivesoftware.smack.packet.Message) packet;
-            LogUtil.log("XMPP: processPacket:Message－(" + message.getFrom() + ")" + message.getBody());
+            LogUtil.log("XMPP: processPacket:Message－(" + user + ")" + message.getBody());
 
             if (session.session == null)
             {
-                session.session = messenger.getChatManager().createChat(message.getFrom(), this);
-                Contact contact = new Contact(messenger.getRoster().getEntry(getUser(message.getFrom())));
+                user = getUser(user);
+                session.session = messenger.getChatManager().createChat(user, this);
+                Contact contact = new Contact(messenger.getRoster().getEntry(user));
                 session.contact = contact;
             }
             Control.getInstance().instantMessageReceived(session, new Message(message));

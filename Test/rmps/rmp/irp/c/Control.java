@@ -153,7 +153,7 @@ public class Control implements IControl
         // 消息内容为空
         if (msg == null || msg.length() < 1)
         {
-            session.send("无法确认您输入的内容，可不要考验阿木的智商哟！:)");
+            // session.send("无法确认您输入的内容，可不要考验阿木的智商哟！:)");
             return;
         }
         // 无意义消息文本
@@ -386,6 +386,22 @@ public class Control implements IControl
     public static IService getService(String code)
     {
         return services != null ? services.get(code) : null;
+    }
+
+    /**
+     * 获取影射键盘
+     * 
+     * @param code
+     * @return
+     */
+    public static String getCommand(String code)
+    {
+        return command.get(code);
+    }
+
+    public static StringBuffer appendHelp(ISession session, StringBuffer message)
+    {
+        return message.append("? 使用帮助；* 显示菜单；& 报告错误").append(session.newLine());
     }
 
     /**

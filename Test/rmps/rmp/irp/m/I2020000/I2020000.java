@@ -39,7 +39,6 @@ import cons.EnvCons;
  * 邮政编码
  * <li>使用说明：</li>
  * <br />
- * TODO:
  * </ul>
  * 
  * @author Amon

@@ -32,7 +32,7 @@ public class CharUtil
         return new String(c);
     }
 
-    static String toHex(byte[] b)
+    public static String toHex(byte[] b)
     {
         char[] c = new char[b.length << 1];
         int i = 0;

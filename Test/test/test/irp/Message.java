@@ -1,8 +1,8 @@
 package test.irp;
 
-import rmp.irp.comn.AMessage;
+import com.amonsoft.rmps.irp.b.IMessage;
 
-public class Message extends AMessage
+public class Message implements IMessage
 {
     private String message;
 
@@ -21,5 +21,50 @@ public class Message extends AMessage
     public void setContent(String content)
     {
         message = content;
+    }
+
+    @Override
+    public String getContentType()
+    {
+        return "";
+    }
+
+    @Override
+    public String getEncoding()
+    {
+        return "";
+    }
+
+    @Override
+    public String getMessageUID()
+    {
+        return "";
+    }
+
+    @Override
+    public byte[] getRawData()
+    {
+        return "".getBytes();
+    }
+
+    @Override
+    public String getSubject()
+    {
+        return "";
+    }
+
+    @Override
+    public void setContentType(String contentType)
+    {
+    }
+
+    @Override
+    public void setEncoding(String encoding)
+    {
+    }
+
+    @Override
+    public void setSubject(String subject)
+    {
     }
 }
