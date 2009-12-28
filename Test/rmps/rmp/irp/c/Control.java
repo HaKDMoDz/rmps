@@ -15,6 +15,7 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import rmp.irp.m.help.Help;
+import rmp.irp.m.root.Root;
 import rmp.util.EnvUtil;
 
 import com.amonsoft.rmps.irp.b.IMessage;
@@ -110,6 +111,9 @@ public class Control implements IControl
             Help help = new Help();
             help.wInit();
             services.put("", help);
+            Root root = new Root();
+            root.wInit();
+            services.put("$", root);
 
             LogUtil.log("IRPS：Control 初始化成功！");
         }
@@ -167,12 +171,15 @@ public class Control implements IControl
         // 管理人员处理方式
         if (manager.get(session.getContact().getEmail().toLowerCase()) != null)
         {
-            // IService service = services.get(00000000);
-            // if (service == null)
-            // {
-            // service = new Root();
-            // }
-            // service.doDeal(session, message);
+            if ("$".equals(tmp))
+            {
+                // IService service = services.get(00000000);
+                // if (service == null)
+                // {
+                // service = new Root();
+                // }
+                // service.doDeal(session, message);
+            }
         }
 
         IProcess process = session.getProcess();

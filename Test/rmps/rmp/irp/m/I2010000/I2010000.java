@@ -158,7 +158,8 @@ public class I2010000 implements IService
             String txt = message.getContent();
             String tmp = txt.trim();
 
-            if (!csPtn.matcher(tmp).matches())
+            boolean isPy = csPtn.matcher(tmp).matches();
+            if (!isPy)
             {
                 // 查找是否存在用户输入的城市
                 K1SV2S t = null;
@@ -188,7 +189,8 @@ public class I2010000 implements IService
 
             StringBuffer msg = new StringBuffer();
             Document doc = DocumentHelper.parseText(data);
-            Element ele = (Element) doc.getRootElement().selectSingleNode(CharUtil.format("city[@cityname='{0}']", tmp));
+            Element ele = doc.getRootElement();
+            ele = (Element) ele.selectSingleNode(CharUtil.format("city[@{0}='{1}']", isPy ? "pyName" : "cityname", tmp));
             if (ele != null)
             {
                 msg.append("今天概况：");
