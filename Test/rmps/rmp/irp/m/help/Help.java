@@ -115,6 +115,7 @@ public class Help implements IService
     public void doDeal(ISession session, IMessage message)
     {
         StringBuffer msg = new StringBuffer();
+        msg.append("小木目前能够为您提供以下服务：").append(session.newLine());
         String func = session.getProcess().getFunc();
         IService serv;
         for (int i = 0; i < 10; i += 1)

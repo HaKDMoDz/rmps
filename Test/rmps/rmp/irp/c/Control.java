@@ -399,10 +399,20 @@ public class Control implements IControl
         return command.get(code);
     }
 
+    /**
+     * @param session
+     * @param message
+     * @return
+     */
     public static StringBuffer appendHelp(ISession session, StringBuffer message)
     {
+        if (message.lastIndexOf(session.newLine()) != message.length() - session.newLine().length())
+        {
+            message.append(session.newLine());
+        }
         message.append("请输入对应的数字以选择您要使用的服务！").append(session.newLine());
-        return message.append("其它：?使用帮助；*显示菜单；&报告错误；").append(session.newLine());
+        message.append("其它：?使用帮助；*显示菜单；&报告错误；").append(session.newLine());
+        return message;
     }
 
     /**

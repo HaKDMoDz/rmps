@@ -96,7 +96,12 @@ public class I2030000 implements IService
     @Override
     public void doInit(ISession session, IMessage message)
     {
-        session.send("请输入一个15或18号的身份证号码！");
+        StringBuffer msg = new StringBuffer();
+        msg.append(CharUtil.format("欢迎使用《{0}》服务！", getName())).append(session.newLine());
+        msg.append(CharUtil.format("　　《{0}》服务目前支持15及18位身份证号码查询，并提供15位号码到18位号码的转换服务！", getName())).append(session.newLine());
+        msg.append("　　您可以通过如下的方式使用此服务：").append(session.newLine());
+        msg.append("　　1、直接输入您要查询的15或18位身份证号码；").append(session.newLine());
+        session.send(msg.toString());
         session.getProcess().setType(IProcess.TYPE_CONTENT);
         session.getProcess().setStep(IProcess.STEP_DEFAULT);
     }

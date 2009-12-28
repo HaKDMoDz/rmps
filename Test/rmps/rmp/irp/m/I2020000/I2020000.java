@@ -107,7 +107,14 @@ public class I2020000 implements IService
     @Override
     public void doInit(ISession session, IMessage message)
     {
-        session.send("您可以输入任意一个国家国家、地区或城市的名称或者拼音！");
+        StringBuffer msg = new StringBuffer();
+        msg.append(CharUtil.format("欢迎使用《{0}》服务！", getName())).append(session.newLine());
+        msg.append(CharUtil.format("　　《{0}》服务目前支持15及18位身份证号码查询，并提供15位号码到18位号码的转换服务！", getName())).append(session.newLine());
+        msg.append("　　您可以通过如下的方式使用此服务：").append(session.newLine());
+        msg.append("　　1、直接输入您要查询的国家、地区或城市的名字：如上海；").append(session.newLine());
+        msg.append("　　2、输入您要查询的国家、地区或城市的拼音：如shanghai；").append(session.newLine());
+        msg.append("　　3、输入您要查询的国家、地区或城市的拼音首字母：如sh；").append(session.newLine());
+        session.send(msg.toString());
         session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
         session.getProcess().setStep(IProcess.STEP_DEFAULT);
     }
@@ -115,11 +122,24 @@ public class I2020000 implements IService
     @Override
     public void doMenu(ISession session, IMessage message)
     {
+        StringBuffer msg = new StringBuffer();
+        msg.append("1、输入*或＊返回服务选择菜单；").append(session.newLine());
+        msg.append("2、输入其它任意键继续当前服务；").append(session.newLine());
+        session.send(msg.toString());
     }
 
     @Override
     public void doHelp(ISession session, IMessage message)
     {
+        StringBuffer msg = new StringBuffer();
+        msg.append("您可以进行以下操作：").append(session.newLine());
+        msg.append("<或《 向上翻页").append(session.newLine());
+        msg.append("<<或《《 向上翻页").append(session.newLine());
+        msg.append(">或》 向下翻页").append(session.newLine());
+        msg.append(">>或》》 向下翻页").append(session.newLine());
+        msg.append("?或？ 显示使用帮助；").append(session.newLine());
+        msg.append("*或＊ 显示服务菜单；").append(session.newLine());
+        session.send(msg.toString());
     }
 
     @Override
