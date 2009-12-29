@@ -20,6 +20,7 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
+import rmp.bean.K1SV1S;
 import rmp.bean.K1SV2S;
 import rmp.util.EnvUtil;
 import rmp.util.LogUtil;
@@ -229,21 +230,55 @@ public class I2010000 implements IService
         try
         {
             // 读取天气代码
-            HashMap<String, String> city0 = new HashMap<String, String>();
-            HashMap<String, String> city1 = new HashMap<String, String>();
-            HashMap<String, String> city2 = new HashMap<String, String>();
+            HashMap<String, K1SV1S> city0 = new HashMap<String, K1SV1S>();
+            HashMap<String, K1SV1S> city1 = new HashMap<String, K1SV1S>();
+            HashMap<String, K1SV1S> city2 = new HashMap<String, K1SV1S>();
+
+            boolean special = false;
             final String CODE = "http://flash.weather.com.cn/wmaps/xml/{0}.xml";
+
+            // 省市
             String txt0 = HttpUtil.request(CharUtil.format(CODE, "china"), "GET", "UTF-8");
-            Document document = DocumentHelper.parseText(txt0);
-            Element ele = document.getRootElement();
-            for (Object obj0 : ele.selectNodes("city"))
+            Document doc0 = DocumentHelper.parseText(txt0);
+            for (Object obj0 : doc0.getRootElement().selectNodes("city"))
             {
                 Element ele0 = (Element) obj0;
+                txt0 = ele0.attributeValue("pyName");
+                city0.put(ele0.attributeValue("quName"), new K1SV1S(txt0, ele0.attributeValue("url")));
+                // 澳门重庆香港台湾海南北京上海天津特殊处理
+                special = "aomenchongqingxianggangtaiwanhainanbeijingshanghaitianjin".indexOf(txt0) < 0;
+
+                // 地区
+                String txt1 = CharUtil.format(CODE, txt0);
+                System.out.println(txt1);
+                txt1 = HttpUtil.request(txt1, "GET", "UTF-8");
+                Document doc1 = DocumentHelper.parseText(txt1);
+                for (Object obj1 : doc1.getRootElement().selectNodes("city"))
+                {
+                    Element ele1 = (Element) obj1;
+                    txt1 = ele1.attributeValue("pyName");
+                    city1.put(ele1.attributeValue("cityname"), new K1SV1S(txt1, ele1.attributeValue("url")));
+
+                    if (special)
+                    {
+                        // 县市
+                        String txt2 = CharUtil.format(CODE, txt1);
+                        System.out.println(txt2);
+                        txt2 = HttpUtil.request(txt2, "GET", "UTF-8");
+                        Document doc2 = DocumentHelper.parseText(txt2);
+                        for (Object obj2 : doc2.getRootElement().selectNodes("city"))
+                        {
+                            Element ele2 = (Element) obj2;
+                            txt2 = ele2.attributeValue("pyName");
+                            city2.put(ele2.attributeValue("cityname"), new K1SV1S(txt2, ele2.attributeValue("url")));
+                        }
+                    }
+                }
             }
 
             // 读取行政划分
-            document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
-            ele = (Element) document.selectSingleNode("/irps/I2010000/item[@id='配置']");
+            Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
+            Element ele = (Element) document.selectSingleNode("/irps/I2010000/item[@id='配置']");
             ele.clearContent();
 
             final String PATH = "http://service.weather.com.cn/plugin/data/city{0}.xml?level={1}";
@@ -255,7 +290,7 @@ public class I2010000 implements IService
             for (String tmp0 : txt0.split(","))
             {
                 Element ele0 = DocumentHelper.createElement("map");
-                tmp = split(ele0, tmp0);
+                tmp = split(ele0, tmp0, city0);
                 ele.add(ele0);
 
                 // 地区
@@ -264,16 +299,18 @@ public class I2010000 implements IService
                 for (String tmp1 : txt1.split(","))
                 {
                     Element ele1 = DocumentHelper.createElement("map");
-                    tmp = split(ele1, tmp1);
+                    tmp = split(ele1, tmp1, city1);
                     ele0.add(ele1);
 
                     // 县市
                     i = 2;
-                    String txt2 = HttpUtil.request(CharUtil.format(PATH, tmp, i), "GET", "utf-8");
+                    String txt2 = CharUtil.format(PATH, tmp, i);
+                    System.out.println(txt2);
+                    txt2 = HttpUtil.request(txt2, "GET", "utf-8");
                     for (String tmp2 : txt2.split(","))
                     {
                         Element ele2 = DocumentHelper.createElement("map");
-                        tmp = split(ele2, tmp2);
+                        tmp = split(ele2, tmp2, city2);
                         ele1.add(ele2);
                     }
                 }
@@ -289,11 +326,21 @@ public class I2010000 implements IService
         }
     }
 
-    private String split(Element ele, String txt)
+    private String split(Element ele, String txt, HashMap<String, K1SV1S> map)
     {
         String[] arr = txt.split("\\|");
-        ele.addAttribute("id", arr[0]);
-        ele.addAttribute("key", arr[1]);
+        String tmp = arr[1];
+        ele.addAttribute("key", tmp);
+        for (String key : map.keySet())
+        {
+            if (key.indexOf(tmp) >= 0)
+            {
+                K1SV1S kv = map.get(arr[1]);
+                ele.addAttribute("id", kv.getV() == null ? "" : kv.getV());
+                ele.addAttribute("comment", kv.getK() == null ? "" : kv.getK());
+                map.remove(key);
+            }
+        }
         return arr[0];
     }
 }

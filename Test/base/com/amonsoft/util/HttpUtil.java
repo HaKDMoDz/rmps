@@ -33,7 +33,7 @@ public class HttpUtil
      */
     public static String request(String url, String method, String charset) throws Exception
     {
-        HttpURLConnection conn = (HttpURLConnection) (new URL(url).openConnection());
+        HttpURLConnection conn = (HttpURLConnection) (new URL(url.replace(" ", "%20")).openConnection());
         conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
         conn.setUseCaches(true);
         conn.setDoInput(true);
