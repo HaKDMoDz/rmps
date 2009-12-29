@@ -7,7 +7,19 @@
  */
 package rmp.irp.v.meebo;
 
+import java.io.File;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+
+import rmp.util.EnvUtil;
+
 import com.amonsoft.rmps.irp.v.IConnect;
+import com.amonsoft.util.LogUtil;
+
+import cons.EnvCons;
 
 /**
  * <ul>
@@ -26,17 +38,29 @@ public class Connect implements IConnect
     private String host;
     private int port;
     private String server;
-    private int priority = 10;
+    private int priority;
 
     @Override
     public boolean load()
     {
-        host = "meebo.org";
-        port = 5222;
-        server = "meebo.org";
-        user = "Amon.CT";
-        pwds = "!~g_OQ5;";
-        return true;
+        try
+        {
+            final String NAME = "meebo";
+            Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, NAME + ".xml")));
+            Element element = (Element) document.selectSingleNode("/irps/" + NAME);
+            host = ((Element) element.selectSingleNode("map[@key='host']")).getText();
+            port = Integer.parseInt(((Element) element.selectSingleNode("map[@key='port']")).getText());
+            server = ((Element) element.selectSingleNode("map[@key='server']")).getText();
+            priority = Integer.parseInt(((Element) element.selectSingleNode("map[@key='priority']")).getText());
+            user = ((Element) element.selectSingleNode("map[@key='user']")).getText();
+            pwds = ((Element) element.selectSingleNode("map[@key='pwds']")).getText();
+            return true;
+        }
+        catch (DocumentException exp)
+        {
+            LogUtil.exception(exp);
+            return false;
+        }
     }
 
     @Override
