@@ -333,12 +333,16 @@ public class I2010000 implements IService
         ele.addAttribute("key", tmp);
         for (String key : map.keySet())
         {
-            if (key.indexOf(tmp) >= 0)
+            if (key != null && key.indexOf(tmp) >= 0)
             {
-                K1SV1S kv = map.get(arr[1]);
-                ele.addAttribute("id", kv.getV() == null ? "" : kv.getV());
-                ele.addAttribute("comment", kv.getK() == null ? "" : kv.getK());
+                K1SV1S kv = map.get(key);
+                if (kv != null)
+                {
+                    ele.addAttribute("id", kv.getV() == null ? "" : kv.getV());
+                    ele.addAttribute("comment", kv.getK() == null ? "" : kv.getK());
+                }
                 map.remove(key);
+                break;
             }
         }
         return arr[0];
