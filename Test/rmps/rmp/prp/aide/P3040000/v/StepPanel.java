@@ -14,10 +14,10 @@ import rmp.prp.aide.P3040000.P3040000;
 import rmp.prp.aide.P3040000.t.Util;
 import rmp.util.BeanUtil;
 import rmp.util.HashUtil;
+import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
 
 import com.amonsoft.util.CharUtil;
-import com.amonsoft.util.LogUtil;
 
 import cons.SysCons;
 import cons.db.PrpCons;

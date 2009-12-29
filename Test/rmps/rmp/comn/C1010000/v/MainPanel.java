@@ -18,9 +18,9 @@ import rmp.comn.C1010000.C1010000;
 import rmp.face.WBean;
 import rmp.ui.link.WLinkLabel;
 import rmp.util.BeanUtil;
+import rmp.util.LogUtil;
 
 import com.amonsoft.util.CharUtil;
-import com.amonsoft.util.LogUtil;
 
 import cons.comn.info.C1010000.ConstUI;
 import cons.comn.info.C1010000.LangRes;

@@ -33,6 +33,7 @@ import rmp.prp.v.NetPanel;
 import rmp.prp.v.StdPanel;
 import rmp.prp.v.SubMenu;
 import rmp.util.BeanUtil;
+import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.RmpsUtil;
 
@@ -42,7 +43,6 @@ import com.amonsoft.skin.ISkin;
 import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.DeskUtil;
 import com.amonsoft.util.LangUtil;
-import com.amonsoft.util.LogUtil;
 
 import cons.CfgCons;
 import cons.EnvCons;

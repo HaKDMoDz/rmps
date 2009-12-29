@@ -14,11 +14,12 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
+import rmp.util.LogUtil;
+
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IStatus;
 import com.amonsoft.rmps.irp.v.IAccount;
 import com.amonsoft.rmps.irp.v.IConnect;
-import com.amonsoft.util.LogUtil;
 import com.wilko.jaim.Buddy;
 import com.wilko.jaim.BuddyUpdateTocResponse;
 import com.wilko.jaim.ConfigTocResponse;

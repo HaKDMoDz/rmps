@@ -14,9 +14,9 @@ import rmp.face.WBean;
 import rmp.prp.aide.P3030000.P3030000;
 import rmp.prp.aide.P3030000.m.CodeData;
 import rmp.util.BeanUtil;
+import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
 
-import com.amonsoft.util.LogUtil;
 
 import cons.prp.aide.P3030000.LangRes;
 

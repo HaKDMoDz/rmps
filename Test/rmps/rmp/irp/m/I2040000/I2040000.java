@@ -19,13 +19,13 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import rmp.util.EnvUtil;
+import rmp.util.LogUtil;
 
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.util.CharUtil;
-import com.amonsoft.util.LogUtil;
 
 import cons.EnvCons;
 

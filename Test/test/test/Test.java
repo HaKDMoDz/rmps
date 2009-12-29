@@ -7,6 +7,9 @@
  */
 package test;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
 import rmp.Rmps;
 import rmp.comn.user.UserInfo;
 import rmp.irp.m.I2010000.I2010000;
@@ -32,7 +35,15 @@ public class Test
      */
     public static void main(String[] args)
     {
-        test();
+        try
+        {
+            System.getProperties().store(new FileOutputStream("cfg/rmp.xml"), "");
+        }
+        catch (Exception e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     public static void test()

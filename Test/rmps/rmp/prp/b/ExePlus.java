@@ -15,10 +15,10 @@ import java.util.logging.Logger;
 import rmp.prp.m.ExeItem;
 import rmp.util.BeanUtil;
 import rmp.util.EnvUtil;
+import rmp.util.LogUtil;
 
 import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.DeskUtil;
-import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>

@@ -19,9 +19,9 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import rmp.util.EnvUtil;
+import rmp.util.LogUtil;
 
 import com.amonsoft.rmps.irp.v.IConnect;
-import com.amonsoft.util.LogUtil;
 
 import cons.EnvCons;
 

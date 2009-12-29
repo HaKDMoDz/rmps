@@ -13,7 +13,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-import com.amonsoft.util.LogUtil;
+import rmp.util.LogUtil;
+
 
 /**
  * <ul>

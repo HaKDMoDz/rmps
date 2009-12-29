@@ -30,13 +30,13 @@ import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.RosterPacket;
 
 import rmp.irp.c.Control;
+import rmp.util.LogUtil;
 
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IStatus;
 import com.amonsoft.rmps.irp.v.IAccount;
 import com.amonsoft.rmps.irp.v.IConnect;
 import com.amonsoft.util.CharUtil;
-import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>

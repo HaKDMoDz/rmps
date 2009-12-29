@@ -12,11 +12,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import rmp.util.LogUtil;
+
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
-import com.amonsoft.util.LogUtil;
 import com.sun.syndication.feed.synd.SyndCategory;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;

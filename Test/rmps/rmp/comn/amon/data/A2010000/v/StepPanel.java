@@ -14,9 +14,9 @@ import javax.swing.DefaultComboBoxModel;
 import rmp.bean.K1SV1S;
 import rmp.comn.amon.data.A2010000.b.WDataBase;
 import rmp.comn.amon.data.A2010000.t.Util;
+import rmp.util.LogUtil;
 
 import com.amonsoft.util.CharUtil;
-import com.amonsoft.util.LogUtil;
 
 import cons.db.AmonCons;
 

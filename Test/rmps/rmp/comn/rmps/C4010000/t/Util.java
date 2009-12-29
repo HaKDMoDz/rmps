@@ -13,9 +13,9 @@ import java.io.IOException;
 import java.util.Properties;
 
 import rmp.Rmps;
+import rmp.util.LogUtil;
 
 import com.amonsoft.util.CharUtil;
-import com.amonsoft.util.LogUtil;
 
 import cons.CfgCons;
 import cons.EnvCons;

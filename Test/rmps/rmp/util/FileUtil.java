@@ -30,7 +30,6 @@ import rmp.Rmps;
 import rmp.bean.FilesFilter;
 
 import com.amonsoft.util.CharUtil;
-import com.amonsoft.util.LogUtil;
 
 import cons.CfgCons;
 import cons.EnvCons;

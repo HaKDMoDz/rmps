@@ -11,8 +11,8 @@ import javax.swing.ButtonGroup;
 
 import rmp.prp.aide.P3080000.P3080000;
 import rmp.prp.aide.P3080000.t.Util;
+import rmp.util.LogUtil;
 
-import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>

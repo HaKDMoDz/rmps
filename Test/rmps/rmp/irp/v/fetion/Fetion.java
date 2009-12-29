@@ -21,11 +21,12 @@ import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 
+import rmp.util.LogUtil;
+
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IStatus;
 import com.amonsoft.rmps.irp.v.IAccount;
 import com.amonsoft.rmps.irp.v.IConnect;
-import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>

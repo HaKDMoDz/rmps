@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import rmp.irp.comn.Process;
+import rmp.util.LogUtil;
 import twitter4j.DirectMessage;
 import twitter4j.Query;
 import twitter4j.QueryResult;
@@ -21,7 +22,6 @@ import twitter4j.TwitterException;
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
-import com.amonsoft.util.LogUtil;
 
 import cons.irp.ConsEnv;
 

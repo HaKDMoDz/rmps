@@ -34,11 +34,11 @@ import rmp.face.WBean;
 import rmp.prp.aide.P3050000.m.SecureKey;
 import rmp.util.FileUtil;
 import rmp.util.HashUtil;
+import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.StringUtil;
 
 import com.amonsoft.util.CharUtil;
-import com.amonsoft.util.LogUtil;
 
 import cons.SysCons;
 import cons.comn.amon.code.A1010000.LangRes;

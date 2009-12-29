@@ -22,9 +22,9 @@ import rmp.face.WBackCall;
 import rmp.prp.aide.P3090000.P3090000;
 import rmp.prp.aide.P3090000.t.Util;
 import rmp.util.ImageUtil;
+import rmp.util.LogUtil;
 
 import com.amonsoft.util.CharUtil;
-import com.amonsoft.util.LogUtil;
 
 import cons.EnvCons;
 import cons.prp.aide.P3090000.ConstUI;

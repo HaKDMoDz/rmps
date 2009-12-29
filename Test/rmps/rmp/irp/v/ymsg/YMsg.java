@@ -10,6 +10,8 @@ package rmp.irp.v.ymsg;
 import java.awt.Toolkit;
 import java.util.List;
 
+import rmp.util.LogUtil;
+
 import ymsg.network.event.SessionChatEvent;
 import ymsg.network.event.SessionConferenceEvent;
 import ymsg.network.event.SessionErrorEvent;
@@ -25,7 +27,6 @@ import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IStatus;
 import com.amonsoft.rmps.irp.v.IAccount;
 import com.amonsoft.rmps.irp.v.IConnect;
-import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>

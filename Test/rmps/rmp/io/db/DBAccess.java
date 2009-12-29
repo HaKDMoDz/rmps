@@ -15,8 +15,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import rmp.util.LogUtil;
+
 import com.amonsoft.util.CharUtil;
-import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>

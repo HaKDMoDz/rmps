@@ -12,10 +12,10 @@ import javax.swing.ButtonGroup;
 import rmp.Rmps;
 import rmp.prp.aide.P3090000.P3090000;
 import rmp.prp.aide.P3090000.t.Util;
+import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
 
 import com.amonsoft.util.CharUtil;
-import com.amonsoft.util.LogUtil;
 
 import cons.prp.aide.P3090000.ConstUI;
 

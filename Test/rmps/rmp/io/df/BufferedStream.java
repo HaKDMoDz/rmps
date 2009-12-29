@@ -12,7 +12,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-import com.amonsoft.util.LogUtil;
+import rmp.util.LogUtil;
+
 
 import cons.EnvCons;
 

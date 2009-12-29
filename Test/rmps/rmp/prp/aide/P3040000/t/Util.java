@@ -17,8 +17,8 @@ import rmp.face.WBackCall;
 import rmp.io.db.DBAccess;
 import rmp.prp.aide.P3040000.P3040000;
 import rmp.util.DateUtil;
+import rmp.util.LogUtil;
 
-import com.amonsoft.util.LogUtil;
 
 import cons.db.PrpCons;
 import cons.prp.aide.P3040000.ConstUI;

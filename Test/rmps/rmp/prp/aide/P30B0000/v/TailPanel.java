@@ -15,11 +15,11 @@ import javax.swing.WindowConstants;
 import rmp.prp.aide.P30A0000.m.DataModel;
 import rmp.prp.aide.P30A0000.t.Util;
 import rmp.prp.aide.P30B0000.P30B0000;
+import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
 
 import com.amonsoft.bean.WForm;
 import com.amonsoft.rmps.prp.v.IView;
-import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>

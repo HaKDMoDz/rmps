@@ -8,8 +8,10 @@
 package rmp;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Properties;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -18,6 +20,7 @@ import javax.swing.plaf.synth.SynthLookAndFeel;
 import rmp.comn.user.UserInfo;
 import rmp.irp.Irps;
 import rmp.util.EnvUtil;
+import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
 
 import com.amonsoft.cons.ConsSys;
@@ -25,7 +28,6 @@ import com.amonsoft.skin.ISkin;
 import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.DeskUtil;
 import com.amonsoft.util.LangUtil;
-import com.amonsoft.util.LogUtil;
 
 import cons.CfgCons;
 import cons.EnvCons;
@@ -56,8 +58,18 @@ public final class Rmps
      */
     public static void main(String[] args)
     {
+        Properties prop = new Properties();
+        try
+        {
+            prop.load(new FileInputStream(new File(EnvCons.FOLDER0_CFG, "rmp.agc")));
+        }
+        catch (Exception exp)
+        {
+            return;
+        }
+
         // 1、 启动系统日志
-        LogUtil.wInit();
+        LogUtil.wInit(prop.getProperty("rmps.log", "log"));
 
         // 2、 运行环境检测
         if (!checkJre())
@@ -452,7 +464,7 @@ public final class Rmps
             lb_LogoForm.setUndecorated(true);
             lb_LogoForm.getContentPane().setLayout(new java.awt.BorderLayout());
             final javax.swing.JLabel l = new javax.swing.JLabel("adfadf");// new
-                                                                          // javax.swing.ImageIcon(getLogo(32)));
+            // javax.swing.ImageIcon(getLogo(32)));
             lb_LogoForm.getContentPane().add(l);
             l.addMouseListener(new java.awt.event.MouseAdapter()
             {

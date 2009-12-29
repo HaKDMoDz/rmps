@@ -11,13 +11,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import rmp.prp.Prps;
+import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
 import rmp.util.RmpsUtil;
 
 import com.amonsoft.rmps.prp.IPrpPlus;
 import com.amonsoft.util.DeskUtil;
 import com.amonsoft.util.LangUtil;
-import com.amonsoft.util.LogUtil;
 
 import cons.EnvCons;
 import cons.prp.ConstUI;

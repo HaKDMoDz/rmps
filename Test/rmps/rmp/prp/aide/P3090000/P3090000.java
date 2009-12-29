@@ -27,6 +27,7 @@ import rmp.prp.aide.P3090000.v.TailPanel;
 import rmp.util.BeanUtil;
 import rmp.util.EnvUtil;
 import rmp.util.FileUtil;
+import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
 
 import com.amonsoft.bean.WForm;
@@ -34,7 +35,6 @@ import com.amonsoft.cons.ConsSys;
 import com.amonsoft.rmps.prp.IPrpPlus;
 import com.amonsoft.util.DeskUtil;
 import com.amonsoft.util.LangUtil;
-import com.amonsoft.util.LogUtil;
 
 import cons.EnvCons;
 import cons.id.PrpCons;
@@ -537,7 +537,7 @@ public class P3090000 extends WForm implements IPrpPlus
         Rmps.setUser(ui);
 
         // 1、 启动系统日志
-        LogUtil.wInit();
+        LogUtil.wInit("log");
 
         // 2、 运行环境检测
         if (!Rmps.checkJre())

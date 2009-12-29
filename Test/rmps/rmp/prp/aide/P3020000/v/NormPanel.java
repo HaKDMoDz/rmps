@@ -16,10 +16,10 @@ import rmp.prp.aide.P3020000.P3020000;
 import rmp.prp.aide.P3020000.m.DataModel;
 import rmp.prp.aide.P3020000.t.Util;
 import rmp.util.BeanUtil;
+import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
 
 import com.amonsoft.util.CharUtil;
-import com.amonsoft.util.LogUtil;
 
 import cons.ui.LangRes;
 

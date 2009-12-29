@@ -7,10 +7,11 @@
  */
 package rmp.irp.m.I7030000;
 
+import rmp.util.LogUtil;
+
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
-import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>

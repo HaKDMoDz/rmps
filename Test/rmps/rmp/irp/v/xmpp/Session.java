@@ -13,11 +13,11 @@ import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.XMPPException;
 
 import rmp.irp.comn.ASession;
+import rmp.util.LogUtil;
 
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IMimeMessage;
-import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>

@@ -13,10 +13,10 @@ import java.io.IOException;
 import java.util.Properties;
 
 import rmp.util.EnvUtil;
+import rmp.util.LogUtil;
 
 import com.amonsoft.cons.ConsSys;
 import com.amonsoft.rmps.IRmps;
-import com.amonsoft.util.LogUtil;
 
 import cons.CfgCons;
 

@@ -20,7 +20,6 @@ import javax.swing.JViewport;
 import javax.swing.text.JTextComponent;
 
 import com.amonsoft.util.CharUtil;
-import com.amonsoft.util.LogUtil;
 
 /**
  * <ul>

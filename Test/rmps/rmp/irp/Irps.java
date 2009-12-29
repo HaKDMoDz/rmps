@@ -16,7 +16,6 @@ import rmp.irp.v.meebo.Meebo;
 
 import com.amonsoft.rmps.irp.b.IStatus;
 import com.amonsoft.rmps.irp.v.IAccount;
-import com.amonsoft.util.LogUtil;
 
 import cons.irp.ConsEnv;
 
@@ -107,7 +106,7 @@ public class Irps
      */
     public static void main(String[] args)
     {
-        LogUtil.wInit();
+        //LogUtil.wInit("log");
 
         accounts = new HashMap<String, IAccount>();
 

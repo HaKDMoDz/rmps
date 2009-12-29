@@ -23,9 +23,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import rmp.util.FileUtil;
+import rmp.util.LogUtil;
 
 import com.amonsoft.util.CharUtil;
-import com.amonsoft.util.LogUtil;
 
 import cons.EnvCons;
 import cons.SysCons;

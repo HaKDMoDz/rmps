@@ -22,11 +22,11 @@ import rmp.bean.K1SV2S;
 import rmp.prp.aide.P3060000.P3060000;
 import rmp.prp.aide.P3060000.t.Util;
 import rmp.util.BeanUtil;
+import rmp.util.LogUtil;
 import rmp.util.MesgUtil;
 
 import com.amonsoft.rmps.prp.v.IView;
 import com.amonsoft.util.CharUtil;
-import com.amonsoft.util.LogUtil;
 
 import cons.prp.aide.P3060000.ConstUI;
 import cons.prp.aide.P3060000.LangRes;

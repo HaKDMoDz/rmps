@@ -20,7 +20,6 @@ import javax.crypto.spec.IvParameterSpec;
 import rmp.bean.CipherKey;
 
 import com.amonsoft.util.CharUtil;
-import com.amonsoft.util.LogUtil;
 
 import cons.SysCons;
 import cryptix.jce.provider.CryptixCrypto;
