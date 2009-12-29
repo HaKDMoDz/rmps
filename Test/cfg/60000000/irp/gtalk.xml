@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <irps>
-	<jabber>
+	<gtalk>
 		<map key="host">talk.google.com</map>
 		<map key="port">5222</map>
 		<map key="server">gmail.com</map>
 		<map key="priority">10</map>
 		<map key="user">Amon.CT@gmail.com</map>
 		<map key="pwds">qTrH2e3oXk</map>
-	</jabber>
+	</gtalk>
 </irps>

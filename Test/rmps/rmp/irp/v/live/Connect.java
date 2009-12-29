@@ -46,7 +46,7 @@ public class Connect implements IConnect
         try
         {
             final String NAME = "live";
-            Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, NAME + ".xml")));
+            Document document = new SAXReader().read(new File(EnvUtil.getCfgPath(EnvCons.FOLDER1_IRP, NAME + ".xml")));
             Element element = (Element) document.selectSingleNode("/irps/" + NAME);
             user = ((Element) element.selectSingleNode("map[@key='user']")).getText();
             pwds = ((Element) element.selectSingleNode("map[@key='pwds']")).getText();

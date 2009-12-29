@@ -50,7 +50,7 @@ public class Connect implements IConnect
         try
         {
             final String NAME = "gtalk";
-            Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, NAME + ".xml")));
+            Document document = new SAXReader().read(new File(EnvUtil.getCfgPath(EnvCons.FOLDER1_IRP, NAME + ".xml")));
             Element element = (Element) document.selectSingleNode("/irps/" + NAME);
             host = ((Element) element.selectSingleNode("map[@key='host']")).getText();
             port = Integer.parseInt(((Element) element.selectSingleNode("map[@key='port']")).getText());

@@ -77,6 +77,7 @@ public interface EnvCons
     // ========================================================================
     /** 数据备份目录 */
     String FOLDER0_BACK = "bak";
+    String FOLDER0_CFG = "cfg";
     String FOLDER0_DATA = "dat";
     /** 帮助目录 */
     String FOLDER0_HELP = "help";

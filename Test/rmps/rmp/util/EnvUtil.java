@@ -92,6 +92,17 @@ public final class EnvUtil
         return sb.toString();
     }
 
+    public static String getCfgPath(String... name)
+    {
+        StringBuffer sb = new StringBuffer();
+        sb.append(EnvCons.FOLDER0_CFG).append(EnvCons.COMN_SP_FILE).append(Rmps.getUser().getUserID());
+        for (String temp : name)
+        {
+            sb.append(EnvCons.COMN_SP_FILE).append(temp);
+        }
+        return sb.toString();
+    }
+
     public static String getDataPath(String... name)
     {
         StringBuffer sb = new StringBuffer();
