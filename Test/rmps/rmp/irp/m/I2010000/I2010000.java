@@ -45,7 +45,8 @@ import cons.EnvCons;
  */
 public class I2010000 implements IService
 {
-    private static List<HashMap<String, K1SV2S>> maps;
+    private static List<HashMap<String, K1SV2S>> csList;
+    private static HashMap<String, String> pyName;
     private static Pattern csPtn;
 
     @Override
@@ -53,11 +54,11 @@ public class I2010000 implements IService
     {
         try
         {
-            maps = new ArrayList<HashMap<String, K1SV2S>>();
-            maps.add(new HashMap<String, K1SV2S>());
-            maps.add(new HashMap<String, K1SV2S>());
-            maps.add(new HashMap<String, K1SV2S>());
-            maps.add(new HashMap<String, K1SV2S>());
+            csList = new ArrayList<HashMap<String, K1SV2S>>();
+            csList.add(new HashMap<String, K1SV2S>());
+            csList.add(new HashMap<String, K1SV2S>());
+            csList.add(new HashMap<String, K1SV2S>());
+            csList.add(new HashMap<String, K1SV2S>());
 
             csPtn = Pattern.compile("[a-z']+");
 
@@ -72,7 +73,7 @@ public class I2010000 implements IService
             for (Object o0 : document.selectNodes("/irps/I2020000/item[@id='配置']/map"))
             {
                 ele = (Element) o0;
-                map = maps.get(0);
+                map = csList.get(0);
                 id0 = ele.attributeValue("key");
                 map.put(id0, new K1SV2S(ele.attributeValue("id"), "", "0"));
 
@@ -80,7 +81,7 @@ public class I2010000 implements IService
                 for (Object o1 : ele.selectNodes("map"))
                 {
                     ele = (Element) o1;
-                    map = maps.get(1);
+                    map = csList.get(1);
                     id1 = ele.attributeValue("key");
                     map.put(id1, new K1SV2S(ele.attributeValue("id"), id0, "1"));
 
@@ -88,14 +89,14 @@ public class I2010000 implements IService
                     for (Object o2 : ele.selectNodes("map"))
                     {
                         ele = (Element) o2;
-                        map = maps.get(1);
+                        map = csList.get(1);
                         id2 = ele.attributeValue("key");
                         map.put(id2, new K1SV2S(ele.attributeValue("id"), id1, "2"));
                         // 乡镇
                         for (Object o3 : ele.selectNodes("map"))
                         {
                             ele = (Element) o3;
-                            map = maps.get(1);
+                            map = csList.get(1);
                             map.put(ele.attributeValue("key"), new K1SV2S(ele.attributeValue("id"), id2, "3"));
                         }
                     }
@@ -164,7 +165,7 @@ public class I2010000 implements IService
                 // 查找是否存在用户输入的城市
                 K1SV2S t = null;
                 int i = -1;
-                for (HashMap<String, K1SV2S> map : maps)
+                for (HashMap<String, K1SV2S> map : csList)
                 {
                     t = map.get(tmp);
                     if (t != null)
@@ -180,7 +181,7 @@ public class I2010000 implements IService
                 }
 
                 // 获取上一级城市信息
-                HashMap<String, K1SV2S> map = maps.get(i);
+                HashMap<String, K1SV2S> map = csList.get(i);
                 t = map.get(t.getV1());
             }
 
@@ -227,8 +228,22 @@ public class I2010000 implements IService
     {
         try
         {
-            Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
-            Element ele = (Element) document.selectSingleNode("/irps/I2020000/item[@id='配置']");
+            // 读取天气代码
+            HashMap<String, String> city0 = new HashMap<String, String>();
+            HashMap<String, String> city1 = new HashMap<String, String>();
+            HashMap<String, String> city2 = new HashMap<String, String>();
+            final String CODE = "http://flash.weather.com.cn/wmaps/xml/{0}.xml";
+            String txt0 = HttpUtil.request(CharUtil.format(CODE, "china"), "GET", "UTF-8");
+            Document document = DocumentHelper.parseText(txt0);
+            Element ele = document.getRootElement();
+            for (Object obj0 : ele.selectNodes("city"))
+            {
+                Element ele0 = (Element) obj0;
+            }
+
+            // 读取行政划分
+            document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
+            ele = (Element) document.selectSingleNode("/irps/I2010000/item[@id='配置']");
             ele.clearContent();
 
             final String PATH = "http://service.weather.com.cn/plugin/data/city{0}.xml?level={1}";
@@ -236,15 +251,11 @@ public class I2010000 implements IService
             int i = 0;
 
             // 省市
-            Element ele0;
-            Element ele1;
-            Element ele2;
-            Element ele3;
-            String txt0 = HttpUtil.request(CharUtil.format(PATH, "", i), "GET", "utf-8");
+            txt0 = HttpUtil.request(CharUtil.format(PATH, "", i), "GET", "utf-8");
             for (String tmp0 : txt0.split(","))
             {
-                ele0 = DocumentHelper.createElement("map");
-                tmp = split(ele, tmp0);
+                Element ele0 = DocumentHelper.createElement("map");
+                tmp = split(ele0, tmp0);
                 ele.add(ele0);
 
                 // 地区
@@ -252,7 +263,7 @@ public class I2010000 implements IService
                 String txt1 = HttpUtil.request(CharUtil.format(PATH, tmp, i), "GET", "utf-8");
                 for (String tmp1 : txt1.split(","))
                 {
-                    ele1 = DocumentHelper.createElement("map");
+                    Element ele1 = DocumentHelper.createElement("map");
                     tmp = split(ele1, tmp1);
                     ele0.add(ele1);
 
@@ -261,19 +272,9 @@ public class I2010000 implements IService
                     String txt2 = HttpUtil.request(CharUtil.format(PATH, tmp, i), "GET", "utf-8");
                     for (String tmp2 : txt2.split(","))
                     {
-                        ele2 = DocumentHelper.createElement("map");
+                        Element ele2 = DocumentHelper.createElement("map");
                         tmp = split(ele2, tmp2);
                         ele1.add(ele2);
-
-                        // 乡镇
-                        i = 3;
-                        String txt3 = HttpUtil.request(CharUtil.format(PATH, tmp, i), "GET", "utf-8");
-                        for (String tmp3 : txt3.split(","))
-                        {
-                            ele3 = DocumentHelper.createElement("map");
-                            split(ele3, tmp3);
-                            ele2.add(ele3);
-                        }
                     }
                 }
             }
