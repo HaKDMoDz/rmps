@@ -13,6 +13,18 @@
 	<classpathentry kind="lib" path="lib/core/httpcore-nio-4.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/core/httpmime-4.0.jar"/>
 	<classpathentry kind="lib" path="lib/core/jaxen-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/irps/Fetion.jar"/>
+	<classpathentry kind="lib" path="lib/irps/jaimlib-0.5.jar"/>
+	<classpathentry kind="lib" path="lib/irps/jml-1.0b3-full.jar"/>
+	<classpathentry kind="lib" path="lib/irps/joscar-protocol.jar"/>
+	<classpathentry kind="lib" path="lib/irps/rome-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/irps/smack-3.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/irps/smackx-debug.jar"/>
+	<classpathentry kind="lib" path="lib/irps/smackx-jingle.jar"/>
+	<classpathentry kind="lib" path="lib/irps/smackx.jar"/>
+	<classpathentry kind="lib" path="lib/irps/twitter4j-2.0.10.jar"/>
+	<classpathentry kind="lib" path="lib/irps/ymsg_network_v0_64.jar"/>
+	<classpathentry kind="lib" path="lib/irps/ymsg_support_v0_64.jar"/>
 	<classpathentry kind="lib" path="lib/axis-ant.jar"/>
 	<classpathentry kind="lib" path="lib/axis.jar"/>
 	<classpathentry kind="lib" path="lib/commons-discovery-0.2.jar"/>
@@ -26,17 +38,5 @@
 	<classpathentry kind="lib" path="lib/saaj-impl-1.3.4.jar"/>
 	<classpathentry kind="lib" path="lib/saaj.jar"/>
 	<classpathentry kind="lib" path="lib/wsdl4j-1.5.1.jar"/>
-	<classpathentry kind="lib" path="lib/irps/Fetion.jar"/>
-	<classpathentry kind="lib" path="lib/irps/jaimlib-0.5.jar"/>
-	<classpathentry kind="lib" path="lib/irps/jml-1.0b3-full.jar"/>
-	<classpathentry kind="lib" path="lib/irps/joscar-protocol.jar"/>
-	<classpathentry kind="lib" path="lib/irps/rome-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/irps/smack-3.1.0.jar"/>
-	<classpathentry kind="lib" path="lib/irps/smackx-debug.jar"/>
-	<classpathentry kind="lib" path="lib/irps/smackx-jingle.jar"/>
-	<classpathentry kind="lib" path="lib/irps/smackx.jar"/>
-	<classpathentry kind="lib" path="lib/irps/twitter4j-2.0.10.jar"/>
-	<classpathentry kind="lib" path="lib/irps/ymsg_network_v0_64.jar"/>
-	<classpathentry kind="lib" path="lib/irps/ymsg_support_v0_64.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
