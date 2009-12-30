@@ -78,13 +78,22 @@ public class I8010000 implements IService
     @Override
     public void doInit(ISession session, IMessage message)
     {
-        session.send("请选择您要使用的摘要算法：");
+        StringBuffer msg = new StringBuffer();
+        doInit(session, msg);
+        doHelp(session, msg);
+        doMenu(session, msg);
+
+        session.send(msg.toString());
         session.getProcess().setType(IProcess.TYPE_COMMAND);
+        session.getProcess().setStep(IProcess.STEP_DEFAULT);
     }
 
     @Override
     public void doHelp(ISession session, IMessage message)
     {
+        StringBuffer msg = new StringBuffer();
+        doHelp(session, msg);
+        session.send(msg.toString());
     }
 
     @Override
@@ -95,9 +104,13 @@ public class I8010000 implements IService
         if (md != null)
         {
             msg.append("您上一次数据摘要结果为：").append(session.newLine());
-            msg.append(CharUtil.toHex(md.digest()));
+            msg.append(CharUtil.toHex(md.digest())).append(session.newLine());
+            msg.append(session.newLine());
         }
-        msg.append("请选择您要使用的摘要算法，要返回上一层请输入星号：");
+
+        doMenu(session, msg);
+
+        session.send(msg.toString());
         session.getProcess().setType(IProcess.TYPE_COMMAND);
     }
 
@@ -153,6 +166,7 @@ public class I8010000 implements IService
             }
             msg.append("已有信息摘要结果：").append(session.newLine());
             msg.append(CharUtil.toHex(md.digest()));
+            msg.append(session.newLine());
             session.send(msg.toString());
         }
         catch (Exception exp)
@@ -173,6 +187,32 @@ public class I8010000 implements IService
 
     @Override
     public void doRoot(ISession session, IMessage message)
+    {
+    }
+
+    private void doInit(ISession session, StringBuffer message)
+    {
+        message.append(CharUtil.format("欢迎使用《{0}》服务！", getName())).append(session.newLine());
+        message.append(CharUtil.format("　　《{0}》服务支持目前较为常用的多个商用摘要算法，如MD5、SHA-1、SHA-256、SHA-512、RIPEMD-128、Tiger等！", getName())).append(session.newLine());
+    }
+
+    private void doHelp(ISession session, StringBuffer message)
+    {
+        message.append("您可以通过如下的方式使用此服务：").append(session.newLine());
+        message.append("　　1、选择您要使用的消息摘要算法；").append(session.newLine());
+        message.append("　　2、输入您要进行摘要处理的数据，可以连续输入；").append(session.newLine());
+    }
+
+    private void doMenu(ISession session, StringBuffer message)
+    {
+        for (int i = 0; i < 10; i += 1)
+        {
+            message.append(i).append('、').append(hash.get("" + i)).append(session.newLine());
+        }
+        message.append("请输入对应的数字选择您要使用的摘要算法：").append(session.newLine());
+    }
+
+    private void doStep(ISession session, StringBuffer message)
     {
     }
 }

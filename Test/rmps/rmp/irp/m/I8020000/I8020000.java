@@ -40,11 +40,11 @@ public class I8020000 implements IService
     public boolean wInit()
     {
         hash = new HashMap<String, String>(4);
-        hash.put("1", Constant.METHOD_TEST);
+        hash.put("0", Constant.METHOD_TEST);
         // hash.put("1", Constant.METHOD_MATCH);
-        hash.put("2", Constant.METHOD_SPLIT);
-        hash.put("3", Constant.METHOD_SEARCH);
-        hash.put("4", Constant.METHOD_REPLACE);
+        hash.put("1", Constant.METHOD_SPLIT);
+        hash.put("2", Constant.METHOD_SEARCH);
+        hash.put("3", Constant.METHOD_REPLACE);
         return true;
     }
 
@@ -70,7 +70,8 @@ public class I8020000 implements IService
     public void doInit(ISession session, IMessage message)
     {
         StringBuffer msg = new StringBuffer();
-        msg.append("请输入您的正则表达式，或*号返回服务选择菜单！");
+        doInit(session, msg);
+
         session.send(msg.toString());
         session.getProcess().setType(IProcess.TYPE_NACTION | IProcess.TYPE_CONTENT);
         session.getProcess().setStep(1);
@@ -80,16 +81,16 @@ public class I8020000 implements IService
     public void doHelp(ISession session, IMessage message)
     {
         StringBuffer msg = new StringBuffer();
-        msg.append("1、输入正则表达式；");
-        msg.append("2、选择正则验证方法；");
-        msg.append("3、输入要验证的字符串；");
-        msg.append("有关正则表达式的详细信息，请访问：http://www.regexlab.com/zh/regref.htm");
+        doHelp(session, msg);
         session.send(msg.toString());
     }
 
     @Override
     public void doMenu(ISession session, IMessage message)
     {
+        StringBuffer msg = new StringBuffer();
+        doMenu(session, msg);
+        session.send(msg.toString());
     }
 
     @Override
@@ -241,5 +242,33 @@ public class I8020000 implements IService
         message.append("*、返回服务切换菜单；").append(session.newLine());
         session.send(message.toString());
         session.getProcess().setStep(0);
+    }
+
+    private void doInit(ISession session, StringBuffer message)
+    {
+        message.append(CharUtil.format("欢迎使用《{0}》服务！", getName())).append(session.newLine());
+        message.append(CharUtil.format("　　《{0}》服务支持目前较为常用的多个商用摘要算法，如MD5、SHA-1、SHA-256、SHA-512、RIPEMD-128、Tiger等！", getName())).append(session.newLine());
+    }
+
+    private void doHelp(ISession session, StringBuffer message)
+    {
+        message.append("您可以通过如下的方式使用此服务：").append(session.newLine());
+        message.append("　　1、输入正则表达式；").append(session.newLine());
+        message.append("　　2、选择正则验证方法；").append(session.newLine());
+        message.append("　　3、输入要验证的字符串；").append(session.newLine());
+        message.append("　　有关正则表达式的详细信息，请访问：http://www.regexlab.com/zh/regref.htm");
+    }
+
+    private void doMenu(ISession session, StringBuffer message)
+    {
+        int c = hash.size();
+        if (c > 10)
+        {
+            c = 10;
+        }
+        for (int i = 0; i < c; i += 1)
+        {
+            message.append(i).append('、').append(hash.get("" + i)).append(session.newLine());
+        }
     }
 }

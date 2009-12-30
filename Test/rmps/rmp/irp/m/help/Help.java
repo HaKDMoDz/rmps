@@ -55,7 +55,10 @@ public class Help implements IService
     public void doInit(ISession session, IMessage message)
     {
         StringBuffer msg = new StringBuffer();
-        msg.append("您好，小木为您服务！");
+        doInit(session, msg);
+        msg.append(session.newLine());
+        doMenu(session, msg);
+
         session.send(msg.toString());
         session.getProcess().setType(IProcess.TYPE_KEYCODE);
     }
@@ -64,8 +67,8 @@ public class Help implements IService
     public void doMenu(ISession session, IMessage message)
     {
         StringBuffer msg = new StringBuffer();
-        msg = listService(session, msg);
-        msg.append("您可以通过数字键0-9选择您要进行的操作！");
+        doMenu(session, msg);
+
         session.send(msg.toString());
     }
 
@@ -73,16 +76,7 @@ public class Help implements IService
     public void doHelp(ISession session, IMessage message)
     {
         StringBuffer msg = new StringBuffer();
-        msg.append("您只要通过数字键即可以获得小木为您提供的所有服务！").append(session.newLine());
-        msg.append("并且在使用的过程，为您提供以下的快捷键功能：").append(session.newLine());
-        msg.append("?或？ 获取当前服务的帮助信息；").append(session.newLine());
-        msg.append("*或＊ 显示当前服务的选项菜单；").append(session.newLine());
-        msg.append("/或／ 跳转到最顶层服务菜单；").append(session.newLine());
-        msg.append("..   跳转到上一层服务菜单；").append(session.newLine());
-        msg.append("数字  跳转到下一层服务菜单；").append(session.newLine());
-        // msg.append("#数字 选择当前服务的功能选项；").append(session.newLine());
-        msg.append("&    向作者汇报错误信息；").append(session.newLine());
-        msg.append("@    给作者留言；");
+        doHelp(session, msg);
         session.send(msg.toString());
     }
 
@@ -91,7 +85,7 @@ public class Help implements IService
     {
         StringBuffer msg = new StringBuffer();
         msg.append("小木目前能够为您提供以下服务：").append(session.newLine());
-        msg = listService(session, msg);
+        doMenu(session, msg);
 
         // msg.append("0、我的应用").append(session.newLine());
         // msg.append("1、新闻资讯").append(session.newLine());
@@ -104,7 +98,6 @@ public class Help implements IService
         // msg.append("8、功能扩展").append(session.newLine());
         // msg.append("9、配置管理").append(session.newLine());
 
-        Control.appendHelp(session, msg);
         session.send(msg.toString());
         session.getProcess().setType(IProcess.TYPE_KEYCODE);
     }
@@ -124,7 +117,28 @@ public class Help implements IService
     {
     }
 
-    private StringBuffer listService(ISession session, StringBuffer message)
+    private void doInit(ISession session, StringBuffer message)
+    {
+        message.append("您好，小木为您服务！").append(session.newLine());
+        message.append("　　小木致力于为您提供实用而又风格统一的服务，以满足您的日常生活、工作及学习所需，");
+        message.append("目前小木的服务功能还在不断的开发与完善过程中，也希望您能提出宝贵的意见或建议！").append(session.newLine());
+    }
+
+    private void doHelp(ISession session, StringBuffer message)
+    {
+        message.append("您可以通过如下的方式使用此服务：").append(session.newLine());
+        message.append("　　不同的服务，您只需要通过简单的数字键盘操作即可获得，并且提供了一些快捷键功能以方便您的使用：").append(session.newLine());
+        message.append("*或＊ 显示服务的选择菜单；").append(session.newLine());
+        message.append("?或？ 获取当前服务的帮助；").append(session.newLine());
+        message.append(".或。 征服上一次信息录入；").append(session.newLine());
+        message.append("/或／ 跳转到最顶层服务菜单；").append(session.newLine());
+        message.append("..   跳转到上一层服务菜单；").append(session.newLine());
+        message.append("数字  跳转到下一层服务菜单；").append(session.newLine());
+        message.append("&    向作者汇报错误信息；").append(session.newLine());
+        message.append("@    给作者留言；");
+    }
+
+    private void doMenu(ISession session, StringBuffer message)
     {
         IService serv;
         String func = session.getProcess().getFunc();
@@ -136,6 +150,6 @@ public class Help implements IService
                 message.append(func + i).append('、').append(serv.getName()).append(session.newLine());
             }
         }
-        return message;
+        message.append("请输入对应的数字以选择您要使用的服务！");
     }
 }

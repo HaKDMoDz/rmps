@@ -73,13 +73,40 @@ public abstract class ASession implements ISession
     protected static StringBuffer appendPath(ISession session, StringBuffer message)
     {
         IProcess process = session.getProcess();
-        message.append("您当前的操作：/").append(process.getFunc()).append('（');
+        message.append("当前操作：/").append(process.getFunc()).append('（');
         IService service = Control.getService(process.getFunc());
         if (service != null)
         {
             message.append(service.getName());
         }
         message.append("）：");
+        message.append(session.newLine()).append('〖');
+        int type = session.getProcess().getType();
+        if ((type & IProcess.TYPE_NACTION) != 0)
+        {
+            message.append("锁定");
+        }
+        else
+        {
+            if (type == IProcess.TYPE_DEFAULT)
+            {
+                message.append("默认、");
+            }
+            if ((type & IProcess.TYPE_KEYCODE) != 0)
+            {
+                message.append("文本、");
+            }
+            if ((type & IProcess.TYPE_COMMAND) != 0)
+            {
+                message.append("命令、");
+            }
+            if ((type & IProcess.TYPE_CONTENT) != 0)
+            {
+                message.append("文本、");
+            }
+            message.deleteCharAt(message.length() - 1);
+        }
+        message.append('〗');
         message.append(session.newLine()).append("---------------------------------");
         message.append(session.newLine()).append(session.newLine());
         return message;
@@ -99,6 +126,7 @@ public abstract class ASession implements ISession
             message.append(session.newLine());
         }
         message.append(session.newLine()).append("---------------------------------");
+        message.append(session.newLine()).append("〖*菜单 ?帮助〗");
         message.append(session.newLine()).append("© Amonsoft @ http://amonsoft.com/");
         return message;
     }

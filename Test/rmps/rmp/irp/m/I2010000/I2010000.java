@@ -26,6 +26,7 @@ import rmp.util.EnvUtil;
 import rmp.util.LogUtil;
 
 import com.amonsoft.rmps.irp.b.IMessage;
+import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.util.CharUtil;
@@ -48,7 +49,8 @@ public class I2010000 implements IService
 {
     private static List<HashMap<String, K1SV2S>> csList;
     private static HashMap<String, String> pyName;
-    private static Pattern csPtn;
+    private static Pattern pyPtn;
+    private static Pattern hzPtn;
 
     @Override
     public boolean wInit()
@@ -63,7 +65,8 @@ public class I2010000 implements IService
             // 汉字：拼音匹配
             pyName = new HashMap<String, String>();
 
-            csPtn = Pattern.compile("[a-z']+");
+            pyPtn = Pattern.compile("[a-z']+");
+            hzPtn = Pattern.compile("[\u4e00-\u9fa5]+");
 
             // 读取省市/地区/县市/乡镇信息
             Element e;
@@ -132,22 +135,31 @@ public class I2010000 implements IService
     public void doInit(ISession session, IMessage message)
     {
         StringBuffer msg = new StringBuffer();
-        msg.append(CharUtil.format("欢迎使用《{0}》服务！", getName())).append(session.newLine());
-        msg.append(CharUtil.format("　　《{0}》服务目前", getName())).append(session.newLine());
-        msg.append("　　您可以通过如下的方式使用此服务：").append(session.newLine());
-        msg.append("　　1、直接输入您要查询的城市名称：如上海；").append(session.newLine());
-        msg.append("　　2、输入您要查询的城市名称拼音：如shanghai；").append(session.newLine());
+        doInit(session, msg);
+        msg.append(session.newLine());
+        doHelp(session, msg);
+
         session.send(msg.toString());
+        session.getProcess().setType(IProcess.TYPE_CONTENT);
+        session.getProcess().setStep(IProcess.STEP_DEFAULT);
     }
 
     @Override
     public void doHelp(ISession session, IMessage message)
     {
+        StringBuffer msg = new StringBuffer();
+        doHelp(session, msg);
+        session.send(msg.toString());
     }
 
     @Override
     public void doMenu(ISession session, IMessage message)
     {
+        StringBuffer msg = new StringBuffer();
+        doMenu(session, msg);
+
+        session.send(msg.toString());
+        session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
     }
 
     @Override
@@ -158,21 +170,26 @@ public class I2010000 implements IService
             String txt = message.getContent();
             String tmp = txt.trim();
 
-            boolean isPy = csPtn.matcher(tmp).matches();
-            if (isPy)
+            if (pyPtn.matcher(tmp).matches())
             {
-                tmp = pyName.get(tmp.replaceAll("\\s|sheng|zizhiqu|diqu|qu|xian|shi|xiang|zhen$", ""));
+                tmp = pyName.get(tmp.replaceAll(Constant.SPECIAL_CITY_PY, ""));
                 if (!CharUtil.isValidate(tmp))
                 {
                     session.send("无法确认您输入的城市名称，请重新输入！");
                     return;
                 }
             }
-            else
+            else if (hzPtn.matcher(tmp).matches())
             {
                 // 查找是否存在用户输入的城市
-                tmp = tmp.replaceAll("\\s|省|自治区|地区|区|县|市|乡|镇$", "");
+                tmp = tmp.replaceAll(Constant.SPECIAL_CITY_HZ, "");
             }
+            else
+            {
+                session.send("请输入您要查询的城市名称或其拼音！");
+                return;
+            }
+
             K1SV2S item;
             int i = csList.size() - 1;
             String top = null;
@@ -203,7 +220,7 @@ public class I2010000 implements IService
                 city = ele.attributeValue("cityname");
                 if (city != null && city.indexOf(tmp) >= 0)
                 {
-                    msg.append("城市：").append(city).append(session.newLine());
+                    msg.append("【查询城市】").append(city).append(session.newLine());
 
                     msg.append(session.newLine()).append("【今日概况】").append(session.newLine());
                     msg.append("天气：").append(ele.attributeValue("stateDetailed")).append(session.newLine());
@@ -342,13 +359,31 @@ public class I2010000 implements IService
             msg.append("<map key=\"上海\">").append(session.newLine());
             msg.append("<map key=\"天津\">").append(session.newLine());
             msg.append("<map key=\"重庆\">").append(session.newLine());
-            msg.append("以上节点分别添加id和comment属性，以方便天气查询！");
+            msg.append("请删除以上节点，以方便天气查询！");
             session.send(msg.toString());
         }
         catch (Exception exp)
         {
             LogUtil.exception(exp);
         }
+    }
+
+    private void doInit(ISession session, StringBuffer message)
+    {
+        message.append(CharUtil.format("欢迎使用《{0}》服务！", getName())).append(session.newLine());
+        message.append(CharUtil.format("　　《{0}》服务目前支持国内县级及以上城市天气信息查询，及最新一小时内实时天气信息。", getName())).append(session.newLine());
+    }
+
+    private void doHelp(ISession session, StringBuffer message)
+    {
+        message.append("您可以通过如下的方式使用此服务：").append(session.newLine());
+        message.append("　　1、直接输入您要查询的城市名称：如上海；").append(session.newLine());
+        message.append("　　2、输入您要查询城市的拼音（仅支持地区及以上城市）：如shanghai；").append(session.newLine());
+    }
+
+    private void doMenu(ISession session, StringBuffer message)
+    {
+        message.append("请输入您要查询的城市名称或拼音，或者输入数字切换其它服务！");
     }
 
     private String split(Element ele, String txt, HashMap<String, K1SV1S> map)
