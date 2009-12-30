@@ -129,9 +129,9 @@ public class I2050000 implements IService
         msg.append("　　您可以通过如下的方式使用此服务：").append(session.newLine());
         msg.append("　　1、直接输入数字及单位：如1米；").append(session.newLine());
         msg.append("　　2、数字与待转换单位=?目标转换单位：如1米=?寸；").append(session.newLine());
-        session.send(msg.toString());
         session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
         session.getProcess().setStep(IProcess.STEP_DEFAULT);
+        session.send(msg.toString());
     }
 
     @Override

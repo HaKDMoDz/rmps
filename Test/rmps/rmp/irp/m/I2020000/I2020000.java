@@ -114,9 +114,9 @@ public class I2020000 implements IService
         msg.append("　　1、直接输入您要查询的国家、地区或城市的名字：如上海；").append(session.newLine());
         msg.append("　　2、输入您要查询的国家、地区或城市的拼音：如shanghai；").append(session.newLine());
         msg.append("　　3、输入您要查询的国家、地区或城市的拼音首字母：如sh；").append(session.newLine());
-        session.send(msg.toString());
         session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
         session.getProcess().setStep(IProcess.STEP_DEFAULT);
+        session.send(msg.toString());
     }
 
     @Override
@@ -207,32 +207,32 @@ public class I2020000 implements IService
     public void doStep(ISession session, IMessage message)
     {
         IProcess proc = session.getProcess();
-        List<String> list = (List<String>) session.getAttribute(getCode() + "_m");
+        List<?> list = (List<?>) session.getAttribute(getCode() + "_m");
         if (list == null || list.size() < 1)
         {
-            session.send("请输入您要查询的国家、地区或城市的名称或拼音！");
             session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
             proc.setStep(IProcess.STEP_DEFAULT);
+            session.send("请输入您要查询的国家、地区或城市的名称或拼音！");
             return;
         }
 
         int step = proc.getStep();
         if (step <= -1)
         {
-            session.send("已经是第一页！");
             proc.setStep(IProcess.STEP_DEFAULT);
+            session.send("已经是第一页！");
             return;
         }
 
         if (step >= proc.getMost())
         {
-            session.send("已经是最后一页！");
             proc.setStep(proc.getMost());
+            session.send("已经是最后一页！");
             return;
         }
 
         session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_COMMAND | IProcess.TYPE_CONTENT);
-        showData(session, list.get(step));
+        showData(session, "" + list.get(step));
     }
 
     @Override

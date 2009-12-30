@@ -94,7 +94,7 @@ public abstract class ASession implements ISession
             }
             if ((type & IProcess.TYPE_KEYCODE) != 0)
             {
-                message.append("文本、");
+                message.append("服务、");
             }
             if ((type & IProcess.TYPE_COMMAND) != 0)
             {

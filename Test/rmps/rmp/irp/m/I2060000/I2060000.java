@@ -39,19 +39,18 @@ public class I2060000 implements IService
     @Override
     public String getName()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "";
     }
 
     @Override
     public String getDescription()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "";
     }
 
     @Override
     public void doInit(ISession session, IMessage message)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -62,13 +61,11 @@ public class I2060000 implements IService
     @Override
     public void doHelp(ISession session, IMessage message)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void doDeal(ISession session, IMessage message)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override

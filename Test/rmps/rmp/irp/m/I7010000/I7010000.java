@@ -100,15 +100,13 @@ public class I7010000 implements IService
     public void doInit(ISession session, IMessage message)
     {
         StringBuffer msg = new StringBuffer();
-        msg.append("欢迎使用《ＩＰ查询》服务！").append(session.newLine());
-        msg.append("　　ＩＰ查询目前支持国内及国外的IP地址查询，并且支持IPv4地IPv6地址的转换。").append(session.newLine());
-        msg.append("　　您可以通过如下的方式使用此服务：").append(session.newLine());
-        msg.append("　　1、直接输入您的查询的IPv4地址：如127.0.0.1；").append(session.newLine());
-        msg.append("　　2、输入您要查询的网站域名：如www.amonsoft.com；").append(session.newLine());
+        doInit(session, msg);
+        msg.append(session.newLine());
+        doHelp(session, msg);
 
-        session.send(msg.toString());
         session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
         session.getProcess().setStep(IProcess.STEP_DEFAULT);
+        session.send(msg.toString());
     }
 
     @Override
@@ -172,11 +170,11 @@ public class I7010000 implements IService
                 e = (Element) o;
                 msg.append(e.getText()).append(session.newLine());
             }
-            session.send(msg.toString());
 
             // 设置下一次操作状态
             IProcess process = session.getProcess();
             process.setType(IProcess.TYPE_CONTENT);
+            session.send(msg.toString());
         }
         catch (Exception exp)
         {
@@ -199,5 +197,18 @@ public class I7010000 implements IService
     @Override
     public void doRoot(ISession session, IMessage message)
     {
+    }
+
+    private void doInit(ISession session, StringBuffer message)
+    {
+        message.append("欢迎使用《ＩＰ查询》服务！").append(session.newLine());
+        message.append("　　ＩＰ查询目前支持国内及国外的IP地址查询，并且支持IPv4地IPv6地址的转换。").append(session.newLine());
+    }
+
+    private void doHelp(ISession session, StringBuffer message)
+    {
+        message.append("您可以通过如下的方式使用此服务：").append(session.newLine());
+        message.append("　　1、直接输入您的查询的IPv4地址：如127.0.0.1；").append(session.newLine());
+        message.append("　　2、输入您要查询的网站域名：如www.amonsoft.com；").append(session.newLine());
     }
 }

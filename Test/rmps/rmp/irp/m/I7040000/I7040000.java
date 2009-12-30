@@ -52,7 +52,7 @@ public class I7040000 implements IService
         try
         {
             messenger = new twitter4j.Twitter("", "");
-            twitter4j.Status tStatus = messenger.updateStatus("");
+            // twitter4j.Status tStatus = messenger.updateStatus("");
         }
         catch (Exception exp)
         {
@@ -138,7 +138,7 @@ public class I7040000 implements IService
                 try
                 {
                     // 获取Timeline
-                    List statuses = messenger.getFriendsTimeline();
+                    // List statuses = messenger.getFriendsTimeline();
                     messenger.sendDirectMessage("id", "message");
                     List<DirectMessage> messages = messenger.getDirectMessages();
                     for (DirectMessage dm : messages)
@@ -158,7 +158,7 @@ public class I7040000 implements IService
                     QueryResult result = messenger.search(query);
                     for (Tweet tweet : result.getTweets())
                     {
-                        // print(tweet.getFromUser() + ":" + tweet.getText());
+                        System.out.println(tweet.getFromUser() + ":" + tweet.getText());
                     }
                 }
                 catch (TwitterException ex)

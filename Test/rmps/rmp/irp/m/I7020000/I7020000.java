@@ -71,8 +71,8 @@ public class I7020000 implements IService
     @Override
     public void doInit(ISession session, IMessage message)
     {
-        session.send("欢迎使用RSS阅读器！");
         session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_COMMAND);
+        session.send("欢迎使用RSS阅读器！");
     }
 
     @Override
@@ -83,8 +83,8 @@ public class I7020000 implements IService
     @Override
     public void doHelp(ISession session, IMessage message)
     {
-        session.send("请以星号（*）起始输入您要查看的RSS频道号码！");
         session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_COMMAND);
+        session.send("请以星号（*）起始输入您要查看的RSS频道号码！");
     }
 
     @Override
@@ -176,7 +176,7 @@ public class I7020000 implements IService
             }
 
             SyndFeed feed = new SyndFeedInput().build(new XmlReader(new URL(channel)));
-            List list = feed.getEntries();
+            List<?> list = feed.getEntries();
             Object obj = list.get(proc.getStep());
             StringBuffer msg = new StringBuffer();
             if (obj instanceof SyndEntry)

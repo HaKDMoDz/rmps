@@ -7,6 +7,10 @@
  */
 package rmp.irp.m.I4010000;
 
+import com.amonsoft.rmps.irp.b.IMessage;
+import com.amonsoft.rmps.irp.b.ISession;
+import com.amonsoft.rmps.irp.m.IService;
+
 /**
  * <ul>
  * <li>功能说明：</li>
@@ -19,7 +23,64 @@ package rmp.irp.m.I4010000;
  * @author amon
  * 
  */
-public class I4010000
+public class I4010000 implements IService
 {
+    @Override
+    public boolean wInit()
+    {
+        return true;
+    }
 
+    @Override
+    public String getCode()
+    {
+        return "52060000";
+    }
+
+    @Override
+    public String getName()
+    {
+        return "";
+    }
+
+    @Override
+    public String getDescription()
+    {
+        return "";
+    }
+
+    @Override
+    public void doInit(ISession session, IMessage message)
+    {
+    }
+
+    @Override
+    public void doMenu(ISession session, IMessage message)
+    {
+    }
+
+    @Override
+    public void doHelp(ISession session, IMessage message)
+    {
+    }
+
+    @Override
+    public void doDeal(ISession session, IMessage message)
+    {
+    }
+
+    @Override
+    public void doStep(ISession session, IMessage message)
+    {
+    }
+
+    @Override
+    public void doExit(ISession session, IMessage message)
+    {
+    }
+
+    @Override
+    public void doRoot(ISession session, IMessage message)
+    {
+    }
 }

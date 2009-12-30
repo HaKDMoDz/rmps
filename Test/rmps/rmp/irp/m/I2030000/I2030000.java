@@ -8,7 +8,6 @@
 package rmp.irp.m.I2030000;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -28,7 +27,6 @@ import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.HttpUtil;
 
 import cons.EnvCons;
-import cons.irp.a.ConstUI;
 
 /**
  * <ul>
@@ -101,16 +99,16 @@ public class I2030000 implements IService
         msg.append(CharUtil.format("　　《{0}》服务目前支持15及18位身份证号码查询，并提供15位号码到18位号码的转换服务！", getName())).append(session.newLine());
         msg.append("　　您可以通过如下的方式使用此服务：").append(session.newLine());
         msg.append("　　1、直接输入您要查询的15或18位身份证号码；").append(session.newLine());
-        session.send(msg.toString());
         session.getProcess().setType(IProcess.TYPE_CONTENT);
         session.getProcess().setStep(IProcess.STEP_DEFAULT);
+        session.send(msg.toString());
     }
 
     @Override
     public void doMenu(ISession session, IMessage message)
     {
-        session.send("请输入一个15或18号的身份证号码，或输入服务代码切换其它服务！");
         session.getProcess().setType(IProcess.TYPE_KEYCODE);
+        session.send("请输入一个15或18号的身份证号码，或输入服务代码切换其它服务！");
     }
 
     @Override
@@ -157,12 +155,12 @@ public class I2030000 implements IService
                     }
                 }
             }
-            session.send(msg.toString());
 
             // 设置下一次操作状态
             IProcess proc = session.getProcess();
             proc.setType(IProcess.TYPE_CONTENT);
             proc.setStep(IProcess.STEP_DEFAULT);
+            session.send(msg.toString());
         }
         catch (Exception exp)
         {
@@ -170,103 +168,6 @@ public class I2030000 implements IService
 
             // 设置下一次操作状态
             session.getProcess().setType(IProcess.TYPE_CONTENT);
-        }
-    }
-
-    public void doDeal0(ISession session, IMessage message)
-    {
-        try
-        {
-            String command = message.getContent();
-            if (!CharUtil.isValidate(command))
-            {
-                command = "上海";
-            }
-
-            // 读取天气信息
-            HashMap<Integer, String> dataList = rmp.prp.aide.P3090000.t.Util.getWeatherByCity(command);
-
-            // 注册天气图标
-            // message.registerEmoticon(ConstUI.P3090000_DAY11,
-            // CharUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
-            // dataList.get(8)));
-            // message.registerEmoticon(ConstUI.P3090000_DAY12,
-            // CharUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
-            // dataList.get(9)));
-            // message.registerEmoticon(ConstUI.P3090000_DAY21,
-            // CharUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
-            // dataList.get(15)));
-            // message.registerEmoticon(ConstUI.P3090000_DAY22,
-            // CharUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
-            // dataList.get(16)));
-            // message.registerEmoticon(ConstUI.P3090000_DAY31,
-            // CharUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
-            // dataList.get(20)));
-            // message.registerEmoticon(ConstUI.P3090000_DAY32,
-            // CharUtil.format(cons.prp.aide.P3090000.ConstUI.BG_ICON,
-            // dataList.get(21)));
-
-            // 分段发送天气信息
-            StringBuffer sb = new StringBuffer("\r\n");
-            int idx = 0;
-            while (idx < 11)
-            {
-                sb.append("ImsRobot.getMesg(ConstUI.P3090000_PRE + (idx + 500))");
-                sb.append(dataList.get(idx)).append(ConstUI.NEXT_LINE);
-                idx += 1;
-            }
-
-            // 向用户发送计算结果
-            message.setContent(sb.toString());
-            session.send(message);
-
-            sb.delete(2, sb.length());
-            while (idx < 12)
-            {
-                sb.append("ImsRobot.getMesg(ConstUI.P3090000_PRE + (idx + 500))");
-                sb.append(dataList.get(idx)).append(ConstUI.NEXT_LINE);
-                idx += 1;
-            }
-
-            // 向用户发送计算结果
-            message.setContent(sb.toString());
-            session.send(message);
-
-            sb.delete(2, sb.length());
-            while (idx < 22)
-            {
-                sb.append("ImsRobot.getMesg(ConstUI.P3090000_PRE + (idx + 500))");
-                sb.append(dataList.get(idx)).append(ConstUI.NEXT_LINE);
-                idx += 1;
-            }
-
-            // 向用户发送计算结果
-            message.setContent(sb.toString());
-            session.send(message);
-
-            sb.delete(2, sb.length());
-            while (idx < 23)
-            {
-                sb.append("ImsRobot.getMesg(ConstUI.P3090000_PRE + (idx + 500))");
-                sb.append(dataList.get(idx)).append(ConstUI.NEXT_LINE);
-                idx += 1;
-            }
-
-            // 向用户发送计算结果
-            message.setContent(sb.toString());
-            session.send(message);
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
-            try
-            {
-                session.send(exp.getMessage());
-            }
-            catch (Exception e)
-            {
-                LogUtil.exception(e);
-            }
         }
     }
 

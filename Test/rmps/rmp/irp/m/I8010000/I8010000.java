@@ -13,6 +13,7 @@ package rmp.irp.m.I8010000;
 import java.security.MessageDigest;
 import java.util.HashMap;
 
+import rmp.irp.util.IrpsUtil;
 import rmp.util.LogUtil;
 import test.irp.Control;
 
@@ -83,9 +84,9 @@ public class I8010000 implements IService
         doHelp(session, msg);
         doMenu(session, msg);
 
+        session.getProcess().setType(IProcess.TYPE_CONTENT);
+        session.getProcess().setStep(1);
         session.send(msg.toString());
-        session.getProcess().setType(IProcess.TYPE_COMMAND);
-        session.getProcess().setStep(IProcess.STEP_DEFAULT);
     }
 
     @Override
@@ -110,8 +111,8 @@ public class I8010000 implements IService
 
         doMenu(session, msg);
 
-        session.send(msg.toString());
         session.getProcess().setType(IProcess.TYPE_COMMAND);
+        session.send(msg.toString());
     }
 
     @Override
@@ -122,13 +123,25 @@ public class I8010000 implements IService
             // 用户输入文本
             String txt = message.getContent();
             String tmp = txt.trim();
+            StringBuffer msg = new StringBuffer();
 
             IProcess proc = session.getProcess();
-            if (proc.getType() == IProcess.TYPE_COMMAND)
+            if (proc.getStep() == 1)
             {
-                if (!proc.setItem(tmp))
+                if (!IrpsUtil.isSZ(tmp))
                 {
-                    doInit(session, message);
+                    msg.append("您输入的不是的数字！").append(session.newLine());
+                    doMenu(session, msg);
+                    session.send(msg.toString());
+                    return;
+                }
+
+                tmp = hash.get(tmp);
+                if (!CharUtil.isValidate(tmp))
+                {
+                    msg.append("您输入的不是一个有效的数字！").append(session.newLine());
+                    doMenu(session, msg);
+                    session.send(msg.toString());
                     return;
                 }
 
@@ -149,7 +162,6 @@ public class I8010000 implements IService
             }
 
             // 进行摘要计算
-            StringBuffer msg = new StringBuffer();
             MessageDigest md;
             if ("*".equals(Control.getCommand(tmp)))
             {
@@ -214,5 +226,7 @@ public class I8010000 implements IService
 
     private void doStep(ISession session, StringBuffer message)
     {
+        message.append("1、修改摘要算法；").append(session.newLine());
+        message.append("2、输入消息数据；").append(session.newLine());
     }
 }

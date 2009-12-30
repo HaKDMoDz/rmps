@@ -139,9 +139,9 @@ public class I2010000 implements IService
         msg.append(session.newLine());
         doHelp(session, msg);
 
-        session.send(msg.toString());
         session.getProcess().setType(IProcess.TYPE_CONTENT);
         session.getProcess().setStep(IProcess.STEP_DEFAULT);
+        session.send(msg.toString());
     }
 
     @Override
@@ -158,8 +158,8 @@ public class I2010000 implements IService
         StringBuffer msg = new StringBuffer();
         doMenu(session, msg);
 
-        session.send(msg.toString());
         session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
+        session.send(msg.toString());
     }
 
     @Override

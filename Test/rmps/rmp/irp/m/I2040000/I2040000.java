@@ -99,9 +99,9 @@ public class I2040000 implements IService
     @Override
     public void doInit(ISession session, IMessage message)
     {
-        session.send("Welcome to Phone:");
         session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
         session.getProcess().setStep(IProcess.STEP_DEFAULT);
+        session.send("Welcome to Phone:");
     }
 
     @Override
@@ -157,12 +157,12 @@ public class I2040000 implements IService
             msg.append("卡类型：").append(temp[7]).append(session.newLine());
             msg.append("区　号：").append(temp[9]).append(session.newLine());
 
-            // 发送结果信息
-            session.send(msg.toString());
-
             // 设置下一次操作状态
             IProcess process = session.getProcess();
             process.setType(IProcess.TYPE_CONTENT);
+
+            // 发送结果信息
+            session.send(msg.toString());
         }
         catch (Exception exp)
         {

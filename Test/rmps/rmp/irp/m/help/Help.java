@@ -59,8 +59,8 @@ public class Help implements IService
         msg.append(session.newLine());
         doMenu(session, msg);
 
-        session.send(msg.toString());
         session.getProcess().setType(IProcess.TYPE_KEYCODE);
+        session.send(msg.toString());
     }
 
     @Override
@@ -99,7 +99,6 @@ public class Help implements IService
         // msg.append("9、配置管理").append(session.newLine());
 
         session.send(msg.toString());
-        session.getProcess().setType(IProcess.TYPE_KEYCODE);
     }
 
     @Override
