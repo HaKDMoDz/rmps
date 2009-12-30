@@ -74,31 +74,30 @@ public class I2010000 implements IService
             {
                 e = (Element) o0;
                 map = csList.get(0);
+                String k0 = e.attributeValue("key");
                 String c0 = e.attributeValue("comment");
-                map.put(c0, new K1SV2S(e.attributeValue("id"), "", "0"));
-                pyName.put(e.attributeValue("key"), c0);
+                map.put(k0, new K1SV2S(e.attributeValue("id"), "", "0"));
+                pyName.put(c0, k0);
 
                 // 地区
                 for (Object o1 : e.selectNodes("map"))
                 {
                     e = (Element) o1;
                     map = csList.get(1);
+                    String k1 = e.attributeValue("key");
                     String c1 = e.attributeValue("comment");
-                    map.put(c1, new K1SV2S(e.attributeValue("id"), c0, "1"));
-                    if (CharUtil.isValidate(c1))
-                    {
-                        pyName.put(e.attributeValue("key"), c1);
-                    }
+                    map.put(k1, new K1SV2S(e.attributeValue("id"), c0, "1"));
+                    pyName.put(c1, k1);
 
                     // 县市
                     for (Object o2 : e.selectNodes("map"))
                     {
                         e = (Element) o2;
                         map = csList.get(2);
+                        String k2 = e.attributeValue("key");
                         String c2 = e.attributeValue("comment");
-                        System.out.println(e.attributeValue("key") + "," + c2);
-                        map.put(c2, new K1SV2S(e.attributeValue("id"), c1, "2"));
-                        pyName.put(e.attributeValue("key"), c2);
+                        map.put(k2, new K1SV2S(e.attributeValue("id"), c1, "2"));
+                        pyName.put(c2, k2);
                     }
                 }
             }
@@ -162,17 +161,17 @@ public class I2010000 implements IService
             boolean isPy = csPtn.matcher(tmp).matches();
             if (isPy)
             {
-                tmp = tmp.replaceAll("\\s|sheng|zizhiqu|diqu|qu|xian|shi|xiang|zhen$", "");
-            }
-            else
-            {
-                // 查找是否存在用户输入的城市
-                tmp = pyName.get(tmp.replaceAll("\\s|省|自治区|地区|区|县|市|乡|镇$", ""));
+                tmp = pyName.get(tmp.replaceAll("\\s|sheng|zizhiqu|diqu|qu|xian|shi|xiang|zhen$", ""));
                 if (!CharUtil.isValidate(tmp))
                 {
                     session.send("无法确认您输入的城市名称，请重新输入！");
                     return;
                 }
+            }
+            else
+            {
+                // 查找是否存在用户输入的城市
+                tmp = tmp.replaceAll("\\s|省|自治区|地区|区|县|市|乡|镇$", "");
             }
             K1SV2S item;
             int i = csList.size() - 1;
@@ -197,26 +196,32 @@ public class I2010000 implements IService
             StringBuffer msg = new StringBuffer();
             Document doc = DocumentHelper.parseText(data);
             Element ele = doc.getRootElement();
-            ele = (Element) ele.selectSingleNode(CharUtil.format("city[@pyName='{0}']", tmp));
-            if (ele != null)
+            String city;
+            for (Object obj : ele.selectNodes("city"))
             {
-                msg.append("城市：").append(ele.attributeValue("cityname")).append(session.newLine());
-
-                msg.append(session.newLine()).append("【今日概况】").append(session.newLine());
-                msg.append("天气：").append(ele.attributeValue("stateDetailed")).append(session.newLine());
-                msg.append("温度：").append(ele.attributeValue("tem1")).append("℃～").append(ele.attributeValue("tem2")).append('℃').append(session.newLine());
-                msg.append("风力：").append(ele.attributeValue("windState")).append(session.newLine());
-
-                // 判断有无实况信息
-                tmp = ele.attributeValue("time");
-                if (CharUtil.isValidate(tmp))
+                ele = (Element) obj;
+                city = ele.attributeValue("cityname");
+                if (city != null && city.indexOf(tmp) >= 0)
                 {
-                    msg.append(session.newLine()).append("【当前实况】").append(session.newLine());
-                    msg.append("更新：").append(tmp).append(session.newLine());
-                    msg.append("温度：").append(ele.attributeValue("temNow")).append('℃').append(session.newLine());
-                    msg.append("风向：").append(ele.attributeValue("windDir")).append(session.newLine());
-                    msg.append("风级：").append(ele.attributeValue("windPower")).append(session.newLine());
-                    msg.append("湿度：").append(ele.attributeValue("humidity")).append(session.newLine());
+                    msg.append("城市：").append(city).append(session.newLine());
+
+                    msg.append(session.newLine()).append("【今日概况】").append(session.newLine());
+                    msg.append("天气：").append(ele.attributeValue("stateDetailed")).append(session.newLine());
+                    msg.append("温度：").append(ele.attributeValue("tem1")).append("℃～").append(ele.attributeValue("tem2")).append('℃').append(session.newLine());
+                    msg.append("风力：").append(ele.attributeValue("windState")).append(session.newLine());
+
+                    // 判断有无实况信息
+                    tmp = ele.attributeValue("time");
+                    if (CharUtil.isValidate(tmp))
+                    {
+                        msg.append(session.newLine()).append("【当前实况】").append(session.newLine());
+                        msg.append("更新：").append(tmp).append(session.newLine());
+                        msg.append("温度：").append(ele.attributeValue("temNow")).append('℃').append(session.newLine());
+                        msg.append("风向：").append(ele.attributeValue("windDir")).append(session.newLine());
+                        msg.append("风级：").append(ele.attributeValue("windPower")).append(session.newLine());
+                        msg.append("湿度：").append(ele.attributeValue("humidity")).append(session.newLine());
+                    }
+                    break;
                 }
             }
             session.send(msg.toString());
