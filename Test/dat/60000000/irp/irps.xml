@@ -59,11 +59,13 @@
 		<map key="help">您会经常用到的功能及输入方式：
 			?或？ 获取当前服务的帮助信息；
 			*或＊ 显示当前服务的选项菜单；
-			/或／ 跳转到最顶层服务菜单；
+			/或／
+			跳转到最顶层服务菜单；
 			.. 跳转到上一层服务菜单；
 			数字 跳转到下一层服务菜单；
 			#数字 选择当前服务的功能选项；
-			&amp; 向作者汇报错误信息；
+			&amp;
+			向作者汇报错误信息；
 			@ 给作者留言；
         </map>
 		<map key="deal"></map>
@@ -80,15 +82,8 @@
 		<map key="1" comment="邮政编码">rmp.irp.m.I2020000.I2020000</map>
 		<map key="2" comment="度量转换">rmp.irp.m.I2050000.I2050000</map>
 		<map key="3" comment="身份查询">rmp.irp.m.I2030000.I2030000</map>
-		<!--
-			map key="2">rmp.irp.m.I2000000.I2000000</map> <map key="22"
-			comment="邮政编码">rmp.irp.m.I2020000.I2020000</map> <map
-			key="24">rmp.irp.m.I2040000.I2040000</map> <map
-			key="25">rmp.irp.m.I2050000.I2050000</map> <map key="7"
-			comment="IP查询">rmp.irp.m.I7000000.I7000000</map> <map key="71"
-			comment="IP查询">rmp.irp.m.I7010000.I7010000</map> <map key="72"
-			comment="在线阅读">rmp.irp.m.I7020000.I7020000</map> <map key="9"
-			comment="配置管理">rmp.irp.m.I9000000.I9000000</map
-		-->
+		<map key="4" comment="天气预报">rmp.irp.m.I2010000.I2010000</map>
+		<map key="5" comment="消息摘要">rmp.irp.m.I8010000.I8010000</map>
+		<map key="6" comment="正则运算">rmp.irp.m.I8020000.I8020000</map>
 	</item>
 </irps>

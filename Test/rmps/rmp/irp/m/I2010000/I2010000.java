@@ -55,51 +55,50 @@ public class I2010000 implements IService
     {
         try
         {
+            // 拼音：编码匹配
             csList = new ArrayList<HashMap<String, K1SV2S>>();
             csList.add(new HashMap<String, K1SV2S>());
             csList.add(new HashMap<String, K1SV2S>());
             csList.add(new HashMap<String, K1SV2S>());
-            csList.add(new HashMap<String, K1SV2S>());
+            // 汉字：拼音匹配
+            pyName = new HashMap<String, String>();
 
             csPtn = Pattern.compile("[a-z']+");
 
             // 读取省市/地区/县市/乡镇信息
-            Element ele;
-            String id0;
-            String id1;
-            String id2;
+            Element e;
             HashMap<String, K1SV2S> map;
             Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
             // 省市
-            for (Object o0 : document.selectNodes("/irps/I2020000/item[@id='配置']/map"))
+            for (Object o0 : document.selectNodes("/irps/I2010000/item[@id='配置']/map"))
             {
-                ele = (Element) o0;
+                e = (Element) o0;
                 map = csList.get(0);
-                id0 = ele.attributeValue("key");
-                map.put(id0, new K1SV2S(ele.attributeValue("id"), "", "0"));
+                String c0 = e.attributeValue("comment");
+                map.put(c0, new K1SV2S(e.attributeValue("id"), "", "0"));
+                pyName.put(e.attributeValue("key"), c0);
 
                 // 地区
-                for (Object o1 : ele.selectNodes("map"))
+                for (Object o1 : e.selectNodes("map"))
                 {
-                    ele = (Element) o1;
+                    e = (Element) o1;
                     map = csList.get(1);
-                    id1 = ele.attributeValue("key");
-                    map.put(id1, new K1SV2S(ele.attributeValue("id"), id0, "1"));
+                    String c1 = e.attributeValue("comment");
+                    map.put(c1, new K1SV2S(e.attributeValue("id"), c0, "1"));
+                    if (CharUtil.isValidate(c1))
+                    {
+                        pyName.put(e.attributeValue("key"), c1);
+                    }
 
                     // 县市
-                    for (Object o2 : ele.selectNodes("map"))
+                    for (Object o2 : e.selectNodes("map"))
                     {
-                        ele = (Element) o2;
-                        map = csList.get(1);
-                        id2 = ele.attributeValue("key");
-                        map.put(id2, new K1SV2S(ele.attributeValue("id"), id1, "2"));
-                        // 乡镇
-                        for (Object o3 : ele.selectNodes("map"))
-                        {
-                            ele = (Element) o3;
-                            map = csList.get(1);
-                            map.put(ele.attributeValue("key"), new K1SV2S(ele.attributeValue("id"), id2, "3"));
-                        }
+                        e = (Element) o2;
+                        map = csList.get(2);
+                        String c2 = e.attributeValue("comment");
+                        System.out.println(e.attributeValue("key") + "," + c2);
+                        map.put(c2, new K1SV2S(e.attributeValue("id"), c1, "2"));
+                        pyName.put(e.attributeValue("key"), c2);
                     }
                 }
             }
@@ -161,52 +160,66 @@ public class I2010000 implements IService
             String tmp = txt.trim();
 
             boolean isPy = csPtn.matcher(tmp).matches();
-            if (!isPy)
+            if (isPy)
+            {
+                tmp = tmp.replaceAll("\\s|sheng|zizhiqu|diqu|qu|xian|shi|xiang|zhen$", "");
+            }
+            else
             {
                 // 查找是否存在用户输入的城市
-                K1SV2S t = null;
-                int i = -1;
-                for (HashMap<String, K1SV2S> map : csList)
+                tmp = pyName.get(tmp.replaceAll("\\s|省|自治区|地区|区|县|市|乡|镇$", ""));
+                if (!CharUtil.isValidate(tmp))
                 {
-                    t = map.get(tmp);
-                    if (t != null)
-                    {
-                        break;
-                    }
-                    i += 1;
-                }
-                if (t == null)
-                {
-                    session.send("无法确认您输入的城市名称！");
+                    session.send("无法确认您输入的城市名称，请重新输入！");
                     return;
                 }
-
-                // 获取上一级城市信息
-                HashMap<String, K1SV2S> map = csList.get(i);
-                t = map.get(t.getV1());
+            }
+            K1SV2S item;
+            int i = csList.size() - 1;
+            String top = null;
+            while (i >= 0)
+            {
+                item = csList.get(i--).get(tmp);
+                if (item != null && CharUtil.isValidate(item.getV1()))
+                {
+                    top = item.getV1();
+                    break;
+                }
+            }
+            if (!CharUtil.isValidate(top))
+            {
+                top = "china";
             }
 
             // 获取天气数据
-            String data = HttpUtil.request(CharUtil.format("http://flash.weather.com.cn/wmaps/xml/{0}.xml", ""), "GET", "utf-8");
+            String data = HttpUtil.request(CharUtil.format("http://flash.weather.com.cn/wmaps/xml/{0}.xml", top), "GET", "utf-8");
 
             StringBuffer msg = new StringBuffer();
             Document doc = DocumentHelper.parseText(data);
             Element ele = doc.getRootElement();
-            ele = (Element) ele.selectSingleNode(CharUtil.format("city[@{0}='{1}']", isPy ? "pyName" : "cityname", tmp));
+            ele = (Element) ele.selectSingleNode(CharUtil.format("city[@pyName='{0}']", tmp));
             if (ele != null)
             {
-                msg.append("今天概况：");
+                msg.append("城市：").append(ele.attributeValue("cityname")).append(session.newLine());
+
+                msg.append(session.newLine()).append("【今日概况】").append(session.newLine());
                 msg.append("天气：").append(ele.attributeValue("stateDetailed")).append(session.newLine());
-                msg.append("温度：").append(ele.attributeValue("tem1")).append('～').append(ele.attributeValue("tem2")).append(session.newLine());
+                msg.append("温度：").append(ele.attributeValue("tem1")).append("℃～").append(ele.attributeValue("tem2")).append('℃').append(session.newLine());
                 msg.append("风力：").append(ele.attributeValue("windState")).append(session.newLine());
 
-                msg.append("当前实况：");
-                msg.append("更新：").append(ele.attributeValue("time")).append(session.newLine());
-                msg.append("温度：").append(ele.attributeValue("temNow")).append(session.newLine());
-                msg.append("风向：").append(ele.attributeValue("windDir")).append(session.newLine());
-                msg.append("风级：").append(ele.attributeValue("windPower")).append(session.newLine());
-                msg.append("湿度：").append(ele.attributeValue("humidity")).append(session.newLine());
+                // 判断有无实况信息
+                tmp = ele.attributeValue("time");
+                if (CharUtil.isValidate(tmp))
+                {
+                    msg.append(session.newLine()).append("【当前实况】").append(session.newLine());
+                    msg.append("更新：").append(tmp).append(session.newLine());
+                    msg.append("温度：").append(ele.attributeValue("temNow")).append('℃').append(session.newLine());
+                    msg.append("风向：").append(ele.attributeValue("windDir")).append(session.newLine());
+                    msg.append("风级：").append(ele.attributeValue("windPower")).append(session.newLine());
+                    msg.append("湿度：").append(ele.attributeValue("humidity")).append(session.newLine());
+                }
             }
+            session.send(msg.toString());
         }
         catch (Exception exp)
         {
@@ -234,7 +247,8 @@ public class I2010000 implements IService
             HashMap<String, K1SV1S> city1 = new HashMap<String, K1SV1S>();
             HashMap<String, K1SV1S> city2 = new HashMap<String, K1SV1S>();
 
-            boolean special = false;
+            boolean spSign = false;
+            String spName = "北京上海天津重庆海南香港澳门台湾";
             final String CODE = "http://flash.weather.com.cn/wmaps/xml/{0}.xml";
 
             // 省市
@@ -244,14 +258,13 @@ public class I2010000 implements IService
             {
                 Element ele0 = (Element) obj0;
                 txt0 = ele0.attributeValue("pyName");
-                city0.put(ele0.attributeValue("quName"), new K1SV1S(txt0, ele0.attributeValue("url")));
-                // 澳门重庆香港台湾海南北京上海天津特殊处理
-                special = "aomenchongqingxianggangtaiwanhainanbeijingshanghaitianjin".indexOf(txt0) < 0;
+                String tmp = ele0.attributeValue("quName");
+                city0.put(tmp, new K1SV1S(txt0, ele0.attributeValue("url")));
+                // 特殊处理
+                spSign = spName.indexOf(tmp) < 0;
 
                 // 地区
-                String txt1 = CharUtil.format(CODE, txt0);
-                System.out.println(txt1);
-                txt1 = HttpUtil.request(txt1, "GET", "UTF-8");
+                String txt1 = HttpUtil.request(CharUtil.format(CODE, txt0), "GET", "UTF-8");
                 Document doc1 = DocumentHelper.parseText(txt1);
                 for (Object obj1 : doc1.getRootElement().selectNodes("city"))
                 {
@@ -259,12 +272,10 @@ public class I2010000 implements IService
                     txt1 = ele1.attributeValue("pyName");
                     city1.put(ele1.attributeValue("cityname"), new K1SV1S(txt1, ele1.attributeValue("url")));
 
-                    if (special)
+                    if (spSign)
                     {
                         // 县市
-                        String txt2 = CharUtil.format(CODE, txt1);
-                        System.out.println(txt2);
-                        txt2 = HttpUtil.request(txt2, "GET", "UTF-8");
+                        String txt2 = HttpUtil.request(CharUtil.format(CODE, txt1), "GET", "UTF-8");
                         Document doc2 = DocumentHelper.parseText(txt2);
                         for (Object obj2 : doc2.getRootElement().selectNodes("city"))
                         {
@@ -292,6 +303,8 @@ public class I2010000 implements IService
                 Element ele0 = DocumentHelper.createElement("map");
                 tmp = split(ele0, tmp0, city0);
                 ele.add(ele0);
+                // 特殊处理
+                spSign = spName.indexOf(ele0.attributeValue("key")) >= 0;
 
                 // 地区
                 i = 1;
@@ -299,18 +312,16 @@ public class I2010000 implements IService
                 for (String tmp1 : txt1.split(","))
                 {
                     Element ele1 = DocumentHelper.createElement("map");
-                    tmp = split(ele1, tmp1, city1);
+                    tmp = split(ele1, tmp1, spSign ? null : city1);
                     ele0.add(ele1);
 
                     // 县市
                     i = 2;
-                    String txt2 = CharUtil.format(PATH, tmp, i);
-                    System.out.println(txt2);
-                    txt2 = HttpUtil.request(txt2, "GET", "utf-8");
+                    String txt2 = HttpUtil.request(CharUtil.format(PATH, tmp, i), "GET", "utf-8");
                     for (String tmp2 : txt2.split(","))
                     {
                         Element ele2 = DocumentHelper.createElement("map");
-                        tmp = split(ele2, tmp2, city2);
+                        tmp = split(ele2, tmp2, spSign ? city1 : city2);
                         ele1.add(ele2);
                     }
                 }
@@ -319,6 +330,15 @@ public class I2010000 implements IService
             XMLWriter writer = new XMLWriter(new FileOutputStream(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
             writer.write(document);
             writer.close();
+
+            StringBuffer msg = new StringBuffer();
+            msg.append("数据更新完毕，您可能还需要修改文件中以下几个地方：").append(session.newLine());
+            msg.append("<map key=\"北京\">").append(session.newLine());
+            msg.append("<map key=\"上海\">").append(session.newLine());
+            msg.append("<map key=\"天津\">").append(session.newLine());
+            msg.append("<map key=\"重庆\">").append(session.newLine());
+            msg.append("以上节点分别添加id和comment属性，以方便天气查询！");
+            session.send(msg.toString());
         }
         catch (Exception exp)
         {

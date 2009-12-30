@@ -163,11 +163,11 @@ public class Live extends MsnAdapter implements IAccount
     @Override
     public void controlMessageReceived(MsnSwitchboard switchboard, MsnControlMessage message, MsnContact contact)
     {
-        LogUtil.log("controlMessageReceived:" + message.getContentType());
-
-        session.switchboard = switchboard;
-        session.contact.contact = contact;
-        Control.getInstance().controlMessageReceived(session, null);
+        // LogUtil.log("controlMessageReceived:" + message.getContentType());
+        //
+        // session.switchboard = switchboard;
+        // session.contact.contact = contact;
+        // Control.getInstance().controlMessageReceived(session, null);
     }
 
     @Override

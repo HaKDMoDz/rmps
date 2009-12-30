@@ -27,10 +27,6 @@ import com.amonsoft.rmps.irp.m.IService;
  */
 public class Help implements IService
 {
-    private static String init;
-    private static String menu;
-    private static String help;
-
     @Override
     public boolean wInit()
     {
@@ -58,57 +54,36 @@ public class Help implements IService
     @Override
     public void doInit(ISession session, IMessage message)
     {
-        if (init == null)
-        {
-            StringBuffer msg = new StringBuffer();
-            msg.append("您好，小木为您服务！");
-            init = msg.toString();
-        }
-        session.send(init);
+        StringBuffer msg = new StringBuffer();
+        msg.append("您好，小木为您服务！");
+        session.send(msg.toString());
         session.getProcess().setType(IProcess.TYPE_KEYCODE);
     }
 
     @Override
     public void doMenu(ISession session, IMessage message)
     {
-        if (menu == null)
-        {
-            StringBuffer msg = new StringBuffer();
-            String func = session.getProcess().getFunc();
-            IService serv;
-            for (int i = 0; i < 10; i += 1)
-            {
-                serv = Control.getService(func + i);
-                if (serv != null)
-                {
-                    msg.append(func + i).append('、').append(serv.getName()).append(session.newLine());
-                }
-            }
-            msg.append("您可以通过数字键0-9选择您要进行的操作！");
-            menu = msg.toString();
-        }
-        session.send(menu);
+        StringBuffer msg = new StringBuffer();
+        msg = listService(session, msg);
+        msg.append("您可以通过数字键0-9选择您要进行的操作！");
+        session.send(msg.toString());
     }
 
     @Override
     public void doHelp(ISession session, IMessage message)
     {
-        if (help == null)
-        {
-            StringBuffer msg = new StringBuffer();
-            msg.append("您只要通过数字键即可以获得小木为您提供的所有服务！").append(session.newLine());
-            msg.append("并且在使用的过程，为您提供以下的快捷键功能：").append(session.newLine());
-            msg.append("?或？ 获取当前服务的帮助信息；").append(session.newLine());
-            msg.append("*或＊ 显示当前服务的选项菜单；").append(session.newLine());
-            msg.append("/或／ 跳转到最顶层服务菜单；").append(session.newLine());
-            msg.append("..   跳转到上一层服务菜单；").append(session.newLine());
-            msg.append("数字  跳转到下一层服务菜单；").append(session.newLine());
-            // msg.append("#数字 选择当前服务的功能选项；").append(session.newLine());
-            msg.append("&    向作者汇报错误信息；").append(session.newLine());
-            msg.append("@    给作者留言；");
-            help = msg.toString();
-        }
-        session.send(help);
+        StringBuffer msg = new StringBuffer();
+        msg.append("您只要通过数字键即可以获得小木为您提供的所有服务！").append(session.newLine());
+        msg.append("并且在使用的过程，为您提供以下的快捷键功能：").append(session.newLine());
+        msg.append("?或？ 获取当前服务的帮助信息；").append(session.newLine());
+        msg.append("*或＊ 显示当前服务的选项菜单；").append(session.newLine());
+        msg.append("/或／ 跳转到最顶层服务菜单；").append(session.newLine());
+        msg.append("..   跳转到上一层服务菜单；").append(session.newLine());
+        msg.append("数字  跳转到下一层服务菜单；").append(session.newLine());
+        // msg.append("#数字 选择当前服务的功能选项；").append(session.newLine());
+        msg.append("&    向作者汇报错误信息；").append(session.newLine());
+        msg.append("@    给作者留言；");
+        session.send(msg.toString());
     }
 
     @Override
@@ -116,16 +91,8 @@ public class Help implements IService
     {
         StringBuffer msg = new StringBuffer();
         msg.append("小木目前能够为您提供以下服务：").append(session.newLine());
-        String func = session.getProcess().getFunc();
-        IService serv;
-        for (int i = 0; i < 10; i += 1)
-        {
-            serv = Control.getService(func + i);
-            if (serv != null)
-            {
-                msg.append(func + i).append('、').append(serv.getName()).append(session.newLine());
-            }
-        }
+        msg = listService(session, msg);
+
         // msg.append("0、我的应用").append(session.newLine());
         // msg.append("1、新闻资讯").append(session.newLine());
         // msg.append("2、生活服务").append(session.newLine());
@@ -155,5 +122,20 @@ public class Help implements IService
     @Override
     public void doRoot(ISession session, IMessage message)
     {
+    }
+
+    private StringBuffer listService(ISession session, StringBuffer message)
+    {
+        IService serv;
+        String func = session.getProcess().getFunc();
+        for (int i = 0; i < 10; i += 1)
+        {
+            serv = Control.getService(func + i);
+            if (serv != null)
+            {
+                message.append(func + i).append('、').append(serv.getName()).append(session.newLine());
+            }
+        }
+        return message;
     }
 }
