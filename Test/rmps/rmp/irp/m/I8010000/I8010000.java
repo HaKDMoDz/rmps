@@ -81,8 +81,8 @@ public class I8010000 implements IService
     {
         StringBuffer msg = new StringBuffer();
         doInit(session, msg);
-        doHelp(session, msg);
-        doMenu(session, msg);
+        doHelp(session, msg.append(session.newLine()));
+        doMenu(session, msg.append(session.newLine()));
 
         session.getProcess().setType(IProcess.TYPE_CONTENT);
         session.getProcess().setStep(1);
@@ -126,11 +126,11 @@ public class I8010000 implements IService
             StringBuffer msg = new StringBuffer();
 
             IProcess proc = session.getProcess();
-            if (proc.getStep() == 1)
+            if (proc.getStep() == Constant.STEP_CIPHER)
             {
                 if (!IrpsUtil.isSZ(tmp))
                 {
-                    msg.append("您输入的不是的数字！").append(session.newLine());
+                    msg.append("您输入的不是有效的数字！").append(session.newLine());
                     doMenu(session, msg);
                     session.send(msg.toString());
                     return;
@@ -145,41 +145,37 @@ public class I8010000 implements IService
                     return;
                 }
 
-                // 判断用户输入合法性
-                tmp = hash.get(tmp);
-                if (!CharUtil.isValidate(tmp))
-                {
-                    doInit(session, message);
-                    return;
-                }
-
                 // 生成摘要对象
-                session.setAttribute(getCode() + "_s", MessageDigest.getInstance(tmp, "CryptixCrypto"));
+                session.setAttribute(getCode() + Constant.SESSION_DIGEST_SRC, MessageDigest.getInstance(tmp, "CryptixCrypto"));
                 // 清除上一次摘要对象
-                session.setAttribute(getCode() + "_t", null);
-                proc.setType(IProcess.TYPE_CONTENT);
+                session.setAttribute(getCode() + Constant.SESSION_DIGEST_NOW, null);
+                proc.setStep(Constant.STEP_USERDATE);
+                session.send("请输入您的摘要数据！");
                 return;
             }
 
             // 进行摘要计算
-            MessageDigest md;
-            if ("*".equals(Control.getCommand(tmp)))
+            if (proc.getStep() == Constant.STEP_USERDATE)
             {
-                md = (MessageDigest) session.getAttribute(getCode() + "_t");
-                msg.append(CharUtil.format("{0}摘要结果为：", hash.get(proc.getItem()))).append(session.newLine());
-                msg.append(CharUtil.toHex(md.digest())).append(session.newLine());
+                MessageDigest md;
+                if ("*".equals(Control.getCommand(tmp)))
+                {
+                    md = (MessageDigest) session.getAttribute(getCode() + "_t");
+                    msg.append(CharUtil.format("{0}摘要结果为：", hash.get(proc.getItem()))).append(session.newLine());
+                    msg.append(CharUtil.toHex(md.digest())).append(session.newLine());
+                }
+                else
+                {
+                    md = (MessageDigest) session.getAttribute(getCode() + "_s");
+                    md.update(txt.getBytes());
+                    session.setAttribute(getCode() + "_t", md);
+                    md = (MessageDigest) md.clone();
+                }
+                msg.append("已有信息摘要结果：").append(session.newLine());
+                msg.append(CharUtil.toHex(md.digest()));
+                msg.append(session.newLine());
+                session.send(msg.toString());
             }
-            else
-            {
-                md = (MessageDigest) session.getAttribute(getCode() + "_s");
-                md.update(txt.getBytes());
-                session.setAttribute(getCode() + "_t", md);
-                md = (MessageDigest) md.clone();
-            }
-            msg.append("已有信息摘要结果：").append(session.newLine());
-            msg.append(CharUtil.toHex(md.digest()));
-            msg.append(session.newLine());
-            session.send(msg.toString());
         }
         catch (Exception exp)
         {
@@ -202,32 +198,36 @@ public class I8010000 implements IService
     {
     }
 
-    private void doInit(ISession session, StringBuffer message)
+    private StringBuffer doInit(ISession session, StringBuffer message)
     {
         message.append(CharUtil.format("欢迎使用《{0}》服务！", getName())).append(session.newLine());
         message.append(CharUtil.format("　　《{0}》服务支持目前较为常用的多个商用摘要算法，如MD5、SHA-1、SHA-256、SHA-512、RIPEMD-128、Tiger等！", getName())).append(session.newLine());
+        return message;
     }
 
-    private void doHelp(ISession session, StringBuffer message)
+    private StringBuffer doHelp(ISession session, StringBuffer message)
     {
         message.append("您可以通过如下的方式使用此服务：").append(session.newLine());
         message.append("　　1、选择您要使用的消息摘要算法；").append(session.newLine());
         message.append("　　2、输入您要进行摘要处理的数据，可以连续输入；").append(session.newLine());
+        return message;
     }
 
-    private void doMenu(ISession session, StringBuffer message)
+    private StringBuffer doMenu(ISession session, StringBuffer message)
     {
         for (int i = 0; i < 10; i += 1)
         {
             message.append(i).append('、').append(hash.get("" + i)).append(session.newLine());
         }
         message.append("请输入对应的数字选择您要使用的摘要算法：").append(session.newLine());
+        return message;
     }
 
-    private void doStep(ISession session, StringBuffer message)
+    private StringBuffer doStep(ISession session, StringBuffer message)
     {
         message.append("1、修改摘要算法；").append(session.newLine());
         message.append("2、输入消息数据；").append(session.newLine());
         message.append("*、返回服务选择菜单；").append(session.newLine());
+        return message;
     }
 }

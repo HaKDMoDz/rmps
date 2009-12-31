@@ -28,15 +28,15 @@ public class IrpsUtil
     /**
      * 数字正则表达式
      */
-    private static Pattern szReg = Pattern.compile("^[\\d０１２３４５６７８９]%");
+    private static Pattern szReg = Pattern.compile("^[\\d０１２３４５６７８９]$");
     /**
      * 汉字正则表达式
      */
-    private static Pattern hzReg = Pattern.compile("^[\\d０１２３４５６７８９]%");
+    private static Pattern hzReg = Pattern.compile("^[\\d０１２３４５６７８９]$");
     /**
      * 拼音正则表达式
      */
-    private static Pattern pyReg = Pattern.compile("^[\\d０１２３４５６７８９]%");
+    private static Pattern pyReg = Pattern.compile("^[\\d０１２３４５６７８９]$");
 
     /**
      * 是否为纯数字
