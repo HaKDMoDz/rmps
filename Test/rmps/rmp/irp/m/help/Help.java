@@ -98,6 +98,10 @@ public class Help implements IService
         // msg.append("8、功能扩展").append(session.newLine());
         // msg.append("9、配置管理").append(session.newLine());
 
+        if (session.getProcess().getType() == IProcess.TYPE_DEFAULT)
+        {
+            session.getProcess().setType(IProcess.TYPE_KEYCODE);
+        }
         session.send(msg.toString());
     }
 

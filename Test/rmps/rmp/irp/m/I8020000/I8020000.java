@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import rmp.irp.c.Control;
+
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
@@ -40,11 +42,11 @@ public class I8020000 implements IService
     public boolean wInit()
     {
         hash = new HashMap<String, String>(4);
-        hash.put("0", Constant.METHOD_TEST);
-        // hash.put("1", Constant.METHOD_MATCH);
-        hash.put("1", Constant.METHOD_SPLIT);
-        hash.put("2", Constant.METHOD_SEARCH);
-        hash.put("3", Constant.METHOD_REPLACE);
+        hash.put("0", Constant.MATCHER_TEST);
+        hash.put("1", Constant.MATCHER_SPLIT);
+        hash.put("2", Constant.MATCHER_MATCH);
+        hash.put("3", Constant.MATCHER_SEARCH);
+        hash.put("4", Constant.MATCHER_REPLACE);
         return true;
     }
 
@@ -71,10 +73,17 @@ public class I8020000 implements IService
     {
         StringBuffer msg = new StringBuffer();
         doInit(session, msg);
+        doHelp(session, msg.append(session.newLine()));
 
-        session.send(msg.toString());
+        msg.append(session.newLine()).append("第一步：请输入匹配模式").append(session.newLine());
+
         session.getProcess().setType(IProcess.TYPE_NACTION | IProcess.TYPE_CONTENT);
-        session.getProcess().setStep(1);
+        session.getProcess().setStep(Constant.STEP_PATTERN);
+        session.send(msg.toString());
+
+        session.setAttribute(getCode() + Constant.SESSION_PATTERN, null);
+        session.setAttribute(getCode() + Constant.SESSION_MATCHER, null);
+        session.setAttribute(getCode() + Constant.SESSION_CHARSET, null);
     }
 
     @Override
@@ -98,6 +107,7 @@ public class I8020000 implements IService
     {
         String txt = message.getContent();
         String tmp = txt.trim();
+        StringBuffer msg = new StringBuffer(session.newLine());
 
         IProcess proc = session.getProcess();
         // 功能选择
@@ -105,82 +115,126 @@ public class I8020000 implements IService
         {
             if ("1".equals(tmp))
             {
-                proc.setStep(3);
+                proc.setStep(Constant.STEP_CHARSET);
+                session.send(msg.append("请输入后续验证数据！").append(session.newLine()).toString());
+                return;
             }
-            else if ("2".equals(tmp))
+            if ("2".equals(tmp))
             {
-                proc.setStep(2);
+                proc.setStep(Constant.STEP_CHARONE);
+                session.send(msg.append("请输入新的验证数据！").append(session.newLine()).toString());
+                return;
             }
-            else if ("3".equals(tmp))
+            if ("3".equals(tmp))
             {
-                proc.setStep(1);
+                doMenu(session, msg);
+                proc.setStep(Constant.STEP_MATCHER);
+                session.send(msg.toString());
+                return;
             }
-            else if ("*".equals(tmp))
+            if ("4".equals(tmp))
             {
-                proc.setType(IProcess.TYPE_KEYCODE);
+                proc.setStep(Constant.STEP_PATTERN);
+                session.send(msg.append("请输入新的匹配模式！").append(session.newLine()).toString());
+                return;
             }
+            if ("*".equals(tmp))
+            {
+                String func = proc.getFunc();
+                if (func.length() > 0)
+                {
+                    func = func.substring(0, func.length() - 1);
+                }
+                proc.setFunc(func);
+                Control.getService(func).doInit(session, message);
+                // proc.setType(IProcess.TYPE_KEYCODE);
+                // session.send(msg.toString());
+                return;
+            }
+
+            // 容错处理
+            msg.append("小木不能确认您当前的操作！").append(session.newLine());
+            doStep(session, msg);
+            session.send(msg.toString());
             return;
         }
+
         // 输入表达式
-        if (proc.getStep() == 1)
+        if (proc.getStep() == Constant.STEP_PATTERN)
         {
             if (!CharUtil.isValidate(txt))
             {
-                session.send("表达式不能为空，请重新输入！");
+                session.send(msg.append("匹配模式不能为空，请重新输入！").append(session.newLine()).toString());
                 return;
             }
-            session.setAttribute(getCode() + "_r", txt);
+            session.setAttribute(getCode() + Constant.SESSION_PATTERN, txt);
 
             // 判断字符串
-            if (session.getAttribute(getCode() + "_t") == null)
+            if (session.getAttribute(getCode() + Constant.SESSION_MATCHER) == null)
             {
-                session.send("请输入您要验证的字符串，或*号返回服务选择菜单！");
-                proc.setStep(2);
-            }
-            else
-            {
-                showData(session);
-            }
-            return;
-        }
-        // 输入字符串
-        if (proc.getStep() == 2)
-        {
-            if (!CharUtil.isValidate(txt))
-            {
-                session.send("字符串不能为空，请重新输入！");
-                return;
-            }
-            session.setAttribute(getCode() + "_t", txt);
-
-            // 判断运算符
-            if (session.getAttribute(getCode() + "_p") == null)
-            {
-                StringBuffer msg = new StringBuffer();
-                msg.append("请选择您要执行的的验证方法，或*号返回服务选择菜单！").append(session.newLine());
-                for (String key : hash.keySet())
-                {
-                    msg.append(key).append("、").append(hash.get(key)).append(session.newLine());
-                }
+                // 第一次使用服务
+                msg.append("第二步：选择验证方法").append(session.newLine());
+                doMenu(session, msg);
                 session.send(msg.toString());
-                proc.setStep(3);
+                proc.setStep(Constant.STEP_MATCHER);
             }
             else
             {
-                showData(session);
+                // 内容更新，显示运算结果
+                showData(session, msg);
             }
             return;
         }
+
         // 选择运算符
-        if (proc.getStep() == 3)
+        if (proc.getStep() == Constant.STEP_MATCHER)
         {
             if (!CharUtil.isValidate(tmp))
             {
-                session.send("请选择您要执行的验证方法！");
+                doMenu(session, msg);
+                session.send(msg.toString());
                 return;
             }
-            session.setAttribute(getCode() + "_p", tmp);
-            showData(session);
+            session.setAttribute(getCode() + Constant.SESSION_MATCHER, tmp);
+
+            // 判断字符串
+            if (session.getAttribute(getCode() + Constant.SESSION_CHARSET) == null)
+            {
+                // 第一次使用服务
+                session.send(msg.append("第三步：输入验证数据").append(session.newLine()).toString());
+                proc.setStep(Constant.STEP_CHARONE);
+            }
+            else
+            {
+                // 内容更新，显示运算结果
+                showData(session, msg);
+            }
+            return;
+        }
+
+        // 单匹配数据输入
+        if (proc.getStep() == Constant.STEP_CHARONE)
+        {
+            if (!CharUtil.isValidate(txt))
+            {
+                session.send(msg.append("待验证数据不能为空，请重新输入！").append(session.newLine()).toString());
+                return;
+            }
+            session.setAttribute(getCode() + Constant.SESSION_CHARSET, txt);
+
+            // 内容更新，显示运算结果
+            showData(session, msg);
+            return;
+        }
+
+        // 多匹配数据输入
+        if (proc.getStep() == Constant.STEP_CHARSET)
+        {
+            if (CharUtil.isValidate(txt))
+            {
+                session.setAttribute(getCode() + Constant.SESSION_CHARSET, session.getAttribute(getCode() + Constant.SESSION_CHARSET) + txt);
+            }
+            showData(session, msg);
             return;
         }
     }
@@ -200,66 +254,24 @@ public class I8020000 implements IService
     {
     }
 
-    private void showData(ISession session)
-    {
-        StringBuffer message = new StringBuffer();
-        String r = (String) session.getAttribute(getCode() + "_r");// 表达式
-        String t = (String) session.getAttribute(getCode() + "_t");// 字符串
-        String m = hash.get((String) session.getAttribute(getCode() + "_p"));// 运算符
-        if (Constant.METHOD_TEST.equals(m))
-        {
-            message.append(Constant.METHOD_TEST).append("()运行结果：").append(Pattern.matches(r, t));
-        }
-        else if (Constant.METHOD_MATCH.equals(m))
-        {
-        }
-        else if (Constant.METHOD_SPLIT.equals(m))
-        {
-            message.append(Constant.METHOD_SPLIT).append("()运行结果：").append(session.newLine());
-            for (String s : t.split(r))
-            {
-                message.append(s).append(session.newLine());
-            }
-        }
-        else if (Constant.METHOD_SEARCH.equals(m))
-        {
-            message.append(Constant.METHOD_SEARCH).append("()运行结果：").append(session.newLine());
-            Matcher p = Pattern.compile(r).matcher(t);
-            while (p.find())
-            {
-                message.append(p.group()).append(session.newLine());
-            }
-        }
-        else if (Constant.METHOD_REPLACE.equals(m))
-        {
-            message.append(Constant.METHOD_REPLACE).append("()运行结果：").append(t.replaceAll(r, ""));
-        }
-        message.append(session.newLine());
-        message.append("请选择您要进行的操作：").append(session.newLine());
-        message.append("1、输入新的验证字符串；").append(session.newLine());
-        message.append("2、选择其它验证方法；").append(session.newLine());
-        message.append("3、更新正则表达式；").append(session.newLine());
-        message.append("*、返回服务切换菜单；").append(session.newLine());
-        session.send(message.toString());
-        session.getProcess().setStep(0);
-    }
-
-    private void doInit(ISession session, StringBuffer message)
+    private StringBuffer doInit(ISession session, StringBuffer message)
     {
         message.append(CharUtil.format("欢迎使用《{0}》服务！", getName())).append(session.newLine());
-        message.append(CharUtil.format("　　《{0}》服务支持目前较为常用的多个商用摘要算法，如MD5、SHA-1、SHA-256、SHA-512、RIPEMD-128、Tiger等！", getName())).append(session.newLine());
+        message.append(CharUtil.format("　　《{0}》服务支持常用正则表达式算法，如test、split、search、replace等！", getName())).append(session.newLine());
+        return message;
     }
 
-    private void doHelp(ISession session, StringBuffer message)
+    private StringBuffer doHelp(ISession session, StringBuffer message)
     {
         message.append("您可以通过如下的方式使用此服务：").append(session.newLine());
         message.append("　　1、输入正则表达式；").append(session.newLine());
         message.append("　　2、选择正则验证方法；").append(session.newLine());
         message.append("　　3、输入要验证的字符串；").append(session.newLine());
-        message.append("　　有关正则表达式的详细信息，请访问：http://www.regexlab.com/zh/regref.htm");
+        message.append("　　有关正则表达式的详细信息，请访问：http://www.regexlab.com/zh/regref.htm").append(session.newLine());
+        return message;
     }
 
-    private void doMenu(ISession session, StringBuffer message)
+    private StringBuffer doMenu(ISession session, StringBuffer message)
     {
         int c = hash.size();
         if (c > 10)
@@ -270,5 +282,68 @@ public class I8020000 implements IService
         {
             message.append(i).append('、').append(hash.get("" + i)).append(session.newLine());
         }
+        message.append("请输入对应的数字选择您要使用的验证方法：").append(session.newLine());
+        return message;
+    }
+
+    private StringBuffer doStep(ISession session, StringBuffer message)
+    {
+        message.append("1、继续当前验证数据输入；").append(session.newLine());
+        message.append("2、录入新的验证数据；").append(session.newLine());
+        message.append("3、选择其它验证方法；").append(session.newLine());
+        message.append("4、更新当前匹配模式；").append(session.newLine());
+        message.append("*、返回服务选择菜单；").append(session.newLine());
+        message.append("请选择您要进行的操作：").append(session.newLine());
+        return message;
+    }
+
+    private void showData(ISession session, StringBuffer message)
+    {
+        String p = (String) session.getAttribute(getCode() + Constant.SESSION_PATTERN);// 表达式
+        String m = hash.get((String) session.getAttribute(getCode() + Constant.SESSION_MATCHER));// 运算符
+        String t = (String) session.getAttribute(getCode() + Constant.SESSION_CHARSET);// 字符串
+        message.append('/').append(p).append("/ .");
+        if (Constant.MATCHER_TEST.equals(m))
+        {
+            message.append(Constant.MATCHER_TEST).append("() 运行结果：");
+            message.append(Pattern.matches(p, t)).append(session.newLine());
+        }
+        else if (Constant.MATCHER_MATCH.equals(m))
+        {
+            message.append(Constant.MATCHER_MATCH).append("() 运行结果：").append(session.newLine());
+            Matcher r = Pattern.compile(p).matcher(t);
+            while (r.find())
+            {
+                message.append(r.start()).append(session.newLine());
+            }
+        }
+        else if (Constant.MATCHER_SPLIT.equals(m))
+        {
+            message.append(Constant.MATCHER_SPLIT).append("() 运行结果：").append(session.newLine());
+            for (String s : t.split(p))
+            {
+                message.append(s).append(session.newLine());
+            }
+        }
+        else if (Constant.MATCHER_SEARCH.equals(m))
+        {
+            message.append(Constant.MATCHER_SEARCH).append("() 运行结果：").append(session.newLine());
+            Matcher r = Pattern.compile(p).matcher(t);
+            while (r.find())
+            {
+                message.append(r.group()).append(session.newLine());
+            }
+        }
+        else if (Constant.MATCHER_REPLACE.equals(m))
+        {
+            message.append(Constant.MATCHER_REPLACE).append("('■') 运行结果：");
+            message.append(session.newLine()).append(t.replaceAll(p, "■")).append(session.newLine());
+        }
+
+        message.append(session.newLine());
+        doStep(session, message);
+
+        session.getProcess().setStep(IProcess.STEP_DEFAULT);
+        session.send(message.toString());
     }
 }

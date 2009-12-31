@@ -79,8 +79,8 @@ public abstract class ASession implements ISession
         {
             message.append(service.getName());
         }
-        message.append("）：");
-        message.append(session.newLine()).append('〖');
+        message.append("）：").append(session.newLine());
+        message.append('〖');
         int type = session.getProcess().getType();
         if ((type & IProcess.TYPE_NACTION) != 0)
         {
@@ -102,13 +102,12 @@ public abstract class ASession implements ISession
             }
             if ((type & IProcess.TYPE_CONTENT) != 0)
             {
-                message.append("文本、");
+                message.append("内容、");
             }
             message.deleteCharAt(message.length() - 1);
         }
-        message.append('〗');
-        message.append(session.newLine()).append("---------------------------------");
-        message.append(session.newLine()).append(session.newLine());
+        message.append('〗').append(session.newLine());
+        message.append("---------------------------------").append(session.newLine());
         return message;
     }
 
@@ -121,10 +120,6 @@ public abstract class ASession implements ISession
      */
     protected static StringBuffer appendCopy(ISession session, StringBuffer message)
     {
-        if (message.lastIndexOf(session.newLine()) != message.length() - session.newLine().length())
-        {
-            message.append(session.newLine());
-        }
         message.append(session.newLine()).append("---------------------------------");
         message.append(session.newLine()).append("〖*菜单 ?帮助〗");
         message.append(session.newLine()).append("© Amonsoft @ http://amonsoft.com/");

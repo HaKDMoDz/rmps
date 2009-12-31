@@ -12,7 +12,6 @@ import java.util.regex.Pattern;
 import rmp.irp.c.Control;
 
 import com.amonsoft.rmps.irp.b.IProcess;
-import com.amonsoft.util.CharUtil;
 
 /**
  * <ul>
@@ -59,9 +58,15 @@ public class Process implements IProcess
     public boolean setFunc(String func)
     {
         // 判断参数是否为空
-        if (!CharUtil.isValidate(func))
+        if (func == null)
         {
             return false;
+        }
+
+        if (FUNC_DEFAULT.equals(func))
+        {
+            this.func = func;
+            return true;
         }
 
         // 判断是否为功能代码

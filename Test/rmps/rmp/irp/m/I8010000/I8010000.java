@@ -228,5 +228,6 @@ public class I8010000 implements IService
     {
         message.append("1、修改摘要算法；").append(session.newLine());
         message.append("2、输入消息数据；").append(session.newLine());
+        message.append("*、返回服务选择菜单；").append(session.newLine());
     }
 }
