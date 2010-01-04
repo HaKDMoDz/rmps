@@ -773,8 +773,8 @@ public class Fetion implements IAccount// , IFetionEventListener
     static final int LOGIN_DATAIO_ERROR = 2;
     static final int LOGIN_FAILED = 3;
     static int call_id;
-    ArrayList<IDataType> Commands = new ArrayList();
-    ArrayList<IDataType> Commands2 = new ArrayList();
+    ArrayList<IDataType> Commands = new ArrayList<IDataType>();
+    ArrayList<IDataType> Commands2 = new ArrayList<IDataType>();
     private static final String[] hexDigits =
     { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F" };
     int Q1 = 2;

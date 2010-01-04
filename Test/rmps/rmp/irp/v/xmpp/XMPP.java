@@ -154,8 +154,9 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
         List<IContact> list = new ArrayList<IContact>();
         for (RosterEntry re : messenger.getRoster().getEntries())
         {
+            list.add(new Contact(re));
         }
-        throw new UnsupportedOperationException("Not supported yet.");
+        return list;
     }
 
     @Override

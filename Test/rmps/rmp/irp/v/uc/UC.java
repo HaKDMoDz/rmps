@@ -27,7 +27,8 @@ import com.amonsoft.rmps.irp.v.IConnect;
 public class UC implements IAccount
 {
     private Connect connect;
-    private Session session;
+
+    // private Session session;
 
     @Override
     public void exit()

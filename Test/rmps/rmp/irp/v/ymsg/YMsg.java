@@ -42,7 +42,8 @@ public class YMsg implements IAccount, SessionListener
 {
     private Connect connect;
     private ymsg.network.Session messenger;
-    private Session session;
+
+    // private Session session;
 
     public YMsg()
     {

@@ -43,7 +43,7 @@ import com.amonsoft.rmps.irp.v.IConnect;
  */
 public class ICQ implements IAccount, ClientConnListener, FlapPacketListener, SnacPacketListener, ConnProcessorExceptionHandler
 {
-    private IConnect connect;
+    // private IConnect connect;
     private ClientFlapConn messenger;
     protected ClientSnacProcessor processor;
 
@@ -61,7 +61,7 @@ public class ICQ implements IAccount, ClientConnListener, FlapPacketListener, Sn
             case IStatus.SIGN:
                 Connect conn = new Connect();
                 conn.load();
-                connect = conn;
+                // connect = conn;
 
                 messenger = new ClientFlapConn(new ConnDescriptor(conn.getServer(), conn.getPort()));
                 messenger.addConnListener(this);

@@ -48,7 +48,7 @@ import com.wilko.jaim.Utils;
  */
 public class AIM implements IAccount, JaimEventListener
 {
-    private IConnect connect;
+    // private IConnect connect;
     private JaimConnection messenger;
 
     @Override
@@ -67,7 +67,7 @@ public class AIM implements IAccount, JaimEventListener
             case IStatus.SIGN:
                 Connect conn = new Connect();
                 conn.load();
-                connect = conn;
+                // connect = conn;
 
                 try
                 {
@@ -223,7 +223,7 @@ public class AIM implements IAccount, JaimEventListener
             try
             {
                 messenger.sendEvil(er.getEvilBy(), false); // Let's warn them
-                                                           // back
+                // back
                 messenger.addBlock(er.getEvilBy()); // And block them
             }
             catch (Exception e)
@@ -265,12 +265,12 @@ public class AIM implements IAccount, JaimEventListener
 
         try
         {
-            Iterator it = messenger.getGroups().iterator();
+            Iterator<?> it = messenger.getGroups().iterator();
             while (it.hasNext())
             {
                 Group g = (Group) it.next();
                 System.out.println("Group: " + g.getName());
-                Enumeration e = g.enumerateBuddies();
+                Enumeration<?> e = g.enumerateBuddies();
                 while (e.hasMoreElements())
                 {
                     Buddy b = (Buddy) e.nextElement();

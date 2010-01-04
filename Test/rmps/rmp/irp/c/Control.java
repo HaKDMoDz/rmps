@@ -419,24 +419,24 @@ public class Control implements IControl
         message.append("您可以使用<<、<、>或>>进行翻页查看。").append(session.newLine());
         return message;
     }
-
-    private boolean processSpecial()
-    {
-        return true;
-    }
-
-    private boolean processKeycode()
-    {
-        return true;
-    }
-
-    private boolean processCommand()
-    {
-        return true;
-    }
-
-    private boolean processContent()
-    {
-        return true;
-    }
+    //
+    // private boolean processSpecial()
+    // {
+    // return true;
+    // }
+    //
+    // private boolean processKeycode()
+    // {
+    // return true;
+    // }
+    //
+    // private boolean processCommand()
+    // {
+    // return true;
+    // }
+    //
+    // private boolean processContent()
+    // {
+    // return true;
+    // }
 }
