@@ -35,6 +35,7 @@ public class Process implements IProcess
     Process()
     {
         func = FUNC_DEFAULT;
+        item = ITEM_DEFAULT;
         step = STEP_DEFAULT;
         type = TYPE_DEFAULT;
 

@@ -84,28 +84,25 @@ public abstract class ASession implements ISession
         int type = session.getProcess().getType();
         if ((type & IProcess.TYPE_NACTION) != 0)
         {
-            message.append("锁定");
+            message.append("锁定-");
         }
-        else
+        if (type == IProcess.TYPE_DEFAULT)
         {
-            if (type == IProcess.TYPE_DEFAULT)
-            {
-                message.append("默认、");
-            }
-            if ((type & IProcess.TYPE_KEYCODE) != 0)
-            {
-                message.append("服务、");
-            }
-            if ((type & IProcess.TYPE_COMMAND) != 0)
-            {
-                message.append("命令、");
-            }
-            if ((type & IProcess.TYPE_CONTENT) != 0)
-            {
-                message.append("内容、");
-            }
-            message.deleteCharAt(message.length() - 1);
+            message.append("默认、");
         }
+        if ((type & IProcess.TYPE_KEYCODE) != 0)
+        {
+            message.append("服务、");
+        }
+        if ((type & IProcess.TYPE_COMMAND) != 0)
+        {
+            message.append("命令、");
+        }
+        if ((type & IProcess.TYPE_CONTENT) != 0)
+        {
+            message.append("内容、");
+        }
+        message.deleteCharAt(message.length() - 1);
         message.append('〗').append(session.newLine());
         message.append("---------------------------------").append(session.newLine());
         return message;

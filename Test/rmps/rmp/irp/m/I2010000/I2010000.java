@@ -22,6 +22,7 @@ import org.dom4j.io.XMLWriter;
 
 import rmp.bean.K1SV1S;
 import rmp.bean.K1SV2S;
+import rmp.irp.c.Control;
 import rmp.util.EnvUtil;
 import rmp.util.LogUtil;
 
@@ -134,12 +135,13 @@ public class I2010000 implements IService
     @Override
     public void doInit(ISession session, IMessage message)
     {
-        StringBuffer msg = new StringBuffer();
+        StringBuffer msg = new StringBuffer(session.newLine());
         doInit(session, msg);
         msg.append(session.newLine());
         doHelp(session, msg);
 
         session.getProcess().setType(IProcess.TYPE_CONTENT);
+        session.getProcess().setItem(IProcess.ITEM_DEFAULT);
         session.getProcess().setStep(IProcess.STEP_DEFAULT);
         session.send(msg.toString());
     }
@@ -147,7 +149,7 @@ public class I2010000 implements IService
     @Override
     public void doHelp(ISession session, IMessage message)
     {
-        StringBuffer msg = new StringBuffer();
+        StringBuffer msg = new StringBuffer(session.newLine());
         doHelp(session, msg);
         session.send(msg.toString());
     }
@@ -155,11 +157,24 @@ public class I2010000 implements IService
     @Override
     public void doMenu(ISession session, IMessage message)
     {
-        StringBuffer msg = new StringBuffer();
-        doMenu(session, msg);
+        IProcess pro = session.getProcess();
+        if (IProcess.ITEM_DEFAULT.equals(pro.getItem()))
+        {
+            StringBuffer msg = new StringBuffer(session.newLine());
+            doMenu(session, msg);
 
-        session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
-        session.send(msg.toString());
+            session.getProcess().setItem(Constant.ITEM_SUBMENU);
+            session.send(msg.toString());
+            return;
+        }
+
+        String func = pro.getFunc();
+        if (func.length() > 0)
+        {
+            func = func.substring(0, func.length() - 1);
+        }
+        pro.setFunc(func);
+        Control.getService(func).doInit(session, message);
     }
 
     @Override
@@ -169,13 +184,36 @@ public class I2010000 implements IService
         {
             String txt = message.getContent();
             String tmp = txt.trim();
+            IProcess pro = session.getProcess();
+            StringBuffer msg = new StringBuffer(session.newLine());
+
+            if (!IProcess.ITEM_DEFAULT.equals(pro.getItem()))
+            {
+                // 返回上级选单
+                if ("*".equals(pro.getItem()))
+                {
+                    String func = pro.getFunc();
+                    if (func.length() > 0)
+                    {
+                        func = func.substring(0, func.length() - 1);
+                    }
+                    pro.setFunc(func);
+                    Control.getService(func).doInit(session, message);
+                    return;
+                }
+
+                // 继续当前服务
+                pro.setItem(IProcess.ITEM_DEFAULT);
+                session.send(msg.append("请输入您要查询的城市名称或其拼音！").append(session.newLine()).toString());
+                return;
+            }
 
             if (pyPtn.matcher(tmp).matches())
             {
                 tmp = pyName.get(tmp.replaceAll(Constant.SPECIAL_CITY_PY, ""));
                 if (!CharUtil.isValidate(tmp))
                 {
-                    session.send("无法确认您输入的城市名称，请重新输入！");
+                    session.send(msg.append("无法确认您输入的城市名称，请重新输入！").append(session.newLine()).toString());
                     return;
                 }
             }
@@ -186,7 +224,7 @@ public class I2010000 implements IService
             }
             else
             {
-                session.send("请输入您要查询的城市名称或其拼音！");
+                session.send(msg.append("请输入您要查询的城市名称或其拼音！").append(session.newLine()).toString());
                 return;
             }
 
@@ -210,7 +248,6 @@ public class I2010000 implements IService
             // 获取天气数据
             String data = HttpUtil.request(CharUtil.format("http://flash.weather.com.cn/wmaps/xml/{0}.xml", top), "GET", "utf-8");
 
-            StringBuffer msg = new StringBuffer();
             Document doc = DocumentHelper.parseText(data);
             Element ele = doc.getRootElement();
             String city;
@@ -353,7 +390,7 @@ public class I2010000 implements IService
             writer.write(document);
             writer.close();
 
-            StringBuffer msg = new StringBuffer();
+            StringBuffer msg = new StringBuffer(session.newLine());
             msg.append("数据更新完毕，您可能还需要修改文件中以下几个地方：").append(session.newLine());
             msg.append("<map key=\"北京\">").append(session.newLine());
             msg.append("<map key=\"上海\">").append(session.newLine());
@@ -383,7 +420,9 @@ public class I2010000 implements IService
 
     private void doMenu(ISession session, StringBuffer message)
     {
-        message.append("请输入您要查询的城市名称或拼音，或者输入数字切换其它服务！");
+        message.append(CharUtil.format("0、继续使用《{0}》服务；", getName())).append(session.newLine());
+        message.append("*、返回上级服务选单；").append(session.newLine());
+        message.append("请输入对应的数字选择您要使用的验证方法：").append(session.newLine());
     }
 
     private String split(Element ele, String txt, HashMap<String, K1SV1S> map)

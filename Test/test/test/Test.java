@@ -7,6 +7,8 @@
  */
 package test;
 
+import java.util.regex.Pattern;
+
 import rmp.Rmps;
 import rmp.comn.user.UserInfo;
 import rmp.irp.m.I2010000.I2010000;
@@ -32,7 +34,8 @@ public class Test
      */
     public static void main(String[] args)
     {
-        test();
+        System.out.println(Pattern.matches("[aA]mon", "yaoamon"));
+        System.out.println(Pattern.compile("[aA]mon").matcher("yaoamon").matches());
     }
 
     public static void test()
@@ -45,7 +48,7 @@ public class Test
         Message message = new Message("118.132.166.12");
         IService s = new I2010000();
         s.wInit();
-//        s.doInit(session, message);
-//        s.doRoot(session, message);
+        // s.doInit(session, message);
+        // s.doRoot(session, message);
     }
 }

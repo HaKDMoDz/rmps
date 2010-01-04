@@ -123,7 +123,7 @@ public class I8010000 implements IService
             // 用户输入文本
             String txt = message.getContent();
             String tmp = txt.trim();
-            StringBuffer msg = new StringBuffer();
+            StringBuffer msg = new StringBuffer(session.newLine());
 
             IProcess proc = session.getProcess();
             if (proc.getStep() == Constant.STEP_CIPHER)
@@ -150,7 +150,7 @@ public class I8010000 implements IService
                 // 清除上一次摘要对象
                 session.setAttribute(getCode() + Constant.SESSION_DIGEST_NOW, null);
                 proc.setStep(Constant.STEP_USERDATE);
-                session.send("请输入您的摘要数据！");
+                session.send(msg.append("请输入您的摘要数据！").append(session.newLine()).toString());
                 return;
             }
 
@@ -172,8 +172,8 @@ public class I8010000 implements IService
                     md = (MessageDigest) md.clone();
                 }
                 msg.append("已有信息摘要结果：").append(session.newLine());
-                msg.append(CharUtil.toHex(md.digest()));
-                msg.append(session.newLine());
+                msg.append(CharUtil.toHex(md.digest())).append(session.newLine());
+                doStep(session, msg);
                 session.send(msg.toString());
             }
         }

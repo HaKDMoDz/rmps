@@ -113,6 +113,12 @@ public class I8020000 implements IService
         // 功能选择
         if (proc.getStep() == IProcess.STEP_DEFAULT)
         {
+            if ("0".equals(tmp))
+            {
+                proc.setStep(Constant.STEP_CHARONE);
+                session.send(msg.append("请输入新的验证数据！").append(session.newLine()).toString());
+                return;
+            }
             if ("1".equals(tmp))
             {
                 proc.setStep(Constant.STEP_CHARSET);
@@ -121,18 +127,12 @@ public class I8020000 implements IService
             }
             if ("2".equals(tmp))
             {
-                proc.setStep(Constant.STEP_CHARONE);
-                session.send(msg.append("请输入新的验证数据！").append(session.newLine()).toString());
-                return;
-            }
-            if ("3".equals(tmp))
-            {
                 doMenu(session, msg);
                 proc.setStep(Constant.STEP_MATCHER);
                 session.send(msg.toString());
                 return;
             }
-            if ("4".equals(tmp))
+            if ("3".equals(tmp))
             {
                 proc.setStep(Constant.STEP_PATTERN);
                 session.send(msg.append("请输入新的匹配模式！").append(session.newLine()).toString());
@@ -147,8 +147,6 @@ public class I8020000 implements IService
                 }
                 proc.setFunc(func);
                 Control.getService(func).doInit(session, message);
-                // proc.setType(IProcess.TYPE_KEYCODE);
-                // session.send(msg.toString());
                 return;
             }
 
@@ -288,10 +286,10 @@ public class I8020000 implements IService
 
     private StringBuffer doStep(ISession session, StringBuffer message)
     {
-        message.append("1、继续当前验证数据输入；").append(session.newLine());
-        message.append("2、录入新的验证数据；").append(session.newLine());
-        message.append("3、选择其它验证方法；").append(session.newLine());
-        message.append("4、更新当前匹配模式；").append(session.newLine());
+        message.append("0、录入新的验证数据；").append(session.newLine());
+        message.append("1、继续当前数据输入；").append(session.newLine());
+        message.append("2、选择其它验证方法；").append(session.newLine());
+        message.append("3、更新当前匹配模式；").append(session.newLine());
         message.append("*、返回服务选择菜单；").append(session.newLine());
         message.append("请选择您要进行的操作：").append(session.newLine());
         return message;
