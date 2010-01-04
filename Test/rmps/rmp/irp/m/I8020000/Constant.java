@@ -10,7 +10,6 @@
  */
 package rmp.irp.m.I8020000;
 
-import com.amonsoft.rmps.irp.b.IProcess;
 
 /**
  * <ul>
