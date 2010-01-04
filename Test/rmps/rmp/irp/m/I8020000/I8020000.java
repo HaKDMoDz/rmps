@@ -108,45 +108,42 @@ public class I8020000 implements IService
         String txt = message.getContent();
         String tmp = txt.trim();
         StringBuffer msg = new StringBuffer(session.newLine());
+        IProcess pro = session.getProcess();
 
-        IProcess proc = session.getProcess();
         // 功能选择
-        if (proc.getStep() == IProcess.STEP_DEFAULT)
+        if (pro.getStep() == IProcess.STEP_DEFAULT)
         {
             if ("0".equals(tmp))
             {
-                proc.setStep(Constant.STEP_CHARONE);
+                pro.setStep(Constant.STEP_CHARONE);
                 session.send(msg.append("请输入新的验证数据！").append(session.newLine()).toString());
                 return;
             }
             if ("1".equals(tmp))
             {
-                proc.setStep(Constant.STEP_CHARSET);
+                pro.setStep(Constant.STEP_CHARSET);
                 session.send(msg.append("请输入后续验证数据！").append(session.newLine()).toString());
                 return;
             }
             if ("2".equals(tmp))
             {
                 doMenu(session, msg);
-                proc.setStep(Constant.STEP_MATCHER);
+                pro.setStep(Constant.STEP_MATCHER);
                 session.send(msg.toString());
                 return;
             }
             if ("3".equals(tmp))
             {
-                proc.setStep(Constant.STEP_PATTERN);
+                pro.setStep(Constant.STEP_PATTERN);
                 session.send(msg.append("请输入新的匹配模式！").append(session.newLine()).toString());
                 return;
             }
             if ("*".equals(tmp))
             {
-                String func = proc.getFunc();
-                if (func.length() > 0)
+                if (pro.setFunc(".."))
                 {
-                    func = func.substring(0, func.length() - 1);
+                    Control.getService(pro.getFunc()).doInit(session, message);
                 }
-                proc.setFunc(func);
-                Control.getService(func).doInit(session, message);
                 return;
             }
 
@@ -158,7 +155,7 @@ public class I8020000 implements IService
         }
 
         // 输入表达式
-        if (proc.getStep() == Constant.STEP_PATTERN)
+        if (pro.getStep() == Constant.STEP_PATTERN)
         {
             if (!CharUtil.isValidate(txt))
             {
@@ -174,7 +171,7 @@ public class I8020000 implements IService
                 msg.append("第二步：选择验证方法").append(session.newLine());
                 doMenu(session, msg);
                 session.send(msg.toString());
-                proc.setStep(Constant.STEP_MATCHER);
+                pro.setStep(Constant.STEP_MATCHER);
             }
             else
             {
@@ -185,7 +182,7 @@ public class I8020000 implements IService
         }
 
         // 选择运算符
-        if (proc.getStep() == Constant.STEP_MATCHER)
+        if (pro.getStep() == Constant.STEP_MATCHER)
         {
             if (!CharUtil.isValidate(tmp))
             {
@@ -200,7 +197,7 @@ public class I8020000 implements IService
             {
                 // 第一次使用服务
                 session.send(msg.append("第三步：输入验证数据").append(session.newLine()).toString());
-                proc.setStep(Constant.STEP_CHARONE);
+                pro.setStep(Constant.STEP_CHARONE);
             }
             else
             {
@@ -211,7 +208,7 @@ public class I8020000 implements IService
         }
 
         // 单匹配数据输入
-        if (proc.getStep() == Constant.STEP_CHARONE)
+        if (pro.getStep() == Constant.STEP_CHARONE)
         {
             if (!CharUtil.isValidate(txt))
             {
@@ -226,7 +223,7 @@ public class I8020000 implements IService
         }
 
         // 多匹配数据输入
-        if (proc.getStep() == Constant.STEP_CHARSET)
+        if (pro.getStep() == Constant.STEP_CHARSET)
         {
             if (CharUtil.isValidate(txt))
             {
