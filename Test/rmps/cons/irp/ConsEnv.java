@@ -32,4 +32,7 @@ public interface ConsEnv
     String IM_XMPP = "xmpp";
     String IM_YMSG = "ymsg";
     String IS_IP = "";
+
+    String KEY_MENU = "*";
+    String KEY_HELP = "?";
 }
