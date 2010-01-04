@@ -18,6 +18,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import rmp.irp.c.Control;
 import rmp.util.EnvUtil;
 import rmp.util.LogUtil;
 
@@ -123,13 +124,12 @@ public class I2050000 implements IService
     @Override
     public void doInit(ISession session, IMessage message)
     {
-        StringBuffer msg = new StringBuffer();
-        msg.append("欢迎使用《度量转换》服务！").append(session.newLine());
-        msg.append("　　度量转换目前支持长度、面积、体积、重量、能量、压力、温度等单位的转换。").append(session.newLine());
-        msg.append("　　您可以通过如下的方式使用此服务：").append(session.newLine());
-        msg.append("　　1、直接输入数字及单位：如1米；").append(session.newLine());
-        msg.append("　　2、数字与待转换单位=?目标转换单位：如1米=?寸；").append(session.newLine());
-        session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
+        StringBuffer msg = new StringBuffer(session.newLine());
+        doInit(session, msg);
+        doHelp(session, msg.append(session.newLine()));
+
+        session.getProcess().setType(IProcess.TYPE_CONTENT);
+        session.getProcess().setItem(IProcess.ITEM_DEFAULT);
         session.getProcess().setStep(IProcess.STEP_DEFAULT);
         session.send(msg.toString());
     }
@@ -137,11 +137,29 @@ public class I2050000 implements IService
     @Override
     public void doMenu(ISession session, IMessage message)
     {
+        IProcess pro = session.getProcess();
+        if (IProcess.ITEM_DEFAULT.equals(pro.getItem()))
+        {
+            StringBuffer msg = new StringBuffer(session.newLine());
+            doMenu(session, msg);
+
+            pro.setItem(Constant.ITEM_SUBMENU);
+            session.send(msg.toString());
+            return;
+        }
+
+        if (pro.setFunc(".."))
+        {
+            Control.getService(pro.getFunc()).doInit(session, message);
+        }
     }
 
     @Override
     public void doHelp(ISession session, IMessage message)
     {
+        StringBuffer msg = new StringBuffer(session.newLine());
+        doHelp(session, msg);
+        session.send(msg.toString());
     }
 
     @Override
@@ -151,13 +169,15 @@ public class I2050000 implements IService
         String txt = message.getContent();
         // 消息字符串转化
         String tmp = txt.trim().toLowerCase();
+        StringBuffer msg = new StringBuffer(session.newLine());
+        // IProcess pro = session.getProcess();
 
         // 判断是否指定转换目标
         String[] arr = tmp.split("[=＝]");
         tmp = arr[0];
         if (!CharUtil.isValidate(tmp))
         {
-            session.send("请输入转换来源单位！");
+            session.send(msg.append("请输入转换来源单位！").append(session.newLine()).toString());
             return;
         }
 
@@ -181,7 +201,7 @@ public class I2050000 implements IService
         }
         if (u == null)
         {
-            session.send("小木看不懂您输入的是什么单位，请重新输入。");
+            session.send(msg.append("小木看不懂您输入的是什么单位，请重新输入。").append(session.newLine()).toString());
             return;
         }
 
@@ -189,7 +209,7 @@ public class I2050000 implements IService
         tmp = arr[0].replace(uUnit, "");// 获取用户输入数据
         if (!Pattern.matches(reg + '$', tmp))
         {
-            session.send("小木无法辨认您输入的数字，请重新输入。");
+            session.send(msg.append("小木无法辨认您输入的数字，请重新输入。").append(session.newLine()).toString());
             return;
         }
         // 度量转换
@@ -224,11 +244,11 @@ public class I2050000 implements IService
                 {
                     if (CharUtil.isValidate(tmp))
                     {
-                        session.send(CharUtil.format("小木暂时还不知道{0}是什么度量单位，请确认您输入的是否正确？", tmp));
+                        session.send(msg.append(CharUtil.format("小木暂时还不知道{0}是什么度量单位，请确认您输入的是否正确？", tmp)).append(session.newLine()).toString());
                     }
                     else
                     {
-                        session.send("公式输入错误，正确的输入格式示例如下：\n1米=?寸");
+                        session.send(msg.append("公式输入错误，正确的输入格式示例如下：\n1米=?寸").append(session.newLine()).toString());
                     }
                     return;
                 }
@@ -239,7 +259,6 @@ public class I2050000 implements IService
             }
         }
 
-        StringBuffer msg = new StringBuffer();
         msg.append(arr[0]);
 
         // 其它单位处理
@@ -267,7 +286,7 @@ public class I2050000 implements IService
             dc = Double.parseDouble(tmp);
             if (dc < -273.15)
             {
-                session.send("摄氏度不能低于-273.15。");
+                session.send(msg.append("摄氏度不能低于-273.15。").append(session.newLine()).toString());
                 return;
             }
             df = 32 + (dc * 9 / 5);
@@ -280,7 +299,7 @@ public class I2050000 implements IService
             df = Double.parseDouble(tmp);
             if (df < -459.666666)
             {
-                session.send("华氏度不能低于-459.666666。");
+                session.send(msg.append("华氏度不能低于-459.666666。").append(session.newLine()).toString());
                 return;
             }
             dc = (df - 32) * 5 / 9;
@@ -293,7 +312,7 @@ public class I2050000 implements IService
             dk = Double.parseDouble(tmp);
             if (dk < 0)
             {
-                session.send("开氏度不能低于0。");
+                session.send(msg.append("开氏度不能低于0。").append(session.newLine()).toString());
                 return;
             }
             dc = dk - 273.15;
@@ -306,7 +325,7 @@ public class I2050000 implements IService
             ra = Double.parseDouble(tmp);
             if (ra < 0)
             {
-                session.send("兰氏度不能低于0。");
+                session.send(msg.append("兰氏度不能低于0。").append(session.newLine()).toString());
                 return;
             }
             dk = ra / 1.8;
@@ -319,7 +338,7 @@ public class I2050000 implements IService
             re = Double.parseDouble(tmp);
             if (re < -218.5199999999)
             {
-                session.send("列氏度不能低于-218.5199999999。");
+                session.send(msg.append("列氏度不能低于-218.5199999999。").append(session.newLine()).toString());
                 return;
             }
             dc = re * 1.25;
@@ -351,5 +370,27 @@ public class I2050000 implements IService
     @Override
     public void doRoot(ISession session, IMessage message)
     {
+    }
+
+    private StringBuffer doInit(ISession session, StringBuffer message)
+    {
+        message.append("欢迎使用《度量转换》服务！").append(session.newLine());
+        message.append("　　度量转换目前支持长度、面积、体积、重量、能量、压力、温度等单位的转换。").append(session.newLine());
+        return message;
+    }
+
+    private StringBuffer doHelp(ISession session, StringBuffer message)
+    {
+        message.append("您可以通过如下的方式使用此服务：").append(session.newLine());
+        message.append("　　1、直接输入数字及单位：如1米；").append(session.newLine());
+        message.append("　　2、数字与待转换单位=?目标转换单位：如1米=?寸；").append(session.newLine());
+        return message;
+    }
+
+    private void doMenu(ISession session, StringBuffer message)
+    {
+        message.append(CharUtil.format("0、继续使用《{0}》服务；", getName())).append(session.newLine());
+        message.append("*、返回上级服务选单；").append(session.newLine());
+        message.append("请输入对应的数字选择您要使用的验证方法：").append(session.newLine());
     }
 }

@@ -107,14 +107,12 @@ public class I2020000 implements IService
     @Override
     public void doInit(ISession session, IMessage message)
     {
-        StringBuffer msg = new StringBuffer();
-        msg.append(CharUtil.format("欢迎使用《{0}》服务！", getName())).append(session.newLine());
-        msg.append(CharUtil.format("　　《{0}》服务目前支持15及18位身份证号码查询，并提供15位号码到18位号码的转换服务！", getName())).append(session.newLine());
-        msg.append("　　您可以通过如下的方式使用此服务：").append(session.newLine());
-        msg.append("　　1、直接输入您要查询的国家、地区或城市的名字：如上海；").append(session.newLine());
-        msg.append("　　2、输入您要查询的国家、地区或城市的拼音：如shanghai；").append(session.newLine());
-        msg.append("　　3、输入您要查询的国家、地区或城市的拼音首字母：如sh；").append(session.newLine());
+        StringBuffer msg = new StringBuffer(session.newLine());
+        doInit(session, msg);
+        doHelp(session, msg.append(session.newLine()));
+
         session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
+        session.getProcess().setItem(IProcess.ITEM_DEFAULT);
         session.getProcess().setStep(IProcess.STEP_DEFAULT);
         session.send(msg.toString());
     }
@@ -122,16 +120,28 @@ public class I2020000 implements IService
     @Override
     public void doMenu(ISession session, IMessage message)
     {
-        StringBuffer msg = new StringBuffer();
-        msg.append("1、输入*或＊返回服务选择菜单；").append(session.newLine());
-        msg.append("2、输入其它任意键继续当前服务；").append(session.newLine());
-        session.send(msg.toString());
+        IProcess pro = session.getProcess();
+        if (IProcess.ITEM_DEFAULT.equals(pro.getItem()))
+        {
+            StringBuffer msg = new StringBuffer(session.newLine());
+            doMenu(session, msg);
+
+            pro.setItem(Constant.ITEM_SUBMENU);
+            session.send(msg.toString());
+            return;
+        }
+
+        if (pro.setFunc(".."))
+        {
+            Control.getService(pro.getFunc()).doInit(session, message);
+        }
     }
 
     @Override
     public void doHelp(ISession session, IMessage message)
     {
-        StringBuffer msg = new StringBuffer();
+        StringBuffer msg = new StringBuffer(session.newLine());
+        doHelp(session, msg);
         msg.append("您可以进行以下操作：").append(session.newLine());
         msg.append("<或《 向上翻页").append(session.newLine());
         msg.append("<<或《《 向上翻页").append(session.newLine());
@@ -145,15 +155,17 @@ public class I2020000 implements IService
     @Override
     public void doDeal(ISession session, IMessage message)
     {
+        String key = message.getContent();
+        String tmp = key.trim();
+        StringBuffer msg = new StringBuffer(session.newLine());
+        IProcess pro = session.getProcess();
+
         try
         {
-            String key = message.getContent();
-            IProcess proc = session.getProcess();
-
             // 地址校验
-            if (!CharUtil.isValidate(key))
+            if (!CharUtil.isValidate(tmp))
             {
-                session.send("请输入您要查询的国家、地区或城市的名称或拼音！");
+                session.send(msg.append("请输入您要查询的国家、地区或城市的名称或拼音！").append(session.newLine()).toString());
                 return;
             }
 
@@ -179,19 +191,19 @@ public class I2020000 implements IService
             }
 
             // 设置下一次操作状态
-            proc.setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_COMMAND | IProcess.TYPE_CONTENT);
-            proc.setStep(IProcess.STEP_DEFAULT);
-            proc.setMost(list.size());
+            pro.setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_COMMAND | IProcess.TYPE_CONTENT);
+            pro.setStep(IProcess.STEP_DEFAULT);
+            pro.setMost(list.size());
             session.setAttribute(getCode() + "_m", list);
 
             if (list.size() < 1)
             {
-                session.send("请输入您要查询的国家、地区或城市的名称或拼音！");
+                session.send(msg.append("请输入您要查询的国家、地区或城市的名称或拼音！").append(session.newLine()).toString());
             }
             else
             {
                 // 发送结果信息
-                showData(session, list.get(proc.getStep()));
+                showData(session, list.get(pro.getStep()));
             }
         }
         catch (Exception exp)
@@ -199,35 +211,37 @@ public class I2020000 implements IService
             LogUtil.exception(exp);
 
             // 设置下一次操作状态
-            session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
+            pro.setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
         }
     }
 
     @Override
     public void doStep(ISession session, IMessage message)
     {
-        IProcess proc = session.getProcess();
+        StringBuffer msg = new StringBuffer(session.newLine());
+        IProcess pro = session.getProcess();
+
         List<?> list = (List<?>) session.getAttribute(getCode() + "_m");
         if (list == null || list.size() < 1)
         {
             session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
-            proc.setStep(IProcess.STEP_DEFAULT);
-            session.send("请输入您要查询的国家、地区或城市的名称或拼音！");
+            pro.setStep(IProcess.STEP_DEFAULT);
+            session.send(msg.append("请输入您要查询的国家、地区或城市的名称或拼音！").append(session.newLine()).toString());
             return;
         }
 
-        int step = proc.getStep();
+        int step = pro.getStep();
         if (step <= -1)
         {
-            proc.setStep(IProcess.STEP_DEFAULT);
-            session.send("已经是第一页！");
+            pro.setStep(IProcess.STEP_DEFAULT);
+            session.send(msg.append("已经是第一页！").append(session.newLine()).toString());
             return;
         }
 
-        if (step >= proc.getMost())
+        if (step >= pro.getMost())
         {
-            proc.setStep(proc.getMost());
-            session.send("已经是最后一页！");
+            pro.setStep(pro.getMost());
+            session.send(msg.append("已经是最后一页！").append(session.newLine()).toString());
             return;
         }
 
@@ -243,6 +257,29 @@ public class I2020000 implements IService
     @Override
     public void doRoot(ISession session, IMessage message)
     {
+    }
+
+    private StringBuffer doInit(ISession session, StringBuffer message)
+    {
+        message.append(CharUtil.format("欢迎使用《{0}》服务！", getName())).append(session.newLine());
+        message.append(CharUtil.format("　　《{0}》服务目前支持15及18位身份证号码查询，并提供15位号码到18位号码的转换服务！", getName())).append(session.newLine());
+        return message;
+    }
+
+    private StringBuffer doHelp(ISession session, StringBuffer message)
+    {
+        message.append("您可以通过如下的方式使用此服务：").append(session.newLine());
+        message.append("　　1、直接输入您要查询的国家、地区或城市的名字：如上海；").append(session.newLine());
+        message.append("　　2、输入您要查询的国家、地区或城市的拼音：如shanghai；").append(session.newLine());
+        message.append("　　3、输入您要查询的国家、地区或城市的拼音首字母：如sh；").append(session.newLine());
+        return message;
+    }
+
+    private StringBuffer doMenu(ISession session, StringBuffer message)
+    {
+        message.append(CharUtil.format("0、继续使用《{0}》服务；", getName())).append(session.newLine());
+        message.append("*、返回上级服务选单；").append(session.newLine());
+        return message;
     }
 
     private void showData(ISession session, String data)

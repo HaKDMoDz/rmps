@@ -163,18 +163,15 @@ public class I2010000 implements IService
             StringBuffer msg = new StringBuffer(session.newLine());
             doMenu(session, msg);
 
-            session.getProcess().setItem(Constant.ITEM_SUBMENU);
+            pro.setItem(Constant.ITEM_SUBMENU);
             session.send(msg.toString());
             return;
         }
 
-        String func = pro.getFunc();
-        if (func.length() > 0)
+        if (pro.setFunc(".."))
         {
-            func = func.substring(0, func.length() - 1);
+            Control.getService(pro.getFunc()).doInit(session, message);
         }
-        pro.setFunc(func);
-        Control.getService(func).doInit(session, message);
     }
 
     @Override

@@ -16,6 +16,7 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import rmp.irp.c.Control;
 import rmp.util.EnvUtil;
 import rmp.util.LogUtil;
 
@@ -27,6 +28,7 @@ import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.HttpUtil;
 
 import cons.EnvCons;
+import cons.irp.ConsEnv;
 
 /**
  * <ul>
@@ -94,12 +96,13 @@ public class I2030000 implements IService
     @Override
     public void doInit(ISession session, IMessage message)
     {
-        StringBuffer msg = new StringBuffer();
-        msg.append(CharUtil.format("欢迎使用《{0}》服务！", getName())).append(session.newLine());
-        msg.append(CharUtil.format("　　《{0}》服务目前支持15及18位身份证号码查询，并提供15位号码到18位号码的转换服务！", getName())).append(session.newLine());
-        msg.append("　　您可以通过如下的方式使用此服务：").append(session.newLine());
-        msg.append("　　1、直接输入您要查询的15或18位身份证号码；").append(session.newLine());
+        StringBuffer msg = new StringBuffer(session.newLine());
+        doInit(session, msg);
+        doHelp(session, msg.append(session.newLine()));
+        msg.append(session.newLine()).append("请输入一个15或18号的身份证号码！").append(session.newLine());
+
         session.getProcess().setType(IProcess.TYPE_CONTENT);
+        session.getProcess().setItem(IProcess.ITEM_DEFAULT);
         session.getProcess().setStep(IProcess.STEP_DEFAULT);
         session.send(msg.toString());
     }
@@ -107,27 +110,75 @@ public class I2030000 implements IService
     @Override
     public void doMenu(ISession session, IMessage message)
     {
-        session.getProcess().setType(IProcess.TYPE_KEYCODE);
-        session.send("请输入一个15或18号的身份证号码，或输入服务代码切换其它服务！");
+        IProcess pro = session.getProcess();
+
+        if (IProcess.ITEM_DEFAULT.equals(pro.getItem()))
+        {
+            StringBuffer msg = new StringBuffer(session.newLine());
+            doMenu(session, msg);
+
+            pro.setItem(Constant.ITEM_SUBMENU);
+            session.send(msg.toString());
+            return;
+        }
+
+        if (pro.setFunc(".."))
+        {
+            Control.getService(pro.getFunc()).doInit(session, message);
+        }
     }
 
     @Override
     public void doHelp(ISession session, IMessage message)
     {
-        session.send("服务信息完善中……");
+        StringBuffer msg = new StringBuffer(session.newLine());
+        doHelp(session, msg);
+        session.send(msg.toString());
     }
 
     @Override
     public void doDeal(ISession session, IMessage message)
     {
+        String key = message.getContent();
+        String tmp = key.trim();
+        StringBuffer msg = new StringBuffer(session.newLine());
+        IProcess pro = session.getProcess();
+
         try
         {
-            String key = message.getContent();
-            String tmp = key.trim();
+            // 用户输入选单
+            if (ConsEnv.KEY_MENU.equals(tmp))
+            {
+                doMenu(session, msg);
+
+                pro.setItem(Constant.ITEM_SUBMENU);
+                session.send(msg.toString());
+                return;
+            }
+
+            // 选单交互过程
+            if (!IProcess.ITEM_DEFAULT.equals(pro.getItem()))
+            {
+                // 返回服务选单
+                if (ConsEnv.KEY_MENU.equals(tmp))
+                {
+                    if (pro.setFunc(".."))
+                    {
+                        Control.getService(pro.getFunc()).doInit(session, message);
+                    }
+                }
+                else
+                {
+                    pro.setItem(IProcess.ITEM_DEFAULT);
+                    session.send(msg.append("请输入一个15或18位身份证号！").append(session.newLine()).toString());
+                }
+                return;
+            }
+
             // 号码校验
             if (!idPtn.matcher(tmp).matches())
             {
-                session.send("请输入一个15或18位身份证号！");
+                session.send(msg.append("请输入一个15或18位身份证号！").append(session.newLine()).toString());
                 return;
             }
 
@@ -136,11 +187,9 @@ public class I2030000 implements IService
             int i = xml.indexOf("<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"fontcolor\">");
             int j = xml.indexOf("</table>", i) + 8;
             xml = xml.substring(i, j);
-            LogUtil.log("返回结果：" + xml);
             Document doc = DocumentHelper.parseText(xml);
 
             // 处理结果并显示
-            StringBuffer msg = new StringBuffer();
             List<?> l1 = doc.selectNodes("/table/tr");
             if (l1.size() == 4)
             {
@@ -157,9 +206,7 @@ public class I2030000 implements IService
             }
 
             // 设置下一次操作状态
-            IProcess proc = session.getProcess();
-            proc.setType(IProcess.TYPE_CONTENT);
-            proc.setStep(IProcess.STEP_DEFAULT);
+            pro.setStep(IProcess.STEP_DEFAULT);
             session.send(msg.toString());
         }
         catch (Exception exp)
@@ -167,7 +214,7 @@ public class I2030000 implements IService
             LogUtil.exception(exp);
 
             // 设置下一次操作状态
-            session.getProcess().setType(IProcess.TYPE_CONTENT);
+            pro.setType(IProcess.TYPE_CONTENT);
         }
     }
 
@@ -184,5 +231,26 @@ public class I2030000 implements IService
     @Override
     public void doRoot(ISession session, IMessage message)
     {
+    }
+
+    private StringBuffer doInit(ISession session, StringBuffer message)
+    {
+        message.append(CharUtil.format("欢迎使用《{0}》服务！", getName())).append(session.newLine());
+        message.append(CharUtil.format("　　《{0}》服务目前支持15及18位身份证号码查询，并提供15位号码到18位号码的转换服务！", getName())).append(session.newLine());
+        return message;
+    }
+
+    private StringBuffer doHelp(ISession session, StringBuffer message)
+    {
+        message.append("您可以通过如下的方式使用此服务：").append(session.newLine());
+        message.append("　　1、直接输入您要查询的15或18位身份证号码；").append(session.newLine());
+        return message;
+    }
+
+    private void doMenu(ISession session, StringBuffer message)
+    {
+        message.append(CharUtil.format("0、继续使用《{0}》服务；", getName())).append(session.newLine());
+        message.append("*、返回上级服务选单；").append(session.newLine());
+        message.append("请输入对应的数字选择您要使用的验证方法：").append(session.newLine());
     }
 }

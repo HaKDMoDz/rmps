@@ -48,4 +48,6 @@ public interface Constant
      * 体积
      */
     int STEP_TJ = 6;
+
+    String ITEM_SUBMENU = "1";
 }
