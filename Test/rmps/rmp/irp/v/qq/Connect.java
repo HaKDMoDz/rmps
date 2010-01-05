@@ -7,7 +7,19 @@
  */
 package rmp.irp.v.qq;
 
+import java.io.File;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+
+import rmp.util.EnvUtil;
+import rmp.util.LogUtil;
+
 import com.amonsoft.rmps.irp.v.IConnect;
+
+import cons.EnvCons;
 
 /**
  * <ul>
@@ -21,28 +33,54 @@ import com.amonsoft.rmps.irp.v.IConnect;
  */
 public class Connect implements IConnect
 {
+    private String user;
+    private String pwds;
+    private String host;
+    private int port;
+    private String server;
+
+    public Connect()
+    {
+    }
+
     @Override
     public boolean load()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try
+        {
+            final String NAME = "qq";
+            Document document = new SAXReader().read(new File(EnvUtil.getCfgPath(EnvCons.FOLDER1_IRP, NAME + ".xml")));
+            Element element = (Element) document.selectSingleNode("/irps/" + NAME);
+            host = ((Element) element.selectSingleNode("map[@key='host']")).getText();
+            port = Integer.parseInt(((Element) element.selectSingleNode("map[@key='port']")).getText());
+            server = ((Element) element.selectSingleNode("map[@key='server']")).getText();
+            user = ((Element) element.selectSingleNode("map[@key='user']")).getText();
+            pwds = ((Element) element.selectSingleNode("map[@key='pwds']")).getText();
+            return true;
+        }
+        catch (DocumentException exp)
+        {
+            LogUtil.exception(exp);
+            return false;
+        }
     }
 
     @Override
     public String getUser()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return user;
     }
 
     @Override
     public String getPwds()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return pwds;
     }
 
     @Override
     public String getMail()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return user + "@qq.com";
     }
 
     /**
@@ -51,7 +89,7 @@ public class Connect implements IConnect
     @Override
     public String getHost()
     {
-        return "";
+        return host;
     }
 
     /**
@@ -60,17 +98,18 @@ public class Connect implements IConnect
      */
     public void setHost(String host)
     {
+        this.host = host;
     }
 
     @Override
     public String getServer()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return server;
     }
 
     @Override
     public int getPort()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return port;
     }
 }

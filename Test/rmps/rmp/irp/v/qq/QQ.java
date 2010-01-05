@@ -9,7 +9,12 @@ package rmp.irp.v.qq;
 
 import java.util.List;
 
+import rmp.irp.v.live.Connect;
+import rmp.irp.v.live.Session;
+
 import com.amonsoft.rmps.irp.b.IContact;
+import com.amonsoft.rmps.irp.b.ISession;
+import com.amonsoft.rmps.irp.b.IStatus;
 import com.amonsoft.rmps.irp.v.IAccount;
 import com.amonsoft.rmps.irp.v.IConnect;
 
@@ -25,33 +30,57 @@ import com.amonsoft.rmps.irp.v.IConnect;
  */
 public class QQ implements IAccount
 {
-    @Override
-    public void exit()
+    private IConnect connect;
+    private ISession session;
+    private JQQ messenger;
+
+    public QQ()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void sign(int status)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        switch (status)
+        {
+            case IStatus.INIT:
+                connect = new Connect();
+                connect.load();
+                session = new Session();
+                messenger = new JQQ(connect);
+                break;
+            case IStatus.SIGN:
+                messenger.signIn();
+                break;
+            case IStatus.LINE:
+                break;
+            case IStatus.DOWN:
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void exit()
+    {
     }
 
     @Override
     public IConnect getConnect()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return connect;
     }
 
     @Override
     public IContact getContact(String user)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return null;
     }
 
     @Override
     public List<IContact> getContact()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return null;
     }
 }
