@@ -135,7 +135,7 @@ public class I7010000 implements IService
             }
 
             // 页面数据请求
-            String xml = HttpUtil.request(path + '?' + CharUtil.format(args, tmp), "GET", "gb2312");
+            String xml = HttpUtil.request(path + '?' + CharUtil.format(args, tmp), "GET", "gb2312", null);
             if (!CharUtil.isValidate(xml))
             {
                 return;

@@ -243,7 +243,7 @@ public class I2010000 implements IService
             }
 
             // 获取天气数据
-            String data = HttpUtil.request(CharUtil.format("http://flash.weather.com.cn/wmaps/xml/{0}.xml", top), "GET", "utf-8");
+            String data = HttpUtil.request(CharUtil.format("http://flash.weather.com.cn/wmaps/xml/{0}.xml", top), "GET", "utf-8", null);
 
             Document doc = DocumentHelper.parseText(data);
             Element ele = doc.getRootElement();
@@ -308,7 +308,7 @@ public class I2010000 implements IService
             final String CODE = "http://flash.weather.com.cn/wmaps/xml/{0}.xml";
 
             // 省市
-            String txt0 = HttpUtil.request(CharUtil.format(CODE, "china"), "GET", "UTF-8");
+            String txt0 = HttpUtil.request(CharUtil.format(CODE, "china"), "GET", "UTF-8", null);
             Document doc0 = DocumentHelper.parseText(txt0);
             for (Object obj0 : doc0.getRootElement().selectNodes("city"))
             {
@@ -320,7 +320,7 @@ public class I2010000 implements IService
                 spSign = spName.indexOf(tmp) < 0;
 
                 // 地区
-                String txt1 = HttpUtil.request(CharUtil.format(CODE, txt0), "GET", "UTF-8");
+                String txt1 = HttpUtil.request(CharUtil.format(CODE, txt0), "GET", "UTF-8", null);
                 Document doc1 = DocumentHelper.parseText(txt1);
                 for (Object obj1 : doc1.getRootElement().selectNodes("city"))
                 {
@@ -331,7 +331,7 @@ public class I2010000 implements IService
                     if (spSign)
                     {
                         // 县市
-                        String txt2 = HttpUtil.request(CharUtil.format(CODE, txt1), "GET", "UTF-8");
+                        String txt2 = HttpUtil.request(CharUtil.format(CODE, txt1), "GET", "UTF-8", null);
                         Document doc2 = DocumentHelper.parseText(txt2);
                         for (Object obj2 : doc2.getRootElement().selectNodes("city"))
                         {
@@ -353,7 +353,7 @@ public class I2010000 implements IService
             int i = 0;
 
             // 省市
-            txt0 = HttpUtil.request(CharUtil.format(PATH, "", i), "GET", "utf-8");
+            txt0 = HttpUtil.request(CharUtil.format(PATH, "", i), "GET", "utf-8", null);
             for (String tmp0 : txt0.split(","))
             {
                 Element ele0 = DocumentHelper.createElement("map");
@@ -364,7 +364,7 @@ public class I2010000 implements IService
 
                 // 地区
                 i = 1;
-                String txt1 = HttpUtil.request(CharUtil.format(PATH, tmp, i), "GET", "utf-8");
+                String txt1 = HttpUtil.request(CharUtil.format(PATH, tmp, i), "GET", "utf-8", null);
                 for (String tmp1 : txt1.split(","))
                 {
                     Element ele1 = DocumentHelper.createElement("map");
@@ -373,7 +373,7 @@ public class I2010000 implements IService
 
                     // 县市
                     i = 2;
-                    String txt2 = HttpUtil.request(CharUtil.format(PATH, tmp, i), "GET", "utf-8");
+                    String txt2 = HttpUtil.request(CharUtil.format(PATH, tmp, i), "GET", "utf-8", null);
                     for (String tmp2 : txt2.split(","))
                     {
                         Element ele2 = DocumentHelper.createElement("map");

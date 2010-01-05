@@ -7,7 +7,8 @@
  */
 package test;
 
-import java.util.regex.Pattern;
+import java.security.MessageDigest;
+import java.util.HashMap;
 
 import rmp.Rmps;
 import rmp.comn.user.UserInfo;
@@ -16,6 +17,8 @@ import test.irp.Message;
 import test.irp.Session;
 
 import com.amonsoft.rmps.irp.m.IService;
+import com.amonsoft.util.CharUtil;
+import com.amonsoft.util.HttpUtil;
 
 /**
  * <ul>
@@ -34,8 +37,8 @@ public class Test
      */
     public static void main(String[] args)
     {
-        System.out.println(Pattern.matches("[aA]mon", "yaoamon"));
-        System.out.println(Pattern.compile("[aA]mon").matcher("yaoamon").matches());
+        sign();
+        list();
     }
 
     public static void test()
@@ -50,5 +53,52 @@ public class Test
         s.wInit();
         // s.doInit(session, message);
         // s.doRoot(session, message);
+    }
+
+    public static void sign()
+    {
+        try
+        {
+            HashMap<String, String> params = new HashMap<String, String>();
+            params.put("VER", "1.1");
+            params.put("CMD", "Login");
+            String time = Long.toString(System.currentTimeMillis());
+            params.put("SEQ", time.substring(time.length() - 5));
+            params.put("UIN", "107618109");
+            params.put("PS", CharUtil.toHex(MessageDigest.getInstance("MD5").digest("bIxSTULX1Yl9".getBytes())));
+            params.put("M5", "1");
+            params.put("LC", "9326B87B234E7235");
+            String data = HttpUtil.request("http://tqq.tencent.com:8000", "POST", "gb2312", params);
+            System.out.println(data);
+            // VER=1.1&CMD=Login&SEQ=17923&UIN=107618109&RES=0&RS=0&HI=60&LI=300&COMP=NOKIA8F3A18D6E27
+            // VER=1.1&CMD=Login&SEQ=31126&UIN=107618109&RES=0&RS=0&HI=60&LI=300&COMP=NOKIA8F3A18D6E27
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static void list()
+    {
+        try
+        {
+            HashMap<String, String> params = new HashMap<String, String>();
+            params.put("VER", "1.1");// QQ协议的版本
+            params.put("CMD", "Login");// 协议的命令，包括有Login（登录）、List（好友列表）
+            String time = Long.toString(System.currentTimeMillis());
+            params.put("SEQ", time.substring(time.length() - 7));// 防止重复发送标记
+            params.put("UIN", "107618109");// 用户QQ号
+            params.put("SN", "160");// 
+            params.put("UN", "0");// 
+            String data = HttpUtil.request("http://tqq.tencent.com:8000", "POST", "gb2312", params);
+            System.out.println(data);
+            // VER=1.1&CMD=Login&SEQ=17923&UIN=107618109&RES=0&RS=0&HI=60&LI=300&COMP=NOKIA8F3A18D6E27
+            // VER=1.1&CMD=Login&SEQ=31126&UIN=107618109&RES=0&RS=0&HI=60&LI=300&COMP=NOKIA8F3A18D6E27
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

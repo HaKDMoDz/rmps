@@ -183,7 +183,7 @@ public class I2030000 implements IService
             }
 
             // 发起页面请求
-            String xml = HttpUtil.request(path + '?' + CharUtil.format(args, key), "POST", "gb2312");
+            String xml = HttpUtil.request(path + '?' + CharUtil.format(args, key), "POST", "gb2312", null);
             int i = xml.indexOf("<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"fontcolor\">");
             int j = xml.indexOf("</table>", i) + 8;
             xml = xml.substring(i, j);

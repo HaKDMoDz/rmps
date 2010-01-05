@@ -8,10 +8,11 @@
 package com.amonsoft.util;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import org.apache.axis.utils.ByteArrayOutputStream;
+import java.util.HashMap;
 
 public class HttpUtil
 {
@@ -31,7 +32,7 @@ public class HttpUtil
      * @return
      * @throws Exception
      */
-    public static String request(String url, String method, String charset) throws Exception
+    public static String request(String url, String method, String charset, HashMap<String, String> params) throws Exception
     {
         HttpURLConnection conn = (HttpURLConnection) (new URL(url.replace(" ", "%20")).openConnection());
         conn.setRequestProperty("Proxy-Connection", "Keep-Alive");
@@ -40,16 +41,29 @@ public class HttpUtil
         conn.setDoOutput(true);
         conn.setRequestMethod(method);
 
+        // 参数传递
+        if (params != null && params.size() > 0)
+        {
+            StringBuffer buf = new StringBuffer();
+            for (String key : params.keySet())
+            {
+                buf.append('&').append(key).append('=').append(params.get(key));
+            }
+            BufferedOutputStream bos = new BufferedOutputStream(conn.getOutputStream());
+            bos.write(buf.substring(1).getBytes(charset));
+            bos.close();
+        }
+
         // 读取返回结果
         BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
         byte[] b = new byte[1024];
         int i = bis.read(b);
         while (i >= 0)
         {
-            bos.write(b, 0, i);
+            baos.write(b, 0, i);
             i = bis.read(b);
         }
-        return new String(bos.toByteArray(), charset);
+        return new String(baos.toByteArray(), charset);
     }
 }
