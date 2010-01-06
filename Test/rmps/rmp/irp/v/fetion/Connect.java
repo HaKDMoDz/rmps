@@ -33,7 +33,7 @@ public class Connect implements IConnect
     public boolean load()
     {
         user = "13585709149";
-        pwds = "ImkfYygyViq3721";
+        pwds = "iitau123";
         setVersion("3.5.2540");
         setSysCfg("http://nav.fetion.com.cn/nav/getsystemconfig.aspx");
         setSipCfg("http://nav.m161.com.cn/Getconfig.aspx");

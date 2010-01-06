@@ -35,6 +35,8 @@ public class Contact implements IContact
     private String id;
     private String name;
     private String email;
+    private String mobile;
+
     private String display;
     private String personal;
     private List<ICatalog> catalogs = new ArrayList<ICatalog>();
@@ -71,7 +73,7 @@ public class Contact implements IContact
     /**
      * @param name
      */
-    public void getName(String name)
+    public void setName(String name)
     {
         this.name = name;
     }
@@ -164,6 +166,13 @@ public class Contact implements IContact
     }
 
     /**
+     * @param status
+     */
+    public void setStatus(String status)
+    {
+    }
+
+    /**
      * @return
      */
     public String getUri()
@@ -177,5 +186,21 @@ public class Contact implements IContact
     public void setUri(String uri)
     {
         this.uri = uri;
+    }
+
+    /**
+     * @return
+     */
+    public String getMobile()
+    {
+        return mobile;
+    }
+
+    /**
+     * @param mobile
+     */
+    public void setMobile(String mobile)
+    {
+        this.mobile = mobile;
     }
 }

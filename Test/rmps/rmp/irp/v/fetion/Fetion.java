@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.axis.utils.ByteArrayOutputStream;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
@@ -42,49 +43,51 @@ import com.amonsoft.util.CharUtil;
  * 
  * @author Amon
  */
-public class Fetion implements IAccount, Runnable
+public class Fetion extends Thread implements IAccount
 {
     private Connect connect;
     private String sid;
-    private String uri;
-    public String sipc_proxy;
-    private String ssi_app_sign_in;
-    private String ssi_app_sign_out;
-    private StringBuffer LoginDebugMemo;
-
+    // private String uri;
+    private String sipcProxy;
+    // private String ssi_app_sign_in;
+    // private String ssi_app_sign_out;
+    /**
+     * 服务调用序列
+     */
+    private static int callId;
+    /**
+     * 保持在线序列
+     */
+    private static int liveId;
     /**
      * Socket通讯对象
      */
-    private Socket socket;
+    private static Socket socket;
     /**
      * 数据输入对象
      */
-    private DataInputStream dataIn;
+    private DataInputStream dataIs;
     /**
      * 数据输出对象
      */
-    private DataOutputStream dataOut;
+    private DataOutputStream dataOs;
     /**
-     * 接收消息数据
+     * 目录列表
      */
-    private String getData;
-    private ArrayList<Catalog> catalogs = new ArrayList<Catalog>();
-    private ArrayList<Contact> contacts = new ArrayList<Contact>();
-    static final int LOGIN_SUCC = 0;
-    static final int LOGIN_CONN_ERROR = 1;
-    static final int LOGIN_DATAIO_ERROR = 2;
-    static final int LOGIN_FAILED = 3;
-    private static int callId;
-    private int liveId = 2;
-
-    private ArrayList<IDataType> Commands = new ArrayList<IDataType>();
+    private List<Catalog> catalogs = new ArrayList<Catalog>();
+    /**
+     * 人员列表
+     */
+    private List<IContact> contacts = new ArrayList<IContact>();
+    /**
+     * 命令列表
+     */
+    private HashMap<String, String> commands = new HashMap<String, String>();
 
     public Fetion()
     {
-        this.socket = null;
-        this.getData = "";
         callId = 2;
-        this.Commands.clear();
+        liveId = 2;
     }
 
     @Override
@@ -100,12 +103,19 @@ public class Fetion implements IAccount, Runnable
             case IStatus.INIT:
                 connect = new Connect();
                 connect.load();
+                init();
+                break;
 
-                break;
             case IStatus.SIGN:
+                System.out.println(login() == Constant.LOGIN_SUCC);
+                start();
                 break;
+
             case IStatus.DOWN:
+                logout();
+                liveId = -1;
                 break;
+
             default:
                 break;
         }
@@ -114,19 +124,26 @@ public class Fetion implements IAccount, Runnable
     @Override
     public IConnect getConnect()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return connect;
     }
 
     @Override
     public IContact getContact(String user)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        for (IContact contact : contacts)
+        {
+            if (user.equals(contact.getId()))
+            {
+                return contact;
+            }
+        }
+        return null;
     }
 
     @Override
     public List<IContact> getContact()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return contacts;
     }
 
     private String initSysEncode()
@@ -158,11 +175,12 @@ public class Fetion implements IAccount, Runnable
     {
         Element ele = (Element) doc.selectSingleNode("/config/servers");
 
-        sipc_proxy = ele.selectSingleNode("sipc-proxy").getText();
+        sipcProxy = ele.selectSingleNode("sipc-proxy").getText();
 
-        ssi_app_sign_in = ele.selectSingleNode("ssi-app-sign-in").getText();
-
-        ssi_app_sign_out = ele.selectSingleNode("ssi-app-sign-out").getText();
+        // ssi_app_sign_in = ele.selectSingleNode("ssi-app-sign-in").getText();
+        //
+        // ssi_app_sign_out =
+        // ele.selectSingleNode("ssi-app-sign-out").getText();
         return true;
     }
 
@@ -172,7 +190,7 @@ public class Fetion implements IAccount, Runnable
 
         sid = ele.selectSingleNode("Sid").getText();
 
-        uri = ele.selectSingleNode("Uri").getText();
+        // uri = ele.selectSingleNode("Uri").getText();
         return true;
     }
 
@@ -221,27 +239,29 @@ public class Fetion implements IAccount, Runnable
 
             // 返回数据解析
             initSipDeocde(DocumentHelper.parseText(buf.toString().replace("xmlns=\"http://tempuri.org/DateExchange.xsd\"", "")));
+            return true;
         }
         catch (Exception exp)
         {
             System.out.println(exp);
+            return false;
         }
-        return true;
     }
 
-    public static String MD5Encode(String origin)
+    private static String digest(String text)
     {
         try
         {
-            return CharUtil.toHex(MessageDigest.getInstance("MD5").digest(origin.getBytes("utf-8")));
+            return CharUtil.toHex(MessageDigest.getInstance("MD5").digest(text.getBytes()));
         }
-        catch (Exception ex)
+        catch (Exception exp)
         {
+            System.out.println(exp);
             return "";
         }
     }
 
-    public static String computeH1(String s1, String s2)
+    private static String compute(String s1, String s2)
     {
         try
         {
@@ -266,32 +286,17 @@ public class Fetion implements IAccount, Runnable
         }
     }
 
-    public void addSendStr(String str)
+    private String response()
     {
-        System.out.println("Send:\n" + str);
+        return response(Constant.ENV_BREAKS + Constant.ENV_BREAKS);
     }
 
-    public void addRecvStr(String str)
-    {
-        System.out.println("Recv:\n" + str);
-    }
-
-    public void addDebugStr(String str)
-    {
-        System.out.println("Debug:\n" + str);
-    }
-
-    public String waitResponse()
-    {
-        return waitResponse(Constant.ENV_BREAKS + Constant.ENV_BREAKS);
-    }
-
-    public String waitResponse(int len)
+    private String response(int len)
     {
         try
         {
             byte[] recvBuf = new byte[len];
-            int t = dataIn.read(recvBuf);
+            int t = dataIs.read(recvBuf);
             return t == len ? new String(recvBuf, "utf-8") : "";
         }
         catch (Exception e)
@@ -300,48 +305,29 @@ public class Fetion implements IAccount, Runnable
         }
     }
 
-    public String waitResponse(String endStr)
+    private String response(String end)
     {
-        byte[] recvBuf = new byte[40960];
-        int recvPos = 0;
-        while (true)
-        {
-            int t;
-            try
-            {
-                t = this.dataIn.read();
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-            recvBuf[(recvPos++)] = (byte) t;
-            if (recvPos <= endStr.length())
-                continue;
-            int end = 1;
-            for (int i = 0; i < endStr.length(); ++i)
-            {
-                if (recvBuf[(recvPos - endStr.length() + i)] == endStr.charAt(i))
-                    continue;
-                end = 0;
-                break;
-            }
-            if (end == 1)
-            {
-                break;
-            }
-        }
-        recvBuf[recvPos] = 0;
-        String res;
         try
         {
-            res = new String(recvBuf, "utf-8");
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+            byte[] buf = new byte[1024];
+            int len = dataIs.read(buf);
+            while (len == buf.length)
+            {
+                bos.write(buf, 0, len);
+                len = dataIs.read(buf);
+            }
+            bos.write(buf, 0, len);
+
+            String tmp = new String(bos.toByteArray(), "utf-8");
+            int i = tmp.indexOf(end) + end.length();
+            return i >= tmp.length() ? tmp : tmp.substring(0, i);
         }
-        catch (Exception end)
+        catch (Exception exp)
         {
-            res = "Convert to UTF8 Error\n";
+            return "Convert to UTF8 Error\n";
         }
-        return res;
     }
 
     private String SignInnEncode()
@@ -368,16 +354,16 @@ public class Fetion implements IAccount, Runnable
 
     public int login()
     {
-        String[] proxySplit = this.sipc_proxy.split(":");
         try
         {
+            String[] proxySplit = sipcProxy.split(":");
             socket = new Socket(proxySplit[0], Integer.parseInt(proxySplit[1]));
-            dataIn = new DataInputStream(socket.getInputStream());
-            dataOut = new DataOutputStream(socket.getOutputStream());
+            dataIs = new DataInputStream(socket.getInputStream());
+            dataOs = new DataOutputStream(socket.getOutputStream());
         }
         catch (Exception e1)
         {
-            return LOGIN_CONN_ERROR;
+            return Constant.LOGIN_CONN_ERROR;
         }
 
         liveId = 2;
@@ -394,59 +380,58 @@ public class Fetion implements IAccount, Runnable
             send(tmp.toString());
 
             // 第二次握手
-            getData = waitResponse();
-
-            int i = getData.indexOf("nonce");
+            String response = response();
+            int i = response.indexOf("nonce");
             if (i < 0)
             {
-                return LOGIN_FAILED;
+                return Constant.LOGIN_FAILED;
             }
             i += 7;
-            int j = getData.indexOf('"', i);
+            int j = response.indexOf('"', i);
             if (j < i)
             {
-                return LOGIN_FAILED;
+                return Constant.LOGIN_FAILED;
             }
-            String nonce = getData.substring(i, j);
+            String nonce = response.substring(i, j);
 
             // 第三次握手
             String m1 = sid + ":fetion.com.cn:" + connect.getPwds();
-            String m2 = ":" + nonce + ":7036EA07568E7C4D6D49FD76141062FE";
-            String h1 = computeH1(m1, m2);
+            String m2 = ":" + nonce + ':' + Constant.CNONCE;
+            String h1 = compute(m1, m2);
             m2 = "REGISTER:" + sid;
-            String h2 = MD5Encode(m2);
+            String h2 = digest(m2);
             m2 = h1 + ":" + nonce + ":" + h2;
-            String response = MD5Encode(m2);
 
             tmp.delete(0, tmp.length());
             tmp.append("R fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
             tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
             tmp.append("I: 1").append(Constant.ENV_BREAKS);
             tmp.append("Q: 2 R").append(Constant.ENV_BREAKS);
-            tmp.append("A: Digest response=\"").append(response).append("\",cnonce=\"7036EA07568E7C4D6D49FD76141062FE\"").append(Constant.ENV_BREAKS);
+            tmp.append("A: Digest response=\"").append(digest(m2)).append("\",cnonce=\"").append(Constant.CNONCE).append("\"").append(Constant.ENV_BREAKS);
             tmp.append("L: ").append(data.length()).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
             tmp.append(data);
             send(tmp.toString());
 
             // 登录状态确认
-            getData = waitResponse();
-            i = getData.indexOf("\r\nL: ");
-            if (i > 0)
+            response = response();
+            // i = response.indexOf("\r\nL: ");
+            // if (i > 0)
+            // {
+            // String append = response.substring(i + 5).trim();
+            // append = waitResponse(Integer.parseInt(append)).trim();
+            // response = response.trim() + "\r\n\r\n" + append;
+            // }
+            if (response.indexOf("200") < 0)
             {
-                String append = getData.substring(i + 5).trim();
-                append = waitResponse(Integer.parseInt(append)).trim();
-                getData = getData.trim() + "\r\n\r\n" + append;
-            }
-            if (this.getData.indexOf("200") < 0)
-            {
-                return LOGIN_FAILED;
+                return Constant.LOGIN_FAILED;
             }
         }
         catch (Exception e2)
         {
-            return LOGIN_DATAIO_ERROR;
+            return Constant.LOGIN_DATAIO_ERROR;
         }
-        return LOGIN_SUCC;
+        System.out.println("OK");
+        return Constant.LOGIN_SUCC;
     }
 
     private HashMap<String, String> dd(String text)
@@ -466,62 +451,48 @@ public class Fetion implements IAccount, Runnable
 
     public void run()
     {
-        while (!(Thread.interrupted()))
+        System.out.println(liveId);
+        while (liveId > 0)
         {
-            getData = waitResponse();
-            HashMap<String, String> map = dd(getData);
-            int command = 0;
-            String append = map.get("I");
+            String response = response();
+            HashMap<String, String> map = dd(response);
+            String append = map.get("L");
             if (CharUtil.isValidate(append))
             {
-                command = Integer.parseInt(append);
-            }
-            append = map.get("L");
-            if (CharUtil.isValidate(append))
-            {
-                append = waitResponse(Integer.parseInt(append)).trim();
-                getData = getData.trim() + "\r\n\r\n" + append;
+                append = response(Integer.parseInt(append)).trim();
+                response = response.trim() + "\r\n\r\n" + append;
             }
 
-            if (command >= 0)
+            String command = map.get("I");
+            if (CharUtil.isValidate(command) && commands.containsKey(command))
             {
-                IDataType element;
-                try
+                command = commands.remove(command);
+                if (Constant.N_GetPersonalInfo.equals(command))
                 {
-                    element = Commands.get(command);
+                    updateDisplay(append);
                 }
-                catch (Exception e)
+                else if (Constant.N_GetContactList.equals(command))
                 {
-                    element = new IDataType(0);
+                    updateCatalog(append);
                 }
-
-                switch (element.NType)
+                else if (Constant.N_GetContactsInfo.equals(command))
                 {
-                    case IDataType.N_GetPersonalInfo:
-                        updatePersonalInfoShow(append);
-                        break;
-                    case IDataType.N_GetContactList:
-                        updateCatalog(append);
-                        break;
-                    case IDataType.N_GetContactsInfo:
-                    case IDataType.N_SubPresence:
-                        updateContact(append);
+                    updateContact(append);
                 }
-
+                else if (Constant.N_SubPresence.equals(command))
+                {
+                    updateContact(append);
+                }
             }
-            else
+            else if ('M' == response.charAt(0))
             {
-                switch (getData.charAt(0))
-                {
-                    case 'M':
-                        ProcessMessge(this.getData, append);
-                        replyM(this.getData);
-                }
+                ProcessMessge(response, append);
+                replyM(response);
             }
         }
     }
 
-    public void updatePersonalInfoShow(String res)
+    public void updateDisplay(String res)
     {
         if (res == null)
             return;
@@ -614,16 +585,27 @@ public class Fetion implements IAccount, Runnable
         try
         {
             Document doc = DocumentHelper.parseText(text);
+            Element e1;
             for (Object o1 : doc.selectNodes("/results/contacts/contact"))
             {
-                Element e1 = (Element) o1;
+                e1 = (Element) o1;
                 String uri = e1.attributeValue("uri");
-                String statusCode = e1.attributeValue("status-code");
+                System.out.println(uri);
+                Contact contact;
+                for (IContact tmp : contacts)
+                {
+                    contact = (Contact) tmp;
+                    if (uri.equals(contact.getUri()))
+                    {
+                        contact.setStatus(e1.attributeValue("status-code"));
 
-                Element e2 = e1.element("personal");
-                String dd = e2.attributeValue("impresa");// 心情
-                String nickname = e2.attributeValue("nickname");
-                String mobileNo = e2.attributeValue(" mobile-no");
+                        e1 = e1.element("personal");
+                        contact.setPersonalMessage(e1.attributeValue("impresa"));// 心情
+                        contact.setName(e1.attributeValue("nickname"));
+                        contact.setMobile(e1.attributeValue(" mobile-no"));
+                        break;
+                    }
+                }
             }
         }
         catch (Exception exp)
@@ -662,15 +644,6 @@ public class Fetion implements IAccount, Runnable
         return result;
     }
 
-    void addCommand(int id, IDataType e)
-    {
-        while (Commands.size() < id)
-        {
-            Commands.add(null);
-        }
-        Commands.add(id, e);
-    }
-
     public void getPersonalInfo()
     {
         callId += 1;
@@ -693,7 +666,7 @@ public class Fetion implements IAccount, Runnable
         tmp.append(text);
 
         send(tmp.toString());
-        addCommand(callId, new IDataType(IDataType.N_GetPersonalInfo));
+        commands.put(Integer.toString(callId), Constant.N_GetPersonalInfo);
     }
 
     public void getContactList()
@@ -720,7 +693,7 @@ public class Fetion implements IAccount, Runnable
         tmp.append(text);
 
         send(tmp.toString());
-        addCommand(callId, new IDataType(IDataType.N_GetContactList));
+        commands.put(Integer.toString(callId), Constant.N_GetContactList);
     }
 
     public void getContactDetail(String args)
@@ -737,7 +710,7 @@ public class Fetion implements IAccount, Runnable
         tmp.append(args);
 
         send(tmp.toString());
-        addCommand(callId, new IDataType(IDataType.N_GetContactsInfo));
+        commands.put(Integer.toString(callId), Constant.N_GetContactsInfo);
     }
 
     public void subPresence(String args)
@@ -754,7 +727,7 @@ public class Fetion implements IAccount, Runnable
         tmp.append(args);
 
         send(tmp.toString());
-        addCommand(callId, new IDataType(IDataType.N_SubPresence));
+        commands.put(Integer.toString(callId), Constant.N_SubPresence);
     }
 
     public void logout()
@@ -772,8 +745,8 @@ public class Fetion implements IAccount, Runnable
     {
         try
         {
-            dataOut.write(message.getBytes("utf-8"));
-            dataOut.flush();
+            dataOs.write(message.getBytes("utf-8"));
+            dataOs.flush();
         }
         catch (Exception e)
         {
@@ -790,9 +763,11 @@ public class Fetion implements IAccount, Runnable
         Element args = doc.addElement("args");
         args.addElement("contacts").addAttribute("attributes", "provisioning;impresa;mobile-no;nickname;name;portrait-crc;ivr-enabled");
 
-        for (Contact tmp : contacts)
+        Contact contact;
+        for (IContact tmp : contacts)
         {
-            args.addElement("contact").addAttribute("uri", tmp.getUri());
+            contact = (Contact) tmp;
+            args.addElement("contact").addAttribute("uri", contact.getUri());
         }
 
         getContactDetail(doc.asXML());
@@ -832,7 +807,7 @@ public class Fetion implements IAccount, Runnable
         tmp.append(text);
 
         send(tmp.toString());
-        addCommand(callId, new IDataType(IDataType.N_SendMsg));
+        commands.put(Integer.toString(callId), Constant.N_SendMsg);
     }
 
     public void setNickname(String text)
@@ -848,7 +823,7 @@ public class Fetion implements IAccount, Runnable
         tmp.append("L: ").append(text.getBytes().length).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
         tmp.append(text);
         send(tmp.toString());
-        addCommand(callId, new IDataType(IDataType.N_SetPersonalInfo));
+        commands.put(Integer.toString(callId), Constant.N_SetPersonalInfo);
     }
 
     public void replyM(String s)
@@ -881,14 +856,5 @@ public class Fetion implements IAccount, Runnable
         tmp.append("I: 1").append(Constant.ENV_BREAKS);
         tmp.append("Q: ").append(liveId).append(" R").append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
         send(tmp.toString());
-    }
-
-    public static void main(String[] args)
-    {
-        Fetion jf = new Fetion();
-        jf.init();
-        jf.login();
-        jf.getContactList();
-        jf.logout();
     }
 }
