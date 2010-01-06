@@ -7,6 +7,8 @@
  */
 package rmp.irp.v.live;
 
+import java.util.List;
+
 import net.sf.jml.MsnContact;
 
 import com.amonsoft.rmps.irp.b.ICatalog;
@@ -25,6 +27,18 @@ import com.amonsoft.rmps.irp.b.IContact;
 public class Contact implements IContact
 {
     MsnContact contact;
+
+    @Override
+    public String getId()
+    {
+        return null;
+    }
+
+    @Override
+    public String getName()
+    {
+        return null;
+    }
 
     @Override
     public String getDisplayName()
@@ -51,7 +65,7 @@ public class Contact implements IContact
     }
 
     @Override
-    public ICatalog[] getGroups()
+    public List<ICatalog> getCatalogs()
     {
         return null;
     }

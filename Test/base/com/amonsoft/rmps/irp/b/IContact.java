@@ -7,6 +7,8 @@
  */
 package com.amonsoft.rmps.irp.b;
 
+import java.util.List;
+
 /**
  * <ul>
  * <li>功能说明：</li>
@@ -20,12 +22,46 @@ package com.amonsoft.rmps.irp.b;
  */
 public interface IContact
 {
+    /**
+     * 用户索引
+     * 
+     * @return
+     */
+    String getId();
+
+    /**
+     * 用户名称
+     * 
+     * @return
+     */
+    String getName();
+
+    /**
+     * 显示名称
+     * 
+     * @return
+     */
     String getDisplayName();
 
+    /**
+     * 电子邮件
+     * 
+     * @return
+     */
     String getEmail();
 
+    /**
+     * 状态说明
+     * 
+     * @return
+     */
     String getStatus();
 
+    /**
+     * 个人消息
+     * 
+     * @return
+     */
     String getPersonalMessage();
 
     /**
@@ -33,5 +69,5 @@ public interface IContact
      * 
      * @return
      */
-    ICatalog[] getGroups();
+    List<ICatalog> getCatalogs();
 }

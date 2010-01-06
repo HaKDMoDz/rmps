@@ -18,18 +18,12 @@
 				<map key="密云" id="101011300" comment="miyun" />
 				<map key="门头沟" id="101011400" comment="mentougou" />
 				<map key="平谷" id="101011500" comment="pinggu" />
-				<map key="八达岭" />
-				<map key="佛爷顶" />
-				<map key="汤河口" />
-				<map key="密云上甸子" />
-				<map key="斋堂" />
-				<map key="霞云岭" />
 			</map>
 			<map key="上海" id="" comment="shanghai">
 				<map key="上海市中心" id="101020100" comment="shanghaishizhongxin" />
 				<map key="闵行" id="101020200" comment="minhang" />
 				<map key="宝山" id="101020300" comment="baoshan" />
-				<map key="川沙" />
+				<map key="浦东" id="101021300" comment="pudong"  />
 				<map key="嘉定" id="101020500" comment="jiading" />
 				<map key="南汇" id="101020600" comment="nanhui" />
 				<map key="金山" id="101020700" comment="jinshan" />
@@ -37,8 +31,6 @@
 				<map key="松江" id="101020900" comment="songjiang" />
 				<map key="奉贤" id="101021000" comment="fengxian" />
 				<map key="崇明" id="101021100" comment="chongming" />
-				<map key="陈家镇" />
-				<map key="引水船" />
 			</map>
 			<map key="天津" id="" comment="tianjin">
 				<map key="天津市中心" id="101030100" comment="tianjinshizhongxin" />
@@ -53,46 +45,19 @@
 				<map key="津南" id="101031000" comment="jinnan" />
 				<map key="塘沽" id="101031100" comment="tanggu" />
 				<map key="大港" id="101031200" comment="dagang" />
-				<map key="平台" />
 				<map key="蓟县" id="101031400" comment="jixian" />
 			</map>
 			<map key="重庆" id="" comment="chongqing">
 				<map key="重庆市中心" id="101040100" comment="chongqingshizhongxin" />
 				<map key="永川" id="101040200" comment="yongchuanshi" />
 				<map key="合川" id="101040300" comment="hechuanshi" />
-				<map key="南川" />
 				<map key="江津" id="101040500" comment="jiangjinshi" />
-				<map key="万盛" />
-				<map key="渝北" />
-				<map key="北碚" />
-				<map key="巴南" />
-				<map key="长寿" />
 				<map key="黔江" id="101041100" comment="qianjiangtujia" />
-				<map key="万州天城" />
-				<map key="万州龙宝" />
 				<map key="涪陵" id="101041400" comment="fulingqu" />
-				<map key="开县" />
-				<map key="城口" />
 				<map key="云阳" id="101041700" comment="yunyangxian" />
-				<map key="巫溪" />
-				<map key="奉节" />
 				<map key="巫山" id="101042000" comment="wushanxian" />
-				<map key="潼南" />
-				<map key="垫江" />
 				<map key="梁平" id="101042300" comment="liangpingxian" />
-				<map key="忠县" />
-				<map key="石柱" />
-				<map key="大足" />
-				<map key="荣昌" />
-				<map key="铜梁" />
-				<map key="璧山" />
 				<map key="丰都" id="101043000" comment="fengduxian" />
-				<map key="武隆" />
-				<map key="彭水" />
-				<map key="綦江" />
-				<map key="酉阳" />
-				<map key="金佛山" />
-				<map key="秀山" />
 			</map>
 			<map key="黑龙江" id="" comment="heilongjiang">
 				<map key="哈尔滨" id="101050101" comment="haerbin">
@@ -3198,141 +3163,49 @@
 				</map>
 			</map>
 			<map key="海南" id="" comment="hainan">
-				<map key="海口" id="101310101" comment="haikou">
-					<map key="海口" />
-				</map>
-				<map key="琼山">
-					<map key="琼山" />
-				</map>
-				<map key="三亚" id="101310201" comment="sanya">
-					<map key="三亚" />
-				</map>
-				<map key="东方" id="101310202" comment="dongfang">
-					<map key="东方" />
-				</map>
-				<map key="临高" id="101310203" comment="lingao">
-					<map key="临高" />
-				</map>
-				<map key="澄迈" id="101310204" comment="chengmai">
-					<map key="澄迈" />
-				</map>
-				<map key="儋州" id="101310205" comment="danzhou">
-					<map key="儋州" />
-				</map>
-				<map key="昌江" id="101310206" comment="changjiang">
-					<map key="昌江" />
-				</map>
-				<map key="白沙" id="101310207" comment="baisha">
-					<map key="白沙" />
-				</map>
-				<map key="琼中" id="101310208" comment="qiongzhong">
-					<map key="琼中" />
-				</map>
-				<map key="定安" id="101310209" comment="anding">
-					<map key="定安" />
-				</map>
-				<map key="屯昌" id="101310210" comment="tunchang">
-					<map key="屯昌" />
-				</map>
-				<map key="琼海" id="101310211" comment="qionghai">
-					<map key="琼海" />
-				</map>
-				<map key="文昌" id="101310212" comment="wenchang">
-					<map key="文昌" />
-				</map>
-				<map key="清兰">
-					<map key="清兰" />
-				</map>
-				<map key="保亭" id="101310214" comment="baoting">
-					<map key="保亭" />
-				</map>
-				<map key="万宁" id="101310215" comment="wanning">
-					<map key="万宁" />
-				</map>
-				<map key="陵水" id="101310216" comment="lingshui">
-					<map key="陵水" />
-				</map>
-				<map key="西沙">
-					<map key="西沙" />
-				</map>
-				<map key="珊瑚岛">
-					<map key="珊瑚岛" />
-				</map>
-				<map key="永署礁">
-					<map key="永署礁" />
-				</map>
-				<map key="南沙岛">
-					<map key="南沙岛" />
-				</map>
-				<map key="乐东" id="101310221" comment="ledong">
-					<map key="乐东" />
-				</map>
-				<map key="通什">
-					<map key="通什" />
-				</map>
+				<map key="海口" id="101310101" comment="haikou"/>
+				<map key="文昌" id="101310212" comment="wenchang"/>
+				<map key="临高" id="101310203" comment="lingao"/>
+				<map key="澄迈" id="101310204" comment="chengmai"/>
+				<map key="儋州" id="101310205" comment="danzhou"/>
+				<map key="定安" id="101310209" comment="anding"/>
+				<map key="屯昌" id="101310210" comment="tunchang"/>
+				<map key="昌江" id="101310206" comment="changjiang"/>
+				<map key="白沙" id="101310207" comment="baisha"/>
+				<map key="琼海" id="101310211" comment="qionghai"/>
+				<map key="琼中" id="101310208" comment="qiongzhong"/>
+				<map key="东方" id="101310202" comment="dongfang"/>
+				<map key="五指山" id="101310222" comment="tongshi"/>
+				<map key="万宁" id="101310215" comment="wanning"/>
+				<map key="乐东" id="101310221" comment="ledong"/>
+				<map key="保亭" id="101310214" comment="baoting"/>
+				<map key="陵水" id="101310216" comment="lingshui"/>
+				<map key="三亚" id="101310201" comment="sanya"/>
 			</map>
 			<map key="香港" id="" comment="xianggang">
-				<map key="香港" id="101320101" comment="xianggangdao">
-					<map key="香港" />
-					<map key="九龙" id="101271805" comment="jiulong" />
-					<map key="新界" id="101320103" comment="xinjie" />
-					<map key="中环" />
-					<map key="铜锣湾" />
-				</map>
+				<map key="香港岛" id="101320101" comment="xianggangdao"/>
+				<map key="九龙" id="101271805" comment="jiulong" />
+				<map key="新界" id="101320103" comment="xinjie" />
 			</map>
 			<map key="澳门" id="" comment="aomen">
-				<map key="澳门" id="101330101" comment="aomen">
-					<map key="澳门" />
-				</map>
+				<map key="澳门" id="101330101" comment="aomen"/>
 			</map>
 			<map key="台湾" id="" comment="taiwan">
-				<map key="台北" id="101340101" comment="taibei">
-					<map key="台北县" />
-					<map key="台北市" />
-				</map>
-				<map key="高雄" id="101340201" comment="gaoxiong">
-					<map key="高雄" />
-					<map key="东港" />
-					<map key="大武" />
-					<map key="恒春" />
-					<map key="兰屿" />
-				</map>
-				<map key="台南" id="101340203" comment="tainan">
-					<map key="台南" />
-				</map>
-				<map key="台中" id="101340401" comment="taizhong">
-					<map key="台中" />
-				</map>
-				<map key="桃园" id="101340102" comment="taoyuan">
-					<map key="桃园" />
-				</map>
-				<map key="新竹" id="101340103" comment="xinzhu">
-					<map key="新竹县" />
-					<map key="新竹市" />
-					<map key="公馆" />
-				</map>
-				<map key="宜兰" id="101340104" comment="yilan">
-					<map key="宜兰" />
-				</map>
-				<map key="澎湖">
-					<map key="马公" />
-					<map key="东吉屿" />
-				</map>
-				<map key="嘉义" id="101340202" comment="jiayi">
-					<map key="嘉义" />
-					<map key="阿里山" />
-					<map key="玉山" />
-					<map key="新港" />
-				</map>
-				<map key="花莲" id="101340405" comment="hualian">
-					<map key="花莲" />
-				</map>
-				<map key="台东" id="101340204" comment="taidong">
-					<map key="台东" />
-				</map>
-				<map key="基隆">
-					<map key="彭佳屿" />
-				</map>
+				<map key="台北" id="101340101" comment="taibei"/>
+				<map key="桃园" id="101340102" comment="taoyuan"/>
+				<map key="新竹" id="101340103" comment="xinzhu"/>
+				<map key="宜兰" id="101340104" comment="yilan"/>
+				<map key="苗栗" id="101340402" comment="miaoli"/>
+				<map key="台中" id="101340401" comment="taizhong"/>
+				<map key="花莲" id="101340405" comment="hualian"/>
+				<map key="彰化" id="101340403" comment="zhanghua"/>
+				<map key="南投" id="101340404" comment="nantou"/>
+				<map key="云林" id="101340406" comment="yunlin"/>
+				<map key="嘉义" id="101340202" comment="jiayi"/>
+				<map key="台南" id="101340203" comment="tainan"/>
+				<map key="台东" id="101340204" comment="taidong"/>
+				<map key="屏东" id="101340205" comment="pingdong"/>
+				<map key="高雄" id="101340201" comment="gaoxiong"/>
 			</map>
 		</item>
 	</I2010000>

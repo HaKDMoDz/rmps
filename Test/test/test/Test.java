@@ -68,7 +68,8 @@ public class Test
             params.put("PS", CharUtil.toHex(MessageDigest.getInstance("MD5").digest("bIxSTULX1Yl9".getBytes())));
             params.put("M5", "1");
             params.put("LC", "9326B87B234E7235");
-            String data = HttpUtil.request("http://tqq.tencent.com:8000", "POST", "gb2312", params);
+            //String data = HttpUtil.request("http://tqq.tencent.com:8000", "POST", "gb2312", params);
+            String data = HttpUtil.request("http://219.133.60.211:8000", "POST", "gb2312", params);
             System.out.println(data);
             // VER=1.1&CMD=Login&SEQ=17923&UIN=107618109&RES=0&RS=0&HI=60&LI=300&COMP=NOKIA8F3A18D6E27
             // VER=1.1&CMD=Login&SEQ=31126&UIN=107618109&RES=0&RS=0&HI=60&LI=300&COMP=NOKIA8F3A18D6E27
@@ -91,7 +92,8 @@ public class Test
             params.put("UIN", "107618109");// 用户QQ号
             params.put("SN", "160");// 
             params.put("UN", "0");// 
-            String data = HttpUtil.request("http://tqq.tencent.com:8000", "POST", "gb2312", params);
+            //String data = HttpUtil.request("http://tqq.tencent.com:8000", "POST", "gb2312", params);
+            String data = HttpUtil.request("http://119.147.11.76:8000", "POST", "gb2312", params);
             System.out.println(data);
             // VER=1.1&CMD=Login&SEQ=17923&UIN=107618109&RES=0&RS=0&HI=60&LI=300&COMP=NOKIA8F3A18D6E27
             // VER=1.1&CMD=Login&SEQ=31126&UIN=107618109&RES=0&RS=0&HI=60&LI=300&COMP=NOKIA8F3A18D6E27

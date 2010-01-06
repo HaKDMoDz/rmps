@@ -20,4 +20,24 @@ package com.amonsoft.rmps.irp.b;
  */
 public interface ICatalog
 {
+    /**
+     * 目录索引
+     * 
+     * @return
+     */
+    String getId();
+
+    /**
+     * 目录路径
+     * 
+     * @return
+     */
+    String getUri();
+
+    /**
+     * 目录名称
+     * 
+     * @return
+     */
+    String getName();
 }

@@ -7,26 +7,30 @@
  */
 package rmp.irp.v.fetion;
 
-//import cn.edu.ctgu.ghl.fetion.FetionEvent;
-//import cn.edu.ctgu.ghl.fetion.IFetionEventListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
 import java.net.Socket;
 import java.net.URL;
 import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import rmp.util.LogUtil;
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+import org.dom4j.Node;
+import org.dom4j.io.SAXReader;
 
+import com.amonsoft.rmps.irp.b.ICatalog;
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IStatus;
 import com.amonsoft.rmps.irp.v.IAccount;
 import com.amonsoft.rmps.irp.v.IConnect;
+import com.amonsoft.util.CharUtil;
 
 /**
  * <ul>
@@ -38,15 +42,48 @@ import com.amonsoft.rmps.irp.v.IConnect;
  * 
  * @author Amon
  */
-public class Fetion implements IAccount// , IFetionEventListener
+public class Fetion implements IAccount, Runnable
 {
     private Connect connect;
+    private String sid;
+    private String uri;
+    public String sipc_proxy;
+    private String ssi_app_sign_in;
+    private String ssi_app_sign_out;
+    private StringBuffer LoginDebugMemo;
+
+    /**
+     * Socket通讯对象
+     */
+    private Socket socket;
+    /**
+     * 数据输入对象
+     */
+    private DataInputStream dataIn;
+    /**
+     * 数据输出对象
+     */
+    private DataOutputStream dataOut;
+    /**
+     * 接收消息数据
+     */
+    private String getData;
+    private ArrayList<Catalog> catalogs = new ArrayList<Catalog>();
+    private ArrayList<Contact> contacts = new ArrayList<Contact>();
+    static final int LOGIN_SUCC = 0;
+    static final int LOGIN_CONN_ERROR = 1;
+    static final int LOGIN_DATAIO_ERROR = 2;
+    static final int LOGIN_FAILED = 3;
+    private static int callId;
+    private int liveId = 2;
+
+    private ArrayList<IDataType> Commands = new ArrayList<IDataType>();
 
     public Fetion()
     {
         this.socket = null;
         this.getData = "";
-        call_id = 2;
+        callId = 2;
         this.Commands.clear();
     }
 
@@ -64,10 +101,8 @@ public class Fetion implements IAccount// , IFetionEventListener
                 connect = new Connect();
                 connect.load();
 
-                initF();
                 break;
             case IStatus.SIGN:
-                System.out.println(login(connect.getProxy(), connect.getPwds()));
                 break;
             case IStatus.DOWN:
                 break;
@@ -94,89 +129,141 @@ public class Fetion implements IAccount// , IFetionEventListener
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    // @Override
-    // public void process(FetionEvent e)
-    // {
-    // if (e.getFirstLine() != null && e.getFirstLine().startsWith("M") &&
-    // e.getBody() != null)
-    // {
-    // messenger.sendSms2SelfPhone(e.toString());
-    // if (e.getBody().trim().startsWith("cmd"))
-    // {
-    // System.out.println("excute[" + e.getBody().trim().substring(3) + "]");
-    // try
-    // {
-    // Runtime.getRuntime().exec(e.getBody().trim().substring(3));
-    // }
-    // catch (IOException e1)
-    // {
-    // // TODO Auto-generated catch block
-    // e1.printStackTrace();
-    // }
-    // }
-    // }
-    // }
-
-    public static String byteArrayToHexString(byte[] b)
+    private String initSysEncode()
     {
-        StringBuffer resultSb = new StringBuffer();
-        for (int i = 0; i < b.length; ++i)
-        {
-            resultSb.append(byteToHexString(b[i]));
-        }
-        return resultSb.toString();
+        Document doc = DocumentHelper.createDocument();
+        Element config = doc.addElement("config");
+
+        config.addElement("user").addAttribute("mobile-no", connect.getUser());
+
+        Element client = config.addElement("client");
+        client.addAttribute("type", "PC");
+        client.addAttribute("version", Constant.VER_FETION);
+        client.addAttribute("platform", "W5.1");
+
+        config.addElement("servers").addAttribute("version", "0");
+
+        config.addElement("service-no").addAttribute("version", "0");
+
+        config.addElement("parameters").addAttribute("version", "0");
+
+        config.addElement("hints").addAttribute("version", "0");
+
+        config.addElement("http-applications").addAttribute("version", "0");
+
+        return doc.asXML();
     }
 
-    private static String byteToHexString(byte b)
+    private boolean initSysDecode(Document doc)
     {
-        int n = b;
-        if (n < 0)
+        Element ele = (Element) doc.selectSingleNode("/config/servers");
+
+        sipc_proxy = ele.selectSingleNode("sipc-proxy").getText();
+
+        ssi_app_sign_in = ele.selectSingleNode("ssi-app-sign-in").getText();
+
+        ssi_app_sign_out = ele.selectSingleNode("ssi-app-sign-out").getText();
+        return true;
+    }
+
+    private boolean initSipDeocde(Document doc)
+    {
+        Node ele = doc.selectSingleNode("/Root/Users/User");
+
+        sid = ele.selectSingleNode("Sid").getText();
+
+        uri = ele.selectSingleNode("Uri").getText();
+        return true;
+    }
+
+    public boolean init()
+    {
+        URLConnection connection = null;
+        try
         {
-            n = 256 + n;
+            // 连接配置服务器
+            connection = new URL(connect.getSysCfg()).openConnection();
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Content-Type", "text/plain");
+            connection.setRequestProperty("charset", "utf-8");
+
+            // 向配置服务器发送信息
+            OutputStreamWriter osw = new OutputStreamWriter(connection.getOutputStream(), "utf-8");
+            osw.write(initSysEncode());
+            osw.flush();
+            osw.close();
+
+            // 返回数据解析
+            initSysDecode(new SAXReader().read(connection.getInputStream()));
+
+            // 连接身份服务器
+            connection = new URL(connect.getSipCfg()).openConnection();
+            connection.setDoOutput(true);
+            connection.setRequestProperty("charset", "utf-8");
+
+            // 向身份服务器发送信息
+            osw = new OutputStreamWriter(connection.getOutputStream(), "utf-8");
+            osw.write(sid == null ? "CellPhone=" + connect.getUser() : "Sid=" + sid);
+            osw.flush();
+            osw.close();
+
+            // 读取配置服务器返回数据
+            InputStreamReader isr = new InputStreamReader(connection.getInputStream(), "utf-8");
+            StringBuffer buf = new StringBuffer();
+            char[] tmp = new char[1024];
+            int len = isr.read(tmp);
+            while (len >= 0)
+            {
+                buf.append(tmp, 0, len);
+                len = isr.read(tmp);
+            }
+            isr.close();
+
+            // 返回数据解析
+            initSipDeocde(DocumentHelper.parseText(buf.toString().replace("xmlns=\"http://tempuri.org/DateExchange.xsd\"", "")));
         }
-        int d1 = n / 16;
-        int d2 = n % 16;
-        return hexDigits[d1] + hexDigits[d2];
+        catch (Exception exp)
+        {
+            System.out.println(exp);
+        }
+        return true;
     }
 
     public static String MD5Encode(String origin)
     {
-        String resultString = null;
         try
         {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            resultString = byteArrayToHexString(md.digest(origin.getBytes("utf-8")));
+            return CharUtil.toHex(MessageDigest.getInstance("MD5").digest(origin.getBytes("utf-8")));
         }
         catch (Exception ex)
         {
+            return "";
         }
-        return resultString;
     }
 
     public static String computeH1(String s1, String s2)
     {
-        String res = null;
         try
         {
             MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] key = md.digest(s1.getBytes("utf-8"));
-            byte[] ss = s2.getBytes("utf-8");
-            byte[] t = new byte[key.length + ss.length];
+            byte[] k = md.digest(s1.getBytes("utf-8"));
+            byte[] s = s2.getBytes("utf-8");
+            byte[] t = new byte[k.length + s.length];
 
-            for (int i = 0; i < key.length; ++i)
+            for (int i = 0, j = k.length; i < j; ++i)
             {
-                t[i] = key[i];
+                t[i] = k[i];
             }
-            for (int i = 0; i < ss.length; ++i)
+            for (int i = 0, j = s.length; i < j; ++i)
             {
-                t[(key.length + i)] = ss[i];
+                t[(k.length + i)] = s[i];
             }
-            res = byteArrayToHexString(md.digest(t));
+            return CharUtil.toHex(md.digest(t));
         }
         catch (Exception e)
         {
+            return null;
         }
-        return res;
     }
 
     public void addSendStr(String str)
@@ -196,38 +283,21 @@ public class Fetion implements IAccount// , IFetionEventListener
 
     public String waitResponse()
     {
-        return waitResponse("\r\n\r\n");
+        return waitResponse(Constant.ENV_BREAKS + Constant.ENV_BREAKS);
     }
 
     public String waitResponse(int len)
     {
-        int recvPos = 0;
-
-        byte[] recvBuf = new byte[len + 1];
-        while (recvPos < len)
-        {
-            int t;
-            try
-            {
-                t = this.dataIn.read();
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-            recvBuf[(recvPos++)] = (byte) t;
-        }
-        recvBuf[recvPos] = 0;
-        String res;
         try
         {
-            res = new String(recvBuf, "utf-8");
+            byte[] recvBuf = new byte[len];
+            int t = dataIn.read(recvBuf);
+            return t == len ? new String(recvBuf, "utf-8") : "";
         }
         catch (Exception e)
         {
-            res = "Convert to UTF8 Error\n";
+            return "Convert to UTF8 Error\n";
         }
-        return res;
     }
 
     public String waitResponse(String endStr)
@@ -247,16 +317,12 @@ public class Fetion implements IAccount// , IFetionEventListener
             }
             recvBuf[(recvPos++)] = (byte) t;
             if (recvPos <= endStr.length())
-            {
                 continue;
-            }
             int end = 1;
             for (int i = 0; i < endStr.length(); ++i)
             {
                 if (recvBuf[(recvPos - endStr.length() + i)] == endStr.charAt(i))
-                {
                     continue;
-                }
                 end = 0;
                 break;
             }
@@ -278,111 +344,151 @@ public class Fetion implements IAccount// , IFetionEventListener
         return res;
     }
 
-    public int login(String proxyUri, String pwd)
+    private String SignInnEncode()
     {
-        String[] proxySplit = proxyUri.split(":");
+        Document doc = DocumentHelper.createDocument();
+        Element args = doc.addElement("args");
+
+        Element device = args.addElement("device");
+        device.addAttribute("type", "PC");
+        device.addAttribute("version", "5");
+        device.addAttribute("client-version", Constant.VER_FETION);
+
+        args.addElement("caps").addAttribute("value", "simple-im;im-session;temp-group");
+
+        args.addElement("events").addAttribute("value", "contact;permission;system-message");
+
+        args.addElement("user-info").addAttribute("attributes", "all");
+
+        Element basic = args.addElement("presence").addElement("basic");
+        basic.addAttribute("value", "0").addAttribute("desc", "");
+
+        return doc.asXML();
+    }
+
+    public int login()
+    {
+        String[] proxySplit = this.sipc_proxy.split(":");
         try
         {
-            this.socket = new Socket(proxySplit[0], Integer.parseInt(proxySplit[1]));
-
-            this.dataIn = new DataInputStream(this.socket.getInputStream());
-            this.dataOut = new DataOutputStream(this.socket.getOutputStream());
+            socket = new Socket(proxySplit[0], Integer.parseInt(proxySplit[1]));
+            dataIn = new DataInputStream(socket.getInputStream());
+            dataOut = new DataOutputStream(socket.getOutputStream());
         }
         catch (Exception e1)
         {
-            return 1;
+            return LOGIN_CONN_ERROR;
         }
-        this.Q1 = 2;
+
+        liveId = 2;
         try
         {
-            String args = "<args><device type=\"PC\" version=\"5\" client-version=\"3.5.2540\" /><caps value=\"simple-im;im-session;temp-group\" /><events value=\"contact;permission;system-message\" /><user-info attributes=\"all\" /><presence><basic value=\"0\" desc=\"\" /></presence></args>";
-            this.sendData = "R fetion.com.cn SIP-C/2.0\r\n";
-            Fetion tmp93_92 = this;
-            tmp93_92.sendData = tmp93_92.sendData + "F: " + this.sid + "\r\n";
-            Fetion tmp131_130 = this;
-            tmp131_130.sendData = tmp131_130.sendData + "I: 1\r\nQ: 1 R\r\nL: " + args.length() + "\r\n\r\n";
-            this.sendData += args;
-            addSendStr(this.sendData);
-            SendData();
-            this.getData = waitResponse();
-            addRecvStr(this.getData);
-            if (this.getData.indexOf("nonce") <= 0)
+            // 第一次握手
+            String data = SignInnEncode();
+            StringBuffer tmp = new StringBuffer();
+            tmp.append("R fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
+            tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+            tmp.append("I: 1").append(Constant.ENV_BREAKS).append("Q: 1 R").append(Constant.ENV_BREAKS).append("L: ");
+            tmp.append(data.length()).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
+            tmp.append(data);
+            send(tmp.toString());
+
+            // 第二次握手
+            getData = waitResponse();
+
+            int i = getData.indexOf("nonce");
+            if (i < 0)
             {
-                addDebugStr("No nonce field");
-                return 3;
+                return LOGIN_FAILED;
             }
-            String nonce = this.getData.substring(this.getData.indexOf("nonce") + 7);
-            nonce = nonce.substring(0, nonce.indexOf(34));
-
-            String cnonce = "7036EA07568E7C4D6D49FD76141062FE";
-
-            String md5Str = this.sid + ":fetion.com.cn:" + pwd;
-            String key = MD5Encode(md5Str);
-            String debugStr = "key=MD5(\"" + md5Str + "\")=" + key + "\n";
-            String md5Str_ = md5Str;
-            md5Str = ":" + nonce + ":" + cnonce;
-            String H1 = computeH1(md5Str_, md5Str);
-            debugStr = debugStr + "H1=MD5(\"" + key + md5Str + "\")=" + H1 + "\n";
-            md5Str = "REGISTER:" + this.sid;
-            String H2 = MD5Encode(md5Str);
-            debugStr = debugStr + "H2=MD5(\"" + md5Str + "\")=" + H2 + "\n";
-            md5Str = H1 + ":" + nonce + ":" + H2;
-            String response = MD5Encode(md5Str);
-            debugStr = debugStr + "response=MD5(\"" + md5Str + "\")=" + response + "\n";
-            addDebugStr(debugStr);
-            this.sendData = "R fetion.com.cn SIP-C/2.0\r\nF: " + this.sid + "\r\n" + "I: 1\r\n" + "Q: 2 R\r\n" + "A: Digest response=\"" + response
-                    + "\",cnonce=\"7036EA07568E7C4D6D49FD76141062FE\"\r\n" + "L: " + args.length() + "\r\n\r\n" + args;
-
-            addSendStr(this.sendData);
-            SendData();
-            this.getData = waitResponse();
-            if (this.getData.indexOf("\r\nL: ") > 0)
+            i += 7;
+            int j = getData.indexOf('"', i);
+            if (j < i)
             {
-                String append = this.getData.substring(this.getData.indexOf("\r\nL: ") + 5);
-                append = append.substring(0, append.indexOf("\r\n"));
+                return LOGIN_FAILED;
+            }
+            String nonce = getData.substring(i, j);
+
+            // 第三次握手
+            String m1 = sid + ":fetion.com.cn:" + connect.getPwds();
+            String m2 = ":" + nonce + ":7036EA07568E7C4D6D49FD76141062FE";
+            String h1 = computeH1(m1, m2);
+            m2 = "REGISTER:" + sid;
+            String h2 = MD5Encode(m2);
+            m2 = h1 + ":" + nonce + ":" + h2;
+            String response = MD5Encode(m2);
+
+            tmp.delete(0, tmp.length());
+            tmp.append("R fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
+            tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+            tmp.append("I: 1").append(Constant.ENV_BREAKS);
+            tmp.append("Q: 2 R").append(Constant.ENV_BREAKS);
+            tmp.append("A: Digest response=\"").append(response).append("\",cnonce=\"7036EA07568E7C4D6D49FD76141062FE\"").append(Constant.ENV_BREAKS);
+            tmp.append("L: ").append(data.length()).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
+            tmp.append(data);
+            send(tmp.toString());
+
+            // 登录状态确认
+            getData = waitResponse();
+            i = getData.indexOf("\r\nL: ");
+            if (i > 0)
+            {
+                String append = getData.substring(i + 5).trim();
                 append = waitResponse(Integer.parseInt(append)).trim();
-                this.getData = this.getData.trim() + "\r\n\r\n" + append;
+                getData = getData.trim() + "\r\n\r\n" + append;
             }
-            addRecvStr(this.getData);
-            if (this.getData.indexOf("200") <= 0)
+            if (this.getData.indexOf("200") < 0)
             {
-                return 3;
+                return LOGIN_FAILED;
             }
         }
         catch (Exception e2)
         {
-            return 2;
+            return LOGIN_DATAIO_ERROR;
         }
-        return 0;
+        return LOGIN_SUCC;
+    }
+
+    private HashMap<String, String> dd(String text)
+    {
+        HashMap<String, String> map = new HashMap<String, String>();
+        String[] arr;
+        for (String tmp : text.split(Constant.ENV_BREAKS))
+        {
+            arr = tmp.split(":");
+            if (arr.length == 2)
+            {
+                map.put(arr[0].trim(), arr[1].trim());
+            }
+        }
+        return map;
     }
 
     public void run()
     {
         while (!(Thread.interrupted()))
         {
-            this.getData = waitResponse();
-            String append = null;
-            if (this.getData.indexOf("\r\nL: ") > 0)
-            {
-                append = this.getData.substring(this.getData.indexOf("\r\nL: ") + 5);
-                append = append.substring(0, append.indexOf("\r\n"));
-                append = waitResponse(Integer.parseInt(append)).trim();
-                this.getData = this.getData.trim() + "\r\n\r\n" + append;
-            }
-            addRecvStr(this.getData);
+            getData = waitResponse();
+            HashMap<String, String> map = dd(getData);
             int command = 0;
-            if (this.getData.indexOf("\r\nI: ") > 0)
+            String append = map.get("I");
+            if (CharUtil.isValidate(append))
             {
-                String comm = this.getData.substring(this.getData.indexOf("\r\nI: ") + 5);
-                comm = comm.substring(0, comm.indexOf("\r\n"));
-                command = Integer.parseInt(comm);
+                command = Integer.parseInt(append);
             }
+            append = map.get("L");
+            if (CharUtil.isValidate(append))
+            {
+                append = waitResponse(Integer.parseInt(append)).trim();
+                getData = getData.trim() + "\r\n\r\n" + append;
+            }
+
             if (command >= 0)
             {
                 IDataType element;
                 try
                 {
-                    element = (IDataType) this.Commands.get(command);
+                    element = Commands.get(command);
                 }
                 catch (Exception e)
                 {
@@ -391,43 +497,158 @@ public class Fetion implements IAccount// , IFetionEventListener
 
                 switch (element.NType)
                 {
-                    case 1:
-                        // this.mFrame.updatePersonalInfoShow(append);
-                        System.out.println(append);
+                    case IDataType.N_GetPersonalInfo:
+                        updatePersonalInfoShow(append);
                         break;
-                    case 2:
-                        // this.mFrame.updateContactsShow(append);
-                        System.out.println(append);
+                    case IDataType.N_GetContactList:
+                        updateCatalog(append);
                         break;
-                    case 3:
-                    case 4:
-                        // this.mFrame.updateContactsDetail(append);
-                        System.out.println(append);
+                    case IDataType.N_GetContactsInfo:
+                    case IDataType.N_SubPresence:
+                        updateContact(append);
                 }
 
             }
             else
             {
-                switch (this.getData.charAt(0))
+                switch (getData.charAt(0))
                 {
                     case 'M':
-                        // this.mFrame.ProcessMessge(this.getData, append);
-                        System.out.println(getData);
-                        System.out.println(append);
+                        ProcessMessge(this.getData, append);
                         replyM(this.getData);
                 }
             }
         }
     }
 
+    public void updatePersonalInfoShow(String res)
+    {
+        if (res == null)
+            return;
+        if (res.indexOf("mobile-no=") <= 0)
+            return;
+        String t = res.substring(res.indexOf("mobile-no=") + 11);
+        t = t.substring(0, t.indexOf(34));// 我的手机号码
+        t = res.substring(res.indexOf("nickname=") + 10);
+        t = t.substring(0, t.indexOf(34));// 我的昵称
+    }
+
+    /**
+     * 联系人列表更新
+     * 
+     * @param res
+     */
+    public void updateCatalog(String text)
+    {
+        try
+        {
+            Document doc = DocumentHelper.parseText(text);
+
+            catalogs.clear();
+            Catalog catalog = new Catalog("0", "Not Grouped");
+            catalogs.add(catalog);
+
+            Node node = doc.selectSingleNode("/results/contacts");
+            if (node == null)
+            {
+                return;
+            }
+
+            HashMap<String, ICatalog> map = new HashMap<String, ICatalog>();
+            map.put(catalog.getId(), catalog);
+
+            Element element;
+            for (Object obj : node.selectNodes("buddy-lists/buddy-list"))
+            {
+                element = (Element) obj;
+                catalog = new Catalog(element.attributeValue("id"), element.attributeValue("name"));
+                catalogs.add(catalog);
+                map.put(catalog.getId(), catalog);
+            }
+
+            Contact contact;
+            for (Object obj : node.selectNodes("buddies/buddy"))
+            {
+                element = (Element) obj;
+                contact = new Contact();
+                contact.setId(element.attributeValue("user-id"));
+                contact.setUri(element.attributeValue("uri"));
+                contact.setDisplayName(element.attributeValue("local-name"));
+                contact.addCatalog(map.get(element.attributeValue("buddy-lists")));
+                contacts.add(contact);
+            }
+            for (Object obj : node.selectNodes("buddies/mobile-buddies"))
+            {
+                element = (Element) obj;
+                contact = new Contact();
+                contact.setId(element.attributeValue("user-id"));
+                contact.setUri(element.attributeValue("uri"));
+                contact.setDisplayName(element.attributeValue("local-name"));
+                contact.addCatalog(map.get(element.attributeValue("buddy-lists")));
+                contacts.add(contact);
+            }
+            for (Object obj : node.selectNodes("buddies/blacklist"))
+            {
+                element = (Element) obj;
+
+                contact = new Contact();
+                contact.setId(element.attributeValue("user-id"));
+                contact.setUri(element.attributeValue("uri"));
+                contact.setDisplayName(element.attributeValue("local-name"));
+                contacts.add(contact);
+            }
+        }
+        catch (Exception exp)
+        {
+            System.out.println(exp);
+        }
+    }
+
+    /**
+     * 联系人详细信息更新
+     * 
+     * @param text
+     */
+    public void updateContact(String text)
+    {
+        try
+        {
+            Document doc = DocumentHelper.parseText(text);
+            for (Object o1 : doc.selectNodes("/results/contacts/contact"))
+            {
+                Element e1 = (Element) o1;
+                String uri = e1.attributeValue("uri");
+                String statusCode = e1.attributeValue("status-code");
+
+                Element e2 = e1.element("personal");
+                String dd = e2.attributeValue("impresa");// 心情
+                String nickname = e2.attributeValue("nickname");
+                String mobileNo = e2.attributeValue(" mobile-no");
+            }
+        }
+        catch (Exception exp)
+        {
+            System.out.println(exp);
+        }
+    }
+
+    public void ProcessMessge(String cmd, String text)
+    {
+        if (cmd.indexOf("F: ") <= 0)
+            return;
+        String from_sip = cmd.substring(cmd.indexOf("F: ") + 3);
+        from_sip = from_sip.substring(0, from_sip.indexOf("\r\n"));
+    }
+
     public void close()
     {
         try
         {
-            this.socket.close();
+            socket.close();
         }
         catch (Exception e)
         {
+            System.out.println(e);
         }
     }
 
@@ -435,9 +656,7 @@ public class Fetion implements IAccount// , IFetionEventListener
     {
         String result = s;
         if (result.indexOf(p) < 0)
-        {
             return null;
-        }
         result = result.substring(result.indexOf(p));
         result = result.substring(0, result.indexOf("\r\n"));
         return result;
@@ -445,337 +664,231 @@ public class Fetion implements IAccount// , IFetionEventListener
 
     void addCommand(int id, IDataType e)
     {
-        while (this.Commands.size() < id)
+        while (Commands.size() < id)
         {
-            this.Commands.add(null);
+            Commands.add(null);
         }
-        this.Commands.add(id, e);
+        Commands.add(id, e);
     }
 
     public void getPersonalInfo()
     {
-        String args = "<args><personal attributes=\"all\" /><services version=\"\" attributes=\"all\" /><config version=\"14\" attributes=\"all\" /><mobile-device attributes=\"all\" /></args>";
-        call_id += 1;
-        this.sendData = "S fetion.com.cn SIP-C/2.0\r\nF: " + this.sid + "\r\n" + "I: " + call_id + "\r\n" + "Q: 1 S\r\n" + "N: GetPersonalInfo\r\n" + "L: " + args.length() + "\r\n\r\n";
+        callId += 1;
 
-        this.sendData += args;
-        addSendStr(this.sendData);
-        SendData();
-        IDataType element = new IDataType(1);
-        addCommand(call_id, element);
+        Document doc = DocumentHelper.createDocument();
+        Element args = doc.addElement("args");
+        args.addElement("personal").addAttribute("attributes", "all");
+        args.addElement("services").addAttribute("version", "").addAttribute("attributes", "all");
+        args.addElement("config").addAttribute("version", "").addAttribute("attributes", "all");
+        args.addElement("mobile-device").addAttribute("attributes", "all");
+
+        String text = doc.asXML();
+        StringBuffer tmp = new StringBuffer();
+        tmp.append("S fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
+        tmp.append("Q: 1 S").append(Constant.ENV_BREAKS);
+        tmp.append("N: GetPersonalInfo").append(Constant.ENV_BREAKS);
+        tmp.append("L: ").append(text.length()).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
+        tmp.append(text);
+
+        send(tmp.toString());
+        addCommand(callId, new IDataType(IDataType.N_GetPersonalInfo));
     }
 
     public void getContactList()
     {
-        String args = "<args><contacts><buddy-lists /><buddies attributes=\"all\" /><mobile-buddies attributes=\"all\" /><chat-friends /><blacklist /></contacts></args>";
-        call_id += 1;
-        this.sendData = "S fetion.com.cn SIP-C/2.0\r\nF: " + this.sid + "\r\n" + "I: " + call_id + "\r\n" + "Q: 1 S\r\n" + "N: GetContactList\r\n" + "L: " + args.length() + "\r\n\r\n";
+        callId += 1;
 
-        this.sendData += args;
-        addSendStr(this.sendData);
-        SendData();
-        IDataType element = new IDataType(2);
-        addCommand(call_id, element);
+        Document doc = DocumentHelper.createDocument();
+        Element args = doc.addElement("args");
+        Element contacts = args.addElement("contacts");
+        contacts.addElement("buddy-lists");
+        contacts.addElement("buddies").addAttribute("attributes", "all");
+        contacts.addElement("mobile-buddies").addAttribute("attributes", "all");
+        contacts.addElement("chat-friends");
+        contacts.addElement("blacklist");
+
+        String text = doc.asXML();
+        StringBuffer tmp = new StringBuffer();
+        tmp.append("S fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
+        tmp.append("Q: 1 S").append(Constant.ENV_BREAKS);
+        tmp.append("N: GetContactList").append(Constant.ENV_BREAKS);
+        tmp.append("L: ").append(text.length()).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
+        tmp.append(text);
+
+        send(tmp.toString());
+        addCommand(callId, new IDataType(IDataType.N_GetContactList));
     }
 
     public void getContactDetail(String args)
     {
-        call_id += 1;
-        this.sendData = "S fetion.com.cn SIP-C/2.0\r\nF: " + this.sid + "\r\n" + "I: " + call_id + "\r\n" + "Q: 1 S\r\n" + "N: GetContactsInfo\r\n" + "L: " + args.length() + "\r\n\r\n";
+        callId += 1;
 
-        this.sendData += args;
-        addSendStr(this.sendData);
-        SendData();
-        IDataType element = new IDataType(3);
-        addCommand(call_id, element);
+        StringBuffer tmp = new StringBuffer();
+        tmp.append("S fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
+        tmp.append("Q: 1 S").append(Constant.ENV_BREAKS);
+        tmp.append("N: GetContactsInfo").append(Constant.ENV_BREAKS);
+        tmp.append("L: ").append(args.length()).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
+        tmp.append(args);
+
+        send(tmp.toString());
+        addCommand(callId, new IDataType(IDataType.N_GetContactsInfo));
     }
 
     public void subPresence(String args)
     {
-        call_id += 1;
-        this.sendData = "SUB fetion.com.cn SIP-C/2.0\r\nF: " + this.sid + "\r\n" + "I: " + call_id + "\r\n" + "Q: 1 SUB\r\n" + "N: presence\r\n" + "L: " + args.length() + "\r\n\r\n";
+        callId += 1;
 
-        this.sendData += args;
-        addSendStr(this.sendData);
-        SendData();
-        IDataType element = new IDataType(4);
-        addCommand(call_id, element);
+        StringBuffer tmp = new StringBuffer();
+        tmp.append("SUB fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
+        tmp.append("Q: 1 SUB").append(Constant.ENV_BREAKS);
+        tmp.append("N: presence").append(Constant.ENV_BREAKS);
+        tmp.append("L: ").append(args.length()).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
+        tmp.append(args);
+
+        send(tmp.toString());
+        addCommand(callId, new IDataType(IDataType.N_SubPresence));
     }
 
-    public void sendLogout()
+    public void logout()
     {
-        this.sendData = "R fetion.com.cn SIP-C/2.0\r\nF: " + this.sid + "\r\n" + "I: " + call_id + "\r\n" + "Q: 1 R\r\n" + "X: 0\r\n\r\n";
-
-        addSendStr(this.sendData);
-        SendData();
+        StringBuffer tmp = new StringBuffer();
+        tmp.append("R fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
+        tmp.append("Q: 1 R").append(Constant.ENV_BREAKS);
+        tmp.append("X: 0").append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
+        send(tmp.toString());
     }
 
-    public void SendData()
+    public void send(String message)
     {
-        byte[] textBytes = null;
         try
         {
-            textBytes = this.sendData.getBytes("utf-8");
-            this.dataOut.write(textBytes);
-            this.dataOut.flush();
+            dataOut.write(message.getBytes("utf-8"));
+            dataOut.flush();
         }
         catch (Exception e)
         {
+            System.out.println(e);
         }
     }
 
+    /**
+     * 发送更新联系人信息命令
+     */
+    public void sendContact()
+    {
+        Document doc = DocumentHelper.createDocument();
+        Element args = doc.addElement("args");
+        args.addElement("contacts").addAttribute("attributes", "provisioning;impresa;mobile-no;nickname;name;portrait-crc;ivr-enabled");
+
+        for (Contact tmp : contacts)
+        {
+            args.addElement("contact").addAttribute("uri", tmp.getUri());
+        }
+
+        getContactDetail(doc.asXML());
+    }
+
+    /**
+     * @param to_uri
+     *            接收人
+     * @param text
+     *            消息内容
+     * @param forceSMS
+     *            是否强制为短信
+     */
     public void sendMsg(String to_uri, String text, Boolean forceSMS)
     {
-        call_id += 1;
-        byte[] textBytes;
-        try
-        {
-            textBytes = text.getBytes("utf-8");
-        }
-        catch (Exception e)
-        {
-            return;
-        }
-        this.sendData = "M fetion.com.cn SIP-C/2.0\r\nF: " + this.sid + "\r\n" + "I: " + call_id + "\r\n" + "Q: 2 M\r\n" + "T: " + to_uri + "\r\n";
+        callId += 1;
+
+        StringBuffer tmp = new StringBuffer();
+        tmp.append("M fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
+        tmp.append("Q: 2 M").append(Constant.ENV_BREAKS);
+        tmp.append("T: ").append(to_uri).append(Constant.ENV_BREAKS);
 
         if (!(forceSMS.booleanValue()))
         {
-            this.sendData += "C: text/plain\r\nK: SaveHistory\r\nN: CatMsg\r\n";
+            tmp.append("C: text/plain").append(Constant.ENV_BREAKS);
+            tmp.append("K: SaveHistory").append(Constant.ENV_BREAKS);
+            tmp.append("N: CatMsg").append(Constant.ENV_BREAKS);
         }
         else
         {
-            this.sendData += "N: SendCatSMS\r\n";
+            tmp.append("N: SendCatSMS").append(Constant.ENV_BREAKS);
         }
-        Fetion tmp158_157 = this;
-        tmp158_157.sendData = tmp158_157.sendData + "L: " + textBytes.length + "\r\n\r\n";
-        this.sendData += text;
-        try
-        {
-            textBytes = this.sendData.getBytes("utf-8");
-        }
-        catch (Exception e)
-        {
-            return;
-        }
-        addSendStr(this.sendData);
-        SendData();
-        IDataType element = new IDataType(5);
-        addCommand(call_id, element);
+
+        tmp.append("L: ").append(text.getBytes().length).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
+        tmp.append(text);
+
+        send(tmp.toString());
+        addCommand(callId, new IDataType(IDataType.N_SendMsg));
     }
 
     public void setNickname(String text)
     {
-        call_id += 1;
-        byte[] textBytes;
-        try
-        {
-            textBytes = text.getBytes("utf-8");
-        }
-        catch (Exception e)
-        {
-            return;
-        }
-        this.sendData = "S fetion.com.cn SIP-C/2.0\r\nF: " + this.sid + "\r\n" + "I: " + call_id + "\r\n" + "Q: 1 S\r\n" + "N: SetPersonalInfo\r\n" + "L: " + textBytes.length + "\r\n\r\n";
+        callId += 1;
 
-        this.sendData += text;
-        try
-        {
-            textBytes = this.sendData.getBytes("utf-8");
-        }
-        catch (Exception e)
-        {
-            return;
-        }
-        addSendStr(this.sendData);
-        SendData();
-        IDataType element = new IDataType(6);
-        addCommand(call_id, element);
+        StringBuffer tmp = new StringBuffer();
+        tmp.append("S fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
+        tmp.append("Q: 1 S").append(Constant.ENV_BREAKS);
+        tmp.append("N: SetPersonalInfo").append(Constant.ENV_BREAKS);
+        tmp.append("L: ").append(text.getBytes().length).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
+        tmp.append(text);
+        send(tmp.toString());
+        addCommand(callId, new IDataType(IDataType.N_SetPersonalInfo));
     }
 
     public void replyM(String s)
     {
-        this.sendData = "SIP-C/2.0 200 OK\r\n";
         String t = getLine(s, "F: ");
         if (t == null)
-        {
             return;
-        }
-        Fetion tmp26_25 = this;
-        tmp26_25.sendData = tmp26_25.sendData + t + "\r\n";
-        t = getLine(s, "I: ");
-        if (t == null)
-        {
+        String i = getLine(s, "I: ");
+        if (i == null)
             return;
-        }
-        Fetion tmp68_67 = this;
-        tmp68_67.sendData = tmp68_67.sendData + t + "\r\n";
-        t = getLine(s, "Q: ");
-        if (t == null)
-        {
+        String q = getLine(s, "Q: ");
+        if (q == null)
             return;
-        }
-        Fetion tmp110_109 = this;
-        tmp110_109.sendData = tmp110_109.sendData + t + "\r\n\r\n";
-        addSendStr(this.sendData);
-        SendData();
+
+        StringBuffer tmp = new StringBuffer();
+        tmp.append("SIP-C/2.0 200 OK").append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(t).append(Constant.ENV_BREAKS);
+        tmp.append("I: ").append(i).append(Constant.ENV_BREAKS);
+        tmp.append("Q: ").append(q).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
+        send(tmp.toString());
     }
 
     public void sendKeepAlive()
     {
-        this.Q1 += 1;
-        this.sendData = "R fetion.com.cn SIP-C/2.0\r\nF: " + this.sid + "\r\n" + "I: 1\r\n" + "Q: " + this.Q1 + " R\r\n\r\n";
+        liveId += 1;
 
-        addSendStr(this.sendData);
-        SendData();
+        StringBuffer tmp = new StringBuffer();
+        tmp.append("R fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("I: 1").append(Constant.ENV_BREAKS);
+        tmp.append("Q: ").append(liveId).append(" R").append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
+        send(tmp.toString());
     }
 
-    private void initF()
+    public static void main(String[] args)
     {
-        if (connect.getUser().length() == 0)
-        {
-            LogUtil.log("CellPhone/Fetion ID field should not be empty.");
-            return;
-        }
-        URLConnection connection = null;
-        try
-        {
-            URL getSystemConfigURL = new URL("http://nav.fetion.com.cn/nav/getsystemconfig.aspx");
-
-            connection = getSystemConfigURL.openConnection();
-            HttpURLConnection httpconn = (HttpURLConnection) connection;
-            connection.setDoOutput(true);
-            connection.setRequestProperty("Content-Type", "text/plain");
-            connection.setRequestProperty("charset", "utf-8");
-            OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream(), "utf-8");
-            out
-                    .write("<config><user mobile-no=\"13585709149\" /><client type=\"PC\" version=\"2.1.0.0\" platform=\"W5.1\" /><servers version=\"0\" /><service-no version=\"0\" /><parameters version=\"0\" /><hints version=\"0\" /><http-applications version=\"0\" /></config>");
-            out.flush();
-            out.close();
-            InputStreamReader in;
-            try
-            {
-                in = new InputStreamReader(connection.getInputStream(), "utf-8");
-            }
-            catch (Exception ex)
-            {
-                LogUtil.log("Init Web Error:\n");
-                in = new InputStreamReader(httpconn.getErrorStream(), "utf-8");
-                return;
-            }
-            char[] data = new char[10240];
-            int i = 0;
-            int j;
-            while (true)
-            {
-                j = in.read();
-                if (j == -1)
-                {
-                    data[i] = '\0';
-                    break;
-                }
-                data[(i++)] = (char) j;
-            }
-            in.close();
-
-            String res = new String(data);
-
-            String sipc_proxy = res.substring(res.indexOf("<sipc-proxy>") + 12);
-            sipc_proxy = sipc_proxy.substring(0, sipc_proxy.indexOf("</sipc-proxy>")).trim();
-            connect.setProxy(sipc_proxy);
-
-            LogUtil.log("sipc-proxy:[" + sipc_proxy + "]\n");
-            String ssi_app_sign_in = res.substring(res.indexOf("<ssi-app-sign-in>") + 17);
-            ssi_app_sign_in = ssi_app_sign_in.substring(0, ssi_app_sign_in.indexOf("</ssi-app-sign-in>"));
-            LogUtil.log("ssi-app-sign-in:[" + ssi_app_sign_in + "]\n");
-            String ssi_app_sign_out = res.substring(res.indexOf("<ssi-app-sign-out>") + 18);
-            ssi_app_sign_out = ssi_app_sign_out.substring(0, ssi_app_sign_out.indexOf("</ssi-app-sign-out>"));
-            LogUtil.log("ssi-app-sign-out:[" + ssi_app_sign_out + "]\n");
-
-            if ((connect.getUser().length() == 11) && (connect.getUser().charAt(0) == '1') && (((connect.getUser().charAt(1) == '3') || (connect.getUser().charAt(1) == '5'))))
-            {
-                this.sid = null;
-            }
-            else
-            {
-                this.sid = connect.getUser();
-            }
-            connection = null;
-            URL getSipURL = new URL("http://nav.m161.com.cn/Getconfig.aspx");
-            connection = getSipURL.openConnection();
-            httpconn = (HttpURLConnection) connection;
-            connection.setDoOutput(true);
-
-            connection.setRequestProperty("charset", "utf-8");
-            out = new OutputStreamWriter(connection.getOutputStream(), "utf-8");
-            if (this.sid == null)
-            {
-                out.write("CellPhone=" + connect.getUser());
-            }
-            else
-            {
-                out.write("Sid=" + this.sid);
-            }
-            out.flush();
-            out.close();
-            try
-            {
-                in = new InputStreamReader(connection.getInputStream(), "utf-8");
-            }
-            catch (Exception ex)
-            {
-                LogUtil.log("Init get sip Web Error:\n");
-                in = new InputStreamReader(httpconn.getErrorStream(), "utf-8");
-                return;
-            }
-            i = 0;
-            j = 0;
-            while (true)
-            {
-                j = in.read();
-                if (j == -1)
-                {
-                    data[i] = '\0';
-                    break;
-                }
-                data[(i++)] = (char) j;
-            }
-            in.close();
-
-            res = new String(data);
-
-            this.sid = res.substring(res.indexOf("<Sid>") + 5);
-            this.sid = this.sid.substring(0, this.sid.indexOf("</Sid>")).trim();
-            LogUtil.log("sid:[" + this.sid + "]\n");
-            if (this.sid.length() < 2)
-            {
-                LogUtil.log("CellPhone/Fetion ID is not exist\n");
-                return;
-            }
-            res = res.substring(res.indexOf("<User>"));
-            String uri = res.substring(res.indexOf("<Uri>") + 5);
-            uri = uri.substring(0, uri.indexOf("</Uri>")).trim();
-            LogUtil.log("uri:[" + uri + "]\n");
-        }
-        catch (Exception e)
-        {
-            LogUtil.log("Init Button Excetion:\n" + e.toString() + "\n");
-        }
+        Fetion jf = new Fetion();
+        jf.init();
+        jf.login();
+        jf.getContactList();
+        jf.logout();
     }
-
-    DataInputStream dataIn;
-    DataOutputStream dataOut;
-    Socket socket;
-    String sendData;
-    String getData;
-    String sid;
-    static final int LOGIN_SUCC = 0;
-    static final int LOGIN_CONN_ERROR = 1;
-    static final int LOGIN_DATAIO_ERROR = 2;
-    static final int LOGIN_FAILED = 3;
-    static int call_id;
-    ArrayList<IDataType> Commands = new ArrayList<IDataType>();
-    ArrayList<IDataType> Commands2 = new ArrayList<IDataType>();
-    private static final String[] hexDigits =
-    { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F" };
-    int Q1 = 2;
 }

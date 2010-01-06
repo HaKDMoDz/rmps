@@ -7,6 +7,8 @@
  */
 package rmp.irp.v.xmpp;
 
+import java.util.List;
+
 import org.jivesoftware.smack.RosterEntry;
 
 import com.amonsoft.rmps.irp.b.ICatalog;
@@ -29,6 +31,18 @@ public class Contact implements IContact
     public Contact(RosterEntry contact)
     {
         this.contact = contact;
+    }
+
+    @Override
+    public String getId()
+    {
+        return null;
+    }
+
+    @Override
+    public String getName()
+    {
+        return null;
     }
 
     @Override
@@ -56,7 +70,7 @@ public class Contact implements IContact
     }
 
     @Override
-    public ICatalog[] getGroups()
+    public List<ICatalog> getCatalogs()
     {
         return null;
     }
