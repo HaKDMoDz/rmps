@@ -295,9 +295,14 @@ public class Fetion extends Thread implements IAccount
     {
         try
         {
-            byte[] recvBuf = new byte[len];
-            int t = dataIs.read(recvBuf);
-            return t == len ? new String(recvBuf, "utf-8") : "";
+            byte[] buf = new byte[len];
+            int t = dataIs.read(buf);
+            // return t == len ? new String(buf) : "";
+            String tmp = t == len ? new String(buf) : "";
+            System.out.println("======================");
+            System.out.println("RECV");
+            System.out.println(tmp);
+            return tmp;
         }
         catch (Exception e)
         {
@@ -322,7 +327,12 @@ public class Fetion extends Thread implements IAccount
 
             String tmp = new String(bos.toByteArray(), "utf-8");
             int i = tmp.indexOf(end) + end.length();
-            return i >= tmp.length() ? tmp : tmp.substring(0, i);
+            // return i >= tmp.length() ? tmp : tmp.substring(0, i);
+            tmp = i >= tmp.length() ? tmp : tmp.substring(0, i);
+            System.out.println("======================");
+            System.out.println("RECV");
+            System.out.println(tmp);
+            return tmp;
         }
         catch (Exception exp)
         {
@@ -405,7 +415,7 @@ public class Fetion extends Thread implements IAccount
             tmp.delete(0, tmp.length());
             tmp.append("R fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
             tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
-            tmp.append("I: 1").append(Constant.ENV_BREAKS);
+            tmp.append("I: 2").append(Constant.ENV_BREAKS);
             tmp.append("Q: 2 R").append(Constant.ENV_BREAKS);
             tmp.append("A: Digest response=\"").append(digest(m2)).append("\",cnonce=\"").append(Constant.CNONCE).append("\"").append(Constant.ENV_BREAKS);
             tmp.append("L: ").append(data.length()).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
@@ -449,45 +459,51 @@ public class Fetion extends Thread implements IAccount
         return map;
     }
 
+    @Override
     public void run()
     {
         System.out.println(liveId);
         while (liveId > 0)
         {
-            String response = response();
-            HashMap<String, String> map = dd(response);
+            String resHead = response();
+            System.out.println("resHead:");
+            System.out.println(resHead);
+            HashMap<String, String> map = dd(resHead);
             String append = map.get("L");
+            String resBody = null;
             if (CharUtil.isValidate(append))
             {
-                append = response(Integer.parseInt(append)).trim();
-                response = response.trim() + "\r\n\r\n" + append;
+                resBody = response(Integer.parseInt(append)).trim();
             }
+            System.out.println("resBody:");
+            System.out.println(resBody);
 
-            String command = map.get("I");
-            if (CharUtil.isValidate(command) && commands.containsKey(command))
+            String action = map.get("I");
+            if (CharUtil.isValidate(action) && commands.containsKey(action))
             {
-                command = commands.remove(command);
-                if (Constant.N_GetPersonalInfo.equals(command))
+                action = commands.remove(action);
+                System.out.println("Action:" + action);
+                if (Constant.N_GetPersonalInfo.equals(action))
                 {
-                    updateDisplay(append);
+                    updateDisplay(resBody);
                 }
-                else if (Constant.N_GetContactList.equals(command))
+                else if (Constant.N_GetContactList.equals(action))
                 {
-                    updateCatalog(append);
+                    updateCatalog(resBody);
                 }
-                else if (Constant.N_GetContactsInfo.equals(command))
+                else if (Constant.N_GetContactsInfo.equals(action))
                 {
-                    updateContact(append);
+                    updateContact(resBody);
                 }
-                else if (Constant.N_SubPresence.equals(command))
+                else if (Constant.N_SubPresence.equals(action))
                 {
-                    updateContact(append);
+                    updateContact(resBody);
                 }
             }
-            else if ('M' == response.charAt(0))
+            else if ('M' == resHead.charAt(0))
             {
-                ProcessMessge(response, append);
-                replyM(response);
+                ProcessMessge(resHead, append);
+                replyM(resHead);
             }
         }
     }
@@ -743,6 +759,9 @@ public class Fetion extends Thread implements IAccount
 
     public void send(String message)
     {
+        System.out.println("==============================");
+        System.out.println("send");
+        System.out.println(message);
         try
         {
             dataOs.write(message.getBytes("utf-8"));
