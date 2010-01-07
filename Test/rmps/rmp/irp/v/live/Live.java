@@ -7,6 +7,7 @@
  */
 package rmp.irp.v.live;
 
+import java.util.HashMap;
 import java.util.List;
 
 import net.sf.jml.MsnContact;
@@ -43,7 +44,7 @@ public class Live extends MsnAdapter implements IAccount
 {
     private Connect connect;
     private MsnMessenger messenger;
-    private Session session;
+    private HashMap<String, Session> sessions;
 
     public Live()
     {
@@ -62,9 +63,9 @@ public class Live extends MsnAdapter implements IAccount
             case IPresence.INIT:
                 try
                 {
+                    sessions = new HashMap<String, Session>();
                     connect = new Connect();
                     connect.load();
-                    session = new Session();
                 }
                 catch (Exception exp)
                 {
@@ -129,16 +130,12 @@ public class Live extends MsnAdapter implements IAccount
     public void loginCompleted(MsnMessenger messenger)
     {
         LogUtil.log("loginCompleted.");
-
-        Control.getInstance().loginCompleted(session);
     }
 
     @Override
     public void logout(MsnMessenger messenger)
     {
         LogUtil.log("logout.");
-
-        Control.getInstance().willLogout(session);
     }
 
     @Override
@@ -146,6 +143,7 @@ public class Live extends MsnAdapter implements IAccount
     {
         LogUtil.log("instantMessageReceived from " + friend.getEmail().getEmailAddress() + ':' + message.getContent());
 
+        Session session = getSession(friend.getEmail().getEmailAddress());
         session.switchboard = switchboard;
         session.contact.contact = friend;
         Control.getInstance().instantMessageReceived(session, new Message(message));
@@ -156,8 +154,7 @@ public class Live extends MsnAdapter implements IAccount
     {
         LogUtil.log("systemMessageReceived:" + message.getContent());
 
-        session.messenger = messenger;
-        Control.getInstance().systemMessageReceived(session, null);
+        Control.getInstance().systemMessageReceived(null, null);
     }
 
     @Override
@@ -174,7 +171,7 @@ public class Live extends MsnAdapter implements IAccount
     public void datacastMessageReceived(MsnSwitchboard switchboard, MsnDatacastMessage message, MsnContact friend)
     {
         LogUtil.log("datacastMessageReceived from " + friend.getEmail().getEmailAddress() + ':' + message.getContentType());
-
+        Session session = getSession(friend.getEmail().getEmailAddress());
         Control.getInstance().datacastMessageReceived(session, null);
     }
 
@@ -212,6 +209,7 @@ public class Live extends MsnAdapter implements IAccount
     public void contactAddedMe(MsnMessenger messenger, MsnContact friend)
     {
         messenger.addFriend(friend.getEmail(), "irps");
+        Session session = getSession(friend.getEmail().getEmailAddress());
         Control.getInstance().contactAddedMe(session);
         LogUtil.log("contactAddedMe from " + friend.getEmail().getEmailAddress());
     }
@@ -244,5 +242,16 @@ public class Live extends MsnAdapter implements IAccount
     public void contactLeaveSwitchboard(MsnSwitchboard switchboard, MsnContact friend)
     {
         LogUtil.log("contactLeaveSwitchboard from " + friend.getEmail().getEmailAddress());
+    }
+
+    private Session getSession(String user)
+    {
+        Session session = sessions.get(user);
+        if (session == null)
+        {
+            session = new Session();
+            sessions.put(user, session);
+        }
+        return session;
     }
 }

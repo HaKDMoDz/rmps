@@ -95,7 +95,7 @@ public interface IControl
      */
     void unknownMessageReceived(ISession session, IMessage message);
 
-    void contactStatusChanged();
+    void contactPresenceChanged(ISession session);
 
     void contactAddedMe(ISession session);
 

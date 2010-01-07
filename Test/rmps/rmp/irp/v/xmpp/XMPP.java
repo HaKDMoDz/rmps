@@ -70,8 +70,8 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
         switch (status)
         {
             case IPresence.INIT:
-                getConnect();
                 sessions = new HashMap<String, Session>();
+                getConnect();
                 break;
             case IPresence.SIGN:
                 try
@@ -199,12 +199,7 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
     public void processPacket(Packet packet)
     {
         String user = packet.getFrom();
-        Session session = sessions.get(user);
-        if (session == null)
-        {
-            session = new Session();
-            sessions.put(user, session);
-        }
+        Session session = getSession(user);
 
         if (packet instanceof org.jivesoftware.smack.packet.Message)
         {
@@ -290,6 +285,17 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
     public void presenceChanged(Presence prsnc)
     {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    private Session getSession(String user)
+    {
+        Session session = sessions.get(user);
+        if (session == null)
+        {
+            session = new Session();
+            sessions.put(user, session);
+        }
+        return session;
     }
 
     private String getUser(String from)

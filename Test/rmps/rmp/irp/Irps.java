@@ -9,6 +9,7 @@ package rmp.irp;
 
 import java.util.HashMap;
 
+import rmp.irp.v.fetion.Fetion;
 import rmp.irp.v.gtalk.GTalk;
 import rmp.irp.v.jabber.Jabber;
 import rmp.irp.v.live.Live;
@@ -43,7 +44,7 @@ public class Irps
 
         main(null);
 
-        irpsItem = new java.awt.MenuItem("MSN");
+        irpsItem = new java.awt.MenuItem("Live");
         irpsItem.addActionListener(new java.awt.event.ActionListener()
         {
             @Override
@@ -66,7 +67,7 @@ public class Irps
                 IAccount account = new GTalk();
                 account.sign(IPresence.INIT);
                 account.sign(IPresence.SIGN);
-                accounts.put(ConsEnv.IM_LIVE, account);
+                accounts.put(ConsEnv.IM_GTALK, account);
             }
         });
         menu.add(irpsItem);
@@ -80,7 +81,7 @@ public class Irps
                 IAccount account = new Meebo();
                 account.sign(IPresence.INIT);
                 account.sign(IPresence.SIGN);
-                accounts.put(ConsEnv.IM_LIVE, account);
+                accounts.put(ConsEnv.IM_MEEBO, account);
             }
         });
         menu.add(irpsItem);
@@ -94,7 +95,21 @@ public class Irps
                 IAccount account = new Jabber();
                 account.sign(IPresence.INIT);
                 account.sign(IPresence.SIGN);
-                accounts.put(ConsEnv.IM_LIVE, account);
+                accounts.put(ConsEnv.IM_JABBER, account);
+            }
+        });
+        menu.add(irpsItem);
+
+        irpsItem = new java.awt.MenuItem("Fetion");
+        irpsItem.addActionListener(new java.awt.event.ActionListener()
+        {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                IAccount account = new Fetion();
+                account.sign(IPresence.INIT);
+                account.sign(IPresence.SIGN);
+                accounts.put(ConsEnv.IM_FETION, account);
             }
         });
         menu.add(irpsItem);
@@ -106,7 +121,7 @@ public class Irps
      */
     public static void main(String[] args)
     {
-        //LogUtil.wInit("log");
+        // LogUtil.wInit("log");
 
         accounts = new HashMap<String, IAccount>();
 

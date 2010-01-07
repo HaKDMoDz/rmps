@@ -333,7 +333,7 @@ public class Control implements IControl
     }
 
     @Override
-    public void contactStatusChanged()
+    public void contactPresenceChanged(ISession session)
     {
         LogUtil.log("contactStatusChanged:");
     }

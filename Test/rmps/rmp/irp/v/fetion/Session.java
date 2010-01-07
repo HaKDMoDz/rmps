@@ -31,6 +31,11 @@ import com.amonsoft.rmps.irp.b.IMimeMessage;
  */
 public class Session extends ASession
 {
+    Connect connect;
+
+    Session()
+    {
+    }
 
     /*
      * (non-Javadoc)
@@ -93,6 +98,7 @@ public class Session extends ASession
     @Override
     public void send(String message)
     {
+        connect.send("", message, false);
     }
 
     /*

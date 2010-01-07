@@ -24,8 +24,11 @@ public interface ConsEnv
     String IM_DICT = "dict";
     String IM_FETION = "fetion";
     String IM_ICQ = "icq";
+    String IM_GTALK = "gtalk";
     String IM_LAVA = "lava";
     String IM_LIVE = "live";
+    String IM_JABBER = "jabber";
+    String IM_MEEBO = "meebo";
     String IM_QQ = "qq";
     String IM_SIP = "sip";
     String IM_UC = "uc";

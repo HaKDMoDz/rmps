@@ -33,7 +33,7 @@ public class Presence implements IPresence
     /**
      * 特定IM状态编码
      */
-    private String imc;
+    private String imc = "0";
     /**
      * 用户状态信息
      */
