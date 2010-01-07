@@ -14,7 +14,7 @@ import rmp.irp.v.live.Session;
 
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.ISession;
-import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.rmps.irp.b.IPresence;
 import com.amonsoft.rmps.irp.v.IAccount;
 import com.amonsoft.rmps.irp.v.IConnect;
 
@@ -43,18 +43,18 @@ public class QQ implements IAccount
     {
         switch (status)
         {
-            case IStatus.INIT:
+            case IPresence.INIT:
                 connect = new Connect();
                 connect.load();
                 session = new Session();
                 messenger = new JQQ(connect);
                 break;
-            case IStatus.SIGN:
+            case IPresence.SIGN:
                 messenger.signIn();
                 break;
-            case IStatus.LINE:
+            case IPresence.LINE:
                 break;
-            case IStatus.DOWN:
+            case IPresence.DOWN:
                 break;
             default:
                 break;

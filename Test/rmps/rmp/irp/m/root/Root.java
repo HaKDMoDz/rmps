@@ -12,7 +12,7 @@ import rmp.util.LogUtil;
 
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.ISession;
-import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.rmps.irp.b.IPresence;
 import com.amonsoft.rmps.irp.m.IService;
 
 /**
@@ -97,12 +97,12 @@ public class Root implements IService
             tmp = arr[2];
             if ("online".equals(tmp))
             {
-                Irps.step(arr[1], IStatus.SIGN);
+                Irps.step(arr[1], IPresence.SIGN);
                 return;
             }
             if ("offline".equals(tmp))
             {
-                Irps.step(arr[1], IStatus.DOWN);
+                Irps.step(arr[1], IPresence.DOWN);
             }
             return;
         }

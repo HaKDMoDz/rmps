@@ -10,7 +10,7 @@ package rmp.irp.v.uc;
 import java.util.List;
 
 import com.amonsoft.rmps.irp.b.IContact;
-import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.rmps.irp.b.IPresence;
 import com.amonsoft.rmps.irp.v.IAccount;
 import com.amonsoft.rmps.irp.v.IConnect;
 
@@ -41,13 +41,13 @@ public class UC implements IAccount
     {
         switch (status)
         {
-            case IStatus.INIT:
+            case IPresence.INIT:
                 connect = new Connect();
                 connect.load();
                 break;
-            case IStatus.SIGN:
+            case IPresence.SIGN:
                 break;
-            case IStatus.DOWN:
+            case IPresence.DOWN:
                 break;
             default:
                 break;

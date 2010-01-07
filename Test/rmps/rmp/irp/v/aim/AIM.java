@@ -17,7 +17,7 @@ import java.util.List;
 import rmp.util.LogUtil;
 
 import com.amonsoft.rmps.irp.b.IContact;
-import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.rmps.irp.b.IPresence;
 import com.amonsoft.rmps.irp.v.IAccount;
 import com.amonsoft.rmps.irp.v.IConnect;
 import com.wilko.jaim.Buddy;
@@ -62,9 +62,9 @@ public class AIM implements IAccount, JaimEventListener
     {
         switch (status)
         {
-            case IStatus.INIT:
+            case IPresence.INIT:
                 break;
-            case IStatus.SIGN:
+            case IPresence.SIGN:
                 Connect conn = new Connect();
                 conn.load();
                 // connect = conn;
@@ -92,7 +92,7 @@ public class AIM implements IAccount, JaimEventListener
                     LogUtil.exception(exp);
                 }
                 break;
-            case IStatus.DOWN:
+            case IPresence.DOWN:
                 try
                 {
                     messenger.disconnect();

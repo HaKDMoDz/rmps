@@ -13,6 +13,7 @@ import net.sf.jml.MsnContact;
 
 import com.amonsoft.rmps.irp.b.ICatalog;
 import com.amonsoft.rmps.irp.b.IContact;
+import com.amonsoft.rmps.irp.b.IPresence;
 
 /**
  * <ul>
@@ -53,9 +54,9 @@ public class Contact implements IContact
     }
 
     @Override
-    public String getStatus()
+    public IPresence getPresence()
     {
-        return contact.getStatus().getStatus();
+        return null;// contact.getStatus().getStatus();
     }
 
     @Override

@@ -24,7 +24,7 @@ import ymsg.network.event.SessionNewMailEvent;
 import ymsg.network.event.SessionNotifyEvent;
 
 import com.amonsoft.rmps.irp.b.IContact;
-import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.rmps.irp.b.IPresence;
 import com.amonsoft.rmps.irp.v.IAccount;
 import com.amonsoft.rmps.irp.v.IConnect;
 
@@ -60,11 +60,11 @@ public class YMsg implements IAccount, SessionListener
     {
         switch (status)
         {
-            case IStatus.INIT:
+            case IPresence.INIT:
                 connect = new Connect();
                 connect.load();
                 break;
-            case IStatus.SIGN:
+            case IPresence.SIGN:
                 try
                 {
                     messenger = new ymsg.network.Session();
@@ -77,7 +77,7 @@ public class YMsg implements IAccount, SessionListener
                     LogUtil.exception(exp);
                 }
                 break;
-            case IStatus.DOWN:
+            case IPresence.DOWN:
                 try
                 {
                     messenger.logout();

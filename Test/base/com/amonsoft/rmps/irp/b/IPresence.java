@@ -18,7 +18,7 @@ package com.amonsoft.rmps.irp.b;
  * 
  * @author Amon
  */
-public interface IStatus
+public interface IPresence
 {
     /**
      * 未知
@@ -60,4 +60,10 @@ public interface IStatus
      * 午餐
      */
     int BUSY_LUNCH = 0;
+
+    int getAsc();
+
+    String getImc();
+
+    String getMessage();
 }

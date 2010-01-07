@@ -17,7 +17,7 @@ import rmp.irp.v.fetion.Fetion;
 import test.irp.Message;
 import test.irp.Session;
 
-import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.rmps.irp.b.IPresence;
 import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.HttpUtil;
@@ -39,11 +39,16 @@ public class Test
      */
     public static void main(String[] args)
     {
-        Fetion jf = new Fetion();
-        jf.sign(IStatus.INIT);
-        jf.login();
-        jf.getContactList();
-        jf.logout();
+        try
+        {
+            Fetion jf = new Fetion();
+            jf.sign(IPresence.INIT);
+            jf.sign(IPresence.SIGN);
+        }
+        catch (Exception exp)
+        {
+            System.out.println(exp);
+        }
     }
 
     public static void test()
@@ -56,8 +61,8 @@ public class Test
         Message message = new Message("118.132.166.12");
         IService s = new I2010000();
         s.wInit();
-        // s.doInit(session, message);
-        // s.doRoot(session, message);
+        s.doInit(session, message);
+        s.doRoot(session, message);
     }
 
     public static void sign()

@@ -55,7 +55,7 @@ public interface IContact
      * 
      * @return
      */
-    String getStatus();
+    IPresence getPresence();
 
     /**
      * 个人消息

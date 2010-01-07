@@ -15,6 +15,7 @@ import java.util.List;
 
 import com.amonsoft.rmps.irp.b.ICatalog;
 import com.amonsoft.rmps.irp.b.IContact;
+import com.amonsoft.rmps.irp.b.IPresence;
 
 /**
  * <ul>
@@ -160,7 +161,7 @@ public class Contact implements IContact
      * @see com.amonsoft.rmps.irp.b.IContact#getStatus()
      */
     @Override
-    public String getStatus()
+    public IPresence getPresence()
     {
         return null;
     }
@@ -168,7 +169,7 @@ public class Contact implements IContact
     /**
      * @param status
      */
-    public void setStatus(String status)
+    public void setPresence(IPresence presence)
     {
     }
 

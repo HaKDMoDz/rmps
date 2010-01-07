@@ -27,7 +27,7 @@ import net.kano.joscar.snac.SnacResponseEvent;
 import net.kano.joscar.snaccmd.DefaultClientFactoryList;
 
 import com.amonsoft.rmps.irp.b.IContact;
-import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.rmps.irp.b.IPresence;
 import com.amonsoft.rmps.irp.v.IAccount;
 import com.amonsoft.rmps.irp.v.IConnect;
 
@@ -56,9 +56,9 @@ public class ICQ implements IAccount, ClientConnListener, FlapPacketListener, Sn
     {
         switch (status)
         {
-            case IStatus.INIT:
+            case IPresence.INIT:
                 break;
-            case IStatus.SIGN:
+            case IPresence.SIGN:
                 Connect conn = new Connect();
                 conn.load();
                 // connect = conn;
@@ -76,7 +76,7 @@ public class ICQ implements IAccount, ClientConnListener, FlapPacketListener, Sn
                 processor.getCmdFactoryMgr().setDefaultFactoryList(new DefaultClientFactoryList());
                 processor.addPacketListener(this);
                 break;
-            case IStatus.DOWN:
+            case IPresence.DOWN:
                 break;
             default:
                 break;

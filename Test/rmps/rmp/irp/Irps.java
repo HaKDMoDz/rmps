@@ -14,7 +14,7 @@ import rmp.irp.v.jabber.Jabber;
 import rmp.irp.v.live.Live;
 import rmp.irp.v.meebo.Meebo;
 
-import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.rmps.irp.b.IPresence;
 import com.amonsoft.rmps.irp.v.IAccount;
 
 import cons.irp.ConsEnv;
@@ -50,8 +50,8 @@ public class Irps
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 IAccount account = new Live();
-                account.sign(IStatus.INIT);
-                account.sign(IStatus.SIGN);
+                account.sign(IPresence.INIT);
+                account.sign(IPresence.SIGN);
                 accounts.put(ConsEnv.IM_LIVE, account);
             }
         });
@@ -64,8 +64,8 @@ public class Irps
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 IAccount account = new GTalk();
-                account.sign(IStatus.INIT);
-                account.sign(IStatus.SIGN);
+                account.sign(IPresence.INIT);
+                account.sign(IPresence.SIGN);
                 accounts.put(ConsEnv.IM_LIVE, account);
             }
         });
@@ -78,8 +78,8 @@ public class Irps
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 IAccount account = new Meebo();
-                account.sign(IStatus.INIT);
-                account.sign(IStatus.SIGN);
+                account.sign(IPresence.INIT);
+                account.sign(IPresence.SIGN);
                 accounts.put(ConsEnv.IM_LIVE, account);
             }
         });
@@ -92,8 +92,8 @@ public class Irps
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 IAccount account = new Jabber();
-                account.sign(IStatus.INIT);
-                account.sign(IStatus.SIGN);
+                account.sign(IPresence.INIT);
+                account.sign(IPresence.SIGN);
                 accounts.put(ConsEnv.IM_LIVE, account);
             }
         });
@@ -117,7 +117,7 @@ public class Irps
     {
         for (IAccount acc : accounts.values())
         {
-            acc.sign(IStatus.DOWN);
+            acc.sign(IPresence.DOWN);
         }
         System.exit(status);
     }

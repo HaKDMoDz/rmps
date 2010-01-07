@@ -19,7 +19,7 @@ import com.amonsoft.rmps.irp.v.IConnect;
  * 
  * @author Amon
  */
-public class Connect implements IConnect
+public class Connect implements IConnect, Runnable
 {
     private String user;
     private String pwds;
@@ -86,6 +86,11 @@ public class Connect implements IConnect
     public int getPort()
     {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void run()
+    {
     }
 
     /**

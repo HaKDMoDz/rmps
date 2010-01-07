@@ -25,7 +25,7 @@ import rmp.irp.c.Control;
 import rmp.util.LogUtil;
 
 import com.amonsoft.rmps.irp.b.IContact;
-import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.rmps.irp.b.IPresence;
 import com.amonsoft.rmps.irp.v.IAccount;
 import com.amonsoft.rmps.irp.v.IConnect;
 
@@ -59,7 +59,7 @@ public class Live extends MsnAdapter implements IAccount
     {
         switch (status)
         {
-            case IStatus.INIT:
+            case IPresence.INIT:
                 try
                 {
                     connect = new Connect();
@@ -71,7 +71,7 @@ public class Live extends MsnAdapter implements IAccount
                     LogUtil.exception(exp);
                 }
                 break;
-            case IStatus.SIGN:
+            case IPresence.SIGN:
 
                 messenger = MsnMessengerFactory.createMsnMessenger(connect.getUser(), connect.getPwds());
                 messenger.setSupportedProtocol(new MsnProtocol[]
@@ -84,7 +84,7 @@ public class Live extends MsnAdapter implements IAccount
                 // messenger.getOwner().setDisplayName("小木");
                 // messenger.getOwner().getDisplayName();
                 break;
-            case IStatus.DOWN:
+            case IPresence.DOWN:
                 messenger.logout();
                 LogUtil.wExit();
                 break;

@@ -33,7 +33,7 @@ import rmp.irp.c.Control;
 import rmp.util.LogUtil;
 
 import com.amonsoft.rmps.irp.b.IContact;
-import com.amonsoft.rmps.irp.b.IStatus;
+import com.amonsoft.rmps.irp.b.IPresence;
 import com.amonsoft.rmps.irp.v.IAccount;
 import com.amonsoft.rmps.irp.v.IConnect;
 import com.amonsoft.util.CharUtil;
@@ -69,11 +69,11 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
     {
         switch (status)
         {
-            case IStatus.INIT:
+            case IPresence.INIT:
                 getConnect();
                 sessions = new HashMap<String, Session>();
                 break;
-            case IStatus.SIGN:
+            case IPresence.SIGN:
                 try
                 {
                     ConnectionConfiguration config = new ConnectionConfiguration(connect.getHost(), connect.getPort(), connect.getServer());
@@ -117,13 +117,13 @@ public class XMPP implements IAccount, ConnectionListener, PacketListener, Roste
                 }
                 break;
 
-            case IStatus.AWAY:
+            case IPresence.AWAY:
                 Presence presence = new Presence(Presence.Type.unavailable);
                 presence.setStatus("Gone fishing");
                 messenger.sendPacket(presence);
                 break;
 
-            case IStatus.DOWN:
+            case IPresence.DOWN:
                 messenger.disconnect();
                 break;
             default:
