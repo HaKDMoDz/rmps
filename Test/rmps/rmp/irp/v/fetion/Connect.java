@@ -763,9 +763,6 @@ public class Connect extends Thread implements IConnect
      */
     private void send(String message)
     {
-        LogUtil.log("==============================");
-        LogUtil.log("send");
-        LogUtil.log(message);
         try
         {
             dataOs.write(message.getBytes("utf-8"));
@@ -791,9 +788,6 @@ public class Connect extends Thread implements IConnect
             {
                 bos.write(dataIs.read());
             }
-            LogUtil.log("~~~~~~~~~~~~~~~~");
-            LogUtil.log("recv0");
-            LogUtil.log(bos.toString());
             return bos.toString();
         }
         catch (Exception exp)
@@ -821,9 +815,6 @@ public class Connect extends Thread implements IConnect
                     break;
                 }
             }
-            LogUtil.log("~~~~~~~~~~~~~~~~");
-            LogUtil.log("recv1");
-            LogUtil.log(bos.toString());
             return bos.toString();
         }
         catch (Exception exp)
