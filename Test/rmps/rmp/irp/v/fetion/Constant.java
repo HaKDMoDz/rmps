@@ -28,8 +28,6 @@ public interface Constant
     int LOGIN_DATAIO_ERROR = 2;
     int LOGIN_FAILED = 3;
 
-    String VER_FETION = "2.3.0210";
-
     String ENV_BREAKS = "\r\n";
 
     String N_NULL = "0";

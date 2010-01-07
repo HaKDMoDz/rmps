@@ -362,7 +362,17 @@ public class Fetion implements IAccount
         con.addElement("contact").addAttribute("uri", connect.getUri());
         pre = sub.addElement("presence");
         pre.addElement("extended").addAttribute("types", "sms;location;listening;ring-back-tone");
-        connect.subPresence(doc.asXML());
+        connect.initPresence(doc.asXML());
+    }
+
+    /**
+     * 设置昵称
+     * 
+     * @param text
+     */
+    void sendNickname(String text)
+    {
+        connect.setNickname("<args><personal nickname=\"" + text + "\" /></args>");
     }
 
     private Session getSession(String user)

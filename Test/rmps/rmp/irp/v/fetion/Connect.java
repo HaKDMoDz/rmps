@@ -9,6 +9,7 @@ package rmp.irp.v.fetion;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
@@ -24,10 +25,13 @@ import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
+import rmp.util.EnvUtil;
 import rmp.util.LogUtil;
 
 import com.amonsoft.rmps.irp.v.IConnect;
 import com.amonsoft.util.CharUtil;
+
+import cons.EnvCons;
 
 /**
  * <ul>
@@ -93,14 +97,17 @@ public class Connect extends Thread implements IConnect
     @Override
     public boolean load()
     {
-        user = "13585709149";
-        pwds = "iitau123";
-        setVersion("3.5.2540");
-        setSysCfg("http://nav.fetion.com.cn/nav/getsystemconfig.aspx");
-        setSipCfg("http://nav.m161.com.cn/Getconfig.aspx");
-
         try
         {
+            final String NAME = "fetion";
+            Document document = new SAXReader().read(new File(EnvUtil.getCfgPath(EnvCons.FOLDER1_IRP, NAME + ".xml")));
+            Element element = (Element) document.selectSingleNode("/irps/" + NAME);
+            user = ((Element) element.selectSingleNode("map[@key='user']")).getText();
+            pwds = ((Element) element.selectSingleNode("map[@key='pwds']")).getText();
+            version = ((Element) element.selectSingleNode("map[@key='version']")).getText();
+            sysCfg = ((Element) element.selectSingleNode("map[@key='syscfg']")).getText();
+            sipCfg = ((Element) element.selectSingleNode("map[@key='sipcfg']")).getText();
+
             // 连接配置服务器
             URLConnection connection = new URL(getSysCfg()).openConnection();
             connection.setDoOutput(true);
@@ -240,15 +247,218 @@ public class Connect extends Thread implements IConnect
             }
             else if ('M' == resHead.charAt(0))
             {
-                sendReceived(resHead);
-                String fromSip = map.get("F");
-                if (!CharUtil.isValidate(fromSip))
+                String f = map.get("F");
+                if (!CharUtil.isValidate(f))
                 {
                     return;
                 }
-                messenger.readMessage(uri, resBody);
+                String i = map.get("I");
+                if (!CharUtil.isValidate(i))
+                {
+                    return;
+                }
+                String q = map.get("Q");
+                if (!CharUtil.isValidate(q))
+                {
+                    return;
+                }
+
+                StringBuffer tmp = new StringBuffer();
+                tmp.append("SIP-C/2.0 200 OK").append(Constant.ENV_BREAKS);
+                tmp.append("F: ").append(f).append(Constant.ENV_BREAKS);
+                tmp.append("I: ").append(i).append(Constant.ENV_BREAKS);
+                tmp.append("Q: ").append(q).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
+                send(tmp.toString());
+
+                messenger.readMessage(f, resBody);
             }
         }
+    }
+
+    /**
+     * @return the sysCfg
+     */
+    public String getSysCfg()
+    {
+        return sysCfg;
+    }
+
+    /**
+     * @param sysCfg
+     *            the sysCfg to set
+     */
+    public void setSysCfg(String sysCfg)
+    {
+        this.sysCfg = sysCfg;
+    }
+
+    private String initSysEncode()
+    {
+        Document doc = DocumentHelper.createDocument();
+        Element config = doc.addElement("config");
+
+        config.addElement("user").addAttribute("mobile-no", getUser());
+
+        Element client = config.addElement("client");
+        client.addAttribute("type", "PC");
+        client.addAttribute("version", getVersion());
+        client.addAttribute("platform", "W5.1");
+
+        config.addElement("servers").addAttribute("version", "0");
+
+        config.addElement("service-no").addAttribute("version", "0");
+
+        config.addElement("parameters").addAttribute("version", "0");
+
+        config.addElement("hints").addAttribute("version", "0");
+
+        config.addElement("http-applications").addAttribute("version", "0");
+
+        return doc.asXML();
+    }
+
+    private boolean initSysDecode(Document doc)
+    {
+        Element ele = (Element) doc.selectSingleNode("/config/servers");
+
+        proxy = ele.selectSingleNode("sipc-proxy").getText();
+
+        // ssi_app_sign_in = ele.selectSingleNode("ssi-app-sign-in").getText();
+        //
+        // ssi_app_sign_out =
+        // ele.selectSingleNode("ssi-app-sign-out").getText();
+        return true;
+    }
+
+    /**
+     * @return the sipCfg
+     */
+    public String getSipCfg()
+    {
+        return sipCfg;
+    }
+
+    /**
+     * @param sipCfg
+     *            the sipCfg to set
+     */
+    public void setSipCfg(String sipCfg)
+    {
+        this.sipCfg = sipCfg;
+    }
+
+    private boolean initSipDeocde(Document doc)
+    {
+        Node ele = doc.selectSingleNode("/Root/Users/User");
+
+        sid = ele.selectSingleNode("Sid").getText();
+
+        // uri = ele.selectSingleNode("Uri").getText();
+        return true;
+    }
+
+    /**
+     * @return the proxy
+     */
+    public String getProxy()
+    {
+        return proxy;
+    }
+
+    /**
+     * @param proxy
+     *            the proxy to set
+     */
+    public void setProxy(String proxy)
+    {
+        this.proxy = proxy;
+    }
+
+    /**
+     * @return the version
+     */
+    public String getVersion()
+    {
+        return version;
+    }
+
+    /**
+     * @param version
+     *            the version to set
+     */
+    public void setVersion(String version)
+    {
+        this.version = version;
+    }
+
+    public void close()
+    {
+        try
+        {
+            socket.close();
+        }
+        catch (Exception exp)
+        {
+            LogUtil.exception(exp);
+        }
+    }
+
+    /**
+     * @param to_uri
+     *            接收人
+     * @param text
+     *            消息内容
+     * @param forceSMS
+     *            是否强制为短信
+     */
+    public void send(String to_uri, String text, Boolean forceSMS)
+    {
+        callId += 1;
+
+        StringBuffer tmp = new StringBuffer();
+        tmp.append("M fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
+        tmp.append("Q: 2 M").append(Constant.ENV_BREAKS);
+        tmp.append("T: ").append(to_uri).append(Constant.ENV_BREAKS);
+
+        if (!(forceSMS.booleanValue()))
+        {
+            tmp.append("C: text/plain").append(Constant.ENV_BREAKS);
+            tmp.append("K: SaveHistory").append(Constant.ENV_BREAKS);
+            tmp.append("N: CatMsg").append(Constant.ENV_BREAKS);
+        }
+        else
+        {
+            tmp.append("N: SendCatSMS").append(Constant.ENV_BREAKS);
+        }
+
+        tmp.append("L: ").append(text.getBytes().length).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
+        tmp.append(text);
+
+        send(tmp.toString());
+        commands.put(Integer.toString(callId), Constant.N_SendMsg);
+    }
+
+    /**
+     * 修改显示名称
+     * 
+     * @param text
+     */
+    void setNickname(String text)
+    {
+        callId += 1;
+
+        StringBuffer tmp = new StringBuffer();
+        tmp.append("S fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
+        tmp.append("Q: 1 S").append(Constant.ENV_BREAKS);
+        tmp.append("N: SetPersonalInfo").append(Constant.ENV_BREAKS);
+        tmp.append("L: ").append(text.getBytes().length).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
+        tmp.append(text);
+        send(tmp.toString());
+        commands.put(Integer.toString(callId), Constant.N_SetPersonalInfo);
     }
 
     int login()
@@ -344,212 +554,6 @@ public class Connect extends Thread implements IConnect
     }
 
     /**
-     * @return the sysCfg
-     */
-    public String getSysCfg()
-    {
-        return sysCfg;
-    }
-
-    /**
-     * @param sysCfg
-     *            the sysCfg to set
-     */
-    public void setSysCfg(String sysCfg)
-    {
-        this.sysCfg = sysCfg;
-    }
-
-    private String initSysEncode()
-    {
-        Document doc = DocumentHelper.createDocument();
-        Element config = doc.addElement("config");
-
-        config.addElement("user").addAttribute("mobile-no", getUser());
-
-        Element client = config.addElement("client");
-        client.addAttribute("type", "PC");
-        client.addAttribute("version", Constant.VER_FETION);
-        client.addAttribute("platform", "W5.1");
-
-        config.addElement("servers").addAttribute("version", "0");
-
-        config.addElement("service-no").addAttribute("version", "0");
-
-        config.addElement("parameters").addAttribute("version", "0");
-
-        config.addElement("hints").addAttribute("version", "0");
-
-        config.addElement("http-applications").addAttribute("version", "0");
-
-        return doc.asXML();
-    }
-
-    private boolean initSysDecode(Document doc)
-    {
-        Element ele = (Element) doc.selectSingleNode("/config/servers");
-
-        proxy = ele.selectSingleNode("sipc-proxy").getText();
-
-        // ssi_app_sign_in = ele.selectSingleNode("ssi-app-sign-in").getText();
-        //
-        // ssi_app_sign_out =
-        // ele.selectSingleNode("ssi-app-sign-out").getText();
-        return true;
-    }
-
-    /**
-     * @return the sipCfg
-     */
-    public String getSipCfg()
-    {
-        return sipCfg;
-    }
-
-    /**
-     * @param sipCfg
-     *            the sipCfg to set
-     */
-    public void setSipCfg(String sipCfg)
-    {
-        this.sipCfg = sipCfg;
-    }
-
-    /**
-     * @return the proxy
-     */
-    public String getProxy()
-    {
-        return proxy;
-    }
-
-    private boolean initSipDeocde(Document doc)
-    {
-        Node ele = doc.selectSingleNode("/Root/Users/User");
-
-        sid = ele.selectSingleNode("Sid").getText();
-
-        // uri = ele.selectSingleNode("Uri").getText();
-        return true;
-    }
-
-    /**
-     * @param proxy
-     *            the proxy to set
-     */
-    public void setProxy(String proxy)
-    {
-        this.proxy = proxy;
-    }
-
-    /**
-     * @return the version
-     */
-    public String getVersion()
-    {
-        return version;
-    }
-
-    /**
-     * @param version
-     *            the version to set
-     */
-    public void setVersion(String version)
-    {
-        this.version = version;
-    }
-
-    private String response()
-    {
-        return response(Constant.ENV_BREAKS + Constant.ENV_BREAKS);
-    }
-
-    private String response(int len)
-    {
-        try
-        {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream(len);
-            for (int i = 0; i < len; i += 1)
-            {
-                bos.write(dataIs.read());
-            }
-            LogUtil.log("~~~~~~~~~~~~~~~~");
-            LogUtil.log("recv0");
-            LogUtil.log(bos.toString());
-            return bos.toString();
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
-            return "Convert to UTF8 Error\n";
-        }
-    }
-
-    private String response(String end)
-    {
-        try
-        {
-            byte[] tmp = end.getBytes();
-            ByteArrayOutputStream bos = new ByteArrayOutputStream(4096);
-            int p = 0;
-            byte b;
-            while (true)
-            {
-                b = dataIs.readByte();
-                bos.write(b);
-                p = (b == tmp[p]) ? p + 1 : 0;
-                if (p == tmp.length)
-                {
-                    break;
-                }
-            }
-            LogUtil.log("~~~~~~~~~~~~~~~~");
-            LogUtil.log("recv1");
-            LogUtil.log(bos.toString());
-            return bos.toString();
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
-            return "Convert to UTF8 Error\n";
-        }
-    }
-
-    public void close()
-    {
-        try
-        {
-            socket.close();
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
-        }
-    }
-
-    /**
-     * 用户在线状态订阅
-     * 
-     * @param data
-     */
-    void subPresence(String data)
-    {
-        callId += 1;
-
-        StringBuffer tmp = new StringBuffer();
-        tmp.append("SUB fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
-        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
-        tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
-        tmp.append("Q: 1 SUB").append(Constant.ENV_BREAKS);
-        tmp.append("N: presence").append(Constant.ENV_BREAKS);
-        tmp.append("L: ").append(data.length()).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
-        tmp.append(data);
-
-        send(tmp.toString());
-        commands.put(Integer.toString(callId), Constant.N_SubPresence);
-    }
-
-    /**
      * 退出登录
      */
     void logout()
@@ -566,130 +570,11 @@ public class Connect extends Thread implements IConnect
     }
 
     /**
-     * 发送消息
-     * 
-     * @param message
+     * @return
      */
-    private void send(String message)
+    String getUri()
     {
-        LogUtil.log("==============================");
-        LogUtil.log("send");
-        LogUtil.log(message);
-        try
-        {
-            dataOs.write(message.getBytes("utf-8"));
-            dataOs.flush();
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
-        }
-    }
-
-    /**
-     * @param to_uri
-     *            接收人
-     * @param text
-     *            消息内容
-     * @param forceSMS
-     *            是否强制为短信
-     */
-    public void send(String to_uri, String text, Boolean forceSMS)
-    {
-        callId += 1;
-
-        StringBuffer tmp = new StringBuffer();
-        tmp.append("M fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
-        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
-        tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
-        tmp.append("Q: 2 M").append(Constant.ENV_BREAKS);
-        tmp.append("T: ").append(to_uri).append(Constant.ENV_BREAKS);
-
-        if (!(forceSMS.booleanValue()))
-        {
-            tmp.append("C: text/plain").append(Constant.ENV_BREAKS);
-            tmp.append("K: SaveHistory").append(Constant.ENV_BREAKS);
-            tmp.append("N: CatMsg").append(Constant.ENV_BREAKS);
-        }
-        else
-        {
-            tmp.append("N: SendCatSMS").append(Constant.ENV_BREAKS);
-        }
-
-        tmp.append("L: ").append(text.getBytes().length).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
-        tmp.append(text);
-
-        send(tmp.toString());
-        commands.put(Integer.toString(callId), Constant.N_SendMsg);
-    }
-
-    /**
-     * 修改显示名称
-     * 
-     * @param text
-     */
-    public void setNickname(String text)
-    {
-        callId += 1;
-
-        StringBuffer tmp = new StringBuffer();
-        tmp.append("S fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
-        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
-        tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
-        tmp.append("Q: 1 S").append(Constant.ENV_BREAKS);
-        tmp.append("N: SetPersonalInfo").append(Constant.ENV_BREAKS);
-        tmp.append("L: ").append(text.getBytes().length).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
-        tmp.append(text);
-        send(tmp.toString());
-        commands.put(Integer.toString(callId), Constant.N_SetPersonalInfo);
-    }
-
-    /**
-     * 在线保持信息
-     */
-    void sendKeepAlive()
-    {
-        liveId += 1;
-
-        StringBuffer tmp = new StringBuffer();
-        tmp.append("R fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
-        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
-        tmp.append("I: 1").append(Constant.ENV_BREAKS);
-        tmp.append("Q: ").append(liveId).append(" R").append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
-        send(tmp.toString());
-    }
-
-    /**
-     * 消息收到确认
-     * 
-     * @param s
-     *            已接收消息头
-     */
-    private void sendReceived(String s)
-    {
-        HashMap<String, String> map = readHead(s);
-        String f = map.get("F");
-        if (!CharUtil.isValidate(f))
-        {
-            return;
-        }
-        String i = map.get("I");
-        if (!CharUtil.isValidate(i))
-        {
-            return;
-        }
-        String q = map.get("Q");
-        if (!CharUtil.isValidate(q))
-        {
-            return;
-        }
-
-        StringBuffer tmp = new StringBuffer();
-        tmp.append("SIP-C/2.0 200 OK").append(Constant.ENV_BREAKS);
-        tmp.append("F: ").append(f).append(Constant.ENV_BREAKS);
-        tmp.append("I: ").append(i).append(Constant.ENV_BREAKS);
-        tmp.append("Q: ").append(q).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
-        send(tmp.toString());
+        return uri;
     }
 
     /**
@@ -771,50 +656,40 @@ public class Connect extends Thread implements IConnect
     }
 
     /**
-     * @param text
-     * @return
+     * 用户在线状态订阅
+     * 
+     * @param data
      */
-    private static String digest(String text)
+    void initPresence(String data)
     {
-        try
-        {
-            return CharUtil.toHex(MessageDigest.getInstance("MD5").digest(text.getBytes()));
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
-            return "";
-        }
+        callId += 1;
+
+        StringBuffer tmp = new StringBuffer();
+        tmp.append("SUB fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
+        tmp.append("Q: 1 SUB").append(Constant.ENV_BREAKS);
+        tmp.append("N: presence").append(Constant.ENV_BREAKS);
+        tmp.append("L: ").append(data.length()).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
+        tmp.append(data);
+
+        send(tmp.toString());
+        commands.put(Integer.toString(callId), Constant.N_SubPresence);
     }
 
     /**
-     * @param s1
-     * @param s2
-     * @return
+     * 在线保持信息
      */
-    private static String compute(String s1, String s2)
+    void sendKeepAlive()
     {
-        try
-        {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] k = md.digest(s1.getBytes("utf-8"));
-            byte[] s = s2.getBytes("utf-8");
-            byte[] t = new byte[k.length + s.length];
+        liveId += 1;
 
-            for (int i = 0, j = k.length; i < j; ++i)
-            {
-                t[i] = k[i];
-            }
-            for (int i = 0, j = s.length; i < j; ++i)
-            {
-                t[(k.length + i)] = s[i];
-            }
-            return CharUtil.toHex(md.digest(t));
-        }
-        catch (Exception e)
-        {
-            return null;
-        }
+        StringBuffer tmp = new StringBuffer();
+        tmp.append("R fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("I: 1").append(Constant.ENV_BREAKS);
+        tmp.append("Q: ").append(liveId).append(" R").append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
+        send(tmp.toString());
     }
 
     private String SignInnEncode()
@@ -825,7 +700,7 @@ public class Connect extends Thread implements IConnect
         Element device = args.addElement("device");
         device.addAttribute("type", "PC");
         device.addAttribute("version", "5");
-        device.addAttribute("client-version", Constant.VER_FETION);
+        device.addAttribute("client-version", getVersion());
 
         args.addElement("caps").addAttribute("value", "simple-im;im-session;temp-group");
 
@@ -882,10 +757,126 @@ public class Connect extends Thread implements IConnect
     }
 
     /**
+     * 发送消息
+     * 
+     * @param message
+     */
+    private void send(String message)
+    {
+        LogUtil.log("==============================");
+        LogUtil.log("send");
+        LogUtil.log(message);
+        try
+        {
+            dataOs.write(message.getBytes("utf-8"));
+            dataOs.flush();
+        }
+        catch (Exception exp)
+        {
+            LogUtil.exception(exp);
+        }
+    }
+
+    private String response()
+    {
+        return response(Constant.ENV_BREAKS + Constant.ENV_BREAKS);
+    }
+
+    private String response(int len)
+    {
+        try
+        {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream(len);
+            for (int i = 0; i < len; i += 1)
+            {
+                bos.write(dataIs.read());
+            }
+            LogUtil.log("~~~~~~~~~~~~~~~~");
+            LogUtil.log("recv0");
+            LogUtil.log(bos.toString());
+            return bos.toString();
+        }
+        catch (Exception exp)
+        {
+            LogUtil.exception(exp);
+            return "Convert to UTF8 Error\n";
+        }
+    }
+
+    private String response(String end)
+    {
+        try
+        {
+            byte[] tmp = end.getBytes();
+            ByteArrayOutputStream bos = new ByteArrayOutputStream(4096);
+            int p = 0;
+            byte b;
+            while (true)
+            {
+                b = dataIs.readByte();
+                bos.write(b);
+                p = (b == tmp[p]) ? p + 1 : 0;
+                if (p == tmp.length)
+                {
+                    break;
+                }
+            }
+            LogUtil.log("~~~~~~~~~~~~~~~~");
+            LogUtil.log("recv1");
+            LogUtil.log(bos.toString());
+            return bos.toString();
+        }
+        catch (Exception exp)
+        {
+            LogUtil.exception(exp);
+            return "Convert to UTF8 Error\n";
+        }
+    }
+
+    /**
+     * @param text
      * @return
      */
-    String getUri()
+    private static String digest(String text)
     {
-        return uri;
+        try
+        {
+            return CharUtil.toHex(MessageDigest.getInstance("MD5").digest(text.getBytes()));
+        }
+        catch (Exception exp)
+        {
+            LogUtil.exception(exp);
+            return "";
+        }
+    }
+
+    /**
+     * @param s1
+     * @param s2
+     * @return
+     */
+    private static String compute(String s1, String s2)
+    {
+        try
+        {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] k = md.digest(s1.getBytes("utf-8"));
+            byte[] s = s2.getBytes("utf-8");
+            byte[] t = new byte[k.length + s.length];
+
+            for (int i = 0, j = k.length; i < j; ++i)
+            {
+                t[i] = k[i];
+            }
+            for (int i = 0, j = s.length; i < j; ++i)
+            {
+                t[(k.length + i)] = s[i];
+            }
+            return CharUtil.toHex(md.digest(t));
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 }
