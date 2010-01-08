@@ -22,7 +22,6 @@ import org.apache.axis.utils.ByteArrayOutputStream;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
 import rmp.util.EnvUtil;
@@ -54,10 +53,8 @@ public class Connect extends Thread implements IConnect
     private String sysCfg;
     private String sipCfg;
     private String proxy;
-
-    private String sid;
-
     private String uri;
+    // private String sid;
     // private String ssi_app_sign_in;
     // private String ssi_app_sign_out;
 
@@ -130,7 +127,8 @@ public class Connect extends Thread implements IConnect
 
             // 向身份服务器发送信息
             osw = new OutputStreamWriter(connection.getOutputStream(), "utf-8");
-            osw.write(sid == null ? "CellPhone=" + getUser() : "Sid=" + sid);
+            // osw.write(sid == null ? "CellPhone=" + getUser() : "Sid=" + sid);
+            osw.write("Sid=" + getUser());
             osw.flush();
             osw.close();
 
@@ -147,7 +145,7 @@ public class Connect extends Thread implements IConnect
             isr.close();
 
             // 返回数据解析
-            initSipDeocde(DocumentHelper.parseText(buf.toString().replace("xmlns=\"http://tempuri.org/DateExchange.xsd\"", "")));
+            // initSipDeocde(DocumentHelper.parseText(buf.toString().replace("xmlns=\"http://tempuri.org/DateExchange.xsd\"", "")));
             return true;
         }
         catch (Exception exp)
@@ -346,11 +344,11 @@ public class Connect extends Thread implements IConnect
         this.sipCfg = sipCfg;
     }
 
-    private boolean initSipDeocde(Document doc)
+    boolean initSipDeocde(Document doc)
     {
-        Node ele = doc.selectSingleNode("/Root/Users/User");
+        // Node ele = doc.selectSingleNode("/Root/Users/User");
 
-        sid = ele.selectSingleNode("Sid").getText();
+        // sid = ele.selectSingleNode("Sid").getText();
 
         // uri = ele.selectSingleNode("Uri").getText();
         return true;
@@ -416,7 +414,7 @@ public class Connect extends Thread implements IConnect
 
         StringBuffer tmp = new StringBuffer();
         tmp.append("M fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
-        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(getUser()).append(Constant.ENV_BREAKS);
         tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
         tmp.append("Q: 2 M").append(Constant.ENV_BREAKS);
         tmp.append("T: ").append(to_uri).append(Constant.ENV_BREAKS);
@@ -450,7 +448,7 @@ public class Connect extends Thread implements IConnect
 
         StringBuffer tmp = new StringBuffer();
         tmp.append("S fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
-        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(getUser()).append(Constant.ENV_BREAKS);
         tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
         tmp.append("Q: 1 S").append(Constant.ENV_BREAKS);
         tmp.append("N: SetPersonalInfo").append(Constant.ENV_BREAKS);
@@ -483,7 +481,7 @@ public class Connect extends Thread implements IConnect
             String data = SignInnEncode();
             StringBuffer tmp = new StringBuffer();
             tmp.append("R fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
-            tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+            tmp.append("F: ").append(getUser()).append(Constant.ENV_BREAKS);
             tmp.append("I: 1").append(Constant.ENV_BREAKS).append("Q: 1 R").append(Constant.ENV_BREAKS).append("L: ");
             tmp.append(data.length()).append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
             tmp.append(data);
@@ -505,16 +503,16 @@ public class Connect extends Thread implements IConnect
             String nonce = response.substring(i, j);
 
             // 第三次握手
-            String m1 = sid + ":fetion.com.cn:" + getPwds();
+            String m1 = getUser() + ":fetion.com.cn:" + getPwds();
             String m2 = ":" + nonce + ':' + Constant.CNONCE;
             String h1 = compute(m1, m2);
-            m2 = "REGISTER:" + sid;
+            m2 = "REGISTER:" + getUser();
             String h2 = digest(m2);
             m2 = h1 + ":" + nonce + ":" + h2;
 
             tmp.delete(0, tmp.length());
             tmp.append("R fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
-            tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+            tmp.append("F: ").append(getUser()).append(Constant.ENV_BREAKS);
             tmp.append("I: 2").append(Constant.ENV_BREAKS);
             tmp.append("Q: 2 R").append(Constant.ENV_BREAKS);
             tmp.append("A: Digest response=\"").append(digest(m2)).append("\",cnonce=\"").append(Constant.CNONCE).append("\"").append(Constant.ENV_BREAKS);
@@ -559,7 +557,7 @@ public class Connect extends Thread implements IConnect
     {
         StringBuffer tmp = new StringBuffer();
         tmp.append("R fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
-        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(getUser()).append(Constant.ENV_BREAKS);
         tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
         tmp.append("Q: 1 R").append(Constant.ENV_BREAKS);
         tmp.append("X: 0").append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
@@ -593,7 +591,7 @@ public class Connect extends Thread implements IConnect
         String data = doc.asXML();
         StringBuffer tmp = new StringBuffer();
         tmp.append("S fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
-        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(getUser()).append(Constant.ENV_BREAKS);
         tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
         tmp.append("Q: 1 S").append(Constant.ENV_BREAKS);
         tmp.append("N: GetPersonalInfo").append(Constant.ENV_BREAKS);
@@ -623,7 +621,7 @@ public class Connect extends Thread implements IConnect
         String data = doc.asXML();
         StringBuffer tmp = new StringBuffer();
         tmp.append("S fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
-        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(getUser()).append(Constant.ENV_BREAKS);
         tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
         tmp.append("Q: 1 S").append(Constant.ENV_BREAKS);
         tmp.append("N: GetContactList").append(Constant.ENV_BREAKS);
@@ -643,7 +641,7 @@ public class Connect extends Thread implements IConnect
 
         StringBuffer tmp = new StringBuffer();
         tmp.append("S fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
-        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(getUser()).append(Constant.ENV_BREAKS);
         tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
         tmp.append("Q: 1 S").append(Constant.ENV_BREAKS);
         tmp.append("N: GetContactsInfo").append(Constant.ENV_BREAKS);
@@ -665,7 +663,7 @@ public class Connect extends Thread implements IConnect
 
         StringBuffer tmp = new StringBuffer();
         tmp.append("SUB fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
-        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(getUser()).append(Constant.ENV_BREAKS);
         tmp.append("I: ").append(callId).append(Constant.ENV_BREAKS);
         tmp.append("Q: 1 SUB").append(Constant.ENV_BREAKS);
         tmp.append("N: presence").append(Constant.ENV_BREAKS);
@@ -685,7 +683,7 @@ public class Connect extends Thread implements IConnect
 
         StringBuffer tmp = new StringBuffer();
         tmp.append("R fetion.com.cn SIP-C/2.0").append(Constant.ENV_BREAKS);
-        tmp.append("F: ").append(sid).append(Constant.ENV_BREAKS);
+        tmp.append("F: ").append(getUser()).append(Constant.ENV_BREAKS);
         tmp.append("I: 1").append(Constant.ENV_BREAKS);
         tmp.append("Q: ").append(liveId).append(" R").append(Constant.ENV_BREAKS).append(Constant.ENV_BREAKS);
         send(tmp.toString());
