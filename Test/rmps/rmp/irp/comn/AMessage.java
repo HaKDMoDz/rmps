@@ -27,7 +27,7 @@ import com.amonsoft.rmps.irp.b.IMessage;
  */
 public abstract class AMessage implements IMessage
 {
-    private String content;
+    protected String content;
     private String contentType;
     private String encoding;
     private String messageUID;
