@@ -725,7 +725,7 @@ public class Connect extends Thread implements IConnect
         String[] arr;
         for (String tmp : text.split(Constant.ENV_BREAKS))
         {
-            arr = tmp.split(":");
+            arr = tmp.split(": ");
             if (arr.length == 2)
             {
                 map.put(arr[0].trim(), arr[1].trim());

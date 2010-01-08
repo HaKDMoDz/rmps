@@ -119,7 +119,7 @@ public class Fetion implements IAccount
     {
         for (IContact contact : contacts)
         {
-            if (user.equals(contact.getId()))
+            if (user.equals(((Contact) contact).getUri()))
             {
                 return contact;
             }
@@ -140,6 +140,7 @@ public class Fetion implements IAccount
      */
     boolean readCatalog(String text)
     {
+        LogUtil.log("readCatalog:" + text);
         if (!CharUtil.isValidate(text))
         {
             return false;
@@ -220,6 +221,8 @@ public class Fetion implements IAccount
      */
     boolean readContact(String text)
     {
+        LogUtil.log("readContact:" + text);
+
         if (!CharUtil.isValidate(text))
         {
             return false;
@@ -263,6 +266,8 @@ public class Fetion implements IAccount
 
     boolean readPresence(String text)
     {
+        LogUtil.log("readPresence:" + text);
+
         if (!CharUtil.isValidate(text))
         {
             return false;
@@ -312,7 +317,9 @@ public class Fetion implements IAccount
      */
     boolean readMessage(String user, String text)
     {
-        LogUtil.log("readMessage:" + text);
+        LogUtil.log("发送：");
+        LogUtil.log(text);
+
         Control.getInstance().instantMessageReceived(getSession(user), new Message(text));
         return true;
     }
@@ -382,6 +389,8 @@ public class Fetion implements IAccount
         if (session == null)
         {
             session = new Session();
+            session.connect = connect;
+            session.contact = (Contact) getContact(user);
             sessions.put(user, session);
         }
         return session;

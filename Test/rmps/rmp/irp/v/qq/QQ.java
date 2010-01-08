@@ -13,8 +13,8 @@ import rmp.irp.v.live.Connect;
 import rmp.irp.v.live.Session;
 
 import com.amonsoft.rmps.irp.b.IContact;
-import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.b.IPresence;
+import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.v.IAccount;
 import com.amonsoft.rmps.irp.v.IConnect;
 
@@ -32,7 +32,7 @@ public class QQ implements IAccount
 {
     private IConnect connect;
     private ISession session;
-    private JQQ messenger;
+    private String messenger;
 
     public QQ()
     {
@@ -47,10 +47,10 @@ public class QQ implements IAccount
                 connect = new Connect();
                 connect.load();
                 session = new Session();
-                messenger = new JQQ(connect);
+                // messenger = new JQQ(connect);
                 break;
             case IPresence.SIGN:
-                messenger.signIn();
+                // messenger.signIn();
                 break;
             case IPresence.LINE:
                 break;

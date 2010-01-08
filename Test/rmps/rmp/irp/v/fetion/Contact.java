@@ -35,7 +35,7 @@ public class Contact implements IContact
     private String uri;
     private String id;
     private String name;
-    private String email;
+    private String email = "";
     private String mobile;
 
     private String display;

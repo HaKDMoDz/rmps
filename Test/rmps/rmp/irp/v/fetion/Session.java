@@ -13,6 +13,7 @@ package rmp.irp.v.fetion;
 import java.io.File;
 
 import rmp.irp.comn.ASession;
+import rmp.util.LogUtil;
 
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IMessage;
@@ -32,6 +33,7 @@ import com.amonsoft.rmps.irp.b.IMimeMessage;
 public class Session extends ASession
 {
     Connect connect;
+    Contact contact;
 
     Session()
     {
@@ -67,7 +69,7 @@ public class Session extends ASession
     @Override
     public IContact getContact()
     {
-        return null;
+        return contact;
     }
 
     /*
@@ -98,7 +100,10 @@ public class Session extends ASession
     @Override
     public void send(String message)
     {
-        connect.send("", message, false);
+        LogUtil.log("发送：");
+        LogUtil.log(message);
+
+        connect.send(contact.getUri(), message, false);
     }
 
     /*
