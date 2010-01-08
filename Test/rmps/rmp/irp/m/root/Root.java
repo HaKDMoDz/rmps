@@ -11,8 +11,8 @@ import rmp.irp.Irps;
 import rmp.util.LogUtil;
 
 import com.amonsoft.rmps.irp.b.IMessage;
-import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.b.IPresence;
+import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
 
 /**

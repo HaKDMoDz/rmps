@@ -13,8 +13,6 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 import rmp.util.LogUtil;
-
-
 import cons.EnvCons;
 
 /**

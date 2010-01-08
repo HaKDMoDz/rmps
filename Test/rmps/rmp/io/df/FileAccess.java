@@ -11,8 +11,6 @@ import java.io.File;
 import java.io.IOException;
 
 import rmp.util.LogUtil;
-
-
 import cons.SysCons;
 
 /**

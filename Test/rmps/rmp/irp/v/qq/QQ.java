@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import rmp.irp.c.Control;
+import rmp.util.LogUtil;
 
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IPresence;
@@ -78,6 +79,7 @@ public class QQ implements IAccount, IQQListener
                 connect = new Connect();
                 connect.load();
                 user = new QQUser(Integer.parseInt(connect.getUser()), connect.getPwds());
+                LogUtil.log("QQ初始化成功！");
                 break;
             case IPresence.SIGN:
                 try
@@ -92,10 +94,11 @@ public class QQ implements IAccount, IQQListener
                     messenger.addQQListener(this);
                     messenger.setLoginServer(connect.getHost());
                     messenger.login();
+                    LogUtil.log("QQ登录成功！");
                 }
                 catch (Exception exp)
                 {
-                    System.out.println(exp);
+                    LogUtil.exception(exp);
                 }
                 break;
             case IPresence.LINE:

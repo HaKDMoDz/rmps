@@ -24,8 +24,6 @@ import rmp.prp.aide.P3040000.t.Util;
 import rmp.util.BeanUtil;
 import rmp.util.DateUtil;
 import rmp.util.LogUtil;
-
-
 import cons.prp.aide.P3040000.ConstUI;
 import cons.prp.aide.P3040000.LangRes;
 
