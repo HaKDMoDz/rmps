@@ -39,7 +39,7 @@ public class Connect implements IConnect
     private int port;
     private String server;
 
-    public Connect()
+    Connect()
     {
     }
 

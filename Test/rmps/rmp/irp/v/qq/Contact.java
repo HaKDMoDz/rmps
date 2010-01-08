@@ -10,11 +10,17 @@
  */
 package rmp.irp.v.qq;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.amonsoft.rmps.irp.b.ICatalog;
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IPresence;
+import com.amonsoft.util.CharUtil;
+
+import edu.tsinghua.lumaqq.qq.beans.ContactInfo;
+import edu.tsinghua.lumaqq.qq.beans.FriendRemark;
+import edu.tsinghua.lumaqq.qq.beans.QQFriend;
 
 /**
  * <ul>
@@ -25,80 +31,174 @@ import com.amonsoft.rmps.irp.b.IPresence;
  * <br />
  * TODO:
  * </ul>
+ * 
  * @author Administrator
  * 
  */
 public class Contact implements IContact
 {
+    protected QQFriend friend;
+    protected FriendRemark remark;
+    protected ContactInfo contact;
+    protected Presence presence;
+    protected List<ICatalog> catalogs;
 
-    /* (non-Javadoc)
+    Contact()
+    {
+        catalogs = new ArrayList<ICatalog>();
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.amonsoft.rmps.irp.b.IContact#getCatalogs()
      */
     @Override
     public List<ICatalog> getCatalogs()
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
-    /* (non-Javadoc)
+    public void addCatalog(ICatalog catalog)
+    {
+        catalogs.add(catalog);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.amonsoft.rmps.irp.b.IContact#getDisplayName()
      */
     @Override
     public String getDisplayName()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return friend.nick;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.amonsoft.rmps.irp.b.IContact#getEmail()
      */
     @Override
     public String getEmail()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return remark.email;
     }
 
-    /* (non-Javadoc)
+    public void setEmail(String email)
+    {
+        remark.email = email;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.amonsoft.rmps.irp.b.IContact#getId()
      */
     @Override
     public String getId()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return Integer.toString(friend.qqNum);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.amonsoft.rmps.irp.b.IContact#getName()
      */
     @Override
     public String getName()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return remark.name;
     }
 
-    /* (non-Javadoc)
+    public void setName(String name)
+    {
+        remark.name = name;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.amonsoft.rmps.irp.b.IContact#getPersonalMessage()
      */
     @Override
     public String getPersonalMessage()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return contact.intro;
     }
 
-    /* (non-Javadoc)
+    /**
+     * @param personalMessage
+     */
+    public void setPersonalMessage(String personalMessage)
+    {
+        contact.intro = personalMessage;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.amonsoft.rmps.irp.b.IContact#getPresence()
      */
     @Override
     public IPresence getPresence()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return presence;
     }
 
+    @Override
+    public String toString()
+    {
+        if (CharUtil.isValidate(getDisplayName()))
+        {
+            return getDisplayName();
+        }
+        if (CharUtil.isValidate(getName()))
+        {
+            return getName();
+        }
+        return "" + getQQ();
+    }
+
+    /**
+     * @return
+     */
+    public int getQQ()
+    {
+        return friend.qqNum;
+    }
+
+    /**
+     * @param qq
+     */
+    public void setQQ(int qq)
+    {
+        friend.qqNum = qq;
+    }
+
+    /**
+     * @param friend
+     */
+    public void setFriendInfo(QQFriend friend)
+    {
+        this.friend = friend;
+    }
+
+    /**
+     * @param friendRemark
+     */
+    public void setFriendRemark(FriendRemark friendRemark)
+    {
+        this.remark = friendRemark;
+    }
+
+    /**
+     * @param contactInfo
+     */
+    public void setContactInfo(ContactInfo contactInfo)
+    {
+        this.contact = contactInfo;
+    }
 }

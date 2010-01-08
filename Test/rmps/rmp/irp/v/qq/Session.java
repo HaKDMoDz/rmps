@@ -15,6 +15,8 @@ import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IMimeMessage;
 
+import edu.tsinghua.lumaqq.qq.QQClient;
+
 /**
  * <ul>
  * <li>功能说明：</li>
@@ -27,6 +29,8 @@ import com.amonsoft.rmps.irp.b.IMimeMessage;
  */
 public class Session extends ASession
 {
+    QQClient messenger;
+
     @Override
     public void send()
     {
@@ -35,6 +39,7 @@ public class Session extends ASession
     @Override
     public void send(String message)
     {
+        messenger.im_Send(0, message.getBytes());
     }
 
     @Override

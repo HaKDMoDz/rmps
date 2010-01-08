@@ -16,45 +16,79 @@ import com.amonsoft.rmps.irp.b.ICatalog;
  * <ul>
  * <li>功能说明：</li>
  * <br />
- * TODO:
  * <li>使用说明：</li>
  * <br />
- * TODO:
  * </ul>
+ * 
  * @author Administrator
  * 
  */
 public class Catalog implements ICatalog
 {
+    private String id;
+    private String name;
+    private int online;
 
-    /* (non-Javadoc)
+    Catalog()
+    {
+    }
+
+    Catalog(String id, String name)
+    {
+        this.id = id;
+        this.name = name;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.amonsoft.rmps.irp.b.ICatalog#getId()
      */
     @Override
     public String getId()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return id;
     }
 
-    /* (non-Javadoc)
+    public void setId(String id)
+    {
+        this.id = id;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.amonsoft.rmps.irp.b.ICatalog#getName()
      */
     @Override
     public String getName()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return name;
     }
 
-    /* (non-Javadoc)
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.amonsoft.rmps.irp.b.ICatalog#getUri()
      */
     @Override
     public String getUri()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return "";
     }
 
+    public int getOnline()
+    {
+        return online;
+    }
+
+    public void setOnline(int online)
+    {
+        this.online = online;
+    }
 }

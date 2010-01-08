@@ -16,15 +16,24 @@ import rmp.irp.comn.AMessage;
  * <ul>
  * <li>功能说明：</li>
  * <br />
- * TODO:
  * <li>使用说明：</li>
  * <br />
- * TODO:
  * </ul>
+ * 
  * @author Administrator
  * 
  */
 public class Message extends AMessage
 {
+    private String content;
 
+    Message()
+    {
+    }
+
+    Message(String content)
+    {
+        this.content = content;
+
+    }
 }
