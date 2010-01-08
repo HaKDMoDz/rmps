@@ -38,5 +38,7 @@
 	<classpathentry kind="lib" path="lib/saaj-impl-1.3.4.jar"/>
 	<classpathentry kind="lib" path="lib/saaj.jar"/>
 	<classpathentry kind="lib" path="lib/wsdl4j-1.5.1.jar"/>
+	<classpathentry kind="lib" path="lib/irps/pinyin4j-2.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/irps/lumaqq.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
