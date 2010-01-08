@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <irps>
-	<gtalk>
-		<map key="host">http://tqq.tencent.com</map>
+	<qq>
+		<map key="host">sz.tencent.com</map>
 		<map key="port">8000</map>
-		<map key="server">tqq</map>
+		<map key="server">tencent.com</map>
 		<map key="user">107618109</map>
-		<map key="pwds">bIxSTULX1Yl9</map>
-	</gtalk>
+		<map key="pwds">axc's;#(:o.U</map>
+	</qq>
 </irps>
