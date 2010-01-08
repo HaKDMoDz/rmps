@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 import rmp.irp.c.Control;
 import rmp.util.LogUtil;
 
@@ -31,12 +34,15 @@ import edu.tsinghua.lumaqq.qq.events.IQQListener;
 import edu.tsinghua.lumaqq.qq.events.QQEvent;
 import edu.tsinghua.lumaqq.qq.net.PortGateFactory;
 import edu.tsinghua.lumaqq.qq.packets.in.ClusterCommandReplyPacket;
+import edu.tsinghua.lumaqq.qq.packets.in.FriendDataOpReplyPacket;
 import edu.tsinghua.lumaqq.qq.packets.in.GetFriendListReplyPacket;
 import edu.tsinghua.lumaqq.qq.packets.in.GetUserInfoReplyPacket;
 import edu.tsinghua.lumaqq.qq.packets.in.GroupDataOpReplyPacket;
 import edu.tsinghua.lumaqq.qq.packets.in.ReceiveIMPacket;
 import edu.tsinghua.lumaqq.qq.packets.in.SystemNotificationPacket;
 import edu.tsinghua.lumaqq.qq.packets.in._09.LoginGetListReplyPacket;
+import edu.tsinghua.lumaqq.qq.packets.in._09.LoginRequestReplyPacket;
+import edu.tsinghua.lumaqq.qq.packets.in._09.LoginVerifyReplyPacket;
 import edu.tsinghua.lumaqq.qq.packets.out.AddFriendAuthResponsePacket;
 
 /**
@@ -52,7 +58,7 @@ import edu.tsinghua.lumaqq.qq.packets.out.AddFriendAuthResponsePacket;
 public class QQ implements IAccount, IQQListener
 {
     private Connect connect;
-    private List<Session> sessions;
+    private Map<String, Session> sessions;
     private QQUser user;
     private QQClient messenger;
     private int loginGetListPosition;
@@ -75,7 +81,7 @@ public class QQ implements IAccount, IQQListener
         switch (status)
         {
             case IPresence.INIT:
-                sessions = new ArrayList<Session>();
+                sessions = new HashMap<String, Session>();
                 connect = new Connect();
                 connect.load();
                 user = new QQUser(Integer.parseInt(connect.getUser()), connect.getPwds());
@@ -146,12 +152,30 @@ public class QQ implements IAccount, IQQListener
             case QQEvent.IM_RECEIVED:
                 ReceiveIMPacket packet = (ReceiveIMPacket) evt.getSource();
                 String message = parseIMMessage(packet.normalIM.messages);
-                Control.getInstance().instantMessageReceived(getSession(""), new Message(message));
+                Control.getInstance().instantMessageReceived(getSession(Integer.toString(packet.header.sender)), new Message(message));
                 break;
 
-            case QQEvent.SYS_TIMEOUT: // 系统超时
+            /* 登录事件 */
+            case QQEvent.LOGIN_NEED_VERIFY: // 登录需要验证
+                processLoginRequestVerify((LoginRequestReplyPacket) evt.getSource());
+                break;
+            case QQEvent.LOGIN_OK:
+                messenger.user_GetGroupNames();
+                break;
+            case QQEvent.LOGIN_FAIL:
+                LoginVerifyReplyPacket vp = (LoginVerifyReplyPacket) evt.getSource();
+                LogUtil.log("登录时发生错误：" + vp.replyCode + "：" + vp.replyMessage);
+                break;
             case QQEvent.LOGIN_UNKNOWN_ERROR: // 登录错误
+                LogUtil.log("登录时发生未知错误");
                 logout();
+                break;
+            case QQEvent.SYS_TIMEOUT: // 系统超时
+                LogUtil.log("登录超时:" + Integer.toHexString(evt.operation));
+                logout();
+                break;
+            case -1:
+                LogUtil.log(evt.toString());
                 break;
             case QQEvent.USER_GET_INFO_OK: // 得到用户信息成功
                 ContactInfo contactInfo = ((GetUserInfoReplyPacket) evt.getSource()).contactInfo;
@@ -209,15 +233,14 @@ public class QQ implements IAccount, IQQListener
                 }
 
                 break;
-            // case QQEvent.FRIEND_GET_REMARKS_OK: //得到好友备注
-            // hasRemark =
-            // ((FriendDataOpReplyPacket)event.getSource()).hasRemark;
-            // if (hasRemark) {
-            // friendsRemarkPage ++;
-            // client.user_GetRemarks(friendsRemarkPage);
-            // }
-            // sendHandlerMessage(msg);
-            // break;
+            case QQEvent.FRIEND_GET_REMARKS_OK: // 得到好友备注
+                boolean hasRemark = ((FriendDataOpReplyPacket) evt.getSource()).hasRemark;
+                if (hasRemark)
+                {
+                    // friendsRemarkPage++;
+                    // client.user_GetRemarks(friendsRemarkPage);
+                }
+                break;
             case QQEvent.CLUSTER_GET_INFO_FAIL:
             case QQEvent.CLUSTER_GET_INFO_OK: // 得到群信息成功
                 processClusterInfo((ClusterCommandReplyPacket) evt.getSource());
@@ -269,6 +292,7 @@ public class QQ implements IAccount, IQQListener
             case QQEvent.IM_CLUSTER_SEND_EX_FAIL:
                 break;
             default:
+                LogUtil.log("事件代码：0x" + Integer.toHexString(evt.type));
                 break;
         }
     }
@@ -486,13 +510,29 @@ public class QQ implements IAccount, IQQListener
         return sb.toString();
     }
 
+    private void processLoginRequestVerify(LoginRequestReplyPacket in)
+    {
+        try
+        {
+            javax.swing.JLabel lbl = new javax.swing.JLabel("请输入验证码!", new ImageIcon(in.pngData), javax.swing.JLabel.BOTTOM);
+            String code = JOptionPane.showInputDialog(null, lbl, "登录验证", JOptionPane.INFORMATION_MESSAGE);
+            messenger.loginRequest(in.answerToken, code.getBytes(), (byte) 0x0);
+        }
+        catch (Exception exp)
+        {
+            LogUtil.exception(exp);
+        }
+    }
+
     private ISession getSession(String id)
     {
-        Session session = sessions.get(0);
+        Session session = sessions.get(id);
         if (session == null)
         {
             session = new Session();
+            session.contact = (Contact) getContact(id);
             session.messenger = messenger;
+            sessions.put(id, session);
         }
         return session;
     }

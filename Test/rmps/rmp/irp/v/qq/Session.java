@@ -30,6 +30,8 @@ import edu.tsinghua.lumaqq.qq.QQClient;
 public class Session extends ASession
 {
     QQClient messenger;
+    Contact contact;
+    int qq;
 
     @Override
     public void send()
@@ -39,12 +41,13 @@ public class Session extends ASession
     @Override
     public void send(String message)
     {
-        messenger.im_Send(0, message.getBytes());
+        send(message, true);
     }
 
     @Override
     public void send(String message, boolean literal)
     {
+        messenger.im_Send(qq, message.getBytes());
     }
 
     @Override
@@ -80,18 +83,18 @@ public class Session extends ASession
     @Override
     public IContact getContact()
     {
-        return null;
+        return contact;
     }
 
     @Override
     public IMessage createMessage()
     {
-        return null;
+        return new Message();
     }
 
     @Override
     public IMimeMessage createMimeMessage()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return null;
     }
 }
