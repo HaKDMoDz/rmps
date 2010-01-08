@@ -312,6 +312,7 @@ public class Fetion implements IAccount
      */
     boolean readMessage(String user, String text)
     {
+        LogUtil.log("readMessage:" + text);
         Control.getInstance().instantMessageReceived(getSession(user), new Message(text));
         return true;
     }

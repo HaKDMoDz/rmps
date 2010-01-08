@@ -227,7 +227,6 @@ public class Connect extends Thread implements IConnect
             if (CharUtil.isValidate(action) && commands.containsKey(action))
             {
                 action = commands.remove(action);
-                LogUtil.log("Action:" + action);
                 if (Constant.N_GetPersonalInfo.equals(action))
                 {
                     readDisplay(resBody);
