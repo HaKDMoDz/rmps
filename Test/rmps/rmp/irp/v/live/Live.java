@@ -141,7 +141,8 @@ public class Live extends MsnAdapter implements IAccount
     @Override
     public void instantMessageReceived(MsnSwitchboard switchboard, MsnInstantMessage message, MsnContact friend)
     {
-        LogUtil.log("instantMessageReceived from " + friend.getEmail().getEmailAddress() + ':' + message.getContent());
+        LogUtil.log("接收：" + friend.getEmail().getEmailAddress());
+        LogUtil.log(message.getContent());
 
         Session session = getSession(friend.getEmail().getEmailAddress());
         session.switchboard = switchboard;
