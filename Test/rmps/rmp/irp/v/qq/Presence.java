@@ -40,7 +40,7 @@ public class Presence implements IPresence
     @Override
     public int getAsc()
     {
-        return 0;
+        return asc;
     }
 
     /*

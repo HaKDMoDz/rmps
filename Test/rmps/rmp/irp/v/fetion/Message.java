@@ -25,8 +25,6 @@ import rmp.irp.comn.AMessage;
  */
 public class Message extends AMessage
 {
-    private String content;
-
     /**
      * 
      */

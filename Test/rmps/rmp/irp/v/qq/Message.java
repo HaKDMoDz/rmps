@@ -25,8 +25,6 @@ import rmp.irp.comn.AMessage;
  */
 public class Message extends AMessage
 {
-    private String content;
-
     Message()
     {
     }
@@ -34,6 +32,5 @@ public class Message extends AMessage
     Message(String content)
     {
         this.content = content;
-
     }
 }
