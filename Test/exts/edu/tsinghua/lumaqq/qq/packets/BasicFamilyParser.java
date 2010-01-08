@@ -21,6 +21,8 @@ package edu.tsinghua.lumaqq.qq.packets;
 
 import java.nio.ByteBuffer;
 
+import rmp.util.LogUtil;
+
 import edu.tsinghua.lumaqq.qq.QQ;
 import edu.tsinghua.lumaqq.qq.beans.QQUser;
 import edu.tsinghua.lumaqq.qq.packets.in.AddFriendAuthResponseReplyPacket;
@@ -205,7 +207,7 @@ public class BasicFamilyParser implements IParser {
 	 * @see edu.tsinghua.lumaqq.qq.packets.IParser#parseIncoming(java.nio.ByteBuffer, int, edu.tsinghua.lumaqq.qq.beans.QQUser)
 	 */
 	public InPacket parseIncoming(ByteBuffer buf, int len, QQUser user) throws PacketParseException {
-		 System.out.println("getCommand=" + Integer.toHexString(getCommand(buf, user)));
+		 LogUtil.log("getCommand=" + Integer.toHexString(getCommand(buf, user)));
 	    try {
             switch(getCommand(buf, user)) {
                 case QQ.QQ09_CMD_LOGIN_REQUEST:

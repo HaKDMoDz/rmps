@@ -49,7 +49,6 @@ import edu.tsinghua.lumaqq.qq.packets.PacketParseException;
  * @author luma
  * @see edu.tsinghua.lumaqq.qq.beans.QQFriend
  */
-@Deprecated
 public class GetFriendListReplyPacket extends BasicInPacket {
     public char position;
     public List<QQFriend> friends;

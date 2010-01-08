@@ -35,6 +35,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
+import rmp.util.LogUtil;
 import edu.tsinghua.lumaqq.qq.beans.Card;
 import edu.tsinghua.lumaqq.qq.beans.ContactInfo;
 import edu.tsinghua.lumaqq.qq.beans.FriendRemark;
@@ -1987,7 +1988,7 @@ public class QQClient implements IQQListener,Serializable {
     private int position = 0;
 	public void qqEvent(QQEvent e) {
 //		handler.sendMessage(Message.obtain(handler, e.type, e.getSource()));
-		System.out.println("QQEvent=" + Integer.toHexString(e.type));
+	    LogUtil.log("QQEvent=" + Integer.toHexString(e.type));
 		switch(e.type) {
 		    case QQEvent.LOGIN_GET_TOKEN_OK:
 		        processGetLoginTokenSuccess();
@@ -2005,7 +2006,6 @@ public class QQClient implements IQQListener,Serializable {
 		    	loginSendInfo();
 		    	break;
 //		    case QQEvent.LOGIN_NEED_VERIFY:
-//		    
 //		    	break;
 			case QQEvent.LOGIN_OK:
 				processLoginSuccess();

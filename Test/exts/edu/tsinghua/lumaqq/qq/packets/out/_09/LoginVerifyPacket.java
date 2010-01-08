@@ -21,6 +21,7 @@ package edu.tsinghua.lumaqq.qq.packets.out._09;
 
 import java.nio.ByteBuffer;
 
+import rmp.util.LogUtil;
 import edu.tsinghua.lumaqq.qq.QQ;
 import edu.tsinghua.lumaqq.qq.Util;
 import edu.tsinghua.lumaqq.qq.beans.QQUser;
@@ -143,7 +144,7 @@ public class LoginVerifyPacket extends BasicOutPacket {
 		verifyData.put( user.getInitKey() ); //verify_key1
 		verifyData.put( user.getPasswordKey() ); //verify_key2
 		
-		if( verifyData.position() != 104 ){ System.out.println("Wrong pos!!!");	}
+		if( verifyData.position() != 104 ){ LogUtil.log("Wrong pos!!!");	}
 		//加密 verifyData
 		byte[] encrypted = crypter.encrypt(verifyData.array(), 0, verifyData.position(), user.getMd5pwd2());
 		

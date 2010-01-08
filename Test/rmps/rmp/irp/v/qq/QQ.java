@@ -7,6 +7,8 @@
  */
 package rmp.irp.v.qq;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,17 +27,26 @@ import com.amonsoft.rmps.irp.v.IAccount;
 import com.amonsoft.rmps.irp.v.IConnect;
 
 import edu.tsinghua.lumaqq.qq.QQClient;
+import edu.tsinghua.lumaqq.qq.Util;
 import edu.tsinghua.lumaqq.qq.beans.CardStub;
 import edu.tsinghua.lumaqq.qq.beans.ContactInfo;
+import edu.tsinghua.lumaqq.qq.beans.FriendOnlineEntry;
+import edu.tsinghua.lumaqq.qq.beans.FriendRemark;
+import edu.tsinghua.lumaqq.qq.beans.FriendStatus;
 import edu.tsinghua.lumaqq.qq.beans.IMMessage;
 import edu.tsinghua.lumaqq.qq.beans.QQFriend;
 import edu.tsinghua.lumaqq.qq.beans.QQUser;
 import edu.tsinghua.lumaqq.qq.events.IQQListener;
 import edu.tsinghua.lumaqq.qq.events.QQEvent;
 import edu.tsinghua.lumaqq.qq.net.PortGateFactory;
+import edu.tsinghua.lumaqq.qq.packets.Packet;
+import edu.tsinghua.lumaqq.qq.packets.in.AddFriendExReplyPacket;
+import edu.tsinghua.lumaqq.qq.packets.in.AuthInfoOpReplyPacket;
 import edu.tsinghua.lumaqq.qq.packets.in.ClusterCommandReplyPacket;
+import edu.tsinghua.lumaqq.qq.packets.in.FriendChangeStatusPacket;
 import edu.tsinghua.lumaqq.qq.packets.in.FriendDataOpReplyPacket;
 import edu.tsinghua.lumaqq.qq.packets.in.GetFriendListReplyPacket;
+import edu.tsinghua.lumaqq.qq.packets.in.GetOnlineOpReplyPacket;
 import edu.tsinghua.lumaqq.qq.packets.in.GetUserInfoReplyPacket;
 import edu.tsinghua.lumaqq.qq.packets.in.GroupDataOpReplyPacket;
 import edu.tsinghua.lumaqq.qq.packets.in.ReceiveIMPacket;
@@ -44,6 +55,8 @@ import edu.tsinghua.lumaqq.qq.packets.in._09.LoginGetListReplyPacket;
 import edu.tsinghua.lumaqq.qq.packets.in._09.LoginRequestReplyPacket;
 import edu.tsinghua.lumaqq.qq.packets.in._09.LoginVerifyReplyPacket;
 import edu.tsinghua.lumaqq.qq.packets.out.AddFriendAuthResponsePacket;
+import edu.tsinghua.lumaqq.qq.packets.out.AuthInfoOpPacket;
+import edu.tsinghua.lumaqq.qq.packets.out.FriendDataOpPacket;
 
 /**
  * <ul>
@@ -61,6 +74,8 @@ public class QQ implements IAccount, IQQListener
     private Map<String, Session> sessions;
     private QQUser user;
     private QQClient messenger;
+    private int lastMsgSeq;
+    private int friendsRemarkPage;
     private int loginGetListPosition;
     private List<Catalog> catalogs = new ArrayList<Catalog>();;
     private List<QQGroup> qqGroups;
@@ -85,13 +100,13 @@ public class QQ implements IAccount, IQQListener
                 connect = new Connect();
                 connect.load();
                 user = new QQUser(Integer.parseInt(connect.getUser()), connect.getPwds());
-                LogUtil.log("QQ初始化成功！");
+                LogUtil.log("QQ机器人初始化成功！");
                 break;
             case IPresence.SIGN:
                 try
                 {
                     user.setLoginMode(edu.tsinghua.lumaqq.qq.QQ.QQ_LOGIN_MODE_NORMAL);
-                    user.setStatus(edu.tsinghua.lumaqq.qq.QQ.QQ_STATUS_ONLINE);
+                    user.setStatus(edu.tsinghua.lumaqq.qq.QQ.QQ_STATUS_QME);
                     user.setUdp(true);
 
                     messenger = new QQClient();
@@ -100,7 +115,7 @@ public class QQ implements IAccount, IQQListener
                     messenger.addQQListener(this);
                     messenger.setLoginServer(connect.getHost());
                     messenger.login();
-                    LogUtil.log("QQ登录成功！");
+                    LogUtil.log("QQ机器人登录成功！");
                 }
                 catch (Exception exp)
                 {
@@ -133,9 +148,9 @@ public class QQ implements IAccount, IQQListener
     }
 
     @Override
-    public IContact getContact(String user)
+    public IContact getContact(String key)
     {
-        return null;
+        return contacts.get(key);
     }
 
     @Override
@@ -150,15 +165,23 @@ public class QQ implements IAccount, IQQListener
         switch (evt.type)
         {
             case QQEvent.IM_RECEIVED:
-                ReceiveIMPacket packet = (ReceiveIMPacket) evt.getSource();
-                String message = parseIMMessage(packet.normalIM.messages);
-                Control.getInstance().instantMessageReceived(getSession(Integer.toString(packet.header.sender)), new Message(message));
+                processMessageReceived((ReceiveIMPacket) evt.getSource());
                 break;
-
-            /* 登录事件 */
-            case QQEvent.LOGIN_NEED_VERIFY: // 登录需要验证
+            // 收到一条重复消息
+            case QQEvent.IM_DUPLICATED:
+                processMessageReceived((ReceiveIMPacket) evt.getSource());
+                break;
+            // 群消息
+            case QQEvent.IM_CLUSTER_RECEIVED:
+                break;
+            // 消息发送成功
+            case QQEvent.IM_SEND_OK:
+                break;
+            // 登录需要验证
+            case QQEvent.LOGIN_NEED_VERIFY:
                 processLoginRequestVerify((LoginRequestReplyPacket) evt.getSource());
                 break;
+            // 登录成功，请求分组列表
             case QQEvent.LOGIN_OK:
                 messenger.user_GetGroupNames();
                 break;
@@ -169,30 +192,6 @@ public class QQ implements IAccount, IQQListener
             case QQEvent.LOGIN_UNKNOWN_ERROR: // 登录错误
                 LogUtil.log("登录时发生未知错误");
                 logout();
-                break;
-            case QQEvent.SYS_TIMEOUT: // 系统超时
-                LogUtil.log("登录超时:" + Integer.toHexString(evt.operation));
-                logout();
-                break;
-            case -1:
-                LogUtil.log(evt.toString());
-                break;
-            case QQEvent.USER_GET_INFO_OK: // 得到用户信息成功
-                ContactInfo contactInfo = ((GetUserInfoReplyPacket) evt.getSource()).contactInfo;
-                if (contactInfo.qq != user.getQQ())
-                {
-                    IContact friend = contacts.get(contactInfo.qq);
-                    if (friend != null)
-                    {
-                        ((Contact) friend).setContactInfo(contactInfo);
-                    }
-                }
-                break;
-            case QQEvent.FRIEND_GET_GROUP_NAMES_OK: // 下载分组名称成功，发送LoginGetListPacket
-                processGroup((GroupDataOpReplyPacket) evt.getSource());
-                // 获取好友和群列表
-                loginGetListPosition = 1;
-                messenger.loginGetList(0);
                 break;
             case QQEvent.LOGIN_GET_LIST_OK:
                 LoginGetListReplyPacket lp = (LoginGetListReplyPacket) evt.getSource();
@@ -206,15 +205,17 @@ public class QQ implements IAccount, IQQListener
                     // 获取好友信息
                     messenger.getFriendList();
 
+                    // 获得群信息
                     if (receiveGroupIm)
                     {
-                        // 获得群信息
                         getQQGroupsInfo();
                     }
                 }
                 break;
-            case QQEvent.FRIEND_GET_LIST_OK: // 获得好友列表成功
+            // 获得好友列表成功
+            case QQEvent.FRIEND_GET_LIST_OK:
                 GetFriendListReplyPacket fp = (GetFriendListReplyPacket) evt.getSource();
+                System.out.println(Integer.toHexString(fp.position));
                 processFriendList(fp);
                 if (fp.position != 0xFFFF)
                 {
@@ -222,27 +223,98 @@ public class QQ implements IAccount, IQQListener
                 }
                 else
                 {
-                    // for (int i=0; i<mChildData.size(); i++) {
-                    // Collections.sort(mChildData.get(i),
-                    // Comparators.getComparator());
-                    // }
-                    // //获取在线好友列表
-                    // client.user_GetOnline();
+                    // 获取在线好友列表
+                    // messenger.user_GetOnline();
                     // 获取好友备注
                     messenger.user_GetRemarks(0);
                 }
-
                 break;
-            case QQEvent.FRIEND_GET_REMARKS_OK: // 得到好友备注
-                boolean hasRemark = ((FriendDataOpReplyPacket) evt.getSource()).hasRemark;
-                if (hasRemark)
+            // 得到在线好友列表成功
+            case QQEvent.FRIEND_GET_ONLINE_OK:
+                processOnlineFriends((GetOnlineOpReplyPacket) evt.getSource());
+                break;
+            // 得到好友备注成功
+            case QQEvent.FRIEND_GET_REMARKS_OK:
+                processFriendsRemark((FriendDataOpReplyPacket) evt.getSource());
+                break;
+            case QQEvent.USER_STATUS_CHANGE_OK:
+                LogUtil.log("在线状态登录成功！");
+                break;
+            // 好友状态变化
+            case QQEvent.FRIEND_STATUS_CHANGED:
+                processFriendChangeStatus((FriendChangeStatusPacket) evt.getSource());
+                break;
+            // 好友属性变化
+            case QQEvent.FRIEND_PROPERTY_CHANGED:
+                break;
+            // 得到用户信息成功
+            case QQEvent.USER_GET_INFO_OK:
+                ContactInfo contactInfo = ((GetUserInfoReplyPacket) evt.getSource()).contactInfo;
+                if (contactInfo.qq != user.getQQ())
                 {
-                    // friendsRemarkPage++;
-                    // client.user_GetRemarks(friendsRemarkPage);
+                    IContact friend = contacts.get(contactInfo.qq);
+                    if (friend != null)
+                    {
+                        ((Contact) friend).setContactInfo(contactInfo);
+                    }
                 }
                 break;
+            // 添加一个好友成功
+            case QQEvent.FRIEND_ADD_OK:
+                int qq = ((AddFriendExReplyPacket) evt.getSource()).friendQQ;
+                Contact buddy = (Contact) contacts.get(qq);
+                if (buddy != null)
+                {
+                    switch (buddy.presence.getQQS())
+                    {
+                        // 对方请求加我好友并允许我加对方好友，我提交通过后把对方加好友，这样就不需要发送
+                        case edu.tsinghua.lumaqq.qq.QQ.QQ_AUTH_ALREADY:
+                            // AuthInfoOpPacket
+                            processFriendAddOk(qq);
+                            break;
+                        // 我加对方好友，对方允许任意人加好友，需要发送 AuthInfoOpPacket
+                        default:
+                            processFriendAddGetAuth((AddFriendExReplyPacket) evt.getSource());
+                            break;
+                    }
+                }
+                break;
+            case QQEvent.FRIEND_ADD_NO_AUTH:
+            case QQEvent.FRIEND_ADD_NEED_AUTH:
+                processFriendAddGetAuth((AddFriendExReplyPacket) evt.getSource());
+                break;
+            case QQEvent.FRIEND_GET_AUTH_INFO_OK:
+                sendFriendAddAuthInfo((AuthInfoOpReplyPacket) evt.getSource());
+                break;
+            case QQEvent.FRIEND_GET_AUTH_INFO_FROM_URL:
+                processGetAuthInfoFromUrl((AuthInfoOpReplyPacket) evt.getSource());
+                break;
+            case QQEvent.FRIEND_SUBMIT_AUTO_INFO_OK:
+                sendFriendAddAuthInfo((AuthInfoOpReplyPacket) evt.getSource());
+                break;
+            // 修改备注成功
+            case QQEvent.FRIEND_UPLOAD_REMARKS_OK:
+                updateBuddyRemark((FriendDataOpPacket) evt.getSource());
+                break;
+            // 上传好友分组成功
+            case QQEvent.FRIEND_UPLOAD_GROUPS_OK:
+                break;
+            // 下载分组名称成功，发送LoginGetListPacket
+            case QQEvent.FRIEND_GET_GROUP_NAMES_OK:
+                processGroup((GroupDataOpReplyPacket) evt.getSource());
+                // 获取好友和群列表
+                loginGetListPosition = 1;
+                messenger.loginGetList(0);
+                break;
+            case QQEvent.USER_KEEP_ALIVE_FAIL: // 保持连接失败
+                logout();
+                break;
+            case QQEvent.USER_KEEP_ALIVE_OK:
+                break;
             case QQEvent.CLUSTER_GET_INFO_FAIL:
-            case QQEvent.CLUSTER_GET_INFO_OK: // 得到群信息成功
+                break;
+            // 得到群信息成功
+            case QQEvent.CLUSTER_GET_INFO_OK:
                 processClusterInfo((ClusterCommandReplyPacket) evt.getSource());
                 break;
             case QQEvent.CLUSTER_GET_MEMBER_INFO_FAIL:
@@ -260,27 +332,31 @@ public class QQ implements IAccount, IQQListener
             case QQEvent.CLUSTER_GET_ONLINE_MEMBER_OK:
                 processGetOnlineMember((ClusterCommandReplyPacket) evt.getSource());
                 break;
-            case QQEvent.USER_KEEP_ALIVE_FAIL: // 保持连接失败
-                logout();
-                break;
-            case QQEvent.SYS_KICKED: // 被系统踢出
-                processSysKicked((ReceiveIMPacket) evt.getSource());
-                break;
-            case QQEvent.IM_SEND_OK: // 消息发送成功
-            case QQEvent.USER_KEEP_ALIVE_OK:
-                break;
             case QQEvent.SYS_REQUEST_ADD_EX:
                 processSysRequestAdd((SystemNotificationPacket) evt.getSource());
                 break;
-            case QQEvent.FRIEND_AUTH_SEND_OK: // 对方加我好友，我通过并加对方好友
-                int qq = ((AddFriendAuthResponsePacket) evt.getSource()).getTo();
-                IContact buddy = contacts.get(qq);
+            // 对方加我好友，我通过并加对方好友
+            case QQEvent.FRIEND_AUTH_SEND_OK:
+                qq = ((AddFriendAuthResponsePacket) evt.getSource()).getTo();
+                buddy = (Contact) contacts.get(qq);
                 if (buddy == null)
                 {
                     buddy = new Contact();
                     contacts.put(qq, buddy);
                 }
                 messenger.user_Add(qq);
+                break;
+            case QQEvent.SYS_TIMEOUT: // 系统超时
+                Packet p = (Packet) evt.getSource();
+                LogUtil.log(p.getPacketName() + " 操作超时");
+                break;
+            //
+            case QQEvent.SYS_APPROVE_ADD_BIDI:
+                processFriendAddOk(((SystemNotificationPacket) evt.getSource()).from);
+                break;
+            case QQEvent.SYS_KICKED: // 被系统踢出
+                LogUtil.log("您被系统踢了！");
+                logout();
                 break;
             // 错误处理
             case QQEvent.ERROR_CONNECTION_BROKEN:
@@ -311,6 +387,7 @@ public class QQ implements IAccount, IQQListener
         catalogs.add(new Catalog("0", "我的好友"));
         for (int i = 0; i < names.size(); i++)
         {
+            System.out.println(seqs.get(i) + ":" + names.get(i));
             catalogs.add(new Catalog(seqs.get(i).toString(), names.get(i)));
         }
     }
@@ -330,6 +407,7 @@ public class QQ implements IAccount, IQQListener
         {
             Contact contact = new Contact();
             contact.friend = friend;
+            System.out.println(friend.qqNum + ":" + friend.nick);
             String group = Integer.toString(contact.friend.groupSeq);
             for (Catalog catalog : catalogs)
             {
@@ -364,14 +442,12 @@ public class QQ implements IAccount, IQQListener
 
     private void processFriendList(GetFriendListReplyPacket fp)
     {
-        List<QQFriend> friends = fp.friends;
-        for (int i = 0; i < friends.size(); i++)
+        for (QQFriend friend : fp.friends)
         {
-            QQFriend friend = friends.get(i);
-
             IContact contact = contacts.get(friend.qqNum);
             if (contact != null)
             {
+                System.out.println(friend.qqNum + ":" + friend.nick);
                 ((Contact) contact).setFriendInfo(friend);
             }
         }
@@ -466,7 +542,7 @@ public class QQ implements IAccount, IQQListener
                         int originalState = Integer.parseInt(member.presence.getImc());
                         if (originalState != edu.tsinghua.lumaqq.qq.QQ.QQ_STATUS_ONLINE)
                         {
-                            member.presence.setImc(edu.tsinghua.lumaqq.qq.QQ.QQ_STATUS_ONLINE + "");
+                            member.presence.setQQS(edu.tsinghua.lumaqq.qq.QQ.QQ_STATUS_ONLINE);
                             members.remove(member);
                             members.add(member);
                         }
@@ -476,11 +552,6 @@ public class QQ implements IAccount, IQQListener
                 break;
             }
         }
-    }
-
-    private void processSysKicked(ReceiveIMPacket packet)
-    {
-        logout();
     }
 
     private void processSysRequestAdd(SystemNotificationPacket packet)
@@ -514,7 +585,7 @@ public class QQ implements IAccount, IQQListener
     {
         try
         {
-            javax.swing.JLabel lbl = new javax.swing.JLabel("请输入验证码!", new ImageIcon(in.pngData), javax.swing.JLabel.BOTTOM);
+            javax.swing.JLabel lbl = new javax.swing.JLabel("请输入验证码!", new ImageIcon(in.pngData), javax.swing.SwingConstants.LEFT);
             String code = JOptionPane.showInputDialog(null, lbl, "登录验证", JOptionPane.INFORMATION_MESSAGE);
             messenger.loginRequest(in.answerToken, code.getBytes(), (byte) 0x0);
         }
@@ -535,5 +606,158 @@ public class QQ implements IAccount, IQQListener
             sessions.put(id, session);
         }
         return session;
+    }
+
+    private synchronized void processOnlineFriends(GetOnlineOpReplyPacket packet)
+    {
+        for (FriendOnlineEntry entry : packet.onlineFriends)
+        {
+            FriendStatus status = entry.status;
+            changeFriendStatus(Integer.toString(status.qqNum), status.status);
+        }
+        if (!packet.finished)
+        {
+            messenger.user_GetOnline(packet.position);
+        }
+    }
+
+    private void changeFriendStatus(String qq, byte status)
+    {
+        // 设置分组的在线好友数量
+        Contact buddy = (Contact) getContact(qq);
+        if (buddy == null)
+        {
+            return;
+        }
+
+        if (status != buddy.presence.getQQS())
+        {
+            buddy.presence.setQQS(status);
+            Control.getInstance().contactPresenceChanged(getSession(qq));
+        }
+    }
+
+    protected synchronized void processFriendsRemark(FriendDataOpReplyPacket packet)
+    {
+        if (packet.hasRemark)
+        {
+            messenger.user_GetRemarks(friendsRemarkPage++);
+        }
+
+        Map<Integer, FriendRemark> map = packet.remarks;
+        for (Integer qq : map.keySet())
+        {
+            Contact buddy = (Contact) getContact(qq.toString());
+            if (buddy != null)
+            {
+                buddy.setFriendRemark(map.get(qq));
+            }
+            else
+            {
+                // TODO 没有找到，加入陌生人
+            }
+        }
+    }
+
+    protected void processFriendChangeStatus(FriendChangeStatusPacket packet)
+    {
+        String qq = Integer.toString(packet.friendQQ);
+        changeFriendStatus(qq, packet.status);
+    }
+
+    private void processFriendAddOk(int qq)
+    {
+        // 上传好友分组
+        messenger.user_AddToList(0, qq);
+        // 上传备注
+        messenger.user_UploadRemark(qq, new FriendRemark());
+        // 获取好友信息
+        messenger.user_GetInfo(qq);
+    }
+
+    private void processFriendAddGetAuth(AddFriendExReplyPacket packet)
+    {
+        AuthInfoOpPacket p = new AuthInfoOpPacket(user);
+        p.setTo(packet.friendQQ);
+        p.setSubCommand(edu.tsinghua.lumaqq.qq.QQ.QQ_SUB_CMD_GET_AUTH_INFO);
+
+        Contact buddy = (Contact) contacts.get(packet.friendQQ);
+        if (buddy == null)
+        {
+            buddy = new Contact();
+            contacts.put(packet.friendQQ, buddy);
+        }
+        // buddy.setVerifyFlag(packet.authCode);
+
+        messenger.sendPacket(p);
+    }
+
+    private void sendFriendAddAuthInfo(AuthInfoOpReplyPacket packet)
+    {
+        final byte[] authInfo = packet.authInfo;
+
+        // 获取qq号
+        AuthInfoOpPacket outPacket = (AuthInfoOpPacket) messenger.retrieveSent(packet);
+        final int qq = outPacket.getTo();
+
+        Contact buddy = (Contact) contacts.get(qq);
+        if (buddy.presence.getQQS() == edu.tsinghua.lumaqq.qq.QQ.QQ_AUTH_NEED)
+        {
+            messenger.user_SendAuth(qq, authInfo, "机器人小木");
+        }
+        else if (buddy.presence.getQQS() == edu.tsinghua.lumaqq.qq.QQ.QQ_AUTH_NO)
+        {
+            messenger.user_SendAuth(qq, authInfo, "");
+        }
+    }
+
+    private void processGetAuthInfoFromUrl(AuthInfoOpReplyPacket packet)
+    {
+        try
+        {
+            String url = Util.getString(packet.authInfo);
+
+            HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+            conn.setDoInput(true);
+            conn.connect();
+            String sessionId = conn.getHeaderField("getqqsession");
+
+            AuthInfoOpPacket outPacket = (AuthInfoOpPacket) messenger.retrieveSent(packet);
+            int qq = outPacket.getTo();
+            // 提交验证信息
+            AuthInfoOpPacket p = new AuthInfoOpPacket(user);
+            p.setSubCommand(edu.tsinghua.lumaqq.qq.QQ.QQ_SUB_CMD_SUBMIT_AUTH_INFO);
+            p.setTo(qq);
+            p.setAuthString("");
+            p.setCookie(sessionId);
+            messenger.sendPacket(p);
+        }
+        catch (Exception exp)
+        {
+            LogUtil.exception(exp);
+        }
+    }
+
+    private void updateBuddyRemark(FriendDataOpPacket packet)
+    {
+        Contact friend = (Contact) contacts.get(packet.getQQ());
+        if (friend != null)
+        {
+            friend.setName(packet.getRemark().name);
+        }
+    }
+
+    private void processMessageReceived(ReceiveIMPacket packet)
+    {
+        if (lastMsgSeq == packet.header.sequence)
+        {
+            return;
+        }
+        if (packet.normalIM != null)
+        {
+            lastMsgSeq = packet.header.sequence;
+            String message = parseIMMessage(packet.normalIM.messages);
+            Control.getInstance().instantMessageReceived(getSession(Integer.toString(packet.header.sender)), new Message(message));
+        }
     }
 }

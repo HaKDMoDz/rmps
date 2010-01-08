@@ -29,8 +29,7 @@ import edu.tsinghua.lumaqq.qq.QQ;
  */
 public class Presence implements IPresence
 {
-    private int asc;
-    private int imc;
+    private byte imc;
 
     /*
      * (non-Javadoc)
@@ -40,7 +39,25 @@ public class Presence implements IPresence
     @Override
     public int getAsc()
     {
-        return asc;
+        switch (this.imc)
+        {
+            case QQ.QQ_STATUS_QME:
+                return IPresence.IDLE;
+            case QQ.QQ_STATUS_ONLINE:
+                return IPresence.LINE;
+            case QQ.QQ_STATUS_OFFLINE:
+                return IPresence.DOWN;
+            case QQ.QQ_STATUS_AWAY:
+                return IPresence.AWAY;
+            case QQ.QQ_STATUS_BUSY:
+                return IPresence.BUSY;
+            case QQ.QQ_STATUS_QUIET:
+                return 4;
+            case QQ.QQ_STATUS_HIDDEN:
+                return IPresence.HIDE;
+            default:
+                return 9;
+        }
     }
 
     /*
@@ -54,27 +71,14 @@ public class Presence implements IPresence
         return imc + "";
     }
 
-    public int setImc(String imc)
+    public byte getQQS()
     {
-        switch (this.imc)
-        {
-            case QQ.QQ_STATUS_QME:
-                return 1;
-            case QQ.QQ_STATUS_ONLINE:
-                return 2;
-            case QQ.QQ_STATUS_OFFLINE:
-                return 7;
-            case QQ.QQ_STATUS_AWAY:
-                return 5;
-            case QQ.QQ_STATUS_BUSY:
-                return 3;
-            case QQ.QQ_STATUS_QUIET:
-                return 4;
-            case QQ.QQ_STATUS_HIDDEN:
-                return 6;
-            default:
-                return 9;
-        }
+        return imc;
+    }
+
+    public void setQQS(byte qqs)
+    {
+        this.imc = qqs;
     }
 
     /*
