@@ -79,7 +79,7 @@ public class QQ implements IAccount, IQQListener
     private int loginGetListPosition;
     private List<Catalog> catalogs = new ArrayList<Catalog>();;
     private List<QQGroup> qqGroups;
-    private Map<Integer, IContact> contacts = new HashMap<Integer, IContact>(); // 好友QQ号与名称对应Map
+    private Map<String, IContact> contacts = new HashMap<String, IContact>(); // 好友QQ号与名称对应Map
 
     /**
      * 是否获得群信息
@@ -125,11 +125,7 @@ public class QQ implements IAccount, IQQListener
             case IPresence.LINE:
                 break;
             case IPresence.DOWN:
-                if (user != null && user.isLoggedIn())
-                {
-                    messenger.logout();
-                }
-                messenger.release();
+                logout();
                 break;
             default:
                 break;
@@ -215,7 +211,6 @@ public class QQ implements IAccount, IQQListener
             // 获得好友列表成功
             case QQEvent.FRIEND_GET_LIST_OK:
                 GetFriendListReplyPacket fp = (GetFriendListReplyPacket) evt.getSource();
-                System.out.println(Integer.toHexString(fp.position));
                 processFriendList(fp);
                 if (fp.position != 0xFFFF)
                 {
@@ -226,7 +221,7 @@ public class QQ implements IAccount, IQQListener
                     // 获取在线好友列表
                     // messenger.user_GetOnline();
                     // 获取好友备注
-                    messenger.user_GetRemarks(0);
+                    // messenger.user_GetRemarks(0);
                 }
                 break;
             // 得到在线好友列表成功
@@ -252,7 +247,7 @@ public class QQ implements IAccount, IQQListener
                 ContactInfo contactInfo = ((GetUserInfoReplyPacket) evt.getSource()).contactInfo;
                 if (contactInfo.qq != user.getQQ())
                 {
-                    IContact friend = contacts.get(contactInfo.qq);
+                    IContact friend = contacts.get(Integer.toString(contactInfo.qq));
                     if (friend != null)
                     {
                         ((Contact) friend).setContactInfo(contactInfo);
@@ -261,8 +256,9 @@ public class QQ implements IAccount, IQQListener
                 break;
             // 添加一个好友成功
             case QQEvent.FRIEND_ADD_OK:
-                int qq = ((AddFriendExReplyPacket) evt.getSource()).friendQQ;
-                Contact buddy = (Contact) contacts.get(qq);
+                AddFriendExReplyPacket aferp = (AddFriendExReplyPacket) evt.getSource();
+                String qqNum = Integer.toString(aferp.friendQQ);
+                Contact buddy = (Contact) contacts.get(qqNum);
                 if (buddy != null)
                 {
                     switch (buddy.presence.getQQS())
@@ -270,7 +266,7 @@ public class QQ implements IAccount, IQQListener
                         // 对方请求加我好友并允许我加对方好友，我提交通过后把对方加好友，这样就不需要发送
                         case edu.tsinghua.lumaqq.qq.QQ.QQ_AUTH_ALREADY:
                             // AuthInfoOpPacket
-                            processFriendAddOk(qq);
+                            processFriendAddOk(aferp.friendQQ);
                             break;
                         // 我加对方好友，对方允许任意人加好友，需要发送 AuthInfoOpPacket
                         default:
@@ -309,8 +305,6 @@ public class QQ implements IAccount, IQQListener
             case QQEvent.USER_KEEP_ALIVE_FAIL: // 保持连接失败
                 logout();
                 break;
-            case QQEvent.USER_KEEP_ALIVE_OK:
-                break;
             case QQEvent.CLUSTER_GET_INFO_FAIL:
                 break;
             // 得到群信息成功
@@ -337,14 +331,15 @@ public class QQ implements IAccount, IQQListener
                 break;
             // 对方加我好友，我通过并加对方好友
             case QQEvent.FRIEND_AUTH_SEND_OK:
-                qq = ((AddFriendAuthResponsePacket) evt.getSource()).getTo();
-                buddy = (Contact) contacts.get(qq);
+                AddFriendAuthResponsePacket aarp = (AddFriendAuthResponsePacket) evt.getSource();
+                qqNum = Integer.toString(aarp.getTo());
+                buddy = (Contact) contacts.get(qqNum);
                 if (buddy == null)
                 {
                     buddy = new Contact();
-                    contacts.put(qq, buddy);
+                    contacts.put(qqNum, buddy);
                 }
-                messenger.user_Add(qq);
+                messenger.user_Add(aarp.getTo());
                 break;
             case QQEvent.SYS_TIMEOUT: // 系统超时
                 Packet p = (Packet) evt.getSource();
@@ -375,6 +370,11 @@ public class QQ implements IAccount, IQQListener
 
     private void logout()
     {
+        if (user != null && user.isLoggedIn())
+        {
+            messenger.logout();
+        }
+        messenger.release();
     }
 
     // 处理好友分组的信息
@@ -387,7 +387,6 @@ public class QQ implements IAccount, IQQListener
         catalogs.add(new Catalog("0", "我的好友"));
         for (int i = 0; i < names.size(); i++)
         {
-            System.out.println(seqs.get(i) + ":" + names.get(i));
             catalogs.add(new Catalog(seqs.get(i).toString(), names.get(i)));
         }
     }
@@ -407,7 +406,8 @@ public class QQ implements IAccount, IQQListener
         {
             Contact contact = new Contact();
             contact.friend = friend;
-            System.out.println(friend.qqNum + ":" + friend.nick);
+            contact.presence = new Presence();
+            contacts.put(Integer.toString(friend.qqNum), contact);
             String group = Integer.toString(contact.friend.groupSeq);
             for (Catalog catalog : catalogs)
             {
@@ -444,10 +444,9 @@ public class QQ implements IAccount, IQQListener
     {
         for (QQFriend friend : fp.friends)
         {
-            IContact contact = contacts.get(friend.qqNum);
+            IContact contact = contacts.get(Integer.toString(friend.qqNum));
             if (contact != null)
             {
-                System.out.println(friend.qqNum + ":" + friend.nick);
                 ((Contact) contact).setFriendInfo(friend);
             }
         }
@@ -624,15 +623,15 @@ public class QQ implements IAccount, IQQListener
     private void changeFriendStatus(String qq, byte status)
     {
         // 设置分组的在线好友数量
-        Contact buddy = (Contact) getContact(qq);
-        if (buddy == null)
+        Contact contact = (Contact) getContact(qq);
+        if (contact == null)
         {
             return;
         }
 
-        if (status != buddy.presence.getQQS())
+        if (status != contact.presence.getQQS())
         {
-            buddy.presence.setQQS(status);
+            contact.presence.setQQS(status);
             Control.getInstance().contactPresenceChanged(getSession(qq));
         }
     }
@@ -680,12 +679,13 @@ public class QQ implements IAccount, IQQListener
         AuthInfoOpPacket p = new AuthInfoOpPacket(user);
         p.setTo(packet.friendQQ);
         p.setSubCommand(edu.tsinghua.lumaqq.qq.QQ.QQ_SUB_CMD_GET_AUTH_INFO);
+        String qqNum = Integer.toString(packet.friendQQ);
 
-        Contact buddy = (Contact) contacts.get(packet.friendQQ);
+        Contact buddy = (Contact) contacts.get(qqNum);
         if (buddy == null)
         {
             buddy = new Contact();
-            contacts.put(packet.friendQQ, buddy);
+            contacts.put(qqNum, buddy);
         }
         // buddy.setVerifyFlag(packet.authCode);
 
@@ -698,9 +698,9 @@ public class QQ implements IAccount, IQQListener
 
         // 获取qq号
         AuthInfoOpPacket outPacket = (AuthInfoOpPacket) messenger.retrieveSent(packet);
-        final int qq = outPacket.getTo();
+        int qq = outPacket.getTo();
 
-        Contact buddy = (Contact) contacts.get(qq);
+        Contact buddy = (Contact) contacts.get(Integer.toString(qq));
         if (buddy.presence.getQQS() == edu.tsinghua.lumaqq.qq.QQ.QQ_AUTH_NEED)
         {
             messenger.user_SendAuth(qq, authInfo, "机器人小木");
@@ -740,7 +740,7 @@ public class QQ implements IAccount, IQQListener
 
     private void updateBuddyRemark(FriendDataOpPacket packet)
     {
-        Contact friend = (Contact) contacts.get(packet.getQQ());
+        Contact friend = (Contact) contacts.get(Integer.toString(packet.getQQ()));
         if (friend != null)
         {
             friend.setName(packet.getRemark().name);

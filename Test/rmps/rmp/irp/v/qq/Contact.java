@@ -83,7 +83,7 @@ public class Contact implements IContact
     @Override
     public String getEmail()
     {
-        return remark.email;
+        return remark != null ? remark.email : "";
     }
 
     public void setEmail(String email)

@@ -47,7 +47,11 @@ public class Session extends ASession
     @Override
     public void send(String message, boolean literal)
     {
-        messenger.im_Send(qq, message.getBytes());
+        if (literal)
+        {
+            message = appendCopy(this, appendPath(this, new StringBuffer()).append(message)).toString();
+        }
+        messenger.im_Send(contact.friend.qqNum, message.getBytes());
     }
 
     @Override

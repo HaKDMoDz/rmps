@@ -19,6 +19,7 @@ import rmp.irp.m.root.Root;
 import rmp.util.EnvUtil;
 import rmp.util.LogUtil;
 
+import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
@@ -169,16 +170,25 @@ public class Control implements IControl
         }
 
         // 管理人员处理方式
-        if (manager.get(session.getContact().getEmail().toLowerCase()) != null)
+        IContact contact = session.getContact();
+        if (contact == null)
         {
-            if ("$".equals(tmp))
+            return;
+        }
+        String email = contact.getEmail();
+        if (CharUtil.isValidate(email))
+        {
+            if (manager.get(email.toLowerCase()) != null)
             {
-                // IService service = services.get(00000000);
-                // if (service == null)
-                // {
-                // service = new Root();
-                // }
-                // service.doDeal(session, message);
+                if ("$".equals(tmp))
+                {
+                    // IService service = services.get(00000000);
+                    // if (service == null)
+                    // {
+                    // service = new Root();
+                    // }
+                    // service.doDeal(session, message);
+                }
             }
         }
 

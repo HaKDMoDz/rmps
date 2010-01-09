@@ -84,10 +84,17 @@ public class Process implements IProcess
         {
             tmp.append(this.func);
         }
+        
+        // 上级切换事件
+        int l = tmp.length();
+        if ("..".equals(func))
+        {
+            this.func = l > 0 ? tmp.substring(0, l - 1) : FUNC_DEFAULT;
+            return true;
+        }
 
         // 向上切换
         int i = 0;
-        int l = tmp.length();
         while (l > 0)
         {
             i = func.indexOf("../", i) + 3;

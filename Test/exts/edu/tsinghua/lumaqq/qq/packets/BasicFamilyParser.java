@@ -22,7 +22,6 @@ package edu.tsinghua.lumaqq.qq.packets;
 import java.nio.ByteBuffer;
 
 import rmp.util.LogUtil;
-
 import edu.tsinghua.lumaqq.qq.QQ;
 import edu.tsinghua.lumaqq.qq.beans.QQUser;
 import edu.tsinghua.lumaqq.qq.packets.in.AddFriendAuthResponseReplyPacket;
