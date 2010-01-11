@@ -256,7 +256,7 @@ public class I2010000 implements IService
                 {
                     msg.append("【查询城市】").append(city).append(session.newLine());
 
-                    msg.append(session.newLine()).append("【今日概况】").append(session.newLine());
+                    msg.append("【今日概况】").append(session.newLine());
                     msg.append("天气：").append(ele.attributeValue("stateDetailed")).append(session.newLine());
                     msg.append("温度：").append(ele.attributeValue("tem1")).append("℃～").append(ele.attributeValue("tem2")).append('℃').append(session.newLine());
                     msg.append("风力：").append(ele.attributeValue("windState")).append(session.newLine());
@@ -265,7 +265,7 @@ public class I2010000 implements IService
                     tmp = ele.attributeValue("time");
                     if (CharUtil.isValidate(tmp))
                     {
-                        msg.append(session.newLine()).append("【当前实况】").append(session.newLine());
+                        msg.append("【当前实况】").append(session.newLine());
                         msg.append("更新：").append(tmp).append(session.newLine());
                         msg.append("温度：").append(ele.attributeValue("temNow")).append('℃').append(session.newLine());
                         msg.append("风向：").append(ele.attributeValue("windDir")).append(session.newLine());
