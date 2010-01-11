@@ -350,7 +350,7 @@ public class QQ implements IAccount, IQQListener
                 processFriendAddOk(((SystemNotificationPacket) evt.getSource()).from);
                 break;
             case QQEvent.SYS_KICKED: // 被系统踢出
-                LogUtil.log("您被系统踢了！");
+                javax.swing.JOptionPane.showMessageDialog(null, "您被系统踢了，请重新登录QQ！");
                 logout();
                 break;
             // 错误处理

@@ -5,16 +5,15 @@
 	<classpathentry kind="src" path="rmps"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="lib/core/jaxen-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/core/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="lib/core/cryptix-jce-provider.jar"/>
-	<classpathentry kind="lib" path="lib/core/cryptix-openpgp-provider.jar"/>
 	<classpathentry kind="lib" path="lib/core/hsqldb-2.0.0.jar"/>
-	<classpathentry kind="lib" path="lib/core/httpclient-4.0.jar"/>
+	<classpathentry kind="lib" path="lib/core/httpmime-4.0.jar"/>
 	<classpathentry kind="lib" path="lib/core/httpcore-4.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/core/httpcore-nio-4.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/core/httpmime-4.0.jar"/>
-	<classpathentry kind="lib" path="lib/core/jaxen-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/irps/Fetion.jar"/>
+	<classpathentry kind="lib" path="lib/core/httpclient-4.0.jar"/>
+	<classpathentry kind="lib" path="lib/core/cryptix-jce-provider.jar"/>
+	<classpathentry kind="lib" path="lib/core/cryptix-openpgp-provider.jar"/>
 	<classpathentry kind="lib" path="lib/irps/jaimlib-0.5.jar"/>
 	<classpathentry kind="lib" path="lib/irps/jml-1.0b3-full.jar"/>
 	<classpathentry kind="lib" path="lib/irps/joscar-protocol.jar"/>
@@ -36,9 +35,8 @@
 	<classpathentry kind="lib" path="lib/jmf.jar"/>
 	<classpathentry kind="lib" path="lib/mediaplayer.jar"/>
 	<classpathentry kind="lib" path="lib/multiplayer.jar"/>
-	<classpathentry kind="lib" path="lib/saaj-impl-1.3.4.jar"/>
 	<classpathentry kind="lib" path="lib/saaj.jar"/>
+	<classpathentry kind="lib" path="lib/saaj-impl-1.3.4.jar"/>
 	<classpathentry kind="lib" path="lib/wsdl4j-1.5.1.jar"/>
-	<classpathentry kind="lib" path="lib/irps/pinyin4j-2.5.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
