@@ -8,6 +8,7 @@
 package com.amonsoft.util;
 
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 /**
  * <ul>
@@ -170,6 +171,28 @@ public class CharUtil
     {
         int len = text.length();
         return (minLen <= len) && (len <= maxLen);
+    }
+
+    /**
+     * 是否为整数
+     * 
+     * @param text
+     * @return
+     */
+    public static boolean isValidateInteger(String text)
+    {
+        return Pattern.matches("^-?\\d+$", text);
+    }
+
+    /**
+     * 是否为小数
+     * 
+     * @param text
+     * @return
+     */
+    public static boolean isValidateNumber(String text)
+    {
+        return Pattern.matches("^[+-]?\\d+\\.\\d+$", text);
     }
 
     /**

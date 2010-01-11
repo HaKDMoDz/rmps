@@ -61,6 +61,9 @@ public class I2020000 implements IService
     {
         try
         {
+            paPtn = Pattern.compile("(\\[')(.*?)('\\])");
+            piPtn = Pattern.compile("'(.*?)'");
+
             Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
             Element element = (Element) document.selectSingleNode("/irps/I2020000/item[@id='配置']/map[@key='path']");
             if (element != null)
@@ -72,9 +75,6 @@ public class I2020000 implements IService
             {
                 args = element.getText();
             }
-
-            paPtn = Pattern.compile("(\\[')(.*?)('\\])");
-            piPtn = Pattern.compile("'(.*?)'");
 
             LogUtil.log(getName() + " 初始化成功！");
             return true;
