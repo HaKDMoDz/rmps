@@ -66,12 +66,13 @@ public class I2020000 implements IService
             piPtn = Pattern.compile("'(.*?)'");
 
             Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
-            Element element = (Element) document.selectSingleNode("/irps/I2020000/item[@id='配置']/map[@key='path']");
+            Element root = (Element) document.selectSingleNode("/irps/" + getCode());
+            Element element = (Element) root.selectSingleNode("item[@id='配置']/map[@key='path']");
             if (element != null)
             {
                 path = element.getText();
             }
-            element = (Element) document.selectSingleNode("/irps/I2020000/item[@id='配置']/map[@key='args']");
+            element = (Element) root.selectSingleNode("item[@id='配置']/map[@key='args']");
             if (element != null)
             {
                 args = element.getText();
@@ -90,7 +91,7 @@ public class I2020000 implements IService
     @Override
     public String getCode()
     {
-        return "52020000";
+        return "I2020000";
     }
 
     @Override

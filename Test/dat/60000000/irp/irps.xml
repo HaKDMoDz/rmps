@@ -83,7 +83,7 @@
 		<map key="2" comment="身份查询">rmp.irp.m.I2030000.I2030000</map>
 		<map key="3" comment="度量转换">rmp.irp.m.I2050000.I2050000</map>
 		<map key="4" comment="迷你日历">rmp.irp.m.I2060000.I2060000</map>
-		<map key="5" comment="ＩＰ查询">rmp.irp.m.I7010000.I7010000</map>
+		<map key="5" comment="ＩＰ查询">rmp.irp.m.I2080000.I2080000</map>
 		<map key="6" comment="消息摘要">rmp.irp.m.I8010000.I8010000</map>
 		<map key="7" comment="正则运算">rmp.irp.m.I8020000.I8020000</map>
 	</item>

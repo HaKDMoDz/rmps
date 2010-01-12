@@ -18,7 +18,7 @@ package rmp.irp.v.fetion;
  * <br />
  * </ul>
  * 
- * @author Administrator
+ * @author Amon
  * 
  */
 public interface Constant

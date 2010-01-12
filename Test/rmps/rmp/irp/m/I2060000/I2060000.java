@@ -31,6 +31,7 @@ import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.HttpUtil;
 
 import cons.EnvCons;
+import cons.irp.ConsEnv;
 
 /**
  * <ul>
@@ -66,12 +67,13 @@ public class I2060000 implements IService
             htList.add(new K1SV1S(">>", "下一年"));
 
             Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
-            Element element = (Element) document.selectSingleNode("/irps/I2060000/item[@id='配置']/map[@key='path']");
+            Element root = (Element) document.selectSingleNode("/irps/" + getCode());
+            Element element = (Element) root.selectSingleNode("item[@id='配置']/map[@key='path']");
             if (element != null)
             {
                 path = element.getText();
             }
-            element = (Element) document.selectSingleNode("/irps/I2060000/item[@id='配置']/map[@key='args']");
+            element = (Element) root.selectSingleNode("item[@id='配置']/map[@key='args']");
             if (element != null)
             {
                 args = element.getText();
@@ -87,7 +89,7 @@ public class I2060000 implements IService
     @Override
     public String getCode()
     {
-        return "52060000";
+        return "I2060000";
     }
 
     @Override
@@ -139,10 +141,26 @@ public class I2060000 implements IService
         String txt = message.getContent();
         String tmp = Control.getCommand(txt.trim());
         StringBuffer msg = new StringBuffer(session.newLine());
+        IProcess pro = session.getProcess();
 
         // 命令处理
         if (CharUtil.isValidate(tmp))
         {
+            if (ConsEnv.KEY_MENU.equals(tmp))
+            {
+                if (IProcess.ITEM_DEFAULT.equals(pro.getItem()))
+                {
+                    doMenu(session, msg);
+                    pro.setItem(Constant.ITEM_SUBMENU);
+
+                    session.send(msg.toString());
+                }
+                else if (pro.setFunc(".."))
+                {
+                    Control.getService(pro.getFunc()).doInit(session, message);
+                }
+                return;
+            }
             if ("<<".equals(tmp))
             {
                 tmp = (String) session.getAttribute(getCode() + Constant.SESSION_YEAR);
@@ -231,6 +249,13 @@ public class I2060000 implements IService
         message.append("　　2、使用<<或>>进行年份切换；").append(session.newLine());
         message.append("　　3、使用<或>进行月份切换；").append(session.newLine());
         return message;
+    }
+
+    private void doMenu(ISession session, StringBuffer message)
+    {
+        message.append(CharUtil.format("0、继续使用《{0}》服务；", getName())).append(session.newLine());
+        message.append("*、返回上级服务选单；").append(session.newLine());
+        message.append("请输入对应的数字选择您要使用的验证方法：").append(session.newLine());
     }
 
     /**

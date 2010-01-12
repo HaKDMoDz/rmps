@@ -73,8 +73,9 @@ public class I2010000 implements IService
             Element e;
             HashMap<String, K1SV2S> map;
             Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
+            Element root = (Element) document.selectSingleNode("/irps/" + getCode());
             // 省市
-            for (Object o0 : document.selectNodes("/irps/I2010000/item[@id='配置']/map"))
+            for (Object o0 : root.selectNodes("item[@id='配置']/map"))
             {
                 e = (Element) o0;
                 map = csList.get(0);
@@ -117,7 +118,7 @@ public class I2010000 implements IService
     @Override
     public String getCode()
     {
-        return "52010000";
+        return "I2010000";
     }
 
     @Override

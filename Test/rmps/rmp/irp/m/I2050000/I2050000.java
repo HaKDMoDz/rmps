@@ -59,6 +59,7 @@ public class I2050000 implements IService
             decs = new HashMap<String, HashMap<String, BigDecimal>>();
 
             Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
+            Element root = (Element) document.selectSingleNode("/irps/" + getCode());
 
             // 支持单位初始化
             StringBuffer tmp = new StringBuffer();
@@ -67,7 +68,7 @@ public class I2050000 implements IService
             Element e2;
             HashMap<String, String> k;
             HashMap<String, BigDecimal> u;
-            for (Object t1 : document.selectNodes("/irps/I2050000/item"))
+            for (Object t1 : root.selectNodes("item"))
             {
                 e1 = (Element) t1;
                 sid = e1.attributeValue("id");
@@ -108,7 +109,7 @@ public class I2050000 implements IService
     @Override
     public String getCode()
     {
-        return "52050000";
+        return "I2050000";
     }
 
     @Override

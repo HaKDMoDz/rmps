@@ -10,7 +10,6 @@
  */
 package rmp.irp.m.I8020000;
 
-
 /**
  * <ul>
  * <li>功能说明：</li>
@@ -19,7 +18,7 @@ package rmp.irp.m.I8020000;
  * <br />
  * </ul>
  * 
- * @author Administrator
+ * @author Amon
  * 
  */
 public interface Constant

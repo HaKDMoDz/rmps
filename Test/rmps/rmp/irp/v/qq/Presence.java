@@ -24,7 +24,7 @@ import edu.tsinghua.lumaqq.qq.QQ;
  * TODO:
  * </ul>
  * 
- * @author Administrator
+ * @author Amon
  * 
  */
 public class Presence implements IPresence

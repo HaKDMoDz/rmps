@@ -20,7 +20,7 @@ import java.security.MessageDigest;
  * <br />
  * </ul>
  * 
- * @author Administrator
+ * @author Amon
  * 
  */
 public class HashUtil

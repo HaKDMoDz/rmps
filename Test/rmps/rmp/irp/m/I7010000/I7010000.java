@@ -33,7 +33,7 @@ import cons.EnvCons;
  * <ul>
  * <li>功能说明：</li>
  * <br />
- * IP地址查询
+ * 科学计算 
  * <li>使用说明：</li>
  * <br />
  * </ul>

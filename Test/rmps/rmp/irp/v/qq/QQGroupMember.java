@@ -21,7 +21,7 @@ import edu.tsinghua.lumaqq.qq.beans.QQFriend;
  * <br />
  * </ul>
  * 
- * @author Administrator
+ * @author Amon
  * 
  */
 public class QQGroupMember extends Contact

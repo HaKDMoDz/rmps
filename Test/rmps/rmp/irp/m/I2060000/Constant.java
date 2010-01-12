@@ -18,11 +18,13 @@ package rmp.irp.m.I2060000;
  * <br />
  * </ul>
  * 
- * @author Administrator
+ * @author Amon
  * 
  */
 public interface Constant
 {
+    String ITEM_SUBMENU = "1";
+
     String SESSION_YEAR = "_y";
     String SESSION_MONTH = "_m";
     String SESSION_DAY = "_d";

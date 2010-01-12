@@ -27,7 +27,7 @@ import com.amonsoft.rmps.irp.b.IPresence;
  * TODO:
  * </ul>
  * 
- * @author Administrator
+ * @author Amon
  * 
  */
 public class Contact implements IContact

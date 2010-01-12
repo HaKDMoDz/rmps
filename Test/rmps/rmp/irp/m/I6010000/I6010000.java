@@ -8,7 +8,7 @@
 /*
  * 
  */
-package rmp.irp.m.I2010000;
+package rmp.irp.m.I6010000;
 
 /**
  * <ul>
@@ -21,10 +21,6 @@ package rmp.irp.m.I2010000;
  * @author Amon
  * 
  */
-public interface Constant
+public class I6010000
 {
-    String SPECIAL_CITY_PY = "\\s|sheng|zizhiqu|diqu|qu|xian|shi|xiang|zhen$";
-    String SPECIAL_CITY_HZ = "\\s|省|自治区|地区|区|县|市|乡|镇$";
-
-    String ITEM_SUBMENU = "1";
 }

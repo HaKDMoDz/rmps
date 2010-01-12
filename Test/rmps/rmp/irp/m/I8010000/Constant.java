@@ -20,7 +20,7 @@ package rmp.irp.m.I8010000;
  * TODO:
  * </ul>
  * 
- * @author Administrator
+ * @author Amon
  * 
  */
 public interface Constant

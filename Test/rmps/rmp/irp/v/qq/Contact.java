@@ -32,7 +32,7 @@ import edu.tsinghua.lumaqq.qq.beans.QQFriend;
  * TODO:
  * </ul>
  * 
- * @author Administrator
+ * @author Amon
  * 
  */
 public class Contact implements IContact

@@ -20,7 +20,7 @@ import rmp.irp.comn.AMessage;
  * <br />
  * </ul>
  * 
- * @author Administrator
+ * @author Amon
  * 
  */
 public class Message extends AMessage

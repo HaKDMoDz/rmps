@@ -20,7 +20,7 @@ import edu.tsinghua.lumaqq.qq.events.QQEvent;
  * <br />
  * </ul>
  * 
- * @author Administrator
+ * @author Amon
  * 
  */
 public class QQEvents

@@ -121,7 +121,7 @@ public abstract class ASession implements ISession
         message.append(session.newLine()).append("---------------------------------");
         message.append(session.newLine()).append("〖*菜单 ?帮助");
         IService service = Control.getService(session.getProcess().getFunc());
-        if (service != null)
+        if (service != null && service.getHelpTips() != null)
         {
             for (K1SV1S item : service.getHelpTips())
             {

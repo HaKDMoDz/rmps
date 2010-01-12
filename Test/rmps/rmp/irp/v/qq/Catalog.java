@@ -20,7 +20,7 @@ import com.amonsoft.rmps.irp.b.ICatalog;
  * <br />
  * </ul>
  * 
- * @author Administrator
+ * @author Amon
  * 
  */
 public class Catalog implements ICatalog

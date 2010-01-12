@@ -8,12 +8,13 @@
 /*
  * 
  */
-package rmp.irp.m.I2010000;
+package rmp.irp.m.I5040000;
 
 /**
  * <ul>
  * <li>功能说明：</li>
  * <br />
+ * twitter
  * <li>使用说明：</li>
  * <br />
  * </ul>
@@ -21,10 +22,7 @@ package rmp.irp.m.I2010000;
  * @author Amon
  * 
  */
-public interface Constant
+public class I5040000
 {
-    String SPECIAL_CITY_PY = "\\s|sheng|zizhiqu|diqu|qu|xian|shi|xiang|zhen$";
-    String SPECIAL_CITY_HZ = "\\s|省|自治区|地区|区|县|市|乡|镇$";
 
-    String ITEM_SUBMENU = "1";
 }

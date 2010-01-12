@@ -27,7 +27,7 @@ import com.amonsoft.rmps.irp.b.IMimeMessage;
  * <br />
  * </ul>
  * 
- * @author Administrator
+ * @author Amon
  * 
  */
 public class Session extends ASession

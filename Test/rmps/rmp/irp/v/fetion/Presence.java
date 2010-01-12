@@ -21,7 +21,7 @@ import com.amonsoft.util.CharUtil;
  * <br />
  * </ul>
  * 
- * @author Administrator
+ * @author Amon
  * 
  */
 public class Presence implements IPresence

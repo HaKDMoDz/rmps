@@ -56,12 +56,13 @@ public class I2040000 implements IService
         try
         {
             Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
-            Element element = (Element) document.selectSingleNode("/irps/item/map[@key='path']");
+            Element root = (Element) document.selectSingleNode("/irps/" + getCode());
+            Element element = (Element) root.selectSingleNode("item/map[@key='path']");
             if (element != null)
             {
                 path = element.getText();
             }
-            element = (Element) document.selectSingleNode("/irps/item/map[@key='args']");
+            element = (Element) root.selectSingleNode("item/map[@key='args']");
             if (element != null)
             {
                 args = element.getText();
@@ -83,7 +84,7 @@ public class I2040000 implements IService
     @Override
     public String getCode()
     {
-        return "52040000";
+        return "I2040000";
     }
 
     @Override
