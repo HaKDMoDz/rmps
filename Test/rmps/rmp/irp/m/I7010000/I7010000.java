@@ -16,6 +16,7 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import rmp.bean.K1SV1S;
 import rmp.util.EnvUtil;
 import rmp.util.LogUtil;
 
@@ -94,6 +95,12 @@ public class I7010000 implements IService
     public String getDescription()
     {
         return "ＩＰ查询";
+    }
+
+    @Override
+    public List<K1SV1S> getHelpTips()
+    {
+        return null;
     }
 
     @Override

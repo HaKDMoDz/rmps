@@ -7,6 +7,9 @@
  */
 package rmp.irp.m.I7030000;
 
+import java.util.List;
+
+import rmp.bean.K1SV1S;
 import rmp.util.LogUtil;
 
 import com.amonsoft.rmps.irp.b.IMessage;
@@ -49,6 +52,12 @@ public class I7030000 implements IService
     public String getDescription()
     {
         return "";
+    }
+
+    @Override
+    public List<K1SV1S> getHelpTips()
+    {
+        return null;
     }
 
     @Override

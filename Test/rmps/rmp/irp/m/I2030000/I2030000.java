@@ -16,6 +16,7 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import rmp.bean.K1SV1S;
 import rmp.irp.c.Control;
 import rmp.util.EnvUtil;
 import rmp.util.LogUtil;
@@ -91,6 +92,12 @@ public class I2030000 implements IService
     public String getDescription()
     {
         return "全国公民身份信息查询！";
+    }
+
+    @Override
+    public List<K1SV1S> getHelpTips()
+    {
+        return null;
     }
 
     @Override

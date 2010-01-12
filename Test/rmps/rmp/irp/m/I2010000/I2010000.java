@@ -133,6 +133,12 @@ public class I2010000 implements IService
     }
 
     @Override
+    public List<K1SV1S> getHelpTips()
+    {
+        return null;
+    }
+
+    @Override
     public void doInit(ISession session, IMessage message)
     {
         StringBuffer msg = new StringBuffer(session.newLine());

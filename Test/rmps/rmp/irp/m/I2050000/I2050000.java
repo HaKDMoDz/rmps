@@ -11,6 +11,7 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.dom4j.Document;
@@ -18,6 +19,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import rmp.bean.K1SV1S;
 import rmp.irp.c.Control;
 import rmp.util.EnvUtil;
 import rmp.util.LogUtil;
@@ -119,6 +121,12 @@ public class I2050000 implements IService
     public String getDescription()
     {
         return "度量转换";
+    }
+
+    @Override
+    public List<K1SV1S> getHelpTips()
+    {
+        return null;
     }
 
     @Override

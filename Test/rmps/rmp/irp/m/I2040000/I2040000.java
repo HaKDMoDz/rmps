@@ -11,6 +11,7 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,6 +19,7 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import rmp.bean.K1SV1S;
 import rmp.util.EnvUtil;
 import rmp.util.LogUtil;
 
@@ -94,6 +96,12 @@ public class I2040000 implements IService
     public String getDescription()
     {
         return "Phone";
+    }
+
+    @Override
+    public List<K1SV1S> getHelpTips()
+    {
+        return null;
     }
 
     @Override

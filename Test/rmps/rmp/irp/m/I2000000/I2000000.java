@@ -7,6 +7,10 @@
  */
 package rmp.irp.m.I2000000;
 
+import java.util.List;
+
+import rmp.bean.K1SV1S;
+
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
@@ -45,6 +49,12 @@ public class I2000000 implements IService
     public String getDescription()
     {
         return "";
+    }
+
+    @Override
+    public List<K1SV1S> getHelpTips()
+    {
+        return null;
     }
 
     @Override

@@ -22,6 +22,7 @@ import org.apache.axis.utils.ByteArrayOutputStream;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
 import rmp.util.EnvUtil;
@@ -54,7 +55,7 @@ public class Connect extends Thread implements IConnect
     private String sipCfg;
     private String proxy;
     private String uri;
-    // private String sid;
+    private String sid;
     // private String ssi_app_sign_in;
     // private String ssi_app_sign_out;
 
@@ -127,8 +128,7 @@ public class Connect extends Thread implements IConnect
 
             // 向身份服务器发送信息
             osw = new OutputStreamWriter(connection.getOutputStream(), "utf-8");
-            // osw.write(sid == null ? "CellPhone=" + getUser() : "Sid=" + sid);
-            osw.write("Sid=" + getUser());
+            osw.write(sid == null ? "CellPhone=" + getUser() : "Sid=" + sid);
             osw.flush();
             osw.close();
 
@@ -145,7 +145,8 @@ public class Connect extends Thread implements IConnect
             isr.close();
 
             // 返回数据解析
-            // initSipDeocde(DocumentHelper.parseText(buf.toString().replace("xmlns=\"http://tempuri.org/DateExchange.xsd\"", "")));
+            // initSipDeocde(DocumentHelper.parseText(buf.toString().replace("xmlns=\"http://tempuri.org/DateExchange.xsd\"",
+            // "")));
             return true;
         }
         catch (Exception exp)
@@ -346,9 +347,9 @@ public class Connect extends Thread implements IConnect
 
     boolean initSipDeocde(Document doc)
     {
-        // Node ele = doc.selectSingleNode("/Root/Users/User");
+        Node ele = doc.selectSingleNode("/Root/Users/User");
 
-        // sid = ele.selectSingleNode("Sid").getText();
+        sid = ele.selectSingleNode("Sid").getText();
 
         // uri = ele.selectSingleNode("Uri").getText();
         return true;

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import rmp.bean.K1SV1S;
 import rmp.irp.comn.Process;
 import rmp.util.LogUtil;
 import twitter4j.DirectMessage;
@@ -76,6 +77,12 @@ public class I7040000 implements IService
     public String getDescription()
     {
         return "";
+    }
+
+    @Override
+    public List<K1SV1S> getHelpTips()
+    {
+        return null;
     }
 
     @Override

@@ -7,6 +7,10 @@
  */
 package rmp.irp.m.I9000000;
 
+import java.util.List;
+
+import rmp.bean.K1SV1S;
+
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
@@ -47,6 +51,12 @@ public class I9000000 implements IService
     public String getDescription()
     {
         return "您好，小木为您服务！";
+    }
+
+    @Override
+    public List<K1SV1S> getHelpTips()
+    {
+        return null;
     }
 
     @Override

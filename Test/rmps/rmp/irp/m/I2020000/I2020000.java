@@ -20,6 +20,7 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import rmp.bean.K1SV1S;
 import rmp.irp.c.Control;
 import rmp.util.EnvUtil;
 import rmp.util.LogUtil;
@@ -102,6 +103,12 @@ public class I2020000 implements IService
     public String getDescription()
     {
         return "邮政编码查询";
+    }
+
+    @Override
+    public List<K1SV1S> getHelpTips()
+    {
+        return null;
     }
 
     @Override

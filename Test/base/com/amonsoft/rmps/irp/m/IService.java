@@ -7,6 +7,10 @@
  */
 package com.amonsoft.rmps.irp.m;
 
+import java.util.List;
+
+import rmp.bean.K1SV1S;
+
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.ISession;
 
@@ -30,6 +34,8 @@ public interface IService
     String getName();
 
     String getDescription();
+
+    List<K1SV1S> getHelpTips();
 
     void doInit(ISession session, IMessage message);
 

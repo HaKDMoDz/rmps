@@ -181,7 +181,7 @@ public class CharUtil
      */
     public static boolean isValidateInteger(String text)
     {
-        return Pattern.matches("^-?\\d+$", text);
+        return text != null ? Pattern.matches("^-?\\d+$", text) : false;
     }
 
     /**
@@ -192,7 +192,7 @@ public class CharUtil
      */
     public static boolean isValidateNumber(String text)
     {
-        return Pattern.matches("^[+-]?\\d+\\.\\d+$", text);
+        return text != null ? Pattern.matches("^[+-]?\\d+\\.\\d+$", text) : false;
     }
 
     /**

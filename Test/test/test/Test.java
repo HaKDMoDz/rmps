@@ -12,12 +12,10 @@ import java.util.HashMap;
 
 import rmp.Rmps;
 import rmp.comn.user.UserInfo;
-import rmp.irp.m.I2010000.I2010000;
-import rmp.irp.v.fetion.Fetion;
+import rmp.irp.m.I2060000.I2060000;
 import test.irp.Message;
 import test.irp.Session;
 
-import com.amonsoft.rmps.irp.b.IPresence;
 import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.HttpUtil;
@@ -39,16 +37,7 @@ public class Test
      */
     public static void main(String[] args)
     {
-        try
-        {
-            Fetion jf = new Fetion();
-            jf.sign(IPresence.INIT);
-            jf.sign(IPresence.SIGN);
-        }
-        catch (Exception exp)
-        {
-            System.out.println(exp);
-        }
+        test();
     }
 
     public static void test()
@@ -59,7 +48,7 @@ public class Test
 
         Session session = new Session();
         Message message = new Message("118.132.166.12");
-        IService s = new I2010000();
+        IService s = new I2060000();
         s.wInit();
         s.doInit(session, message);
         s.doRoot(session, message);

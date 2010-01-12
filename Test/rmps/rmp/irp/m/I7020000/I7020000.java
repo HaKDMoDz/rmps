@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import rmp.bean.K1SV1S;
 import rmp.util.LogUtil;
 
 import com.amonsoft.rmps.irp.b.IMessage;
@@ -66,6 +67,12 @@ public class I7020000 implements IService
     public String getDescription()
     {
         return "迷你RSS阅读器";
+    }
+
+    @Override
+    public List<K1SV1S> getHelpTips()
+    {
+        return null;
     }
 
     @Override

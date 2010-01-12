@@ -9,6 +9,7 @@ package rmp.irp.comn;
 
 import java.util.HashMap;
 
+import rmp.bean.K1SV1S;
 import rmp.irp.c.Control;
 
 import com.amonsoft.rmps.irp.b.IProcess;
@@ -118,7 +119,16 @@ public abstract class ASession implements ISession
     protected static StringBuffer appendCopy(ISession session, StringBuffer message)
     {
         message.append(session.newLine()).append("---------------------------------");
-        message.append(session.newLine()).append("〖*菜单 ?帮助〗");
+        message.append(session.newLine()).append("〖*菜单 ?帮助");
+        IService service = Control.getService(session.getProcess().getFunc());
+        if (service != null)
+        {
+            for (K1SV1S item : service.getHelpTips())
+            {
+                message.append(' ').append(item.getK()).append(item.getV());
+            }
+        }
+        message.append('〗');
         message.append(session.newLine()).append("© Amonsoft @ http://amonsoft.com/");
         return message;
     }

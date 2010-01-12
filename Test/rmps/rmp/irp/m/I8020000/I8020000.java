@@ -11,9 +11,11 @@
 package rmp.irp.m.I8020000;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import rmp.bean.K1SV1S;
 import rmp.irp.c.Control;
 
 import com.amonsoft.rmps.irp.b.IMessage;
@@ -66,6 +68,12 @@ public class I8020000 implements IService
     public String getDescription()
     {
         return "正则运算";
+    }
+
+    @Override
+    public List<K1SV1S> getHelpTips()
+    {
+        return null;
     }
 
     @Override

@@ -7,6 +7,9 @@
  */
 package rmp.irp.m.help;
 
+import java.util.List;
+
+import rmp.bean.K1SV1S;
 import rmp.irp.c.Control;
 
 import com.amonsoft.rmps.irp.b.IMessage;
@@ -49,6 +52,12 @@ public class Help implements IService
     public String getDescription()
     {
         return "您好，小木为您服务！";
+    }
+
+    @Override
+    public List<K1SV1S> getHelpTips()
+    {
+        return null;
     }
 
     @Override

@@ -12,7 +12,9 @@ package rmp.irp.m.I8010000;
 
 import java.security.MessageDigest;
 import java.util.HashMap;
+import java.util.List;
 
+import rmp.bean.K1SV1S;
 import rmp.irp.util.IrpsUtil;
 import rmp.util.LogUtil;
 import test.irp.Control;
@@ -74,6 +76,12 @@ public class I8010000 implements IService
     public String getDescription()
     {
         return "消息摘要";
+    }
+
+    @Override
+    public List<K1SV1S> getHelpTips()
+    {
+        return null;
     }
 
     @Override

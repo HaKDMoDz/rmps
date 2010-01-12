@@ -7,6 +7,9 @@
  */
 package rmp.irp.m.root;
 
+import java.util.List;
+
+import rmp.bean.K1SV1S;
 import rmp.irp.Irps;
 import rmp.util.LogUtil;
 
@@ -54,6 +57,12 @@ public class Root implements IService
     public String getDescription()
     {
         return "";
+    }
+
+    @Override
+    public List<K1SV1S> getHelpTips()
+    {
+        return null;
     }
 
     @Override
