@@ -10,13 +10,26 @@
  */
 package rmp.irp.m.I2070000;
 
+import java.io.File;
 import java.util.List;
 
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+
 import rmp.bean.K1SV1S;
+import rmp.util.EnvUtil;
+import rmp.util.LogUtil;
 
 import com.amonsoft.rmps.irp.b.IMessage;
+import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
+import com.amonsoft.util.CharUtil;
+import com.amonsoft.util.HttpUtil;
+
+import cons.EnvCons;
 
 /**
  * <ul>
@@ -32,6 +45,8 @@ import com.amonsoft.rmps.irp.m.IService;
  */
 public class I2070000 implements IService
 {
+    private static String path;
+    private static String args;
 
     /*
      * (non-Javadoc)
@@ -41,7 +56,27 @@ public class I2070000 implements IService
     @Override
     public boolean wInit()
     {
-        return false;
+        try
+        {
+            Document document = new SAXReader().read(new File(EnvUtil.getDataPath(EnvCons.FOLDER1_IRP, getCode() + ".xml")));
+            Element root = (Element) document.selectSingleNode("/irps/" + getCode());
+            Element element = (Element) root.selectSingleNode("item[@id='配置']/map[@key='path']");
+            if (element != null)
+            {
+                path = element.getText();
+            }
+            element = (Element) root.selectSingleNode("item[@id='配置']/map[@key='args']");
+            if (element != null)
+            {
+                args = element.getText();
+            }
+            return true;
+        }
+        catch (Exception exp)
+        {
+            LogUtil.exception(exp);
+            return false;
+        }
     }
 
     /*
@@ -52,7 +87,7 @@ public class I2070000 implements IService
     @Override
     public String getCode()
     {
-        return null;
+        return "I2070000";
     }
 
     /*
@@ -63,7 +98,7 @@ public class I2070000 implements IService
     @Override
     public String getName()
     {
-        return null;
+        return "网络导航";
     }
 
     /*
@@ -74,7 +109,7 @@ public class I2070000 implements IService
     @Override
     public String getDescription()
     {
-        return null;
+        return "网络导航";
     }
 
     /*
@@ -110,6 +145,15 @@ public class I2070000 implements IService
     @Override
     public void doInit(ISession session, IMessage message)
     {
+        StringBuffer msg = new StringBuffer(session.newLine());
+        doInit(session, msg);
+        doHelp(session, msg.append(session.newLine()));
+        msg.append(session.newLine()).append("请输入对应的数字选择您要进行的功能。").append(session.newLine());
+
+        session.getProcess().setType(IProcess.TYPE_CONTENT);
+        session.getProcess().setItem(IProcess.ITEM_DEFAULT);
+        session.getProcess().setStep(IProcess.STEP_DEFAULT);
+        session.send(msg.toString());
     }
 
     /*
@@ -134,6 +178,58 @@ public class I2070000 implements IService
     @Override
     public void doDeal(ISession session, IMessage message)
     {
+        String txt = message.getContent();
+        String tmp = txt.trim();
+        StringBuffer msg = new StringBuffer(session.newLine());
+        IProcess pro = session.getProcess();
+
+        // 功能选择事件
+        if (IProcess.STEP_DEFAULT == pro.getStep())
+        {
+            if (!CharUtil.isValidateInteger(tmp))
+            {
+                doHelp(session, msg);
+                session.send(msg.append("请选择您要进行的操作！").append(session.newLine()).toString());
+                return;
+            }
+
+            pro.setStep(Integer.parseInt(tmp));
+            switch (pro.getStep())
+            {
+                case Constant.STEP_SEARCH:
+                    break;
+                case Constant.STEP_SELECT:
+                    break;
+                case Constant.STEP_APPEND:
+                    break;
+                case Constant.STEP_REMOVE:
+                    break;
+                default:
+                    doHelp(session, msg);
+                    session.send(msg.append("请选择您要进行的操作！").append(session.newLine()).toString());
+                    break;
+            }
+            return;
+        }
+
+        switch (pro.getStep())
+        {
+            case Constant.STEP_SEARCH:
+                doSearch(session, msg);
+                break;
+            case Constant.STEP_SELECT:
+                doSelect(session, msg);
+                break;
+            case Constant.STEP_APPEND:
+                doAppend(session, msg);
+                break;
+            case Constant.STEP_REMOVE:
+                doRemove(session, msg);
+                break;
+            default:
+                break;
+        }
+        session.send(msg.toString());
     }
 
     /*
@@ -170,5 +266,83 @@ public class I2070000 implements IService
     @Override
     public void doRoot(ISession session, IMessage message)
     {
+    }
+
+    private StringBuffer doInit(ISession session, StringBuffer message)
+    {
+        message.append(CharUtil.format("欢迎使用《{0}》服务！", getName())).append(session.newLine());
+        message.append(CharUtil.format("　　《{0}》服务目前支持网址收藏及短域名服务！", getName())).append(session.newLine());
+        return message;
+    }
+
+    private StringBuffer doHelp(ISession session, StringBuffer message)
+    {
+        message.append("您可以通过如下的方式使用此服务：").append(session.newLine());
+        message.append("　　1、快速搜索您的网络收藏；").append(session.newLine());
+        message.append("　　2、递进查找您的网络收藏；").append(session.newLine());
+        message.append("　　3、添加或修改您的网络收藏；").append(session.newLine());
+        return message;
+    }
+
+    private StringBuffer doSearch(ISession session, StringBuffer message)
+    {
+        try
+        {
+            String data = HttpUtil.request(path + CharUtil.format(args, "A0000000", Constant.OPT_SEARCH, ""), "GET", "UTF-8", null);
+            Document doc = DocumentHelper.parseText(data);
+            if (doc != null)
+            {
+
+            }
+        }
+        catch (Exception exp)
+        {
+            LogUtil.exception(exp);
+        }
+        return message;
+    }
+
+    private StringBuffer doSelect(ISession session, StringBuffer message)
+    {
+        try
+        {
+            String data = HttpUtil.request(path + CharUtil.format(args, "A0000000", Constant.OPT_SEARCH, ""), "GET", "UTF-8", null);
+            Document doc = DocumentHelper.parseText(data);
+            if (doc != null)
+            {
+
+            }
+        }
+        catch (Exception exp)
+        {
+            LogUtil.exception(exp);
+        }
+        return message;
+    }
+
+    private StringBuffer doAppend(ISession session, StringBuffer message)
+    {
+        try
+        {
+            HttpUtil.request(path + CharUtil.format(args, "A0000000", Constant.OPT_SEARCH, ""), "POST", "UTF-8", null);
+        }
+        catch (Exception exp)
+        {
+            LogUtil.exception(exp);
+        }
+        return message;
+    }
+
+    private StringBuffer doRemove(ISession session, StringBuffer message)
+    {
+        try
+        {
+            HttpUtil.request(path + CharUtil.format(args, "A0000000", Constant.OPT_SEARCH, ""), "POST", "UTF-8", null);
+        }
+        catch (Exception exp)
+        {
+            LogUtil.exception(exp);
+        }
+        return message;
     }
 }
