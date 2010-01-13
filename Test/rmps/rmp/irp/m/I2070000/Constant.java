@@ -18,7 +18,7 @@ package rmp.irp.m.I2070000;
  * <br />
  * </ul>
  * 
- * @author Administrator
+ * @author Amon
  * 
  */
 public interface Constant
