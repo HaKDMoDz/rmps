@@ -287,32 +287,32 @@ public class I2060000 implements IService
             int t2 = 30;// Integer.parseInt(days);
 
             // 前置空格
-            StringBuffer tmp1 = new StringBuffer(" ");
-            StringBuffer tmp2 = new StringBuffer(" ");
+            StringBuffer tmp1 = new StringBuffer();
+            StringBuffer tmp2 = new StringBuffer();
             for (int i = 0; i < t1; i += 1)
             {
-                tmp1.append("　　　");
-                tmp2.append("　　　");
+                tmp1.append("......");
+                tmp2.append("......");
             }
 
             // 日期数据
             for (int d = 1; d <= t2; d += 1)
             {
-                tmp1.append('　');
+                tmp1.append("..");
                 if (d < 10)
                 {
-                    tmp1.append(' ');
+                    tmp1.append('.');
                 }
-                tmp1.append(d).append('　');
-                tmp2.append(date.selectSingleNode(CharUtil.format("day[@id='{0}']", d)).getText()).append('　');
+                tmp1.append(d).append("..");
+                tmp2.append('.').append(date.selectSingleNode(CharUtil.format("day[@id='{0}']", d)).getText()).append('.');
 
                 t1 += 1;
                 if (t1 % 7 == 0)
                 {
                     message.append(tmp1.toString()).append(session.newLine());
                     message.append(tmp2.toString()).append(session.newLine());
-                    tmp1.delete(1, tmp1.length());
-                    tmp2.delete(1, tmp2.length());
+                    tmp1.delete(0, tmp1.length());
+                    tmp2.delete(0, tmp2.length());
                 }
             }
             if (tmp1.length() > 0)
