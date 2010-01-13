@@ -18,6 +18,7 @@ import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
+import com.amonsoft.util.CharUtil;
 
 /**
  * <ul>
@@ -135,16 +136,17 @@ public class I7010000 implements IService
     {
     }
 
-    private void doInit(ISession session, StringBuffer message)
+    private StringBuffer doInit(ISession session, StringBuffer message)
     {
-        message.append("欢迎使用《ＩＰ查询》服务！").append(session.newLine());
-        message.append("　　ＩＰ查询目前支持国内及国外的IP地址查询，并且支持IPv4地IPv6地址的转换。").append(session.newLine());
+        message.append(CharUtil.format("欢迎使用《{0}》服务！", getName())).append(session.newLine());
+        message.append(CharUtil.format("　　《{0}》服务目前支持四则、代数、三角等运算，并且支持用户自定义运算精度！", getName())).append(session.newLine());
+        return message;
     }
 
-    private void doHelp(ISession session, StringBuffer message)
+    private StringBuffer doHelp(ISession session, StringBuffer message)
     {
         message.append("您可以通过如下的方式使用此服务：").append(session.newLine());
-        message.append("　　1、直接输入您的查询的IPv4地址：如127.0.0.1；").append(session.newLine());
-        message.append("　　2、输入您要查询的网站域名：如www.amonsoft.com；").append(session.newLine());
+        message.append("　　1、直接输入您要进行运算的表达式，如：1+2*3-4^5+sin(cos3)").append(session.newLine());
+        return message;
     }
 }
