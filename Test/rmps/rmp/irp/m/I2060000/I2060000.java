@@ -274,8 +274,8 @@ public class I2060000 implements IService
             String days = date.attributeValue("count");
             if (!CharUtil.isValidateInteger(days))
             {
-                // message.append(message.append("系统处理错误！").append(session.newLine()));
-                // return;
+                message.append(message.append("系统处理错误！").append(session.newLine()));
+                return;
             }
             String week = date.selectSingleNode("week").getText();
             if (!CharUtil.isValidateInteger(week))
@@ -284,7 +284,7 @@ public class I2060000 implements IService
                 return;
             }
             int t1 = Integer.parseInt(week);
-            int t2 = 30;// Integer.parseInt(days);
+            int t2 = Integer.parseInt(days);
 
             // 前置空格
             StringBuffer tmp1 = new StringBuffer();

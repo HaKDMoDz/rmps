@@ -11,6 +11,7 @@
 package rmp.irp.m.I2070000;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.dom4j.Document;
@@ -19,6 +20,7 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import rmp.bean.K1SV1S;
+import rmp.bean.K1SV2S;
 import rmp.util.EnvUtil;
 import rmp.util.LogUtil;
 
@@ -310,7 +312,20 @@ public class I2070000 implements IService
             Document doc = DocumentHelper.parseText(data);
             if (doc != null)
             {
-
+                message.append("【类别】").append(session.newLine());
+                List<K1SV1S> kindList = new ArrayList<K1SV1S>();
+                for (Object obj : doc.selectNodes("/amonsoft/kind/item"))
+                {
+                    Element kind = (Element) obj;
+                    kindList.add(new K1SV1S(kind.attributeValue("id"), kind.attributeValue("name")));
+                }
+                message.append("【链接】").append(session.newLine());
+                List<K1SV2S> linkList = new ArrayList<K1SV2S>();
+                for (Object obj : doc.selectNodes("/amonsoft/kind/item"))
+                {
+                    Element link = (Element) obj;
+                    linkList.add(new K1SV2S(link.attributeValue("id"), link.attributeValue("name"), link.attributeValue("short")));
+                }
             }
         }
         catch (Exception exp)

@@ -10,11 +10,19 @@
  */
 package rmp.irp.v.skype;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import rmp.util.LogUtil;
+
 import com.amonsoft.rmps.irp.b.IContact;
+import com.amonsoft.rmps.irp.b.IPresence;
 import com.amonsoft.rmps.irp.v.IAccount;
 import com.amonsoft.rmps.irp.v.IConnect;
+import com.skype.ChatMessage;
+import com.skype.ChatMessageListener;
+import com.skype.Friend;
+import com.skype.SkypeException;
 
 /**
  * <ul>
@@ -28,8 +36,10 @@ import com.amonsoft.rmps.irp.v.IConnect;
  * @author Amon
  * 
  */
-public class Skype implements IAccount
+public class Skype implements IAccount, ChatMessageListener
 {
+    private static List<IContact> contacts;
+
     @Override
     public void exit()
     {
@@ -38,6 +48,25 @@ public class Skype implements IAccount
     @Override
     public void sign(int status)
     {
+        try
+        {
+            switch (status)
+            {
+                case IPresence.INIT:
+                    break;
+                case IPresence.LINE:
+                    com.skype.Skype.addChatMessageListener(this);
+                    break;
+                case IPresence.DOWN:
+                    break;
+                default:
+                    break;
+            }
+        }
+        catch (Exception exp)
+        {
+            exp.printStackTrace();
+        }
     }
 
     @Override
@@ -55,6 +84,31 @@ public class Skype implements IAccount
     @Override
     public List<IContact> getContact()
     {
-        return null;
+        if (contacts == null)
+        {
+            try
+            {
+                contacts = new ArrayList<IContact>();
+                for (Friend contact : com.skype.Skype.getContactList().getAllFriends())
+                {
+                    contacts.add(new Contact(contact));
+                }
+            }
+            catch (Exception exp)
+            {
+                LogUtil.exception(exp);
+            }
+        }
+        return contacts;
+    }
+
+    @Override
+    public void chatMessageReceived(ChatMessage arg0) throws SkypeException
+    {
+    }
+
+    @Override
+    public void chatMessageSent(ChatMessage arg0) throws SkypeException
+    {
     }
 }

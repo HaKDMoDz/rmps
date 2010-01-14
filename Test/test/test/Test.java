@@ -7,18 +7,15 @@
  */
 package test;
 
-import java.security.MessageDigest;
-import java.util.HashMap;
-
-import rmp.Rmps;
-import rmp.comn.user.UserInfo;
-import rmp.irp.m.I2060000.I2060000;
-import test.irp.Message;
-import test.irp.Session;
-
-import com.amonsoft.rmps.irp.m.IService;
-import com.amonsoft.util.CharUtil;
-import com.amonsoft.util.HttpUtil;
+import com.skype.Chat;
+import com.skype.ChatMessage;
+import com.skype.ChatMessageAdapter;
+import com.skype.ContactList;
+import com.skype.Friend;
+import com.skype.Group;
+import com.skype.Skype;
+import com.skype.SkypeException;
+import com.skype.User;
 
 /**
  * <ul>
@@ -32,76 +29,131 @@ import com.amonsoft.util.HttpUtil;
  */
 public class Test
 {
-    /**
-     * @param args
-     */
-    public static void main(String[] args)
+
+    public static void main(String[] args) throws Exception
     {
-        test();
+        ContactList list = Skype.getContactList();
+        for (Friend f : list.getAllFriends())
+        {
+            System.out.println(f);
+        }
+        for (Group f : list.getAllGroups())
+        {
+            System.out.println(f);
+        }
+        for (Group f : list.getAllSystemGroups())
+        {
+            System.out.println(f);
+        }
+        // displayUsers("MFX");
     }
 
-    public static void test()
+    public static void startListening() throws SkypeException
     {
-        UserInfo user = new UserInfo("Amon", "Amon");
-        user.wInit();
-        Rmps.setUser(user);
 
-        Session session = new Session();
-        Message message = new Message("118.132.166.12");
-        IService s = new I2060000();
-        s.wInit();
-        s.doInit(session, message);
-        s.doRoot(session, message);
+        Skype.setDeamon(false);
+
+        Skype.addChatMessageListener(new ChatMessageAdapter()
+        {
+            public void chatMessageReceived(ChatMessage received) throws SkypeException
+            {
+                // displayUsers(received);
+                // autoAnswering(received, "I love this game", "huaran78", null,
+                // "ÎÒÌß²»ÁË³¤ÍÈ£¡", 1, 1);
+                // autoAnswering(received, "I love this game", "shangcm2006",
+                // "Ë­ÄÜ°Ñ³¤ÍÈÌßÁË£¿", "ÎÒÌß²»ÁË³¤ÍÈ£¡", 1, 1);
+                autoAnswering(received, "这是乱码 ", null, null, "Test", 20, 3);
+            }
+        });
+
     }
 
-    public static void sign()
+    public static void sendTo(String title, String msg, int len, int cnt) throws SkypeException
     {
-        try
+        Chat[] chats = Skype.getAllActiveChats();
+        for (int i = 0; i < chats.length; i++)
         {
-            HashMap<String, String> params = new HashMap<String, String>();
-            params.put("VER", "1.1");
-            params.put("CMD", "Login");
-            String time = Long.toString(System.currentTimeMillis());
-            params.put("SEQ", time.substring(time.length() - 5));
-            params.put("UIN", "107618109");
-            params.put("PS", CharUtil.toHex(MessageDigest.getInstance("MD5").digest("bIxSTULX1Yl9".getBytes())));
-            params.put("M5", "1");
-            params.put("LC", "9326B87B234E7235");
-            // String data = HttpUtil.request("http://tqq.tencent.com:8000",
-            // "POST", "gb2312", params);
-            String data = HttpUtil.request("http://219.133.60.211:8000", "POST", "gb2312", params);
-            System.out.println(data);
-            // VER=1.1&CMD=Login&SEQ=17923&UIN=107618109&RES=0&RS=0&HI=60&LI=300&COMP=NOKIA8F3A18D6E27
-            // VER=1.1&CMD=Login&SEQ=31126&UIN=107618109&RES=0&RS=0&HI=60&LI=300&COMP=NOKIA8F3A18D6E27
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
+            System.out.println(chats[i].getWindowTitle());
+            if (chats[i].getWindowTitle().equals(title))
+            {
+                send(chats[i], msg, len, cnt);
+                break;
+            }
         }
     }
 
-    public static void list()
+    public static void displayUsers(String title) throws SkypeException
     {
-        try
+        Chat[] chats = Skype.getAllActiveChats();
+        for (int i = 0; i < chats.length; i++)
         {
-            HashMap<String, String> params = new HashMap<String, String>();
-            params.put("VER", "1.1");// QQ协议的版本
-            params.put("CMD", "Login");// 协议的命令，包括有Login（登录）、List（好友列表）
-            String time = Long.toString(System.currentTimeMillis());
-            params.put("SEQ", time.substring(time.length() - 7));// 防止重复发送标记
-            params.put("UIN", "107618109");// 用户QQ号
-            params.put("SN", "160");// 
-            params.put("UN", "0");// 
-            // String data = HttpUtil.request("http://tqq.tencent.com:8000",
-            // "POST", "gb2312", params);
-            String data = HttpUtil.request("http://119.147.11.76:8000", "POST", "gb2312", params);
-            System.out.println(data);
-            // VER=1.1&CMD=Login&SEQ=17923&UIN=107618109&RES=0&RS=0&HI=60&LI=300&COMP=NOKIA8F3A18D6E27
-            // VER=1.1&CMD=Login&SEQ=31126&UIN=107618109&RES=0&RS=0&HI=60&LI=300&COMP=NOKIA8F3A18D6E27
+            System.out.println(chats[i].getWindowTitle());
+            if (chats[i].getWindowTitle().equals(title))
+            {
+
+                System.out.println("title: " + chats[i].getWindowTitle());
+                User[] users = chats[i].getAllActiveMembers();
+                for (int j = 0; j < users.length; j++)
+                {
+                    System.out.println(users[j].getFullName() + "=" + users[j].getId());
+                }
+                break;
+            }
         }
-        catch (Exception e)
+    }
+
+    private static void autoAnswering(ChatMessage received, String title, String id, String content, String msg, int len, int cnt) throws SkypeException
+    {
+
+        Chat chat = received.getChat();
+
+        if (!chat.getWindowTitle().equals(title))
         {
-            e.printStackTrace();
+            System.out.println("ignore title: " + chat.getWindowTitle());
+            return;
         }
+
+        if (content != null && !received.getSender().getId().equals(id))
+        {
+            System.out.println("ignore id: " + received.getSender());
+            return;
+        }
+
+        if (content != null && !received.getContent().equals(content))
+        {
+            System.out.println("ignore content: " + received.getContent());
+            return;
+        }
+
+        send(chat, msg, len, cnt);
+
+    }
+
+    private static void send(Chat chat, String msg, int len, int cnt) throws SkypeException
+    {
+        for (int i = 1; i <= len * cnt; i++)
+        {
+            StringBuffer sb = new StringBuffer();
+            int x = i % (len * 2);
+            int l = 0;
+
+            if (x < len)
+            {
+                l = x;
+            }
+            else
+            {
+                l = (len * 2) - x;
+            }
+
+            for (int j = 0; j < l; j++)
+            {
+                sb.append(msg);
+            }
+
+            chat.send(sb.toString());
+        }
+
+        System.out.println("Send OK!");
     }
 }

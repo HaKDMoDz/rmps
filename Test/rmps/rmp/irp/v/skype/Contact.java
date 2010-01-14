@@ -15,6 +15,7 @@ import java.util.List;
 import com.amonsoft.rmps.irp.b.ICatalog;
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IPresence;
+import com.skype.Friend;
 
 /**
  * <ul>
@@ -31,6 +32,16 @@ import com.amonsoft.rmps.irp.b.IPresence;
  */
 public class Contact implements IContact
 {
+    Friend contact;
+
+    Contact()
+    {
+    }
+
+    Contact(Friend contact)
+    {
+        this.contact = contact;
+    }
 
     /*
      * (non-Javadoc)
