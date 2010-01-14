@@ -12,6 +12,7 @@ import java.util.List;
 
 import rmp.bean.K1SV1S;
 import rmp.bean.K1SV2S;
+import rmp.irp.c.Control;
 import rmp.util.LogUtil;
 
 import com.amonsoft.rmps.irp.b.IMessage;
@@ -19,6 +20,8 @@ import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.util.CharUtil;
+
+import cons.irp.ConsEnv;
 
 /**
  * <ul>
@@ -94,12 +97,21 @@ public class I7010000 implements IService
     @Override
     public void doDeal(ISession session, IMessage message)
     {
+        String key = message.getContent();
+        String tmp = key.trim();
+        StringBuffer msg = new StringBuffer();
+        IProcess pro = session.getProcess();
+
         try
         {
-            String key = message.getContent();
-            String tmp = key.trim();
-            StringBuffer msg = new StringBuffer();
-            IProcess pro = session.getProcess();
+            if (ConsEnv.KEY_MENU.equals(tmp))
+            {
+                if (pro.setFunc(".."))
+                {
+                    Control.getService(pro.getFunc()).doInit(session, message);
+                }
+                return;
+            }
 
             List<K1SV2S> list = new ArrayList<K1SV2S>();
             rmp.prp.aide.P3060000.t.Util.calculate(tmp, 8, list);
@@ -108,17 +120,15 @@ public class I7010000 implements IService
                 msg.append("=").append(item.getK()).append(session.newLine());
                 msg.append("~~").append(item.getV1()).append("-->").append(item.getV2()).append(session.newLine());
             }
-
-            // 设置下一次操作状态
-            pro.setType(IProcess.TYPE_CONTENT);
-            session.send(msg.toString());
         }
         catch (Exception exp)
         {
-            LogUtil.exception(exp);
+            msg.append(exp.getMessage()).append(session.newLine());
         }
 
-        session.getProcess().setType(IProcess.TYPE_KEYCODE | IProcess.TYPE_CONTENT);
+        // 设置下一次操作状态
+        pro.setType(IProcess.TYPE_CONTENT);
+        session.send(msg.toString());
     }
 
     @Override
@@ -146,7 +156,7 @@ public class I7010000 implements IService
     private StringBuffer doHelp(ISession session, StringBuffer message)
     {
         message.append("您可以通过如下的方式使用此服务：").append(session.newLine());
-        message.append("　　1、直接输入您要进行运算的表达式，如：1+2*3-4^5+sin(cos3)").append(session.newLine());
+        message.append("　　1、直接输入您要进行运算的表达式，如：1+{[2.3*(4-5)]^6.7}-8!*sin(cotπ)").append(session.newLine());
         return message;
     }
 }

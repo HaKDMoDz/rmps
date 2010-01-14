@@ -302,50 +302,55 @@ public class I8020000 implements IService
 
     private void showData(ISession session, StringBuffer message)
     {
-        String p = (String) session.getAttribute(getCode() + Constant.SESSION_PATTERN);// 表达式
-        String m = hash.get((String) session.getAttribute(getCode() + Constant.SESSION_MATCHER));// 运算符
-        String t = (String) session.getAttribute(getCode() + Constant.SESSION_CHARSET);// 字符串
-        message.append('/').append(p).append("/ .");
-        if (Constant.MATCHER_TEST.equals(m))
+        try
         {
-            message.append(Constant.MATCHER_TEST).append("() 运行结果：");
-            message.append(Pattern.matches(p, t)).append(session.newLine());
-        }
-        else if (Constant.MATCHER_MATCH.equals(m))
-        {
-            message.append(Constant.MATCHER_MATCH).append("() 运行结果：").append(session.newLine());
-            Matcher r = Pattern.compile(p).matcher(t);
-            while (r.find())
+            String p = (String) session.getAttribute(getCode() + Constant.SESSION_PATTERN);// 表达式
+            String m = hash.get((String) session.getAttribute(getCode() + Constant.SESSION_MATCHER));// 运算符
+            String t = (String) session.getAttribute(getCode() + Constant.SESSION_CHARSET);// 字符串
+            message.append('/').append(p).append("/ .");
+            if (Constant.MATCHER_TEST.equals(m))
             {
-                message.append(r.start()).append(session.newLine());
+                message.append(Constant.MATCHER_TEST).append("() 运行结果：");
+                message.append(Pattern.matches(p, t)).append(session.newLine());
+            }
+            else if (Constant.MATCHER_MATCH.equals(m))
+            {
+                message.append(Constant.MATCHER_MATCH).append("() 运行结果：").append(session.newLine());
+                Matcher r = Pattern.compile(p).matcher(t);
+                while (r.find())
+                {
+                    message.append(r.start()).append(session.newLine());
+                }
+            }
+            else if (Constant.MATCHER_SPLIT.equals(m))
+            {
+                message.append(Constant.MATCHER_SPLIT).append("() 运行结果：").append(session.newLine());
+                for (String s : t.split(p))
+                {
+                    message.append(s).append(session.newLine());
+                }
+            }
+            else if (Constant.MATCHER_SEARCH.equals(m))
+            {
+                message.append(Constant.MATCHER_SEARCH).append("() 运行结果：").append(session.newLine());
+                Matcher r = Pattern.compile(p).matcher(t);
+                while (r.find())
+                {
+                    message.append(r.group()).append(session.newLine());
+                }
+            }
+            else if (Constant.MATCHER_REPLACE.equals(m))
+            {
+                message.append(Constant.MATCHER_REPLACE).append("('■') 运行结果：");
+                message.append(session.newLine()).append(t.replaceAll(p, "■")).append(session.newLine());
             }
         }
-        else if (Constant.MATCHER_SPLIT.equals(m))
+        catch (Exception exp)
         {
-            message.append(Constant.MATCHER_SPLIT).append("() 运行结果：").append(session.newLine());
-            for (String s : t.split(p))
-            {
-                message.append(s).append(session.newLine());
-            }
-        }
-        else if (Constant.MATCHER_SEARCH.equals(m))
-        {
-            message.append(Constant.MATCHER_SEARCH).append("() 运行结果：").append(session.newLine());
-            Matcher r = Pattern.compile(p).matcher(t);
-            while (r.find())
-            {
-                message.append(r.group()).append(session.newLine());
-            }
-        }
-        else if (Constant.MATCHER_REPLACE.equals(m))
-        {
-            message.append(Constant.MATCHER_REPLACE).append("('■') 运行结果：");
-            message.append(session.newLine()).append(t.replaceAll(p, "■")).append(session.newLine());
+            message.append(exp.getMessage()).append(session.newLine());
         }
 
-        message.append(session.newLine());
-        doStep(session, message);
-
+        doStep(session, message.append(session.newLine()));
         session.getProcess().setStep(IProcess.STEP_DEFAULT);
         session.send(message.toString());
     }
