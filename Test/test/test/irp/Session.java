@@ -35,6 +35,7 @@ import com.amonsoft.rmps.irp.m.IService;
 public class Session implements ISession
 {
     private IProcess process;
+    private IMessage message;
     private HashMap<String, Object> attribute;
 
     public Session()
@@ -95,15 +96,15 @@ public class Session implements ISession
     }
 
     @Override
-    public void send(IMimeMessage message)
+    public IMessage read()
     {
-        System.out.println(message.getContent());
+        return message;
     }
 
     @Override
-    public void send(IMimeMessage message, boolean literal)
+    public void save(IMessage message)
     {
-        System.out.println(message.getContent());
+        this.message = message;
     }
 
     @Override

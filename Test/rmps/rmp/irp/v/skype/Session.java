@@ -33,7 +33,6 @@ import rmp.irp.comn.ASession;
  */
 public class Session extends ASession
 {
-
     /*
      * (non-Javadoc)
      * 
@@ -42,7 +41,6 @@ public class Session extends ASession
     @Override
     public IMessage createMessage()
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -54,7 +52,6 @@ public class Session extends ASession
     @Override
     public IMimeMessage createMimeMessage()
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -66,7 +63,6 @@ public class Session extends ASession
     @Override
     public IContact getContact()
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -78,8 +74,6 @@ public class Session extends ASession
     @Override
     public void reset()
     {
-        // TODO Auto-generated method stub
-
     }
 
     /*
@@ -90,8 +84,6 @@ public class Session extends ASession
     @Override
     public void send()
     {
-        // TODO Auto-generated method stub
-
     }
 
     /*
@@ -102,8 +94,6 @@ public class Session extends ASession
     @Override
     public void send(String message)
     {
-        // TODO Auto-generated method stub
-
     }
 
     /*
@@ -114,8 +104,6 @@ public class Session extends ASession
     @Override
     public void send(String message, boolean literal)
     {
-        // TODO Auto-generated method stub
-
     }
 
     /*
@@ -127,8 +115,6 @@ public class Session extends ASession
     @Override
     public void send(IMessage message)
     {
-        // TODO Auto-generated method stub
-
     }
 
     /*
@@ -141,36 +127,6 @@ public class Session extends ASession
     @Override
     public void send(IMessage message, boolean literal)
     {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.amonsoft.rmps.irp.b.ISession#send(com.amonsoft.rmps.irp.b.IMimeMessage
-     * )
-     */
-    @Override
-    public void send(IMimeMessage message)
-    {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.amonsoft.rmps.irp.b.ISession#send(com.amonsoft.rmps.irp.b.IMimeMessage
-     * , boolean)
-     */
-    @Override
-    public void send(IMimeMessage message, boolean literal)
-    {
-        // TODO Auto-generated method stub
-
     }
 
     /*
@@ -181,8 +137,5 @@ public class Session extends ASession
     @Override
     public void send(File file)
     {
-        // TODO Auto-generated method stub
-
     }
-
 }

@@ -28,6 +28,7 @@ import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.util.CharUtil;
 
 import cons.EnvCons;
+import cons.irp.ConsEnv;
 
 /**
  * <ul>
@@ -161,13 +162,6 @@ public class Control implements IControl
             // session.send("无法确认您输入的内容，可不要考验阿木的智商哟！:)");
             return;
         }
-        // 无意义消息文本
-        String tmp = msg.trim();
-        if (tmp.length() < 1)
-        {
-            session.send(CharUtil.format(":-o 您好像只输入了 {0} 个空格……", "" + msg.length()));
-            return;
-        }
 
         // 管理人员处理方式
         IContact contact = session.getContact();
@@ -175,6 +169,17 @@ public class Control implements IControl
         {
             return;
         }
+
+        IProcess process = session.getProcess();
+        // 会话锁定事件
+        if ((process.getType() & IProcess.TYPE_NACTION) != 0)
+        {
+            services.get(process.getFunc()).doDeal(session, message);
+            return;
+        }
+
+        // 特殊命令转换
+        String tmp = getCommand(msg);
         String email = contact.getEmail();
         if (CharUtil.isValidate(email))
         {
@@ -192,54 +197,59 @@ public class Control implements IControl
             }
         }
 
-        IProcess process = session.getProcess();
-        // 会话锁定事件
-        if ((process.getType() & IProcess.TYPE_NACTION) != 0)
-        {
-            services.get(process.getFunc()).doDeal(session, message);
-            return;
-        }
-
-        tmp = command.get(tmp);
         // 优先处理命令
         if (tmp != null)
         {
+            // 重复输入
+            if (ConsEnv.KEY_REDO.equals(tmp))
+            {
+                if (session.read() != null)
+                {
+                    message = session.read();
+                    msg = message.getContent();
+                    tmp = getCommand(msg);
+                }
+            }
+
             // 显示菜单
-            if ("*".equals(tmp))
+            if (ConsEnv.KEY_MENU.equals(tmp))
             {
                 services.get(process.getFunc()).doMenu(session, message);
                 return;
             }
             // 使用帮助
-            if ("?".equals(tmp))
+            if (ConsEnv.KEY_HELP.equals(tmp))
             {
                 services.get(process.getFunc()).doHelp(session, message);
                 return;
             }
             // 问题汇报
-            if ("&".equals(tmp))
+            if (ConsEnv.KEY_BUGS.equals(tmp))
             {
                 services.get("").doInit(session, message);
                 return;
             }
             // 发表留言
-            if ("@".equals(tmp))
+            if (ConsEnv.KEY_IDEA.equals(tmp))
             {
                 services.get("").doInit(session, message);
                 return;
             }
             // 邀请作者
-            if ("$".equals(tmp))
+            if (ConsEnv.KEY_AMON.equals(tmp))
             {
                 services.get("").doInit(session, message);
                 return;
             }
         }
 
+        // 记录上次输入
+        session.save(message);
+
         // 功能选择事件
         if ((process.getType() & IProcess.TYPE_KEYCODE) != 0)
         {
-            if (process.setFunc(msg))
+            if (process.setFunc(msg.trim()))
             {
                 // 选择功能初始化
                 services.get(process.getFunc()).doInit(session, message);

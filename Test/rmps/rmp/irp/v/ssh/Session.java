@@ -58,17 +58,6 @@ public class Session extends ASession
     }
 
     @Override
-    public void send(IMimeMessage message)
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void send(IMimeMessage message, boolean literal)
-    {
-    }
-
-    @Override
     public void send(File file)
     {
         throw new UnsupportedOperationException("Not supported yet.");

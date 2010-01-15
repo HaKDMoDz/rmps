@@ -65,16 +65,6 @@ public class Session extends ASession
     }
 
     @Override
-    public void send(IMimeMessage message)
-    {
-    }
-
-    @Override
-    public void send(IMimeMessage message, boolean literal)
-    {
-    }
-
-    @Override
     public void send(File file)
     {
     }

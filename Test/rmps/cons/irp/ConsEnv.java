@@ -39,4 +39,8 @@ public interface ConsEnv
     String KEY_MENU = "*";
     String KEY_HELP = "?";
     String KEY_STEP = "#";
+    String KEY_BUGS = "&";
+    String KEY_IDEA = "@";
+    String KEY_REDO = "~";
+    String KEY_AMON = "$";
 }

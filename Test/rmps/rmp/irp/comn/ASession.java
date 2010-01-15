@@ -12,9 +12,12 @@ import java.util.HashMap;
 import rmp.bean.K1SV1S;
 import rmp.irp.c.Control;
 
+import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
+
+import cons.irp.ConsEnv;
 
 /**
  * <ul>
@@ -29,11 +32,38 @@ import com.amonsoft.rmps.irp.m.IService;
 public abstract class ASession implements ISession
 {
     private IProcess process;
+    private IMessage message;
     private HashMap<String, Object> attribute;
 
     public ASession()
     {
         attribute = new HashMap<String, Object>();
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.amonsoft.rmps.irp.b.ISession#send(com.amonsoft.rmps.irp.b.IMimeMessage
+     * )
+     */
+    @Override
+    public IMessage read()
+    {
+        return message;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.amonsoft.rmps.irp.b.ISession#send(com.amonsoft.rmps.irp.b.IMimeMessage
+     * , boolean)
+     */
+    @Override
+    public void save(IMessage message)
+    {
+        this.message = message;
     }
 
     @Override
@@ -119,7 +149,10 @@ public abstract class ASession implements ISession
     protected static StringBuffer appendCopy(ISession session, StringBuffer message)
     {
         message.append(session.newLine()).append("---------------------------------");
-        message.append(session.newLine()).append("〖*菜单 ?帮助");
+        message.append(session.newLine()).append('〖');
+        message.append(ConsEnv.KEY_MENU).append("菜单 ");
+        message.append(ConsEnv.KEY_HELP).append("帮助 ");
+        message.append(ConsEnv.KEY_REDO).append("重复");
         IService service = Control.getService(session.getProcess().getFunc());
         if (service != null && service.getHelpTips() != null)
         {

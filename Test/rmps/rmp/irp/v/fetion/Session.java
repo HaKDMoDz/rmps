@@ -142,30 +142,6 @@ public class Session extends ASession
     /*
      * (non-Javadoc)
      * 
-     * @see
-     * com.amonsoft.rmps.irp.b.ISession#send(com.amonsoft.rmps.irp.b.IMimeMessage
-     * )
-     */
-    @Override
-    public void send(IMimeMessage message)
-    {
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.amonsoft.rmps.irp.b.ISession#send(com.amonsoft.rmps.irp.b.IMimeMessage
-     * , boolean)
-     */
-    @Override
-    public void send(IMimeMessage message, boolean literal)
-    {
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see com.amonsoft.rmps.irp.b.ISession#send(java.io.File)
      */
     @Override

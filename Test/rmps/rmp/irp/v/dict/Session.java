@@ -14,7 +14,6 @@ import rmp.irp.comn.ASession;
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IMessage;
 import com.amonsoft.rmps.irp.b.IMimeMessage;
-import com.amonsoft.rmps.irp.b.IProcess;
 
 /**
  * <ul>
@@ -59,17 +58,6 @@ public class Session extends ASession
     }
 
     @Override
-    public void send(IMimeMessage message)
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void send(IMimeMessage message, boolean literal)
-    {
-    }
-
-    @Override
     public void send(File file)
     {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -78,12 +66,6 @@ public class Session extends ASession
     @Override
     public void reset()
     {
-    }
-
-    @Override
-    public String newLine()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -100,24 +82,6 @@ public class Session extends ASession
 
     @Override
     public IMimeMessage createMimeMessage()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Object getAttribute(String key)
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void setAttribute(String key, Object obj)
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public IProcess getProcess()
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }

@@ -55,16 +55,16 @@ public interface ISession
     /**
      * 发送多媒体消息
      * 
-     * @param message
+     * @return TODO
      */
-    void send(IMimeMessage message);
+    IMessage read();
 
     /**
      * 发送多媒体消息
      * 
      * @param message
      */
-    void send(IMimeMessage message, boolean literal);
+    void save(IMessage message);
 
     /**
      * 发送文件

@@ -74,17 +74,6 @@ public class Session extends ASession
     }
 
     @Override
-    public void send(IMimeMessage message)
-    {
-        send(message, true);
-    }
-
-    @Override
-    public void send(IMimeMessage message, boolean literal)
-    {
-    }
-
-    @Override
     public void send(File file)
     {
         switchboard.sendFile(file);
