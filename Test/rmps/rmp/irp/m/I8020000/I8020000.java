@@ -5,9 +5,6 @@
  * Description:
  *
  */
-/*
- * 
- */
 package rmp.irp.m.I8020000;
 
 import java.util.HashMap;
@@ -23,6 +20,8 @@ import com.amonsoft.rmps.irp.b.IProcess;
 import com.amonsoft.rmps.irp.b.ISession;
 import com.amonsoft.rmps.irp.m.IService;
 import com.amonsoft.util.CharUtil;
+
+import cons.irp.ConsEnv;
 
 /**
  * <ul>
@@ -119,34 +118,43 @@ public class I8020000 implements IService
         IProcess pro = session.getProcess();
 
         // 功能选择
-        if (pro.getStep() == IProcess.STEP_DEFAULT)
+        if (!IProcess.ITEM_DEFAULT.equals(pro.getItem()))
         {
-            if ("0".equals(tmp))
-            {
-                pro.setStep(Constant.STEP_CHARONE);
-                session.send(msg.append("请输入新的验证数据！").append(session.newLine()).toString());
-                return;
-            }
+            // 输入模式切换
             if ("1".equals(tmp))
             {
-                pro.setStep(Constant.STEP_CHARSET);
-                session.send(msg.append("请输入后续验证数据！").append(session.newLine()).toString());
+                pro.setItem(IProcess.ITEM_DEFAULT);
+                if (pro.getStep() == Constant.STEP_CHARONE)
+                {
+                    pro.setStep(Constant.STEP_CHARSET);
+                    session.send(msg.append("请输入后续验证数据！").append(session.newLine()).toString());
+                }
+                else
+                {
+                    pro.setStep(Constant.STEP_CHARONE);
+                    session.send(msg.append("请输入新的验证数据！").append(session.newLine()).toString());
+                }
                 return;
             }
+            // 选择验证方法
             if ("2".equals(tmp))
             {
                 doMenu(session, msg);
+                pro.setItem(IProcess.ITEM_DEFAULT);
                 pro.setStep(Constant.STEP_MATCHER);
                 session.send(msg.toString());
                 return;
             }
+            // 修改匹配模式
             if ("3".equals(tmp))
             {
+                pro.setItem(IProcess.ITEM_DEFAULT);
                 pro.setStep(Constant.STEP_PATTERN);
                 session.send(msg.append("请输入新的匹配模式！").append(session.newLine()).toString());
                 return;
             }
-            if ("*".equals(tmp))
+            // 显示服务菜单
+            if (ConsEnv.KEY_MENU.equals(tmp))
             {
                 if (pro.setFunc(".."))
                 {
@@ -156,8 +164,24 @@ public class I8020000 implements IService
             }
 
             // 容错处理
-            msg.append("小木不能确认您当前的操作！").append(session.newLine());
+            if (!"0".equals(tmp))
+            {
+                msg.append("小木不能确认您当前的操作！").append(session.newLine());
+                doStep(session, msg);
+                session.send(msg.toString());
+                return;
+            }
+
+            // 继续当前输入
+            pro.setItem(IProcess.ITEM_DEFAULT);
+            txt = ConsEnv.KEY_HELP;
+            tmp = txt;
+        }
+
+        if (ConsEnv.KEY_MENU.equals(tmp))
+        {
             doStep(session, msg);
+            pro.setItem(Constant.ITEM_SUBMENU);
             session.send(msg.toString());
             return;
         }
@@ -291,8 +315,8 @@ public class I8020000 implements IService
 
     private StringBuffer doStep(ISession session, StringBuffer message)
     {
-        message.append("0、录入新的验证数据；").append(session.newLine());
-        message.append("1、继续当前数据输入；").append(session.newLine());
+        message.append("0、继续当前数据输入；").append(session.newLine());
+        message.append(CharUtil.format("1、切换为{0}输入模式；", session.getProcess().getStep() == Constant.STEP_CHARONE ? "连续" : "单次")).append(session.newLine());
         message.append("2、选择其它验证方法；").append(session.newLine());
         message.append("3、更新当前匹配模式；").append(session.newLine());
         message.append("*、返回服务选择菜单；").append(session.newLine());
@@ -307,15 +331,16 @@ public class I8020000 implements IService
             String p = (String) session.getAttribute(getCode() + Constant.SESSION_PATTERN);// 表达式
             String m = hash.get((String) session.getAttribute(getCode() + Constant.SESSION_MATCHER));// 运算符
             String t = (String) session.getAttribute(getCode() + Constant.SESSION_CHARSET);// 字符串
-            message.append('/').append(p).append("/ .");
+            message.append("匹配模式：").append(p).append(session.newLine());
+            message.append("验证方法：").append(m).append(session.newLine());
+            message.append("测试数据：").append(t).append(session.newLine());
+            message.append("运行结果：");
             if (Constant.MATCHER_TEST.equals(m))
             {
-                message.append(Constant.MATCHER_TEST).append("() 运行结果：");
                 message.append(Pattern.matches(p, t)).append(session.newLine());
             }
             else if (Constant.MATCHER_MATCH.equals(m))
             {
-                message.append(Constant.MATCHER_MATCH).append("() 运行结果：").append(session.newLine());
                 Matcher r = Pattern.compile(p).matcher(t);
                 while (r.find())
                 {
@@ -324,7 +349,6 @@ public class I8020000 implements IService
             }
             else if (Constant.MATCHER_SPLIT.equals(m))
             {
-                message.append(Constant.MATCHER_SPLIT).append("() 运行结果：").append(session.newLine());
                 for (String s : t.split(p))
                 {
                     message.append(s).append(session.newLine());
@@ -332,7 +356,6 @@ public class I8020000 implements IService
             }
             else if (Constant.MATCHER_SEARCH.equals(m))
             {
-                message.append(Constant.MATCHER_SEARCH).append("() 运行结果：").append(session.newLine());
                 Matcher r = Pattern.compile(p).matcher(t);
                 while (r.find())
                 {
@@ -341,7 +364,6 @@ public class I8020000 implements IService
             }
             else if (Constant.MATCHER_REPLACE.equals(m))
             {
-                message.append(Constant.MATCHER_REPLACE).append("('■') 运行结果：");
                 message.append(session.newLine()).append(t.replaceAll(p, "■")).append(session.newLine());
             }
         }
@@ -350,8 +372,6 @@ public class I8020000 implements IService
             message.append(exp.getMessage()).append(session.newLine());
         }
 
-        doStep(session, message.append(session.newLine()));
-        session.getProcess().setStep(IProcess.STEP_DEFAULT);
         session.send(message.toString());
     }
 }

@@ -42,7 +42,7 @@ public interface Constant
     /**
      * 支持的验证方法：replace
      */
-    String MATCHER_REPLACE = "replace";
+    String MATCHER_REPLACE = "replace('■')";
 
     /**
      * 会话保存变量：匹配模式
@@ -56,6 +56,11 @@ public interface Constant
      * 会话保存变量：验证数据
      */
     String SESSION_CHARSET = "_c";
+
+    /**
+     * 用户配置菜单
+     */
+    String ITEM_SUBMENU = "1";
 
     /**
      * 操作步骤：输入匹配模式
