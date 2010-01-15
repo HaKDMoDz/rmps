@@ -15,6 +15,7 @@ import rmp.irp.v.jabber.Jabber;
 import rmp.irp.v.live.Live;
 import rmp.irp.v.meebo.Meebo;
 import rmp.irp.v.qq.QQ;
+import rmp.irp.v.ymsg.YMsg;
 
 import com.amonsoft.rmps.irp.b.IPresence;
 import com.amonsoft.rmps.irp.v.IAccount;
@@ -125,6 +126,20 @@ public class Irps
                 account.sign(IPresence.INIT);
                 account.sign(IPresence.SIGN);
                 accounts.put(ConsEnv.IM_QQ, account);
+            }
+        });
+        menu.add(irpsItem);
+
+        irpsItem = new java.awt.MenuItem("Yahoo");
+        irpsItem.addActionListener(new java.awt.event.ActionListener()
+        {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                IAccount account = new YMsg();
+                account.sign(IPresence.INIT);
+                account.sign(IPresence.SIGN);
+                accounts.put(ConsEnv.IM_YMSG, account);
             }
         });
         menu.add(irpsItem);

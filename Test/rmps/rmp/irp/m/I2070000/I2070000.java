@@ -188,48 +188,83 @@ public class I2070000 implements IService
         // 功能选择事件
         if (IProcess.STEP_DEFAULT == pro.getStep())
         {
-            if (!CharUtil.isValidateInteger(tmp))
+            if (!pro.setItem(tmp))
             {
                 doHelp(session, msg);
                 session.send(msg.append("请选择您要进行的操作！").append(session.newLine()).toString());
                 return;
             }
 
-            pro.setStep(Integer.parseInt(tmp));
-            switch (pro.getStep())
+            if (Constant.ITEM_SEARCH.equals(pro.getItem()))
             {
-                case Constant.STEP_SEARCH:
-                    break;
-                case Constant.STEP_SELECT:
-                    break;
-                case Constant.STEP_APPEND:
-                    break;
-                case Constant.STEP_REMOVE:
-                    break;
-                default:
-                    doHelp(session, msg);
-                    session.send(msg.append("请选择您要进行的操作！").append(session.newLine()).toString());
-                    break;
+                return;
             }
-            return;
+            if (Constant.ITEM_APPEND.equals(pro.getItem()))
+            {
+                return;
+            }
+            if (Constant.ITEM_REMOVE.equals(pro.getItem()))
+            {
+                return;
+            }
+            if (!Constant.ITEM_SELECT.equals(pro.getItem()))
+            {
+                doHelp(session, msg);
+                session.send(msg.append("请选择您要进行的操作！").append(session.newLine()).toString());
+                return;
+            }
         }
 
-        switch (pro.getStep())
+        try
         {
-            case Constant.STEP_SEARCH:
+            if (Constant.ITEM_SEARCH.equals(pro.getItem()))
+            {
                 doSearch(session, msg);
-                break;
-            case Constant.STEP_SELECT:
+                return;
+            }
+            if (Constant.ITEM_SELECT.equals(pro.getItem()))
+            {
+                String data = HttpUtil.request(path + '?' + CharUtil.format(args, "A0000000", Constant.OPT_SELECT, ""), "GET", "UTF-8", null);
+                Document doc = DocumentHelper.parseText(data);
+                if (doc != null)
+                {
+                    List<K1SV1S> kindList = new ArrayList<K1SV1S>();
+                    for (Object obj : doc.selectNodes("/amonsoft/kind/item"))
+                    {
+                        Element kind = (Element) obj;
+                        kindList.add(new K1SV1S(kind.attributeValue("id"), kind.attributeValue("name")));
+                    }
+                    session.setAttribute(getCode() + Constant.SESSION_KINDLIST, kindList);
+
+                    List<K1SV2S> linkList = new ArrayList<K1SV2S>();
+                    for (Object obj : doc.selectNodes("/amonsoft/link/item"))
+                    {
+                        Element link = (Element) obj;
+                        linkList.add(new K1SV2S(link.attributeValue("id"), link.attributeValue("name"), link.attributeValue("short")));
+                    }
+                    session.setAttribute(getCode() + Constant.SESSION_LINKLIST, linkList);
+                }
                 doSelect(session, msg);
-                break;
-            case Constant.STEP_APPEND:
+                return;
+            }
+            if (Constant.ITEM_APPEND.equals(pro.getItem()))
+            {
                 doAppend(session, msg);
-                break;
-            case Constant.STEP_REMOVE:
+                return;
+            }
+            if (Constant.ITEM_REMOVE.equals(pro.getItem()))
+            {
                 doRemove(session, msg);
-                break;
-            default:
-                break;
+                return;
+            }
+
+            doHelp(session, msg);
+            session.send(msg.append("请选择您要进行的操作！").append(session.newLine()).toString());
+            return;
+        }
+        catch (Exception exp)
+        {
+            session.send(msg.append(exp.getMessage()).append(session.newLine()).toString());
         }
         session.send(msg.toString());
     }
@@ -304,33 +339,54 @@ public class I2070000 implements IService
         return message;
     }
 
+    @SuppressWarnings("unchecked")
     private StringBuffer doSelect(ISession session, StringBuffer message)
     {
-        try
+        IProcess pro = session.getProcess();
+        int step = pro.getStep();
+        if (step > pro.getStep())
         {
-            String data = HttpUtil.request(path + CharUtil.format(args, "A0000000", Constant.OPT_SEARCH, ""), "GET", "UTF-8", null);
-            Document doc = DocumentHelper.parseText(data);
-            if (doc != null)
+            return message;
+        }
+
+        List<K1SV1S> kind = (List<K1SV1S>) session.getAttribute(getCode() + Constant.SESSION_KINDLIST);
+        List<K1SV2S> link = (List<K1SV2S>) session.getAttribute(getCode() + Constant.SESSION_LINKLIST);
+        int l1 = kind.size();
+        int l2 = link.size();
+        int s1 = step * 10;
+        int e1 = s1 + 10;
+        int s2 = e1 - l1;
+        int e2 = s2;
+        if (e1 > l1)
+        {
+            e1 = l1;
+        }
+        if (e2 > l2)
+        {
+            e2 = l2;
+        }
+
+        // 仅显示类别
+        if (s1 < e1)
+        {
+            int t = 0;
+            message.append(CharUtil.format("【类别】（{0}）", l1)).append(session.newLine());
+            K1SV1S item;
+            while (s1 < e1)
             {
-                message.append("【类别】").append(session.newLine());
-                List<K1SV1S> kindList = new ArrayList<K1SV1S>();
-                for (Object obj : doc.selectNodes("/amonsoft/kind/item"))
-                {
-                    Element kind = (Element) obj;
-                    kindList.add(new K1SV1S(kind.attributeValue("id"), kind.attributeValue("name")));
-                }
-                message.append("【链接】").append(session.newLine());
-                List<K1SV2S> linkList = new ArrayList<K1SV2S>();
-                for (Object obj : doc.selectNodes("/amonsoft/kind/item"))
-                {
-                    Element link = (Element) obj;
-                    linkList.add(new K1SV2S(link.attributeValue("id"), link.attributeValue("name"), link.attributeValue("short")));
-                }
+                item = kind.get(s1++);
+                message.append(t++).append('、').append(item.getV()).append(session.newLine());
             }
         }
-        catch (Exception exp)
+        if (s2 > 0 && s2 < e2)
         {
-            LogUtil.exception(exp);
+            message.append(CharUtil.format("【链接】（{0}）", l2)).append(session.newLine());
+            K1SV2S item;
+            while (s2 < e2)
+            {
+                item = link.get(s2++);
+                message.append(item.getV1()).append(item.getV2()).append(session.newLine());
+            }
         }
         return message;
     }

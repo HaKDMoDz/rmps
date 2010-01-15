@@ -8,11 +8,9 @@
 package rmp.irp.v.ymsg;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import rmp.irp.comn.ASession;
+import rmp.util.LogUtil;
 
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IMessage;
@@ -30,9 +28,14 @@ import com.amonsoft.rmps.irp.b.IMimeMessage;
  */
 public class Session extends ASession
 {
-    private ymsg.network.Session messenger;
+    org.openymsg.network.Session messenger;
+    org.openymsg.network.event.SessionEvent session;
 
-    public Session(ymsg.network.Session messenger)
+    Session()
+    {
+    }
+
+    Session(org.openymsg.network.Session messenger)
     {
         this.messenger = messenger;
     }
@@ -40,48 +43,48 @@ public class Session extends ASession
     @Override
     public void send()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try
+        {
+            messenger.sendTypingNotification(session.getFrom(), true);
+        }
+        catch (Exception exp)
+        {
+            LogUtil.exception(exp);
+        }
     }
 
     @Override
     public void send(String message)
     {
-        try
-        {
-            messenger.sendChatMessage(message);
-        }
-        catch (IllegalStateException ex)
-        {
-            Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch (IOException ex)
-        {
-            Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        send(message, true);
     }
 
     @Override
     public void send(String message, boolean literal)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try
+        {
+            messenger.sendMessage(session.getFrom(), literal ? appendCopy(this, appendPath(this, new StringBuffer()).append(message)).toString() : message);
+        }
+        catch (Exception ex)
+        {
+            LogUtil.exception(ex);
+        }
     }
 
     @Override
     public void send(IMessage message)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void send(IMessage message, boolean literal)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void send(File file)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -92,18 +95,18 @@ public class Session extends ASession
     @Override
     public IContact getContact()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new Contact(session.getFrom());
     }
 
     @Override
     public IMessage createMessage()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return null;
     }
 
     @Override
     public IMimeMessage createMimeMessage()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return null;
     }
 }

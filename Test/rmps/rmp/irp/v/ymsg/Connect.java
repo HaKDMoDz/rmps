@@ -31,7 +31,7 @@ public class Connect implements IConnect
     @Override
     public boolean load()
     {
-        user = "Amon_CT@yahoo.com";
+        user = "Amon_CT";
         pwds = "fPEHrmQs";
         return true;
     }

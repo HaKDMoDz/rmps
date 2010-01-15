@@ -7,20 +7,16 @@
  */
 package rmp.irp.v.ymsg;
 
-import java.awt.Toolkit;
+import java.util.HashMap;
 import java.util.List;
 
+import org.openymsg.network.FireEvent;
+import org.openymsg.network.ServiceType;
+import org.openymsg.network.event.SessionEvent;
+import org.openymsg.network.event.SessionListener;
+
+import rmp.irp.c.Control;
 import rmp.util.LogUtil;
-import ymsg.network.event.SessionChatEvent;
-import ymsg.network.event.SessionConferenceEvent;
-import ymsg.network.event.SessionErrorEvent;
-import ymsg.network.event.SessionEvent;
-import ymsg.network.event.SessionExceptionEvent;
-import ymsg.network.event.SessionFileTransferEvent;
-import ymsg.network.event.SessionFriendEvent;
-import ymsg.network.event.SessionListener;
-import ymsg.network.event.SessionNewMailEvent;
-import ymsg.network.event.SessionNotifyEvent;
 
 import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IPresence;
@@ -40,9 +36,8 @@ import com.amonsoft.rmps.irp.v.IConnect;
 public class YMsg implements IAccount, SessionListener
 {
     private Connect connect;
-    private ymsg.network.Session messenger;
-
-    // private Session session;
+    private org.openymsg.network.Session messenger;
+    private HashMap<String, Session> sessions;
 
     public YMsg()
     {
@@ -60,15 +55,15 @@ public class YMsg implements IAccount, SessionListener
         switch (status)
         {
             case IPresence.INIT:
+                sessions = new HashMap<String, Session>();
                 connect = new Connect();
                 connect.load();
                 break;
             case IPresence.SIGN:
                 try
                 {
-                    messenger = new ymsg.network.Session();
+                    messenger = new org.openymsg.network.Session();
                     messenger.addSessionListener(this);
-
                     messenger.login(connect.getUser(), connect.getPwds());
                 }
                 catch (Exception exp)
@@ -100,159 +95,36 @@ public class YMsg implements IAccount, SessionListener
     @Override
     public IContact getContact(String user)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return null;
     }
 
     @Override
     public List<IContact> getContact()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return null;
     }
 
     @Override
-    public void fileTransferReceived(SessionFileTransferEvent arg0)
+    public void dispatch(FireEvent evt)
     {
-    }
-
-    @Override
-    public void connectionClosed(SessionEvent arg0)
-    {
-    }
-
-    @Override
-    public void listReceived(SessionEvent arg0)
-    {
-    }
-
-    @Override
-    public void messageReceived(SessionEvent arg0)
-    {
-        try
+        ServiceType type = evt.getType();
+        SessionEvent event = evt.getEvent();
+        if (ServiceType.MESSAGE == type)
         {
-            messenger.sendMessage(arg0.getFrom(), arg0.getMessage());
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
-        }
-        try
-        {
-            messenger.sendChatMessage(arg0.getMessage());
-        }
-        catch (Exception exp)
-        {
-            LogUtil.exception(exp);
+            Session session = getSession(event.getFrom());
+            session.session = event;
+            Control.getInstance().instantMessageReceived(session, new Message(event.getMessage()));
         }
     }
 
-    @Override
-    public void buzzReceived(SessionEvent arg0)
+    private Session getSession(String name)
     {
-        Toolkit.getDefaultToolkit().beep();
-    }
-
-    @Override
-    public void offlineMessageReceived(SessionEvent arg0)
-    {
-    }
-
-    @Override
-    public void errorPacketReceived(SessionErrorEvent arg0)
-    {
-    }
-
-    @Override
-    public void inputExceptionThrown(SessionExceptionEvent arg0)
-    {
-    }
-
-    @Override
-    public void newMailReceived(SessionNewMailEvent arg0)
-    {
-    }
-
-    @Override
-    public void notifyReceived(SessionNotifyEvent arg0)
-    {
-    }
-
-    @Override
-    public void contactRequestReceived(SessionEvent arg0)
-    {
-    }
-
-    @Override
-    public void contactRejectionReceived(SessionEvent arg0)
-    {
-    }
-
-    @Override
-    public void conferenceInviteReceived(SessionConferenceEvent arg0)
-    {
-    }
-
-    @Override
-    public void conferenceInviteDeclinedReceived(SessionConferenceEvent arg0)
-    {
-    }
-
-    @Override
-    public void conferenceLogonReceived(SessionConferenceEvent arg0)
-    {
-    }
-
-    @Override
-    public void conferenceLogoffReceived(SessionConferenceEvent arg0)
-    {
-    }
-
-    @Override
-    public void conferenceMessageReceived(SessionConferenceEvent arg0)
-    {
-    }
-
-    @Override
-    public void friendsUpdateReceived(SessionFriendEvent arg0)
-    {
-    }
-
-    @Override
-    public void friendAddedReceived(SessionFriendEvent arg0)
-    {
-    }
-
-    @Override
-    public void friendRemovedReceived(SessionFriendEvent arg0)
-    {
-    }
-
-    @Override
-    public void chatLogonReceived(SessionChatEvent arg0)
-    {
-    }
-
-    @Override
-    public void chatLogoffReceived(SessionChatEvent arg0)
-    {
-    }
-
-    @Override
-    public void chatMessageReceived(SessionChatEvent arg0)
-    {
-    }
-
-    @Override
-    public void chatUserUpdateReceived(SessionChatEvent arg0)
-    {
-    }
-
-    @Override
-    public void chatConnectionClosed(SessionEvent arg0)
-    {
-    }
-
-    @Override
-    public void chatCaptchaReceived(SessionChatEvent arg0)
-    {
+        Session session = sessions.get(name);
+        if (session == null)
+        {
+            session = new Session(messenger);
+            sessions.put(name, session);
+        }
+        return session;
     }
 }

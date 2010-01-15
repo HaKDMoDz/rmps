@@ -28,8 +28,12 @@ public interface Constant
     String OPT_APPEND = "a";
     String OPT_REMOVE = "r";
 
-    int STEP_SEARCH = 1;
-    int STEP_SELECT = 2;
-    int STEP_APPEND = 3;
-    int STEP_REMOVE = 4;
+    String ITEM_SEARCH = "1";
+    String ITEM_SELECT = "2";
+    String ITEM_APPEND = "3";
+    String ITEM_REMOVE = "4";
+
+    String SESSION_KINDLIST = "_k";
+    String SESSION_LINKLIST = "_l";
+    String SESSION_STEPLIST = "_s";
 }

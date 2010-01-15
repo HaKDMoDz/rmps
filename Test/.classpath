@@ -23,8 +23,6 @@
 	<classpathentry kind="lib" path="lib/irps/smackx-jingle.jar"/>
 	<classpathentry kind="lib" path="lib/irps/smackx.jar"/>
 	<classpathentry kind="lib" path="lib/irps/twitter4j-2.0.10.jar"/>
-	<classpathentry kind="lib" path="lib/irps/ymsg_network_v0_64.jar"/>
-	<classpathentry kind="lib" path="lib/irps/ymsg_support_v0_64.jar"/>
 	<classpathentry kind="lib" path="lib/axis-ant.jar"/>
 	<classpathentry kind="lib" path="lib/axis.jar"/>
 	<classpathentry kind="lib" path="lib/commons-discovery-0.2.jar"/>
@@ -39,5 +37,6 @@
 	<classpathentry kind="lib" path="lib/prps/jmf/jmf.jar"/>
 	<classpathentry kind="lib" path="lib/prps/jmf/mediaplayer.jar"/>
 	<classpathentry kind="lib" path="lib/prps/jmf/multiplayer.jar"/>
+	<classpathentry kind="lib" path="lib/irps/openymsg_0.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
