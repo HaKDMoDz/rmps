@@ -28,16 +28,16 @@
 	<classpathentry kind="lib" path="lib/axis-ant.jar"/>
 	<classpathentry kind="lib" path="lib/axis.jar"/>
 	<classpathentry kind="lib" path="lib/commons-discovery-0.2.jar"/>
-	<classpathentry kind="lib" path="lib/customizer.jar"/>
 	<classpathentry kind="lib" path="lib/image4j-0.7.jar"/>
 	<classpathentry kind="lib" path="lib/jaxrpc.jar"/>
 	<classpathentry kind="lib" path="lib/jdom-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/jmf.jar"/>
-	<classpathentry kind="lib" path="lib/mediaplayer.jar"/>
-	<classpathentry kind="lib" path="lib/multiplayer.jar"/>
 	<classpathentry kind="lib" path="lib/saaj.jar"/>
 	<classpathentry kind="lib" path="lib/saaj-impl-1.3.4.jar"/>
 	<classpathentry kind="lib" path="lib/wsdl4j-1.5.1.jar"/>
 	<classpathentry kind="lib" path="lib/irps/skype.jar"/>
+	<classpathentry kind="lib" path="lib/prps/jmf/customizer.jar"/>
+	<classpathentry kind="lib" path="lib/prps/jmf/jmf.jar"/>
+	<classpathentry kind="lib" path="lib/prps/jmf/mediaplayer.jar"/>
+	<classpathentry kind="lib" path="lib/prps/jmf/multiplayer.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
