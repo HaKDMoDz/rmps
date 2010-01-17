@@ -155,7 +155,7 @@ public class I2030000 implements IService
         try
         {
             // 用户输入选单
-            if (ConsEnv.KEY_MENU.equals(tmp))
+            if (ConsEnv.KEY_FUNC.equals(tmp))
             {
                 doMenu(session, msg);
 
@@ -168,7 +168,7 @@ public class I2030000 implements IService
             if (!IProcess.ITEM_DEFAULT.equals(pro.getItem()))
             {
                 // 返回服务选单
-                if (ConsEnv.KEY_MENU.equals(tmp))
+                if (ConsEnv.KEY_FUNC.equals(tmp))
                 {
                     if (pro.setFunc(".."))
                     {

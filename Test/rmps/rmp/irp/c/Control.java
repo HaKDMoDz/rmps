@@ -171,12 +171,6 @@ public class Control implements IControl
         }
 
         IProcess process = session.getProcess();
-        // 会话锁定事件
-        if ((process.getType() & IProcess.TYPE_NACTION) != 0)
-        {
-            services.get(process.getFunc()).doDeal(session, message);
-            return;
-        }
 
         // 特殊命令转换
         String tmp = getCommand(msg);
@@ -200,46 +194,59 @@ public class Control implements IControl
         // 优先处理命令
         if (tmp != null)
         {
-            // 重复输入
-            if (ConsEnv.KEY_REDO.equals(tmp))
-            {
-                if (session.read() != null)
-                {
-                    message = session.read();
-                    msg = message.getContent();
-                    tmp = getCommand(msg);
-                }
-            }
-
-            // 显示菜单
+            // 服务菜单
             if (ConsEnv.KEY_MENU.equals(tmp))
             {
                 services.get(process.getFunc()).doMenu(session, message);
                 return;
             }
-            // 使用帮助
-            if (ConsEnv.KEY_HELP.equals(tmp))
+
+            if ((process.getType() & IProcess.TYPE_NACTION) == 0)
             {
-                services.get(process.getFunc()).doHelp(session, message);
-                return;
-            }
-            // 问题汇报
-            if (ConsEnv.KEY_BUGS.equals(tmp))
-            {
-                services.get("").doInit(session, message);
-                return;
-            }
-            // 发表留言
-            if (ConsEnv.KEY_IDEA.equals(tmp))
-            {
-                services.get("").doInit(session, message);
-                return;
-            }
-            // 邀请作者
-            if (ConsEnv.KEY_AMON.equals(tmp))
-            {
-                services.get("").doInit(session, message);
-                return;
+                // 重复输入
+                if (ConsEnv.KEY_REDO.equals(tmp))
+                {
+                    if (session.read() != null)
+                    {
+                        message = session.read();
+                        msg = message.getContent();
+                        tmp = getCommand(msg);
+                    }
+                }
+
+                // 显示菜单
+                if (ConsEnv.KEY_FUNC.equals(tmp))
+                {
+                    if (process.setFunc(".."))
+                    {
+                        services.get(process.getFunc()).doInit(session, message);
+                    }
+                    return;
+                }
+                // 使用帮助
+                if (ConsEnv.KEY_HELP.equals(tmp))
+                {
+                    services.get(process.getFunc()).doHelp(session, message);
+                    return;
+                }
+                // 问题汇报
+                if (ConsEnv.KEY_BUGS.equals(tmp))
+                {
+                    services.get("").doInit(session, message);
+                    return;
+                }
+                // 发表留言
+                if (ConsEnv.KEY_IDEA.equals(tmp))
+                {
+                    services.get("").doInit(session, message);
+                    return;
+                }
+                // 邀请作者
+                if (ConsEnv.KEY_AMON.equals(tmp))
+                {
+                    services.get("").doInit(session, message);
+                    return;
+                }
             }
         }
 
@@ -296,7 +303,7 @@ public class Control implements IControl
             }
 
             // 自定义命令
-            services.get(process.getFunc()).doDeal(session, message);
+            // services.get(process.getFunc()).doDeal(session, message);
 
             // 判断是否继续
             if (process.getType() <= IProcess.TYPE_COMMAND)
@@ -436,7 +443,7 @@ public class Control implements IControl
     {
         IProcess proc = session.getProcess();
         message.append(session.newLine()).append(CharUtil.format("当前第 {0}/{1} 页，", proc.getStep() + 1, proc.getMost()));
-        message.append("您可以使用<<、<、>或>>进行翻页查看。").append(session.newLine());
+        message.append("您可以使用<<、<、>或>>进行翻页查看。");
         return message;
     }
     //

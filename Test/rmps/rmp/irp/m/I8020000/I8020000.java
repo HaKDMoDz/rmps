@@ -154,7 +154,7 @@ public class I8020000 implements IService
                 return;
             }
             // 显示服务菜单
-            if (ConsEnv.KEY_MENU.equals(tmp))
+            if (ConsEnv.KEY_FUNC.equals(tmp))
             {
                 if (pro.setFunc(".."))
                 {
@@ -178,7 +178,7 @@ public class I8020000 implements IService
             tmp = txt;
         }
 
-        if (ConsEnv.KEY_MENU.equals(tmp))
+        if (ConsEnv.KEY_FUNC.equals(tmp))
         {
             doStep(session, msg);
             pro.setItem(Constant.ITEM_SUBMENU);

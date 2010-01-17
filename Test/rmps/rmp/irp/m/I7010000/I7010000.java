@@ -104,7 +104,7 @@ public class I7010000 implements IService
 
         try
         {
-            if (ConsEnv.KEY_MENU.equals(tmp))
+            if (ConsEnv.KEY_FUNC.equals(tmp))
             {
                 if (pro.setFunc(".."))
                 {

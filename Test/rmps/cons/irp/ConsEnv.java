@@ -36,9 +36,9 @@ public interface ConsEnv
     String IM_YMSG = "ymsg";
     String IS_IP = "";
 
-    String KEY_MENU = "*";
+    String KEY_FUNC = "*";
     String KEY_HELP = "?";
-    String KEY_STEP = "#";
+    String KEY_MENU = "#";
     String KEY_BUGS = "&";
     String KEY_IDEA = "@";
     String KEY_REDO = "~";

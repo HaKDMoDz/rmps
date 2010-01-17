@@ -146,7 +146,7 @@ public class I2060000 implements IService
         // 命令处理
         if (CharUtil.isValidate(tmp))
         {
-            if (ConsEnv.KEY_MENU.equals(tmp))
+            if (ConsEnv.KEY_FUNC.equals(tmp))
             {
                 if (IProcess.ITEM_DEFAULT.equals(pro.getItem()))
                 {

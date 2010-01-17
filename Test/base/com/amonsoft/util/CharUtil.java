@@ -174,6 +174,17 @@ public class CharUtil
     }
 
     /**
+     * 是否为合法的URI
+     * 
+     * @param text
+     * @return
+     */
+    public static boolean isValidateUri(String text)
+    {
+        return text != null ? Pattern.matches("[a-zA-z]+://[^\\s]+", text) : false;
+    }
+
+    /**
      * 是否为整数
      * 
      * @param text

@@ -150,7 +150,7 @@ public abstract class ASession implements ISession
     {
         message.append(session.newLine()).append("---------------------------------");
         message.append(session.newLine()).append('〖');
-        message.append(ConsEnv.KEY_MENU).append("菜单 ");
+        message.append(ConsEnv.KEY_FUNC).append("菜单 ");
         message.append(ConsEnv.KEY_HELP).append("帮助 ");
         message.append(ConsEnv.KEY_REDO).append("重复");
         IService service = Control.getService(session.getProcess().getFunc());
