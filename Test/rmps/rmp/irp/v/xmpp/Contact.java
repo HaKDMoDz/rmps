@@ -11,8 +11,9 @@ import java.util.List;
 
 import org.jivesoftware.smack.RosterEntry;
 
+import rmp.irp.comn.AContact;
+
 import com.amonsoft.rmps.irp.b.ICatalog;
-import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IPresence;
 
 /**
@@ -25,7 +26,7 @@ import com.amonsoft.rmps.irp.b.IPresence;
  * 
  * @author Amon
  */
-public class Contact implements IContact
+public class Contact extends AContact
 {
     private RosterEntry contact;
 
@@ -36,6 +37,12 @@ public class Contact implements IContact
 
     @Override
     public String getId()
+    {
+        return null;
+    }
+
+    @Override
+    public String getUser()
     {
         return null;
     }
@@ -61,7 +68,7 @@ public class Contact implements IContact
     @Override
     public IPresence getPresence()
     {
-        return null;//contact.getStatus().toString();
+        return null;// contact.getStatus().toString();
     }
 
     @Override

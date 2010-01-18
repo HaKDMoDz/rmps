@@ -10,9 +10,9 @@ package rmp.irp.v.live;
 import java.util.List;
 
 import net.sf.jml.MsnContact;
+import rmp.irp.comn.AContact;
 
 import com.amonsoft.rmps.irp.b.ICatalog;
-import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IPresence;
 
 /**
@@ -25,12 +25,18 @@ import com.amonsoft.rmps.irp.b.IPresence;
  * 
  * @author Amon
  */
-public class Contact implements IContact
+public class Contact extends AContact
 {
     MsnContact contact;
 
     @Override
     public String getId()
+    {
+        return null;
+    }
+
+    @Override
+    public String getUser()
     {
         return null;
     }

@@ -30,6 +30,20 @@ public interface IContact
     String getId();
 
     /**
+     * 用户代码
+     * 
+     * @return
+     */
+    String getCode();
+
+    /**
+     * 用户账户
+     * 
+     * @return
+     */
+    String getUser();
+
+    /**
      * 用户名称
      * 
      * @return

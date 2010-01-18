@@ -12,8 +12,9 @@ package rmp.irp.v.skype;
 
 import java.util.List;
 
+import rmp.irp.comn.AContact;
+
 import com.amonsoft.rmps.irp.b.ICatalog;
-import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IPresence;
 import com.skype.Friend;
 
@@ -30,7 +31,7 @@ import com.skype.Friend;
  * @author Amon
  * 
  */
-public class Contact implements IContact
+public class Contact extends AContact
 {
     Friend contact;
 
@@ -97,9 +98,15 @@ public class Contact implements IContact
      * @see com.amonsoft.rmps.irp.b.IContact#getName()
      */
     @Override
-    public String getName()
+    public String getUser()
     {
         // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getName()
+    {
         return null;
     }
 

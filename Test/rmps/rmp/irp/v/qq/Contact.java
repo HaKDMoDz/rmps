@@ -13,8 +13,9 @@ package rmp.irp.v.qq;
 import java.util.ArrayList;
 import java.util.List;
 
+import rmp.irp.comn.AContact;
+
 import com.amonsoft.rmps.irp.b.ICatalog;
-import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IPresence;
 import com.amonsoft.util.CharUtil;
 
@@ -35,7 +36,7 @@ import edu.tsinghua.lumaqq.qq.beans.QQFriend;
  * @author Amon
  * 
  */
-public class Contact implements IContact
+public class Contact extends AContact
 {
     protected QQFriend friend;
     protected FriendRemark remark;
@@ -108,9 +109,15 @@ public class Contact implements IContact
      * @see com.amonsoft.rmps.irp.b.IContact#getName()
      */
     @Override
-    public String getName()
+    public String getUser()
     {
         return remark.name;
+    }
+
+    @Override
+    public String getName()
+    {
+        return null;
     }
 
     public void setName(String name)
@@ -155,9 +162,9 @@ public class Contact implements IContact
         {
             return getDisplayName();
         }
-        if (CharUtil.isValidate(getName()))
+        if (CharUtil.isValidate(getUser()))
         {
-            return getName();
+            return getUser();
         }
         return "" + getQQ();
     }

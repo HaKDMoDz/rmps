@@ -13,8 +13,9 @@ package rmp.irp.v.fetion;
 import java.util.ArrayList;
 import java.util.List;
 
+import rmp.irp.comn.AContact;
+
 import com.amonsoft.rmps.irp.b.ICatalog;
-import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IPresence;
 
 /**
@@ -30,10 +31,11 @@ import com.amonsoft.rmps.irp.b.IPresence;
  * @author Amon
  * 
  */
-public class Contact implements IContact
+public class Contact extends AContact
 {
     private String uri;
     private String id;
+    private String user;
     private String name;
     private String email = "";
     private String mobile;
@@ -66,17 +68,23 @@ public class Contact implements IContact
     }
 
     @Override
-    public String getName()
+    public String getUser()
     {
-        return name;
+        return user;
     }
 
     /**
-     * @param name
+     * @param user
      */
-    public void setName(String name)
+    public void setName(String user)
     {
-        this.name = name;
+        this.user = user;
+    }
+
+    @Override
+    public String getName()
+    {
+        return name;
     }
 
     /*

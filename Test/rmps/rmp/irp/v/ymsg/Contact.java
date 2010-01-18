@@ -12,8 +12,9 @@ package rmp.irp.v.ymsg;
 
 import java.util.List;
 
+import rmp.irp.comn.AContact;
+
 import com.amonsoft.rmps.irp.b.ICatalog;
-import com.amonsoft.rmps.irp.b.IContact;
 import com.amonsoft.rmps.irp.b.IPresence;
 
 /**
@@ -29,7 +30,7 @@ import com.amonsoft.rmps.irp.b.IPresence;
  * @author Administrator
  * 
  */
-public class Contact implements IContact
+public class Contact extends AContact
 {
     private String user;
 
@@ -91,6 +92,12 @@ public class Contact implements IContact
      * 
      * @see com.amonsoft.rmps.irp.b.IContact#getName()
      */
+    @Override
+    public String getUser()
+    {
+        return null;
+    }
+
     @Override
     public String getName()
     {
