@@ -18,11 +18,11 @@ import java.util.List;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
 import rmp.bean.K1SV1S;
 import rmp.bean.K1SV2S;
+import rmp.bean.K1SV3S;
 import rmp.irp.c.Control;
 import rmp.util.EnvUtil;
 import rmp.util.LogUtil;
@@ -163,7 +163,7 @@ public class I2070000 implements IService
         session.getProcess().setItem(IProcess.ITEM_DEFAULT);
         session.getProcess().setStep(IProcess.STEP_DEFAULT);
         session.send(msg.toString());
-        session.setAttribute(getCode() + Constant.SESSION_SHOWMENU, Constant.SESSION_MENU_SUB);
+        session.setAttribute(getCode() + Constant.SESSION_SHOWMENU, null);
     }
 
     /*
@@ -212,7 +212,7 @@ public class I2070000 implements IService
                     {
                         pro.setItem(Constant.ITEM_SEARCH);
                         pro.setStep(IProcess.STEP_DEFAULT);
-                        session.send(msg.append("请输入您的查询内容！").append(session.newLine()).toString());
+                        session.send(msg.append("请输入您要查询的内容！").append(session.newLine()).toString());
                         session.setAttribute(getCode() + Constant.SESSION_SHOWMENU, null);
                         return;
                     }
@@ -247,11 +247,11 @@ public class I2070000 implements IService
                     }
                     return;
                 }
-                // 逐级选择事件
+                // 其它输入，进行当前操作
                 pro.setType(IProcess.TYPE_NACTION | IProcess.TYPE_COMMAND | IProcess.TYPE_CONTENT);
                 pro.setStep(IProcess.STEP_DEFAULT);
             }
-            if (Constant.SESSION_MENU_MGR.equals(menu))
+            else if (Constant.SESSION_MENU_MGR.equals(menu))
             {
                 // 用户选择进入数据更新模式
                 if (Constant.ITEM_UPDATE.equals(pro.getItem()))
@@ -265,6 +265,7 @@ public class I2070000 implements IService
         {
             if (IProcess.ITEM_DEFAULT.equals(pro.getItem()))
             {
+                // 进入搜索模式
                 if ("0".equals(tmp))
                 {
                     pro.setItem(Constant.ITEM_SEARCH);
@@ -273,6 +274,7 @@ public class I2070000 implements IService
                     session.setAttribute(getCode() + Constant.SESSION_SHOWMENU, null);
                     return;
                 }
+                // 返回服务菜单
                 if (ConsEnv.KEY_FUNC.equals(tmp))
                 {
                     if (pro.setFunc(".."))
@@ -281,15 +283,18 @@ public class I2070000 implements IService
                     }
                     return;
                 }
+                // 容错处理
                 if (!"1".equals(tmp))
                 {
                     doHelp(session, msg);
                     session.send(msg.toString());
                     return;
                 }
+                // 进入目录模式
                 pro.setItem(Constant.ITEM_SELECT);
                 pro.setStep(IProcess.STEP_DEFAULT);
             }
+            // 显示操作菜单
             else if (ConsEnv.KEY_MENU.equals(tmp))
             {
                 doHelp(session, msg);
@@ -302,7 +307,41 @@ public class I2070000 implements IService
         {
             if (Constant.ITEM_SEARCH.equals(pro.getItem()))
             {
-                session.setAttribute(getCode() + Constant.SESSION_LINKNAME_K, tmp);
+                if (!CharUtil.isValidate(tmp))
+                {
+                    return;
+                }
+                String data = HttpUtil.request(path + '?' + CharUtil.format(args, "A0000000", Constant.OPT_SEARCH, tmp), "GET", "UTF-8", null);
+                Document doc = DocumentHelper.parseText(data);
+                if (doc != null)
+                {
+                    ArrayList<K1SV3S> itemList = (ArrayList<K1SV3S>) session.getAttribute(getCode() + Constant.SESSION_ITEMLIST_K);
+                    if (itemList != null)
+                    {
+                        itemList.clear();
+                    }
+                    else
+                    {
+                        itemList = new ArrayList<K1SV3S>();
+                        session.setAttribute(getCode() + Constant.SESSION_ITEMLIST_K, itemList);
+                    }
+                    Element node;
+                    Element kind;
+                    Element link;
+                    K1SV3S item;
+                    for (Object obj : doc.selectNodes("/amonsoft/item"))
+                    {
+                        node = (Element) obj;
+                        kind = node.element("kind");
+                        link = node.element("link");
+                        item = new K1SV3S();
+                        item.setK(kind.attributeValue("id") + ',' + link.attributeValue("id"));
+                        item.setV1(kind.attributeValue("name"));
+                        item.setV2(link.attributeValue("name"));
+                        item.setV3(link.attributeValue("short"));
+                        itemList.add(item);
+                    }
+                }
                 doSearch(session, msg);
                 session.send(msg.toString());
                 return;
@@ -494,18 +533,37 @@ public class I2070000 implements IService
     {
         try
         {
-            String data = HttpUtil.request(path + '?' + CharUtil.format(args, "A0000000", Constant.OPT_SEARCH, session.getAttribute(getCode() + Constant.SESSION_LINKNAME_K)), "GET", "UTF-8", null);
-            Document doc = DocumentHelper.parseText(data);
-            if (doc != null)
+            ArrayList<?> itemList = (ArrayList<?>) session.getAttribute(getCode() + Constant.SESSION_ITEMLIST_K);
+            if (itemList == null)
             {
-                for (Object obj : doc.selectNodes("/amonsoft/item"))
-                {
-                    Element node = (Element) obj;
-                    message.append("〖").append(node.element("kind").attributeValue("name")).append("〗").append(session.newLine());
-                    node = node.element("link");
-                    message.append("快捷地址：http://amonsoft.net/?/").append(node.attributeValue("short")).append(session.newLine());
-                    message.append("链接名称：").append(node.attributeValue("name")).append(session.newLine());
-                }
+                return message;
+            }
+            int i = session.getProcess().getStep();
+            // 判断是否为第一页
+            if (i <= -1)
+            {
+                session.send(message.append("已是第一页！").append(session.newLine()).toString());
+                return message;
+            }
+            // 判断是否为最后一页
+            if (i >= session.getProcess().getMost())
+            {
+                session.send(message.append("已是最后一页！").append(session.newLine()).toString());
+                return message;
+            }
+            int s = i * 10;
+            int e = s + 10;
+            if (e >= itemList.size())
+            {
+                e = itemList.size();
+            }
+            i = 0;
+            while (s < e)
+            {
+                K1SV3S item = (K1SV3S) itemList.get(s++);
+                message.append(i++).append("、〖").append(item.getV1()).append("〗").append(session.newLine());
+                message.append("快捷地址：http://amonsoft.net/?/").append(item.getV2()).append(session.newLine());
+                message.append("链接名称：").append(item.getV3()).append(session.newLine());
             }
         }
         catch (Exception exp)
@@ -551,7 +609,7 @@ public class I2070000 implements IService
             while (s1 < e1)
             {
                 item = kind.get(s1++);
-                message.append(t++).append('、').append(item.getV()).append(session.newLine());
+                message.append(t++).append('、').append(item.getV1()).append(session.newLine());
             }
         }
         if (s2 > 0 && s2 < e2)

@@ -158,7 +158,7 @@ public abstract class ASession implements ISession
         {
             for (K1SV1S item : service.getHelpTips())
             {
-                message.append(' ').append(item.getK()).append(item.getV());
+                message.append(' ').append(item.getK()).append(item.getV1());
             }
         }
         message.append('〗');

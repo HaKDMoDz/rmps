@@ -441,7 +441,7 @@ public class I2010000 implements IService
                 K1SV1S kv = map.get(key);
                 if (kv != null)
                 {
-                    ele.addAttribute("id", kv.getV() == null ? "" : kv.getV());
+                    ele.addAttribute("id", kv.getV1() == null ? "" : kv.getV1());
                     ele.addAttribute("comment", kv.getK() == null ? "" : kv.getK());
                 }
                 map.remove(key);

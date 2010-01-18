@@ -390,7 +390,7 @@ public class CodeData extends AbstractTableModel
         if (tmp == 127)
         {
             kv.setK("DEL");
-            kv.setV("DEL");
+            kv.setV1("DEL");
         }
         else if (tmp <= 32)
         {
@@ -404,12 +404,12 @@ public class CodeData extends AbstractTableModel
                     "record separator", "unit separator", "space" };
 
             kv.setK(TIPS[tmp]);
-            kv.setV(CTRL[tmp]);
+            kv.setV1(CTRL[tmp]);
         }
         else
         {
             kv.setK(Character.toString(tmp));
-            kv.setV(kv.getK());
+            kv.setV1(kv.getK());
         }
         return kv;
     }

@@ -20,12 +20,12 @@ import java.io.Serializable;
  * 
  * @author Amon
  */
-public final class K1SV1S implements Serializable, Cloneable
+public class K1SV1S implements Serializable, Cloneable
 {
     /** Key值 */
     private String k;
     /** Value值 */
-    private String v;
+    private String v1;
 
     /**
      * 默认构造器
@@ -45,8 +45,8 @@ public final class K1SV1S implements Serializable, Cloneable
      */
     public K1SV1S(String key, String value)
     {
-        k = key;
-        v = value;
+        this.k = key;
+        this.v1 = value;
     }
 
     /**
@@ -54,7 +54,7 @@ public final class K1SV1S implements Serializable, Cloneable
      */
     public final String getK()
     {
-        return k;
+        return this.k;
     }
 
     /**
@@ -69,18 +69,18 @@ public final class K1SV1S implements Serializable, Cloneable
     /**
      * @return the v
      */
-    public final String getV()
+    public final String getV1()
     {
-        return v;
+        return v1;
     }
 
     /**
      * @param v
      *            the v to set
      */
-    public final void setV(String v)
+    public final void setV1(String v)
     {
-        this.v = v;
+        this.v1 = v;
     }
 
     /*
@@ -90,7 +90,7 @@ public final class K1SV1S implements Serializable, Cloneable
      */
     public Object clone() throws CloneNotSupportedException
     {
-        return new K1SV1S(k, v);
+        return new K1SV1S(k, v1);
     }
 
     /*
@@ -116,6 +116,6 @@ public final class K1SV1S implements Serializable, Cloneable
      */
     public String toString()
     {
-        return v;
+        return v1;
     }
 }

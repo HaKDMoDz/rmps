@@ -54,6 +54,10 @@ public interface Constant
     String SESSION_MENU_MGR = "2";
 
     /**
+     * 链接搜索：数据列表
+     */
+    String SESSION_ITEMLIST_K = "_i";
+    /**
      * 级联查询：类别列表
      */
     String SESSION_KINDLIST_K = "_k";

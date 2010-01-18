@@ -20,14 +20,8 @@ import java.io.Serializable;
  * 
  * @author Amon
  */
-public final class K1SV2S implements Serializable, Cloneable
+public class K1SV2S extends K1SV1S implements Serializable, Cloneable
 {
-    /**  */
-    private static final long serialVersionUID = -7850578789980909658L;
-    /** Key */
-    private String k;
-    /** Value1 */
-    private String v1;
     /** Value2 */
     private String v2;
 
@@ -46,43 +40,8 @@ public final class K1SV2S implements Serializable, Cloneable
      */
     public K1SV2S(String key, String value1, String value2)
     {
-        k = key;
-        v1 = value1;
-        v2 = value2;
-    }
-
-    /**
-     * @return the k
-     */
-    public final String getK()
-    {
-        return k;
-    }
-
-    /**
-     * @param k
-     *            the k to set
-     */
-    public final void setK(String k)
-    {
-        this.k = k;
-    }
-
-    /**
-     * @return the v1
-     */
-    public final String getV1()
-    {
-        return v1;
-    }
-
-    /**
-     * @param v1
-     *            the v1 to set
-     */
-    public final void setV1(String v1)
-    {
-        this.v1 = v1;
+        super(key, value1);
+        this.v2 = value2;
     }
 
     /**
@@ -124,22 +83,12 @@ public final class K1SV2S implements Serializable, Cloneable
             return getK().equals(o);
         }
 
-        if (o instanceof K1SV2S)
+        if (o instanceof K1SV1S)
         {
-            K1SV2S kv = (K1SV2S) o;
+            K1SV1S kv = (K1SV1S) o;
             return getK().equals(kv.getK());
         }
         return false;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#toString()
-     */
-    public String toString()
-    {
-        return v1;
     }
 
     /*
