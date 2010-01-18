@@ -68,13 +68,13 @@ public interface Constant
     /**
      * 新增数据：类别名称
      */
-    String SESSION_APPEND_KIND_K = "_c";
+    String SESSION_KINDNAME_K = "_c";
     /**
      * 新增数据：链接地址
      */
-    String SESSION_APPEND_LINK_K = "_u";
+    String SESSION_LINKPATH_K = "_u";
     /**
      * 新增数据：链接名称
      */
-    String SESSION_APPEND_NAME_K = "_n";
+    String SESSION_LINKNAME_K = "_n";
 }

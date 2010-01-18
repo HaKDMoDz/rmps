@@ -18,6 +18,7 @@ import java.util.List;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
 import rmp.bean.K1SV1S;
@@ -34,6 +35,7 @@ import com.amonsoft.util.CharUtil;
 import com.amonsoft.util.HttpUtil;
 
 import cons.EnvCons;
+import cons.irp.ConsEnv;
 
 /**
  * <ul>
@@ -202,9 +204,8 @@ public class I2070000 implements IService
             // 记录用户选择
             if (Constant.SESSION_MENU_SUB.equals(menu))
             {
-                // 判断当前功能
                 // 用户选择进入模式切换
-                if ("0".equals(pro.getItem()))
+                if ("0".equals(tmp))
                 {
                     // 进入搜索模式
                     if (Constant.ITEM_SELECT.equals(pro.getItem()))
@@ -212,6 +213,7 @@ public class I2070000 implements IService
                         pro.setItem(Constant.ITEM_SEARCH);
                         pro.setStep(IProcess.STEP_DEFAULT);
                         session.send(msg.append("请输入您的查询内容！").append(session.newLine()).toString());
+                        session.setAttribute(getCode() + Constant.SESSION_SHOWMENU, null);
                         return;
                     }
                     // 进入目录模式
@@ -225,16 +227,24 @@ public class I2070000 implements IService
                     session.setAttribute(getCode() + Constant.SESSION_SHOWMENU, null);
                 }
                 // 用户选择进入添加类别事件
-                else if ("1".equals(pro.getItem()))
+                else if ("1".equals(tmp))
                 {
                     session.setAttribute(getCode() + Constant.SESSION_SHOWMENU, null);
                 }
                 // 用户选择进入添加链接事件
-                else if ("2".equals(pro.getItem()))
+                else if ("2".equals(tmp))
                 {
                     pro.setStep(Constant.STEP_APPEND_LINK);
                     session.setAttribute(getCode() + Constant.SESSION_SHOWMENU, null);
                     session.send(msg.append("请输入链接地址！").append(session.newLine()).toString());
+                    return;
+                }
+                else if (ConsEnv.KEY_FUNC.equals(tmp))
+                {
+                    if (pro.setFunc(".."))
+                    {
+                        Control.getService(pro.getFunc()).doInit(session, message);
+                    }
                     return;
                 }
                 // 逐级选择事件
@@ -250,12 +260,51 @@ public class I2070000 implements IService
                 }
             }
         }
+        // 用户首次进入
+        else
+        {
+            if (IProcess.ITEM_DEFAULT.equals(pro.getItem()))
+            {
+                if ("0".equals(tmp))
+                {
+                    pro.setItem(Constant.ITEM_SEARCH);
+                    pro.setStep(IProcess.STEP_DEFAULT);
+                    session.send(msg.append("请输入您的查询条件！").append(session.newLine()).toString());
+                    session.setAttribute(getCode() + Constant.SESSION_SHOWMENU, null);
+                    return;
+                }
+                if (ConsEnv.KEY_FUNC.equals(tmp))
+                {
+                    if (pro.setFunc(".."))
+                    {
+                        Control.getService(pro.getFunc()).doInit(session, message);
+                    }
+                    return;
+                }
+                if (!"1".equals(tmp))
+                {
+                    doHelp(session, msg);
+                    session.send(msg.toString());
+                    return;
+                }
+                pro.setItem(Constant.ITEM_SELECT);
+                pro.setStep(IProcess.STEP_DEFAULT);
+            }
+            else if (ConsEnv.KEY_MENU.equals(tmp))
+            {
+                doHelp(session, msg);
+                session.send(msg.toString());
+                return;
+            }
+        }
 
         try
         {
             if (Constant.ITEM_SEARCH.equals(pro.getItem()))
             {
+                session.setAttribute(getCode() + Constant.SESSION_LINKNAME_K, tmp);
                 doSearch(session, msg);
+                session.send(msg.toString());
                 return;
             }
             if (Constant.ITEM_SELECT.equals(pro.getItem()))
@@ -322,7 +371,7 @@ public class I2070000 implements IService
                         return;
                     }
                     pro.setStep(Constant.STEP_APPEND_NAME);
-                    session.setAttribute(getCode() + Constant.SESSION_APPEND_LINK_K, tmp);
+                    session.setAttribute(getCode() + Constant.SESSION_LINKPATH_K, tmp);
                     session.send(msg.append("请输入链接名称！").append(session.newLine()).toString());
                     return;
                 }
@@ -333,7 +382,7 @@ public class I2070000 implements IService
                         session.send(msg.append("请输入链接名称！").append(session.newLine()).toString());
                         return;
                     }
-                    session.setAttribute(getCode() + Constant.SESSION_APPEND_NAME_K, tmp);
+                    session.setAttribute(getCode() + Constant.SESSION_LINKNAME_K, tmp);
                 }
 
                 doAppend(session, msg);
@@ -404,9 +453,8 @@ public class I2070000 implements IService
     private StringBuffer doHelp(ISession session, StringBuffer message)
     {
         message.append("您可以通过如下的方式使用此服务：").append(session.newLine());
-        message.append("　　1、快速搜索您的网络收藏；").append(session.newLine());
-        message.append("　　2、递进查找您的网络收藏；").append(session.newLine());
-        message.append("　　3、添加或修改您的网络收藏；").append(session.newLine());
+        message.append("　　0、快速搜索您的网络收藏；").append(session.newLine());
+        message.append("　　1、递进查找您的网络收藏；").append(session.newLine());
         return message;
     }
 
@@ -446,11 +494,18 @@ public class I2070000 implements IService
     {
         try
         {
-            String data = HttpUtil.request(path + CharUtil.format(args, "A0000000", Constant.OPT_SEARCH, ""), "GET", "UTF-8", null);
+            String data = HttpUtil.request(path + '?' + CharUtil.format(args, "A0000000", Constant.OPT_SEARCH, session.getAttribute(getCode() + Constant.SESSION_LINKNAME_K)), "GET", "UTF-8", null);
             Document doc = DocumentHelper.parseText(data);
             if (doc != null)
             {
-
+                for (Object obj : doc.selectNodes("/amonsoft/item"))
+                {
+                    Element node = (Element) obj;
+                    message.append("〖").append(node.element("kind").attributeValue("name")).append("〗").append(session.newLine());
+                    node = node.element("link");
+                    message.append("快捷地址：http://amonsoft.net/?/").append(node.attributeValue("short")).append(session.newLine());
+                    message.append("链接名称：").append(node.attributeValue("name")).append(session.newLine());
+                }
             }
         }
         catch (Exception exp)
@@ -523,7 +578,7 @@ public class I2070000 implements IService
             Element root = doc.addElement("amonsoft").addElement("item");
 
             // 判断是否需要添加类别
-            String tmp = (String) session.getAttribute(getCode() + Constant.SESSION_APPEND_KIND_K);
+            String tmp = (String) session.getAttribute(getCode() + Constant.SESSION_KINDNAME_K);
             if (CharUtil.isValidate(tmp))
             {
                 Element kind = root.addElement("kind");
@@ -532,13 +587,13 @@ public class I2070000 implements IService
             }
 
             // 判断是否需要添加链接
-            tmp = (String) session.getAttribute(getCode() + Constant.SESSION_APPEND_LINK_K);
+            tmp = (String) session.getAttribute(getCode() + Constant.SESSION_LINKPATH_K);
             if (CharUtil.isValidate(tmp))
             {
                 Element link = root.addElement("link");
                 link.addAttribute("uri", uri);
                 link.addAttribute("name", tmp);
-                link.addAttribute("path", (String) session.getAttribute(getCode() + Constant.SESSION_APPEND_NAME_K));
+                link.addAttribute("path", (String) session.getAttribute(getCode() + Constant.SESSION_LINKNAME_K));
             }
 
             // POST参数
