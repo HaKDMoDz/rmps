@@ -432,6 +432,13 @@ public class I2070000 implements IService
                 doRemove(session, msg);
                 return;
             }
+            if (Constant.ITEM_DETAIL.equals(pro.getItem()))
+            {
+                String uri = "";
+                String data = HttpUtil.request(path + '?' + CharUtil.format(args, "A0000000", Constant.OPT_DETAIL, uri), "GET", "UTF-8", null);
+                doDetail(session, msg);
+                return;
+            }
 
             doHelp(session, msg);
             session.send(msg.append("请选择您要进行的操作！").append(session.newLine()).toString());
@@ -622,6 +629,11 @@ public class I2070000 implements IService
                 message.append(item.getV1()).append(item.getV2()).append(session.newLine());
             }
         }
+        return message;
+    }
+
+    private StringBuffer doDetail(ISession session, StringBuffer message)
+    {
         return message;
     }
 

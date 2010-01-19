@@ -29,11 +29,13 @@ public interface Constant
     String OPT_SELECT = "l";
     String OPT_APPEND = "a";
     String OPT_REMOVE = "r";
+    String OPT_DETAIL = "i";
 
     String ITEM_SEARCH = "0";
     String ITEM_SELECT = "1";
     String ITEM_APPEND = "2";
     String ITEM_UPDATE = "3";
+    String ITEM_DETAIL = "4";
 
     int STEP_CONFIG = 1;
 
