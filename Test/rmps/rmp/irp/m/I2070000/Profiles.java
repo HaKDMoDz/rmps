@@ -11,6 +11,7 @@
 package rmp.irp.m.I2070000;
 
 import java.util.List;
+import java.util.Stack;
 
 import rmp.bean.K1SV1S;
 import rmp.bean.K1SV2S;
@@ -42,7 +43,7 @@ final class Profiles
     /**
      * 目录列表，仅在目录模式时使用
      */
-    List<String> pathList;
+    Stack<String> pathList;
     /**
      * 类别列表，仅在目录模式时使用
      */
@@ -55,4 +56,10 @@ final class Profiles
      * 结果列表，仅在搜索模式时使用
      */
     List<K1SV3S> itemList;
+
+    Profiles()
+    {
+        pathList = new Stack<String>();
+        pathList.push("");
+    }
 }

@@ -14,6 +14,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -154,14 +155,13 @@ public class I2070000 implements IService
         StringBuffer msg = new StringBuffer(session.newLine());
         doInit(session, msg);
         doHelp(session, msg.append(session.newLine()));
-        msg.append(session.newLine()).append("请输入对应的数字选择您要进行的功能。").append(session.newLine());
+        doMenu(session, msg.append(session.newLine()));
+        // msg.append(session.newLine()).append("请输入对应的数字选择您要进行的功能。").append(session.newLine());
 
         session.getProcess().setType(IProcess.TYPE_NACTION | IProcess.TYPE_CONTENT);
         session.getProcess().setItem(IProcess.ITEM_DEFAULT);
         session.getProcess().setStep(IProcess.STEP_DEFAULT);
         session.send(msg.toString());
-
-        session.setAttribute(getCode() + Constant.SESSION_PROFILES, new Profiles());
     }
 
     /*
@@ -220,48 +220,6 @@ public class I2070000 implements IService
             tmp = txt.trim();
             fav.showMenu = Constant.MENU_NONE;
         }
-        // 用户首次进入
-        else
-        {
-            if (IProcess.ITEM_DEFAULT.equals(pro.getItem()))
-            {
-                // 进入搜索模式
-                if ("0".equals(tmp))
-                {
-                    pro.setItem(Constant.ITEM_SEARCH);
-                    pro.setStep(IProcess.STEP_DEFAULT);
-                    session.send(msg.append("请输入您的查询条件！").append(session.newLine()).toString());
-                    fav.showMenu = Constant.MENU_NONE;
-                    return;
-                }
-                // 返回服务菜单
-                if (ConsEnv.KEY_FUNC.equals(tmp))
-                {
-                    if (pro.setFunc(".."))
-                    {
-                        Control.getService(pro.getFunc()).doInit(session, message);
-                    }
-                    return;
-                }
-                // 容错处理
-                if (!"1".equals(tmp))
-                {
-                    doHelp(session, msg);
-                    session.send(msg.toString());
-                    return;
-                }
-                // 进入目录模式
-                pro.setItem(Constant.ITEM_SELECT);
-                pro.setStep(IProcess.STEP_DEFAULT);
-            }
-            // 显示操作菜单
-            else if (ConsEnv.KEY_MENU.equals(tmp))
-            {
-                doHelp(session, msg);
-                session.send(msg.toString());
-                return;
-            }
-        }
 
         try
         {
@@ -305,6 +263,18 @@ public class I2070000 implements IService
                 }
 
                 tmp = Control.getCommand(tmp);
+                if (tmp != null)
+                {
+                    if (Pattern.matches("\\.\\./?", tmp))
+                    {
+                        tmp = fav.pathList.pop();
+                    }
+                    else
+                    {
+                        msg.append("请输入对应的数字选择下级类别！").append(session.newLine());
+                        return;
+                    }
+                }
                 if (doSelect(session, msg, pro, fav, tmp))
                 {
                     doSelect(session, msg);
@@ -381,9 +351,15 @@ public class I2070000 implements IService
     private StringBuffer doMenu(ISession session, StringBuffer message)
     {
         Profiles fav = (Profiles) session.getAttribute(getCode() + Constant.SESSION_PROFILES);
+        if (fav == null)
+        {
+            fav = new Profiles();
+            session.setAttribute(getCode() + Constant.SESSION_PROFILES, fav);
+        }
         String item = session.getProcess().getItem();
         if (IProcess.ITEM_DEFAULT.equals(item))
         {
+            message.append("请输入对应的数字选择您要进行的功能。").append(session.newLine());
             message.append("0、搜索模式；").append(session.newLine());
             message.append("1、目录模式；").append(session.newLine());
             message.append("*、返回服务列表；").append(session.newLine());
@@ -429,15 +405,19 @@ public class I2070000 implements IService
             if ("0".equals(tmp))
             {
                 pro.setItem(Constant.ITEM_SEARCH);
-                doSearch(pro, fav, message).append(session.newLine());
+                pro.setStep(IProcess.STEP_DEFAULT);
+                fav.itemList.clear();
+                fav.showMenu = Constant.MENU_NONE;
+                message.append("请输入您要查询的内容！");
                 return true;
             }
             // 进入目录模式
             if ("1".equals(tmp))
             {
                 pro.setItem(Constant.ITEM_SELECT);
-                doHelp(session, message);
-                doSelect(pro, fav, message).append(session.newLine());
+                pro.setStep(IProcess.STEP_DEFAULT);
+                fav.showMenu = Constant.MENU_NONE;
+                doSelect(session, message);
                 return true;
             }
 
@@ -449,8 +429,9 @@ public class I2070000 implements IService
             if ("0".equals(tmp))
             {
                 pro.setItem(Constant.ITEM_SELECT);
-                doHelp(session, message);
-                doSelect(pro, fav, message).append(session.newLine());
+                pro.setStep(IProcess.STEP_DEFAULT);
+                fav.showMenu = Constant.MENU_NONE;
+                doSelect(session, message);
                 return true;
             }
             // 其它输入，进行当前操作
@@ -462,7 +443,10 @@ public class I2070000 implements IService
             if ("0".equals(tmp))
             {
                 pro.setItem(Constant.ITEM_SEARCH);
-                doSearch(pro, fav, message).append(session.newLine());
+                pro.setStep(IProcess.STEP_DEFAULT);
+                fav.itemList.clear();
+                fav.showMenu = Constant.MENU_NONE;
+                message.append("请输入您要查询的内容！");
                 return true;
             }
             // 用户选择进入添加类别事件
@@ -474,7 +458,7 @@ public class I2070000 implements IService
             else if ("2".equals(tmp))
             {
                 fav.dataEdit = Constant.EDIT_APPEND_LINK;
-                message.append("请输入链接地址！").append(session.newLine()).toString();
+                message.append("请输入链接地址！").append(session.newLine());
                 fav.showMenu = Constant.MENU_NONE;
                 return true;
             }
@@ -532,6 +516,9 @@ public class I2070000 implements IService
                 item.setV3(link.attributeValue("short"));
                 fav.itemList.add(item);
             }
+
+            pro.setStep(IProcess.STEP_DEFAULT);
+            pro.setMost(fav.itemList.size() / 10 + 1);
         }
         return true;
     }
@@ -540,12 +527,13 @@ public class I2070000 implements IService
     {
         try
         {
-            ArrayList<?> itemList = (ArrayList<?>) session.getAttribute(getCode() + Constant.SESSION_ITEMLIST_K);
-            if (itemList == null)
+            IProcess pro = session.getProcess();
+            Profiles fav = (Profiles) session.getAttribute(getCode() + Constant.SESSION_PROFILES);
+            if (fav.itemList == null)
             {
                 return message;
             }
-            int i = session.getProcess().getStep();
+            int i = pro.getStep();
             // 判断是否为第一页
             if (i <= -1)
             {
@@ -553,21 +541,21 @@ public class I2070000 implements IService
                 return message;
             }
             // 判断是否为最后一页
-            if (i >= session.getProcess().getMost())
+            if (i >= pro.getMost())
             {
                 session.send(message.append("已是最后一页！").append(session.newLine()).toString());
                 return message;
             }
             int s = i * 10;
             int e = s + 10;
-            if (e >= itemList.size())
+            if (e >= fav.itemList.size())
             {
-                e = itemList.size();
+                e = fav.itemList.size();
             }
             i = 0;
             while (s < e)
             {
-                K1SV3S item = (K1SV3S) itemList.get(s++);
+                K1SV3S item = (K1SV3S) fav.itemList.get(s++);
                 message.append(i++).append("、〖").append(item.getV1()).append("〗").append(session.newLine());
                 message.append("快捷地址：http://amonsoft.net/?/").append(item.getV2()).append(session.newLine());
                 message.append("链接名称：").append(item.getV3()).append(session.newLine());
@@ -580,12 +568,23 @@ public class I2070000 implements IService
         return message;
     }
 
+    /**
+     * 目录模式：数据输入合法性判断
+     * 
+     * @param session
+     * @param message
+     * @param pro
+     * @param fav
+     * @param tmp
+     * @return
+     * @throws Exception
+     */
     private boolean doSelect(ISession session, StringBuffer message, IProcess pro, Profiles fav, String tmp) throws Exception
     {
         // 判断输入字符合法性
-        if (!CharUtil.isValidateInteger(tmp))
+        if (fav.kindList != null && !CharUtil.isValidateInteger(tmp))
         {
-            message.append("请输入对应的数字选择下级类别！").append(session.newLine()).toString();
+            message.append("请输入对应的数字选择下级类别！").append(session.newLine());
             return false;
         }
 
@@ -596,12 +595,12 @@ public class I2070000 implements IService
             int idx = pro.getStep() * 10 + Integer.parseInt(tmp);
             if (idx < 0 || idx >= fav.kindList.size())
             {
-                message.append("请输入对应的数字选择下级类别！").append(session.newLine()).toString();
+                message.append("请输入对应的数字选择下级类别！").append(session.newLine());
                 return false;
             }
             uri = fav.kindList.get(idx).getK();
         }
-        fav.pathList.add(uri);
+        fav.pathList.push(uri);
 
         String data = HttpUtil.request(path + '?' + CharUtil.format(args, session.getContact().getCode(), Constant.OPT_SELECT, uri), "GET", "UTF-8", null);
         Document doc = DocumentHelper.parseText(data);
@@ -691,7 +690,7 @@ public class I2070000 implements IService
                 message.append(item.getV1()).append(item.getV2()).append(session.newLine());
             }
         }
-        return message;
+        return message.append("请输入对应的数字选择您要进行的操作！");
     }
 
     private boolean doDetail(ISession session, StringBuffer message, IProcess pro, Profiles fav, String tmp) throws Exception
@@ -712,19 +711,19 @@ public class I2070000 implements IService
         {
             if (!CharUtil.isValidateUri(tmp))
             {
-                message.append("您输入的不是一个合适的链接地址，请重新输入！").append(session.newLine()).toString();
+                message.append("您输入的不是一个合适的链接地址，请重新输入！").append(session.newLine());
                 return false;
             }
             pro.setStep(Constant.STEP_APPEND_NAME);
             session.setAttribute(getCode() + Constant.SESSION_LINKPATH_K, tmp);
-            message.append("请输入链接名称！").append(session.newLine()).toString();
+            message.append("请输入链接名称！").append(session.newLine());
             return false;
         }
         if (pro.getStep() == Constant.STEP_APPEND_NAME)
         {
             if (!CharUtil.isValidate(tmp))
             {
-                message.append("请输入链接名称！").append(session.newLine()).toString();
+                message.append("请输入链接名称！").append(session.newLine());
                 return false;
             }
             session.setAttribute(getCode() + Constant.SESSION_LINKNAME_K, tmp);
@@ -736,7 +735,8 @@ public class I2070000 implements IService
     {
         try
         {
-            String uri = (String) session.getAttribute(getCode() + Constant.SESSION_KINDHASH_K);
+            Profiles fav = (Profiles) session.getAttribute(getCode() + Constant.SESSION_PROFILES);
+            String uri = fav.pathList.peek();
 
             // 生成XML文档
             Document doc = DocumentHelper.createDocument();
@@ -789,23 +789,5 @@ public class I2070000 implements IService
             LogUtil.exception(exp);
         }
         return message;
-    }
-
-    private StringBuffer doSearch(IProcess pro, Profiles fav, StringBuffer msg)
-    {
-        pro.setItem(Constant.ITEM_SEARCH);
-        pro.setStep(IProcess.STEP_DEFAULT);
-        msg.append("请输入您要查询的内容！");
-        fav.showMenu = Constant.MENU_NONE;
-        return msg;
-    }
-
-    private StringBuffer doSelect(IProcess pro, Profiles fav, StringBuffer msg)
-    {
-        pro.setItem(Constant.ITEM_SELECT);
-        pro.setStep(IProcess.STEP_DEFAULT);
-        msg.append("请选择您要进行的操作！");
-        fav.showMenu = Constant.MENU_NONE;
-        return msg;
     }
 }

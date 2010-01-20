@@ -41,12 +41,8 @@ public interface Constant
     int EDIT_DELETE = 4;
     int EDIT_DETAIL = 5;
 
-    int STEP_CONFIG = 1;
-
     int STEP_APPEND_LINK = IProcess.STEP_DEFAULT;
     int STEP_APPEND_NAME = STEP_APPEND_LINK + 1;
-
-    String SESSION_PROFILES = "_p";
 
     /**
      * 不显示菜单
@@ -69,22 +65,8 @@ public interface Constant
      */
     int MENU_EIDT = 4;
 
-    /**
-     * 链接搜索：数据列表
-     */
-    String SESSION_ITEMLIST_K = "_i";
-    /**
-     * 级联查询：类别列表
-     */
-    String SESSION_KINDLIST_K = "_k";
-    /**
-     * 级联查询：链接列表
-     */
-    String SESSION_LINKLIST_K = "_l";
-    /**
-     * 级联查询：上级类别索引
-     */
-    String SESSION_KINDHASH_K = "_h";
+    String SESSION_PROFILES = "_p";
+
     /**
      * 新增数据：类别名称
      */
