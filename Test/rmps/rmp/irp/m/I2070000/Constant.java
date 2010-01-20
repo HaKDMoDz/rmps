@@ -33,27 +33,41 @@ public interface Constant
 
     String ITEM_SEARCH = "0";
     String ITEM_SELECT = "1";
-    String ITEM_APPEND = "2";
-    String ITEM_UPDATE = "3";
-    String ITEM_DETAIL = "4";
+
+    int EDIT_DEFAULT = 0;
+    int EDIT_APPEND_KIND = 1;
+    int EDIT_APPEND_LINK = 2;
+    int EDIT_UPDATE = 3;
+    int EDIT_DELETE = 4;
+    int EDIT_DETAIL = 5;
 
     int STEP_CONFIG = 1;
 
     int STEP_APPEND_LINK = IProcess.STEP_DEFAULT;
     int STEP_APPEND_NAME = STEP_APPEND_LINK + 1;
 
+    String SESSION_PROFILES = "_p";
+
     /**
-     * 显示配置
+     * 不显示菜单
      */
-    String SESSION_SHOWMENU = "_m";
+    int MENU_NONE = 0;
     /**
-     * 数据管理菜单（搜索/查看模式、添加类别、添加链接等）
+     * 模式选择菜单（搜索/查看模式等）
      */
-    String SESSION_MENU_SUB = "1";
+    int MENU_MODE = 1;
     /**
-     * 数据操作菜单（编辑、删除、复制、移动、返回等）
+     * 数据搜索菜单（目录模式）
      */
-    String SESSION_MENU_MGR = "2";
+    int MENU_SRCH = 2;
+    /**
+     * 数据查看菜单（搜索模式、新增类别、新增链接）
+     */
+    int MENU_LIST = 3;
+    /**
+     * 数据管理菜单（编辑、删除、复制、移动、返回等）
+     */
+    int MENU_EIDT = 4;
 
     /**
      * 链接搜索：数据列表
