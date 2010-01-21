@@ -195,34 +195,34 @@ public class I2070000 implements IService
         IProcess pro = session.getProcess();
         Profiles fav = (Profiles) session.getAttribute(getCode() + Constant.SESSION_PROFILES);
 
-        // 功能菜单事件
-        if (Constant.MENU_NONE != fav.showMenu)
-        {
-            tmp = Control.getCommand(tmp);
-            if (tmp != null)
-            {
-                // 显示服务列表菜单
-                if (ConsEnv.KEY_FUNC.equals(tmp))
-                {
-                    if (pro.setFunc(".."))
-                    {
-                        Control.getService(pro.getFunc()).doInit(session, message);
-                    }
-                    return;
-                }
-
-                if (doDeal(session, msg, pro, fav, tmp))
-                {
-                    session.send(msg.toString());
-                    return;
-                }
-            }
-            tmp = txt.trim();
-            fav.showMenu = Constant.MENU_NONE;
-        }
-
         try
         {
+            // 功能菜单事件
+            if (Constant.MENU_NONE != fav.showMenu)
+            {
+                tmp = Control.getCommand(tmp);
+                if (tmp != null)
+                {
+                    // 显示服务列表菜单
+                    if (ConsEnv.KEY_FUNC.equals(tmp))
+                    {
+                        if (pro.setFunc(".."))
+                        {
+                            Control.getService(pro.getFunc()).doInit(session, message);
+                        }
+                        return;
+                    }
+
+                    if (doDeal(session, msg, pro, fav, tmp))
+                    {
+                        session.send(msg.toString());
+                        return;
+                    }
+                }
+                tmp = txt.trim();
+                fav.showMenu = Constant.MENU_NONE;
+            }
+
             if (Constant.ITEM_SEARCH.equals(pro.getItem()))
             {
                 // 执行数据查询
@@ -271,7 +271,7 @@ public class I2070000 implements IService
                     }
                     else
                     {
-                        msg.append("请输入对应的数字选择下级类别！").append(session.newLine());
+                        session.send(msg.append("请输入对应的数字选择下级类别！").append(session.newLine()).toString());
                         return;
                     }
                 }
@@ -396,7 +396,7 @@ public class I2070000 implements IService
         return message;
     }
 
-    private boolean doDeal(ISession session, StringBuffer message, IProcess pro, Profiles fav, String tmp)
+    private boolean doDeal(ISession session, StringBuffer message, IProcess pro, Profiles fav, String tmp) throws Exception
     {
         // 当前显示为模式切换菜单
         if (Constant.MENU_MODE == fav.showMenu)
@@ -406,9 +406,12 @@ public class I2070000 implements IService
             {
                 pro.setItem(Constant.ITEM_SEARCH);
                 pro.setStep(IProcess.STEP_DEFAULT);
-                fav.itemList.clear();
+                if (fav.itemList != null)
+                {
+                    fav.itemList.clear();
+                }
                 fav.showMenu = Constant.MENU_NONE;
-                message.append("请输入您要查询的内容！");
+                message.append("请输入您要查询的内容！").append(session.newLine());
                 return true;
             }
             // 进入目录模式
@@ -431,7 +434,10 @@ public class I2070000 implements IService
                 pro.setItem(Constant.ITEM_SELECT);
                 pro.setStep(IProcess.STEP_DEFAULT);
                 fav.showMenu = Constant.MENU_NONE;
-                doSelect(session, message);
+                if (fav.kindList == null && doSelect(session, message, pro, fav, tmp))
+                {
+                    doSelect(session, message);
+                }
                 return true;
             }
             // 其它输入，进行当前操作
@@ -446,7 +452,7 @@ public class I2070000 implements IService
                 pro.setStep(IProcess.STEP_DEFAULT);
                 fav.itemList.clear();
                 fav.showMenu = Constant.MENU_NONE;
-                message.append("请输入您要查询的内容！");
+                message.append("请输入您要查询的内容！").append(session.newLine());
                 return true;
             }
             // 用户选择进入添加类别事件
@@ -581,17 +587,17 @@ public class I2070000 implements IService
      */
     private boolean doSelect(ISession session, StringBuffer message, IProcess pro, Profiles fav, String tmp) throws Exception
     {
-        // 判断输入字符合法性
-        if (fav.kindList != null && !CharUtil.isValidateInteger(tmp))
-        {
-            message.append("请输入对应的数字选择下级类别！").append(session.newLine());
-            return false;
-        }
-
         // 判断输入数值是否越界
         String uri = "";
         if (fav.kindList != null)
         {
+            // 判断输入字符合法性
+            if (!CharUtil.isValidateInteger(tmp))
+            {
+                message.append("请输入对应的数字选择下级类别！").append(session.newLine());
+                return false;
+            }
+
             int idx = pro.getStep() * 10 + Integer.parseInt(tmp);
             if (idx < 0 || idx >= fav.kindList.size())
             {
