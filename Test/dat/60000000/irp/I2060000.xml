@@ -3,7 +3,7 @@
 	<I2060000>
 		<item id="配置">
 			<map key="path">http://amonsoft.net/date/date0001.ashx</map>
-			<map key="args">y={0}&amp;m={1}&amp;d={2}&amp;f={3}</map>
+			<map key="args">y={0}&amp;m={1}&amp;d={2}&amp;s={3}&amp;l={4}</map>
 		</item>
 		<item id="资源">
 		</item>

@@ -268,7 +268,7 @@ public class I2050000 implements IService
             }
         }
 
-        msg.append(arr[0]);
+        msg.append(arr[0]).append(session.newLine());
 
         // 其它单位处理
         if (!isWD)
@@ -276,7 +276,7 @@ public class I2050000 implements IService
             for (String key : map.keySet())
             {
                 BigDecimal dec2 = map.get(key);
-                msg.append(session.newLine()).append("=" + dec1.divide(dec2, 7, 0).toString().replaceAll("\\.?0*$", "") + key);
+                msg.append("=" + dec1.divide(dec2, 7, 0).toString().replaceAll("\\.?0*$", "") + key).append(session.newLine());
             }
             session.send(msg.toString());
             return;

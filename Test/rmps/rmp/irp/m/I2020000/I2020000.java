@@ -285,8 +285,8 @@ public class I2020000 implements IService
 
     private StringBuffer doMenu(ISession session, StringBuffer message)
     {
-        message.append(CharUtil.format("0、继续使用《{0}》服务；", getName())).append(session.newLine());
-        message.append("*、返回上级服务选单；").append(session.newLine());
+        message.append("*、返回服务切换选单；").append(session.newLine());
+        message.append(CharUtil.format("其它键继续使用《{0}》服务；", getName())).append(session.newLine());
         return message;
     }
 

@@ -111,7 +111,7 @@ public abstract class ASession implements ISession
             message.append(service.getName());
         }
         message.append("）：").append(session.newLine());
-        message.append('〖');
+        message.append('【');
         int type = session.getProcess().getType();
         if ((type & IProcess.TYPE_NACTION) != 0)
         {
@@ -134,7 +134,7 @@ public abstract class ASession implements ISession
             message.append("内容、");
         }
         message.deleteCharAt(message.length() - 1);
-        message.append('〗').append(session.newLine());
+        message.append('】').append(session.newLine());
         message.append("---------------------------------").append(session.newLine());
         return message;
     }
@@ -149,8 +149,8 @@ public abstract class ASession implements ISession
     protected static StringBuffer appendCopy(ISession session, StringBuffer message)
     {
         message.append(session.newLine()).append("---------------------------------");
-        message.append(session.newLine()).append('〖');
-        message.append(ConsEnv.KEY_FUNC).append("菜单 ");
+        message.append(session.newLine()).append('【');
+        message.append(ConsEnv.KEY_MENU).append("菜单 ");
         message.append(ConsEnv.KEY_HELP).append("帮助 ");
         message.append(ConsEnv.KEY_REDO).append("重复");
         IService service = Control.getService(session.getProcess().getFunc());
@@ -161,7 +161,7 @@ public abstract class ASession implements ISession
                 message.append(' ').append(item.getK()).append(item.getV1());
             }
         }
-        message.append('〗');
+        message.append('】');
         message.append(session.newLine()).append("© Amonsoft @ http://amonsoft.com/");
         return message;
     }

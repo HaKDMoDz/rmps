@@ -11,7 +11,6 @@
 package rmp.irp.m.I2070000;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -158,7 +157,7 @@ public class I2070000 implements IService
         doMenu(session, msg.append(session.newLine()));
         // msg.append(session.newLine()).append("请输入对应的数字选择您要进行的功能。").append(session.newLine());
 
-        session.getProcess().setType(IProcess.TYPE_NACTION | IProcess.TYPE_CONTENT);
+        session.getProcess().setType(IProcess.TYPE_NACTION | IProcess.TYPE_COMMAND | IProcess.TYPE_CONTENT);
         session.getProcess().setItem(IProcess.ITEM_DEFAULT);
         session.getProcess().setStep(IProcess.STEP_DEFAULT);
         session.send(msg.toString());
@@ -235,7 +234,12 @@ public class I2070000 implements IService
             }
             if (Constant.ITEM_SELECT.equals(pro.getItem()))
             {
-                // 数据新增
+                // 新增类别
+                if (Constant.EDIT_APPEND_KIND == fav.dataEdit)
+                {
+                    return;
+                }
+                // 新增链接
                 if (Constant.EDIT_APPEND_LINK == fav.dataEdit)
                 {
                     if (doAppend(session, msg, pro, fav, tmp))
@@ -245,13 +249,13 @@ public class I2070000 implements IService
                     session.send(msg.toString());
                     return;
                 }
-                // 数据删除
+                // 链接删除
                 if (Constant.EDIT_DELETE == fav.dataEdit)
                 {
                     doRemove(session, msg);
                     return;
                 }
-                // 数据查看
+                // 链接查看
                 if (Constant.EDIT_DETAIL == fav.dataEdit)
                 {
                     if (doDetail(session, msg, pro, fav, tmp))
@@ -267,18 +271,24 @@ public class I2070000 implements IService
                 {
                     if (Pattern.matches("\\.\\./?", tmp))
                     {
-                        tmp = fav.pathList.pop();
+                        if (fav.pathList.size() > 1)
+                        {
+                            fav.pathList.pop();
+                            tmp = fav.pathList.pop();
+                        }
+                        else
+                        {
+                            tmp = Constant.URI_DEFAULT;
+                        }
                     }
-                    else
+                    if (doSelect(session, msg, pro, fav, tmp))
                     {
-                        session.send(msg.append("请输入对应的数字选择下级类别！").append(session.newLine()).toString());
-                        return;
+                        doSelect(session, msg);
                     }
                 }
-                if (doSelect(session, msg, pro, fav, tmp))
+                else
                 {
-                    doSelect(session, msg);
-                    Control.appendPage(session, msg);
+                    msg.append("您输入的不是一个有效的数字！").append(session.newLine());
                 }
                 session.send(msg.toString());
                 return;
@@ -406,10 +416,7 @@ public class I2070000 implements IService
             {
                 pro.setItem(Constant.ITEM_SEARCH);
                 pro.setStep(IProcess.STEP_DEFAULT);
-                if (fav.itemList != null)
-                {
-                    fav.itemList.clear();
-                }
+                fav.getItemList().clear();
                 fav.showMenu = Constant.MENU_NONE;
                 message.append("请输入您要查询的内容！").append(session.newLine());
                 return true;
@@ -420,7 +427,11 @@ public class I2070000 implements IService
                 pro.setItem(Constant.ITEM_SELECT);
                 pro.setStep(IProcess.STEP_DEFAULT);
                 fav.showMenu = Constant.MENU_NONE;
-                doSelect(session, message);
+                fav.pathList.clear();
+                if (doSelect(session, message, pro, fav, Constant.URI_DEFAULT))
+                {
+                    doSelect(session, message);
+                }
                 return true;
             }
 
@@ -434,7 +445,8 @@ public class I2070000 implements IService
                 pro.setItem(Constant.ITEM_SELECT);
                 pro.setStep(IProcess.STEP_DEFAULT);
                 fav.showMenu = Constant.MENU_NONE;
-                if (fav.kindList == null && doSelect(session, message, pro, fav, tmp))
+                fav.pathList.clear();
+                if (doSelect(session, message, pro, fav, Constant.URI_DEFAULT))
                 {
                     doSelect(session, message);
                 }
@@ -450,21 +462,24 @@ public class I2070000 implements IService
             {
                 pro.setItem(Constant.ITEM_SEARCH);
                 pro.setStep(IProcess.STEP_DEFAULT);
-                fav.itemList.clear();
+                fav.getItemList().clear();
                 fav.showMenu = Constant.MENU_NONE;
                 message.append("请输入您要查询的内容！").append(session.newLine());
                 return true;
             }
-            // 用户选择进入添加类别事件
-            if ("1".equals(tmp))
-            {
-                fav.dataEdit = Constant.EDIT_APPEND_KIND;
-            }
             // 用户选择进入添加链接事件
-            else if ("2".equals(tmp))
+            if ("1".equals(tmp))
             {
                 fav.dataEdit = Constant.EDIT_APPEND_LINK;
                 message.append("请输入链接地址！").append(session.newLine());
+                fav.showMenu = Constant.MENU_NONE;
+                return true;
+            }
+            // 用户选择进入添加类别事件
+            if ("2".equals(tmp))
+            {
+                fav.dataEdit = Constant.EDIT_APPEND_KIND;
+                message.append("请输入类别名称！").append(session.newLine());
                 fav.showMenu = Constant.MENU_NONE;
                 return true;
             }
@@ -498,14 +513,7 @@ public class I2070000 implements IService
         Document doc = DocumentHelper.parseText(data);
         if (doc != null)
         {
-            if (fav.itemList != null)
-            {
-                fav.itemList.clear();
-            }
-            else
-            {
-                fav.itemList = new ArrayList<K1SV3S>();
-            }
+            fav.getItemList().clear();
             Element node;
             Element kind;
             Element link;
@@ -520,11 +528,11 @@ public class I2070000 implements IService
                 item.setV1(kind.attributeValue("name"));
                 item.setV2(link.attributeValue("name"));
                 item.setV3(link.attributeValue("short"));
-                fav.itemList.add(item);
+                fav.getItemList().add(item);
             }
 
             pro.setStep(IProcess.STEP_DEFAULT);
-            pro.setMost(fav.itemList.size() / 10 + 1);
+            pro.setMost(fav.getItemList().size() / 10 + 1);
         }
         return true;
     }
@@ -535,10 +543,6 @@ public class I2070000 implements IService
         {
             IProcess pro = session.getProcess();
             Profiles fav = (Profiles) session.getAttribute(getCode() + Constant.SESSION_PROFILES);
-            if (fav.itemList == null)
-            {
-                return message;
-            }
             int i = pro.getStep();
             // 判断是否为第一页
             if (i <= -1)
@@ -554,14 +558,14 @@ public class I2070000 implements IService
             }
             int s = i * 10;
             int e = s + 10;
-            if (e >= fav.itemList.size())
+            if (e >= fav.getItemList().size())
             {
-                e = fav.itemList.size();
+                e = fav.getItemList().size();
             }
             i = 0;
             while (s < e)
             {
-                K1SV3S item = (K1SV3S) fav.itemList.get(s++);
+                K1SV3S item = (K1SV3S) fav.getItemList().get(s++);
                 message.append(i++).append("、〖").append(item.getV1()).append("〗").append(session.newLine());
                 message.append("快捷地址：http://amonsoft.net/?/").append(item.getV2()).append(session.newLine());
                 message.append("链接名称：").append(item.getV3()).append(session.newLine());
@@ -582,6 +586,7 @@ public class I2070000 implements IService
      * @param pro
      * @param fav
      * @param tmp
+     *            用户输入数值
      * @return
      * @throws Exception
      */
@@ -589,7 +594,7 @@ public class I2070000 implements IService
     {
         // 判断输入数值是否越界
         String uri = "";
-        if (fav.kindList != null)
+        if (!Constant.URI_DEFAULT.equals(tmp))
         {
             // 判断输入字符合法性
             if (!CharUtil.isValidateInteger(tmp))
@@ -599,12 +604,12 @@ public class I2070000 implements IService
             }
 
             int idx = pro.getStep() * 10 + Integer.parseInt(tmp);
-            if (idx < 0 || idx >= fav.kindList.size())
+            if (idx < 0 || idx >= fav.getKindList().size())
             {
-                message.append("请输入对应的数字选择下级类别！").append(session.newLine());
+                message.append("没有下级数据，无法确认您要执行的操作！").append(session.newLine());
                 return false;
             }
-            uri = fav.kindList.get(idx).getK();
+            uri = fav.getKindList().get(idx).getK();
         }
         fav.pathList.push(uri);
 
@@ -613,38 +618,24 @@ public class I2070000 implements IService
         if (doc != null)
         {
             // 读取类别信息
-            if (fav.kindList == null)
-            {
-                fav.kindList = new ArrayList<K1SV1S>();
-            }
-            else
-            {
-                fav.kindList.clear();
-            }
+            fav.getKindList().clear();
 
             for (Object obj : doc.selectNodes("/amonsoft/kind/item"))
             {
                 Element kind = (Element) obj;
-                fav.kindList.add(new K1SV1S(kind.attributeValue("id"), kind.attributeValue("name")));
+                fav.getKindList().add(new K1SV1S(kind.attributeValue("id"), kind.attributeValue("name")));
             }
 
             // 读取链接信息
-            if (fav.linkList == null)
-            {
-                fav.linkList = new ArrayList<K1SV2S>();
-            }
-            else
-            {
-                fav.linkList.clear();
-            }
+            fav.getLinkList().clear();
             for (Object obj : doc.selectNodes("/amonsoft/link/item"))
             {
                 Element link = (Element) obj;
-                fav.linkList.add(new K1SV2S(link.attributeValue("id"), link.attributeValue("name"), link.attributeValue("short")));
+                fav.getLinkList().add(new K1SV2S(link.attributeValue("id"), link.attributeValue("name"), link.attributeValue("short")));
             }
 
             pro.setStep(IProcess.STEP_DEFAULT);
-            pro.setMost((fav.kindList.size() + fav.linkList.size()) / 10 + 1);
+            pro.setMost((fav.getKindList().size() + fav.getLinkList().size()) / 10 + 1);
         }
         return true;
     }
@@ -659,8 +650,8 @@ public class I2070000 implements IService
             return message;
         }
 
-        int l1 = fav.kindList.size();
-        int l2 = fav.linkList.size();
+        int l1 = fav.getKindList().size();
+        int l2 = fav.getLinkList().size();
         int s1 = step * 10;
         int e1 = s1 + 10;
         int s2 = e1 - l1;
@@ -682,7 +673,7 @@ public class I2070000 implements IService
             K1SV1S item;
             while (s1 < e1)
             {
-                item = fav.kindList.get(s1++);
+                item = fav.getKindList().get(s1++);
                 message.append(t++).append('、').append(item.getV1()).append(session.newLine());
             }
         }
@@ -692,17 +683,23 @@ public class I2070000 implements IService
             K1SV2S item;
             while (s2 < e2)
             {
-                item = fav.linkList.get(s2++);
+                item = fav.getLinkList().get(s2++);
                 message.append(item.getV1()).append(item.getV2()).append(session.newLine());
             }
         }
-        return message.append("请输入对应的数字选择您要进行的操作！");
+        message.append("请输入对应的数字选择您要进行的操作！").append(session.newLine());
+        return Control.appendPage(session, message);
     }
 
     private boolean doDetail(ISession session, StringBuffer message, IProcess pro, Profiles fav, String tmp) throws Exception
     {
         String uri = "";
         String data = HttpUtil.request(path + '?' + CharUtil.format(args, session.getContact().getCode(), Constant.OPT_DETAIL, uri), "GET", "UTF-8", null);
+        Document doc = DocumentHelper.parseText(data);
+        if (doc != null)
+        {
+            
+        }
         return true;
     }
 
@@ -713,6 +710,18 @@ public class I2070000 implements IService
 
     private boolean doAppend(ISession session, StringBuffer message, IProcess pro, Profiles fav, String tmp)
     {
+        // 添加类别
+        if (session.getProcess().getStep() == Constant.STEP_APPEND_KIND)
+        {
+            if (!CharUtil.isValidate(tmp))
+            {
+                message.append("请输入链接名称！").append(session.newLine());
+                return false;
+            }
+            session.setAttribute(getCode() + Constant.SESSION_KINDNAME_K, tmp);
+            return true;
+        }
+        // 添加链接：输入链接地址
         if (session.getProcess().getStep() == Constant.STEP_APPEND_LINK)
         {
             if (!CharUtil.isValidateUri(tmp))
@@ -725,6 +734,7 @@ public class I2070000 implements IService
             message.append("请输入链接名称！").append(session.newLine());
             return false;
         }
+        // 添加链接：输入链接名称
         if (pro.getStep() == Constant.STEP_APPEND_NAME)
         {
             if (!CharUtil.isValidate(tmp))

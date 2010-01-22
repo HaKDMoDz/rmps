@@ -111,13 +111,13 @@ public class Contact extends AContact
     @Override
     public String getUser()
     {
-        return remark.name;
+        return Integer.toString(friend.qqNum);
     }
 
     @Override
     public String getName()
     {
-        return null;
+        return remark.name;
     }
 
     public void setName(String name)

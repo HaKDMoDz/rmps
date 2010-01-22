@@ -10,6 +10,7 @@
  */
 package rmp.irp.m.I2070000;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -43,23 +44,54 @@ final class Profiles
     /**
      * 目录列表，仅在目录模式时使用
      */
-    Stack<String> pathList;
+    Stack<String> pathList = new Stack<String>();
     /**
      * 类别列表，仅在目录模式时使用
      */
-    List<K1SV1S> kindList;
+    private List<K1SV1S> kindList;
+
     /**
      * 链接列表，仅在目录模式时使用
      */
-    List<K1SV2S> linkList;
+    private List<K1SV2S> linkList;
     /**
      * 结果列表，仅在搜索模式时使用
      */
-    List<K1SV3S> itemList;
+    private List<K1SV3S> itemList;
 
-    Profiles()
+    /**
+     * @return the kindList
+     */
+    List<K1SV1S> getKindList()
     {
-        pathList = new Stack<String>();
-        pathList.push("");
+        if (kindList == null)
+        {
+            kindList = new ArrayList<K1SV1S>();
+        }
+        return kindList;
+    }
+
+    /**
+     * @return the linkList
+     */
+    List<K1SV2S> getLinkList()
+    {
+        if (linkList == null)
+        {
+            linkList = new ArrayList<K1SV2S>();
+        }
+        return linkList;
+    }
+
+    /**
+     * @return the itemList
+     */
+    List<K1SV3S> getItemList()
+    {
+        if (itemList == null)
+        {
+            itemList = new ArrayList<K1SV3S>();
+        }
+        return itemList;
     }
 }

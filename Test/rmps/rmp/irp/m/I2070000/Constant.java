@@ -25,11 +25,13 @@ import com.amonsoft.rmps.irp.b.IProcess;
  */
 public interface Constant
 {
+    String URI_DEFAULT = "";
+
     String OPT_SEARCH = "q";
     String OPT_SELECT = "l";
     String OPT_APPEND = "a";
     String OPT_REMOVE = "r";
-    String OPT_DETAIL = "i";
+    String OPT_DETAIL = "d";
 
     String ITEM_SEARCH = "0";
     String ITEM_SELECT = "1";
@@ -41,7 +43,8 @@ public interface Constant
     int EDIT_DELETE = 4;
     int EDIT_DETAIL = 5;
 
-    int STEP_APPEND_LINK = IProcess.STEP_DEFAULT;
+    int STEP_APPEND_KIND = IProcess.STEP_DEFAULT;
+    int STEP_APPEND_LINK = STEP_APPEND_KIND + 1;
     int STEP_APPEND_NAME = STEP_APPEND_LINK + 1;
 
     /**
@@ -65,6 +68,9 @@ public interface Constant
      */
     int MENU_EIDT = 4;
 
+    /**
+     * 流程控制对象
+     */
     String SESSION_PROFILES = "_p";
 
     /**

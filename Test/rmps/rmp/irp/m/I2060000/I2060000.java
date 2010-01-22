@@ -128,6 +128,9 @@ public class I2060000 implements IService
     @Override
     public void doMenu(ISession session, IMessage message)
     {
+        StringBuffer msg = new StringBuffer(session.newLine());
+        doMenu(session, msg);
+        session.send(msg.toString());
     }
 
     @Override
@@ -268,7 +271,10 @@ public class I2060000 implements IService
     {
         try
         {
-            String data = HttpUtil.request(CharUtil.format(path + '?' + args, "", "", "", ""), "GET", "UTF-8", null);
+            String y = (String) session.getAttribute(getCode() + Constant.SESSION_YEAR);
+            String m = (String) session.getAttribute(getCode() + Constant.SESSION_MONTH);
+            String d = (String) session.getAttribute(getCode() + Constant.SESSION_DAY);
+            String data = HttpUtil.request(CharUtil.format(path + '?' + args, y, m, d, "", "", ""), "GET", "UTF-8", null);
             Document document = DocumentHelper.parseText(data);
             Element date = (Element) document.selectSingleNode("amonsoft/date");
             String days = date.attributeValue("count");
@@ -286,6 +292,10 @@ public class I2060000 implements IService
             int t1 = Integer.parseInt(week);
             int t2 = Integer.parseInt(days);
 
+            message.append("当前日期：").append(session.newLine());
+            message.append(date.attributeValue("solar")).append(session.newLine());
+            message.append(date.attributeValue("lunar")).append(session.newLine());
+
             // 前置空格
             StringBuffer tmp1 = new StringBuffer();
             StringBuffer tmp2 = new StringBuffer();
@@ -296,15 +306,15 @@ public class I2060000 implements IService
             }
 
             // 日期数据
-            for (int d = 1; d <= t2; d += 1)
+            for (int t = 1; t <= t2; t += 1)
             {
                 tmp1.append("..");
-                if (d < 10)
+                if (t < 10)
                 {
                     tmp1.append('.');
                 }
-                tmp1.append(d).append("..");
-                tmp2.append('.').append(date.selectSingleNode(CharUtil.format("day[@id='{0}']", d)).getText()).append('.');
+                tmp1.append(t).append("..");
+                tmp2.append('.').append(date.selectSingleNode(CharUtil.format("day[@id='{0}']", t)).getText()).append('.');
 
                 t1 += 1;
                 if (t1 % 7 == 0)
@@ -320,7 +330,6 @@ public class I2060000 implements IService
                 message.append(tmp1.toString()).append(session.newLine());
                 message.append(tmp2.toString()).append(session.newLine());
             }
-            message.append(date.attributeValue("value")).append(session.newLine());
         }
         catch (Exception exp)
         {
