@@ -203,7 +203,7 @@ public class CharUtil
      */
     public static boolean isValidateNumber(String text)
     {
-        return text != null ? Pattern.matches("^[+-]?\\d+\\.\\d+$", text) : false;
+        return text != null ? Pattern.matches("^[+-]?\\d+(\\.\\d+([eE]?[+-]?\\d+)?)?$", text) : false;
     }
 
     /**
