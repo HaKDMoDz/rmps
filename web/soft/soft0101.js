@@ -1,0 +1,4 @@
+﻿function checkNull()
+{
+    return true;
+}

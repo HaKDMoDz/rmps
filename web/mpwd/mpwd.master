@@ -1,0 +1,187 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="mpwd.master.cs" Inherits="mpwd_mpwd" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>魔方密码，开源的跨平台密码管理软件！</title>
+    <%=cons.wrp.WrpCons.KEYWORDS_MPWD%>
+    <%=cons.wrp.WrpCons.DESCRIPTION_MPWD%>
+    <%=rmp.wrp.Wrps.ComnHead(cons.wrp.WrpCons.MODULE_MPWD)%>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="AmonForm" runat="server">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="height: 81px; background-image: url(<%=cons.EnvCons.PRE_URL%>/_styles/0002/images/mpwd_hs.gif); background-repeat: repeat">
+                &nbsp;
+            </td>
+            <td style="width: 760px; height: 81px; background-image: url(<%=cons.EnvCons.PRE_URL%>/_styles/0002/images/mpwd_hc.gif); background-repeat: no-repeat" align="center">
+                <table width="700" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="height: 51px;" align="left">
+                            <a href="/" title="网站首页">
+                                <asp:Image ID="im_AmonLogo" runat="server" /></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height: 30px;" align="right">
+                            &nbsp;|&nbsp;
+                            <%
+                                rmp.bean.K1V2 item;
+                                int guidIndx = (int)Session[cons.wrp.WrpCons.GUIDINDX];
+                                System.Collections.Generic.List<rmp.bean.K1V2> guidList = rmp.wrp.Wrps.GuidMpwd(Session);
+                                int guidSize = guidList.Count;
+                                for (int i = 0; i < guidSize; i += 1)
+                                {
+                                    item = guidList[i];
+                                    if (guidIndx == i)
+                                    {
+                            %>
+                            <span class="TEXT_NOTE2">
+                                <%= item.V1%></span>&nbsp;|&nbsp;
+                            <%
+                                }
+                                    else
+                                    {
+                            %>
+                            <a href="<%= item.K %>" title="<%= item.V2 %>">
+                                <%= item.V1%></a>&nbsp;|&nbsp;
+                            <%
+                                }
+                                }
+                            %>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td style="height: 81px; background-image: url(<%=cons.EnvCons.PRE_URL%>/_styles/0002/images/mpwd_hs.gif); background-repeat: repeat">
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td style="width: 760px; background-image: url(<%=cons.EnvCons.PRE_URL%>/_styles/0002/images/mpwd_bc.gif);">
+                <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="width: 240px;" align="right" valign="top">
+                            <table width="230" border="0" cellpadding="0" cellspacing="0" style="background-color: #d2d2d2;">
+                                <tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="height: 200px;" align="center">
+                                        <img src="<%=cons.EnvCons.PRE_URL%>/_styles/0002/images/mpwd_ll.png" alt="" style="border: 4px solid #FFFFFF;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="height: 600px;" align="center" valign="top">
+                                        <table width="200" border="0" cellpadding="2" cellspacing="0">
+                                            <tr>
+                                                <td align="center" class="TD_LIST_HEAD">
+                                                    友情链接
+                                                </td>
+                                            </tr>
+                                            <% foreach (rmp.bean.K1V2 link in rmp.wrp.link.Link.MpwdLink)
+                                               {%>
+                                            <tr>
+                                                <td align="left" class="TD_LIST_BODY">
+                                                    ·&nbsp;<a href="<%= link.K %>" title="<%= link.V2 %>" target="_blank"><%= link.V1%></a>
+                                                </td>
+                                            </tr>
+                                            <%}%>
+                                            <tr>
+                                                <td align="right" class="TD_LIST_FOOT">
+                                                    <a href="/link/link1001.aspx?sid=sctvraydxttvfdrb" title="更多友情链接">更多</a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 520px;" align="left" valign="top">
+                            <table width="510" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td align="center">
+                                        <table width="480" border="0" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td style="height: 20px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="left">
+                                                    <span style="font-size: medium; font-weight: bold;">魔方密码</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="height: 20px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="height: 1px;" class="TD_LINE">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="height: 20px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <!-- TemplateBeginEditable name="body" -->
+                                                    <asp:ContentPlaceHolder ID="AmonView" runat="server">
+                                                    </asp:ContentPlaceHolder>
+                                                    <!-- TemplateEndEditable -->
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="height: 40px;">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td style="height: 75px; background-image: url(<%=cons.EnvCons.PRE_URL%>/_styles/0002/images/mpwd_fs.gif); background-repeat: repeat;">
+                &nbsp;
+            </td>
+            <td style="width: 760px; height: 75px; background-image: url(<%=cons.EnvCons.PRE_URL%>/_styles/0002/images/mpwd_fc.gif); background-repeat: no-repeat;" align="center">
+                <table width="90%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td align="center" style="height: 50px;">
+                            版权所有 (C) 2010 魔方密码（MagicPwd）。<br />
+                            <br />
+
+                            <script type="text/javascript" src="http://js.tongji.linezing.com/760570/tongji.js"></script>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height: 25px;">
+                            &nbsp;
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td style="height: 75px; background-image: url(<%=cons.EnvCons.PRE_URL%>/_styles/0002/images/mpwd_fs.gif); background-repeat: repeat;">
+                &nbsp;
+            </td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>

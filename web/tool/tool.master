@@ -1,0 +1,66 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="tool.master.cs" Inherits="tool_tool" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>
+        <%=cons.wrp.WrpCons.TITLE_TOOL%>
+    </title>
+    <%=cons.wrp.WrpCons.KEYWORDS_TOOL%>
+    <%=cons.wrp.WrpCons.DESCRIPTION_TOOL%>
+    <%=rmp.wrp.Wrps.ComnHead(cons.wrp.WrpCons.MODULE_TOOL)%>
+    <%= "<link type=\"text/css\" rel=\"stylesheet\" href=\"/tool/tool"+Session[cons.wrp.WrpCons.SCRIPTID]+".css\" charset=\"utf-8\" />" %>
+</head>
+<body>
+    <form id="AmonForm" runat="server">
+        <table border="0" cellpadding="0" cellspacing="0" id="AmonTool">
+            <tr>
+                <td style="height: 40px; background-color: #FAFAFA;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td style="height: 40px; width: 26px" align="right">
+                                <asp:Image ID="im_TOolIcon" runat="server" Width="16" Height="16" ImageUrl="~/logo/logo10.png" Style="vertical-align: middle;" />
+                            </td>
+                            <td style="height: 40px;" align="left">
+                                <strong>
+                                    <%=Session[cons.wrp.WrpCons.GUIDNAME]%>
+                                </strong>
+                            </td>
+                            <td style="height: 40px; padding-right: 10px;" align="right">
+                                <asp:Label ID="lb_ErrMsg" runat="server" CssClass="TEXT_NOTE1"></asp:Label>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <div id="ToolView" style="width: 100%; overflow: auto; display: none;">
+                        <asp:ContentPlaceHolder ID="AmonView" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                    <div id="LoadView">
+                        <img src="/_images/loading.gif" alt="数据加载中" />
+                        <br />
+                        数据加载中……
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 50px; background-color: #FAFAFA;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td style="height: 40px; padding-left: 10px;" align="left">
+                                <span id="AmonCopy">&copy;&nbsp;<asp:Label ID="lb_CopyYear" runat="server"></asp:Label>&nbsp;Amonsoft.&nbsp;All&nbsp;Rights&nbsp;Reserved.</span>
+                            </td>
+                            <td style="height: 40px; padding-right: 10px;" align="right">
+                                <a href="#" id="hl_Favorite" onclick="return addFav()">收藏本页</a>&nbsp;<a href="/idea/idea1002.aspx?sid=<%=Session[cons.wrp.WrpCons.SCRIPTID]%>0000">发表意见</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+<%=string.Format("<script type=\"text/javascript\" src=\"/{0}{1}/tool{2}.js\"></script>", cons.EnvCons.PRE_URL, cons.wrp.WrpCons.MODULE_TOOL, Session[cons.wrp.WrpCons.SCRIPTID])%>

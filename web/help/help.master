@@ -1,0 +1,134 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="help.master.cs" Inherits="help_help" %>
+<%@ Register Src="~/App_Ascx/AmonHead.ascx" TagName="AmonHead" TagPrefix="uc1" %>
+<%@ Register Src="~/App_Ascx/AmonFoot.ascx" TagName="AmonFoot" TagPrefix="uc2" %>
+<%@ Register Src="ascx/HelpList.ascx" TagName="AmonList" TagPrefix="uc3" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>
+        <%=cons.wrp.WrpCons.TITLE_HELP%>
+    </title>
+    <%=cons.wrp.WrpCons.KEYWORDS_HELP%>
+    <%=cons.wrp.WrpCons.DESCRIPTION_HELP%>
+    <%=rmp.wrp.Wrps.ComnHead(cons.wrp.WrpCons.MODULE_HELP)%>
+</head>
+<body>
+    <form id="AmonForm" runat="server">
+        <table border="0" cellpadding="0" cellspacing="0" id="TB_AmonSoft">
+            <tr>
+                <td>
+                    <uc1:AmonHead ID="AmonHead1" runat="server" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table border="0" cellpadding="0" cellspacing="0" id="TB_AmonBody">
+                        <tr>
+                            <td id="TD_AmonBody_L">
+                                &nbsp;
+                            </td>
+                            <td id="TD_AmonBody_M">
+                                <table border="0" cellpadding="0" cellspacing="0" id="TB_BODY">
+                                    <tr>
+                                        <td height="10px" colspan="2">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td id="TD_BODY_LIST" align="center">
+                                            <uc3:AmonList ID="AmonList1" runat="server" />
+                                        </td>
+                                        <td id="TD_BODY_VIEW" align="left">
+                                            <table border="0" cellpadding="0" cellspacing="0" id="TB_VIEW">
+                                                <tr>
+                                                    <td align="center">
+                                                        <table border="0" cellpadding="0" cellspacing="0" id="TB_VIEW_USER">
+                                                            <tr>
+                                                                <td height="10px">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="left">
+                                                                    网站导航：
+                                                                    <%
+                                                                        rmp.bean.K1V2 item;
+                                                                        int guidIndx = (int)Session[cons.wrp.WrpCons.GUIDINDX];
+                                                                        System.Collections.Generic.List<rmp.bean.K1V2> guidList = rmp.wrp.Wrps.GuidHelp(Session);
+                                                                        for (int i = 0; i < guidIndx; i += 1)
+                                                                        {
+                                                                            item = guidList[i];
+                                                                    %>
+                                                                    <a href="<%= item.K %>" title="<%= item.V2 %>"><%= item.V1 %></a>&nbsp;|&nbsp;
+                                                                    <%
+                                                                        }
+                                                                        item = guidList[guidIndx];
+                                                                    %>
+                                                                    <span class="TEXT_NOTE2"><%= item.V1 %></span>&nbsp;|
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td height="1" class="TD_LINE">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="center">
+                                                                    <table border="0" cellpadding="0" cellspacing="0" id="TB_VIEW_DATA">
+                                                                        <tr>
+                                                                            <th align="left" style="height:40px;">
+                                                                                <%= Session[cons.wrp.WrpCons.GUIDNAME] %>
+                                                                            </th>
+                                                                        </tr>
+                                                                        <tr id="tr_ErrMsg" runat="server">
+                                                                            <td align="center">
+                                                                                <asp:Label ID="lb_ErrMsg" CssClass="TEXT_NOTE1" runat="server"></asp:Label>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="center">
+                                                                                <!-- TemplateBeginEditable name="body" -->
+                                                                                <asp:ContentPlaceHolder ID="AmonView" runat="server">
+                                                                                </asp:ContentPlaceHolder>
+                                                                                <!-- TemplateEndEditable -->
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                &nbsp;
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="TD_TAIL">
+                                                                    &nbsp;
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height="10px" colspan="2">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td id="TD_AmonBody_R">
+                                &nbsp;
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <uc2:AmonFoot ID="AmonFoot1" runat="server" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+<%= rmp.wrp.Wrps.ComnScript(Session, cons.wrp.WrpCons.MODULE_HELP) %>

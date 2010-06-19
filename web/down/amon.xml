@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment>Amon系列软件版本更新控制文档</comment>
+  <!-- 后缀解析 -->
+  <entry key="10000000">V1.2.0.1</entry>
+  <!-- 后缀解析 -->
+  <entry key="13010000">V2.1.3.9</entry>
+  <!-- 批量更名 -->
+  <entry key="13020000">V1.1.0.0</entry>
+  <!-- 编码查询 -->
+  <entry key="13030000">V1.2.0.1</entry>
+  <!-- 迷你日历 -->
+  <entry key="13040000">V1.1.0.0</entry>
+  <!-- 数据安全 -->
+  <entry key="13050000">V1.1.0.0</entry>
+  <!-- 计算助理 -->
+  <entry key="13060000">V1.3.0.1</entry>
+  <!-- 魔方密码 -->
+  <entry key="130F0000">V2.0.4.5</entry>
+</properties>

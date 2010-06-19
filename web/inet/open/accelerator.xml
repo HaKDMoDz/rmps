@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<openServiceDescription xmlns="http://www.microsoft.com/schemas/openservicedescription/1.0">
+  <homepageUrl>http://amonsoft.net/</homepageUrl>
+  <display>
+    <name>Amon网页精灵</name>
+    <icon>http://amonsoft.net/favicon.ico</icon>
+    <description>Amon网页精灵，您的网络冲浪助手！</description>
+  </display>
+  <activity category="Share">
+    <activityAction context="selection">
+      <preview method="post" accept-charset="UTF-8" action="http://amonsoft.net/inet/inet0001.aspx">
+        <parameter name="sid" value="twie" />
+        <parameter name="h" value="238" />
+        <parameter name="w" value="314" />
+        <parameter name="t" value="{documentTitle}" />
+        <parameter name="u" value="{documentUrl}" />
+        <parameter name="d" value="{selection}" />
+      </preview>
+      <execute method="post" accept-charset="UTF-8" action="http://amonsoft.net/inet/inet0001.aspx" >
+        <parameter name="sid" value="twie" />
+        <parameter name="t" value="{documentTitle}" />
+        <parameter name="u" value="{documentUrl}" />
+        <parameter name="d" value="{selection}" />
+      </execute>
+    </activityAction>
+    <activityAction context="link">
+      <preview method="post" accept-charset="UTF-8" action="http://amonsoft.net/inet/inet0001.aspx">
+        <parameter name="sid" value="twie" />
+        <parameter name="h" value="238" />
+        <parameter name="w" value="314" />
+        <parameter name="t" value="{linkText}" />
+        <parameter name="u" value="{link}" />
+        <parameter name="d" value="{selection}" />
+      </preview>
+      <execute method="post" accept-charset="UTF-8" action="http://amonsoft.net/inet/inet0001.aspx" >
+        <parameter name="sid" value="twie" />
+        <parameter name="t" value="{linkText}" />
+        <parameter name="u" value="{link}" />
+        <parameter name="d" value="{selection}" />
+      </execute>
+    </activityAction>
+    <activityAction context="document">
+      <preview method="post" accept-charset="UTF-8" action="http://amonsoft.net/inet/inet0001.aspx">
+        <parameter name="sid" value="twie" />
+        <parameter name="h" value="238" />
+        <parameter name="w" value="314" />
+        <parameter name="t" value="{documentTitle}" />
+        <parameter name="u" value="{documentUrl}" />
+        <parameter name="d" value="{selection}" />
+      </preview>
+      <execute method="post" accept-charset="UTF-8" action="http://amonsoft.net/inet/inet0001.aspx" >
+        <parameter name="sid" value="twie" />
+        <parameter name="t" value="{documentTitle}" />
+        <parameter name="u" value="{documentUrl}" />
+        <parameter name="d" value="{selection}" />
+      </execute>
+    </activityAction>
+  </activity>
+</openServiceDescription>

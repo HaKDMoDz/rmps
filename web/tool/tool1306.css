@@ -1,0 +1,25 @@
+﻿.BT_MATH
+{
+    width: 90%;
+}
+.TF_MATH
+{
+    text-align: right;
+}
+#dv_MathExps
+{
+	width:320px;
+	height:165px;
+	z-index:1;
+	position:absolute;
+	border: #AAAAAA 1px solid;
+	background-color: #EFEFEF;
+}
+#dv_TextArea
+{
+	width:300px;
+	height:115px;
+	overflow: scroll;
+	background-image: url('/_images/textarea.png');
+	border: #CCCCCC 2px solid;
+}

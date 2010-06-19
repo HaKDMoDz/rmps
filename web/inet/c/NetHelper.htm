@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网页精灵</title>
+    <link rel="stylesheet" type="text/css" href="NetHelper.css" media="all" />
+
+    <script type="text/javascript" src="/web/inet/inet0001.ashx?sid=A0000000"></script>
+
+</head>
+<body>
+    <p>
+        网页精灵是一款完全基于Javascript语言开发、跨浏览器运行的网络辅助工具，并且精选了一些更适合于国内用户使用的互联网服务。<br />
+        <br />
+        目前经过测试的浏览器如下：<br />
+    </p>
+    <ul>
+        <li>Microsoft Internet Explorer 6;</li>
+        <li>Microsoft Internet Explorer 7;</li>
+        <li>Microsoft Internet Explorer 8;</li>
+        <li>Mozilla Firefox 3.x;</li>
+        <li>Apple Safari 3.x;</li>
+        <li>Opera 9.x;</li>
+        <li>Google Chrome beta;</li>
+    </ul>
+    <input type="text" id="tfDateText" />
+    <input type="button" id="btDateMenu" value="弹出日历" />
+    <input type="button" value="模式窗口" onclick="iNetHelper.mDlgOpen('test.htm',400,300,'abc',cTest);" />
+</body>
+</html>
+
+<script type="text/javascript">
+    function cTest(g)
+    {
+        alert(g);
+    }
+    function net_amonsoft_user()
+    {
+        iNetHelper.init('help');
+        iNetHelper.init('pbse');
+        iNetHelper.init('rpop');
+//        iNetHelper.init('time', 'yyy年MM月dd日 HH:mm:ss wwww', '');
+        iNetHelper.init('mdlg','own');
+//        iNetHelper.init('date');
+        iNetHelper.init('date', 'menu', 'yyyy-MM-dd', 160, 120, 'tfDateText', 'btDateMenu');
+//        iNetHelper.init('pbse');
+//        iNetHelper.init('time');
+
+        iNetHelper.init('form', '1', '200', '100', 500, 200, '', '', true, true);
+//        iNetHelper.initForm('1', 'test form', 'hello, my Baby!!!!');
+    }
+    net_amonsoft_user();
+</script>
+

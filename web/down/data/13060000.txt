@@ -1,0 +1,16 @@
+﻿#soft=
+#ver=
+#build=
+env=&nbsp;&nbsp;环境需求：<br />&nbsp;&nbsp;Java运行环境（JRE）6.0及其以<br />&nbsp;&nbsp;后版本。详细请参见：<br />&nbsp;&nbsp;<a href="http://www.java.com/" target="_blank">http://www.java.com/</a>
+
+text=华军下载
+link=http://www.newhua.com/soft/63584.htm
+tips=华军下载
+
+text=硅谷动力
+link=http://download.enet.com.cn/html/030792008012102.html
+tips=硅谷动力
+
+text=天空下载
+link=http://member.skycn.com/soft/29690.html
+tips=天空下载

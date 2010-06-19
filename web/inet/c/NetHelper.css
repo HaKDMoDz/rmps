@@ -1,0 +1,220 @@
+﻿/******************************************************************************
+ * CSS Document
+ * NetHelper v1.0
+ * http://amonsoft.net/
+ * Copyright (c) 2008 Amonsoft.net
+ ******************************************************************************/
+/**
+ * 网页精灵：通用容器样式
+*/
+.Net_Amonsoft_NetHelper_Form
+{
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    color: #666666;
+    font-family: "宋体" , "微软雅黑" , Fixedsys, System, Arial, "Times New Roman" , sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+	line-height:100%;
+    overflow: hidden;
+    padding: 1px;
+}
+.Net_Amonsoft_NetHelper_Form a
+{
+    text-decoration: none;
+}
+.Net_Amonsoft_NetHelper_Form img
+{
+    border: none;
+    vertical-align: middle;
+}
+.Net_Amonsoft_NetHelper_BODY
+{
+    background-color: #EEEEEE;
+    color: #666666;
+    font-family: "宋体" , "微软雅黑" , Fixedsys, System, Arial, "Times New Roman" , sans-serif;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+/**
+ * 没有数据时的选项卡
+*/
+.Net_Amonsoft_NetHelper_TABN
+{
+    border-bottom: 1px dashed #DADADA;
+}
+/**
+ * 默认状态时的选项卡
+*/
+.Net_Amonsoft_NetHelper_TABD
+{
+    background-color: #CCCCCC;
+    border: 1px dashed #DADADA;
+}
+/**
+ * 鼠标经过时的选项卡
+*/
+.Net_Amonsoft_NetHelper_TABO
+{
+    background-color: #EFEFEF;
+    border: 1px dashed #DADADA;
+}
+/**
+ * 选中状态时的选项卡
+*/
+.Net_Amonsoft_NetHelper_TABS
+{
+    background-color: #FFFFFF;
+    border-top: 1px dashed #DADADA;
+    border-left: 1px dashed #DADADA;
+    border-right: 1px dashed #DADADA;
+}
+/**--------------------------------------------------------
+ *  // 收藏模块
+ *--------------------------------------------------------*/
+.Net_Amonsoft_NetHelper_Help
+{
+    background-color: #FFFFFF;
+    border-left: 1px dashed #DADADA;
+    border-bottom: 1px dashed #DADADA;
+    border-right: 1px dashed #DADADA;
+}
+.Net_Amonsoft_NetHelper_Help td
+{
+    padding: 0px 0px 0px 4px;
+}
+.Net_Amonsoft_NetHelper_Help a
+{
+    color: #333333;
+    display: block;
+    font-weight: normal;
+}
+.Net_Amonsoft_NetHelper_Help a:hover
+{
+    background-color: #99CC66;
+    border-bottom: 0px;
+}
+/**--------------------------------------------------------
+ * 日期模块
+ *---------------------------------------------------------*/
+/**
+ * 日历组件中信息提示单元格样式
+ */
+#Net_Amonsoft_NetHelper_Date_TD0
+{
+    background-color: #FFFFFF;
+    border: 1px outset #CCCCCC;
+    color: #0FF0FF;
+}
+#Net_Amonsoft_NetHelper_Date_TD0 a
+{
+    color: #0FF0FF;
+}
+/**
+ * 日历组件中今日单元格样式
+*/
+.Net_Amonsoft_NetHelper_Date_R a
+{
+    color: #FF0000;
+}
+/**
+ * 日历组件中周六单元格样式
+*/
+.Net_Amonsoft_NetHelper_Date_G a
+{
+    color: #0000FF;
+}
+/**
+ * 日历组件中周日单元格样式
+*/
+.Net_Amonsoft_NetHelper_Date_B a
+{
+    color: #00AAFF;
+}
+/**
+ * 日历组件中其它单元格样式
+*/
+.Net_Amonsoft_NetHelper_Date_D a
+{
+}
+/**--------------------------------------------------------
+ * 菜单模块
+ *---------------------------------------------------------*/
+/**
+ * 网页精灵弹出菜单样式
+*/
+.Net_Amonsoft_NetHelper_Menu
+{
+    background-color: #EEEEEE;
+    font-family: "宋体" , "微软雅黑" , Fixedsys, System, Arial, "Times New Roman" , sans-serif;
+    font-size: 12px;
+    text-align: left;
+    overflow: hidden;
+}
+/**
+ * 弹出菜单：左侧徽标单元格样式
+*/
+.Net_Amonsoft_NetHelper_Menu_SL
+{
+    border-right: 1px solid #e0e0e0;
+}
+/**
+ * 弹出菜单：右侧菜单单元格样式
+*/
+.Net_Amonsoft_NetHelper_Menu_SR
+{
+    border-left: 1px solid #ffffff;
+}
+/**
+ * 弹出菜单：分隔符单元格样式
+*/
+.Net_Amonsoft_NetHelper_Menu_HR
+{
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #ffffff;
+}
+/**
+ * 弹出菜单：二级菜单单元格样式
+*/
+.Net_Amonsoft_NetHelper_Menu_RA
+{
+    background-image:url('/web/inet/c/rpopS.gif');
+    background-repeat:no-repeat;
+    background-position:center right;
+}
+/**
+ * 弹出菜单：鼠标经过单元行样式
+*/
+.Net_Amonsoft_NetHelper_Menu_OV
+{
+    cursor:pointer;
+    background-color:#dbecf3;
+    border:#b2d8e3 1px solid;
+}
+/**--------------------------------------------------------
+ * 模拟容器模块
+ *---------------------------------------------------------*/
+.Net_Amonsoft_NetHelper_80wif_Form
+{
+    background-color: #EEEEEE;
+    border: 1px solid #CCCCCC;
+    font-family: "宋体" , "微软雅黑" , Fixedsys, System, Arial, "Times New Roman" , sans-serif;
+    font-size: 12px;
+    text-align: left;
+    overflow: hidden;
+    padding: 1px;
+}
+.Net_Amonsoft_NetHelper_80wif_Form_Head
+{
+    background-color: #CCCCCC;
+}
+.Net_Amonsoft_NetHelper_80wif_Form_Drag
+{
+    background-color: #EEEEEE;
+    border: 1px solid #FF9900;
+    font-family: "宋体" , "微软雅黑" , Fixedsys, System, Arial, "Times New Roman" , sans-serif;
+    font-size: 12px;
+    text-align: left;
+    overflow: hidden;
+    padding: 1px;
+}

@@ -1,0 +1,8 @@
+系统：rmps
+模块：web
+路径：/rmps/web/idea/
+说明：Amon留言模块
+
+idea0001.aspx   所有留言（按时间降序分页显示）
+idea0002.aspx   发表留言
+idea9999.aspx   留言管理

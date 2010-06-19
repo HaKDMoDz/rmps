@@ -1,0 +1,37 @@
+﻿#net_amonsoft_wime_main
+{
+    width: 200px;
+    position: fixed;
+    background-color: #EEEEEE;
+    border: solid 1px #CCCCCC;
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+    font-size: 12px;
+}
+#net_amonsoft_wime_code
+{
+    color: #66CC00;
+    border-right: dotted 1px #CCCCCC;
+    padding: 4px;
+}
+#net_amonsoft_wime_char
+{
+    color: #003399;
+    border-top: dotted 1px #CCCCCC;
+    padding: 3px;
+}
+.net_amonsoft_wime_butn
+{
+    border: 0px;
+    color: #FF6600;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    padding: 0px;
+    margin: 0px;
+    font-size: 10px;
+    background-color: transparent;
+}
+.net_amonsoft_wime_note
+{
+    color: #FF0000;
+}

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>后缀解析</ShortName>
+  <LongName>后缀解析 - 在线查询</LongName>
+  <Description>后缀解析，为您提供更为详细的文件后缀信息！</Description>
+  <Tags>后缀解析 File Extension</Tags>
+  <Contact>amonsoft@gmail.com</Contact>
+  <Url type="text/html" template="http://amonsoft.cn/exts/exts0001.aspx?exts={searchTerms}&amp;case=0&amp;type="/>
+  <Image height="16" width="16" type="image/vnd.microsoft.icon">http://amonsoft.cn/favicon.ico</Image>
+  <Query role="example" searchTerms="exts" />
+  <Query role="request" searchTerms="exts" startPage="1" />
+  <Developer>Amonsoft.cn</Developer>
+  <Attribution>Search data Copyright 2009, Amonsoft.cn, All Rights Reserved</Attribution>
+  <SyndicationRight>open</SyndicationRight>
+  <AdultContent>false</AdultContent>
+  <Language>zh-CN</Language>
+  <InputEncoding>UTF-8</InputEncoding>
+  <OutputEncoding>UTF-8</OutputEncoding>
+</OpenSearchDescription>

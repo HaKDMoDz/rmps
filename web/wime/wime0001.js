@@ -1,0 +1,1 @@
+﻿wime.init('ctl00_AmonView_ta_TextArea');

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://inethelper/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://inethelper/locale/inethelper.dtd">
+<overlay id="inethelper-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script src="overlay.js"/>
+  <script src="thunderbirdOverlay.js"/>
+
+  <menupopup id="taskPopup">
+    <menuitem id="inethelperMenuItem" label="&inethelper.label;" oncommand="inethelper.openMini(event);"/>
+  </menupopup>
+  <popup id="threadPaneContext">
+    <menuitem id="inethelperContexts" label="&inethelperContext.label;" accesskey="&inethelperContext.accesskey;" oncommand="inethelper.openMini(event)"/>
+  </popup>
+  <toolbarpalette id="MailToolbarPalette">
+  <toolbarbutton id="inethelperToolbars"
+    label="&inethelperToolbar.label;"
+    tooltiptext="&inethelperToolbar.tooltip;"
+    oncommand="inethelper.openMini()"
+    class="toolbarbutton-1 chromeclass-toolbar-additional"/>
+  </toolbarpalette>
+</overlay>

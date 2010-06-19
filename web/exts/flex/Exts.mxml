@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical"
+	verticalAlign="top" horizontalAlign="center"
+	fontFamily="宋体" fontSize="12" backgroundColor="#FFFFFF"
+	backgroundGradientAlphas="[1.0, 1.0]" backgroundGradientColors="[#FFFFFF, #FFFFFF]">
+
+	<!-- 界面转换时的动态效果 -->
+    <mx:states>
+    	<mx:State name="ds">
+    		<mx:SetProperty target="{tb}" name="visible" value="true"/>
+    		<mx:SetProperty target="{tw}" name="visible" value="false"/>
+    		<mx:SetProperty target="{pg}" name="visible" value="false"/>
+    	</mx:State>
+    	<mx:State name="ps">
+    		<mx:SetProperty target="{tb}" name="visible" value="false"/>
+    		<mx:SetProperty target="{tw}" name="visible" value="true"/>
+    		<mx:SetProperty target="{pg}" name="visible" value="false"/>
+    	</mx:State>
+        <mx:State name="es">
+        	<mx:SetProperty target="{tb}" name="visible" value="false"/>
+	        <mx:AddChild relativeTo="{un}" position="after">
+	        	<mx:TitleWindow id="tw" layout="absolute"
+	        		width="600" height="400" visible="false"
+	        		showCloseButton="true" close="wx();">
+		        	<mx:TabNavigator id="tn" left="10" top="10" bottom="10" right="10">
+						<mx:Canvas label="概要" toolTip="概要信息">
+							<mx:Label x="10" y="10" text="软件名称"/>
+							<mx:TextInput id="base_ExtsSoft" x="71" y="8" width="231" editable="false" text="{hs.lastResult.P3010000.exts.base.ExtsSoft}"/>
+							<mx:Label x="312" y="10" text="所属类别"/>
+							<mx:TextInput id="base_ExtsType" x="373" y="8" width="175" editable="false" text="{hs.lastResult.P3010000.exts.base.ExtsType}"/>
+							<mx:Label x="10" y="40" text="应用平台"/>
+							<mx:TextInput id="base_PlatForm" x="71" y="38" width="231" editable="false" text="{hs.lastResult.P3010000.exts.base.PlatForm}"/>
+							<mx:Label x="312" y="40" text="CPU 架构"/>
+							<mx:TextInput id="base_ArchBits" x="373" y="38" width="175" editable="false" text="{hs.lastResult.P3010000.exts.base.ArchBits}"/>
+							<mx:Label x="10" y="70" text="最后更新"/>
+							<mx:TextInput id="base_LastUpdt" x="71" y="68" width="231" editable="false" text="{hs.lastResult.P3010000.exts.base.LastUpdt}"/>
+							<mx:Label x="312" y="70" text="查询统计"/>
+							<mx:TextInput id="base_QueryFeq" x="373" y="68" width="175" editable="false" text="{hs.lastResult.P3010000.exts.base.QueryFeq}"/>
+							<mx:Label x="10" y="98" text="快捷地址"/>
+							<mx:Tile x="71" y="98" width="477" horizontalAlign="left" direction="vertical" borderColor="#B7BABC" borderStyle="solid">
+								<mx:LinkButton id="base_MiniPath" maxWidth="470" label="{'http://amonsoft.cn/?' + hs.lastResult.P3010000.exts.base.ExtsName}"/>
+								<mx:LinkButton id="base_FullPath" maxWidth="470" label="{'http://amonsoft.cn/exts/exts0001.aspx?exts=' + hs.lastResult.P3010000.exts.base.ExtsName}"/>
+							</mx:Tile>
+							<mx:Label x="10" y="159" text="附注信息"/>
+							<mx:TextArea id="base_MarkData" x="71" y="158" width="477" height="104" editable="false" text="{hs.lastResult.P3010000.exts.base.MarkData}"/>
+						</mx:Canvas>
+						<mx:Canvas label="简介" toolTip="简介信息">
+							<mx:Label x="10" y="10" text="简要介绍"/>
+							<mx:TextArea id="Desp_DespInfo" x="71" y="9" width="477" height="122" editable="false" text="{hs.lastResult.P3010000.exts.desp.DespInfo}"/>
+							<mx:Label x="10" y="140" text="附注信息"/>
+							<mx:TextArea id="Desp_MarkData" x="71" y="139" width="477" height="122" editable="false" text="{hs.lastResult.P3010000.exts.desp.MarkData}"/>
+						</mx:Canvas>
+						<mx:Canvas label="Mime" toolTip="Mime类型">
+							<mx:DataGrid id="mime_MimeType" x="10" y="10" width="538" height="251" dataProvider="{hs.lastResult.P3010000.exts.mime.list.item}">
+								<mx:columns>
+									<mx:DataGridColumn headerText="Mime类型" dataField="name"/>
+									<mx:DataGridColumn headerText="附注信息" width="62" textAlign="center">
+										<mx:itemRenderer>
+											<mx:Component>
+												<mx:LinkButton icon="@Embed('../info.png')" toolTip="查看附注信息"/>
+											</mx:Component>
+										</mx:itemRenderer>
+									</mx:DataGridColumn>
+								</mx:columns>
+							</mx:DataGrid>
+						</mx:Canvas>
+						<mx:Canvas label="平台" toolTip="平台信息">
+							<mx:DataGrid id="plat_PlatForm" x="10" y="10" width="538" height="251" dataProvider="{hs.lastResult.P3010000.exts.plat.list.item}">
+								<mx:columns>
+									<mx:DataGridColumn headerText="" width="20" textAlign="center">
+										<mx:itemRenderer>
+											<mx:Component>
+												<mx:HBox width="100%" horizontalAlign="center">
+													<mx:Image source="{data.attribute('icon')+'&amp;d=0010'}" width="16" height="16"/>
+												</mx:HBox>
+											</mx:Component>
+										</mx:itemRenderer>
+									</mx:DataGridColumn>
+									<mx:DataGridColumn headerText="平台名称" dataField="name"/>
+								</mx:columns>
+							</mx:DataGrid>
+						</mx:Canvas>
+						<mx:Canvas label="格式" toolTip="格式信息">
+							<mx:Label x="10" y="10" text="文档名称"/>
+							<mx:TextInput id="docs_FileName" x="71" y="8" width="449" editable="false" text="{hs.lastResult.P3010000.exts.docs.FileName}"/>
+							<mx:LinkButton id="docs_FilePath" x="528" y="9" icon="@Embed('../link.png')" width="20" toolTip="查看文档" click="lf()"/>
+							<mx:Label x="10" y="40" text="发行版本"/>
+							<mx:TextInput id="docs_FileVers" x="71" y="38" width="477" editable="false" text="{hs.lastResult.P3010000.exts.docs.FileVers}"/>
+							<mx:Label x="10" y="70" text="发行日期"/>
+							<mx:TextInput id="docs_PubsDate" x="71" y="68" width="477" editable="false" text="{hs.lastResult.P3010000.exts.docs.PubsDate}"/>
+							<mx:Label x="10" y="100" text="文档摘要"/>
+							<mx:TextArea id="docs_DocsInfo" x="71" y="98" width="477" height="77" editable="false" text="{hs.lastResult.P3010000.exts.docs.DocsInfo}"/>
+							<mx:Label x="10" y="186" text="附注信息"/>
+							<mx:TextArea id="docs_MarkData" x="71" y="184" width="477" height="77" editable="false" text="{hs.lastResult.P3010000.exts.docs.MarkData}"/>
+						</mx:Canvas>
+						<mx:Canvas label="公司" toolTip="公司信息">
+							<mx:Image id="corp_CorpLogo" x="10" y="10" width="48" height="48"
+								source="{hs.lastResult.P3010000.exts.corp.CorpLogo+'&amp;d=0030'}"
+								click="pc(corp_CorpLogo, hs.lastResult.P3010000.exts.corp.CorpLogo, -2, -2);" httpStatus="pd(event);"/>
+							<mx:Label x="66" y="10" text="中文名称"/>
+							<mx:TextInput id="corp_NameCN" x="127" y="8" width="421" editable="false" text="{hs.lastResult.P3010000.exts.corp.NameCN}"/>
+							<mx:Label x="66" y="40" text="英文名称"/>
+							<mx:TextInput id="corp_NameEN" x="127" y="38" width="421" editable="false" text="{hs.lastResult.P3010000.exts.corp.NameEN}"/>
+							<mx:Label x="10" y="70" text="公司网址"/>
+							<mx:TextInput id="corp_CorpSite" x="71" y="68" width="449" editable="false" text="{hs.lastResult.P3010000.exts.corp.CorpSite}"/>
+							<mx:LinkButton x="528" y="69" icon="@Embed('../link.png')" width="20" toolTip="浏览网站" click="lk(corp_CorpSite.text, '')"/>
+							<mx:Label x="10" y="100" text="公司简介"/>
+							<mx:TextArea id="corp_CorpInfo" x="71" y="98" width="477" height="77" editable="false" text="{hs.lastResult.P3010000.exts.corp.CorpInfo}"/>
+							<mx:Label x="10" y="186" text="附注信息"/>
+							<mx:TextArea id="corp_MarkData" x="71" y="184" width="477" height="77" editable="false" text="{hs.lastResult.P3010000.exts.corp.MarkData}"/>
+						</mx:Canvas>
+						<mx:Canvas label="软件" toolTip="软件信息">
+							<mx:Image id="soft_SoftIcon" x="10" y="10" width="48" height="48"
+								source="{hs.lastResult.P3010000.exts.soft.SoftIcon+'&amp;d=0030'}"
+								click="pc(corp_CorpLogo, hs.lastResult.P3010000.exts.soft.SoftIcon, -2, -2)" httpStatus="pd(event);"/>
+							<mx:Label x="66" y="10" text="中文名称"/>
+							<mx:TextInput id="soft_NameCN" x="127" y="8" width="175" editable="false" text="{hs.lastResult.P3010000.exts.soft.NameCN}"/>
+							<mx:Label x="312" y="10" text="英文名称"/>
+							<mx:TextInput id="soft_NameEN" x="373" y="8" width="175" editable="false" text="{hs.lastResult.P3010000.exts.soft.NameEN}"/>
+							<mx:Label x="66" y="40" text="电子邮件"/>
+							<mx:TextInput id="soft_MailAddr" x="127" y="38" width="175" editable="false" text="{hs.lastResult.P3010000.exts.soft.MailAddr}"/>
+							<mx:Label x="312" y="40" text="链接地址"/>
+							<mx:TextInput id="soft_SoftPage" x="373" y="38" width="147" editable="false" text="{hs.lastResult.P3010000.exts.soft.SoftPage}"/>
+							<mx:LinkButton x="528" y="39" icon="@Embed('../link.png')" width="20" toolTip="打开链接" click="lk(soft_SoftPage.text, '')"/>
+							<mx:Label x="10" y="70" text="兼容后缀"/>
+							<mx:TextInput id="soft_ExtsList" x="71" y="68" width="231" editable="false" text="{hs.lastResult.P3010000.exts.soft.ExtsList}"/>
+							<mx:Label x="312" y="70" text="运行截图"/>
+							<mx:TextInput id="soft_SoftView" x="373" y="68" width="147" editable="false" text="{hs.lastResult.P3010000.exts.soft.SoftView}"/>
+							<mx:LinkButton x="528" y="69" icon="@Embed('../link.png')" width="20" toolTip="查看截图" click="lk(soft_SoftView.text, '')"/>
+							<mx:Label x="10" y="100" text="软件简介"/>
+							<mx:TextArea id="soft_SoftInfo" x="71" y="98" width="477" height="77" editable="false" text="{hs.lastResult.P3010000.exts.soft.SoftInfo}"/>
+							<mx:Label x="10" y="186" text="附注信息"/>
+							<mx:TextArea id="soft_MarkData" x="71" y="184" width="477" height="77" editable="false" text="{hs.lastResult.P3010000.exts.soft.MarkData}"/>
+						</mx:Canvas>
+						<mx:Canvas label="文件" toolTip="文件信息">
+							<mx:Image id="file_FileIcon" x="10" y="10" width="48" height="48"
+								source="{hs.lastResult.P3010000.exts.file.FileIcon+'&amp;d=0030'}"
+								click="pc(corp_CorpLogo, hs.lastResult.P3010000.exts.file.FileIcon, -2, -2)" httpStatus="pd(event);"/>
+							<mx:Label x="66" y="10" text="数值签名"/>
+							<mx:TextInput id="file_SignCode" x="127" y="8" width="175" editable="false" text="{hs.lastResult.P3010000.exts.file.SignCode}"/>
+							<mx:Label x="312" y="10" text="字符签名"/>
+							<mx:TextInput id="file_SignChar" x="373" y="8" width="175" editable="false" text="{hs.lastResult.P3010000.exts.file.SignChar}"/>
+							<mx:Label x="66" y="40" text="偏移位置"/>
+							<mx:TextInput id="file_Offset" x="127" y="38" width="175" editable="false" text="{hs.lastResult.P3010000.exts.file.Offset}"/>
+							<mx:Label x="312" y="40" text="加密算法"/>
+							<mx:TextInput id="file_Cipher" x="373" y="38" width="175" editable="false" text="{hs.lastResult.P3010000.exts.file.Cipher}"/>
+							<mx:Label x="10" y="70" text="起始数据"/>
+							<mx:TextInput id="file_HeadData" x="71" y="68" width="477" editable="false" text="{hs.lastResult.P3010000.exts.file.HeadData}"/>
+							<mx:Label x="10" y="100" text="结束数据"/>
+							<mx:TextInput id="file_FootData" x="71" y="98" width="477" editable="false" text="{hs.lastResult.P3010000.exts.file.FootData}"/>
+							<mx:Label x="10" y="130" text="文件简介"/>
+							<mx:TextArea id="file_FileInfo" x="71" y="128" width="477" height="62" editable="false" text="{hs.lastResult.P3010000.exts.file.FileInfo}"/>
+							<mx:Label x="10" y="199" text="附注信息"/>
+							<mx:TextArea id="file_MarkData" x="71" y="198" width="477" height="63" editable="false" text="{hs.lastResult.P3010000.exts.file.MarkData}"/>
+						</mx:Canvas>
+						<mx:Canvas label="致谢" toolTip="特别致谢">
+							<mx:Image id="idio_IdioLogo" x="10" y="10" width="48" height="48"
+								source="{hs.lastResult.P3010000.exts.idio.IdioLogo+'&amp;d=0030'}"
+								click="pc(corp_CorpLogo, hs.lastResult.P3010000.exts.idio.IdioLogo, -2, -2)" httpStatus="pd(event);"/>
+							<mx:Label x="66" y="10" text="昵    称"/>
+							<mx:TextInput id="idio_NickName" x="127" y="8" width="421" editable="false" text="{hs.lastResult.P3010000.exts.idio.NickName}"/>
+							<mx:Label x="66" y="40" text="邮    件"/>
+							<mx:TextInput id="idio_MailAddr" x="127" y="38" width="393" editable="false" text="{hs.lastResult.P3010000.exts.idio.MailAddr}"/>
+							<mx:LinkButton x="528" y="39" icon="@Embed('../mail.png')" width="20" toolTip="发送邮件" click="lk(idio_MailAddr.text, 'mailto:')"/>
+							<mx:Label x="10" y="70" text="签    名"/>
+							<mx:TextInput id="idio_IdioSign" x="71" y="68" width="477" editable="false" text="{hs.lastResult.P3010000.exts.idio.IdioSign}"/>
+							<mx:Label x="10" y="100" text="个人主页"/>
+							<mx:TextInput id="idio_HomePage" x="71" y="98" width="449" editable="false" text="{hs.lastResult.P3010000.exts.idio.HomePage}"/>
+							<mx:LinkButton x="528" y="99" icon="@Embed('../link.png')" width="20" toolTip="浏览首页" click="lk(idio_HomePage.text, '')"/>
+							<mx:Label x="10" y="130" text="个人简介"/>
+							<mx:TextArea id="idio_IdioInfo" x="71" y="128" width="477" height="133" editable="false" text="{hs.lastResult.P3010000.exts.idio.IdioInfo}"/>
+						</mx:Canvas>
+						<mx:Canvas label="备选" toolTip="备选软件">
+							<mx:DataGrid id="tn_Asoc" x="10" y="10" width="538" height="251" dataProvider="{hs.lastResult.P3010000.exts.asoc.list.item}">
+								<mx:columns>
+									<mx:DataGridColumn headerText="Link" dataField="link" visible="false"/>
+									<mx:DataGridColumn headerText="" width="20" textAlign="center">
+										<mx:itemRenderer>
+											<mx:Component>
+												<mx:HBox width="100%" horizontalAlign="center">
+													<mx:Image source="{data.icon+'&amp;d=0010'}" width="16" height="16"/>
+												</mx:HBox>
+											</mx:Component>
+										</mx:itemRenderer>
+									</mx:DataGridColumn>
+									<mx:DataGridColumn headerText="备选软件" dataField="name" dataTipField="name"/>
+									<mx:DataGridColumn headerText="兼容方式" dataField="exec" width="62" textAlign="center"/>
+									<mx:DataGridColumn headerText="运行平台" width="164" textAlign="center">
+										<mx:itemRenderer>
+											<mx:Component>
+												<mx:HBox width="100%" horizontalAlign="center">
+													<mx:Image source="{data.plat.all != null ? data.plat.all+'&amp;d=0010' : data.plat.default+'&amp;d=0010'}" toolTip="平台通用" width="16" height="16"/>
+													<mx:Image source="{data.plat.windows != null ? data.plat.windows+'&amp;d=0010' : data.plat.default+'&amp;d=0010'}" toolTip="Windows 平台" width="16" height="16"/>
+													<mx:Image source="{data.plat.macintosh != null ? data.plat.macintosh+'&amp;d=0010' : data.plat.default+'&amp;d=0010'}" toolTip="Macintosh 平台" width="16" height="16"/>
+													<mx:Image source="{data.plat.linux != null ? data.plat.linux+'&amp;d=0010' : data.plat.default+'&amp;d=0010'}" toolTip="Linux 平台" width="16" height="16"/>
+													<mx:Image source="{data.plat.unix != null ? data.plat.unix+'&amp;d=0010' : data.plat.default+'&amp;d=0010'}" toolTip="Unix 平台" width="16" height="16"/>
+													<mx:Image source="{data.plat.mobile != null ? data.plat.mobile+'&amp;d=0010' : data.plat.default+'&amp;d=0010'}" toolTip="移动平台" width="16" height="16"/>
+													<mx:Image source="{data.plat.special != null ? data.plat.special+'&amp;d=0010' : data.plat.default+'&amp;d=0010'}" toolTip="其它平台" width="16" height="16"/>
+												</mx:HBox>
+											</mx:Component>
+										</mx:itemRenderer>
+									</mx:DataGridColumn>
+								</mx:columns>
+							</mx:DataGrid>
+						</mx:Canvas>
+					</mx:TabNavigator>
+					<mx:ControlBar>
+						<mx:HBox id="rg" horizontalAlign="left">
+							<mx:LinkButton id="rg_Prev" icon="@Embed('../left.png')" toolTip="上一记录" click="ls(-1);" />
+							<mx:LinkButton id="rg_0" label="1" click="lg(0);"/>
+							<mx:LinkButton id="rg_1" label="2" click="lg(1);"/>
+							<mx:LinkButton id="rg_2" label="3" click="lg(2);"/>
+							<mx:LinkButton id="rg_3" label="4" click="lg(3);"/>
+							<mx:LinkButton id="rg_4" label="5" click="lg(4);"/>
+							<mx:LinkButton id="rg_5" label="6" click="lg(5);"/>
+							<mx:LinkButton id="rg_6" label="7" click="lg(6);"/>
+							<mx:LinkButton id="rg_7" label="8" click="lg(7);"/>
+							<mx:LinkButton id="rg_8" label="9" click="lg(8);"/>
+							<mx:LinkButton id="rg_Next" icon="@Embed('../right.png')" toolTip="下一记录" click="ls(1);"/>
+						</mx:HBox>
+						<mx:Spacer width="100%"/>
+						<mx:CheckBox id="wi" label="独立窗口" toolTip="123" click="ws();"/>
+					</mx:ControlBar>
+		        </mx:TitleWindow>
+	        </mx:AddChild>
+	        <mx:AddChild>
+	        	<mx:Grid id="pg" backgroundColor="#FFFFFF" borderColor="#B7BABC" borderStyle="solid" visible="false" creationComplete="PopUpManager.addPopUp(pg, this);">
+    	        	<mx:GridRow width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" mouseOut="st()" mouseOver="ct()">
+        	        	<mx:GridItem width="261" height="260" horizontalAlign="center" verticalAlign="middle">
+        	        		<mx:Image id="pv" httpStatus="pe(event);"/>
+        	        	</mx:GridItem>
+    	        	</mx:GridRow>
+    	        	<mx:GridRow width="100%">
+        	        	<mx:GridItem width="100%" horizontalAlign="center" verticalAlign="top" mouseOut="st()" mouseOver="ct()">
+        	        		<mx:HSlider id="sl"
+        	        			labels="[16,48,256]"
+        	        			allowTrackClick="true" liveDragging="true"
+        	        			minimum="16" maximum="256" value="48"
+        	        			snapInterval="16" tickInterval="16"
+        	        			change="sc()"/>
+        	        	</mx:GridItem>
+    	        	</mx:GridRow>
+	        	</mx:Grid>
+	        </mx:AddChild>
+        </mx:State>
+    </mx:states>
+    
+    <mx:transitions>
+    	<mx:Transition fromState="*" toState="*">
+    	</mx:Transition>
+    </mx:transitions>
+    
+    <!-- 处理脚本 -->
+    <mx:Script>
+    	<![CDATA[
+    		import mx.core.IContainer;
+    		import mx.managers.PopUpManager;
+    		import mx.managers.PopUpManager;
+    		import mx.managers.PopUpManager;
+    		import mx.containers.Canvas;
+    		import mx.managers.PopUpManager;
+    		import mx.utils.StringUtil;
+    		import mx.managers.PopUpManager;
+    		import mx.controls.Alert;
+    		import mx.rpc.events.FaultEvent;
+    		import mx.rpc.events.ResultEvent;
+
+			private var currIndx:int = -1;
+			private var extsSize:int = 9;
+			private var extsLink:Array;
+			private var extsInfo:Object;
+			private var iconPath:String;
+			private var interval:uint;
+
+			/**
+			 * 用户点击按钮查询
+			 */
+			private function hq():void
+			{
+				var exts:String = StringUtil.trim(q.text);
+				if(exts == '')
+				{
+					application.focusManager.setFocus(q);
+					Alert.show('请输入您要查询的后缀名称！', '温馨提示');
+					q.text = '';
+					return;
+				}
+				exts = exts.replace(/^(\.)*/g, '.');
+				if(exts == '.')
+				{
+					application.focusManager.setFocus(q);
+					Alert.show('请输入一个形如“.abc”的后缀字符串！', '温馨提示');
+					q.text = '.';
+					return;
+				}
+				if(exts.charAt(0) != '.')
+				{
+					exts = '.' + exts;
+				}
+
+				if(c0.selected) hs.request['case'] = '0';
+				else if (c1.selected)
+				{
+					hs.request['case'] = '1';
+					exts = exts.toUpperCase();
+				}
+				else if (c2.selected)
+				{
+					hs.request['case'] = '2';
+					exts = exts.toLowerCase();
+				}
+				else if (c3.selected) hs.request['case'] = '3';
+				q.text = exts;
+
+				currIndx = -1;
+				hs.request['exts'] = exts;
+				hs.request['soft'] = null;
+				hs.send();
+				currentState = 'es';
+				if(extsLink == null)
+				{
+					extsLink = [rg_0, rg_1, rg_2, rg_3, rg_4, rg_5, rg_6, rg_7, rg_8];
+				}
+				tw.visible=true;
+			}
+			/**
+			 * 链接导航事件查询
+			 */
+			private function lg(n:int):void
+			{
+				if(currIndx == n)
+				{
+					return;
+				}
+				extsLink[currIndx].label = (currIndx+1);
+				currIndx = n;
+				extsLink[currIndx].label = '[' + (currIndx+1) + ']';
+				hs.request.soft = extsInfo.item[currIndx].hash;
+				hs.send();
+			}
+			/**
+			 * 上一个、下一个按钮事件
+			 */
+			private function ls(n:int):void
+			{
+				var tempIndx:int = (currIndx + n);
+				if(tempIndx <= -1 || tempIndx >= extsSize)
+				{
+					return;
+				}
+				extsLink[currIndx].label = (currIndx+1);
+				currIndx = tempIndx;
+				extsLink[currIndx].label = '[' + (currIndx+1) + ']';
+				hs.request.soft = extsInfo.item[currIndx].hash;
+				hs.send();
+			}
+			/**
+			 * 数据查询结果成功时的处理
+			 */
+			private function hr(event:ResultEvent):void
+			{
+				var rs:Object = event.result;
+				var size:int = parseInt(rs.P3010000.info.size);
+				if (size==0)
+				{
+					switch(rs.P3010000.info.fail)
+					{
+						case '1':
+						case '2':
+						case '3':
+						default:
+					}
+					return;
+				}
+
+				if(currIndx==-1)
+				{
+					var lastSize:int = extsSize;
+					extsInfo = rs.P3010000.info;
+					extsSize = size;
+					tw.title = '后缀解析 共 '+extsSize+' 个结果';
+				
+					// Link
+					var tmpIndex:int = lastSize - extsSize;
+					var minIndex:int = tmpIndex > 0 ? extsSize : lastSize;
+					currIndx = 0;
+					while(currIndx < minIndex)
+					{
+						extsLink[currIndx].label = (currIndx + 1);
+						extsLink[currIndx].toolTip = (extsSize == 1 ? extsInfo.item.name : extsInfo.item[currIndx].name);
+						currIndx += 1;
+					}
+					while(tmpIndex < 0)
+					{
+						extsLink[currIndx].label = (currIndx + 1);
+						extsLink[currIndx].toolTip = extsInfo.item[currIndx].name;
+						rg.addChildAt(extsLink[currIndx], ++currIndx);
+						tmpIndex += 1;
+					}
+					while(tmpIndex > 0)
+					{
+						rg.removeChild(extsLink[currIndx++]);
+						tmpIndex -= 1;
+					}
+					currIndx = 0;
+					extsLink[currIndx].label = '[1]';
+				}
+			}
+			/**
+			 * 数据查询结果失败时的处理
+			 */
+			private function hf(event:FaultEvent):void
+			{
+				Alert.show(event.toString(), 'Error');
+			}
+			/**
+			 * 切换到网页模式
+			 */
+			private function ce():void
+			{
+				navigateToURL(new URLRequest('/exts/exts0001.aspx'), '_self');
+			}
+			/**
+			 * 文档格式查看按钮事件
+			 */
+			private function lf():void
+			{
+				var url:String = hs.lastResult.P3010000.exts.docs.FilePath;
+				if(url == '')
+				{
+					return;
+				}
+				navigateToURL(new URLRequest(url));
+			}
+			/**
+			 * 打开链接地址
+			 */
+			private function lk(url:String, pre:String):void
+			{
+				if(url==null || url == '')
+				{
+					return;
+				}
+				navigateToURL(new URLRequest(pre + url));
+			}
+			/**
+			 * 用户登录
+			 */
+			private function su():void
+			{
+				navigateToURL(new URLRequest('/user/user0001.aspx'));
+			}
+			/**
+			 * 显示图标预览窗口
+			 */
+			private function pc(c:Image, t:String, x:int, y:int):void
+			{
+				var pt:Point = new Point(0, 0); 
+				pt = c.localToGlobal(pt);
+				pg.x = pt.x + x;
+				pg.y = pt.y + y;
+				pg.visible = true;
+				PopUpManager.bringToFront(pg);
+
+				iconPath = t;
+				sl.value = 48;
+				sc();
+			}
+			/**
+			 * 显示图标弹出窗口
+			 */
+			private function sc():void
+			{
+				var s:int = sl.value;
+				pv.width = s;
+				pv.height = s;
+				sl.labels = [16, s, 256];
+				pv.source = iconPath.replace('{0}', lp(s.toString(16), 4));
+			}
+			/**
+			 * 字符串左填充
+			 */
+			private function lp(s:String, n:int):String
+			{
+				if(s.length < n)
+				{
+					var t:String='';
+					for(var i:int=s.length;i<n;i+=1)
+					{
+						t += '0';
+					}
+					return t+s;
+				}
+				return s.substring(s.length - 4);
+			}
+			/**
+			 * 设置计时器
+			 */
+			private function st():void
+			{
+				interval = setTimeout(ph, 500);
+			}
+			/**
+			 * 移除计时器
+			 */
+			private function ct():void
+			{
+				clearTimeout(interval);
+			}
+			/**
+			 * 隐藏图像预览窗口
+			 */
+			private function ph():void
+			{
+				pg.visible = false;
+			}
+			/**
+			 * 默认大小（48*48）图像加载状态判断，若加载不成功，则加载默认图像
+			 */
+			private function pd(evt:HTTPStatusEvent):void
+			{
+				if(evt.status == 404)
+				{
+					pv.source='/exts/comn/00030.png';
+				}
+			}
+			/**
+			 * 图像加载状态判定，若加载不成功，则加载默认图像
+			 */
+			private function pe(evt:HTTPStatusEvent):void
+			{
+				if(evt.status == 404)
+				{
+					pv.source='/exts/comn/'+lp(sl.value.toString(16), 5)+'.png';
+				}
+			}
+			/**
+			 * 弹出窗口的状态设置
+			 */
+			private function ws():void
+			{
+				if(wi.selected)
+				{
+					PopUpManager.addPopUp(tw, this);
+					PopUpManager.centerPopUp(tw);
+				}
+				else
+				{
+					addChildAt(tw, 2);
+					PopUpManager.removePopUp(tw);
+				}
+			}
+			/**
+			 * 弹出窗口关闭
+			 */
+			private function wx():void
+			{
+				currentState='ds';
+			}
+    	]]>
+    </mx:Script>
+    
+    <!-- 异步数据查询 -->
+	<mx:HTTPService id="hs"
+		method="GET" resultFormat="object"
+		url="/exts/exts0001.ashx"
+		useProxy="false"
+		result="hr(event);" fault="hf(event);">
+	</mx:HTTPService>
+
+	<!-- 系统徽标 -->
+    <mx:Image id="logo" source="/_images/winshine.png"/>
+    
+    <!-- 用户交互组件区域，主要有功能选项及用户输入区域 -->
+    <mx:Grid id="un" width="670">
+    	<!-- 功能选项区域 -->
+        <mx:GridRow id="uf" width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+            <mx:GridItem width="100%" height="100%">
+            </mx:GridItem>
+        </mx:GridRow>
+        <!-- 用户交互区域 -->
+        <mx:GridRow id="ua" width="100%" height="66" label="123" backgroundImage="/_images/bg.png">
+            <mx:GridItem width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+            	<!-- 功能导航信息标签（function） -->
+                <mx:Label id="f" text="后缀名称" fontSize="12" fontWeight="bold" fontFamily="宋体"/>
+                <!-- 数据查询交互文本区域（Query） -->
+                <mx:TextInput id="q" fontSize="18" width="400" enter="hq();"/>
+                <!-- 执行搜索按钮（Execute） -->
+                <mx:Button id="e" label="查询" click="hq();"/>
+            </mx:GridItem>
+        </mx:GridRow>
+        <!-- 扩展功能区域 -->
+        <mx:GridRow id="ux" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+            <mx:GridItem width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+            	<mx:RadioButton id="c3" label="模糊查询"/>
+            	<mx:RadioButton id="c0" label="大小敏感" selected="true"/>
+            	<mx:RadioButton id="c1" label="大写"/>
+            	<mx:RadioButton id="c2" label="小写"/>
+            </mx:GridItem>
+        </mx:GridRow>
+    </mx:Grid>
+    
+    <!-- 功能页面 -->
+    <mx:Tile id="tb" width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+    </mx:Tile>
+    
+    <!-- 版权信息 -->
+	<mx:ControlBar id="cr" width="90%" horizontalAlign="center">
+		<mx:Label text="{'© ' + new Date().getFullYear() + ' Winshine.biz.'}"/>
+	</mx:ControlBar>
+
+	<!-- 系统导航菜单，包括功能菜单及登录按钮等 -->
+    <mx:ApplicationControlBar dock="true">
+        <mx:LinkButton id="ge" label="网页模式" click="ce();"/>
+        <mx:Spacer width="100%"/>
+        <mx:LinkButton id="ur" label="登录" click="su();"/>
+    </mx:ApplicationControlBar>
+</mx:Application>

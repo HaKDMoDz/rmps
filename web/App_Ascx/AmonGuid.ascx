@@ -1,0 +1,1 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="AmonGuid.ascx.cs" Inherits="App_Ascx_AmonGuid" %>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>  
+<openServiceDescription xmlns="http://www.microsoft.com/schemas/openservicedescription/1.0">  
+    <homepageUrl>http://amonsoft.cn/</homepageUrl>  
+    <display>  
+        <name>后缀解析</name>  
+        <icon>http://amonsoft.cn/favicon.ico</icon>  
+        <description>后缀解析，为您提供更为详细的文件后缀名信息！</description>  
+    </display>  
+    <activity category="search">  
+        <activityAction context="selection">  
+            <preview action="http://amonsoft.cn/tool/tool1301.aspx">  
+                <parameter name="exts" value="{selection}" type="text" />      
+                <parameter name="case" value="1" />                                   
+            </preview>  
+            <execute method="get" action="http://amonsoft.cn/exts/exts0001.aspx" >  
+                <parameter name="exts" value="{selection}" type="text" />  
+                <parameter name="case" value="1" />     
+            </execute>     
+        </activityAction>  
+    </activity>  
+</openServiceDescription>

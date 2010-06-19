@@ -1,0 +1,20 @@
+﻿#soft=
+#ver=
+#build=
+env=&nbsp;&nbsp;环境需求：<br />&nbsp;&nbsp;Java运行环境（JRE）6.0及其以<br />&nbsp;&nbsp;后版本。详细请参见：<br />&nbsp;&nbsp;<a href="http://www.java.com/" target="_blank">http://www.java.com/</a>
+
+text=华军下载
+link=http://www.onlinedown.net/soft/64396.htm
+tips=华军下载
+
+text=硅谷动力
+link=http://download.enet.com.cn/html/030772008022701.html
+tips=硅谷动力
+
+text=绿色软件联盟
+link=http://www.xdowns.com/soft/6/56/2008/Soft_40875.html
+tips=绿色软件联盟
+
+text=下载无限
+link=http://www.wxdown.net/Software/Catalog43/8568.html
+tips=下载无限

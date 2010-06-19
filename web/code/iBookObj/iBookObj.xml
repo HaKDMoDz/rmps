@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<openServiceDescription xmlns="http://www.microsoft.com/schemas/openservicedescription/1.0">
+  <homepageUrl>http://www.amonsoft.cn/</homepageUrl>
+  <display>
+    <name>Amon网络收藏</name>
+    <icon>http://www.amonsoft.cn/logo/favicon.ico</icon>
+    <description>Amon网络收藏，您的网络收藏助手！</description>
+  </display>
+  <activity category="share">
+    <activityAction context="selection">
+      <preview action="http://www.amonsoft.cn/mini/mini1307.aspx">
+        <parameter name="s" value="{selection}" />
+        <parameter name="u" value="{documentUrl}" />
+        <parameter name="t" value="{documentTitle}" />
+      </preview>
+      <execute method="get" action="http://www.amonsoft.cn/tool/tool1307.aspx" >
+        <parameter name="s" value="{selection}" type="text" />
+        <parameter name="u" value="{documentUrl}" type="text" />
+        <parameter name="t" value="{documentTitle}" type="text" />
+      </execute>
+    </activityAction>
+  </activity>
+</openServiceDescription>

@@ -1,0 +1,120 @@
+﻿.TB_EXTSINFO
+{
+    border: solid 1px #CCCCCC;
+}
+.TD_TAB_D
+{
+    height: 18px;
+    background-color: #DDDDDD;
+}
+.TD_TAB_E
+{
+    height: 18px;
+    background-color: #80BFFF;
+}
+.TD_TAB_S
+{
+    height: 18px;
+    background-color: #CCFF66;
+}
+.A_TAB_O
+{
+    color: #FF9933;
+    text-decoration: none;
+}
+.IMG_EXTSICON
+{
+    border: solid 1px #99CC00;
+}
+.ICON_VIEW
+{
+    position: absolute; /*top:0px; 	left:0px;*/
+    background: #fff9e3;
+    border: 1px solid #fadc80;
+    margin: 0px;
+    padding: 4px 4px 4px 4px;
+    z-index: 1001;
+}
+/*****
+ * 后缀解析专用板式
+ *****/
+.exts_head
+{
+    color: #FFFFFF;
+    height: 25px;
+    background-image: url(images/exts_h.png);
+    background-repeat: repeat-x;
+    background-position: center center;
+}
+.exts_body_tl
+{
+    background-image: url(images/exts_tl.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.exts_body_tm
+{
+    background-image: url(images/exts_tm.png);
+    background-repeat:repeat-x;
+    background-position: center center;
+}
+.exts_body_tr
+{
+    background-image: url(images/exts_tr.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.exts_body_ml
+{
+    background-image: url(images/exts_ml.png);
+    background-repeat:repeat-y;
+    background-position: center center;
+}
+.exts_body_mr
+{
+    background-image: url(images/exts_mr.png);
+    background-repeat: repeat-y;
+    background-position: center center;
+}
+.exts_body_bl
+{
+    background-image: url(images/exts_bl.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.exts_body_bm
+{
+    background-image: url(images/exts_bm.png);
+    background-repeat: repeat-x;
+    background-position: center center;
+}
+.exts_body_br
+{
+    background-image: url(images/exts_br.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.exts_head a
+{
+    color:#FFFFFF;
+}
+.exts_head a:hover
+{
+    text-decoration: underline;
+}
+.exts_head a:visited
+{
+    color:#FFFFFF;
+}
+.exts_link a
+{
+    color:#808080;
+}
+.exts_link a:hover
+{
+    text-decoration: underline;
+}
+.exts_link a:visited
+{
+    color:#808080;
+}

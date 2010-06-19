@@ -1,0 +1,123 @@
+﻿/**
+ * Document   : iSearcher
+ * Created on : 2009-9-10, 13:06:04
+ * Author     : 姚尚文
+ * Description: Purpose of the stylesheet follows.
+ */
+#Net_Amonsoft_iSearcher
+{
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+    font-size: 12px;
+}
+#Net_Amonsoft_iSearcher a
+{
+    text-decoration: none;
+}
+#Net_Amonsoft_iSearcher img
+{
+    border: none;
+}
+#Net_Amonsoft_iSearcher #q
+{
+    background-image: url(/srch/_i/g.gif);
+    background-position: center left;
+    background-repeat: no-repeat;
+    border-width: 0px;
+    height: 13px;
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+    font-size: 12px;
+    padding: 4px;
+    vertical-align: middle;
+    outline-color: -moz-use-text-color;
+    outline-style: none;
+    outline-width: medium;
+}
+/*类别选项列表风格*/
+#Net_Amonsoft_iSearcher_k
+{
+    background-color: #F4F4F4;
+    background-image: url(/srch/_i/1.png);
+    background-repeat: no-repeat;
+}
+/*搜索引擎列表风格*/
+#Net_Amonsoft_iSearcher_a
+{
+}
+/*执行查询风格*/
+#Net_Amonsoft_iSearcher_i
+{
+    width: 100px;
+}
+/*执行查询风格*/
+#Net_Amonsoft_iSearcher_q
+{
+    border: 1px solid #FFFFFF;
+}
+
+/*用户录入区域风格*/
+#Net_Amonsoft_iSearcher .tbq
+{
+    background-color: #FFFFFF;
+    border: 1px solid #D9E6EE;
+}
+
+/*搜索引擎名称风格*/
+#Net_Amonsoft_iSearcher .tdt
+{
+    background-image: url(/srch/_i/t.gif);
+    width: 100px;
+}
+/*搜索引擎文本风格*/
+#Net_Amonsoft_iSearcher .tdq
+{
+}
+/*搜索引擎切换风格*/
+#Net_Amonsoft_iSearcher .tda
+{
+    width: 20px;
+}
+
+/*弹出菜单DIV风格*/
+#Net_Amonsoft_iSearcher .pop
+{
+    background-color: #FFFFFF;
+    border: 1px solid #E7E7E7;
+    padding: 1px;
+    position: absolute;
+}
+
+/*类别默认风格*/
+#Net_Amonsoft_iSearcher .tkd
+{
+}
+/*类别经过风格*/
+#Net_Amonsoft_iSearcher .tko
+{
+    cursor: pointer;
+    background-image: url(/srch/_i/2.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+/*选项默认风格*/
+#Net_Amonsoft_iSearcher .tid
+{
+    background-color: #F4F4F4;
+    border: 1px solid #E7E7E7;
+}
+/*选项经过风格*/
+#Net_Amonsoft_iSearcher .tio
+{
+    padding: 1px;
+    background-color: #3B97D3;
+    cursor: pointer;
+}
+
+/*选项默认风格*/
+#Net_Amonsoft_iSearcher .tqd
+{
+}
+/*选项经过风格*/
+#Net_Amonsoft_iSearcher .tqo
+{
+}

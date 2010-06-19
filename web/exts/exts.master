@@ -1,0 +1,223 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="exts.master.cs" Inherits="exts_exts" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>
+        <%=cons.wrp.WrpCons.TITLE_EXTS%>
+    </title>
+    <link title="后缀解析" rel="search" type="application/opensearchdescription+xml" href="/exts/open/open_search.xml" />
+    <%=cons.wrp.WrpCons.KEYWORDS_EXTS %>
+    <%=cons.wrp.WrpCons.DESCRIPTION_EXTS%>
+    <%=rmp.wrp.Wrps.ComnHead(cons.wrp.WrpCons.MODULE_EXTS)%>
+</head>
+<body>
+    <form id="AmonForm" runat="server">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td class="exts_head" align="right" colspan="3">
+                <asp:Label ID="lb_AmonUser" runat="server"></asp:Label><asp:HyperLink ID="hl_SignIn" NavigateUrl="~/user/user0101.aspx" runat="server">登录</asp:HyperLink><asp:LinkButton ID="lb_SignOs" runat="server" OnClick="lb_SignOs_Click">退出</asp:LinkButton>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td style="width: 760px; height: 100px;">
+                <a href="/" title="网站首页">
+                    <asp:Image ID="im_AmonLogo" runat="server" /></a>
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td style="width: 760px;" align="center">
+                <table width="700" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="exts_body_tl" style="width: 12px; height: 36px;">
+                        </td>
+                        <td class="exts_body_tm" align="right">
+                            <table border="0" cellpadding="2" cellspacing="0" width="100%">
+                                <tr>
+                                    <td align="left" style="font-weight: bold;">
+                                        后缀解析
+                                    </td>
+                                    <td align="right">
+                                        <asp:Panel ID="pl_Edit" runat="server">
+                                            <asp:HyperLink ID="hl_ExtsInfo" NavigateUrl="~/exts/exts0010.aspx" runat="server">后缀数据</asp:HyperLink>
+                                            &nbsp;<asp:HyperLink ID="hl_CorpInfo" NavigateUrl="~/exts/exts0100.aspx" runat="server">公司信息</asp:HyperLink>
+                                            &nbsp;<asp:HyperLink ID="hl_SoftInfo" NavigateUrl="~/exts/exts0200.aspx" runat="server">软件信息</asp:HyperLink>
+                                            &nbsp;<asp:HyperLink ID="hl_FileInfo" NavigateUrl="~/exts/exts0300.aspx" runat="server">文件信息</asp:HyperLink>
+                                            &nbsp;<asp:HyperLink ID="hl_DocsInfo" NavigateUrl="~/exts/exts0400.aspx" runat="server">文档信息</asp:HyperLink>
+                                            &nbsp;<asp:HyperLink ID="hl_MimeInfo" NavigateUrl="~/exts/exts0500.aspx" runat="server">MIME类型</asp:HyperLink>
+                                            &nbsp;<asp:HyperLink ID="hl_PlatForm" NavigateUrl="~/exts/exts0600.aspx" runat="server">应用平台</asp:HyperLink>
+                                            &nbsp;更多
+                                        </asp:Panel>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="exts_body_tr" style="width: 12px; height: 36px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="exts_body_ml" style="width: 12px;">
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td class="exts_body_mr" style="width: 12px;">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="exts_body_ml" style="width: 12px;">
+                        </td>
+                        <td align="left">
+                            网站导航：
+                            <%
+                                rmp.bean.K1V2 item;
+                                int guidIndx = (int)Session[cons.wrp.WrpCons.GUIDINDX];
+                                int guidSize = (int)Session[cons.wrp.WrpCons.GUIDSIZE];
+                                System.Collections.Generic.List<rmp.bean.K1V2> guidList = rmp.wrp.Wrps.GuidExts(Session);
+                                for (int i = 0; i < guidSize; i += 1)
+                                {
+                                    item = guidList[i];
+                                    if (guidIndx == i)
+                                    {
+                            %>
+                            <span class="TEXT_NOTE2">
+                                <%= item.V1%></span>&nbsp;|&nbsp;
+                            <%
+                                }
+                                    else
+                                    {
+                            %>
+                            <a href="<%= item.K %>" title="<%= item.V2 %>">
+                                <%= item.V1%></a>&nbsp;|&nbsp;
+                            <%
+                                }
+                                }
+                            %>
+                        </td>
+                        <td class="exts_body_mr" style="width: 12px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="exts_body_ml" style="width: 12px; height: 40px;">
+                        </td>
+                        <td class="exts_body_mm" style="height: 40px;" align="center">
+                            &nbsp;
+                        </td>
+                        <td class="exts_body_mr" style="width: 12px; height: 40px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="exts_body_ml" style="width: 12px;">
+                        </td>
+                        <td class="exts_body_mm" align="center">
+                            <!-- TemplateBeginEditable name="body" -->
+                            <asp:ContentPlaceHolder ID="AmonView" runat="server">
+                            </asp:ContentPlaceHolder>
+                            <!-- TemplateEndEditable -->
+                        </td>
+                        <td class="exts_body_mr" style="width: 12px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="exts_body_ml" style="width: 12px; height: 40px;">
+                        </td>
+                        <td class="exts_body_mm" style="height: 40px;" align="center">
+                            &nbsp;
+                        </td>
+                        <td class="exts_body_mr" style="width: 12px; height: 40px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="exts_body_bl" style="width: 12px; height: 16px;">
+                        </td>
+                        <td class="exts_body_bm">
+                            &nbsp;
+                        </td>
+                        <td class="exts_body_br" style="width: 12px; height: 16px;">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td style="width: 760px">
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td class="TD_LINE_T">
+                <table width="100%" border="0" cellspacing="0" cellpadding="3">
+                    <tr>
+                        <td class="exts_link" style="width: 10%;" align="center">
+                            <a href="http://amonsoft.net/">Amon在线</a>
+                        </td>
+                        <td class="exts_link" style="width: 10%;" align="center">
+                            <a href="http://amonsoft.com/">Amon软件</a>
+                        </td>
+                        <td class="exts_link" style="width: 10%;" align="center">
+                            <a href="http://amonsoft.blog.163.com/">Amon博客</a>
+                        </td>
+                        <td class="exts_link" style="width: 10%;" align="center">
+                            <a href="http://magicpwd.com/">魔方密码</a>
+                        </td>
+                        <td class="exts_link" style="width: 10%;" align="center">
+                            &nbsp;
+                        </td>
+                        <td class="exts_link" style="width: 10%;" align="center">
+                            &nbsp;
+                        </td>
+                        <td class="exts_link" style="width: 10%;" align="center">
+                            &nbsp;
+                        </td>
+                        <td class="exts_link" style="width: 10%;" align="center">
+                            &nbsp;
+                        </td>
+                        <td class="exts_link" style="width: 20%;" align="right">
+                            &copy; Winshine.biz
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td style="width: 760px">
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>
+<%=String.Format("<script type=\"text/javascript\" src=\"{0}/{1}/{2}.js\"></script>", cons.EnvCons.PRE_URL, cons.wrp.WrpCons.MODULE_EXTS, Session[cons.wrp.WrpCons.SCRIPTID])%>

@@ -1,0 +1,28 @@
+﻿<search
+    version="7.1"
+    name="后缀解析"
+    description="后缀解析，为您提供更为详细的文件后缀信息！"
+    action="http://www.amonsoft.cn/exts/exts0001.aspx"
+    searchForm="http://www.amonsoft.cn/"
+    method="GET"
+    queryCharset="UTF-8">
+
+    <input name="exts" user>
+    <input name="case" value="0">
+    <input name="type" value="">
+
+    <interpret
+        resultListStart="<!-- RESULT LIST START -->"
+        resultListEnd="<!-- RESULT LIST END -->"
+
+        resultItemStart="<!-- RESULT ITEM START -->"
+        resultItemEnd="<!-- RESULT ITEM END -->"
+    >
+
+</search>
+
+<browser
+  update="http://www.amonsoft.cn/exts/srch/exts_zh_CN.src"
+  updateIcon="http://www.amonsoft.cn/logo/logo10.png"
+  updateCheckDays="7">
+ 

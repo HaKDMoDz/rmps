@@ -1,0 +1,7 @@
+﻿/****************************************************************
+ * iDateObj v1.0
+ * http://www.amonsoft.cn/code/iSrchObj/
+ * Copyright (c) 2008 Amonsoft.cn
+ ****************************************************************/
+function iDateObj(){var THIS = this;var _DOC = document;var NAME = 'iDataObj';var fix = true;var NOW;var YYY;var MMM;var DDD;var hhh;var mmm;var sss;var DAY = new Array();THIS.init = function(){YYY = '年';MMM = '月';DDD = '日';hhh = ':';mmm = ':';sss = '';DAY[0] = '星期日';DAY[1] = '星期一';DAY[2] = '星期二';DAY[3] = '星期三';DAY[4] = '星期四';DAY[5] = '星期五';DAY[6] = '星期六';setInterval('ido.show()', 1000);};THIS.show = function(){NOW = new Date();_DOC.getElementById('ctl00_AmonHead1_AmonDate').innerHTML = Y() + M() + D() + '&nbsp;' + h() + m() + s() + '&nbsp;' + w();};function Y(){return NOW.getFullYear() + YYY;}function M(){var m = NOW.getMonth() + 1;if (fix && m < 10){m = '0' + m;}return m + MMM;}function D(){var d = NOW.getDate();if (fix && d < 10){d = '0' + d;}return d + DDD;}function h(){var h = NOW.getHours();if (fix && h < 10){h = '0' + h;}return h + hhh;}function m(){var m = NOW.getMinutes();if (fix && m < 10){m = '0' + m;}return m + mmm;}function s(){var s = NOW.getSeconds();if (fix && s < 10){s = '0' + s;}return s + sss;}function w(){return DAY[NOW.getDay()];}}
+var ido = new iDateObj();ido.init();

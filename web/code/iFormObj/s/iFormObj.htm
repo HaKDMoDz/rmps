@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>无标题页</title>
+</head>
+<body>
+<a href="" onclick="return chooseImg();">打开窗口</a>
+</body>
+</html>
+
+<script type="text/javascript" src="iFormObj.js"></script>
+
+<script type="text/javascript">
+function chooseImg()
+{
+    var arr = new Array();
+    iFormObj.open('subWin.htm', 540, 360, arr, processImg, window);
+    return false;
+}
+function processImg(data)
+{
+    alert(data);
+}
+</script>
+

@@ -1,0 +1,6 @@
+content	inethelper	content/
+locale	inethelper	zh-CN	locale/zh-CN/
+skin	inethelper	classic/1.0	skin/
+overlay	chrome://browser/content/browser.xul	chrome://inethelper/content/firefoxOverlay.xul
+overlay	chrome://messenger/content/messenger.xul	chrome://inethelper/content/thunderbirdOverlay.xul
+style	chrome://global/content/customizeToolbar.xul	chrome://inethelper/skin/overlay.css

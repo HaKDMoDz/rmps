@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
+         xmlns:NC="http://home.netscape.com/NC-rdf#"
+         xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <RDF:Description RDF:about="rdf:#$GP7g13"
+                   em:id="{3550f703-e582-4d05-9a08-453d09bdfdc6}"
+                   em:minVersion="1.5"
+                   em:maxVersion="2.0.0.*" />
+  <RDF:Description RDF:about="rdf:#$FP7g13"
+                   em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+                   em:minVersion="1.5"
+                   em:maxVersion="3.0.*" />
+  <RDF:Description RDF:about="urn:mozilla:install-manifest"
+                   em:id="inethelper@amonsoft.net"
+                   em:name="Amon网页精灵"
+                   em:version="1.1"
+                   em:creator="Amon"
+                   em:description="Amon网页精灵，您的网络冲浪助手！"
+                   em:homepageURL="http://amonsoft.net/">
+    <em:contributor>Amon</em:contributor>
+    <em:contributor>Sand</em:contributor>
+    <em:targetApplication RDF:resource="rdf:#$FP7g13"/>
+    <em:targetApplication RDF:resource="rdf:#$GP7g13"/>
+  </RDF:Description>
+</RDF:RDF>

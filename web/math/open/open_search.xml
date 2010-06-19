@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>计算助理</ShortName>
+  <LongName>计算助理 - 在线计算</LongName>
+  <Description>计算助理，为您提供复杂代数公式计算！</Description>
+  <Tags>数据计算</Tags>
+  <Contact>amonsoft@gmail.com</Contact>
+  <Url type="text/html" template="http://www.amonsoft.cn/math/math0001.aspx?math={searchTerms}&amp;type="/>
+  <Image width="16" height="16" type="image/png">http://www.amonsoft.cn/logo/logo10.png</Image>
+  <Query role="example" searchTerms="sin(π)" />
+  <Developer>Amonsoft.cn</Developer>
+  <Attribution>Copyright 2008, Amonsoft.cn, All Rights Reserved</Attribution>
+  <SyndicationRight>open</SyndicationRight>
+  <AdultContent>false</AdultContent>
+  <Language>zh-CN</Language>
+  <InputEncoding>UTF-8</InputEncoding>
+  <OutputEncoding>UTF-8</OutputEncoding>
+</OpenSearchDescription>
