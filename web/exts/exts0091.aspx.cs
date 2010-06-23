@@ -23,7 +23,7 @@ public partial class exts_exts0091 : Page
             return;
         }
 
-        // Master Page初始化
+        #region Master Page初始化
         Session[cons.wrp.WrpCons.GUIDINDX] = 4;
         Session[cons.wrp.WrpCons.GUIDNAME] = "数据管理";
         Session[cons.wrp.WrpCons.SCRIPTID] = "exts0091";
@@ -40,6 +40,7 @@ public partial class exts_exts0091 : Page
         guidItem.K = cons.EnvCons.PRE_URL + "/exts/exts0091.aspx";
         guidItem.V1 = "描述信息";
         guidItem.V2 = "描述信息";
+        #endregion
 
         if (IsPostBack)
         {
@@ -47,14 +48,8 @@ public partial class exts_exts0091 : Page
         }
 
         //传入参数读取
-        String sid = Request[cons.wrp.WrpCons.SID];
-        if (sid == null)
-        {
-            Response.Redirect("~/index.aspx");
-            return;
-        }
-        sid = sid.Trim();
-        if (sid == "")
+        String sid = (Request[cons.wrp.WrpCons.SID] ?? "").Trim();
+        if (!StringUtil.isValidateHash(sid))
         {
             Response.Redirect("~/index.aspx");
             return;
@@ -140,7 +135,8 @@ public partial class exts_exts0091 : Page
             dba.addWhere(cons.io.db.prp.PrpCons.P3010502, cb_P3010502.SelectedValue);
 
             dba.executeUpdate();
-            Wrps.ShowMesg(Master, "后缀描述更新成功！");
+
+            lb_ErrMsg.Text = "后缀描述更新成功！";
         }
         else
         {
@@ -149,7 +145,8 @@ public partial class exts_exts0091 : Page
             dba.addParam(cons.io.db.prp.PrpCons.P3010506, cons.EnvCons.SQL_NOW, false);
 
             dba.executeInsert();
-            Wrps.ShowMesg(Master, "后缀描述添加成功！");
+
+            lb_ErrMsg.Text = "后缀描述添加成功！";
 
             // 修改状态标记为更新状态，用户可以进行后缀的更新操作
             hd_IsUpdate.Value = "1";

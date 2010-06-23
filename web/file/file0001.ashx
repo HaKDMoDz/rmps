@@ -16,7 +16,7 @@ public class file0001 : IHttpHandler
             context.Response.End();
         }
 
-        String dir = context.Server.MapPath(EnvCons.DIR_DAT);
+        String dir = context.Server.MapPath(cons.EnvCons.DIR_DAT);
         if (!System.IO.File.Exists(dir + sid.Replace(',', System.IO.Path.DirectorySeparatorChar) + ".aed"))
         {
             context.Response.ContentType = "text/plain";

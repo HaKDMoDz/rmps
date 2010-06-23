@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
-using cons.io.db.prp;
-
 using rmp.bean;
 using rmp.io.db;
 using rmp.util;
 using rmp.wrp;
 using rmp.wrp.exts;
-using System.Data;
 
 public partial class exts_exts0021 : Page
 {
+    private rmp.comn.user.UserInfo userInfo;
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (rmp.comn.user.UserInfo.Current(Session).UserRank < cons.comn.user.UserInfo.LEVEL_02)
+        userInfo = rmp.comn.user.UserInfo.Current(Session);
+        if (userInfo.UserRank < cons.comn.user.UserInfo.LEVEL_02)
         {
             Response.Redirect("~/index.aspx");
             return;
@@ -53,6 +53,7 @@ public partial class exts_exts0021 : Page
         rmp.comn.Util.InitCat1Data(cb_P301000C, cons.SysCons.UI_LANGHASH, "13010000", true);
         // 特别致谢
         rmp.comn.user.Util.InitUserList(cb_P301000F, false);
+        cb_P301000F.SelectedValue = userInfo.UserHash;
 
         // 数据更新操作
         LoadData();
@@ -71,10 +72,10 @@ public partial class exts_exts0021 : Page
         }
 
         DBAccess dba = new DBAccess();
-        dba.addTable(PrpCons.P3010000);
-        dba.addWhere(PrpCons.P3010003, WrpUtil.text2Db(sid));
-        dba.addWhere(PrpCons.P3010006, uri);
-        dba.addWhere(PrpCons.P3010014, opt, false);
+        dba.addTable(cons.io.db.prp.PrpCons.P3010000);
+        dba.addWhere(cons.io.db.prp.PrpCons.P3010003, WrpUtil.text2Db(sid));
+        dba.addWhere(cons.io.db.prp.PrpCons.P3010006, uri);
+        dba.addWhere(cons.io.db.prp.PrpCons.P3010014, opt, false);
 
         DataTable dt = dba.executeSelect();
         if (dt == null || dt.Rows.Count < 1)
@@ -203,18 +204,18 @@ public partial class exts_exts0021 : Page
         #endregion
 
         DBAccess dba = new DBAccess();
-        dba.addTable(PrpCons.P3010000);
-        dba.addParam(PrpCons.P3010002, ab_ArchBits.ArchBits); //处理字长
-        dba.addParam(PrpCons.P3010004, cb_P3010004.SelectedValue); //国别信息
-        dba.addParam(PrpCons.P3010005, cb_P3010005.SelectedValue); //公司索引
-        dba.addParam(PrpCons.P3010006, cb_P3010006.SelectedValue); //软件索引
-        dba.addParam(PrpCons.P3010007, cb_P3010007.SelectedValue); //文件索引
-        dba.addParam(PrpCons.P3010008, cb_P3010008.SelectedValue); //文档格式
-        dba.addParam(PrpCons.P301000C, cb_P301000C.SelectedValue); //类别索引
-        dba.addParam(PrpCons.P301000D, pf_PlatForm.PlatForm); //家族平台
-        dba.addParam(PrpCons.P301000F, cb_P301000F.SelectedValue); //人员索引
-        dba.addParam(PrpCons.P3010010, WrpUtil.text2Db(ta_P3010010.Text)); //附注信息
-        dba.addParam(PrpCons.P3010011, cons.EnvCons.SQL_NOW, false); //更新日期
+        dba.addTable(cons.io.db.prp.PrpCons.P3010000);
+        dba.addParam(cons.io.db.prp.PrpCons.P3010002, ab_ArchBits.ArchBits); //处理字长
+        dba.addParam(cons.io.db.prp.PrpCons.P3010004, cb_P3010004.SelectedValue); //国别信息
+        dba.addParam(cons.io.db.prp.PrpCons.P3010005, cb_P3010005.SelectedValue); //公司索引
+        dba.addParam(cons.io.db.prp.PrpCons.P3010006, cb_P3010006.SelectedValue); //软件索引
+        dba.addParam(cons.io.db.prp.PrpCons.P3010007, cb_P3010007.SelectedValue); //文件索引
+        dba.addParam(cons.io.db.prp.PrpCons.P3010008, cb_P3010008.SelectedValue); //文档格式
+        dba.addParam(cons.io.db.prp.PrpCons.P301000C, cb_P301000C.SelectedValue); //类别索引
+        dba.addParam(cons.io.db.prp.PrpCons.P301000D, pf_PlatForm.PlatForm); //家族平台
+        dba.addParam(cons.io.db.prp.PrpCons.P301000F, cb_P301000F.SelectedValue); //人员索引
+        dba.addParam(cons.io.db.prp.PrpCons.P3010010, WrpUtil.text2Db(ta_P3010010.Text)); //附注信息
+        dba.addParam(cons.io.db.prp.PrpCons.P3010011, cons.EnvCons.SQL_NOW, false); //更新日期
 
         try
         {
@@ -226,9 +227,9 @@ public partial class exts_exts0021 : Page
                 // 更新数据
                 if (isUpdate)
                 {
-                    dba.addWhere(PrpCons.P3010003, WrpUtil.text2Db(hd_P3010003.Value)); //后缀索引
-                    dba.addWhere(PrpCons.P3010006, WrpUtil.text2Db(hd_P3010006.Value)); //软件索引
-                    dba.addWhere(PrpCons.P3010014, "0", false); //操作流水
+                    dba.addWhere(cons.io.db.prp.PrpCons.P3010003, WrpUtil.text2Db(hd_P3010003.Value)); //后缀索引
+                    dba.addWhere(cons.io.db.prp.PrpCons.P3010006, WrpUtil.text2Db(hd_P3010006.Value)); //软件索引
+                    dba.addWhere(cons.io.db.prp.PrpCons.P3010014, "0", false); //操作流水
 
                     dba.executeUpdate();
 
@@ -241,17 +242,17 @@ public partial class exts_exts0021 : Page
                     // 附注信息、MIME类型、备选软件等索引
                     String hash = HashUtil.getCurrTimeHex(false);
 
-                    dba.addParam(PrpCons.P3010001, 0);
-                    dba.addParam(PrpCons.P3010003, HashUtil.digest(exts, false)); //后缀索引
-                    dba.addParam(PrpCons.P3010009, hash);
-                    dba.addParam(PrpCons.P301000A, hash);
-                    dba.addParam(PrpCons.P301000B, hash);
-                    dba.addParam(PrpCons.P301000E, hash);
-                    dba.addParam(PrpCons.P3010012, cons.EnvCons.SQL_NOW, false);
-                    dba.addParam(PrpCons.P3010013, exts);
-                    dba.addParam(PrpCons.P3010014, 0);
-                    dba.addParam(PrpCons.P3010015, cons.wrp.WrpCons.OPT_NORMAL);
-                    dba.addParam(PrpCons.P3010016, ui.UserCode);
+                    dba.addParam(cons.io.db.prp.PrpCons.P3010001, 0);
+                    dba.addParam(cons.io.db.prp.PrpCons.P3010003, HashUtil.digest(exts, false)); //后缀索引
+                    dba.addParam(cons.io.db.prp.PrpCons.P3010009, hash);
+                    dba.addParam(cons.io.db.prp.PrpCons.P301000A, hash);
+                    dba.addParam(cons.io.db.prp.PrpCons.P301000B, hash);
+                    dba.addParam(cons.io.db.prp.PrpCons.P301000E, hash);
+                    dba.addParam(cons.io.db.prp.PrpCons.P3010012, cons.EnvCons.SQL_NOW, false);
+                    dba.addParam(cons.io.db.prp.PrpCons.P3010013, exts);
+                    dba.addParam(cons.io.db.prp.PrpCons.P3010014, 0);
+                    dba.addParam(cons.io.db.prp.PrpCons.P3010015, cons.wrp.WrpCons.OPT_NORMAL);
+                    dba.addParam(cons.io.db.prp.PrpCons.P3010016, ui.UserCode);
 
                     dba.executeInsert();
 
@@ -265,21 +266,21 @@ public partial class exts_exts0021 : Page
                 // 附注信息、MIME类型、备选软件等索引
                 String hash = HashUtil.getCurrTimeHex(false);
                 // 后缀索引
-                dba.addParam(PrpCons.P3010003, isUpdate ? WrpUtil.text2Db(hd_P3010003.Value) : HashUtil.digest(exts, false)); //后缀索引
-                dba.addParam(PrpCons.P3010009, hash);
-                dba.addParam(PrpCons.P301000A, hash);
-                dba.addParam(PrpCons.P301000B, hash);
-                dba.addParam(PrpCons.P301000E, hash);
-                dba.addParam(PrpCons.P3010001, String.Format("IFNULL(MAX({0}), -1) + 1", PrpCons.P3010001), false);
-                dba.addParam(PrpCons.P3010012, cons.EnvCons.SQL_NOW, false);
-                dba.addParam(PrpCons.P3010013, exts);
-                dba.addParam(PrpCons.P3010014, String.Format("IFNULL(MAX({0}), -1) + 1", PrpCons.P3010014), false);
-                dba.addParam(PrpCons.P3010015, isUpdate ? cons.wrp.WrpCons.OPT_UPDATE : cons.wrp.WrpCons.OPT_INSERT);
-                dba.addParam(PrpCons.P3010016, ui.UserCode);
+                dba.addParam(cons.io.db.prp.PrpCons.P3010003, isUpdate ? WrpUtil.text2Db(hd_P3010003.Value) : HashUtil.digest(exts, false)); //后缀索引
+                dba.addParam(cons.io.db.prp.PrpCons.P3010009, hash);
+                dba.addParam(cons.io.db.prp.PrpCons.P301000A, hash);
+                dba.addParam(cons.io.db.prp.PrpCons.P301000B, hash);
+                dba.addParam(cons.io.db.prp.PrpCons.P301000E, hash);
+                dba.addParam(cons.io.db.prp.PrpCons.P3010001, String.Format("IFNULL(MAX({0}), -1) + 1", cons.io.db.prp.PrpCons.P3010001), false);
+                dba.addParam(cons.io.db.prp.PrpCons.P3010012, cons.EnvCons.SQL_NOW, false);
+                dba.addParam(cons.io.db.prp.PrpCons.P3010013, exts);
+                dba.addParam(cons.io.db.prp.PrpCons.P3010014, String.Format("IFNULL(MAX({0}), -1) + 1", cons.io.db.prp.PrpCons.P3010014), false);
+                dba.addParam(cons.io.db.prp.PrpCons.P3010015, isUpdate ? cons.wrp.WrpCons.OPT_UPDATE : cons.wrp.WrpCons.OPT_INSERT);
+                dba.addParam(cons.io.db.prp.PrpCons.P3010016, ui.UserCode);
 
-                dba.addWhere(PrpCons.P3010003, WrpUtil.text2Db(hd_P3010003.Value)); //后缀索引
-                dba.addWhere(PrpCons.P3010006, WrpUtil.text2Db(hd_P3010006.Value)); //软件索引
-                dba.executeBackup(PrpCons.P3010000, PrpCons.P3010000);
+                dba.addWhere(cons.io.db.prp.PrpCons.P3010003, WrpUtil.text2Db(hd_P3010003.Value)); //后缀索引
+                dba.addWhere(cons.io.db.prp.PrpCons.P3010006, WrpUtil.text2Db(hd_P3010006.Value)); //软件索引
+                dba.executeBackup(cons.io.db.prp.PrpCons.P3010000, cons.io.db.prp.PrpCons.P3010000);
 
                 Exts.ExtsSize += 1;
                 Exts.addRecentUpdate(tf_P3010013.Text);
@@ -298,14 +299,14 @@ public partial class exts_exts0021 : Page
     private void InitDocsData()
     {
         DBAccess dba = new DBAccess();
-        dba.addTable(PrpCons.P3010400);
-        dba.addColumn(PrpCons.P3010402);
-        dba.addColumn(PrpCons.P3010405);
-        dba.addWhere(PrpCons.P3010403, cons.SysCons.UI_LANGHASH);
-        dba.addSort(PrpCons.P3010405);
+        dba.addTable(cons.io.db.prp.PrpCons.P3010400);
+        dba.addColumn(cons.io.db.prp.PrpCons.P3010402);
+        dba.addColumn(cons.io.db.prp.PrpCons.P3010405);
+        dba.addWhere(cons.io.db.prp.PrpCons.P3010403, cons.SysCons.UI_LANGHASH);
+        dba.addSort(cons.io.db.prp.PrpCons.P3010405);
 
-        cb_P3010008.DataValueField = PrpCons.P3010402;
-        cb_P3010008.DataTextField = PrpCons.P3010405;
+        cb_P3010008.DataValueField = cons.io.db.prp.PrpCons.P3010402;
+        cb_P3010008.DataTextField = cons.io.db.prp.PrpCons.P3010405;
         cb_P3010008.DataSource = dba.executeSelect();
         cb_P3010008.DataBind();
 

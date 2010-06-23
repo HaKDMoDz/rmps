@@ -12,6 +12,7 @@ using rmp.wrp.link;
 using rmp.wrp.soft;
 using rmp.wrp.srch;
 using rmp.wrp.wime;
+using cons;
 
 public partial class comn_comn0503 : System.Web.UI.Page
 {

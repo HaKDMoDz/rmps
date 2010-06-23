@@ -19,13 +19,13 @@ public partial class exts_exts0020 : Page
         // ====================================================================
         // 用户身份认证
         // ====================================================================
-        if (UserInfo.Current(Session).UserRank <= cons.comn.user.UserInfo.LEVEL_05)
+        if (UserInfo.Current(Session).UserRank < cons.comn.user.UserInfo.LEVEL_02)
         {
             Response.Redirect("~/index.aspx");
             return;
         }
 
-        // Master Page初始化
+        #region Master Page初始化
         Session[cons.wrp.WrpCons.GUIDINDX] = 4;
         Session[cons.wrp.WrpCons.GUIDNAME] = "数据管理";
         Session[cons.wrp.WrpCons.SCRIPTID] = "exts0020";
@@ -42,13 +42,14 @@ public partial class exts_exts0020 : Page
         guidItem.K = cons.EnvCons.PRE_URL + "/exts/exts0020.aspx";
         guidItem.V1 = "快捷模式";
         guidItem.V2 = "快捷模式";
+        #endregion
 
         if (IsPostBack)
         {
             return;
         }
 
-        String sid = Request[cons.wrp.WrpCons.SID];
+        String sid = (Request[cons.wrp.WrpCons.SID] ?? "").Trim();
         if (StringUtil.isValidate(sid))
         {
             hd_SoftHash.Value = sid;

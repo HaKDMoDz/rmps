@@ -159,13 +159,24 @@ public partial class exts_exts0103 : Page
             bool isUpdate = StringUtil.isValidateHash(hd_P3010102.Value);
             bool isManage = userInfo.UserRank > cons.comn.user.UserInfo.LEVEL_05;
 
+            String P3010102;
+            if (isUpdate)
+            {
+                P3010102 = WrpUtil.text2Db(hd_P3010102.Value);
+            }
+            else
+            {
+                P3010102 = HashUtil.getCurrTimeHex(false);
+                hd_P3010102.Value = P3010102;
+            }
+
             // 系统管理人员操作
             if (isManage)
             {
                 // 数据更新
                 if (isUpdate)
                 {
-                    dba.addWhere(cons.io.db.prp.PrpCons.P3010102, WrpUtil.text2Db(hd_P3010102.Value));
+                    dba.addWhere(cons.io.db.prp.PrpCons.P3010102, P3010102);
                     dba.addWhere(cons.io.db.prp.PrpCons.P301010C, "0", false); //操作流水
 
                     dba.executeUpdate();
@@ -176,7 +187,7 @@ public partial class exts_exts0103 : Page
                 else
                 {
                     dba.addParam(cons.io.db.prp.PrpCons.P3010101, 0);
-                    dba.addParam(cons.io.db.prp.PrpCons.P3010102, HashUtil.getCurrTimeHex(false));
+                    dba.addParam(cons.io.db.prp.PrpCons.P3010102, P3010102);
                     dba.addParam(cons.io.db.prp.PrpCons.P301010B, cons.EnvCons.SQL_NOW, false);
                     dba.addParam(cons.io.db.prp.PrpCons.P301010C, 0);
                     dba.addParam(cons.io.db.prp.PrpCons.P301010D, cons.wrp.WrpCons.OPT_NORMAL);
@@ -190,7 +201,6 @@ public partial class exts_exts0103 : Page
             // 网络用户编辑数据
             else
             {
-                String P3010102 = isUpdate ? WrpUtil.text2Db(hd_P3010102.Value) : HashUtil.getCurrTimeHex(false);
                 dba.addParam(cons.io.db.prp.PrpCons.P3010101, String.Format("IFNULL(MAX({0}), -1) + 1", cons.io.db.prp.PrpCons.P3010101), false);
                 dba.addParam(cons.io.db.prp.PrpCons.P3010102, P3010102);
                 dba.addParam(cons.io.db.prp.PrpCons.P301010B, isUpdate ? "'" + hd_P301010B.Value + "'" : cons.EnvCons.SQL_NOW, false);

@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Web.UI;
-
-using cons.io.db.comn;
-
-using rmp.io.db;
 using rmp.comn.user;
+using rmp.io.db;
 using rmp.util;
 using rmp.wrp;
 
-using WrpCons = cons.wrp.WrpCons;
 
 public partial class comn_comn0301 : Page
 {
@@ -21,11 +17,12 @@ public partial class comn_comn0301 : Page
             return;
         }
 
-        // Master Page初始化
+        #region Master Page初始化
         Session[cons.wrp.WrpCons.GUIDINDX] = 1;
         Session[cons.wrp.WrpCons.GUIDNAME] = "用户查询";
         Session[cons.wrp.WrpCons.SCRIPTID] = "comn0301";
         Session[cons.wrp.WrpCons.GUIDSIZE] = Wrps.GuidUser(Session).Count;
+        #endregion
 
         // 是否页面回传
         if (IsPostBack)
@@ -67,7 +64,7 @@ public partial class comn_comn0301 : Page
         dba.addColumn(cons.io.db.comn.user.UserCons.C3010405);
         dba.addColumn(cons.io.db.comn.user.UserCons.C301040C);
         dba.addColumn(cons.io.db.comn.user.UserCons.C301040D);
-        dba.addWhere(cons.io.db.comn.user.UserCons.C3010301, cons.io.db.comn.user.UserCons.C3010402, false);
+        dba.addWhere(cons.io.db.comn.user.UserCons.C3010302, cons.io.db.comn.user.UserCons.C3010402, false);
         String key = WrpUtil.text2Db(tf_U0000405.Text);
         if (StringUtil.isValidate(key))
         {

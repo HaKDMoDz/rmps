@@ -9,6 +9,7 @@ using rmp.io.db;
 using rmp.util;
 using rmp.wrp;
 using rmp.wrp.exts;
+using cons;
 
 public partial class exts_exts0403 : Page
 {
@@ -164,11 +165,23 @@ public partial class exts_exts0403 : Page
             int operate = 0;
             bool isUpdate = StringUtil.isValidate(hd_P3010402.Value);
             bool isManage = userInfo.UserRank > cons.comn.user.UserInfo.LEVEL_05;
+
+            String P3010402;
+            if (isUpdate)
+            {
+                P3010402 = WrpUtil.text2Db(hd_P3010402.Value);
+            }
+            else
+            {
+                P3010402 = HashUtil.getCurrTimeHex(false);
+                hd_P3010402.Value = P3010402;
+            }
+
             if (isManage)
             {
                 if (isUpdate)
                 {
-                    dba.addWhere(cons.io.db.prp.PrpCons.P3010402, WrpUtil.text2Db(hd_P3010402.Value));//文档索引
+                    dba.addWhere(cons.io.db.prp.PrpCons.P3010402, P3010402);//文档索引
                     dba.addWhere(cons.io.db.prp.PrpCons.P3010403, cons.SysCons.UI_LANGHASH);//语言索引
                     dba.addWhere(cons.io.db.prp.PrpCons.P301040C, "0", false);
 
@@ -179,7 +192,7 @@ public partial class exts_exts0403 : Page
                 else
                 {
                     dba.addParam(cons.io.db.prp.PrpCons.P3010401, 0);
-                    dba.addParam(cons.io.db.prp.PrpCons.P3010402, HashUtil.getCurrTimeHex(false));//文档索引
+                    dba.addParam(cons.io.db.prp.PrpCons.P3010402, P3010402);//文档索引
                     dba.addParam(cons.io.db.prp.PrpCons.P3010403, cons.SysCons.UI_LANGHASH);//语言索引
                     dba.addParam(cons.io.db.prp.PrpCons.P301040B, cons.EnvCons.SQL_NOW, false);//更新日期
                     dba.addParam(cons.io.db.prp.PrpCons.P301040C, 0);
@@ -193,7 +206,6 @@ public partial class exts_exts0403 : Page
             }
             else
             {
-                String P3010402 = isUpdate ? WrpUtil.text2Db(hd_P3010402.Value) : HashUtil.getCurrTimeHex(false);
                 dba.addParam(cons.io.db.prp.PrpCons.P3010401, String.Format("IFNULL(MAX({0}), -1) + 1", cons.io.db.prp.PrpCons.P3010401), false);//文档路径
                 dba.addParam(cons.io.db.prp.PrpCons.P3010402, P3010402);//文档索引
                 dba.addParam(cons.io.db.prp.PrpCons.P3010403, cons.SysCons.UI_LANGHASH);//语言索引
@@ -202,7 +214,7 @@ public partial class exts_exts0403 : Page
                 dba.addParam(cons.io.db.prp.PrpCons.P301040D, isUpdate ? cons.wrp.WrpCons.OPT_UPDATE : cons.wrp.WrpCons.OPT_INSERT);
                 dba.addParam(cons.io.db.prp.PrpCons.P301040E, userInfo.UserCode);
 
-                dba.addWhere(cons.io.db.prp.PrpCons.P3010402, WrpUtil.text2Db(hd_P3010402.Value));
+                dba.addWhere(cons.io.db.prp.PrpCons.P3010402, P3010402);
                 dba.executeBackup(cons.io.db.prp.PrpCons.P3010400, cons.io.db.prp.PrpCons.P3010400);
 
                 dba.reset();
@@ -217,7 +229,7 @@ public partial class exts_exts0403 : Page
 
             if (StringUtil.isValidateHash(hd_TempHash.Value))
             {
-                Exts.SaveDocs("~/temp/docs/", hd_TempHash.Value, ".aed", hd_P3010404.Value, isManage, operate);
+                Exts.SaveDocs(EnvCons.DIR_TMP + "docs/", hd_TempHash.Value, ".aed", hd_P3010404.Value, isManage, operate);
             }
         }
         catch (Exception exp)

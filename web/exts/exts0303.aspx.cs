@@ -202,12 +202,23 @@ public partial class exts_exts0303 : Page
             bool isUpdate = StringUtil.isValidateHash(hd_P3010302.Value);
             bool isManage = userInfo.UserRank > cons.comn.user.UserInfo.LEVEL_05;
 
+            String P3010302;
+            if (isUpdate)
+            {
+                P3010302 = WrpUtil.text2Db(hd_P3010302.Value);
+            }
+            else
+            {
+                P3010302 = HashUtil.getCurrTimeHex(false);
+                hd_P3010302.Value = P3010302;
+            }
+
             if (isManage)
             {
                 // 更新数据
                 if (isUpdate)
                 {
-                    dba.addWhere(cons.io.db.prp.PrpCons.P3010302, WrpUtil.text2Db(hd_P3010302.Value));
+                    dba.addWhere(cons.io.db.prp.PrpCons.P3010302, P3010302);
                     dba.addWhere(cons.io.db.prp.PrpCons.P301030F, "0", false);
 
                     dba.executeUpdate();
@@ -217,7 +228,7 @@ public partial class exts_exts0303 : Page
                 else
                 {
                     dba.addParam(cons.io.db.prp.PrpCons.P3010301, 0);
-                    dba.addParam(cons.io.db.prp.PrpCons.P3010302, HashUtil.getCurrTimeHex(false));
+                    dba.addParam(cons.io.db.prp.PrpCons.P3010302, P3010302);
                     dba.addParam(cons.io.db.prp.PrpCons.P301030E, cons.EnvCons.SQL_NOW, false);
                     dba.addParam(cons.io.db.prp.PrpCons.P301030F, 0);
                     dba.addParam(cons.io.db.prp.PrpCons.P3010310, cons.wrp.WrpCons.OPT_NORMAL);
@@ -231,7 +242,6 @@ public partial class exts_exts0303 : Page
             // 新增数据
             else
             {
-                String P3010302 = isUpdate ? WrpUtil.text2Db(hd_P3010302.Value) : HashUtil.getCurrTimeHex(false);
                 dba.addParam(cons.io.db.prp.PrpCons.P3010301, String.Format("IFNULL(MAX({0}), -1) + 1", cons.io.db.prp.PrpCons.P3010301), false);
                 dba.addParam(cons.io.db.prp.PrpCons.P3010302, P3010302);
                 dba.addParam(cons.io.db.prp.PrpCons.P301030E, isUpdate ? "'" + hd_P301030E.Value + "'" : cons.EnvCons.SQL_NOW, false);
@@ -253,18 +263,6 @@ public partial class exts_exts0303 : Page
                 operate = (int)(dba.executeSelect().Rows[0][cons.io.db.prp.PrpCons.P301030F]);
 
                 lb_ErrMsg.Text = "数据更新成功！";
-
-                if (!isUpdate)
-                {
-                    tf_P3010305.Text = "";
-                    tf_P3010306.Text = "";
-                    tf_P3010307.Text = "0";
-                    tf_P3010308.Text = "";
-                    tf_P3010309.Text = "";
-                    tf_P301030A.Text = "";
-                    ta_P301030B.Text = "";
-                    ta_P301030C.Text = "";
-                }
             }
 
             ai_P3010304.SaveIcon(isManage, operate);

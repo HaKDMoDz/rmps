@@ -10,6 +10,7 @@ using rmp.wrp;
 using rmp.wrp.exts;
 
 using Util = rmp.comn.Util;
+using cons;
 
 public partial class exts_exts0603 : Page
 {
@@ -196,6 +197,7 @@ public partial class exts_exts0603 : Page
             int operate = 0;
             bool isUpdate = StringUtil.isValidateHash(hd_P301F203.Value);
             bool isManage = userInfo.UserRank > cons.comn.user.UserInfo.LEVEL_05;
+
             if (isManage)
             {
                 // 更新数据
@@ -251,7 +253,7 @@ public partial class exts_exts0603 : Page
             // 用户有更新
             if (StringUtil.isValidateHash(hd_TempHash.Value))
             {
-                Exts.SaveDocs("~/temp/plat/", hd_TempHash.Value, ".png", hd_P301F208.Value, isManage, operate);
+                Exts.SaveDocs(EnvCons.DIR_TMP + "plat/", hd_TempHash.Value, ".png", hd_P301F208.Value, isManage, operate);
             }
         }
         catch (Exception exp)

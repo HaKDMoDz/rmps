@@ -409,13 +409,24 @@ public partial class exts_exts0203 : Page
             bool isUpdate = StringUtil.isValidate(hd_P3010202.Value);
             bool isManage = userInfo.UserRank > cons.comn.user.UserInfo.LEVEL_05;
 
+            String P3010202;
+            if (isUpdate)
+            {
+                P3010202 = WrpUtil.text2Db(hd_P3010202.Value);
+            }
+            else
+            {
+                P3010202 = HashUtil.getCurrTimeHex(false);
+                hd_P3010202.Value = P3010202;
+            }
+
             // 管理人员操作
             if (isManage)
             {
                 // 更新数据
                 if (isUpdate)
                 {
-                    dba.addWhere(cons.io.db.prp.PrpCons.P3010202, WrpUtil.text2Db(hd_P3010202.Value));// 软件索引
+                    dba.addWhere(cons.io.db.prp.PrpCons.P3010202, P3010202);// 软件索引
                     dba.addWhere(cons.io.db.prp.PrpCons.P301020F, "0", false);// 操作流水
 
                     dba.executeUpdate();
@@ -425,7 +436,7 @@ public partial class exts_exts0203 : Page
                 else
                 {
                     dba.addParam(cons.io.db.prp.PrpCons.P3010201, 0);
-                    dba.addParam(cons.io.db.prp.PrpCons.P3010202, HashUtil.getCurrTimeHex(false));
+                    dba.addParam(cons.io.db.prp.PrpCons.P3010202, P3010202);
                     dba.addParam(cons.io.db.prp.PrpCons.P301020E, EnvCons.SQL_NOW, false);
                     dba.addParam(cons.io.db.prp.PrpCons.P301020F, 0);
                     dba.addParam(cons.io.db.prp.PrpCons.P3010210, cons.wrp.WrpCons.OPT_NORMAL);
@@ -439,7 +450,6 @@ public partial class exts_exts0203 : Page
             // 网络用户操作
             else
             {
-                String P3010202 = isUpdate ? WrpUtil.text2Db(hd_P3010202.Value) : HashUtil.getCurrTimeHex(false);
                 dba.addParam(cons.io.db.prp.PrpCons.P3010201, String.Format("IFNULL(MAX({0}), -1) + 1", cons.io.db.prp.PrpCons.P3010201), false);
                 dba.addParam(cons.io.db.prp.PrpCons.P3010202, P3010202);
                 dba.addParam(cons.io.db.prp.PrpCons.P301020E, isUpdate ? "'" + hd_P301020E.Value + "'" : cons.EnvCons.SQL_NOW, false);
@@ -469,7 +479,7 @@ public partial class exts_exts0203 : Page
             // 用户有更新
             if (StringUtil.isValidateHash(hd_TempHash.Value))
             {
-                Exts.SaveDocs("~/temp/view/", hd_TempHash.Value, ".png", hd_P301020A.Value, isManage, operate);
+                Exts.SaveDocs(EnvCons.DIR_TMP + "view/", hd_TempHash.Value, ".png", hd_P301020A.Value, isManage, operate);
             }
         }
         catch (Exception exp)

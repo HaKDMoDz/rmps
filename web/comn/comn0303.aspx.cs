@@ -3,15 +3,11 @@ using System.Data;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web.UI;
-
-using cons.io.db.comn;
-
-using rmp.io.db;
 using rmp.comn.user;
+using rmp.io.db;
 using rmp.util;
 using rmp.wrp;
 
-using WrpCons = cons.wrp.WrpCons;
 
 public partial class comn_comn0303 : Page
 {
@@ -23,11 +19,12 @@ public partial class comn_comn0303 : Page
             Response.Redirect("~/index.aspx");
         }
 
-        // Master Page初始化
+        #region Master Page初始化
         Session[cons.wrp.WrpCons.GUIDINDX] = 1;
         Session[cons.wrp.WrpCons.GUIDNAME] = "用户更新";
         Session[cons.wrp.WrpCons.SCRIPTID] = "comn0303";
         Session[cons.wrp.WrpCons.GUIDSIZE] = Wrps.GuidUser(Session).Count;
+        #endregion
 
         // 是否页面回传
         if (IsPostBack)
@@ -35,13 +32,13 @@ public partial class comn_comn0303 : Page
             return;
         }
 
-        String sid = WrpUtil.text2Db(Request[cons.wrp.WrpCons.SID]);
+        String sid = (Request[cons.wrp.WrpCons.SID] ?? "").Trim();
         LoadData(sid);
     }
 
     private void LoadData(String sid)
     {
-        if (!StringUtil.isValidate(sid, 16))
+        if (!StringUtil.isValidateHash(sid))
         {
             return;
         }
