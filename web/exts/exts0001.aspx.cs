@@ -187,6 +187,7 @@ public partial class exts_exts0001 : Page
                 return;
             }
 
+            tf_ExtsName.Text = extsName;
             ShowExts(extsName, Request["case"]);
             return;
         }

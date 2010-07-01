@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Text;
 using System.Web;
 using System.Web.Services;
 
 using cons;
 using cons.io.db.prp;
-using cons.wrp.exts;
 
-using rmp.comn;
 using rmp.io.db;
 using rmp.util;
 
@@ -21,7 +17,7 @@ namespace rmp.wrp.exts
     /// <summary>
     /// Exts0001 的摘要说明
     /// </summary>
-    [WebService(Namespace = "http://amonsoft.cn/exts/", Description = "")]
+    [WebService(Namespace = "http://amonsoft.net/exts/", Description = "")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     public class Exts0001 : WebService
     {

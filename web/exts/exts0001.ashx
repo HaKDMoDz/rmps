@@ -30,6 +30,8 @@ public class exts0001 : IHttpHandler
     /// </summary>
     public const String FAIL_05 = "5";
 
+    public const String WEB_SITE = "http://amonsoft.net";
+
     /// <summary>
     /// 
     /// </summary>
@@ -262,7 +264,7 @@ public class exts0001 : IHttpHandler
         data.Append("</ExtsName>");
 
         data.Append("<QuickUrl>");
-        data.Append("http://amonsoft.cn/?.").Append(row0[cons.io.db.prp.PrpCons.P3010013].ToString());
+        data.Append(WEB_SITE + "/?.").Append(row0[cons.io.db.prp.PrpCons.P3010013].ToString());
         data.Append("</QuickUrl>");
 
         Append(data, "ExtsHash", cons.io.db.prp.PrpCons.P3010003, row0, false);
@@ -396,7 +398,7 @@ public class exts0001 : IHttpHandler
         {
             Append(data, "DocsHash", cons.io.db.prp.PrpCons.P3010402, view.Rows[0], false);
             data.Append("<FilePath>");
-            data.Append("/data/docs/").Append(view.Rows[0][cons.io.db.prp.PrpCons.P3010404].ToString());
+            data.Append("/file/file0001.ashx?sid=").Append(view.Rows[0][cons.io.db.prp.PrpCons.P3010404].ToString());
             data.Append("</FilePath>");
             Append(data, "FileName", cons.io.db.prp.PrpCons.P3010405, view.Rows[0], true);
             Append(data, "FileVers", cons.io.db.prp.PrpCons.P3010406, view.Rows[0], true);
@@ -426,7 +428,7 @@ public class exts0001 : IHttpHandler
             data.Append(rmp.comn.Comn.ReadStatItem(view.Rows[0][cons.io.db.prp.PrpCons.P3010103].ToString(), cons.SysCons.UI_LANGHASH).V1);
             data.Append("</StatInfo>");
             data.Append("<CorpLogo>");
-            data.Append("/exts/exts0002.ashx?sid=").Append(view.Rows[0][cons.io.db.prp.PrpCons.P3010104].ToString()).Append("&amp;u=corp");
+            data.Append("/icon/icon0001.ashx?sid=").Append(view.Rows[0][cons.io.db.prp.PrpCons.P3010104].ToString()).Append("&amp;u=corp");
             data.Append("</CorpLogo>");
             Append(data, "NameCN", cons.io.db.prp.PrpCons.P3010105, view.Rows[0], true);
             Append(data, "NameEN", cons.io.db.prp.PrpCons.P3010106, view.Rows[0], true);
@@ -447,7 +449,7 @@ public class exts0001 : IHttpHandler
         {
             Append(data, "SoftHash", cons.io.db.prp.PrpCons.P3010202, view.Rows[0], false);
             data.Append("<SoftIcon>");
-            data.Append("/exts/exts0002.ashx?sid=").Append(view.Rows[0][cons.io.db.prp.PrpCons.P3010204].ToString()).Append("&amp;u=soft");
+            data.Append("/icon/icon0001.ashx?sid=").Append(view.Rows[0][cons.io.db.prp.PrpCons.P3010204].ToString()).Append("&amp;u=soft");
             data.Append("</SoftIcon>");
             Append(data, "NameCN", cons.io.db.prp.PrpCons.P3010205, view.Rows[0], true);
             Append(data, "NameEN", cons.io.db.prp.PrpCons.P3010206, view.Rows[0], true);
@@ -479,7 +481,7 @@ public class exts0001 : IHttpHandler
         {
             Append(data, "FileHash", cons.io.db.prp.PrpCons.P3010302, view.Rows[0], false);
             data.Append("<FileIcon>");
-            data.Append("/exts/exts0002.ashx?sid=").Append(view.Rows[0][cons.io.db.prp.PrpCons.P3010304].ToString()).Append("&amp;u=file");
+            data.Append("/icon/icon0001.ashx?sid=").Append(view.Rows[0][cons.io.db.prp.PrpCons.P3010304].ToString()).Append("&amp;u=file");
             data.Append("</FileIcon>");
             Append(data, "SignChar", cons.io.db.prp.PrpCons.P3010305, view.Rows[0], true);
             Append(data, "SignCode", cons.io.db.prp.PrpCons.P3010306, view.Rows[0], false);
@@ -512,7 +514,7 @@ public class exts0001 : IHttpHandler
             Append(data, "MailAddr", cons.io.db.comn.user.UserCons.C3010406, view.Rows[0], true);
             Append(data, "NickName", cons.io.db.comn.user.UserCons.C3010407, view.Rows[0], true);
             data.Append("<IdioLogo>");
-            data.Append("/user/user0002.ashx?sid=").Append(view.Rows[0][cons.io.db.comn.user.UserCons.C3010408].ToString()).Append("&amp;u=idio");
+            data.Append("/icon/icon0001.ashx?sid=").Append(view.Rows[0][cons.io.db.comn.user.UserCons.C3010408].ToString()).Append("&amp;u=idio");
             data.Append("</IdioLogo>");
             Append(data, "IdioSign", cons.io.db.comn.user.UserCons.C3010409, view.Rows[0], true);
             Append(data, "HomePage", cons.io.db.comn.user.UserCons.C301040A, view.Rows[0], true);
@@ -550,15 +552,15 @@ public class exts0001 : IHttpHandler
             data.Append(" name=\"").Append(row[cons.io.db.prp.PrpCons.P3010205].ToString()).Append("\"");
             data.Append(" desp=\"").Append(row[cons.io.db.prp.PrpCons.P3010706].ToString()).Append("\"");
             data.Append(" link=\"/exts/exts0202.aspx?sid=").Append(row[cons.io.db.prp.PrpCons.P3010704].ToString()).Append("\"");
-            data.Append(" icon=\"/exts/exts0002.ashx?sid=").Append(row[cons.io.db.prp.PrpCons.P3010204].ToString()).Append("&amp;u=soft\"");
+            data.Append(" icon=\"/icon/icon0001.ashx?uri=soft&amp;sid=").Append(row[cons.io.db.prp.PrpCons.P3010204].ToString()).Append("\"");
             data.Append(" exec=\"").Append(row[cons.io.db.prp.PrpCons.P3010705].ToString()).Append("\"");
             data.Append(" >");
-            data.Append("<plat default=\"/exts/exts0002.ashx?sid=_def\">");
+            data.Append("<plat default=\"/icon/icon0001.ashx?sid=comn,_DEF\">");
             int P3010702 = int.Parse(row[cons.io.db.prp.PrpCons.P3010702].ToString());
             if (P3010702 == cons.SysCons.OS_IDX_ALL)
             {
                 data.Append("<all>");
-                data.Append("/exts/exts0002.ashx?sid=_all");
+                data.Append("/icon/icon0001.ashx?sid=comn,_ALL");
                 data.Append("</all>");
             }
             else
@@ -567,42 +569,42 @@ public class exts0001 : IHttpHandler
                 if ((P3010702 & cons.SysCons.OS_IDX_WINDOWS) != 0)
                 {
                     data.Append("<windows>");
-                    data.Append("/exts/exts0002.ashx?sid=_win");
+                    data.Append("/icon/icon0001.ashx?sid=comn,_WIN");
                     data.Append("</windows>");
                 }
                 // Mac OS平台
                 if ((P3010702 & cons.SysCons.OS_IDX_MACINTOSH) != 0)
                 {
                     data.Append("<macintosh>");
-                    data.Append("/exts/exts0002.ashx?sid=_mac");
+                    data.Append("/icon/icon0001.ashx?sid=comn,_MAC");
                     data.Append("</macintosh>");
                 }
                 // Linux平台
                 if ((P3010702 & cons.SysCons.OS_IDX_LINUX) != 0)
                 {
                     data.Append("<linux>");
-                    data.Append("/exts/exts0002.ashx?sid=_lnx");
+                    data.Append("/icon/icon0001.ashx?sid=comn,_LNX");
                     data.Append("</linux>");
                 }
                 // Unix平台
                 if ((P3010702 & cons.SysCons.OS_IDX_UNIX) != 0)
                 {
                     data.Append("<unix>");
-                    data.Append("/exts/exts0002.ashx?sid=_unx");
+                    data.Append("/icon/icon0001.ashx?sid=comn,_UNX");
                     data.Append("</unix>");
                 }
                 // 移动平台
                 if ((P3010702 & cons.SysCons.OS_IDX_MOBILE) != 0)
                 {
                     data.Append("<mobile>");
-                    data.Append("/exts/exts0002.ashx?sid=_mbl");
+                    data.Append("/icon/icon0001.ashx?sid=comn,_MBL");
                     data.Append("</mobile>");
                 }
                 // 其它平台
                 if ((P3010702 & cons.SysCons.OS_IDX_UNKNOWN) != 0)
                 {
                     data.Append("<special>");
-                    data.Append("/exts/exts0002.ashx?sid=_spc");
+                    data.Append("/icon/icon0001.ashx?sid=comn,_SPC");
                     data.Append("</special>");
                 }
             }
