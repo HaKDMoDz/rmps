@@ -33,7 +33,7 @@
                                         Email：&nbsp;&nbsp;
                                     </td>
                                     <td style="width: 27%; height: 20px;" align="left">
-                                        <a href="mailto:Amon@amonsoft.com">Amon@amonsoft.com</a>
+                                        <a href="mailto:Amon@magicpwd.com">Amon@magicpwd.com</a>
                                     </td>
                                     <td style="width: 58%; height: 20px;" align="left">
                                         &nbsp;

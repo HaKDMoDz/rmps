@@ -69,19 +69,19 @@
                         <a href="<%=cons.EnvCons.PRE_URL%>/link/">网络导航</a>
                     </td>
                     <td class="TD_SITE_LINK" style="height: 30px;">
-                        <a href="<%=cons.EnvCons.PRE_URL%>/iask/">Amon在线</a>
-                    </td>
-                    <td class="TD_SITE_LINK" style="height: 30px;">
-                        <a href="<%=cons.EnvCons.PRE_URL%>/srch/">Amon搜索</a>
-                    </td>
-                    <td class="TD_SITE_LINK" style="height: 30px;">
                         <a href="<%=cons.EnvCons.PRE_URL%>/card/">Amon卡片</a>
                     </td>
                     <td class="TD_SITE_LINK" style="height: 30px;">
-                        <a href="<%=cons.EnvCons.PRE_URL%>/blog/">Amon博客</a>
+                        <a href="<%=cons.EnvCons.PRE_URL%>/info/">关于作者</a>
                     </td>
                     <td class="TD_SITE_LINK" style="height: 30px;">
-                        <a href="<%=cons.EnvCons.PRE_URL%>/info/">关于作者</a>
+                        &nbsp;
+                    </td>
+                    <td class="TD_SITE_LINK" style="height: 30px;">
+                        &nbsp;
+                    </td>
+                    <td class="TD_SITE_LINK" style="height: 30px;">
+                        &nbsp;
                     </td>
                     <td class="TD_SITE_USER" style="height: 30px;">
                         <asp:HyperLink ID="hl_SignIn" NavigateUrl="~/user/user0101.aspx" runat="server">登录</asp:HyperLink><asp:LinkButton ID="lb_SignOs" runat="server" OnClick="lb_SignOs_Click">退出</asp:LinkButton>
