@@ -67,21 +67,18 @@ namespace cons
         /// </summary>
         public const String SQL_NOW = "NOW()";
 
-        public const String DIR_DAT = "~/_dat/";
-        public const String DIR_BAK = "~/_bak/";
-        public const String DIR_TMP = "~/_tmp/";
+        public const String DIR_DAT = "~/data/";
+        public const String DIR_BAK = "~/back/";
+        public const String DIR_TMP = "~/temp/";
 
         public const String HOST_BLOG = "amonsoft.com";
         public const String SITE_BLOG = "http://amonsoft.com/";
 
-        public const String HOST_EXTS = "amonsoft.cn";
-        public const String SITE_EXTS = "http://amonsoft.cn/";
+        public const String HOST_SOFT = "amonsoft.net";
+        public const String SITE_SOFT = "http://amonsoft.net/";
 
-        public const String HOST_HOME = "winshine.biz";
-        public const String SITE_HOME = "http://winshine.biz/";
-
-        public const String HOST_INET = "amonsoft.net";
-        public const String SITE_INET = "http://amonsoft.net/";
+        public const String HOST_CORP = "winshine.biz";
+        public const String SITE_CORP = "http://winshine.biz/";
 
         public const String HOST_MPWD = "magicpwd.com";
         public const String SITE_MPWD = "http://magicpwd.com/";

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
+using System.Text.RegularExpressions;
 using System.Web.UI;
-
 using rmp.io.db;
 using rmp.util;
 using rmp.wrp.soft;
@@ -33,7 +33,11 @@ public partial class mpwd_index : Page
 
             lb_SoftVers.Text = row[cons.io.db.comn.ComnCons.C0010105] + "（" + Soft.GetStrategy((int)row[cons.io.db.comn.ComnCons.C0010102]) + "）";
             lb_PubsTime.Text = row[cons.io.db.comn.ComnCons.C0010107].ToString();
-            hl_SoftDown.NavigateUrl = row[cons.io.db.comn.ComnCons.C001010F].ToString();
+            String down = row[cons.io.db.comn.ComnCons.C001010F].ToString();
+            hl_DownZip.NavigateUrl = down;
+            hl_DownWin.NavigateUrl = Regex.Replace(down, "\\.zip$", ".exe", RegexOptions.IgnoreCase);
+            hl_DownMac.NavigateUrl = Regex.Replace(down, "\\.zip$", ".dmg", RegexOptions.IgnoreCase);
+            hl_DownUnx.NavigateUrl = Regex.Replace(down, "\\.zip$", ".sh", RegexOptions.IgnoreCase);
             hl_SoftJnlp.NavigateUrl = row[cons.io.db.comn.ComnCons.C0010110].ToString();
             hl_Win.NavigateUrl = String.Format("~/_images/{0}/3000_w03.png", sid);
             hl_Lin.NavigateUrl = String.Format("~/_images/{0}/3000_l01.png", sid);

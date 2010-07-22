@@ -201,8 +201,8 @@
                                                             快捷地址
                                                         </th>
                                                         <td align="left" class="TD_DataItem_TL_L" colspan="3">
-                                                            <a href="http://amonsoft.cn/?.<%=extsName%>" title="后缀 .<%=extsName%> 的快捷访问地址！">http://amonsoft.cn/?.<%=extsName%></a><br />
-                                                            <a href="http://amonsoft.cn/exts/exts0001.aspx?exts=.<%=extsName%>" title="后缀 .<%=extsName%> 的常规访问地址！">http://amonsoft.cn/exts/exts0001.aspx?exts=.<%=extsName%></a><br />
+                                                            <a href="<%=cons.EnvCons.SITE_SOFT%>?.<%=extsName%>" title="后缀 .<%=extsName%> 的快捷访问地址！"><%=cons.EnvCons.SITE_SOFT%>?.<%=extsName%></a><br />
+                                                            <a href="<%=cons.EnvCons.SITE_SOFT%>exts/exts0001.aspx?exts=.<%=extsName%>" title="后缀 .<%=extsName%> 的常规访问地址！"><%=cons.EnvCons.SITE_SOFT%>exts/exts0001.aspx?exts=.<%=extsName%></a><br />
                                                         </td>
                                                     </tr>
                                                     <tr>
