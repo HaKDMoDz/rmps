@@ -20,7 +20,7 @@ public class mpwd0001 : IHttpHandler
 		String opt = "";
 
         String dir = context.Server.MapPath(cons.EnvCons.DIR_DAT);
-        context.Response.WriteFile(dir + "mpwd/guid0001.png");
+        context.Response.WriteFile(dir + "mpwd/mpwd0001.png");
         context.Response.End();
     }
 
