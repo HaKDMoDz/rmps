@@ -37,7 +37,7 @@ namespace com.amonsoft.exts.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool form_run_first {
             get {
                 return ((bool)(this["form_run_first"]));

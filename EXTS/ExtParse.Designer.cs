@@ -648,7 +648,7 @@ namespace com.amonsoft.exts
             this.MI_HideForm,
             this.MI_ExitForm});
             this.PM_MenuList.Name = "PM_MenuList";
-            this.PM_MenuList.Size = new System.Drawing.Size(161, 314);
+            this.PM_MenuList.Size = new System.Drawing.Size(161, 336);
             // 
             // MI_SoftInfo
             // 
@@ -809,14 +809,14 @@ namespace com.amonsoft.exts
             // MI_ExptHtml
             // 
             this.MI_ExptHtml.Name = "MI_ExptHtml";
-            this.MI_ExptHtml.Size = new System.Drawing.Size(118, 22);
+            this.MI_ExptHtml.Size = new System.Drawing.Size(152, 22);
             this.MI_ExptHtml.Text = "网页文件";
             this.MI_ExptHtml.Click += new System.EventHandler(this.MI_ExptHtml_Click);
             // 
             // MI_ExptText
             // 
             this.MI_ExptText.Name = "MI_ExptText";
-            this.MI_ExptText.Size = new System.Drawing.Size(118, 22);
+            this.MI_ExptText.Size = new System.Drawing.Size(152, 22);
             this.MI_ExptText.Text = "文本文件";
             this.MI_ExptText.Click += new System.EventHandler(this.MI_ExptText_Click);
             // 
@@ -834,28 +834,28 @@ namespace com.amonsoft.exts
             // MI_SearchGG
             // 
             this.MI_SearchGG.Name = "MI_SearchGG";
-            this.MI_SearchGG.Size = new System.Drawing.Size(112, 22);
+            this.MI_SearchGG.Size = new System.Drawing.Size(152, 22);
             this.MI_SearchGG.Text = "谷歌(&G)";
             this.MI_SearchGG.Click += new System.EventHandler(this.MI_SearchGG_Click);
             // 
             // MI_SearchYH
             // 
             this.MI_SearchYH.Name = "MI_SearchYH";
-            this.MI_SearchYH.Size = new System.Drawing.Size(112, 22);
+            this.MI_SearchYH.Size = new System.Drawing.Size(152, 22);
             this.MI_SearchYH.Text = "雅虎(&Y)";
             this.MI_SearchYH.Click += new System.EventHandler(this.MI_SearchYH_Click);
             // 
             // MI_SearchYD
             // 
             this.MI_SearchYD.Name = "MI_SearchYD";
-            this.MI_SearchYD.Size = new System.Drawing.Size(112, 22);
+            this.MI_SearchYD.Size = new System.Drawing.Size(152, 22);
             this.MI_SearchYD.Text = "有道(&D)";
             this.MI_SearchYD.Click += new System.EventHandler(this.MI_SearchYD_Click);
             // 
             // MI_SearchBD
             // 
             this.MI_SearchBD.Name = "MI_SearchBD";
-            this.MI_SearchBD.Size = new System.Drawing.Size(112, 22);
+            this.MI_SearchBD.Size = new System.Drawing.Size(152, 22);
             this.MI_SearchBD.Text = "百度(&B)";
             this.MI_SearchBD.Click += new System.EventHandler(this.MI_SearchBD_Click);
             // 
@@ -864,6 +864,7 @@ namespace com.amonsoft.exts
             this.MI_VoteExts.Name = "MI_VoteExts";
             this.MI_VoteExts.Size = new System.Drawing.Size(160, 22);
             this.MI_VoteExts.Text = "贡献后缀信息(&V)";
+            this.MI_VoteExts.Visible = false;
             this.MI_VoteExts.Click += new System.EventHandler(this.MI_VoteExts_Click);
             // 
             // toolStripSeparator4

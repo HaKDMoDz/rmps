@@ -12,6 +12,12 @@
     <AssemblyName>EXTS</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationIcon>Logo.ico</ApplicationIcon>
+    <ManifestCertificateThumbprint>ED19A557F80C31E40344B2BA1BF6F5B9AFEB47E9</ManifestCertificateThumbprint>
+    <ManifestKeyFile>EXTS_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>true</SignManifests>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -22,9 +28,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -205,7 +210,11 @@
     <None Include="Resources\00030.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="EXTS_TemporaryKey.pfx" />
     <None Include="Resources\00040.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Logo.ico" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lib\" />
