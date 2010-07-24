@@ -22,15 +22,15 @@ function chkExts()
     }
 
     var caze=0;
-    if($E('rb_ExtsUppr').checked)
+    if($E('rb_ExtsCase_1').checked)
     {
         caze=1;
     }
-    else if($E('rb_ExtsLowr').checked)
+    else if($E('rb_ExtsCase_2').checked)
     {
         caze=2;
     }
-    else if($E('rb_ExtsBlur').checked)
+    else if($E('rb_ExtsCase_3').checked)
     {
         caze=3;
     }
