@@ -1417,6 +1417,8 @@ namespace com.amonsoft.exts
                     }
                 }
                 MoveWindow(p_Handle, fx, fy, fw, fh, true);
+                // 部分窗口并不会立即调整完毕并正确显示
+                Thread.Sleep(500);
                 GetWindowRect(p_Handle, ref rect);
             }
             return rect;
@@ -1448,9 +1450,18 @@ namespace com.amonsoft.exts
                     g1.CopyFromScreen(SourcePoint.X, SourcePoint.Y, 0, 0, SelectionRectangle.Size);
                 }
 
-                Bitmap tmp = new Bitmap(Settings.Default.screenshot_w, Settings.Default.screenshot_h);
+                int tw = Settings.Default.screenshot_w;
+                int th = Settings.Default.screenshot_h;
+                Bitmap tmp = new Bitmap(tw, th);
                 Graphics g2 = Graphics.FromImage(tmp);
-                g2.DrawImage(bitmap, 0, 0, tmp.Width, tmp.Height);
+                
+                double rw = tw / (double)w;
+                double rh = th / (double)h;
+                double r = rw <= rh ? rw : rh;
+                tw = (int)(w * r);
+                th = (int)(h * r);
+
+                g2.DrawImage(bitmap, (Settings.Default.screenshot_w - tw) >> 1, (Settings.Default.screenshot_h - th) >> 1, tw, th);
                 g2.Save();
                 bitmap = tmp;
             }

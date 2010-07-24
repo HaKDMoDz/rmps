@@ -149,6 +149,7 @@ namespace com.amonsoft.exts
             settings.screenshot_s = CK_Scale.Checked;
             settings.screenshot_r = CK_Ratio.Checked;
             settings.screenshot_t = it;
+            settings.Save();
 
             Close();
         }
