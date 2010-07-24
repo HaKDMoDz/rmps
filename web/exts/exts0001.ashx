@@ -338,7 +338,7 @@ public class exts0001 : IHttpHandler
             data.Append(" id=\"").Append(id++).Append("\"");
             data.Append(" name=\"").Append(row[cons.io.db.prp.PrpCons.P301F104].ToString()).Append("\"");
             data.Append(" desp=\"").Append(row[cons.io.db.prp.PrpCons.P3010604].ToString()).Append("\"");
-            data.Append(" link=\"/exts/exts0502.aspx?sid=").Append(row[cons.io.db.prp.PrpCons.P301F102].ToString()).Append("\"");
+            data.Append(" link=\"/exts/exts0502.aspx?sid=").Append(row[cons.io.db.prp.PrpCons.P3010603].ToString()).Append("\"");
             data.Append(" />");
         }
         data.Append("</list>");

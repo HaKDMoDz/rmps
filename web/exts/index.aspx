@@ -11,10 +11,12 @@
                 <table id="tb_Exts" width="460" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td colspan="3" align="center">
-                            <asp:RadioButton ID="rb_ExtsBlur" runat="server" AccessKey="R" GroupName="bg_ExtsCase" Text="模糊查询(R)" />
-                            <asp:RadioButton ID="rb_ExtsCase" runat="server" AccessKey="H" GroupName="bg_ExtsCase" Text="大小敏感(H)" />
-                            <asp:RadioButton ID="rb_ExtsUppr" runat="server" AccessKey="U" GroupName="bg_ExtsCase" Text="大写(U)" />
-                            <asp:RadioButton ID="rb_ExtsLowr" runat="server" AccessKey="L" GroupName="bg_ExtsCase" Text="小写(L)" />
+                            <asp:RadioButtonList ID="rb_ExtsCase" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
+                                <asp:ListItem Text="大小敏感(H)" Value="0" Selected="True"></asp:ListItem>
+                                <asp:ListItem Text="大写(U)" Value="1"></asp:ListItem>
+                                <asp:ListItem Text="小写(L)" Value="2"></asp:ListItem>
+                                <asp:ListItem Text="模糊查询(R)" Value="3"></asp:ListItem>
+                            </asp:RadioButtonList>
                         </td>
                     </tr>
                     <tr>
@@ -32,7 +34,7 @@
                     <tr>
                         <td align="center" colspan="3" style="height: 20px;">
                             <asp:CheckBox ID="ck_ExtsFile" runat="server" Text="文件查看(I)" AccessKey="I" ToolTip="查看指定文件的后缀信息" />
-                            <asp:CheckBox ID="ck_ExtsAjax" runat="server" Text="启用Ajax(J)" AccessKey="J" ToolTip="启用Ajax可以获得更好的网络效果" Checked="true" />
+                            <asp:CheckBox ID="ck_ExtsAjax" runat="server" Text="启用Ajax(J)" AccessKey="J" ToolTip="启用Ajax可以获得更好的网络效果" />
                         </td>
                     </tr>
                 </table>

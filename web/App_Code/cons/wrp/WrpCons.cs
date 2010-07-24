@@ -508,6 +508,7 @@ namespace cons.wrp
         /// </summary>
         public const String P3010000_LIST = "amon_P3010000_list";
         public const String P3010000_EXTS = "amon_P3010000_exts";
+        public const String P3010000_CASE = "amon_P3010000_case";
         public const String P3010000_SRCH = "amon_P3010000_srch";
         public const String P3010000_AJAX = "amon_P3010000_ajax";//用户偏好设置，是否启用AJAX
 
