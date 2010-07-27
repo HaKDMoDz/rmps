@@ -52,7 +52,7 @@
         </tr>
         <tr>
             <td style="height: 60px;" align="center">
-                <a href="/exts/exts0001.html">使用Flex版</a>&nbsp;&nbsp;<a href="/down/Extparse_V3.3.1.0_2009-07-18.zip">使用.Net版</a>&nbsp;&nbsp;<a href="#" onclick="return myGears();">使用 Gears</a>
+                <a href="/exts/exts0001.html">使用Flex版</a>&nbsp;&nbsp;<a href="/jnlp/exts/publish.html">使用.Net版</a>&nbsp;&nbsp;<a href="#" onclick="return myGears();">使用 Gears</a>
             </td>
         </tr>
         <tr>
