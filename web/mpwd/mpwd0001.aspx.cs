@@ -20,7 +20,7 @@ public partial class mpwd_mpwd0001 : Page
         DBAccess dba = new DBAccess();
         dba.addTable(cons.io.db.comn.ComnCons.C0010A00);
         dba.addWhere(cons.io.db.comn.ComnCons.C0010A04, "130F0000");
-        dba.addSort(cons.io.db.comn.ComnCons.C0010A05, false);
+        dba.addSort(cons.io.db.comn.ComnCons.C0010A07, false);
 
         // 数据查询与梆定
         VersList.DataSource = dba.executeSelect();
