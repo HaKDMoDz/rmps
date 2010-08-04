@@ -39,10 +39,10 @@
                 软件下载：
             </td>
             <td align="left" style="height: 20px;">
-                <asp:HyperLink ID="hl_DownZip" runat="server">平台无关版本</asp:HyperLink>&nbsp;&nbsp;
+                <asp:HyperLink ID="hl_DownZip" runat="server">平台无关版本</asp:HyperLink><br />
                 <asp:HyperLink ID="hl_DownWin" runat="server">Windows 版本</asp:HyperLink>&nbsp;&nbsp;
                 <asp:HyperLink ID="hl_DownMac" runat="server">Mac OS X 版本</asp:HyperLink>&nbsp;&nbsp;
-                <asp:HyperLink ID="hl_DownUnx" runat="server">Unix/Linux 版本</asp:HyperLink>&nbsp;&nbsp;
+                <asp:HyperLink ID="hl_DownUnx" runat="server">Unix/Linux 版本</asp:HyperLink><br />
                 <a href="/mpwd/mpwd0002.aspx">其它下载</a>
             </td>
         </tr>
