@@ -64,7 +64,7 @@ public partial class exts_exts0101 : Page
         String corpName = (tf_P3010105.Text ?? "").Trim();
         if (corpName != "")
         {
-            dba.addWhere(PrpCons.P3010105, "LIKE", '%' + new Regex("\\s+").Replace(WrpUtil.text2Db(corpName), "%") + '%', true);
+            dba.addWhere(PrpCons.P3010105, "LIKE", WrpUtil.text2Like(corpName), true);
         }
         dba.addSort(ComnCons.C1110104);
         dba.addSort(PrpCons.P3010105);

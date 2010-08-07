@@ -48,6 +48,7 @@
                                     </td>
                                     <td align="right">
                                         <asp:Panel ID="pl_Edit" runat="server">
+                                            管理：
                                             <asp:HyperLink ID="hl_ExtsInfo" NavigateUrl="~/exts/exts0010.aspx" runat="server">后缀数据</asp:HyperLink>
                                             &nbsp;<asp:HyperLink ID="hl_CorpInfo" NavigateUrl="~/exts/exts0100.aspx" runat="server">公司信息</asp:HyperLink>
                                             &nbsp;<asp:HyperLink ID="hl_SoftInfo" NavigateUrl="~/exts/exts0200.aspx" runat="server">软件信息</asp:HyperLink>

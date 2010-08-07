@@ -1,114 +1,75 @@
-﻿<%@ Page Language="C#" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/exts/exts.master" AutoEventWireup="true" CodeFile="exts0002.aspx.cs" Inherits="exts_exts0002" %>
 
-<html>
-<!-- 
-Smart developers always View Source. 
-
-This application was built using Adobe Flex, an open source framework
-for building rich Internet applications that get delivered via the
-Flash Player or to desktops via Adobe AIR. 
-
-Learn more about Flex at http://flex.org 
-// -->
-<head id="Head2" runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!--  BEGIN Browser History required section -->
-    <link rel="stylesheet" type="text/css" href="history/history.css" />
-    <!--  END Browser History required section -->
-    <title></title>
-
-    <script type="text/javascript" src="AC_OETags.js" language="javascript"></script>
-
-    <!--  BEGIN Browser History required section -->
-
-    <script type="text/javascript" src="history/history.js" language="javascript"></script>
-
-    <!--  END Browser History required section -->
-    <style type="text/css">
-        body { margin: 0px; overflow:hidden }
-    </style>
-
-    <script language="JavaScript" type="text/javascript">
-<!--
-// -----------------------------------------------------------------------------
-// Globals
-// Major version of Flash required
-var requiredMajorVersion = 9;
-// Minor version of Flash required
-var requiredMinorVersion = 0;
-// Minor version of Flash required
-var requiredRevision = 28;
-// -----------------------------------------------------------------------------
-// -->
-    </script>
-
-</head>
-<body scroll="no">
-
-    <script language="JavaScript" type="text/javascript">
-<!--
-// Version check for the Flash Player that has the ability to start Player Product Install (6.0r65)
-var hasProductInstall = DetectFlashVer(6, 0, 65);
-
-// Version check based upon the values defined in globals
-var hasRequestedVersion = DetectFlashVer(requiredMajorVersion, requiredMinorVersion, requiredRevision);
-
-if ( hasProductInstall && !hasRequestedVersion ) {
-	// DO NOT MODIFY THE FOLLOWING FOUR LINES
-	// Location visited after installation is complete if installation is required
-	var MMPlayerType = (isIE == true) ? "ActiveX" : "PlugIn";
-	var MMredirectURL = window.location;
-    document.title = document.title.slice(0, 47) + " - Flash Player Installation";
-    var MMdoctitle = document.title;
-
-	AC_FL_RunContent(
-		"src", "playerProductInstall",
-		"FlashVars", "MMredirectURL="+MMredirectURL+'&MMplayerType='+MMPlayerType+'&MMdoctitle='+MMdoctitle+"",
-		"width", "100%",
-		"height", "100%",
-		"align", "middle",
-		"id", "Exts",
-		"quality", "high",
-		"bgcolor", "#ffffff",
-		"name", "Exts",
-		"allowScriptAccess","sameDomain",
-		"type", "application/x-shockwave-flash",
-		"pluginspage", "http://www.adobe.com/go/getflashplayer"
-	);
-} else if (hasRequestedVersion) {
-	// if we've detected an acceptable version
-	// embed the Flash Content SWF when all tests are passed
-	AC_FL_RunContent(
-			"src", "Exts",
-			"width", "100%",
-			"height", "100%",
-			"align", "middle",
-			"id", "Exts",
-			"quality", "high",
-			"bgcolor", "#ffffff",
-			"name", "Exts",
-			"allowScriptAccess","sameDomain",
-			"type", "application/x-shockwave-flash",
-			"pluginspage", "http://www.adobe.com/go/getflashplayer"
-	);
-  } else {  // flash is too old or we can't detect the plugin
-    var alternateContent = 'Alternate HTML content should be placed here. '
-  	+ 'This content requires the Adobe Flash Player. '
-   	+ '<a href=http://www.adobe.com/go/getflash/>Get Flash</a>';
-    document.write(alternateContent);  // insert non-flash content
-  }
-// -->
-    </script>
-
-    <noscript>
-        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="Exts" width="100%" height="100%" codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
-            <param name="movie" value="Exts.swf" />
-            <param name="quality" value="high" />
-            <param name="bgcolor" value="#ffffff" />
-            <param name="allowScriptAccess" value="sameDomain" />
-            <embed src="Exts.swf" quality="high" bgcolor="#ffffff" width="100%" height="100%" name="Exts" align="middle" play="true" loop="false" quality="high" allowscriptaccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">
-			</embed>
-        </object>
-    </noscript>
-</body>
-</html>
+<asp:Content ID="AmonData" ContentPlaceHolderID="AmonView" runat="Server">
+    <asp:ScriptManager ID="sm_Script" runat="server">
+    </asp:ScriptManager>
+    <asp:UpdatePanel ID="up_Update" runat="server">
+        <ContentTemplate>
+            <table border="0" cellpadding="0" cellspacing="0" id="TB_DATA">
+                <tr>
+                    <td align="center">
+                        <table id="tb_Exts" width="460" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td colspan="3" align="center">
+                                    <asp:RadioButtonList ID="rb_IconMode" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
+                                        <asp:ListItem Text="公司(C)" Value="corp"></asp:ListItem>
+                                        <asp:ListItem Text="软件(S)" Value="soft"></asp:ListItem>
+                                        <asp:ListItem Text="文件(S)" Value="file"></asp:ListItem>
+                                        <asp:ListItem Text="个性(I)" Value="idio"></asp:ListItem>
+                                    </asp:RadioButtonList>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" style="width: 20%;">
+                                    <asp:Label ID="lb_IconName" runat="server" Text="图标名称(N)"></asp:Label>
+                                </td>
+                                <td align="center" style="width: 60%;">
+                                    <asp:TextBox ID="tf_IconName" runat="server" Width="90%" AccessKey="N"></asp:TextBox>
+                                </td>
+                                <td align="left" style="width: 20%;">
+                                    <asp:Button ID="bt_IconName" runat="server" Text="查询(Q)" AccessKey="Q" OnClick="bt_IconName_Click" OnClientClick="return chkIcon();" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="TD_LINE_B">
+                                    &nbsp;
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <asp:ImageButton ID="ib_ViewIcon" runat="server" OnClick="ib_ViewIcon_Click" />
+                        <asp:ImageButton ID="ib_ViewList" runat="server" OnClick="ib_ViewList_Click" />
+                        <asp:HiddenField ID="hd_ViewMode" runat="server" />
+                    </td>
+                </tr>
+                <tr id="tr_IconList" runat="server">
+                    <td align="center" id="td_IconList" runat="server">
+                    </td>
+                </tr>
+            </table>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    <div id="dv_ViewIcon" title="Amon图标" style="display: none;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td style="width: 13px;" align="center" rowspan="2">
+                    <div id="sv_SlidIcon" style="height: 260px;">
+                    </div>
+                </td>
+                <td style="height: 260px;" align="center">
+                    <img id="im_SlidIcon" src="" alt="" />
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <label id="lb_SlidIcon" style="border: 0; font-weight: bold;">
+                    </label>
+                    <input type="hidden" id="hd_SlidIcon" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</asp:Content>

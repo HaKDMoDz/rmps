@@ -5,6 +5,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Web;
 using cons;
+using System.Text.RegularExpressions;
 
 namespace rmp.util
 {
@@ -45,6 +46,20 @@ namespace rmp.util
         public static String text2Db(String text)
         {
             return text != null ? text.Replace("\\", "\\\\").Replace("'", "\\'") : "";
+        }
+
+        public static String text2Like(String text)
+        {
+            text = Regex.Replace(text2Db(text), "[\\s%_]+", "%");
+            if (text[0] != '%')
+            {
+                text = '%' + text;
+            }
+            if (text[text.Length - 1] != '%')
+            {
+                text += '%';
+            }
+            return text;
         }
 
         /// <summary>

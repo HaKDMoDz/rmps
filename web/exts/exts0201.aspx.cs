@@ -66,12 +66,7 @@ public partial class exts_exts0201 : Page
         String softName = (tf_P3010205.Text ?? "").Trim();
         if (softName != "")
         {
-
-            softName = Regex.Replace(WrpUtil.text2Db(softName), "[\\s%_]+", "%");
-            if (softName != "%")
-            {
-                dba.addWhere(cons.io.db.prp.PrpCons.P3010205, "LIKE", '%' + softName + '%', true);
-            }
+            dba.addWhere(cons.io.db.prp.PrpCons.P3010205, "LIKE", WrpUtil.text2Like(softName), true);
         }
         dba.addSort(cons.io.db.prp.PrpCons.P3010105);
         dba.addSort(cons.io.db.prp.PrpCons.P3010205);
