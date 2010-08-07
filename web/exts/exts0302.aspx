@@ -13,7 +13,7 @@
                 <table width="100%" border="0" cellpadding="3" cellspacing="0" class="TB_DataList_TL" id="FILEPROP">
                     <tr>
                         <td width="80" rowspan="2" align="center" class="TD_DataHead_TL_L">
-                            <as:AmonIcon ID="ai_P3010304" runat="server" DstIconPath="corp" ToolTip="文件图标" />
+                            <as:AmonIcon ID="ai_P3010304" runat="server" DstIconPath="file" ToolTip="文件图标" Enabled="true" Viewable="true" CreateViewDiv="true" />
                         </td>
                         <th width="80" height="30" class="TD_DataHead_TL_L">
                             数值签名

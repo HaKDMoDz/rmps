@@ -26,7 +26,7 @@
                                         <tr>
                                             <td style="width: 80px;" rowspan="2" align="center" class="TD_DataHead_TL_L">
                                                 <asp:HiddenField ID="hd_P3010202" runat="server" />
-                                                <as:AmonIcon ID="ai_P3010204" runat="server" DstIconPath="soft" ToolTip="软件图标" Enabled="true" CreateDiv="true" />
+                                                <as:AmonIcon ID="ai_P3010204" runat="server" DstIconPath="soft" ToolTip="软件图标" Enabled="true" Editable="true" CreateEditDiv="true" />
                                             </td>
                                             <th style="width: 80px; height: 30px;" class="TD_DataHead_TL_L">
                                                 中文名称

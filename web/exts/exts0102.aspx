@@ -13,7 +13,7 @@
                 <table width="100%" border="0" cellpadding="3" cellspacing="0" class="TB_DataList_TL" id="CORPPROP">
                     <tr>
                         <td width="80" rowspan="2" align="center" class="TD_DataHead_TL_L">
-                            <as:AmonIcon ID="ai_P3010104" runat="server" DstIconPath="corp" ToolTip="公司徽标" />
+                            <as:AmonIcon ID="ai_P3010104" runat="server" DstIconPath="corp" ToolTip="公司徽标" Enabled="true" Viewable="true" CreateViewDiv="true" />
                         </td>
                         <th width="80" height="30" class="TD_DataHead_TL_L">
                             本语名称

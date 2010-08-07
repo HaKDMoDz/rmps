@@ -67,9 +67,9 @@ namespace cons
         /// </summary>
         public const String SQL_NOW = "NOW()";
 
-        public const String DIR_DAT = "~/data/";
-        public const String DIR_BAK = "~/back/";
-        public const String DIR_TMP = "~/temp/";
+        public const String DIR_DAT = "~/_dat/";
+        public const String DIR_BAK = "~/_bak/";
+        public const String DIR_TMP = "~/_tmp/";
 
         public const String HOST_BLOG = "amonsoft.com";
         public const String SITE_BLOG = "http://amonsoft.com/";
