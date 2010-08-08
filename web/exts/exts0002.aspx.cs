@@ -1,18 +1,14 @@
 ﻿using System;
-using rmp.wrp;
-using rmp.bean;
 using System.Collections.Generic;
-using rmp.io.db;
 using System.Data;
-using rmp.util;
 using System.Text;
+using rmp.bean;
+using rmp.io.db;
+using rmp.util;
+using rmp.wrp;
 
 public partial class exts_exts0002 : System.Web.UI.Page
 {
-    private int iconSize = 48;
-    private int rowCount = 10;
-    private int colCount = 4;
-
     protected void Page_Load(object sender, EventArgs e)
     {
         #region Master Page初始化
@@ -34,39 +30,72 @@ public partial class exts_exts0002 : System.Web.UI.Page
             return;
         }
 
+        rb_IconMode.SelectedValue = "soft";
+        hd_IconSize.Value = "48";
+        hd_ColCount.Value = "5";
+        hd_RowCount.Value = "10";
+        hd_ViewMode.Value = "icon";
         tr_IconList.Visible = false;
-    }
-
-    public int IconSize
-    {
-        get
-        {
-            return iconSize;
-        }
-        set
-        {
-            iconSize = value;
-        }
-    }
-
-    public int ColCount
-    {
-        get
-        {
-            return colCount;
-        }
-        set
-        {
-            colCount = value;
-        }
     }
 
     protected void bt_IconName_Click(object sender, EventArgs e)
     {
-        String text = WrpUtil.text2Like(tf_IconName.Text);
+        if (rb_IconMode.SelectedIndex < 0)
+        {
+            return;
+        }
 
+        String text = (tf_IconName.Text ?? "").Trim();
+        if (!StringUtil.isValidate(text))
+        {
+            return;
+        }
+        text = WrpUtil.text2Like(text);
+
+        hd_IconMode.Value = rb_IconMode.SelectedValue;
+        hd_IconName.Value = text;
+
+        ShowIcon(rb_IconMode.SelectedValue, text, 0);
+    }
+
+    protected void ib_ViewIcon_Click(object sender, System.Web.UI.ImageClickEventArgs e)
+    {
+        hd_ViewMode.Value = "icon";
+        hd_IconSize.Value = "48";
+        ShowIcon(hd_IconMode.Value, hd_IconName.Value, 0);
+    }
+
+    protected void ib_ViewList_Click(object sender, System.Web.UI.ImageClickEventArgs e)
+    {
+        hd_ViewMode.Value = "list";
+        hd_IconSize.Value = "16";
+        ShowIcon(hd_IconMode.Value, hd_IconName.Value, 0);
+    }
+
+    protected void lb_PrevPage_Click(object sender, EventArgs e)
+    {
+        String v = hd_PageIndx.Value;
+        if (!StringUtil.isValidateLong(v))
+        {
+            v = "1";
+        }
+        ShowIcon(hd_IconMode.Value, hd_IconName.Value, int.Parse(v) - 1);
+    }
+
+    protected void lb_NextPage_Click(object sender, EventArgs e)
+    {
+        String v = hd_PageIndx.Value;
+        if (!StringUtil.isValidateLong(v))
+        {
+            v = "-1";
+        }
+        ShowIcon(hd_IconMode.Value, hd_IconName.Value, int.Parse(v) + 1);
+    }
+
+    private void ShowIcon(String mode, String text, int page)
+    {
         DBAccess dba = new DBAccess();
-        switch (rb_IconMode.SelectedValue)
+        switch (mode)
         {
             case "corp":
                 dba.addTable(cons.io.db.prp.PrpCons.P3010100);
@@ -75,11 +104,11 @@ public partial class exts_exts0002 : System.Web.UI.Page
 
                 if (hd_ViewMode.Value == "list")
                 {
-                    ViewList(temp());
+                    ViewList(temp(), page, hd_IconSize.Value, "corp", cons.io.db.prp.PrpCons.P3010104, cons.io.db.prp.PrpCons.P3010105, cons.io.db.prp.PrpCons.P301010A);
                 }
                 else
                 {
-                    ViewIcon(temp(), "", "", "");
+                    ViewIcon(temp(), page, hd_IconSize.Value, "corp", cons.io.db.prp.PrpCons.P3010104, cons.io.db.prp.PrpCons.P3010105, cons.io.db.prp.PrpCons.P301010A);
                 }
                 break;
             case "soft":
@@ -89,11 +118,11 @@ public partial class exts_exts0002 : System.Web.UI.Page
 
                 if (hd_ViewMode.Value == "list")
                 {
-                    ViewList(temp());
+                    ViewList(temp(), page, hd_IconSize.Value, "soft", cons.io.db.prp.PrpCons.P3010204, cons.io.db.prp.PrpCons.P3010205, cons.io.db.prp.PrpCons.P301020D);
                 }
                 else
                 {
-                    ViewIcon(temp(), "", "", "");
+                    ViewIcon(temp(), page, hd_IconSize.Value, "soft", cons.io.db.prp.PrpCons.P3010204, cons.io.db.prp.PrpCons.P3010205, cons.io.db.prp.PrpCons.P301020D);
                 }
                 break;
             case "file":
@@ -103,11 +132,11 @@ public partial class exts_exts0002 : System.Web.UI.Page
 
                 if (hd_ViewMode.Value == "list")
                 {
-                    ViewList(temp());
+                    ViewList(temp(), page, hd_IconSize.Value, "file", cons.io.db.prp.PrpCons.P3010304, cons.io.db.prp.PrpCons.P3010305, cons.io.db.prp.PrpCons.P301030D);
                 }
                 else
                 {
-                    ViewIcon(temp(), "", "", "");
+                    ViewIcon(temp(), page, hd_IconSize.Value, "file", cons.io.db.prp.PrpCons.P3010304, cons.io.db.prp.PrpCons.P3010305, cons.io.db.prp.PrpCons.P301030D);
                 }
                 break;
             case "idio":
@@ -117,63 +146,83 @@ public partial class exts_exts0002 : System.Web.UI.Page
 
                 if (hd_ViewMode.Value == "list")
                 {
-                    ViewList(temp());
+                    ViewList(temp(), page, hd_IconSize.Value, "idio", cons.io.db.comn.user.UserCons.C3010408, cons.io.db.comn.user.UserCons.C3010407, cons.io.db.comn.user.UserCons.C3010407);
                 }
                 else
                 {
-                    ViewIcon(temp(), "", "", "");
+                    ViewIcon(temp(), page, hd_IconSize.Value, "idio", cons.io.db.comn.user.UserCons.C3010408, cons.io.db.comn.user.UserCons.C3010407, cons.io.db.comn.user.UserCons.C3010407);
                 }
                 break;
             default:
                 break;
         }
+        hd_PageIndx.Value = page.ToString();
     }
 
-    protected void ib_ViewList_Click(object sender, System.Web.UI.ImageClickEventArgs e)
+    private void ViewIcon(DataTable list, int page, String size, String uri, String sid, String tip, String upd)
     {
+        // 读取行信息
+        String r = hd_RowCount.Value;
+        if (!StringUtil.isValidateLong(r))
+        {
+            r = "10";
+        }
+        int rowCount = int.Parse(r);
+        if (rowCount < 1)
+        {
+            rowCount = 1;
+        }
 
-    }
+        // 读取列信息
+        String c = hd_ColCount.Value;
+        if (!StringUtil.isValidateLong(c))
+        {
+            c = "5";
+        }
+        int colCount = int.Parse(c);
+        if (colCount < 1)
+        {
+            colCount = 1;
+        }
 
-    protected void ib_ViewIcon_Click(object sender, System.Web.UI.ImageClickEventArgs e)
-    {
-
-    }
-
-    private void ViewList(DataTable data)
-    {
-        StringBuilder buf = new StringBuilder();
-
-        td_IconList.InnerHtml = buf.ToString();
-        tr_IconList.Visible = true;
-    }
-
-    private void ViewIcon(DataTable list, String uri, String sid, String tip)
-    {
         StringBuilder buf = new StringBuilder();
 
         int row = 0;
         int col = 0;
-        int cnt = data.Rows.Count;
+        int cnt = list.Rows.Count;
+        int cur = rowCount * colCount * page;
         int tmp;
+        if (cur > cnt)
+        {
+            cur = 0;
+        }
         DataRow item;
 
-        buf.Append("<table width=\"100%\">");
+        buf.Append("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"3\">");
         while (row < rowCount)
         {
             col = 0;
-            tmp = colCount < cnt ? colCount : cnt;
+            tmp = cnt - cur;
+            if (tmp > colCount)
+            {
+                tmp = colCount;
+            }
 
             buf.Append("<tr>");
             while (col < tmp)
             {
-                item = list[tmp];
+                item = list.Rows[cur++];
 
                 buf.Append("<td align=\"center\">");
-                buf.Append("<img width=\"").Append(iconSize).Append("\" height=\"").Append(iconSize).Append("\" class=\"IMG_EXTSICON\" style=\"cursor:pointer;\"");
+                buf.Append("<img width=\"").Append(size).Append("\" height=\"").Append(size).Append("\" class=\"IMG_EXTSICON\" style=\"cursor:pointer;\"");
                 buf.Append(" onclick=\"viewIcon('").Append(item[sid]).Append("');\"");
                 buf.Append(" alt=\"").Append(item[tip]).Append("\"");
-                buf.Append(" src=\"").Append(cons.EnvCons.PRE_URL).Append("/icon/icon0001.ashx?uri=").Append(item[uri]).Append("&amp;sid=").Append(item[sid]).Append("\" />");
+                buf.Append(" title=\"").Append(item[tip]).Append("，点击查看\"");
+                buf.Append(" src=\"").Append(cons.EnvCons.PRE_URL).Append("/icon/icon0001.ashx?uri=").Append(size).Append("&amp;sid=").Append(item[sid]).Append("\" />");
+                buf.Append("<br />");
+                buf.Append(item[tip]);
                 buf.Append("</td>");
+
                 col += 1;
             }
             while (col < colCount)
@@ -183,10 +232,82 @@ public partial class exts_exts0002 : System.Web.UI.Page
             }
             buf.Append("</tr>");
 
-            cnt -= colCount;
             row += 1;
         }
         buf.Append("</table>");
+
+        tmp = (cnt - 1) / (rowCount * colCount);
+        lb_PrevPage.Enabled = (page > 0);
+        lb_NextPage.Enabled = (page < tmp);
+        lb_PageInfo.Text = (page + 1) + "/" + (tmp + 1);
+
+        td_IconList.InnerHtml = buf.ToString();
+        tr_IconList.Visible = true;
+    }
+
+    private void ViewList(DataTable list, int page, String size, String uri, String sid, String tip, String upd)
+    {
+        // 读取行信息
+        String r = hd_RowCount.Value;
+        if (!StringUtil.isValidateLong(r))
+        {
+            r = "10";
+        }
+        int rowCount = int.Parse(r);
+        if (rowCount < 1)
+        {
+            rowCount = 1;
+        }
+
+        StringBuilder buf = new StringBuilder();
+
+        int row = 0;
+        int cnt = list.Rows.Count;
+        int cur = rowCount * page;
+        if (cur > cnt)
+        {
+            cur = 0;
+        }
+        int tmp = cnt - cur;
+        if (tmp > rowCount)
+        {
+            tmp = rowCount;
+        }
+        DataRow item;
+
+        buf.Append("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"3\">");
+        buf.Append("<tr>");
+        buf.Append("<td align=\"center\" style=\"width:30px;\">图标</td>");
+        buf.Append("<td align=\"center\">名称</td>");
+        buf.Append("<td align=\"center\" style=\"width:120px;\">更新</td>");
+        buf.Append("</tr>");
+        while (row++ < tmp)
+        {
+
+            item = list.Rows[cur++];
+
+            buf.Append("<tr>");
+            buf.Append("<td align=\"center\">");
+            buf.Append("<img width=\"").Append(size).Append("\" height=\"").Append(size).Append("\" class=\"IMG_EXTSICON\" style=\"cursor:pointer;\"");
+            buf.Append(" onclick=\"viewIcon('").Append(item[sid]).Append("');\"");
+            buf.Append(" alt=\"").Append(item[tip]).Append("\"");
+            buf.Append(" title=\"").Append(item[tip]).Append("，点击查看\"");
+            buf.Append(" src=\"").Append(cons.EnvCons.PRE_URL).Append("/icon/icon0001.ashx?uri=").Append(size).Append("&amp;sid=").Append(item[sid]).Append("\" />");
+            buf.Append("</td>");
+            buf.Append("<td align=\"left\">");
+            buf.Append(item[tip]);
+            buf.Append("</td>");
+            buf.Append("<td align=\"right\">");
+            buf.Append(item[upd]);
+            buf.Append("</td>");
+            buf.Append("</tr>");
+        }
+        buf.Append("</table>");
+
+        tmp = (cnt - 1) / rowCount;
+        lb_PrevPage.Enabled = (page > 0);
+        lb_NextPage.Enabled = (page < tmp);
+        lb_PageInfo.Text = (page + 1) + "/" + (tmp + 1);
 
         td_IconList.InnerHtml = buf.ToString();
         tr_IconList.Visible = true;
@@ -200,30 +321,20 @@ public partial class exts_exts0002 : System.Web.UI.Page
         dt.Columns.Add(cons.io.db.prp.PrpCons.P3010204, typeof(String));
         dt.Columns.Add(cons.io.db.prp.PrpCons.P3010205, typeof(String));
         dt.Columns.Add(cons.io.db.prp.PrpCons.P3010206, typeof(String));
+        dt.Columns.Add(cons.io.db.prp.PrpCons.P301020D, typeof(DateTime));
 
-        DataRow row = dt.NewRow();
-        row[0] = "1";
-        row[1] = "2";
-        row[2] = "3";
-        row[3] = "中文";
-        row[4] = "English";
-        dt.Rows.Add(row);
-
-        row = dt.NewRow();
-        row[0] = "1";
-        row[1] = "2";
-        row[2] = "3";
-        row[3] = "中文";
-        row[4] = "English";
-        dt.Rows.Add(row);
-
-        row = dt.NewRow();
-        row[0] = "1";
-        row[1] = "2";
-        row[2] = "3";
-        row[3] = "中文";
-        row[4] = "English";
-        dt.Rows.Add(row);
+        DataRow row;
+        for (int i = 0; i < 11; i += 1)
+        {
+            row = dt.NewRow();
+            row[0] = "1";
+            row[1] = "2";
+            row[2] = "3";
+            row[3] = "中文";
+            row[4] = "English";
+            row[5] = DateTime.Now;
+            dt.Rows.Add(row);
+        }
 
         return dt;
     }

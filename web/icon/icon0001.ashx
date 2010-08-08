@@ -22,7 +22,6 @@ public class icon0001 : IHttpHandler
 
         // 索引
         String sid = (context.Request[cons.wrp.WrpCons.SID] ?? "").Trim();
-
         if (!rmp.util.StringUtil.isValidatePath(sid))
         {
             sid = "comn,_NVL";

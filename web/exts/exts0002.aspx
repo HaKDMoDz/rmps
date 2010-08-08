@@ -33,6 +33,10 @@
                             <tr>
                                 <td colspan="3" class="TD_LINE_B">
                                     &nbsp;
+                                    <asp:HiddenField ID="hd_IconSize" runat="server" />
+                                    <asp:HiddenField ID="hd_ViewMode" runat="server" />
+                                    <asp:HiddenField ID="hd_ColCount" runat="server" />
+                                    <asp:HiddenField ID="hd_RowCount" runat="server" />
                                 </td>
                             </tr>
                         </table>
@@ -40,13 +44,23 @@
                 </tr>
                 <tr>
                     <td align="right">
-                        <asp:ImageButton ID="ib_ViewIcon" runat="server" OnClick="ib_ViewIcon_Click" />
-                        <asp:ImageButton ID="ib_ViewList" runat="server" OnClick="ib_ViewList_Click" />
-                        <asp:HiddenField ID="hd_ViewMode" runat="server" />
+                        查看：
+                        <asp:ImageButton ID="ib_ViewIcon" runat="server" OnClick="ib_ViewIcon_Click" ToolTip="以图标方式查看" />
+                        <asp:ImageButton ID="ib_ViewList" runat="server" OnClick="ib_ViewList_Click" ToolTip="以列表方式查看" />
                     </td>
                 </tr>
                 <tr id="tr_IconList" runat="server">
                     <td align="center" id="td_IconList" runat="server">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <asp:LinkButton ID="lb_PrevPage" runat="server" Text="上一页" OnClick="lb_PrevPage_Click"></asp:LinkButton>
+                        <asp:HiddenField ID="hd_IconMode" runat="server" />
+                        <asp:HiddenField ID="hd_IconName" runat="server" />
+                        <asp:HiddenField ID="hd_PageIndx" runat="server" />
+                        <asp:Label ID="lb_PageInfo" runat="server"></asp:Label>
+                        <asp:LinkButton ID="lb_NextPage" runat="server" Text="下一页" OnClick="lb_NextPage_Click"></asp:LinkButton>
                     </td>
                 </tr>
             </table>
