@@ -21,7 +21,7 @@ function addFav()
     var ext = $E('hd_ExtsName').value;
     var cas = $E('hd_ExtsCase').value;
 
-    return addFavorite('http://www.amonsoft.cn/exts/exts0001.aspx?exts=' + ext + '&case=' + cas, '后缀解析 - ' + ext, '')
+    return addFavorite('http://amonsoft.net/exts/exts0001.aspx?exts=' + ext + '&case=' + cas, '后缀解析 - ' + ext, '')
 }
 
 $(function()
@@ -47,7 +47,7 @@ function viewIcon(sid,cid)
         sid='comn,_NVL';
     }
     
-    $("#dv_ViewIcon").attr("slidHash",'/web/icon/icon0001.ashx?sid='+sid+'&uri=');
+    $("#dv_ViewIcon").attr("slidHash",'/icon/icon0001.ashx?sid='+sid+'&uri=');
     
     $("#sv_SlidIcon").slider("value",48)
     showIcon(48);

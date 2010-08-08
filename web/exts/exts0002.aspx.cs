@@ -104,11 +104,11 @@ public partial class exts_exts0002 : System.Web.UI.Page
 
                 if (hd_ViewMode.Value == "list")
                 {
-                    ViewList(temp(), page, hd_IconSize.Value, "corp", cons.io.db.prp.PrpCons.P3010104, cons.io.db.prp.PrpCons.P3010105, cons.io.db.prp.PrpCons.P301010A);
+                    ViewList(dba.executeSelect(), page, hd_IconSize.Value, "corp", cons.io.db.prp.PrpCons.P3010104, cons.io.db.prp.PrpCons.P3010105, cons.io.db.prp.PrpCons.P301010A);
                 }
                 else
                 {
-                    ViewIcon(temp(), page, hd_IconSize.Value, "corp", cons.io.db.prp.PrpCons.P3010104, cons.io.db.prp.PrpCons.P3010105, cons.io.db.prp.PrpCons.P301010A);
+                    ViewIcon(dba.executeSelect(), page, hd_IconSize.Value, "corp", cons.io.db.prp.PrpCons.P3010104, cons.io.db.prp.PrpCons.P3010105, cons.io.db.prp.PrpCons.P301010A);
                 }
                 break;
             case "soft":
@@ -118,11 +118,11 @@ public partial class exts_exts0002 : System.Web.UI.Page
 
                 if (hd_ViewMode.Value == "list")
                 {
-                    ViewList(temp(), page, hd_IconSize.Value, "soft", cons.io.db.prp.PrpCons.P3010204, cons.io.db.prp.PrpCons.P3010205, cons.io.db.prp.PrpCons.P301020D);
+                    ViewList(dba.executeSelect(), page, hd_IconSize.Value, "soft", cons.io.db.prp.PrpCons.P3010204, cons.io.db.prp.PrpCons.P3010205, cons.io.db.prp.PrpCons.P301020D);
                 }
                 else
                 {
-                    ViewIcon(temp(), page, hd_IconSize.Value, "soft", cons.io.db.prp.PrpCons.P3010204, cons.io.db.prp.PrpCons.P3010205, cons.io.db.prp.PrpCons.P301020D);
+                    ViewIcon(dba.executeSelect(), page, hd_IconSize.Value, "soft", cons.io.db.prp.PrpCons.P3010204, cons.io.db.prp.PrpCons.P3010205, cons.io.db.prp.PrpCons.P301020D);
                 }
                 break;
             case "file":
@@ -132,11 +132,11 @@ public partial class exts_exts0002 : System.Web.UI.Page
 
                 if (hd_ViewMode.Value == "list")
                 {
-                    ViewList(temp(), page, hd_IconSize.Value, "file", cons.io.db.prp.PrpCons.P3010304, cons.io.db.prp.PrpCons.P3010305, cons.io.db.prp.PrpCons.P301030D);
+                    ViewList(dba.executeSelect(), page, hd_IconSize.Value, "file", cons.io.db.prp.PrpCons.P3010304, cons.io.db.prp.PrpCons.P3010305, cons.io.db.prp.PrpCons.P301030D);
                 }
                 else
                 {
-                    ViewIcon(temp(), page, hd_IconSize.Value, "file", cons.io.db.prp.PrpCons.P3010304, cons.io.db.prp.PrpCons.P3010305, cons.io.db.prp.PrpCons.P301030D);
+                    ViewIcon(dba.executeSelect(), page, hd_IconSize.Value, "file", cons.io.db.prp.PrpCons.P3010304, cons.io.db.prp.PrpCons.P3010305, cons.io.db.prp.PrpCons.P301030D);
                 }
                 break;
             case "idio":
@@ -146,11 +146,11 @@ public partial class exts_exts0002 : System.Web.UI.Page
 
                 if (hd_ViewMode.Value == "list")
                 {
-                    ViewList(temp(), page, hd_IconSize.Value, "idio", cons.io.db.comn.user.UserCons.C3010408, cons.io.db.comn.user.UserCons.C3010407, cons.io.db.comn.user.UserCons.C3010407);
+                    ViewList(dba.executeSelect(), page, hd_IconSize.Value, "idio", cons.io.db.comn.user.UserCons.C3010408, cons.io.db.comn.user.UserCons.C3010407, cons.io.db.comn.user.UserCons.C3010407);
                 }
                 else
                 {
-                    ViewIcon(temp(), page, hd_IconSize.Value, "idio", cons.io.db.comn.user.UserCons.C3010408, cons.io.db.comn.user.UserCons.C3010407, cons.io.db.comn.user.UserCons.C3010407);
+                    ViewIcon(dba.executeSelect(), page, hd_IconSize.Value, "idio", cons.io.db.comn.user.UserCons.C3010408, cons.io.db.comn.user.UserCons.C3010407, cons.io.db.comn.user.UserCons.C3010407);
                 }
                 break;
             default:
@@ -311,31 +311,5 @@ public partial class exts_exts0002 : System.Web.UI.Page
 
         td_IconList.InnerHtml = buf.ToString();
         tr_IconList.Visible = true;
-    }
-
-    private DataTable temp()
-    {
-        DataTable dt = new DataTable();
-        dt.Columns.Add(cons.io.db.prp.PrpCons.P3010202, typeof(String));
-        dt.Columns.Add(cons.io.db.prp.PrpCons.P3010203, typeof(String));
-        dt.Columns.Add(cons.io.db.prp.PrpCons.P3010204, typeof(String));
-        dt.Columns.Add(cons.io.db.prp.PrpCons.P3010205, typeof(String));
-        dt.Columns.Add(cons.io.db.prp.PrpCons.P3010206, typeof(String));
-        dt.Columns.Add(cons.io.db.prp.PrpCons.P301020D, typeof(DateTime));
-
-        DataRow row;
-        for (int i = 0; i < 11; i += 1)
-        {
-            row = dt.NewRow();
-            row[0] = "1";
-            row[1] = "2";
-            row[2] = "3";
-            row[3] = "中文";
-            row[4] = "English";
-            row[5] = DateTime.Now;
-            dt.Rows.Add(row);
-        }
-
-        return dt;
     }
 }
