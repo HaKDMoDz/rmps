@@ -185,8 +185,6 @@ public partial class exts_exts0002 : System.Web.UI.Page
             colCount = 1;
         }
 
-        StringBuilder buf = new StringBuilder();
-
         int row = 0;
         int col = 0;
         int cnt = list.Rows.Count;
@@ -198,6 +196,9 @@ public partial class exts_exts0002 : System.Web.UI.Page
         }
         DataRow item;
 
+        StringBuilder buf = new StringBuilder();
+        StringBuilder buf1 = new StringBuilder();
+        StringBuilder buf2 = new StringBuilder();
         buf.Append("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"3\">");
         while (row < rowCount)
         {
@@ -208,29 +209,38 @@ public partial class exts_exts0002 : System.Web.UI.Page
                 tmp = colCount;
             }
 
-            buf.Append("<tr>");
+            buf1.Append("<tr>");
+            buf2.Append("<tr>");
             while (col < tmp)
             {
                 item = list.Rows[cur++];
 
-                buf.Append("<td align=\"center\">");
-                buf.Append("<img width=\"").Append(size).Append("\" height=\"").Append(size).Append("\" class=\"IMG_EXTSICON\" style=\"cursor:pointer;\"");
-                buf.Append(" onclick=\"viewIcon('").Append(item[sid]).Append("');\"");
-                buf.Append(" alt=\"").Append(item[tip]).Append("\"");
-                buf.Append(" title=\"").Append(item[tip]).Append("，点击查看\"");
-                buf.Append(" src=\"").Append(cons.EnvCons.PRE_URL).Append("/icon/icon0001.ashx?uri=").Append(size).Append("&amp;sid=").Append(item[sid]).Append("\" />");
-                buf.Append("<br />");
-                buf.Append(item[tip]);
-                buf.Append("</td>");
+                buf1.Append("<td align=\"center\">");
+                buf1.Append("<img width=\"").Append(size).Append("\" height=\"").Append(size).Append("\" class=\"IMG_EXTSICON\" style=\"cursor:pointer;\"");
+                buf1.Append(" onclick=\"viewIcon('").Append(item[sid]).Append("');\"");
+                buf1.Append(" alt=\"").Append(item[tip]).Append("\"");
+                buf1.Append(" title=\"").Append(item[tip]).Append("，点击查看\"");
+                buf1.Append(" src=\"").Append(cons.EnvCons.PRE_URL).Append("/icon/icon0001.ashx?uri=").Append(size).Append("&amp;sid=").Append(item[sid]).Append("\" />");
+                buf1.Append("</td>");
+
+                buf2.Append("<td align=\"center\">");
+                buf2.Append(item[tip]);
+                buf2.Append("</td>");
 
                 col += 1;
             }
             while (col < colCount)
             {
-                buf.Append("<td align=\"center\">&nbsp;</td>");
+                buf1.Append("<td align=\"center\">&nbsp;</td>");
+                buf2.Append("<td align=\"center\">&nbsp;</td>");
                 col += 1;
             }
-            buf.Append("</tr>");
+            buf1.Append("</tr>");
+            buf2.Append("</tr>");
+
+            buf.Append(buf1.ToString()).Append(buf2.ToString());
+            buf1.Remove(0, buf1.Length);
+            buf2.Remove(0, buf2.Length);
 
             row += 1;
         }
