@@ -22,15 +22,19 @@
 <script type="text/javascript" charset="utf-8">
 $W().saveIcon=function(uri,sid,opt,cid)
 {
-    if (!uri)
+    if(!uri)
     {
         uri='/icon/icon0001.ashx?sid=comn,_NVL';
         sid='0';
     }
-    if (!sid)
+    if(!sid)
     {
         sid='0';
     }
+	if(!cid)
+	{
+		cid=$("#dv_EditIcon").attr('editHash');
+	}
 
     $X(cid+'_ib_AmonIcon').src=_URI+uri+sid+'0030.png';
     $X(cid+'_hd_SrcPath').value=uri;
@@ -43,13 +47,14 @@ $W().saveIcon=function(uri,sid,opt,cid)
 function editIcon(cid)
 {
     var d=$X(cid+'_hd_DstHash').value;
-    if (!d)
+    if(!d)
     {
         d='0';
     }
 
     $("#dv_EditIcon").dialog({width:600,height:400,modal:true});
 	$X('if_EditIcon').src=_URI+'/icon/icon0100.aspx?uri=corp&sid='+d;
+	$("#dv_EditIcon").attr('editHash',cid);
 
     return false;
 }
@@ -67,18 +72,18 @@ function editIcon(cid)
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <tr>
             <td style="width: 13px;" align="center" rowspan="2">
-                <div id="sv_SlidIcon" style="height: 260px;">
+                <div id="sv_ViewIcon" style="height: 260px;">
                 </div>
             </td>
             <td style="height: 260px;" align="center">
-                <img id="im_SlidIcon" src="" alt="" />
+                <img id="im_ViewIcon" src="" alt="" />
             </td>
         </tr>
         <tr>
             <td align="center">
-                <label id="lb_SlidIcon" style="border: 0; font-weight: bold;">
+                <label id="lb_ViewIcon" style="border: 0; font-weight: bold;">
                 </label>
-                <input type="hidden" id="hd_SlidIcon" />
+                <input type="hidden" id="hd_ViewIcon" />
             </td>
         </tr>
     </table>
@@ -87,7 +92,7 @@ function editIcon(cid)
 <script type="text/javascript" charset="utf-8">
 $(function()
 {
-    $("#sv_SlidIcon").slider({
+    $("#sv_ViewIcon").slider({
         orientation: "vertical",
         range: "min",
         min: 16,
@@ -107,9 +112,9 @@ function viewIcon(sid,cid)
         sid='comn,_NVL';
     }
     
-    $("#dv_ViewIcon").attr("slidHash",'/web/icon/icon0001.ashx?sid='+sid+'&uri=');
+    $("#dv_ViewIcon").attr("viewHash",'/web/icon/icon0001.ashx?sid='+sid+'&uri=');
     
-    $("#sv_SlidIcon").slider("value",48)
+    $("#sv_ViewIcon").slider("value",48)
     showIcon(48);
     
     $("#dv_ViewIcon").dialog({width:310,height:330,modal:true});
@@ -117,9 +122,9 @@ function viewIcon(sid,cid)
 }
 function showIcon(size)
 {
-    $("#lb_SlidIcon").html("图片大小："+size+"×"+size);
-    $('#hd_SlidIcon').val(size);
-    $X('im_SlidIcon').src=$("#dv_ViewIcon").attr("slidHash")+size;
+    $("#lb_ViewIcon").html("图片大小："+size+"×"+size);
+    $('#hd_ViewIcon').val(size);
+    $X('im_ViewIcon').src=$("#dv_ViewIcon").attr("viewHash")+size;
 }
 </script>
 
