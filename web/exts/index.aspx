@@ -12,10 +12,10 @@
                     <tr>
                         <td colspan="3" align="center">
                             <asp:RadioButtonList ID="rb_ExtsCase" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
-                                <asp:ListItem Text="模糊查询(R)" Value="0"></asp:ListItem>
-                                <asp:ListItem Text="大小敏感(H)" Value="1" Selected="True"></asp:ListItem>
-                                <asp:ListItem Text="大写(U)" Value="2"></asp:ListItem>
-                                <asp:ListItem Text="小写(L)" Value="3"></asp:ListItem>
+                                <asp:ListItem Text="大小敏感(H)" Value="0"></asp:ListItem>
+                                <asp:ListItem Text="大写(U)" Value="1"></asp:ListItem>
+                                <asp:ListItem Text="小写(L)" Value="2"></asp:ListItem>
+                                <asp:ListItem Text="模糊查询(R)" Value="3"></asp:ListItem>
                             </asp:RadioButtonList>
                         </td>
                     </tr>

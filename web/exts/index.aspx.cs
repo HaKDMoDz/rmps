@@ -29,11 +29,11 @@ public partial class exts_index : Page
         }
 
         // Index Page初始化
-        rb_ExtsCase.Items[0].Attributes.Add("accesskey", "R");
-        rb_ExtsCase.Items[1].Attributes.Add("accesskey", "H");
-        rb_ExtsCase.Items[2].Attributes.Add("accesskey", "U");
-        rb_ExtsCase.Items[3].Attributes.Add("accesskey", "L");
-        rb_ExtsCase.SelectedValue = (Session[cons.wrp.WrpCons.P3010000_CASE] ?? "1").ToString().Trim();
+        rb_ExtsCase.Items[0].Attributes.Add("accesskey", "H");
+        rb_ExtsCase.Items[1].Attributes.Add("accesskey", "U");
+        rb_ExtsCase.Items[2].Attributes.Add("accesskey", "L");
+        rb_ExtsCase.Items[3].Attributes.Add("accesskey", "R");
+        rb_ExtsCase.SelectedValue = (Session[cons.wrp.WrpCons.P3010000_CASE] ?? cons.wrp.exts.ExtsCons.EXTS_CASE_CASE).ToString().Trim();
         ck_ExtsAjax.Checked = ("1" == (Session[cons.wrp.WrpCons.P3010000_AJAX] ?? "1").ToString().Trim());
         lb_AmonInfo.Text = Exts.ExtsSize.ToString();
     }
