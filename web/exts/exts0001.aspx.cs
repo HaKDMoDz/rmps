@@ -169,10 +169,10 @@ public partial class exts_exts0001 : Page
     {
         ck_ExtsAjax.Checked = ("1" == Request["ajax"]);
 
-        rb_ExtsCase.Items[0].Attributes.Add("accesskey", "R");
-        rb_ExtsCase.Items[1].Attributes.Add("accesskey", "H");
-        rb_ExtsCase.Items[2].Attributes.Add("accesskey", "U");
-        rb_ExtsCase.Items[3].Attributes.Add("accesskey", "L");
+        rb_ExtsCase.Items[0].Attributes.Add("accesskey", "H");
+        rb_ExtsCase.Items[1].Attributes.Add("accesskey", "U");
+        rb_ExtsCase.Items[2].Attributes.Add("accesskey", "L");
+        rb_ExtsCase.Items[3].Attributes.Add("accesskey", "R");
 
         ck_ExtsFile.Attributes.Add("onclick", "chgExts()");
 
