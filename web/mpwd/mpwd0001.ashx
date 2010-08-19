@@ -20,7 +20,10 @@ public class mpwd0001 : IHttpHandler
         // 操作系统
         String opt = (context.Request[cons.wrp.WrpCons.OPT] ?? "").Trim();
 
-        System.IO.File.AppendText(context.Server.MapPath("~/mpwd/mpwd.txt")).WriteLine(String.Format("{0}\t{1}\t{2}", sid, uri, opt));
+        System.IO.StreamWriter writer = System.IO.File.AppendText(context.Server.MapPath("~/mpwd/mpwd.txt"));
+        writer.WriteLine(String.Format("{0}\t{1}\t{2}", sid, uri, opt));
+        writer.Flush();
+        writer.Close();
 
         String dir = context.Server.MapPath(cons.EnvCons.DIR_DAT);
         context.Response.WriteFile(dir + "mpwd/mpwd0001.png");
