@@ -12,12 +12,15 @@ public class mpwd0001 : IHttpHandler
     {
         context.Response.ContentType = "image/png";
 
-        // 用户
-        String uri = (context.Request[cons.wrp.WrpCons.URI] ?? "").Trim();
-        // 版本
+        // 用户编码
+        // 当前版本
         String sid = (context.Request[cons.wrp.WrpCons.SID] ?? "").Trim();
-		// IP
-		String opt = "";
+        // 网络地址
+        String uri = (context.Request[cons.wrp.WrpCons.URI] ?? "").Trim();
+        // 操作系统
+        String opt = (context.Request[cons.wrp.WrpCons.OPT] ?? "").Trim();
+
+        System.IO.File.AppendText(context.Server.MapPath("~/mpwd/mpwd.txt")).WriteLine(String.Format("{0}\t{1}\t{2}", sid, uri, opt));
 
         String dir = context.Server.MapPath(cons.EnvCons.DIR_DAT);
         context.Response.WriteFile(dir + "mpwd/mpwd0001.png");
