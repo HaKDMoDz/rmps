@@ -14,13 +14,12 @@
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <ApplicationIcon>Logo.ico</ApplicationIcon>
-    <ManifestCertificateThumbprint>ED19A557F80C31E40344B2BA1BF6F5B9AFEB47E9</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>D18C1DF9D21E5CC767E50397A05F4C9F78B2063E</ManifestCertificateThumbprint>
     <ManifestKeyFile>EXTS_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
-    <StartupObject>com.amonsoft.exts.Program</StartupObject>
     <PublishUrl>publish\</PublishUrl>
-    <Install>false</Install>
+    <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
@@ -30,10 +29,8 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>http://amonsoft.net/jnlp/exts/</InstallUrl>
-    <ProductName>后缀解析</ProductName>
-    <PublisherName>Winshine.biz</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
-    <WebPage>publish.html</WebPage>
+    <WebPage>publish.htm</WebPage>
     <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>4.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
