@@ -481,7 +481,7 @@ namespace com.amonsoft.exts
             this.LC_ExtsLink.Size = new System.Drawing.Size(119, 12);
             this.LC_ExtsLink.TabIndex = 8;
             this.LC_ExtsLink.TabStop = true;
-            this.LC_ExtsLink.Text = "http://amonsoft.cn/";
+            this.LC_ExtsLink.Text = "http://amonsoft.net/";
             this.TP_ToolTips.SetToolTip(this.LC_ExtsLink, "点击打开在线页面");
             this.LC_ExtsLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LC_ExtsLink_LinkClicked);
             // 
