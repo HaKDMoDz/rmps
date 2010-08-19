@@ -262,7 +262,7 @@ public class exts0001 : IHttpHandler
         data.Append("</ExtsName>");
 
         data.Append("<QuickUrl>");
-        data.Append(cons.EnvCons.SITE_SOFT + "/?.").Append(row0[cons.io.db.prp.PrpCons.P3010013].ToString());
+        data.Append(cons.EnvCons.SITE_SOFT + "?.").Append(row0[cons.io.db.prp.PrpCons.P3010013].ToString());
         data.Append("</QuickUrl>");
 
         Append(data, "ExtsHash", cons.io.db.prp.PrpCons.P3010003, row0, false);
