@@ -18,6 +18,8 @@
     <ManifestKeyFile>EXTS_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
+    <StartupObject>com.amonsoft.exts.Program</StartupObject>
+    <NoWin32Manifest>true</NoWin32Manifest>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
@@ -29,8 +31,11 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>http://amonsoft.net/jnlp/exts/</InstallUrl>
+    <SupportUrl>http://amonsoft.net/</SupportUrl>
+    <ProductName>后缀解析</ProductName>
+    <PublisherName>Amon软件</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
-    <WebPage>publish.htm</WebPage>
+    <WebPage>publish.html</WebPage>
     <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>4.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>

@@ -2,8 +2,7 @@
   <PropertyGroup>
     <PublishUrlHistory>publish\</PublishUrlHistory>
     <InstallUrlHistory>http://amonsoft.net/jnlp/exts/</InstallUrlHistory>
-    <SupportUrlHistory>
-    </SupportUrlHistory>
+    <SupportUrlHistory>http://amonsoft.net/</SupportUrlHistory>
     <UpdateUrlHistory>
     </UpdateUrlHistory>
     <BootstrapperUrlHistory>
