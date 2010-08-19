@@ -17,8 +17,10 @@ namespace com.amonsoft.exts
             TB_LocY.Text = settings.screenshot_y.ToString();
             TB_DimW.Text = settings.screenshot_w.ToString();
             TB_DimH.Text = settings.screenshot_h.ToString();
+            CK_Reloc.Checked = settings.screenshot_m;
             CK_Scale.Checked = settings.screenshot_s;
             CK_Ratio.Checked = settings.screenshot_r;
+            CK_Ratio.Enabled = settings.screenshot_s;
             TB_Time.Text = settings.screenshot_t.ToString();
         }
 
@@ -146,6 +148,7 @@ namespace com.amonsoft.exts
             settings.screenshot_y = iy;
             settings.screenshot_w = iw;
             settings.screenshot_h = ih;
+            settings.screenshot_m = CK_Reloc.Checked;
             settings.screenshot_s = CK_Scale.Checked;
             settings.screenshot_r = CK_Ratio.Checked;
             settings.screenshot_t = it;

@@ -9,10 +9,10 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="screenshot_x" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">-1</Value>
     </Setting>
     <Setting Name="screenshot_y" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">-1</Value>
     </Setting>
     <Setting Name="screenshot_w" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">800</Value>
@@ -21,7 +21,7 @@
       <Value Profile="(Default)">600</Value>
     </Setting>
     <Setting Name="screenshot_t" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">3</Value>
     </Setting>
     <Setting Name="screenshot_m" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

@@ -42,7 +42,7 @@
             this.CK_Scale = new System.Windows.Forms.CheckBox();
             this.CK_Ratio = new System.Windows.Forms.CheckBox();
             this.BT_Save = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.CK_Reloc = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // LB_LocX
@@ -156,22 +156,22 @@
             this.BT_Save.UseVisualStyleBackColor = true;
             this.BT_Save.Click += new System.EventHandler(this.BT_Save_Click);
             // 
-            // checkBox1
+            // CK_Reloc
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(12, 104);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(126, 16);
-            this.checkBox1.TabIndex = 10;
-            this.checkBox1.Text = "移动窗口位置（&L）";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.CK_Reloc.AutoSize = true;
+            this.CK_Reloc.Location = new System.Drawing.Point(12, 104);
+            this.CK_Reloc.Name = "CK_Reloc";
+            this.CK_Reloc.Size = new System.Drawing.Size(126, 16);
+            this.CK_Reloc.TabIndex = 10;
+            this.CK_Reloc.Text = "移动窗口位置（&L）";
+            this.CK_Reloc.UseVisualStyleBackColor = true;
             // 
             // FM_ExtShots
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 184);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.CK_Reloc);
             this.Controls.Add(this.BT_Save);
             this.Controls.Add(this.CK_Ratio);
             this.Controls.Add(this.CK_Scale);
@@ -211,6 +211,6 @@
         private System.Windows.Forms.CheckBox CK_Scale;
         private System.Windows.Forms.CheckBox CK_Ratio;
         private System.Windows.Forms.Button BT_Save;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox CK_Reloc;
     }
 }

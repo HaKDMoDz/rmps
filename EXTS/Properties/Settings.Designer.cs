@@ -49,7 +49,7 @@ namespace com.amonsoft.exts.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
         public int screenshot_x {
             get {
                 return ((int)(this["screenshot_x"]));
@@ -61,7 +61,7 @@ namespace com.amonsoft.exts.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
         public int screenshot_y {
             get {
                 return ((int)(this["screenshot_y"]));
@@ -97,7 +97,7 @@ namespace com.amonsoft.exts.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
         public int screenshot_t {
             get {
                 return ((int)(this["screenshot_t"]));
