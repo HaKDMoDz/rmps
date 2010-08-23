@@ -104,11 +104,11 @@ public partial class exts_exts0002 : System.Web.UI.Page
 
                 if (hd_ViewMode.Value == "list")
                 {
-                    ViewList(dba.executeSelect(), page, hd_IconSize.Value, "corp", cons.io.db.prp.PrpCons.P3010104, cons.io.db.prp.PrpCons.P3010105, cons.io.db.prp.PrpCons.P301010A);
+                    ViewList(dba.executeSelect(), page, hd_IconSize.Value, cons.io.db.prp.PrpCons.P3010102, "corp", cons.io.db.prp.PrpCons.P3010104, cons.io.db.prp.PrpCons.P3010105, cons.io.db.prp.PrpCons.P301010A, "/exts/exts0102.aspx", cons.io.db.prp.PrpCons.P301010C);
                 }
                 else
                 {
-                    ViewIcon(dba.executeSelect(), page, hd_IconSize.Value, "corp", cons.io.db.prp.PrpCons.P3010104, cons.io.db.prp.PrpCons.P3010105, cons.io.db.prp.PrpCons.P301010A);
+                    ViewIcon(dba.executeSelect(), page, hd_IconSize.Value, cons.io.db.prp.PrpCons.P3010102, "corp", cons.io.db.prp.PrpCons.P3010104, cons.io.db.prp.PrpCons.P3010105, cons.io.db.prp.PrpCons.P301010A, "/exts/exts0102.aspx", cons.io.db.prp.PrpCons.P301010C);
                 }
                 break;
             case "soft":
@@ -118,11 +118,11 @@ public partial class exts_exts0002 : System.Web.UI.Page
 
                 if (hd_ViewMode.Value == "list")
                 {
-                    ViewList(dba.executeSelect(), page, hd_IconSize.Value, "soft", cons.io.db.prp.PrpCons.P3010204, cons.io.db.prp.PrpCons.P3010205, cons.io.db.prp.PrpCons.P301020D);
+                    ViewList(dba.executeSelect(), page, hd_IconSize.Value, cons.io.db.prp.PrpCons.P3010202, "soft", cons.io.db.prp.PrpCons.P3010204, cons.io.db.prp.PrpCons.P3010205, cons.io.db.prp.PrpCons.P301020D, "/exts/exts0202.aspx", cons.io.db.prp.PrpCons.P301020F);
                 }
                 else
                 {
-                    ViewIcon(dba.executeSelect(), page, hd_IconSize.Value, "soft", cons.io.db.prp.PrpCons.P3010204, cons.io.db.prp.PrpCons.P3010205, cons.io.db.prp.PrpCons.P301020D);
+                    ViewIcon(dba.executeSelect(), page, hd_IconSize.Value, cons.io.db.prp.PrpCons.P3010202, "soft", cons.io.db.prp.PrpCons.P3010204, cons.io.db.prp.PrpCons.P3010205, cons.io.db.prp.PrpCons.P301020D, "/exts/exts0202.aspx", cons.io.db.prp.PrpCons.P301020F);
                 }
                 break;
             case "file":
@@ -132,11 +132,11 @@ public partial class exts_exts0002 : System.Web.UI.Page
 
                 if (hd_ViewMode.Value == "list")
                 {
-                    ViewList(dba.executeSelect(), page, hd_IconSize.Value, "file", cons.io.db.prp.PrpCons.P3010304, cons.io.db.prp.PrpCons.P3010305, cons.io.db.prp.PrpCons.P301030D);
+                    ViewList(dba.executeSelect(), page, hd_IconSize.Value, cons.io.db.prp.PrpCons.P3010302, "file", cons.io.db.prp.PrpCons.P3010304, cons.io.db.prp.PrpCons.P3010305, cons.io.db.prp.PrpCons.P301030D, "/exts/exts0302.aspx", cons.io.db.prp.PrpCons.P301030F);
                 }
                 else
                 {
-                    ViewIcon(dba.executeSelect(), page, hd_IconSize.Value, "file", cons.io.db.prp.PrpCons.P3010304, cons.io.db.prp.PrpCons.P3010305, cons.io.db.prp.PrpCons.P301030D);
+                    ViewIcon(dba.executeSelect(), page, hd_IconSize.Value, cons.io.db.prp.PrpCons.P3010302, "file", cons.io.db.prp.PrpCons.P3010304, cons.io.db.prp.PrpCons.P3010305, cons.io.db.prp.PrpCons.P301030D, "/exts/exts0302.aspx", cons.io.db.prp.PrpCons.P301030F);
                 }
                 break;
             case "idio":
@@ -146,11 +146,11 @@ public partial class exts_exts0002 : System.Web.UI.Page
 
                 if (hd_ViewMode.Value == "list")
                 {
-                    ViewList(dba.executeSelect(), page, hd_IconSize.Value, "idio", cons.io.db.comn.user.UserCons.C3010408, cons.io.db.comn.user.UserCons.C3010407, cons.io.db.comn.user.UserCons.C3010407);
+                    ViewList(dba.executeSelect(), page, hd_IconSize.Value, cons.io.db.comn.user.UserCons.C3010402, "idio", cons.io.db.comn.user.UserCons.C3010408, cons.io.db.comn.user.UserCons.C3010407, "/user/user0002.aspx", cons.io.db.comn.user.UserCons.C3010407, null);
                 }
                 else
                 {
-                    ViewIcon(dba.executeSelect(), page, hd_IconSize.Value, "idio", cons.io.db.comn.user.UserCons.C3010408, cons.io.db.comn.user.UserCons.C3010407, cons.io.db.comn.user.UserCons.C3010407);
+                    ViewIcon(dba.executeSelect(), page, hd_IconSize.Value, cons.io.db.comn.user.UserCons.C3010402, "idio", cons.io.db.comn.user.UserCons.C3010408, cons.io.db.comn.user.UserCons.C3010407, "/user/user0002.aspx", cons.io.db.comn.user.UserCons.C3010407, null);
                 }
                 break;
             default:
@@ -159,7 +159,19 @@ public partial class exts_exts0002 : System.Web.UI.Page
         hd_PageIndx.Value = page.ToString();
     }
 
-    private void ViewIcon(DataTable list, int page, String size, String uri, String sid, String tip, String upd)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="list"></param>
+    /// <param name="page"></param>
+    /// <param name="size"></param>
+    /// <param name="uri"></param>
+    /// <param name="sid"></param>
+    /// <param name="tip">提示信息</param>
+    /// <param name="upd">更新日期</param>
+    /// <param name="view">跳转页面</param>
+    /// <param name="opt">操作流水</param>
+    private void ViewIcon(DataTable list, int page, String size, String hash, String uri, String sid, String tip, String upd, String view, String opt)
     {
         // 读取行信息
         String r = hd_RowCount.Value;
@@ -224,7 +236,14 @@ public partial class exts_exts0002 : System.Web.UI.Page
                 buf1.Append("</td>");
 
                 buf2.Append("<td align=\"center\">");
+                buf2.Append("<a href=\"").Append(cons.EnvCons.PRE_URL).Append(view).Append("?sid=").Append(item[hash]);
+                if (opt != null)
+                {
+                    buf2.Append("&opt=").Append(item[opt]);
+                }
+                buf2.Append("\" target=\"_blank\">");
                 buf2.Append(item[tip]);
+                buf2.Append("</a>");
                 buf2.Append("</td>");
 
                 col += 1;
@@ -255,7 +274,7 @@ public partial class exts_exts0002 : System.Web.UI.Page
         tr_IconList.Visible = true;
     }
 
-    private void ViewList(DataTable list, int page, String size, String uri, String sid, String tip, String upd)
+    private void ViewList(DataTable list, int page, String size, String hash, String uri, String sid, String tip, String upd, String view, String opt)
     {
         // 读取行信息
         String r = hd_RowCount.Value;
@@ -305,7 +324,14 @@ public partial class exts_exts0002 : System.Web.UI.Page
             buf.Append(" src=\"").Append(cons.EnvCons.PRE_URL).Append("/icon/icon0001.ashx?uri=").Append(size).Append("&amp;sid=").Append(item[sid]).Append("\" />");
             buf.Append("</td>");
             buf.Append("<td align=\"left\">");
+            buf.Append("<a href=\"").Append(cons.EnvCons.PRE_URL).Append(view).Append("?sid=").Append(item[hash]);
+            if (opt != null)
+            {
+                buf.Append("&opt=").Append(item[opt]);
+            }
+            buf.Append("\" target=\"_blank\">");
             buf.Append(item[tip]);
+            buf.Append("</a>");
             buf.Append("</td>");
             buf.Append("<td align=\"right\">");
             buf.Append(item[upd]);

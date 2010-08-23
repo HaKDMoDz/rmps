@@ -112,7 +112,7 @@ function viewIcon(sid,cid)
         sid='comn,_NVL';
     }
     
-    $("#dv_ViewIcon").attr("viewHash",'/web/icon/icon0001.ashx?sid='+sid+'&uri=');
+    $("#dv_ViewIcon").attr("viewHash",'/icon/icon0001.ashx?sid='+sid+'&uri=');
     
     $("#sv_ViewIcon").slider("value",48)
     showIcon(48);

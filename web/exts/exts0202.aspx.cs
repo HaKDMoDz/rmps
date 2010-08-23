@@ -47,6 +47,8 @@ public partial class exts_exts0202 : Page
 
         //读取数据
         LoadData(sid, opt);
+
+        ai_P3010204.InitData();
     }
 
     /// <summary>
