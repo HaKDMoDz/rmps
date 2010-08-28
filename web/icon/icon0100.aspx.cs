@@ -21,18 +21,10 @@ public partial class icon_icon0100 : Page
             return;
         }
 
-        String sid = Request[WrpCons.SID];
-        if (sid == null)
+        String sid = (Request[WrpCons.SID] ?? "").Trim();
+        if (!StringUtil.isValidateHash(sid))
         {
             sid = HashUtil.getCurrTimeHex(false);
-        }
-        else
-        {
-            sid = sid.Trim();
-            if (sid == "" || sid == "0")
-            {
-                sid = HashUtil.getCurrTimeHex(false);
-            }
         }
         hd_IconHash.Value = sid;
         hd_IconPath.Value = Request["dir"];

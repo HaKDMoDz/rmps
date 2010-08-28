@@ -7,9 +7,6 @@
     <asp:ScriptManager ID="sm_Script" runat="server">
     </asp:ScriptManager>
     <asp:UpdatePanel ID="up_Update" runat="server">
-        <Triggers>
-            <asp:PostBackTrigger ControlID="bt_P301020A" />
-        </Triggers>
         <ContentTemplate>
             <table border="0" cellpadding="0" cellspacing="0" id="TB_DATA">
                 <tr>
@@ -116,14 +113,18 @@
                                                 </table>
                                             </td>
                                         </tr>
-                                        <tr id="tr_P301020A" runat="server" visible="false">
+                                        <tr>
                                             <th style="width: 80px; height: 30px;" class="TD_DataHead_TL_L">
                                                 运行截图
                                             </th>
                                             <td colspan="2" align="left" class="TD_DataItem_TL_L">
-                                                <asp:FileUpload ID="fu_P301020A" runat="server" /><asp:Button ID="bt_P301020A" runat="server" Text="上传(L)" AccessKey="L" OnClick="bt_P301020A_Click" />
-                                                <asp:HiddenField ID="hd_P301020A" runat="server" Value="0" />
-                                                <asp:HiddenField ID="hd_TempHash" runat="server" Value="0" />
+                                                <asp:HiddenField ID="hd_P301020A" runat="server" />
+                                                <asp:HiddenField ID="hd_TempHash" runat="server" />
+                                                <input type="button" value="编辑(E)" accesskey="E" onclick="editFile();" />
+                                                <input type="button" value="查看(V)" accesskey="V" onclick="viewFile();" />
+                                                <div id="dv_P301020A" title="Amon图像" style="display: none">
+                                                    <iframe id="if_P301020A" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>

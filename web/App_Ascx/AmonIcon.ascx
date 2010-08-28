@@ -46,14 +46,14 @@ $W().saveIcon=function(uri,sid,opt,cid)
 };
 function editIcon(cid)
 {
-    var d=$X(cid+'_hd_DstHash').value;
-    if(!d)
+    var sid=$X(cid+'_hd_DstHash').value;
+    if(!sid)
     {
-        d='0';
+        sid='0';
     }
 
     $("#dv_EditIcon").dialog({width:600,height:400,modal:true});
-	$X('if_EditIcon').src=_URI+'/icon/icon0100.aspx?uri=corp&sid='+d;
+	$X('if_EditIcon').src=_URI+'/icon/icon0100.aspx?sid='+sid;
 	$("#dv_EditIcon").attr('editHash',cid);
 
     return false;

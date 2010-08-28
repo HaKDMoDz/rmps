@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Text;
 using System.Web;
 using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 using cons;
-
 using rmp.bean;
 using rmp.comn.user;
 using rmp.util;
-using System.Collections;
-using System.Configuration;
+using rmp.io.db;
 
 namespace rmp.wrp
 {
@@ -24,6 +22,32 @@ namespace rmp.wrp
         private static String comnScript;
         private static System.Drawing.Image markImage;
         private static Dictionary<String, String> siteList;
+        private static Dictionary<String, int> updtList;
+
+        /// <summary>
+        /// 获取下一个操作流水
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static int NextStep(String key)
+        {
+            lock (updtList)
+            {
+                if (updtList == null)
+                {
+                    updtList = new Dictionary<string, int>();
+                }
+                if (!updtList.ContainsKey(key))
+                {
+                    DBAccess dba = new DBAccess();
+                    dba.addTable(key.Substring(0, 6) + "00");
+                    dba.addColumn(String.Format("IFNULL(MAX({0}),0) {0}", key));
+                    updtList[key] = (int)dba.executeSelect().Rows[0][0];
+                }
+                updtList[key] += 1;
+            }
+            return updtList[key];
+        }
 
         /// <summary>
         /// 获取用户使用风格

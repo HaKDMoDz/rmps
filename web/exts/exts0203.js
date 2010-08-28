@@ -18,6 +18,15 @@ function changeAsoc()
     $X('tr_Asoc02').style.display = b ? '' : 'none';
     $X('tr_Asoc03').style.display = b ? '' : 'none';
 }
+function editFile()
+{
+    $("#dv_P301020A").dialog({width:600,height:400,modal:true});
+	$X('if_P301020A').src=_URI+'/icon/icon0201.aspx?sid='+d;
+    return false;
+}
+function viewFile()
+{
+}
 function checkNull()
 {
     var c = $E('tf_P3010205');

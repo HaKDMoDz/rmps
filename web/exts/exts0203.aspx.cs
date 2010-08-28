@@ -134,7 +134,6 @@ public partial class exts_exts0203 : Page
         ck_C1110100.Checked = false;
         ck_C1110100.Enabled = true;
         tb_P3010209.Visible = true;
-        tr_P301020A.Visible = true;
     }
 
     /// <summary>
@@ -312,40 +311,6 @@ public partial class exts_exts0203 : Page
     }
 
     /// <summary>
-    /// 运行截图上传按钮事件处理
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void bt_P301020A_Click(object sender, EventArgs e)
-    {
-        aa_AmonAuth.InitData();
-
-        String name = fu_P301020A.FileName;
-        if (!StringUtil.isValidate(name) || !fu_P301020A.HasFile || fu_P301020A.FileContent.Length < 1)
-        {
-            return;
-        }
-
-        if (!StringUtil.isValidateHash(hd_TempHash.Value))
-        {
-            hd_TempHash.Value = HashUtil.getCurrTimeHex(true);
-        }
-
-        try
-        {
-            System.Drawing.Image image = System.Drawing.Image.FromStream(fu_P301020A.FileContent);
-            image.Save(Server.MapPath("~/temp/view/") + hd_TempHash.Value + ".png", System.Drawing.Imaging.ImageFormat.Png);
-            lb_ErrMsg.Text = "运行截图上传成功！";
-        }
-        catch (Exception exp)
-        {
-            lb_ErrMsg.Text = "运行截图上传出错：" + exp.Message;
-        }
-
-        fu_P301020A.FileContent.Close();
-    }
-
-    /// <summary>
     /// 数据保存按钮事件处理
     /// </summary>
     /// <param name="sender"></param>
@@ -470,7 +435,6 @@ public partial class exts_exts0203 : Page
                 dba.addLimit(1);
                 operate = (int)(dba.executeSelect().Rows[0][cons.io.db.prp.PrpCons.P301020F]);
 
-                tr_P301020A.Visible = true;
                 lb_ErrMsg.Text = "数据更新成功！";
             }
 
