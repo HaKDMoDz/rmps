@@ -1,5 +1,6 @@
 ﻿using System;
 using rmp.util;
+using rmp.comn.user;
 
 public partial class file_file0100 : System.Web.UI.Page
 {

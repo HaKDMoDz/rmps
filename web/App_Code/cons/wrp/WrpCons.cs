@@ -49,6 +49,10 @@ namespace cons.wrp
         /// </summary>
         public const string TITLE_EXTS = "后缀解析，为您提供更为详细的文件扩展名信息！";
         /// <summary>
+        /// 
+        /// </summary>
+        public const string TITLE_FILE = "Amon文件";
+        /// <summary>
         /// Amon帮助
         /// </summary>
         public const string TITLE_HELP = TITLE;
@@ -155,6 +159,10 @@ namespace cons.wrp
         /// 
         /// </summary>
         public const string KEYWORDS_EXTS = KEYWORDS;
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string KEYWORDS_FILE = KEYWORDS;
         /// <summary>
         /// 
         /// </summary>
@@ -265,6 +273,10 @@ namespace cons.wrp
         /// <summary>
         /// 
         /// </summary>
+        public const string DESCRIPTION_FILE = DESCRIPTION;
+        /// <summary>
+        /// 
+        /// </summary>
         public const string DESCRIPTION_HELP = DESCRIPTION;
         /// <summary>
         /// 
@@ -365,6 +377,10 @@ namespace cons.wrp
         /// 后缀解析
         /// </summary>
         public const String MODULE_EXTS = "exts";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const String MODULE_FILE = "file";
         /// <summary>
         /// 在线帮助
         /// </summary>

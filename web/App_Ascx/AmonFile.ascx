@@ -3,14 +3,12 @@
 <asp:HiddenField ID="hd_SrcPath" runat="server" Value="" />
 <%-- 用户修改图标时，临时图标Hash键值 --%>
 <asp:HiddenField ID="hd_SrcHash" runat="server" Value="" />
-<%-- 用户操作记录：-1删除，0无操作，1新增，2覆盖，3追加 --%>
-<asp:HiddenField ID="hd_UserOpt" runat="server" Value="0" />
 <%-- 图标文件目标存储路径，如corp,soft等 --%>
 <asp:HiddenField ID="hd_DstPath" runat="server" Value="0" />
 <%-- 图标文件最终Hash键值 --%>
 <asp:HiddenField ID="hd_DstHash" runat="server" Value="0" />
-<asp:Label ID="lb_FileName" runat="server"></asp:Label>
-<input type="button" value="编辑(E)" accesskey="E" onclick="editFile();" />
+<asp:HyperLink ID="hl_FileName" runat="server" ToolTip="点击查看" Target="_blank"></asp:HyperLink>
+<input type="button" value="编辑(E)" accesskey="E" onclick="editFile('<%=ClientID%>');" />
 <%
     // 编辑功能
     if (CreateEditDiv)
@@ -21,7 +19,7 @@
 </div>
 
 <script type="text/javascript">
-    function editFile()
+    function editFile(cid)
     {
         var d=$X(cid+'_hd_DstHash').value;
         if(!d)
@@ -29,33 +27,23 @@
             d='0';
         }
 
-        $("#dv_EditFile").dialog({width:600,height:400,modal:true});
+        $("#dv_EditFile").dialog({width:600,height:460,modal:true});
 	    $X('if_EditFile').src=_URI+'/file/file0100.aspx?sid='+d;
 	    $("#dv_EditFile").attr('editHash',cid);
 
         return false;
     }
-    function saveFile()
+    function saveFile(uri,sid,ext,cid)
     {
-    }
-</script>
-
-<%
-    }
-%>
-<input type="button" value="查看(E)" accesskey="V" onclick="viewFile();" />
-<%
-    // 编辑功能
-    if (CreateViewDiv)
-    {
-%>
-<div id="dv_ViewFile" title="Amon文件" style="display: none;">
-    <iframe id="if_ViewFile" frameborder="0" style="width: 100%; height: 100%;"></iframe>
-</div>
-
-<script type="text/javascript">
-    function viewFile()
-    {
+        if(!cid)
+        {
+            cid=$("#dv_EditFile").attr('editHash');
+        }
+        $X(cid+'_hl_FileName').href=_URI+uri+sid+ext;
+        $X(cid+'_hl_FileName').innerHTML=sid+ext;
+        $X(cid+'_hd_DstPath').value=uri;
+        $X(cid+'_hd_DstHash').value=sid;
+        $("#dv_EditFile").dialog('close');
     }
 </script>
 

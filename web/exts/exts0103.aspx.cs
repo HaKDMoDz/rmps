@@ -122,14 +122,14 @@ public partial class exts_exts0103 : Page
         String P3010103 = cb_P3010103.SelectedValue;
         if (!StringUtil.isValidateHash(P3010103))
         {
-            Wrps.ShowMesg(this.Master, "请选择国别信息！");
+            lb_ErrMsg.Text = "请选择国别信息！";
             cb_P3010103.Focus();
             return;
         }
         String P3010105 = WrpUtil.text2Db(tf_P3010105.Text);
         if (!StringUtil.isValidate(P3010105))
         {
-            Wrps.ShowMesg(this.Master, "“中文名称”不能为空！");
+            lb_ErrMsg.Text = "“中文名称”不能为空！";
             tf_P3010105.Focus();
             return;
         }

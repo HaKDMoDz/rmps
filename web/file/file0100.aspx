@@ -28,7 +28,7 @@
                     <asp:ListItem Value="1">图像文件上传</asp:ListItem>
                     <asp:ListItem Value="2">普通文件上传</asp:ListItem>
                 </asp:DropDownList>
-                <asp:Button ID="bt_NextStep" runat="server" Text="下一步(N)" AccessKey="N" OnClick="bt_NextStep_Click" OnClientClick="return checkNull();" />
+                <asp:Button ID="bt_NextStep" runat="server" Text="下一步(N)" AccessKey="N" OnClick="bt_NextStep_Click" />
                 <asp:HiddenField ID="hd_FileHash" runat="server" />
             </td>
         </tr>

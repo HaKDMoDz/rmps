@@ -1,4 +1,9 @@
 ﻿using System;
+using rmp.comn.user;
+using rmp.util;
+using cons;
+using System.IO;
+using System.Text;
 
 /// <summary>
 /// 图像文件处理
@@ -18,11 +23,26 @@ public partial class file_file0101 : System.Web.UI.Page
             return;
         }
 
+        // 记录已有图像名称
+        String[] files = Directory.GetFiles(Server.MapPath(String.Format("{0}view/", EnvCons.DIR_TMP)), "*.png");
+        StringBuilder buf = new StringBuilder();
+        foreach (String file in files)
+        {
+            buf.Append(new FileInfo(file).Name.Replace(".png", "")).Append(',');
+        }
+        hd_FileList.Value = buf.ToString(0, buf.Length - 1);
+        hd_FileIndx.Value = "0";
+
         String sid = (Request[cons.wrp.WrpCons.SID] ?? "").Trim();
         if (StringUtil.isValidateHash(sid))
         {
             hd_FileHash.Value = sid;
-            im_TmpImg.ImageUrl = String.Format("{0}view/{1}.png", EnvCons.DIR_TMP, sid);
+            im_ViewFile.ImageUrl = String.Format("{0}view/{1}.png", EnvCons.DIR_TMP, sid);
+        }
+        else if (files.Length > 0)
+        {
+            hd_FileHash.Value = "0";
+            im_ViewFile.ImageUrl = String.Format("{0}view/0.png", EnvCons.DIR_TMP);
         }
     }
 
@@ -31,7 +51,7 @@ public partial class file_file0101 : System.Web.UI.Page
         String name = fu_FilePath.FileName;
         if (!StringUtil.isValidate(name) || !fu_FilePath.HasFile || fu_FilePath.FileContent.Length < 1)
         {
-            lb_ErrMsg.Text = "请选择您要上传的文件。";
+            lb_ErrMsg.Text = "请选择您要上传的图像。";
             return;
         }
 
@@ -45,14 +65,14 @@ public partial class file_file0101 : System.Web.UI.Page
         {
             System.Drawing.Image image = System.Drawing.Image.FromStream(fu_FilePath.FileContent);
             image.Save(Server.MapPath(imgUrl), System.Drawing.Imaging.ImageFormat.Png);
-            lb_ErrMsg.Text = "运行截图上传成功！";
+            lb_ErrMsg.Text = "图像上传成功！";
         }
         catch (Exception exp)
         {
-            lb_ErrMsg.Text = "运行截图上传出错：" + exp.Message;
+            lb_ErrMsg.Text = "图像上传出错：" + exp.Message;
         }
 
         fu_FilePath.FileContent.Close();
-        im_TmpImg.ImageUrl = imgUrl;
+        im_ViewFile.ImageUrl = imgUrl;
     }
 }

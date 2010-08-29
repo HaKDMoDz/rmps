@@ -125,10 +125,9 @@ public partial class exts_exts0203 : Page
             String exts = t.StartsWith(".") ? t : '.' + t;
             ls_P3010209.Items.Add(new ListItem(exts, exts));
         } //兼容后缀
-        hd_P301020A.Value = "" + row[cons.io.db.prp.PrpCons.P301020A]; // 运行截图
+        af_P301020A.DstIconHash = "" + row[cons.io.db.prp.PrpCons.P301020A]; // 运行截图
         ta_P301020B.Text = "" + row[cons.io.db.prp.PrpCons.P301020B]; //软件描述
         ta_P301020C.Text = "" + row[cons.io.db.prp.PrpCons.P301020C]; //附注信息
-        hd_P301020E.Value = "" + row[cons.io.db.prp.PrpCons.P301020E]; //创建日期
 
         //当前操作为更新操作
         ck_C1110100.Checked = false;
@@ -348,10 +347,7 @@ public partial class exts_exts0203 : Page
         // 公司信息
         String P3010203 = ck_C1110100.Checked ? cb_P3010203.SelectedValue : hd_P3010203.Value;
         // 软件图标
-        if (StringUtil.isValidateHash(hd_TempHash.Value) && !StringUtil.isValidatePath(hd_P301020A.Value))
-        {
-            hd_P301020A.Value = Exts.NextDocs("view", HashUtil.getCurrTimeHex(true));
-        }
+        af_P301020A.SaveFile();
         #endregion
 
         DBAccess dba = new DBAccess();
@@ -363,7 +359,7 @@ public partial class exts_exts0203 : Page
         dba.addParam(cons.io.db.prp.PrpCons.P3010207, WrpUtil.text2Db(tf_P3010207.Text));
         dba.addParam(cons.io.db.prp.PrpCons.P3010208, WrpUtil.text2Db(tf_P3010208.Text));
         dba.addParam(cons.io.db.prp.PrpCons.P3010209, WrpUtil.text2Db(sb.ToString()));
-        dba.addParam(cons.io.db.prp.PrpCons.P301020A, hd_P301020A.Value);
+        dba.addParam(cons.io.db.prp.PrpCons.P301020A, af_P301020A.DstIconHash);
         dba.addParam(cons.io.db.prp.PrpCons.P301020B, WrpUtil.text2Db(ta_P301020B.Text));
         dba.addParam(cons.io.db.prp.PrpCons.P301020C, WrpUtil.text2Db(ta_P301020C.Text));
         dba.addParam(cons.io.db.prp.PrpCons.P301020D, EnvCons.SQL_NOW, false);
@@ -374,77 +370,34 @@ public partial class exts_exts0203 : Page
             bool isUpdate = StringUtil.isValidate(hd_P3010202.Value);
             bool isManage = userInfo.UserRank > cons.comn.user.UserInfo.LEVEL_05;
 
-            String P3010202;
-            if (isUpdate)
-            {
-                P3010202 = WrpUtil.text2Db(hd_P3010202.Value);
-            }
-            else
-            {
-                P3010202 = HashUtil.getCurrTimeHex(false);
-                hd_P3010202.Value = P3010202;
-            }
-
             // 管理人员操作
-            if (isManage)
+            if (isManage && isUpdate)
             {
-                // 更新数据
-                if (isUpdate)
-                {
-                    dba.addWhere(cons.io.db.prp.PrpCons.P3010202, P3010202);// 软件索引
-                    dba.addWhere(cons.io.db.prp.PrpCons.P301020F, "0", false);// 操作流水
+                operate = 0;
+                dba.addWhere(cons.io.db.prp.PrpCons.P3010202, WrpUtil.text2Db(hd_P3010202.Value));// 软件索引
+                dba.addWhere(cons.io.db.prp.PrpCons.P301020F, "0", false);// 操作流水
 
-                    dba.executeUpdate();
+                dba.executeUpdate();
 
-                    lb_ErrMsg.Text = "数据合并成功！";
-                }
-                else
-                {
-                    dba.addParam(cons.io.db.prp.PrpCons.P3010201, 0);
-                    dba.addParam(cons.io.db.prp.PrpCons.P3010202, P3010202);
-                    dba.addParam(cons.io.db.prp.PrpCons.P301020E, EnvCons.SQL_NOW, false);
-                    dba.addParam(cons.io.db.prp.PrpCons.P301020F, 0);
-                    dba.addParam(cons.io.db.prp.PrpCons.P3010210, cons.wrp.WrpCons.OPT_NORMAL);
-                    dba.addParam(cons.io.db.prp.PrpCons.P3010211, userInfo.UserCode);
-
-                    dba.executeInsert();
-
-                    lb_ErrMsg.Text = "数据新增成功！";
-                }
+                lb_ErrMsg.Text = "数据合并成功！";
             }
-            // 网络用户操作
             else
             {
-                dba.addParam(cons.io.db.prp.PrpCons.P3010201, String.Format("IFNULL(MAX({0}), -1) + 1", cons.io.db.prp.PrpCons.P3010201), false);
-                dba.addParam(cons.io.db.prp.PrpCons.P3010202, P3010202);
-                dba.addParam(cons.io.db.prp.PrpCons.P301020E, isUpdate ? "'" + hd_P301020E.Value + "'" : cons.EnvCons.SQL_NOW, false);
-                dba.addParam(cons.io.db.prp.PrpCons.P301020F, String.Format("IFNULL(MAX({0}), -1) + 1", cons.io.db.prp.PrpCons.P301020F), false);
+                operate = rmp.wrp.Wrps.NextStep(cons.io.db.prp.PrpCons.P301020F);
+
+                dba.addParam(cons.io.db.prp.PrpCons.P3010201, 0);
+                dba.addParam(cons.io.db.prp.PrpCons.P3010202, HashUtil.getCurrTimeHex(false));
+                dba.addParam(cons.io.db.prp.PrpCons.P301020E, EnvCons.SQL_NOW, false);
+                dba.addParam(cons.io.db.prp.PrpCons.P301020F, operate);
                 dba.addParam(cons.io.db.prp.PrpCons.P3010210, isUpdate ? cons.wrp.WrpCons.OPT_UPDATE : cons.wrp.WrpCons.OPT_INSERT);
                 dba.addParam(cons.io.db.prp.PrpCons.P3010211, userInfo.UserCode);
 
-                dba.addWhere(cons.io.db.prp.PrpCons.P3010202, P3010202);// 软件索引
-                dba.executeBackup(cons.io.db.prp.PrpCons.P3010200, cons.io.db.prp.PrpCons.P3010200);
+                dba.executeInsert();
 
-                // 读取操作流水号
-                dba.reset();
-                dba.addTable(cons.io.db.prp.PrpCons.P3010200);
-                dba.addColumn(cons.io.db.prp.PrpCons.P301020F);
-                dba.addWhere(cons.io.db.prp.PrpCons.P3010202, P3010202);
-                dba.addWhere(cons.io.db.prp.PrpCons.P3010211, userInfo.UserCode);
-                dba.addSort(cons.io.db.prp.PrpCons.P301020F, false);
-                dba.addLimit(1);
-                operate = (int)(dba.executeSelect().Rows[0][cons.io.db.prp.PrpCons.P301020F]);
-
-                lb_ErrMsg.Text = "数据更新成功！";
+                lb_ErrMsg.Text = isUpdate ? "数据更新成功！" : "数据新增成功！";
             }
 
             ai_P3010204.SaveIcon(isManage, operate);
-
-            // 用户有更新
-            if (StringUtil.isValidateHash(hd_TempHash.Value))
-            {
-                Exts.SaveDocs(EnvCons.DIR_TMP + "view/", hd_TempHash.Value, ".png", hd_P301020A.Value, isManage, operate);
-            }
         }
         catch (Exception exp)
         {

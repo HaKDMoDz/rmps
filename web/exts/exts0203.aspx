@@ -2,6 +2,7 @@
 
 <%@ Register Src="~/App_Ascx/AmonAuth.ascx" TagName="AmonAuth" TagPrefix="as" %>
 <%@ Register Src="~/App_Ascx/AmonIcon.ascx" TagName="AmonIcon" TagPrefix="as" %>
+<%@ Register Src="~/App_Ascx/AmonFile.ascx" TagName="AmonFile" TagPrefix="as" %>
 <%@ Register Src="ascx/PlatForm.ascx" TagName="PlatForm" TagPrefix="as" %>
 <asp:Content ID="AmonData" ContentPlaceHolderID="AmonView" runat="Server">
     <asp:ScriptManager ID="sm_Script" runat="server">
@@ -118,13 +119,7 @@
                                                 运行截图
                                             </th>
                                             <td colspan="2" align="left" class="TD_DataItem_TL_L">
-                                                <asp:HiddenField ID="hd_P301020A" runat="server" />
-                                                <asp:HiddenField ID="hd_TempHash" runat="server" />
-                                                <input type="button" value="编辑(E)" accesskey="E" onclick="editFile();" />
-                                                <input type="button" value="查看(V)" accesskey="V" onclick="viewFile();" />
-                                                <div id="dv_P301020A" title="Amon图像" style="display: none">
-                                                    <iframe id="if_P301020A" frameborder="0" style="width: 100%; height: 100%;"></iframe>
-                                                </div>
+                                                <as:AmonFile ID="af_P301020A" runat="server" DstIconPath="view" CreateEditDiv="true" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -167,7 +162,7 @@
                         <asp:Button ID="bt_Update" runat="server" OnClick="bt_Update_Click" Text="保存(S)" AccessKey="S" OnClientClick="return checkNull();" />
                         <input type="button" value="返回(R)" accesskey="R" />
                         <asp:HiddenField ID="hd_NextStep" runat="server" />
-                        <asp:HiddenField ID="hd_P301020E" runat="server" />
+                        <asp:HiddenField ID="hd_Operate" runat="server" />
                         &nbsp;&nbsp;
                     </td>
                 </tr>

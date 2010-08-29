@@ -5,27 +5,18 @@ function initView()
 
     $E('cb_C1110100').disabled = b;
     $E('cb_P3010203').disabled = b;
-    
-    b = $E('hd_IsUpdate').value == '1';
-    $X('tr_Asoc00').style.display = b ? '' : 'none';
-    $X('tr_Asoc01').style.display = b ? '' : 'none';
 
     changeAsoc();
 }
 function changeAsoc()
 {
-    var b = $E('ck_P3010209').checked;
-    $X('tr_Asoc02').style.display = b ? '' : 'none';
-    $X('tr_Asoc03').style.display = b ? '' : 'none';
-}
-function editFile()
-{
-    $("#dv_P301020A").dialog({width:600,height:400,modal:true});
-	$X('if_P301020A').src=_URI+'/icon/icon0201.aspx?sid='+d;
-    return false;
-}
-function viewFile()
-{
+    var o=$E('ck_P3010209');
+    if(o)
+    {
+        var b=o.checked;
+        $X('tr_Asoc02').style.display = b ? '' : 'none';
+        $X('tr_Asoc03').style.display = b ? '' : 'none';
+    }
 }
 function checkNull()
 {
