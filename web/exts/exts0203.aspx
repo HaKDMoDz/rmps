@@ -119,7 +119,7 @@
                                                 运行截图
                                             </th>
                                             <td colspan="2" align="left" class="TD_DataItem_TL_L">
-                                                <as:AmonFile ID="af_P301020A" runat="server" DstIconPath="view" CreateEditDiv="true" />
+                                                <as:AmonFile ID="af_P301020A" runat="server" SrcFilePath="view" DstFilePath="view" CreateEditDiv="true" />
                                             </td>
                                         </tr>
                                         <tr>

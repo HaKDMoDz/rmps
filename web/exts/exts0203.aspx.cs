@@ -125,7 +125,7 @@ public partial class exts_exts0203 : Page
             String exts = t.StartsWith(".") ? t : '.' + t;
             ls_P3010209.Items.Add(new ListItem(exts, exts));
         } //兼容后缀
-        af_P301020A.DstIconHash = "" + row[cons.io.db.prp.PrpCons.P301020A]; // 运行截图
+        af_P301020A.DstFileHash = "" + row[cons.io.db.prp.PrpCons.P301020A]; // 运行截图
         ta_P301020B.Text = "" + row[cons.io.db.prp.PrpCons.P301020B]; //软件描述
         ta_P301020C.Text = "" + row[cons.io.db.prp.PrpCons.P301020C]; //附注信息
 
@@ -346,8 +346,6 @@ public partial class exts_exts0203 : Page
         }
         // 公司信息
         String P3010203 = ck_C1110100.Checked ? cb_P3010203.SelectedValue : hd_P3010203.Value;
-        // 软件图标
-        af_P301020A.SaveFile();
         #endregion
 
         DBAccess dba = new DBAccess();
@@ -359,14 +357,14 @@ public partial class exts_exts0203 : Page
         dba.addParam(cons.io.db.prp.PrpCons.P3010207, WrpUtil.text2Db(tf_P3010207.Text));
         dba.addParam(cons.io.db.prp.PrpCons.P3010208, WrpUtil.text2Db(tf_P3010208.Text));
         dba.addParam(cons.io.db.prp.PrpCons.P3010209, WrpUtil.text2Db(sb.ToString()));
-        dba.addParam(cons.io.db.prp.PrpCons.P301020A, af_P301020A.DstIconHash);
+        dba.addParam(cons.io.db.prp.PrpCons.P301020A, af_P301020A.NextFile());
         dba.addParam(cons.io.db.prp.PrpCons.P301020B, WrpUtil.text2Db(ta_P301020B.Text));
         dba.addParam(cons.io.db.prp.PrpCons.P301020C, WrpUtil.text2Db(ta_P301020C.Text));
         dba.addParam(cons.io.db.prp.PrpCons.P301020D, EnvCons.SQL_NOW, false);
 
         try
         {
-            int operate = 0;
+            long operate = 0;
             bool isUpdate = StringUtil.isValidate(hd_P3010202.Value);
             bool isManage = userInfo.UserRank > cons.comn.user.UserInfo.LEVEL_05;
 
@@ -398,10 +396,29 @@ public partial class exts_exts0203 : Page
             }
 
             ai_P3010204.SaveIcon(isManage, operate);
+            // 软件图标
+            af_P301020A.SaveFile(isManage, operate);
         }
         catch (Exception exp)
         {
             lb_ErrMsg.Text = "软件信息保存出错：" + exp.Message;
         }
+    }
+
+    private void LoadDefault()
+    {
+        hd_NextStep.Value = "";
+        hd_Operate.Value = "";
+        hd_P3010202.Value = "";
+        hd_P3010203.Value = "";
+        tf_P3010205.Text = "";
+        tf_P3010206.Text = "";
+        tf_P3010207.Text = "";
+        tf_P3010208.Text = "";
+        tf_P3010209.Text = "";
+        ta_P301020B.Text = "";
+        ta_P301020C.Text = "";
+        ai_P3010204.DstIconHash = "";
+        af_P301020A.DstFileHash = "";
     }
 }

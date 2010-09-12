@@ -22,10 +22,11 @@ public partial class file_file0100 : System.Web.UI.Page
         {
             hd_FileHash.Value = sid;
         }
+        hd_FilePath.Value = (Request[cons.wrp.WrpCons.OPT] ?? "").Trim();
     }
 
     protected void bt_NextStep_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/file/file010" + cb_TypeList.SelectedValue + ".aspx?sid=" + hd_FileHash.Value);
+        Response.Redirect("~/file/file010" + cb_TypeList.SelectedValue + ".aspx?sid=" + hd_FileHash.Value + "&opt=" + hd_FilePath.Value);
     }
 }

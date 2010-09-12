@@ -90,16 +90,11 @@ public partial class App_Ascx_AmonIcon : System.Web.UI.UserControl
     /// </summary>
     /// <param name="isManage"></param>
     /// <param name="operate"></param>
-    public void SaveIcon(bool isManage, int operate)
+    public bool SaveIcon(bool isManage, long operate)
     {
-        try
-        {
-            rmp.wrp.exts.Exts.SaveIcon(hd_UserOpt.Value, hd_SrcPath.Value, hd_SrcHash.Value, hd_DstHash.Value, isManage, operate);
-        }
-        catch (Exception)
-        {
-        }
+        rmp.wrp.exts.Exts.SaveIcon(hd_UserOpt.Value, hd_SrcPath.Value, hd_SrcHash.Value, hd_DstHash.Value, isManage, operate);
         hd_UserOpt.Value = "0";
+        return true;
     }
 
     /// <summary>
@@ -128,7 +123,12 @@ public partial class App_Ascx_AmonIcon : System.Web.UI.UserControl
         }
         set
         {
-            hd_DstPath.Value = value;
+            String path = value;
+            if (!path.EndsWith("/"))
+            {
+                path += '/';
+            }
+            hd_DstPath.Value = path;
         }
     }
 
@@ -155,6 +155,15 @@ public partial class App_Ascx_AmonIcon : System.Web.UI.UserControl
         get
         {
             return hd_SrcPath.Value;
+        }
+        set
+        {
+            String path = value;
+            if (!path.EndsWith("/"))
+            {
+                path += '/';
+            }
+            hd_SrcPath.Value = path;
         }
     }
 

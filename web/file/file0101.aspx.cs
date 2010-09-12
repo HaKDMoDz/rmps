@@ -23,27 +23,34 @@ public partial class file_file0101 : System.Web.UI.Page
             return;
         }
 
+        String dir = cons.EnvCons.DIR_TMP + (Request[cons.wrp.WrpCons.OPT] ?? "").Trim();
+        if (!dir.EndsWith("/"))
+        {
+            dir += '/';
+        }
+        String tmp = Server.MapPath(dir);
+
         // 记录已有图像名称
-        String[] files = Directory.GetFiles(Server.MapPath(String.Format("{0}view/", EnvCons.DIR_TMP)), "*.png");
+        String[] files = Directory.GetFiles(tmp, "*.png");
         StringBuilder buf = new StringBuilder();
         foreach (String file in files)
         {
             buf.Append(new FileInfo(file).Name.Replace(".png", "")).Append(',');
         }
-        hd_FileList.Value = buf.ToString(0, buf.Length - 1);
+        hd_FileList.Value = buf.Length > 0 ? buf.ToString(0, buf.Length - 1) : "";
         hd_FileIndx.Value = "0";
 
+        // 显示默认图片
         String sid = (Request[cons.wrp.WrpCons.SID] ?? "").Trim();
-        if (StringUtil.isValidateHash(sid))
+        if (!StringUtil.isValidateHash(sid))
         {
-            hd_FileHash.Value = sid;
-            im_ViewFile.ImageUrl = String.Format("{0}view/{1}.png", EnvCons.DIR_TMP, sid);
+            sid = "0";
         }
-        else if (files.Length > 0)
-        {
-            hd_FileHash.Value = "0";
-            im_ViewFile.ImageUrl = String.Format("{0}view/0.png", EnvCons.DIR_TMP);
-        }
+        hd_FileHash.Value = sid;
+        im_ViewFile.ImageUrl = String.Format("{0}{1}.png", dir, sid);
+
+        // 记录图片路径
+        hd_FilePath.Value = dir.Substring(1);
     }
 
     protected void bt_FilePath_Click(object sender, EventArgs e)

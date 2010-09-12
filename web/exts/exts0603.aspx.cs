@@ -178,7 +178,7 @@ public partial class exts_exts0603 : Page
 
         if (StringUtil.isValidateHash(hd_TempHash.Value) && !StringUtil.isValidatePath(hd_P301F208.Value))
         {
-            hd_P301F208.Value = Exts.NextDocs("plat", HashUtil.getCurrTimeHex(true));
+            hd_P301F208.Value = Exts.NextFile("plat", HashUtil.getCurrTimeHex(true));
         }
 
         DBAccess dba = new DBAccess();
@@ -253,7 +253,7 @@ public partial class exts_exts0603 : Page
             // 用户有更新
             if (StringUtil.isValidateHash(hd_TempHash.Value))
             {
-                Exts.SaveDocs(EnvCons.DIR_TMP + "plat/", hd_TempHash.Value, ".png", hd_P301F208.Value, isManage, operate);
+                Exts.SaveFile(EnvCons.DIR_TMP + "plat/", hd_TempHash.Value, ".png", hd_P301F208.Value, isManage, operate);
             }
         }
         catch (Exception exp)

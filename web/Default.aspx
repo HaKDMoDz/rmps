@@ -12,7 +12,8 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <uc1:AmonFile ID="AmonFile1" runat="server" CreateEditDiv="true" />
+        <uc1:AmonFile ID="AmonFile1" runat="server" CreateEditDiv="true" SrcFilePath="view" DstFilePath="_dat/view"/>
+        <asp:HyperLink ID="si" runat="server" NavigateUrl="~/user/user0101.aspx">登录</asp:HyperLink>
     </div>
     </form>
 </body>

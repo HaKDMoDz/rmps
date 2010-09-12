@@ -17,7 +17,6 @@
 <div id="dv_EditFile" title="Amon文件" style="display: none;">
     <iframe id="if_EditFile" frameborder="0" style="width: 100%; height: 100%;"></iframe>
 </div>
-
 <script type="text/javascript">
     function editFile(cid)
     {
@@ -28,21 +27,21 @@
         }
 
         $("#dv_EditFile").dialog({width:600,height:460,modal:true});
-	    $X('if_EditFile').src=_URI+'/file/file0100.aspx?sid='+d;
+	    $X('if_EditFile').src=_URI+'/file/file0100.aspx?sid='+d+'&opt='+escape('<%= SrcFilePath %>');
 	    $("#dv_EditFile").attr('editHash',cid);
 
         return false;
     }
-    function saveFile(uri,sid,ext,cid)
+    function saveFile(sid,ext,cid)
     {
         if(!cid)
         {
             cid=$("#dv_EditFile").attr('editHash');
         }
-        $X(cid+'_hl_FileName').href=_URI+uri+sid+ext;
+        $X(cid+'_hl_FileName').href=_URI+'<%=cons.EnvCons.DIR_TMP.Substring(1)+SrcFilePath%>'+sid+ext;
         $X(cid+'_hl_FileName').innerHTML=sid+ext;
-        $X(cid+'_hd_DstPath').value=uri;
-        $X(cid+'_hd_DstHash').value=sid;
+        //$X(cid+'_hd_SrcPath').value=uri;
+        $X(cid+'_hd_SrcHash').value=sid;
         $("#dv_EditFile").dialog('close');
     }
 </script>

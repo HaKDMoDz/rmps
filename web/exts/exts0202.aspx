@@ -10,7 +10,7 @@
         </tr>
         <tr>
             <td align="center">
-                <table width="460" border="0" cellpadding="3" cellspacing="0" class="TB_EXTSINFO">
+                <table width="460" border="0" cellpadding="3" cellspacing="0" class="TB_DataList_TL">
                     <tr>
                         <td width="80" rowspan="2" align="center" class="TD_DataHead_TL_L">
                             <as:AmonIcon ID="ai_P3010204" runat="server" DstIconPath="soft" ToolTip="软件图标" Enabled="true" Viewable="true" CreateViewDiv="true" />
@@ -19,7 +19,7 @@
                             中文名称
                         </th>
                         <td align="left" class="TD_DataItem_TL_L">
-                            <asp:Label ID="lb_P3010205" runat="server"></asp:Label>&nbsp;
+                            <asp:HyperLink ID="hl_P3010205" runat="server"></asp:HyperLink>&nbsp;
                         </td>
                     </tr>
                     <tr>

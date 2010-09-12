@@ -14,8 +14,8 @@ function changeAsoc()
     if(o)
     {
         var b=o.checked;
-        $X('tr_Asoc02').style.display = b ? '' : 'none';
-        $X('tr_Asoc03').style.display = b ? '' : 'none';
+        $E('tr_Asoc02').style.display = b ? '' : 'none';
+        $E('tr_Asoc03').style.display = b ? '' : 'none';
     }
 }
 function checkNull()

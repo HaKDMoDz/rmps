@@ -76,7 +76,12 @@ public partial class exts_exts0202 : Page
         DataRow row = dt.Rows[0];
         hl_P3010203.NavigateUrl = "~/exts/exts0102.aspx?sid=" + row[PrpCons.P3010203];
         ai_P3010204.DstIconHash = "" + row[PrpCons.P3010204];
-        lb_P3010205.Text = "" + row[PrpCons.P3010205];
+        hl_P3010205.Text = "" + row[PrpCons.P3010205];
+        if (rmp.comn.user.UserInfo.Current(Session).UserRank >= cons.comn.user.UserInfo.LEVEL_02)
+        {
+            hl_P3010205.NavigateUrl = String.Format("exts0203.aspx?sid={0}&opt={1}", sid, opt);
+            hl_P3010205.ToolTip = "点击修改";
+        }
         lb_P3010206.Text = "" + row[PrpCons.P3010206];
         hl_P3010207.NavigateUrl = "mailto:" + row[PrpCons.P3010207];
         hl_P3010207.ToolTip = "" + row[PrpCons.P3010207];

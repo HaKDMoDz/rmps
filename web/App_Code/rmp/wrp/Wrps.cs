@@ -22,27 +22,23 @@ namespace rmp.wrp
         private static String comnScript;
         private static System.Drawing.Image markImage;
         private static Dictionary<String, String> siteList;
-        private static Dictionary<String, int> updtList;
+        private static Dictionary<String, long> updtList = new Dictionary<String, long>();
 
         /// <summary>
         /// 获取下一个操作流水
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static int NextStep(String key)
+        public static long NextStep(String key)
         {
             lock (updtList)
             {
-                if (updtList == null)
-                {
-                    updtList = new Dictionary<string, int>();
-                }
                 if (!updtList.ContainsKey(key))
                 {
                     DBAccess dba = new DBAccess();
                     dba.addTable(key.Substring(0, 6) + "00");
                     dba.addColumn(String.Format("IFNULL(MAX({0}),0) {0}", key));
-                    updtList[key] = (int)dba.executeSelect().Rows[0][0];
+                    updtList[key] = (long)dba.executeSelect().Rows[0][0];
                 }
                 updtList[key] += 1;
             }
@@ -194,8 +190,8 @@ namespace rmp.wrp
 
                 // Linezing
                 //comnScript = String.Format(script, EnvCons.PRE_URL);
-                comnScript = "<script type=\"text/javascript\" src=\"/{0}{1}/{2}.js\"></script>";
-                comnScript += "<script type=\"text/javascript\" src=\"/{0}inet/inet0002.ashx?sid={3}\"></script>";
+                comnScript = "<script type=\"text/javascript\" src=\"{0}/{1}/{2}.js\"></script>";
+                comnScript += "<script type=\"text/javascript\" src=\"{0}/inet/inet0002.ashx?sid={3}\"></script>";
                 comnScript += "<script type=\"text/javascript\" src=\"http://js.tongji.linezing.com/1078296/tongji.js\"></script>";
             }
             return string.Format(comnScript, EnvCons.PRE_URL, model, Session[cons.wrp.WrpCons.SCRIPTID], UserInfo.Current(Session).UserCode);

@@ -32,6 +32,7 @@
                 <a href="#" onclick="return lastFile();">上一张</a>
                 <asp:Image ID="im_ViewFile" runat="server" Width="400" Height="300" />
                 <a href="#" onclick="return nextFile();">下一张</a>
+                <asp:HiddenField ID="hd_FilePath" runat="server" />
                 <asp:HiddenField ID="hd_FileList" runat="server" />
                 <asp:HiddenField ID="hd_FileIndx" runat="server" />
             </td>
@@ -46,6 +47,5 @@
     </form>
 </body>
 </html>
-
 <script type="text/javascript" src="file0101.js"></script>
 

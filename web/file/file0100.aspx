@@ -30,6 +30,7 @@
                 </asp:DropDownList>
                 <asp:Button ID="bt_NextStep" runat="server" Text="下一步(N)" AccessKey="N" OnClick="bt_NextStep_Click" />
                 <asp:HiddenField ID="hd_FileHash" runat="server" />
+                <asp:HiddenField ID="hd_FilePath" runat="server" />
             </td>
         </tr>
     </table>

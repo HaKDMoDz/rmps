@@ -115,7 +115,7 @@ public partial class exts_exts0403 : Page
         }
         if (!StringUtil.isValidatePath(hd_P3010404.Value))
         {
-            hd_P3010404.Value = Exts.NextDocs("docs", hd_TempHash.Value);
+            hd_P3010404.Value = Exts.NextFile("docs", hd_TempHash.Value);
         }
 
         try
@@ -229,7 +229,7 @@ public partial class exts_exts0403 : Page
 
             if (StringUtil.isValidateHash(hd_TempHash.Value))
             {
-                Exts.SaveDocs(EnvCons.DIR_TMP + "docs/", hd_TempHash.Value, ".aed", hd_P3010404.Value, isManage, operate);
+                Exts.SaveFile(EnvCons.DIR_TMP + "docs/", hd_TempHash.Value, ".aed", hd_P3010404.Value, isManage, operate);
             }
         }
         catch (Exception exp)

@@ -738,8 +738,12 @@ namespace rmp.wrp.exts
             return hash;
         }
 
-        public static String NextDocs(String dstPath, String dstHash)
+        public static String NextFile(String dstPath, String dstHash)
         {
+            if (dstPath.EndsWith("/"))
+            {
+                dstPath = dstPath.Substring(0, dstPath.Length - 1);
+            }
             String dir = HttpContext.Current.Server.MapPath(EnvCons.DIR_DAT + dstPath);
             int i = 1000;
             String tmp;
@@ -761,7 +765,7 @@ namespace rmp.wrp.exts
             return "";
         }
 
-        public static String SaveDocs(String srcPath, String srcHash, String srcExts, String dstHash, bool isManage, int operate)
+        public static String SaveFile(String srcPath, String srcHash, String srcExts, String dstHash, bool isManage, long operate)
         {
             // 图像更新
             if (StringUtil.isValidatePath(dstHash))
@@ -789,7 +793,7 @@ namespace rmp.wrp.exts
                 {
                     path.Create();
                 }
-                File.Copy(HttpContext.Current.Server.MapPath(srcPath) + srcHash + srcExts, file);
+                File.Copy(HttpContext.Current.Server.MapPath(EnvCons.DIR_TMP + srcPath) + srcHash + srcExts, file);
             }
             return dstHash;
         }
@@ -846,7 +850,7 @@ namespace rmp.wrp.exts
         /// <param name="manager">是否管理人员</param>
         /// <param name="operate">操作流水</param>
         /// <returns></returns>
-        public static String SaveIcon(String updtIcon, String srcPath, String srcHash, String dstHash, bool manager, int operate)
+        public static String SaveIcon(String updtIcon, String srcPath, String srcHash, String dstHash, bool manager, long operate)
         {
             updtIcon = (updtIcon ?? "").Trim();
             if (updtIcon != "1" && updtIcon != "2" && updtIcon != "3")

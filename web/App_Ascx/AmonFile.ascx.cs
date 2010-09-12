@@ -11,17 +11,30 @@ public partial class App_Ascx_AmonFile : System.Web.UI.UserControl
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (IsPostBack)
+        {
+            return;
+        }
     }
 
-    public bool SaveFile()
+    public String NextFile()
+    {
+        if (!StringUtil.isValidatePath(hd_DstHash.Value))
+        {
+            hd_DstHash.Value = rmp.wrp.exts.Exts.NextFile(hd_DstPath.Value, HashUtil.getCurrTimeHex(true));
+        }
+        return hd_DstHash.Value;
+    }
+
+    public bool SaveFile(bool isManage, long operate)
     {
         if (!StringUtil.isValidateHash(hd_SrcHash.Value))
         {
             hd_DstHash.Value = "0";
-            return false;
+            return true;
         }
 
-        if (!StringUtil.isValidateHash(hd_DstHash.Value))
+        if (!StringUtil.isValidatePath(hd_DstHash.Value))
         {
             hd_DstHash.Value = HashUtil.getCurrTimeHex(true);
         }
@@ -36,14 +49,15 @@ public partial class App_Ascx_AmonFile : System.Web.UI.UserControl
         {
             dstPath += '/';
         }
-        File.Copy(Server.MapPath(srcPath) + hd_SrcHash.Value + fileExt, Server.MapPath(dstPath) + hd_DstHash + fileExt);
+
+        hd_DstHash.Value = rmp.wrp.exts.Exts.SaveFile(srcPath, hd_SrcHash.Value, fileExt, hd_DstHash.Value, isManage, operate);
         return true;
     }
 
     /// <summary>
     /// 读取或设置目标保存目录
     /// </summary>
-    public String DstIconPath
+    public String DstFilePath
     {
         get
         {
@@ -51,14 +65,19 @@ public partial class App_Ascx_AmonFile : System.Web.UI.UserControl
         }
         set
         {
-            hd_DstPath.Value = value;
+            String path = value;
+            if (!path.EndsWith("/"))
+            {
+                path += '/';
+            }
+            hd_DstPath.Value = path;
         }
     }
 
     /// <summary>
     /// 读取或设置目标文件名称
     /// </summary>
-    public String DstIconHash
+    public String DstFileHash
     {
         get
         {
@@ -73,22 +92,35 @@ public partial class App_Ascx_AmonFile : System.Web.UI.UserControl
     /// <summary>
     /// 获取临时保存目录
     /// </summary>
-    public String SrcIconPath
+    public String SrcFilePath
     {
         get
         {
             return hd_SrcPath.Value;
+        }
+        set
+        {
+            String path = value;
+            if (!path.EndsWith("/"))
+            {
+                path += '/';
+            }
+            hd_SrcPath.Value = path;
         }
     }
 
     /// <summary>
     /// 获取临时文件名称
     /// </summary>
-    public String SrcIconHash
+    public String SrcFileHash
     {
         get
         {
             return hd_SrcHash.Value;
+        }
+        set
+        {
+            hd_SrcHash.Value = value;
         }
     }
 
