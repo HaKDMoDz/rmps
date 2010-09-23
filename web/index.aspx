@@ -99,7 +99,7 @@
                             ·<a href="/iask/iask1305.aspx" title="MD5、SHA-1、SHA-256、SHA-384、SHA-512消息摘要。">消息摘要</a>
                         </td>
                         <td align="left" style="width: 40%">
-                            ·<a href="/inet/index.aspx">Amon网页精灵！</a><img src="_images/new.gif" alt="" width="13" height="13" style="vertical-align: middle;" />
+                            ·<a href="/exts/index.aspx">Amon后缀解析！</a><img src="_images/new.gif" alt="" width="13" height="13" style="vertical-align: middle;" />
                         </td>
                     </tr>
                     <tr>
@@ -113,7 +113,7 @@
                             ·<a href="/iask/iask130C.aspx">ＩＰ查询</a>
                         </td>
                         <td align="left" style="width: 40%">
-                            ·<a href="/wime/index.aspx">Amon网页五笔！</a><img src="_images/new.gif" alt="" width="13" height="13" style="vertical-align: middle;" />
+                            ·<a href="/mpwd/index.aspx">Amon魔方密码！</a><img src="_images/new.gif" alt="" width="13" height="13" style="vertical-align: middle;" />
                         </td>
                     </tr>
                     <tr>
@@ -127,7 +127,7 @@
                             ·<a href="/iask/iask13A1.aspx">节目预告</a>
                         </td>
                         <td align="left" style="width: 40%">
-                            ·<a href="/exts/exts0001.asmx">后缀解析Web Service！</a>
+                            ·<a href="/inet/index.aspx">Amon网页精灵！</a><img src="_images/new.gif" alt="" width="13" height="13" style="vertical-align: middle;" />
                         </td>
                     </tr>
                     <tr>
@@ -141,7 +141,7 @@
                             ·<a href="/iask/iask13A2.aspx">邮编查询</a>
                         </td>
                         <td align="left" style="width: 40%">
-                            ·<a href="/exts/exts1007.aspx">后缀解析搜索代码定制！</a>
+                            ·<a href="/link/index.aspx">Amon网络导航！</a><img src="_images/new.gif" alt="" width="13" height="13" style="vertical-align: middle;" />
                         </td>
                     </tr>
                     <tr>
@@ -155,7 +155,7 @@
                             ·<a href="/iask/iask13A3.aspx">天气预报</a>
                         </td>
                         <td align="left" style="width: 40%">
-                            ·<a href="/exts/exts1005.aspx">后缀解析浏览器内置搜索！</a>
+                            ·<a href="/edit/index.aspx">Amon源码查看！</a><img src="_images/new.gif" alt="" width="13" height="13" style="vertical-align: middle;" />
                         </td>
                     </tr>
                 </table>
@@ -193,7 +193,7 @@
                             <a href="/myim/">即时通讯</a>
                         </td>
                         <td class="sl" align="center" style="height: 22px;">
-                            <a href="/date/">博时网</a>
+                            <a href="/date/">时钟秀</a>
                         </td>
                     </tr>
                 </table>
@@ -205,11 +205,11 @@
                 &nbsp;<a href="/info/">Amonsoft</a>.&nbsp;All&nbsp;Rights Reserved.&nbsp;<a href="http://www.miibeian.gov.cn/" title="信息产业部ICP/IP地址/域名信息备案管理系统" target="_blank">沪ICP备09014915号</a>
                 <br />
                 <a href="http://validator.w3.org/check/referer" target="_blank">
-                    <img src="_images/vxml.gif" alt="Valid CSS!" width="16" height="16" />
+                    <img src="_images/n_vxml.gif" alt="Valid CSS!" width="16" height="16" />
                 </a>&nbsp;<a href="https://www.google.com/analytics/home/" title="Google Analytics" target="_blank">
-                    <img src="_images/copy.gif" alt="Copyright!" width="16" height="16" />
+                    <img src="_images/n_copy.gif" alt="Copyright!" width="16" height="16" />
                 </a>&nbsp;<a href="http://jigsaw.w3.org/css-validator/check/referer" target="_blank">
-                    <img src="_images/vcss.gif" alt="Valid XML!" width="16" height="16" />
+                    <img src="_images/n_vcss.gif" alt="Valid XML!" width="16" height="16" />
                 </a>
             </td>
         </tr>

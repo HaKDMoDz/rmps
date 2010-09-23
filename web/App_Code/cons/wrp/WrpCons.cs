@@ -39,7 +39,7 @@ namespace cons.wrp
         /// <summary>
         /// 博时网
         /// </summary>
-        public const string TITLE_DATE = "博时网";
+        public const string TITLE_DATE = "时钟秀";
         /// <summary>
         /// 源码查看
         /// </summary>
