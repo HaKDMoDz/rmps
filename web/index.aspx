@@ -47,7 +47,7 @@
             <td align="center" style="height: 500px; background-image: url(_images/line.png);background-repeat:no-repeat;background-position:center center;">
             	<table border="0" cellpadding="2" cellspacing="0" width="540">
 			        <tr>
-			            <td align="center" rowspan="4" style="width:280px;">
+			            <td align="center" rowspan="5" style="width:280px;">
 			            	<img src="_images/winshine.png" />
 			            </td>
 			            <td align="center" style="width:52px; height: 40px;">
@@ -55,14 +55,6 @@
 			            </td>
 			            <td align="left" style="font-size:18px;">
 			            	<a href="blog/" title="Amon博客">Amon博客</a>
-			            </td>
-			        </tr>
-			        <tr>
-			            <td align="center" style="width:52px; height: 40px;">
-			            	<a href="exts/" title="后缀解析"><img src="logo/exts/logo32.png" /></a>
-			            </td>
-			            <td align="left" style="font-size:18px;">
-			            	<a href="exts/" title="后缀解析">后缀解析</a>
 			            </td>
 			        </tr>
 			        <tr>
@@ -75,10 +67,26 @@
 			        </tr>
 			        <tr>
 			            <td align="center" style="width:52px; height: 40px;">
+			            	<a href="exts/" title="后缀解析"><img src="logo/exts/logo32.png" /></a>
+			            </td>
+			            <td align="left" style="font-size:18px;">
+			            	<a href="exts/" title="后缀解析">后缀解析</a>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="center" style="width:52px; height: 40px;">
 			                <a href="inet/" title="网页精灵"><img src="logo/soft/logo32.png" /></a>
 			            </td>
 			            <td align="left" style="font-size:18px;">
 			            	<a href="inet/" title="网页精灵">网页精灵</a>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="center" style="width:52px; height: 40px;">
+			                <a href="wftp/" title="Web FTP"><img src="logo/wftp/logo32.png" /></a>
+			            </td>
+			            <td align="left" style="font-size:18px;">
+			            	<a href="wftp/" title="Web FTP">Web FTP</a>
 			            </td>
 			        </tr>
             	</table>
