@@ -129,7 +129,7 @@ namespace rmp.wrp.inet
                     if (i % cols == 0) html.Append("<tr>");
                     html.Append("<td align=\"left\" style=\"height:20px;\">");
                     html.Append("<a href=\"/inet/inet0002.aspx?sid=").Append(v[WrpCons.W2019102]).Append("\" target=\"_blank\" s=\"").Append(v[WrpCons.W2019102]).Append("\" w=\"").Append(v[WrpCons.W201910A]).Append("\" h=\"").Append(v[WrpCons.W201910B]).Append("\" k=\"").Append(stid).Append("\" title=\"").Append(v[WrpCons.W2019107]).Append("\" onclick=\"return openLink(this);\">");
-                    html.Append("<img src=\"/_dat/inet/").Append(v[WrpCons.W2019105]).Append(".gif\" alt=\"\" />").Append(v[WrpCons.W2019106]);
+                    html.Append("<img src=\"/data/inet/").Append(v[WrpCons.W2019105]).Append(".gif\" alt=\"\" />").Append(v[WrpCons.W2019106]);
                     html.Append("</a>");
                     html.Append("</td>");
                     i += 1;
