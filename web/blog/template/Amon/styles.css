@@ -67,11 +67,10 @@ acronym {
 
 #footer {
     clear: both;
-     width: 780px;
-    height: 60px;
-     border-top: 10px solid #080813;
+    width: 780px;
+    height: 43px;
     color: #9899a9;
-    background-color: #252527;
+    background:url('images/footer.gif') no-repeat center center;
 }
 
 #footer a:hover {
@@ -428,7 +427,7 @@ h2 a:hover {
 .textbox-content{
     word-wrap: break-word;
     padding: 0px 10px 8px 10px;
-    color: #4E5067;
+    color: #666;
     margin: 6px 0 0 0;
     clear: both;
     line-height: 180%;
@@ -466,8 +465,8 @@ h2 a:hover {
 }
 .sep {
     font-size: 0;
-    border-top: 1px solid #e2e2df;
-    border-bottom: 1px solid #fff;
+    border-top: 1px dashed #e2e2df;
+    border-bottom: 1px dashed #fff;
 }
 .readmore {
     margin-top: 9px;
