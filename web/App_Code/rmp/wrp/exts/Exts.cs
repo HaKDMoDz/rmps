@@ -800,6 +800,10 @@ namespace rmp.wrp.exts
 
         public static String NextIcon(String updtIcon, String dstPath, String dstHash)
         {
+            if (dstPath.EndsWith("/"))
+            {
+                dstPath = dstPath.Substring(0, dstPath.Length - 1);
+            }
             if (updtIcon.Trim() != "1" || !StringUtil.isValidate(dstPath, 4))
             {
                 return dstHash;

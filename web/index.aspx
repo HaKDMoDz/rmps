@@ -30,20 +30,6 @@
     <form id="AmonForm" runat="server">
     <table border="0" cellpadding="2" cellspacing="0" width="100%">
         <tr>
-            <td align="right">
-                <div id="s" runat="server">
-                    <asp:HyperLink ID="si" runat="server" NavigateUrl="~/user/user0101.aspx">登录</asp:HyperLink>
-                </div>
-                <div id="u" runat="server">
-                    您好，
-                    <asp:HyperLink ID="un" runat="server" NavigateUrl="~/user/user0001.aspx"></asp:HyperLink>
-                    ！
-                    <asp:LinkButton ID="so" runat="server" OnClick="lb_AmonUser_Click">退出</asp:LinkButton>
-                </div>
-                <asp:HiddenField ID="uc" runat="server" />
-            </td>
-        </tr>
-        <tr>
             <td align="center" style="height: 500px; background-image: url(_images/line.png);background-repeat:no-repeat;background-position:center center;">
             	<table border="0" cellpadding="2" cellspacing="0" width="540">
 			        <tr>

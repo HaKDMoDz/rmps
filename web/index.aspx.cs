@@ -44,19 +44,6 @@ public partial class index : Page
     }
 
     /// <summary>
-    /// 退出登录事件
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void lb_AmonUser_Click(object sender, EventArgs e)
-    {
-        rmp.comn.user.UserInfo.Current(Session).signOs();
-        u.Visible = false;
-        uc.Value = cons.comn.user.UserInfo.COMN_CODE;
-        s.Visible = true;
-    }
-
-    /// <summary>
     /// 网址导航
     /// </summary>
     private bool SiteGuid()
@@ -101,13 +88,5 @@ public partial class index : Page
     {
         // 年份版权
         lb_CopyYear.Text = DateTime.Now.Year.ToString();
-
-        // 用户登录信息
-        rmp.comn.user.UserInfo ui = rmp.comn.user.UserInfo.Current(Session);
-        bool b = ui.UserRank > cons.comn.user.UserInfo.LEVEL_00;
-        u.Visible = b;
-        s.Visible = !b;
-        un.Text = ui.UserName;
-        uc.Value = ui.UserCode;
     }
 }
