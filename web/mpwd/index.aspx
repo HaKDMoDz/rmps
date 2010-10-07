@@ -36,6 +36,14 @@
         </tr>
         <tr>
             <td align="right" style="height: 20px;">
+                界面截图：
+            </td>
+            <td align="left" style="height: 20px;">
+                <asp:HyperLink ID="hl_Win" runat="server">Windows</asp:HyperLink>&nbsp;&nbsp;<asp:HyperLink ID="hl_Lin" runat="server">Linux</asp:HyperLink>&nbsp;&nbsp;<asp:HyperLink ID="hl_Sub" runat="server">Substance</asp:HyperLink>
+            </td>
+        </tr>
+        <tr>
+            <td align="right" style="height: 20px;">
                 软件下载：
             </td>
             <td align="left" style="height: 20px;">
@@ -48,10 +56,10 @@
         </tr>
         <tr>
             <td align="right" style="height: 20px;">
-                界面截图：
+                在线使用：
             </td>
             <td align="left" style="height: 20px;">
-                <asp:HyperLink ID="hl_Win" runat="server">Windows</asp:HyperLink>&nbsp;&nbsp;<asp:HyperLink ID="hl_Lin" runat="server">Linux</asp:HyperLink>&nbsp;&nbsp;<asp:HyperLink ID="hl_Sub" runat="server">Substance</asp:HyperLink>
+                <asp:HyperLink ID="hl_SoftJnlp" runat="server"><img src="../_images/jnlp.png" alt="在线使用" /></asp:HyperLink>
             </td>
         </tr>
         <tr>
@@ -60,14 +68,6 @@
             </td>
             <td align="left" style="height: 20px;">
                 <a href="http://code.google.com/p/magicpwd/" target="_blank">项目首页</a>
-            </td>
-        </tr>
-        <tr>
-            <td align="right" style="height: 20px;">
-                在线使用：
-            </td>
-            <td align="left" style="height: 20px;">
-                <asp:HyperLink ID="hl_SoftJnlp" runat="server"><img src="../_images/jnlp.png" alt="在线使用" /></asp:HyperLink>
             </td>
         </tr>
         <tr>
