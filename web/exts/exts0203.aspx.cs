@@ -395,8 +395,9 @@ public partial class exts_exts0203 : Page
                 lb_ErrMsg.Text = isUpdate ? "数据更新成功！" : "数据新增成功！";
             }
 
-            ai_P3010204.SaveIcon(isManage, operate);
             // 软件图标
+            ai_P3010204.SaveIcon(isManage, operate);
+            // 软件截图
             af_P301020A.SaveFile(isManage, operate);
         }
         catch (Exception exp)
