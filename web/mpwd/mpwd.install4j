@@ -32,7 +32,7 @@
     <components />
   </files>
   <launchers>
-    <launcher name="magicpwd" id="21" external="false" excludeFromMenu="false" menuName="" icnsFile="./tmp/logo/logo.icns" pngIcon16File="./tmp/logo/logo16.png" pngIcon32File="./tmp/logo/logo32.png" macServiceDependencies="" swtApp="false" fileset="">
+    <launcher name="magicpwd" id="21" external="false" excludeFromMenu="false" menuName="魔方密码" icnsFile="./tmp/logo/logo.icns" pngIcon16File="./tmp/logo/logo16.png" pngIcon32File="./tmp/logo/logo32.png" macServiceDependencies="" swtApp="false" fileset="">
       <executable name="magicpwd" type="1" iconSet="true" iconFile="./tmp/logo/logo.ico" executableDir="." redirectStderr="true" stderrFile="error.log" stderrMode="overwrite" redirectStdout="false" stdoutFile="output.log" stdoutMode="overwrite" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="true" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker" checkConsoleParameter="false" globalSingleInstance="false">
         <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="" productName="" />
       </executable>
