@@ -39,7 +39,7 @@
                 界面截图：
             </td>
             <td align="left" style="height: 20px;">
-                <asp:HyperLink ID="hl_Win" runat="server">Windows</asp:HyperLink>&nbsp;&nbsp;<asp:HyperLink ID="hl_Lin" runat="server">Linux</asp:HyperLink>&nbsp;&nbsp;<asp:HyperLink ID="hl_Sub" runat="server">Substance</asp:HyperLink>
+                <asp:HyperLink ID="hl_Win" runat="server">Windows</asp:HyperLink>&nbsp;&nbsp;<asp:HyperLink ID="hl_Lin" runat="server">Linux</asp:HyperLink>&nbsp;&nbsp;<asp:HyperLink ID="hl_Sub" runat="server">Java</asp:HyperLink>
             </td>
         </tr>
         <tr>

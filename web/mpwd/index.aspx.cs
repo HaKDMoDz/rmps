@@ -41,7 +41,7 @@ public partial class mpwd_index : Page
             hl_SoftJnlp.NavigateUrl = row[cons.io.db.comn.ComnCons.C0010110].ToString();
             hl_Win.NavigateUrl = String.Format("~/_images/{0}/3000_w03.png", sid);
             hl_Lin.NavigateUrl = String.Format("~/_images/{0}/3000_l01.png", sid);
-            hl_Sub.NavigateUrl = String.Format("~/_images/{0}/3000_s01.png", sid);
+            hl_Sub.NavigateUrl = String.Format("~/_images/{0}/3000_j01.png", sid);
 
             // 软件介绍
             SoftInfo.Text = WrpUtil.db2Html(row[cons.io.db.comn.ComnCons.C0010112].ToString());

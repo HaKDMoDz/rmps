@@ -7,8 +7,6 @@
     <%=cons.wrp.WrpCons.KEYWORDS_MPWD%>
     <%=cons.wrp.WrpCons.DESCRIPTION_MPWD%>
     <%=rmp.wrp.Wrps.ComnHead(cons.wrp.WrpCons.MODULE_MPWD)%>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="AmonForm" runat="server">
