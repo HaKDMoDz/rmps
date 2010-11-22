@@ -85,13 +85,9 @@
                 <br />
                 <a href="http://www.miibeian.gov.cn/" title="信息产业部ICP/IP地址/域名信息备案管理系统" target="_blank">沪ICP备09014915号</a>
                 <br />
-                <a href="http://validator.w3.org/check/referer" target="_blank">
-                    <img src="_images/n_vxml.gif" alt="Valid CSS!" width="16" height="16" />
-                </a>&nbsp;<a href="https://www.google.com/analytics/home/" title="Google Analytics" target="_blank">
-                    <img src="_images/n_copy.gif" alt="Copyright!" width="16" height="16" />
-                </a>&nbsp;<a href="http://jigsaw.w3.org/css-validator/check/referer" target="_blank">
-                    <img src="_images/n_vcss.gif" alt="Valid XML!" width="16" height="16" />
-                </a>
+                <a href="http://validator.w3.org/check/referer" target="_blank"><img src="_images/n_vxml.gif" alt="Valid CSS!" width="16" height="16" /></a>&nbsp;
+				<a href="https://www.google.com/analytics/home/" title="Google Analytics" target="_blank"><img src="_images/n_copy.gif" alt="Copyright!" width="16" height="16" /></a>&nbsp;
+				<a href="http://jigsaw.w3.org/css-validator/check/referer" target="_blank"><img src="_images/n_vcss.gif" alt="Valid XML!" width="16" height="16" /></a>
             </td>
         </tr>
     </table>
