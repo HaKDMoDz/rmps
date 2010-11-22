@@ -37,10 +37,10 @@
 			            	<img src="_images/winshine.png" />
 			            </td>
 			            <td align="center" style="width:52px; height: 40px;">
-			                <a href="blog/" title="Amon博客"><img src="logo/blog/logo32.png" /></a>
+			                <a href="wlog/" title="Amon博客"><img src="logo/blog/logo32.png" /></a>
 			            </td>
 			            <td align="left" style="font-size:18px;">
-			            	<a href="blog/" title="Amon博客">Amon博客</a>
+			            	<a href="wlog/" title="Amon博客">Amon博客</a>
 			            </td>
 			        </tr>
 			        <tr>
