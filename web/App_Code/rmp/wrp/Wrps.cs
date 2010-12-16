@@ -546,6 +546,7 @@ namespace rmp.wrp
                 guidList.Add(new K1V2("/mpwd/mpwd0001.aspx", "历史", "历史"));
                 guidList.Add(new K1V2("/mpwd/mpwd0002.aspx", "下载", "下载"));
                 guidList.Add(new K1V2("/mpwd/mpwd0003.aspx", "关于", "关于"));
+                guidList.Add(new K1V2("/mpwd/mpwd0100.aspx", "皮肤", "皮肤"));
                 guidList.Add(new K1V2("/mpwd/mpwd0004.aspx", "帮助", "帮助"));
                 Session.Add("amon_guid_" + cons.wrp.WrpCons.MODULE_MPWD, guidList);
             }
