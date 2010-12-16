@@ -73,12 +73,33 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="height: 200px;" align="center">
-                                        <img src="<%=cons.EnvCons.PRE_URL%>/_styles/0002/images/mpwd_ll.png" alt="" style="border: 4px solid #FFFFFF;" />
+                                    <td align="center">
+                                        <table width="200" border="0" cellpadding="2" cellspacing="0">
+                                            <tr>
+                                                <td align="center" class="TD_LIST_HEAD">
+                                                    运行截图
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" class="TD_LIST_BODY">
+                                                    <img src="<%=cons.EnvCons.PRE_URL%>/_images/130F0000/3000_l02t.png" alt="" style="border: 4px solid #FFFFFF;" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" class="TD_LIST_BODY">
+                                                    <img src="<%=cons.EnvCons.PRE_URL%>/_images/130F0000/3000_s01t.png" alt="" style="border: 4px solid #FFFFFF;" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" class="TD_LIST_BODY">
+                                                    <img src="<%=cons.EnvCons.PRE_URL%>/_images/130F0000/3000_w03t.png" alt="" style="border: 4px solid #FFFFFF;" />
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="height: 600px;" align="center" valign="top">
+                                    <td align="center">
                                         <table width="200" border="0" cellpadding="2" cellspacing="0">
                                             <tr>
                                                 <td align="center" class="TD_LIST_HEAD">
@@ -181,5 +202,9 @@
         </tr>
     </table>
     </form>
+    <div id="divScreenshot" title="运行截图" style="display: none;">
+        <img id="imgScreenshot" src="" />
+    </div>
+	<script type="text/javascript" src="http://chatapi-js.opener.asia/merger.js"></script>
 </body>
 </html>
