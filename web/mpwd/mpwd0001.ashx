@@ -19,9 +19,11 @@ public class mpwd0001 : IHttpHandler
         String uri = (context.Request[cons.wrp.WrpCons.URI] ?? "").Trim();
         // 操作系统
         String opt = (context.Request[cons.wrp.WrpCons.OPT] ?? "").Trim();
+        String uip = context.Request.UserHostAddress;
+        String upc = context.Request.UserHostName;
 
         System.IO.StreamWriter writer = System.IO.File.AppendText(context.Server.MapPath("~/mpwd/mpwd.txt"));
-        writer.WriteLine(String.Format("{0}\t{1}\t{2}\t{3}", sid, uri, opt, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+        writer.WriteLine(String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", sid, uri, uip, opt, upc, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
         writer.Flush();
         writer.Close();
 
