@@ -31,17 +31,14 @@ public partial class code_code0001 : Page
         // 年份版权
         lb_CopyYear.Text = DateTime.Now.Year.ToString();
 
-        int width = 480;
         if (UserInfo.Current(Session).UserRank != cons.comn.user.UserInfo.LEVEL_09)
         {
             ck_OverRide.Visible = false;
             ck_OverRide.Checked = false;
-            width = 580;
         }
 
         String url = Request.Params[cons.wrp.WrpCons.URI] ?? "http://";
         tf_FilePath.Text = url;
-        //tf_FilePath.Width = width;
 
         Wrps.GuidEdit(Session)[2].K = cons.EnvCons.PRE_URL + "/edit/edit0002.aspx?uri=" + url;
 
@@ -328,7 +325,7 @@ public partial class code_code0001 : Page
 
     private String getStyle(String key)
     {
-        return String.Format("<font color=\"red\">{0}</font>", key);
+        return String.Format("<font color=\"#0000C0\">{0}</font>", key);
     }
     #endregion
 

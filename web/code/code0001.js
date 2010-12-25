@@ -33,8 +33,6 @@ function showCode()
 }
 function editSubmit()
 {
-    editor.data();
-    
     var obj = $X('ck_OverRide');
     if(obj && obj.checked)
     {
