@@ -42,7 +42,7 @@
                 </tr>
                 <tr>
                     <td id="CodeBody" align="center">
-                        <asp:TextBox ID="ta_UserData" runat="server" TextMode="MultiLine" Width="500" Height="500"></asp:TextBox>
+                        <asp:TextBox ID="ta_UserData" runat="server" TextMode="MultiLine" Width="98%" Height="500"></asp:TextBox>
                     </td>
                     <td align="left" valign="top" style="width: 160px;">
                         <table border="0" cellpadding="0" cellspacing="0" width="98%">
