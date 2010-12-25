@@ -1,9 +1,34 @@
 ﻿// JScript 文件
-var errMsg = $E('hd_ErrMsg').value;
+var errMsg = $X('hd_ErrMsg').value;
 if(errMsg!=null && errMsg!='')
 {
     alert(errMsg);
     $E('hd_ErrMsg').value='';
+}
+KE.init({id : 'ta_UserData',imageUploadJson : 'edit0002.ashx',fileManagerJson : 'edit0001.ashx',allowFileManager : true});
+
+function showText()
+{
+    KE.remove('ta_UserData');
+    $X('tr_EditText').style.display='';
+    $X('tr_EditHtml').style.display='none';
+    $X('tr_EditCode').style.display='none';
+}
+
+function showHtml()
+{
+	KE.create('ta_UserData');
+    $X('tr_EditText').style.display='none';
+    $X('tr_EditHtml').style.display='';
+    $X('tr_EditCode').style.display='none';
+}
+
+function showCode()
+{
+    KE.remove('ta_UserData');
+    $X('tr_EditText').style.display='none';
+    $X('tr_EditHtml').style.display='none';
+    $X('tr_EditCode').style.display='';
 }
 
 function editSubmit()

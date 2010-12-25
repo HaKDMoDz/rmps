@@ -1,4 +1,21 @@
 ﻿// JScript 文件
+KE.show({
+            id : 'content1',
+            imageUploadJson : 'upload_json.ashx',
+            fileManagerJson : 'file_manager_json.ashx',
+            allowFileManager : true,
+		    afterCreate : function(id) {
+			    KE.event.ctrl(document, 13, function() {
+				    KE.util.setData(id);
+				    document.forms['form1'].submit();
+			    });
+			    KE.event.ctrl(KE.g[id].iframeDoc, 13, function() {
+				    KE.util.setData(id);
+				    document.forms['form1'].submit();
+			    });
+		    }
+        });
+
 var errMsg = $E('hd_ErrMsg').value;
 if(errMsg!=null && errMsg!='')
 {
