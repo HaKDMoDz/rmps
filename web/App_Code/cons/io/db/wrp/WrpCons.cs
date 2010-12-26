@@ -577,6 +577,155 @@ namespace cons.io.db.wrp
         #endregion
         #endregion
 
+        #region 代码编辑
+        #region 高亮字词
+        /// <summary>
+        /// 高亮字词
+        /// </summary>
+        public const String W2050100 = "W2050100";
+        /// <summary>
+        /// 字词索引
+        /// </summary>
+        public const String W2050101 = "W2050101";
+        /// <summary>
+        /// 所属语言
+        /// </summary>
+        public const String W2050102 = "W2050102";
+        /// <summary>
+        /// 所属风格
+        /// </summary>
+        public const String W2050103 = "W2050103";
+        /// <summary>
+        /// 字词内容
+        /// </summary>
+        public const String W2050104 = "W2050104";
+        /// <summary>
+        /// 链接资源
+        /// </summary>
+        public const String W2050105 = "W2050105";
+        /// <summary>
+        /// 链接提示
+        /// </summary>
+        public const String W2050106 = "W2050106";
+        /// <summary>
+        /// 备注信息
+        /// </summary>
+        public const String W2050107 = "W2050107";
+        #endregion
+        #region 语法风格
+        /// <summary>
+        /// 语法风格
+        /// </summary>
+        public const String W2050200 = "W2050200";
+        /// <summary>
+        /// 显示排序
+        /// </summary>
+        public const String W2050201 = "W2050201";
+        /// <summary>
+        /// 风格索引
+        /// </summary>
+        public const String W2050202 = "W2050202";
+        /// <summary>
+        /// 所属语言
+        /// </summary>
+        public const String W2050203 = "W2050203";
+        /// <summary>
+        /// 风格名称
+        /// </summary>
+        public const String W2050204 = "W2050204";
+        /// <summary>
+        /// 样式标题
+        /// </summary>
+        public const String W2050205 = "W2050205";
+        /// <summary>
+        /// 背景颜色
+        /// </summary>
+        public const String W2050206 = "W2050206";
+        /// <summary>
+        /// 前景颜色
+        /// </summary>
+        public const String W2050207 = "W2050207";
+        /// <summary>
+        /// 字体名称
+        /// </summary>
+        public const String W2050208 = "W2050208";
+        /// <summary>
+        /// 字体大小
+        /// </summary>
+        public const String W2050209 = "W2050209";
+        /// <summary>
+        /// 字体风格
+        /// </summary>
+        public const String W205020A = "W205020A";
+        /// <summary>
+        /// 备注信息
+        /// </summary>
+        public const String W205020B = "W205020B";
+        #endregion
+        #region 语言定义
+        /// <summary>
+        /// 语言定义
+        /// </summary>
+        public const String W2050300 = "W2050300";
+        /// <summary>
+        /// 语言索引
+        /// </summary>
+        public const String W2050301 = "W2050301";
+        /// <summary>
+        /// 语言名称
+        /// </summary>
+        public const String W2050302 = "W2050302";
+        /// <summary>
+        /// 转义字符1
+        /// </summary>
+        public const String W2050303 = "W2050303";
+        /// <summary>
+        /// 转义字符2
+        /// </summary>
+        public const String W2050304 = "W2050304";
+        /// <summary>
+        /// 字符串起始标记1
+        /// </summary>
+        public const String W2050305 = "W2050305";
+        /// <summary>
+        /// 字符串结束标记1
+        /// </summary>
+        public const String W2050306 = "W2050306";
+        /// <summary>
+        /// 字符串起始标记2
+        /// </summary>
+        public const String W2050307 = "W2050307";
+        /// <summary>
+        /// 字符串结束标记2
+        /// </summary>
+        public const String W2050308 = "W2050308";
+        /// <summary>
+        /// 单行注释
+        /// </summary>
+        public const String W2050309 = "W2050309";
+        /// <summary>
+        /// 多行注释（起始）
+        /// </summary>
+        public const String W205030A = "W205030A";
+        /// <summary>
+        /// 多行注释（结束）
+        /// </summary>
+        public const String W205030B = "W205030B";
+        /// <summary>
+        /// 文档注释（起始）
+        /// </summary>
+        public const String W205030C = "W205030C";
+        /// <summary>
+        /// 文档注释（结束）
+        /// </summary>
+        public const String W205030D = "W205030D";
+        /// <summary>
+        /// 备注信息
+        /// </summary>
+        public const String W205030E = "W205030E";
+        #endregion
+        #endregion
+
         #endregion
 
         #region 博客模块
