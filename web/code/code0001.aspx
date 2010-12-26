@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="code0001.aspx.cs" Inherits="code_code0001" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="code0001.aspx.cs" Inherits="code_code0001" ValidateRequest="false" %>
 
 <%@ Register Src="~/App_Ascx/AmonHead.ascx" TagName="AmonHead" TagPrefix="uc1" %>
 <%@ Register Src="~/App_Ascx/AmonFoot.ascx" TagName="AmonFoot" TagPrefix="uc2" %>
@@ -16,30 +16,30 @@
     <form id="AmonForm" runat="server">
     <asp:ScriptManager ID="sm_Script" runat="server">
     </asp:ScriptManager>
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tr>
-            <td id="CodeHead" align="right" colspan="2">
-            </td>
-        </tr>
-        <tr>
-            <td id="CodeGuid" align="left">
-                <label>
-                    <input type="radio" id="cb_EditText" name="mode" onclick="showText();" checked="checked" />普通模式
-                </label>
-                <label>
-                    <input type="radio" id="cb_EditHtml" name="mode" onclick="showHtml();" />高级模式
-                </label>
-                <label>
-                    <input type="radio" id="cb_EditCode" name="mode" onclick="showCode();" />代码转换
-                </label>
-                <asp:Label ID="lb_ErrMsg" runat="server"></asp:Label>
-                <asp:HiddenField ID="hd_ErrMsg" runat="server" />
-            </td>
-            <td>
-            </td>
-        </tr>
-        <asp:UpdatePanel ID="up_Update" runat="server">
-            <ContentTemplate>
+    <asp:UpdatePanel ID="up_Update" runat="server">
+        <ContentTemplate>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                    <td id="CodeHead" align="right" colspan="2">
+                    </td>
+                </tr>
+                <tr>
+                    <td id="CodeGuid" align="left">
+                        <label>
+                            <input type="radio" id="cb_EditText" name="mode" onclick="showText();" checked="checked" />普通模式
+                        </label>
+                        <label>
+                            <input type="radio" id="cb_EditHtml" name="mode" onclick="showHtml();" />高级模式
+                        </label>
+                        <label>
+                            <input type="radio" id="cb_EditCode" name="mode" onclick="showCode();" />代码转换
+                        </label>
+                        <asp:Label ID="lb_ErrMsg" runat="server"></asp:Label>
+                        <asp:HiddenField ID="hd_ErrMsg" runat="server" />
+                    </td>
+                    <td>
+                    </td>
+                </tr>
                 <tr>
                     <td id="CodeBody" align="center">
                         <asp:TextBox ID="ta_UserData" runat="server" TextMode="MultiLine" Width="98%" Height="500"></asp:TextBox>
@@ -139,7 +139,7 @@
                                                 行号：
                                             </td>
                                             <td align="left">
-                                                <asp:CheckBox ID="ck_ShowLine" runat="server" Text="显示行号" />
+                                                <asp:CheckBox ID="ck_ShowLineNbr" runat="server" Text="显示行号" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -147,10 +147,15 @@
                                                 样式：
                                             </td>
                                             <td align="left">
-                                                <asp:DropDownList ID="cb_Style" runat="server">
-                                                    <asp:ListItem Text="内联样式" Value="0"></asp:ListItem>
-                                                    <asp:ListItem Text="外部样式" Value="1"></asp:ListItem>
-                                                </asp:DropDownList>
+                                                <asp:CheckBox ID="ck_InLineStyle" runat="server" Text="使用内联样式" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">
+                                                资源：
+                                            </td>
+                                            <td align="left">
+                                                <asp:CheckBox ID="ck_ShowLinkUri" runat="server" Text="显示资源链接" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -158,10 +163,19 @@
                                                 格式：
                                             </td>
                                             <td align="left">
-                                                <asp:DropDownList ID="cb_Format" runat="server">
-                                                    <asp:ListItem Text="格式优先" Value="0"></asp:ListItem>
-                                                    <asp:ListItem Text="代码优先" Value="1"></asp:ListItem>
+                                                <asp:DropDownList ID="cb_TagStyle" runat="server">
+                                                    <asp:ListItem Text="<pre>标签" Value="pre"></asp:ListItem>
+                                                    <asp:ListItem Text="<div>标签" Value="div"></asp:ListItem>
+                                                    <asp:ListItem Text="<table>标签" Value="table"></asp:ListItem>
                                                 </asp:DropDownList>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">
+                                                制表符：
+                                            </td>
+                                            <td align="left">
+                                                <asp:TextBox ID="tf_TabCount" runat="server" Text="4" Columns="4"></asp:TextBox>空格
                                             </td>
                                         </tr>
                                         <tr>
@@ -175,25 +189,25 @@
                         </table>
                     </td>
                 </tr>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-        <tr>
-            <td id="CodeFoot" align="center" colspan="2">
-                &copy;&nbsp;<asp:Label ID="lb_CopyYear" runat="server"></asp:Label>
-                &nbsp;<a href="/info/">Amonsoft</a>.&nbsp;All&nbsp;Rights Reserved.
-                <br />
-                <a href="http://www.miibeian.gov.cn/" title="信息产业部ICP/IP地址/域名信息备案管理系统" target="_blank">沪ICP备09014915号</a>
-                <br />
-                <a href="http://validator.w3.org/check/referer" target="_blank">
-                    <img src="<%=cons.EnvCons.PRE_URL%>/_images/n_vxml.gif" alt="Valid CSS!" width="16" height="16" />
-                </a>&nbsp; <a href="https://www.google.com/analytics/home/" title="Google Analytics" target="_blank">
-                    <img src="<%=cons.EnvCons.PRE_URL%>/_images/n_copy.gif" alt="Copyright!" width="16" height="16" />
-                </a>&nbsp; <a href="http://jigsaw.w3.org/css-validator/check/referer" target="_blank">
-                    <img src="<%=cons.EnvCons.PRE_URL%>/_images/n_vcss.gif" alt="Valid XML!" width="16" height="16" />
-                </a>
-            </td>
-        </tr>
-    </table>
+                <tr>
+                    <td id="CodeFoot" align="center" colspan="2">
+                        &copy;&nbsp;<asp:Label ID="lb_CopyYear" runat="server"></asp:Label>
+                        &nbsp;<a href="/info/">Amonsoft</a>.&nbsp;All&nbsp;Rights Reserved.
+                        <br />
+                        <a href="http://www.miibeian.gov.cn/" title="信息产业部ICP/IP地址/域名信息备案管理系统" target="_blank">沪ICP备09014915号</a>
+                        <br />
+                        <a href="http://validator.w3.org/check/referer" target="_blank">
+                            <img src="<%=cons.EnvCons.PRE_URL%>/_images/n_vxml.gif" alt="Valid CSS!" width="16" height="16" />
+                        </a>&nbsp; <a href="https://www.google.com/analytics/home/" title="Google Analytics" target="_blank">
+                            <img src="<%=cons.EnvCons.PRE_URL%>/_images/n_copy.gif" alt="Copyright!" width="16" height="16" />
+                        </a>&nbsp; <a href="http://jigsaw.w3.org/css-validator/check/referer" target="_blank">
+                            <img src="<%=cons.EnvCons.PRE_URL%>/_images/n_vcss.gif" alt="Valid XML!" width="16" height="16" />
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </ContentTemplate>
+    </asp:UpdatePanel>
     </form>
 </body>
 </html>

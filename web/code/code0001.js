@@ -1,6 +1,7 @@
 ﻿// JScript File
 function pageInit()
 {
+    $X('tr_Res').style.display=$X('cb_EditCode').checked?'none':'';
     $X('tr_EditOpen').style.display=$X('cb_EditCode').checked?'none':'';
     $X('tr_EditText').style.display=$X('cb_EditText').checked?'':'none';
     $X('tr_EditHtml').style.display=$X('cb_EditHtml').checked?'':'none';
@@ -10,6 +11,7 @@ function pageInit()
 function showText()
 {
     KE.remove('ta_UserData');
+    $X('tr_Res').style.display='';
     $X('tr_EditOpen').style.display='';
     $X('tr_EditText').style.display='';
     $X('tr_EditHtml').style.display='none';
@@ -18,6 +20,7 @@ function showText()
 function showHtml()
 {
 	KE.create('ta_UserData');
+	$X('tr_Res').style.display='';
 	$X('tr_EditOpen').style.display='';
     $X('tr_EditText').style.display='none';
     $X('tr_EditHtml').style.display='';
@@ -26,6 +29,7 @@ function showHtml()
 function showCode()
 {
     KE.remove('ta_UserData');
+    $X('tr_Res').style.display='none';
     $X('tr_EditOpen').style.display='none';
     $X('tr_EditText').style.display='none';
     $X('tr_EditHtml').style.display='none';

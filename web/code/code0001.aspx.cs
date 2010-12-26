@@ -1,15 +1,16 @@
 ﻿using System;
-using System.Web.UI;
 using System.Collections.Generic;
-using System.Text;
-using rmp.wrp;
-using rmp.comn.user;
-using rmp.util;
-using System.IO;
-using rmp.io.db;
 using System.Data;
+using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Web.UI;
 using rmp.bean;
+using rmp.comn.user;
+using rmp.io.db;
+using rmp.util;
+using rmp.wrp;
+using rmp.wrp.code;
 
 public partial class code_code0001 : Page
 {
@@ -36,6 +37,9 @@ public partial class code_code0001 : Page
             ck_OverRide.Visible = false;
             ck_OverRide.Checked = false;
         }
+
+        ck_ShowLineNbr.Checked = true;
+        ck_ShowLinkUri.Checked = true;
 
         String url = Request.Params[cons.wrp.WrpCons.URI] ?? "http://";
         tf_FilePath.Text = url;
@@ -190,142 +194,14 @@ public partial class code_code0001 : Page
     #region 代码转换
     protected void bt_EditCode_Click(object sender, EventArgs e)
     {
-        DBAccess dba = new DBAccess();
-        DataTable dt = dba.executeSelect("select A03 from a where a02='java.ini'");
-        Dictionary<String, String> dict = new Dictionary<String, String>();
-        String tmp;
-        foreach (DataRow row in dt.Rows)
-        {
-            tmp = row["A03"] as String;
-            dict[tmp] = tmp;
-        }
-        dt.Dispose();
-
-        ta_UserData.Text = Code2Html(dict);
-    }
-    protected String Code2Html(Dictionary<String, String> srcDict)
-    {
-        StringBuilder buffer = new StringBuilder();
-        buffer.Append("<html>");
-        buffer.Append("<head>");
-        buffer.Append("<title>").Append("").Append("</title>");
-        buffer.Append("<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />");
-        buffer.Append("<style type=\"text/css\">");
-        buffer.Append("<!--.line_num {color: #666666; background-color: #E8E8E8;}//-->");
-        buffer.Append("</style>");
-        buffer.Append("</head>");
-        buffer.Append("<body>");
-        buffer.Append(cb_Format.SelectedValue == "0" ? "<pre style=\"font: 9pt Verdana, Fixedsys, Verdana, Tahoma;\">" : "<div style=\"font: 9pt Verdana, Fixedsys, Verdana, Tahoma;\">");
-        String[] text = Regex.Replace(ta_UserData.Text, "[\r\n]", "\n").Split('\n');
-        int size = text.Length;
-        int cnt = size.ToString().Length;
-        for (int i = 0; i < size; i += 1)
-        {
-            if (ck_ShowLine.Checked)
-            {
-                enCodeLine(buffer, i, cnt);
-            }
-            buffer.Append(enCodeHtml(text[i], srcDict)).Append(cb_Format.SelectedValue == "0" ? "\n" : "<br />");
-        }
-        buffer.Append(cb_Format.SelectedValue == "0" ? "</pre>" : "</div>");
-        buffer.Append("</body>");
-        buffer.Append("</html>");
-
-        return buffer.ToString();
-    }
-
-    private void enCodeLine(StringBuilder buf, int lineNbr, int lineCnt)
-    {
-        buf.Append("<span class=\"line_num\">");
-        buf.Append("<font color=\"#e8e8e8\">");
-        String tmp = (lineNbr + 1).ToString();
-        for (int i = tmp.Length, j = lineCnt + 2; i < j; i += 1)
-        {
-            buf.Append("0");
-        }
-        buf.Append("</font>");
-        buf.Append(tmp);
-        buf.Append(" </span>");
-    }
-
-    private String enCodeHtml(String text, Dictionary<String, String> srcDict)
-    {
-        bool spf = true;
-        // 单引号优先
-        if (spf)
-        {
-            int sp = text.IndexOf('\'');
-            if (Regex.IsMatch(text, "'.*?'"))
-            {
-            }
-        }
-        bool dpf = true;
-
-        // 双引号优先
-        if (dpf)
-        {
-            if (Regex.IsMatch(text, "\".*?\""))
-            {
-                Match match = Regex.Match(text, "\".*?\"");
-                StringBuilder buf = new StringBuilder();
-                int ids = 0;
-                int ide;
-                String tmp;
-                while (match.Success)
-                {
-                    ide = match.Index;
-                    buf.Append(replace(text.Substring(ids, ide - ids), srcDict));
-                    tmp = match.Value;
-                    buf.Append(tmp);
-                    ids = ide + tmp.Length;
-                    match = match.NextMatch();
-                }
-                text = buf.Append(replace(text.Substring(ids, text.Length - ids), srcDict)).ToString();
-            }
-            else
-            {
-                text = replace(text, srcDict);
-            }
-        }
-
-        if (cb_Format.SelectedValue == "1")
-        {
-            Match match = Regex.Match(text, "^\\s+");
-            if (match.Success)
-            {
-                String tmp = match.Value;
-                text = tmp.Replace(" ", "&nbsp;") + text.Substring(tmp.Length);
-            }
-        }
-        return text;
-    }
-
-    private String replace(String text, Dictionary<String, String> dict)
-    {
-        StringBuilder buf = new StringBuilder(text);
-        List<I1S1> list = new List<I1S1>();
-        Match match = Regex.Match(text, "[$\\w\\d]+");
-        while (match.Success)
-        {
-            list.Add(new I1S1(match.Index, match.Value));
-            match = match.NextMatch();
-        }
-
-        I1S1 item;
-        for (int i = list.Count - 1; i >= 0; i -= 1)
-        {
-            item = list[i];
-            if (dict.ContainsKey(item.V))
-            {
-                buf.Remove(item.K, item.V.Length).Insert(item.K, getStyle(item.V));
-            }
-        }
-        return buf.ToString();
-    }
-
-    private String getStyle(String key)
-    {
-        return String.Format("<font color=\"#0000C0\">{0}</font>", key);
+        UserOpt userOpt = new UserOpt();
+        userOpt.Language = "";
+        userOpt.ShowLineNbr = ck_ShowLineNbr.Checked;
+        userOpt.InLineStyle = ck_InLineStyle.Checked;
+        userOpt.ShowLinkUri = ck_ShowLinkUri.Checked;
+        userOpt.TagStyle = cb_TagStyle.SelectedValue;
+        GenHtml genHtml = new GenHtml(ta_UserData.Text, userOpt);
+        ta_UserData.Text = genHtml.ToHtml();
     }
     #endregion
 
