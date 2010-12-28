@@ -201,7 +201,7 @@ public partial class edit_edit0001 : Page
         }
         dt.Dispose();
 
-        ta_UserData.Text = HightLight.Parse(ta_UserData.Text);// Code2Html(dict);
+        ta_UserData.Text = Code2Html(dict);
     }
     protected String Code2Html(Dictionary<String, String> srcDict)
     {
