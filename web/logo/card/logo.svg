@@ -14,11 +14,11 @@
    height="48px"
    id="svg3624"
    version="1.1"
-   inkscape:version="0.47 r22583"
-   sodipodi:docname="logo5.svg"
-   inkscape:export-filename="C:\Documents and Settings\Amon\桌面\logo16.png"
-   inkscape:export-xdpi="30"
-   inkscape:export-ydpi="30">
+   inkscape:version="0.48.0 r9654"
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="D:\Rmps\web\logo\card\logo256.png"
+   inkscape:export-xdpi="480"
+   inkscape:export-ydpi="480">
   <defs
      id="defs3626">
     <linearGradient
@@ -100,7 +100,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -120,12 +120,12 @@
     <text
        xml:space="preserve"
        style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial Black;-inkscape-font-specification:Arial Black"
-       x="10.585812"
+       x="14.585812"
        y="30.157"
        id="text3609"><tspan
          sodipodi:role="line"
          id="tspan3611"
-         x="10.585812"
+         x="14.585812"
          y="30.157"
          style="font-size:16px;font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;fill:#ffffff;font-family:Arial Black;-inkscape-font-specification:Arial Black Heavy">AI</tspan></text>
   </g>
