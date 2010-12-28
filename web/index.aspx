@@ -33,7 +33,7 @@
             <td align="center" style="height: 500px; background-image: url(_images/line.png);background-repeat:no-repeat;background-position:center center;">
             	<table border="0" cellpadding="2" cellspacing="0" width="540">
 			        <tr>
-			            <td align="center" rowspan="5" style="width:280px;">
+			            <td align="center" rowspan="6" style="width:280px;">
 			            	<img src="_images/winshine.png" />
 			            </td>
 			            <td align="center" style="width:52px; height: 40px;">
@@ -41,6 +41,14 @@
 			            </td>
 			            <td align="left" style="font-size:18px;">
 			            	<a href="wlog/" title="Amon博客">Amon博客</a>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td align="center" style="width:52px; height: 40px;">
+			            	<a href="code/code0001.aspx" title="源码编辑"><img src="logo/code/logo32.png" /></a>
+			            </td>
+			            <td align="left" style="font-size:18px;">
+			            	<a href="code/code0001.aspx" title="源码编辑">源码编辑</a>
 			            </td>
 			        </tr>
 			        <tr>
