@@ -29,8 +29,13 @@ public partial class code_code0001 : Page
             return;
         }
 
+        LoadData();
+    }
+    private void LoadData()
+    {
         // 年份版权
         lb_CopyYear.Text = DateTime.Now.Year.ToString();
+        im_AmonLogo.ImageUrl = "~/logo/code/logo.png";
 
         if (UserInfo.Current(Session).UserRank != cons.comn.user.UserInfo.LEVEL_09)
         {
@@ -38,18 +43,11 @@ public partial class code_code0001 : Page
             ck_OverRide.Checked = false;
         }
 
+        rb_EditCode.Checked = true;
         ck_ShowLineNbr.Checked = true;
         ck_ShowLinkUri.Checked = true;
+        cb_TagStyle.SelectedValue = UserOpt.TAG_STYLE_DIV;
 
-        String url = Request.Params[cons.wrp.WrpCons.URI] ?? "http://";
-        tf_FilePath.Text = url;
-
-        Wrps.GuidEdit(Session)[2].K = cons.EnvCons.PRE_URL + "/edit/edit0002.aspx?uri=" + url;
-
-        LoadData(url);
-    }
-    private void LoadData(String url)
-    {
         DBAccess dba = new DBAccess();
         dba.addTable(cons.io.db.wrp.WrpCons.W2050300);
         dba.addColumn(cons.io.db.wrp.WrpCons.W2050301);
@@ -59,25 +57,25 @@ public partial class code_code0001 : Page
         cb_Language.DataValueField = cons.io.db.wrp.WrpCons.W2050301;
         cb_Language.DataSource = dba.executeSelect();
         cb_Language.DataBind();
+        cb_Language.Items.Insert(0, "--请选择--");
 
-        cb_TagStyle.SelectedValue = UserOpt.TAG_STYLE_DIV;
-
-        //获得指定链接的源代码
-        if (url == "http://")
-        {
-            return;
-        }
+        String url = Request.Params[cons.wrp.WrpCons.URI] ?? "http://";
         if (!url.StartsWith("http://"))
         {
             url = "http://" + url;
         }
+        tf_FilePath.Text = url;
 
-        try
+        //获得指定链接的源代码
+        if (url != "http://")
         {
-            ta_UserData.Text = WrpUtil.readHtmlCode(url);
-        }
-        catch (Exception)
-        {
+            try
+            {
+                ta_UserData.Text = WrpUtil.readHtmlCode(url);
+            }
+            catch (Exception)
+            {
+            }
         }
     }
     #endregion

@@ -1,11 +1,11 @@
 ﻿// JScript File
 function pageInit()
 {
-    $X('tr_Res').style.display=$X('cb_EditCode').checked?'none':'';
-    $X('tr_EditOpen').style.display=$X('cb_EditCode').checked?'none':'';
-    $X('tr_EditText').style.display=$X('cb_EditText').checked?'':'none';
-    $X('tr_EditHtml').style.display=$X('cb_EditHtml').checked?'':'none';
-    $X('tr_EditCode').style.display=$X('cb_EditCode').checked?'':'none';
+    $X('tr_Res').style.display=$X('rb_EditCode').checked?'none':'';
+    $X('tr_EditOpen').style.display=$X('rb_EditCode').checked?'none':'';
+    $X('tr_EditText').style.display=$X('rb_EditText').checked?'':'none';
+    $X('tr_EditHtml').style.display=$X('rb_EditHtml').checked?'':'none';
+    $X('tr_EditCode').style.display=$X('rb_EditCode').checked?'':'none';
     KE.init({id : 'ta_UserData',imageUploadJson : 'code0003.ashx',fileManagerJson : 'code0002.ashx',allowFileManager : true});
 }
 function showText()
@@ -37,6 +37,17 @@ function showCode()
 }
 function transform()
 {
+    var obj=$X('cb_Language');
+    var val=obj.value;
+    if(!val||val.length!=16)
+    {
+         $X('dv_Message').innerHTML='请选择源代码语言！';
+         $( "#dv_Message" ).dialog({
+		     height: 140,
+		     modal: true
+	     });
+	     return false;
+    }
     $.ajax({
       url:"code0001.ashx",
       type:"POST",
@@ -61,7 +72,6 @@ function transform()
          if(msg.indexOf('msg:')>=0){
              $X('dv_Message').innerHTML=msg.substring(4);
              $( "#dv_Message" ).dialog({
-			     height: 140,
 			     modal: true
 		     });
             return;

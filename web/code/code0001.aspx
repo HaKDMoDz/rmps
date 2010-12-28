@@ -16,28 +16,34 @@
     <form id="AmonForm" runat="server">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <tr>
-            <td id="CodeHead" align="right" colspan="2">
+            <td style="width: 40px;">
+            </td>
+            <td id="CodeHead" align="left" colspan="2">
+                <a href="/" title="网站首页">
+                    <asp:Image ID="im_AmonLogo" runat="server" /></a>
             </td>
         </tr>
         <tr>
-            <td id="CodeGuid" align="left">
+            <td id="CodeGuid" align="left" colspan="2">
+                &nbsp;
                 <label>
-                    <input type="radio" id="cb_EditHtml" name="mode" onclick="showHtml();" />网页在线编辑器
+                    <input type="radio" id="rb_EditText" runat="server" name="mode" onclick="showText();" />HTML代码格式化
                 </label>
                 <label>
-                    <input type="radio" id="cb_EditText" name="mode" onclick="showText();" checked="checked" />Javascript代码格式化
+                    <input type="radio" id="rb_EditCode" runat="server" name="mode" onclick="showCode();" />HTML源代码转换
                 </label>
                 <label>
-                    <input type="radio" id="cb_EditCode" name="mode" onclick="showCode();" />Html代码转换
+                    <input type="radio" id="rb_EditHtml" runat="server" name="mode" onclick="showHtml();" />网页在线编辑器
                 </label>
                 <asp:Label ID="lb_ErrMsg" runat="server"></asp:Label>
                 <asp:HiddenField ID="hd_ErrMsg" runat="server" />
             </td>
-            <td>
+            <td align="right" style="width: 200px;">
+                <a href="/" title="网站首页">网站首页</a>&nbsp;&nbsp;
             </td>
         </tr>
         <tr>
-            <td id="CodeBody" align="center">
+            <td id="CodeBody" align="center" colspan="2">
                 <asp:TextBox ID="ta_UserData" runat="server" TextMode="MultiLine" Width="98%" Height="800"></asp:TextBox>
             </td>
             <td align="left" valign="top" style="width: 200px;">
@@ -195,7 +201,7 @@
             </td>
         </tr>
         <tr>
-            <td id="CodeFoot" align="center" colspan="2">
+            <td id="CodeFoot" align="center" colspan="3">
                 &copy;&nbsp;<asp:Label ID="lb_CopyYear" runat="server"></asp:Label>
                 &nbsp;<a href="/info/">Amonsoft</a>.&nbsp;All&nbsp;Rights Reserved.
                 <br />
