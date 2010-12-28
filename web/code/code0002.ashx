@@ -1,4 +1,4 @@
-﻿<%@ webhandler Language="C#" class="Upload" %>
+﻿<%@ webhandler Language="C#" class="FileManager" %>
 
 /**
  * KindEditor ASP.NET
@@ -12,75 +12,195 @@ using System;
 using System.Collections;
 using System.Web;
 using System.IO;
-using System.Globalization;
+using System.Text.RegularExpressions;
 using LitJson;
+using System.Collections.Generic;
 
-public class Upload : IHttpHandler
+public class FileManager : IHttpHandler
 {
-	//文件保存目录路径
-	private String savePath = "attached/";
-	//文件保存目录URL
-	private String saveUrl = "attached/";
-	//定义允许上传的文件扩展名
-	private String fileTypes = "gif,jpg,jpeg,png,bmp";
-	//最大文件大小
-	private int maxSize = 1000000;
-
-	private HttpContext context;
-
 	public void ProcessRequest(HttpContext context)
 	{
-		this.context = context;
+		String aspxUrl = context.Request.Path.Substring(0, context.Request.Path.LastIndexOf("/") + 1);
 
-		HttpPostedFile imgFile = context.Request.Files["imgFile"];
-		if (imgFile == null)
+		//根目录路径，相对路径
+		String rootPath = "attached/";
+		//根目录URL，可以指定绝对路径，比如 http://www.yoursite.com/attached/
+		String rootUrl = aspxUrl + "attached/";
+		//图片扩展名
+		String fileTypes = "gif,jpg,jpeg,png,bmp";
+
+		String currentPath = "";
+		String currentUrl = "";
+		String currentDirPath = "";
+		String moveupDirPath = "";
+
+		//根据path参数，设置各路径和URL
+		String path = context.Request.QueryString["path"];
+		path = String.IsNullOrEmpty(path) ? "" : path;
+		if (path == "")
 		{
-			showError("请选择文件。");
+			currentPath = context.Server.MapPath(rootPath);
+			currentUrl = rootUrl;
+			currentDirPath = "";
+			moveupDirPath = "";
+		}
+		else
+		{
+			currentPath = context.Server.MapPath(rootPath) + path;
+			currentUrl = rootUrl + path;
+			currentDirPath = path;
+			moveupDirPath = Regex.Replace(currentDirPath, @"(.*?)[^\/]+\/$", "$1");
 		}
 
-		String dirPath = context.Server.MapPath(savePath);
-		if (!Directory.Exists(dirPath))
+		//排序形式，name or size or type
+		String order = context.Request.QueryString["order"];
+		order = String.IsNullOrEmpty(order) ? "" : order.ToLower();
+
+		//不允许使用..移动到上一级目录
+		if (Regex.IsMatch(path, @"\.\."))
 		{
-			showError("上传目录不存在。");
+			context.Response.Write("Access is not allowed.");
+			context.Response.End();
+		}
+		//最后一个字符不是/
+		if (path != "" && !path.EndsWith("/"))
+		{
+			context.Response.Write("Parameter is not valid.");
+			context.Response.End();
+		}
+		//目录不存在或不是目录
+		if (!Directory.Exists(currentPath))
+		{
+			context.Response.Write("Directory does not exist.");
+			context.Response.End();
 		}
 
-		String fileName = imgFile.FileName;
-		String fileExt = Path.GetExtension(fileName).ToLower();
-		ArrayList fileTypeList = ArrayList.Adapter(fileTypes.Split(','));
+		//遍历目录取得文件信息
+		string[] dirList = Directory.GetDirectories(currentPath);
+		string[] fileList = Directory.GetFiles(currentPath);
 
-		if (imgFile.InputStream == null || imgFile.InputStream.Length > maxSize)
+		switch (order)
 		{
-			showError("上传文件大小超过限制。");
+			case "size":
+				Array.Sort(dirList, new NameSorter());
+				Array.Sort(fileList, new SizeSorter());
+				break;
+			case "type":
+				Array.Sort(dirList, new NameSorter());
+				Array.Sort(fileList, new TypeSorter());
+				break;
+			case "name":
+			default:
+				Array.Sort(dirList, new NameSorter());
+				Array.Sort(fileList, new NameSorter());
+				break;
 		}
 
-		if (String.IsNullOrEmpty(fileExt) || Array.IndexOf(fileTypes.Split(','), fileExt.Substring(1).ToLower()) == -1)
+		Hashtable result = new Hashtable();
+		result["moveup_dir_path"] = moveupDirPath;
+		result["current_dir_path"] = currentDirPath;
+		result["current_url"] = currentUrl;
+		result["total_count"] = dirList.Length + fileList.Length;
+		List<Hashtable> dirFileList = new List<Hashtable>();
+		result["file_list"] = dirFileList;
+		for (int i = 0; i < dirList.Length; i++)
 		{
-			showError("上传文件扩展名是不允许的扩展名。");
+			DirectoryInfo dir = new DirectoryInfo(dirList[i]);
+			Hashtable hash = new Hashtable();
+			hash["is_dir"] = true;
+			hash["has_file"] = (dir.GetFileSystemInfos().Length > 0);
+			hash["filesize"] = 0;
+			hash["is_photo"] = false;
+			hash["filetype"] = "";
+			hash["filename"] = dir.Name;
+			hash["datetime"] = dir.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss");
+			dirFileList.Add(hash);
 		}
-
-		String newFileName = DateTime.Now.ToString("yyyyMMddHHmmss_ffff", DateTimeFormatInfo.InvariantInfo) + fileExt;
-		String filePath = dirPath + newFileName;
-
-		imgFile.SaveAs(filePath);
-
-		String fileUrl = saveUrl + newFileName;
-
-		Hashtable hash = new Hashtable();
-		hash["error"] = 0;
-		hash["url"] = fileUrl;
-		context.Response.AddHeader("Content-Type", "text/html; charset=UTF-8");
-		context.Response.Write(JsonMapper.ToJson(hash));
+		for (int i = 0; i < fileList.Length; i++)
+		{
+			FileInfo file = new FileInfo(fileList[i]);
+			Hashtable hash = new Hashtable();
+			hash["is_dir"] = false;
+			hash["has_file"] = false;
+			hash["filesize"] = file.Length;
+			hash["is_photo"] = (Array.IndexOf(fileTypes.Split(','), file.Extension.Substring(1).ToLower()) >= 0);
+			hash["filetype"] = file.Extension.Substring(1);
+			hash["filename"] = file.Name;
+			hash["datetime"] = file.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss");
+			dirFileList.Add(hash);
+		}
+		context.Response.AddHeader("Content-Type", "application/json; charset=UTF-8");
+		context.Response.Write(JsonMapper.ToJson(result));
 		context.Response.End();
 	}
 
-	private void showError(string message)
+	public class NameSorter : IComparer
 	{
-		Hashtable hash = new Hashtable();
-		hash["error"] = 1;
-		hash["message"] = message;
-		context.Response.AddHeader("Content-Type", "text/html; charset=UTF-8");
-		context.Response.Write(JsonMapper.ToJson(hash));
-		context.Response.End();
+		public int Compare(object x, object y)
+		{
+			if (x == null && y == null)
+			{
+				return 0;
+			}
+			if (x == null)
+			{
+				return -1;
+			}
+			if (y == null)
+			{
+				return 1;
+			}
+			FileInfo xInfo = new FileInfo(x.ToString());
+			FileInfo yInfo = new FileInfo(y.ToString());
+
+			return xInfo.FullName.CompareTo(yInfo.FullName);
+		}
+	}
+
+	public class SizeSorter : IComparer
+	{
+		public int Compare(object x, object y)
+		{
+			if (x == null && y == null)
+			{
+				return 0;
+			}
+			if (x == null)
+			{
+				return -1;
+			}
+			if (y == null)
+			{
+				return 1;
+			}
+			FileInfo xInfo = new FileInfo(x.ToString());
+			FileInfo yInfo = new FileInfo(y.ToString());
+
+			return xInfo.Length.CompareTo(yInfo.Length);
+		}
+	}
+
+	public class TypeSorter : IComparer
+	{
+		public int Compare(object x, object y)
+		{
+			if (x == null && y == null)
+			{
+				return 0;
+			}
+			if (x == null)
+			{
+				return -1;
+			}
+			if (y == null)
+			{
+				return 1;
+			}
+			FileInfo xInfo = new FileInfo(x.ToString());
+			FileInfo yInfo = new FileInfo(y.ToString());
+
+			return xInfo.Extension.CompareTo(yInfo.Extension);
+		}
 	}
 
 	public bool IsReusable

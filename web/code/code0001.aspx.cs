@@ -50,6 +50,18 @@ public partial class code_code0001 : Page
     }
     private void LoadData(String url)
     {
+        DBAccess dba = new DBAccess();
+        dba.addTable(cons.io.db.wrp.WrpCons.W2050300);
+        dba.addColumn(cons.io.db.wrp.WrpCons.W2050301);
+        dba.addColumn(cons.io.db.wrp.WrpCons.W2050302);
+        dba.addSort(cons.io.db.wrp.WrpCons.W2050302, true);
+        cb_Language.DataTextField = cons.io.db.wrp.WrpCons.W2050302;
+        cb_Language.DataValueField = cons.io.db.wrp.WrpCons.W2050301;
+        cb_Language.DataSource = dba.executeSelect();
+        cb_Language.DataBind();
+
+        cb_TagStyle.SelectedValue = UserOpt.TAG_STYLE_DIV;
+
         //获得指定链接的源代码
         if (url == "http://")
         {

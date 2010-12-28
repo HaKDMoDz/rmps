@@ -6,7 +6,7 @@ function pageInit()
     $X('tr_EditText').style.display=$X('cb_EditText').checked?'':'none';
     $X('tr_EditHtml').style.display=$X('cb_EditHtml').checked?'':'none';
     $X('tr_EditCode').style.display=$X('cb_EditCode').checked?'':'none';
-    KE.init({id : 'ta_UserData',imageUploadJson : 'code0002.ashx',fileManagerJson : 'code0001.ashx',allowFileManager : true});
+    KE.init({id : 'ta_UserData',imageUploadJson : 'code0003.ashx',fileManagerJson : 'code0002.ashx',allowFileManager : true});
 }
 function showText()
 {
@@ -34,6 +34,42 @@ function showCode()
     $X('tr_EditText').style.display='none';
     $X('tr_EditHtml').style.display='none';
     $X('tr_EditCode').style.display='';
+}
+function transform()
+{
+    $.ajax({
+      url:"code0001.ashx",
+      type:"POST",
+      data:({
+              l:$X('cb_Language').value,
+              i:$X('ck_InLineStyle').checked?'1':'0',
+              n:$X('ck_ShowLineNbr').checked?'1':'0',
+              u:$X('ck_ShowLinkUri').checked?'1':'0',
+              t:$X('cb_TagStyle').value,
+              s:$X('tf_TabCount').value,
+              c:$X('ta_UserData').value
+           }),
+      success:function(msg){
+         if(typeof(msg) != 'string'){
+             $X('dv_Message').innerHTML='服务器处理异常！';
+             $( "#dv_Message" ).dialog({
+			     height: 140,
+			     modal: true
+		     });
+             return;
+         }
+         if(msg.indexOf('msg:')>=0){
+             $X('dv_Message').innerHTML=msg.substring(4);
+             $( "#dv_Message" ).dialog({
+			     height: 140,
+			     modal: true
+		     });
+            return;
+         }
+         $X('ta_UserData').value=msg;
+      }
+   });
+   return false;
 }
 function editSubmit()
 {
