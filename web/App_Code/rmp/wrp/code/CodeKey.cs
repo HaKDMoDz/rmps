@@ -4,6 +4,9 @@ namespace rmp.wrp.code
 {
     public class CodeKey
     {
+        public const int TYPE_NORMAL = 0;
+        public const int TYPE_REGEXP = 1;
+
         /// <summary>
         /// 关键字索引
         /// </summary>
@@ -37,8 +40,12 @@ namespace rmp.wrp.code
         /// </summary>
         public String W2050106;
         /// <summary>
+        /// 是否为表达式
+        /// </summary>
+        public int W2050107;
+        /// <summary>
         /// 关键字备注
         /// </summary>
-        public String W2050107;
+        public String W2050108;
     }
 }

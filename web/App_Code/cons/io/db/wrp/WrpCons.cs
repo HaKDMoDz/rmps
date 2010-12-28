@@ -608,9 +608,13 @@ namespace cons.io.db.wrp
         /// </summary>
         public const String W2050106 = "W2050106";
         /// <summary>
-        /// 备注信息
+        /// 关键字类别
         /// </summary>
         public const String W2050107 = "W2050107";
+        /// <summary>
+        /// 备注信息
+        /// </summary>
+        public const String W2050108 = "W2050108";
         #endregion
         #region 语法风格
         /// <summary>
@@ -720,9 +724,17 @@ namespace cons.io.db.wrp
         /// </summary>
         public const String W205030D = "W205030D";
         /// <summary>
-        /// 备注信息
+        /// 区分大小写
         /// </summary>
         public const String W205030E = "W205030E";
+        /// <summary>
+        /// 特殊字符
+        /// </summary>
+        public const String W205030F = "W205030F";
+        /// <summary>
+        /// 备注信息
+        /// </summary>
+        public const String W2050310 = "W2050310";
         #endregion
         #endregion
 

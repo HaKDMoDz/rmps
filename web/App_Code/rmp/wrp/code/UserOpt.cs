@@ -15,6 +15,12 @@ namespace rmp.wrp.code
         private String tagStyle;
         private String language;
 
+        public String Language
+        {
+            get { return language; }
+            set { language = value; }
+        }
+
         public UserOpt()
         {
             SetDefault();
@@ -57,12 +63,6 @@ namespace rmp.wrp.code
         {
             get { return tagStyle; }
             set { tagStyle = value; }
-        }
-
-        public String Language
-        {
-            get { return language; }
-            set { language = value; }
         }
     }
 }

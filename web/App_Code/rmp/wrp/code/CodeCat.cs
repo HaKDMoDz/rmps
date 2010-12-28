@@ -37,28 +37,36 @@ namespace rmp.wrp.code
         /// </summary>
         public String W2050308;
         /// <summary>
-        /// 
+        /// 单行注释
         /// </summary>
         public String W2050309;
         /// <summary>
-        /// 
+        /// 多行注释（起始）
         /// </summary>
         public String W205030A;
         /// <summary>
-        /// 
+        /// 多行注释（结束）
         /// </summary>
         public String W205030B;
         /// <summary>
-        /// 
+        /// 文档注释（起始）
         /// </summary>
         public String W205030C;
         /// <summary>
-        /// 
+        /// 文档注释（结束）
         /// </summary>
         public String W205030D;
         /// <summary>
+        /// 区分大小写
+        /// </summary>
+        public bool W205030E;
+        /// <summary>
+        /// 特殊字符
+        /// </summary>
+        public String W205030F;
+        /// <summary>
         /// 备注信息
         /// </summary>
-        public String W205030E;
+        public String W2050310;
     }
 }
