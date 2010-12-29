@@ -16,21 +16,25 @@
     <form id="AmonForm" runat="server">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <tr>
-            <td style="width: 40px;">
-            </td>
             <td id="CodeHead" align="left" colspan="2">
-                <a href="/" title="网站首页">
-                    <asp:Image ID="im_AmonLogo" runat="server" /></a>
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td align="right" style="width: 200px;">
+                            <a href="/" title="网站首页">
+                                <asp:Image ID="im_AmonLogo" runat="server" /></a>
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
         <tr>
-            <td id="CodeGuid" align="left" colspan="2">
+            <td id="CodeGuid" align="left">
                 <div id="mode">
                     <input type="radio" id="rb_EditText" runat="server" name="mode" onclick="showText();" /><label for="rb_EditText">HTML代码格式化</label>
                     <input type="radio" id="rb_EditCode" runat="server" name="mode" onclick="showCode();" /><label for="rb_EditCode">HTML源代码转换</label>
-                    <input type="radio" id="rb_EditHtml" runat="server" name="mode" onclick="showHtml();" /><label for="rb_EditHtml">网页在线编辑器</label>
+                    <input type="radio" id="rb_EditHtml" runat="server" name="mode" onclick="showHtml();" /><label for="rb_EditHtml">HTML在线编辑器</label>
+                    <input type="radio" id="rb_EditView" runat="server" name="mode" onclick="showView();" /><label for="rb_EditView">HTML结果预览</label>
                 </div>
-                <asp:Label ID="lb_ErrMsg" runat="server"></asp:Label>
                 <asp:HiddenField ID="hd_ErrMsg" runat="server" />
             </td>
             <td align="right" style="width: 200px;">
@@ -38,8 +42,9 @@
             </td>
         </tr>
         <tr>
-            <td id="CodeBody" align="center" colspan="2">
-                <asp:TextBox ID="ta_UserData" runat="server" TextMode="MultiLine" Width="98%" Height="800"></asp:TextBox>
+            <td id="CodeBody" align="center">
+                <asp:TextBox ID="ta_UserData" runat="server" TextMode="MultiLine" Width="98%" Height="800" CssClass="USERAREA"></asp:TextBox>
+                <iframe id="if_UserData" frameborder="0" width="98%" height="800" class="USERAREA"></iframe>
             </td>
             <td align="left" valign="top" style="width: 200px;">
                 <table border="0" cellpadding="0" cellspacing="0" width="92%">
@@ -186,7 +191,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <asp:Button ID="bt_EditCode" runat="server" Text="转换" OnClick="bt_EditCode_Click" OnClientClick="return transform();" />
+                                        <asp:Button ID="bt_EditCode" runat="server" Text="转换(X)" AccessKey="X" OnClick="bt_EditCode_Click" OnClientClick="return transform();" />
                                     </td>
                                 </tr>
                             </table>
@@ -196,7 +201,7 @@
             </td>
         </tr>
         <tr>
-            <td id="CodeFoot" align="center" colspan="3">
+            <td id="CodeFoot" align="center" colspan="2">
                 &copy;&nbsp;<asp:Label ID="lb_CopyYear" runat="server"></asp:Label>
                 &nbsp;<a href="/info/">Amonsoft</a>.&nbsp;All&nbsp;Rights Reserved.
                 <br />
@@ -212,7 +217,7 @@
             </td>
         </tr>
     </table>
-    <div id="dv_Message" title="提示">
+    <div id="dv_Message" title="提示" style="color: #FF0000; font-family: 宋体, Arial, Sans-Serif; font-weight: bold; text-align: center;">
     </div>
     </form>
 </body>

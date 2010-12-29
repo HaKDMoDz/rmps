@@ -1,6 +1,20 @@
 ﻿// JScript File
+function chgView(view)
+{
+    if(view)
+    {
+        $X('if_UserData').style.display='';
+        $X('ta_UserData').style.display='none';
+    }
+    else
+    {
+        $X('ta_UserData').style.display='';
+        $X('if_UserData').style.display='none';
+    }
+}
 $(function pageInit()
 {
+    chgView($X('rb_EditView').checked);
     $X('tr_Res').style.display=$X('rb_EditCode').checked?'none':'';
     $X('tr_EditOpen').style.display=$X('rb_EditCode').checked?'none':'';
     $X('tr_EditText').style.display=$X('rb_EditText').checked?'':'none';
@@ -11,6 +25,7 @@ $(function pageInit()
 });
 function showText()
 {
+    chgView(false);
     KE.remove('ta_UserData');
     $X('tr_Res').style.display='';
     $X('tr_EditOpen').style.display='';
@@ -20,6 +35,7 @@ function showText()
 }
 function showHtml()
 {
+    chgView(false);
 	KE.create('ta_UserData');
 	$X('tr_Res').style.display='';
 	$X('tr_EditOpen').style.display='';
@@ -29,12 +45,20 @@ function showHtml()
 }
 function showCode()
 {
+    chgView(false);
     KE.remove('ta_UserData');
     $X('tr_Res').style.display='none';
     $X('tr_EditOpen').style.display='none';
     $X('tr_EditText').style.display='none';
     $X('tr_EditHtml').style.display='none';
     $X('tr_EditCode').style.display='';
+}
+function showView()
+{
+    chgView(true);
+    var doc=document.getElementById('if_UserData').contentDocument || document.frames['if_UserData'].document;
+    doc.clear();
+    doc.write($X('ta_UserData').value);
 }
 function transform()
 {
@@ -44,8 +68,13 @@ function transform()
     {
          $X('dv_Message').innerHTML='请选择源代码语言！';
          $( "#dv_Message" ).dialog({
-		     height: 140,
-		     modal: true
+		     modal:true,
+		     buttons:{
+		        "OK":function(){
+		            $(this).dialog('close');
+		            $X('cb_Language').focus();
+		        }
+		     }
 	     });
 	     return false;
     }
