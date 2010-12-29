@@ -30,6 +30,10 @@
 	overflow: hidden;
 	padding: 0;
 }
+.USERAREA
+{
+	border:solid 1px #CCC;
+}
 .TB_CODEITEM
 {
 	border: dashed 1px #CCCCCC;
