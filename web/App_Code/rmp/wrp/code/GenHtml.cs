@@ -236,7 +236,7 @@ namespace rmp.wrp.code
             #region 生成HTML代码
             buffer.Append("<html>");
             buffer.Append("<head>");
-            buffer.Append("<title>").Append("").Append("</title>");
+            buffer.Append("<title>Amon源码</title>");
             buffer.Append("<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />");
             if (!userOpt.InLineStyle)
             {
