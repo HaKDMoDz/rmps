@@ -45,10 +45,10 @@
 			        </tr>
 			        <tr>
 			            <td align="center" style="width:52px; height: 40px;">
-			            	<a href="code/code0001.aspx" title="源码编辑"><img src="logo/code/logo32.png" /></a>
+			            	<a href="code/" title="源码编辑"><img src="logo/code/logo32.png" /></a>
 			            </td>
 			            <td align="left" style="font-size:18px;">
-			            	<a href="code/code0001.aspx" title="源码编辑">源码编辑</a>
+			            	<a href="code/" title="源码编辑">源码编辑</a>
 			            </td>
 			        </tr>
 			        <tr>
