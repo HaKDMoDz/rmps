@@ -65,8 +65,12 @@ namespace rmp.wrp.code
         /// </summary>
         public String W205030F;
         /// <summary>
-        /// 备注信息
+        /// 数字格式
         /// </summary>
         public String W2050310;
+        /// <summary>
+        /// 备注信息
+        /// </summary>
+        public String W2050311;
     }
 }

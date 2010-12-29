@@ -25,16 +25,11 @@
         </tr>
         <tr>
             <td id="CodeGuid" align="left" colspan="2">
-                &nbsp;
-                <label>
-                    <input type="radio" id="rb_EditText" runat="server" name="mode" onclick="showText();" />HTML代码格式化
-                </label>
-                <label>
-                    <input type="radio" id="rb_EditCode" runat="server" name="mode" onclick="showCode();" />HTML源代码转换
-                </label>
-                <label>
-                    <input type="radio" id="rb_EditHtml" runat="server" name="mode" onclick="showHtml();" />网页在线编辑器
-                </label>
+                <div id="mode">
+                    <input type="radio" id="rb_EditText" runat="server" name="mode" onclick="showText();" /><label for="rb_EditText">HTML代码格式化</label>
+                    <input type="radio" id="rb_EditCode" runat="server" name="mode" onclick="showCode();" /><label for="rb_EditCode">HTML源代码转换</label>
+                    <input type="radio" id="rb_EditHtml" runat="server" name="mode" onclick="showHtml();" /><label for="rb_EditHtml">网页在线编辑器</label>
+                </div>
                 <asp:Label ID="lb_ErrMsg" runat="server"></asp:Label>
                 <asp:HiddenField ID="hd_ErrMsg" runat="server" />
             </td>
@@ -229,4 +224,4 @@
 
 <script type="text/javascript" src="kindeditor-min.js"></script>
 
-<%= rmp.wrp.Wrps.ComnScript(Session, cons.wrp.WrpCons.MODULE_CODE) %>
+<%= String.Format("<script type=\"text/javascript\" src=\"{0}/{1}/{2}.js\"></script>", cons.EnvCons.PRE_URL, cons.wrp.WrpCons.MODULE_CODE, Session[cons.wrp.WrpCons.SCRIPTID])%>

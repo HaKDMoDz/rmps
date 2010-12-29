@@ -54,6 +54,11 @@ namespace rmp.wrp.code
             codeCat.W205030E = "1" == (row[cons.io.db.wrp.WrpCons.W205030E] + "");
             codeCat.W205030F = row[cons.io.db.wrp.WrpCons.W205030F] + "";
             codeCat.W2050310 = row[cons.io.db.wrp.WrpCons.W2050310] + "";
+            codeCat.W2050311 = row[cons.io.db.wrp.WrpCons.W2050311] + "";
+            if (String.IsNullOrEmpty(codeCat.W2050310))
+            {
+                codeCat.W2050310 = "((\\d*\\.\\d+)|(\\d+(\\.\\d*)?)([*]?[eE][-+]?\\d+)?)";
+            }
             #endregion
 
             StringBuilder buffer = new StringBuilder();
@@ -522,8 +527,7 @@ namespace rmp.wrp.code
             buf.Append("$\\w\\d]+").Append('|');
 
             // 数值表达式
-            const String NUM_REG = "^((\\d*\\.\\d+)|(\\d+(\\.\\d*)?)([*]?[eE][-+]?\\d+)?[dDlL]?)$|^((0[xX])?[0-9A-Fa-f]+)$";
-            buf.Append(NUM_REG);
+            buf.Append(codeCat.W2050310);
 
             List<I1S1> list = new List<I1S1>();
             Match match = Regex.Match(text, buf.ToString());
@@ -561,7 +565,7 @@ namespace rmp.wrp.code
                     continue;
                 }
 
-                if (Regex.IsMatch(item.V, NUM_REG))
+                if (Regex.IsMatch(item.V, codeCat.W2050310))
                 {
                     buf.Remove(item.K, item.V.Length).Insert(item.K, formatNum(item.V, keyDict["※number"]));
                 }

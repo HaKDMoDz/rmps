@@ -1,13 +1,14 @@
 ﻿// JScript File
-function pageInit()
+$(function pageInit()
 {
     $X('tr_Res').style.display=$X('rb_EditCode').checked?'none':'';
     $X('tr_EditOpen').style.display=$X('rb_EditCode').checked?'none':'';
     $X('tr_EditText').style.display=$X('rb_EditText').checked?'':'none';
     $X('tr_EditHtml').style.display=$X('rb_EditHtml').checked?'':'none';
     $X('tr_EditCode').style.display=$X('rb_EditCode').checked?'':'none';
+    $( "#mode" ).buttonset();
     KE.init({id : 'ta_UserData',imageUploadJson : 'code0003.ashx',fileManagerJson : 'code0002.ashx',allowFileManager : true});
-}
+});
 function showText()
 {
     KE.remove('ta_UserData');
@@ -168,4 +169,3 @@ function unpacker_filter(source)
     }
     return source;
 }
-pageInit();

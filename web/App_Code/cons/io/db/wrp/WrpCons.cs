@@ -732,9 +732,13 @@ namespace cons.io.db.wrp
         /// </summary>
         public const String W205030F = "W205030F";
         /// <summary>
-        /// 备注信息
+        /// 数字格式
         /// </summary>
         public const String W2050310 = "W2050310";
+        /// <summary>
+        /// 备注信息
+        /// </summary>
+        public const String W2050311 = "W2050311";
         #endregion
         #endregion
 
