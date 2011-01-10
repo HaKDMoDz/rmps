@@ -57,8 +57,8 @@ function showView()
 {
     chgView(true);
     var doc=document.getElementById('if_UserData').contentDocument || document.frames['if_UserData'].document;
-    doc.clear();
     doc.write($X('ta_UserData').value);
+    doc.close();
 }
 function transform()
 {
