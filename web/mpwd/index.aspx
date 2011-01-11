@@ -47,11 +47,40 @@
                 软件下载：
             </td>
             <td align="left" style="height: 20px;">
-                <asp:HyperLink ID="hl_DownZip" runat="server" ToolTip="平台无关版本"><img src="/icon/icon0001.ashx?sid=comn,_ALL&uri=32" /></asp:HyperLink>&nbsp;
-                <asp:HyperLink ID="hl_DownWin" runat="server" ToolTip="Windows 版本"><img src="/icon/icon0001.ashx?sid=comn,_WIN&uri=32" /></asp:HyperLink>&nbsp;
-                <asp:HyperLink ID="hl_DownMac" runat="server" ToolTip="Mac OS X 版本"><img src="/icon/icon0001.ashx?sid=comn,_MAC&uri=32" /></asp:HyperLink>&nbsp;
-                <asp:HyperLink ID="hl_DownUnx" runat="server" ToolTip="Unix/Linux 版本"><img src="/icon/icon0001.ashx?sid=comn,_LNX&uri=32" /></asp:HyperLink>&nbsp;
-                <a href="/mpwd/mpwd0002.aspx">其它下载</a>
+				<table border="0" style="width: 100%;">
+					<tr>
+						<td>
+							平台无关版本
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<asp:HyperLink ID="hl_DownZip" runat="server" ToolTip="平台无关版本"><img src="/icon/icon0001.ashx?sid=comn,_ALL&uri=32" /></asp:HyperLink>&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td>
+							含JRE版本
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<asp:HyperLink ID="hl_DownWinJ" runat="server" ToolTip="Windows 版本"><img src="/icon/icon0001.ashx?sid=comn,_WIN&uri=32" /></asp:HyperLink>&nbsp;
+							<asp:HyperLink ID="hl_DownLnxJ" runat="server" ToolTip="Linux 版本"><img src="/icon/icon0001.ashx?sid=comn,_LNX&uri=32" /></asp:HyperLink>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							无JRE版本
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<asp:HyperLink ID="hl_DownWinN" runat="server" ToolTip="Windows 版本"><img src="/icon/icon0001.ashx?sid=comn,_WIN&uri=32" /></asp:HyperLink>&nbsp;
+							<asp:HyperLink ID="hl_DownLnxN" runat="server" ToolTip="Linux 版本"><img src="/icon/icon0001.ashx?sid=comn,_LNX&uri=32" /></asp:HyperLink>
+						</td>
+					</tr>
+				</table>
             </td>
         </tr>
         <tr>

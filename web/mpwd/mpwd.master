@@ -82,17 +82,7 @@
                                             </tr>
                                             <tr>
                                                 <td align="center" class="TD_LIST_BODY">
-                                                    <img src="<%=cons.EnvCons.PRE_URL%>/_images/130F0000/3000_l02t.png" alt="" style="border: 4px solid #FFFFFF;" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td align="center" class="TD_LIST_BODY">
                                                     <img src="<%=cons.EnvCons.PRE_URL%>/_images/130F0000/3000_s01t.png" alt="" style="border: 4px solid #FFFFFF;" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td align="center" class="TD_LIST_BODY">
-                                                    <img src="<%=cons.EnvCons.PRE_URL%>/_images/130F0000/3000_w03t.png" alt="" style="border: 4px solid #FFFFFF;" />
                                                 </td>
                                             </tr>
                                         </table>

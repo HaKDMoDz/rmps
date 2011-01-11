@@ -35,9 +35,10 @@ public partial class mpwd_index : Page
             lb_PubsTime.Text = row[cons.io.db.comn.ComnCons.C0010107].ToString();
             String down = row[cons.io.db.comn.ComnCons.C001010F].ToString();
             hl_DownZip.NavigateUrl = down;
-            hl_DownWin.NavigateUrl = Regex.Replace(down, "\\.zip$", ".exe", RegexOptions.IgnoreCase);
-            hl_DownMac.NavigateUrl = Regex.Replace(down, "\\.zip$", ".dmg", RegexOptions.IgnoreCase);
-            hl_DownUnx.NavigateUrl = Regex.Replace(down, "\\.zip$", ".sh", RegexOptions.IgnoreCase);
+            hl_DownWinJ.NavigateUrl = Regex.Replace(down, "\\.zip$", "_j.exe", RegexOptions.IgnoreCase);
+            hl_DownLnxJ.NavigateUrl = Regex.Replace(down, "\\.zip$", "_j.sh", RegexOptions.IgnoreCase);
+            hl_DownWinN.NavigateUrl = Regex.Replace(down, "\\.zip$", "_n.exe", RegexOptions.IgnoreCase);
+            hl_DownLnxN.NavigateUrl = Regex.Replace(down, "\\.zip$", "_n.sh", RegexOptions.IgnoreCase);
             hl_SoftJnlp.NavigateUrl = row[cons.io.db.comn.ComnCons.C0010110].ToString();
             hl_Win.NavigateUrl = String.Format("~/_images/{0}/3000_w03.png", sid);
             hl_Lin.NavigateUrl = String.Format("~/_images/{0}/3000_l01.png", sid);
