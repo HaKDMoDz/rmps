@@ -13,6 +13,7 @@ public class mpwd0001 : IHttpHandler
         context.Response.ContentType = "image/png";
 
         // 用户编码
+        String usn = "";
         // 当前版本
         String sid = (context.Request[cons.wrp.WrpCons.SID] ?? "").Trim();
         // 网络地址
