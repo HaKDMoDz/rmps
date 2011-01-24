@@ -33,16 +33,6 @@ function showText()
     $X('tr_EditHtml').style.display='none';
     $X('tr_EditCode').style.display='none';
 }
-function showHtml()
-{
-    chgView(false);
-	KE.create('ta_UserData');
-	$X('tr_Res').style.display='';
-	$X('tr_EditOpen').style.display='';
-    $X('tr_EditText').style.display='none';
-    $X('tr_EditHtml').style.display='';
-    $X('tr_EditCode').style.display='none';
-}
 function showCode()
 {
     chgView(false);
@@ -53,8 +43,19 @@ function showCode()
     $X('tr_EditHtml').style.display='none';
     $X('tr_EditCode').style.display='';
 }
+function showHtml()
+{
+    chgView(false);
+	KE.create('ta_UserData');
+	$X('tr_Res').style.display='';
+	$X('tr_EditOpen').style.display='';
+    $X('tr_EditText').style.display='none';
+    $X('tr_EditHtml').style.display='';
+    $X('tr_EditCode').style.display='none';
+}
 function showView()
 {
+    KE.remove('ta_UserData');
     chgView(true);
     var doc=document.getElementById('if_UserData').contentDocument || document.frames['if_UserData'].document;
     doc.write($X('ta_UserData').value);
@@ -64,7 +65,7 @@ function transform()
 {
     var obj=$X('cb_Language');
     var val=obj.value;
-    if(!val||val.length!=16)
+    if(!val)
     {
          $X('dv_Message').innerHTML='请选择源代码语言！';
          $( "#dv_Message" ).dialog({
@@ -126,14 +127,14 @@ function editPrompt()
     if(url == null)
     {
         alert('请输入一个合法的链接地址，如：“http://www.amonsoft.cn/”。');
-        $E('tf_FilePath').focus();
+        $X('tf_FilePath').focus();
         return false;
     }
     url = url.trim();
     if (url == '' || url == 'http://')
     {
         alert('请输入一个合法的链接地址，如：“http://www.amonsoft.cn/”。');
-        $E('tf_FilePath').focus();
+        $X('tf_FilePath').focus();
         return false;
     }
     return true;
@@ -181,7 +182,7 @@ function trim_leading_comments(str)
 }
 function unpacker_filter(source)
 {
-    if ($E('ck_PrePackr').checked)
+    if ($X('ck_PrePackr').checked)
     {
         stripped_source = trim_leading_comments(source);
         if (starts_with(stripped_source.toLowerCase().replace(/ +/g, ''), 'eval(function(p,a,c,k')) {

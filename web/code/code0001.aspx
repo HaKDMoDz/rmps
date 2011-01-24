@@ -123,7 +123,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <asp:Button ID="bt_Beautify" runat="server" AccessKey="B" Text="格式化代码(B)" OnClientClick="return do_js_beautify();" />
+										<input type="button" id="bt_Beautify" accesskey="B" value="格式化代码(B)" onclick="return do_js_beautify();" />
                                     </td>
                                 </tr>
                             </table>

@@ -29,7 +29,7 @@ namespace rmp.wrp.code
             #region 读取语言信息
             DBAccess dba = new DBAccess();
             dba.addTable(cons.io.db.wrp.WrpCons.W2050300);
-            dba.addWhere(cons.io.db.wrp.WrpCons.W2050301, userOpt.Language);
+            dba.addWhere(String.Format("LOWER({0})", cons.io.db.wrp.WrpCons.W2050302), userOpt.Language.ToLower());
             DataTable dt = dba.executeSelect();
             int cnt = dt.Rows.Count;
             if (cnt != 1)
@@ -66,7 +66,7 @@ namespace rmp.wrp.code
             #region 读取风格信息
             dba.reset();
             dba.addTable(cons.io.db.wrp.WrpCons.W2050200);
-            dba.addWhere(cons.io.db.wrp.WrpCons.W2050203, userOpt.Language);
+            dba.addWhere(cons.io.db.wrp.WrpCons.W2050203, codeCat.W2050301);
             dba.addSort(cons.io.db.wrp.WrpCons.W2050201, true);
             dt = dba.executeSelect();
             cnt = dt.Rows.Count;
@@ -111,7 +111,7 @@ namespace rmp.wrp.code
             // 关键字信息
             dba.reset();
             dba.addTable(cons.io.db.wrp.WrpCons.W2050100);
-            dba.addWhere(cons.io.db.wrp.WrpCons.W2050102, userOpt.Language);
+            dba.addWhere(cons.io.db.wrp.WrpCons.W2050102, codeCat.W2050301);
             dba.addWhere(cons.io.db.wrp.WrpCons.W2050107, CodeKey.TYPE_NORMAL.ToString());
             dt = dba.executeSelect();
             cnt = dt.Rows.Count;
@@ -140,7 +140,7 @@ namespace rmp.wrp.code
             // 表达式信息
             dba.reset();
             dba.addTable(cons.io.db.wrp.WrpCons.W2050100);
-            dba.addWhere(cons.io.db.wrp.WrpCons.W2050102, userOpt.Language);
+            dba.addWhere(cons.io.db.wrp.WrpCons.W2050102, codeCat.W2050301);
             dba.addWhere(cons.io.db.wrp.WrpCons.W2050107, CodeKey.TYPE_REGEXP.ToString());
             dt = dba.executeSelect();
             cnt = dt.Rows.Count;

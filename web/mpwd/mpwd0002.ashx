@@ -40,30 +40,42 @@ public class mpwd0002 : IHttpHandler
         root.AppendChild(node);
         root = node;
 
-        int rnd = new Random().Next(3);
+        int rnd = new Random().Next(5);
         for (int i = 0; i < 10; i += 1)
         {
             node = document.CreateElement("file");
             root.AppendChild(node);
-
-            temp = document.CreateElement("name");
-            temp.InnerText = "mpwd0001.png";
-            node.AppendChild(temp);
 
             temp = document.CreateElement("version");
             temp.InnerText = "V1.0.0." + i;
             node.AppendChild(temp);
 
             temp = document.CreateElement("operation");
-            temp.InnerText = ((i + rnd) % 3 - 1).ToString();
+            temp.InnerText = ((i + rnd) % 5 - 1).ToString();
             node.AppendChild(temp);
 
             temp = document.CreateElement("remote-path");
             temp.InnerText = "data/mpwd/";
             node.AppendChild(temp);
 
-            temp = document.CreateElement("locale-path");
+            temp = document.CreateElement("remote-name");
+            temp.InnerText = "mpwd0001.png";
+            node.AppendChild(temp);
+
+            temp = document.CreateElement("local-path1");
             temp.InnerText = "temp" + i;
+            node.AppendChild(temp);
+
+            temp = document.CreateElement("local-name1");
+            temp.InnerText = "mpwd0001.png";
+            node.AppendChild(temp);
+
+            temp = document.CreateElement("local-path2");
+            temp.InnerText = "temp" + i;
+            node.AppendChild(temp);
+
+            temp = document.CreateElement("local-name2");
+            temp.InnerText = "mpwd0001.png";
             node.AppendChild(temp);
         }
 

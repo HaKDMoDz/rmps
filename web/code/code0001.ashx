@@ -10,7 +10,7 @@ public class code0001 : IHttpHandler
     {
         #region 语言判断
         String lang = rmp.util.WrpUtil.text2Db(context.Request["l"]);
-        if (!rmp.util.StringUtil.isValidateHash(lang))
+        if (!rmp.util.StringUtil.isValidate(lang))
         {
             context.Response.ContentType = "text/plain";
             context.Response.Write("msg:请选择代码语言！");
