@@ -57,8 +57,17 @@ public class code0001 : IHttpHandler
 
         try
         {
-            context.Response.ContentType = "text/" + (opt == "html" ? "html" : "plain");
-            context.Response.Write(new rmp.wrp.code.GenHtml(text, userOpt).ToHtml());
+            String html = new rmp.wrp.code.GenHtml(text, userOpt).ToHtml();
+            if (html == null)
+            {
+                context.Response.ContentType = "text/plain";
+                context.Response.Write(text);
+            }
+            else
+            {
+                context.Response.ContentType = "text/" + (opt == "html" ? "html" : "plain");
+                context.Response.Write(html);
+            }
         }
         catch (Exception exp)
         {

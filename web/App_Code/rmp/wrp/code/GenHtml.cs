@@ -29,7 +29,7 @@ namespace rmp.wrp.code
             #region 读取语言信息
             DBAccess dba = new DBAccess();
             dba.addTable(cons.io.db.wrp.WrpCons.W2050300);
-            dba.addWhere(String.Format("LOWER({0})", cons.io.db.wrp.WrpCons.W2050302), userOpt.Language.ToLower());
+            dba.addWhere(cons.io.db.wrp.WrpCons.W2050311, userOpt.Language.ToLower());
             DataTable dt = dba.executeSelect();
             int cnt = dt.Rows.Count;
             if (cnt != 1)
