@@ -23,7 +23,7 @@ public class mpwd0001 : IHttpHandler
         String uip = context.Request.UserHostAddress;
         String upc = context.Request.UserHostName;
 
-        System.IO.StreamWriter writer = System.IO.File.AppendText(context.Server.MapPath("~/mpwd/mpwd.txt"));
+        System.IO.StreamWriter writer = System.IO.File.AppendText(context.Server.MapPath("~/data/mpwd.txt"));
         writer.WriteLine(String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", sid, uri, uip, opt, upc, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
         writer.Flush();
         writer.Close();
