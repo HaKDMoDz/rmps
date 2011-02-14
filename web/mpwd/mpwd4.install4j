@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="4.2.8" transformSequenceNumber="2">
   <directoryPresets config="./pub" />
-  <application name="魔方密码" distributionSourceDir="" applicationId="8491-8644-7127-4560" mediaDir="./pub" mediaFilePattern="magicpwd_v${compiler:sys.version}_${compiler:sys.date}" compression="9" lzmaCompression="true" pack200Compression="false" excludeSignedFromPacking="true" keepModificationTimes="false" missingFilesStrategy="warn" shortName="MagicPwd" publisher="Amon" publisherWeb="http://magicpwd.com/" version="3.5.4.6" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.6" javaMaxVersion="" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
+  <application name="魔方密码" distributionSourceDir="" applicationId="8491-8644-7127-4560" mediaDir="./pub" mediaFilePattern="magicpwd_${compiler:sys.platform}${compiler:sys.withJre}" compression="9" lzmaCompression="true" pack200Compression="false" excludeSignedFromPacking="true" keepModificationTimes="false" missingFilesStrategy="warn" shortName="MagicPwd" publisher="Amon" publisherWeb="http://magicpwd.com/" version="3.5.6.8" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.6" javaMaxVersion="" allowBetaVM="false" jdkMode="runtimeJre" jdkName="">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="zh_CN" customLocalizationFile="" />
       <additionalLanguages>
@@ -23,8 +23,9 @@
       <mountPoint id="20" root="" location="" mode="755" />
     </mountPoints>
     <entries>
-      <dirEntry mountPoint="20" file="./res" overwrite="4" shared="false" mode="644" uninstallMode="0" excludeSuffixes="" dirMode="755">
+      <dirEntry mountPoint="20" file="./res" overwrite="4" shared="false" mode="644" uninstallMode="0" excludeSuffixes="*.db" dirMode="755">
         <exclude>
+          <entry location=".svn" fileType="regular" />
           <entry location="filelist.html" fileType="regular" />
         </exclude>
       </dirEntry>
@@ -463,6 +464,7 @@
   </mediaSets>
   <buildIds buildAll="false">
     <mediaSet refId="23" />
+    <mediaSet refId="24" />
   </buildIds>
 </install4j>
 

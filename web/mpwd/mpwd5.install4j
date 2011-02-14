@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="5.0.6" transformSequenceNumber="3">
   <directoryPresets config="./res/logo" />
-  <application name="魔方密码" distributionSourceDir="" applicationId="5252-2199-8296-6779" mediaDir="./pub" mediaFilePattern="magicpwd_v${compiler:sys.version}_${compiler:sys.date}${compiler:sys.withJre}" compression="9" lzmaCompression="true" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="MagicPwd" publisher="Amon" publisherWeb="http://magicpwd.com/" version="3.5.4.6" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.6" javaMaxVersion="" allowBetaVM="true" jdkMode="runtimeJre" jdkName="">
+  <application name="魔方密码" distributionSourceDir="" applicationId="5252-2199-8296-6779" mediaDir="./pub" mediaFilePattern="magicpwd_${compiler:sys.platform}${compiler:sys.withJre}" compression="9" lzmaCompression="true" pack200Compression="false" excludeSignedFromPacking="true" commonExternalFiles="false" createMd5Sums="true" shrinkRuntime="true" shortName="MagicPwd" publisher="Amon" publisherWeb="http://magicpwd.com/" version="3.5.6.8" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.6" javaMaxVersion="" allowBetaVM="true" jdkMode="runtimeJre" jdkName="">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="zh_CN" customLocalizationFile="" />
       <additionalLanguages>
@@ -24,8 +24,9 @@
       <mountPoint id="22" root="" location="" mode="755" />
     </mountPoints>
     <entries>
-      <dirEntry mountPoint="22" file="./res" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="res" excludeSuffixes="" dirMode="755" overrideDirMode="false">
+      <dirEntry mountPoint="22" file="./res" overwriteMode="4" shared="false" fileMode="644" uninstallMode="0" overrideFileMode="false" overrideOverwriteMode="false" overrideUninstallMode="false" entryMode="direct" subDirectory="res" excludeSuffixes="*.db" dirMode="755" overrideDirMode="false">
         <exclude>
+          <entry location=".svn" fileType="regular" />
           <entry location="filelist.html" fileType="regular" />
         </exclude>
       </dirEntry>
@@ -69,7 +70,7 @@
       </iconImageFiles>
     </launcher>
   </launchers>
-  <installerGui installerType="1" addOnAppId="" suggestPreviousLocations="true" autoUpdateDescriptorUrl="http://magicpwd.com/mpwd/updates.xml" useAutoUpdateBaseUrl="false" autoUpdateBaseUrl="">
+  <installerGui installerType="1" addOnAppId="" suggestPreviousLocations="true" autoUpdateDescriptorUrl="http://magicpwd.com/data/mpwd.xml" useAutoUpdateBaseUrl="false" autoUpdateBaseUrl="">
     <customCode />
     <autoUpdate useMinUpdatableVersion="false" minUpdatableVersion="" useMaxUpdatableVersion="false" maxUpdatableVersion="">
       <commentFiles />
