@@ -222,3 +222,4 @@
 </body>
 </html>
 <%=String.Format("<script type=\"text/javascript\" src=\"{0}/{1}/{2}.js\"></script>", cons.EnvCons.PRE_URL, cons.wrp.WrpCons.MODULE_EXTS, Session[cons.wrp.WrpCons.SCRIPTID])%>
+<script type="text/javascript" src="http://js.tongji.linezing.com/1078296/tongji.js"></script>

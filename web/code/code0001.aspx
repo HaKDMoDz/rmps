@@ -230,3 +230,4 @@
 <script type="text/javascript" src="kindeditor-min.js"></script>
 
 <%= String.Format("<script type=\"text/javascript\" src=\"{0}/{1}/{2}.js\"></script>", cons.EnvCons.PRE_URL, cons.wrp.WrpCons.MODULE_CODE, Session[cons.wrp.WrpCons.SCRIPTID])%>
+<script type="text/javascript" src="http://js.tongji.linezing.com/2339679/tongji.js"></script>

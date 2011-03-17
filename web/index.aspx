@@ -97,5 +97,5 @@
 
 <script type="text/javascript" src="index.js"></script>
 
-<script type="text/javascript" src="http://js.tongji.linezing.com/1078296/tongji.js"></script>
+<script type="text/javascript" src="http://js.tongji.linezing.com/437983/tongji.js"></script>
 

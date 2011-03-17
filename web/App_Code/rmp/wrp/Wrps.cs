@@ -192,7 +192,7 @@ namespace rmp.wrp
                 //comnScript = String.Format(script, EnvCons.PRE_URL);
                 comnScript = "<script type=\"text/javascript\" src=\"{0}/{1}/{2}.js\"></script>";
                 comnScript += "<script type=\"text/javascript\" src=\"{0}/inet/inet0002.ashx?sid={3}\"></script>";
-                comnScript += "<script type=\"text/javascript\" src=\"http://js.tongji.linezing.com/1078296/tongji.js\"></script>";
+                comnScript += "<script type=\"text/javascript\" src=\"http://js.tongji.linezing.com/437983/tongji.js\"></script>";
             }
             return string.Format(comnScript, EnvCons.PRE_URL, model, Session[cons.wrp.WrpCons.SCRIPTID], UserInfo.Current(Session).UserCode);
         }

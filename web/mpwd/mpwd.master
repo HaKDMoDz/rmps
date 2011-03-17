@@ -7,6 +7,7 @@
     <%=cons.wrp.WrpCons.KEYWORDS_MPWD%>
     <%=cons.wrp.WrpCons.DESCRIPTION_MPWD%>
     <%=rmp.wrp.Wrps.ComnHead(cons.wrp.WrpCons.MODULE_MPWD)%>
+	<link type="text/css" rel="stylesheet" href="http://js.wcdn.cn/t3/style/css/common/card.css" />
 </head>
 <body>
     <form id="AmonForm" runat="server">
@@ -112,6 +113,22 @@
                                         </table>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td align="center">
+                                        <table width="200" border="0" cellpadding="2" cellspacing="0">
+                                            <tr>
+                                                <td align="center" class="TD_LIST_HEAD">
+                                                    在线关注
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="right" class="TD_LIST_BODY">
+													<span id="wb_connect_btn"></span>&nbsp;<span id="wb_follow_btn"></span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
                             </table>
                         </td>
                         <td style="width: 520px;" align="left" valign="top">
@@ -195,6 +212,15 @@
     <div id="divScreenshot" title="运行截图" style="display: none;">
         <img id="imgScreenshot" src="" />
     </div>
-	<script type="text/javascript" src="http://chatapi-js.opener.asia/merger.js"></script>
 </body>
 </html>
+<script type="text/javascript" src="http://js.wcdn.cn/t3/platform/js/api/wb.js" charset="utf-8"></script>
+<script type="text/javascript">
+WB.core.load(['connect', 'client', 'widget.base', 'widget.atWhere'], function() {
+	var cfg = {key: '1036092624',xdpath: 'http://magicpwd.com/mpwd/xd.html'};
+	WB.connect.init(cfg);
+	WB.client.init(cfg);
+	//WB.widget.base.connectButton(document.getElementById("wb_connect_btn"));
+	WB.widget.base.followButton(1724281697, document.getElementById("wb_follow_btn"));
+});
+</script>
