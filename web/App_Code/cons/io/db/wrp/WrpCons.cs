@@ -742,6 +742,57 @@ namespace cons.io.db.wrp
         #endregion
         #endregion
 
+        #region 碎语
+        public const String W2060100 = "W2060100";
+        /// <summary>
+        /// 排序
+        /// </summary>
+        public const String W2060101 = "W2060101";
+        /// <summary>
+        /// 评级总值
+        /// </summary>
+        public const String W2060102 = "W2060102";
+        /// <summary>
+        /// 评级次数
+        /// </summary>
+        public const String W2060103 = "W2060103";
+        /// <summary>
+        /// 预留
+        /// </summary>
+        public const String W2060104 = "W2060104";
+        /// <summary>
+        /// 索引
+        /// </summary>
+        public const String W2060105 = "W2060105";
+        /// <summary>
+        /// 一级分类
+        /// </summary>
+        public const String W2060106 = "W2060106";
+        /// <summary>
+        /// 二级分类
+        /// </summary>
+        public const String W2060107 = "W2060107";
+        /// <summary>
+        /// 标题
+        /// </summary>
+        public const String W2060108 = "W2060108";
+        /// <summary>
+        /// 内容
+        /// </summary>
+        public const String W2060109 = "W2060109";
+        /// <summary>
+        /// 用户
+        /// </summary>
+        public const String W206010A = "W206010A";
+        /// <summary>
+        /// 更新日期
+        /// </summary>
+        public const String W206010B = "W206010B";
+        /// <summary>
+        /// 创建日期
+        /// </summary>
+        public const String W206010C = "W206010C";
+        #endregion
         #endregion
 
         #region 博客模块

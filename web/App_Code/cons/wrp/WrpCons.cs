@@ -59,7 +59,7 @@ namespace cons.wrp
         /// <summary>
         /// 
         /// </summary>
-        public const string TITLE_HOME = "闻讯";
+        public const string TITLE_HOME = "阿木e居";
         /// <summary>
         /// 
         /// </summary>

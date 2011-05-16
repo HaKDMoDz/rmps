@@ -11,6 +11,7 @@ using rmp.bean;
 using rmp.comn.user;
 using rmp.io.db;
 using rmp.util;
+using rmp.comn;
 
 namespace rmp.wrp
 {
@@ -20,6 +21,7 @@ namespace rmp.wrp
     public class Wrps
     {
         private static String comnScript;
+        private static Properties properteis;
         private static System.Drawing.Image markImage;
         private static Dictionary<String, String> siteList;
         private static Dictionary<String, long> updtList = new Dictionary<String, long>();
@@ -160,6 +162,27 @@ namespace rmp.wrp
                 }
                 return markImage;
             }
+        }
+
+        public static void SetProperties(string key, string value, string comment)
+        {
+            if (properteis == null)
+            {
+                properteis = new Properties();
+                properteis.Load(HttpContext.Current.Server.MapPath(cons.EnvCons.DIR_DAT + "web.txt"));
+            }
+            properteis.Set(key, value, comment);
+            properteis.Save(HttpContext.Current.Server.MapPath(cons.EnvCons.DIR_DAT + "web.txt"));
+        }
+
+        public static string GetProperties(string key, string def)
+        {
+            if (properteis == null)
+            {
+                properteis = new Properties();
+                properteis.Load(HttpContext.Current.Server.MapPath(cons.EnvCons.DIR_DAT + "web.txt"));
+            }
+            return properteis.Get(key, def);
         }
 
         /// <summary>
