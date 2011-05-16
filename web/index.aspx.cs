@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Web.UI;
+using rmp.wrp.misc;
 
 public partial class index : Page
 {
@@ -88,5 +89,10 @@ public partial class index : Page
     {
         // 年份版权
         lb_CopyYear.Text = DateTime.Now.Year.ToString();
+        W2060100 w2060100 = Misc.GetMisc();
+        this.dvMiscHead.InnerText = "每日一文：" + w2060100.W2060106 + " > " + w2060100.W2060107;
+        this.dvMiscName.InnerText = w2060100.W2060108;
+        this.dvMiscBody.InnerText = w2060100.W2060109;
+        this.dvMiscRate.Attributes["data"] = (w2060100.W2060103 > 0 ? (double)w2060100.W2060102 / w2060100.W2060103 : 0) + "_" + w2060100.W2060105;
     }
 }
