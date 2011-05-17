@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using System.Data;
 using rmp.io.db;
+using System.Text.RegularExpressions;
 
 namespace rmp.wrp.misc
 {
@@ -22,6 +23,12 @@ namespace rmp.wrp.misc
             if (w2060100 == null)
             {
                 w2060100 = new W2060100();
+                string day = Wrps.GetProperties("misc.day", "");
+                if (!Regex.IsMatch(day, "^\\d{1,2}$"))
+                {
+                    day = "1";
+                }
+                lastDay = int.Parse(day);
             }
 
             DateTime now = DateTime.Now;
@@ -47,7 +54,14 @@ namespace rmp.wrp.misc
                     dba.addColumn(cons.io.db.wrp.WrpCons.W206010C);
                     dba.addWhere(cons.io.db.wrp.WrpCons.W2060106, cons.io.db.comn.ComnCons.C2010002, false);
                     dba.addWhere(cons.io.db.wrp.WrpCons.W2060107, cons.io.db.comn.ComnCons.C2010105, false);
-					dba.addWhere(cons.io.db.wrp.WrpCons.W2060105, ">", w2060100.W2060105 > 0 ? w2060100.W2060105.ToString() : Wrps.GetProperties("misc", "1"), false);
+                    if (w2060100.W2060105 > 0)
+                    {
+                        dba.addWhere(cons.io.db.wrp.WrpCons.W2060105, ">", w2060100.W2060105.ToString(), false);
+                    }
+                    else
+                    {
+                        dba.addWhere(cons.io.db.wrp.WrpCons.W2060105, "=", Wrps.GetProperties("misc.key", "1"), false);
+                    }
                     dba.addSort(cons.io.db.wrp.WrpCons.W2060105);
                     dba.addLimit(1);
 
@@ -80,7 +94,8 @@ namespace rmp.wrp.misc
                     }
                     dt.Dispose();
 
-                    Wrps.SetProperties("misc", w2060100.W2060105.ToString(), "");
+                    Wrps.SetProperties("misc.day", lastDay.ToString(), "日期");
+                    Wrps.SetProperties("misc.key", w2060100.W2060105.ToString(), "索引");
                 }
             }
             return w2060100;
