@@ -1,2 +1,4 @@
-#
-misc=3
+#索引
+misc.key=3
+#日期
+misc.day=22
