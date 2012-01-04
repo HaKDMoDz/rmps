@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rmps version="1.0">
+    <plus id="examples">
+        <part>rmp.prp.aide</part>
+        <path>rmp.prp.aide.Testsoft.Testsoft</path>
+        <dependence></dependence>
+        <extension>javax.swing.JPanel</extension>
+        <implementation>com.amonsoft.rmps.prp.ISoft</implementation>
+    </plus>
+    <exec id="examples">
+        <icon>logo16.png</icon>
+        <name>测试软件</name>
+        <description>一个测试软件，用于说明插件的配置方法</description>
+        <dependence></dependence>
+        <execution>example.jar</execution>
+        <parameter></parameter>
+    </exec>
+    <jnlp id="examples">
+        <href>http://java.sun.com/products/javawebstart/apps/player.jnlp</href>
+        <icon>logo16.png</icon>
+        <name>Notepad</name>
+        <title>Java高速缓存查看器</title>
+        <description>一个测试软件，用于说明插件的配置方法</description>
+    </jnlp>
+</rmps>

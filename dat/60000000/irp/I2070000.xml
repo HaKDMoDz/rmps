@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<irps>
+	<I2070000>
+		<item id="配置">
+			<map key="path">http://amonsoft.net/link/link0001.ashx</map>
+			<map key="args">sid={0}&amp;opt={1}&amp;uri={2}</map>
+		</item>
+		<item id="资源">
+		</item>
+	</I2070000>
+</irps>
