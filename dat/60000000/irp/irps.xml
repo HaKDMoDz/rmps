@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<irps>
+    <item id="配置">
+        <map key="#">#</map>
+        <map key="?">?</map>
+        <map key="？">?</map>
+        <map key=".">.</map>
+        <map key="。">.</map>
+        <map key="..">..</map>
+        <map key="。。">..</map>
+        <map key=".。">..</map>
+        <map key="。.">..</map>
+        <map key="1">1</map>
+        <map key="１">1</map>
+        <map key="2">2</map>
+        <map key="２">2</map>
+        <map key="3">3</map>
+        <map key="３">3</map>
+        <map key="4">4</map>
+        <map key="４">4</map>
+        <map key="5">5</map>
+        <map key="５">5</map>
+        <map key="6">6</map>
+        <map key="６">6</map>
+        <map key="7">7</map>
+        <map key="７">7</map>
+        <map key="8">8</map>
+        <map key="８">8</map>
+        <map key="9">9</map>
+        <map key="９">9</map>
+        <map key="0">0</map>
+        <map key="０">0</map>
+        <map key="/">/</map>
+        <map key="$">$</map>
+        <map key="￥">$</map>
+        <map key="&gt;">&gt;</map>
+        <map key="〉">&gt;</map>
+        <map key="》">&gt;</map>
+        <map key="&gt;&gt;">&gt;&gt;</map>
+        <map key="〉〉">&gt;&gt;</map>
+        <map key="〉》">&gt;&gt;</map>
+        <map key="》》">&gt;&gt;</map>
+        <map key="》〉">&gt;&gt;</map>
+        <map key="&lt;">&lt;</map>
+        <map key="〈">&lt;</map>
+        <map key="《">&lt;</map>
+        <map key="&lt;&lt;">&lt;&lt;</map>
+        <map key="〈〈">&lt;&lt;</map>
+        <map key="〈《">&lt;&lt;</map>
+        <map key="《《">&lt;&lt;</map>
+        <map key="《〈">&lt;&lt;</map>
+    </item>
+    <item id="资源">
+        <map key="init">您好，{username}，{atom}为您服务！</map>
+        <map key="menu">您可以通过数字键0-9选择您要进行的操作！</map>
+        <map key="help">您会经常用到的功能及输入方式：
+            ?或？ 获取当前服务的帮助信息；
+            *　　 显示当前服务的选项菜单；
+            /或／ 跳转到最顶层服务菜单；
+            ..　　跳转到上一层服务菜单；
+            数字　跳转到下一层服务菜单；
+            #数字 选择当前服务的功能选项；
+            &amp;　　 向作者汇报错误信息；
+            @　　 给作者留言；
+        </map>
+        <map key="deal"></map>
+        <map key="step">已经是第一条数据！</map>
+        <map key="step">已经是最后一条数据！</map>
+        <map key="exit"></map>
+    </item>
+    <item id="管理">
+        <map key="live">amon.ct@live.com</map>
+        <map key="meebo">amon.ct@meebo.org</map>
+    </item>
+    <item id="服务">
+        <map key="0" comment="IP查询">rmp.irp.m.I7010000.I7010000</map>
+        <map key="1" comment="邮政编码">rmp.irp.m.I2020000.I2020000</map>
+        <map key="2" comment="度量转换">rmp.irp.m.I2050000.I2050000</map>
+        <map key="3" comment="身份查询">rmp.irp.m.I2030000.I2030000</map>
+        <!--map key="2">rmp.irp.m.I2000000.I2000000</map>
+        <map key="22" comment="邮政编码">rmp.irp.m.I2020000.I2020000</map>
+        <map key="24">rmp.irp.m.I2040000.I2040000</map>
+        <map key="25">rmp.irp.m.I2050000.I2050000</map>
+        <map key="7" comment="IP查询">rmp.irp.m.I7000000.I7000000</map>
+        <map key="71" comment="IP查询">rmp.irp.m.I7010000.I7010000</map>
+        <map key="72" comment="在线阅读">rmp.irp.m.I7020000.I7020000</map>
+        <map key="9" comment="配置管理">rmp.irp.m.I9000000.I9000000</map-->
+    </item>
+</irps>
