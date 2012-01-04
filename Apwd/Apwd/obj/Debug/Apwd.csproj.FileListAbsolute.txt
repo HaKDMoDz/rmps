@@ -1,0 +1,12 @@
+F:\Apwd\Apwd\obj\Debug\ResolveAssemblyReference.cache
+F:\Apwd\Apwd\obj\Debug\App.g.i.cs
+F:\Apwd\Apwd\obj\Debug\MainPage.g.i.cs
+F:\Apwd\Apwd\obj\Debug\Apwd.g.resources
+F:\Apwd\Apwd\Bin\Debug\Apwd.dll
+F:\Apwd\Apwd\Bin\Debug\Apwd.pdb
+F:\Apwd\Apwd\Bin\Debug\AppManifest.xaml
+F:\Apwd\Apwd\Bin\Debug\Apwd.xap
+F:\Apwd\Apwd\Bin\Debug\ApwdTestPage.html
+F:\Apwd\Apwd\obj\Debug\Apwd.dll
+F:\Apwd\Apwd\obj\Debug\Apwd.pdb
+F:\Apwd\Apwd\obj\Debug\XapCacheFile.xml
