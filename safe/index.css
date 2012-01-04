@@ -1,0 +1,124 @@
+﻿*
+{
+    margin: 0;
+    padding: 0;
+}
+body
+{
+    background-color: #000;
+    font-family: Arial, "Arial Black" , "宋体" , "微软雅黑" , Terminal, Courier;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
+textarea
+{
+    margin: 5px;
+    font-family: Arial, "Arial Black" , "宋体" , "微软雅黑" , Terminal, Courier;
+    font-size: 12px;
+}
+iframe
+{
+    border: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+#TbUp
+{
+    width: 100%;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 0.4em 0;
+}
+#LbErr1
+{
+    color: #F00;
+}
+.Txt
+{
+    position: relative;
+    z-index: 1;
+}
+.Btn
+{
+    background: url(../img/button.png) repeat-x scroll 0 50% #222222;
+    border: 2px solid #AAAAAA;
+    border-radius: 6px 6px 6px 6px;
+    color: #EEEEEE;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 0.4em 0;
+    text-align: center;
+    width: 80px;
+}
+.Btn:hover
+{
+    background: none repeat scroll 0 0 #111111;
+    color: #FFFFFF;
+}
+.BgTl
+{
+    background-image: url(../_img/safe/bgtl.png);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    height: 62px;
+    width: 12px;
+}
+.BgTm
+{
+    background-image: url(../_img/safe/bgtm.png);
+    background-repeat: repeat-x;
+    background-position: center bottom;
+    height: 62px;
+}
+.BgTr
+{
+    background-image: url(../_img/safe/bgtr.png);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    height: 62px;
+    width: 12px;
+}
+.BgMl
+{
+    background-image: url(../_img/safe/bgml.png);
+    background-repeat: repeat-y;
+    background-position: right center;
+    width: 12px;
+}
+.BgMm
+{
+    background-color: #FFF;
+}
+.BgMr
+{
+    background-image: url(../_img/safe/bgmr.png);
+    background-repeat: repeat-y;
+    background-position: left center;
+    width: 12px;
+}
+.BgBl
+{
+    background-image: url(../_img/safe/bgbl.png);
+    background-repeat: no-repeat;
+    background-position: right top;
+    height: 62px;
+    width: 12px;
+}
+.BgBm
+{
+    background-image: url(../_img/safe/bgbm.png);
+    background-repeat: repeat-x;
+    background-position: center top;
+    height: 62px;
+}
+.BgBr
+{
+    background-image: url(../_img/safe/bgbr.png);
+    background-repeat: no-repeat;
+    background-position: left top;
+    height: 62px;
+    width: 12px;
+}

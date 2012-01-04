@@ -1,0 +1,126 @@
+﻿body
+{
+    background-color: #FEFEFE;
+    color: #330000;
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+    font-size: 12px;
+    margin: 3px;
+}
+img
+{
+    border-width: 0px;
+    text-align: justify;
+}
+a
+{
+    color: Gray;
+    text-decoration: none;
+}
+a:hover
+{
+    color: Black;
+}
+#tbCard
+{
+    /**background-image: url(_images/content-gradient-bg.png);*/
+    background-position: left top;
+    background-repeat: no-repeat;
+    width: 734px;
+}
+#trCardT
+{
+    background-image: url(_images/0001/container-top-bg.png);
+    background-repeat: no-repeat;
+    height: 31px;
+}
+#trCardM
+{
+    background-image: url(_images/0001/container-bg-repeat.png);
+    background-repeat: repeat-y;
+}
+#trCardB
+{
+    background-image: url(_images/0001/container-bottom-bg.png);
+    background-repeat: repeat-y;
+    height: 31px;
+}
+#tdCardMMenu
+{
+}
+#tbMenu
+{
+    width: 300px;
+}
+#tdMenuLogo
+{
+    height: 60px;
+}
+#tdMenuLine
+{
+    background-image: url(_images/0001/menu-divider.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 20px;
+}
+#tdMenuList a
+{
+    font-size: 14px;
+}
+#tdCardMLine
+{
+    /*border-right: solid 1px #ccc;*/
+    background-image: url(_images/0001/divider-shadow.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 446px;
+    width: 10px;
+}
+#tdCardMMisc
+{
+}
+#tdMiscHead
+{
+    border-bottom: solid 1px #CCC;
+    height: 40px;
+}
+#tdMiscName
+{
+    color: #454545;
+    font-size: 24px;
+    height: 40px;
+}
+#tdMiscBody
+{
+    background-color: #FFFFFF;
+    border-left: solid 1px #CECECE;
+    border-top: solid 1px #CECECE;
+    border-right: solid 1px #CECECE;
+    border-bottom: solid 1px #F4F4F4;
+    color: #646464;
+    font-size: 12px;
+    height: 300px;
+    padding: 5px;
+}
+#tdMiscRate
+{
+    background-color: #FFF;
+    border-left: solid 1px #CECECE;
+    border-right: solid 1px #CECECE;
+    border-bottom: solid 1px #CECECE;
+    height: 30px;
+    padding-left: 5px;
+}
+#tbCopy
+{
+    width: 690px;
+}
+.softIcon
+{
+    width: 18px;
+    height: 28px;
+}
+.softName
+{
+    width: 120px;
+    height: 28px;
+}

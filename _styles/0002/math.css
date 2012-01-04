@@ -1,0 +1,55 @@
+﻿.BT_MATH
+{
+    width: 90%;
+}
+.TF_MATH
+{
+    text-align: right;
+}
+.TH_MATH
+{
+    background-color: #E0E0E0;
+}
+.TR_MATH
+{
+    background-color: #ECE9D8;
+}
+#tb_MainMath
+{
+    border: solid 5px #C0C0C0;
+}
+#dv_MathExps
+{
+    width: 320px;
+    height: 165px;
+    z-index: 1;
+    position: absolute;
+    border: #AAAAAA 1px solid;
+    background-color: #EFEFEF;
+}
+#dv_TextArea
+{
+    width: 300px;
+    height: 115px;
+    overflow: scroll;
+    background-image: url(images/textarea.png);
+    border: #CCCCCC 2px solid;
+}
+#tb_NormMath
+{
+    border: solid 5px #C0C0C0;
+}
+#tb_MiniMath
+{
+    background-color: #CCCCCC;
+    border-style: solid;
+    border-width: 6px;
+    border-color: #999999;
+}
+#tb_MiniExps
+{
+    padding-bottom: 2px;
+    padding-top: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+}

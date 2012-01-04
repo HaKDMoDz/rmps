@@ -1,0 +1,169 @@
+﻿#d
+{
+    width: 320px;
+    height: 27px;
+    background-image: url(images/1307bgtb.png);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#l
+{
+    position: absolute;
+    width: 318px;
+    background-color: #FFFFFF;
+    border: solid 1px #E0E0E0;
+}
+#t
+{
+}
+#q
+{
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+    font-size: 12px;
+    padding-left: 4px;
+    padding-top: 4px;
+    padding-bottom: 1px;
+    vertical-align: middle;
+    border-width: 0px;
+    height: 17px;
+    width: 200px;
+    outline-color: -moz-use-text-color;
+    outline-style: none;
+    outline-width: medium;
+}
+.ig
+{
+    font-style: italic;
+    font-weight: bold;
+}
+.il
+{
+    background-color: #FFFFFF;
+}
+.io
+{
+    background-color: #EAEAEA;
+    cursor: pointer;
+}
+/*导航首页样式*/
+.TB_LinkPort
+{
+    border: solid 1px #F0F0F0;
+}
+.TR_LinkPort_A
+{
+    background-color: #FAFAFA;
+}
+.TR_LinkPort_D
+{
+    background-color: #FFFFFF;
+}
+.TB_LinkUser
+{
+}
+.TD_LinkPort_P
+{
+    width: 48px;
+    height: 48px;
+    background-image: url(images/1307bgep.png);
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px;
+    cursor: pointer;
+    overflow: hidden;
+}
+/*我的导航*/
+.TB_TopType
+{
+}
+.TD_TopType
+{
+    background-image: url(images/1307Type.png);
+    background-position: right;
+    background-repeat: repeat-y;
+}
+.TD_TopType_H
+{
+    background: #E0EFE0;
+    border-top: 1px dashed #C0C0C0;
+    border-left: 1px dashed #C0C0C0;
+    border-bottom: 1px dashed #C0C0C0;
+    border-right: 1px solid #C0C0C0;
+}
+.TD_TopType_C
+{
+    background: #F8F8F8;
+    border-right: 1px solid #F8F8F8;
+    border-top: 1px solid #999;
+    border-left: 1px solid #999;
+    border-bottom: 1px solid #999;
+}
+.TD_TopType_C a
+{
+    display: block;
+    background: #ccc;
+}
+.TD_UTopType_D
+{
+    background: #fAfAfA;
+    border-top: 1px dashed #F0F0F0;
+    border-left: 1px dashed #F0F0F0;
+    border-bottom: 1px dashed #F0F0F0;
+    border-right: 1px solid #F0F0F0;
+}
+.TD_UTopType_D a
+{
+    text-decoration: none;
+}
+.TD_UTopType_D a:hover
+{
+    display: block;
+    text-decoration: underline;
+    background: #E0E0E0;
+}
+.TD_STopType_D
+{
+    background: #f1f1f1;
+    border-top: 1px dashed #C0C0C0;
+    border-left: 1px dashed #C0C0C0;
+    border-bottom: 1px dashed #C0C0C0;
+    border-right: 1px solid #C0C0C0;
+}
+.TD_STopType_D a
+{
+    text-decoration: none;
+}
+.TD_STopType_D a:hover
+{
+    display: block;
+    text-decoration: underline;
+    background: #E0E0E0;
+}
+.TB_SubType
+{
+    border: solid 1px #c2d5d7;
+}
+.TD_SubType_H
+{
+    font-weight: bold;
+    height: 22px;
+    background-image: url(images/1307Head.gif);
+}
+.TD_USubType
+{
+}
+.TD_SSubType
+{
+}
+.TB_CurLink
+{
+    border: solid 1px #c2d5d7;
+}
+.TD_CurLink_H
+{
+    font-weight: bold;
+    height: 22px;
+    background-image: url(images/1307Head.gif);
+}

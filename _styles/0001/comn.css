@@ -1,0 +1,498 @@
+﻿A
+{
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+    text-decoration: none;
+}
+A:link
+{
+    color: #333333;
+    text-decoration: none;
+}
+A:visited
+{
+    color: #009933;
+    text-decoration: none;
+}
+A:hover
+{
+    color: #990000;
+    text-decoration: underline;
+}
+BODY
+{
+    background-color: #ffffff;
+    color:#666666;
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+    font-size: 9pt;
+    margin: 0px;
+}
+DIV
+{
+    margin: 0px;
+    font-size: 9pt;
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+}
+FORM
+{
+    margin: 0px;
+}
+H5
+{
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+    font-size: 9pt;
+}
+HR
+{
+    height: 1px;
+    color: #330000;
+}
+IMG
+{
+    border-width: 0px;
+}
+INPUT
+{
+    font-size: 9pt;
+    color: #333333;
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+}
+LI
+{
+    padding-top: 2px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 10px;
+}
+P
+{
+    font-size: 9pt;
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+}
+SELECT
+{
+    font-size: 9pt;
+    color: #333333;
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+}
+TABLE
+{
+    padding: 0px;
+}
+TEXTAREA
+{
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+    font-size: 9pt;
+}
+TD
+{
+    font-size: 9pt;
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+}
+UL
+{
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 10px;
+    padding-top: 3px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 10px;
+}
+
+/*========================================================================
+ * 特定组件风格定义
+ *========================================================================*/
+/*=========================================================
+ * AmonHoft表格风格定义
+ *=========================================================*/
+#TB_AmonSoft
+{
+    background-color: #fAfAfA;
+    width: 100%;
+}
+/*=========================================================
+ * AmonHead表格风格定义
+ *=========================================================*/
+#TB_AmonHead
+{
+    background-color: #fAfAfA;
+    width: 100%;
+}
+#TD_AmonHead_1L
+{
+}
+#TD_AmonHead_1M
+{
+    width: 760px;
+}
+#TD_AmonHead_1R
+{
+}
+#TD_AmonHead_2L
+{
+}
+#TD_AmonHead_2M
+{
+    background-image: url(images/menu.gif);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    height: 65px;
+}
+#TD_AmonHead_2R
+{
+}
+/*========================================
+ * Head表格风格定义
+ *========================================*/
+#TB_HEAD
+{
+    width: 100%;
+}
+/*========================================
+ * Site（头部导航菜单）表格风格定义
+ *========================================*/
+#TB_SITE
+{
+    width: 740px;
+}
+.TD_SITE_LINK
+{
+    text-align: center;
+    width: 70px;
+}
+.TD_SITE_USER
+{
+    text-align: center;
+    width: 70px;
+}
+/*=========================================================
+ * AmonBody组件风格定义
+ *=========================================================*/
+#TB_AmonBody
+{
+    width: 100%;
+    background-color: #fAfAfA;
+}
+#TD_AmonBody_L
+{
+}
+#TD_AmonBody_M
+{
+    width: 760px;
+}
+#TD_AmonBody_R
+{
+}
+/*========================================
+ * Body表格风格定义
+ *========================================*/
+#TB_BODY
+{
+    width: 100%;
+    background-color: #ffffff;
+}
+#TD_BODY_LIST
+{
+    width: 220px;
+    vertical-align: top;
+}
+#TD_BODY_VIEW
+{
+    width: 540px;
+    vertical-align: top;
+}
+/*=========================================================
+ * AmonFoot组件风格定义
+ *=========================================================*/
+#TB_AmonFoot
+{
+    background-color: #fAfAfA;
+    width: 100%;
+}
+#TD_AmonFoot_L
+{
+}
+#TD_AmonFoot_M
+{
+    width: 760px;
+    background-image: url(images/line.gif);
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+#TD_AmonFoot_R
+{
+}
+/*========================================
+ * Foot表格风格定义
+ *========================================*/
+#TB_FOOT
+{
+    width: 100%;
+}
+/*========================================
+ * Copy（版权）表格风格定义
+ *========================================*/
+#TB_FOOT_COPY
+{
+    width: 740px;
+}
+/*=========================================================
+ * List表格风格定义
+ *=========================================================*/
+#TB_LIST
+{
+    width: 100%;
+}
+.TB_LIST_ITEM
+{
+    width: 100%;
+}
+.TD_LIST_HEAD
+{
+    background-image: url(images/itemT.gif);
+    background-position: center top;
+    background-repeat: no-repeat;
+    color: #670E15;
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px;
+    text-align: center;
+}
+.TD_LIST_BODY
+{
+    background-image: url(images/itemL.gif);
+    background-repeat: repeat-y;
+    padding-left: 8px;
+    padding-bottom: 4px;
+    text-align: left;
+}
+.TD_LIST_FOOT
+{
+    background-image: url(images/itemB.gif);
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    padding-right: 8px;
+    padding-bottom: 4px;
+    text-align: right;
+}
+/*=========================================================
+ * View表格风格定义
+ *=========================================================*/
+#TB_VIEW
+{
+    background-color: #ffffff;
+    width: 530px;
+}
+#TB_VIEW_USER
+{
+    width: 510px;
+}
+#TB_VIEW_DATA
+{
+    width: 490px;
+}
+/*=========================================================
+ * Data表格风格定义
+ *=========================================================*/
+#TB_DATA
+{
+    width: 470px;
+}
+/*========================================================================
+ * 其它组件风格定义
+ *========================================================================*/
+.DV_TEXT1
+{
+    background-color: #EEEEEE;
+    border: dashed 1px #CCCCCC;
+    padding: 4px;
+    text-align: left;
+    width: 90%;
+}
+.TEXT_HEAD1
+{
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+    font-size: 18pt;
+    font-weight: bold;
+}
+.TEXT_HEAD2
+{
+    color: #243B8A;
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+    font-size: 9pt;
+    font-weight: bold;
+}
+.TEXT_HEAD3
+{
+}
+.TEXT_NOTE1
+{
+    color: #FF0000;
+}
+.TEXT_NOTE2
+{
+    color: #FE4C1C;
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+}
+.TEXT_NOTE3
+{
+    color: #FF0000;
+}
+.TD_HEAD1
+{
+}
+.TD_HEAD2
+{
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+    font-size: 9pt;
+    font-weight: bold;
+    text-align: left;
+    vertical-align: middle;
+    height: 30px;
+}
+.TD_HEAD3
+{
+}
+/*显示一个直线单元格*/
+.TD_LINE
+{
+    background-color: #A0A0A0;
+}
+.TD_GAPS
+{
+    height: 20px;
+}
+/*尾部空白单元格，用于用户数据与版权部分呈现一个隔离区域*/
+.TD_TAIL
+{
+    height: 40px;
+}
+/*=========================================================
+ * 表格风格定义
+ *=========================================================*/
+/*边框风格*/
+.DV_DataList
+{
+    padding: 4px;
+    border: solid 2px #A0A0A0;
+}
+
+/*含上下左右边框的表格*/
+.TB_DataList
+{
+    border: dashed 1px #CCCCCC;
+}
+.TD_DataHead_L
+{
+    background-color: #EEEEEE;
+    border-bottom: dashed 1px #CCCCCC;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.TD_DataHead_N
+{
+    background-color: #EEEEEE;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.TD_DataItem_L
+{
+    border-bottom: dashed 1px #CCCCCC;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.TD_DataItem_N
+{
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.TD_DataFoot_L
+{
+    border-bottom: dashed 1px #CCCCCC;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.TD_DataFoot_N
+{
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+/*仅上左边框的表格*/
+.TB_DataList_TL
+{
+    border-top: dashed 1px #CCCCCC;
+    border-left: dashed 1px #CCCCCC;
+}
+.TD_DataHead_TL_N
+{
+    background-color: #EEEEEE;
+    border-bottom: dashed 0px #CCCCCC;
+    border-right: dashed 0px #CCCCCC;
+}
+.TD_DataHead_TL_L
+{
+    background-color: #EEEEEE;
+    border-bottom: dashed 1px #CCCCCC;
+    border-right: dashed 1px #CCCCCC;
+}
+.TD_DataItem_TL_N
+{
+    border-bottom: dashed 0px #CCCCCC;
+    border-right: dashed 0px #CCCCCC;
+}
+.TD_DataItem_TL_L
+{
+    border-bottom: dashed 1px #CCCCCC;
+    border-right: dashed 1px #CCCCCC;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+.TD_DataFoot_TL_N
+{
+    border-bottom: dashed 0px #CCCCCC;
+    border-right: dashed 0px #CCCCCC;
+}
+.TD_DataFoot_TL_L
+{
+    border-bottom: dashed 1px #CCCCCC;
+    border-right: dashed 1px #CCCCCC;
+}
+/*仅下右边框的表格*/
+.TB_DataList_BR
+{
+    border-bottom: dashed 1px #CCCCCC;
+    border-right: dashed 1px #CCCCCC;
+}
+.TD_DataHead_BR_N
+{
+    border-top: dashed 0px #CCCCCC;
+    border-left: dashed 0px #CCCCCC;
+}
+.TD_DataHead_BR_L
+{
+    border-top: dashed 1px #CCCCCC;
+    border-left: dashed 1px #CCCCCC;
+}
+.TD_DataItem_BR_N
+{
+    border-top: dashed 0px #CCCCCC;
+    border-left: dashed 0px #CCCCCC;
+}
+.TD_DataItem_BR_L
+{
+    border-top: dashed 1px #CCCCCC;
+    border-left: dashed 1px #CCCCCC;
+}
+.TD_DataFoot_BR_N
+{
+    border-top: dashed 0px #CCCCCC;
+    border-left: dashed 0px #CCCCCC;
+}
+.TD_DataFoot_BR_L
+{
+    border-top: dashed 1px #CCCCCC;
+    border-left: dashed 1px #CCCCCC;
+}

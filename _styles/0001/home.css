@@ -1,0 +1,146 @@
+﻿BODY
+{
+    background-color: #ffffff;
+    color: #330000;
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+    font-size: 9pt;
+    margin: 0px;
+}
+#g
+{
+    width: 670px;
+    background-image: url(images/bg.png);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#d
+{
+    width: 360px;
+    height: 27px;
+    background-image: url(images/tb.png);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#n
+{
+    height: 23px;
+    width: 98px;
+    background-color: #EFEFEF;
+}
+#t
+{
+}
+#l
+{
+    position: absolute;
+    width: 358px;
+    background-color: #FFFFFF;
+    border: solid 1px #E0E0E0;
+}
+#q
+{
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+    font-size: 12px;
+    padding-left: 4px;
+    padding-top: 4px;
+    padding-bottom: 1px;
+    vertical-align: middle;
+    border-width: 0px;
+    height: 17px;
+    width: 240px;
+    outline-color: -moz-use-text-color;
+    outline-style: none;
+    outline-width: medium;
+}
+.ig
+{
+    font-style: italic;
+    font-weight: bold;
+}
+.il
+{
+    background-color: #FFFFFF;
+}
+.io
+{
+    background-color: #EAEAEA;
+    cursor: pointer;
+}
+.sl
+{
+    width: 10%;
+    height: 24px;
+    background-color: #F8F8F8;
+}
+
+.f
+{
+    height: 28px;
+}
+.f ul
+{
+    margin: 0 auto;
+}
+.f ul li
+{
+    display: inline;
+}
+.f ul li a
+{
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+    font-size: 14px;
+    height: 28px;
+    width: 88px;
+    padding: 0px;
+    margin: 0px;
+    display: inline-block;
+    line-height: 28px;
+}
+.f ul li a.fc
+{
+    color: #000000;
+    font-weight: bold;
+    background-image: url(images/tf.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-decoration: none;
+}
+.f ul li a.fd
+{
+}
+
+.s
+{
+    height: 28px;
+}
+.s ul
+{
+    margin: 0 auto;
+}
+.s ul li
+{
+    display: inline;
+}
+.s ul li a
+{
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+    font-size: 12px;
+    height: 28px;
+    width: 88px;
+    padding: 0px;
+    margin: 0px;
+    display: inline-block;
+    line-height: 28px;
+}
+.s ul li a.sc
+{
+    color: #000000;
+    font-weight: bold;
+    background-image: url(images/ts.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-decoration: none;
+}
+.s ul li a.sd
+{
+}
