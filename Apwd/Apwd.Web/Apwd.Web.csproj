@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Logo\logo.ico</ApplicationIcon>
+    <ApplicationIcon>logo\logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -62,16 +62,16 @@
     <Content Include="c.html" />
     <Content Include="ClientBin\Apwd.xap" />
     <Content Include="index.aspx" />
-    <Content Include="Libs\MySql.Data.dll" />
-    <Content Include="Logo\logo.ico" />
-    <Resource Include="Logo\logo128.png" />
-    <Resource Include="Logo\logo16.png" />
-    <Resource Include="Logo\logo24.png" />
-    <Resource Include="Logo\logo256.png" />
-    <Resource Include="Logo\logo32.png" />
-    <Resource Include="Logo\logo48.png" />
-    <Resource Include="Logo\logo64.png" />
-    <Resource Include="Logo\logo96.png" />
+    <Content Include="lib\MySql.Data.dll" />
+    <Content Include="logo\logo.ico" />
+    <Resource Include="logo\logo128.png" />
+    <Resource Include="logo\logo16.png" />
+    <Resource Include="logo\logo24.png" />
+    <Resource Include="logo\logo256.png" />
+    <Resource Include="logo\logo32.png" />
+    <Resource Include="logo\logo48.png" />
+    <Resource Include="logo\logo64.png" />
+    <Resource Include="logo\logo96.png" />
     <Content Include="Silverlight.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

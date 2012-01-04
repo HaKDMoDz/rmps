@@ -443,7 +443,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Logo\logo.ico" />
     <Page Include="Views\Demo\ChildWindow1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -452,14 +451,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Resource Include="Logo\logo128.png" />
-    <Resource Include="Logo\logo16.png" />
-    <Resource Include="Logo\logo24.png" />
-    <Resource Include="Logo\logo256.png" />
-    <Resource Include="Logo\logo32.png" />
-    <Resource Include="Logo\logo48.png" />
-    <Resource Include="Logo\logo64.png" />
-    <Resource Include="Logo\logo96.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Mgtd\" />
