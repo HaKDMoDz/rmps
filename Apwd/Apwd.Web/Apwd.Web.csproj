@@ -10,8 +10,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Me.Amon.Apwd.Web</RootNamespace>
-    <AssemblyName>Apwd.Web</AssemblyName>
+    <RootNamespace>Me.Amon.Apwd</RootNamespace>
+    <AssemblyName>Amon</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
     <SilverlightApplicationList>{425CE640-0AA1-4AB4-904E-6BA0AD7F52C7}|..\Apwd\Apwd.csproj|ClientBin|False</SilverlightApplicationList>
@@ -33,8 +33,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Logo\logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=5.1.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -43,7 +50,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
@@ -55,6 +61,17 @@
     <Content Include="c.aspx" />
     <Content Include="c.html" />
     <Content Include="ClientBin\Apwd.xap" />
+    <Content Include="index.aspx" />
+    <Content Include="Libs\MySql.Data.dll" />
+    <Content Include="Logo\logo.ico" />
+    <Resource Include="Logo\logo128.png" />
+    <Resource Include="Logo\logo16.png" />
+    <Resource Include="Logo\logo24.png" />
+    <Resource Include="Logo\logo256.png" />
+    <Resource Include="Logo\logo32.png" />
+    <Resource Include="Logo\logo48.png" />
+    <Resource Include="Logo\logo64.png" />
+    <Resource Include="Logo\logo96.png" />
     <Content Include="Silverlight.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -65,9 +82,24 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Me\Amon\DB\DBAccess.cs" />
+    <Compile Include="Me\Amon\Util\CharUtil.cs" />
+    <Compile Include="Me\Amon\Util\HashUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="s.ashx.cs">
+      <DependentUpon>s.ashx</DependentUpon>
+    </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="s.ashx" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
