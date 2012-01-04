@@ -49,7 +49,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Logo\logo.ico</ApplicationIcon>
+    <ApplicationIcon>logo\logo.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>Me.Amon.Asec.Program</StartupObject>
@@ -263,8 +263,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Libs\BouncyCastle.Crypto.dll" />
-    <Content Include="Logo\logo.ico" />
+    <Content Include="lib\BouncyCastle.Crypto.dll" />
+    <Content Include="logo\logo.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
