@@ -60,10 +60,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
+    <Reference Include="System.ComponentModel.DataAnnotations, Version=2.0.5.0, Culture=neutral, PublicKeyToken=ddd0da4d3e678217" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Controls, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Data, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="System.Windows.Controls.Data.Input, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="System.Windows.Data, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
@@ -71,10 +76,188 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Comn\MD5.cs" />
+    <Compile Include="Comn\MD5Managed.cs" />
+    <Compile Include="Comn\PwdModel.cs" />
+    <Compile Include="Comn\SafeModel.cs" />
+    <Compile Include="Comn\UserMdl.cs" />
+    <Compile Include="Comn\UserModel.cs" />
+    <Compile Include="Const\EnvConst.cs" />
+    <Compile Include="Effect\FlipDirection.cs" />
+    <Compile Include="Effect\FlipProjection.cs" />
+    <Compile Include="Effect\ViewProjection.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Att.cs" />
+    <Compile Include="Model\Atts\AreaAtt.cs" />
+    <Compile Include="Model\Atts\DataAtt.cs" />
+    <Compile Include="Model\Atts\DateAtt.cs" />
+    <Compile Include="Model\Atts\FileAtt.cs" />
+    <Compile Include="Model\Atts\GuidAtt.cs" />
+    <Compile Include="Model\Atts\HintAtt.cs" />
+    <Compile Include="Model\Atts\LinkAtt.cs" />
+    <Compile Include="Model\Atts\ListAtt.cs" />
+    <Compile Include="Model\Atts\LogoAtt.cs" />
+    <Compile Include="Model\Atts\MailAtt.cs" />
+    <Compile Include="Model\Atts\MetaAtt.cs" />
+    <Compile Include="Model\Atts\PassAtt.cs" />
+    <Compile Include="Model\Atts\SignAtt.cs" />
+    <Compile Include="Model\Atts\TextAtt.cs" />
+    <Compile Include="Model\Cat.cs" />
+    <Compile Include="Model\Hkey\Chrome.cs" />
+    <Compile Include="Model\Hkey\Firefox.cs" />
+    <Compile Include="Model\Hkey\MSIE.cs" />
+    <Compile Include="Model\Hkey\None.cs" />
+    <Compile Include="Model\Hkey\Opera.cs" />
+    <Compile Include="Model\Hkey\Safari.cs" />
+    <Compile Include="Model\Hotkey.cs" />
+    <Compile Include="Model\Key.cs" />
+    <Compile Include="Model\LibDetail.cs" />
+    <Compile Include="Model\LibHeader.cs" />
+    <Compile Include="Model\MgtdDetail.cs" />
+    <Compile Include="Model\MgtdHeader.cs" />
+    <Compile Include="Model\Ucs.cs" />
+    <Compile Include="Model\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\BeanUtil.cs" />
+    <Compile Include="Utils\CharUtil.cs" />
+    <Compile Include="Utils\HttpUtil.cs" />
+    <Compile Include="Utils\SafeUtil.cs" />
+    <Compile Include="Views\Alert.xaml.cs">
+      <DependentUpon>Alert.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Bean\CatItem.xaml.cs">
+      <DependentUpon>CatItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Bean\KeyItem.xaml.cs">
+      <DependentUpon>KeyItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Demo\ChildWindow1.xaml.cs">
+      <DependentUpon>ChildWindow1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Demo\Demo.xaml.cs">
+      <DependentUpon>Demo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Error.xaml.cs">
+      <DependentUpon>Error.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\Cube.xaml.cs">
+      <DependentUpon>Cube.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IView.cs" />
+    <Compile Include="Views\Mopt\Mopt.xaml.cs">
+      <DependentUpon>Mopt.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\IAttEdit.cs" />
+    <Compile Include="Views\Mpwd\Mkey\Mkey.xaml.cs">
+      <DependentUpon>Mkey.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mpro\AreaCmp.xaml.cs">
+      <DependentUpon>AreaCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mpro\DataCmp.xaml.cs">
+      <DependentUpon>DataCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mpro\DateCmp.xaml.cs">
+      <DependentUpon>DateCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mpro\FileCmp.xaml.cs">
+      <DependentUpon>FileCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mpro\GuidCmp.xaml.cs">
+      <DependentUpon>GuidCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mpro\HintCmp.xaml.cs">
+      <DependentUpon>HintCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mpro\InfoCmp.xaml.cs">
+      <DependentUpon>InfoCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mpro\IPropCmp.cs" />
+    <Compile Include="Views\Mpwd\Mpro\LinkCmp.xaml.cs">
+      <DependentUpon>LinkCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mpro\ListCmp.xaml.cs">
+      <DependentUpon>ListCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mpro\LogoCmp.xaml.cs">
+      <DependentUpon>LogoCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mpro\MailCmp.xaml.cs">
+      <DependentUpon>MailCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mpro\MetaCmp.xaml.cs">
+      <DependentUpon>MetaCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mpro\Mpro.xaml.cs">
+      <DependentUpon>Mpro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mpro\PassCmp.xaml.cs">
+      <DependentUpon>PassCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mpro\SignCmp.xaml.cs">
+      <DependentUpon>SignCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mpro\TextCmp.xaml.cs">
+      <DependentUpon>TextCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mpwd.xaml.cs">
+      <DependentUpon>Mpwd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mwiz\AreaCmp.xaml.cs">
+      <DependentUpon>AreaCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mwiz\BodyCmp.xaml.cs">
+      <DependentUpon>BodyCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mwiz\DataCmp.xaml.cs">
+      <DependentUpon>DataCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mwiz\DateCmp.xaml.cs">
+      <DependentUpon>DateCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mwiz\FileCmp.xaml.cs">
+      <DependentUpon>FileCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mwiz\HeadCmp.xaml.cs">
+      <DependentUpon>HeadCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mwiz\ICardCtl.cs" />
+    <Compile Include="Views\Mpwd\Mwiz\IEditCtl.cs" />
+    <Compile Include="Views\Mpwd\Mwiz\InfoCmp.xaml.cs">
+      <DependentUpon>InfoCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mwiz\LinkCmp.xaml.cs">
+      <DependentUpon>LinkCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mwiz\ListCmp.xaml.cs">
+      <DependentUpon>ListCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mwiz\MailCmp.xaml.cs">
+      <DependentUpon>MailCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mwiz\Mwiz.xaml.cs">
+      <DependentUpon>Mwiz.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mwiz\PassCmp.xaml.cs">
+      <DependentUpon>PassCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mwiz\SignCmp.xaml.cs">
+      <DependentUpon>SignCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mpwd\Mwiz\TextCmp.xaml.cs">
+      <DependentUpon>TextCmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\User\SignIn.xaml.cs">
+      <DependentUpon>SignIn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\User\SignUp.xaml.cs">
+      <DependentUpon>SignUp.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -88,6 +271,198 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\Alert.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Bean\CatItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Bean\KeyItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Demo\Demo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Error.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Home\Cube.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Home\Home.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mopt\Mopt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mkey\Mkey.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mpro\AreaCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mpro\DataCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mpro\DateCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mpro\FileCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mpro\GuidCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mpro\HintCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mpro\InfoCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mpro\LinkCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mpro\ListCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mpro\LogoCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mpro\MailCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mpro\MetaCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mpro\Mpro.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mpro\PassCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mpro\SignCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mpro\TextCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mpwd.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mwiz\AreaCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mwiz\BodyCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mwiz\DataCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mwiz\DateCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mwiz\FileCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mwiz\HeadCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mwiz\InfoCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mwiz\LinkCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mwiz\ListCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mwiz\MailCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mwiz\Mwiz.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mwiz\PassCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mwiz\SignCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mpwd\Mwiz\TextCmp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\User\SignIn.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\User\SignUp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Logo\logo.ico" />
+    <Page Include="Views\Demo\ChildWindow1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="Logo\logo128.png" />
+    <Resource Include="Logo\logo16.png" />
+    <Resource Include="Logo\logo24.png" />
+    <Resource Include="Logo\logo256.png" />
+    <Resource Include="Logo\logo32.png" />
+    <Resource Include="Logo\logo48.png" />
+    <Resource Include="Logo\logo64.png" />
+    <Resource Include="Logo\logo96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Mgtd\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
