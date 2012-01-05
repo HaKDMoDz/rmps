@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Asec")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("阿木加密器")]
+[assembly: AssemblyDescription("这是说明")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Asec")]
+[assembly: AssemblyCompany("Amon.Me")]
+[assembly: AssemblyProduct("阿木加密器")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
