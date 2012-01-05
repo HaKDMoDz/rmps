@@ -1,0 +1,12 @@
+<OutOfBrowserSettings ShortName="阿木密码箱" EnableGPUAcceleration="True" ShowInstallMenuItem="True">
+  <OutOfBrowserSettings.Blurb>您的桌面上的 Apwd 应用程序；在家、工作或旅途中均可使用。</OutOfBrowserSettings.Blurb>
+  <OutOfBrowserSettings.WindowSettings>
+    <WindowSettings Title="阿木密码箱" Height="600" Width="800" />
+  </OutOfBrowserSettings.WindowSettings>
+  <OutOfBrowserSettings.Icons>
+    <Icon Size="16,16">logo/logo16.png</Icon>
+    <Icon Size="32,32">logo/logo32.png</Icon>
+    <Icon Size="48,48">logo/logo48.png</Icon>
+    <Icon Size="128,128">logo/logo128.png</Icon>
+  </OutOfBrowserSettings.Icons>
+</OutOfBrowserSettings>
