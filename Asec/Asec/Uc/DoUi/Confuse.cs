@@ -45,7 +45,7 @@ namespace Msec.Uc.DoUi
 
         public override void InitKey(string key)
         {
-            bool b = key == IData.KEY_ENC;
+            bool b = key == IData.DIR_ENC;
             _Do.LbMask.Visible = b;
             _Do.CbMask.Visible = b;
             _Do.BtMask.Visible = b;
@@ -187,7 +187,9 @@ namespace Msec.Uc.DoUi
                 _Writer.Flush();
                 _Do.ShowData();
             }
+
             _Writer.Close();
+            _Writer = null;
         }
         #endregion
         #endregion

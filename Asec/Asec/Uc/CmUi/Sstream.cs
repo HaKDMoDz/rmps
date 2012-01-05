@@ -27,13 +27,13 @@ namespace Msec.Uc.CmUi
             _Cm.Enabled = true;
 
             Util.Clear(_Cm.CbName);
-            _Cm.CbName.Items.Add(new Item { K = "HC128", V = "HC128", D = "128" });//128
-            _Cm.CbName.Items.Add(new Item { K = "HC256", V = "HC256", D = "256" });//256
-            _Cm.CbName.Items.Add(new Item { K = "Isaac", V = "Isaac", D = "32" });//32 .. 8192
-            _Cm.CbName.Items.Add(new Item { K = "RC4", V = "RC4", D = "40" });//40 .. 2048
-            _Cm.CbName.Items.Add(new Item { K = "Salsa20", V = "Salsa20", D = "128" });//128/256
-            _Cm.CbName.Items.Add(new Item { K = "Vmpc", V = "Vmpc", D = "32" });//8 .. 6144
-            _Cm.CbName.Items.Add(new Item { K = "VmpcKsa3", V = "VmpcKsa3", D = "32" });
+            _Cm.CbName.Items.Add(new Item { K = IData.SSTREAM_HC128, V = "HC128", D = "128" });//128
+            _Cm.CbName.Items.Add(new Item { K = IData.SSTREAM_HC256, V = "HC256", D = "256" });//256
+            _Cm.CbName.Items.Add(new Item { K = IData.SSTREAM_ISAAC, V = "Isaac", D = "32" });//32 .. 8192
+            _Cm.CbName.Items.Add(new Item { K = IData.SSTREAM_RC4, V = "RC4", D = "40" });//40 .. 2048
+            _Cm.CbName.Items.Add(new Item { K = IData.SSTREAM_SALSA20, V = "Salsa20", D = "128" });//128/256
+            _Cm.CbName.Items.Add(new Item { K = IData.SSTREAM_VMPC, V = "Vmpc", D = "32" });//8 .. 6144
+            _Cm.CbName.Items.Add(new Item { K = IData.SSTREAM_VMPCKSA3, V = "VmpcKsa3", D = "32" });
             _Cm.CbName.Enabled = false;
 
             _Cm.LbMode.Visible = false;
@@ -58,37 +58,37 @@ namespace Msec.Uc.CmUi
 
             switch (name)
             {
-                case "HC128":
+                case IData.SSTREAM_HC128:
                     _Engine = new HC128Engine();
                     _KeySize = 16;//128
                     _IVSize = 16;
                     break;
-                case "HC256":
+                case IData.SSTREAM_HC256:
                     _Engine = new HC256Engine();
                     _KeySize = 32;
                     _IVSize = 16;
                     break;
-                case "Isaac":
+                case IData.SSTREAM_ISAAC:
                     _Engine = new IsaacEngine();
                     _KeySize = 10;
                     _IVSize = 0;
                     break;
-                case "RC4":
+                case IData.SSTREAM_RC4:
                     _Engine = new RC4Engine();
                     _KeySize = 10;
                     _IVSize = 0;
                     break;
-                case "Salsa20":
+                case IData.SSTREAM_SALSA20:
                     _Engine = new Salsa20Engine();
                     _KeySize = 16;
                     _IVSize = 8;
                     break;
-                case "Vmpc":
+                case IData.SSTREAM_VMPC:
                     _Engine = new VmpcEngine();
                     _KeySize = 10;
                     _IVSize = 16;
                     break;
-                case "VmpcKsa3":
+                case IData.SSTREAM_VMPCKSA3:
                     _Engine = new VmpcKsa3Engine();
                     _KeySize = 10;
                     _IVSize = 16;

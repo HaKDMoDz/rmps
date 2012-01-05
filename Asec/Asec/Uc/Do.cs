@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml;
 using Msec.Uc.DoUi;
 
 namespace Msec.Uc
@@ -51,10 +52,11 @@ namespace Msec.Uc
 
             _Ado = _Default;
 
-            CbType.Items.Add(ADo._TypeDef);
-            CbType.SelectedIndex = 0;
             CbMask.Items.Add(ADo._MaskDef);
             CbMask.SelectedIndex = 0;
+
+            CbType.Items.Add(ADo._TypeDef);
+            CbType.SelectedIndex = 0;
         }
 
         public void InitOpt(string dir)
@@ -92,9 +94,13 @@ namespace Msec.Uc
             _Ado.InitOpt();
         }
 
-        public void InitKey(string key)
+        public void InitDir(string dir)
         {
-            _Ado.InitKey(key);
+            _Ado.InitKey(dir);
+        }
+
+        public void InitAlg(string alg)
+        {
         }
 
         public void FocusIn()
@@ -112,17 +118,91 @@ namespace Msec.Uc
             }
             return _Ado.Check();
         }
+
+        public XmlElement SaveXml(XmlDocument doc)
+        {
+            XmlElement node = doc.CreateElement("output");
+
+            XmlAttribute attr = doc.CreateAttribute("type");
+            node.Attributes.Append(attr);
+            Item item = CbType.SelectedItem as Item;
+            if (item != null)
+            {
+                attr.Value = item.K;
+            }
+
+            attr = doc.CreateAttribute("key");
+            node.Attributes.Append(attr);
+            item = CbMask.SelectedItem as Item;
+            if (item != null)
+            {
+                attr.Value = item.K;
+            }
+
+            attr = doc.CreateAttribute("value");
+            node.Attributes.Append(attr);
+            if (item != null)
+            {
+                attr.Value = item.D;
+            }
+
+            return node;
+        }
+
+        public void LoadXml(XmlDocument doc)
+        {
+            XmlNode node = doc.SelectSingleNode("/msec/output");
+            if (node != null)
+            {
+                XmlAttribute attr = node.Attributes["type"];
+                if (attr != null)
+                {
+                    CbType.SelectedItem = new Item { K = attr.Value };
+                }
+
+                attr = node.Attributes["key"];
+                if (attr == null)
+                {
+                    return;
+                }
+                for (int i = 0, j = CbMask.Items.Count; i < j; i += 1)
+                {
+                    Item item = CbMask.Items[i] as Item;
+                    if (item == null)
+                    {
+                        continue;
+                    }
+                    if (item.K != attr.Value)
+                    {
+                        continue;
+                    }
+                    attr = node.Attributes["value"];
+                    if (attr != null)
+                    {
+                        item.D = attr.Value;
+                    }
+                    CbMask.SelectedIndex = i;
+                    break;
+                }
+            }
+        }
         #endregion
 
         #region 事项处理
         private void CbType_SelectedIndexChanged(object sender, EventArgs e)
         {
+#if DEBUG
+            Logs.Info("DO:    CbType_SelectedIndexChanged...");
+#endif
             Item item = CbType.SelectedItem as Item;
             if (item == null)
             {
                 return;
             }
 
+#if DEBUG
+            Logs.Info("DO:    CbType_SelectedIndexChanged:" + item.K);
+#endif
             _Ado.ChangedType(item);
         }
 
@@ -133,12 +213,18 @@ namespace Msec.Uc
 
         private void CbMask_SelectedIndexChanged(object sender, EventArgs e)
         {
+#if DEBUG
+            Logs.Info("DO:    CbMask_SelectedIndexChanged...");
+#endif
             Item item = CbMask.SelectedItem as Item;
             if (item == null)
             {
                 return;
             }
 
+#if DEBUG
+            Logs.Info("DO:    CbMask_SelectedIndexChanged:" + item.K);
+#endif
             _Ado.ChangedMask(item);
         }
 

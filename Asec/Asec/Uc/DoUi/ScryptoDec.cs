@@ -65,7 +65,7 @@ namespace Msec.Uc.DoUi
             switch (_Type.K)
             {
                 case OUTPUT_FILE:
-                    _Stream = File.OpenWrite(_Do.TbData.Text);
+                    _Stream = new FileStream(_Do.TbData.Text, FileMode.Create);
                     break;
                 case OUTPUT_TEXT:
                     _Stream = new MemoryStream();

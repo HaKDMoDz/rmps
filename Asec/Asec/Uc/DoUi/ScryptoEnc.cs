@@ -79,7 +79,7 @@ namespace Msec.Uc.DoUi
             switch (_Type.K)
             {
                 case OUTPUT_FILE_BIN:
-                    _Stream = File.OpenWrite(_Do.TbData.Text);
+                    _Stream = new FileStream(_Do.TbData.Text, FileMode.Create);
                     break;
                 case OUTPUT_FILE_TXT:
                     _Writer = new StreamWriter(_Do.TbData.Text);

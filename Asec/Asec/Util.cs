@@ -38,7 +38,7 @@ namespace Msec
 
         public static string GenPass(string data, int length)
         {
-            StringBuilder buf = new StringBuilder();
+            StringBuilder buf = new StringBuilder(data);
             for (int i = buf.Length, j = length; i < j; i += 1)
             {
                 buf.Append(' ');

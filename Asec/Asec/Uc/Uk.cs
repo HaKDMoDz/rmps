@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Text;
 using System.Windows.Forms;
+using System.Xml;
 using Msec.Uc.UkUi;
 using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Parameters;
 
 namespace Msec.Uc
 {
@@ -52,6 +51,9 @@ namespace Msec.Uc
             _Txt2Img = new Txt2Img(_Main, this);
 
             _Auk = _Default;
+
+            CbSize.Items.Add(AUk._SizeDef);
+            CbSize.SelectedIndex = 0;
         }
 
         public void InitOpt(string dir)
@@ -89,9 +91,14 @@ namespace Msec.Uc
             _Auk.InitOpt();
         }
 
-        public void InitKey(string key)
+        public void InitDir(string dir)
         {
-            _Auk.InitKey(key);
+            _Auk.InitDir(dir);
+        }
+
+        public void InitAlg(string alg)
+        {
+            _Auk.InitAlg(alg);
         }
 
         public void FocusIn()
@@ -102,9 +109,59 @@ namespace Msec.Uc
         {
             return _Auk.Check();
         }
+
+        public XmlElement SaveXml(XmlDocument doc)
+        {
+            XmlElement node = doc.CreateElement("key");
+
+            XmlAttribute attr = doc.CreateAttribute("size");
+            node.Attributes.Append(attr);
+            Item item = CbSize.SelectedItem as Item;
+            if (item != null)
+            {
+                attr.Value = item.K;
+            }
+
+            return node;
+        }
+
+        public void LoadXml(XmlDocument doc)
+        {
+            XmlNode node = doc.SelectSingleNode("/msec/key");
+            if (node != null)
+            {
+                XmlAttribute attr = node.Attributes["size"];
+                if (attr != null)
+                {
+                    CbSize.SelectedItem = new Item { K = attr.Value };
+                }
+            }
+        }
         #endregion
 
         #region 事项处理
+        private void CbSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+#if DEBUG
+            Logs.Info("CbSize_SelectedIndexChanged...");
+#endif
+            Item item = CbSize.SelectedItem as Item;
+            if (item == null)
+            {
+                return;
+            }
+
+#if DEBUG
+            Logs.Info("CbSize_SelectedIndexChanged:" + item.K);
+#endif
+            int len = int.Parse(item.K == "0" ? item.D : item.K);
+            if (TbPass.Text.Length > len)
+            {
+                TbPass.Text = TbPass.Text.Substring(0, len);
+            }
+            TbPass.MaxLength = len;
+        }
+
         private void BtPass_Click(object sender, EventArgs e)
         {
             _Auk.MorePass();
@@ -116,28 +173,19 @@ namespace Msec.Uc
         }
         #endregion
 
-        public ICipherParameters GenParam(int keySize, int ivSize)
+        public ICipherParameters GenParam()
         {
-            StringBuilder buf = new StringBuilder(TbPass.Text);
-            for (int i = buf.Length, j = keySize; i < j; i += 1)
-            {
-                buf.Append(' ');
-            }
-            byte[] pass = Encoding.UTF8.GetBytes(buf.ToString());
+            return _Auk.GenParam();
+        }
 
-            ICipherParameters param = new KeyParameter(pass);
-            if (ivSize > 0)
-            {
-                buf.Clear().Append(TbSalt.Text);
-                for (int i = buf.Length, j = ivSize; i < j; i += 1)
-                {
-                    buf.Append(' ');
-                }
-                byte[] iv = Encoding.UTF8.GetBytes(buf.ToString());
-                param = new ParametersWithIV(new KeyParameter(pass), iv);
-            }
-            return param;
-            //return new ParametersWithSalt(_Auk.GenParam("", TbPass.Text), Encoding.Default.GetBytes(buf.ToString()));
+        private void TbPass_GotFocus(object sender, EventArgs e)
+        {
+            TbPass.SelectAll();
+        }
+
+        private void TbSalt_GotFocus(object sender, EventArgs e)
+        {
+            TbSalt.SelectAll();
         }
     }
 }

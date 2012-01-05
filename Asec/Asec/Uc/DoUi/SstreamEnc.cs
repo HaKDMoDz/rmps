@@ -94,7 +94,7 @@ namespace Msec.Uc.DoUi
             switch (_Type.K)
             {
                 case OUTPUT_FILE_BIN:
-                    _Stream = File.OpenWrite(_Do.TbData.Text);
+                    _Stream = new FileStream(_Do.TbData.Text, FileMode.Create);
                     break;
                 case OUTPUT_FILE_TXT:
                     _Writer = new StreamWriter(_Do.TbData.Text);
@@ -118,6 +118,7 @@ namespace Msec.Uc.DoUi
         {
             if (_Stream != null)
             {
+                _Stream.Flush();
                 _Stream.Close();
                 _Stream = null;
                 return;
@@ -133,13 +134,16 @@ namespace Msec.Uc.DoUi
                         _Writer.Write(_CharBuf, 0, len);
                     }
                 }
-                _Writer.Close();
-                _Writer = null;
+
+                _Writer.Flush();
 
                 if (_Type.K == OUTPUT_TEXT)
                 {
                     _Do.ShowData();
                 }
+
+                _Writer.Close();
+                _Writer = null;
                 return;
             }
         }

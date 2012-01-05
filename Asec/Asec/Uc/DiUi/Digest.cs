@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Text;
 
 namespace Msec.Uc.DiUi
 {
@@ -123,10 +124,10 @@ namespace Msec.Uc.DiUi
             switch (_Type.K)
             {
                 case INPUT_FILE:
-                    _Stream = System.IO.File.OpenRead(_Di.TbData.Text);
+                    _Stream = File.OpenRead(_Di.TbData.Text);
                     break;
                 case INPUT_TEXT:
-                    _Stream = new System.IO.MemoryStream(Encoding.Default.GetBytes(_Di.UserData.ToString()));
+                    _Stream = new MemoryStream(Encoding.Default.GetBytes(_Di.UserData.ToString()));
                     break;
                 default:
                     _Stream = null;

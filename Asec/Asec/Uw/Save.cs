@@ -9,6 +9,7 @@ namespace Msec.Uw
         public void Show(Main main, string data)
         {
             SaveFileDialog fd = new SaveFileDialog();
+            fd.Filter = "所有文档(*.*)|*.*";
             fd.FileName = data;
             if (DialogResult.OK != fd.ShowDialog(main))
             {

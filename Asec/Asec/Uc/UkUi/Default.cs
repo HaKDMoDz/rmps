@@ -12,11 +12,15 @@ namespace Msec.Uc.UkUi
         {
             _Uk.Enabled = false;
 
-            _Uk.LbSize.Text = "口令(&K)";
-            _Uk.LbPass.Text = "向量(&V)";
+            _Uk.LbPass.Text = "口令(&K)";
+            _Uk.LbSalt.Text = "向量(&V)";
         }
 
-        public override void InitKey(string key)
+        public override void InitDir(string dir)
+        {
+        }
+
+        public override void InitAlg(string alg)
         {
         }
 
@@ -31,6 +35,11 @@ namespace Msec.Uc.UkUi
         public override bool Check()
         {
             return true;
+        }
+
+        public override Org.BouncyCastle.Crypto.ICipherParameters GenParam()
+        {
+            return null;
         }
     }
 }

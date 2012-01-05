@@ -1,0 +1,5 @@
+F:\Asec\Cmd\bin\Release\Cmd.exe
+F:\Asec\Cmd\bin\Release\Cmd.pdb
+F:\Asec\Cmd\obj\x86\Release\ResolveAssemblyReference.cache
+F:\Asec\Cmd\obj\x86\Release\Cmd.exe
+F:\Asec\Cmd\obj\x86\Release\Cmd.pdb

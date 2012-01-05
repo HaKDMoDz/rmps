@@ -12,9 +12,19 @@ namespace Msec.Uc.UkUi
         {
         }
 
-        public override void InitKey(string key)
+        public override void InitDir(string dir)
         {
             _Uk.Enabled = false;
+        }
+
+        public override void InitAlg(string alg)
+        {
+            Util.Clear(_Uk.CbSize);
+            _SizeDef.D = "32767";
+            _Uk.CbSize.SelectedIndex = 0;
+
+            _Uk.LbSize.Enabled = false;
+            _Uk.CbSize.Enabled = false;
         }
 
         public override void MorePass()
@@ -27,7 +37,18 @@ namespace Msec.Uc.UkUi
 
         public override bool Check()
         {
+            if (string.IsNullOrEmpty(_Uk.TbPass.Text))
+            {
+                _Main.ShowAlert("请输入口令！");
+                _Uk.TbPass.Focus();
+                return false;
+            }
             return true;
+        }
+
+        public override Org.BouncyCastle.Crypto.ICipherParameters GenParam()
+        {
+            return null;
         }
     }
 }

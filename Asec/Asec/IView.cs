@@ -1,4 +1,6 @@
-﻿namespace Msec
+﻿using System.Xml;
+
+namespace Msec
 {
     public interface IView
     {
@@ -6,10 +8,16 @@
 
         void InitOpt(string opt);
 
-        void InitKey(string key);
+        void InitDir(string dir);
+
+        void InitAlg(string alg);
 
         void FocusIn();
 
         bool Check();
+
+        XmlElement SaveXml(XmlDocument doc);
+
+        void LoadXml(XmlDocument doc);
     }
 }

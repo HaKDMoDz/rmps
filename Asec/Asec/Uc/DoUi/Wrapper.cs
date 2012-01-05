@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Text;
 using System.IO;
+using System.Text;
 
 namespace Msec.Uc.DoUi
 {
@@ -30,13 +30,14 @@ namespace Msec.Uc.DoUi
             _Do.CbMask.Items.Add(new Item { K = "12", V = "4进制", D = "0123" });
             _Do.CbMask.Items.Add(new Item { K = "13", V = "8进制", D = "01234567" });
             _Do.CbMask.Items.Add(new Item { K = "14", V = "16进制", D = "0123456789ABCDEF" });
-            _Do.CbMask.Items.Add(new Item { K = "15", V = "32进制", D = "0123456789ABCDEF" });
+            _Do.CbMask.Items.Add(new Item { K = "15", V = "32进制", D = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
             _Do.CbMask.Items.Add(new Item { K = "16", V = "64进制", D = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz*." });
             _Do.CbMask.Items.Add(new Item { K = "21", V = "仅数字", D = "0123456789" });
             _Do.CbMask.Items.Add(new Item { K = "22", V = "大写字母", D = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
             _Do.CbMask.Items.Add(new Item { K = "23", V = "小写字母", D = "abcdefghijklmnopqrstuvwxyz" });
             _Do.CbMask.Items.Add(new Item { K = "24", V = "大小写字母", D = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
             _Do.CbMask.Items.Add(new Item { K = "25", V = "数字及字母", D = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
+            _Do.CbMask.Items.Add(new Item { K = "26", V = "可输入英文符号", D = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" });
             _Do.CbMask.Items.Add(new Item { K = USER_CHARSET, V = "自定义字符集", D = "" });
 
             _Do.LbMask.Visible = false;
@@ -46,7 +47,7 @@ namespace Msec.Uc.DoUi
 
         public override void InitKey(string key)
         {
-            bool b = key == IData.KEY_ENC;
+            bool b = key == IData.DIR_ENC;
             _Do.LbMask.Visible = b;
             _Do.CbMask.Visible = b;
             _Do.BtMask.Visible = b;
@@ -137,28 +138,40 @@ namespace Msec.Uc.DoUi
 
         public override void Begin()
         {
-            switch (_Type.K)
+            // 加密
+            if (_Do.CbMask.Visible)
             {
-                case OUTPUT_FILE:
-                    if (_Do.CbMask.Visible)
-                    {
+                switch (_Type.K)
+                {
+                    case OUTPUT_FILE:
                         _Writer = new StreamWriter(_Do.TbData.Text);
-                    }
-                    else
-                    {
-                        _Stream = File.OpenWrite(_Do.TbData.Text);
-                    }
-                    break;
-                case OUTPUT_TEXT:
-                    _Writer = new StringWriter(_Do.UserData.Clear());
-                    break;
-                default:
-                    break;
-            }
+                        break;
+                    case OUTPUT_TEXT:
+                        _Writer = new StringWriter(_Do.UserData.Clear());
+                        break;
+                    default:
+                        break;
+                }
 
-            if (_Mask.K.Length > 1)
+                if (_Mask.K.Length > 1)
+                {
+                    _Wrapper.Init(true, _Mask.D.ToCharArray());
+                }
+            }
+            //解密
+            else
             {
-                _Wrapper.Init(true, _Mask.D.ToCharArray());
+                switch (_Type.K)
+                {
+                    case OUTPUT_FILE:
+                        _Stream = new FileStream(_Do.TbData.Text, FileMode.Create);
+                        break;
+                    case OUTPUT_TEXT:
+                        _Stream = new MemoryStream();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -190,6 +203,15 @@ namespace Msec.Uc.DoUi
         {
             if (_Stream != null)
             {
+                _Stream.Flush();
+
+                if (_Type.K == OUTPUT_TEXT)
+                {
+                    byte[] tmp = ((MemoryStream)_Stream).ToArray();
+                    _Do.UserData.Clear().Append(Encoding.Default.GetString(tmp));
+                    _Do.ShowData();
+                }
+
                 _Stream.Close();
                 _Stream = null;
                 return;
@@ -206,13 +228,15 @@ namespace Msec.Uc.DoUi
                     }
                 }
 
-                _Writer.Close();
-                _Writer = null;
+                _Writer.Flush();
 
                 if (_Type.K == OUTPUT_TEXT)
                 {
                     _Do.ShowData();
                 }
+
+                _Writer.Close();
+                _Writer = null;
             }
         }
         #endregion

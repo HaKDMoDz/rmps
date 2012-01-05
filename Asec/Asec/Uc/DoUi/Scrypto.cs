@@ -21,10 +21,8 @@ namespace Msec.Uc.DoUi
             _Do.Enabled = true;
 
             Util.Clear(_Do.CbType);
-            _Do.CbType.Items.Add(new Item { K = OUTPUT_FILE_BIN, V = "字节文件" });
-            _Do.CbType.Items.Add(new Item { K = OUTPUT_FILE_TXT, V = "字符文件" });
-            _Do.CbType.Items.Add(new Item { K = OUTPUT_TEXT, V = "文本" });
             _Do.CbType.Enabled = true;
+            _Do.CbType.SelectedIndex = 0;
 
             _Do.TbData.Enabled = false;
             _Do.BtData.Enabled = false;
@@ -34,18 +32,19 @@ namespace Msec.Uc.DoUi
             _Do.CbMask.Items.Add(new Item { K = "12", V = "4进制", D = "0123" });
             _Do.CbMask.Items.Add(new Item { K = "13", V = "8进制", D = "01234567" });
             _Do.CbMask.Items.Add(new Item { K = "14", V = "16进制", D = "0123456789ABCDEF" });
-            _Do.CbMask.Items.Add(new Item { K = "15", V = "32进制", D = "0123456789ABCDEF" });
+            _Do.CbMask.Items.Add(new Item { K = "15", V = "32进制", D = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
             _Do.CbMask.Items.Add(new Item { K = "16", V = "64进制", D = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz*." });
             _Do.CbMask.Items.Add(new Item { K = "21", V = "仅数字", D = "0123456789" });
             _Do.CbMask.Items.Add(new Item { K = "22", V = "大写字母", D = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
             _Do.CbMask.Items.Add(new Item { K = "23", V = "小写字母", D = "abcdefghijklmnopqrstuvwxyz" });
             _Do.CbMask.Items.Add(new Item { K = "24", V = "大小写字母", D = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
             _Do.CbMask.Items.Add(new Item { K = "25", V = "数字及字母", D = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
+            _Do.CbMask.Items.Add(new Item { K = "26", V = "可输入英文符号", D = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" });
             _Do.CbMask.Items.Add(new Item { K = USER_CHARSET, V = "自定义字符集", D = "" });
 
-            _Do.LbMask.Visible = true;
-            _Do.CbMask.Visible = true;
-            _Do.BtMask.Visible = true;
+            _Do.LbMask.Visible = false;
+            _Do.CbMask.Visible = false;
+            _Do.BtMask.Visible = false;
         }
 
         public override void InitKey(string key)

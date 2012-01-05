@@ -29,13 +29,14 @@ namespace Msec.Uc.DoUi
             _Do.CbMask.Items.Add(new Item { K = "12", V = "4进制", D = "0123" });
             _Do.CbMask.Items.Add(new Item { K = "13", V = "8进制", D = "01234567" });
             _Do.CbMask.Items.Add(new Item { K = "14", V = "16进制", D = "0123456789ABCDEF" });
-            _Do.CbMask.Items.Add(new Item { K = "15", V = "32进制", D = "0123456789ABCDEF" });
+            _Do.CbMask.Items.Add(new Item { K = "15", V = "32进制", D = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
             _Do.CbMask.Items.Add(new Item { K = "16", V = "64进制", D = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz*." });
             _Do.CbMask.Items.Add(new Item { K = "21", V = "仅数字", D = "0123456789" });
             _Do.CbMask.Items.Add(new Item { K = "22", V = "大写字母", D = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
             _Do.CbMask.Items.Add(new Item { K = "23", V = "小写字母", D = "abcdefghijklmnopqrstuvwxyz" });
             _Do.CbMask.Items.Add(new Item { K = "24", V = "大小写字母", D = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
             _Do.CbMask.Items.Add(new Item { K = "25", V = "数字及字母", D = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
+            _Do.CbMask.Items.Add(new Item { K = "26", V = "可输入英文符号", D = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" });
             _Do.CbMask.Items.Add(new Item { K = USER_CHARSET, V = "自定义字符集", D = "" });
 
             _Do.LbMask.Visible = false;
@@ -154,13 +155,13 @@ namespace Msec.Uc.DoUi
             switch (_Type.K)
             {
                 case OUTPUT_TEXT:
-                    _Writer = new System.IO.StringWriter(_Do.UserData.Clear());
+                    _Writer = new StringWriter(_Do.UserData.Clear());
                     break;
                 case OUTPUT_FILE_TXT:
-                    _Writer = new System.IO.StreamWriter(_Do.TbData.Text);
+                    _Writer = new StreamWriter(_Do.TbData.Text);
                     break;
                 case OUTPUT_FILE_BIN:
-                    _Stream = File.OpenWrite(_Do.TbData.Text);
+                    _Stream = new FileStream(_Do.TbData.Text, FileMode.Create);
                     break;
                 default:
                     _Writer = null;
@@ -177,7 +178,7 @@ namespace Msec.Uc.DoUi
         public override void Write(byte[] buffer, int offset, int count)
         {
             // 不处理
-            if (_Type.K == OUTPUT_FILE_BIN)
+            if (_Stream != null)
             {
                 _Stream.Write(buffer, offset, count);
                 return;
@@ -199,20 +200,25 @@ namespace Msec.Uc.DoUi
 
         public override void End()
         {
-            switch (_Type.K)
+            if (_Stream != null)
             {
-                case OUTPUT_TEXT:
-                    _Writer.Close();
+                _Stream.Flush();
+                _Stream.Close();
+                _Stream = null;
+                return;
+            }
+
+            if (_Writer != null)
+            {
+                _Writer.Flush();
+
+                if (_Type.K == OUTPUT_TEXT)
+                {
                     _Do.ShowData();
-                    break;
-                case OUTPUT_FILE_TXT:
-                    _Writer.Close();
-                    break;
-                case OUTPUT_FILE_BIN:
-                    _Stream.Close();
-                    break;
-                default:
-                    break;
+                }
+
+                _Writer.Close();
+                _Writer = null;
             }
         }
         #endregion

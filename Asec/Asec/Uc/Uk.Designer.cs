@@ -68,6 +68,7 @@
             this.BtSalt.TabIndex = 7;
             this.BtSalt.Text = ".";
             this.BtSalt.UseVisualStyleBackColor = true;
+            this.BtSalt.Visible = false;
             this.BtSalt.Click += new System.EventHandler(this.BtSalt_Click);
             // 
             // TbSalt
@@ -76,6 +77,7 @@
             this.TbSalt.Name = "TbSalt";
             this.TbSalt.Size = new System.Drawing.Size(121, 21);
             this.TbSalt.TabIndex = 6;
+            this.TbSalt.Visible = false;
             // 
             // LbSalt
             // 
@@ -85,6 +87,7 @@
             this.LbSalt.Size = new System.Drawing.Size(47, 12);
             this.LbSalt.TabIndex = 5;
             this.LbSalt.Text = "向量(&V)";
+            this.LbSalt.Visible = false;
             // 
             // BtPass
             // 
@@ -120,6 +123,7 @@
             this.CbSize.Name = "CbSize";
             this.CbSize.Size = new System.Drawing.Size(121, 20);
             this.CbSize.TabIndex = 1;
+            this.CbSize.SelectedIndexChanged += new System.EventHandler(this.CbSize_SelectedIndexChanged);
             // 
             // LbSize
             // 
@@ -147,11 +151,11 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         public System.Windows.Forms.Label LbSize;
-        private System.Windows.Forms.ComboBox CbSize;
+        public System.Windows.Forms.ComboBox CbSize;
         public System.Windows.Forms.Label LbPass;
         public System.Windows.Forms.TextBox TbPass;
         public System.Windows.Forms.Button BtPass;
-        private System.Windows.Forms.Label LbSalt;
+        public System.Windows.Forms.Label LbSalt;
         public System.Windows.Forms.TextBox TbSalt;
         public System.Windows.Forms.Button BtSalt;
 

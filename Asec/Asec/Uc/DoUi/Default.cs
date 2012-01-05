@@ -1,5 +1,4 @@
-﻿
-namespace Msec.Uc.DoUi
+﻿namespace Msec.Uc.DoUi
 {
     public class Default : ADo
     {

@@ -82,6 +82,7 @@
     </Compile>
     <Compile Include="Item.cs" />
     <Compile Include="IView.cs" />
+    <Compile Include="Logs.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,7 +176,6 @@
     <Compile Include="Uc\UkUi\Digest.cs" />
     <Compile Include="Uc\UkUi\RandKey.cs" />
     <Compile Include="Uc\UkUi\Scrypto.cs" />
-    <Compile Include="Uc\UkUi\SecKey.cs" />
     <Compile Include="Uc\UkUi\Sstream.cs" />
     <Compile Include="Uc\UkUi\Txt2Img.cs" />
     <Compile Include="Uc\UkUi\Wrapper.cs" />

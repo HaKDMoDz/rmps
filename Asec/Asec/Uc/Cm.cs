@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Xml;
 using Msec.Uc.CmUi;
 using Org.BouncyCastle.Crypto;
 
@@ -49,14 +50,14 @@ namespace Msec.Uc
 
             _Acm = _Default;
 
-            CbName.Items.Add(ACm._NameDef);
-            CbName.SelectedIndex = 0;
+            CbPads.Items.Add(ACm._SizeDef);
+            CbPads.SelectedIndex = 0;
 
             CbMode.Items.Add(ACm._ModeDef);
             CbMode.SelectedIndex = 0;
 
-            CbPads.Items.Add(ACm._SizeDef);
-            CbPads.SelectedIndex = 0;
+            CbName.Items.Add(ACm._NameDef);
+            CbName.SelectedIndex = 0;
         }
 
         public void InitOpt(string opt)
@@ -94,9 +95,13 @@ namespace Msec.Uc
             _Acm.InitOpt();
         }
 
-        public void InitKey(string key)
+        public void InitDir(string dir)
         {
-            _Acm.InitKey(key);
+            _Acm.InitKey(dir);
+        }
+
+        public void InitAlg(string alg)
+        {
         }
 
         public void FocusIn()
@@ -115,28 +120,96 @@ namespace Msec.Uc
             }
             return true;
         }
+
+        public XmlElement SaveXml(XmlDocument doc)
+        {
+            XmlElement node = doc.CreateElement("cipher");
+
+            XmlAttribute attr = doc.CreateAttribute("name");
+            node.Attributes.Append(attr);
+
+            Item item = CbName.SelectedItem as Item;
+            if (item != null)
+            {
+                attr.Value = item.K;
+            }
+
+            attr = doc.CreateAttribute("mode");
+            node.Attributes.Append(attr);
+            item = CbMode.SelectedItem as Item;
+            if (item != null)
+            {
+                attr.Value = item.K;
+            }
+
+            attr = doc.CreateAttribute("padding");
+            node.Attributes.Append(attr);
+            item = CbPads.SelectedItem as Item;
+            if (item != null)
+            {
+                attr.Value = item.K;
+            }
+
+            return node;
+        }
+
+        public void LoadXml(XmlDocument doc)
+        {
+            XmlNode node = doc.SelectSingleNode("/msec/cipher");
+            if (node != null)
+            {
+                XmlAttribute attr = node.Attributes["name"];
+                if (attr != null)
+                {
+                    CbName.SelectedItem = new Item { K = attr.Value };
+                }
+                attr = node.Attributes["mode"];
+                if (attr != null)
+                {
+                    CbMode.SelectedItem = new Item { K = attr.Value };
+                }
+                attr = node.Attributes["padding"];
+                if (attr != null)
+                {
+                    CbPads.SelectedItem = new Item { K = attr.Value };
+                }
+            }
+        }
         #endregion
 
         #region 事项处理
         private void CbName_SelectedIndexChanged(object sender, EventArgs e)
         {
+#if DEBUG
+            Logs.Info("CbName_SelectedIndexChanged...");
+#endif
             Item item = CbName.SelectedItem as Item;
             if (item == null)
             {
                 return;
             }
 
+#if DEBUG
+            Logs.Info("CbName_SelectedIndexChanged:" + item.K);
+#endif
             _Acm.ChangeName(item.K);
+            _Main.ChangeAlg(item.K);
         }
 
         private void CbMode_SelectedIndexChanged(object sender, EventArgs e)
         {
+#if DEBUG
+            Logs.Info("CbMode_SelectedIndexChanged...");
+#endif
             Item item = CbMode.SelectedItem as Item;
             if (item == null)
             {
                 return;
             }
 
+#if DEBUG
+            Logs.Info("CbMode_SelectedIndexChanged:" + item.K);
+#endif
             string mode = item.K == "0" ? item.D : item.K;
             if (mode != null)
             {
@@ -146,12 +219,18 @@ namespace Msec.Uc
 
         private void CbPads_SelectedIndexChanged(object sender, EventArgs e)
         {
+#if DEBUG
+            Logs.Info("CbPads_SelectedIndexChanged...");
+#endif
             Item item = CbPads.SelectedItem as Item;
             if (item == null)
             {
                 return;
             }
 
+#if DEBUG
+            Logs.Info("CbPads_SelectedIndexChanged:" + item.K);
+#endif
             string size = item.K == "0" ? item.D : item.K;
             if (size != null)
             {
@@ -160,23 +239,7 @@ namespace Msec.Uc
         }
         #endregion
 
-        public int KeySize
-        {
-            get
-            {
-                return _Acm.KeySize;
-            }
-        }
-
-        public int IVSize
-        {
-            get
-            {
-                return _Acm.IVSize;
-            }
-        }
-
-        public BufferedBlockCipher SBlock
+        public BufferedBlockCipher Scrypto
         {
             get
             {
@@ -184,7 +247,7 @@ namespace Msec.Uc
             }
         }
 
-        public BufferedAsymmetricBlockCipher ABlock
+        public BufferedAsymmetricBlockCipher Acrypto
         {
             get
             {
@@ -200,11 +263,11 @@ namespace Msec.Uc
             }
         }
 
-        public Ce.Wrapper Confuse
+        public Ce.Wrapper Wrapper
         {
             get
             {
-                return _Confuse.Cipher;
+                return _Wrapper.Cipher;
             }
         }
 

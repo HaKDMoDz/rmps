@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Xml;
 using Msec.Uc;
 using Msec.Uw;
 using Org.BouncyCastle.Crypto;
@@ -33,26 +34,15 @@ namespace Msec
         public void Init()
         {
             // 
-            // UcCm
+            // UcDo
             // 
-            _UcCm = new Msec.Uc.Cm(this);
-            _UcCm.Init();
-            _UcCm.Location = new System.Drawing.Point(12, 39);
-            _UcCm.Name = "UcCm";
-            _UcCm.Size = new System.Drawing.Size(240, 110);
-            _UcCm.TabIndex = 3;
-            Controls.Add(_UcCm);
-
-            // 
-            // UcUk
-            // 
-            _UcUk = new Msec.Uc.Uk(this);
-            _UcUk.Init();
-            _UcUk.Location = new System.Drawing.Point(258, 39);
-            _UcUk.Name = "UcUk";
-            _UcUk.Size = new System.Drawing.Size(240, 110);
-            _UcUk.TabIndex = 4;
-            Controls.Add(_UcUk);
+            _UcDo = new Msec.Uc.Do(this);
+            _UcDo.Init();
+            _UcDo.Location = new System.Drawing.Point(258, 155);
+            _UcDo.Name = "UcDo";
+            _UcDo.Size = new System.Drawing.Size(240, 110);
+            _UcDo.TabIndex = 6;
+            Controls.Add(_UcDo);
 
             // 
             // UcDi
@@ -66,28 +56,26 @@ namespace Msec
             Controls.Add(_UcDi);
 
             // 
-            // UcDo
+            // UcUk
             // 
-            _UcDo = new Msec.Uc.Do(this);
-            _UcDo.Init();
-            _UcDo.Location = new System.Drawing.Point(258, 155);
-            _UcDo.Name = "UcDo";
-            _UcDo.Size = new System.Drawing.Size(240, 110);
-            _UcDo.TabIndex = 6;
-            Controls.Add(_UcDo);
+            _UcUk = new Msec.Uc.Uk(this);
+            _UcUk.Init();
+            _UcUk.Location = new System.Drawing.Point(258, 39);
+            _UcUk.Name = "UcUk";
+            _UcUk.Size = new System.Drawing.Size(240, 110);
+            _UcUk.TabIndex = 4;
+            Controls.Add(_UcUk);
 
             // 
-            // CbOpt
+            // UcCm
             // 
-            CbOpt.Items.Add(new Item { K = "0", V = "请选择" });
-            CbOpt.Items.Add(new Item { K = IData.OPT_DIGEST, V = "散列算法" });
-            CbOpt.Items.Add(new Item { K = IData.OPT_RANDKEY, V = "随机口令" });
-            CbOpt.Items.Add(new Item { K = IData.OPT_WRAPPER, V = "混淆算法" });
-            CbOpt.Items.Add(new Item { K = IData.OPT_SCRYPTO, V = "块对称算法" });
-            CbOpt.Items.Add(new Item { K = IData.OPT_SSTREAM, V = "流对称算法" });
-            //CbOpt.Items.Add(new Item { K = IData.OPT_ACRYPTO, V = "非对称算法" });
-            //CbOpt.Items.Add(new Item { K = IData.OPT_TXT2IMG, V = "图文转换" });
-            CbOpt.SelectedIndex = 0;
+            _UcCm = new Msec.Uc.Cm(this);
+            _UcCm.Init();
+            _UcCm.Location = new System.Drawing.Point(12, 39);
+            _UcCm.Name = "UcCm";
+            _UcCm.Size = new System.Drawing.Size(240, 110);
+            _UcCm.TabIndex = 3;
+            Controls.Add(_UcCm);
 
             // 
             // CbKey
@@ -95,14 +83,21 @@ namespace Msec
             CbKey.Items.Add(new Item { K = "0", V = "请选择" });
             CbKey.Items.Add(new Item { K = IData.DIR_ENC, V = "加密" });
             CbKey.Items.Add(new Item { K = IData.DIR_DEC, V = "解密" });
-            CbOpt.SelectedIndex = 0;
+            CbKey.SelectedIndex = 0;
             CbKey.Visible = false;
 
             // 
-            // CbDir
+            // CbOpt
             // 
-            //CbDir.Items.Add(new Item { K = "0", V = "请选择" });
-            //CbDir.Visible = false;
+            CbOpt.Items.Add(new Item { K = "0", V = "请选择" });
+            CbOpt.Items.Add(new Item { K = IData.OPT_DIGEST, V = "散列算法" });
+            //CbOpt.Items.Add(new Item { K = IData.OPT_RANDKEY, V = "随机口令" });
+            CbOpt.Items.Add(new Item { K = IData.OPT_WRAPPER, V = "掩码算法" });
+            CbOpt.Items.Add(new Item { K = IData.OPT_SCRYPTO, V = "块对称算法" });
+            CbOpt.Items.Add(new Item { K = IData.OPT_SSTREAM, V = "流对称算法" });
+            //CbOpt.Items.Add(new Item { K = IData.OPT_ACRYPTO, V = "非对称算法" });
+            //CbOpt.Items.Add(new Item { K = IData.OPT_TXT2IMG, V = "图文转换" });
+            CbOpt.SelectedIndex = 0;
 
             //BtDo.Text = "执行(&R)";
         }
@@ -110,12 +105,18 @@ namespace Msec
         #region 事件处理
         private void CbOpt_SelectedIndexChanged(object sender, EventArgs e)
         {
+#if DEBUG
+            Logs.Info("CbOpt_SelectedIndexChanged...");
+#endif
             Item item = CbOpt.SelectedItem as Item;
             if (item == null)
             {
                 return;
             }
 
+#if DEBUG
+            Logs.Info("CbOpt_SelectedIndexChanged:" + item.K);
+#endif
             _UcCm.InitOpt(item.K);
             _UcUk.InitOpt(item.K);
             _UcDi.InitOpt(item.K);
@@ -156,16 +157,22 @@ namespace Msec
 
         private void CbKey_SelectedIndexChanged(object sender, EventArgs e)
         {
+#if DEBUG
+            Logs.Info("CbKey_SelectedIndexChanged...");
+#endif
             Item item = CbKey.SelectedItem as Item;
             if (item == null)
             {
                 return;
             }
 
-            _UcCm.InitKey(item.K);
-            _UcUk.InitKey(item.K);
-            _UcDi.InitKey(item.K);
-            _UcDo.InitKey(item.K);
+#if DEBUG
+            Logs.Info("CbKey_SelectedIndexChanged:" + item.K);
+#endif
+            _UcCm.InitDir(item.K);
+            _UcUk.InitDir(item.K);
+            _UcDi.InitDir(item.K);
+            _UcDo.InitDir(item.K);
         }
 
         private void BtDo_Click(object sender, EventArgs e)
@@ -240,7 +247,7 @@ namespace Msec
                         CbKey.Focus();
                         return;
                     }
-                    Scrypto(key.K != IData.KEY_DEC);
+                    Scrypto(key.K != IData.DIR_DEC);
                     break;
                 case IData.OPT_SSTREAM:
                     if (key == null || key.K == "0")
@@ -249,7 +256,7 @@ namespace Msec
                         CbKey.Focus();
                         return;
                     }
-                    Sstream(key.K != IData.KEY_DEC);
+                    Sstream(key.K != IData.DIR_DEC);
                     break;
                 case IData.OPT_ACRYPTO:
                     if (key == null || key.K == "0")
@@ -258,7 +265,7 @@ namespace Msec
                         CbKey.Focus();
                         return;
                     }
-                    Acrypto(key.K != IData.KEY_DEC);
+                    Acrypto(key.K != IData.DIR_DEC);
                     break;
                 case IData.OPT_TXT2IMG:
                     Txt2Img();
@@ -278,6 +285,13 @@ namespace Msec
         #endregion
 
         #region 公有方法
+        public void ChangeAlg(string alg)
+        {
+            _UcUk.InitAlg(alg);
+            _UcDi.InitAlg(alg);
+            _UcDo.InitAlg(alg);
+        }
+
         public void ShowInfo(string info)
         {
             LbInfo.Text = info;
@@ -313,8 +327,8 @@ namespace Msec
                 return;
             }
             _Mask = new Mask();
-            //_Mask.Item = mask;
-            _Mask.Show(this);
+            _Mask.Location = new Point(Location.X + (Width - _Mask.Width) / 2, Location.Y + (Height - _Mask.Height) / 2);
+            _Mask.Show(this, mask);
         }
 
         public void ShowOpen(string file, CallBackHandler<string> handler)
@@ -327,14 +341,16 @@ namespace Msec
             _Open.Show(this, file);
         }
 
-        public void ShowPass(string pass)
+        public void ShowPass(string pass, CallBackHandler<string> handler)
         {
             if (_Pass != null && _Pass.Visible)
             {
                 return;
             }
             _Pass = new Pass();
-            _Pass.Show(this);
+            _Pass.CallBack = handler;
+            _Pass.Location = new Point(Location.X + (Width - _Pass.Width) / 2, Location.Y + (Height - _Pass.Height) / 2);
+            _Pass.Show(this, pass);
         }
 
         public void ShowSave(string file, CallBackHandler<string> handler)
@@ -395,6 +411,15 @@ namespace Msec
 
         private void Randkey()
         {
+            _UcDo.Begin();
+
+            byte[] buf = new byte[IData.BUF_SIZE];
+            int len = _UcDi.Read(buf, 0, buf.Length);
+            _UcDo.Write(buf, 0, len);
+
+            ShowInfo("处理已完成！");
+
+            _UcDo.End();
         }
 
         private void Wrapper()
@@ -427,8 +452,8 @@ namespace Msec
 
         private void Scrypto(bool encrypt)
         {
-            BufferedCipherBase cipher = _UcCm.SBlock;
-            cipher.Init(encrypt, _UcUk.GenParam(_UcCm.KeySize, _UcCm.IVSize));
+            BufferedCipherBase cipher = _UcCm.Scrypto;
+            cipher.Init(encrypt, _UcUk.GenParam());
 
             _UcDi.Begin();
             _UcDo.Begin();
@@ -467,7 +492,7 @@ namespace Msec
         private void Sstream(bool encrypt)
         {
             BufferedStreamCipher cipher = _UcCm.Stream;
-            cipher.Init(encrypt, _UcUk.GenParam(_UcCm.KeySize, _UcCm.IVSize));
+            cipher.Init(encrypt, _UcUk.GenParam());
 
             _UcDi.Begin();
             _UcDo.Begin();
@@ -502,8 +527,8 @@ namespace Msec
 
         private void Acrypto(bool encrypt)
         {
-            BufferedBlockCipher cipher = _UcCm.SBlock;
-            cipher.Init(encrypt, _UcUk.GenParam(_UcCm.KeySize, _UcCm.IVSize));
+            BufferedBlockCipher cipher = _UcCm.Scrypto;
+            cipher.Init(encrypt, _UcUk.GenParam());
 
             _UcDi.Begin();
             _UcDo.Begin();
@@ -556,7 +581,87 @@ namespace Msec
 
         private void MiSave_Click(object sender, EventArgs e)
         {
+            Item item = CbOpt.SelectedItem as Item;
+            if (item == null || item.K == "0")
+            {
+                ShowAlert("默认操作不需要保存！");
+                return;
+            }
 
+            SaveFileDialog fd = new SaveFileDialog();
+            fd.AddExtension = true;
+            fd.DefaultExt = ".asxml";
+            fd.Filter = "加密器文件(*.asxml)|*.asxml";
+            if (DialogResult.OK != fd.ShowDialog())
+            {
+                return;
+            }
+
+            XmlDocument doc = new XmlDocument();
+            XmlDeclaration dec = doc.CreateXmlDeclaration("1.0", "utf-8", null);
+            doc.AppendChild(dec);
+
+            XmlElement root = doc.CreateElement("msec");
+            doc.AppendChild(root);
+
+            XmlElement node = doc.CreateElement("operation");
+            root.AppendChild(node);
+            XmlAttribute attr = doc.CreateAttribute("key");
+            node.Attributes.Append(attr);
+            if (item != null)
+            {
+                attr.Value = item.K;
+            }
+
+            attr = doc.CreateAttribute("dir");
+            node.Attributes.Append(attr);
+            item = CbKey.SelectedItem as Item;
+            if (item != null)
+            {
+                attr.Value = item.K;
+            }
+
+            root.AppendChild(_UcCm.SaveXml(doc));
+            root.AppendChild(_UcUk.SaveXml(doc));
+            root.AppendChild(_UcDi.SaveXml(doc));
+            root.AppendChild(_UcDo.SaveXml(doc));
+
+            doc.Save(fd.FileName);
+        }
+
+        private void MiLoad_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.AddExtension = true;
+            fd.DefaultExt = ".asxml";
+            fd.Filter = "加密器文件(*.asxml)|*.asxml";
+            if (DialogResult.OK != fd.ShowDialog())
+            {
+                return;
+            }
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(fd.FileName);
+
+            XmlNode node = doc.SelectSingleNode("/msec/operation");
+            if (node != null)
+            {
+                XmlAttribute attr = node.Attributes["key"];
+                if (attr != null)
+                {
+                    CbOpt.SelectedItem = new Item { K = attr.Value };
+                }
+                attr = node.Attributes["dir"];
+                if (attr != null)
+                {
+                    CbKey.SelectedItem = new Item { K = attr.Value };
+                }
+            }
+
+            _UcCm.LoadXml(doc);
+            _UcUk.LoadXml(doc);
+            _UcDi.LoadXml(doc);
+            _UcDo.LoadXml(doc);
         }
     }
 }

@@ -18,11 +18,11 @@ namespace Msec.Uc.CmUi
             _Cm.Enabled = true;
 
             Util.Clear(_Cm.CbName);
-            _Cm.CbName.Items.Add(new Item { K = "ElGamal", V = "ElGamal" });
-            _Cm.CbName.Items.Add(new Item { K = "NaccacheStern", V = "NaccacheStern" });
-            _Cm.CbName.Items.Add(new Item { K = "RsaBlinded", V = "RsaBlinded" });
-            _Cm.CbName.Items.Add(new Item { K = "RsaBlinding", V = "RsaBlinding" });
-            _Cm.CbName.Items.Add(new Item { K = "Rsa", V = "Rsa" });
+            _Cm.CbName.Items.Add(new Item { K = IData.ACRYPTO_ELGAMAL, V = "ElGamal" });
+            _Cm.CbName.Items.Add(new Item { K = IData.ACRYPTO_NACCACHESTERN, V = "NaccacheStern" });
+            _Cm.CbName.Items.Add(new Item { K = IData.ACRYPTO_RSABLINDED, V = "RsaBlinded" });
+            _Cm.CbName.Items.Add(new Item { K = IData.ACRYPTO_RSABLINDING, V = "RsaBlinding" });
+            _Cm.CbName.Items.Add(new Item { K = IData.ACRYPTO_RSA, V = "Rsa" });
             _Cm.CbName.Enabled = false;
 
             Util.Clear(_Cm.CbMode);
@@ -68,19 +68,19 @@ namespace Msec.Uc.CmUi
 
             switch (name)
             {
-                case "ElGamal":
+                case IData.ACRYPTO_ELGAMAL:
                     _Engine = new ElGamalEngine();
                     break;
-                case "NaccacheStern":
+                case IData.ACRYPTO_NACCACHESTERN:
                     _Engine = new NaccacheSternEngine();
                     break;
-                case "RsaBlinded":
+                case IData.ACRYPTO_RSABLINDED:
                     _Engine = new RsaBlindedEngine();
                     break;
-                case "RsaBlinding":
+                case IData.ACRYPTO_RSABLINDING:
                     _Engine = new RsaBlindingEngine();
                     break;
-                case "Rsa":
+                case IData.ACRYPTO_RSA:
                     _Engine = new RsaEngine();
                     break;
             }

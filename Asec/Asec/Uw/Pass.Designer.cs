@@ -29,34 +29,39 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Pass));
-            this.PlPass = new System.Windows.Forms.Panel();
-            this.LbPass = new System.Windows.Forms.Label();
+            this.TbPass = new System.Windows.Forms.TextBox();
+            this.BtOk = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // PlPass
+            // TbPass
             // 
-            this.PlPass.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PlPass.Location = new System.Drawing.Point(12, 12);
-            this.PlPass.Name = "PlPass";
-            this.PlPass.Size = new System.Drawing.Size(128, 128);
-            this.PlPass.TabIndex = 0;
+            this.TbPass.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TbPass.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.TbPass.Location = new System.Drawing.Point(12, 12);
+            this.TbPass.Multiline = true;
+            this.TbPass.Name = "TbPass";
+            this.TbPass.ReadOnly = true;
+            this.TbPass.Size = new System.Drawing.Size(128, 128);
+            this.TbPass.TabIndex = 0;
+            this.TbPass.TabStop = false;
             // 
-            // LbPass
+            // BtOk
             // 
-            this.LbPass.AutoSize = true;
-            this.LbPass.Location = new System.Drawing.Point(10, 148);
-            this.LbPass.Name = "LbPass";
-            this.LbPass.Size = new System.Drawing.Size(101, 12);
-            this.LbPass.TabIndex = 1;
-            this.LbPass.Text = "请移动您的鼠标！";
+            this.BtOk.Location = new System.Drawing.Point(65, 146);
+            this.BtOk.Name = "BtOk";
+            this.BtOk.Size = new System.Drawing.Size(75, 23);
+            this.BtOk.TabIndex = 1;
+            this.BtOk.Text = "确定(&O)";
+            this.BtOk.UseVisualStyleBackColor = true;
             // 
             // Pass
             // 
+            this.AcceptButton = this.BtOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(152, 169);
-            this.Controls.Add(this.LbPass);
-            this.Controls.Add(this.PlPass);
+            this.ClientSize = new System.Drawing.Size(152, 181);
+            this.Controls.Add(this.BtOk);
+            this.Controls.Add(this.TbPass);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Pass";
@@ -70,7 +75,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel PlPass;
-        private System.Windows.Forms.Label LbPass;
+        private System.Windows.Forms.TextBox TbPass;
+        private System.Windows.Forms.Button BtOk;
     }
 }
