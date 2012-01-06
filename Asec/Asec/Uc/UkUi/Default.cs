@@ -13,7 +13,10 @@ namespace Msec.Uc.UkUi
             _Uk.Enabled = false;
 
             _Uk.LbPass.Text = "口令(&K)";
-            _Uk.LbSalt.Text = "向量(&V)";
+
+            _Uk.LbSalt.Visible = false;
+            _Uk.TbSalt.Visible = false;
+            _Uk.BtSalt.Visible = false;
         }
 
         public override void InitDir(string dir)

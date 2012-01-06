@@ -17,7 +17,11 @@ namespace Msec.Uc.UkUi
             _Uk.Enabled = true;
 
             _Uk.LbPass.Text = "用户(&K)";
+
             _Uk.LbSalt.Text = "网站(&V)";
+            _Uk.LbSalt.Visible = false;
+            _Uk.TbSalt.Visible = false;
+            _Uk.BtSalt.Visible = false;
         }
 
         public override void InitDir(string dir)

@@ -39,11 +39,12 @@
             this.MiUser = new System.Windows.Forms.ToolStripMenuItem();
             this.MiInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiLoad = new System.Windows.Forms.ToolStripMenuItem();
             this.MiSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.MiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.Worker = new System.ComponentModel.BackgroundWorker();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.MsUser.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -112,6 +113,7 @@
             this.MiUser.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MiInfo,
             this.toolStripSeparator1,
+            this.MiLoad,
             this.MiSave,
             this.toolStripSeparator2,
             this.MiExit});
@@ -131,12 +133,12 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
-            // MiExit
+            // MiLoad
             // 
-            this.MiExit.Name = "MiExit";
-            this.MiExit.Size = new System.Drawing.Size(152, 22);
-            this.MiExit.Text = "退出(&X)";
-            this.MiExit.Click += new System.EventHandler(this.MiExit_Click);
+            this.MiLoad.Name = "MiLoad";
+            this.MiLoad.Size = new System.Drawing.Size(152, 22);
+            this.MiLoad.Text = "打开(&O)";
+            this.MiLoad.Click += new System.EventHandler(this.MiLoad_Click);
             // 
             // MiSave
             // 
@@ -145,16 +147,23 @@
             this.MiSave.Text = "保存(&S)";
             this.MiSave.Click += new System.EventHandler(this.MiSave_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            // 
+            // MiExit
+            // 
+            this.MiExit.Name = "MiExit";
+            this.MiExit.Size = new System.Drawing.Size(152, 22);
+            this.MiExit.Text = "退出(&X)";
+            this.MiExit.Click += new System.EventHandler(this.MiExit_Click);
+            // 
             // Worker
             // 
             this.Worker.WorkerSupportsCancellation = true;
             this.Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.DoWork);
             this.Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.DoWorkerCompleted);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // Main
             // 
@@ -196,6 +205,7 @@
         private System.Windows.Forms.ToolTip TpTips;
         private System.Windows.Forms.ToolStripMenuItem MiSave;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem MiLoad;
     }
 }
 

@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Pass));
             this.TbPass = new System.Windows.Forms.TextBox();
             this.BtOk = new System.Windows.Forms.Button();
+            this.Worker = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // TbPass
@@ -44,6 +45,9 @@
             this.TbPass.Size = new System.Drawing.Size(128, 128);
             this.TbPass.TabIndex = 0;
             this.TbPass.TabStop = false;
+            this.TbPass.MouseEnter += new System.EventHandler(this.TbPass_MouseEnter);
+            this.TbPass.MouseLeave += new System.EventHandler(this.TbPass_MouseLeave);
+            this.TbPass.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TbPass_MouseMove);
             // 
             // BtOk
             // 
@@ -53,6 +57,12 @@
             this.BtOk.TabIndex = 1;
             this.BtOk.Text = "确定(&O)";
             this.BtOk.UseVisualStyleBackColor = true;
+            this.BtOk.Click += new System.EventHandler(this.BtOk_Click);
+            // 
+            // Worker
+            // 
+            this.Worker.WorkerSupportsCancellation = true;
+            this.Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Worker_DoWork);
             // 
             // Pass
             // 
@@ -77,5 +87,6 @@
 
         private System.Windows.Forms.TextBox TbPass;
         private System.Windows.Forms.Button BtOk;
+        private System.ComponentModel.BackgroundWorker Worker;
     }
 }

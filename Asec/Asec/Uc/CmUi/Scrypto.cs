@@ -47,8 +47,8 @@ namespace Msec.Uc.CmUi
             _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_NOEKEON, V = "Noekeon" });//128
             _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_NULL, V = "Null" });
             _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_RC2, V = "RC2" });//0 .. 1024
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_RC532, V = "RC5（32位）" });//0 .. 128
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_RC564, V = "RC5（64位）" });//0 .. 128
+            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_RC532, V = "RC5" });//0 .. 128
+            //_Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_RC564, V = "RC5（64位）" });//0 .. 128
             _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_RC6, V = "RC6" });//0 .. 256
             _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_RIJNDAEL, V = "Rijndael" });//0 .. 256
             _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_SEED, V = "Seed" });//128

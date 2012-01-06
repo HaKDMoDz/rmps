@@ -159,7 +159,12 @@ namespace Msec.Uc
             {
                 TbPass.Text = TbPass.Text.Substring(0, len);
             }
+            if (TbSalt.Text.Length > len)
+            {
+                TbSalt.Text = TbSalt.Text.Substring(0, len);
+            }
             TbPass.MaxLength = len;
+            TbSalt.MaxLength = len;
         }
 
         private void BtPass_Click(object sender, EventArgs e)

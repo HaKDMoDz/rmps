@@ -10,11 +10,15 @@ namespace Msec.Uc.UkUi
 
         public override void InitOpt()
         {
+            _Uk.Enabled = false;
+
+            _Uk.LbSalt.Visible = false;
+            _Uk.TbSalt.Visible = false;
+            _Uk.BtSalt.Visible = false;
         }
 
         public override void InitDir(string dir)
         {
-            _Uk.Enabled = false;
         }
 
         public override void InitAlg(string alg)

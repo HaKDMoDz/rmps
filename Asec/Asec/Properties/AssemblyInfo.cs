@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("阿木加密器")]
-[assembly: AssemblyDescription("这是说明")]
+[assembly: AssemblyDescription("阿木加密器是一款免费的加密软件，支持多种散列、掩码及加密算法！")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Amon.Me")]
 [assembly: AssemblyProduct("阿木加密器")]
