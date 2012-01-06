@@ -34,7 +34,7 @@ namespace Me.Amon.Apwd.Comn
             #region 口令散列
             byte[] temp = Encoding.UTF8.GetBytes(name + code);
             // 口令
-            byte[] key = new MD5Managed().ComputeHash(temp);
+            byte[] key = new SHA256Managed().ComputeHash(temp);
             // 向量
             byte[] iv = Encoding.UTF8.GetBytes(code + "@Amon.Me");
             // 数据
