@@ -21,7 +21,7 @@
           <EnableENC>False</EnableENC>
           <AlwaysStartWebServerOnDebug>True</AlwaysStartWebServerOnDebug>
           <ProjectOutputReferences>
-            <Ref Project="{425CE640-0AA1-4AB4-904E-6BA0AD7F52C7}" Folder="ClientBin">Apwd.xap</Ref>
+            <Ref Project="{425CE640-0AA1-4AB4-904E-6BA0AD7F52C7}" Folder="xap">Apwd.xap</Ref>
           </ProjectOutputReferences>
         </WebProjectProperties>
       </FlavorProperties>
