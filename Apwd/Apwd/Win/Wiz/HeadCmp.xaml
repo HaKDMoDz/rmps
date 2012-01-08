@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Me.Amon.Apwd.Win.Wiz.HeadCmp"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="360" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk">
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="27" />
+            <RowDefinition Height="27" />
+            <RowDefinition Height="51" />
+            <RowDefinition Height="27" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="64" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" Height="23" HorizontalAlignment="Right" Margin="0,0,0,0" Name="lbLibName" VerticalAlignment="Top" Text="模板：" />
+        <ComboBox Grid.Column="1" Grid.Row="0" Height="23" HorizontalAlignment="Left" Margin="0,0,0,0" Name="CbLibName" VerticalAlignment="Top" Width="120" GotFocus="CbLibName_GotFocus" />
+        <TextBlock Grid.Column="0" Grid.Row="1" Height="23" HorizontalAlignment="Right" Margin="0,0,0,0" Name="LbMetaName" VerticalAlignment="Top" Text="名称：" />
+        <TextBox Grid.Column="1" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="0,0,0,0" Name="TbMetaName" VerticalAlignment="Top" Width="120" GotFocus="TbMetaName_GotFocus" />
+        <TextBlock Grid.Column="0" Grid.Row="2" Height="23" HorizontalAlignment="Right" Margin="0,0,0,0" Name="LbMetaData" VerticalAlignment="Top" Text="搜索：" />
+        <TextBox Grid.Column="1" Grid.Row="2" Height="47" Name="TaMetaData" VerticalAlignment="Top" GotFocus="TaMetaData_GotFocus" />
+        <TextBlock Grid.Column="0" Grid.Row="3" Height="23" HorizontalAlignment="Right" Margin="0,0,0,0" Name="LbLogo" VerticalAlignment="Top" Text="徽标：" />
+        <TextBox Grid.Column="1" Grid.Row="3" Height="23" HorizontalAlignment="Left" Margin="0,0,0,0" Name="TbLogoData" VerticalAlignment="Top" Width="120" GotFocus="TbLogoData_GotFocus" />
+        <TextBlock Grid.Column="0" Grid.Row="4" Height="23" HorizontalAlignment="Right" Margin="0,0,0,0" Name="LbHint" VerticalAlignment="Top" Text="提示：" />
+        <TextBox Grid.Column="1" Grid.Row="4" Height="47" Name="TbHintData" VerticalAlignment="Top" GotFocus="TbHintData_GotFocus" />
+    </Grid>
+</UserControl>

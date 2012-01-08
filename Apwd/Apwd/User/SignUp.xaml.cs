@@ -6,10 +6,10 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Xml;
-using Me.Amon.Apwd.Comn;
 using Me.Amon.Apwd.Const;
 using Me.Amon.Apwd.Model;
 using Me.Amon.Apwd.Utils;
+using Me.Amon.Apwd.Win;
 
 namespace Me.Amon.Apwd.Views.User
 {
@@ -207,7 +207,7 @@ namespace Me.Amon.Apwd.Views.User
             {
                 userMdl.View = view;
                 userMdl.LibKey = libKey;
-                Mpwd.Mpwd mpwd = new Mpwd.Mpwd(userMdl);
+                Awin mpwd = new Awin(userMdl);
                 mpwd.InitView(_Main);
                 mpwd.InitData();
             }

@@ -63,7 +63,7 @@ namespace Me.Amon.Apwd
         {
             if (_View.ViewName != "Mopt")
             {
-                _View = new Mopt();
+                _View = new Aopt();
                 _View.InitView(this);
                 _View.InitData();
             }

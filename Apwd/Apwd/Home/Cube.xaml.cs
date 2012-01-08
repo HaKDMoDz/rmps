@@ -60,11 +60,11 @@ namespace Me.Amon.Apwd.Views.Home
         {
             get
             {
-                return _CenterX;
+                return _CenterY;
             }
             set
             {
-                _CenterX = value;
+                _CenterY = value;
             }
         }
 
@@ -145,7 +145,7 @@ namespace Me.Amon.Apwd.Views.Home
         /// <param name="e"></param>
         private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
-            double y = _UserAction ? ((_UserPoint.X - CenterX) / Width) * CubeSpeed : _DefAngle;
+            double y = _UserAction ? ((_UserPoint.X - _CenterX) / Width) * CubeSpeed : _DefAngle;
             Image1Projection.RotationY += y;
             Image2Projection.RotationY += y;
             Image3Projection.RotationY += y;
@@ -153,7 +153,7 @@ namespace Me.Amon.Apwd.Views.Home
             Image5Projection.RotationY += y;
             Image6Projection.RotationY += y;
 
-            double x = _UserAction ? ((_UserPoint.Y - CenterY) / Height) * CubeSpeed : _DefAngle;
+            double x = _UserAction ? ((_UserPoint.Y - _CenterY) / Height) * CubeSpeed : _DefAngle;
             Image1Projection.RotationX += x;
             Image2Projection.RotationX += x;
             Image3Projection.RotationX += x;

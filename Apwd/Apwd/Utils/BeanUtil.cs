@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using Me.Amon.Apwd.Bean;
 using Me.Amon.Apwd.Model;
-using Me.Amon.Apwd.Views;
 
 namespace Me.Amon.Apwd.Utils
 {
