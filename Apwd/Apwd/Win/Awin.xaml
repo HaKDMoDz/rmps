@@ -62,6 +62,9 @@
             <Button Name="KeyMajorBtn" Width="16" Height="18" Click="KeyMajorBtn_Click" Style="{StaticResource TabButtonStyle}">
                 <Image Name="KeyMajorImg" Source="/img/key/key-major.png"/>
             </Button>
+            <Button Name="KeyUpdateBtn" Width="16" Height="18" Click="KeyUpdateBtn_Click" Style="{StaticResource TabButtonStyle}">
+                <Image Name="KeyUpdateImg" Source="/img/key/key-remove.png"/>
+            </Button>
             <Button Name="KeyRemoveBtn" Width="16" Height="18" Click="KeyRemoveBtn_Click" Style="{StaticResource TabButtonStyle}">
                 <Image Name="KeyRemoveImg" Source="/img/key/key-remove.png"/>
             </Button>

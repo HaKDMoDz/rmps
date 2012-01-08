@@ -6,11 +6,11 @@
     mc:Ignorable="d"
     d:DesignHeight="470" d:DesignWidth="640" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk">
     <Grid>
-        <ListBox Height="100" Name="listBox1" Width="120">
-            <ListBoxItem Content="1" />
-            <ListBoxItem Content="2" />
-            <ListBoxItem Content="3" />
-        </ListBox>
-        <sdk:DataGrid AutoGenerateColumns="False" Height="100" HorizontalAlignment="Left" Margin="391,211,0,0" Name="dataGrid1" VerticalAlignment="Top" Width="120" />
+        <sdk:TreeView Height="200" HorizontalAlignment="Left" Margin="208,85,0,0" Name="treeView1" VerticalAlignment="Top" Width="120" Drop="treeView1_Drop" DragEnter="treeView1_DragEnter">
+            <sdk:TreeViewItem Header="1" />
+            <sdk:TreeViewItem Header="2" />
+            <sdk:TreeViewItem Header="4" />
+            <sdk:TreeViewItem Header="5" />
+        </sdk:TreeView>
     </Grid>
 </UserControl>

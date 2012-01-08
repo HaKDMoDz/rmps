@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using Me.Amon.Apwd.Model;
 
-namespace Me.Amon.Apwd.Win.KeyCmp
+namespace Me.Amon.Apwd.Win
 {
     public partial class Akey : ChildWindow
     {

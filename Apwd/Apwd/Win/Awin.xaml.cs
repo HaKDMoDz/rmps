@@ -11,7 +11,6 @@ using Me.Amon.Apwd.Effect;
 using Me.Amon.Apwd.Model;
 using Me.Amon.Apwd.Utils;
 using Me.Amon.Apwd.Views.Bean;
-using Me.Amon.Apwd.Win.KeyCmp;
 using Me.Amon.Apwd.Win.Pro;
 using Me.Amon.Apwd.Win.Wiz;
 
@@ -372,9 +371,59 @@ namespace Me.Amon.Apwd.Win
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void KeyUpdateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Post("&o=cat", new UploadStringCompletedEventHandler(KeyUpdateUploadStringCompleted));
+        }
+
+        /// <summary>
+        /// 删除口令
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void KeyRemoveBtn_Click(object sender, RoutedEventArgs e)
         {
             KeyRemove();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void KeyUpdateUploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            List<Cat> catList = new List<Cat>();
+
+            string xml = e.Result;
+            using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
+            {
+                if (xml.IndexOf("<error>") > 0)
+                {
+                    BeanUtil.HideLoading();
+                    reader.ReadToFollowing("error");
+                    BeanUtil.ShowAlert(reader.ReadElementContentAsString());
+                    return;
+                }
+
+                if (reader.ReadToFollowing("cats"))
+                {
+                    while (reader.ReadToFollowing("Id"))
+                    {
+                        //创建一个新的Item对象，后面把数据保存到Item对象中
+                        Cat cat = new Cat();
+                        cat.Id = reader.ReadElementContentAsString();
+                        cat.Parent = reader.ReadElementContentAsString();
+                        cat.Icon = reader.ReadElementContentAsString();
+                        cat.Text = reader.ReadElementContentAsString();
+                        cat.Tips = reader.ReadElementContentAsString();
+                        cat.Value = reader.ReadElementContentAsString();
+                        catList.Add(cat);
+                    }
+                }
+            }
+
+            BeanUtil.HideLoading();
         }
         #endregion
 

@@ -1,5 +1,4 @@
 ﻿using System.Windows.Controls;
-using Me.Amon.Apwd.Win.Pro;
 
 namespace Me.Amon.Apwd.Views.Demo
 {
@@ -25,26 +24,11 @@ namespace Me.Amon.Apwd.Views.Demo
         {
         }
 
-        private int last;
-        private void button1_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            if (last == 0)
-            {
-                ShowSc2();
-                last = 1;
-            }
-            else
-            {
-                ShowSc1();
-                last = 0;
-            }
-        }
-
-        private void ShowSc1()
+        private void treeView1_Drop(object sender, System.Windows.DragEventArgs e)
         {
         }
 
-        private void ShowSc2()
+        private void treeView1_DragEnter(object sender, System.Windows.DragEventArgs e)
         {
         }
     }

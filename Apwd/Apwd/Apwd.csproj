@@ -149,8 +149,11 @@
     <Compile Include="Opt\Aopt.xaml.cs">
       <DependentUpon>Aopt.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Win\Acat.xaml.cs">
+      <DependentUpon>Acat.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Win\IAttEdit.cs" />
-    <Compile Include="Win\Key\Akey.xaml.cs">
+    <Compile Include="Win\Akey.xaml.cs">
       <DependentUpon>Akey.xaml</DependentUpon>
     </Compile>
     <Compile Include="Win\Pro\AreaCmp.xaml.cs">
@@ -302,7 +305,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Win\Key\Akey.xaml">
+    <Page Include="Win\Akey.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -458,6 +461,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo\logo.ico" />
+    <Page Include="Win\Acat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Resource Include="logo\logo96.png" />
     <Content Include="logo\logo128.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
