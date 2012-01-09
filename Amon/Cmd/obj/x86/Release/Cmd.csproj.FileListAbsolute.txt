@@ -1,0 +1,5 @@
+F:\Amon\Cmd\bin\Release\Cmd.exe
+F:\Amon\Cmd\bin\Release\Cmd.pdb
+F:\Amon\Cmd\obj\x86\Release\ResolveAssemblyReference.cache
+F:\Amon\Cmd\obj\x86\Release\Cmd.exe
+F:\Amon\Cmd\obj\x86\Release\Cmd.pdb

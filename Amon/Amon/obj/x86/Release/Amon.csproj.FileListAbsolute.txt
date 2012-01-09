@@ -1,0 +1,31 @@
+C:\Users\Aven\AppData\Local\Temporary Projects\Amon\bin\Release\Amon.exe
+C:\Users\Aven\AppData\Local\Temporary Projects\Amon\bin\Release\Amon.pdb
+C:\Users\Aven\AppData\Local\Temporary Projects\Amon\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\Aven\AppData\Local\Temporary Projects\Amon\obj\x86\Release\Me.Amon.Properties.Resources.resources
+C:\Users\Aven\AppData\Local\Temporary Projects\Amon\obj\x86\Release\GenerateResource.read.1.tlog
+C:\Users\Aven\AppData\Local\Temporary Projects\Amon\obj\x86\Release\GenerateResource.write.1.tlog
+C:\Users\Aven\AppData\Local\Temporary Projects\Amon\obj\x86\Release\Amon.exe
+C:\Users\Aven\AppData\Local\Temporary Projects\Amon\obj\x86\Release\Amon.pdb
+F:\Amon\Amon\obj\x86\Release\Amon.exe
+F:\Amon\Amon\obj\x86\Release\Amon.pdb
+F:\Amon\Amon\bin\Release\Amon.exe
+F:\Amon\Amon\bin\Release\Amon.pdb
+F:\Amon\Amon\obj\x86\Release\ResolveAssemblyReference.cache
+F:\Amon\Amon\obj\x86\Release\Me.Amon.Main.resources
+F:\Amon\Amon\obj\x86\Release\Me.Amon.Properties.Resources.resources
+F:\Amon\Amon\obj\x86\Release\GenerateResource.read.1.tlog
+F:\Amon\Amon\obj\x86\Release\GenerateResource.write.1.tlog
+F:\Amon\Amon\obj\x86\Release\Me.Amon.User.SignIn.resources
+F:\Amon\Amon\obj\x86\Release\Me.Amon.User.SignUp.resources
+F:\Amon\Amon\bin\Release\System.Data.SQLite.dll
+F:\Amon\Amon\obj\x86\Release\Me.Amon.Pwd.APwd.resources
+F:\Amon\Amon\obj\x86\Release\Me.Amon.Pwd.Wiz.BeanArea.resources
+F:\Amon\Amon\obj\x86\Release\Me.Amon.Pwd.Wiz.BeanBody.resources
+F:\Amon\Amon\obj\x86\Release\Me.Amon.Pwd.Wiz.BeanDate.resources
+F:\Amon\Amon\obj\x86\Release\Me.Amon.Pwd.Wiz.BeanFile.resources
+F:\Amon\Amon\obj\x86\Release\Me.Amon.Pwd.Wiz.BeanInfo.resources
+F:\Amon\Amon\obj\x86\Release\Me.Amon.Pwd.Wiz.BeanLink.resources
+F:\Amon\Amon\obj\x86\Release\Me.Amon.Pwd.Wiz.BeanList.resources
+F:\Amon\Amon\obj\x86\Release\Me.Amon.Pwd.Wiz.BeanMail.resources
+F:\Amon\Amon\obj\x86\Release\Me.Amon.Pwd.Wiz.BeanPass.resources
+F:\Amon\Amon\obj\x86\Release\Me.Amon.Pwd.Wiz.BeanText.resources
