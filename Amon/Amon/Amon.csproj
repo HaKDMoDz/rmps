@@ -75,12 +75,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ce\Wrapper.cs" />
-    <Compile Include="DA\DBAccess.cs" />
-    <Compile Include="DA\DBConst.cs" />
-    <Compile Include="DA\DCAccess.cs" />
-    <Compile Include="DA\DCConst.cs" />
-    <Compile Include="DA\DFAccess.cs" />
-    <Compile Include="DA\DFConst.cs" />
+    <Compile Include="Da\DBAccess.cs" />
+    <Compile Include="Da\DBConst.cs" />
+    <Compile Include="Da\DCAccess.cs" />
+    <Compile Include="Da\DCConst.cs" />
+    <Compile Include="Da\DFAccess.cs" />
+    <Compile Include="Da\DFConst.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -423,13 +423,13 @@
     <Compile Include="Sec\Uw\Text.Designer.cs">
       <DependentUpon>Text.cs</DependentUpon>
     </Compile>
-    <Compile Include="UC\IcoEdit.cs">
+    <Compile Include="Uc\IcoEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UC\IcoEdit.Designer.cs">
+    <Compile Include="Uc\IcoEdit.Designer.cs">
       <DependentUpon>IcoEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="UC\Item.cs" />
+    <Compile Include="Uc\Item.cs" />
     <Compile Include="User\SignIn.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -525,7 +525,7 @@
     <EmbeddedResource Include="Sec\Uw\Text.resx">
       <DependentUpon>Text.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC\IcoEdit.resx">
+    <EmbeddedResource Include="Uc\IcoEdit.resx">
       <DependentUpon>IcoEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\SignIn.resx">

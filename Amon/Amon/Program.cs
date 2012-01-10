@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Me.Amon.Sec;
+using Me.Amon.Pwd;
 
 namespace Me.Amon
 {
@@ -14,7 +14,7 @@ namespace Me.Amon
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ASec());
+            Application.Run(new APwd());
         }
     }
 }

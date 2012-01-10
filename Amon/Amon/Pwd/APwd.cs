@@ -64,5 +64,45 @@ namespace Me.Amon.Pwd
             HSplit.Panel2.Controls.Clear();
             HSplit.Panel2.Controls.Add(uc);
         }
+
+        private void CmiAppendCat_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateCat_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void CmiDeleteCat_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void CmiEditIcon_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void CmiAppendKey_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateKey_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void CmiDeleteKey_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void CmiChangeCat_Click(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
