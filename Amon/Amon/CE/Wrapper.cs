@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Me.Amon.CE
+namespace Me.Amon.Ce
 {
     public class Wrapper
     {

@@ -28,10 +28,161 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.LbLib = new System.Windows.Forms.Label();
+            this.CbLib = new System.Windows.Forms.ComboBox();
+            this.LbName = new System.Windows.Forms.Label();
+            this.TbName = new System.Windows.Forms.TextBox();
+            this.LbMeta = new System.Windows.Forms.Label();
+            this.TbMeta = new System.Windows.Forms.TextBox();
+            this.LbIcon = new System.Windows.Forms.Label();
+            this.PbIcon = new System.Windows.Forms.PictureBox();
+            this.LbHint = new System.Windows.Forms.Label();
+            this.TbHint = new System.Windows.Forms.TextBox();
+            this.LbMemo = new System.Windows.Forms.Label();
+            this.TbMemo = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.PbIcon)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // LbLib
+            // 
+            this.LbLib.AutoSize = true;
+            this.LbLib.Location = new System.Drawing.Point(7, 6);
+            this.LbLib.Name = "LbLib";
+            this.LbLib.Size = new System.Drawing.Size(47, 12);
+            this.LbLib.TabIndex = 0;
+            this.LbLib.Text = "模板(&T)";
+            // 
+            // CbLib
+            // 
+            this.CbLib.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbLib.FormattingEnabled = true;
+            this.CbLib.Location = new System.Drawing.Point(60, 3);
+            this.CbLib.Name = "CbLib";
+            this.CbLib.Size = new System.Drawing.Size(121, 20);
+            this.CbLib.TabIndex = 1;
+            this.CbLib.SelectedIndexChanged += new System.EventHandler(this.CbLib_SelectedIndexChanged);
+            // 
+            // LbName
+            // 
+            this.LbName.AutoSize = true;
+            this.LbName.Location = new System.Drawing.Point(7, 32);
+            this.LbName.Name = "LbName";
+            this.LbName.Size = new System.Drawing.Size(47, 12);
+            this.LbName.TabIndex = 2;
+            this.LbName.Text = "标题(&N)";
+            // 
+            // TbName
+            // 
+            this.TbName.Location = new System.Drawing.Point(60, 29);
+            this.TbName.Name = "TbName";
+            this.TbName.Size = new System.Drawing.Size(100, 21);
+            this.TbName.TabIndex = 3;
+            // 
+            // LbMeta
+            // 
+            this.LbMeta.AutoSize = true;
+            this.LbMeta.Location = new System.Drawing.Point(7, 59);
+            this.LbMeta.Name = "LbMeta";
+            this.LbMeta.Size = new System.Drawing.Size(47, 12);
+            this.LbMeta.TabIndex = 4;
+            this.LbMeta.Text = "搜索(&M)";
+            // 
+            // TbMeta
+            // 
+            this.TbMeta.Location = new System.Drawing.Point(60, 56);
+            this.TbMeta.Multiline = true;
+            this.TbMeta.Name = "TbMeta";
+            this.TbMeta.Size = new System.Drawing.Size(287, 48);
+            this.TbMeta.TabIndex = 5;
+            // 
+            // LbIcon
+            // 
+            this.LbIcon.AutoSize = true;
+            this.LbIcon.Location = new System.Drawing.Point(7, 112);
+            this.LbIcon.Name = "LbIcon";
+            this.LbIcon.Size = new System.Drawing.Size(47, 12);
+            this.LbIcon.TabIndex = 6;
+            this.LbIcon.Text = "徽标(&L)";
+            // 
+            // PbIcon
+            // 
+            this.PbIcon.Location = new System.Drawing.Point(60, 110);
+            this.PbIcon.Name = "PbIcon";
+            this.PbIcon.Size = new System.Drawing.Size(16, 16);
+            this.PbIcon.TabIndex = 7;
+            this.PbIcon.TabStop = false;
+            // 
+            // LbHint
+            // 
+            this.LbHint.AutoSize = true;
+            this.LbHint.Location = new System.Drawing.Point(7, 135);
+            this.LbHint.Name = "LbHint";
+            this.LbHint.Size = new System.Drawing.Size(47, 12);
+            this.LbHint.TabIndex = 8;
+            this.LbHint.Text = "提醒(&H)";
+            // 
+            // TbHint
+            // 
+            this.TbHint.Location = new System.Drawing.Point(60, 132);
+            this.TbHint.Name = "TbHint";
+            this.TbHint.Size = new System.Drawing.Size(100, 21);
+            this.TbHint.TabIndex = 9;
+            // 
+            // LbMemo
+            // 
+            this.LbMemo.AutoSize = true;
+            this.LbMemo.Location = new System.Drawing.Point(7, 162);
+            this.LbMemo.Name = "LbMemo";
+            this.LbMemo.Size = new System.Drawing.Size(47, 12);
+            this.LbMemo.TabIndex = 10;
+            this.LbMemo.Text = "备注(&R)";
+            // 
+            // TbMemo
+            // 
+            this.TbMemo.Location = new System.Drawing.Point(60, 159);
+            this.TbMemo.Multiline = true;
+            this.TbMemo.Name = "TbMemo";
+            this.TbMemo.Size = new System.Drawing.Size(287, 59);
+            this.TbMemo.TabIndex = 11;
+            // 
+            // BeanHead
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.TbMemo);
+            this.Controls.Add(this.LbMemo);
+            this.Controls.Add(this.TbHint);
+            this.Controls.Add(this.LbHint);
+            this.Controls.Add(this.PbIcon);
+            this.Controls.Add(this.LbIcon);
+            this.Controls.Add(this.TbMeta);
+            this.Controls.Add(this.LbMeta);
+            this.Controls.Add(this.TbName);
+            this.Controls.Add(this.LbName);
+            this.Controls.Add(this.CbLib);
+            this.Controls.Add(this.LbLib);
+            this.Name = "BeanHead";
+            this.Size = new System.Drawing.Size(350, 250);
+            ((System.ComponentModel.ISupportInitialize)(this.PbIcon)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Label LbLib;
+        private System.Windows.Forms.ComboBox CbLib;
+        private System.Windows.Forms.Label LbName;
+        private System.Windows.Forms.TextBox TbName;
+        private System.Windows.Forms.Label LbMeta;
+        private System.Windows.Forms.TextBox TbMeta;
+        private System.Windows.Forms.Label LbIcon;
+        private System.Windows.Forms.PictureBox PbIcon;
+        private System.Windows.Forms.Label LbHint;
+        private System.Windows.Forms.TextBox TbHint;
+        private System.Windows.Forms.Label LbMemo;
+        private System.Windows.Forms.TextBox TbMemo;
+
     }
 }

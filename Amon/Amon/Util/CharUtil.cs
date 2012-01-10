@@ -457,5 +457,15 @@ namespace Me.Amon.Util
 
             return NextRandomKey(c, 8, false);
         }
+
+        public static string GenPass(string data, int length)
+        {
+            StringBuilder buf = new StringBuilder(data);
+            for (int i = buf.Length, j = length; i < j; i += 1)
+            {
+                buf.Append(' ');
+            }
+            return buf.ToString();
+        }
     }
 }

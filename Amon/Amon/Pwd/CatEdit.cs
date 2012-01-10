@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Me.Amon.Pwd.Wiz
+namespace Me.Amon.Pwd
 {
-    public partial class BeanHead : UserControl
+    public partial class CatEdit : Form
     {
-        public BeanHead()
+        public CatEdit()
         {
             InitializeComponent();
         }
 
-        private void CbLib_SelectedIndexChanged(object sender, EventArgs e)
+        private void BtOk_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtNo_Click(object sender, EventArgs e)
         {
 
         }

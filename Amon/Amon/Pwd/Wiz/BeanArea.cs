@@ -15,10 +15,5 @@ namespace Me.Amon.Pwd.Wiz
         {
             InitializeComponent();
         }
-
-        public BeanArea()
-        {
-            InitializeComponent();
-        }
     }
 }

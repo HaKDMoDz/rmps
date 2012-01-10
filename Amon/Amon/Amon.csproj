@@ -56,6 +56,9 @@
     <ApplicationIcon>Logo\logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>.\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite">
@@ -71,7 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CE\Wrapper.cs" />
+    <Compile Include="Ce\Wrapper.cs" />
     <Compile Include="DA\DBAccess.cs" />
     <Compile Include="DA\DBConst.cs" />
     <Compile Include="DA\DCAccess.cs" />
@@ -114,6 +117,12 @@
     </Compile>
     <Compile Include="Pwd\APwd.Designer.cs">
       <DependentUpon>APwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\CatEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pwd\CatEdit.Designer.cs">
+      <DependentUpon>CatEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\Pad\APad.cs">
       <SubType>UserControl</SubType>
@@ -303,6 +312,124 @@
       <DependentUpon>BeanText.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\Wiz\IWizEdit.cs" />
+    <Compile Include="Sec\ASec.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sec\ASec.Designer.cs">
+      <DependentUpon>ASec.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\IData.cs" />
+    <Compile Include="Sec\IForm.cs" />
+    <Compile Include="Sec\IView.cs" />
+    <Compile Include="Sec\Uc\ACm.cs" />
+    <Compile Include="Sec\Uc\ADi.cs" />
+    <Compile Include="Sec\Uc\ADo.cs" />
+    <Compile Include="Sec\Uc\AUk.cs" />
+    <Compile Include="Sec\Uc\Cm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Uc\Cm.Designer.cs">
+      <DependentUpon>Cm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Uc\CmUi\Acrypto.cs" />
+    <Compile Include="Sec\Uc\CmUi\Confuse.cs" />
+    <Compile Include="Sec\Uc\CmUi\Default.cs" />
+    <Compile Include="Sec\Uc\CmUi\Digest.cs" />
+    <Compile Include="Sec\Uc\CmUi\RandKey.cs" />
+    <Compile Include="Sec\Uc\CmUi\Scrypto.cs" />
+    <Compile Include="Sec\Uc\CmUi\Sstream.cs" />
+    <Compile Include="Sec\Uc\CmUi\Txt2Img.cs" />
+    <Compile Include="Sec\Uc\CmUi\Wrapper.cs" />
+    <Compile Include="Sec\Uc\Di.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Uc\Di.Designer.cs">
+      <DependentUpon>Di.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Uc\DiUi\Acrypto.cs" />
+    <Compile Include="Sec\Uc\DiUi\Confuse.cs" />
+    <Compile Include="Sec\Uc\DiUi\Default.cs" />
+    <Compile Include="Sec\Uc\DiUi\Digest.cs" />
+    <Compile Include="Sec\Uc\DiUi\RandKey.cs" />
+    <Compile Include="Sec\Uc\DiUi\Scrypto.cs" />
+    <Compile Include="Sec\Uc\DiUi\ScryptoDec.cs" />
+    <Compile Include="Sec\Uc\DiUi\ScryptoDef.cs" />
+    <Compile Include="Sec\Uc\DiUi\ScryptoEnc.cs" />
+    <Compile Include="Sec\Uc\DiUi\Sstream.cs" />
+    <Compile Include="Sec\Uc\DiUi\SstreamDec.cs" />
+    <Compile Include="Sec\Uc\DiUi\SstreamDef.cs" />
+    <Compile Include="Sec\Uc\DiUi\SstreamEnc.cs" />
+    <Compile Include="Sec\Uc\DiUi\Txt2Img.cs" />
+    <Compile Include="Sec\Uc\DiUi\Wrapper.cs" />
+    <Compile Include="Sec\Uc\Do.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Uc\Do.Designer.cs">
+      <DependentUpon>Do.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Uc\DoUi\Acrypto.cs" />
+    <Compile Include="Sec\Uc\DoUi\Confuse.cs" />
+    <Compile Include="Sec\Uc\DoUi\Default.cs" />
+    <Compile Include="Sec\Uc\DoUi\Digest.cs" />
+    <Compile Include="Sec\Uc\DoUi\RandKey.cs" />
+    <Compile Include="Sec\Uc\DoUi\Scrypto.cs" />
+    <Compile Include="Sec\Uc\DoUi\ScryptoDec.cs" />
+    <Compile Include="Sec\Uc\DoUi\ScryptoDef.cs" />
+    <Compile Include="Sec\Uc\DoUi\ScryptoEnc.cs" />
+    <Compile Include="Sec\Uc\DoUi\Sstream.cs" />
+    <Compile Include="Sec\Uc\DoUi\SstreamDec.cs" />
+    <Compile Include="Sec\Uc\DoUi\SstreamDef.cs" />
+    <Compile Include="Sec\Uc\DoUi\SstreamEnc.cs" />
+    <Compile Include="Sec\Uc\DoUi\Txt2Img.cs" />
+    <Compile Include="Sec\Uc\DoUi\Wrapper.cs" />
+    <Compile Include="Sec\Uc\Uk.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Uc\Uk.Designer.cs">
+      <DependentUpon>Uk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Uc\UkUi\Acrypto.cs" />
+    <Compile Include="Sec\Uc\UkUi\Confuse.cs" />
+    <Compile Include="Sec\Uc\UkUi\Default.cs" />
+    <Compile Include="Sec\Uc\UkUi\Digest.cs" />
+    <Compile Include="Sec\Uc\UkUi\RandKey.cs" />
+    <Compile Include="Sec\Uc\UkUi\Scrypto.cs" />
+    <Compile Include="Sec\Uc\UkUi\Sstream.cs" />
+    <Compile Include="Sec\Uc\UkUi\Txt2Img.cs" />
+    <Compile Include="Sec\Uc\UkUi\Wrapper.cs" />
+    <Compile Include="Sec\Uw\Edit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sec\Uw\Edit.Designer.cs">
+      <DependentUpon>Edit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Uw\Mask.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sec\Uw\Mask.Designer.cs">
+      <DependentUpon>Mask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Uw\Open.cs" />
+    <Compile Include="Sec\Uw\Pass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sec\Uw\Pass.Designer.cs">
+      <DependentUpon>Pass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Uw\Save.cs" />
+    <Compile Include="Sec\Uw\Text.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sec\Uw\Text.Designer.cs">
+      <DependentUpon>Text.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\IcoEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UC\IcoEdit.Designer.cs">
+      <DependentUpon>IcoEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\Item.cs" />
     <Compile Include="User\SignIn.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -315,6 +442,7 @@
     <Compile Include="User\SignUp.Designer.cs">
       <DependentUpon>SignUp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Util\BeanUtil.cs" />
     <Compile Include="Util\CharUtil.cs" />
     <Compile Include="Util\HashUtil.cs" />
     <Compile Include="Util\HttpUtil.cs" />
@@ -334,6 +462,9 @@
     <EmbeddedResource Include="Pwd\APwd.resx">
       <DependentUpon>APwd.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\CatEdit.resx">
+      <DependentUpon>CatEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Wiz\BeanArea.resx">
       <DependentUpon>BeanArea.cs</DependentUpon>
     </EmbeddedResource>
@@ -345,6 +476,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Wiz\BeanFile.resx">
       <DependentUpon>BeanFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanHead.resx">
+      <DependentUpon>BeanHead.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Wiz\BeanInfo.resx">
       <DependentUpon>BeanInfo.cs</DependentUpon>
@@ -363,6 +497,36 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Wiz\BeanText.resx">
       <DependentUpon>BeanText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\ASec.resx">
+      <DependentUpon>ASec.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Uc\Cm.resx">
+      <DependentUpon>Cm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Uc\Di.resx">
+      <DependentUpon>Di.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Uc\Do.resx">
+      <DependentUpon>Do.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Uc\Uk.resx">
+      <DependentUpon>Uk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Uw\Edit.resx">
+      <DependentUpon>Edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Uw\Mask.resx">
+      <DependentUpon>Mask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Uw\Pass.resx">
+      <DependentUpon>Pass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Uw\Text.resx">
+      <DependentUpon>Text.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\IcoEdit.resx">
+      <DependentUpon>IcoEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\SignIn.resx">
       <DependentUpon>SignIn.cs</DependentUpon>
@@ -385,7 +549,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Gtd\" />
-    <Folder Include="Sec\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
