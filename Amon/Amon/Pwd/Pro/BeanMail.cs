@@ -38,5 +38,10 @@ namespace Me.Amon.Pwd.Pro
         {
         }
         #endregion
+
+        private void BtSend_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

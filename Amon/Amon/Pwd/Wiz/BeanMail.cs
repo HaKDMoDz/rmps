@@ -15,5 +15,10 @@ namespace Me.Amon.Pwd.Wiz
         {
             InitializeComponent();
         }
+
+        private void BtSend_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

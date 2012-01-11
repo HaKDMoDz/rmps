@@ -507,6 +507,9 @@
     <EmbeddedResource Include="Pwd\Lib\LibHeader.resx">
       <DependentUpon>LibHeader.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pad\APad.resx">
+      <DependentUpon>APad.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Pro\BeanArea.resx">
       <DependentUpon>BeanArea.cs</DependentUpon>
     </EmbeddedResource>
@@ -558,6 +561,9 @@
     <EmbeddedResource Include="Pwd\Wiz\BeanBody.resx">
       <DependentUpon>BeanBody.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanData.resx">
+      <DependentUpon>BeanData.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Wiz\BeanDate.resx">
       <DependentUpon>BeanDate.cs</DependentUpon>
     </EmbeddedResource>
@@ -581,6 +587,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Wiz\BeanPass.resx">
       <DependentUpon>BeanPass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanSign.resx">
+      <DependentUpon>BeanSign.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Wiz\BeanText.resx">
       <DependentUpon>BeanText.cs</DependentUpon>

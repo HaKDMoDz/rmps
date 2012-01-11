@@ -38,5 +38,15 @@ namespace Me.Amon.Pwd.Pro
         {
         }
         #endregion
+
+        private void BtView_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtOpen_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

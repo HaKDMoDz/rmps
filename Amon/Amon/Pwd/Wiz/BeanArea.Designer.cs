@@ -28,18 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.TbData = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
+            // 
+            // TbData
+            // 
+            this.TbData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TbData.Location = new System.Drawing.Point(3, 3);
+            this.TbData.Multiline = true;
+            this.TbData.Name = "TbData";
+            this.TbData.Size = new System.Drawing.Size(344, 46);
+            this.TbData.TabIndex = 0;
             // 
             // BeanArea
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.TbData);
             this.Name = "BeanArea";
-            this.Size = new System.Drawing.Size(350, 150);
+            this.Size = new System.Drawing.Size(350, 52);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.TextBox TbData;
     }
 }

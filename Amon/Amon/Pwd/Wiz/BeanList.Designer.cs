@@ -28,23 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.CbData = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // CbData
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(3, 3);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 20);
-            this.comboBox1.TabIndex = 0;
+            this.CbData.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbData.FormattingEnabled = true;
+            this.CbData.Location = new System.Drawing.Point(3, 3);
+            this.CbData.Name = "CbData";
+            this.CbData.Size = new System.Drawing.Size(121, 20);
+            this.CbData.TabIndex = 0;
             // 
             // BeanList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.CbData);
             this.Name = "BeanList";
             this.Size = new System.Drawing.Size(350, 27);
             this.ResumeLayout(false);
@@ -53,6 +53,6 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox CbData;
     }
 }

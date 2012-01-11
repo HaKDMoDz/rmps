@@ -32,8 +32,8 @@
             this.TbName = new System.Windows.Forms.TextBox();
             this.LbData = new System.Windows.Forms.Label();
             this.TbData = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.BtView = new System.Windows.Forms.Button();
+            this.BtOpen = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LbName
@@ -70,30 +70,32 @@
             this.TbData.Size = new System.Drawing.Size(307, 21);
             this.TbData.TabIndex = 3;
             // 
-            // button1
+            // BtView
             // 
-            this.button1.Location = new System.Drawing.Point(56, 57);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(21, 21);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.BtView.Location = new System.Drawing.Point(56, 57);
+            this.BtView.Name = "BtView";
+            this.BtView.Size = new System.Drawing.Size(21, 21);
+            this.BtView.TabIndex = 4;
+            this.BtView.Text = "button1";
+            this.BtView.UseVisualStyleBackColor = true;
+            this.BtView.Click += new System.EventHandler(this.BtView_Click);
             // 
-            // button2
+            // BtOpen
             // 
-            this.button2.Location = new System.Drawing.Point(83, 57);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(21, 21);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.BtOpen.Location = new System.Drawing.Point(83, 57);
+            this.BtOpen.Name = "BtOpen";
+            this.BtOpen.Size = new System.Drawing.Size(21, 21);
+            this.BtOpen.TabIndex = 5;
+            this.BtOpen.Text = "button2";
+            this.BtOpen.UseVisualStyleBackColor = true;
+            this.BtOpen.Click += new System.EventHandler(this.BtOpen_Click);
             // 
             // BeanFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.BtOpen);
+            this.Controls.Add(this.BtView);
             this.Controls.Add(this.TbData);
             this.Controls.Add(this.LbData);
             this.Controls.Add(this.TbName);
@@ -111,7 +113,7 @@
         private System.Windows.Forms.TextBox TbName;
         private System.Windows.Forms.Label LbData;
         private System.Windows.Forms.TextBox TbData;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BtView;
+        private System.Windows.Forms.Button BtOpen;
     }
 }
