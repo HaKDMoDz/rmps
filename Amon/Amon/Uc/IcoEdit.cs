@@ -30,5 +30,20 @@ namespace Me.Amon.UC
         {
 
         }
+
+        private void MiAppend_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiUpdate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiDelete_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

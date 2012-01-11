@@ -1,0 +1,187 @@
+﻿namespace Me.Amon.Pwd
+{
+    partial class LibEdit
+    {
+        /// <summary>
+        /// 必需的设计器变量。
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// 清理所有正在使用的资源。
+        /// </summary>
+        /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows 窗体设计器生成的代码
+
+        /// <summary>
+        /// 设计器支持所需的方法 - 不要
+        /// 使用代码编辑器修改此方法的内容。
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("<四个中文>");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("四个中文", new System.Windows.Forms.TreeNode[] {
+            treeNode1});
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LibEdit));
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MiAppendLibh = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiDeleteLibh = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.MiAppendLibd = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiDeleteLibd = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtUpdate = new System.Windows.Forms.Button();
+            this.BtCancel = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.CmMenu.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // treeView1
+            // 
+            this.treeView1.ContextMenuStrip = this.CmMenu;
+            this.treeView1.Location = new System.Drawing.Point(12, 12);
+            this.treeView1.Name = "treeView1";
+            treeNode1.Name = "节点1";
+            treeNode1.Text = "<四个中文>";
+            treeNode2.Name = "节点0";
+            treeNode2.Text = "四个中文";
+            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode2});
+            this.treeView1.Size = new System.Drawing.Size(141, 209);
+            this.treeView1.TabIndex = 0;
+            // 
+            // CmMenu
+            // 
+            this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MiAppendLibh,
+            this.MiDeleteLibh,
+            this.toolStripSeparator1,
+            this.MiAppendLibd,
+            this.MiDeleteLibd});
+            this.CmMenu.Name = "CmMenu";
+            this.CmMenu.Size = new System.Drawing.Size(140, 98);
+            // 
+            // MiAppendLibh
+            // 
+            this.MiAppendLibh.Name = "MiAppendLibh";
+            this.MiAppendLibh.Size = new System.Drawing.Size(139, 22);
+            this.MiAppendLibh.Text = "添加模板(&1)";
+            this.MiAppendLibh.Click += new System.EventHandler(this.MiAppendLibh_Click);
+            // 
+            // MiDeleteLibh
+            // 
+            this.MiDeleteLibh.Name = "MiDeleteLibh";
+            this.MiDeleteLibh.Size = new System.Drawing.Size(139, 22);
+            this.MiDeleteLibh.Text = "删除模板(&2)";
+            this.MiDeleteLibh.Click += new System.EventHandler(this.MiDeleteLibh_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(136, 6);
+            // 
+            // MiAppendLibd
+            // 
+            this.MiAppendLibd.Name = "MiAppendLibd";
+            this.MiAppendLibd.Size = new System.Drawing.Size(139, 22);
+            this.MiAppendLibd.Text = "添加属性(&3)";
+            this.MiAppendLibd.Click += new System.EventHandler(this.MiAppendLibd_Click);
+            // 
+            // MiDeleteLibd
+            // 
+            this.MiDeleteLibd.Name = "MiDeleteLibd";
+            this.MiDeleteLibd.Size = new System.Drawing.Size(139, 22);
+            this.MiDeleteLibd.Text = "删除属性(&4)";
+            this.MiDeleteLibd.Click += new System.EventHandler(this.MiDeleteLibd_Click);
+            // 
+            // BtUpdate
+            // 
+            this.BtUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtUpdate.Location = new System.Drawing.Point(246, 227);
+            this.BtUpdate.Name = "BtUpdate";
+            this.BtUpdate.Size = new System.Drawing.Size(75, 23);
+            this.BtUpdate.TabIndex = 2;
+            this.BtUpdate.Text = "保存(&S)";
+            this.BtUpdate.UseVisualStyleBackColor = true;
+            // 
+            // BtCancel
+            // 
+            this.BtCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.BtCancel.Location = new System.Drawing.Point(327, 227);
+            this.BtCancel.Name = "BtCancel";
+            this.BtCancel.Size = new System.Drawing.Size(75, 23);
+            this.BtCancel.TabIndex = 3;
+            this.BtCancel.Text = "取消(&C)";
+            this.BtCancel.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.panel1);
+            this.groupBox1.Location = new System.Drawing.Point(159, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(243, 209);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "groupBox1";
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(6, 20);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(231, 183);
+            this.panel1.TabIndex = 0;
+            // 
+            // LibEdit
+            // 
+            this.AcceptButton = this.BtUpdate;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.BtCancel;
+            this.ClientSize = new System.Drawing.Size(414, 262);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.BtCancel);
+            this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.BtUpdate);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "LibEdit";
+            this.Text = "LibEdit";
+            this.CmMenu.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.Button BtUpdate;
+        private System.Windows.Forms.Button BtCancel;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ContextMenuStrip CmMenu;
+        private System.Windows.Forms.ToolStripMenuItem MiAppendLibh;
+        private System.Windows.Forms.ToolStripMenuItem MiDeleteLibh;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem MiAppendLibd;
+        private System.Windows.Forms.ToolStripMenuItem MiDeleteLibd;
+    }
+}

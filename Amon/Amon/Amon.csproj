@@ -124,6 +124,30 @@
     <Compile Include="Pwd\CatEdit.Designer.cs">
       <DependentUpon>CatEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pwd\FindBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\FindBar.Designer.cs">
+      <DependentUpon>FindBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\LibEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pwd\LibEdit.Designer.cs">
+      <DependentUpon>LibEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Lib\LibDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Lib\LibDetail.Designer.cs">
+      <DependentUpon>LibDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Lib\LibHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Lib\LibHeader.Designer.cs">
+      <DependentUpon>LibHeader.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pwd\Pad\APad.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -464,6 +488,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\CatEdit.resx">
       <DependentUpon>CatEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\FindBar.resx">
+      <DependentUpon>FindBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\LibEdit.resx">
+      <DependentUpon>LibEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Lib\LibDetail.resx">
+      <DependentUpon>LibDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Lib\LibHeader.resx">
+      <DependentUpon>LibHeader.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Wiz\BeanArea.resx">
       <DependentUpon>BeanArea.cs</DependentUpon>
