@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Me.Amon.Pwd.Pro
 {
-    public partial class BeanMeta : UserControl, IProEdit
+    public partial class BeanMeta : UserControl, IRecEdit
     {
         public BeanMeta()
         {

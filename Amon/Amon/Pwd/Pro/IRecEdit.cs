@@ -6,7 +6,7 @@ using Me.Amon.Model;
 
 namespace Me.Amon.Pwd.Pro
 {
-    public interface IProEdit
+    public interface IRecEdit
     {
         bool ShowData(AAtt att);
 

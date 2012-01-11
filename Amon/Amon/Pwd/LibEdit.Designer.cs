@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("<四个中文>");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("四个中文", new System.Windows.Forms.TreeNode[] {
-            treeNode1});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LibEdit));
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -42,10 +39,10 @@
             this.MiDeleteLibd = new System.Windows.Forms.ToolStripMenuItem();
             this.BtUpdate = new System.Windows.Forms.Button();
             this.BtCancel = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.GbGroup = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.CmMenu.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.GbGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // treeView1
@@ -53,12 +50,6 @@
             this.treeView1.ContextMenuStrip = this.CmMenu;
             this.treeView1.Location = new System.Drawing.Point(12, 12);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "节点1";
-            treeNode1.Text = "<四个中文>";
-            treeNode2.Name = "节点0";
-            treeNode2.Text = "四个中文";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
             this.treeView1.Size = new System.Drawing.Size(141, 209);
             this.treeView1.TabIndex = 0;
             // 
@@ -127,18 +118,18 @@
             this.BtCancel.Text = "取消(&C)";
             this.BtCancel.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // GbGroup
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.GbGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.panel1);
-            this.groupBox1.Location = new System.Drawing.Point(159, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(243, 209);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.GbGroup.Controls.Add(this.panel1);
+            this.GbGroup.Location = new System.Drawing.Point(159, 12);
+            this.GbGroup.Name = "GbGroup";
+            this.GbGroup.Size = new System.Drawing.Size(243, 209);
+            this.GbGroup.TabIndex = 4;
+            this.GbGroup.TabStop = false;
+            this.GbGroup.Text = "信息";
             // 
             // panel1
             // 
@@ -154,7 +145,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.BtCancel;
             this.ClientSize = new System.Drawing.Size(414, 262);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.GbGroup);
             this.Controls.Add(this.BtCancel);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.BtUpdate);
@@ -165,7 +156,7 @@
             this.Name = "LibEdit";
             this.Text = "LibEdit";
             this.CmMenu.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
+            this.GbGroup.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -175,7 +166,7 @@
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.Button BtUpdate;
         private System.Windows.Forms.Button BtCancel;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox GbGroup;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ContextMenuStrip CmMenu;
         private System.Windows.Forms.ToolStripMenuItem MiAppendLibh;

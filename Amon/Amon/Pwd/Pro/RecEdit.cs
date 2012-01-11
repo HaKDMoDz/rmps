@@ -9,34 +9,26 @@ using System.Windows.Forms;
 
 namespace Me.Amon.Pwd.Pro
 {
-    public partial class BeanDate : UserControl, IRecEdit
+    public partial class RecEdit : UserControl
     {
-        public BeanDate()
+        public RecEdit()
         {
             InitializeComponent();
         }
 
-        #region 接口实现
-        public bool ShowData(Model.AAtt att)
+        private void BtCopy_Click(object sender, EventArgs e)
         {
-            return true;
+
         }
 
-        public void InitView()
+        private void BtSave_Click(object sender, EventArgs e)
         {
+
         }
 
-        public void Copy()
+        private void BtDrop_Click(object sender, EventArgs e)
         {
-        }
 
-        public void Save()
-        {
         }
-
-        public void Drop()
-        {
-        }
-        #endregion
     }
 }

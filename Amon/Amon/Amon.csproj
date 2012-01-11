@@ -154,6 +154,12 @@
     <Compile Include="Pwd\Pad\APad.Designer.cs">
       <DependentUpon>APad.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pwd\Pro\RecEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pro\RecEdit.Designer.cs">
+      <DependentUpon>RecEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pwd\Pro\BeanData.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -250,7 +256,7 @@
     <Compile Include="Pwd\Pro\BeanArea.Designer.cs">
       <DependentUpon>BeanArea.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\Pro\IProEdit.cs" />
+    <Compile Include="Pwd\Pro\IRecEdit.cs" />
     <Compile Include="Pwd\Wiz\AWiz.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -500,6 +506,51 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Lib\LibHeader.resx">
       <DependentUpon>LibHeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanArea.resx">
+      <DependentUpon>BeanArea.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanData.resx">
+      <DependentUpon>BeanData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanDate.resx">
+      <DependentUpon>BeanDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanFile.resx">
+      <DependentUpon>BeanFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanGuid.resx">
+      <DependentUpon>BeanGuid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanHint.resx">
+      <DependentUpon>BeanHint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanInfo.resx">
+      <DependentUpon>BeanInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanLink.resx">
+      <DependentUpon>BeanLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanList.resx">
+      <DependentUpon>BeanList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanMail.resx">
+      <DependentUpon>BeanMail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanMeta.resx">
+      <DependentUpon>BeanMeta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanPass.resx">
+      <DependentUpon>BeanPass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanSign.resx">
+      <DependentUpon>BeanSign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanText.resx">
+      <DependentUpon>BeanText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\RecEdit.resx">
+      <DependentUpon>RecEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Wiz\BeanArea.resx">
       <DependentUpon>BeanArea.cs</DependentUpon>

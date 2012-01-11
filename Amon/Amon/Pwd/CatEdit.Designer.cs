@@ -100,16 +100,19 @@
             // 
             // TbMemo
             // 
+            this.TbMemo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TbMemo.Location = new System.Drawing.Point(65, 93);
             this.TbMemo.Multiline = true;
             this.TbMemo.Name = "TbMemo";
-            this.TbMemo.Size = new System.Drawing.Size(177, 58);
+            this.TbMemo.Size = new System.Drawing.Size(197, 58);
             this.TbMemo.TabIndex = 7;
             // 
             // BtOk
             // 
             this.BtOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtOk.Location = new System.Drawing.Point(86, 157);
+            this.BtOk.Location = new System.Drawing.Point(106, 157);
             this.BtOk.Name = "BtOk";
             this.BtOk.Size = new System.Drawing.Size(75, 23);
             this.BtOk.TabIndex = 8;
@@ -120,7 +123,7 @@
             // BtNo
             // 
             this.BtNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtNo.Location = new System.Drawing.Point(167, 157);
+            this.BtNo.Location = new System.Drawing.Point(187, 157);
             this.BtNo.Name = "BtNo";
             this.BtNo.Size = new System.Drawing.Size(75, 23);
             this.BtNo.TabIndex = 9;
@@ -132,7 +135,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(254, 192);
+            this.ClientSize = new System.Drawing.Size(274, 192);
             this.Controls.Add(this.BtNo);
             this.Controls.Add(this.BtOk);
             this.Controls.Add(this.TbMemo);
