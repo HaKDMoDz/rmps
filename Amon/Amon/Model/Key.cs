@@ -89,8 +89,6 @@ namespace Me.Amon.Model
         /// </summary>
         public bool Backup { get; set; }
 
-        private bool _IsUpdate;
-        public bool IsUpdate { get { return _IsUpdate; } }
         public bool Modified { get; set; }
 
         /// <summary>
@@ -120,7 +118,6 @@ namespace Me.Amon.Model
             GtdHeader = null;
 
             Backup = true;
-            _IsUpdate = false;
         }
 
         public override string ToString()
@@ -183,8 +180,6 @@ namespace Me.Amon.Model
             Memo = reader.ReadElementContentAsString();
             VisitDate = reader.ReadElementContentAsString();
             CipherVer = reader.ReadElementContentAsString();
-
-            _IsUpdate = true;
         }
     }
 }

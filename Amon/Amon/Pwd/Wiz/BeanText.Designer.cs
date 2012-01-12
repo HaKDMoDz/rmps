@@ -36,9 +36,9 @@
             this.TbData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TbData.Location = new System.Drawing.Point(3, 3);
+            this.TbData.Location = new System.Drawing.Point(0, 0);
             this.TbData.Name = "TbData";
-            this.TbData.Size = new System.Drawing.Size(344, 21);
+            this.TbData.Size = new System.Drawing.Size(350, 21);
             this.TbData.TabIndex = 0;
             // 
             // BeanText
@@ -47,7 +47,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.TbData);
             this.Name = "BeanText";
-            this.Size = new System.Drawing.Size(350, 27);
+            this.Size = new System.Drawing.Size(350, 24);
             this.ResumeLayout(false);
             this.PerformLayout();
 

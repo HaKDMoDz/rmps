@@ -51,6 +51,7 @@
             this.BtName.TabIndex = 1;
             this.BtName.Text = "button1";
             this.BtName.UseVisualStyleBackColor = true;
+            this.BtName.Click += new System.EventHandler(this.BtName_Click);
             // 
             // LbData
             // 

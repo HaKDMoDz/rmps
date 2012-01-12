@@ -36,10 +36,10 @@
             this.TbData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TbData.Location = new System.Drawing.Point(3, 3);
+            this.TbData.Location = new System.Drawing.Point(0, 0);
             this.TbData.Multiline = true;
             this.TbData.Name = "TbData";
-            this.TbData.Size = new System.Drawing.Size(344, 46);
+            this.TbData.Size = new System.Drawing.Size(350, 45);
             this.TbData.TabIndex = 0;
             // 
             // BeanArea
@@ -48,7 +48,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.TbData);
             this.Name = "BeanArea";
-            this.Size = new System.Drawing.Size(350, 52);
+            this.Size = new System.Drawing.Size(350, 48);
             this.ResumeLayout(false);
             this.PerformLayout();
 

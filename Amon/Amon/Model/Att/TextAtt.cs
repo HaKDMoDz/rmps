@@ -50,8 +50,16 @@ namespace Me.Amon.Model.Att
             return true;
         }
 
-        public override bool ImportByXml(string xml)
+        public override bool ImportByXml(XmlReader reader)
         {
+            if (reader.ReadToDescendant("name"))
+            {
+                Name = reader.Value;
+            }
+            if (reader.ReadToNextSibling("data"))
+            {
+                Data = reader.Value;
+            }
             return true;
         }
 

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Me.Amon.UC
+namespace Me.Amon.Uc
 {
     public partial class IcoEdit : Form
     {

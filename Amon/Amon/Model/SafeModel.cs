@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Security.Cryptography;
 using System.Text;
-using Me.Amon.Model.Att;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using Me.Amon.Model.Att;
+using Me.Amon.Util;
 
 namespace Me.Amon.Model
 {
@@ -21,42 +23,14 @@ namespace Me.Amon.Model
         {
             _UserModel = userModel;
         }
+
+        public void Init()
+        {
+        }
         #endregion
 
         #region 公共属性
-        /// <summary>
-        /// 是否更新
-        /// </summary>
         public Key Key { get; set; }
-        #endregion
-
-        #region 属性重写
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Code
-        {
-            get
-            {
-                return _UserModel.Code;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Name
-        {
-            get
-            {
-                return _UserModel.Name;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public List<LibHeader> LibKey { get { return _UserModel.LibKey; } }
         #endregion
 
         #region 属性信息
@@ -259,6 +233,7 @@ namespace Me.Amon.Model
             grid.DataSource = _AttList;
             grid.Select(0);
         }
+
         /// <summary>
         /// 
         /// </summary>

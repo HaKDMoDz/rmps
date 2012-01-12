@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using Me.Amon.User;
 
 namespace Me.Amon
 {
@@ -7,6 +8,12 @@ namespace Me.Amon
         public Main()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, System.EventArgs e)
+        {
+            SignIn signIn = new SignIn();
+            signIn.Show();
         }
     }
 }

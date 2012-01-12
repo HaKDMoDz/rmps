@@ -55,8 +55,16 @@ namespace Me.Amon.Model.Att
             return true;
         }
 
-        public override bool ImportByXml(string xml)
+        public override bool ImportByXml(XmlReader reader)
         {
+            if (reader.ReadToDescendant("name"))
+            {
+                Name = reader.Value;
+            }
+            if (reader.ReadToNextSibling("data"))
+            {
+                Data = reader.Value;
+            }
             return true;
         }
 
@@ -71,7 +79,7 @@ namespace Me.Amon.Model.Att
                 ext.Clear();
             }
 
-            ext.Add(SPEC_VALUE_NONE);
+            ext.Add(SPEC_VALUE_FAIL);
             ext.Add(SPEC_VALUE_NONE);
         }
         #endregion

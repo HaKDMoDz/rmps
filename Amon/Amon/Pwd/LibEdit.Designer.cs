@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LibEdit));
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.TvLibView = new System.Windows.Forms.TreeView();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MiAppendLibh = new System.Windows.Forms.ToolStripMenuItem();
             this.MiDeleteLibh = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,18 +40,16 @@
             this.BtUpdate = new System.Windows.Forms.Button();
             this.BtCancel = new System.Windows.Forms.Button();
             this.GbGroup = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.CmMenu.SuspendLayout();
-            this.GbGroup.SuspendLayout();
             this.SuspendLayout();
             // 
-            // treeView1
+            // TvLibView
             // 
-            this.treeView1.ContextMenuStrip = this.CmMenu;
-            this.treeView1.Location = new System.Drawing.Point(12, 12);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(141, 209);
-            this.treeView1.TabIndex = 0;
+            this.TvLibView.ContextMenuStrip = this.CmMenu;
+            this.TvLibView.Location = new System.Drawing.Point(12, 12);
+            this.TvLibView.Name = "TvLibView";
+            this.TvLibView.Size = new System.Drawing.Size(141, 209);
+            this.TvLibView.TabIndex = 0;
             // 
             // CmMenu
             // 
@@ -106,6 +104,7 @@
             this.BtUpdate.TabIndex = 2;
             this.BtUpdate.Text = "保存(&S)";
             this.BtUpdate.UseVisualStyleBackColor = true;
+            this.BtUpdate.Click += new System.EventHandler(this.BtUpdate_Click);
             // 
             // BtCancel
             // 
@@ -117,26 +116,19 @@
             this.BtCancel.TabIndex = 3;
             this.BtCancel.Text = "取消(&C)";
             this.BtCancel.UseVisualStyleBackColor = true;
+            this.BtCancel.Click += new System.EventHandler(this.BtCancel_Click);
             // 
             // GbGroup
             // 
             this.GbGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.GbGroup.Controls.Add(this.panel1);
             this.GbGroup.Location = new System.Drawing.Point(159, 12);
             this.GbGroup.Name = "GbGroup";
             this.GbGroup.Size = new System.Drawing.Size(243, 209);
             this.GbGroup.TabIndex = 4;
             this.GbGroup.TabStop = false;
             this.GbGroup.Text = "信息";
-            // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(6, 20);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(231, 183);
-            this.panel1.TabIndex = 0;
             // 
             // LibEdit
             // 
@@ -147,7 +139,7 @@
             this.ClientSize = new System.Drawing.Size(414, 262);
             this.Controls.Add(this.GbGroup);
             this.Controls.Add(this.BtCancel);
-            this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.TvLibView);
             this.Controls.Add(this.BtUpdate);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -156,18 +148,16 @@
             this.Name = "LibEdit";
             this.Text = "LibEdit";
             this.CmMenu.ResumeLayout(false);
-            this.GbGroup.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView TvLibView;
         private System.Windows.Forms.Button BtUpdate;
         private System.Windows.Forms.Button BtCancel;
         private System.Windows.Forms.GroupBox GbGroup;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ContextMenuStrip CmMenu;
         private System.Windows.Forms.ToolStripMenuItem MiAppendLibh;
         private System.Windows.Forms.ToolStripMenuItem MiDeleteLibh;

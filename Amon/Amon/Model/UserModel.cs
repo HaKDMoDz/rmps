@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
-using Me.Amon.DA;
+using Me.Amon.Da;
 using Me.Amon.Util;
 
 namespace Me.Amon.Model
@@ -22,6 +21,8 @@ namespace Me.Amon.Model
         public string Name { get { return _Name; } }
         public string Code { get { return _Code; } }
         public int View { get; set; }
+
+        private SafeModel _SafeModel;
         #endregion
 
         #region 权限认证
@@ -37,7 +38,8 @@ namespace Me.Amon.Model
             #region 口令散列
             byte[] temp = Encoding.UTF8.GetBytes(name + code);
             // 口令
-            byte[] key = new SHA256Managed().ComputeHash(temp);
+            //byte[] key = new SHA256Managed().ComputeHash(temp);
+            byte[] key = MD5.Create("MD5").ComputeHash(temp);
             // 向量
             byte[] iv = Encoding.UTF8.GetBytes(code + "@Amon.Me");
             // 数据
@@ -287,22 +289,6 @@ namespace Me.Amon.Model
         }
         #endregion
 
-        #region 口令模板
-        private List<LibHeader> _LibKey;
-        public List<LibHeader> LibKey
-        {
-            get
-            {
-                return _LibKey;
-            }
-            set
-            {
-                _LibKey = (value == null) ? new List<LibHeader>() : value;
-                _LibKey.Insert(0, new LibHeader { Id = "", Name = "请选择" });
-            }
-        }
-        #endregion
-
         /// <summary>
         /// 
         /// </summary>
@@ -313,17 +299,26 @@ namespace Me.Amon.Model
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
             //client.UploadStringAsync(new Uri(EnvConst.SERVER_PATH), "POST", "c=" + Code + "&t=" + _Token + data);
         }
+
         private DBAccess _DBAccess;
         private DCAccess _DCAccess;
         private DFAccess _DFAccess;
+        private DataModel _DataModel;
+        private ViewModel _ViewModel;
 
         public void Init()
         {
-            _DBAccess = new DBAccess(this);
-            _DCAccess = new DCAccess(this);
-            _DFAccess = new DFAccess(this);
+            _DBAccess = new DBAccess();
+            _DBAccess.Init(this);
+            _DCAccess = new DCAccess();
+            _DCAccess.Init(this);
+            _DFAccess = new DFAccess();
+            _DFAccess.Init(this);
         }
 
+        public SafeModel SafeModel { get { return _SafeModel; } }
+        public DataModel DataModel { get { return _DataModel; } }
+        public ViewModel ViewModel { get { return _ViewModel; } }
         public DBAccess DBAccess { get { return _DBAccess; } }
         public DCAccess DCAccess { get { return _DCAccess; } }
         public DFAccess DFAccess { get { return _DFAccess; } }

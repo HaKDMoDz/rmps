@@ -13,6 +13,11 @@ namespace Me.Amon.Model
 
         public List<LibDetail> Details { get; set; }
 
+        public LibHeader()
+        {
+            Details = new List<LibDetail>();
+        }
+
         public override string ToString()
         {
             return Name;

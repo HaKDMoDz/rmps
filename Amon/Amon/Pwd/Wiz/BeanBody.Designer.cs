@@ -28,12 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.TpGrid = new System.Windows.Forms.TableLayoutPanel();
             this.SuspendLayout();
+            // 
+            // TpGrid
+            // 
+            this.TpGrid.ColumnCount = 2;
+            this.TpGrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.TpGrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TpGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TpGrid.Location = new System.Drawing.Point(0, 0);
+            this.TpGrid.Name = "TpGrid";
+            this.TpGrid.RowCount = 1;
+            this.TpGrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TpGrid.Size = new System.Drawing.Size(350, 250);
+            this.TpGrid.TabIndex = 0;
             // 
             // BeanBody
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.TpGrid);
             this.Name = "BeanBody";
             this.Size = new System.Drawing.Size(350, 250);
             this.ResumeLayout(false);
@@ -41,6 +56,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.TableLayoutPanel TpGrid;
 
 
     }

@@ -35,7 +35,7 @@
             // 
             this.CbData.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CbData.FormattingEnabled = true;
-            this.CbData.Location = new System.Drawing.Point(3, 3);
+            this.CbData.Location = new System.Drawing.Point(0, 0);
             this.CbData.Name = "CbData";
             this.CbData.Size = new System.Drawing.Size(121, 20);
             this.CbData.TabIndex = 0;
@@ -46,7 +46,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.CbData);
             this.Name = "BeanList";
-            this.Size = new System.Drawing.Size(350, 27);
+            this.Size = new System.Drawing.Size(350, 24);
             this.ResumeLayout(false);
 
         }

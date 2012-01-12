@@ -38,15 +38,15 @@
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(3, 3);
+            this.textBox1.Location = new System.Drawing.Point(0, 0);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(290, 21);
+            this.textBox1.Size = new System.Drawing.Size(293, 21);
             this.textBox1.TabIndex = 0;
             // 
             // BtOpen
             // 
             this.BtOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtOpen.Location = new System.Drawing.Point(326, 3);
+            this.BtOpen.Location = new System.Drawing.Point(326, 0);
             this.BtOpen.Name = "BtOpen";
             this.BtOpen.Size = new System.Drawing.Size(21, 21);
             this.BtOpen.TabIndex = 2;
@@ -58,7 +58,7 @@
             // 
             this.BtView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtView.Location = new System.Drawing.Point(299, 3);
+            this.BtView.Location = new System.Drawing.Point(299, 0);
             this.BtView.Name = "BtView";
             this.BtView.Size = new System.Drawing.Size(21, 21);
             this.BtView.TabIndex = 1;
@@ -74,7 +74,7 @@
             this.Controls.Add(this.BtOpen);
             this.Controls.Add(this.textBox1);
             this.Name = "BeanFile";
-            this.Size = new System.Drawing.Size(350, 27);
+            this.Size = new System.Drawing.Size(350, 24);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -37,16 +37,16 @@
             this.TbData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TbData.Location = new System.Drawing.Point(3, 3);
+            this.TbData.Location = new System.Drawing.Point(0, 0);
             this.TbData.Name = "TbData";
-            this.TbData.Size = new System.Drawing.Size(317, 21);
+            this.TbData.Size = new System.Drawing.Size(320, 21);
             this.TbData.TabIndex = 0;
             // 
             // BtOpen
             // 
             this.BtOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtOpen.Location = new System.Drawing.Point(326, 3);
+            this.BtOpen.Location = new System.Drawing.Point(326, 0);
             this.BtOpen.Name = "BtOpen";
             this.BtOpen.Size = new System.Drawing.Size(21, 21);
             this.BtOpen.TabIndex = 1;
@@ -61,7 +61,7 @@
             this.Controls.Add(this.BtOpen);
             this.Controls.Add(this.TbData);
             this.Name = "BeanLink";
-            this.Size = new System.Drawing.Size(350, 27);
+            this.Size = new System.Drawing.Size(350, 24);
             this.ResumeLayout(false);
             this.PerformLayout();
 

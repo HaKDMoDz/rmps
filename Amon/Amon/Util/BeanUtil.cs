@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 using Me.Amon.Uc;
 
 namespace Me.Amon.Util
@@ -34,6 +35,24 @@ namespace Me.Amon.Util
             {
                 cBox.SelectedIndex = 0;
             }
+        }
+        private static Image _None;
+
+        public static Image None
+        {
+            get
+            {
+                if (_None == null)
+                {
+                    _None = new Bitmap(16, 16);
+                }
+                return _None;
+            }
+        }
+
+        public static void ShowAlert(string alert)
+        {
+            MessageBox.Show(alert);
         }
     }
 }

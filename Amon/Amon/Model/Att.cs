@@ -12,6 +12,10 @@ namespace Me.Amon.Model
         /// 显示排序
         /// </summary>
         public string Order { get; set; }
+        /// <summary>
+        /// 编辑状态
+        /// </summary>
+        public bool Modified { get; set; }
 
         /// <summary>
         /// 记录类别
@@ -255,7 +259,7 @@ namespace Me.Amon.Model
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public abstract bool ImportByXml(string xml);
+        public abstract bool ImportByXml(XmlReader reader);
         #endregion
 
         #region 公共方法
@@ -327,7 +331,7 @@ namespace Me.Amon.Model
         /// </summary>
         public const int TYPE_AREA = TYPE_LIST + 1;
         /// <summary>
-        /// 属性：附件9
+        /// 属性：文件9
         /// </summary>
         public const int TYPE_FILE = TYPE_AREA + 1;
         /// <summary>

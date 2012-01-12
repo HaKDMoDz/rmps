@@ -39,19 +39,19 @@
             this.TbData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TbData.Location = new System.Drawing.Point(3, 3);
+            this.TbData.Location = new System.Drawing.Point(0, 0);
             this.TbData.Name = "TbData";
-            this.TbData.Size = new System.Drawing.Size(263, 21);
+            this.TbData.Size = new System.Drawing.Size(266, 21);
             this.TbData.TabIndex = 0;
             // 
             // BtOpt
             // 
             this.BtOpt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtOpt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtOpt.Location = new System.Drawing.Point(326, 3);
+            this.BtOpt.Location = new System.Drawing.Point(326, 0);
             this.BtOpt.Name = "BtOpt";
             this.BtOpt.Size = new System.Drawing.Size(21, 21);
-            this.BtOpt.TabIndex = 1;
+            this.BtOpt.TabIndex = 3;
             this.BtOpt.Text = "button1";
             this.BtOpt.UseVisualStyleBackColor = true;
             this.BtOpt.Click += new System.EventHandler(this.BtOpt_Click);
@@ -60,7 +60,7 @@
             // 
             this.BtGen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtGen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtGen.Location = new System.Drawing.Point(299, 3);
+            this.BtGen.Location = new System.Drawing.Point(299, 0);
             this.BtGen.Name = "BtGen";
             this.BtGen.Size = new System.Drawing.Size(21, 21);
             this.BtGen.TabIndex = 2;
@@ -72,10 +72,10 @@
             // 
             this.BtMod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtMod.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtMod.Location = new System.Drawing.Point(272, 3);
+            this.BtMod.Location = new System.Drawing.Point(272, 0);
             this.BtMod.Name = "BtMod";
             this.BtMod.Size = new System.Drawing.Size(21, 21);
-            this.BtMod.TabIndex = 3;
+            this.BtMod.TabIndex = 1;
             this.BtMod.Text = "button3";
             this.BtMod.UseVisualStyleBackColor = true;
             this.BtMod.Click += new System.EventHandler(this.BtMod_Click);
@@ -89,7 +89,7 @@
             this.Controls.Add(this.BtOpt);
             this.Controls.Add(this.TbData);
             this.Name = "BeanPass";
-            this.Size = new System.Drawing.Size(350, 27);
+            this.Size = new System.Drawing.Size(350, 24);
             this.ResumeLayout(false);
             this.PerformLayout();
 

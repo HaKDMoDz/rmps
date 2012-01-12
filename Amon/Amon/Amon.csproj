@@ -81,6 +81,10 @@
     <Compile Include="Da\DCConst.cs" />
     <Compile Include="Da\DFAccess.cs" />
     <Compile Include="Da\DFConst.cs" />
+    <Compile Include="Event\AmonHandler.cs" />
+    <Compile Include="IDat.cs" />
+    <Compile Include="IEnv.cs" />
+    <Compile Include="Logs.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +106,8 @@
     <Compile Include="Model\Att\PassAtt.cs" />
     <Compile Include="Model\Att\SignAtt.cs" />
     <Compile Include="Model\Att\TextAtt.cs" />
+    <Compile Include="Model\Cat.cs" />
+    <Compile Include="Model\DataModel.cs" />
     <Compile Include="Model\Key.cs" />
     <Compile Include="Model\LibDetail.cs" />
     <Compile Include="Model\LibHeader.cs" />
@@ -110,6 +116,7 @@
     <Compile Include="Model\SafeModel.cs" />
     <Compile Include="Model\Ucs.cs" />
     <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Model\ViewModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pwd\APwd.cs">
@@ -130,12 +137,14 @@
     <Compile Include="Pwd\FindBar.Designer.cs">
       <DependentUpon>FindBar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pwd\IPwd.cs" />
     <Compile Include="Pwd\LibEdit.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Pwd\LibEdit.Designer.cs">
       <DependentUpon>LibEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pwd\Lib\ILibEdit.cs" />
     <Compile Include="Pwd\Lib\LibDetail.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -341,7 +350,9 @@
     <Compile Include="Pwd\Wiz\BeanText.Designer.cs">
       <DependentUpon>BeanText.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pwd\Wiz\IRecEdit.cs" />
     <Compile Include="Pwd\Wiz\IWizEdit.cs" />
+    <Compile Include="Pwd\Wiz\IWizView.cs" />
     <Compile Include="Sec\ASec.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -460,6 +471,10 @@
       <DependentUpon>IcoEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Uc\Item.cs" />
+    <Compile Include="Uc\ListBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\Properties.cs" />
     <Compile Include="User\SignIn.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -476,6 +491,7 @@
     <Compile Include="Util\CharUtil.cs" />
     <Compile Include="Util\HashUtil.cs" />
     <Compile Include="Util\HttpUtil.cs" />
+    <Compile Include="Util\SafeUtil.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -554,6 +570,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Pro\RecEdit.resx">
       <DependentUpon>RecEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\AWiz.resx">
+      <DependentUpon>AWiz.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Wiz\BeanArea.resx">
       <DependentUpon>BeanArea.cs</DependentUpon>
