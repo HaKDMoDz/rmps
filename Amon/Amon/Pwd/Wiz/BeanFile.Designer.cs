@@ -28,20 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TbData = new System.Windows.Forms.TextBox();
             this.BtOpen = new System.Windows.Forms.Button();
             this.BtView = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // TbData
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.TbData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(293, 21);
-            this.textBox1.TabIndex = 0;
+            this.TbData.Location = new System.Drawing.Point(0, 0);
+            this.TbData.Name = "TbData";
+            this.TbData.Size = new System.Drawing.Size(293, 21);
+            this.TbData.TabIndex = 0;
             // 
             // BtOpen
             // 
@@ -72,7 +72,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.BtView);
             this.Controls.Add(this.BtOpen);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TbData);
             this.Name = "BeanFile";
             this.Size = new System.Drawing.Size(350, 24);
             this.ResumeLayout(false);
@@ -82,7 +82,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TbData;
         private System.Windows.Forms.Button BtOpen;
         private System.Windows.Forms.Button BtView;
     }

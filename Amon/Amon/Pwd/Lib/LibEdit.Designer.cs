@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Pwd
+﻿namespace Me.Amon.Pwd.Lib
 {
     partial class LibEdit
     {
@@ -120,8 +120,8 @@
             // 
             // GbGroup
             // 
-            this.GbGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.GbGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.GbGroup.Location = new System.Drawing.Point(159, 12);
             this.GbGroup.Name = "GbGroup";
@@ -146,7 +146,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LibEdit";
-            this.Text = "LibEdit";
+            this.Text = "模板管理";
             this.CmMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 

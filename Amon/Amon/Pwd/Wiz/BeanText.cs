@@ -4,12 +4,13 @@ using Me.Amon.Model;
 
 namespace Me.Amon.Pwd.Wiz
 {
-    public partial class BeanText : UserControl, IRecEdit
+    public partial class BeanText : UserControl, IAttEdit
     {
         private TableLayoutPanel _Grid;
         private Label _Label;
         private AAtt _Att;
 
+        #region 构造函数
         public BeanText()
         {
             InitializeComponent();
@@ -25,6 +26,7 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
             Dock = DockStyle.Fill;
         }
+        #endregion
 
         #region 接口实现
         public void InitView(int row)
@@ -48,6 +50,7 @@ namespace Me.Amon.Pwd.Wiz
 
         public void Copy()
         {
+            Clipboard.SetText(TbData.Text);
         }
 
         public bool Save()

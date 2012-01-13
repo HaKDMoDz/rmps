@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.Pro
 {
-    partial class BeanArea
+    partial class BeanMemo
     {
         /// <summary> 
         /// 必需的设计器变量。

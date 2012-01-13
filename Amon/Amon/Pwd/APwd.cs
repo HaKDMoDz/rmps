@@ -5,9 +5,12 @@ using System.Text;
 using System.Windows.Forms;
 using Me.Amon.Da;
 using Me.Amon.Model;
+using Me.Amon.Pwd.Cat;
+using Me.Amon.Pwd.Lib;
 using Me.Amon.Pwd.Pad;
 using Me.Amon.Pwd.Pro;
 using Me.Amon.Pwd.Wiz;
+using Me.Amon.Uc;
 using Me.Amon.Util;
 
 namespace Me.Amon.Pwd
@@ -49,7 +52,7 @@ namespace Me.Amon.Pwd
             _ViewModel = new ViewModel(_UserModel);
             _ViewModel.Load();
 
-            Cat cat = new Cat { Id = "0", Text = "阿木密码箱", Tips = "阿木密码箱" };
+            Model.Cat cat = new Model.Cat { Id = "0", Text = "阿木密码箱", Tips = "阿木密码箱" };
             IlCatList.Images.Add(cat.Id, BeanUtil.None);
             _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Id };
             _RootNode.Tag = cat;
@@ -230,24 +233,502 @@ namespace Me.Amon.Pwd
 
             _PwdView.ShowData(key);
         }
-        #endregion
 
-        #region 菜单栏事件
-        #endregion
-
-        #region 工具栏事件
-        #endregion
-
-        #region 弹出菜单事件
-        #region 类别事件
-        private void SmiAppendCat_Click(object sender, System.EventArgs e)
+        private void APwd_KeyDown(object sender, KeyEventArgs e)
         {
-            CatEdit cat = new CatEdit();
-            cat.CallBackHandler = new Event.AmonHandler<Cat>(CatAppendHandler);
-            cat.Show(this, new Cat { });
+            if (e.Control)
+            {
+                // 添加记录
+                if (e.KeyCode == Keys.N)
+                {
+                    AppendKey();
+                    return;
+                }
+                // 保存记录
+                if (e.KeyCode == Keys.S)
+                {
+                    UpdateKey();
+                    return;
+                }
+                // 删除记录
+                if (e.KeyCode == Keys.R)
+                {
+                    _PwdView.DeleteKey();
+                    return;
+                }
+                // 隐藏窗口
+                if (e.KeyCode == Keys.H || e.KeyCode == Keys.Enter)
+                {
+                    Visible = false;
+                    return;
+                }
+                // 向上移动
+                if ((e.KeyCode == Keys.U) || (e.Shift && e.KeyCode == Keys.Up))
+                {
+                    _PwdView.DeleteKey();
+                    return;
+                }
+                // 向下移动
+                if ((e.KeyCode == Keys.D) || (e.Shift && e.KeyCode == Keys.Down))
+                {
+                    _PwdView.DeleteKey();
+                    return;
+                }
+                // 向上选择
+                if (e.KeyCode == Keys.Up)
+                {
+                    _PwdView.DeleteKey();
+                    return;
+                }
+                // 向下选择
+                if (e.KeyCode == Keys.Down)
+                {
+                    _PwdView.DeleteKey();
+                    return;
+                }
+                // 查找
+                if (e.KeyCode == Keys.F)
+                {
+                    _PwdView.DeleteKey();
+                    return;
+                }
+                // 查询
+                if (e.KeyCode == Keys.Q)
+                {
+                    _PwdView.DeleteKey();
+                    return;
+                }
+                // 菜单栏隐现
+                if (e.KeyCode == Keys.M)
+                {
+                    TmMenu.Visible = !TmMenu.Visible;
+                    return;
+                }
+                // 工具栏隐现
+                if (e.KeyCode == Keys.T)
+                {
+                    TsTool.Visible = !TsTool.Visible;
+                    return;
+                }
+                // 状态栏隐现
+                if (e.KeyCode == Keys.I)
+                {
+                    SsInfo.Visible = !SsInfo.Visible;
+                    return;
+                }
+                // 目录隐现
+                if (e.KeyCode == Keys.G)
+                {
+                    VSplit.Panel1Collapsed = !VSplit.Panel1Collapsed;
+                    return;
+                }
+                // 列表隐现
+                if (e.KeyCode == Keys.K)
+                {
+                    VSplit.Panel2Collapsed = !VSplit.Panel2Collapsed;
+                    return;
+                }
+                return;
+            }
+            if (e.Alt)
+            {
+                // 复制属性
+                if (e.KeyCode == Keys.C)
+                {
+                    _PwdView.DeleteKey();
+                    return;
+                }
+                // 更新属性
+                if (e.KeyCode == Keys.U)
+                {
+                    _PwdView.DeleteKey();
+                    return;
+                }
+                // 删除属性
+                if (e.KeyCode == Keys.R)
+                {
+                    _PwdView.DeleteKey();
+                    return;
+                }
+                return;
+            }
         }
 
-        private void CatAppendHandler(Cat cat)
+        private void APwd_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_SafeModel.Key.Modified)
+            {
+                if (DialogResult.OK != MessageBox.Show("", "", MessageBoxButtons.YesNo))
+                {
+                    return;
+                }
+                if (WindowState == FormWindowState.Minimized)
+                {
+                    WindowState = FormWindowState.Normal;
+                }
+                if (!Visible)
+                {
+                    Visible = true;
+                }
+                e.Cancel = true;
+            }
+        }
+        #endregion
+
+        #region 菜单栏事件区域
+        #region 系统菜单
+        #endregion
+
+        #region 编辑菜单
+        #region 类别编辑
+        private void TmiAppendCat_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiUpdateCat_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiDeleteCat_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region 口令编辑
+        private void TmiAppendKey_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiUpdateKey_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiDeleteKey_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region 属性编辑
+        #region 添加属性
+        private void TmiAppendAttText_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiAppendAttPass_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiAppendAttLink_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiAppendAttMail_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiAppendAttDate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiAppendAttData_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiAppendAttList_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiAppendAttMemo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiAppendAttFile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiAppendAttLine_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region 转换属性
+        private void TmiUpdateAttText_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiUpdateAttPass_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiUpdateAttLink_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiUpdateAttMail_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiUpdateAttDate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiUpdateAttData_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiUpdateAttList_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiUpdateAttMemo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiUpdateAttFile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiUpdateAttLine_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        private void TmiDeleteAtt_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+        #endregion
+
+        #region 视图菜单
+        private void TmiMenu_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiTool_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiInfo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiCatView_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiKeyList_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiFindBar_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region 数据菜单
+        private void TmiSync_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiBackup_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiResuma_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #region 数据导出
+        private void TmiExportTxt_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiExportXml_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region 数据导入
+        private void TmiImportTxt_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiImportXml_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+        #endregion
+
+        #region 用户菜单
+        #region 口令安全
+        private void TmiPkey_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiSkey_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region 系统管理
+        private void TmiLib_Click(object sender, EventArgs e)
+        {
+            LibEdit edit = new LibEdit(_UserModel);
+            edit.Init(_DataModel);
+            edit.Show(this);
+        }
+
+        private void TmiUcs_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiIco_Click(object sender, EventArgs e)
+        {
+            IcoEdit edit = new IcoEdit(_UserModel);
+            edit.Init();
+            edit.Show(this);
+        }
+        #endregion
+        #endregion
+
+        #region 皮肤菜单
+        #endregion
+
+        #region 帮助菜单
+        private void TmiHelp_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiKeys_Click(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("按键");
+            dt.Columns.Add("功能");
+            dt.Columns.Add("说明");
+            dt.Rows.Add("Control N", "添加记录", "");
+            dt.Rows.Add("Control S", "保存记录", "");
+            dt.Rows.Add("Control D", "删除记录", "");
+            dt.Rows.Add("Control +", "添加类别", "");
+            dt.Rows.Add("Control -", "删除类别", "");
+            dt.Rows.Add("Control H", "隐藏窗口", "");
+            dt.Rows.Add("Control Enter", "隐藏窗口", "");
+            dt.Rows.Add("Control L", "锁定窗口", "");
+            dt.Rows.Add("Control Up", "选择上一个属性", "");
+            dt.Rows.Add("Control Down", "选择下一个属性", "");
+            dt.Rows.Add("Control Shift Up", "向上移动属性", "");
+            dt.Rows.Add("Control Shift Down", "向下移动属性", "");
+            dt.Rows.Add("Control M", "切换菜单栏显示状态", "");
+            dt.Rows.Add("Control T", "切换工具栏显示状态", "");
+            dt.Rows.Add("Control I", "切换状态栏显示状态", "");
+            dt.Rows.Add("Control F", "切换查找栏显示状态", "");
+            dt.Rows.Add("Control K", "切换类别导航显示状态", "");
+            dt.Rows.Add("Control P", "切换记录导航显示状态", "");
+            dt.Rows.Add("Control A", "切换属性编辑显示状态", "");
+            dt.Rows.Add("Control Q", "快速查找", "");
+            dt.Rows.Add("Control 1", "切换到专业模式", "");
+            dt.Rows.Add("Control 2", "切换到向导模式", "");
+            dt.Rows.Add("Control 3", "切换到记事模式", "");
+            dt.Rows.Add("Alt C", "复制属性数据到剪贴板", "");
+            dt.Rows.Add("Alt U", "应用当前属性变更", "");
+            dt.Rows.Add("Alt D", "移除当前属性", "");
+            HotKeys keys = new HotKeys();
+            keys.KeyList = dt;
+            keys.Show(this);
+        }
+
+        private void TmiAbout_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+        #endregion
+
+        #region 工具栏事件区域
+        private void TsbAppend_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TsbUpdate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TsbDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TsbMenu_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TsbTool_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TsbInfo_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region 弹出菜单事件区域
+        #region 类别弹出菜单
+        private void CmiAppendCat_Click(object sender, EventArgs e)
+        {
+            CatEdit cat = new CatEdit();
+            cat.CallBackHandler = new Event.AmonHandler<Model.Cat>(CatAppendHandler);
+            cat.Show(this, new Model.Cat { });
+        }
+
+        private void CatAppendHandler(Model.Cat cat)
         {
             TreeNode root = TvCatView.SelectedNode;
 
@@ -278,14 +759,14 @@ namespace Me.Amon.Pwd
             root.Nodes.Add(node);
         }
 
-        private void SmiUpdateCat_Click(object sender, System.EventArgs e)
+        private void CmiUpdateCat_Click(object sender, EventArgs e)
         {
             CatEdit cat = new CatEdit();
-            cat.CallBackHandler = new Event.AmonHandler<Cat>(CatUpdateHandler);
+            cat.CallBackHandler = new Event.AmonHandler<Model.Cat>(CatUpdateHandler);
             cat.Show(this);
         }
 
-        private void CatUpdateHandler(Cat cat)
+        private void CatUpdateHandler(Model.Cat cat)
         {
             TreeNode node = TvCatView.SelectedNode;
 
@@ -310,24 +791,229 @@ namespace Me.Amon.Pwd
             node.ImageKey = cat.Icon;
         }
 
-        private void SmiDeleteCat_Click(object sender, System.EventArgs e)
+        private void CmiDeleteCat_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiEditIcon_Click(object sender, EventArgs e)
         {
 
         }
         #endregion
 
-        #region 记录事件
-        private void SmiAppendKey_Click(object sender, System.EventArgs e)
+        #region 口令弹出菜单
+        private void CmiAppendKey_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void SmiUpdateKey_Click(object sender, System.EventArgs e)
+        private void CmiUpdateKey_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void SmiDeleteKey_Click(object sender, System.EventArgs e)
+        private void CmiDeleteKey_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #region 使用状态
+        private void CmiLabel0_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiLabel2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiLabel3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiLabel4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiLabel5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiLabel6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiLabel7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiLabel8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiLabel9_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region 优先级
+        private void CmiMajorP2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiMajorP1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiMajor0_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiMajorN1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiMajorN2_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        private void CmiMoveto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiHistory_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region 属性弹出菜单
+        #region 添加属性
+        private void CmiAppendAttText_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiAppendAttPass_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiAppendAttLink_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiAppendAttMail_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiAppendAttDate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiAppendAttData_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiAppendAttList_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiAppendAttMemo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiAppendAttFile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiAppendAttLine_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region 转换属性
+        private void CmiUpdateAttText_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateAttPass_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateAttLink_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateAttMail_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateAttDate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateAttData_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateAttList_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateAttMemo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateAttFile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateAttLine_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        private void CmiDeleteAtt_Click(object sender, EventArgs e)
         {
 
         }
@@ -393,6 +1079,21 @@ namespace Me.Amon.Pwd
             _PwdView.InitView(TpGrid);
         }
 
+        #region 类别处理
+        private void AppendCat()
+        {
+        }
+
+        private void UpdateCat()
+        {
+        }
+
+        private void DeleteCat()
+        {
+        }
+        #endregion
+
+        #region 口令处理
         private void AppendKey()
         {
             if (_SafeModel.Key == null)
@@ -428,7 +1129,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            Cat cat = node.Tag as Cat;
+            Model.Cat cat = node.Tag as Model.Cat;
             if (cat == null)
             {
                 BeanUtil.ShowAlert("系统异常，请稍后重试！");
@@ -450,7 +1151,7 @@ namespace Me.Amon.Pwd
                 #region 数据备份
                 if (_SafeModel.Key.Backup)
                 {
-                    long t = DateTime.Now.Millisecond;
+                    long t = DateTime.UtcNow.Millisecond;
                     dba.ReInit();
                     dba.AddParam(IDat.APWD0A01, t);
                     dba.AddParam(IDat.APWD0A02, IDat.APWD0102);
@@ -564,112 +1265,6 @@ namespace Me.Amon.Pwd
         {
         }
         #endregion
-
-        private void APwd_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Control)
-            {
-                if (e.KeyCode == Keys.N)
-                {
-                    AppendKey();
-                    return;
-                }
-                if (e.KeyCode == Keys.S)
-                {
-                    UpdateKey();
-                    return;
-                }
-                if (e.KeyCode == Keys.R)
-                {
-                    _PwdView.DeleteKey();
-                    return;
-                }
-                // 向上移动
-                if ((e.KeyCode == Keys.U) || (e.Shift && e.KeyCode == Keys.Up))
-                {
-                    _PwdView.DeleteKey();
-                    return;
-                }
-                // 向下移动
-                if ((e.KeyCode == Keys.D) || (e.Shift && e.KeyCode == Keys.Down))
-                {
-                    _PwdView.DeleteKey();
-                    return;
-                }
-                // 向上选择
-                if (e.KeyCode == Keys.Up)
-                {
-                    _PwdView.DeleteKey();
-                    return;
-                }
-                // 向下选择
-                if (e.KeyCode == Keys.Down)
-                {
-                    _PwdView.DeleteKey();
-                    return;
-                }
-                // 查找
-                if (e.KeyCode == Keys.F)
-                {
-                    _PwdView.DeleteKey();
-                    return;
-                }
-                // 查询
-                if (e.KeyCode == Keys.Q)
-                {
-                    _PwdView.DeleteKey();
-                    return;
-                }
-                // 目录隐现
-                if (e.KeyCode == Keys.T)
-                {
-                    _PwdView.DeleteKey();
-                    return;
-                }
-                // 列表隐现
-                if (e.KeyCode == Keys.K)
-                {
-                    _PwdView.DeleteKey();
-                    return;
-                }
-                return;
-            }
-            if (e.Alt)
-            {
-                // 复制属性
-                if (e.KeyCode == Keys.C)
-                {
-                    _PwdView.DeleteKey();
-                    return;
-                }
-                // 更新属性
-                if (e.KeyCode == Keys.U)
-                {
-                    _PwdView.DeleteKey();
-                    return;
-                }
-                // 删除属性
-                if (e.KeyCode == Keys.R)
-                {
-                    _PwdView.DeleteKey();
-                    return;
-                }
-                return;
-            }
-        }
-
-        private void CmiLib_Click(object sender, System.EventArgs e)
-        {
-            LibEdit libEdit = new LibEdit();
-            libEdit.Init(_DataModel);
-            libEdit.Show(this);
-        }
-
-        private void TmiLib_Click(object sender, EventArgs e)
-        {
-            LibEdit edit = new LibEdit(_UserModel);
-            edit.Init(_DataModel);
-            edit.Show(this);
-        }
+        #endregion
     }
 }

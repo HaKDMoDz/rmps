@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
-using Me.Amon.Da;
 using Me.Amon.Model;
+using Me.Amon.Pwd;
 using Me.Amon.Util;
 
 namespace Me.Amon.User
@@ -16,88 +15,20 @@ namespace Me.Amon.User
         private string _Name;
         private string _Pass;
         private string _Code;
-        private SafeModel _SafeModel;
-        private Uc.Properties _Prop;
 
         public SignUp()
         {
             InitializeComponent();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SignUpDownloadStringCompleted(object sender, System.Net.UploadStringCompletedEventArgs e)
-        {
-            string xml = e.Result;
-            string code = null;
-            string pass = null;
-            int view = 0;
-            List<LibHeader> libKey = new List<LibHeader>();
-            using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
-            {
-                if (xml.IndexOf("<error>") > 0)
-                {
-                    reader.ReadToFollowing("error");
-                    return;
-                }
-
-                if (!reader.ReadToFollowing("code"))
-                {
-                    return;
-                }
-                code = reader.ReadElementContentAsString();
-
-                pass = reader.ReadElementContentAsString();
-
-                view = reader.ReadElementContentAsInt();
-
-                if (reader.Name == "libs" || reader.ReadToNextSibling("libs"))
-                {
-                    while (reader.ReadToFollowing("lib"))
-                    {
-                        LibHeader header = new LibHeader();
-                        header.FromXml(reader);
-                        libKey.Add(header);
-
-                        if (reader.Name == "atts" || reader.ReadToNextSibling("atts"))
-                        {
-                            List<LibDetail> libD = new List<LibDetail>();
-                            if (reader.ReadToDescendant("att"))
-                            {
-                                LibDetail detail = new LibDetail();
-                                detail.FromXml(reader);
-                                libD.Add(detail);
-                            }
-                            while (reader.ReadToNextSibling("att"))
-                            {
-                                LibDetail detail = new LibDetail();
-                                detail.FromXml(reader);
-                                libD.Add(detail);
-                            }
-                            header.Details = libD;
-                        }
-                    }
-                }
-            }
-
-            UserModel userMdl = new UserModel();
-            if (userMdl.SignIn(_Name, pass, code))
-            {
-                userMdl.View = view;
-            }
-        }
-
         private void BtOk_Click(object sender, System.EventArgs e)
         {
-
+            DoSignUp();
         }
 
         private void BtNo_Click(object sender, System.EventArgs e)
         {
-
+            Close();
         }
 
         private void ShowAlert(string alert)
@@ -188,11 +119,22 @@ namespace Me.Amon.User
                 view = reader.ReadElementContentAsInt();
             }
 
+            Uc.Properties _Prop = new Uc.Properties();
+            _Prop.Load("amon.cfg");
+            _Prop.Set(string.Format("amon.{0}.code", _Name), _Code);
+            _Prop.Set(string.Format("amon.{0}.info", _Name), _Pass);
+            _Prop.Set(string.Format("amon.{0}.view", _Name), view.ToString());
+            _Prop.Save("amon.cfg");
+
             UserModel userModel = new UserModel();
             if (userModel.SignUp(_Name, _Pass, _Code))
             {
                 userModel.Init();
-                userModel.View = view;
+
+                APwd pwd = new APwd(userModel);
+                pwd.Init();
+                pwd.Show();
+                Close();
             }
         }
     }

@@ -1,15 +1,14 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using Me.Amon.Model;
 
 namespace Me.Amon.Pwd.Pro
 {
-    public partial class BeanMail : UserControl, IAttEdit
+    public partial class BeanMemo : UserControl, IAttEdit
     {
         private AAtt _Att;
         private TextBox _Ctl;
 
-        public BeanMail()
+        public BeanMemo()
         {
             InitializeComponent();
         }
@@ -53,10 +52,5 @@ namespace Me.Amon.Pwd.Pro
             }
         }
         #endregion
-
-        private void BtSend_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

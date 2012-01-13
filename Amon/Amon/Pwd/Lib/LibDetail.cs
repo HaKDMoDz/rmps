@@ -29,9 +29,9 @@ namespace Me.Amon.Pwd.Lib
             CbType.Items.Add(new Item { K = AAtt.TYPE_DATE.ToString(), V = "日期" });
             CbType.Items.Add(new Item { K = AAtt.TYPE_DATA.ToString(), V = "数值" });
             CbType.Items.Add(new Item { K = AAtt.TYPE_LIST.ToString(), V = "列表" });
-            CbType.Items.Add(new Item { K = AAtt.TYPE_AREA.ToString(), V = "附注" });
+            CbType.Items.Add(new Item { K = AAtt.TYPE_MEMO.ToString(), V = "附注" });
             CbType.Items.Add(new Item { K = AAtt.TYPE_FILE.ToString(), V = "文件" });
-            CbType.Items.Add(new Item { K = AAtt.TYPE_SIGN.ToString(), V = "分组" });
+            CbType.Items.Add(new Item { K = AAtt.TYPE_LINE.ToString(), V = "分组" });
         }
 
         public void Show(Me.Amon.Model.LibDetail detail)

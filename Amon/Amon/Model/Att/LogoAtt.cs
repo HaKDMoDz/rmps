@@ -69,19 +69,21 @@ namespace Me.Amon.Model.Att
         {
         }
 
-        public string toString()
+        public override string ToString()
         {
             return Data;
         }
 
-        public string getPath()
+        public string Path
         {
-            return path;
-        }
-
-        public void setPath(string path)
-        {
-            this.path = path;
+            get
+            {
+                return path;
+            }
+            set
+            {
+                path = value;
+            }
         }
     }
 }

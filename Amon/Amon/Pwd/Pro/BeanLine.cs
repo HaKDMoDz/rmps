@@ -4,12 +4,12 @@ using Me.Amon.Model;
 
 namespace Me.Amon.Pwd.Pro
 {
-    public partial class BeanMail : UserControl, IAttEdit
+    public partial class BeanLine : UserControl, IAttEdit
     {
         private AAtt _Att;
         private TextBox _Ctl;
 
-        public BeanMail()
+        public BeanLine()
         {
             InitializeComponent();
         }
@@ -54,7 +54,12 @@ namespace Me.Amon.Pwd.Pro
         }
         #endregion
 
-        private void BtSend_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
 
         }

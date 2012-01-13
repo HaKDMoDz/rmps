@@ -32,7 +32,7 @@ namespace Me.Amon.Model
         /// <summary>
         /// 专有内容
         /// </summary>
-        protected List<string> ext;
+        protected List<string> _Spec;
         #endregion
 
         #region 构造函数
@@ -84,12 +84,12 @@ namespace Me.Amon.Model
                     return new DataAtt();
                 case TYPE_LIST:
                     return new ListAtt();
-                case TYPE_AREA:
-                    return new AreaAtt();
+                case TYPE_MEMO:
+                    return new MemoAtt();
                 case TYPE_FILE:
                     return new FileAtt();
-                case TYPE_SIGN:
-                    return new SignAtt();
+                case TYPE_LINE:
+                    return new LineAtt();
                 case TYPE_GUID:
                     return new GuidAtt();
                 case TYPE_META:
@@ -140,7 +140,7 @@ namespace Me.Amon.Model
         /// <param name="spec"></param>
         public void AddSpec(string spec)
         {
-            this.ext.Add(spec);
+            this._Spec.Add(spec);
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace Me.Amon.Model
         /// <returns></returns>
         public string GetSpec(int index)
         {
-            return (index > -1 && index < ext.Count) ? ext[index] : null;
+            return (index > -1 && index < _Spec.Count) ? _Spec[index] : null;
         }
 
         /// <summary>
@@ -161,9 +161,9 @@ namespace Me.Amon.Model
         /// <returns></returns>
         public string GetSpec(int index, string defValue)
         {
-            if (index > -1 && index < ext.Count)
+            if (index > -1 && index < _Spec.Count)
             {
-                string temp = ext[index];
+                string temp = _Spec[index];
                 return temp != null ? temp : defValue;
             }
             return defValue;
@@ -176,13 +176,13 @@ namespace Me.Amon.Model
         /// <param name="spec"></param>
         public void SetSpec(int index, string spec)
         {
-            if (index == this.ext.Count)
+            if (index == this._Spec.Count)
             {
-                this.ext.Add(spec);
+                this._Spec.Add(spec);
             }
             else
             {
-                this.ext[index] = spec;
+                this._Spec[index] = spec;
             }
         }
 
@@ -193,15 +193,15 @@ namespace Me.Amon.Model
         /// <returns></returns>
         public string EncodeSpec(char c)
         {
-            if (ext == null || ext.Count < 1)
+            if (_Spec == null || _Spec.Count < 1)
             {
                 return "";
             }
 
             StringBuilder text = new StringBuilder();
-            for (int i = 0, j = ext.Count; i < j; i += 1)
+            for (int i = 0, j = _Spec.Count; i < j; i += 1)
             {
-                text.Append(c).Append(ext[i]);
+                text.Append(c).Append(_Spec[i]);
             }
             return text.ToString();
         }
@@ -218,13 +218,13 @@ namespace Me.Amon.Model
                 return;
             }
 
-            ext.Clear();
+            _Spec.Clear();
 
             int s = 0;
             int e = text.IndexOf(c, s);
             while (e >= s)
             {
-                ext.Add(text.Substring(s, e - s));
+                _Spec.Add(text.Substring(s, e - s));
                 s = e + 1;
                 e = text.IndexOf(c, s);
             }
@@ -329,19 +329,19 @@ namespace Me.Amon.Model
         /// <summary>
         /// 属性：附注8
         /// </summary>
-        public const int TYPE_AREA = TYPE_LIST + 1;
+        public const int TYPE_MEMO = TYPE_LIST + 1;
         /// <summary>
         /// 属性：文件9
         /// </summary>
-        public const int TYPE_FILE = TYPE_AREA + 1;
+        public const int TYPE_FILE = TYPE_MEMO + 1;
         /// <summary>
         /// 属性：分组10
         /// </summary>
-        public const int TYPE_SIGN = TYPE_FILE + 1;
+        public const int TYPE_LINE = TYPE_FILE + 1;
         /// <summary>
         /// 属性：模板向导
         /// </summary>
-        public const int TYPE_GUID = TYPE_SIGN + 1;
+        public const int TYPE_GUID = TYPE_LINE + 1;
         /// <summary>
         /// 属性：关键搜索
         /// </summary>

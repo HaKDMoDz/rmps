@@ -85,7 +85,7 @@ namespace Me.Amon.User
             _Pass = SafeUtil.EncryptPass(_Pass);
 
             _Prop = new Uc.Properties();
-            _Prop.Load("dat\\amon.cfg");
+            _Prop.Load("amon.cfg");
 
             _Code = _Prop.Get(string.Format("amon.{0}.code", _Name));
             if (!CharUtil.IsValidateCode(_Code))
@@ -105,6 +105,7 @@ namespace Me.Amon.User
         private void SignIn_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
         {
             string xml = e.Result;
+            int view = 0;
             using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
             {
                 if (xml.IndexOf("<error>") > 0)
@@ -122,12 +123,13 @@ namespace Me.Amon.User
 
                 _Pass = reader.ReadElementContentAsString();
 
-                //view = reader.ReadElementContentAsInt();
+                view = reader.ReadElementContentAsInt();
             }
 
             _Prop.Set(string.Format("amon.{0}.code", _Name), _Code);
             _Prop.Set(string.Format("amon.{0}.info", _Name), _Pass);
-            _Prop.Save("dat\\amon.cfg");
+            _Prop.Set(string.Format("amon.{0}.view", _Name), view.ToString());
+            _Prop.Save("amon.cfg");
 
             LoadUser();
         }

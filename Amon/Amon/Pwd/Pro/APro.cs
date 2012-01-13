@@ -66,5 +66,9 @@ namespace Me.Amon.Pwd.Pro
         {
         }
         #endregion
+
+        public void DeleteAtt()
+        {
+        }
     }
 }

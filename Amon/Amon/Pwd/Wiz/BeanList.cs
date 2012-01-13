@@ -1,13 +1,16 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using Me.Amon.Model;
 
 namespace Me.Amon.Pwd.Wiz
 {
-    public partial class BeanList : UserControl, IRecEdit
+    public partial class BeanList : UserControl, IAttEdit
     {
         private TableLayoutPanel _Grid;
         private Label _Label;
+        private AAtt _Att;
 
+        #region 构造函数
         public BeanList()
         {
             InitializeComponent();
@@ -23,6 +26,7 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
             Dock = DockStyle.Fill;
         }
+        #endregion
 
         #region 接口实现
         public void InitView(int row)
@@ -33,8 +37,14 @@ namespace Me.Amon.Pwd.Wiz
             _Grid.Controls.Add(this, 1, row);
         }
 
-        public bool ShowData(Model.AAtt att)
+        public bool ShowData(AAtt att)
         {
+            _Att = att;
+            if (_Att != null)
+            {
+                _Label.Text = _Att.Name;
+                CbData.SelectedItem = _Att.Data;
+            }
             return true;
         }
 
@@ -44,6 +54,16 @@ namespace Me.Amon.Pwd.Wiz
 
         public bool Save()
         {
+            if (_Att == null)
+            {
+                return false;
+            }
+
+            if (CbData.SelectedValue.ToString() != _Att.Data)
+            {
+                _Att.Data = CbData.SelectedValue.ToString();
+                _Att.Modified = true;
+            }
             return true;
         }
         #endregion

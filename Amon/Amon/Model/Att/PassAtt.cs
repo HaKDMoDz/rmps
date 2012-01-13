@@ -23,7 +23,7 @@ namespace Me.Amon.Model.Att
                 return false;
             }
             builder.Append(DoEscape(Name)).Append(',').Append(DoEscape(Data));
-            foreach (string tmp in ext)
+            foreach (string tmp in _Spec)
             {
                 builder.Append(',').Append(tmp);
             }
@@ -56,10 +56,10 @@ namespace Me.Amon.Model.Att
             Name = UnEscape(array[0].Replace("\f", "\\,"));
             Data = UnEscape(array[1].Replace("\f", "\\,"));
 
-            ext.Clear();
+            _Spec.Clear();
             for (int i = 2, j = array.Length; i < j; i += 1)
             {
-                ext.Add(array[i]);
+                _Spec.Add(array[i]);
             }
             return true;
         }
@@ -79,13 +79,13 @@ namespace Me.Amon.Model.Att
 
         public override void SetDefault()
         {
-            if (ext == null)
+            if (_Spec == null)
             {
-                this.ext = new List<string>(3);
+                this._Spec = new List<string>(3);
             }
             else
             {
-                ext.Clear();
+                _Spec.Clear();
             }
 
             //ext.Add(userCfg.getPwdsKey());

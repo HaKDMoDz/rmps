@@ -92,7 +92,7 @@
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Att.cs" />
-    <Compile Include="Model\Att\AreaAtt.cs" />
+    <Compile Include="Model\Att\MemoAtt.cs" />
     <Compile Include="Model\Att\DataAtt.cs" />
     <Compile Include="Model\Att\DateAtt.cs" />
     <Compile Include="Model\Att\FileAtt.cs" />
@@ -104,13 +104,14 @@
     <Compile Include="Model\Att\MailAtt.cs" />
     <Compile Include="Model\Att\MetaAtt.cs" />
     <Compile Include="Model\Att\PassAtt.cs" />
-    <Compile Include="Model\Att\SignAtt.cs" />
+    <Compile Include="Model\Att\LineAtt.cs" />
     <Compile Include="Model\Att\TextAtt.cs" />
     <Compile Include="Model\Cat.cs" />
     <Compile Include="Model\DataModel.cs" />
     <Compile Include="Model\Key.cs" />
     <Compile Include="Model\LibDetail.cs" />
     <Compile Include="Model\LibHeader.cs" />
+    <Compile Include="Model\Log.cs" />
     <Compile Include="Model\MgtdDetail.cs" />
     <Compile Include="Model\MgtdHeader.cs" />
     <Compile Include="Model\SafeModel.cs" />
@@ -125,10 +126,10 @@
     <Compile Include="Pwd\APwd.Designer.cs">
       <DependentUpon>APwd.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\CatEdit.cs">
+    <Compile Include="Pwd\Cat\CatEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pwd\CatEdit.Designer.cs">
+    <Compile Include="Pwd\Cat\CatEdit.Designer.cs">
       <DependentUpon>CatEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\FindBar.cs">
@@ -138,10 +139,10 @@
       <DependentUpon>FindBar.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\IPwd.cs" />
-    <Compile Include="Pwd\LibEdit.cs">
+    <Compile Include="Pwd\Lib\LibEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pwd\LibEdit.Designer.cs">
+    <Compile Include="Pwd\Lib\LibEdit.Designer.cs">
       <DependentUpon>LibEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\Lib\ILibEdit.cs" />
@@ -157,17 +158,23 @@
     <Compile Include="Pwd\Lib\LibHeader.Designer.cs">
       <DependentUpon>LibHeader.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pwd\Log\LogEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pwd\Log\LogEdit.Designer.cs">
+      <DependentUpon>LogEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pwd\Pad\APad.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Pwd\Pad\APad.Designer.cs">
       <DependentUpon>APad.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\Pro\RecEdit.cs">
+    <Compile Include="Pwd\Pro\AttEdit.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\Pro\RecEdit.Designer.cs">
-      <DependentUpon>RecEdit.cs</DependentUpon>
+    <Compile Include="Pwd\Pro\AttEdit.Designer.cs">
+      <DependentUpon>AttEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\Pro\BeanData.cs">
       <SubType>UserControl</SubType>
@@ -241,11 +248,11 @@
     <Compile Include="Pwd\Pro\BeanPass.Designer.cs">
       <DependentUpon>BeanPass.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\Pro\BeanSign.cs">
+    <Compile Include="Pwd\Pro\BeanLine.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\Pro\BeanSign.Designer.cs">
-      <DependentUpon>BeanSign.cs</DependentUpon>
+    <Compile Include="Pwd\Pro\BeanLine.Designer.cs">
+      <DependentUpon>BeanLine.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\Pro\BeanText.cs">
       <SubType>UserControl</SubType>
@@ -259,24 +266,24 @@
     <Compile Include="Pwd\Pro\APro.Designer.cs">
       <DependentUpon>APro.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\Pro\BeanArea.cs">
+    <Compile Include="Pwd\Pro\BeanMemo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\Pro\BeanArea.Designer.cs">
-      <DependentUpon>BeanArea.cs</DependentUpon>
+    <Compile Include="Pwd\Pro\BeanMemo.Designer.cs">
+      <DependentUpon>BeanMemo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\Pro\IRecEdit.cs" />
+    <Compile Include="Pwd\Pro\IAttEdit.cs" />
     <Compile Include="Pwd\Wiz\AWiz.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Pwd\Wiz\AWiz.Designer.cs">
       <DependentUpon>AWiz.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\Wiz\BeanArea.cs">
+    <Compile Include="Pwd\Wiz\BeanMemo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\Wiz\BeanArea.Designer.cs">
-      <DependentUpon>BeanArea.cs</DependentUpon>
+    <Compile Include="Pwd\Wiz\BeanMemo.Designer.cs">
+      <DependentUpon>BeanMemo.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\Wiz\BeanBody.cs">
       <SubType>UserControl</SubType>
@@ -338,11 +345,11 @@
     <Compile Include="Pwd\Wiz\BeanPass.Designer.cs">
       <DependentUpon>BeanPass.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\Wiz\BeanSign.cs">
+    <Compile Include="Pwd\Wiz\BeanLine.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\Wiz\BeanSign.Designer.cs">
-      <DependentUpon>BeanSign.cs</DependentUpon>
+    <Compile Include="Pwd\Wiz\BeanLine.Designer.cs">
+      <DependentUpon>BeanLine.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\Wiz\BeanText.cs">
       <SubType>UserControl</SubType>
@@ -350,8 +357,7 @@
     <Compile Include="Pwd\Wiz\BeanText.Designer.cs">
       <DependentUpon>BeanText.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\Wiz\IRecEdit.cs" />
-    <Compile Include="Pwd\Wiz\IWizEdit.cs" />
+    <Compile Include="Pwd\Wiz\IAttEdit.cs" />
     <Compile Include="Pwd\Wiz\IWizView.cs" />
     <Compile Include="Sec\ASec.cs">
       <SubType>Form</SubType>
@@ -464,16 +470,31 @@
     <Compile Include="Sec\Uw\Text.Designer.cs">
       <DependentUpon>Text.cs</DependentUpon>
     </Compile>
+    <Compile Include="Uc\HotKeys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uc\HotKeys.Designer.cs">
+      <DependentUpon>HotKeys.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uc\IcoEdit.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Uc\IcoEdit.Designer.cs">
       <DependentUpon>IcoEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Uc\Item.cs" />
-    <Compile Include="Uc\ListBoxEx.cs">
-      <SubType>Component</SubType>
+    <Compile Include="Uc\Ico\DirEdit.cs">
+      <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Uc\Ico\DirEdit.Designer.cs">
+      <DependentUpon>DirEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uc\Ico\IcoView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Uc\Ico\IcoView.Designer.cs">
+      <DependentUpon>IcoView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uc\Item.cs" />
     <Compile Include="Uc\Properties.cs" />
     <Compile Include="User\SignIn.cs">
       <SubType>Form</SubType>
@@ -508,13 +529,13 @@
     <EmbeddedResource Include="Pwd\APwd.resx">
       <DependentUpon>APwd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\CatEdit.resx">
+    <EmbeddedResource Include="Pwd\Cat\CatEdit.resx">
       <DependentUpon>CatEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\FindBar.resx">
       <DependentUpon>FindBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\LibEdit.resx">
+    <EmbeddedResource Include="Pwd\Lib\LibEdit.resx">
       <DependentUpon>LibEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Lib\LibDetail.resx">
@@ -523,11 +544,14 @@
     <EmbeddedResource Include="Pwd\Lib\LibHeader.resx">
       <DependentUpon>LibHeader.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Log\LogEdit.resx">
+      <DependentUpon>LogEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Pad\APad.resx">
       <DependentUpon>APad.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\Pro\BeanArea.resx">
-      <DependentUpon>BeanArea.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\Pro\BeanMemo.resx">
+      <DependentUpon>BeanMemo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Pro\BeanData.resx">
       <DependentUpon>BeanData.cs</DependentUpon>
@@ -562,20 +586,20 @@
     <EmbeddedResource Include="Pwd\Pro\BeanPass.resx">
       <DependentUpon>BeanPass.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\Pro\BeanSign.resx">
-      <DependentUpon>BeanSign.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\Pro\BeanLine.resx">
+      <DependentUpon>BeanLine.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Pro\BeanText.resx">
       <DependentUpon>BeanText.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\Pro\RecEdit.resx">
-      <DependentUpon>RecEdit.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\Pro\AttEdit.resx">
+      <DependentUpon>AttEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Wiz\AWiz.resx">
       <DependentUpon>AWiz.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\Wiz\BeanArea.resx">
-      <DependentUpon>BeanArea.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\Wiz\BeanMemo.resx">
+      <DependentUpon>BeanMemo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Wiz\BeanBody.resx">
       <DependentUpon>BeanBody.cs</DependentUpon>
@@ -607,8 +631,8 @@
     <EmbeddedResource Include="Pwd\Wiz\BeanPass.resx">
       <DependentUpon>BeanPass.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\Wiz\BeanSign.resx">
-      <DependentUpon>BeanSign.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\Wiz\BeanLine.resx">
+      <DependentUpon>BeanLine.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Wiz\BeanText.resx">
       <DependentUpon>BeanText.cs</DependentUpon>
@@ -640,8 +664,17 @@
     <EmbeddedResource Include="Sec\Uw\Text.resx">
       <DependentUpon>Text.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Uc\HotKeys.resx">
+      <DependentUpon>HotKeys.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Uc\IcoEdit.resx">
       <DependentUpon>IcoEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uc\Ico\DirEdit.resx">
+      <DependentUpon>DirEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uc\Ico\IcoView.resx">
+      <DependentUpon>IcoView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\SignIn.resx">
       <DependentUpon>SignIn.cs</DependentUpon>

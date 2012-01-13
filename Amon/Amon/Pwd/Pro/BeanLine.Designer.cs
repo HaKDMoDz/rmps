@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.Pro
 {
-    partial class BeanSign
+    partial class BeanLine
     {
         /// <summary> 
         /// 必需的设计器变量。

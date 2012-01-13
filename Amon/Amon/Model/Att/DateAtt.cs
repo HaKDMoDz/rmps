@@ -68,16 +68,16 @@ namespace Me.Amon.Model.Att
 
         public override void SetDefault()
         {
-            if (ext == null)
+            if (_Spec == null)
             {
-                this.ext = new List<string>(1);
+                this._Spec = new List<string>(1);
             }
             else
             {
-                ext.Clear();
+                _Spec.Clear();
             }
 
-            ext.Add(SPEC_VALUE_NONE);
+            _Spec.Add(SPEC_VALUE_NONE);
         }
     }
 }

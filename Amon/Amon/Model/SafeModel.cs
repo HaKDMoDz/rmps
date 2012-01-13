@@ -266,7 +266,7 @@ namespace Me.Amon.Model
             LogoAtt logo = new LogoAtt();
             logo.Name = Key.IcoName;
             logo.Data = Key.IcoMemo;
-            logo.setPath(Key.IcoPath);
+            logo.Path = Key.IcoPath;
             _AttList.Add(logo);
 
             // HintItem
@@ -333,7 +333,7 @@ namespace Me.Amon.Model
             LogoAtt logo = (LogoAtt)_AttList[AAtt.PWDS_HEAD_LOGO];
             Key.IcoName = logo.Name;
             Key.IcoMemo = logo.Data;
-            Key.IcoPath = logo.getPath();
+            Key.IcoPath = logo.Path;
 
             // HintItem
             HintAtt hint = (HintAtt)_AttList[AAtt.PWDS_HEAD_HINT];

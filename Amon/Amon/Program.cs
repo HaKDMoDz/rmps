@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.IO;
 
 namespace Me.Amon
 {
@@ -12,10 +11,6 @@ namespace Me.Amon
         [STAThread]
         static void Main()
         {
-            if (!Directory.Exists("dat\\"))
-            {
-                Directory.CreateDirectory("dat\\");
-            }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());

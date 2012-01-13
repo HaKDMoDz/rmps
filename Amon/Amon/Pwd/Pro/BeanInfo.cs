@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Me.Amon.Pwd.Pro
 {
-    public partial class BeanInfo : UserControl, IRecEdit
+    public partial class BeanInfo : UserControl, IAttEdit
     {
         public BeanInfo()
         {
@@ -17,13 +10,11 @@ namespace Me.Amon.Pwd.Pro
         }
 
         #region 接口实现
+        public Control Control { get { return this; } }
+
         public bool ShowData(Model.AAtt att)
         {
             return true;
-        }
-
-        public void InitView()
-        {
         }
 
         public void Copy()
@@ -31,10 +22,6 @@ namespace Me.Amon.Pwd.Pro
         }
 
         public void Save()
-        {
-        }
-
-        public void Drop()
         {
         }
         #endregion

@@ -20,9 +20,6 @@ namespace Me.Amon.Model
 
         public string Name { get { return _Name; } }
         public string Code { get { return _Code; } }
-        public int View { get; set; }
-
-        private SafeModel _SafeModel;
         #endregion
 
         #region 权限认证
@@ -303,8 +300,6 @@ namespace Me.Amon.Model
         private DBAccess _DBAccess;
         private DCAccess _DCAccess;
         private DFAccess _DFAccess;
-        private DataModel _DataModel;
-        private ViewModel _ViewModel;
 
         public void Init()
         {
@@ -316,9 +311,6 @@ namespace Me.Amon.Model
             _DFAccess.Init(this);
         }
 
-        public SafeModel SafeModel { get { return _SafeModel; } }
-        public DataModel DataModel { get { return _DataModel; } }
-        public ViewModel ViewModel { get { return _ViewModel; } }
         public DBAccess DBAccess { get { return _DBAccess; } }
         public DCAccess DCAccess { get { return _DCAccess; } }
         public DFAccess DFAccess { get { return _DFAccess; } }

@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Windows.Forms;
 using Me.Amon.Event;
-using Me.Amon.Model;
 
-namespace Me.Amon.Pwd
+namespace Me.Amon.Pwd.Cat
 {
     public partial class CatEdit : Form
     {
-        private Cat _Cat;
+        private Model.Cat _Cat;
 
         public CatEdit()
         {
             InitializeComponent();
         }
 
-        public void Init(Cat cat)
+        public void Init(Model.Cat cat)
         {
             _Cat = cat;
         }
 
-        public AmonHandler<Cat> CallBackHandler { get; set; }
+        public AmonHandler<Model.Cat> CallBackHandler { get; set; }
 
-        public void Show(IWin32Window owner, Cat cat)
+        public void Show(IWin32Window owner, Model.Cat cat)
         {
             _Cat = cat;
             this.Show(owner);
@@ -31,7 +30,7 @@ namespace Me.Amon.Pwd
         {
             if (_Cat == null)
             {
-                _Cat = new Cat();
+                _Cat = new Model.Cat();
             }
 
             _Cat.Icon = "";

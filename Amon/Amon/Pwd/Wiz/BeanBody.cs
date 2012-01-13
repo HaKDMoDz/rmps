@@ -58,7 +58,7 @@ namespace Me.Amon.Pwd.Wiz
             {
                 AAtt att = _SafeModel.GetAtt(i);
 
-                IRecEdit ctl = GetCtl(att.Type);
+                IAttEdit ctl = GetCtl(att.Type);
                 ctl.InitView(row);
                 ctl.ShowData(att);
 
@@ -99,19 +99,19 @@ namespace Me.Amon.Pwd.Wiz
             }
         }
 
-        public IRecEdit EditCtl { get; set; }
+        public IAttEdit EditCtl { get; set; }
 
-        private IRecEdit GetCtl(int type)
+        private IAttEdit GetCtl(int type)
         {
             if (!_IdxList.ContainsKey(type))
             {
                 _IdxList.Add(type, 0);
-                _CmpList.Add(type, new List<IRecEdit>());
+                _CmpList.Add(type, new List<IAttEdit>());
             }
             int index = _IdxList[type];
-            List<IRecEdit> list = _CmpList[type];
+            List<IAttEdit> list = _CmpList[type];
 
-            IRecEdit ctl;
+            IAttEdit ctl;
             if (list.Count <= index)
             {
                 switch (type)
@@ -137,14 +137,14 @@ namespace Me.Amon.Pwd.Wiz
                     case AAtt.TYPE_LIST:
                         ctl = new BeanList(TpGrid);
                         break;
-                    case AAtt.TYPE_AREA:
-                        ctl = new BeanArea(TpGrid);
+                    case AAtt.TYPE_MEMO:
+                        ctl = new BeanMemo(TpGrid);
                         break;
                     case AAtt.TYPE_FILE:
                         ctl = new BeanFile(TpGrid);
                         break;
-                    case AAtt.TYPE_SIGN:
-                        ctl = new BeanSign(TpGrid);
+                    case AAtt.TYPE_LINE:
+                        ctl = new BeanLine(TpGrid);
                         break;
                     default:
                         ctl = null;
@@ -162,6 +162,6 @@ namespace Me.Amon.Pwd.Wiz
         }
 
         private Dictionary<int, int> _IdxList = new Dictionary<int, int>();
-        private Dictionary<int, List<IRecEdit>> _CmpList = new Dictionary<int, List<IRecEdit>>(AAtt.TYPE_SIZE);
+        private Dictionary<int, List<IAttEdit>> _CmpList = new Dictionary<int, List<IAttEdit>>(AAtt.TYPE_SIZE);
     }
 }

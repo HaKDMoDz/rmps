@@ -3,7 +3,7 @@ using Me.Amon.Model;
 
 namespace Me.Amon.Pwd.Wiz
 {
-    public interface IRecEdit
+    public interface IAttEdit
     {
         void InitView(int row);
 

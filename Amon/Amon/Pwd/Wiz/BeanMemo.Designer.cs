@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.Wiz
 {
-    partial class BeanSign
+    partial class BeanMemo
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,21 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.BtOpt = new System.Windows.Forms.Button();
             this.TbData = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // BtOpt
-            // 
-            this.BtOpt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtOpt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtOpt.Location = new System.Drawing.Point(326, 0);
-            this.BtOpt.Name = "BtOpt";
-            this.BtOpt.Size = new System.Drawing.Size(21, 21);
-            this.BtOpt.TabIndex = 3;
-            this.BtOpt.Text = "button1";
-            this.BtOpt.UseVisualStyleBackColor = true;
-            this.BtOpt.Click += new System.EventHandler(this.BtOpt_Click);
             // 
             // TbData
             // 
@@ -50,18 +37,18 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TbData.Location = new System.Drawing.Point(0, 0);
+            this.TbData.Multiline = true;
             this.TbData.Name = "TbData";
-            this.TbData.Size = new System.Drawing.Size(320, 21);
-            this.TbData.TabIndex = 2;
+            this.TbData.Size = new System.Drawing.Size(350, 45);
+            this.TbData.TabIndex = 0;
             // 
-            // BeanSign
+            // BeanArea
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.BtOpt);
             this.Controls.Add(this.TbData);
-            this.Name = "BeanSign";
-            this.Size = new System.Drawing.Size(350, 24);
+            this.Name = "BeanArea";
+            this.Size = new System.Drawing.Size(350, 48);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -69,7 +56,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button BtOpt;
         private System.Windows.Forms.TextBox TbData;
     }
 }

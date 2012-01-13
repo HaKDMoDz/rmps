@@ -29,7 +29,7 @@ namespace Me.Amon.Model.Att
             }
             builder.Append(DoEscape(Name)).Append(',').Append(DoEscape(Data));
 
-            foreach (string tmp in ext)
+            foreach (string tmp in _Spec)
             {
                 builder.Append(',').Append(tmp);
             }
@@ -62,10 +62,10 @@ namespace Me.Amon.Model.Att
             Name = UnEscape(array[0].Replace("\f", "\\,"));
             Data = UnEscape(array[1].Replace("\f", "\\,"));
 
-            ext.Clear();
+            _Spec.Clear();
             for (int i = 2, j = array.Length; i < j; i += 1)
             {
-                ext.Add(array[i]);
+                _Spec.Add(array[i]);
             }
             return true;
         }
@@ -85,23 +85,23 @@ namespace Me.Amon.Model.Att
 
         public override void SetDefault()
         {
-            if (ext == null)
+            if (_Spec == null)
             {
-                this.ext = new List<string>(8);
+                this._Spec = new List<string>(8);
             }
             else
             {
-                ext.Clear();
+                _Spec.Clear();
             }
 
-            ext.Add(SPEC_VALUE_TRUE);
-            ext.Add("+0-");
-            ext.Add("0");
-            ext.Add("8");
-            ext.Add(SPEC_VALUE_NONE);
-            ext.Add(SPEC_VALUE_TRUE);
-            ext.Add("^");
-            ext.Add(SPEC_VALUE_FAIL);
+            _Spec.Add(SPEC_VALUE_TRUE);
+            _Spec.Add("+0-");
+            _Spec.Add("0");
+            _Spec.Add("8");
+            _Spec.Add(SPEC_VALUE_NONE);
+            _Spec.Add(SPEC_VALUE_TRUE);
+            _Spec.Add("^");
+            _Spec.Add(SPEC_VALUE_FAIL);
         }
     }
 }
