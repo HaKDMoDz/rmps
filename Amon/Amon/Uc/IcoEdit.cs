@@ -41,14 +41,14 @@ namespace Me.Amon.Uc
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
             dba.AddTable(IDat.APWD0500);
-            dba.AddWhere(IDat.APWD0502, _UserModel.Code);
+            dba.AddWhere(IDat.APWD0503, _UserModel.Code);
             dba.AddSort(IDat.APWD0501, true);
 
             using (DataTable dt = dba.ExecuteSelect())
             {
                 foreach (DataRow row in dt.Rows)
                 {
-                    LbDir.Items.Add(new Item { K = row[IDat.APWD0503] as string, V = row[IDat.APWD0504] as string, D = row[IDat.APWD0505] as string });
+                    LbDir.Items.Add(new Item { K = row[IDat.APWD0504] as string, V = row[IDat.APWD0505] as string, D = row[IDat.APWD0506] as string });
                 }
             }
 
@@ -120,8 +120,8 @@ namespace Me.Amon.Uc
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
             dba.AddTable(IDat.APWD0500);
-            dba.AddWhere(IDat.APWD0502, _UserModel.Code);
-            dba.AddWhere(IDat.APWD0503, item.K);
+            dba.AddWhere(IDat.APWD0503, _UserModel.Code);
+            dba.AddWhere(IDat.APWD0504, item.K);
             dba.ExecuteDelete();
             Directory.Delete(CurrentPath, true);
 
@@ -167,13 +167,13 @@ namespace Me.Amon.Uc
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
             dba.AddTable(IDat.APWD0500);
-            dba.AddParam(IDat.APWD0504, item.V);
-            dba.AddParam(IDat.APWD0505, item.D);
-            dba.AddParam(IDat.APWD0506, "");
+            dba.AddParam(IDat.APWD0505, item.V);
+            dba.AddParam(IDat.APWD0506, item.D);
+            dba.AddParam(IDat.APWD0507, "");
             if (CharUtil.IsValidateHash(item.K))
             {
-                dba.AddWhere(IDat.APWD0502, _UserModel.Code);
-                dba.AddWhere(IDat.APWD0503, item.K);
+                dba.AddWhere(IDat.APWD0503, _UserModel.Code);
+                dba.AddWhere(IDat.APWD0504, item.K);
                 dba.ExecuteUpdate();
                 LbDir.Items[LbDir.SelectedIndex] = item;
             }
@@ -181,8 +181,8 @@ namespace Me.Amon.Uc
             {
                 item.K = HashUtil.GetCurrTimeHex(true);
                 dba.AddParam(IDat.APWD0501, LbDir.Items.Count);
-                dba.AddParam(IDat.APWD0502, _UserModel.Code);
-                dba.AddParam(IDat.APWD0503, item.K);
+                dba.AddParam(IDat.APWD0503, _UserModel.Code);
+                dba.AddParam(IDat.APWD0504, item.K);
                 dba.ExecuteInsert();
 
                 Directory.CreateDirectory(DefaultPath + Path.DirectorySeparatorChar + item.K);

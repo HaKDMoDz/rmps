@@ -6,6 +6,11 @@
         /// 数据库常量：日期
         /// </summary>
         public const string SQL_NOW = "datetime('now')";
+        public const string VER_DB = "5";
+        public const int OPT_DEFAULT = 0;
+        public const int OPT_APPEND = 1;
+        public const int OPT_DELETE = -1;
+        public const int OPT_UPDATE = 2;
 
         #region 类别
         #region 一级类别
@@ -114,6 +119,14 @@
         /// 创建时间
         /// </summary>
         public const string C201020B = "C201020B";
+        /// <summary>
+        /// 版本控制
+        /// </summary>
+        public const string C201020C = "C201020C";
+        /// <summary>
+        /// 操作状态：0默认、1新增、2删除、3更新
+        /// </summary>
+        public const string C201020D = "C201020D";
         #endregion
         #endregion
 
@@ -124,19 +137,24 @@
         /// </summary>
         public const string APWD0000 = "APWD0000";
         /// <summary>
-        /// 数据索引
+        /// 一级索引
         /// </summary>
         public const string APWD0001 = "APWD0001";
         public const int APWD0001_SIZE = 16;
         /// <summary>
-        /// 配置信息
+        /// 二级索引
         /// </summary>
         public const string APWD0002 = "APWD0002";
         public const int APWD0002_SIZE = 1024;
         /// <summary>
-        /// 配置时间
+        /// 配置信息
         /// </summary>
         public const string APWD0003 = "APWD0003";
+        public const int APWD0003_SIZE = 1024;
+        /// <summary>
+        /// 配置时间
+        /// </summary>
+        public const string APWD0004 = "APWD0004";
         #endregion
 
         #region 口令信息表格
@@ -231,9 +249,13 @@
         /// </summary>
         public const string APWD0112 = "APWD0112";
         /// <summary>
-        /// 同步版本
+        /// 版本控制
         /// </summary>
         public const string APWD0113 = "APWD0113";
+        /// <summary>
+        /// 操作状态：0默认、1新增、2删除、3更新
+        /// </summary>
+        public const string APWD0114 = "APWD0114";
         #endregion
 
         #region 口令内容表格
@@ -246,15 +268,20 @@
         /// </summary>
         public const string APWD0201 = "APWD0201";
         /// <summary>
-        /// 口令索引
+        /// 用户代码
         /// </summary>
         public const string APWD0202 = "APWD0202";
-        public const int APWD0202_SIZE = 16;
+        public const int APWD0202_SIZE = 8;
+        /// <summary>
+        /// 口令索引
+        /// </summary>
+        public const string APWD0203 = "APWD0203";
+        public const int APWD0203_SIZE = 16;
         /// <summary>
         /// 口令内容
         /// </summary>
-        public const string APWD0203 = "APWD0203";
-        public const int APWD0203_SIZE = 4096;
+        public const string APWD0204 = "APWD0204";
+        public const int APWD0204_SIZE = 4096;
         #endregion
 
         #region 口令模板表格
@@ -308,6 +335,14 @@
         /// 创建日期
         /// </summary>
         public const string APWD030A = "APWD030A";
+        /// <summary>
+        /// 版本控制
+        /// </summary>
+        public const string APWD030B = "APWD030B";
+        /// <summary>
+        /// 操作状态：0默认、1新增、2删除、3更新
+        /// </summary>
+        public const string APWD030C = "APWD030C";
         #endregion
 
         #region 选项列表表格
@@ -320,30 +355,43 @@
         /// </summary>
         public const string APWD0401 = "APWD0401";
         /// <summary>
-        /// 属性索引
+        /// 用户代码
         /// </summary>
         public const string APWD0402 = "APWD0402";
-        public const int APWD0402_SIZE = 16;
+        public const int APWD0402_SIZE = 8;
         /// <summary>
-        /// 模板索引
+        /// 属性索引
         /// </summary>
         public const string APWD0403 = "APWD0403";
         public const int APWD0403_SIZE = 16;
         /// <summary>
-        /// 选项名称
+        /// 模板索引
         /// </summary>
         public const string APWD0404 = "APWD0404";
-        public const int APWD0404_SIZE = 64;
+        public const int APWD0404_SIZE = 16;
+        /// <summary>
+        /// 选项名称
+        /// </summary>
+        public const string APWD0405 = "APWD0405";
+        public const int APWD0405_SIZE = 64;
         /// <summary>
         /// 选项提示
         /// </summary>
-        public const string APWD0405 = "APWD0405";
-        public const int APWD0405_SIZE = 256;
+        public const string APWD0406 = "APWD0406";
+        public const int APWD0406_SIZE = 256;
         /// <summary>
         /// 选项说明
         /// </summary>
-        public const string APWD0406 = "APWD0406";
-        public const int APWD0406_SIZE = 2048;
+        public const string APWD0407 = "APWD0407";
+        public const int APWD0407_SIZE = 2048;
+        /// <summary>
+        /// 版本控制
+        /// </summary>
+        public const string APWD0408 = "APWD0408";
+        /// <summary>
+        /// 操作状态：0默认、1新增、2删除、3更新
+        /// </summary>
+        public const string APWD0409 = "APWD0409";
         #endregion
 
         #region 图标分类表格
@@ -356,30 +404,43 @@
         /// </summary>
         public const string APWD0501 = "APWD0501";
         /// <summary>
-        /// 类别索引
+        /// 用户代码
         /// </summary>
         public const string APWD0502 = "APWD0502";
         public const int APWD0502_SIZE = 16;
         /// <summary>
-        /// 类别名称
+        /// 类别索引
         /// </summary>
         public const string APWD0503 = "APWD0503";
-        public const int APWD0503_SIZE = 32;
+        public const int APWD0503_SIZE = 16;
+        /// <summary>
+        /// 类别名称
+        /// </summary>
+        public const string APWD0504 = "APWD0504";
+        public const int APWD0504_SIZE = 32;
         /// <summary>
         /// 类别提示
         /// </summary>
-        public const string APWD0504 = "APWD0504";
-        public const int APWD0504_SIZE = 256;
+        public const string APWD0505 = "APWD0505";
+        public const int APWD0505_SIZE = 256;
         /// <summary>
         /// 类别目录
         /// </summary>
-        public const string APWD0505 = "APWD0505";
-        public const int APWD0505_SIZE = 64;
+        public const string APWD0506 = "APWD0506";
+        public const int APWD0506_SIZE = 64;
         /// <summary>
         /// 类别备注
         /// </summary>
-        public const string APWD0506 = "APWD0506";
-        public const int APWD0506_SIZE = 2048;
+        public const string APWD0507 = "APWD0507";
+        public const int APWD0507_SIZE = 2048;
+        /// <summary>
+        /// 版本控制
+        /// </summary>
+        public const string APWD0508 = "APWD0508";
+        /// <summary>
+        /// 操作状态：0默认、1新增、2删除、3更新
+        /// </summary>
+        public const string APWD0509 = "APWD0509";
         #endregion
 
         #region 字符空间表格
@@ -392,9 +453,10 @@
         /// </summary>
         public const string APWD0601 = "APWD0601";
         /// <summary>
-        /// 使用状态
+        /// 用户代码
         /// </summary>
         public const string APWD0602 = "APWD0602";
+        public const int APWD0602_SIZE = 8;
         /// <summary>
         /// 空间索引
         /// </summary>
@@ -428,6 +490,14 @@
         /// 创建日期
         /// </summary>
         public const string APWD0609 = "APWD0609";
+        /// <summary>
+        /// 版本控制
+        /// </summary>
+        public const string APWD060A = "APWD060A";
+        /// <summary>
+        /// 操作状态：0默认、1新增、2删除、3更新
+        /// </summary>
+        public const string APWD060B = "APWD060B";
         #endregion
 
         #region 历史信息表格
@@ -537,15 +607,20 @@
         /// </summary>
         public const string APWD0B02 = "APWD0B02";
         /// <summary>
-        /// 口令索引
+        /// 用户代码
         /// </summary>
         public const string APWD0B03 = "APWD0B03";
         public const int APWD0B03_SIZE = APWD0202_SIZE;
         /// <summary>
-        /// 口令内容
+        /// 口令索引
         /// </summary>
         public const string APWD0B04 = "APWD0B04";
         public const int APWD0B04_SIZE = APWD0203_SIZE;
+        /// <summary>
+        /// 口令内容
+        /// </summary>
+        public const string APWD0B05 = "APWD0B05";
+        public const int APWD0B05_SIZE = APWD0204_SIZE;
         #endregion
         #endregion
 

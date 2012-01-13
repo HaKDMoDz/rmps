@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Me.Amon.Da;
+using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Pwd._Cat;
 using Me.Amon.Pwd._Lib;
@@ -70,6 +71,7 @@ namespace Me.Amon.Pwd
             dba.AddColumn(IDat.C2010208);
             dba.AddColumn(IDat.C2010209);
             dba.AddWhere(IDat.C2010202, _UserModel.Code);
+            dba.AddWhere(IDat.C201020D, ">", IDat.OPT_DELETE.ToString(), false);
             DataTable dt = dba.ExecuteSelect();
             InitCat(_RootNode, dt);
             _RootNode.Expand();
@@ -220,14 +222,14 @@ namespace Me.Amon.Pwd
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
             dba.AddTable(IDat.APWD0200);
-            dba.AddColumn(IDat.APWD0203);
-            dba.AddWhere(IDat.APWD0202, key.Id);
+            dba.AddColumn(IDat.APWD0204);
+            dba.AddWhere(IDat.APWD0203, key.Id);
             dba.AddSort(IDat.APWD0201);
             DataTable dt = dba.ExecuteSelect();
             StringBuilder buf = new StringBuilder();
             foreach (DataRow row in dt.Rows)
             {
-                buf.Append(row[IDat.APWD0203] as string);
+                buf.Append(row[IDat.APWD0204] as string);
             }
             _SafeModel.Decode(buf.ToString());
 
@@ -383,34 +385,34 @@ namespace Me.Amon.Pwd
         #region 类别编辑
         private void TmiAppendCat_Click(object sender, EventArgs e)
         {
-
+            AppendCat();
         }
 
         private void TmiUpdateCat_Click(object sender, EventArgs e)
         {
-
+            UpdateCat();
         }
 
         private void TmiDeleteCat_Click(object sender, EventArgs e)
         {
-
+            DeleteCat();
         }
         #endregion
 
         #region 口令编辑
         private void TmiAppendKey_Click(object sender, EventArgs e)
         {
-
+            AppendKey();
         }
 
         private void TmiUpdateKey_Click(object sender, EventArgs e)
         {
-
+            UpdateKey();
         }
 
         private void TmiDeleteKey_Click(object sender, EventArgs e)
         {
-
+            DeleteKey();
         }
         #endregion
 
@@ -723,77 +725,17 @@ namespace Me.Amon.Pwd
         #region 类别弹出菜单
         private void CmiAppendCat_Click(object sender, EventArgs e)
         {
-            CatEdit cat = new CatEdit();
-            cat.CallBackHandler = new Event.AmonHandler<Cat>(CatAppendHandler);
-            cat.Show(this, new Cat { });
-        }
-
-        private void CatAppendHandler(Cat cat)
-        {
-            TreeNode root = TvCatView.SelectedNode;
-
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(IDat.C2010200);
-            dba.AddParam(IDat.C2010201, root.Nodes.Count);
-            dba.AddParam(IDat.C2010202, _UserModel.Code);
-            dba.AddParam(IDat.C2010203, HashUtil.GetCurrTimeHex(false));
-            dba.AddParam(IDat.C2010204, root.Name);
-            dba.AddParam(IDat.C2010205, cat.Text);
-            dba.AddParam(IDat.C2010206, cat.Tips);
-            dba.AddParam(IDat.C2010207, cat.Icon);
-            dba.AddParam(IDat.C2010208, cat.Value);
-            dba.AddParam(IDat.C2010209, "");
-            dba.AddParam(IDat.C201020A, IDat.SQL_NOW, false);
-            dba.AddParam(IDat.C201020B, IDat.SQL_NOW, false);
-            dba.ExecuteInsert();
-
-            TreeNode node = new TreeNode();
-            node.Name = cat.Id;
-            node.Text = cat.Text;
-            node.ToolTipText = cat.Tips;
-            if (CharUtil.IsValidateHash(cat.Icon))
-            {
-                node.ImageKey = cat.Icon;
-            }
-            root.Nodes.Add(node);
+            AppendCat();
         }
 
         private void CmiUpdateCat_Click(object sender, EventArgs e)
         {
-            CatEdit cat = new CatEdit();
-            cat.CallBackHandler = new Event.AmonHandler<Cat>(CatUpdateHandler);
-            cat.Show(this);
-        }
-
-        private void CatUpdateHandler(Cat cat)
-        {
-            TreeNode node = TvCatView.SelectedNode;
-
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(IDat.C2010200);
-            dba.AddParam(IDat.C2010205, cat.Text);
-            dba.AddParam(IDat.C2010206, cat.Tips);
-            dba.AddParam(IDat.C2010207, cat.Icon);
-            dba.AddParam(IDat.C2010208, cat.Value);
-            dba.AddParam(IDat.C2010209, "");
-            dba.AddParam(IDat.C201020A, IDat.SQL_NOW, false);
-            dba.AddWhere(IDat.C2010202, _UserModel.Code);
-            dba.AddWhere(IDat.C2010203, HashUtil.GetCurrTimeHex(false));
-            if (1 != dba.ExecuteUpdate())
-            {
-                return;
-            }
-
-            node.Text = cat.Text;
-            node.ToolTipText = cat.Tips;
-            node.ImageKey = cat.Icon;
+            UpdateCat();
         }
 
         private void CmiDeleteCat_Click(object sender, EventArgs e)
         {
-
+            DeleteCat();
         }
 
         private void CmiEditIcon_Click(object sender, EventArgs e)
@@ -1082,14 +1024,135 @@ namespace Me.Amon.Pwd
         #region 类别处理
         private void AppendCat()
         {
+            CatEdit catEdit = new CatEdit();
+            catEdit.CallBackHandler = new AmonHandler<Cat>(CatAppendHandler);
+            catEdit.Show(this, new Cat());
+        }
+
+        private void CatAppendHandler(Cat cat)
+        {
+            TreeNode root = TvCatView.SelectedNode;
+
+            DBAccess dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(IDat.C2010200);
+            dba.AddParam(IDat.C2010201, root.Nodes.Count);
+            dba.AddParam(IDat.C2010202, _UserModel.Code);
+            dba.AddParam(IDat.C2010203, HashUtil.GetCurrTimeHex(false));
+            dba.AddParam(IDat.C2010204, root.Name);
+            dba.AddParam(IDat.C2010205, cat.Text);
+            dba.AddParam(IDat.C2010206, cat.Tips);
+            dba.AddParam(IDat.C2010207, cat.Icon);
+            dba.AddParam(IDat.C2010208, cat.Value);
+            dba.AddParam(IDat.C2010209, "");
+            dba.AddParam(IDat.C201020A, IDat.SQL_NOW, false);
+            dba.AddParam(IDat.C201020B, IDat.SQL_NOW, false);
+            dba.ExecuteInsert();
+
+            TreeNode node = new TreeNode();
+            node.Name = cat.Id;
+            node.Text = cat.Text;
+            node.ToolTipText = cat.Tips;
+            if (CharUtil.IsValidateHash(cat.Icon))
+            {
+                node.ImageKey = cat.Icon;
+            }
+            root.Nodes.Add(node);
         }
 
         private void UpdateCat()
         {
+            TreeNode node = TvCatView.SelectedNode;
+            if (node == null)
+            {
+                MessageBox.Show("请选择您要更新的类别！", "");
+                TvCatView.Focus();
+                return;
+            }
+
+            Cat cat = node.Tag as Cat;
+            if (cat == null || cat.Id == "0")
+            {
+                return;
+            }
+
+            CatEdit catEdit = new CatEdit();
+            catEdit.CallBackHandler = new AmonHandler<Cat>(CatUpdateHandler);
+            catEdit.Show(this, cat);
+        }
+
+        private void CatUpdateHandler(Cat cat)
+        {
+            TreeNode node = TvCatView.SelectedNode;
+
+            DBAccess dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(IDat.C2010200);
+            dba.AddParam(IDat.C2010205, cat.Text);
+            dba.AddParam(IDat.C2010206, cat.Tips);
+            dba.AddParam(IDat.C2010207, cat.Icon);
+            dba.AddParam(IDat.C2010208, cat.Value);
+            dba.AddParam(IDat.C2010209, "");
+            dba.AddParam(IDat.C201020A, IDat.SQL_NOW, false);
+            dba.AddWhere(IDat.C2010202, _UserModel.Code);
+            dba.AddWhere(IDat.C2010203, HashUtil.GetCurrTimeHex(false));
+            if (1 != dba.ExecuteUpdate())
+            {
+                return;
+            }
+
+            node.Text = cat.Text;
+            node.ToolTipText = cat.Tips;
+            node.ImageKey = cat.Icon;
         }
 
         private void DeleteCat()
         {
+            TreeNode node = TvCatView.SelectedNode;
+            if (node == null)
+            {
+                MessageBox.Show("请选择您要更新的类别！", "");
+                TvCatView.Focus();
+                return;
+            }
+
+            Cat cat = node.Tag as Cat;
+            if (cat == null || cat.Id == "0")
+            {
+                return;
+            }
+
+            if (node.Nodes.Count > 0)
+            {
+                MessageBox.Show("子类别不为空，不能删除！", "");
+                return;
+            }
+
+            DBAccess dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(IDat.APWD0100);
+            dba.AddColumn("COUNT(0)", "CNT");
+            dba.AddWhere(IDat.APWD0104, _UserModel.Code);
+            dba.AddWhere(IDat.APWD0106, cat.Id);
+            int cnt = (int)dba.ExecuteScalar();
+            if (cnt > 0)
+            {
+                MessageBox.Show("口令记录不为空，不能删除！", "");
+                return;
+            }
+
+            dba.ReInit();
+            dba.AddTable(IDat.C2010200);
+            dba.AddParam(IDat.C201020D, IDat.OPT_DELETE);
+            dba.AddWhere(IDat.C2010202, _UserModel.Code);
+            dba.AddWhere(IDat.C2010203, cat.Id);
+            dba.ExecuteUpdate();
+
+            TreeNode root = node.Parent;
+            if (root != null)
+            {
+                root.Nodes.Remove(node);
+            }
         }
         #endregion
 
@@ -1178,16 +1241,16 @@ namespace Me.Amon.Pwd
                     dba.ReInit();
                     dba.AddParam(IDat.APWD0B01, t);
                     dba.AddParam(IDat.APWD0B02, IDat.APWD0201);
-                    dba.AddParam(IDat.APWD0B03, IDat.APWD0202);
                     dba.AddParam(IDat.APWD0B04, IDat.APWD0203);
-                    dba.AddWhere(IDat.APWD0202, _SafeModel.Key.Id);
+                    dba.AddParam(IDat.APWD0B05, IDat.APWD0204);
+                    dba.AddWhere(IDat.APWD0203, _SafeModel.Key.Id);
                     dba.AddBackupBatch(IDat.APWD0B00, IDat.APWD0200);
                 }
                 #endregion
 
                 dba.ReInit();
                 dba.AddTable(IDat.APWD0200);
-                dba.AddWhere(IDat.APWD0202, _SafeModel.Key.Id);
+                dba.AddWhere(IDat.APWD0203, _SafeModel.Key.Id);
                 dba.AddDeleteBatch();
             }
 
@@ -1237,17 +1300,17 @@ namespace Me.Amon.Pwd
                 dba.ReInit();
                 dba.AddTable(IDat.APWD0200);
                 dba.AddParam(IDat.APWD0201, i++);
-                dba.AddParam(IDat.APWD0202, _SafeModel.Key.Id);
-                if (_SafeModel.Key.Password.Length - j > IDat.APWD0203_SIZE)
+                dba.AddParam(IDat.APWD0203, _SafeModel.Key.Id);
+                if (_SafeModel.Key.Password.Length - j > IDat.APWD0204_SIZE)
                 {
-                    dba.AddParam(IDat.APWD0203, _SafeModel.Key.Password.Substring(j, IDat.APWD0203_SIZE));
+                    dba.AddParam(IDat.APWD0204, _SafeModel.Key.Password.Substring(j, IDat.APWD0204_SIZE));
                 }
                 else
                 {
-                    dba.AddParam(IDat.APWD0203, _SafeModel.Key.Password.Substring(j));
+                    dba.AddParam(IDat.APWD0204, _SafeModel.Key.Password.Substring(j));
                 }
                 dba.AddInsertBatch();
-                j += IDat.APWD0203_SIZE;
+                j += IDat.APWD0204_SIZE;
             }
             #endregion
 

@@ -95,14 +95,14 @@ namespace Me.Amon.Pwd._Log
             dba.ReInit();
             dba.AddTable(IDat.APWD0B00);
             dba.AddWhere(IDat.APWD0B01, log.Id.ToString());
-            dba.AddWhere(IDat.APWD0B03, _Key.Id);
+            dba.AddWhere(IDat.APWD0B04, _Key.Id);
             dba.AddSort(IDat.APWD0B02, true);
             StringBuilder buf = new StringBuilder();
             using (DataTable dt = dba.ExecuteSelect())
             {
                 foreach (DataRow row in dt.Rows)
                 {
-                    buf.Append(row[IDat.APWD0B04] as string);
+                    buf.Append(row[IDat.APWD0B05] as string);
                 }
             }
             _SafeModel.Decode(buf.ToString());
@@ -173,9 +173,9 @@ namespace Me.Amon.Pwd._Log
                 dba.ReInit();
                 dba.AddParam(IDat.APWD0B01, t);
                 dba.AddParam(IDat.APWD0B02, IDat.APWD0201);
-                dba.AddParam(IDat.APWD0B03, IDat.APWD0202);
                 dba.AddParam(IDat.APWD0B04, IDat.APWD0203);
-                dba.AddWhere(IDat.APWD0202, _SafeModel.Key.Id);
+                dba.AddParam(IDat.APWD0B05, IDat.APWD0204);
+                dba.AddWhere(IDat.APWD0203, _SafeModel.Key.Id);
                 dba.AddBackupBatch(IDat.APWD0B00, IDat.APWD0200);
             }
             #endregion
@@ -202,15 +202,15 @@ namespace Me.Amon.Pwd._Log
 
             dba.ReInit();
             dba.AddTable(IDat.APWD0B00);
-            dba.AddWhere(IDat.APWD0B03, _Key.Id);
+            dba.AddWhere(IDat.APWD0B04, _Key.Id);
             dba.AddDeleteBatch();
 
             dba.ReInit();
             dba.AddParam(IDat.APWD0201, IDat.APWD0B02);
-            dba.AddParam(IDat.APWD0202, IDat.APWD0B03);
             dba.AddParam(IDat.APWD0203, IDat.APWD0B04);
+            dba.AddParam(IDat.APWD0204, IDat.APWD0B05);
             dba.AddParam(IDat.APWD0B01, log.Id.ToString());
-            dba.AddWhere(IDat.APWD0B03, _Key.Id);
+            dba.AddWhere(IDat.APWD0B04, _Key.Id);
             dba.AddBackupBatch(IDat.APWD0200, IDat.APWD0B00);
             #endregion
 
@@ -243,7 +243,7 @@ namespace Me.Amon.Pwd._Log
             dba.ReInit();
             dba.AddTable(IDat.APWD0B00);
             dba.AddWhere(IDat.APWD0B01, log.Id.ToString());
-            dba.AddWhere(IDat.APWD0B03, _Key.Id);
+            dba.AddWhere(IDat.APWD0B04, _Key.Id);
             dba.AddDeleteBatch();
 
             dba.ExecuteBatch();
@@ -266,7 +266,7 @@ namespace Me.Amon.Pwd._Log
 
             dba.ReInit();
             dba.AddTable(IDat.APWD0B00);
-            dba.AddWhere(IDat.APWD0B03, _Key.Id);
+            dba.AddWhere(IDat.APWD0B04, _Key.Id);
             dba.AddDeleteBatch();
 
             dba.ExecuteBatch();
