@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Pwd.Lib
+﻿namespace Me.Amon.Pwd._Lib
 {
     public interface ILibEdit
     {

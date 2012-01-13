@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Pwd.Cat
+﻿namespace Me.Amon.Pwd._Cat
 {
     partial class CatEdit
     {

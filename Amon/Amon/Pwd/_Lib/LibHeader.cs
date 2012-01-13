@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using Me.Amon.Util;
 
-namespace Me.Amon.Pwd.Lib
+namespace Me.Amon.Pwd._Lib
 {
     public partial class LibHeader : UserControl, ILibEdit
     {

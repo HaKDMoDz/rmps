@@ -5,8 +5,8 @@ using System.Text;
 using System.Windows.Forms;
 using Me.Amon.Da;
 using Me.Amon.Model;
-using Me.Amon.Pwd.Cat;
-using Me.Amon.Pwd.Lib;
+using Me.Amon.Pwd._Cat;
+using Me.Amon.Pwd._Lib;
 using Me.Amon.Pwd.Pad;
 using Me.Amon.Pwd.Pro;
 using Me.Amon.Pwd.Wiz;
@@ -52,7 +52,7 @@ namespace Me.Amon.Pwd
             _ViewModel = new ViewModel(_UserModel);
             _ViewModel.Load();
 
-            Model.Cat cat = new Model.Cat { Id = "0", Text = "阿木密码箱", Tips = "阿木密码箱" };
+            Cat cat = new Cat { Id = "0", Text = "阿木密码箱", Tips = "阿木密码箱" };
             IlCatList.Images.Add(cat.Id, BeanUtil.None);
             _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Id };
             _RootNode.Tag = cat;
@@ -724,11 +724,11 @@ namespace Me.Amon.Pwd
         private void CmiAppendCat_Click(object sender, EventArgs e)
         {
             CatEdit cat = new CatEdit();
-            cat.CallBackHandler = new Event.AmonHandler<Model.Cat>(CatAppendHandler);
-            cat.Show(this, new Model.Cat { });
+            cat.CallBackHandler = new Event.AmonHandler<Cat>(CatAppendHandler);
+            cat.Show(this, new Cat { });
         }
 
-        private void CatAppendHandler(Model.Cat cat)
+        private void CatAppendHandler(Cat cat)
         {
             TreeNode root = TvCatView.SelectedNode;
 
@@ -762,11 +762,11 @@ namespace Me.Amon.Pwd
         private void CmiUpdateCat_Click(object sender, EventArgs e)
         {
             CatEdit cat = new CatEdit();
-            cat.CallBackHandler = new Event.AmonHandler<Model.Cat>(CatUpdateHandler);
+            cat.CallBackHandler = new Event.AmonHandler<Cat>(CatUpdateHandler);
             cat.Show(this);
         }
 
-        private void CatUpdateHandler(Model.Cat cat)
+        private void CatUpdateHandler(Cat cat)
         {
             TreeNode node = TvCatView.SelectedNode;
 
@@ -1129,7 +1129,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            Model.Cat cat = node.Tag as Model.Cat;
+            Cat cat = node.Tag as Cat;
             if (cat == null)
             {
                 BeanUtil.ShowAlert("系统异常，请稍后重试！");

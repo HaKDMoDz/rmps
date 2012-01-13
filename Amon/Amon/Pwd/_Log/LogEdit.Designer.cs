@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Pwd.Log
+﻿namespace Me.Amon.Pwd._Log
 {
     partial class LogEdit
     {

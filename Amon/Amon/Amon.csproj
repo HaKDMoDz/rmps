@@ -126,10 +126,10 @@
     <Compile Include="Pwd\APwd.Designer.cs">
       <DependentUpon>APwd.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\Cat\CatEdit.cs">
+    <Compile Include="Pwd\_Cat\CatEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pwd\Cat\CatEdit.Designer.cs">
+    <Compile Include="Pwd\_Cat\CatEdit.Designer.cs">
       <DependentUpon>CatEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\FindBar.cs">
@@ -139,29 +139,29 @@
       <DependentUpon>FindBar.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\IPwd.cs" />
-    <Compile Include="Pwd\Lib\LibEdit.cs">
+    <Compile Include="Pwd\_Lib\LibEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pwd\Lib\LibEdit.Designer.cs">
+    <Compile Include="Pwd\_Lib\LibEdit.Designer.cs">
       <DependentUpon>LibEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\Lib\ILibEdit.cs" />
-    <Compile Include="Pwd\Lib\LibDetail.cs">
+    <Compile Include="Pwd\_Lib\ILibEdit.cs" />
+    <Compile Include="Pwd\_Lib\LibDetail.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\Lib\LibDetail.Designer.cs">
+    <Compile Include="Pwd\_Lib\LibDetail.Designer.cs">
       <DependentUpon>LibDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\Lib\LibHeader.cs">
+    <Compile Include="Pwd\_Lib\LibHeader.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\Lib\LibHeader.Designer.cs">
+    <Compile Include="Pwd\_Lib\LibHeader.Designer.cs">
       <DependentUpon>LibHeader.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\Log\LogEdit.cs">
+    <Compile Include="Pwd\_Log\LogEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pwd\Log\LogEdit.Designer.cs">
+    <Compile Include="Pwd\_Log\LogEdit.Designer.cs">
       <DependentUpon>LogEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\Pad\APad.cs">
@@ -529,22 +529,22 @@
     <EmbeddedResource Include="Pwd\APwd.resx">
       <DependentUpon>APwd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\Cat\CatEdit.resx">
+    <EmbeddedResource Include="Pwd\_Cat\CatEdit.resx">
       <DependentUpon>CatEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\FindBar.resx">
       <DependentUpon>FindBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\Lib\LibEdit.resx">
+    <EmbeddedResource Include="Pwd\_Lib\LibEdit.resx">
       <DependentUpon>LibEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\Lib\LibDetail.resx">
+    <EmbeddedResource Include="Pwd\_Lib\LibDetail.resx">
       <DependentUpon>LibDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\Lib\LibHeader.resx">
+    <EmbeddedResource Include="Pwd\_Lib\LibHeader.resx">
       <DependentUpon>LibHeader.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\Log\LogEdit.resx">
+    <EmbeddedResource Include="Pwd\_Log\LogEdit.resx">
       <DependentUpon>LogEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Pad\APad.resx">

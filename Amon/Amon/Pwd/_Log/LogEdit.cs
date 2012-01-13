@@ -6,7 +6,7 @@ using Me.Amon.Da;
 using Me.Amon.Model;
 using Me.Amon.Model.Att;
 
-namespace Me.Amon.Pwd.Log
+namespace Me.Amon.Pwd._Log
 {
     public partial class LogEdit : Form
     {
@@ -41,7 +41,7 @@ namespace Me.Amon.Pwd.Log
             DataTable dt = dba.ExecuteSelect();
             foreach (DataRow row in dt.Rows)
             {
-                Model.Log log = new Model.Log();
+                Log log = new Log();
                 log.Id = (long)row[IDat.APWD0A01];
                 LbLog.Items.Add(log);
             }
@@ -50,7 +50,7 @@ namespace Me.Amon.Pwd.Log
 
         private void LbLog_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Model.Log log = LbLog.SelectedItem as Model.Log;
+            Log log = LbLog.SelectedItem as Log;
             if (log == null)
             {
                 return;
@@ -129,7 +129,7 @@ namespace Me.Amon.Pwd.Log
 
         private void BtResume_Click(object sender, EventArgs e)
         {
-            Model.Log log = LbLog.SelectedItem as Model.Log;
+            Log log = LbLog.SelectedItem as Log;
             if (log == null)
             {
                 MessageBox.Show("请选择您要恢复到的记录！");
@@ -214,12 +214,12 @@ namespace Me.Amon.Pwd.Log
             dba.AddBackupBatch(IDat.APWD0200, IDat.APWD0B00);
             #endregion
 
-            LbLog.Items.Insert(0, new Model.Log { Id = t });
+            LbLog.Items.Insert(0, new Log { Id = t });
         }
 
         private void BtClearCur_Click(object sender, EventArgs e)
         {
-            Model.Log log = LbLog.SelectedItem as Model.Log;
+            Log log = LbLog.SelectedItem as Log;
             if (log == null)
             {
                 MessageBox.Show("请选择您要恢复到的记录！");

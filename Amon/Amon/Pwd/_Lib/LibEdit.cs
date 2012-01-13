@@ -5,16 +5,16 @@ using Me.Amon.Da;
 using Me.Amon.Model;
 using Me.Amon.Util;
 
-namespace Me.Amon.Pwd.Lib
+namespace Me.Amon.Pwd._Lib
 {
     public partial class LibEdit : Form
     {
         private TreeNode _Selected;
         private UserModel _UserModel;
         private DataModel _DataModel;
-        private Lib.ILibEdit _UcEditer;
-        private Lib.LibHeader _UcHeader;
-        private Lib.LibDetail _UcDetail;
+        private ILibEdit _UcEditer;
+        private LibHeader _UcHeader;
+        private LibDetail _UcDetail;
 
         public LibEdit()
         {
@@ -61,8 +61,8 @@ namespace Me.Amon.Pwd.Lib
                 }
             }
 
-            _UcHeader = new Lib.LibHeader(this);
-            _UcDetail = new Lib.LibDetail(this);
+            _UcHeader = new LibHeader(this);
+            _UcDetail = new LibDetail(this);
 
             _UcHeader.Location = new Point(6, 20);
             _UcHeader.Size = new Size(231, 183);

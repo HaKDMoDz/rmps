@@ -3,7 +3,7 @@ using Me.Amon.Model;
 using Me.Amon.Uc;
 using Me.Amon.Util;
 
-namespace Me.Amon.Pwd.Lib
+namespace Me.Amon.Pwd._Lib
 {
     public partial class LibDetail : UserControl, ILibEdit
     {
