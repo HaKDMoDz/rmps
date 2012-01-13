@@ -500,6 +500,13 @@ namespace Me.Amon.Da
             _ValueList.Add(value.ToString());
         }
 
+        public void AddStep(string param, long value)
+        {
+            _ParamList.Add(param);
+            _SignList.Add("=");
+            _ValueList.Add(param + "+" + value);
+        }
+
         /// <summary>
         /// 用户自定义关联条件
         /// </summary>

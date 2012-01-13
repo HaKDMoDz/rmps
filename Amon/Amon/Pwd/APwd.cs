@@ -1025,11 +1025,11 @@ namespace Me.Amon.Pwd
         private void AppendCat()
         {
             CatEdit catEdit = new CatEdit();
-            catEdit.CallBackHandler = new AmonHandler<Cat>(CatAppendHandler);
+            catEdit.CallBackHandler = new AmonHandler<Cat>(AppendCatHandler);
             catEdit.Show(this, new Cat());
         }
 
-        private void CatAppendHandler(Cat cat)
+        private void AppendCatHandler(Cat cat)
         {
             TreeNode root = TvCatView.SelectedNode;
 
@@ -1047,12 +1047,15 @@ namespace Me.Amon.Pwd
             dba.AddParam(IDat.C2010209, "");
             dba.AddParam(IDat.C201020A, IDat.SQL_NOW, false);
             dba.AddParam(IDat.C201020B, IDat.SQL_NOW, false);
+            dba.AddParam(IDat.C201020C, IDat.VER_DEFAULT);
+            dba.AddParam(IDat.C201020D, IDat.OPT_INSERT);
             dba.ExecuteInsert();
 
             TreeNode node = new TreeNode();
             node.Name = cat.Id;
             node.Text = cat.Text;
             node.ToolTipText = cat.Tips;
+            node.Tag = cat;
             if (CharUtil.IsValidateHash(cat.Icon))
             {
                 node.ImageKey = cat.Icon;
@@ -1077,11 +1080,11 @@ namespace Me.Amon.Pwd
             }
 
             CatEdit catEdit = new CatEdit();
-            catEdit.CallBackHandler = new AmonHandler<Cat>(CatUpdateHandler);
+            catEdit.CallBackHandler = new AmonHandler<Cat>(UpdateCatHandler);
             catEdit.Show(this, cat);
         }
 
-        private void CatUpdateHandler(Cat cat)
+        private void UpdateCatHandler(Cat cat)
         {
             TreeNode node = TvCatView.SelectedNode;
 
@@ -1094,6 +1097,8 @@ namespace Me.Amon.Pwd
             dba.AddParam(IDat.C2010208, cat.Value);
             dba.AddParam(IDat.C2010209, "");
             dba.AddParam(IDat.C201020A, IDat.SQL_NOW, false);
+            dba.AddStep(IDat.C201020C, 1);
+            dba.AddParam(IDat.C201020D, IDat.OPT_UPDATE);
             dba.AddWhere(IDat.C2010202, _UserModel.Code);
             dba.AddWhere(IDat.C2010203, HashUtil.GetCurrTimeHex(false));
             if (1 != dba.ExecuteUpdate())

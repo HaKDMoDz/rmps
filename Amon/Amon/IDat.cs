@@ -7,9 +7,10 @@
         /// </summary>
         public const string SQL_NOW = "datetime('now')";
         public const string VER_DB = "5";
-        public const int OPT_DEFAULT = 0;
-        public const int OPT_APPEND = 1;
+        public const int VER_DEFAULT = 1;
         public const int OPT_DELETE = -1;
+        public const int OPT_DEFAULT = 0;
+        public const int OPT_INSERT = 1;
         public const int OPT_UPDATE = 2;
 
         #region 类别
@@ -124,7 +125,7 @@
         /// </summary>
         public const string C201020C = "C201020C";
         /// <summary>
-        /// 操作状态：0默认、1新增、2删除、3更新
+        /// 操作状态：0删除、1默认、2新增、3更新
         /// </summary>
         public const string C201020D = "C201020D";
         #endregion
@@ -253,7 +254,7 @@
         /// </summary>
         public const string APWD0113 = "APWD0113";
         /// <summary>
-        /// 操作状态：0默认、1新增、2删除、3更新
+        /// 操作状态：0删除、1默认、2新增、3更新
         /// </summary>
         public const string APWD0114 = "APWD0114";
         #endregion
@@ -340,7 +341,7 @@
         /// </summary>
         public const string APWD030B = "APWD030B";
         /// <summary>
-        /// 操作状态：0默认、1新增、2删除、3更新
+        /// 操作状态：0删除、1默认、2新增、3更新
         /// </summary>
         public const string APWD030C = "APWD030C";
         #endregion
@@ -389,7 +390,7 @@
         /// </summary>
         public const string APWD0408 = "APWD0408";
         /// <summary>
-        /// 操作状态：0默认、1新增、2删除、3更新
+        /// 操作状态：0删除、1默认、2新增、3更新
         /// </summary>
         public const string APWD0409 = "APWD0409";
         #endregion
@@ -438,7 +439,7 @@
         /// </summary>
         public const string APWD0508 = "APWD0508";
         /// <summary>
-        /// 操作状态：0默认、1新增、2删除、3更新
+        /// 操作状态：0删除、1默认、2新增、3更新
         /// </summary>
         public const string APWD0509 = "APWD0509";
         #endregion
@@ -495,7 +496,7 @@
         /// </summary>
         public const string APWD060A = "APWD060A";
         /// <summary>
-        /// 操作状态：0默认、1新增、2删除、3更新
+        /// 操作状态：0删除、1默认、2新增、3更新
         /// </summary>
         public const string APWD060B = "APWD060B";
         #endregion
