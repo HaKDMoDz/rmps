@@ -17,6 +17,8 @@ namespace Me.Amon.Pwd.Pro
         #region 接口实现
         public Control Control { get { return this; } }
 
+        public string Title { get { return "向导"; } }
+
         public bool ShowData(Model.AAtt att)
         {
             _Att = att;

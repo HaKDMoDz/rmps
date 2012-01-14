@@ -7,6 +7,8 @@ namespace Me.Amon.Pwd.Pro
     {
         Control Control { get; }
 
+        string Title { get; }
+
         bool ShowData(AAtt att);
 
         void Copy();

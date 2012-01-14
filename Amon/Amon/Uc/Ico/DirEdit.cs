@@ -18,6 +18,9 @@ namespace Me.Amon.Uc.Ico
             _IcoEdit = icoEdit;
 
             InitializeComponent();
+
+            _IcoEdit.AcceptButton = BtUpdate;
+            _IcoEdit.CancelButton = BtCancel;
         }
 
         public void ShowData(Item item)

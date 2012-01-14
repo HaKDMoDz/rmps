@@ -539,6 +539,9 @@
     <EmbeddedResource Include="Pwd\APwd.resx">
       <DependentUpon>APwd.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\APro.resx">
+      <DependentUpon>APro.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pwd\_Cat\CatEdit.resx">
       <DependentUpon>CatEdit.cs</DependentUpon>
     </EmbeddedResource>

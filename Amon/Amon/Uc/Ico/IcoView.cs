@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Drawing;
-using System.IO;
-using Me.Amon.Util;
 using System.Drawing.Imaging;
+using System.IO;
+using System.Windows.Forms;
+using Me.Amon.Util;
 
 namespace Me.Amon.Uc.Ico
 {
@@ -21,6 +21,9 @@ namespace Me.Amon.Uc.Ico
             _IcoEdit = icoEdit;
 
             InitializeComponent();
+
+            _IcoEdit.AcceptButton = BtChoose;
+            _IcoEdit.CancelButton = BtCancel;
         }
 
         public void ShowData(string path)

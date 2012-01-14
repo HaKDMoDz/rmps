@@ -61,7 +61,7 @@ namespace Me.Amon.Pwd
             IlCatList.Images.Add(cat.Icon, BeanUtil.CatNan);
             _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Id };
             _RootNode.Tag = cat;
-            TvCatView.Nodes.Add(_RootNode);
+            TvCatTree.Nodes.Add(_RootNode);
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
@@ -138,7 +138,7 @@ namespace Me.Amon.Pwd
 
         #region 事件处理
         #region 界面事件
-        private void TvCatView_AfterSelect(object sender, TreeViewEventArgs e)
+        private void TvCatTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeNode node = e.Node;
             if (node == null)
@@ -589,34 +589,49 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 视图菜单
+        private void TmiViewPro_Click(object sender, EventArgs e)
+        {
+            ChangeView(1);
+        }
+
+        private void TmiViewWiz_Click(object sender, EventArgs e)
+        {
+            ChangeView(2);
+        }
+
+        private void TmiViewPad_Click(object sender, EventArgs e)
+        {
+            ChangeView(3);
+        }
+
         private void TmiMenu_Click(object sender, EventArgs e)
         {
-
+            SetMenuVisible(!TmMenu.Visible);
         }
 
         private void TmiTool_Click(object sender, EventArgs e)
         {
-
+            SetToolVisible(!TsTool.Visible);
         }
 
         private void TmiInfo_Click(object sender, EventArgs e)
         {
-
+            SetInfoVisible(!SsInfo.Visible);
         }
 
         private void TmiCatView_Click(object sender, EventArgs e)
         {
-
+            SetCatViewVisible(!TvCatTree.Visible);
         }
 
         private void TmiKeyList_Click(object sender, EventArgs e)
         {
-            ShowHotKeys();
+            SetKeyListVisible(!LbKeyList.Visible);
         }
 
         private void TmiFindBar_Click(object sender, EventArgs e)
         {
-
+            SetFindBarVisible(!_FindBar.Visible);
         }
         #endregion
 
@@ -1001,6 +1016,11 @@ namespace Me.Amon.Pwd
             HSplit.Panel2.Controls.Clear();
             HSplit.Panel2.Controls.Add(uc);
         }
+
+        public void ShowTips(Control control, string caption)
+        {
+            TpTips.SetToolTip(control, caption);
+        }
         #endregion
 
         #region 私有方法
@@ -1020,7 +1040,8 @@ namespace Me.Amon.Pwd
                 case 1:
                     if (_ProView == null)
                     {
-                        _ProView = new APro(_SafeModel, _DataModel);
+                        _ProView = new APro();
+                        _ProView.Init(this, _SafeModel, _DataModel);
                     }
                     _PwdView = _ProView;
                     _LastView = view;
@@ -1028,7 +1049,8 @@ namespace Me.Amon.Pwd
                 case 2:
                     if (_WizView == null)
                     {
-                        _WizView = new AWiz(_SafeModel, _DataModel);
+                        _WizView = new AWiz();
+                        _WizView.Init(this, _SafeModel, _DataModel);
                     }
                     _PwdView = _WizView;
                     _LastView = view;
@@ -1036,7 +1058,8 @@ namespace Me.Amon.Pwd
                 case 3:
                     if (_PadView == null)
                     {
-                        _PadView = new APad(_SafeModel, _DataModel);
+                        _PadView = new APad();
+                        _PadView.Init(this, _SafeModel, _DataModel);
                     }
                     _PwdView = _PadView;
                     _LastView = view;
@@ -1046,6 +1069,46 @@ namespace Me.Amon.Pwd
                     return;
             }
             _PwdView.InitView(TpGrid);
+        }
+
+        private void SetMenuVisible(bool visible)
+        {
+            TmMenu.Visible = visible;
+            TmiMenu.Checked = visible;
+            TsbMenu.Checked = visible;
+        }
+
+        private void SetToolVisible(bool visible)
+        {
+            TsTool.Visible = visible;
+            TmiTool.Checked = visible;
+            TsbTool.Checked = visible;
+        }
+
+        private void SetInfoVisible(bool visible)
+        {
+            SsInfo.Visible = visible;
+            TmiInfo.Checked = visible;
+            TsbInfo.Checked = visible;
+        }
+
+        private void SetCatViewVisible(bool visible)
+        {
+            VSplit.Panel1Collapsed = !visible;
+            TmiCatView.Checked = visible;
+        }
+
+        private void SetKeyListVisible(bool visible)
+        {
+            VSplit.Panel2Collapsed = !visible;
+            TmiKeyList.Checked = visible;
+        }
+
+        private void SetFindBarVisible(bool visible)
+        {
+            //TpGrid.RowStyles[0].Height = 0;
+            _FindBar.Visible = visible;
+            TmiFindBar.Checked = visible;
         }
 
         #region 类别处理
@@ -1101,11 +1164,11 @@ namespace Me.Amon.Pwd
 
         private void UpdateCat()
         {
-            TreeNode node = TvCatView.SelectedNode;
+            TreeNode node = TvCatTree.SelectedNode;
             if (node == null)
             {
                 MessageBox.Show("请选择您要更新的类别！", "");
-                TvCatView.Focus();
+                TvCatTree.Focus();
                 return;
             }
 
@@ -1122,7 +1185,7 @@ namespace Me.Amon.Pwd
 
         private void UpdateCatHandler(Cat cat)
         {
-            TreeNode node = TvCatView.SelectedNode;
+            TreeNode node = TvCatTree.SelectedNode;
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
@@ -1149,11 +1212,11 @@ namespace Me.Amon.Pwd
 
         private void DeleteCat()
         {
-            TreeNode node = TvCatView.SelectedNode;
+            TreeNode node = TvCatTree.SelectedNode;
             if (node == null)
             {
                 MessageBox.Show("请选择您要更新的类别！", "");
-                TvCatView.Focus();
+                TvCatTree.Focus();
                 return;
             }
 
@@ -1219,11 +1282,11 @@ namespace Me.Amon.Pwd
 
         private void UpdateKey()
         {
-            TreeNode node = TvCatView.SelectedNode;
+            TreeNode node = TvCatTree.SelectedNode;
             if (node == null)
             {
                 BeanUtil.ShowAlert("请选择类别！");
-                TvCatView.Focus();
+                TvCatTree.Focus();
                 return;
             }
 
@@ -1372,7 +1435,7 @@ namespace Me.Amon.Pwd
             key = key.Trim();
             if (string.IsNullOrEmpty(key))
             {
-                TvCatView.SelectedNode = _LastNode;
+                TvCatTree.SelectedNode = _LastNode;
                 return;
             }
 
@@ -1386,7 +1449,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            TvCatView.SelectedNode = null;
+            TvCatTree.SelectedNode = null;
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();

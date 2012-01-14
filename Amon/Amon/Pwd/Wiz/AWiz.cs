@@ -6,6 +6,7 @@ namespace Me.Amon.Pwd.Wiz
 {
     public partial class AWiz : UserControl, IPwd
     {
+        private APwd _APwd;
         private IWizView _Last;
         private BeanInfo _Info;
         private BeanHead _Head;
@@ -18,12 +19,11 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
         }
 
-        public AWiz(SafeModel safeModel, DataModel dataModel)
+        public void Init(APwd apwd, SafeModel safeModel, DataModel dataModel)
         {
+            _APwd = apwd;
             _SafeModel = safeModel;
             _DataModel = dataModel;
-
-            InitializeComponent();
         }
 
         #region 接口实现
@@ -81,6 +81,11 @@ namespace Me.Amon.Pwd.Wiz
         {
         }
         #endregion
+
+        public void ShowTips(Control control, string caption)
+        {
+            _APwd.ShowTips(control, caption);
+        }
 
         private void BtPrev_Click(object sender, EventArgs e)
         {

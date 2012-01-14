@@ -5,6 +5,7 @@ namespace Me.Amon.Pwd.Pad
 {
     public partial class APad : UserControl, IPwd
     {
+        private APwd _APwd;
         private SafeModel _SafeModel;
 
         public APad()
@@ -12,11 +13,14 @@ namespace Me.Amon.Pwd.Pad
             InitializeComponent();
         }
 
-        public APad(SafeModel safeModel, DataModel dataModel)
+        public void Init(APwd apwd, SafeModel safeModel, DataModel dataModel)
         {
+            _APwd = apwd;
             _SafeModel = safeModel;
+        }
 
-            InitializeComponent();
+        public void Init()
+        {
         }
 
         #region 接口实现
@@ -64,5 +68,10 @@ namespace Me.Amon.Pwd.Pad
         {
         }
         #endregion
+
+        public void ShowTips(Control control, string caption)
+        {
+            _APwd.ShowTips(control, caption);
+        }
     }
 }

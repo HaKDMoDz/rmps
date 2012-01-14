@@ -133,7 +133,23 @@ namespace Me.Amon.Model
             _AttList.Clear();
         }
 
-        public void BindTo(DataGrid grid)
+        public void Remove(AAtt att)
+        {
+            if (att.Type < AAtt.TYPE_GUID)
+            {
+                _AttList.Remove(att);
+            }
+        }
+
+        public void RemoveAt(int index)
+        {
+            if (index >= AAtt.HEAD_SIZE && index <= _AttList.Count)
+            {
+                _AttList.RemoveAt(index);
+            }
+        }
+
+        public void BindTo(DataGridView grid)
         {
             grid.DataSource = _AttList;
         }

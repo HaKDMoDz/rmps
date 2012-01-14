@@ -12,10 +12,14 @@ namespace Me.Amon.Pwd.Pro
         public BeanText()
         {
             InitializeComponent();
+
+            Name = "文本";
         }
 
         #region 接口实现
         public Control Control { get { return this; } }
+
+        public string Title { get { return "文本"; } }
 
         public bool ShowData(AAtt att)
         {
