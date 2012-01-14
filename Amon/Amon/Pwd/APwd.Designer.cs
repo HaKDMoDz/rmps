@@ -112,7 +112,7 @@
             this.TmuExport = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiExportTxt = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiExportXml = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiImport = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmuImport = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiImportTxt = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiImportXml = new System.Windows.Forms.ToolStripMenuItem();
             this.TmuUser = new System.Windows.Forms.ToolStripMenuItem();
@@ -443,7 +443,7 @@
             this.TmMenu.Location = new System.Drawing.Point(0, 0);
             this.TmMenu.Name = "TmMenu";
             this.TmMenu.Size = new System.Drawing.Size(624, 25);
-            this.TmMenu.TabIndex = 2;
+            this.TmMenu.TabIndex = 0;
             this.TmMenu.Text = "menuStrip1";
             // 
             // TmuFile
@@ -473,54 +473,54 @@
             // TmiAppendCat
             // 
             this.TmiAppendCat.Name = "TmiAppendCat";
-            this.TmiAppendCat.Size = new System.Drawing.Size(152, 22);
+            this.TmiAppendCat.Size = new System.Drawing.Size(124, 22);
             this.TmiAppendCat.Text = "添加类别";
             this.TmiAppendCat.Click += new System.EventHandler(this.TmiAppendCat_Click);
             // 
             // TmiUpdateCat
             // 
             this.TmiUpdateCat.Name = "TmiUpdateCat";
-            this.TmiUpdateCat.Size = new System.Drawing.Size(152, 22);
+            this.TmiUpdateCat.Size = new System.Drawing.Size(124, 22);
             this.TmiUpdateCat.Text = "更新类别";
             this.TmiUpdateCat.Click += new System.EventHandler(this.TmiUpdateCat_Click);
             // 
             // TmiDeleteCat
             // 
             this.TmiDeleteCat.Name = "TmiDeleteCat";
-            this.TmiDeleteCat.Size = new System.Drawing.Size(152, 22);
+            this.TmiDeleteCat.Size = new System.Drawing.Size(124, 22);
             this.TmiDeleteCat.Text = "删除类别";
             this.TmiDeleteCat.Click += new System.EventHandler(this.TmiDeleteCat_Click);
             // 
             // TmiEditSep0
             // 
             this.TmiEditSep0.Name = "TmiEditSep0";
-            this.TmiEditSep0.Size = new System.Drawing.Size(149, 6);
+            this.TmiEditSep0.Size = new System.Drawing.Size(121, 6);
             // 
             // TmiAppendKey
             // 
             this.TmiAppendKey.Name = "TmiAppendKey";
-            this.TmiAppendKey.Size = new System.Drawing.Size(152, 22);
+            this.TmiAppendKey.Size = new System.Drawing.Size(124, 22);
             this.TmiAppendKey.Text = "添加记录";
             this.TmiAppendKey.Click += new System.EventHandler(this.TmiAppendKey_Click);
             // 
             // TmiUpdateKey
             // 
             this.TmiUpdateKey.Name = "TmiUpdateKey";
-            this.TmiUpdateKey.Size = new System.Drawing.Size(152, 22);
+            this.TmiUpdateKey.Size = new System.Drawing.Size(124, 22);
             this.TmiUpdateKey.Text = "更新记录";
             this.TmiUpdateKey.Click += new System.EventHandler(this.TmiUpdateKey_Click);
             // 
             // TmiDeleteKey
             // 
             this.TmiDeleteKey.Name = "TmiDeleteKey";
-            this.TmiDeleteKey.Size = new System.Drawing.Size(152, 22);
+            this.TmiDeleteKey.Size = new System.Drawing.Size(124, 22);
             this.TmiDeleteKey.Text = "删除记录";
             this.TmiDeleteKey.Click += new System.EventHandler(this.TmiDeleteKey_Click);
             // 
             // TmiEditSep1
             // 
             this.TmiEditSep1.Name = "TmiEditSep1";
-            this.TmiEditSep1.Size = new System.Drawing.Size(149, 6);
+            this.TmiEditSep1.Size = new System.Drawing.Size(121, 6);
             // 
             // TmuAppendAtt
             // 
@@ -536,7 +536,7 @@
             this.TmiAppendAttFile,
             this.TmiAppendAttLine});
             this.TmuAppendAtt.Name = "TmuAppendAtt";
-            this.TmuAppendAtt.Size = new System.Drawing.Size(152, 22);
+            this.TmuAppendAtt.Size = new System.Drawing.Size(124, 22);
             this.TmuAppendAtt.Text = "添加属性";
             // 
             // TmiAppendAttText
@@ -623,7 +623,7 @@
             this.TmiUpdateAttFile,
             this.TmiUpdateAttLine});
             this.TmuUpdateAtt.Name = "TmuUpdateAtt";
-            this.TmuUpdateAtt.Size = new System.Drawing.Size(152, 22);
+            this.TmuUpdateAtt.Size = new System.Drawing.Size(124, 22);
             this.TmuUpdateAtt.Text = "转换属性";
             // 
             // TmiUpdateAttText
@@ -699,7 +699,7 @@
             // TmiDeleteAtt
             // 
             this.TmiDeleteAtt.Name = "TmiDeleteAtt";
-            this.TmiDeleteAtt.Size = new System.Drawing.Size(152, 22);
+            this.TmiDeleteAtt.Size = new System.Drawing.Size(124, 22);
             this.TmiDeleteAtt.Text = "删除属性";
             this.TmiDeleteAtt.Click += new System.EventHandler(this.TmiDeleteAtt_Click);
             // 
@@ -781,7 +781,7 @@
             this.TmiResuma,
             this.TmiDataSep1,
             this.TmuExport,
-            this.TmiImport});
+            this.TmuImport});
             this.TmuData.Name = "TmuData";
             this.TmuData.Size = new System.Drawing.Size(61, 21);
             this.TmuData.Text = "数据(&D)";
@@ -789,33 +789,33 @@
             // TmiSync
             // 
             this.TmiSync.Name = "TmiSync";
-            this.TmiSync.Size = new System.Drawing.Size(152, 22);
+            this.TmiSync.Size = new System.Drawing.Size(100, 22);
             this.TmiSync.Text = "同步";
             this.TmiSync.Click += new System.EventHandler(this.TmiSync_Click);
             // 
             // TmiDataSep0
             // 
             this.TmiDataSep0.Name = "TmiDataSep0";
-            this.TmiDataSep0.Size = new System.Drawing.Size(149, 6);
+            this.TmiDataSep0.Size = new System.Drawing.Size(97, 6);
             // 
             // TmiBackup
             // 
             this.TmiBackup.Name = "TmiBackup";
-            this.TmiBackup.Size = new System.Drawing.Size(152, 22);
+            this.TmiBackup.Size = new System.Drawing.Size(100, 22);
             this.TmiBackup.Text = "备份";
             this.TmiBackup.Click += new System.EventHandler(this.TmiBackup_Click);
             // 
             // TmiResuma
             // 
             this.TmiResuma.Name = "TmiResuma";
-            this.TmiResuma.Size = new System.Drawing.Size(152, 22);
+            this.TmiResuma.Size = new System.Drawing.Size(100, 22);
             this.TmiResuma.Text = "恢复";
             this.TmiResuma.Click += new System.EventHandler(this.TmiResuma_Click);
             // 
             // TmiDataSep1
             // 
             this.TmiDataSep1.Name = "TmiDataSep1";
-            this.TmiDataSep1.Size = new System.Drawing.Size(149, 6);
+            this.TmiDataSep1.Size = new System.Drawing.Size(97, 6);
             // 
             // TmuExport
             // 
@@ -823,7 +823,7 @@
             this.TmiExportTxt,
             this.TmiExportXml});
             this.TmuExport.Name = "TmuExport";
-            this.TmuExport.Size = new System.Drawing.Size(152, 22);
+            this.TmuExport.Size = new System.Drawing.Size(100, 22);
             this.TmuExport.Text = "导出";
             // 
             // TmiExportTxt
@@ -842,12 +842,12 @@
             // 
             // TmiImport
             // 
-            this.TmiImport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TmuImport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TmiImportTxt,
             this.TmiImportXml});
-            this.TmiImport.Name = "TmiImport";
-            this.TmiImport.Size = new System.Drawing.Size(152, 22);
-            this.TmiImport.Text = "导入";
+            this.TmuImport.Name = "TmiImport";
+            this.TmuImport.Size = new System.Drawing.Size(100, 22);
+            this.TmuImport.Text = "导入";
             // 
             // TmiImportTxt
             // 
@@ -943,31 +943,31 @@
             // TmiHelp
             // 
             this.TmiHelp.Name = "TmiHelp";
-            this.TmiHelp.Size = new System.Drawing.Size(152, 22);
+            this.TmiHelp.Size = new System.Drawing.Size(128, 22);
             this.TmiHelp.Text = "帮助(&H)";
             this.TmiHelp.Click += new System.EventHandler(this.TmiHelp_Click);
             // 
             // TmiHelpSep0
             // 
             this.TmiHelpSep0.Name = "TmiHelpSep0";
-            this.TmiHelpSep0.Size = new System.Drawing.Size(149, 6);
+            this.TmiHelpSep0.Size = new System.Drawing.Size(125, 6);
             // 
             // TmiKeys
             // 
             this.TmiKeys.Name = "TmiKeys";
-            this.TmiKeys.Size = new System.Drawing.Size(152, 22);
+            this.TmiKeys.Size = new System.Drawing.Size(128, 22);
             this.TmiKeys.Text = "快捷键(&K)";
             this.TmiKeys.Click += new System.EventHandler(this.TmiKeys_Click);
             // 
             // TmiHelpSep1
             // 
             this.TmiHelpSep1.Name = "TmiHelpSep1";
-            this.TmiHelpSep1.Size = new System.Drawing.Size(149, 6);
+            this.TmiHelpSep1.Size = new System.Drawing.Size(125, 6);
             // 
             // TmiAbout
             // 
             this.TmiAbout.Name = "TmiAbout";
-            this.TmiAbout.Size = new System.Drawing.Size(152, 22);
+            this.TmiAbout.Size = new System.Drawing.Size(128, 22);
             this.TmiAbout.Text = "关于(&A)";
             this.TmiAbout.Click += new System.EventHandler(this.TmiAbout_Click);
             // 
@@ -977,12 +977,12 @@
             // TcTool.ContentPanel
             // 
             this.TcTool.ContentPanel.Controls.Add(this.HSplit);
-            this.TcTool.ContentPanel.Size = new System.Drawing.Size(624, 370);
+            this.TcTool.ContentPanel.Size = new System.Drawing.Size(624, 395);
             this.TcTool.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TcTool.Location = new System.Drawing.Point(0, 25);
+            this.TcTool.Location = new System.Drawing.Point(0, 0);
             this.TcTool.Name = "TcTool";
-            this.TcTool.Size = new System.Drawing.Size(624, 395);
-            this.TcTool.TabIndex = 3;
+            this.TcTool.Size = new System.Drawing.Size(624, 420);
+            this.TcTool.TabIndex = 1;
             this.TcTool.Text = "toolStripContainer1";
             // 
             // TcTool.TopToolStripPanel
@@ -1004,7 +1004,7 @@
             // HSplit.Panel2
             // 
             this.HSplit.Panel2.Controls.Add(this.TpGrid);
-            this.HSplit.Size = new System.Drawing.Size(600, 364);
+            this.HSplit.Size = new System.Drawing.Size(600, 389);
             this.HSplit.SplitterDistance = 200;
             this.HSplit.TabIndex = 0;
             this.HSplit.TabStop = false;
@@ -1023,8 +1023,8 @@
             // VSplit.Panel2
             // 
             this.VSplit.Panel2.Controls.Add(this.LbKeyList);
-            this.VSplit.Size = new System.Drawing.Size(200, 364);
-            this.VSplit.SplitterDistance = 200;
+            this.VSplit.Size = new System.Drawing.Size(200, 389);
+            this.VSplit.SplitterDistance = 213;
             this.VSplit.TabIndex = 0;
             this.VSplit.TabStop = false;
             // 
@@ -1037,7 +1037,7 @@
             this.TvCatView.Location = new System.Drawing.Point(0, 0);
             this.TvCatView.Name = "TvCatView";
             this.TvCatView.SelectedImageIndex = 0;
-            this.TvCatView.Size = new System.Drawing.Size(200, 200);
+            this.TvCatView.Size = new System.Drawing.Size(200, 213);
             this.TvCatView.TabIndex = 0;
             this.TvCatView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvCatView_AfterSelect);
             // 
@@ -1056,7 +1056,7 @@
             this.LbKeyList.ItemHeight = 12;
             this.LbKeyList.Location = new System.Drawing.Point(0, 0);
             this.LbKeyList.Name = "LbKeyList";
-            this.LbKeyList.Size = new System.Drawing.Size(200, 160);
+            this.LbKeyList.Size = new System.Drawing.Size(200, 172);
             this.LbKeyList.TabIndex = 0;
             this.LbKeyList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.LbKeyList_DrawItem);
             this.LbKeyList.SelectedIndexChanged += new System.EventHandler(this.LbKeyList_SelectedIndexChanged);
@@ -1072,7 +1072,7 @@
             this.TpGrid.RowCount = 2;
             this.TpGrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
             this.TpGrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TpGrid.Size = new System.Drawing.Size(396, 364);
+            this.TpGrid.Size = new System.Drawing.Size(396, 389);
             this.TpGrid.TabIndex = 0;
             // 
             // FbFind
@@ -1097,7 +1097,7 @@
             this.TsbToolSep1});
             this.TsTool.Location = new System.Drawing.Point(3, 0);
             this.TsTool.Name = "TsTool";
-            this.TsTool.Size = new System.Drawing.Size(193, 25);
+            this.TsTool.Size = new System.Drawing.Size(162, 25);
             this.TsTool.TabIndex = 0;
             // 
             // TsbAppend
@@ -1175,7 +1175,7 @@
             this.SsInfo.Location = new System.Drawing.Point(0, 420);
             this.SsInfo.Name = "SsInfo";
             this.SsInfo.Size = new System.Drawing.Size(624, 22);
-            this.SsInfo.TabIndex = 4;
+            this.SsInfo.TabIndex = 2;
             this.SsInfo.Text = "statusStrip1";
             // 
             // CmAtt
@@ -1373,8 +1373,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 442);
-            this.Controls.Add(this.TcTool);
             this.Controls.Add(this.TmMenu);
+            this.Controls.Add(this.TcTool);
             this.Controls.Add(this.SsInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -1409,62 +1409,9 @@
 
         #endregion
 
-        private System.Windows.Forms.ContextMenuStrip CmCat;
-        private System.Windows.Forms.ContextMenuStrip CmKey;
         private System.Windows.Forms.MenuStrip TmMenu;
-        private System.Windows.Forms.ToolStripContainer TcTool;
-        private System.Windows.Forms.ToolStrip TsTool;
         private System.Windows.Forms.ToolStripMenuItem TmuFile;
         private System.Windows.Forms.ToolStripMenuItem TmuEdit;
-        private System.Windows.Forms.ToolStripMenuItem TmuView;
-        private System.Windows.Forms.ToolStripMenuItem TmuData;
-        private System.Windows.Forms.ToolStripMenuItem TmuSkin;
-        private System.Windows.Forms.ToolStripMenuItem TmuHelp;
-        private System.Windows.Forms.ToolStripButton TsbAppend;
-        private System.Windows.Forms.ToolStripButton TsbUpdate;
-        private System.Windows.Forms.ToolStripButton TsbDelete;
-        private System.Windows.Forms.ToolStripSeparator TsbToolSep0;
-        private System.Windows.Forms.StatusStrip SsInfo;
-        private System.Windows.Forms.SplitContainer HSplit;
-        private System.Windows.Forms.SplitContainer VSplit;
-        private System.Windows.Forms.TreeView TvCatView;
-        private System.Windows.Forms.ListBox LbKeyList;
-        private System.Windows.Forms.TableLayoutPanel TpGrid;
-        private System.Windows.Forms.ToolStripMenuItem CmiAppendKey;
-        private System.Windows.Forms.ToolStripMenuItem CmiUpdateKey;
-        private System.Windows.Forms.ToolStripMenuItem CmiDeleteKey;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem CmuLabel;
-        private System.Windows.Forms.ToolStripMenuItem CmuMajor;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem CmiMoveto;
-        private System.Windows.Forms.ToolStripMenuItem CmiAppendCat;
-        private System.Windows.Forms.ToolStripMenuItem CmiUpdateCat;
-        private System.Windows.Forms.ToolStripMenuItem CmiDeleteCat;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripMenuItem CmiEditIcon;
-        private System.Windows.Forms.ToolStripMenuItem TmiAbout;
-        private System.Windows.Forms.ToolStripMenuItem TmiHelp;
-        private System.Windows.Forms.ToolStripMenuItem TmiKeys;
-        private System.Windows.Forms.ToolStripMenuItem CmiHistory;
-        private System.Windows.Forms.ToolStripMenuItem TmiTool;
-        private System.Windows.Forms.ToolStripMenuItem TmiMenu;
-        private System.Windows.Forms.ToolStripMenuItem TmiInfo;
-        private System.Windows.Forms.ToolStripSeparator TmiViewSep0;
-        private System.Windows.Forms.ToolStripButton TsbMenu;
-        private System.Windows.Forms.ToolStripButton TsbTool;
-        private System.Windows.Forms.ToolStripButton TsbInfo;
-        private System.Windows.Forms.ToolStripSeparator TsbToolSep1;
-        private System.Windows.Forms.ToolStripMenuItem TmiCatView;
-        private System.Windows.Forms.ToolStripMenuItem TmiKeyList;
-        private System.Windows.Forms.ToolStripMenuItem TmiFindBar;
-        private System.Windows.Forms.ToolStripMenuItem TmiSync;
-        private System.Windows.Forms.ToolStripMenuItem TmiBackup;
-        private System.Windows.Forms.ToolStripMenuItem TmiResuma;
-        private System.Windows.Forms.ToolStripSeparator TmiDataSep0;
-        private System.Windows.Forms.ToolStripSeparator TmiDataSep1;
-        private System.Windows.Forms.ToolStripMenuItem TmuExport;
-        private System.Windows.Forms.ToolStripMenuItem TmiImport;
         private System.Windows.Forms.ToolStripMenuItem TmiAppendCat;
         private System.Windows.Forms.ToolStripMenuItem TmiUpdateCat;
         private System.Windows.Forms.ToolStripMenuItem TmiDeleteCat;
@@ -1473,17 +1420,67 @@
         private System.Windows.Forms.ToolStripMenuItem TmiUpdateKey;
         private System.Windows.Forms.ToolStripMenuItem TmiDeleteKey;
         private System.Windows.Forms.ToolStripSeparator TmiEditSep1;
-        private System.Windows.Forms.ToolStripMenuItem TmuUser;
-        private System.Windows.Forms.ToolStripMenuItem TmiPkey;
-        private System.Windows.Forms.ToolStripMenuItem TmiSkey;
+        private System.Windows.Forms.ToolStripMenuItem TmuAppendAtt;
+        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttText;
+        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttPass;
+        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttLink;
+        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttMail;
+        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttDate;
+        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttData;
+        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttList;
+        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttMemo;
+        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttFile;
+        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttLine;
+        private System.Windows.Forms.ToolStripMenuItem TmuUpdateAtt;
+        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttText;
+        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttPass;
+        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttLink;
+        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttMail;
+        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttDate;
+        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttData;
+        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttList;
+        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttMemo;
+        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttFile;
+        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttLine;
+        private System.Windows.Forms.ToolStripMenuItem TmiDeleteAtt;
+        private System.Windows.Forms.ToolStripMenuItem TmuView;
+        private System.Windows.Forms.ToolStripMenuItem TmiMenu;
+        private System.Windows.Forms.ToolStripMenuItem TmiTool;
+        private System.Windows.Forms.ToolStripMenuItem TmiInfo;
+        private System.Windows.Forms.ToolStripSeparator TmiViewSep0;
+        private System.Windows.Forms.ToolStripMenuItem TmiCatView;
+        private System.Windows.Forms.ToolStripMenuItem TmiKeyList;
+        private System.Windows.Forms.ToolStripMenuItem TmiFindBar;
+        private System.Windows.Forms.ToolStripMenuItem TmuData;
+        private System.Windows.Forms.ToolStripMenuItem TmiSync;
+        private System.Windows.Forms.ToolStripSeparator TmiDataSep0;
+        private System.Windows.Forms.ToolStripMenuItem TmiBackup;
+        private System.Windows.Forms.ToolStripMenuItem TmiResuma;
+        private System.Windows.Forms.ToolStripSeparator TmiDataSep1;
+        private System.Windows.Forms.ToolStripMenuItem TmuExport;
+        private System.Windows.Forms.ToolStripMenuItem TmiExportTxt;
+        private System.Windows.Forms.ToolStripMenuItem TmiExportXml;
+        private System.Windows.Forms.ToolStripMenuItem TmuImport;
+        private System.Windows.Forms.ToolStripMenuItem TmiImportTxt;
+        private System.Windows.Forms.ToolStripMenuItem TmiImportXml;
+        private System.Windows.Forms.ToolStripMenuItem TmuSkin;
+        private System.Windows.Forms.ToolStripMenuItem TmuHelp;
+        private System.Windows.Forms.ToolStripMenuItem TmiHelp;
         private System.Windows.Forms.ToolStripSeparator TmiHelpSep0;
-        private System.Windows.Forms.ImageList IlCatList;
-        private FindBar FbFind;
-        private System.Windows.Forms.ToolStripSeparator TmiUserSep0;
-        private System.Windows.Forms.ToolStripMenuItem TmiUcs;
-        private System.Windows.Forms.ToolStripMenuItem TmiIco;
-        private System.Windows.Forms.ToolStripSeparator TmiUserSep1;
-        private System.Windows.Forms.ToolStripMenuItem TmiLib;
+        private System.Windows.Forms.ToolStripMenuItem TmiKeys;
+        private System.Windows.Forms.ToolStripSeparator TmiHelpSep1;
+        private System.Windows.Forms.ToolStripMenuItem TmiAbout;
+
+        private System.Windows.Forms.ContextMenuStrip CmCat;
+        private System.Windows.Forms.ToolStripMenuItem CmiAppendCat;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateCat;
+        private System.Windows.Forms.ToolStripMenuItem CmiDeleteCat;
+        private System.Windows.Forms.ToolStripMenuItem CmiEditIcon;
+        private System.Windows.Forms.ContextMenuStrip CmKey;
+        private System.Windows.Forms.ToolStripMenuItem CmiAppendKey;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateKey;
+        private System.Windows.Forms.ToolStripMenuItem CmiDeleteKey;
+        private System.Windows.Forms.ToolStripMenuItem CmuLabel;
         private System.Windows.Forms.ToolStripMenuItem CmiLabel0;
         private System.Windows.Forms.ToolStripMenuItem CmiLabel1;
         private System.Windows.Forms.ToolStripMenuItem CmiLabel2;
@@ -1494,56 +1491,18 @@
         private System.Windows.Forms.ToolStripMenuItem CmiLabel7;
         private System.Windows.Forms.ToolStripMenuItem CmiLabel8;
         private System.Windows.Forms.ToolStripMenuItem CmiLabel9;
+        private System.Windows.Forms.ToolStripMenuItem CmuMajor;
         private System.Windows.Forms.ToolStripMenuItem CmiMajorP2;
         private System.Windows.Forms.ToolStripMenuItem CmiMajorP1;
         private System.Windows.Forms.ToolStripMenuItem CmiMajor0;
         private System.Windows.Forms.ToolStripMenuItem CmiMajorN1;
         private System.Windows.Forms.ToolStripMenuItem CmiMajorN2;
-        private System.Windows.Forms.ToolStripMenuItem TmuAppendAtt;
-        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttText;
-        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttPass;
-        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttLink;
-        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttMail;
-        private System.Windows.Forms.ToolStripMenuItem TmuUpdateAtt;
-        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttText;
-        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttPass;
-        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttLink;
-        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttMail;
-        private System.Windows.Forms.ToolStripMenuItem TmiDeleteAtt;
+        private System.Windows.Forms.ToolStripMenuItem CmiMoveto;
+        private System.Windows.Forms.ToolStripMenuItem CmiHistory;
         private System.Windows.Forms.ContextMenuStrip CmAtt;
         private System.Windows.Forms.ToolStripMenuItem CmuAppendAtt;
-        private System.Windows.Forms.ToolStripMenuItem CmuUpdateAtt;
-        private System.Windows.Forms.ToolStripMenuItem CmiDeleteAtt;
         private System.Windows.Forms.ToolStripMenuItem CmiAppendAttText;
         private System.Windows.Forms.ToolStripMenuItem CmiAppendAttPass;
-        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttText;
-        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttPass;
-        private System.Windows.Forms.ToolTip TpTips;
-        private System.Windows.Forms.ToolStripSeparator TmiHelpSep1;
-        private System.Windows.Forms.ToolStripMenuItem TmiExportTxt;
-        private System.Windows.Forms.ToolStripMenuItem TmiExportXml;
-        private System.Windows.Forms.ToolStripMenuItem TmiImportTxt;
-        private System.Windows.Forms.ToolStripMenuItem TmiImportXml;
-        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttDate;
-        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttData;
-        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttList;
-        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttMemo;
-        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttFile;
-        private System.Windows.Forms.ToolStripMenuItem TmiAppendAttLine;
-        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttDate;
-        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttData;
-        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttList;
-        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttMemo;
-        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttFile;
-        private System.Windows.Forms.ToolStripMenuItem TmiUpdateAttLine;
-        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttLink;
-        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttMail;
-        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttDate;
-        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttData;
-        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttList;
-        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttMemo;
-        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttFile;
-        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttLine;
         private System.Windows.Forms.ToolStripMenuItem CmiAppendAttLink;
         private System.Windows.Forms.ToolStripMenuItem CmiAppendAttMail;
         private System.Windows.Forms.ToolStripMenuItem CmiAppendAttDate;
@@ -1552,5 +1511,48 @@
         private System.Windows.Forms.ToolStripMenuItem CmiAppendAttMemo;
         private System.Windows.Forms.ToolStripMenuItem CmiAppendAttFile;
         private System.Windows.Forms.ToolStripMenuItem CmiAppendAttLine;
+        private System.Windows.Forms.ToolStripMenuItem CmuUpdateAtt;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttText;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttPass;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttLink;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttMail;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttDate;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttData;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttList;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttMemo;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttFile;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttLine;
+        private System.Windows.Forms.ToolStripMenuItem CmiDeleteAtt;
+
+        private System.Windows.Forms.ToolStripContainer TcTool;
+        private System.Windows.Forms.ToolStrip TsTool;
+        private System.Windows.Forms.ToolStripButton TsbAppend;
+        private System.Windows.Forms.ToolStripButton TsbUpdate;
+        private System.Windows.Forms.ToolStripButton TsbDelete;
+        private System.Windows.Forms.ToolStripSeparator TsbToolSep0;
+        private System.Windows.Forms.StatusStrip SsInfo;
+        private System.Windows.Forms.SplitContainer HSplit;
+        private System.Windows.Forms.SplitContainer VSplit;
+        private System.Windows.Forms.TreeView TvCatView;
+        private System.Windows.Forms.ListBox LbKeyList;
+        private System.Windows.Forms.TableLayoutPanel TpGrid;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton TsbMenu;
+        private System.Windows.Forms.ToolStripButton TsbTool;
+        private System.Windows.Forms.ToolStripButton TsbInfo;
+        private System.Windows.Forms.ToolStripSeparator TsbToolSep1;
+        private System.Windows.Forms.ToolStripMenuItem TmuUser;
+        private System.Windows.Forms.ToolStripMenuItem TmiPkey;
+        private System.Windows.Forms.ToolStripMenuItem TmiSkey;
+        private System.Windows.Forms.ImageList IlCatList;
+        private FindBar FbFind;
+        private System.Windows.Forms.ToolStripSeparator TmiUserSep0;
+        private System.Windows.Forms.ToolStripMenuItem TmiUcs;
+        private System.Windows.Forms.ToolStripMenuItem TmiIco;
+        private System.Windows.Forms.ToolStripSeparator TmiUserSep1;
+        private System.Windows.Forms.ToolStripMenuItem TmiLib;
+        private System.Windows.Forms.ToolTip TpTips;
     }
 }
