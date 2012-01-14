@@ -30,37 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(APwd));
-            this.CmCat = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.CmiAppendCat = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiUpdateCat = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiDeleteCat = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.CmiEditIcon = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmKey = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.CmiAppendKey = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiUpdateKey = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiDeleteKey = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.CmuLabel = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiLabel0 = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiLabel1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiLabel2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiLabel3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiLabel4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiLabel5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiLabel6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiLabel7 = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiLabel8 = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiLabel9 = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmuMajor = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiMajorP2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiMajorP1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiMajor0 = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiMajorN1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiMajorN2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.CmiMoveto = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.TmMenu = new System.Windows.Forms.MenuStrip();
             this.TmuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.TmuEdit = new System.Windows.Forms.ToolStripMenuItem();
@@ -131,13 +100,6 @@
             this.TmiHelpSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.TmiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.TcTool = new System.Windows.Forms.ToolStripContainer();
-            this.HSplit = new System.Windows.Forms.SplitContainer();
-            this.VSplit = new System.Windows.Forms.SplitContainer();
-            this.TvCatView = new System.Windows.Forms.TreeView();
-            this.IlCatList = new System.Windows.Forms.ImageList(this.components);
-            this.LbKeyList = new System.Windows.Forms.ListBox();
-            this.TpGrid = new System.Windows.Forms.TableLayoutPanel();
-            this.FbFind = new Me.Amon.Pwd.FindBar();
             this.TsTool = new System.Windows.Forms.ToolStrip();
             this.TsbAppend = new System.Windows.Forms.ToolStripButton();
             this.TsbUpdate = new System.Windows.Forms.ToolStripButton();
@@ -147,7 +109,46 @@
             this.TsbTool = new System.Windows.Forms.ToolStripButton();
             this.TsbInfo = new System.Windows.Forms.ToolStripButton();
             this.TsbToolSep1 = new System.Windows.Forms.ToolStripSeparator();
+            this.HSplit = new System.Windows.Forms.SplitContainer();
+            this.VSplit = new System.Windows.Forms.SplitContainer();
+            this.TvCatView = new System.Windows.Forms.TreeView();
+            this.IlCatList = new System.Windows.Forms.ImageList(this.components);
+            this.LbKeyList = new System.Windows.Forms.ListBox();
+            this.TpGrid = new System.Windows.Forms.TableLayoutPanel();
+            this.FbFind = new Me.Amon.Pwd.FindBar();
             this.SsInfo = new System.Windows.Forms.StatusStrip();
+            this.TpTips = new System.Windows.Forms.ToolTip(this.components);
+            this.CmCat = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CmiAppendCat = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiUpdateCat = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiDeleteCat = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiCatSep0 = new System.Windows.Forms.ToolStripSeparator();
+            this.CmiEditIcon = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmKey = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CmiAppendKey = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiUpdateKey = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiDeleteKey = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiKeySep0 = new System.Windows.Forms.ToolStripSeparator();
+            this.CmuLabel = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiLabel0 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiLabel1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiLabel2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiLabel3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiLabel4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiLabel5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiLabel6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiLabel7 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiLabel8 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiLabel9 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmuMajor = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiMajorP2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiMajorP1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiMajor0 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiMajorN1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiMajorN2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiKeySep1 = new System.Windows.Forms.ToolStripSeparator();
+            this.CmiMoveto = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.CmAtt = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CmuAppendAtt = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiAppendAttText = new System.Windows.Forms.ToolStripMenuItem();
@@ -172,13 +173,11 @@
             this.CmiUpdateAttFile = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiUpdateAttLine = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiDeleteAtt = new System.Windows.Forms.ToolStripMenuItem();
-            this.TpTips = new System.Windows.Forms.ToolTip(this.components);
-            this.CmCat.SuspendLayout();
-            this.CmKey.SuspendLayout();
             this.TmMenu.SuspendLayout();
             this.TcTool.ContentPanel.SuspendLayout();
             this.TcTool.TopToolStripPanel.SuspendLayout();
             this.TcTool.SuspendLayout();
+            this.TsTool.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HSplit)).BeginInit();
             this.HSplit.Panel1.SuspendLayout();
             this.HSplit.Panel2.SuspendLayout();
@@ -188,247 +187,10 @@
             this.VSplit.Panel2.SuspendLayout();
             this.VSplit.SuspendLayout();
             this.TpGrid.SuspendLayout();
-            this.TsTool.SuspendLayout();
+            this.CmCat.SuspendLayout();
+            this.CmKey.SuspendLayout();
             this.CmAtt.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // CmCat
-            // 
-            this.CmCat.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CmiAppendCat,
-            this.CmiUpdateCat,
-            this.CmiDeleteCat,
-            this.toolStripSeparator4,
-            this.CmiEditIcon});
-            this.CmCat.Name = "CsCat";
-            this.CmCat.Size = new System.Drawing.Size(142, 98);
-            // 
-            // CmiAppendCat
-            // 
-            this.CmiAppendCat.Name = "CmiAppendCat";
-            this.CmiAppendCat.Size = new System.Drawing.Size(141, 22);
-            this.CmiAppendCat.Text = "新增类别(&A)";
-            this.CmiAppendCat.Click += new System.EventHandler(this.CmiAppendCat_Click);
-            // 
-            // CmiUpdateCat
-            // 
-            this.CmiUpdateCat.Name = "CmiUpdateCat";
-            this.CmiUpdateCat.Size = new System.Drawing.Size(141, 22);
-            this.CmiUpdateCat.Text = "更新类别(&U)";
-            this.CmiUpdateCat.Click += new System.EventHandler(this.CmiUpdateCat_Click);
-            // 
-            // CmiDeleteCat
-            // 
-            this.CmiDeleteCat.Name = "CmiDeleteCat";
-            this.CmiDeleteCat.Size = new System.Drawing.Size(141, 22);
-            this.CmiDeleteCat.Text = "删除类别(&D)";
-            this.CmiDeleteCat.Click += new System.EventHandler(this.CmiDeleteCat_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(138, 6);
-            // 
-            // CmiEditIcon
-            // 
-            this.CmiEditIcon.Name = "CmiEditIcon";
-            this.CmiEditIcon.Size = new System.Drawing.Size(141, 22);
-            this.CmiEditIcon.Text = "更改图标(&I)";
-            this.CmiEditIcon.Click += new System.EventHandler(this.CmiEditIcon_Click);
-            // 
-            // CmKey
-            // 
-            this.CmKey.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CmiAppendKey,
-            this.CmiUpdateKey,
-            this.CmiDeleteKey,
-            this.toolStripSeparator2,
-            this.CmuLabel,
-            this.CmuMajor,
-            this.toolStripSeparator3,
-            this.CmiMoveto,
-            this.CmiHistory});
-            this.CmKey.Name = "CsCat";
-            this.CmKey.Size = new System.Drawing.Size(176, 170);
-            // 
-            // CmiAppendKey
-            // 
-            this.CmiAppendKey.Name = "CmiAppendKey";
-            this.CmiAppendKey.Size = new System.Drawing.Size(175, 22);
-            this.CmiAppendKey.Text = "新增记录(&A)";
-            this.CmiAppendKey.Click += new System.EventHandler(this.CmiAppendKey_Click);
-            // 
-            // CmiUpdateKey
-            // 
-            this.CmiUpdateKey.Name = "CmiUpdateKey";
-            this.CmiUpdateKey.Size = new System.Drawing.Size(175, 22);
-            this.CmiUpdateKey.Text = "更新记录(&U)";
-            this.CmiUpdateKey.Click += new System.EventHandler(this.CmiUpdateKey_Click);
-            // 
-            // CmiDeleteKey
-            // 
-            this.CmiDeleteKey.Name = "CmiDeleteKey";
-            this.CmiDeleteKey.Size = new System.Drawing.Size(175, 22);
-            this.CmiDeleteKey.Text = "删除记录(&D)";
-            this.CmiDeleteKey.Click += new System.EventHandler(this.CmiDeleteKey_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(172, 6);
-            // 
-            // CmuLabel
-            // 
-            this.CmuLabel.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CmiLabel0,
-            this.CmiLabel1,
-            this.CmiLabel2,
-            this.CmiLabel3,
-            this.CmiLabel4,
-            this.CmiLabel5,
-            this.CmiLabel6,
-            this.CmiLabel7,
-            this.CmiLabel8,
-            this.CmiLabel9});
-            this.CmuLabel.Name = "CmuLabel";
-            this.CmuLabel.Size = new System.Drawing.Size(175, 22);
-            this.CmuLabel.Text = "使用状态(&L)";
-            // 
-            // CmiLabel0
-            // 
-            this.CmiLabel0.Name = "CmiLabel0";
-            this.CmiLabel0.Size = new System.Drawing.Size(100, 22);
-            this.CmiLabel0.Text = "默认";
-            this.CmiLabel0.Click += new System.EventHandler(this.CmiLabel0_Click);
-            // 
-            // CmiLabel1
-            // 
-            this.CmiLabel1.Name = "CmiLabel1";
-            this.CmiLabel1.Size = new System.Drawing.Size(100, 22);
-            this.CmiLabel1.Text = "1";
-            this.CmiLabel1.Click += new System.EventHandler(this.CmiLabel1_Click);
-            // 
-            // CmiLabel2
-            // 
-            this.CmiLabel2.Name = "CmiLabel2";
-            this.CmiLabel2.Size = new System.Drawing.Size(100, 22);
-            this.CmiLabel2.Text = "2";
-            this.CmiLabel2.Click += new System.EventHandler(this.CmiLabel2_Click);
-            // 
-            // CmiLabel3
-            // 
-            this.CmiLabel3.Name = "CmiLabel3";
-            this.CmiLabel3.Size = new System.Drawing.Size(100, 22);
-            this.CmiLabel3.Text = "3";
-            this.CmiLabel3.Click += new System.EventHandler(this.CmiLabel3_Click);
-            // 
-            // CmiLabel4
-            // 
-            this.CmiLabel4.Name = "CmiLabel4";
-            this.CmiLabel4.Size = new System.Drawing.Size(100, 22);
-            this.CmiLabel4.Text = "4";
-            this.CmiLabel4.Click += new System.EventHandler(this.CmiLabel4_Click);
-            // 
-            // CmiLabel5
-            // 
-            this.CmiLabel5.Name = "CmiLabel5";
-            this.CmiLabel5.Size = new System.Drawing.Size(100, 22);
-            this.CmiLabel5.Text = "5";
-            this.CmiLabel5.Click += new System.EventHandler(this.CmiLabel5_Click);
-            // 
-            // CmiLabel6
-            // 
-            this.CmiLabel6.Name = "CmiLabel6";
-            this.CmiLabel6.Size = new System.Drawing.Size(100, 22);
-            this.CmiLabel6.Text = "6";
-            this.CmiLabel6.Click += new System.EventHandler(this.CmiLabel6_Click);
-            // 
-            // CmiLabel7
-            // 
-            this.CmiLabel7.Name = "CmiLabel7";
-            this.CmiLabel7.Size = new System.Drawing.Size(100, 22);
-            this.CmiLabel7.Text = "7";
-            this.CmiLabel7.Click += new System.EventHandler(this.CmiLabel7_Click);
-            // 
-            // CmiLabel8
-            // 
-            this.CmiLabel8.Name = "CmiLabel8";
-            this.CmiLabel8.Size = new System.Drawing.Size(100, 22);
-            this.CmiLabel8.Text = "8";
-            this.CmiLabel8.Click += new System.EventHandler(this.CmiLabel8_Click);
-            // 
-            // CmiLabel9
-            // 
-            this.CmiLabel9.Name = "CmiLabel9";
-            this.CmiLabel9.Size = new System.Drawing.Size(100, 22);
-            this.CmiLabel9.Text = "9";
-            this.CmiLabel9.Click += new System.EventHandler(this.CmiLabel9_Click);
-            // 
-            // CmuMajor
-            // 
-            this.CmuMajor.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CmiMajorP2,
-            this.CmiMajorP1,
-            this.CmiMajor0,
-            this.CmiMajorN1,
-            this.CmiMajorN2});
-            this.CmuMajor.Name = "CmuMajor";
-            this.CmuMajor.Size = new System.Drawing.Size(175, 22);
-            this.CmuMajor.Text = "紧要程度(&M)";
-            // 
-            // CmiMajorP2
-            // 
-            this.CmiMajorP2.Name = "CmiMajorP2";
-            this.CmiMajorP2.Size = new System.Drawing.Size(100, 22);
-            this.CmiMajorP2.Text = "最高";
-            this.CmiMajorP2.Click += new System.EventHandler(this.CmiMajorP2_Click);
-            // 
-            // CmiMajorP1
-            // 
-            this.CmiMajorP1.Name = "CmiMajorP1";
-            this.CmiMajorP1.Size = new System.Drawing.Size(100, 22);
-            this.CmiMajorP1.Text = "高";
-            this.CmiMajorP1.Click += new System.EventHandler(this.CmiMajorP1_Click);
-            // 
-            // CmiMajor0
-            // 
-            this.CmiMajor0.Name = "CmiMajor0";
-            this.CmiMajor0.Size = new System.Drawing.Size(100, 22);
-            this.CmiMajor0.Text = "默认";
-            this.CmiMajor0.Click += new System.EventHandler(this.CmiMajor0_Click);
-            // 
-            // CmiMajorN1
-            // 
-            this.CmiMajorN1.Name = "CmiMajorN1";
-            this.CmiMajorN1.Size = new System.Drawing.Size(100, 22);
-            this.CmiMajorN1.Text = "低";
-            this.CmiMajorN1.Click += new System.EventHandler(this.CmiMajorN1_Click);
-            // 
-            // CmiMajorN2
-            // 
-            this.CmiMajorN2.Name = "CmiMajorN2";
-            this.CmiMajorN2.Size = new System.Drawing.Size(100, 22);
-            this.CmiMajorN2.Text = "最低";
-            this.CmiMajorN2.Click += new System.EventHandler(this.CmiMajorN2_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(172, 6);
-            // 
-            // CmiMoveto
-            // 
-            this.CmiMoveto.Name = "CmiMoveto";
-            this.CmiMoveto.Size = new System.Drawing.Size(175, 22);
-            this.CmiMoveto.Text = "把记录迁移到…(&C)";
-            this.CmiMoveto.Click += new System.EventHandler(this.CmiMoveto_Click);
-            // 
-            // CmiHistory
-            // 
-            this.CmiHistory.Name = "CmiHistory";
-            this.CmiHistory.Size = new System.Drawing.Size(175, 22);
-            this.CmiHistory.Text = "查看历史记录…(&H)";
-            this.CmiHistory.Click += new System.EventHandler(this.CmiHistory_Click);
             // 
             // TmMenu
             // 
@@ -840,12 +602,12 @@
             this.TmiExportXml.Text = "XML格式";
             this.TmiExportXml.Click += new System.EventHandler(this.TmiExportXml_Click);
             // 
-            // TmiImport
+            // TmuImport
             // 
             this.TmuImport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TmiImportTxt,
             this.TmiImportXml});
-            this.TmuImport.Name = "TmiImport";
+            this.TmuImport.Name = "TmuImport";
             this.TmuImport.Size = new System.Drawing.Size(100, 22);
             this.TmuImport.Text = "导入";
             // 
@@ -989,6 +751,93 @@
             // 
             this.TcTool.TopToolStripPanel.Controls.Add(this.TsTool);
             // 
+            // TsTool
+            // 
+            this.TsTool.Dock = System.Windows.Forms.DockStyle.None;
+            this.TsTool.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TsbAppend,
+            this.TsbUpdate,
+            this.TsbDelete,
+            this.TsbToolSep0,
+            this.TsbMenu,
+            this.TsbTool,
+            this.TsbInfo,
+            this.TsbToolSep1});
+            this.TsTool.Location = new System.Drawing.Point(3, 0);
+            this.TsTool.Name = "TsTool";
+            this.TsTool.Size = new System.Drawing.Size(162, 25);
+            this.TsTool.TabIndex = 0;
+            // 
+            // TsbAppend
+            // 
+            this.TsbAppend.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbAppend.Image = ((System.Drawing.Image)(resources.GetObject("TsbAppend.Image")));
+            this.TsbAppend.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbAppend.Name = "TsbAppend";
+            this.TsbAppend.Size = new System.Drawing.Size(23, 22);
+            this.TsbAppend.Text = "添加记录";
+            this.TsbAppend.Click += new System.EventHandler(this.TsbAppend_Click);
+            // 
+            // TsbUpdate
+            // 
+            this.TsbUpdate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbUpdate.Image = ((System.Drawing.Image)(resources.GetObject("TsbUpdate.Image")));
+            this.TsbUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbUpdate.Name = "TsbUpdate";
+            this.TsbUpdate.Size = new System.Drawing.Size(23, 22);
+            this.TsbUpdate.Text = "保存记录";
+            this.TsbUpdate.Click += new System.EventHandler(this.TsbUpdate_Click);
+            // 
+            // TsbDelete
+            // 
+            this.TsbDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbDelete.Image = ((System.Drawing.Image)(resources.GetObject("TsbDelete.Image")));
+            this.TsbDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbDelete.Name = "TsbDelete";
+            this.TsbDelete.Size = new System.Drawing.Size(23, 22);
+            this.TsbDelete.Text = "删除记录";
+            this.TsbDelete.Click += new System.EventHandler(this.TsbDelete_Click);
+            // 
+            // TsbToolSep0
+            // 
+            this.TsbToolSep0.Name = "TsbToolSep0";
+            this.TsbToolSep0.Size = new System.Drawing.Size(6, 25);
+            // 
+            // TsbMenu
+            // 
+            this.TsbMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbMenu.Image = ((System.Drawing.Image)(resources.GetObject("TsbMenu.Image")));
+            this.TsbMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbMenu.Name = "TsbMenu";
+            this.TsbMenu.Size = new System.Drawing.Size(23, 22);
+            this.TsbMenu.Text = "toolStripButton1";
+            this.TsbMenu.Click += new System.EventHandler(this.TsbMenu_Click);
+            // 
+            // TsbTool
+            // 
+            this.TsbTool.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbTool.Image = ((System.Drawing.Image)(resources.GetObject("TsbTool.Image")));
+            this.TsbTool.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbTool.Name = "TsbTool";
+            this.TsbTool.Size = new System.Drawing.Size(23, 22);
+            this.TsbTool.Text = "toolStripButton2";
+            this.TsbTool.Click += new System.EventHandler(this.TsbTool_Click);
+            // 
+            // TsbInfo
+            // 
+            this.TsbInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbInfo.Image = ((System.Drawing.Image)(resources.GetObject("TsbInfo.Image")));
+            this.TsbInfo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbInfo.Name = "TsbInfo";
+            this.TsbInfo.Size = new System.Drawing.Size(23, 22);
+            this.TsbInfo.Text = "toolStripButton3";
+            this.TsbInfo.Click += new System.EventHandler(this.TsbInfo_Click);
+            // 
+            // TsbToolSep1
+            // 
+            this.TsbToolSep1.Name = "TsbToolSep1";
+            this.TsbToolSep1.Size = new System.Drawing.Size(6, 25);
+            // 
             // HSplit
             // 
             this.HSplit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1083,93 +932,6 @@
             this.FbFind.Size = new System.Drawing.Size(390, 26);
             this.FbFind.TabIndex = 0;
             // 
-            // TsTool
-            // 
-            this.TsTool.Dock = System.Windows.Forms.DockStyle.None;
-            this.TsTool.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TsbAppend,
-            this.TsbUpdate,
-            this.TsbDelete,
-            this.TsbToolSep0,
-            this.TsbMenu,
-            this.TsbTool,
-            this.TsbInfo,
-            this.TsbToolSep1});
-            this.TsTool.Location = new System.Drawing.Point(3, 0);
-            this.TsTool.Name = "TsTool";
-            this.TsTool.Size = new System.Drawing.Size(162, 25);
-            this.TsTool.TabIndex = 0;
-            // 
-            // TsbAppend
-            // 
-            this.TsbAppend.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbAppend.Image = ((System.Drawing.Image)(resources.GetObject("TsbAppend.Image")));
-            this.TsbAppend.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsbAppend.Name = "TsbAppend";
-            this.TsbAppend.Size = new System.Drawing.Size(23, 22);
-            this.TsbAppend.Text = "添加记录";
-            this.TsbAppend.Click += new System.EventHandler(this.TsbAppend_Click);
-            // 
-            // TsbUpdate
-            // 
-            this.TsbUpdate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbUpdate.Image = ((System.Drawing.Image)(resources.GetObject("TsbUpdate.Image")));
-            this.TsbUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsbUpdate.Name = "TsbUpdate";
-            this.TsbUpdate.Size = new System.Drawing.Size(23, 22);
-            this.TsbUpdate.Text = "保存记录";
-            this.TsbUpdate.Click += new System.EventHandler(this.TsbUpdate_Click);
-            // 
-            // TsbDelete
-            // 
-            this.TsbDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbDelete.Image = ((System.Drawing.Image)(resources.GetObject("TsbDelete.Image")));
-            this.TsbDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsbDelete.Name = "TsbDelete";
-            this.TsbDelete.Size = new System.Drawing.Size(23, 22);
-            this.TsbDelete.Text = "删除记录";
-            this.TsbDelete.Click += new System.EventHandler(this.TsbDelete_Click);
-            // 
-            // TsbToolSep0
-            // 
-            this.TsbToolSep0.Name = "TsbToolSep0";
-            this.TsbToolSep0.Size = new System.Drawing.Size(6, 25);
-            // 
-            // TsbMenu
-            // 
-            this.TsbMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbMenu.Image = ((System.Drawing.Image)(resources.GetObject("TsbMenu.Image")));
-            this.TsbMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsbMenu.Name = "TsbMenu";
-            this.TsbMenu.Size = new System.Drawing.Size(23, 22);
-            this.TsbMenu.Text = "toolStripButton1";
-            this.TsbMenu.Click += new System.EventHandler(this.TsbMenu_Click);
-            // 
-            // TsbTool
-            // 
-            this.TsbTool.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbTool.Image = ((System.Drawing.Image)(resources.GetObject("TsbTool.Image")));
-            this.TsbTool.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsbTool.Name = "TsbTool";
-            this.TsbTool.Size = new System.Drawing.Size(23, 22);
-            this.TsbTool.Text = "toolStripButton2";
-            this.TsbTool.Click += new System.EventHandler(this.TsbTool_Click);
-            // 
-            // TsbInfo
-            // 
-            this.TsbInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbInfo.Image = ((System.Drawing.Image)(resources.GetObject("TsbInfo.Image")));
-            this.TsbInfo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsbInfo.Name = "TsbInfo";
-            this.TsbInfo.Size = new System.Drawing.Size(23, 22);
-            this.TsbInfo.Text = "toolStripButton3";
-            this.TsbInfo.Click += new System.EventHandler(this.TsbInfo_Click);
-            // 
-            // TsbToolSep1
-            // 
-            this.TsbToolSep1.Name = "TsbToolSep1";
-            this.TsbToolSep1.Size = new System.Drawing.Size(6, 25);
-            // 
             // SsInfo
             // 
             this.SsInfo.Location = new System.Drawing.Point(0, 420);
@@ -1177,6 +939,244 @@
             this.SsInfo.Size = new System.Drawing.Size(624, 22);
             this.SsInfo.TabIndex = 2;
             this.SsInfo.Text = "statusStrip1";
+            // 
+            // CmCat
+            // 
+            this.CmCat.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CmiAppendCat,
+            this.CmiUpdateCat,
+            this.CmiDeleteCat,
+            this.CmiCatSep0,
+            this.CmiEditIcon});
+            this.CmCat.Name = "CsCat";
+            this.CmCat.Size = new System.Drawing.Size(142, 98);
+            // 
+            // CmiAppendCat
+            // 
+            this.CmiAppendCat.Name = "CmiAppendCat";
+            this.CmiAppendCat.Size = new System.Drawing.Size(141, 22);
+            this.CmiAppendCat.Text = "新增类别(&A)";
+            this.CmiAppendCat.Click += new System.EventHandler(this.CmiAppendCat_Click);
+            // 
+            // CmiUpdateCat
+            // 
+            this.CmiUpdateCat.Name = "CmiUpdateCat";
+            this.CmiUpdateCat.Size = new System.Drawing.Size(141, 22);
+            this.CmiUpdateCat.Text = "更新类别(&U)";
+            this.CmiUpdateCat.Click += new System.EventHandler(this.CmiUpdateCat_Click);
+            // 
+            // CmiDeleteCat
+            // 
+            this.CmiDeleteCat.Name = "CmiDeleteCat";
+            this.CmiDeleteCat.Size = new System.Drawing.Size(141, 22);
+            this.CmiDeleteCat.Text = "删除类别(&D)";
+            this.CmiDeleteCat.Click += new System.EventHandler(this.CmiDeleteCat_Click);
+            // 
+            // CmiCatSep0
+            // 
+            this.CmiCatSep0.Name = "CmiCatSep0";
+            this.CmiCatSep0.Size = new System.Drawing.Size(138, 6);
+            // 
+            // CmiEditIcon
+            // 
+            this.CmiEditIcon.Name = "CmiEditIcon";
+            this.CmiEditIcon.Size = new System.Drawing.Size(141, 22);
+            this.CmiEditIcon.Text = "更改图标(&I)";
+            this.CmiEditIcon.Click += new System.EventHandler(this.CmiEditIcon_Click);
+            // 
+            // CmKey
+            // 
+            this.CmKey.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CmiAppendKey,
+            this.CmiUpdateKey,
+            this.CmiDeleteKey,
+            this.CmiKeySep0,
+            this.CmuLabel,
+            this.CmuMajor,
+            this.CmiKeySep1,
+            this.CmiMoveto,
+            this.CmiHistory});
+            this.CmKey.Name = "CsCat";
+            this.CmKey.Size = new System.Drawing.Size(176, 192);
+            // 
+            // CmiAppendKey
+            // 
+            this.CmiAppendKey.Name = "CmiAppendKey";
+            this.CmiAppendKey.Size = new System.Drawing.Size(175, 22);
+            this.CmiAppendKey.Text = "新增记录(&A)";
+            this.CmiAppendKey.Click += new System.EventHandler(this.CmiAppendKey_Click);
+            // 
+            // CmiUpdateKey
+            // 
+            this.CmiUpdateKey.Name = "CmiUpdateKey";
+            this.CmiUpdateKey.Size = new System.Drawing.Size(175, 22);
+            this.CmiUpdateKey.Text = "更新记录(&U)";
+            this.CmiUpdateKey.Click += new System.EventHandler(this.CmiUpdateKey_Click);
+            // 
+            // CmiDeleteKey
+            // 
+            this.CmiDeleteKey.Name = "CmiDeleteKey";
+            this.CmiDeleteKey.Size = new System.Drawing.Size(175, 22);
+            this.CmiDeleteKey.Text = "删除记录(&D)";
+            this.CmiDeleteKey.Click += new System.EventHandler(this.CmiDeleteKey_Click);
+            // 
+            // CmiKeySep0
+            // 
+            this.CmiKeySep0.Name = "CmiKeySep0";
+            this.CmiKeySep0.Size = new System.Drawing.Size(172, 6);
+            // 
+            // CmuLabel
+            // 
+            this.CmuLabel.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CmiLabel0,
+            this.CmiLabel1,
+            this.CmiLabel2,
+            this.CmiLabel3,
+            this.CmiLabel4,
+            this.CmiLabel5,
+            this.CmiLabel6,
+            this.CmiLabel7,
+            this.CmiLabel8,
+            this.CmiLabel9});
+            this.CmuLabel.Name = "CmuLabel";
+            this.CmuLabel.Size = new System.Drawing.Size(175, 22);
+            this.CmuLabel.Text = "使用状态(&L)";
+            // 
+            // CmiLabel0
+            // 
+            this.CmiLabel0.Name = "CmiLabel0";
+            this.CmiLabel0.Size = new System.Drawing.Size(100, 22);
+            this.CmiLabel0.Text = "默认";
+            this.CmiLabel0.Click += new System.EventHandler(this.CmiLabel0_Click);
+            // 
+            // CmiLabel1
+            // 
+            this.CmiLabel1.Name = "CmiLabel1";
+            this.CmiLabel1.Size = new System.Drawing.Size(100, 22);
+            this.CmiLabel1.Text = "1";
+            this.CmiLabel1.Click += new System.EventHandler(this.CmiLabel1_Click);
+            // 
+            // CmiLabel2
+            // 
+            this.CmiLabel2.Name = "CmiLabel2";
+            this.CmiLabel2.Size = new System.Drawing.Size(100, 22);
+            this.CmiLabel2.Text = "2";
+            this.CmiLabel2.Click += new System.EventHandler(this.CmiLabel2_Click);
+            // 
+            // CmiLabel3
+            // 
+            this.CmiLabel3.Name = "CmiLabel3";
+            this.CmiLabel3.Size = new System.Drawing.Size(100, 22);
+            this.CmiLabel3.Text = "3";
+            this.CmiLabel3.Click += new System.EventHandler(this.CmiLabel3_Click);
+            // 
+            // CmiLabel4
+            // 
+            this.CmiLabel4.Name = "CmiLabel4";
+            this.CmiLabel4.Size = new System.Drawing.Size(100, 22);
+            this.CmiLabel4.Text = "4";
+            this.CmiLabel4.Click += new System.EventHandler(this.CmiLabel4_Click);
+            // 
+            // CmiLabel5
+            // 
+            this.CmiLabel5.Name = "CmiLabel5";
+            this.CmiLabel5.Size = new System.Drawing.Size(100, 22);
+            this.CmiLabel5.Text = "5";
+            this.CmiLabel5.Click += new System.EventHandler(this.CmiLabel5_Click);
+            // 
+            // CmiLabel6
+            // 
+            this.CmiLabel6.Name = "CmiLabel6";
+            this.CmiLabel6.Size = new System.Drawing.Size(100, 22);
+            this.CmiLabel6.Text = "6";
+            this.CmiLabel6.Click += new System.EventHandler(this.CmiLabel6_Click);
+            // 
+            // CmiLabel7
+            // 
+            this.CmiLabel7.Name = "CmiLabel7";
+            this.CmiLabel7.Size = new System.Drawing.Size(100, 22);
+            this.CmiLabel7.Text = "7";
+            this.CmiLabel7.Click += new System.EventHandler(this.CmiLabel7_Click);
+            // 
+            // CmiLabel8
+            // 
+            this.CmiLabel8.Name = "CmiLabel8";
+            this.CmiLabel8.Size = new System.Drawing.Size(100, 22);
+            this.CmiLabel8.Text = "8";
+            this.CmiLabel8.Click += new System.EventHandler(this.CmiLabel8_Click);
+            // 
+            // CmiLabel9
+            // 
+            this.CmiLabel9.Name = "CmiLabel9";
+            this.CmiLabel9.Size = new System.Drawing.Size(100, 22);
+            this.CmiLabel9.Text = "9";
+            this.CmiLabel9.Click += new System.EventHandler(this.CmiLabel9_Click);
+            // 
+            // CmuMajor
+            // 
+            this.CmuMajor.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CmiMajorP2,
+            this.CmiMajorP1,
+            this.CmiMajor0,
+            this.CmiMajorN1,
+            this.CmiMajorN2});
+            this.CmuMajor.Name = "CmuMajor";
+            this.CmuMajor.Size = new System.Drawing.Size(175, 22);
+            this.CmuMajor.Text = "紧要程度(&M)";
+            // 
+            // CmiMajorP2
+            // 
+            this.CmiMajorP2.Name = "CmiMajorP2";
+            this.CmiMajorP2.Size = new System.Drawing.Size(100, 22);
+            this.CmiMajorP2.Text = "最高";
+            this.CmiMajorP2.Click += new System.EventHandler(this.CmiMajorP2_Click);
+            // 
+            // CmiMajorP1
+            // 
+            this.CmiMajorP1.Name = "CmiMajorP1";
+            this.CmiMajorP1.Size = new System.Drawing.Size(100, 22);
+            this.CmiMajorP1.Text = "高";
+            this.CmiMajorP1.Click += new System.EventHandler(this.CmiMajorP1_Click);
+            // 
+            // CmiMajor0
+            // 
+            this.CmiMajor0.Name = "CmiMajor0";
+            this.CmiMajor0.Size = new System.Drawing.Size(100, 22);
+            this.CmiMajor0.Text = "默认";
+            this.CmiMajor0.Click += new System.EventHandler(this.CmiMajor0_Click);
+            // 
+            // CmiMajorN1
+            // 
+            this.CmiMajorN1.Name = "CmiMajorN1";
+            this.CmiMajorN1.Size = new System.Drawing.Size(100, 22);
+            this.CmiMajorN1.Text = "低";
+            this.CmiMajorN1.Click += new System.EventHandler(this.CmiMajorN1_Click);
+            // 
+            // CmiMajorN2
+            // 
+            this.CmiMajorN2.Name = "CmiMajorN2";
+            this.CmiMajorN2.Size = new System.Drawing.Size(100, 22);
+            this.CmiMajorN2.Text = "最低";
+            this.CmiMajorN2.Click += new System.EventHandler(this.CmiMajorN2_Click);
+            // 
+            // CmiKeySep1
+            // 
+            this.CmiKeySep1.Name = "CmiKeySep1";
+            this.CmiKeySep1.Size = new System.Drawing.Size(172, 6);
+            // 
+            // CmiMoveto
+            // 
+            this.CmiMoveto.Name = "CmiMoveto";
+            this.CmiMoveto.Size = new System.Drawing.Size(175, 22);
+            this.CmiMoveto.Text = "把记录迁移到…(&C)";
+            this.CmiMoveto.Click += new System.EventHandler(this.CmiMoveto_Click);
+            // 
+            // CmiHistory
+            // 
+            this.CmiHistory.Name = "CmiHistory";
+            this.CmiHistory.Size = new System.Drawing.Size(175, 22);
+            this.CmiHistory.Text = "查看历史记录…(&H)";
+            this.CmiHistory.Click += new System.EventHandler(this.CmiHistory_Click);
             // 
             // CmAtt
             // 
@@ -1463,6 +1463,14 @@
         private System.Windows.Forms.ToolStripMenuItem TmuImport;
         private System.Windows.Forms.ToolStripMenuItem TmiImportTxt;
         private System.Windows.Forms.ToolStripMenuItem TmiImportXml;
+        private System.Windows.Forms.ToolStripMenuItem TmuUser;
+        private System.Windows.Forms.ToolStripMenuItem TmiPkey;
+        private System.Windows.Forms.ToolStripMenuItem TmiSkey;
+        private System.Windows.Forms.ToolStripSeparator TmiUserSep0;
+        private System.Windows.Forms.ToolStripMenuItem TmiLib;
+        private System.Windows.Forms.ToolStripMenuItem TmiUcs;
+        private System.Windows.Forms.ToolStripMenuItem TmiIco;
+        private System.Windows.Forms.ToolStripSeparator TmiUserSep1;
         private System.Windows.Forms.ToolStripMenuItem TmuSkin;
         private System.Windows.Forms.ToolStripMenuItem TmuHelp;
         private System.Windows.Forms.ToolStripMenuItem TmiHelp;
@@ -1470,16 +1478,37 @@
         private System.Windows.Forms.ToolStripMenuItem TmiKeys;
         private System.Windows.Forms.ToolStripSeparator TmiHelpSep1;
         private System.Windows.Forms.ToolStripMenuItem TmiAbout;
+        private System.Windows.Forms.ToolStripContainer TcTool;
+        private System.Windows.Forms.ToolStrip TsTool;
+        private System.Windows.Forms.ToolStripButton TsbAppend;
+        private System.Windows.Forms.ToolStripButton TsbUpdate;
+        private System.Windows.Forms.ToolStripButton TsbDelete;
+        private System.Windows.Forms.ToolStripSeparator TsbToolSep0;
+        private System.Windows.Forms.ToolStripButton TsbMenu;
+        private System.Windows.Forms.ToolStripButton TsbTool;
+        private System.Windows.Forms.ToolStripButton TsbInfo;
+        private System.Windows.Forms.ToolStripSeparator TsbToolSep1;
+        private System.Windows.Forms.SplitContainer HSplit;
+        private System.Windows.Forms.SplitContainer VSplit;
+        private System.Windows.Forms.TreeView TvCatView;
+        private System.Windows.Forms.ImageList IlCatList;
+        private System.Windows.Forms.ListBox LbKeyList;
+        private System.Windows.Forms.TableLayoutPanel TpGrid;
+        private FindBar FbFind;
+        private System.Windows.Forms.StatusStrip SsInfo;
+        private System.Windows.Forms.ToolTip TpTips;
 
         private System.Windows.Forms.ContextMenuStrip CmCat;
         private System.Windows.Forms.ToolStripMenuItem CmiAppendCat;
         private System.Windows.Forms.ToolStripMenuItem CmiUpdateCat;
         private System.Windows.Forms.ToolStripMenuItem CmiDeleteCat;
+        private System.Windows.Forms.ToolStripSeparator CmiCatSep0;
         private System.Windows.Forms.ToolStripMenuItem CmiEditIcon;
         private System.Windows.Forms.ContextMenuStrip CmKey;
         private System.Windows.Forms.ToolStripMenuItem CmiAppendKey;
         private System.Windows.Forms.ToolStripMenuItem CmiUpdateKey;
         private System.Windows.Forms.ToolStripMenuItem CmiDeleteKey;
+        private System.Windows.Forms.ToolStripSeparator CmiKeySep0;
         private System.Windows.Forms.ToolStripMenuItem CmuLabel;
         private System.Windows.Forms.ToolStripMenuItem CmiLabel0;
         private System.Windows.Forms.ToolStripMenuItem CmiLabel1;
@@ -1497,6 +1526,7 @@
         private System.Windows.Forms.ToolStripMenuItem CmiMajor0;
         private System.Windows.Forms.ToolStripMenuItem CmiMajorN1;
         private System.Windows.Forms.ToolStripMenuItem CmiMajorN2;
+        private System.Windows.Forms.ToolStripSeparator CmiKeySep1;
         private System.Windows.Forms.ToolStripMenuItem CmiMoveto;
         private System.Windows.Forms.ToolStripMenuItem CmiHistory;
         private System.Windows.Forms.ContextMenuStrip CmAtt;
@@ -1523,36 +1553,5 @@
         private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttFile;
         private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttLine;
         private System.Windows.Forms.ToolStripMenuItem CmiDeleteAtt;
-
-        private System.Windows.Forms.ToolStripContainer TcTool;
-        private System.Windows.Forms.ToolStrip TsTool;
-        private System.Windows.Forms.ToolStripButton TsbAppend;
-        private System.Windows.Forms.ToolStripButton TsbUpdate;
-        private System.Windows.Forms.ToolStripButton TsbDelete;
-        private System.Windows.Forms.ToolStripSeparator TsbToolSep0;
-        private System.Windows.Forms.StatusStrip SsInfo;
-        private System.Windows.Forms.SplitContainer HSplit;
-        private System.Windows.Forms.SplitContainer VSplit;
-        private System.Windows.Forms.TreeView TvCatView;
-        private System.Windows.Forms.ListBox LbKeyList;
-        private System.Windows.Forms.TableLayoutPanel TpGrid;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripButton TsbMenu;
-        private System.Windows.Forms.ToolStripButton TsbTool;
-        private System.Windows.Forms.ToolStripButton TsbInfo;
-        private System.Windows.Forms.ToolStripSeparator TsbToolSep1;
-        private System.Windows.Forms.ToolStripMenuItem TmuUser;
-        private System.Windows.Forms.ToolStripMenuItem TmiPkey;
-        private System.Windows.Forms.ToolStripMenuItem TmiSkey;
-        private System.Windows.Forms.ImageList IlCatList;
-        private FindBar FbFind;
-        private System.Windows.Forms.ToolStripSeparator TmiUserSep0;
-        private System.Windows.Forms.ToolStripMenuItem TmiUcs;
-        private System.Windows.Forms.ToolStripMenuItem TmiIco;
-        private System.Windows.Forms.ToolStripSeparator TmiUserSep1;
-        private System.Windows.Forms.ToolStripMenuItem TmiLib;
-        private System.Windows.Forms.ToolTip TpTips;
     }
 }
