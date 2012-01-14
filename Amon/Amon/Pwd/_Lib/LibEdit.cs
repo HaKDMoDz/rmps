@@ -90,12 +90,12 @@ namespace Me.Amon.Pwd._Lib
             }
 
             object obj = _Selected.Tag;
-            if (obj is LibHeader)
+            if (obj is Model.LibHeader)
             {
                 ShowHeader(obj as Model.LibHeader);
                 return;
             }
-            if (obj is LibDetail)
+            if (obj is Model.LibDetail)
             {
                 ShowDetail(obj as Model.LibDetail);
                 return;
@@ -224,6 +224,8 @@ namespace Me.Amon.Pwd._Lib
             {
                 dba.AddWhere(IDat.APWD0303, _UserModel.Code);
                 dba.AddWhere(IDat.APWD0304, detail.Id);
+                dba.AddVcs(IDat.APWD030B, 1);
+                dba.AddOpt(IDat.APWD030C, detail.Operate, IDat.OPT_UPDATE);
                 dba.ExecuteUpdate();
 
                 TreeNode root = TvLibView.SelectedNode;
@@ -238,6 +240,8 @@ namespace Me.Amon.Pwd._Lib
                 dba.AddParam(IDat.APWD0304, detail.Id);
                 dba.AddParam(IDat.APWD0305, _Selected.Name);
                 dba.AddParam(IDat.APWD030A, IDat.SQL_NOW, false);
+                dba.AddParam(IDat.APWD030B, IDat.VCS_DEFAULT);
+                dba.AddParam(IDat.APWD030C, IDat.OPT_INSERT);
                 dba.ExecuteInsert();
 
                 header.Details.Add(detail);

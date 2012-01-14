@@ -4,8 +4,7 @@ namespace Me.Amon.Model
     /// <summary>
     /// 
     /// </summary>
-    public class Ucs
+    public class Ucs : Vcs
     {
-
     }
 }

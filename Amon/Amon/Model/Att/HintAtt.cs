@@ -5,7 +5,7 @@ namespace Me.Amon.Model.Att
 {
     public class HintAtt : AAtt
     {
-        public MgtdHeader GtdHeader { get; set; }
+        public GtdHeader GtdHeader { get; set; }
 
         public HintAtt()
             : base(TYPE_HINT, "", "")

@@ -500,11 +500,21 @@ namespace Me.Amon.Da
             _ValueList.Add(value.ToString());
         }
 
-        public void AddStep(string param, long value)
+        public void AddVcs(string param, int step)
         {
             _ParamList.Add(param);
             _SignList.Add("=");
-            _ValueList.Add(param + "+" + value);
+            _ValueList.Add(param + "+" + step);
+        }
+
+        public void AddOpt(string param, int prev, long next)
+        {
+            if (prev > IDat.OPT_INSERT)
+            {
+                _ParamList.Add(param);
+                _SignList.Add("=");
+                _ValueList.Add(next.ToString());
+            }
         }
 
         /// <summary>

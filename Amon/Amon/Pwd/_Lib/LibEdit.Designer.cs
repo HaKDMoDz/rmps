@@ -50,6 +50,7 @@
             this.TvLibView.Name = "TvLibView";
             this.TvLibView.Size = new System.Drawing.Size(141, 209);
             this.TvLibView.TabIndex = 0;
+            this.TvLibView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvLibTree_AfterSelect);
             // 
             // CmMenu
             // 
@@ -120,8 +121,8 @@
             // 
             // GbGroup
             // 
-            this.GbGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.GbGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.GbGroup.Location = new System.Drawing.Point(159, 12);
             this.GbGroup.Name = "GbGroup";
@@ -146,6 +147,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LibEdit";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "模板管理";
             this.CmMenu.ResumeLayout(false);
             this.ResumeLayout(false);

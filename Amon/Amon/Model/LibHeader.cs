@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace Me.Amon.Model
 {
-    public class LibHeader
+    public class LibHeader : Vcs
     {
         public string Id { get; set; }
 

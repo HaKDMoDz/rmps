@@ -53,8 +53,8 @@ namespace Me.Amon.Pwd
             _ViewModel = new ViewModel(_UserModel);
             _ViewModel.Load();
 
-            Cat cat = new Cat { Id = "0", Text = "阿木密码箱", Tips = "阿木密码箱" };
-            IlCatList.Images.Add(cat.Id, BeanUtil.None);
+            Cat cat = new Cat { Id = "0", Text = "阿木密码箱", Tips = "阿木密码箱", Icon = "0" };
+            IlCatList.Images.Add(cat.Icon, BeanUtil.None);
             _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Id };
             _RootNode.Tag = cat;
             TvCatView.Nodes.Add(_RootNode);
@@ -94,20 +94,30 @@ namespace Me.Amon.Pwd
                     continue;
                 }
 
+                Cat cat = new Cat();
+                cat.Id = row[IDat.C2010203] as string;
+                cat.Text = row[IDat.C2010205] as string;
+                cat.Tips = row[IDat.C2010206] as string;
+                cat.Icon = row[IDat.C2010207] as string;
+
                 TreeNode node = new TreeNode();
-                node.Name = row[IDat.C2010203] as string;
-                node.Text = row[IDat.C2010205] as string;
-                node.ToolTipText = row[IDat.C2010206] as string;
-                tmp = row[IDat.C2010207] as string;
-                if (CharUtil.IsValidateHash(tmp))
+                node.Name = cat.Id;
+                node.Text = cat.Text;
+                node.ToolTipText = cat.Tips;
+                node.Tag = cat;
+                if (CharUtil.IsValidateHash(cat.Icon))
                 {
-                    //IlCatList.Images.Add(tmp, Image.FromFile(""));
-                    node.ImageIndex = IlCatList.Images.Count;
+                    //IlCatList.Images.Add(cat.Icon, Image.FromFile(""));
+                    node.ImageKey = cat.Icon;
                 }
-                node.ImageIndex = 0;
+                else
+                {
+                    node.ImageKey = "0";
+                }
 
                 root.Nodes.Add(node);
                 data.Rows.RemoveAt(i);
+                InitCat(node, data);
             }
         }
         #endregion
@@ -139,6 +149,7 @@ namespace Me.Amon.Pwd
 
         private void InitKey(DataTable data)
         {
+            LbKeyList.Items.Clear();
             foreach (DataRow row in data.Rows)
             {
                 Key key = new Key();
@@ -1047,7 +1058,7 @@ namespace Me.Amon.Pwd
             dba.AddParam(IDat.C2010209, "");
             dba.AddParam(IDat.C201020A, IDat.SQL_NOW, false);
             dba.AddParam(IDat.C201020B, IDat.SQL_NOW, false);
-            dba.AddParam(IDat.C201020C, IDat.VER_DEFAULT);
+            dba.AddParam(IDat.C201020C, IDat.VCS_DEFAULT);
             dba.AddParam(IDat.C201020D, IDat.OPT_INSERT);
             dba.ExecuteInsert();
 
@@ -1097,8 +1108,8 @@ namespace Me.Amon.Pwd
             dba.AddParam(IDat.C2010208, cat.Value);
             dba.AddParam(IDat.C2010209, "");
             dba.AddParam(IDat.C201020A, IDat.SQL_NOW, false);
-            dba.AddStep(IDat.C201020C, 1);
-            dba.AddParam(IDat.C201020D, IDat.OPT_UPDATE);
+            dba.AddVcs(IDat.C201020C, 1);
+            dba.AddOpt(IDat.C201020D, cat.Operate, IDat.OPT_UPDATE);
             dba.AddWhere(IDat.C2010202, _UserModel.Code);
             dba.AddWhere(IDat.C2010203, HashUtil.GetCurrTimeHex(false));
             if (1 != dba.ExecuteUpdate())
@@ -1274,7 +1285,6 @@ namespace Me.Amon.Pwd
             dba.AddParam(IDat.APWD010F, _SafeModel.Key.GtdMemo);
             dba.AddParam(IDat.APWD0110, _SafeModel.Key.Memo);
             dba.AddParam(IDat.APWD0112, "1");
-            dba.AddParam(IDat.APWD0113, "1");
 
             if (update)
             {
@@ -1282,6 +1292,8 @@ namespace Me.Amon.Pwd
                 dba.AddWhere(IDat.APWD0105, _SafeModel.Key.Id);
                 _SafeModel.Key.VisitDate = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
                 dba.AddParam(IDat.APWD0111, _SafeModel.Key.VisitDate);
+                dba.AddVcs(IDat.APWD0113, 1);
+                dba.AddOpt(IDat.APWD0114, _SafeModel.Key.Operate, IDat.OPT_UPDATE);
                 dba.AddUpdateBatch();
             }
             else
@@ -1293,6 +1305,8 @@ namespace Me.Amon.Pwd
                 dba.AddParam(IDat.APWD0104, _UserModel.Code);
                 dba.AddParam(IDat.APWD0105, _SafeModel.Key.Id);
                 dba.AddParam(IDat.APWD0111, _SafeModel.Key.RegDate);
+                dba.AddParam(IDat.APWD0113, IDat.VCS_DEFAULT);
+                dba.AddParam(IDat.APWD0114, IDat.OPT_INSERT);
                 dba.AddInsertBatch();
             }
             #endregion

@@ -8,24 +8,25 @@ namespace Me.Amon.Pwd.Wiz
     {
         private SafeModel _SafeModel;
         private RowStyle _DefStyle;
+        private Label _DefLabel;
 
         public BeanBody()
         {
             InitializeComponent();
-
-            _DefStyle = new RowStyle(SizeType.Percent, 100F);
         }
 
         public BeanBody(SafeModel safeModel)
         {
             _SafeModel = safeModel;
-            _DefStyle = new RowStyle(SizeType.Percent, 100F);
 
             InitializeComponent();
         }
 
         public void Init(DataModel dataModel)
         {
+            _DefStyle = new RowStyle(SizeType.Percent, 100F);
+
+            _DefLabel = new Label { Dock = DockStyle.Fill };
         }
 
         public void InitView(TableLayoutPanel grid)
@@ -66,6 +67,9 @@ namespace Me.Amon.Pwd.Wiz
             }
 
             TpGrid.RowStyles.Add(_DefStyle);
+            TpGrid.RowCount = row;
+
+            TpGrid.Controls.Add(_DefLabel, 1, row);
         }
 
         public bool SaveData()

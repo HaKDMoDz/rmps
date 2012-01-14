@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Model
 {
-    public class LibDetail
+    public class LibDetail : Vcs
     {
         public string Id { get; set; }
 

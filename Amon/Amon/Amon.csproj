@@ -115,11 +115,12 @@
     <Compile Include="Model\LibDetail.cs" />
     <Compile Include="Model\LibHeader.cs" />
     <Compile Include="Model\Log.cs" />
-    <Compile Include="Model\MgtdDetail.cs" />
-    <Compile Include="Model\MgtdHeader.cs" />
+    <Compile Include="Model\GtdDetail.cs" />
+    <Compile Include="Model\GtdHeader.cs" />
     <Compile Include="Model\SafeModel.cs" />
     <Compile Include="Model\Ucs.cs" />
     <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Model\Vcs.cs" />
     <Compile Include="Model\ViewModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -499,6 +500,12 @@
     </Compile>
     <Compile Include="Uc\Item.cs" />
     <Compile Include="Uc\Properties.cs" />
+    <Compile Include="Uc\UcsEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uc\UcsEdit.Designer.cs">
+      <DependentUpon>UcsEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="User\SignIn.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -678,6 +685,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Uc\Ico\IcoView.resx">
       <DependentUpon>IcoView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uc\UcsEdit.resx">
+      <DependentUpon>UcsEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\SignIn.resx">
       <DependentUpon>SignIn.cs</DependentUpon>

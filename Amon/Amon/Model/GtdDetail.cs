@@ -1,7 +1,7 @@
 ﻿
 namespace Me.Amon.Model
 {
-    public class MgtdDetail
+    public class GtdDetail : Vcs
     {
         public int P30F0401 { get; set; }
         /// <summary>

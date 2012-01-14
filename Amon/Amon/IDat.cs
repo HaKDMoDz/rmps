@@ -7,7 +7,7 @@
         /// </summary>
         public const string SQL_NOW = "datetime('now')";
         public const string VER_DB = "5";
-        public const int VER_DEFAULT = 1;
+        public const int VCS_DEFAULT = 1;
         public const int OPT_DELETE = -1;
         public const int OPT_DEFAULT = 0;
         public const int OPT_INSERT = 1;

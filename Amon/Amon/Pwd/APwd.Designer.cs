@@ -67,11 +67,11 @@
             this.TmiAppendCat = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiUpdateCat = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiDeleteCat = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.TmiEditSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.TmiAppendKey = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiUpdateKey = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiDeleteKey = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.TmiEditSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.TmuAppendAtt = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiAppendAttText = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiAppendAttPass = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,16 +99,16 @@
             this.TmiMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiTool = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.TmiViewSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.TmiCatView = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiKeyList = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiFindBar = new System.Windows.Forms.ToolStripMenuItem();
             this.TmuData = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiSync = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.TmiDataSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.TmiBackup = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiResuma = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.TmiDataSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.TmuExport = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiExportTxt = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiExportXml = new System.Windows.Forms.ToolStripMenuItem();
@@ -118,35 +118,36 @@
             this.TmuUser = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiPkey = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiSkey = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.TmiUserSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.TmiLib = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiUcs = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiIco = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            this.TmiUserSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.TmuSkin = new System.Windows.Forms.ToolStripMenuItem();
             this.TmuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.TmiHelpSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.TmiKeys = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+            this.TmiHelpSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.TmiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.TcTool = new System.Windows.Forms.ToolStripContainer();
             this.HSplit = new System.Windows.Forms.SplitContainer();
             this.VSplit = new System.Windows.Forms.SplitContainer();
             this.TvCatView = new System.Windows.Forms.TreeView();
+            this.IlCatList = new System.Windows.Forms.ImageList(this.components);
             this.LbKeyList = new System.Windows.Forms.ListBox();
             this.TpGrid = new System.Windows.Forms.TableLayoutPanel();
+            this.FbFind = new Me.Amon.Pwd.FindBar();
             this.TsTool = new System.Windows.Forms.ToolStrip();
             this.TsbAppend = new System.Windows.Forms.ToolStripButton();
             this.TsbUpdate = new System.Windows.Forms.ToolStripButton();
             this.TsbDelete = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.TsbToolSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.TsbMenu = new System.Windows.Forms.ToolStripButton();
             this.TsbTool = new System.Windows.Forms.ToolStripButton();
             this.TsbInfo = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.TsbToolSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.SsInfo = new System.Windows.Forms.StatusStrip();
-            this.IlCatList = new System.Windows.Forms.ImageList(this.components);
             this.CmAtt = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CmuAppendAtt = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiAppendAttText = new System.Windows.Forms.ToolStripMenuItem();
@@ -172,7 +173,6 @@
             this.CmiUpdateAttLine = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiDeleteAtt = new System.Windows.Forms.ToolStripMenuItem();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
-            this.FbFind = new Me.Amon.Pwd.FindBar();
             this.CmCat.SuspendLayout();
             this.CmKey.SuspendLayout();
             this.TmMenu.SuspendLayout();
@@ -458,11 +458,11 @@
             this.TmiAppendCat,
             this.TmiUpdateCat,
             this.TmiDeleteCat,
-            this.toolStripSeparator9,
+            this.TmiEditSep0,
             this.TmiAppendKey,
             this.TmiUpdateKey,
             this.TmiDeleteKey,
-            this.toolStripSeparator10,
+            this.TmiEditSep1,
             this.TmuAppendAtt,
             this.TmuUpdateAtt,
             this.TmiDeleteAtt});
@@ -473,54 +473,54 @@
             // TmiAppendCat
             // 
             this.TmiAppendCat.Name = "TmiAppendCat";
-            this.TmiAppendCat.Size = new System.Drawing.Size(124, 22);
+            this.TmiAppendCat.Size = new System.Drawing.Size(152, 22);
             this.TmiAppendCat.Text = "添加类别";
             this.TmiAppendCat.Click += new System.EventHandler(this.TmiAppendCat_Click);
             // 
             // TmiUpdateCat
             // 
             this.TmiUpdateCat.Name = "TmiUpdateCat";
-            this.TmiUpdateCat.Size = new System.Drawing.Size(124, 22);
+            this.TmiUpdateCat.Size = new System.Drawing.Size(152, 22);
             this.TmiUpdateCat.Text = "更新类别";
             this.TmiUpdateCat.Click += new System.EventHandler(this.TmiUpdateCat_Click);
             // 
             // TmiDeleteCat
             // 
             this.TmiDeleteCat.Name = "TmiDeleteCat";
-            this.TmiDeleteCat.Size = new System.Drawing.Size(124, 22);
+            this.TmiDeleteCat.Size = new System.Drawing.Size(152, 22);
             this.TmiDeleteCat.Text = "删除类别";
             this.TmiDeleteCat.Click += new System.EventHandler(this.TmiDeleteCat_Click);
             // 
-            // toolStripSeparator9
+            // TmiEditSep0
             // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(121, 6);
+            this.TmiEditSep0.Name = "TmiEditSep0";
+            this.TmiEditSep0.Size = new System.Drawing.Size(149, 6);
             // 
             // TmiAppendKey
             // 
             this.TmiAppendKey.Name = "TmiAppendKey";
-            this.TmiAppendKey.Size = new System.Drawing.Size(124, 22);
+            this.TmiAppendKey.Size = new System.Drawing.Size(152, 22);
             this.TmiAppendKey.Text = "添加记录";
             this.TmiAppendKey.Click += new System.EventHandler(this.TmiAppendKey_Click);
             // 
             // TmiUpdateKey
             // 
             this.TmiUpdateKey.Name = "TmiUpdateKey";
-            this.TmiUpdateKey.Size = new System.Drawing.Size(124, 22);
+            this.TmiUpdateKey.Size = new System.Drawing.Size(152, 22);
             this.TmiUpdateKey.Text = "更新记录";
             this.TmiUpdateKey.Click += new System.EventHandler(this.TmiUpdateKey_Click);
             // 
             // TmiDeleteKey
             // 
             this.TmiDeleteKey.Name = "TmiDeleteKey";
-            this.TmiDeleteKey.Size = new System.Drawing.Size(124, 22);
+            this.TmiDeleteKey.Size = new System.Drawing.Size(152, 22);
             this.TmiDeleteKey.Text = "删除记录";
             this.TmiDeleteKey.Click += new System.EventHandler(this.TmiDeleteKey_Click);
             // 
-            // toolStripSeparator10
+            // TmiEditSep1
             // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(121, 6);
+            this.TmiEditSep1.Name = "TmiEditSep1";
+            this.TmiEditSep1.Size = new System.Drawing.Size(149, 6);
             // 
             // TmuAppendAtt
             // 
@@ -536,7 +536,7 @@
             this.TmiAppendAttFile,
             this.TmiAppendAttLine});
             this.TmuAppendAtt.Name = "TmuAppendAtt";
-            this.TmuAppendAtt.Size = new System.Drawing.Size(124, 22);
+            this.TmuAppendAtt.Size = new System.Drawing.Size(152, 22);
             this.TmuAppendAtt.Text = "添加属性";
             // 
             // TmiAppendAttText
@@ -623,7 +623,7 @@
             this.TmiUpdateAttFile,
             this.TmiUpdateAttLine});
             this.TmuUpdateAtt.Name = "TmuUpdateAtt";
-            this.TmuUpdateAtt.Size = new System.Drawing.Size(124, 22);
+            this.TmuUpdateAtt.Size = new System.Drawing.Size(152, 22);
             this.TmuUpdateAtt.Text = "转换属性";
             // 
             // TmiUpdateAttText
@@ -699,7 +699,7 @@
             // TmiDeleteAtt
             // 
             this.TmiDeleteAtt.Name = "TmiDeleteAtt";
-            this.TmiDeleteAtt.Size = new System.Drawing.Size(124, 22);
+            this.TmiDeleteAtt.Size = new System.Drawing.Size(152, 22);
             this.TmiDeleteAtt.Text = "删除属性";
             this.TmiDeleteAtt.Click += new System.EventHandler(this.TmiDeleteAtt_Click);
             // 
@@ -709,7 +709,7 @@
             this.TmiMenu,
             this.TmiTool,
             this.TmiInfo,
-            this.toolStripSeparator5,
+            this.TmiViewSep0,
             this.TmiCatView,
             this.TmiKeyList,
             this.TmiFindBar});
@@ -743,10 +743,10 @@
             this.TmiInfo.Text = "状态栏";
             this.TmiInfo.Click += new System.EventHandler(this.TmiInfo_Click);
             // 
-            // toolStripSeparator5
+            // TmiViewSep0
             // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(166, 6);
+            this.TmiViewSep0.Name = "TmiViewSep0";
+            this.TmiViewSep0.Size = new System.Drawing.Size(166, 6);
             // 
             // TmiCatView
             // 
@@ -776,10 +776,10 @@
             // 
             this.TmuData.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TmiSync,
-            this.toolStripSeparator7,
+            this.TmiDataSep0,
             this.TmiBackup,
             this.TmiResuma,
-            this.toolStripSeparator8,
+            this.TmiDataSep1,
             this.TmuExport,
             this.TmiImport});
             this.TmuData.Name = "TmuData";
@@ -789,33 +789,33 @@
             // TmiSync
             // 
             this.TmiSync.Name = "TmiSync";
-            this.TmiSync.Size = new System.Drawing.Size(100, 22);
+            this.TmiSync.Size = new System.Drawing.Size(152, 22);
             this.TmiSync.Text = "同步";
             this.TmiSync.Click += new System.EventHandler(this.TmiSync_Click);
             // 
-            // toolStripSeparator7
+            // TmiDataSep0
             // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(97, 6);
+            this.TmiDataSep0.Name = "TmiDataSep0";
+            this.TmiDataSep0.Size = new System.Drawing.Size(149, 6);
             // 
             // TmiBackup
             // 
             this.TmiBackup.Name = "TmiBackup";
-            this.TmiBackup.Size = new System.Drawing.Size(100, 22);
+            this.TmiBackup.Size = new System.Drawing.Size(152, 22);
             this.TmiBackup.Text = "备份";
             this.TmiBackup.Click += new System.EventHandler(this.TmiBackup_Click);
             // 
             // TmiResuma
             // 
             this.TmiResuma.Name = "TmiResuma";
-            this.TmiResuma.Size = new System.Drawing.Size(100, 22);
+            this.TmiResuma.Size = new System.Drawing.Size(152, 22);
             this.TmiResuma.Text = "恢复";
             this.TmiResuma.Click += new System.EventHandler(this.TmiResuma_Click);
             // 
-            // toolStripSeparator8
+            // TmiDataSep1
             // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(97, 6);
+            this.TmiDataSep1.Name = "TmiDataSep1";
+            this.TmiDataSep1.Size = new System.Drawing.Size(149, 6);
             // 
             // TmuExport
             // 
@@ -823,7 +823,7 @@
             this.TmiExportTxt,
             this.TmiExportXml});
             this.TmuExport.Name = "TmuExport";
-            this.TmuExport.Size = new System.Drawing.Size(100, 22);
+            this.TmuExport.Size = new System.Drawing.Size(152, 22);
             this.TmuExport.Text = "导出";
             // 
             // TmiExportTxt
@@ -846,7 +846,7 @@
             this.TmiImportTxt,
             this.TmiImportXml});
             this.TmiImport.Name = "TmiImport";
-            this.TmiImport.Size = new System.Drawing.Size(100, 22);
+            this.TmiImport.Size = new System.Drawing.Size(152, 22);
             this.TmiImport.Text = "导入";
             // 
             // TmiImportTxt
@@ -868,11 +868,11 @@
             this.TmuUser.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TmiPkey,
             this.TmiSkey,
-            this.toolStripSeparator12,
+            this.TmiUserSep0,
             this.TmiLib,
             this.TmiUcs,
             this.TmiIco,
-            this.toolStripSeparator13});
+            this.TmiUserSep1});
             this.TmuUser.Name = "TmuUser";
             this.TmuUser.Size = new System.Drawing.Size(61, 21);
             this.TmuUser.Text = "用户(&U)";
@@ -891,10 +891,10 @@
             this.TmiSkey.Text = "设置安全口令(&S)";
             this.TmiSkey.Click += new System.EventHandler(this.TmiSkey_Click);
             // 
-            // toolStripSeparator12
+            // TmiUserSep0
             // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(161, 6);
+            this.TmiUserSep0.Name = "TmiUserSep0";
+            this.TmiUserSep0.Size = new System.Drawing.Size(161, 6);
             // 
             // TmiLib
             // 
@@ -917,10 +917,10 @@
             this.TmiIco.Text = "图标管理(&I)";
             this.TmiIco.Click += new System.EventHandler(this.TmiIco_Click);
             // 
-            // toolStripSeparator13
+            // TmiUserSep1
             // 
-            this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(161, 6);
+            this.TmiUserSep1.Name = "TmiUserSep1";
+            this.TmiUserSep1.Size = new System.Drawing.Size(161, 6);
             // 
             // TmuSkin
             // 
@@ -932,9 +932,9 @@
             // 
             this.TmuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TmiHelp,
-            this.toolStripSeparator11,
+            this.TmiHelpSep0,
             this.TmiKeys,
-            this.toolStripSeparator14,
+            this.TmiHelpSep1,
             this.TmiAbout});
             this.TmuHelp.Name = "TmuHelp";
             this.TmuHelp.Size = new System.Drawing.Size(61, 21);
@@ -947,10 +947,10 @@
             this.TmiHelp.Text = "帮助(&H)";
             this.TmiHelp.Click += new System.EventHandler(this.TmiHelp_Click);
             // 
-            // toolStripSeparator11
+            // TmiHelpSep0
             // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(149, 6);
+            this.TmiHelpSep0.Name = "TmiHelpSep0";
+            this.TmiHelpSep0.Size = new System.Drawing.Size(149, 6);
             // 
             // TmiKeys
             // 
@@ -959,10 +959,10 @@
             this.TmiKeys.Text = "快捷键(&K)";
             this.TmiKeys.Click += new System.EventHandler(this.TmiKeys_Click);
             // 
-            // toolStripSeparator14
+            // TmiHelpSep1
             // 
-            this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(149, 6);
+            this.TmiHelpSep1.Name = "TmiHelpSep1";
+            this.TmiHelpSep1.Size = new System.Drawing.Size(149, 6);
             // 
             // TmiAbout
             // 
@@ -1032,21 +1032,34 @@
             // 
             this.TvCatView.ContextMenuStrip = this.CmCat;
             this.TvCatView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TvCatView.ImageIndex = 0;
+            this.TvCatView.ImageList = this.IlCatList;
             this.TvCatView.Location = new System.Drawing.Point(0, 0);
             this.TvCatView.Name = "TvCatView";
+            this.TvCatView.SelectedImageIndex = 0;
             this.TvCatView.Size = new System.Drawing.Size(200, 200);
             this.TvCatView.TabIndex = 0;
+            this.TvCatView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvCatView_AfterSelect);
+            // 
+            // IlCatList
+            // 
+            this.IlCatList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.IlCatList.ImageSize = new System.Drawing.Size(16, 16);
+            this.IlCatList.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // LbKeyList
             // 
             this.LbKeyList.ContextMenuStrip = this.CmKey;
             this.LbKeyList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LbKeyList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.LbKeyList.FormattingEnabled = true;
             this.LbKeyList.ItemHeight = 12;
             this.LbKeyList.Location = new System.Drawing.Point(0, 0);
             this.LbKeyList.Name = "LbKeyList";
             this.LbKeyList.Size = new System.Drawing.Size(200, 160);
             this.LbKeyList.TabIndex = 0;
+            this.LbKeyList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.LbKeyList_DrawItem);
+            this.LbKeyList.SelectedIndexChanged += new System.EventHandler(this.LbKeyList_SelectedIndexChanged);
             // 
             // TpGrid
             // 
@@ -1062,6 +1075,14 @@
             this.TpGrid.Size = new System.Drawing.Size(396, 364);
             this.TpGrid.TabIndex = 0;
             // 
+            // FbFind
+            // 
+            this.FbFind.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FbFind.Location = new System.Drawing.Point(3, 3);
+            this.FbFind.Name = "FbFind";
+            this.FbFind.Size = new System.Drawing.Size(390, 26);
+            this.FbFind.TabIndex = 0;
+            // 
             // TsTool
             // 
             this.TsTool.Dock = System.Windows.Forms.DockStyle.None;
@@ -1069,11 +1090,11 @@
             this.TsbAppend,
             this.TsbUpdate,
             this.TsbDelete,
-            this.toolStripSeparator1,
+            this.TsbToolSep0,
             this.TsbMenu,
             this.TsbTool,
             this.TsbInfo,
-            this.toolStripSeparator6});
+            this.TsbToolSep1});
             this.TsTool.Location = new System.Drawing.Point(3, 0);
             this.TsTool.Name = "TsTool";
             this.TsTool.Size = new System.Drawing.Size(193, 25);
@@ -1109,10 +1130,10 @@
             this.TsbDelete.Text = "删除记录";
             this.TsbDelete.Click += new System.EventHandler(this.TsbDelete_Click);
             // 
-            // toolStripSeparator1
+            // TsbToolSep0
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.TsbToolSep0.Name = "TsbToolSep0";
+            this.TsbToolSep0.Size = new System.Drawing.Size(6, 25);
             // 
             // TsbMenu
             // 
@@ -1144,10 +1165,10 @@
             this.TsbInfo.Text = "toolStripButton3";
             this.TsbInfo.Click += new System.EventHandler(this.TsbInfo_Click);
             // 
-            // toolStripSeparator6
+            // TsbToolSep1
             // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+            this.TsbToolSep1.Name = "TsbToolSep1";
+            this.TsbToolSep1.Size = new System.Drawing.Size(6, 25);
             // 
             // SsInfo
             // 
@@ -1156,12 +1177,6 @@
             this.SsInfo.Size = new System.Drawing.Size(624, 22);
             this.SsInfo.TabIndex = 4;
             this.SsInfo.Text = "statusStrip1";
-            // 
-            // IlCatList
-            // 
-            this.IlCatList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.IlCatList.ImageSize = new System.Drawing.Size(16, 16);
-            this.IlCatList.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // CmAtt
             // 
@@ -1353,14 +1368,6 @@
             this.CmiDeleteAtt.Text = "删除属性";
             this.CmiDeleteAtt.Click += new System.EventHandler(this.CmiDeleteAtt_Click);
             // 
-            // FbFind
-            // 
-            this.FbFind.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FbFind.Location = new System.Drawing.Point(3, 3);
-            this.FbFind.Name = "FbFind";
-            this.FbFind.Size = new System.Drawing.Size(390, 26);
-            this.FbFind.TabIndex = 0;
-            // 
             // APwd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1416,7 +1423,7 @@
         private System.Windows.Forms.ToolStripButton TsbAppend;
         private System.Windows.Forms.ToolStripButton TsbUpdate;
         private System.Windows.Forms.ToolStripButton TsbDelete;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator TsbToolSep0;
         private System.Windows.Forms.StatusStrip SsInfo;
         private System.Windows.Forms.SplitContainer HSplit;
         private System.Windows.Forms.SplitContainer VSplit;
@@ -1443,39 +1450,39 @@
         private System.Windows.Forms.ToolStripMenuItem TmiTool;
         private System.Windows.Forms.ToolStripMenuItem TmiMenu;
         private System.Windows.Forms.ToolStripMenuItem TmiInfo;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripSeparator TmiViewSep0;
         private System.Windows.Forms.ToolStripButton TsbMenu;
         private System.Windows.Forms.ToolStripButton TsbTool;
         private System.Windows.Forms.ToolStripButton TsbInfo;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripSeparator TsbToolSep1;
         private System.Windows.Forms.ToolStripMenuItem TmiCatView;
         private System.Windows.Forms.ToolStripMenuItem TmiKeyList;
         private System.Windows.Forms.ToolStripMenuItem TmiFindBar;
         private System.Windows.Forms.ToolStripMenuItem TmiSync;
         private System.Windows.Forms.ToolStripMenuItem TmiBackup;
         private System.Windows.Forms.ToolStripMenuItem TmiResuma;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripSeparator TmiDataSep0;
+        private System.Windows.Forms.ToolStripSeparator TmiDataSep1;
         private System.Windows.Forms.ToolStripMenuItem TmuExport;
         private System.Windows.Forms.ToolStripMenuItem TmiImport;
         private System.Windows.Forms.ToolStripMenuItem TmiAppendCat;
         private System.Windows.Forms.ToolStripMenuItem TmiUpdateCat;
         private System.Windows.Forms.ToolStripMenuItem TmiDeleteCat;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripSeparator TmiEditSep0;
         private System.Windows.Forms.ToolStripMenuItem TmiAppendKey;
         private System.Windows.Forms.ToolStripMenuItem TmiUpdateKey;
         private System.Windows.Forms.ToolStripMenuItem TmiDeleteKey;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripSeparator TmiEditSep1;
         private System.Windows.Forms.ToolStripMenuItem TmuUser;
         private System.Windows.Forms.ToolStripMenuItem TmiPkey;
         private System.Windows.Forms.ToolStripMenuItem TmiSkey;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripSeparator TmiHelpSep0;
         private System.Windows.Forms.ImageList IlCatList;
         private FindBar FbFind;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
+        private System.Windows.Forms.ToolStripSeparator TmiUserSep0;
         private System.Windows.Forms.ToolStripMenuItem TmiUcs;
         private System.Windows.Forms.ToolStripMenuItem TmiIco;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
+        private System.Windows.Forms.ToolStripSeparator TmiUserSep1;
         private System.Windows.Forms.ToolStripMenuItem TmiLib;
         private System.Windows.Forms.ToolStripMenuItem CmiLabel0;
         private System.Windows.Forms.ToolStripMenuItem CmiLabel1;
@@ -1512,7 +1519,7 @@
         private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttText;
         private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttPass;
         private System.Windows.Forms.ToolTip TpTips;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
+        private System.Windows.Forms.ToolStripSeparator TmiHelpSep1;
         private System.Windows.Forms.ToolStripMenuItem TmiExportTxt;
         private System.Windows.Forms.ToolStripMenuItem TmiExportXml;
         private System.Windows.Forms.ToolStripMenuItem TmiImportTxt;

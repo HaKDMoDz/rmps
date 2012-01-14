@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Model
 {
-    public class MgtdHeader
+    public class GtdHeader : Vcs
     {
         /// <summary>
         /// 显示排序
@@ -87,6 +87,6 @@ namespace Me.Amon.Model
         /// <summary>s
         /// 提示列表
         /// </summary>
-        public List<MgtdDetail> HintList { get; set; }
+        public List<GtdDetail> HintList { get; set; }
     }
 }

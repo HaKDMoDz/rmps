@@ -8,6 +8,7 @@ namespace Me.Amon.Pwd.Wiz
     public partial class BeanLine : UserControl, IAttEdit
     {
         private TableLayoutPanel _Grid;
+        private RowStyle _Style;
         private Label _Label;
         private AAtt _Att;
 
@@ -20,11 +21,14 @@ namespace Me.Amon.Pwd.Wiz
         public BeanLine(TableLayoutPanel grid)
         {
             _Grid = grid;
+
+            InitializeComponent();
+
             _Label = new Label();
             _Label.TextAlign = ContentAlignment.MiddleRight;
             _Label.Dock = DockStyle.Fill;
 
-            InitializeComponent();
+            _Style = new RowStyle(SizeType.Absolute, 27F);
             Dock = DockStyle.Fill;
         }
         #endregion
@@ -32,7 +36,9 @@ namespace Me.Amon.Pwd.Wiz
         #region 接口实现
         public void InitView(int row)
         {
-            _Grid.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+            TabIndex = row;
+
+            _Grid.RowStyles.Add(_Style);
 
             _Grid.Controls.Add(_Label, 0, row);
             _Grid.Controls.Add(this, 1, row);

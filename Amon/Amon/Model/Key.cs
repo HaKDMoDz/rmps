@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace Me.Amon.Model
 {
-    public class Key
+    public class Key : Vcs
     {
         /// <summary>
         /// 口令索引
@@ -82,7 +82,7 @@ namespace Me.Amon.Model
         /// <summary>
         /// 定时任务
         /// </summary>
-        public MgtdHeader GtdHeader { get; set; }
+        public GtdHeader GtdHeader { get; set; }
 
         /// <summary>
         /// 是否备份
