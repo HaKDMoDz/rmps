@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Drawing;
+using System.Text;
 using System.Xml;
 
 namespace Me.Amon.Model
@@ -90,6 +91,7 @@ namespace Me.Amon.Model
         public bool Backup { get; set; }
 
         public bool Modified { get; set; }
+        public Image Ico { get; set; }
 
         /// <summary>
         /// 恢复默认值

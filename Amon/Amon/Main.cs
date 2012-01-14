@@ -10,10 +10,15 @@ namespace Me.Amon
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, System.EventArgs e)
+        private void BtPwd_Click(object sender, System.EventArgs e)
         {
             SignIn signIn = new SignIn();
             signIn.Show();
+        }
+
+        private void button1_Click(object sender, System.EventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -33,6 +33,7 @@ namespace Me.Amon.Pwd.Wiz
         {
             grid.Controls.Add(this, 0, 0);
             Dock = DockStyle.Fill;
+            TabIndex = 0;
             grid.RowStyles[1].Height = 32;
         }
 

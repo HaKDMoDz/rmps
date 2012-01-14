@@ -467,5 +467,15 @@ namespace Me.Amon.Util
             }
             return buf.ToString();
         }
+
+        public static string Text2DB(string text)
+        {
+            return text != null ? text.Replace("'", "''") : "";
+        }
+
+        public static string Db2Text(string text)
+        {
+            return "";
+        }
     }
 }

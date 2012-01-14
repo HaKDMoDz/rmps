@@ -115,7 +115,6 @@
             this.IlCatList = new System.Windows.Forms.ImageList(this.components);
             this.LbKeyList = new System.Windows.Forms.ListBox();
             this.TpGrid = new System.Windows.Forms.TableLayoutPanel();
-            this.FbFind = new Me.Amon.Pwd.FindBar();
             this.SsInfo = new System.Windows.Forms.StatusStrip();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.CmCat = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -914,7 +913,6 @@
             // 
             this.TpGrid.ColumnCount = 1;
             this.TpGrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TpGrid.Controls.Add(this.FbFind, 0, 0);
             this.TpGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TpGrid.Location = new System.Drawing.Point(0, 0);
             this.TpGrid.Name = "TpGrid";
@@ -923,14 +921,6 @@
             this.TpGrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TpGrid.Size = new System.Drawing.Size(396, 389);
             this.TpGrid.TabIndex = 0;
-            // 
-            // FbFind
-            // 
-            this.FbFind.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FbFind.Location = new System.Drawing.Point(3, 3);
-            this.FbFind.Name = "FbFind";
-            this.FbFind.Size = new System.Drawing.Size(390, 26);
-            this.FbFind.TabIndex = 0;
             // 
             // SsInfo
             // 
@@ -1494,10 +1484,8 @@
         private System.Windows.Forms.ImageList IlCatList;
         private System.Windows.Forms.ListBox LbKeyList;
         private System.Windows.Forms.TableLayoutPanel TpGrid;
-        private FindBar FbFind;
         private System.Windows.Forms.StatusStrip SsInfo;
         private System.Windows.Forms.ToolTip TpTips;
-
         private System.Windows.Forms.ContextMenuStrip CmCat;
         private System.Windows.Forms.ToolStripMenuItem CmiAppendCat;
         private System.Windows.Forms.ToolStripMenuItem CmiUpdateCat;

@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Me.Amon.Model.Att;
-using Me.Amon.Util;
 
 namespace Me.Amon.Model
 {

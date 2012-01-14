@@ -10,6 +10,8 @@ namespace Me.Amon.Pwd.Wiz
 
         void HideView(TableLayoutPanel grid);
 
+        bool Focus();
+
         void ShowData();
 
         bool SaveData();

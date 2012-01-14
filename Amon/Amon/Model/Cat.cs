@@ -25,7 +25,11 @@
         /// <summary>
         /// 类别键值
         /// </summary>
-        public string Value { get; set; }
+        public string Meta { get; set; }
+        /// <summary>
+        /// 类别说明
+        /// </summary>
+        public string Memo { get; set; }
 
         public override string ToString()
         {

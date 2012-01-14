@@ -34,6 +34,7 @@ namespace Me.Amon.Pwd.Wiz
         {
             grid.Controls.Add(this, 0, 0);
             Dock = DockStyle.Fill;
+            TabIndex = 0;
             grid.RowStyles[1].Height = 32;
         }
 
@@ -73,8 +74,6 @@ namespace Me.Amon.Pwd.Wiz
                 return;
             }
             TbHint.Text = hint.Data;
-
-            CbLib.Focus();
         }
 
         public bool SaveData()
@@ -130,6 +129,11 @@ namespace Me.Amon.Pwd.Wiz
         }
 
         private void CbLib_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PbIcon_Click(object sender, EventArgs e)
         {
 
         }

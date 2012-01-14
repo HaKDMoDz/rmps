@@ -34,7 +34,7 @@
             this.LbTips = new System.Windows.Forms.Label();
             this.TbTips = new System.Windows.Forms.TextBox();
             this.LbValue = new System.Windows.Forms.Label();
-            this.TbValue = new System.Windows.Forms.TextBox();
+            this.TbMeta = new System.Windows.Forms.TextBox();
             this.LbMemo = new System.Windows.Forms.Label();
             this.TbMemo = new System.Windows.Forms.TextBox();
             this.BtOk = new System.Windows.Forms.Button();
@@ -82,12 +82,12 @@
             this.LbValue.TabIndex = 4;
             this.LbValue.Text = "键值(&V)";
             // 
-            // TbValue
+            // TbMeta
             // 
-            this.TbValue.Location = new System.Drawing.Point(65, 66);
-            this.TbValue.Name = "TbValue";
-            this.TbValue.Size = new System.Drawing.Size(140, 21);
-            this.TbValue.TabIndex = 5;
+            this.TbMeta.Location = new System.Drawing.Point(65, 66);
+            this.TbMeta.Name = "TbMeta";
+            this.TbMeta.Size = new System.Drawing.Size(140, 21);
+            this.TbMeta.TabIndex = 5;
             // 
             // LbMemo
             // 
@@ -123,6 +123,7 @@
             // BtNo
             // 
             this.BtNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtNo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.BtNo.Location = new System.Drawing.Point(187, 157);
             this.BtNo.Name = "BtNo";
             this.BtNo.Size = new System.Drawing.Size(75, 23);
@@ -133,14 +134,16 @@
             // 
             // CatEdit
             // 
+            this.AcceptButton = this.BtOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.BtNo;
             this.ClientSize = new System.Drawing.Size(274, 192);
             this.Controls.Add(this.BtNo);
             this.Controls.Add(this.BtOk);
             this.Controls.Add(this.TbMemo);
             this.Controls.Add(this.LbMemo);
-            this.Controls.Add(this.TbValue);
+            this.Controls.Add(this.TbMeta);
             this.Controls.Add(this.LbValue);
             this.Controls.Add(this.TbTips);
             this.Controls.Add(this.LbTips);
@@ -166,7 +169,7 @@
         private System.Windows.Forms.Label LbTips;
         private System.Windows.Forms.TextBox TbTips;
         private System.Windows.Forms.Label LbValue;
-        private System.Windows.Forms.TextBox TbValue;
+        private System.Windows.Forms.TextBox TbMeta;
         private System.Windows.Forms.Label LbMemo;
         private System.Windows.Forms.TextBox TbMemo;
         private System.Windows.Forms.Button BtOk;

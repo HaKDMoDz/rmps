@@ -36,17 +36,30 @@ namespace Me.Amon.Util
                 cBox.SelectedIndex = 0;
             }
         }
-        private static Image _None;
 
-        public static Image None
+        private static Image _CatNan;
+        public static Image CatNan
         {
             get
             {
-                if (_None == null)
+                if (_CatNan == null)
                 {
-                    _None = new Bitmap(16, 16);
+                    _CatNan = new Bitmap(16, 16);
                 }
-                return _None;
+                return _CatNan;
+            }
+        }
+
+        private static Image _KeyNan;
+        public static Image KeyNan
+        {
+            get
+            {
+                if (_KeyNan == null)
+                {
+                    _KeyNan = new Bitmap(32, 32);
+                }
+                return _KeyNan;
             }
         }
 

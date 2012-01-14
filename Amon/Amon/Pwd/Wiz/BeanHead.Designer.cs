@@ -116,6 +116,7 @@
             this.PbIcon.Size = new System.Drawing.Size(16, 16);
             this.PbIcon.TabIndex = 7;
             this.PbIcon.TabStop = false;
+            this.PbIcon.Click += new System.EventHandler(this.PbIcon_Click);
             // 
             // LbHint
             // 

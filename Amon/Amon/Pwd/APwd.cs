@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Me.Amon.Da;
 using Me.Amon.Event;
@@ -19,11 +21,13 @@ namespace Me.Amon.Pwd
     public partial class APwd : Form
     {
         #region 全局变量
+        private FindBar _FindBar;
         private UserModel _UserModel;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
         private ViewModel _ViewModel;
         private TreeNode _RootNode;
+        private TreeNode _LastNode;
         private IPwd _PwdView;
         private APro _ProView;
         private AWiz _WizView;
@@ -54,7 +58,7 @@ namespace Me.Amon.Pwd
             _ViewModel.Load();
 
             Cat cat = new Cat { Id = "0", Text = "阿木密码箱", Tips = "阿木密码箱", Icon = "0" };
-            IlCatList.Images.Add(cat.Icon, BeanUtil.None);
+            IlCatList.Images.Add(cat.Icon, BeanUtil.CatNan);
             _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Id };
             _RootNode.Tag = cat;
             TvCatView.Nodes.Add(_RootNode);
@@ -78,6 +82,14 @@ namespace Me.Amon.Pwd
 
             LbKeyList.ItemHeight = 30;
 
+            _FindBar = new FindBar(this);
+            _FindBar.Dock = DockStyle.Fill;
+            _FindBar.Location = new Point(3, 3);
+            _FindBar.Name = "FbFind";
+            _FindBar.Size = new Size(390, 26);
+            _FindBar.TabIndex = 0;
+            TpGrid.Controls.Add(_FindBar, 0, 0);
+
             ChangeView(2);
         }
 
@@ -99,6 +111,8 @@ namespace Me.Amon.Pwd
                 cat.Text = row[IDat.C2010205] as string;
                 cat.Tips = row[IDat.C2010206] as string;
                 cat.Icon = row[IDat.C2010207] as string;
+                cat.Meta = row[IDat.C2010208] as string;
+                cat.Memo = row[IDat.C2010209] as string;
 
                 TreeNode node = new TreeNode();
                 node.Name = cat.Id;
@@ -107,7 +121,7 @@ namespace Me.Amon.Pwd
                 node.Tag = cat;
                 if (CharUtil.IsValidateHash(cat.Icon))
                 {
-                    //IlCatList.Images.Add(cat.Icon, Image.FromFile(""));
+                    IlCatList.Images.Add(cat.Icon, Image.FromFile(_DataModel.CatDir + cat.Icon + ".png"));
                     node.ImageKey = cat.Icon;
                 }
                 else
@@ -144,7 +158,12 @@ namespace Me.Amon.Pwd
             dba.AddWhere(IDat.APWD0104, _UserModel.Code);
             dba.AddWhere(IDat.APWD0106, catId);
             dba.AddSort(IDat.APWD0101, false);
-            InitKey(dba.ExecuteSelect());
+            using (DataTable dt = dba.ExecuteSelect())
+            {
+                InitKey(dt);
+            }
+
+            _LastNode = node;
         }
 
         private void InitKey(DataTable data)
@@ -170,6 +189,7 @@ namespace Me.Amon.Pwd
                 key.Memo = row[IDat.APWD0110] as string;
                 key.VisitDate = row[IDat.APWD0111] as string;
                 key.CipherVer = row[IDat.APWD0112] as string;
+                InitIco(key);
                 LbKeyList.Items.Add(key);
             }
             data.Dispose();
@@ -203,7 +223,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            //e.Graphics.DrawImage(null, 0, 0);
+            e.Graphics.DrawImage(key.Ico, 0, 0);
 
             //最后把要显示的文字画在背景图片上
             e.Graphics.DrawString(key.Title, this.Font, Brushes.Black, e.Bounds.X + 36, e.Bounds.Y + 2);
@@ -222,7 +242,7 @@ namespace Me.Amon.Pwd
             }
 
             Key key = LbKeyList.SelectedItem as Key;
-            if (key == null)
+            if (key == null || !CharUtil.IsValidateHash(key.Id))
             {
                 BeanUtil.ShowAlert("系统异常，请稍后重试！");
                 return;
@@ -249,6 +269,17 @@ namespace Me.Amon.Pwd
 
         private void APwd_KeyDown(object sender, KeyEventArgs e)
         {
+            // 帮助
+            if (e.KeyCode == Keys.F1)
+            {
+                return;
+            }
+            // 快捷键
+            if (e.KeyCode == Keys.F5)
+            {
+                ShowHotKeys();
+                return;
+            }
             if (e.Control)
             {
                 // 添加记录
@@ -302,13 +333,31 @@ namespace Me.Amon.Pwd
                 // 查找
                 if (e.KeyCode == Keys.F)
                 {
-                    _PwdView.DeleteKey();
+                    _FindBar.Focus();
                     return;
                 }
                 // 查询
                 if (e.KeyCode == Keys.Q)
                 {
                     _PwdView.DeleteKey();
+                    return;
+                }
+                // 添加类别
+                if (e.KeyValue == 187 || e.KeyValue == 107)
+                {
+                    AppendCat();
+                    return;
+                }
+                // 更新类别
+                if (e.KeyValue == 190 || e.KeyValue == 110)
+                {
+                    UpdateCat();
+                    return;
+                }
+                // 删除类别
+                if (e.KeyValue == 189 || e.KeyValue == 109)
+                {
+                    DeleteCat();
                     return;
                 }
                 // 菜单栏隐现
@@ -562,7 +611,7 @@ namespace Me.Amon.Pwd
 
         private void TmiKeyList_Click(object sender, EventArgs e)
         {
-
+            ShowHotKeys();
         }
 
         private void TmiFindBar_Click(object sender, EventArgs e)
@@ -658,39 +707,6 @@ namespace Me.Amon.Pwd
 
         private void TmiKeys_Click(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("按键");
-            dt.Columns.Add("功能");
-            dt.Columns.Add("说明");
-            dt.Rows.Add("Control N", "添加记录", "");
-            dt.Rows.Add("Control S", "保存记录", "");
-            dt.Rows.Add("Control D", "删除记录", "");
-            dt.Rows.Add("Control +", "添加类别", "");
-            dt.Rows.Add("Control -", "删除类别", "");
-            dt.Rows.Add("Control H", "隐藏窗口", "");
-            dt.Rows.Add("Control Enter", "隐藏窗口", "");
-            dt.Rows.Add("Control L", "锁定窗口", "");
-            dt.Rows.Add("Control Up", "选择上一个属性", "");
-            dt.Rows.Add("Control Down", "选择下一个属性", "");
-            dt.Rows.Add("Control Shift Up", "向上移动属性", "");
-            dt.Rows.Add("Control Shift Down", "向下移动属性", "");
-            dt.Rows.Add("Control M", "切换菜单栏显示状态", "");
-            dt.Rows.Add("Control T", "切换工具栏显示状态", "");
-            dt.Rows.Add("Control I", "切换状态栏显示状态", "");
-            dt.Rows.Add("Control F", "切换查找栏显示状态", "");
-            dt.Rows.Add("Control K", "切换类别导航显示状态", "");
-            dt.Rows.Add("Control P", "切换记录导航显示状态", "");
-            dt.Rows.Add("Control A", "切换属性编辑显示状态", "");
-            dt.Rows.Add("Control Q", "快速查找", "");
-            dt.Rows.Add("Control 1", "切换到专业模式", "");
-            dt.Rows.Add("Control 2", "切换到向导模式", "");
-            dt.Rows.Add("Control 3", "切换到记事模式", "");
-            dt.Rows.Add("Alt C", "复制属性数据到剪贴板", "");
-            dt.Rows.Add("Alt U", "应用当前属性变更", "");
-            dt.Rows.Add("Alt D", "移除当前属性", "");
-            HotKeys keys = new HotKeys();
-            keys.KeyList = dt;
-            keys.Show(this);
         }
 
         private void TmiAbout_Click(object sender, EventArgs e)
@@ -1042,25 +1058,33 @@ namespace Me.Amon.Pwd
 
         private void AppendCatHandler(Cat cat)
         {
-            TreeNode root = TvCatView.SelectedNode;
+            if (_LastNode == null)
+            {
+                return;
+            }
+
+            cat.Id = HashUtil.GetCurrTimeHex(false);
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
             dba.AddTable(IDat.C2010200);
-            dba.AddParam(IDat.C2010201, root.Nodes.Count);
+            dba.AddParam(IDat.C2010201, _LastNode.Nodes.Count);
             dba.AddParam(IDat.C2010202, _UserModel.Code);
-            dba.AddParam(IDat.C2010203, HashUtil.GetCurrTimeHex(false));
-            dba.AddParam(IDat.C2010204, root.Name);
+            dba.AddParam(IDat.C2010203, cat.Id);
+            dba.AddParam(IDat.C2010204, _LastNode.Name);
             dba.AddParam(IDat.C2010205, cat.Text);
             dba.AddParam(IDat.C2010206, cat.Tips);
             dba.AddParam(IDat.C2010207, cat.Icon);
-            dba.AddParam(IDat.C2010208, cat.Value);
-            dba.AddParam(IDat.C2010209, "");
+            dba.AddParam(IDat.C2010208, cat.Meta);
+            dba.AddParam(IDat.C2010209, cat.Memo);
             dba.AddParam(IDat.C201020A, IDat.SQL_NOW, false);
             dba.AddParam(IDat.C201020B, IDat.SQL_NOW, false);
             dba.AddParam(IDat.C201020C, IDat.VCS_DEFAULT);
             dba.AddParam(IDat.C201020D, IDat.OPT_INSERT);
-            dba.ExecuteInsert();
+            if (1 != dba.ExecuteInsert())
+            {
+                return;
+            }
 
             TreeNode node = new TreeNode();
             node.Name = cat.Id;
@@ -1071,7 +1095,8 @@ namespace Me.Amon.Pwd
             {
                 node.ImageKey = cat.Icon;
             }
-            root.Nodes.Add(node);
+            _LastNode.Nodes.Add(node);
+            _LastNode.Expand();
         }
 
         private void UpdateCat()
@@ -1105,13 +1130,13 @@ namespace Me.Amon.Pwd
             dba.AddParam(IDat.C2010205, cat.Text);
             dba.AddParam(IDat.C2010206, cat.Tips);
             dba.AddParam(IDat.C2010207, cat.Icon);
-            dba.AddParam(IDat.C2010208, cat.Value);
-            dba.AddParam(IDat.C2010209, "");
+            dba.AddParam(IDat.C2010208, cat.Meta);
+            dba.AddParam(IDat.C2010209, cat.Memo);
             dba.AddParam(IDat.C201020A, IDat.SQL_NOW, false);
             dba.AddVcs(IDat.C201020C, 1);
             dba.AddOpt(IDat.C201020D, cat.Operate, IDat.OPT_UPDATE);
             dba.AddWhere(IDat.C2010202, _UserModel.Code);
-            dba.AddWhere(IDat.C2010203, HashUtil.GetCurrTimeHex(false));
+            dba.AddWhere(IDat.C2010203, cat.Id);
             if (1 != dba.ExecuteUpdate())
             {
                 return;
@@ -1150,7 +1175,7 @@ namespace Me.Amon.Pwd
             dba.AddColumn("COUNT(0)", "CNT");
             dba.AddWhere(IDat.APWD0104, _UserModel.Code);
             dba.AddWhere(IDat.APWD0106, cat.Id);
-            int cnt = (int)dba.ExecuteScalar();
+            long cnt = (long)dba.ExecuteScalar();
             if (cnt > 0)
             {
                 MessageBox.Show("口令记录不为空，不能删除！", "");
@@ -1175,19 +1200,13 @@ namespace Me.Amon.Pwd
         #region 口令处理
         private void AppendKey()
         {
-            if (_SafeModel.Key == null)
+            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                _SafeModel.Key = new Key();
+                BeanUtil.ShowAlert("数据已修改，请保存！");
+                return;
             }
-            else
-            {
-                if (_SafeModel.Key.Modified)
-                {
-                    BeanUtil.ShowAlert("数据已修改，请保存！");
-                    return;
-                }
-                _SafeModel.Key.SetDefault();
-            }
+
+            _SafeModel.Key = new Key { Ico = BeanUtil.CatNan };
 
             _SafeModel.Clear();
             _SafeModel.InitGuid();
@@ -1304,7 +1323,8 @@ namespace Me.Amon.Pwd
                 dba.AddParam(IDat.APWD0103, 0);
                 dba.AddParam(IDat.APWD0104, _UserModel.Code);
                 dba.AddParam(IDat.APWD0105, _SafeModel.Key.Id);
-                dba.AddParam(IDat.APWD0111, _SafeModel.Key.RegDate);
+                _SafeModel.Key.VisitDate = _SafeModel.Key.RegDate;
+                dba.AddParam(IDat.APWD0111, _SafeModel.Key.VisitDate);
                 dba.AddParam(IDat.APWD0113, IDat.VCS_DEFAULT);
                 dba.AddParam(IDat.APWD0114, IDat.OPT_INSERT);
                 dba.AddInsertBatch();
@@ -1337,7 +1357,7 @@ namespace Me.Amon.Pwd
 
             if (!update)
             {
-                LbKeyList.Items.Add(_SafeModel.Key);
+                LbKeyList.Items.Insert(0, _SafeModel.Key);
             }
             _SafeModel.Key.Modified = false;
             _PwdView.ShowData();
@@ -1345,6 +1365,97 @@ namespace Me.Amon.Pwd
 
         private void DeleteKey()
         {
+        }
+
+        public void SearchKey(string key)
+        {
+            key = key.Trim();
+            if (string.IsNullOrEmpty(key))
+            {
+                TvCatView.SelectedNode = _LastNode;
+                return;
+            }
+
+            key = key.Replace('　', ' ').Replace('＋', '+');
+            key = CharUtil.Text2DB(key.ToLower());
+            key = Regex.Replace(key, "^[+\\s]*|[+\\s]*$", "%");
+            key = Regex.Replace(key, "[+%\\s]+", "%");
+            if (key == "%")
+            {
+                MessageBox.Show("您输入的查询条件无效！");
+                return;
+            }
+
+            TvCatView.SelectedNode = null;
+
+            DBAccess dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(IDat.APWD0100);
+            dba.AddWhere(IDat.APWD0104, _UserModel.Code);
+            dba.AddWhere(string.Format("{0} LIKE '{2}' or {1} like '{2}'", IDat.APWD0109, IDat.APWD010A, key));
+            dba.AddWhere(IDat.APWD0114, "!=", IDat.OPT_DELETE.ToString(), false);
+
+            using (DataTable dt = dba.ExecuteSelect())
+            {
+                InitKey(dt);
+            }
+        }
+
+        private void InitIco(Key key)
+        {
+            if (CharUtil.IsValidateHash(key.IcoName))
+            {
+                if (CharUtil.IsValidateHash(key.IcoPath))
+                {
+                    key.Ico = Image.FromFile(_DataModel.KeyDir + key.IcoPath + Path.DirectorySeparatorChar + key.IcoName + ".png");
+                }
+                else
+                {
+                    key.Ico = Image.FromFile(_DataModel.KeyDir + key.IcoName + ".png");
+                }
+            }
+            else
+            {
+                key.Ico = BeanUtil.KeyNan;
+            }
+        }
+
+        private void ShowHotKeys()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("按键");
+            dt.Columns.Add("功能");
+            dt.Columns.Add("说明");
+            dt.Rows.Add("Control N", "添加记录", "");
+            dt.Rows.Add("Control S", "保存记录", "");
+            dt.Rows.Add("Control D", "删除记录", "");
+            dt.Rows.Add("Control +", "添加类别", "");
+            dt.Rows.Add("Control -", "删除类别", "");
+            dt.Rows.Add("Control H", "隐藏窗口", "");
+            dt.Rows.Add("Control Enter", "隐藏窗口", "");
+            dt.Rows.Add("Control L", "锁定窗口", "");
+            dt.Rows.Add("Control Up", "选择上一个属性", "");
+            dt.Rows.Add("Control Down", "选择下一个属性", "");
+            dt.Rows.Add("Control Shift Up", "向上移动属性", "");
+            dt.Rows.Add("Control Shift Down", "向下移动属性", "");
+            dt.Rows.Add("Control M", "切换菜单栏显示状态", "");
+            dt.Rows.Add("Control T", "切换工具栏显示状态", "");
+            dt.Rows.Add("Control I", "切换状态栏显示状态", "");
+            dt.Rows.Add("Control F", "切换查找栏显示状态", "");
+            dt.Rows.Add("Control K", "切换类别导航显示状态", "");
+            dt.Rows.Add("Control P", "切换记录导航显示状态", "");
+            dt.Rows.Add("Control A", "切换属性编辑显示状态", "");
+            dt.Rows.Add("Control Q", "快速查找", "");
+            dt.Rows.Add("Control 1", "切换到专业模式", "");
+            dt.Rows.Add("Control 2", "切换到向导模式", "");
+            dt.Rows.Add("Control 3", "切换到记事模式", "");
+            dt.Rows.Add("Alt C", "复制属性数据到剪贴板", "");
+            dt.Rows.Add("Alt U", "应用当前属性变更", "");
+            dt.Rows.Add("Alt D", "移除当前属性", "");
+
+            HotKeys keys = new HotKeys();
+            keys.KeyList = dt;
+            keys.Show(this);
         }
         #endregion
         #endregion

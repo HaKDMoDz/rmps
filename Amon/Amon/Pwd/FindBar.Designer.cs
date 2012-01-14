@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.LbFind = new System.Windows.Forms.Label();
-            this.TbFiind = new System.Windows.Forms.TextBox();
+            this.TbFind = new System.Windows.Forms.TextBox();
             this.BtFind = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -42,17 +42,16 @@
             this.LbFind.TabIndex = 0;
             this.LbFind.Text = "查找(&F)";
             // 
-            // TbFiind
+            // TbFind
             // 
-            this.TbFiind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.TbFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TbFiind.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.TbFiind.Location = new System.Drawing.Point(56, 3);
-            this.TbFiind.Name = "TbFiind";
-            this.TbFiind.Size = new System.Drawing.Size(222, 23);
-            this.TbFiind.TabIndex = 1;
-            this.TbFiind.Text = "Abc中文";
-            this.TbFiind.TextChanged += new System.EventHandler(this.TbFind_TextChanged);
+            this.TbFind.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.TbFind.Location = new System.Drawing.Point(56, 3);
+            this.TbFind.Name = "TbFind";
+            this.TbFind.Size = new System.Drawing.Size(222, 23);
+            this.TbFind.TabIndex = 1;
+            this.TbFind.TextChanged += new System.EventHandler(this.TbFind_TextChanged);
             // 
             // BtFind
             // 
@@ -70,7 +69,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.BtFind);
-            this.Controls.Add(this.TbFiind);
+            this.Controls.Add(this.TbFind);
             this.Controls.Add(this.LbFind);
             this.Name = "FindBar";
             this.Size = new System.Drawing.Size(362, 29);
@@ -82,7 +81,7 @@
         #endregion
 
         private System.Windows.Forms.Label LbFind;
-        private System.Windows.Forms.TextBox TbFiind;
+        private System.Windows.Forms.TextBox TbFind;
         private System.Windows.Forms.Button BtFind;
     }
 }

@@ -61,14 +61,14 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 232);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(326, 26);
-            this.flowLayoutPanel1.TabIndex = 0;
+            this.flowLayoutPanel1.TabIndex = 1;
             // 
             // BtCopy
             // 
             this.BtCopy.Location = new System.Drawing.Point(248, 3);
             this.BtCopy.Name = "BtCopy";
             this.BtCopy.Size = new System.Drawing.Size(75, 23);
-            this.BtCopy.TabIndex = 0;
+            this.BtCopy.TabIndex = 2;
             this.BtCopy.Text = "复制(&C)";
             this.BtCopy.UseVisualStyleBackColor = true;
             this.BtCopy.Click += new System.EventHandler(this.BtCopy_Click);
@@ -88,7 +88,7 @@
             this.BtPrev.Location = new System.Drawing.Point(86, 3);
             this.BtPrev.Name = "BtPrev";
             this.BtPrev.Size = new System.Drawing.Size(75, 23);
-            this.BtPrev.TabIndex = 2;
+            this.BtPrev.TabIndex = 0;
             this.BtPrev.Text = "上一步(&P)";
             this.BtPrev.UseVisualStyleBackColor = true;
             this.BtPrev.Click += new System.EventHandler(this.BtPrev_Click);

@@ -53,6 +53,7 @@ namespace Me.Amon.Pwd.Wiz
         public void AppendKey()
         {
             ShowHead();
+            _Last.Focus();
         }
 
         public bool UpdateKey()
