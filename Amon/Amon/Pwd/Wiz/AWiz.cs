@@ -29,10 +29,15 @@ namespace Me.Amon.Pwd.Wiz
         #region 接口实现
         public void InitView(TableLayoutPanel grid)
         {
-            ShowInfo();
+            _InfoBean = new BeanInfo();
+            _InfoBean.Init(_DataModel);
+            _InfoBean.InitView(TpGrid);
+            _InfoBean.ShowData();
 
             grid.Controls.Add(this, 0, 1);
             Dock = DockStyle.Fill;
+
+            _LastView = _InfoBean;
         }
 
         public void HideView(TableLayoutPanel grid)
