@@ -7,10 +7,10 @@ namespace Me.Amon.Pwd.Wiz
     public partial class AWiz : UserControl, IPwd
     {
         private APwd _APwd;
-        private IWizView _Last;
-        private BeanInfo _Info;
-        private BeanHead _Head;
-        private BeanBody _Body;
+        private IWizView _LastView;
+        private BeanInfo _InfoBean;
+        private BeanHead _HeadBean;
+        private BeanBody _BodyBean;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
 
@@ -53,24 +53,36 @@ namespace Me.Amon.Pwd.Wiz
         public void AppendKey()
         {
             ShowHead();
-            _Last.Focus();
+            _LastView.Focus();
         }
 
         public bool UpdateKey()
         {
-            if (_Last == null)
+            if (_LastView == null)
             {
                 return false;
             }
-            return _Last.SaveData();
+            return _LastView.SaveData();
         }
 
         public void DeleteKey()
         {
         }
 
+        public void AppendAtt(int type)
+        {
+        }
+
+        public void UpdateAtt(int type)
+        {
+        }
+
         public void CopyAtt()
         {
+            if (_LastView != null)
+            {
+                _LastView.CopyData();
+            }
         }
 
         public void SaveAtt()
@@ -89,7 +101,7 @@ namespace Me.Amon.Pwd.Wiz
 
         private void BtPrev_Click(object sender, EventArgs e)
         {
-            if (_Last != null && !_Last.SaveData())
+            if (_LastView != null && !_LastView.SaveData())
             {
                 return;
             }
@@ -98,7 +110,7 @@ namespace Me.Amon.Pwd.Wiz
 
         private void BtNext_Click(object sender, EventArgs e)
         {
-            if (_Last != null && !_Last.SaveData())
+            if (_LastView != null && !_LastView.SaveData())
             {
                 return;
             }
@@ -107,67 +119,67 @@ namespace Me.Amon.Pwd.Wiz
 
         private void BtCopy_Click(object sender, EventArgs e)
         {
-            if (_Last != null)
+            if (_LastView != null)
             {
-                _Last.CopyData();
+                _LastView.CopyData();
             }
         }
 
         private void ShowInfo()
         {
-            if (_Info == null)
+            if (_InfoBean == null)
             {
-                _Info = new BeanInfo();
-                _Info.Init(_DataModel);
+                _InfoBean = new BeanInfo();
+                _InfoBean.Init(_DataModel);
             }
-            if (_Last != null && _Last != _Info)
+            if (_LastView != null && _LastView != _InfoBean)
             {
-                _Last.HideView(TpGrid);
-                _Info.InitView(TpGrid);
+                _LastView.HideView(TpGrid);
+                _InfoBean.InitView(TpGrid);
             }
 
-            _Last = _Info;
-            _Last.ShowData();
+            _LastView = _InfoBean;
+            _LastView.ShowData();
         }
 
         private void ShowHead()
         {
-            if (_Head == null)
+            if (_HeadBean == null)
             {
-                _Head = new BeanHead(_SafeModel);
-                _Head.Init(_DataModel);
+                _HeadBean = new BeanHead(_SafeModel);
+                _HeadBean.Init(_DataModel);
             }
-            if (_Last != null && _Last != _Head)
+            if (_LastView != null && _LastView != _HeadBean)
             {
-                _Last.HideView(TpGrid);
-                _Head.InitView(TpGrid);
+                _LastView.HideView(TpGrid);
+                _HeadBean.InitView(TpGrid);
 
                 BtPrev.Visible = false;
                 BtNext.Visible = true;
             }
 
-            _Last = _Head;
-            _Last.ShowData();
+            _LastView = _HeadBean;
+            _LastView.ShowData();
         }
 
         private void ShowBody()
         {
-            if (_Body == null)
+            if (_BodyBean == null)
             {
-                _Body = new BeanBody(_SafeModel);
-                _Body.Init(_DataModel);
+                _BodyBean = new BeanBody(_SafeModel);
+                _BodyBean.Init(_DataModel);
             }
-            if (_Last != null && _Last != _Body)
+            if (_LastView != null && _LastView != _BodyBean)
             {
-                _Last.HideView(TpGrid);
-                _Body.InitView(TpGrid);
+                _LastView.HideView(TpGrid);
+                _BodyBean.InitView(TpGrid);
 
                 BtPrev.Visible = true;
                 BtNext.Visible = false;
             }
 
-            _Last = _Body;
-            _Last.ShowData();
+            _LastView = _BodyBean;
+            _LastView.ShowData();
         }
     }
 }

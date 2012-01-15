@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading;
+using System.Windows.Forms;
 
 namespace Me.Amon.Util
 {
@@ -21,20 +21,36 @@ namespace Me.Amon.Util
 
         private static string _OldText;
         private static Timer _Timer;
-        public static void dd()
+        public static void Copy(string newText)
         {
             _OldText = System.Windows.Forms.Clipboard.GetText();
+            System.Windows.Forms.Clipboard.SetText(newText);
             if (_Timer == null)
             {
-                _Timer = new Timer(new TimerCallback(TimerEnd_CallBack));
+                _Timer = new Timer();
+                _Timer.Tick += new EventHandler(Timer_Tick);
             }
-            _Timer.Change(0, 1000 * 60);
+            _Timer.Interval = 1000 * 5;
+            _Timer.Start();
         }
 
-        private static void TimerEnd_CallBack(object state)
+        public static void Copy(string newText, int minutes)
+        {
+            _OldText = System.Windows.Forms.Clipboard.GetText();
+            System.Windows.Forms.Clipboard.SetText(newText);
+            if (_Timer == null)
+            {
+                _Timer = new Timer();
+                _Timer.Tick += new EventHandler(Timer_Tick);
+            }
+            _Timer.Interval = 1000 * minutes;
+            _Timer.Start();
+        }
+
+        private static void Timer_Tick(object sender, EventArgs e)
         {
             System.Windows.Forms.Clipboard.SetText(_OldText);
-            _Timer.Change(-1, -1);
+            _Timer.Stop();
         }
     }
 }

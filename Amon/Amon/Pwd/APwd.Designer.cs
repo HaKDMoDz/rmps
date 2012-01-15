@@ -1401,6 +1401,7 @@
             this.KeyPreview = true;
             this.Name = "APwd";
             this.Text = "阿木密码箱";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.APwd_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.APwd_KeyDown);
             this.TmMenu.ResumeLayout(false);
             this.TmMenu.PerformLayout();

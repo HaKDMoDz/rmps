@@ -8,6 +8,7 @@ namespace Me.Amon.Pwd.Wiz
 {
     public partial class BeanPass : UserControl, IAttEdit
     {
+        private BeanBody _Body;
         private TableLayoutPanel _Grid;
         private RowStyle _Style;
         private Label _Label;
@@ -19,8 +20,9 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
         }
 
-        public BeanPass(TableLayoutPanel grid)
+        public BeanPass(BeanBody body, TableLayoutPanel grid)
         {
+            _Body = body;
             _Grid = grid;
 
             InitializeComponent();
@@ -43,8 +45,6 @@ namespace Me.Amon.Pwd.Wiz
 
             _Grid.Controls.Add(_Label, 0, row);
             _Grid.Controls.Add(this, 1, row);
-
-            BackColor = Color.Blue;
         }
 
         public bool ShowData(AAtt att)
@@ -60,8 +60,7 @@ namespace Me.Amon.Pwd.Wiz
 
         public void Copy()
         {
-            Clipboard.SetText(TbData.Text);
-            SafeUtil.dd();
+            SafeUtil.Copy(TbData.Text);
         }
 
         public bool Save()
@@ -80,19 +79,113 @@ namespace Me.Amon.Pwd.Wiz
         }
         #endregion
 
+        private void TbData_GotFocus(object sender, EventArgs e)
+        {
+            _Body.EditCtl = this;
+        }
+
         private void BtMod_Click(object sender, EventArgs e)
         {
-
+            if (TbData.PasswordChar != '*')
+            {
+                TbData.PasswordChar = '*';
+            }
+            else
+            {
+                TbData.PasswordChar = '\0';
+            }
         }
 
         private void BtGen_Click(object sender, EventArgs e)
         {
-
+            TbData.Text = new string(CharUtil.GenerateUserChar());
         }
 
         private void BtOpt_Click(object sender, EventArgs e)
         {
+            CmMenu.Show(BtOpt, 0, BtOpt.Height);
+        }
+
+        #region 菜单事件
+        private void MiCharLen0_Click(object sender, EventArgs e)
+        {
 
         }
+
+        private void MiCharLen1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharLen2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharLen3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharLen4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharLen5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharLen6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharSet0_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharSet1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharSet2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharSet3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharSet4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharSet5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharSet6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharSetO_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiRepeatable_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
     }
 }

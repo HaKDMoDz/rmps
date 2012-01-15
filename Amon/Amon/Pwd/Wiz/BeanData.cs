@@ -7,6 +7,7 @@ namespace Me.Amon.Pwd.Wiz
 {
     public partial class BeanData : UserControl, IAttEdit
     {
+        private BeanBody _Body;
         private TableLayoutPanel _Grid;
         private RowStyle _Style;
         private Label _Label;
@@ -18,8 +19,9 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
         }
 
-        public BeanData(TableLayoutPanel grid)
+        public BeanData(BeanBody body, TableLayoutPanel grid)
         {
+            _Body = body;
             _Grid = grid;
 
             InitializeComponent();
@@ -30,6 +32,8 @@ namespace Me.Amon.Pwd.Wiz
 
             _Style = new RowStyle(SizeType.Absolute, 27F);
             Dock = DockStyle.Fill;
+
+            TbData.GotFocus += new EventHandler(TbData_GotFocus);
         }
         #endregion
 
@@ -75,6 +79,11 @@ namespace Me.Amon.Pwd.Wiz
             return true;
         }
         #endregion
+
+        private void TbData_GotFocus(object sender, EventArgs e)
+        {
+            _Body.EditCtl = this;
+        }
 
         private void BtOpt_Click(object sender, EventArgs e)
         {

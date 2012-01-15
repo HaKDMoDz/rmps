@@ -72,6 +72,69 @@ namespace Me.Amon.Pwd.Pro
         {
         }
 
+        public void AppendAtt(int type)
+        {
+            if (type < AAtt.TYPE_TEXT || type > AAtt.TYPE_LINE)
+            {
+                return;
+            }
+            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
+            {
+                return;
+            }
+            if (GvAttList.SelectedRows.Count < 1)
+            {
+                return;
+            }
+            AAtt att = AAtt.GetInstance(type);
+            int index = GvAttList.SelectedRows[0].Index;
+            if (index < 0)
+            {
+                index = _SafeModel.Count;
+            }
+            else if (index < AAtt.HEAD_SIZE)
+            {
+                index = AAtt.HEAD_SIZE;
+            }
+            else
+            {
+                index += 1;
+            }
+            _UserAction = false;
+            _SafeModel.Insert(index, att);
+            GvAttList.DataSource = null;
+            _SafeModel.BindTo(GvAttList);
+            _UserAction = true;
+            _SafeModel.Key.Modified = true;
+
+            GvAttList.Rows[index].Selected = true;
+        }
+
+        public void UpdateAtt(int type)
+        {
+            if (type < AAtt.TYPE_TEXT || type > AAtt.TYPE_LINE)
+            {
+                return;
+            }
+            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
+            {
+                return;
+            }
+            if (GvAttList.SelectedRows.Count < 1)
+            {
+                return;
+            }
+            AAtt att = GvAttList.SelectedRows[0].DataBoundItem as AAtt;
+            if (att == null || att.Type >= AAtt.TYPE_GUID)
+            {
+                return;
+            }
+            att.Type = type;
+            _SafeModel.Key.Modified = true;
+
+            AeAttEdit.ShowView(att);
+        }
+
         public void CopyAtt()
         {
         }

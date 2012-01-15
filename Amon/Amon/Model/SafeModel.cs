@@ -133,6 +133,15 @@ namespace Me.Amon.Model
             _AttList.Clear();
         }
 
+        public void Append(AAtt att)
+        {
+        }
+
+        public void Insert(int index, AAtt att)
+        {
+            _AttList.Insert(index, att);
+        }
+
         public void Remove(AAtt att)
         {
             if (att.Type < AAtt.TYPE_GUID)

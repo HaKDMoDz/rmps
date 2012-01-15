@@ -269,17 +269,6 @@ namespace Me.Amon.Pwd
 
         private void APwd_KeyDown(object sender, KeyEventArgs e)
         {
-            // 帮助
-            if (e.KeyCode == Keys.F1)
-            {
-                return;
-            }
-            // 快捷键
-            if (e.KeyCode == Keys.F5)
-            {
-                ShowHotKeys();
-                return;
-            }
             if (e.Control)
             {
                 // 添加记录
@@ -309,25 +298,21 @@ namespace Me.Amon.Pwd
                 // 向上移动
                 if ((e.KeyCode == Keys.U) || (e.Shift && e.KeyCode == Keys.Up))
                 {
-                    _PwdView.DeleteKey();
                     return;
                 }
                 // 向下移动
                 if ((e.KeyCode == Keys.D) || (e.Shift && e.KeyCode == Keys.Down))
                 {
-                    _PwdView.DeleteKey();
                     return;
                 }
                 // 向上选择
                 if (e.KeyCode == Keys.Up)
                 {
-                    _PwdView.DeleteKey();
                     return;
                 }
                 // 向下选择
                 if (e.KeyCode == Keys.Down)
                 {
-                    _PwdView.DeleteKey();
                     return;
                 }
                 // 查找
@@ -339,23 +324,92 @@ namespace Me.Amon.Pwd
                 // 查询
                 if (e.KeyCode == Keys.Q)
                 {
-                    _PwdView.DeleteKey();
+                    Close();
                     return;
                 }
+                #region 切换视图
+                if (e.KeyCode == Keys.F1)
+                {
+                    ChangeView(1);
+                    return;
+                }
+                if (e.KeyCode == Keys.F2)
+                {
+                    ChangeView(2);
+                    return;
+                }
+                if (e.KeyCode == Keys.F3)
+                {
+                    ChangeView(3);
+                    return;
+                }
+                #endregion
+                #region 添加属性
+                if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1)
+                {
+                    _PwdView.AppendAtt(AAtt.TYPE_TEXT);
+                    return;
+                }
+                if (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2)
+                {
+                    _PwdView.AppendAtt(AAtt.TYPE_PASS);
+                    return;
+                }
+                if (e.KeyCode == Keys.D3 || e.KeyCode == Keys.NumPad3)
+                {
+                    _PwdView.AppendAtt(AAtt.TYPE_LINK);
+                    return;
+                }
+                if (e.KeyCode == Keys.D4 || e.KeyCode == Keys.NumPad4)
+                {
+                    _PwdView.AppendAtt(AAtt.TYPE_MAIL);
+                    return;
+                }
+                if (e.KeyCode == Keys.D5 || e.KeyCode == Keys.NumPad5)
+                {
+                    _PwdView.AppendAtt(AAtt.TYPE_DATE);
+                    return;
+                }
+                if (e.KeyCode == Keys.D6 || e.KeyCode == Keys.NumPad6)
+                {
+                    _PwdView.AppendAtt(AAtt.TYPE_DATA);
+                    return;
+                }
+                if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7)
+                {
+                    _PwdView.AppendAtt(AAtt.TYPE_LIST);
+                    return;
+                }
+                if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8)
+                {
+                    _PwdView.AppendAtt(AAtt.TYPE_MEMO);
+                    return;
+                }
+                if (e.KeyCode == Keys.D9 || e.KeyCode == Keys.NumPad9)
+                {
+                    _PwdView.AppendAtt(AAtt.TYPE_FILE);
+                    return;
+                }
+                if (e.KeyCode == Keys.D0 || e.KeyCode == Keys.NumPad0)
+                {
+                    _PwdView.AppendAtt(AAtt.TYPE_LINE);
+                    return;
+                }
+                #endregion
                 // 添加类别
-                if (e.KeyValue == 187 || e.KeyValue == 107)
+                if (e.KeyCode == Keys.Oemplus || e.KeyCode == Keys.Add)
                 {
                     AppendCat();
                     return;
                 }
                 // 更新类别
-                if (e.KeyValue == 190 || e.KeyValue == 110)
+                if (e.KeyCode == Keys.OemPeriod || e.KeyCode == Keys.Decimal)
                 {
                     UpdateCat();
                     return;
                 }
                 // 删除类别
-                if (e.KeyValue == 189 || e.KeyValue == 109)
+                if (e.KeyCode == Keys.OemMinus || e.KeyCode == Keys.Subtract)
                 {
                     DeleteCat();
                     return;
@@ -397,30 +451,93 @@ namespace Me.Amon.Pwd
                 // 复制属性
                 if (e.KeyCode == Keys.C)
                 {
-                    _PwdView.DeleteKey();
+                    _PwdView.CopyAtt();
                     return;
                 }
                 // 更新属性
                 if (e.KeyCode == Keys.U)
                 {
-                    _PwdView.DeleteKey();
+                    _PwdView.SaveAtt();
                     return;
                 }
                 // 删除属性
                 if (e.KeyCode == Keys.R)
                 {
-                    _PwdView.DeleteKey();
+                    _PwdView.DropAtt();
                     return;
                 }
+                #region 修改属性
+                if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1)
+                {
+                    _PwdView.UpdateAtt(AAtt.TYPE_TEXT);
+                    return;
+                }
+                if (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2)
+                {
+                    _PwdView.UpdateAtt(AAtt.TYPE_PASS);
+                    return;
+                }
+                if (e.KeyCode == Keys.D3 || e.KeyCode == Keys.NumPad3)
+                {
+                    _PwdView.UpdateAtt(AAtt.TYPE_LINK);
+                    return;
+                }
+                if (e.KeyCode == Keys.D4 || e.KeyCode == Keys.NumPad4)
+                {
+                    _PwdView.UpdateAtt(AAtt.TYPE_MAIL);
+                    return;
+                }
+                if (e.KeyCode == Keys.D5 || e.KeyCode == Keys.NumPad5)
+                {
+                    _PwdView.UpdateAtt(AAtt.TYPE_DATE);
+                    return;
+                }
+                if (e.KeyCode == Keys.D6 || e.KeyCode == Keys.NumPad6)
+                {
+                    _PwdView.UpdateAtt(AAtt.TYPE_DATA);
+                    return;
+                }
+                if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7)
+                {
+                    _PwdView.UpdateAtt(AAtt.TYPE_LIST);
+                    return;
+                }
+                if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8)
+                {
+                    _PwdView.UpdateAtt(AAtt.TYPE_MEMO);
+                    return;
+                }
+                if (e.KeyCode == Keys.D9 || e.KeyCode == Keys.NumPad9)
+                {
+                    _PwdView.UpdateAtt(AAtt.TYPE_FILE);
+                    return;
+                }
+                if (e.KeyCode == Keys.D0 || e.KeyCode == Keys.NumPad0)
+                {
+                    _PwdView.UpdateAtt(AAtt.TYPE_LINE);
+                    return;
+                }
+                #endregion
+                return;
+            }
+            // 帮助
+            if (e.KeyCode == Keys.F1)
+            {
+                return;
+            }
+            // 快捷键
+            if (e.KeyCode == Keys.F5)
+            {
+                ShowHotKeys();
                 return;
             }
         }
 
         private void APwd_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_SafeModel.Key.Modified)
+            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                if (DialogResult.OK != MessageBox.Show("", "", MessageBoxButtons.YesNo))
+                if (DialogResult.OK != MessageBox.Show("您有数据尚未保存，确认要退出吗？", "", MessageBoxButtons.YesNo))
                 {
                     return;
                 }

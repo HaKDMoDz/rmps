@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Model;
 
@@ -6,6 +7,7 @@ namespace Me.Amon.Pwd.Wiz
 {
     public partial class BeanList : UserControl, IAttEdit
     {
+        private BeanBody _Body;
         private TableLayoutPanel _Grid;
         private RowStyle _Style;
         private Label _Label;
@@ -17,8 +19,9 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
         }
 
-        public BeanList(TableLayoutPanel grid)
+        public BeanList(BeanBody body, TableLayoutPanel grid)
         {
+            _Body = body;
             _Grid = grid;
 
             InitializeComponent();
@@ -73,5 +76,10 @@ namespace Me.Amon.Pwd.Wiz
             return true;
         }
         #endregion
+
+        private void TbData_GotFocus(object sender, EventArgs e)
+        {
+            _Body.EditCtl = this;
+        }
     }
 }

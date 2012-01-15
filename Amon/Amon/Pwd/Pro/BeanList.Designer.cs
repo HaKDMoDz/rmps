@@ -30,7 +30,7 @@
         {
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.TbData = new System.Windows.Forms.TextBox();
+            this.CbData = new System.Windows.Forms.ComboBox();
             this.LbData = new System.Windows.Forms.Label();
             this.TbName = new System.Windows.Forms.TextBox();
             this.LbName = new System.Windows.Forms.Label();
@@ -56,14 +56,14 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // TbData
+            // CbData
             // 
-            this.TbData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TbData.Location = new System.Drawing.Point(56, 30);
-            this.TbData.Name = "TbData";
-            this.TbData.Size = new System.Drawing.Size(307, 21);
-            this.TbData.TabIndex = 9;
+            this.CbData.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbData.Location = new System.Drawing.Point(56, 30);
+            this.CbData.Name = "CbData";
+            this.CbData.Size = new System.Drawing.Size(121, 20);
+            this.CbData.TabIndex = 9;
+            this.CbData.SelectedIndexChanged += new System.EventHandler(this.CbData_SelectedIndexChanged);
             // 
             // LbData
             // 
@@ -96,7 +96,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.TbData);
+            this.Controls.Add(this.CbData);
             this.Controls.Add(this.LbData);
             this.Controls.Add(this.TbName);
             this.Controls.Add(this.LbName);
@@ -111,7 +111,7 @@
 
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox TbData;
+        private System.Windows.Forms.ComboBox CbData;
         private System.Windows.Forms.Label LbData;
         private System.Windows.Forms.TextBox TbName;
         private System.Windows.Forms.Label LbName;

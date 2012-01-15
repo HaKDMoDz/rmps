@@ -12,6 +12,9 @@ namespace Me.Amon.Pwd.Pro
         public BeanFile()
         {
             InitializeComponent();
+
+            this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
+            this.TbData.GotFocus += new EventHandler(TbData_GotFocus);
         }
 
         #region 接口实现
@@ -55,6 +58,18 @@ namespace Me.Amon.Pwd.Pro
             }
         }
         #endregion
+
+        private void TbName_GotFocus(object sender, EventArgs e)
+        {
+            _Ctl = TbName;
+            TbName.SelectAll();
+        }
+
+        private void TbData_GotFocus(object sender, EventArgs e)
+        {
+            _Ctl = TbData;
+            TbData.SelectAll();
+        }
 
         private void BtView_Click(object sender, EventArgs e)
         {

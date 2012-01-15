@@ -122,34 +122,34 @@ namespace Me.Amon.Pwd.Wiz
                 switch (type)
                 {
                     case AAtt.TYPE_TEXT:
-                        ctl = new BeanText(TpGrid);
+                        ctl = new BeanText(this, TpGrid);
                         break;
                     case AAtt.TYPE_PASS:
-                        ctl = new BeanPass(TpGrid);
+                        ctl = new BeanPass(this, TpGrid);
                         break;
                     case AAtt.TYPE_LINK:
-                        ctl = new BeanLink(TpGrid);
+                        ctl = new BeanLink(this, TpGrid);
                         break;
                     case AAtt.TYPE_MAIL:
-                        ctl = new BeanMail(TpGrid);
+                        ctl = new BeanMail(this, TpGrid);
                         break;
                     case AAtt.TYPE_DATE:
-                        ctl = new BeanDate(TpGrid);
+                        ctl = new BeanDate(this, TpGrid);
                         break;
                     case AAtt.TYPE_DATA:
-                        ctl = new BeanData(TpGrid);
+                        ctl = new BeanData(this, TpGrid);
                         break;
                     case AAtt.TYPE_LIST:
-                        ctl = new BeanList(TpGrid);
+                        ctl = new BeanList(this, TpGrid);
                         break;
                     case AAtt.TYPE_MEMO:
-                        ctl = new BeanMemo(TpGrid);
+                        ctl = new BeanMemo(this, TpGrid);
                         break;
                     case AAtt.TYPE_FILE:
-                        ctl = new BeanFile(TpGrid);
+                        ctl = new BeanFile(this, TpGrid);
                         break;
                     case AAtt.TYPE_LINE:
-                        ctl = new BeanLine(TpGrid);
+                        ctl = new BeanLine(this, TpGrid);
                         break;
                     default:
                         ctl = null;

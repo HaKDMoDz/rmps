@@ -13,6 +13,9 @@ namespace Me.Amon.Pwd.Pro
         public BeanPass()
         {
             InitializeComponent();
+
+            this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
+            this.TbData.GotFocus += new EventHandler(TbData_GotFocus);
         }
 
         #region 接口实现
@@ -34,8 +37,7 @@ namespace Me.Amon.Pwd.Pro
 
         public void Copy()
         {
-            Clipboard.SetText(_Ctl.Text);
-            SafeUtil.dd();
+            SafeUtil.Copy(_Ctl.Text);
         }
 
         public void Save()
@@ -58,9 +60,28 @@ namespace Me.Amon.Pwd.Pro
         }
         #endregion
 
+        private void TbName_GotFocus(object sender, EventArgs e)
+        {
+            _Ctl = TbName;
+            TbName.SelectAll();
+        }
+
+        private void TbData_GotFocus(object sender, EventArgs e)
+        {
+            _Ctl = TbData;
+            TbData.SelectAll();
+        }
+
         private void BtMod_Click(object sender, EventArgs e)
         {
-
+            if (TbData.PasswordChar != '*')
+            {
+                TbData.PasswordChar = '*';
+            }
+            else
+            {
+                TbData.PasswordChar = '\0';
+            }
         }
 
         private void BtGen_Click(object sender, EventArgs e)
@@ -70,7 +91,89 @@ namespace Me.Amon.Pwd.Pro
 
         private void BtOpt_Click(object sender, EventArgs e)
         {
+            CmMenu.Show(BtOpt, 0, BtOpt.Height);
+        }
+
+        #region 菜单事件
+        private void MiCharLen0_Click(object sender, EventArgs e)
+        {
 
         }
+
+        private void MiCharLen1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharLen2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharLen3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharLen4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharLen5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharLen6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharSet0_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharSet1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharSet2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharSet3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharSet4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharSet5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharSet6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiCharSetO_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiRepeatable_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
     }
 }

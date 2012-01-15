@@ -49,10 +49,18 @@ namespace Me.Amon.Pwd.Pad
 
         public bool UpdateKey()
         {
-            return false;
+            return true;
         }
 
         public void DeleteKey()
+        {
+        }
+
+        public void AppendAtt(int type)
+        {
+        }
+
+        public void UpdateAtt(int type)
         {
         }
 

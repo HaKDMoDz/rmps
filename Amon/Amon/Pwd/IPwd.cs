@@ -19,6 +19,10 @@ namespace Me.Amon.Pwd
 
         void DeleteKey();
 
+        void AppendAtt(int type);
+
+        void UpdateAtt(int type);
+
         void CopyAtt();
 
         void SaveAtt();

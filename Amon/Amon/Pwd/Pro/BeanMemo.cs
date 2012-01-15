@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using Me.Amon.Model;
 
 namespace Me.Amon.Pwd.Pro
@@ -11,6 +12,9 @@ namespace Me.Amon.Pwd.Pro
         public BeanMemo()
         {
             InitializeComponent();
+
+            this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
+            this.TbData.GotFocus += new EventHandler(TbData_GotFocus);
         }
 
         #region 接口实现
@@ -54,5 +58,17 @@ namespace Me.Amon.Pwd.Pro
             }
         }
         #endregion
+
+        private void TbName_GotFocus(object sender, EventArgs e)
+        {
+            _Ctl = TbName;
+            TbName.SelectAll();
+        }
+
+        private void TbData_GotFocus(object sender, EventArgs e)
+        {
+            _Ctl = TbData;
+            TbData.SelectAll();
+        }
     }
 }
