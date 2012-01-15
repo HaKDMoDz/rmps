@@ -46,10 +46,13 @@
             this.TpGrid = new System.Windows.Forms.TableLayoutPanel();
             this.TsTool = new System.Windows.Forms.ToolStrip();
             this.TsbAppend = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.SsInfo = new System.Windows.Forms.StatusStrip();
             this.TssInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.CmCat = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.dToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmKey = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TmMenu.SuspendLayout();
             this.TcTool.ContentPanel.SuspendLayout();
             this.TcTool.TopToolStripPanel.SuspendLayout();
@@ -64,6 +67,7 @@
             this.VSplit.SuspendLayout();
             this.TsTool.SuspendLayout();
             this.SsInfo.SuspendLayout();
+            this.CmCat.SuspendLayout();
             this.SuspendLayout();
             // 
             // TmMenu
@@ -223,7 +227,7 @@
             this.toolStripButton1});
             this.TsTool.Location = new System.Drawing.Point(3, 0);
             this.TsTool.Name = "TsTool";
-            this.TsTool.Size = new System.Drawing.Size(89, 25);
+            this.TsTool.Size = new System.Drawing.Size(58, 25);
             this.TsTool.TabIndex = 0;
             this.TsTool.EndDrag += new System.EventHandler(this.TsTool_EndDrag);
             // 
@@ -235,6 +239,15 @@
             this.TsbAppend.Name = "TsbAppend";
             this.TsbAppend.Size = new System.Drawing.Size(23, 22);
             this.TsbAppend.Text = "toolStripButton1";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "toolStripButton1";
             // 
             // SsInfo
             // 
@@ -252,14 +265,23 @@
             this.TssInfo.Size = new System.Drawing.Size(50, 17);
             this.TssInfo.Text = "TssInfo";
             // 
-            // toolStripButton1
+            // CmCat
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
+            this.CmCat.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dToolStripMenuItem});
+            this.CmCat.Name = "CmCat";
+            this.CmCat.Size = new System.Drawing.Size(85, 26);
+            // 
+            // dToolStripMenuItem
+            // 
+            this.dToolStripMenuItem.Name = "dToolStripMenuItem";
+            this.dToolStripMenuItem.Size = new System.Drawing.Size(84, 22);
+            this.dToolStripMenuItem.Text = "d";
+            // 
+            // CmKey
+            // 
+            this.CmKey.Name = "CmKey";
+            this.CmKey.Size = new System.Drawing.Size(153, 26);
             // 
             // Demo
             // 
@@ -292,6 +314,7 @@
             this.TsTool.PerformLayout();
             this.SsInfo.ResumeLayout(false);
             this.SsInfo.PerformLayout();
+            this.CmCat.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -319,5 +342,8 @@
         private System.Windows.Forms.TableLayoutPanel TpGrid;
         private System.Windows.Forms.ToolTip TpTips;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ContextMenuStrip CmCat;
+        private System.Windows.Forms.ToolStripMenuItem dToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip CmKey;
     }
 }

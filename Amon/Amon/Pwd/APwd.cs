@@ -58,7 +58,7 @@ namespace Me.Amon.Pwd
             _ViewModel.Load();
 
             Cat cat = new Cat { Id = "0", Text = "阿木密码箱", Tips = "阿木密码箱", Icon = "0" };
-            IlCatList.Images.Add(cat.Icon, BeanUtil.CatNan);
+            IlCatTree.Images.Add(cat.Icon, BeanUtil.CatNan);
             _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Id };
             _RootNode.Tag = cat;
             TvCatTree.Nodes.Add(_RootNode);
@@ -121,7 +121,7 @@ namespace Me.Amon.Pwd
                 node.Tag = cat;
                 if (CharUtil.IsValidateHash(cat.Icon))
                 {
-                    IlCatList.Images.Add(cat.Icon, Image.FromFile(_DataModel.CatDir + cat.Icon + ".png"));
+                    IlCatTree.Images.Add(cat.Icon, Image.FromFile(_DataModel.CatDir + cat.Icon + ".png"));
                     node.ImageKey = cat.Icon;
                 }
                 else
@@ -558,7 +558,7 @@ namespace Me.Amon.Pwd
         #region 系统菜单
         private void TmiHideWin_Click(object sender, EventArgs e)
         {
-
+            Visible = false;
         }
 
         private void TmiLockWin_Click(object sender, EventArgs e)
@@ -568,7 +568,7 @@ namespace Me.Amon.Pwd
 
         private void TmiExitApp_Click(object sender, EventArgs e)
         {
-
+            Close();
         }
         #endregion
 
@@ -1038,117 +1038,6 @@ namespace Me.Amon.Pwd
         }
 
         private void CmiHistory_Click(object sender, EventArgs e)
-        {
-
-        }
-        #endregion
-
-        #region 属性弹出菜单
-        #region 添加属性
-        private void CmiAppendAttText_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiAppendAttPass_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiAppendAttLink_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiAppendAttMail_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiAppendAttDate_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiAppendAttData_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiAppendAttList_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiAppendAttMemo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiAppendAttFile_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiAppendAttLine_Click(object sender, EventArgs e)
-        {
-
-        }
-        #endregion
-
-        #region 转换属性
-        private void CmiUpdateAttText_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiUpdateAttPass_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiUpdateAttLink_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiUpdateAttMail_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiUpdateAttDate_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiUpdateAttData_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiUpdateAttList_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiUpdateAttMemo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiUpdateAttFile_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiUpdateAttLine_Click(object sender, EventArgs e)
-        {
-
-        }
-        #endregion
-
-        private void CmiDeleteAtt_Click(object sender, EventArgs e)
         {
 
         }

@@ -28,12 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GvAttList = new System.Windows.Forms.DataGridView();
             this.OrderCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AeAttEdit = new Me.Amon.Pwd.Pro.AttEdit();
+            this.CmAtt = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CmuAppendAtt = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiAppendAttText = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiAppendAttPass = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiAppendAttLink = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiAppendAttMail = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiAppendAttDate = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiAppendAttData = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiAppendAttList = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiAppendAttMemo = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiAppendAttFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiAppendAttLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmuUpdateAtt = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiUpdateAttText = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiUpdateAttPass = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiUpdateAttLink = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiUpdateAttMail = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiUpdateAttDate = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiUpdateAttData = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiUpdateAttList = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiUpdateAttMemo = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiUpdateAttFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiUpdateAttLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiDeleteAtt = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.GvAttList)).BeginInit();
+            this.CmAtt.SuspendLayout();
             this.SuspendLayout();
             // 
             // GvAttList
@@ -42,13 +68,14 @@
             this.GvAttList.AllowUserToDeleteRows = false;
             this.GvAttList.AllowUserToResizeColumns = false;
             this.GvAttList.AllowUserToResizeRows = false;
-            this.GvAttList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.GvAttList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.GvAttList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GvAttList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.OrderCol,
             this.ValueCol});
+            this.GvAttList.ContextMenuStrip = this.CmAtt;
             this.GvAttList.Location = new System.Drawing.Point(0, 0);
             this.GvAttList.MultiSelect = false;
             this.GvAttList.Name = "GvAttList";
@@ -62,8 +89,8 @@
             // 
             // OrderCol
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OrderCol.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OrderCol.DefaultCellStyle = dataGridViewCellStyle2;
             this.OrderCol.HeaderText = "索引";
             this.OrderCol.Name = "OrderCol";
             this.OrderCol.ReadOnly = true;
@@ -77,12 +104,202 @@
             // 
             // AeAttEdit
             // 
-            this.AeAttEdit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.AeAttEdit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AeAttEdit.Location = new System.Drawing.Point(0, 151);
             this.AeAttEdit.Name = "AeAttEdit";
             this.AeAttEdit.Size = new System.Drawing.Size(332, 110);
             this.AeAttEdit.TabIndex = 1;
+            // 
+            // CmAtt
+            // 
+            this.CmAtt.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CmuAppendAtt,
+            this.CmuUpdateAtt,
+            this.CmiDeleteAtt});
+            this.CmAtt.Name = "CmAtt";
+            this.CmAtt.Size = new System.Drawing.Size(125, 70);
+            // 
+            // CmuAppendAtt
+            // 
+            this.CmuAppendAtt.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CmiAppendAttText,
+            this.CmiAppendAttPass,
+            this.CmiAppendAttLink,
+            this.CmiAppendAttMail,
+            this.CmiAppendAttDate,
+            this.CmiAppendAttData,
+            this.CmiAppendAttList,
+            this.CmiAppendAttMemo,
+            this.CmiAppendAttFile,
+            this.CmiAppendAttLine});
+            this.CmuAppendAtt.Name = "CmuAppendAtt";
+            this.CmuAppendAtt.Size = new System.Drawing.Size(124, 22);
+            this.CmuAppendAtt.Text = "添加属性";
+            // 
+            // CmiAppendAttText
+            // 
+            this.CmiAppendAttText.Name = "CmiAppendAttText";
+            this.CmiAppendAttText.Size = new System.Drawing.Size(100, 22);
+            this.CmiAppendAttText.Text = "文本";
+            this.CmiAppendAttText.Click += new System.EventHandler(this.CmiAppendAttText_Click);
+            // 
+            // CmiAppendAttPass
+            // 
+            this.CmiAppendAttPass.Name = "CmiAppendAttPass";
+            this.CmiAppendAttPass.Size = new System.Drawing.Size(100, 22);
+            this.CmiAppendAttPass.Text = "口令";
+            this.CmiAppendAttPass.Click += new System.EventHandler(this.CmiAppendAttPass_Click);
+            // 
+            // CmiAppendAttLink
+            // 
+            this.CmiAppendAttLink.Name = "CmiAppendAttLink";
+            this.CmiAppendAttLink.Size = new System.Drawing.Size(100, 22);
+            this.CmiAppendAttLink.Text = "链接";
+            this.CmiAppendAttLink.Click += new System.EventHandler(this.CmiAppendAttLink_Click);
+            // 
+            // CmiAppendAttMail
+            // 
+            this.CmiAppendAttMail.Name = "CmiAppendAttMail";
+            this.CmiAppendAttMail.Size = new System.Drawing.Size(100, 22);
+            this.CmiAppendAttMail.Text = "邮件";
+            this.CmiAppendAttMail.Click += new System.EventHandler(this.CmiAppendAttMail_Click);
+            // 
+            // CmiAppendAttDate
+            // 
+            this.CmiAppendAttDate.Name = "CmiAppendAttDate";
+            this.CmiAppendAttDate.Size = new System.Drawing.Size(100, 22);
+            this.CmiAppendAttDate.Text = "日期";
+            this.CmiAppendAttDate.Click += new System.EventHandler(this.CmiAppendAttDate_Click);
+            // 
+            // CmiAppendAttData
+            // 
+            this.CmiAppendAttData.Name = "CmiAppendAttData";
+            this.CmiAppendAttData.Size = new System.Drawing.Size(100, 22);
+            this.CmiAppendAttData.Text = "数值";
+            this.CmiAppendAttData.Click += new System.EventHandler(this.CmiAppendAttData_Click);
+            // 
+            // CmiAppendAttList
+            // 
+            this.CmiAppendAttList.Name = "CmiAppendAttList";
+            this.CmiAppendAttList.Size = new System.Drawing.Size(100, 22);
+            this.CmiAppendAttList.Text = "列表";
+            this.CmiAppendAttList.Click += new System.EventHandler(this.CmiAppendAttList_Click);
+            // 
+            // CmiAppendAttMemo
+            // 
+            this.CmiAppendAttMemo.Name = "CmiAppendAttMemo";
+            this.CmiAppendAttMemo.Size = new System.Drawing.Size(100, 22);
+            this.CmiAppendAttMemo.Text = "附注";
+            this.CmiAppendAttMemo.Click += new System.EventHandler(this.CmiAppendAttMemo_Click);
+            // 
+            // CmiAppendAttFile
+            // 
+            this.CmiAppendAttFile.Name = "CmiAppendAttFile";
+            this.CmiAppendAttFile.Size = new System.Drawing.Size(100, 22);
+            this.CmiAppendAttFile.Text = "附件";
+            this.CmiAppendAttFile.Click += new System.EventHandler(this.CmiAppendAttFile_Click);
+            // 
+            // CmiAppendAttLine
+            // 
+            this.CmiAppendAttLine.Name = "CmiAppendAttLine";
+            this.CmiAppendAttLine.Size = new System.Drawing.Size(100, 22);
+            this.CmiAppendAttLine.Text = "分组";
+            this.CmiAppendAttLine.Click += new System.EventHandler(this.CmiAppendAttLine_Click);
+            // 
+            // CmuUpdateAtt
+            // 
+            this.CmuUpdateAtt.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CmiUpdateAttText,
+            this.CmiUpdateAttPass,
+            this.CmiUpdateAttLink,
+            this.CmiUpdateAttMail,
+            this.CmiUpdateAttDate,
+            this.CmiUpdateAttData,
+            this.CmiUpdateAttList,
+            this.CmiUpdateAttMemo,
+            this.CmiUpdateAttFile,
+            this.CmiUpdateAttLine});
+            this.CmuUpdateAtt.Name = "CmuUpdateAtt";
+            this.CmuUpdateAtt.Size = new System.Drawing.Size(124, 22);
+            this.CmuUpdateAtt.Text = "转换属性";
+            // 
+            // CmiUpdateAttText
+            // 
+            this.CmiUpdateAttText.Name = "CmiUpdateAttText";
+            this.CmiUpdateAttText.Size = new System.Drawing.Size(100, 22);
+            this.CmiUpdateAttText.Text = "文本";
+            this.CmiUpdateAttText.Click += new System.EventHandler(this.CmiUpdateAttText_Click);
+            // 
+            // CmiUpdateAttPass
+            // 
+            this.CmiUpdateAttPass.Name = "CmiUpdateAttPass";
+            this.CmiUpdateAttPass.Size = new System.Drawing.Size(100, 22);
+            this.CmiUpdateAttPass.Text = "口令";
+            this.CmiUpdateAttPass.Click += new System.EventHandler(this.CmiUpdateAttPass_Click);
+            // 
+            // CmiUpdateAttLink
+            // 
+            this.CmiUpdateAttLink.Name = "CmiUpdateAttLink";
+            this.CmiUpdateAttLink.Size = new System.Drawing.Size(100, 22);
+            this.CmiUpdateAttLink.Text = "链接";
+            this.CmiUpdateAttLink.Click += new System.EventHandler(this.CmiUpdateAttLink_Click);
+            // 
+            // CmiUpdateAttMail
+            // 
+            this.CmiUpdateAttMail.Name = "CmiUpdateAttMail";
+            this.CmiUpdateAttMail.Size = new System.Drawing.Size(100, 22);
+            this.CmiUpdateAttMail.Text = "邮件";
+            this.CmiUpdateAttMail.Click += new System.EventHandler(this.CmiUpdateAttMail_Click);
+            // 
+            // CmiUpdateAttDate
+            // 
+            this.CmiUpdateAttDate.Name = "CmiUpdateAttDate";
+            this.CmiUpdateAttDate.Size = new System.Drawing.Size(100, 22);
+            this.CmiUpdateAttDate.Text = "日期";
+            this.CmiUpdateAttDate.Click += new System.EventHandler(this.CmiUpdateAttDate_Click);
+            // 
+            // CmiUpdateAttData
+            // 
+            this.CmiUpdateAttData.Name = "CmiUpdateAttData";
+            this.CmiUpdateAttData.Size = new System.Drawing.Size(100, 22);
+            this.CmiUpdateAttData.Text = "数值";
+            this.CmiUpdateAttData.Click += new System.EventHandler(this.CmiUpdateAttData_Click);
+            // 
+            // CmiUpdateAttList
+            // 
+            this.CmiUpdateAttList.Name = "CmiUpdateAttList";
+            this.CmiUpdateAttList.Size = new System.Drawing.Size(100, 22);
+            this.CmiUpdateAttList.Text = "列表";
+            this.CmiUpdateAttList.Click += new System.EventHandler(this.CmiUpdateAttList_Click);
+            // 
+            // CmiUpdateAttMemo
+            // 
+            this.CmiUpdateAttMemo.Name = "CmiUpdateAttMemo";
+            this.CmiUpdateAttMemo.Size = new System.Drawing.Size(100, 22);
+            this.CmiUpdateAttMemo.Text = "附注";
+            this.CmiUpdateAttMemo.Click += new System.EventHandler(this.CmiUpdateAttMemo_Click);
+            // 
+            // CmiUpdateAttFile
+            // 
+            this.CmiUpdateAttFile.Name = "CmiUpdateAttFile";
+            this.CmiUpdateAttFile.Size = new System.Drawing.Size(100, 22);
+            this.CmiUpdateAttFile.Text = "附件";
+            this.CmiUpdateAttFile.Click += new System.EventHandler(this.CmiUpdateAttFile_Click);
+            // 
+            // CmiUpdateAttLine
+            // 
+            this.CmiUpdateAttLine.Name = "CmiUpdateAttLine";
+            this.CmiUpdateAttLine.Size = new System.Drawing.Size(100, 22);
+            this.CmiUpdateAttLine.Text = "分组";
+            this.CmiUpdateAttLine.Click += new System.EventHandler(this.CmiUpdateAttLine_Click);
+            // 
+            // CmiDeleteAtt
+            // 
+            this.CmiDeleteAtt.Name = "CmiDeleteAtt";
+            this.CmiDeleteAtt.Size = new System.Drawing.Size(124, 22);
+            this.CmiDeleteAtt.Text = "删除属性";
+            this.CmiDeleteAtt.Click += new System.EventHandler(this.CmiDeleteAtt_Click);
             // 
             // APro
             // 
@@ -93,6 +310,7 @@
             this.Name = "APro";
             this.Size = new System.Drawing.Size(332, 261);
             ((System.ComponentModel.ISupportInitialize)(this.GvAttList)).EndInit();
+            this.CmAtt.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -103,5 +321,29 @@
         private System.Windows.Forms.DataGridView GvAttList;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn ValueCol;
+        private System.Windows.Forms.ContextMenuStrip CmAtt;
+        private System.Windows.Forms.ToolStripMenuItem CmuAppendAtt;
+        private System.Windows.Forms.ToolStripMenuItem CmiAppendAttText;
+        private System.Windows.Forms.ToolStripMenuItem CmiAppendAttPass;
+        private System.Windows.Forms.ToolStripMenuItem CmiAppendAttLink;
+        private System.Windows.Forms.ToolStripMenuItem CmiAppendAttMail;
+        private System.Windows.Forms.ToolStripMenuItem CmiAppendAttDate;
+        private System.Windows.Forms.ToolStripMenuItem CmiAppendAttData;
+        private System.Windows.Forms.ToolStripMenuItem CmiAppendAttList;
+        private System.Windows.Forms.ToolStripMenuItem CmiAppendAttMemo;
+        private System.Windows.Forms.ToolStripMenuItem CmiAppendAttFile;
+        private System.Windows.Forms.ToolStripMenuItem CmiAppendAttLine;
+        private System.Windows.Forms.ToolStripMenuItem CmuUpdateAtt;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttText;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttPass;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttLink;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttMail;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttDate;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttData;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttList;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttMemo;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttFile;
+        private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttLine;
+        private System.Windows.Forms.ToolStripMenuItem CmiDeleteAtt;
     }
 }

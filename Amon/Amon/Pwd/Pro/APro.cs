@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using Me.Amon.Model;
 
 namespace Me.Amon.Pwd.Pro
@@ -148,6 +149,117 @@ namespace Me.Amon.Pwd.Pro
         }
         #endregion
 
+        #region 属性弹出菜单
+        #region 添加属性
+        private void CmiAppendAttText_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiAppendAttPass_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiAppendAttLink_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiAppendAttMail_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiAppendAttDate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiAppendAttData_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiAppendAttList_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiAppendAttMemo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiAppendAttFile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiAppendAttLine_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region 转换属性
+        private void CmiUpdateAttText_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateAttPass_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateAttLink_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateAttMail_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateAttDate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateAttData_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateAttList_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateAttMemo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateAttFile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiUpdateAttLine_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        private void CmiDeleteAtt_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+        
         public void ShowTips(Control control, string caption)
         {
             _APwd.ShowTips(control, caption);
