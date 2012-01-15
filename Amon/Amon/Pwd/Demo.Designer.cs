@@ -38,23 +38,22 @@
             this.TmuUser = new System.Windows.Forms.ToolStripMenuItem();
             this.TmuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.TcTool = new System.Windows.Forms.ToolStripContainer();
-            this.SsInfo = new System.Windows.Forms.StatusStrip();
-            this.TssInfo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.TsTool = new System.Windows.Forms.ToolStrip();
-            this.TsbAppend = new System.Windows.Forms.ToolStripButton();
             this.HSplit = new System.Windows.Forms.SplitContainer();
             this.VSplit = new System.Windows.Forms.SplitContainer();
             this.TvCatTree = new System.Windows.Forms.TreeView();
             this.IlCatTree = new System.Windows.Forms.ImageList(this.components);
             this.LbKeyList = new System.Windows.Forms.ListBox();
             this.TpGrid = new System.Windows.Forms.TableLayoutPanel();
+            this.TsTool = new System.Windows.Forms.ToolStrip();
+            this.TsbAppend = new System.Windows.Forms.ToolStripButton();
+            this.SsInfo = new System.Windows.Forms.StatusStrip();
+            this.TssInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.TmMenu.SuspendLayout();
             this.TcTool.ContentPanel.SuspendLayout();
             this.TcTool.TopToolStripPanel.SuspendLayout();
             this.TcTool.SuspendLayout();
-            this.SsInfo.SuspendLayout();
-            this.TsTool.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HSplit)).BeginInit();
             this.HSplit.Panel1.SuspendLayout();
             this.HSplit.Panel2.SuspendLayout();
@@ -63,6 +62,8 @@
             this.VSplit.Panel1.SuspendLayout();
             this.VSplit.Panel2.SuspendLayout();
             this.VSplit.SuspendLayout();
+            this.TsTool.SuspendLayout();
+            this.SsInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // TmMenu
@@ -133,42 +134,6 @@
             // TcTool.TopToolStripPanel
             // 
             this.TcTool.TopToolStripPanel.Controls.Add(this.TsTool);
-            // 
-            // SsInfo
-            // 
-            this.SsInfo.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TssInfo});
-            this.SsInfo.Location = new System.Drawing.Point(0, 390);
-            this.SsInfo.Name = "SsInfo";
-            this.SsInfo.Size = new System.Drawing.Size(584, 22);
-            this.SsInfo.TabIndex = 2;
-            this.SsInfo.Text = "statusStrip1";
-            // 
-            // TssInfo
-            // 
-            this.TssInfo.Name = "TssInfo";
-            this.TssInfo.Size = new System.Drawing.Size(50, 17);
-            this.TssInfo.Text = "TssInfo";
-            // 
-            // TsTool
-            // 
-            this.TsTool.Dock = System.Windows.Forms.DockStyle.None;
-            this.TsTool.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TsbAppend});
-            this.TsTool.Location = new System.Drawing.Point(3, 0);
-            this.TsTool.Name = "TsTool";
-            this.TsTool.Size = new System.Drawing.Size(35, 25);
-            this.TsTool.TabIndex = 0;
-            this.TsTool.EndDrag += new System.EventHandler(this.TsTool_EndDrag);
-            // 
-            // TsbAppend
-            // 
-            this.TsbAppend.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbAppend.Image = ((System.Drawing.Image)(resources.GetObject("TsbAppend.Image")));
-            this.TsbAppend.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsbAppend.Name = "TsbAppend";
-            this.TsbAppend.Size = new System.Drawing.Size(23, 22);
-            this.TsbAppend.Text = "toolStripButton1";
             // 
             // HSplit
             // 
@@ -250,6 +215,52 @@
             this.TpGrid.Size = new System.Drawing.Size(356, 334);
             this.TpGrid.TabIndex = 0;
             // 
+            // TsTool
+            // 
+            this.TsTool.Dock = System.Windows.Forms.DockStyle.None;
+            this.TsTool.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TsbAppend,
+            this.toolStripButton1});
+            this.TsTool.Location = new System.Drawing.Point(3, 0);
+            this.TsTool.Name = "TsTool";
+            this.TsTool.Size = new System.Drawing.Size(89, 25);
+            this.TsTool.TabIndex = 0;
+            this.TsTool.EndDrag += new System.EventHandler(this.TsTool_EndDrag);
+            // 
+            // TsbAppend
+            // 
+            this.TsbAppend.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbAppend.Image = ((System.Drawing.Image)(resources.GetObject("TsbAppend.Image")));
+            this.TsbAppend.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbAppend.Name = "TsbAppend";
+            this.TsbAppend.Size = new System.Drawing.Size(23, 22);
+            this.TsbAppend.Text = "toolStripButton1";
+            // 
+            // SsInfo
+            // 
+            this.SsInfo.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TssInfo});
+            this.SsInfo.Location = new System.Drawing.Point(0, 390);
+            this.SsInfo.Name = "SsInfo";
+            this.SsInfo.Size = new System.Drawing.Size(584, 22);
+            this.SsInfo.TabIndex = 2;
+            this.SsInfo.Text = "statusStrip1";
+            // 
+            // TssInfo
+            // 
+            this.TssInfo.Name = "TssInfo";
+            this.TssInfo.Size = new System.Drawing.Size(50, 17);
+            this.TssInfo.Text = "TssInfo";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "toolStripButton1";
+            // 
             // Demo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -269,10 +280,6 @@
             this.TcTool.TopToolStripPanel.PerformLayout();
             this.TcTool.ResumeLayout(false);
             this.TcTool.PerformLayout();
-            this.SsInfo.ResumeLayout(false);
-            this.SsInfo.PerformLayout();
-            this.TsTool.ResumeLayout(false);
-            this.TsTool.PerformLayout();
             this.HSplit.Panel1.ResumeLayout(false);
             this.HSplit.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.HSplit)).EndInit();
@@ -281,6 +288,10 @@
             this.VSplit.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.VSplit)).EndInit();
             this.VSplit.ResumeLayout(false);
+            this.TsTool.ResumeLayout(false);
+            this.TsTool.PerformLayout();
+            this.SsInfo.ResumeLayout(false);
+            this.SsInfo.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -307,5 +318,6 @@
         private System.Windows.Forms.ListBox LbKeyList;
         private System.Windows.Forms.TableLayoutPanel TpGrid;
         private System.Windows.Forms.ToolTip TpTips;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }

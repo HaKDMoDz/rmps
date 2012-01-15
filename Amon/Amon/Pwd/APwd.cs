@@ -429,7 +429,7 @@ namespace Me.Amon.Pwd
                 // 状态栏隐现
                 if (e.KeyCode == Keys.I)
                 {
-                    SsInfo.Visible = !SsInfo.Visible;
+                    SsEcho.Visible = !SsEcho.Visible;
                     return;
                 }
                 // 目录隐现
@@ -556,6 +556,20 @@ namespace Me.Amon.Pwd
 
         #region 菜单栏事件区域
         #region 系统菜单
+        private void TmiHideWin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiLockWin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TmiExitApp_Click(object sender, EventArgs e)
+        {
+
+        }
         #endregion
 
         #region 编辑菜单
@@ -723,7 +737,7 @@ namespace Me.Amon.Pwd
 
         private void TmiMenu_Click(object sender, EventArgs e)
         {
-            SetMenuVisible(!TmMenu.Visible);
+            SetMenuVisible(false);
         }
 
         private void TmiTool_Click(object sender, EventArgs e)
@@ -731,9 +745,9 @@ namespace Me.Amon.Pwd
             SetToolVisible(!TsTool.Visible);
         }
 
-        private void TmiInfo_Click(object sender, EventArgs e)
+        private void TmiEcho_Click(object sender, EventArgs e)
         {
-            SetInfoVisible(!SsInfo.Visible);
+            SetEchoVisible(!SsEcho.Visible);
         }
 
         private void TmiCatView_Click(object sender, EventArgs e)
@@ -841,7 +855,7 @@ namespace Me.Amon.Pwd
         {
         }
 
-        private void TmiAbout_Click(object sender, EventArgs e)
+        private void TmiInfo_Click(object sender, EventArgs e)
         {
 
         }
@@ -849,6 +863,11 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 工具栏事件区域
+        private void TsTool_EndDrag(object sender, EventArgs e)
+        {
+
+        }
+
         private void TsbAppend_Click(object sender, EventArgs e)
         {
 
@@ -866,10 +885,25 @@ namespace Me.Amon.Pwd
 
         private void TsbMenu_Click(object sender, EventArgs e)
         {
-
+            SetMenuVisible(!TmMenu.Visible);
         }
 
         private void TsbTool_Click(object sender, EventArgs e)
+        {
+            SetToolVisible(false);
+        }
+
+        private void TsbEcho_Click(object sender, EventArgs e)
+        {
+            SetEchoVisible(!SsEcho.Visible);
+        }
+
+        private void TsbSync_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TsbKeys_Click(object sender, EventArgs e)
         {
 
         }
@@ -1202,11 +1236,11 @@ namespace Me.Amon.Pwd
             TsbTool.Checked = visible;
         }
 
-        private void SetInfoVisible(bool visible)
+        private void SetEchoVisible(bool visible)
         {
-            SsInfo.Visible = visible;
-            TmiInfo.Checked = visible;
-            TsbInfo.Checked = visible;
+            SsEcho.Visible = visible;
+            TmiEcho.Checked = visible;
+            TsbEcho.Checked = visible;
         }
 
         private void SetCatViewVisible(bool visible)
@@ -1223,7 +1257,7 @@ namespace Me.Amon.Pwd
 
         private void SetFindBarVisible(bool visible)
         {
-            //TpGrid.RowStyles[0].Height = 0;
+            TpGrid.RowStyles[0].Height = visible ? 32 : 0;
             _FindBar.Visible = visible;
             TmiFindBar.Checked = visible;
         }
