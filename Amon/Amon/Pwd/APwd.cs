@@ -80,8 +80,6 @@ namespace Me.Amon.Pwd
             InitCat(_RootNode, dt);
             _RootNode.Expand();
 
-            LbKeyList.ItemHeight = 30;
-
             _FindBar = new FindBar(this);
             _FindBar.Dock = DockStyle.Fill;
             _FindBar.Location = new Point(3, 3);
@@ -1049,8 +1047,8 @@ namespace Me.Amon.Pwd
         public void ChangeView(UserControl uc)
         {
             uc.Dock = DockStyle.Fill;
-            uc.Location = new Point(0, 0);
-            uc.Size = new Size(460, 398);
+            uc.Location = new Point(3, 35);
+            uc.Size = new Size(350, 296);
             uc.TabIndex = 0;
 
             HSplit.Panel2.Controls.Clear();

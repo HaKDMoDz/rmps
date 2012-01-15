@@ -159,6 +159,7 @@
             this.TsbKeys = new System.Windows.Forms.ToolStripButton();
             this.TsbInfo = new System.Windows.Forms.ToolStripButton();
             this.SsEcho = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.TmMenu.SuspendLayout();
             this.TcTool.ContentPanel.SuspendLayout();
@@ -175,6 +176,7 @@
             this.CmCat.SuspendLayout();
             this.CmKey.SuspendLayout();
             this.TsTool.SuspendLayout();
+            this.SsEcho.SuspendLayout();
             this.SuspendLayout();
             // 
             // TmMenu
@@ -813,7 +815,7 @@
             // 
             this.HSplit.Panel2.Controls.Add(this.TpGrid);
             this.HSplit.Size = new System.Drawing.Size(560, 334);
-            this.HSplit.SplitterDistance = 186;
+            this.HSplit.SplitterDistance = 200;
             this.HSplit.TabIndex = 0;
             this.HSplit.TabStop = false;
             // 
@@ -831,8 +833,8 @@
             // VSplit.Panel2
             // 
             this.VSplit.Panel2.Controls.Add(this.LbKeyList);
-            this.VSplit.Size = new System.Drawing.Size(186, 334);
-            this.VSplit.SplitterDistance = 147;
+            this.VSplit.Size = new System.Drawing.Size(200, 334);
+            this.VSplit.SplitterDistance = 160;
             this.VSplit.TabIndex = 0;
             this.VSplit.TabStop = false;
             // 
@@ -845,7 +847,7 @@
             this.TvCatTree.Location = new System.Drawing.Point(0, 0);
             this.TvCatTree.Name = "TvCatTree";
             this.TvCatTree.SelectedImageIndex = 0;
-            this.TvCatTree.Size = new System.Drawing.Size(186, 147);
+            this.TvCatTree.Size = new System.Drawing.Size(200, 160);
             this.TvCatTree.TabIndex = 0;
             this.TvCatTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvCatTree_AfterSelect);
             // 
@@ -903,12 +905,12 @@
             // 
             this.LbKeyList.ContextMenuStrip = this.CmKey;
             this.LbKeyList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LbKeyList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.LbKeyList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.LbKeyList.FormattingEnabled = true;
-            this.LbKeyList.ItemHeight = 12;
+            this.LbKeyList.ItemHeight = 30;
             this.LbKeyList.Location = new System.Drawing.Point(0, 0);
             this.LbKeyList.Name = "LbKeyList";
-            this.LbKeyList.Size = new System.Drawing.Size(186, 183);
+            this.LbKeyList.Size = new System.Drawing.Size(200, 170);
             this.LbKeyList.TabIndex = 0;
             this.LbKeyList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.LbKeyList_DrawItem);
             this.LbKeyList.SelectedIndexChanged += new System.EventHandler(this.LbKeyList_SelectedIndexChanged);
@@ -1117,7 +1119,7 @@
             this.TpGrid.RowCount = 2;
             this.TpGrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
             this.TpGrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TpGrid.Size = new System.Drawing.Size(370, 334);
+            this.TpGrid.Size = new System.Drawing.Size(356, 334);
             this.TpGrid.TabIndex = 0;
             // 
             // TsTool
@@ -1258,11 +1260,19 @@
             // 
             // SsEcho
             // 
+            this.SsEcho.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
             this.SsEcho.Location = new System.Drawing.Point(0, 390);
             this.SsEcho.Name = "SsEcho";
             this.SsEcho.Size = new System.Drawing.Size(584, 22);
             this.SsEcho.TabIndex = 2;
             this.SsEcho.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(131, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // APwd
             // 
@@ -1297,6 +1307,8 @@
             this.CmKey.ResumeLayout(false);
             this.TsTool.ResumeLayout(false);
             this.TsTool.PerformLayout();
+            this.SsEcho.ResumeLayout(false);
+            this.SsEcho.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1434,5 +1446,6 @@
         private System.Windows.Forms.ToolStripButton TsbInfo;
         private System.Windows.Forms.ToolStripButton TsbSync;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
