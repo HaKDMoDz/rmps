@@ -47,7 +47,7 @@ namespace Me.Amon.Uc.Ico
         {
             OpenFileDialog fd = new OpenFileDialog();
             fd.Multiselect = false;
-            fd.Filter = "PNG文件|*.png";
+            fd.Filter = "PNG文件|*.png|JPG文件|*.jpg|BMP文件|*.bmp";
             if (DialogResult.OK != fd.ShowDialog(this))
             {
                 return;
