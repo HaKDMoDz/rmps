@@ -13,7 +13,9 @@ namespace Me.Amon
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main());
+            Main main = new Main();
+            main.Init();
+            Application.Run(main);
         }
     }
 }

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UcsEdit));
-            this.LbUcs = new System.Windows.Forms.ListBox();
+            this.LsUcs = new System.Windows.Forms.ListBox();
             this.LbName = new System.Windows.Forms.Label();
             this.TbName = new System.Windows.Forms.TextBox();
             this.LbTips = new System.Windows.Forms.Label();
@@ -41,14 +41,15 @@
             this.BtCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // LbUcs
+            // LsUcs
             // 
-            this.LbUcs.FormattingEnabled = true;
-            this.LbUcs.ItemHeight = 12;
-            this.LbUcs.Location = new System.Drawing.Point(12, 12);
-            this.LbUcs.Name = "LbUcs";
-            this.LbUcs.Size = new System.Drawing.Size(120, 208);
-            this.LbUcs.TabIndex = 0;
+            this.LsUcs.FormattingEnabled = true;
+            this.LsUcs.ItemHeight = 12;
+            this.LsUcs.Location = new System.Drawing.Point(12, 12);
+            this.LsUcs.Name = "LsUcs";
+            this.LsUcs.Size = new System.Drawing.Size(120, 208);
+            this.LsUcs.TabIndex = 0;
+            this.LsUcs.SelectedIndexChanged += new System.EventHandler(this.LsUcs_SelectedIndexChanged);
             // 
             // LbName
             // 
@@ -153,12 +154,13 @@
             this.Controls.Add(this.LbTips);
             this.Controls.Add(this.TbName);
             this.Controls.Add(this.LbName);
-            this.Controls.Add(this.LbUcs);
+            this.Controls.Add(this.LsUcs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "UcsEdit";
+            this.ShowInTaskbar = false;
             this.Text = "字符管理";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -167,7 +169,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox LbUcs;
+        private System.Windows.Forms.ListBox LsUcs;
         private System.Windows.Forms.Label LbName;
         private System.Windows.Forms.TextBox TbName;
         private System.Windows.Forms.Label LbTips;

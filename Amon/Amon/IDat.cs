@@ -448,57 +448,57 @@
         /// <summary>
         /// 字符空间表格
         /// </summary>
-        public const string APWD0600 = "APWD0600";
+        public const string AICO0100 = "AICO0100";
         /// <summary>
         /// 排序依据
         /// </summary>
-        public const string APWD0601 = "APWD0601";
+        public const string AICO0101 = "AICO0101";
         /// <summary>
         /// 用户代码
         /// </summary>
-        public const string APWD0602 = "APWD0602";
-        public const int APWD0602_SIZE = 8;
+        public const string AICO0102 = "AICO0102";
+        public const int AICO0102_SIZE = 8;
         /// <summary>
         /// 空间索引
         /// </summary>
-        public const string APWD0603 = "APWD0603";
-        public const int APWD0603_SIZE = 16;
+        public const string AICO0103 = "AICO0103";
+        public const int AICO0103_SIZE = 16;
         /// <summary>
         /// 空间名称
         /// </summary>
-        public const string APWD0604 = "APWD0604";
-        public const int APWD0604_SIZE = 256;
+        public const string AICO0104 = "AICO0104";
+        public const int AICO0104_SIZE = 256;
         /// <summary>
         /// 空间提示
         /// </summary>
-        public const string APWD0605 = "APWD0605";
-        public const int APWD0605_SIZE = 256;
+        public const string AICO0105 = "AICO0105";
+        public const int AICO0105_SIZE = 256;
         /// <summary>
         /// 空间字符
         /// </summary>
-        public const string APWD0606 = "APWD0606";
-        public const int APWD0606_SIZE = 512;
+        public const string AICO0106 = "AICO0106";
+        public const int AICO0106_SIZE = 512;
         /// <summary>
         /// 相关说明
         /// </summary>
-        public const string APWD0607 = "APWD0607";
-        public const int APWD0607_SIZE = 2048;
+        public const string AICO0107 = "AICO0107";
+        public const int AICO0107_SIZE = 2048;
         /// <summary>
         /// 更新日期
         /// </summary>
-        public const string APWD0608 = "APWD0608";
+        public const string AICO0108 = "AICO0108";
         /// <summary>
         /// 创建日期
         /// </summary>
-        public const string APWD0609 = "APWD0609";
+        public const string AICO0109 = "AICO0109";
         /// <summary>
         /// 版本控制
         /// </summary>
-        public const string APWD060A = "APWD060A";
+        public const string AICO010A = "AICO010A";
         /// <summary>
         /// 操作状态：0删除、1默认、2新增、3更新
         /// </summary>
-        public const string APWD060B = "APWD060B";
+        public const string AICO010B = "AICO010B";
         #endregion
 
         #region 历史信息表格

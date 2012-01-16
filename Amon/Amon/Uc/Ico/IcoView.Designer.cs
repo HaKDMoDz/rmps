@@ -41,12 +41,12 @@
             this.LvIco.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.LvIco.LargeImageList = this.IlIco;
             this.LvIco.Location = new System.Drawing.Point(0, 0);
             this.LvIco.Name = "LvIco";
             this.LvIco.Size = new System.Drawing.Size(244, 220);
             this.LvIco.TabIndex = 0;
             this.LvIco.UseCompatibleStateImageBehavior = false;
-            this.LvIco.View = System.Windows.Forms.View.SmallIcon;
             // 
             // BtCancel
             // 
@@ -83,8 +83,8 @@
             // 
             // IlIco
             // 
-            this.IlIco.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.IlIco.ImageSize = new System.Drawing.Size(16, 16);
+            this.IlIco.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.IlIco.ImageSize = new System.Drawing.Size(24, 24);
             this.IlIco.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // IcoView

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
+using Me.Amon.Model;
 
 namespace Me.Amon.Uc.Ico
 {
     public partial class DirEdit : UserControl
     {
         private IcoEdit _IcoEdit;
-        private Item _Item;
+        private Dir _Item;
 
         public DirEdit()
         {
@@ -23,11 +24,11 @@ namespace Me.Amon.Uc.Ico
             _IcoEdit.CancelButton = BtCancel;
         }
 
-        public void ShowData(Item item)
+        public void ShowData(Dir item)
         {
             _Item = item;
-            TbName.Text = _Item.V;
-            TbTips.Text = _Item.D;
+            TbName.Text = _Item.Name;
+            TbTips.Text = _Item.Tips;
         }
 
         private void BtUpdate_Click(object sender, EventArgs e)
@@ -38,8 +39,8 @@ namespace Me.Amon.Uc.Ico
                 TbName.Focus();
                 return;
             }
-            _Item.V = name;
-            _Item.D = TbTips.Text;
+            _Item.Name = name;
+            _Item.Tips = TbTips.Text;
             _IcoEdit.UpdateDir(_Item);
         }
 

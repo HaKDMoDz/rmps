@@ -28,16 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.BtPwd = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.BgWorker = new System.Windows.Forms.Timer(this.components);
+            this.NiTray = new System.Windows.Forms.NotifyIcon(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // BtPwd
             // 
-            this.BtPwd.Location = new System.Drawing.Point(123, -1);
+            this.BtPwd.Location = new System.Drawing.Point(38, 9);
             this.BtPwd.Name = "BtPwd";
             this.BtPwd.Size = new System.Drawing.Size(75, 23);
             this.BtPwd.TabIndex = 0;
@@ -47,7 +50,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(123, 28);
+            this.button1.Location = new System.Drawing.Point(119, 9);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -57,18 +60,28 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(48, 48);
+            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            // 
+            // BgWorker
+            // 
+            this.BgWorker.Tick += new System.EventHandler(this.BgWorker_Tick);
+            // 
+            // NiTray
+            // 
+            this.NiTray.BalloonTipTitle = "阿木提示";
+            this.NiTray.Icon = ((System.Drawing.Icon)(resources.GetObject("NiTray.Icon")));
+            this.NiTray.Text = "阿木导航";
+            this.NiTray.Visible = true;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(200, 50);
+            this.ClientSize = new System.Drawing.Size(200, 36);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.BtPwd);
@@ -77,6 +90,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Main";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "登录";
             this.TopMost = true;
@@ -90,6 +104,8 @@
         private System.Windows.Forms.Button BtPwd;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Timer BgWorker;
+        private System.Windows.Forms.NotifyIcon NiTray;
 
 
     }

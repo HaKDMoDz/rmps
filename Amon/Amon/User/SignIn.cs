@@ -17,11 +17,14 @@ namespace Me.Amon.User
         private string _Code;
         private Uc.Properties _Prop;
 
+        #region 构造函数
         public SignIn()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region 事件处理
         private void BtOk_Click(object sender, EventArgs e)
         {
             DoSignIn();
@@ -31,11 +34,13 @@ namespace Me.Amon.User
         {
             Close();
         }
+        #endregion
 
         private void ShowAlert(string alert)
         {
         }
 
+        #region 私有方法
         private void DoSignIn()
         {
             _Name = TbName.Text;
@@ -147,5 +152,6 @@ namespace Me.Amon.User
                 Close();
             }
         }
+        #endregion
     }
 }

@@ -11,6 +11,7 @@ namespace Me.Amon.Uc.Ico
     {
         private IcoEdit _IcoEdit;
 
+        #region 构造函数
         public IcoView()
         {
             InitializeComponent();
@@ -25,20 +26,9 @@ namespace Me.Amon.Uc.Ico
             _IcoEdit.AcceptButton = BtChoose;
             _IcoEdit.CancelButton = BtCancel;
         }
+        #endregion
 
-        public void ShowData(string path)
-        {
-            int i = 1;
-            LvIco.Items.Clear();
-            IlIco.Images.Clear();
-            foreach (string file in Directory.GetFiles(path, "*.png"))
-            {
-                string key = file.Substring(0, 16);
-                IlIco.Images.Add(key, Image.FromFile(file));
-                LvIco.Items.Add(new ListViewItem((i++).ToString(), key));
-            }
-        }
-
+        #region 事件处理
         private void BtChoose_Click(object sender, EventArgs e)
         {
             if (LvIco.SelectedItems.Count < 1)
@@ -62,7 +52,7 @@ namespace Me.Amon.Uc.Ico
             {
                 return;
             }
-            if (File.Exists(fd.FileName))
+            if (!File.Exists(fd.FileName))
             {
                 MessageBox.Show("您选择的文件不存在！");
                 return;
@@ -98,6 +88,47 @@ namespace Me.Amon.Uc.Ico
         private void BtCancel_Click(object sender, EventArgs e)
         {
             _IcoEdit.Close();
+        }
+        #endregion
+
+        #region 公共函数
+        public void ShowData(string path)
+        {
+            int i = 1;
+            LvIco.Items.Clear();
+            IlIco.Images.Clear();
+            int index;
+            string name;
+            foreach (string file in Directory.GetFiles(path, "*.png"))
+            {
+                index = file.LastIndexOf(Path.DirectorySeparatorChar);
+                if (index == file.Length - 1)
+                {
+                    continue;
+                }
+                name = file.Substring(index + 1);
+                index = name.IndexOf('.');
+                if (index != 16)
+                {
+                    continue;
+                }
+                name = file.Substring(0, 16);
+                IlIco.Images.Add(name, LoadImage(file));
+                LvIco.Items.Add(new ListViewItem((i++).ToString(), name));
+            }
+        }
+        #endregion
+
+        private Image LoadImage(string file)
+        {
+            if (!File.Exists(file))
+            {
+                return BeanUtil.KeyNaN;
+            }
+            using (Stream stream = File.OpenRead(file))
+            {
+                return Image.FromStream(stream);
+            }
         }
     }
 }

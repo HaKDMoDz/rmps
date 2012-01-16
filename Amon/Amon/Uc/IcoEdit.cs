@@ -33,45 +33,49 @@ namespace Me.Amon.Uc
         public string CurrentPath { get; set; }
         public ListViewItem SelectedItem { get; set; }
 
-        public void Init()
+        public void Init(DataModel dataModel)
         {
             DefaultPath = IEnv.DATA_DIR + Path.DirectorySeparatorChar + _UserModel.Code + Path.DirectorySeparatorChar + "key";
-            LbDir.Items.Add(new Item { K = "0", V = "默认目录" });
+            LsDir.Items.Add(new Item { K = "0", V = "默认目录" });
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
             dba.AddTable(IDat.APWD0500);
-            dba.AddWhere(IDat.APWD0503, _UserModel.Code);
+            dba.AddColumn(IDat.APWD0503);
+            dba.AddColumn(IDat.APWD0504);
+            dba.AddColumn(IDat.APWD0505);
+            dba.AddColumn(IDat.APWD0507);
+            dba.AddWhere(IDat.APWD0502, _UserModel.Code);
             dba.AddSort(IDat.APWD0501, true);
 
             using (DataTable dt = dba.ExecuteSelect())
             {
                 foreach (DataRow row in dt.Rows)
                 {
-                    LbDir.Items.Add(new Item { K = row[IDat.APWD0504] as string, V = row[IDat.APWD0505] as string, D = row[IDat.APWD0506] as string });
+                    LsDir.Items.Add(new Dir { Id = row[IDat.APWD0503] as string, Name = row[IDat.APWD0504] as string, Tips = row[IDat.APWD0505] as string, Memo = row[IDat.APWD0507] as string });
                 }
             }
 
             ShowIcoView();
         }
 
-        private void LbDir_SelectedIndexChanged(object sender, EventArgs e)
+        private void LsDir_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_Control is DirEdit)
             {
                 ShowIcoView();
             }
 
-            Item item = LbDir.SelectedItem as Item;
+            Dir item = LsDir.SelectedItem as Dir;
             if (item == null)
             {
                 return;
             }
 
             CurrentPath = DefaultPath;
-            if (CharUtil.IsValidate(item.K))
+            if (CharUtil.IsValidate(item.Id))
             {
-                CurrentPath += Path.DirectorySeparatorChar + item.K;
+                CurrentPath += Path.DirectorySeparatorChar + item.Id;
             }
             if (!Directory.Exists(CurrentPath))
             {
@@ -86,13 +90,13 @@ namespace Me.Amon.Uc
             {
                 ShowDirEdit();
             }
-            _DirEdit.ShowData(new Item());
+            _DirEdit.ShowData(new Dir());
         }
 
         private void MiUpdate_Click(object sender, EventArgs e)
         {
-            Item item = LbDir.SelectedItem as Item;
-            if (item == null || item.K == "0")
+            Dir item = LsDir.SelectedItem as Dir;
+            if (item == null || item.Id == "0")
             {
                 return;
             }
@@ -106,13 +110,13 @@ namespace Me.Amon.Uc
 
         private void MiDelete_Click(object sender, EventArgs e)
         {
-            Item item = LbDir.SelectedItem as Item;
-            if (item == null || item.K == "0")
+            Dir item = LsDir.SelectedItem as Dir;
+            if (item == null || item.Id == "0")
             {
                 return;
             }
 
-            if (DialogResult.OK != MessageBox.Show("确认要删除吗？", "", MessageBoxButtons.YesNo))
+            if (DialogResult.Yes != MessageBox.Show("确认要删除吗？", "", MessageBoxButtons.YesNo))
             {
                 return;
             }
@@ -120,12 +124,18 @@ namespace Me.Amon.Uc
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
             dba.AddTable(IDat.APWD0500);
-            dba.AddWhere(IDat.APWD0503, _UserModel.Code);
-            dba.AddWhere(IDat.APWD0504, item.K);
-            dba.ExecuteDelete();
-            Directory.Delete(CurrentPath, true);
+            dba.AddWhere(IDat.APWD0502, _UserModel.Code);
+            dba.AddWhere(IDat.APWD0503, item.Id);
+            if (1 != dba.ExecuteDelete())
+            {
+                return;
+            }
+            if (Directory.Exists(CurrentPath))
+            {
+                Directory.Delete(CurrentPath, true);
+            }
 
-            LbDir.Items.Remove(item);
+            LsDir.Items.Remove(item);
         }
 
         private void ShowDirEdit()
@@ -162,32 +172,38 @@ namespace Me.Amon.Uc
             _Control = _IcoView;
         }
 
-        public void UpdateDir(Item item)
+        public void UpdateDir(Dir item)
         {
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
             dba.AddTable(IDat.APWD0500);
-            dba.AddParam(IDat.APWD0505, item.V);
-            dba.AddParam(IDat.APWD0506, item.D);
-            dba.AddParam(IDat.APWD0507, "");
-            if (CharUtil.IsValidateHash(item.K))
+            dba.AddParam(IDat.APWD0504, item.Name);
+            dba.AddParam(IDat.APWD0505, item.Tips);
+            dba.AddParam(IDat.APWD0506, item.Path);
+            dba.AddParam(IDat.APWD0507, item.Memo);
+            if (CharUtil.IsValidateHash(item.Id))
             {
-                dba.AddWhere(IDat.APWD0503, _UserModel.Code);
-                dba.AddWhere(IDat.APWD0504, item.K);
+                dba.AddWhere(IDat.APWD0502, _UserModel.Code);
+                dba.AddWhere(IDat.APWD0503, item.Id);
+                dba.AddVcs(IDat.APWD0508, IDat.VCS_DEFAULT);
+                dba.AddOpt(IDat.APWD0509, 0, IDat.OPT_INSERT);
                 dba.ExecuteUpdate();
-                LbDir.Items[LbDir.SelectedIndex] = item;
+
+                LsDir.Items[LsDir.SelectedIndex] = item;
             }
             else
             {
-                item.K = HashUtil.GetCurrTimeHex(true);
-                dba.AddParam(IDat.APWD0501, LbDir.Items.Count);
-                dba.AddParam(IDat.APWD0503, _UserModel.Code);
-                dba.AddParam(IDat.APWD0504, item.K);
+                item.Id = Convert.ToString(DateTime.UtcNow.ToBinary(), 16).ToUpper().PadLeft(16, '0');
+                dba.AddParam(IDat.APWD0501, LsDir.Items.Count);
+                dba.AddParam(IDat.APWD0502, _UserModel.Code);
+                dba.AddParam(IDat.APWD0503, item.Id);
+                dba.AddParam(IDat.APWD0508, IDat.VCS_DEFAULT);
+                dba.AddParam(IDat.APWD0509, IDat.OPT_INSERT);
                 dba.ExecuteInsert();
 
-                Directory.CreateDirectory(DefaultPath + Path.DirectorySeparatorChar + item.K);
-                LbDir.Items.Add(item);
-                LbDir.SelectedItem = item;
+                Directory.CreateDirectory(DefaultPath + Path.DirectorySeparatorChar + item.Id);
+                LsDir.Items.Add(item);
+                LsDir.SelectedItem = item;
             }
         }
     }

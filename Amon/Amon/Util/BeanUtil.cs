@@ -37,29 +37,29 @@ namespace Me.Amon.Util
             }
         }
 
-        private static Image _CatNan;
-        public static Image CatNan
+        private static Image _CatNaN;
+        public static Image CatNaN
         {
             get
             {
-                if (_CatNan == null)
+                if (_CatNaN == null)
                 {
-                    _CatNan = new Bitmap(16, 16);
+                    _CatNaN = new Bitmap(16, 16);
                 }
-                return _CatNan;
+                return _CatNaN;
             }
         }
 
-        private static Image _KeyNan;
-        public static Image KeyNan
+        private static Image _KeyNaN;
+        public static Image KeyNaN
         {
             get
             {
-                if (_KeyNan == null)
+                if (_KeyNaN == null)
                 {
-                    _KeyNan = new Bitmap(32, 32);
+                    _KeyNaN = new Bitmap(32, 32);
                 }
-                return _KeyNan;
+                return _KeyNaN;
             }
         }
 

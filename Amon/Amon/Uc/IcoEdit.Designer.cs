@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IcoEdit));
-            this.LbDir = new System.Windows.Forms.ListBox();
+            this.LsDir = new System.Windows.Forms.ListBox();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MiAppend = new System.Windows.Forms.ToolStripMenuItem();
             this.MiUpdate = new System.Windows.Forms.ToolStripMenuItem();
@@ -38,15 +38,16 @@
             this.CmMenu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // LbDir
+            // LsDir
             // 
-            this.LbDir.ContextMenuStrip = this.CmMenu;
-            this.LbDir.FormattingEnabled = true;
-            this.LbDir.ItemHeight = 12;
-            this.LbDir.Location = new System.Drawing.Point(12, 12);
-            this.LbDir.Name = "LbDir";
-            this.LbDir.Size = new System.Drawing.Size(120, 220);
-            this.LbDir.TabIndex = 0;
+            this.LsDir.ContextMenuStrip = this.CmMenu;
+            this.LsDir.FormattingEnabled = true;
+            this.LsDir.ItemHeight = 12;
+            this.LsDir.Location = new System.Drawing.Point(12, 12);
+            this.LsDir.Name = "LsDir";
+            this.LsDir.Size = new System.Drawing.Size(120, 220);
+            this.LsDir.TabIndex = 0;
+            this.LsDir.SelectedIndexChanged += new System.EventHandler(this.LsDir_SelectedIndexChanged);
             // 
             // CmMenu
             // 
@@ -83,12 +84,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(394, 273);
-            this.Controls.Add(this.LbDir);
+            this.Controls.Add(this.LsDir);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "IcoEdit";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "图标管理";
             this.CmMenu.ResumeLayout(false);
@@ -98,7 +100,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox LbDir;
+        private System.Windows.Forms.ListBox LsDir;
         private System.Windows.Forms.ContextMenuStrip CmMenu;
         private System.Windows.Forms.ToolStripMenuItem MiAppend;
         private System.Windows.Forms.ToolStripMenuItem MiUpdate;

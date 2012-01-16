@@ -58,7 +58,7 @@ namespace Me.Amon.Pwd
             _ViewModel.Load();
 
             Cat cat = new Cat { Id = "0", Text = "阿木密码箱", Tips = "阿木密码箱", Icon = "0" };
-            IlCatTree.Images.Add(cat.Icon, BeanUtil.CatNan);
+            IlCatTree.Images.Add(cat.Icon, BeanUtil.CatNaN);
             _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Id };
             _RootNode.Tag = cat;
             TvCatTree.Nodes.Add(_RootNode);
@@ -828,13 +828,15 @@ namespace Me.Amon.Pwd
 
         private void TmiUcs_Click(object sender, EventArgs e)
         {
-
+            UcsEdit edit = new UcsEdit(_UserModel);
+            edit.Init(_DataModel);
+            edit.Show(this);
         }
 
         private void TmiIco_Click(object sender, EventArgs e)
         {
             IcoEdit edit = new IcoEdit(_UserModel);
-            edit.Init();
+            edit.Init(_DataModel);
             edit.Show(this);
         }
         #endregion
@@ -1307,7 +1309,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            _SafeModel.Key = new Key { Ico = BeanUtil.CatNan };
+            _SafeModel.Key = new Key { Ico = BeanUtil.CatNaN };
 
             _SafeModel.Clear();
             _SafeModel.InitGuid();
@@ -1517,7 +1519,7 @@ namespace Me.Amon.Pwd
             }
             else
             {
-                key.Ico = BeanUtil.KeyNan;
+                key.Ico = BeanUtil.KeyNaN;
             }
         }
 
