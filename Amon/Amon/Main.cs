@@ -112,11 +112,11 @@ namespace Me.Amon
 
             _SrcImage = Image.FromFile("Skin\\Default\\eyer.png");
 
-            _AlienRadius = 14;
-            _AlienCenterX = 22;
-            _AlienCenterY = 21;
+            _AlienRadius = 10;
+            _AlienCenterX = 16;
+            _AlienCenterY = 14;
 
-            _PupilRadius = 8;
+            _PupilRadius = 5;
             _PupilCenterX = _AlienCenterX;
             _PupilCenterY = _AlienCenterY;
 
