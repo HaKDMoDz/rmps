@@ -41,7 +41,7 @@
             this.TbTxt.Location = new System.Drawing.Point(12, 12);
             this.TbTxt.Multiline = true;
             this.TbTxt.Name = "TbTxt";
-            this.TbTxt.Size = new System.Drawing.Size(260, 216);
+            this.TbTxt.Size = new System.Drawing.Size(360, 216);
             this.TbTxt.TabIndex = 0;
             // 
             // CkWrap
@@ -60,11 +60,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(384, 262);
             this.Controls.Add(this.CkWrap);
             this.Controls.Add(this.TbTxt);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TxtEditor";
+            this.ShowInTaskbar = false;
             this.Text = "文本查看器";
             this.ResumeLayout(false);
             this.PerformLayout();

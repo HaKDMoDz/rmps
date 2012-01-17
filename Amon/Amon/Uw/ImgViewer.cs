@@ -47,35 +47,20 @@ namespace Me.Amon.Uw
             PbImg.Width = _SrcImage.Width;
             PbImg.Height = _SrcImage.Height;
             PbImg.Location = new Point((PlImg.Width - _SrcImage.Width) >> 1, (PlImg.Height - _SrcImage.Height) >> 1);
+
+            ReDraw();
         }
         #endregion
 
         #region 事件处理
-        private void BtCursor_Click(object sender, EventArgs e)
+        private void ImgViewer_Resize(object sender, EventArgs e)
         {
-            _MoveTip = !_MoveTip;
-        }
-
-        private void BtGrid_Click(object sender, EventArgs e)
-        {
-            _Choosed = !_Choosed;
-        }
-
-        private void BtEraser_Click(object sender, EventArgs e)
-        {
-            using (Graphics g = Graphics.FromImage(_TmpImage))
-            {
-                g.FillRectangle(_GroundBrush, 0, 0, _DstImage.Width, _DstImage.Height);
-
-                g.DrawImage(_SrcImage, 0, 0);
-            }
-
-            GenImage(new Point(_DstImage.Width >> 1, _DstImage.Height >> 1));
+            PbImg.Location = new Point((PlImg.Width - _SrcImage.Width) >> 1, (PlImg.Height - _SrcImage.Height) >> 1);
         }
 
         private void PbImg_MouseMove(object sender, MouseEventArgs e)
         {
-            GenImage(e.Location);
+            DoDraw(e.Location.X, e.Location.Y);
         }
 
         private void PbImg_MouseClick(object sender, MouseEventArgs e)
@@ -92,12 +77,38 @@ namespace Me.Amon.Uw
                 g.DrawLine(_ChoosedPen, p.X, 0, p.X, _DstImage.Height);
             }
 
-            GenImage(p);
+            DoDraw(p.X, p.Y);
+        }
+
+        private void BtCursor_Click(object sender, EventArgs e)
+        {
+            _MoveTip = !_MoveTip;
+        }
+
+        private void BtGrid_Click(object sender, EventArgs e)
+        {
+            _Choosed = !_Choosed;
+        }
+
+        private void BtEraser_Click(object sender, EventArgs e)
+        {
         }
         #endregion
 
         #region 私有函数
-        private void GenImage(Point p)
+        private void ReDraw()
+        {
+            using (Graphics g = Graphics.FromImage(_TmpImage))
+            {
+                g.FillRectangle(_GroundBrush, 0, 0, _DstImage.Width, _DstImage.Height);
+
+                g.DrawImage(_SrcImage, 0, 0);
+            }
+
+            DoDraw(_DstImage.Width >> 1, _DstImage.Height >> 1);
+        }
+
+        private void DoDraw(int x, int y)
         {
             using (Graphics g = Graphics.FromImage(_DstImage))
             {
@@ -105,10 +116,10 @@ namespace Me.Amon.Uw
 
                 g.DrawImage(_TmpImage, 0, 0);
 
-                if (_MoveTip && p != null)
+                if (_MoveTip)
                 {
-                    g.DrawLine(_MoveTipPen, 0, p.Y, _DstImage.Width, p.Y);
-                    g.DrawLine(_MoveTipPen, p.X, 0, p.X, _DstImage.Height);
+                    g.DrawLine(_MoveTipPen, 0, y, _DstImage.Width, y);
+                    g.DrawLine(_MoveTipPen, x, 0, x, _DstImage.Height);
                 }
             }
 

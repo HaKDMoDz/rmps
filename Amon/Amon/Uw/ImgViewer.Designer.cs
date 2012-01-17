@@ -30,16 +30,16 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImgViewer));
             this.PlImg = new System.Windows.Forms.Panel();
+            this.PbImg = new System.Windows.Forms.PictureBox();
             this.TlGrid = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.FlGrid = new System.Windows.Forms.FlowLayoutPanel();
             this.BtCursor = new System.Windows.Forms.Button();
             this.BtGrid = new System.Windows.Forms.Button();
             this.BtEraser = new System.Windows.Forms.Button();
-            this.PbImg = new System.Windows.Forms.PictureBox();
             this.PlImg.SuspendLayout();
-            this.TlGrid.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbImg)).BeginInit();
+            this.TlGrid.SuspendLayout();
+            this.FlGrid.SuspendLayout();
             this.SuspendLayout();
             // 
             // PlImg
@@ -51,8 +51,19 @@
             this.PlImg.Controls.Add(this.PbImg);
             this.PlImg.Location = new System.Drawing.Point(12, 12);
             this.PlImg.Name = "PlImg";
-            this.PlImg.Size = new System.Drawing.Size(260, 197);
+            this.PlImg.Size = new System.Drawing.Size(360, 197);
             this.PlImg.TabIndex = 0;
+            // 
+            // PbImg
+            // 
+            this.PbImg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PbImg.Location = new System.Drawing.Point(130, 71);
+            this.PbImg.Name = "PbImg";
+            this.PbImg.Size = new System.Drawing.Size(100, 50);
+            this.PbImg.TabIndex = 0;
+            this.PbImg.TabStop = false;
+            this.PbImg.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PbImg_MouseClick);
+            this.PbImg.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PbImg_MouseMove);
             // 
             // TlGrid
             // 
@@ -62,23 +73,23 @@
             this.TlGrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.TlGrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
             this.TlGrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TlGrid.Controls.Add(this.flowLayoutPanel1, 1, 0);
+            this.TlGrid.Controls.Add(this.FlGrid, 1, 0);
             this.TlGrid.Location = new System.Drawing.Point(12, 215);
             this.TlGrid.Name = "TlGrid";
             this.TlGrid.RowCount = 1;
             this.TlGrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TlGrid.Size = new System.Drawing.Size(260, 35);
+            this.TlGrid.Size = new System.Drawing.Size(360, 35);
             this.TlGrid.TabIndex = 1;
             // 
-            // flowLayoutPanel1
+            // FlGrid
             // 
-            this.flowLayoutPanel1.Controls.Add(this.BtCursor);
-            this.flowLayoutPanel1.Controls.Add(this.BtGrid);
-            this.flowLayoutPanel1.Controls.Add(this.BtEraser);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(86, 3);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(87, 29);
-            this.flowLayoutPanel1.TabIndex = 0;
+            this.FlGrid.Controls.Add(this.BtCursor);
+            this.FlGrid.Controls.Add(this.BtGrid);
+            this.FlGrid.Controls.Add(this.BtEraser);
+            this.FlGrid.Location = new System.Drawing.Point(136, 3);
+            this.FlGrid.Name = "FlGrid";
+            this.FlGrid.Size = new System.Drawing.Size(87, 29);
+            this.FlGrid.TabIndex = 0;
             // 
             // BtCursor
             // 
@@ -110,31 +121,24 @@
             this.BtEraser.UseVisualStyleBackColor = true;
             this.BtEraser.Click += new System.EventHandler(this.BtEraser_Click);
             // 
-            // PbImg
-            // 
-            this.PbImg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PbImg.Location = new System.Drawing.Point(81, 66);
-            this.PbImg.Name = "PbImg";
-            this.PbImg.Size = new System.Drawing.Size(100, 50);
-            this.PbImg.TabIndex = 0;
-            this.PbImg.TabStop = false;
-            // 
             // ImgViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(384, 262);
             this.Controls.Add(this.TlGrid);
             this.Controls.Add(this.PlImg);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ImgViewer";
+            this.ShowInTaskbar = false;
             this.Text = "图像查看器";
+            this.Resize += new System.EventHandler(this.ImgViewer_Resize);
             this.PlImg.ResumeLayout(false);
-            this.TlGrid.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PbImg)).EndInit();
+            this.TlGrid.ResumeLayout(false);
+            this.FlGrid.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -143,7 +147,7 @@
 
         private System.Windows.Forms.Panel PlImg;
         private System.Windows.Forms.TableLayoutPanel TlGrid;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel FlGrid;
         private System.Windows.Forms.Button BtCursor;
         private System.Windows.Forms.Button BtGrid;
         private System.Windows.Forms.Button BtEraser;

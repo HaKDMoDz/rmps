@@ -230,6 +230,7 @@ namespace Me.Amon.Pwd._Lib
                 dba.AddOpt(IDat.APWD030C, detail.Operate, IDat.OPT_UPDATE);
                 dba.ExecuteUpdate();
 
+                _Selected.Text = AAtt.SP_TPL_LS + detail.Name + AAtt.SP_TPL_RS;
                 TreeNode root = TvLibView.SelectedNode;
             }
             else
