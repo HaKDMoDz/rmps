@@ -10,5 +10,18 @@
         public const int KEY_APWD = 0x1;
         public const int KEY_AWIZ = 0x2;
         public const int KEY_APAD = 0x3;
+
+        /// <summary>
+        /// 加密文件
+        /// </summary>
+        public const string FILE_ACF = ".acf";
+        /// <summary>
+        /// 视图文件
+        /// </summary>
+        public const string FILE_FEEL = ".asf";
+        /// <summary>
+        /// 风格文件
+        /// </summary>
+        public const string FILE_LOOK = ".asl";
     }
 }

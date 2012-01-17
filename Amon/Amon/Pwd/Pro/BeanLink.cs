@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using Me.Amon.Model;
 
@@ -73,7 +74,14 @@ namespace Me.Amon.Pwd.Pro
 
         private void BtOpen_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                Process.Start(TbData.Text);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
     }
 }

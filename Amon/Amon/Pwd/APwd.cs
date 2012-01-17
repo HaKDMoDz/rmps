@@ -1668,7 +1668,14 @@ namespace Me.Amon.Pwd
         #endregion
         private void ShowHelp()
         {
-            Process.Start("http://amon.me/help");
+            try
+            {
+                Process.Start("http://amon.me/help");
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
 
         private void ShowKeys()
