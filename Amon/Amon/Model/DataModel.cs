@@ -94,6 +94,12 @@ namespace Me.Amon.Model
 
             #region 字符空间
             _UcsList = new List<Ucs>();
+            _UcsList.Add(new Ucs { Id = "aucs000000000001", Name = "仅数字", Tips = "仅数字", Data = "0123456789" });
+            _UcsList.Add(new Ucs { Id = "aucs000000000002", Name = "大写字母", Tips = "大写字母", Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
+            _UcsList.Add(new Ucs { Id = "aucs000000000003", Name = "小写字母", Tips = "小写字母", Data = "abcdefghijklmnopqrstuvwxyz" });
+            _UcsList.Add(new Ucs { Id = "aucs000000000004", Name = "大小写字母", Tips = "大小写字母", Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
+            _UcsList.Add(new Ucs { Id = "aucs000000000005", Name = "数字及字母", Tips = "数字及字母", Data = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
+            _UcsList.Add(new Ucs { Id = "aucs000000000006", Name = "可输入英文符号", Tips = "可输入英文符号", Data = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" });
             dba.ReInit();
             dba.AddTable(IDat.AUCS0100);
             dba.AddColumn(IDat.AUCS0103);

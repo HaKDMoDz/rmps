@@ -169,7 +169,7 @@ namespace Me.Amon.Pwd.Wiz
             {
                 _LastCharSet.Checked = false;
             }
-            string key = _Att.GetSpec(PassAtt.SPEC_PWDS_KEY);
+            string key = _Att.GetSpec(PassAtt.SPEC_PWDS_KEY, AAtt.SPEC_VALUE_NONE);
             if (_CharSetDict.ContainsKey(key))
             {
                 _LastCharSet = _CharSetDict[key];
