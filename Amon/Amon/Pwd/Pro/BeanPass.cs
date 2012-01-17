@@ -23,7 +23,7 @@ namespace Me.Amon.Pwd.Pro
 
         public string Title { get { return "口令"; } }
 
-        public bool ShowData(AAtt att)
+        public bool ShowData(DataModel dataModel, AAtt att)
         {
             _Att = att;
 
@@ -31,6 +31,23 @@ namespace Me.Amon.Pwd.Pro
             {
                 TbName.Text = _Att.Name;
                 TbData.Text = _Att.Data;
+            }
+
+            if ((dataModel.UcsModified & IEnv.KEY_AWIZ) > 0)
+            {
+                MuCharSet.DropDownItems.Clear();
+                ToolStripMenuItem item;
+                foreach (Ucs ucs in dataModel.UcsList)
+                {
+                    item = new ToolStripMenuItem();
+                    item.Click += new EventHandler(MiCharSet_Click);
+                    item.Name = ucs.Id;
+                    item.Size = new System.Drawing.Size(160, 22);
+                    item.Tag = ucs.Data;
+                    item.Text = ucs.Name;
+                    MuCharSet.DropDownItems.Add(item);
+                }
+                dataModel.UcsModified &= IEnv.KEY_AWIZ;
             }
             return true;
         }
@@ -95,77 +112,12 @@ namespace Me.Amon.Pwd.Pro
         }
 
         #region 菜单事件
-        private void MiCharLen0_Click(object sender, EventArgs e)
+        private void MiCharLen_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void MiCharLen1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MiCharLen2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MiCharLen3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MiCharLen4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MiCharLen5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MiCharLen6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MiCharSet0_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MiCharSet1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MiCharSet2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MiCharSet3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MiCharSet4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MiCharSet5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MiCharSet6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MiCharSetO_Click(object sender, EventArgs e)
+        private void MiCharSet_Click(object sender, EventArgs e)
         {
 
         }

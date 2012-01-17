@@ -7,6 +7,7 @@ namespace Me.Amon.Pwd.Wiz
     public partial class BeanBody : UserControl, IWizView
     {
         private SafeModel _SafeModel;
+        private DataModel _DataModel;
         private RowStyle _DefStyle;
         private Label _DefLabel;
 
@@ -24,6 +25,8 @@ namespace Me.Amon.Pwd.Wiz
 
         public void Init(DataModel dataModel)
         {
+            _DataModel = dataModel;
+
             _DefStyle = new RowStyle(SizeType.Percent, 100F);
 
             _DefLabel = new Label { Dock = DockStyle.Fill };
@@ -62,7 +65,7 @@ namespace Me.Amon.Pwd.Wiz
 
                 IAttEdit ctl = GetCtl(att.Type);
                 ctl.InitView(row);
-                ctl.ShowData(att);
+                ctl.ShowData(_DataModel, att);
 
                 row += 1;
             }

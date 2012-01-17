@@ -42,7 +42,6 @@
             this.TmiDeleteCat = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiEditSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.TmiAppendKey = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiUpdateKey = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiDeleteKey = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiEditSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.TmuAppendAtt = new System.Windows.Forms.ToolStripMenuItem();
@@ -121,7 +120,6 @@
             this.LbKeyList = new System.Windows.Forms.ListBox();
             this.CmKey = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CmiAppendKey = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiUpdateKey = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiDeleteKey = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiKeySep0 = new System.Windows.Forms.ToolStripSeparator();
             this.CmuLabel = new System.Windows.Forms.ToolStripMenuItem();
@@ -159,8 +157,10 @@
             this.TsbKeys = new System.Windows.Forms.ToolStripButton();
             this.TsbInfo = new System.Windows.Forms.ToolStripButton();
             this.SsEcho = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.TssEcho = new System.Windows.Forms.ToolStripStatusLabel();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
+            this.TssTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.UcTime = new System.Windows.Forms.Timer(this.components);
             this.TmMenu.SuspendLayout();
             this.TcTool.ContentPanel.SuspendLayout();
             this.TcTool.TopToolStripPanel.SuspendLayout();
@@ -240,7 +240,6 @@
             this.TmiDeleteCat,
             this.TmiEditSep0,
             this.TmiAppendKey,
-            this.TmiUpdateKey,
             this.TmiDeleteKey,
             this.TmiEditSep1,
             this.TmuAppendAtt,
@@ -253,54 +252,47 @@
             // TmiAppendCat
             // 
             this.TmiAppendCat.Name = "TmiAppendCat";
-            this.TmiAppendCat.Size = new System.Drawing.Size(124, 22);
+            this.TmiAppendCat.Size = new System.Drawing.Size(152, 22);
             this.TmiAppendCat.Text = "添加类别";
             this.TmiAppendCat.Click += new System.EventHandler(this.TmiAppendCat_Click);
             // 
             // TmiUpdateCat
             // 
             this.TmiUpdateCat.Name = "TmiUpdateCat";
-            this.TmiUpdateCat.Size = new System.Drawing.Size(124, 22);
+            this.TmiUpdateCat.Size = new System.Drawing.Size(152, 22);
             this.TmiUpdateCat.Text = "更新类别";
             this.TmiUpdateCat.Click += new System.EventHandler(this.TmiUpdateCat_Click);
             // 
             // TmiDeleteCat
             // 
             this.TmiDeleteCat.Name = "TmiDeleteCat";
-            this.TmiDeleteCat.Size = new System.Drawing.Size(124, 22);
+            this.TmiDeleteCat.Size = new System.Drawing.Size(152, 22);
             this.TmiDeleteCat.Text = "删除类别";
             this.TmiDeleteCat.Click += new System.EventHandler(this.TmiDeleteCat_Click);
             // 
             // TmiEditSep0
             // 
             this.TmiEditSep0.Name = "TmiEditSep0";
-            this.TmiEditSep0.Size = new System.Drawing.Size(121, 6);
+            this.TmiEditSep0.Size = new System.Drawing.Size(149, 6);
             // 
             // TmiAppendKey
             // 
             this.TmiAppendKey.Name = "TmiAppendKey";
-            this.TmiAppendKey.Size = new System.Drawing.Size(124, 22);
+            this.TmiAppendKey.Size = new System.Drawing.Size(152, 22);
             this.TmiAppendKey.Text = "添加记录";
             this.TmiAppendKey.Click += new System.EventHandler(this.TmiAppendKey_Click);
-            // 
-            // TmiUpdateKey
-            // 
-            this.TmiUpdateKey.Name = "TmiUpdateKey";
-            this.TmiUpdateKey.Size = new System.Drawing.Size(124, 22);
-            this.TmiUpdateKey.Text = "更新记录";
-            this.TmiUpdateKey.Click += new System.EventHandler(this.TmiUpdateKey_Click);
             // 
             // TmiDeleteKey
             // 
             this.TmiDeleteKey.Name = "TmiDeleteKey";
-            this.TmiDeleteKey.Size = new System.Drawing.Size(124, 22);
+            this.TmiDeleteKey.Size = new System.Drawing.Size(152, 22);
             this.TmiDeleteKey.Text = "删除记录";
             this.TmiDeleteKey.Click += new System.EventHandler(this.TmiDeleteKey_Click);
             // 
             // TmiEditSep1
             // 
             this.TmiEditSep1.Name = "TmiEditSep1";
-            this.TmiEditSep1.Size = new System.Drawing.Size(121, 6);
+            this.TmiEditSep1.Size = new System.Drawing.Size(149, 6);
             // 
             // TmuAppendAtt
             // 
@@ -316,7 +308,7 @@
             this.TmiAppendAttFile,
             this.TmiAppendAttLine});
             this.TmuAppendAtt.Name = "TmuAppendAtt";
-            this.TmuAppendAtt.Size = new System.Drawing.Size(124, 22);
+            this.TmuAppendAtt.Size = new System.Drawing.Size(152, 22);
             this.TmuAppendAtt.Text = "添加属性";
             // 
             // TmiAppendAttText
@@ -403,7 +395,7 @@
             this.TmiUpdateAttFile,
             this.TmiUpdateAttLine});
             this.TmuUpdateAtt.Name = "TmuUpdateAtt";
-            this.TmuUpdateAtt.Size = new System.Drawing.Size(124, 22);
+            this.TmuUpdateAtt.Size = new System.Drawing.Size(152, 22);
             this.TmuUpdateAtt.Text = "转换属性";
             // 
             // TmiUpdateAttText
@@ -479,7 +471,7 @@
             // TmiDeleteAtt
             // 
             this.TmiDeleteAtt.Name = "TmiDeleteAtt";
-            this.TmiDeleteAtt.Size = new System.Drawing.Size(124, 22);
+            this.TmiDeleteAtt.Size = new System.Drawing.Size(152, 22);
             this.TmiDeleteAtt.Text = "删除属性";
             this.TmiDeleteAtt.Click += new System.EventHandler(this.TmiDeleteAtt_Click);
             // 
@@ -919,7 +911,6 @@
             // 
             this.CmKey.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CmiAppendKey,
-            this.CmiUpdateKey,
             this.CmiDeleteKey,
             this.CmiKeySep0,
             this.CmuLabel,
@@ -928,7 +919,7 @@
             this.CmiMoveto,
             this.CmiHistory});
             this.CmKey.Name = "CsCat";
-            this.CmKey.Size = new System.Drawing.Size(176, 170);
+            this.CmKey.Size = new System.Drawing.Size(176, 148);
             // 
             // CmiAppendKey
             // 
@@ -936,13 +927,6 @@
             this.CmiAppendKey.Size = new System.Drawing.Size(175, 22);
             this.CmiAppendKey.Text = "新增记录(&A)";
             this.CmiAppendKey.Click += new System.EventHandler(this.CmiAppendKey_Click);
-            // 
-            // CmiUpdateKey
-            // 
-            this.CmiUpdateKey.Name = "CmiUpdateKey";
-            this.CmiUpdateKey.Size = new System.Drawing.Size(175, 22);
-            this.CmiUpdateKey.Text = "更新记录(&U)";
-            this.CmiUpdateKey.Click += new System.EventHandler(this.CmiUpdateKey_Click);
             // 
             // CmiDeleteKey
             // 
@@ -1261,18 +1245,30 @@
             // SsEcho
             // 
             this.SsEcho.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.TssEcho,
+            this.TssTime});
             this.SsEcho.Location = new System.Drawing.Point(0, 390);
             this.SsEcho.Name = "SsEcho";
             this.SsEcho.Size = new System.Drawing.Size(584, 22);
             this.SsEcho.TabIndex = 2;
             this.SsEcho.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // TssEcho
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(131, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.TssEcho.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.TssEcho.Name = "TssEcho";
+            this.TssEcho.Size = new System.Drawing.Size(569, 17);
+            this.TssEcho.Spring = true;
+            this.TssEcho.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // TssTime
+            // 
+            this.TssTime.Name = "TssTime";
+            this.TssTime.Size = new System.Drawing.Size(0, 17);
+            // 
+            // UcTime
+            // 
+            this.UcTime.Tick += new System.EventHandler(this.UcTime_Tick);
             // 
             // APwd
             // 
@@ -1324,7 +1320,6 @@
         private System.Windows.Forms.ToolStripMenuItem TmiDeleteCat;
         private System.Windows.Forms.ToolStripSeparator TmiEditSep0;
         private System.Windows.Forms.ToolStripMenuItem TmiAppendKey;
-        private System.Windows.Forms.ToolStripMenuItem TmiUpdateKey;
         private System.Windows.Forms.ToolStripMenuItem TmiDeleteKey;
         private System.Windows.Forms.ToolStripSeparator TmiEditSep1;
         private System.Windows.Forms.ToolStripMenuItem TmuAppendAtt;
@@ -1415,7 +1410,6 @@
         private System.Windows.Forms.ToolStripMenuItem CmiEditIcon;
         private System.Windows.Forms.ContextMenuStrip CmKey;
         private System.Windows.Forms.ToolStripMenuItem CmiAppendKey;
-        private System.Windows.Forms.ToolStripMenuItem CmiUpdateKey;
         private System.Windows.Forms.ToolStripMenuItem CmiDeleteKey;
         private System.Windows.Forms.ToolStripSeparator CmiKeySep0;
         private System.Windows.Forms.ToolStripMenuItem CmuLabel;
@@ -1446,6 +1440,8 @@
         private System.Windows.Forms.ToolStripButton TsbInfo;
         private System.Windows.Forms.ToolStripButton TsbSync;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel TssEcho;
+        private System.Windows.Forms.ToolStripStatusLabel TssTime;
+        private System.Windows.Forms.Timer UcTime;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Uc;
+using System.IO;
 
 namespace Me.Amon.Util
 {
@@ -37,35 +38,47 @@ namespace Me.Amon.Util
             }
         }
 
-        private static Image _CatNaN;
-        public static Image CatNaN
+        private static Image _NaN16;
+        public static Image NaN16
         {
             get
             {
-                if (_CatNaN == null)
+                if (_NaN16 == null)
                 {
-                    _CatNaN = new Bitmap(16, 16);
+                    _NaN16 = new Bitmap(16, 16);
                 }
-                return _CatNaN;
+                return _NaN16;
             }
         }
 
-        private static Image _KeyNaN;
-        public static Image KeyNaN
+        private static Image _NaN32;
+        public static Image NaN32
         {
             get
             {
-                if (_KeyNaN == null)
+                if (_NaN32 == null)
                 {
-                    _KeyNaN = new Bitmap(32, 32);
+                    _NaN32 = new Bitmap(32, 32);
                 }
-                return _KeyNaN;
+                return _NaN32;
             }
         }
 
         public static void ShowAlert(string alert)
         {
             MessageBox.Show(alert);
+        }
+
+        public static Image ReadImage(string file, Image defImg)
+        {
+            if (!File.Exists(file))
+            {
+                return defImg;
+            }
+            using (Stream stream = File.OpenRead(file))
+            {
+                return Image.FromStream(stream);
+            }
         }
     }
 }

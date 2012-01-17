@@ -20,7 +20,10 @@ namespace Me.Amon.Pwd._Lib
             _LibEdit = libEdit;
 
             InitializeComponent();
+        }
 
+        public void Init()
+        {
             CbType.Items.Add(new Item { K = "0", V = "请选择" });
             CbType.Items.Add(new Item { K = AAtt.TYPE_TEXT.ToString(), V = "文本" });
             CbType.Items.Add(new Item { K = AAtt.TYPE_PASS.ToString(), V = "口令" });
@@ -32,6 +35,10 @@ namespace Me.Amon.Pwd._Lib
             CbType.Items.Add(new Item { K = AAtt.TYPE_MEMO.ToString(), V = "附注" });
             CbType.Items.Add(new Item { K = AAtt.TYPE_FILE.ToString(), V = "文件" });
             //CbType.Items.Add(new Item { K = AAtt.TYPE_LINE.ToString(), V = "分组" });
+
+            TbName.MaxLength = IDat.APWD0306_SIZE;
+            TbData.MaxLength = IDat.APWD0307_SIZE;
+            TbMemo.MaxLength = IDat.APWD0308_SIZE;
         }
 
         public void Show(Me.Amon.Model.LibDetail detail)
@@ -49,12 +56,15 @@ namespace Me.Amon.Pwd._Lib
             Item item = CbType.SelectedItem as Item;
             if (item == null)
             {
-                MessageBox.Show("");
+                MessageBox.Show("请选择属性类型！");
+                CbType.Focus();
                 return;
             }
             string name = TbName.Text;
             if (!CharUtil.IsValidate(name))
             {
+                MessageBox.Show("请输入属性名称！");
+                TbName.Focus();
                 return;
             }
 

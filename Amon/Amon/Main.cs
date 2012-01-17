@@ -73,9 +73,14 @@ namespace Me.Amon
 
         private void ChangeStyle(char style)
         {
-            if (_PupilImg == null)
+            if (_BufImage == null)
             {
-                _PupilImg = new Bitmap(12, 12);
+                _BufImage = new Bitmap(32, 32);
+            }
+
+            if (_BgBrush == null)
+            {
+                _BgBrush = new SolidBrush(Color.DarkGray);
             }
 
             if (style == 'l')
@@ -89,6 +94,11 @@ namespace Me.Amon
                 _PupilRadius = 8;
                 _PupilCenterX = _AlienCenterX;
                 _PupilCenterY = _AlienCenterY;
+
+                if (_PupilImg == null)
+                {
+                    _PupilImg = new Bitmap(_PupilRadius << 1, _PupilRadius << 1);
+                }
 
                 _Rect1 = new Rectangle(5, 10, 20, 15);
                 _LgBrush1 = new LinearGradientBrush(_Rect1, Color.FromArgb(160, 255, 255, 255), Color.FromArgb(0, 255, 255, 255), LinearGradientMode.Horizontal);
@@ -109,34 +119,41 @@ namespace Me.Amon
                 }
                 return;
             }
-
-            _SrcImage = Image.FromFile("Skin\\Default\\eyer.png");
-
-            _AlienRadius = 10;
-            _AlienCenterX = 16;
-            _AlienCenterY = 14;
-
-            _PupilRadius = 5;
-            _PupilCenterX = _AlienCenterX;
-            _PupilCenterY = _AlienCenterY;
-
-            _Rect1 = new Rectangle(23, 10, 20, 15);
-            _LgBrush1 = new LinearGradientBrush(_Rect1, Color.FromArgb(0, 255, 255, 255), Color.FromArgb(160, 255, 255, 255), LinearGradientMode.Horizontal);
-
-            _Rect2 = new Rectangle(22, 10, 12, 12);
-            _LgBrush2 = new LinearGradientBrush(_Rect2, Color.FromArgb(255, 255, 255, 255), Color.FromArgb(0, 255, 255, 255), LinearGradientMode.BackwardDiagonal);
-
-            using (Graphics g = Graphics.FromImage(_PupilImg))
+            else
             {
-                g.SmoothingMode = SmoothingMode.AntiAlias;
-                g.TextRenderingHint = TextRenderingHint.AntiAlias;
+                _SrcImage = Image.FromFile("Skin\\Default\\eyer.png");
 
-                g.Clear(Color.FromArgb(0, 0, 0, 0));
-                g.FillEllipse(new SolidBrush(Color.Black), 0, 0, _PupilImg.Width, _PupilImg.Height);
+                _AlienRadius = 10;
+                _AlienCenterX = 14;
+                _AlienCenterY = 14;
 
-                Rectangle rect = new Rectangle(_PupilRadius - 2, 2, _PupilRadius, _PupilRadius);
-                Brush brush = new LinearGradientBrush(rect, Color.FromArgb(255, 255, 255, 255), Color.FromArgb(0, 255, 255, 255), LinearGradientMode.BackwardDiagonal);
-                g.FillEllipse(brush, rect);
+                _PupilRadius = 5;
+                _PupilCenterX = _AlienCenterX;
+                _PupilCenterY = _AlienCenterY;
+
+                if (_PupilImg == null)
+                {
+                    _PupilImg = new Bitmap(_PupilRadius << 1, _PupilRadius << 1);
+                }
+
+                _Rect1 = new Rectangle(23, 10, 20, 15);
+                _LgBrush1 = new LinearGradientBrush(_Rect1, Color.FromArgb(0, 255, 255, 255), Color.FromArgb(160, 255, 255, 255), LinearGradientMode.Horizontal);
+
+                _Rect2 = new Rectangle(22, 10, 12, 12);
+                _LgBrush2 = new LinearGradientBrush(_Rect2, Color.FromArgb(255, 255, 255, 255), Color.FromArgb(0, 255, 255, 255), LinearGradientMode.BackwardDiagonal);
+
+                using (Graphics g = Graphics.FromImage(_PupilImg))
+                {
+                    g.SmoothingMode = SmoothingMode.AntiAlias;
+                    g.TextRenderingHint = TextRenderingHint.AntiAlias;
+
+                    g.Clear(Color.FromArgb(0, 0, 0, 0));
+                    g.FillEllipse(new SolidBrush(Color.Black), 0, 0, _PupilImg.Width, _PupilImg.Height);
+
+                    Rectangle rect = new Rectangle(_PupilRadius - 2, 2, _PupilRadius, _PupilRadius);
+                    Brush brush = new LinearGradientBrush(rect, Color.FromArgb(255, 255, 255, 255), Color.FromArgb(0, 255, 255, 255), LinearGradientMode.BackwardDiagonal);
+                    g.FillEllipse(brush, rect);
+                }
             }
         }
 
@@ -193,14 +210,6 @@ namespace Me.Amon
 
         private void GenImage()
         {
-            if (_BufImage == null)
-            {
-                _BufImage = new Bitmap(48, 48);
-            }
-            if (_BgBrush == null)
-            {
-                _BgBrush = new SolidBrush(Color.Black);
-            }
             using (Graphics g = Graphics.FromImage(_BufImage))
             {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -218,8 +227,8 @@ namespace Me.Amon
             g.FillRectangle(_BgBrush, 0, 0, 48, 48);
             g.DrawImage(_SrcImage, 0, 0);
 
-            g.FillEllipse(_LgBrush1, _Rect1);
-            g.FillEllipse(_LgBrush2, _Rect2);
+            //g.FillEllipse(_LgBrush1, _Rect1);
+            //g.FillEllipse(_LgBrush2, _Rect2);
 
             int x = _PupilCenterX - _PupilRadius;
             int y = _PupilCenterY - _PupilRadius;

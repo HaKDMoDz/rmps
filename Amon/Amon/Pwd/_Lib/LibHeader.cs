@@ -20,6 +20,12 @@ namespace Me.Amon.Pwd._Lib
             InitializeComponent();
         }
 
+        public void Init()
+        {
+            TbName.MaxLength = IDat.APWD0306_SIZE;
+            TbMemo.MaxLength = IDat.APWD0308_SIZE;
+        }
+
         public void Show(Me.Amon.Model.LibHeader header)
         {
             _LibHeader = header;

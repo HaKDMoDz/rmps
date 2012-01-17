@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using Me.Amon.Model;
+﻿using Me.Amon.Model;
 
 namespace Me.Amon.Pwd.Wiz
 {
@@ -7,7 +6,7 @@ namespace Me.Amon.Pwd.Wiz
     {
         void InitView(int row);
 
-        bool ShowData(AAtt att);
+        bool ShowData(DataModel dataModel, AAtt att);
 
         void Copy();
 

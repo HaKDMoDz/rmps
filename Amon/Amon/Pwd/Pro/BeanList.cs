@@ -24,7 +24,7 @@ namespace Me.Amon.Pwd.Pro
 
         public string Title { get { return "列表"; } }
 
-        public bool ShowData(AAtt att)
+        public bool ShowData(DataModel dataModel, AAtt att)
         {
             _Att = att;
 

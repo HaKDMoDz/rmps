@@ -48,7 +48,7 @@ namespace Me.Amon.Pwd.Wiz
             _Grid.Controls.Add(this, 1, row);
         }
 
-        public bool ShowData(AAtt att)
+        public bool ShowData(DataModel dataModel, AAtt att)
         {
             _Att = att;
             if (_Att != null)

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Xml;
 using Me.Amon.Model.Att;
 
 namespace Me.Amon.Model
@@ -387,11 +388,11 @@ namespace Me.Amon.Model
         #endregion
 
         #region 数据导入
-        public void ImportByTxt(string data)
+        public bool ImportByTxt(string data)
         {
             if (string.IsNullOrEmpty(data))
             {
-                return;
+                return false;
             }
 
             if (Key == null)
@@ -402,7 +403,7 @@ namespace Me.Amon.Model
             string[] list = data.Replace("\\;", "\b").Split(';');
             if (list == null || list.Length < AAtt.HEAD_SIZE)
             {
-                return;
+                return false;
             }
 
             Clear();
@@ -429,6 +430,22 @@ namespace Me.Amon.Model
                     _AttList.Add(item);
                 }
             }
+            return true;
+        }
+
+        public bool ExportAsTxt(StringBuilder buffer)
+        {
+            return true;
+        }
+
+        public bool ImportByXml(string xml)
+        {
+            return true;
+        }
+
+        public bool ExportAsXml(XmlWriter writer)
+        {
+            return true;
         }
         #endregion
     }

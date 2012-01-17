@@ -159,7 +159,7 @@
             this.MiCharLen0.Name = "MiCharLen0";
             this.MiCharLen0.Size = new System.Drawing.Size(160, 22);
             this.MiCharLen0.Text = "默认(&D)";
-            this.MiCharLen0.Click += new System.EventHandler(this.MiCharLen0_Click);
+            this.MiCharLen0.Click += new System.EventHandler(this.MiCharLen_Click);
             // 
             // MiCharLenSep0
             // 
@@ -171,42 +171,42 @@
             this.MiCharLen1.Name = "MiCharLen1";
             this.MiCharLen1.Size = new System.Drawing.Size(160, 22);
             this.MiCharLen1.Text = "6位";
-            this.MiCharLen1.Click += new System.EventHandler(this.MiCharLen1_Click);
+            this.MiCharLen1.Click += new System.EventHandler(this.MiCharLen_Click);
             // 
             // MiCharLen2
             // 
             this.MiCharLen2.Name = "MiCharLen2";
             this.MiCharLen2.Size = new System.Drawing.Size(160, 22);
             this.MiCharLen2.Text = "8位";
-            this.MiCharLen2.Click += new System.EventHandler(this.MiCharLen2_Click);
+            this.MiCharLen2.Click += new System.EventHandler(this.MiCharLen_Click);
             // 
             // MiCharLen3
             // 
             this.MiCharLen3.Name = "MiCharLen3";
             this.MiCharLen3.Size = new System.Drawing.Size(160, 22);
             this.MiCharLen3.Text = "10位";
-            this.MiCharLen3.Click += new System.EventHandler(this.MiCharLen3_Click);
+            this.MiCharLen3.Click += new System.EventHandler(this.MiCharLen_Click);
             // 
             // MiCharLen4
             // 
             this.MiCharLen4.Name = "MiCharLen4";
             this.MiCharLen4.Size = new System.Drawing.Size(160, 22);
             this.MiCharLen4.Text = "12位";
-            this.MiCharLen4.Click += new System.EventHandler(this.MiCharLen4_Click);
+            this.MiCharLen4.Click += new System.EventHandler(this.MiCharLen_Click);
             // 
             // MiCharLen5
             // 
             this.MiCharLen5.Name = "MiCharLen5";
             this.MiCharLen5.Size = new System.Drawing.Size(160, 22);
             this.MiCharLen5.Text = "16位";
-            this.MiCharLen5.Click += new System.EventHandler(this.MiCharLen5_Click);
+            this.MiCharLen5.Click += new System.EventHandler(this.MiCharLen_Click);
             // 
             // MiCharLen6
             // 
             this.MiCharLen6.Name = "MiCharLen6";
             this.MiCharLen6.Size = new System.Drawing.Size(160, 22);
             this.MiCharLen6.Text = "32位";
-            this.MiCharLen6.Click += new System.EventHandler(this.MiCharLen6_Click);
+            this.MiCharLen6.Click += new System.EventHandler(this.MiCharLen_Click);
             // 
             // MiCharLenSep1
             // 
@@ -240,7 +240,7 @@
             this.MiCharSet0.Name = "MiCharSet0";
             this.MiCharSet0.Size = new System.Drawing.Size(160, 22);
             this.MiCharSet0.Text = "默认(&D)";
-            this.MiCharSet0.Click += new System.EventHandler(this.MiCharSet0_Click);
+            this.MiCharSet0.Click += new System.EventHandler(this.MiCharSet_Click);
             // 
             // MiCharSetSep0
             // 
@@ -252,42 +252,42 @@
             this.MiCharSet1.Name = "MiCharSet1";
             this.MiCharSet1.Size = new System.Drawing.Size(160, 22);
             this.MiCharSet1.Text = "数字";
-            this.MiCharSet1.Click += new System.EventHandler(this.MiCharSet1_Click);
-            // 
-            // MiCharSet3
-            // 
-            this.MiCharSet3.Name = "MiCharSet3";
-            this.MiCharSet3.Size = new System.Drawing.Size(160, 22);
-            this.MiCharSet3.Text = "小写字母";
-            this.MiCharSet3.Click += new System.EventHandler(this.MiCharSet3_Click);
+            this.MiCharSet1.Click += new System.EventHandler(this.MiCharSet_Click);
             // 
             // MiCharSet2
             // 
             this.MiCharSet2.Name = "MiCharSet2";
             this.MiCharSet2.Size = new System.Drawing.Size(160, 22);
             this.MiCharSet2.Text = "大写字母";
-            this.MiCharSet2.Click += new System.EventHandler(this.MiCharSet2_Click);
+            this.MiCharSet2.Click += new System.EventHandler(this.MiCharSet_Click);
+            // 
+            // MiCharSet3
+            // 
+            this.MiCharSet3.Name = "MiCharSet3";
+            this.MiCharSet3.Size = new System.Drawing.Size(160, 22);
+            this.MiCharSet3.Text = "小写字母";
+            this.MiCharSet3.Click += new System.EventHandler(this.MiCharSet_Click);
             // 
             // MiCharSet4
             // 
             this.MiCharSet4.Name = "MiCharSet4";
             this.MiCharSet4.Size = new System.Drawing.Size(160, 22);
             this.MiCharSet4.Text = "大小写字母";
-            this.MiCharSet4.Click += new System.EventHandler(this.MiCharSet4_Click);
+            this.MiCharSet4.Click += new System.EventHandler(this.MiCharSet_Click);
             // 
             // MiCharSet5
             // 
             this.MiCharSet5.Name = "MiCharSet5";
             this.MiCharSet5.Size = new System.Drawing.Size(160, 22);
             this.MiCharSet5.Text = "字母及数字";
-            this.MiCharSet5.Click += new System.EventHandler(this.MiCharSet5_Click);
+            this.MiCharSet5.Click += new System.EventHandler(this.MiCharSet_Click);
             // 
             // MiCharSet6
             // 
             this.MiCharSet6.Name = "MiCharSet6";
             this.MiCharSet6.Size = new System.Drawing.Size(160, 22);
             this.MiCharSet6.Text = "键盘可输入字符";
-            this.MiCharSet6.Click += new System.EventHandler(this.MiCharSet6_Click);
+            this.MiCharSet6.Click += new System.EventHandler(this.MiCharSet_Click);
             // 
             // MiCharSetSep1
             // 
@@ -299,7 +299,7 @@
             this.MiCharSetO.Name = "MiCharSetO";
             this.MiCharSetO.Size = new System.Drawing.Size(160, 22);
             this.MiCharSetO.Text = "其它…(&O)";
-            this.MiCharSetO.Click += new System.EventHandler(this.MiCharSetO_Click);
+            this.MiCharSetO.Click += new System.EventHandler(this.MiCharSet_Click);
             // 
             // MiRepeatable
             // 

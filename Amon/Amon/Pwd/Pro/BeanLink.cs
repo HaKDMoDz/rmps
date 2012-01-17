@@ -22,7 +22,7 @@ namespace Me.Amon.Pwd.Pro
 
         public string Title { get { return "链接"; } }
 
-        public bool ShowData(AAtt att)
+        public bool ShowData(DataModel dataModel, AAtt att)
         {
             _Att = att;
 

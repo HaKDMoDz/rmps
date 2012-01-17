@@ -22,7 +22,10 @@ namespace Me.Amon.Uc.Ico
             _IcoEdit = icoEdit;
 
             InitializeComponent();
+        }
 
+        public void Init()
+        {
             _IcoEdit.AcceptButton = BtChoose;
             _IcoEdit.CancelButton = BtCancel;
         }
@@ -123,7 +126,7 @@ namespace Me.Amon.Uc.Ico
         {
             if (!File.Exists(file))
             {
-                return BeanUtil.KeyNaN;
+                return BeanUtil.NaN32;
             }
             using (Stream stream = File.OpenRead(file))
             {

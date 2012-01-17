@@ -10,6 +10,7 @@ namespace Me.Amon.Pwd.Wiz
     public partial class BeanHead : UserControl, IWizView
     {
         private SafeModel _SafeModel;
+        private DataModel _DataModel;
 
         public BeanHead()
         {
@@ -25,9 +26,7 @@ namespace Me.Amon.Pwd.Wiz
 
         public void Init(DataModel dataModel)
         {
-            CbLib.DataSource = dataModel.LibKey;
-            CbLib.DisplayMember = "Name";
-            CbLib.ValueMember = "Id";
+            _DataModel = dataModel;
         }
 
         public void InitView(TableLayoutPanel grid)
@@ -45,6 +44,14 @@ namespace Me.Amon.Pwd.Wiz
 
         public void ShowData()
         {
+            if ((_DataModel.LibModified & IEnv.KEY_AWIZ) > 0)
+            {
+                CbLib.DataSource = _DataModel.LibList;
+                CbLib.DisplayMember = "Name";
+                CbLib.ValueMember = "Id";
+                _DataModel.LibModified &= IEnv.KEY_AWIZ;
+            }
+
             GuidAtt guid = _SafeModel.Guid;
             if (guid == null)
             {

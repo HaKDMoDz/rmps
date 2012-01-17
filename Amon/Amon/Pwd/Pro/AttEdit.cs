@@ -9,6 +9,7 @@ namespace Me.Amon.Pwd.Pro
     public partial class AttEdit : UserControl
     {
         private APro _APro;
+        private DataModel _DataModel;
         private IAttEdit _CmpLast;
         private BeanInfo _CmpInfo;
         private Dictionary<int, IAttEdit> _CmpList;
@@ -18,9 +19,10 @@ namespace Me.Amon.Pwd.Pro
             InitializeComponent();
         }
 
-        public void Init(APro apro)
+        public void Init(APro apro, DataModel dataModel)
         {
             _APro = apro;
+            _DataModel = dataModel;
 
             _CmpList = new Dictionary<int, IAttEdit>(AAtt.TYPE_SIZE + 2);
 
@@ -60,7 +62,7 @@ namespace Me.Amon.Pwd.Pro
                 GbGroup.Controls.Remove(_CmpLast.Control);
             }
 
-            _CmpInfo.ShowData(null);
+            _CmpInfo.ShowData(_DataModel, null);
             GbGroup.Text = _CmpInfo.Title;
             GbGroup.Controls.Add(_CmpInfo);
 
@@ -75,7 +77,7 @@ namespace Me.Amon.Pwd.Pro
             }
 
             _CmpLast = GetCtl(att.Type);
-            _CmpLast.ShowData(att);
+            _CmpLast.ShowData(_DataModel, att);
 
             GbGroup.Text = _CmpLast.Title;
             GbGroup.Controls.Add(_CmpLast.Control);

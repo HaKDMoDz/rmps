@@ -32,7 +32,7 @@ namespace Me.Amon.Pwd._Lib
         {
             _DataModel = dataModel;
 
-            foreach (Model.LibHeader header in dataModel.LibKey)
+            foreach (Model.LibHeader header in dataModel.LibList)
             {
                 if (header.Id == "0")
                 {
@@ -62,7 +62,9 @@ namespace Me.Amon.Pwd._Lib
             }
 
             _UcHeader = new LibHeader(this);
+            _UcHeader.Init();
             _UcDetail = new LibDetail(this);
+            _UcDetail.Init();
 
             _UcHeader.Location = new Point(6, 20);
             _UcHeader.Size = new Size(231, 183);
@@ -196,7 +198,7 @@ namespace Me.Amon.Pwd._Lib
                 dba.AddParam(IDat.APWD0303, _UserModel.Code);
                 dba.ExecuteInsert();
 
-                _DataModel.LibKey.Add(header);
+                _DataModel.LibList.Add(header);
 
                 TreeNode node = new TreeNode();
                 node.Name = header.Id;

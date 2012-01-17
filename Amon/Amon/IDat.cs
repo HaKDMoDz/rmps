@@ -6,12 +6,15 @@
         /// 数据库常量：日期
         /// </summary>
         public const string SQL_NOW = "datetime('now')";
-        public const string VER_DB = "5";
+        public const string VER_DB = "1";
         public const int VCS_DEFAULT = 1;
         public const int OPT_DELETE = -1;
-        public const int OPT_DEFAULT = 0;
-        public const int OPT_INSERT = 1;
+        public const int OPT_INSERT = 0;
+        public const int OPT_DEFAULT = 1;
         public const int OPT_UPDATE = 2;
+        public const int OPT_PWD_UPDATE_CAT = 3;
+        public const int OPT_PWD_UPDATE_LABEL = 4;
+        public const int OPT_PWD_UPDATE_MAJOR = 5;
 
         #region 类别
         #region 一级类别
@@ -395,112 +398,6 @@
         public const string APWD0409 = "APWD0409";
         #endregion
 
-        #region 图标分类表格
-        /// <summary>
-        /// 图标分类表格
-        /// </summary>
-        public const string APWD0500 = "APWD0500";
-        /// <summary>
-        /// 显示排序
-        /// </summary>
-        public const string APWD0501 = "APWD0501";
-        /// <summary>
-        /// 用户代码
-        /// </summary>
-        public const string APWD0502 = "APWD0502";
-        public const int APWD0502_SIZE = 16;
-        /// <summary>
-        /// 类别索引
-        /// </summary>
-        public const string APWD0503 = "APWD0503";
-        public const int APWD0503_SIZE = 16;
-        /// <summary>
-        /// 类别名称
-        /// </summary>
-        public const string APWD0504 = "APWD0504";
-        public const int APWD0504_SIZE = 32;
-        /// <summary>
-        /// 类别提示
-        /// </summary>
-        public const string APWD0505 = "APWD0505";
-        public const int APWD0505_SIZE = 256;
-        /// <summary>
-        /// 类别目录
-        /// </summary>
-        public const string APWD0506 = "APWD0506";
-        public const int APWD0506_SIZE = 64;
-        /// <summary>
-        /// 类别备注
-        /// </summary>
-        public const string APWD0507 = "APWD0507";
-        public const int APWD0507_SIZE = 2048;
-        /// <summary>
-        /// 版本控制
-        /// </summary>
-        public const string APWD0508 = "APWD0508";
-        /// <summary>
-        /// 操作状态：0删除、1默认、2新增、3更新
-        /// </summary>
-        public const string APWD0509 = "APWD0509";
-        #endregion
-
-        #region 字符空间表格
-        /// <summary>
-        /// 字符空间表格
-        /// </summary>
-        public const string AICO0100 = "AICO0100";
-        /// <summary>
-        /// 排序依据
-        /// </summary>
-        public const string AICO0101 = "AICO0101";
-        /// <summary>
-        /// 用户代码
-        /// </summary>
-        public const string AICO0102 = "AICO0102";
-        public const int AICO0102_SIZE = 8;
-        /// <summary>
-        /// 空间索引
-        /// </summary>
-        public const string AICO0103 = "AICO0103";
-        public const int AICO0103_SIZE = 16;
-        /// <summary>
-        /// 空间名称
-        /// </summary>
-        public const string AICO0104 = "AICO0104";
-        public const int AICO0104_SIZE = 256;
-        /// <summary>
-        /// 空间提示
-        /// </summary>
-        public const string AICO0105 = "AICO0105";
-        public const int AICO0105_SIZE = 256;
-        /// <summary>
-        /// 空间字符
-        /// </summary>
-        public const string AICO0106 = "AICO0106";
-        public const int AICO0106_SIZE = 512;
-        /// <summary>
-        /// 相关说明
-        /// </summary>
-        public const string AICO0107 = "AICO0107";
-        public const int AICO0107_SIZE = 2048;
-        /// <summary>
-        /// 更新日期
-        /// </summary>
-        public const string AICO0108 = "AICO0108";
-        /// <summary>
-        /// 创建日期
-        /// </summary>
-        public const string AICO0109 = "AICO0109";
-        /// <summary>
-        /// 版本控制
-        /// </summary>
-        public const string AICO010A = "AICO010A";
-        /// <summary>
-        /// 操作状态：0删除、1默认、2新增、3更新
-        /// </summary>
-        public const string AICO010B = "AICO010B";
-        #endregion
-
         #region 历史信息表格
         /// <summary>
         /// 历史信息表格
@@ -623,6 +520,112 @@
         public const string APWD0B05 = "APWD0B05";
         public const int APWD0B05_SIZE = APWD0204_SIZE;
         #endregion
+        #endregion
+
+        #region 图标分类表格
+        /// <summary>
+        /// 图标分类表格
+        /// </summary>
+        public const string AICO0100 = "AICO0100";
+        /// <summary>
+        /// 显示排序
+        /// </summary>
+        public const string AICO0101 = "AICO0101";
+        /// <summary>
+        /// 用户代码
+        /// </summary>
+        public const string AICO0102 = "AICO0102";
+        public const int AICO0102_SIZE = 16;
+        /// <summary>
+        /// 类别索引
+        /// </summary>
+        public const string AICO0103 = "AICO0103";
+        public const int AICO0103_SIZE = 16;
+        /// <summary>
+        /// 类别名称
+        /// </summary>
+        public const string AICO0104 = "AICO0104";
+        public const int AICO0104_SIZE = 32;
+        /// <summary>
+        /// 类别提示
+        /// </summary>
+        public const string AICO0105 = "AICO0105";
+        public const int AICO0105_SIZE = 256;
+        /// <summary>
+        /// 类别目录
+        /// </summary>
+        public const string AICO0106 = "AICO0106";
+        public const int AICO0106_SIZE = 64;
+        /// <summary>
+        /// 类别备注
+        /// </summary>
+        public const string AICO0107 = "AICO0107";
+        public const int AICO0107_SIZE = 2048;
+        /// <summary>
+        /// 版本控制
+        /// </summary>
+        public const string AICO0108 = "AICO0108";
+        /// <summary>
+        /// 操作状态：0删除、1默认、2新增、3更新
+        /// </summary>
+        public const string AICO0109 = "AICO0109";
+        #endregion
+
+        #region 字符空间表格
+        /// <summary>
+        /// 字符空间表格
+        /// </summary>
+        public const string AUCS0100 = "AUCS0100";
+        /// <summary>
+        /// 排序依据
+        /// </summary>
+        public const string AUCS0101 = "AUCS0101";
+        /// <summary>
+        /// 用户代码
+        /// </summary>
+        public const string AUCS0102 = "AUCS0102";
+        public const int AUCS0102_SIZE = 8;
+        /// <summary>
+        /// 空间索引
+        /// </summary>
+        public const string AUCS0103 = "AUCS0103";
+        public const int AUCS0103_SIZE = 16;
+        /// <summary>
+        /// 空间名称
+        /// </summary>
+        public const string AUCS0104 = "AUCS0104";
+        public const int AUCS0104_SIZE = 256;
+        /// <summary>
+        /// 空间提示
+        /// </summary>
+        public const string AUCS0105 = "AUCS0105";
+        public const int AUCS0105_SIZE = 256;
+        /// <summary>
+        /// 空间字符
+        /// </summary>
+        public const string AUCS0106 = "AUCS0106";
+        public const int AUCS0106_SIZE = 512;
+        /// <summary>
+        /// 相关说明
+        /// </summary>
+        public const string AUCS0107 = "AUCS0107";
+        public const int AUCS0107_SIZE = 2048;
+        /// <summary>
+        /// 更新日期
+        /// </summary>
+        public const string AUCS0108 = "AUCS0108";
+        /// <summary>
+        /// 创建日期
+        /// </summary>
+        public const string AUCS0109 = "AUCS0109";
+        /// <summary>
+        /// 版本控制
+        /// </summary>
+        public const string AUCS010A = "AUCS010A";
+        /// <summary>
+        /// 操作状态：0删除、1默认、2新增、3更新
+        /// </summary>
+        public const string AUCS010B = "AUCS010B";
         #endregion
 
         #region 计划任务

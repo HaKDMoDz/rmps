@@ -21,12 +21,12 @@ namespace Me.Amon.Pwd
 
         private void TbFind_TextChanged(object sender, EventArgs e)
         {
-            _APwd.SearchKey(TbFind.Text);
+            _APwd.FindKey(TbFind.Text);
         }
 
         private void BtFind_Click(object sender, EventArgs e)
         {
-            _APwd.SearchKey(TbFind.Text);
+            _APwd.FindKey(TbFind.Text);
         }
     }
 }

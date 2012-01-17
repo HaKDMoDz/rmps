@@ -34,6 +34,8 @@
             this.TbTips = new System.Windows.Forms.TextBox();
             this.BtUpdate = new System.Windows.Forms.Button();
             this.BtCancel = new System.Windows.Forms.Button();
+            this.LbMemo = new System.Windows.Forms.Label();
+            this.TbMemo = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // LbName
@@ -67,9 +69,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TbTips.Location = new System.Drawing.Point(56, 30);
-            this.TbTips.Multiline = true;
             this.TbTips.Name = "TbTips";
-            this.TbTips.Size = new System.Drawing.Size(185, 56);
+            this.TbTips.Size = new System.Drawing.Size(100, 21);
             this.TbTips.TabIndex = 3;
             // 
             // BtUpdate
@@ -77,7 +78,7 @@
             this.BtUpdate.Location = new System.Drawing.Point(85, 223);
             this.BtUpdate.Name = "BtUpdate";
             this.BtUpdate.Size = new System.Drawing.Size(75, 23);
-            this.BtUpdate.TabIndex = 4;
+            this.BtUpdate.TabIndex = 6;
             this.BtUpdate.Text = "确定(&O)";
             this.BtUpdate.UseVisualStyleBackColor = true;
             this.BtUpdate.Click += new System.EventHandler(this.BtUpdate_Click);
@@ -87,15 +88,34 @@
             this.BtCancel.Location = new System.Drawing.Point(166, 223);
             this.BtCancel.Name = "BtCancel";
             this.BtCancel.Size = new System.Drawing.Size(75, 23);
-            this.BtCancel.TabIndex = 5;
+            this.BtCancel.TabIndex = 7;
             this.BtCancel.Text = "取消(&C)";
             this.BtCancel.UseVisualStyleBackColor = true;
             this.BtCancel.Click += new System.EventHandler(this.BtCancel_Click);
+            // 
+            // LbMemo
+            // 
+            this.LbMemo.AutoSize = true;
+            this.LbMemo.Location = new System.Drawing.Point(3, 60);
+            this.LbMemo.Name = "LbMemo";
+            this.LbMemo.Size = new System.Drawing.Size(47, 12);
+            this.LbMemo.TabIndex = 4;
+            this.LbMemo.Text = "说明(&D)";
+            // 
+            // TbMemo
+            // 
+            this.TbMemo.Location = new System.Drawing.Point(56, 57);
+            this.TbMemo.Multiline = true;
+            this.TbMemo.Name = "TbMemo";
+            this.TbMemo.Size = new System.Drawing.Size(185, 62);
+            this.TbMemo.TabIndex = 5;
             // 
             // DirEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.TbMemo);
+            this.Controls.Add(this.LbMemo);
             this.Controls.Add(this.BtCancel);
             this.Controls.Add(this.BtUpdate);
             this.Controls.Add(this.TbTips);
@@ -117,5 +137,7 @@
         private System.Windows.Forms.TextBox TbTips;
         private System.Windows.Forms.Button BtUpdate;
         private System.Windows.Forms.Button BtCancel;
+        private System.Windows.Forms.Label LbMemo;
+        private System.Windows.Forms.TextBox TbMemo;
     }
 }

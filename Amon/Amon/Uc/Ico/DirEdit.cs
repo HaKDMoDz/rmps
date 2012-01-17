@@ -19,6 +19,13 @@ namespace Me.Amon.Uc.Ico
             _IcoEdit = icoEdit;
 
             InitializeComponent();
+        }
+
+        public void Init()
+        {
+            TbName.MaxLength = IDat.AICO0104_SIZE;
+            TbTips.MaxLength = IDat.AICO0105_SIZE;
+            TbMemo.MaxLength = IDat.AICO0107_SIZE;
 
             _IcoEdit.AcceptButton = BtUpdate;
             _IcoEdit.CancelButton = BtCancel;

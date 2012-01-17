@@ -32,6 +32,7 @@ namespace Me.Amon.Pwd._Log
             _Key = key;
 
             DBAccess dba = _UserModel.DBAccess;
+            dba.ReInit();
             dba.AddTable(IDat.APWD0A00);
             dba.AddColumn(IDat.APWD0A01);
             dba.AddWhere(IDat.APWD0A04, _UserModel.Code);

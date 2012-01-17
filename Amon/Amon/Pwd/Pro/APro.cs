@@ -25,7 +25,7 @@ namespace Me.Amon.Pwd.Pro
 
             GvAttList.AutoGenerateColumns = false;
 
-            AeAttEdit.Init(this);
+            AeAttEdit.Init(this, _DataModel);
         }
 
         #region 接口实现
@@ -259,7 +259,7 @@ namespace Me.Amon.Pwd.Pro
 
         }
         #endregion
-        
+
         public void ShowTips(Control control, string caption)
         {
             _APwd.ShowTips(control, caption);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -10,6 +11,7 @@ using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Pwd._Cat;
 using Me.Amon.Pwd._Lib;
+using Me.Amon.Pwd._Log;
 using Me.Amon.Pwd.Pad;
 using Me.Amon.Pwd.Pro;
 using Me.Amon.Pwd.Wiz;
@@ -58,7 +60,7 @@ namespace Me.Amon.Pwd
             _ViewModel.Load();
 
             Cat cat = new Cat { Id = "0", Text = "阿木密码箱", Tips = "阿木密码箱", Icon = "0" };
-            IlCatTree.Images.Add(cat.Icon, BeanUtil.CatNaN);
+            IlCatTree.Images.Add(cat.Icon, BeanUtil.NaN16);
             _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Id };
             _RootNode.Tag = cat;
             TvCatTree.Nodes.Add(_RootNode);
@@ -89,6 +91,13 @@ namespace Me.Amon.Pwd
             TpGrid.Controls.Add(_FindBar, 0, 0);
 
             ChangeView(2);
+
+            UcTime.Start();
+
+            _CmiLabels = new ToolStripMenuItem[] { CmiLabel0, CmiLabel1, CmiLabel2, CmiLabel3, CmiLabel4, CmiLabel5, CmiLabel6, CmiLabel7, CmiLabel8, CmiLabel9 };
+            _LastLabel = CmiLabel0;
+            _CmiMajors = new ToolStripMenuItem[] { CmiMajorN2, CmiMajorN1, CmiMajor0, CmiMajorP1, CmiMajorP2, };
+            _LastMajor = CmiMajor0;
         }
 
         private void InitCat(TreeNode root, DataTable data)
@@ -150,16 +159,7 @@ namespace Me.Amon.Pwd
                 catId = "0";
             }
 
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(IDat.APWD0100);
-            dba.AddWhere(IDat.APWD0104, _UserModel.Code);
-            dba.AddWhere(IDat.APWD0106, catId);
-            dba.AddSort(IDat.APWD0101, false);
-            using (DataTable dt = dba.ExecuteSelect())
-            {
-                InitKey(dt);
-            }
+            ListKey(catId);
 
             _LastNode = node;
         }
@@ -197,38 +197,23 @@ namespace Me.Amon.Pwd
         {
             e.DrawBackground();
 
-            //if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)//如果选中该选项
-            //{
-            //Brush b = new TextureBrush(new Bitmap(@"../../../sj.bmp"));//读取背景图片,再转变成画刷
-            ////就在背景里画图片
-            //e.Graphics.FillRectangle(b, e.Bounds);//参数中,e.Bounds 表示当前选项在整个listbox中的区域
-            //}
-            //else//不是选中item
-            //{
-            //    e.Graphics.FillRectangle(Brushes.White, e.Bounds);//在背景上画空白
-            //Brush b = new TextureBrush(new Bitmap(@"../../../Listline.bmp"));//底下线的图片
-            ////在背景上画线
-            //e.Graphics.FillRectangle(b, e.Bounds.X, e.Bounds.Y + 23, e.Bounds.Width, 1);//参数中,23和1是根据图片来的,因为需要在最下面显示线条
-            //}
-
-            if (e.Index <= -1 || e.Index >= LbKeyList.Items.Count)
+            if (e.Index > -1 && e.Index < LbKeyList.Items.Count)
             {
-                return;
+                Key key = LbKeyList.Items[e.Index] as Key;
+                if (key != null)
+                {
+                    e.Graphics.DrawImage(key.Icon, 0, 0);
+
+                    //最后把要显示的文字画在背景图片上
+                    e.Graphics.DrawString(key.Title, this.Font, Brushes.Black, e.Bounds.X + 36, e.Bounds.Y);
+
+                    e.Graphics.DrawString(key.VisitDate, this.Font, Brushes.Gray, e.Bounds.X + 36, e.Bounds.Height - 14);
+
+                    e.Graphics.DrawImage(key.Hint, e.Bounds.Width - 48, e.Bounds.Height - 16);
+                    e.Graphics.DrawImage(_ViewModel.LabelImages[key.Label], e.Bounds.Width - 32, e.Bounds.Height - 16);
+                    e.Graphics.DrawImage(_ViewModel.MajorImages[key.Major + 2], e.Bounds.Width - 16, e.Bounds.Height - 16);
+                }
             }
-            Key key = LbKeyList.Items[e.Index] as Key;
-            if (key == null)
-            {
-                return;
-            }
-
-            e.Graphics.DrawImage(key.Ico, 0, 0);
-
-            //最后把要显示的文字画在背景图片上
-            e.Graphics.DrawString(key.Title, this.Font, Brushes.Black, e.Bounds.X + 36, e.Bounds.Y + 2);
-
-            e.Graphics.DrawString(key.VisitDate, this.Font, Brushes.Gray, e.Bounds.X + 36, e.Bounds.Y + 16);
-
-            //e.Graphics.DrawImage(null, 0, 0);
         }
 
         private void LbKeyList_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -263,6 +248,14 @@ namespace Me.Amon.Pwd
             _SafeModel.Decode(buf.ToString());
 
             _PwdView.ShowData(key);
+
+            _LastLabel.Checked = false;
+            _LastLabel = _CmiLabels[key.Label];
+            _LastLabel.Checked = true;
+
+            _LastMajor.Checked = false;
+            _LastMajor = _CmiMajors[key.Major + 2];
+            _LastMajor.Checked = true;
         }
 
         private void APwd_KeyDown(object sender, KeyEventArgs e)
@@ -521,12 +514,13 @@ namespace Me.Amon.Pwd
             // 帮助
             if (e.KeyCode == Keys.F1)
             {
+                ShowHelp();
                 return;
             }
             // 快捷键
             if (e.KeyCode == Keys.F5)
             {
-                ShowHotKeys();
+                ShowKeys();
                 return;
             }
         }
@@ -609,110 +603,110 @@ namespace Me.Amon.Pwd
         #region 添加属性
         private void TmiAppendAttText_Click(object sender, EventArgs e)
         {
-
+            _PwdView.AppendAtt(AAtt.TYPE_TEXT);
         }
 
         private void TmiAppendAttPass_Click(object sender, EventArgs e)
         {
-
+            _PwdView.AppendAtt(AAtt.TYPE_PASS);
         }
 
         private void TmiAppendAttLink_Click(object sender, EventArgs e)
         {
-
+            _PwdView.AppendAtt(AAtt.TYPE_LINK);
         }
 
         private void TmiAppendAttMail_Click(object sender, EventArgs e)
         {
-
+            _PwdView.AppendAtt(AAtt.TYPE_MAIL);
         }
 
         private void TmiAppendAttDate_Click(object sender, EventArgs e)
         {
-
+            _PwdView.AppendAtt(AAtt.TYPE_DATE);
         }
 
         private void TmiAppendAttData_Click(object sender, EventArgs e)
         {
-
+            _PwdView.AppendAtt(AAtt.TYPE_DATA);
         }
 
         private void TmiAppendAttList_Click(object sender, EventArgs e)
         {
-
+            _PwdView.AppendAtt(AAtt.TYPE_LIST);
         }
 
         private void TmiAppendAttMemo_Click(object sender, EventArgs e)
         {
-
+            _PwdView.AppendAtt(AAtt.TYPE_MEMO);
         }
 
         private void TmiAppendAttFile_Click(object sender, EventArgs e)
         {
-
+            _PwdView.AppendAtt(AAtt.TYPE_FILE);
         }
 
         private void TmiAppendAttLine_Click(object sender, EventArgs e)
         {
-
+            _PwdView.AppendAtt(AAtt.TYPE_LINE);
         }
         #endregion
 
         #region 转换属性
         private void TmiUpdateAttText_Click(object sender, EventArgs e)
         {
-
+            _PwdView.UpdateAtt(AAtt.TYPE_TEXT);
         }
 
         private void TmiUpdateAttPass_Click(object sender, EventArgs e)
         {
-
+            _PwdView.UpdateAtt(AAtt.TYPE_PASS);
         }
 
         private void TmiUpdateAttLink_Click(object sender, EventArgs e)
         {
-
+            _PwdView.UpdateAtt(AAtt.TYPE_LINK);
         }
 
         private void TmiUpdateAttMail_Click(object sender, EventArgs e)
         {
-
+            _PwdView.UpdateAtt(AAtt.TYPE_MAIL);
         }
 
         private void TmiUpdateAttDate_Click(object sender, EventArgs e)
         {
-
+            _PwdView.UpdateAtt(AAtt.TYPE_DATE);
         }
 
         private void TmiUpdateAttData_Click(object sender, EventArgs e)
         {
-
+            _PwdView.UpdateAtt(AAtt.TYPE_DATA);
         }
 
         private void TmiUpdateAttList_Click(object sender, EventArgs e)
         {
-
+            _PwdView.UpdateAtt(AAtt.TYPE_LIST);
         }
 
         private void TmiUpdateAttMemo_Click(object sender, EventArgs e)
         {
-
+            _PwdView.UpdateAtt(AAtt.TYPE_MEMO);
         }
 
         private void TmiUpdateAttFile_Click(object sender, EventArgs e)
         {
-
+            _PwdView.UpdateAtt(AAtt.TYPE_FILE);
         }
 
         private void TmiUpdateAttLine_Click(object sender, EventArgs e)
         {
-
+            _PwdView.UpdateAtt(AAtt.TYPE_LINE);
         }
         #endregion
 
         private void TmiDeleteAtt_Click(object sender, EventArgs e)
         {
-
+            _PwdView.DropAtt();
         }
         #endregion
         #endregion
@@ -750,7 +744,7 @@ namespace Me.Amon.Pwd
 
         private void TmiCatView_Click(object sender, EventArgs e)
         {
-            SetCatViewVisible(!TvCatTree.Visible);
+            SetCatTreeVisible(!TvCatTree.Visible);
         }
 
         private void TmiKeyList_Click(object sender, EventArgs e)
@@ -848,16 +842,17 @@ namespace Me.Amon.Pwd
         #region 帮助菜单
         private void TmiHelp_Click(object sender, EventArgs e)
         {
-
+            ShowHelp();
         }
 
         private void TmiKeys_Click(object sender, EventArgs e)
         {
+            ShowKeys();
         }
 
         private void TmiInfo_Click(object sender, EventArgs e)
         {
-
+            ShowInfo();
         }
         #endregion
         #endregion
@@ -940,106 +935,155 @@ namespace Me.Amon.Pwd
         #region 口令弹出菜单
         private void CmiAppendKey_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void CmiUpdateKey_Click(object sender, EventArgs e)
-        {
-
+            AppendKey();
         }
 
         private void CmiDeleteKey_Click(object sender, EventArgs e)
         {
-
+            DeleteKey();
         }
 
         #region 使用状态
+        private ToolStripMenuItem _LastLabel;
+        private ToolStripMenuItem[] _CmiLabels;
         private void CmiLabel0_Click(object sender, EventArgs e)
         {
-
+            ChangeLabel(0);
+            _LastLabel.Checked = false;
+            _LastLabel = CmiLabel0;
+            _LastLabel.Checked = true;
         }
 
         private void CmiLabel1_Click(object sender, EventArgs e)
         {
-
+            ChangeLabel(1);
+            _LastLabel.Checked = false;
+            _LastLabel = CmiLabel1;
+            _LastLabel.Checked = true;
         }
 
         private void CmiLabel2_Click(object sender, EventArgs e)
         {
-
+            ChangeLabel(2);
+            _LastLabel.Checked = false;
+            _LastLabel = CmiLabel2;
+            _LastLabel.Checked = true;
         }
 
         private void CmiLabel3_Click(object sender, EventArgs e)
         {
-
+            ChangeLabel(3);
+            _LastLabel.Checked = false;
+            _LastLabel = CmiLabel3;
+            _LastLabel.Checked = true;
         }
 
         private void CmiLabel4_Click(object sender, EventArgs e)
         {
-
+            ChangeLabel(4);
+            _LastLabel.Checked = false;
+            _LastLabel = CmiLabel4;
+            _LastLabel.Checked = true;
         }
 
         private void CmiLabel5_Click(object sender, EventArgs e)
         {
-
+            ChangeLabel(5);
+            _LastLabel.Checked = false;
+            _LastLabel = CmiLabel5;
+            _LastLabel.Checked = true;
         }
 
         private void CmiLabel6_Click(object sender, EventArgs e)
         {
-
+            ChangeLabel(6);
+            _LastLabel.Checked = false;
+            _LastLabel = CmiLabel6;
+            _LastLabel.Checked = true;
         }
 
         private void CmiLabel7_Click(object sender, EventArgs e)
         {
-
+            ChangeLabel(7);
+            _LastLabel.Checked = false;
+            _LastLabel = CmiLabel7;
+            _LastLabel.Checked = true;
         }
 
         private void CmiLabel8_Click(object sender, EventArgs e)
         {
-
+            ChangeLabel(8);
+            _LastLabel.Checked = false;
+            _LastLabel = CmiLabel8;
+            _LastLabel.Checked = true;
         }
 
         private void CmiLabel9_Click(object sender, EventArgs e)
         {
-
+            ChangeLabel(9);
+            _LastLabel.Checked = false;
+            _LastLabel = CmiLabel9;
+            _LastLabel.Checked = true;
         }
         #endregion
 
         #region 优先级
+        private ToolStripMenuItem _LastMajor;
+        private ToolStripMenuItem[] _CmiMajors;
         private void CmiMajorP2_Click(object sender, EventArgs e)
         {
-
+            ChangeMajor(2);
+            _LastMajor.Checked = false;
+            _LastMajor = CmiMajorP2;
+            _LastMajor.Checked = true;
         }
 
         private void CmiMajorP1_Click(object sender, EventArgs e)
         {
-
+            ChangeMajor(1);
+            _LastMajor.Checked = false;
+            _LastMajor = CmiMajorP1;
+            _LastMajor.Checked = true;
         }
 
         private void CmiMajor0_Click(object sender, EventArgs e)
         {
-
+            ChangeMajor(0);
+            _LastMajor.Checked = false;
+            _LastMajor = CmiMajor0;
+            _LastMajor.Checked = true;
         }
 
         private void CmiMajorN1_Click(object sender, EventArgs e)
         {
-
+            ChangeMajor(-1);
+            _LastMajor.Checked = false;
+            _LastMajor = CmiMajorN1;
+            _LastMajor.Checked = true;
         }
 
         private void CmiMajorN2_Click(object sender, EventArgs e)
         {
-
+            ChangeMajor(-2);
+            _LastMajor.Checked = false;
+            _LastMajor = CmiMajorN2;
+            _LastMajor.Checked = true;
         }
         #endregion
 
         private void CmiMoveto_Click(object sender, EventArgs e)
         {
-
+            CatView view = new CatView(_UserModel);
+            view.Init(IlCatTree);
+            view.CallBack = new AmonHandler<string>(ChangeCat);
+            view.ShowDialog(this);
         }
 
         private void CmiHistory_Click(object sender, EventArgs e)
         {
-
+            LogEdit edit = new LogEdit(_UserModel);
+            edit.Init(_SafeModel.Key);
+            edit.Show(this);
         }
         #endregion
         #endregion
@@ -1111,6 +1155,80 @@ namespace Me.Amon.Pwd
             _PwdView.InitView(TpGrid);
         }
 
+        private void ChangeCat(string catId)
+        {
+            if (string.IsNullOrEmpty(catId))
+            {
+                catId = "0";
+            }
+
+            DBAccess dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(IDat.APWD0100);
+            dba.AddParam(IDat.APWD0106, catId);
+            dba.AddWhere(IDat.APWD0104, _UserModel.Code);
+            dba.AddWhere(IDat.APWD0105, _SafeModel.Key.Id);
+            dba.AddVcs(IDat.APWD0113, 1);
+            dba.AddOpt(IDat.APWD0114, _SafeModel.Key.Operate, IDat.OPT_PWD_UPDATE_CAT);
+            if (1 != dba.ExecuteUpdate())
+            {
+                return;
+            }
+
+            ListKey(_SafeModel.Key.CatId);
+            _SafeModel.Key.CatId = catId;
+        }
+
+        public void ChangeLabel(int label)
+        {
+            if (label < 0 || label > 9)
+            {
+                return;
+            }
+
+            DBAccess dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(IDat.APWD0100);
+            dba.AddParam(IDat.APWD0102, label);
+            dba.AddWhere(IDat.APWD0104, _UserModel.Code);
+            dba.AddWhere(IDat.APWD0105, _SafeModel.Key.Id);
+            dba.AddVcs(IDat.APWD0113, 1);
+            dba.AddOpt(IDat.APWD0114, _SafeModel.Key.Operate, IDat.OPT_PWD_UPDATE_LABEL);
+            if (1 != dba.ExecuteUpdate())
+            {
+                return;
+            }
+
+            _SafeModel.Key.Label = label;
+            //LbKeyList.Items[LbKeyList.SelectedIndex] = _SafeModel.Key;
+            LbKeyList.Refresh();
+        }
+
+        public void ChangeMajor(int major)
+        {
+            if (major < -2 || major > 2)
+            {
+                return;
+            }
+
+            DBAccess dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(IDat.APWD0100);
+            dba.AddParam(IDat.APWD0103, major);
+            dba.AddWhere(IDat.APWD0104, _UserModel.Code);
+            dba.AddWhere(IDat.APWD0105, _SafeModel.Key.Id);
+            dba.AddVcs(IDat.APWD0113, 1);
+            dba.AddOpt(IDat.APWD0114, _SafeModel.Key.Operate, IDat.OPT_PWD_UPDATE_LABEL);
+            if (1 != dba.ExecuteUpdate())
+            {
+                return;
+            }
+
+            _SafeModel.Key.Major = major;
+            //LbKeyList.Items[LbKeyList.SelectedIndex] = _SafeModel.Key;
+            LbKeyList.Refresh();
+        }
+
         private void SetMenuVisible(bool visible)
         {
             TmMenu.Visible = visible;
@@ -1132,7 +1250,7 @@ namespace Me.Amon.Pwd
             TsbEcho.Checked = visible;
         }
 
-        private void SetCatViewVisible(bool visible)
+        private void SetCatTreeVisible(bool visible)
         {
             VSplit.Panel1Collapsed = !visible;
             TmiCatView.Checked = visible;
@@ -1309,7 +1427,8 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            _SafeModel.Key = new Key { Ico = BeanUtil.CatNaN };
+            _SafeModel.Key = new Key();
+            _SafeModel.Key.SetDefault();
 
             _SafeModel.Clear();
             _SafeModel.InitGuid();
@@ -1470,20 +1589,34 @@ namespace Me.Amon.Pwd
         {
         }
 
-        public void SearchKey(string key)
+        public void ListKey(string catId)
         {
-            key = key.Trim();
-            if (string.IsNullOrEmpty(key))
+            DBAccess dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(IDat.APWD0100);
+            dba.AddWhere(IDat.APWD0104, _UserModel.Code);
+            dba.AddWhere(IDat.APWD0106, catId);
+            dba.AddSort(IDat.APWD0101, false);
+            using (DataTable dt = dba.ExecuteSelect())
+            {
+                InitKey(dt);
+            }
+        }
+
+        public void FindKey(string meta)
+        {
+            meta = meta.Trim();
+            if (string.IsNullOrEmpty(meta))
             {
                 TvCatTree.SelectedNode = _LastNode;
                 return;
             }
 
-            key = key.Replace('　', ' ').Replace('＋', '+');
-            key = CharUtil.Text2DB(key.ToLower());
-            key = Regex.Replace(key, "^[+\\s]*|[+\\s]*$", "%");
-            key = Regex.Replace(key, "[+%\\s]+", "%");
-            if (key == "%")
+            meta = meta.Replace('　', ' ').Replace('＋', '+');
+            meta = CharUtil.Text2DB(meta.ToLower());
+            meta = Regex.Replace(meta, "^[+\\s]*|[+\\s]*$", "%");
+            meta = Regex.Replace(meta, "[+%\\s]+", "%");
+            if (meta == "%")
             {
                 MessageBox.Show("您输入的查询条件无效！");
                 return;
@@ -1495,7 +1628,7 @@ namespace Me.Amon.Pwd
             dba.ReInit();
             dba.AddTable(IDat.APWD0100);
             dba.AddWhere(IDat.APWD0104, _UserModel.Code);
-            dba.AddWhere(string.Format("{0} LIKE '{2}' or {1} like '{2}'", IDat.APWD0109, IDat.APWD010A, key));
+            dba.AddWhere(string.Format("{0} LIKE '{2}' or {1} like '{2}'", IDat.APWD0109, IDat.APWD010A, meta));
             dba.AddWhere(IDat.APWD0114, "!=", IDat.OPT_DELETE.ToString(), false);
 
             using (DataTable dt = dba.ExecuteSelect())
@@ -1510,20 +1643,35 @@ namespace Me.Amon.Pwd
             {
                 if (CharUtil.IsValidateHash(key.IcoPath))
                 {
-                    key.Ico = Image.FromFile(_DataModel.KeyDir + key.IcoPath + Path.DirectorySeparatorChar + key.IcoName + ".png");
+                    key.Icon = Image.FromFile(_DataModel.KeyDir + key.IcoPath + Path.DirectorySeparatorChar + key.IcoName + ".png");
                 }
                 else
                 {
-                    key.Ico = Image.FromFile(_DataModel.KeyDir + key.IcoName + ".png");
+                    key.Icon = Image.FromFile(_DataModel.KeyDir + key.IcoName + ".png");
                 }
             }
             else
             {
-                key.Ico = BeanUtil.KeyNaN;
+                key.Icon = BeanUtil.NaN32;
+            }
+
+            if (CharUtil.IsValidateHash(key.GtdId))
+            {
+                key.Hint = _ViewModel.HimtImage;
+            }
+            else
+            {
+                key.Hint = BeanUtil.NaN16;
             }
         }
+        #endregion
+        #endregion
+        private void ShowHelp()
+        {
+            Process.Start("http://amon.me/help");
+        }
 
-        private void ShowHotKeys()
+        private void ShowKeys()
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("按键");
@@ -1560,7 +1708,14 @@ namespace Me.Amon.Pwd
             keys.KeyList = dt;
             keys.Show(this);
         }
-        #endregion
-        #endregion
+
+        private void ShowInfo()
+        {
+        }
+
+        private void UcTime_Tick(object sender, EventArgs e)
+        {
+            TssTime.Text = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
+        }
     }
 }

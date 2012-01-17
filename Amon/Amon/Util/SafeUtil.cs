@@ -52,5 +52,15 @@ namespace Me.Amon.Util
             System.Windows.Forms.Clipboard.SetText(_OldText);
             _Timer.Stop();
         }
+
+        public static bool EncryptFile(string alg, string key, string srcFile, string dstFile)
+        {
+            return true;
+        }
+
+        public static bool DecryptFile(string alg, string key, string srcFile, string dstFile)
+        {
+            return true;
+        }
     }
 }

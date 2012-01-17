@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Text;
 using System.Xml;
+using Me.Amon.Util;
 
 namespace Me.Amon.Model
 {
@@ -91,7 +92,8 @@ namespace Me.Amon.Model
         public bool Backup { get; set; }
 
         public bool Modified { get; set; }
-        public Image Ico { get; set; }
+        public Image Icon { get; set; }
+        public Image Hint { get; set; }
 
         /// <summary>
         /// 恢复默认值
@@ -118,6 +120,9 @@ namespace Me.Amon.Model
 
             Password = null;
             GtdHeader = null;
+
+            Icon = BeanUtil.NaN16;
+            Hint = BeanUtil.NaN16;
 
             Backup = true;
         }

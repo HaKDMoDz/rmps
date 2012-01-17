@@ -27,7 +27,7 @@ namespace Me.Amon.Pwd._Cat
 
         public void Show(IWin32Window owner, Cat cat)
         {
-            this.Show(owner);
+            base.Show(owner);
             ShowData(cat);
         }
 

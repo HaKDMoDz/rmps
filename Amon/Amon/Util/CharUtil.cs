@@ -445,7 +445,7 @@ namespace Me.Amon.Util
         /// 随机用户口令
         /// </summary>
         /// <returns></returns>
-        public static char[] GenerateUserChar()
+        public static char[] GenerateUserKeys()
         {
             char[] c = new char[94];
             int i = 0;
@@ -456,6 +456,19 @@ namespace Me.Amon.Util
             }
 
             return NextRandomKey(c, 8, false);
+        }
+
+        public static char[] GenerateFileKeys()
+        {
+            char[] c = new char[94];
+            int i = 0;
+            char t = '!';
+            while (i < 94)
+            {
+                c[i++] = t++;
+            }
+
+            return NextRandomKey(c, 16, false);
         }
 
         public static string GenPass(string data, int length)

@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using Me.Amon.Model;
 
 namespace Me.Amon.Pwd.Pro
 {
@@ -14,7 +15,7 @@ namespace Me.Amon.Pwd.Pro
 
         public string Title { get { return "提示"; } }
 
-        public bool ShowData(Model.AAtt att)
+        public bool ShowData(DataModel dataModel, AAtt att)
         {
             return true;
         }

@@ -2,6 +2,7 @@
 {
     public class Cat : Vcs
     {
+        public int Order { get; set; }
         /// <summary>
         /// 类别索引
         /// </summary>

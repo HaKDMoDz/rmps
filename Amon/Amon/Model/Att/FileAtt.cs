@@ -9,6 +9,8 @@ namespace Me.Amon.Model.Att
     {
         public const int SPEC_FILE_NAME = 0;// 附件原文件名
         public const int SPEC_FILE_EXTS = 1;// 附件原扩展名
+        public const int SPEC_FILE_ALG = 2;// 加密算法
+        public const int SPEC_FILE_KEY = 3;// 加密口令
 
         public FileAtt()
             : base(TYPE_FILE, "", "")

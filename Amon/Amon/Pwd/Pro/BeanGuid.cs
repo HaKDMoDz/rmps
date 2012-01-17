@@ -19,8 +19,15 @@ namespace Me.Amon.Pwd.Pro
 
         public string Title { get { return "向导"; } }
 
-        public bool ShowData(Model.AAtt att)
+        public bool ShowData(DataModel dataModel, AAtt att)
         {
+            if ((dataModel.LibModified & IEnv.KEY_APWD) > 0)
+            {
+                CbName.DataSource = dataModel.LibList;
+                CbName.DisplayMember = "Name";
+                CbName.ValueMember = "Id";
+                dataModel.LibModified &= IEnv.KEY_APWD;
+            }
             _Att = att;
             return true;
         }
@@ -31,7 +38,7 @@ namespace Me.Amon.Pwd.Pro
 
         public void Save()
         {
-            LibHeader header = comboBox1.SelectedItem as LibHeader;
+            LibHeader header = CbName.SelectedItem as LibHeader;
             if (header == null || header.Id == "0")
             {
                 return;
@@ -47,7 +54,6 @@ namespace Me.Amon.Pwd.Pro
 
         private void button1_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

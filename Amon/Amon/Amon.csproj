@@ -150,6 +150,12 @@
       <DependentUpon>FindBar.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\IPwd.cs" />
+    <Compile Include="Pwd\_Cat\CatView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pwd\_Cat\CatView.Designer.cs">
+      <DependentUpon>CatView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pwd\_Lib\LibEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -530,6 +536,18 @@
     <Compile Include="Util\HashUtil.cs" />
     <Compile Include="Util\HttpUtil.cs" />
     <Compile Include="Util\SafeUtil.cs" />
+    <Compile Include="Uw\ImgViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\ImgViewer.Designer.cs">
+      <DependentUpon>ImgViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\TxtEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\TxtEditor.Designer.cs">
+      <DependentUpon>TxtEditor.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -557,6 +575,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\FindBar.resx">
       <DependentUpon>FindBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\_Cat\CatView.resx">
+      <DependentUpon>CatView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\_Lib\LibEdit.resx">
       <DependentUpon>LibEdit.cs</DependentUpon>
@@ -707,6 +728,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="User\SignUp.resx">
       <DependentUpon>SignUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\ImgViewer.resx">
+      <DependentUpon>ImgViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\TxtEditor.resx">
+      <DependentUpon>TxtEditor.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

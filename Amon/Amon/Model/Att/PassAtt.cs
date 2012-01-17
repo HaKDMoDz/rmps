@@ -7,9 +7,9 @@ namespace Me.Amon.Model.Att
 {
     public class PassAtt : AAtt
     {
-        public const int SPEC_PWDS_HASH = 0;// 字符空间索引
-        public const int SPEC_PWDS_SIZE = 1;// 生成口令长度
-        public const int SPEC_PWDS_LOOP = 2;// 是否允许重复
+        public const int SPEC_PWDS_KEY = 0;// 字符空间索引
+        public const int SPEC_PWDS_LEN = 1;// 生成口令长度
+        public const int SPEC_PWDS_REP = 2;// 是否允许重复
 
         public PassAtt()
             : base(TYPE_PASS, "", "")
