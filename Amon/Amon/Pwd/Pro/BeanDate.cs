@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Me.Amon.Model;
+using Me.Amon.Model.Att;
 
 namespace Me.Amon.Pwd.Pro
 {
@@ -9,27 +10,32 @@ namespace Me.Amon.Pwd.Pro
         private AAtt _Att;
         private TextBox _Ctl;
 
+        #region 构造函数
         public BeanDate()
         {
             InitializeComponent();
-
-            this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
-            this.TbData.GotFocus += new EventHandler(TbData_GotFocus);
         }
+
+        public void InitOnce(DataModel dataModel)
+        {
+            this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
+            this.DtData.GotFocus += new EventHandler(DtData_GotFocus);
+        }
+        #endregion
 
         #region 接口实现
         public Control Control { get { return this; } }
 
         public string Title { get { return "日期"; } }
 
-        public bool ShowData(DataModel dataModel, AAtt att)
+        public bool ShowData(AAtt att)
         {
             _Att = att;
 
             if (_Att != null)
             {
                 TbName.Text = _Att.Name;
-                TbData.Text = _Att.Data;
+                DtData.Text = _Att.Data;
             }
             return true;
         }
@@ -51,29 +57,65 @@ namespace Me.Amon.Pwd.Pro
                 _Att.Name = TbName.Text;
                 _Att.Modified = true;
             }
-            if (TbData.Text != _Att.Data)
+            if (DtData.Text != _Att.Data)
             {
-                _Att.Data = TbData.Text;
+                _Att.Data = DtData.Text;
                 _Att.Modified = true;
             }
         }
         #endregion
 
+        #region 事件处理
         private void TbName_GotFocus(object sender, EventArgs e)
         {
             _Ctl = TbName;
             TbName.SelectAll();
         }
 
-        private void TbData_GotFocus(object sender, EventArgs e)
+        private void DtData_GotFocus(object sender, EventArgs e)
         {
-            _Ctl = TbData;
-            TbData.SelectAll();
+        }
+
+        #region 按钮事件
+        private void BtNow_Click(object sender, EventArgs e)
+        {
+            DtData.Value = DateTime.Now;
         }
 
         private void BtOpt_Click(object sender, EventArgs e)
         {
 
         }
+        #endregion
+
+        #region 菜单事件
+        private void MiDateDef_Click(object sender, EventArgs e)
+        {
+            _Att.SetSpec(DateAtt.SPEC_FORMAT, DataAtt.SPEC_VALUE_NONE);
+            DtData.Format = DateTimePickerFormat.Long;
+        }
+
+        private void MiDatePre_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            if (item == null)
+            {
+                return;
+            }
+            string cmd = item.Tag as string;
+            if (string.IsNullOrEmpty(cmd))
+            {
+                return;
+            }
+            _Att.SetSpec(DateAtt.SPEC_FORMAT, cmd);
+            DtData.Format = DateTimePickerFormat.Custom;
+            DtData.CustomFormat = cmd;
+        }
+
+        private void MiDateDiy_Click(object sender, EventArgs e)
+        {
+        }
+        #endregion
+        #endregion
     }
 }

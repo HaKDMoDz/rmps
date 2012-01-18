@@ -25,12 +25,16 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
         }
 
-        public BeanFile(BeanBody body, TableLayoutPanel grid)
+        public BeanFile(BeanBody body)
         {
             _Body = body;
-            _Grid = grid;
 
             InitializeComponent();
+        }
+
+        public void InitOnce(TableLayoutPanel grid)
+        {
+            _Grid = grid;
 
             _Label = new Label();
             _Label.TextAlign = ContentAlignment.MiddleRight;
@@ -86,11 +90,13 @@ namespace Me.Amon.Pwd.Wiz
         }
         #endregion
 
+        #region 事件处理
         private void TbData_GotFocus(object sender, EventArgs e)
         {
             _Body.EditCtl = this;
         }
 
+        #region 按钮事件
         private void BtView_Click(object sender, EventArgs e)
         {
             CmMenu.Show(BtView, 0, BtView.Height);
@@ -130,7 +136,9 @@ namespace Me.Amon.Pwd.Wiz
                 TbData.Text = info.Name;
             }
         }
+        #endregion
 
+        #region 菜单事件
         private void MiSysViewer_Click(object sender, EventArgs e)
         {
             ViewFile(false);
@@ -140,7 +148,10 @@ namespace Me.Amon.Pwd.Wiz
         {
             ViewFile(true);
         }
+        #endregion
+        #endregion
 
+        #region 私有函数
         private void ViewFile(bool inner)
         {
             string srcFile = _DataModel.AsfDir + _Att.GetSpec(FileAtt.SPEC_FILE_NAME) + ".asf";
@@ -184,5 +195,6 @@ namespace Me.Amon.Pwd.Wiz
                 MessageBox.Show(e.Message);
             }
         }
+        #endregion
     }
 }

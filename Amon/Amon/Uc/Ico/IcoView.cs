@@ -60,6 +60,11 @@ namespace Me.Amon.Uc.Ico
                 MessageBox.Show("您选择的文件不存在！");
                 return;
             }
+            string name = Path.GetFileName(fd.FileName).ToLower();
+            if (!name.EndsWith(".png") && !name.EndsWith(".jpg") && !name.EndsWith(".bmp"))
+            {
+                return;
+            }
             using (Image img = Image.FromFile(fd.FileName))
             {
                 Bitmap bmp = new Bitmap(IEnv.ICON_DIM, IEnv.ICON_DIM);
@@ -79,9 +84,9 @@ namespace Me.Amon.Uc.Ico
                     g.Dispose();
                 }
                 string key = HashUtil.GetCurrTimeHex(true);
-                bmp.Save(_IcoEdit.CurrentPath + Path.DirectorySeparatorChar + key + ".png", ImageFormat.Png);
+                bmp.Save(_IcoEdit.CurrentPath + key + ".png", ImageFormat.Png);
                 IlIco.Images.Add(key, img);
-                _IcoEdit.SelectedItem = new ListViewItem(LvIco.Items.Count.ToString(), key);
+                _IcoEdit.SelectedItem = new ListViewItem((LvIco.Items.Count + 1).ToString(), key);
                 LvIco.Items.Add(_IcoEdit.SelectedItem);
                 LvIco.SelectedItems.Clear();
                 _IcoEdit.SelectedItem.Selected = true;
@@ -100,6 +105,7 @@ namespace Me.Amon.Uc.Ico
             int i = 1;
             LvIco.Items.Clear();
             IlIco.Images.Clear();
+            IlIco.Images.Add(BeanUtil.NaN32);
             int index;
             string name;
             foreach (string file in Directory.GetFiles(path, "*.png"))
@@ -115,7 +121,7 @@ namespace Me.Amon.Uc.Ico
                 {
                     continue;
                 }
-                name = file.Substring(0, 16);
+                name = name.Substring(0, 16);
                 IlIco.Images.Add(name, LoadImage(file));
                 LvIco.Items.Add(new ListViewItem((i++).ToString(), name));
             }

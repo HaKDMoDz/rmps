@@ -62,7 +62,7 @@ namespace Me.Amon.Pwd.Pro
                 GbGroup.Controls.Remove(_CmpLast.Control);
             }
 
-            _CmpInfo.ShowData(_DataModel, null);
+            _CmpInfo.ShowData(null);
             GbGroup.Text = _CmpInfo.Title;
             GbGroup.Controls.Add(_CmpInfo);
 
@@ -77,7 +77,7 @@ namespace Me.Amon.Pwd.Pro
             }
 
             _CmpLast = GetCtl(att.Type);
-            _CmpLast.ShowData(_DataModel, att);
+            _CmpLast.ShowData(att);
 
             GbGroup.Text = _CmpLast.Title;
             GbGroup.Controls.Add(_CmpLast.Control);
@@ -139,6 +139,7 @@ namespace Me.Amon.Pwd.Pro
                     ctl = null;
                     break;
             }
+            ctl.InitOnce(_DataModel);
             _CmpList[type] = ctl;
 
             ctl.Control.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 using System.Xml;
 using Me.Amon.Util;
 
@@ -59,13 +58,19 @@ namespace Me.Amon.Model.Att
             {
                 return false;
             }
-            Name = UnEscape(array[0].Replace("\f", "\\,"));
-            Data = UnEscape(array[1].Replace("\f", "\\,"));
+            int i = 0;
+            Name = UnEscape(array[i++].Replace("\f", "\\,"));
+            Data = UnEscape(array[i++].Replace("\f", "\\,"));
 
-            _Spec.Clear();
-            for (int i = 2, j = array.Length; i < j; i += 1)
+            int j = _Spec.Length + i;
+            if (j > array.Length)
             {
-                _Spec.Add(array[i]);
+                j = array.Length;
+            }
+            while (j > i)
+            {
+                j -= 1;
+                _Spec[j - i] = array[j];
             }
             return true;
         }
@@ -87,21 +92,17 @@ namespace Me.Amon.Model.Att
         {
             if (_Spec == null)
             {
-                this._Spec = new List<string>(8);
-            }
-            else
-            {
-                _Spec.Clear();
+                _Spec = new string[8];
             }
 
-            _Spec.Add(SPEC_VALUE_TRUE);
-            _Spec.Add("+0-");
-            _Spec.Add("0");
-            _Spec.Add("8");
-            _Spec.Add(SPEC_VALUE_NONE);
-            _Spec.Add(SPEC_VALUE_TRUE);
-            _Spec.Add("^");
-            _Spec.Add(SPEC_VALUE_FAIL);
+            _Spec[0] = SPEC_VALUE_TRUE;
+            _Spec[1] = "+0-";
+            _Spec[2] = "0";
+            _Spec[3] = "8";
+            _Spec[4] = SPEC_VALUE_NONE;
+            _Spec[5] = SPEC_VALUE_TRUE;
+            _Spec[6] = "^";
+            _Spec[7] = SPEC_VALUE_FAIL;
         }
     }
 }

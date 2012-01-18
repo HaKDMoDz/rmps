@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 using System.Xml;
 using Me.Amon.Util;
 
@@ -48,8 +47,20 @@ namespace Me.Amon.Model.Att
             {
                 return false;
             }
-            Name = UnEscape(array[0].Replace("\f", "\\,"));
-            Data = UnEscape(array[1].Replace("\f", "\\,"));
+            int i = 0;
+            Name = UnEscape(array[i++].Replace("\f", "\\,"));
+            Data = UnEscape(array[i++].Replace("\f", "\\,"));
+
+            int j = _Spec.Length + i;
+            if (j > array.Length)
+            {
+                j = array.Length;
+            }
+            while (j > i)
+            {
+                j -= 1;
+                _Spec[j - i] = array[j];
+            }
             return true;
         }
 
@@ -70,14 +81,10 @@ namespace Me.Amon.Model.Att
         {
             if (_Spec == null)
             {
-                this._Spec = new List<string>(1);
-            }
-            else
-            {
-                _Spec.Clear();
+                _Spec = new string[1];
             }
 
-            _Spec.Add(SPEC_VALUE_NONE);
+            _Spec[0] = SPEC_VALUE_NONE;
         }
     }
 }

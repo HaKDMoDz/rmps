@@ -101,7 +101,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LogEdit";
-            this.Text = "LogEdit";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "操作日志";
             this.ResumeLayout(false);
             this.PerformLayout();
 

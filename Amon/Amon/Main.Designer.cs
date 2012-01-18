@@ -35,7 +35,12 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.BgWorker = new System.Windows.Forms.Timer(this.components);
             this.NiTray = new System.Windows.Forms.NotifyIcon(this.components);
+            this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MiTopMost = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiGuid = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiExit = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.CmMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtPwd
@@ -73,15 +78,47 @@
             // NiTray
             // 
             this.NiTray.BalloonTipTitle = "阿木提示";
+            this.NiTray.ContextMenuStrip = this.CmMenu;
             this.NiTray.Icon = ((System.Drawing.Icon)(resources.GetObject("NiTray.Icon")));
             this.NiTray.Text = "阿木导航";
             this.NiTray.Visible = true;
+            // 
+            // CmMenu
+            // 
+            this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MiTopMost,
+            this.MiGuid,
+            this.MiExit});
+            this.CmMenu.Name = "CmMenu";
+            this.CmMenu.Size = new System.Drawing.Size(149, 70);
+            // 
+            // MiTopMost
+            // 
+            this.MiTopMost.Name = "MiTopMost";
+            this.MiTopMost.Size = new System.Drawing.Size(148, 22);
+            this.MiTopMost.Text = "关于";
+            this.MiTopMost.Click += new System.EventHandler(this.MiTopMost_Click);
+            // 
+            // MiGuid
+            // 
+            this.MiGuid.Name = "MiGuid";
+            this.MiGuid.Size = new System.Drawing.Size(148, 22);
+            this.MiGuid.Text = "隐藏导航窗口";
+            this.MiGuid.Click += new System.EventHandler(this.MiTrayIco_Click);
+            // 
+            // MiExit
+            // 
+            this.MiExit.Name = "MiExit";
+            this.MiExit.Size = new System.Drawing.Size(148, 22);
+            this.MiExit.Text = "退出";
+            this.MiExit.Click += new System.EventHandler(this.MiExit_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(200, 36);
+            this.ContextMenuStrip = this.CmMenu;
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.BtPwd);
@@ -91,13 +128,14 @@
             this.MinimizeBox = false;
             this.Name = "Main";
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "登录";
             this.TopMost = true;
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Main_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Main_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.CmMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -109,6 +147,10 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Timer BgWorker;
         private System.Windows.Forms.NotifyIcon NiTray;
+        private System.Windows.Forms.ContextMenuStrip CmMenu;
+        private System.Windows.Forms.ToolStripMenuItem MiTopMost;
+        private System.Windows.Forms.ToolStripMenuItem MiGuid;
+        private System.Windows.Forms.ToolStripMenuItem MiExit;
 
 
     }

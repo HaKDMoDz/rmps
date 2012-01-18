@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Me.Amon.Model;
 
@@ -20,12 +21,16 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
         }
 
-        public BeanLink(BeanBody body, TableLayoutPanel grid)
+        public BeanLink(BeanBody body)
         {
             _Body = body;
-            _Grid = grid;
 
             InitializeComponent();
+        }
+
+        public void InitOnce(TableLayoutPanel grid)
+        {
+            _Grid = grid;
 
             _Label = new Label();
             _Label.TextAlign = ContentAlignment.MiddleRight;
@@ -79,21 +84,36 @@ namespace Me.Amon.Pwd.Wiz
         }
         #endregion
 
+        #region 事件处理
         private void TbData_GotFocus(object sender, EventArgs e)
         {
             _Body.EditCtl = this;
         }
 
+        #region 按钮事件
         private void BtOpen_Click(object sender, EventArgs e)
         {
+            string link = TbData.Text.Trim();
+            if (string.IsNullOrEmpty(link))
+            {
+                return;
+            }
+
+            if (!Regex.IsMatch(link, "^\\w+://.+", RegexOptions.IgnoreCase))
+            {
+                link = "http://" + link;
+            }
+
             try
             {
-                Process.Start(TbData.Text);
+                Process.Start(link);
             }
             catch (Exception exp)
             {
                 MessageBox.Show(exp.Message);
             }
         }
+        #endregion
+        #endregion
     }
 }

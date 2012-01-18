@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Model;
-using Me.Amon.Util;
 using Me.Amon.Model.Att;
-using System.Collections.Generic;
+using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.Wiz
 {
@@ -16,6 +16,13 @@ namespace Me.Amon.Pwd.Wiz
         private RowStyle _Style;
         private Label _Label;
         private AAtt _Att;
+        private ToolStripMenuItem _CharLenDef;
+        private ToolStripMenuItem _CharLenDiy;
+        private ToolStripMenuItem _LastCharLen;
+        private Dictionary<string, ToolStripMenuItem> _CharLenDict = new Dictionary<string, ToolStripMenuItem>();
+        private ToolStripMenuItem _CharSetDef;
+        private ToolStripMenuItem _LastCharSet;
+        private Dictionary<string, ToolStripMenuItem> _CharSetDict = new Dictionary<string, ToolStripMenuItem>();
 
         #region 构造函数
         public BeanPass()
@@ -23,12 +30,16 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
         }
 
-        public BeanPass(BeanBody body, TableLayoutPanel grid)
+        public BeanPass(BeanBody body)
         {
             _Body = body;
-            _Grid = grid;
 
             InitializeComponent();
+        }
+
+        public void InitOnce(TableLayoutPanel grid)
+        {
+            _Grid = grid;
 
             _Label = new Label();
             _Label.TextAlign = ContentAlignment.MiddleRight;
@@ -36,6 +47,46 @@ namespace Me.Amon.Pwd.Wiz
 
             _Style = new RowStyle(SizeType.Absolute, 27F);
             Dock = DockStyle.Fill;
+
+            CmMenu.SuspendLayout();
+            _CharLenDef = new ToolStripMenuItem();
+            _CharLenDef.Size = new Size(160, 22);
+            _CharLenDef.Text = "默认(&D)";
+            _CharLenDef.Click += new EventHandler(MiCharLenDef_Click);
+            MuCharLen.DropDownItems.Add(_CharLenDef);
+
+            InitMenu("6", "6", MuCharLen);
+            InitMenu("8", "8", MuCharLen);
+            InitMenu("10", "10", MuCharLen);
+            InitMenu("12", "12", MuCharLen);
+            InitMenu("14", "14", MuCharLen);
+            InitMenu("16", "16", MuCharLen);
+
+            _CharLenDiy = new ToolStripMenuItem();
+            _CharLenDiy.Size = new Size(160, 22);
+            _CharLenDiy.Text = "其它…(&O)";
+            _CharLenDiy.Click += new EventHandler(MiCharLenDiy_Click);
+
+            _LastCharLen = MiCharLenDef;
+            _LastCharLen.Checked = true;
+
+            CmMenu.ResumeLayout(true);
+
+            _CharSetDef = new ToolStripMenuItem();
+            _CharSetDef.Size = new Size(160, 22);
+            _CharSetDef.Text = "默认(&D)";
+            _CharSetDef.Click += new EventHandler(MiCharSetDef_Click);
+        }
+
+        private void InitMenu(string tag, string text, ToolStripMenuItem menu)
+        {
+            ToolStripMenuItem item = new ToolStripMenuItem();
+            item.Size = new Size(160, 22);
+            item.Text = text;
+            item.Tag = tag;
+            item.Click += new EventHandler(MiCharLenPre_Click);
+            menu.DropDownItems.Add(item);
+            _CharLenDict[tag] = item;
         }
         #endregion
 
@@ -56,6 +107,8 @@ namespace Me.Amon.Pwd.Wiz
             if ((_DataModel.UcsModified & IEnv.KEY_AWIZ) > 0)
             {
                 MuCharSet.DropDownItems.Clear();
+                MuCharSet.DropDownItems.Add(_CharSetDef);
+
                 _CharSetDict.Clear();
                 ToolStripMenuItem item;
                 foreach (Ucs ucs in _DataModel.UcsList)
@@ -70,14 +123,19 @@ namespace Me.Amon.Pwd.Wiz
                     _CharSetDict[ucs.Id] = item;
                 }
                 _DataModel.UcsModified &= IEnv.KEY_AWIZ;
+
+                _LastCharSet = _CharSetDef;
+                _LastCharSet.Checked = true;
             }
 
             _Att = att;
-            if (_Att != null)
+            if (_Att == null)
             {
-                _Label.Text = _Att.Name;
-                TbData.Text = _Att.Data;
+                return false;
             }
+
+            _Label.Text = _Att.Name;
+            TbData.Text = _Att.Data;
             return true;
         }
 
@@ -102,11 +160,13 @@ namespace Me.Amon.Pwd.Wiz
         }
         #endregion
 
+        #region 事件处理
         private void TbData_GotFocus(object sender, EventArgs e)
         {
             _Body.EditCtl = this;
         }
 
+        #region 按钮事件
         private void BtMod_Click(object sender, EventArgs e)
         {
             if (TbData.PasswordChar != '*')
@@ -121,27 +181,20 @@ namespace Me.Amon.Pwd.Wiz
 
         private void BtGen_Click(object sender, EventArgs e)
         {
-            string key = _Att.GetSpec(PassAtt.SPEC_PWDS_KEY);
-            if (CharUtil.IsValidateHash(key))
+            string len = _Att.GetSpec(PassAtt.SPEC_PWDS_LEN);
+            if (string.IsNullOrEmpty(len) || len == "0")
             {
-                if (_CharSetDict.ContainsKey(key))
-                {
-                    key = _CharSetDict[key].Tag as string;
-                }
-                else
-                {
-                    key = _DataModel.UcsDefault.Data;
-                }
+                len = "8";
+            }
+
+            string key = _Att.GetSpec(PassAtt.SPEC_PWDS_KEY);
+            if (CharUtil.IsValidateHash(key) && _CharSetDict.ContainsKey(key))
+            {
+                key = _CharSetDict[key].Tag as string;
             }
             else
             {
                 key = _DataModel.UcsDefault.Data;
-            }
-
-            string len = _Att.GetSpec(PassAtt.SPEC_PWDS_LEN, AAtt.SPEC_VALUE_NONE);
-            if (len == "0")
-            {
-                len = "8";
             }
 
             string rep = _Att.GetSpec(PassAtt.SPEC_PWDS_REP, AAtt.SPEC_VALUE_FAIL);
@@ -150,18 +203,19 @@ namespace Me.Amon.Pwd.Wiz
 
         private void BtOpt_Click(object sender, EventArgs e)
         {
-            if (_LastCharLen != null)
+            _LastCharLen.Checked = false;
+            string len = _Att.GetSpec(PassAtt.SPEC_PWDS_LEN);
+            if (string.IsNullOrEmpty(len))
             {
-                _LastCharLen.Checked = false;
+                _LastCharLen = _CharLenDef;
             }
-            string len = _Att.GetSpec(PassAtt.SPEC_PWDS_LEN, AAtt.SPEC_VALUE_NONE);
-            if (_CharLenDict.ContainsKey(len))
+            else if (_CharLenDict.ContainsKey(len))
             {
                 _LastCharLen = _CharLenDict[len];
             }
             else
             {
-                _LastCharLen = MiCharLen0;
+                _LastCharLen = MiCharLenDef;
             }
             _LastCharLen.Checked = true;
 
@@ -170,7 +224,11 @@ namespace Me.Amon.Pwd.Wiz
                 _LastCharSet.Checked = false;
             }
             string key = _Att.GetSpec(PassAtt.SPEC_PWDS_KEY, AAtt.SPEC_VALUE_NONE);
-            if (_CharSetDict.ContainsKey(key))
+            if (string.IsNullOrEmpty(key))
+            {
+                _LastCharSet = _CharSetDef;
+            }
+            else if (_CharSetDict.ContainsKey(key))
             {
                 _LastCharSet = _CharSetDict[key];
             }
@@ -185,22 +243,19 @@ namespace Me.Amon.Pwd.Wiz
 
             CmMenu.Show(BtOpt, 0, BtOpt.Height);
         }
+        #endregion
 
         #region 菜单事件
-        private ToolStripMenuItem _LastCharLen;
-        private Dictionary<string, ToolStripMenuItem> _CharLenDict = new Dictionary<string, ToolStripMenuItem>();
-        private ToolStripMenuItem _LastCharSet;
-        private Dictionary<string, ToolStripMenuItem> _CharSetDict = new Dictionary<string, ToolStripMenuItem>();
         private void MiCharLenDef_Click(object sender, EventArgs e)
         {
-            _Att.SetSpec(PassAtt.SPEC_PWDS_LEN, "0");
+            _Att.SetSpec(PassAtt.SPEC_PWDS_LEN, PassAtt.SPEC_VALUE_NONE);
 
             _LastCharLen.Checked = false;
-            _LastCharLen = MiCharLen0;
+            _LastCharLen = _CharLenDef;
             _LastCharLen.Checked = true;
         }
 
-        private void MiCharLen_Click(object sender, EventArgs e)
+        private void MiCharLenPre_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem item = sender as ToolStripMenuItem;
             if (item == null)
@@ -220,14 +275,14 @@ namespace Me.Amon.Pwd.Wiz
             _LastCharLen.Checked = true;
         }
 
-        private void MiCharLenMore_Click(object sender, EventArgs e)
+        private void MiCharLenDiy_Click(object sender, EventArgs e)
         {
         }
 
         private void MiCharSetDef_Click(object sender, EventArgs e)
         {
             _LastCharSet.Checked = false;
-            _LastCharSet = MiCharSet0;
+            _LastCharSet = _CharSetDef;
             _LastCharSet.Checked = true;
 
             _Att.SetSpec(PassAtt.SPEC_PWDS_KEY, AAtt.SPEC_VALUE_NONE);
@@ -241,7 +296,7 @@ namespace Me.Amon.Pwd.Wiz
                 return;
             }
             string key = item.Name;
-            if (CharUtil.IsValidateHash(key))
+            if (!CharUtil.IsValidateHash(key))
             {
                 return;
             }
@@ -263,6 +318,7 @@ namespace Me.Amon.Pwd.Wiz
             MiRepeatable.Checked = !MiRepeatable.Checked;
             _Att.SetSpec(PassAtt.SPEC_PWDS_REP, MiRepeatable.Checked ? AAtt.SPEC_VALUE_TRUE : AAtt.SPEC_VALUE_FAIL);
         }
+        #endregion
         #endregion
     }
 }

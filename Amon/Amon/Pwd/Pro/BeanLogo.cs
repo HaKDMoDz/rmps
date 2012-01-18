@@ -8,17 +8,23 @@ namespace Me.Amon.Pwd.Pro
         private AAtt _Att;
         private TextBoxBase _Ctl;
 
+        #region 构造函数
         public BeanLogo()
         {
             InitializeComponent();
         }
+
+        public void InitOnce(DataModel dataModel)
+        {
+        }
+        #endregion
 
         #region 接口实现
         public Control Control { get { return this; } }
 
         public string Title { get { return "徽标"; } }
 
-        public bool ShowData(DataModel dataModel, AAtt att)
+        public bool ShowData(AAtt att)
         {
             _Att = att;
 

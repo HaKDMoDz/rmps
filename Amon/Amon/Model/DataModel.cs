@@ -42,6 +42,11 @@ namespace Me.Amon.Model
                 Directory.CreateDirectory(_AsfDir);
             }
 
+            #region 读取配置
+            UcsLength = 8;
+            _UcsKey = "aucs000000000005";
+            #endregion
+
             #region 口令模板
             DBAccess dba = _UserModel.DBAccess;
 
@@ -100,6 +105,14 @@ namespace Me.Amon.Model
             _UcsList.Add(new Ucs { Id = "aucs000000000004", Name = "大小写字母", Tips = "大小写字母", Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
             _UcsList.Add(new Ucs { Id = "aucs000000000005", Name = "数字及字母", Tips = "数字及字母", Data = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
             _UcsList.Add(new Ucs { Id = "aucs000000000006", Name = "可输入英文符号", Tips = "可输入英文符号", Data = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" });
+            foreach (Ucs item in _UcsList)
+            {
+                if (item.Id == _UcsKey)
+                {
+                    UcsDefault = item;
+                }
+            }
+
             dba.ReInit();
             dba.AddTable(IDat.AUCS0100);
             dba.AddColumn(IDat.AUCS0103);
@@ -121,7 +134,7 @@ namespace Me.Amon.Model
                     item.Memo = row[IDat.AUCS0107] as string;
                     UcsList.Add(item);
 
-                    if (item.Id == _UcsDefault)
+                    if (item.Id == _UcsKey)
                     {
                         UcsDefault = item;
                     }
@@ -168,8 +181,9 @@ namespace Me.Amon.Model
             }
         }
         public int UcsModified { get; set; }
-        private string _UcsDefault;
+        private string _UcsKey;
         public Ucs UcsDefault { get; set; }
+        public int UcsLength { get; set; }
         #endregion
     }
 }

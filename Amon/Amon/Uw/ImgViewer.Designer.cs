@@ -133,6 +133,7 @@
             this.MinimizeBox = false;
             this.Name = "ImgViewer";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "图像查看器";
             this.Resize += new System.EventHandler(this.ImgViewer_Resize);
             this.PlImg.ResumeLayout(false);

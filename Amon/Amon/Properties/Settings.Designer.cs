@@ -22,5 +22,29 @@ namespace Me.Amon.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int LocX {
+            get {
+                return ((int)(this["LocX"]));
+            }
+            set {
+                this["LocX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int LocY {
+            get {
+                return ((int)(this["LocY"]));
+            }
+            set {
+                this["LocY"] = value;
+            }
+        }
     }
 }

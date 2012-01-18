@@ -11,20 +11,25 @@ namespace Me.Amon.Pwd.Pro
         private Item _Item;
         private Control _Ctl;
 
+        #region 构造函数
         public BeanList()
         {
             InitializeComponent();
+        }
 
+        public void InitOnce(DataModel dataModel)
+        {
             this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
             this.CbData.GotFocus += new EventHandler(CbData_GotFocus);
         }
+        #endregion
 
         #region 接口实现
         public Control Control { get { return this; } }
 
         public string Title { get { return "列表"; } }
 
-        public bool ShowData(DataModel dataModel, AAtt att)
+        public bool ShowData(AAtt att)
         {
             _Att = att;
 

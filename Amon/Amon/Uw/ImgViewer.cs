@@ -55,7 +55,7 @@ namespace Me.Amon.Uw
         #region 事件处理
         private void ImgViewer_Resize(object sender, EventArgs e)
         {
-            PbImg.Location = new Point((PlImg.Width - _SrcImage.Width) >> 1, (PlImg.Height - _SrcImage.Height) >> 1);
+            PbImg.Location = new Point((PlImg.Width - PbImg.Width) >> 1, (PlImg.Height - PbImg.Height) >> 1);
         }
 
         private void PbImg_MouseMove(object sender, MouseEventArgs e)

@@ -395,11 +395,6 @@ namespace Me.Amon.Model
                 return false;
             }
 
-            if (Key == null)
-            {
-                Key = new Key();
-            }
-
             string[] list = data.Replace("\\;", "\b").Split(';');
             if (list == null || list.Length < AAtt.HEAD_SIZE)
             {
@@ -407,7 +402,14 @@ namespace Me.Amon.Model
             }
 
             Clear();
-            Key.SetDefault();
+            if (Key == null)
+            {
+                Key = new Key();
+            }
+            else
+            {
+                Key.SetDefault();
+            }
 
             foreach (string tmp in list)
             {
@@ -435,16 +437,67 @@ namespace Me.Amon.Model
 
         public bool ExportAsTxt(StringBuilder buffer)
         {
+            if (buffer == null)
+            {
+                return false;
+            }
+
+            foreach (AAtt att in _AttList)
+            {
+                att.ExportAsTxt(buffer);
+            }
             return true;
         }
 
-        public bool ImportByXml(string xml)
+        public bool ImportByXml(XmlReader reader)
         {
+            if (reader == null)
+            {
+                return false;
+            }
+
+            if (!reader.ReadToDescendant("att"))
+            {
+                return false;
+            }
+
+            Clear();
+            if (Key == null)
+            {
+                Key = new Key();
+            }
+            else
+            {
+                Key.SetDefault();
+            }
+
+            do
+            {
+                int type = reader.ReadContentAsInt();
+                AAtt item = AAtt.GetInstance(type);
+                if (item != null)
+                {
+                    item.ImportByXml(reader);
+                    _AttList.Add(item);
+                }
+            } while (reader.ReadToNextSibling("att"));
+
             return true;
         }
 
         public bool ExportAsXml(XmlWriter writer)
         {
+            if (writer == null)
+            {
+                return false;
+            }
+
+            foreach (AAtt att in _AttList)
+            {
+                writer.WriteStartElement("att");
+                att.ExportAsXml(writer);
+                writer.WriteEndElement();
+            }
             return true;
         }
         #endregion

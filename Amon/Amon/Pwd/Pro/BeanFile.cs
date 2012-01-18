@@ -9,20 +9,25 @@ namespace Me.Amon.Pwd.Pro
         private AAtt _Att;
         private TextBox _Ctl;
 
+        #region 构造函数
         public BeanFile()
         {
             InitializeComponent();
+        }
 
+        public void InitOnce(DataModel dataModel)
+        {
             this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
             this.TbData.GotFocus += new EventHandler(TbData_GotFocus);
         }
+        #endregion
 
         #region 接口实现
         public Control Control { get { return this; } }
 
         public string Title { get { return "文件"; } }
 
-        public bool ShowData(DataModel dataModel, AAtt att)
+        public bool ShowData(AAtt att)
         {
             _Att = att;
 
@@ -77,6 +82,16 @@ namespace Me.Amon.Pwd.Pro
         }
 
         private void BtOpen_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiPwdViewer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MiSysViewer_Click(object sender, EventArgs e)
         {
 
         }

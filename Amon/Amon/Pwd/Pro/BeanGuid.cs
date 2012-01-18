@@ -8,10 +8,16 @@ namespace Me.Amon.Pwd.Pro
     public partial class BeanGuid : UserControl, IAttEdit
     {
         private AAtt _Att;
+        private DataModel _DataModel;
 
         public BeanGuid()
         {
             InitializeComponent();
+        }
+
+        public void InitOnce(DataModel dataModel)
+        {
+            _DataModel = dataModel;
         }
 
         #region 接口实现
@@ -19,14 +25,14 @@ namespace Me.Amon.Pwd.Pro
 
         public string Title { get { return "向导"; } }
 
-        public bool ShowData(DataModel dataModel, AAtt att)
+        public bool ShowData(AAtt att)
         {
-            if ((dataModel.LibModified & IEnv.KEY_APWD) > 0)
+            if ((_DataModel.LibModified & IEnv.KEY_APWD) > 0)
             {
-                CbName.DataSource = dataModel.LibList;
+                CbName.DataSource = _DataModel.LibList;
                 CbName.DisplayMember = "Name";
                 CbName.ValueMember = "Id";
-                dataModel.LibModified &= IEnv.KEY_APWD;
+                _DataModel.LibModified &= IEnv.KEY_APWD;
             }
             _Att = att;
             return true;

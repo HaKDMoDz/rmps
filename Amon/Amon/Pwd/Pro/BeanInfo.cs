@@ -5,17 +5,23 @@ namespace Me.Amon.Pwd.Pro
 {
     public partial class BeanInfo : UserControl, IAttEdit
     {
+        #region 构造函数
         public BeanInfo()
         {
             InitializeComponent();
         }
+
+        public void InitOnce(DataModel dataModel)
+        {
+        }
+        #endregion
 
         #region 接口实现
         public Control Control { get { return this; } }
 
         public string Title { get { return "提示"; } }
 
-        public bool ShowData(DataModel dataModel, AAtt att)
+        public bool ShowData(AAtt att)
         {
             return true;
         }

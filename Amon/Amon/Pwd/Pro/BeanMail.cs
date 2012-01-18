@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Forms;
 using Me.Amon.Model;
+using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.Pro
 {
@@ -10,20 +11,25 @@ namespace Me.Amon.Pwd.Pro
         private AAtt _Att;
         private TextBox _Ctl;
 
+        #region 构造函数
         public BeanMail()
         {
             InitializeComponent();
+        }
 
+        public void InitOnce(DataModel dataModel)
+        {
             this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
             this.TbData.GotFocus += new EventHandler(TbData_GotFocus);
         }
+        #endregion
 
         #region 接口实现
         public Control Control { get { return this; } }
 
         public string Title { get { return "邮件"; } }
 
-        public bool ShowData(DataModel dataModel, AAtt att)
+        public bool ShowData(AAtt att)
         {
             _Att = att;
 
@@ -47,14 +53,22 @@ namespace Me.Amon.Pwd.Pro
                 return;
             }
 
+            string mail = TbData.Text.Trim();
+            if (!string.IsNullOrEmpty(mail) && !CharUtil.IsValidateMail(mail))
+            {
+                MessageBox.Show("无效的邮件地址！");
+                TbData.Focus();
+                return;
+            }
+
             if (TbName.Text != _Att.Name)
             {
                 _Att.Name = TbName.Text;
                 _Att.Modified = true;
             }
-            if (TbData.Text != _Att.Data)
+            if (mail != _Att.Data)
             {
-                _Att.Data = TbData.Text;
+                _Att.Data = mail;
                 _Att.Modified = true;
             }
         }
@@ -74,9 +88,21 @@ namespace Me.Amon.Pwd.Pro
 
         private void BtSend_Click(object sender, EventArgs e)
         {
+            string mail = TbData.Text.Trim();
+            if (string.IsNullOrEmpty(mail))
+            {
+                return;
+            }
+            if (!CharUtil.IsValidateMail(mail))
+            {
+                MessageBox.Show("无效的邮件地址！");
+                TbData.Focus();
+                return;
+            }
+
             try
             {
-                Process.Start("mailto:" + TbData.Text);
+                Process.Start("mailto:" + mail);
             }
             catch (Exception exp)
             {

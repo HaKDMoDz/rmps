@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Windows.Forms;
+using Me.Amon.Properties;
 using Me.Amon.User;
 
 namespace Me.Amon
@@ -17,8 +18,20 @@ namespace Me.Amon
 
         public void Init()
         {
-            _ScreenW = Screen.PrimaryScreen.Bounds.Width;
-            _ScreenH = Screen.PrimaryScreen.Bounds.Height;
+            _ScreenW = SystemInformation.WorkingArea.Width;
+            _ScreenH = SystemInformation.WorkingArea.Height;
+
+            int x = Settings.Default.LocX;
+            if (x < 0)
+            {
+                x = _ScreenW >> 1;
+            }
+            int y = Settings.Default.LocY;
+            if (y < 0)
+            {
+                y = 0;
+            }
+            Location = new Point(x, y);
 
             ChangeStyle('r');
 
@@ -85,7 +98,7 @@ namespace Me.Amon
 
             if (style == 'l')
             {
-                _SrcImage = Image.FromFile("Skin\\Default\\eyel.png");
+                _SrcImage = Image.FromFile("Skin\\Feel\\Default\\eyel.png");
 
                 _AlienRadius = 14;
                 _AlienCenterX = 26;
@@ -121,7 +134,7 @@ namespace Me.Amon
             }
             else
             {
-                _SrcImage = Image.FromFile("Skin\\Default\\eyer.png");
+                _SrcImage = Image.FromFile("Skin\\Feel\\Default\\eyer.png");
 
                 _AlienRadius = 10;
                 _AlienCenterX = 14;
@@ -311,6 +324,9 @@ namespace Me.Amon
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Settings.Default.LocX = Location.X;
+            Settings.Default.LocY = Location.Y;
+            Settings.Default.Save();
             //HOOK.StopHook();
         }
         #endregion
@@ -336,7 +352,7 @@ namespace Me.Amon
             ShowASec();
         }
 
-        private void MIExit_Click(object sender, EventArgs e)
+        private void MiExit_Click(object sender, EventArgs e)
         {
             Close();
         }

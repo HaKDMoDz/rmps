@@ -6,6 +6,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Xml;
 using Me.Amon.Da;
 using Me.Amon.Event;
 using Me.Amon.Model;
@@ -202,16 +203,19 @@ namespace Me.Amon.Pwd
                 Key key = LbKeyList.Items[e.Index] as Key;
                 if (key != null)
                 {
-                    e.Graphics.DrawImage(key.Icon, 0, 0);
+                    e.Graphics.DrawImage(key.Icon, e.Bounds.X, e.Bounds.Y);
 
                     //最后把要显示的文字画在背景图片上
                     e.Graphics.DrawString(key.Title, this.Font, Brushes.Black, e.Bounds.X + 36, e.Bounds.Y);
 
-                    e.Graphics.DrawString(key.VisitDate, this.Font, Brushes.Gray, e.Bounds.X + 36, e.Bounds.Height - 14);
+                    int y = e.Bounds.Y + e.Bounds.Height;
+                    e.Graphics.DrawString(key.VisitDate, this.Font, Brushes.Gray, e.Bounds.X + 36, y - 14);
 
-                    e.Graphics.DrawImage(key.Hint, e.Bounds.Width - 48, e.Bounds.Height - 16);
-                    e.Graphics.DrawImage(_ViewModel.LabelImages[key.Label], e.Bounds.Width - 32, e.Bounds.Height - 16);
-                    e.Graphics.DrawImage(_ViewModel.MajorImages[key.Major + 2], e.Bounds.Width - 16, e.Bounds.Height - 16);
+                    int x = e.Bounds.X + e.Bounds.Width;
+                    y -= 16;
+                    e.Graphics.DrawImage(key.Hint, x - 48, y);
+                    e.Graphics.DrawImage(_ViewModel.LabelImages[key.Label], x - 32, y);
+                    e.Graphics.DrawImage(_ViewModel.MajorImages[key.Major + 2], x - 16, y);
                 }
             }
         }
@@ -766,7 +770,6 @@ namespace Me.Amon.Pwd
 
         private void TmiBackup_Click(object sender, EventArgs e)
         {
-
         }
 
         private void TmiResuma_Click(object sender, EventArgs e)
@@ -777,26 +780,175 @@ namespace Me.Amon.Pwd
         #region 数据导出
         private void TmiExportTxt_Click(object sender, EventArgs e)
         {
-
         }
 
         private void TmiExportXml_Click(object sender, EventArgs e)
         {
+            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            {
+                if (DialogResult.Yes == MessageBox.Show("当前记录已被修改，要保存吗？"))
+                {
+                    return;
+                }
+            }
 
+            SaveFileDialog fd = new SaveFileDialog();
+            fd.Filter = "文件|*.apxml";
+            if (DialogResult.OK != fd.ShowDialog(this))
+            {
+                return;
+            }
+            string file = fd.FileName;
+            if (string.IsNullOrEmpty(file))
+            {
+                return;
+            }
+
+            using (XmlWriter writer = XmlWriter.Create(new StreamWriter(file, false)))
+            {
+                writer.WriteStartElement("Amon");
+                writer.WriteElementString("Version", "1");
+                writer.WriteStartElement("Keys");
+                _SafeModel.ExportAsXml(writer);
+                writer.WriteEndElement();
+                writer.WriteEndElement();
+            }
         }
         #endregion
 
         #region 数据导入
         private void TmiImportTxt_Click(object sender, EventArgs e)
         {
+            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            {
+                if (DialogResult.Yes == MessageBox.Show("当前记录已被修改，要保存吗？"))
+                {
+                    return;
+                }
+            }
 
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Filter = "文件|*.aptxt";
+            if (DialogResult.OK != fd.ShowDialog(this))
+            {
+                return;
+            }
+            string file = fd.FileName;
+            if (string.IsNullOrEmpty(file) || !File.Exists(file))
+            {
+                return;
+            }
+
+            using (StreamReader reader = File.OpenText(file))
+            {
+                // 版本判断
+                string ver = reader.ReadLine();
+                if ("1" != ver)
+                {
+                    MessageBox.Show("未知的文件版本，无法进行导入处理！");
+                    return;
+                }
+
+                string line = reader.ReadLine();
+                while (line != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(line))
+                    {
+                        _SafeModel.ImportByTxt(line);
+                        UpdateKey();
+                    }
+                    line = reader.ReadLine();
+                }
+            }
         }
 
         private void TmiImportXml_Click(object sender, EventArgs e)
         {
+            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            {
+                if (DialogResult.Yes == MessageBox.Show("当前记录已被修改，要保存吗？"))
+                {
+                    return;
+                }
+            }
 
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Filter = "文件|*.apxml";
+            if (DialogResult.OK != fd.ShowDialog(this))
+            {
+                return;
+            }
+            string file = fd.FileName;
+            if (string.IsNullOrEmpty(file) || !File.Exists(file))
+            {
+                return;
+            }
+
+            using (XmlReader reader = XmlReader.Create(File.OpenText(file)))
+            {
+                if (!reader.ReadToFollowing("version"))
+                {
+                    MessageBox.Show("未知的文件版本，无法进行导入处理！");
+                    return;
+                }
+                if (reader.Value != "1")
+                {
+                    MessageBox.Show("未知的文件版本，无法进行导入处理！");
+                    return;
+                }
+                while (reader.ReadToFollowing("key"))
+                {
+                    _SafeModel.ImportByXml(reader);
+                }
+            }
         }
         #endregion
+
+        private void TmiImportOld_Click(object sender, EventArgs e)
+        {
+            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            {
+                if (DialogResult.Yes == MessageBox.Show("当前记录已被修改，要保存吗？"))
+                {
+                    return;
+                }
+            }
+
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Filter = "所有文件|*.*";
+            if (DialogResult.OK != fd.ShowDialog(this))
+            {
+                return;
+            }
+            string file = fd.FileName;
+            if (string.IsNullOrEmpty(file) || !File.Exists(file))
+            {
+                return;
+            }
+
+            using (StreamReader reader = File.OpenText(file))
+            {
+                // 版本判断
+                string ver = reader.ReadLine();
+                if ("2" != ver)
+                {
+                    MessageBox.Show("未知的文件版本，无法进行导入处理！");
+                    return;
+                }
+
+                string line = reader.ReadLine();
+                while (line != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(line))
+                    {
+                        _SafeModel.ImportByTxt(line);
+                        UpdateKey();
+                    }
+                    line = reader.ReadLine();
+                }
+            }
+        }
+
         #endregion
 
         #region 用户菜单
@@ -1587,6 +1739,66 @@ namespace Me.Amon.Pwd
 
         private void DeleteKey()
         {
+        }
+
+        private void ImportKey()
+        {
+            _SafeModel.Encode();
+
+            _SafeModel.Key.Id = HashUtil.GetCurrTimeHex(false);
+            _SafeModel.Key.VisitDate = _SafeModel.Key.RegDate;
+
+            DBAccess dba = _UserModel.DBAccess;
+
+            #region 口令信息
+            dba.ReInit();
+            dba.AddTable(IDat.APWD0100);
+            dba.AddParam(IDat.APWD0101, 0);
+            dba.AddParam(IDat.APWD0102, 0);
+            dba.AddParam(IDat.APWD0103, 0);
+            dba.AddParam(IDat.APWD0104, _UserModel.Code);
+            dba.AddParam(IDat.APWD0105, _SafeModel.Key.Id);
+            dba.AddParam(IDat.APWD0106, _SafeModel.Key.CatId);
+            dba.AddParam(IDat.APWD0107, _SafeModel.Key.RegDate);
+            dba.AddParam(IDat.APWD0108, _SafeModel.Key.LibId);
+            dba.AddParam(IDat.APWD0109, _SafeModel.Key.Title);
+            dba.AddParam(IDat.APWD010A, _SafeModel.Key.MetaKey);
+            dba.AddParam(IDat.APWD010B, _SafeModel.Key.IcoName);
+            dba.AddParam(IDat.APWD010C, _SafeModel.Key.IcoPath);
+            dba.AddParam(IDat.APWD010D, _SafeModel.Key.IcoMemo);
+            dba.AddParam(IDat.APWD010E, _SafeModel.Key.GtdId);
+            dba.AddParam(IDat.APWD010F, _SafeModel.Key.GtdMemo);
+            dba.AddParam(IDat.APWD0110, _SafeModel.Key.Memo);
+            dba.AddParam(IDat.APWD0111, _SafeModel.Key.VisitDate);
+            dba.AddParam(IDat.APWD0112, "1");
+            dba.AddParam(IDat.APWD0113, IDat.VCS_DEFAULT);
+            dba.AddParam(IDat.APWD0114, IDat.OPT_INSERT);
+            dba.AddInsertBatch();
+            #endregion
+
+            #region 口令内容
+            int i = 0;
+            int j = 0;
+            while (j < _SafeModel.Key.Password.Length)
+            {
+                dba.ReInit();
+                dba.AddTable(IDat.APWD0200);
+                dba.AddParam(IDat.APWD0201, i++);
+                dba.AddParam(IDat.APWD0203, _SafeModel.Key.Id);
+                if (_SafeModel.Key.Password.Length - j > IDat.APWD0204_SIZE)
+                {
+                    dba.AddParam(IDat.APWD0204, _SafeModel.Key.Password.Substring(j, IDat.APWD0204_SIZE));
+                }
+                else
+                {
+                    dba.AddParam(IDat.APWD0204, _SafeModel.Key.Password.Substring(j));
+                }
+                dba.AddInsertBatch();
+                j += IDat.APWD0204_SIZE;
+            }
+            #endregion
+
+            dba.ExecuteBatch();
         }
 
         public void ListKey(string catId)

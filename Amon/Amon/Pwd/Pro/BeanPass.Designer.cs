@@ -38,27 +38,13 @@
             this.BtOpt = new System.Windows.Forms.Button();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MuCharLen = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiCharLen0 = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiCharLenDef = new System.Windows.Forms.ToolStripMenuItem();
             this.MiCharLenSep0 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiCharLen1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiCharLen2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiCharLen3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiCharLen4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiCharLen5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiCharLen6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiCharLenDiy = new System.Windows.Forms.ToolStripMenuItem();
             this.MiCharLenSep1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.MuCharSet = new System.Windows.Forms.ToolStripMenuItem();
             this.MiCharSet0 = new System.Windows.Forms.ToolStripMenuItem();
             this.MiCharSetSep0 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiCharSet1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiCharSet3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiCharSet2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiCharSet4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiCharSet5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiCharSet6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiCharSetSep1 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiCharSetO = new System.Windows.Forms.ToolStripMenuItem();
             this.MiRepeatable = new System.Windows.Forms.ToolStripMenuItem();
             this.CmMenu.SuspendLayout();
             this.SuspendLayout();
@@ -140,97 +126,41 @@
             // MuCharLen
             // 
             this.MuCharLen.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MiCharLen0,
+            this.MiCharLenDef,
             this.MiCharLenSep0,
-            this.MiCharLen1,
-            this.MiCharLen2,
-            this.MiCharLen3,
-            this.MiCharLen4,
-            this.MiCharLen5,
-            this.MiCharLen6,
             this.MiCharLenSep1,
-            this.toolStripTextBox1});
+            this.MiCharLenDiy});
             this.MuCharLen.Name = "MuCharLen";
             this.MuCharLen.Size = new System.Drawing.Size(164, 22);
             this.MuCharLen.Text = "口令长度(&L)";
             // 
-            // MiCharLen0
+            // MiCharLenDef
             // 
-            this.MiCharLen0.Name = "MiCharLen0";
-            this.MiCharLen0.Size = new System.Drawing.Size(160, 22);
-            this.MiCharLen0.Text = "默认(&D)";
-            this.MiCharLen0.Click += new System.EventHandler(this.MiCharLen_Click);
+            this.MiCharLenDef.Name = "MiCharLenDef";
+            this.MiCharLenDef.Size = new System.Drawing.Size(152, 22);
+            this.MiCharLenDef.Text = "默认(&D)";
             // 
             // MiCharLenSep0
             // 
             this.MiCharLenSep0.Name = "MiCharLenSep0";
-            this.MiCharLenSep0.Size = new System.Drawing.Size(157, 6);
+            this.MiCharLenSep0.Size = new System.Drawing.Size(149, 6);
             // 
-            // MiCharLen1
+            // MiCharLenDiy
             // 
-            this.MiCharLen1.Name = "MiCharLen1";
-            this.MiCharLen1.Size = new System.Drawing.Size(160, 22);
-            this.MiCharLen1.Text = "6位";
-            this.MiCharLen1.Click += new System.EventHandler(this.MiCharLen_Click);
-            // 
-            // MiCharLen2
-            // 
-            this.MiCharLen2.Name = "MiCharLen2";
-            this.MiCharLen2.Size = new System.Drawing.Size(160, 22);
-            this.MiCharLen2.Text = "8位";
-            this.MiCharLen2.Click += new System.EventHandler(this.MiCharLen_Click);
-            // 
-            // MiCharLen3
-            // 
-            this.MiCharLen3.Name = "MiCharLen3";
-            this.MiCharLen3.Size = new System.Drawing.Size(160, 22);
-            this.MiCharLen3.Text = "10位";
-            this.MiCharLen3.Click += new System.EventHandler(this.MiCharLen_Click);
-            // 
-            // MiCharLen4
-            // 
-            this.MiCharLen4.Name = "MiCharLen4";
-            this.MiCharLen4.Size = new System.Drawing.Size(160, 22);
-            this.MiCharLen4.Text = "12位";
-            this.MiCharLen4.Click += new System.EventHandler(this.MiCharLen_Click);
-            // 
-            // MiCharLen5
-            // 
-            this.MiCharLen5.Name = "MiCharLen5";
-            this.MiCharLen5.Size = new System.Drawing.Size(160, 22);
-            this.MiCharLen5.Text = "16位";
-            this.MiCharLen5.Click += new System.EventHandler(this.MiCharLen_Click);
-            // 
-            // MiCharLen6
-            // 
-            this.MiCharLen6.Name = "MiCharLen6";
-            this.MiCharLen6.Size = new System.Drawing.Size(160, 22);
-            this.MiCharLen6.Text = "32位";
-            this.MiCharLen6.Click += new System.EventHandler(this.MiCharLen_Click);
+            this.MiCharLenDiy.Name = "MiCharLenDiy";
+            this.MiCharLenDiy.Size = new System.Drawing.Size(152, 22);
+            this.MiCharLenDiy.Text = "32位";
             // 
             // MiCharLenSep1
             // 
             this.MiCharLenSep1.Name = "MiCharLenSep1";
-            this.MiCharLenSep1.Size = new System.Drawing.Size(157, 6);
-            // 
-            // toolStripTextBox1
-            // 
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 23);
+            this.MiCharLenSep1.Size = new System.Drawing.Size(149, 6);
             // 
             // MuCharSet
             // 
             this.MuCharSet.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MiCharSet0,
-            this.MiCharSetSep0,
-            this.MiCharSet1,
-            this.MiCharSet2,
-            this.MiCharSet3,
-            this.MiCharSet4,
-            this.MiCharSet5,
-            this.MiCharSet6,
-            this.MiCharSetSep1,
-            this.MiCharSetO});
+            this.MiCharSetSep0});
             this.MuCharSet.Name = "MuCharSet";
             this.MuCharSet.Size = new System.Drawing.Size(164, 22);
             this.MuCharSet.Text = "字符空间(&C)";
@@ -246,60 +176,6 @@
             // 
             this.MiCharSetSep0.Name = "MiCharSetSep0";
             this.MiCharSetSep0.Size = new System.Drawing.Size(157, 6);
-            // 
-            // MiCharSet1
-            // 
-            this.MiCharSet1.Name = "MiCharSet1";
-            this.MiCharSet1.Size = new System.Drawing.Size(160, 22);
-            this.MiCharSet1.Text = "数字";
-            this.MiCharSet1.Click += new System.EventHandler(this.MiCharSet_Click);
-            // 
-            // MiCharSet2
-            // 
-            this.MiCharSet2.Name = "MiCharSet2";
-            this.MiCharSet2.Size = new System.Drawing.Size(160, 22);
-            this.MiCharSet2.Text = "大写字母";
-            this.MiCharSet2.Click += new System.EventHandler(this.MiCharSet_Click);
-            // 
-            // MiCharSet3
-            // 
-            this.MiCharSet3.Name = "MiCharSet3";
-            this.MiCharSet3.Size = new System.Drawing.Size(160, 22);
-            this.MiCharSet3.Text = "小写字母";
-            this.MiCharSet3.Click += new System.EventHandler(this.MiCharSet_Click);
-            // 
-            // MiCharSet4
-            // 
-            this.MiCharSet4.Name = "MiCharSet4";
-            this.MiCharSet4.Size = new System.Drawing.Size(160, 22);
-            this.MiCharSet4.Text = "大小写字母";
-            this.MiCharSet4.Click += new System.EventHandler(this.MiCharSet_Click);
-            // 
-            // MiCharSet5
-            // 
-            this.MiCharSet5.Name = "MiCharSet5";
-            this.MiCharSet5.Size = new System.Drawing.Size(160, 22);
-            this.MiCharSet5.Text = "字母及数字";
-            this.MiCharSet5.Click += new System.EventHandler(this.MiCharSet_Click);
-            // 
-            // MiCharSet6
-            // 
-            this.MiCharSet6.Name = "MiCharSet6";
-            this.MiCharSet6.Size = new System.Drawing.Size(160, 22);
-            this.MiCharSet6.Text = "键盘可输入字符";
-            this.MiCharSet6.Click += new System.EventHandler(this.MiCharSet_Click);
-            // 
-            // MiCharSetSep1
-            // 
-            this.MiCharSetSep1.Name = "MiCharSetSep1";
-            this.MiCharSetSep1.Size = new System.Drawing.Size(157, 6);
-            // 
-            // MiCharSetO
-            // 
-            this.MiCharSetO.Name = "MiCharSetO";
-            this.MiCharSetO.Size = new System.Drawing.Size(160, 22);
-            this.MiCharSetO.Text = "其它…(&O)";
-            this.MiCharSetO.Click += new System.EventHandler(this.MiCharSet_Click);
             // 
             // MiRepeatable
             // 
@@ -338,27 +214,13 @@
         private System.Windows.Forms.Button BtOpt;
         private System.Windows.Forms.ContextMenuStrip CmMenu;
         private System.Windows.Forms.ToolStripMenuItem MuCharLen;
-        private System.Windows.Forms.ToolStripMenuItem MiCharLen0;
+        private System.Windows.Forms.ToolStripMenuItem MiCharLenDef;
         private System.Windows.Forms.ToolStripSeparator MiCharLenSep0;
-        private System.Windows.Forms.ToolStripMenuItem MiCharLen1;
-        private System.Windows.Forms.ToolStripMenuItem MiCharLen2;
-        private System.Windows.Forms.ToolStripMenuItem MiCharLen3;
-        private System.Windows.Forms.ToolStripMenuItem MiCharLen4;
-        private System.Windows.Forms.ToolStripMenuItem MiCharLen5;
-        private System.Windows.Forms.ToolStripMenuItem MiCharLen6;
+        private System.Windows.Forms.ToolStripMenuItem MiCharLenDiy;
         private System.Windows.Forms.ToolStripSeparator MiCharLenSep1;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
         private System.Windows.Forms.ToolStripMenuItem MuCharSet;
         private System.Windows.Forms.ToolStripMenuItem MiCharSet0;
         private System.Windows.Forms.ToolStripSeparator MiCharSetSep0;
-        private System.Windows.Forms.ToolStripMenuItem MiCharSet1;
-        private System.Windows.Forms.ToolStripMenuItem MiCharSet3;
-        private System.Windows.Forms.ToolStripMenuItem MiCharSet2;
-        private System.Windows.Forms.ToolStripMenuItem MiCharSet4;
-        private System.Windows.Forms.ToolStripMenuItem MiCharSet5;
-        private System.Windows.Forms.ToolStripMenuItem MiCharSet6;
-        private System.Windows.Forms.ToolStripSeparator MiCharSetSep1;
-        private System.Windows.Forms.ToolStripMenuItem MiCharSetO;
         private System.Windows.Forms.ToolStripMenuItem MiRepeatable;
     }
 }

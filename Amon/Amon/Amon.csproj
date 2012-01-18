@@ -735,6 +735,7 @@
     <EmbeddedResource Include="Uw\TxtEditor.resx">
       <DependentUpon>TxtEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

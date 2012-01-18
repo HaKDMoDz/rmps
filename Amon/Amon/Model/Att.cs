@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 using System.Xml;
 using Me.Amon.Model.Att;
 
@@ -32,7 +31,7 @@ namespace Me.Amon.Model
         /// <summary>
         /// 专有内容
         /// </summary>
-        protected List<string> _Spec;
+        protected string[] _Spec;
         #endregion
 
         #region 构造函数
@@ -135,22 +134,13 @@ namespace Me.Amon.Model
 
         #region 附加信息
         /// <summary>
-        /// 追加附加信息
-        /// </summary>
-        /// <param name="spec"></param>
-        public void AddSpec(string spec)
-        {
-            this._Spec.Add(spec);
-        }
-
-        /// <summary>
         /// 读取附加信息
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
         public string GetSpec(int index)
         {
-            return (index > -1 && index < _Spec.Count) ? _Spec[index] : null;
+            return (index > -1 && index < _Spec.Length) ? _Spec[index] : null;
         }
 
         /// <summary>
@@ -161,7 +151,7 @@ namespace Me.Amon.Model
         /// <returns></returns>
         public string GetSpec(int index, string defValue)
         {
-            if (index > -1 && index < _Spec.Count)
+            if (index > -1 && index < _Spec.Length)
             {
                 string temp = _Spec[index];
                 return temp != null ? temp : defValue;
@@ -176,13 +166,9 @@ namespace Me.Amon.Model
         /// <param name="spec"></param>
         public void SetSpec(int index, string spec)
         {
-            if (index == this._Spec.Count)
+            if (index > -1 && index < _Spec.Length)
             {
-                this._Spec.Add(spec);
-            }
-            else
-            {
-                this._Spec[index] = spec;
+                _Spec[index] = spec;
             }
         }
 
@@ -193,13 +179,13 @@ namespace Me.Amon.Model
         /// <returns></returns>
         public string EncodeSpec(char c)
         {
-            if (_Spec == null || _Spec.Count < 1)
+            if (_Spec == null || _Spec.Length < 1)
             {
                 return "";
             }
 
             StringBuilder text = new StringBuilder();
-            for (int i = 0, j = _Spec.Count; i < j; i += 1)
+            for (int i = 0, j = _Spec.Length; i < j; i += 1)
             {
                 text.Append(c).Append(_Spec[i]);
             }
@@ -218,15 +204,16 @@ namespace Me.Amon.Model
                 return;
             }
 
-            _Spec.Clear();
-
-            int s = 0;
-            int e = text.IndexOf(c, s);
-            while (e >= s)
+            string[] tmp = text.Split(c);
+            int j = tmp.Length;
+            if (j > _Spec.Length)
             {
-                _Spec.Add(text.Substring(s, e - s));
-                s = e + 1;
-                e = text.IndexOf(c, s);
+                j = _Spec.Length;
+            }
+            while (j > 0)
+            {
+                j -= 1;
+                _Spec[j] = tmp[j];
             }
         }
         #endregion

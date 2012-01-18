@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Model;
+using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.Wiz
 {
@@ -20,12 +21,16 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
         }
 
-        public BeanMail(BeanBody body, TableLayoutPanel grid)
+        public BeanMail(BeanBody body)
         {
             _Body = body;
-            _Grid = grid;
 
             InitializeComponent();
+        }
+
+        public void InitOnce(TableLayoutPanel grid)
+        {
+            _Grid = grid;
 
             _Label = new Label();
             _Label.TextAlign = ContentAlignment.MiddleRight;
@@ -70,22 +75,44 @@ namespace Me.Amon.Pwd.Wiz
                 return false;
             }
 
-            if (TbData.Text != _Att.Data)
+            string mail = TbData.Text.Trim();
+            if (mail.Length > 0 && !CharUtil.IsValidateMail(mail))
             {
-                _Att.Data = TbData.Text;
+                MessageBox.Show("无效的邮件地址！");
+                TbData.Focus();
+                return false;
+            }
+
+            if (mail != _Att.Data)
+            {
+                _Att.Data = mail;
                 _Att.Modified = true;
             }
             return true;
         }
         #endregion
 
+        #region 事件处理
         private void TbData_GotFocus(object sender, EventArgs e)
         {
             _Body.EditCtl = this;
         }
 
+        #region 按钮事件
         private void BtSend_Click(object sender, EventArgs e)
         {
+            string mail = TbData.Text.Trim();
+            if (string.IsNullOrEmpty(mail))
+            {
+                return;
+            }
+            if (!CharUtil.IsValidateMail(mail))
+            {
+                MessageBox.Show("无效的邮件地址！");
+                TbData.Focus();
+                return;
+            }
+
             try
             {
                 Process.Start("mailto:" + TbData.Text);
@@ -95,5 +122,7 @@ namespace Me.Amon.Pwd.Wiz
                 MessageBox.Show(exp.Message);
             }
         }
+        #endregion
+        #endregion
     }
 }

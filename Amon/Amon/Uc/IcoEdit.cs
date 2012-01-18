@@ -13,6 +13,7 @@ namespace Me.Amon.Uc
     public partial class IcoEdit : Form
     {
         private UserModel _UserModel;
+        private DataModel _DataModel;
         private DirEdit _DirEdit;
         private IcoView _IcoView;
         private Control _Control;
@@ -29,14 +30,13 @@ namespace Me.Amon.Uc
             InitializeComponent();
         }
 
-        public string DefaultPath { get; set; }
         public string CurrentPath { get; set; }
         public ListViewItem SelectedItem { get; set; }
 
         public void Init(DataModel dataModel)
         {
-            DefaultPath = IEnv.DATA_DIR + Path.DirectorySeparatorChar + _UserModel.Code + Path.DirectorySeparatorChar + "key";
-            LsDir.Items.Add(new Item { K = "0", V = "默认目录" });
+            _DataModel = dataModel;
+            LsDir.Items.Add(new Dir { Id = "0", Name = "默认分类", Tips = "默认分类" });
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
@@ -52,7 +52,12 @@ namespace Me.Amon.Uc
             {
                 foreach (DataRow row in dt.Rows)
                 {
-                    LsDir.Items.Add(new Dir { Id = row[IDat.AICO0103] as string, Name = row[IDat.AICO0104] as string, Tips = row[IDat.AICO0105] as string, Memo = row[IDat.AICO0107] as string });
+                    Dir item = new Dir();
+                    item.Id = row[IDat.AICO0103] as string;
+                    item.Name = row[IDat.AICO0104] as string;
+                    item.Tips = row[IDat.AICO0105] as string;
+                    item.Memo = row[IDat.AICO0107] as string;
+                    LsDir.Items.Add(item);
                 }
             }
 
@@ -72,10 +77,10 @@ namespace Me.Amon.Uc
                 return;
             }
 
-            CurrentPath = DefaultPath;
-            if (CharUtil.IsValidate(item.Id))
+            CurrentPath = _DataModel.KeyDir;
+            if (CharUtil.IsValidateHash(item.Id))
             {
-                CurrentPath += Path.DirectorySeparatorChar + item.Id;
+                CurrentPath += item.Id + Path.DirectorySeparatorChar;
             }
             if (!Directory.Exists(CurrentPath))
             {
@@ -203,7 +208,7 @@ namespace Me.Amon.Uc
                 dba.AddParam(IDat.AICO0109, IDat.OPT_INSERT);
                 dba.ExecuteInsert();
 
-                Directory.CreateDirectory(DefaultPath + Path.DirectorySeparatorChar + item.Id);
+                Directory.CreateDirectory(_DataModel.KeyDir + item.Id);
                 LsDir.Items.Add(item);
                 LsDir.SelectedItem = item;
             }

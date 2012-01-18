@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Me.Amon.Model;
 
@@ -10,20 +11,25 @@ namespace Me.Amon.Pwd.Pro
         private AAtt _Att;
         private TextBox _Ctl;
 
+        #region 构造函数
         public BeanLink()
         {
             InitializeComponent();
+        }
 
+        public void InitOnce(DataModel dataModel)
+        {
             this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
             this.TbData.GotFocus += new EventHandler(TbData_GotFocus);
         }
+        #endregion
 
         #region 接口实现
         public Control Control { get { return this; } }
 
         public string Title { get { return "链接"; } }
 
-        public bool ShowData(DataModel dataModel, AAtt att)
+        public bool ShowData(AAtt att)
         {
             _Att = att;
 
@@ -74,9 +80,20 @@ namespace Me.Amon.Pwd.Pro
 
         private void BtOpen_Click(object sender, EventArgs e)
         {
+            string link = TbData.Text.Trim();
+            if (string.IsNullOrEmpty(link))
+            {
+                return;
+            }
+
+            if (!Regex.IsMatch(link, "^\\w+://.+", RegexOptions.IgnoreCase))
+            {
+                link = "http://" + link;
+            }
+
             try
             {
-                Process.Start(TbData.Text);
+                Process.Start(link);
             }
             catch (Exception exp)
             {

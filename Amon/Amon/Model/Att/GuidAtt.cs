@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 using System.Xml;
 using Me.Amon.Util;
 
@@ -72,15 +71,11 @@ namespace Me.Amon.Model.Att
         {
             if (_Spec == null)
             {
-                this._Spec = new List<string>(2);
-            }
-            else
-            {
-                _Spec.Clear();
+                _Spec = new string[2];
             }
 
-            _Spec.Add(SPEC_VALUE_FAIL);
-            _Spec.Add(SPEC_VALUE_NONE);
+            _Spec[0] = SPEC_VALUE_FAIL;
+            _Spec[1] = SPEC_VALUE_NONE;
         }
         #endregion
 

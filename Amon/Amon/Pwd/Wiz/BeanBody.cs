@@ -47,6 +47,9 @@ namespace Me.Amon.Pwd.Wiz
 
         public void ShowData()
         {
+            SuspendLayout();
+            TpGrid.SuspendLayout();
+
             TpGrid.Controls.Clear();
             TpGrid.RowStyles.Clear();
 
@@ -74,6 +77,9 @@ namespace Me.Amon.Pwd.Wiz
             TpGrid.RowCount = row;
 
             TpGrid.Controls.Add(_DefLabel, 1, row);
+
+            TpGrid.ResumeLayout(true);
+            ResumeLayout(true);
         }
 
         public bool SaveData()
@@ -125,39 +131,40 @@ namespace Me.Amon.Pwd.Wiz
                 switch (type)
                 {
                     case AAtt.TYPE_TEXT:
-                        ctl = new BeanText(this, TpGrid);
+                        ctl = new BeanText(this);
                         break;
                     case AAtt.TYPE_PASS:
-                        ctl = new BeanPass(this, TpGrid);
+                        ctl = new BeanPass(this);
                         break;
                     case AAtt.TYPE_LINK:
-                        ctl = new BeanLink(this, TpGrid);
+                        ctl = new BeanLink(this);
                         break;
                     case AAtt.TYPE_MAIL:
-                        ctl = new BeanMail(this, TpGrid);
+                        ctl = new BeanMail(this);
                         break;
                     case AAtt.TYPE_DATE:
-                        ctl = new BeanDate(this, TpGrid);
+                        ctl = new BeanDate(this);
                         break;
                     case AAtt.TYPE_DATA:
-                        ctl = new BeanData(this, TpGrid);
+                        ctl = new BeanData(this);
                         break;
                     case AAtt.TYPE_LIST:
-                        ctl = new BeanList(this, TpGrid);
+                        ctl = new BeanList(this);
                         break;
                     case AAtt.TYPE_MEMO:
-                        ctl = new BeanMemo(this, TpGrid);
+                        ctl = new BeanMemo(this);
                         break;
                     case AAtt.TYPE_FILE:
-                        ctl = new BeanFile(this, TpGrid);
+                        ctl = new BeanFile(this);
                         break;
                     case AAtt.TYPE_LINE:
-                        ctl = new BeanLine(this, TpGrid);
+                        ctl = new BeanLine(this);
                         break;
                     default:
                         ctl = null;
                         break;
                 }
+                ctl.InitOnce(TpGrid);
                 list.Add(ctl);
             }
             else

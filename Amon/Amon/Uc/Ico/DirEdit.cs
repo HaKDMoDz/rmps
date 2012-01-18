@@ -36,6 +36,7 @@ namespace Me.Amon.Uc.Ico
             _Item = item;
             TbName.Text = _Item.Name;
             TbTips.Text = _Item.Tips;
+            TbMemo.Text = _Item.Memo;
         }
 
         private void BtUpdate_Click(object sender, EventArgs e)

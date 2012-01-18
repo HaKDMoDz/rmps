@@ -19,12 +19,16 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
         }
 
-        public BeanData(BeanBody body, TableLayoutPanel grid)
+        public BeanData(BeanBody body)
         {
             _Body = body;
-            _Grid = grid;
 
             InitializeComponent();
+        }
+
+        public void InitOnce(TableLayoutPanel grid)
+        {
+            _Grid = grid;
 
             _Label = new Label();
             _Label.TextAlign = ContentAlignment.MiddleRight;
@@ -80,6 +84,7 @@ namespace Me.Amon.Pwd.Wiz
         }
         #endregion
 
+        #region 事件处理
         private void TbData_GotFocus(object sender, EventArgs e)
         {
             _Body.EditCtl = this;
@@ -89,5 +94,6 @@ namespace Me.Amon.Pwd.Wiz
         {
 
         }
+        #endregion
     }
 }
