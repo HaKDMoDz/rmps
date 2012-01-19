@@ -2020,6 +2020,7 @@ namespace Me.Amon.Pwd
 
         private void ShowInfo()
         {
+            new Info().ShowDialog(this);
         }
         #endregion
     }
