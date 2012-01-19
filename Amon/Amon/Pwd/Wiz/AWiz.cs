@@ -45,18 +45,38 @@ namespace Me.Amon.Pwd.Wiz
             grid.Controls.Remove(this);
         }
 
-        public void ShowData()
+        public void ShowInfo()
         {
-            ShowInfo();
+            if (_InfoBean == null)
+            {
+                _InfoBean = new BeanInfo();
+                _InfoBean.Init(_DataModel);
+            }
+            if (_LastView != null && _LastView != _InfoBean)
+            {
+                _LastView.HideView(TpGrid);
+                _InfoBean.InitView(TpGrid);
+            }
+
+            _LastView = _InfoBean;
+            _LastView.ShowData();
         }
 
-        public void ShowData(Key key)
+        public void ShowData()
         {
             ShowHead();
         }
 
         public void AppendKey()
         {
+            _SafeModel.Clear();
+            _SafeModel.Key.SetDefault();
+
+            _SafeModel.InitGuid();
+            _SafeModel.InitMeta();
+            _SafeModel.InitLogo();
+            _SafeModel.InitHint();
+
             ShowHead();
             _LastView.Focus();
         }
@@ -128,23 +148,6 @@ namespace Me.Amon.Pwd.Wiz
             {
                 _LastView.CopyData();
             }
-        }
-
-        private void ShowInfo()
-        {
-            if (_InfoBean == null)
-            {
-                _InfoBean = new BeanInfo();
-                _InfoBean.Init(_DataModel);
-            }
-            if (_LastView != null && _LastView != _InfoBean)
-            {
-                _LastView.HideView(TpGrid);
-                _InfoBean.InitView(TpGrid);
-            }
-
-            _LastView = _InfoBean;
-            _LastView.ShowData();
         }
 
         private void ShowHead()

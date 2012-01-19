@@ -1,12 +1,17 @@
 ﻿using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Uc;
-using System.IO;
+using Me.Amon.Uw;
 
 namespace Me.Amon.Util
 {
     public class BeanUtil
     {
+        public static Form Form { get; set; }
+        private static Alert _Alert;
+        private static Input _Input;
+
         public static void Clear(ComboBox cBox)
         {
             if (cBox.Items.Count < 1)
@@ -66,7 +71,20 @@ namespace Me.Amon.Util
 
         public static void ShowAlert(string alert)
         {
-            MessageBox.Show(alert);
+            if (_Alert == null)
+            {
+                _Alert = new Alert();
+            }
+            _Alert.Show(Form, alert);
+        }
+
+        public static void ShowInput(string message, string deftext)
+        {
+            if (_Input == null)
+            {
+                _Input = new Input();
+            }
+            _Input.Show(Form, message, deftext);
         }
 
         public static Image ReadImage(string file, Image defImg)

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Model;
 
@@ -7,11 +9,16 @@ namespace Me.Amon.Pwd.Pro
     public partial class APro : UserControl, IPwd
     {
         private APwd _APwd;
-        private AAtt _AAtt;
         private DataModel _DataModel;
         private SafeModel _SafeModel;
+        private int _LastIndex;
         private bool _UserAction;
+        private AAtt _AAtt;
+        private IAttEdit _CmpLast;
+        private BeanInfo _CmpInfo;
+        private Dictionary<int, IAttEdit> _CmpList;
 
+        #region 构造函数
         public APro()
         {
             InitializeComponent();
@@ -24,9 +31,24 @@ namespace Me.Amon.Pwd.Pro
             _DataModel = dataModel;
 
             GvAttList.AutoGenerateColumns = false;
+            OrderCol.DataPropertyName = "Order";
+            ValueCol.DataPropertyName = "Name";
 
-            AeAttEdit.Init(this, _DataModel);
+            _APwd.ShowTips(BtCopy, "复制属性");
+            _APwd.ShowTips(BtSave, "保存属性");
+            _APwd.ShowTips(BtDrop, "移除属性");
+
+            _CmpInfo = new BeanInfo();
+            _CmpInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            _CmpInfo.Location = new Point(6, 20);
+            _CmpInfo.Size = new Size(347, 84);
+            _CmpInfo.TabIndex = 0;
+            GbGroup.Controls.Add(_CmpInfo);
+            _CmpLast = _CmpInfo;
+
+            _CmpList = new Dictionary<int, IAttEdit>(AAtt.TYPE_SIZE + 2);
         }
+        #endregion
 
         #region 接口实现
         public void InitView(TableLayoutPanel grid)
@@ -41,20 +63,25 @@ namespace Me.Amon.Pwd.Pro
             grid.Controls.Remove(this);
         }
 
-        public void ShowData()
+        public void ShowInfo()
         {
             GvAttList.DataSource = null;
-            AeAttEdit.ShowInfo();
+
+            GbGroup.Controls.Remove(_CmpLast.Control);
+
+            GbGroup.Text = _CmpInfo.Title;
+            GbGroup.Controls.Add(_CmpInfo);
+            _CmpInfo.ShowData(null);
+
+            _CmpLast = _CmpInfo;
         }
 
-        public void ShowData(Key key)
+        public void ShowData()
         {
             GvAttList.DataSource = null;
 
             _UserAction = false;
             _SafeModel.BindTo(GvAttList);
-            OrderCol.DataPropertyName = "Order";
-            ValueCol.DataPropertyName = "Name";
             _UserAction = true;
 
             GvAttList.Rows[1].Selected = true;
@@ -62,6 +89,15 @@ namespace Me.Amon.Pwd.Pro
 
         public void AppendKey()
         {
+            _UserAction = false;
+            _SafeModel.Clear();
+            _SafeModel.Key.SetDefault();
+            _AAtt = _SafeModel.InitGuid();
+            GvAttList.DataSource = null;
+            _SafeModel.BindTo(GvAttList);
+            _UserAction = true;
+
+            ShowView(_AAtt);
         }
 
         public bool UpdateKey()
@@ -133,164 +169,267 @@ namespace Me.Amon.Pwd.Pro
             att.Type = type;
             _SafeModel.Key.Modified = true;
 
-            AeAttEdit.ShowView(att);
+            ShowView(att);
         }
 
         public void CopyAtt()
         {
+            _CmpLast.Copy();
         }
 
         public void SaveAtt()
         {
+            _UserAction = false;
+            _CmpLast.Save();
+            GvAttList.DataSource = null;
+            _SafeModel.BindTo(GvAttList);
+            _UserAction = true;
+
+            GvAttList.Rows[_LastIndex].Selected = true;
         }
 
         public void DropAtt()
         {
-        }
-        #endregion
-
-        #region 属性弹出菜单
-        #region 添加属性
-        private void CmiAppendAttText_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiAppendAttPass_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiAppendAttLink_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiAppendAttMail_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiAppendAttDate_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiAppendAttData_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiAppendAttList_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiAppendAttMemo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiAppendAttFile_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiAppendAttLine_Click(object sender, EventArgs e)
-        {
-
-        }
-        #endregion
-
-        #region 转换属性
-        private void CmiUpdateAttText_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiUpdateAttPass_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiUpdateAttLink_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiUpdateAttMail_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiUpdateAttDate_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiUpdateAttData_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiUpdateAttList_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiUpdateAttMemo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiUpdateAttFile_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CmiUpdateAttLine_Click(object sender, EventArgs e)
-        {
-
-        }
-        #endregion
-
-        private void CmiDeleteAtt_Click(object sender, EventArgs e)
-        {
-
-        }
-        #endregion
-
-        public void ShowTips(Control control, string caption)
-        {
-            _APwd.ShowTips(control, caption);
-        }
-
-        public void AppendAtt()
-        {
-        }
-
-        public void UpdateAtt()
-        {
-            GvAttList.Refresh();
-        }
-
-        public void DeleteAtt()
-        {
+            _UserAction = false;
             _SafeModel.Remove(_AAtt);
-        }
+            GvAttList.DataSource = null;
+            _SafeModel.BindTo(GvAttList);
+            _UserAction = true;
 
+            if (_LastIndex >= _SafeModel.Count)
+            {
+                _LastIndex = _SafeModel.Count;
+            }
+            GvAttList.Rows[_LastIndex].Selected = true;
+        }
+        #endregion
+
+        #region 界面事件
         private void GvAttList_SelectionChanged(object sender, System.EventArgs e)
         {
             if (!_UserAction || GvAttList.SelectedRows.Count < 1)
             {
                 return;
             }
-            _AAtt = GvAttList.SelectedRows[0].DataBoundItem as AAtt;
+
+            _LastIndex = GvAttList.SelectedRows[0].Index;
+            _AAtt = _SafeModel.GetAtt(_LastIndex);
             if (_AAtt == null)
             {
                 return;
             }
-            AeAttEdit.ShowView(_AAtt);
+
+            ShowView(_AAtt);
         }
+
+        private void BtCopy_Click(object sender, EventArgs e)
+        {
+            CopyAtt();
+        }
+
+        private void BtSave_Click(object sender, EventArgs e)
+        {
+            SaveAtt();
+        }
+
+        private void BtDrop_Click(object sender, EventArgs e)
+        {
+            DropAtt();
+        }
+        #endregion
+
+        #region 菜单事件
+        #region 添加属性
+        private void CmiAppendAttText_Click(object sender, EventArgs e)
+        {
+            AppendAtt(AAtt.TYPE_TEXT);
+        }
+
+        private void CmiAppendAttPass_Click(object sender, EventArgs e)
+        {
+            AppendAtt(AAtt.TYPE_PASS);
+        }
+
+        private void CmiAppendAttLink_Click(object sender, EventArgs e)
+        {
+            AppendAtt(AAtt.TYPE_LINK);
+        }
+
+        private void CmiAppendAttMail_Click(object sender, EventArgs e)
+        {
+            AppendAtt(AAtt.TYPE_MAIL);
+        }
+
+        private void CmiAppendAttDate_Click(object sender, EventArgs e)
+        {
+            AppendAtt(AAtt.TYPE_DATE);
+        }
+
+        private void CmiAppendAttData_Click(object sender, EventArgs e)
+        {
+            AppendAtt(AAtt.TYPE_DATA);
+        }
+
+        private void CmiAppendAttList_Click(object sender, EventArgs e)
+        {
+            AppendAtt(AAtt.TYPE_LIST);
+        }
+
+        private void CmiAppendAttMemo_Click(object sender, EventArgs e)
+        {
+            AppendAtt(AAtt.TYPE_MEMO);
+        }
+
+        private void CmiAppendAttFile_Click(object sender, EventArgs e)
+        {
+            AppendAtt(AAtt.TYPE_FILE);
+        }
+
+        private void CmiAppendAttLine_Click(object sender, EventArgs e)
+        {
+            AppendAtt(AAtt.TYPE_LINE);
+        }
+        #endregion
+
+        #region 转换属性
+        private void CmiUpdateAttText_Click(object sender, EventArgs e)
+        {
+            UpdateAtt(AAtt.TYPE_TEXT);
+        }
+
+        private void CmiUpdateAttPass_Click(object sender, EventArgs e)
+        {
+            UpdateAtt(AAtt.TYPE_PASS);
+        }
+
+        private void CmiUpdateAttLink_Click(object sender, EventArgs e)
+        {
+            UpdateAtt(AAtt.TYPE_LINK);
+        }
+
+        private void CmiUpdateAttMail_Click(object sender, EventArgs e)
+        {
+            UpdateAtt(AAtt.TYPE_MAIL);
+        }
+
+        private void CmiUpdateAttDate_Click(object sender, EventArgs e)
+        {
+            UpdateAtt(AAtt.TYPE_DATE);
+        }
+
+        private void CmiUpdateAttData_Click(object sender, EventArgs e)
+        {
+            UpdateAtt(AAtt.TYPE_DATA);
+        }
+
+        private void CmiUpdateAttList_Click(object sender, EventArgs e)
+        {
+            UpdateAtt(AAtt.TYPE_LIST);
+        }
+
+        private void CmiUpdateAttMemo_Click(object sender, EventArgs e)
+        {
+            UpdateAtt(AAtt.TYPE_MEMO);
+        }
+
+        private void CmiUpdateAttFile_Click(object sender, EventArgs e)
+        {
+            UpdateAtt(AAtt.TYPE_FILE);
+        }
+
+        private void CmiUpdateAttLine_Click(object sender, EventArgs e)
+        {
+            UpdateAtt(AAtt.TYPE_LINE);
+        }
+        #endregion
+
+        private void CmiDeleteAtt_Click(object sender, EventArgs e)
+        {
+            DropAtt();
+        }
+        #endregion
+
+        #region 私有函数
+        private void ShowView(AAtt att)
+        {
+            if (_CmpLast != null)
+            {
+                GbGroup.Controls.Remove(_CmpLast.Control);
+            }
+
+            _CmpLast = GetCtl(att.Type);
+            _CmpLast.ShowData(att);
+
+            GbGroup.Text = _CmpLast.Title;
+            GbGroup.Controls.Add(_CmpLast.Control);
+        }
+
+        private IAttEdit GetCtl(int type)
+        {
+            if (_CmpList.ContainsKey(type))
+            {
+                return _CmpList[type];
+            }
+
+            IAttEdit ctl;
+            switch (type)
+            {
+                case AAtt.TYPE_TEXT:
+                    ctl = new BeanText();
+                    break;
+                case AAtt.TYPE_PASS:
+                    ctl = new BeanPass();
+                    break;
+                case AAtt.TYPE_LINK:
+                    ctl = new BeanLink();
+                    break;
+                case AAtt.TYPE_MAIL:
+                    ctl = new BeanMail();
+                    break;
+                case AAtt.TYPE_DATE:
+                    ctl = new BeanDate();
+                    break;
+                case AAtt.TYPE_DATA:
+                    ctl = new BeanData();
+                    break;
+                case AAtt.TYPE_LIST:
+                    ctl = new BeanList();
+                    break;
+                case AAtt.TYPE_MEMO:
+                    ctl = new BeanMemo();
+                    break;
+                case AAtt.TYPE_FILE:
+                    ctl = new BeanFile();
+                    break;
+                case AAtt.TYPE_LINE:
+                    ctl = new BeanLine();
+                    break;
+                case AAtt.TYPE_GUID:
+                    ctl = new BeanGuid(_SafeModel);
+                    break;
+                case AAtt.TYPE_META:
+                    ctl = new BeanMeta();
+                    break;
+                case AAtt.TYPE_LOGO:
+                    ctl = new BeanLogo();
+                    break;
+                case AAtt.TYPE_HINT:
+                    ctl = new BeanHint();
+                    break;
+                default:
+                    ctl = null;
+                    break;
+            }
+            ctl.InitOnce(_DataModel);
+            _CmpList[type] = ctl;
+
+            ctl.Control.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ctl.Control.Location = new Point(6, 20);
+            ctl.Control.Size = new Size(309, 84);
+            ctl.Control.TabIndex = 0;
+
+            return ctl;
+        }
+        #endregion
     }
 }

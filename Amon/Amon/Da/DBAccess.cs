@@ -509,7 +509,7 @@ namespace Me.Amon.Da
 
         public void AddOpt(string param, int prev, long next)
         {
-            if (prev > IDat.OPT_INSERT)
+            if (prev > IDat.OPT_INSERT || next == IDat.OPT_DELETE)
             {
                 _ParamList.Add(param);
                 _SignList.Add("=");

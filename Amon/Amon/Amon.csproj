@@ -187,12 +187,6 @@
     <Compile Include="Pwd\Pad\APad.Designer.cs">
       <DependentUpon>APad.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\Pro\AttEdit.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Pwd\Pro\AttEdit.Designer.cs">
-      <DependentUpon>AttEdit.cs</DependentUpon>
-    </Compile>
     <Compile Include="Pwd\Pro\BeanData.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -536,11 +530,23 @@
     <Compile Include="Util\HashUtil.cs" />
     <Compile Include="Util\HttpUtil.cs" />
     <Compile Include="Util\SafeUtil.cs" />
+    <Compile Include="Uw\Alert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Alert.Designer.cs">
+      <DependentUpon>Alert.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uw\ImgViewer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Uw\ImgViewer.Designer.cs">
       <DependentUpon>ImgViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Input.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Input.Designer.cs">
+      <DependentUpon>Input.cs</DependentUpon>
     </Compile>
     <Compile Include="Uw\TxtEditor.cs">
       <SubType>Form</SubType>
@@ -636,9 +642,6 @@
     <EmbeddedResource Include="Pwd\Pro\BeanText.resx">
       <DependentUpon>BeanText.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\Pro\AttEdit.resx">
-      <DependentUpon>AttEdit.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Wiz\AWiz.resx">
       <DependentUpon>AWiz.cs</DependentUpon>
     </EmbeddedResource>
@@ -729,8 +732,14 @@
     <EmbeddedResource Include="User\SignUp.resx">
       <DependentUpon>SignUp.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Alert.resx">
+      <DependentUpon>Alert.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Uw\ImgViewer.resx">
       <DependentUpon>ImgViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Input.resx">
+      <DependentUpon>Input.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\TxtEditor.resx">
       <DependentUpon>TxtEditor.cs</DependentUpon>
@@ -748,6 +757,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo\logo.ico" />
+    <None Include="Resources\eye16.png" />
+    <None Include="Resources\eye24.png" />
+    <None Include="Resources\eye32.png" />
     <Content Include="Skin\Feel\Default\att-card.png" />
     <Content Include="Skin\Feel\Default\att-date.png" />
     <Content Include="Skin\Feel\Default\att-file-saveas.png" />

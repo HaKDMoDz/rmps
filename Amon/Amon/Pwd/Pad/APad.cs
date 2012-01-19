@@ -35,11 +35,11 @@ namespace Me.Amon.Pwd.Pad
             grid.Controls.Remove(this);
         }
 
-        public void ShowData()
+        public void ShowInfo()
         {
         }
 
-        public void ShowData(Model.Key key)
+        public void ShowData()
         {
         }
 

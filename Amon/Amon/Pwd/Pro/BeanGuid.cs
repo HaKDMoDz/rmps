@@ -2,16 +2,25 @@
 using System.Windows.Forms;
 using Me.Amon.Model;
 using Me.Amon.Model.Att;
+using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.Pro
 {
     public partial class BeanGuid : UserControl, IAttEdit
     {
         private AAtt _Att;
+        private SafeModel _SafeModel;
         private DataModel _DataModel;
 
         public BeanGuid()
         {
+            InitializeComponent();
+        }
+
+        public BeanGuid(SafeModel safeModel)
+        {
+            _SafeModel = safeModel;
+
             InitializeComponent();
         }
 
@@ -29,10 +38,11 @@ namespace Me.Amon.Pwd.Pro
         {
             if ((_DataModel.LibModified & IEnv.KEY_APWD) > 0)
             {
+                CbName.DataSource = null;
                 CbName.DataSource = _DataModel.LibList;
                 CbName.DisplayMember = "Name";
                 CbName.ValueMember = "Id";
-                _DataModel.LibModified &= IEnv.KEY_APWD;
+                _DataModel.LibModified &= ~IEnv.KEY_APWD;
             }
             _Att = att;
             return true;
@@ -53,6 +63,16 @@ namespace Me.Amon.Pwd.Pro
             if (header.Id != _Att.GetSpec(GuidAtt.SPEC_GUID_TPLT))
             {
                 _Att.SetSpec(GuidAtt.SPEC_GUID_TPLT, header.Id);
+                if (!_SafeModel.Key.IsUpdate)
+                {
+                    if (_SafeModel.Count < AAtt.HEAD_SIZE)
+                    {
+                        _SafeModel.InitMeta();
+                        _SafeModel.InitLogo();
+                        _SafeModel.InitHint();
+                    }
+                    _SafeModel.InitData(header);
+                }
                 _Att.Modified = true;
             }
         }

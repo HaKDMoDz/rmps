@@ -172,20 +172,10 @@ namespace Me.Amon.Model
         /// <returns></returns>
         public AAtt InitGuid()
         {
-            GuidAtt guid = new GuidAtt();
-            guid.Name = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            GuidAtt guid = new GuidAtt { Order = "模板" };
+            guid.Name = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
             _AttList.Add(guid);
             return guid;
-        }
-
-        /// <summary>
-        /// 头部初始化
-        /// </summary>
-        /// <param name="grid"></param>
-        public void InitGuid(DataGrid grid)
-        {
-            InitGuid();
-            grid.DataSource = _AttList;
         }
 
         /// <summary>
@@ -194,7 +184,7 @@ namespace Me.Amon.Model
         /// <returns></returns>
         public AAtt InitMeta()
         {
-            MetaAtt meta = new MetaAtt();
+            MetaAtt meta = new MetaAtt { Order = "搜索" };
             _AttList.Add(meta);
             return meta;
         }
@@ -205,7 +195,7 @@ namespace Me.Amon.Model
         /// <returns></returns>
         public AAtt InitLogo()
         {
-            LogoAtt logo = new LogoAtt();
+            LogoAtt logo = new LogoAtt { Order = "徽标" };
             _AttList.Add(logo);
             return logo;
         }
@@ -216,7 +206,7 @@ namespace Me.Amon.Model
         /// <returns></returns>
         public AAtt InitHint()
         {
-            HintAtt hint = new HintAtt();
+            HintAtt hint = new HintAtt { Order = "提醒" };
             _AttList.Add(hint);
             return hint;
         }
@@ -244,19 +234,6 @@ namespace Me.Amon.Model
         #endregion
 
         #region 数据处理
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="grid"></param>
-        public void Decode(string key, DataGrid grid)
-        {
-            Decode(key);
-
-            grid.DataSource = _AttList;
-            grid.Select(0);
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -419,17 +396,19 @@ namespace Me.Amon.Model
                 }
 
                 string tmp1 = tmp.Replace("\b", "\\;").Trim();
-                Match matche = Regex.Match(tmp1, "^\\d+");
+                Match matche = Regex.Match(tmp1, "^\\d+:");
                 if (!matche.Success)
                 {
                     continue;
                 }
                 string tmp2 = matche.Value;
-                AAtt item = AAtt.GetInstance(int.Parse(tmp2));
+                AAtt item = AAtt.GetInstance(int.Parse(tmp2.Substring(0, tmp2.Length - 1)));
                 if (item != null)
                 {
-                    item.ImportByTxt(tmp1.Substring(tmp2.Length + 1));
-                    _AttList.Add(item);
+                    if (item.ImportByTxt(tmp1.Substring(tmp2.Length)))
+                    {
+                        _AttList.Add(item);
+                    }
                 }
             }
             return true;
@@ -456,7 +435,7 @@ namespace Me.Amon.Model
                 return false;
             }
 
-            if (!reader.ReadToDescendant("att"))
+            if (!reader.ReadToDescendant("Att"))
             {
                 return false;
             }
@@ -471,16 +450,28 @@ namespace Me.Amon.Model
                 Key.SetDefault();
             }
 
+            if (reader.MoveToAttribute("Cat"))
+            {
+                Key.CatId = reader.ReadContentAsString();
+            }
+
             do
             {
-                int type = reader.ReadContentAsInt();
+                if (!reader.ReadToDescendant("Type"))
+                {
+                    continue;
+                }
+
+                int type = reader.ReadElementContentAsInt();
                 AAtt item = AAtt.GetInstance(type);
                 if (item != null)
                 {
-                    item.ImportByXml(reader);
-                    _AttList.Add(item);
+                    if (item.ImportByXml(reader))
+                    {
+                        _AttList.Add(item);
+                    }
                 }
-            } while (reader.ReadToNextSibling("att"));
+            } while (reader.ReadToFollowing("Att"));
 
             return true;
         }
@@ -492,12 +483,15 @@ namespace Me.Amon.Model
                 return false;
             }
 
+            writer.WriteStartElement("Key");
+            writer.WriteElementString("Cat", Key.CatId);
             foreach (AAtt att in _AttList)
             {
-                writer.WriteStartElement("att");
+                writer.WriteStartElement("Att");
                 att.ExportAsXml(writer);
                 writer.WriteEndElement();
             }
+            writer.WriteEndElement();
             return true;
         }
         #endregion

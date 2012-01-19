@@ -31,6 +31,9 @@ namespace Me.Amon.Pwd
         private ViewModel _ViewModel;
         private TreeNode _RootNode;
         private TreeNode _LastNode;
+        private string _LastHash;
+        private string _LastMeta;
+        private bool _IsSearch;
         private IPwd _PwdView;
         private APro _ProView;
         private AWiz _WizView;
@@ -154,14 +157,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            string catId = node.Name;
-            if (!CharUtil.IsValidateHash(catId))
-            {
-                catId = "0";
-            }
-
-            ListKey(catId);
-
+            ListKey(node.Name);
             _LastNode = node;
         }
 
@@ -171,25 +167,33 @@ namespace Me.Amon.Pwd
             foreach (DataRow row in data.Rows)
             {
                 Key key = new Key();
-                key.Id = row[IDat.APWD0105] as string;
-                key.Order = (int)row[IDat.APWD0101];
-                key.Label = (int)row[IDat.APWD0102];
-                key.Major = (int)row[IDat.APWD0103];
-                key.CatId = row[IDat.APWD0106] as string;
-                key.RegDate = row[IDat.APWD0107] as string;
-                key.LibId = row[IDat.APWD0108] as string;
-                key.Title = row[IDat.APWD0109] as string;
-                key.MetaKey = row[IDat.APWD010A] as string;
-                key.IcoName = row[IDat.APWD010B] as string;
-                key.IcoPath = row[IDat.APWD010C] as string;
-                key.IcoMemo = row[IDat.APWD010D] as string;
-                key.GtdId = row[IDat.APWD010E] as string;
-                key.GtdMemo = row[IDat.APWD010F] as string;
-                key.Memo = row[IDat.APWD0110] as string;
-                key.VisitDate = row[IDat.APWD0111] as string;
-                key.CipherVer = row[IDat.APWD0112] as string;
-                InitIco(key);
+                key.Load(row);
                 LbKeyList.Items.Add(key);
+
+                if (CharUtil.IsValidateHash(key.IcoName))
+                {
+                    if (CharUtil.IsValidateHash(key.IcoPath))
+                    {
+                        key.Icon = Image.FromFile(_DataModel.KeyDir + key.IcoPath + Path.DirectorySeparatorChar + key.IcoName + ".png");
+                    }
+                    else
+                    {
+                        key.Icon = Image.FromFile(_DataModel.KeyDir + key.IcoName + ".png");
+                    }
+                }
+                else
+                {
+                    key.Icon = BeanUtil.NaN32;
+                }
+
+                if (CharUtil.IsValidateHash(key.GtdId))
+                {
+                    key.Hint = _ViewModel.HimtImage;
+                }
+                else
+                {
+                    key.Hint = BeanUtil.NaN16;
+                }
             }
             data.Dispose();
         }
@@ -222,16 +226,21 @@ namespace Me.Amon.Pwd
 
         private void LbKeyList_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            Key key = LbKeyList.SelectedItem as Key;
+            if (key == null)
             {
-                BeanUtil.ShowAlert("编辑中……");
                 return;
             }
 
-            Key key = LbKeyList.SelectedItem as Key;
-            if (key == null || !CharUtil.IsValidateHash(key.Id))
+            if (!CharUtil.IsValidateHash(key.Id))
             {
                 BeanUtil.ShowAlert("系统异常，请稍后重试！");
+                return;
+            }
+
+            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            {
+                BeanUtil.ShowAlert("编辑中……");
                 return;
             }
 
@@ -241,17 +250,20 @@ namespace Me.Amon.Pwd
             dba.ReInit();
             dba.AddTable(IDat.APWD0200);
             dba.AddColumn(IDat.APWD0204);
+            dba.AddWhere(IDat.APWD0202, _UserModel.Code);
             dba.AddWhere(IDat.APWD0203, key.Id);
-            dba.AddSort(IDat.APWD0201);
-            DataTable dt = dba.ExecuteSelect();
-            StringBuilder buf = new StringBuilder();
-            foreach (DataRow row in dt.Rows)
+            dba.AddSort(IDat.APWD0201, true);
+            using (DataTable dt = dba.ExecuteSelect())
             {
-                buf.Append(row[IDat.APWD0204] as string);
+                StringBuilder buffer = new StringBuilder();
+                foreach (DataRow row in dt.Rows)
+                {
+                    buffer.Append(row[IDat.APWD0204] as string);
+                }
+                _SafeModel.Decode(buffer.ToString());
             }
-            _SafeModel.Decode(buf.ToString());
 
-            _PwdView.ShowData(key);
+            _PwdView.ShowData();
 
             _LastLabel.Checked = false;
             _LastLabel = _CmiLabels[key.Label];
@@ -548,6 +560,11 @@ namespace Me.Amon.Pwd
                 e.Cancel = true;
             }
         }
+
+        private void UcTime_Tick(object sender, EventArgs e)
+        {
+            TssTime.Text = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
+        }
         #endregion
 
         #region 菜单栏事件区域
@@ -780,6 +797,33 @@ namespace Me.Amon.Pwd
         #region 数据导出
         private void TmiExportTxt_Click(object sender, EventArgs e)
         {
+            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            {
+                if (DialogResult.Yes == MessageBox.Show("当前记录已被修改，要保存吗？"))
+                {
+                    return;
+                }
+            }
+
+            SaveFileDialog fd = new SaveFileDialog();
+            fd.Filter = "文件|*.aptxt";
+            if (DialogResult.OK != fd.ShowDialog(this))
+            {
+                return;
+            }
+            string file = fd.FileName;
+            if (string.IsNullOrEmpty(file))
+            {
+                return;
+            }
+
+            using (StreamWriter writer = new StreamWriter(file, false))
+            {
+                writer.WriteLine("APwd-1");
+                StringBuilder buffer = new StringBuilder();
+                _SafeModel.ExportAsTxt(buffer);
+                writer.WriteLine(buffer.ToString());
+            }
         }
 
         private void TmiExportXml_Click(object sender, EventArgs e)
@@ -807,7 +851,8 @@ namespace Me.Amon.Pwd
             using (XmlWriter writer = XmlWriter.Create(new StreamWriter(file, false)))
             {
                 writer.WriteStartElement("Amon");
-                writer.WriteElementString("Version", "1");
+                writer.WriteElementString("App", "APwd");
+                writer.WriteElementString("Ver", "1");
                 writer.WriteStartElement("Keys");
                 _SafeModel.ExportAsXml(writer);
                 writer.WriteEndElement();
@@ -843,7 +888,7 @@ namespace Me.Amon.Pwd
             {
                 // 版本判断
                 string ver = reader.ReadLine();
-                if ("1" != ver)
+                if ("APwd-1" != ver)
                 {
                     MessageBox.Show("未知的文件版本，无法进行导入处理！");
                     return;
@@ -854,8 +899,10 @@ namespace Me.Amon.Pwd
                 {
                     if (!string.IsNullOrWhiteSpace(line))
                     {
-                        _SafeModel.ImportByTxt(line);
-                        UpdateKey();
+                        if (_SafeModel.ImportByTxt(line))
+                        {
+                            ImportKey();
+                        }
                     }
                     line = reader.ReadLine();
                 }
@@ -886,19 +933,32 @@ namespace Me.Amon.Pwd
 
             using (XmlReader reader = XmlReader.Create(File.OpenText(file)))
             {
-                if (!reader.ReadToFollowing("version"))
+                if (!reader.ReadToFollowing("App"))
+                {
+                    MessageBox.Show("未知的文件格式，无法进行导入处理！");
+                    return;
+                }
+                if (reader.ReadElementContentAsString() != "APwd")
+                {
+                    MessageBox.Show("未知的文件格式，无法进行导入处理！");
+                    return;
+                }
+                if (reader.Name != "Ver" && !reader.ReadToFollowing("Ver"))
                 {
                     MessageBox.Show("未知的文件版本，无法进行导入处理！");
                     return;
                 }
-                if (reader.Value != "1")
+                if (reader.ReadElementContentAsString() != "1")
                 {
                     MessageBox.Show("未知的文件版本，无法进行导入处理！");
                     return;
                 }
-                while (reader.ReadToFollowing("key"))
+                while (reader.ReadToFollowing("Key"))
                 {
-                    _SafeModel.ImportByXml(reader);
+                    if (_SafeModel.ImportByXml(reader))
+                    {
+                        ImportKey();
+                    }
                 }
             }
         }
@@ -1313,6 +1373,10 @@ namespace Me.Amon.Pwd
             {
                 catId = "0";
             }
+            if (catId == _SafeModel.Key.CatId)
+            {
+                return;
+            }
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
@@ -1327,8 +1391,8 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            ListKey(_SafeModel.Key.CatId);
             _SafeModel.Key.CatId = catId;
+            LastOpt();
         }
 
         public void ChangeLabel(int label)
@@ -1573,20 +1637,17 @@ namespace Me.Amon.Pwd
         #region 口令处理
         private void AppendKey()
         {
-            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            if (_SafeModel.Key == null)
             {
-                BeanUtil.ShowAlert("数据已修改，请保存！");
-                return;
+                _SafeModel.Key = new Key();
             }
-
-            _SafeModel.Key = new Key();
-            _SafeModel.Key.SetDefault();
-
-            _SafeModel.Clear();
-            _SafeModel.InitGuid();
-            _SafeModel.InitMeta();
-            _SafeModel.InitLogo();
-            _SafeModel.InitHint();
+            else if (_SafeModel.Key.Modified)
+            {
+                if (DialogResult.Yes == MessageBox.Show("您的数据已修改，确认不保存吗？"))
+                {
+                    return;
+                }
+            }
 
             _PwdView.AppendKey();
         }
@@ -1617,8 +1678,8 @@ namespace Me.Amon.Pwd
 
             DBAccess dba = _UserModel.DBAccess;
 
-            bool update = CharUtil.IsValidateHash(_SafeModel.Key.Id);
-            if (update)
+            bool isUpdate = CharUtil.IsValidateHash(_SafeModel.Key.Id);
+            if (isUpdate)
             {
                 #region 数据备份
                 if (_SafeModel.Key.Backup)
@@ -1679,7 +1740,7 @@ namespace Me.Amon.Pwd
             dba.AddParam(IDat.APWD0110, _SafeModel.Key.Memo);
             dba.AddParam(IDat.APWD0112, "1");
 
-            if (update)
+            if (isUpdate)
             {
                 dba.AddWhere(IDat.APWD0104, _UserModel.Code);
                 dba.AddWhere(IDat.APWD0105, _SafeModel.Key.Id);
@@ -1713,6 +1774,7 @@ namespace Me.Amon.Pwd
                 dba.ReInit();
                 dba.AddTable(IDat.APWD0200);
                 dba.AddParam(IDat.APWD0201, i++);
+                dba.AddParam(IDat.APWD0202, _UserModel.Code);
                 dba.AddParam(IDat.APWD0203, _SafeModel.Key.Id);
                 if (_SafeModel.Key.Password.Length - j > IDat.APWD0204_SIZE)
                 {
@@ -1729,16 +1791,48 @@ namespace Me.Amon.Pwd
 
             dba.ExecuteBatch();
 
-            if (!update)
-            {
-                LbKeyList.Items.Insert(0, _SafeModel.Key);
-            }
             _SafeModel.Key.Modified = false;
-            _PwdView.ShowData();
+            if (isUpdate && !_IsSearch)
+            {
+                LbKeyList.Items[LbKeyList.SelectedIndex] = _SafeModel.Key;
+            }
+            else
+            {
+                LastOpt();
+            }
+            _PwdView.ShowInfo();
         }
 
         private void DeleteKey()
         {
+            if (_SafeModel.Key == null)
+            {
+                return;
+            }
+
+            if (DialogResult.Yes != MessageBox.Show("确认要删除此记录吗，此操作将不可恢复？", "提示", MessageBoxButtons.YesNoCancel))
+            {
+                return;
+            }
+
+            if (DialogResult.No != MessageBox.Show("再次确认，要返回吗？", "提示", MessageBoxButtons.YesNoCancel))
+            {
+                return;
+            }
+
+            DBAccess dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(IDat.APWD0100);
+            dba.AddVcs(IDat.APWD0113, 1);
+            dba.AddOpt(IDat.APWD0114, _SafeModel.Key.Operate, IDat.OPT_DELETE);
+            dba.AddWhere(IDat.APWD0104, _UserModel.Code);
+            dba.AddWhere(IDat.APWD0105, _SafeModel.Key.Id);
+            if (1 != dba.ExecuteUpdate())
+            {
+                return;
+            }
+
+            LbKeyList.Items.RemoveAt(LbKeyList.SelectedIndex);
         }
 
         private void ImportKey()
@@ -1803,11 +1897,25 @@ namespace Me.Amon.Pwd
 
         public void ListKey(string catId)
         {
+            if (!CharUtil.IsValidateHash(catId))
+            {
+                catId = "0";
+            }
+
+            DoListKey(catId);
+
+            _IsSearch = false;
+            _LastHash = catId;
+        }
+
+        public void DoListKey(string catId)
+        {
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
             dba.AddTable(IDat.APWD0100);
             dba.AddWhere(IDat.APWD0104, _UserModel.Code);
             dba.AddWhere(IDat.APWD0106, catId);
+            dba.AddWhere(IDat.APWD0114, "!=", IDat.OPT_DELETE.ToString(), false);
             dba.AddSort(IDat.APWD0101, false);
             using (DataTable dt = dba.ExecuteSelect())
             {
@@ -1836,6 +1944,14 @@ namespace Me.Amon.Pwd
 
             TvCatTree.SelectedNode = null;
 
+            DoFindKey(meta);
+
+            _IsSearch = true;
+            _LastMeta = meta;
+        }
+
+        private void DoFindKey(string meta)
+        {
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
             dba.AddTable(IDat.APWD0100);
@@ -1849,35 +1965,19 @@ namespace Me.Amon.Pwd
             }
         }
 
-        private void InitIco(Key key)
+        public void LastOpt()
         {
-            if (CharUtil.IsValidateHash(key.IcoName))
+            if (_IsSearch)
             {
-                if (CharUtil.IsValidateHash(key.IcoPath))
-                {
-                    key.Icon = Image.FromFile(_DataModel.KeyDir + key.IcoPath + Path.DirectorySeparatorChar + key.IcoName + ".png");
-                }
-                else
-                {
-                    key.Icon = Image.FromFile(_DataModel.KeyDir + key.IcoName + ".png");
-                }
+                DoFindKey(_LastMeta);
             }
             else
             {
-                key.Icon = BeanUtil.NaN32;
-            }
-
-            if (CharUtil.IsValidateHash(key.GtdId))
-            {
-                key.Hint = _ViewModel.HimtImage;
-            }
-            else
-            {
-                key.Hint = BeanUtil.NaN16;
+                DoListKey(_LastHash);
             }
         }
         #endregion
-        #endregion
+
         private void ShowHelp()
         {
             try
@@ -1931,10 +2031,6 @@ namespace Me.Amon.Pwd
         private void ShowInfo()
         {
         }
-
-        private void UcTime_Tick(object sender, EventArgs e)
-        {
-            TssTime.Text = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
-        }
+        #endregion
     }
 }

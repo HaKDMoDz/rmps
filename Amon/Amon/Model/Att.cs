@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using System.Xml;
 using Me.Amon.Model.Att;
+using Me.Amon.Util;
 
 namespace Me.Amon.Model
 {
@@ -228,25 +229,103 @@ namespace Me.Amon.Model
         /// </summary>
         /// <param name="builder"></param>
         /// <returns></returns>
-        public abstract bool ExportAsTxt(StringBuilder builder);
+        public bool ExportAsTxt(StringBuilder buffer)
+        {
+            if (buffer == null)
+            {
+                return false;
+            }
+            buffer.Append(Type).Append(':').Append(DoEscape(Name)).Append(',').Append(DoEscape(Data));
+
+            if (_Spec != null)
+            {
+                foreach (string tmp in _Spec)
+                {
+                    buffer.Append(',').Append(DoEscape(tmp));
+                }
+            }
+            buffer.Append(';');
+            return true;
+        }
+
         /// <summary>
         /// 从TXT文件导入
         /// </summary>
         /// <param name="txt"></param>
         /// <returns></returns>
-        public abstract bool ImportByTxt(string txt);
+        public bool ImportByTxt(string txt)
+        {
+            if (!CharUtil.IsValidate(txt))
+            {
+                return false;
+            }
+            string[] array = txt.Replace("\\,", "\f").Split(',');
+            if (array == null || array.Length < 2)
+            {
+                return false;
+            }
+            int i = 0;
+            Name = UnEscape(array[i++].Replace("\f", "\\,"));
+            Data = UnEscape(array[i++].Replace("\f", "\\,"));
+
+            if (_Spec != null)
+            {
+                int j = _Spec.Length + i;
+                if (j > array.Length)
+                {
+                    j = array.Length;
+                }
+                while (j > i)
+                {
+                    j -= 1;
+                    _Spec[j - i] = UnEscape(array[j].Replace("\f", "\\,"));
+                }
+            }
+            return true;
+        }
         /// <summary>
         /// 导出为XML文件
         /// </summary>
         /// <param name="writer"></param>
         /// <returns></returns>
-        public abstract bool ExportAsXml(XmlWriter writer);
+        public bool ExportAsXml(XmlWriter writer)
+        {
+            writer.WriteElementString("Type", Type.ToString());
+            writer.WriteElementString("Name", Name);
+            writer.WriteElementString("Data", Data);
+
+            if (_Spec != null)
+            {
+                writer.WriteStartElement("Spec");
+                for (int i = 0; i < _Spec.Length; i += 1)
+                {
+                    writer.WriteAttributeString("V" + i, _Spec[i]);
+                }
+                writer.WriteEndElement();
+            }
+            return true;
+        }
         /// <summary>
         /// 从XML文件导入
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public abstract bool ImportByXml(XmlReader reader);
+        public bool ImportByXml(XmlReader reader)
+        {
+            //if (reader.Name == "Type")
+            //{
+            //    Type = reader.ReadElementContentAsInt();
+            //}
+            if (reader.Name == "Name")
+            {
+                Name = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Data")
+            {
+                Data = reader.ReadElementContentAsString();
+            }
+            return true;
+        }
         #endregion
 
         #region 公共方法

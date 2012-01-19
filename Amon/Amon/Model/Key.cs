@@ -1,11 +1,12 @@
-﻿using System.Drawing;
+﻿using System.Data;
+using System.Drawing;
 using System.Text;
 using System.Xml;
 using Me.Amon.Util;
 
 namespace Me.Amon.Model
 {
-    public class Key : Vcs
+    public sealed class Key : Vcs
     {
         /// <summary>
         /// 口令索引
@@ -91,6 +92,12 @@ namespace Me.Amon.Model
         /// </summary>
         public bool Backup { get; set; }
 
+        /// <summary>
+        /// 是否更新
+        /// </summary>
+        public bool IsUpdate { get { return _IsUpdate; } }
+        private bool _IsUpdate;
+
         public bool Modified { get; set; }
         public Image Icon { get; set; }
         public Image Hint { get; set; }
@@ -124,12 +131,39 @@ namespace Me.Amon.Model
             Icon = BeanUtil.NaN16;
             Hint = BeanUtil.NaN16;
 
+            _IsUpdate = false;
             Backup = true;
+            Modified = false;
         }
 
         public override string ToString()
         {
             return Title;
+        }
+
+        public void Load(DataRow row)
+        {
+            Id = row[IDat.APWD0105] as string;
+            Order = (int)row[IDat.APWD0101];
+            Label = (int)row[IDat.APWD0102];
+            Major = (int)row[IDat.APWD0103];
+            CatId = row[IDat.APWD0106] as string;
+            RegDate = row[IDat.APWD0107] as string;
+            LibId = row[IDat.APWD0108] as string;
+            Title = row[IDat.APWD0109] as string;
+            MetaKey = row[IDat.APWD010A] as string;
+            IcoName = row[IDat.APWD010B] as string;
+            IcoPath = row[IDat.APWD010C] as string;
+            IcoMemo = row[IDat.APWD010D] as string;
+            GtdId = row[IDat.APWD010E] as string;
+            GtdMemo = row[IDat.APWD010F] as string;
+            Memo = row[IDat.APWD0110] as string;
+
+            VisitDate = row[IDat.APWD0111] as string;
+            CipherVer = row[IDat.APWD0112] as string;
+
+            _IsUpdate = true;
+            Modified = false;
         }
 
         public string ToXml()

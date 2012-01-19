@@ -152,7 +152,7 @@ namespace Me.Amon.Uc
                 LsUcs.Items.Add(_Item);
                 ShowData(new Ucs());
             }
-            //_DataModel.UcsChanged = true;
+            _DataModel.UcsModified = -1;
         }
         #endregion
     }

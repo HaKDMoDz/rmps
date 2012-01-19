@@ -49,7 +49,7 @@ namespace Me.Amon.Pwd.Wiz
                 CbLib.DataSource = _DataModel.LibList;
                 CbLib.DisplayMember = "Name";
                 CbLib.ValueMember = "Id";
-                _DataModel.LibModified &= IEnv.KEY_AWIZ;
+                _DataModel.LibModified &= ~IEnv.KEY_AWIZ;
             }
 
             GuidAtt guid = _SafeModel.Guid;
@@ -110,7 +110,7 @@ namespace Me.Amon.Pwd.Wiz
             if (lib.Id != guid.GetSpec(GuidAtt.SPEC_GUID_TPLT))
             {
                 guid.SetSpec(GuidAtt.SPEC_GUID_TPLT, lib.Id);
-                if (!CharUtil.IsValidateHash(_SafeModel.Key.Id))
+                if (!_SafeModel.Key.IsUpdate)
                 {
                     _SafeModel.InitData(lib);
                 }

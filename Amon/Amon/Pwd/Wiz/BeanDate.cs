@@ -99,7 +99,7 @@ namespace Me.Amon.Pwd.Wiz
             _Label.Text = _Att.Name;
             if (!string.IsNullOrEmpty(_Att.Data))
             {
-                DtData.Value = DateTime.FromBinary(long.Parse(_Att.Data));
+                DtData.Value = DateTime.FromFileTime(long.Parse(_Att.Data));
             }
             return true;
         }
@@ -116,7 +116,7 @@ namespace Me.Amon.Pwd.Wiz
                 return false;
             }
 
-            string date = DtData.Value.ToBinary().ToString();
+            string date = DtData.Value.ToFileTime().ToString();
             if (date != _Att.Data)
             {
                 _Att.Data = date;

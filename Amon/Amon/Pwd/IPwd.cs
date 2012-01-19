@@ -1,5 +1,4 @@
 ﻿using System.Windows.Forms;
-using Me.Amon.Model;
 
 namespace Me.Amon.Pwd
 {
@@ -9,9 +8,9 @@ namespace Me.Amon.Pwd
 
         void HideView(TableLayoutPanel grid);
 
-        void ShowData();
+        void ShowInfo();
 
-        void ShowData(Key key);
+        void ShowData();
 
         void AppendKey();
 

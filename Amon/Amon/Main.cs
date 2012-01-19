@@ -32,8 +32,9 @@ namespace Me.Amon
                 y = 0;
             }
             Location = new Point(x, y);
+            ClientSize = new Size(88, 28);
 
-            ChangeStyle('r');
+            ChangeStyle('0');
 
             GenImage();
 
@@ -93,7 +94,7 @@ namespace Me.Amon
 
             if (_BgBrush == null)
             {
-                _BgBrush = new SolidBrush(Color.DarkGray);
+                _BgBrush = new SolidBrush(Color.Black);
             }
 
             if (style == 'l')
@@ -132,7 +133,7 @@ namespace Me.Amon
                 }
                 return;
             }
-            else
+            else if (style == 'r')
             {
                 _SrcImage = Image.FromFile("Skin\\Feel\\Default\\eyer.png");
 
@@ -154,6 +155,42 @@ namespace Me.Amon
 
                 _Rect2 = new Rectangle(22, 10, 12, 12);
                 _LgBrush2 = new LinearGradientBrush(_Rect2, Color.FromArgb(255, 255, 255, 255), Color.FromArgb(0, 255, 255, 255), LinearGradientMode.BackwardDiagonal);
+
+                using (Graphics g = Graphics.FromImage(_PupilImg))
+                {
+                    g.SmoothingMode = SmoothingMode.AntiAlias;
+                    g.TextRenderingHint = TextRenderingHint.AntiAlias;
+
+                    g.Clear(Color.FromArgb(0, 0, 0, 0));
+                    g.FillEllipse(new SolidBrush(Color.Black), 0, 0, _PupilImg.Width, _PupilImg.Height);
+
+                    Rectangle rect = new Rectangle(_PupilRadius - 2, 2, _PupilRadius, _PupilRadius);
+                    Brush brush = new LinearGradientBrush(rect, Color.FromArgb(255, 255, 255, 255), Color.FromArgb(0, 255, 255, 255), LinearGradientMode.BackwardDiagonal);
+                    g.FillEllipse(brush, rect);
+                }
+            }
+            else
+            {
+                _SrcImage = Resources.eye24;
+
+                _AlienRadius = 14;
+                _AlienCenterX = 15;
+                _AlienCenterY = 15;
+
+                _PupilRadius = 5;
+                _PupilCenterX = _AlienCenterX;
+                _PupilCenterY = _AlienCenterY;
+
+                if (_PupilImg == null)
+                {
+                    _PupilImg = new Bitmap(_PupilRadius << 1, _PupilRadius << 1);
+                }
+
+                _Rect1 = new Rectangle(2, 2, 28, 28);
+                _LgBrush1 = new SolidBrush(Color.Black);
+
+                _Rect2 = new Rectangle(4, 4, 24, 24);
+                _LgBrush2 = new SolidBrush(Color.White);
 
                 using (Graphics g = Graphics.FromImage(_PupilImg))
                 {
@@ -237,36 +274,20 @@ namespace Me.Amon
 
         private void Style0(Graphics g)
         {
-            g.FillRectangle(_BgBrush, 0, 0, 48, 48);
-            g.DrawImage(_SrcImage, 0, 0);
+            g.FillRectangle(_BgBrush, 0, 0, 32, 32);
+            if (_SrcImage != null)
+            {
+                g.DrawImage(_SrcImage, 0, 0);
+            }
 
-            //g.FillEllipse(_LgBrush1, _Rect1);
-            //g.FillEllipse(_LgBrush2, _Rect2);
+            //g.DrawEllipse(new Pen(Color.Black), _Rect1);
+            //g.DrawEllipse(new Pen(Color.Black), _Rect2);
 
             int x = _PupilCenterX - _PupilRadius;
             int y = _PupilCenterY - _PupilRadius;
             int r = _PupilRadius << 1;
             g.FillEllipse(_BgBrush, x, y, r, r);
             g.DrawImage(_PupilImg, x, y);
-        }
-
-        private void Style2(Graphics g)
-        {
-            g.FillRectangle(new SolidBrush(Color.White), 0, 0, 48, 48);
-
-            Rectangle rect1 = new Rectangle(0, 0, 24, 48);
-            LinearGradientBrush brush1 = new LinearGradientBrush(rect1, Color.FromArgb(255, 128, 128, 128), Color.FromArgb(255, 255, 255, 255), LinearGradientMode.Vertical);
-            g.FillEllipse(brush1, rect1);
-            rect1 = new Rectangle(3, 3, 18, 42);
-            brush1 = new LinearGradientBrush(rect1, Color.FromArgb(255, 255, 255, 255), Color.FromArgb(255, 206, 206, 206), LinearGradientMode.Vertical);
-            g.FillEllipse(brush1, rect1);
-
-            Rectangle rect2 = new Rectangle(24, 0, 24, 48);
-            LinearGradientBrush brush2 = new LinearGradientBrush(rect2, Color.FromArgb(255, 128, 128, 128), Color.FromArgb(255, 255, 255, 255), LinearGradientMode.Vertical);
-            g.FillEllipse(brush2, rect2);
-            rect2 = new Rectangle(27, 3, 18, 42);
-            brush2 = new LinearGradientBrush(rect2, Color.FromArgb(255, 255, 255, 255), Color.FromArgb(255, 206, 206, 206), LinearGradientMode.Vertical);
-            g.FillEllipse(brush2, rect2);
         }
         #endregion
 

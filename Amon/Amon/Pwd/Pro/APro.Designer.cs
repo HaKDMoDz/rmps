@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GvAttList = new System.Windows.Forms.DataGridView();
             this.OrderCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AeAttEdit = new Me.Amon.Pwd.Pro.AttEdit();
             this.CmAtt = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CmuAppendAtt = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiAppendAttText = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,8 +57,13 @@
             this.CmiUpdateAttFile = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiUpdateAttLine = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiDeleteAtt = new System.Windows.Forms.ToolStripMenuItem();
+            this.GbGroup = new System.Windows.Forms.GroupBox();
+            this.BtCopy = new System.Windows.Forms.Button();
+            this.BtSave = new System.Windows.Forms.Button();
+            this.BtDrop = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.GvAttList)).BeginInit();
             this.CmAtt.SuspendLayout();
+            this.GbGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // GvAttList
@@ -83,14 +87,14 @@
             this.GvAttList.RowHeadersVisible = false;
             this.GvAttList.RowTemplate.Height = 23;
             this.GvAttList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GvAttList.Size = new System.Drawing.Size(332, 145);
+            this.GvAttList.Size = new System.Drawing.Size(350, 145);
             this.GvAttList.TabIndex = 0;
             this.GvAttList.SelectionChanged += new System.EventHandler(this.GvAttList_SelectionChanged);
             // 
             // OrderCol
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OrderCol.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OrderCol.DefaultCellStyle = dataGridViewCellStyle5;
             this.OrderCol.HeaderText = "索引";
             this.OrderCol.Name = "OrderCol";
             this.OrderCol.ReadOnly = true;
@@ -101,15 +105,6 @@
             this.ValueCol.HeaderText = "属性";
             this.ValueCol.Name = "ValueCol";
             this.ValueCol.ReadOnly = true;
-            // 
-            // AeAttEdit
-            // 
-            this.AeAttEdit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.AeAttEdit.Location = new System.Drawing.Point(0, 151);
-            this.AeAttEdit.Name = "AeAttEdit";
-            this.AeAttEdit.Size = new System.Drawing.Size(332, 110);
-            this.AeAttEdit.TabIndex = 1;
             // 
             // CmAtt
             // 
@@ -301,23 +296,71 @@
             this.CmiDeleteAtt.Text = "删除属性";
             this.CmiDeleteAtt.Click += new System.EventHandler(this.CmiDeleteAtt_Click);
             // 
+            // GbGroup
+            // 
+            this.GbGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GbGroup.Controls.Add(this.BtDrop);
+            this.GbGroup.Controls.Add(this.BtSave);
+            this.GbGroup.Controls.Add(this.BtCopy);
+            this.GbGroup.Location = new System.Drawing.Point(0, 151);
+            this.GbGroup.Name = "GbGroup";
+            this.GbGroup.Size = new System.Drawing.Size(350, 110);
+            this.GbGroup.TabIndex = 1;
+            this.GbGroup.TabStop = false;
+            this.GbGroup.Text = "提示";
+            // 
+            // BtCopy
+            // 
+            this.BtCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtCopy.Location = new System.Drawing.Point(321, 23);
+            this.BtCopy.Name = "BtCopy";
+            this.BtCopy.Size = new System.Drawing.Size(23, 23);
+            this.BtCopy.TabIndex = 1;
+            this.BtCopy.Text = "button1";
+            this.BtCopy.UseVisualStyleBackColor = true;
+            this.BtCopy.Click += new System.EventHandler(this.BtCopy_Click);
+            // 
+            // BtSave
+            // 
+            this.BtSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtSave.Location = new System.Drawing.Point(321, 52);
+            this.BtSave.Name = "BtSave";
+            this.BtSave.Size = new System.Drawing.Size(23, 23);
+            this.BtSave.TabIndex = 2;
+            this.BtSave.Text = "button2";
+            this.BtSave.UseVisualStyleBackColor = true;
+            this.BtSave.Click += new System.EventHandler(this.BtSave_Click);
+            // 
+            // BtDrop
+            // 
+            this.BtDrop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtDrop.Location = new System.Drawing.Point(321, 81);
+            this.BtDrop.Name = "BtDrop";
+            this.BtDrop.Size = new System.Drawing.Size(23, 23);
+            this.BtDrop.TabIndex = 3;
+            this.BtDrop.Text = "button3";
+            this.BtDrop.UseVisualStyleBackColor = true;
+            this.BtDrop.Click += new System.EventHandler(this.BtDrop_Click);
+            // 
             // APro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.GvAttList);
-            this.Controls.Add(this.AeAttEdit);
+            this.Controls.Add(this.GbGroup);
             this.Name = "APro";
-            this.Size = new System.Drawing.Size(332, 261);
+            this.Size = new System.Drawing.Size(350, 261);
             ((System.ComponentModel.ISupportInitialize)(this.GvAttList)).EndInit();
             this.CmAtt.ResumeLayout(false);
+            this.GbGroup.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private AttEdit AeAttEdit;
+        private System.Windows.Forms.GroupBox GbGroup;
         private System.Windows.Forms.DataGridView GvAttList;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn ValueCol;
@@ -345,5 +388,8 @@
         private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttFile;
         private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttLine;
         private System.Windows.Forms.ToolStripMenuItem CmiDeleteAtt;
+        private System.Windows.Forms.Button BtDrop;
+        private System.Windows.Forms.Button BtSave;
+        private System.Windows.Forms.Button BtCopy;
     }
 }

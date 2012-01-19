@@ -209,6 +209,8 @@ namespace Me.Amon.Pwd._Lib
 
                 TvLibView.SelectedNode = null;
             }
+
+            _DataModel.LibModified = -1;
         }
 
         public void SaveDetail(Model.LibDetail detail)
@@ -258,6 +260,7 @@ namespace Me.Amon.Pwd._Lib
 
                 TvLibView.SelectedNode = null;
             }
+            _DataModel.LibModified = -1;
         }
     }
 }

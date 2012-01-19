@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
 using Me.Amon.Da;
@@ -50,7 +50,7 @@ namespace Me.Amon.Model
             #region 口令模板
             DBAccess dba = _UserModel.DBAccess;
 
-            _LibList = new List<LibHeader>();
+            _LibList = new ObservableCollection<LibHeader>();
             _LibList.Insert(0, new LibHeader { Id = "0", Name = "请选择" });
             dba.ReInit();
             dba.AddTable(IDat.APWD0300);
@@ -94,11 +94,11 @@ namespace Me.Amon.Model
                     }
                 }
             }
-            LibModified = 0x7FFFFFFF;
+            LibModified = -1;
             #endregion
 
             #region 字符空间
-            _UcsList = new List<Ucs>();
+            _UcsList = new ObservableCollection<Ucs>();
             _UcsList.Add(new Ucs { Id = "aucs000000000001", Name = "仅数字", Tips = "仅数字", Data = "0123456789" });
             _UcsList.Add(new Ucs { Id = "aucs000000000002", Name = "大写字母", Tips = "大写字母", Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
             _UcsList.Add(new Ucs { Id = "aucs000000000003", Name = "小写字母", Tips = "小写字母", Data = "abcdefghijklmnopqrstuvwxyz" });
@@ -160,8 +160,8 @@ namespace Me.Amon.Model
         public string AsfDir { get { return _AsfDir; } }
 
         #region 口令模板
-        private List<LibHeader> _LibList;
-        public List<LibHeader> LibList
+        private ObservableCollection<LibHeader> _LibList;
+        public ObservableCollection<LibHeader> LibList
         {
             get
             {
@@ -172,8 +172,8 @@ namespace Me.Amon.Model
         #endregion
 
         #region 字符集
-        private List<Ucs> _UcsList;
-        public List<Ucs> UcsList
+        private ObservableCollection<Ucs> _UcsList;
+        public ObservableCollection<Ucs> UcsList
         {
             get
             {
