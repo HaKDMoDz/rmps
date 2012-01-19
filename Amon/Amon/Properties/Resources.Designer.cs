@@ -80,5 +80,12 @@ namespace Me.Amon.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.Drawing.Bitmap Pupil {
+            get {
+                object obj = ResourceManager.GetObject("Pupil", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

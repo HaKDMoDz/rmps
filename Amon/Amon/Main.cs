@@ -34,7 +34,7 @@ namespace Me.Amon
             Location = new Point(x, y);
             ClientSize = new Size(88, 28);
 
-            ChangeStyle('0');
+            ChangeStyle();
 
             GenImage();
 
@@ -74,7 +74,7 @@ namespace Me.Amon
         private int _ScreenH;
 
         private Image _BufImage;
-        private Image _SrcImage;
+        private Image _TmpImage;
         private Image _PupilImg;
         private Brush _BgBrush;
         private Rectangle _Rect1;
@@ -85,126 +85,28 @@ namespace Me.Amon
         private Point _MouseOffset;
         private bool _IsMouseDown;
 
-        private void ChangeStyle(char style)
+        private void ChangeStyle()
         {
-            if (_BufImage == null)
-            {
-                _BufImage = new Bitmap(32, 32);
-            }
+            _AlienRadius = 10;
+            _AlienCenterX = 12;
+            _AlienCenterY = 12;
 
-            if (_BgBrush == null)
-            {
-                _BgBrush = new SolidBrush(Color.Black);
-            }
+            _PupilRadius = 6;
+            _PupilCenterX = _AlienCenterX;
+            _PupilCenterY = _AlienCenterY;
 
-            if (style == 'l')
-            {
-                _SrcImage = Image.FromFile("Skin\\Feel\\Default\\eyel.png");
+            _BufImage = new Bitmap(32, 32);
+            _TmpImage = new Bitmap(20, 20);
 
-                _AlienRadius = 14;
-                _AlienCenterX = 26;
-                _AlienCenterY = 21;
+            _BgBrush = new SolidBrush(Color.Black);
 
-                _PupilRadius = 8;
-                _PupilCenterX = _AlienCenterX;
-                _PupilCenterY = _AlienCenterY;
+            _Rect1 = new Rectangle(0, 0, 20, 20);
+            _LgBrush1 = new SolidBrush(Color.White);
 
-                if (_PupilImg == null)
-                {
-                    _PupilImg = new Bitmap(_PupilRadius << 1, _PupilRadius << 1);
-                }
+            _Rect2 = new Rectangle(0, 0, 20, 20);
+            _LgBrush2 = new SolidBrush(Color.White);
 
-                _Rect1 = new Rectangle(5, 10, 20, 15);
-                _LgBrush1 = new LinearGradientBrush(_Rect1, Color.FromArgb(160, 255, 255, 255), Color.FromArgb(0, 255, 255, 255), LinearGradientMode.Horizontal);
-
-                _Rect2 = new Rectangle(14, 10, 12, 12);
-                _LgBrush2 = new LinearGradientBrush(_Rect2, Color.FromArgb(255, 255, 255, 255), Color.FromArgb(0, 255, 255, 255), LinearGradientMode.ForwardDiagonal);
-
-                using (Graphics g = Graphics.FromImage(_PupilImg))
-                {
-                    g.SmoothingMode = SmoothingMode.AntiAlias;
-
-                    g.Clear(Color.FromArgb(0, 0, 0, 0));
-                    g.FillEllipse(new SolidBrush(Color.Black), 0, 0, _PupilImg.Width, _PupilImg.Height);
-
-                    Rectangle rect = new Rectangle(2, 2, _PupilRadius, _PupilRadius);
-                    Brush brush = new LinearGradientBrush(rect, Color.FromArgb(255, 255, 255, 255), Color.FromArgb(0, 255, 255, 255), LinearGradientMode.ForwardDiagonal);
-                    g.FillEllipse(brush, rect);
-                }
-                return;
-            }
-            else if (style == 'r')
-            {
-                _SrcImage = Image.FromFile("Skin\\Feel\\Default\\eyer.png");
-
-                _AlienRadius = 10;
-                _AlienCenterX = 14;
-                _AlienCenterY = 14;
-
-                _PupilRadius = 5;
-                _PupilCenterX = _AlienCenterX;
-                _PupilCenterY = _AlienCenterY;
-
-                if (_PupilImg == null)
-                {
-                    _PupilImg = new Bitmap(_PupilRadius << 1, _PupilRadius << 1);
-                }
-
-                _Rect1 = new Rectangle(23, 10, 20, 15);
-                _LgBrush1 = new LinearGradientBrush(_Rect1, Color.FromArgb(0, 255, 255, 255), Color.FromArgb(160, 255, 255, 255), LinearGradientMode.Horizontal);
-
-                _Rect2 = new Rectangle(22, 10, 12, 12);
-                _LgBrush2 = new LinearGradientBrush(_Rect2, Color.FromArgb(255, 255, 255, 255), Color.FromArgb(0, 255, 255, 255), LinearGradientMode.BackwardDiagonal);
-
-                using (Graphics g = Graphics.FromImage(_PupilImg))
-                {
-                    g.SmoothingMode = SmoothingMode.AntiAlias;
-                    g.TextRenderingHint = TextRenderingHint.AntiAlias;
-
-                    g.Clear(Color.FromArgb(0, 0, 0, 0));
-                    g.FillEllipse(new SolidBrush(Color.Black), 0, 0, _PupilImg.Width, _PupilImg.Height);
-
-                    Rectangle rect = new Rectangle(_PupilRadius - 2, 2, _PupilRadius, _PupilRadius);
-                    Brush brush = new LinearGradientBrush(rect, Color.FromArgb(255, 255, 255, 255), Color.FromArgb(0, 255, 255, 255), LinearGradientMode.BackwardDiagonal);
-                    g.FillEllipse(brush, rect);
-                }
-            }
-            else
-            {
-                _SrcImage = Resources.eye24;
-
-                _AlienRadius = 14;
-                _AlienCenterX = 15;
-                _AlienCenterY = 15;
-
-                _PupilRadius = 5;
-                _PupilCenterX = _AlienCenterX;
-                _PupilCenterY = _AlienCenterY;
-
-                if (_PupilImg == null)
-                {
-                    _PupilImg = new Bitmap(_PupilRadius << 1, _PupilRadius << 1);
-                }
-
-                _Rect1 = new Rectangle(2, 2, 28, 28);
-                _LgBrush1 = new SolidBrush(Color.Black);
-
-                _Rect2 = new Rectangle(4, 4, 24, 24);
-                _LgBrush2 = new SolidBrush(Color.White);
-
-                using (Graphics g = Graphics.FromImage(_PupilImg))
-                {
-                    g.SmoothingMode = SmoothingMode.AntiAlias;
-                    g.TextRenderingHint = TextRenderingHint.AntiAlias;
-
-                    g.Clear(Color.FromArgb(0, 0, 0, 0));
-                    g.FillEllipse(new SolidBrush(Color.Black), 0, 0, _PupilImg.Width, _PupilImg.Height);
-
-                    Rectangle rect = new Rectangle(_PupilRadius - 2, 2, _PupilRadius, _PupilRadius);
-                    Brush brush = new LinearGradientBrush(rect, Color.FromArgb(255, 255, 255, 255), Color.FromArgb(0, 255, 255, 255), LinearGradientMode.BackwardDiagonal);
-                    g.FillEllipse(brush, rect);
-                }
-            }
+            _PupilImg = Resources.Pupil;
         }
 
         private void BgWorker_Tick(object sender, System.EventArgs e)
@@ -262,7 +164,7 @@ namespace Me.Amon
         {
             using (Graphics g = Graphics.FromImage(_BufImage))
             {
-                g.SmoothingMode = SmoothingMode.AntiAlias;
+                g.SmoothingMode = SmoothingMode.HighQuality;
                 //g.TextRenderingHint = TextRenderingHint.AntiAlias;
 
                 Style0(g);
@@ -275,19 +177,28 @@ namespace Me.Amon
         private void Style0(Graphics g)
         {
             g.FillRectangle(_BgBrush, 0, 0, 32, 32);
-            if (_SrcImage != null)
+
+            using (Graphics g1 = Graphics.FromImage(_TmpImage))
             {
-                g.DrawImage(_SrcImage, 0, 0);
+                g1.SmoothingMode = SmoothingMode.HighQuality;
+
+                g1.FillRectangle(_BgBrush, 0, 0, _TmpImage.Width, _TmpImage.Height);
+                g1.FillEllipse(_LgBrush1, _Rect1);
+
+                int x = _PupilCenterX - _PupilRadius;
+                int y = _PupilCenterY - _PupilRadius;
+                int r = _PupilRadius << 1;
+                g1.DrawImage(_PupilImg, x, y, _PupilImg.Width, _PupilImg.Height);
+
+                g1.Flush();
             }
 
-            //g.DrawEllipse(new Pen(Color.Black), _Rect1);
-            //g.DrawEllipse(new Pen(Color.Black), _Rect2);
+            g.FillEllipse(new SolidBrush(Color.Black), _Rect1);
+            g.FillEllipse(new SolidBrush(Color.White), _Rect2);
 
-            int x = _PupilCenterX - _PupilRadius;
-            int y = _PupilCenterY - _PupilRadius;
-            int r = _PupilRadius << 1;
-            g.FillEllipse(_BgBrush, x, y, r, r);
-            g.DrawImage(_PupilImg, x, y);
+            //g.FillEllipse(_BgBrush, x, y, r, r);
+            g.DrawImage(_TmpImage, 2, 1, 8, 20);
+            g.DrawImage(_TmpImage, 14, 1, 8, 20);
         }
         #endregion
 

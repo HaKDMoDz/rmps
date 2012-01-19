@@ -769,6 +769,7 @@
     <None Include="Resources\eye16.png" />
     <None Include="Resources\eye24.png" />
     <None Include="Resources\eye32.png" />
+    <None Include="Resources\Pupil.png" />
     <Content Include="Skin\Feel\Default\att-card.png" />
     <Content Include="Skin\Feel\Default\att-date.png" />
     <Content Include="Skin\Feel\Default\att-file-saveas.png" />
