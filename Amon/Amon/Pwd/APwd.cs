@@ -890,7 +890,7 @@ namespace Me.Amon.Pwd
                 string ver = reader.ReadLine();
                 if ("APwd-1" != ver)
                 {
-                    MessageBox.Show("未知的文件版本，无法进行导入处理！");
+                    BeanUtil.ShowAlert("未知的文件版本，无法进行导入处理！");
                     return;
                 }
 
@@ -933,24 +933,14 @@ namespace Me.Amon.Pwd
 
             using (XmlReader reader = XmlReader.Create(File.OpenText(file)))
             {
-                if (!reader.ReadToFollowing("App"))
+                if (!reader.ReadToFollowing("App") || reader.ReadElementContentAsString() != "APwd")
                 {
-                    MessageBox.Show("未知的文件格式，无法进行导入处理！");
+                    BeanUtil.ShowAlert("未知的文件格式，无法进行导入处理！");
                     return;
                 }
-                if (reader.ReadElementContentAsString() != "APwd")
+                if (reader.Name != "Ver" && !reader.ReadToFollowing("Ver") || reader.ReadElementContentAsString() != "1")
                 {
-                    MessageBox.Show("未知的文件格式，无法进行导入处理！");
-                    return;
-                }
-                if (reader.Name != "Ver" && !reader.ReadToFollowing("Ver"))
-                {
-                    MessageBox.Show("未知的文件版本，无法进行导入处理！");
-                    return;
-                }
-                if (reader.ReadElementContentAsString() != "1")
-                {
-                    MessageBox.Show("未知的文件版本，无法进行导入处理！");
+                    BeanUtil.ShowAlert("未知的文件版本，无法进行导入处理！");
                     return;
                 }
                 while (reader.ReadToFollowing("Key"))
@@ -992,7 +982,7 @@ namespace Me.Amon.Pwd
                 string ver = reader.ReadLine();
                 if ("2" != ver)
                 {
-                    MessageBox.Show("未知的文件版本，无法进行导入处理！");
+                    BeanUtil.ShowAlert("未知的文件版本，无法进行导入处理！");
                     return;
                 }
 
@@ -1541,7 +1531,7 @@ namespace Me.Amon.Pwd
             TreeNode node = TvCatTree.SelectedNode;
             if (node == null)
             {
-                MessageBox.Show("请选择您要更新的类别！", "");
+                BeanUtil.ShowAlert("请选择您要更新的类别！");
                 TvCatTree.Focus();
                 return;
             }
@@ -1589,7 +1579,7 @@ namespace Me.Amon.Pwd
             TreeNode node = TvCatTree.SelectedNode;
             if (node == null)
             {
-                MessageBox.Show("请选择您要更新的类别！", "");
+                BeanUtil.ShowAlert("请选择您要删除的类别！");
                 TvCatTree.Focus();
                 return;
             }
@@ -1602,7 +1592,7 @@ namespace Me.Amon.Pwd
 
             if (node.Nodes.Count > 0)
             {
-                MessageBox.Show("子类别不为空，不能删除！", "");
+                BeanUtil.ShowAlert("子类别不为空，不能删除！");
                 return;
             }
 
@@ -1615,7 +1605,7 @@ namespace Me.Amon.Pwd
             long cnt = (long)dba.ExecuteScalar();
             if (cnt > 0)
             {
-                MessageBox.Show("口令记录不为空，不能删除！", "");
+                BeanUtil.ShowAlert("口令记录不为空，不能删除！");
                 return;
             }
 
@@ -1938,7 +1928,7 @@ namespace Me.Amon.Pwd
             meta = Regex.Replace(meta, "[+%\\s]+", "%");
             if (meta == "%")
             {
-                MessageBox.Show("您输入的查询条件无效！");
+                BeanUtil.ShowAlert("您输入的查询条件无效！");
                 return;
             }
 
@@ -1986,7 +1976,7 @@ namespace Me.Amon.Pwd
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message);
+                BeanUtil.ShowAlert(exp.Message);
             }
         }
 
