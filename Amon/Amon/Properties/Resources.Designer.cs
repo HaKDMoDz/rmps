@@ -60,27 +60,6 @@ namespace Me.Amon.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap eye16 {
-            get {
-                object obj = ResourceManager.GetObject("eye16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap eye24 {
-            get {
-                object obj = ResourceManager.GetObject("eye24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap eye32 {
-            get {
-                object obj = ResourceManager.GetObject("eye32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap Pupil {
             get {
                 object obj = ResourceManager.GetObject("Pupil", resourceCulture);
