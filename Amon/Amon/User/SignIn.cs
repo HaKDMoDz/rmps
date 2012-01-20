@@ -190,5 +190,17 @@ namespace Me.Amon.User
         {
             CmMenu.Show(PbMenu, 0, PbMenu.Height);
         }
+
+        private void MiSignUp_Click(object sender, EventArgs e)
+        {
+            SignUp signUp = new SignUp(_UserModel);
+            signUp.Show();
+            Close();
+        }
+
+        private void MiUpgrade_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

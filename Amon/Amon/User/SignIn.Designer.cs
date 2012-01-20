@@ -40,6 +40,7 @@
             this.MiSignUp = new System.Windows.Forms.ToolStripMenuItem();
             this.PbMenu = new System.Windows.Forms.PictureBox();
             this.PbGuid = new System.Windows.Forms.PictureBox();
+            this.MiUpgrade = new System.Windows.Forms.ToolStripMenuItem();
             this.CmMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbGuid)).BeginInit();
@@ -104,15 +105,17 @@
             // CmMenu
             // 
             this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MiSignUp});
+            this.MiSignUp,
+            this.MiUpgrade});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(117, 26);
+            this.CmMenu.Size = new System.Drawing.Size(153, 70);
             // 
             // MiSignUp
             // 
             this.MiSignUp.Name = "MiSignUp";
-            this.MiSignUp.Size = new System.Drawing.Size(116, 22);
+            this.MiSignUp.Size = new System.Drawing.Size(152, 22);
             this.MiSignUp.Text = "注册(&R)";
+            this.MiSignUp.Click += new System.EventHandler(this.MiSignUp_Click);
             // 
             // PbMenu
             // 
@@ -133,6 +136,14 @@
             this.PbGuid.Size = new System.Drawing.Size(250, 40);
             this.PbGuid.TabIndex = 2;
             this.PbGuid.TabStop = false;
+            // 
+            // MiUpgrade
+            // 
+            this.MiUpgrade.Enabled = false;
+            this.MiUpgrade.Name = "MiUpgrade";
+            this.MiUpgrade.Size = new System.Drawing.Size(152, 22);
+            this.MiUpgrade.Text = "升级(&U)";
+            this.MiUpgrade.Click += new System.EventHandler(this.MiUpgrade_Click);
             // 
             // SignIn
             // 
@@ -176,5 +187,6 @@
         private System.Windows.Forms.PictureBox PbMenu;
         private System.Windows.Forms.ContextMenuStrip CmMenu;
         private System.Windows.Forms.ToolStripMenuItem MiSignUp;
+        private System.Windows.Forms.ToolStripMenuItem MiUpgrade;
     }
 }
