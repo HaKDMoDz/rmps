@@ -182,8 +182,9 @@ namespace Me.Amon.Pwd._Lib
 
             if (CharUtil.IsValidateHash(header.Id))
             {
-                dba.AddWhere(IDat.APWD0304, header.Id);
                 dba.AddWhere(IDat.APWD0303, _UserModel.Code);
+                dba.AddWhere(IDat.APWD0304, header.Id);
+                dba.AddVcs(IDat.APWD030B, IDat.APWD030C, header.Operate, IDat.OPT_UPDATE);
                 dba.ExecuteUpdate();
 
                 _Selected.Text = header.Name;
@@ -191,11 +192,12 @@ namespace Me.Amon.Pwd._Lib
             }
             else
             {
-                header.Id = HashUtil.GetCurrTimeHex(false);
+                header.Id = HashUtil.UtcTimeInHex(false);
                 dba.AddParam(IDat.APWD0301, TvLibView.Nodes.Count);
+                dba.AddParam(IDat.APWD0303, _UserModel.Code);
                 dba.AddParam(IDat.APWD0304, header.Id);
                 dba.AddParam(IDat.APWD030A, IDat.SQL_NOW, false);
-                dba.AddParam(IDat.APWD0303, _UserModel.Code);
+                dba.AddVcs(IDat.APWD030B, IDat.APWD030C);
                 dba.ExecuteInsert();
 
                 _DataModel.LibList.Add(header);
@@ -228,8 +230,7 @@ namespace Me.Amon.Pwd._Lib
             {
                 dba.AddWhere(IDat.APWD0303, _UserModel.Code);
                 dba.AddWhere(IDat.APWD0304, detail.Id);
-                dba.AddVcs(IDat.APWD030B, 1);
-                dba.AddOpt(IDat.APWD030C, detail.Operate, IDat.OPT_UPDATE);
+                dba.AddVcs(IDat.APWD030B, IDat.APWD030C, detail.Operate, IDat.OPT_UPDATE);
                 dba.ExecuteUpdate();
 
                 _Selected.Text = AAtt.SP_TPL_LS + detail.Name + AAtt.SP_TPL_RS;
@@ -239,14 +240,13 @@ namespace Me.Amon.Pwd._Lib
             {
                 Model.LibHeader header = _Selected.Tag as Model.LibHeader;
 
-                detail.Id = HashUtil.GetCurrTimeHex(false);
+                detail.Id = HashUtil.UtcTimeInHex(false);
                 dba.AddParam(IDat.APWD0301, _Selected.Nodes.Count);
                 dba.AddParam(IDat.APWD0303, _UserModel.Code);
                 dba.AddParam(IDat.APWD0304, detail.Id);
                 dba.AddParam(IDat.APWD0305, _Selected.Name);
                 dba.AddParam(IDat.APWD030A, IDat.SQL_NOW, false);
-                dba.AddParam(IDat.APWD030B, IDat.VCS_DEFAULT);
-                dba.AddParam(IDat.APWD030C, IDat.OPT_INSERT);
+                dba.AddVcs(IDat.APWD030B, IDat.APWD030C);
                 dba.ExecuteInsert();
 
                 header.Details.Add(detail);

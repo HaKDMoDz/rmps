@@ -1,15 +1,28 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 using System.Windows.Forms;
+using Me.Amon.Event;
+using Me.Amon.Model;
 using Me.Amon.Properties;
+using Me.Amon.Pwd;
+using Me.Amon.Sec;
 using Me.Amon.User;
+using Me.Amon.Util;
+using Me.Amon.Uw;
 
 namespace Me.Amon
 {
     public partial class Main : Form
     {
+        private static IApp _IApp;
+        private static Alert _Alert;
+        private static Input _Input;
+        private static Waiting _Waiting;
+        private UserModel _UserModel;
+        private APwd _APwd;
+        private ASec _ASec;
+
         #region 构造函数
         public Main()
         {
@@ -18,8 +31,11 @@ namespace Me.Amon
 
         public void Init()
         {
-            _ScreenW = SystemInformation.WorkingArea.Width;
-            _ScreenH = SystemInformation.WorkingArea.Height;
+            Region = new Region(new Rectangle(0, 0, 25, 25));
+            TransparencyKey = this.BackColor;
+
+            _ScreenW = Screen.PrimaryScreen.Bounds.Width;
+            _ScreenH = Screen.PrimaryScreen.Bounds.Height;
 
             int x = Settings.Default.LocX;
             if (x < 0)
@@ -32,82 +48,70 @@ namespace Me.Amon
                 y = 0;
             }
             Location = new Point(x, y);
-            ClientSize = new Size(88, 28);
 
-            ChangeStyle();
+            _AlienRadius = 11;
+            _AlienCenterX = 12;
+            _AlienCenterY = 12;
+            x = _AlienRadius << 1;
+            _AlienRect = new Rectangle(0, 0, x, x);
 
-            GenImage();
+            _PupilImg = Resources.Pupil;
+            _PupilRadius = 6;
+            _PupilCenterX = _AlienRadius;
+            _PupilCenterY = _AlienRadius;
+
+            _BufImage = new Bitmap(PbLogo.Width, PbLogo.Height);
+            _BufBrush = new SolidBrush(Color.Black);
+
+            _TmpImage = new Bitmap(x, x);
+            _TmpBrush = new SolidBrush(Color.White);
+
+            x = (_BufImage.Width - _TmpImage.Width) / 3;
+            y = (_BufImage.Height - _TmpImage.Height) >> 1;
+            _LRect = new Rectangle(x, y, _AlienRadius, _TmpImage.Height);
+            _RRect = new Rectangle(x + _AlienRadius + x, y, _AlienRadius, _TmpImage.Height);
+
+            GenImage(_PupilCenterX, _PupilCenterY);
 
             BgWorker.Interval = 30;
             BgWorker.Start();
+
+            _UserModel = new UserModel();
         }
         #endregion
 
-        private void BtPwd_Click(object sender, System.EventArgs e)
-        {
-            SignIn signIn = new SignIn();
-            signIn.Show();
-        }
-
-        private void button1_Click(object sender, System.EventArgs e)
-        {
-            Close();
-        }
-
         #region 眼睛动画
+        /// <summary>
+        /// 屏幕
+        /// </summary>
+        private int _ScreenW;
+        private int _ScreenH;
         /// <summary>
         /// 瞳仁
         /// </summary>
+        private Rectangle _AlienRect;
         private int _AlienRadius;
         private int _AlienCenterX;
         private int _AlienCenterY;
         /// <summary>
         /// 瞳孔
         /// </summary>
+        private Image _PupilImg;
         private int _PupilRadius;
         private int _PupilCenterX;
         private int _PupilCenterY;
         /// <summary>
-        /// 
+        /// 成像
         /// </summary>
-        private int _ScreenW;
-        private int _ScreenH;
-
         private Image _BufImage;
+        private Brush _BufBrush;
         private Image _TmpImage;
-        private Image _PupilImg;
-        private Brush _BgBrush;
-        private Rectangle _Rect1;
-        private Rectangle _Rect2;
-        private Brush _LgBrush1;
-        private Brush _LgBrush2;
+        private Brush _TmpBrush;
+        private Rectangle _LRect;
+        private Rectangle _RRect;
 
         private Point _MouseOffset;
         private bool _IsMouseDown;
-
-        private void ChangeStyle()
-        {
-            _AlienRadius = 10;
-            _AlienCenterX = 12;
-            _AlienCenterY = 12;
-
-            _PupilRadius = 6;
-            _PupilCenterX = _AlienCenterX;
-            _PupilCenterY = _AlienCenterY;
-
-            _BufImage = new Bitmap(32, 32);
-            _TmpImage = new Bitmap(20, 20);
-
-            _BgBrush = new SolidBrush(Color.Black);
-
-            _Rect1 = new Rectangle(0, 0, 20, 20);
-            _LgBrush1 = new SolidBrush(Color.White);
-
-            _Rect2 = new Rectangle(0, 0, 20, 20);
-            _LgBrush2 = new SolidBrush(Color.White);
-
-            _PupilImg = Resources.Pupil;
-        }
 
         private void BgWorker_Tick(object sender, System.EventArgs e)
         {
@@ -136,13 +140,22 @@ namespace Me.Amon
                 y = _ScreenH;
             }
 
+            // 眼睛中心坐标
             int cx = Location.X + _AlienCenterX;
             int cy = Location.Y + _AlienCenterY;
 
             int mw = x - cx;//象限水平鼠标距离
             int mh = y - cy;//象限垂直鼠标距离
             int sw = mw < 0 ? cx : (_ScreenW - cx);//象限屏幕宽度
+            if (sw < 1)
+            {
+                sw = 1;
+            }
             int sh = mh < 0 ? cy : (_ScreenH - cy);//象限屏幕高度
+            if (sh < 1)
+            {
+                sh = 1;
+            }
             int dr = _AlienRadius - _PupilRadius;//可绘制半径
             double rw = (double)mw / sw;
             double rh = (double)mh / sh;
@@ -152,53 +165,39 @@ namespace Me.Amon
                 rr = 1;
             }
 
-            double dw = 1.0;//绽放比例
-            double dh = 1.0;
-            _PupilCenterX = (int)(dr * dw * rw / rr) + _AlienCenterX;
-            _PupilCenterY = (int)(dr * dh * rh / rr) + _AlienCenterY;
+            x = (int)(dr * rw / rr) + _PupilCenterX;
+            y = (int)(dr * rh / rr) + _PupilCenterY;
 
-            GenImage();
+            GenImage(x, y);
         }
 
-        private void GenImage()
+        private void GenImage(int x, int y)
         {
-            using (Graphics g = Graphics.FromImage(_BufImage))
-            {
-                g.SmoothingMode = SmoothingMode.HighQuality;
-                //g.TextRenderingHint = TextRenderingHint.AntiAlias;
-
-                Style0(g);
-
-                g.Flush();
-            }
-            pictureBox1.Image = _BufImage;
-        }
-
-        private void Style0(Graphics g)
-        {
-            g.FillRectangle(_BgBrush, 0, 0, 32, 32);
-
-            using (Graphics g1 = Graphics.FromImage(_TmpImage))
+            using (Graphics g1 = Graphics.FromImage(_BufImage))
             {
                 g1.SmoothingMode = SmoothingMode.HighQuality;
+                //g1.TextRenderingHint = TextRenderingHint.AntiAlias;
 
-                g1.FillRectangle(_BgBrush, 0, 0, _TmpImage.Width, _TmpImage.Height);
-                g1.FillEllipse(_LgBrush1, _Rect1);
+                using (Graphics g2 = Graphics.FromImage(_TmpImage))
+                {
+                    g2.SmoothingMode = SmoothingMode.HighQuality;
+                    //g2.TextRenderingHint = TextRenderingHint.AntiAlias;
 
-                int x = _PupilCenterX - _PupilRadius;
-                int y = _PupilCenterY - _PupilRadius;
-                int r = _PupilRadius << 1;
-                g1.DrawImage(_PupilImg, x, y, _PupilImg.Width, _PupilImg.Height);
+                    g2.FillRectangle(_BufBrush, _AlienRect);
+                    g2.FillEllipse(_TmpBrush, _AlienRect);
+
+                    g2.DrawImage(_PupilImg, x - _PupilRadius, y - _PupilRadius, _PupilImg.Width, _PupilImg.Height);
+
+                    g2.Flush();
+                }
+
+                g1.FillRectangle(_BufBrush, 0, 0, _BufImage.Width, _BufImage.Height);
+                g1.DrawImage(_TmpImage, _LRect);
+                g1.DrawImage(_TmpImage, _RRect);
 
                 g1.Flush();
             }
-
-            g.FillEllipse(new SolidBrush(Color.Black), _Rect1);
-            g.FillEllipse(new SolidBrush(Color.White), _Rect2);
-
-            //g.FillEllipse(_BgBrush, x, y, r, r);
-            g.DrawImage(_TmpImage, 2, 1, 8, 20);
-            g.DrawImage(_TmpImage, 14, 1, 8, 20);
+            PbLogo.Image = _BufImage;
         }
         #endregion
 
@@ -256,47 +255,193 @@ namespace Me.Amon
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (_IApp != null && !_IApp.WillExit())
+            {
+                return;
+            }
+
             Settings.Default.LocX = Location.X;
             Settings.Default.LocY = Location.Y;
             Settings.Default.Save();
             //HOOK.StopHook();
         }
+
+        private void NiTray_DoubleClick(object sender, EventArgs e)
+        {
+            BringToFront();
+        }
         #endregion
 
         #region 菜单事件
-        private void MiTopMost_Click(object sender, EventArgs e)
-        {
-            TopMost = !TopMost;
-        }
-
-        private void MiTrayIco_Click(object sender, EventArgs e)
+        private void MgTray_Click(object sender, EventArgs e)
         {
             NiTray.Visible = !NiTray.Visible;
+            MgTray.Checked = NiTray.Visible;
         }
 
-        private void MiPwd_Click(object sender, EventArgs e)
+        private void MgAPwd_Click(object sender, EventArgs e)
         {
-            ShowAPwd();
+            if (_IApp == null || !_IApp.Visible)
+            {
+                CheckUser(new AmonHandler<int>(ShowAPwd));
+                return;
+            }
+
+            if (_IApp.AppId != IEnv.IAPP_APWD)
+            {
+                _IApp.Visible = false;
+                ShowAPwd(IEnv.IAPP_APWD);
+                return;
+            }
         }
 
-        private void MiSec_Click(object sender, EventArgs e)
+        private void MgASec_Click(object sender, EventArgs e)
         {
-            ShowASec();
+            if (_IApp == null || !_IApp.Visible)
+            {
+                CheckUser(new AmonHandler<int>(ShowASec));
+                return;
+            }
+
+            if (_IApp.AppId != IEnv.IAPP_ASEC)
+            {
+                _IApp.Visible = false;
+                ShowAPwd(IEnv.IAPP_ASEC);
+                return;
+            }
         }
 
-        private void MiExit_Click(object sender, EventArgs e)
+        private void MgTopMost_Click(object sender, EventArgs e)
+        {
+            TopMost = !TopMost;
+            MgTopMost.Checked = TopMost;
+        }
+
+        private void MgExit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void MtGuid_Click(object sender, EventArgs e)
+        {
+            Visible = !Visible;
+            MtGuid.Checked = Visible;
+        }
+
+        private void MtAPwd_Click(object sender, EventArgs e)
+        {
+            if (_IApp == null || !_IApp.Visible)
+            {
+                CheckUser(new AmonHandler<int>(ShowAPwd));
+                return;
+            }
+
+            if (_IApp.AppId != IEnv.IAPP_APWD)
+            {
+                _IApp.Visible = false;
+                ShowAPwd(IEnv.IAPP_APWD);
+                return;
+            }
+        }
+
+        private void MtASec_Click(object sender, EventArgs e)
+        {
+            if (_IApp == null || !_IApp.Visible)
+            {
+                CheckUser(new AmonHandler<int>(ShowASec));
+                return;
+            }
+
+            if (_IApp.AppId != IEnv.IAPP_ASEC)
+            {
+                _IApp.Visible = false;
+                ShowAPwd(IEnv.IAPP_ASEC);
+                return;
+            }
+        }
+
+        private void MtExit_Click(object sender, EventArgs e)
         {
             Close();
         }
         #endregion
 
-        #region 私有函数
-        private void ShowAPwd()
+        #region 全局函数
+        public static DialogResult ShowConfirm(string message)
         {
+            return MessageBox.Show(_IApp.Form, message, "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
         }
 
-        private void ShowASec()
+        public static void ShowWaiting(string message)
         {
+            if (_Waiting == null)
+            {
+                _Waiting = new Waiting();
+            }
+            BeanUtil.CenterToParent(_Waiting, _IApp.Form);
+            _Waiting.Show(_IApp.Form, message);
+        }
+
+        public static void ShowAlert(string alert)
+        {
+            if (_Alert == null)
+            {
+                _Alert = new Alert();
+            }
+            BeanUtil.CenterToParent(_Alert, _IApp.Form);
+            _Alert.Show(_IApp.Form, alert);
+        }
+
+        public static void ShowInput(string message, string deftext)
+        {
+            if (_Input == null)
+            {
+                _Input = new Input();
+            }
+            BeanUtil.CenterToParent(_Input, _IApp.Form);
+            _Input.Show(_IApp.Form, message, deftext);
+        }
+        #endregion
+
+        #region 私有函数
+        private void CheckUser(AmonHandler<int> handler)
+        {
+            if (!CharUtil.IsValidateCode(_UserModel.Code))
+            {
+                SignIn signIn = new SignIn(_UserModel);
+                signIn.CallBackHandler = handler;
+                signIn.Show();
+            }
+            else
+            {
+                SignRs signRs = new SignRs(_UserModel);
+                signRs.CallBackHandler = handler;
+                signRs.Show();
+            }
+        }
+
+        private void ShowAPwd(int view)
+        {
+            if (_APwd == null)
+            {
+                _APwd = new APwd(_UserModel);
+                _APwd.InitOnce();
+            }
+            _IApp = _APwd;
+
+            _APwd.Show();
+        }
+
+        private void ShowASec(int view)
+        {
+            if (_ASec == null)
+            {
+                _ASec = new ASec(_UserModel);
+                _ASec.InitOnce();
+            }
+            _IApp = _ASec;
+
+            _ASec.Show();
         }
         #endregion
     }

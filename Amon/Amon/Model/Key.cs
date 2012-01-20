@@ -160,7 +160,8 @@ namespace Me.Amon.Model
             Memo = row[IDat.APWD0110] as string;
 
             VisitDate = row[IDat.APWD0111] as string;
-            CipherVer = row[IDat.APWD0112] as string;
+            Backup = (string)row[IDat.APWD0112] == "t";
+            CipherVer = row[IDat.APWD0113] as string;
 
             _IsUpdate = true;
             Modified = false;

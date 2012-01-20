@@ -93,7 +93,7 @@ namespace Me.Amon.Pwd.Wiz
             LibHeader lib = CbLib.SelectedItem as LibHeader;
             if (lib == null || !CharUtil.IsValidateHash(lib.Id))
             {
-                BeanUtil.ShowAlert("请选择您要使用的模板！");
+                Main.ShowAlert("请选择您要使用的模板！");
                 CbLib.Focus();
                 return false;
             }
@@ -101,7 +101,7 @@ namespace Me.Amon.Pwd.Wiz
             string name = TbName.Text;
             if (!CharUtil.IsValidate(name))
             {
-                BeanUtil.ShowAlert("请输入口令标题！");
+                Main.ShowAlert("请输入口令标题！");
                 TbName.Focus();
                 return false;
             }

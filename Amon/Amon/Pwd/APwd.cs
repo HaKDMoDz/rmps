@@ -21,7 +21,7 @@ using Me.Amon.Util;
 
 namespace Me.Amon.Pwd
 {
-    public partial class APwd : Form
+    public partial class APwd : Form, IApp
     {
         #region 全局变量
         private FindBar _FindBar;
@@ -54,7 +54,7 @@ namespace Me.Amon.Pwd
             InitializeComponent();
         }
 
-        public void Init()
+        public void InitOnce()
         {
             _SafeModel = new SafeModel(_UserModel);
             _SafeModel.Init();
@@ -102,6 +102,20 @@ namespace Me.Amon.Pwd
             _LastLabel = CmiLabel0;
             _CmiMajors = new ToolStripMenuItem[] { CmiMajorN2, CmiMajorN1, CmiMajor0, CmiMajorP1, CmiMajorP2, };
             _LastMajor = CmiMajor0;
+        }
+
+        public int AppId { get; set; }
+
+        public Form Form { get { return this; } }
+
+        public bool WillExit()
+        {
+            return true;
+        }
+
+        public bool SaveData()
+        {
+            return true;
         }
 
         private void InitCat(TreeNode root, DataTable data)
@@ -234,13 +248,13 @@ namespace Me.Amon.Pwd
 
             if (!CharUtil.IsValidateHash(key.Id))
             {
-                BeanUtil.ShowAlert("系统异常，请稍后重试！");
+                Main.ShowAlert("系统异常，请稍后重试！");
                 return;
             }
 
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                BeanUtil.ShowAlert("编辑中……");
+                Main.ShowAlert("编辑中……");
                 return;
             }
 
@@ -890,7 +904,7 @@ namespace Me.Amon.Pwd
                 string ver = reader.ReadLine();
                 if ("APwd-1" != ver)
                 {
-                    BeanUtil.ShowAlert("未知的文件版本，无法进行导入处理！");
+                    Main.ShowAlert("未知的文件版本，无法进行导入处理！");
                     return;
                 }
 
@@ -935,12 +949,12 @@ namespace Me.Amon.Pwd
             {
                 if (!reader.ReadToFollowing("App") || reader.ReadElementContentAsString() != "APwd")
                 {
-                    BeanUtil.ShowAlert("未知的文件格式，无法进行导入处理！");
+                    Main.ShowAlert("未知的文件格式，无法进行导入处理！");
                     return;
                 }
                 if (reader.Name != "Ver" && !reader.ReadToFollowing("Ver") || reader.ReadElementContentAsString() != "1")
                 {
-                    BeanUtil.ShowAlert("未知的文件版本，无法进行导入处理！");
+                    Main.ShowAlert("未知的文件版本，无法进行导入处理！");
                     return;
                 }
                 while (reader.ReadToFollowing("Key"))
@@ -982,7 +996,7 @@ namespace Me.Amon.Pwd
                 string ver = reader.ReadLine();
                 if ("2" != ver)
                 {
-                    BeanUtil.ShowAlert("未知的文件版本，无法进行导入处理！");
+                    Main.ShowAlert("未知的文件版本，无法进行导入处理！");
                     return;
                 }
 
@@ -1019,6 +1033,7 @@ namespace Me.Amon.Pwd
         {
             LibEdit edit = new LibEdit(_UserModel);
             edit.Init(_DataModel);
+            BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
 
@@ -1026,6 +1041,7 @@ namespace Me.Amon.Pwd
         {
             UcsEdit edit = new UcsEdit(_UserModel);
             edit.Init(_DataModel);
+            BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
 
@@ -1033,6 +1049,7 @@ namespace Me.Amon.Pwd
         {
             IcoEdit edit = new IcoEdit(_UserModel);
             edit.Init(_DataModel);
+            BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
         #endregion
@@ -1278,6 +1295,7 @@ namespace Me.Amon.Pwd
             CatView view = new CatView(_UserModel);
             view.Init(IlCatTree);
             view.CallBack = new AmonHandler<string>(ChangeCat);
+            BeanUtil.CenterToParent(view, this);
             view.ShowDialog(this);
         }
 
@@ -1285,6 +1303,7 @@ namespace Me.Amon.Pwd
         {
             LogEdit edit = new LogEdit(_UserModel);
             edit.Init(_SafeModel.Key);
+            BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
         #endregion
@@ -1374,8 +1393,7 @@ namespace Me.Amon.Pwd
             dba.AddParam(IDat.APWD0106, catId);
             dba.AddWhere(IDat.APWD0104, _UserModel.Code);
             dba.AddWhere(IDat.APWD0105, _SafeModel.Key.Id);
-            dba.AddVcs(IDat.APWD0113, 1);
-            dba.AddOpt(IDat.APWD0114, _SafeModel.Key.Operate, IDat.OPT_PWD_UPDATE_CAT);
+            dba.AddVcs(IDat.APWD0114, IDat.APWD0115, _SafeModel.Key.Operate, IDat.OPT_PWD_UPDATE_CAT);
             if (1 != dba.ExecuteUpdate())
             {
                 return;
@@ -1398,8 +1416,7 @@ namespace Me.Amon.Pwd
             dba.AddParam(IDat.APWD0102, label);
             dba.AddWhere(IDat.APWD0104, _UserModel.Code);
             dba.AddWhere(IDat.APWD0105, _SafeModel.Key.Id);
-            dba.AddVcs(IDat.APWD0113, 1);
-            dba.AddOpt(IDat.APWD0114, _SafeModel.Key.Operate, IDat.OPT_PWD_UPDATE_LABEL);
+            dba.AddVcs(IDat.APWD0114, IDat.APWD0115, _SafeModel.Key.Operate, IDat.OPT_PWD_UPDATE_LABEL);
             if (1 != dba.ExecuteUpdate())
             {
                 return;
@@ -1423,8 +1440,7 @@ namespace Me.Amon.Pwd
             dba.AddParam(IDat.APWD0103, major);
             dba.AddWhere(IDat.APWD0104, _UserModel.Code);
             dba.AddWhere(IDat.APWD0105, _SafeModel.Key.Id);
-            dba.AddVcs(IDat.APWD0113, 1);
-            dba.AddOpt(IDat.APWD0114, _SafeModel.Key.Operate, IDat.OPT_PWD_UPDATE_LABEL);
+            dba.AddVcs(IDat.APWD0114, IDat.APWD0115, _SafeModel.Key.Operate, IDat.OPT_PWD_UPDATE_MAJOR);
             if (1 != dba.ExecuteUpdate())
             {
                 return;
@@ -1490,7 +1506,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            cat.Id = HashUtil.GetCurrTimeHex(false);
+            cat.Id = HashUtil.UtcTimeInHex(false);
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
@@ -1506,8 +1522,7 @@ namespace Me.Amon.Pwd
             dba.AddParam(IDat.C2010209, cat.Memo);
             dba.AddParam(IDat.C201020A, IDat.SQL_NOW, false);
             dba.AddParam(IDat.C201020B, IDat.SQL_NOW, false);
-            dba.AddParam(IDat.C201020C, IDat.VCS_DEFAULT);
-            dba.AddParam(IDat.C201020D, IDat.OPT_INSERT);
+            dba.AddVcs(IDat.C201020C, IDat.C201020D);
             if (1 != dba.ExecuteInsert())
             {
                 return;
@@ -1531,7 +1546,7 @@ namespace Me.Amon.Pwd
             TreeNode node = TvCatTree.SelectedNode;
             if (node == null)
             {
-                BeanUtil.ShowAlert("请选择您要更新的类别！");
+                Main.ShowAlert("请选择您要更新的类别！");
                 TvCatTree.Focus();
                 return;
             }
@@ -1560,8 +1575,7 @@ namespace Me.Amon.Pwd
             dba.AddParam(IDat.C2010208, cat.Meta);
             dba.AddParam(IDat.C2010209, cat.Memo);
             dba.AddParam(IDat.C201020A, IDat.SQL_NOW, false);
-            dba.AddVcs(IDat.C201020C, 1);
-            dba.AddOpt(IDat.C201020D, cat.Operate, IDat.OPT_UPDATE);
+            dba.AddVcs(IDat.C201020C, IDat.C201020D, cat.Operate, IDat.OPT_UPDATE);
             dba.AddWhere(IDat.C2010202, _UserModel.Code);
             dba.AddWhere(IDat.C2010203, cat.Id);
             if (1 != dba.ExecuteUpdate())
@@ -1579,8 +1593,13 @@ namespace Me.Amon.Pwd
             TreeNode node = TvCatTree.SelectedNode;
             if (node == null)
             {
-                BeanUtil.ShowAlert("请选择您要删除的类别！");
+                Main.ShowAlert("请选择您要删除的类别！");
                 TvCatTree.Focus();
+                return;
+            }
+
+            if (DialogResult.Yes != Main.ShowConfirm("确认要删除选中的类别吗，此操作将不可恢复？"))
+            {
                 return;
             }
 
@@ -1592,7 +1611,7 @@ namespace Me.Amon.Pwd
 
             if (node.Nodes.Count > 0)
             {
-                BeanUtil.ShowAlert("子类别不为空，不能删除！");
+                Main.ShowAlert("下级类别不为空，不能删除！");
                 return;
             }
 
@@ -1605,7 +1624,7 @@ namespace Me.Amon.Pwd
             long cnt = (long)dba.ExecuteScalar();
             if (cnt > 0)
             {
-                BeanUtil.ShowAlert("口令记录不为空，不能删除！");
+                Main.ShowAlert("类别数据不为空，不能删除！");
                 return;
             }
 
@@ -1647,7 +1666,7 @@ namespace Me.Amon.Pwd
             TreeNode node = TvCatTree.SelectedNode;
             if (node == null)
             {
-                BeanUtil.ShowAlert("请选择类别！");
+                Main.ShowAlert("请选择类别！");
                 TvCatTree.Focus();
                 return;
             }
@@ -1655,7 +1674,7 @@ namespace Me.Amon.Pwd
             Cat cat = node.Tag as Cat;
             if (cat == null)
             {
-                BeanUtil.ShowAlert("系统异常，请稍后重试！");
+                Main.ShowAlert("系统异常，请稍后重试！");
                 return;
             }
 
@@ -1674,35 +1693,37 @@ namespace Me.Amon.Pwd
                 #region 数据备份
                 if (_SafeModel.Key.Backup)
                 {
-                    long t = DateTime.UtcNow.Millisecond;
+                    string t = HashUtil.UtcTimeInHex();
                     dba.ReInit();
                     dba.AddParam(IDat.APWD0A01, t);
-                    dba.AddParam(IDat.APWD0A02, IDat.APWD0102);
-                    dba.AddParam(IDat.APWD0A03, IDat.APWD0103);
-                    dba.AddParam(IDat.APWD0A04, IDat.APWD0104);
-                    dba.AddParam(IDat.APWD0A05, IDat.APWD0105);
-                    dba.AddParam(IDat.APWD0A06, IDat.APWD0106);
-                    dba.AddParam(IDat.APWD0A07, IDat.APWD0107);
-                    dba.AddParam(IDat.APWD0A08, IDat.APWD0108);
-                    dba.AddParam(IDat.APWD0A09, IDat.APWD0109);
-                    dba.AddParam(IDat.APWD0A0A, IDat.APWD010A);
-                    dba.AddParam(IDat.APWD0A0B, IDat.APWD010B);
-                    dba.AddParam(IDat.APWD0A0C, IDat.APWD010C);
-                    dba.AddParam(IDat.APWD0A0D, IDat.APWD010D);
-                    dba.AddParam(IDat.APWD0A0E, IDat.APWD010E);
-                    dba.AddParam(IDat.APWD0A0F, IDat.APWD010F);
-                    dba.AddParam(IDat.APWD0A10, IDat.APWD0110);
-                    dba.AddParam(IDat.APWD0A11, IDat.APWD0111);
-                    dba.AddParam(IDat.APWD0A12, IDat.APWD0112);
+                    dba.AddParam(IDat.APWD0A02, IDat.APWD0102, false);
+                    dba.AddParam(IDat.APWD0A03, IDat.APWD0103, false);
+                    dba.AddParam(IDat.APWD0A04, IDat.APWD0104, false);
+                    dba.AddParam(IDat.APWD0A05, IDat.APWD0105, false);
+                    dba.AddParam(IDat.APWD0A06, IDat.APWD0106, false);
+                    dba.AddParam(IDat.APWD0A07, IDat.APWD0107, false);
+                    dba.AddParam(IDat.APWD0A08, IDat.APWD0108, false);
+                    dba.AddParam(IDat.APWD0A09, IDat.APWD0109, false);
+                    dba.AddParam(IDat.APWD0A0A, IDat.APWD010A, false);
+                    dba.AddParam(IDat.APWD0A0B, IDat.APWD010B, false);
+                    dba.AddParam(IDat.APWD0A0C, IDat.APWD010C, false);
+                    dba.AddParam(IDat.APWD0A0D, IDat.APWD010D, false);
+                    dba.AddParam(IDat.APWD0A0E, IDat.APWD010E, false);
+                    dba.AddParam(IDat.APWD0A0F, IDat.APWD010F, false);
+                    dba.AddParam(IDat.APWD0A10, IDat.APWD0110, false);
+                    dba.AddParam(IDat.APWD0A11, IDat.APWD0111, false);
+                    dba.AddParam(IDat.APWD0A12, IDat.APWD0112, false);
+                    dba.AddParam(IDat.APWD0A13, IDat.APWD0113, false);
                     dba.AddWhere(IDat.APWD0104, _UserModel.Code);
                     dba.AddWhere(IDat.APWD0105, _SafeModel.Key.Id);
                     dba.AddBackupBatch(IDat.APWD0A00, IDat.APWD0100);
 
                     dba.ReInit();
                     dba.AddParam(IDat.APWD0B01, t);
-                    dba.AddParam(IDat.APWD0B02, IDat.APWD0201);
-                    dba.AddParam(IDat.APWD0B04, IDat.APWD0203);
-                    dba.AddParam(IDat.APWD0B05, IDat.APWD0204);
+                    dba.AddParam(IDat.APWD0B02, IDat.APWD0201, false);
+                    dba.AddParam(IDat.APWD0B03, IDat.APWD0202, false);
+                    dba.AddParam(IDat.APWD0B04, IDat.APWD0203, false);
+                    dba.AddParam(IDat.APWD0B05, IDat.APWD0204, false);
                     dba.AddWhere(IDat.APWD0203, _SafeModel.Key.Id);
                     dba.AddBackupBatch(IDat.APWD0B00, IDat.APWD0200);
                 }
@@ -1728,7 +1749,8 @@ namespace Me.Amon.Pwd
             dba.AddParam(IDat.APWD010E, _SafeModel.Key.GtdId);
             dba.AddParam(IDat.APWD010F, _SafeModel.Key.GtdMemo);
             dba.AddParam(IDat.APWD0110, _SafeModel.Key.Memo);
-            dba.AddParam(IDat.APWD0112, "1");
+            dba.AddParam(IDat.APWD0112, _SafeModel.Key.Backup ? "t" : "f");
+            dba.AddParam(IDat.APWD0113, "1");
 
             if (isUpdate)
             {
@@ -1736,13 +1758,12 @@ namespace Me.Amon.Pwd
                 dba.AddWhere(IDat.APWD0105, _SafeModel.Key.Id);
                 _SafeModel.Key.VisitDate = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
                 dba.AddParam(IDat.APWD0111, _SafeModel.Key.VisitDate);
-                dba.AddVcs(IDat.APWD0113, 1);
-                dba.AddOpt(IDat.APWD0114, _SafeModel.Key.Operate, IDat.OPT_UPDATE);
+                dba.AddVcs(IDat.APWD0114, IDat.APWD0115, _SafeModel.Key.Operate, IDat.OPT_UPDATE);
                 dba.AddUpdateBatch();
             }
             else
             {
-                _SafeModel.Key.Id = HashUtil.GetCurrTimeHex(false);
+                _SafeModel.Key.Id = HashUtil.UtcTimeInHex(false);
                 dba.AddParam(IDat.APWD0101, 0);
                 dba.AddParam(IDat.APWD0102, 0);
                 dba.AddParam(IDat.APWD0103, 0);
@@ -1750,8 +1771,7 @@ namespace Me.Amon.Pwd
                 dba.AddParam(IDat.APWD0105, _SafeModel.Key.Id);
                 _SafeModel.Key.VisitDate = _SafeModel.Key.RegDate;
                 dba.AddParam(IDat.APWD0111, _SafeModel.Key.VisitDate);
-                dba.AddParam(IDat.APWD0113, IDat.VCS_DEFAULT);
-                dba.AddParam(IDat.APWD0114, IDat.OPT_INSERT);
+                dba.AddVcs(IDat.APWD0114, IDat.APWD0115);
                 dba.AddInsertBatch();
             }
             #endregion
@@ -1800,12 +1820,12 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            if (DialogResult.Yes != MessageBox.Show("确认要删除此记录吗，此操作将不可恢复？", "提示", MessageBoxButtons.YesNoCancel))
+            if (DialogResult.Yes != Main.ShowConfirm("确认要删除选中的类别吗，此操作将不可恢复？"))
             {
                 return;
             }
 
-            if (DialogResult.No != MessageBox.Show("再次确认，要返回吗？", "提示", MessageBoxButtons.YesNoCancel))
+            if (DialogResult.No != Main.ShowConfirm("再次确认，要返回吗？"))
             {
                 return;
             }
@@ -1813,8 +1833,7 @@ namespace Me.Amon.Pwd
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
             dba.AddTable(IDat.APWD0100);
-            dba.AddVcs(IDat.APWD0113, 1);
-            dba.AddOpt(IDat.APWD0114, _SafeModel.Key.Operate, IDat.OPT_DELETE);
+            dba.AddVcs(IDat.APWD0114, IDat.APWD0115, _SafeModel.Key.Operate, IDat.OPT_DELETE);
             dba.AddWhere(IDat.APWD0104, _UserModel.Code);
             dba.AddWhere(IDat.APWD0105, _SafeModel.Key.Id);
             if (1 != dba.ExecuteUpdate())
@@ -1829,7 +1848,7 @@ namespace Me.Amon.Pwd
         {
             _SafeModel.Encode();
 
-            _SafeModel.Key.Id = HashUtil.GetCurrTimeHex(false);
+            _SafeModel.Key.Id = HashUtil.UtcTimeInHex(false);
             _SafeModel.Key.VisitDate = _SafeModel.Key.RegDate;
 
             DBAccess dba = _UserModel.DBAccess;
@@ -1854,9 +1873,9 @@ namespace Me.Amon.Pwd
             dba.AddParam(IDat.APWD010F, _SafeModel.Key.GtdMemo);
             dba.AddParam(IDat.APWD0110, _SafeModel.Key.Memo);
             dba.AddParam(IDat.APWD0111, _SafeModel.Key.VisitDate);
-            dba.AddParam(IDat.APWD0112, "1");
-            dba.AddParam(IDat.APWD0113, IDat.VCS_DEFAULT);
-            dba.AddParam(IDat.APWD0114, IDat.OPT_INSERT);
+            dba.AddParam(IDat.APWD0112, "t");
+            dba.AddParam(IDat.APWD0113, "1");
+            dba.AddParam(IDat.APWD0114, IDat.APWD0115);
             dba.AddInsertBatch();
             #endregion
 
@@ -1905,7 +1924,7 @@ namespace Me.Amon.Pwd
             dba.AddTable(IDat.APWD0100);
             dba.AddWhere(IDat.APWD0104, _UserModel.Code);
             dba.AddWhere(IDat.APWD0106, catId);
-            dba.AddWhere(IDat.APWD0114, "!=", IDat.OPT_DELETE.ToString(), false);
+            dba.AddWhere(IDat.APWD0115, "!=", IDat.OPT_DELETE.ToString(), false);
             dba.AddSort(IDat.APWD0101, false);
             using (DataTable dt = dba.ExecuteSelect())
             {
@@ -1928,7 +1947,7 @@ namespace Me.Amon.Pwd
             meta = Regex.Replace(meta, "[+%\\s]+", "%");
             if (meta == "%")
             {
-                BeanUtil.ShowAlert("您输入的查询条件无效！");
+                Main.ShowAlert("您输入的查询条件无效！");
                 return;
             }
 
@@ -1947,7 +1966,7 @@ namespace Me.Amon.Pwd
             dba.AddTable(IDat.APWD0100);
             dba.AddWhere(IDat.APWD0104, _UserModel.Code);
             dba.AddWhere(string.Format("{0} LIKE '{2}' or {1} like '{2}'", IDat.APWD0109, IDat.APWD010A, meta));
-            dba.AddWhere(IDat.APWD0114, "!=", IDat.OPT_DELETE.ToString(), false);
+            dba.AddWhere(IDat.APWD0115, "!=", IDat.OPT_DELETE.ToString(), false);
 
             using (DataTable dt = dba.ExecuteSelect())
             {
@@ -1976,7 +1995,7 @@ namespace Me.Amon.Pwd
             }
             catch (Exception exp)
             {
-                BeanUtil.ShowAlert(exp.Message);
+                Main.ShowAlert(exp.Message);
             }
         }
 

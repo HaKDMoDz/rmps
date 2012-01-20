@@ -7,7 +7,8 @@
         /// </summary>
         public const string SQL_NOW = "datetime('now')";
         public const string VER_DB = "1";
-        public const int VCS_DEFAULT = 1;
+
+        public const int OPT_CONFUSE = -2;
         public const int OPT_DELETE = -1;
         public const int OPT_INSERT = 0;
         public const int OPT_DEFAULT = 1;
@@ -249,17 +250,21 @@
         public const string APWD0111 = "APWD0111";
         public const int APWD0111_SIZE = 24;
         /// <summary>
-        /// 加密版本
+        /// 是否备份
         /// </summary>
         public const string APWD0112 = "APWD0112";
         /// <summary>
-        /// 版本控制
+        /// 加密版本
         /// </summary>
         public const string APWD0113 = "APWD0113";
         /// <summary>
-        /// 操作状态：0删除、1默认、2新增、3更新
+        /// 版本控制
         /// </summary>
         public const string APWD0114 = "APWD0114";
+        /// <summary>
+        /// 操作状态：0删除、1默认、2新增、3更新
+        /// </summary>
+        public const string APWD0115 = "APWD0115";
         #endregion
 
         #region 口令内容表格
@@ -407,6 +412,7 @@
         /// 日志索引
         /// </summary>
         public const string APWD0A01 = "APWD0A01";
+        public const int APWD0A01_SIZE = 16;
         /// <summary>
         /// 使用状态
         /// </summary>
@@ -486,9 +492,13 @@
         public const string APWD0A11 = "APWD0A11";
         public const int APWD0A11_SIZE = APWD0111_SIZE;
         /// <summary>
-        /// 加密版本
+        /// 是否备份
         /// </summary>
         public const string APWD0A12 = "APWD0A12";
+        /// <summary>
+        /// 加密版本
+        /// </summary>
+        public const string APWD0A13 = "APWD0A13";
         #endregion
 
         #region 历史数据表格

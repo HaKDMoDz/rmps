@@ -4,13 +4,13 @@ namespace Me.Amon.Model
 {
     public class Log
     {
-        private long _Id;
+        private string _Id;
         private string _LogDate;
 
         /// <summary>
         /// 日志索引
         /// </summary>
-        public long Id
+        public string Id
         {
             get
             {
@@ -19,7 +19,7 @@ namespace Me.Amon.Model
             set
             {
                 _Id = value;
-                _LogDate = DateTime.FromBinary(_Id).ToString(IEnv.DATEIME_FORMAT);
+                _LogDate = DateTime.FromFileTime(Convert.ToInt64(_Id, 16)).ToString(IEnv.DATEIME_FORMAT);
             }
         }
 
@@ -54,9 +54,9 @@ namespace Me.Amon.Model
             {
                 return _Id == ((Log)obj).Id;
             }
-            if (obj is long)
+            if (obj is string)
             {
-                return _Id == (long)obj;
+                return _Id == (string)obj;
             }
             return _Id.Equals(obj);
         }

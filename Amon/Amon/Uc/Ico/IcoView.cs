@@ -83,7 +83,7 @@ namespace Me.Amon.Uc.Ico
                     g.Flush();
                     g.Dispose();
                 }
-                string key = HashUtil.GetCurrTimeHex(true);
+                string key = HashUtil.UtcTimeInHex(true);
                 bmp.Save(_IcoEdit.CurrentPath + key + ".png", ImageFormat.Png);
                 IlIco.Images.Add(key, img);
                 _IcoEdit.SelectedItem = new ListViewItem((LvIco.Items.Count + 1).ToString(), key);

@@ -11,6 +11,13 @@
         public const int KEY_AWIZ = 0x2;
         public const int KEY_APAD = 0x3;
 
+        public const string AMON_CFG = "Amon.cfg";
+        public const string USER_CFG = "User.cfg";
+
+        public const int IAPP_NONE = 0;
+        public const int IAPP_APWD = 1;
+        public const int IAPP_ASEC = 2;
+
         /// <summary>
         /// 加密文件
         /// </summary>

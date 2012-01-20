@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SignUp));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.PbGuid = new System.Windows.Forms.PictureBox();
             this.LbName = new System.Windows.Forms.Label();
             this.TbName = new System.Windows.Forms.TextBox();
             this.LbPass1 = new System.Windows.Forms.Label();
@@ -38,21 +39,27 @@
             this.TbPass2 = new System.Windows.Forms.TextBox();
             this.BtNo = new System.Windows.Forms.Button();
             this.BtOk = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MiLocal = new System.Windows.Forms.ToolStripMenuItem();
+            this.PbMenu = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.PbGuid)).BeginInit();
+            this.CmMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // PbGuid
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(254, 48);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.PbGuid.Image = global::Me.Amon.Properties.Resources.Guid;
+            this.PbGuid.Location = new System.Drawing.Point(0, 0);
+            this.PbGuid.Name = "PbGuid";
+            this.PbGuid.Size = new System.Drawing.Size(250, 40);
+            this.PbGuid.TabIndex = 0;
+            this.PbGuid.TabStop = false;
             // 
             // LbName
             // 
             this.LbName.AutoSize = true;
-            this.LbName.Location = new System.Drawing.Point(41, 67);
+            this.LbName.Location = new System.Drawing.Point(41, 63);
             this.LbName.Name = "LbName";
             this.LbName.Size = new System.Drawing.Size(71, 12);
             this.LbName.TabIndex = 0;
@@ -60,7 +67,7 @@
             // 
             // TbName
             // 
-            this.TbName.Location = new System.Drawing.Point(118, 64);
+            this.TbName.Location = new System.Drawing.Point(118, 60);
             this.TbName.Name = "TbName";
             this.TbName.Size = new System.Drawing.Size(100, 21);
             this.TbName.TabIndex = 1;
@@ -68,7 +75,7 @@
             // LbPass1
             // 
             this.LbPass1.AutoSize = true;
-            this.LbPass1.Location = new System.Drawing.Point(41, 94);
+            this.LbPass1.Location = new System.Drawing.Point(41, 90);
             this.LbPass1.Name = "LbPass1";
             this.LbPass1.Size = new System.Drawing.Size(71, 12);
             this.LbPass1.TabIndex = 2;
@@ -76,7 +83,7 @@
             // 
             // TbPass1
             // 
-            this.TbPass1.Location = new System.Drawing.Point(118, 91);
+            this.TbPass1.Location = new System.Drawing.Point(118, 87);
             this.TbPass1.Name = "TbPass1";
             this.TbPass1.PasswordChar = '*';
             this.TbPass1.Size = new System.Drawing.Size(100, 21);
@@ -85,7 +92,7 @@
             // LbPass2
             // 
             this.LbPass2.AutoSize = true;
-            this.LbPass2.Location = new System.Drawing.Point(41, 121);
+            this.LbPass2.Location = new System.Drawing.Point(41, 117);
             this.LbPass2.Name = "LbPass2";
             this.LbPass2.Size = new System.Drawing.Size(71, 12);
             this.LbPass2.TabIndex = 4;
@@ -93,7 +100,7 @@
             // 
             // TbPass2
             // 
-            this.TbPass2.Location = new System.Drawing.Point(118, 118);
+            this.TbPass2.Location = new System.Drawing.Point(118, 114);
             this.TbPass2.Name = "TbPass2";
             this.TbPass2.Size = new System.Drawing.Size(100, 21);
             this.TbPass2.TabIndex = 5;
@@ -102,7 +109,7 @@
             // 
             this.BtNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtNo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.BtNo.Location = new System.Drawing.Point(167, 154);
+            this.BtNo.Location = new System.Drawing.Point(167, 149);
             this.BtNo.Name = "BtNo";
             this.BtNo.Size = new System.Drawing.Size(75, 23);
             this.BtNo.TabIndex = 7;
@@ -113,7 +120,7 @@
             // BtOk
             // 
             this.BtOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtOk.Location = new System.Drawing.Point(86, 154);
+            this.BtOk.Location = new System.Drawing.Point(86, 149);
             this.BtOk.Name = "BtOk";
             this.BtOk.Size = new System.Drawing.Size(75, 23);
             this.BtOk.TabIndex = 6;
@@ -121,14 +128,40 @@
             this.BtOk.UseVisualStyleBackColor = true;
             this.BtOk.Click += new System.EventHandler(this.BtOk_Click);
             // 
+            // CmMenu
+            // 
+            this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MiLocal});
+            this.CmMenu.Name = "CmMenu";
+            this.CmMenu.Size = new System.Drawing.Size(151, 26);
+            // 
+            // MiLocal
+            // 
+            this.MiLocal.Name = "MiLocal";
+            this.MiLocal.Size = new System.Drawing.Size(150, 22);
+            this.MiLocal.Text = "仅本地使用(&L)";
+            this.MiLocal.Click += new System.EventHandler(this.MiLocal_Click);
+            // 
+            // PbMenu
+            // 
+            this.PbMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PbMenu.Image = global::Me.Amon.Properties.Resources.Menu;
+            this.PbMenu.Location = new System.Drawing.Point(12, 153);
+            this.PbMenu.Name = "PbMenu";
+            this.PbMenu.Size = new System.Drawing.Size(16, 16);
+            this.PbMenu.TabIndex = 9;
+            this.PbMenu.TabStop = false;
+            this.PbMenu.Click += new System.EventHandler(this.PbMenu_Click);
+            // 
             // SignUp
             // 
             this.AcceptButton = this.BtOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.BtNo;
-            this.ClientSize = new System.Drawing.Size(254, 189);
+            this.ClientSize = new System.Drawing.Size(254, 184);
             this.Controls.Add(this.BtOk);
+            this.Controls.Add(this.PbMenu);
             this.Controls.Add(this.BtNo);
             this.Controls.Add(this.TbPass2);
             this.Controls.Add(this.LbPass2);
@@ -136,13 +169,15 @@
             this.Controls.Add(this.LbPass1);
             this.Controls.Add(this.TbName);
             this.Controls.Add(this.LbName);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.PbGuid);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SignUp";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SignUp";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbGuid)).EndInit();
+            this.CmMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -150,7 +185,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox PbGuid;
         private System.Windows.Forms.Label LbName;
         private System.Windows.Forms.TextBox TbName;
         private System.Windows.Forms.Label LbPass1;
@@ -159,5 +194,8 @@
         private System.Windows.Forms.TextBox TbPass2;
         private System.Windows.Forms.Button BtNo;
         private System.Windows.Forms.Button BtOk;
+        private System.Windows.Forms.ContextMenuStrip CmMenu;
+        private System.Windows.Forms.ToolStripMenuItem MiLocal;
+        private System.Windows.Forms.PictureBox PbMenu;
     }
 }

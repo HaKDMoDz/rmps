@@ -10,14 +10,29 @@ namespace Me.Amon.Util
         {
         }
 
+        public static long LocTime()
+        {
+            return DateTime.Now.ToFileTime();
+        }
+
+        public static long UtcTime()
+        {
+            return DateTime.UtcNow.ToFileTime();
+        }
+
+        public static string UtcTimeInHex()
+        {
+            return Convert.ToString(DateTime.UtcNow.ToFileTime(), 16).ToUpper().PadLeft(16, '0');
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="bigCase"></param>
         /// <returns></returns>
-        public static String GetCurrTimeHex(bool bigCase)
+        public static String UtcTimeInHex(bool bigCase)
         {
-            return CharUtil.EncodeLong(DateTime.UtcNow.ToBinary(), bigCase);
+            return CharUtil.EncodeLong(DateTime.UtcNow.ToFileTime(), bigCase);
         }
     }
 }

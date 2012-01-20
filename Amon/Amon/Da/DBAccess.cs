@@ -164,9 +164,10 @@ namespace Me.Amon.Da
                     sql.Append(IDat.APWD010F).Append(" VARCHAR(").Append(IDat.APWD010F_SIZE).Append("),");
                     sql.Append(IDat.APWD0110).Append(" VARCHAR(").Append(IDat.APWD0110_SIZE).Append("),");
                     sql.Append(IDat.APWD0111).Append(" VARCHAR(").Append(IDat.APWD0111_SIZE).Append("),");
-                    sql.Append(IDat.APWD0112).Append(" INT,");
+                    sql.Append(IDat.APWD0112).Append(" CHAR(1),");
                     sql.Append(IDat.APWD0113).Append(" INT,");
                     sql.Append(IDat.APWD0114).Append(" INT,");
+                    sql.Append(IDat.APWD0115).Append(" INT,");
                     sql.Append("PRIMARY KEY (").Append(IDat.APWD0104).Append(",").Append(IDat.APWD0105).Append(")");
                     sql.Append(")");
                     mycommand.CommandText = sql.ToString();
@@ -254,7 +255,7 @@ namespace Me.Amon.Da
 
                     sql.Clear();
                     sql.Append("CREATE TABLE ").Append(IDat.APWD0A00).Append("(");
-                    sql.Append(IDat.APWD0A01).Append(" INT,");
+                    sql.Append(IDat.APWD0A01).Append(" VARCHAR(").Append(IDat.APWD0A01_SIZE).Append("),");
                     sql.Append(IDat.APWD0A02).Append(" INT,");
                     sql.Append(IDat.APWD0A03).Append(" INT,");
                     sql.Append(IDat.APWD0A04).Append(" VARCHAR(").Append(IDat.APWD0A04_SIZE).Append("),");
@@ -271,7 +272,8 @@ namespace Me.Amon.Da
                     sql.Append(IDat.APWD0A0F).Append(" VARCHAR(").Append(IDat.APWD0A0F_SIZE).Append("),");
                     sql.Append(IDat.APWD0A10).Append(" VARCHAR(").Append(IDat.APWD0A10_SIZE).Append("),");
                     sql.Append(IDat.APWD0A11).Append(" VARCHAR(").Append(IDat.APWD0A11_SIZE).Append("),");
-                    sql.Append(IDat.APWD0A12).Append(" INT,");
+                    sql.Append(IDat.APWD0A12).Append(" CHAR(1),");
+                    sql.Append(IDat.APWD0A13).Append(" INT,");
                     sql.Append("PRIMARY KEY (").Append(IDat.APWD0A01).Append(")");
                     sql.Append(")");
                     mycommand.CommandText = sql.ToString();
@@ -500,20 +502,31 @@ namespace Me.Amon.Da
             _ValueList.Add(value.ToString());
         }
 
-        public void AddVcs(string param, int step)
+        public void AddVcs(string optCol, string vcsCol)
         {
-            _ParamList.Add(param);
+            _ParamList.Add(optCol);
             _SignList.Add("=");
-            _ValueList.Add(param + "+" + step);
+            _ValueList.Add(IDat.OPT_INSERT.ToString());
+
+            _ParamList.Add(vcsCol);
+            _SignList.Add("=");
+            _ValueList.Add("1");
         }
 
-        public void AddOpt(string param, int prev, long next)
+        public void AddVcs(string vcsCol, string optCol, int lastOpt, int nextOpt)
         {
-            if (prev > IDat.OPT_INSERT || next == IDat.OPT_DELETE)
+            if (lastOpt > IDat.OPT_INSERT || nextOpt == IDat.OPT_DELETE)
             {
-                _ParamList.Add(param);
+                _ParamList.Add(optCol);
                 _SignList.Add("=");
-                _ValueList.Add(next.ToString());
+                _ValueList.Add(nextOpt.ToString());
+            }
+
+            if (lastOpt == IDat.OPT_DEFAULT)
+            {
+                _ParamList.Add(vcsCol);
+                _SignList.Add("=");
+                _ValueList.Add(vcsCol + "+1");
             }
         }
 

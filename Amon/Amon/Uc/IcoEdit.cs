@@ -192,20 +192,18 @@ namespace Me.Amon.Uc
             {
                 dba.AddWhere(IDat.AICO0102, _UserModel.Code);
                 dba.AddWhere(IDat.AICO0103, item.Id);
-                dba.AddVcs(IDat.AICO0108, IDat.VCS_DEFAULT);
-                dba.AddOpt(IDat.AICO0109, 0, IDat.OPT_INSERT);
+                dba.AddVcs(IDat.AICO0108, IDat.AICO0109, item.Operate, IDat.OPT_INSERT);
                 dba.ExecuteUpdate();
 
                 LsDir.Items[LsDir.SelectedIndex] = item;
             }
             else
             {
-                item.Id = Convert.ToString(DateTime.UtcNow.ToBinary(), 16).ToUpper().PadLeft(16, '0');
+                item.Id = HashUtil.UtcTimeInHex();
                 dba.AddParam(IDat.AICO0101, LsDir.Items.Count);
                 dba.AddParam(IDat.AICO0102, _UserModel.Code);
                 dba.AddParam(IDat.AICO0103, item.Id);
-                dba.AddParam(IDat.AICO0108, IDat.VCS_DEFAULT);
-                dba.AddParam(IDat.AICO0109, IDat.OPT_INSERT);
+                dba.AddVcs(IDat.AICO0108, IDat.AICO0109);
                 dba.ExecuteInsert();
 
                 Directory.CreateDirectory(_DataModel.KeyDir + item.Id);

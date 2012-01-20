@@ -4,9 +4,8 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
+using Me.Amon.Event;
 using Me.Amon.Model;
-using Me.Amon.Pwd;
-using Me.Amon.Util;
 
 namespace Me.Amon.User
 {
@@ -14,13 +13,25 @@ namespace Me.Amon.User
     {
         private string _Name;
         private string _Pass;
-        private string _Code;
+        private UserModel _UserModel;
 
+        #region 构造函数
         public SignUp()
         {
             InitializeComponent();
         }
 
+        public SignUp(UserModel userModel)
+        {
+            _UserModel = userModel;
+
+            InitializeComponent();
+        }
+        #endregion
+
+        public AmonHandler<int> CallBackHandler { get; set; }
+
+        #region 事件处理
         private void BtOk_Click(object sender, System.EventArgs e)
         {
             DoSignUp();
@@ -30,11 +41,9 @@ namespace Me.Amon.User
         {
             Close();
         }
+        #endregion
 
-        private void ShowAlert(string alert)
-        {
-        }
-
+        #region 私有函数
         private void DoSignUp()
         {
             _Name = TbName.Text;
@@ -64,6 +73,7 @@ namespace Me.Amon.User
 
             #region 口令判断
             _Pass = TbPass1.Text;
+            TbPass1.Text = "";
             if (string.IsNullOrEmpty(_Pass))
             {
                 ShowAlert("请输入登录口令！");
@@ -80,29 +90,50 @@ namespace Me.Amon.User
                 return;
             }
 
-            if (_Pass != TbPass2.Text)
+            string pass = TbPass2.Text;
+            TbPass2.Text = "";
+            if (_Pass != pass)
             {
                 ShowAlert("您两次输入的口令不一致！");
-                TbPass1.Text = "";
-                TbPass2.Text = "";
                 TbPass1.Focus();
                 return;
             }
             #endregion
 
-            // 口令散列
-            _Pass = SafeUtil.EncryptPass(_Pass);
+            _Pass = _UserModel.Digest(_Name, _Pass);
+            pass = null;
 
-            WebClient client = new WebClient();
-            client.Headers["Content-type"] = "application/x-www-form-urlencoded";
-            client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignUp_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=sup&n=" + _Name + "&k=" + _Pass);
+            // 在线注册
+            if (MiLocal.Checked)
+            {
+                WebClient client = new WebClient();
+                client.Headers["Content-type"] = "application/x-www-form-urlencoded";
+                client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignUp_UploadStringCompleted);
+                client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=sup&n=" + _Name + "&k=" + _Pass);
+                return;
+            }
+
+            // 本地注册
+            string data = _UserModel.SignUp(_Name, _Pass);
+            if (data.Length != 72)
+            {
+                return;
+            }
         }
 
         private void SignUp_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
         {
+            if (e.Error != null)
+            {
+                ShowAlert(e.Error.Message);
+                return;
+            }
+
             string xml = e.Result;
-            int view = 0;
+            string code = null;
+            string pass = null;
+            string data = null;
+            int view = IEnv.IAPP_NONE;
             using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
             {
                 if (xml.IndexOf("<error>") > 0)
@@ -112,30 +143,57 @@ namespace Me.Amon.User
                 }
 
                 reader.ReadToFollowing("code");
-                _Code = reader.ReadElementContentAsString();
+                code = reader.ReadElementContentAsString();
 
-                _Pass = reader.ReadElementContentAsString();
+                pass = reader.ReadElementContentAsString();
+
+                data = reader.ReadElementContentAsString();
 
                 view = reader.ReadElementContentAsInt();
             }
 
+            SaveData(_Name, code, pass, data, view);
+        }
+
+        private void SaveData(string name, string code, string pass, string data, int view)
+        {
             Uc.Properties _Prop = new Uc.Properties();
-            _Prop.Load("amon.cfg");
-            _Prop.Set(string.Format("amon.{0}.code", _Name), _Code);
-            _Prop.Set(string.Format("amon.{0}.info", _Name), _Pass);
+            _Prop.Load(IEnv.AMON_CFG);
+            _Prop.Set(string.Format("amon.{0}.code", _Name), code);
+            _Prop.Set(string.Format("amon.{0}.info", _Name), pass);
+            _Prop.Set(string.Format("amon.{0}.data", _Name), data);
             _Prop.Set(string.Format("amon.{0}.view", _Name), view.ToString());
-            _Prop.Save("amon.cfg");
+            _Prop.Save(IEnv.AMON_CFG);
 
-            UserModel userModel = new UserModel();
-            if (userModel.SignUp(_Name, _Pass, _Code))
+            if (!_UserModel.SignIn(_Name, code, "", data))
             {
-                userModel.Init();
-
-                APwd pwd = new APwd(userModel);
-                pwd.Init();
-                pwd.Show();
-                Close();
+                ShowAlert("身份验证错误，请确认您的用户及口令输入是否正确！");
+                TbName.Focus();
+                return;
             }
+
+            _UserModel.Init();
+            if (CallBackHandler != null)
+            {
+                CallBackHandler.Invoke(view);
+            }
+            Close();
+        }
+
+        private void ShowAlert(string alert)
+        {
+            MessageBox.Show(this, alert, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        #endregion
+
+        private void PbMenu_Click(object sender, EventArgs e)
+        {
+            CmMenu.Show(PbMenu, 0, PbMenu.Height);
+        }
+
+        private void MiLocal_Click(object sender, EventArgs e)
+        {
+            MiLocal.Checked = !MiLocal.Checked;
         }
     }
 }

@@ -2,15 +2,12 @@
 using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Uc;
-using Me.Amon.Uw;
 
 namespace Me.Amon.Util
 {
     public class BeanUtil
     {
-        public static Form Form { get; set; }
-        private static Alert _Alert;
-        private static Input _Input;
+        public static IApp IApp { get; set; }
 
         public static void Clear(ComboBox cBox)
         {
@@ -69,22 +66,22 @@ namespace Me.Amon.Util
             }
         }
 
-        public static void ShowAlert(string alert)
+        public static void CenterToParent(Form child, Form parent)
         {
-            if (_Alert == null)
+            if (parent != null && parent.Visible)
             {
-                _Alert = new Alert();
+                Point point = parent.Location;
+                point.X += (parent.Width - child.Width) >> 1;
+                point.Y += (parent.Height - child.Height) >> 1;
+                child.Location = point;
             }
-            _Alert.Show(Form, alert);
-        }
-
-        public static void ShowInput(string message, string deftext)
-        {
-            if (_Input == null)
+            else
             {
-                _Input = new Input();
+                Point point = new Point();
+                point.X = (SystemInformation.WorkingArea.Width - child.Width) >> 1;
+                point.Y = (SystemInformation.WorkingArea.Height - child.Height) >> 1;
+                child.Location = point;
             }
-            _Input.Show(Form, message, deftext);
         }
 
         public static Image ReadImage(string file, Image defImg)

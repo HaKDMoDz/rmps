@@ -132,21 +132,19 @@ namespace Me.Amon.Uc
             {
                 dba.AddWhere(IDat.AUCS0102, _UserModel.Code);
                 dba.AddWhere(IDat.AUCS0103, _Item.Id);
-                dba.AddVcs(IDat.AUCS010A, 1);
-                dba.AddOpt(IDat.AUCS010B, _Item.Operate, IDat.OPT_UPDATE);
+                dba.AddVcs(IDat.AUCS010A, IDat.AUCS010B, _Item.Operate, IDat.OPT_UPDATE);
                 dba.ExecuteUpdate();
 
                 LsUcs.Items[LsUcs.SelectedIndex] = _Item;
             }
             else
             {
-                _Item.Id = HashUtil.GetCurrTimeHex(false);
+                _Item.Id = HashUtil.UtcTimeInHex(false);
                 dba.AddParam(IDat.AUCS0101, LsUcs.Items.Count);
                 dba.AddParam(IDat.AUCS0102, _UserModel.Code);
                 dba.AddParam(IDat.AUCS0103, _Item.Id);
                 dba.AddParam(IDat.AUCS0109, IDat.SQL_NOW, false);
-                dba.AddParam(IDat.AUCS010A, IDat.VCS_DEFAULT);
-                dba.AddParam(IDat.AUCS010B, IDat.OPT_UPDATE);
+                dba.AddVcs(IDat.AUCS010A, IDat.AUCS010B);
                 dba.ExecuteInsert();
 
                 LsUcs.Items.Add(_Item);

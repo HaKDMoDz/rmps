@@ -120,7 +120,7 @@ namespace Me.Amon.Pwd.Wiz
             string name = _Att.GetSpec(FileAtt.SPEC_FILE_NAME);
             if (!CharUtil.IsValidateHash(name))
             {
-                name = HashUtil.GetCurrTimeHex(true);
+                name = HashUtil.UtcTimeInHex(true);
             }
             string dstFile = _DataModel.AsfDir + name + ".asf";
 

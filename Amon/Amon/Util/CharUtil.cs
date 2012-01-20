@@ -418,39 +418,6 @@ namespace Me.Amon.Util
         }
 
         /// <summary>
-        /// 随机用户掩码
-        /// </summary>
-        /// <returns></returns>
-        private char[] GenerateDataChar()
-        {
-            char[] c = new char[93];
-            char t = '!';
-            int i = 0;
-            while (i < 6)
-            {
-                c[i++] = t++;
-            }
-            t = '(';
-            while (i < 93)
-            {
-                c[i++] = t++;
-            }
-
-            return NextRandomKey(c, 16, false);
-        }
-
-        /// <summary>
-        /// 随机加密口令
-        /// </summary>
-        /// <returns></returns>
-        private byte[] GenerateDataKeys()
-        {
-            byte[] b = new byte[16];
-            new Random().NextBytes(b);
-            return b;
-        }
-
-        /// <summary>
         /// 随机用户口令
         /// </summary>
         /// <returns></returns>

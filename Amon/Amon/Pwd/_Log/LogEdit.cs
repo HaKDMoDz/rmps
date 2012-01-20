@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Me.Amon.Da;
 using Me.Amon.Model;
 using Me.Amon.Model.Att;
+using Me.Amon.Util;
 
 namespace Me.Amon.Pwd._Log
 {
@@ -43,7 +44,7 @@ namespace Me.Amon.Pwd._Log
             foreach (DataRow row in dt.Rows)
             {
                 Log log = new Log();
-                log.Id = (long)row[IDat.APWD0A01];
+                log.Id = row[IDat.APWD0A01] as string;
                 LbLog.Items.Add(log);
             }
             dt.Dispose();
@@ -87,7 +88,7 @@ namespace Me.Amon.Pwd._Log
                 key.GtdId = row[IDat.APWD0A0E] as string;
                 key.GtdMemo = row[IDat.APWD0A0F] as string;
                 key.Memo = row[IDat.APWD0A10] as string;
-                key.CipherVer = row[IDat.APWD0A12] as string;
+                key.CipherVer = row[IDat.APWD0A13] as string;
                 _SafeModel.Key = key;
             }
             #endregion
@@ -144,7 +145,7 @@ namespace Me.Amon.Pwd._Log
             }
 
             DBAccess dba = _UserModel.DBAccess;
-            long t = DateTime.Now.Millisecond;
+            string t = HashUtil.UtcTimeInHex();
             #region 数据备份
             if (_SafeModel.Key.Backup)
             {
@@ -167,6 +168,7 @@ namespace Me.Amon.Pwd._Log
                 dba.AddParam(IDat.APWD0A10, IDat.APWD0110);
                 dba.AddParam(IDat.APWD0A11, IDat.APWD0111);
                 dba.AddParam(IDat.APWD0A12, IDat.APWD0112);
+                dba.AddParam(IDat.APWD0A13, IDat.APWD0113);
                 dba.AddWhere(IDat.APWD0104, _UserModel.Code);
                 dba.AddWhere(IDat.APWD0105, _SafeModel.Key.Id);
                 dba.AddBackupBatch(IDat.APWD0A00, IDat.APWD0100);
@@ -196,7 +198,8 @@ namespace Me.Amon.Pwd._Log
             dba.AddParam(IDat.APWD010E, _SafeModel.Key.GtdId);
             dba.AddParam(IDat.APWD010F, _SafeModel.Key.GtdMemo);
             dba.AddParam(IDat.APWD0110, _SafeModel.Key.Memo);
-            dba.AddParam(IDat.APWD0112, _SafeModel.Key.CipherVer);
+            dba.AddParam(IDat.APWD0112, _SafeModel.Key.Backup ? "t" : "f");
+            dba.AddParam(IDat.APWD0113, _SafeModel.Key.CipherVer);
             dba.AddWhere(IDat.APWD0104, _UserModel.Code);
             dba.AddWhere(IDat.APWD0105, _Key.Id);
             dba.AddUpdateBatch();

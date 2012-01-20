@@ -85,6 +85,13 @@
     <Compile Include="Da\DFAccess.cs" />
     <Compile Include="Da\DFConst.cs" />
     <Compile Include="Event\AmonHandler.cs" />
+    <Compile Include="Gtd\AGtd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gtd\AGtd.Designer.cs">
+      <DependentUpon>AGtd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IApp.cs" />
     <Compile Include="IDat.cs" />
     <Compile Include="IEnv.cs" />
     <Compile Include="Info.cs">
@@ -525,6 +532,12 @@
     <Compile Include="User\SignIn.Designer.cs">
       <DependentUpon>SignIn.cs</DependentUpon>
     </Compile>
+    <Compile Include="User\SignRs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\SignRs.Designer.cs">
+      <DependentUpon>SignRs.cs</DependentUpon>
+    </Compile>
     <Compile Include="User\SignUp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -559,6 +572,12 @@
     </Compile>
     <Compile Include="Uw\TxtEditor.Designer.cs">
       <DependentUpon>TxtEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Waiting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Waiting.Designer.cs">
+      <DependentUpon>Waiting.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Info.resx">
       <DependentUpon>Info.cs</DependentUpon>
@@ -738,6 +757,9 @@
     <EmbeddedResource Include="User\SignIn.resx">
       <DependentUpon>SignIn.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="User\SignRs.resx">
+      <DependentUpon>SignRs.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="User\SignUp.resx">
       <DependentUpon>SignUp.cs</DependentUpon>
     </EmbeddedResource>
@@ -752,6 +774,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\TxtEditor.resx">
       <DependentUpon>TxtEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Waiting.resx">
+      <DependentUpon>Waiting.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
@@ -770,6 +795,8 @@
     <None Include="Resources\eye24.png" />
     <None Include="Resources\eye32.png" />
     <None Include="Resources\Pupil.png" />
+    <None Include="Resources\Guid.png" />
+    <None Include="Resources\Menu.png" />
     <Content Include="Skin\Feel\Default\att-card.png" />
     <Content Include="Skin\Feel\Default\att-date.png" />
     <Content Include="Skin\Feel\Default\att-file-saveas.png" />
@@ -814,6 +841,7 @@
     <Content Include="Skin\Feel\Default\key-major-1.png" />
     <Content Include="Skin\Feel\Default\key-major-2.png" />
     <Content Include="Skin\Feel\Default\key-major0.png" />
+    <None Include="Skin\Feel\Default\Loading.gif" />
     <Content Include="Skin\Feel\Default\mail-attach.png" />
     <Content Include="Skin\Feel\Default\mail-receive.png" />
     <Content Include="Skin\Feel\Default\maoc.png" />
@@ -840,7 +868,6 @@
     <Content Include="Skin\Feel\Default\wait.gif" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Gtd\" />
     <Folder Include="Skin\Look\Default\" />
   </ItemGroup>
   <ItemGroup>

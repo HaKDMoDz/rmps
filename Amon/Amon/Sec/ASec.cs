@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
+using Me.Amon.Model;
 using Me.Amon.Sec.Uc;
 using Me.Amon.Sec.Uw;
 using Me.Amon.Uc;
@@ -11,7 +12,7 @@ using Org.BouncyCastle.Crypto.Paddings;
 
 namespace Me.Amon.Sec
 {
-    public partial class ASec : Form
+    public partial class ASec : Form, IApp
     {
         #region 全局变量
         private Cm _UcCm;
@@ -32,7 +33,13 @@ namespace Me.Amon.Sec
             InitializeComponent();
         }
 
-        public void Init()
+        public ASec(UserModel userModel)
+        {
+            InitializeComponent();
+        }
+
+        #region 接口实现
+        public void InitOnce()
         {
             // 
             // UcDo
@@ -102,6 +109,21 @@ namespace Me.Amon.Sec
 
             //BtDo.Text = "执行(&R)";
         }
+
+        public int AppId { get; set; }
+
+        public Form Form { get { return this; } }
+
+        public bool WillExit()
+        {
+            return true;
+        }
+
+        public bool SaveData()
+        {
+            return true;
+        }
+        #endregion
 
         #region 事件处理
         private void CbOpt_SelectedIndexChanged(object sender, EventArgs e)

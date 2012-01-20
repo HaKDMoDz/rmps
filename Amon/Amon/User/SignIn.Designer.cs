@@ -28,21 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SignIn));
             this.LbName = new System.Windows.Forms.Label();
             this.TbName = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.TbPass = new System.Windows.Forms.TextBox();
             this.LbPass = new System.Windows.Forms.Label();
             this.BtNo = new System.Windows.Forms.Button();
             this.BtOk = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MiSignUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.PbMenu = new System.Windows.Forms.PictureBox();
+            this.PbGuid = new System.Windows.Forms.PictureBox();
+            this.CmMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbGuid)).BeginInit();
             this.SuspendLayout();
             // 
             // LbName
             // 
             this.LbName.AutoSize = true;
-            this.LbName.Location = new System.Drawing.Point(49, 66);
+            this.LbName.Location = new System.Drawing.Point(49, 63);
             this.LbName.Name = "LbName";
             this.LbName.Size = new System.Drawing.Size(47, 12);
             this.LbName.TabIndex = 0;
@@ -50,22 +56,14 @@
             // 
             // TbName
             // 
-            this.TbName.Location = new System.Drawing.Point(102, 63);
+            this.TbName.Location = new System.Drawing.Point(102, 60);
             this.TbName.Name = "TbName";
             this.TbName.Size = new System.Drawing.Size(100, 21);
             this.TbName.TabIndex = 1;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(254, 48);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            // 
             // TbPass
             // 
-            this.TbPass.Location = new System.Drawing.Point(102, 90);
+            this.TbPass.Location = new System.Drawing.Point(102, 87);
             this.TbPass.Name = "TbPass";
             this.TbPass.PasswordChar = '*';
             this.TbPass.Size = new System.Drawing.Size(100, 21);
@@ -74,7 +72,7 @@
             // LbPass
             // 
             this.LbPass.AutoSize = true;
-            this.LbPass.Location = new System.Drawing.Point(49, 93);
+            this.LbPass.Location = new System.Drawing.Point(49, 90);
             this.LbPass.Name = "LbPass";
             this.LbPass.Size = new System.Drawing.Size(47, 12);
             this.LbPass.TabIndex = 2;
@@ -84,7 +82,7 @@
             // 
             this.BtNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtNo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.BtNo.Location = new System.Drawing.Point(167, 129);
+            this.BtNo.Location = new System.Drawing.Point(163, 122);
             this.BtNo.Name = "BtNo";
             this.BtNo.Size = new System.Drawing.Size(75, 23);
             this.BtNo.TabIndex = 5;
@@ -95,7 +93,7 @@
             // BtOk
             // 
             this.BtOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtOk.Location = new System.Drawing.Point(86, 129);
+            this.BtOk.Location = new System.Drawing.Point(82, 122);
             this.BtOk.Name = "BtOk";
             this.BtOk.Size = new System.Drawing.Size(75, 23);
             this.BtOk.TabIndex = 4;
@@ -103,18 +101,52 @@
             this.BtOk.UseVisualStyleBackColor = true;
             this.BtOk.Click += new System.EventHandler(this.BtOk_Click);
             // 
+            // CmMenu
+            // 
+            this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MiSignUp});
+            this.CmMenu.Name = "CmMenu";
+            this.CmMenu.Size = new System.Drawing.Size(117, 26);
+            // 
+            // MiSignUp
+            // 
+            this.MiSignUp.Name = "MiSignUp";
+            this.MiSignUp.Size = new System.Drawing.Size(116, 22);
+            this.MiSignUp.Text = "注册(&R)";
+            // 
+            // PbMenu
+            // 
+            this.PbMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PbMenu.Image = global::Me.Amon.Properties.Resources.Menu;
+            this.PbMenu.Location = new System.Drawing.Point(12, 126);
+            this.PbMenu.Name = "PbMenu";
+            this.PbMenu.Size = new System.Drawing.Size(16, 16);
+            this.PbMenu.TabIndex = 6;
+            this.PbMenu.TabStop = false;
+            this.PbMenu.Click += new System.EventHandler(this.PbMenu_Click);
+            // 
+            // PbGuid
+            // 
+            this.PbGuid.Image = global::Me.Amon.Properties.Resources.Guid;
+            this.PbGuid.Location = new System.Drawing.Point(0, 0);
+            this.PbGuid.Name = "PbGuid";
+            this.PbGuid.Size = new System.Drawing.Size(250, 40);
+            this.PbGuid.TabIndex = 2;
+            this.PbGuid.TabStop = false;
+            // 
             // SignIn
             // 
             this.AcceptButton = this.BtOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.BtNo;
-            this.ClientSize = new System.Drawing.Size(254, 164);
+            this.ClientSize = new System.Drawing.Size(250, 157);
+            this.Controls.Add(this.PbMenu);
             this.Controls.Add(this.BtOk);
             this.Controls.Add(this.BtNo);
             this.Controls.Add(this.TbPass);
             this.Controls.Add(this.LbPass);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.PbGuid);
             this.Controls.Add(this.TbName);
             this.Controls.Add(this.LbName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -124,7 +156,9 @@
             this.Name = "SignIn";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "登录";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.CmMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbGuid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,10 +168,13 @@
 
         private System.Windows.Forms.Label LbName;
         private System.Windows.Forms.TextBox TbName;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox PbGuid;
         private System.Windows.Forms.TextBox TbPass;
         private System.Windows.Forms.Label LbPass;
         private System.Windows.Forms.Button BtNo;
         private System.Windows.Forms.Button BtOk;
+        private System.Windows.Forms.PictureBox PbMenu;
+        private System.Windows.Forms.ContextMenuStrip CmMenu;
+        private System.Windows.Forms.ToolStripMenuItem MiSignUp;
     }
 }

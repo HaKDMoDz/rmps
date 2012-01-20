@@ -22,63 +22,84 @@ namespace Me.Amon.Model
         public string Code { get { return _Code; } }
         #endregion
 
+        public string Digest(string name, string pass)
+        {
+            return Convert.ToBase64String(Digest(name + '%' + pass + "@APwd"));
+        }
+
+        public byte[] Digest(string data)
+        {
+            if (string.IsNullOrEmpty(data))
+            {
+                return null;
+            }
+            byte[] temp = Encoding.UTF8.GetBytes(data);
+            return HashAlgorithm.Create("SHA256").ComputeHash(temp);
+        }
+
+        private byte[] GenK(string name, string code, string pass)
+        {
+            return Digest(name + '@' + code + "&Amon.Me/" + pass);
+        }
+
+        private byte[] GenV(string name, string code, string pass)
+        {
+            return Encoding.UTF8.GetBytes(code + "@Amon.Me");
+        }
+
         #region 权限认证
         /// <summary>
-        /// 
+        /// 用户登录
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="pass"></param>
-        /// <param name="code"></param>
         /// <returns></returns>
-        private bool Verify(string name, string pass, string code)
+        public bool SignIn(string name, string code, string pass, string data)
         {
             #region 口令散列
-            byte[] temp = Encoding.UTF8.GetBytes(name + code);
             // 口令
-            //byte[] key = new SHA256Managed().ComputeHash(temp);
-            byte[] key = MD5.Create("MD5").ComputeHash(temp);
+            byte[] k = GenK(name, code, pass);
             // 向量
-            byte[] iv = Encoding.UTF8.GetBytes(code + "@Amon.Me");
+            byte[] v = GenV(name, code, pass);
             // 数据
-            byte[] data = Convert.FromBase64String(pass);
+            byte[] t = Encoding.UTF8.GetBytes(data);
             #endregion
 
             #region AES 解密
             AesManaged aes = new AesManaged();
-            //aes.Mode = CipherMode.CBC;
-            //aes.Padding = PaddingMode.Zeros;
-
             using (MemoryStream mStream = new MemoryStream())
             {
-                using (CryptoStream cStream = new CryptoStream(mStream, aes.CreateDecryptor(key, iv), CryptoStreamMode.Write))
+                using (CryptoStream cStream = new CryptoStream(mStream, aes.CreateDecryptor(k, v), CryptoStreamMode.Write))
                 {
-                    cStream.Write(data, 0, data.Length);
+                    cStream.Write(t, 0, t.Length);
                     cStream.FlushFinalBlock();
-                    data = mStream.ToArray();
+                    t = mStream.ToArray();
                 }
             }
             aes.Clear();
             #endregion
 
+            if (t.Length != 72)
+            {
+                return false;
+            }
+
+            _Code = Encoding.UTF8.GetString(t, 0, 8);
+            int i = 8;
             salt = new byte[16];
-            Array.Copy(data, 0, salt, 0, 16);
+            Array.Copy(t, i, salt, 0, salt.Length);
+            i += salt.Length;
             keys = new byte[32];
-            Array.Copy(data, 16, keys, 0, 32);
-            mask = Encoding.UTF8.GetChars(data, 48, 16);
+            Array.Copy(t, i, keys, 0, keys.Length);
+            i += keys.Length;
+            mask = Encoding.UTF8.GetChars(t, 48, 16);
 
             _Name = name;
-            _Pass = pass;
             _Code = code;
             return true;
         }
 
-        /// <summary>
-        /// 用户登录
-        /// </summary>
-        /// <returns></returns>
-        public bool SignIn(string name, string pass, string code)
+        public bool SignRs(string name, string pass)
         {
-            return Verify(name, pass, code);
+            return (name == _Name && pass == _Pass);
         }
 
         /// <summary>
@@ -240,11 +261,65 @@ namespace Me.Amon.Model
         /// 用户注册
         /// </summary>
         /// <returns></returns>
-        public bool SignUp(string name, string pass, string code)
+        public string SignUp(string name, string pass)
         {
-            return Verify(name, pass, code);
+            _Code = "A0000000";
+            byte[] k = GenK(name, _Code, pass);
+            byte[] v = GenV(name, _Code, pass);
+
+            Random r = new Random();
+            salt = new byte[16];
+            r.NextBytes(salt);
+            keys = new byte[32];
+            r.NextBytes(keys);
+            mask = GenChar();
+
+            byte[] t = new byte[72];
+            byte[] a = Encoding.UTF8.GetBytes(_Code);
+            int i = 0;
+            Array.Copy(a, 0, t, i, a.Length);
+            i += a.Length;
+            Array.Copy(salt, 0, t, i, salt.Length);
+            i += salt.Length;
+            Array.Copy(keys, 0, t, i, keys.Length);
+            i += keys.Length;
+            a = Encoding.UTF8.GetBytes(mask);
+            Array.Copy(a, 0, t, i, a.Length);
+
+            #region AES 加密
+            AesManaged aes = new AesManaged();
+            using (MemoryStream mStream = new MemoryStream())
+            {
+                using (CryptoStream cStream = new CryptoStream(mStream, aes.CreateEncryptor(k, v), CryptoStreamMode.Write))
+                {
+                    cStream.Write(t, 0, t.Length);
+                    cStream.FlushFinalBlock();
+                    t = mStream.ToArray();
+                }
+            }
+            aes.Clear();
+            #endregion
+
+            return Convert.ToBase64String(t);
         }
         #endregion
+
+        private char[] GenChar()
+        {
+            char[] c = new char[93];
+            char t = '!';
+            int i = 0;
+            while (i < 6)
+            {
+                c[i++] = t++;
+            }
+            t = '(';
+            while (i < 93)
+            {
+                c[i++] = t++;
+            }
+            return CharUtil.NextRandomKey(c, 16, false);
+        }
 
         #region 数据安全
         public string Decode(string data)

@@ -1,25 +1,13 @@
 ﻿using System;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
-using System.IO;
 
 namespace Me.Amon.Util
 {
     public sealed class SafeUtil
     {
-        public static string EncryptPass(string pass)
-        {
-            if (string.IsNullOrEmpty(pass))
-            {
-                return "";
-            }
-            byte[] temp = Encoding.UTF8.GetBytes(pass);
-            temp = new SHA256Managed().ComputeHash(temp);
-            //temp = MD5.Create("MD5").ComputeHash(temp);
-            return Convert.ToBase64String(temp);
-        }
-
         private static string _OldText;
         private static Timer _Timer;
         public static void Copy(string newText)
