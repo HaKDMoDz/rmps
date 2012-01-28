@@ -107,11 +107,33 @@ namespace Me.Amon.Uc
                         item.V = line.Substring(idx + 1);
                     }
                     dict[item.K] = item;
+                    keys.Add(item.K);
 
                     item = new Item { V = "", D = "" };
                     isComment = false;
                     multiLine = line.EndsWith("\\");
                 }
+                reader.Close();
+            }
+        }
+
+        /// <summary>
+        /// 保存文件
+        /// </summary>
+        /// <param name="filePath">要保存的Properties文件</param>
+        /// <returns></returns>
+        public void Save(string filePath)
+        {
+            using (StreamWriter writer = File.Exists(filePath) ? new StreamWriter(filePath, false) : File.CreateText(filePath))
+            {
+                foreach (string key in keys)
+                {
+                    Item item = dict[key];
+                    writer.WriteLine("#" + item.D);
+                    writer.WriteLine(key + "=" + item.V);
+                }
+                writer.Flush();
+                writer.Close();
             }
         }
 
@@ -199,27 +221,5 @@ namespace Me.Amon.Uc
         //        }
         //    }
         //}
-
-        /// <summary>
-        /// 保存文件
-        /// </summary>
-        /// <param name="filePath">要保存的Properties文件</param>
-        /// <returns></returns>
-        public void Save(string filePath)
-        {
-            if (File.Exists(filePath))
-            {
-                File.CreateText(filePath);
-            }
-            StreamWriter writer = new StreamWriter(filePath, false);
-            foreach (string key in keys)
-            {
-                Item item = dict[key];
-                writer.WriteLine("#" + item.D);
-                writer.WriteLine(key + "=" + item.V);
-            }
-            writer.Flush();
-            writer.Close();
-        }
     }
 }

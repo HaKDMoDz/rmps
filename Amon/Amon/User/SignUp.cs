@@ -13,7 +13,9 @@ namespace Me.Amon.User
     {
         private string _Name;
         private string _Pass;
+        private string _Root;
         private UserModel _UserModel;
+        private Uc.Properties _Prop;
 
         #region 构造函数
         public SignUp()
@@ -26,6 +28,8 @@ namespace Me.Amon.User
             _UserModel = userModel;
 
             InitializeComponent();
+
+            _Root = IEnv.DATA_DIR + Path.DirectorySeparatorChar;
         }
         #endregion
 
@@ -40,6 +44,11 @@ namespace Me.Amon.User
         private void BtNo_Click(object sender, System.EventArgs e)
         {
             Close();
+        }
+
+        private void PbMenu_Click(object sender, EventArgs e)
+        {
+            CmMenu.Show(PbMenu, 0, PbMenu.Height);
         }
         #endregion
 
@@ -100,8 +109,19 @@ namespace Me.Amon.User
             }
             #endregion
 
-            _Pass = _UserModel.Digest(_Name, _Pass);
+            _Name = _Name.ToLower();
             pass = null;
+
+            _Prop = new Uc.Properties();
+            _Prop.Load(IEnv.AMON_CFG);
+            string root = _Prop.Get(string.Format("amon.{0}.root", _Name));
+            if (!string.IsNullOrEmpty(root))
+            {
+                ShowAlert(string.Format("已存在名为 {0} 的用户，请尝试其它用户名！", _Name));
+                return;
+            }
+
+            string info = _UserModel.Digest(_Name, _Pass);
 
             // 在线注册
             if (MiLocal.Checked)
@@ -109,16 +129,21 @@ namespace Me.Amon.User
                 WebClient client = new WebClient();
                 client.Headers["Content-type"] = "application/x-www-form-urlencoded";
                 client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignUp_UploadStringCompleted);
-                client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=sup&n=" + _Name + "&k=" + _Pass);
+                client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=sup&n=" + _Name + "&k=" + info);
                 return;
             }
 
             // 本地注册
-            string data = _UserModel.SignUp(_Name, _Pass);
-            if (data.Length != 72)
+            bool ok = _UserModel.SignUp(_Root, _Name, _Pass, info);
+            _Prop = null;
+
+            if (!ok)
             {
+                ShowAlert("系统异常，请稍后重试！");
                 return;
             }
+
+            LoadUser(0);
         }
 
         private void SignUp_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -131,7 +156,7 @@ namespace Me.Amon.User
 
             string xml = e.Result;
             string code = null;
-            string pass = null;
+            string info = null;
             string data = null;
             int view = IEnv.IAPP_NONE;
             using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
@@ -139,39 +164,28 @@ namespace Me.Amon.User
                 if (xml.IndexOf("<error>") > 0)
                 {
                     reader.ReadToFollowing("error");
+                    ShowAlert(reader.ReadElementContentAsString());
                     return;
                 }
 
                 reader.ReadToFollowing("code");
                 code = reader.ReadElementContentAsString();
 
-                pass = reader.ReadElementContentAsString();
+                info = reader.ReadElementContentAsString();
 
                 data = reader.ReadElementContentAsString();
 
                 view = reader.ReadElementContentAsInt();
             }
 
-            SaveData(_Name, code, pass, data, view);
+            _UserModel.SignNw(_Root, code, _Name, info, data);
+            _Pass = null;
+
+            LoadUser(view);
         }
 
-        private void SaveData(string name, string code, string pass, string data, int view)
+        private void LoadUser(int view)
         {
-            Uc.Properties _Prop = new Uc.Properties();
-            _Prop.Load(IEnv.AMON_CFG);
-            _Prop.Set(string.Format("amon.{0}.code", _Name), code);
-            _Prop.Set(string.Format("amon.{0}.info", _Name), pass);
-            _Prop.Set(string.Format("amon.{0}.data", _Name), data);
-            _Prop.Set(string.Format("amon.{0}.view", _Name), view.ToString());
-            _Prop.Save(IEnv.AMON_CFG);
-
-            if (!_UserModel.SignIn(_Name, code, "", data))
-            {
-                ShowAlert("身份验证错误，请确认您的用户及口令输入是否正确！");
-                TbName.Focus();
-                return;
-            }
-
             _UserModel.Init();
             if (CallBackHandler != null)
             {
@@ -185,11 +199,6 @@ namespace Me.Amon.User
             MessageBox.Show(this, alert, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion
-
-        private void PbMenu_Click(object sender, EventArgs e)
-        {
-            CmMenu.Show(PbMenu, 0, PbMenu.Height);
-        }
 
         private void MiLocal_Click(object sender, EventArgs e)
         {

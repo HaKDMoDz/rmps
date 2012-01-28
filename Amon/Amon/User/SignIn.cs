@@ -13,7 +13,8 @@ namespace Me.Amon.User
     public partial class SignIn : Form
     {
         private string _Name;
-        private string _Pass;
+        private string _Info;
+        private string _Root;
         private UserModel _UserModel;
         private Uc.Properties _Prop;
 
@@ -28,6 +29,8 @@ namespace Me.Amon.User
             _UserModel = userModel;
 
             InitializeComponent();
+
+            _Root = IEnv.DATA_DIR + Path.DirectorySeparatorChar;
         }
         #endregion
 
@@ -74,16 +77,16 @@ namespace Me.Amon.User
             #endregion
 
             #region 口令判断
-            _Pass = TbPass.Text;
+            string pass = TbPass.Text;
             TbPass.Text = "";
-            if (string.IsNullOrEmpty(_Pass))
+            if (string.IsNullOrEmpty(pass))
             {
                 ShowAlert("请输入登录口令！");
                 TbPass.Focus();
                 return;
             }
 
-            if (_Pass.Length < 3)
+            if (pass.Length < 3)
             {
                 ShowAlert("登录口令不能少于3个字符！");
                 TbPass.Focus();
@@ -91,11 +94,13 @@ namespace Me.Amon.User
             }
             #endregion
 
-            // 口令散列
-            _Pass = _UserModel.Digest(_Name, _Pass);
+            _Name = _Name.ToLower();
 
             _Prop = new Uc.Properties();
             _Prop.Load(IEnv.AMON_CFG);
+
+            // 口令散列
+            _Info = _UserModel.Digest(_Name, pass);
 
             string code = _Prop.Get(string.Format("amon.{0}.code", _Name));
             if (!CharUtil.IsValidateCode(code))
@@ -104,22 +109,21 @@ namespace Me.Amon.User
                 client.Credentials = CredentialCache.DefaultCredentials;
                 client.Headers["Content-type"] = "application/x-www-form-urlencoded";
                 client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignIn_UploadStringCompleted);
-                client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=sin&n=" + _Name + "&k=" + _Pass);
+                client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=sin&n=" + _Name + "&k=" + _Info);
                 return;
             }
 
-            if (_Pass != _Prop.Get(string.Format("amon.{0}.info", _Name)))
+            bool ok = _UserModel.SignIn(_Root, code, _Name, pass, _Info);
+            pass = null;
+
+            if (!ok)
             {
-                ShowAlert("身份验证错误，请确认您输入的用户及口令是否正确！");
+                ShowAlert("身份验证错误，请确认您的用户及口令输入是否正确！");
+                TbName.Focus();
                 return;
             }
 
-            string data = _Prop.Get(string.Format("amon.{0}.data", _Name));
-
-            string t = _Prop.Get(string.Format("amon.{0}.view", _Name));
-            int view = CharUtil.IsValidateLong(t) ? int.Parse(t) : IEnv.IAPP_NONE;
-
-            LoadUser(_Name, code, "", data, view);
+            LoadUser(0);
         }
 
         private void SignIn_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -154,25 +158,14 @@ namespace Me.Amon.User
                 view = reader.ReadElementContentAsInt();
             }
 
-            _Prop.Set(string.Format("amon.{0}.code", _Name), code);
-            _Prop.Set(string.Format("amon.{0}.info", _Name), _Pass);
-            _Prop.Set(string.Format("amon.{0}.data", _Name), data);
-            _Prop.Set(string.Format("amon.{0}.view", _Name), view.ToString());
-            _Prop.Save(IEnv.AMON_CFG);
+            _UserModel.SignNw(_Root, code, _Name, _Info, data);
 
-            LoadUser(_Name, code, "", data, view);
+            LoadUser(view);
         }
 
-        private void LoadUser(string name, string code, string pass, string data, int view)
+        private void LoadUser(int view)
         {
-            if (!_UserModel.SignIn(_Name, code, pass, data))
-            {
-                ShowAlert("身份验证错误，请确认您的用户及口令输入是否正确！");
-                TbName.Focus();
-                return;
-            }
             _UserModel.Init();
-
             if (CallBackHandler != null)
             {
                 CallBackHandler.Invoke(view);
@@ -191,11 +184,17 @@ namespace Me.Amon.User
             CmMenu.Show(PbMenu, 0, PbMenu.Height);
         }
 
-        private void MiSignUp_Click(object sender, EventArgs e)
+        private void MiOnSignUp_Click(object sender, EventArgs e)
         {
             SignUp signUp = new SignUp(_UserModel);
+            signUp.CallBackHandler = CallBackHandler;
             signUp.Show();
             Close();
+        }
+
+        private void MiOfSignUp_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void MiUpgrade_Click(object sender, EventArgs e)

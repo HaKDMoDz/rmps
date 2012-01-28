@@ -37,10 +37,13 @@
             this.BtNo = new System.Windows.Forms.Button();
             this.BtOk = new System.Windows.Forms.Button();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MiSignUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiOnSignUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiOfSignUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiLcSignUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.MiUpgrade = new System.Windows.Forms.ToolStripMenuItem();
             this.PbMenu = new System.Windows.Forms.PictureBox();
             this.PbGuid = new System.Windows.Forms.PictureBox();
-            this.MiUpgrade = new System.Windows.Forms.ToolStripMenuItem();
             this.CmMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbGuid)).BeginInit();
@@ -105,17 +108,46 @@
             // CmMenu
             // 
             this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MiSignUp,
+            this.MiOnSignUp,
+            this.MiOfSignUp,
+            this.MiLcSignUp,
+            this.toolStripSeparator1,
             this.MiUpgrade});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(153, 70);
+            this.CmMenu.Size = new System.Drawing.Size(153, 120);
             // 
-            // MiSignUp
+            // MiOnSignUp
             // 
-            this.MiSignUp.Name = "MiSignUp";
-            this.MiSignUp.Size = new System.Drawing.Size(152, 22);
-            this.MiSignUp.Text = "注册(&R)";
-            this.MiSignUp.Click += new System.EventHandler(this.MiSignUp_Click);
+            this.MiOnSignUp.Name = "MiOnSignUp";
+            this.MiOnSignUp.Size = new System.Drawing.Size(152, 22);
+            this.MiOnSignUp.Text = "联机注册(&O)";
+            this.MiOnSignUp.Click += new System.EventHandler(this.MiOnSignUp_Click);
+            // 
+            // MiOfSignUp
+            // 
+            this.MiOfSignUp.Enabled = false;
+            this.MiOfSignUp.Name = "MiOfSignUp";
+            this.MiOfSignUp.Size = new System.Drawing.Size(152, 22);
+            this.MiOfSignUp.Text = "脱机注册(&F)";
+            this.MiOfSignUp.Click += new System.EventHandler(this.MiOfSignUp_Click);
+            // 
+            // MiLcSignUp
+            // 
+            this.MiLcSignUp.Name = "MiLcSignUp";
+            this.MiLcSignUp.Size = new System.Drawing.Size(152, 22);
+            this.MiLcSignUp.Text = "本地注册(&P)";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // MiUpgrade
+            // 
+            this.MiUpgrade.Name = "MiUpgrade";
+            this.MiUpgrade.Size = new System.Drawing.Size(152, 22);
+            this.MiUpgrade.Text = "升级(&U)";
+            this.MiUpgrade.Click += new System.EventHandler(this.MiUpgrade_Click);
             // 
             // PbMenu
             // 
@@ -136,14 +168,6 @@
             this.PbGuid.Size = new System.Drawing.Size(250, 40);
             this.PbGuid.TabIndex = 2;
             this.PbGuid.TabStop = false;
-            // 
-            // MiUpgrade
-            // 
-            this.MiUpgrade.Enabled = false;
-            this.MiUpgrade.Name = "MiUpgrade";
-            this.MiUpgrade.Size = new System.Drawing.Size(152, 22);
-            this.MiUpgrade.Text = "升级(&U)";
-            this.MiUpgrade.Click += new System.EventHandler(this.MiUpgrade_Click);
             // 
             // SignIn
             // 
@@ -186,7 +210,10 @@
         private System.Windows.Forms.Button BtOk;
         private System.Windows.Forms.PictureBox PbMenu;
         private System.Windows.Forms.ContextMenuStrip CmMenu;
-        private System.Windows.Forms.ToolStripMenuItem MiSignUp;
+        private System.Windows.Forms.ToolStripMenuItem MiOnSignUp;
+        private System.Windows.Forms.ToolStripMenuItem MiOfSignUp;
+        private System.Windows.Forms.ToolStripMenuItem MiLcSignUp;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem MiUpgrade;
     }
 }

@@ -11,9 +11,9 @@ namespace Me.Amon.Model
     public sealed class UserModel
     {
         #region 全局变量
-        private string _Name;
-        private string _Pass;
         private string _Code;
+        private string _Name;
+        private string _Info;
         private byte[] keys;
         private byte[] salt;
         private char[] mask;
@@ -52,15 +52,31 @@ namespace Me.Amon.Model
         /// 用户登录
         /// </summary>
         /// <returns></returns>
-        public bool SignIn(string name, string code, string pass, string data)
+        public bool SignIn(string root, string code, string name, string pass, string info)
         {
+            root += code + Path.DirectorySeparatorChar + IEnv.AMON_CFG;
+            if (!File.Exists(root))
+            {
+                return false;
+            }
+
+            Uc.Properties prop = new Uc.Properties();
+            prop.Load(root);
+
+            if (info != prop.Get("amon.info"))
+            {
+                return false;
+            }
+            string data = prop.Get("amon.data");
+
             #region 口令散列
             // 口令
             byte[] k = GenK(name, code, pass);
             // 向量
             byte[] v = GenV(name, code, pass);
             // 数据
-            byte[] t = Encoding.UTF8.GetBytes(data);
+            byte[] t = Convert.FromBase64String(data);
+            pass = null;
             #endregion
 
             #region AES 解密
@@ -97,9 +113,9 @@ namespace Me.Amon.Model
             return true;
         }
 
-        public bool SignRs(string name, string pass)
+        public bool SignRs(string name, string info)
         {
-            return (name == _Name && pass == _Pass);
+            return (name == _Name && info == _Info);
         }
 
         /// <summary>
@@ -115,8 +131,13 @@ namespace Me.Amon.Model
         /// 网络登录
         /// </summary>
         /// <returns></returns>
-        public bool SignNw()
+        public bool SignNw(string root, string code, string name, string info, string data)
         {
+            Uc.Properties prop = new Uc.Properties();
+            prop.Set("amon.code", code);
+            prop.Set("amon.info", info);
+            prop.Set("amon.data", data);
+            prop.Save(root + code + Path.DirectorySeparatorChar + IEnv.AMON_CFG);
             return true;
         }
 
@@ -261,11 +282,12 @@ namespace Me.Amon.Model
         /// 用户注册
         /// </summary>
         /// <returns></returns>
-        public string SignUp(string name, string pass)
+        public bool SignUp(string root, string name, string pass, string info)
         {
-            _Code = "A0000000";
-            byte[] k = GenK(name, _Code, pass);
-            byte[] v = GenV(name, _Code, pass);
+            string code = "A0000000";
+            byte[] k = GenK(name, code, pass);
+            byte[] v = GenV(name, code, pass);
+            pass = null;
 
             Random r = new Random();
             salt = new byte[16];
@@ -275,7 +297,7 @@ namespace Me.Amon.Model
             mask = GenChar();
 
             byte[] t = new byte[72];
-            byte[] a = Encoding.UTF8.GetBytes(_Code);
+            byte[] a = Encoding.UTF8.GetBytes(code);
             int i = 0;
             Array.Copy(a, 0, t, i, a.Length);
             i += a.Length;
@@ -300,7 +322,22 @@ namespace Me.Amon.Model
             aes.Clear();
             #endregion
 
-            return Convert.ToBase64String(t);
+            root += code + Path.DirectorySeparatorChar;
+            if (!Directory.Exists(root))
+            {
+                Directory.CreateDirectory(root);
+            }
+            string data = Convert.ToBase64String(t);
+            Uc.Properties prop = new Uc.Properties();
+            prop.Set("amon.code", code);
+            prop.Set("amon.info", info);
+            prop.Set("amon.data", data);
+            prop.Save(root + IEnv.AMON_CFG);
+
+            _Name = name;
+            _Code = code;
+            _Info = pass;
+            return true;
         }
         #endregion
 
