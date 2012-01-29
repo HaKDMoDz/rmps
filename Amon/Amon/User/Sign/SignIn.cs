@@ -4,73 +4,60 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
-using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Util;
 
-namespace Me.Amon.User
+namespace Me.Amon.User.Sign
 {
-    public partial class SignIn : Form
+    public partial class SignIn : UserControl, ISignAc
     {
         private string _Name;
         private string _Info;
-        private string _Root;
+        private string _Home;
         private UserModel _UserModel;
         private Uc.Properties _Prop;
+        private SignAc _SignAc;
 
-        #region 构造函数
         public SignIn()
         {
             InitializeComponent();
         }
 
-        public SignIn(UserModel userModel)
+        public SignIn(SignAc signAc, UserModel userModel)
         {
+            _SignAc = signAc;
             _UserModel = userModel;
 
             InitializeComponent();
-
-            _Root = IEnv.DATA_DIR + Path.DirectorySeparatorChar;
-        }
-        #endregion
-
-        public AmonHandler<int> CallBackHandler { get; set; }
-
-        #region 事件处理
-        private void BtOk_Click(object sender, EventArgs e)
-        {
-            DoSignIn();
         }
 
-        private void BtNo_Click(object sender, EventArgs e)
+        #region 接口实现
+        public Control Control
         {
-            Close();
+            get { return this; }
         }
-        #endregion
 
-        #region 私有方法
-        private void DoSignIn()
+        public void DoSignAc()
         {
+            #region 用户判断
             _Name = TbName.Text;
-
-            #region 用户名判断
             if (string.IsNullOrEmpty(_Name))
             {
-                ShowAlert("请输入用户名！");
+                _SignAc.ShowAlert("请输入用户名！");
                 TbName.Focus();
                 return;
             }
 
             if (_Name.Length < 3)
             {
-                ShowAlert("用户名不能少于3个字符！");
+                _SignAc.ShowAlert("用户名不能少于3个字符！");
                 TbName.Focus();
                 return;
             }
 
             if (!Regex.IsMatch(_Name, "^\\w{3,}$"))
             {
-                ShowAlert("用户名中含有非法字符！");
+                _SignAc.ShowAlert("用户名中含有非法字符！");
                 TbName.Focus();
                 return;
             }
@@ -81,28 +68,27 @@ namespace Me.Amon.User
             TbPass.Text = "";
             if (string.IsNullOrEmpty(pass))
             {
-                ShowAlert("请输入登录口令！");
+                _SignAc.ShowAlert("请输入登录口令！");
                 TbPass.Focus();
                 return;
             }
 
             if (pass.Length < 3)
             {
-                ShowAlert("登录口令不能少于3个字符！");
+                _SignAc.ShowAlert("登录口令不能少于3个字符！");
                 TbPass.Focus();
                 return;
             }
             #endregion
 
-            _Name = _Name.ToLower();
-
             _Prop = new Uc.Properties();
             _Prop.Load(IEnv.AMON_CFG);
 
-            // 口令散列
+            _Name = _Name.ToLower();
             _Info = _UserModel.Digest(_Name, pass);
-
             string code = _Prop.Get(string.Format("amon.{0}.code", _Name));
+
+            #region 已有用户首次登录
             if (!CharUtil.IsValidateCode(code))
             {
                 WebClient client = new WebClient();
@@ -112,25 +98,95 @@ namespace Me.Amon.User
                 client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=sin&n=" + _Name + "&k=" + _Info);
                 return;
             }
+            #endregion
 
-            bool ok = _UserModel.SignIn(_Root, code, _Name, pass, _Info);
-            pass = null;
-
-            if (!ok)
+            #region 已有用户正常登录
+            if (!_UserModel.SignIn(_Home, code, _Name, pass, _Info))
             {
-                ShowAlert("身份验证错误，请确认您的用户及口令输入是否正确！");
+                pass = null;
+                _SignAc.ShowAlert("身份验证错误，请确认您的用户及口令输入是否正确！");
                 TbName.Focus();
                 return;
             }
 
-            LoadUser(0);
+            pass = null;
+            _SignAc.CallBack(0);
+            #endregion
         }
 
+        public void DoCancel()
+        {
+            _SignAc.Close();
+        }
+        #endregion
+
+        private void BtPath_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #region 菜单事件
+        /// <summary>
+        /// 打开(&O)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MiOpen_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fd = new FolderBrowserDialog();
+            if (DialogResult.OK != fd.ShowDialog())
+            {
+                return;
+            }
+        }
+
+        /// <summary>
+        /// 联机注册(&R)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MiOnSignUp_Click(object sender, EventArgs e)
+        {
+            //ShowSignOn();
+        }
+
+        /// <summary>
+        /// 脱机注册(&N)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MiOfSignUp_Click(object sender, EventArgs e)
+        {
+            //ShowSignOf();
+        }
+
+        /// <summary>
+        /// 单机注册(&P)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MiPcSignUp_Click(object sender, EventArgs e)
+        {
+            //ShowSignPc();
+        }
+
+        /// <summary>
+        /// 升级(&U)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MiUpgrade_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region 私有函数
         private void SignIn_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
         {
             if (e.Error != null)
             {
-                ShowAlert(e.Error.Message);
+                _SignAc.ShowAlert(e.Error.Message);
                 return;
             }
 
@@ -143,7 +199,7 @@ namespace Me.Amon.User
                 if (xml.IndexOf("<error>") > 0)
                 {
                     reader.ReadToFollowing("error");
-                    ShowAlert(reader.ReadElementContentAsString());
+                    _SignAc.ShowAlert(reader.ReadElementContentAsString());
                     return;
                 }
 
@@ -158,48 +214,11 @@ namespace Me.Amon.User
                 view = reader.ReadElementContentAsInt();
             }
 
-            _UserModel.SignNw(_Root, code, _Name, _Info, data);
+            _UserModel.SignNw(_Home, code, _Info, data);
 
-            LoadUser(view);
-        }
-
-        private void LoadUser(int view)
-        {
-            _UserModel.Init();
-            if (CallBackHandler != null)
-            {
-                CallBackHandler.Invoke(view);
-            }
-            Close();
-        }
-
-        private void ShowAlert(string alert)
-        {
-            MessageBox.Show(this, alert, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            _SignAc.CallBack(view);
         }
         #endregion
 
-        private void PbMenu_Click(object sender, EventArgs e)
-        {
-            CmMenu.Show(PbMenu, 0, PbMenu.Height);
-        }
-
-        private void MiOnSignUp_Click(object sender, EventArgs e)
-        {
-            SignUp signUp = new SignUp(_UserModel);
-            signUp.CallBackHandler = CallBackHandler;
-            signUp.Show();
-            Close();
-        }
-
-        private void MiOfSignUp_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MiUpgrade_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

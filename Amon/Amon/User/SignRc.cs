@@ -6,30 +6,24 @@ using Me.Amon.Model;
 
 namespace Me.Amon.User
 {
-    public partial class SignRs : Form
+    /// <summary>
+    /// 口令修改
+    /// </summary>
+    public partial class SignRc : Form
     {
         private UserModel _UserModel;
 
-        #region 构造函数
-        public SignRs()
+        public SignRc()
         {
             InitializeComponent();
         }
-
-        public SignRs(UserModel userModel)
-        {
-            _UserModel = userModel;
-
-            InitializeComponent();
-        }
-        #endregion
 
         public AmonHandler<int> CallBackHandler { get; set; }
 
         #region 事件处理
         private void BtOk_Click(object sender, EventArgs e)
         {
-            DoSignRs();
+            DoSignRc();
         }
 
         private void BtNo_Click(object sender, EventArgs e)
@@ -39,7 +33,7 @@ namespace Me.Amon.User
         #endregion
 
         #region 私有函数
-        private void DoSignRs()
+        private void DoSignRc()
         {
             string name = TbName.Text;
 
@@ -86,7 +80,7 @@ namespace Me.Amon.User
 
             pass = _UserModel.Digest(name, pass);
 
-            if (!_UserModel.SignRs(name, pass))
+            if (!_UserModel.SignRc(name, pass))
             {
                 ShowAlert("身份验证错误，请确认您的用户及口令输入是否正确！");
                 TbName.Focus();

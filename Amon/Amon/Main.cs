@@ -408,15 +408,16 @@ namespace Me.Amon
         {
             if (!CharUtil.IsValidateCode(_UserModel.Code))
             {
-                SignIn signIn = new SignIn(_UserModel);
-                signIn.CallBackHandler = handler;
-                signIn.Show();
+                SignAc signAc = new SignAc(_UserModel);
+                signAc.InitOnce();
+                signAc.CallBackHandler = handler;
+                signAc.Show();
             }
             else
             {
-                SignRs signRs = new SignRs(_UserModel);
-                signRs.CallBackHandler = handler;
-                signRs.Show();
+                AuthRc authRc = new AuthRc(_UserModel);
+                authRc.CallBackHandler = handler;
+                authRc.Show();
             }
         }
 

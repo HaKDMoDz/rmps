@@ -14,17 +14,19 @@ namespace Me.Amon.Model
         private string _Code;
         private string _Name;
         private string _Info;
+        private string _Home;
         private byte[] keys;
         private byte[] salt;
         private char[] mask;
 
         public string Name { get { return _Name; } }
         public string Code { get { return _Code; } }
+        public string Home { get { return _Home; } }
         #endregion
 
         public string Digest(string name, string pass)
         {
-            return Convert.ToBase64String(Digest(name + '%' + pass + "@APwd"));
+            return Convert.ToBase64String(Digest(name + '%' + pass + "@Amon"));
         }
 
         public byte[] Digest(string data)
@@ -52,16 +54,16 @@ namespace Me.Amon.Model
         /// 用户登录
         /// </summary>
         /// <returns></returns>
-        public bool SignIn(string root, string code, string name, string pass, string info)
+        public bool SignIn(string home, string code, string name, string pass, string info)
         {
-            root += code + Path.DirectorySeparatorChar + IEnv.AMON_CFG;
-            if (!File.Exists(root))
+            string file = home + IEnv.AMON_CFG;
+            if (!File.Exists(file))
             {
                 return false;
             }
 
             Uc.Properties prop = new Uc.Properties();
-            prop.Load(root);
+            prop.Load(file);
 
             if (info != prop.Get("amon.info"))
             {
@@ -110,34 +112,42 @@ namespace Me.Amon.Model
 
             _Name = name;
             _Code = code;
+            _Home = home;
             return true;
         }
 
-        public bool SignRs(string name, string info)
+        /// <summary>
+        /// 重新认证
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public bool SignRc(string name, string info)
         {
             return (name == _Name && info == _Info);
         }
 
         /// <summary>
-        /// 
+        /// 屏幕加锁
         /// </summary>
+        /// <param name="pass"></param>
         /// <returns></returns>
-        public bool SignPb()
+        public bool SignAc(string pass)
         {
-            return true;
+            return _Info == Digest(Name, pass);
         }
 
         /// <summary>
         /// 网络登录
         /// </summary>
         /// <returns></returns>
-        public bool SignNw(string root, string code, string name, string info, string data)
+        public bool SignNw(string home, string code, string info, string data)
         {
             Uc.Properties prop = new Uc.Properties();
             prop.Set("amon.code", code);
             prop.Set("amon.info", info);
             prop.Set("amon.data", data);
-            prop.Save(root + code + Path.DirectorySeparatorChar + IEnv.AMON_CFG);
+            prop.Save(home + code + Path.DirectorySeparatorChar + IEnv.AMON_CFG);
             return true;
         }
 
@@ -150,36 +160,54 @@ namespace Me.Amon.Model
         public bool SignPk(string oldPwds, string newPwds)
         {
             // 已有口令校验
-            //pwds = oldPwds;
-            //byte[] temp = signInDigest();
-            //if (!Util.bytesToString(temp, true).equals(userMdl.getCfg(ConsCfg.CFG_USER_INFO, "")))
-            //{
-            //    return false;
-            //}
+            if (_Info != Digest(Name, oldPwds))
+            {
+                return false;
+            }
 
-            //// 摘要用户登录信息
-            //pwds = newPwds;
-            //temp = signInDigest();
-            //userMdl.setCfg(ConsCfg.CFG_USER_INFO, Util.bytesToString(temp, true));
+            // 生成加密密钥及字符空间
+            byte[] t = new byte[72];
+            byte[] a = Encoding.UTF8.GetBytes(Code);
+            int i = 0;
+            Array.Copy(a, 0, t, i, a.Length);
+            i += a.Length;
+            Array.Copy(salt, 0, t, i, salt.Length);
+            i += salt.Length;
+            Array.Copy(keys, 0, t, i, keys.Length);
+            i += keys.Length;
+            a = Encoding.UTF8.GetBytes(mask);
+            Array.Copy(a, 0, t, i, a.Length);
 
-            //// 生成加密密钥及字符空间
-            //byte[] t = new byte[32];
-            //temp = new string(mask).getBytes();
-            //System.arraycopy(temp, 0, t, 0, temp.length);
-            //System.arraycopy(keys, 0, t, 16, keys.length);
+            // 口令
+            byte[] k = GenK(Name, Code, newPwds);
+            // 向量
+            byte[] v = GenV(Name, Code, newPwds);
 
-            //// 摘要用户加密信息
-            //temp = keys;
-            //keys = cipherDigest();
+            #region AES 加密
+            AesManaged aes = new AesManaged();
+            using (MemoryStream mStream = new MemoryStream())
+            {
+                using (CryptoStream cStream = new CryptoStream(mStream, aes.CreateEncryptor(k, v), CryptoStreamMode.Write))
+                {
+                    cStream.Write(t, 0, t.Length);
+                    cStream.FlushFinalBlock();
+                    t = mStream.ToArray();
+                }
+            }
+            aes.Clear();
+            #endregion
 
-            //// 加密安全数据
-            //Cipher aes = Cipher.getInstance(ConsEnv.NAME_CIPHER);
-            //aes.init(Cipher.ENCRYPT_MODE, this);
-            //keys = aes.doFinal(t);
-            //userMdl.setCfg(ConsCfg.CFG_USER_PKEY, Util.bytesToString(keys, true));
 
-            //// 恢复原有数据加密口令
-            //keys = temp;
+            // 摘要用户登录信息
+            _Info = Digest(Name, newPwds);
+
+            string data = Convert.ToBase64String(t);
+            Uc.Properties prop = new Uc.Properties();
+            prop.Set("amon.code", Code);
+            prop.Set("amon.info", _Info);
+            prop.Set("amon.data", data);
+            prop.Save(Home + Code + Path.DirectorySeparatorChar + IEnv.AMON_CFG);
+
             return true;
         }
 
@@ -282,7 +310,7 @@ namespace Me.Amon.Model
         /// 用户注册
         /// </summary>
         /// <returns></returns>
-        public bool SignUp(string root, string name, string pass, string info)
+        public bool SignUp(string root, string name, string pass)
         {
             string code = "A0000000";
             byte[] k = GenK(name, code, pass);
@@ -322,17 +350,17 @@ namespace Me.Amon.Model
             aes.Clear();
             #endregion
 
-            root += code + Path.DirectorySeparatorChar;
-            if (!Directory.Exists(root))
+            _Home = root + code + Path.DirectorySeparatorChar;
+            if (!Directory.Exists(_Home))
             {
-                Directory.CreateDirectory(root);
+                Directory.CreateDirectory(_Home);
             }
             string data = Convert.ToBase64String(t);
             Uc.Properties prop = new Uc.Properties();
             prop.Set("amon.code", code);
-            prop.Set("amon.info", info);
+            prop.Set("amon.info", Digest(name, pass));
             prop.Set("amon.data", data);
-            prop.Save(root + IEnv.AMON_CFG);
+            prop.Save(_Home + IEnv.AMON_CFG);
 
             _Name = name;
             _Code = code;

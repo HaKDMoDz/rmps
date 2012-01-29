@@ -61,6 +61,9 @@
             this.PbLogo.Size = new System.Drawing.Size(25, 25);
             this.PbLogo.TabIndex = 2;
             this.PbLogo.TabStop = false;
+            this.PbLogo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Main_MouseDown);
+            this.PbLogo.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
+            this.PbLogo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Main_MouseUp);
             // 
             // BgWorker
             // 

@@ -526,22 +526,68 @@
     <Compile Include="Uc\UcsEdit.Designer.cs">
       <DependentUpon>UcsEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\SignIn.cs">
+    <Compile Include="User\AuthAc.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="User\SignIn.Designer.cs">
+    <Compile Include="User\AuthAc.Designer.cs">
+      <DependentUpon>AuthAc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\AuthRc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\AuthRc.Designer.cs">
+      <DependentUpon>AuthRc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\Auth\AuthFk.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User\Auth\AuthFk.Designer.cs">
+      <DependentUpon>AuthFk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\Auth\AuthPk.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User\Auth\AuthPk.Designer.cs">
+      <DependentUpon>AuthPk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\Auth\AuthSk.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User\Auth\AuthSk.Designer.cs">
+      <DependentUpon>AuthSk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\Auth\EAuthAc.cs" />
+    <Compile Include="User\Auth\IAuthAc.cs" />
+    <Compile Include="User\SignAc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\SignAc.Designer.cs">
+      <DependentUpon>SignAc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\SignRc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\SignRc.Designer.cs">
+      <DependentUpon>SignRc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\Sign\ESignAc.cs" />
+    <Compile Include="User\Sign\ISignAc.cs" />
+    <Compile Include="User\Sign\SignIn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User\Sign\SignIn.Designer.cs">
       <DependentUpon>SignIn.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\SignRs.cs">
-      <SubType>Form</SubType>
+    <Compile Include="User\Sign\SignPc.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="User\SignRs.Designer.cs">
-      <DependentUpon>SignRs.cs</DependentUpon>
+    <Compile Include="User\Sign\SignPc.Designer.cs">
+      <DependentUpon>SignPc.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\SignUp.cs">
-      <SubType>Form</SubType>
+    <Compile Include="User\Sign\SignUp.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="User\SignUp.Designer.cs">
+    <Compile Include="User\Sign\SignUp.Designer.cs">
       <DependentUpon>SignUp.cs</DependentUpon>
     </Compile>
     <Compile Include="Util\BeanUtil.cs" />
@@ -754,13 +800,25 @@
     <EmbeddedResource Include="Uc\UcsEdit.resx">
       <DependentUpon>UcsEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\SignIn.resx">
+    <EmbeddedResource Include="User\AuthAc.resx">
+      <DependentUpon>AuthAc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\AuthRc.resx">
+      <DependentUpon>AuthRc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\SignAc.resx">
+      <DependentUpon>SignAc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\SignRc.resx">
+      <DependentUpon>SignRc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\Sign\SignIn.resx">
       <DependentUpon>SignIn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\SignRs.resx">
-      <DependentUpon>SignRs.cs</DependentUpon>
+    <EmbeddedResource Include="User\Sign\SignPc.resx">
+      <DependentUpon>SignPc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\SignUp.resx">
+    <EmbeddedResource Include="User\Sign\SignUp.resx">
       <DependentUpon>SignUp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\Alert.resx">
