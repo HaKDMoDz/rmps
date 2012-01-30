@@ -39,7 +39,7 @@
             // LbOldPass
             // 
             this.LbOldPass.AutoSize = true;
-            this.LbOldPass.Location = new System.Drawing.Point(3, 6);
+            this.LbOldPass.Location = new System.Drawing.Point(24, 6);
             this.LbOldPass.Name = "LbOldPass";
             this.LbOldPass.Size = new System.Drawing.Size(71, 12);
             this.LbOldPass.TabIndex = 0;
@@ -47,7 +47,7 @@
             // 
             // TbOldPass
             // 
-            this.TbOldPass.Location = new System.Drawing.Point(80, 3);
+            this.TbOldPass.Location = new System.Drawing.Point(101, 3);
             this.TbOldPass.Name = "TbOldPass";
             this.TbOldPass.Size = new System.Drawing.Size(100, 21);
             this.TbOldPass.TabIndex = 1;
@@ -56,7 +56,7 @@
             // LbNewPass1
             // 
             this.LbNewPass1.AutoSize = true;
-            this.LbNewPass1.Location = new System.Drawing.Point(3, 33);
+            this.LbNewPass1.Location = new System.Drawing.Point(24, 33);
             this.LbNewPass1.Name = "LbNewPass1";
             this.LbNewPass1.Size = new System.Drawing.Size(71, 12);
             this.LbNewPass1.TabIndex = 2;
@@ -64,7 +64,7 @@
             // 
             // TbNewPass1
             // 
-            this.TbNewPass1.Location = new System.Drawing.Point(80, 30);
+            this.TbNewPass1.Location = new System.Drawing.Point(101, 30);
             this.TbNewPass1.Name = "TbNewPass1";
             this.TbNewPass1.Size = new System.Drawing.Size(100, 21);
             this.TbNewPass1.TabIndex = 3;
@@ -73,7 +73,7 @@
             // LbNewPass2
             // 
             this.LbNewPass2.AutoSize = true;
-            this.LbNewPass2.Location = new System.Drawing.Point(3, 60);
+            this.LbNewPass2.Location = new System.Drawing.Point(24, 60);
             this.LbNewPass2.Name = "LbNewPass2";
             this.LbNewPass2.Size = new System.Drawing.Size(71, 12);
             this.LbNewPass2.TabIndex = 4;
@@ -81,7 +81,7 @@
             // 
             // TbNewPass2
             // 
-            this.TbNewPass2.Location = new System.Drawing.Point(80, 57);
+            this.TbNewPass2.Location = new System.Drawing.Point(101, 57);
             this.TbNewPass2.Name = "TbNewPass2";
             this.TbNewPass2.Size = new System.Drawing.Size(100, 21);
             this.TbNewPass2.TabIndex = 5;

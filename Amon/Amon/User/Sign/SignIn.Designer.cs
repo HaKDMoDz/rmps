@@ -49,7 +49,7 @@
             // LbName
             // 
             this.LbName.AutoSize = true;
-            this.LbName.Location = new System.Drawing.Point(3, 6);
+            this.LbName.Location = new System.Drawing.Point(38, 6);
             this.LbName.Name = "LbName";
             this.LbName.Size = new System.Drawing.Size(47, 12);
             this.LbName.TabIndex = 0;
@@ -57,7 +57,7 @@
             // 
             // TbName
             // 
-            this.TbName.Location = new System.Drawing.Point(56, 3);
+            this.TbName.Location = new System.Drawing.Point(91, 3);
             this.TbName.Name = "TbName";
             this.TbName.Size = new System.Drawing.Size(100, 21);
             this.TbName.TabIndex = 1;
@@ -65,7 +65,7 @@
             // LbPass
             // 
             this.LbPass.AutoSize = true;
-            this.LbPass.Location = new System.Drawing.Point(3, 33);
+            this.LbPass.Location = new System.Drawing.Point(38, 33);
             this.LbPass.Name = "LbPass";
             this.LbPass.Size = new System.Drawing.Size(47, 12);
             this.LbPass.TabIndex = 2;
@@ -73,7 +73,7 @@
             // 
             // TbPass
             // 
-            this.TbPass.Location = new System.Drawing.Point(56, 30);
+            this.TbPass.Location = new System.Drawing.Point(91, 30);
             this.TbPass.Name = "TbPass";
             this.TbPass.Size = new System.Drawing.Size(100, 21);
             this.TbPass.TabIndex = 3;

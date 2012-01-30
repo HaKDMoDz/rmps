@@ -342,10 +342,11 @@ namespace Me.Amon
 
         private void MgExit_Click(object sender, EventArgs e)
         {
-            if (_IApp.WillExit())
+            if (_IApp != null && !_IApp.WillExit())
             {
-                Close();
+                return;
             }
+            Close();
         }
         #endregion
 
@@ -411,10 +412,11 @@ namespace Me.Amon
 
         private void MtExit_Click(object sender, EventArgs e)
         {
-            if (_IApp.WillExit())
+            if (_IApp != null && !_IApp.WillExit())
             {
-                Close();
+                return;
             }
+            Close();
         }
         #endregion
         #endregion

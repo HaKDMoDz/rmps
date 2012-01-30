@@ -163,14 +163,21 @@ namespace Me.Amon.User
 
         private void ShowView(Control control)
         {
-            if (_SignAc != null)
+            if (_SignAc == null)
             {
-                if (_SignAc.Name == control.Name)
-                {
-                    return;
-                }
-                Controls.Remove(_SignAc.Control);
+                control.Location = new Point(12, 46);
+                control.TabIndex = 1;
+                Controls.Add(control);
+                Height += control.Height;
+                BeanUtil.CenterToScreen(this);
+                return;
             }
+
+            if (_SignAc.Name == control.Name)
+            {
+                return;
+            }
+            Controls.Remove(_SignAc.Control);
 
             control.Location = new Point(12, 46);
             control.TabIndex = 1;

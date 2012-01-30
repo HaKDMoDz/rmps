@@ -50,7 +50,7 @@
             // 
             this.TbName.Location = new System.Drawing.Point(80, 3);
             this.TbName.Name = "TbName";
-            this.TbName.Size = new System.Drawing.Size(100, 21);
+            this.TbName.Size = new System.Drawing.Size(127, 21);
             this.TbName.TabIndex = 1;
             // 
             // LbPath
@@ -96,7 +96,7 @@
             this.BtPath.Text = "button1";
             this.BtPath.UseVisualStyleBackColor = true;
             // 
-            // SignPc
+            // SignUl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -107,7 +107,7 @@
             this.Controls.Add(this.LbPath);
             this.Controls.Add(this.TbName);
             this.Controls.Add(this.LbName);
-            this.Name = "SignPc";
+            this.Name = "SignUl";
             this.Size = new System.Drawing.Size(226, 108);
             this.ResumeLayout(false);
             this.PerformLayout();

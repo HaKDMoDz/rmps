@@ -42,7 +42,7 @@
             // LbName
             // 
             this.LbName.AutoSize = true;
-            this.LbName.Location = new System.Drawing.Point(3, 6);
+            this.LbName.Location = new System.Drawing.Point(12, 6);
             this.LbName.Name = "LbName";
             this.LbName.Size = new System.Drawing.Size(71, 12);
             this.LbName.TabIndex = 0;
@@ -50,15 +50,15 @@
             // 
             // TbName
             // 
-            this.TbName.Location = new System.Drawing.Point(80, 3);
+            this.TbName.Location = new System.Drawing.Point(89, 3);
             this.TbName.Name = "TbName";
-            this.TbName.Size = new System.Drawing.Size(100, 21);
+            this.TbName.Size = new System.Drawing.Size(127, 21);
             this.TbName.TabIndex = 1;
             // 
             // LbPass1
             // 
             this.LbPass1.AutoSize = true;
-            this.LbPass1.Location = new System.Drawing.Point(3, 33);
+            this.LbPass1.Location = new System.Drawing.Point(12, 33);
             this.LbPass1.Name = "LbPass1";
             this.LbPass1.Size = new System.Drawing.Size(71, 12);
             this.LbPass1.TabIndex = 2;
@@ -66,16 +66,16 @@
             // 
             // TbPass1
             // 
-            this.TbPass1.Location = new System.Drawing.Point(80, 30);
+            this.TbPass1.Location = new System.Drawing.Point(89, 30);
             this.TbPass1.Name = "TbPass1";
-            this.TbPass1.Size = new System.Drawing.Size(100, 21);
+            this.TbPass1.Size = new System.Drawing.Size(127, 21);
             this.TbPass1.TabIndex = 3;
             this.TbPass1.UseSystemPasswordChar = true;
             // 
             // LbPass2
             // 
             this.LbPass2.AutoSize = true;
-            this.LbPass2.Location = new System.Drawing.Point(3, 60);
+            this.LbPass2.Location = new System.Drawing.Point(12, 60);
             this.LbPass2.Name = "LbPass2";
             this.LbPass2.Size = new System.Drawing.Size(71, 12);
             this.LbPass2.TabIndex = 4;
@@ -83,16 +83,16 @@
             // 
             // TbPass2
             // 
-            this.TbPass2.Location = new System.Drawing.Point(80, 57);
+            this.TbPass2.Location = new System.Drawing.Point(89, 57);
             this.TbPass2.Name = "TbPass2";
-            this.TbPass2.Size = new System.Drawing.Size(100, 21);
+            this.TbPass2.Size = new System.Drawing.Size(127, 21);
             this.TbPass2.TabIndex = 5;
             this.TbPass2.UseSystemPasswordChar = true;
             // 
             // LbPath
             // 
             this.LbPath.AutoSize = true;
-            this.LbPath.Location = new System.Drawing.Point(3, 87);
+            this.LbPath.Location = new System.Drawing.Point(12, 87);
             this.LbPath.Name = "LbPath";
             this.LbPath.Size = new System.Drawing.Size(71, 12);
             this.LbPath.TabIndex = 6;
@@ -100,7 +100,7 @@
             // 
             // TbPath
             // 
-            this.TbPath.Location = new System.Drawing.Point(80, 84);
+            this.TbPath.Location = new System.Drawing.Point(89, 84);
             this.TbPath.Name = "TbPath";
             this.TbPath.ReadOnly = true;
             this.TbPath.Size = new System.Drawing.Size(100, 21);
@@ -108,7 +108,7 @@
             // 
             // BtPath
             // 
-            this.BtPath.Location = new System.Drawing.Point(186, 84);
+            this.BtPath.Location = new System.Drawing.Point(195, 84);
             this.BtPath.Name = "BtPath";
             this.BtPath.Size = new System.Drawing.Size(21, 21);
             this.BtPath.TabIndex = 8;
