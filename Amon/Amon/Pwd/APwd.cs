@@ -72,17 +72,17 @@ namespace Me.Amon.Pwd
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
-            dba.AddTable(IDat.C2010200);
-            dba.AddColumn(IDat.C2010201);
-            dba.AddColumn(IDat.C2010203);
-            dba.AddColumn(IDat.C2010204);
-            dba.AddColumn(IDat.C2010205);
-            dba.AddColumn(IDat.C2010206);
-            dba.AddColumn(IDat.C2010207);
-            dba.AddColumn(IDat.C2010208);
-            dba.AddColumn(IDat.C2010209);
-            dba.AddWhere(IDat.C2010202, _UserModel.Code);
-            dba.AddWhere(IDat.C201020D, ">", IDat.OPT_DELETE.ToString(), false);
+            dba.AddTable(IDat.ACAT0200);
+            dba.AddColumn(IDat.ACAT0201);
+            dba.AddColumn(IDat.ACAT0203);
+            dba.AddColumn(IDat.ACAT0204);
+            dba.AddColumn(IDat.ACAT0205);
+            dba.AddColumn(IDat.ACAT0206);
+            dba.AddColumn(IDat.ACAT0207);
+            dba.AddColumn(IDat.ACAT0208);
+            dba.AddColumn(IDat.ACAT0209);
+            dba.AddWhere(IDat.ACAT0202, _UserModel.Code);
+            dba.AddWhere(IDat.ACAT020D, ">", IDat.OPT_DELETE.ToString(), false);
             DataTable dt = dba.ExecuteSelect();
             InitCat(_RootNode, dt);
             _RootNode.Expand();
@@ -125,7 +125,7 @@ namespace Me.Amon.Pwd
             while (i < data.Rows.Count)
             {
                 DataRow row = data.Rows[i];
-                string tmp = row[IDat.C2010204] as string;
+                string tmp = row[IDat.ACAT0204] as string;
                 if (tmp != root.Name)
                 {
                     i += 1;
@@ -133,12 +133,12 @@ namespace Me.Amon.Pwd
                 }
 
                 Cat cat = new Cat();
-                cat.Id = row[IDat.C2010203] as string;
-                cat.Text = row[IDat.C2010205] as string;
-                cat.Tips = row[IDat.C2010206] as string;
-                cat.Icon = row[IDat.C2010207] as string;
-                cat.Meta = row[IDat.C2010208] as string;
-                cat.Memo = row[IDat.C2010209] as string;
+                cat.Id = row[IDat.ACAT0203] as string;
+                cat.Text = row[IDat.ACAT0205] as string;
+                cat.Tips = row[IDat.ACAT0206] as string;
+                cat.Icon = row[IDat.ACAT0207] as string;
+                cat.Meta = row[IDat.ACAT0208] as string;
+                cat.Memo = row[IDat.ACAT0209] as string;
 
                 TreeNode node = new TreeNode();
                 node.Name = cat.Id;
@@ -1511,19 +1511,19 @@ namespace Me.Amon.Pwd
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
-            dba.AddTable(IDat.C2010200);
-            dba.AddParam(IDat.C2010201, _LastNode.Nodes.Count);
-            dba.AddParam(IDat.C2010202, _UserModel.Code);
-            dba.AddParam(IDat.C2010203, cat.Id);
-            dba.AddParam(IDat.C2010204, _LastNode.Name);
-            dba.AddParam(IDat.C2010205, cat.Text);
-            dba.AddParam(IDat.C2010206, cat.Tips);
-            dba.AddParam(IDat.C2010207, cat.Icon);
-            dba.AddParam(IDat.C2010208, cat.Meta);
-            dba.AddParam(IDat.C2010209, cat.Memo);
-            dba.AddParam(IDat.C201020A, IDat.SQL_NOW, false);
-            dba.AddParam(IDat.C201020B, IDat.SQL_NOW, false);
-            dba.AddVcs(IDat.C201020C, IDat.C201020D);
+            dba.AddTable(IDat.ACAT0200);
+            dba.AddParam(IDat.ACAT0201, _LastNode.Nodes.Count);
+            dba.AddParam(IDat.ACAT0202, _UserModel.Code);
+            dba.AddParam(IDat.ACAT0203, cat.Id);
+            dba.AddParam(IDat.ACAT0204, _LastNode.Name);
+            dba.AddParam(IDat.ACAT0205, cat.Text);
+            dba.AddParam(IDat.ACAT0206, cat.Tips);
+            dba.AddParam(IDat.ACAT0207, cat.Icon);
+            dba.AddParam(IDat.ACAT0208, cat.Meta);
+            dba.AddParam(IDat.ACAT0209, cat.Memo);
+            dba.AddParam(IDat.ACAT020A, IDat.SQL_NOW, false);
+            dba.AddParam(IDat.ACAT020B, IDat.SQL_NOW, false);
+            dba.AddVcs(IDat.ACAT020C, IDat.ACAT020D);
             if (1 != dba.ExecuteInsert())
             {
                 return;
@@ -1569,16 +1569,16 @@ namespace Me.Amon.Pwd
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
-            dba.AddTable(IDat.C2010200);
-            dba.AddParam(IDat.C2010205, cat.Text);
-            dba.AddParam(IDat.C2010206, cat.Tips);
-            dba.AddParam(IDat.C2010207, cat.Icon);
-            dba.AddParam(IDat.C2010208, cat.Meta);
-            dba.AddParam(IDat.C2010209, cat.Memo);
-            dba.AddParam(IDat.C201020A, IDat.SQL_NOW, false);
-            dba.AddVcs(IDat.C201020C, IDat.C201020D, cat.Operate, IDat.OPT_UPDATE);
-            dba.AddWhere(IDat.C2010202, _UserModel.Code);
-            dba.AddWhere(IDat.C2010203, cat.Id);
+            dba.AddTable(IDat.ACAT0200);
+            dba.AddParam(IDat.ACAT0205, cat.Text);
+            dba.AddParam(IDat.ACAT0206, cat.Tips);
+            dba.AddParam(IDat.ACAT0207, cat.Icon);
+            dba.AddParam(IDat.ACAT0208, cat.Meta);
+            dba.AddParam(IDat.ACAT0209, cat.Memo);
+            dba.AddParam(IDat.ACAT020A, IDat.SQL_NOW, false);
+            dba.AddVcs(IDat.ACAT020C, IDat.ACAT020D, cat.Operate, IDat.OPT_UPDATE);
+            dba.AddWhere(IDat.ACAT0202, _UserModel.Code);
+            dba.AddWhere(IDat.ACAT0203, cat.Id);
             if (1 != dba.ExecuteUpdate())
             {
                 return;
@@ -1630,10 +1630,10 @@ namespace Me.Amon.Pwd
             }
 
             dba.ReInit();
-            dba.AddTable(IDat.C2010200);
-            dba.AddParam(IDat.C201020D, IDat.OPT_DELETE);
-            dba.AddWhere(IDat.C2010202, _UserModel.Code);
-            dba.AddWhere(IDat.C2010203, cat.Id);
+            dba.AddTable(IDat.ACAT0200);
+            dba.AddParam(IDat.ACAT020D, IDat.OPT_DELETE);
+            dba.AddWhere(IDat.ACAT0202, _UserModel.Code);
+            dba.AddWhere(IDat.ACAT0203, cat.Id);
             dba.ExecuteUpdate();
 
             TreeNode root = node.Parent;
