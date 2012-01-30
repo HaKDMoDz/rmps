@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Me.Amon.Da;
 using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Util;
@@ -17,10 +18,10 @@ namespace Me.Amon.Pwd._Cat
 
         public void Init()
         {
-            TbName.MaxLength = IDat.ACAT0205_SIZE;
-            TbTips.MaxLength = IDat.ACAT0206_SIZE;
-            TbMeta.MaxLength = IDat.ACAT0208_SIZE;
-            TbMemo.MaxLength = IDat.ACAT0209_SIZE;
+            TbName.MaxLength = DBConst.ACAT0205_SIZE;
+            TbTips.MaxLength = DBConst.ACAT0206_SIZE;
+            TbMeta.MaxLength = DBConst.ACAT0208_SIZE;
+            TbMemo.MaxLength = DBConst.ACAT0209_SIZE;
         }
 
         public AmonHandler<Model.Cat> CallBackHandler { get; set; }
@@ -49,9 +50,9 @@ namespace Me.Amon.Pwd._Cat
                 TbName.Focus();
                 return;
             }
-            if (!CharUtil.IsValidate(name, 1, IDat.ACAT0104_SIZE))
+            if (!CharUtil.IsValidate(name, 1, DBConst.ACAT0104_SIZE))
             {
-                MessageBox.Show("类别名称不能多于" + IDat.ACAT0104_SIZE + "个字符！");
+                MessageBox.Show("类别名称不能多于" + DBConst.ACAT0104_SIZE + "个字符！");
                 TbName.Focus();
                 return;
             }

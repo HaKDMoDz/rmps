@@ -55,43 +55,43 @@ namespace Me.Amon.Model
             _LibList = new ObservableCollection<LibHeader>();
             _LibList.Insert(0, new LibHeader { Id = "0", Name = "请选择" });
             dba.ReInit();
-            dba.AddTable(IDat.APWD0300);
-            dba.AddColumn(IDat.APWD0304);
-            dba.AddColumn(IDat.APWD0306);
-            dba.AddColumn(IDat.APWD0308);
-            dba.AddWhere(IDat.APWD0302, "0");
-            dba.AddWhere(IDat.APWD0303, _UserModel.Code);
-            dba.AddSort(IDat.APWD0301, true);
+            dba.AddTable(DBConst.APWD0300);
+            dba.AddColumn(DBConst.APWD0304);
+            dba.AddColumn(DBConst.APWD0306);
+            dba.AddColumn(DBConst.APWD0308);
+            dba.AddWhere(DBConst.APWD0302, "0");
+            dba.AddWhere(DBConst.APWD0303, _UserModel.Code);
+            dba.AddSort(DBConst.APWD0301, true);
             using (DataTable dt1 = dba.ExecuteSelect())
             {
                 foreach (DataRow r1 in dt1.Rows)
                 {
                     LibHeader header = new LibHeader();
-                    header.Id = r1[IDat.APWD0304] as string;
-                    header.Name = r1[IDat.APWD0306] as string;
-                    header.Memo = r1[IDat.APWD0308] as string;
+                    header.Id = r1[DBConst.APWD0304] as string;
+                    header.Name = r1[DBConst.APWD0306] as string;
+                    header.Memo = r1[DBConst.APWD0308] as string;
                     _LibList.Add(header);
 
                     dba.ReInit();
-                    dba.AddTable(IDat.APWD0300);
-                    dba.AddColumn(IDat.APWD0302);
-                    dba.AddColumn(IDat.APWD0304);
-                    dba.AddColumn(IDat.APWD0306);
-                    dba.AddColumn(IDat.APWD0307);
-                    dba.AddColumn(IDat.APWD0308);
-                    dba.AddWhere(IDat.APWD0305, header.Id);
-                    dba.AddWhere(IDat.APWD0303, _UserModel.Code);
-                    dba.AddSort(IDat.APWD0301, true);
+                    dba.AddTable(DBConst.APWD0300);
+                    dba.AddColumn(DBConst.APWD0302);
+                    dba.AddColumn(DBConst.APWD0304);
+                    dba.AddColumn(DBConst.APWD0306);
+                    dba.AddColumn(DBConst.APWD0307);
+                    dba.AddColumn(DBConst.APWD0308);
+                    dba.AddWhere(DBConst.APWD0305, header.Id);
+                    dba.AddWhere(DBConst.APWD0303, _UserModel.Code);
+                    dba.AddSort(DBConst.APWD0301, true);
 
                     DataTable dt2 = dba.ExecuteSelect();
                     foreach (DataRow r2 in dt2.Rows)
                     {
                         LibDetail detail = new LibDetail();
-                        detail.Type = (int)r2[IDat.APWD0302];
-                        detail.Id = r2[IDat.APWD0304] as string;
-                        detail.Name = r2[IDat.APWD0306] as string;
-                        detail.Data = r2[IDat.APWD0307] as string;
-                        detail.Memo = r2[IDat.APWD0308] as string;
+                        detail.Type = (int)r2[DBConst.APWD0302];
+                        detail.Id = r2[DBConst.APWD0304] as string;
+                        detail.Name = r2[DBConst.APWD0306] as string;
+                        detail.Data = r2[DBConst.APWD0307] as string;
+                        detail.Memo = r2[DBConst.APWD0308] as string;
                         header.Details.Add(detail);
                     }
                 }
@@ -116,24 +116,24 @@ namespace Me.Amon.Model
             }
 
             dba.ReInit();
-            dba.AddTable(IDat.AUCS0100);
-            dba.AddColumn(IDat.AUCS0103);
-            dba.AddColumn(IDat.AUCS0104);
-            dba.AddColumn(IDat.AUCS0105);
-            dba.AddColumn(IDat.AUCS0106);
-            dba.AddColumn(IDat.AUCS0107);
-            dba.AddWhere(IDat.AUCS0102, _UserModel.Code);
-            dba.AddSort(IDat.AUCS0101, true);
+            dba.AddTable(DBConst.AUCS0100);
+            dba.AddColumn(DBConst.AUCS0103);
+            dba.AddColumn(DBConst.AUCS0104);
+            dba.AddColumn(DBConst.AUCS0105);
+            dba.AddColumn(DBConst.AUCS0106);
+            dba.AddColumn(DBConst.AUCS0107);
+            dba.AddWhere(DBConst.AUCS0102, _UserModel.Code);
+            dba.AddSort(DBConst.AUCS0101, true);
             using (DataTable dt = dba.ExecuteSelect())
             {
                 foreach (DataRow row in dt.Rows)
                 {
                     Ucs item = new Ucs();
-                    item.Id = row[IDat.AUCS0103] as string;
-                    item.Name = row[IDat.AUCS0104] as string;
-                    item.Tips = row[IDat.AUCS0105] as string;
-                    item.Data = row[IDat.AUCS0106] as string;
-                    item.Memo = row[IDat.AUCS0107] as string;
+                    item.Id = row[DBConst.AUCS0103] as string;
+                    item.Name = row[DBConst.AUCS0104] as string;
+                    item.Tips = row[DBConst.AUCS0105] as string;
+                    item.Data = row[DBConst.AUCS0106] as string;
+                    item.Memo = row[DBConst.AUCS0107] as string;
                     UcsList.Add(item);
 
                     if (item.Id == _UcsKey)

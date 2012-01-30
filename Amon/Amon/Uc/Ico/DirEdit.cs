@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Me.Amon.Da;
 using Me.Amon.Model;
 
 namespace Me.Amon.Uc.Ico
@@ -23,9 +24,9 @@ namespace Me.Amon.Uc.Ico
 
         public void Init()
         {
-            TbName.MaxLength = IDat.AICO0104_SIZE;
-            TbTips.MaxLength = IDat.AICO0105_SIZE;
-            TbMemo.MaxLength = IDat.AICO0107_SIZE;
+            TbName.MaxLength = DBConst.AICO0104_SIZE;
+            TbTips.MaxLength = DBConst.AICO0105_SIZE;
+            TbMemo.MaxLength = DBConst.AICO0107_SIZE;
 
             _IcoEdit.AcceptButton = BtUpdate;
             _IcoEdit.CancelButton = BtCancel;

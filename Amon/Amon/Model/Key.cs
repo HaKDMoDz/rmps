@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Text;
 using System.Xml;
+using Me.Amon.Da;
 using Me.Amon.Util;
 
 namespace Me.Amon.Model
@@ -143,25 +144,25 @@ namespace Me.Amon.Model
 
         public void Load(DataRow row)
         {
-            Id = row[IDat.APWD0105] as string;
-            Order = (int)row[IDat.APWD0101];
-            Label = (int)row[IDat.APWD0102];
-            Major = (int)row[IDat.APWD0103];
-            CatId = row[IDat.APWD0106] as string;
-            RegDate = row[IDat.APWD0107] as string;
-            LibId = row[IDat.APWD0108] as string;
-            Title = row[IDat.APWD0109] as string;
-            MetaKey = row[IDat.APWD010A] as string;
-            IcoName = row[IDat.APWD010B] as string;
-            IcoPath = row[IDat.APWD010C] as string;
-            IcoMemo = row[IDat.APWD010D] as string;
-            GtdId = row[IDat.APWD010E] as string;
-            GtdMemo = row[IDat.APWD010F] as string;
-            Memo = row[IDat.APWD0110] as string;
+            Id = row[DBConst.APWD0105] as string;
+            Order = (int)row[DBConst.APWD0101];
+            Label = (int)row[DBConst.APWD0102];
+            Major = (int)row[DBConst.APWD0103];
+            CatId = row[DBConst.APWD0106] as string;
+            RegDate = row[DBConst.APWD0107] as string;
+            LibId = row[DBConst.APWD0108] as string;
+            Title = row[DBConst.APWD0109] as string;
+            MetaKey = row[DBConst.APWD010A] as string;
+            IcoName = row[DBConst.APWD010B] as string;
+            IcoPath = row[DBConst.APWD010C] as string;
+            IcoMemo = row[DBConst.APWD010D] as string;
+            GtdId = row[DBConst.APWD010E] as string;
+            GtdMemo = row[DBConst.APWD010F] as string;
+            Memo = row[DBConst.APWD0110] as string;
 
-            VisitDate = row[IDat.APWD0111] as string;
-            Backup = (string)row[IDat.APWD0112] == "t";
-            CipherVer = row[IDat.APWD0113] as string;
+            VisitDate = row[DBConst.APWD0111] as string;
+            Backup = (string)row[DBConst.APWD0112] == "t";
+            CipherVer = row[DBConst.APWD0113] as string;
 
             _IsUpdate = true;
             Modified = false;

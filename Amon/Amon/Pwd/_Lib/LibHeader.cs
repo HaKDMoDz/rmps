@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using Me.Amon.Da;
 using Me.Amon.Util;
 
 namespace Me.Amon.Pwd._Lib
@@ -22,8 +23,8 @@ namespace Me.Amon.Pwd._Lib
 
         public void Init()
         {
-            TbName.MaxLength = IDat.APWD0306_SIZE;
-            TbMemo.MaxLength = IDat.APWD0308_SIZE;
+            TbName.MaxLength = DBConst.APWD0306_SIZE;
+            TbMemo.MaxLength = DBConst.APWD0308_SIZE;
         }
 
         public void Show(Me.Amon.Model.LibHeader header)

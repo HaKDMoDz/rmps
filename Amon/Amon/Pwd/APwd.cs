@@ -72,17 +72,17 @@ namespace Me.Amon.Pwd
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
-            dba.AddTable(IDat.ACAT0200);
-            dba.AddColumn(IDat.ACAT0201);
-            dba.AddColumn(IDat.ACAT0203);
-            dba.AddColumn(IDat.ACAT0204);
-            dba.AddColumn(IDat.ACAT0205);
-            dba.AddColumn(IDat.ACAT0206);
-            dba.AddColumn(IDat.ACAT0207);
-            dba.AddColumn(IDat.ACAT0208);
-            dba.AddColumn(IDat.ACAT0209);
-            dba.AddWhere(IDat.ACAT0202, _UserModel.Code);
-            dba.AddWhere(IDat.ACAT020D, ">", IDat.OPT_DELETE.ToString(), false);
+            dba.AddTable(DBConst.ACAT0200);
+            dba.AddColumn(DBConst.ACAT0201);
+            dba.AddColumn(DBConst.ACAT0203);
+            dba.AddColumn(DBConst.ACAT0204);
+            dba.AddColumn(DBConst.ACAT0205);
+            dba.AddColumn(DBConst.ACAT0206);
+            dba.AddColumn(DBConst.ACAT0207);
+            dba.AddColumn(DBConst.ACAT0208);
+            dba.AddColumn(DBConst.ACAT0209);
+            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
+            dba.AddWhere(DBConst.ACAT020D, ">", DBConst.OPT_DELETE.ToString(), false);
             DataTable dt = dba.ExecuteSelect();
             InitCat(_RootNode, dt);
             _RootNode.Expand();
@@ -125,7 +125,7 @@ namespace Me.Amon.Pwd
             while (i < data.Rows.Count)
             {
                 DataRow row = data.Rows[i];
-                string tmp = row[IDat.ACAT0204] as string;
+                string tmp = row[DBConst.ACAT0204] as string;
                 if (tmp != root.Name)
                 {
                     i += 1;
@@ -133,12 +133,12 @@ namespace Me.Amon.Pwd
                 }
 
                 Cat cat = new Cat();
-                cat.Id = row[IDat.ACAT0203] as string;
-                cat.Text = row[IDat.ACAT0205] as string;
-                cat.Tips = row[IDat.ACAT0206] as string;
-                cat.Icon = row[IDat.ACAT0207] as string;
-                cat.Meta = row[IDat.ACAT0208] as string;
-                cat.Memo = row[IDat.ACAT0209] as string;
+                cat.Id = row[DBConst.ACAT0203] as string;
+                cat.Text = row[DBConst.ACAT0205] as string;
+                cat.Tips = row[DBConst.ACAT0206] as string;
+                cat.Icon = row[DBConst.ACAT0207] as string;
+                cat.Meta = row[DBConst.ACAT0208] as string;
+                cat.Memo = row[DBConst.ACAT0209] as string;
 
                 TreeNode node = new TreeNode();
                 node.Name = cat.Id;
@@ -263,17 +263,17 @@ namespace Me.Amon.Pwd
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
-            dba.AddTable(IDat.APWD0200);
-            dba.AddColumn(IDat.APWD0204);
-            dba.AddWhere(IDat.APWD0202, _UserModel.Code);
-            dba.AddWhere(IDat.APWD0203, key.Id);
-            dba.AddSort(IDat.APWD0201, true);
+            dba.AddTable(DBConst.APWD0200);
+            dba.AddColumn(DBConst.APWD0204);
+            dba.AddWhere(DBConst.APWD0202, _UserModel.Code);
+            dba.AddWhere(DBConst.APWD0203, key.Id);
+            dba.AddSort(DBConst.APWD0201, true);
             using (DataTable dt = dba.ExecuteSelect())
             {
                 StringBuilder buffer = new StringBuilder();
                 foreach (DataRow row in dt.Rows)
                 {
-                    buffer.Append(row[IDat.APWD0204] as string);
+                    buffer.Append(row[DBConst.APWD0204] as string);
                 }
                 _SafeModel.Decode(buffer.ToString());
             }
@@ -1390,11 +1390,11 @@ namespace Me.Amon.Pwd
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
-            dba.AddTable(IDat.APWD0100);
-            dba.AddParam(IDat.APWD0106, catId);
-            dba.AddWhere(IDat.APWD0104, _UserModel.Code);
-            dba.AddWhere(IDat.APWD0105, _SafeModel.Key.Id);
-            dba.AddVcs(IDat.APWD0114, IDat.APWD0115, _SafeModel.Key.Operate, IDat.OPT_PWD_UPDATE_CAT);
+            dba.AddTable(DBConst.APWD0100);
+            dba.AddParam(DBConst.APWD0106, catId);
+            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
+            dba.AddWhere(DBConst.APWD0105, _SafeModel.Key.Id);
+            dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115, _SafeModel.Key.Operate, DBConst.OPT_PWD_UPDATE_CAT);
             if (1 != dba.ExecuteUpdate())
             {
                 return;
@@ -1413,11 +1413,11 @@ namespace Me.Amon.Pwd
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
-            dba.AddTable(IDat.APWD0100);
-            dba.AddParam(IDat.APWD0102, label);
-            dba.AddWhere(IDat.APWD0104, _UserModel.Code);
-            dba.AddWhere(IDat.APWD0105, _SafeModel.Key.Id);
-            dba.AddVcs(IDat.APWD0114, IDat.APWD0115, _SafeModel.Key.Operate, IDat.OPT_PWD_UPDATE_LABEL);
+            dba.AddTable(DBConst.APWD0100);
+            dba.AddParam(DBConst.APWD0102, label);
+            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
+            dba.AddWhere(DBConst.APWD0105, _SafeModel.Key.Id);
+            dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115, _SafeModel.Key.Operate, DBConst.OPT_PWD_UPDATE_LABEL);
             if (1 != dba.ExecuteUpdate())
             {
                 return;
@@ -1437,11 +1437,11 @@ namespace Me.Amon.Pwd
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
-            dba.AddTable(IDat.APWD0100);
-            dba.AddParam(IDat.APWD0103, major);
-            dba.AddWhere(IDat.APWD0104, _UserModel.Code);
-            dba.AddWhere(IDat.APWD0105, _SafeModel.Key.Id);
-            dba.AddVcs(IDat.APWD0114, IDat.APWD0115, _SafeModel.Key.Operate, IDat.OPT_PWD_UPDATE_MAJOR);
+            dba.AddTable(DBConst.APWD0100);
+            dba.AddParam(DBConst.APWD0103, major);
+            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
+            dba.AddWhere(DBConst.APWD0105, _SafeModel.Key.Id);
+            dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115, _SafeModel.Key.Operate, DBConst.OPT_PWD_UPDATE_MAJOR);
             if (1 != dba.ExecuteUpdate())
             {
                 return;
@@ -1511,19 +1511,19 @@ namespace Me.Amon.Pwd
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
-            dba.AddTable(IDat.ACAT0200);
-            dba.AddParam(IDat.ACAT0201, _LastNode.Nodes.Count);
-            dba.AddParam(IDat.ACAT0202, _UserModel.Code);
-            dba.AddParam(IDat.ACAT0203, cat.Id);
-            dba.AddParam(IDat.ACAT0204, _LastNode.Name);
-            dba.AddParam(IDat.ACAT0205, cat.Text);
-            dba.AddParam(IDat.ACAT0206, cat.Tips);
-            dba.AddParam(IDat.ACAT0207, cat.Icon);
-            dba.AddParam(IDat.ACAT0208, cat.Meta);
-            dba.AddParam(IDat.ACAT0209, cat.Memo);
-            dba.AddParam(IDat.ACAT020A, IDat.SQL_NOW, false);
-            dba.AddParam(IDat.ACAT020B, IDat.SQL_NOW, false);
-            dba.AddVcs(IDat.ACAT020C, IDat.ACAT020D);
+            dba.AddTable(DBConst.ACAT0200);
+            dba.AddParam(DBConst.ACAT0201, _LastNode.Nodes.Count);
+            dba.AddParam(DBConst.ACAT0202, _UserModel.Code);
+            dba.AddParam(DBConst.ACAT0203, cat.Id);
+            dba.AddParam(DBConst.ACAT0204, _LastNode.Name);
+            dba.AddParam(DBConst.ACAT0205, cat.Text);
+            dba.AddParam(DBConst.ACAT0206, cat.Tips);
+            dba.AddParam(DBConst.ACAT0207, cat.Icon);
+            dba.AddParam(DBConst.ACAT0208, cat.Meta);
+            dba.AddParam(DBConst.ACAT0209, cat.Memo);
+            dba.AddParam(DBConst.ACAT020A, DBConst.SQL_NOW, false);
+            dba.AddParam(DBConst.ACAT020B, DBConst.SQL_NOW, false);
+            dba.AddVcs(DBConst.ACAT020C, DBConst.ACAT020D);
             if (1 != dba.ExecuteInsert())
             {
                 return;
@@ -1569,16 +1569,16 @@ namespace Me.Amon.Pwd
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
-            dba.AddTable(IDat.ACAT0200);
-            dba.AddParam(IDat.ACAT0205, cat.Text);
-            dba.AddParam(IDat.ACAT0206, cat.Tips);
-            dba.AddParam(IDat.ACAT0207, cat.Icon);
-            dba.AddParam(IDat.ACAT0208, cat.Meta);
-            dba.AddParam(IDat.ACAT0209, cat.Memo);
-            dba.AddParam(IDat.ACAT020A, IDat.SQL_NOW, false);
-            dba.AddVcs(IDat.ACAT020C, IDat.ACAT020D, cat.Operate, IDat.OPT_UPDATE);
-            dba.AddWhere(IDat.ACAT0202, _UserModel.Code);
-            dba.AddWhere(IDat.ACAT0203, cat.Id);
+            dba.AddTable(DBConst.ACAT0200);
+            dba.AddParam(DBConst.ACAT0205, cat.Text);
+            dba.AddParam(DBConst.ACAT0206, cat.Tips);
+            dba.AddParam(DBConst.ACAT0207, cat.Icon);
+            dba.AddParam(DBConst.ACAT0208, cat.Meta);
+            dba.AddParam(DBConst.ACAT0209, cat.Memo);
+            dba.AddParam(DBConst.ACAT020A, DBConst.SQL_NOW, false);
+            dba.AddVcs(DBConst.ACAT020C, DBConst.ACAT020D, cat.Operate, DBConst.OPT_UPDATE);
+            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
+            dba.AddWhere(DBConst.ACAT0203, cat.Id);
             if (1 != dba.ExecuteUpdate())
             {
                 return;
@@ -1618,10 +1618,10 @@ namespace Me.Amon.Pwd
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
-            dba.AddTable(IDat.APWD0100);
+            dba.AddTable(DBConst.APWD0100);
             dba.AddColumn("COUNT(0)", "CNT");
-            dba.AddWhere(IDat.APWD0104, _UserModel.Code);
-            dba.AddWhere(IDat.APWD0106, cat.Id);
+            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
+            dba.AddWhere(DBConst.APWD0106, cat.Id);
             long cnt = (long)dba.ExecuteScalar();
             if (cnt > 0)
             {
@@ -1630,10 +1630,10 @@ namespace Me.Amon.Pwd
             }
 
             dba.ReInit();
-            dba.AddTable(IDat.ACAT0200);
-            dba.AddParam(IDat.ACAT020D, IDat.OPT_DELETE);
-            dba.AddWhere(IDat.ACAT0202, _UserModel.Code);
-            dba.AddWhere(IDat.ACAT0203, cat.Id);
+            dba.AddTable(DBConst.ACAT0200);
+            dba.AddParam(DBConst.ACAT020D, DBConst.OPT_DELETE);
+            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
+            dba.AddWhere(DBConst.ACAT0203, cat.Id);
             dba.ExecuteUpdate();
 
             TreeNode root = node.Parent;
@@ -1696,83 +1696,83 @@ namespace Me.Amon.Pwd
                 {
                     string t = HashUtil.UtcTimeInHex();
                     dba.ReInit();
-                    dba.AddParam(IDat.APWD0A01, t);
-                    dba.AddParam(IDat.APWD0A02, IDat.APWD0102, false);
-                    dba.AddParam(IDat.APWD0A03, IDat.APWD0103, false);
-                    dba.AddParam(IDat.APWD0A04, IDat.APWD0104, false);
-                    dba.AddParam(IDat.APWD0A05, IDat.APWD0105, false);
-                    dba.AddParam(IDat.APWD0A06, IDat.APWD0106, false);
-                    dba.AddParam(IDat.APWD0A07, IDat.APWD0107, false);
-                    dba.AddParam(IDat.APWD0A08, IDat.APWD0108, false);
-                    dba.AddParam(IDat.APWD0A09, IDat.APWD0109, false);
-                    dba.AddParam(IDat.APWD0A0A, IDat.APWD010A, false);
-                    dba.AddParam(IDat.APWD0A0B, IDat.APWD010B, false);
-                    dba.AddParam(IDat.APWD0A0C, IDat.APWD010C, false);
-                    dba.AddParam(IDat.APWD0A0D, IDat.APWD010D, false);
-                    dba.AddParam(IDat.APWD0A0E, IDat.APWD010E, false);
-                    dba.AddParam(IDat.APWD0A0F, IDat.APWD010F, false);
-                    dba.AddParam(IDat.APWD0A10, IDat.APWD0110, false);
-                    dba.AddParam(IDat.APWD0A11, IDat.APWD0111, false);
-                    dba.AddParam(IDat.APWD0A12, IDat.APWD0112, false);
-                    dba.AddParam(IDat.APWD0A13, IDat.APWD0113, false);
-                    dba.AddWhere(IDat.APWD0104, _UserModel.Code);
-                    dba.AddWhere(IDat.APWD0105, _SafeModel.Key.Id);
-                    dba.AddBackupBatch(IDat.APWD0A00, IDat.APWD0100);
+                    dba.AddParam(DBConst.APWD0A01, t);
+                    dba.AddParam(DBConst.APWD0A02, DBConst.APWD0102, false);
+                    dba.AddParam(DBConst.APWD0A03, DBConst.APWD0103, false);
+                    dba.AddParam(DBConst.APWD0A04, DBConst.APWD0104, false);
+                    dba.AddParam(DBConst.APWD0A05, DBConst.APWD0105, false);
+                    dba.AddParam(DBConst.APWD0A06, DBConst.APWD0106, false);
+                    dba.AddParam(DBConst.APWD0A07, DBConst.APWD0107, false);
+                    dba.AddParam(DBConst.APWD0A08, DBConst.APWD0108, false);
+                    dba.AddParam(DBConst.APWD0A09, DBConst.APWD0109, false);
+                    dba.AddParam(DBConst.APWD0A0A, DBConst.APWD010A, false);
+                    dba.AddParam(DBConst.APWD0A0B, DBConst.APWD010B, false);
+                    dba.AddParam(DBConst.APWD0A0C, DBConst.APWD010C, false);
+                    dba.AddParam(DBConst.APWD0A0D, DBConst.APWD010D, false);
+                    dba.AddParam(DBConst.APWD0A0E, DBConst.APWD010E, false);
+                    dba.AddParam(DBConst.APWD0A0F, DBConst.APWD010F, false);
+                    dba.AddParam(DBConst.APWD0A10, DBConst.APWD0110, false);
+                    dba.AddParam(DBConst.APWD0A11, DBConst.APWD0111, false);
+                    dba.AddParam(DBConst.APWD0A12, DBConst.APWD0112, false);
+                    dba.AddParam(DBConst.APWD0A13, DBConst.APWD0113, false);
+                    dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
+                    dba.AddWhere(DBConst.APWD0105, _SafeModel.Key.Id);
+                    dba.AddBackupBatch(DBConst.APWD0A00, DBConst.APWD0100);
 
                     dba.ReInit();
-                    dba.AddParam(IDat.APWD0B01, t);
-                    dba.AddParam(IDat.APWD0B02, IDat.APWD0201, false);
-                    dba.AddParam(IDat.APWD0B03, IDat.APWD0202, false);
-                    dba.AddParam(IDat.APWD0B04, IDat.APWD0203, false);
-                    dba.AddParam(IDat.APWD0B05, IDat.APWD0204, false);
-                    dba.AddWhere(IDat.APWD0203, _SafeModel.Key.Id);
-                    dba.AddBackupBatch(IDat.APWD0B00, IDat.APWD0200);
+                    dba.AddParam(DBConst.APWD0B01, t);
+                    dba.AddParam(DBConst.APWD0B02, DBConst.APWD0201, false);
+                    dba.AddParam(DBConst.APWD0B03, DBConst.APWD0202, false);
+                    dba.AddParam(DBConst.APWD0B04, DBConst.APWD0203, false);
+                    dba.AddParam(DBConst.APWD0B05, DBConst.APWD0204, false);
+                    dba.AddWhere(DBConst.APWD0203, _SafeModel.Key.Id);
+                    dba.AddBackupBatch(DBConst.APWD0B00, DBConst.APWD0200);
                 }
                 #endregion
 
                 dba.ReInit();
-                dba.AddTable(IDat.APWD0200);
-                dba.AddWhere(IDat.APWD0203, _SafeModel.Key.Id);
+                dba.AddTable(DBConst.APWD0200);
+                dba.AddWhere(DBConst.APWD0203, _SafeModel.Key.Id);
                 dba.AddDeleteBatch();
             }
 
             #region 口令信息
             dba.ReInit();
-            dba.AddTable(IDat.APWD0100);
-            dba.AddParam(IDat.APWD0106, cat.Id);
-            dba.AddParam(IDat.APWD0107, _SafeModel.Key.RegDate);
-            dba.AddParam(IDat.APWD0108, _SafeModel.Key.LibId);
-            dba.AddParam(IDat.APWD0109, _SafeModel.Key.Title);
-            dba.AddParam(IDat.APWD010A, _SafeModel.Key.MetaKey);
-            dba.AddParam(IDat.APWD010B, _SafeModel.Key.IcoName);
-            dba.AddParam(IDat.APWD010C, _SafeModel.Key.IcoPath);
-            dba.AddParam(IDat.APWD010D, _SafeModel.Key.IcoMemo);
-            dba.AddParam(IDat.APWD010E, _SafeModel.Key.GtdId);
-            dba.AddParam(IDat.APWD010F, _SafeModel.Key.GtdMemo);
-            dba.AddParam(IDat.APWD0110, _SafeModel.Key.Memo);
-            dba.AddParam(IDat.APWD0112, _SafeModel.Key.Backup ? "t" : "f");
-            dba.AddParam(IDat.APWD0113, "1");
+            dba.AddTable(DBConst.APWD0100);
+            dba.AddParam(DBConst.APWD0106, cat.Id);
+            dba.AddParam(DBConst.APWD0107, _SafeModel.Key.RegDate);
+            dba.AddParam(DBConst.APWD0108, _SafeModel.Key.LibId);
+            dba.AddParam(DBConst.APWD0109, _SafeModel.Key.Title);
+            dba.AddParam(DBConst.APWD010A, _SafeModel.Key.MetaKey);
+            dba.AddParam(DBConst.APWD010B, _SafeModel.Key.IcoName);
+            dba.AddParam(DBConst.APWD010C, _SafeModel.Key.IcoPath);
+            dba.AddParam(DBConst.APWD010D, _SafeModel.Key.IcoMemo);
+            dba.AddParam(DBConst.APWD010E, _SafeModel.Key.GtdId);
+            dba.AddParam(DBConst.APWD010F, _SafeModel.Key.GtdMemo);
+            dba.AddParam(DBConst.APWD0110, _SafeModel.Key.Memo);
+            dba.AddParam(DBConst.APWD0112, _SafeModel.Key.Backup ? "t" : "f");
+            dba.AddParam(DBConst.APWD0113, "1");
 
             if (isUpdate)
             {
-                dba.AddWhere(IDat.APWD0104, _UserModel.Code);
-                dba.AddWhere(IDat.APWD0105, _SafeModel.Key.Id);
+                dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
+                dba.AddWhere(DBConst.APWD0105, _SafeModel.Key.Id);
                 _SafeModel.Key.VisitDate = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
-                dba.AddParam(IDat.APWD0111, _SafeModel.Key.VisitDate);
-                dba.AddVcs(IDat.APWD0114, IDat.APWD0115, _SafeModel.Key.Operate, IDat.OPT_UPDATE);
+                dba.AddParam(DBConst.APWD0111, _SafeModel.Key.VisitDate);
+                dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115, _SafeModel.Key.Operate, DBConst.OPT_UPDATE);
                 dba.AddUpdateBatch();
             }
             else
             {
                 _SafeModel.Key.Id = HashUtil.UtcTimeInHex(false);
-                dba.AddParam(IDat.APWD0101, 0);
-                dba.AddParam(IDat.APWD0102, 0);
-                dba.AddParam(IDat.APWD0103, 0);
-                dba.AddParam(IDat.APWD0104, _UserModel.Code);
-                dba.AddParam(IDat.APWD0105, _SafeModel.Key.Id);
+                dba.AddParam(DBConst.APWD0101, 0);
+                dba.AddParam(DBConst.APWD0102, 0);
+                dba.AddParam(DBConst.APWD0103, 0);
+                dba.AddParam(DBConst.APWD0104, _UserModel.Code);
+                dba.AddParam(DBConst.APWD0105, _SafeModel.Key.Id);
                 _SafeModel.Key.VisitDate = _SafeModel.Key.RegDate;
-                dba.AddParam(IDat.APWD0111, _SafeModel.Key.VisitDate);
-                dba.AddVcs(IDat.APWD0114, IDat.APWD0115);
+                dba.AddParam(DBConst.APWD0111, _SafeModel.Key.VisitDate);
+                dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115);
                 dba.AddInsertBatch();
             }
             #endregion
@@ -1783,20 +1783,20 @@ namespace Me.Amon.Pwd
             while (j < _SafeModel.Key.Password.Length)
             {
                 dba.ReInit();
-                dba.AddTable(IDat.APWD0200);
-                dba.AddParam(IDat.APWD0201, i++);
-                dba.AddParam(IDat.APWD0202, _UserModel.Code);
-                dba.AddParam(IDat.APWD0203, _SafeModel.Key.Id);
-                if (_SafeModel.Key.Password.Length - j > IDat.APWD0204_SIZE)
+                dba.AddTable(DBConst.APWD0200);
+                dba.AddParam(DBConst.APWD0201, i++);
+                dba.AddParam(DBConst.APWD0202, _UserModel.Code);
+                dba.AddParam(DBConst.APWD0203, _SafeModel.Key.Id);
+                if (_SafeModel.Key.Password.Length - j > DBConst.APWD0204_SIZE)
                 {
-                    dba.AddParam(IDat.APWD0204, _SafeModel.Key.Password.Substring(j, IDat.APWD0204_SIZE));
+                    dba.AddParam(DBConst.APWD0204, _SafeModel.Key.Password.Substring(j, DBConst.APWD0204_SIZE));
                 }
                 else
                 {
-                    dba.AddParam(IDat.APWD0204, _SafeModel.Key.Password.Substring(j));
+                    dba.AddParam(DBConst.APWD0204, _SafeModel.Key.Password.Substring(j));
                 }
                 dba.AddInsertBatch();
-                j += IDat.APWD0204_SIZE;
+                j += DBConst.APWD0204_SIZE;
             }
             #endregion
 
@@ -1833,10 +1833,10 @@ namespace Me.Amon.Pwd
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
-            dba.AddTable(IDat.APWD0100);
-            dba.AddVcs(IDat.APWD0114, IDat.APWD0115, _SafeModel.Key.Operate, IDat.OPT_DELETE);
-            dba.AddWhere(IDat.APWD0104, _UserModel.Code);
-            dba.AddWhere(IDat.APWD0105, _SafeModel.Key.Id);
+            dba.AddTable(DBConst.APWD0100);
+            dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115, _SafeModel.Key.Operate, DBConst.OPT_DELETE);
+            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
+            dba.AddWhere(DBConst.APWD0105, _SafeModel.Key.Id);
             if (1 != dba.ExecuteUpdate())
             {
                 return;
@@ -1856,27 +1856,27 @@ namespace Me.Amon.Pwd
 
             #region 口令信息
             dba.ReInit();
-            dba.AddTable(IDat.APWD0100);
-            dba.AddParam(IDat.APWD0101, 0);
-            dba.AddParam(IDat.APWD0102, 0);
-            dba.AddParam(IDat.APWD0103, 0);
-            dba.AddParam(IDat.APWD0104, _UserModel.Code);
-            dba.AddParam(IDat.APWD0105, _SafeModel.Key.Id);
-            dba.AddParam(IDat.APWD0106, _SafeModel.Key.CatId);
-            dba.AddParam(IDat.APWD0107, _SafeModel.Key.RegDate);
-            dba.AddParam(IDat.APWD0108, _SafeModel.Key.LibId);
-            dba.AddParam(IDat.APWD0109, _SafeModel.Key.Title);
-            dba.AddParam(IDat.APWD010A, _SafeModel.Key.MetaKey);
-            dba.AddParam(IDat.APWD010B, _SafeModel.Key.IcoName);
-            dba.AddParam(IDat.APWD010C, _SafeModel.Key.IcoPath);
-            dba.AddParam(IDat.APWD010D, _SafeModel.Key.IcoMemo);
-            dba.AddParam(IDat.APWD010E, _SafeModel.Key.GtdId);
-            dba.AddParam(IDat.APWD010F, _SafeModel.Key.GtdMemo);
-            dba.AddParam(IDat.APWD0110, _SafeModel.Key.Memo);
-            dba.AddParam(IDat.APWD0111, _SafeModel.Key.VisitDate);
-            dba.AddParam(IDat.APWD0112, "t");
-            dba.AddParam(IDat.APWD0113, "1");
-            dba.AddParam(IDat.APWD0114, IDat.APWD0115);
+            dba.AddTable(DBConst.APWD0100);
+            dba.AddParam(DBConst.APWD0101, 0);
+            dba.AddParam(DBConst.APWD0102, 0);
+            dba.AddParam(DBConst.APWD0103, 0);
+            dba.AddParam(DBConst.APWD0104, _UserModel.Code);
+            dba.AddParam(DBConst.APWD0105, _SafeModel.Key.Id);
+            dba.AddParam(DBConst.APWD0106, _SafeModel.Key.CatId);
+            dba.AddParam(DBConst.APWD0107, _SafeModel.Key.RegDate);
+            dba.AddParam(DBConst.APWD0108, _SafeModel.Key.LibId);
+            dba.AddParam(DBConst.APWD0109, _SafeModel.Key.Title);
+            dba.AddParam(DBConst.APWD010A, _SafeModel.Key.MetaKey);
+            dba.AddParam(DBConst.APWD010B, _SafeModel.Key.IcoName);
+            dba.AddParam(DBConst.APWD010C, _SafeModel.Key.IcoPath);
+            dba.AddParam(DBConst.APWD010D, _SafeModel.Key.IcoMemo);
+            dba.AddParam(DBConst.APWD010E, _SafeModel.Key.GtdId);
+            dba.AddParam(DBConst.APWD010F, _SafeModel.Key.GtdMemo);
+            dba.AddParam(DBConst.APWD0110, _SafeModel.Key.Memo);
+            dba.AddParam(DBConst.APWD0111, _SafeModel.Key.VisitDate);
+            dba.AddParam(DBConst.APWD0112, "t");
+            dba.AddParam(DBConst.APWD0113, "1");
+            dba.AddParam(DBConst.APWD0114, DBConst.APWD0115);
             dba.AddInsertBatch();
             #endregion
 
@@ -1886,19 +1886,19 @@ namespace Me.Amon.Pwd
             while (j < _SafeModel.Key.Password.Length)
             {
                 dba.ReInit();
-                dba.AddTable(IDat.APWD0200);
-                dba.AddParam(IDat.APWD0201, i++);
-                dba.AddParam(IDat.APWD0203, _SafeModel.Key.Id);
-                if (_SafeModel.Key.Password.Length - j > IDat.APWD0204_SIZE)
+                dba.AddTable(DBConst.APWD0200);
+                dba.AddParam(DBConst.APWD0201, i++);
+                dba.AddParam(DBConst.APWD0203, _SafeModel.Key.Id);
+                if (_SafeModel.Key.Password.Length - j > DBConst.APWD0204_SIZE)
                 {
-                    dba.AddParam(IDat.APWD0204, _SafeModel.Key.Password.Substring(j, IDat.APWD0204_SIZE));
+                    dba.AddParam(DBConst.APWD0204, _SafeModel.Key.Password.Substring(j, DBConst.APWD0204_SIZE));
                 }
                 else
                 {
-                    dba.AddParam(IDat.APWD0204, _SafeModel.Key.Password.Substring(j));
+                    dba.AddParam(DBConst.APWD0204, _SafeModel.Key.Password.Substring(j));
                 }
                 dba.AddInsertBatch();
-                j += IDat.APWD0204_SIZE;
+                j += DBConst.APWD0204_SIZE;
             }
             #endregion
 
@@ -1922,11 +1922,11 @@ namespace Me.Amon.Pwd
         {
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
-            dba.AddTable(IDat.APWD0100);
-            dba.AddWhere(IDat.APWD0104, _UserModel.Code);
-            dba.AddWhere(IDat.APWD0106, catId);
-            dba.AddWhere(IDat.APWD0115, "!=", IDat.OPT_DELETE.ToString(), false);
-            dba.AddSort(IDat.APWD0101, false);
+            dba.AddTable(DBConst.APWD0100);
+            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
+            dba.AddWhere(DBConst.APWD0106, catId);
+            dba.AddWhere(DBConst.APWD0115, "!=", DBConst.OPT_DELETE.ToString(), false);
+            dba.AddSort(DBConst.APWD0101, false);
             using (DataTable dt = dba.ExecuteSelect())
             {
                 InitKey(dt);
@@ -1964,10 +1964,10 @@ namespace Me.Amon.Pwd
         {
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
-            dba.AddTable(IDat.APWD0100);
-            dba.AddWhere(IDat.APWD0104, _UserModel.Code);
-            dba.AddWhere(string.Format("{0} LIKE '{2}' or {1} like '{2}'", IDat.APWD0109, IDat.APWD010A, meta));
-            dba.AddWhere(IDat.APWD0115, "!=", IDat.OPT_DELETE.ToString(), false);
+            dba.AddTable(DBConst.APWD0100);
+            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
+            dba.AddWhere(string.Format("{0} LIKE '{2}' or {1} like '{2}'", DBConst.APWD0109, DBConst.APWD010A, meta));
+            dba.AddWhere(DBConst.APWD0115, "!=", DBConst.OPT_DELETE.ToString(), false);
 
             using (DataTable dt = dba.ExecuteSelect())
             {

@@ -1,6 +1,6 @@
-﻿namespace Me.Amon
+﻿namespace Me.Amon.Da
 {
-    public class IDat
+    public class DBConst
     {
         /// <summary>
         /// 数据库常量：日期

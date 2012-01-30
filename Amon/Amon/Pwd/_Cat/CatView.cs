@@ -37,17 +37,17 @@ namespace Me.Amon.Pwd._Cat
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
-            dba.AddTable(IDat.ACAT0200);
-            dba.AddColumn(IDat.ACAT0201);
-            dba.AddColumn(IDat.ACAT0203);
-            dba.AddColumn(IDat.ACAT0204);
-            dba.AddColumn(IDat.ACAT0205);
-            dba.AddColumn(IDat.ACAT0206);
-            dba.AddColumn(IDat.ACAT0207);
-            dba.AddColumn(IDat.ACAT0208);
-            dba.AddColumn(IDat.ACAT0209);
-            dba.AddWhere(IDat.ACAT0202, _UserModel.Code);
-            dba.AddWhere(IDat.ACAT020D, ">", IDat.OPT_DELETE.ToString(), false);
+            dba.AddTable(DBConst.ACAT0200);
+            dba.AddColumn(DBConst.ACAT0201);
+            dba.AddColumn(DBConst.ACAT0203);
+            dba.AddColumn(DBConst.ACAT0204);
+            dba.AddColumn(DBConst.ACAT0205);
+            dba.AddColumn(DBConst.ACAT0206);
+            dba.AddColumn(DBConst.ACAT0207);
+            dba.AddColumn(DBConst.ACAT0208);
+            dba.AddColumn(DBConst.ACAT0209);
+            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
+            dba.AddWhere(DBConst.ACAT020D, ">", DBConst.OPT_DELETE.ToString(), false);
             DataTable dt = dba.ExecuteSelect();
             InitCat(_RootNode, dt);
             _RootNode.Expand();
@@ -59,7 +59,7 @@ namespace Me.Amon.Pwd._Cat
             while (i < data.Rows.Count)
             {
                 DataRow row = data.Rows[i];
-                string tmp = row[IDat.ACAT0204] as string;
+                string tmp = row[DBConst.ACAT0204] as string;
                 if (tmp != root.Name)
                 {
                     i += 1;
@@ -67,12 +67,12 @@ namespace Me.Amon.Pwd._Cat
                 }
 
                 Cat cat = new Cat();
-                cat.Id = row[IDat.ACAT0203] as string;
-                cat.Text = row[IDat.ACAT0205] as string;
-                cat.Tips = row[IDat.ACAT0206] as string;
-                cat.Icon = row[IDat.ACAT0207] as string;
-                cat.Meta = row[IDat.ACAT0208] as string;
-                cat.Memo = row[IDat.ACAT0209] as string;
+                cat.Id = row[DBConst.ACAT0203] as string;
+                cat.Text = row[DBConst.ACAT0205] as string;
+                cat.Tips = row[DBConst.ACAT0206] as string;
+                cat.Icon = row[DBConst.ACAT0207] as string;
+                cat.Meta = row[DBConst.ACAT0208] as string;
+                cat.Memo = row[DBConst.ACAT0209] as string;
 
                 TreeNode node = new TreeNode();
                 node.Name = cat.Id;

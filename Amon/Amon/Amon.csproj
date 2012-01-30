@@ -79,7 +79,6 @@
   <ItemGroup>
     <Compile Include="Ce\Wrapper.cs" />
     <Compile Include="Da\DBAccess.cs" />
-    <Compile Include="Da\DBConst.cs" />
     <Compile Include="Da\DCAccess.cs" />
     <Compile Include="Da\DCConst.cs" />
     <Compile Include="Da\DFAccess.cs" />
@@ -92,7 +91,7 @@
       <DependentUpon>AGtd.cs</DependentUpon>
     </Compile>
     <Compile Include="IApp.cs" />
-    <Compile Include="IDat.cs" />
+    <Compile Include="Da\DBConst.cs" />
     <Compile Include="IEnv.cs" />
     <Compile Include="Info.cs">
       <SubType>Form</SubType>

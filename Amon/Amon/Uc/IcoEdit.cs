@@ -40,23 +40,23 @@ namespace Me.Amon.Uc
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
-            dba.AddTable(IDat.AICO0100);
-            dba.AddColumn(IDat.AICO0103);
-            dba.AddColumn(IDat.AICO0104);
-            dba.AddColumn(IDat.AICO0105);
-            dba.AddColumn(IDat.AICO0107);
-            dba.AddWhere(IDat.AICO0102, _UserModel.Code);
-            dba.AddSort(IDat.AICO0101, true);
+            dba.AddTable(DBConst.AICO0100);
+            dba.AddColumn(DBConst.AICO0103);
+            dba.AddColumn(DBConst.AICO0104);
+            dba.AddColumn(DBConst.AICO0105);
+            dba.AddColumn(DBConst.AICO0107);
+            dba.AddWhere(DBConst.AICO0102, _UserModel.Code);
+            dba.AddSort(DBConst.AICO0101, true);
 
             using (DataTable dt = dba.ExecuteSelect())
             {
                 foreach (DataRow row in dt.Rows)
                 {
                     Dir item = new Dir();
-                    item.Id = row[IDat.AICO0103] as string;
-                    item.Name = row[IDat.AICO0104] as string;
-                    item.Tips = row[IDat.AICO0105] as string;
-                    item.Memo = row[IDat.AICO0107] as string;
+                    item.Id = row[DBConst.AICO0103] as string;
+                    item.Name = row[DBConst.AICO0104] as string;
+                    item.Tips = row[DBConst.AICO0105] as string;
+                    item.Memo = row[DBConst.AICO0107] as string;
                     LsDir.Items.Add(item);
                 }
             }
@@ -128,9 +128,9 @@ namespace Me.Amon.Uc
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
-            dba.AddTable(IDat.AICO0100);
-            dba.AddWhere(IDat.AICO0102, _UserModel.Code);
-            dba.AddWhere(IDat.AICO0103, item.Id);
+            dba.AddTable(DBConst.AICO0100);
+            dba.AddWhere(DBConst.AICO0102, _UserModel.Code);
+            dba.AddWhere(DBConst.AICO0103, item.Id);
             if (1 != dba.ExecuteDelete())
             {
                 return;
@@ -183,16 +183,16 @@ namespace Me.Amon.Uc
         {
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
-            dba.AddTable(IDat.AICO0100);
-            dba.AddParam(IDat.AICO0104, item.Name);
-            dba.AddParam(IDat.AICO0105, item.Tips);
-            dba.AddParam(IDat.AICO0106, item.Path);
-            dba.AddParam(IDat.AICO0107, item.Memo);
+            dba.AddTable(DBConst.AICO0100);
+            dba.AddParam(DBConst.AICO0104, item.Name);
+            dba.AddParam(DBConst.AICO0105, item.Tips);
+            dba.AddParam(DBConst.AICO0106, item.Path);
+            dba.AddParam(DBConst.AICO0107, item.Memo);
             if (CharUtil.IsValidateHash(item.Id))
             {
-                dba.AddWhere(IDat.AICO0102, _UserModel.Code);
-                dba.AddWhere(IDat.AICO0103, item.Id);
-                dba.AddVcs(IDat.AICO0108, IDat.AICO0109, item.Operate, IDat.OPT_INSERT);
+                dba.AddWhere(DBConst.AICO0102, _UserModel.Code);
+                dba.AddWhere(DBConst.AICO0103, item.Id);
+                dba.AddVcs(DBConst.AICO0108, DBConst.AICO0109, item.Operate, DBConst.OPT_INSERT);
                 dba.ExecuteUpdate();
 
                 LsDir.Items[LsDir.SelectedIndex] = item;
@@ -200,10 +200,10 @@ namespace Me.Amon.Uc
             else
             {
                 item.Id = HashUtil.UtcTimeInHex();
-                dba.AddParam(IDat.AICO0101, LsDir.Items.Count);
-                dba.AddParam(IDat.AICO0102, _UserModel.Code);
-                dba.AddParam(IDat.AICO0103, item.Id);
-                dba.AddVcs(IDat.AICO0108, IDat.AICO0109);
+                dba.AddParam(DBConst.AICO0101, LsDir.Items.Count);
+                dba.AddParam(DBConst.AICO0102, _UserModel.Code);
+                dba.AddParam(DBConst.AICO0103, item.Id);
+                dba.AddVcs(DBConst.AICO0108, DBConst.AICO0109);
                 dba.ExecuteInsert();
 
                 Directory.CreateDirectory(_DataModel.KeyDir + item.Id);

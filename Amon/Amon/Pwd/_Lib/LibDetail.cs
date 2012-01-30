@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using Me.Amon.Da;
 using Me.Amon.Model;
 using Me.Amon.Uc;
 using Me.Amon.Util;
@@ -36,9 +37,9 @@ namespace Me.Amon.Pwd._Lib
             CbType.Items.Add(new Item { K = AAtt.TYPE_FILE.ToString(), V = "文件" });
             //CbType.Items.Add(new Item { K = AAtt.TYPE_LINE.ToString(), V = "分组" });
 
-            TbName.MaxLength = IDat.APWD0306_SIZE;
-            TbData.MaxLength = IDat.APWD0307_SIZE;
-            TbMemo.MaxLength = IDat.APWD0308_SIZE;
+            TbName.MaxLength = DBConst.APWD0306_SIZE;
+            TbData.MaxLength = DBConst.APWD0307_SIZE;
+            TbMemo.MaxLength = DBConst.APWD0308_SIZE;
         }
 
         public void Show(Me.Amon.Model.LibDetail detail)

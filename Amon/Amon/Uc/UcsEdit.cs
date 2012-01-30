@@ -31,9 +31,9 @@ namespace Me.Amon.Uc
         {
             _DataModel = dataModel;
 
-            TbName.MaxLength = IDat.AUCS0104_SIZE;
-            TbTips.MaxLength = IDat.AUCS0105_SIZE;
-            TbChar.MaxLength = IDat.AUCS0106_SIZE;
+            TbName.MaxLength = DBConst.AUCS0104_SIZE;
+            TbTips.MaxLength = DBConst.AUCS0105_SIZE;
+            TbChar.MaxLength = DBConst.AUCS0106_SIZE;
 
             ShowData(new Ucs());
         }
@@ -122,17 +122,17 @@ namespace Me.Amon.Uc
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
-            dba.AddTable(IDat.AUCS0100);
-            dba.AddParam(IDat.AUCS0104, _Item.Name);
-            dba.AddParam(IDat.AUCS0105, _Item.Tips);
-            dba.AddParam(IDat.AUCS0106, _Item.Data);
-            dba.AddParam(IDat.AUCS0107, "");
-            dba.AddParam(IDat.AUCS0108, IDat.SQL_NOW, false);
+            dba.AddTable(DBConst.AUCS0100);
+            dba.AddParam(DBConst.AUCS0104, _Item.Name);
+            dba.AddParam(DBConst.AUCS0105, _Item.Tips);
+            dba.AddParam(DBConst.AUCS0106, _Item.Data);
+            dba.AddParam(DBConst.AUCS0107, "");
+            dba.AddParam(DBConst.AUCS0108, DBConst.SQL_NOW, false);
             if (CharUtil.IsValidateHash(_Item.Id))
             {
-                dba.AddWhere(IDat.AUCS0102, _UserModel.Code);
-                dba.AddWhere(IDat.AUCS0103, _Item.Id);
-                dba.AddVcs(IDat.AUCS010A, IDat.AUCS010B, _Item.Operate, IDat.OPT_UPDATE);
+                dba.AddWhere(DBConst.AUCS0102, _UserModel.Code);
+                dba.AddWhere(DBConst.AUCS0103, _Item.Id);
+                dba.AddVcs(DBConst.AUCS010A, DBConst.AUCS010B, _Item.Operate, DBConst.OPT_UPDATE);
                 dba.ExecuteUpdate();
 
                 LsUcs.Items[LsUcs.SelectedIndex] = _Item;
@@ -140,11 +140,11 @@ namespace Me.Amon.Uc
             else
             {
                 _Item.Id = HashUtil.UtcTimeInHex(false);
-                dba.AddParam(IDat.AUCS0101, LsUcs.Items.Count);
-                dba.AddParam(IDat.AUCS0102, _UserModel.Code);
-                dba.AddParam(IDat.AUCS0103, _Item.Id);
-                dba.AddParam(IDat.AUCS0109, IDat.SQL_NOW, false);
-                dba.AddVcs(IDat.AUCS010A, IDat.AUCS010B);
+                dba.AddParam(DBConst.AUCS0101, LsUcs.Items.Count);
+                dba.AddParam(DBConst.AUCS0102, _UserModel.Code);
+                dba.AddParam(DBConst.AUCS0103, _Item.Id);
+                dba.AddParam(DBConst.AUCS0109, DBConst.SQL_NOW, false);
+                dba.AddVcs(DBConst.AUCS010A, DBConst.AUCS010B);
                 dba.ExecuteInsert();
 
                 LsUcs.Items.Add(_Item);
