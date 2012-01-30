@@ -77,11 +77,16 @@ namespace Me.Amon.Util
             }
             else
             {
-                Point point = new Point();
-                point.X = (SystemInformation.WorkingArea.Width - child.Width) >> 1;
-                point.Y = (SystemInformation.WorkingArea.Height - child.Height) >> 1;
-                child.Location = point;
+                CenterToScreen(child);
             }
+        }
+
+        public static void CenterToScreen(Form window)
+        {
+            Point point = new Point();
+            point.X = (SystemInformation.WorkingArea.Width - window.Width) >> 1;
+            point.Y = (SystemInformation.WorkingArea.Height - window.Height) >> 1;
+            window.Location = point;
         }
 
         public static Image ReadImage(string file, Image defImg)

@@ -11,17 +11,19 @@ namespace Me.Amon.Model
     public sealed class UserModel
     {
         #region 全局变量
-        private string _Code;
-        private string _Name;
         private string _Info;
-        private string _Home;
-        private byte[] keys;
-        private byte[] salt;
-        private char[] mask;
+        private byte[] _Keys;
+        private byte[] _Salt;
+        private char[] _Mask;
 
         public string Name { get { return _Name; } }
+        private string _Name;
         public string Code { get { return _Code; } }
+        private string _Code;
         public string Home { get { return _Home; } }
+        private string _Home;
+        public string Look { get; set; }
+        public string Feel { get; set; }
         #endregion
 
         public string Digest(string name, string pass)
@@ -65,11 +67,11 @@ namespace Me.Amon.Model
             Uc.Properties prop = new Uc.Properties();
             prop.Load(file);
 
-            if (info != prop.Get("amon.info"))
+            if (info != prop.Get(IEnv.AMON_CFG_INFO))
             {
                 return false;
             }
-            string data = prop.Get("amon.data");
+            string data = prop.Get(IEnv.AMON_CFG_DATA);
 
             #region 口令散列
             // 口令
@@ -102,17 +104,20 @@ namespace Me.Amon.Model
 
             _Code = Encoding.UTF8.GetString(t, 0, 8);
             int i = 8;
-            salt = new byte[16];
-            Array.Copy(t, i, salt, 0, salt.Length);
-            i += salt.Length;
-            keys = new byte[32];
-            Array.Copy(t, i, keys, 0, keys.Length);
-            i += keys.Length;
-            mask = Encoding.UTF8.GetChars(t, 48, 16);
+            _Salt = new byte[16];
+            Array.Copy(t, i, _Salt, 0, _Salt.Length);
+            i += _Salt.Length;
+            _Keys = new byte[32];
+            Array.Copy(t, i, _Keys, 0, _Keys.Length);
+            i += _Keys.Length;
+            _Mask = Encoding.UTF8.GetChars(t, i, 16);
 
             _Name = name;
             _Code = code;
+            _Info = info;
             _Home = home;
+            Look = "Default";
+            Feel = "Default";
             return true;
         }
 
@@ -141,13 +146,19 @@ namespace Me.Amon.Model
         /// 网络登录
         /// </summary>
         /// <returns></returns>
-        public bool SignNw(string home, string code, string info, string data)
+        public bool SignNw(string root, string code, string name, string info, string data)
         {
+            root += code;
+            if (!Directory.Exists(root))
+            {
+                Directory.CreateDirectory(root);
+            }
             Uc.Properties prop = new Uc.Properties();
-            prop.Set("amon.code", code);
-            prop.Set("amon.info", info);
-            prop.Set("amon.data", data);
-            prop.Save(home + code + Path.DirectorySeparatorChar + IEnv.AMON_CFG);
+            prop.Set(IEnv.AMON_CFG_NAME, name);
+            prop.Set(IEnv.AMON_CFG_CODE, code);
+            prop.Set(IEnv.AMON_CFG_INFO, info);
+            prop.Set(IEnv.AMON_CFG_DATA, data);
+            prop.Save(root + Path.DirectorySeparatorChar + IEnv.AMON_CFG);
             return true;
         }
 
@@ -171,11 +182,11 @@ namespace Me.Amon.Model
             int i = 0;
             Array.Copy(a, 0, t, i, a.Length);
             i += a.Length;
-            Array.Copy(salt, 0, t, i, salt.Length);
-            i += salt.Length;
-            Array.Copy(keys, 0, t, i, keys.Length);
-            i += keys.Length;
-            a = Encoding.UTF8.GetBytes(mask);
+            Array.Copy(_Salt, 0, t, i, _Salt.Length);
+            i += _Salt.Length;
+            Array.Copy(_Keys, 0, t, i, _Keys.Length);
+            i += _Keys.Length;
+            a = Encoding.UTF8.GetBytes(_Mask);
             Array.Copy(a, 0, t, i, a.Length);
 
             // 口令
@@ -203,10 +214,9 @@ namespace Me.Amon.Model
 
             string data = Convert.ToBase64String(t);
             Uc.Properties prop = new Uc.Properties();
-            prop.Set("amon.code", Code);
-            prop.Set("amon.info", _Info);
-            prop.Set("amon.data", data);
-            prop.Save(Home + Code + Path.DirectorySeparatorChar + IEnv.AMON_CFG);
+            prop.Set(IEnv.AMON_CFG_INFO, _Info);
+            prop.Set(IEnv.AMON_CFG_DATA, data);
+            prop.Save(Home + IEnv.AMON_CFG);
 
             return true;
         }
@@ -315,25 +325,24 @@ namespace Me.Amon.Model
             string code = "A0000000";
             byte[] k = GenK(name, code, pass);
             byte[] v = GenV(name, code, pass);
-            pass = null;
 
             Random r = new Random();
-            salt = new byte[16];
-            r.NextBytes(salt);
-            keys = new byte[32];
-            r.NextBytes(keys);
-            mask = GenChar();
+            _Salt = new byte[16];
+            r.NextBytes(_Salt);
+            _Keys = new byte[32];
+            r.NextBytes(_Keys);
+            _Mask = GenChar();
 
             byte[] t = new byte[72];
             byte[] a = Encoding.UTF8.GetBytes(code);
             int i = 0;
             Array.Copy(a, 0, t, i, a.Length);
             i += a.Length;
-            Array.Copy(salt, 0, t, i, salt.Length);
-            i += salt.Length;
-            Array.Copy(keys, 0, t, i, keys.Length);
-            i += keys.Length;
-            a = Encoding.UTF8.GetBytes(mask);
+            Array.Copy(_Salt, 0, t, i, _Salt.Length);
+            i += _Salt.Length;
+            Array.Copy(_Keys, 0, t, i, _Keys.Length);
+            i += _Keys.Length;
+            a = Encoding.UTF8.GetBytes(_Mask);
             Array.Copy(a, 0, t, i, a.Length);
 
             #region AES 加密
@@ -350,22 +359,26 @@ namespace Me.Amon.Model
             aes.Clear();
             #endregion
 
-            _Home = root + code + Path.DirectorySeparatorChar;
-            if (!Directory.Exists(_Home))
-            {
-                Directory.CreateDirectory(_Home);
-            }
-            string data = Convert.ToBase64String(t);
-            Uc.Properties prop = new Uc.Properties();
-            prop.Set("amon.code", code);
-            prop.Set("amon.info", Digest(name, pass));
-            prop.Set("amon.data", data);
-            prop.Save(_Home + IEnv.AMON_CFG);
+            SignNw(root, code, name, Digest(name, pass), Convert.ToBase64String(t));
 
             _Name = name;
             _Code = code;
             _Info = pass;
+            _Home = root + code + Path.DirectorySeparatorChar;
+            pass = null;
             return true;
+        }
+
+        public void SignOf()
+        {
+            _Info = null;
+            _Keys = null;
+            _Salt = null;
+            _Mask = null;
+
+            _Name = null;
+            _Code = null;
+            _Home = null;
         }
         #endregion
 
@@ -391,10 +404,10 @@ namespace Me.Amon.Model
         {
             AesManaged aes = new AesManaged();
 
-            byte[] buf = CharUtil.DecodeString(data, mask);
+            byte[] buf = CharUtil.DecodeString(data, _Mask);
             using (MemoryStream mStream = new MemoryStream())
             {
-                using (CryptoStream cStream = new CryptoStream(mStream, aes.CreateDecryptor(keys, salt), CryptoStreamMode.Write))
+                using (CryptoStream cStream = new CryptoStream(mStream, aes.CreateDecryptor(_Keys, _Salt), CryptoStreamMode.Write))
                 {
                     cStream.Write(buf, 0, buf.Length);
                     cStream.FlushFinalBlock();
@@ -413,7 +426,7 @@ namespace Me.Amon.Model
             byte[] buf = Encoding.UTF8.GetBytes(data);
             using (MemoryStream mStream = new MemoryStream())
             {
-                using (CryptoStream cStream = new CryptoStream(mStream, aes.CreateEncryptor(keys, salt), CryptoStreamMode.Write))
+                using (CryptoStream cStream = new CryptoStream(mStream, aes.CreateEncryptor(_Keys, _Salt), CryptoStreamMode.Write))
                 {
                     cStream.Write(buf, 0, buf.Length);
                     cStream.FlushFinalBlock();
@@ -422,7 +435,7 @@ namespace Me.Amon.Model
             }
             aes.Clear();
 
-            return CharUtil.EncodeString(buf, mask);
+            return CharUtil.EncodeString(buf, _Mask);
         }
         #endregion
 

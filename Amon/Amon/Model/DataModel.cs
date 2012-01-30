@@ -16,31 +16,33 @@ namespace Me.Amon.Model
 
         public void Init()
         {
-            _DatDir = "dat" + Path.DirectorySeparatorChar + _UserModel.Code + Path.DirectorySeparatorChar;
+            #region 数据目录
+            _DatDir = IEnv.DATA_DIR + Path.DirectorySeparatorChar + _UserModel.Code + Path.DirectorySeparatorChar;
             if (!Directory.Exists(_DatDir))
             {
                 Directory.CreateDirectory(_DatDir);
             }
-            _CatDir = _DatDir + "cat" + Path.DirectorySeparatorChar;
+            _CatDir = _DatDir + "CAT" + Path.DirectorySeparatorChar;
             if (!Directory.Exists(_CatDir))
             {
                 Directory.CreateDirectory(_CatDir);
             }
-            _KeyDir = _DatDir + "key" + Path.DirectorySeparatorChar;
+            _KeyDir = _DatDir + "KEY" + Path.DirectorySeparatorChar;
             if (!Directory.Exists(_KeyDir))
             {
                 Directory.CreateDirectory(_KeyDir);
             }
-            _AttDir = _DatDir + "att" + Path.DirectorySeparatorChar;
+            _AttDir = _DatDir + "ATT" + Path.DirectorySeparatorChar;
             if (!Directory.Exists(_AttDir))
             {
                 Directory.CreateDirectory(_AttDir);
             }
-            _AsfDir = _DatDir + "asf" + Path.DirectorySeparatorChar;
-            if (!Directory.Exists(_AsfDir))
+            _AcfDir = _DatDir + "ACF" + Path.DirectorySeparatorChar;
+            if (!Directory.Exists(_AcfDir))
             {
-                Directory.CreateDirectory(_AsfDir);
+                Directory.CreateDirectory(_AcfDir);
             }
+            #endregion
 
             #region 读取配置
             UcsLength = 8;
@@ -156,8 +158,8 @@ namespace Me.Amon.Model
         private string _AttDir;
         public string AttDir { get { return _AttDir; } }
 
-        private string _AsfDir;
-        public string AsfDir { get { return _AsfDir; } }
+        private string _AcfDir;
+        public string AcfDir { get { return _AcfDir; } }
 
         #region 口令模板
         private ObservableCollection<LibHeader> _LibList;

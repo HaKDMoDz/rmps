@@ -11,6 +11,7 @@ namespace Me.Amon.User.Sign
 {
     public partial class SignIn : UserControl, ISignAc
     {
+        private bool _Waiting;
         private string _Name;
         private string _Info;
         private string _Home;
@@ -82,15 +83,19 @@ namespace Me.Amon.User.Sign
             #endregion
 
             _Prop = new Uc.Properties();
-            _Prop.Load(IEnv.AMON_CFG);
+            _Prop.Load(IEnv.AMON_SYS);
 
             _Name = _Name.ToLower();
             _Info = _UserModel.Digest(_Name, pass);
-            string code = _Prop.Get(string.Format("amon.{0}.code", _Name));
+            string code = _Prop.Get(string.Format(IEnv.AMON_SYS_CODE, _Name));
+            _Home = _Prop.Get(string.Format(IEnv.AMON_SYS_HOME, _Name));
 
             #region 已有用户首次登录
             if (!CharUtil.IsValidateCode(code))
             {
+                _Waiting = true;
+                _SignAc.ShowWaiting();
+
                 WebClient client = new WebClient();
                 client.Credentials = CredentialCache.DefaultCredentials;
                 client.Headers["Content-type"] = "application/x-www-form-urlencoded";
@@ -118,12 +123,12 @@ namespace Me.Amon.User.Sign
         {
             _SignAc.Close();
         }
-        #endregion
 
-        private void BtPath_Click(object sender, EventArgs e)
+        public void ShowMenu(Control control, int x, int y)
         {
-
+            CmMenu.Show(control, x, y);
         }
+        #endregion
 
         #region 菜单事件
         /// <summary>
@@ -138,6 +143,34 @@ namespace Me.Amon.User.Sign
             {
                 return;
             }
+
+            string path = fd.SelectedPath;
+            if (!Directory.Exists(path))
+            {
+                _SignAc.ShowAlert("您选择的路径不存在！");
+                return;
+            }
+            path += IEnv.AMON_CFG;
+            if (!File.Exists(path))
+            {
+                _SignAc.ShowAlert("请确认您选择的数据路径是否正确！");
+                return;
+            }
+            Uc.Properties prop = new Uc.Properties();
+            prop.Load(path);
+            string name = prop.Get(IEnv.AMON_CFG_NAME);
+            string code = prop.Get(IEnv.AMON_CFG_CODE);
+            if (!CharUtil.IsValidateCode(code) || !CharUtil.IsValidate(name))
+            {
+                _SignAc.ShowAlert("请确认您选择的数据路径是否正确！");
+                return;
+            }
+
+            prop.Clear();
+            prop.Load(IEnv.AMON_SYS);
+            prop.Set(string.Format(IEnv.AMON_SYS_CODE, name), code);
+            prop.Set(string.Format(IEnv.AMON_SYS_HOME, name), path);
+            prop.Save(IEnv.AMON_SYS);
         }
 
         /// <summary>
@@ -147,7 +180,7 @@ namespace Me.Amon.User.Sign
         /// <param name="e"></param>
         private void MiOnSignUp_Click(object sender, EventArgs e)
         {
-            //ShowSignOn();
+            _SignAc.ShowView(ESignAc.SignOl);
         }
 
         /// <summary>
@@ -157,7 +190,7 @@ namespace Me.Amon.User.Sign
         /// <param name="e"></param>
         private void MiOfSignUp_Click(object sender, EventArgs e)
         {
-            //ShowSignOf();
+            _SignAc.ShowView(ESignAc.SignUl);
         }
 
         /// <summary>
@@ -167,7 +200,17 @@ namespace Me.Amon.User.Sign
         /// <param name="e"></param>
         private void MiPcSignUp_Click(object sender, EventArgs e)
         {
-            //ShowSignPc();
+            _SignAc.ShowView(ESignAc.SignPc);
+        }
+
+        /// <summary>
+        /// 忘记口令(&F)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MiFind_Click(object sender, EventArgs e)
+        {
+            _SignAc.ShowView(ESignAc.SignFk);
         }
 
         /// <summary>
@@ -177,7 +220,6 @@ namespace Me.Amon.User.Sign
         /// <param name="e"></param>
         private void MiUpgrade_Click(object sender, EventArgs e)
         {
-
         }
         #endregion
 
@@ -187,6 +229,8 @@ namespace Me.Amon.User.Sign
             if (e.Error != null)
             {
                 _SignAc.ShowAlert(e.Error.Message);
+                _SignAc.HideWaiting();
+                _Waiting = false;
                 return;
             }
 
@@ -200,11 +244,15 @@ namespace Me.Amon.User.Sign
                 {
                     reader.ReadToFollowing("error");
                     _SignAc.ShowAlert(reader.ReadElementContentAsString());
+                    _SignAc.HideWaiting();
+                    _Waiting = false;
                     return;
                 }
 
                 if (!reader.ReadToFollowing("code"))
                 {
+                    _SignAc.HideWaiting();
+                    _Waiting = false;
                     return;
                 }
                 code = reader.ReadElementContentAsString();
@@ -214,11 +262,10 @@ namespace Me.Amon.User.Sign
                 view = reader.ReadElementContentAsInt();
             }
 
-            _UserModel.SignNw(_Home, code, _Info, data);
+            _UserModel.SignNw(_Home, code, _Name, _Info, data);
 
             _SignAc.CallBack(view);
         }
         #endregion
-
     }
 }

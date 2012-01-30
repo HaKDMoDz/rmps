@@ -3,20 +3,35 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Me.Amon.Event;
 using Me.Amon.Model;
+using Me.Amon.Util;
 
 namespace Me.Amon.User
 {
     /// <summary>
-    /// 口令修改
+    /// 重新验证
     /// </summary>
     public partial class SignRc : Form
     {
         private UserModel _UserModel;
 
+        #region 构造函数
         public SignRc()
         {
             InitializeComponent();
         }
+
+        public SignRc(UserModel userModel)
+        {
+            _UserModel = userModel;
+
+            InitializeComponent();
+        }
+
+        public void InitOnce()
+        {
+            BeanUtil.CenterToScreen(this);
+        }
+        #endregion
 
         public AmonHandler<int> CallBackHandler { get; set; }
 
@@ -35,9 +50,8 @@ namespace Me.Amon.User
         #region 私有函数
         private void DoSignRc()
         {
+            #region 用户判断
             string name = TbName.Text;
-
-            #region 用户名判断
             if (string.IsNullOrEmpty(name))
             {
                 ShowAlert("请输入用户名！");
@@ -58,6 +72,7 @@ namespace Me.Amon.User
                 TbName.Focus();
                 return;
             }
+            name = name.ToLower();
             #endregion
 
             #region 口令判断
@@ -86,7 +101,6 @@ namespace Me.Amon.User
                 TbName.Focus();
                 return;
             }
-            _UserModel.Init();
 
             if (CallBackHandler != null)
             {

@@ -10,6 +10,7 @@ using Me.Amon.Sec;
 using Me.Amon.User;
 using Me.Amon.Util;
 using Me.Amon.Uw;
+using Me.Amon.User.Sign;
 
 namespace Me.Amon
 {
@@ -273,6 +274,13 @@ namespace Me.Amon
         #endregion
 
         #region 菜单事件
+        #region 导航菜单
+        private void MgTopMost_Click(object sender, EventArgs e)
+        {
+            TopMost = !TopMost;
+            MgTopMost.Checked = TopMost;
+        }
+
         private void MgTray_Click(object sender, EventArgs e)
         {
             NiTray.Visible = !NiTray.Visible;
@@ -306,22 +314,42 @@ namespace Me.Amon
             if (_IApp.AppId != IEnv.IAPP_ASEC)
             {
                 _IApp.Visible = false;
-                ShowAPwd(IEnv.IAPP_ASEC);
+                ShowASec(IEnv.IAPP_ASEC);
                 return;
             }
         }
 
-        private void MgTopMost_Click(object sender, EventArgs e)
+        private void MgSignUp_Click(object sender, EventArgs e)
         {
-            TopMost = !TopMost;
-            MgTopMost.Checked = TopMost;
+            SignAc(ESignAc.SignOl, new AmonHandler<int>(DoSignOl));
+        }
+
+        private void MgSignIn_Click(object sender, EventArgs e)
+        {
+            SignAc(ESignAc.SignIn, new AmonHandler<int>(DoSignIn));
+        }
+
+        private void MgSignOf_Click(object sender, EventArgs e)
+        {
+            _UserModel.SignOf();
+
+            MgSignIn.Visible = true;
+            MtSignIn.Visible = true;
+
+            MgSignOf.Visible = false;
+            MtSignOf.Visible = false;
         }
 
         private void MgExit_Click(object sender, EventArgs e)
         {
-            Close();
+            if (_IApp.WillExit())
+            {
+                Close();
+            }
         }
+        #endregion
 
+        #region 托盘菜单
         private void MtGuid_Click(object sender, EventArgs e)
         {
             Visible = !Visible;
@@ -355,15 +383,40 @@ namespace Me.Amon
             if (_IApp.AppId != IEnv.IAPP_ASEC)
             {
                 _IApp.Visible = false;
-                ShowAPwd(IEnv.IAPP_ASEC);
+                ShowASec(IEnv.IAPP_ASEC);
                 return;
             }
         }
 
+        private void MtSignUp_Click(object sender, EventArgs e)
+        {
+            SignAc(ESignAc.SignOl, new AmonHandler<int>(DoSignOl));
+        }
+
+        private void MtSignIn_Click(object sender, EventArgs e)
+        {
+            SignAc(ESignAc.SignIn, new AmonHandler<int>(DoSignIn));
+        }
+
+        private void MtSignOf_Click(object sender, EventArgs e)
+        {
+            _UserModel.SignOf();
+
+            MgSignIn.Visible = true;
+            MtSignIn.Visible = true;
+
+            MgSignOf.Visible = false;
+            MtSignOf.Visible = false;
+        }
+
         private void MtExit_Click(object sender, EventArgs e)
         {
-            Close();
+            if (_IApp.WillExit())
+            {
+                Close();
+            }
         }
+        #endregion
         #endregion
 
         #region 全局函数
@@ -404,21 +457,49 @@ namespace Me.Amon
         #endregion
 
         #region 私有函数
+        private SignAc _SignAc;
+        private void SignAc(ESignAc signAc, AmonHandler<int> handler)
+        {
+            if (_SignAc == null || !_SignAc.Visible)
+            {
+                _SignAc = new SignAc(_UserModel);
+                _SignAc.InitOnce();
+            }
+            _SignAc.CallBackHandler = handler;
+            _SignAc.ShowView(signAc);
+            _SignAc.Show();
+        }
+
+        private SignRc _SignRc;
         private void CheckUser(AmonHandler<int> handler)
         {
             if (!CharUtil.IsValidateCode(_UserModel.Code))
             {
-                SignAc signAc = new SignAc(_UserModel);
-                signAc.InitOnce();
-                signAc.CallBackHandler = handler;
-                signAc.Show();
+                SignAc(ESignAc.SignIn, handler);
             }
             else
             {
-                AuthRc authRc = new AuthRc(_UserModel);
-                authRc.CallBackHandler = handler;
-                authRc.Show();
+                if (_SignRc == null || !_SignRc.Visible)
+                {
+                    _SignRc = new SignRc(_UserModel);
+                    _SignRc.InitOnce();
+                    _SignRc.Show();
+                }
+                _SignRc.CallBackHandler = handler;
             }
+        }
+
+        private void DoSignIn(int view)
+        {
+            MgSignIn.Visible = false;
+            MtSignIn.Visible = false;
+
+            MgSignOf.Visible = true;
+            MtSignOf.Visible = true;
+        }
+
+        private void DoSignOl(int view)
+        {
         }
 
         private void ShowAPwd(int view)

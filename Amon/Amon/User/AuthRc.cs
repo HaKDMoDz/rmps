@@ -2,16 +2,18 @@
 using System.Windows.Forms;
 using Me.Amon.Event;
 using Me.Amon.Model;
+using Me.Amon.Util;
 
 namespace Me.Amon.User
 {
     /// <summary>
-    /// 重新认证
+    /// 屏幕加锁
     /// </summary>
     public partial class AuthRc : Form
     {
         private UserModel _UserModel;
         private int _ErrorCnt;
+        private bool _SysAction;
 
         #region 构造函数
         public AuthRc()
@@ -19,11 +21,13 @@ namespace Me.Amon.User
             InitializeComponent();
         }
 
-        public AuthRc(UserModel userModel)
+        public AuthRc(UserModel userModel, Form owner)
         {
             _UserModel = userModel;
 
             InitializeComponent();
+
+            BeanUtil.CenterToParent(this, owner);
         }
         #endregion
 
@@ -38,7 +42,7 @@ namespace Me.Amon.User
             }
 
             string pass = TbPass.Text;
-            pass = "";
+            TbPass.Text = "";
             if (string.IsNullOrEmpty(pass))
             {
                 ShowAlert("请输入登录口令！");
@@ -48,23 +52,24 @@ namespace Me.Amon.User
 
             if (!_UserModel.SignAc(pass))
             {
+                _ErrorCnt += 1;
                 ShowAlert("口令输入错误！");
                 TbPass.Focus();
-                _ErrorCnt += 1;
                 return;
             }
 
+            _SysAction = true;
             Close();
         }
 
-        private void AuthAc_FormClosing(object sender, FormClosingEventArgs e)
+        private void AuthRc_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = true;
+            e.Cancel = !_SysAction;
         }
 
         private void ShowAlert(string alert)
         {
-            //LbInfo.Text = alert;
+            LbInfo.Text = alert;
         }
     }
 }

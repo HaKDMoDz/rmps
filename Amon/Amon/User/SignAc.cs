@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.User.Sign;
+using Me.Amon.Util;
 
 namespace Me.Amon.User
 {
@@ -12,7 +13,6 @@ namespace Me.Amon.User
     /// </summary>
     public partial class SignAc : Form
     {
-        private bool _Waiting;
         private ISignAc _SignAc;
         private UserModel _UserModel;
 
@@ -31,11 +31,7 @@ namespace Me.Amon.User
 
         public void InitOnce()
         {
-            _SignIn = new SignIn(this, _UserModel);
-            _SignIn.Location = new Point(12, 46);
-            _SignIn.TabIndex = 1;
-            Controls.Add(_SignIn);
-            _SignAc = _SignIn;
+            BeanUtil.CenterToScreen(this);
         }
         #endregion
 
@@ -53,6 +49,7 @@ namespace Me.Amon.User
         }
         private void PbMenu_Click(object sender, EventArgs e)
         {
+            _SignAc.ShowMenu(PbMenu, 0, PbMenu.Height);
         }
         #endregion
 
@@ -62,22 +59,16 @@ namespace Me.Amon.User
             MessageBox.Show(this, alert, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        public void ShowWaiting(string message)
+        public void ShowWaiting()
         {
-            _Waiting = true;
-
-            //LbInfo.Text = message;
             BtOk.Enabled = false;
             BtNo.Enabled = false;
         }
 
-        public void HideWaiting(string message)
+        public void HideWaiting()
         {
             BtNo.Enabled = true;
             BtOk.Enabled = true;
-            //LbInfo.Text = message;
-
-            _Waiting = false;
         }
 
         public void ShowView(ESignAc signAc)
@@ -87,14 +78,17 @@ namespace Me.Amon.User
                 case ESignAc.SignIn:
                     ShowSignIn();
                     break;
-                case ESignAc.SignOn:
-                    ShowSignOn();
+                case ESignAc.SignOl:
+                    ShowSignOl();
                     break;
-                case ESignAc.SignOf:
-                    ShowSignOf();
+                case ESignAc.SignUl:
+                    ShowSignUl();
                     break;
                 case ESignAc.SignPc:
                     ShowSignPc();
+                    break;
+                case ESignAc.SignFk:
+                    ShowSignFk();
                     break;
             }
         }
@@ -123,46 +117,60 @@ namespace Me.Amon.User
         }
 
         private SignUp _SignUp;
-        private void ShowSignOn()
+        private void ShowSignOl()
         {
             if (_SignUp == null)
             {
                 _SignUp = new SignUp(this, _UserModel);
             }
-            _SignUp.IsOnLine = true;
+            _SignUp.IsPcMode = false;
             ShowView(_SignUp);
             _SignAc = _SignUp;
         }
 
-        private void ShowSignOf()
+        private SignUl _SignOf;
+        private void ShowSignUl()
         {
-            if (_SignUp == null)
+            if (_SignOf == null)
             {
-                _SignUp = new SignUp(this, _UserModel);
+                _SignOf = new SignUl(this, _UserModel);
             }
-            _SignUp.IsOnLine = false;
-            ShowView(_SignUp);
-            _SignAc = _SignUp;
+            ShowView(_SignOf);
+            _SignAc = _SignOf;
         }
 
-        private SignPc _SignPc;
         private void ShowSignPc()
         {
-            if (_SignPc == null)
+            if (_SignUp == null)
             {
-                _SignPc = new SignPc(this, _UserModel);
+                _SignUp = new SignUp(this, _UserModel);
             }
-            ShowView(_SignPc);
-            _SignAc = _SignPc;
+            _SignUp.IsPcMode = true;
+            ShowView(_SignUp);
+            _SignAc = _SignUp;
+        }
+
+        private SignFk _SignFk;
+        private void ShowSignFk()
+        {
+            if (_SignFk == null)
+            {
+                _SignFk = new SignFk(this, _UserModel);
+            }
+            ShowView(_SignFk);
+            _SignAc = _SignFk;
         }
 
         private void ShowView(Control control)
         {
-            if (_SignAc.Name == control.Name)
+            if (_SignAc != null)
             {
-                return;
+                if (_SignAc.Name == control.Name)
+                {
+                    return;
+                }
+                Controls.Remove(_SignAc.Control);
             }
-            Controls.Remove(_SignAc.Control);
 
             control.Location = new Point(12, 46);
             control.TabIndex = 1;

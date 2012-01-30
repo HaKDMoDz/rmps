@@ -22,116 +22,116 @@
         /// <summary>
         /// 一级类别
         /// </summary>
-        public const string C2010100 = "C2010100";
+        public const string C2010100 = "ACAT0100";
         /// <summary>
         /// 显示排序
         /// </summary>
-        public const string C2010101 = "C2010101";
-        /// <summary>
-        /// 类别索引
-        /// </summary>
-        public const string C2010102 = "C2010102";
-        public const int C2010102_SIZE = 16;
+        public const string C2010101 = "ACAT0101";
         /// <summary>
         /// 系统索引
         /// </summary>
-        public const string C2010103 = "C2010103";
-        public const int C2010103_SIZE = 8;
+        public const string C2010102 = "ACAT0102";
+        public const int C2010102_SIZE = 8;
+        /// <summary>
+        /// 类别索引
+        /// </summary>
+        public const string C2010103 = "ACAT0103";
+        public const int C2010103_SIZE = 16;
         /// <summary>
         /// 类别名称
         /// </summary>
-        public const string C2010104 = "C2010104";
+        public const string C2010104 = "ACAT0104";
         public const int C2010104_SIZE = 256;
         /// <summary>
         /// 类别提示
         /// </summary>
-        public const string C2010105 = "C2010105";
+        public const string C2010105 = "ACAT0105";
         public const int C2010105_SIZE = 256;
         /// <summary>
         /// 类别键值
         /// </summary>
-        public const string C2010106 = "C2010106";
+        public const string C2010106 = "ACAT0106";
         public const int C2010106_SIZE = 64;
         /// <summary>
         /// 类别描述
         /// </summary>
-        public const string C2010107 = "C2010107";
+        public const string C2010107 = "ACAT0107";
         public const int C2010107_SIZE = 2048;
         /// <summary>
         /// 更新时间
         /// </summary>
-        public const string C2010108 = "C2010108";
+        public const string C2010108 = "ACAT0108";
         /// <summary>
         /// 创建时间
         /// </summary>
-        public const string C2010109 = "C2010109";
+        public const string C2010109 = "ACAT0109";
         #endregion
 
         #region 多级类别
         /// <summary>
         /// 多级类别
         /// </summary>
-        public const string C2010200 = "C2010200";
+        public const string C2010200 = "ACAT0200";
         /// <summary>
         /// 显示排序
         /// </summary>
-        public const string C2010201 = "C2010201";
+        public const string C2010201 = "ACAT0201";
         /// <summary>
         /// 用户代码
         /// </summary>
-        public const string C2010202 = "C2010202";
+        public const string C2010202 = "ACAT0202";
         public const int C2010202_SIZE = 8;
         /// <summary>
         /// 类别索引
         /// </summary>
-        public const string C2010203 = "C2010203";
+        public const string C2010203 = "ACAT0203";
         public const int C2010203_SIZE = 16;
         /// <summary>
         /// 一级索引
         /// </summary>
-        public const string C2010204 = "C2010204";
+        public const string C2010204 = "ACAT0204";
         public const int C2010204_SIZE = 16;
         /// <summary>
         /// 类别名称
         /// </summary>
-        public const string C2010205 = "C2010205";
+        public const string C2010205 = "ACAT0205";
         public const int C2010205_SIZE = 256;
         /// <summary>
         /// 类别提示
         /// </summary>
-        public const string C2010206 = "C2010206";
+        public const string C2010206 = "ACAT0206";
         public const int C2010206_SIZE = 256;
         /// <summary>
         /// 类别图标
         /// </summary>
-        public const string C2010207 = "C2010207";
+        public const string C2010207 = "ACAT0207";
         public const int C2010207_SIZE = 16;
         /// <summary>
         /// 类别键值
         /// </summary>
-        public const string C2010208 = "C2010208";
+        public const string C2010208 = "ACAT0208";
         public const int C2010208_SIZE = 64;
         /// <summary>
         /// 类别描述
         /// </summary>
-        public const string C2010209 = "C2010209";
+        public const string C2010209 = "ACAT0209";
         public const int C2010209_SIZE = 2048;
         /// <summary>
         /// 更新时间
         /// </summary>
-        public const string C201020A = "C201020A";
+        public const string C201020A = "ACAT020A";
         /// <summary>
         /// 创建时间
         /// </summary>
-        public const string C201020B = "C201020B";
+        public const string C201020B = "ACAT020B";
         /// <summary>
         /// 版本控制
         /// </summary>
-        public const string C201020C = "C201020C";
+        public const string C201020C = "ACAT020C";
         /// <summary>
         /// 操作状态：0删除、1默认、2新增、3更新
         /// </summary>
-        public const string C201020D = "C201020D";
+        public const string C201020D = "ACAT020D";
         #endregion
         #endregion
 
@@ -150,7 +150,7 @@
         /// 二级索引
         /// </summary>
         public const string APWD0002 = "APWD0002";
-        public const int APWD0002_SIZE = 1024;
+        public const int APWD0002_SIZE = 16;
         /// <summary>
         /// 配置信息
         /// </summary>

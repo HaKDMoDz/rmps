@@ -10,17 +10,17 @@ namespace Me.Amon.User.Sign
     /// <summary>
     /// 脱机注册
     /// </summary>
-    public partial class SignPc : UserControl, ISignAc
+    public partial class SignUl : UserControl, ISignAc
     {
         private UserModel _UserModel;
         private SignAc _SignAc;
 
-        public SignPc()
+        public SignUl()
         {
             InitializeComponent();
         }
 
-        public SignPc(SignAc signAc, UserModel userModel)
+        public SignUl(SignAc signAc, UserModel userModel)
         {
             _SignAc = signAc;
             _UserModel = userModel;
@@ -130,18 +130,22 @@ namespace Me.Amon.User.Sign
             }
             #endregion
 
-            _UserModel.SignNw(path, code, info, data);
+            _UserModel.SignNw(path, code, name, info, data);
 
             Uc.Properties prop = new Uc.Properties();
-            prop.Load(IEnv.AMON_CFG);
-            prop.Set(string.Format("amon.{0}.code", name), path);
-            prop.Set(string.Format("amon.{0}.code", name), code);
-            prop.Save(IEnv.AMON_CFG);
+            prop.Load(IEnv.AMON_SYS);
+            prop.Set(string.Format(IEnv.AMON_SYS_HOME, name), path);
+            prop.Set(string.Format(IEnv.AMON_SYS_CODE, name), code);
+            prop.Save(IEnv.AMON_SYS);
         }
 
         public void DoCancel()
         {
             _SignAc.ShowView(ESignAc.SignIn);
+        }
+
+        public void ShowMenu(Control control, int x, int y)
+        {
         }
         #endregion
 

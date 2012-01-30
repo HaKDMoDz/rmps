@@ -40,7 +40,9 @@
             this.MiOfSignUp = new System.Windows.Forms.ToolStripMenuItem();
             this.MiPcSignUp = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiUpgrade = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiFind = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.升级UToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CmMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,9 +75,9 @@
             // 
             this.TbPass.Location = new System.Drawing.Point(56, 30);
             this.TbPass.Name = "TbPass";
-            this.TbPass.PasswordChar = '*';
             this.TbPass.Size = new System.Drawing.Size(100, 21);
             this.TbPass.TabIndex = 3;
+            this.TbPass.UseSystemPasswordChar = true;
             // 
             // CmMenu
             // 
@@ -86,9 +88,11 @@
             this.MiOfSignUp,
             this.MiPcSignUp,
             this.toolStripSeparator2,
-            this.MiUpgrade});
+            this.MiFind,
+            this.toolStripSeparator3,
+            this.升级UToolStripMenuItem});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(153, 148);
+            this.CmMenu.Size = new System.Drawing.Size(153, 176);
             // 
             // MiOpen
             // 
@@ -128,13 +132,25 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
-            // MiUpgrade
+            // MiFind
             // 
-            this.MiUpgrade.Enabled = false;
-            this.MiUpgrade.Name = "MiUpgrade";
-            this.MiUpgrade.Size = new System.Drawing.Size(152, 22);
-            this.MiUpgrade.Text = "升级(&U)";
-            this.MiUpgrade.Click += new System.EventHandler(this.MiUpgrade_Click);
+            this.MiFind.Name = "MiFind";
+            this.MiFind.Size = new System.Drawing.Size(152, 22);
+            this.MiFind.Text = "找回口令(&F)";
+            this.MiFind.Click += new System.EventHandler(this.MiFind_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            // 
+            // 升级UToolStripMenuItem
+            // 
+            this.升级UToolStripMenuItem.Enabled = false;
+            this.升级UToolStripMenuItem.Name = "升级UToolStripMenuItem";
+            this.升级UToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.升级UToolStripMenuItem.Text = "升级(&U)";
+            this.升级UToolStripMenuItem.Click += new System.EventHandler(this.MiUpgrade_Click);
             // 
             // SignIn
             // 
@@ -165,6 +181,8 @@
         private System.Windows.Forms.ToolStripMenuItem MiOfSignUp;
         private System.Windows.Forms.ToolStripMenuItem MiPcSignUp;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem MiUpgrade;
+        private System.Windows.Forms.ToolStripMenuItem MiFind;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem 升级UToolStripMenuItem;
     }
 }

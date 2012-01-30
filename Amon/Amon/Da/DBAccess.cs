@@ -109,7 +109,7 @@ namespace Me.Amon.Da
                     sql.Append(IDat.C2010107).Append(" VARCHAR(").Append(IDat.C2010107_SIZE).Append("),");
                     sql.Append(IDat.C2010108).Append(" DATETIME,");
                     sql.Append(IDat.C2010109).Append(" DATETIME,");
-                    sql.Append("PRIMARY KEY (").Append(IDat.C2010102).Append(")");
+                    sql.Append("PRIMARY KEY (").Append(IDat.C2010103).Append(")");
                     sql.Append(")");
                     mycommand.CommandText = sql.ToString();
                     mycommand.ExecuteNonQuery();
@@ -140,7 +140,7 @@ namespace Me.Amon.Da
                     sql.Append(IDat.APWD0002).Append(" VARCHAR(").Append(IDat.APWD0002_SIZE).Append("),");
                     sql.Append(IDat.APWD0003).Append(" VARCHAR(").Append(IDat.APWD0003_SIZE).Append("),");
                     sql.Append(IDat.APWD0004).Append(" DATETIME,");
-                    sql.Append("PRIMARY KEY (").Append(IDat.APWD0001).Append(",").Append(IDat.APWD0001).Append(")");
+                    sql.Append("PRIMARY KEY (").Append(IDat.APWD0001).Append(",").Append(IDat.APWD0002).Append(")");
                     sql.Append(")");
                     mycommand.CommandText = sql.ToString();
                     mycommand.ExecuteNonQuery();
@@ -194,8 +194,8 @@ namespace Me.Amon.Da
                     sql.Append(IDat.APWD0306).Append(" VARCHAR(").Append(IDat.APWD0306_SIZE).Append("),");
                     sql.Append(IDat.APWD0307).Append(" VARCHAR(").Append(IDat.APWD0307_SIZE).Append("),");
                     sql.Append(IDat.APWD0308).Append(" VARCHAR(").Append(IDat.APWD0308_SIZE).Append("),");
-                    sql.Append(IDat.APWD0309).Append(" DATEIME,");
-                    sql.Append(IDat.APWD030A).Append(" DATEIME,");
+                    sql.Append(IDat.APWD0309).Append(" DATETIME,");
+                    sql.Append(IDat.APWD030A).Append(" DATETIME,");
                     sql.Append(IDat.APWD030B).Append(" INT,");
                     sql.Append(IDat.APWD030C).Append(" INT,");
                     sql.Append("PRIMARY KEY (").Append(IDat.APWD0303).Append(",").Append(IDat.APWD0304).Append(")");
@@ -230,7 +230,7 @@ namespace Me.Amon.Da
                     sql.Append(IDat.AICO0107).Append(" VARCHAR(").Append(IDat.AICO0107_SIZE).Append("),");
                     sql.Append(IDat.AICO0108).Append(" INT,");
                     sql.Append(IDat.AICO0109).Append(" INT,");
-                    sql.Append("PRIMARY KEY (").Append(IDat.AICO0103).Append(",").Append(IDat.AICO0103).Append(")");
+                    sql.Append("PRIMARY KEY (").Append(IDat.AICO0102).Append(",").Append(IDat.AICO0103).Append(")");
                     sql.Append(")");
                     mycommand.CommandText = sql.ToString();
                     mycommand.ExecuteNonQuery();

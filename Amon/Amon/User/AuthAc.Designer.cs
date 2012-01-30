@@ -92,6 +92,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AuthAc";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "AuthAc";
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).EndInit();

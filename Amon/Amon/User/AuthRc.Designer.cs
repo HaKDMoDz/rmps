@@ -33,6 +33,7 @@
             this.LbPass = new System.Windows.Forms.Label();
             this.TbPass = new System.Windows.Forms.TextBox();
             this.BtOk = new System.Windows.Forms.Button();
+            this.LbInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,12 +73,21 @@
             this.BtOk.UseVisualStyleBackColor = true;
             this.BtOk.Click += new System.EventHandler(this.BtOk_Click);
             // 
+            // LbInfo
+            // 
+            this.LbInfo.AutoSize = true;
+            this.LbInfo.Location = new System.Drawing.Point(12, 102);
+            this.LbInfo.Name = "LbInfo";
+            this.LbInfo.Size = new System.Drawing.Size(0, 12);
+            this.LbInfo.TabIndex = 4;
+            // 
             // AuthRc
             // 
             this.AcceptButton = this.BtOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(250, 132);
+            this.Controls.Add(this.LbInfo);
             this.Controls.Add(this.BtOk);
             this.Controls.Add(this.TbPass);
             this.Controls.Add(this.LbPass);
@@ -87,8 +97,10 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AuthRc";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "AuthRc";
+            this.Text = "解锁";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AuthRc_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -101,5 +113,6 @@
         private System.Windows.Forms.Label LbPass;
         private System.Windows.Forms.TextBox TbPass;
         private System.Windows.Forms.Button BtOk;
+        private System.Windows.Forms.Label LbInfo;
     }
 }

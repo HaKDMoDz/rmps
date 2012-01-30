@@ -137,6 +137,12 @@ namespace Me.Amon.Uc
             }
         }
 
+        public void Clear()
+        {
+            keys.Clear();
+            dict.Clear();
+        }
+
         /// <summary>
         /// 导入文件
         /// </summary>

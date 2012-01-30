@@ -68,9 +68,9 @@
             // 
             this.TbPass1.Location = new System.Drawing.Point(80, 30);
             this.TbPass1.Name = "TbPass1";
-            this.TbPass1.PasswordChar = '*';
             this.TbPass1.Size = new System.Drawing.Size(100, 21);
             this.TbPass1.TabIndex = 3;
+            this.TbPass1.UseSystemPasswordChar = true;
             // 
             // LbPass2
             // 
@@ -85,9 +85,9 @@
             // 
             this.TbPass2.Location = new System.Drawing.Point(80, 57);
             this.TbPass2.Name = "TbPass2";
-            this.TbPass2.PasswordChar = '*';
             this.TbPass2.Size = new System.Drawing.Size(100, 21);
             this.TbPass2.TabIndex = 5;
+            this.TbPass2.UseSystemPasswordChar = true;
             // 
             // LbPath
             // 

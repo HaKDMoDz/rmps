@@ -157,12 +157,12 @@ namespace Me.Amon.Ce
         public int DoFinal(byte[] output, int offset2)
         {
             int index = offset2;
-            if (_BitLeft > 0)
+            if (_BitLeft > 0 && _PrevDat > 0)
             {
                 output[index++] = (byte)(_PrevDat & 0xFF);
-                _PrevDat = 0;
-                _BitLeft = 0;
             }
+            _PrevDat = 0;
+            _BitLeft = 0;
             return index - offset2;
         }
 
@@ -188,12 +188,12 @@ namespace Me.Amon.Ce
                 offset1 += 1;
             }
 
-            if (_BitLeft > 0)
+            if (_BitLeft > 0 && _PrevDat > 0)
             {
                 output[index++] = (byte)(_PrevDat & 0xFF);
-                _PrevDat = 0;
-                _BitLeft = 0;
             }
+            _PrevDat = 0;
+            _BitLeft = 0;
 
             return index - offset2;
         }

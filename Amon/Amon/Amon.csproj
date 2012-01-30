@@ -538,11 +538,11 @@
     <Compile Include="User\AuthRc.Designer.cs">
       <DependentUpon>AuthRc.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\Auth\AuthFk.cs">
+    <Compile Include="User\Sign\SignFk.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="User\Auth\AuthFk.Designer.cs">
-      <DependentUpon>AuthFk.cs</DependentUpon>
+    <Compile Include="User\Sign\SignFk.Designer.cs">
+      <DependentUpon>SignFk.cs</DependentUpon>
     </Compile>
     <Compile Include="User\Auth\AuthPk.cs">
       <SubType>UserControl</SubType>
@@ -578,11 +578,11 @@
     <Compile Include="User\Sign\SignIn.Designer.cs">
       <DependentUpon>SignIn.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\Sign\SignPc.cs">
+    <Compile Include="User\Sign\SignUl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="User\Sign\SignPc.Designer.cs">
-      <DependentUpon>SignPc.cs</DependentUpon>
+    <Compile Include="User\Sign\SignUl.Designer.cs">
+      <DependentUpon>SignUl.cs</DependentUpon>
     </Compile>
     <Compile Include="User\Sign\SignUp.cs">
       <SubType>UserControl</SubType>
@@ -806,17 +806,23 @@
     <EmbeddedResource Include="User\AuthRc.resx">
       <DependentUpon>AuthRc.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="User\Auth\AuthPk.resx">
+      <DependentUpon>AuthPk.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="User\SignAc.resx">
       <DependentUpon>SignAc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\SignRc.resx">
       <DependentUpon>SignRc.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="User\Sign\SignFk.resx">
+      <DependentUpon>SignFk.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="User\Sign\SignIn.resx">
       <DependentUpon>SignIn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\Sign\SignPc.resx">
-      <DependentUpon>SignPc.cs</DependentUpon>
+    <EmbeddedResource Include="User\Sign\SignUl.resx">
+      <DependentUpon>SignUl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\Sign\SignUp.resx">
       <DependentUpon>SignUp.cs</DependentUpon>

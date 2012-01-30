@@ -497,7 +497,7 @@
             // 
             this.TmiViewPro.Name = "TmiViewPro";
             this.TmiViewPro.Size = new System.Drawing.Size(169, 22);
-            this.TmiViewPro.Text = "记事模式(&3)";
+            this.TmiViewPro.Text = "专业模式(&1)";
             this.TmiViewPro.Click += new System.EventHandler(this.TmiViewPro_Click);
             // 
             // TmiViewWiz
@@ -511,7 +511,8 @@
             // 
             this.TmiViewPad.Name = "TmiViewPad";
             this.TmiViewPad.Size = new System.Drawing.Size(169, 22);
-            this.TmiViewPad.Text = "专业模式(&1)";
+            this.TmiViewPad.Text = "记事模式(&3)";
+            this.TmiViewPad.Visible = false;
             this.TmiViewPad.Click += new System.EventHandler(this.TmiViewPad_Click);
             // 
             // TmiViewSep0

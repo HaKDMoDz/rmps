@@ -38,6 +38,8 @@ namespace Me.Amon.User.Sign
             _UserModel = userModel;
 
             InitializeComponent();
+
+            TbPath.Text = IEnv.DATA_DIR + Path.DirectorySeparatorChar;
         }
 
         #region 接口实现
@@ -48,9 +50,8 @@ namespace Me.Amon.User.Sign
 
         public void DoSignAc()
         {
-            _Name = TbName.Text;
-
             #region 用户判断
+            _Name = TbName.Text;
             if (string.IsNullOrEmpty(_Name))
             {
                 _SignAc.ShowAlert("请输入用户名！");
@@ -74,8 +75,8 @@ namespace Me.Amon.User.Sign
 
             _Name = _Name.ToLower();
             _Prop = new Uc.Properties();
-            _Prop.Load(IEnv.AMON_CFG);
-            string home = _Prop.Get(string.Format("amon.{0}.home", _Name));
+            _Prop.Load(IEnv.AMON_SYS);
+            string home = _Prop.Get(string.Format(IEnv.AMON_SYS_HOME, _Name));
             if (!string.IsNullOrEmpty(home))
             {
                 _SignAc.ShowAlert(string.Format("已存在名为 {0} 的用户，请尝试其它用户名！", _Name));
@@ -138,7 +139,7 @@ namespace Me.Amon.User.Sign
             #endregion
 
             // 在线注册
-            if (IsOnLine)
+            if (!IsPcMode)
             {
                 WebClient client = new WebClient();
                 client.Headers["Content-type"] = "application/x-www-form-urlencoded";
@@ -155,6 +156,10 @@ namespace Me.Amon.User.Sign
                 return;
             }
 
+            _Prop.Set(string.Format(IEnv.AMON_SYS_CODE, _Name), _UserModel.Code);
+            _Prop.Set(string.Format(IEnv.AMON_SYS_HOME, _Name), _Root + _UserModel.Code + Path.DirectorySeparatorChar);
+            _Prop.Save(IEnv.AMON_SYS);
+
             _SignAc.CallBack(0);
         }
 
@@ -162,13 +167,47 @@ namespace Me.Amon.User.Sign
         {
             _SignAc.ShowView(ESignAc.SignIn);
         }
+
+        public void ShowMenu(Control control, int x, int y)
+        {
+        }
         #endregion
 
-        public bool IsOnLine { get; set; }
+        public bool IsPcMode { get; set; }
 
         private void BtPath_Click(object sender, EventArgs e)
         {
-
+            FolderBrowserDialog fd = new FolderBrowserDialog();
+            fd.SelectedPath = TbPath.Text;
+            if (DialogResult.OK != fd.ShowDialog())
+            {
+                return;
+            }
+            string path = fd.SelectedPath;
+            if (string.IsNullOrEmpty(path))
+            {
+                _SignAc.ShowAlert("请选择数据存放目录！");
+                BtPath.Focus();
+                return;
+            }
+            if (!Directory.Exists(path))
+            {
+                try
+                {
+                    Directory.CreateDirectory(path);
+                }
+                catch (Exception exp)
+                {
+                    _SignAc.ShowAlert(exp.Message);
+                    BtPath.Focus();
+                    return;
+                }
+            }
+            if (path[path.Length - 1] != Path.DirectorySeparatorChar)
+            {
+                path += Path.DirectorySeparatorChar;
+            }
+            TbPath.Text = path;
         }
 
         #region 私有函数
@@ -253,7 +292,7 @@ namespace Me.Amon.User.Sign
                 view = reader.ReadElementContentAsInt();
             }
 
-            _UserModel.SignNw(_Root, code, info, data);
+            _UserModel.SignNw(_Root, code, _Name, info, data);
             _Pass = null;
 
             _SignAc.CallBack(view);

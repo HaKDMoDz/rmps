@@ -122,7 +122,7 @@ namespace Me.Amon.Pwd.Wiz
             {
                 name = HashUtil.UtcTimeInHex(true);
             }
-            string dstFile = _DataModel.AsfDir + name + ".asf";
+            string dstFile = _DataModel.AcfDir + name + IEnv.FILE_ACF;
 
             FileInfo info = new FileInfo(srcFile);
             _Att.SetSpec(FileAtt.SPEC_FILE_NAME, name);
@@ -139,14 +139,14 @@ namespace Me.Amon.Pwd.Wiz
         #endregion
 
         #region 菜单事件
-        private void MiSysViewer_Click(object sender, EventArgs e)
-        {
-            ViewFile(false);
-        }
-
         private void MiPwdViewer_Click(object sender, EventArgs e)
         {
             ViewFile(true);
+        }
+
+        private void MiSysViewer_Click(object sender, EventArgs e)
+        {
+            ViewFile(false);
         }
         #endregion
         #endregion
@@ -154,7 +154,7 @@ namespace Me.Amon.Pwd.Wiz
         #region 私有函数
         private void ViewFile(bool inner)
         {
-            string srcFile = _DataModel.AsfDir + _Att.GetSpec(FileAtt.SPEC_FILE_NAME) + ".asf";
+            string srcFile = _DataModel.AcfDir + _Att.GetSpec(FileAtt.SPEC_FILE_NAME) + IEnv.FILE_ACF;
             if (!File.Exists(srcFile))
             {
                 MessageBox.Show("系统错误，找不到来源文件！");

@@ -92,6 +92,7 @@ namespace Me.Amon.Uw
 
         private void BtEraser_Click(object sender, EventArgs e)
         {
+            ReDraw();
         }
         #endregion
 

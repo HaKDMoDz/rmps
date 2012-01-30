@@ -18,6 +18,7 @@ using Me.Amon.Pwd.Pro;
 using Me.Amon.Pwd.Wiz;
 using Me.Amon.Uc;
 using Me.Amon.Util;
+using Me.Amon.User;
 
 namespace Me.Amon.Pwd
 {
@@ -590,7 +591,7 @@ namespace Me.Amon.Pwd
 
         private void TmiLockWin_Click(object sender, EventArgs e)
         {
-
+            new AuthRc(_UserModel, this).ShowDialog(this);
         }
 
         private void TmiExitApp_Click(object sender, EventArgs e)

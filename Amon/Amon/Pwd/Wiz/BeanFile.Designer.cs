@@ -75,8 +75,8 @@
             // CmMenu
             // 
             this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MiSysViewer,
-            this.MiPwdViewer});
+            this.MiPwdViewer,
+            this.MiSysViewer});
             this.CmMenu.Name = "CmMenu";
             this.CmMenu.Size = new System.Drawing.Size(153, 70);
             // 

@@ -11,5 +11,7 @@ namespace Me.Amon.User.Sign
         void DoSignAc();
 
         void DoCancel();
+
+        void ShowMenu(Control control, int x, int y);
     }
 }
