@@ -19,7 +19,7 @@
         /// 服务器路径
         /// </summary>
         /// public const string SERVER_PATH = "http://mpwd.sinaapp.com/s.php";
-        public const string SERVER_PATH = "http://localhost:65169/s.ashx";
+        public const string SERVER_PATH = "http://localhost:50429/Web/s.ashx";
         /// <summary>
         /// 服务器类型
         /// </summary>

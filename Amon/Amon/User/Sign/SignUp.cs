@@ -21,6 +21,7 @@ namespace Me.Amon.User.Sign
     public partial class SignUp : UserControl, ISignAc
     {
         private string _Name;
+        private string _Mail;
         private string _Pass;
         private string _Root;
         private UserModel _UserModel;
@@ -84,6 +85,10 @@ namespace Me.Amon.User.Sign
             }
             #endregion
 
+            #region 用户邮件
+            _Mail = "a@b.c";
+            #endregion
+
             #region 口令判断
             _Pass = TbPass1.Text;
             TbPass1.Text = "";
@@ -144,7 +149,7 @@ namespace Me.Amon.User.Sign
                 WebClient client = new WebClient();
                 client.Headers["Content-type"] = "application/x-www-form-urlencoded";
                 client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignUpV_UploadStringCompleted);
-                client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=sup&m=1");
+                client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=rsa&m=0");
                 return;
             }
 
@@ -221,7 +226,7 @@ namespace Me.Amon.User.Sign
 
             string xml = e.Result;
             string t = null;
-            string k = null;
+            string d = null;
             using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
             {
                 if (xml.IndexOf("<error>") > 0)
@@ -238,17 +243,17 @@ namespace Me.Amon.User.Sign
 
                 if (reader.Name == "k" || reader.ReadToFollowing("k"))
                 {
-                    k = reader.ReadElementContentAsString();
+                    d = reader.ReadElementContentAsString();
                 }
             }
 
             switch (IEnv.SERVER_TYPE)
             {
                 case "NET":
-                    k = Net(k);
+                    d = Net(d);
                     break;
                 case "PHP":
-                    k = Php(k);
+                    d = Php(d);
                     break;
                 default:
                     break;
@@ -257,7 +262,7 @@ namespace Me.Amon.User.Sign
             WebClient client = new WebClient();
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignUpS_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=sup&m=2&t=" + t + "&n=" + _Name + "&k=" + k);
+            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=sup&m=" + t + "&d=" + d);
         }
 
         private void SignUpS_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -272,7 +277,6 @@ namespace Me.Amon.User.Sign
             string code;
             string info;
             string data;
-            int view = IEnv.IAPP_NONE;
             using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
             {
                 if (xml.IndexOf("<error>") > 0)
@@ -282,20 +286,22 @@ namespace Me.Amon.User.Sign
                     return;
                 }
 
-                reader.ReadToFollowing("code");
+                if (!reader.ReadToFollowing("code"))
+                {
+                    _SignAc.ShowAlert("服务器返回异常，请稍后再试！");
+                    return;
+                }
                 code = reader.ReadElementContentAsString();
 
                 info = reader.ReadElementContentAsString();
 
                 data = reader.ReadElementContentAsString();
-
-                view = reader.ReadElementContentAsInt();
             }
 
             _UserModel.SignNw(_Root, code, _Name, info, data);
             _Pass = null;
 
-            _SignAc.CallBack(view);
+            _SignAc.CallBack(0);
         }
 
         private string Net(string t)
@@ -303,7 +309,7 @@ namespace Me.Amon.User.Sign
             RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
             rsa.FromXmlString(t);
 
-            byte[] b = Encoding.UTF8.GetBytes(_Pass);
+            byte[] b = Encoding.UTF8.GetBytes(_Name + '\n' + _Mail + '\n' + _Pass);
             b = rsa.Encrypt(b, false);
             return HttpUtil.ToBase64String(b);
         }

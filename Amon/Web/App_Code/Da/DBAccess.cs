@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
-using System.IO;
 using System.Text;
 using Me.Amon.Model;
 using Me.Amon.Util;
@@ -54,7 +52,6 @@ namespace Me.Amon.Da
         private int _MinLimit;
         private int _MaxLimit;
 
-
         public DBAccess()
         {
             // 参数列表
@@ -72,289 +69,9 @@ namespace Me.Amon.Da
             // 排序依据缓冲
             _OrderList = new StringBuilder();
             _BatchList = new List<string>();
-        }
 
-        public void Init(UserModel userModel)
-        {
-            string path = string.Format("dat\\{0}\\", userModel.Code);
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            path += "amon.db3";
-            bool isNew = !File.Exists(path);
-            _Connection = new SQLiteConnection("Data Source=dat\\" + userModel.Code + "\\amon.db3;Version=3;");
+            _Connection = new SQLiteConnection("Data Source=D:\\amon.db3;Version=3;");
             _Connection.Open();
-
-            if (isNew)
-            {
-                DbInit();
-            }
-        }
-
-        private void DbInit()
-        {
-            using (SQLiteTransaction mytransaction = _Connection.BeginTransaction())
-            {
-                using (SQLiteCommand mycommand = new SQLiteCommand(_Connection))
-                {
-                    StringBuilder sql = new StringBuilder();
-                    sql.Append("CREATE TABLE ").Append(IDat.ACAT0100).Append("(");
-                    sql.Append(IDat.ACAT0101).Append(" INT,");
-                    sql.Append(IDat.ACAT0102).Append(" VARCHAR(").Append(IDat.ACAT0102_SIZE).Append("),");
-                    sql.Append(IDat.ACAT0103).Append(" VARCHAR(").Append(IDat.ACAT0103_SIZE).Append("),");
-                    sql.Append(IDat.ACAT0104).Append(" VARCHAR(").Append(IDat.ACAT0104_SIZE).Append("),");
-                    sql.Append(IDat.ACAT0105).Append(" VARCHAR(").Append(IDat.ACAT0105_SIZE).Append("),");
-                    sql.Append(IDat.ACAT0106).Append(" VARCHAR(").Append(IDat.ACAT0106_SIZE).Append("),");
-                    sql.Append(IDat.ACAT0107).Append(" VARCHAR(").Append(IDat.ACAT0107_SIZE).Append("),");
-                    sql.Append(IDat.ACAT0108).Append(" DATETIME,");
-                    sql.Append(IDat.ACAT0109).Append(" DATETIME,");
-                    sql.Append("PRIMARY KEY (").Append(IDat.ACAT0103).Append(")");
-                    sql.Append(")");
-                    mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
-                    mycommand.ExecuteNonQuery();
-
-                    sql.Clear();
-                    sql.Append("CREATE TABLE ").Append(IDat.ACAT0200).Append("(");
-                    sql.Append(IDat.ACAT0201).Append(" INT,");
-                    sql.Append(IDat.ACAT0202).Append(" VARCHAR(").Append(IDat.ACAT0202_SIZE).Append("),");
-                    sql.Append(IDat.ACAT0203).Append(" VARCHAR(").Append(IDat.ACAT0203_SIZE).Append("),");
-                    sql.Append(IDat.ACAT0204).Append(" VARCHAR(").Append(IDat.ACAT0204_SIZE).Append("),");
-                    sql.Append(IDat.ACAT0205).Append(" VARCHAR(").Append(IDat.ACAT0205_SIZE).Append("),");
-                    sql.Append(IDat.ACAT0206).Append(" VARCHAR(").Append(IDat.ACAT0206_SIZE).Append("),");
-                    sql.Append(IDat.ACAT0207).Append(" VARCHAR(").Append(IDat.ACAT0207_SIZE).Append("),");
-                    sql.Append(IDat.ACAT0208).Append(" VARCHAR(").Append(IDat.ACAT0208_SIZE).Append("),");
-                    sql.Append(IDat.ACAT0209).Append(" VARCHAR(").Append(IDat.ACAT0209_SIZE).Append("),");
-                    sql.Append(IDat.ACAT020A).Append(" DATETIME,");
-                    sql.Append(IDat.ACAT020B).Append(" DATETIME,");
-                    sql.Append(IDat.ACAT020C).Append(" INT,");
-                    sql.Append(IDat.ACAT020D).Append(" INT,");
-                    sql.Append("PRIMARY KEY (").Append(IDat.ACAT0202).Append(",").Append(IDat.ACAT0203).Append(")");
-                    sql.Append(")");
-                    mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
-                    mycommand.ExecuteNonQuery();
-
-                    sql.Clear();
-                    sql.Append("CREATE TABLE ").Append(IDat.APWD0000).Append("(");
-                    sql.Append(IDat.APWD0001).Append(" VARCHAR(").Append(IDat.APWD0001_SIZE).Append("),");
-                    sql.Append(IDat.APWD0002).Append(" VARCHAR(").Append(IDat.APWD0002_SIZE).Append("),");
-                    sql.Append(IDat.APWD0003).Append(" VARCHAR(").Append(IDat.APWD0003_SIZE).Append("),");
-                    sql.Append(IDat.APWD0004).Append(" DATETIME,");
-                    sql.Append("PRIMARY KEY (").Append(IDat.APWD0001).Append(",").Append(IDat.APWD0002).Append(")");
-                    sql.Append(")");
-                    mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
-                    mycommand.ExecuteNonQuery();
-
-                    sql.Clear();
-                    sql.Append("CREATE TABLE ").Append(IDat.APWD0100).Append("(");
-                    sql.Append(IDat.APWD0101).Append(" INT,");
-                    sql.Append(IDat.APWD0102).Append(" INT,");
-                    sql.Append(IDat.APWD0103).Append(" INT,");
-                    sql.Append(IDat.APWD0104).Append(" VARCHAR(").Append(IDat.APWD0104_SIZE).Append("),");
-                    sql.Append(IDat.APWD0105).Append(" VARCHAR(").Append(IDat.APWD0105_SIZE).Append("),");
-                    sql.Append(IDat.APWD0106).Append(" VARCHAR(").Append(IDat.APWD0106_SIZE).Append("),");
-                    sql.Append(IDat.APWD0107).Append(" VARCHAR(").Append(IDat.APWD0107_SIZE).Append("),");
-                    sql.Append(IDat.APWD0108).Append(" VARCHAR(").Append(IDat.APWD0108_SIZE).Append("),");
-                    sql.Append(IDat.APWD0109).Append(" VARCHAR(").Append(IDat.APWD0109_SIZE).Append("),");
-                    sql.Append(IDat.APWD010A).Append(" VARCHAR(").Append(IDat.APWD010A_SIZE).Append("),");
-                    sql.Append(IDat.APWD010B).Append(" VARCHAR(").Append(IDat.APWD010B_SIZE).Append("),");
-                    sql.Append(IDat.APWD010C).Append(" VARCHAR(").Append(IDat.APWD010C_SIZE).Append("),");
-                    sql.Append(IDat.APWD010D).Append(" VARCHAR(").Append(IDat.APWD010D_SIZE).Append("),");
-                    sql.Append(IDat.APWD010E).Append(" VARCHAR(").Append(IDat.APWD010E_SIZE).Append("),");
-                    sql.Append(IDat.APWD010F).Append(" VARCHAR(").Append(IDat.APWD010F_SIZE).Append("),");
-                    sql.Append(IDat.APWD0110).Append(" VARCHAR(").Append(IDat.APWD0110_SIZE).Append("),");
-                    sql.Append(IDat.APWD0111).Append(" VARCHAR(").Append(IDat.APWD0111_SIZE).Append("),");
-                    sql.Append(IDat.APWD0112).Append(" CHAR(1),");
-                    sql.Append(IDat.APWD0113).Append(" INT,");
-                    sql.Append(IDat.APWD0114).Append(" INT,");
-                    sql.Append(IDat.APWD0115).Append(" INT,");
-                    sql.Append("PRIMARY KEY (").Append(IDat.APWD0104).Append(",").Append(IDat.APWD0105).Append(")");
-                    sql.Append(")");
-                    mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
-                    mycommand.ExecuteNonQuery();
-
-                    sql.Clear();
-                    sql.Append("CREATE TABLE ").Append(IDat.APWD0200).Append("(");
-                    sql.Append(IDat.APWD0201).Append(" INT,");
-                    sql.Append(IDat.APWD0202).Append(" VARCHAR(").Append(IDat.APWD0202_SIZE).Append("),");
-                    sql.Append(IDat.APWD0203).Append(" VARCHAR(").Append(IDat.APWD0203_SIZE).Append("),");
-                    sql.Append(IDat.APWD0204).Append(" VARCHAR(").Append(IDat.APWD0204_SIZE).Append("),");
-                    sql.Append("PRIMARY KEY (").Append(IDat.APWD0201).Append(",").Append(IDat.APWD0202).Append(",").Append(IDat.APWD0203).Append(")");
-                    sql.Append(")");
-                    mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
-                    mycommand.ExecuteNonQuery();
-
-                    sql.Clear();
-                    sql.Append("CREATE TABLE ").Append(IDat.APWD0300).Append("(");
-                    sql.Append(IDat.APWD0301).Append(" INT,");
-                    sql.Append(IDat.APWD0302).Append(" INT,");
-                    sql.Append(IDat.APWD0303).Append(" VARCHAR(").Append(IDat.APWD0303_SIZE).Append("),");
-                    sql.Append(IDat.APWD0304).Append(" VARCHAR(").Append(IDat.APWD0304_SIZE).Append("),");
-                    sql.Append(IDat.APWD0305).Append(" VARCHAR(").Append(IDat.APWD0305_SIZE).Append("),");
-                    sql.Append(IDat.APWD0306).Append(" VARCHAR(").Append(IDat.APWD0306_SIZE).Append("),");
-                    sql.Append(IDat.APWD0307).Append(" VARCHAR(").Append(IDat.APWD0307_SIZE).Append("),");
-                    sql.Append(IDat.APWD0308).Append(" VARCHAR(").Append(IDat.APWD0308_SIZE).Append("),");
-                    sql.Append(IDat.APWD0309).Append(" DATETIME,");
-                    sql.Append(IDat.APWD030A).Append(" DATETIME,");
-                    sql.Append(IDat.APWD030B).Append(" INT,");
-                    sql.Append(IDat.APWD030C).Append(" INT,");
-                    sql.Append("PRIMARY KEY (").Append(IDat.APWD0303).Append(",").Append(IDat.APWD0304).Append(")");
-                    sql.Append(")");
-                    mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
-                    mycommand.ExecuteNonQuery();
-
-                    sql.Clear();
-                    sql.Append("CREATE TABLE ").Append(IDat.APWD0400).Append("(");
-                    sql.Append(IDat.APWD0401).Append(" INT,");
-                    sql.Append(IDat.APWD0402).Append(" VARCHAR(").Append(IDat.APWD0402_SIZE).Append("),");
-                    sql.Append(IDat.APWD0403).Append(" VARCHAR(").Append(IDat.APWD0403_SIZE).Append("),");
-                    sql.Append(IDat.APWD0404).Append(" VARCHAR(").Append(IDat.APWD0404_SIZE).Append("),");
-                    sql.Append(IDat.APWD0405).Append(" VARCHAR(").Append(IDat.APWD0405_SIZE).Append("),");
-                    sql.Append(IDat.APWD0406).Append(" VARCHAR(").Append(IDat.APWD0406_SIZE).Append("),");
-                    sql.Append(IDat.APWD0407).Append(" VARCHAR(").Append(IDat.APWD0407_SIZE).Append("),");
-                    sql.Append(IDat.APWD0408).Append(" INT,");
-                    sql.Append(IDat.APWD0409).Append(" INT,");
-                    sql.Append("PRIMARY KEY (").Append(IDat.APWD0402).Append(",").Append(IDat.APWD0403).Append(")");
-                    sql.Append(")");
-                    mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
-                    mycommand.ExecuteNonQuery();
-
-                    sql.Clear();
-                    sql.Append("CREATE TABLE ").Append(IDat.AICO0100).Append("(");
-                    sql.Append(IDat.AICO0101).Append(" INT,");
-                    sql.Append(IDat.AICO0102).Append(" VARCHAR(").Append(IDat.AICO0102_SIZE).Append("),");
-                    sql.Append(IDat.AICO0103).Append(" VARCHAR(").Append(IDat.AICO0103_SIZE).Append("),");
-                    sql.Append(IDat.AICO0104).Append(" VARCHAR(").Append(IDat.AICO0104_SIZE).Append("),");
-                    sql.Append(IDat.AICO0105).Append(" VARCHAR(").Append(IDat.AICO0105_SIZE).Append("),");
-                    sql.Append(IDat.AICO0106).Append(" VARCHAR(").Append(IDat.AICO0106_SIZE).Append("),");
-                    sql.Append(IDat.AICO0107).Append(" VARCHAR(").Append(IDat.AICO0107_SIZE).Append("),");
-                    sql.Append(IDat.AICO0108).Append(" INT,");
-                    sql.Append(IDat.AICO0109).Append(" INT,");
-                    sql.Append("PRIMARY KEY (").Append(IDat.AICO0102).Append(",").Append(IDat.AICO0103).Append(")");
-                    sql.Append(")");
-                    mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
-                    mycommand.ExecuteNonQuery();
-
-                    sql.Clear();
-                    sql.Append("CREATE TABLE ").Append(IDat.AUCS0100).Append("(");
-                    sql.Append(IDat.AUCS0101).Append(" INT,");
-                    sql.Append(IDat.AUCS0102).Append(" VARCHAR(").Append(IDat.AUCS0102_SIZE).Append("),");
-                    sql.Append(IDat.AUCS0103).Append(" VARCHAR(").Append(IDat.AUCS0103_SIZE).Append("),");
-                    sql.Append(IDat.AUCS0104).Append(" VARCHAR(").Append(IDat.AUCS0104_SIZE).Append("),");
-                    sql.Append(IDat.AUCS0105).Append(" VARCHAR(").Append(IDat.AUCS0105_SIZE).Append("),");
-                    sql.Append(IDat.AUCS0106).Append(" VARCHAR(").Append(IDat.AUCS0106_SIZE).Append("),");
-                    sql.Append(IDat.AUCS0107).Append(" VARCHAR(").Append(IDat.AUCS0107_SIZE).Append("),");
-                    sql.Append(IDat.AUCS0108).Append(" DATETIME,");
-                    sql.Append(IDat.AUCS0109).Append(" DATETIME,");
-                    sql.Append(IDat.AUCS010A).Append(" INT,");
-                    sql.Append(IDat.AUCS010B).Append(" INT,");
-                    sql.Append("PRIMARY KEY (").Append(IDat.AUCS0103).Append(")");
-                    sql.Append(")");
-                    mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
-                    mycommand.ExecuteNonQuery();
-
-                    sql.Clear();
-                    sql.Append("CREATE TABLE ").Append(IDat.APWD0A00).Append("(");
-                    sql.Append(IDat.APWD0A01).Append(" VARCHAR(").Append(IDat.APWD0A01_SIZE).Append("),");
-                    sql.Append(IDat.APWD0A02).Append(" INT,");
-                    sql.Append(IDat.APWD0A03).Append(" INT,");
-                    sql.Append(IDat.APWD0A04).Append(" VARCHAR(").Append(IDat.APWD0A04_SIZE).Append("),");
-                    sql.Append(IDat.APWD0A05).Append(" VARCHAR(").Append(IDat.APWD0A05_SIZE).Append("),");
-                    sql.Append(IDat.APWD0A06).Append(" VARCHAR(").Append(IDat.APWD0A06_SIZE).Append("),");
-                    sql.Append(IDat.APWD0A07).Append(" VARCHAR(").Append(IDat.APWD0A07_SIZE).Append("),");
-                    sql.Append(IDat.APWD0A08).Append(" VARCHAR(").Append(IDat.APWD0A08_SIZE).Append("),");
-                    sql.Append(IDat.APWD0A09).Append(" VARCHAR(").Append(IDat.APWD0A09_SIZE).Append("),");
-                    sql.Append(IDat.APWD0A0A).Append(" VARCHAR(").Append(IDat.APWD0A0A_SIZE).Append("),");
-                    sql.Append(IDat.APWD0A0B).Append(" VARCHAR(").Append(IDat.APWD0A0B_SIZE).Append("),");
-                    sql.Append(IDat.APWD0A0C).Append(" VARCHAR(").Append(IDat.APWD0A0C_SIZE).Append("),");
-                    sql.Append(IDat.APWD0A0D).Append(" VARCHAR(").Append(IDat.APWD0A0D_SIZE).Append("),");
-                    sql.Append(IDat.APWD0A0E).Append(" VARCHAR(").Append(IDat.APWD0A0E_SIZE).Append("),");
-                    sql.Append(IDat.APWD0A0F).Append(" VARCHAR(").Append(IDat.APWD0A0F_SIZE).Append("),");
-                    sql.Append(IDat.APWD0A10).Append(" VARCHAR(").Append(IDat.APWD0A10_SIZE).Append("),");
-                    sql.Append(IDat.APWD0A11).Append(" VARCHAR(").Append(IDat.APWD0A11_SIZE).Append("),");
-                    sql.Append(IDat.APWD0A12).Append(" CHAR(1),");
-                    sql.Append(IDat.APWD0A13).Append(" INT,");
-                    sql.Append("PRIMARY KEY (").Append(IDat.APWD0A01).Append(")");
-                    sql.Append(")");
-                    mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
-                    mycommand.ExecuteNonQuery();
-
-                    sql.Clear();
-                    sql.Append("CREATE TABLE ").Append(IDat.APWD0B00).Append("(");
-                    sql.Append(IDat.APWD0B01).Append(" INT,");
-                    sql.Append(IDat.APWD0B02).Append(" INT,");
-                    sql.Append(IDat.APWD0B03).Append(" VARCHAR(").Append(IDat.APWD0B03_SIZE).Append("),");
-                    sql.Append(IDat.APWD0B04).Append(" VARCHAR(").Append(IDat.APWD0B04_SIZE).Append("),");
-                    sql.Append(IDat.APWD0B05).Append(" VARCHAR(").Append(IDat.APWD0B05_SIZE).Append("),");
-                    sql.Append("PRIMARY KEY (").Append(IDat.APWD0B01).Append(",").Append(IDat.APWD0B02).Append(",").Append(IDat.APWD0B03).Append(")");
-                    sql.Append(")");
-                    mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
-                    mycommand.ExecuteNonQuery();
-
-                    //sql.Clear();
-                    //sql.Append("CREATE TABLE ").Append(IDat.AGTD0100).Append("(");
-                    //sql.Append(IDat.AGTD0101).Append(" INT,");
-                    //sql.Append(IDat.AGTD0102).Append(" INT,");
-                    //sql.Append(IDat.AGTD0103).Append(" INT,");
-                    //sql.Append(IDat.AGTD0104).Append(" INT,");
-                    //sql.Append(IDat.AGTD0105).Append(" INT,");
-                    //sql.Append(IDat.AGTD0106).Append(" INT,");
-                    //sql.Append(IDat.AGTD0107).Append(" INT,");
-                    //sql.Append(IDat.AGTD0108).Append(" INT,");
-                    //sql.Append(IDat.AGTD0109).Append(" VARCHAR(").Append(IDat.AGTD0109_SIZE).Append("),");
-                    //sql.Append(IDat.AGTD010A).Append(" VARCHAR(").Append(IDat.AGTD010A_SIZE).Append("),");
-                    //sql.Append(IDat.AGTD010B).Append(" VARCHAR(").Append(IDat.AGTD010B_SIZE).Append("),");
-                    //sql.Append(IDat.AGTD010C).Append(" VARCHAR(").Append(IDat.AGTD010C_SIZE).Append("),");
-                    //sql.Append(IDat.AGTD010D).Append(" INT,");
-                    //sql.Append(IDat.AGTD010E).Append(" INT,");
-                    //sql.Append(IDat.AGTD010F).Append(" INT,");
-                    //sql.Append(IDat.AGTD0110).Append(" VARCHAR(").Append(IDat.AGTD0110_SIZE).Append("),");
-                    //sql.Append(IDat.AGTD0111).Append(" VARCHAR(").Append(IDat.AGTD0111_SIZE).Append("),");
-                    //sql.Append(IDat.AGTD0112).Append(" INT,");
-                    //sql.Append(IDat.AGTD0113).Append(" INT,");
-                    //sql.Append(IDat.AGTD0114).Append(" VARCHAR(").Append(IDat.AGTD0114_SIZE).Append("),");
-                    //sql.Append("PRIMARY KEY (").Append(IDat.AGTD0109).Append(")");
-                    //sql.Append(")");
-                    //mycommand.CommandText = sql.ToString();
-                    //mycommand.ExecuteNonQuery();
-
-                    //sql.Clear();
-                    //sql.Append("CREATE TABLE ").Append(IDat.AGTD0200).Append("(");
-                    //sql.Append(IDat.AGTD0201).Append(" INT,");
-                    //sql.Append(IDat.AGTD0202).Append(" VARCHAR(").Append(IDat.AGTD0202_SIZE).Append("),");
-                    //sql.Append(IDat.AGTD0203).Append(" INT,");
-                    //sql.Append(IDat.AGTD0204).Append(" INT,");
-                    //sql.Append(IDat.AGTD0205).Append(" INT,");
-                    //sql.Append(IDat.AGTD0206).Append(" VARCHAR(").Append(IDat.AGTD0206_SIZE).Append("),");
-                    //sql.Append("PRIMARY KEY (").Append(IDat.AGTD0201).Append(",").Append(IDat.AGTD0202).Append(")");
-                    //sql.Append(")");
-                    //mycommand.CommandText = sql.ToString();
-                    //mycommand.ExecuteNonQuery();
-
-                    sql.Clear();
-                    sql.Append("INSERT INTO ").Append(IDat.APWD0000).Append("(");
-                    sql.Append(IDat.APWD0001).Append(",");
-                    sql.Append(IDat.APWD0002).Append(",");
-                    sql.Append(IDat.APWD0003).Append(",");
-                    sql.Append(IDat.APWD0004).Append(") VALUES (");
-                    sql.Append("'version','db','").Append(IDat.VER_DB).Append("',").Append(IDat.SQL_NOW).Append(")");
-                    mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
-                    mycommand.ExecuteNonQuery();
-                }
-                mytransaction.Commit();
-            }
         }
 
         /// <summary>
@@ -518,7 +235,7 @@ namespace Me.Amon.Da
         {
             _ParamList.Add(optCol);
             _SignList.Add("=");
-            _ValueList.Add(IDat.OPT_INSERT.ToString());
+            _ValueList.Add(Vcs.OPT_INSERT.ToString());
 
             _ParamList.Add(vcsCol);
             _SignList.Add("=");
@@ -527,14 +244,14 @@ namespace Me.Amon.Da
 
         public void AddVcs(string vcsCol, string optCol, int lastOpt, int nextOpt)
         {
-            if (lastOpt > IDat.OPT_INSERT || nextOpt == IDat.OPT_DELETE)
+            if (lastOpt > Vcs.OPT_INSERT || nextOpt == Vcs.OPT_DELETE)
             {
                 _ParamList.Add(optCol);
                 _SignList.Add("=");
                 _ValueList.Add(nextOpt.ToString());
             }
 
-            if (lastOpt == IDat.OPT_DEFAULT)
+            if (lastOpt == Vcs.OPT_DEFAULT)
             {
                 _ParamList.Add(vcsCol);
                 _SignList.Add("=");

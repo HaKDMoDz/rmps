@@ -7,20 +7,20 @@ using Me.Amon.Da;
 using Me.Amon.Model;
 using Me.Amon.Util;
 
-namespace Me.Amon.Uc
+namespace Me.Amon.Uw
 {
-    public partial class UcsEdit : Form
+    public partial class UdcEdit : Form
     {
         private Ucs _Item;
         private UserModel _UserModel;
         private DataModel _DataModel;
 
-        public UcsEdit()
+        public UdcEdit()
         {
             InitializeComponent();
         }
 
-        public UcsEdit(UserModel userModel)
+        public UdcEdit(UserModel userModel)
         {
             _UserModel = userModel;
 

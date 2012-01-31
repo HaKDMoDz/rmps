@@ -417,6 +417,30 @@ namespace Me.Amon.Util
             return r;
         }
 
+        public static string GenerateUserCode(string code)
+        {
+            char[] sc = code.ToCharArray();
+            for (int i = sc.Length - 1; i >= 0; i -= 1)
+            {
+                char c = ++sc[i];
+                if (c < '0')
+                {
+                    return "";
+                }
+                if (c > 'Z')
+                {
+                    sc[i] = '0';
+                    continue;
+                }
+                if (c > '9' && c < 'A')
+                {
+                    sc[i] = 'A';
+                }
+                break;
+            }
+            return new string(sc);
+        }
+
         /// <summary>
         /// 随机用户口令
         /// </summary>
@@ -432,6 +456,23 @@ namespace Me.Amon.Util
             }
 
             return NextRandomKey(c, 8, false);
+        }
+
+        public static char[] GenerateUserChar()
+        {
+            char[] c = new char[93];
+            char t = '!';
+            int i = 0;
+            while (i < 6)
+            {
+                c[i++] = t++;
+            }
+            t = '(';
+            while (i < 93)
+            {
+                c[i++] = t++;
+            }
+            return CharUtil.NextRandomKey(c, 16, false);
         }
 
         public static char[] GenerateFileKeys()

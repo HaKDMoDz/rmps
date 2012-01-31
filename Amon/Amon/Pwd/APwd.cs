@@ -17,8 +17,9 @@ using Me.Amon.Pwd.Pad;
 using Me.Amon.Pwd.Pro;
 using Me.Amon.Pwd.Wiz;
 using Me.Amon.Uc;
-using Me.Amon.Util;
 using Me.Amon.User;
+using Me.Amon.Util;
+using Me.Amon.Uw;
 
 namespace Me.Amon.Pwd
 {
@@ -1040,7 +1041,7 @@ namespace Me.Amon.Pwd
 
         private void TmiUcs_Click(object sender, EventArgs e)
         {
-            UcsEdit edit = new UcsEdit(_UserModel);
+            UdcEdit edit = new UdcEdit(_UserModel);
             edit.Init(_DataModel);
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);

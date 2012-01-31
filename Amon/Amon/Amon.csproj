@@ -519,11 +519,11 @@
     </Compile>
     <Compile Include="Uc\Item.cs" />
     <Compile Include="Uc\Properties.cs" />
-    <Compile Include="Uc\UcsEdit.cs">
+    <Compile Include="Uw\UdcEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Uc\UcsEdit.Designer.cs">
-      <DependentUpon>UcsEdit.cs</DependentUpon>
+    <Compile Include="Uw\UdcEdit.Designer.cs">
+      <DependentUpon>UdcEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="User\AuthAc.cs">
       <SubType>Form</SubType>
@@ -796,8 +796,8 @@
     <EmbeddedResource Include="Uc\Ico\IcoView.resx">
       <DependentUpon>IcoView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Uc\UcsEdit.resx">
-      <DependentUpon>UcsEdit.cs</DependentUpon>
+    <EmbeddedResource Include="Uw\UdcEdit.resx">
+      <DependentUpon>UdcEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\AuthAc.resx">
       <DependentUpon>AuthAc.cs</DependentUpon>

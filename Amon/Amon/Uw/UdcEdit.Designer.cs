@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Uc
+﻿namespace Me.Amon.Uw
 {
-    partial class UcsEdit
+    partial class UdcEdit
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UcsEdit));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UdcEdit));
             this.LsUcs = new System.Windows.Forms.ListBox();
             this.LbName = new System.Windows.Forms.Label();
             this.TbName = new System.Windows.Forms.TextBox();
@@ -138,9 +138,9 @@
             this.BtCancel.UseVisualStyleBackColor = true;
             this.BtCancel.Click += new System.EventHandler(this.BtCancel_Click);
             // 
-            // UcsEdit
+            // UdcEdit
             // 
-            this.AcceptButton = this.BtAppend;
+            this.AcceptButton = this.BtUpdate;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.BtCancel;
@@ -159,7 +159,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "UcsEdit";
+            this.Name = "UdcEdit";
             this.ShowInTaskbar = false;
             this.Text = "字符管理";
             this.ResumeLayout(false);
