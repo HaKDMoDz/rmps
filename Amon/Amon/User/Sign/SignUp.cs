@@ -148,6 +148,7 @@ namespace Me.Amon.User.Sign
             {
                 WebClient client = new WebClient();
                 client.Headers["Content-type"] = "application/x-www-form-urlencoded";
+                client.Encoding = Encoding.UTF8;
                 client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignUpV_UploadStringCompleted);
                 client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=rsa&m=0");
                 return;
@@ -229,9 +230,9 @@ namespace Me.Amon.User.Sign
             string d = null;
             using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
             {
-                if (xml.IndexOf("<error>") > 0)
+                if (xml.IndexOf("<Error>") > 0)
                 {
-                    reader.ReadToFollowing("error");
+                    reader.ReadToFollowing("Error");
                     _SignAc.ShowAlert(reader.ReadElementContentAsString());
                     return;
                 }
@@ -261,6 +262,7 @@ namespace Me.Amon.User.Sign
 
             WebClient client = new WebClient();
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
+            client.Encoding = Encoding.UTF8;
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignUpS_UploadStringCompleted);
             client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=sup&m=" + t + "&d=" + d);
         }
@@ -274,28 +276,33 @@ namespace Me.Amon.User.Sign
             }
 
             string xml = e.Result;
-            string code;
-            string info;
-            string data;
+            string code = null;
+            string info = null;
+            string data = null;
             using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
             {
-                if (xml.IndexOf("<error>") > 0)
+                if (xml.IndexOf("<Error>") > 0)
                 {
-                    reader.ReadToFollowing("error");
+                    reader.ReadToFollowing("Error");
                     _SignAc.ShowAlert(reader.ReadElementContentAsString());
                     return;
                 }
 
-                if (!reader.ReadToFollowing("code"))
+                if (reader.Name == "Code" || reader.ReadToFollowing("Code"))
                 {
-                    _SignAc.ShowAlert("服务器返回异常，请稍后再试！");
+                    code = reader.ReadElementContentAsString();
                     return;
                 }
-                code = reader.ReadElementContentAsString();
 
-                info = reader.ReadElementContentAsString();
+                if (reader.Name == "Info" || reader.ReadToFollowing("Info"))
+                {
+                    info = reader.ReadElementContentAsString();
+                }
 
-                data = reader.ReadElementContentAsString();
+                if (reader.Name == "Info" || reader.ReadToFollowing("Info"))
+                {
+                    data = reader.ReadElementContentAsString();
+                }
             }
 
             _UserModel.SignNw(_Root, code, _Name, info, data);

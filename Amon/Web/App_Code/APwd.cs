@@ -19,6 +19,7 @@ namespace Me.Amon
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/xml";
+            context.Response.Charset = "UTF-8";
 
             string c = context.Request["c"];//用户代码
             string o = context.Request["o"];//操作类型
@@ -311,12 +312,25 @@ namespace Me.Amon
             string pass = tmp[2];
             #endregion
 
-            #region 用户信息
+            #region 用户名判断
             DBAccess dba = new DBAccess();
-            dba.AddTable(DBConst.C3010300);
-            dba.AddColumn(string.Format("MAX({0}) {0}", DBConst.C3010302));
-            dba.AddWhere(string.Format("LENGTH({0})=8", DBConst.C3010302));
+            dba.AddTable(DBConst.C3010400);
+            dba.AddColumn(DBConst.C3010402);
+            dba.AddWhere(string.Format("{0}='{1}' OR {2}='{3}'", DBConst.C3010405, name, DBConst.C3010406, mail));
             DataTable dt = dba.ExecuteSelect();
+            if (dt.Rows.Count != 0)
+            {
+                SendError(writer, "重复的登录用户或电子邮件！");
+                return;
+            }
+            #endregion
+
+            #region 用户信息
+            dba.ReInit();
+            dba.AddTable(DBConst.C3010400);
+            dba.AddColumn(string.Format("MAX({0}) {0}", DBConst.C3010402));
+            dba.AddWhere(string.Format("LENGTH({0})=8", DBConst.C3010402));
+            dt = dba.ExecuteSelect();
             string code = "";
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -482,9 +496,9 @@ namespace Me.Amon
             dba.AddParam(DBConst.APWD0004, DBConst.SQL_NOW, false);
             dba.ExecuteInsert();
 
-            writer.WriteElementString("code", code);
-            writer.WriteElementString("info", info);
-            writer.WriteElementString("data", d);
+            writer.WriteElementString("Code", code);
+            writer.WriteElementString("Info", info);
+            writer.WriteElementString("Data", d);
         }
 
         private void SignPk(HttpContext context)

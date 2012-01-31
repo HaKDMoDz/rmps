@@ -240,24 +240,25 @@ namespace Me.Amon.User.Sign
             int view = IEnv.IAPP_NONE;
             using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
             {
-                if (xml.IndexOf("<error>") > 0)
+                if (xml.IndexOf("<Error>") > 0)
                 {
-                    reader.ReadToFollowing("error");
+                    reader.ReadToFollowing("Error");
                     _SignAc.ShowAlert(reader.ReadElementContentAsString());
                     _SignAc.HideWaiting();
                     _Waiting = false;
                     return;
                 }
 
-                if (!reader.ReadToFollowing("code"))
+                if (reader.Name == "Code" || reader.ReadToFollowing("Code"))
                 {
-                    _SignAc.HideWaiting();
-                    _Waiting = false;
+                    code = reader.ReadElementContentAsString();
                     return;
                 }
-                code = reader.ReadElementContentAsString();
 
-                data = reader.ReadElementContentAsString();
+                if (reader.Name == "Info" || reader.ReadToFollowing("Info"))
+                {
+                    data = reader.ReadElementContentAsString();
+                }
 
                 view = reader.ReadElementContentAsInt();
             }
