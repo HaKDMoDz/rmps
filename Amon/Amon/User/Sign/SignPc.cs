@@ -18,7 +18,7 @@ namespace Me.Amon.User.Sign
     /// <summary>
     /// 联机/单机注册
     /// </summary>
-    public partial class SignUp : UserControl, ISignAc
+    public partial class SignPc : UserControl, ISignAc
     {
         private string _Name;
         private string _Mail;
@@ -28,12 +28,12 @@ namespace Me.Amon.User.Sign
         private Uc.Properties _Prop;
         private SignAc _SignAc;
 
-        public SignUp()
+        public SignPc()
         {
             InitializeComponent();
         }
 
-        public SignUp(SignAc signAc, UserModel userModel)
+        public SignPc(SignAc signAc, UserModel userModel)
         {
             _SignAc = signAc;
             _UserModel = userModel;

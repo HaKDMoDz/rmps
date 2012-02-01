@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.User.Sign
 {
-    partial class SignUp
+    partial class SignPc
     {
         /// <summary> 
         /// 必需的设计器变量。

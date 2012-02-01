@@ -116,12 +116,12 @@ namespace Me.Amon.User
             _SignAc = _SignIn;
         }
 
-        private SignUp _SignUp;
+        private SignPc _SignUp;
         private void ShowSignOl()
         {
             if (_SignUp == null)
             {
-                _SignUp = new SignUp(this, _UserModel);
+                _SignUp = new SignPc(this, _UserModel);
             }
             _SignUp.IsPcMode = false;
             ShowView(_SignUp);
@@ -143,7 +143,7 @@ namespace Me.Amon.User
         {
             if (_SignUp == null)
             {
-                _SignUp = new SignUp(this, _UserModel);
+                _SignUp = new SignPc(this, _UserModel);
             }
             _SignUp.IsPcMode = true;
             ShowView(_SignUp);
