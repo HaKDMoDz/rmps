@@ -123,13 +123,13 @@ namespace Me.Amon.Model
         /// <summary>
         /// 修改登录口令
         /// </summary>
-        /// <param name="oldPwds"></param>
-        /// <param name="newPwds"></param>
+        /// <param name="oldPass"></param>
+        /// <param name="newPass"></param>
         /// <returns></returns>
-        public bool SignPk(string oldPwds, string newPwds)
+        public bool SignPk(string oldPass, string newPass)
         {
             // 口令验证
-            String tmpPwds = Digest(_Name, oldPwds);
+            String tmpPwds = Digest(_Name, oldPass);
 
             // 执行查询
             var dba = new DBAccess();
@@ -143,13 +143,13 @@ namespace Me.Amon.Model
             {
                 return false;
             }
-            oldPwds = dt.Rows[0][0].ToString();
-            if (tmpPwds != oldPwds)
+            oldPass = dt.Rows[0][0].ToString();
+            if (tmpPwds != oldPass)
             {
                 return false;
             }
 
-            tmpPwds = Digest(_Name, newPwds);
+            tmpPwds = Digest(_Name, newPass);
 
             // 修改口令
             dba.ReInit();
@@ -461,7 +461,6 @@ namespace Me.Amon.Model
 
             _Name = name;
             _Code = code;
-            _Info = pass;
             return true;
         }
         #endregion

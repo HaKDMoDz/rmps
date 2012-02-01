@@ -40,7 +40,7 @@ namespace Me.Amon
                     SignUp(context, writer);
                     break;
                 case "spk":
-                    SignPk(context);
+                    SignPk(context, writer);
                     break;
                 case "ssk":
                     SignSk(context);
@@ -295,18 +295,13 @@ namespace Me.Amon
                 return;
             }
 
-            #region 身份信息
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
-            rsa.FromXmlString(File.ReadAllText("D:\\rsa.key"));
-            byte[] b = rsa.Decrypt(HttpUtil.FromBase64String(d), false);
-            d = Encoding.UTF8.GetString(b);
+            d = Decrypt(HttpUtil.FromBase64String(d));
             string[] tmp = d.Split('\n');
             if (tmp.Length != 3)
             {
                 SendError(writer, "网络异常2，请稍后再试！");
                 return;
             }
-            #endregion
 
             string code = "";
             string name = HttpUtil.Text2Db(tmp[0]);
@@ -319,15 +314,34 @@ namespace Me.Amon
                 return;
             }
 
-            model.SignWs(code, name, pass,out d);
+            model.SignWs(code, name, pass, out d);
 
             writer.WriteElementString("Code", code);
             writer.WriteElementString("Info", info);
             writer.WriteElementString("Data", d);
         }
 
-        private void SignPk(HttpContext context)
+        private void SignPk(HttpContext context, XmlWriter writer)
         {
+            string d = context.Request["d"];
+            if (!CharUtil.IsValidate(d))
+            {
+                SendError(writer, "网络异常1，请稍后再试！");
+                return;
+            }
+
+            d = Decrypt(HttpUtil.FromBase64String(d));
+            string[] tmp = d.Split('\n');
+            if (tmp.Length != 3)
+            {
+                SendError(writer, "网络异常2，请稍后再试！");
+                return;
+            }
+
+            string name = HttpUtil.Text2Db(tmp[0]);
+            string oldPass = tmp[1];
+            string newPass = tmp[2];
+            new UserModel().SignPk(oldPass, newPass);
         }
 
         private void SignSk(HttpContext context)
@@ -353,65 +367,38 @@ namespace Me.Amon
             writer.WriteEndElement();
         }
 
-        private byte[] RSAEncrypt(byte[] DataToEncrypt, RSAParameters RSAKeyInfo, bool DoOAEPPadding)
+        private byte[] Encrypt(byte[] data)
         {
-            try
+            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
             {
-                byte[] encryptedData;
-                //Create a new instance of RSACryptoServiceProvider.
-                using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
-                {
-
-                    //Import the RSA Key information. This only needs
-                    //toinclude the public key information.
-                    RSA.ImportParameters(RSAKeyInfo);
-
-                    //Encrypt the passed byte array and specify OAEP padding.  
-                    //OAEP padding is only available on Microsoft Windows XP or
-                    //later.  
-                    encryptedData = RSA.Encrypt(DataToEncrypt, DoOAEPPadding);
-                }
-                return encryptedData;
+                rsa.FromXmlString(File.ReadAllText("D:\\rsa.key"));
+                return rsa.Encrypt(data, false);
             }
-            //Catch and display a CryptographicException  
-            //to the console.
-            catch (CryptographicException e)
-            {
-                //Console.WriteLine(e.Message);
-
-                return null;
-            }
-
         }
 
-        private byte[] RSADecrypt(byte[] DataToDecrypt, RSAParameters RSAKeyInfo, bool DoOAEPPadding)
+        private string Decrypt(byte[] data)
         {
-            try
+            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
             {
-                byte[] decryptedData;
-                //Create a new instance of RSACryptoServiceProvider.
-                using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
-                {
-                    //Import the RSA Key information. This needs
-                    //to include the private key information.
-                    RSA.ImportParameters(RSAKeyInfo);
-
-                    //Decrypt the passed byte array and specify OAEP padding.  
-                    //OAEP padding is only available on Microsoft Windows XP or
-                    //later.  
-                    decryptedData = RSA.Decrypt(DataToDecrypt, DoOAEPPadding);
-                }
-                return decryptedData;
+                rsa.FromXmlString(File.ReadAllText("D:\\rsa.key"));
+                data = rsa.Decrypt(data, false);
             }
-            //Catch and display a CryptographicException  
-            //to the console.
-            catch (CryptographicException e)
-            {
-                //Console.WriteLine(e.ToString());
+            return Encoding.UTF8.GetString(data);
+        }
 
+        private static string Digest(string name, string pass)
+        {
+            return Convert.ToBase64String(Digest(name + '%' + pass + "@Amon"));
+        }
+
+        private static byte[] Digest(string data)
+        {
+            if (string.IsNullOrEmpty(data))
+            {
                 return null;
             }
-
+            byte[] temp = Encoding.UTF8.GetBytes(data);
+            return HashAlgorithm.Create("SHA256").ComputeHash(temp);
         }
         #endregion
 
@@ -428,21 +415,6 @@ namespace Me.Amon
         private static byte[] GenV(string name, string code, string pass)
         {
             return Encoding.UTF8.GetBytes(code + "@Amon.Me");
-        }
-
-        private static string Digest(string name, string pass)
-        {
-            return Convert.ToBase64String(Digest(name + '%' + pass + "@Amon"));
-        }
-
-        private static byte[] Digest(string data)
-        {
-            if (string.IsNullOrEmpty(data))
-            {
-                return null;
-            }
-            byte[] temp = Encoding.UTF8.GetBytes(data);
-            return HashAlgorithm.Create("SHA256").ComputeHash(temp);
         }
 
         public bool IsReusable
