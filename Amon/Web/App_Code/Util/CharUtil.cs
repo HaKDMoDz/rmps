@@ -420,7 +420,7 @@ namespace Me.Amon.Util
         public static string GenerateUserCode(string code)
         {
             char[] sc = code.ToCharArray();
-            for (int i = sc.Length - 1; i >= 0; i -= 1)
+            for (int i = sc.Length - 2; i >= 0; i -= 1)
             {
                 char c = ++sc[i];
                 if (c < '0')
@@ -472,7 +472,7 @@ namespace Me.Amon.Util
             {
                 c[i++] = t++;
             }
-            return CharUtil.NextRandomKey(c, 16, false);
+            return NextRandomKey(c, 16, false);
         }
 
         public static char[] GenerateFileKeys()

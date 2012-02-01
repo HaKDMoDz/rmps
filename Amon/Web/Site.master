@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="main">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+            <asp:ContentPlaceHolder ID="AmonView" runat="server"/>
         </div>
         <div class="clear">
         </div>

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.SQLite;
 using System.Text;
 using Me.Amon.Model;
 using Me.Amon.Util;
+using MySql.Data.MySqlClient;
 
 namespace Me.Amon.Da
 {
@@ -12,7 +12,7 @@ namespace Me.Amon.Da
     /// </summary>
     public class DBAccess
     {
-        private SQLiteConnection _Connection;
+        private MySqlConnection _Connection;
         /// <summary>
         /// 当前要操作的字段名称（列表（以逗号“,”分隔符区分））
         /// </summary>
@@ -70,7 +70,7 @@ namespace Me.Amon.Da
             _OrderList = new StringBuilder();
             _BatchList = new List<string>();
 
-            _Connection = new SQLiteConnection("Data Source=D:\\amon.db3;Version=3;");
+            _Connection = new MySqlConnection("Server=localhost;Port=3306;Database=test;Uid=root;Pwd=123456;");
             _Connection.Open();
         }
 
@@ -382,10 +382,11 @@ namespace Me.Amon.Da
         public int Execute(string sql)
         {
             int n = 0;
-            using (SQLiteTransaction mytransaction = _Connection.BeginTransaction())
+            using (MySqlTransaction mytransaction = _Connection.BeginTransaction())
             {
-                using (SQLiteCommand mycommand = new SQLiteCommand(_Connection))
+                using (MySqlCommand mycommand = new MySqlCommand())
                 {
+                    mycommand.Connection = _Connection;
                     mycommand.CommandText = sql;
                     n = mycommand.ExecuteNonQuery();
                 }
@@ -401,8 +402,9 @@ namespace Me.Amon.Da
 
         public object ExecuteScalar(string sql)
         {
-            using (SQLiteCommand mycommand = new SQLiteCommand(_Connection))
+            using (MySqlCommand mycommand = new MySqlCommand())
             {
+                mycommand.Connection = _Connection;
                 mycommand.CommandText = sql;
                 return mycommand.ExecuteScalar();
             }
@@ -418,10 +420,11 @@ namespace Me.Amon.Da
         public int ExecuteBatch(List<string> sqls)
         {
             int n = 0;
-            using (SQLiteTransaction mytransaction = _Connection.BeginTransaction())
+            using (MySqlTransaction mytransaction = _Connection.BeginTransaction())
             {
-                using (SQLiteCommand mycommand = new SQLiteCommand(_Connection))
+                using (MySqlCommand mycommand = new MySqlCommand())
                 {
+                    mycommand.Connection = _Connection;
                     foreach (string sql in sqls)
                     {
                         mycommand.CommandText = sql;
@@ -447,7 +450,7 @@ namespace Me.Amon.Da
         {
             DataTable dataList = new DataTable();
 
-            using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlSelect, _Connection))
+            using (MySqlDataAdapter adapter = new MySqlDataAdapter(sqlSelect, _Connection))
             {
                 adapter.Fill(dataList);
             }
@@ -468,10 +471,11 @@ namespace Me.Amon.Da
         public int ExecuteUpdate(string sqlUpdate)
         {
             int n = 0;
-            using (SQLiteTransaction mytransaction = _Connection.BeginTransaction())
+            using (MySqlTransaction mytransaction = _Connection.BeginTransaction())
             {
-                using (SQLiteCommand mycommand = new SQLiteCommand(_Connection))
+                using (MySqlCommand mycommand = new MySqlCommand())
                 {
+                    mycommand.Connection = _Connection;
                     mycommand.CommandText = sqlUpdate;
                     n = mycommand.ExecuteNonQuery();
                 }
@@ -498,10 +502,11 @@ namespace Me.Amon.Da
         public int ExecuteInsert(string sqlInsert)
         {
             int n = 0;
-            using (SQLiteTransaction mytransaction = _Connection.BeginTransaction())
+            using (MySqlTransaction mytransaction = _Connection.BeginTransaction())
             {
-                using (SQLiteCommand mycommand = new SQLiteCommand(_Connection))
+                using (MySqlCommand mycommand = new MySqlCommand())
                 {
+                    mycommand.Connection = _Connection;
                     mycommand.CommandText = sqlInsert;
                     n = mycommand.ExecuteNonQuery();
                 }
@@ -529,10 +534,11 @@ namespace Me.Amon.Da
         public int ExecuteDelete(string sqlDelete)
         {
             int n = 0;
-            using (SQLiteTransaction mytransaction = _Connection.BeginTransaction())
+            using (MySqlTransaction mytransaction = _Connection.BeginTransaction())
             {
-                using (SQLiteCommand mycommand = new SQLiteCommand(_Connection))
+                using (MySqlCommand mycommand = new MySqlCommand())
                 {
+                    mycommand.Connection = _Connection;
                     mycommand.CommandText = sqlDelete;
                     n = mycommand.ExecuteNonQuery();
                 }
@@ -560,10 +566,11 @@ namespace Me.Amon.Da
         public int ExecuteBackup(string sqlBackup)
         {
             int n = 0;
-            using (SQLiteTransaction mytransaction = _Connection.BeginTransaction())
+            using (MySqlTransaction mytransaction = _Connection.BeginTransaction())
             {
-                using (SQLiteCommand mycommand = new SQLiteCommand(_Connection))
+                using (MySqlCommand mycommand = new MySqlCommand())
                 {
+                    mycommand.Connection = _Connection;
                     mycommand.CommandText = sqlBackup;
                     n = mycommand.ExecuteNonQuery();
                 }

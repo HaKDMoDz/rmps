@@ -5,7 +5,7 @@
         /// <summary>
         /// 数据库常量：日期
         /// </summary>
-        public const string SQL_NOW = "datetime('now')";
+        public const string SQL_NOW = "now()";
         public const string VER_DB = "1";
 
         #region 类别

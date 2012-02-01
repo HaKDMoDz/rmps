@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Data;
 using System.IO;
-using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using Me.Amon.Da;
@@ -11,7 +11,6 @@ namespace Me.Amon.Model
     public sealed class UserModel
     {
         #region 全局变量
-        private string _Info;
         private byte[] _Keys;
         private byte[] _Salt;
         private char[] _Mask;
@@ -20,10 +19,10 @@ namespace Me.Amon.Model
         private string _Name;
         public string Code { get { return _Code; } }
         private string _Code;
-        public string Home { get { return _Home; } }
-        private string _Home;
-        public string Look { get; set; }
-        public string Feel { get; set; }
+        private string Hash { get { return _Hash; } }
+        private string _Hash;
+        private int Rank { get { return _Rank; } }
+        private int _Rank;
         #endregion
 
         public string Digest(string name, string pass)
@@ -52,72 +51,72 @@ namespace Me.Amon.Model
         }
 
         #region 权限认证
+        public bool SignIn(string name, string pass)
+        {
+            return true;
+        }
+
         /// <summary>
-        /// 用户登录
+        /// 网页登录
         /// </summary>
         /// <returns></returns>
-        public bool SignIn(string home, string code, string name, string pass, string info)
+        public bool SignWp(string name, string pass)
         {
-            //string file = home + IEnv.AMON_CFG;
-            //if (!File.Exists(file))
+            var dba = new DBAccess();
+
+            // 登录用户验证
+            dba.ReInit();
+            dba.AddTable(DBConst.C3010400);
+            dba.AddTable(DBConst.C3010300);
+            dba.AddColumn(DBConst.C3010401);
+            dba.AddColumn(DBConst.C3010302);
+            dba.AddWhere(DBConst.C3010405, HttpUtil.Text2Db(name));
+            dba.AddWhere(DBConst.C3010402, DBConst.C3010302, false);
+            DataTable dt = dba.ExecuteSelect();
+            if (dt == null || dt.Rows.Count != 1)
+            {
+                return false;
+            }
+
+            String tmpHash = dt.Rows[0][DBConst.C3010401].ToString();
+            String tmpCode = dt.Rows[0][DBConst.C3010302].ToString();
+
+            // 登录口令验证
+            dba.ReInit();
+            dba.AddTable(DBConst.C3010600);
+            dba.AddColumn(DBConst.C3010603);
+            dba.AddWhere(DBConst.C3010602, tmpHash);
+            dt = dba.ExecuteSelect();
+            if (dt == null || dt.Rows.Count != 1)
+            {
+                return false;
+            }
+
+            String tmpPwds = Digest(name, pass);
+            if (tmpPwds != dt.Rows[0][DBConst.C3010603].ToString())
+            {
+                return false;
+            }
+
+            // 登录权限读取
+            //dba.ReInit();
+            //dba.AddTable(DBConst.C3010F00);
+            //dba.AddTable(DBConst.C3010200);
+            //dba.AddColumn(DBConst.C3010F02);
+            //dba.AddWhere(DBConst.C3010203, DBConst.C3010F03, false);
+            //dba.AddWhere(DBConst.C3010202, tmpHash);
+            //dba.AddWhere(DBConst.C3010204, "42010000");
+            //dt = dba.ExecuteSelect();
+            //if (dt == null || dt.Rows.Count != 1)
             //{
             //    return false;
             //}
 
-            //Uc.Properties prop = new Uc.Properties();
-            //prop.Load(file);
+            _Name = name;
+            _Code = tmpCode;
+            _Hash = tmpHash;
+            _Rank = (int)dt.Rows[0][DBConst.C3010F02];
 
-            //if (info != prop.Get(IEnv.AMON_CFG_INFO))
-            //{
-            //    return false;
-            //}
-            //string data = prop.Get(IEnv.AMON_CFG_DATA);
-
-            //#region 口令散列
-            //// 口令
-            //byte[] k = GenK(name, code, pass);
-            //// 向量
-            //byte[] v = GenV(name, code, pass);
-            //// 数据
-            //byte[] t = Convert.FromBase64String(data);
-            //pass = null;
-            //#endregion
-
-            //#region AES 解密
-            //AesManaged aes = new AesManaged();
-            //using (MemoryStream mStream = new MemoryStream())
-            //{
-            //    using (CryptoStream cStream = new CryptoStream(mStream, aes.CreateDecryptor(k, v), CryptoStreamMode.Write))
-            //    {
-            //        cStream.Write(t, 0, t.Length);
-            //        cStream.FlushFinalBlock();
-            //        t = mStream.ToArray();
-            //    }
-            //}
-            //aes.Clear();
-            //#endregion
-
-            //if (t.Length != 72)
-            //{
-            //    return false;
-            //}
-
-            //_Code = Encoding.UTF8.GetString(t, 0, 8);
-            //int i = 8;
-            //_Salt = new byte[16];
-            //Array.Copy(t, i, _Salt, 0, _Salt.Length);
-            //i += _Salt.Length;
-            //_Keys = new byte[32];
-            //Array.Copy(t, i, _Keys, 0, _Keys.Length);
-            //i += _Keys.Length;
-            //_Mask = Encoding.UTF8.GetChars(t, i, 16);
-
-            //_Name = name;
-            //_Code = code;
-            //_Info = info;
-            //_Home = home;
-            //Look = "Default";
-            //Feel = "Default";
             return true;
         }
 
@@ -129,55 +128,36 @@ namespace Me.Amon.Model
         /// <returns></returns>
         public bool SignPk(string oldPwds, string newPwds)
         {
-            // 已有口令校验
-            if (_Info != Digest(Name, oldPwds))
+            // 口令验证
+            String tmpPwds = Digest(_Name, oldPwds);
+
+            // 执行查询
+            var dba = new DBAccess();
+            dba.AddTable(DBConst.C3010600);
+            dba.AddColumn(DBConst.C3010603);
+            dba.AddWhere(DBConst.C3010602, _Hash);
+            DataTable dt = dba.ExecuteSelect();
+
+            // 数据验证
+            if (dt.Rows.Count != 1)
+            {
+                return false;
+            }
+            oldPwds = dt.Rows[0][0].ToString();
+            if (tmpPwds != oldPwds)
             {
                 return false;
             }
 
-            // 生成加密密钥及字符空间
-            byte[] t = new byte[72];
-            byte[] a = Encoding.UTF8.GetBytes(Code);
-            int i = 0;
-            Array.Copy(a, 0, t, i, a.Length);
-            i += a.Length;
-            Array.Copy(_Salt, 0, t, i, _Salt.Length);
-            i += _Salt.Length;
-            Array.Copy(_Keys, 0, t, i, _Keys.Length);
-            i += _Keys.Length;
-            a = Encoding.UTF8.GetBytes(_Mask);
-            Array.Copy(a, 0, t, i, a.Length);
+            tmpPwds = Digest(_Name, newPwds);
 
-            // 口令
-            byte[] k = GenK(Name, Code, newPwds);
-            // 向量
-            byte[] v = GenV(Name, Code, newPwds);
-
-            #region AES 加密
-            AesManaged aes = new AesManaged();
-            using (MemoryStream mStream = new MemoryStream())
-            {
-                using (CryptoStream cStream = new CryptoStream(mStream, aes.CreateEncryptor(k, v), CryptoStreamMode.Write))
-                {
-                    cStream.Write(t, 0, t.Length);
-                    cStream.FlushFinalBlock();
-                    t = mStream.ToArray();
-                }
-            }
-            aes.Clear();
-            #endregion
-
-
-            // 摘要用户登录信息
-            _Info = Digest(Name, newPwds);
-
-            //string data = Convert.ToBase64String(t);
-            //Uc.Properties prop = new Uc.Properties();
-            //prop.Set(IEnv.AMON_CFG_INFO, _Info);
-            //prop.Set(IEnv.AMON_CFG_DATA, data);
-            //prop.Save(Home + IEnv.AMON_CFG);
-
-            return true;
+            // 修改口令
+            dba.ReInit();
+            dba.AddTable(DBConst.C3010600);
+            dba.AddParam(DBConst.C3010603, tmpPwds);
+            dba.AddParam(DBConst.C301060F, DBConst.SQL_NOW, false);
+            dba.AddWhere(DBConst.C3010602, _Hash);
+            return 1 == dba.ExecuteUpdate();
         }
 
         /// <summary>
@@ -278,33 +258,184 @@ namespace Me.Amon.Model
         /// <summary>
         /// 用户注册
         /// </summary>
+        /// <param name="name">登录用户</param>
+        /// <param name="pass">用户口令</param>
+        /// <param name="mail">电子邮件</param>
         /// <returns></returns>
-        public bool SignUp(string root, string name, string pass)
+        public bool SignUp(String name, String pass, String mail, out string code, out string info)
         {
-            string code = "A0000000";
-            byte[] k = GenK(name, code, pass);
-            byte[] v = GenV(name, code, pass);
+            code = "";
+            info = "";
 
+            #region 用户名判断
+            DBAccess dba = new DBAccess();
+            dba.AddTable(DBConst.C3010400);
+            dba.AddColumn(DBConst.C3010402);
+            dba.AddWhere(string.Format("{0}='{1}' OR {2}='{3}'", DBConst.C3010405, name, DBConst.C3010406, mail));
+            DataTable dt = dba.ExecuteSelect();
+            if (dt.Rows.Count != 0)
+            {
+                return false;
+            }
+            #endregion
+
+            #region 用户信息
+            dba.ReInit();
+            dba.AddTable(DBConst.C3010400);
+            dba.AddColumn(string.Format("MAX({0}) {0}", DBConst.C3010402));
+            dba.AddWhere(string.Format("LENGTH({0})=8", DBConst.C3010402));
+            dt = dba.ExecuteSelect();
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                code = dt.Rows[0][0].ToString();
+            }
+            if (!CharUtil.IsValidateCode(code))
+            {
+                code = "A0000000";
+            }
+            code = CharUtil.GenerateUserCode(code);
+            #endregion
+
+            string hash = HashUtil.UtcTimeInHex(false);
+
+            #region 真实信息
+            dba.ReInit();
+            dba.AddTable(DBConst.C3010300);
+            dba.AddParam(DBConst.C3010301, hash);
+            dba.AddParam(DBConst.C3010302, code);
+            dba.AddParam(DBConst.C3010303, "");
+            dba.AddParam(DBConst.C3010304, "");
+            dba.AddParam(DBConst.C3010305, 1);
+            dba.AddParam(DBConst.C3010306, null);
+            dba.AddParam(DBConst.C3010307, "");
+            dba.AddParam(DBConst.C3010308, DBConst.SQL_NOW, false);
+            dba.AddParam(DBConst.C3010309, DBConst.SQL_NOW, false);
+            if (dba.ExecuteInsert() != 1)
+            {
+                return false;
+            }
+            #endregion
+
+            #region 在线信息
+            dba.ReInit();
+            dba.AddTable(DBConst.C3010400);
+            dba.AddParam(DBConst.C3010401, hash);
+            dba.AddParam(DBConst.C3010402, code);
+            dba.AddParam(DBConst.C3010403, "0");
+            dba.AddParam(DBConst.C3010404, "0");
+            dba.AddParam(DBConst.C3010405, name);
+            dba.AddParam(DBConst.C3010406, mail);
+            dba.AddParam(DBConst.C3010407, name);
+            dba.AddParam(DBConst.C3010408, "0");
+            dba.AddParam(DBConst.C3010409, "");
+            dba.AddParam(DBConst.C301040A, "");
+            dba.AddParam(DBConst.C301040B, "");
+            dba.AddParam(DBConst.C301040C, DBConst.SQL_NOW, false);
+            dba.AddParam(DBConst.C301040D, DBConst.SQL_NOW, false);
+            if (dba.ExecuteInsert() != 1)
+            {
+                return false;
+            }
+            #endregion
+
+            #region 联系方式
+            dba.ReInit();
+            dba.AddTable(DBConst.C3010500);
+            dba.AddParam(DBConst.C3010501, "0");
+            dba.AddParam(DBConst.C3010502, "4");
+            dba.AddParam(DBConst.C3010503, hash);
+            dba.AddParam(DBConst.C3010504, code);
+            dba.AddParam(DBConst.C3010505, "sctteqacvfxgqgtb");// 电子邮件
+            dba.AddParam(DBConst.C3010506, mail);
+            dba.AddParam(DBConst.C3010507, "");
+            dba.AddParam(DBConst.C3010508, DBConst.SQL_NOW, false);
+            dba.AddParam(DBConst.C3010509, DBConst.SQL_NOW, false);
+            if (dba.ExecuteInsert() != 1)
+            {
+                return false;
+            }
+            #endregion
+
+            #region 安全信息
+            info = Digest(name, pass);
+            dba.ReInit();
+            dba.AddTable(DBConst.C3010600);
+            dba.AddParam(DBConst.C3010601, hash);
+            dba.AddParam(DBConst.C3010602, hash);
+            dba.AddParam(DBConst.C3010603, info);
+            dba.AddParam(DBConst.C3010604, mail);
+            dba.AddParam(DBConst.C3010605, "");
+            dba.AddParam(DBConst.C3010606, "");
+            dba.AddParam(DBConst.C3010607, "");
+            dba.AddParam(DBConst.C3010608, "");
+            dba.AddParam(DBConst.C3010609, "");
+            dba.AddParam(DBConst.C301060A, "");
+            dba.AddParam(DBConst.C301060B, "");
+            dba.AddParam(DBConst.C301060C, "");
+            dba.AddParam(DBConst.C301060D, "");
+            dba.AddParam(DBConst.C301060E, "");
+            dba.AddParam(DBConst.C301060F, DBConst.SQL_NOW, false);
+            dba.AddParam(DBConst.C3010610, DBConst.SQL_NOW, false);
+            if (dba.ExecuteInsert() != 1)
+            {
+                return false;
+            }
+            #endregion
+
+            #region 权限分配
+            dba.ReInit();
+            dba.AddTable(DBConst.C3010200);
+            dba.AddParam(DBConst.C3010201, hash);
+            dba.AddParam(DBConst.C3010202, hash);
+            dba.AddParam(DBConst.C3010203, "sctvsxyttfzeqqgq");//一般用户
+            dba.AddParam(DBConst.C3010204, "42010000");
+            dba.AddParam(DBConst.C3010205, "");
+            dba.AddParam(DBConst.C3010206, DBConst.SQL_NOW, false);
+            dba.AddParam(DBConst.C3010207, DBConst.SQL_NOW, false);
+            if (dba.ExecuteInsert() != 1)
+            {
+                return false;
+            }
+            #endregion
+
+            _Name = name;
+            _Code = code;
+            //userRank = cons.comn.user.UserInfo.LEVEL_02;//一般用户
+
+            return true;
+        }
+
+        /// <summary>
+        /// 网络用户
+        /// </summary>
+        /// <returns></returns>
+        public bool SignWs(string code, string name, string pass, out string data)
+        {
             Random r = new Random();
-            _Salt = new byte[16];
-            r.NextBytes(_Salt);
-            _Keys = new byte[32];
-            r.NextBytes(_Keys);
-            _Mask = GenChar();
-
             byte[] t = new byte[72];
-            byte[] a = Encoding.UTF8.GetBytes(code);
+
             int i = 0;
+            byte[] a = Encoding.UTF8.GetBytes(code);
             Array.Copy(a, 0, t, i, a.Length);
             i += a.Length;
+
+            _Salt = new byte[16];
+            r.NextBytes(_Salt);
             Array.Copy(_Salt, 0, t, i, _Salt.Length);
             i += _Salt.Length;
+
+            _Keys = new byte[32];
+            r.NextBytes(_Keys);
             Array.Copy(_Keys, 0, t, i, _Keys.Length);
             i += _Keys.Length;
+
+            _Mask = CharUtil.GenerateUserChar();
             a = Encoding.UTF8.GetBytes(_Mask);
             Array.Copy(a, 0, t, i, a.Length);
 
             #region AES 加密
+            byte[] k = GenK(name, code, pass);
+            byte[] v = GenV(name, code, pass);
             AesManaged aes = new AesManaged();
             using (MemoryStream mStream = new MemoryStream())
             {
@@ -318,31 +449,22 @@ namespace Me.Amon.Model
             aes.Clear();
             #endregion
 
+            data = Convert.ToBase64String(t);
+
+            DBAccess dba = new DBAccess();
+            dba.AddTable(DBConst.APWD0000);
+            dba.AddParam(DBConst.APWD0001, code);
+            dba.AddParam(DBConst.APWD0002, "data");
+            dba.AddParam(DBConst.APWD0003, data);
+            dba.AddParam(DBConst.APWD0004, DBConst.SQL_NOW, false);
+            dba.ExecuteInsert();
+
             _Name = name;
             _Code = code;
             _Info = pass;
-            _Home = root + code + Path.DirectorySeparatorChar;
-            pass = null;
             return true;
         }
         #endregion
-
-        private char[] GenChar()
-        {
-            char[] c = new char[93];
-            char t = '!';
-            int i = 0;
-            while (i < 6)
-            {
-                c[i++] = t++;
-            }
-            t = '(';
-            while (i < 93)
-            {
-                c[i++] = t++;
-            }
-            return CharUtil.NextRandomKey(c, 16, false);
-        }
 
         #region 数据安全
         public string Decode(string data)

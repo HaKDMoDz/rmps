@@ -260,7 +260,10 @@ namespace Me.Amon.User.Sign
                     data = reader.ReadElementContentAsString();
                 }
 
-                view = reader.ReadElementContentAsInt();
+                if (reader.Name == "View" || reader.ReadToFollowing("View"))
+                {
+                    view = reader.ReadElementContentAsInt();
+                }
             }
 
             _UserModel.SignNw(_Home, code, _Name, _Info, data);

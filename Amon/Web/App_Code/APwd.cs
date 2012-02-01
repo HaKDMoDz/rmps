@@ -306,195 +306,20 @@ namespace Me.Amon
                 SendError(writer, "网络异常2，请稍后再试！");
                 return;
             }
-            string hash = HashUtil.UtcTimeInHex(false);
+            #endregion
+
+            string code = "";
             string name = HttpUtil.Text2Db(tmp[0]);
             string mail = HttpUtil.Text2Db(tmp[1]);
             string pass = tmp[2];
-            #endregion
-
-            #region 用户名判断
-            DBAccess dba = new DBAccess();
-            dba.AddTable(DBConst.C3010400);
-            dba.AddColumn(DBConst.C3010402);
-            dba.AddWhere(string.Format("{0}='{1}' OR {2}='{3}'", DBConst.C3010405, name, DBConst.C3010406, mail));
-            DataTable dt = dba.ExecuteSelect();
-            if (dt.Rows.Count != 0)
+            string info = "";
+            UserModel model = new UserModel();
+            if (!model.SignUp(name, pass, mail, out code, out info))
             {
-                SendError(writer, "重复的登录用户或电子邮件！");
                 return;
             }
-            #endregion
 
-            #region 用户信息
-            dba.ReInit();
-            dba.AddTable(DBConst.C3010400);
-            dba.AddColumn(string.Format("MAX({0}) {0}", DBConst.C3010402));
-            dba.AddWhere(string.Format("LENGTH({0})=8", DBConst.C3010402));
-            dt = dba.ExecuteSelect();
-            string code = "";
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                code = dt.Rows[0][0].ToString();
-            }
-            if (!CharUtil.IsValidateCode(code))
-            {
-                code = "A0000000";
-            }
-            code = CharUtil.GenerateUserCode(code);
-            #endregion
-
-            #region 真实信息
-            dba.ReInit();
-            dba.AddTable(DBConst.C3010300);
-            dba.AddParam(DBConst.C3010301, hash);
-            dba.AddParam(DBConst.C3010302, code);
-            dba.AddParam(DBConst.C3010303, "");
-            dba.AddParam(DBConst.C3010304, "");
-            dba.AddParam(DBConst.C3010305, "");
-            dba.AddParam(DBConst.C3010306, null);
-            dba.AddParam(DBConst.C3010307, "");
-            dba.AddParam(DBConst.C3010308, DBConst.SQL_NOW, false);
-            dba.AddParam(DBConst.C3010309, DBConst.SQL_NOW, false);
-            if (dba.ExecuteInsert() != 1)
-            {
-                SendError(writer, "网络异常3，请稍后再试！");
-                return;
-            }
-            #endregion
-
-            #region 在线信息
-            dba.ReInit();
-            dba.AddTable(DBConst.C3010400);
-            dba.AddParam(DBConst.C3010401, hash);
-            dba.AddParam(DBConst.C3010402, code);
-            dba.AddParam(DBConst.C3010403, "0");
-            dba.AddParam(DBConst.C3010404, "0");
-            dba.AddParam(DBConst.C3010405, name);
-            dba.AddParam(DBConst.C3010406, mail);
-            dba.AddParam(DBConst.C3010407, name);
-            dba.AddParam(DBConst.C3010408, "0");
-            dba.AddParam(DBConst.C3010409, "");
-            dba.AddParam(DBConst.C301040A, "");
-            dba.AddParam(DBConst.C301040B, "");
-            dba.AddParam(DBConst.C301040C, DBConst.SQL_NOW, false);
-            dba.AddParam(DBConst.C301040D, DBConst.SQL_NOW, false);
-            if (dba.ExecuteInsert() != 1)
-            {
-                SendError(writer, "网络异常4，请稍后再试！");
-                return;
-            }
-            #endregion
-
-            #region 联系方式
-            dba.ReInit();
-            dba.AddTable(DBConst.C3010500);
-            dba.AddParam(DBConst.C3010501, "0");
-            dba.AddParam(DBConst.C3010502, "4");
-            dba.AddParam(DBConst.C3010503, hash);
-            dba.AddParam(DBConst.C3010504, code);
-            dba.AddParam(DBConst.C3010505, "sctteqacvfxgqgtb");// 电子邮件
-            dba.AddParam(DBConst.C3010506, mail);
-            dba.AddParam(DBConst.C3010507, "");
-            dba.AddParam(DBConst.C3010508, DBConst.SQL_NOW, false);
-            dba.AddParam(DBConst.C3010509, DBConst.SQL_NOW, false);
-            if (dba.ExecuteInsert() != 1)
-            {
-                SendError(writer, "网络异常5，请稍后再试！");
-                return;
-            }
-            #endregion
-
-            #region 安全信息
-            string info = Digest(name, pass);
-            dba.ReInit();
-            dba.AddTable(DBConst.C3010600);
-            dba.AddParam(DBConst.C3010601, hash);
-            dba.AddParam(DBConst.C3010602, hash);
-            dba.AddParam(DBConst.C3010603, info);
-            dba.AddParam(DBConst.C3010604, mail);
-            dba.AddParam(DBConst.C3010605, "");
-            dba.AddParam(DBConst.C3010606, "");
-            dba.AddParam(DBConst.C3010607, "");
-            dba.AddParam(DBConst.C3010608, "");
-            dba.AddParam(DBConst.C3010609, "");
-            dba.AddParam(DBConst.C301060A, "");
-            dba.AddParam(DBConst.C301060B, "");
-            dba.AddParam(DBConst.C301060C, "");
-            dba.AddParam(DBConst.C301060D, "");
-            dba.AddParam(DBConst.C301060E, "");
-            dba.AddParam(DBConst.C301060F, DBConst.SQL_NOW, false);
-            dba.AddParam(DBConst.C3010610, DBConst.SQL_NOW, false);
-            if (dba.ExecuteInsert() != 1)
-            {
-                SendError(writer, "网络异常6，请稍后再试！");
-                return;
-            }
-            #endregion
-
-            #region 权限分配
-            dba.ReInit();
-            dba.AddTable(DBConst.C3010200);
-            dba.AddParam(DBConst.C3010201, hash);
-            dba.AddParam(DBConst.C3010202, hash);
-            dba.AddParam(DBConst.C3010203, "sctvsxyttfzeqqgq");//一般用户
-            dba.AddParam(DBConst.C3010204, "42010000");
-            dba.AddParam(DBConst.C3010205, "");
-            dba.AddParam(DBConst.C3010206, DBConst.SQL_NOW, false);
-            dba.AddParam(DBConst.C3010207, DBConst.SQL_NOW, false);
-            if (dba.ExecuteInsert() != 1)
-            {
-                SendError(writer, "网络异常7，请稍后再试！");
-                return;
-            }
-            #endregion
-
-            #region 安全信息
-            byte[] t = new byte[72];
-            b = Encoding.UTF8.GetBytes(code);
-            int i = 0;
-            Array.Copy(b, 0, t, i, b.Length);
-            i += b.Length;
-
-            Random r = new Random();
-            b = new byte[16];
-            r.NextBytes(b);
-            Array.Copy(b, 0, t, i, b.Length);
-            i += b.Length;
-
-            b = new byte[32];
-            r.NextBytes(b);
-            Array.Copy(b, 0, t, i, b.Length);
-            i += b.Length;
-
-            b = Encoding.UTF8.GetBytes(CharUtil.GenerateUserChar());
-            Array.Copy(b, 0, t, i, b.Length);
-            #endregion
-
-            #region AES 加密
-            byte[] k = GenK(name, code, pass);
-            byte[] v = GenV(name, code, pass);
-            AesManaged aes = new AesManaged();
-            using (MemoryStream mStream = new MemoryStream())
-            {
-                using (CryptoStream cStream = new CryptoStream(mStream, aes.CreateEncryptor(k, v), CryptoStreamMode.Write))
-                {
-                    cStream.Write(t, 0, t.Length);
-                    cStream.FlushFinalBlock();
-                    t = mStream.ToArray();
-                }
-            }
-            aes.Clear();
-            #endregion
-
-            d = Convert.ToBase64String(t);
-
-            dba.ReInit();
-            dba.AddTable(DBConst.APWD0000);
-            dba.AddParam(DBConst.APWD0001, code);
-            dba.AddParam(DBConst.APWD0002, "data");
-            dba.AddParam(DBConst.APWD0003, d);
-            dba.AddParam(DBConst.APWD0004, DBConst.SQL_NOW, false);
-            dba.ExecuteInsert();
+            model.SignWs(code, name, pass,out d);
 
             writer.WriteElementString("Code", code);
             writer.WriteElementString("Info", info);
