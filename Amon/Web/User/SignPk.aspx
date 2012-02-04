@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="user0103.aspx.cs" Inherits="user_user0103" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="SignPk.aspx.cs" Inherits="User_SignPk" %>
 
 <asp:Content ID="AmonData" ContentPlaceHolderID="AmonView" runat="Server">
     <table border="0" cellpadding="0" cellspacing="0" id="TB_DATA">
-        <tr id="tr_ErrMsg" runat="server">
+        <tr id="TrErrMsg" runat="server">
             <td align="center">
-                <asp:Label ID="lb_ErrMsg" runat="server" CssClass="TEXT_NOTE1"></asp:Label>
+                <asp:Label ID="LbErrMsg" runat="server" CssClass="TEXT_NOTE1"></asp:Label>
             </td>
         </tr>
         <tr id="tr_RegData1" runat="server">
@@ -15,7 +15,7 @@
                             现有口令：
                         </th>
                         <td align="left" class="TD_DataItem_TL_L">
-                            <asp:TextBox ID="pf_OldPwds" runat="server" Style="width: 160px;" TextMode="Password"></asp:TextBox>
+                            <asp:TextBox ID="TbOldPass" runat="server" Style="width: 160px;" TextMode="Password"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -23,7 +23,7 @@
                             新登录口令：
                         </th>
                         <td align="left" class="TD_DataItem_TL_L">
-                            <asp:TextBox ID="pf_NewPwds" runat="server" Style="width: 160px;" TextMode="Password"></asp:TextBox>
+                            <asp:TextBox ID="TbNewPass" runat="server" Style="width: 160px;" TextMode="Password"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -31,7 +31,7 @@
                             新口令确认：
                         </th>
                         <td align="left" class="TD_DataItem_TL_L">
-                            <asp:TextBox ID="pf_FrmPwds" runat="server" Style="width: 160px;" TextMode="Password"></asp:TextBox>
+                            <asp:TextBox ID="TbRepPass" runat="server" Style="width: 160px;" TextMode="Password"></asp:TextBox>
                         </td>
                     </tr>
                 </table>
@@ -42,7 +42,7 @@
                 <table border="0" cellpadding="4" cellspacing="0" width="300">
                     <tr>
                         <td align="right">
-                            <asp:Button ID="bt_Change" runat="server" Text="修改(R)" AccessKey="R" OnClick="bt_Change_Click" OnClientClick="return checkNull();" />
+                            <asp:Button ID="BtSignPk" runat="server" Text="修改(R)" AccessKey="R" OnClick="BtSignPk_Click" OnClientClick="return checkNull();" />
                         </td>
                     </tr>
                 </table>
@@ -60,4 +60,7 @@
             </td>
         </tr>
     </table>
+</asp:Content>
+<asp:Content ID="AmonFoot" ContentPlaceHolderID="AmonFoot" runat="Server">
+    <script type="text/javascript" src="SignPk.js"></script>
 </asp:Content>

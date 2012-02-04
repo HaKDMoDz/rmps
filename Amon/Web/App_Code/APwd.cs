@@ -303,17 +303,24 @@ namespace Me.Amon
                 return;
             }
 
-            string code = "";
             string name = HttpUtil.Text2Db(tmp[0]);
             string mail = HttpUtil.Text2Db(tmp[1]);
             string pass = tmp[2];
-            string info = "";
-            UserModel model = new UserModel();
-            if (!model.SignUp(name, pass, mail, out code, out info))
+            UserModel model = UserModel.Current(context.Session);
+            if (!model.SignUp(name, pass, mail))
             {
                 return;
             }
+        }
 
+        public void SignWs(HttpContext context, XmlWriter writer)
+        {
+            UserModel model = UserModel.Current(context.Session);
+            string code = "";
+            string name = "";
+            string pass = "";
+            string info = "";
+            string d = "";
             model.SignWs(code, name, pass, out d);
 
             writer.WriteElementString("Code", code);
@@ -341,7 +348,8 @@ namespace Me.Amon
             string name = HttpUtil.Text2Db(tmp[0]);
             string oldPass = tmp[1];
             string newPass = tmp[2];
-            new UserModel().SignPk(oldPass, newPass);
+            UserModel userModel = UserModel.Current(context.Session);
+            userModel.SignPk(oldPass, newPass);
         }
 
         private void SignSk(HttpContext context)

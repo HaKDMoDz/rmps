@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="user0102.aspx.cs" Inherits="user_user0102" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="SignUp.aspx.cs" Inherits="User_SignUp" %>
 
 <asp:Content ID="AmonData" ContentPlaceHolderID="AmonView" runat="Server">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tr id="tr_ErrMsg" runat="server" style="display: none;">
+        <tr id="TrErrMsg" runat="server" style="display: none;">
             <td align="center" style="height: 30px;">
-                <asp:Label ID="lb_ErrMsg" runat="server" CssClass="TEXT_NOTE1"></asp:Label>
+                <asp:Label ID="LbErrMsg" runat="server" CssClass="TEXT_NOTE1"></asp:Label>
             </td>
         </tr>
         <tr id="tr_RegData1" runat="server">
@@ -15,7 +15,7 @@
                             登录用户：
                         </th>
                         <td align="left" class="TD_DataItem_TL_L">
-                            <asp:TextBox ID="tf_UserName" runat="server" Style="width: 160px;"></asp:TextBox>
+                            <asp:TextBox ID="TbName" runat="server" Style="width: 160px;"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -23,7 +23,7 @@
                             登录口令：
                         </th>
                         <td align="left" class="TD_DataItem_TL_L">
-                            <asp:TextBox ID="pf_UserPwds" runat="server" TextMode="Password" Style="width: 160px;"></asp:TextBox>
+                            <asp:TextBox ID="TbPass1" runat="server" TextMode="Password" Style="width: 160px;"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -31,7 +31,7 @@
                             口令确认：
                         </th>
                         <td align="left" class="TD_DataItem_TL_L">
-                            <asp:TextBox ID="pf_FirmPwds" runat="server" TextMode="Password" Style="width: 160px;"></asp:TextBox>
+                            <asp:TextBox ID="TbPass2" runat="server" TextMode="Password" Style="width: 160px;"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -39,7 +39,7 @@
                             电子邮件：
                         </th>
                         <td align="left" class="TD_DataItem_TL_L">
-                            <asp:TextBox ID="tf_UserMail" runat="server" Style="width: 160px;"></asp:TextBox>
+                            <asp:TextBox ID="TbMail" runat="server" Style="width: 160px;"></asp:TextBox>
                         </td>
                     </tr>
                 </table>
@@ -50,7 +50,7 @@
                 <table border="0" cellpadding="4" cellspacing="0" width="300">
                     <tr>
                         <td align="right">
-                            <asp:Button ID="bt_Register" runat="server" Text="注册(R)" AccessKey="R" OnClick="bt_Register_Click" OnClientClick="return checkNull();" />
+                            <asp:Button ID="BtSignUp" runat="server" Text="注册(R)" AccessKey="R" OnClick="BtSignUp_Click" OnClientClick="return checkNull();" />
                         </td>
                     </tr>
                 </table>
@@ -99,4 +99,7 @@
             </td>
         </tr>
     </table>
+</asp:Content>
+<asp:Content ID="AmonFoot" ContentPlaceHolderID="AmonFoot" runat="Server">
+    <script type="text/javascript" src="SignUp.js"></script>
 </asp:Content>

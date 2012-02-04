@@ -3,6 +3,7 @@ using System.Data;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web.SessionState;
 using Me.Amon.Da;
 using Me.Amon.Util;
 
@@ -15,40 +16,39 @@ namespace Me.Amon.Model
         private byte[] _Salt;
         private char[] _Mask;
 
-        public string Name { get { return _Name; } }
-        private string _Name;
-        public string Code { get { return _Code; } }
-        private string _Code;
         private string Hash { get { return _Hash; } }
         private string _Hash;
+        public string Code { get { return _Code; } }
+        private string _Code;
         private int Rank { get { return _Rank; } }
         private int _Rank;
+        public string Name { get { return _Name; } }
+        private string _Name;
+        public string Mail { get { return _Mail; } }
+        private string _Mail;
         #endregion
 
-        public string Digest(string name, string pass)
+        private UserModel()
         {
-            return Convert.ToBase64String(Digest(name + '%' + pass + "@Amon"));
+            _Rank = 0;
+            _Hash = "";
+            _Code = "A0000000";
+            _Name = "用户";
+            _Mail = "user@amonsoft.cn";
         }
 
-        public byte[] Digest(string data)
+        #region 静态函数
+        public static UserModel Current(HttpSessionState Session)
         {
-            if (string.IsNullOrEmpty(data))
+            var um = (UserModel)Session[IEnv.SESSION_USER];
+            if (um == null)
             {
-                return null;
+                um = new UserModel();
+                Session[IEnv.SESSION_USER] = um;
             }
-            byte[] temp = Encoding.UTF8.GetBytes(data);
-            return HashAlgorithm.Create("SHA256").ComputeHash(temp);
+            return um;
         }
-
-        private byte[] GenK(string name, string code, string pass)
-        {
-            return Digest(name + '@' + code + "&Amon.Me/" + pass);
-        }
-
-        private byte[] GenV(string name, string code, string pass)
-        {
-            return Encoding.UTF8.GetBytes(code + "@Amon.Me");
-        }
+        #endregion
 
         #region 权限认证
         public bool SignIn(string name, string pass)
@@ -115,7 +115,7 @@ namespace Me.Amon.Model
             _Name = name;
             _Code = tmpCode;
             _Hash = tmpHash;
-            _Rank = (int)dt.Rows[0][DBConst.C3010F02];
+            //_Rank = (int)dt.Rows[0][DBConst.C3010F02];
 
             return true;
         }
@@ -262,11 +262,8 @@ namespace Me.Amon.Model
         /// <param name="pass">用户口令</param>
         /// <param name="mail">电子邮件</param>
         /// <returns></returns>
-        public bool SignUp(String name, String pass, String mail, out string code, out string info)
+        public bool SignUp(String name, String pass, String mail)
         {
-            code = "";
-            info = "";
-
             #region 用户名判断
             DBAccess dba = new DBAccess();
             dba.AddTable(DBConst.C3010400);
@@ -285,6 +282,7 @@ namespace Me.Amon.Model
             dba.AddColumn(string.Format("MAX({0}) {0}", DBConst.C3010402));
             dba.AddWhere(string.Format("LENGTH({0})=8", DBConst.C3010402));
             dt = dba.ExecuteSelect();
+            string code = "";
             if (dt != null && dt.Rows.Count > 0)
             {
                 code = dt.Rows[0][0].ToString();
@@ -357,7 +355,7 @@ namespace Me.Amon.Model
             #endregion
 
             #region 安全信息
-            info = Digest(name, pass);
+            string info = Digest(name, pass);
             dba.ReInit();
             dba.AddTable(DBConst.C3010600);
             dba.AddParam(DBConst.C3010601, hash);
@@ -502,6 +500,31 @@ namespace Me.Amon.Model
             aes.Clear();
 
             return CharUtil.EncodeString(buf, _Mask);
+        }
+
+        public string Digest(string name, string pass)
+        {
+            return Convert.ToBase64String(Digest(name + '%' + pass + "@Amon"));
+        }
+
+        public byte[] Digest(string data)
+        {
+            if (string.IsNullOrEmpty(data))
+            {
+                return null;
+            }
+            byte[] temp = Encoding.UTF8.GetBytes(data);
+            return HashAlgorithm.Create("SHA256").ComputeHash(temp);
+        }
+
+        private byte[] GenK(string name, string code, string pass)
+        {
+            return Digest(name + '@' + code + "&Amon.Me/" + pass);
+        }
+
+        private byte[] GenV(string name, string code, string pass)
+        {
+            return Encoding.UTF8.GetBytes(code + "@Amon.Me");
         }
         #endregion
     }

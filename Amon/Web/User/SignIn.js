@@ -4,14 +4,14 @@ function checkNull()
     var reg;
     var txt;
 
-    txt = $('TbName').value;
+    txt = $('#TbName').value;
     if(txt==null || txt=='')
     {
-        $('LbErrMsg').innerHTML = '请输入【登录用户】！';
-        $('TbName').focus();
+        $('#LbErrMsg').innerHTML = '请输入【登录用户】！';
+        $('#TbName').focus();
         return false;
     }
-    reg = /^\w+[\w\d\.]*$/
+    reg = /^\w+[\w\d\.]*$/;
     if(!reg.test(txt))
     {
         $('LbErrMsg').value = '您输入的【登录用户】不合法：登录用户仅能为大小写字母、下划线及英文点号！';
@@ -26,7 +26,7 @@ function checkNull()
         return false;
     }
     
-    txt = $X('TbPass').value;
+    txt = $('TbPass').value;
     if(txt==null || txt=='')
     {
         $('LbErrMsg').innerHTML = '请输入【登录口令】！';

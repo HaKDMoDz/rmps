@@ -519,6 +519,12 @@
     </Compile>
     <Compile Include="Uc\Item.cs" />
     <Compile Include="Uc\Properties.cs" />
+    <Compile Include="User\Sign\SignOl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User\Sign\SignOl.Designer.cs">
+      <DependentUpon>SignOl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uw\UdcEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -583,11 +589,11 @@
     <Compile Include="User\Sign\SignUl.Designer.cs">
       <DependentUpon>SignUl.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\Sign\SignUp.cs">
+    <Compile Include="User\Sign\SignPc.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="User\Sign\SignUp.Designer.cs">
-      <DependentUpon>SignUp.cs</DependentUpon>
+    <Compile Include="User\Sign\SignPc.Designer.cs">
+      <DependentUpon>SignPc.cs</DependentUpon>
     </Compile>
     <Compile Include="Util\BeanUtil.cs" />
     <Compile Include="Util\CharUtil.cs" />
@@ -796,6 +802,9 @@
     <EmbeddedResource Include="Uc\Ico\IcoView.resx">
       <DependentUpon>IcoView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="User\Sign\SignOl.resx">
+      <DependentUpon>SignOl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Uw\UdcEdit.resx">
       <DependentUpon>UdcEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -823,8 +832,8 @@
     <EmbeddedResource Include="User\Sign\SignUl.resx">
       <DependentUpon>SignUl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\Sign\SignUp.resx">
-      <DependentUpon>SignUp.cs</DependentUpon>
+    <EmbeddedResource Include="User\Sign\SignPc.resx">
+      <DependentUpon>SignPc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\Alert.resx">
       <DependentUpon>Alert.cs</DependentUpon>
