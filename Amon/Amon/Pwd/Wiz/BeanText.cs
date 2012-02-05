@@ -26,7 +26,7 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
         }
 
-        public void InitOnce(TableLayoutPanel grid)
+        public void InitOnce(TableLayoutPanel grid, ViewModel viewModel)
         {
             _Grid = grid;
 

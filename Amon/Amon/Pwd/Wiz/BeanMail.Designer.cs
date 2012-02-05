@@ -45,12 +45,13 @@
             // BtSend
             // 
             this.BtSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtSend.FlatAppearance.BorderSize = 0;
             this.BtSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtSend.Location = new System.Drawing.Point(326, 0);
             this.BtSend.Name = "BtSend";
             this.BtSend.Size = new System.Drawing.Size(21, 21);
             this.BtSend.TabIndex = 1;
-            this.BtSend.Text = "button1";
+            this.BtSend.TabStop = false;
             this.BtSend.UseVisualStyleBackColor = true;
             this.BtSend.Click += new System.EventHandler(this.BtSend_Click);
             // 

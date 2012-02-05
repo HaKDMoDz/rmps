@@ -30,7 +30,7 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
         }
 
-        public void InitOnce(TableLayoutPanel grid)
+        public void InitOnce(TableLayoutPanel grid, ViewModel viewModel)
         {
             _Grid = grid;
 
@@ -63,6 +63,9 @@ namespace Me.Amon.Pwd.Wiz
 
             _LastMenu = MiDateDef;
             _LastMenu.Checked = true;
+
+            BtNow.Image = viewModel.GetImage("att-date-now");
+            BtOpt.Image = viewModel.GetImage("att-date-options");
         }
 
         private void InitMenu(string tag, string text, ToolStripMenuItem root)

@@ -9,8 +9,9 @@ namespace Me.Amon.Pwd.Pro
     public partial class APro : UserControl, IPwd
     {
         private APwd _APwd;
-        private DataModel _DataModel;
         private SafeModel _SafeModel;
+        private DataModel _DataModel;
+        private ViewModel _ViewModel;
         private int _LastIndex;
         private bool _UserAction;
         private AAtt _AAtt;
@@ -24,11 +25,12 @@ namespace Me.Amon.Pwd.Pro
             InitializeComponent();
         }
 
-        public void Init(APwd apwd, SafeModel safeModel, DataModel dataModel)
+        public void Init(APwd apwd, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
         {
             _APwd = apwd;
             _SafeModel = safeModel;
             _DataModel = dataModel;
+            _ViewModel = viewModel;
 
             GvAttList.AutoGenerateColumns = false;
             OrderCol.DataPropertyName = "Order";
@@ -420,7 +422,7 @@ namespace Me.Amon.Pwd.Pro
                     ctl = null;
                     break;
             }
-            ctl.InitOnce(_DataModel);
+            ctl.InitOnce(_DataModel, _ViewModel);
             _CmpList[type] = ctl;
 
             ctl.Control.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;

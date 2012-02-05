@@ -45,12 +45,13 @@
             // BtOpen
             // 
             this.BtOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtOpen.FlatAppearance.BorderSize = 0;
             this.BtOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtOpen.Location = new System.Drawing.Point(326, 0);
             this.BtOpen.Name = "BtOpen";
             this.BtOpen.Size = new System.Drawing.Size(21, 21);
             this.BtOpen.TabIndex = 1;
-            this.BtOpen.Text = "button1";
+            this.BtOpen.TabStop = false;
             this.BtOpen.UseVisualStyleBackColor = true;
             this.BtOpen.Click += new System.EventHandler(this.BtOpen_Click);
             // 

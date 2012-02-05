@@ -14,7 +14,7 @@ namespace Me.Amon.Pwd.Pro
             InitializeComponent();
         }
 
-        public void InitOnce(DataModel dataModel)
+        public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
         }
         #endregion

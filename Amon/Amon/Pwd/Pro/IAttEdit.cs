@@ -9,7 +9,7 @@ namespace Me.Amon.Pwd.Pro
 
         string Title { get; }
 
-        void InitOnce(DataModel dataModel);
+        void InitOnce(DataModel dataModel, ViewModel viewModel);
 
         bool ShowData(AAtt att);
 

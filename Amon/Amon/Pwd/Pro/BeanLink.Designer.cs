@@ -40,8 +40,7 @@
             this.BtOpen.Location = new System.Drawing.Point(56, 57);
             this.BtOpen.Name = "BtOpen";
             this.BtOpen.Size = new System.Drawing.Size(21, 21);
-            this.BtOpen.TabIndex = 10;
-            this.BtOpen.Text = "button1";
+            this.BtOpen.TabIndex = 4;
             this.BtOpen.UseVisualStyleBackColor = true;
             this.BtOpen.Click += new System.EventHandler(this.BtOpen_Click);
             // 
@@ -52,7 +51,7 @@
             this.TbData.Location = new System.Drawing.Point(56, 30);
             this.TbData.Name = "TbData";
             this.TbData.Size = new System.Drawing.Size(307, 21);
-            this.TbData.TabIndex = 9;
+            this.TbData.TabIndex = 3;
             // 
             // LbData
             // 
@@ -60,7 +59,7 @@
             this.LbData.Location = new System.Drawing.Point(3, 33);
             this.LbData.Name = "LbData";
             this.LbData.Size = new System.Drawing.Size(47, 12);
-            this.LbData.TabIndex = 8;
+            this.LbData.TabIndex = 2;
             this.LbData.Text = "数据(&D)";
             // 
             // TbName
@@ -68,7 +67,7 @@
             this.TbName.Location = new System.Drawing.Point(56, 3);
             this.TbName.Name = "TbName";
             this.TbName.Size = new System.Drawing.Size(100, 21);
-            this.TbName.TabIndex = 7;
+            this.TbName.TabIndex = 1;
             // 
             // LbName
             // 
@@ -76,7 +75,7 @@
             this.LbName.Location = new System.Drawing.Point(3, 6);
             this.LbName.Name = "LbName";
             this.LbName.Size = new System.Drawing.Size(47, 12);
-            this.LbName.TabIndex = 6;
+            this.LbName.TabIndex = 0;
             this.LbName.Text = "名称(&N)";
             // 
             // BeanLink

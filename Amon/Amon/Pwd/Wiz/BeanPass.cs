@@ -12,16 +12,20 @@ namespace Me.Amon.Pwd.Wiz
     {
         private BeanBody _Body;
         private DataModel _DataModel;
+        private ViewModel _ViewModel;
         private TableLayoutPanel _Grid;
         private RowStyle _Style;
         private Label _Label;
         private AAtt _Att;
-        private ToolStripMenuItem _CharLenDef;
-        private ToolStripMenuItem _CharLenDiy;
         private ToolStripMenuItem _LastCharLen;
+        private ToolStripMenuItem _CharLenDef;
+        private ToolStripSeparator _CharLenSep;
+        private ToolStripMenuItem _CharLenDiy;
         private Dictionary<string, ToolStripMenuItem> _CharLenDict = new Dictionary<string, ToolStripMenuItem>();
-        private ToolStripMenuItem _CharSetDef;
+
         private ToolStripMenuItem _LastCharSet;
+        private ToolStripMenuItem _CharSetDef;
+        private ToolStripSeparator _CharSetSep;
         private Dictionary<string, ToolStripMenuItem> _CharSetDict = new Dictionary<string, ToolStripMenuItem>();
 
         #region 构造函数
@@ -37,7 +41,7 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
         }
 
-        public void InitOnce(TableLayoutPanel grid)
+        public void InitOnce(TableLayoutPanel grid, ViewModel viewModel)
         {
             _Grid = grid;
 
@@ -55,6 +59,9 @@ namespace Me.Amon.Pwd.Wiz
             _CharLenDef.Click += new EventHandler(MiCharLenDef_Click);
             MuCharLen.DropDownItems.Add(_CharLenDef);
 
+            _CharLenSep = new ToolStripSeparator();
+            MuCharLen.DropDownItems.Add(_CharLenSep);
+
             InitMenu("6", "6", MuCharLen);
             InitMenu("8", "8", MuCharLen);
             InitMenu("10", "10", MuCharLen);
@@ -67,7 +74,7 @@ namespace Me.Amon.Pwd.Wiz
             _CharLenDiy.Text = "其它…(&O)";
             _CharLenDiy.Click += new EventHandler(MiCharLenDiy_Click);
 
-            _LastCharLen = MiCharLenDef;
+            _LastCharLen = _CharLenDef;
             _LastCharLen.Checked = true;
 
             CmMenu.ResumeLayout(true);
@@ -76,6 +83,13 @@ namespace Me.Amon.Pwd.Wiz
             _CharSetDef.Size = new Size(160, 22);
             _CharSetDef.Text = "默认(&D)";
             _CharSetDef.Click += new EventHandler(MiCharSetDef_Click);
+
+            _CharSetSep = new ToolStripSeparator();
+
+            _ViewModel = viewModel;
+            BtMod.Image = viewModel.GetImage(TbData.UseSystemPasswordChar ? "att-pass-hide" : "att-pass-show");
+            BtGen.Image = viewModel.GetImage("att-pass-gen");
+            BtOpt.Image = viewModel.GetImage("att-pass-options");
         }
 
         private void InitMenu(string tag, string text, ToolStripMenuItem menu)
@@ -108,6 +122,7 @@ namespace Me.Amon.Pwd.Wiz
             {
                 MuCharSet.DropDownItems.Clear();
                 MuCharSet.DropDownItems.Add(_CharSetDef);
+                MuCharSet.DropDownItems.Add(_CharSetSep);
 
                 _CharSetDict.Clear();
                 ToolStripMenuItem item;
@@ -169,14 +184,8 @@ namespace Me.Amon.Pwd.Wiz
         #region 按钮事件
         private void BtMod_Click(object sender, EventArgs e)
         {
-            if (TbData.PasswordChar != '*')
-            {
-                TbData.PasswordChar = '*';
-            }
-            else
-            {
-                TbData.PasswordChar = '\0';
-            }
+            TbData.UseSystemPasswordChar = !TbData.UseSystemPasswordChar;
+            BtMod.Image = _ViewModel.GetImage(TbData.UseSystemPasswordChar ? "att-pass-hide" : "att-pass-show");
         }
 
         private void BtGen_Click(object sender, EventArgs e)
@@ -215,7 +224,7 @@ namespace Me.Amon.Pwd.Wiz
             }
             else
             {
-                _LastCharLen = MiCharLenDef;
+                _LastCharLen = _CharLenDef;
             }
             _LastCharLen.Checked = true;
 
@@ -234,7 +243,7 @@ namespace Me.Amon.Pwd.Wiz
             }
             else
             {
-                _LastCharSet = MiCharSet0;
+                _LastCharSet = _CharSetDef;
             }
             _LastCharSet.Checked = true;
 

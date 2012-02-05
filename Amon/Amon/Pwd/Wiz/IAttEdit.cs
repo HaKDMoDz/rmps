@@ -5,7 +5,7 @@ namespace Me.Amon.Pwd.Wiz
 {
     public interface IAttEdit
     {
-        void InitOnce(TableLayoutPanel grid);
+        void InitOnce(TableLayoutPanel grid, ViewModel viewModel);
 
         void InitView(int row);
 

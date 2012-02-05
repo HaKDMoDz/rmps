@@ -22,61 +22,90 @@ namespace Me.Amon.Model
 
         public bool FindBarVisible { get; set; }
 
-        public bool InfoBarVisible { get; set; }
+        public bool EchoBarVisible { get; set; }
 
         public bool CatTreeVisible { get; set; }
 
         public bool KeyListVisible { get; set; }
 
-        private List<Image> _LabelImages;
-        public List<Image> LabelImages
-        {
-            get
-            {
-                return _LabelImages;
-            }
-        }
+        public int WindowLocX { get; set; }
+        public int WindowLocY { get; set; }
+        public int WindowDimW { get; set; }
+        public int WindowDimH { get; set; }
 
-        private List<Image> _MajorImages;
-        public List<Image> MajorImages
-        {
-            get
-            {
-                return _MajorImages;
-            }
-        }
+        public Image HintImage { get; set; }
 
-        public Image HimtImage { get; set; }
-
+        private string _FeelPath;
+        private string _LookPath;
+        private Uc.Properties _Prop;
+        private Dictionary<string, Image> _Imgs;
         public void Load()
         {
-            Skin = "Skin\\Default\\";
+            #region Look
+            _LookPath = string.Format("Skin{1}Look{1}{0}{1}", _UserModel.Feel, Path.DirectorySeparatorChar);
+            _Prop = new Uc.Properties();
+            _Prop.Load(_LookPath + IEnv.FILE_LOOK);
+            MenuBarVisible = IEnv.VALUE_TRUE == _Prop.Get("MenuBar", IEnv.VALUE_TRUE).ToLower();
+            ToolBarVisible = IEnv.VALUE_TRUE == _Prop.Get("ToolBar", IEnv.VALUE_TRUE).ToLower();
+            FindBarVisible = IEnv.VALUE_TRUE == _Prop.Get("FindBar", IEnv.VALUE_TRUE).ToLower();
+            EchoBarVisible = IEnv.VALUE_TRUE == _Prop.Get("EchoBar", IEnv.VALUE_TRUE).ToLower();
+            CatTreeVisible = IEnv.VALUE_TRUE == _Prop.Get("CatTree", IEnv.VALUE_TRUE).ToLower();
+            KeyListVisible = IEnv.VALUE_TRUE == _Prop.Get("KeyList", IEnv.VALUE_TRUE).ToLower();
 
-            if (_LabelImages == null)
+            string tmp = _Prop.Get("LocX", "");
+            if (CharUtil.IsValidateLong(tmp))
             {
-                _LabelImages = new List<Image>(10);
+                WindowLocX = int.Parse(tmp);
+            }
+            tmp = _Prop.Get("LocY", "");
+            if (CharUtil.IsValidateLong(tmp))
+            {
+                WindowLocY = int.Parse(tmp);
+            }
+            tmp = _Prop.Get("DimW", "");
+            if (CharUtil.IsValidateLong(tmp))
+            {
+                WindowDimW = int.Parse(tmp);
+            }
+            tmp = _Prop.Get("DimH", "");
+            if (CharUtil.IsValidateLong(tmp))
+            {
+                WindowDimH = int.Parse(tmp);
+            }
+            #endregion
+
+            #region Feel
+            _FeelPath = string.Format("Skin{1}Feel{1}{0}{1}", _UserModel.Feel, Path.DirectorySeparatorChar);
+            _Prop.Clear();
+            _Prop.Load(_FeelPath + IEnv.FILE_FEEL);
+
+            if (_Imgs == null)
+            {
+                _Imgs = new Dictionary<string, Image>();
             }
             else
             {
-                _LabelImages.Clear();
+                _Imgs.Clear();
             }
-            for (int i = 0; i < 10; i += 1)
+            #endregion
+        }
+
+        public Image GetImage(string key)
+        {
+            key = _Prop.Get(key);
+            if (string.IsNullOrEmpty(key))
             {
-                _LabelImages.Add(BeanUtil.ReadImage(string.Format("{0}key-label{1}.png", Skin, i), BeanUtil.NaN16));
+                return BeanUtil.NaN16;
             }
 
-            if (_MajorImages == null)
+            if (_Imgs.ContainsKey(key))
             {
-                _MajorImages = new List<Image>(5);
+                return _Imgs[key];
             }
-            else
-            {
-                _MajorImages.Clear();
-            }
-            for (int i = -2; i < 3; i += 1)
-            {
-                _MajorImages.Add(BeanUtil.ReadImage(string.Format("{0}key-major{1}.png", Skin, i > 0 ? "+" + i : i.ToString()), BeanUtil.NaN16));
-            }
+
+            Image img = BeanUtil.ReadImage(_FeelPath + key, BeanUtil.NaN16);
+            _Imgs[key] = img;
+            return img;
         }
 
         public void Save()

@@ -81,7 +81,6 @@
             this.BtView.Name = "BtView";
             this.BtView.Size = new System.Drawing.Size(21, 21);
             this.BtView.TabIndex = 4;
-            this.BtView.Text = "button1";
             this.BtView.UseVisualStyleBackColor = true;
             this.BtView.Click += new System.EventHandler(this.BtView_Click);
             // 
@@ -91,7 +90,6 @@
             this.BtOpen.Name = "BtOpen";
             this.BtOpen.Size = new System.Drawing.Size(21, 21);
             this.BtOpen.TabIndex = 5;
-            this.BtOpen.Text = "button2";
             this.BtOpen.UseVisualStyleBackColor = true;
             this.BtOpen.Click += new System.EventHandler(this.BtOpen_Click);
             // 

@@ -13,17 +13,19 @@ namespace Me.Amon.Pwd.Wiz
         private BeanBody _BodyBean;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
+        private ViewModel _ViewModel;
 
         public AWiz()
         {
             InitializeComponent();
         }
 
-        public void Init(APwd apwd, SafeModel safeModel, DataModel dataModel)
+        public void Init(APwd apwd, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
         {
             _APwd = apwd;
             _SafeModel = safeModel;
             _DataModel = dataModel;
+            _ViewModel = viewModel;
         }
 
         #region 接口实现
@@ -175,7 +177,7 @@ namespace Me.Amon.Pwd.Wiz
             if (_BodyBean == null)
             {
                 _BodyBean = new BeanBody(_SafeModel);
-                _BodyBean.Init(_DataModel);
+                _BodyBean.Init(_DataModel, _ViewModel);
             }
             if (_LastView != null && _LastView != _BodyBean)
             {

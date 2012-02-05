@@ -26,7 +26,7 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
         }
 
-        public void InitOnce(TableLayoutPanel grid)
+        public void InitOnce(TableLayoutPanel grid, ViewModel viewModel)
         {
             _Grid = grid;
 
@@ -38,6 +38,8 @@ namespace Me.Amon.Pwd.Wiz
             Dock = DockStyle.Fill;
 
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
+
+            BtOpt.Image = viewModel.GetImage("att-data-options");
         }
         #endregion
 

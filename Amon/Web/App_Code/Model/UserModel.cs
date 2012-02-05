@@ -28,7 +28,7 @@ namespace Me.Amon.Model
         private string _Mail;
         #endregion
 
-        private UserModel()
+        public UserModel()
         {
             _Rank = 0;
             _Hash = "";
@@ -262,7 +262,7 @@ namespace Me.Amon.Model
         /// <param name="pass">用户口令</param>
         /// <param name="mail">电子邮件</param>
         /// <returns></returns>
-        public bool SignUp(String name, String pass, String mail)
+        public int SignUp(String name, String pass, String mail)
         {
             #region 用户名判断
             DBAccess dba = new DBAccess();
@@ -272,7 +272,7 @@ namespace Me.Amon.Model
             DataTable dt = dba.ExecuteSelect();
             if (dt.Rows.Count != 0)
             {
-                return false;
+                return IMsg.MSG_SIGNUP_EXIST;
             }
             #endregion
 
@@ -310,7 +310,7 @@ namespace Me.Amon.Model
             dba.AddParam(DBConst.C3010309, DBConst.SQL_NOW, false);
             if (dba.ExecuteInsert() != 1)
             {
-                return false;
+                return IMsg.MSG_SIGNUP_INNER;
             }
             #endregion
 
@@ -332,7 +332,7 @@ namespace Me.Amon.Model
             dba.AddParam(DBConst.C301040D, DBConst.SQL_NOW, false);
             if (dba.ExecuteInsert() != 1)
             {
-                return false;
+                return IMsg.MSG_SIGNUP_INNER;
             }
             #endregion
 
@@ -350,7 +350,7 @@ namespace Me.Amon.Model
             dba.AddParam(DBConst.C3010509, DBConst.SQL_NOW, false);
             if (dba.ExecuteInsert() != 1)
             {
-                return false;
+                return IMsg.MSG_SIGNUP_INNER;
             }
             #endregion
 
@@ -376,7 +376,7 @@ namespace Me.Amon.Model
             dba.AddParam(DBConst.C3010610, DBConst.SQL_NOW, false);
             if (dba.ExecuteInsert() != 1)
             {
-                return false;
+                return IMsg.MSG_SIGNUP_INNER;
             }
             #endregion
 
@@ -386,13 +386,13 @@ namespace Me.Amon.Model
             dba.AddParam(DBConst.C3010201, hash);
             dba.AddParam(DBConst.C3010202, hash);
             dba.AddParam(DBConst.C3010203, "sctvsxyttfzeqqgq");//一般用户
-            dba.AddParam(DBConst.C3010204, "42010000");
+            dba.AddParam(DBConst.C3010204, "APWD0000");
             dba.AddParam(DBConst.C3010205, "");
             dba.AddParam(DBConst.C3010206, DBConst.SQL_NOW, false);
             dba.AddParam(DBConst.C3010207, DBConst.SQL_NOW, false);
             if (dba.ExecuteInsert() != 1)
             {
-                return false;
+                return IMsg.MSG_SIGNUP_INNER;
             }
             #endregion
 
@@ -400,7 +400,7 @@ namespace Me.Amon.Model
             _Code = code;
             //userRank = cons.comn.user.UserInfo.LEVEL_02;//一般用户
 
-            return true;
+            return IMsg.MSG_SIGNUP_SUCCESS;
         }
 
         /// <summary>

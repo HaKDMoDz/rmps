@@ -33,8 +33,8 @@
             this.BtOpen = new System.Windows.Forms.Button();
             this.BtView = new System.Windows.Forms.Button();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MiSysViewer = new System.Windows.Forms.ToolStripMenuItem();
             this.MiPwdViewer = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiSysViewer = new System.Windows.Forms.ToolStripMenuItem();
             this.CmMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,24 +51,26 @@
             // BtOpen
             // 
             this.BtOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtOpen.FlatAppearance.BorderSize = 0;
             this.BtOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtOpen.Location = new System.Drawing.Point(326, 0);
+            this.BtOpen.Location = new System.Drawing.Point(329, 3);
             this.BtOpen.Name = "BtOpen";
             this.BtOpen.Size = new System.Drawing.Size(21, 21);
             this.BtOpen.TabIndex = 2;
-            this.BtOpen.Text = "button1";
+            this.BtOpen.TabStop = false;
             this.BtOpen.UseVisualStyleBackColor = true;
             this.BtOpen.Click += new System.EventHandler(this.BtOpen_Click);
             // 
             // BtView
             // 
             this.BtView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtView.FlatAppearance.BorderSize = 0;
             this.BtView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtView.Location = new System.Drawing.Point(299, 0);
             this.BtView.Name = "BtView";
             this.BtView.Size = new System.Drawing.Size(21, 21);
             this.BtView.TabIndex = 1;
-            this.BtView.Text = "button2";
+            this.BtView.TabStop = false;
             this.BtView.UseVisualStyleBackColor = true;
             this.BtView.Click += new System.EventHandler(this.BtView_Click);
             // 
@@ -80,13 +82,6 @@
             this.CmMenu.Name = "CmMenu";
             this.CmMenu.Size = new System.Drawing.Size(153, 70);
             // 
-            // MiSysViewer
-            // 
-            this.MiSysViewer.Name = "MiSysViewer";
-            this.MiSysViewer.Size = new System.Drawing.Size(152, 22);
-            this.MiSysViewer.Text = "系统查看器";
-            this.MiSysViewer.Click += new System.EventHandler(this.MiSysViewer_Click);
-            // 
             // MiPwdViewer
             // 
             this.MiPwdViewer.Name = "MiPwdViewer";
@@ -94,13 +89,20 @@
             this.MiPwdViewer.Text = "内置查看器";
             this.MiPwdViewer.Click += new System.EventHandler(this.MiPwdViewer_Click);
             // 
+            // MiSysViewer
+            // 
+            this.MiSysViewer.Name = "MiSysViewer";
+            this.MiSysViewer.Size = new System.Drawing.Size(152, 22);
+            this.MiSysViewer.Text = "系统查看器";
+            this.MiSysViewer.Click += new System.EventHandler(this.MiSysViewer_Click);
+            // 
             // BeanFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.BtView);
-            this.Controls.Add(this.BtOpen);
             this.Controls.Add(this.TbData);
+            this.Controls.Add(this.BtOpen);
             this.Name = "BeanFile";
             this.Size = new System.Drawing.Size(350, 24);
             this.CmMenu.ResumeLayout(false);

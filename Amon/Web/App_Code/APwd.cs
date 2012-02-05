@@ -306,7 +306,7 @@ namespace Me.Amon
             string name = HttpUtil.Text2Db(tmp[0]);
             string mail = HttpUtil.Text2Db(tmp[1]);
             string pass = tmp[2];
-            UserModel model = UserModel.Current(context.Session);
+            UserModel model = new UserModel();
             if (!model.SignUp(name, pass, mail))
             {
                 return;

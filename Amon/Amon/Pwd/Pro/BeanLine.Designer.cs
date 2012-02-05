@@ -41,8 +41,7 @@
             this.button2.Location = new System.Drawing.Point(83, 57);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(21, 21);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "button2";
+            this.button2.TabIndex = 5;
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -51,8 +50,7 @@
             this.button1.Location = new System.Drawing.Point(56, 57);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(21, 21);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "button1";
+            this.button1.TabIndex = 4;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -63,7 +61,7 @@
             this.TbData.Location = new System.Drawing.Point(56, 30);
             this.TbData.Name = "TbData";
             this.TbData.Size = new System.Drawing.Size(307, 21);
-            this.TbData.TabIndex = 9;
+            this.TbData.TabIndex = 3;
             // 
             // LbData
             // 
@@ -71,7 +69,7 @@
             this.LbData.Location = new System.Drawing.Point(3, 33);
             this.LbData.Name = "LbData";
             this.LbData.Size = new System.Drawing.Size(47, 12);
-            this.LbData.TabIndex = 8;
+            this.LbData.TabIndex = 2;
             this.LbData.Text = "数据(&D)";
             // 
             // TbName
@@ -79,7 +77,7 @@
             this.TbName.Location = new System.Drawing.Point(56, 3);
             this.TbName.Name = "TbName";
             this.TbName.Size = new System.Drawing.Size(100, 21);
-            this.TbName.TabIndex = 7;
+            this.TbName.TabIndex = 1;
             // 
             // LbName
             // 
@@ -87,10 +85,10 @@
             this.LbName.Location = new System.Drawing.Point(3, 6);
             this.LbName.Name = "LbName";
             this.LbName.Size = new System.Drawing.Size(47, 12);
-            this.LbName.TabIndex = 6;
+            this.LbName.TabIndex = 0;
             this.LbName.Text = "名称(&N)";
             // 
-            // BeanSign
+            // BeanLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -100,7 +98,7 @@
             this.Controls.Add(this.LbData);
             this.Controls.Add(this.TbName);
             this.Controls.Add(this.LbName);
-            this.Name = "BeanSign";
+            this.Name = "BeanLine";
             this.Size = new System.Drawing.Size(366, 81);
             this.ResumeLayout(false);
             this.PerformLayout();

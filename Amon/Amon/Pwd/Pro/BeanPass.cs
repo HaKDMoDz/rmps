@@ -12,27 +12,31 @@ namespace Me.Amon.Pwd.Pro
     {
         private AAtt _Att;
         private DataModel _DataModel;
+        private ViewModel _ViewModel;
         private TextBox _Ctl;
-        private ToolStripMenuItem _CharLenDef;
-        private ToolStripMenuItem _CharLenDiy;
         private ToolStripMenuItem _LastCharLen;
+        private ToolStripMenuItem _CharLenDef;
+        private ToolStripSeparator _CharLenSep;
+        private ToolStripMenuItem _CharLenDiy;
         private Dictionary<string, ToolStripMenuItem> _CharLenDict = new Dictionary<string, ToolStripMenuItem>();
-        private ToolStripMenuItem _CharSetDef;
+
         private ToolStripMenuItem _LastCharSet;
+        private ToolStripMenuItem _CharSetDef;
+        private ToolStripSeparator _CharSetSep;
         private Dictionary<string, ToolStripMenuItem> _CharSetDict = new Dictionary<string, ToolStripMenuItem>();
 
         #region 构造函数
         public BeanPass()
         {
             InitializeComponent();
-
-            this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
-            this.TbData.GotFocus += new EventHandler(TbData_GotFocus);
         }
 
-        public void InitOnce(DataModel dataModel)
+        public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
             _DataModel = dataModel;
+
+            TbName.GotFocus += new EventHandler(TbName_GotFocus);
+            TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
             CmMenu.SuspendLayout();
             _CharLenDef = new ToolStripMenuItem();
@@ -40,6 +44,9 @@ namespace Me.Amon.Pwd.Pro
             _CharLenDef.Text = "默认(&D)";
             _CharLenDef.Click += new EventHandler(MiCharLenDef_Click);
             MuCharLen.DropDownItems.Add(_CharLenDef);
+
+            _CharLenSep = new ToolStripSeparator();
+            MuCharLen.DropDownItems.Add(_CharLenSep);
 
             InitMenu("6", "6", MuCharLen);
             InitMenu("8", "8", MuCharLen);
@@ -53,7 +60,7 @@ namespace Me.Amon.Pwd.Pro
             _CharLenDiy.Text = "其它…(&O)";
             _CharLenDiy.Click += new EventHandler(MiCharLenDiy_Click);
 
-            _LastCharLen = MiCharLenDef;
+            _LastCharLen = _CharLenDef;
             _LastCharLen.Checked = true;
 
             CmMenu.ResumeLayout(true);
@@ -62,6 +69,13 @@ namespace Me.Amon.Pwd.Pro
             _CharSetDef.Size = new Size(160, 22);
             _CharSetDef.Text = "默认(&D)";
             _CharSetDef.Click += new EventHandler(MiCharSetDef_Click);
+
+            _CharSetSep = new ToolStripSeparator();
+
+            _ViewModel = viewModel;
+            BtMod.Image = viewModel.GetImage(TbData.UseSystemPasswordChar ? "att-pass-hide" : "att-pass-show");
+            BtGen.Image = viewModel.GetImage("att-pass-gen");
+            BtOpt.Image = viewModel.GetImage("att-pass-options");
         }
 
         private void InitMenu(string tag, string text, ToolStripMenuItem menu)
@@ -83,11 +97,13 @@ namespace Me.Amon.Pwd.Pro
 
         public bool ShowData(AAtt att)
         {
-            _Att = att;
-
             if ((_DataModel.UcsModified & IEnv.KEY_AWIZ) > 0)
             {
                 MuCharSet.DropDownItems.Clear();
+                MuCharSet.DropDownItems.Add(_CharSetDef);
+                MuCharSet.DropDownItems.Add(_CharSetSep);
+
+                _CharSetDict.Clear();
                 ToolStripMenuItem item;
                 foreach (Ucs ucs in _DataModel.UcsList)
                 {
@@ -98,15 +114,22 @@ namespace Me.Amon.Pwd.Pro
                     item.Tag = ucs.Data;
                     item.Text = ucs.Name;
                     MuCharSet.DropDownItems.Add(item);
+                    _CharSetDict[ucs.Id] = item;
                 }
                 _DataModel.UcsModified &= IEnv.KEY_AWIZ;
+
+                _LastCharSet = _CharSetDef;
+                _LastCharSet.Checked = true;
             }
 
-            if (_Att != null)
+            _Att = att;
+            if (_Att == null)
             {
-                TbName.Text = _Att.Name;
-                TbData.Text = _Att.Data;
+                return false;
             }
+
+            TbName.Text = _Att.Name;
+            TbData.Text = _Att.Data;
             return true;
         }
 
@@ -151,14 +174,8 @@ namespace Me.Amon.Pwd.Pro
         #region 按钮事件
         private void BtMod_Click(object sender, EventArgs e)
         {
-            if (TbData.PasswordChar != '*')
-            {
-                TbData.PasswordChar = '*';
-            }
-            else
-            {
-                TbData.PasswordChar = '\0';
-            }
+            TbData.UseSystemPasswordChar = !TbData.UseSystemPasswordChar;
+            BtMod.Image = _ViewModel.GetImage(TbData.UseSystemPasswordChar ? "att-pass-hide" : "att-pass-show");
         }
 
         private void BtGen_Click(object sender, EventArgs e)
@@ -197,7 +214,7 @@ namespace Me.Amon.Pwd.Pro
             }
             else
             {
-                _LastCharLen = MiCharLenDef;
+                _LastCharLen = _CharLenDef;
             }
             _LastCharLen.Checked = true;
 
@@ -216,7 +233,7 @@ namespace Me.Amon.Pwd.Pro
             }
             else
             {
-                _LastCharSet = MiCharSet0;
+                _LastCharSet = _CharSetDef;
             }
             _LastCharSet.Checked = true;
 

@@ -26,7 +26,7 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
         }
 
-        public void InitOnce(TableLayoutPanel grid)
+        public void InitOnce(TableLayoutPanel grid, ViewModel viewModel)
         {
             _Grid = grid;
 
@@ -36,6 +36,8 @@ namespace Me.Amon.Pwd.Wiz
 
             _Style = new RowStyle(SizeType.Absolute, 27F);
             Dock = DockStyle.Fill;
+
+            BtOpt.Image = viewModel.GetImage("att-line-options");
         }
         #endregion
 

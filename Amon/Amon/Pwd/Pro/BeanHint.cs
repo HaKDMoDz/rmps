@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Me.Amon.Model;
+using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.Pro
 {
@@ -14,8 +15,9 @@ namespace Me.Amon.Pwd.Pro
             InitializeComponent();
         }
 
-        public void InitOnce(DataModel dataModel)
+        public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
+            BtName.Image = BeanUtil.NaN16;
         }
         #endregion
 

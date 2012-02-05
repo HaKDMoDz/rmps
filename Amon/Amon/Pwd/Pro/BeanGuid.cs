@@ -24,9 +24,11 @@ namespace Me.Amon.Pwd.Pro
             InitializeComponent();
         }
 
-        public void InitOnce(DataModel dataModel)
+        public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
             _DataModel = dataModel;
+
+            BtOpt.Image = viewModel.GetImage("");
         }
 
         #region 接口实现

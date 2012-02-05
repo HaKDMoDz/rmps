@@ -32,7 +32,7 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
         }
 
-        public void InitOnce(TableLayoutPanel grid)
+        public void InitOnce(TableLayoutPanel grid, ViewModel viewModel)
         {
             _Grid = grid;
 
@@ -42,6 +42,9 @@ namespace Me.Amon.Pwd.Wiz
 
             _Style = new RowStyle(SizeType.Absolute, 27F);
             Dock = DockStyle.Fill;
+
+            BtView.Image = viewModel.GetImage("att-file-preview");
+            BtOpen.Image = viewModel.GetImage("att-file-append");
         }
         #endregion
 

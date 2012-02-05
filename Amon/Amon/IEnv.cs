@@ -14,7 +14,7 @@
         /// 系统日期格式
         /// </summary>
         public const string DATEIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-        
+
         /// <summary>
         /// 服务器路径
         /// </summary>
@@ -65,10 +65,12 @@
         /// <summary>
         /// 视图文件
         /// </summary>
-        public const string FILE_FEEL = ".asf";
+        public const string FILE_FEEL = "feel.asf";
         /// <summary>
         /// 风格文件
         /// </summary>
-        public const string FILE_LOOK = ".asl";
+        public const string FILE_LOOK = "look.asl";
+
+        public const string VALUE_TRUE = "true";
     }
 }

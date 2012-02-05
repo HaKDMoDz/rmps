@@ -40,8 +40,7 @@
             this.BtSend.Location = new System.Drawing.Point(56, 57);
             this.BtSend.Name = "BtSend";
             this.BtSend.Size = new System.Drawing.Size(21, 21);
-            this.BtSend.TabIndex = 10;
-            this.BtSend.Text = "button1";
+            this.BtSend.TabIndex = 4;
             this.BtSend.UseVisualStyleBackColor = true;
             this.BtSend.Click += new System.EventHandler(this.BtSend_Click);
             // 
@@ -52,7 +51,7 @@
             this.TbData.Location = new System.Drawing.Point(56, 30);
             this.TbData.Name = "TbData";
             this.TbData.Size = new System.Drawing.Size(307, 21);
-            this.TbData.TabIndex = 9;
+            this.TbData.TabIndex = 3;
             // 
             // LbData
             // 
@@ -60,7 +59,7 @@
             this.LbData.Location = new System.Drawing.Point(3, 33);
             this.LbData.Name = "LbData";
             this.LbData.Size = new System.Drawing.Size(47, 12);
-            this.LbData.TabIndex = 8;
+            this.LbData.TabIndex = 2;
             this.LbData.Text = "数据(&D)";
             // 
             // TbName
@@ -68,7 +67,7 @@
             this.TbName.Location = new System.Drawing.Point(56, 3);
             this.TbName.Name = "TbName";
             this.TbName.Size = new System.Drawing.Size(100, 21);
-            this.TbName.TabIndex = 7;
+            this.TbName.TabIndex = 1;
             // 
             // LbName
             // 
@@ -76,7 +75,7 @@
             this.LbName.Location = new System.Drawing.Point(3, 6);
             this.LbName.Name = "LbName";
             this.LbName.Size = new System.Drawing.Size(47, 12);
-            this.LbName.TabIndex = 6;
+            this.LbName.TabIndex = 0;
             this.LbName.Text = "名称(&N)";
             // 
             // BeanMail

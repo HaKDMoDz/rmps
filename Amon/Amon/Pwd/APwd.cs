@@ -102,7 +102,20 @@ namespace Me.Amon.Pwd
 
             _CmiLabels = new ToolStripMenuItem[] { CmiLabel0, CmiLabel1, CmiLabel2, CmiLabel3, CmiLabel4, CmiLabel5, CmiLabel6, CmiLabel7, CmiLabel8, CmiLabel9 };
             _LastLabel = CmiLabel0;
+            _ImgLabels = new Image[_CmiLabels.Length];
+            for (int i = 0; i < _CmiLabels.Length; i += 1)
+            {
+                _ImgLabels[i] = _ViewModel.GetImage("key-label" + i);
+                _CmiLabels[i].Image = _ImgLabels[i];
+            }
+
             _CmiMajors = new ToolStripMenuItem[] { CmiMajorN2, CmiMajorN1, CmiMajor0, CmiMajorP1, CmiMajorP2, };
+            _ImgMajors = new Image[_CmiMajors.Length];
+            for (int i = 0; i < _CmiMajors.Length; i += 1)
+            {
+                _ImgMajors[i] = _ViewModel.GetImage("key-major" + i);
+                _CmiMajors[i].Image = _ImgMajors[i];
+            }
             _LastMajor = CmiMajor0;
         }
 
@@ -204,7 +217,7 @@ namespace Me.Amon.Pwd
 
                 if (CharUtil.IsValidateHash(key.GtdId))
                 {
-                    key.Hint = _ViewModel.HimtImage;
+                    key.Hint = _ViewModel.HintImage;
                 }
                 else
                 {
@@ -234,8 +247,8 @@ namespace Me.Amon.Pwd
                     int x = e.Bounds.X + e.Bounds.Width;
                     y -= 16;
                     e.Graphics.DrawImage(key.Hint, x - 48, y);
-                    e.Graphics.DrawImage(_ViewModel.LabelImages[key.Label], x - 32, y);
-                    e.Graphics.DrawImage(_ViewModel.MajorImages[key.Major + 2], x - 16, y);
+                    e.Graphics.DrawImage(_ImgLabels[key.Label], x - 32, y);
+                    e.Graphics.DrawImage(_ImgMajors[key.Major + 2], x - 16, y);
                 }
             }
         }
@@ -1167,6 +1180,7 @@ namespace Me.Amon.Pwd
         #region 使用状态
         private ToolStripMenuItem _LastLabel;
         private ToolStripMenuItem[] _CmiLabels;
+        private Image[] _ImgLabels;
         private void CmiLabel0_Click(object sender, EventArgs e)
         {
             ChangeLabel(0);
@@ -1251,6 +1265,7 @@ namespace Me.Amon.Pwd
         #region 优先级
         private ToolStripMenuItem _LastMajor;
         private ToolStripMenuItem[] _CmiMajors;
+        private Image[] _ImgMajors;
         private void CmiMajorP2_Click(object sender, EventArgs e)
         {
             ChangeMajor(2);
@@ -1348,7 +1363,7 @@ namespace Me.Amon.Pwd
                     if (_ProView == null)
                     {
                         _ProView = new APro();
-                        _ProView.Init(this, _SafeModel, _DataModel);
+                        _ProView.Init(this, _SafeModel, _DataModel, _ViewModel);
                     }
                     _PwdView = _ProView;
                     _LastView = view;
@@ -1357,7 +1372,7 @@ namespace Me.Amon.Pwd
                     if (_WizView == null)
                     {
                         _WizView = new AWiz();
-                        _WizView.Init(this, _SafeModel, _DataModel);
+                        _WizView.Init(this, _SafeModel, _DataModel, _ViewModel);
                     }
                     _PwdView = _WizView;
                     _LastView = view;

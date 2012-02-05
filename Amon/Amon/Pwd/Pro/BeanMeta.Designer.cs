@@ -43,7 +43,7 @@
             this.TbData.Multiline = true;
             this.TbData.Name = "TbData";
             this.TbData.Size = new System.Drawing.Size(307, 48);
-            this.TbData.TabIndex = 7;
+            this.TbData.TabIndex = 3;
             // 
             // LbData
             // 
@@ -51,7 +51,7 @@
             this.LbData.Location = new System.Drawing.Point(3, 35);
             this.LbData.Name = "LbData";
             this.LbData.Size = new System.Drawing.Size(47, 12);
-            this.LbData.TabIndex = 6;
+            this.LbData.TabIndex = 2;
             this.LbData.Text = "数据(&D)";
             // 
             // TbName
@@ -59,7 +59,7 @@
             this.TbName.Location = new System.Drawing.Point(56, 3);
             this.TbName.Name = "TbName";
             this.TbName.Size = new System.Drawing.Size(100, 21);
-            this.TbName.TabIndex = 5;
+            this.TbName.TabIndex = 1;
             // 
             // LbName
             // 
@@ -67,7 +67,7 @@
             this.LbName.Location = new System.Drawing.Point(3, 6);
             this.LbName.Name = "LbName";
             this.LbName.Size = new System.Drawing.Size(47, 12);
-            this.LbName.TabIndex = 4;
+            this.LbName.TabIndex = 0;
             this.LbName.Text = "名称(&N)";
             // 
             // BeanMeta

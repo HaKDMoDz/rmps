@@ -77,6 +77,10 @@ namespace Me.Amon.Uc
                     {
                         break;
                     }
+                    if (string.IsNullOrEmpty(line))
+                    {
+                        continue;
+                    }
 
                     if (line.StartsWith("#"))
                     {

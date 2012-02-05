@@ -15,7 +15,7 @@ namespace Me.Amon.Pwd.Pro
             InitializeComponent();
         }
 
-        public void InitOnce(DataModel dataModel)
+        public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
             this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
             this.TbData.GotFocus += new EventHandler(TbData_GotFocus);

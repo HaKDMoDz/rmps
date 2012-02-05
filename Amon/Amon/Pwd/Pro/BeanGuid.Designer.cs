@@ -57,7 +57,6 @@
             this.BtOpt.Name = "BtOpt";
             this.BtOpt.Size = new System.Drawing.Size(21, 21);
             this.BtOpt.TabIndex = 2;
-            this.BtOpt.Text = "button1";
             this.BtOpt.UseVisualStyleBackColor = true;
             this.BtOpt.Click += new System.EventHandler(this.button1_Click);
             // 

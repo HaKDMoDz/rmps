@@ -8,6 +8,7 @@ namespace Me.Amon.Pwd.Wiz
     {
         private SafeModel _SafeModel;
         private DataModel _DataModel;
+        private ViewModel _ViewModel;
         private RowStyle _DefStyle;
         private Label _DefLabel;
 
@@ -23,9 +24,10 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
         }
 
-        public void Init(DataModel dataModel)
+        public void Init(DataModel dataModel, ViewModel viewModel)
         {
             _DataModel = dataModel;
+            _ViewModel = viewModel;
 
             _DefStyle = new RowStyle(SizeType.Percent, 100F);
 
@@ -164,7 +166,7 @@ namespace Me.Amon.Pwd.Wiz
                         ctl = null;
                         break;
                 }
-                ctl.InitOnce(TpGrid);
+                ctl.InitOnce(TpGrid, _ViewModel);
                 list.Add(ctl);
             }
             else
