@@ -100,7 +100,7 @@ namespace Me.Amon.Uc
                             item.V += line;
                         }
 
-                        multiLine = line.EndsWith("\\");
+                        multiLine = line.EndsWith("  \\");
                         continue;
                     }
 
@@ -115,7 +115,7 @@ namespace Me.Amon.Uc
 
                     item = new Item { V = "", D = "" };
                     isComment = false;
-                    multiLine = line.EndsWith("\\");
+                    multiLine = line.EndsWith("  \\");
                 }
                 reader.Close();
             }

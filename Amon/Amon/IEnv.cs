@@ -41,6 +41,7 @@
         public const string AMON_CFG_CODE = "amon.code";
         public const string AMON_CFG_INFO = "amon.info";
         public const string AMON_CFG_DATA = "amon.data";
+        public const string AMON_CFG_PASS = "amon.pass";
         public const string AMON_CFG_LOOK = "amon.look";
         public const string AMON_CFG_FEEL = "amon.feel";
 

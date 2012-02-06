@@ -4,6 +4,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web.SessionState;
+using System.Xml;
 using Me.Amon.Da;
 using Me.Amon.Util;
 
@@ -14,6 +15,7 @@ namespace Me.Amon.Model
         #region 全局变量
         private byte[] _Keys;
         private byte[] _Salt;
+        private byte[] _Pass;
         private char[] _Mask;
 
         private string Hash { get { return _Hash; } }
@@ -155,7 +157,7 @@ namespace Me.Amon.Model
             dba.ReInit();
             dba.AddTable(DBConst.C3010600);
             dba.AddParam(DBConst.C3010603, tmpPwds);
-            dba.AddParam(DBConst.C301060F, DBConst.SQL_NOW, false);
+            dba.AddParam(DBConst.C3010610, DBConst.SQL_NOW, false);
             dba.AddWhere(DBConst.C3010602, _Hash);
             return 1 == dba.ExecuteUpdate();
         }
@@ -256,7 +258,7 @@ namespace Me.Amon.Model
         }
 
         /// <summary>
-        /// 用户注册
+        /// 用户注册（网页方式）
         /// </summary>
         /// <param name="name">登录用户</param>
         /// <param name="pass">用户口令</param>
@@ -355,6 +357,8 @@ namespace Me.Amon.Model
             #endregion
 
             #region 安全信息
+            _Pass = new byte[256];
+            new Random().NextBytes(_Pass);
             string info = Digest(name, pass);
             dba.ReInit();
             dba.AddTable(DBConst.C3010600);
@@ -372,8 +376,8 @@ namespace Me.Amon.Model
             dba.AddParam(DBConst.C301060C, "");
             dba.AddParam(DBConst.C301060D, "");
             dba.AddParam(DBConst.C301060E, "");
-            dba.AddParam(DBConst.C301060F, DBConst.SQL_NOW, false);
             dba.AddParam(DBConst.C3010610, DBConst.SQL_NOW, false);
+            dba.AddParam(DBConst.C3010611, DBConst.SQL_NOW, false);
             if (dba.ExecuteInsert() != 1)
             {
                 return IMsg.MSG_SIGNUP_INNER;
@@ -404,16 +408,16 @@ namespace Me.Amon.Model
         }
 
         /// <summary>
-        /// 网络用户
+        /// 用户注册（服务方式）
         /// </summary>
         /// <returns></returns>
-        public bool SignWs(string code, string name, string pass, out string data)
+        public bool SignWs(string name, string pass, XmlWriter writer)
         {
             Random r = new Random();
             byte[] t = new byte[72];
 
             int i = 0;
-            byte[] a = Encoding.UTF8.GetBytes(code);
+            byte[] a = Encoding.UTF8.GetBytes(_Code);
             Array.Copy(a, 0, t, i, a.Length);
             i += a.Length;
 
@@ -432,8 +436,8 @@ namespace Me.Amon.Model
             Array.Copy(a, 0, t, i, a.Length);
 
             #region AES 加密
-            byte[] k = GenK(name, code, pass);
-            byte[] v = GenV(name, code, pass);
+            byte[] k = GenK(name, _Code, pass);
+            byte[] v = GenV(name, _Code, pass);
             AesManaged aes = new AesManaged();
             using (MemoryStream mStream = new MemoryStream())
             {
@@ -447,23 +451,51 @@ namespace Me.Amon.Model
             aes.Clear();
             #endregion
 
-            data = Convert.ToBase64String(t);
+            string data = Convert.ToBase64String(t);
 
             DBAccess dba = new DBAccess();
             dba.AddTable(DBConst.APWD0000);
-            dba.AddParam(DBConst.APWD0001, code);
+            dba.AddParam(DBConst.APWD0001, _Code);
             dba.AddParam(DBConst.APWD0002, "data");
             dba.AddParam(DBConst.APWD0003, data);
             dba.AddParam(DBConst.APWD0004, DBConst.SQL_NOW, false);
             dba.ExecuteInsert();
 
-            _Name = name;
-            _Code = code;
+            writer.WriteElementString("Code", _Code);
+            writer.WriteElementString("Info", "");
+            writer.WriteElementString("Data", data);
+            writer.WriteElementString("Pass", Convert.ToBase64String(_Pass));
             return true;
         }
         #endregion
 
         #region 数据安全
+        public string Digest(string name, string pass)
+        {
+            byte[] s = Encoding.UTF8.GetBytes(name + '%' + pass + "@Amon");
+            byte[] t = new byte[_Hash.Length + s.Length];
+            new Random().NextBytes(t);
+            Array.Copy(_Pass, t, _Pass.Length);
+            Array.Copy(s, 0, t, _Pass.Length, s.Length);
+
+            return Convert.ToBase64String(Digest(t));
+        }
+
+        public byte[] Digest(byte[] data)
+        {
+            return HashAlgorithm.Create("SHA256").ComputeHash(data);
+        }
+
+        private byte[] GenK(string name, string code, string pass)
+        {
+            return Digest(Encoding.UTF8.GetBytes(name + '@' + code + "&Amon.Me/" + pass));
+        }
+
+        private byte[] GenV(string name, string code, string pass)
+        {
+            return Encoding.UTF8.GetBytes(code + "@Amon.Me");
+        }
+
         public string Decode(string data)
         {
             AesManaged aes = new AesManaged();
@@ -500,31 +532,6 @@ namespace Me.Amon.Model
             aes.Clear();
 
             return CharUtil.EncodeString(buf, _Mask);
-        }
-
-        public string Digest(string name, string pass)
-        {
-            return Convert.ToBase64String(Digest(name + '%' + pass + "@Amon"));
-        }
-
-        public byte[] Digest(string data)
-        {
-            if (string.IsNullOrEmpty(data))
-            {
-                return null;
-            }
-            byte[] temp = Encoding.UTF8.GetBytes(data);
-            return HashAlgorithm.Create("SHA256").ComputeHash(temp);
-        }
-
-        private byte[] GenK(string name, string code, string pass)
-        {
-            return Digest(name + '@' + code + "&Amon.Me/" + pass);
-        }
-
-        private byte[] GenV(string name, string code, string pass)
-        {
-            return Encoding.UTF8.GetBytes(code + "@Amon.Me");
         }
         #endregion
     }

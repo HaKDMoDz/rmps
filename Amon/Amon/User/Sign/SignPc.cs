@@ -16,7 +16,7 @@ using Org.BouncyCastle.OpenSsl;
 namespace Me.Amon.User.Sign
 {
     /// <summary>
-    /// 联机/单机注册
+    /// 联机注册
     /// </summary>
     public partial class SignPc : UserControl, ISignAc
     {
@@ -143,17 +143,6 @@ namespace Me.Amon.User.Sign
             }
             #endregion
 
-            // 在线注册
-            if (!IsPcMode)
-            {
-                WebClient client = new WebClient();
-                client.Headers["Content-type"] = "application/x-www-form-urlencoded";
-                client.Encoding = Encoding.UTF8;
-                client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignUpV_UploadStringCompleted);
-                client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=rsa&m=0");
-                return;
-            }
-
             // 本地注册
             if (!_UserModel.SignUp(_Root, _Name, _Pass))
             {
@@ -178,8 +167,6 @@ namespace Me.Amon.User.Sign
         {
         }
         #endregion
-
-        public bool IsPcMode { get; set; }
 
         private void BtPath_Click(object sender, EventArgs e)
         {
@@ -215,128 +202,5 @@ namespace Me.Amon.User.Sign
             }
             TbPath.Text = path;
         }
-
-        #region 私有函数
-        private void SignUpV_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
-        {
-            if (e.Error != null)
-            {
-                _SignAc.ShowAlert(e.Error.Message);
-                return;
-            }
-
-            string xml = e.Result;
-            string t = null;
-            string d = null;
-            using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
-            {
-                if (xml.IndexOf("<Error>") > 0)
-                {
-                    reader.ReadToFollowing("Error");
-                    _SignAc.ShowAlert(reader.ReadElementContentAsString());
-                    return;
-                }
-
-                if (reader.Name == "t" || reader.ReadToFollowing("t"))
-                {
-                    t = reader.ReadElementContentAsString();
-                }
-
-                if (reader.Name == "k" || reader.ReadToFollowing("k"))
-                {
-                    d = reader.ReadElementContentAsString();
-                }
-            }
-
-            switch (IEnv.SERVER_TYPE)
-            {
-                case "NET":
-                    d = Net(d);
-                    break;
-                case "PHP":
-                    d = Php(d);
-                    break;
-                default:
-                    break;
-            }
-
-            WebClient client = new WebClient();
-            client.Headers["Content-type"] = "application/x-www-form-urlencoded";
-            client.Encoding = Encoding.UTF8;
-            client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignUpS_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=sup&m=" + t + "&d=" + d);
-        }
-
-        private void SignUpS_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
-        {
-            if (e.Error != null)
-            {
-                _SignAc.ShowAlert(e.Error.Message);
-                return;
-            }
-
-            string xml = e.Result;
-            string code = null;
-            string info = null;
-            string data = null;
-            using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
-            {
-                if (xml.IndexOf("<Error>") > 0)
-                {
-                    reader.ReadToFollowing("Error");
-                    _SignAc.ShowAlert(reader.ReadElementContentAsString());
-                    return;
-                }
-
-                if (reader.Name == "Code" || reader.ReadToFollowing("Code"))
-                {
-                    code = reader.ReadElementContentAsString();
-                    return;
-                }
-
-                if (reader.Name == "Info" || reader.ReadToFollowing("Info"))
-                {
-                    info = reader.ReadElementContentAsString();
-                }
-
-                if (reader.Name == "Info" || reader.ReadToFollowing("Info"))
-                {
-                    data = reader.ReadElementContentAsString();
-                }
-            }
-
-            _UserModel.SignNw(_Root, code, _Name, info, data);
-            _Pass = null;
-
-            _SignAc.CallBack(0);
-        }
-
-        private string Net(string t)
-        {
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
-            rsa.FromXmlString(t);
-
-            byte[] b = Encoding.UTF8.GetBytes(_Name + '\n' + _Mail + '\n' + _Pass);
-            b = rsa.Encrypt(b, false);
-            return HttpUtil.ToBase64String(b);
-        }
-
-        private string Php(string t)
-        {
-            AsymmetricKeyParameter keyPair;
-            using (StringReader sr = new StringReader(t))
-            {
-                PemReader pr = new PemReader(sr);
-                keyPair = (AsymmetricKeyParameter)pr.ReadObject();
-            }
-
-            IAsymmetricBlockCipher rsa = new Pkcs1Encoding(new RsaEngine());
-            rsa.Init(true, keyPair);
-
-            byte[] b = Encoding.UTF8.GetBytes(_Pass);
-            b = rsa.ProcessBlock(b, 0, b.Length);
-            return HttpUtil.ToBase64String(b);
-        }
-        #endregion
     }
 }

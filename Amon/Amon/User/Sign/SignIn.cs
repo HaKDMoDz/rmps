@@ -86,7 +86,6 @@ namespace Me.Amon.User.Sign
             _Prop.Load(IEnv.AMON_SYS);
 
             _Name = _Name.ToLower();
-            _Info = _UserModel.Digest(_Name, pass);
             string code = _Prop.Get(string.Format(IEnv.AMON_SYS_CODE, _Name));
             _Home = _Prop.Get(string.Format(IEnv.AMON_SYS_HOME, _Name));
 
@@ -106,7 +105,7 @@ namespace Me.Amon.User.Sign
             #endregion
 
             #region 已有用户正常登录
-            if (!_UserModel.SignIn(_Home, code, _Name, pass, _Info))
+            if (!_UserModel.SignIn(_Home, code, _Name, pass))
             {
                 pass = null;
                 _SignAc.ShowAlert("身份验证错误，请确认您的用户及口令输入是否正确！");

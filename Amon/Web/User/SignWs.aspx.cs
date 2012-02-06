@@ -35,9 +35,8 @@ public partial class User_SignWs : System.Web.UI.Page
             return;
         }
 
-        string data;
         UserModel userModel = UserModel.Current(Session);
-        if (userModel.SignWs(userModel.Code, userModel.Name, userPwds, out data))
+        if (userModel.SignWs(userModel.Name, userPwds, null))
         {
             tr_RegData1.Visible = false;
             tr_RegData2.Visible = false;

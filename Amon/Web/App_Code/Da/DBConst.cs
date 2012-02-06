@@ -453,13 +453,18 @@
         public const string C301060E = "C301060E";
         public const int C301060E_SIZE = 256;
         /// <summary>
-        /// 更新日期
+        /// 随机口令
         /// </summary>
         public const string C301060F = "C301060F";
+        public const int C301060F_SIZE = 512;
+        /// <summary>
+        /// 更新日期
+        /// </summary>
+        public const string C3010610 = "C3010610";
         /// <summary>
         /// 创建日期
         /// </summary>
-        public const string C3010610 = "C3010610";
+        public const string C3010611 = "C3010611";
         #endregion
 
         #region 通讯类别

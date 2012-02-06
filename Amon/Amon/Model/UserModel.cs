@@ -12,6 +12,7 @@ namespace Me.Amon.Model
     {
         #region 全局变量
         private string _Info;
+        private byte[] _Pass;
         private byte[] _Keys;
         private byte[] _Salt;
         private char[] _Mask;
@@ -26,37 +27,12 @@ namespace Me.Amon.Model
         public string Feel { get; set; }
         #endregion
 
-        public string Digest(string name, string pass)
-        {
-            return Convert.ToBase64String(Digest(name + '%' + pass + "@Amon"));
-        }
-
-        public byte[] Digest(string data)
-        {
-            if (string.IsNullOrEmpty(data))
-            {
-                return null;
-            }
-            byte[] temp = Encoding.UTF8.GetBytes(data);
-            return HashAlgorithm.Create("SHA256").ComputeHash(temp);
-        }
-
-        private byte[] GenK(string name, string code, string pass)
-        {
-            return Digest(name + '@' + code + "&Amon.Me/" + pass);
-        }
-
-        private byte[] GenV(string name, string code, string pass)
-        {
-            return Encoding.UTF8.GetBytes(code + "@Amon.Me");
-        }
-
         #region 权限认证
         /// <summary>
         /// 用户登录
         /// </summary>
         /// <returns></returns>
-        public bool SignIn(string home, string code, string name, string pass, string info)
+        public bool SignIn(string home, string code, string name, string pass)
         {
             string file = home + IEnv.AMON_CFG;
             if (!File.Exists(file))
@@ -67,7 +43,14 @@ namespace Me.Amon.Model
             Uc.Properties prop = new Uc.Properties();
             prop.Load(file);
 
-            if (info != prop.Get(IEnv.AMON_CFG_INFO))
+            string hash = prop.Get(IEnv.AMON_CFG_PASS);
+            if (!CharUtil.IsValidate(hash, 344))
+            {
+                return false;
+            }
+            _Pass = Convert.FromBase64String(hash);
+            hash = Digest(name, pass);
+            if (hash != prop.Get(IEnv.AMON_CFG_INFO))
             {
                 return false;
             }
@@ -114,7 +97,7 @@ namespace Me.Amon.Model
 
             _Name = name;
             _Code = code;
-            _Info = info;
+            _Info = hash;
             _Home = home;
             Look = "Default";
             Feel = "Default";
@@ -156,6 +139,7 @@ namespace Me.Amon.Model
             Uc.Properties prop = new Uc.Properties();
             prop.Set(IEnv.AMON_CFG_NAME, name);
             prop.Set(IEnv.AMON_CFG_CODE, code);
+            prop.Set(IEnv.AMON_CFG_PASS, Convert.ToBase64String(_Pass));
             prop.Set(IEnv.AMON_CFG_INFO, info);
             prop.Set(IEnv.AMON_CFG_DATA, data);
             prop.Save(root + Path.DirectorySeparatorChar + IEnv.AMON_CFG);
@@ -207,7 +191,6 @@ namespace Me.Amon.Model
             }
             aes.Clear();
             #endregion
-
 
             // 摘要用户登录信息
             _Info = Digest(Name, newPwds);
@@ -359,13 +342,16 @@ namespace Me.Amon.Model
             aes.Clear();
             #endregion
 
-            SignNw(root, code, name, Digest(name, pass), Convert.ToBase64String(t));
+            _Pass = new byte[256];
+            r.NextBytes(_Pass);
+            pass = Digest(name, pass);
+
+            SignNw(root, code, name, pass, Convert.ToBase64String(t));
 
             _Name = name;
             _Code = code;
             _Info = pass;
             _Home = root + code + Path.DirectorySeparatorChar;
-            pass = null;
             return true;
         }
 
@@ -400,6 +386,32 @@ namespace Me.Amon.Model
         }
 
         #region 数据安全
+        public string Digest(string name, string pass)
+        {
+            byte[] s = Encoding.UTF8.GetBytes(name + '%' + pass + "@Amon");
+            byte[] t = new byte[_Pass.Length + s.Length];
+            new Random().NextBytes(t);
+            Array.Copy(_Pass, t, _Pass.Length);
+            Array.Copy(s, 0, t, _Pass.Length, s.Length);
+
+            return Convert.ToBase64String(Digest(t));
+        }
+
+        public byte[] Digest(byte[] data)
+        {
+            return HashAlgorithm.Create("SHA256").ComputeHash(data);
+        }
+
+        private byte[] GenK(string name, string code, string pass)
+        {
+            return Digest(Encoding.UTF8.GetBytes(name + '@' + code + "&Amon.Me/" + pass));
+        }
+
+        private byte[] GenV(string name, string code, string pass)
+        {
+            return Encoding.UTF8.GetBytes(code + "@Amon.Me");
+        }
+
         public string Decode(string data)
         {
             AesManaged aes = new AesManaged();

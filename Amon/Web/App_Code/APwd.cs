@@ -307,25 +307,11 @@ namespace Me.Amon
             string mail = HttpUtil.Text2Db(tmp[1]);
             string pass = tmp[2];
             UserModel model = new UserModel();
-            if (!model.SignUp(name, pass, mail))
+            if (0 != model.SignUp(name, pass, mail))
             {
                 return;
             }
-        }
-
-        public void SignWs(HttpContext context, XmlWriter writer)
-        {
-            UserModel model = UserModel.Current(context.Session);
-            string code = "";
-            string name = "";
-            string pass = "";
-            string info = "";
-            string d = "";
-            model.SignWs(code, name, pass, out d);
-
-            writer.WriteElementString("Code", code);
-            writer.WriteElementString("Info", info);
-            writer.WriteElementString("Data", d);
+            model.SignWs(name, pass, writer);
         }
 
         private void SignPk(HttpContext context, XmlWriter writer)
