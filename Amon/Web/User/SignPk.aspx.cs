@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Web.UI;
+using Me.Amon.Model;
 
 public partial class User_SignPk : Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        TrErrMsg.Attributes.Add("style", "display: none;");
+        if (UserModel.Current(Session).Rank < IUser.LEVEL_01)
+        {
+            Response.Redirect("~/Index.aspx");
+            return;
+        }
 
         if (IsPostBack)
         {
             return;
         }
-
-        //bt_Change.Enabled = UserInfo.Current(Session).UserCode != cons.comn.user.UserInfo.DEMO_CODE;
     }
 
     protected void BtSignPk_Click(object sender, EventArgs e)

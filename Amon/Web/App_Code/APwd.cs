@@ -26,7 +26,6 @@ namespace Me.Amon
 
             XmlWriter writer = XmlWriter.Create(context.Response.Output);
             writer.WriteStartElement("Amon");
-            writer.WriteStartElement("APwd");
 
             switch (o)
             {
@@ -65,7 +64,6 @@ namespace Me.Amon
                     break;
             }
 
-            writer.WriteEndElement();
             writer.WriteEndElement();
 
             writer.Flush();
@@ -288,6 +286,8 @@ namespace Me.Amon
 
         private void SignUp(HttpContext context, XmlWriter writer)
         {
+            writer.WriteStartElement("User");
+
             string d = context.Request["d"];
             if (!CharUtil.IsValidate(d))
             {
@@ -312,6 +312,8 @@ namespace Me.Amon
                 return;
             }
             model.SignWs(name, pass, writer);
+
+            writer.WriteEndElement();
         }
 
         private void SignPk(HttpContext context, XmlWriter writer)

@@ -1,7 +1,7 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="SignUp.aspx.cs" Inherits="User_SignUp" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Amon.master" AutoEventWireup="true" CodeFile="SignUp.aspx.cs" Inherits="User_SignUp" %>
 
 <asp:Content ID="AmonData" ContentPlaceHolderID="AmonView" runat="Server">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <table border="0" cellpadding="0" cellspacing="0" id="TB_DATA">
         <tr id="TrErrMsg" runat="server" style="display: none;">
             <td align="center" style="height: 30px;">
                 <asp:Label ID="LbErrMsg" runat="server" CssClass="TEXT_NOTE1"></asp:Label>
@@ -50,7 +50,8 @@
                 <table border="0" cellpadding="4" cellspacing="0" width="300">
                     <tr>
                         <td align="right">
-                            <asp:Button ID="BtSignUp" runat="server" Text="注册(R)" AccessKey="R" OnClick="BtSignUp_Click" OnClientClick="return checkNull();" />
+                            <asp:Button ID="BtSignUp" runat="server" Text="注册(R)" AccessKey="R" OnClick="BtSignUp_Click" />
+                            <a href="SignIn.aspx">取消</a>
                         </td>
                     </tr>
                 </table>
@@ -70,24 +71,19 @@
                             <label id="dv_Redirect" style="color: #FF0000;">
                                 5</label>
                             秒钟后没有自动跳转到登录页面，请手动点击下面链接：<br />
-
                             <script type="text/javascript">
                                 var time = 5;
                                 setInterval("reDirect()", 1000);
-                                function reDirect()
-                                {
+                                function reDirect() {
                                     time -= 1;
-                                    if(time > 0)
-                                    {
+                                    if (time > 0) {
                                         document.getElementById('dv_Redirect').innerHTML = time.toString();
                                     }
-                                    else
-                                    {
+                                    else {
                                         window.location.href = "/user/user0101.aspx";
                                     }
                                 }
                             </script>
-
                         </td>
                     </tr>
                     <tr>
@@ -99,7 +95,4 @@
             </td>
         </tr>
     </table>
-</asp:Content>
-<asp:Content ID="AmonFoot" ContentPlaceHolderID="AmonFoot" runat="Server">
-    <script type="text/javascript" src="SignUp.js"></script>
 </asp:Content>

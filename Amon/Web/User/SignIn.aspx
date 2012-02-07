@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="SignIn.aspx.cs" Inherits="User_SignIn" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Amon.master" AutoEventWireup="true" CodeFile="SignIn.aspx.cs" Inherits="User_SignIn" %>
 
 <asp:Content ID="AmonData" ContentPlaceHolderID="AmonView" runat="Server">
     <table border="0" cellpadding="0" cellspacing="0" id="TB_DATA">
@@ -37,14 +37,12 @@
                             演示账户：demo/demo
                         </td>
                         <td align="right" style="height: 40px;">
-                            <asp:Button ID="BtSignIn" runat="server" Text="登录(S)" AccessKey="S" OnClick="BtSignIn_Click" OnClientClick="return checkNull();" />
+                            <asp:Button ID="BtSignIn" runat="server" Text="登录(S)" AccessKey="S" OnClick="BtSignIn_Click" />
+                            <a href="SignUp.aspx">注册</a>
                         </td>
                     </tr>
                 </table>
             </td>
         </tr>
     </table>
-</asp:Content>
-<asp:Content ID="AmonFoot" ContentPlaceHolderID="AmonFoot" runat="Server">
-    <script type="text/javascript" src="SignIn.js"></script>
 </asp:Content>

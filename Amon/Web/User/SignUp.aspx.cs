@@ -10,7 +10,11 @@ public partial class User_SignUp : Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        TrErrMsg.Attributes.Add("style", "display: none;");
+        if (UserModel.Current(Session).Rank < IUser.LEVEL_01)
+        {
+            Response.Redirect("~/Index.aspx");
+            return;
+        }
 
         if (IsPostBack)
         {

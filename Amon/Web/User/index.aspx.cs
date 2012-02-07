@@ -1,6 +1,7 @@
 ﻿using System;
+using Me.Amon.Da;
 
-public partial class user_index : System.Web.UI.Page
+public partial class User_Index : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -8,5 +9,7 @@ public partial class user_index : System.Web.UI.Page
         {
             return;
         }
+
+        //DBAccess dba = new DBAccess();
     }
 }

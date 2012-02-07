@@ -1,11 +1,22 @@
 ﻿using System;
+using System.Text;
+using System.Xml;
 using Me.Amon.Model;
 
 public partial class User_SignWs : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (UserModel.Current(Session).Rank < IUser.LEVEL_01)
+        {
+            Response.Redirect("~/Index.aspx");
+            return;
+        }
 
+        if (IsPostBack)
+        {
+            return;
+        }
     }
 
     protected void BtSignWs_Click(object sender, EventArgs e)
@@ -35,17 +46,28 @@ public partial class User_SignWs : System.Web.UI.Page
             return;
         }
 
+        StringBuilder buffer = new StringBuilder();
+        XmlWriter writer = XmlWriter.Create(buffer);
+        writer.WriteStartElement("Amon");
+        writer.WriteStartElement("User");
+
         UserModel userModel = UserModel.Current(Session);
-        if (userModel.SignWs(userModel.Name, userPwds, null))
-        {
-            tr_RegData1.Visible = false;
-            tr_RegData2.Visible = false;
-            tr_RegInfo.Visible = true;
-        }
-        else
+        if (!userModel.SignWs(userModel.Name, userPwds, writer))
         {
             LbErrMsg.Text = "用户注册失败，请稍后重试！";
             TrErrMsg.Attributes.Add("style", "display:;");
+            return;
         }
+
+        tr_RegData1.Visible = false;
+        tr_RegData2.Visible = false;
+        tr_RegInfo.Visible = true;
+
+        writer.WriteEndElement();
+        writer.WriteEndElement();
+        writer.Flush();
+        writer.Close();
+
+        TBData.Text = buffer.Replace("encoding=\"utf-16\"", "encoding=\"utf-8\"").ToString();
     }
 }

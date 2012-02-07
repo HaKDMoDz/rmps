@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="SignWs.aspx.cs" Inherits="User_SignWs" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Amon.master" AutoEventWireup="true" CodeFile="SignWs.aspx.cs" Inherits="User_SignWs" %>
 
 <asp:Content ID="AmonData" ContentPlaceHolderID="AmonView" runat="Server">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -34,7 +34,7 @@
                 <table border="0" cellpadding="4" cellspacing="0" width="300">
                     <tr>
                         <td align="right">
-                            <asp:Button ID="BtSignWs" runat="server" Text="注册(R)" AccessKey="R" OnClick="BtSignWs_Click" OnClientClick="return checkNull();" />
+                            <asp:Button ID="BtSignWs" runat="server" Text="注册(R)" AccessKey="R" OnClick="BtSignWs_Click" />
                         </td>
                     </tr>
                 </table>
@@ -50,14 +50,11 @@
                     </tr>
                     <tr>
                         <td align="left" class="TD_DataHead_TL_L">
-                            <asp:TextBox ID="TBData" runat="server" ReadOnly="True" TextMode="MultiLine"></asp:TextBox>
+                            <asp:TextBox ID="TBData" runat="server" ReadOnly="True" TextMode="MultiLine" Width="100%" Rows="8"></asp:TextBox>
                         </td>
                     </tr>
                 </table>
             </td>
         </tr>
     </table>
-</asp:Content>
-<asp:Content ID="AmonFoot" ContentPlaceHolderID="AmonFoot" runat="Server">
-    <script type="text/javascript" src="SignWs.js"></script>
 </asp:Content>

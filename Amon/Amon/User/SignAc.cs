@@ -15,6 +15,7 @@ namespace Me.Amon.User
     {
         private ISignAc _SignAc;
         private UserModel _UserModel;
+        private Uc.Properties _Prop;
 
         #region 构造函数
         public SignAc()

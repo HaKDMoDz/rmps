@@ -245,7 +245,7 @@ namespace Me.Amon.Model
             {
                 return;
             }
-            key = _UserModel.Decode(key);
+            key = _UserModel.DecodeKey(key);
 
             _AttList.Clear();
 
@@ -358,7 +358,7 @@ namespace Me.Amon.Model
             // 加密版本
             Key.CipherVer = "1";
 
-            Key.Password = _UserModel.Encode(buf.ToString());
+            Key.Password = _UserModel.EncodeKey(buf.ToString());
 
             _AttList.Clear();
         }

@@ -292,3 +292,156 @@ div.accountInfo
     text-align: right;
     padding-right: 10px;
 }
+
+/* AMON  
+----------------------------------------------------------*/
+#TB_DATA
+{
+    width: 100%;
+}
+
+.TEXT_NOTE1
+{
+    color: #FF0000;
+}
+.TEXT_NOTE2
+{
+    color: #ff6600;
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+}
+.TEXT_NOTE3
+{
+    color: #0000FF;
+}
+.TEXT_NOTE4
+{
+    color: #999999;
+}
+
+/*=========================================================
+ * 表格风格定义
+ *=========================================================*/
+/*边框风格*/
+.DV_DataList
+{
+    padding: 4px;
+    border: solid 2px #A0A0A0;
+}
+
+/*含上下左右边框的表格*/
+.TB_DataList
+{
+    border: dashed 1px #CCCCCC;
+}
+.TD_DataHead_L
+{
+    background-color: #EEEEEE;
+    border-bottom: dashed 1px #CCCCCC;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.TD_DataHead_N
+{
+    background-color: #EEEEEE;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.TD_DataItem_L
+{
+    border-bottom: dashed 1px #CCCCCC;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.TD_DataItem_N
+{
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.TD_DataFoot_L
+{
+    border-bottom: dashed 1px #CCCCCC;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.TD_DataFoot_N
+{
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+/*仅上左边框的表格*/
+.TB_DataList_TL
+{
+    border-top: dashed 1px #CCCCCC;
+    border-left: dashed 1px #CCCCCC;
+}
+.TD_DataHead_TL_N
+{
+    background-color: #EEEEEE;
+    border-bottom: dashed 0px #CCCCCC;
+    border-right: dashed 0px #CCCCCC;
+}
+.TD_DataHead_TL_L
+{
+    background-color: #EEEEEE;
+    border-bottom: dashed 1px #CCCCCC;
+    border-right: dashed 1px #CCCCCC;
+}
+.TD_DataItem_TL_N
+{
+    border-bottom: dashed 0px #CCCCCC;
+    border-right: dashed 0px #CCCCCC;
+}
+.TD_DataItem_TL_L
+{
+    border-bottom: dashed 1px #CCCCCC;
+    border-right: dashed 1px #CCCCCC;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+.TD_DataFoot_TL_N
+{
+    border-bottom: dashed 0px #CCCCCC;
+    border-right: dashed 0px #CCCCCC;
+}
+.TD_DataFoot_TL_L
+{
+    border-bottom: dashed 1px #CCCCCC;
+    border-right: dashed 1px #CCCCCC;
+}
+/*仅下右边框的表格*/
+.TB_DataList_BR
+{
+    border-bottom: dashed 1px #CCCCCC;
+    border-right: dashed 1px #CCCCCC;
+}
+.TD_DataHead_BR_N
+{
+    border-top: dashed 0px #CCCCCC;
+    border-left: dashed 0px #CCCCCC;
+}
+.TD_DataHead_BR_L
+{
+    border-top: dashed 1px #CCCCCC;
+    border-left: dashed 1px #CCCCCC;
+}
+.TD_DataItem_BR_N
+{
+    border-top: dashed 0px #CCCCCC;
+    border-left: dashed 0px #CCCCCC;
+}
+.TD_DataItem_BR_L
+{
+    border-top: dashed 1px #CCCCCC;
+    border-left: dashed 1px #CCCCCC;
+}
+.TD_DataFoot_BR_N
+{
+    border-top: dashed 0px #CCCCCC;
+    border-left: dashed 0px #CCCCCC;
+}
+.TD_DataFoot_BR_L
+{
+    border-top: dashed 1px #CCCCCC;
+    border-left: dashed 1px #CCCCCC;
+}

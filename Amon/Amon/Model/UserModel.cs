@@ -5,6 +5,8 @@ using System.Security.Cryptography;
 using System.Text;
 using Me.Amon.Da;
 using Me.Amon.Util;
+using System.Xml;
+using System.Text.RegularExpressions;
 
 namespace Me.Amon.Model
 {
@@ -56,44 +58,10 @@ namespace Me.Amon.Model
             }
             string data = prop.Get(IEnv.AMON_CFG_DATA);
 
-            #region 口令散列
-            // 口令
-            byte[] k = GenK(name, code, pass);
-            // 向量
-            byte[] v = GenV(name, code, pass);
-            // 数据
-            byte[] t = Convert.FromBase64String(data);
-            pass = null;
-            #endregion
-
-            #region AES 解密
-            AesManaged aes = new AesManaged();
-            using (MemoryStream mStream = new MemoryStream())
-            {
-                using (CryptoStream cStream = new CryptoStream(mStream, aes.CreateDecryptor(k, v), CryptoStreamMode.Write))
-                {
-                    cStream.Write(t, 0, t.Length);
-                    cStream.FlushFinalBlock();
-                    t = mStream.ToArray();
-                }
-            }
-            aes.Clear();
-            #endregion
-
-            if (t.Length != 72)
+            if (!Decrypt(name, code, pass, data))
             {
                 return false;
             }
-
-            _Code = Encoding.UTF8.GetString(t, 0, 8);
-            int i = 8;
-            _Salt = new byte[16];
-            Array.Copy(t, i, _Salt, 0, _Salt.Length);
-            i += _Salt.Length;
-            _Keys = new byte[32];
-            Array.Copy(t, i, _Keys, 0, _Keys.Length);
-            i += _Keys.Length;
-            _Mask = Encoding.UTF8.GetChars(t, i, 16);
 
             _Name = name;
             _Code = code;
@@ -123,6 +91,80 @@ namespace Me.Amon.Model
         public bool SignAc(string pass)
         {
             return _Info == Digest(Name, pass);
+        }
+
+        public bool SignWs(string root, string name, string pass, string text)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(text);
+            #region Code
+            XmlNode node = doc.SelectSingleNode("/Amon/User/Code");
+            if (node == null)
+            {
+                return false;
+            }
+            string code = node.InnerText;
+            if (!Regex.IsMatch(code, "^[A-Z0-9]{8}$"))
+            {
+                return false;
+            }
+            #endregion
+
+            #region Pass
+            node = doc.SelectSingleNode("/Amon/User/Pass");
+            if (node == null)
+            {
+                return false;
+            }
+            string t = node.InnerText;
+            if (!Regex.IsMatch(t, "^[A-Za-z0-9+/=]{256,}$"))
+            {
+                return false;
+            }
+            #endregion
+
+            #region Info
+            node = doc.SelectSingleNode("/Amon/User/Info");
+            if (node == null)
+            {
+                return false;
+            }
+            string info = node.InnerText;
+            if (!Regex.IsMatch(info, "^[A-Za-z0-9+/=]{44}$"))
+            {
+                return false;
+            }
+            #endregion
+
+            #region Data
+            node = doc.SelectSingleNode("/Amon/User/Data");
+            if (node == null)
+            {
+                return false;
+            }
+            string data = node.InnerText;
+            if (!Regex.IsMatch(data, "^[A-Za-z0-9+/=]{108}$"))
+            {
+                return false;
+            }
+            #endregion
+
+            _Pass = Convert.FromBase64String(t);
+            if (info != Digest(name, pass))
+            {
+                return false;
+            }
+
+            if (!Decrypt(name, code, pass, data))
+            {
+                return false;
+            }
+
+            SignNw(root, code, name, info, data);
+            _Home = root + code + Path.DirectorySeparatorChar;
+            Look = "Default";
+            Feel = "Default";
+            return true;
         }
 
         /// <summary>
@@ -412,7 +454,50 @@ namespace Me.Amon.Model
             return Encoding.UTF8.GetBytes(code + "@Amon.Me");
         }
 
-        public string Decode(string data)
+        private bool Decrypt(string name, string code, string pass, string data)
+        {
+            #region 口令散列
+            // 口令
+            byte[] k = GenK(name, code, pass);
+            // 向量
+            byte[] v = GenV(name, code, pass);
+            // 数据
+            byte[] t = Convert.FromBase64String(data);
+            pass = null;
+            #endregion
+
+            #region AES 解密
+            AesManaged aes = new AesManaged();
+            using (MemoryStream mStream = new MemoryStream())
+            {
+                using (CryptoStream cStream = new CryptoStream(mStream, aes.CreateDecryptor(k, v), CryptoStreamMode.Write))
+                {
+                    cStream.Write(t, 0, t.Length);
+                    cStream.FlushFinalBlock();
+                    t = mStream.ToArray();
+                }
+            }
+            aes.Clear();
+            #endregion
+
+            if (t.Length != 72)
+            {
+                return false;
+            }
+
+            _Code = Encoding.UTF8.GetString(t, 0, 8);
+            int i = 8;
+            _Salt = new byte[16];
+            Array.Copy(t, i, _Salt, 0, _Salt.Length);
+            i += _Salt.Length;
+            _Keys = new byte[32];
+            Array.Copy(t, i, _Keys, 0, _Keys.Length);
+            i += _Keys.Length;
+            _Mask = Encoding.UTF8.GetChars(t, i, 16);
+            return true;
+        }
+
+        public string DecodeKey(string data)
         {
             AesManaged aes = new AesManaged();
 
@@ -431,7 +516,7 @@ namespace Me.Amon.Model
             return Encoding.UTF8.GetString(buf, 0, buf.Length);
         }
 
-        public string Encode(string data)
+        public string EncodeKey(string data)
         {
             AesManaged aes = new AesManaged();
 

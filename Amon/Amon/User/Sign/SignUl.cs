@@ -26,6 +26,8 @@ namespace Me.Amon.User.Sign
             _UserModel = userModel;
 
             InitializeComponent();
+
+            TbPath.Text = IEnv.DATA_DIR + Path.DirectorySeparatorChar;
         }
 
         #region 接口实现
@@ -44,6 +46,10 @@ namespace Me.Amon.User.Sign
                 TbName.Focus();
                 return;
             }
+            #endregion
+
+            #region 登录口令
+            string pass = "qqqq";
             #endregion
 
             #region 路径判断
@@ -68,59 +74,23 @@ namespace Me.Amon.User.Sign
                 TbInfo.Focus();
                 return;
             }
+            #endregion
 
-            string code;
-            string info;
-            string data;
             try
             {
-                string msg = "无效的认证数据！";
-                XmlDocument doc = new XmlDocument();
-                doc.LoadXml(text);
-                XmlNode node = doc.SelectSingleNode("/Amon/User/Code");
-                if (node == null)
+                if (!_UserModel.SignWs(path, name, pass, text))
                 {
-                    _SignAc.ShowAlert(msg);
-                    TbInfo.Focus();
-                    return;
-                }
-                code = node.Value;
-                if (!Regex.IsMatch(code, "^[A-Z0-9]{8}$"))
-                {
+                    string msg = "无效的认证数据！";
                     _SignAc.ShowAlert(msg);
                     TbInfo.Focus();
                     return;
                 }
 
-                node = doc.SelectSingleNode("/Amon/User/Info");
-                if (node == null)
-                {
-                    _SignAc.ShowAlert(msg);
-                    TbInfo.Focus();
-                    return;
-                }
-                info = node.Value;
-                if (!Regex.IsMatch(info, "^[A-Za-z0-9+/]{44}$"))
-                {
-                    _SignAc.ShowAlert(msg);
-                    TbInfo.Focus();
-                    return;
-                }
-
-                node = doc.SelectSingleNode("/Amon/User/Data");
-                if (node == null)
-                {
-                    _SignAc.ShowAlert(msg);
-                    TbInfo.Focus();
-                    return;
-                }
-                data = node.Value;
-                if (!Regex.IsMatch(data, "^[A-Za-z0-9+/]{108}$"))
-                {
-                    _SignAc.ShowAlert(msg);
-                    TbInfo.Focus();
-                    return;
-                }
+                Uc.Properties prop = new Uc.Properties();
+                prop.Load(IEnv.AMON_SYS);
+                prop.Set(string.Format(IEnv.AMON_SYS_HOME, name), path);
+                prop.Set(string.Format(IEnv.AMON_SYS_CODE, name), _UserModel.Code);
+                prop.Save(IEnv.AMON_SYS);
             }
             catch (Exception exp)
             {
@@ -128,15 +98,6 @@ namespace Me.Amon.User.Sign
                 TbInfo.Focus();
                 return;
             }
-            #endregion
-
-            _UserModel.SignNw(path, code, name, info, data);
-
-            Uc.Properties prop = new Uc.Properties();
-            prop.Load(IEnv.AMON_SYS);
-            prop.Set(string.Format(IEnv.AMON_SYS_HOME, name), path);
-            prop.Set(string.Format(IEnv.AMON_SYS_CODE, name), code);
-            prop.Save(IEnv.AMON_SYS);
         }
 
         public void DoCancel()
@@ -151,7 +112,37 @@ namespace Me.Amon.User.Sign
 
         private void BtPath_Click(object sender, EventArgs e)
         {
-
+            FolderBrowserDialog fd = new FolderBrowserDialog();
+            fd.SelectedPath = TbPath.Text;
+            if (DialogResult.OK != fd.ShowDialog())
+            {
+                return;
+            }
+            string path = fd.SelectedPath;
+            if (string.IsNullOrEmpty(path))
+            {
+                _SignAc.ShowAlert("请选择数据存放目录！");
+                BtPath.Focus();
+                return;
+            }
+            if (!Directory.Exists(path))
+            {
+                try
+                {
+                    Directory.CreateDirectory(path);
+                }
+                catch (Exception exp)
+                {
+                    _SignAc.ShowAlert(exp.Message);
+                    BtPath.Focus();
+                    return;
+                }
+            }
+            if (path[path.Length - 1] != Path.DirectorySeparatorChar)
+            {
+                path += Path.DirectorySeparatorChar;
+            }
+            TbPath.Text = path;
         }
     }
 }

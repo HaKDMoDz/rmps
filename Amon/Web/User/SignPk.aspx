@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="SignPk.aspx.cs" Inherits="User_SignPk" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Amon.master" AutoEventWireup="true" CodeFile="SignPk.aspx.cs" Inherits="User_SignPk" %>
 
 <asp:Content ID="AmonData" ContentPlaceHolderID="AmonView" runat="Server">
     <table border="0" cellpadding="0" cellspacing="0" id="TB_DATA">
@@ -60,7 +60,4 @@
             </td>
         </tr>
     </table>
-</asp:Content>
-<asp:Content ID="AmonFoot" ContentPlaceHolderID="AmonFoot" runat="Server">
-    <script type="text/javascript" src="SignPk.js"></script>
 </asp:Content>

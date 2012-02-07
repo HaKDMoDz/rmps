@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Amon.master.cs" Inherits="AmonMaster" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -20,22 +20,14 @@
                 </h1>
             </div>
             <div class="loginDisplay">
-                <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
-                    <AnonymousTemplate>
-                        [ <a href="~/User/SignIn.aspx" id="HeadLoginStatus" runat="server">登录</a> ]
-                    </AnonymousTemplate>
-                    <LoggedInTemplate>
-                        欢迎您，<span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" />
-                        </span>! [
-                        <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="注销" LogoutPageUrl="~/" />
-                        ]
-                    </LoggedInTemplate>
-                </asp:LoginView>
+                <asp:HyperLink ID="HlSignIn" runat="server" NavigateUrl="~/User/SignIn.aspx">登录</asp:HyperLink>
+                <asp:Label ID="LbUser" runat="server"></asp:Label>
+                <asp:LinkButton ID="LbSignIn" runat="server" OnClick="LbSignIn_Click">注销</asp:LinkButton>
             </div>
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
-                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="主页" />
+                        <asp:MenuItem NavigateUrl="~/Index.aspx" Text="主页" />
                         <asp:MenuItem NavigateUrl="~/About.aspx" Text="关于" />
                     </Items>
                 </asp:Menu>
@@ -50,7 +42,5 @@
     <div class="footer">
     </div>
     </form>
-    <asp:ContentPlaceHolder ID="AmonFoot" runat="server">
-    </asp:ContentPlaceHolder>
 </body>
 </html>

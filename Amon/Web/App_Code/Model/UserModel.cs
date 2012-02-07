@@ -22,7 +22,7 @@ namespace Me.Amon.Model
         private string _Hash;
         public string Code { get { return _Code; } }
         private string _Code;
-        private int Rank { get { return _Rank; } }
+        public int Rank { get { return _Rank; } }
         private int _Rank;
         public string Name { get { return _Name; } }
         private string _Name;
@@ -58,6 +58,15 @@ namespace Me.Amon.Model
             return true;
         }
 
+        public void SignOf()
+        {
+            _Rank = 0;
+            _Hash = "";
+            _Code = "A0000000";
+            _Name = "用户";
+            _Mail = "user@amonsoft.cn";
+        }
+
         /// <summary>
         /// 网页登录
         /// </summary>
@@ -87,6 +96,7 @@ namespace Me.Amon.Model
             dba.ReInit();
             dba.AddTable(DBConst.C3010600);
             dba.AddColumn(DBConst.C3010603);
+            dba.AddColumn(DBConst.C301060F);
             dba.AddWhere(DBConst.C3010602, tmpHash);
             dt = dba.ExecuteSelect();
             if (dt == null || dt.Rows.Count != 1)
@@ -94,6 +104,12 @@ namespace Me.Amon.Model
                 return false;
             }
 
+            string t = dt.Rows[0][DBConst.C301060F] as string;
+            if (string.IsNullOrEmpty(t))
+            {
+                return false;
+            }
+            _Pass = Convert.FromBase64String(t);
             String tmpPwds = Digest(name, pass);
             if (tmpPwds != dt.Rows[0][DBConst.C3010603].ToString())
             {
@@ -101,23 +117,23 @@ namespace Me.Amon.Model
             }
 
             // 登录权限读取
-            //dba.ReInit();
-            //dba.AddTable(DBConst.C3010F00);
-            //dba.AddTable(DBConst.C3010200);
-            //dba.AddColumn(DBConst.C3010F02);
-            //dba.AddWhere(DBConst.C3010203, DBConst.C3010F03, false);
-            //dba.AddWhere(DBConst.C3010202, tmpHash);
-            //dba.AddWhere(DBConst.C3010204, "42010000");
-            //dt = dba.ExecuteSelect();
-            //if (dt == null || dt.Rows.Count != 1)
-            //{
-            //    return false;
-            //}
+            dba.ReInit();
+            dba.AddTable(DBConst.C3010F00);
+            dba.AddTable(DBConst.C3010200);
+            dba.AddColumn(DBConst.C3010F02);
+            dba.AddWhere(DBConst.C3010203, DBConst.C3010F03, false);
+            dba.AddWhere(DBConst.C3010202, tmpHash);
+            dba.AddWhere(DBConst.C3010204, "APWD0000");
+            dt = dba.ExecuteSelect();
+            if (dt == null || dt.Rows.Count != 1)
+            {
+                return false;
+            }
 
             _Name = name;
             _Code = tmpCode;
             _Hash = tmpHash;
-            //_Rank = (int)dt.Rows[0][DBConst.C3010F02];
+            _Rank = (int)dt.Rows[0][DBConst.C3010F02];
 
             return true;
         }
@@ -342,7 +358,7 @@ namespace Me.Amon.Model
             dba.ReInit();
             dba.AddTable(DBConst.C3010500);
             dba.AddParam(DBConst.C3010501, "0");
-            dba.AddParam(DBConst.C3010502, "4");
+            dba.AddParam(DBConst.C3010502, IUser.MAJOR_04);
             dba.AddParam(DBConst.C3010503, hash);
             dba.AddParam(DBConst.C3010504, code);
             dba.AddParam(DBConst.C3010505, "sctteqacvfxgqgtb");// 电子邮件
@@ -376,6 +392,7 @@ namespace Me.Amon.Model
             dba.AddParam(DBConst.C301060C, "");
             dba.AddParam(DBConst.C301060D, "");
             dba.AddParam(DBConst.C301060E, "");
+            dba.AddParam(DBConst.C301060F, Convert.ToBase64String(_Pass));
             dba.AddParam(DBConst.C3010610, DBConst.SQL_NOW, false);
             dba.AddParam(DBConst.C3010611, DBConst.SQL_NOW, false);
             if (dba.ExecuteInsert() != 1)
@@ -402,7 +419,7 @@ namespace Me.Amon.Model
 
             _Name = name;
             _Code = code;
-            //userRank = cons.comn.user.UserInfo.LEVEL_02;//一般用户
+            _Rank = IUser.LEVEL_02;//一般用户
 
             return IMsg.MSG_SIGNUP_SUCCESS;
         }
@@ -462,9 +479,9 @@ namespace Me.Amon.Model
             dba.ExecuteInsert();
 
             writer.WriteElementString("Code", _Code);
-            writer.WriteElementString("Info", "");
-            writer.WriteElementString("Data", data);
             writer.WriteElementString("Pass", Convert.ToBase64String(_Pass));
+            writer.WriteElementString("Info", Digest(name, pass));
+            writer.WriteElementString("Data", data);
             return true;
         }
         #endregion
@@ -473,7 +490,7 @@ namespace Me.Amon.Model
         public string Digest(string name, string pass)
         {
             byte[] s = Encoding.UTF8.GetBytes(name + '%' + pass + "@Amon");
-            byte[] t = new byte[_Hash.Length + s.Length];
+            byte[] t = new byte[_Pass.Length + s.Length];
             new Random().NextBytes(t);
             Array.Copy(_Pass, t, _Pass.Length);
             Array.Copy(s, 0, t, _Pass.Length, s.Length);
