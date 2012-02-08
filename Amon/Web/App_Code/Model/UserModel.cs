@@ -13,19 +13,22 @@ namespace Me.Amon.Model
     public sealed class UserModel
     {
         #region 全局变量
+        private string _Info;
+        private byte[] _Data;
         private byte[] _Keys;
         private byte[] _Salt;
-        private byte[] _Pass;
         private char[] _Mask;
 
         private string Hash { get { return _Hash; } }
         private string _Hash;
-        public string Code { get { return _Code; } }
-        private string _Code;
         public int Rank { get { return _Rank; } }
         private int _Rank;
+        public string Code { get { return _Code; } }
+        private string _Code;
         public string Name { get { return _Name; } }
         private string _Name;
+        public string Home { get { return _Home; } }
+        private string _Home;
         public string Mail { get { return _Mail; } }
         private string _Mail;
         #endregion
@@ -53,25 +56,11 @@ namespace Me.Amon.Model
         #endregion
 
         #region 权限认证
-        public bool SignIn(string name, string pass)
-        {
-            return true;
-        }
-
-        public void SignOf()
-        {
-            _Rank = 0;
-            _Hash = "";
-            _Code = "A0000000";
-            _Name = "用户";
-            _Mail = "user@amonsoft.cn";
-        }
-
         /// <summary>
         /// 网页登录
         /// </summary>
         /// <returns></returns>
-        public bool SignWp(string name, string pass)
+        public bool WpSignIn(string name, string pass)
         {
             var dba = new DBAccess();
 
@@ -109,8 +98,8 @@ namespace Me.Amon.Model
             {
                 return false;
             }
-            _Pass = Convert.FromBase64String(t);
-            String tmpPwds = Digest(name, pass);
+            _Data = Convert.FromBase64String(t);
+            String tmpPwds = Digest(name, pass, _Data);
             if (tmpPwds != dt.Rows[0][DBConst.C3010603].ToString())
             {
                 return false;
@@ -139,15 +128,27 @@ namespace Me.Amon.Model
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public void WpSignOf()
+        {
+            _Rank = 0;
+            _Hash = "";
+            _Code = "A0000000";
+            _Name = "用户";
+            _Mail = "user@amonsoft.cn";
+        }
+
+        /// <summary>
         /// 修改登录口令
         /// </summary>
         /// <param name="oldPass"></param>
         /// <param name="newPass"></param>
         /// <returns></returns>
-        public bool SignPk(string oldPass, string newPass)
+        public bool WpSignPk(string oldPass, string newPass)
         {
             // 口令验证
-            String tmpPwds = Digest(_Name, oldPass);
+            String tmpPwds = Digest(_Name, oldPass, _Data);
 
             // 执行查询
             var dba = new DBAccess();
@@ -167,7 +168,7 @@ namespace Me.Amon.Model
                 return false;
             }
 
-            tmpPwds = Digest(_Name, newPass);
+            tmpPwds = Digest(_Name, newPass, _Data);
 
             // 修改口令
             dba.ReInit();
@@ -184,7 +185,7 @@ namespace Me.Amon.Model
         /// <param name="usrName"></param>
         /// <param name="secPwds"></param>
         /// <returns></returns>
-        public bool SignFp(string usrName, StringBuilder secPwds)
+        public bool WpSignFp(string usrName, StringBuilder secPwds)
         {
             //name = usrName;
 
@@ -236,7 +237,7 @@ namespace Me.Amon.Model
         /// <param name="oldPwds"></param>
         /// <param name="secPwds"></param>
         /// <returns></returns>
-        public bool SignSk(string oldPwds, string secPwds)
+        public bool WpSignSk(string oldPwds, string secPwds)
         {
             //// 已有口令校验
             //pwds = oldPwds;
@@ -280,7 +281,7 @@ namespace Me.Amon.Model
         /// <param name="pass">用户口令</param>
         /// <param name="mail">电子邮件</param>
         /// <returns></returns>
-        public int SignUp(String name, String pass, String mail)
+        public int WpSignUp(String name, String pass, String mail)
         {
             #region 用户名判断
             DBAccess dba = new DBAccess();
@@ -373,9 +374,9 @@ namespace Me.Amon.Model
             #endregion
 
             #region 安全信息
-            _Pass = new byte[256];
-            new Random().NextBytes(_Pass);
-            string info = Digest(name, pass);
+            _Data = new byte[256];
+            new Random().NextBytes(_Data);
+            string info = Digest(name, pass, _Data);
             dba.ReInit();
             dba.AddTable(DBConst.C3010600);
             dba.AddParam(DBConst.C3010601, hash);
@@ -392,7 +393,7 @@ namespace Me.Amon.Model
             dba.AddParam(DBConst.C301060C, "");
             dba.AddParam(DBConst.C301060D, "");
             dba.AddParam(DBConst.C301060E, "");
-            dba.AddParam(DBConst.C301060F, Convert.ToBase64String(_Pass));
+            dba.AddParam(DBConst.C301060F, Convert.ToBase64String(_Data));
             dba.AddParam(DBConst.C3010610, DBConst.SQL_NOW, false);
             dba.AddParam(DBConst.C3010611, DBConst.SQL_NOW, false);
             if (dba.ExecuteInsert() != 1)
@@ -425,10 +426,10 @@ namespace Me.Amon.Model
         }
 
         /// <summary>
-        /// 用户注册（服务方式）
+        /// 用户注册
         /// </summary>
         /// <returns></returns>
-        public bool SignWs(string name, string pass, XmlWriter writer)
+        public bool CaSignUp(string name, string pass, XmlWriter writer)
         {
             Random r = new Random();
             byte[] t = new byte[72];
@@ -468,32 +469,67 @@ namespace Me.Amon.Model
             aes.Clear();
             #endregion
 
-            string data = Convert.ToBase64String(t);
-
             DBAccess dba = new DBAccess();
             dba.AddTable(DBConst.APWD0000);
+            dba.AddWhere(DBConst.APWD0001, _Code);
+            dba.AddDeleteBatch();
+
+            string data = Convert.ToBase64String(_Data);
+            dba.ReInit();
+            dba.AddTable(DBConst.APWD0000);
             dba.AddParam(DBConst.APWD0001, _Code);
-            dba.AddParam(DBConst.APWD0002, "data");
+            dba.AddParam(DBConst.APWD0002, "Data");
             dba.AddParam(DBConst.APWD0003, data);
             dba.AddParam(DBConst.APWD0004, DBConst.SQL_NOW, false);
-            dba.ExecuteInsert();
+            dba.AddInsertBatch();
 
+            string info = Digest(name, pass, a);
+            dba.ReInit();
+            dba.AddTable(DBConst.APWD0000);
+            dba.AddParam(DBConst.APWD0001, _Code);
+            dba.AddParam(DBConst.APWD0002, "Info");
+            dba.AddParam(DBConst.APWD0003, info);
+            dba.AddParam(DBConst.APWD0004, DBConst.SQL_NOW, false);
+            dba.AddInsertBatch();
+
+            string main = Convert.ToBase64String(t);
+            dba.ReInit();
+            dba.AddTable(DBConst.APWD0000);
+            dba.AddParam(DBConst.APWD0001, _Code);
+            dba.AddParam(DBConst.APWD0002, "Main");
+            dba.AddParam(DBConst.APWD0003, main);
+            dba.AddParam(DBConst.APWD0004, DBConst.SQL_NOW, false);
+            dba.AddInsertBatch();
+
+            string safe = "";
+            dba.ReInit();
+            dba.AddTable(DBConst.APWD0000);
+            dba.AddParam(DBConst.APWD0001, _Code);
+            dba.AddParam(DBConst.APWD0002, "Safe");
+            dba.AddParam(DBConst.APWD0003, safe);
+            dba.AddParam(DBConst.APWD0004, DBConst.SQL_NOW, false);
+            dba.AddInsertBatch();
+            dba.ExecuteBatch();
+
+            a = new byte[256];
+            new Random().NextBytes(a);
             writer.WriteElementString("Code", _Code);
-            writer.WriteElementString("Pass", Convert.ToBase64String(_Pass));
-            writer.WriteElementString("Info", Digest(name, pass));
             writer.WriteElementString("Data", data);
+            writer.WriteElementString("Info", info);
+            writer.WriteElementString("Main", main);
+            writer.WriteElementString("Safe", safe);
             return true;
         }
         #endregion
 
         #region 数据安全
-        public string Digest(string name, string pass)
+        public string Digest(string name, string pass, byte[] d)
         {
             byte[] s = Encoding.UTF8.GetBytes(name + '%' + pass + "@Amon");
-            byte[] t = new byte[_Pass.Length + s.Length];
+            byte[] t = new byte[_Data.Length + s.Length];
             new Random().NextBytes(t);
-            Array.Copy(_Pass, t, _Pass.Length);
-            Array.Copy(s, 0, t, _Pass.Length, s.Length);
+            Array.Copy(_Data, t, _Data.Length);
+            Array.Copy(s, 0, t, _Data.Length, s.Length);
 
             return Convert.ToBase64String(Digest(t));
         }

@@ -2,12 +2,15 @@
 using System.Text;
 using System.Xml;
 using Me.Amon.Model;
+using Me.Amon.Da;
+using System.Data;
 
 public partial class User_SignWs : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (UserModel.Current(Session).Rank < IUser.LEVEL_01)
+        UserModel userModel = UserModel.Current(Session);
+        if (userModel.Rank < IUser.LEVEL_02)
         {
             Response.Redirect("~/Index.aspx");
             return;
@@ -17,6 +20,57 @@ public partial class User_SignWs : System.Web.UI.Page
         {
             return;
         }
+
+        DBAccess dba = new DBAccess();
+        dba.AddTable(DBConst.APWD0000);
+        dba.AddColumn(DBConst.APWD0002);
+        dba.AddColumn(DBConst.APWD0003);
+        dba.AddWhere(DBConst.APWD0001, userModel.Code);
+        dba.AddSort(DBConst.APWD0002, true);
+        DataTable dt = dba.ExecuteSelect();
+        if (dt.Rows.Count != 4)
+        {
+            TrRegInfo.Visible = false;
+            return;
+        }
+
+        TrRegData1.Visible = false;
+        TrRegData2.Visible = false;
+
+        StringBuilder buffer = new StringBuilder();
+        XmlWriter writer = XmlWriter.Create(buffer);
+        writer.WriteStartElement("Amon");
+        writer.WriteStartElement("User");
+        writer.WriteElementString("Code", userModel.Code);
+        foreach (DataRow row in dt.Rows)
+        {
+            if ("Data" == row[DBConst.APWD0002] as string)
+            {
+                writer.WriteElementString("Data", row[DBConst.APWD0003] as string);
+                continue;
+            }
+            if ("Info" == row[DBConst.APWD0002] as string)
+            {
+                writer.WriteElementString("Info", row[DBConst.APWD0003] as string);
+                continue;
+            }
+            if ("Main" == row[DBConst.APWD0002] as string)
+            {
+                writer.WriteElementString("Main", row[DBConst.APWD0003] as string);
+                continue;
+            }
+            if ("Safe" == row[DBConst.APWD0002] as string)
+            {
+                writer.WriteElementString("Safe", row[DBConst.APWD0003] as string);
+                continue;
+            }
+        }
+        writer.WriteEndElement();
+        writer.WriteEndElement();
+        writer.Flush();
+        writer.Close();
+
+        TBData.Text = buffer.Replace("encoding=\"utf-16\"", "encoding=\"utf-8\"").ToString();
     }
 
     protected void BtSignWs_Click(object sender, EventArgs e)
@@ -52,16 +106,16 @@ public partial class User_SignWs : System.Web.UI.Page
         writer.WriteStartElement("User");
 
         UserModel userModel = UserModel.Current(Session);
-        if (!userModel.SignWs(userModel.Name, userPwds, writer))
+        if (!userModel.CaSignUp(userModel.Name, userPwds, writer))
         {
             LbErrMsg.Text = "用户注册失败，请稍后重试！";
             TrErrMsg.Attributes.Add("style", "display:;");
             return;
         }
 
-        tr_RegData1.Visible = false;
-        tr_RegData2.Visible = false;
-        tr_RegInfo.Visible = true;
+        TrRegData1.Visible = false;
+        TrRegData2.Visible = false;
+        TrRegInfo.Visible = true;
 
         writer.WriteEndElement();
         writer.WriteEndElement();

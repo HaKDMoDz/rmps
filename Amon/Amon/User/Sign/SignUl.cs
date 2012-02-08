@@ -78,7 +78,7 @@ namespace Me.Amon.User.Sign
 
             try
             {
-                if (!_UserModel.SignWs(path, name, pass, text))
+                if (!_UserModel.CaSignWs(path, name, pass, text))
                 {
                     string msg = "无效的认证数据！";
                     _SignAc.ShowAlert(msg);

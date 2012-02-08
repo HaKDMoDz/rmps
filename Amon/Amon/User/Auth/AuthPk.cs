@@ -70,7 +70,7 @@ namespace Me.Amon.User.Auth
             TbNewPass1.Text = "";
             TbNewPass2.Text = "";
 
-            if (!_UserModel.SignPk(oldPass, newPass))
+            if (!_UserModel.CaSignPk(oldPass, newPass))
             {
                 oldPass = null;
                 newPass = null;

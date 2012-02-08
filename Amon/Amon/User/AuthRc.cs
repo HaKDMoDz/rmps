@@ -50,7 +50,7 @@ namespace Me.Amon.User
                 return;
             }
 
-            if (!_UserModel.SignAc(pass))
+            if (!_UserModel.CaSignAc(pass))
             {
                 _ErrorCnt += 1;
                 ShowAlert("口令输入错误！");

@@ -307,11 +307,11 @@ namespace Me.Amon
             string mail = HttpUtil.Text2Db(tmp[1]);
             string pass = tmp[2];
             UserModel model = new UserModel();
-            if (0 != model.SignUp(name, pass, mail))
+            if (0 != model.WpSignUp(name, pass, mail))
             {
                 return;
             }
-            model.SignWs(name, pass, writer);
+            model.CaSignUp(name, pass, writer);
 
             writer.WriteEndElement();
         }
@@ -337,7 +337,7 @@ namespace Me.Amon
             string oldPass = tmp[1];
             string newPass = tmp[2];
             UserModel userModel = UserModel.Current(context.Session);
-            userModel.SignPk(oldPass, newPass);
+            userModel.WpSignPk(oldPass, newPass);
         }
 
         private void SignSk(HttpContext context)

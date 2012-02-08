@@ -14,15 +14,16 @@ namespace Me.Amon.Model
     {
         #region 全局变量
         private string _Info;
-        private byte[] _Pass;
+        private byte[] _Data;
+
         private byte[] _Keys;
         private byte[] _Salt;
         private char[] _Mask;
 
-        public string Name { get { return _Name; } }
-        private string _Name;
         public string Code { get { return _Code; } }
         private string _Code;
+        public string Name { get { return _Name; } }
+        private string _Name;
         public string Home { get { return _Home; } }
         private string _Home;
         public string Look { get; set; }
@@ -34,7 +35,7 @@ namespace Me.Amon.Model
         /// 用户登录
         /// </summary>
         /// <returns></returns>
-        public bool SignIn(string home, string code, string name, string pass)
+        public bool CaSignIn(string home, string code, string name, string pass)
         {
             string file = home + IEnv.AMON_CFG;
             if (!File.Exists(file))
@@ -45,18 +46,18 @@ namespace Me.Amon.Model
             Uc.Properties prop = new Uc.Properties();
             prop.Load(file);
 
-            string hash = prop.Get(IEnv.AMON_CFG_PASS);
+            string hash = prop.Get(IEnv.AMON_CFG_DATA);
             if (!CharUtil.IsValidate(hash, 344))
             {
                 return false;
             }
-            _Pass = Convert.FromBase64String(hash);
+            _Data = Convert.FromBase64String(hash);
             hash = Digest(name, pass);
             if (hash != prop.Get(IEnv.AMON_CFG_INFO))
             {
                 return false;
             }
-            string data = prop.Get(IEnv.AMON_CFG_DATA);
+            string data = prop.Get(IEnv.AMON_CFG_MAIN);
 
             if (!Decrypt(name, code, pass, data))
             {
@@ -78,7 +79,7 @@ namespace Me.Amon.Model
         /// <param name="name"></param>
         /// <param name="info"></param>
         /// <returns></returns>
-        public bool SignRc(string name, string info)
+        public bool CaSignRc(string name, string info)
         {
             return (name == _Name && info == _Info);
         }
@@ -88,12 +89,12 @@ namespace Me.Amon.Model
         /// </summary>
         /// <param name="pass"></param>
         /// <returns></returns>
-        public bool SignAc(string pass)
+        public bool CaSignAc(string pass)
         {
             return _Info == Digest(Name, pass);
         }
 
-        public bool SignWs(string root, string name, string pass, string text)
+        public bool CaSignWs(string root, string name, string pass, string text)
         {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(text);
@@ -110,14 +111,14 @@ namespace Me.Amon.Model
             }
             #endregion
 
-            #region Pass
-            node = doc.SelectSingleNode("/Amon/User/Pass");
+            #region Data
+            node = doc.SelectSingleNode("/Amon/User/Data");
             if (node == null)
             {
                 return false;
             }
-            string t = node.InnerText;
-            if (!Regex.IsMatch(t, "^[A-Za-z0-9+/=]{256,}$"))
+            string data = node.InnerText;
+            if (!Regex.IsMatch(data, "^[A-Za-z0-9+/=]{256,}$"))
             {
                 return false;
             }
@@ -136,31 +137,40 @@ namespace Me.Amon.Model
             }
             #endregion
 
-            #region Data
-            node = doc.SelectSingleNode("/Amon/User/Data");
+            #region Main
+            node = doc.SelectSingleNode("/Amon/User/Main");
             if (node == null)
             {
                 return false;
             }
-            string data = node.InnerText;
-            if (!Regex.IsMatch(data, "^[A-Za-z0-9+/=]{108}$"))
+            string main = node.InnerText;
+            if (!Regex.IsMatch(main, "^[A-Za-z0-9+/=]{108}$"))
             {
                 return false;
             }
             #endregion
 
-            _Pass = Convert.FromBase64String(t);
+            #region Safe
+            node = doc.SelectSingleNode("/Amon/User/Safe");
+            if (node == null)
+            {
+                return false;
+            }
+            string safe = node.InnerText;
+            #endregion
+
+            _Data = Convert.FromBase64String(data);
             if (info != Digest(name, pass))
             {
                 return false;
             }
 
-            if (!Decrypt(name, code, pass, data))
+            if (!Decrypt(name, code, pass, main))
             {
                 return false;
             }
 
-            SignNw(root, code, name, info, data);
+            CaSignNw(root, name, code, Convert.ToBase64String(_Data), info, main, "");
             _Home = root + code + Path.DirectorySeparatorChar;
             Look = "Default";
             Feel = "Default";
@@ -171,7 +181,7 @@ namespace Me.Amon.Model
         /// 网络登录
         /// </summary>
         /// <returns></returns>
-        public bool SignNw(string root, string code, string name, string info, string data)
+        public bool CaSignNw(string root, string name, string code, string data, string info, string main, string safe)
         {
             root += code;
             if (!Directory.Exists(root))
@@ -181,9 +191,10 @@ namespace Me.Amon.Model
             Uc.Properties prop = new Uc.Properties();
             prop.Set(IEnv.AMON_CFG_NAME, name);
             prop.Set(IEnv.AMON_CFG_CODE, code);
-            prop.Set(IEnv.AMON_CFG_PASS, Convert.ToBase64String(_Pass));
-            prop.Set(IEnv.AMON_CFG_INFO, info);
             prop.Set(IEnv.AMON_CFG_DATA, data);
+            prop.Set(IEnv.AMON_CFG_INFO, info);
+            prop.Set(IEnv.AMON_CFG_MAIN, main);
+            prop.Set(IEnv.AMON_CFG_SAFE, safe);
             prop.Save(root + Path.DirectorySeparatorChar + IEnv.AMON_CFG);
             return true;
         }
@@ -194,7 +205,7 @@ namespace Me.Amon.Model
         /// <param name="oldPwds"></param>
         /// <param name="newPwds"></param>
         /// <returns></returns>
-        public bool SignPk(string oldPwds, string newPwds)
+        public bool CaSignPk(string oldPwds, string newPwds)
         {
             // 已有口令校验
             if (_Info != Digest(Name, oldPwds))
@@ -240,7 +251,7 @@ namespace Me.Amon.Model
             string data = Convert.ToBase64String(t);
             Uc.Properties prop = new Uc.Properties();
             prop.Set(IEnv.AMON_CFG_INFO, _Info);
-            prop.Set(IEnv.AMON_CFG_DATA, data);
+            prop.Set(IEnv.AMON_CFG_MAIN, data);
             prop.Save(Home + IEnv.AMON_CFG);
 
             return true;
@@ -252,7 +263,7 @@ namespace Me.Amon.Model
         /// <param name="usrName"></param>
         /// <param name="secPwds"></param>
         /// <returns></returns>
-        public bool SignFp(string usrName, StringBuilder secPwds)
+        public bool CaSignFp(string usrName, StringBuilder secPwds)
         {
             //name = usrName;
 
@@ -304,7 +315,7 @@ namespace Me.Amon.Model
         /// <param name="oldPwds"></param>
         /// <param name="secPwds"></param>
         /// <returns></returns>
-        public bool SignSk(string oldPwds, string secPwds)
+        public bool CaSignSk(string oldPwds, string secPwds)
         {
             //// 已有口令校验
             //pwds = oldPwds;
@@ -345,7 +356,7 @@ namespace Me.Amon.Model
         /// 用户注册
         /// </summary>
         /// <returns></returns>
-        public bool SignUp(string root, string name, string pass)
+        public bool CaSignUp(string root, string name, string pass)
         {
             string code = "A0000000";
             byte[] k = GenK(name, code, pass);
@@ -383,12 +394,13 @@ namespace Me.Amon.Model
             }
             aes.Clear();
             #endregion
+            string main = Convert.ToBase64String(t);
 
-            _Pass = new byte[256];
-            r.NextBytes(_Pass);
-            pass = Digest(name, pass);
+            _Data = new byte[256];
+            r.NextBytes(_Data);
+            string info = Digest(name, pass);
 
-            SignNw(root, code, name, pass, Convert.ToBase64String(t));
+            CaSignNw(root, name, code, Convert.ToBase64String(_Data), info, main, "");
 
             _Name = name;
             _Code = code;
@@ -397,7 +409,7 @@ namespace Me.Amon.Model
             return true;
         }
 
-        public void SignOf()
+        public void CaSignOf()
         {
             _Info = null;
             _Keys = null;
@@ -431,10 +443,10 @@ namespace Me.Amon.Model
         public string Digest(string name, string pass)
         {
             byte[] s = Encoding.UTF8.GetBytes(name + '%' + pass + "@Amon");
-            byte[] t = new byte[_Pass.Length + s.Length];
+            byte[] t = new byte[_Data.Length + s.Length];
             new Random().NextBytes(t);
-            Array.Copy(_Pass, t, _Pass.Length);
-            Array.Copy(s, 0, t, _Pass.Length, s.Length);
+            Array.Copy(_Data, t, _Data.Length);
+            Array.Copy(s, 0, t, _Data.Length, s.Length);
 
             return Convert.ToBase64String(Digest(t));
         }

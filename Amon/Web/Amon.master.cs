@@ -24,7 +24,7 @@ public partial class AmonMaster : System.Web.UI.MasterPage
     protected void LbSignIn_Click(object sender, EventArgs e)
     {
         UserModel userModel = UserModel.Current(Session);
-        userModel.SignOf();
+        userModel.WpSignOf();
         Response.Redirect("~/Index.aspx");
     }
 }

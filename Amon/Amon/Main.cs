@@ -331,7 +331,7 @@ namespace Me.Amon
 
         private void MgSignOf_Click(object sender, EventArgs e)
         {
-            _UserModel.SignOf();
+            _UserModel.CaSignOf();
 
             MgSignIn.Visible = true;
             MtSignIn.Visible = true;
@@ -401,7 +401,7 @@ namespace Me.Amon
 
         private void MtSignOf_Click(object sender, EventArgs e)
         {
-            _UserModel.SignOf();
+            _UserModel.CaSignOf();
 
             MgSignIn.Visible = true;
             MtSignIn.Visible = true;

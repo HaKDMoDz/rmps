@@ -95,7 +95,7 @@ namespace Me.Amon.User
 
             pass = _UserModel.Digest(name, pass);
 
-            if (!_UserModel.SignRc(name, pass))
+            if (!_UserModel.CaSignRc(name, pass))
             {
                 ShowAlert("身份验证错误，请确认您的用户及口令输入是否正确！");
                 TbName.Focus();

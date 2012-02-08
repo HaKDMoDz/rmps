@@ -155,7 +155,7 @@ namespace Me.Amon.User.Sign
             }
 
             // 本地注册
-            if (!_UserModel.SignUp(_Root, _Name, _Pass))
+            if (!_UserModel.CaSignUp(_Root, _Name, _Pass))
             {
                 _Pass = null;
                 _SignAc.ShowAlert("系统异常，请稍后重试！");
@@ -277,8 +277,10 @@ namespace Me.Amon.User.Sign
 
             string xml = e.Result;
             string code = null;
-            string info = null;
             string data = null;
+            string info = null;
+            string main = null;
+            string safe = null;
             using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
             {
                 if (xml.IndexOf("<Error>") > 0)
@@ -294,18 +296,29 @@ namespace Me.Amon.User.Sign
                     return;
                 }
 
+                if (reader.Name == "Data" || reader.ReadToFollowing("Data"))
+                {
+                    data = reader.ReadElementContentAsString();
+                    return;
+                }
+
                 if (reader.Name == "Info" || reader.ReadToFollowing("Info"))
                 {
                     info = reader.ReadElementContentAsString();
                 }
 
-                if (reader.Name == "Info" || reader.ReadToFollowing("Info"))
+                if (reader.Name == "Main" || reader.ReadToFollowing("Main"))
                 {
-                    data = reader.ReadElementContentAsString();
+                    main = reader.ReadElementContentAsString();
+                }
+
+                if (reader.Name == "Safe" || reader.ReadToFollowing("Safe"))
+                {
+                    safe = reader.ReadElementContentAsString();
                 }
             }
 
-            _UserModel.SignNw(_Root, code, _Name, info, data);
+            _UserModel.CaSignNw(_Root, _Name, code, data, info, main, safe);
             _Pass = null;
 
             _SignAc.CallBack(0);

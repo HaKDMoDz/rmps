@@ -7,7 +7,7 @@
                 <asp:Label ID="LbErrMsg" runat="server" CssClass="TEXT_NOTE1"></asp:Label>
             </td>
         </tr>
-        <tr id="tr_RegData1" runat="server">
+        <tr id="TrRegData1" runat="server">
             <td align="center">
                 <table border="0" cellpadding="4" cellspacing="0" width="300" class="TB_DataList_TL">
                     <tr>
@@ -29,7 +29,7 @@
                 </table>
             </td>
         </tr>
-        <tr id="tr_RegData2" runat="server">
+        <tr id="TrRegData2" runat="server">
             <td align="center">
                 <table border="0" cellpadding="4" cellspacing="0" width="300">
                     <tr>
@@ -40,17 +40,22 @@
                 </table>
             </td>
         </tr>
-        <tr id="tr_RegInfo" runat="server" visible="false">
+        <tr id="TrRegInfo" runat="server">
             <td align="center">
-                <table border="0" cellpadding="5" cellspacing="0" width="300" class="TB_DataList_TL">
+                <table border="0" cellpadding="5" cellspacing="0" width="480" class="TB_DataList_TL">
                     <tr>
                         <th align="left" class="TD_DataHead_TL_L">
                             恭喜：用户注册成功！
                         </th>
                     </tr>
                     <tr>
-                        <td align="left" class="TD_DataHead_TL_L">
-                            <asp:TextBox ID="TBData" runat="server" ReadOnly="True" TextMode="MultiLine" Width="100%" Rows="8"></asp:TextBox>
+                        <td align="left" class="TD_DataItem_TL_L">
+                            请牢记下面的信息数据，并在客户端输入。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" class="TD_DataHead_TL_L">
+                            <asp:TextBox ID="TBData" runat="server" ReadOnly="True" TextMode="MultiLine" Width="98%" Rows="13"></asp:TextBox>
                         </td>
                     </tr>
                 </table>

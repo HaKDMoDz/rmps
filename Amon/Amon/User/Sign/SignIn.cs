@@ -105,7 +105,7 @@ namespace Me.Amon.User.Sign
             #endregion
 
             #region 已有用户正常登录
-            if (!_UserModel.SignIn(_Home, code, _Name, pass))
+            if (!_UserModel.CaSignIn(_Home, code, _Name, pass))
             {
                 pass = null;
                 _SignAc.ShowAlert("身份验证错误，请确认您的用户及口令输入是否正确！");
@@ -236,6 +236,8 @@ namespace Me.Amon.User.Sign
             string xml = e.Result;
             string code = null;
             string data = null;
+            string main = null;
+            string safe = null;
             int view = IEnv.IAPP_NONE;
             using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
             {
@@ -254,9 +256,20 @@ namespace Me.Amon.User.Sign
                     return;
                 }
 
-                if (reader.Name == "Info" || reader.ReadToFollowing("Info"))
+                if (reader.Name == "Data" || reader.ReadToFollowing("Data"))
                 {
                     data = reader.ReadElementContentAsString();
+                    return;
+                }
+
+                if (reader.Name == "Main" || reader.ReadToFollowing("Main"))
+                {
+                    main = reader.ReadElementContentAsString();
+                }
+
+                if (reader.Name == "Safe" || reader.ReadToFollowing("Safe"))
+                {
+                    safe = reader.ReadElementContentAsString();
                 }
 
                 if (reader.Name == "View" || reader.ReadToFollowing("View"))
@@ -265,7 +278,7 @@ namespace Me.Amon.User.Sign
                 }
             }
 
-            _UserModel.SignNw(_Home, code, _Name, _Info, data);
+            _UserModel.CaSignNw(_Home, _Name, code, data, _Info, main, safe);
 
             _SignAc.CallBack(view);
         }

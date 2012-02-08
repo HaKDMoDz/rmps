@@ -144,7 +144,7 @@ namespace Me.Amon.User.Sign
             #endregion
 
             // 本地注册
-            if (!_UserModel.SignUp(_Root, _Name, _Pass))
+            if (!_UserModel.CaSignUp(_Root, _Name, _Pass))
             {
                 _Pass = null;
                 _SignAc.ShowAlert("系统异常，请稍后重试！");
