@@ -55,38 +55,32 @@ namespace Me.Amon.User.Sign
             _Name = TbName.Text;
             if (string.IsNullOrEmpty(_Name))
             {
-                _SignAc.ShowAlert("请输入用户名！");
+                _SignAc.ShowAlert("请输入【登录用户】！");
                 TbName.Focus();
                 return;
             }
-
-            if (_Name.Length < 5)
+            if (!CharUtil.IsValidateName(_Name))
             {
-                _SignAc.ShowAlert("用户名不能少于5个字符！");
+                _SignAc.ShowAlert("【登录用户】应在 4 到 32 个字符之间，且仅能为大小写字母、下划线及英文点号！");
                 TbName.Focus();
-                return;
-            }
-
-            if (!Regex.IsMatch(_Name, "^\\w{5,}$"))
-            {
-                _SignAc.ShowAlert("用户名中含有非法字符！");
-                TbName.Focus();
-                return;
-            }
-
-            _Name = _Name.ToLower();
-            _Prop = new Uc.Properties();
-            _Prop.Load(IEnv.AMON_SYS);
-            string home = _Prop.Get(string.Format(IEnv.AMON_SYS_HOME, _Name));
-            if (!string.IsNullOrEmpty(home))
-            {
-                _SignAc.ShowAlert(string.Format("已存在名为 {0} 的用户，请尝试其它用户名！", _Name));
                 return;
             }
             #endregion
 
             #region 用户邮件
-            _Mail = "a@b.c";
+            _Mail = TbMail.Text;
+            if (string.IsNullOrEmpty(_Mail))
+            {
+                _SignAc.ShowAlert("请输入【电子邮件】！");
+                TbMail.Focus();
+                return;
+            }
+            if (!CharUtil.IsValidateMail(_Mail))
+            {
+                _SignAc.ShowAlert("请输入一个有效的【电子邮件】！");
+                TbMail.Focus();
+                return;
+            }
             #endregion
 
             #region 口令判断
@@ -94,14 +88,14 @@ namespace Me.Amon.User.Sign
             TbPass1.Text = "";
             if (string.IsNullOrEmpty(_Pass))
             {
-                _SignAc.ShowAlert("请输入登录口令！");
+                _SignAc.ShowAlert("请输入【登录口令】！");
                 TbPass1.Focus();
                 return;
             }
 
             if (_Pass.Length < 4)
             {
-                _SignAc.ShowAlert("登录口令不能少于4个字符！");
+                _SignAc.ShowAlert("【登录口令】不能少于 4 个字符！");
                 TbPass1.Text = "";
                 TbPass2.Text = "";
                 TbPass1.Focus();
@@ -124,22 +118,18 @@ namespace Me.Amon.User.Sign
             {
                 _Root = IEnv.DATA_DIR + Path.DirectorySeparatorChar;
             }
-            if (!Directory.Exists(_Root))
+            #endregion
+
+            #region 本地用户判断
+            _Name = _Name.ToLower();
+            _Prop = new Uc.Properties();
+            _Prop.Load(IEnv.AMON_SYS);
+            string home = _Prop.Get(string.Format(IEnv.AMON_SYS_HOME, _Name));
+            if (!string.IsNullOrEmpty(home))
             {
-                try
-                {
-                    Directory.CreateDirectory(_Root);
-                }
-                catch (Exception exp)
-                {
-                    _SignAc.ShowAlert(exp.Message);
-                    TbPath.Text = IEnv.DATA_DIR;
-                    return;
-                }
-            }
-            if (_Root[_Root.Length - 1] != (Path.DirectorySeparatorChar))
-            {
-                _Root += Path.DirectorySeparatorChar;
+                _SignAc.ShowAlert(string.Format("已存在名为 {0} 的用户，请尝试其它用户名！", _Name));
+                TbName.Focus();
+                return;
             }
             #endregion
 
@@ -157,16 +147,18 @@ namespace Me.Amon.User.Sign
             // 本地注册
             if (!_UserModel.CaSignUp(_Root, _Name, _Pass))
             {
-                _Pass = null;
                 _SignAc.ShowAlert("系统异常，请稍后重试！");
                 return;
             }
+            else
+            {
+                _Prop.Set(string.Format(IEnv.AMON_SYS_CODE, _Name), _UserModel.Code);
+                _Prop.Set(string.Format(IEnv.AMON_SYS_HOME, _Name), _Root + _UserModel.Code + Path.DirectorySeparatorChar);
+                _Prop.Save(IEnv.AMON_SYS);
 
-            _Prop.Set(string.Format(IEnv.AMON_SYS_CODE, _Name), _UserModel.Code);
-            _Prop.Set(string.Format(IEnv.AMON_SYS_HOME, _Name), _Root + _UserModel.Code + Path.DirectorySeparatorChar);
-            _Prop.Save(IEnv.AMON_SYS);
-
-            _SignAc.CallBack(0);
+                _SignAc.CallBack(0);
+            }
+            _Pass = null;
         }
 
         public void DoCancel()

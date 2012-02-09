@@ -46,7 +46,7 @@ namespace Me.Amon.User.Sign
             _Name = TbName.Text;
             if (string.IsNullOrEmpty(_Name))
             {
-                _SignAc.ShowAlert("请输入用户名！");
+                _SignAc.ShowAlert("请输入【登录用户】！");
                 TbName.Focus();
                 return;
             }
@@ -63,14 +63,14 @@ namespace Me.Amon.User.Sign
             TbPass.Text = "";
             if (string.IsNullOrEmpty(_Pass))
             {
-                _SignAc.ShowAlert("请输入登录口令！");
+                _SignAc.ShowAlert("请输入【登录口令】！");
                 TbPass.Focus();
                 return;
             }
 
-            if (_Pass.Length < 3)
+            if (_Pass.Length < 4)
             {
-                _SignAc.ShowAlert("登录口令不能少于3个字符！");
+                _SignAc.ShowAlert("【登录口令】不能少于 4 个字符！");
                 TbPass.Focus();
                 return;
             }

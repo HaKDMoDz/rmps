@@ -30,7 +30,7 @@ namespace Me.Amon.Util
         /// <returns></returns>
         public static bool IsValidateName(string name)
         {
-            return name != null ? Regex.IsMatch(name, "^\\w+[\\w\\d\\.]{4,32}$") : false;
+            return name != null ? Regex.IsMatch(name, "^\\w+[\\w\\d\\.]{3,31}$") : false;
         }
 
         /// <summary>
