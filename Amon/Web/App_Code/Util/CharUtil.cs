@@ -3,28 +3,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Me.Amon.Util
-{/// <summary>
+{
+    /// <summary>
     /// StringUtil 的摘要说明
     /// </summary>
     public class CharUtil
     {
-        /// <summary>
-        /// 用户代码
-        /// </summary>
-        private static readonly Regex _UserCode = new Regex("^[0-9A-Za-z]{8}$");
-        /// <summary>
-        /// 数据主键
-        /// </summary>
-        private static readonly Regex _DataHash = new Regex("^[0-9A-Za-z]{16}$");
-        /// <summary>
-        /// 图标路径
-        /// </summary>
-        private static readonly Regex _PathHash = new Regex("^[A-Za-z]{4},([0-9]{4},[0-9A-Za-z]{16}|_[A-Z]{3})$");
-        /// <summary>
-        /// 整数数字
-        /// </summary>
-        private static readonly Regex _LongHash = new Regex("^\\d+$");
-
         private CharUtil()
         {
         }
@@ -36,7 +20,17 @@ namespace Me.Amon.Util
         /// <returns></returns>
         public static bool IsValidateCode(string code)
         {
-            return code != null ? _UserCode.IsMatch(code) : false;
+            return code != null ? Regex.IsMatch(code, "^[0-9A-Za-z]{8}$") : false;
+        }
+
+        /// <summary>
+        /// 判断是否为合法的用户名称
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static bool IsValidateName(string name)
+        {
+            return name != null ? Regex.IsMatch(name, "^\\w+[\\w\\d\\.]{4,32}$") : false;
         }
 
         /// <summary>
@@ -46,22 +40,27 @@ namespace Me.Amon.Util
         /// <returns></returns>
         public static bool IsValidateHash(string hash)
         {
-            return hash != null ? _DataHash.IsMatch(hash) : false;
+            return hash != null ? Regex.IsMatch(hash, "^[0-9A-Za-z]{16}$") : false;
         }
 
-        public static bool IsValidatePath(string hash)
+        /// <summary>
+        /// 图标路径
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static bool IsValidatePath(string path)
         {
-            return hash != null ? _PathHash.IsMatch(hash) : false;
+            return path != null ? Regex.IsMatch(path, "^[A-Za-z]{4},([0-9]{4},[0-9A-Za-z]{16}|_[A-Z]{3})$") : false;
         }
 
         /// <summary>
         /// 判断是否为合法的整形数值
         /// </summary>
-        /// <param name="hash"></param>
+        /// <param name="text"></param>
         /// <returns></returns>
-        public static bool IsValidateLong(string hash)
+        public static bool IsValidateLong(string text)
         {
-            return hash != null ? _LongHash.IsMatch(hash) : false;
+            return text != null ? Regex.IsMatch(text, "^\\d+$") : false;
         }
 
         public static String EncodeLong(long l, bool bigCase)

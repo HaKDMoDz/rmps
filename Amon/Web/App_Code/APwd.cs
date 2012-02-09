@@ -8,6 +8,7 @@ using System.Xml;
 using Me.Amon.Da;
 using Me.Amon.Model;
 using Me.Amon.Util;
+using System.Text.RegularExpressions;
 
 namespace Me.Amon
 {
@@ -282,6 +283,69 @@ namespace Me.Amon
         #region 用户信息
         private void SignIn(HttpContext context, XmlWriter writer)
         {
+            string d = context.Request["d"];
+            if (!CharUtil.IsValidate(d))
+            {
+                SendError(writer, "请输入【登录用户】！");
+                return;
+            }
+            if (!CharUtil.IsValidateName(d))
+            {
+                SendError(writer, "【登录用户】应在 4 到 32 个字符之间，且仅能为大小写字母、下划线及英文点号！");
+                return;
+            }
+
+            DBAccess dba = new DBAccess();
+            dba.AddTable(DBConst.C3010400);
+            dba.AddColumn(DBConst.C3010402);
+            dba.AddWhere(DBConst.C3010405, d);
+            DataTable dt = dba.ExecuteSelect();
+            if (dt.Rows.Count != 1)
+            {
+                SendError(writer, "请确认您输入的【登录用户】或【登录口令】是否正确！");
+                return;
+            }
+            string code = dt.Rows[0][DBConst.C3010402] as string;
+            if (!CharUtil.IsValidateCode(code))
+            {
+                SendError(writer, "请确认您输入的【登录用户】或【登录口令】是否正确！");
+                return;
+            }
+
+            dba.ReInit();
+            dba.AddTable(DBConst.APWD0000);
+            dba.AddColumn(DBConst.APWD0002);
+            dba.AddColumn(DBConst.APWD0003);
+            dba.AddWhere(DBConst.APWD0001, code);
+            dba.AddSort(DBConst.APWD0002, true);
+            dt = dba.ExecuteSelect();
+
+            writer.WriteStartElement("User");
+            writer.WriteElementString("Code", code);
+            foreach (DataRow row in dt.Rows)
+            {
+                if ("Data" == row[DBConst.APWD0002] as string)
+                {
+                    writer.WriteElementString("Data", row[DBConst.APWD0003] as string);
+                    continue;
+                }
+                if ("Info" == row[DBConst.APWD0002] as string)
+                {
+                    writer.WriteElementString("Info", row[DBConst.APWD0003] as string);
+                    continue;
+                }
+                if ("Main" == row[DBConst.APWD0002] as string)
+                {
+                    writer.WriteElementString("Main", row[DBConst.APWD0003] as string);
+                    continue;
+                }
+                if ("Safe" == row[DBConst.APWD0002] as string)
+                {
+                    writer.WriteElementString("Safe", row[DBConst.APWD0003] as string);
+                    continue;
+                }
+            }
+            writer.WriteEndElement();
         }
 
         private void SignUp(HttpContext context, XmlWriter writer)

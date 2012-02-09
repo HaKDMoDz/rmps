@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Model;
 using Me.Amon.Util;
+using System.Text;
 
 namespace Me.Amon.User.Sign
 {
@@ -48,17 +49,9 @@ namespace Me.Amon.User.Sign
                 TbName.Focus();
                 return;
             }
-
-            if (_Name.Length < 3)
+            if (!CharUtil.IsValidateName(_Name))
             {
-                _SignAc.ShowAlert("用户名不能少于3个字符！");
-                TbName.Focus();
-                return;
-            }
-
-            if (!Regex.IsMatch(_Name, "^\\w{3,}$"))
-            {
-                _SignAc.ShowAlert("用户名中含有非法字符！");
+                _SignAc.ShowAlert("【登录用户】应在 4 到 32 个字符之间，且仅能为大小写字母、下划线及英文点号！");
                 TbName.Focus();
                 return;
             }
@@ -95,11 +88,14 @@ namespace Me.Amon.User.Sign
                 _Waiting = true;
                 _SignAc.ShowWaiting();
 
+                _Home = IEnv.DATA_DIR + Path.DirectorySeparatorChar;
+
                 WebClient client = new WebClient();
                 client.Credentials = CredentialCache.DefaultCredentials;
                 client.Headers["Content-type"] = "application/x-www-form-urlencoded";
+                client.Encoding = Encoding.UTF8;
                 client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignIn_UploadStringCompleted);
-                client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=sin&n=" + _Name + "&k=" + _Info);
+                client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=sin&d=" + _Name);
                 return;
             }
             #endregion
@@ -236,9 +232,9 @@ namespace Me.Amon.User.Sign
             string xml = e.Result;
             string code = null;
             string data = null;
+            string info = null;
             string main = null;
             string safe = null;
-            int view = IEnv.IAPP_NONE;
             using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
             {
                 if (xml.IndexOf("<Error>") > 0)
@@ -253,13 +249,16 @@ namespace Me.Amon.User.Sign
                 if (reader.Name == "Code" || reader.ReadToFollowing("Code"))
                 {
                     code = reader.ReadElementContentAsString();
-                    return;
                 }
 
                 if (reader.Name == "Data" || reader.ReadToFollowing("Data"))
                 {
                     data = reader.ReadElementContentAsString();
-                    return;
+                }
+
+                if (reader.Name == "Info" || reader.ReadToFollowing("Info"))
+                {
+                    info = reader.ReadElementContentAsString();
                 }
 
                 if (reader.Name == "Main" || reader.ReadToFollowing("Main"))
@@ -271,16 +270,11 @@ namespace Me.Amon.User.Sign
                 {
                     safe = reader.ReadElementContentAsString();
                 }
-
-                if (reader.Name == "View" || reader.ReadToFollowing("View"))
-                {
-                    view = reader.ReadElementContentAsInt();
-                }
             }
 
-            _UserModel.CaSignNw(_Home, _Name, code, data, _Info, main, safe);
+            _UserModel.CaSignNw(_Home, _Name, code, data, info, main, safe);
 
-            _SignAc.CallBack(view);
+            _SignAc.CallBack(IEnv.IAPP_APWD);
         }
         #endregion
     }
