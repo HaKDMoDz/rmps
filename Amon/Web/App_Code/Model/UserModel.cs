@@ -429,11 +429,12 @@ namespace Me.Amon.Model
         /// 用户注册
         /// </summary>
         /// <returns></returns>
-        public bool CaSignUp(string name, string pass, XmlWriter writer)
+        public bool WsSignUp(string name, string pass, XmlWriter writer)
         {
             Random r = new Random();
-            byte[] t = new byte[72];
 
+            // 口令
+            byte[] t = new byte[72];
             int i = 0;
             byte[] a = Encoding.UTF8.GetBytes(_Code);
             Array.Copy(a, 0, t, i, a.Length);
@@ -474,7 +475,9 @@ namespace Me.Amon.Model
             dba.AddWhere(DBConst.APWD0001, _Code);
             dba.AddDeleteBatch();
 
-            string data = Convert.ToBase64String(_Data);
+            a = new byte[256];
+            r.NextBytes(a);
+            string data = Convert.ToBase64String(a);
             dba.ReInit();
             dba.AddTable(DBConst.APWD0000);
             dba.AddParam(DBConst.APWD0001, _Code);
@@ -523,13 +526,12 @@ namespace Me.Amon.Model
         #endregion
 
         #region 数据安全
-        public string Digest(string name, string pass, byte[] d)
+        public string Digest(string name, string pass, byte[] data)
         {
             byte[] s = Encoding.UTF8.GetBytes(name + '%' + pass + "@Amon");
-            byte[] t = new byte[_Data.Length + s.Length];
-            new Random().NextBytes(t);
-            Array.Copy(_Data, t, _Data.Length);
-            Array.Copy(s, 0, t, _Data.Length, s.Length);
+            byte[] t = new byte[data.Length + s.Length];
+            Array.Copy(data, t, data.Length);
+            Array.Copy(s, 0, t, data.Length, s.Length);
 
             return Convert.ToBase64String(Digest(t));
         }

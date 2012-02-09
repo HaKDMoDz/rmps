@@ -106,7 +106,7 @@ public partial class User_SignWs : System.Web.UI.Page
         writer.WriteStartElement("User");
 
         UserModel userModel = UserModel.Current(Session);
-        if (!userModel.CaSignUp(userModel.Name, userPwds, writer))
+        if (!userModel.WsSignUp(userModel.Name, userPwds, writer))
         {
             LbErrMsg.Text = "用户注册失败，请稍后重试！";
             TrErrMsg.Attributes.Add("style", "display:;");

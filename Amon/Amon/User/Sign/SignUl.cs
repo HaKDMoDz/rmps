@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Model;
@@ -49,7 +48,13 @@ namespace Me.Amon.User.Sign
             #endregion
 
             #region 登录口令
-            string pass = "qqqq";
+            string pass = TbPass.Text;
+            if (string.IsNullOrEmpty(pass))
+            {
+                _SignAc.ShowAlert("请输入登录用户！");
+                TbPass.Focus();
+                return;
+            }
             #endregion
 
             #region 路径判断
@@ -67,23 +72,32 @@ namespace Me.Amon.User.Sign
             #endregion
 
             #region 认证信息
-            string text = TbInfo.Text;
+            string text = TbText.Text;
             if (string.IsNullOrEmpty(text))
             {
                 _SignAc.ShowAlert("请输入认证数据！");
-                TbInfo.Focus();
+                TbPath.Focus();
                 return;
             }
             #endregion
 
             try
             {
-                if (!_UserModel.CaSignWs(path, name, pass, text))
+                using (XmlReader reader = XmlReader.Create(new StringReader(text)))
                 {
-                    string msg = "无效的认证数据！";
-                    _SignAc.ShowAlert(msg);
-                    TbInfo.Focus();
-                    return;
+                    if (text.IndexOf("<Error>") > 0)
+                    {
+                        reader.ReadToFollowing("Error");
+                        _SignAc.ShowAlert(reader.ReadElementContentAsString());
+                        return;
+                    }
+
+                    if (!_UserModel.CaSignIn(path, name, pass, text))
+                    {
+                        _SignAc.ShowAlert("请确认您输入的令牌数据是否有效！");
+                        TbPath.Focus();
+                        return;
+                    }
                 }
 
                 Uc.Properties prop = new Uc.Properties();
@@ -95,7 +109,7 @@ namespace Me.Amon.User.Sign
             catch (Exception exp)
             {
                 _SignAc.ShowAlert(exp.Message);
-                TbInfo.Focus();
+                TbPath.Focus();
                 return;
             }
         }
@@ -113,7 +127,7 @@ namespace Me.Amon.User.Sign
         private void BtPath_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fd = new FolderBrowserDialog();
-            fd.SelectedPath = TbPath.Text;
+            fd.SelectedPath = TbPass.Text;
             if (DialogResult.OK != fd.ShowDialog())
             {
                 return;

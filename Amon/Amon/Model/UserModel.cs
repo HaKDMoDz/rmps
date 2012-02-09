@@ -46,27 +46,28 @@ namespace Me.Amon.Model
             Uc.Properties prop = new Uc.Properties();
             prop.Load(file);
 
-            string hash = prop.Get(IEnv.AMON_CFG_DATA);
-            if (!CharUtil.IsValidate(hash, 344))
+            string data = prop.Get(IEnv.AMON_CFG_DATA);
+            if (!CharUtil.IsValidate(data, 344))
             {
                 return false;
             }
-            _Data = Convert.FromBase64String(hash);
-            hash = Digest(name, pass);
-            if (hash != prop.Get(IEnv.AMON_CFG_INFO))
-            {
-                return false;
-            }
-            string data = prop.Get(IEnv.AMON_CFG_MAIN);
+            _Data = Convert.FromBase64String(data);
 
-            if (!Decrypt(name, code, pass, data))
+            string info = Digest(name, pass);
+            if (info != prop.Get(IEnv.AMON_CFG_INFO))
+            {
+                return false;
+            }
+
+            string main = prop.Get(IEnv.AMON_CFG_MAIN);
+            if (!Decrypt(name, code, pass, main))
             {
                 return false;
             }
 
             _Name = name;
             _Code = code;
-            _Info = hash;
+            _Info = info;
             _Home = home;
             Look = "Default";
             Feel = "Default";
@@ -92,111 +93,6 @@ namespace Me.Amon.Model
         public bool CaSignAc(string pass)
         {
             return _Info == Digest(Name, pass);
-        }
-
-        public bool CaSignWs(string root, string name, string pass, string text)
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(text);
-            #region Code
-            XmlNode node = doc.SelectSingleNode("/Amon/User/Code");
-            if (node == null)
-            {
-                return false;
-            }
-            string code = node.InnerText;
-            if (!Regex.IsMatch(code, "^[A-Z0-9]{8}$"))
-            {
-                return false;
-            }
-            #endregion
-
-            #region Data
-            node = doc.SelectSingleNode("/Amon/User/Data");
-            if (node == null)
-            {
-                return false;
-            }
-            string data = node.InnerText;
-            if (!Regex.IsMatch(data, "^[A-Za-z0-9+/=]{256,}$"))
-            {
-                return false;
-            }
-            #endregion
-
-            #region Info
-            node = doc.SelectSingleNode("/Amon/User/Info");
-            if (node == null)
-            {
-                return false;
-            }
-            string info = node.InnerText;
-            if (!Regex.IsMatch(info, "^[A-Za-z0-9+/=]{44}$"))
-            {
-                return false;
-            }
-            #endregion
-
-            #region Main
-            node = doc.SelectSingleNode("/Amon/User/Main");
-            if (node == null)
-            {
-                return false;
-            }
-            string main = node.InnerText;
-            if (!Regex.IsMatch(main, "^[A-Za-z0-9+/=]{108}$"))
-            {
-                return false;
-            }
-            #endregion
-
-            #region Safe
-            node = doc.SelectSingleNode("/Amon/User/Safe");
-            if (node == null)
-            {
-                return false;
-            }
-            string safe = node.InnerText;
-            #endregion
-
-            _Data = Convert.FromBase64String(data);
-            if (info != Digest(name, pass))
-            {
-                return false;
-            }
-
-            if (!Decrypt(name, code, pass, main))
-            {
-                return false;
-            }
-
-            CaSignNw(root, name, code, Convert.ToBase64String(_Data), info, main, "");
-            _Home = root + code + Path.DirectorySeparatorChar;
-            Look = "Default";
-            Feel = "Default";
-            return true;
-        }
-
-        /// <summary>
-        /// 网络登录
-        /// </summary>
-        /// <returns></returns>
-        public bool CaSignNw(string root, string name, string code, string data, string info, string main, string safe)
-        {
-            root += code;
-            if (!Directory.Exists(root))
-            {
-                Directory.CreateDirectory(root);
-            }
-            Uc.Properties prop = new Uc.Properties();
-            prop.Set(IEnv.AMON_CFG_NAME, name);
-            prop.Set(IEnv.AMON_CFG_CODE, code);
-            prop.Set(IEnv.AMON_CFG_DATA, data);
-            prop.Set(IEnv.AMON_CFG_INFO, info);
-            prop.Set(IEnv.AMON_CFG_MAIN, main);
-            prop.Set(IEnv.AMON_CFG_SAFE, safe);
-            prop.Save(root + Path.DirectorySeparatorChar + IEnv.AMON_CFG);
-            return true;
         }
 
         /// <summary>
@@ -400,12 +296,25 @@ namespace Me.Amon.Model
             r.NextBytes(_Data);
             string info = Digest(name, pass);
 
-            CaSignNw(root, name, code, Convert.ToBase64String(_Data), info, main, "");
+            _Home = root + code + Path.DirectorySeparatorChar;
+            if (!Directory.Exists(_Home))
+            {
+                Directory.CreateDirectory(_Home);
+            }
+            Uc.Properties prop = new Uc.Properties();
+            prop.Set(IEnv.AMON_CFG_NAME, name);
+            prop.Set(IEnv.AMON_CFG_CODE, code);
+            prop.Set(IEnv.AMON_CFG_DATA, Convert.ToBase64String(_Data));
+            prop.Set(IEnv.AMON_CFG_INFO, info);
+            prop.Set(IEnv.AMON_CFG_MAIN, main);
+            prop.Set(IEnv.AMON_CFG_SAFE, "");
+            prop.Save(_Home + IEnv.AMON_CFG);
 
             _Name = name;
             _Code = code;
             _Info = pass;
-            _Home = root + code + Path.DirectorySeparatorChar;
+            Look = "Default";
+            Feel = "Default";
             return true;
         }
 
@@ -419,6 +328,91 @@ namespace Me.Amon.Model
             _Name = null;
             _Code = null;
             _Home = null;
+        }
+
+        /// <summary>
+        /// 网络登录
+        /// </summary>
+        /// <returns></returns>
+        public bool WsSignIn(string root, string name, string pass, XmlReader reader)
+        {
+            string code = null;
+            if (reader.Name == "Code" || reader.ReadToFollowing("Code"))
+            {
+                code = reader.ReadElementContentAsString();
+            }
+            if (!CharUtil.IsValidateCode(code))
+            {
+                return false;
+            }
+
+            string data = null;
+            if (reader.Name == "Data" || reader.ReadToFollowing("Data"))
+            {
+                data = reader.ReadElementContentAsString();
+            }
+            if (!Regex.IsMatch(data, "^[A-Za-z0-9+/=]{256,}$"))
+            {
+                return false;
+            }
+
+            string info = null;
+            if (reader.Name == "Info" || reader.ReadToFollowing("Info"))
+            {
+                info = reader.ReadElementContentAsString();
+            }
+            if (!Regex.IsMatch(info, "^[A-Za-z0-9+/=]{44}$"))
+            {
+                return false;
+            }
+
+            string main = null;
+            if (reader.Name == "Main" || reader.ReadToFollowing("Main"))
+            {
+                main = reader.ReadElementContentAsString();
+            }
+            if (!Regex.IsMatch(main, "^[A-Za-z0-9+/=]{108}$"))
+            {
+                return false;
+            }
+
+            string safe = null;
+            if (reader.Name == "Safe" || reader.ReadToFollowing("Safe"))
+            {
+                safe = reader.ReadElementContentAsString();
+            }
+
+            _Data = Convert.FromBase64String(data);
+            if (info != Digest(name, pass))
+            {
+                return false;
+            }
+
+            if (!Decrypt(name, code, pass, main))
+            {
+                return false;
+            }
+
+            _Home = root + code + Path.DirectorySeparatorChar;
+            if (!Directory.Exists(_Home))
+            {
+                Directory.CreateDirectory(_Home);
+            }
+            Uc.Properties prop = new Uc.Properties();
+            prop.Set(IEnv.AMON_CFG_NAME, name);
+            prop.Set(IEnv.AMON_CFG_CODE, code);
+            prop.Set(IEnv.AMON_CFG_DATA, data);
+            prop.Set(IEnv.AMON_CFG_INFO, info);
+            prop.Set(IEnv.AMON_CFG_MAIN, main);
+            prop.Set(IEnv.AMON_CFG_SAFE, safe);
+            prop.Save(_Home + IEnv.AMON_CFG);
+
+            _Name = name;
+            _Code = code;
+            _Info = info;
+            Look = "Default";
+            Feel = "Default";
+            return true;
         }
         #endregion
 
@@ -444,7 +438,6 @@ namespace Me.Amon.Model
         {
             byte[] s = Encoding.UTF8.GetBytes(name + '%' + pass + "@Amon");
             byte[] t = new byte[_Data.Length + s.Length];
-            new Random().NextBytes(t);
             Array.Copy(_Data, t, _Data.Length);
             Array.Copy(s, 0, t, _Data.Length, s.Length);
 
@@ -466,7 +459,7 @@ namespace Me.Amon.Model
             return Encoding.UTF8.GetBytes(code + "@Amon.Me");
         }
 
-        private bool Decrypt(string name, string code, string pass, string data)
+        private bool Decrypt(string name, string code, string pass, string main)
         {
             #region 口令散列
             // 口令
@@ -474,7 +467,7 @@ namespace Me.Amon.Model
             // 向量
             byte[] v = GenV(name, code, pass);
             // 数据
-            byte[] t = Convert.FromBase64String(data);
+            byte[] t = Convert.FromBase64String(main);
             pass = null;
             #endregion
 

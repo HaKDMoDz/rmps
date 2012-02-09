@@ -276,11 +276,6 @@ namespace Me.Amon.User.Sign
             }
 
             string xml = e.Result;
-            string code = null;
-            string data = null;
-            string info = null;
-            string main = null;
-            string safe = null;
             using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
             {
                 if (xml.IndexOf("<Error>") > 0)
@@ -290,38 +285,24 @@ namespace Me.Amon.User.Sign
                     return;
                 }
 
-                if (reader.Name == "Code" || reader.ReadToFollowing("Code"))
+                if (!_UserModel.WsSignIn(_Root, _Name, _Pass, reader))
                 {
-                    code = reader.ReadElementContentAsString();
-                    return;
+                    _SignAc.ShowAlert("注册用户失败，请稍后重试！");
+                    TbName.Focus();
                 }
-
-                if (reader.Name == "Data" || reader.ReadToFollowing("Data"))
+                else
                 {
-                    data = reader.ReadElementContentAsString();
-                    return;
-                }
+                    Uc.Properties prop = new Uc.Properties();
+                    prop.Load(IEnv.AMON_SYS);
+                    prop.Set(string.Format(IEnv.AMON_SYS_HOME, _Name), _UserModel.Home);
+                    prop.Set(string.Format(IEnv.AMON_SYS_CODE, _Name), _UserModel.Code);
+                    prop.Save(IEnv.AMON_SYS);
 
-                if (reader.Name == "Info" || reader.ReadToFollowing("Info"))
-                {
-                    info = reader.ReadElementContentAsString();
-                }
-
-                if (reader.Name == "Main" || reader.ReadToFollowing("Main"))
-                {
-                    main = reader.ReadElementContentAsString();
-                }
-
-                if (reader.Name == "Safe" || reader.ReadToFollowing("Safe"))
-                {
-                    safe = reader.ReadElementContentAsString();
+                    _SignAc.CallBack(0);
                 }
             }
 
-            _UserModel.CaSignNw(_Root, _Name, code, data, info, main, safe);
             _Pass = null;
-
-            _SignAc.CallBack(0);
         }
 
         private string Net(string t)

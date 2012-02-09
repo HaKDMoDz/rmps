@@ -375,7 +375,7 @@ namespace Me.Amon
             {
                 return;
             }
-            model.CaSignUp(name, pass, writer);
+            model.WsSignUp(name, pass, writer);
 
             writer.WriteEndElement();
         }

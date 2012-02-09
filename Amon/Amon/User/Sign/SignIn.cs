@@ -14,6 +14,7 @@ namespace Me.Amon.User.Sign
     {
         private bool _Waiting;
         private string _Name;
+        private string _Pass;
         private string _Info;
         private string _Home;
         private UserModel _UserModel;
@@ -58,16 +59,16 @@ namespace Me.Amon.User.Sign
             #endregion
 
             #region 口令判断
-            string pass = TbPass.Text;
+            _Pass = TbPass.Text;
             TbPass.Text = "";
-            if (string.IsNullOrEmpty(pass))
+            if (string.IsNullOrEmpty(_Pass))
             {
                 _SignAc.ShowAlert("请输入登录口令！");
                 TbPass.Focus();
                 return;
             }
 
-            if (pass.Length < 3)
+            if (_Pass.Length < 3)
             {
                 _SignAc.ShowAlert("登录口令不能少于3个字符！");
                 TbPass.Focus();
@@ -101,16 +102,17 @@ namespace Me.Amon.User.Sign
             #endregion
 
             #region 已有用户正常登录
-            if (!_UserModel.CaSignIn(_Home, code, _Name, pass))
+            if (!_UserModel.CaSignIn(_Home, code, _Name, _Pass))
             {
-                pass = null;
                 _SignAc.ShowAlert("身份验证错误，请确认您的用户及口令输入是否正确！");
                 TbName.Focus();
-                return;
+            }
+            else
+            {
+                _SignAc.CallBack(0);
             }
 
-            pass = null;
-            _SignAc.CallBack(0);
+            _Pass = null;
             #endregion
         }
 
@@ -230,51 +232,34 @@ namespace Me.Amon.User.Sign
             }
 
             string xml = e.Result;
-            string code = null;
-            string data = null;
-            string info = null;
-            string main = null;
-            string safe = null;
+
             using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
             {
                 if (xml.IndexOf("<Error>") > 0)
                 {
                     reader.ReadToFollowing("Error");
                     _SignAc.ShowAlert(reader.ReadElementContentAsString());
-                    _SignAc.HideWaiting();
-                    _Waiting = false;
                     return;
                 }
 
-                if (reader.Name == "Code" || reader.ReadToFollowing("Code"))
+                if (!_UserModel.WsSignIn(_Home, _Name, _Pass, reader))
                 {
-                    code = reader.ReadElementContentAsString();
+                    _SignAc.ShowAlert("注册用户失败，请稍后重试！");
+                    TbName.Focus();
                 }
-
-                if (reader.Name == "Data" || reader.ReadToFollowing("Data"))
+                else
                 {
-                    data = reader.ReadElementContentAsString();
-                }
+                    Uc.Properties prop = new Uc.Properties();
+                    prop.Load(IEnv.AMON_SYS);
+                    prop.Set(string.Format(IEnv.AMON_SYS_HOME, _Name), _UserModel.Home);
+                    prop.Set(string.Format(IEnv.AMON_SYS_CODE, _Name), _UserModel.Code);
+                    prop.Save(IEnv.AMON_SYS);
 
-                if (reader.Name == "Info" || reader.ReadToFollowing("Info"))
-                {
-                    info = reader.ReadElementContentAsString();
-                }
-
-                if (reader.Name == "Main" || reader.ReadToFollowing("Main"))
-                {
-                    main = reader.ReadElementContentAsString();
-                }
-
-                if (reader.Name == "Safe" || reader.ReadToFollowing("Safe"))
-                {
-                    safe = reader.ReadElementContentAsString();
+                    _SignAc.CallBack(IEnv.IAPP_APWD);
                 }
             }
 
-            _UserModel.CaSignNw(_Home, _Name, code, data, info, main, safe);
-
-            _SignAc.CallBack(IEnv.IAPP_APWD);
+            _Pass = null;
         }
         #endregion
     }
