@@ -62,7 +62,8 @@ namespace Me.Amon
             _PupilCenterY = _AlienRadius;
 
             _BufImage = new Bitmap(PbLogo.Width, PbLogo.Height);
-            _BufBrush = new SolidBrush(Color.Black);
+            _BRect = new Rectangle(0, 0, PbLogo.Width, PbLogo.Height);
+            _BufBrush = new LinearGradientBrush(_BRect, Color.FromArgb(96, 96, 96), Color.FromArgb(0, 0, 0), LinearGradientMode.Vertical);
 
             _TmpImage = new Bitmap(x, x);
             _TmpBrush = new SolidBrush(Color.White);
@@ -108,6 +109,7 @@ namespace Me.Amon
         private Brush _BufBrush;
         private Image _TmpImage;
         private Brush _TmpBrush;
+        private Rectangle _BRect;
         private Rectangle _LRect;
         private Rectangle _RRect;
 
@@ -192,7 +194,9 @@ namespace Me.Amon
                     g2.Flush();
                 }
 
-                g1.FillRectangle(_BufBrush, 0, 0, _BufImage.Width, _BufImage.Height);
+                //g1.Clear(Color.FromArgb(0, 0, 0, 0));
+                g1.FillRectangle(_BufBrush, _BRect);
+                //g1.DrawImage(Resources.Alien, 0, 0);
                 g1.DrawImage(_TmpImage, _LRect);
                 g1.DrawImage(_TmpImage, _RRect);
 
