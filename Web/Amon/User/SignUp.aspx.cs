@@ -11,12 +11,6 @@ namespace Me.Amon.User
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (UserModel.Current(Session).Rank < IUser.LEVEL_01)
-            {
-                Response.Redirect("~/Index.aspx");
-                return;
-            }
-
             if (IsPostBack)
             {
                 return;

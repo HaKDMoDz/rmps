@@ -1,4 +1,4 @@
-﻿<%@ Page Title="主页" Language="C#" MasterPageFile="~/Amon.master" AutoEventWireup="true" CodeFile="Index.aspx.cs" Inherits="Me.Amon.Index" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Amon.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="Me.Amon.Index1" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="AmonHead">
 </asp:Content>

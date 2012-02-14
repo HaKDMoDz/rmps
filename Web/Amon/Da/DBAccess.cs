@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Text;
 using Me.Amon.Model;
@@ -70,8 +71,7 @@ namespace Me.Amon.Da
             _OrderList = new StringBuilder();
             _BatchList = new List<string>();
 
-            //_Connection = new MySqlConnection("Server=localhost;Port=3306;Database=test;Uid=root;Pwd=123456;");
-            _Connection = new MySqlConnection("Server=203.171.236.2;Port=3306;Database=amonyao;Uid=amonyao;Pwd=amonyao123;");
+            _Connection = new MySqlConnection(string.Format(ConfigurationManager.ConnectionStrings["SQLServer"].ConnectionString, "amonyao", "amonyao", "amonyao123"));
             _Connection.Open();
         }
 

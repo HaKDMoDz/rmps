@@ -1,4 +1,4 @@
-﻿<%@ Page Title="关于我们" Language="C#" MasterPageFile="~/Amon.master" AutoEventWireup="true" CodeFile="About.aspx.cs" Inherits="Me.Amon.About" %>
+﻿<%@ Page Title="关于作者" Language="C#" MasterPageFile="~/Amon.Master" AutoEventWireup="true" CodeBehind="About.aspx.cs" Inherits="Me.Amon.About" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="AmonHead">
 </asp:Content>
