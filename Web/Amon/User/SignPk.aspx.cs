@@ -21,7 +21,7 @@ namespace Me.Amon.User
 
         protected void BtSignPk_Click(object sender, EventArgs e)
         {
-            String oldPwds = TbOldPass.Text;
+            string oldPwds = TbOldPass.Text;
             if (string.IsNullOrEmpty(oldPwds))
             {
                 LbErrMsg.Text = "请输入【现有口令】！";
@@ -37,7 +37,7 @@ namespace Me.Amon.User
                 return;
             }
 
-            String newPwds = TbNewPass.Text;
+            string newPwds = TbNewPass.Text;
             if (string.IsNullOrEmpty(newPwds))
             {
                 LbErrMsg.Text = "请输入【新登录口令】！";

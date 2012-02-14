@@ -31,7 +31,7 @@ namespace Me.Amon.Model
         /// <summary>
         /// 日志时间
         /// </summary>
-        public String LogDate
+        public string LogDate
         {
             get
             {

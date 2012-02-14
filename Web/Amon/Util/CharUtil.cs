@@ -63,7 +63,7 @@ namespace Me.Amon.Util
             return text != null ? Regex.IsMatch(text, "^\\d+$") : false;
         }
 
-        public static String EncodeLong(long l, bool bigCase)
+        public static string EncodeLong(long l, bool bigCase)
         {
             // 不同进制使用的数值表示字符
             char[] digits = bigCase ? new char[] { 'Q', 'A', 'Z', 'W', 'S', 'X', 'E', 'D', 'C', 'R', 'F', 'V', 'T', 'G', 'B', 'Y' } : new char[] { 'q', 'a', 'z', 'w', 's', 'x', 'e', 'd', 'c', 'r', 'f', 'v', 't', 'g', 'b', 'y' };
@@ -79,7 +79,7 @@ namespace Me.Amon.Util
             while (charPos > 0);
 
             // 返回符合用户要求格式的数组字符串
-            return new String(buf);
+            return new string(buf);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Me.Amon.Util
         /// <param name="b"></param>
         /// <param name="bigCase"></param>
         /// <returns></returns>
-        public static String EncodeBytes(byte[] b, bool bigCase)
+        public static string EncodeBytes(byte[] b, bool bigCase)
         {
             // 不同进制使用的数值表示字符
             char[] digits = bigCase ? new char[] { 'Q', 'A', 'Z', 'W', 'S', 'X', 'E', 'D', 'C', 'R', 'F', 'V', 'T', 'G', 'B', 'Y' } : new char[] { 'q', 'a', 'z', 'w', 's', 'x', 'e', 'd', 'c', 'r', 'f', 'v', 't', 'g', 'b', 'y' };
@@ -107,7 +107,7 @@ namespace Me.Amon.Util
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static bool IsValidate(String value)
+        public static bool IsValidate(string value)
         {
             return (value != null && value.Trim().Length > 0);
         }
@@ -118,7 +118,7 @@ namespace Me.Amon.Util
         /// <param name="value"></param>
         /// <param name="fix"></param>
         /// <returns></returns>
-        public static bool IsValidate(String value, int fix)
+        public static bool IsValidate(string value, int fix)
         {
             return (value != null && value.Trim().Length == fix);
         }
@@ -130,7 +130,7 @@ namespace Me.Amon.Util
         /// <param name="min"></param>
         /// <param name="max"></param>
         /// <returns></returns>
-        public static bool IsValidate(String value, int min, int max)
+        public static bool IsValidate(string value, int min, int max)
         {
             if (value != null)
             {
@@ -145,7 +145,7 @@ namespace Me.Amon.Util
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public static byte[] getBytes(String text)
+        public static byte[] getBytes(string text)
         {
             if (string.IsNullOrEmpty(text))
             {
@@ -165,7 +165,7 @@ namespace Me.Amon.Util
             return rst;
         }
 
-        public static String lpad(String text, int length, String padStr)
+        public static string lpad(string text, int length, string padStr)
         {
             int s = text.Length;
             int e = padStr.Length;
@@ -181,7 +181,7 @@ namespace Me.Amon.Util
             return text;
         }
 
-        public static String trim(String text, int size)
+        public static string trim(string text, int size)
         {
             if (text == null)
             {
@@ -216,7 +216,7 @@ namespace Me.Amon.Util
         /// <param name="src"></param>
         /// <param name="len">中文字符个数</param>
         /// <returns></returns>
-        public static string FixWidth(String src, int len)
+        public static string FixWidth(string src, int len)
         {
             if (src.Length > len)
             {

@@ -78,8 +78,8 @@ namespace Me.Amon.Model
                 return false;
             }
 
-            String tmpHash = dt.Rows[0][DBConst.C3010401].ToString();
-            String tmpCode = dt.Rows[0][DBConst.C3010302].ToString();
+            string tmpHash = dt.Rows[0][DBConst.C3010401].ToString();
+            string tmpCode = dt.Rows[0][DBConst.C3010302].ToString();
 
             // 登录口令验证
             dba.ReInit();
@@ -99,7 +99,7 @@ namespace Me.Amon.Model
                 return false;
             }
             _Data = Convert.FromBase64String(t);
-            String tmpPwds = Digest(name, pass, _Data);
+            string tmpPwds = Digest(name.ToLower(), pass, _Data);
             if (tmpPwds != dt.Rows[0][DBConst.C3010603].ToString())
             {
                 return false;
@@ -148,7 +148,7 @@ namespace Me.Amon.Model
         public bool WpSignPk(string oldPass, string newPass)
         {
             // 口令验证
-            String tmpPwds = Digest(_Name, oldPass, _Data);
+            string tmpPwds = Digest(_Name, oldPass, _Data);
 
             // 执行查询
             var dba = new DBAccess();
@@ -281,7 +281,7 @@ namespace Me.Amon.Model
         /// <param name="pass">用户口令</param>
         /// <param name="mail">电子邮件</param>
         /// <returns></returns>
-        public int WpSignUp(String name, String pass, String mail)
+        public int WpSignUp(string name, string pass, string mail)
         {
             #region 用户名判断
             DBAccess dba = new DBAccess();
@@ -376,7 +376,7 @@ namespace Me.Amon.Model
             #region 安全信息
             _Data = new byte[256];
             new Random().NextBytes(_Data);
-            string info = Digest(name, pass, _Data);
+            string info = Digest(name.ToLower(), pass, _Data);
             dba.ReInit();
             dba.AddTable(DBConst.C3010600);
             dba.AddParam(DBConst.C3010601, hash);

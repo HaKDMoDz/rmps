@@ -77,7 +77,7 @@ namespace Me.Amon.User
 
         protected void BtSignWs_Click(object sender, EventArgs e)
         {
-            String userPwds = TbPass1.Text;
+            string userPwds = TbPass1.Text;
             if (string.IsNullOrEmpty(userPwds))
             {
                 LbErrMsg.Text = "请输入【登录口令】！";

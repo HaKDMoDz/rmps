@@ -19,7 +19,7 @@ namespace Me.Amon.User
 
         protected void BtSignUp_Click(object sender, EventArgs e)
         {
-            String userName = TbName.Text;
+            string userName = TbName.Text;
             if (string.IsNullOrEmpty(userName))
             {
                 LbErrMsg.Text = "请输入【登录用户】！";
@@ -43,7 +43,7 @@ namespace Me.Amon.User
                 return;
             }
 
-            String userPwds = TbPass1.Text;
+            string userPwds = TbPass1.Text;
             if (string.IsNullOrEmpty(userPwds))
             {
                 LbErrMsg.Text = "请输入【登录口令】！";
@@ -68,7 +68,7 @@ namespace Me.Amon.User
                 return;
             }
 
-            String userMail = TbMail.Text;
+            string userMail = TbMail.Text;
             if (!CharUtil.IsValidate(userMail))
             {
                 LbErrMsg.Text = "请输入【电子邮件】！";
@@ -93,7 +93,7 @@ namespace Me.Amon.User
             DataTable dv = dba.ExecuteSelect();
             if (dv != null && dv.Rows.Count > 0)
             {
-                LbErrMsg.Text = String.Format("用户名 {0} 已存在，请选择其它用户名！", userName);
+                LbErrMsg.Text = string.Format("用户名 {0} 已存在，请选择其它用户名！", userName);
                 TrErrMsg.Attributes.Add("style", "display:;");
                 TbName.Focus();
                 return;

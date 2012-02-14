@@ -20,12 +20,12 @@ namespace Me.Amon.Util
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public static String Text2Db(String text)
+        public static string Text2Db(string text)
         {
             return text != null ? text.Replace("\\", "\\\\").Replace("'", "\\'") : "";
         }
 
-        public static String Text2Like(String text)
+        public static string Text2Like(string text)
         {
             text = Regex.Replace(Text2Db(text), "[\\s%_]+", "%");
             if (text[0] != '%')
@@ -44,13 +44,13 @@ namespace Me.Amon.Util
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static String Db2Html(Object obj)
+        public static string Db2Html(Object obj)
         {
             if (obj == null)
             {
                 return "&nbsp;";
             }
-            String text = obj.ToString();
+            string text = obj.ToString();
             if (text == "")
             {
                 return "&nbsp;";
@@ -69,7 +69,7 @@ namespace Me.Amon.Util
             {
                 return "";
             }
-            String text = obj.ToString().Trim();
+            string text = obj.ToString().Trim();
             if (text == "")
             {
                 return "";

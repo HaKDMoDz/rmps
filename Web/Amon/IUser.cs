@@ -73,13 +73,13 @@ public class IUser
     /// <summary>
     /// 系统共用用户代码
     /// </summary>
-    public const String COMN_CODE = "A0000000";
+    public const string COMN_CODE = "A0000000";
     /// <summary>
     /// 系统演示用户代码
     /// </summary>
-    public const String DEMO_CODE = "A0000001";
+    public const string DEMO_CODE = "A0000001";
     /// <summary>
     /// 系统测试用户代码
     /// </summary>
-    public const String TEST_CODE = "A0000002";
+    public const string TEST_CODE = "A0000002";
 }
