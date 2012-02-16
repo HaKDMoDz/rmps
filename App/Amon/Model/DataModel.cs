@@ -116,24 +116,24 @@ namespace Me.Amon.Model
             }
 
             dba.ReInit();
-            dba.AddTable(DBConst.AUCS0100);
-            dba.AddColumn(DBConst.AUCS0103);
-            dba.AddColumn(DBConst.AUCS0104);
-            dba.AddColumn(DBConst.AUCS0105);
-            dba.AddColumn(DBConst.AUCS0106);
-            dba.AddColumn(DBConst.AUCS0107);
-            dba.AddWhere(DBConst.AUCS0102, _UserModel.Code);
-            dba.AddSort(DBConst.AUCS0101, true);
+            dba.AddTable(DBConst.AUDC0100);
+            dba.AddColumn(DBConst.AUDC0103);
+            dba.AddColumn(DBConst.AUDC0104);
+            dba.AddColumn(DBConst.AUDC0105);
+            dba.AddColumn(DBConst.AUDC0106);
+            dba.AddColumn(DBConst.AUDC0107);
+            dba.AddWhere(DBConst.AUDC0102, _UserModel.Code);
+            dba.AddSort(DBConst.AUDC0101, true);
             using (DataTable dt = dba.ExecuteSelect())
             {
                 foreach (DataRow row in dt.Rows)
                 {
                     Udc item = new Udc();
-                    item.Id = row[DBConst.AUCS0103] as string;
-                    item.Name = row[DBConst.AUCS0104] as string;
-                    item.Tips = row[DBConst.AUCS0105] as string;
-                    item.Data = row[DBConst.AUCS0106] as string;
-                    item.Memo = row[DBConst.AUCS0107] as string;
+                    item.Id = row[DBConst.AUDC0103] as string;
+                    item.Name = row[DBConst.AUDC0104] as string;
+                    item.Tips = row[DBConst.AUDC0105] as string;
+                    item.Data = row[DBConst.AUDC0106] as string;
+                    item.Memo = row[DBConst.AUDC0107] as string;
                     UcsList.Add(item);
 
                     if (item.Id == _UcsKey)

@@ -20,12 +20,12 @@ namespace Me.Amon.Model
         #region 接口实现
         public override bool Load(DataRow row)
         {
-            Order = (int)row[DBConst.AUCS0101];
-            Id = row[DBConst.AUCS0103] as string;
-            Name = row[DBConst.AUCS0104] as string;
-            Tips = row[DBConst.AUCS0105] as string;
-            Data = row[DBConst.AUCS0106] as string;
-            Memo = row[DBConst.AUCS0107] as string;
+            Order = (int)row[DBConst.AUDC0101];
+            Id = row[DBConst.AUDC0103] as string;
+            Name = row[DBConst.AUDC0104] as string;
+            Tips = row[DBConst.AUDC0105] as string;
+            Data = row[DBConst.AUDC0106] as string;
+            Memo = row[DBConst.AUDC0107] as string;
 
             return true;
         }

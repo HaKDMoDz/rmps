@@ -164,6 +164,7 @@ namespace Me.Amon.Pwd
                 {
                     IlCatTree.Images.Add(cat.Icon, Image.FromFile(_DataModel.CatDir + cat.Icon + ".png"));
                     node.ImageKey = cat.Icon;
+                    node.SelectedImageKey = cat.Icon;
                 }
                 else
                 {

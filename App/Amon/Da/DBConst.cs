@@ -585,57 +585,57 @@
         /// <summary>
         /// 字符空间表格
         /// </summary>
-        public const string AUCS0100 = "AUCS0100";
+        public const string AUDC0100 = "AUDC0100";
         /// <summary>
         /// 排序依据
         /// </summary>
-        public const string AUCS0101 = "AUCS0101";
+        public const string AUDC0101 = "AUDC0101";
         /// <summary>
         /// 用户代码
         /// </summary>
-        public const string AUCS0102 = "AUCS0102";
-        public const int AUCS0102_SIZE = 8;
+        public const string AUDC0102 = "AUDC0102";
+        public const int AUDC0102_SIZE = 8;
         /// <summary>
         /// 空间索引
         /// </summary>
-        public const string AUCS0103 = "AUCS0103";
-        public const int AUCS0103_SIZE = 16;
+        public const string AUDC0103 = "AUDC0103";
+        public const int AUDC0103_SIZE = 16;
         /// <summary>
         /// 空间名称
         /// </summary>
-        public const string AUCS0104 = "AUCS0104";
-        public const int AUCS0104_SIZE = 256;
+        public const string AUDC0104 = "AUDC0104";
+        public const int AUDC0104_SIZE = 256;
         /// <summary>
         /// 空间提示
         /// </summary>
-        public const string AUCS0105 = "AUCS0105";
-        public const int AUCS0105_SIZE = 256;
+        public const string AUDC0105 = "AUDC0105";
+        public const int AUDC0105_SIZE = 256;
         /// <summary>
         /// 空间字符
         /// </summary>
-        public const string AUCS0106 = "AUCS0106";
-        public const int AUCS0106_SIZE = 512;
+        public const string AUDC0106 = "AUDC0106";
+        public const int AUDC0106_SIZE = 512;
         /// <summary>
         /// 相关说明
         /// </summary>
-        public const string AUCS0107 = "AUCS0107";
-        public const int AUCS0107_SIZE = 2048;
+        public const string AUDC0107 = "AUDC0107";
+        public const int AUDC0107_SIZE = 2048;
         /// <summary>
         /// 更新日期
         /// </summary>
-        public const string AUCS0108 = "AUCS0108";
+        public const string AUDC0108 = "AUDC0108";
         /// <summary>
         /// 创建日期
         /// </summary>
-        public const string AUCS0109 = "AUCS0109";
+        public const string AUDC0109 = "AUDC0109";
         /// <summary>
         /// 版本控制
         /// </summary>
-        public const string AUCS010A = "AUCS010A";
+        public const string AUDC010A = "AUDC010A";
         /// <summary>
         /// 操作状态：0删除、1默认、2新增、3更新
         /// </summary>
-        public const string AUCS010B = "AUCS010B";
+        public const string AUDC010B = "AUDC010B";
         #endregion
 
         #region 计划任务
