@@ -8,14 +8,13 @@ using System.Xml;
 using Me.Amon.Da;
 using Me.Amon.Model;
 using Me.Amon.Util;
-using System.Text.RegularExpressions;
 
 namespace Me.Amon
 {
     /// <summary>
-    /// APwd 的摘要说明
+    /// s 的摘要说明
     /// </summary>
-    public class APwd : IHttpHandler
+    public class s : IHttpHandler
     {
         public void ProcessRequest(HttpContext context)
         {
@@ -319,6 +318,11 @@ namespace Me.Amon
             dba.AddWhere(DBConst.APWD0001, code);
             dba.AddSort(DBConst.APWD0002, true);
             dt = dba.ExecuteSelect();
+            if (dt.Rows.Count < 1)
+            {
+                writer.WriteElementString("Error", "请确认您是否已经开通密码箱的功能！");
+                return;
+            }
 
             writer.WriteStartElement("User");
             writer.WriteElementString("Code", code);
@@ -350,12 +354,10 @@ namespace Me.Amon
 
         private void SignUp(HttpContext context, XmlWriter writer)
         {
-            writer.WriteStartElement("User");
-
             string d = context.Request["d"];
             if (!CharUtil.IsValidate(d))
             {
-                SendError(writer, "网络异常1，请稍后再试！");
+                SendError(writer, "网络异常1，请稍后重试！");
                 return;
             }
 
@@ -363,7 +365,7 @@ namespace Me.Amon
             string[] tmp = d.Split('\n');
             if (tmp.Length != 3)
             {
-                SendError(writer, "网络异常2，请稍后再试！");
+                SendError(writer, "网络异常2，请稍后重试！");
                 return;
             }
 
@@ -373,10 +375,12 @@ namespace Me.Amon
             UserModel model = new UserModel();
             if (0 != model.WpSignUp(name, pass, mail))
             {
+                SendError(writer, "系统处理异常，请稍后重试！");
                 return;
             }
-            model.WsSignUp(name, pass, writer);
 
+            writer.WriteStartElement("User");
+            model.WsSignUp(name, pass, writer);
             writer.WriteEndElement();
         }
 

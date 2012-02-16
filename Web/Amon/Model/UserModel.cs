@@ -70,6 +70,7 @@ namespace Me.Amon.Model
             dba.AddTable(DBConst.C3010300);
             dba.AddColumn(DBConst.C3010401);
             dba.AddColumn(DBConst.C3010302);
+            dba.AddColumn(DBConst.C3010407);
             dba.AddWhere(DBConst.C3010405, HttpUtil.Text2Db(name));
             dba.AddWhere(DBConst.C3010402, DBConst.C3010302, false);
             DataTable dt = dba.ExecuteSelect();
@@ -78,8 +79,9 @@ namespace Me.Amon.Model
                 return false;
             }
 
-            string tmpHash = dt.Rows[0][DBConst.C3010401].ToString();
-            string tmpCode = dt.Rows[0][DBConst.C3010302].ToString();
+            string tmpHash = dt.Rows[0][DBConst.C3010401] as string;
+            string tmpCode = dt.Rows[0][DBConst.C3010302] as string;
+            _Name = dt.Rows[0][DBConst.C3010407] as string;
 
             // 登录口令验证
             dba.ReInit();
@@ -119,7 +121,6 @@ namespace Me.Amon.Model
                 return false;
             }
 
-            _Name = name;
             _Code = tmpCode;
             _Hash = tmpHash;
             _Rank = (int)dt.Rows[0][DBConst.C3010F02];
@@ -517,6 +518,145 @@ namespace Me.Amon.Model
             a = new byte[256];
             new Random().NextBytes(a);
             writer.WriteElementString("Code", _Code);
+            writer.WriteElementString("Data", data);
+            writer.WriteElementString("Info", info);
+            writer.WriteElementString("Main", main);
+            writer.WriteElementString("Safe", safe);
+            return true;
+        }
+
+        /// <summary>
+        /// 修改口令
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="oldPass"></param>
+        /// <param name="newPass"></param>
+        /// <returns></returns>
+        public bool WsSignPk(string name, string oldPass, string newPass, XmlWriter writer)
+        {
+            var dba = new DBAccess();
+            dba.AddTable(DBConst.C3010400);
+            dba.AddColumn(DBConst.C3010402);
+            dba.AddWhere(DBConst.C3010400, CharUtil.Text2DB(name));
+            var dt = dba.ExecuteSelect();
+            if (dt.Rows.Count != 1)
+            {
+                writer.WriteElementString("Error", "请确认您的登录口令及登录口令是否正确！");
+                return false;
+            }
+
+            string code = dt.Rows[0][DBConst.C3010402] as string;
+            dba.ReInit();
+            dba.AddTable(DBConst.APWD0000);
+            dba.AddColumn(DBConst.APWD0002);
+            dba.AddColumn(DBConst.APWD0003);
+            dba.AddWhere(DBConst.APWD0001, code);
+            dba.AddSort(DBConst.APWD0002, true);
+            dt = dba.ExecuteSelect();
+            if (dt.Rows.Count != 4)
+            {
+                writer.WriteElementString("Error", "系统异常，请与管理员联系：admin@amon.me！");
+                return false;
+            }
+
+            string data = dt.Rows[0][DBConst.APWD0003] as string;
+            if (string.IsNullOrEmpty(data))
+            {
+                writer.WriteElementString("Error", "系统异常，请与管理员联系：admin@amon.me！");
+                return false;
+            }
+            byte[] b = Convert.FromBase64String(data);
+            string info = dt.Rows[0][DBConst.APWD0003] as string;
+            string main = dt.Rows[0][DBConst.APWD0003] as string;
+            string safe = dt.Rows[0][DBConst.APWD0003] as string;
+
+            // 已有口令校验
+            if (info != Digest(name, oldPass, b))
+            {
+                writer.WriteElementString("Error", "请确认您的登录口令及登录口令是否正确！");
+                return false;
+            }
+
+            // 口令
+            byte[] k = GenK(name, code, oldPass);
+            // 向量
+            byte[] v = GenV(name, code, oldPass);
+            byte[] t = Convert.FromBase64String(main);
+            #region AES 加密
+            AesManaged aes1 = new AesManaged();
+            using (MemoryStream mStream = new MemoryStream())
+            {
+                using (CryptoStream cStream = new CryptoStream(mStream, aes1.CreateDecryptor(k, v), CryptoStreamMode.Write))
+                {
+                    cStream.Write(t, 0, t.Length);
+                    cStream.FlushFinalBlock();
+                    t = mStream.ToArray();
+                }
+            }
+            aes1.Clear();
+            #endregion
+
+            new Random().NextBytes(b);
+            // 口令
+            k = GenK(name, code, newPass);
+            // 向量
+            v = GenV(name, code, newPass);
+
+            #region AES 加密
+            AesManaged aes2 = new AesManaged();
+            using (MemoryStream mStream = new MemoryStream())
+            {
+                using (CryptoStream cStream = new CryptoStream(mStream, aes2.CreateEncryptor(k, v), CryptoStreamMode.Write))
+                {
+                    cStream.Write(t, 0, t.Length);
+                    cStream.FlushFinalBlock();
+                    t = mStream.ToArray();
+                }
+            }
+            aes1.Clear();
+            #endregion
+
+            // 摘要用户登录信息
+            info = Digest(name, newPass, b);
+            data = Convert.ToBase64String(b);
+            main = Convert.ToBase64String(t);
+
+            dba.ReInit();
+            dba.AddTable(DBConst.APWD0000);
+            dba.AddWhere(DBConst.APWD0001, code);
+            dba.AddDeleteBatch();
+
+            dba.ReInit();
+            dba.AddTable(DBConst.APWD0000);
+            dba.AddParam(DBConst.APWD0001, code);
+            dba.AddParam(DBConst.APWD0002, "Data");
+            dba.AddParam(DBConst.APWD0003, data);
+            dba.AddInsertBatch();
+
+            dba.ReInit();
+            dba.AddTable(DBConst.APWD0000);
+            dba.AddParam(DBConst.APWD0001, code);
+            dba.AddParam(DBConst.APWD0002, "Info");
+            dba.AddParam(DBConst.APWD0003, info);
+            dba.AddInsertBatch();
+
+            dba.ReInit();
+            dba.AddTable(DBConst.APWD0000);
+            dba.AddParam(DBConst.APWD0001, code);
+            dba.AddParam(DBConst.APWD0002, "Main");
+            dba.AddParam(DBConst.APWD0003, main);
+            dba.AddInsertBatch();
+
+            dba.ReInit();
+            dba.AddTable(DBConst.APWD0000);
+            dba.AddParam(DBConst.APWD0001, code);
+            dba.AddParam(DBConst.APWD0002, "Safe");
+            dba.AddParam(DBConst.APWD0003, safe);
+            dba.AddInsertBatch();
+
+            dba.ExecuteBatch();
+
+            writer.WriteElementString("Code", code);
             writer.WriteElementString("Data", data);
             writer.WriteElementString("Info", info);
             writer.WriteElementString("Main", main);
