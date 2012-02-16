@@ -18,6 +18,7 @@ using Me.Amon.Pwd.Pro;
 using Me.Amon.Pwd.Wiz;
 using Me.Amon.Uc;
 using Me.Amon.User;
+using Me.Amon.User.Auth;
 using Me.Amon.Util;
 using Me.Amon.Uw;
 
@@ -811,16 +812,17 @@ namespace Me.Amon.Pwd
         #region 数据菜单
         private void TmiSync_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("同步功能尚在完善中，敬请期待！");
         }
 
         private void TmiBackup_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("同步功能尚在完善中，敬请期待！");
         }
 
         private void TmiResuma_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("同步功能尚在完善中，敬请期待！");
         }
 
         #region 数据导出
@@ -1034,7 +1036,9 @@ namespace Me.Amon.Pwd
         #region 口令安全
         private void TmiPkey_Click(object sender, EventArgs e)
         {
-
+            AuthAc authAc = new AuthAc(_UserModel);
+            authAc.InitOnce();
+            authAc.ShowView(EAuthAc.AuthPk);
         }
 
         private void TmiSkey_Click(object sender, EventArgs e)
@@ -2008,7 +2012,7 @@ namespace Me.Amon.Pwd
         {
             try
             {
-                Process.Start("http://amon.me/help");
+                Process.Start("http://amon.me/blog");
             }
             catch (Exception exp)
             {

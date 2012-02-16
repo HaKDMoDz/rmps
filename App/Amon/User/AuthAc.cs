@@ -25,6 +25,10 @@ namespace Me.Amon.User
 
             InitializeComponent();
         }
+
+        public void InitOnce()
+        {
+        }
         #endregion
 
         #region 公共函数
