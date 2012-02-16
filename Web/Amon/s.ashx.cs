@@ -173,14 +173,14 @@ namespace Me.Amon
         private void ListUdc(DBAccess dba, XmlWriter writer, string code)
         {
             dba.ReInit();
-            dba.AddTable(DBConst.AUCS0100);
-            dba.AddColumn(DBConst.AUCS0103);
-            dba.AddColumn(DBConst.AUCS0104);
-            dba.AddColumn(DBConst.AUCS0105);
-            dba.AddColumn(DBConst.AUCS0106);
-            dba.AddColumn(DBConst.AUCS0107);
-            dba.AddWhere(DBConst.AUCS0102, code);
-            dba.AddSort(DBConst.AUCS0101, true);
+            dba.AddTable(DBConst.AUDC0100);
+            dba.AddColumn(DBConst.AUDC0103);
+            dba.AddColumn(DBConst.AUDC0104);
+            dba.AddColumn(DBConst.AUDC0105);
+            dba.AddColumn(DBConst.AUDC0106);
+            dba.AddColumn(DBConst.AUDC0107);
+            dba.AddWhere(DBConst.AUDC0102, code);
+            dba.AddSort(DBConst.AUDC0101, true);
 
             writer.WriteStartElement("Udcs");
             using (DataTable dt = dba.ExecuteSelect())
