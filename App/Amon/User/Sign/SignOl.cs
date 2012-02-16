@@ -3,7 +3,6 @@ using System.IO;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Model;
@@ -120,6 +119,8 @@ namespace Me.Amon.User.Sign
             }
             #endregion
 
+            _SignAc.ShowWaiting();
+
             #region 本地用户判断
             _Name = _Name.ToLower();
             _Prop = new Uc.Properties();
@@ -127,6 +128,7 @@ namespace Me.Amon.User.Sign
             string home = _Prop.Get(string.Format(IEnv.AMON_SYS_HOME, _Name));
             if (!string.IsNullOrEmpty(home))
             {
+                _SignAc.HideWaiting();
                 _SignAc.ShowAlert(string.Format("已存在名为 {0} 的用户，请尝试其它用户名！", _Name));
                 TbName.Focus();
                 return;
@@ -134,31 +136,11 @@ namespace Me.Amon.User.Sign
             #endregion
 
             // 在线注册
-            if (!IsPcMode)
-            {
-                WebClient client = new WebClient();
-                client.Headers["Content-type"] = "application/x-www-form-urlencoded";
-                client.Encoding = Encoding.UTF8;
-                client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignUpV_UploadStringCompleted);
-                client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=rsa&m=0");
-                return;
-            }
-
-            // 本地注册
-            if (!_UserModel.CaSignUp(_Root, _Name, _Pass))
-            {
-                _SignAc.ShowAlert("系统异常，请稍后重试！");
-                return;
-            }
-            else
-            {
-                _Prop.Set(string.Format(IEnv.AMON_SYS_CODE, _Name), _UserModel.Code);
-                _Prop.Set(string.Format(IEnv.AMON_SYS_HOME, _Name), _Root + _UserModel.Code + Path.DirectorySeparatorChar);
-                _Prop.Save(IEnv.AMON_SYS);
-
-                _SignAc.CallBack(0);
-            }
-            _Pass = null;
+            WebClient client = new WebClient();
+            client.Headers["Content-type"] = "application/x-www-form-urlencoded";
+            client.Encoding = Encoding.UTF8;
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignUpV_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=rsa&m=0");
         }
 
         public void DoCancel()
@@ -171,8 +153,7 @@ namespace Me.Amon.User.Sign
         }
         #endregion
 
-        public bool IsPcMode { get; set; }
-
+        #region 事件处理
         private void BtPath_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fd = new FolderBrowserDialog();
@@ -207,12 +188,14 @@ namespace Me.Amon.User.Sign
             }
             TbPath.Text = path;
         }
+        #endregion
 
         #region 私有函数
         private void SignUpV_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
         {
             if (e.Error != null)
             {
+                _SignAc.HideWaiting();
                 _SignAc.ShowAlert(e.Error.Message);
                 return;
             }
@@ -224,6 +207,7 @@ namespace Me.Amon.User.Sign
             {
                 if (xml.IndexOf("<Error>") > 0)
                 {
+                    _SignAc.HideWaiting();
                     reader.ReadToFollowing("Error");
                     _SignAc.ShowAlert(reader.ReadElementContentAsString());
                     return;
@@ -263,6 +247,7 @@ namespace Me.Amon.User.Sign
         {
             if (e.Error != null)
             {
+                _SignAc.HideWaiting();
                 _SignAc.ShowAlert(e.Error.Message);
                 return;
             }
@@ -272,6 +257,7 @@ namespace Me.Amon.User.Sign
             {
                 if (xml.IndexOf("<Error>") > 0)
                 {
+                    _SignAc.HideWaiting();
                     reader.ReadToFollowing("Error");
                     _SignAc.ShowAlert(reader.ReadElementContentAsString());
                     return;
@@ -279,6 +265,7 @@ namespace Me.Amon.User.Sign
 
                 if (!_UserModel.WsSignIn(_Root, _Name, _Pass, reader))
                 {
+                    _SignAc.HideWaiting();
                     _SignAc.ShowAlert("注册用户失败，请稍后重试！");
                     TbName.Focus();
                 }
@@ -289,6 +276,8 @@ namespace Me.Amon.User.Sign
                     prop.Set(string.Format(IEnv.AMON_SYS_HOME, _Name), _UserModel.Home);
                     prop.Set(string.Format(IEnv.AMON_SYS_CODE, _Name), _UserModel.Code);
                     prop.Save(IEnv.AMON_SYS);
+
+                    InitDat();
 
                     _SignAc.CallBack(0);
                 }
@@ -322,6 +311,135 @@ namespace Me.Amon.User.Sign
             byte[] b = Encoding.UTF8.GetBytes(_Pass);
             b = rsa.ProcessBlock(b, 0, b.Length);
             return HttpUtil.ToBase64String(b);
+        }
+
+        private void InitDat()
+        {
+            _UserModel.Init();
+
+            WebClient client = new WebClient();
+            client.Headers["Content-type"] = "application/x-www-form-urlencoded";
+            client.Encoding = Encoding.UTF8;
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(InitCat_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=cat&c=");
+        }
+
+        private void InitCat_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                _SignAc.HideWaiting();
+                _SignAc.ShowAlert(e.Error.Message);
+                return;
+            }
+
+            string xml = e.Result;
+            using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
+            {
+                if (xml.IndexOf("<Error>") > 0)
+                {
+                    _SignAc.HideWaiting();
+                    reader.ReadToFollowing("Error");
+                    _SignAc.ShowAlert(reader.ReadElementContentAsString());
+                    return;
+                }
+
+                Cat cat = new Cat();
+                cat.FromXml(null);
+            }
+
+            WebClient client = new WebClient();
+            client.Headers["Content-type"] = "application/x-www-form-urlencoded";
+            client.Encoding = Encoding.UTF8;
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(InitLib_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=lib&c=");
+        }
+
+        private void InitLib_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                _SignAc.HideWaiting();
+                _SignAc.ShowAlert(e.Error.Message);
+                return;
+            }
+
+            string xml = e.Result;
+            using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
+            {
+                if (xml.IndexOf("<Error>") > 0)
+                {
+                    _SignAc.HideWaiting();
+                    reader.ReadToFollowing("Error");
+                    _SignAc.ShowAlert(reader.ReadElementContentAsString());
+                    return;
+                }
+
+                LibHeader header = new LibHeader();
+                header.FromXml(reader);
+            }
+
+            WebClient client = new WebClient();
+            client.Headers["Content-type"] = "application/x-www-form-urlencoded";
+            client.Encoding = Encoding.UTF8;
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(InitUdc_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=lib&c=");
+        }
+
+        private void InitUdc_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                _SignAc.HideWaiting();
+                _SignAc.ShowAlert(e.Error.Message);
+                return;
+            }
+
+            string xml = e.Result;
+            using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
+            {
+                if (xml.IndexOf("<Error>") > 0)
+                {
+                    _SignAc.HideWaiting();
+                    reader.ReadToFollowing("Error");
+                    _SignAc.ShowAlert(reader.ReadElementContentAsString());
+                    return;
+                }
+
+                Udc udc = new Udc();
+                udc.FromXml(reader);
+            }
+
+            WebClient client = new WebClient();
+            client.Headers["Content-type"] = "application/x-www-form-urlencoded";
+            client.Encoding = Encoding.UTF8;
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(InitKey_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=lib&c=");
+        }
+
+        private void InitKey_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                _SignAc.HideWaiting();
+                _SignAc.ShowAlert(e.Error.Message);
+                return;
+            }
+
+            string xml = e.Result;
+            using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
+            {
+                if (xml.IndexOf("<Error>") > 0)
+                {
+                    _SignAc.HideWaiting();
+                    reader.ReadToFollowing("Error");
+                    _SignAc.ShowAlert(reader.ReadElementContentAsString());
+                    return;
+                }
+
+                Key key = new Key();
+                key.FromXml(reader);
+            }
         }
         #endregion
     }

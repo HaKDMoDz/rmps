@@ -1,22 +1,13 @@
 ﻿using System;
 using System.IO;
-using System.Net;
-using System.Security.Cryptography;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Xml;
 using Me.Amon.Model;
-using Me.Amon.Util;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Encodings;
-using Org.BouncyCastle.Crypto.Engines;
-using Org.BouncyCastle.OpenSsl;
 
 namespace Me.Amon.User.Sign
 {
     /// <summary>
-    /// 联机注册
+    /// 单机注册
     /// </summary>
     public partial class SignPc : UserControl, ISignAc
     {
@@ -124,29 +115,15 @@ namespace Me.Amon.User.Sign
             {
                 _Root = IEnv.DATA_DIR + Path.DirectorySeparatorChar;
             }
-            if (!Directory.Exists(_Root))
-            {
-                try
-                {
-                    Directory.CreateDirectory(_Root);
-                }
-                catch (Exception exp)
-                {
-                    _SignAc.ShowAlert(exp.Message);
-                    TbPath.Text = IEnv.DATA_DIR;
-                    return;
-                }
-            }
-            if (_Root[_Root.Length - 1] != (Path.DirectorySeparatorChar))
-            {
-                _Root += Path.DirectorySeparatorChar;
-            }
             #endregion
+
+            _SignAc.ShowWaiting();
 
             // 本地注册
             if (!_UserModel.CaSignUp(_Root, _Name, _Pass))
             {
                 _Pass = null;
+                _SignAc.HideWaiting();
                 _SignAc.ShowAlert("系统异常，请稍后重试！");
                 return;
             }
@@ -154,6 +131,8 @@ namespace Me.Amon.User.Sign
             _Prop.Set(string.Format(IEnv.AMON_SYS_CODE, _Name), _UserModel.Code);
             _Prop.Set(string.Format(IEnv.AMON_SYS_HOME, _Name), _Root + _UserModel.Code + Path.DirectorySeparatorChar);
             _Prop.Save(IEnv.AMON_SYS);
+
+            InitDat();
 
             _SignAc.CallBack(0);
         }
@@ -168,6 +147,7 @@ namespace Me.Amon.User.Sign
         }
         #endregion
 
+        #region 事件处理
         private void BtPath_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fd = new FolderBrowserDialog();
@@ -201,6 +181,24 @@ namespace Me.Amon.User.Sign
                 path += Path.DirectorySeparatorChar;
             }
             TbPath.Text = path;
+        }
+        #endregion
+
+        private void InitDat()
+        {
+            _UserModel.Init();
+            var dba = _UserModel.DBAccess;
+
+            StreamReader reader = File.OpenText("Amon.dat");
+            string line = reader.ReadLine();
+            while (line != null)
+            {
+                dba.AddBatch(line);
+                line = reader.ReadLine();
+            }
+            reader.Close();
+
+            dba.ExecuteBatch();
         }
     }
 }

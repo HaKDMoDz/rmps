@@ -11,7 +11,7 @@ namespace Me.Amon.Uw
 {
     public partial class UdcEdit : Form
     {
-        private Ucs _Item;
+        private Udc _Item;
         private UserModel _UserModel;
         private DataModel _DataModel;
 
@@ -35,13 +35,13 @@ namespace Me.Amon.Uw
             TbTips.MaxLength = DBConst.AUCS0105_SIZE;
             TbChar.MaxLength = DBConst.AUCS0106_SIZE;
 
-            ShowData(new Ucs());
+            ShowData(new Udc());
         }
 
         #region 事件处理
         private void LsUcs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Ucs item = LsUcs.SelectedItem as Ucs;
+            Udc item = LsUcs.SelectedItem as Udc;
             if (item == null)
             {
                 return;
@@ -52,7 +52,7 @@ namespace Me.Amon.Uw
 
         private void BtAppend_Click(object sender, EventArgs e)
         {
-            ShowData(new Ucs());
+            ShowData(new Udc());
         }
 
         private void BtUpdate_Click(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace Me.Amon.Uw
         #endregion
 
         #region 私有函数
-        private void ShowData(Ucs item)
+        private void ShowData(Udc item)
         {
             _Item = item;
 
@@ -148,7 +148,7 @@ namespace Me.Amon.Uw
                 dba.ExecuteInsert();
 
                 LsUcs.Items.Add(_Item);
-                ShowData(new Ucs());
+                ShowData(new Udc());
             }
             _DataModel.UcsModified = -1;
         }

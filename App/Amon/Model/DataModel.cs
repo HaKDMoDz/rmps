@@ -100,14 +100,14 @@ namespace Me.Amon.Model
             #endregion
 
             #region 字符空间
-            _UcsList = new ObservableCollection<Ucs>();
-            _UcsList.Add(new Ucs { Id = "aucs000000000001", Name = "仅数字", Tips = "仅数字", Data = "0123456789" });
-            _UcsList.Add(new Ucs { Id = "aucs000000000002", Name = "大写字母", Tips = "大写字母", Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
-            _UcsList.Add(new Ucs { Id = "aucs000000000003", Name = "小写字母", Tips = "小写字母", Data = "abcdefghijklmnopqrstuvwxyz" });
-            _UcsList.Add(new Ucs { Id = "aucs000000000004", Name = "大小写字母", Tips = "大小写字母", Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
-            _UcsList.Add(new Ucs { Id = "aucs000000000005", Name = "数字及字母", Tips = "数字及字母", Data = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
-            _UcsList.Add(new Ucs { Id = "aucs000000000006", Name = "可输入英文符号", Tips = "可输入英文符号", Data = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" });
-            foreach (Ucs item in _UcsList)
+            _UcsList = new ObservableCollection<Udc>();
+            _UcsList.Add(new Udc { Id = "aucs000000000001", Name = "仅数字", Tips = "仅数字", Data = "0123456789" });
+            _UcsList.Add(new Udc { Id = "aucs000000000002", Name = "大写字母", Tips = "大写字母", Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
+            _UcsList.Add(new Udc { Id = "aucs000000000003", Name = "小写字母", Tips = "小写字母", Data = "abcdefghijklmnopqrstuvwxyz" });
+            _UcsList.Add(new Udc { Id = "aucs000000000004", Name = "大小写字母", Tips = "大小写字母", Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
+            _UcsList.Add(new Udc { Id = "aucs000000000005", Name = "数字及字母", Tips = "数字及字母", Data = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
+            _UcsList.Add(new Udc { Id = "aucs000000000006", Name = "可输入英文符号", Tips = "可输入英文符号", Data = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" });
+            foreach (Udc item in _UcsList)
             {
                 if (item.Id == _UcsKey)
                 {
@@ -128,7 +128,7 @@ namespace Me.Amon.Model
             {
                 foreach (DataRow row in dt.Rows)
                 {
-                    Ucs item = new Ucs();
+                    Udc item = new Udc();
                     item.Id = row[DBConst.AUCS0103] as string;
                     item.Name = row[DBConst.AUCS0104] as string;
                     item.Tips = row[DBConst.AUCS0105] as string;
@@ -174,8 +174,8 @@ namespace Me.Amon.Model
         #endregion
 
         #region 字符集
-        private ObservableCollection<Ucs> _UcsList;
-        public ObservableCollection<Ucs> UcsList
+        private ObservableCollection<Udc> _UcsList;
+        public ObservableCollection<Udc> UcsList
         {
             get
             {
@@ -184,7 +184,7 @@ namespace Me.Amon.Model
         }
         public int UcsModified { get; set; }
         private string _UcsKey;
-        public Ucs UcsDefault { get; set; }
+        public Udc UcsDefault { get; set; }
         public int UcsLength { get; set; }
         #endregion
     }

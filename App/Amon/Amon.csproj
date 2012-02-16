@@ -106,35 +106,93 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\Att.cs" />
-    <Compile Include="Model\Att\MemoAtt.cs" />
-    <Compile Include="Model\Att\DataAtt.cs" />
-    <Compile Include="Model\Att\DateAtt.cs" />
-    <Compile Include="Model\Att\FileAtt.cs" />
-    <Compile Include="Model\Att\GuidAtt.cs" />
-    <Compile Include="Model\Att\HintAtt.cs" />
-    <Compile Include="Model\Att\LinkAtt.cs" />
-    <Compile Include="Model\Att\ListAtt.cs" />
-    <Compile Include="Model\Att\LogoAtt.cs" />
-    <Compile Include="Model\Att\MailAtt.cs" />
-    <Compile Include="Model\Att\MetaAtt.cs" />
-    <Compile Include="Model\Att\PassAtt.cs" />
-    <Compile Include="Model\Att\LineAtt.cs" />
-    <Compile Include="Model\Att\TextAtt.cs" />
-    <Compile Include="Model\Cat.cs" />
-    <Compile Include="Model\DataModel.cs" />
-    <Compile Include="Model\Dir.cs" />
-    <Compile Include="Model\Key.cs" />
-    <Compile Include="Model\LibDetail.cs" />
-    <Compile Include="Model\LibHeader.cs" />
-    <Compile Include="Model\Log.cs" />
-    <Compile Include="Model\GtdDetail.cs" />
-    <Compile Include="Model\GtdHeader.cs" />
-    <Compile Include="Model\SafeModel.cs" />
-    <Compile Include="Model\Ucs.cs" />
-    <Compile Include="Model\UserModel.cs" />
-    <Compile Include="Model\Vcs.cs" />
-    <Compile Include="Model\ViewModel.cs" />
+    <Compile Include="Model\Att.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Att\DataAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Att\DateAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Att\FileAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Att\GuidAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Att\HintAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Att\LineAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Att\LinkAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Att\ListAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Att\LogoAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Att\MailAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Att\MemoAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Att\MetaAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Att\PassAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Att\TextAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Cat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\DataModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Dir.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\GtdDetail.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\GtdHeader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Key.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LibDetail.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\LibHeader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Log.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\SafeModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Udc.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\UserModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Vcs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\ViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pwd\APwd.cs">
@@ -525,6 +583,21 @@
     <Compile Include="User\Sign\SignOl.Designer.cs">
       <DependentUpon>SignOl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Util\BeanUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\CharUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\HashUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\HttpUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\SafeUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Uw\UdcEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -595,11 +668,6 @@
     <Compile Include="User\Sign\SignPc.Designer.cs">
       <DependentUpon>SignPc.cs</DependentUpon>
     </Compile>
-    <Compile Include="Util\BeanUtil.cs" />
-    <Compile Include="Util\CharUtil.cs" />
-    <Compile Include="Util\HashUtil.cs" />
-    <Compile Include="Util\HttpUtil.cs" />
-    <Compile Include="Util\SafeUtil.cs" />
     <Compile Include="Uw\Alert.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -869,6 +937,8 @@
     <None Include="Resources\Pupil.png" />
     <None Include="Resources\Guid.png" />
     <None Include="Resources\Menu.png" />
+    <None Include="Amon.dat" />
+    <None Include="Resources\Load.gif" />
     <Content Include="Skin\Feel\Default\att-card.png" />
     <Content Include="Skin\Feel\Default\att-date.png" />
     <Content Include="Skin\Feel\Default\att-file-saveas.png" />

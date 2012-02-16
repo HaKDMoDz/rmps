@@ -3,12 +3,16 @@ using System.Drawing;
 using System.Text;
 using System.Xml;
 using Me.Amon.Da;
-using Me.Amon.Util;
+using System.Collections.Generic;
 
 namespace Me.Amon.Model
 {
     public sealed class Key : Vcs
     {
+        public const int OPT_PWD_UPDATE_CAT = 3;
+        public const int OPT_PWD_UPDATE_LABEL = 4;
+        public const int OPT_PWD_UPDATE_MAJOR = 5;
+
         /// <summary>
         /// 口令索引
         /// </summary>
@@ -103,6 +107,46 @@ namespace Me.Amon.Model
         public Image Icon { get; set; }
         public Image Hint { get; set; }
 
+        #region 接口实现
+        public override bool Load(DataRow row)
+        {
+            Id = row[DBConst.APWD0105] as string;
+            Order = (int)row[DBConst.APWD0101];
+            Label = (int)row[DBConst.APWD0102];
+            Major = (int)row[DBConst.APWD0103];
+            CatId = row[DBConst.APWD0106] as string;
+            RegDate = row[DBConst.APWD0107] as string;
+            LibId = row[DBConst.APWD0108] as string;
+            Title = row[DBConst.APWD0109] as string;
+            MetaKey = row[DBConst.APWD010A] as string;
+            IcoName = row[DBConst.APWD010B] as string;
+            IcoPath = row[DBConst.APWD010C] as string;
+            IcoMemo = row[DBConst.APWD010D] as string;
+            GtdId = row[DBConst.APWD010E] as string;
+            GtdMemo = row[DBConst.APWD010F] as string;
+            Memo = row[DBConst.APWD0110] as string;
+
+            VisitDate = row[DBConst.APWD0111] as string;
+            Backup = (string)row[DBConst.APWD0112] == "t";
+            CipherVer = row[DBConst.APWD0113] as string;
+
+            _IsUpdate = true;
+            Modified = false;
+
+            return true;
+        }
+
+        public override bool Read(DBAccess dba, string Id)
+        {
+            return true;
+        }
+
+        public override bool Save(DBAccess dba, bool update)
+        {
+            return true;
+        }
+        #endregion
+
         /// <summary>
         /// 恢复默认值
         /// </summary>
@@ -129,9 +173,6 @@ namespace Me.Amon.Model
             Password = null;
             GtdHeader = null;
 
-            Icon = BeanUtil.NaN16;
-            Hint = BeanUtil.NaN16;
-
             _IsUpdate = false;
             Backup = true;
             Modified = false;
@@ -140,32 +181,6 @@ namespace Me.Amon.Model
         public override string ToString()
         {
             return Title;
-        }
-
-        public void Load(DataRow row)
-        {
-            Id = row[DBConst.APWD0105] as string;
-            Order = (int)row[DBConst.APWD0101];
-            Label = (int)row[DBConst.APWD0102];
-            Major = (int)row[DBConst.APWD0103];
-            CatId = row[DBConst.APWD0106] as string;
-            RegDate = row[DBConst.APWD0107] as string;
-            LibId = row[DBConst.APWD0108] as string;
-            Title = row[DBConst.APWD0109] as string;
-            MetaKey = row[DBConst.APWD010A] as string;
-            IcoName = row[DBConst.APWD010B] as string;
-            IcoPath = row[DBConst.APWD010C] as string;
-            IcoMemo = row[DBConst.APWD010D] as string;
-            GtdId = row[DBConst.APWD010E] as string;
-            GtdMemo = row[DBConst.APWD010F] as string;
-            Memo = row[DBConst.APWD0110] as string;
-
-            VisitDate = row[DBConst.APWD0111] as string;
-            Backup = (string)row[DBConst.APWD0112] == "t";
-            CipherVer = row[DBConst.APWD0113] as string;
-
-            _IsUpdate = true;
-            Modified = false;
         }
 
         public string ToXml()
@@ -206,7 +221,15 @@ namespace Me.Amon.Model
 
         public void FromXml(XmlReader reader)
         {
-            Id = reader.ReadElementContentAsString();
+            if (reader == null)
+            {
+                return;
+            }
+
+            if (reader.Name == "Id" || reader.ReadToNextSibling("Id"))
+            {
+                Id = reader.ReadElementContentAsString();
+            }
             Order = reader.ReadElementContentAsInt();
             Label = reader.ReadElementContentAsInt();
             Major = reader.ReadElementContentAsInt();

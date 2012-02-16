@@ -5,6 +5,7 @@ using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.User.Sign;
 using Me.Amon.Util;
+using Me.Amon.Properties;
 
 namespace Me.Amon.User
 {
@@ -62,12 +63,14 @@ namespace Me.Amon.User
 
         public void ShowWaiting()
         {
+            PbMenu.Image = Resources.Load;
             BtOk.Enabled = false;
             BtNo.Enabled = false;
         }
 
         public void HideWaiting()
         {
+            PbMenu.Image = Resources.Menu;
             BtNo.Enabled = true;
             BtOk.Enabled = true;
         }
@@ -96,7 +99,6 @@ namespace Me.Amon.User
 
         public void CallBack(int view)
         {
-            _UserModel.Init();
             if (CallBackHandler != null)
             {
                 CallBackHandler.Invoke(view);

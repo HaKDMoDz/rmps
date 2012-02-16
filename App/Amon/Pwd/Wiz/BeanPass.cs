@@ -126,7 +126,7 @@ namespace Me.Amon.Pwd.Wiz
 
                 _CharSetDict.Clear();
                 ToolStripMenuItem item;
-                foreach (Ucs ucs in _DataModel.UcsList)
+                foreach (Udc ucs in _DataModel.UcsList)
                 {
                     item = new ToolStripMenuItem();
                     item.Click += new EventHandler(MiCharSet_Click);

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.Text.RegularExpressions;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Model;
 using Me.Amon.Util;
-using System.Text;
 
 namespace Me.Amon.User.Sign
 {
@@ -76,6 +75,8 @@ namespace Me.Amon.User.Sign
             }
             #endregion
 
+            _SignAc.ShowWaiting();
+
             _Prop = new Uc.Properties();
             _Prop.Load(IEnv.AMON_SYS);
 
@@ -104,15 +105,14 @@ namespace Me.Amon.User.Sign
             #region 已有用户正常登录
             if (!_UserModel.CaSignIn(_Home, code, _Name, _Pass))
             {
+                _SignAc.HideWaiting();
                 _SignAc.ShowAlert("身份验证错误，请确认您的用户及口令输入是否正确！");
                 TbName.Focus();
-            }
-            else
-            {
-                _SignAc.CallBack(0);
+                return;
             }
 
-            _Pass = null;
+            _UserModel.Init();
+            _SignAc.CallBack(0);
             #endregion
         }
 
