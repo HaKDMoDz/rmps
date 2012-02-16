@@ -31,7 +31,7 @@ namespace Me.Amon.User.Sign
 
             InitializeComponent();
 
-            TbPath.Text = IEnv.DATA_DIR + Path.DirectorySeparatorChar;
+            TbPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
         }
 
         #region 接口实现
