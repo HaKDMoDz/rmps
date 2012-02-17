@@ -1,10 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
+using Me.Amon.Bean;
 using Me.Amon.Da;
-using Me.Amon.Model;
 
-namespace Me.Amon.Bean
+namespace Me.Amon.Model
 {
     public sealed class DataModel
     {

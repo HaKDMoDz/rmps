@@ -154,7 +154,7 @@
     <Compile Include="Bean\Cat.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\DataModel.cs">
+    <Compile Include="Model\DataModel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bean\Dir.cs">
