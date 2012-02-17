@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Text;
 using System.Xml;
 using Me.Amon.Da;
+using System.Collections.Generic;
 
 namespace Me.Amon.Bean
 {
@@ -218,25 +219,82 @@ namespace Me.Amon.Bean
             return buffer.Replace("utf-16", "utf-8").ToString();
         }
 
-        public void FromXml(XmlReader reader)
+        public bool FromXml(XmlReader reader)
         {
-            Id = reader.ReadElementContentAsString();
-            Order = reader.ReadElementContentAsInt();
-            Label = reader.ReadElementContentAsInt();
-            Major = reader.ReadElementContentAsInt();
-            CatId = reader.ReadElementContentAsString();
-            RegDate = reader.ReadElementContentAsString();
-            LibId = reader.ReadElementContentAsString();
-            Title = reader.ReadElementContentAsString();
-            MetaKey = reader.ReadElementContentAsString();
-            IcoName = reader.ReadElementContentAsString();
-            IcoPath = reader.ReadElementContentAsString();
-            IcoMemo = reader.ReadElementContentAsString();
-            GtdId = reader.ReadElementContentAsString();
-            GtdMemo = reader.ReadElementContentAsString();
-            Memo = reader.ReadElementContentAsString();
-            VisitDate = reader.ReadElementContentAsString();
-            CipherVer = reader.ReadElementContentAsString();
+            if (reader == null || reader.Name != "Key")
+            {
+                return false;
+            }
+
+            if (reader.Name == "Id" || reader.ReadToDescendant("Id"))
+            {
+                Id = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Order" || reader.ReadToNextSibling("Order"))
+            {
+                Order = reader.ReadElementContentAsInt();
+            }
+            if (reader.Name == "Label" || reader.ReadToNextSibling("Label"))
+            {
+                Label = reader.ReadElementContentAsInt();
+            }
+            if (reader.Name == "Major" || reader.ReadToNextSibling("Major"))
+            {
+                Major = reader.ReadElementContentAsInt();
+            }
+            if (reader.Name == "CatId" || reader.ReadToNextSibling("CatId"))
+            {
+                CatId = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "RegDate" || reader.ReadToNextSibling("RegDate"))
+            {
+                RegDate = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "LibId" || reader.ReadToNextSibling("LibId"))
+            {
+                LibId = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Title" || reader.ReadToNextSibling("Title"))
+            {
+                Title = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "MetaKey" || reader.ReadToNextSibling("MetaKey"))
+            {
+                MetaKey = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "IcoName" || reader.ReadToNextSibling("IcoName"))
+            {
+                IcoName = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "IcoPath" || reader.ReadToNextSibling("IcoPath"))
+            {
+                IcoPath = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "IcoMemo" || reader.ReadToNextSibling("IcoMemo"))
+            {
+                IcoMemo = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "GtdId" || reader.ReadToNextSibling("GtdId"))
+            {
+                GtdId = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "GtdMemo" || reader.ReadToNextSibling("GtdMemo"))
+            {
+                GtdMemo = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Memo" || reader.ReadToNextSibling("Memo"))
+            {
+                Memo = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "VisitDate" || reader.ReadToNextSibling("VisitDate"))
+            {
+                VisitDate = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "CipherVer" || reader.ReadToNextSibling("CipherVer"))
+            {
+                CipherVer = reader.ReadElementContentAsString();
+            }
+            return true;
         }
     }
 }

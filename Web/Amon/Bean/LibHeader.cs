@@ -74,18 +74,24 @@ namespace Me.Amon.Bean
 
         public bool FromXml(XmlReader reader)
         {
-            if (reader == null)
+            if (reader == null || reader.Name != "Lib")
             {
                 return false;
             }
-            if (reader.Name == "Id" || reader.ReadToFollowing("Id"))
+
+            if (reader.Name == "Id" || reader.ReadToDescendant("Id"))
             {
                 Id = reader.ReadElementContentAsString();
-                Name = reader.ReadElementContentAsString();
-                Memo = reader.ReadElementContentAsString();
-                return true;
             }
-            return false;
+            if (reader.Name == "Name" || reader.ReadToNextSibling("Name"))
+            {
+                Name = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Memo" || reader.ReadToNextSibling("Memo"))
+            {
+                Memo = reader.ReadElementContentAsString();
+            }
+            return true;
         }
 
         public void ToXml(XmlWriter writer)

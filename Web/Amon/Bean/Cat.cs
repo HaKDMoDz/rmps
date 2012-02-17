@@ -1,18 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Xml;
 using Me.Amon.Da;
-using Me.Amon.Util;
 
 namespace Me.Amon.Bean
 {
     public class Cat : Vcs
     {
         public int Order { get; set; }
-        /// <summary>
-        /// 用户代码
-        /// </summary>
-        public string UserCode { get; set; }
         /// <summary>
         /// 类别索引
         /// </summary>
@@ -98,68 +92,44 @@ namespace Me.Amon.Bean
         }
         #endregion
 
-        public bool FromXml(XmlNode root)
+        public bool FromXml(XmlReader reader)
         {
-            if (root.Name != "Cat")
+            if (reader == null || reader.Name != "Cat")
             {
                 return false;
             }
 
-            foreach (XmlNode node in root.ChildNodes)
+            if (reader.Name == "Order" || reader.ReadToDescendant("Order"))
             {
-                if (node == null)
-                {
-                    continue;
-                }
-                if (node.Name == "Order")
-                {
-                    if (CharUtil.IsValidateLong(node.InnerText))
-                    {
-                        Order = int.Parse(node.InnerText);
-                    }
-                    continue;
-                }
-                if (node.Name == "Id")
-                {
-                    if (CharUtil.IsValidateHash(node.InnerText))
-                    {
-                        Id = node.InnerText;
-                    }
-                    continue;
-                }
-                if (node.Name == "Parent")
-                {
-                    if (CharUtil.IsValidateHash(node.InnerText))
-                    {
-                        Parent = node.InnerText;
-                    }
-                }
-                if (node.Name == "Text")
-                {
-                    if (CharUtil.IsValidate(node.InnerText))
-                    {
-                        Text = node.InnerText;
-                    }
-                }
-                if (node.Name == "Tips")
-                {
-                    Tips = node.InnerText;
-                }
-                if (node.Name == "Icon")
-                {
-                    if (CharUtil.IsValidateHash(node.InnerText))
-                    {
-                        Icon = node.InnerText;
-                    }
-                }
-                if (node.Name == "Meta")
-                {
-                    Meta = node.InnerText;
-                }
-                if (node.Name == "Memo")
-                {
-                    Memo = node.InnerText;
-                }
+                Order = reader.ReadElementContentAsInt();
+            }
+            if (reader.Name == "Id" || reader.ReadToNextSibling("Id"))
+            {
+                Id = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Parent" || reader.ReadToNextSibling("Parent"))
+            {
+                Parent = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Text" || reader.ReadToNextSibling("Text"))
+            {
+                Text = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Tips" || reader.ReadToNextSibling("Tips"))
+            {
+                Tips = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Icon" || reader.ReadToNextSibling("Icon"))
+            {
+                Icon = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Meta" || reader.ReadToNextSibling("Meta"))
+            {
+                Meta = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Memo" || reader.ReadToNextSibling("Memo"))
+            {
+                Memo = reader.ReadElementContentAsString();
             }
             return true;
         }

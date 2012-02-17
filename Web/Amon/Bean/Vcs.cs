@@ -11,6 +11,11 @@ namespace Me.Amon.Bean
         public const int OPT_DEFAULT = 1;
         public const int OPT_UPDATE = 2;
 
+        /// <summary>
+        /// 用户代码
+        /// </summary>
+        public string UserCode { get; set; }
+
         public int Operate { get; set; }
 
         public int Version { get; set; }

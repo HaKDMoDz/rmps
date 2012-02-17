@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Xml;
 using Me.Amon.Da;
 
@@ -66,13 +65,43 @@ namespace Me.Amon.Bean
         }
         #endregion
 
-        public void FromXml(XmlReader reader)
+        public bool FromXml(XmlReader reader)
         {
+            if (reader == null || reader.Name != "Udc")
+            {
+                return false;
+            }
+
+            if (reader.Name == "Order" || reader.ReadToDescendant("Order"))
+            {
+                Order = reader.ReadElementContentAsInt();
+            }
+            if (reader.Name == "Id" || reader.ReadToNextSibling("Id"))
+            {
+                Id = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Name" || reader.ReadToNextSibling("Name"))
+            {
+                Name = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Tips" || reader.ReadToNextSibling("Tips"))
+            {
+                Tips = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Data" || reader.ReadToNextSibling("Data"))
+            {
+                Data = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Memo" || reader.ReadToNextSibling("Memo"))
+            {
+                Data = reader.ReadElementContentAsString();
+            }
+            return true;
         }
 
         public void ToXml(XmlWriter writer)
         {
-            writer.WriteStartElement("Ucs");
+            writer.WriteStartElement("Udc");
 
             writer.WriteElementString("Order", Order.ToString());
             writer.WriteElementString("Id", Id);
