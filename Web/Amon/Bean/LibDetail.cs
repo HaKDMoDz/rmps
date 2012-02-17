@@ -3,7 +3,7 @@ using System.Xml;
 using Me.Amon.Da;
 using System.Collections.Generic;
 
-namespace Me.Amon.Model
+namespace Me.Amon.Bean
 {
     public class LibDetail : Vcs
     {

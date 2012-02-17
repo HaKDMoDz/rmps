@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using Me.Amon.Da;
 
-namespace Me.Amon.Model
+namespace Me.Amon.Bean
 {
     public abstract class Vcs
     {

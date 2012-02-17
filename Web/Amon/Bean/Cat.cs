@@ -4,7 +4,7 @@ using System.Xml;
 using Me.Amon.Da;
 using Me.Amon.Util;
 
-namespace Me.Amon.Model
+namespace Me.Amon.Bean
 {
     public class Cat : Vcs
     {

@@ -3,7 +3,7 @@ using System.Data;
 using System.Xml;
 using Me.Amon.Da;
 
-namespace Me.Amon.Model
+namespace Me.Amon.Bean
 {
     /// <summary>
     /// 

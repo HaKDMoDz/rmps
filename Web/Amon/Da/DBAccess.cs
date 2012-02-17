@@ -2,7 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Text;
-using Me.Amon.Model;
+using Me.Amon.Bean;
 using Me.Amon.Util;
 using MySql.Data.MySqlClient;
 

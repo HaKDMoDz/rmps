@@ -307,11 +307,14 @@ namespace Me.Amon.Model
             {
                 code = dt.Rows[0][0].ToString();
             }
-            if (!CharUtil.IsValidateCode(code))
+            if (CharUtil.IsValidateCode(code))
+            {
+                code = CharUtil.GenerateUserCode(code);
+            }
+            else
             {
                 code = "A0000000";
             }
-            code = CharUtil.GenerateUserCode(code);
             #endregion
 
             string hash = HashUtil.UtcTimeInHex(false);
@@ -432,6 +435,7 @@ namespace Me.Amon.Model
         /// <returns></returns>
         public bool WsSignUp(string name, string pass, XmlWriter writer)
         {
+            name = name.ToLower();
             Random r = new Random();
 
             // 口令
