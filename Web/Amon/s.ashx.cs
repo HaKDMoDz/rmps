@@ -240,7 +240,7 @@ namespace Me.Amon
         #endregion
 
         #region 数据同步
-        private void SyncCat(DBAccess dba, XmlDocument reader, string code)
+        private void SyncCat(DBAccess dba, XmlReader reader, string code)
         {
             Cat newCat = new Cat();
             if (!newCat.FromXml(reader))

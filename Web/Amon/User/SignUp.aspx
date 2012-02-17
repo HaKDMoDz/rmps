@@ -82,7 +82,7 @@
                                         document.getElementById('dv_Redirect').innerHTML = time.toString();
                                     }
                                     else {
-                                        window.location.href = "/user/user0101.aspx";
+                                        window.location.href = "/User/Index.aspx";
                                     }
                                 }
                             </script>
@@ -90,7 +90,7 @@
                     </tr>
                     <tr>
                         <td align="center" class="TD_DataHead_TL_L">
-                            <a href="user0001.aspx">用户登录&gt;&gt;&gt;</a>
+                            <a href="Index.aspx">用户登录&gt;&gt;&gt;</a>
                         </td>
                     </tr>
                 </table>
