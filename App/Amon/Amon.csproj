@@ -106,88 +106,88 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\Att.cs">
+    <Compile Include="Bean\AAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Att\DataAtt.cs">
+    <Compile Include="Bean\Att\DataAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Att\DateAtt.cs">
+    <Compile Include="Bean\Att\DateAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Att\FileAtt.cs">
+    <Compile Include="Bean\Att\FileAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Att\GuidAtt.cs">
+    <Compile Include="Bean\Att\GuidAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Att\HintAtt.cs">
+    <Compile Include="Bean\Att\HintAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Att\LineAtt.cs">
+    <Compile Include="Bean\Att\LineAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Att\LinkAtt.cs">
+    <Compile Include="Bean\Att\LinkAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Att\ListAtt.cs">
+    <Compile Include="Bean\Att\ListAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Att\LogoAtt.cs">
+    <Compile Include="Bean\Att\LogoAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Att\MailAtt.cs">
+    <Compile Include="Bean\Att\MailAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Att\MemoAtt.cs">
+    <Compile Include="Bean\Att\MemoAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Att\MetaAtt.cs">
+    <Compile Include="Bean\Att\MetaAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Att\PassAtt.cs">
+    <Compile Include="Bean\Att\PassAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Att\TextAtt.cs">
+    <Compile Include="Bean\Att\TextAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Cat.cs">
+    <Compile Include="Bean\Cat.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\DataModel.cs">
+    <Compile Include="Bean\DataModel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Dir.cs">
+    <Compile Include="Bean\Dir.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\GtdDetail.cs">
+    <Compile Include="Bean\GtdDetail.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\GtdHeader.cs">
+    <Compile Include="Bean\GtdHeader.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Key.cs">
+    <Compile Include="Bean\Key.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\LibDetail.cs">
+    <Compile Include="Bean\LibDetail.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\LibHeader.cs">
+    <Compile Include="Bean\LibHeader.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Log.cs">
+    <Compile Include="Bean\Log.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\SafeModel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Udc.cs">
+    <Compile Include="Bean\Udc.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\UserModel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Vcs.cs">
+    <Compile Include="Bean\Vcs.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\ViewModel.cs">

@@ -4,7 +4,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
-using Me.Amon.Model.Att;
+using Me.Amon.Bean;
+using Me.Amon.Bean.Att;
 
 namespace Me.Amon.Model
 {

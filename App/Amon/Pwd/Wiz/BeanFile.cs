@@ -3,8 +3,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using Me.Amon.Bean;
+using Me.Amon.Bean.Att;
 using Me.Amon.Model;
-using Me.Amon.Model.Att;
 using Me.Amon.Util;
 using Me.Amon.Uw;
 

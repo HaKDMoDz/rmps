@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using Me.Amon.Da;
 using Me.Amon.Event;
-using Me.Amon.Model;
+using Me.Amon.Bean;
 using Me.Amon.Util;
 
 namespace Me.Amon.Pwd._Cat
@@ -24,7 +24,7 @@ namespace Me.Amon.Pwd._Cat
             TbMemo.MaxLength = DBConst.ACAT0209_SIZE;
         }
 
-        public AmonHandler<Model.Cat> CallBackHandler { get; set; }
+        public AmonHandler<Cat> CallBackHandler { get; set; }
 
         public void Show(IWin32Window owner, Cat cat)
         {

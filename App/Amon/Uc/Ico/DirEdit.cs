@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using Me.Amon.Bean;
 using Me.Amon.Da;
-using Me.Amon.Model;
 
 namespace Me.Amon.Uc.Ico
 {

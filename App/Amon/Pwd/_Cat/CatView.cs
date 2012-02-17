@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
+using Me.Amon.Bean;
 using Me.Amon.Da;
 using Me.Amon.Event;
 using Me.Amon.Model;

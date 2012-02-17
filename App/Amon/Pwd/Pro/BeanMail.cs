@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using Me.Amon.Bean;
 using Me.Amon.Model;
 using Me.Amon.Util;
 

@@ -1,9 +1,8 @@
 ﻿using System.Data;
 using System.Xml;
 using Me.Amon.Da;
-using System.Collections.Generic;
 
-namespace Me.Amon.Model
+namespace Me.Amon.Bean
 {
     public class LibDetail : Vcs
     {
@@ -42,19 +41,28 @@ namespace Me.Amon.Model
 
         public bool FromXml(XmlReader reader)
         {
-            if (reader == null)
+            if (reader == null || reader.Name != "Item")
             {
                 return false;
             }
-            if (reader.Name == "Type" || reader.ReadToFollowing("Type"))
+
+            if (reader.Name == "Type" || reader.ReadToDescendant("Type"))
             {
                 Type = reader.ReadElementContentAsInt();
-                Name = reader.ReadElementContentAsString();
-                Data = reader.ReadElementContentAsString();
-                Memo = reader.ReadElementContentAsString();
-                return true;
             }
-            return false;
+            if (reader.Name == "Name" || reader.ReadToNextSibling("Name"))
+            {
+                Name = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Data" || reader.ReadToNextSibling("Data"))
+            {
+                Data = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Memo" || reader.ReadToNextSibling("Memo"))
+            {
+                Memo = reader.ReadElementContentAsString();
+            }
+            return true;
         }
 
         public void ToXml(XmlWriter writer)

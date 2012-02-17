@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
+using Me.Amon.Bean;
 using Me.Amon.Da;
 using Me.Amon.Event;
 using Me.Amon.Model;
@@ -162,9 +163,17 @@ namespace Me.Amon.Pwd
                 node.Tag = cat;
                 if (CharUtil.IsValidateHash(cat.Icon))
                 {
-                    IlCatTree.Images.Add(cat.Icon, Image.FromFile(_DataModel.CatDir + cat.Icon + ".png"));
-                    node.ImageKey = cat.Icon;
-                    node.SelectedImageKey = cat.Icon;
+                    string file = _DataModel.CatDir + cat.Icon + ".png";
+                    if (!File.Exists(file))
+                    {
+                        node.ImageKey = "0";
+                    }
+                    else
+                    {
+                        IlCatTree.Images.Add(cat.Icon, Image.FromFile(file));
+                        node.ImageKey = cat.Icon;
+                        node.SelectedImageKey = cat.Icon;
+                    }
                 }
                 else
                 {

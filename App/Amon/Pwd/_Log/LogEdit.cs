@@ -2,9 +2,10 @@
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using Me.Amon.Bean;
+using Me.Amon.Bean.Att;
 using Me.Amon.Da;
 using Me.Amon.Model;
-using Me.Amon.Model.Att;
 using Me.Amon.Util;
 
 namespace Me.Amon.Pwd._Log

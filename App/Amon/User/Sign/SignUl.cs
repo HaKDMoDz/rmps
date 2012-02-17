@@ -93,6 +93,7 @@ namespace Me.Amon.User.Sign
                 {
                     if (text.IndexOf("<Error>") > 0)
                     {
+                        _SignAc.HideWaiting();
                         reader.ReadToFollowing("Error");
                         _SignAc.ShowAlert(reader.ReadElementContentAsString());
                         return;
@@ -111,9 +112,12 @@ namespace Me.Amon.User.Sign
                 prop.Set(string.Format(IEnv.AMON_SYS_HOME, name), path);
                 prop.Set(string.Format(IEnv.AMON_SYS_CODE, name), _UserModel.Code);
                 prop.Save(IEnv.AMON_SYS);
+
+                InitDat();
             }
             catch (Exception exp)
             {
+                _SignAc.HideWaiting();
                 _SignAc.ShowAlert(exp.Message);
                 TbPath.Focus();
                 return;
@@ -130,6 +134,7 @@ namespace Me.Amon.User.Sign
         }
         #endregion
 
+        #region 事件处理
         private void BtPath_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fd = new FolderBrowserDialog();
@@ -163,6 +168,24 @@ namespace Me.Amon.User.Sign
                 path += Path.DirectorySeparatorChar;
             }
             TbPath.Text = path;
+        }
+        #endregion
+
+        private void InitDat()
+        {
+            _UserModel.Init();
+            var dba = _UserModel.DBAccess;
+
+            StreamReader reader = File.OpenText("Amon.dat");
+            string line = reader.ReadLine();
+            while (line != null)
+            {
+                dba.AddBatch(line);
+                line = reader.ReadLine();
+            }
+            reader.Close();
+
+            dba.ExecuteBatch();
         }
     }
 }

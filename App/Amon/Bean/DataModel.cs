@@ -2,8 +2,9 @@
 using System.Data;
 using System.IO;
 using Me.Amon.Da;
+using Me.Amon.Model;
 
-namespace Me.Amon.Model
+namespace Me.Amon.Bean
 {
     public sealed class DataModel
     {

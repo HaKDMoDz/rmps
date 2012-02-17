@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using Me.Amon.Bean;
 using Me.Amon.Model;
 
 namespace Me.Amon.Pwd.Pro

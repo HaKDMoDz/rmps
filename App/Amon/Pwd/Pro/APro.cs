@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Me.Amon.Bean;
 using Me.Amon.Model;
 
 namespace Me.Amon.Pwd.Pro

@@ -3,6 +3,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using Me.Amon.Bean;
 using Me.Amon.Da;
 using Me.Amon.Model;
 using Me.Amon.Uc.Ico;

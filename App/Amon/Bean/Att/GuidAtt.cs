@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Model.Att
+﻿namespace Me.Amon.Bean.Att
 {
     public class GuidAtt : AAtt
     {

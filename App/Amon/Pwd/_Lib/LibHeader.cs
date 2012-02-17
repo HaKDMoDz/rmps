@@ -7,7 +7,7 @@ namespace Me.Amon.Pwd._Lib
     public partial class LibHeader : UserControl, ILibEdit
     {
         private LibEdit _LibEdit;
-        private Me.Amon.Model.LibHeader _LibHeader;
+        private Me.Amon.Bean.LibHeader _LibHeader;
 
         public LibHeader()
         {
@@ -27,7 +27,7 @@ namespace Me.Amon.Pwd._Lib
             TbMemo.MaxLength = DBConst.APWD0308_SIZE;
         }
 
-        public void Show(Me.Amon.Model.LibHeader header)
+        public void Show(Me.Amon.Bean.LibHeader header)
         {
             _LibHeader = header;
 
@@ -47,7 +47,7 @@ namespace Me.Amon.Pwd._Lib
             _LibHeader.Memo = TbMemo.Text;
 
             _LibEdit.SaveHeader(_LibHeader);
-            Show(new Me.Amon.Model.LibHeader());
+            Show(new Me.Amon.Bean.LibHeader());
         }
     }
 }

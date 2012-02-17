@@ -4,6 +4,7 @@ using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using Me.Amon.Bean;
 using Me.Amon.Model;
 using Me.Amon.Util;
 
@@ -87,9 +88,6 @@ namespace Me.Amon.User.Sign
             #region 已有用户首次登录
             if (!CharUtil.IsValidateCode(code))
             {
-                _Waiting = true;
-                _SignAc.ShowWaiting();
-
                 _Home = IEnv.DATA_DIR + Path.DirectorySeparatorChar;
 
                 WebClient client = new WebClient();
@@ -225,8 +223,8 @@ namespace Me.Amon.User.Sign
         {
             if (e.Error != null)
             {
-                _SignAc.ShowAlert(e.Error.Message);
                 _SignAc.HideWaiting();
+                _SignAc.ShowAlert(e.Error.Message);
                 _Waiting = false;
                 return;
             }
@@ -237,6 +235,7 @@ namespace Me.Amon.User.Sign
             {
                 if (xml.IndexOf("<Error>") > 0)
                 {
+                    _SignAc.HideWaiting();
                     reader.ReadToFollowing("Error");
                     _SignAc.ShowAlert(reader.ReadElementContentAsString());
                     return;
@@ -244,7 +243,8 @@ namespace Me.Amon.User.Sign
 
                 if (!_UserModel.WsSignIn(_Home, _Name, _Pass, reader))
                 {
-                    _SignAc.ShowAlert("注册用户失败，请稍后重试！");
+                    _SignAc.HideWaiting();
+                    _SignAc.ShowAlert("请确认您输入的登录用户及登录口令是否正确！");
                     TbName.Focus();
                 }
                 else
@@ -255,11 +255,174 @@ namespace Me.Amon.User.Sign
                     prop.Set(string.Format(IEnv.AMON_SYS_CODE, _Name), _UserModel.Code);
                     prop.Save(IEnv.AMON_SYS);
 
-                    _SignAc.CallBack(IEnv.IAPP_APWD);
+                    InitDat();
                 }
             }
 
             _Pass = null;
+        }
+
+        private void InitDat()
+        {
+            _UserModel.Init();
+
+            WebClient client = new WebClient();
+            client.Headers["Content-type"] = "application/x-www-form-urlencoded";
+            client.Encoding = Encoding.UTF8;
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(InitCat_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=cat&c=" + _UserModel.Code);
+        }
+
+        private void InitCat_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                _SignAc.HideWaiting();
+                _SignAc.ShowAlert(e.Error.Message);
+                return;
+            }
+
+            string xml = e.Result;
+            using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
+            {
+                if (xml.IndexOf("<Error>") > 0)
+                {
+                    _SignAc.HideWaiting();
+                    reader.ReadToFollowing("Error");
+                    _SignAc.ShowAlert(reader.ReadElementContentAsString());
+                    return;
+                }
+
+                Cat cat = new Cat();
+                cat.UserCode = _UserModel.Code;
+                while (reader.ReadToFollowing("Cat"))
+                {
+                    if (!cat.FromXml(reader))
+                    {
+                        continue;
+                    }
+                    cat.Save(_UserModel.DBAccess, false);
+                }
+            }
+
+            WebClient client = new WebClient();
+            client.Headers["Content-type"] = "application/x-www-form-urlencoded";
+            client.Encoding = Encoding.UTF8;
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(InitLib_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=lib&c=" + _UserModel.Code);
+        }
+
+        private void InitLib_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                _SignAc.HideWaiting();
+                _SignAc.ShowAlert(e.Error.Message);
+                return;
+            }
+
+            string xml = e.Result;
+            using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
+            {
+                if (xml.IndexOf("<Error>") > 0)
+                {
+                    _SignAc.HideWaiting();
+                    reader.ReadToFollowing("Error");
+                    _SignAc.ShowAlert(reader.ReadElementContentAsString());
+                    return;
+                }
+
+                LibHeader header = new LibHeader();
+                header.UserCode = _UserModel.Code;
+                while (reader.ReadToFollowing("Libh"))
+                {
+                    if (!header.FromXml(reader))
+                    {
+                        continue;
+                    }
+                    header.Save(_UserModel.DBAccess, false);
+                }
+            }
+
+            WebClient client = new WebClient();
+            client.Headers["Content-type"] = "application/x-www-form-urlencoded";
+            client.Encoding = Encoding.UTF8;
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(InitUdc_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=udc&c=" + _UserModel.Code);
+        }
+
+        private void InitUdc_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                _SignAc.HideWaiting();
+                _SignAc.ShowAlert(e.Error.Message);
+                return;
+            }
+
+            string xml = e.Result;
+            using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
+            {
+                if (xml.IndexOf("<Error>") > 0)
+                {
+                    _SignAc.HideWaiting();
+                    reader.ReadToFollowing("Error");
+                    _SignAc.ShowAlert(reader.ReadElementContentAsString());
+                    return;
+                }
+
+                Udc udc = new Udc();
+                udc.UserCode = _UserModel.Code;
+                while (reader.ReadToFollowing("Udc"))
+                {
+                    if (!udc.FromXml(reader))
+                    {
+                        continue;
+                    }
+                    udc.Save(_UserModel.DBAccess, false);
+                }
+            }
+
+            WebClient client = new WebClient();
+            client.Headers["Content-type"] = "application/x-www-form-urlencoded";
+            client.Encoding = Encoding.UTF8;
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(InitKey_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=key&c=" + _UserModel.Code);
+        }
+
+        private void InitKey_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                _SignAc.HideWaiting();
+                _SignAc.ShowAlert(e.Error.Message);
+                return;
+            }
+
+            string xml = e.Result;
+            using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
+            {
+                if (xml.IndexOf("<Error>") > 0)
+                {
+                    _SignAc.HideWaiting();
+                    reader.ReadToFollowing("Error");
+                    _SignAc.ShowAlert(reader.ReadElementContentAsString());
+                    return;
+                }
+
+                Key key = new Key();
+                key.UserCode = _UserModel.Code;
+                while (reader.ReadToFollowing("Key"))
+                {
+                    if (!key.FromXml(reader))
+                    {
+                        continue;
+                    }
+                    key.Save(_UserModel.DBAccess, false);
+                }
+            }
+
+            _SignAc.CallBack(IEnv.IAPP_APWD);
         }
         #endregion
     }

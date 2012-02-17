@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Me.Amon.Bean;
 using Me.Amon.Da;
 using Me.Amon.Model;
 using Me.Amon.Util;
@@ -32,7 +33,7 @@ namespace Me.Amon.Pwd._Lib
         {
             _DataModel = dataModel;
 
-            foreach (Model.LibHeader header in dataModel.LibList)
+            foreach (Bean.LibHeader header in dataModel.LibList)
             {
                 if (header.Id == "0")
                 {
@@ -50,7 +51,7 @@ namespace Me.Amon.Pwd._Lib
                 {
                     continue;
                 }
-                foreach (Model.LibDetail detail in header.Details)
+                foreach (Bean.LibDetail detail in header.Details)
                 {
                     TreeNode node = new TreeNode();
                     node.Name = detail.Id;
@@ -69,7 +70,7 @@ namespace Me.Amon.Pwd._Lib
             _UcHeader.Location = new Point(6, 20);
             _UcHeader.Size = new Size(231, 183);
             GbGroup.Controls.Add(_UcHeader);
-            _UcHeader.Show(new Model.LibHeader());
+            _UcHeader.Show(new Bean.LibHeader());
             _UcEditer = _UcHeader;
         }
 
@@ -92,21 +93,21 @@ namespace Me.Amon.Pwd._Lib
             }
 
             object obj = _Selected.Tag;
-            if (obj is Model.LibHeader)
+            if (obj is Bean.LibHeader)
             {
-                ShowHeader(obj as Model.LibHeader);
+                ShowHeader(obj as Bean.LibHeader);
                 return;
             }
-            if (obj is Model.LibDetail)
+            if (obj is Bean.LibDetail)
             {
-                ShowDetail(obj as Model.LibDetail);
+                ShowDetail(obj as Bean.LibDetail);
                 return;
             }
         }
 
         private void MiAppendLibh_Click(object sender, EventArgs e)
         {
-            ShowHeader(new Model.LibHeader());
+            ShowHeader(new Bean.LibHeader());
         }
 
         private void MiDeleteLibh_Click(object sender, EventArgs e)
@@ -126,7 +127,7 @@ namespace Me.Amon.Pwd._Lib
             {
                 _Selected = _Selected.Parent;
             }
-            ShowDetail(new Model.LibDetail());
+            ShowDetail(new Bean.LibDetail());
         }
 
         private void MiDeleteLibd_Click(object sender, EventArgs e)
@@ -134,7 +135,7 @@ namespace Me.Amon.Pwd._Lib
 
         }
 
-        private void ShowHeader(Model.LibHeader header)
+        private void ShowHeader(Bean.LibHeader header)
         {
             if (_UcEditer.Name != "LibHeader")
             {
@@ -151,7 +152,7 @@ namespace Me.Amon.Pwd._Lib
             _UcHeader.Show(header);
         }
 
-        private void ShowDetail(Model.LibDetail detail)
+        private void ShowDetail(Bean.LibDetail detail)
         {
             if (_UcEditer.Name != "LibDetail")
             {
@@ -168,7 +169,7 @@ namespace Me.Amon.Pwd._Lib
             _UcDetail.Show(detail);
         }
 
-        public void SaveHeader(Model.LibHeader header)
+        public void SaveHeader(Bean.LibHeader header)
         {
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
@@ -215,7 +216,7 @@ namespace Me.Amon.Pwd._Lib
             _DataModel.LibModified = -1;
         }
 
-        public void SaveDetail(Model.LibDetail detail)
+        public void SaveDetail(Bean.LibDetail detail)
         {
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
@@ -238,7 +239,7 @@ namespace Me.Amon.Pwd._Lib
             }
             else
             {
-                Model.LibHeader header = _Selected.Tag as Model.LibHeader;
+                Bean.LibHeader header = _Selected.Tag as Bean.LibHeader;
 
                 detail.Id = HashUtil.UtcTimeInHex(false);
                 dba.AddParam(DBConst.APWD0301, _Selected.Nodes.Count);

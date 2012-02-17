@@ -3,7 +3,7 @@ using System.Data;
 using System.Xml;
 using Me.Amon.Da;
 
-namespace Me.Amon.Model
+namespace Me.Amon.Bean
 {
     public class LibHeader : Vcs
     {
@@ -74,18 +74,24 @@ namespace Me.Amon.Model
 
         public bool FromXml(XmlReader reader)
         {
-            if (reader == null)
+            if (reader == null || reader.Name != "Lib")
             {
                 return false;
             }
-            if (reader.Name == "Id" || reader.ReadToFollowing("Id"))
+
+            if (reader.Name == "Id" || reader.ReadToDescendant("Id"))
             {
                 Id = reader.ReadElementContentAsString();
-                Name = reader.ReadElementContentAsString();
-                Memo = reader.ReadElementContentAsString();
-                return true;
             }
-            return false;
+            if (reader.Name == "Name" || reader.ReadToNextSibling("Name"))
+            {
+                Name = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Memo" || reader.ReadToNextSibling("Memo"))
+            {
+                Memo = reader.ReadElementContentAsString();
+            }
+            return true;
         }
 
         public void ToXml(XmlWriter writer)

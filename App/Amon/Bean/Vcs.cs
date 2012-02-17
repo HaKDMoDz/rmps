@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using Me.Amon.Da;
 
-namespace Me.Amon.Model
+namespace Me.Amon.Bean
 {
     public abstract class Vcs
     {
@@ -10,6 +10,11 @@ namespace Me.Amon.Model
         public const int OPT_INSERT = 0;
         public const int OPT_DEFAULT = 1;
         public const int OPT_UPDATE = 2;
+
+        /// <summary>
+        /// 用户代码
+        /// </summary>
+        public string UserCode { get; set; }
 
         public int Operate { get; set; }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Me.Amon.Bean;
 using Me.Amon.Da;
 using Me.Amon.Model;
 using Me.Amon.Util;

@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using Me.Amon.Bean;
 using Me.Amon.Model;
 using Me.Amon.Util;
 using Org.BouncyCastle.Crypto;
@@ -278,8 +279,6 @@ namespace Me.Amon.User.Sign
                     prop.Save(IEnv.AMON_SYS);
 
                     InitDat();
-
-                    _SignAc.CallBack(0);
                 }
             }
 
@@ -440,6 +439,8 @@ namespace Me.Amon.User.Sign
                 Key key = new Key();
                 key.FromXml(reader);
             }
+
+            _SignAc.CallBack(IEnv.IAPP_APWD);
         }
         #endregion
     }

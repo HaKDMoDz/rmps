@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Me.Amon.Bean;
 using Me.Amon.Model;
 
 namespace Me.Amon.Pwd.Wiz
