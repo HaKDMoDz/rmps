@@ -3,6 +3,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Me.Amon.Model;
+using Me.Amon.Util;
 
 namespace Me.Amon.User.Sign
 {
@@ -113,7 +114,13 @@ namespace Me.Amon.User.Sign
             _Root = TbPath.Text;
             if (string.IsNullOrEmpty(_Root))
             {
-                _Root = IEnv.DATA_DIR + Path.DirectorySeparatorChar;
+                _SignAc.ShowAlert("请选择您的数据存放目录！");
+                BtPath.Focus();
+                return;
+            }
+            if (_Root[_Root.Length - 1] != Path.DirectorySeparatorChar)
+            {
+                _Root += Path.DirectorySeparatorChar;
             }
             #endregion
 
@@ -187,9 +194,12 @@ namespace Me.Amon.User.Sign
         private void InitDat()
         {
             _UserModel.Init();
+            BeanUtil.UnZip("Amon.dat", _UserModel.Home);
+
             var dba = _UserModel.DBAccess;
 
-            StreamReader reader = File.OpenText("Amon.dat");
+            string file = _UserModel.Home + "dat.sql";
+            StreamReader reader = File.OpenText(file);
             string line = reader.ReadLine();
             while (line != null)
             {
@@ -197,6 +207,7 @@ namespace Me.Amon.User.Sign
                 line = reader.ReadLine();
             }
             reader.Close();
+            File.Delete(file);
 
             dba.ExecuteBatch();
         }

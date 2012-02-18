@@ -18,27 +18,22 @@ namespace Me.Amon.Model
         public void Init()
         {
             #region 数据目录
-            _DatDir = _UserModel.Home + _UserModel.Code + Path.DirectorySeparatorChar;
-            if (!Directory.Exists(_DatDir))
-            {
-                Directory.CreateDirectory(_DatDir);
-            }
-            _CatDir = _DatDir + "CAT" + Path.DirectorySeparatorChar;
+            _CatDir = _UserModel.Home + "CAT" + Path.DirectorySeparatorChar;
             if (!Directory.Exists(_CatDir))
             {
                 Directory.CreateDirectory(_CatDir);
             }
-            _KeyDir = _DatDir + "KEY" + Path.DirectorySeparatorChar;
+            _KeyDir = _UserModel.Home + "KEY" + Path.DirectorySeparatorChar;
             if (!Directory.Exists(_KeyDir))
             {
                 Directory.CreateDirectory(_KeyDir);
             }
-            _AttDir = _DatDir + "ATT" + Path.DirectorySeparatorChar;
+            _AttDir = _UserModel.Home + "ATT" + Path.DirectorySeparatorChar;
             if (!Directory.Exists(_AttDir))
             {
                 Directory.CreateDirectory(_AttDir);
             }
-            _AcfDir = _DatDir + "ACF" + Path.DirectorySeparatorChar;
+            _AcfDir = _UserModel.Home + "ACF" + Path.DirectorySeparatorChar;
             if (!Directory.Exists(_AcfDir))
             {
                 Directory.CreateDirectory(_AcfDir);
@@ -146,9 +141,6 @@ namespace Me.Amon.Model
             UcsModified = 0x7FFFFFFF;
             #endregion
         }
-
-        private string _DatDir;
-        public string DatDir { get { return _DatDir; } }
 
         private string _CatDir;
         public string CatDir { get { return _CatDir; } }

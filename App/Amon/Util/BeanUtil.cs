@@ -145,6 +145,10 @@ namespace Me.Amon.Util
 
         public static void UnZip(string zipFile, string dstPath)
         {
+            if (!File.Exists(zipFile))
+            {
+                return;
+            }
             if (!Directory.Exists(dstPath))
             {
                 Directory.CreateDirectory(dstPath);

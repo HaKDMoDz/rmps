@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
+using Me.Amon.Util;
 
 namespace Cmd
 {
@@ -11,7 +10,11 @@ namespace Cmd
     {
         static void Main(string[] args)
         {
-            dd();
+            cc();
+        }
+        private static void cc()
+        {
+            BeanUtil.UnZip("F:\\Amon.dat", "F:\\123\\");
         }
         public static void dd()
         {

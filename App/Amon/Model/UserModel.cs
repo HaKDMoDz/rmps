@@ -560,10 +560,10 @@ namespace Me.Amon.Model
         {
             _DBAccess = new DBAccess();
             _DBAccess.Init(this);
-            _DCAccess = new DCAccess();
-            _DCAccess.Init(this);
-            _DFAccess = new DFAccess();
-            _DFAccess.Init(this);
+            //_DCAccess = new DCAccess();
+            //_DCAccess.Init(this);
+            //_DFAccess = new DFAccess();
+            //_DFAccess.Init(this);
         }
 
         public DBAccess DBAccess { get { return _DBAccess; } }
