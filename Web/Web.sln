@@ -3,6 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Web Developer Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{BD1D78B4-8B5F-4335-98A3-6CFE1BF4F733}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amon", "Amon\Amon.csproj", "{5CA46E16-A312-467B-9114-D3DAC0E11CC9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BD1D78B4-8B5F-4335-98A3-6CFE1BF4F733} = {BD1D78B4-8B5F-4335-98A3-6CFE1BF4F733}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +18,10 @@ Global
 		{BD1D78B4-8B5F-4335-98A3-6CFE1BF4F733}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD1D78B4-8B5F-4335-98A3-6CFE1BF4F733}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD1D78B4-8B5F-4335-98A3-6CFE1BF4F733}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CA46E16-A312-467B-9114-D3DAC0E11CC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CA46E16-A312-467B-9114-D3DAC0E11CC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CA46E16-A312-467B-9114-D3DAC0E11CC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CA46E16-A312-467B-9114-D3DAC0E11CC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
