@@ -139,13 +139,15 @@ namespace Me.Amon.User.Sign
                 return;
             }
 
-            string path = fd.SelectedPath;
-            if (!Directory.Exists(path))
+            string home = fd.SelectedPath;
+            if (!Directory.Exists(home))
             {
                 _SignAc.ShowAlert("您选择的路径不存在！");
                 return;
             }
-            path += IEnv.AMON_CFG;
+            home += Path.DirectorySeparatorChar;
+
+            string path = home + IEnv.AMON_CFG;
             if (!File.Exists(path))
             {
                 _SignAc.ShowAlert("请确认您选择的数据路径是否正确！");
@@ -164,7 +166,7 @@ namespace Me.Amon.User.Sign
             prop.Clear();
             prop.Load(IEnv.AMON_SYS);
             prop.Set(string.Format(IEnv.AMON_SYS_CODE, name), code);
-            prop.Set(string.Format(IEnv.AMON_SYS_HOME, name), path);
+            prop.Set(string.Format(IEnv.AMON_SYS_HOME, name), home);
             prop.Save(IEnv.AMON_SYS);
         }
 

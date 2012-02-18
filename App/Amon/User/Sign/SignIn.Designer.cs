@@ -134,6 +134,7 @@
             // 
             // MiFind
             // 
+            this.MiFind.Enabled = false;
             this.MiFind.Name = "MiFind";
             this.MiFind.Size = new System.Drawing.Size(152, 22);
             this.MiFind.Text = "找回口令(&F)";

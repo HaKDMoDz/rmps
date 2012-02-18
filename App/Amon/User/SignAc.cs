@@ -165,26 +165,29 @@ namespace Me.Amon.User
 
         private void ShowView(Control control)
         {
+            int step;
+
             if (_SignAc == null)
             {
-                control.Location = new Point(12, 46);
-                control.TabIndex = 1;
-                Controls.Add(control);
-                Height += control.Height;
+                step = 0;
                 BeanUtil.CenterToScreen(this);
-                return;
             }
-
-            if (_SignAc.Name == control.Name)
+            else
             {
-                return;
-            }
-            Controls.Remove(_SignAc.Control);
+                if (_SignAc.Name == control.Name)
+                {
+                    return;
+                }
 
-            control.Location = new Point(12, 46);
+                step = _SignAc.Control.Height;
+                Controls.Remove(_SignAc.Control);
+            }
+
+            control.Location = new Point(12, 50);
             control.TabIndex = 1;
             Controls.Add(control);
-            int step = control.Height - _SignAc.Control.Height;
+
+            step = control.Height - step;
             Height += step;
             Point p = Location;
             p.Y -= (step >> 1);

@@ -33,7 +33,7 @@ namespace Me.Amon.User.Sign
 
         public void DoCancel()
         {
-            _SignAc.Close();
+            _SignAc.ShowView(ESignAc.SignIn);
         }
 
         public void ShowMenu(Control control, int x, int y)
