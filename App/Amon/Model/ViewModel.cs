@@ -28,6 +28,8 @@ namespace Me.Amon.Model
 
         public bool KeyListVisible { get; set; }
 
+        public bool KeyGuidVisible { get; set; }
+
         public int WindowLocX { get; set; }
         public int WindowLocY { get; set; }
         public int WindowDimW { get; set; }
@@ -51,6 +53,7 @@ namespace Me.Amon.Model
             EchoBarVisible = IEnv.VALUE_TRUE == _Prop.Get("EchoBar", IEnv.VALUE_TRUE).ToLower();
             CatTreeVisible = IEnv.VALUE_TRUE == _Prop.Get("CatTree", IEnv.VALUE_TRUE).ToLower();
             KeyListVisible = IEnv.VALUE_TRUE == _Prop.Get("KeyList", IEnv.VALUE_TRUE).ToLower();
+            KeyGuidVisible = IEnv.VALUE_TRUE == _Prop.Get("KeyGuid", IEnv.VALUE_TRUE).ToLower();
 
             string tmp = _Prop.Get("LocX", "");
             if (CharUtil.IsValidateLong(tmp))
@@ -110,6 +113,19 @@ namespace Me.Amon.Model
 
         public void Save()
         {
+            _Prop.Set("MenuBar", MenuBarVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
+            _Prop.Set("ToolBar", ToolBarVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
+            _Prop.Set("FindBar", FindBarVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
+            _Prop.Set("EchoBar", EchoBarVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
+            _Prop.Set("CatTree", CatTreeVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
+            _Prop.Set("KeyList", KeyListVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
+            _Prop.Set("KeyGuid", KeyGuidVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
+
+            _Prop.Set("LocX", WindowLocX.ToString());
+            _Prop.Set("LocY", WindowLocY.ToString());
+            _Prop.Set("DimW", WindowDimW.ToString());
+            _Prop.Set("DimH", WindowDimH.ToString());
+            _Prop.Save(_LookPath);
         }
     }
 }

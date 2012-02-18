@@ -28,7 +28,7 @@ namespace Me.Amon.Pwd
     public partial class APwd : Form, IApp
     {
         #region 全局变量
-        private FindBar _FindBar;
+        private FindBar FbFind;
         private UserModel _UserModel;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
@@ -67,6 +67,7 @@ namespace Me.Amon.Pwd
             _ViewModel = new ViewModel(_UserModel);
             _ViewModel.Load();
 
+            #region 类别
             Cat cat = new Cat { Id = "0", Text = "阿木密码箱", Tips = "阿木密码箱", Icon = "0" };
             IlCatTree.Images.Add(cat.Icon, BeanUtil.NaN16);
             _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Id };
@@ -86,35 +87,63 @@ namespace Me.Amon.Pwd
             dba.AddColumn(DBConst.ACAT0209);
             dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
             dba.AddWhere(DBConst.ACAT020D, ">", DBConst.OPT_DELETE.ToString(), false);
+            dba.AddSort(DBConst.ACAT0201, true);
             DataTable dt = dba.ExecuteSelect();
             InitCat(_RootNode, dt);
             _RootNode.Expand();
+            #endregion
 
-            _FindBar = new FindBar(this);
-            _FindBar.Dock = DockStyle.Fill;
-            _FindBar.Location = new Point(3, 3);
-            _FindBar.Name = "FbFind";
-            _FindBar.Size = new Size(390, 26);
-            _FindBar.TabIndex = 0;
-            TpGrid.Controls.Add(_FindBar, 0, 0);
+            #region 查找
+            FbFind = new FindBar(this);
+            FbFind.Dock = DockStyle.Fill;
+            FbFind.Location = new Point(3, 3);
+            FbFind.Name = "FbFind";
+            FbFind.Size = new Size(390, 26);
+            FbFind.TabIndex = 0;
+            TpGrid.Controls.Add(FbFind, 0, 0);
+            #endregion
+
+            #region 视图
+            VSplit.Panel1Collapsed = !_ViewModel.CatTreeVisible;
+            VSplit.Panel2Collapsed = !_ViewModel.KeyListVisible;
+            HSplit.Panel1Collapsed = !_ViewModel.KeyGuidVisible;
+
+            TmMenu.Visible = _ViewModel.MenuBarVisible;
+            TmiMenuBar.Checked = _ViewModel.MenuBarVisible;
+            TsbMenuBar.Checked = _ViewModel.MenuBarVisible;
+
+            TsTool.Visible = _ViewModel.ToolBarVisible;
+            TmiToolBar.Checked = _ViewModel.ToolBarVisible;
+            TsbToolBar.Checked = _ViewModel.ToolBarVisible;
+
+            FbFind.Visible = _ViewModel.FindBarVisible;
+            TmiFindBar.Checked = _ViewModel.FindBarVisible;
+
+            SsEcho.Visible = _ViewModel.EchoBarVisible;
+            TmiEchoBar.Checked = _ViewModel.EchoBarVisible;
+            TsbEchoBar.Checked = _ViewModel.EchoBarVisible;
+            #endregion
 
             ChangeView(2);
 
             UcTime.Start();
 
+            #region 图标
             TsbAppend.Image = _ViewModel.GetImage("menu-key-append");
             TsbUpdate.Image = _ViewModel.GetImage("menu-key-update");
             TsbDelete.Image = _ViewModel.GetImage("menu-key-delete");
 
-            TsbMenu.Image = _ViewModel.GetImage("menu-view-menubar");
-            TsbTool.Image = _ViewModel.GetImage("menu-view-toolbar");
-            TsbEcho.Image = _ViewModel.GetImage("menu-view-echobar");
+            TsbMenuBar.Image = _ViewModel.GetImage("menu-view-menubar");
+            TsbToolBar.Image = _ViewModel.GetImage("menu-view-toolbar");
+            TsbEchoBar.Image = _ViewModel.GetImage("menu-view-echobar");
 
             TsbSync.Image = _ViewModel.GetImage("menu-data-sync");
 
             TsbKeys.Image = _ViewModel.GetImage("menu-help-hotkeys");
             TsbInfo.Image = _ViewModel.GetImage("menu-help-topic");
+            #endregion
 
+            #region 使用状态
             _CmiLabels = new ToolStripMenuItem[] { CmiLabel0, CmiLabel1, CmiLabel2, CmiLabel3, CmiLabel4, CmiLabel5, CmiLabel6, CmiLabel7, CmiLabel8, CmiLabel9 };
             _LastLabel = CmiLabel0;
             _ImgLabels = new Image[_CmiLabels.Length];
@@ -123,7 +152,9 @@ namespace Me.Amon.Pwd
                 _ImgLabels[i] = _ViewModel.GetImage("key-label" + i);
                 _CmiLabels[i].Image = _ImgLabels[i];
             }
+            #endregion
 
+            #region 紧要程度
             _CmiMajors = new ToolStripMenuItem[] { CmiMajorN2, CmiMajorN1, CmiMajor0, CmiMajorP1, CmiMajorP2, };
             _ImgMajors = new Image[_CmiMajors.Length];
             for (int i = 0; i < _CmiMajors.Length; i += 1)
@@ -132,6 +163,7 @@ namespace Me.Amon.Pwd
                 _CmiMajors[i].Image = _ImgMajors[i];
             }
             _LastMajor = CmiMajor0;
+            #endregion
         }
 
         public int AppId { get; set; }
@@ -162,12 +194,7 @@ namespace Me.Amon.Pwd
                 }
 
                 Cat cat = new Cat();
-                cat.Id = row[DBConst.ACAT0203] as string;
-                cat.Text = row[DBConst.ACAT0205] as string;
-                cat.Tips = row[DBConst.ACAT0206] as string;
-                cat.Icon = row[DBConst.ACAT0207] as string;
-                cat.Meta = row[DBConst.ACAT0208] as string;
-                cat.Memo = row[DBConst.ACAT0209] as string;
+                cat.Load(row);
 
                 TreeNode node = new TreeNode();
                 node.Name = cat.Id;
@@ -378,7 +405,7 @@ namespace Me.Amon.Pwd
                 // 查找
                 if (e.KeyCode == Keys.F)
                 {
-                    _FindBar.Focus();
+                    FbFind.Focus();
                     return;
                 }
                 // 查询
@@ -801,19 +828,24 @@ namespace Me.Amon.Pwd
             ChangeView(3);
         }
 
-        private void TmiMenu_Click(object sender, EventArgs e)
+        private void TmiMenuBar_Click(object sender, EventArgs e)
         {
             SetMenuVisible(false);
         }
 
-        private void TmiTool_Click(object sender, EventArgs e)
+        private void TmiToolBar_Click(object sender, EventArgs e)
         {
             SetToolVisible(!TsTool.Visible);
         }
 
-        private void TmiEcho_Click(object sender, EventArgs e)
+        private void TmiEchoBar_Click(object sender, EventArgs e)
         {
             SetEchoVisible(!SsEcho.Visible);
+        }
+
+        private void TmiKeyGuid_Click(object sender, EventArgs e)
+        {
+            SetKeyGuidVisible(!TmiKeyGuid.Visible);
         }
 
         private void TmiCatView_Click(object sender, EventArgs e)
@@ -828,7 +860,7 @@ namespace Me.Amon.Pwd
 
         private void TmiFindBar_Click(object sender, EventArgs e)
         {
-            SetFindBarVisible(!_FindBar.Visible);
+            SetFindBarVisible(!FbFind.Visible);
         }
         #endregion
 
@@ -1172,6 +1204,16 @@ namespace Me.Amon.Pwd
 
         #region 弹出菜单事件区域
         #region 类别弹出菜单
+        private void CmiSortU_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmiSortD_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void CmiAppendCat_Click(object sender, EventArgs e)
         {
             AppendCat();
@@ -1498,22 +1540,28 @@ namespace Me.Amon.Pwd
         private void SetMenuVisible(bool visible)
         {
             TmMenu.Visible = visible;
-            TmiMenu.Checked = visible;
-            TsbMenu.Checked = visible;
+            TmiMenuBar.Checked = visible;
+            TsbMenuBar.Checked = visible;
         }
 
         private void SetToolVisible(bool visible)
         {
             TsTool.Visible = visible;
-            TmiTool.Checked = visible;
-            TsbTool.Checked = visible;
+            TmiToolBar.Checked = visible;
+            TsbToolBar.Checked = visible;
         }
 
         private void SetEchoVisible(bool visible)
         {
             SsEcho.Visible = visible;
-            TmiEcho.Checked = visible;
-            TsbEcho.Checked = visible;
+            TmiEchoBar.Checked = visible;
+            TsbEchoBar.Checked = visible;
+        }
+
+        private void SetKeyGuidVisible(bool visible)
+        {
+            HSplit.Panel1Collapsed = !visible;
+            TmiKeyGuid.Checked = visible;
         }
 
         private void SetCatTreeVisible(bool visible)
@@ -1531,7 +1579,7 @@ namespace Me.Amon.Pwd
         private void SetFindBarVisible(bool visible)
         {
             TpGrid.RowStyles[0].Height = visible ? 32 : 0;
-            _FindBar.Visible = visible;
+            FbFind.Visible = visible;
             TmiFindBar.Checked = visible;
         }
 

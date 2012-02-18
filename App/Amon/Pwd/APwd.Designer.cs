@@ -72,10 +72,11 @@
             this.TmiViewWiz = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiViewPad = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiViewSep0 = new System.Windows.Forms.ToolStripSeparator();
-            this.TmiMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiTool = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiEcho = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiMenuBar = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiToolBar = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiEchoBar = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiViewSep1 = new System.Windows.Forms.ToolStripSeparator();
+            this.TmiKeyGuid = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiCatView = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiKeyList = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiFindBar = new System.Windows.Forms.ToolStripMenuItem();
@@ -111,10 +112,13 @@
             this.VSplit = new System.Windows.Forms.SplitContainer();
             this.TvCatTree = new System.Windows.Forms.TreeView();
             this.CmCat = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CmiSortD = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiSortU = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiCatSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.CmiAppendCat = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiUpdateCat = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiDeleteCat = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiCatSep0 = new System.Windows.Forms.ToolStripSeparator();
+            this.CmiCatSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.CmiEditIcon = new System.Windows.Forms.ToolStripMenuItem();
             this.IlCatTree = new System.Windows.Forms.ImageList(this.components);
             this.LbKeyList = new System.Windows.Forms.ListBox();
@@ -148,9 +152,9 @@
             this.TsbUpdate = new System.Windows.Forms.ToolStripButton();
             this.TsbDelete = new System.Windows.Forms.ToolStripButton();
             this.TsbToolSep0 = new System.Windows.Forms.ToolStripSeparator();
-            this.TsbMenu = new System.Windows.Forms.ToolStripButton();
-            this.TsbTool = new System.Windows.Forms.ToolStripButton();
-            this.TsbEcho = new System.Windows.Forms.ToolStripButton();
+            this.TsbMenuBar = new System.Windows.Forms.ToolStripButton();
+            this.TsbToolBar = new System.Windows.Forms.ToolStripButton();
+            this.TsbEchoBar = new System.Windows.Forms.ToolStripButton();
             this.TsbToolSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.TsbSync = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -482,10 +486,11 @@
             this.TmiViewWiz,
             this.TmiViewPad,
             this.TmiViewSep0,
-            this.TmiMenu,
-            this.TmiTool,
-            this.TmiEcho,
+            this.TmiMenuBar,
+            this.TmiToolBar,
+            this.TmiEchoBar,
             this.TmiViewSep1,
+            this.TmiKeyGuid,
             this.TmiCatView,
             this.TmiKeyList,
             this.TmiFindBar});
@@ -520,36 +525,44 @@
             this.TmiViewSep0.Name = "TmiViewSep0";
             this.TmiViewSep0.Size = new System.Drawing.Size(166, 6);
             // 
-            // TmiMenu
+            // TmiMenuBar
             // 
-            this.TmiMenu.Name = "TmiMenu";
-            this.TmiMenu.ShortcutKeyDisplayString = "Ctrl + M";
-            this.TmiMenu.Size = new System.Drawing.Size(169, 22);
-            this.TmiMenu.Text = "菜单栏";
-            this.TmiMenu.Click += new System.EventHandler(this.TmiMenu_Click);
+            this.TmiMenuBar.Name = "TmiMenuBar";
+            this.TmiMenuBar.ShortcutKeyDisplayString = "Ctrl + M";
+            this.TmiMenuBar.Size = new System.Drawing.Size(169, 22);
+            this.TmiMenuBar.Text = "菜单栏";
+            this.TmiMenuBar.Click += new System.EventHandler(this.TmiMenuBar_Click);
             // 
-            // TmiTool
+            // TmiToolBar
             // 
-            this.TmiTool.Checked = true;
-            this.TmiTool.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.TmiTool.Name = "TmiTool";
-            this.TmiTool.ShortcutKeyDisplayString = "Ctrl + T";
-            this.TmiTool.Size = new System.Drawing.Size(169, 22);
-            this.TmiTool.Text = "工具栏";
-            this.TmiTool.Click += new System.EventHandler(this.TmiTool_Click);
+            this.TmiToolBar.Checked = true;
+            this.TmiToolBar.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.TmiToolBar.Name = "TmiToolBar";
+            this.TmiToolBar.ShortcutKeyDisplayString = "Ctrl + T";
+            this.TmiToolBar.Size = new System.Drawing.Size(169, 22);
+            this.TmiToolBar.Text = "工具栏";
+            this.TmiToolBar.Click += new System.EventHandler(this.TmiToolBar_Click);
             // 
-            // TmiEcho
+            // TmiEchoBar
             // 
-            this.TmiEcho.Name = "TmiEcho";
-            this.TmiEcho.ShortcutKeyDisplayString = "Ctrl + I";
-            this.TmiEcho.Size = new System.Drawing.Size(169, 22);
-            this.TmiEcho.Text = "状态栏";
-            this.TmiEcho.Click += new System.EventHandler(this.TmiEcho_Click);
+            this.TmiEchoBar.Name = "TmiEchoBar";
+            this.TmiEchoBar.ShortcutKeyDisplayString = "Ctrl + I";
+            this.TmiEchoBar.Size = new System.Drawing.Size(169, 22);
+            this.TmiEchoBar.Text = "状态栏";
+            this.TmiEchoBar.Click += new System.EventHandler(this.TmiEchoBar_Click);
             // 
             // TmiViewSep1
             // 
             this.TmiViewSep1.Name = "TmiViewSep1";
             this.TmiViewSep1.Size = new System.Drawing.Size(166, 6);
+            // 
+            // TmiKeyGuid
+            // 
+            this.TmiKeyGuid.Name = "TmiKeyGuid";
+            this.TmiKeyGuid.ShortcutKeyDisplayString = "Ctrl + E";
+            this.TmiKeyGuid.Size = new System.Drawing.Size(169, 22);
+            this.TmiKeyGuid.Text = "导航";
+            this.TmiKeyGuid.Click += new System.EventHandler(this.TmiKeyGuid_Click);
             // 
             // TmiCatView
             // 
@@ -847,44 +860,66 @@
             // CmCat
             // 
             this.CmCat.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CmiSortD,
+            this.CmiSortU,
+            this.CmiCatSep0,
             this.CmiAppendCat,
             this.CmiUpdateCat,
             this.CmiDeleteCat,
-            this.CmiCatSep0,
+            this.CmiCatSep1,
             this.CmiEditIcon});
             this.CmCat.Name = "CsCat";
-            this.CmCat.Size = new System.Drawing.Size(142, 98);
+            this.CmCat.Size = new System.Drawing.Size(153, 170);
+            // 
+            // CmiSortD
+            // 
+            this.CmiSortD.Name = "CmiSortD";
+            this.CmiSortD.Size = new System.Drawing.Size(152, 22);
+            this.CmiSortD.Text = "下移";
+            this.CmiSortD.Click += new System.EventHandler(this.CmiSortD_Click);
+            // 
+            // CmiSortU
+            // 
+            this.CmiSortU.Name = "CmiSortU";
+            this.CmiSortU.Size = new System.Drawing.Size(152, 22);
+            this.CmiSortU.Text = "上移";
+            this.CmiSortU.Click += new System.EventHandler(this.CmiSortU_Click);
+            // 
+            // CmiCatSep0
+            // 
+            this.CmiCatSep0.Name = "CmiCatSep0";
+            this.CmiCatSep0.Size = new System.Drawing.Size(149, 6);
             // 
             // CmiAppendCat
             // 
             this.CmiAppendCat.Name = "CmiAppendCat";
-            this.CmiAppendCat.Size = new System.Drawing.Size(141, 22);
+            this.CmiAppendCat.Size = new System.Drawing.Size(152, 22);
             this.CmiAppendCat.Text = "新增类别(&A)";
             this.CmiAppendCat.Click += new System.EventHandler(this.CmiAppendCat_Click);
             // 
             // CmiUpdateCat
             // 
             this.CmiUpdateCat.Name = "CmiUpdateCat";
-            this.CmiUpdateCat.Size = new System.Drawing.Size(141, 22);
+            this.CmiUpdateCat.Size = new System.Drawing.Size(152, 22);
             this.CmiUpdateCat.Text = "更新类别(&U)";
             this.CmiUpdateCat.Click += new System.EventHandler(this.CmiUpdateCat_Click);
             // 
             // CmiDeleteCat
             // 
             this.CmiDeleteCat.Name = "CmiDeleteCat";
-            this.CmiDeleteCat.Size = new System.Drawing.Size(141, 22);
+            this.CmiDeleteCat.Size = new System.Drawing.Size(152, 22);
             this.CmiDeleteCat.Text = "删除类别(&D)";
             this.CmiDeleteCat.Click += new System.EventHandler(this.CmiDeleteCat_Click);
             // 
-            // CmiCatSep0
+            // CmiCatSep1
             // 
-            this.CmiCatSep0.Name = "CmiCatSep0";
-            this.CmiCatSep0.Size = new System.Drawing.Size(138, 6);
+            this.CmiCatSep1.Name = "CmiCatSep1";
+            this.CmiCatSep1.Size = new System.Drawing.Size(149, 6);
             // 
             // CmiEditIcon
             // 
             this.CmiEditIcon.Name = "CmiEditIcon";
-            this.CmiEditIcon.Size = new System.Drawing.Size(141, 22);
+            this.CmiEditIcon.Size = new System.Drawing.Size(152, 22);
             this.CmiEditIcon.Text = "更改图标(&I)";
             this.CmiEditIcon.Click += new System.EventHandler(this.CmiEditIcon_Click);
             // 
@@ -1115,9 +1150,9 @@
             this.TsbUpdate,
             this.TsbDelete,
             this.TsbToolSep0,
-            this.TsbMenu,
-            this.TsbTool,
-            this.TsbEcho,
+            this.TsbMenuBar,
+            this.TsbToolBar,
+            this.TsbEchoBar,
             this.TsbToolSep1,
             this.TsbSync,
             this.toolStripSeparator2,
@@ -1125,7 +1160,7 @@
             this.TsbInfo});
             this.TsTool.Location = new System.Drawing.Point(3, 0);
             this.TsTool.Name = "TsTool";
-            this.TsTool.Size = new System.Drawing.Size(237, 25);
+            this.TsTool.Size = new System.Drawing.Size(268, 25);
             this.TsTool.TabIndex = 0;
             this.TsTool.EndDrag += new System.EventHandler(this.TsTool_EndDrag);
             // 
@@ -1167,38 +1202,38 @@
             this.TsbToolSep0.Name = "TsbToolSep0";
             this.TsbToolSep0.Size = new System.Drawing.Size(6, 25);
             // 
-            // TsbMenu
+            // TsbMenuBar
             // 
-            this.TsbMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbMenu.Image = ((System.Drawing.Image)(resources.GetObject("TsbMenu.Image")));
-            this.TsbMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsbMenu.Name = "TsbMenu";
-            this.TsbMenu.Size = new System.Drawing.Size(23, 22);
-            this.TsbMenu.Text = "菜单栏";
-            this.TsbMenu.ToolTipText = "切换菜单栏显示状态";
-            this.TsbMenu.Click += new System.EventHandler(this.TsbMenu_Click);
+            this.TsbMenuBar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbMenuBar.Image = ((System.Drawing.Image)(resources.GetObject("TsbMenuBar.Image")));
+            this.TsbMenuBar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbMenuBar.Name = "TsbMenuBar";
+            this.TsbMenuBar.Size = new System.Drawing.Size(23, 22);
+            this.TsbMenuBar.Text = "菜单栏";
+            this.TsbMenuBar.ToolTipText = "切换菜单栏显示状态";
+            this.TsbMenuBar.Click += new System.EventHandler(this.TsbMenu_Click);
             // 
-            // TsbTool
+            // TsbToolBar
             // 
-            this.TsbTool.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbTool.Image = ((System.Drawing.Image)(resources.GetObject("TsbTool.Image")));
-            this.TsbTool.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsbTool.Name = "TsbTool";
-            this.TsbTool.Size = new System.Drawing.Size(23, 22);
-            this.TsbTool.Text = "工具栏";
-            this.TsbTool.ToolTipText = "切换工具栏显示状态";
-            this.TsbTool.Click += new System.EventHandler(this.TsbTool_Click);
+            this.TsbToolBar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbToolBar.Image = ((System.Drawing.Image)(resources.GetObject("TsbToolBar.Image")));
+            this.TsbToolBar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbToolBar.Name = "TsbToolBar";
+            this.TsbToolBar.Size = new System.Drawing.Size(23, 22);
+            this.TsbToolBar.Text = "工具栏";
+            this.TsbToolBar.ToolTipText = "切换工具栏显示状态";
+            this.TsbToolBar.Click += new System.EventHandler(this.TsbTool_Click);
             // 
-            // TsbEcho
+            // TsbEchoBar
             // 
-            this.TsbEcho.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbEcho.Image = ((System.Drawing.Image)(resources.GetObject("TsbEcho.Image")));
-            this.TsbEcho.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.TsbEcho.Name = "TsbEcho";
-            this.TsbEcho.Size = new System.Drawing.Size(23, 22);
-            this.TsbEcho.Text = "状态栏";
-            this.TsbEcho.ToolTipText = "切换状态栏显示状态";
-            this.TsbEcho.Click += new System.EventHandler(this.TsbEcho_Click);
+            this.TsbEchoBar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TsbEchoBar.Image = ((System.Drawing.Image)(resources.GetObject("TsbEchoBar.Image")));
+            this.TsbEchoBar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TsbEchoBar.Name = "TsbEchoBar";
+            this.TsbEchoBar.Size = new System.Drawing.Size(23, 22);
+            this.TsbEchoBar.Text = "状态栏";
+            this.TsbEchoBar.ToolTipText = "切换状态栏显示状态";
+            this.TsbEchoBar.Click += new System.EventHandler(this.TsbEcho_Click);
             // 
             // TsbToolSep1
             // 
@@ -1351,9 +1386,9 @@
         private System.Windows.Forms.ToolStripMenuItem TmiViewWiz;
         private System.Windows.Forms.ToolStripMenuItem TmiViewPad;
         private System.Windows.Forms.ToolStripSeparator TmiViewSep0;
-        private System.Windows.Forms.ToolStripMenuItem TmiMenu;
-        private System.Windows.Forms.ToolStripMenuItem TmiTool;
-        private System.Windows.Forms.ToolStripMenuItem TmiEcho;
+        private System.Windows.Forms.ToolStripMenuItem TmiMenuBar;
+        private System.Windows.Forms.ToolStripMenuItem TmiToolBar;
+        private System.Windows.Forms.ToolStripMenuItem TmiEchoBar;
         private System.Windows.Forms.ToolStripSeparator TmiViewSep1;
         private System.Windows.Forms.ToolStripMenuItem TmiCatView;
         private System.Windows.Forms.ToolStripMenuItem TmiKeyList;
@@ -1391,9 +1426,9 @@
         private System.Windows.Forms.ToolStripButton TsbUpdate;
         private System.Windows.Forms.ToolStripButton TsbDelete;
         private System.Windows.Forms.ToolStripSeparator TsbToolSep0;
-        private System.Windows.Forms.ToolStripButton TsbMenu;
-        private System.Windows.Forms.ToolStripButton TsbTool;
-        private System.Windows.Forms.ToolStripButton TsbEcho;
+        private System.Windows.Forms.ToolStripButton TsbMenuBar;
+        private System.Windows.Forms.ToolStripButton TsbToolBar;
+        private System.Windows.Forms.ToolStripButton TsbEchoBar;
         private System.Windows.Forms.ToolStripSeparator TsbToolSep1;
         private System.Windows.Forms.SplitContainer HSplit;
         private System.Windows.Forms.SplitContainer VSplit;
@@ -1444,5 +1479,9 @@
         private System.Windows.Forms.ToolStripStatusLabel TssEcho;
         private System.Windows.Forms.ToolStripStatusLabel TssTime;
         private System.Windows.Forms.Timer UcTime;
+        private System.Windows.Forms.ToolStripMenuItem CmiSortU;
+        private System.Windows.Forms.ToolStripMenuItem CmiSortD;
+        private System.Windows.Forms.ToolStripSeparator CmiCatSep1;
+        private System.Windows.Forms.ToolStripMenuItem TmiKeyGuid;
     }
 }

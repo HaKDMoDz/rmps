@@ -74,5 +74,6 @@
         public const string FILE_LOOK = "look.asl";
 
         public const string VALUE_TRUE = "true";
+        public const string VALUE_FALSE = "false";
     }
 }
