@@ -18,7 +18,7 @@ namespace Me.Amon.Model
         public void Init()
         {
             #region 数据目录
-            _DatDir = IEnv.DATA_DIR + Path.DirectorySeparatorChar + _UserModel.Code + Path.DirectorySeparatorChar;
+            _DatDir = _UserModel.Home + _UserModel.Code + Path.DirectorySeparatorChar;
             if (!Directory.Exists(_DatDir))
             {
                 Directory.CreateDirectory(_DatDir);
