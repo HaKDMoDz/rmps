@@ -102,6 +102,19 @@ namespace Me.Amon.Pwd
 
             UcTime.Start();
 
+            TsbAppend.Image = _ViewModel.GetImage("menu-key-append");
+            TsbUpdate.Image = _ViewModel.GetImage("menu-key-update");
+            TsbDelete.Image = _ViewModel.GetImage("menu-key-delete");
+
+            TsbMenu.Image = _ViewModel.GetImage("menu-view-menubar");
+            TsbTool.Image = _ViewModel.GetImage("menu-view-toolbar");
+            TsbEcho.Image = _ViewModel.GetImage("menu-view-echobar");
+
+            TsbSync.Image = _ViewModel.GetImage("menu-data-sync");
+
+            TsbKeys.Image = _ViewModel.GetImage("menu-help-hotkeys");
+            TsbInfo.Image = _ViewModel.GetImage("menu-help-topic");
+
             _CmiLabels = new ToolStripMenuItem[] { CmiLabel0, CmiLabel1, CmiLabel2, CmiLabel3, CmiLabel4, CmiLabel5, CmiLabel6, CmiLabel7, CmiLabel8, CmiLabel9 };
             _LastLabel = CmiLabel0;
             _ImgLabels = new Image[_CmiLabels.Length];

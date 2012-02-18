@@ -934,14 +934,22 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo\logo.ico" />
-    <None Include="Resources\eye16.png" />
-    <None Include="Resources\eye24.png" />
-    <None Include="Resources\eye32.png" />
+    <Content Include="Resources\Loading.gif" />
+    <Content Include="Resources\Waiting.gif" />
+    <Content Include="Skin\Feel\Default\data-sync.png" />
+    <Content Include="Skin\Feel\Default\edit-key-append.png" />
+    <Content Include="Skin\Feel\Default\edit-key-delete.png" />
+    <Content Include="Skin\Feel\Default\edit-key-update.png" />
+    <Content Include="Skin\Feel\Default\file-open.png" />
+    <Content Include="Skin\Feel\Default\help-hotkeys.png" />
+    <Content Include="Skin\Feel\Default\view-echobar.png" />
+    <Content Include="Skin\Feel\Default\view-findbar.png" />
+    <Content Include="Skin\Feel\Default\view-toolbar.png" />
+    <Content Include="Skin\Feel\Default\window-exit.png" />
     <None Include="Resources\Pupil.png" />
     <None Include="Resources\Guid.png" />
     <None Include="Resources\Menu.png" />
     <None Include="Amon.dat" />
-    <None Include="Resources\Load.gif" />
     <Content Include="Skin\Feel\Default\att-card.png" />
     <Content Include="Skin\Feel\Default\att-date.png" />
     <Content Include="Skin\Feel\Default\att-file-saveas.png" />
@@ -958,8 +966,6 @@
     <Content Include="Skin\Feel\Default\att-pass-show.png" />
     <Content Include="Skin\Feel\Default\att-pass-opt.png" />
     <Content Include="Skin\Feel\Default\config.png" />
-    <Content Include="Skin\Feel\Default\eyer.png" />
-    <Content Include="Skin\Feel\Default\eyel.png" />
     <Content Include="Skin\Feel\Default\att-file-delete-all.png" />
     <Content Include="Skin\Feel\Default\att-file-img-cursor-def.png" />
     <Content Include="Skin\Feel\Default\att-file-img-cursor-sel.png" />
@@ -986,7 +992,6 @@
     <Content Include="Skin\Feel\Default\key-major-1.png" />
     <Content Include="Skin\Feel\Default\key-major-2.png" />
     <Content Include="Skin\Feel\Default\key-major0.png" />
-    <None Include="Skin\Feel\Default\Loading.gif" />
     <Content Include="Skin\Feel\Default\mail-attach.png" />
     <Content Include="Skin\Feel\Default\mail-receive.png" />
     <Content Include="Skin\Feel\Default\maoc.png" />
@@ -996,11 +1001,6 @@
     <Content Include="Skin\Feel\Default\apad.png" />
     <Content Include="Skin\Feel\Default\apay.png" />
     <Content Include="Skin\Feel\Default\apwd.png" />
-    <Content Include="Skin\Feel\Default\menu-file-close.png" />
-    <Content Include="Skin\Feel\Default\menu-file-delete.png" />
-    <Content Include="Skin\Feel\Default\menu-file-new.png" />
-    <Content Include="Skin\Feel\Default\menu-file-open.png" />
-    <Content Include="Skin\Feel\Default\menu-file-save.png" />
     <Content Include="Skin\Feel\Default\awiz.png" />
     <Content Include="Skin\Feel\Default\att-now.png" />
     <Content Include="Skin\Feel\Default\tool-edit-log.png" />
@@ -1008,8 +1008,8 @@
     <Content Include="Skin\Feel\Default\tool-edit-movel.png" />
     <Content Include="Skin\Feel\Default\tool-edit-mover.png" />
     <Content Include="Skin\Feel\Default\tool-edit-moveu.png" />
-    <Content Include="Skin\Feel\Default\tool-help.png" />
-    <Content Include="Skin\Feel\Default\tool-view-menu.png" />
+    <Content Include="Skin\Feel\Default\help.png" />
+    <Content Include="Skin\Feel\Default\view-menubar.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Skin\Look\Default\" />

@@ -23,6 +23,12 @@ menu-file-exit=6
 #######################################
 menu-edit-undo=7
 menu-edit-redo=8
+menu-cat-append=0
+menu-cat-update=1
+menu-cat-delete=2
+menu-key-append=edit-key-append.png
+menu-key-update=edit-key-update.png
+menu-key-delete=edit-key-delete.png
 menu-edit-delete-cur=file-delete.png
 menu-edit-delete-all=10
 menu-edit-move-up=edit-move-up.png
@@ -40,17 +46,18 @@ menu-guid-select-next=17
 #######################################
 # 视图图标
 #######################################
-menu-view-menubar=view-menu.png
-menu-view-toolbar=19
-menu-view-infobar=20
-menu-view-findbar=21
+menu-view-menubar=view-menubar.png
+menu-view-toolbar=view-toolbar.png
+menu-view-echobar=view-echobar.png
+menu-view-findbar=view-findbar.png
 menu-view-prop-isolate=edit-isolate.png
 menu-view-prop-visable=23
 
 #######################################
-# 工具图标
+# 数据图标
 #######################################
 menu-data-search=find.png
+menu-data-sync=data-sync.png
 
 #######################################
 # 工具图标
@@ -61,6 +68,7 @@ menu-tool-options=24
 # 帮助图标
 #######################################
 menu-help-topic=help.png
+menu-help-hotkeys=help-hotkeys.png
 
 #######################################
 # 标记为

@@ -67,13 +67,6 @@ namespace Me.Amon.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap Load {
-            get {
-                object obj = ResourceManager.GetObject("Load", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap Loading {
             get {
                 object obj = ResourceManager.GetObject("Loading", resourceCulture);
@@ -91,6 +84,13 @@ namespace Me.Amon.Properties {
         internal static System.Drawing.Bitmap Pupil {
             get {
                 object obj = ResourceManager.GetObject("Pupil", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Waiting {
+            get {
+                object obj = ResourceManager.GetObject("Waiting", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

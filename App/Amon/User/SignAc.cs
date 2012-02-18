@@ -63,7 +63,7 @@ namespace Me.Amon.User
 
         public void ShowWaiting()
         {
-            PbMenu.Image = Resources.Load;
+            PbMenu.Image = Resources.Waiting;
             BtOk.Enabled = false;
             BtNo.Enabled = false;
         }
