@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-/// <summary>
+﻿/// <summary>
 ///IUser 的摘要说明
 /// </summary>
 public class IUser
@@ -77,9 +72,9 @@ public class IUser
     /// <summary>
     /// 系统演示用户代码
     /// </summary>
-    public const string DEMO_CODE = "A0000001";
+    public const string DEMO_CODE = "A0000010";
     /// <summary>
     /// 系统测试用户代码
     /// </summary>
-    public const string TEST_CODE = "A0000002";
+    public const string TEST_CODE = "A0000020";
 }
