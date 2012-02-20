@@ -1842,7 +1842,7 @@ namespace Me.Amon.Pwd
             dba.AddParam(DBConst.APWD010F, _SafeModel.Key.GtdMemo);
             dba.AddParam(DBConst.APWD0110, _SafeModel.Key.Memo);
             dba.AddParam(DBConst.APWD0112, _SafeModel.Key.Backup ? "t" : "f");
-            dba.AddParam(DBConst.APWD0113, "1");
+            dba.AddParam(DBConst.APWD0113, _SafeModel.Key.CipherVer);
 
             if (isUpdate)
             {

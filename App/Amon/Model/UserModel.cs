@@ -502,7 +502,7 @@ namespace Me.Amon.Model
             return true;
         }
 
-        public string DecodeKey(string dat, int sec)
+        public string Decode(string dat, int sec)
         {
             byte[] buf;
             if (sec == ISec.SEC_AES)

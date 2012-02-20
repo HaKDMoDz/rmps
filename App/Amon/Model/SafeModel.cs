@@ -246,7 +246,7 @@ namespace Me.Amon.Model
             {
                 return;
             }
-            key = _UserModel.DecodeKey(key, sec);
+            key = _UserModel.Decode(key, sec);
 
             _AttList.Clear();
 
