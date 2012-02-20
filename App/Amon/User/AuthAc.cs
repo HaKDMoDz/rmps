@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Me.Amon.Model;
 using Me.Amon.User.Auth;
+using Me.Amon.Util;
 
 namespace Me.Amon.User
 {
@@ -80,20 +81,31 @@ namespace Me.Amon.User
 
         private void ShowView(Control control)
         {
-            if (_AuthAc.Name == control.Name)
+            int step;
+            if (_AuthAc == null)
             {
-                return;
+                step = 0;
+                BeanUtil.CenterToScreen(this);
             }
-            Controls.Remove(_AuthAc.Control);
+            else
+            {
+                if (_AuthAc.Name == control.Name)
+                {
+                    return;
+                }
 
-            control.Location = new Point(12, 46);
+                step = _AuthAc.Control.Height;
+                Controls.Remove(_AuthAc.Control);
+            }
+
+            control.Location = new Point(12, 50);
             control.TabIndex = 1;
             Controls.Add(control);
 
-            int step = control.Height - _AuthAc.Control.Height;
-            Height += step;
+            step -= control.Height;
+            Height -= step;
             Point p = Location;
-            p.Y -= (step >> 1);
+            p.Y += (step >> 1);
             Location = p;
         }
         #endregion

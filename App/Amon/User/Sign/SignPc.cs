@@ -13,7 +13,6 @@ namespace Me.Amon.User.Sign
     public partial class SignPc : UserControl, ISignAc
     {
         private string _Name;
-        private string _Mail;
         private string _Pass;
         private string _Root;
         private UserModel _UserModel;
@@ -77,10 +76,6 @@ namespace Me.Amon.User.Sign
             }
             #endregion
 
-            #region 用户邮件
-            _Mail = "a@b.c";
-            #endregion
-
             #region 口令判断
             _Pass = TbPass1.Text;
             TbPass1.Text = "";
@@ -126,22 +121,29 @@ namespace Me.Amon.User.Sign
 
             _SignAc.ShowWaiting();
 
-            // 本地注册
-            if (!_UserModel.CaSignUp(_Root, _Name, _Pass))
+            try
             {
-                _Pass = null;
+                // 本地注册
+                if (!_UserModel.CaSignUp(_Root, _Name, _Pass))
+                {
+                    _Pass = null;
+                    _SignAc.HideWaiting();
+                    _SignAc.ShowAlert("系统异常，请稍后重试！");
+                    return;
+                }
+
+                _Prop.Set(string.Format(IEnv.AMON_SYS_CODE, _Name), _UserModel.Code);
+                _Prop.Set(string.Format(IEnv.AMON_SYS_HOME, _Name), _UserModel.Home);
+                _Prop.Save(IEnv.AMON_SYS);
+
+                InitDat();
+            }
+            catch (Exception exp)
+            {
                 _SignAc.HideWaiting();
-                _SignAc.ShowAlert("系统异常，请稍后重试！");
+                _SignAc.ShowAlert(exp.Message);
                 return;
             }
-
-            _Prop.Set(string.Format(IEnv.AMON_SYS_CODE, _Name), _UserModel.Code);
-            _Prop.Set(string.Format(IEnv.AMON_SYS_HOME, _Name), _Root + _UserModel.Code + Path.DirectorySeparatorChar);
-            _Prop.Save(IEnv.AMON_SYS);
-
-            InitDat();
-
-            _SignAc.CallBack(0);
         }
 
         public void DoCancel()
@@ -196,6 +198,7 @@ namespace Me.Amon.User.Sign
             _UserModel.Init();
             BeanUtil.UnZip("Amon.dat", _UserModel.Home);
 
+            var tmp = '\'' + _UserModel.Code + '\'';
             var dba = _UserModel.DBAccess;
 
             string file = _UserModel.Home + "dat.sql";
@@ -203,13 +206,15 @@ namespace Me.Amon.User.Sign
             string line = reader.ReadLine();
             while (line != null)
             {
-                dba.AddBatch(line);
+                dba.AddBatch(line.Replace("'A0000000'", tmp));
                 line = reader.ReadLine();
             }
             reader.Close();
             File.Delete(file);
 
             dba.ExecuteBatch();
+
+            _SignAc.CallBack(IEnv.IAPP_APWD);
         }
     }
 }

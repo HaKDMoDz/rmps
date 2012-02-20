@@ -105,6 +105,7 @@
             this.TbPath.ReadOnly = true;
             this.TbPath.Size = new System.Drawing.Size(100, 21);
             this.TbPath.TabIndex = 7;
+            this.TbPath.TabStop = false;
             // 
             // BtPath
             // 
@@ -116,7 +117,7 @@
             this.BtPath.UseVisualStyleBackColor = true;
             this.BtPath.Click += new System.EventHandler(this.BtPath_Click);
             // 
-            // SignUp
+            // SignPc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -129,7 +130,7 @@
             this.Controls.Add(this.LbPass1);
             this.Controls.Add(this.TbName);
             this.Controls.Add(this.LbName);
-            this.Name = "SignUp";
+            this.Name = "SignPc";
             this.Size = new System.Drawing.Size(226, 108);
             this.ResumeLayout(false);
             this.PerformLayout();

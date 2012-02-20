@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Model;
+using Me.Amon.Util;
 
 namespace Me.Amon.User.Sign
 {
@@ -99,7 +100,7 @@ namespace Me.Amon.User.Sign
                         return;
                     }
 
-                    if (!_UserModel.CaSignIn(path, name, pass, text))
+                    if (!_UserModel.WsSignIn(path, name, pass, reader))
                     {
                         _SignAc.ShowAlert("请确认您输入的令牌数据是否有效！");
                         TbPath.Focus();
@@ -109,8 +110,8 @@ namespace Me.Amon.User.Sign
 
                 Uc.Properties prop = new Uc.Properties();
                 prop.Load(IEnv.AMON_SYS);
-                prop.Set(string.Format(IEnv.AMON_SYS_HOME, name), path);
                 prop.Set(string.Format(IEnv.AMON_SYS_CODE, name), _UserModel.Code);
+                prop.Set(string.Format(IEnv.AMON_SYS_HOME, name), _UserModel.Home);
                 prop.Save(IEnv.AMON_SYS);
 
                 InitDat();
@@ -174,18 +175,25 @@ namespace Me.Amon.User.Sign
         private void InitDat()
         {
             _UserModel.Init();
+            BeanUtil.UnZip("Amon.dat", _UserModel.Home);
+
+            var tmp = '\'' + _UserModel.Code + '\'';
             var dba = _UserModel.DBAccess;
 
-            StreamReader reader = File.OpenText("Amon.dat");
+            string file = _UserModel.Home + "dat.sql";
+            StreamReader reader = File.OpenText(file);
             string line = reader.ReadLine();
             while (line != null)
             {
-                dba.AddBatch(line);
+                dba.AddBatch(line.Replace("'A0000000'", tmp));
                 line = reader.ReadLine();
             }
             reader.Close();
+            File.Delete(file);
 
             dba.ExecuteBatch();
+
+            _SignAc.CallBack(IEnv.IAPP_APWD);
         }
     }
 }

@@ -340,7 +340,7 @@ namespace Me.Amon.Pwd
                 {
                     buffer.Append(row[DBConst.APWD0204] as string);
                 }
-                _SafeModel.Decode(buffer.ToString());
+                _SafeModel.Decode(buffer.ToString(), key.CipherVer);
             }
 
             _PwdView.ShowData();

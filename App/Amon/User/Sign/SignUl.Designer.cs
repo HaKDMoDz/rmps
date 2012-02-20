@@ -88,6 +88,7 @@
             this.TbPath.ReadOnly = true;
             this.TbPath.Size = new System.Drawing.Size(100, 21);
             this.TbPath.TabIndex = 5;
+            this.TbPath.TabStop = false;
             // 
             // BtPath
             // 

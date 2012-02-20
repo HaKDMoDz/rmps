@@ -502,23 +502,35 @@ namespace Me.Amon.Model
             return true;
         }
 
-        public string DecodeKey(string data)
+        public string DecodeKey(string dat, int sec)
         {
-            AesManaged aes = new AesManaged();
-
-            byte[] buf = CharUtil.DecodeString(data, _Mask);
-            using (MemoryStream mStream = new MemoryStream())
+            byte[] buf;
+            if (sec == ISec.SEC_AES)
             {
-                using (CryptoStream cStream = new CryptoStream(mStream, aes.CreateDecryptor(_Keys, _Salt), CryptoStreamMode.Write))
-                {
-                    cStream.Write(buf, 0, buf.Length);
-                    cStream.FlushFinalBlock();
-                    buf = mStream.ToArray();
-                }
-            }
-            aes.Clear();
+                AesManaged aes = new AesManaged();
 
-            return Encoding.UTF8.GetString(buf, 0, buf.Length);
+                buf = CharUtil.DecodeString(dat, _Mask);
+                using (MemoryStream mStream = new MemoryStream())
+                {
+                    using (CryptoStream cStream = new CryptoStream(mStream, aes.CreateDecryptor(_Keys, _Salt), CryptoStreamMode.Write))
+                    {
+                        cStream.Write(buf, 0, buf.Length);
+                        cStream.FlushFinalBlock();
+                        buf = mStream.ToArray();
+                    }
+                }
+                aes.Clear();
+
+                return Encoding.UTF8.GetString(buf, 0, buf.Length);
+            }
+
+            if (sec == ISec.SEC_BASE64)
+            {
+                buf = Convert.FromBase64String(dat);
+                return Encoding.UTF8.GetString(buf, 0, buf.Length);
+            }
+
+            return dat;
         }
 
         public string EncodeKey(string data)

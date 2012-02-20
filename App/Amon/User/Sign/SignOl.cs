@@ -274,8 +274,8 @@ namespace Me.Amon.User.Sign
                 {
                     Uc.Properties prop = new Uc.Properties();
                     prop.Load(IEnv.AMON_SYS);
-                    prop.Set(string.Format(IEnv.AMON_SYS_HOME, _Name), _UserModel.Home);
                     prop.Set(string.Format(IEnv.AMON_SYS_CODE, _Name), _UserModel.Code);
+                    prop.Set(string.Format(IEnv.AMON_SYS_HOME, _Name), _UserModel.Home);
                     prop.Save(IEnv.AMON_SYS);
 
                     InitDat();

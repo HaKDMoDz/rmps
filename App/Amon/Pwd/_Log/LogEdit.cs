@@ -89,7 +89,7 @@ namespace Me.Amon.Pwd._Log
                 key.GtdId = row[DBConst.APWD0A0E] as string;
                 key.GtdMemo = row[DBConst.APWD0A0F] as string;
                 key.Memo = row[DBConst.APWD0A10] as string;
-                key.CipherVer = row[DBConst.APWD0A13] as string;
+                key.CipherVer = (int)row[DBConst.APWD0A13];
                 _SafeModel.Key = key;
             }
             #endregion
@@ -108,7 +108,7 @@ namespace Me.Amon.Pwd._Log
                     buf.Append(row[DBConst.APWD0B05] as string);
                 }
             }
-            _SafeModel.Decode(buf.ToString());
+            _SafeModel.Decode(buf.ToString(), _Key.CipherVer);
             #endregion
 
             buf.Clear();

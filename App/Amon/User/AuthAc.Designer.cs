@@ -49,7 +49,7 @@
             // PbMenu
             // 
             this.PbMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.PbMenu.Location = new System.Drawing.Point(12, 163);
+            this.PbMenu.Location = new System.Drawing.Point(12, 62);
             this.PbMenu.Name = "PbMenu";
             this.PbMenu.Size = new System.Drawing.Size(16, 16);
             this.PbMenu.TabIndex = 2;
@@ -58,7 +58,7 @@
             // BtOk
             // 
             this.BtOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtOk.Location = new System.Drawing.Point(82, 160);
+            this.BtOk.Location = new System.Drawing.Point(82, 59);
             this.BtOk.Name = "BtOk";
             this.BtOk.Size = new System.Drawing.Size(75, 23);
             this.BtOk.TabIndex = 3;
@@ -69,7 +69,7 @@
             // 
             this.BtNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtNo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.BtNo.Location = new System.Drawing.Point(163, 160);
+            this.BtNo.Location = new System.Drawing.Point(163, 59);
             this.BtNo.Name = "BtNo";
             this.BtNo.Size = new System.Drawing.Size(75, 23);
             this.BtNo.TabIndex = 4;
@@ -82,7 +82,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.BtNo;
-            this.ClientSize = new System.Drawing.Size(250, 195);
+            this.ClientSize = new System.Drawing.Size(250, 94);
             this.Controls.Add(this.BtNo);
             this.Controls.Add(this.BtOk);
             this.Controls.Add(this.PbMenu);

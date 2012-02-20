@@ -5,7 +5,7 @@
         /// <summary>
         /// 默认数据目录
         /// </summary>
-        public const string DATA_DIR = "DAT";
+        public const string DATA_DIR = "Dat";
         /// <summary>
         /// 图标大小
         /// </summary>

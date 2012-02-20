@@ -239,14 +239,14 @@ namespace Me.Amon.Model
         /// 
         /// </summary>
         /// <param name="key"></param>
-        public void Decode(string key)
+        public void Decode(string key, int sec)
         {
             // 查询数据是否为空
             if (key.Length < 1)
             {
                 return;
             }
-            key = _UserModel.DecodeKey(key);
+            key = _UserModel.DecodeKey(key, sec);
 
             _AttList.Clear();
 
@@ -357,7 +357,7 @@ namespace Me.Amon.Model
             }
 
             // 加密版本
-            Key.CipherVer = "1";
+            Key.CipherVer = ISec.SEC_AES;
 
             Key.Password = _UserModel.EncodeKey(buf.ToString());
 

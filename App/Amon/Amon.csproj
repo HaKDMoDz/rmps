@@ -102,6 +102,7 @@
     <Compile Include="Info.Designer.cs">
       <DependentUpon>Info.cs</DependentUpon>
     </Compile>
+    <Compile Include="ISec.cs" />
     <Compile Include="Logs.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>

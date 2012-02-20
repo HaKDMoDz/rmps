@@ -78,9 +78,13 @@ namespace Me.Amon.Bean
         /// </summary>
         public string VisitDate { get; set; }
         /// <summary>
+        /// 是否备份
+        /// </summary>
+        public bool Backup { get; set; }
+        /// <summary>
         /// 加密版本
         /// </summary>
-        public string CipherVer { get; set; }
+        public int CipherVer { get; set; }
 
         /// <summary>
         /// 加密口令
@@ -91,11 +95,6 @@ namespace Me.Amon.Bean
         /// 定时任务
         /// </summary>
         public GtdHeader GtdHeader { get; set; }
-
-        /// <summary>
-        /// 是否备份
-        /// </summary>
-        public bool Backup { get; set; }
 
         /// <summary>
         /// 是否更新
@@ -128,7 +127,7 @@ namespace Me.Amon.Bean
 
             VisitDate = row[DBConst.APWD0111] as string;
             Backup = (string)row[DBConst.APWD0112] == "t";
-            CipherVer = row[DBConst.APWD0113] as string;
+            CipherVer = (int)row[DBConst.APWD0113];
 
             _IsUpdate = true;
             Modified = false;
@@ -168,7 +167,7 @@ namespace Me.Amon.Bean
             GtdMemo = null;
             Memo = null;
             VisitDate = null;
-            CipherVer = null;
+            CipherVer = 0;
 
             Password = null;
             GtdHeader = null;
@@ -207,7 +206,7 @@ namespace Me.Amon.Bean
                 writer.WriteElementString("GtdMemo", GtdMemo);
                 writer.WriteElementString("Memo", Memo);
                 writer.WriteElementString("VisitDate", VisitDate);
-                writer.WriteElementString("CipherVer", CipherVer);
+                writer.WriteElementString("CipherVer", CipherVer.ToString());
                 writer.WriteElementString("Backup", Backup ? "true" : "false");
                 writer.WriteElementString("Password", Password);
 
@@ -292,7 +291,7 @@ namespace Me.Amon.Bean
             }
             if (reader.Name == "CipherVer" || reader.ReadToNextSibling("CipherVer"))
             {
-                CipherVer = reader.ReadElementContentAsString();
+                CipherVer = reader.ReadElementContentAsInt();
             }
             return true;
         }

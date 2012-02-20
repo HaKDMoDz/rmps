@@ -166,7 +166,6 @@ namespace Me.Amon.User
         private void ShowView(Control control)
         {
             int step;
-
             if (_SignAc == null)
             {
                 step = 0;
@@ -187,10 +186,10 @@ namespace Me.Amon.User
             control.TabIndex = 1;
             Controls.Add(control);
 
-            step = control.Height - step;
-            Height += step;
+            step -= control.Height;
+            Height -= step;
             Point p = Location;
-            p.Y -= (step >> 1);
+            p.Y += (step >> 1);
             Location = p;
         }
         #endregion
