@@ -561,6 +561,12 @@
     <Compile Include="Uc\HotKeys.Designer.cs">
       <DependentUpon>HotKeys.cs</DependentUpon>
     </Compile>
+    <Compile Include="Uw\Error.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Error.Designer.cs">
+      <DependentUpon>Error.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uw\IcoEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -865,6 +871,9 @@
     <EmbeddedResource Include="Uc\HotKeys.resx">
       <DependentUpon>HotKeys.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Error.resx">
+      <DependentUpon>Error.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Uw\IcoEditor.resx">
       <DependentUpon>IcoEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -935,6 +944,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo\logo.ico" />
+    <None Include="Resources\Alert.png" />
+    <None Include="Resources\Error.png" />
     <Content Include="Resources\Loading.gif" />
     <None Include="Resources\Logo.png" />
     <Content Include="Resources\Waiting.gif" />

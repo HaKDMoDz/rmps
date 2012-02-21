@@ -37,6 +37,7 @@
             // 
             // PbIcon
             // 
+            this.PbIcon.Image = global::Me.Amon.Properties.Resources.Alert;
             this.PbIcon.Location = new System.Drawing.Point(12, 12);
             this.PbIcon.Name = "PbIcon";
             this.PbIcon.Size = new System.Drawing.Size(32, 32);
