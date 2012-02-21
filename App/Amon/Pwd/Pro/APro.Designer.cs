@@ -29,10 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GvAttList = new System.Windows.Forms.DataGridView();
-            this.OrderCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CmAtt = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CmuAppendAtt = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiAppendAttText = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,9 +56,11 @@
             this.CmiUpdateAttLine = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiDeleteAtt = new System.Windows.Forms.ToolStripMenuItem();
             this.GbGroup = new System.Windows.Forms.GroupBox();
-            this.BtCopy = new System.Windows.Forms.Button();
-            this.BtSave = new System.Windows.Forms.Button();
             this.BtDrop = new System.Windows.Forms.Button();
+            this.BtSave = new System.Windows.Forms.Button();
+            this.BtCopy = new System.Windows.Forms.Button();
+            this.OrderCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GvAttList)).BeginInit();
             this.CmAtt.SuspendLayout();
             this.GbGroup.SuspendLayout();
@@ -90,21 +90,6 @@
             this.GvAttList.Size = new System.Drawing.Size(350, 145);
             this.GvAttList.TabIndex = 0;
             this.GvAttList.SelectionChanged += new System.EventHandler(this.GvAttList_SelectionChanged);
-            // 
-            // OrderCol
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OrderCol.DefaultCellStyle = dataGridViewCellStyle5;
-            this.OrderCol.HeaderText = "索引";
-            this.OrderCol.Name = "OrderCol";
-            this.OrderCol.ReadOnly = true;
-            this.OrderCol.Width = 52;
-            // 
-            // ValueCol
-            // 
-            this.ValueCol.HeaderText = "属性";
-            this.ValueCol.Name = "ValueCol";
-            this.ValueCol.ReadOnly = true;
             // 
             // CmAtt
             // 
@@ -310,16 +295,15 @@
             this.GbGroup.TabStop = false;
             this.GbGroup.Text = "提示";
             // 
-            // BtCopy
+            // BtDrop
             // 
-            this.BtCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtCopy.Location = new System.Drawing.Point(321, 23);
-            this.BtCopy.Name = "BtCopy";
-            this.BtCopy.Size = new System.Drawing.Size(23, 23);
-            this.BtCopy.TabIndex = 1;
-            this.BtCopy.Text = "button1";
-            this.BtCopy.UseVisualStyleBackColor = true;
-            this.BtCopy.Click += new System.EventHandler(this.BtCopy_Click);
+            this.BtDrop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtDrop.Location = new System.Drawing.Point(321, 81);
+            this.BtDrop.Name = "BtDrop";
+            this.BtDrop.Size = new System.Drawing.Size(23, 23);
+            this.BtDrop.TabIndex = 3;
+            this.BtDrop.UseVisualStyleBackColor = true;
+            this.BtDrop.Click += new System.EventHandler(this.BtDrop_Click);
             // 
             // BtSave
             // 
@@ -328,20 +312,35 @@
             this.BtSave.Name = "BtSave";
             this.BtSave.Size = new System.Drawing.Size(23, 23);
             this.BtSave.TabIndex = 2;
-            this.BtSave.Text = "button2";
             this.BtSave.UseVisualStyleBackColor = true;
             this.BtSave.Click += new System.EventHandler(this.BtSave_Click);
             // 
-            // BtDrop
+            // BtCopy
             // 
-            this.BtDrop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtDrop.Location = new System.Drawing.Point(321, 81);
-            this.BtDrop.Name = "BtDrop";
-            this.BtDrop.Size = new System.Drawing.Size(23, 23);
-            this.BtDrop.TabIndex = 3;
-            this.BtDrop.Text = "button3";
-            this.BtDrop.UseVisualStyleBackColor = true;
-            this.BtDrop.Click += new System.EventHandler(this.BtDrop_Click);
+            this.BtCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtCopy.Location = new System.Drawing.Point(321, 23);
+            this.BtCopy.Name = "BtCopy";
+            this.BtCopy.Size = new System.Drawing.Size(23, 23);
+            this.BtCopy.TabIndex = 1;
+            this.BtCopy.UseVisualStyleBackColor = true;
+            this.BtCopy.Click += new System.EventHandler(this.BtCopy_Click);
+            // 
+            // OrderCol
+            // 
+            this.OrderCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OrderCol.DefaultCellStyle = dataGridViewCellStyle2;
+            this.OrderCol.HeaderText = "索引";
+            this.OrderCol.Name = "OrderCol";
+            this.OrderCol.ReadOnly = true;
+            this.OrderCol.Width = 54;
+            // 
+            // ValueCol
+            // 
+            this.ValueCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ValueCol.HeaderText = "属性";
+            this.ValueCol.Name = "ValueCol";
+            this.ValueCol.ReadOnly = true;
             // 
             // APro
             // 
@@ -362,8 +361,6 @@
 
         private System.Windows.Forms.GroupBox GbGroup;
         private System.Windows.Forms.DataGridView GvAttList;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OrderCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ValueCol;
         private System.Windows.Forms.ContextMenuStrip CmAtt;
         private System.Windows.Forms.ToolStripMenuItem CmuAppendAtt;
         private System.Windows.Forms.ToolStripMenuItem CmiAppendAttText;
@@ -391,5 +388,7 @@
         private System.Windows.Forms.Button BtDrop;
         private System.Windows.Forms.Button BtSave;
         private System.Windows.Forms.Button BtCopy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OrderCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ValueCol;
     }
 }

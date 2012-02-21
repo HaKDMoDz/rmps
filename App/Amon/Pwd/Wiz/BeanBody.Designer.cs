@@ -34,7 +34,7 @@
             // TpGrid
             // 
             this.TpGrid.ColumnCount = 2;
-            this.TpGrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.TpGrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 68F));
             this.TpGrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TpGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TpGrid.Location = new System.Drawing.Point(0, 0);

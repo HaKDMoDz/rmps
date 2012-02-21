@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Uc.Ico
+﻿namespace Me.Amon.Uw.Ico
 {
     partial class IcoView
     {

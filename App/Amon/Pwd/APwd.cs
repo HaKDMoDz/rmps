@@ -11,6 +11,7 @@ using Me.Amon.Bean;
 using Me.Amon.Da;
 using Me.Amon.Event;
 using Me.Amon.Model;
+using Me.Amon.Properties;
 using Me.Amon.Pwd._Cat;
 using Me.Amon.Pwd._Lib;
 using Me.Amon.Pwd._Log;
@@ -68,9 +69,10 @@ namespace Me.Amon.Pwd
             _ViewModel.Load();
 
             #region 类别
-            Cat cat = new Cat { Id = "0", Text = "阿木密码箱", Tips = "阿木密码箱", Icon = "0" };
-            IlCatTree.Images.Add(cat.Icon, BeanUtil.NaN16);
-            _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Id };
+            Cat cat = new Cat { Id = "0", Text = "阿木密码箱", Tips = "阿木密码箱", Icon = "Amon" };
+            IlCatTree.Images.Add("0", BeanUtil.NaN16);
+            IlCatTree.Images.Add(cat.Icon, Resources.Logo);
+            _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Icon, SelectedImageKey = cat.Icon };
             _RootNode.Tag = cat;
             TvCatTree.Nodes.Add(_RootNode);
 
@@ -212,13 +214,13 @@ namespace Me.Amon.Pwd
                     {
                         IlCatTree.Images.Add(cat.Icon, Image.FromFile(file));
                         node.ImageKey = cat.Icon;
-                        node.SelectedImageKey = cat.Icon;
                     }
                 }
                 else
                 {
                     node.ImageKey = "0";
                 }
+                node.SelectedImageKey = node.ImageKey;
 
                 root.Nodes.Add(node);
                 data.Rows.RemoveAt(i);
@@ -232,7 +234,7 @@ namespace Me.Amon.Pwd
         private void TvCatTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeNode node = e.Node;
-            if (node == null)
+            if (node == null || node == _LastNode)
             {
                 return;
             }
@@ -1113,7 +1115,7 @@ namespace Me.Amon.Pwd
 
         private void TmiUcs_Click(object sender, EventArgs e)
         {
-            UdcEdit edit = new UdcEdit(_UserModel);
+            UdcEditor edit = new UdcEditor(_UserModel);
             edit.Init(_DataModel);
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
@@ -1121,8 +1123,8 @@ namespace Me.Amon.Pwd
 
         private void TmiIco_Click(object sender, EventArgs e)
         {
-            IcoEdit edit = new IcoEdit(_UserModel);
-            edit.Init(_DataModel);
+            IcoEditor edit = new IcoEditor(_UserModel, _DataModel.KeyDir);
+            edit.InitOnce(true);
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
@@ -1158,17 +1160,17 @@ namespace Me.Amon.Pwd
 
         private void TsbAppend_Click(object sender, EventArgs e)
         {
-
+            AppendKey();
         }
 
         private void TsbUpdate_Click(object sender, EventArgs e)
         {
-
+            UpdateKey();
         }
 
         private void TsbDelete_Click(object sender, EventArgs e)
         {
-
+            DeleteKey();
         }
 
         private void TsbMenu_Click(object sender, EventArgs e)
@@ -1206,12 +1208,118 @@ namespace Me.Amon.Pwd
         #region 类别弹出菜单
         private void CmiSortU_Click(object sender, EventArgs e)
         {
+            TreeNode currNode = TvCatTree.SelectedNode;
+            if (currNode == null)
+            {
+                return;
+            }
 
+            TreeNode prevNode = currNode.PrevNode;
+            if (prevNode == null)
+            {
+                return;
+            }
+
+            Cat currCat = currNode.Tag as Cat;
+            int i = prevNode.Index;
+            if (currCat == null || currCat.Id == "0")
+            {
+                return;
+            }
+
+            Cat prevCat = prevNode.Tag as Cat;
+            if (prevCat == null || prevCat.Id == "0")
+            {
+                return;
+            }
+
+            var dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(DBConst.ACAT0200);
+            dba.AddParam(DBConst.ACAT0201, prevNode.Index);
+            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
+            dba.AddWhere(DBConst.ACAT0203, currCat.Id);
+            dba.AddUpdateBatch();
+
+            dba.ReInit();
+            dba.AddTable(DBConst.ACAT0200);
+            dba.AddParam(DBConst.ACAT0201, currNode.Index);
+            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
+            dba.AddWhere(DBConst.ACAT0203, prevCat.Id);
+            dba.AddUpdateBatch();
+
+            dba.ExecuteBatch();
+
+            string key = prevNode.ImageKey;
+            prevNode.Tag = currCat;
+            prevNode.Text = currCat.Text;
+            prevNode.ImageKey = currNode.ImageKey;
+            prevNode.SelectedImageKey = currNode.ImageKey;
+            currNode.Tag = prevCat;
+            currNode.Text = prevCat.Text;
+            currNode.ImageKey = key;
+            currNode.SelectedImageKey = key;
+
+            _LastNode = prevNode;
+            TvCatTree.SelectedNode = _LastNode;
         }
 
         private void CmiSortD_Click(object sender, EventArgs e)
         {
+            TreeNode currNode = TvCatTree.SelectedNode;
+            if (currNode == null)
+            {
+                return;
+            }
 
+            TreeNode nextNode = currNode.NextNode;
+            if (nextNode == null)
+            {
+                return;
+            }
+
+            Cat currCat = currNode.Tag as Cat;
+            int i = nextNode.Index;
+            if (currCat == null || currCat.Id == "0")
+            {
+                return;
+            }
+
+            Cat nextCat = nextNode.Tag as Cat;
+            if (nextCat == null || nextCat.Id == "0")
+            {
+                return;
+            }
+
+            var dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(DBConst.ACAT0200);
+            dba.AddParam(DBConst.ACAT0201, nextNode.Index);
+            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
+            dba.AddWhere(DBConst.ACAT0203, currCat.Id);
+            dba.AddUpdateBatch();
+
+            dba.ReInit();
+            dba.AddTable(DBConst.ACAT0200);
+            dba.AddParam(DBConst.ACAT0201, currNode.Index);
+            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
+            dba.AddWhere(DBConst.ACAT0203, nextCat.Id);
+            dba.AddUpdateBatch();
+
+            dba.ExecuteBatch();
+
+            string key = nextNode.ImageKey;
+            nextNode.Tag = currCat;
+            nextNode.Text = currCat.Text;
+            nextNode.ImageKey = currNode.ImageKey;
+            nextNode.SelectedImageKey = currNode.ImageKey;
+            currNode.Tag = nextCat;
+            currNode.Text = nextCat.Text;
+            currNode.ImageKey = key;
+            currNode.SelectedImageKey = key;
+
+            _LastNode = nextNode;
+            TvCatTree.SelectedNode = _LastNode;
         }
 
         private void CmiAppendCat_Click(object sender, EventArgs e)
@@ -1231,7 +1339,35 @@ namespace Me.Amon.Pwd
 
         private void CmiEditIcon_Click(object sender, EventArgs e)
         {
+            IcoEditor editor = new IcoEditor(_UserModel, _DataModel.CatDir);
+            editor.CallBackHandler = new AmonHandler<string>(ChangeCatIcon);
+            editor.InitOnce(false);
+            BeanUtil.CenterToParent(editor, this);
+            editor.ShowDialog(this);
+        }
 
+        private void ChangeCatIcon(string key)
+        {
+            if (!CharUtil.IsValidateHash(key))
+            {
+                key = "0";
+            }
+            _LastNode.ImageKey = key;
+            _LastNode.SelectedImageKey = key;
+
+            Cat cat = _LastNode.Tag as Cat;
+            if (cat == null)
+            {
+                return;
+            }
+
+            var dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(DBConst.ACAT0200);
+            dba.AddParam(DBConst.ACAT0207, key);
+            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
+            dba.AddWhere(DBConst.ACAT0203, cat.Id);
+            dba.ExecuteUpdate();
         }
         #endregion
 

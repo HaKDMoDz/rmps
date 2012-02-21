@@ -67,7 +67,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TbData.Location = new System.Drawing.Point(56, 30);
             this.TbData.Name = "TbData";
-            this.TbData.PasswordChar = '*';
             this.TbData.Size = new System.Drawing.Size(307, 21);
             this.TbData.TabIndex = 3;
             this.TbData.UseSystemPasswordChar = true;

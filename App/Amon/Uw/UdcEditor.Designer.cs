@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Uw
 {
-    partial class UdcEdit
+    partial class UdcEditor
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UdcEdit));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UdcEditor));
             this.LsUcs = new System.Windows.Forms.ListBox();
             this.LbName = new System.Windows.Forms.Label();
             this.TbName = new System.Windows.Forms.TextBox();

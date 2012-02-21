@@ -37,8 +37,11 @@ namespace Me.Amon.Pwd.Pro
             OrderCol.DataPropertyName = "Order";
             ValueCol.DataPropertyName = "Name";
 
+            BtCopy.Image = viewModel.GetImage("att-copy");
             _APwd.ShowTips(BtCopy, "复制属性");
+            BtSave.Image = viewModel.GetImage("att-save");
             _APwd.ShowTips(BtSave, "保存属性");
+            BtDrop.Image = viewModel.GetImage("att-drop");
             _APwd.ShowTips(BtDrop, "移除属性");
 
             _CmpInfo = new BeanInfo();
@@ -58,7 +61,6 @@ namespace Me.Amon.Pwd.Pro
         {
             grid.Controls.Add(this, 0, 1);
             Dock = DockStyle.Fill;
-            ValueCol.Width = Width - OrderCol.Width - 3;
         }
 
         public void HideView(TableLayoutPanel grid)

@@ -102,6 +102,7 @@
             this.MinimizeBox = false;
             this.Name = "Input";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "输入";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Input_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.PbIcon)).EndInit();

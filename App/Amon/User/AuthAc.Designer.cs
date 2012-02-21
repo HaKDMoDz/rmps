@@ -94,7 +94,7 @@
             this.Name = "AuthAc";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "AuthAc";
+            this.Text = "修改口令";
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();
             this.ResumeLayout(false);

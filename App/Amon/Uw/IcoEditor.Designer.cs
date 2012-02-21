@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Uc
+﻿namespace Me.Amon.Uw
 {
-    partial class IcoEdit
+    partial class IcoEditor
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IcoEdit));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IcoEditor));
             this.LsDir = new System.Windows.Forms.ListBox();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MiAppend = new System.Windows.Forms.ToolStripMenuItem();

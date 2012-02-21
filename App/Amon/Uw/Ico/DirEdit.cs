@@ -3,11 +3,11 @@ using System.Windows.Forms;
 using Me.Amon.Bean;
 using Me.Amon.Da;
 
-namespace Me.Amon.Uc.Ico
+namespace Me.Amon.Uw.Ico
 {
     public partial class DirEdit : UserControl
     {
-        private IcoEdit _IcoEdit;
+        private IcoEditor _IcoEdit;
         private Dir _Item;
 
         public DirEdit()
@@ -15,7 +15,7 @@ namespace Me.Amon.Uc.Ico
             InitializeComponent();
         }
 
-        public DirEdit(IcoEdit icoEdit)
+        public DirEdit(IcoEditor icoEdit)
         {
             _IcoEdit = icoEdit;
 

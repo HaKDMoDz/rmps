@@ -59,6 +59,7 @@
             this.Controls.Add(this.PbImg);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Waiting";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Waiting";
             ((System.ComponentModel.ISupportInitialize)(this.PbImg)).EndInit();
             this.ResumeLayout(false);

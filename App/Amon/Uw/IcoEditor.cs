@@ -5,68 +5,94 @@ using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Bean;
 using Me.Amon.Da;
+using Me.Amon.Event;
 using Me.Amon.Model;
-using Me.Amon.Uc.Ico;
 using Me.Amon.Util;
+using Me.Amon.Uw.Ico;
 
-namespace Me.Amon.Uc
+namespace Me.Amon.Uw
 {
-    public partial class IcoEdit : Form
+    public partial class IcoEditor : Form
     {
         private UserModel _UserModel;
-        private DataModel _DataModel;
         private DirEdit _DirEdit;
         private IcoView _IcoView;
         private Control _Control;
+        private string _RootDir;
+        private int _LastIdx;
 
-        public IcoEdit()
+        #region 构造函数
+        public IcoEditor()
         {
             InitializeComponent();
         }
 
-        public IcoEdit(UserModel userModel)
+        public IcoEditor(UserModel userModel, string rootDir)
         {
             _UserModel = userModel;
+            _RootDir = rootDir;
 
             InitializeComponent();
         }
+
+        public AmonHandler<string> CallBackHandler { get; set; }
+
+        public void InitOnce(bool dirVisible)
+        {
+            ShowIcoView();
+
+            if (dirVisible)
+            {
+                LsDir.Items.Add(new Dir { Id = "0", Name = "默认分类", Tips = "默认分类" });
+
+                DBAccess dba = _UserModel.DBAccess;
+                dba.ReInit();
+                dba.AddTable(DBConst.AICO0100);
+                dba.AddColumn(DBConst.AICO0103);
+                dba.AddColumn(DBConst.AICO0104);
+                dba.AddColumn(DBConst.AICO0105);
+                dba.AddColumn(DBConst.AICO0107);
+                dba.AddWhere(DBConst.AICO0102, _UserModel.Code);
+                dba.AddSort(DBConst.AICO0101, true);
+
+                using (DataTable dt = dba.ExecuteSelect())
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        Dir item = new Dir();
+                        item.Id = row[DBConst.AICO0103] as string;
+                        item.Name = row[DBConst.AICO0104] as string;
+                        item.Tips = row[DBConst.AICO0105] as string;
+                        item.Memo = row[DBConst.AICO0107] as string;
+                        LsDir.Items.Add(item);
+                    }
+                }
+
+                LsDir.SelectedIndex = 0;
+            }
+            else
+            {
+                Width -= _IcoView.Location.X - LsDir.Location.X;
+                _IcoView.Location = LsDir.Location;
+                LsDir.Visible = false;
+            }
+
+            _IcoView.ShowData(_RootDir);
+        }
+        #endregion
 
         public string CurrentPath { get; set; }
         public ListViewItem SelectedItem { get; set; }
 
-        public void Init(DataModel dataModel)
-        {
-            _DataModel = dataModel;
-            LsDir.Items.Add(new Dir { Id = "0", Name = "默认分类", Tips = "默认分类" });
-
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.AICO0100);
-            dba.AddColumn(DBConst.AICO0103);
-            dba.AddColumn(DBConst.AICO0104);
-            dba.AddColumn(DBConst.AICO0105);
-            dba.AddColumn(DBConst.AICO0107);
-            dba.AddWhere(DBConst.AICO0102, _UserModel.Code);
-            dba.AddSort(DBConst.AICO0101, true);
-
-            using (DataTable dt = dba.ExecuteSelect())
-            {
-                foreach (DataRow row in dt.Rows)
-                {
-                    Dir item = new Dir();
-                    item.Id = row[DBConst.AICO0103] as string;
-                    item.Name = row[DBConst.AICO0104] as string;
-                    item.Tips = row[DBConst.AICO0105] as string;
-                    item.Memo = row[DBConst.AICO0107] as string;
-                    LsDir.Items.Add(item);
-                }
-            }
-
-            ShowIcoView();
-        }
-
+        #region 事件处理
+        #region 界面事件
         private void LsDir_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (_LastIdx == LsDir.SelectedIndex)
+            {
+                return;
+            }
+
             if (_Control is DirEdit)
             {
                 ShowIcoView();
@@ -78,18 +104,16 @@ namespace Me.Amon.Uc
                 return;
             }
 
-            CurrentPath = _DataModel.KeyDir;
-            if (CharUtil.IsValidateHash(item.Id))
-            {
-                CurrentPath += item.Id + Path.DirectorySeparatorChar;
-            }
+            CurrentPath = CharUtil.IsValidateHash(item.Id) ? _RootDir + item.Id + Path.DirectorySeparatorChar : _RootDir;
             if (!Directory.Exists(CurrentPath))
             {
                 return;
             }
             _IcoView.ShowData(CurrentPath);
         }
+        #endregion
 
+        #region 菜单事件
         private void MiAppend_Click(object sender, EventArgs e)
         {
             if (_Control is IcoView)
@@ -143,7 +167,10 @@ namespace Me.Amon.Uc
 
             LsDir.Items.Remove(item);
         }
+        #endregion
+        #endregion
 
+        #region 私有函数
         private void ShowDirEdit()
         {
             if (_DirEdit == null)
@@ -179,7 +206,9 @@ namespace Me.Amon.Uc
             Controls.Add(_IcoView);
             _Control = _IcoView;
         }
+        #endregion
 
+        #region 仅有函数
         public void UpdateDir(Dir item)
         {
             DBAccess dba = _UserModel.DBAccess;
@@ -207,10 +236,11 @@ namespace Me.Amon.Uc
                 dba.AddVcs(DBConst.AICO0108, DBConst.AICO0109);
                 dba.ExecuteInsert();
 
-                Directory.CreateDirectory(_DataModel.KeyDir + item.Id);
+                Directory.CreateDirectory(_RootDir + item.Id);
                 LsDir.Items.Add(item);
                 LsDir.SelectedItem = item;
             }
         }
+        #endregion
     }
 }

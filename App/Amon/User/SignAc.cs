@@ -3,9 +3,9 @@ using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Event;
 using Me.Amon.Model;
+using Me.Amon.Properties;
 using Me.Amon.User.Sign;
 using Me.Amon.Util;
-using Me.Amon.Properties;
 
 namespace Me.Amon.User
 {
@@ -17,6 +17,8 @@ namespace Me.Amon.User
         private ISignAc _SignAc;
         private UserModel _UserModel;
         private Uc.Properties _Prop;
+
+        public AmonHandler<int> CallBackHandler { get; set; }
 
         #region 构造函数
         public SignAc()
@@ -36,8 +38,6 @@ namespace Me.Amon.User
             BeanUtil.CenterToScreen(this);
         }
         #endregion
-
-        public AmonHandler<int> CallBackHandler { get; set; }
 
         #region 事件处理
         private void BtOk_Click(object sender, EventArgs e)

@@ -70,6 +70,7 @@
             this.TbPass.Name = "TbPass";
             this.TbPass.Size = new System.Drawing.Size(100, 21);
             this.TbPass.TabIndex = 4;
+            this.TbPass.UseSystemPasswordChar = true;
             // 
             // BtOk
             // 
@@ -80,6 +81,7 @@
             this.BtOk.TabIndex = 5;
             this.BtOk.Text = "确定(&O)";
             this.BtOk.UseVisualStyleBackColor = true;
+            this.BtOk.Click += new System.EventHandler(this.BtOk_Click);
             // 
             // BtNo
             // 
@@ -91,6 +93,7 @@
             this.BtNo.TabIndex = 6;
             this.BtNo.Text = "取消(&C)";
             this.BtNo.UseVisualStyleBackColor = true;
+            this.BtNo.Click += new System.EventHandler(this.BtNo_Click);
             // 
             // pictureBox1
             // 
@@ -121,7 +124,7 @@
             this.MinimizeBox = false;
             this.Name = "SignRc";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "SignRc";
+            this.Text = "认证";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

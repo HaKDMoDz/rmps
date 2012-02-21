@@ -10,18 +10,18 @@ using Me.Amon.Util;
 
 namespace Me.Amon.Uw
 {
-    public partial class UdcEdit : Form
+    public partial class UdcEditor : Form
     {
         private Udc _Item;
         private UserModel _UserModel;
         private DataModel _DataModel;
 
-        public UdcEdit()
+        public UdcEditor()
         {
             InitializeComponent();
         }
 
-        public UdcEdit(UserModel userModel)
+        public UdcEditor(UserModel userModel)
         {
             _UserModel = userModel;
 

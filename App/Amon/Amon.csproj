@@ -561,22 +561,22 @@
     <Compile Include="Uc\HotKeys.Designer.cs">
       <DependentUpon>HotKeys.cs</DependentUpon>
     </Compile>
-    <Compile Include="Uc\IcoEdit.cs">
+    <Compile Include="Uw\IcoEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Uc\IcoEdit.Designer.cs">
-      <DependentUpon>IcoEdit.cs</DependentUpon>
+    <Compile Include="Uw\IcoEditor.Designer.cs">
+      <DependentUpon>IcoEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Uc\Ico\DirEdit.cs">
+    <Compile Include="Uw\Ico\DirEdit.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Uc\Ico\DirEdit.Designer.cs">
+    <Compile Include="Uw\Ico\DirEdit.Designer.cs">
       <DependentUpon>DirEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Uc\Ico\IcoView.cs">
+    <Compile Include="Uw\Ico\IcoView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Uc\Ico\IcoView.Designer.cs">
+    <Compile Include="Uw\Ico\IcoView.Designer.cs">
       <DependentUpon>IcoView.cs</DependentUpon>
     </Compile>
     <Compile Include="Uc\Item.cs" />
@@ -602,11 +602,11 @@
     <Compile Include="Util\SafeUtil.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Uw\UdcEdit.cs">
+    <Compile Include="Uw\UdcEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Uw\UdcEdit.Designer.cs">
-      <DependentUpon>UdcEdit.cs</DependentUpon>
+    <Compile Include="Uw\UdcEditor.Designer.cs">
+      <DependentUpon>UdcEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="User\AuthAc.cs">
       <SubType>Form</SubType>
@@ -865,20 +865,20 @@
     <EmbeddedResource Include="Uc\HotKeys.resx">
       <DependentUpon>HotKeys.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Uc\IcoEdit.resx">
-      <DependentUpon>IcoEdit.cs</DependentUpon>
+    <EmbeddedResource Include="Uw\IcoEditor.resx">
+      <DependentUpon>IcoEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Uc\Ico\DirEdit.resx">
+    <EmbeddedResource Include="Uw\Ico\DirEdit.resx">
       <DependentUpon>DirEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Uc\Ico\IcoView.resx">
+    <EmbeddedResource Include="Uw\Ico\IcoView.resx">
       <DependentUpon>IcoView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\Sign\SignOl.resx">
       <DependentUpon>SignOl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Uw\UdcEdit.resx">
-      <DependentUpon>UdcEdit.cs</DependentUpon>
+    <EmbeddedResource Include="Uw\UdcEditor.resx">
+      <DependentUpon>UdcEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\AuthAc.resx">
       <DependentUpon>AuthAc.cs</DependentUpon>
@@ -936,6 +936,7 @@
   <ItemGroup>
     <Content Include="Logo\logo.ico" />
     <Content Include="Resources\Loading.gif" />
+    <None Include="Resources\Logo.png" />
     <Content Include="Resources\Waiting.gif" />
     <Content Include="Skin\Feel\Default\data-sync.png" />
     <Content Include="Skin\Feel\Default\edit-key-append.png" />

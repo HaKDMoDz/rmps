@@ -5,11 +5,11 @@ using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Util;
 
-namespace Me.Amon.Uc.Ico
+namespace Me.Amon.Uw.Ico
 {
     public partial class IcoView : UserControl
     {
-        private IcoEdit _IcoEdit;
+        private IcoEditor _IcoEdit;
 
         #region 构造函数
         public IcoView()
@@ -17,7 +17,7 @@ namespace Me.Amon.Uc.Ico
             InitializeComponent();
         }
 
-        public IcoView(IcoEdit icoEdit)
+        public IcoView(IcoEditor icoEdit)
         {
             _IcoEdit = icoEdit;
 

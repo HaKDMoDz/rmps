@@ -98,7 +98,7 @@
             this.MinimizeBox = false;
             this.Name = "SignAc";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "SignAc";
+            this.Text = "登录";
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();
             this.ResumeLayout(false);

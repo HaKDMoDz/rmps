@@ -82,6 +82,7 @@
             this.MinimizeBox = false;
             this.Name = "Alert";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "提示";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Alert_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.PbIcon)).EndInit();

@@ -112,8 +112,8 @@
             this.VSplit = new System.Windows.Forms.SplitContainer();
             this.TvCatTree = new System.Windows.Forms.TreeView();
             this.CmCat = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.CmiSortD = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiSortU = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiSortD = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiCatSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.CmiAppendCat = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiUpdateCat = new System.Windows.Forms.ToolStripMenuItem();
@@ -860,8 +860,8 @@
             // CmCat
             // 
             this.CmCat.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CmiSortD,
             this.CmiSortU,
+            this.CmiSortD,
             this.CmiCatSep0,
             this.CmiAppendCat,
             this.CmiUpdateCat,
@@ -871,19 +871,19 @@
             this.CmCat.Name = "CsCat";
             this.CmCat.Size = new System.Drawing.Size(153, 170);
             // 
-            // CmiSortD
-            // 
-            this.CmiSortD.Name = "CmiSortD";
-            this.CmiSortD.Size = new System.Drawing.Size(152, 22);
-            this.CmiSortD.Text = "下移";
-            this.CmiSortD.Click += new System.EventHandler(this.CmiSortD_Click);
-            // 
             // CmiSortU
             // 
             this.CmiSortU.Name = "CmiSortU";
             this.CmiSortU.Size = new System.Drawing.Size(152, 22);
             this.CmiSortU.Text = "上移";
             this.CmiSortU.Click += new System.EventHandler(this.CmiSortU_Click);
+            // 
+            // CmiSortD
+            // 
+            this.CmiSortD.Name = "CmiSortD";
+            this.CmiSortD.Size = new System.Drawing.Size(152, 22);
+            this.CmiSortD.Text = "下移";
+            this.CmiSortD.Click += new System.EventHandler(this.CmiSortD_Click);
             // 
             // CmiCatSep0
             // 
@@ -925,7 +925,7 @@
             // 
             // IlCatTree
             // 
-            this.IlCatTree.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.IlCatTree.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             this.IlCatTree.ImageSize = new System.Drawing.Size(16, 16);
             this.IlCatTree.TransparentColor = System.Drawing.Color.Transparent;
             // 
@@ -1160,7 +1160,7 @@
             this.TsbInfo});
             this.TsTool.Location = new System.Drawing.Point(3, 0);
             this.TsTool.Name = "TsTool";
-            this.TsTool.Size = new System.Drawing.Size(268, 25);
+            this.TsTool.Size = new System.Drawing.Size(237, 25);
             this.TsTool.TabIndex = 0;
             this.TsTool.EndDrag += new System.EventHandler(this.TsTool_EndDrag);
             // 
