@@ -183,9 +183,9 @@ namespace Me.Amon.Pwd.Pro
             {
                 Process.Start(dstFile);
             }
-            catch (Exception e)
+            catch (Exception exp)
             {
-                MessageBox.Show(e.Message);
+                Main.ShowError(exp);
             }
         }
         #endregion

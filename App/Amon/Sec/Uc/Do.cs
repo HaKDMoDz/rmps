@@ -193,7 +193,7 @@ namespace Me.Amon.Sec.Uc
         private void CbType_SelectedIndexChanged(object sender, EventArgs e)
         {
 #if DEBUG
-            Logs.Info("DO:    CbType_SelectedIndexChanged...");
+            Main.LogInfo("DO:    CbType_SelectedIndexChanged...");
 #endif
             Item item = CbType.SelectedItem as Item;
             if (item == null)
@@ -202,7 +202,7 @@ namespace Me.Amon.Sec.Uc
             }
 
 #if DEBUG
-            Logs.Info("DO:    CbType_SelectedIndexChanged:" + item.K);
+            Main.LogInfo("DO:    CbType_SelectedIndexChanged:" + item.K);
 #endif
             _Ado.ChangedType(item);
         }
@@ -215,7 +215,7 @@ namespace Me.Amon.Sec.Uc
         private void CbMask_SelectedIndexChanged(object sender, EventArgs e)
         {
 #if DEBUG
-            Logs.Info("DO:    CbMask_SelectedIndexChanged...");
+            Main.LogInfo("DO:    CbMask_SelectedIndexChanged...");
 #endif
             Item item = CbMask.SelectedItem as Item;
             if (item == null)
@@ -224,7 +224,7 @@ namespace Me.Amon.Sec.Uc
             }
 
 #if DEBUG
-            Logs.Info("DO:    CbMask_SelectedIndexChanged:" + item.K);
+            Main.LogInfo("DO:    CbMask_SelectedIndexChanged:" + item.K);
 #endif
             _Ado.ChangedMask(item);
         }

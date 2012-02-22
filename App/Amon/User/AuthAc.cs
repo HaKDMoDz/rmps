@@ -62,10 +62,9 @@ namespace Me.Amon.User
             }
             ShowView(_AuthPk);
             _AuthAc = _AuthPk;
-        }
 
-        private void ShowAuthFk()
-        {
+            Text = "修改登录口令";
+            BtOk.Text = "确定(&O)";
         }
 
         private AuthSk _AuthSk;
@@ -77,6 +76,9 @@ namespace Me.Amon.User
             }
             ShowView(_AuthSk);
             _AuthAc = _AuthSk;
+
+            Text = "设置安全口令";
+            BtOk.Text = "确定(&O)";
         }
 
         private void ShowView(Control control)

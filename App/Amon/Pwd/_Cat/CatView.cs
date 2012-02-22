@@ -31,11 +31,16 @@ namespace Me.Amon.Pwd._Cat
         {
             TvCatTree.ImageList = imgList;
 
-            Cat cat = new Cat { Id = "0", Text = "阿木密码箱", Tips = "阿木密码箱", Icon = "0" };
-            _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Id };
+            Cat cat = new Cat { Id = "0", Text = "阿木密码箱", Tips = "阿木密码箱", Icon = "Amon" };
+            _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Icon, SelectedImageKey = cat.Icon };
             _RootNode.Tag = cat;
             TvCatTree.Nodes.Add(_RootNode);
+            InitCat(_RootNode);
+            _RootNode.Expand();
+        }
 
+        private void InitCat(TreeNode root)
+        {
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
             dba.AddTable(DBConst.ACAT0200);
@@ -48,50 +53,28 @@ namespace Me.Amon.Pwd._Cat
             dba.AddColumn(DBConst.ACAT0208);
             dba.AddColumn(DBConst.ACAT0209);
             dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
+            dba.AddWhere(DBConst.ACAT0204, root.Name);
             dba.AddWhere(DBConst.ACAT020D, ">", DBConst.OPT_DELETE.ToString(), false);
-            DataTable dt = dba.ExecuteSelect();
-            InitCat(_RootNode, dt);
-            _RootNode.Expand();
-        }
+            dba.AddSort(DBConst.ACAT0201, true);
 
-        private void InitCat(TreeNode root, DataTable data)
-        {
-            int i = 0;
-            while (i < data.Rows.Count)
+            using (DataTable dt = dba.ExecuteSelect())
             {
-                DataRow row = data.Rows[i];
-                string tmp = row[DBConst.ACAT0204] as string;
-                if (tmp != root.Name)
+                foreach (DataRow row in dt.Rows)
                 {
-                    i += 1;
-                    continue;
-                }
+                    Cat cat = new Cat();
+                    cat.Load(row);
 
-                Cat cat = new Cat();
-                cat.Id = row[DBConst.ACAT0203] as string;
-                cat.Text = row[DBConst.ACAT0205] as string;
-                cat.Tips = row[DBConst.ACAT0206] as string;
-                cat.Icon = row[DBConst.ACAT0207] as string;
-                cat.Meta = row[DBConst.ACAT0208] as string;
-                cat.Memo = row[DBConst.ACAT0209] as string;
-
-                TreeNode node = new TreeNode();
-                node.Name = cat.Id;
-                node.Text = cat.Text;
-                node.ToolTipText = cat.Tips;
-                node.Tag = cat;
-                if (CharUtil.IsValidateHash(cat.Icon))
-                {
+                    TreeNode node = new TreeNode();
+                    node.Name = cat.Id;
+                    node.Text = cat.Text;
+                    node.ToolTipText = cat.Tips;
+                    node.Tag = cat;
                     node.ImageKey = cat.Icon;
-                }
-                else
-                {
-                    node.ImageKey = "0";
-                }
+                    node.SelectedImageKey = node.ImageKey;
 
-                root.Nodes.Add(node);
-                data.Rows.RemoveAt(i);
-                InitCat(node, data);
+                    root.Nodes.Add(node);
+                    InitCat(node);
+                }
             }
         }
         #endregion

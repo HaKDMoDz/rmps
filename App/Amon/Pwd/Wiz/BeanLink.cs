@@ -113,7 +113,7 @@ namespace Me.Amon.Pwd.Wiz
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message);
+                Main.ShowError(exp);
             }
         }
         #endregion

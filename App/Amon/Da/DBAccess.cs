@@ -107,7 +107,7 @@ namespace Me.Amon.Da
                     sql.Append("PRIMARY KEY (").Append(DBConst.ACAT0103).Append(")");
                     sql.Append(")");
                     mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
+                    Main.LogInfo(mycommand.CommandText);
                     mycommand.ExecuteNonQuery();
 
                     sql.Clear();
@@ -128,7 +128,7 @@ namespace Me.Amon.Da
                     sql.Append("PRIMARY KEY (").Append(DBConst.ACAT0202).Append(",").Append(DBConst.ACAT0203).Append(")");
                     sql.Append(")");
                     mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
+                    Main.LogInfo(mycommand.CommandText);
                     mycommand.ExecuteNonQuery();
 
                     sql.Clear();
@@ -140,7 +140,7 @@ namespace Me.Amon.Da
                     sql.Append("PRIMARY KEY (").Append(DBConst.APWD0001).Append(",").Append(DBConst.APWD0002).Append(")");
                     sql.Append(")");
                     mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
+                    Main.LogInfo(mycommand.CommandText);
                     mycommand.ExecuteNonQuery();
 
                     sql.Clear();
@@ -169,7 +169,7 @@ namespace Me.Amon.Da
                     sql.Append("PRIMARY KEY (").Append(DBConst.APWD0104).Append(",").Append(DBConst.APWD0105).Append(")");
                     sql.Append(")");
                     mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
+                    Main.LogInfo(mycommand.CommandText);
                     mycommand.ExecuteNonQuery();
 
                     sql.Clear();
@@ -181,7 +181,7 @@ namespace Me.Amon.Da
                     sql.Append("PRIMARY KEY (").Append(DBConst.APWD0201).Append(",").Append(DBConst.APWD0202).Append(",").Append(DBConst.APWD0203).Append(")");
                     sql.Append(")");
                     mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
+                    Main.LogInfo(mycommand.CommandText);
                     mycommand.ExecuteNonQuery();
 
                     sql.Clear();
@@ -201,7 +201,7 @@ namespace Me.Amon.Da
                     sql.Append("PRIMARY KEY (").Append(DBConst.APWD0303).Append(",").Append(DBConst.APWD0304).Append(")");
                     sql.Append(")");
                     mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
+                    Main.LogInfo(mycommand.CommandText);
                     mycommand.ExecuteNonQuery();
 
                     sql.Clear();
@@ -218,7 +218,7 @@ namespace Me.Amon.Da
                     sql.Append("PRIMARY KEY (").Append(DBConst.APWD0402).Append(",").Append(DBConst.APWD0403).Append(")");
                     sql.Append(")");
                     mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
+                    Main.LogInfo(mycommand.CommandText);
                     mycommand.ExecuteNonQuery();
 
                     sql.Clear();
@@ -235,7 +235,7 @@ namespace Me.Amon.Da
                     sql.Append("PRIMARY KEY (").Append(DBConst.AICO0102).Append(",").Append(DBConst.AICO0103).Append(")");
                     sql.Append(")");
                     mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
+                    Main.LogInfo(mycommand.CommandText);
                     mycommand.ExecuteNonQuery();
 
                     sql.Clear();
@@ -254,7 +254,7 @@ namespace Me.Amon.Da
                     sql.Append("PRIMARY KEY (").Append(DBConst.AUDC0103).Append(")");
                     sql.Append(")");
                     mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
+                    Main.LogInfo(mycommand.CommandText);
                     mycommand.ExecuteNonQuery();
 
                     sql.Clear();
@@ -281,7 +281,7 @@ namespace Me.Amon.Da
                     sql.Append("PRIMARY KEY (").Append(DBConst.APWD0A01).Append(")");
                     sql.Append(")");
                     mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
+                    Main.LogInfo(mycommand.CommandText);
                     mycommand.ExecuteNonQuery();
 
                     sql.Clear();
@@ -294,7 +294,7 @@ namespace Me.Amon.Da
                     sql.Append("PRIMARY KEY (").Append(DBConst.APWD0B01).Append(",").Append(DBConst.APWD0B02).Append(",").Append(DBConst.APWD0B03).Append(")");
                     sql.Append(")");
                     mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
+                    Main.LogInfo(mycommand.CommandText);
                     mycommand.ExecuteNonQuery();
 
                     //sql.Clear();
@@ -345,7 +345,7 @@ namespace Me.Amon.Da
                     sql.Append(DBConst.APWD0004).Append(") VALUES (");
                     sql.Append("'version','db','").Append(DBConst.VER_DB).Append("',").Append(DBConst.SQL_NOW).Append(")");
                     mycommand.CommandText = sql.ToString();
-                    Logs.Info(mycommand.CommandText);
+                    Main.LogInfo(mycommand.CommandText);
                     mycommand.ExecuteNonQuery();
                 }
                 mytransaction.Commit();

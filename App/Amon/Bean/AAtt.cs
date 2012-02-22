@@ -389,19 +389,23 @@ namespace Me.Amon.Bean
         /// </summary>
         public const int TYPE_DATA = TYPE_DATE + 1;
         /// <summary>
-        /// 属性：列表7
+        /// 属性：电话7
         /// </summary>
-        public const int TYPE_LIST = TYPE_DATA + 1;
+        public const int TYPE_CALL = TYPE_DATE + 1;
         /// <summary>
-        /// 属性：附注8
+        /// 属性：列表8
+        /// </summary>
+        public const int TYPE_LIST = TYPE_CALL + 1;
+        /// <summary>
+        /// 属性：附注9
         /// </summary>
         public const int TYPE_MEMO = TYPE_LIST + 1;
         /// <summary>
-        /// 属性：文件9
+        /// 属性：文件10
         /// </summary>
         public const int TYPE_FILE = TYPE_MEMO + 1;
         /// <summary>
-        /// 属性：分组10
+        /// 属性：分组11
         /// </summary>
         public const int TYPE_LINE = TYPE_FILE + 1;
         /// <summary>

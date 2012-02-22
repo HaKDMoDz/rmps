@@ -8,9 +8,10 @@ using Me.Amon.Properties;
 using Me.Amon.Pwd;
 using Me.Amon.Sec;
 using Me.Amon.User;
+using Me.Amon.User.Sign;
 using Me.Amon.Util;
 using Me.Amon.Uw;
-using Me.Amon.User.Sign;
+using System.IO;
 
 namespace Me.Amon
 {
@@ -18,6 +19,7 @@ namespace Me.Amon
     {
         private static IApp _IApp;
         private static Alert _Alert;
+        private static Error _Error;
         private static Input _Input;
         private static Waiting _Waiting;
         private UserModel _UserModel;
@@ -30,7 +32,7 @@ namespace Me.Amon
             InitializeComponent();
         }
 
-        public void Init()
+        public void InitOnce()
         {
             Region = new Region(new Rectangle(0, 0, 25, 25));
             TransparencyKey = this.BackColor;
@@ -79,6 +81,15 @@ namespace Me.Amon
             BgWorker.Start();
 
             _UserModel = new UserModel();
+
+            if (!Directory.Exists(IEnv.DATA_DIR))
+            {
+                Directory.CreateDirectory(IEnv.DATA_DIR);
+            }
+            if (File.Exists(IEnv.FILE_LOG))
+            {
+                _Writer = new StreamWriter(IEnv.FILE_LOG, true);
+            }
         }
         #endregion
 
@@ -451,6 +462,16 @@ namespace Me.Amon
             _Alert.Show(_IApp.Form, alert);
         }
 
+        public static void ShowError(Exception error)
+        {
+            if (_Error == null)
+            {
+                _Error = new Error();
+            }
+            BeanUtil.CenterToParent(_Error, _IApp.Form);
+            _Error.Show(_IApp.Form, error);
+        }
+
         public static void ShowInput(string message, string deftext)
         {
             if (_Input == null)
@@ -459,6 +480,15 @@ namespace Me.Amon
             }
             BeanUtil.CenterToParent(_Input, _IApp.Form);
             _Input.Show(_IApp.Form, message, deftext);
+        }
+
+        private static StreamWriter _Writer;
+        public static void LogInfo(string msg)
+        {
+            if (_Writer != null)
+            {
+                _Writer.WriteLine(msg);
+            }
         }
         #endregion
 

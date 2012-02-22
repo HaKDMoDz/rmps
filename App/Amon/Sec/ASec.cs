@@ -129,7 +129,7 @@ namespace Me.Amon.Sec
         private void CbOpt_SelectedIndexChanged(object sender, EventArgs e)
         {
 #if DEBUG
-            Logs.Info("CbOpt_SelectedIndexChanged...");
+            Main.LogInfo("CbOpt_SelectedIndexChanged...");
 #endif
             Item item = CbOpt.SelectedItem as Item;
             if (item == null)
@@ -138,7 +138,7 @@ namespace Me.Amon.Sec
             }
 
 #if DEBUG
-            Logs.Info("CbOpt_SelectedIndexChanged:" + item.K);
+            Main.LogInfo("CbOpt_SelectedIndexChanged:" + item.K);
 #endif
             _UcCm.InitOpt(item.K);
             _UcUk.InitOpt(item.K);
@@ -181,7 +181,7 @@ namespace Me.Amon.Sec
         private void CbKey_SelectedIndexChanged(object sender, EventArgs e)
         {
 #if DEBUG
-            Logs.Info("CbKey_SelectedIndexChanged...");
+            Main.LogInfo("CbKey_SelectedIndexChanged...");
 #endif
             Item item = CbKey.SelectedItem as Item;
             if (item == null)
@@ -190,7 +190,7 @@ namespace Me.Amon.Sec
             }
 
 #if DEBUG
-            Logs.Info("CbKey_SelectedIndexChanged:" + item.K);
+            Main.LogInfo("CbKey_SelectedIndexChanged:" + item.K);
 #endif
             _UcCm.InitDir(item.K);
             _UcUk.InitDir(item.K);

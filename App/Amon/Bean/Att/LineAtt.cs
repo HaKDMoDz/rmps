@@ -2,8 +2,8 @@
 {
     public class LineAtt : AAtt
     {
-        public const int SPEC_SIGN_TYPE = 0;//控制类型
-        public const int SPEC_SIGN_TPLT = 1;//显示模板
+        public const int SPEC_LINE_TYPE = 0;//控制类型
+        public const int SPEC_LINE_TPLT = 1;//显示模板
 
         public LineAtt()
             : base(TYPE_LINE, "", "")

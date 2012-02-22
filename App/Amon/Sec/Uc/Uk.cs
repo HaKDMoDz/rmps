@@ -144,7 +144,7 @@ namespace Me.Amon.Sec.Uc
         private void CbSize_SelectedIndexChanged(object sender, EventArgs e)
         {
 #if DEBUG
-            Logs.Info("CbSize_SelectedIndexChanged...");
+            Main.LogInfo("CbSize_SelectedIndexChanged...");
 #endif
             Item item = CbSize.SelectedItem as Item;
             if (item == null)
@@ -153,7 +153,7 @@ namespace Me.Amon.Sec.Uc
             }
 
 #if DEBUG
-            Logs.Info("CbSize_SelectedIndexChanged:" + item.K);
+            Main.LogInfo("CbSize_SelectedIndexChanged:" + item.K);
 #endif
             int len = int.Parse(item.K == "0" ? item.D : item.K);
             if (TbPass.Text.Length > len)

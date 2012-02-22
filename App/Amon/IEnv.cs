@@ -7,6 +7,11 @@
         /// </summary>
         public const string DATA_DIR = "Dat";
         /// <summary>
+        /// 
+        /// </summary>
+        public const string FILE_LOG = "Amon.log";
+        public const string FILE_DB = "Amon.db3";
+        /// <summary>
         /// 图标大小
         /// </summary>
         public const int ICON_DIM = 32;

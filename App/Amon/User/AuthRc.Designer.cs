@@ -61,6 +61,7 @@
             this.TbPass.Name = "TbPass";
             this.TbPass.Size = new System.Drawing.Size(100, 21);
             this.TbPass.TabIndex = 2;
+            this.TbPass.UseSystemPasswordChar = true;
             // 
             // BtOk
             // 

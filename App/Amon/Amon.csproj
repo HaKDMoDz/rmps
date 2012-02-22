@@ -65,6 +65,9 @@
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>Lib\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="MessagingToolkit.Barcode">
+      <HintPath>Lib\MessagingToolkit.Barcode.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite">
@@ -80,6 +83,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bean\Att\CallAtt.cs" />
     <Compile Include="Ce\Wrapper.cs" />
     <Compile Include="Da\DBAccess.cs" />
     <Compile Include="Da\DCAccess.cs" />
@@ -103,7 +107,6 @@
       <DependentUpon>Info.cs</DependentUpon>
     </Compile>
     <Compile Include="ISec.cs" />
-    <Compile Include="Logs.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -210,6 +213,18 @@
     </Compile>
     <Compile Include="Pwd\Demo.Designer.cs">
       <DependentUpon>Demo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanCall.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanCall.Designer.cs">
+      <DependentUpon>BeanCall.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanCall.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanCall.Designer.cs">
+      <DependentUpon>BeanCall.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\_Cat\CatEdit.cs">
       <SubType>Form</SubType>
@@ -732,6 +747,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Pro\APro.resx">
       <DependentUpon>APro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanCall.resx">
+      <DependentUpon>BeanCall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanCall.resx">
+      <DependentUpon>BeanCall.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\_Cat\CatEdit.resx">
       <DependentUpon>CatEdit.cs</DependentUpon>

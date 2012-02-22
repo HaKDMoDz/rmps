@@ -100,7 +100,7 @@ namespace Me.Amon.Pwd.Pro
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message);
+                Main.ShowError(exp);
             }
         }
     }

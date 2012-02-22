@@ -75,23 +75,7 @@ namespace Me.Amon.Pwd
             _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Icon, SelectedImageKey = cat.Icon };
             _RootNode.Tag = cat;
             TvCatTree.Nodes.Add(_RootNode);
-
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.ACAT0200);
-            dba.AddColumn(DBConst.ACAT0201);
-            dba.AddColumn(DBConst.ACAT0203);
-            dba.AddColumn(DBConst.ACAT0204);
-            dba.AddColumn(DBConst.ACAT0205);
-            dba.AddColumn(DBConst.ACAT0206);
-            dba.AddColumn(DBConst.ACAT0207);
-            dba.AddColumn(DBConst.ACAT0208);
-            dba.AddColumn(DBConst.ACAT0209);
-            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
-            dba.AddWhere(DBConst.ACAT020D, ">", DBConst.OPT_DELETE.ToString(), false);
-            dba.AddSort(DBConst.ACAT0201, true);
-            DataTable dt = dba.ExecuteSelect();
-            InitCat(_RootNode, dt);
+            InitCat(_RootNode);
             _RootNode.Expand();
             #endregion
 
@@ -182,49 +166,58 @@ namespace Me.Amon.Pwd
             return true;
         }
 
-        private void InitCat(TreeNode root, DataTable data)
+        private void InitCat(TreeNode root)
         {
-            int i = 0;
-            while (i < data.Rows.Count)
+            DBAccess dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(DBConst.ACAT0200);
+            dba.AddColumn(DBConst.ACAT0201);
+            dba.AddColumn(DBConst.ACAT0203);
+            dba.AddColumn(DBConst.ACAT0204);
+            dba.AddColumn(DBConst.ACAT0205);
+            dba.AddColumn(DBConst.ACAT0206);
+            dba.AddColumn(DBConst.ACAT0207);
+            dba.AddColumn(DBConst.ACAT0208);
+            dba.AddColumn(DBConst.ACAT0209);
+            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
+            dba.AddWhere(DBConst.ACAT0204, root.Name);
+            dba.AddWhere(DBConst.ACAT020D, ">", DBConst.OPT_DELETE.ToString(), false);
+            dba.AddSort(DBConst.ACAT0201, true);
+
+            using (DataTable dt = dba.ExecuteSelect())
             {
-                DataRow row = data.Rows[i];
-                string tmp = row[DBConst.ACAT0204] as string;
-                if (tmp != root.Name)
+                foreach (DataRow row in dt.Rows)
                 {
-                    i += 1;
-                    continue;
-                }
+                    Cat cat = new Cat();
+                    cat.Load(row);
 
-                Cat cat = new Cat();
-                cat.Load(row);
-
-                TreeNode node = new TreeNode();
-                node.Name = cat.Id;
-                node.Text = cat.Text;
-                node.ToolTipText = cat.Tips;
-                node.Tag = cat;
-                if (CharUtil.IsValidateHash(cat.Icon))
-                {
-                    string file = _DataModel.CatDir + cat.Icon + ".png";
-                    if (!File.Exists(file))
+                    TreeNode node = new TreeNode();
+                    node.Name = cat.Id;
+                    node.Text = cat.Text;
+                    node.ToolTipText = cat.Tips;
+                    node.Tag = cat;
+                    if (CharUtil.IsValidateHash(cat.Icon))
                     {
-                        node.ImageKey = "0";
+                        string file = _DataModel.CatDir + cat.Icon + ".png";
+                        if (!File.Exists(file))
+                        {
+                            node.ImageKey = "0";
+                        }
+                        else
+                        {
+                            IlCatTree.Images.Add(cat.Icon, Image.FromFile(file));
+                            node.ImageKey = cat.Icon;
+                        }
                     }
                     else
                     {
-                        IlCatTree.Images.Add(cat.Icon, Image.FromFile(file));
-                        node.ImageKey = cat.Icon;
+                        node.ImageKey = "0";
                     }
-                }
-                else
-                {
-                    node.ImageKey = "0";
-                }
-                node.SelectedImageKey = node.ImageKey;
+                    node.SelectedImageKey = node.ImageKey;
 
-                root.Nodes.Add(node);
-                data.Rows.RemoveAt(i);
-                InitCat(node, data);
+                    root.Nodes.Add(node);
+                    InitCat(node);
+                }
             }
         }
         #endregion
@@ -2223,7 +2216,7 @@ namespace Me.Amon.Pwd
             }
             catch (Exception exp)
             {
-                Main.ShowAlert(exp.Message);
+                Main.ShowError(exp);
             }
         }
 

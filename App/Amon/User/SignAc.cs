@@ -117,6 +117,9 @@ namespace Me.Amon.User
             }
             ShowView(_SignIn);
             _SignAc = _SignIn;
+
+            Text = "用户登录";
+            BtOk.Text = "登录(&O)";
         }
 
         private SignOl _SignOl;
@@ -128,6 +131,9 @@ namespace Me.Amon.User
             }
             ShowView(_SignOl);
             _SignAc = _SignOl;
+
+            Text = "联机注册";
+            BtOk.Text = "注册(&O)";
         }
 
         private SignUl _SignOf;
@@ -139,6 +145,9 @@ namespace Me.Amon.User
             }
             ShowView(_SignOf);
             _SignAc = _SignOf;
+
+            Text = "脱机注册";
+            BtOk.Text = "注册(&O)";
         }
 
         private SignPc _SignPc;
@@ -150,6 +159,9 @@ namespace Me.Amon.User
             }
             ShowView(_SignPc);
             _SignAc = _SignPc;
+
+            Text = "单机注册";
+            BtOk.Text = "注册(&O)";
         }
 
         private SignFk _SignFk;
@@ -161,6 +173,9 @@ namespace Me.Amon.User
             }
             ShowView(_SignFk);
             _SignAc = _SignFk;
+
+            Text = "找回口令";
+            BtOk.Text = "找回(&O)";
         }
 
         private void ShowView(Control control)

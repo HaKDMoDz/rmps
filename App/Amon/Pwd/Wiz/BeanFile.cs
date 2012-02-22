@@ -194,9 +194,9 @@ namespace Me.Amon.Pwd.Wiz
             {
                 Process.Start(dstFile);
             }
-            catch (Exception e)
+            catch (Exception exp)
             {
-                MessageBox.Show(e.Message);
+                Main.ShowError(exp);
             }
         }
         #endregion

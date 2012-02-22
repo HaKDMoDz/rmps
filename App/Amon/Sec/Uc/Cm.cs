@@ -182,7 +182,7 @@ namespace Me.Amon.Sec.Uc
         private void CbName_SelectedIndexChanged(object sender, EventArgs e)
         {
 #if DEBUG
-            Logs.Info("CbName_SelectedIndexChanged...");
+            Main.LogInfo("CbName_SelectedIndexChanged...");
 #endif
             Item item = CbName.SelectedItem as Item;
             if (item == null)
@@ -191,7 +191,7 @@ namespace Me.Amon.Sec.Uc
             }
 
 #if DEBUG
-            Logs.Info("CbName_SelectedIndexChanged:" + item.K);
+            Main.LogInfo("CbName_SelectedIndexChanged:" + item.K);
 #endif
             _Acm.ChangeName(item.K);
             _ASec.ChangeAlg(item.K);
@@ -200,7 +200,7 @@ namespace Me.Amon.Sec.Uc
         private void CbMode_SelectedIndexChanged(object sender, EventArgs e)
         {
 #if DEBUG
-            Logs.Info("CbMode_SelectedIndexChanged...");
+            Main.LogInfo("CbMode_SelectedIndexChanged...");
 #endif
             Item item = CbMode.SelectedItem as Item;
             if (item == null)
@@ -209,7 +209,7 @@ namespace Me.Amon.Sec.Uc
             }
 
 #if DEBUG
-            Logs.Info("CbMode_SelectedIndexChanged:" + item.K);
+            Main.LogInfo("CbMode_SelectedIndexChanged:" + item.K);
 #endif
             string mode = item.K == "0" ? item.D : item.K;
             if (mode != null)
@@ -221,7 +221,7 @@ namespace Me.Amon.Sec.Uc
         private void CbPads_SelectedIndexChanged(object sender, EventArgs e)
         {
 #if DEBUG
-            Logs.Info("CbPads_SelectedIndexChanged...");
+            Main.LogInfo("CbPads_SelectedIndexChanged...");
 #endif
             Item item = CbPads.SelectedItem as Item;
             if (item == null)
@@ -230,7 +230,7 @@ namespace Me.Amon.Sec.Uc
             }
 
 #if DEBUG
-            Logs.Info("CbPads_SelectedIndexChanged:" + item.K);
+            Main.LogInfo("CbPads_SelectedIndexChanged:" + item.K);
 #endif
             string size = item.K == "0" ? item.D : item.K;
             if (size != null)
