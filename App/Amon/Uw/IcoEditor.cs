@@ -35,8 +35,6 @@ namespace Me.Amon.Uw
             InitializeComponent();
         }
 
-        public AmonHandler<string> CallBackHandler { get; set; }
-
         public void InitOnce(bool dirVisible)
         {
             ShowIcoView();
@@ -92,6 +90,7 @@ namespace Me.Amon.Uw
             {
                 return;
             }
+            _LastIdx = LsDir.SelectedIndex;
 
             if (_Control is DirEdit)
             {

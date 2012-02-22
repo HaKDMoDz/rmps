@@ -90,9 +90,12 @@ namespace Me.Amon.Pwd
             #endregion
 
             #region 视图
+            HSplit.Panel1Collapsed = !_ViewModel.NavPaneVisible;
+            TmiNavPane.Checked = _ViewModel.NavPaneVisible;
             VSplit.Panel1Collapsed = !_ViewModel.CatTreeVisible;
+            TmiCatView.Checked = _ViewModel.CatTreeVisible;
             VSplit.Panel2Collapsed = !_ViewModel.KeyListVisible;
-            HSplit.Panel1Collapsed = !_ViewModel.KeyGuidVisible;
+            TmiKeyList.Checked = _ViewModel.KeyListVisible;
 
             TmMenu.Visible = _ViewModel.MenuBarVisible;
             TmiMenuBar.Checked = _ViewModel.MenuBarVisible;
@@ -515,15 +518,21 @@ namespace Me.Amon.Pwd
                     return;
                 }
                 // 目录隐现
-                if (e.KeyCode == Keys.G)
+                if (e.KeyCode == Keys.K)
                 {
-                    VSplit.Panel1Collapsed = !VSplit.Panel1Collapsed;
+                    SetCatTreeVisible(VSplit.Panel1Collapsed);
                     return;
                 }
                 // 列表隐现
-                if (e.KeyCode == Keys.K)
+                if (e.KeyCode == Keys.L)
                 {
-                    VSplit.Panel2Collapsed = !VSplit.Panel2Collapsed;
+                    SetKeyListVisible(VSplit.Panel2Collapsed);
+                    return;
+                }
+                // 列表隐现
+                if (e.KeyCode == Keys.G)
+                {
+                    SetNavPaneVisible(HSplit.Panel1Collapsed);
                     return;
                 }
                 return;
@@ -840,17 +849,17 @@ namespace Me.Amon.Pwd
 
         private void TmiKeyGuid_Click(object sender, EventArgs e)
         {
-            SetKeyGuidVisible(!TmiKeyGuid.Visible);
+            SetNavPaneVisible(HSplit.Panel1Collapsed);
         }
 
         private void TmiCatView_Click(object sender, EventArgs e)
         {
-            SetCatTreeVisible(!TvCatTree.Visible);
+            SetCatTreeVisible(VSplit.Panel1Collapsed);
         }
 
         private void TmiKeyList_Click(object sender, EventArgs e)
         {
-            SetKeyListVisible(!LbKeyList.Visible);
+            SetKeyListVisible(VSplit.Panel2Collapsed);
         }
 
         private void TmiFindBar_Click(object sender, EventArgs e)
@@ -1333,14 +1342,14 @@ namespace Me.Amon.Pwd
         private void CmiEditIcon_Click(object sender, EventArgs e)
         {
             IcoEditor editor = new IcoEditor(_UserModel, _DataModel.CatDir);
-            editor.CallBackHandler = new AmonHandler<string>(ChangeCatIcon);
             editor.InitOnce(false);
             BeanUtil.CenterToParent(editor, this);
-            editor.ShowDialog(this);
-        }
+            if (DialogResult.OK != editor.ShowDialog(this))
+            {
+                return;
+            }
 
-        private void ChangeCatIcon(string key)
-        {
+            string key = editor.SelectedItem.ImageKey;
             if (!CharUtil.IsValidateHash(key))
             {
                 key = "0";
@@ -1687,22 +1696,36 @@ namespace Me.Amon.Pwd
             TsbEchoBar.Checked = visible;
         }
 
-        private void SetKeyGuidVisible(bool visible)
-        {
-            HSplit.Panel1Collapsed = !visible;
-            TmiKeyGuid.Checked = visible;
-        }
-
         private void SetCatTreeVisible(bool visible)
         {
-            VSplit.Panel1Collapsed = !visible;
-            TmiCatView.Checked = visible;
+            if (!visible && VSplit.Panel2Collapsed)
+            {
+                SetNavPaneVisible(false);
+            }
+            else
+            {
+                VSplit.Panel1Collapsed = !visible;
+                TmiCatView.Checked = visible;
+            }
         }
 
         private void SetKeyListVisible(bool visible)
         {
-            VSplit.Panel2Collapsed = !visible;
-            TmiKeyList.Checked = visible;
+            if (!visible && VSplit.Panel1Collapsed)
+            {
+                SetNavPaneVisible(false);
+            }
+            else
+            {
+                VSplit.Panel2Collapsed = !visible;
+                TmiKeyList.Checked = visible;
+            }
+        }
+
+        private void SetNavPaneVisible(bool visible)
+        {
+            HSplit.Panel1Collapsed = !visible;
+            TmiNavPane.Checked = visible;
         }
 
         private void SetFindBarVisible(bool visible)

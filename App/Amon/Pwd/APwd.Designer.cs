@@ -76,7 +76,7 @@
             this.TmiToolBar = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiEchoBar = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiViewSep1 = new System.Windows.Forms.ToolStripSeparator();
-            this.TmiKeyGuid = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiNavPane = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiCatView = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiKeyList = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiFindBar = new System.Windows.Forms.ToolStripMenuItem();
@@ -490,7 +490,7 @@
             this.TmiToolBar,
             this.TmiEchoBar,
             this.TmiViewSep1,
-            this.TmiKeyGuid,
+            this.TmiNavPane,
             this.TmiCatView,
             this.TmiKeyList,
             this.TmiFindBar});
@@ -556,13 +556,13 @@
             this.TmiViewSep1.Name = "TmiViewSep1";
             this.TmiViewSep1.Size = new System.Drawing.Size(166, 6);
             // 
-            // TmiKeyGuid
+            // TmiNavPane
             // 
-            this.TmiKeyGuid.Name = "TmiKeyGuid";
-            this.TmiKeyGuid.ShortcutKeyDisplayString = "Ctrl + E";
-            this.TmiKeyGuid.Size = new System.Drawing.Size(169, 22);
-            this.TmiKeyGuid.Text = "导航";
-            this.TmiKeyGuid.Click += new System.EventHandler(this.TmiKeyGuid_Click);
+            this.TmiNavPane.Name = "TmiNavPane";
+            this.TmiNavPane.ShortcutKeyDisplayString = "Ctrl + E";
+            this.TmiNavPane.Size = new System.Drawing.Size(169, 22);
+            this.TmiNavPane.Text = "导航";
+            this.TmiNavPane.Click += new System.EventHandler(this.TmiKeyGuid_Click);
             // 
             // TmiCatView
             // 
@@ -1482,6 +1482,6 @@
         private System.Windows.Forms.ToolStripMenuItem CmiSortU;
         private System.Windows.Forms.ToolStripMenuItem CmiSortD;
         private System.Windows.Forms.ToolStripSeparator CmiCatSep1;
-        private System.Windows.Forms.ToolStripMenuItem TmiKeyGuid;
+        private System.Windows.Forms.ToolStripMenuItem TmiNavPane;
     }
 }
