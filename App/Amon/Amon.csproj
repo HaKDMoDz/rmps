@@ -570,10 +570,10 @@
     <Compile Include="Sec\Uw\Text.Designer.cs">
       <DependentUpon>Text.cs</DependentUpon>
     </Compile>
-    <Compile Include="Uc\HotKeys.cs">
+    <Compile Include="Uw\HotKeys.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Uc\HotKeys.Designer.cs">
+    <Compile Include="Uw\HotKeys.Designer.cs">
       <DependentUpon>HotKeys.cs</DependentUpon>
     </Compile>
     <Compile Include="Uw\Error.cs">
@@ -889,7 +889,7 @@
     <EmbeddedResource Include="Sec\Uw\Text.resx">
       <DependentUpon>Text.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Uc\HotKeys.resx">
+    <EmbeddedResource Include="Uw\HotKeys.resx">
       <DependentUpon>HotKeys.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\Error.resx">

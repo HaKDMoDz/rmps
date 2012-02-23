@@ -43,7 +43,6 @@ namespace Me.Amon.Pwd
         private APro _ProView;
         private AWiz _WizView;
         private APad _PadView;
-        private int _LastView;
         #endregion
 
         #region 构造函数
@@ -113,7 +112,7 @@ namespace Me.Amon.Pwd
             TsbEchoBar.Checked = _ViewModel.EchoBarVisible;
             #endregion
 
-            ChangeView(2);
+            ShowAWiz();
 
             UcTime.Start();
 
@@ -201,16 +200,8 @@ namespace Me.Amon.Pwd
                     node.Tag = cat;
                     if (CharUtil.IsValidateHash(cat.Icon))
                     {
-                        string file = _DataModel.CatDir + cat.Icon + ".png";
-                        if (!File.Exists(file))
-                        {
-                            node.ImageKey = "0";
-                        }
-                        else
-                        {
-                            IlCatTree.Images.Add(cat.Icon, Image.FromFile(file));
-                            node.ImageKey = cat.Icon;
-                        }
+                        IlCatTree.Images.Add(cat.Icon, BeanUtil.ReadImage(_DataModel.CatDir + cat.Icon + ".png", BeanUtil.NaN16));
+                        node.ImageKey = cat.Icon;
                     }
                     else
                     {
@@ -252,11 +243,11 @@ namespace Me.Amon.Pwd
                 {
                     if (CharUtil.IsValidateHash(key.IcoPath))
                     {
-                        key.Icon = Image.FromFile(_DataModel.KeyDir + key.IcoPath + Path.DirectorySeparatorChar + key.IcoName + ".png");
+                        key.Icon = BeanUtil.ReadImage(_DataModel.KeyDir + key.IcoPath + Path.DirectorySeparatorChar + key.IcoName + ".png", BeanUtil.NaN32);
                     }
                     else
                     {
-                        key.Icon = Image.FromFile(_DataModel.KeyDir + key.IcoName + ".png");
+                        key.Icon = BeanUtil.ReadImage(_DataModel.KeyDir + key.IcoName + ".png", BeanUtil.NaN32);
                     }
                 }
                 else
@@ -374,61 +365,69 @@ namespace Me.Amon.Pwd
                     _PwdView.DeleteKey();
                     return;
                 }
-                // 隐藏窗口
-                if (e.KeyCode == Keys.H || e.KeyCode == Keys.Enter)
-                {
-                    Visible = false;
-                    return;
-                }
-                // 向上移动
-                if ((e.KeyCode == Keys.U) || (e.Shift && e.KeyCode == Keys.Up))
-                {
-                    return;
-                }
-                // 向下移动
-                if ((e.KeyCode == Keys.D) || (e.Shift && e.KeyCode == Keys.Down))
-                {
-                    return;
-                }
-                // 向上选择
-                if (e.KeyCode == Keys.Up)
-                {
-                    return;
-                }
-                // 向下选择
-                if (e.KeyCode == Keys.Down)
-                {
-                    return;
-                }
                 // 查找
                 if (e.KeyCode == Keys.F)
                 {
                     FbFind.Focus();
                     return;
                 }
-                // 查询
-                if (e.KeyCode == Keys.Q)
+                // 锁定窗口
+                if (e.KeyCode == Keys.L)
                 {
-                    Close();
+                    LockForm();
                     return;
                 }
+                // 隐藏窗口
+                if (e.KeyCode == Keys.H || e.KeyCode == Keys.Enter)
+                {
+                    HideForm();
+                    return;
+                }
+                // 退出窗口
+                if (e.KeyCode == Keys.Q)
+                {
+                    ExitForm();
+                    return;
+                }
+                // 向上选择
+                if (e.KeyCode == Keys.U || e.KeyCode == Keys.Up)
+                {
+                    return;
+                }
+                // 向下选择
+                if (e.KeyCode == Keys.U || e.KeyCode == Keys.Down)
+                {
+                    return;
+                }
+                // 向上移动
+                if (e.Shift && (e.KeyCode == Keys.U || e.KeyCode == Keys.Up))
+                {
+                    return;
+                }
+                // 向下移动
+                if (e.Shift && (e.KeyCode == Keys.D || e.KeyCode == Keys.Down))
+                {
+                    return;
+                }
+
                 #region 切换视图
                 if (e.KeyCode == Keys.F1)
                 {
-                    ChangeView(1);
+                    ShowAPro();
                     return;
                 }
                 if (e.KeyCode == Keys.F2)
                 {
-                    ChangeView(2);
+                    ShowAWiz();
                     return;
                 }
                 if (e.KeyCode == Keys.F3)
                 {
-                    ChangeView(3);
+                    ShowAPad();
                     return;
                 }
                 #endregion
+
                 #region 添加属性
                 if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1)
                 {
@@ -481,6 +480,8 @@ namespace Me.Amon.Pwd
                     return;
                 }
                 #endregion
+
+                #region 类别管理
                 // 添加类别
                 if (e.KeyCode == Keys.Oemplus || e.KeyCode == Keys.Add)
                 {
@@ -499,6 +500,8 @@ namespace Me.Amon.Pwd
                     DeleteCat();
                     return;
                 }
+                #endregion
+
                 // 菜单栏隐现
                 if (e.KeyCode == Keys.M)
                 {
@@ -512,9 +515,15 @@ namespace Me.Amon.Pwd
                     return;
                 }
                 // 状态栏隐现
-                if (e.KeyCode == Keys.I)
+                if (e.KeyCode == Keys.E)
                 {
                     SsEcho.Visible = !SsEcho.Visible;
+                    return;
+                }
+                // 查找隐现
+                if (e.KeyCode == Keys.G)
+                {
+                    SetFindBarVisible(!FbFind.Visible);
                     return;
                 }
                 // 目录隐现
@@ -524,15 +533,21 @@ namespace Me.Amon.Pwd
                     return;
                 }
                 // 列表隐现
-                if (e.KeyCode == Keys.L)
+                if (e.KeyCode == Keys.P)
                 {
                     SetKeyListVisible(VSplit.Panel2Collapsed);
                     return;
                 }
                 // 列表隐现
-                if (e.KeyCode == Keys.G)
+                if (e.KeyCode == Keys.J)
                 {
                     SetNavPaneVisible(HSplit.Panel1Collapsed);
+                    return;
+                }
+                // 属性隐现
+                if (e.KeyCode == Keys.A)
+                {
+                    //SetKeyListVisible(VSplit.Panel2Collapsed);
                     return;
                 }
                 return;
@@ -627,22 +642,9 @@ namespace Me.Amon.Pwd
 
         private void APwd_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
-            {
-                if (DialogResult.OK != MessageBox.Show("您有数据尚未保存，确认要退出吗？", "", MessageBoxButtons.YesNo))
-                {
-                    return;
-                }
-                if (WindowState == FormWindowState.Minimized)
-                {
-                    WindowState = FormWindowState.Normal;
-                }
-                if (!Visible)
-                {
-                    Visible = true;
-                }
-                e.Cancel = true;
-            }
+            e.Cancel = true;
+
+            HideForm();
         }
 
         private void UcTime_Tick(object sender, EventArgs e)
@@ -655,7 +657,7 @@ namespace Me.Amon.Pwd
         #region 系统菜单
         private void TmiHideWin_Click(object sender, EventArgs e)
         {
-            Visible = false;
+            HideForm();
         }
 
         private void TmiLockWin_Click(object sender, EventArgs e)
@@ -665,7 +667,7 @@ namespace Me.Amon.Pwd
 
         private void TmiExitApp_Click(object sender, EventArgs e)
         {
-            Close();
+            ExitForm();
         }
         #endregion
 
@@ -819,17 +821,17 @@ namespace Me.Amon.Pwd
         #region 视图菜单
         private void TmiViewPro_Click(object sender, EventArgs e)
         {
-            ChangeView(1);
+            ShowAPro();
         }
 
         private void TmiViewWiz_Click(object sender, EventArgs e)
         {
-            ChangeView(2);
+            ShowAWiz();
         }
 
         private void TmiViewPad_Click(object sender, EventArgs e)
         {
-            ChangeView(3);
+            ShowAPad();
         }
 
         private void TmiMenuBar_Click(object sender, EventArgs e)
@@ -1098,6 +1100,7 @@ namespace Me.Amon.Pwd
             AuthAc authAc = new AuthAc(_UserModel);
             authAc.InitOnce();
             authAc.ShowView(EAuthAc.AuthPk);
+            authAc.ShowDialog(this);
         }
 
         private void TmiSkey_Click(object sender, EventArgs e)
@@ -1126,7 +1129,7 @@ namespace Me.Amon.Pwd
         private void TmiIco_Click(object sender, EventArgs e)
         {
             IcoEditor edit = new IcoEditor(_UserModel, _DataModel.KeyDir);
-            edit.InitOnce(true);
+            edit.InitOnce(24, true);
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
@@ -1342,7 +1345,7 @@ namespace Me.Amon.Pwd
         private void CmiEditIcon_Click(object sender, EventArgs e)
         {
             IcoEditor editor = new IcoEditor(_UserModel, _DataModel.CatDir);
-            editor.InitOnce(false);
+            editor.InitOnce(16, false);
             BeanUtil.CenterToParent(editor, this);
             if (DialogResult.OK != editor.ShowDialog(this))
             {
@@ -1353,6 +1356,10 @@ namespace Me.Amon.Pwd
             if (!CharUtil.IsValidateHash(key))
             {
                 key = "0";
+            }
+            if (!IlCatTree.Images.ContainsKey(key))
+            {
+                IlCatTree.Images.Add(key, BeanUtil.ReadImage(editor.HomeDir + key + ".png", BeanUtil.NaN16));
             }
             _LastNode.ImageKey = key;
             _LastNode.SelectedImageKey = key;
@@ -1553,51 +1560,82 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 私有方法
-        private void ChangeView(int view)
+        private void ShowAPro()
         {
-            if (_LastView == view)
+            if (_ProView == null)
             {
-                return;
+                _ProView = new APro();
+                _ProView.Name = "Pro";
+                _ProView.Init(this, _SafeModel, _DataModel, _ViewModel);
             }
+
             if (_PwdView != null)
             {
+                if (_PwdView.Name == _ProView.Name)
+                {
+                    return;
+                }
                 _PwdView.HideView(TpGrid);
             }
 
-            switch (view)
-            {
-                case 1:
-                    if (_ProView == null)
-                    {
-                        _ProView = new APro();
-                        _ProView.Init(this, _SafeModel, _DataModel, _ViewModel);
-                    }
-                    _PwdView = _ProView;
-                    _LastView = view;
-                    break;
-                case 2:
-                    if (_WizView == null)
-                    {
-                        _WizView = new AWiz();
-                        _WizView.Init(this, _SafeModel, _DataModel, _ViewModel);
-                    }
-                    _PwdView = _WizView;
-                    _LastView = view;
-                    break;
-                case 3:
-                    if (_PadView == null)
-                    {
-                        _PadView = new APad();
-                        _PadView.Init(this, _SafeModel, _DataModel);
-                    }
-                    _PwdView = _PadView;
-                    _LastView = view;
-                    break;
-                default:
-                    _LastView = 0;
-                    return;
-            }
+            _PwdView = _ProView;
             _PwdView.InitView(TpGrid);
+
+            TmiViewPro.Checked = true;
+            TmiViewWiz.Checked = false;
+            TmiViewPad.Checked = false;
+        }
+
+        private void ShowAWiz()
+        {
+            if (_WizView == null)
+            {
+                _WizView = new AWiz();
+                _WizView.Name = "Wiz";
+                _WizView.Init(this, _SafeModel, _DataModel, _ViewModel);
+            }
+
+            if (_PwdView != null)
+            {
+                if (_PwdView.Name == _WizView.Name)
+                {
+                    return;
+                }
+                _PwdView.HideView(TpGrid);
+            }
+
+            _PwdView = _WizView;
+            _PwdView.InitView(TpGrid);
+
+            TmiViewPro.Checked = false;
+            TmiViewWiz.Checked = true;
+            TmiViewPad.Checked = false;
+        }
+
+        private void ShowAPad()
+        {
+            if (_PadView == null)
+            {
+                _PadView = new APad();
+                _PadView.Name = "Pad";
+                _PadView.Init(this, _SafeModel, _DataModel);
+            }
+
+            if (_PwdView != null)
+            {
+                if (_PwdView.Name == _PadView.Name)
+                {
+                    return;
+                }
+                _PwdView.HideView(TpGrid);
+            }
+
+            _PwdView = _PadView;
+            _PwdView.InitView(TpGrid);
+
+            TmiViewPro.Checked = false;
+            TmiViewWiz.Checked = false;
+            TmiViewPad.Checked = true;
         }
 
         private void ChangeCat(string catId)
@@ -2182,6 +2220,7 @@ namespace Me.Amon.Pwd
             if (string.IsNullOrEmpty(meta))
             {
                 TvCatTree.SelectedNode = _LastNode;
+                ListKey(_LastNode.Name);
                 return;
             }
 
@@ -2251,39 +2290,72 @@ namespace Me.Amon.Pwd
             dt.Columns.Add("说明");
             dt.Rows.Add("Control N", "添加记录", "");
             dt.Rows.Add("Control S", "保存记录", "");
-            dt.Rows.Add("Control D", "删除记录", "");
-            dt.Rows.Add("Control +", "添加类别", "");
-            dt.Rows.Add("Control -", "删除类别", "");
-            dt.Rows.Add("Control H", "隐藏窗口", "");
-            dt.Rows.Add("Control Enter", "隐藏窗口", "");
+            dt.Rows.Add("Control R", "删除记录", "");
+            dt.Rows.Add("Control F", "快速查找", "");
             dt.Rows.Add("Control L", "锁定窗口", "");
-            dt.Rows.Add("Control Up", "选择上一个属性", "");
-            dt.Rows.Add("Control Down", "选择下一个属性", "");
-            dt.Rows.Add("Control Shift Up", "向上移动属性", "");
-            dt.Rows.Add("Control Shift Down", "向下移动属性", "");
+            dt.Rows.Add("Control H", "隐藏窗口", "Control Enter");
+            dt.Rows.Add("Control Q", "退出", "");
+            dt.Rows.Add("Control U", "选择上一个属性", "Control Up");
+            dt.Rows.Add("Control D", "选择下一个属性", "Control Down");
+            dt.Rows.Add("Control Shift U", "向上移动属性", "Control Shift Up");
+            dt.Rows.Add("Control Shift D", "向下移动属性", "Control Shift Down");
+            dt.Rows.Add("Control F1", "切换到专业模式", "");
+            dt.Rows.Add("Control F2", "切换到向导模式", "");
+            dt.Rows.Add("Control F3", "切换到记事模式", "");
+            dt.Rows.Add("Control +", "添加类别", "");
+            dt.Rows.Add("Control .", "更新类别", "");
+            dt.Rows.Add("Control -", "删除类别", "");
             dt.Rows.Add("Control M", "切换菜单栏显示状态", "");
             dt.Rows.Add("Control T", "切换工具栏显示状态", "");
-            dt.Rows.Add("Control I", "切换状态栏显示状态", "");
-            dt.Rows.Add("Control F", "切换查找栏显示状态", "");
-            dt.Rows.Add("Control K", "切换类别导航显示状态", "");
-            dt.Rows.Add("Control P", "切换记录导航显示状态", "");
+            dt.Rows.Add("Control E", "切换状态栏显示状态", "");
+            dt.Rows.Add("Control G", "切换查找栏显示状态", "");
+            dt.Rows.Add("Control K", "切换类别目录显示状态", "");
+            dt.Rows.Add("Control P", "切换口令列表显示状态", "");
+            dt.Rows.Add("Control J", "切换导航面板显示状态", "");
             dt.Rows.Add("Control A", "切换属性编辑显示状态", "");
-            dt.Rows.Add("Control Q", "快速查找", "");
-            dt.Rows.Add("Control 1", "切换到专业模式", "");
-            dt.Rows.Add("Control 2", "切换到向导模式", "");
-            dt.Rows.Add("Control 3", "切换到记事模式", "");
+            dt.Rows.Add("Control P", "显示或隐藏导航面板", "");
             dt.Rows.Add("Alt C", "复制属性数据到剪贴板", "");
             dt.Rows.Add("Alt U", "应用当前属性变更", "");
             dt.Rows.Add("Alt D", "移除当前属性", "");
 
             HotKeys keys = new HotKeys();
             keys.KeyList = dt;
+            BeanUtil.CenterToParent(keys, this);
             keys.Show(this);
         }
 
         private void ShowInfo()
         {
             new Info().ShowDialog(this);
+        }
+
+        private void LockForm()
+        {
+        }
+
+        private void HideForm()
+        {
+            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            {
+                if (DialogResult.OK != MessageBox.Show("您有数据尚未保存，确认要退出吗？", "", MessageBoxButtons.YesNo))
+                {
+                    return;
+                }
+                if (WindowState == FormWindowState.Minimized)
+                {
+                    WindowState = FormWindowState.Normal;
+                }
+                if (!Visible)
+                {
+                    Visible = true;
+                }
+            }
+            Visible = false;
+        }
+
+        private void ExitForm()
+        {
+            Close();
         }
         #endregion
     }

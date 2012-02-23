@@ -24,8 +24,10 @@ namespace Me.Amon.Uw.Ico
             InitializeComponent();
         }
 
-        public void Init()
+        public void InitOnce()
         {
+            IlIco.ImageSize = new Size(_IcoEdit.IcoSize, _IcoEdit.IcoSize);
+
             _IcoEdit.AcceptButton = BtChoose;
             _IcoEdit.CancelButton = BtCancel;
         }
@@ -67,24 +69,26 @@ namespace Me.Amon.Uw.Ico
             }
             using (Image img = Image.FromFile(fd.FileName))
             {
-                Bitmap bmp = new Bitmap(IEnv.ICON_DIM, IEnv.ICON_DIM);
+                int size = _IcoEdit.IcoSize;
+
+                Bitmap bmp = new Bitmap(size, size);
                 int w = img.Width;
                 int h = img.Height;
-                if (w != IEnv.ICON_DIM && h != IEnv.ICON_DIM)
+                if (w != size && h != size)
                 {
-                    double rw = (double)IEnv.ICON_DIM / w;
-                    double rh = (double)IEnv.ICON_DIM / h;
+                    double rw = (double)size / w;
+                    double rh = (double)size / h;
                     double r = rw <= rh ? rw : rh;
                     w = (int)(r * w);
                     h = (int)(r * h);
 
                     Graphics g = Graphics.FromImage(bmp);
-                    g.DrawImage(img, (IEnv.ICON_DIM - w) >> 1, (IEnv.ICON_DIM - h) >> 1, w, h);
+                    g.DrawImage(img, (size - w) >> 1, (size - h) >> 1, w, h);
                     g.Flush();
                     g.Dispose();
                 }
                 string key = HashUtil.UtcTimeInHex(true);
-                bmp.Save(_IcoEdit.CurrentPath + key + ".png", ImageFormat.Png);
+                bmp.Save(_IcoEdit.HomeDir + key + ".png", ImageFormat.Png);
                 IlIco.Images.Add(key, img);
                 _IcoEdit.SelectedItem = new ListViewItem((LvIco.Items.Count + 1).ToString(), key);
                 LvIco.Items.Add(_IcoEdit.SelectedItem);
@@ -122,22 +126,10 @@ namespace Me.Amon.Uw.Ico
                     continue;
                 }
                 name = name.Substring(0, 16);
-                IlIco.Images.Add(name, LoadImage(file));
+                IlIco.Images.Add(name, BeanUtil.ReadImage(file, BeanUtil.NaN32));
                 LvIco.Items.Add(new ListViewItem((i++).ToString(), name));
             }
         }
         #endregion
-
-        private Image LoadImage(string file)
-        {
-            if (!File.Exists(file))
-            {
-                return BeanUtil.NaN32;
-            }
-            using (Stream stream = File.OpenRead(file))
-            {
-                return Image.FromStream(stream);
-            }
-        }
     }
 }

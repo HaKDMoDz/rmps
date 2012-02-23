@@ -4,6 +4,8 @@ namespace Me.Amon.Pwd
 {
     public interface IPwd
     {
+        string Name { get; }
+
         void InitView(TableLayoutPanel grid);
 
         void HideView(TableLayoutPanel grid);

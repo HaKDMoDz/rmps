@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Uc
+﻿namespace Me.Amon.Uw
 {
     partial class HotKeys
     {
@@ -76,6 +76,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "HotKeys";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "快捷键";
             ((System.ComponentModel.ISupportInitialize)(this.DvKeys)).EndInit();
             this.ResumeLayout(false);

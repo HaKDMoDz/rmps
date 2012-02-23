@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows.Forms;
 
-namespace Me.Amon.Uc
+namespace Me.Amon.Uw
 {
     public partial class HotKeys : Form
     {

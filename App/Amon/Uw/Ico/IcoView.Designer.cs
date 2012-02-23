@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.LvIco = new System.Windows.Forms.ListView();
+            this.IlIco = new System.Windows.Forms.ImageList(this.components);
             this.BtCancel = new System.Windows.Forms.Button();
             this.BtAppend = new System.Windows.Forms.Button();
             this.BtChoose = new System.Windows.Forms.Button();
-            this.IlIco = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
             // 
             // LvIco
@@ -47,6 +47,11 @@
             this.LvIco.Size = new System.Drawing.Size(244, 220);
             this.LvIco.TabIndex = 0;
             this.LvIco.UseCompatibleStateImageBehavior = false;
+            // 
+            // IlIco
+            // 
+            this.IlIco.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.IlIco.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // BtCancel
             // 
@@ -80,12 +85,6 @@
             this.BtChoose.Text = "选择(&S)";
             this.BtChoose.UseVisualStyleBackColor = true;
             this.BtChoose.Click += new System.EventHandler(this.BtChoose_Click);
-            // 
-            // IlIco
-            // 
-            this.IlIco.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.IlIco.ImageSize = new System.Drawing.Size(24, 24);
-            this.IlIco.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // IcoView
             // 

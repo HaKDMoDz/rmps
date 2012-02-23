@@ -12,10 +12,6 @@
         public const string FILE_LOG = "Amon.log";
         public const string FILE_DB = "Amon.db3";
         /// <summary>
-        /// 图标大小
-        /// </summary>
-        public const int ICON_DIM = 32;
-        /// <summary>
         /// 系统日期格式
         /// </summary>
         public const string DATEIME_FORMAT = "yyyy-MM-dd HH:mm:ss";

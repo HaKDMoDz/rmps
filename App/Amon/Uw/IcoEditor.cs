@@ -5,7 +5,6 @@ using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Bean;
 using Me.Amon.Da;
-using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Util;
 using Me.Amon.Uw.Ico;
@@ -19,7 +18,9 @@ namespace Me.Amon.Uw
         private IcoView _IcoView;
         private Control _Control;
         private string _RootDir;
+        private string _HomeDir;
         private int _LastIdx;
+        private int _IcoSize;
 
         #region 构造函数
         public IcoEditor()
@@ -35,8 +36,10 @@ namespace Me.Amon.Uw
             InitializeComponent();
         }
 
-        public void InitOnce(bool dirVisible)
+        public void InitOnce(int icoSize, bool dirVisible)
         {
+            _IcoSize = icoSize;
+
             ShowIcoView();
 
             if (dirVisible)
@@ -75,11 +78,13 @@ namespace Me.Amon.Uw
                 LsDir.Visible = false;
             }
 
+            _HomeDir = _RootDir;
             _IcoView.ShowData(_RootDir);
         }
         #endregion
 
-        public string CurrentPath { get; set; }
+        public int IcoSize { get { return _IcoSize; } }
+        public string HomeDir { get { return _HomeDir; } }
         public ListViewItem SelectedItem { get; set; }
 
         #region 事件处理
@@ -103,12 +108,12 @@ namespace Me.Amon.Uw
                 return;
             }
 
-            CurrentPath = CharUtil.IsValidateHash(item.Id) ? _RootDir + item.Id + Path.DirectorySeparatorChar : _RootDir;
-            if (!Directory.Exists(CurrentPath))
+            _HomeDir = CharUtil.IsValidateHash(item.Id) ? _RootDir + item.Id + Path.DirectorySeparatorChar : _RootDir;
+            if (!Directory.Exists(_HomeDir))
             {
                 return;
             }
-            _IcoView.ShowData(CurrentPath);
+            _IcoView.ShowData(_HomeDir);
         }
         #endregion
 
@@ -159,9 +164,9 @@ namespace Me.Amon.Uw
             {
                 return;
             }
-            if (Directory.Exists(CurrentPath))
+            if (Directory.Exists(HomeDir))
             {
-                Directory.Delete(CurrentPath, true);
+                Directory.Delete(HomeDir, true);
             }
 
             LsDir.Items.Remove(item);
@@ -193,7 +198,7 @@ namespace Me.Amon.Uw
             if (_IcoView == null)
             {
                 _IcoView = new IcoView(this);
-                _IcoView.Init();
+                _IcoView.InitOnce();
                 _IcoView.Location = new Point(138, 12);
                 _IcoView.Size = new Size(244, 249);
                 _IcoView.TabIndex = 1;

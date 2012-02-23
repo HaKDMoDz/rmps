@@ -29,6 +29,7 @@ namespace Me.Amon.User
 
         public void InitOnce()
         {
+            BeanUtil.CenterToScreen(this);
         }
         #endregion
 
