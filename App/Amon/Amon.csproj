@@ -967,6 +967,7 @@
     <Content Include="Logo\logo.ico" />
     <None Include="Resources\Alert.png" />
     <None Include="Resources\Error.png" />
+    <None Include="Resources\Hint.png" />
     <Content Include="Resources\Loading.gif" />
     <None Include="Resources\Logo.png" />
     <Content Include="Resources\Waiting.gif" />

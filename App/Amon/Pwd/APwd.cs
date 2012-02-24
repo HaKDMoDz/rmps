@@ -18,7 +18,6 @@ using Me.Amon.Pwd._Log;
 using Me.Amon.Pwd.Pad;
 using Me.Amon.Pwd.Pro;
 using Me.Amon.Pwd.Wiz;
-using Me.Amon.Uc;
 using Me.Amon.User;
 using Me.Amon.User.Auth;
 using Me.Amon.Util;
@@ -89,10 +88,14 @@ namespace Me.Amon.Pwd
             #endregion
 
             #region 视图
+            HSplit.SplitterDistance = _ViewModel.HSplitDistance;
             HSplit.Panel1Collapsed = !_ViewModel.NavPaneVisible;
             TmiNavPane.Checked = _ViewModel.NavPaneVisible;
+
+            VSplit.SplitterDistance = _ViewModel.VSplitDistance;
             VSplit.Panel1Collapsed = !_ViewModel.CatTreeVisible;
             TmiCatView.Checked = _ViewModel.CatTreeVisible;
+
             VSplit.Panel2Collapsed = !_ViewModel.KeyListVisible;
             TmiKeyList.Checked = _ViewModel.KeyListVisible;
 
@@ -255,14 +258,7 @@ namespace Me.Amon.Pwd
                     key.Icon = BeanUtil.NaN32;
                 }
 
-                if (CharUtil.IsValidateHash(key.GtdId))
-                {
-                    key.Hint = _ViewModel.HintImage;
-                }
-                else
-                {
-                    key.Hint = BeanUtil.NaN16;
-                }
+                key.Hint = CharUtil.IsValidateHash(key.GtdId) ? Resources.Hint : BeanUtil.NaN16;
             }
             data.Dispose();
         }
@@ -836,17 +832,17 @@ namespace Me.Amon.Pwd
 
         private void TmiMenuBar_Click(object sender, EventArgs e)
         {
-            SetMenuVisible(false);
+            SetMenuBarVisible(false);
         }
 
         private void TmiToolBar_Click(object sender, EventArgs e)
         {
-            SetToolVisible(!TsTool.Visible);
+            SetToolBarVisible(!TsTool.Visible);
         }
 
         private void TmiEchoBar_Click(object sender, EventArgs e)
         {
-            SetEchoVisible(!SsEcho.Visible);
+            SetEchoBarVisible(!SsEcho.Visible);
         }
 
         private void TmiKeyGuid_Click(object sender, EventArgs e)
@@ -1180,17 +1176,17 @@ namespace Me.Amon.Pwd
 
         private void TsbMenu_Click(object sender, EventArgs e)
         {
-            SetMenuVisible(!TmMenu.Visible);
+            SetMenuBarVisible(!TmMenu.Visible);
         }
 
         private void TsbTool_Click(object sender, EventArgs e)
         {
-            SetToolVisible(false);
+            SetToolBarVisible(false);
         }
 
         private void TsbEcho_Click(object sender, EventArgs e)
         {
-            SetEchoVisible(!SsEcho.Visible);
+            SetEchoBarVisible(!SsEcho.Visible);
         }
 
         private void TsbSync_Click(object sender, EventArgs e)
@@ -1713,25 +1709,31 @@ namespace Me.Amon.Pwd
             LbKeyList.Refresh();
         }
 
-        private void SetMenuVisible(bool visible)
+        private void SetMenuBarVisible(bool visible)
         {
             TmMenu.Visible = visible;
             TmiMenuBar.Checked = visible;
             TsbMenuBar.Checked = visible;
+
+            _ViewModel.MenuBarVisible = visible;
         }
 
-        private void SetToolVisible(bool visible)
+        private void SetToolBarVisible(bool visible)
         {
             TsTool.Visible = visible;
             TmiToolBar.Checked = visible;
             TsbToolBar.Checked = visible;
+
+            _ViewModel.ToolBarVisible = visible;
         }
 
-        private void SetEchoVisible(bool visible)
+        private void SetEchoBarVisible(bool visible)
         {
             SsEcho.Visible = visible;
             TmiEchoBar.Checked = visible;
             TsbEchoBar.Checked = visible;
+
+            _ViewModel.EchoBarVisible = visible;
         }
 
         private void SetCatTreeVisible(bool visible)
@@ -1744,6 +1746,8 @@ namespace Me.Amon.Pwd
             {
                 VSplit.Panel1Collapsed = !visible;
                 TmiCatView.Checked = visible;
+
+                _ViewModel.CatTreeVisible = visible;
             }
         }
 
@@ -1757,6 +1761,8 @@ namespace Me.Amon.Pwd
             {
                 VSplit.Panel2Collapsed = !visible;
                 TmiKeyList.Checked = visible;
+
+                _ViewModel.KeyListVisible = visible;
             }
         }
 
@@ -1764,6 +1770,8 @@ namespace Me.Amon.Pwd
         {
             HSplit.Panel1Collapsed = !visible;
             TmiNavPane.Checked = visible;
+
+            _ViewModel.NavPaneVisible = visible;
         }
 
         private void SetFindBarVisible(bool visible)
@@ -1771,6 +1779,8 @@ namespace Me.Amon.Pwd
             TpGrid.RowStyles[0].Height = visible ? 32 : 0;
             FbFind.Visible = visible;
             TmiFindBar.Checked = visible;
+
+            _ViewModel.FindBarVisible = visible;
         }
 
         #region 类别处理
@@ -2355,6 +2365,12 @@ namespace Me.Amon.Pwd
 
         private void ExitForm()
         {
+            _ViewModel.WindowLocX = Location.X;
+            _ViewModel.WindowLocY = Location.Y;
+            _ViewModel.WindowDimW = Width;
+            _ViewModel.WindowDimH = Height;
+            _ViewModel.Save();
+
             Close();
         }
         #endregion

@@ -821,7 +821,7 @@
             // 
             this.HSplit.Panel2.Controls.Add(this.TpGrid);
             this.HSplit.Size = new System.Drawing.Size(560, 334);
-            this.HSplit.SplitterDistance = 200;
+            this.HSplit.SplitterDistance = 186;
             this.HSplit.TabIndex = 0;
             this.HSplit.TabStop = false;
             // 
@@ -839,8 +839,8 @@
             // VSplit.Panel2
             // 
             this.VSplit.Panel2.Controls.Add(this.LbKeyList);
-            this.VSplit.Size = new System.Drawing.Size(200, 334);
-            this.VSplit.SplitterDistance = 160;
+            this.VSplit.Size = new System.Drawing.Size(186, 334);
+            this.VSplit.SplitterDistance = 167;
             this.VSplit.TabIndex = 0;
             this.VSplit.TabStop = false;
             // 
@@ -853,7 +853,7 @@
             this.TvCatTree.Location = new System.Drawing.Point(0, 0);
             this.TvCatTree.Name = "TvCatTree";
             this.TvCatTree.SelectedImageIndex = 0;
-            this.TvCatTree.Size = new System.Drawing.Size(200, 160);
+            this.TvCatTree.Size = new System.Drawing.Size(186, 167);
             this.TvCatTree.TabIndex = 0;
             this.TvCatTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvCatTree_AfterSelect);
             // 
@@ -938,7 +938,7 @@
             this.LbKeyList.ItemHeight = 30;
             this.LbKeyList.Location = new System.Drawing.Point(0, 0);
             this.LbKeyList.Name = "LbKeyList";
-            this.LbKeyList.Size = new System.Drawing.Size(200, 170);
+            this.LbKeyList.Size = new System.Drawing.Size(186, 163);
             this.LbKeyList.TabIndex = 0;
             this.LbKeyList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.LbKeyList_DrawItem);
             this.LbKeyList.SelectedIndexChanged += new System.EventHandler(this.LbKeyList_SelectedIndexChanged);
@@ -1139,7 +1139,7 @@
             this.TpGrid.RowCount = 2;
             this.TpGrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
             this.TpGrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TpGrid.Size = new System.Drawing.Size(356, 334);
+            this.TpGrid.Size = new System.Drawing.Size(370, 334);
             this.TpGrid.TabIndex = 0;
             // 
             // TsTool

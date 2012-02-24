@@ -19,7 +19,10 @@ namespace Me.Amon.Uc
             if (key != null)
             {
                 dict[key] = new Item { V = value };
-                keys.Add(key);
+                if (!keys.Contains(key))
+                {
+                    keys.Add(key);
+                }
             }
         }
 

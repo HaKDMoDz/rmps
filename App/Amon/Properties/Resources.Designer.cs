@@ -81,6 +81,13 @@ namespace Me.Amon.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Hint {
+            get {
+                object obj = ResourceManager.GetObject("Hint", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Loading {
             get {
                 object obj = ResourceManager.GetObject("Loading", resourceCulture);
