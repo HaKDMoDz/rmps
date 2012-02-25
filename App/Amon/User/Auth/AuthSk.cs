@@ -32,7 +32,7 @@ namespace Me.Amon.User.Auth
             get { return this; }
         }
 
-        public void DoSignAc()
+        public void DoAuthAc()
         {
         }
 

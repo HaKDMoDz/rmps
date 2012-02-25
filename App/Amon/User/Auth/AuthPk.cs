@@ -1,5 +1,16 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.IO;
+using System.Net;
+using System.Security.Cryptography;
+using System.Text;
+using System.Windows.Forms;
+using System.Xml;
 using Me.Amon.Model;
+using Me.Amon.Util;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Crypto.Encodings;
+using Org.BouncyCastle.Crypto.Engines;
+using Org.BouncyCastle.OpenSsl;
 
 namespace Me.Amon.User.Auth
 {
@@ -10,6 +21,8 @@ namespace Me.Amon.User.Auth
     {
         private AuthAc _AuthAc;
         private UserModel _UserModel;
+        private string _OldPass;
+        private string _NewPass;
 
         #region 构造函数
         public AuthPk()
@@ -32,26 +45,29 @@ namespace Me.Amon.User.Auth
             get { return this; }
         }
 
-        public void DoSignAc()
+        public void DoAuthAc()
         {
-            string oldPass = TbOldPass.Text;
-            if (string.IsNullOrEmpty(oldPass))
+            #region 已有口令
+            _OldPass = TbOldPass.Text;
+            if (string.IsNullOrEmpty(_OldPass))
             {
                 _AuthAc.ShowAlert("请输入已有口令！");
                 TbOldPass.Focus();
                 return;
             }
             TbOldPass.Text = "";
+            #endregion
 
-            string newPass = TbNewPass1.Text;
-            if (string.IsNullOrEmpty(newPass))
+            #region 新口令
+            _NewPass = TbNewPass1.Text;
+            if (string.IsNullOrEmpty(_NewPass))
             {
                 _AuthAc.ShowAlert("请输入登录口令！");
                 TbNewPass1.Focus();
                 return;
             }
 
-            if (newPass.Length < 4)
+            if (_NewPass.Length < 4)
             {
                 _AuthAc.ShowAlert("登录口令不能少于4个字符！");
                 TbNewPass1.Text = "";
@@ -60,7 +76,7 @@ namespace Me.Amon.User.Auth
                 return;
             }
 
-            if (newPass != TbNewPass2.Text)
+            if (_NewPass != TbNewPass2.Text)
             {
                 TbNewPass2.Text = "";
                 _AuthAc.ShowAlert("您两次输入的口令不一致！");
@@ -69,17 +85,21 @@ namespace Me.Amon.User.Auth
             }
             TbNewPass1.Text = "";
             TbNewPass2.Text = "";
+            #endregion
 
-            if (!_UserModel.CaSignPk(oldPass, newPass))
+            // 单机用户
+            if (_UserModel.Code == IEnv.USER_AMON)
             {
-                oldPass = null;
-                newPass = null;
-                _AuthAc.ShowAlert("登录口令修改失败，请重试！");
-                TbOldPass.Focus();
+                dd();
                 return;
             }
 
-            _AuthAc.Close();
+            // 在线注册
+            WebClient client = new WebClient();
+            client.Headers["Content-type"] = "application/x-www-form-urlencoded";
+            client.Encoding = Encoding.UTF8;
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignUpV_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=rsa&m=0");
         }
 
         public void DoCancel()
@@ -87,5 +107,130 @@ namespace Me.Amon.User.Auth
             _AuthAc.Close();
         }
         #endregion
+
+        private void SignUpV_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                _AuthAc.HideWaiting();
+                _AuthAc.ShowAlert(e.Error.Message);
+                return;
+            }
+
+            string xml = e.Result;
+            string t = null;
+            string d = null;
+            using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
+            {
+                if (xml.IndexOf("<Error>") > 0)
+                {
+                    _AuthAc.HideWaiting();
+                    reader.ReadToFollowing("Error");
+                    _AuthAc.ShowAlert(reader.ReadElementContentAsString());
+                    return;
+                }
+
+                if (reader.Name == "t" || reader.ReadToFollowing("t"))
+                {
+                    t = reader.ReadElementContentAsString();
+                }
+
+                if (reader.Name == "k" || reader.ReadToFollowing("k"))
+                {
+                    d = reader.ReadElementContentAsString();
+                }
+            }
+
+            switch (IEnv.SERVER_TYPE)
+            {
+                case "NET":
+                    d = Net(d);
+                    break;
+                case "PHP":
+                    d = Php(d);
+                    break;
+                default:
+                    break;
+            }
+
+            WebClient client = new WebClient();
+            client.Headers["Content-type"] = "application/x-www-form-urlencoded";
+            client.Encoding = Encoding.UTF8;
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignUpS_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=spk&m=" + t + "&d=" + d);
+        }
+
+        private void SignUpS_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                _AuthAc.HideWaiting();
+                _AuthAc.ShowAlert(e.Error.Message);
+                return;
+            }
+
+            string xml = e.Result;
+            using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
+            {
+                if (xml.IndexOf("<Error>") > 0)
+                {
+                    _AuthAc.HideWaiting();
+                    reader.ReadToFollowing("Error");
+                    _AuthAc.ShowAlert(reader.ReadElementContentAsString());
+                    return;
+                }
+
+                if (!_UserModel.WsSignPk(_OldPass, _NewPass, reader))
+                {
+                    _AuthAc.HideWaiting();
+                    _AuthAc.ShowAlert("注册用户失败，请稍后重试！");
+                    TbOldPass.Focus();
+                }
+            }
+        }
+
+        private void dd()
+        {
+            if (!_UserModel.CaSignPk(_OldPass, _NewPass))
+            {
+                _OldPass = null;
+                _NewPass = null;
+                _AuthAc.ShowAlert("登录口令修改失败，请重试！");
+                TbOldPass.Focus();
+                return;
+            }
+
+            _OldPass = null;
+            _NewPass = null;
+
+            _AuthAc.Close();
+        }
+
+        private string Net(string t)
+        {
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+            rsa.FromXmlString(t);
+
+            byte[] b = Encoding.UTF8.GetBytes(_UserModel.Code + '\n' + _OldPass + '\n' + _NewPass);
+            b = rsa.Encrypt(b, false);
+            return HttpUtil.ToBase64String(b);
+        }
+
+        private string Php(string t)
+        {
+            AsymmetricKeyParameter keyPair;
+            using (StringReader sr = new StringReader(t))
+            {
+                PemReader pr = new PemReader(sr);
+                keyPair = (AsymmetricKeyParameter)pr.ReadObject();
+            }
+
+            IAsymmetricBlockCipher rsa = new Pkcs1Encoding(new RsaEngine());
+            rsa.Init(true, keyPair);
+
+            byte[] b = Encoding.UTF8.GetBytes(_UserModel.Code + '\n' + _OldPass + '\n' + _NewPass);
+            b = rsa.ProcessBlock(b, 0, b.Length);
+            return HttpUtil.ToBase64String(b);
+        }
     }
 }

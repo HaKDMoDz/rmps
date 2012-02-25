@@ -76,5 +76,9 @@
 
         public const string VALUE_TRUE = "true";
         public const string VALUE_FALSE = "false";
+
+        public const string USER_AMON = "A0000000";
+        public const string USER_DEMO = "A0000010";
+        public const string USER_TEST = "A0000020";
     }
 }

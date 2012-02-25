@@ -144,10 +144,11 @@ namespace Me.Amon.Model
             // 摘要用户登录信息
             _Info = Digest(Name, newPwds);
 
-            string data = Convert.ToBase64String(t);
+            string main = Convert.ToBase64String(t);
             Uc.Properties prop = new Uc.Properties();
+            prop.Load(Home + IEnv.AMON_CFG);
             prop.Set(IEnv.AMON_CFG_INFO, _Info);
-            prop.Set(IEnv.AMON_CFG_MAIN, data);
+            prop.Set(IEnv.AMON_CFG_MAIN, main);
             prop.Save(Home + IEnv.AMON_CFG);
 
             return true;
@@ -312,7 +313,7 @@ namespace Me.Amon.Model
 
             _Name = name;
             _Code = code;
-            _Info = pass;
+            _Info = info;
             Look = "Default";
             Feel = "Default";
             return true;
@@ -412,6 +413,79 @@ namespace Me.Amon.Model
             _Info = info;
             Look = "Default";
             Feel = "Default";
+            return true;
+        }
+
+        public bool WsSignPk(string oldPass, string newPass, XmlReader reader)
+        {
+            string code = null;
+            if (reader.Name == "Code" || reader.ReadToFollowing("Code"))
+            {
+                code = reader.ReadElementContentAsString();
+            }
+            if (!CharUtil.IsValidateCode(code))
+            {
+                return false;
+            }
+
+            string data = null;
+            if (reader.Name == "Data" || reader.ReadToFollowing("Data"))
+            {
+                data = reader.ReadElementContentAsString();
+            }
+            if (!Regex.IsMatch(data, "^[A-Za-z0-9+/=]{256,}$"))
+            {
+                return false;
+            }
+
+            string info = null;
+            if (reader.Name == "Info" || reader.ReadToFollowing("Info"))
+            {
+                info = reader.ReadElementContentAsString();
+            }
+            if (!Regex.IsMatch(info, "^[A-Za-z0-9+/=]{44}$"))
+            {
+                return false;
+            }
+
+            string main = null;
+            if (reader.Name == "Main" || reader.ReadToFollowing("Main"))
+            {
+                main = reader.ReadElementContentAsString();
+            }
+            if (!Regex.IsMatch(main, "^[A-Za-z0-9+/=]{108}$"))
+            {
+                return false;
+            }
+
+            string safe = null;
+            if (reader.Name == "Safe" || reader.ReadToFollowing("Safe"))
+            {
+                safe = reader.ReadElementContentAsString();
+            }
+
+            _Data = Convert.FromBase64String(data);
+            if (info != Digest(oldPass, newPass))
+            {
+                return false;
+            }
+
+            if (!Decrypt(oldPass, code, newPass, main))
+            {
+                return false;
+            }
+
+            Uc.Properties prop = new Uc.Properties();
+            prop.Load(_Home + IEnv.AMON_CFG);
+            prop.Set(IEnv.AMON_CFG_NAME, oldPass);
+            prop.Set(IEnv.AMON_CFG_CODE, code);
+            prop.Set(IEnv.AMON_CFG_DATA, data);
+            prop.Set(IEnv.AMON_CFG_INFO, info);
+            prop.Set(IEnv.AMON_CFG_MAIN, main);
+            prop.Set(IEnv.AMON_CFG_SAFE, safe);
+            prop.Save(_Home + IEnv.AMON_CFG);
+
+            _Info = info;
             return true;
         }
         #endregion

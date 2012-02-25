@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Model;
+using Me.Amon.Properties;
 using Me.Amon.User.Auth;
 using Me.Amon.Util;
 
@@ -51,6 +52,20 @@ namespace Me.Amon.User
         {
             MessageBox.Show(this, alert, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        public void ShowWaiting()
+        {
+            PbMenu.Image = Resources.Waiting;
+            BtOk.Enabled = false;
+            BtNo.Enabled = false;
+        }
+
+        public void HideWaiting()
+        {
+            PbMenu.Image = Resources.Menu;
+            BtNo.Enabled = true;
+            BtOk.Enabled = true;
+        }
         #endregion
 
         #region 私有函数
@@ -59,7 +74,7 @@ namespace Me.Amon.User
         {
             if (_AuthPk == null)
             {
-                _AuthPk = new AuthPk();
+                _AuthPk = new AuthPk(this, _UserModel);
             }
             ShowView(_AuthPk);
             _AuthAc = _AuthPk;
@@ -73,7 +88,7 @@ namespace Me.Amon.User
         {
             if (_AuthSk == null)
             {
-                _AuthSk = new AuthSk();
+                _AuthSk = new AuthSk(this, _UserModel);
             }
             ShowView(_AuthSk);
             _AuthAc = _AuthSk;
@@ -110,6 +125,18 @@ namespace Me.Amon.User
             Point p = Location;
             p.Y += (step >> 1);
             Location = p;
+        }
+        #endregion
+
+        #region 事件处理
+        private void BtOk_Click(object sender, System.EventArgs e)
+        {
+            _AuthAc.DoAuthAc();
+        }
+
+        private void BtNo_Click(object sender, System.EventArgs e)
+        {
+            _AuthAc.DoCancel();
         }
         #endregion
     }

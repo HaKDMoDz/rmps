@@ -307,7 +307,7 @@ namespace Me.Amon.User.Sign
             IAsymmetricBlockCipher rsa = new Pkcs1Encoding(new RsaEngine());
             rsa.Init(true, keyPair);
 
-            byte[] b = Encoding.UTF8.GetBytes(_Pass);
+            byte[] b = Encoding.UTF8.GetBytes(_Name + '\n' + _Mail + '\n' + _Pass);
             b = rsa.ProcessBlock(b, 0, b.Length);
             return HttpUtil.ToBase64String(b);
         }

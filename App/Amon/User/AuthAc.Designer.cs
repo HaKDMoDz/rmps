@@ -64,6 +64,7 @@
             this.BtOk.TabIndex = 3;
             this.BtOk.Text = "确定(&O)";
             this.BtOk.UseVisualStyleBackColor = true;
+            this.BtOk.Click += new System.EventHandler(this.BtOk_Click);
             // 
             // BtNo
             // 
@@ -75,6 +76,7 @@
             this.BtNo.TabIndex = 4;
             this.BtNo.Text = "取消(&C)";
             this.BtNo.UseVisualStyleBackColor = true;
+            this.BtNo.Click += new System.EventHandler(this.BtNo_Click);
             // 
             // AuthAc
             // 

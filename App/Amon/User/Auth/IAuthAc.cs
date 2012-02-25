@@ -8,7 +8,7 @@ namespace Me.Amon.User.Auth
 
         Control Control { get; }
 
-        void DoSignAc();
+        void DoAuthAc();
 
         void DoCancel();
     }
