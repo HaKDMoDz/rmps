@@ -2,7 +2,9 @@
 {
     public enum EAuthAc
     {
-        AuthPk,
+        AuthOl,
+        AuthUl,
+        AuthPc,
         AuthSk
     }
 }

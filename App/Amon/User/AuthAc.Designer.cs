@@ -49,11 +49,14 @@
             // PbMenu
             // 
             this.PbMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.PbMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PbMenu.Image = global::Me.Amon.Properties.Resources.Menu;
             this.PbMenu.Location = new System.Drawing.Point(12, 62);
             this.PbMenu.Name = "PbMenu";
             this.PbMenu.Size = new System.Drawing.Size(16, 16);
             this.PbMenu.TabIndex = 2;
             this.PbMenu.TabStop = false;
+            this.PbMenu.Click += new System.EventHandler(this.PbMenu_Click);
             // 
             // BtOk
             // 

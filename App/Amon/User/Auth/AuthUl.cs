@@ -1,23 +1,21 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using Me.Amon.Model;
 
 namespace Me.Amon.User.Auth
 {
-    /// <summary>
-    /// 安全口令
-    /// </summary>
-    public partial class AuthSk : UserControl, IAuthAc
+    public partial class AuthUl : UserControl, IAuthAc
     {
         private AuthAc _AuthAc;
         private UserModel _UserModel;
 
         #region 构造函数
-        public AuthSk()
+        public AuthUl()
         {
             InitializeComponent();
         }
 
-        public AuthSk(AuthAc authAc, UserModel userModel)
+        public AuthUl(AuthAc authAc, UserModel userModel)
         {
             _AuthAc = authAc;
             _UserModel = userModel;
@@ -27,7 +25,7 @@ namespace Me.Amon.User.Auth
         #endregion
 
         #region 接口实现
-        public Control Control
+        public new Control Control
         {
             get { return this; }
         }
@@ -38,11 +36,23 @@ namespace Me.Amon.User.Auth
 
         public void DoCancel()
         {
-            _AuthAc.Close();
         }
 
         public void ShowMenu(Control control, int x, int y)
         {
+            CmMenu.Show(control, x, y);
+        }
+        #endregion
+
+        #region 事件处理
+        private void MiAuthOl_Click(object sender, EventArgs e)
+        {
+            _AuthAc.ShowView(EAuthAc.AuthOl);
+        }
+
+        private void MiAuthPc_Click(object sender, EventArgs e)
+        {
+            _AuthAc.ShowView(EAuthAc.AuthPc);
         }
         #endregion
     }

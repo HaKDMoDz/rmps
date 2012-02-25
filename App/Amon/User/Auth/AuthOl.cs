@@ -17,7 +17,7 @@ namespace Me.Amon.User.Auth
     /// <summary>
     /// 登录口令
     /// </summary>
-    public partial class AuthPk : UserControl, IAuthAc
+    public partial class AuthOl : UserControl, IAuthAc
     {
         private AuthAc _AuthAc;
         private UserModel _UserModel;
@@ -25,12 +25,12 @@ namespace Me.Amon.User.Auth
         private string _NewPass;
 
         #region 构造函数
-        public AuthPk()
+        public AuthOl()
         {
             InitializeComponent();
         }
 
-        public AuthPk(AuthAc authAc, UserModel userModel)
+        public AuthOl(AuthAc authAc, UserModel userModel)
         {
             _AuthAc = authAc;
             _UserModel = userModel;
@@ -87,13 +87,6 @@ namespace Me.Amon.User.Auth
             TbNewPass2.Text = "";
             #endregion
 
-            // 单机用户
-            if (_UserModel.Code == IEnv.USER_AMON)
-            {
-                dd();
-                return;
-            }
-
             // 在线注册
             WebClient client = new WebClient();
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
@@ -105,6 +98,11 @@ namespace Me.Amon.User.Auth
         public void DoCancel()
         {
             _AuthAc.Close();
+        }
+
+        public void ShowMenu(Control control, int x, int y)
+        {
+            CmMenu.Show(control, x, y);
         }
         #endregion
 
@@ -189,23 +187,6 @@ namespace Me.Amon.User.Auth
             }
         }
 
-        private void dd()
-        {
-            if (!_UserModel.CaSignPk(_OldPass, _NewPass))
-            {
-                _OldPass = null;
-                _NewPass = null;
-                _AuthAc.ShowAlert("登录口令修改失败，请重试！");
-                TbOldPass.Focus();
-                return;
-            }
-
-            _OldPass = null;
-            _NewPass = null;
-
-            _AuthAc.Close();
-        }
-
         private string Net(string t)
         {
             RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
@@ -232,5 +213,17 @@ namespace Me.Amon.User.Auth
             b = rsa.ProcessBlock(b, 0, b.Length);
             return HttpUtil.ToBase64String(b);
         }
+
+        #region 事件处理
+        private void MiAuthUl_Click(object sender, EventArgs e)
+        {
+            _AuthAc.ShowView(EAuthAc.AuthUl);
+        }
+
+        private void MiAuthPc_Click(object sender, EventArgs e)
+        {
+            _AuthAc.ShowView(EAuthAc.AuthPc);
+        }
+        #endregion
     }
 }

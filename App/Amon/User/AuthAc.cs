@@ -39,8 +39,14 @@ namespace Me.Amon.User
         {
             switch (authAc)
             {
-                case EAuthAc.AuthPk:
-                    ShowAuthPk();
+                case EAuthAc.AuthOl:
+                    ShowAuthOl();
+                    break;
+                case EAuthAc.AuthUl:
+                    ShowAuthUl();
+                    break;
+                case EAuthAc.AuthPc:
+                    ShowAuthPc();
                     break;
                 case EAuthAc.AuthSk:
                     ShowAuthSk();
@@ -69,17 +75,45 @@ namespace Me.Amon.User
         #endregion
 
         #region 私有函数
-        private AuthPk _AuthPk;
-        private void ShowAuthPk()
+        private AuthOl _AuthPk;
+        private void ShowAuthOl()
         {
             if (_AuthPk == null)
             {
-                _AuthPk = new AuthPk(this, _UserModel);
+                _AuthPk = new AuthOl(this, _UserModel);
             }
             ShowView(_AuthPk);
             _AuthAc = _AuthPk;
 
-            Text = "修改登录口令";
+            Text = "联机修改";
+            BtOk.Text = "确定(&O)";
+        }
+
+        private AuthUl _AuthUl;
+        private void ShowAuthUl()
+        {
+            if (_AuthUl == null)
+            {
+                _AuthUl = new AuthUl(this, _UserModel);
+            }
+            ShowView(_AuthUl);
+            _AuthAc = _AuthUl;
+
+            Text = "脱机修改";
+            BtOk.Text = "确定(&O)";
+        }
+
+        private AuthPc _AuthPc;
+        private void ShowAuthPc()
+        {
+            if (_AuthPc == null)
+            {
+                _AuthPc = new AuthPc(this, _UserModel);
+            }
+            ShowView(_AuthPc);
+            _AuthAc = _AuthPc;
+
+            Text = "单机修改";
             BtOk.Text = "确定(&O)";
         }
 
@@ -137,6 +171,11 @@ namespace Me.Amon.User
         private void BtNo_Click(object sender, System.EventArgs e)
         {
             _AuthAc.DoCancel();
+        }
+
+        private void PbMenu_Click(object sender, System.EventArgs e)
+        {
+            _AuthAc.ShowMenu(PbMenu, 0, PbMenu.Height);
         }
         #endregion
     }

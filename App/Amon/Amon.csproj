@@ -570,6 +570,18 @@
     <Compile Include="Sec\Uw\Text.Designer.cs">
       <DependentUpon>Text.cs</DependentUpon>
     </Compile>
+    <Compile Include="User\Auth\AuthPc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User\Auth\AuthPc.Designer.cs">
+      <DependentUpon>AuthPc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\Auth\AuthUl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User\Auth\AuthUl.Designer.cs">
+      <DependentUpon>AuthUl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uw\HotKeys.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -647,11 +659,11 @@
     <Compile Include="User\Sign\SignFk.Designer.cs">
       <DependentUpon>SignFk.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\Auth\AuthPk.cs">
+    <Compile Include="User\Auth\AuthOl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="User\Auth\AuthPk.Designer.cs">
-      <DependentUpon>AuthPk.cs</DependentUpon>
+    <Compile Include="User\Auth\AuthOl.Designer.cs">
+      <DependentUpon>AuthOl.cs</DependentUpon>
     </Compile>
     <Compile Include="User\Auth\AuthSk.cs">
       <SubType>UserControl</SubType>
@@ -889,6 +901,12 @@
     <EmbeddedResource Include="Sec\Uw\Text.resx">
       <DependentUpon>Text.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="User\Auth\AuthPc.resx">
+      <DependentUpon>AuthPc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\Auth\AuthUl.resx">
+      <DependentUpon>AuthUl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Uw\HotKeys.resx">
       <DependentUpon>HotKeys.cs</DependentUpon>
     </EmbeddedResource>
@@ -916,8 +934,8 @@
     <EmbeddedResource Include="User\AuthRc.resx">
       <DependentUpon>AuthRc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\Auth\AuthPk.resx">
-      <DependentUpon>AuthPk.cs</DependentUpon>
+    <EmbeddedResource Include="User\Auth\AuthOl.resx">
+      <DependentUpon>AuthOl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\SignAc.resx">
       <DependentUpon>SignAc.cs</DependentUpon>

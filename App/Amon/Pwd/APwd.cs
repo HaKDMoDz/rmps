@@ -1097,7 +1097,7 @@ namespace Me.Amon.Pwd
         {
             AuthAc authAc = new AuthAc(_UserModel);
             authAc.InitOnce();
-            authAc.ShowView(EAuthAc.AuthPk);
+            authAc.ShowView(EAuthAc.AuthPc);
             authAc.ShowDialog(this);
         }
 

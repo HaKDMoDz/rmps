@@ -11,5 +11,7 @@ namespace Me.Amon.User.Auth
         void DoAuthAc();
 
         void DoCancel();
+
+        void ShowMenu(Control control, int x, int y);
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.User.Auth
 {
-    partial class AuthPk
+    partial class AuthOl
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,12 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.LbOldPass = new System.Windows.Forms.Label();
             this.TbOldPass = new System.Windows.Forms.TextBox();
             this.LbNewPass1 = new System.Windows.Forms.Label();
             this.TbNewPass1 = new System.Windows.Forms.TextBox();
             this.LbNewPass2 = new System.Windows.Forms.Label();
             this.TbNewPass2 = new System.Windows.Forms.TextBox();
+            this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MiAuthOl = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiAuthUl = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiAuthPc = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // LbOldPass
@@ -87,7 +93,38 @@
             this.TbNewPass2.TabIndex = 5;
             this.TbNewPass2.UseSystemPasswordChar = true;
             // 
-            // AuthPk
+            // CmMenu
+            // 
+            this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MiAuthOl,
+            this.MiAuthUl,
+            this.MiAuthPc});
+            this.CmMenu.Name = "CmMenu";
+            this.CmMenu.Size = new System.Drawing.Size(153, 92);
+            // 
+            // MiAuthOl
+            // 
+            this.MiAuthOl.Checked = true;
+            this.MiAuthOl.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.MiAuthOl.Name = "MiAuthOl";
+            this.MiAuthOl.Size = new System.Drawing.Size(152, 22);
+            this.MiAuthOl.Text = "联机修改(&O)";
+            // 
+            // MiAuthUl
+            // 
+            this.MiAuthUl.Name = "MiAuthUl";
+            this.MiAuthUl.Size = new System.Drawing.Size(152, 22);
+            this.MiAuthUl.Text = "脱机修改(&U)";
+            this.MiAuthUl.Click += new System.EventHandler(this.MiAuthUl_Click);
+            // 
+            // MiAuthPc
+            // 
+            this.MiAuthPc.Name = "MiAuthPc";
+            this.MiAuthPc.Size = new System.Drawing.Size(152, 22);
+            this.MiAuthPc.Text = "单机修改(&P)";
+            this.MiAuthPc.Click += new System.EventHandler(this.MiAuthPc_Click);
+            // 
+            // AuthOl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -97,8 +134,9 @@
             this.Controls.Add(this.LbNewPass1);
             this.Controls.Add(this.TbOldPass);
             this.Controls.Add(this.LbOldPass);
-            this.Name = "AuthPk";
+            this.Name = "AuthOl";
             this.Size = new System.Drawing.Size(226, 81);
+            this.CmMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -112,5 +150,9 @@
         private System.Windows.Forms.TextBox TbNewPass1;
         private System.Windows.Forms.Label LbNewPass2;
         private System.Windows.Forms.TextBox TbNewPass2;
+        private System.Windows.Forms.ContextMenuStrip CmMenu;
+        private System.Windows.Forms.ToolStripMenuItem MiAuthOl;
+        private System.Windows.Forms.ToolStripMenuItem MiAuthUl;
+        private System.Windows.Forms.ToolStripMenuItem MiAuthPc;
     }
 }
