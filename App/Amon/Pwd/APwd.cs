@@ -113,6 +113,8 @@ namespace Me.Amon.Pwd
             SsEcho.Visible = _ViewModel.EchoBarVisible;
             TmiEchoBar.Checked = _ViewModel.EchoBarVisible;
             TsbEchoBar.Checked = _ViewModel.EchoBarVisible;
+
+            Location = new Point(_ViewModel.WindowLocX, _ViewModel.WindowLocY);
             #endregion
 
             ShowAWiz();

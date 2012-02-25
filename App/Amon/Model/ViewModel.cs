@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
 using Me.Amon.Util;
 
 namespace Me.Amon.Model
@@ -45,7 +46,7 @@ namespace Me.Amon.Model
             }
             set
             {
-                _HSplitDistance = value < 0 ? 120 : value;
+                _HSplitDistance = value < 0 ? 200 : value;
             }
         }
 
@@ -58,7 +59,7 @@ namespace Me.Amon.Model
             }
             set
             {
-                _VSplitDistance = value < 0 ? 120 : value;
+                _VSplitDistance = value < 0 ? 160 : value;
             }
         }
 
@@ -132,25 +133,33 @@ namespace Me.Amon.Model
                 VSplitDistance = int.Parse(tmp);
             }
 
+            tmp = _UserProp.Get("DimW", "600");
+            if (CharUtil.IsValidateLong(tmp))
+            {
+                WindowDimW = int.Parse(tmp);
+            }
+            tmp = _UserProp.Get("DimH", "450");
+            if (CharUtil.IsValidateLong(tmp))
+            {
+                WindowDimH = int.Parse(tmp);
+            }
             tmp = _UserProp.Get("LocX", "");
             if (CharUtil.IsValidateLong(tmp))
             {
                 WindowLocX = int.Parse(tmp);
+            }
+            else
+            {
+                WindowLocX = (SystemInformation.WorkingArea.Width - WindowDimW) >> 1;
             }
             tmp = _UserProp.Get("LocY", "");
             if (CharUtil.IsValidateLong(tmp))
             {
                 WindowLocY = int.Parse(tmp);
             }
-            tmp = _UserProp.Get("DimW", "");
-            if (CharUtil.IsValidateLong(tmp))
+            else
             {
-                WindowDimW = int.Parse(tmp);
-            }
-            tmp = _UserProp.Get("DimH", "");
-            if (CharUtil.IsValidateLong(tmp))
-            {
-                WindowDimH = int.Parse(tmp);
+                WindowLocY = (SystemInformation.WorkingArea.Height - WindowDimH) >> 1;
             }
             #endregion
         }

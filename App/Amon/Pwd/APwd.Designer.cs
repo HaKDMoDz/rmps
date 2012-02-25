@@ -1317,6 +1317,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "APwd";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "阿木密码箱";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.APwd_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.APwd_KeyDown);
