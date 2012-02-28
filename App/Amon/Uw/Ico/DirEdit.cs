@@ -7,7 +7,7 @@ namespace Me.Amon.Uw.Ico
 {
     public partial class DirEdit : UserControl
     {
-        private IcoEditor _IcoEdit;
+        private IcoSeeker _IcoSeeker;
         private Dir _Item;
 
         public DirEdit()
@@ -15,9 +15,9 @@ namespace Me.Amon.Uw.Ico
             InitializeComponent();
         }
 
-        public DirEdit(IcoEditor icoEdit)
+        public DirEdit(IcoSeeker icoSeeker)
         {
-            _IcoEdit = icoEdit;
+            _IcoSeeker = icoSeeker;
 
             InitializeComponent();
         }
@@ -28,8 +28,8 @@ namespace Me.Amon.Uw.Ico
             TbTips.MaxLength = DBConst.AICO0105_SIZE;
             TbMemo.MaxLength = DBConst.AICO0107_SIZE;
 
-            _IcoEdit.AcceptButton = BtUpdate;
-            _IcoEdit.CancelButton = BtCancel;
+            _IcoSeeker.AcceptButton = BtUpdate;
+            _IcoSeeker.CancelButton = BtCancel;
         }
 
         public void ShowData(Dir item)
@@ -50,12 +50,12 @@ namespace Me.Amon.Uw.Ico
             }
             _Item.Name = name;
             _Item.Tips = TbTips.Text;
-            _IcoEdit.UpdateDir(_Item);
+            _IcoSeeker.UpdateDir(_Item);
         }
 
         private void BtCancel_Click(object sender, EventArgs e)
         {
-            _IcoEdit.Close();
+            _IcoSeeker.Close();
         }
     }
 }

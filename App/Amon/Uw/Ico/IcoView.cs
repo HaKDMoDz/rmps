@@ -4,12 +4,13 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Util;
+using Me.Amon.Bean;
 
 namespace Me.Amon.Uw.Ico
 {
     public partial class IcoView : UserControl
     {
-        private IcoEditor _IcoEdit;
+        private IcoSeeker _IcoSeeker;
 
         #region 构造函数
         public IcoView()
@@ -17,19 +18,19 @@ namespace Me.Amon.Uw.Ico
             InitializeComponent();
         }
 
-        public IcoView(IcoEditor icoEdit)
+        public IcoView(IcoSeeker icoEdit)
         {
-            _IcoEdit = icoEdit;
+            _IcoSeeker = icoEdit;
 
             InitializeComponent();
         }
 
         public void InitOnce()
         {
-            IlIco.ImageSize = new Size(_IcoEdit.IcoSize, _IcoEdit.IcoSize);
+            IlIco.ImageSize = new Size(_IcoSeeker.IcoSize, _IcoSeeker.IcoSize);
 
-            _IcoEdit.AcceptButton = BtChoose;
-            _IcoEdit.CancelButton = BtCancel;
+            _IcoSeeker.AcceptButton = BtChoose;
+            _IcoSeeker.CancelButton = BtCancel;
         }
         #endregion
 
@@ -43,16 +44,15 @@ namespace Me.Amon.Uw.Ico
                 return;
             }
 
-            _IcoEdit.SelectedItem = LvIco.SelectedItems[0];
-            _IcoEdit.DialogResult = DialogResult.OK;
-            _IcoEdit.Close();
+            var item = LvIco.SelectedItems[0];
+            _IcoSeeker.CallBack(new Img { Key = item.ImageKey, Large = IlIco.Images[item.ImageKey] });
         }
 
         private void BtAppend_Click(object sender, EventArgs e)
         {
             OpenFileDialog fd = new OpenFileDialog();
             fd.Multiselect = false;
-            fd.Filter = "PNG文件|*.png|JPG文件|*.jpg|BMP文件|*.bmp";
+            fd.Filter = "图像文件|*.png;*.jpg;*.gif;*.bmp|PNG文件|*.png|JPG文件|*.jpg|BMP文件|*.bmp";
             if (DialogResult.OK != fd.ShowDialog(this))
             {
                 return;
@@ -69,7 +69,7 @@ namespace Me.Amon.Uw.Ico
             }
             using (Image img = Image.FromFile(fd.FileName))
             {
-                int size = _IcoEdit.IcoSize;
+                int size = _IcoSeeker.IcoSize;
 
                 Bitmap bmp = new Bitmap(size, size);
                 int w = img.Width;
@@ -88,18 +88,19 @@ namespace Me.Amon.Uw.Ico
                     g.Dispose();
                 }
                 string key = HashUtil.UtcTimeInHex(true);
-                bmp.Save(_IcoEdit.HomeDir + key + ".png", ImageFormat.Png);
+                bmp.Save(_IcoSeeker.HomeDir + key + ".png", ImageFormat.Png);
                 IlIco.Images.Add(key, img);
-                _IcoEdit.SelectedItem = new ListViewItem((LvIco.Items.Count + 1).ToString(), key);
-                LvIco.Items.Add(_IcoEdit.SelectedItem);
+
                 LvIco.SelectedItems.Clear();
-                _IcoEdit.SelectedItem.Selected = true;
+                var item = new ListViewItem((LvIco.Items.Count + 1).ToString(), key);
+                LvIco.Items.Add(item);
+                item.Selected = true;
             }
         }
 
         private void BtCancel_Click(object sender, EventArgs e)
         {
-            _IcoEdit.Close();
+            _IcoSeeker.Close();
         }
         #endregion
 

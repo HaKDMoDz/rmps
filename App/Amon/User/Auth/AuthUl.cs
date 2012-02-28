@@ -25,7 +25,7 @@ namespace Me.Amon.User.Auth
         #endregion
 
         #region 接口实现
-        public new Control Control
+        public Control Control
         {
             get { return this; }
         }

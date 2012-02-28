@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bean\Att\CallAtt.cs" />
+    <Compile Include="Bean\Img.cs" />
     <Compile Include="Ce\Wrapper.cs" />
     <Compile Include="Da\DBAccess.cs" />
     <Compile Include="Da\DCAccess.cs" />
@@ -99,6 +100,12 @@
     </Compile>
     <Compile Include="IApp.cs" />
     <Compile Include="Da\DBConst.cs" />
+    <Compile Include="Ico\AIco.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ico\AIco.Designer.cs">
+      <DependentUpon>AIco.cs</DependentUpon>
+    </Compile>
     <Compile Include="IEnv.cs" />
     <Compile Include="Info.cs">
       <SubType>Form</SubType>
@@ -594,23 +601,11 @@
     <Compile Include="Uw\Error.Designer.cs">
       <DependentUpon>Error.cs</DependentUpon>
     </Compile>
-    <Compile Include="Uw\IcoEditor.cs">
+    <Compile Include="Uw\IcoSeeker.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Uw\IcoEditor.Designer.cs">
-      <DependentUpon>IcoEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Uw\Ico\DirEdit.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Uw\Ico\DirEdit.Designer.cs">
-      <DependentUpon>DirEdit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Uw\Ico\IcoView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Uw\Ico\IcoView.Designer.cs">
-      <DependentUpon>IcoView.cs</DependentUpon>
+    <Compile Include="Uw\IcoSeeker.Designer.cs">
+      <DependentUpon>IcoSeeker.cs</DependentUpon>
     </Compile>
     <Compile Include="Uc\Item.cs" />
     <Compile Include="Uc\Properties.cs" />
@@ -634,6 +629,24 @@
     </Compile>
     <Compile Include="Util\SafeUtil.cs">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Uw\Ico\DirEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Uw\Ico\DirEdit.Designer.cs">
+      <DependentUpon>DirEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Ico\IcoView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Uw\Ico\IcoView.Designer.cs">
+      <DependentUpon>IcoView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\PngSeeker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\PngSeeker.Designer.cs">
+      <DependentUpon>PngSeeker.cs</DependentUpon>
     </Compile>
     <Compile Include="Uw\UdcEditor.cs">
       <SubType>Form</SubType>
@@ -735,6 +748,9 @@
     <Compile Include="Uw\Waiting.Designer.cs">
       <DependentUpon>Waiting.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Ico\AIco.resx">
+      <DependentUpon>AIco.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Info.resx">
       <DependentUpon>Info.cs</DependentUpon>
     </EmbeddedResource>
@@ -913,8 +929,11 @@
     <EmbeddedResource Include="Uw\Error.resx">
       <DependentUpon>Error.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Uw\IcoEditor.resx">
-      <DependentUpon>IcoEditor.cs</DependentUpon>
+    <EmbeddedResource Include="Uw\IcoSeeker.resx">
+      <DependentUpon>IcoSeeker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\Sign\SignOl.resx">
+      <DependentUpon>SignOl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\Ico\DirEdit.resx">
       <DependentUpon>DirEdit.cs</DependentUpon>
@@ -922,8 +941,8 @@
     <EmbeddedResource Include="Uw\Ico\IcoView.resx">
       <DependentUpon>IcoView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\Sign\SignOl.resx">
-      <DependentUpon>SignOl.cs</DependentUpon>
+    <EmbeddedResource Include="Uw\PngSeeker.resx">
+      <DependentUpon>PngSeeker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\UdcEditor.resx">
       <DependentUpon>UdcEditor.cs</DependentUpon>

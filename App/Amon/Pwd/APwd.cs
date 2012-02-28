@@ -1126,8 +1126,8 @@ namespace Me.Amon.Pwd
 
         private void TmiIco_Click(object sender, EventArgs e)
         {
-            IcoEditor edit = new IcoEditor(_UserModel, _DataModel.KeyDir);
-            edit.InitOnce(24, true);
+            IcoSeeker edit = new IcoSeeker(_UserModel, _DataModel.KeyDir);
+            edit.InitOnce(32);
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
@@ -1342,39 +1342,10 @@ namespace Me.Amon.Pwd
 
         private void CmiEditIcon_Click(object sender, EventArgs e)
         {
-            IcoEditor editor = new IcoEditor(_UserModel, _DataModel.CatDir);
-            editor.InitOnce(16, false);
+            PngSeeker editor = new PngSeeker(_UserModel, _DataModel.CatDir);
+            editor.InitOnce(16);
+            editor.CallBackHandler = new AmonHandler<Img>(ChangeImg);
             BeanUtil.CenterToParent(editor, this);
-            if (DialogResult.OK != editor.ShowDialog(this))
-            {
-                return;
-            }
-
-            string key = editor.SelectedItem.ImageKey;
-            if (!CharUtil.IsValidateHash(key))
-            {
-                key = "0";
-            }
-            if (!IlCatTree.Images.ContainsKey(key))
-            {
-                IlCatTree.Images.Add(key, BeanUtil.ReadImage(editor.HomeDir + key + ".png", BeanUtil.NaN16));
-            }
-            _LastNode.ImageKey = key;
-            _LastNode.SelectedImageKey = key;
-
-            Cat cat = _LastNode.Tag as Cat;
-            if (cat == null)
-            {
-                return;
-            }
-
-            var dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.ACAT0200);
-            dba.AddParam(DBConst.ACAT0207, key);
-            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
-            dba.AddWhere(DBConst.ACAT0203, cat.Id);
-            dba.ExecuteUpdate();
         }
         #endregion
 
@@ -1634,6 +1605,34 @@ namespace Me.Amon.Pwd
             TmiViewPro.Checked = false;
             TmiViewWiz.Checked = false;
             TmiViewPad.Checked = true;
+        }
+
+        private void ChangeImg(Img img)
+        {
+            if (!CharUtil.IsValidateHash(img.Key))
+            {
+                img.Key = "0";
+            }
+            if (!IlCatTree.Images.ContainsKey(img.Key))
+            {
+                IlCatTree.Images.Add(img.Key, img.Large);
+            }
+            _LastNode.ImageKey = img.Key;
+            _LastNode.SelectedImageKey = img.Key;
+
+            Cat cat = _LastNode.Tag as Cat;
+            if (cat == null)
+            {
+                return;
+            }
+
+            var dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(DBConst.ACAT0200);
+            dba.AddParam(DBConst.ACAT0207, img.Key);
+            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
+            dba.AddWhere(DBConst.ACAT0203, cat.Id);
+            dba.ExecuteUpdate();
         }
 
         private void ChangeCat(string catId)
@@ -2363,6 +2362,12 @@ namespace Me.Amon.Pwd
                 }
             }
             Visible = false;
+
+            _ViewModel.WindowLocX = Location.X;
+            _ViewModel.WindowLocY = Location.Y;
+            _ViewModel.WindowDimW = Width;
+            _ViewModel.WindowDimH = Height;
+            _ViewModel.Save();
         }
 
         private void ExitForm()
