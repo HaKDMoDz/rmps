@@ -52,7 +52,7 @@ namespace Me.Amon.Uw.Ico
         {
             OpenFileDialog fd = new OpenFileDialog();
             fd.Multiselect = false;
-            fd.Filter = "图像文件|*.png;*.jpg;*.gif;*.bmp|PNG文件|*.png|JPG文件|*.jpg|BMP文件|*.bmp";
+            fd.Filter = IEnv.FILE_IMG;
             if (DialogResult.OK != fd.ShowDialog(this))
             {
                 return;

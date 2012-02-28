@@ -503,19 +503,19 @@ namespace Me.Amon.Pwd
                 // 菜单栏隐现
                 if (e.KeyCode == Keys.M)
                 {
-                    TmMenu.Visible = !TmMenu.Visible;
+                    SetMenuBarVisible(!TmMenu.Visible);
                     return;
                 }
                 // 工具栏隐现
                 if (e.KeyCode == Keys.T)
                 {
-                    TsTool.Visible = !TsTool.Visible;
+                    SetToolBarVisible(!TsTool.Visible);
                     return;
                 }
                 // 状态栏隐现
                 if (e.KeyCode == Keys.E)
                 {
-                    SsEcho.Visible = !SsEcho.Visible;
+                    SetEchoBarVisible(!SsEcho.Visible);
                     return;
                 }
                 // 查找隐现
@@ -1344,8 +1344,9 @@ namespace Me.Amon.Pwd
         {
             PngSeeker editor = new PngSeeker(_UserModel, _DataModel.CatDir);
             editor.InitOnce(16);
-            editor.CallBackHandler = new AmonHandler<Img>(ChangeImg);
+            editor.CallBackHandler = new AmonHandler<Img>(ChangeImgByKey);
             BeanUtil.CenterToParent(editor, this);
+            editor.ShowDialog(this);
         }
         #endregion
 
@@ -1494,7 +1495,7 @@ namespace Me.Amon.Pwd
         {
             CatView view = new CatView(_UserModel);
             view.Init(IlCatTree);
-            view.CallBack = new AmonHandler<string>(ChangeCat);
+            view.CallBack = new AmonHandler<string>(ChangeCatByKey);
             BeanUtil.CenterToParent(view, this);
             view.ShowDialog(this);
         }
@@ -1607,7 +1608,7 @@ namespace Me.Amon.Pwd
             TmiViewPad.Checked = true;
         }
 
-        private void ChangeImg(Img img)
+        private void ChangeImgByKey(Img img)
         {
             if (!CharUtil.IsValidateHash(img.Key))
             {
@@ -1615,7 +1616,7 @@ namespace Me.Amon.Pwd
             }
             if (!IlCatTree.Images.ContainsKey(img.Key))
             {
-                IlCatTree.Images.Add(img.Key, img.Large);
+                IlCatTree.Images.Add(img.Key, img.Small);
             }
             _LastNode.ImageKey = img.Key;
             _LastNode.SelectedImageKey = img.Key;
@@ -1635,7 +1636,7 @@ namespace Me.Amon.Pwd
             dba.ExecuteUpdate();
         }
 
-        private void ChangeCat(string catId)
+        private void ChangeCatByKey(string catId)
         {
             if (string.IsNullOrEmpty(catId))
             {

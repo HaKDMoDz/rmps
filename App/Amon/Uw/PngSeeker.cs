@@ -62,58 +62,14 @@ namespace Me.Amon.Uw
 
         private void BtAppend_Click(object sender, EventArgs e)
         {
-            OpenFileDialog fd = new OpenFileDialog();
-            fd.Multiselect = false;
-            fd.Filter = "PNG文件|*.png|JPG文件|*.jpg|BMP文件|*.bmp";
-            if (DialogResult.OK != fd.ShowDialog(this))
-            {
-                return;
-            }
-            if (!File.Exists(fd.FileName))
-            {
-                MessageBox.Show("您选择的文件不存在！");
-                return;
-            }
-            string name = Path.GetFileName(fd.FileName).ToLower();
-            if (!name.EndsWith(".png") && !name.EndsWith(".jpg") && !name.EndsWith(".bmp"))
-            {
-                return;
-            }
-            using (Image img = Image.FromFile(fd.FileName))
-            {
-                int size = _IcoSize;
 
-                Bitmap bmp = new Bitmap(size, size);
-                int w = img.Width;
-                int h = img.Height;
-                if (w != size && h != size)
-                {
-                    double rw = (double)size / w;
-                    double rh = (double)size / h;
-                    double r = rw <= rh ? rw : rh;
-                    w = (int)(r * w);
-                    h = (int)(r * h);
-
-                    Graphics g = Graphics.FromImage(bmp);
-                    g.DrawImage(img, (size - w) >> 1, (size - h) >> 1, w, h);
-                    g.Flush();
-                    g.Dispose();
-                }
-                string key = HashUtil.UtcTimeInHex(true);
-                bmp.Save(_HomeDir + key + ".png", ImageFormat.Png);
-                IlPng.Images.Add(key, img);
-                var item = new ListViewItem((LvPng.Items.Count + 1).ToString(), key);
-                LvPng.Items.Add(item);
-                LvPng.SelectedItems.Clear();
-                item.Selected = true;
-            }
         }
 
         private void BtSelect_Click(object sender, EventArgs e)
         {
             if (LvPng.SelectedItems.Count < 1)
             {
-                MessageBox.Show("请选择");
+                Main.ShowAlert("请选择一个图标！");
                 LvPng.Focus();
                 return;
             }
@@ -128,6 +84,21 @@ namespace Me.Amon.Uw
 
         private void BtCancel_Click(object sender, EventArgs e)
         {
+            Close();
+        }
+
+        private void LvPng_DoubleClick(object sender, EventArgs e)
+        {
+            if (LvPng.SelectedItems.Count != 1)
+            {
+                return;
+            }
+
+            if (CallBackHandler != null)
+            {
+                var item = LvPng.SelectedItems[0];
+                CallBackHandler.Invoke(new Img { Key = item.ImageKey, Small = IlPng.Images[item.ImageKey] });
+            }
             Close();
         }
     }

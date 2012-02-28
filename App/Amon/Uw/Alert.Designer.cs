@@ -47,11 +47,11 @@
             // TbInfo
             // 
             this.TbInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TbInfo.Location = new System.Drawing.Point(50, 12);
+            this.TbInfo.Location = new System.Drawing.Point(50, 25);
             this.TbInfo.Multiline = true;
             this.TbInfo.Name = "TbInfo";
             this.TbInfo.ReadOnly = true;
-            this.TbInfo.Size = new System.Drawing.Size(212, 59);
+            this.TbInfo.Size = new System.Drawing.Size(212, 46);
             this.TbInfo.TabIndex = 1;
             this.TbInfo.TabStop = false;
             // 

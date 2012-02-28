@@ -53,7 +53,6 @@
             this.LbInfo.Name = "LbInfo";
             this.LbInfo.Size = new System.Drawing.Size(214, 32);
             this.LbInfo.TabIndex = 1;
-            this.LbInfo.Text = "label1";
             this.LbInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TbInfo
