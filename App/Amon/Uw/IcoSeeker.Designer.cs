@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Uw
 {
-    partial class IcoEditor
+    partial class IcoSeeker
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IcoEditor));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IcoSeeker));
             this.LsDir = new System.Windows.Forms.ListBox();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MiAppend = new System.Windows.Forms.ToolStripMenuItem();
             this.MiUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.MiDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.IlIco = new System.Windows.Forms.ImageList(this.components);
             this.CmMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,17 +80,23 @@
             this.MiDelete.Text = "删除分类(&D)";
             this.MiDelete.Click += new System.EventHandler(this.MiDelete_Click);
             // 
-            // IcoEdit
+            // IlIco
+            // 
+            this.IlIco.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.IlIco.ImageSize = new System.Drawing.Size(16, 16);
+            this.IlIco.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // IcoSeeker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(394, 273);
+            this.ClientSize = new System.Drawing.Size(398, 273);
             this.Controls.Add(this.LsDir);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "IcoEdit";
+            this.Name = "IcoSeeker";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "图标管理";
@@ -105,5 +112,6 @@
         private System.Windows.Forms.ToolStripMenuItem MiAppend;
         private System.Windows.Forms.ToolStripMenuItem MiUpdate;
         private System.Windows.Forms.ToolStripMenuItem MiDelete;
+        private System.Windows.Forms.ImageList IlIco;
     }
 }

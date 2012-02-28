@@ -5,13 +5,14 @@ using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Bean;
 using Me.Amon.Da;
+using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Util;
 using Me.Amon.Uw.Ico;
 
 namespace Me.Amon.Uw
 {
-    public partial class IcoEditor : Form
+    public partial class IcoSeeker : Form
     {
         private UserModel _UserModel;
         private DirEdit _DirEdit;
@@ -23,69 +24,59 @@ namespace Me.Amon.Uw
         private int _IcoSize;
 
         #region 构造函数
-        public IcoEditor()
+        public IcoSeeker()
         {
             InitializeComponent();
         }
 
-        public IcoEditor(UserModel userModel, string rootDir)
+        public IcoSeeker(UserModel userModel, string rootDir)
         {
             _UserModel = userModel;
             _RootDir = rootDir;
+            _HomeDir = rootDir;
 
             InitializeComponent();
         }
 
-        public void InitOnce(int icoSize, bool dirVisible)
+        public void InitOnce(int icoSize)
         {
             _IcoSize = icoSize;
 
             ShowIcoView();
 
-            if (dirVisible)
+            LsDir.Items.Add(new Dir { Id = "0", Name = "默认分类", Tips = "默认分类" });
+
+            DBAccess dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(DBConst.AICO0100);
+            dba.AddColumn(DBConst.AICO0103);
+            dba.AddColumn(DBConst.AICO0104);
+            dba.AddColumn(DBConst.AICO0105);
+            dba.AddColumn(DBConst.AICO0107);
+            dba.AddWhere(DBConst.AICO0102, _UserModel.Code);
+            dba.AddSort(DBConst.AICO0101, true);
+
+            using (DataTable dt = dba.ExecuteSelect())
             {
-                LsDir.Items.Add(new Dir { Id = "0", Name = "默认分类", Tips = "默认分类" });
-
-                DBAccess dba = _UserModel.DBAccess;
-                dba.ReInit();
-                dba.AddTable(DBConst.AICO0100);
-                dba.AddColumn(DBConst.AICO0103);
-                dba.AddColumn(DBConst.AICO0104);
-                dba.AddColumn(DBConst.AICO0105);
-                dba.AddColumn(DBConst.AICO0107);
-                dba.AddWhere(DBConst.AICO0102, _UserModel.Code);
-                dba.AddSort(DBConst.AICO0101, true);
-
-                using (DataTable dt = dba.ExecuteSelect())
+                foreach (DataRow row in dt.Rows)
                 {
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        Dir item = new Dir();
-                        item.Id = row[DBConst.AICO0103] as string;
-                        item.Name = row[DBConst.AICO0104] as string;
-                        item.Tips = row[DBConst.AICO0105] as string;
-                        item.Memo = row[DBConst.AICO0107] as string;
-                        LsDir.Items.Add(item);
-                    }
+                    Dir item = new Dir();
+                    item.Id = row[DBConst.AICO0103] as string;
+                    item.Name = row[DBConst.AICO0104] as string;
+                    item.Tips = row[DBConst.AICO0105] as string;
+                    item.Memo = row[DBConst.AICO0107] as string;
+                    LsDir.Items.Add(item);
                 }
-
-                LsDir.SelectedIndex = 0;
-            }
-            else
-            {
-                Width -= _IcoView.Location.X - LsDir.Location.X;
-                _IcoView.Location = LsDir.Location;
-                LsDir.Visible = false;
             }
 
-            _HomeDir = _RootDir;
-            _IcoView.ShowData(_RootDir);
+            LsDir.SelectedIndex = 0;
+            _IcoView.ShowData(_HomeDir);
         }
         #endregion
 
         public int IcoSize { get { return _IcoSize; } }
         public string HomeDir { get { return _HomeDir; } }
-        public ListViewItem SelectedItem { get; set; }
+        public AmonHandler<Img> CallBackHandler { get; set; }
 
         #region 事件处理
         #region 界面事件
@@ -182,7 +173,7 @@ namespace Me.Amon.Uw
                 _DirEdit = new DirEdit(this);
                 _DirEdit.Init();
                 _DirEdit.Location = new Point(138, 12);
-                _DirEdit.Size = new Size(244, 249);
+                _DirEdit.Size = new Size(248, 249);
                 _DirEdit.TabIndex = 1;
             }
             if (_IcoView != null)
@@ -200,7 +191,7 @@ namespace Me.Amon.Uw
                 _IcoView = new IcoView(this);
                 _IcoView.InitOnce();
                 _IcoView.Location = new Point(138, 12);
-                _IcoView.Size = new Size(244, 249);
+                _IcoView.Size = new Size(248, 249);
                 _IcoView.TabIndex = 1;
             }
             if (_DirEdit != null)
@@ -212,7 +203,7 @@ namespace Me.Amon.Uw
         }
         #endregion
 
-        #region 仅有函数
+        #region 公有函数
         public void UpdateDir(Dir item)
         {
             DBAccess dba = _UserModel.DBAccess;
@@ -244,6 +235,15 @@ namespace Me.Amon.Uw
                 LsDir.Items.Add(item);
                 LsDir.SelectedItem = item;
             }
+        }
+
+        public void CallBack(Img img)
+        {
+            if (CallBackHandler != null)
+            {
+                CallBackHandler.Invoke(img);
+            }
+            Close();
         }
         #endregion
     }
