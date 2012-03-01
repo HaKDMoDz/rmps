@@ -155,7 +155,7 @@ namespace Me.Amon.User.Auth
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
             client.Encoding = Encoding.UTF8;
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignUpS_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=spk&m=" + t + "&d=" + d);
+            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "c=" + _UserModel.Code + "&o=spk&t=" + t + "&d=" + d);
         }
 
         private void SignUpS_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)

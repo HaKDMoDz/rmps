@@ -52,6 +52,7 @@
             this.TbData.ReadOnly = true;
             this.TbData.Size = new System.Drawing.Size(350, 177);
             this.TbData.TabIndex = 1;
+            this.TbData.Text = "欢迎使用《阿木密码箱》！";
             // 
             // BeanInfo
             // 

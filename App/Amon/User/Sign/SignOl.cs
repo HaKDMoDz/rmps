@@ -28,6 +28,7 @@ namespace Me.Amon.User.Sign
         private Uc.Properties _Prop;
         private SignAc _SignAc;
 
+        #region 构造函数
         public SignOl()
         {
             InitializeComponent();
@@ -42,6 +43,7 @@ namespace Me.Amon.User.Sign
 
             TbPath.Text = IEnv.DATA_DIR + Path.DirectorySeparatorChar;
         }
+        #endregion
 
         #region 接口实现
         public Control Control
@@ -241,7 +243,7 @@ namespace Me.Amon.User.Sign
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
             client.Encoding = Encoding.UTF8;
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignUpS_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=sup&m=" + t + "&d=" + d);
+            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=sup&t=" + t + "&d=" + d);
         }
 
         private void SignUpS_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -264,7 +266,27 @@ namespace Me.Amon.User.Sign
                     return;
                 }
 
-                if (!_UserModel.WsSignIn(_Root, _Name, _Pass, reader))
+                string code = null;
+                if (reader.Name == "Code" || reader.ReadToFollowing("Code"))
+                {
+                    code = reader.ReadElementContentAsString();
+                }
+                if (!CharUtil.IsValidateCode(code))
+                {
+                    _SignAc.HideWaiting();
+                    _SignAc.ShowAlert("注册用户失败，请稍后重试！");
+                    return;
+                }
+                _Root += code + Path.DirectorySeparatorChar;
+                if (Directory.Exists(_Root))
+                {
+                    _SignAc.HideWaiting();
+                    _SignAc.ShowAlert(string.Format("指定路径下已存在名为 {0} 的目录！", code));
+                    return;
+                }
+                Directory.CreateDirectory(_Root);
+
+                if (!_UserModel.WsSignIn(_Root, code, _Name, _Pass, reader))
                 {
                     _SignAc.HideWaiting();
                     _SignAc.ShowAlert("注册用户失败，请稍后重试！");

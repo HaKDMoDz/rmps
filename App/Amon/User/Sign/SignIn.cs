@@ -243,7 +243,24 @@ namespace Me.Amon.User.Sign
                     return;
                 }
 
-                if (!_UserModel.WsSignIn(_Home, _Name, _Pass, reader))
+                string code = null;
+                if (reader.Name == "Code" || reader.ReadToFollowing("Code"))
+                {
+                    code = reader.ReadElementContentAsString();
+                }
+                if (!CharUtil.IsValidateCode(code))
+                {
+                    _SignAc.HideWaiting();
+                    _SignAc.ShowAlert("注册用户失败，请稍后重试！");
+                    return;
+                }
+                _Home += code + Path.DirectorySeparatorChar;
+                if (!Directory.Exists(_Home))
+                {
+                    Directory.CreateDirectory(_Home);
+                }
+
+                if (!_UserModel.WsSignIn(_Home, code, _Name, _Pass, reader))
                 {
                     _SignAc.HideWaiting();
                     _SignAc.ShowAlert("请确认您输入的登录用户及登录口令是否正确！");

@@ -99,7 +99,6 @@
             this.TmiLib = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiUcs = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiIco = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiUserSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.TmuSkin = new System.Windows.Forms.ToolStripMenuItem();
             this.TmuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiHelp = new System.Windows.Forms.ToolStripMenuItem();
@@ -687,8 +686,7 @@
             this.TmiUserSep0,
             this.TmiLib,
             this.TmiUcs,
-            this.TmiIco,
-            this.TmiUserSep1});
+            this.TmiIco});
             this.TmuUser.Name = "TmuUser";
             this.TmuUser.Size = new System.Drawing.Size(56, 21);
             this.TmuUser.Text = "用户(&I)";
@@ -732,11 +730,6 @@
             this.TmiIco.Size = new System.Drawing.Size(164, 22);
             this.TmiIco.Text = "图标管理(&I)";
             this.TmiIco.Click += new System.EventHandler(this.TmiIco_Click);
-            // 
-            // TmiUserSep1
-            // 
-            this.TmiUserSep1.Name = "TmiUserSep1";
-            this.TmiUserSep1.Size = new System.Drawing.Size(161, 6);
             // 
             // TmuSkin
             // 
@@ -1413,7 +1406,6 @@
         private System.Windows.Forms.ToolStripMenuItem TmiLib;
         private System.Windows.Forms.ToolStripMenuItem TmiUcs;
         private System.Windows.Forms.ToolStripMenuItem TmiIco;
-        private System.Windows.Forms.ToolStripSeparator TmiUserSep1;
         private System.Windows.Forms.ToolStripMenuItem TmuSkin;
         private System.Windows.Forms.ToolStripMenuItem TmuHelp;
         private System.Windows.Forms.ToolStripMenuItem TmiHelp;

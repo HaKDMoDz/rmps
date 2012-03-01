@@ -15,6 +15,7 @@ namespace Me.Amon.User.Sign
         private UserModel _UserModel;
         private SignAc _SignAc;
 
+        #region 构造函数
         public SignUl()
         {
             InitializeComponent();
@@ -29,6 +30,7 @@ namespace Me.Amon.User.Sign
 
             TbPath.Text = IEnv.DATA_DIR + Path.DirectorySeparatorChar;
         }
+        #endregion
 
         #region 接口实现
         public Control Control
@@ -100,7 +102,27 @@ namespace Me.Amon.User.Sign
                         return;
                     }
 
-                    if (!_UserModel.WsSignIn(path, name, pass, reader))
+                    string code = null;
+                    if (reader.Name == "Code" || reader.ReadToFollowing("Code"))
+                    {
+                        code = reader.ReadElementContentAsString();
+                    }
+                    if (!CharUtil.IsValidateCode(code))
+                    {
+                        _SignAc.HideWaiting();
+                        _SignAc.ShowAlert("注册用户失败，请稍后重试！");
+                        return;
+                    }
+                    path += code + Path.DirectorySeparatorChar;
+                    if (Directory.Exists(path))
+                    {
+                        _SignAc.HideWaiting();
+                        _SignAc.ShowAlert(string.Format("指定路径下已存在名为 {0} 的目录！", code));
+                        return;
+                    }
+                    Directory.CreateDirectory(path);
+
+                    if (!_UserModel.WsSignIn(path, code, name, pass, reader))
                     {
                         _SignAc.ShowAlert("请确认您输入的令牌数据是否有效！");
                         TbPath.Focus();

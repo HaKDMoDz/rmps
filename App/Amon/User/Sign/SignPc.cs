@@ -12,13 +12,11 @@ namespace Me.Amon.User.Sign
     /// </summary>
     public partial class SignPc : UserControl, ISignAc
     {
-        private string _Name;
-        private string _Pass;
-        private string _Root;
         private UserModel _UserModel;
         private Uc.Properties _Prop;
         private SignAc _SignAc;
 
+        #region 构造函数
         public SignPc()
         {
             InitializeComponent();
@@ -33,6 +31,7 @@ namespace Me.Amon.User.Sign
 
             TbPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
         }
+        #endregion
 
         #region 接口实现
         public Control Control
@@ -43,50 +42,50 @@ namespace Me.Amon.User.Sign
         public void DoSignAc()
         {
             #region 用户判断
-            _Name = TbName.Text;
-            if (string.IsNullOrEmpty(_Name))
+            string name = TbName.Text;
+            if (string.IsNullOrEmpty(name))
             {
                 _SignAc.ShowAlert("请输入用户名！");
                 TbName.Focus();
                 return;
             }
 
-            if (_Name.Length < 5)
+            if (name.Length < 5)
             {
                 _SignAc.ShowAlert("用户名不能少于5个字符！");
                 TbName.Focus();
                 return;
             }
 
-            if (!Regex.IsMatch(_Name, "^\\w{5,}$"))
+            if (!Regex.IsMatch(name, "^\\w{5,}$"))
             {
                 _SignAc.ShowAlert("用户名中含有非法字符！");
                 TbName.Focus();
                 return;
             }
 
-            _Name = _Name.ToLower();
+            name = name.ToLower();
             _Prop = new Uc.Properties();
             _Prop.Load(IEnv.AMON_SYS);
-            string home = _Prop.Get(string.Format(IEnv.AMON_SYS_HOME, _Name));
+            string home = _Prop.Get(string.Format(IEnv.AMON_SYS_HOME, name));
             if (!string.IsNullOrEmpty(home))
             {
-                _SignAc.ShowAlert(string.Format("已存在名为 {0} 的用户，请尝试其它用户名！", _Name));
+                _SignAc.ShowAlert(string.Format("已存在名为 {0} 的用户，请尝试其它用户名！", name));
                 return;
             }
             #endregion
 
             #region 口令判断
-            _Pass = TbPass1.Text;
+            string pass = TbPass1.Text;
             TbPass1.Text = "";
-            if (string.IsNullOrEmpty(_Pass))
+            if (string.IsNullOrEmpty(pass))
             {
                 _SignAc.ShowAlert("请输入登录口令！");
                 TbPass1.Focus();
                 return;
             }
 
-            if (_Pass.Length < 4)
+            if (pass.Length < 4)
             {
                 _SignAc.ShowAlert("登录口令不能少于4个字符！");
                 TbPass1.Text = "";
@@ -95,7 +94,7 @@ namespace Me.Amon.User.Sign
                 return;
             }
 
-            if (_Pass != TbPass2.Text)
+            if (pass != TbPass2.Text)
             {
                 TbPass2.Text = "";
                 _SignAc.ShowAlert("您两次输入的口令不一致！");
@@ -106,16 +105,26 @@ namespace Me.Amon.User.Sign
             #endregion
 
             #region 路径判断
-            _Root = TbPath.Text;
-            if (string.IsNullOrEmpty(_Root))
+            home = TbPath.Text;
+            if (string.IsNullOrEmpty(home))
             {
                 _SignAc.ShowAlert("请选择您的数据存放目录！");
                 BtPath.Focus();
                 return;
             }
-            if (_Root[_Root.Length - 1] != Path.DirectorySeparatorChar)
+            if (home[home.Length - 1] != Path.DirectorySeparatorChar)
             {
-                _Root += Path.DirectorySeparatorChar;
+                home += Path.DirectorySeparatorChar;
+            }
+            #endregion
+
+            #region 代码
+            string code = IEnv.USER_AMON;
+            home += code + Path.DirectorySeparatorChar;
+            if (Directory.Exists(home))
+            {
+                _SignAc.ShowAlert(string.Format("指定路径下已存在名为 {0} 的目录！", code));
+                return;
             }
             #endregion
 
@@ -124,16 +133,16 @@ namespace Me.Amon.User.Sign
             try
             {
                 // 本地注册
-                if (!_UserModel.CaSignUp(_Root, _Name, _Pass))
+                if (!_UserModel.CaSignUp(home, code, name, pass))
                 {
-                    _Pass = null;
+                    pass = null;
                     _SignAc.HideWaiting();
                     _SignAc.ShowAlert("系统异常，请稍后重试！");
                     return;
                 }
 
-                _Prop.Set(string.Format(IEnv.AMON_SYS_CODE, _Name), _UserModel.Code);
-                _Prop.Set(string.Format(IEnv.AMON_SYS_HOME, _Name), _UserModel.Home);
+                _Prop.Set(string.Format(IEnv.AMON_SYS_CODE, name), _UserModel.Code);
+                _Prop.Set(string.Format(IEnv.AMON_SYS_HOME, name), _UserModel.Home);
                 _Prop.Save(IEnv.AMON_SYS);
 
                 InitDat();
@@ -193,6 +202,7 @@ namespace Me.Amon.User.Sign
         }
         #endregion
 
+        #region 私有函数
         private void InitDat()
         {
             _UserModel.Init();
@@ -216,5 +226,6 @@ namespace Me.Amon.User.Sign
 
             _SignAc.CallBack(IEnv.IAPP_APWD);
         }
+        #endregion
     }
 }

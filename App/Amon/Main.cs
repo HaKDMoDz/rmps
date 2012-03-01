@@ -540,7 +540,7 @@ namespace Me.Amon
 
         private void ShowAPwd(int view)
         {
-            if (_APwd == null)
+            if (_APwd == null || _APwd.IsDisposed)
             {
                 _APwd = new APwd(_UserModel);
                 _APwd.InitOnce();
@@ -552,7 +552,7 @@ namespace Me.Amon
 
         private void ShowASec(int view)
         {
-            if (_ASec == null)
+            if (_ASec == null || _ASec.IsDisposed)
             {
                 _ASec = new ASec(_UserModel);
                 _ASec.InitOnce();

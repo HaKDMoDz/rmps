@@ -253,9 +253,8 @@ namespace Me.Amon.Model
         /// 用户注册
         /// </summary>
         /// <returns></returns>
-        public bool CaSignUp(string root, string name, string pass)
+        public bool CaSignUp(string root, string code, string name, string pass)
         {
-            string code = "A0000000";
             byte[] k = GenK(name, code, pass);
             byte[] v = GenV(name, code, pass);
 
@@ -335,18 +334,8 @@ namespace Me.Amon.Model
         /// 网络登录
         /// </summary>
         /// <returns></returns>
-        public bool WsSignIn(string root, string name, string pass, XmlReader reader)
+        public bool WsSignIn(string home, string code, string name, string pass, XmlReader reader)
         {
-            string code = null;
-            if (reader.Name == "Code" || reader.ReadToFollowing("Code"))
-            {
-                code = reader.ReadElementContentAsString();
-            }
-            if (!CharUtil.IsValidateCode(code))
-            {
-                return false;
-            }
-
             string data = null;
             if (reader.Name == "Data" || reader.ReadToFollowing("Data"))
             {
@@ -394,11 +383,7 @@ namespace Me.Amon.Model
                 return false;
             }
 
-            _Home = root + code + Path.DirectorySeparatorChar;
-            if (!Directory.Exists(_Home))
-            {
-                Directory.CreateDirectory(_Home);
-            }
+            _Home = home;
             Uc.Properties prop = new Uc.Properties();
             prop.Set(IEnv.AMON_CFG_NAME, name);
             prop.Set(IEnv.AMON_CFG_CODE, code);
