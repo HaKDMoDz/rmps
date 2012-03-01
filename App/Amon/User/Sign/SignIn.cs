@@ -284,6 +284,7 @@ namespace Me.Amon.User.Sign
         private void InitDat()
         {
             _UserModel.Init();
+            BeanUtil.UnZip("Amon.dat", _UserModel.Home);
 
             WebClient client = new WebClient();
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
