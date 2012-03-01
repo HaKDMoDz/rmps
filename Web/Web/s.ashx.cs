@@ -355,18 +355,24 @@ namespace Me.Amon
 
         private void SignUp(HttpContext context, XmlWriter writer)
         {
+            string t = context.Request["t"];
+            if (!CharUtil.IsValidateHash(t))
+            {
+                SendError(writer, "无效的句柄！");
+                return;
+            }
             string d = context.Request["d"];
             if (!CharUtil.IsValidate(d))
             {
-                SendError(writer, "网络异常1，请稍后重试！");
+                SendError(writer, "无效的密文！");
                 return;
             }
 
-            d = Decrypt(HttpUtil.FromBase64String(d));
+            d = Decrypt(t, HttpUtil.FromBase64String(d));
             string[] tmp = d.Split('\n');
             if (tmp.Length != 3)
             {
-                SendError(writer, "网络异常2，请稍后重试！");
+                SendError(writer, "无效的密文！");
                 return;
             }
 
@@ -374,7 +380,7 @@ namespace Me.Amon
             string mail = HttpUtil.Text2Db(tmp[1]);
             string pass = tmp[2];
             UserModel model = new UserModel();
-            if (0 != model.WpSignUp(name, pass, mail))
+            if (IMsg.MSG_SIGNUP_SUCCESS != model.WpSignUp(name, pass, mail))
             {
                 SendError(writer, "系统处理异常，请稍后重试！");
                 return;
@@ -387,25 +393,31 @@ namespace Me.Amon
 
         private void SignPk(HttpContext context, XmlWriter writer)
         {
+            string t = context.Request["t"];
+            if (!CharUtil.IsValidateHash(t))
+            {
+                SendError(writer, "无效的句柄！");
+                return;
+            }
             string d = context.Request["d"];
             if (!CharUtil.IsValidate(d))
             {
-                SendError(writer, "网络异常1，请稍后再试！");
+                SendError(writer, "无效的密文！");
                 return;
             }
 
-            d = Decrypt(HttpUtil.FromBase64String(d));
+            d = Decrypt(t, HttpUtil.FromBase64String(d));
             string[] tmp = d.Split('\n');
             if (tmp.Length != 3)
             {
-                SendError(writer, "网络异常2，请稍后再试！");
+                SendError(writer, "无效的密文！");
                 return;
             }
 
             string name = HttpUtil.Text2Db(tmp[0]);
             string oldPass = tmp[1];
             string newPass = tmp[2];
-            UserModel userModel = UserModel.Current(context.Session);
+            UserModel userModel = new UserModel();
             userModel.WpSignPk(oldPass, newPass);
         }
 
@@ -422,32 +434,81 @@ namespace Me.Amon
         #region 安全处理
         private void ProcessRSA(XmlWriter writer)
         {
+            string t = HashUtil.UtcTimeInHex();
+
             RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
-            string key = rsa.ToXmlString(true);
-            File.WriteAllText("D:\\rsa.key", key);
+
+            DBAccess dba = new DBAccess();
+            dba.AddTable(DBConst.C3010000);
+            dba.AddParam(DBConst.C3010001, t);
+            dba.AddParam(DBConst.C3010002, DBConst.SQL_NOW, false);
+            dba.AddParam(DBConst.C3010003, CharUtil.Text2DB(rsa.ToXmlString(true)));
+            dba.AddParam(DBConst.C3010004, 0);
+            dba.ExecuteInsert();
 
             writer.WriteStartElement("RSA");
-            writer.WriteElementString("t", DateTime.UtcNow.ToFileTime().ToString());
+            writer.WriteElementString("t", t);
             writer.WriteElementString("k", rsa.ToXmlString(false));
             writer.WriteEndElement();
         }
 
-        private byte[] Encrypt(byte[] data)
+        private byte[] Encrypt(string t, byte[] data)
         {
+            DBAccess dba = new DBAccess();
+            dba.AddTable(DBConst.C3010000);
+            dba.AddColumn(DBConst.C3010003);
+            dba.AddWhere(DBConst.C3010001, CharUtil.Text2DB(t));
+            dba.AddWhere(DBConst.C3010004, "0");
+            DataTable dt = dba.ExecuteSelect();
+            if (dt.Rows.Count != 1)
+            {
+                return null;
+            }
+            string key = dt.Rows[0][0] as string;
+
             using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
             {
-                rsa.FromXmlString(File.ReadAllText("D:\\rsa.key"));
-                return rsa.Encrypt(data, false);
+                rsa.FromXmlString(key);
+                data = rsa.Encrypt(data, false);
             }
+
+            dba.ReInit();
+            dba.AddTable(DBConst.C3010000);
+            dba.AddParam(DBConst.C3010004, 1);
+            dba.AddWhere(DBConst.C3010001, CharUtil.Text2DB(t));
+            dba.AddWhere(DBConst.C3010004, "0", false);
+            dba.ExecuteUpdate();
+
+            return data;
         }
 
-        private string Decrypt(byte[] data)
+        private string Decrypt(string t, byte[] data)
         {
+            DBAccess dba = new DBAccess();
+            dba.AddTable(DBConst.C3010000);
+            dba.AddColumn(DBConst.C3010003);
+            dba.AddWhere(DBConst.C3010001, CharUtil.Text2DB(t));
+            dba.AddWhere(DBConst.C3010004, "0", false);
+            DataTable dt = dba.ExecuteSelect();
+            if (dt.Rows.Count != 1)
+            {
+                return null;
+            }
+            string key = dt.Rows[0][0] as string;
+
             using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
             {
-                rsa.FromXmlString(File.ReadAllText("D:\\rsa.key"));
+                rsa.FromXmlString(key);
                 data = rsa.Decrypt(data, false);
             }
+
+            dba.ReInit();
+            dba.AddTable(DBConst.C3010000);
+            dba.AddParam(DBConst.C3010004, 1);
+            dba.AddWhere(DBConst.C3010001, CharUtil.Text2DB(t));
+            dba.AddWhere(DBConst.C3010004, "0", false);
+            dba.ExecuteUpdate();
+
             return Encoding.UTF8.GetString(data);
         }
 
@@ -467,6 +528,7 @@ namespace Me.Amon
         }
         #endregion
 
+        #region 共用函数
         private static void SendError(XmlWriter writer, string error)
         {
             writer.WriteElementString("Error", error);
@@ -481,6 +543,7 @@ namespace Me.Amon
         {
             return Encoding.UTF8.GetBytes(code + "@Amon.Me");
         }
+        #endregion
 
         public bool IsReusable
         {

@@ -62,6 +62,9 @@
     <Content Include="c.aspx" />
     <Content Include="c.html" />
     <Content Include="ClientBin\Amon.xap" />
+    <Content Include="down\Index.aspx" />
+    <Content Include="Images\1.png" />
+    <Content Include="Images\2.png" />
     <Content Include="Index.aspx" />
     <Content Include="logo\amon\favicon.ico" />
     <Content Include="logo\amon\logo.ico" />
@@ -208,6 +211,12 @@
     <Content Include="logo\msec\logo64.png" />
     <Content Include="logo\msec\logo96.png" />
     <Content Include="logo\msec\logo_2.svg" />
+    <Content Include="Images\ajaxload.gif" />
+    <Content Include="Images\left.gif" />
+    <Content Include="Images\pause.gif" />
+    <Content Include="Images\play.gif" />
+    <Content Include="Images\right.gif" />
+    <Content Include="Scripts\simplegallery.js" />
     <Content Include="Silverlight.js" />
     <Content Include="sql\Index.aspx" />
     <Content Include="sql\sql.sql" />
@@ -239,6 +248,13 @@
     </Compile>
     <Compile Include="Da\DBAccess.cs" />
     <Compile Include="Da\DBConst.cs" />
+    <Compile Include="down\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="down\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -335,6 +351,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="blog\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Amon.Master" />

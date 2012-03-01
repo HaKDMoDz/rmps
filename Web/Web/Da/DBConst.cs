@@ -127,6 +127,29 @@
         #endregion
 
         #region 用户
+        #region 用户预注册信息
+        /// <summary>
+        /// 用户预注册信息
+        /// </summary>
+        public const string C3010000 = "C3010000";
+        /// <summary>
+        /// 索引
+        /// </summary>
+        public const string C3010001 = "C3010001";
+        /// <summary>
+        /// 时间
+        /// </summary>
+        public const string C3010002 = "C3010002";
+        /// <summary>
+        /// 私钥
+        /// </summary>
+        public const string C3010003 = "C3010003";
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public const string C3010004 = "C3010004";
+        #endregion
+
         #region 用户访问历史记录
         /// <summary>
         /// 用户访问历史记录
