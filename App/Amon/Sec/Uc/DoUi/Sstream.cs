@@ -1,4 +1,5 @@
 ﻿using System;
+using Me.Amon.Bean;
 using Me.Amon.Uc;
 using Me.Amon.Util;
 
@@ -112,14 +113,14 @@ namespace Me.Amon.Sec.Uc.DoUi
             }
         }
 
-        public override void ChangedMask(Item mask)
+        public override void ChangedMask(Udc udc)
         {
-            _Mask = mask;
+            _Udc = udc;
         }
 
         public override void MoreMask()
         {
-            _Asec.ShowMask(_Mask);
+            _Asec.ShowMask(_Udc);
         }
         #endregion
 
@@ -150,7 +151,7 @@ namespace Me.Amon.Sec.Uc.DoUi
 
             int len;
             // BASE64 编码
-            if (_Mask.K == "0")
+            if (_Udc.Id == "0")
             {
                 len = Convert.ToBase64CharArray(buffer, offset, count, _CharBuf, 0);
                 _Writer.WriteLine(_CharBuf, 0, len);

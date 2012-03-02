@@ -2,6 +2,7 @@
 using System.Text;
 using Me.Amon.Uc;
 using Me.Amon.Util;
+using Me.Amon.Bean;
 
 namespace Me.Amon.Sec.Uc.DoUi
 {
@@ -98,14 +99,14 @@ namespace Me.Amon.Sec.Uc.DoUi
             }
         }
 
-        public override void ChangedMask(Item mask)
+        public override void ChangedMask(Udc udc)
         {
-            _Mask = mask;
+            _Udc = udc;
         }
 
         public override void MoreMask()
         {
-            _Asec.ShowMask(_Mask);
+            _Asec.ShowMask(_Udc);
         }
         #endregion
 
@@ -123,15 +124,15 @@ namespace Me.Amon.Sec.Uc.DoUi
                 return true;
             }
 
-            if (_Mask == null)
+            if (_Udc == null)
             {
                 _Asec.ShowAlert("请选择掩码！");
                 _Do.CbMask.Focus();
                 return false;
             }
-            if (_Mask.K == USER_CHARSET)
+            if (_Udc.Id == USER_CHARSET)
             {
-                if (string.IsNullOrEmpty(_Mask.D))
+                if (string.IsNullOrEmpty(_Udc.Data))
                 {
                     _Asec.ShowAlert("掩码字符不能为空！");
                     _Do.CbMask.Focus();
@@ -155,9 +156,9 @@ namespace Me.Amon.Sec.Uc.DoUi
                     break;
             }
 
-            if (_Mask.K.Length > 1)
+            if (_Udc.Id.Length > 1)
             {
-                _Wrapper.Init(true, _Mask.D.ToCharArray());
+                _Wrapper.Init(true, _Udc.Data.ToCharArray());
             }
         }
 
@@ -170,7 +171,7 @@ namespace Me.Amon.Sec.Uc.DoUi
                 len = Encoding.Default.GetChars(byteBuf, offset, length, _CharBuf, 0);
             }
             // BASE64 编码
-            else if (_Mask.K == "0")
+            else if (_Udc.Id == "0")
             {
                 len = Convert.ToBase64CharArray(byteBuf, offset, length, _CharBuf, 0);
             }

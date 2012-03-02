@@ -94,9 +94,9 @@ namespace Me.Amon.Sec.Uc.DoUi
                     break;
             }
             
-            if (_Mask.K.Length > 1)
+            if (_Udc.Id.Length > 1)
             {
-                _Wrapper.Init(true, _Mask.D.ToCharArray());
+                _Wrapper.Init(true, _Udc.Data.ToCharArray());
             }
         }
 

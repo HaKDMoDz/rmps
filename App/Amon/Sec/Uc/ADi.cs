@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using Me.Amon.Bean;
 using Me.Amon.Uc;
 
 namespace Me.Amon.Sec.Uc
@@ -26,7 +27,7 @@ namespace Me.Amon.Sec.Uc
         public static Item _TypeDef = new Item { K = "0", V = "请选择" };
         public static Item _MaskDef = new Item { K = "0", V = "默认" };
         protected static Item _Type;
-        protected static Item _Mask;
+        protected static Udc _Udc;
         protected string _Key;
 
         public abstract void InitOpt();
@@ -37,7 +38,7 @@ namespace Me.Amon.Sec.Uc
 
         public abstract void MoreData();
 
-        public abstract void ChangedMask(Item mask);
+        public abstract void ChangedMask(Udc udc);
 
         public abstract void MoreMask();
 

@@ -1119,7 +1119,7 @@ namespace Me.Amon.Pwd
         private void TmiUcs_Click(object sender, EventArgs e)
         {
             UdcEditor edit = new UdcEditor(_UserModel);
-            edit.Init(_DataModel);
+            edit.Init(_DataModel, null);
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }

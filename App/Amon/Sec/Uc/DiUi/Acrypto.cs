@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Me.Amon.Bean;
 using Me.Amon.Uc;
 using Me.Amon.Util;
 
@@ -95,9 +96,9 @@ namespace Me.Amon.Sec.Uc.DiUi
             }
         }
 
-        public override void ChangedMask(Item mask)
+        public override void ChangedMask(Udc udc)
         {
-            _Mask = mask;
+            _Udc = udc;
         }
 
         public override void MoreMask()

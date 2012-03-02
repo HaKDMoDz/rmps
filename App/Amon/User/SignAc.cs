@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Event;
 using Me.Amon.Model;
@@ -40,6 +41,7 @@ namespace Me.Amon.User
         #endregion
 
         #region 事件处理
+        #region 界面事件
         private void BtOk_Click(object sender, EventArgs e)
         {
             _SignAc.DoSignAc();
@@ -49,10 +51,111 @@ namespace Me.Amon.User
         {
             _SignAc.DoCancel();
         }
+
         private void PbMenu_Click(object sender, EventArgs e)
         {
-            _SignAc.ShowMenu(PbMenu, 0, PbMenu.Height);
+            if (BtOk.Enabled)
+            {
+                CmMenu.Show(PbMenu, 0, PbMenu.Height);
+            }
         }
+        #endregion
+
+        #region 菜单事件
+        /// <summary>
+        /// 打开(&O)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MiOpen_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fd = new FolderBrowserDialog();
+            if (DialogResult.OK != fd.ShowDialog())
+            {
+                return;
+            }
+
+            string home = fd.SelectedPath;
+            if (!Directory.Exists(home))
+            {
+                ShowAlert("您选择的路径不存在！");
+                return;
+            }
+            home += Path.DirectorySeparatorChar;
+
+            string path = home + IEnv.AMON_CFG;
+            if (!File.Exists(path))
+            {
+                ShowAlert("请确认您选择的数据路径是否正确！");
+                return;
+            }
+            Uc.Properties prop = new Uc.Properties();
+            prop.Load(path);
+            string name = prop.Get(IEnv.AMON_CFG_NAME);
+            string code = prop.Get(IEnv.AMON_CFG_CODE);
+            if (!CharUtil.IsValidateCode(code) || !CharUtil.IsValidate(name))
+            {
+                ShowAlert("请确认您选择的数据路径是否正确！");
+                return;
+            }
+
+            prop.Clear();
+            prop.Load(IEnv.AMON_SYS);
+            prop.Set(string.Format(IEnv.AMON_SYS_CODE, name), code);
+            prop.Set(string.Format(IEnv.AMON_SYS_HOME, name), home);
+            prop.Save(IEnv.AMON_SYS);
+        }
+
+        /// <summary>
+        /// 联机注册(&R)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MiOnSignUp_Click(object sender, EventArgs e)
+        {
+            ShowSignOl();
+        }
+
+        /// <summary>
+        /// 脱机注册(&N)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MiOfSignUp_Click(object sender, EventArgs e)
+        {
+            ShowSignUl();
+        }
+
+        /// <summary>
+        /// 单机注册(&P)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MiPcSignUp_Click(object sender, EventArgs e)
+        {
+            ShowSignPc();
+        }
+
+        /// <summary>
+        /// 忘记口令(&F)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void MiSignFk_Click(object sender, EventArgs e)
+        {
+            ShowSignFk();
+        }
+
+        /// <summary>
+        /// 升级(&U)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MiUpgrade_Click(object sender, EventArgs e)
+        {
+        }
+        #endregion
         #endregion
 
         #region 公共函数
@@ -118,6 +221,13 @@ namespace Me.Amon.User
             ShowView(_SignIn);
             _SignAc = _SignIn;
 
+            MiOpen.Visible = true;
+            MiSep0.Visible = true;
+            MiSignFk.Visible = true;
+            MiSep1.Visible = true;
+            MiUpgrade.Visible = true;
+            MiSep2.Visible = true;
+
             Text = "用户登录";
             BtOk.Text = "登录(&O)";
         }
@@ -131,6 +241,13 @@ namespace Me.Amon.User
             }
             ShowView(_SignOl);
             _SignAc = _SignOl;
+
+            MiOpen.Visible = false;
+            MiSep0.Visible = false;
+            MiSignFk.Visible = false;
+            MiSep1.Visible = false;
+            MiUpgrade.Visible = false;
+            MiSep2.Visible = false;
 
             Text = "联机注册";
             BtOk.Text = "注册(&O)";
@@ -146,6 +263,13 @@ namespace Me.Amon.User
             ShowView(_SignOf);
             _SignAc = _SignOf;
 
+            MiOpen.Visible = false;
+            MiSep0.Visible = false;
+            MiSignFk.Visible = false;
+            MiSep1.Visible = false;
+            MiUpgrade.Visible = false;
+            MiSep2.Visible = false;
+
             Text = "脱机注册";
             BtOk.Text = "注册(&O)";
         }
@@ -159,6 +283,13 @@ namespace Me.Amon.User
             }
             ShowView(_SignPc);
             _SignAc = _SignPc;
+
+            MiOpen.Visible = false;
+            MiSep0.Visible = false;
+            MiSignFk.Visible = false;
+            MiSep1.Visible = false;
+            MiUpgrade.Visible = false;
+            MiSep2.Visible = false;
 
             Text = "单机注册";
             BtOk.Text = "注册(&O)";

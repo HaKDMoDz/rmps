@@ -7,27 +7,33 @@ using Me.Amon.Model;
 using Me.Amon.Sec.Uc;
 using Me.Amon.Sec.Uw;
 using Me.Amon.Uc;
+using Me.Amon.Uw;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Paddings;
+using Me.Amon.Util;
+using Me.Amon.Bean;
 
 namespace Me.Amon.Sec
 {
     public partial class ASec : Form, IApp
     {
         #region 全局变量
+        private UserModel _UserModel;
+        private DataModel _DataModel;
         private Cm _UcCm;
         private Uk _UcUk;
         private Di _UcDi;
         private Do _UcDo;
 
         private Edit _Edit;
-        private Mask _Mask;
+        private UdcEditor _UdcEditor;
         private Open _Open;
         private Pass _Pass;
         private Save _Save;
         private Text _Text;
         #endregion
 
+        #region 构造函数
         public ASec()
         {
             InitializeComponent();
@@ -35,8 +41,11 @@ namespace Me.Amon.Sec
 
         public ASec(UserModel userModel)
         {
+            _UserModel = userModel;
+
             InitializeComponent();
         }
+        #endregion
 
         #region 接口实现
         public void InitOnce()
@@ -343,15 +352,16 @@ namespace Me.Amon.Sec
             _Edit.Show(this, data);
         }
 
-        public void ShowMask(Item mask)
+        public void ShowMask(Udc udc)
         {
-            if (_Mask != null && _Mask.Visible)
+            if (_UdcEditor != null && _UdcEditor.Visible)
             {
                 return;
             }
-            _Mask = new Mask();
-            _Mask.Location = new Point(Location.X + (Width - _Mask.Width) / 2, Location.Y + (Height - _Mask.Height) / 2);
-            _Mask.Show(this, mask);
+            _UdcEditor = new UdcEditor();
+            _UdcEditor.Init(_DataModel, udc);
+            BeanUtil.CenterToParent(_UdcEditor, this);
+            _UdcEditor.ShowDialog(this);
         }
 
         public void ShowOpen(string file, CallBackHandler<string> handler)

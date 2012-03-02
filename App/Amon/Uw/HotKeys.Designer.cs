@@ -47,6 +47,8 @@
             this.DvKeys.ReadOnly = true;
             this.DvKeys.RowHeadersVisible = false;
             this.DvKeys.RowTemplate.Height = 23;
+            this.DvKeys.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.DvKeys.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DvKeys.Size = new System.Drawing.Size(330, 189);
             this.DvKeys.TabIndex = 0;
             // 

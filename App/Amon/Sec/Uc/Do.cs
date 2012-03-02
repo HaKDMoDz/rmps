@@ -2,6 +2,7 @@
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using Me.Amon.Bean;
 using Me.Amon.Sec.Uc.DoUi;
 using Me.Amon.Uc;
 
@@ -217,16 +218,16 @@ namespace Me.Amon.Sec.Uc
 #if DEBUG
             Main.LogInfo("DO:    CbMask_SelectedIndexChanged...");
 #endif
-            Item item = CbMask.SelectedItem as Item;
-            if (item == null)
+            Udc udc = CbMask.SelectedItem as Udc;
+            if (udc == null)
             {
                 return;
             }
 
 #if DEBUG
-            Main.LogInfo("DO:    CbMask_SelectedIndexChanged:" + item.K);
+            Main.LogInfo("DO:    CbMask_SelectedIndexChanged:" + udc.Id);
 #endif
-            _Ado.ChangedMask(item);
+            _Ado.ChangedMask(udc);
         }
 
         private void BtMask_Click(object sender, EventArgs e)

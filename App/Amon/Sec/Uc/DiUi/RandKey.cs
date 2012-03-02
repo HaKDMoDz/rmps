@@ -1,4 +1,5 @@
-﻿using Me.Amon.Uc;
+﻿using Me.Amon.Bean;
+using Me.Amon.Uc;
 
 namespace Me.Amon.Sec.Uc.DiUi
 {
@@ -32,7 +33,7 @@ namespace Me.Amon.Sec.Uc.DiUi
         {
         }
 
-        public override void ChangedMask(Item mask)
+        public override void ChangedMask(Udc udc)
         {
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using Me.Amon.Bean;
 using Me.Amon.Uc;
 using Me.Amon.Util;
 
@@ -96,14 +97,14 @@ namespace Me.Amon.Sec.Uc.DoUi
             }
         }
 
-        public override void ChangedMask(Item mask)
+        public override void ChangedMask(Udc udc)
         {
-            _Mask = mask;
+            _Udc = udc;
         }
 
         public override void MoreMask()
         {
-            _Asec.ShowMask(_Mask);
+            _Asec.ShowMask(_Udc);
         }
         #endregion
 
@@ -122,13 +123,13 @@ namespace Me.Amon.Sec.Uc.DoUi
             }
             if (_Do.CbMask.Visible)
             {
-                if (_Mask == null)
+                if (_Udc == null)
                 {
                     _Asec.ShowAlert("请选择掩码！");
                     _Do.CbMask.Focus();
                     return false;
                 }
-                if (_Mask.K == USER_CHARSET && string.IsNullOrEmpty(_Mask.D))
+                if (_Udc.Id == USER_CHARSET && string.IsNullOrEmpty(_Udc.Data))
                 {
                     _Asec.ShowAlert("掩码字符不能为空！");
                     _Do.CbMask.Focus();
@@ -155,9 +156,9 @@ namespace Me.Amon.Sec.Uc.DoUi
                         break;
                 }
 
-                if (_Mask.K.Length > 1)
+                if (_Udc.Id.Length > 1)
                 {
-                    _Wrapper.Init(true, _Mask.D.ToCharArray());
+                    _Wrapper.Init(true, _Udc.Data.ToCharArray());
                 }
             }
             //解密
@@ -189,7 +190,7 @@ namespace Me.Amon.Sec.Uc.DoUi
 
             int len;
             // BASE64 编码
-            if (_Mask.K == "0")
+            if (_Udc.Id == "0")
             {
                 len = Convert.ToBase64CharArray(byteBuf, offset, length, _CharBuf, 0);
             }
@@ -221,7 +222,7 @@ namespace Me.Amon.Sec.Uc.DoUi
 
             if (_Writer != null)
             {
-                if (_Mask.K != "0")
+                if (_Udc.Id != "0")
                 {
                     int len = _Wrapper.DoFinal(_CharBuf, 0);
                     if (len > 0)

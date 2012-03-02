@@ -86,15 +86,15 @@ namespace Me.Amon.Sec.Uc.DiUi
                 return true;
             }
 
-            if (_Mask == null)
+            if (_Udc == null)
             {
                 _ASec.ShowAlert("请选择掩码！");
                 _Di.CbMask.Focus();
                 return false;
             }
-            if (_Mask.K == USER_CHARSET)
+            if (_Udc.Id == USER_CHARSET)
             {
-                if (string.IsNullOrEmpty(_Mask.D))
+                if (string.IsNullOrEmpty(_Udc.Data))
                 {
                     _ASec.ShowAlert("掩码字符不能为空！");
                     _Di.TbData.Focus();
@@ -123,9 +123,9 @@ namespace Me.Amon.Sec.Uc.DiUi
                     break;
             }
 
-            if (_Mask.K.Length > 1)
+            if (_Udc.Id.Length > 1)
             {
-                _Wrapper.Init(false, _Mask.D.ToCharArray());
+                _Wrapper.Init(false, _Udc.Data.ToCharArray());
             }
         }
     }

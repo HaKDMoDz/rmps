@@ -336,12 +336,14 @@ namespace Me.Amon
 
         private void MgSignUp_Click(object sender, EventArgs e)
         {
-            SignAc(ESignAc.SignOl, new AmonHandler<int>(DoSignOl));
+            //SignAc(ESignAc.SignOl, new AmonHandler<int>(DoSignOl));
+            SignAc(ESignAc.SignOl, new AmonHandler<int>(ShowAPwd));
         }
 
         private void MgSignIn_Click(object sender, EventArgs e)
         {
-            SignAc(ESignAc.SignIn, new AmonHandler<int>(DoSignIn));
+            //SignAc(ESignAc.SignIn, new AmonHandler<int>(DoSignIn));
+            SignAc(ESignAc.SignIn, new AmonHandler<int>(ShowAPwd));
         }
 
         private void MgSignOf_Click(object sender, EventArgs e)
@@ -353,6 +355,10 @@ namespace Me.Amon
 
             MgSignOf.Visible = false;
             MtSignOf.Visible = false;
+        }
+
+        private void MtSignFp_Click(object sender, EventArgs e)
+        {
         }
 
         private void MgExit_Click(object sender, EventArgs e)
@@ -406,12 +412,14 @@ namespace Me.Amon
 
         private void MtSignUp_Click(object sender, EventArgs e)
         {
-            SignAc(ESignAc.SignOl, new AmonHandler<int>(DoSignOl));
+            //SignAc(ESignAc.SignOl, new AmonHandler<int>(DoSignOl));
+            SignAc(ESignAc.SignOl, new AmonHandler<int>(ShowAPwd));
         }
 
         private void MtSignIn_Click(object sender, EventArgs e)
         {
-            SignAc(ESignAc.SignIn, new AmonHandler<int>(DoSignIn));
+            //SignAc(ESignAc.SignIn, new AmonHandler<int>(DoSignIn));
+            SignAc(ESignAc.SignIn, new AmonHandler<int>(ShowAPwd));
         }
 
         private void MtSignOf_Click(object sender, EventArgs e)
@@ -423,6 +431,11 @@ namespace Me.Amon
 
             MgSignOf.Visible = false;
             MtSignOf.Visible = false;
+        }
+
+        private void MgSignFp_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void MtExit_Click(object sender, EventArgs e)
@@ -530,6 +543,9 @@ namespace Me.Amon
             MgSignIn.Visible = false;
             MtSignIn.Visible = false;
 
+            MgSignUp.Visible = false;
+            MtSignUp.Visible = false;
+
             MgSignOf.Visible = true;
             MtSignOf.Visible = true;
         }
@@ -548,6 +564,8 @@ namespace Me.Amon
             _IApp = _APwd;
 
             _APwd.Show();
+
+            DoSignIn(view);
         }
 
         private void ShowASec(int view)

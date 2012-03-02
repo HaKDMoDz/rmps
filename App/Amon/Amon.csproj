@@ -27,6 +27,7 @@
     <SupportUrl>http://amon.me/blog</SupportUrl>
     <ProductName>阿木密码箱</ProductName>
     <PublisherName>Amon</PublisherName>
+    <SuiteName>阿木软件</SuiteName>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
@@ -557,12 +558,6 @@
     <Compile Include="Sec\Uw\Edit.Designer.cs">
       <DependentUpon>Edit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sec\Uw\Mask.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sec\Uw\Mask.Designer.cs">
-      <DependentUpon>Mask.cs</DependentUpon>
-    </Compile>
     <Compile Include="Sec\Uw\Open.cs" />
     <Compile Include="Sec\Uw\Pass.cs">
       <SubType>Form</SubType>
@@ -577,6 +572,7 @@
     <Compile Include="Sec\Uw\Text.Designer.cs">
       <DependentUpon>Text.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="User\Auth\AuthPc.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -908,9 +904,6 @@
     <EmbeddedResource Include="Sec\Uw\Edit.resx">
       <DependentUpon>Edit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sec\Uw\Mask.resx">
-      <DependentUpon>Mask.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Sec\Uw\Pass.resx">
       <DependentUpon>Pass.cs</DependentUpon>
     </EmbeddedResource>
@@ -1005,87 +998,15 @@
     <None Include="Resources\Alert.png" />
     <None Include="Resources\Error.png" />
     <None Include="Resources\Hint.png" />
-    <Content Include="Resources\Loading.gif" />
+    <None Include="Resources\Loading.gif" />
     <None Include="Resources\Logo.png" />
-    <Content Include="Resources\Waiting.gif" />
-    <Content Include="Skin\Feel\Default\data-sync.png" />
-    <Content Include="Skin\Feel\Default\edit-key-append.png" />
-    <Content Include="Skin\Feel\Default\edit-key-delete.png" />
-    <Content Include="Skin\Feel\Default\edit-key-update.png" />
-    <Content Include="Skin\Feel\Default\file-open.png" />
-    <Content Include="Skin\Feel\Default\help-hotkeys.png" />
-    <Content Include="Skin\Feel\Default\view-echobar.png" />
-    <Content Include="Skin\Feel\Default\view-findbar.png" />
-    <Content Include="Skin\Feel\Default\view-toolbar.png" />
-    <Content Include="Skin\Feel\Default\window-exit.png" />
+    <None Include="Resources\Waiting.gif" />
     <None Include="Resources\Pupil.png" />
     <None Include="Resources\Guid.png" />
     <None Include="Resources\Menu.png" />
     <None Include="Amon.dat" />
-    <Content Include="Skin\Feel\Default\att-card.png" />
-    <Content Include="Skin\Feel\Default\att-date.png" />
-    <Content Include="Skin\Feel\Default\att-file-saveas.png" />
-    <Content Include="Skin\Feel\Default\att-file-upload.png" />
-    <Content Include="Skin\Feel\Default\att-hint.png" />
-    <Content Include="Skin\Feel\Default\att-link.png" />
-    <Content Include="Skin\Feel\Default\att-mail-send.png" />
-    <Content Include="Skin\Feel\Default\options.png" />
-    <Content Include="Skin\Feel\Default\att-prop-copy.png" />
-    <Content Include="Skin\Feel\Default\att-prop-drop.png" />
-    <Content Include="Skin\Feel\Default\att-prop-save.png" />
-    <Content Include="Skin\Feel\Default\att-pass-gen.png" />
-    <Content Include="Skin\Feel\Default\att-pass-hide.png" />
-    <Content Include="Skin\Feel\Default\att-pass-show.png" />
-    <Content Include="Skin\Feel\Default\att-pass-opt.png" />
-    <Content Include="Skin\Feel\Default\config.png" />
-    <Content Include="Skin\Feel\Default\att-file-delete-all.png" />
-    <Content Include="Skin\Feel\Default\att-file-img-cursor-def.png" />
-    <Content Include="Skin\Feel\Default\att-file-img-cursor-sel.png" />
-    <Content Include="Skin\Feel\Default\att-file-img-eraser.png" />
-    <Content Include="Skin\Feel\Default\att-file-img-shaped-def.png" />
-    <Content Include="Skin\Feel\Default\att-file-img-shaped-sel.png" />
-    <Content Include="Skin\Feel\Default\att-file-preview.png" />
-    <Content Include="Skin\Feel\Default\att-file-revert.png" />
-    <Content Include="Skin\Feel\Default\find.png" />
-    <Content Include="Skin\Feel\Default\feel.asf" />
-    <Content Include="Skin\Feel\Default\guid.png" />
-    <Content Include="Skin\Feel\Default\key-label0.png" />
-    <Content Include="Skin\Feel\Default\key-label1.png" />
-    <Content Include="Skin\Feel\Default\key-label2.png" />
-    <Content Include="Skin\Feel\Default\key-label3.png" />
-    <Content Include="Skin\Feel\Default\key-label4.png" />
-    <Content Include="Skin\Feel\Default\key-label5.png" />
-    <Content Include="Skin\Feel\Default\key-label6.png" />
-    <Content Include="Skin\Feel\Default\key-label7.png" />
-    <Content Include="Skin\Feel\Default\key-label8.png" />
-    <Content Include="Skin\Feel\Default\key-label9.png" />
-    <Content Include="Skin\Feel\Default\key-major+1.png" />
-    <Content Include="Skin\Feel\Default\key-major+2.png" />
-    <Content Include="Skin\Feel\Default\key-major-1.png" />
-    <Content Include="Skin\Feel\Default\key-major-2.png" />
-    <Content Include="Skin\Feel\Default\key-major0.png" />
-    <Content Include="Skin\Feel\Default\mail-attach.png" />
-    <Content Include="Skin\Feel\Default\mail-receive.png" />
-    <Content Include="Skin\Feel\Default\maoc.png" />
-    <Content Include="Skin\Feel\Default\acmd.png" />
-    <Content Include="Skin\Feel\Default\apro.png" />
-    <Content Include="Skin\Feel\Default\agtd.png" />
-    <Content Include="Skin\Feel\Default\apad.png" />
-    <Content Include="Skin\Feel\Default\apay.png" />
-    <Content Include="Skin\Feel\Default\apwd.png" />
-    <Content Include="Skin\Feel\Default\awiz.png" />
-    <Content Include="Skin\Feel\Default\att-now.png" />
-    <Content Include="Skin\Feel\Default\tool-edit-log.png" />
-    <Content Include="Skin\Feel\Default\tool-edit-moved.png" />
-    <Content Include="Skin\Feel\Default\tool-edit-movel.png" />
-    <Content Include="Skin\Feel\Default\tool-edit-mover.png" />
-    <Content Include="Skin\Feel\Default\tool-edit-moveu.png" />
-    <Content Include="Skin\Feel\Default\help.png" />
-    <Content Include="Skin\Feel\Default\view-menubar.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Skin\Look\Default\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
       <Visible>False</Visible>

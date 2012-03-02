@@ -238,16 +238,16 @@
             // TmuEdit
             // 
             this.TmuEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TmiDeleteKey,
+            this.TmiAppendKey,
+            this.TmiEditSep0,
+            this.TmiDeleteAtt,
+            this.TmuUpdateAtt,
+            this.TmuAppendAtt,
+            this.TmiEditSep1,
             this.TmiAppendCat,
             this.TmiUpdateCat,
-            this.TmiDeleteCat,
-            this.TmiEditSep0,
-            this.TmiAppendKey,
-            this.TmiDeleteKey,
-            this.TmiEditSep1,
-            this.TmuAppendAtt,
-            this.TmuUpdateAtt,
-            this.TmiDeleteAtt});
+            this.TmiDeleteCat});
             this.TmuEdit.Name = "TmuEdit";
             this.TmuEdit.Size = new System.Drawing.Size(59, 21);
             this.TmuEdit.Text = "编辑(&E)";
@@ -752,31 +752,33 @@
             // TmiHelp
             // 
             this.TmiHelp.Name = "TmiHelp";
-            this.TmiHelp.Size = new System.Drawing.Size(128, 22);
+            this.TmiHelp.ShortcutKeyDisplayString = "F1";
+            this.TmiHelp.Size = new System.Drawing.Size(152, 22);
             this.TmiHelp.Text = "帮助(&H)";
             this.TmiHelp.Click += new System.EventHandler(this.TmiHelp_Click);
             // 
             // TmiHelpSep0
             // 
             this.TmiHelpSep0.Name = "TmiHelpSep0";
-            this.TmiHelpSep0.Size = new System.Drawing.Size(125, 6);
+            this.TmiHelpSep0.Size = new System.Drawing.Size(149, 6);
             // 
             // TmiKeys
             // 
             this.TmiKeys.Name = "TmiKeys";
-            this.TmiKeys.Size = new System.Drawing.Size(128, 22);
+            this.TmiKeys.ShortcutKeyDisplayString = "F5";
+            this.TmiKeys.Size = new System.Drawing.Size(152, 22);
             this.TmiKeys.Text = "快捷键(&K)";
             this.TmiKeys.Click += new System.EventHandler(this.TmiKeys_Click);
             // 
             // TmiHelpSep1
             // 
             this.TmiHelpSep1.Name = "TmiHelpSep1";
-            this.TmiHelpSep1.Size = new System.Drawing.Size(125, 6);
+            this.TmiHelpSep1.Size = new System.Drawing.Size(149, 6);
             // 
             // TmiInfo
             // 
             this.TmiInfo.Name = "TmiInfo";
-            this.TmiInfo.Size = new System.Drawing.Size(128, 22);
+            this.TmiInfo.Size = new System.Drawing.Size(152, 22);
             this.TmiInfo.Text = "关于(&A)";
             this.TmiInfo.Click += new System.EventHandler(this.TmiInfo_Click);
             // 

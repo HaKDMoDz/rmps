@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Text;
+using Me.Amon.Bean;
 using Me.Amon.Uc;
 using Me.Amon.Util;
 
@@ -79,14 +80,14 @@ namespace Me.Amon.Sec.Uc.DoUi
             }
         }
 
-        public override void ChangedMask(Item mask)
+        public override void ChangedMask(Udc udc)
         {
-            _Mask = mask;
+            _Udc = udc;
         }
 
         public override void MoreMask()
         {
-            _Asec.ShowMask(_Mask);
+            _Asec.ShowMask(_Udc);
         }
         #endregion
 

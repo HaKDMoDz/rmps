@@ -16,6 +16,7 @@ namespace Me.Amon.Uw
         private UserModel _UserModel;
         private DataModel _DataModel;
 
+        #region 构造函数
         public UdcEditor()
         {
             InitializeComponent();
@@ -28,7 +29,7 @@ namespace Me.Amon.Uw
             InitializeComponent();
         }
 
-        public void Init(DataModel dataModel)
+        public void Init(DataModel dataModel, Udc udc)
         {
             _DataModel = dataModel;
 
@@ -36,8 +37,10 @@ namespace Me.Amon.Uw
             TbTips.MaxLength = DBConst.AUDC0105_SIZE;
             TbChar.MaxLength = DBConst.AUDC0106_SIZE;
 
-            ShowData(new Udc());
+            LsUcs.SelectedItem = udc;
+            ShowData(udc);
         }
+        #endregion
 
         #region 事件处理
         private void LsUcs_SelectedIndexChanged(object sender, EventArgs e)
