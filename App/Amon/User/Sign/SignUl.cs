@@ -28,7 +28,7 @@ namespace Me.Amon.User.Sign
 
             InitializeComponent();
 
-            TbPath.Text = IEnv.DATA_DIR + Path.DirectorySeparatorChar;
+            TbPath.Text = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), IEnv.DATA_DIR);
         }
         #endregion
 
@@ -113,7 +113,7 @@ namespace Me.Amon.User.Sign
                         _SignAc.ShowAlert("注册用户失败，请稍后重试！");
                         return;
                     }
-                    path += code + Path.DirectorySeparatorChar;
+                    path = Path.Combine(path, code);
                     if (Directory.Exists(path))
                     {
                         _SignAc.HideWaiting();
@@ -186,11 +186,6 @@ namespace Me.Amon.User.Sign
                     return;
                 }
             }
-            if (path[path.Length - 1] != Path.DirectorySeparatorChar)
-            {
-                path += Path.DirectorySeparatorChar;
-            }
-            TbPath.Text = path;
         }
         #endregion
 
@@ -202,7 +197,7 @@ namespace Me.Amon.User.Sign
             var tmp = '\'' + _UserModel.Code + '\'';
             var dba = _UserModel.DBAccess;
 
-            string file = _UserModel.Home + "dat.sql";
+            string file = Path.Combine(_UserModel.Home, "dat.sql");
             StreamReader reader = File.OpenText(file);
             string line = reader.ReadLine();
             while (line != null)

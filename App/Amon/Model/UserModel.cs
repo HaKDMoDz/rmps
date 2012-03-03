@@ -38,7 +38,7 @@ namespace Me.Amon.Model
         /// <returns></returns>
         public bool CaSignIn(string home, string code, string name, string pass)
         {
-            string file = home + IEnv.AMON_CFG;
+            string file = Path.Combine(home, IEnv.AMON_CFG);
             if (!File.Exists(file))
             {
                 return false;
@@ -107,7 +107,7 @@ namespace Me.Amon.Model
         public bool CaAuthPk(string oldPass, string newPass)
         {
             Uc.Properties prop = new Uc.Properties();
-            prop.Load(Home + IEnv.AMON_CFG);
+            prop.Load(Path.Combine(_Home, IEnv.AMON_CFG));
 
             // 已有口令校验
             string info = Digest(Name, oldPass);
@@ -154,7 +154,7 @@ namespace Me.Amon.Model
             string main = Convert.ToBase64String(t);
             prop.Set(IEnv.AMON_CFG_INFO, info);
             prop.Set(IEnv.AMON_CFG_MAIN, main);
-            prop.Save(Home + IEnv.AMON_CFG);
+            prop.Save(Path.Combine(_Home, IEnv.AMON_CFG));
 
             return true;
         }
@@ -223,9 +223,9 @@ namespace Me.Amon.Model
             }
 
             Uc.Properties prop = new Uc.Properties();
-            prop.Load(Home + IEnv.AMON_CFG);
+            prop.Load(Path.Combine(_Home, IEnv.AMON_CFG));
             prop.Set(IEnv.AMON_CFG_LOCK, Digest(Name, newPass));
-            prop.Save(Home + IEnv.AMON_CFG);
+            prop.Save(Path.Combine(_Home, IEnv.AMON_CFG));
             return true;
         }
 
@@ -238,7 +238,7 @@ namespace Me.Amon.Model
         public bool CaAuthSk(string oldPass, string secPass)
         {
             Uc.Properties prop = new Uc.Properties();
-            prop.Load(Home + IEnv.AMON_CFG);
+            prop.Load(Path.Combine(_Home, IEnv.AMON_CFG));
 
             // 已有口令校验
             string info = Digest(Name, oldPass);
@@ -280,7 +280,7 @@ namespace Me.Amon.Model
             #endregion
 
             prop.Set(IEnv.AMON_CFG_SAFE, Convert.ToBase64String(t));
-            prop.Save(Home + IEnv.AMON_CFG);
+            prop.Save(Path.Combine(_Home, IEnv.AMON_CFG));
             return true;
         }
 
@@ -331,7 +331,7 @@ namespace Me.Amon.Model
             r.NextBytes(_Data);
             string info = Digest(name, pass);
 
-            _Home = root + code + Path.DirectorySeparatorChar;
+            _Home = Path.Combine(root, code);
             if (!Directory.Exists(_Home))
             {
                 Directory.CreateDirectory(_Home);
@@ -344,7 +344,7 @@ namespace Me.Amon.Model
             prop.Set(IEnv.AMON_CFG_LOCK, info);
             prop.Set(IEnv.AMON_CFG_MAIN, main);
             prop.Set(IEnv.AMON_CFG_SAFE, "");
-            prop.Save(_Home + IEnv.AMON_CFG);
+            prop.Save(Path.Combine(_Home, IEnv.AMON_CFG));
 
             _Name = name;
             _Code = code;
@@ -429,7 +429,7 @@ namespace Me.Amon.Model
             prop.Set(IEnv.AMON_CFG_LOCK, info);
             prop.Set(IEnv.AMON_CFG_MAIN, main);
             prop.Set(IEnv.AMON_CFG_SAFE, safe);
-            prop.Save(_Home + IEnv.AMON_CFG);
+            prop.Save(Path.Combine(_Home, IEnv.AMON_CFG));
 
             _Name = name;
             _Code = code;
@@ -500,7 +500,7 @@ namespace Me.Amon.Model
             }
 
             Uc.Properties prop = new Uc.Properties();
-            prop.Load(_Home + IEnv.AMON_CFG);
+            prop.Load(Path.Combine(_Home, IEnv.AMON_CFG));
             prop.Set(IEnv.AMON_CFG_NAME, oldPass);
             prop.Set(IEnv.AMON_CFG_CODE, code);
             prop.Set(IEnv.AMON_CFG_DATA, data);
@@ -508,7 +508,7 @@ namespace Me.Amon.Model
             prop.Set(IEnv.AMON_CFG_LOCK, _Lock);
             prop.Set(IEnv.AMON_CFG_MAIN, main);
             prop.Set(IEnv.AMON_CFG_SAFE, safe);
-            prop.Save(_Home + IEnv.AMON_CFG);
+            prop.Save(Path.Combine(_Home, IEnv.AMON_CFG));
 
             return true;
         }

@@ -88,7 +88,7 @@ namespace Me.Amon.User.Sign
             #region 已有用户首次登录
             if (!CharUtil.IsValidateCode(code))
             {
-                _Home = IEnv.DATA_DIR + Path.DirectorySeparatorChar;
+                _Home = IEnv.DATA_DIR;
 
                 WebClient client = new WebClient();
                 client.Credentials = CredentialCache.DefaultCredentials;
@@ -158,7 +158,7 @@ namespace Me.Amon.User.Sign
                     _SignAc.ShowAlert("注册用户失败，请稍后重试！");
                     return;
                 }
-                _Home += code + Path.DirectorySeparatorChar;
+                _Home = Path.Combine(_Home, code);
                 if (!Directory.Exists(_Home))
                 {
                     Directory.CreateDirectory(_Home);

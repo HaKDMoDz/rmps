@@ -82,7 +82,7 @@ namespace Me.Amon.Model
                 return _Imgs[key];
             }
 
-            Image img = BeanUtil.ReadImage(_FeelPath + key, BeanUtil.NaN16);
+            Image img = BeanUtil.ReadImage(Path.Combine(_FeelPath, key), BeanUtil.NaN16);
             _Imgs[key] = img;
             return img;
         }
@@ -91,15 +91,15 @@ namespace Me.Amon.Model
         public void Load()
         {
             #region Look
-            _LookPath = string.Format("Skin{1}Look{1}{0}{1}", _UserModel.Feel, Path.DirectorySeparatorChar);
+            _LookPath = Path.Combine("Skin", "Look", _UserModel.Look);
             _LookProp = new Uc.Properties();
-            _LookProp.Load(_LookPath + IEnv.FILE_LOOK);
+            _LookProp.Load(Path.Combine(_LookPath, IEnv.FILE_LOOK));
             #endregion
 
             #region Feel
-            _FeelPath = string.Format("Skin{1}Feel{1}{0}{1}", _UserModel.Feel, Path.DirectorySeparatorChar);
+            _FeelPath = Path.Combine("Skin", "Feel", _UserModel.Feel);
             _FeelProp = new Uc.Properties();
-            _FeelProp.Load(_FeelPath + IEnv.FILE_FEEL);
+            _FeelProp.Load(Path.Combine(_FeelPath, IEnv.FILE_FEEL));
 
             if (_Imgs == null)
             {
@@ -113,7 +113,7 @@ namespace Me.Amon.Model
 
             #region 视图
             _UserProp = new Uc.Properties();
-            _UserProp.Load(_UserModel.Home + IEnv.USER_CFG);
+            _UserProp.Load(Path.Combine(_UserModel.Home, IEnv.USER_CFG));
             MenuBarVisible = IEnv.VALUE_TRUE == _UserProp.Get("MenuBar", IEnv.VALUE_TRUE).ToLower();
             ToolBarVisible = IEnv.VALUE_TRUE == _UserProp.Get("ToolBar", IEnv.VALUE_TRUE).ToLower();
             FindBarVisible = IEnv.VALUE_TRUE == _UserProp.Get("FindBar", IEnv.VALUE_TRUE).ToLower();
@@ -181,7 +181,7 @@ namespace Me.Amon.Model
             _UserProp.Set("LocY", WindowLocY.ToString());
             _UserProp.Set("DimW", WindowDimW.ToString());
             _UserProp.Set("DimH", WindowDimH.ToString());
-            _UserProp.Save(_UserModel.Home + IEnv.USER_CFG);
+            _UserProp.Save(Path.Combine(_UserModel.Home, IEnv.USER_CFG));
         }
     }
 }

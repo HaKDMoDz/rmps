@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
 using ICSharpCode.SharpZipLib.Checksums;
@@ -56,6 +57,19 @@ namespace Me.Amon.Util
             }
         }
 
+        private static Image _NaN24;
+        public static Image NaN24
+        {
+            get
+            {
+                if (_NaN24 == null)
+                {
+                    _NaN24 = new Bitmap(24, 24);
+                }
+                return _NaN24;
+            }
+        }
+
         private static Image _NaN32;
         public static Image NaN32
         {
@@ -102,6 +116,44 @@ namespace Me.Amon.Util
             {
                 return Image.FromStream(stream);
             }
+        }
+
+        public static Image ScaleImage(Image img, int dim, bool ratio)
+        {
+            if (img.Width == dim && img.Height == dim)
+            {
+                return img;
+            }
+
+            Bitmap bmp = new Bitmap(dim, dim);
+            int w = img.Width;
+            int h = img.Height;
+            int x;
+            int y;
+            if (ratio)
+            {
+                double rw = (double)dim / w;
+                double rh = (double)dim / h;
+                double r = rw <= rh ? rw : rh;
+                w = (int)(r * w);
+                h = (int)(r * h);
+
+                x = (dim - w) >> 1;
+                y = (dim - h) >> 1;
+            }
+            else
+            {
+                x = 0;
+                y = 0;
+            }
+
+            Graphics g = Graphics.FromImage(bmp);
+            g.SmoothingMode = SmoothingMode.HighQuality;
+            g.DrawImage(img, x, y, w, h);
+            g.Flush();
+            g.Dispose();
+
+            return bmp;
         }
 
         public static void DoZip(string srcPath, string zipFile)
@@ -171,13 +223,13 @@ namespace Me.Amon.Util
 
                 if (zipEntry.IsDirectory)
                 {
-                    Directory.CreateDirectory(dstPath + zipName);
+                    Directory.CreateDirectory(Path.Combine(dstPath, zipName));
                     continue;
                 }
                 if (zipEntry.IsFile)
                 {
                     //解压文件到指定的目录   
-                    FileStream oStream = File.Create(dstPath + zipEntry.Name);
+                    FileStream oStream = File.Create(Path.Combine(dstPath, zipEntry.Name));
                     byte[] buf = new byte[4096];
                     int len = iStream.Read(buf, 0, buf.Length);
                     while (len > 0)

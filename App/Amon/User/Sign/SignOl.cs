@@ -41,7 +41,7 @@ namespace Me.Amon.User.Sign
 
             InitializeComponent();
 
-            TbPath.Text = Path.GetDirectoryName(Application.ExecutablePath) + Path.DirectorySeparatorChar + IEnv.DATA_DIR + Path.DirectorySeparatorChar;
+            TbPath.Text = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), IEnv.DATA_DIR);
         }
         #endregion
 
@@ -118,7 +118,7 @@ namespace Me.Amon.User.Sign
             _Root = TbPath.Text;
             if (string.IsNullOrEmpty(_Root))
             {
-                _Root = IEnv.DATA_DIR + Path.DirectorySeparatorChar;
+                _Root = IEnv.DATA_DIR;
             }
             #endregion
 
@@ -185,11 +185,6 @@ namespace Me.Amon.User.Sign
                     return;
                 }
             }
-            if (path[path.Length - 1] != Path.DirectorySeparatorChar)
-            {
-                path += Path.DirectorySeparatorChar;
-            }
-            TbPath.Text = path;
         }
         #endregion
 
@@ -277,7 +272,7 @@ namespace Me.Amon.User.Sign
                     _SignAc.ShowAlert("注册用户失败，请稍后重试！");
                     return;
                 }
-                _Root += code + Path.DirectorySeparatorChar;
+                _Root = Path.Combine(_Root, code);
                 if (Directory.Exists(_Root))
                 {
                     _SignAc.HideWaiting();

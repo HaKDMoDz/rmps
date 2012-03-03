@@ -18,22 +18,22 @@ namespace Me.Amon.Model
         public void Init()
         {
             #region 数据目录
-            _CatDir = _UserModel.Home + "CAT" + Path.DirectorySeparatorChar;
+            _CatDir = Path.Combine(_UserModel.Home, "CAT");
             if (!Directory.Exists(_CatDir))
             {
                 Directory.CreateDirectory(_CatDir);
             }
-            _KeyDir = _UserModel.Home + "KEY" + Path.DirectorySeparatorChar;
+            _KeyDir = Path.Combine(_UserModel.Home, "KEY");
             if (!Directory.Exists(_KeyDir))
             {
                 Directory.CreateDirectory(_KeyDir);
             }
-            _AttDir = _UserModel.Home + "ATT" + Path.DirectorySeparatorChar;
+            _AttDir = Path.Combine(_UserModel.Home, "ATT");
             if (!Directory.Exists(_AttDir))
             {
                 Directory.CreateDirectory(_AttDir);
             }
-            _AcfDir = _UserModel.Home + "ACF" + Path.DirectorySeparatorChar;
+            _AcfDir = Path.Combine(_UserModel.Home, "ACF");
             if (!Directory.Exists(_AcfDir))
             {
                 Directory.CreateDirectory(_AcfDir);

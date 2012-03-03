@@ -112,16 +112,11 @@ namespace Me.Amon.User.Sign
                 BtPath.Focus();
                 return;
             }
-            if (home[home.Length - 1] != Path.DirectorySeparatorChar)
-            {
-                home += Path.DirectorySeparatorChar;
-            }
             #endregion
 
             #region 代码
             string code = IEnv.USER_AMON;
-            home += code + Path.DirectorySeparatorChar;
-            if (Directory.Exists(home))
+            if (Directory.Exists(Path.Combine(home, code)))
             {
                 _SignAc.ShowAlert(string.Format("指定路径下已存在名为 {0} 的目录！", code));
                 return;
@@ -194,11 +189,6 @@ namespace Me.Amon.User.Sign
                     return;
                 }
             }
-            if (path[path.Length - 1] != Path.DirectorySeparatorChar)
-            {
-                path += Path.DirectorySeparatorChar;
-            }
-            TbPath.Text = path;
         }
         #endregion
 
@@ -211,7 +201,7 @@ namespace Me.Amon.User.Sign
             var tmp = '\'' + _UserModel.Code + '\'';
             var dba = _UserModel.DBAccess;
 
-            string file = _UserModel.Home + "dat.sql";
+            string file = Path.Combine(_UserModel.Home, "dat.sql");
             StreamReader reader = File.OpenText(file);
             string line = reader.ReadLine();
             while (line != null)

@@ -82,5 +82,11 @@
         public const string USER_AMON = "A0000000";
         public const string USER_DEMO = "A0000010";
         public const string USER_TEST = "A0000020";
+
+        public const int IMG_KEY_EDIT_DIM = 16;
+        public const string IMG_KEY_EDIT_EXT = ".16";
+
+        public const int IMG_KEY_LIST_DIM = 24;
+        public const string IMG_KEY_LIST_EXT = ".24";
     }
 }

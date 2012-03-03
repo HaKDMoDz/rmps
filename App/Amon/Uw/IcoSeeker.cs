@@ -99,7 +99,7 @@ namespace Me.Amon.Uw
                 return;
             }
 
-            _HomeDir = CharUtil.IsValidateHash(item.Id) ? _RootDir + item.Id + Path.DirectorySeparatorChar : _RootDir;
+            _HomeDir = CharUtil.IsValidateHash(item.Id) ? Path.Combine(_RootDir, item.Id) : _RootDir;
             if (!Directory.Exists(_HomeDir))
             {
                 return;

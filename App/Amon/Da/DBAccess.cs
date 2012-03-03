@@ -76,7 +76,7 @@ namespace Me.Amon.Da
 
         public void Init(UserModel userModel)
         {
-            string path = userModel.Home + "amon.db3";
+            string path = Path.Combine(userModel.Home, IEnv.FILE_DB);
             bool isNew = !File.Exists(path);
             _Connection = new SQLiteConnection("Data Source=" + path + ";Version=3;");
             _Connection.Open();

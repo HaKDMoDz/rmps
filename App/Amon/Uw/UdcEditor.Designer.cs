@@ -138,7 +138,7 @@
             this.BtCancel.UseVisualStyleBackColor = true;
             this.BtCancel.Click += new System.EventHandler(this.BtCancel_Click);
             // 
-            // UdcEdit
+            // UdcEditor
             // 
             this.AcceptButton = this.BtUpdate;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -159,8 +159,9 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "UdcEdit";
+            this.Name = "UdcEditor";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "字符管理";
             this.ResumeLayout(false);
             this.PerformLayout();

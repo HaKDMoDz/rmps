@@ -81,9 +81,8 @@ namespace Me.Amon.User
                 ShowAlert("您选择的路径不存在！");
                 return;
             }
-            home += Path.DirectorySeparatorChar;
 
-            string path = home + IEnv.AMON_CFG;
+            string path = Path.Combine(home, IEnv.AMON_CFG);
             if (!File.Exists(path))
             {
                 ShowAlert("请确认您选择的数据路径是否正确！");

@@ -4,7 +4,6 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Util;
-using Me.Amon.Bean;
 
 namespace Me.Amon.Uw.Ico
 {
@@ -44,8 +43,7 @@ namespace Me.Amon.Uw.Ico
                 return;
             }
 
-            var item = LvIco.SelectedItems[0];
-            _IcoSeeker.CallBack(new Bean.Ico { Key = item.ImageKey, Large = IlIco.Images[item.ImageKey] });
+            _IcoSeeker.CallBack(new Bean.Ico { Path = _IcoSeeker.HomeDir, File = LvIco.SelectedItems[0].ImageKey });
         }
 
         private void BtAppend_Click(object sender, EventArgs e)
@@ -67,34 +65,27 @@ namespace Me.Amon.Uw.Ico
             {
                 return;
             }
+
             using (Image img = Image.FromFile(fd.FileName))
             {
-                int size = _IcoSeeker.IcoSize;
-
-                Bitmap bmp = new Bitmap(size, size);
-                int w = img.Width;
-                int h = img.Height;
-                if (w != size && h != size)
-                {
-                    double rw = (double)size / w;
-                    double rh = (double)size / h;
-                    double r = rw <= rh ? rw : rh;
-                    w = (int)(r * w);
-                    h = (int)(r * h);
-
-                    Graphics g = Graphics.FromImage(bmp);
-                    g.DrawImage(img, (size - w) >> 1, (size - h) >> 1, w, h);
-                    g.Flush();
-                    g.Dispose();
-                }
                 string key = HashUtil.UtcTimeInHex(true);
-                bmp.Save(_IcoSeeker.HomeDir + key + ".png", ImageFormat.Png);
-                IlIco.Images.Add(key, img);
+                int[] dim = { 16, 24, 32 };
 
-                LvIco.SelectedItems.Clear();
-                var item = new ListViewItem((LvIco.Items.Count + 1).ToString(), key);
-                LvIco.Items.Add(item);
-                item.Selected = true;
+                Image tmp;
+                foreach (int t in dim)
+                {
+                    tmp = BeanUtil.ScaleImage(img, t, true);
+                    tmp.Save(_IcoSeeker.HomeDir + key + "." + t, ImageFormat.Png);
+                    if (_IcoSeeker.IcoSize == t)
+                    {
+                        IlIco.Images.Add(key, tmp);
+
+                        LvIco.SelectedItems.Clear();
+                        var item = new ListViewItem((LvIco.Items.Count + 1).ToString(), key);
+                        LvIco.Items.Add(item);
+                        item.Selected = true;
+                    }
+                }
             }
         }
 

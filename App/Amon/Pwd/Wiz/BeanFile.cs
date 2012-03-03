@@ -158,13 +158,13 @@ namespace Me.Amon.Pwd.Wiz
         #region 私有函数
         private void ViewFile(bool inner)
         {
-            string srcFile = _DataModel.AcfDir + _Att.GetSpec(FileAtt.SPEC_FILE_NAME) + IEnv.FILE_ACF;
+            string srcFile = Path.Combine(_DataModel.AcfDir, _Att.GetSpec(FileAtt.SPEC_FILE_NAME) + IEnv.FILE_ACF);
             if (!File.Exists(srcFile))
             {
                 MessageBox.Show("系统错误，找不到来源文件！");
                 return;
             }
-            string dstFile = Path.GetTempPath() + TbData.Text;
+            string dstFile = Path.Combine(Path.GetTempPath(), TbData.Text);
             if (!SafeUtil.DecryptFile(_Att.GetSpec(FileAtt.SPEC_FILE_ALG), _Att.GetSpec(FileAtt.SPEC_FILE_KEY), srcFile, dstFile))
             {
                 MessageBox.Show("系统错误，无法解密指定文件！");

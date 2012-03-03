@@ -205,7 +205,7 @@ namespace Me.Amon.Pwd
                     node.Tag = cat;
                     if (CharUtil.IsValidateHash(cat.Icon))
                     {
-                        IlCatTree.Images.Add(cat.Icon, BeanUtil.ReadImage(_DataModel.CatDir + cat.Icon + ".png", BeanUtil.NaN16));
+                        IlCatTree.Images.Add(cat.Icon, BeanUtil.ReadImage(Path.Combine(_DataModel.CatDir, cat.Icon + ".png"), BeanUtil.NaN16));
                         node.ImageKey = cat.Icon;
                     }
                     else
@@ -248,11 +248,11 @@ namespace Me.Amon.Pwd
                 {
                     if (CharUtil.IsValidateHash(key.IcoPath))
                     {
-                        key.Icon = BeanUtil.ReadImage(_DataModel.KeyDir + key.IcoPath + Path.DirectorySeparatorChar + key.IcoName + ".png", BeanUtil.NaN32);
+                        key.Icon = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoPath, key.IcoName + IEnv.IMG_KEY_LIST_DIM), BeanUtil.NaN24);
                     }
                     else
                     {
-                        key.Icon = BeanUtil.ReadImage(_DataModel.KeyDir + key.IcoName + ".png", BeanUtil.NaN32);
+                        key.Icon = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoName + IEnv.IMG_KEY_LIST_DIM), BeanUtil.NaN24);
                     }
                 }
                 else
@@ -1126,7 +1126,7 @@ namespace Me.Amon.Pwd
         private void TmiUcs_Click(object sender, EventArgs e)
         {
             UdcEditor edit = new UdcEditor(_UserModel);
-            edit.Init(_DataModel, null);
+            edit.Init(_DataModel, new Udc());
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
@@ -1134,7 +1134,7 @@ namespace Me.Amon.Pwd
         private void TmiIco_Click(object sender, EventArgs e)
         {
             IcoSeeker edit = new IcoSeeker(_UserModel, _DataModel.KeyDir);
-            edit.InitOnce(32);
+            edit.InitOnce(IEnv.IMG_KEY_LIST_DIM);
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
@@ -1351,7 +1351,7 @@ namespace Me.Amon.Pwd
         {
             PngSeeker editor = new PngSeeker(_UserModel, _DataModel.CatDir);
             editor.InitOnce(16);
-            editor.CallBackHandler = new AmonHandler<Bean.Ico>(ChangeImgByKey);
+            editor.CallBackHandler = new AmonHandler<Bean.Png>(ChangeImgByCat);
             BeanUtil.CenterToParent(editor, this);
             editor.ShowDialog(this);
         }
@@ -1615,18 +1615,18 @@ namespace Me.Amon.Pwd
             TmiViewPad.Checked = true;
         }
 
-        private void ChangeImgByKey(Bean.Ico img)
+        private void ChangeImgByCat(Bean.Png png)
         {
-            if (!CharUtil.IsValidateHash(img.Key))
+            if (!CharUtil.IsValidateHash(png.Path))
             {
-                img.Key = "0";
+                png.Path = "0";
             }
-            if (!IlCatTree.Images.ContainsKey(img.Key))
+            if (!IlCatTree.Images.ContainsKey(png.Path))
             {
-                IlCatTree.Images.Add(img.Key, img.Small);
+                IlCatTree.Images.Add(png.Path, png.Image);
             }
-            _LastNode.ImageKey = img.Key;
-            _LastNode.SelectedImageKey = img.Key;
+            _LastNode.ImageKey = png.Path;
+            _LastNode.SelectedImageKey = png.Path;
 
             Cat cat = _LastNode.Tag as Cat;
             if (cat == null)
@@ -1637,7 +1637,7 @@ namespace Me.Amon.Pwd
             var dba = _UserModel.DBAccess;
             dba.ReInit();
             dba.AddTable(DBConst.ACAT0200);
-            dba.AddParam(DBConst.ACAT0207, img.Key);
+            dba.AddParam(DBConst.ACAT0207, png.Path);
             dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
             dba.AddWhere(DBConst.ACAT0203, cat.Id);
             dba.ExecuteUpdate();
