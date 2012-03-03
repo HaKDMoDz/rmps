@@ -80,7 +80,7 @@ namespace Me.Amon.User
             TbPass.Text = "";
             if (string.IsNullOrEmpty(pass))
             {
-                ShowAlert("请输入登录口令！");
+                ShowAlert("请输入解屏口令！");
                 TbPass.Focus();
                 return;
             }
@@ -92,8 +92,6 @@ namespace Me.Amon.User
                 return;
             }
             #endregion
-
-            pass = _UserModel.Digest(name, pass);
 
             if (!_UserModel.CaSignRc(name, pass))
             {

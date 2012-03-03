@@ -51,6 +51,9 @@ namespace Me.Amon.User
                 case EAuthAc.AuthSk:
                     ShowAuthSk();
                     break;
+                case EAuthAc.AuthLk:
+                    ShowAuthLk();
+                    break;
             }
         }
 
@@ -85,7 +88,7 @@ namespace Me.Amon.User
             ShowView(_AuthPk);
             _AuthAc = _AuthPk;
 
-            Text = "联机修改";
+            Text = "修改登录口令（联机）";
             BtOk.Text = "确定(&O)";
         }
 
@@ -99,7 +102,7 @@ namespace Me.Amon.User
             ShowView(_AuthUl);
             _AuthAc = _AuthUl;
 
-            Text = "脱机修改";
+            Text = "修改登录口令（脱机）";
             BtOk.Text = "确定(&O)";
         }
 
@@ -113,7 +116,7 @@ namespace Me.Amon.User
             ShowView(_AuthPc);
             _AuthAc = _AuthPc;
 
-            Text = "单机修改";
+            Text = "修改登录口令（单机）";
             BtOk.Text = "确定(&O)";
         }
 
@@ -128,6 +131,20 @@ namespace Me.Amon.User
             _AuthAc = _AuthSk;
 
             Text = "设置安全口令";
+            BtOk.Text = "确定(&O)";
+        }
+
+        private AuthLk _AuthLk;
+        private void ShowAuthLk()
+        {
+            if (_AuthLk == null)
+            {
+                _AuthLk = new AuthLk(this, _UserModel);
+            }
+            ShowView(_AuthLk);
+            _AuthAc = _AuthLk;
+
+            Text = "修改解屏口令";
             BtOk.Text = "确定(&O)";
         }
 

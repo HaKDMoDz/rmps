@@ -573,6 +573,12 @@
       <DependentUpon>Text.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="User\Auth\AuthLk.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User\Auth\AuthLk.Designer.cs">
+      <DependentUpon>AuthLk.cs</DependentUpon>
+    </Compile>
     <Compile Include="User\Auth\AuthPc.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -909,6 +915,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sec\Uw\Text.resx">
       <DependentUpon>Text.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\Auth\AuthLk.resx">
+      <DependentUpon>AuthLk.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\Auth\AuthPc.resx">
       <DependentUpon>AuthPc.cs</DependentUpon>

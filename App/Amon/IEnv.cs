@@ -42,6 +42,7 @@
         public const string AMON_CFG_CODE = "amon.code";
         public const string AMON_CFG_DATA = "amon.data";
         public const string AMON_CFG_INFO = "amon.info";
+        public const string AMON_CFG_LOCK = "amon.lock";
         public const string AMON_CFG_MAIN = "amon.main";
         public const string AMON_CFG_SAFE = "amon.safe";
         public const string AMON_CFG_LOOK = "amon.look";

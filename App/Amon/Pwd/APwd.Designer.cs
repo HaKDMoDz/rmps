@@ -37,24 +37,10 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.TmiExitApp = new System.Windows.Forms.ToolStripMenuItem();
             this.TmuEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiAppendCat = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiUpdateCat = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiDeleteCat = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiEditSep0 = new System.Windows.Forms.ToolStripSeparator();
-            this.TmiAppendKey = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiDeleteKey = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiEditSep1 = new System.Windows.Forms.ToolStripSeparator();
-            this.TmuAppendAtt = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiAppendAttText = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiAppendAttPass = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiAppendAttLink = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiAppendAttMail = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiAppendAttDate = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiAppendAttData = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiAppendAttList = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiAppendAttMemo = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiAppendAttFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiAppendAttLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiAppendKey = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiEditSep0 = new System.Windows.Forms.ToolStripSeparator();
+            this.TmiDeleteAtt = new System.Windows.Forms.ToolStripMenuItem();
             this.TmuUpdateAtt = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiUpdateAttText = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiUpdateAttPass = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,7 +52,21 @@
             this.TmiUpdateAttMemo = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiUpdateAttFile = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiUpdateAttLine = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiDeleteAtt = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmuAppendAtt = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiAppendAttText = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiAppendAttPass = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiAppendAttLink = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiAppendAttMail = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiAppendAttDate = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiAppendAttData = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiAppendAttList = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiAppendAttMemo = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiAppendAttFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiAppendAttLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiEditSep1 = new System.Windows.Forms.ToolStripSeparator();
+            this.TmiAppendCat = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiUpdateCat = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiDeleteCat = new System.Windows.Forms.ToolStripMenuItem();
             this.TmuView = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiViewPro = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiViewWiz = new System.Windows.Forms.ToolStripMenuItem();
@@ -164,6 +164,7 @@
             this.TssTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.UcTime = new System.Windows.Forms.Timer(this.components);
+            this.TmiLkey = new System.Windows.Forms.ToolStripMenuItem();
             this.TmMenu.SuspendLayout();
             this.TcTool.ContentPanel.SuspendLayout();
             this.TcTool.TopToolStripPanel.SuspendLayout();
@@ -252,31 +253,12 @@
             this.TmuEdit.Size = new System.Drawing.Size(59, 21);
             this.TmuEdit.Text = "编辑(&E)";
             // 
-            // TmiAppendCat
+            // TmiDeleteKey
             // 
-            this.TmiAppendCat.Name = "TmiAppendCat";
-            this.TmiAppendCat.Size = new System.Drawing.Size(124, 22);
-            this.TmiAppendCat.Text = "添加类别";
-            this.TmiAppendCat.Click += new System.EventHandler(this.TmiAppendCat_Click);
-            // 
-            // TmiUpdateCat
-            // 
-            this.TmiUpdateCat.Name = "TmiUpdateCat";
-            this.TmiUpdateCat.Size = new System.Drawing.Size(124, 22);
-            this.TmiUpdateCat.Text = "更新类别";
-            this.TmiUpdateCat.Click += new System.EventHandler(this.TmiUpdateCat_Click);
-            // 
-            // TmiDeleteCat
-            // 
-            this.TmiDeleteCat.Name = "TmiDeleteCat";
-            this.TmiDeleteCat.Size = new System.Drawing.Size(124, 22);
-            this.TmiDeleteCat.Text = "删除类别";
-            this.TmiDeleteCat.Click += new System.EventHandler(this.TmiDeleteCat_Click);
-            // 
-            // TmiEditSep0
-            // 
-            this.TmiEditSep0.Name = "TmiEditSep0";
-            this.TmiEditSep0.Size = new System.Drawing.Size(121, 6);
+            this.TmiDeleteKey.Name = "TmiDeleteKey";
+            this.TmiDeleteKey.Size = new System.Drawing.Size(124, 22);
+            this.TmiDeleteKey.Text = "删除记录";
+            this.TmiDeleteKey.Click += new System.EventHandler(this.TmiDeleteKey_Click);
             // 
             // TmiAppendKey
             // 
@@ -285,104 +267,17 @@
             this.TmiAppendKey.Text = "添加记录";
             this.TmiAppendKey.Click += new System.EventHandler(this.TmiAppendKey_Click);
             // 
-            // TmiDeleteKey
+            // TmiEditSep0
             // 
-            this.TmiDeleteKey.Name = "TmiDeleteKey";
-            this.TmiDeleteKey.Size = new System.Drawing.Size(124, 22);
-            this.TmiDeleteKey.Text = "删除记录";
-            this.TmiDeleteKey.Click += new System.EventHandler(this.TmiDeleteKey_Click);
+            this.TmiEditSep0.Name = "TmiEditSep0";
+            this.TmiEditSep0.Size = new System.Drawing.Size(121, 6);
             // 
-            // TmiEditSep1
+            // TmiDeleteAtt
             // 
-            this.TmiEditSep1.Name = "TmiEditSep1";
-            this.TmiEditSep1.Size = new System.Drawing.Size(121, 6);
-            // 
-            // TmuAppendAtt
-            // 
-            this.TmuAppendAtt.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TmiAppendAttText,
-            this.TmiAppendAttPass,
-            this.TmiAppendAttLink,
-            this.TmiAppendAttMail,
-            this.TmiAppendAttDate,
-            this.TmiAppendAttData,
-            this.TmiAppendAttList,
-            this.TmiAppendAttMemo,
-            this.TmiAppendAttFile,
-            this.TmiAppendAttLine});
-            this.TmuAppendAtt.Name = "TmuAppendAtt";
-            this.TmuAppendAtt.Size = new System.Drawing.Size(124, 22);
-            this.TmuAppendAtt.Text = "添加属性";
-            // 
-            // TmiAppendAttText
-            // 
-            this.TmiAppendAttText.Name = "TmiAppendAttText";
-            this.TmiAppendAttText.Size = new System.Drawing.Size(100, 22);
-            this.TmiAppendAttText.Text = "文本";
-            this.TmiAppendAttText.Click += new System.EventHandler(this.TmiAppendAttText_Click);
-            // 
-            // TmiAppendAttPass
-            // 
-            this.TmiAppendAttPass.Name = "TmiAppendAttPass";
-            this.TmiAppendAttPass.Size = new System.Drawing.Size(100, 22);
-            this.TmiAppendAttPass.Text = "口令";
-            this.TmiAppendAttPass.Click += new System.EventHandler(this.TmiAppendAttPass_Click);
-            // 
-            // TmiAppendAttLink
-            // 
-            this.TmiAppendAttLink.Name = "TmiAppendAttLink";
-            this.TmiAppendAttLink.Size = new System.Drawing.Size(100, 22);
-            this.TmiAppendAttLink.Text = "链接";
-            this.TmiAppendAttLink.Click += new System.EventHandler(this.TmiAppendAttLink_Click);
-            // 
-            // TmiAppendAttMail
-            // 
-            this.TmiAppendAttMail.Name = "TmiAppendAttMail";
-            this.TmiAppendAttMail.Size = new System.Drawing.Size(100, 22);
-            this.TmiAppendAttMail.Text = "邮件";
-            this.TmiAppendAttMail.Click += new System.EventHandler(this.TmiAppendAttMail_Click);
-            // 
-            // TmiAppendAttDate
-            // 
-            this.TmiAppendAttDate.Name = "TmiAppendAttDate";
-            this.TmiAppendAttDate.Size = new System.Drawing.Size(100, 22);
-            this.TmiAppendAttDate.Text = "日期";
-            this.TmiAppendAttDate.Click += new System.EventHandler(this.TmiAppendAttDate_Click);
-            // 
-            // TmiAppendAttData
-            // 
-            this.TmiAppendAttData.Name = "TmiAppendAttData";
-            this.TmiAppendAttData.Size = new System.Drawing.Size(100, 22);
-            this.TmiAppendAttData.Text = "数值";
-            this.TmiAppendAttData.Click += new System.EventHandler(this.TmiAppendAttData_Click);
-            // 
-            // TmiAppendAttList
-            // 
-            this.TmiAppendAttList.Name = "TmiAppendAttList";
-            this.TmiAppendAttList.Size = new System.Drawing.Size(100, 22);
-            this.TmiAppendAttList.Text = "列表";
-            this.TmiAppendAttList.Click += new System.EventHandler(this.TmiAppendAttList_Click);
-            // 
-            // TmiAppendAttMemo
-            // 
-            this.TmiAppendAttMemo.Name = "TmiAppendAttMemo";
-            this.TmiAppendAttMemo.Size = new System.Drawing.Size(100, 22);
-            this.TmiAppendAttMemo.Text = "附注";
-            this.TmiAppendAttMemo.Click += new System.EventHandler(this.TmiAppendAttMemo_Click);
-            // 
-            // TmiAppendAttFile
-            // 
-            this.TmiAppendAttFile.Name = "TmiAppendAttFile";
-            this.TmiAppendAttFile.Size = new System.Drawing.Size(100, 22);
-            this.TmiAppendAttFile.Text = "附件";
-            this.TmiAppendAttFile.Click += new System.EventHandler(this.TmiAppendAttFile_Click);
-            // 
-            // TmiAppendAttLine
-            // 
-            this.TmiAppendAttLine.Name = "TmiAppendAttLine";
-            this.TmiAppendAttLine.Size = new System.Drawing.Size(100, 22);
-            this.TmiAppendAttLine.Text = "分组";
-            this.TmiAppendAttLine.Click += new System.EventHandler(this.TmiAppendAttLine_Click);
+            this.TmiDeleteAtt.Name = "TmiDeleteAtt";
+            this.TmiDeleteAtt.Size = new System.Drawing.Size(124, 22);
+            this.TmiDeleteAtt.Text = "删除属性";
+            this.TmiDeleteAtt.Click += new System.EventHandler(this.TmiDeleteAtt_Click);
             // 
             // TmuUpdateAtt
             // 
@@ -471,12 +366,118 @@
             this.TmiUpdateAttLine.Text = "分组";
             this.TmiUpdateAttLine.Click += new System.EventHandler(this.TmiUpdateAttLine_Click);
             // 
-            // TmiDeleteAtt
+            // TmuAppendAtt
             // 
-            this.TmiDeleteAtt.Name = "TmiDeleteAtt";
-            this.TmiDeleteAtt.Size = new System.Drawing.Size(124, 22);
-            this.TmiDeleteAtt.Text = "删除属性";
-            this.TmiDeleteAtt.Click += new System.EventHandler(this.TmiDeleteAtt_Click);
+            this.TmuAppendAtt.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TmiAppendAttText,
+            this.TmiAppendAttPass,
+            this.TmiAppendAttLink,
+            this.TmiAppendAttMail,
+            this.TmiAppendAttDate,
+            this.TmiAppendAttData,
+            this.TmiAppendAttList,
+            this.TmiAppendAttMemo,
+            this.TmiAppendAttFile,
+            this.TmiAppendAttLine});
+            this.TmuAppendAtt.Name = "TmuAppendAtt";
+            this.TmuAppendAtt.Size = new System.Drawing.Size(124, 22);
+            this.TmuAppendAtt.Text = "添加属性";
+            // 
+            // TmiAppendAttText
+            // 
+            this.TmiAppendAttText.Name = "TmiAppendAttText";
+            this.TmiAppendAttText.Size = new System.Drawing.Size(100, 22);
+            this.TmiAppendAttText.Text = "文本";
+            this.TmiAppendAttText.Click += new System.EventHandler(this.TmiAppendAttText_Click);
+            // 
+            // TmiAppendAttPass
+            // 
+            this.TmiAppendAttPass.Name = "TmiAppendAttPass";
+            this.TmiAppendAttPass.Size = new System.Drawing.Size(100, 22);
+            this.TmiAppendAttPass.Text = "口令";
+            this.TmiAppendAttPass.Click += new System.EventHandler(this.TmiAppendAttPass_Click);
+            // 
+            // TmiAppendAttLink
+            // 
+            this.TmiAppendAttLink.Name = "TmiAppendAttLink";
+            this.TmiAppendAttLink.Size = new System.Drawing.Size(100, 22);
+            this.TmiAppendAttLink.Text = "链接";
+            this.TmiAppendAttLink.Click += new System.EventHandler(this.TmiAppendAttLink_Click);
+            // 
+            // TmiAppendAttMail
+            // 
+            this.TmiAppendAttMail.Name = "TmiAppendAttMail";
+            this.TmiAppendAttMail.Size = new System.Drawing.Size(100, 22);
+            this.TmiAppendAttMail.Text = "邮件";
+            this.TmiAppendAttMail.Click += new System.EventHandler(this.TmiAppendAttMail_Click);
+            // 
+            // TmiAppendAttDate
+            // 
+            this.TmiAppendAttDate.Name = "TmiAppendAttDate";
+            this.TmiAppendAttDate.Size = new System.Drawing.Size(100, 22);
+            this.TmiAppendAttDate.Text = "日期";
+            this.TmiAppendAttDate.Click += new System.EventHandler(this.TmiAppendAttDate_Click);
+            // 
+            // TmiAppendAttData
+            // 
+            this.TmiAppendAttData.Name = "TmiAppendAttData";
+            this.TmiAppendAttData.Size = new System.Drawing.Size(100, 22);
+            this.TmiAppendAttData.Text = "数值";
+            this.TmiAppendAttData.Click += new System.EventHandler(this.TmiAppendAttData_Click);
+            // 
+            // TmiAppendAttList
+            // 
+            this.TmiAppendAttList.Name = "TmiAppendAttList";
+            this.TmiAppendAttList.Size = new System.Drawing.Size(100, 22);
+            this.TmiAppendAttList.Text = "列表";
+            this.TmiAppendAttList.Click += new System.EventHandler(this.TmiAppendAttList_Click);
+            // 
+            // TmiAppendAttMemo
+            // 
+            this.TmiAppendAttMemo.Name = "TmiAppendAttMemo";
+            this.TmiAppendAttMemo.Size = new System.Drawing.Size(100, 22);
+            this.TmiAppendAttMemo.Text = "附注";
+            this.TmiAppendAttMemo.Click += new System.EventHandler(this.TmiAppendAttMemo_Click);
+            // 
+            // TmiAppendAttFile
+            // 
+            this.TmiAppendAttFile.Name = "TmiAppendAttFile";
+            this.TmiAppendAttFile.Size = new System.Drawing.Size(100, 22);
+            this.TmiAppendAttFile.Text = "附件";
+            this.TmiAppendAttFile.Click += new System.EventHandler(this.TmiAppendAttFile_Click);
+            // 
+            // TmiAppendAttLine
+            // 
+            this.TmiAppendAttLine.Name = "TmiAppendAttLine";
+            this.TmiAppendAttLine.Size = new System.Drawing.Size(100, 22);
+            this.TmiAppendAttLine.Text = "分组";
+            this.TmiAppendAttLine.Click += new System.EventHandler(this.TmiAppendAttLine_Click);
+            // 
+            // TmiEditSep1
+            // 
+            this.TmiEditSep1.Name = "TmiEditSep1";
+            this.TmiEditSep1.Size = new System.Drawing.Size(121, 6);
+            // 
+            // TmiAppendCat
+            // 
+            this.TmiAppendCat.Name = "TmiAppendCat";
+            this.TmiAppendCat.Size = new System.Drawing.Size(124, 22);
+            this.TmiAppendCat.Text = "添加类别";
+            this.TmiAppendCat.Click += new System.EventHandler(this.TmiAppendCat_Click);
+            // 
+            // TmiUpdateCat
+            // 
+            this.TmiUpdateCat.Name = "TmiUpdateCat";
+            this.TmiUpdateCat.Size = new System.Drawing.Size(124, 22);
+            this.TmiUpdateCat.Text = "更新类别";
+            this.TmiUpdateCat.Click += new System.EventHandler(this.TmiUpdateCat_Click);
+            // 
+            // TmiDeleteCat
+            // 
+            this.TmiDeleteCat.Name = "TmiDeleteCat";
+            this.TmiDeleteCat.Size = new System.Drawing.Size(124, 22);
+            this.TmiDeleteCat.Text = "删除类别";
+            this.TmiDeleteCat.Click += new System.EventHandler(this.TmiDeleteCat_Click);
             // 
             // TmuView
             // 
@@ -682,6 +683,7 @@
             // 
             this.TmuUser.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TmiPkey,
+            this.TmiLkey,
             this.TmiSkey,
             this.TmiUserSep0,
             this.TmiLib,
@@ -700,6 +702,7 @@
             // 
             // TmiSkey
             // 
+            this.TmiSkey.Enabled = false;
             this.TmiSkey.Name = "TmiSkey";
             this.TmiSkey.Size = new System.Drawing.Size(164, 22);
             this.TmiSkey.Text = "设置安全口令(&S)";
@@ -753,32 +756,32 @@
             // 
             this.TmiHelp.Name = "TmiHelp";
             this.TmiHelp.ShortcutKeyDisplayString = "F1";
-            this.TmiHelp.Size = new System.Drawing.Size(152, 22);
+            this.TmiHelp.Size = new System.Drawing.Size(149, 22);
             this.TmiHelp.Text = "帮助(&H)";
             this.TmiHelp.Click += new System.EventHandler(this.TmiHelp_Click);
             // 
             // TmiHelpSep0
             // 
             this.TmiHelpSep0.Name = "TmiHelpSep0";
-            this.TmiHelpSep0.Size = new System.Drawing.Size(149, 6);
+            this.TmiHelpSep0.Size = new System.Drawing.Size(146, 6);
             // 
             // TmiKeys
             // 
             this.TmiKeys.Name = "TmiKeys";
             this.TmiKeys.ShortcutKeyDisplayString = "F5";
-            this.TmiKeys.Size = new System.Drawing.Size(152, 22);
+            this.TmiKeys.Size = new System.Drawing.Size(149, 22);
             this.TmiKeys.Text = "快捷键(&K)";
             this.TmiKeys.Click += new System.EventHandler(this.TmiKeys_Click);
             // 
             // TmiHelpSep1
             // 
             this.TmiHelpSep1.Name = "TmiHelpSep1";
-            this.TmiHelpSep1.Size = new System.Drawing.Size(149, 6);
+            this.TmiHelpSep1.Size = new System.Drawing.Size(146, 6);
             // 
             // TmiInfo
             // 
             this.TmiInfo.Name = "TmiInfo";
-            this.TmiInfo.Size = new System.Drawing.Size(152, 22);
+            this.TmiInfo.Size = new System.Drawing.Size(149, 22);
             this.TmiInfo.Text = "关于(&A)";
             this.TmiInfo.Click += new System.EventHandler(this.TmiInfo_Click);
             // 
@@ -1301,6 +1304,13 @@
             // 
             this.UcTime.Tick += new System.EventHandler(this.UcTime_Tick);
             // 
+            // TmiLkey
+            // 
+            this.TmiLkey.Name = "TmiLkey";
+            this.TmiLkey.Size = new System.Drawing.Size(164, 22);
+            this.TmiLkey.Text = "修改解锁口令(&L)";
+            this.TmiLkey.Click += new System.EventHandler(this.TmiLkey_Click);
+            // 
             // APwd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1478,5 +1488,6 @@
         private System.Windows.Forms.ToolStripMenuItem CmiSortD;
         private System.Windows.Forms.ToolStripSeparator CmiCatSep1;
         private System.Windows.Forms.ToolStripMenuItem TmiNavPane;
+        private System.Windows.Forms.ToolStripMenuItem TmiLkey;
     }
 }

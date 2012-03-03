@@ -660,7 +660,7 @@ namespace Me.Amon.Pwd
 
         private void TmiLockWin_Click(object sender, EventArgs e)
         {
-            new AuthRc(_UserModel, this).ShowDialog(this);
+            LockForm();
         }
 
         private void TmiExitApp_Click(object sender, EventArgs e)
@@ -1101,9 +1101,16 @@ namespace Me.Amon.Pwd
             authAc.ShowDialog(this);
         }
 
+        private void TmiLkey_Click(object sender, EventArgs e)
+        {
+            AuthAc authAc = new AuthAc(_UserModel);
+            authAc.InitOnce();
+            authAc.ShowView(EAuthAc.AuthLk);
+            authAc.ShowDialog(this);
+        }
+
         private void TmiSkey_Click(object sender, EventArgs e)
         {
-
         }
         #endregion
 
@@ -2343,6 +2350,7 @@ namespace Me.Amon.Pwd
 
         private void LockForm()
         {
+            new AuthRc(_UserModel, this).ShowDialog(this);
         }
 
         private void HideForm()

@@ -14,6 +14,7 @@ namespace Me.Amon.Model
     {
         #region 全局变量
         private string _Info;
+        private string _Lock;
         private byte[] _Data;
 
         private byte[] _Keys;
@@ -65,10 +66,12 @@ namespace Me.Amon.Model
                 return false;
             }
 
+            _Lock = prop.Get(IEnv.AMON_CFG_LOCK);
+
             _Name = name;
             _Code = code;
-            _Info = info;
             _Home = home;
+            _Info = info;
             Look = "Default";
             Feel = "Default";
             return true;
@@ -80,9 +83,9 @@ namespace Me.Amon.Model
         /// <param name="name"></param>
         /// <param name="info"></param>
         /// <returns></returns>
-        public bool CaSignRc(string name, string info)
+        public bool CaSignRc(string name, string pass)
         {
-            return (name == _Name && info == _Info);
+            return (name == _Name && _Info == Digest(_Name, pass));
         }
 
         /// <summary>
@@ -90,21 +93,25 @@ namespace Me.Amon.Model
         /// </summary>
         /// <param name="pass"></param>
         /// <returns></returns>
-        public bool CaSignAc(string pass)
+        public bool CaAuthRc(string pass)
         {
-            return _Info == Digest(Name, pass);
+            return _Lock == Digest(_Name, pass);
         }
 
         /// <summary>
         /// 修改登录口令
         /// </summary>
-        /// <param name="oldPwds"></param>
-        /// <param name="newPwds"></param>
+        /// <param name="oldPass"></param>
+        /// <param name="newPass"></param>
         /// <returns></returns>
-        public bool CaSignPk(string oldPwds, string newPwds)
+        public bool CaAuthPk(string oldPass, string newPass)
         {
+            Uc.Properties prop = new Uc.Properties();
+            prop.Load(Home + IEnv.AMON_CFG);
+
             // 已有口令校验
-            if (_Info != Digest(Name, oldPwds))
+            string info = Digest(Name, oldPass);
+            if (info != prop.Get(IEnv.AMON_CFG_INFO))
             {
                 return false;
             }
@@ -123,9 +130,9 @@ namespace Me.Amon.Model
             Array.Copy(a, 0, t, i, a.Length);
 
             // 口令
-            byte[] k = GenK(Name, Code, newPwds);
+            byte[] k = GenK(Name, Code, newPass);
             // 向量
-            byte[] v = GenV(Name, Code, newPwds);
+            byte[] v = GenV(Name, Code, newPass);
 
             #region AES 加密
             AesManaged aes = new AesManaged();
@@ -142,12 +149,10 @@ namespace Me.Amon.Model
             #endregion
 
             // 摘要用户登录信息
-            _Info = Digest(Name, newPwds);
+            info = Digest(Name, newPass);
 
             string main = Convert.ToBase64String(t);
-            Uc.Properties prop = new Uc.Properties();
-            prop.Load(Home + IEnv.AMON_CFG);
-            prop.Set(IEnv.AMON_CFG_INFO, _Info);
+            prop.Set(IEnv.AMON_CFG_INFO, info);
             prop.Set(IEnv.AMON_CFG_MAIN, main);
             prop.Save(Home + IEnv.AMON_CFG);
 
@@ -158,9 +163,9 @@ namespace Me.Amon.Model
         /// 口令找回
         /// </summary>
         /// <param name="usrName"></param>
-        /// <param name="secPwds"></param>
+        /// <param name="secPass"></param>
         /// <returns></returns>
-        public bool CaSignFp(string usrName, StringBuilder secPwds)
+        public bool CaSignFk(string usrName, StringBuilder secPass)
         {
             //name = usrName;
 
@@ -207,45 +212,75 @@ namespace Me.Amon.Model
         }
 
         /// <summary>
+        /// 设定锁屏口令
+        /// </summary>
+        /// <returns></returns>
+        public bool CaAuthLk(string oldPass, string newPass)
+        {
+            if (_Lock != Digest(_Name, oldPass))
+            {
+                return false;
+            }
+
+            Uc.Properties prop = new Uc.Properties();
+            prop.Load(Home + IEnv.AMON_CFG);
+            prop.Set(IEnv.AMON_CFG_LOCK, Digest(Name, newPass));
+            prop.Save(Home + IEnv.AMON_CFG);
+            return true;
+        }
+
+        /// <summary>
         /// 设定安全口令
         /// </summary>
-        /// <param name="oldPwds"></param>
-        /// <param name="secPwds"></param>
+        /// <param name="oldPass"></param>
+        /// <param name="secPass"></param>
         /// <returns></returns>
-        public bool CaSignSk(string oldPwds, string secPwds)
+        public bool CaAuthSk(string oldPass, string secPass)
         {
-            //// 已有口令校验
-            //pwds = oldPwds;
-            //byte[] temp = signInDigest();
-            //if (!Util.bytesToString(temp, true).equals(userMdl.getCfg(ConsCfg.CFG_USER_INFO, "")))
-            //{
-            //    return false;
-            //}
+            Uc.Properties prop = new Uc.Properties();
+            prop.Load(Home + IEnv.AMON_CFG);
 
-            //// 认证信息
-            //this.pwds = secPwds;
-            //string sKey = Util.bytesToString(signSkDigest(), true);
+            // 已有口令校验
+            string info = Digest(Name, oldPass);
+            if (info != prop.Get(IEnv.AMON_CFG_INFO))
+            {
+                return false;
+            }
 
-            //temp = new string(mask).getBytes();
+            // 生成加密密钥及字符空间
+            byte[] t = new byte[72];
+            byte[] a = Encoding.UTF8.GetBytes(Code);
+            int i = 0;
+            Array.Copy(a, 0, t, i, a.Length);
+            i += a.Length;
+            Array.Copy(_Salt, 0, t, i, _Salt.Length);
+            i += _Salt.Length;
+            Array.Copy(_Keys, 0, t, i, _Keys.Length);
+            i += _Keys.Length;
+            a = Encoding.UTF8.GetBytes(_Mask);
+            Array.Copy(a, 0, t, i, a.Length);
 
-            //// 生成加密密钥及字符空间
-            //byte[] t = new byte[32];
-            //System.arraycopy(temp, 0, t, 0, temp.length);// 字符空间
-            //System.arraycopy(keys, 0, t, 16, keys.length);// 加密密钥
+            // 口令
+            byte[] k = GenK(Name, Code, secPass);
+            // 向量
+            byte[] v = GenV(Name, Code, secPass);
 
-            //// 摘要用户加密信息
-            //temp = keys;
-            //keys = cipherDigest();
+            #region AES 加密
+            AesManaged aes = new AesManaged();
+            using (MemoryStream mStream = new MemoryStream())
+            {
+                using (CryptoStream cStream = new CryptoStream(mStream, aes.CreateEncryptor(k, v), CryptoStreamMode.Write))
+                {
+                    cStream.Write(t, 0, t.Length);
+                    cStream.FlushFinalBlock();
+                    t = mStream.ToArray();
+                }
+            }
+            aes.Clear();
+            #endregion
 
-            //// 加密安全数据
-            //Cipher aes = Cipher.getInstance(ConsEnv.NAME_CIPHER);
-            //aes.init(Cipher.ENCRYPT_MODE, this);
-            //t = aes.doFinal(t);
-            //userMdl.setCfg(ConsCfg.CFG_USER_SKEY, sKey + Util.bytesToString(t, true));
-
-            //this.keys = temp;
-            //this.pwds = null;
-
+            prop.Set(IEnv.AMON_CFG_SAFE, Convert.ToBase64String(t));
+            prop.Save(Home + IEnv.AMON_CFG);
             return true;
         }
 
@@ -306,6 +341,7 @@ namespace Me.Amon.Model
             prop.Set(IEnv.AMON_CFG_CODE, code);
             prop.Set(IEnv.AMON_CFG_DATA, Convert.ToBase64String(_Data));
             prop.Set(IEnv.AMON_CFG_INFO, info);
+            prop.Set(IEnv.AMON_CFG_LOCK, info);
             prop.Set(IEnv.AMON_CFG_MAIN, main);
             prop.Set(IEnv.AMON_CFG_SAFE, "");
             prop.Save(_Home + IEnv.AMON_CFG);
@@ -313,6 +349,7 @@ namespace Me.Amon.Model
             _Name = name;
             _Code = code;
             _Info = info;
+            _Lock = info;
             Look = "Default";
             Feel = "Default";
             return true;
@@ -320,7 +357,7 @@ namespace Me.Amon.Model
 
         public void CaSignOf()
         {
-            _Info = null;
+            _Lock = null;
             _Keys = null;
             _Salt = null;
             _Mask = null;
@@ -389,6 +426,7 @@ namespace Me.Amon.Model
             prop.Set(IEnv.AMON_CFG_CODE, code);
             prop.Set(IEnv.AMON_CFG_DATA, data);
             prop.Set(IEnv.AMON_CFG_INFO, info);
+            prop.Set(IEnv.AMON_CFG_LOCK, info);
             prop.Set(IEnv.AMON_CFG_MAIN, main);
             prop.Set(IEnv.AMON_CFG_SAFE, safe);
             prop.Save(_Home + IEnv.AMON_CFG);
@@ -396,6 +434,7 @@ namespace Me.Amon.Model
             _Name = name;
             _Code = code;
             _Info = info;
+            _Lock = info;
             Look = "Default";
             Feel = "Default";
             return true;
@@ -466,11 +505,16 @@ namespace Me.Amon.Model
             prop.Set(IEnv.AMON_CFG_CODE, code);
             prop.Set(IEnv.AMON_CFG_DATA, data);
             prop.Set(IEnv.AMON_CFG_INFO, info);
+            prop.Set(IEnv.AMON_CFG_LOCK, _Lock);
             prop.Set(IEnv.AMON_CFG_MAIN, main);
             prop.Set(IEnv.AMON_CFG_SAFE, safe);
             prop.Save(_Home + IEnv.AMON_CFG);
 
-            _Info = info;
+            return true;
+        }
+
+        public bool WsSignSk(XmlReader reader)
+        {
             return true;
         }
         #endregion
@@ -493,7 +537,7 @@ namespace Me.Amon.Model
         }
 
         #region 数据安全
-        public string Digest(string name, string pass)
+        private string Digest(string name, string pass)
         {
             byte[] s = Encoding.UTF8.GetBytes(name + '%' + pass + "@Amon");
             byte[] t = new byte[_Data.Length + s.Length];
@@ -503,7 +547,7 @@ namespace Me.Amon.Model
             return Convert.ToBase64String(Digest(t));
         }
 
-        public byte[] Digest(byte[] data)
+        private byte[] Digest(byte[] data)
         {
             return HashAlgorithm.Create("SHA256").ComputeHash(data);
         }

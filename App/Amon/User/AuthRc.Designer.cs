@@ -49,15 +49,15 @@
             // LbPass
             // 
             this.LbPass.AutoSize = true;
-            this.LbPass.Location = new System.Drawing.Point(50, 66);
+            this.LbPass.Location = new System.Drawing.Point(33, 66);
             this.LbPass.Name = "LbPass";
-            this.LbPass.Size = new System.Drawing.Size(47, 12);
+            this.LbPass.Size = new System.Drawing.Size(71, 12);
             this.LbPass.TabIndex = 1;
-            this.LbPass.Text = "口令(&K)";
+            this.LbPass.Text = "解屏口令(&K)";
             // 
             // TbPass
             // 
-            this.TbPass.Location = new System.Drawing.Point(103, 63);
+            this.TbPass.Location = new System.Drawing.Point(110, 63);
             this.TbPass.Name = "TbPass";
             this.TbPass.Size = new System.Drawing.Size(100, 21);
             this.TbPass.TabIndex = 2;
@@ -100,7 +100,7 @@
             this.Name = "AuthRc";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "解锁";
+            this.Text = "解屏";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AuthRc_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

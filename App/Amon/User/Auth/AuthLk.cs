@@ -1,23 +1,27 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
 using Me.Amon.Model;
 
 namespace Me.Amon.User.Auth
 {
-    /// <summary>
-    /// 登录口令
-    /// </summary>
-    public partial class AuthPc : UserControl, IAuthAc
+    public partial class AuthLk : UserControl, IAuthAc
     {
         private AuthAc _AuthAc;
         private UserModel _UserModel;
 
         #region 构造函数
-        public AuthPc()
+        public AuthLk()
         {
             InitializeComponent();
         }
 
-        public AuthPc(AuthAc authAc, UserModel userModel)
+        public AuthLk(AuthAc authAc, UserModel userModel)
         {
             _AuthAc = authAc;
             _UserModel = userModel;
@@ -74,9 +78,9 @@ namespace Me.Amon.User.Auth
             TbNewPass2.Text = "";
             #endregion
 
-            if (!_UserModel.CaAuthPk(oldPass, newPass))
+            if (!_UserModel.CaAuthLk(oldPass, newPass))
             {
-                _AuthAc.ShowAlert("登录口令修改失败，请重试！");
+                _AuthAc.ShowAlert("锁屏口令修改失败，请重试！");
                 TbOldPass.Focus();
             }
             else
@@ -95,18 +99,7 @@ namespace Me.Amon.User.Auth
 
         public void ShowMenu(Control control, int x, int y)
         {
-            CmMenu.Show(control, x, y);
         }
         #endregion
-
-        private void MiAuthOl_Click(object sender, System.EventArgs e)
-        {
-            _AuthAc.ShowView(EAuthAc.AuthOl);
-        }
-
-        private void MiAuthUl_Click(object sender, System.EventArgs e)
-        {
-            _AuthAc.ShowView(EAuthAc.AuthUl);
-        }
     }
 }

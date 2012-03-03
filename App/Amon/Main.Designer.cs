@@ -161,10 +161,9 @@
             // 
             // MtSignFp
             // 
-            this.MtSignFp.Enabled = false;
             this.MtSignFp.Name = "MtSignFp";
             this.MtSignFp.Size = new System.Drawing.Size(165, 22);
-            this.MtSignFp.Text = "忘记口令(&F)";
+            this.MtSignFp.Text = "找回口令(&F)";
             this.MtSignFp.Click += new System.EventHandler(this.MtSignFp_Click);
             // 
             // MtSep2
@@ -263,10 +262,9 @@
             // 
             // MgSignFp
             // 
-            this.MgSignFp.Enabled = false;
             this.MgSignFp.Name = "MgSignFp";
             this.MgSignFp.Size = new System.Drawing.Size(163, 22);
-            this.MgSignFp.Text = "忘记口令(&F)";
+            this.MgSignFp.Text = "找回口令(&F)";
             this.MgSignFp.Click += new System.EventHandler(this.MgSignFp_Click);
             // 
             // MgSep2
