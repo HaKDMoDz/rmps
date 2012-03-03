@@ -1351,7 +1351,7 @@ namespace Me.Amon.Pwd
         {
             PngSeeker editor = new PngSeeker(_UserModel, _DataModel.CatDir);
             editor.InitOnce(16);
-            editor.CallBackHandler = new AmonHandler<Img>(ChangeImgByKey);
+            editor.CallBackHandler = new AmonHandler<Bean.Ico>(ChangeImgByKey);
             BeanUtil.CenterToParent(editor, this);
             editor.ShowDialog(this);
         }
@@ -1615,7 +1615,7 @@ namespace Me.Amon.Pwd
             TmiViewPad.Checked = true;
         }
 
-        private void ChangeImgByKey(Img img)
+        private void ChangeImgByKey(Bean.Ico img)
         {
             if (!CharUtil.IsValidateHash(img.Key))
             {

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing.IconLib;
 
 namespace App
 {
@@ -14,11 +15,14 @@ namespace App
         public Form1()
         {
             InitializeComponent();
+        }
 
-            TextBox tb = new TextBox();
-            tb.Multiline = true;
-            tb.Size = new Size(350, 200);
-            panel1.Controls.Add(tb);
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MultiIcon m = new MultiIcon();
+            m.Load("");
+            SingleIcon s = m.Add("");
+            s.Load("");
         }
     }
 }

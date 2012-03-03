@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Bean
 {
-    public class Img
+    public class Ico
     {
         public string Key { get; set; }
         public string File { get; set; }

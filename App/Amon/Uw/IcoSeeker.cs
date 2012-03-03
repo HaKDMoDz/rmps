@@ -76,7 +76,7 @@ namespace Me.Amon.Uw
 
         public int IcoSize { get { return _IcoSize; } }
         public string HomeDir { get { return _HomeDir; } }
-        public AmonHandler<Img> CallBackHandler { get; set; }
+        public AmonHandler<Bean.Ico> CallBackHandler { get; set; }
 
         #region 事件处理
         #region 界面事件
@@ -237,7 +237,7 @@ namespace Me.Amon.Uw
             }
         }
 
-        public void CallBack(Img img)
+        public void CallBack(Bean.Ico img)
         {
             if (CallBackHandler != null)
             {

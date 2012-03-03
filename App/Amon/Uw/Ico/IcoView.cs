@@ -45,7 +45,7 @@ namespace Me.Amon.Uw.Ico
             }
 
             var item = LvIco.SelectedItems[0];
-            _IcoSeeker.CallBack(new Img { Key = item.ImageKey, Large = IlIco.Images[item.ImageKey] });
+            _IcoSeeker.CallBack(new Bean.Ico { Key = item.ImageKey, Large = IlIco.Images[item.ImageKey] });
         }
 
         private void BtAppend_Click(object sender, EventArgs e)

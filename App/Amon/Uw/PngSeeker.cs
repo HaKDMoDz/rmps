@@ -58,7 +58,7 @@ namespace Me.Amon.Uw
             }
         }
 
-        public AmonHandler<Img> CallBackHandler { get; set; }
+        public AmonHandler<Bean.Ico> CallBackHandler { get; set; }
 
         private void BtAppend_Click(object sender, EventArgs e)
         {
@@ -77,7 +77,7 @@ namespace Me.Amon.Uw
             if (CallBackHandler != null)
             {
                 var item = LvPng.SelectedItems[0];
-                CallBackHandler.Invoke(new Img { Key = item.ImageKey, Small = IlPng.Images[item.ImageKey] });
+                CallBackHandler.Invoke(new Bean.Ico { Key = item.ImageKey, Small = IlPng.Images[item.ImageKey] });
             }
             Close();
         }
@@ -97,7 +97,7 @@ namespace Me.Amon.Uw
             if (CallBackHandler != null)
             {
                 var item = LvPng.SelectedItems[0];
-                CallBackHandler.Invoke(new Img { Key = item.ImageKey, Small = IlPng.Images[item.ImageKey] });
+                CallBackHandler.Invoke(new Bean.Ico { Key = item.ImageKey, Small = IlPng.Images[item.ImageKey] });
             }
             Close();
         }
