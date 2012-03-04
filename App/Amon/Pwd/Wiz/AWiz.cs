@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Me.Amon.Bean;
+using Me.Amon.Event;
 using Me.Amon.Model;
 
 namespace Me.Amon.Pwd.Wiz
@@ -122,11 +122,19 @@ namespace Me.Amon.Pwd.Wiz
         }
         #endregion
 
+        #region 公共函数
         public void ShowTips(Control control, string caption)
         {
             _APwd.ShowTips(control, caption);
         }
 
+        public void ShowIcoSeeker(string rootDir, AmonHandler<Bean.Ico> handler)
+        {
+            _APwd.ShowIcoSeeker(rootDir, handler);
+        }
+        #endregion
+
+        #region 事件处理
         private void BtPrev_Click(object sender, EventArgs e)
         {
             if (_LastView != null && !_LastView.SaveData())
@@ -152,12 +160,14 @@ namespace Me.Amon.Pwd.Wiz
                 _LastView.CopyData();
             }
         }
+        #endregion
 
+        #region 私有函数
         private void ShowHead()
         {
             if (_HeadBean == null)
             {
-                _HeadBean = new BeanHead(_SafeModel);
+                _HeadBean = new BeanHead(this, _SafeModel);
                 _HeadBean.Init(_DataModel);
             }
             if (_LastView != null && _LastView != _HeadBean)
@@ -192,5 +202,6 @@ namespace Me.Amon.Pwd.Wiz
             _LastView = _BodyBean;
             _LastView.ShowData();
         }
+        #endregion
     }
 }

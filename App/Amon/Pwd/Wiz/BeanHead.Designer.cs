@@ -35,12 +35,12 @@
             this.LbMeta = new System.Windows.Forms.Label();
             this.TbMeta = new System.Windows.Forms.TextBox();
             this.LbIcon = new System.Windows.Forms.Label();
-            this.PbIcon = new System.Windows.Forms.PictureBox();
+            this.PbLogo = new System.Windows.Forms.PictureBox();
             this.LbHint = new System.Windows.Forms.Label();
             this.TbHint = new System.Windows.Forms.TextBox();
             this.LbMemo = new System.Windows.Forms.Label();
             this.TbMemo = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.PbIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // LbLib
@@ -106,22 +106,22 @@
             this.LbIcon.TabIndex = 6;
             this.LbIcon.Text = "徽标(&I)";
             // 
-            // PbIcon
+            // PbLogo
             // 
-            this.PbIcon.BackColor = System.Drawing.SystemColors.Window;
-            this.PbIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PbIcon.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PbIcon.Location = new System.Drawing.Point(63, 122);
-            this.PbIcon.Name = "PbIcon";
-            this.PbIcon.Size = new System.Drawing.Size(16, 16);
-            this.PbIcon.TabIndex = 7;
-            this.PbIcon.TabStop = false;
-            this.PbIcon.Click += new System.EventHandler(this.PbIcon_Click);
+            this.PbLogo.BackColor = System.Drawing.SystemColors.Window;
+            this.PbLogo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PbLogo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PbLogo.Location = new System.Drawing.Point(63, 122);
+            this.PbLogo.Name = "PbLogo";
+            this.PbLogo.Size = new System.Drawing.Size(18, 18);
+            this.PbLogo.TabIndex = 7;
+            this.PbLogo.TabStop = false;
+            this.PbLogo.Click += new System.EventHandler(this.PbLogo_Click);
             // 
             // LbHint
             // 
             this.LbHint.AutoSize = true;
-            this.LbHint.Location = new System.Drawing.Point(10, 147);
+            this.LbHint.Location = new System.Drawing.Point(10, 149);
             this.LbHint.Name = "LbHint";
             this.LbHint.Size = new System.Drawing.Size(47, 12);
             this.LbHint.TabIndex = 8;
@@ -129,7 +129,7 @@
             // 
             // TbHint
             // 
-            this.TbHint.Location = new System.Drawing.Point(63, 144);
+            this.TbHint.Location = new System.Drawing.Point(63, 146);
             this.TbHint.Name = "TbHint";
             this.TbHint.Size = new System.Drawing.Size(100, 21);
             this.TbHint.TabIndex = 9;
@@ -137,7 +137,7 @@
             // LbMemo
             // 
             this.LbMemo.AutoSize = true;
-            this.LbMemo.Location = new System.Drawing.Point(10, 174);
+            this.LbMemo.Location = new System.Drawing.Point(10, 176);
             this.LbMemo.Name = "LbMemo";
             this.LbMemo.Size = new System.Drawing.Size(47, 12);
             this.LbMemo.TabIndex = 10;
@@ -147,7 +147,7 @@
             // 
             this.TbMemo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TbMemo.Location = new System.Drawing.Point(63, 171);
+            this.TbMemo.Location = new System.Drawing.Point(63, 173);
             this.TbMemo.Multiline = true;
             this.TbMemo.Name = "TbMemo";
             this.TbMemo.Size = new System.Drawing.Size(284, 60);
@@ -161,7 +161,7 @@
             this.Controls.Add(this.LbMemo);
             this.Controls.Add(this.TbHint);
             this.Controls.Add(this.LbHint);
-            this.Controls.Add(this.PbIcon);
+            this.Controls.Add(this.PbLogo);
             this.Controls.Add(this.LbIcon);
             this.Controls.Add(this.TbMeta);
             this.Controls.Add(this.LbMeta);
@@ -171,7 +171,7 @@
             this.Controls.Add(this.LbLib);
             this.Name = "BeanHead";
             this.Size = new System.Drawing.Size(350, 250);
-            ((System.ComponentModel.ISupportInitialize)(this.PbIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -186,7 +186,7 @@
         private System.Windows.Forms.Label LbMeta;
         private System.Windows.Forms.TextBox TbMeta;
         private System.Windows.Forms.Label LbIcon;
-        private System.Windows.Forms.PictureBox PbIcon;
+        private System.Windows.Forms.PictureBox PbLogo;
         private System.Windows.Forms.Label LbHint;
         private System.Windows.Forms.TextBox TbHint;
         private System.Windows.Forms.Label LbMemo;

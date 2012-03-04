@@ -7,7 +7,7 @@
         public HintAtt()
             : base(TYPE_HINT, "", "")
         {
-            Order = "提示";
+            Order = "提醒";
         }
 
         public override void SetDefault()

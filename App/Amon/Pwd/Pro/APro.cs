@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Bean;
+using Me.Amon.Event;
 using Me.Amon.Model;
 
 namespace Me.Amon.Pwd.Pro
@@ -213,6 +214,13 @@ namespace Me.Amon.Pwd.Pro
         }
         #endregion
 
+        #region 公有函数
+        public void ShowIcoSeeker(AmonHandler<Bean.Ico> handler)
+        {
+            _APwd.ShowIcoSeeker(_DataModel.KeyDir, handler);
+        }
+        #endregion
+
         #region 界面事件
         private void GvAttList_SelectionChanged(object sender, System.EventArgs e)
         {
@@ -419,7 +427,7 @@ namespace Me.Amon.Pwd.Pro
                     ctl = new BeanMeta();
                     break;
                 case AAtt.TYPE_LOGO:
-                    ctl = new BeanLogo();
+                    ctl = new BeanLogo(this);
                     break;
                 case AAtt.TYPE_HINT:
                     ctl = new BeanHint();

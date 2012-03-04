@@ -167,16 +167,26 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                return DialogResult.Yes == MessageBox.Show("您有数据尚未保存，确认要退出吗？", "提示0", MessageBoxButtons.YesNoCancel);
+                return DialogResult.Yes == MessageBox.Show("您有数据尚未保存，确认要退出吗？", "提示", MessageBoxButtons.YesNoCancel);
             }
             return true;
         }
 
         public bool SaveData()
         {
-            _UserModel.DBAccess.Dispose();
-            string file = _UserModel.Code + '-' + DateTime.Now.ToString("yyyyMMddHHmmss") + ".apbak";
             string path = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), IEnv.DIR_BACK);
+            string[] files = Directory.GetFiles(path, _UserModel.Code + "*.apbak", SearchOption.TopDirectoryOnly);
+            if (files.Length >= 3)
+            {
+                Array.Sort(files);
+                for (int i = files.Length - 3; i >= 0; i -= 1)
+                {
+                    File.Delete(files[i]);
+                }
+            }
+
+            _UserModel.DBAccess.CloseConnect();
+            string file = _UserModel.Code + '-' + DateTime.Now.ToString("yyyyMMddHHmmss") + ".apbak";
             DoBackup(Path.Combine(path, file));
             return true;
         }
@@ -256,11 +266,11 @@ namespace Me.Amon.Pwd
                 {
                     if (CharUtil.IsValidateHash(key.IcoPath))
                     {
-                        key.Icon = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoPath, key.IcoName + IEnv.IMG_KEY_LIST_DIM), BeanUtil.NaN24);
+                        key.Icon = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoPath, key.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
                     }
                     else
                     {
-                        key.Icon = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoName + IEnv.IMG_KEY_LIST_DIM), BeanUtil.NaN24);
+                        key.Icon = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
                     }
                 }
                 else
@@ -282,7 +292,7 @@ namespace Me.Amon.Pwd
                 Key key = LbKeyList.Items[e.Index] as Key;
                 if (key != null)
                 {
-                    e.Graphics.DrawImage(key.Icon, e.Bounds.X, e.Bounds.Y);
+                    e.Graphics.DrawImage(key.Icon, e.Bounds.X + 3, e.Bounds.Y + 3);
 
                     //最后把要显示的文字画在背景图片上
                     e.Graphics.DrawString(key.Title, this.Font, Brushes.Black, e.Bounds.X + 36, e.Bounds.Y);
@@ -931,6 +941,8 @@ namespace Me.Amon.Pwd
                 StringBuilder buffer = new StringBuilder();
                 _SafeModel.ExportAsTxt(buffer);
                 writer.WriteLine(buffer.ToString());
+
+                writer.Close();
             }
         }
 
@@ -956,15 +968,22 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            using (XmlWriter writer = XmlWriter.Create(new StreamWriter(file, false)))
+            using (StreamWriter sw = new StreamWriter(file, false))
             {
-                writer.WriteStartElement("Amon");
-                writer.WriteElementString("App", "APwd");
-                writer.WriteElementString("Ver", "1");
-                writer.WriteStartElement("Keys");
-                _SafeModel.ExportAsXml(writer);
-                writer.WriteEndElement();
-                writer.WriteEndElement();
+                using (XmlWriter writer = XmlWriter.Create(sw))
+                {
+                    writer.WriteStartElement("Amon");
+                    writer.WriteElementString("App", "APwd");
+                    writer.WriteElementString("Ver", "1");
+                    writer.WriteStartElement("Keys");
+                    _SafeModel.ExportAsXml(writer);
+                    writer.WriteEndElement();
+                    writer.WriteEndElement();
+
+                    writer.Flush();
+                }
+
+                sw.Close();
             }
         }
         #endregion
@@ -978,6 +997,14 @@ namespace Me.Amon.Pwd
                 {
                     return;
                 }
+            }
+
+            Cat cat = _LastNode.Tag as Cat;
+            if (cat == null)
+            {
+                Main.ShowAlert("请选择您要导入的类别！");
+                TvCatTree.Focus();
+                return;
             }
 
             OpenFileDialog fd = new OpenFileDialog();
@@ -1009,12 +1036,15 @@ namespace Me.Amon.Pwd
                     {
                         if (_SafeModel.ImportByTxt(line))
                         {
+                            _SafeModel.Key.CatId = cat.Id;
                             ImportKey();
                         }
                     }
                     line = reader.ReadLine();
                 }
             }
+
+            DoListKey(cat.Id);
         }
 
         private void TmiImportXml_Click(object sender, EventArgs e)
@@ -1025,6 +1055,14 @@ namespace Me.Amon.Pwd
                 {
                     return;
                 }
+            }
+
+            Cat cat = _LastNode.Tag as Cat;
+            if (cat == null)
+            {
+                Main.ShowAlert("请选择您要导入的类别！");
+                TvCatTree.Focus();
+                return;
             }
 
             OpenFileDialog fd = new OpenFileDialog();
@@ -1055,10 +1093,13 @@ namespace Me.Amon.Pwd
                 {
                     if (_SafeModel.ImportByXml(reader))
                     {
+                        _SafeModel.Key.CatId = cat.Id;
                         ImportKey();
                     }
                 }
             }
+
+            DoListKey(cat.Id);
         }
         #endregion
 
@@ -1552,6 +1593,19 @@ namespace Me.Amon.Pwd
         {
             TpTips.SetToolTip(control, caption);
         }
+
+        public void ShowIcoSeeker(string rootDir, AmonHandler<Bean.Ico> handler)
+        {
+            IcoSeeker seeker = new IcoSeeker(_UserModel, rootDir);
+            seeker.InitOnce(24);
+            seeker.CallBackHandler = handler;
+            BeanUtil.CenterToParent(seeker, this);
+            seeker.ShowDialog(this);
+        }
+
+        public void ShowPngSeeker()
+        {
+        }
         #endregion
 
         #region 私有方法
@@ -1911,19 +1965,29 @@ namespace Me.Amon.Pwd
 
         private void UpdateKey()
         {
-            TreeNode node = TvCatTree.SelectedNode;
-            if (node == null)
+            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
             {
-                Main.ShowAlert("请选择类别！");
-                TvCatTree.Focus();
                 return;
             }
 
-            Cat cat = node.Tag as Cat;
-            if (cat == null)
+            if (!_SafeModel.Key.IsUpdate)
             {
-                Main.ShowAlert("系统异常，请稍后重试！");
-                return;
+                TreeNode node = TvCatTree.SelectedNode;
+                if (node == null)
+                {
+                    Main.ShowAlert("请选择类别！");
+                    TvCatTree.Focus();
+                    return;
+                }
+
+                Cat cat = node.Tag as Cat;
+                if (cat == null)
+                {
+                    Main.ShowAlert("系统异常，请稍后重试！");
+                    return;
+                }
+
+                _SafeModel.Key.CatId = cat.Id;
             }
 
             if (!_PwdView.UpdateKey())
@@ -1986,7 +2050,7 @@ namespace Me.Amon.Pwd
             #region 口令信息
             dba.ReInit();
             dba.AddTable(DBConst.APWD0100);
-            dba.AddParam(DBConst.APWD0106, cat.Id);
+            dba.AddParam(DBConst.APWD0106, _SafeModel.Key.CatId);
             dba.AddParam(DBConst.APWD0107, _SafeModel.Key.RegDate);
             dba.AddParam(DBConst.APWD0108, _SafeModel.Key.LibId);
             dba.AddParam(DBConst.APWD0109, _SafeModel.Key.Title);
@@ -2050,25 +2114,18 @@ namespace Me.Amon.Pwd
             dba.ExecuteBatch();
 
             _SafeModel.Key.Modified = false;
-            if (isUpdate && !_IsSearch)
-            {
-                LbKeyList.Items[LbKeyList.SelectedIndex] = _SafeModel.Key;
-            }
-            else
-            {
-                LastOpt();
-            }
+            LastOpt();
             _PwdView.ShowInfo();
         }
 
         private void DeleteKey()
         {
-            if (_SafeModel.Key == null)
+            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
             {
                 return;
             }
 
-            if (DialogResult.Yes != Main.ShowConfirm("确认要删除选中的类别吗，此操作将不可恢复？"))
+            if (DialogResult.Yes != Main.ShowConfirm("确认要删除选中的口令吗，此操作将不可恢复？"))
             {
                 return;
             }
@@ -2122,8 +2179,8 @@ namespace Me.Amon.Pwd
             dba.AddParam(DBConst.APWD0110, _SafeModel.Key.Memo);
             dba.AddParam(DBConst.APWD0111, _SafeModel.Key.VisitDate);
             dba.AddParam(DBConst.APWD0112, "t");
-            dba.AddParam(DBConst.APWD0113, "1");
-            dba.AddParam(DBConst.APWD0114, DBConst.APWD0115);
+            dba.AddParam(DBConst.APWD0113, ISec.SEC_AES);
+            dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115);
             dba.AddInsertBatch();
             #endregion
 
@@ -2135,6 +2192,7 @@ namespace Me.Amon.Pwd
                 dba.ReInit();
                 dba.AddTable(DBConst.APWD0200);
                 dba.AddParam(DBConst.APWD0201, i++);
+                dba.AddParam(DBConst.APWD0202, _UserModel.Code);
                 dba.AddParam(DBConst.APWD0203, _SafeModel.Key.Id);
                 if (_SafeModel.Key.Password.Length - j > DBConst.APWD0204_SIZE)
                 {
@@ -2319,7 +2377,7 @@ namespace Me.Amon.Pwd
 
         private void DoBackup(string file)
         {
-            _UserModel.DBAccess.Dispose();
+            _UserModel.DBAccess.CloseConnect();
             BeanUtil.DoZip(file, _UserModel.Home);
         }
 
@@ -2372,9 +2430,9 @@ namespace Me.Amon.Pwd
         private void ShowKeys()
         {
             DataTable dt = new DataTable();
-            dt.Columns.Add("按键");
-            dt.Columns.Add("功能");
-            dt.Columns.Add("说明");
+            dt.Columns.Add("MajorKey");
+            dt.Columns.Add("Memo");
+            dt.Columns.Add("MinorKey");
             dt.Rows.Add("Control N", "添加记录", "");
             dt.Rows.Add("Control S", "保存记录", "");
             dt.Rows.Add("Control R", "删除记录", "");

@@ -348,6 +348,15 @@ namespace Me.Amon
 
         private void MgSignOf_Click(object sender, EventArgs e)
         {
+            if (_IApp != null)
+            {
+                if (!_IApp.WillExit())
+                {
+                    return;
+                }
+                _IApp.Visible = false;
+            }
+
             _UserModel.CaSignOf();
 
             MgSignIn.Visible = true;

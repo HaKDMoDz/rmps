@@ -23,7 +23,7 @@ namespace Me.Amon.Pwd.Pro
             _DataModel = dataModel;
         }
 
-        public new Control Control
+        public Control Control
         {
             get { return this; }
         }

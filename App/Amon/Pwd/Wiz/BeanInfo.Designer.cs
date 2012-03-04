@@ -45,6 +45,7 @@
             // 
             // TbData
             // 
+            this.TbData.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TbData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TbData.Location = new System.Drawing.Point(0, 23);
             this.TbData.Multiline = true;
@@ -62,6 +63,7 @@
             this.Controls.Add(this.LbName);
             this.Name = "BeanInfo";
             this.Size = new System.Drawing.Size(350, 200);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.BeanInfo_Paint);
             this.ResumeLayout(false);
             this.PerformLayout();
 

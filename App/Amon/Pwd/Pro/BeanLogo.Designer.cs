@@ -60,11 +60,12 @@
             this.PbName.BackColor = System.Drawing.SystemColors.Window;
             this.PbName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PbName.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PbName.Location = new System.Drawing.Point(56, 3);
+            this.PbName.Location = new System.Drawing.Point(56, 4);
             this.PbName.Name = "PbName";
-            this.PbName.Size = new System.Drawing.Size(21, 21);
+            this.PbName.Size = new System.Drawing.Size(18, 18);
             this.PbName.TabIndex = 1;
             this.PbName.TabStop = false;
+            this.PbName.Click += new System.EventHandler(this.PbName_Click);
             // 
             // LbName
             // 

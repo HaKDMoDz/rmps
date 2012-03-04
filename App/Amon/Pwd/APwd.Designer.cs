@@ -84,7 +84,11 @@
             this.TmiSync = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiDataSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.TmiBackup = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiLocaleBackup = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiRemoteBackup = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiResuma = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiLocaleResuma = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiRemoteResuma = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiDataSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.TmuExport = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiExportTxt = new System.Windows.Forms.ToolStripMenuItem();
@@ -165,10 +169,6 @@
             this.TssTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.UcTime = new System.Windows.Forms.Timer(this.components);
-            this.TmiLocaleBackup = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiRemoteBackup = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiLocaleResuma = new System.Windows.Forms.ToolStripMenuItem();
-            this.TmiRemoteResuma = new System.Windows.Forms.ToolStripMenuItem();
             this.TmMenu.SuspendLayout();
             this.TcTool.ContentPanel.SuspendLayout();
             this.TcTool.TopToolStripPanel.SuspendLayout();
@@ -609,14 +609,14 @@
             // TmiSync
             // 
             this.TmiSync.Name = "TmiSync";
-            this.TmiSync.Size = new System.Drawing.Size(152, 22);
+            this.TmiSync.Size = new System.Drawing.Size(116, 22);
             this.TmiSync.Text = "同步(&S)";
             this.TmiSync.Click += new System.EventHandler(this.TmiSync_Click);
             // 
             // TmiDataSep0
             // 
             this.TmiDataSep0.Name = "TmiDataSep0";
-            this.TmiDataSep0.Size = new System.Drawing.Size(149, 6);
+            this.TmiDataSep0.Size = new System.Drawing.Size(113, 6);
             // 
             // TmiBackup
             // 
@@ -624,8 +624,22 @@
             this.TmiLocaleBackup,
             this.TmiRemoteBackup});
             this.TmiBackup.Name = "TmiBackup";
-            this.TmiBackup.Size = new System.Drawing.Size(152, 22);
+            this.TmiBackup.Size = new System.Drawing.Size(116, 22);
             this.TmiBackup.Text = "备份(&B)";
+            // 
+            // TmiLocaleBackup
+            // 
+            this.TmiLocaleBackup.Name = "TmiLocaleBackup";
+            this.TmiLocaleBackup.Size = new System.Drawing.Size(139, 22);
+            this.TmiLocaleBackup.Text = "本地备份(&L)";
+            this.TmiLocaleBackup.Click += new System.EventHandler(this.TmiLocaleBackup_Click);
+            // 
+            // TmiRemoteBackup
+            // 
+            this.TmiRemoteBackup.Name = "TmiRemoteBackup";
+            this.TmiRemoteBackup.Size = new System.Drawing.Size(139, 22);
+            this.TmiRemoteBackup.Text = "远程备份(&S)";
+            this.TmiRemoteBackup.Click += new System.EventHandler(this.TmiRemoteBackup_Click);
             // 
             // TmiResuma
             // 
@@ -633,13 +647,27 @@
             this.TmiLocaleResuma,
             this.TmiRemoteResuma});
             this.TmiResuma.Name = "TmiResuma";
-            this.TmiResuma.Size = new System.Drawing.Size(152, 22);
+            this.TmiResuma.Size = new System.Drawing.Size(116, 22);
             this.TmiResuma.Text = "恢复(&R)";
+            // 
+            // TmiLocaleResuma
+            // 
+            this.TmiLocaleResuma.Name = "TmiLocaleResuma";
+            this.TmiLocaleResuma.Size = new System.Drawing.Size(139, 22);
+            this.TmiLocaleResuma.Text = "本地恢复(&L)";
+            this.TmiLocaleResuma.Click += new System.EventHandler(this.TmiLocaleResuma_Click);
+            // 
+            // TmiRemoteResuma
+            // 
+            this.TmiRemoteResuma.Name = "TmiRemoteResuma";
+            this.TmiRemoteResuma.Size = new System.Drawing.Size(139, 22);
+            this.TmiRemoteResuma.Text = "远程恢复(&S)";
+            this.TmiRemoteResuma.Click += new System.EventHandler(this.TmiRemoteResuma_Click);
             // 
             // TmiDataSep1
             // 
             this.TmiDataSep1.Name = "TmiDataSep1";
-            this.TmiDataSep1.Size = new System.Drawing.Size(149, 6);
+            this.TmiDataSep1.Size = new System.Drawing.Size(113, 6);
             // 
             // TmuExport
             // 
@@ -647,20 +675,20 @@
             this.TmiExportTxt,
             this.TmiExportXml});
             this.TmuExport.Name = "TmuExport";
-            this.TmuExport.Size = new System.Drawing.Size(152, 22);
+            this.TmuExport.Size = new System.Drawing.Size(116, 22);
             this.TmuExport.Text = "导出(&I)";
             // 
             // TmiExportTxt
             // 
             this.TmiExportTxt.Name = "TmiExportTxt";
-            this.TmiExportTxt.Size = new System.Drawing.Size(152, 22);
+            this.TmiExportTxt.Size = new System.Drawing.Size(126, 22);
             this.TmiExportTxt.Text = "TXT格式";
             this.TmiExportTxt.Click += new System.EventHandler(this.TmiExportTxt_Click);
             // 
             // TmiExportXml
             // 
             this.TmiExportXml.Name = "TmiExportXml";
-            this.TmiExportXml.Size = new System.Drawing.Size(152, 22);
+            this.TmiExportXml.Size = new System.Drawing.Size(126, 22);
             this.TmiExportXml.Text = "XML格式";
             this.TmiExportXml.Click += new System.EventHandler(this.TmiExportXml_Click);
             // 
@@ -670,20 +698,20 @@
             this.TmiImportTxt,
             this.TmiImportXml});
             this.TmuImport.Name = "TmuImport";
-            this.TmuImport.Size = new System.Drawing.Size(152, 22);
+            this.TmuImport.Size = new System.Drawing.Size(116, 22);
             this.TmuImport.Text = "导入(&X)";
             // 
             // TmiImportTxt
             // 
             this.TmiImportTxt.Name = "TmiImportTxt";
-            this.TmiImportTxt.Size = new System.Drawing.Size(152, 22);
+            this.TmiImportTxt.Size = new System.Drawing.Size(126, 22);
             this.TmiImportTxt.Text = "TXT格式";
             this.TmiImportTxt.Click += new System.EventHandler(this.TmiImportTxt_Click);
             // 
             // TmiImportXml
             // 
             this.TmiImportXml.Name = "TmiImportXml";
-            this.TmiImportXml.Size = new System.Drawing.Size(152, 22);
+            this.TmiImportXml.Size = new System.Drawing.Size(126, 22);
             this.TmiImportXml.Text = "XML格式";
             this.TmiImportXml.Click += new System.EventHandler(this.TmiImportXml_Click);
             // 
@@ -712,7 +740,7 @@
             // 
             this.TmiLkey.Name = "TmiLkey";
             this.TmiLkey.Size = new System.Drawing.Size(164, 22);
-            this.TmiLkey.Text = "修改解锁口令(&L)";
+            this.TmiLkey.Text = "修改解屏口令(&L)";
             this.TmiLkey.Click += new System.EventHandler(this.TmiLkey_Click);
             // 
             // TmiSkey
@@ -1318,34 +1346,6 @@
             // UcTime
             // 
             this.UcTime.Tick += new System.EventHandler(this.UcTime_Tick);
-            // 
-            // TmiLocaleBackup
-            // 
-            this.TmiLocaleBackup.Name = "TmiLocaleBackup";
-            this.TmiLocaleBackup.Size = new System.Drawing.Size(152, 22);
-            this.TmiLocaleBackup.Text = "本地备份(&L)";
-            this.TmiLocaleBackup.Click += new System.EventHandler(this.TmiLocaleBackup_Click);
-            // 
-            // TmiRemoteBackup
-            // 
-            this.TmiRemoteBackup.Name = "TmiRemoteBackup";
-            this.TmiRemoteBackup.Size = new System.Drawing.Size(152, 22);
-            this.TmiRemoteBackup.Text = "远程备份(&S)";
-            this.TmiRemoteBackup.Click += new System.EventHandler(this.TmiRemoteBackup_Click);
-            // 
-            // TmiLocaleResuma
-            // 
-            this.TmiLocaleResuma.Name = "TmiLocaleResuma";
-            this.TmiLocaleResuma.Size = new System.Drawing.Size(152, 22);
-            this.TmiLocaleResuma.Text = "本地恢复(&L)";
-            this.TmiLocaleResuma.Click += new System.EventHandler(this.TmiLocaleResuma_Click);
-            // 
-            // TmiRemoteResuma
-            // 
-            this.TmiRemoteResuma.Name = "TmiRemoteResuma";
-            this.TmiRemoteResuma.Size = new System.Drawing.Size(152, 22);
-            this.TmiRemoteResuma.Text = "远程恢复(&S)";
-            this.TmiRemoteResuma.Click += new System.EventHandler(this.TmiRemoteResuma_Click);
             // 
             // APwd
             // 

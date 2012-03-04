@@ -1,5 +1,5 @@
-﻿using System.Windows.Forms;
-using Me.Amon.Bean;
+﻿using System.Drawing;
+using System.Windows.Forms;
 using Me.Amon.Model;
 
 namespace Me.Amon.Pwd.Wiz
@@ -48,6 +48,11 @@ namespace Me.Amon.Pwd.Wiz
 
         public void CopyData()
         {
+        }
+
+        private void BeanInfo_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, this.ClientRectangle, Color.Red, ButtonBorderStyle.Solid);
         }
     }
 }

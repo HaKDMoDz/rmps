@@ -14,6 +14,7 @@ namespace Me.Amon.Da
     /// </summary>
     public class DBAccess
     {
+        private string _DbPath;
         private SQLiteConnection _Connection;
         /// <summary>
         /// 当前要操作的字段名称（列表（以逗号“,”分隔符区分））
@@ -76,28 +77,43 @@ namespace Me.Amon.Da
 
         public void Init(UserModel userModel)
         {
-            string path = Path.Combine(userModel.Home, IEnv.FILE_DB);
-            bool isNew = !File.Exists(path);
-            _Connection = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-            _Connection.Open();
+            _DbPath = Path.Combine(userModel.Home, IEnv.FILE_DB);
 
-            if (isNew)
+            if (!File.Exists(_DbPath))
             {
                 DbInit();
             }
         }
 
-        public void Dispose()
+        public void CloseConnect()
         {
             if (_Connection != null)
             {
                 _Connection.Close();
+                _Connection = null;
+            }
+        }
+
+        private SQLiteConnection BeginConnect
+        {
+            get
+            {
+                if (_Connection == null)
+                {
+                    _Connection = new SQLiteConnection("Data Source=" + _DbPath + ";Version=3;");
+                    _Connection.Open();
+                }
+                if (_Connection.State == ConnectionState.Closed)
+                {
+                    _Connection.Open();
+                }
+                return _Connection;
             }
         }
 
         private void DbInit()
         {
-            using (SQLiteTransaction mytransaction = _Connection.BeginTransaction())
+            using (SQLiteTransaction mytransaction = BeginConnect.BeginTransaction())
             {
                 using (SQLiteCommand mycommand = new SQLiteCommand(_Connection))
                 {
@@ -517,31 +533,31 @@ namespace Me.Amon.Da
             _ValueList.Add(value.ToString());
         }
 
-        public void AddVcs(string optCol, string vcsCol)
+        public void AddVcs(string vcsCol, string optCol)
         {
-            _ParamList.Add(optCol);
-            _SignList.Add("=");
-            _ValueList.Add(DBConst.OPT_INSERT.ToString());
-
             _ParamList.Add(vcsCol);
             _SignList.Add("=");
             _ValueList.Add("1");
+
+            _ParamList.Add(optCol);
+            _SignList.Add("=");
+            _ValueList.Add(DBConst.OPT_INSERT.ToString());
         }
 
         public void AddVcs(string vcsCol, string optCol, int lastOpt, int nextOpt)
         {
-            if (lastOpt > DBConst.OPT_INSERT || nextOpt == DBConst.OPT_DELETE)
-            {
-                _ParamList.Add(optCol);
-                _SignList.Add("=");
-                _ValueList.Add(nextOpt.ToString());
-            }
-
             if (lastOpt == DBConst.OPT_DEFAULT)
             {
                 _ParamList.Add(vcsCol);
                 _SignList.Add("=");
                 _ValueList.Add(vcsCol + "+1");
+            }
+
+            if (lastOpt > DBConst.OPT_INSERT || nextOpt == DBConst.OPT_DELETE)
+            {
+                _ParamList.Add(optCol);
+                _SignList.Add("=");
+                _ValueList.Add(nextOpt.ToString());
             }
         }
 
@@ -668,7 +684,7 @@ namespace Me.Amon.Da
         public int Execute(string sql)
         {
             int n = 0;
-            using (SQLiteTransaction mytransaction = _Connection.BeginTransaction())
+            using (SQLiteTransaction mytransaction = BeginConnect.BeginTransaction())
             {
                 using (SQLiteCommand mycommand = new SQLiteCommand(_Connection))
                 {
@@ -687,7 +703,7 @@ namespace Me.Amon.Da
 
         public object ExecuteScalar(string sql)
         {
-            using (SQLiteCommand mycommand = new SQLiteCommand(_Connection))
+            using (SQLiteCommand mycommand = new SQLiteCommand(BeginConnect))
             {
                 mycommand.CommandText = sql;
                 return mycommand.ExecuteScalar();
@@ -704,7 +720,7 @@ namespace Me.Amon.Da
         public int ExecuteBatch(List<string> sqls)
         {
             int n = 0;
-            using (SQLiteTransaction mytransaction = _Connection.BeginTransaction())
+            using (SQLiteTransaction mytransaction = BeginConnect.BeginTransaction())
             {
                 using (SQLiteCommand mycommand = new SQLiteCommand(_Connection))
                 {
@@ -733,7 +749,7 @@ namespace Me.Amon.Da
         {
             DataTable dataList = new DataTable();
 
-            using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlSelect, _Connection))
+            using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlSelect, BeginConnect))
             {
                 adapter.Fill(dataList);
             }
@@ -754,7 +770,7 @@ namespace Me.Amon.Da
         public int ExecuteUpdate(string sqlUpdate)
         {
             int n = 0;
-            using (SQLiteTransaction mytransaction = _Connection.BeginTransaction())
+            using (SQLiteTransaction mytransaction = BeginConnect.BeginTransaction())
             {
                 using (SQLiteCommand mycommand = new SQLiteCommand(_Connection))
                 {
@@ -784,7 +800,7 @@ namespace Me.Amon.Da
         public int ExecuteInsert(string sqlInsert)
         {
             int n = 0;
-            using (SQLiteTransaction mytransaction = _Connection.BeginTransaction())
+            using (SQLiteTransaction mytransaction = BeginConnect.BeginTransaction())
             {
                 using (SQLiteCommand mycommand = new SQLiteCommand(_Connection))
                 {
@@ -815,7 +831,7 @@ namespace Me.Amon.Da
         public int ExecuteDelete(string sqlDelete)
         {
             int n = 0;
-            using (SQLiteTransaction mytransaction = _Connection.BeginTransaction())
+            using (SQLiteTransaction mytransaction = BeginConnect.BeginTransaction())
             {
                 using (SQLiteCommand mycommand = new SQLiteCommand(_Connection))
                 {
@@ -846,7 +862,7 @@ namespace Me.Amon.Da
         public int ExecuteBackup(string sqlBackup)
         {
             int n = 0;
-            using (SQLiteTransaction mytransaction = _Connection.BeginTransaction())
+            using (SQLiteTransaction mytransaction = BeginConnect.BeginTransaction())
             {
                 using (SQLiteCommand mycommand = new SQLiteCommand(_Connection))
                 {

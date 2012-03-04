@@ -105,7 +105,7 @@ namespace Me.Amon.User.Sign
             {
                 _SignAc.HideWaiting();
                 _SignAc.ShowAlert("身份验证错误，请确认您的用户及口令输入是否正确！");
-                TbName.Focus();
+                TbPass.Focus();
                 return;
             }
 

@@ -7,7 +7,6 @@ using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Uc;
 using Me.Amon.Util;
-using Me.Amon.Uw;
 
 namespace Me.Amon.Pwd.Wiz
 {
@@ -17,6 +16,7 @@ namespace Me.Amon.Pwd.Wiz
         private Bean.Ico _AIco;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
+        private TextBox _TBox;
 
         #region 构造函数
         public BeanHead()
@@ -24,8 +24,9 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
         }
 
-        public BeanHead(SafeModel safeModel)
+        public BeanHead(AWiz awiz, SafeModel safeModel)
         {
+            _AWiz = awiz;
             _SafeModel = safeModel;
 
             InitializeComponent();
@@ -35,6 +36,11 @@ namespace Me.Amon.Pwd.Wiz
         {
             _DataModel = dataModel;
             _AIco = new Bean.Ico();
+
+            TbName.GotFocus += new EventHandler(TbName_GotFocus);
+            TbMeta.GotFocus += new EventHandler(TbMeta_GotFocus);
+            TbHint.GotFocus += new EventHandler(TbHint_GotFocus);
+            TbMemo.GotFocus += new EventHandler(TbMemo_GotFocus);
         }
         #endregion
 
@@ -87,11 +93,11 @@ namespace Me.Amon.Pwd.Wiz
             _AIco.Path = logo.Path;
             if (!CharUtil.IsValidateHash(logo.Name))
             {
-                PbIcon.Image = BeanUtil.NaN16;
+                PbLogo.Image = BeanUtil.NaN16;
             }
             else
             {
-                string path = Path.GetDirectoryName(Application.ExecutablePath);
+                string path = _DataModel.KeyDir;
                 if (CharUtil.IsValidateHash(logo.Path))
                 {
                     path = Path.Combine(path, logo.Path, logo.Name + IEnv.IMG_KEY_EDIT_EXT);
@@ -100,7 +106,7 @@ namespace Me.Amon.Pwd.Wiz
                 {
                     path = Path.Combine(path, logo.Name + IEnv.IMG_KEY_EDIT_EXT);
                 }
-                PbIcon.Image = BeanUtil.ReadImage(path, BeanUtil.NaN16);
+                PbLogo.Image = BeanUtil.ReadImage(path, BeanUtil.NaN16);
             }
 
             HintAtt hint = _SafeModel.Hint;
@@ -142,25 +148,54 @@ namespace Me.Amon.Pwd.Wiz
                 {
                     _SafeModel.InitData(lib);
                 }
+                guid.Modified = true;
+                _SafeModel.Key.Modified |= guid.Modified;
             }
 
             MetaAtt meta = _SafeModel.Meta;
-            meta.Name = name;
-            meta.Data = TbMeta.Text;
+            if (meta.Name != name)
+            {
+                meta.Name = name;
+                meta.Modified = true;
+            }
+            if (meta.Data != TbMeta.Text)
+            {
+                meta.Data = TbMeta.Text;
+                meta.Modified = true;
+            }
+            _SafeModel.Key.Modified |= meta.Modified;
 
             LogoAtt logo = _SafeModel.Logo;
-            logo.Name = _AIco.File;
-            logo.Path = _AIco.Path;
+            if (logo.Name != _AIco.File)
+            {
+                logo.Name = _AIco.File;
+                logo.Modified = true;
+            }
+            if (logo.Path != _AIco.Path)
+            {
+                logo.Path = _AIco.Path;
+                logo.Modified = true;
+            }
+            _SafeModel.Key.Modified |= logo.Modified;
 
             HintAtt hint = _SafeModel.Hint;
             hint.Name = "";
-            hint.Data = TbHint.Text;
+            if (hint.Data != TbHint.Text)
+            {
+                hint.Data = TbHint.Text;
+                hint.Modified = true;
+            }
+            _SafeModel.Key.Modified |= hint.Modified;
 
             return true;
         }
 
         public void CopyData()
         {
+            if (_TBox != null)
+            {
+                Clipboard.SetText(_TBox.Text);
+            }
         }
         #endregion
 
@@ -169,20 +204,36 @@ namespace Me.Amon.Pwd.Wiz
         {
         }
 
-        private void PbIcon_Click(object sender, EventArgs e)
+        private void PbLogo_Click(object sender, EventArgs e)
         {
-            IcoSeeker seeker = new IcoSeeker();
-            seeker.InitOnce(16);
-            seeker.CallBackHandler = new AmonHandler<Bean.Ico>(ChangeImgByKey);
-            BeanUtil.CenterToParent(seeker, null);
-            seeker.ShowDialog(this);
+            _AWiz.ShowIcoSeeker(_DataModel.KeyDir, new AmonHandler<Bean.Ico>(ChangeImgByKey));
+        }
+
+        private void TbName_GotFocus(object sender, EventArgs e)
+        {
+            _TBox = TbName;
+        }
+
+        private void TbMeta_GotFocus(object sender, EventArgs e)
+        {
+            _TBox = TbMeta;
+        }
+
+        private void TbHint_GotFocus(object sender, EventArgs e)
+        {
+            _TBox = TbHint;
+        }
+
+        private void TbMemo_GotFocus(object sender, EventArgs e)
+        {
+            _TBox = TbMemo;
         }
         #endregion
 
         private void ChangeImgByKey(Bean.Ico ico)
         {
             _AIco = ico;
-            PbIcon.Image = BeanUtil.ReadImage(Path.Combine(ico.Path, ico.File + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN16);
+            PbLogo.Image = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, ico.Path, ico.File + IEnv.IMG_KEY_EDIT_EXT), BeanUtil.NaN16);
         }
     }
 }

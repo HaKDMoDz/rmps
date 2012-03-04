@@ -222,9 +222,11 @@ namespace Me.Amon.Model
                 return false;
             }
 
+            _Lock = Digest(Name, newPass);
+
             Uc.Properties prop = new Uc.Properties();
             prop.Load(Path.Combine(_Home, IEnv.AMON_CFG));
-            prop.Set(IEnv.AMON_CFG_LOCK, Digest(Name, newPass));
+            prop.Set(IEnv.AMON_CFG_LOCK, _Lock);
             prop.Save(Path.Combine(_Home, IEnv.AMON_CFG));
             return true;
         }
@@ -668,8 +670,8 @@ namespace Me.Amon.Model
         }
 
         private DBAccess _DBAccess;
-        private DCAccess _DCAccess;
-        private DFAccess _DFAccess;
+        //private DCAccess _DCAccess;
+        //private DFAccess _DFAccess;
 
         public void Init()
         {
@@ -682,7 +684,7 @@ namespace Me.Amon.Model
         }
 
         public DBAccess DBAccess { get { return _DBAccess; } }
-        public DCAccess DCAccess { get { return _DCAccess; } }
-        public DFAccess DFAccess { get { return _DFAccess; } }
+        //public DCAccess DCAccess { get { return _DCAccess; } }
+        //public DFAccess DFAccess { get { return _DFAccess; } }
     }
 }

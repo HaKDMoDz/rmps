@@ -41,7 +41,7 @@
             this.LbName.Name = "LbName";
             this.LbName.Size = new System.Drawing.Size(47, 12);
             this.LbName.TabIndex = 0;
-            this.LbName.Text = "徽标(&N)";
+            this.LbName.Text = "计划(&N)";
             // 
             // BtName
             // 

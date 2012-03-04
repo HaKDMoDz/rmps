@@ -8,11 +8,19 @@ namespace Me.Amon.Pwd.Pro
     public partial class BeanText : UserControl, IAttEdit
     {
         private AAtt _Att;
+        private APro _APro;
         private TextBox _Ctl;
 
         #region 构造函数
         public BeanText()
         {
+            InitializeComponent();
+        }
+
+        public BeanText(APro apro)
+        {
+            _APro = apro;
+
             InitializeComponent();
         }
         #endregion

@@ -44,7 +44,7 @@ namespace Me.Amon.Uw
 
             ShowIcoView();
 
-            LsDir.Items.Add(new Dir { Id = "0", Name = "默认分类", Tips = "默认分类" });
+            LsDir.Items.Add(new Dir { Id = "0", Name = "默认分类", Tips = "默认分类", Path = "." });
 
             DBAccess dba = _UserModel.DBAccess;
             dba.ReInit();
@@ -231,17 +231,18 @@ namespace Me.Amon.Uw
                 dba.AddVcs(DBConst.AICO0108, DBConst.AICO0109);
                 dba.ExecuteInsert();
 
-                Directory.CreateDirectory(_RootDir + item.Id);
+                Directory.CreateDirectory(Path.Combine(_RootDir, item.Id));
                 LsDir.Items.Add(item);
                 LsDir.SelectedItem = item;
             }
         }
 
-        public void CallBack(Bean.Ico img)
+        public void CallBack(Bean.Ico ico)
         {
             if (CallBackHandler != null)
             {
-                CallBackHandler.Invoke(img);
+                ico.Path = (LsDir.Items[_LastIdx] as Dir).Path;
+                CallBackHandler.Invoke(ico);
             }
             Close();
         }
