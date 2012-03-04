@@ -16,7 +16,9 @@ namespace Me.Amon.Pwd.Pro
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region 接口实现
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
             this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
@@ -25,9 +27,7 @@ namespace Me.Amon.Pwd.Pro
             BtNow.Image = viewModel.GetImage("att-date-now");
             BtOpt.Image = viewModel.GetImage("att-date-options");
         }
-        #endregion
 
-        #region 接口实现
         public Control Control { get { return this; } }
 
         public string Title { get { return "日期"; } }
@@ -40,6 +40,15 @@ namespace Me.Amon.Pwd.Pro
             {
                 TbName.Text = _Att.Name;
                 DtData.Text = _Att.Data;
+            }
+
+            if (string.IsNullOrEmpty(TbName.Text))
+            {
+                TbName.Focus();
+            }
+            else
+            {
+                DtData.Focus();
             }
             return true;
         }

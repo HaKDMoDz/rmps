@@ -14,13 +14,13 @@ namespace Me.Amon.Pwd.Pro
         {
             InitializeComponent();
         }
-
-        public void InitOnce(DataModel dataModel, ViewModel viewModel)
-        {
-        }
         #endregion
 
         #region 接口实现
+        public void InitOnce(DataModel dataModel, ViewModel viewModel)
+        {
+        }
+
         public Control Control { get { return this; } }
 
         public string Title { get { return "徽标"; } }
@@ -32,8 +32,10 @@ namespace Me.Amon.Pwd.Pro
             if (_Att != null)
             {
                 //TbName.Text = _Att.Name;
-                //TbData.Text = _Att.Data;
+                TbData.Text = _Att.Data;
             }
+
+            TbData.Focus();
             return true;
         }
 

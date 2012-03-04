@@ -190,6 +190,10 @@ namespace Me.Amon.Pwd.Pro
             _SafeModel.BindTo(GvAttList);
             _UserAction = true;
 
+            if (!_SafeModel.Key.IsUpdate && _LastIndex < _SafeModel.Count - 1)
+            {
+                _LastIndex += 1;
+            }
             GvAttList.Rows[_LastIndex].Selected = true;
         }
 
@@ -203,7 +207,7 @@ namespace Me.Amon.Pwd.Pro
 
             if (_LastIndex >= _SafeModel.Count)
             {
-                _LastIndex = _SafeModel.Count;
+                _LastIndex = _SafeModel.Count - 1;
             }
             GvAttList.Rows[_LastIndex].Selected = true;
         }
@@ -363,10 +367,9 @@ namespace Me.Amon.Pwd.Pro
             }
 
             _CmpLast = GetCtl(att.Type);
-            _CmpLast.ShowData(att);
-
             GbGroup.Text = _CmpLast.Title;
             GbGroup.Controls.Add(_CmpLast.Control);
+            _CmpLast.ShowData(att);
         }
 
         private IAttEdit GetCtl(int type)

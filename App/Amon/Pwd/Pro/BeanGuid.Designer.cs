@@ -58,6 +58,7 @@
             this.BtOpt.Size = new System.Drawing.Size(21, 21);
             this.BtOpt.TabIndex = 2;
             this.BtOpt.UseVisualStyleBackColor = true;
+            this.BtOpt.Visible = false;
             this.BtOpt.Click += new System.EventHandler(this.button1_Click);
             // 
             // BeanGuid

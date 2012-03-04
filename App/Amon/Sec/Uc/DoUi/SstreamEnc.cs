@@ -65,7 +65,7 @@ namespace Me.Amon.Sec.Uc.DoUi
             {
                 if (string.IsNullOrWhiteSpace(_Do.TbData.Text))
                 {
-                    _Asec.ShowAlert("请选择输出路径！");
+                    Main.ShowAlert("请选择输出路径！");
                     _Do.TbData.Focus();
                     return false;
                 }
@@ -74,7 +74,7 @@ namespace Me.Amon.Sec.Uc.DoUi
 
             if (_Udc == null)
             {
-                _Asec.ShowAlert("请选择掩码！");
+                Main.ShowAlert("请选择掩码！");
                 _Do.CbMask.Focus();
                 return false;
             }
@@ -82,7 +82,7 @@ namespace Me.Amon.Sec.Uc.DoUi
             {
                 if (string.IsNullOrEmpty(_Udc.Data))
                 {
-                    _Asec.ShowAlert("掩码字符不能为空！");
+                    Main.ShowAlert("掩码字符不能为空！");
                     _Do.CbMask.Focus();
                     return false;
                 }

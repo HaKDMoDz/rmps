@@ -6,11 +6,11 @@ namespace Me.Amon.Pwd.Pro
 {
     public interface IAttEdit
     {
+        void InitOnce(DataModel dataModel, ViewModel viewModel);
+
         Control Control { get; }
 
         string Title { get; }
-
-        void InitOnce(DataModel dataModel, ViewModel viewModel);
 
         bool ShowData(AAtt att);
 

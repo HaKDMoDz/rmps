@@ -17,15 +17,15 @@ namespace Me.Amon.Pwd.Pro
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region 接口实现
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
             this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
             this.CbData.GotFocus += new EventHandler(CbData_GotFocus);
         }
-        #endregion
 
-        #region 接口实现
         public Control Control { get { return this; } }
 
         public string Title { get { return "列表"; } }
@@ -39,6 +39,15 @@ namespace Me.Amon.Pwd.Pro
                 TbName.Text = _Att.Name;
                 _Item = new Item { K = _Att.Data };
                 CbData.SelectedItem = _Item;
+            }
+
+            if (string.IsNullOrEmpty(TbName.Text))
+            {
+                TbName.Focus();
+            }
+            else
+            {
+                CbData.Focus();
             }
             return true;
         }
@@ -75,6 +84,7 @@ namespace Me.Amon.Pwd.Pro
         }
         #endregion
 
+        #region 事件处理
         private void TbName_GotFocus(object sender, EventArgs e)
         {
             _Ctl = TbName;
@@ -100,5 +110,6 @@ namespace Me.Amon.Pwd.Pro
         {
             _Item = CbData.SelectedItem as Item;
         }
+        #endregion
     }
 }

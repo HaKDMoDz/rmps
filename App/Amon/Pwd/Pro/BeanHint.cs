@@ -15,14 +15,14 @@ namespace Me.Amon.Pwd.Pro
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region 接口实现
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
             BtName.Image = BeanUtil.NaN16;
         }
-        #endregion
 
-        #region 接口实现
         public Control Control { get { return this; } }
 
         public string Title { get { return "提醒"; } }
@@ -36,6 +36,8 @@ namespace Me.Amon.Pwd.Pro
                 //TbName.Text = _Att.Name;
                 TbData.Text = _Att.Data;
             }
+
+            TbData.Focus();
             return true;
         }
 
@@ -59,9 +61,11 @@ namespace Me.Amon.Pwd.Pro
         }
         #endregion
 
+        #region 事件处理
         private void BtName_Click(object sender, EventArgs e)
         {
 
         }
+        #endregion
     }
 }

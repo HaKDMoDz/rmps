@@ -229,7 +229,7 @@ namespace Me.Amon.Sec
             Item opt = CbOpt.SelectedItem as Item;
             if (opt == null || opt.K == "0")
             {
-                ShowAlert("请选择您要执行的操作！");
+                Main.ShowAlert("请选择您要执行的操作！");
                 CbOpt.Focus();
                 return;
             }
@@ -266,7 +266,7 @@ namespace Me.Amon.Sec
                 case IData.OPT_WRAPPER:
                     if (key == null || key.K == "0")
                     {
-                        ShowAlert("请选择您要执行的操作！");
+                        Main.ShowAlert("请选择您要执行的操作！");
                         CbKey.Focus();
                         return;
                     }
@@ -275,7 +275,7 @@ namespace Me.Amon.Sec
                 case IData.OPT_SCRYPTO:
                     if (key == null || key.K == "0")
                     {
-                        ShowAlert("请选择您要执行的操作！");
+                        Main.ShowAlert("请选择您要执行的操作！");
                         CbKey.Focus();
                         return;
                     }
@@ -284,7 +284,7 @@ namespace Me.Amon.Sec
                 case IData.OPT_SSTREAM:
                     if (key == null || key.K == "0")
                     {
-                        ShowAlert("请选择您要执行的操作！");
+                        Main.ShowAlert("请选择您要执行的操作！");
                         CbKey.Focus();
                         return;
                     }
@@ -293,7 +293,7 @@ namespace Me.Amon.Sec
                 case IData.OPT_ACRYPTO:
                     if (key == null || key.K == "0")
                     {
-                        ShowAlert("请选择您要执行的操作！");
+                        Main.ShowAlert("请选择您要执行的操作！");
                         CbKey.Focus();
                         return;
                     }
@@ -335,11 +335,6 @@ namespace Me.Amon.Sec
             TpTips.SetToolTip(control, caption);
         }
 
-        public void ShowAlert(string message)
-        {
-            MessageBox.Show(this, message, "提醒", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-
         public void ShowEdit(string data, CallBackHandler<string> handler)
         {
             if (_Edit != null && _Edit.Visible)
@@ -358,8 +353,8 @@ namespace Me.Amon.Sec
             {
                 return;
             }
-            _UdcEditor = new UdcEditor();
-            _UdcEditor.Init(_DataModel, udc);
+            _UdcEditor = new UdcEditor(_UserModel);
+            _UdcEditor.Init(null, udc);
             BeanUtil.CenterToParent(_UdcEditor, this);
             _UdcEditor.ShowDialog(this);
         }
@@ -414,11 +409,11 @@ namespace Me.Amon.Sec
         {
             IDigest digest = _UcCm.Digest;
 
-            _UcDi.Begin();
-            _UcDo.Begin();
-
             try
             {
+                _UcDi.Begin();
+                _UcDo.Begin();
+
                 byte[] buf = new byte[IData.BUF_SIZE];
                 int len = _UcDi.Read(buf, 0, buf.Length);
                 while (len > 0)
@@ -457,11 +452,11 @@ namespace Me.Amon.Sec
 
         private void Wrapper()
         {
-            _UcDi.Begin();
-            _UcDo.Begin();
-
             try
             {
+                _UcDi.Begin();
+                _UcDo.Begin();
+
                 byte[] buf = new byte[IData.BUF_SIZE];
                 int len = _UcDi.Read(buf, 0, buf.Length);
                 while (len > 0)
@@ -488,11 +483,11 @@ namespace Me.Amon.Sec
             BufferedCipherBase cipher = _UcCm.Scrypto;
             cipher.Init(encrypt, _UcUk.GenParam());
 
-            _UcDi.Begin();
-            _UcDo.Begin();
-
             try
             {
+                _UcDi.Begin();
+                _UcDo.Begin();
+
                 byte[] bi = new byte[IData.BUF_SIZE];
                 byte[] bo = new byte[IData.BUF_SIZE];
                 int li = _UcDi.Read(bi, 0, bi.Length);
@@ -527,11 +522,11 @@ namespace Me.Amon.Sec
             BufferedStreamCipher cipher = _UcCm.Stream;
             cipher.Init(encrypt, _UcUk.GenParam());
 
-            _UcDi.Begin();
-            _UcDo.Begin();
-
             try
             {
+                _UcDi.Begin();
+                _UcDo.Begin();
+
                 byte[] bi = new byte[IData.BUF_SIZE];
                 byte[] bo = new byte[IData.BUF_SIZE];
                 int li = _UcDi.Read(bi, 0, bi.Length);
@@ -563,11 +558,11 @@ namespace Me.Amon.Sec
             BufferedBlockCipher cipher = _UcCm.Scrypto;
             cipher.Init(encrypt, _UcUk.GenParam());
 
-            _UcDi.Begin();
-            _UcDo.Begin();
-
             try
             {
+                _UcDi.Begin();
+                _UcDo.Begin();
+
                 byte[] bi = new byte[IData.BUF_SIZE];
                 byte[] bo = new byte[IData.BUF_SIZE];
                 int li = _UcDi.Read(bi, 0, bi.Length);
@@ -609,6 +604,7 @@ namespace Me.Amon.Sec
 
         private void MiInfo_Click(object sender, EventArgs e)
         {
+            new Info().ShowDialog(this);
         }
 
         private void MiSave_Click(object sender, EventArgs e)
@@ -616,7 +612,7 @@ namespace Me.Amon.Sec
             Item item = CbOpt.SelectedItem as Item;
             if (item == null || item.K == "0")
             {
-                ShowAlert("默认操作不需要保存！");
+                Main.ShowAlert("默认操作不需要保存！");
                 return;
             }
 

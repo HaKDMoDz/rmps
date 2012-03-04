@@ -14,6 +14,7 @@ namespace Me.Amon.Sec.Uc
 
         #region 构造函数
         protected ASec _ASec;
+        protected DataModel _DataModel;
         protected Di _Di;
 
         public ADi(ASec asec, Di di)
@@ -25,7 +26,7 @@ namespace Me.Amon.Sec.Uc
 
         #region 用户交互
         public static Item _TypeDef = new Item { K = "0", V = "请选择" };
-        public static Item _MaskDef = new Item { K = "0", V = "默认" };
+        public static Udc _MaskDef = new Udc { Id = "0", Name = "默认", Data = "" };
         protected static Item _Type;
         protected static Udc _Udc;
         protected string _Key;

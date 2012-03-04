@@ -6,8 +6,15 @@ namespace Me.Amon.Sec.Uc
 {
     public abstract class ADo
     {
+        protected const string OUTPUT_TEXT = "text";
+        protected const string OUTPUT_FILE = "file";
+        protected const string OUTPUT_FILE_TXT = "txtf";
+        protected const string OUTPUT_FILE_BIN = "binf";
+        protected const string USER_CHARSET = "30";
+
         #region 构造函数
         protected ASec _Asec;
+        protected DataModel _DataModel;
         protected Do _Do;
 
         public ADo(ASec asec, Do od)
@@ -17,15 +24,9 @@ namespace Me.Amon.Sec.Uc
         }
         #endregion
 
-        protected const string OUTPUT_TEXT = "text";
-        protected const string OUTPUT_FILE = "file";
-        protected const string OUTPUT_FILE_TXT = "txtf";
-        protected const string OUTPUT_FILE_BIN = "binf";
-        protected const string USER_CHARSET = "30";
-
         #region 用户交互
         public static Item _TypeDef = new Item { K = "0", V = "请选择" };
-        public static Item _MaskDef = new Item { K = "0", V = "默认" };
+        public static Udc _MaskDef = new Udc { Id = "0", Name = "默认", Data = "" };
         protected static Item _Type;
         protected static Udc _Udc;
 

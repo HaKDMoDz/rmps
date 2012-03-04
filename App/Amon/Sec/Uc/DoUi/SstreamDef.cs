@@ -29,7 +29,7 @@ namespace Me.Amon.Sec.Uc.DoUi
             {
                 if (string.IsNullOrWhiteSpace(_Do.TbData.Text))
                 {
-                    _Asec.ShowAlert("请选择输出路径！");
+                    Main.ShowAlert("请选择输出路径！");
                     _Do.TbData.Focus();
                     return false;
                 }

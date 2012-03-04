@@ -28,19 +28,19 @@ namespace Me.Amon.Sec.Uc.DiUi
             _Di.BtData.Enabled = false;
 
             BeanUtil.Clear(_Di.CbMask);
-            _Di.CbMask.Items.Add(new Item { K = "11", V = "2进制", D = "01" });
-            _Di.CbMask.Items.Add(new Item { K = "12", V = "4进制", D = "0123" });
-            _Di.CbMask.Items.Add(new Item { K = "13", V = "8进制", D = "01234567" });
-            _Di.CbMask.Items.Add(new Item { K = "14", V = "16进制", D = "0123456789ABCDEF" });
-            _Di.CbMask.Items.Add(new Item { K = "15", V = "32进制", D = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
-            _Di.CbMask.Items.Add(new Item { K = "16", V = "64进制", D = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz*." });
-            _Di.CbMask.Items.Add(new Item { K = "21", V = "仅数字", D = "0123456789" });
-            _Di.CbMask.Items.Add(new Item { K = "22", V = "大写字母", D = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
-            _Di.CbMask.Items.Add(new Item { K = "23", V = "小写字母", D = "abcdefghijklmnopqrstuvwxyz" });
-            _Di.CbMask.Items.Add(new Item { K = "24", V = "大小写字母", D = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
-            _Di.CbMask.Items.Add(new Item { K = "25", V = "数字及字母", D = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
-            _Di.CbMask.Items.Add(new Item { K = "26", V = "可输入英文符号", D = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" });
-            _Di.CbMask.Items.Add(new Item { K = USER_CHARSET, V = "自定义字符集", D = "" });
+            _Di.CbMask.Items.Add(new Udc { Id = "11", Name = "2进制", Data = "01" });
+            _Di.CbMask.Items.Add(new Udc { Id = "12", Name = "4进制", Data = "0123" });
+            _Di.CbMask.Items.Add(new Udc { Id = "13", Name = "8进制", Data = "01234567" });
+            _Di.CbMask.Items.Add(new Udc { Id = "14", Name = "16进制", Data = "0123456789ABCDEF" });
+            _Di.CbMask.Items.Add(new Udc { Id = "15", Name = "32进制", Data = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
+            _Di.CbMask.Items.Add(new Udc { Id = "16", Name = "64进制", Data = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz*." });
+            _Di.CbMask.Items.Add(new Udc { Id = "21", Name = "仅数字", Data = "0123456789" });
+            _Di.CbMask.Items.Add(new Udc { Id = "22", Name = "大写字母", Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
+            _Di.CbMask.Items.Add(new Udc { Id = "23", Name = "小写字母", Data = "abcdefghijklmnopqrstuvwxyz" });
+            _Di.CbMask.Items.Add(new Udc { Id = "24", Name = "大小写字母", Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
+            _Di.CbMask.Items.Add(new Udc { Id = "25", Name = "数字及字母", Data = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
+            _Di.CbMask.Items.Add(new Udc { Id = "26", Name = "可输入英文符号", Data = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" });
+            _Di.CbMask.Items.Add(new Udc { Id = USER_CHARSET, Name = "自定义字符集", Data = "" });
 
             _Di.LbMask.Visible = false;
             _Di.CbMask.Visible = false;
@@ -110,13 +110,13 @@ namespace Me.Amon.Sec.Uc.DiUi
             {
                 if (string.IsNullOrWhiteSpace(_Di.TbData.Text))
                 {
-                    _ASec.ShowAlert("请选择输入文件！");
+                    Main.ShowAlert("请选择输入文件！");
                     _Di.TbData.Focus();
                     return false;
                 }
                 if (!System.IO.File.Exists(_Di.TbData.Text))
                 {
-                    _ASec.ShowAlert("您选择的输入文件不存在！");
+                    Main.ShowAlert("您选择的输入文件不存在！");
                     _Di.TbData.Focus();
                     return false;
                 }
@@ -126,7 +126,7 @@ namespace Me.Amon.Sec.Uc.DiUi
             {
                 if (string.IsNullOrEmpty(_Di.TbData.Text))
                 {
-                    _ASec.ShowAlert("请录入输入文本！");
+                    Main.ShowAlert("请录入输入文本！");
                     _Di.TbData.Focus();
                     return false;
                 }
@@ -135,7 +135,7 @@ namespace Me.Amon.Sec.Uc.DiUi
 
             if (_Udc == null)
             {
-                _ASec.ShowAlert("请选择掩码！");
+                Main.ShowAlert("请选择掩码！");
                 _Di.CbMask.Focus();
                 return false;
             }
@@ -143,7 +143,7 @@ namespace Me.Amon.Sec.Uc.DiUi
             {
                 if (string.IsNullOrEmpty(_Udc.Data))
                 {
-                    _ASec.ShowAlert("掩码字符不能为空！");
+                    Main.ShowAlert("掩码字符不能为空！");
                     _Di.CbMask.Focus();
                     return false;
                 }

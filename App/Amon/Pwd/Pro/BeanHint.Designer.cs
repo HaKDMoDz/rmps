@@ -45,11 +45,11 @@
             // 
             // BtName
             // 
+            this.BtName.Enabled = false;
             this.BtName.Location = new System.Drawing.Point(56, 3);
             this.BtName.Name = "BtName";
             this.BtName.Size = new System.Drawing.Size(21, 21);
             this.BtName.TabIndex = 1;
-            this.BtName.Text = "button1";
             this.BtName.UseVisualStyleBackColor = true;
             this.BtName.Click += new System.EventHandler(this.BtName_Click);
             // 

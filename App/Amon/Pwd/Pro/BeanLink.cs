@@ -17,7 +17,9 @@ namespace Me.Amon.Pwd.Pro
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region 接口实现
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
             this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
@@ -25,9 +27,7 @@ namespace Me.Amon.Pwd.Pro
 
             BtOpen.Image = viewModel.GetImage("att-link-open");
         }
-        #endregion
 
-        #region 接口实现
         public Control Control { get { return this; } }
 
         public string Title { get { return "链接"; } }
@@ -40,6 +40,15 @@ namespace Me.Amon.Pwd.Pro
             {
                 TbName.Text = _Att.Name;
                 TbData.Text = _Att.Data;
+            }
+
+            if (string.IsNullOrEmpty(TbName.Text))
+            {
+                TbName.Focus();
+            }
+            else
+            {
+                TbData.Focus();
             }
             return true;
         }
@@ -69,6 +78,7 @@ namespace Me.Amon.Pwd.Pro
         }
         #endregion
 
+        #region 事件处理
         private void TbName_GotFocus(object sender, EventArgs e)
         {
             _Ctl = TbName;
@@ -103,5 +113,6 @@ namespace Me.Amon.Pwd.Pro
                 Main.ShowError(exp);
             }
         }
+        #endregion
     }
 }

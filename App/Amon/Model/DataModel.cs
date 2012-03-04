@@ -41,8 +41,8 @@ namespace Me.Amon.Model
             #endregion
 
             #region 读取配置
-            UcsLength = 8;
-            _UcsKey = "aucs000000000005";
+            UdcLength = 8;
+            _UdcKey = "aucs000000000005";
             #endregion
 
             #region 口令模板
@@ -96,18 +96,18 @@ namespace Me.Amon.Model
             #endregion
 
             #region 字符空间
-            _UcsList = new ObservableCollection<Udc>();
-            _UcsList.Add(new Udc { Id = "aucs000000000001", Name = "仅数字", Tips = "仅数字", Data = "0123456789" });
-            _UcsList.Add(new Udc { Id = "aucs000000000002", Name = "大写字母", Tips = "大写字母", Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
-            _UcsList.Add(new Udc { Id = "aucs000000000003", Name = "小写字母", Tips = "小写字母", Data = "abcdefghijklmnopqrstuvwxyz" });
-            _UcsList.Add(new Udc { Id = "aucs000000000004", Name = "大小写字母", Tips = "大小写字母", Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
-            _UcsList.Add(new Udc { Id = "aucs000000000005", Name = "数字及字母", Tips = "数字及字母", Data = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
-            _UcsList.Add(new Udc { Id = "aucs000000000006", Name = "可输入英文符号", Tips = "可输入英文符号", Data = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" });
-            foreach (Udc item in _UcsList)
+            _UdcList = new ObservableCollection<Udc>();
+            _UdcList.Add(new Udc { Id = "aucs000000000001", Name = "仅数字", Tips = "仅数字", Data = "0123456789" });
+            _UdcList.Add(new Udc { Id = "aucs000000000002", Name = "大写字母", Tips = "大写字母", Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
+            _UdcList.Add(new Udc { Id = "aucs000000000003", Name = "小写字母", Tips = "小写字母", Data = "abcdefghijklmnopqrstuvwxyz" });
+            _UdcList.Add(new Udc { Id = "aucs000000000004", Name = "大小写字母", Tips = "大小写字母", Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
+            _UdcList.Add(new Udc { Id = "aucs000000000005", Name = "数字及字母", Tips = "数字及字母", Data = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
+            _UdcList.Add(new Udc { Id = "aucs000000000006", Name = "可输入英文符号", Tips = "可输入英文符号", Data = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" });
+            foreach (Udc item in _UdcList)
             {
-                if (item.Id == _UcsKey)
+                if (item.Id == _UdcKey)
                 {
-                    UcsDefault = item;
+                    UdcDefault = item;
                 }
             }
 
@@ -130,15 +130,15 @@ namespace Me.Amon.Model
                     item.Tips = row[DBConst.AUDC0105] as string;
                     item.Data = row[DBConst.AUDC0106] as string;
                     item.Memo = row[DBConst.AUDC0107] as string;
-                    UcsList.Add(item);
+                    UdcList.Add(item);
 
-                    if (item.Id == _UcsKey)
+                    if (item.Id == _UdcKey)
                     {
-                        UcsDefault = item;
+                        UdcDefault = item;
                     }
                 }
             }
-            UcsModified = 0x7FFFFFFF;
+            UdcModified = 0x7FFFFFFF;
             #endregion
         }
 
@@ -167,18 +167,18 @@ namespace Me.Amon.Model
         #endregion
 
         #region 字符集
-        private ObservableCollection<Udc> _UcsList;
-        public ObservableCollection<Udc> UcsList
+        private ObservableCollection<Udc> _UdcList;
+        public ObservableCollection<Udc> UdcList
         {
             get
             {
-                return _UcsList;
+                return _UdcList;
             }
         }
-        public int UcsModified { get; set; }
-        private string _UcsKey;
-        public Udc UcsDefault { get; set; }
-        public int UcsLength { get; set; }
+        public int UdcModified { get; set; }
+        private string _UdcKey;
+        public Udc UdcDefault { get; set; }
+        public int UdcLength { get; set; }
         #endregion
     }
 }

@@ -114,7 +114,7 @@ namespace Me.Amon.Sec.Uc
             Item item = CbType.SelectedItem as Item;
             if (item == null || item.K == "0")
             {
-                _ASec.ShowAlert("请选择输入方式！");
+                Main.ShowAlert("请选择输入方式！");
                 CbType.Focus();
                 return false;
             }

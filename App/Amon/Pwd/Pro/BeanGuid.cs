@@ -12,6 +12,7 @@ namespace Me.Amon.Pwd.Pro
         private SafeModel _SafeModel;
         private DataModel _DataModel;
 
+        #region 构造函数
         public BeanGuid()
         {
             InitializeComponent();
@@ -23,7 +24,9 @@ namespace Me.Amon.Pwd.Pro
 
             InitializeComponent();
         }
+        #endregion
 
+        #region 接口实现
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
             _DataModel = dataModel;
@@ -31,7 +34,6 @@ namespace Me.Amon.Pwd.Pro
             BtOpt.Image = viewModel.GetImage("");
         }
 
-        #region 接口实现
         public Control Control { get { return this; } }
 
         public string Title { get { return "向导"; } }
@@ -46,7 +48,10 @@ namespace Me.Amon.Pwd.Pro
                 CbName.ValueMember = "Id";
                 _DataModel.LibModified &= ~IEnv.KEY_APWD;
             }
+
             _Att = att;
+
+            CbName.Focus();
             return true;
         }
 
@@ -80,8 +85,10 @@ namespace Me.Amon.Pwd.Pro
         }
         #endregion
 
+        #region 事件处理
         private void button1_Click(object sender, EventArgs e)
         {
         }
+        #endregion
     }
 }

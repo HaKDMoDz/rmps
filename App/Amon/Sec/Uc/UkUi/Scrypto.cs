@@ -287,13 +287,13 @@ namespace Me.Amon.Sec.Uc.UkUi
         {
             if (string.IsNullOrEmpty(_Uk.TbPass.Text))
             {
-                _ASec.ShowAlert("请输入口令！");
+                Main.ShowAlert("请输入口令！");
                 _Uk.TbPass.Focus();
                 return false;
             }
             if (_Uk.TbSalt.Visible && string.IsNullOrEmpty(_Uk.TbSalt.Text))
             {
-                _ASec.ShowAlert("请输入向量！");
+                Main.ShowAlert("请输入向量！");
                 _Uk.TbSalt.Focus();
                 return false;
             }

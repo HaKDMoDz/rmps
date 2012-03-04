@@ -473,6 +473,7 @@
     <Compile Include="Sec\ASec.Designer.cs">
       <DependentUpon>ASec.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sec\DataModel.cs" />
     <Compile Include="Sec\IData.cs" />
     <Compile Include="Sec\IForm.cs" />
     <Compile Include="Sec\IView.cs" />
@@ -780,6 +781,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Pro\BeanCall.resx">
       <DependentUpon>BeanCall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanLogo.resx">
+      <DependentUpon>BeanLogo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Wiz\BeanCall.resx">
       <DependentUpon>BeanCall.cs</DependentUpon>

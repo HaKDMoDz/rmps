@@ -44,7 +44,7 @@ namespace Me.Amon.Sec.Uc.UkUi
         {
             if (string.IsNullOrEmpty(_Uk.TbPass.Text))
             {
-                _ASec.ShowAlert("请输入口令！");
+                Main.ShowAlert("请输入口令！");
                 _Uk.TbPass.Focus();
                 return false;
             }

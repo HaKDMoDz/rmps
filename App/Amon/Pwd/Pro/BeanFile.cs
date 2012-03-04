@@ -21,7 +21,9 @@ namespace Me.Amon.Pwd.Pro
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region 接口实现
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
             _DataModel = dataModel;
@@ -32,9 +34,7 @@ namespace Me.Amon.Pwd.Pro
             BtView.Image = viewModel.GetImage("att-file-preview");
             BtOpen.Image = viewModel.GetImage("att-file-append");
         }
-        #endregion
 
-        #region 接口实现
         public Control Control { get { return this; } }
 
         public string Title { get { return "文件"; } }
@@ -47,6 +47,15 @@ namespace Me.Amon.Pwd.Pro
             {
                 TbName.Text = _Att.Name;
                 TbData.Text = _Att.Data;
+            }
+
+            if (string.IsNullOrEmpty(TbName.Text))
+            {
+                TbName.Focus();
+            }
+            else
+            {
+                TbData.Focus();
             }
             return true;
         }

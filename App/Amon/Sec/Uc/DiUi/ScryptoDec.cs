@@ -62,13 +62,13 @@ namespace Me.Amon.Sec.Uc.DiUi
             {
                 if (string.IsNullOrWhiteSpace(_Di.TbData.Text))
                 {
-                    _ASec.ShowAlert("请选择输入文件！");
+                    Main.ShowAlert("请选择输入文件！");
                     _Di.TbData.Focus();
                     return false;
                 }
                 if (!System.IO.File.Exists(_Di.TbData.Text))
                 {
-                    _ASec.ShowAlert("您选择的输入文件不存在！");
+                    Main.ShowAlert("您选择的输入文件不存在！");
                     _Di.TbData.Focus();
                     return false;
                 }
@@ -79,7 +79,7 @@ namespace Me.Amon.Sec.Uc.DiUi
             {
                 if (string.IsNullOrEmpty(_Di.TbData.Text))
                 {
-                    _ASec.ShowAlert("请录入输入文本！");
+                    Main.ShowAlert("请录入输入文本！");
                     _Di.TbData.Focus();
                     return false;
                 }
@@ -88,7 +88,7 @@ namespace Me.Amon.Sec.Uc.DiUi
 
             if (_Udc == null)
             {
-                _ASec.ShowAlert("请选择掩码！");
+                Main.ShowAlert("请选择掩码！");
                 _Di.CbMask.Focus();
                 return false;
             }
@@ -96,7 +96,7 @@ namespace Me.Amon.Sec.Uc.DiUi
             {
                 if (string.IsNullOrEmpty(_Udc.Data))
                 {
-                    _ASec.ShowAlert("掩码字符不能为空！");
+                    Main.ShowAlert("掩码字符不能为空！");
                     _Di.TbData.Focus();
                     return false;
                 }

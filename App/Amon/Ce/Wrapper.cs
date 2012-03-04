@@ -41,7 +41,7 @@ namespace Me.Amon.Ce
             // 判断可用位数
             if (cnt < 2)
             {
-                throw new Exception("字符太少！");
+                throw new Exception("掩码不能少于2个字符！");
             }
 
             _BitStep = 8;

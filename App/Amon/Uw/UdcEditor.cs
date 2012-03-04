@@ -154,7 +154,10 @@ namespace Me.Amon.Uw
                 LsUcs.Items.Add(_Item);
                 ShowData(new Udc());
             }
-            _DataModel.UcsModified = -1;
+            if (_DataModel != null)
+            {
+                _DataModel.UdcModified = -1;
+            }
         }
         #endregion
     }

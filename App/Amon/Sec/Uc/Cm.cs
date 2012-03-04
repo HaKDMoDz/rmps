@@ -115,7 +115,7 @@ namespace Me.Amon.Sec.Uc
             Item item = CbName.SelectedItem as Item;
             if (item == null || item.K == "0")
             {
-                _ASec.ShowAlert("请选择算法名称！");
+                Main.ShowAlert("请选择算法名称！");
                 CbName.Focus();
                 return false;
             }
