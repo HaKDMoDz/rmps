@@ -34,6 +34,7 @@ namespace Me.Amon.Pwd.Wiz
         public void Init(DataModel dataModel)
         {
             _DataModel = dataModel;
+            _AIco = new Bean.Ico();
         }
         #endregion
 
@@ -82,7 +83,25 @@ namespace Me.Amon.Pwd.Wiz
             {
                 return;
             }
-            //TbLogoData.Text = logo.Data;
+            _AIco.File = logo.Name;
+            _AIco.Path = logo.Path;
+            if (!CharUtil.IsValidateHash(logo.Name))
+            {
+                PbIcon.Image = BeanUtil.NaN16;
+            }
+            else
+            {
+                string path = Path.GetDirectoryName(Application.ExecutablePath);
+                if (CharUtil.IsValidateHash(logo.Path))
+                {
+                    path = Path.Combine(path, logo.Path, logo.Name + IEnv.IMG_KEY_EDIT_EXT);
+                }
+                else
+                {
+                    path = Path.Combine(path, logo.Name + IEnv.IMG_KEY_EDIT_EXT);
+                }
+                PbIcon.Image = BeanUtil.ReadImage(path, BeanUtil.NaN16);
+            }
 
             HintAtt hint = _SafeModel.Hint;
             if (hint == null)
@@ -148,7 +167,6 @@ namespace Me.Amon.Pwd.Wiz
         #region 事件处理
         private void CbLib_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
 
         private void PbIcon_Click(object sender, EventArgs e)

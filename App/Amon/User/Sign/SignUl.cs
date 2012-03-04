@@ -28,7 +28,7 @@ namespace Me.Amon.User.Sign
 
             InitializeComponent();
 
-            TbPath.Text = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), IEnv.DATA_DIR);
+            TbPath.Text = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), IEnv.DIR_DATA);
         }
         #endregion
 
@@ -70,7 +70,7 @@ namespace Me.Amon.User.Sign
             string path = TbPath.Text;
             if (string.IsNullOrEmpty(path))
             {
-                path = IEnv.DATA_DIR;
+                path = IEnv.DIR_DATA;
             }
             if (!Directory.Exists(path))
             {

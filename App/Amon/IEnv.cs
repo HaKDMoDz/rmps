@@ -5,7 +5,8 @@
         /// <summary>
         /// 默认数据目录
         /// </summary>
-        public const string DATA_DIR = "Dat";
+        public const string DIR_DATA = "Dat";
+        public const string DIR_BACK = "Bak";
         /// <summary>
         /// 
         /// </summary>

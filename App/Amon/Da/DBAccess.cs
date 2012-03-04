@@ -87,6 +87,14 @@ namespace Me.Amon.Da
             }
         }
 
+        public void Dispose()
+        {
+            if (_Connection != null)
+            {
+                _Connection.Close();
+            }
+        }
+
         private void DbInit()
         {
             using (SQLiteTransaction mytransaction = _Connection.BeginTransaction())

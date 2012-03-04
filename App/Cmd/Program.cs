@@ -10,12 +10,14 @@ namespace Cmd
     {
         static void Main(string[] args)
         {
-            cc();
+            Console.WriteLine(DateTime.Now.ToString("-yyyyMMdd HH:mm:ss"));
+            Console.ReadLine();
         }
         private static void cc()
         {
-            BeanUtil.UnZip("F:\\Amon.dat", "F:\\123\\");
+            BeanUtil.DoZip("D:\\123.zip", "D:\\Temp", "D:\\Temp\\Demo", "D:\\Temp\\a.txt");
         }
+
         public static void dd()
         {
             string text = File.ReadAllText("D:\\a.txt");

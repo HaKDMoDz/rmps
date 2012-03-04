@@ -88,7 +88,7 @@ namespace Me.Amon.User.Sign
             #region 已有用户首次登录
             if (!CharUtil.IsValidateCode(code))
             {
-                _Home = IEnv.DATA_DIR;
+                _Home = IEnv.DIR_DATA;
 
                 WebClient client = new WebClient();
                 client.Credentials = CredentialCache.DefaultCredentials;

@@ -165,11 +165,19 @@ namespace Me.Amon.Pwd
 
         public bool WillExit()
         {
+            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            {
+                return DialogResult.Yes == MessageBox.Show("您有数据尚未保存，确认要退出吗？", "提示0", MessageBoxButtons.YesNoCancel);
+            }
             return true;
         }
 
         public bool SaveData()
         {
+            _UserModel.DBAccess.Dispose();
+            string file = _UserModel.Code + '-' + DateTime.Now.ToString("yyyyMMddHHmmss") + ".apbak";
+            string path = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), IEnv.DIR_BACK);
+            DoBackup(Path.Combine(path, file));
             return true;
         }
 
@@ -871,17 +879,27 @@ namespace Me.Amon.Pwd
         #region 数据菜单
         private void TmiSync_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("同步功能尚在完善中，敬请期待！");
+            DoSync();
         }
 
-        private void TmiBackup_Click(object sender, EventArgs e)
+        private void TmiLocaleBackup_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("同步功能尚在完善中，敬请期待！");
+            LocaleBackup();
         }
 
-        private void TmiResuma_Click(object sender, EventArgs e)
+        private void TmiLocaleResuma_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("同步功能尚在完善中，敬请期待！");
+            LocaleResuma();
+        }
+
+        private void TmiRemoteBackup_Click(object sender, EventArgs e)
+        {
+            RemoteBackup();
+        }
+
+        private void TmiRemoteResuma_Click(object sender, EventArgs e)
+        {
+            RemoteResume();
         }
 
         #region 数据导出
@@ -1200,17 +1218,17 @@ namespace Me.Amon.Pwd
 
         private void TsbSync_Click(object sender, EventArgs e)
         {
-
+            DoSync();
         }
 
         private void TsbKeys_Click(object sender, EventArgs e)
         {
-
+            ShowKeys();
         }
 
         private void TsbInfo_Click(object sender, EventArgs e)
         {
-
+            ShowInfo();
         }
         #endregion
 
@@ -1537,6 +1555,7 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 私有方法
+        #region 模式切换
         private void ShowAPro()
         {
             if (_ProView == null)
@@ -1591,133 +1610,32 @@ namespace Me.Amon.Pwd
 
         private void ShowAPad()
         {
-            if (_PadView == null)
-            {
-                _PadView = new APad();
-                _PadView.Name = "Pad";
-                _PadView.Init(this, _SafeModel, _DataModel);
-            }
+            //if (_PadView == null)
+            //{
+            //    _PadView = new APad();
+            //    _PadView.Name = "Pad";
+            //    _PadView.Init(this, _SafeModel, _DataModel);
+            //}
 
-            if (_PwdView != null)
-            {
-                if (_PwdView.Name == _PadView.Name)
-                {
-                    return;
-                }
-                _PwdView.HideView(TpGrid);
-            }
+            //if (_PwdView != null)
+            //{
+            //    if (_PwdView.Name == _PadView.Name)
+            //    {
+            //        return;
+            //    }
+            //    _PwdView.HideView(TpGrid);
+            //}
 
-            _PwdView = _PadView;
-            _PwdView.InitView(TpGrid);
+            //_PwdView = _PadView;
+            //_PwdView.InitView(TpGrid);
 
-            TmiViewPro.Checked = false;
-            TmiViewWiz.Checked = false;
-            TmiViewPad.Checked = true;
+            //TmiViewPro.Checked = false;
+            //TmiViewWiz.Checked = false;
+            //TmiViewPad.Checked = true;
         }
+        #endregion
 
-        private void ChangeImgByCat(Bean.Png png)
-        {
-            if (!CharUtil.IsValidateHash(png.Path))
-            {
-                png.Path = "0";
-            }
-            if (!IlCatTree.Images.ContainsKey(png.Path))
-            {
-                IlCatTree.Images.Add(png.Path, png.Image);
-            }
-            _LastNode.ImageKey = png.Path;
-            _LastNode.SelectedImageKey = png.Path;
-
-            Cat cat = _LastNode.Tag as Cat;
-            if (cat == null)
-            {
-                return;
-            }
-
-            var dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.ACAT0200);
-            dba.AddParam(DBConst.ACAT0207, png.Path);
-            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
-            dba.AddWhere(DBConst.ACAT0203, cat.Id);
-            dba.ExecuteUpdate();
-        }
-
-        private void ChangeCatByKey(string catId)
-        {
-            if (string.IsNullOrEmpty(catId))
-            {
-                catId = "0";
-            }
-            if (catId == _SafeModel.Key.CatId)
-            {
-                return;
-            }
-
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.APWD0100);
-            dba.AddParam(DBConst.APWD0106, catId);
-            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
-            dba.AddWhere(DBConst.APWD0105, _SafeModel.Key.Id);
-            dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115, _SafeModel.Key.Operate, DBConst.OPT_PWD_UPDATE_CAT);
-            if (1 != dba.ExecuteUpdate())
-            {
-                return;
-            }
-
-            _SafeModel.Key.CatId = catId;
-            LastOpt();
-        }
-
-        public void ChangeLabel(int label)
-        {
-            if (label < 0 || label > 9)
-            {
-                return;
-            }
-
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.APWD0100);
-            dba.AddParam(DBConst.APWD0102, label);
-            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
-            dba.AddWhere(DBConst.APWD0105, _SafeModel.Key.Id);
-            dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115, _SafeModel.Key.Operate, DBConst.OPT_PWD_UPDATE_LABEL);
-            if (1 != dba.ExecuteUpdate())
-            {
-                return;
-            }
-
-            _SafeModel.Key.Label = label;
-            //LbKeyList.Items[LbKeyList.SelectedIndex] = _SafeModel.Key;
-            LbKeyList.Refresh();
-        }
-
-        public void ChangeMajor(int major)
-        {
-            if (major < -2 || major > 2)
-            {
-                return;
-            }
-
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.APWD0100);
-            dba.AddParam(DBConst.APWD0103, major);
-            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
-            dba.AddWhere(DBConst.APWD0105, _SafeModel.Key.Id);
-            dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115, _SafeModel.Key.Operate, DBConst.OPT_PWD_UPDATE_MAJOR);
-            if (1 != dba.ExecuteUpdate())
-            {
-                return;
-            }
-
-            _SafeModel.Key.Major = major;
-            //LbKeyList.Items[LbKeyList.SelectedIndex] = _SafeModel.Key;
-            LbKeyList.Refresh();
-        }
-
+        #region 视图调整
         private void SetMenuBarVisible(bool visible)
         {
             TmMenu.Visible = visible;
@@ -1791,6 +1709,7 @@ namespace Me.Amon.Pwd
 
             _ViewModel.FindBarVisible = visible;
         }
+        #endregion
 
         #region 类别处理
         private void AppendCat()
@@ -1941,6 +1860,34 @@ namespace Me.Amon.Pwd
             {
                 root.Nodes.Remove(node);
             }
+        }
+
+        private void ChangeImgByCat(Bean.Png png)
+        {
+            if (!CharUtil.IsValidateHash(png.Path))
+            {
+                png.Path = "0";
+            }
+            if (!IlCatTree.Images.ContainsKey(png.Path))
+            {
+                IlCatTree.Images.Add(png.Path, png.Image);
+            }
+            _LastNode.ImageKey = png.Path;
+            _LastNode.SelectedImageKey = png.Path;
+
+            Cat cat = _LastNode.Tag as Cat;
+            if (cat == null)
+            {
+                return;
+            }
+
+            var dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(DBConst.ACAT0200);
+            dba.AddParam(DBConst.ACAT0207, png.Path);
+            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
+            dba.AddWhere(DBConst.ACAT0203, cat.Id);
+            dba.ExecuteUpdate();
         }
         #endregion
 
@@ -2287,6 +2234,127 @@ namespace Me.Amon.Pwd
                 DoListKey(_LastHash);
             }
         }
+
+        private void ChangeCatByKey(string catId)
+        {
+            if (string.IsNullOrEmpty(catId))
+            {
+                catId = "0";
+            }
+            if (catId == _SafeModel.Key.CatId)
+            {
+                return;
+            }
+
+            DBAccess dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(DBConst.APWD0100);
+            dba.AddParam(DBConst.APWD0106, catId);
+            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
+            dba.AddWhere(DBConst.APWD0105, _SafeModel.Key.Id);
+            dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115, _SafeModel.Key.Operate, DBConst.OPT_PWD_UPDATE_CAT);
+            if (1 != dba.ExecuteUpdate())
+            {
+                return;
+            }
+
+            _SafeModel.Key.CatId = catId;
+            LastOpt();
+        }
+
+        public void ChangeLabel(int label)
+        {
+            if (label < 0 || label > 9)
+            {
+                return;
+            }
+
+            DBAccess dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(DBConst.APWD0100);
+            dba.AddParam(DBConst.APWD0102, label);
+            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
+            dba.AddWhere(DBConst.APWD0105, _SafeModel.Key.Id);
+            dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115, _SafeModel.Key.Operate, DBConst.OPT_PWD_UPDATE_LABEL);
+            if (1 != dba.ExecuteUpdate())
+            {
+                return;
+            }
+
+            _SafeModel.Key.Label = label;
+            //LbKeyList.Items[LbKeyList.SelectedIndex] = _SafeModel.Key;
+            LbKeyList.Refresh();
+        }
+
+        public void ChangeMajor(int major)
+        {
+            if (major < -2 || major > 2)
+            {
+                return;
+            }
+
+            DBAccess dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(DBConst.APWD0100);
+            dba.AddParam(DBConst.APWD0103, major);
+            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
+            dba.AddWhere(DBConst.APWD0105, _SafeModel.Key.Id);
+            dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115, _SafeModel.Key.Operate, DBConst.OPT_PWD_UPDATE_MAJOR);
+            if (1 != dba.ExecuteUpdate())
+            {
+                return;
+            }
+
+            _SafeModel.Key.Major = major;
+            //LbKeyList.Items[LbKeyList.SelectedIndex] = _SafeModel.Key;
+            LbKeyList.Refresh();
+        }
+        #endregion
+
+        #region 数据同步
+        private void DoSync()
+        {
+            MessageBox.Show("同步功能尚在完善中，敬请期待！");
+        }
+
+        private void DoBackup(string file)
+        {
+            _UserModel.DBAccess.Dispose();
+            BeanUtil.DoZip(file, _UserModel.Home);
+        }
+
+        private void LocaleBackup()
+        {
+            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            {
+                if (DialogResult.No != MessageBox.Show("您有数据尚未保存，要保存吗？", "提示", MessageBoxButtons.YesNoCancel))
+                {
+                    return;
+                }
+            }
+
+            SaveFileDialog fd = new SaveFileDialog();
+            fd.Filter = "密码箱备份文件|*.apbak";
+            if (DialogResult.OK != fd.ShowDialog(this))
+            {
+                return;
+            }
+            DoBackup(fd.FileName);
+        }
+
+        private void RemoteBackup()
+        {
+            MessageBox.Show("远程备份功能尚在完善中，敬请期待！");
+        }
+
+        private void RemoteResume()
+        {
+            MessageBox.Show("远程恢复功能尚在完善中，敬请期待！");
+        }
+
+        private void LocaleResuma()
+        {
+        }
         #endregion
 
         private void ShowHelp()
@@ -2357,7 +2425,7 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                if (DialogResult.OK != MessageBox.Show("您有数据尚未保存，确认要退出吗？", "", MessageBoxButtons.YesNo))
+                if (DialogResult.OK != MessageBox.Show("您有数据尚未保存，确认要退出吗？", "提示", MessageBoxButtons.YesNo))
                 {
                     return;
                 }

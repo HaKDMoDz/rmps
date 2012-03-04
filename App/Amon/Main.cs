@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Event;
 using Me.Amon.Model;
@@ -11,7 +12,6 @@ using Me.Amon.User;
 using Me.Amon.User.Sign;
 using Me.Amon.Util;
 using Me.Amon.Uw;
-using System.IO;
 
 namespace Me.Amon
 {
@@ -81,11 +81,6 @@ namespace Me.Amon
             BgWorker.Start();
 
             _UserModel = new UserModel();
-
-            if (!Directory.Exists(IEnv.DATA_DIR))
-            {
-                Directory.CreateDirectory(IEnv.DATA_DIR);
-            }
             if (File.Exists(IEnv.FILE_LOG))
             {
                 _Writer = new StreamWriter(IEnv.FILE_LOG, true);
@@ -271,9 +266,14 @@ namespace Me.Amon
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_IApp != null && !_IApp.WillExit())
+            if (_IApp != null)
             {
-                return;
+                if (!_IApp.WillExit())
+                {
+                    e.Cancel = true;
+                    return;
+                }
+                _IApp.SaveData();
             }
 
             Settings.Default.LocX = Location.X;
@@ -363,10 +363,6 @@ namespace Me.Amon
 
         private void MgExit_Click(object sender, EventArgs e)
         {
-            if (_IApp != null && !_IApp.WillExit())
-            {
-                return;
-            }
             Close();
         }
         #endregion
@@ -440,10 +436,6 @@ namespace Me.Amon
 
         private void MtExit_Click(object sender, EventArgs e)
         {
-            if (_IApp != null && !_IApp.WillExit())
-            {
-                return;
-            }
             Close();
         }
         #endregion

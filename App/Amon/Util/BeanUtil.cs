@@ -156,43 +156,86 @@ namespace Me.Amon.Util
             return bmp;
         }
 
-        public static void DoZip(string srcPath, string zipFile)
+        public static void DoZip(string zipFile, string srcBase, params string[] srcPath)
         {
-            Crc32 crc = new Crc32();
+            if (srcBase == null)
+            {
+                srcBase = "";
+            }
+            if (srcBase[srcBase.Length - 1] != Path.DirectorySeparatorChar)
+            {
+                srcBase += Path.DirectorySeparatorChar;
+            }
+
             ZipOutputStream oStream = new ZipOutputStream(File.Create(zipFile));
             oStream.SetLevel(6);
+            Crc32 crc = new Crc32();
 
-            foreach (string file in Directory.GetFiles(srcPath))
+            if (srcPath == null || srcPath.Length < 1)
             {
-                if (File.Exists(file))
+                DoZipPath(oStream, crc, srcBase, srcBase);
+            }
+            else
+            {
+                foreach (string path in srcPath)
                 {
-                    continue;
+                    if (Directory.Exists(path))
+                    {
+                        DoZipPath(oStream, crc, path, srcBase);
+                        continue;
+                    }
+                    if (File.Exists(path))
+                    {
+                        DoZipFile(oStream, crc, path, srcBase);
+                        continue;
+                    }
                 }
-
-                ZipEntry zipEntry = new ZipEntry(file);
-                zipEntry.DateTime = DateTime.Now;
-
-                //打开压缩文件   
-                FileStream iStream = File.OpenRead(file);
-                zipEntry.Size = iStream.Length;
-                oStream.PutNextEntry(zipEntry);
-
-                byte[] buf = new byte[4096];
-                int len = iStream.Read(buf, 0, buf.Length);
-                crc.Reset();
-                while (len > 0)
-                {
-                    crc.Update(buf);
-                    oStream.Write(buf, 0, buf.Length);
-                    len = iStream.Read(buf, 0, buf.Length);
-                }
-                iStream.Close();
-
-                zipEntry.Crc = crc.Value;
             }
 
             oStream.Finish();
             oStream.Close();
+        }
+
+        private static void DoZipPath(ZipOutputStream oStream, Crc32 crc, string srcPath, string srcBase)
+        {
+            foreach (string subPath in Directory.GetDirectories(srcPath))
+            {
+                DoZipPath(oStream, crc, subPath, srcBase);
+            }
+
+            foreach (string file in Directory.GetFiles(srcPath))
+            {
+                DoZipFile(oStream, crc, file, srcBase);
+            }
+        }
+
+        private static void DoZipFile(ZipOutputStream oStream, Crc32 crc, string srcFile, string srcBase)
+        {
+            if (!File.Exists(srcFile))
+            {
+                return;
+            }
+
+            ZipEntry zipEntry = new ZipEntry(srcFile.Replace(srcBase, ""));
+            zipEntry.DateTime = DateTime.Now;
+
+            //打开压缩文件   
+            FileStream iStream = File.OpenRead(srcFile);
+            zipEntry.Size = iStream.Length;
+            oStream.PutNextEntry(zipEntry);
+
+            byte[] buf = new byte[4096];
+            int len = iStream.Read(buf, 0, buf.Length);
+            crc.Reset();
+            while (len > 0)
+            {
+                crc.Update(buf, 0, len);
+                oStream.Write(buf, 0, len);
+                len = iStream.Read(buf, 0, buf.Length);
+            }
+            iStream.Close();
+
+            zipEntry.Crc = crc.Value;
         }
 
         public static void UnZip(string zipFile, string dstPath)
