@@ -1283,21 +1283,26 @@ namespace Me.Amon.Pwd
                 return;
             }
 
+            Cat currCat = currNode.Tag as Cat;
+            if (currCat == null || currCat.Id == "0")
+            {
+                return;
+            }
+
             TreeNode prevNode = currNode.PrevNode;
             if (prevNode == null)
             {
                 return;
             }
 
-            Cat currCat = currNode.Tag as Cat;
-            int i = prevNode.Index;
-            if (currCat == null || currCat.Id == "0")
+            Cat prevCat = prevNode.Tag as Cat;
+            if (prevCat == null || prevCat.Id == "0")
             {
                 return;
             }
 
-            Cat prevCat = prevNode.Tag as Cat;
-            if (prevCat == null || prevCat.Id == "0")
+            TreeNode parent = currNode.Parent;
+            if (parent == null)
             {
                 return;
             }
@@ -1319,18 +1324,10 @@ namespace Me.Amon.Pwd
 
             dba.ExecuteBatch();
 
-            string key = prevNode.ImageKey;
-            prevNode.Tag = currCat;
-            prevNode.Text = currCat.Text;
-            prevNode.ImageKey = currNode.ImageKey;
-            prevNode.SelectedImageKey = currNode.ImageKey;
-            currNode.Tag = prevCat;
-            currNode.Text = prevCat.Text;
-            currNode.ImageKey = key;
-            currNode.SelectedImageKey = key;
-
-            _LastNode = prevNode;
-            TvCatTree.SelectedNode = _LastNode;
+            TvCatTree.SelectedNode = null;
+            parent.Nodes.Remove(currNode);
+            parent.Nodes.Insert(prevNode.Index, currNode);
+            TvCatTree.SelectedNode = currNode;
         }
 
         private void CmiSortD_Click(object sender, EventArgs e)
@@ -1341,21 +1338,26 @@ namespace Me.Amon.Pwd
                 return;
             }
 
+            Cat currCat = currNode.Tag as Cat;
+            if (currCat == null || currCat.Id == "0")
+            {
+                return;
+            }
+
             TreeNode nextNode = currNode.NextNode;
             if (nextNode == null)
             {
                 return;
             }
 
-            Cat currCat = currNode.Tag as Cat;
-            int i = nextNode.Index;
-            if (currCat == null || currCat.Id == "0")
+            Cat nextCat = nextNode.Tag as Cat;
+            if (nextCat == null || nextCat.Id == "0")
             {
                 return;
             }
 
-            Cat nextCat = nextNode.Tag as Cat;
-            if (nextCat == null || nextCat.Id == "0")
+            TreeNode parent = currNode.Parent;
+            if (parent == null)
             {
                 return;
             }
@@ -1377,18 +1379,10 @@ namespace Me.Amon.Pwd
 
             dba.ExecuteBatch();
 
-            string key = nextNode.ImageKey;
-            nextNode.Tag = currCat;
-            nextNode.Text = currCat.Text;
-            nextNode.ImageKey = currNode.ImageKey;
-            nextNode.SelectedImageKey = currNode.ImageKey;
-            currNode.Tag = nextCat;
-            currNode.Text = nextCat.Text;
-            currNode.ImageKey = key;
-            currNode.SelectedImageKey = key;
-
-            _LastNode = nextNode;
-            TvCatTree.SelectedNode = _LastNode;
+            TvCatTree.SelectedNode = null;
+            parent.Nodes.Remove(currNode);
+            parent.Nodes.Insert(nextNode.Index + 1, currNode);
+            TvCatTree.SelectedNode = currNode;
         }
 
         private void CmiAppendCat_Click(object sender, EventArgs e)

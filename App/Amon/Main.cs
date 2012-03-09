@@ -334,10 +334,20 @@ namespace Me.Amon
             }
         }
 
-        private void MgSignUp_Click(object sender, EventArgs e)
+        private void MgSignOl_Click(object sender, EventArgs e)
         {
             //SignAc(ESignAc.SignOl, new AmonHandler<int>(DoSignOl));
             SignAc(ESignAc.SignOl, new AmonHandler<int>(ShowAPwd));
+        }
+
+        private void MgSignUl_Click(object sender, EventArgs e)
+        {
+            SignAc(ESignAc.SignUl, new AmonHandler<int>(ShowAPwd));
+        }
+
+        private void MgSignPc_Click(object sender, EventArgs e)
+        {
+            SignAc(ESignAc.SignPc, new AmonHandler<int>(ShowAPwd));
         }
 
         private void MgSignIn_Click(object sender, EventArgs e)
@@ -415,10 +425,20 @@ namespace Me.Amon
             }
         }
 
-        private void MtSignUp_Click(object sender, EventArgs e)
+        private void MtSignOl_Click(object sender, EventArgs e)
         {
             //SignAc(ESignAc.SignOl, new AmonHandler<int>(DoSignOl));
             SignAc(ESignAc.SignOl, new AmonHandler<int>(ShowAPwd));
+        }
+
+        private void MtSignUl_Click(object sender, EventArgs e)
+        {
+            SignAc(ESignAc.SignUl, new AmonHandler<int>(ShowAPwd));
+        }
+
+        private void MtSignPc_Click(object sender, EventArgs e)
+        {
+            SignAc(ESignAc.SignPc, new AmonHandler<int>(ShowAPwd));
         }
 
         private void MtSignIn_Click(object sender, EventArgs e)
@@ -581,5 +601,21 @@ namespace Me.Amon
             _ASec.Show();
         }
         #endregion
+
+        private void PbLogo_DoubleClick(object sender, EventArgs e)
+        {
+            if (_IApp == null || !_IApp.Visible)
+            {
+                CheckUser(new AmonHandler<int>(ShowAPwd));
+                return;
+            }
+
+            if (_IApp.AppId != IEnv.IAPP_APWD)
+            {
+                _IApp.Visible = false;
+                ShowAPwd(IEnv.IAPP_APWD);
+                return;
+            }
+        }
     }
 }
