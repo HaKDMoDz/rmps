@@ -75,7 +75,7 @@ namespace Me.Amon.Uw.Ico
                 foreach (int t in dim)
                 {
                     tmp = BeanUtil.ScaleImage(img, t, true);
-                    tmp.Save(_IcoSeeker.HomeDir + key + "." + t, ImageFormat.Png);
+                    tmp.Save(Path.Combine(_IcoSeeker.HomeDir, key + "." + t), ImageFormat.Png);
                     if (_IcoSeeker.IcoSize == t)
                     {
                         IlIco.Images.Add(key, tmp);
@@ -104,7 +104,7 @@ namespace Me.Amon.Uw.Ico
             IlIco.Images.Add(BeanUtil.NaN32);
             int index;
             string name;
-            foreach (string file in Directory.GetFiles(path, "*.png"))
+            foreach (string file in Directory.GetFiles(path, '*' + IEnv.IMG_KEY_LIST_EXT))
             {
                 index = file.LastIndexOf(Path.DirectorySeparatorChar);
                 if (index == file.Length - 1)

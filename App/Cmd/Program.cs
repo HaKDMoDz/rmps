@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -10,12 +12,19 @@ namespace Cmd
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(DateTime.Now.ToString("-yyyyMMdd HH:mm:ss"));
-            Console.ReadLine();
         }
         private static void cc()
         {
-            BeanUtil.DoZip("D:\\123.zip", "D:\\Temp", "D:\\Temp\\Demo", "D:\\Temp\\a.txt");
+            string path = @"F:\Dat\KEY\";
+            foreach (string file in Directory.GetFiles(path, "*.24"))
+            {
+                Stream stream = File.OpenRead(file);
+                Image img = Image.FromStream(stream);
+                stream.Close();
+
+                img = BeanUtil.ScaleImage(img, 16, true);
+                img.Save(path + Path.GetFileNameWithoutExtension(file) + ".16", ImageFormat.Png);
+            }
         }
 
         public static void dd()

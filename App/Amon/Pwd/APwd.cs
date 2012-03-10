@@ -167,7 +167,7 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                return DialogResult.Yes == MessageBox.Show("您有数据尚未保存，确认要退出吗？", "提示", MessageBoxButtons.YesNoCancel);
+                return DialogResult.Yes == MessageBox.Show(this, "您有数据尚未保存，确认要退出窗口吗？", "提示", MessageBoxButtons.YesNoCancel);
             }
             return true;
         }
@@ -325,8 +325,10 @@ namespace Me.Amon.Pwd
 
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                Main.ShowAlert("编辑中……");
-                return;
+                if (DialogResult.Yes != MessageBox.Show(this, "您当前的数据尚未保存，要丢弃吗？", "提示", MessageBoxButtons.YesNoCancel))
+                {
+                    return;
+                }
             }
 
             _SafeModel.Key = key;
@@ -754,6 +756,11 @@ namespace Me.Amon.Pwd
             _PwdView.AppendAtt(AAtt.TYPE_DATA);
         }
 
+        private void TmiUpdateAttCall_Click(object sender, EventArgs e)
+        {
+            _PwdView.AppendAtt(AAtt.TYPE_CALL);
+        }
+
         private void TmiAppendAttList_Click(object sender, EventArgs e)
         {
             _PwdView.AppendAtt(AAtt.TYPE_LIST);
@@ -804,6 +811,11 @@ namespace Me.Amon.Pwd
         private void TmiUpdateAttData_Click(object sender, EventArgs e)
         {
             _PwdView.UpdateAtt(AAtt.TYPE_DATA);
+        }
+
+        private void TmiAppendAttCall_Click(object sender, EventArgs e)
+        {
+            _PwdView.UpdateAtt(AAtt.TYPE_CALL);
         }
 
         private void TmiUpdateAttList_Click(object sender, EventArgs e)
@@ -917,7 +929,7 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                if (DialogResult.Yes == MessageBox.Show("当前记录已被修改，要保存吗？"))
+                if (DialogResult.Yes == MessageBox.Show(this, "当前记录已被修改，要保存吗？", "提示", MessageBoxButtons.YesNoCancel))
                 {
                     return;
                 }
@@ -950,7 +962,7 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                if (DialogResult.Yes == MessageBox.Show("当前记录已被修改，要保存吗？"))
+                if (DialogResult.Yes == MessageBox.Show(this, "当前记录已被修改，要保存吗？", "提示", MessageBoxButtons.YesNoCancel))
                 {
                     return;
                 }
@@ -993,7 +1005,7 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                if (DialogResult.Yes == MessageBox.Show("当前记录已被修改，要保存吗？"))
+                if (DialogResult.Yes == MessageBox.Show(this, "当前记录已被修改，要保存吗？", "提示", MessageBoxButtons.YesNoCancel))
                 {
                     return;
                 }
@@ -1051,7 +1063,7 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                if (DialogResult.Yes == MessageBox.Show("当前记录已被修改，要保存吗？"))
+                if (DialogResult.Yes == MessageBox.Show(this, "当前记录已被修改，要保存吗？", "提示", MessageBoxButtons.YesNoCancel))
                 {
                     return;
                 }
@@ -1107,7 +1119,7 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                if (DialogResult.Yes == MessageBox.Show("当前记录已被修改，要保存吗？"))
+                if (DialogResult.Yes == MessageBox.Show(this, "当前记录已被修改，要保存吗？", "提示", MessageBoxButtons.YesNoCancel))
                 {
                     return;
                 }
@@ -1948,7 +1960,7 @@ namespace Me.Amon.Pwd
             }
             else if (_SafeModel.Key.Modified)
             {
-                if (DialogResult.Yes == MessageBox.Show("您的数据已修改，确认不保存吗？"))
+                if (DialogResult.Yes == MessageBox.Show(this, "您的数据已修改，确认要丢弃吗？", "提示", MessageBoxButtons.YesNoCancel))
                 {
                     return;
                 }
@@ -2379,7 +2391,7 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                if (DialogResult.No != MessageBox.Show("您有数据尚未保存，要保存吗？", "提示", MessageBoxButtons.YesNoCancel))
+                if (DialogResult.Yes != MessageBox.Show("您的数据已修改，确认要丢弃吗？", "提示", MessageBoxButtons.YesNoCancel))
                 {
                     return;
                 }
@@ -2477,17 +2489,9 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                if (DialogResult.OK != MessageBox.Show("您有数据尚未保存，确认要退出吗？", "提示", MessageBoxButtons.YesNo))
+                if (DialogResult.Yes != MessageBox.Show(this, "您有数据尚未保存，确认要隐藏窗口吗？", "提示", MessageBoxButtons.YesNo))
                 {
                     return;
-                }
-                if (WindowState == FormWindowState.Minimized)
-                {
-                    WindowState = FormWindowState.Normal;
-                }
-                if (!Visible)
-                {
-                    Visible = true;
                 }
             }
             Visible = false;

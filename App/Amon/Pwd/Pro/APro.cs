@@ -287,6 +287,11 @@ namespace Me.Amon.Pwd.Pro
             AppendAtt(AAtt.TYPE_DATA);
         }
 
+        private void CmiAppendAttCall_Click(object sender, EventArgs e)
+        {
+            AppendAtt(AAtt.TYPE_CALL);
+        }
+
         private void CmiAppendAttList_Click(object sender, EventArgs e)
         {
             AppendAtt(AAtt.TYPE_LIST);
@@ -337,6 +342,11 @@ namespace Me.Amon.Pwd.Pro
         private void CmiUpdateAttData_Click(object sender, EventArgs e)
         {
             UpdateAtt(AAtt.TYPE_DATA);
+        }
+
+        private void CmiUpdateAttCall_Click(object sender, EventArgs e)
+        {
+            UpdateAtt(AAtt.TYPE_CALL);
         }
 
         private void CmiUpdateAttList_Click(object sender, EventArgs e)
@@ -407,6 +417,9 @@ namespace Me.Amon.Pwd.Pro
                     break;
                 case AAtt.TYPE_DATA:
                     ctl = new BeanData();
+                    break;
+                case AAtt.TYPE_CALL:
+                    ctl = new BeanCall();
                     break;
                 case AAtt.TYPE_LIST:
                     ctl = new BeanList();

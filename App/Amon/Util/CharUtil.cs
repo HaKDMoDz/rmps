@@ -51,6 +51,11 @@ namespace Me.Amon.Util
             return false;
         }
 
+        public static bool IsValidateCall(string call)
+        {
+            return call != null ? Regex.IsMatch(call, "^([+]?\\d{2,3}[^\\d]+)?0?((\\d{11})|(\\d{2,3}[^\\d]+)?\\d{7,8}([^\\d]+\\d{1,})?)$") : false;
+        }
+
         /// <summary>
         /// 判断是否为合法的用户代码
         /// </summary>

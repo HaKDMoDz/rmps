@@ -157,6 +157,11 @@ att-date-options=options.png
 att-data-options=options.png
 
 #######################################
+# 电话图标
+#######################################
+att-call-options=options.png
+
+#######################################
 # 附件图标
 #######################################
 att-file-preview=att-file-preview.png

@@ -32,6 +32,7 @@ namespace Me.Amon.Pwd._Lib
             CbType.Items.Add(new Item { K = AAtt.TYPE_MAIL.ToString(), V = "邮件" });
             CbType.Items.Add(new Item { K = AAtt.TYPE_DATE.ToString(), V = "日期" });
             CbType.Items.Add(new Item { K = AAtt.TYPE_DATA.ToString(), V = "数值" });
+            CbType.Items.Add(new Item { K = AAtt.TYPE_CALL.ToString(), V = "电话" });
             //CbType.Items.Add(new Item { K = AAtt.TYPE_LIST.ToString(), V = "列表" });
             CbType.Items.Add(new Item { K = AAtt.TYPE_MEMO.ToString(), V = "附注" });
             CbType.Items.Add(new Item { K = AAtt.TYPE_FILE.ToString(), V = "文件" });

@@ -233,7 +233,16 @@ namespace Me.Amon.Pwd.Wiz
         private void ChangeImgByKey(Bean.Ico ico)
         {
             _AIco = ico;
-            PbLogo.Image = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, ico.Path, ico.File + IEnv.IMG_KEY_EDIT_EXT), BeanUtil.NaN16);
+            string path;
+            if (CharUtil.IsValidateHash(ico.Path))
+            {
+                path = Path.Combine(_DataModel.KeyDir, ico.Path, ico.File + IEnv.IMG_KEY_EDIT_EXT);
+            }
+            else
+            {
+                path = Path.Combine(_DataModel.KeyDir, ico.File + IEnv.IMG_KEY_EDIT_EXT);
+            }
+            PbLogo.Image = BeanUtil.ReadImage(path, BeanUtil.NaN16);
         }
     }
 }

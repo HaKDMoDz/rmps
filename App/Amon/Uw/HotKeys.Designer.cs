@@ -30,15 +30,17 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HotKeys));
             this.DvKeys = new System.Windows.Forms.DataGridView();
-            this.BtOk = new System.Windows.Forms.Button();
             this.MajorKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Memo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MinorKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BtOk = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DvKeys)).BeginInit();
             this.SuspendLayout();
             // 
             // DvKeys
             // 
+            this.DvKeys.AllowUserToAddRows = false;
+            this.DvKeys.AllowUserToDeleteRows = false;
             this.DvKeys.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -58,18 +60,6 @@
             this.DvKeys.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DvKeys.Size = new System.Drawing.Size(370, 199);
             this.DvKeys.TabIndex = 0;
-            // 
-            // BtOk
-            // 
-            this.BtOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtOk.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.BtOk.Location = new System.Drawing.Point(307, 217);
-            this.BtOk.Name = "BtOk";
-            this.BtOk.Size = new System.Drawing.Size(75, 23);
-            this.BtOk.TabIndex = 1;
-            this.BtOk.Text = "确定(&O)";
-            this.BtOk.UseVisualStyleBackColor = true;
-            this.BtOk.Click += new System.EventHandler(this.BtOk_Click);
             // 
             // MajorKey
             // 
@@ -96,6 +86,18 @@
             this.MinorKey.HeaderText = "辅按键";
             this.MinorKey.Name = "MinorKey";
             this.MinorKey.ReadOnly = true;
+            // 
+            // BtOk
+            // 
+            this.BtOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtOk.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.BtOk.Location = new System.Drawing.Point(307, 217);
+            this.BtOk.Name = "BtOk";
+            this.BtOk.Size = new System.Drawing.Size(75, 23);
+            this.BtOk.TabIndex = 1;
+            this.BtOk.Text = "确定(&O)";
+            this.BtOk.UseVisualStyleBackColor = true;
+            this.BtOk.Click += new System.EventHandler(this.BtOk_Click);
             // 
             // HotKeys
             // 

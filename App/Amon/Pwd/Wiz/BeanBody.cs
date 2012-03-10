@@ -151,6 +151,9 @@ namespace Me.Amon.Pwd.Wiz
                     case AAtt.TYPE_DATA:
                         ctl = new BeanData(this);
                         break;
+                    case AAtt.TYPE_CALL:
+                        ctl = new BeanCall(this);
+                        break;
                     case AAtt.TYPE_LIST:
                         ctl = new BeanList(this);
                         break;

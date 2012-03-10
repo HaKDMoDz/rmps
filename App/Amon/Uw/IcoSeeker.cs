@@ -211,7 +211,6 @@ namespace Me.Amon.Uw
             dba.AddTable(DBConst.AICO0100);
             dba.AddParam(DBConst.AICO0104, item.Name);
             dba.AddParam(DBConst.AICO0105, item.Tips);
-            dba.AddParam(DBConst.AICO0106, item.Path);
             dba.AddParam(DBConst.AICO0107, item.Memo);
             if (CharUtil.IsValidateHash(item.Id))
             {
@@ -228,6 +227,7 @@ namespace Me.Amon.Uw
                 dba.AddParam(DBConst.AICO0101, LsDir.Items.Count);
                 dba.AddParam(DBConst.AICO0102, _UserModel.Code);
                 dba.AddParam(DBConst.AICO0103, item.Id);
+                dba.AddParam(DBConst.AICO0106, item.Id);//暂时使用ID
                 dba.AddVcs(DBConst.AICO0108, DBConst.AICO0109);
                 dba.ExecuteInsert();
 
@@ -241,7 +241,7 @@ namespace Me.Amon.Uw
         {
             if (CallBackHandler != null)
             {
-                ico.Path = (LsDir.Items[_LastIdx] as Dir).Path;
+                ico.Path = (LsDir.Items[_LastIdx] as Dir).Id;
                 CallBackHandler.Invoke(ico);
             }
             Close();

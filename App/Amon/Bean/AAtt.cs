@@ -82,6 +82,8 @@ namespace Me.Amon.Bean
                     return new DateAtt();
                 case TYPE_DATA:
                     return new DataAtt();
+                case TYPE_CALL:
+                    return new CallAtt();
                 case TYPE_LIST:
                     return new ListAtt();
                 case TYPE_MEMO:
@@ -391,7 +393,7 @@ namespace Me.Amon.Bean
         /// <summary>
         /// 属性：电话7
         /// </summary>
-        public const int TYPE_CALL = TYPE_DATE + 1;
+        public const int TYPE_CALL = TYPE_DATA + 1;
         /// <summary>
         /// 属性：列表8
         /// </summary>
