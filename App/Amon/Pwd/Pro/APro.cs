@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Bean;
@@ -20,6 +21,7 @@ namespace Me.Amon.Pwd.Pro
         private IAttEdit _CmpLast;
         private BeanInfo _CmpInfo;
         private Dictionary<int, IAttEdit> _CmpList;
+        private DataTable _DataList;
 
         #region 构造函数
         public APro()
@@ -34,9 +36,13 @@ namespace Me.Amon.Pwd.Pro
             _DataModel = dataModel;
             _ViewModel = viewModel;
 
-            GvAttList.AutoGenerateColumns = false;
+            _DataList = new DataTable();
+            _DataList.Columns.Add("Order", typeof(string));
+            _DataList.Columns.Add("Name", typeof(AAtt));
             OrderCol.DataPropertyName = "Order";
             ValueCol.DataPropertyName = "Name";
+            GvAttList.AutoGenerateColumns = false;
+            GvAttList.DataSource = _DataList;
 
             BtCopy.Image = viewModel.GetImage("att-copy");
             _APwd.ShowTips(BtCopy, "复制属性");
@@ -71,7 +77,8 @@ namespace Me.Amon.Pwd.Pro
 
         public void ShowInfo()
         {
-            GvAttList.DataSource = null;
+            _DataList.Rows.Clear();
+            //GvAttList.DataSource = null;
 
             GbGroup.Controls.Remove(_CmpLast.Control);
 
@@ -84,10 +91,14 @@ namespace Me.Amon.Pwd.Pro
 
         public void ShowData()
         {
-            GvAttList.DataSource = null;
-
             _UserAction = false;
-            _SafeModel.BindTo(GvAttList);
+            _DataList.Rows.Clear();
+            AAtt att;
+            for (int i = 0; i < _SafeModel.Count; i += 1)
+            {
+                att = _SafeModel.GetAtt(i);
+                _DataList.Rows.Add(att.Order, att);
+            }
             _UserAction = true;
 
             GvAttList.Rows[1].Selected = true;
@@ -99,8 +110,9 @@ namespace Me.Amon.Pwd.Pro
             _SafeModel.Clear();
             _SafeModel.Key.SetDefault();
             _AAtt = _SafeModel.InitGuid();
-            GvAttList.DataSource = null;
-            _SafeModel.BindTo(GvAttList);
+
+            _DataList.Rows.Clear();
+            _DataList.Rows.Add(_AAtt.Order, _AAtt);
             _UserAction = true;
 
             ShowView(_AAtt);
@@ -143,10 +155,13 @@ namespace Me.Amon.Pwd.Pro
             {
                 index += 1;
             }
+
             _UserAction = false;
             _SafeModel.Insert(index, att);
-            GvAttList.DataSource = null;
-            _SafeModel.BindTo(GvAttList);
+            DataRow row = _DataList.NewRow();
+            row[0] = att.Order;
+            row[1] = att;
+            _DataList.Rows.InsertAt(row, index);
             _UserAction = true;
             _SafeModel.Key.Modified = true;
 
@@ -187,8 +202,8 @@ namespace Me.Amon.Pwd.Pro
         {
             _UserAction = false;
             _CmpLast.Save();
-            GvAttList.DataSource = null;
-            _SafeModel.BindTo(GvAttList);
+            DataRow row = _DataList.Rows[_LastIndex];
+            row[1] = _SafeModel.GetAtt(_LastIndex);
             _UserAction = true;
 
             if (!_SafeModel.Key.IsUpdate && _LastIndex < _SafeModel.Count - 1)
@@ -202,8 +217,7 @@ namespace Me.Amon.Pwd.Pro
         {
             _UserAction = false;
             _SafeModel.Remove(_AAtt);
-            GvAttList.DataSource = null;
-            _SafeModel.BindTo(GvAttList);
+            _DataList.Rows.RemoveAt(_LastIndex);
             _UserAction = true;
 
             if (_LastIndex >= _SafeModel.Count)
@@ -434,7 +448,7 @@ namespace Me.Amon.Pwd.Pro
                     ctl = new BeanLine();
                     break;
                 case AAtt.TYPE_GUID:
-                    ctl = new BeanGuid(_SafeModel);
+                    ctl = new BeanGuid(_SafeModel, _DataList);
                     break;
                 case AAtt.TYPE_META:
                     ctl = new BeanMeta();

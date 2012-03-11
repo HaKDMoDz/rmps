@@ -112,7 +112,16 @@ namespace Me.Amon.Pwd.Pro
         private void ChangeImgByKey(Bean.Ico ico)
         {
             _AIco = ico;
-            PbName.Image = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, ico.Path, ico.File + IEnv.IMG_KEY_EDIT_EXT), BeanUtil.NaN16);
+            string path;
+            if (CharUtil.IsValidateHash(ico.Path))
+            {
+                path = Path.Combine(_DataModel.KeyDir, ico.Path, ico.File + IEnv.IMG_KEY_EDIT_EXT);
+            }
+            else
+            {
+                path = Path.Combine(_DataModel.KeyDir, ico.File + IEnv.IMG_KEY_EDIT_EXT);
+            }
+            PbName.Image = BeanUtil.ReadImage(path, BeanUtil.NaN16);
         }
     }
 }

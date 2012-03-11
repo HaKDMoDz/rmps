@@ -159,11 +159,6 @@ namespace Me.Amon.Model
                 _AttList.RemoveAt(index);
             }
         }
-
-        public void BindTo(DataGridView grid)
-        {
-            grid.DataSource = _AttList;
-        }
         #endregion
 
         #region 固定属性

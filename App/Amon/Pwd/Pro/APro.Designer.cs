@@ -31,8 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GvAttList = new System.Windows.Forms.DataGridView();
-            this.OrderCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CmAtt = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CmuAppendAtt = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiAppendAttText = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,6 +39,7 @@
             this.CmiAppendAttMail = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiAppendAttDate = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiAppendAttData = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiAppendAttCall = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiAppendAttList = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiAppendAttMemo = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiAppendAttFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,6 +51,7 @@
             this.CmiUpdateAttMail = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiUpdateAttDate = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiUpdateAttData = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmiUpdateAttCall = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiUpdateAttList = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiUpdateAttMemo = new System.Windows.Forms.ToolStripMenuItem();
             this.CmiUpdateAttFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,8 +61,8 @@
             this.BtDrop = new System.Windows.Forms.Button();
             this.BtSave = new System.Windows.Forms.Button();
             this.BtCopy = new System.Windows.Forms.Button();
-            this.CmiAppendAttCall = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmiUpdateAttCall = new System.Windows.Forms.ToolStripMenuItem();
+            this.OrderCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GvAttList)).BeginInit();
             this.CmAtt.SuspendLayout();
             this.GbGroup.SuspendLayout();
@@ -93,23 +93,6 @@
             this.GvAttList.TabIndex = 0;
             this.GvAttList.SelectionChanged += new System.EventHandler(this.GvAttList_SelectionChanged);
             // 
-            // OrderCol
-            // 
-            this.OrderCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OrderCol.DefaultCellStyle = dataGridViewCellStyle1;
-            this.OrderCol.HeaderText = "索引";
-            this.OrderCol.Name = "OrderCol";
-            this.OrderCol.ReadOnly = true;
-            this.OrderCol.Width = 54;
-            // 
-            // ValueCol
-            // 
-            this.ValueCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ValueCol.HeaderText = "属性";
-            this.ValueCol.Name = "ValueCol";
-            this.ValueCol.ReadOnly = true;
-            // 
             // CmAtt
             // 
             this.CmAtt.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -117,7 +100,7 @@
             this.CmuUpdateAtt,
             this.CmiDeleteAtt});
             this.CmAtt.Name = "CmAtt";
-            this.CmAtt.Size = new System.Drawing.Size(153, 92);
+            this.CmAtt.Size = new System.Drawing.Size(125, 70);
             // 
             // CmuAppendAtt
             // 
@@ -134,55 +117,62 @@
             this.CmiAppendAttFile,
             this.CmiAppendAttLine});
             this.CmuAppendAtt.Name = "CmuAppendAtt";
-            this.CmuAppendAtt.Size = new System.Drawing.Size(152, 22);
+            this.CmuAppendAtt.Size = new System.Drawing.Size(124, 22);
             this.CmuAppendAtt.Text = "添加属性";
             // 
             // CmiAppendAttText
             // 
             this.CmiAppendAttText.Name = "CmiAppendAttText";
-            this.CmiAppendAttText.Size = new System.Drawing.Size(152, 22);
+            this.CmiAppendAttText.Size = new System.Drawing.Size(100, 22);
             this.CmiAppendAttText.Text = "文本";
             this.CmiAppendAttText.Click += new System.EventHandler(this.CmiAppendAttText_Click);
             // 
             // CmiAppendAttPass
             // 
             this.CmiAppendAttPass.Name = "CmiAppendAttPass";
-            this.CmiAppendAttPass.Size = new System.Drawing.Size(152, 22);
+            this.CmiAppendAttPass.Size = new System.Drawing.Size(100, 22);
             this.CmiAppendAttPass.Text = "口令";
             this.CmiAppendAttPass.Click += new System.EventHandler(this.CmiAppendAttPass_Click);
             // 
             // CmiAppendAttLink
             // 
             this.CmiAppendAttLink.Name = "CmiAppendAttLink";
-            this.CmiAppendAttLink.Size = new System.Drawing.Size(152, 22);
+            this.CmiAppendAttLink.Size = new System.Drawing.Size(100, 22);
             this.CmiAppendAttLink.Text = "链接";
             this.CmiAppendAttLink.Click += new System.EventHandler(this.CmiAppendAttLink_Click);
             // 
             // CmiAppendAttMail
             // 
             this.CmiAppendAttMail.Name = "CmiAppendAttMail";
-            this.CmiAppendAttMail.Size = new System.Drawing.Size(152, 22);
+            this.CmiAppendAttMail.Size = new System.Drawing.Size(100, 22);
             this.CmiAppendAttMail.Text = "邮件";
             this.CmiAppendAttMail.Click += new System.EventHandler(this.CmiAppendAttMail_Click);
             // 
             // CmiAppendAttDate
             // 
             this.CmiAppendAttDate.Name = "CmiAppendAttDate";
-            this.CmiAppendAttDate.Size = new System.Drawing.Size(152, 22);
+            this.CmiAppendAttDate.Size = new System.Drawing.Size(100, 22);
             this.CmiAppendAttDate.Text = "日期";
             this.CmiAppendAttDate.Click += new System.EventHandler(this.CmiAppendAttDate_Click);
             // 
             // CmiAppendAttData
             // 
             this.CmiAppendAttData.Name = "CmiAppendAttData";
-            this.CmiAppendAttData.Size = new System.Drawing.Size(152, 22);
+            this.CmiAppendAttData.Size = new System.Drawing.Size(100, 22);
             this.CmiAppendAttData.Text = "数值";
             this.CmiAppendAttData.Click += new System.EventHandler(this.CmiAppendAttData_Click);
+            // 
+            // CmiAppendAttCall
+            // 
+            this.CmiAppendAttCall.Name = "CmiAppendAttCall";
+            this.CmiAppendAttCall.Size = new System.Drawing.Size(100, 22);
+            this.CmiAppendAttCall.Text = "电话";
+            this.CmiAppendAttCall.Click += new System.EventHandler(this.CmiAppendAttCall_Click);
             // 
             // CmiAppendAttList
             // 
             this.CmiAppendAttList.Name = "CmiAppendAttList";
-            this.CmiAppendAttList.Size = new System.Drawing.Size(152, 22);
+            this.CmiAppendAttList.Size = new System.Drawing.Size(100, 22);
             this.CmiAppendAttList.Text = "列表";
             this.CmiAppendAttList.Visible = false;
             this.CmiAppendAttList.Click += new System.EventHandler(this.CmiAppendAttList_Click);
@@ -190,21 +180,21 @@
             // CmiAppendAttMemo
             // 
             this.CmiAppendAttMemo.Name = "CmiAppendAttMemo";
-            this.CmiAppendAttMemo.Size = new System.Drawing.Size(152, 22);
+            this.CmiAppendAttMemo.Size = new System.Drawing.Size(100, 22);
             this.CmiAppendAttMemo.Text = "附注";
             this.CmiAppendAttMemo.Click += new System.EventHandler(this.CmiAppendAttMemo_Click);
             // 
             // CmiAppendAttFile
             // 
             this.CmiAppendAttFile.Name = "CmiAppendAttFile";
-            this.CmiAppendAttFile.Size = new System.Drawing.Size(152, 22);
+            this.CmiAppendAttFile.Size = new System.Drawing.Size(100, 22);
             this.CmiAppendAttFile.Text = "附件";
             this.CmiAppendAttFile.Click += new System.EventHandler(this.CmiAppendAttFile_Click);
             // 
             // CmiAppendAttLine
             // 
             this.CmiAppendAttLine.Name = "CmiAppendAttLine";
-            this.CmiAppendAttLine.Size = new System.Drawing.Size(152, 22);
+            this.CmiAppendAttLine.Size = new System.Drawing.Size(100, 22);
             this.CmiAppendAttLine.Text = "分组";
             this.CmiAppendAttLine.Visible = false;
             this.CmiAppendAttLine.Click += new System.EventHandler(this.CmiAppendAttLine_Click);
@@ -224,55 +214,62 @@
             this.CmiUpdateAttFile,
             this.CmiUpdateAttLine});
             this.CmuUpdateAtt.Name = "CmuUpdateAtt";
-            this.CmuUpdateAtt.Size = new System.Drawing.Size(152, 22);
+            this.CmuUpdateAtt.Size = new System.Drawing.Size(124, 22);
             this.CmuUpdateAtt.Text = "转换属性";
             // 
             // CmiUpdateAttText
             // 
             this.CmiUpdateAttText.Name = "CmiUpdateAttText";
-            this.CmiUpdateAttText.Size = new System.Drawing.Size(152, 22);
+            this.CmiUpdateAttText.Size = new System.Drawing.Size(100, 22);
             this.CmiUpdateAttText.Text = "文本";
             this.CmiUpdateAttText.Click += new System.EventHandler(this.CmiUpdateAttText_Click);
             // 
             // CmiUpdateAttPass
             // 
             this.CmiUpdateAttPass.Name = "CmiUpdateAttPass";
-            this.CmiUpdateAttPass.Size = new System.Drawing.Size(152, 22);
+            this.CmiUpdateAttPass.Size = new System.Drawing.Size(100, 22);
             this.CmiUpdateAttPass.Text = "口令";
             this.CmiUpdateAttPass.Click += new System.EventHandler(this.CmiUpdateAttPass_Click);
             // 
             // CmiUpdateAttLink
             // 
             this.CmiUpdateAttLink.Name = "CmiUpdateAttLink";
-            this.CmiUpdateAttLink.Size = new System.Drawing.Size(152, 22);
+            this.CmiUpdateAttLink.Size = new System.Drawing.Size(100, 22);
             this.CmiUpdateAttLink.Text = "链接";
             this.CmiUpdateAttLink.Click += new System.EventHandler(this.CmiUpdateAttLink_Click);
             // 
             // CmiUpdateAttMail
             // 
             this.CmiUpdateAttMail.Name = "CmiUpdateAttMail";
-            this.CmiUpdateAttMail.Size = new System.Drawing.Size(152, 22);
+            this.CmiUpdateAttMail.Size = new System.Drawing.Size(100, 22);
             this.CmiUpdateAttMail.Text = "邮件";
             this.CmiUpdateAttMail.Click += new System.EventHandler(this.CmiUpdateAttMail_Click);
             // 
             // CmiUpdateAttDate
             // 
             this.CmiUpdateAttDate.Name = "CmiUpdateAttDate";
-            this.CmiUpdateAttDate.Size = new System.Drawing.Size(152, 22);
+            this.CmiUpdateAttDate.Size = new System.Drawing.Size(100, 22);
             this.CmiUpdateAttDate.Text = "日期";
             this.CmiUpdateAttDate.Click += new System.EventHandler(this.CmiUpdateAttDate_Click);
             // 
             // CmiUpdateAttData
             // 
             this.CmiUpdateAttData.Name = "CmiUpdateAttData";
-            this.CmiUpdateAttData.Size = new System.Drawing.Size(152, 22);
+            this.CmiUpdateAttData.Size = new System.Drawing.Size(100, 22);
             this.CmiUpdateAttData.Text = "数值";
             this.CmiUpdateAttData.Click += new System.EventHandler(this.CmiUpdateAttData_Click);
+            // 
+            // CmiUpdateAttCall
+            // 
+            this.CmiUpdateAttCall.Name = "CmiUpdateAttCall";
+            this.CmiUpdateAttCall.Size = new System.Drawing.Size(100, 22);
+            this.CmiUpdateAttCall.Text = "电话";
+            this.CmiUpdateAttCall.Click += new System.EventHandler(this.CmiUpdateAttCall_Click);
             // 
             // CmiUpdateAttList
             // 
             this.CmiUpdateAttList.Name = "CmiUpdateAttList";
-            this.CmiUpdateAttList.Size = new System.Drawing.Size(152, 22);
+            this.CmiUpdateAttList.Size = new System.Drawing.Size(100, 22);
             this.CmiUpdateAttList.Text = "列表";
             this.CmiUpdateAttList.Visible = false;
             this.CmiUpdateAttList.Click += new System.EventHandler(this.CmiUpdateAttList_Click);
@@ -280,21 +277,21 @@
             // CmiUpdateAttMemo
             // 
             this.CmiUpdateAttMemo.Name = "CmiUpdateAttMemo";
-            this.CmiUpdateAttMemo.Size = new System.Drawing.Size(152, 22);
+            this.CmiUpdateAttMemo.Size = new System.Drawing.Size(100, 22);
             this.CmiUpdateAttMemo.Text = "附注";
             this.CmiUpdateAttMemo.Click += new System.EventHandler(this.CmiUpdateAttMemo_Click);
             // 
             // CmiUpdateAttFile
             // 
             this.CmiUpdateAttFile.Name = "CmiUpdateAttFile";
-            this.CmiUpdateAttFile.Size = new System.Drawing.Size(152, 22);
+            this.CmiUpdateAttFile.Size = new System.Drawing.Size(100, 22);
             this.CmiUpdateAttFile.Text = "附件";
             this.CmiUpdateAttFile.Click += new System.EventHandler(this.CmiUpdateAttFile_Click);
             // 
             // CmiUpdateAttLine
             // 
             this.CmiUpdateAttLine.Name = "CmiUpdateAttLine";
-            this.CmiUpdateAttLine.Size = new System.Drawing.Size(152, 22);
+            this.CmiUpdateAttLine.Size = new System.Drawing.Size(100, 22);
             this.CmiUpdateAttLine.Text = "分组";
             this.CmiUpdateAttLine.Visible = false;
             this.CmiUpdateAttLine.Click += new System.EventHandler(this.CmiUpdateAttLine_Click);
@@ -302,7 +299,7 @@
             // CmiDeleteAtt
             // 
             this.CmiDeleteAtt.Name = "CmiDeleteAtt";
-            this.CmiDeleteAtt.Size = new System.Drawing.Size(152, 22);
+            this.CmiDeleteAtt.Size = new System.Drawing.Size(124, 22);
             this.CmiDeleteAtt.Text = "删除属性";
             this.CmiDeleteAtt.Click += new System.EventHandler(this.CmiDeleteAtt_Click);
             // 
@@ -350,19 +347,24 @@
             this.BtCopy.UseVisualStyleBackColor = true;
             this.BtCopy.Click += new System.EventHandler(this.BtCopy_Click);
             // 
-            // CmiAppendAttCall
+            // OrderCol
             // 
-            this.CmiAppendAttCall.Name = "CmiAppendAttCall";
-            this.CmiAppendAttCall.Size = new System.Drawing.Size(152, 22);
-            this.CmiAppendAttCall.Text = "电话";
-            this.CmiAppendAttCall.Click += new System.EventHandler(this.CmiAppendAttCall_Click);
+            this.OrderCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OrderCol.DefaultCellStyle = dataGridViewCellStyle1;
+            this.OrderCol.HeaderText = "索引";
+            this.OrderCol.Name = "OrderCol";
+            this.OrderCol.ReadOnly = true;
+            this.OrderCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.OrderCol.Width = 54;
             // 
-            // CmiUpdateAttCall
+            // ValueCol
             // 
-            this.CmiUpdateAttCall.Name = "CmiUpdateAttCall";
-            this.CmiUpdateAttCall.Size = new System.Drawing.Size(152, 22);
-            this.CmiUpdateAttCall.Text = "电话";
-            this.CmiUpdateAttCall.Click += new System.EventHandler(this.CmiUpdateAttCall_Click);
+            this.ValueCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ValueCol.HeaderText = "属性";
+            this.ValueCol.Name = "ValueCol";
+            this.ValueCol.ReadOnly = true;
+            this.ValueCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // APro
             // 
@@ -410,9 +412,9 @@
         private System.Windows.Forms.Button BtDrop;
         private System.Windows.Forms.Button BtSave;
         private System.Windows.Forms.Button BtCopy;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OrderCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ValueCol;
         private System.Windows.Forms.ToolStripMenuItem CmiAppendAttCall;
         private System.Windows.Forms.ToolStripMenuItem CmiUpdateAttCall;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OrderCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ValueCol;
     }
 }

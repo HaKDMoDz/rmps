@@ -39,14 +39,15 @@
             this.MtAPwd = new System.Windows.Forms.ToolStripMenuItem();
             this.MtASec = new System.Windows.Forms.ToolStripMenuItem();
             this.MtSep1 = new System.Windows.Forms.ToolStripSeparator();
-            this.MtSignIn = new System.Windows.Forms.ToolStripMenuItem();
-            this.MtSignOf = new System.Windows.Forms.ToolStripMenuItem();
             this.MtSignUp = new System.Windows.Forms.ToolStripMenuItem();
             this.MtSignOl = new System.Windows.Forms.ToolStripMenuItem();
             this.MtSignUl = new System.Windows.Forms.ToolStripMenuItem();
             this.MtSignPc = new System.Windows.Forms.ToolStripMenuItem();
+            this.MtSignIn = new System.Windows.Forms.ToolStripMenuItem();
+            this.MtSignOf = new System.Windows.Forms.ToolStripMenuItem();
             this.MtSignFp = new System.Windows.Forms.ToolStripMenuItem();
             this.MtSep2 = new System.Windows.Forms.ToolStripSeparator();
+            this.MtInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.MtExit = new System.Windows.Forms.ToolStripMenuItem();
             this.CgMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MgTopMost = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,6 +64,7 @@
             this.MgSignPc = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSignFp = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSep2 = new System.Windows.Forms.ToolStripSeparator();
+            this.MgInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.MgExit = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).BeginInit();
             this.CtMenu.SuspendLayout();
@@ -102,14 +104,15 @@
             this.MtAPwd,
             this.MtASec,
             this.MtSep1,
+            this.MtSignUp,
             this.MtSignIn,
             this.MtSignOf,
-            this.MtSignUp,
             this.MtSignFp,
             this.MtSep2,
+            this.MtInfo,
             this.MtExit});
             this.CtMenu.Name = "CtMenu";
-            this.CtMenu.Size = new System.Drawing.Size(166, 198);
+            this.CtMenu.Size = new System.Drawing.Size(166, 220);
             // 
             // MtGuid
             // 
@@ -144,6 +147,37 @@
             this.MtSep1.Name = "MtSep1";
             this.MtSep1.Size = new System.Drawing.Size(162, 6);
             // 
+            // MtSignUp
+            // 
+            this.MtSignUp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MtSignOl,
+            this.MtSignUl,
+            this.MtSignPc});
+            this.MtSignUp.Name = "MtSignUp";
+            this.MtSignUp.Size = new System.Drawing.Size(165, 22);
+            this.MtSignUp.Text = "注册(&U)";
+            // 
+            // MtSignOl
+            // 
+            this.MtSignOl.Name = "MtSignOl";
+            this.MtSignOl.Size = new System.Drawing.Size(142, 22);
+            this.MtSignOl.Text = "联机注册(&R)";
+            this.MtSignOl.Click += new System.EventHandler(this.MtSignOl_Click);
+            // 
+            // MtSignUl
+            // 
+            this.MtSignUl.Name = "MtSignUl";
+            this.MtSignUl.Size = new System.Drawing.Size(142, 22);
+            this.MtSignUl.Text = "脱机注册(&O)";
+            this.MtSignUl.Click += new System.EventHandler(this.MtSignUl_Click);
+            // 
+            // MtSignPc
+            // 
+            this.MtSignPc.Name = "MtSignPc";
+            this.MtSignPc.Size = new System.Drawing.Size(142, 22);
+            this.MtSignPc.Text = "单机注册(&P)";
+            this.MtSignPc.Click += new System.EventHandler(this.MtSignPc_Click);
+            // 
             // MtSignIn
             // 
             this.MtSignIn.Name = "MtSignIn";
@@ -159,37 +193,6 @@
             this.MtSignOf.Visible = false;
             this.MtSignOf.Click += new System.EventHandler(this.MtSignOf_Click);
             // 
-            // MtSignUp
-            // 
-            this.MtSignUp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MtSignOl,
-            this.MtSignUl,
-            this.MtSignPc});
-            this.MtSignUp.Name = "MtSignUp";
-            this.MtSignUp.Size = new System.Drawing.Size(165, 22);
-            this.MtSignUp.Text = "注册(&U)";
-            // 
-            // MtSignOl
-            // 
-            this.MtSignOl.Name = "MtSignOl";
-            this.MtSignOl.Size = new System.Drawing.Size(152, 22);
-            this.MtSignOl.Text = "联机注册(&R)";
-            this.MtSignOl.Click += new System.EventHandler(this.MtSignOl_Click);
-            // 
-            // MtSignUl
-            // 
-            this.MtSignUl.Name = "MtSignUl";
-            this.MtSignUl.Size = new System.Drawing.Size(152, 22);
-            this.MtSignUl.Text = "脱机注册(&O)";
-            this.MtSignUl.Click += new System.EventHandler(this.MtSignUl_Click);
-            // 
-            // MtSignPc
-            // 
-            this.MtSignPc.Name = "MtSignPc";
-            this.MtSignPc.Size = new System.Drawing.Size(152, 22);
-            this.MtSignPc.Text = "单机注册(&P)";
-            this.MtSignPc.Click += new System.EventHandler(this.MtSignPc_Click);
-            // 
             // MtSignFp
             // 
             this.MtSignFp.Name = "MtSignFp";
@@ -201,6 +204,13 @@
             // 
             this.MtSep2.Name = "MtSep2";
             this.MtSep2.Size = new System.Drawing.Size(162, 6);
+            // 
+            // MtInfo
+            // 
+            this.MtInfo.Name = "MtInfo";
+            this.MtInfo.Size = new System.Drawing.Size(165, 22);
+            this.MtInfo.Text = "关于(&A)";
+            this.MtInfo.Click += new System.EventHandler(this.MtInfo_Click);
             // 
             // MtExit
             // 
@@ -218,14 +228,15 @@
             this.MgAPwd,
             this.MgASec,
             this.MgSep1,
+            this.MgSignUp,
             this.MgSignIn,
             this.MgSignOf,
-            this.MgSignUp,
             this.MgSignFp,
             this.MgSep2,
+            this.MgInfo,
             this.MgExit});
             this.CgMenu.Name = "CmMenu";
-            this.CgMenu.Size = new System.Drawing.Size(164, 220);
+            this.CgMenu.Size = new System.Drawing.Size(164, 264);
             // 
             // MgTopMost
             // 
@@ -297,21 +308,21 @@
             // MgSignOl
             // 
             this.MgSignOl.Name = "MgSignOl";
-            this.MgSignOl.Size = new System.Drawing.Size(142, 22);
+            this.MgSignOl.Size = new System.Drawing.Size(152, 22);
             this.MgSignOl.Text = "联机注册(&R)";
             this.MgSignOl.Click += new System.EventHandler(this.MgSignOl_Click);
             // 
             // MgSignUl
             // 
             this.MgSignUl.Name = "MgSignUl";
-            this.MgSignUl.Size = new System.Drawing.Size(142, 22);
+            this.MgSignUl.Size = new System.Drawing.Size(152, 22);
             this.MgSignUl.Text = "脱机注册(&O)";
             this.MgSignUl.Click += new System.EventHandler(this.MgSignUl_Click);
             // 
             // MgSignPc
             // 
             this.MgSignPc.Name = "MgSignPc";
-            this.MgSignPc.Size = new System.Drawing.Size(142, 22);
+            this.MgSignPc.Size = new System.Drawing.Size(152, 22);
             this.MgSignPc.Text = "单机注册(&P)";
             this.MgSignPc.Click += new System.EventHandler(this.MgSignPc_Click);
             // 
@@ -326,6 +337,13 @@
             // 
             this.MgSep2.Name = "MgSep2";
             this.MgSep2.Size = new System.Drawing.Size(160, 6);
+            // 
+            // MgInfo
+            // 
+            this.MgInfo.Name = "MgInfo";
+            this.MgInfo.Size = new System.Drawing.Size(163, 22);
+            this.MgInfo.Text = "关于(&A)";
+            this.MgInfo.Click += new System.EventHandler(this.MgInfo_Click);
             // 
             // MgExit
             // 
@@ -397,6 +415,8 @@
         private System.Windows.Forms.ToolStripMenuItem MtSignOl;
         private System.Windows.Forms.ToolStripMenuItem MtSignUl;
         private System.Windows.Forms.ToolStripMenuItem MtSignPc;
+        private System.Windows.Forms.ToolStripMenuItem MgInfo;
+        private System.Windows.Forms.ToolStripMenuItem MtInfo;
 
 
     }

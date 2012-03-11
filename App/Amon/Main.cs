@@ -380,6 +380,11 @@ namespace Me.Amon
         {
         }
 
+        private void MgInfo_Click(object sender, EventArgs e)
+        {
+            new Info().ShowDialog();
+        }
+
         private void MgExit_Click(object sender, EventArgs e)
         {
             Close();
@@ -461,6 +466,11 @@ namespace Me.Amon
         private void MgSignFp_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void MtInfo_Click(object sender, EventArgs e)
+        {
+            new Info().ShowDialog();
         }
 
         private void MtExit_Click(object sender, EventArgs e)

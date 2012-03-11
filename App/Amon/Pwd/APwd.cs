@@ -56,7 +56,9 @@ namespace Me.Amon.Pwd
 
             InitializeComponent();
         }
+        #endregion
 
+        #region 接口实现
         public void InitOnce()
         {
             _SafeModel = new SafeModel(_UserModel);
@@ -67,8 +69,8 @@ namespace Me.Amon.Pwd
             _ViewModel.Load();
 
             #region 类别
-            Cat cat = new Cat { Id = "0", Text = "阿木密码箱", Tips = "阿木密码箱", Icon = "Amon" };
-            IlCatTree.Images.Add("0", BeanUtil.NaN16);
+            Cat cat = new Cat { Id = "winshineapwd0000", Text = "阿木密码箱", Tips = "阿木密码箱", Icon = "Amon" };
+            IlCatTree.Images.Add("winshineapwd0000", BeanUtil.NaN16);
             IlCatTree.Images.Add(cat.Icon, Resources.Logo);
             _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Icon, SelectedImageKey = cat.Icon };
             _RootNode.Tag = cat;
@@ -2514,5 +2516,20 @@ namespace Me.Amon.Pwd
             Close();
         }
         #endregion
+
+        private void TsbCopy_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TsbPaste_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TsbClear_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

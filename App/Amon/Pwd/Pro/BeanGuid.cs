@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using Me.Amon.Bean;
 using Me.Amon.Bean.Att;
 using Me.Amon.Model;
+using System.Data;
 
 namespace Me.Amon.Pwd.Pro
 {
@@ -11,6 +12,7 @@ namespace Me.Amon.Pwd.Pro
         private AAtt _Att;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
+        private DataTable _DataTable;
 
         #region 构造函数
         public BeanGuid()
@@ -18,9 +20,10 @@ namespace Me.Amon.Pwd.Pro
             InitializeComponent();
         }
 
-        public BeanGuid(SafeModel safeModel)
+        public BeanGuid(SafeModel safeModel, DataTable dataTable)
         {
             _SafeModel = safeModel;
+            _DataTable = dataTable;
 
             InitializeComponent();
         }
@@ -72,13 +75,26 @@ namespace Me.Amon.Pwd.Pro
                 _Att.SetSpec(GuidAtt.SPEC_GUID_TPLT, header.Id);
                 if (!_SafeModel.Key.IsUpdate)
                 {
+                    AAtt att;
                     if (_SafeModel.Count < AAtt.HEAD_SIZE)
                     {
-                        _SafeModel.InitMeta();
-                        _SafeModel.InitLogo();
-                        _SafeModel.InitHint();
+                        att = _SafeModel.InitMeta();
+                        _DataTable.Rows.Add(att.Order, att);
+                        att = _SafeModel.InitLogo();
+                        _DataTable.Rows.Add(att.Order, att);
+                        att = _SafeModel.InitHint();
+                        _DataTable.Rows.Add(att.Order, att);
                     }
                     _SafeModel.InitData(header);
+                    for (int i = _DataTable.Rows.Count - 1; i >= AAtt.HEAD_SIZE; i -= 1)
+                    {
+                        _DataTable.Rows.RemoveAt(i);
+                    }
+                    for (int i = AAtt.HEAD_SIZE; i < _SafeModel.Count; i += 1)
+                    {
+                        att = _SafeModel.GetAtt(i);
+                        _DataTable.Rows.Add(att.Order, att);
+                    }
                 }
                 _Att.Modified = true;
             }
