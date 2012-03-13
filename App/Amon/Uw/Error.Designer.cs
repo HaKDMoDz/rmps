@@ -51,7 +51,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.LbInfo.Location = new System.Drawing.Point(58, 23);
             this.LbInfo.Name = "LbInfo";
-            this.LbInfo.Size = new System.Drawing.Size(214, 32);
+            this.LbInfo.Size = new System.Drawing.Size(314, 32);
             this.LbInfo.TabIndex = 1;
             this.LbInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -64,25 +64,26 @@
             this.TbInfo.Multiline = true;
             this.TbInfo.Name = "TbInfo";
             this.TbInfo.ReadOnly = true;
-            this.TbInfo.Size = new System.Drawing.Size(260, 160);
+            this.TbInfo.Size = new System.Drawing.Size(360, 160);
             this.TbInfo.TabIndex = 2;
             // 
             // BtOk
             // 
             this.BtOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtOk.Location = new System.Drawing.Point(197, 227);
+            this.BtOk.Location = new System.Drawing.Point(297, 227);
             this.BtOk.Name = "BtOk";
             this.BtOk.Size = new System.Drawing.Size(75, 23);
             this.BtOk.TabIndex = 3;
             this.BtOk.Text = "确定(&O)";
             this.BtOk.UseVisualStyleBackColor = true;
+            this.BtOk.Click += new System.EventHandler(this.BtOk_Click);
             // 
             // Error
             // 
             this.AcceptButton = this.BtOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(384, 262);
             this.Controls.Add(this.BtOk);
             this.Controls.Add(this.TbInfo);
             this.Controls.Add(this.LbInfo);

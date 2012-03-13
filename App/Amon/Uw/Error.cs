@@ -16,5 +16,10 @@ namespace Me.Amon.Uw
             TbInfo.Text = error.StackTrace;
             ShowDialog(owner);
         }
+
+        private void BtOk_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

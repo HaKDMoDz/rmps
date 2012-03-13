@@ -133,7 +133,7 @@ namespace Me.Amon.Pwd.Wiz
             {
                 name = HashUtil.UtcTimeInHex(true);
             }
-            string dstFile = _DataModel.AcfDir + name + IEnv.FILE_ACF;
+            string dstFile = Path.Combine(_DataModel.AcfDir, name + IEnv.FILE_ACF);
 
             FileInfo info = new FileInfo(srcFile);
             _Att.SetSpec(FileAtt.SPEC_FILE_NAME, name);
