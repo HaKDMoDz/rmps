@@ -86,6 +86,7 @@
     <Compile Include="Bean\Att\CallAtt.cs" />
     <Compile Include="Bean\Ico.cs" />
     <Compile Include="Bean\Png.cs" />
+    <Compile Include="Ce\Renamer.cs" />
     <Compile Include="Ce\Wrapper.cs" />
     <Compile Include="Da\DBAccess.cs" />
     <Compile Include="Da\DCAccess.cs" />

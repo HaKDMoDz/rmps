@@ -8,12 +8,14 @@ namespace Me.Amon.Pwd.Wiz
     {
         void InitOnce(TableLayoutPanel grid, ViewModel viewModel);
 
-        void InitView(int row);
+        int InitView(int row);
 
         bool ShowData(DataModel dataModel, AAtt att);
 
         void Copy();
 
         bool Save();
+
+        int Height { get; }
     }
 }

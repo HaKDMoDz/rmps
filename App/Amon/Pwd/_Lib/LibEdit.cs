@@ -112,7 +112,35 @@ namespace Me.Amon.Pwd._Lib
 
         private void MiDeleteLibh_Click(object sender, EventArgs e)
         {
+            _Selected = TvLibView.SelectedNode;
+            if (_Selected == null)
+            {
+                return;
+            }
 
+            object obj = _Selected.Tag;
+            if (!(obj is Bean.LibHeader))
+            {
+                return;
+            }
+
+            if (DialogResult.Yes != MessageBox.Show("确认要删除此模板吗，此操作将不可恢复？", "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning))
+            {
+                return;
+            }
+
+            Bean.LibHeader header = (Bean.LibHeader)obj;
+
+            DBAccess dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(DBConst.APWD0300);
+            dba.AddWhere(DBConst.APWD0303, _UserModel.Code);
+            dba.AddWhere(DBConst.APWD0304, header.Id);
+            dba.ExecuteDelete();
+
+            TvLibView.Nodes.Remove(_Selected);
+            _DataModel.LibList.Remove(header);
+            _DataModel.LibModified = -1;
         }
 
         private void MiAppendLibd_Click(object sender, EventArgs e)
@@ -132,7 +160,45 @@ namespace Me.Amon.Pwd._Lib
 
         private void MiDeleteLibd_Click(object sender, EventArgs e)
         {
+            _Selected = TvLibView.SelectedNode;
+            if (_Selected == null)
+            {
+                return;
+            }
+            object obj = _Selected.Tag;
+            if (!(obj is Bean.LibDetail))
+            {
+                return;
+            }
+            Bean.LibDetail detail = (Bean.LibDetail)obj;
 
+            TreeNode node = _Selected.Parent;
+            if (node == null)
+            {
+                return;
+            }
+            obj = node.Tag;
+            if (!(obj is Bean.LibHeader))
+            {
+                return;
+            }
+            Bean.LibHeader header = (Bean.LibHeader)obj;
+
+            if (DialogResult.Yes != MessageBox.Show("确认要删除此属性吗，此操作将不可恢复？", "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning))
+            {
+                return;
+            }
+
+            DBAccess dba = _UserModel.DBAccess;
+            dba.ReInit();
+            dba.AddTable(DBConst.APWD0300);
+            dba.AddWhere(DBConst.APWD0303, _UserModel.Code);
+            dba.AddWhere(DBConst.APWD0304, detail.Id);
+            dba.ExecuteDelete();
+
+            TvLibView.Nodes.Remove(_Selected);
+            header.Details.Remove(detail);
+            _DataModel.LibModified = -1;
         }
 
         private void ShowHeader(Bean.LibHeader header)

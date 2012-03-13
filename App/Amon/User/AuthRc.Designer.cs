@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AuthRc));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LbPass = new System.Windows.Forms.Label();
             this.TbPass = new System.Windows.Forms.TextBox();
             this.BtOk = new System.Windows.Forms.Button();
             this.LbInfo = new System.Windows.Forms.Label();
+            this.BgTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,6 +84,11 @@
             this.LbInfo.Size = new System.Drawing.Size(0, 12);
             this.LbInfo.TabIndex = 4;
             // 
+            // BgTimer
+            // 
+            this.BgTimer.Interval = 1000;
+            this.BgTimer.Tick += new System.EventHandler(this.BgTimer_Tick);
+            // 
             // AuthRc
             // 
             this.AcceptButton = this.BtOk;
@@ -115,5 +122,6 @@
         private System.Windows.Forms.TextBox TbPass;
         private System.Windows.Forms.Button BtOk;
         private System.Windows.Forms.Label LbInfo;
+        private System.Windows.Forms.Timer BgTimer;
     }
 }

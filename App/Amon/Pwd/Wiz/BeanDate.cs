@@ -65,6 +65,8 @@ namespace Me.Amon.Pwd.Wiz
             _LastMenu = MiDateDef;
             _LastMenu.Checked = true;
 
+            DtData.GotFocus += new EventHandler(DtData_GotFocus);
+
             BtNow.Image = viewModel.GetImage("att-date-now");
             BtOpt.Image = viewModel.GetImage("att-date-options");
         }
@@ -82,7 +84,7 @@ namespace Me.Amon.Pwd.Wiz
         #endregion
 
         #region 接口实现
-        public void InitView(int row)
+        public int InitView(int row)
         {
             TabIndex = row;
 
@@ -90,6 +92,8 @@ namespace Me.Amon.Pwd.Wiz
 
             _Grid.Controls.Add(_Label, 0, row);
             _Grid.Controls.Add(this, 1, row);
+
+            return 27;
         }
 
         public bool ShowData(DataModel dataModel, AAtt att)
@@ -110,7 +114,10 @@ namespace Me.Amon.Pwd.Wiz
 
         public void Copy()
         {
-            Clipboard.SetText(DtData.Text);
+            if (!string.IsNullOrEmpty(DtData.Text))
+            {
+                Clipboard.SetText(DtData.Text);
+            }
         }
 
         public bool Save()
@@ -131,7 +138,7 @@ namespace Me.Amon.Pwd.Wiz
         #endregion
 
         #region 事件处理
-        private void TbData_GotFocus(object sender, EventArgs e)
+        private void DtData_GotFocus(object sender, EventArgs e)
         {
             _Body.EditCtl = this;
         }

@@ -14,6 +14,10 @@ namespace Me.Amon
 
         bool Visible { get; set; }
 
+        bool IsDisposed { get; }
+
+        void BringToFront();
+
         bool WillExit();
 
         bool SaveData();

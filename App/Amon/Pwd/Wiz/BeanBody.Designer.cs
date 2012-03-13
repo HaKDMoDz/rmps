@@ -33,21 +33,23 @@
             // 
             // TpGrid
             // 
+            this.TpGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TpGrid.ColumnCount = 2;
             this.TpGrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 68F));
             this.TpGrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TpGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TpGrid.Location = new System.Drawing.Point(0, 0);
             this.TpGrid.Name = "TpGrid";
             this.TpGrid.RowCount = 1;
             this.TpGrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TpGrid.Size = new System.Drawing.Size(350, 250);
+            this.TpGrid.Size = new System.Drawing.Size(350, 32);
             this.TpGrid.TabIndex = 0;
             // 
             // BeanBody
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.Controls.Add(this.TpGrid);
             this.Name = "BeanBody";
             this.Size = new System.Drawing.Size(350, 250);

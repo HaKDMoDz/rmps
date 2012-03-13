@@ -29,7 +29,7 @@ namespace Me.Amon.User.Sign
 
             InitializeComponent();
 
-            TbPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            TbPath.Text = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), IEnv.DIR_DATA);
         }
         #endregion
 

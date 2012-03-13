@@ -35,6 +35,7 @@ namespace Me.Amon.Pwd.Pro
             _SafeModel = safeModel;
             _DataModel = dataModel;
             _ViewModel = viewModel;
+            _LastIndex = -1;
 
             _DataList = new DataTable();
             _DataList.Columns.Add("Order", typeof(string));
@@ -120,6 +121,8 @@ namespace Me.Amon.Pwd.Pro
 
         public bool UpdateKey()
         {
+            _LastIndex = -1;
+            _AAtt = null;
             return true;
         }
 
@@ -215,6 +218,15 @@ namespace Me.Amon.Pwd.Pro
 
         public void DropAtt()
         {
+            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
+            {
+                return;
+            }
+            if (_LastIndex < AAtt.HEAD_SIZE || _AAtt == null)
+            {
+                return;
+            }
+
             _UserAction = false;
             _SafeModel.Remove(_AAtt);
             _DataList.Rows.RemoveAt(_LastIndex);

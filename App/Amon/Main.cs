@@ -585,6 +585,18 @@ namespace Me.Amon
         {
         }
 
+        private void ShowLast(int view)
+        {
+            if (_IApp == null || _IApp.IsDisposed)
+            {
+                ShowAPwd(IEnv.IAPP_APWD);
+            }
+            else
+            {
+                _IApp.Visible = true;
+            }
+        }
+
         private void ShowAPwd(int view)
         {
             if (_APwd == null || _APwd.IsDisposed)
@@ -614,18 +626,14 @@ namespace Me.Amon
 
         private void PbLogo_DoubleClick(object sender, EventArgs e)
         {
-            if (_IApp == null || !_IApp.Visible)
+            if (_IApp == null || _IApp.IsDisposed || !_IApp.Visible)
             {
-                CheckUser(new AmonHandler<int>(ShowAPwd));
+                CheckUser(new AmonHandler<int>(ShowLast));
                 return;
             }
 
-            if (_IApp.AppId != IEnv.IAPP_APWD)
-            {
-                _IApp.Visible = false;
-                ShowAPwd(IEnv.IAPP_APWD);
-                return;
-            }
+            _IApp.Visible = true;
+            _IApp.BringToFront();
         }
     }
 }

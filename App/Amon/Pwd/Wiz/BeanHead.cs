@@ -62,6 +62,7 @@ namespace Me.Amon.Pwd.Wiz
         {
             if ((_DataModel.LibModified & IEnv.KEY_AWIZ) > 0)
             {
+                CbLib.DataSource = null;
                 CbLib.DataSource = _DataModel.LibList;
                 CbLib.DisplayMember = "Name";
                 CbLib.ValueMember = "Id";
@@ -115,6 +116,8 @@ namespace Me.Amon.Pwd.Wiz
                 return;
             }
             TbHint.Text = hint.Data;
+
+            Focus();
         }
 
         public bool SaveData()
@@ -192,7 +195,7 @@ namespace Me.Amon.Pwd.Wiz
 
         public void CopyData()
         {
-            if (_TBox != null)
+            if (_TBox != null && !string.IsNullOrEmpty(_TBox.Text))
             {
                 Clipboard.SetText(_TBox.Text);
             }

@@ -53,6 +53,8 @@ namespace Me.Amon.Pwd.Wiz
             _Style = new RowStyle(SizeType.Absolute, 27F);
             Dock = DockStyle.Fill;
 
+            TbData.GotFocus += new EventHandler(TbData_GotFocus);
+
             CmMenu.SuspendLayout();
             _CharLenDef = new ToolStripMenuItem();
             _CharLenDef.Size = new Size(160, 22);
@@ -106,7 +108,7 @@ namespace Me.Amon.Pwd.Wiz
         #endregion
 
         #region 接口实现
-        public void InitView(int row)
+        public int InitView(int row)
         {
             TabIndex = row;
 
@@ -114,6 +116,8 @@ namespace Me.Amon.Pwd.Wiz
 
             _Grid.Controls.Add(_Label, 0, row);
             _Grid.Controls.Add(this, 1, row);
+
+            return 27;
         }
 
         public bool ShowData(DataModel dataModel, AAtt att)
@@ -157,7 +161,10 @@ namespace Me.Amon.Pwd.Wiz
 
         public void Copy()
         {
-            SafeUtil.Copy(TbData.Text);
+            if (!string.IsNullOrEmpty(TbData.Text))
+            {
+                SafeUtil.Copy(TbData.Text);
+            }
         }
 
         public bool Save()
@@ -208,7 +215,13 @@ namespace Me.Amon.Pwd.Wiz
             }
 
             string rep = _Att.GetSpec(PassAtt.SPEC_PWDS_REP, AAtt.SPEC_VALUE_FAIL);
-            TbData.Text = new string(CharUtil.NextRandomKey(key.ToCharArray(), int.Parse(len), AAtt.SPEC_VALUE_TRUE.Equals(rep)));
+            char[] tmp = CharUtil.NextRandomKey(key.ToCharArray(), int.Parse(len), AAtt.SPEC_VALUE_TRUE.Equals(rep));
+            if (tmp == null)
+            {
+                Main.ShowAlert(string.Format("无法生成长度为 {0} 且{1}重复的随机口令！", len, MiRepeatable.Checked ? "可" : "不可"));
+                return;
+            }
+            TbData.Text = new string(tmp);
         }
 
         private void BtOpt_Click(object sender, EventArgs e)

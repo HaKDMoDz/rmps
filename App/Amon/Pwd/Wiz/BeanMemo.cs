@@ -37,11 +37,13 @@ namespace Me.Amon.Pwd.Wiz
 
             _Style = new RowStyle(SizeType.Absolute, 60F);
             Dock = DockStyle.Fill;
+
+            TbData.GotFocus += new EventHandler(TbData_GotFocus);
         }
         #endregion
 
         #region 接口实现
-        public void InitView(int row)
+        public int InitView(int row)
         {
             TabIndex = row;
 
@@ -49,6 +51,8 @@ namespace Me.Amon.Pwd.Wiz
 
             _Grid.Controls.Add(_Label, 0, row);
             _Grid.Controls.Add(this, 1, row);
+
+            return 60;
         }
 
         public bool ShowData(DataModel dataModel, AAtt att)
@@ -64,7 +68,10 @@ namespace Me.Amon.Pwd.Wiz
 
         public void Copy()
         {
-            Clipboard.SetText(TbData.Text);
+            if (!string.IsNullOrEmpty(TbData.Text))
+            {
+                Clipboard.SetText(TbData.Text);
+            }
         }
 
         public bool Save()

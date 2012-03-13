@@ -10,8 +10,6 @@ namespace Me.Amon.Pwd.Wiz
         private SafeModel _SafeModel;
         private DataModel _DataModel;
         private ViewModel _ViewModel;
-        private RowStyle _DefStyle;
-        private Label _DefLabel;
 
         public BeanBody()
         {
@@ -29,10 +27,6 @@ namespace Me.Amon.Pwd.Wiz
         {
             _DataModel = dataModel;
             _ViewModel = viewModel;
-
-            _DefStyle = new RowStyle(SizeType.Percent, 100F);
-
-            _DefLabel = new Label { Dock = DockStyle.Fill };
         }
 
         public void InitView(TableLayoutPanel grid)
@@ -65,24 +59,24 @@ namespace Me.Amon.Pwd.Wiz
             }
 
             int row = 0;
+            int max = 0;
             for (int i = AAtt.HEAD_SIZE; i < _SafeModel.Count; i += 1)
             {
                 AAtt att = _SafeModel.GetAtt(i);
 
                 IAttEdit ctl = GetCtl(att.Type);
-                ctl.InitView(row);
+                max += ctl.InitView(row);
                 ctl.ShowData(_DataModel, att);
 
                 row += 1;
             }
 
-            TpGrid.RowStyles.Add(_DefStyle);
+            TpGrid.Height = max;
             TpGrid.RowCount = row;
-
-            TpGrid.Controls.Add(_DefLabel, 1, row);
-
             TpGrid.ResumeLayout(true);
             ResumeLayout(true);
+
+            Focus();
         }
 
         public bool SaveData()

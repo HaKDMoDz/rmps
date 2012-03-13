@@ -169,7 +169,7 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                return DialogResult.Yes == MessageBox.Show(this, "您有数据尚未保存，确认要退出窗口吗？", "提示", MessageBoxButtons.YesNoCancel);
+                return DialogResult.Yes == Main.ShowConfirm("您有数据尚未保存，确认要退出窗口吗？");
             }
             return true;
         }
@@ -327,7 +327,7 @@ namespace Me.Amon.Pwd
 
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                if (DialogResult.Yes != MessageBox.Show(this, "您当前的数据尚未保存，要丢弃吗？", "提示", MessageBoxButtons.YesNoCancel))
+                if (DialogResult.Yes != Main.ShowConfirm("您当前的数据尚未保存，要丢弃吗？"))
                 {
                     return;
                 }
@@ -931,7 +931,7 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                if (DialogResult.Yes == MessageBox.Show(this, "当前记录已被修改，要保存吗？", "提示", MessageBoxButtons.YesNoCancel))
+                if (DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
                 {
                     return;
                 }
@@ -964,7 +964,7 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                if (DialogResult.Yes == MessageBox.Show(this, "当前记录已被修改，要保存吗？", "提示", MessageBoxButtons.YesNoCancel))
+                if (DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
                 {
                     return;
                 }
@@ -1007,7 +1007,7 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                if (DialogResult.Yes == MessageBox.Show(this, "当前记录已被修改，要保存吗？", "提示", MessageBoxButtons.YesNoCancel))
+                if (DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
                 {
                     return;
                 }
@@ -1065,7 +1065,7 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                if (DialogResult.Yes == MessageBox.Show(this, "当前记录已被修改，要保存吗？", "提示", MessageBoxButtons.YesNoCancel))
+                if (DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
                 {
                     return;
                 }
@@ -1121,7 +1121,7 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                if (DialogResult.Yes == MessageBox.Show(this, "当前记录已被修改，要保存吗？", "提示", MessageBoxButtons.YesNoCancel))
+                if (DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
                 {
                     return;
                 }
@@ -1416,6 +1416,18 @@ namespace Me.Amon.Pwd
 
         private void CmiEditIcon_Click(object sender, EventArgs e)
         {
+            TreeNode node = TvCatTree.SelectedNode;
+            if (node == null)
+            {
+                return;
+            }
+
+            Cat cat = node.Tag as Cat;
+            if (cat == null || cat.Id == "winshineapwd0000")
+            {
+                return;
+            }
+
             PngSeeker editor = new PngSeeker(_UserModel, _DataModel.CatDir);
             editor.InitOnce(16);
             editor.CallBackHandler = new AmonHandler<Bean.Png>(ChangeImgByCat);
@@ -1834,7 +1846,7 @@ namespace Me.Amon.Pwd
             }
 
             Cat cat = node.Tag as Cat;
-            if (cat == null || cat.Id == "0")
+            if (cat == null || cat.Id == "winshineapwd0000")
             {
                 return;
             }
@@ -1880,13 +1892,8 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            if (DialogResult.Yes != Main.ShowConfirm("确认要删除选中的类别吗，此操作将不可恢复？"))
-            {
-                return;
-            }
-
             Cat cat = node.Tag as Cat;
-            if (cat == null || cat.Id == "0")
+            if (cat == null || cat.Id == "winshineapwd0000")
             {
                 return;
             }
@@ -1894,6 +1901,11 @@ namespace Me.Amon.Pwd
             if (node.Nodes.Count > 0)
             {
                 Main.ShowAlert("下级类别不为空，不能删除！");
+                return;
+            }
+
+            if (DialogResult.Yes != Main.ShowConfirm("确认要删除选中的类别吗，此操作将不可恢复？"))
+            {
                 return;
             }
 
@@ -1926,16 +1938,16 @@ namespace Me.Amon.Pwd
 
         private void ChangeImgByCat(Bean.Png png)
         {
-            if (!CharUtil.IsValidateHash(png.Path))
+            if (!CharUtil.IsValidateHash(png.File))
             {
-                png.Path = "0";
+                png.File = "0";
             }
-            if (!IlCatTree.Images.ContainsKey(png.Path))
+            if (!IlCatTree.Images.ContainsKey(png.File))
             {
-                IlCatTree.Images.Add(png.Path, png.Image);
+                IlCatTree.Images.Add(png.File, png.Image);
             }
-            _LastNode.ImageKey = png.Path;
-            _LastNode.SelectedImageKey = png.Path;
+            _LastNode.ImageKey = png.File;
+            _LastNode.SelectedImageKey = png.File;
 
             Cat cat = _LastNode.Tag as Cat;
             if (cat == null)
@@ -1946,7 +1958,7 @@ namespace Me.Amon.Pwd
             var dba = _UserModel.DBAccess;
             dba.ReInit();
             dba.AddTable(DBConst.ACAT0200);
-            dba.AddParam(DBConst.ACAT0207, png.Path);
+            dba.AddParam(DBConst.ACAT0207, png.File);
             dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
             dba.AddWhere(DBConst.ACAT0203, cat.Id);
             dba.ExecuteUpdate();
@@ -1962,7 +1974,7 @@ namespace Me.Amon.Pwd
             }
             else if (_SafeModel.Key.Modified)
             {
-                if (DialogResult.Yes == MessageBox.Show(this, "您的数据已修改，确认要丢弃吗？", "提示", MessageBoxButtons.YesNoCancel))
+                if (DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
                 {
                     return;
                 }
@@ -2393,7 +2405,7 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                if (DialogResult.Yes != MessageBox.Show("您的数据已修改，确认要丢弃吗？", "提示", MessageBoxButtons.YesNoCancel))
+                if (DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
                 {
                     return;
                 }
@@ -2491,7 +2503,7 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Key != null && _SafeModel.Key.Modified)
             {
-                if (DialogResult.Yes != MessageBox.Show(this, "您有数据尚未保存，确认要隐藏窗口吗？", "提示", MessageBoxButtons.YesNo))
+                if (DialogResult.Yes != Main.ShowConfirm("您有数据尚未保存，确认要隐藏窗口吗？"))
                 {
                     return;
                 }
@@ -2529,7 +2541,6 @@ namespace Me.Amon.Pwd
 
         private void TsbClear_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

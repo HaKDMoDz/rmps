@@ -56,12 +56,12 @@
             this.MgAPwd = new System.Windows.Forms.ToolStripMenuItem();
             this.MgASec = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSep1 = new System.Windows.Forms.ToolStripSeparator();
-            this.MgSignIn = new System.Windows.Forms.ToolStripMenuItem();
-            this.MgSignOf = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSignUp = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSignOl = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSignUl = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSignPc = new System.Windows.Forms.ToolStripMenuItem();
+            this.MgSignIn = new System.Windows.Forms.ToolStripMenuItem();
+            this.MgSignOf = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSignFp = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.MgInfo = new System.Windows.Forms.ToolStripMenuItem();
@@ -112,7 +112,7 @@
             this.MtInfo,
             this.MtExit});
             this.CtMenu.Name = "CtMenu";
-            this.CtMenu.Size = new System.Drawing.Size(166, 220);
+            this.CtMenu.Size = new System.Drawing.Size(166, 242);
             // 
             // MtGuid
             // 
@@ -198,6 +198,7 @@
             this.MtSignFp.Name = "MtSignFp";
             this.MtSignFp.Size = new System.Drawing.Size(165, 22);
             this.MtSignFp.Text = "找回口令(&F)";
+            this.MtSignFp.Visible = false;
             this.MtSignFp.Click += new System.EventHandler(this.MtSignFp_Click);
             // 
             // MtSep2
@@ -236,7 +237,7 @@
             this.MgInfo,
             this.MgExit});
             this.CgMenu.Name = "CmMenu";
-            this.CgMenu.Size = new System.Drawing.Size(164, 264);
+            this.CgMenu.Size = new System.Drawing.Size(164, 242);
             // 
             // MgTopMost
             // 
@@ -280,6 +281,37 @@
             this.MgSep1.Name = "MgSep1";
             this.MgSep1.Size = new System.Drawing.Size(160, 6);
             // 
+            // MgSignUp
+            // 
+            this.MgSignUp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MgSignOl,
+            this.MgSignUl,
+            this.MgSignPc});
+            this.MgSignUp.Name = "MgSignUp";
+            this.MgSignUp.Size = new System.Drawing.Size(163, 22);
+            this.MgSignUp.Text = "注册(&U)";
+            // 
+            // MgSignOl
+            // 
+            this.MgSignOl.Name = "MgSignOl";
+            this.MgSignOl.Size = new System.Drawing.Size(142, 22);
+            this.MgSignOl.Text = "联机注册(&R)";
+            this.MgSignOl.Click += new System.EventHandler(this.MgSignOl_Click);
+            // 
+            // MgSignUl
+            // 
+            this.MgSignUl.Name = "MgSignUl";
+            this.MgSignUl.Size = new System.Drawing.Size(142, 22);
+            this.MgSignUl.Text = "脱机注册(&O)";
+            this.MgSignUl.Click += new System.EventHandler(this.MgSignUl_Click);
+            // 
+            // MgSignPc
+            // 
+            this.MgSignPc.Name = "MgSignPc";
+            this.MgSignPc.Size = new System.Drawing.Size(142, 22);
+            this.MgSignPc.Text = "单机注册(&P)";
+            this.MgSignPc.Click += new System.EventHandler(this.MgSignPc_Click);
+            // 
             // MgSignIn
             // 
             this.MgSignIn.Name = "MgSignIn";
@@ -295,42 +327,12 @@
             this.MgSignOf.Visible = false;
             this.MgSignOf.Click += new System.EventHandler(this.MgSignOf_Click);
             // 
-            // MgSignUp
-            // 
-            this.MgSignUp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MgSignOl,
-            this.MgSignUl,
-            this.MgSignPc});
-            this.MgSignUp.Name = "MgSignUp";
-            this.MgSignUp.Size = new System.Drawing.Size(163, 22);
-            this.MgSignUp.Text = "注册(&U)";
-            // 
-            // MgSignOl
-            // 
-            this.MgSignOl.Name = "MgSignOl";
-            this.MgSignOl.Size = new System.Drawing.Size(152, 22);
-            this.MgSignOl.Text = "联机注册(&R)";
-            this.MgSignOl.Click += new System.EventHandler(this.MgSignOl_Click);
-            // 
-            // MgSignUl
-            // 
-            this.MgSignUl.Name = "MgSignUl";
-            this.MgSignUl.Size = new System.Drawing.Size(152, 22);
-            this.MgSignUl.Text = "脱机注册(&O)";
-            this.MgSignUl.Click += new System.EventHandler(this.MgSignUl_Click);
-            // 
-            // MgSignPc
-            // 
-            this.MgSignPc.Name = "MgSignPc";
-            this.MgSignPc.Size = new System.Drawing.Size(152, 22);
-            this.MgSignPc.Text = "单机注册(&P)";
-            this.MgSignPc.Click += new System.EventHandler(this.MgSignPc_Click);
-            // 
             // MgSignFp
             // 
             this.MgSignFp.Name = "MgSignFp";
             this.MgSignFp.Size = new System.Drawing.Size(163, 22);
             this.MgSignFp.Text = "找回口令(&F)";
+            this.MgSignFp.Visible = false;
             this.MgSignFp.Click += new System.EventHandler(this.MgSignFp_Click);
             // 
             // MgSep2
