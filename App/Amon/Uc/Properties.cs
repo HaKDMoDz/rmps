@@ -87,7 +87,7 @@ namespace Me.Amon.Uc
 
                     if (line.StartsWith("#"))
                     {
-                        item.D += line;
+                        item.D += line.Substring(1);
                         isComment = true;
                         continue;
                     }
