@@ -6,7 +6,12 @@ using System.Runtime.InteropServices;
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("阿木密码箱")]
-[assembly: AssemblyDescription("阿木密码箱是一款免费且开源的密码管理软件，能够帮助您以一个安全的方式管理您的账户信息。软件采用目前国际上通用的标准商用加密算法保证您的数据机密性，支持用户自定义数据、支持随机密码生成、支持基于云存储的数据备份与恢复等功能。")]
+[assembly: AssemblyDescription(@"　　阿木密码箱是一款免费且开源的密码管理软件，能够帮助您以一个安全的方式管理您的账户信息。软件采用目前国际上通用的标准商用加密算法保证您的数据机密性，支持用户自定义数据、支持随机密码生成、支持基于云存储的数据备份与恢复等功能。
+
+　　1、实行代码开源机制，用户可以免费使用及传播。
+　　2、采用SHA-256算法进行身份认证，及AES算法进行数据加密。
+　　3、采用系统操作日志、退出备份、用户手动本地及远程备份机制，充分保障用户数据安全。
+　　4、用户完全自定义密码类别及模板，可根据需要添加或删除属性，且不限属性个数及数据长度。")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Winshine")]
 [assembly: AssemblyProduct("阿木密码箱")]
@@ -32,5 +37,5 @@ using System.Runtime.InteropServices;
 // 可以指定所有这些值，也可以使用“内部版本号”和“修订号”的默认值，
 // 方法是按如下所示使用“*”:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("5.0.0.0")]
-[assembly: AssemblyFileVersion("5.0.0.0")]
+[assembly: AssemblyVersion("5.0.0.2")]
+[assembly: AssemblyFileVersion("5.0.0.2")]

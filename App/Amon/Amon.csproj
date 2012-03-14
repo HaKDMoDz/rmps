@@ -1026,6 +1026,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo\logo.ico" />
+    <None Include="Resources\Info.png" />
     <None Include="Resources\Alert.png" />
     <None Include="Resources\Error.png" />
     <None Include="Resources\Hint.png" />

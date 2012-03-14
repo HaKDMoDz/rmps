@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -11,11 +12,10 @@ namespace Me.Amon
             InitializeComponent();
 
             this.Text = String.Format("关于 {0}", AssemblyTitle);
-            this.labelProductName.Text = "软件：" + AssemblyProduct;
-            this.labelVersion.Text = "版本：" + AssemblyVersion;
-            this.LbCopyright.Text = "版权：" + AssemblyCopyright;
-            this.LbHomepage.Text = "网站：http://amon.me/";
-            this.textBoxDescription.Text = AssemblyDescription;
+            this.LbName.Text = AssemblyProduct;
+            this.LbVersion.Text = AssemblyVersion;
+            this.LbCopyright.Text = AssemblyCopyright;
+            this.TbDescription.Text = AssemblyDescription;
         }
 
         #region 程序集特性访问器
@@ -97,5 +97,29 @@ namespace Me.Amon
             }
         }
         #endregion
+
+        private void LbHomepage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                Process.Start("http://amon.me/");
+            }
+            catch (Exception exp)
+            {
+                Main.ShowError(exp);
+            }
+        }
+
+        private void LbMail_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                Process.Start("mailto:admin@amon.me");
+            }
+            catch (Exception exp)
+            {
+                Main.ShowError(exp);
+            }
+        }
     }
 }
