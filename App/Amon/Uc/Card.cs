@@ -30,7 +30,7 @@ namespace Me.Amon.Uc
             XmlDocument doc = new XmlDocument();
             doc.Load(src);
 
-            XmlNode node = doc.SelectSingleNode("/magicpwd/card/template-res");
+            XmlNode node = doc.SelectSingleNode("/amon/card/template-res");
             string text;
             if (node != null)
             {
@@ -41,7 +41,7 @@ namespace Me.Amon.Uc
                 }
             }
 
-            node = doc.SelectSingleNode("/magicpwd/card/template-uri");
+            node = doc.SelectSingleNode("/amon/card/template-uri");
             if (node == null)
             {
                 return null;
@@ -59,7 +59,7 @@ namespace Me.Amon.Uc
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(src);
-            XmlNode node = doc.SelectSingleNode("/magicpwd/card/template-uri");
+            XmlNode node = doc.SelectSingleNode("/amon/card/template-uri");
             if (node == null)
             {
                 return null;
@@ -87,7 +87,7 @@ namespace Me.Amon.Uc
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(src);
-            XmlNode node = doc.SelectSingleNode("/magicpwd/card/template-uri");
+            XmlNode node = doc.SelectSingleNode("/amon/card/template-uri");
             if (node == null)
             {
                 return null;
@@ -105,7 +105,7 @@ namespace Me.Amon.Uc
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(src);
-            XmlNode node = doc.SelectSingleNode("/magicpwd/card/template-uri");
+            XmlNode node = doc.SelectSingleNode("/amon/card/template-uri");
             if (node == null)
             {
                 return null;
@@ -123,7 +123,7 @@ namespace Me.Amon.Uc
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(src);
-            XmlNode node = doc.SelectSingleNode("/magicpwd/card/template-uri");
+            XmlNode node = doc.SelectSingleNode("/amon/card/template-uri");
             if (node == null)
             {
                 return null;
@@ -167,7 +167,7 @@ namespace Me.Amon.Uc
             XmlDocument doc = new XmlDocument();
             doc.Load(src);
 
-            XmlNode node = doc.SelectSingleNode("/magicpwd/card/template-res");
+            XmlNode node = doc.SelectSingleNode("/amon/card/template-res");
             String text;
             if (node != null)
             {
@@ -178,7 +178,7 @@ namespace Me.Amon.Uc
                 }
             }
 
-            node = doc.SelectSingleNode("/magicpwd/card/template-uri");
+            node = doc.SelectSingleNode("/amon/card/template-uri");
             if (node == null)
             {
                 return null;
@@ -215,12 +215,12 @@ namespace Me.Amon.Uc
             reader.Close();
             stream.Close();
 
-            //AAtt item;
-            //for (int i = AAtt.HEAD_SIZE, j = _SafeModel.Count; i < j; i += 1)
-            //{
-            //    item = _SafeModel.GetAtt(i);
-            //    buffer.Replace('#' + item.Name + '#', item.Data);
-            //}
+            AAtt item;
+            for (int i = AAtt.HEAD_SIZE, j = _SafeModel.Count; i < j; i += 1)
+            {
+                item = _SafeModel.GetAtt(i);
+                buffer.Replace('#' + item.Name + '#', item.Data);
+            }
 
             return buffer.ToString();
         }
@@ -251,7 +251,7 @@ namespace Me.Amon.Uc
             Color c = Color.Transparent;
             String p = "";
             String s = "";
-            XmlNode node = doc.SelectSingleNode("/magicpwd/card/base");
+            XmlNode node = doc.SelectSingleNode("/amon/card/base");
             if (node != null)
             {
                 w = ReadInt(node, "width", w);
@@ -273,7 +273,7 @@ namespace Me.Amon.Uc
 
             if (CharUtil.IsValidate(p))
             {
-                Image img = BeanUtil.ReadImage(p, null);
+                Image img = BeanUtil.ReadImage("Card", p, null);
                 if (img != null)
                 {
                     if ("stretch" == s)
@@ -313,7 +313,7 @@ namespace Me.Amon.Uc
             }
 
             string text;
-            XmlNodeList list = doc.SelectNodes("/magicpwd/card/draw");
+            XmlNodeList list = doc.SelectNodes("/amon/card/draw");
             if (list != null)
             {
                 for (int i = 0, j = list.Count; i < j; i += 1)
@@ -362,8 +362,8 @@ namespace Me.Amon.Uc
                 }
             }
 
-            //AAtt item = _SafeModel.GetAtt(AAtt.PWDS_HEAD_META);
-            //dst = Path.Combine(dst, item.Name + ".png");
+            AAtt item = _SafeModel.GetAtt(AAtt.PWDS_HEAD_META);
+            dst = Path.Combine(dst, item.Name + ".png");
             dst = Path.Combine(dst, "a.png");
             image.Save(dst, ImageFormat.Png);
 
@@ -401,7 +401,7 @@ namespace Me.Amon.Uc
                 return;
             }
 
-            Image img = BeanUtil.ReadImage(text, null);
+            Image img = BeanUtil.ReadImage("Card", text, null);
             if (img != null)
             {
                 int x = ReadInt(node, "x", 0);

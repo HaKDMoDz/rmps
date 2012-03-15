@@ -6,6 +6,8 @@ using System.Windows.Forms;
 using ICSharpCode.SharpZipLib.Checksums;
 using ICSharpCode.SharpZipLib.Zip;
 using Me.Amon.Uc;
+using System.Text.RegularExpressions;
+using System.Net;
 
 namespace Me.Amon.Util
 {
@@ -108,13 +110,66 @@ namespace Me.Amon.Util
 
         public static Image ReadImage(string file, Image defImg)
         {
-            if (!File.Exists(file))
+            Stream stream;
+            if (Regex.IsMatch(file, "^[a-zA-z]{2,}:/{2,3}[^\\s]+"))
+            {
+                stream = WebRequest.Create(file).GetRequestStream();
+            }
+            else if (File.Exists(file))
+            {
+                stream = File.OpenRead(file);
+            }
+            else
             {
                 return defImg;
             }
-            using (Stream stream = File.OpenRead(file))
+
+            try
             {
-                return Image.FromStream(stream);
+                Image img = Image.FromStream(stream);
+                stream.Close();
+                return img;
+            }
+            catch (Exception exp)
+            {
+                return defImg;
+            }
+        }
+
+        public static Image ReadImage(string path, string file, Image defImg)
+        {
+            Stream stream;
+            if (Regex.IsMatch(file, "^[a-zA-z]{2,}:/{2,3}[^\\s]+"))
+            {
+                stream = WebRequest.Create(file).GetRequestStream();
+            }
+            else
+            {
+                if (!Path.IsPathRooted(file))
+                {
+                    file = Path.Combine(path, file);
+                }
+
+                if (!File.Exists(file))
+                {
+                    return defImg;
+                }
+
+                if (Regex.IsMatch(file, "[\\w]"))
+                {
+                }
+                stream = File.OpenRead(file);
+            }
+
+            try
+            {
+                Image img = Image.FromStream(stream);
+                stream.Close();
+                return img;
+            }
+            catch (Exception exp)
+            {
+                return defImg;
             }
         }
 

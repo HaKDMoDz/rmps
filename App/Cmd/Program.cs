@@ -12,6 +12,8 @@ namespace Cmd
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(Path.Combine(@"F:\App\Cmd\bin\Debug", "Cmd.pdb"));
+            Console.ReadLine();
         }
         private static void cc()
         {

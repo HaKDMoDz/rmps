@@ -292,42 +292,65 @@ namespace Me.Amon.Pwd.Wiz
 
                 XmlDocument doc = new XmlDocument();
                 ToolStripMenuItem item;
-                foreach (string cardFile in Directory.GetFiles("card", "*.amc"))
+                foreach (string cardFile in Directory.GetFiles("card", "*.acxml"))
                 {
                     try
                     {
                         doc.Load(cardFile);
+                        EventHandler htmHandler = new EventHandler(HtmItem_Click);
+                        EventHandler txtHandler = new EventHandler(TxtItem_Click);
+                        EventHandler svgHandler = new EventHandler(SvgItem_Click);
+                        EventHandler vcfHandler = new EventHandler(VcfItem_Click);
+                        EventHandler pngHandler = new EventHandler(PngItem_Click);
+                        EventHandler qrcHandler = new EventHandler(QrcItem_Click);
 
-                        XmlNode name = doc.SelectSingleNode("/magicpwd/base/name");
+                        XmlNode name = doc.SelectSingleNode("/amon/base/name");
                         item = new ToolStripMenuItem();
-                        //item.addActionListener(al_Listener);
                         item.Text = (name != null ? name.InnerText : Path.GetFileName(cardFile));
 
-                        XmlNode type = doc.SelectSingleNode("/magicpwd/base/type");
+                        XmlNode type = doc.SelectSingleNode("/amon/base/type");
                         if (type != null)
                         {
                             string text = (type.InnerText + "").Trim().ToLower();
                             if ("htm" == text)
                             {
                                 item.Tag = "htm/" + cardFile;
+                                item.Click += htmHandler;
                                 MuHtmMenu.DropDownItems.Add(item);
                                 continue;
                             }
                             if ("txt" == text)
                             {
                                 item.Tag = "txt/" + cardFile;
+                                item.Click += txtHandler;
                                 MuTxtMenu.DropDownItems.Add(item);
                                 continue;
                             }
                             if ("png" == text)
                             {
                                 item.Tag = "png/" + cardFile;
+                                item.Click += pngHandler;
                                 MuPngMenu.DropDownItems.Add(item);
                                 continue;
                             }
                             if ("svg" == text)
                             {
                                 item.Tag = "svg/" + cardFile;
+                                item.Click += svgHandler;
+                                MuSvgMenu.DropDownItems.Add(item);
+                                continue;
+                            }
+                            if ("vcf" == text)
+                            {
+                                item.Tag = "svg/" + cardFile;
+                                item.Click += vcfHandler;
+                                MuSvgMenu.DropDownItems.Add(item);
+                                continue;
+                            }
+                            if ("qrc" == text)
+                            {
+                                item.Tag = "svg/" + cardFile;
+                                item.Click += qrcHandler;
                                 MuSvgMenu.DropDownItems.Add(item);
                                 continue;
                             }
@@ -346,6 +369,30 @@ namespace Me.Amon.Pwd.Wiz
             PmCardMenu.Show(null, 0, 0);
 
             processing = false;
+        }
+
+        private void HtmItem_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void TxtItem_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void SvgItem_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void VcfItem_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void PngItem_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void QrcItem_Click(object sender, EventArgs e)
+        {
         }
 
         private void cardItemActionPerformed()
@@ -380,19 +427,41 @@ namespace Me.Amon.Pwd.Wiz
                 return;
             }
 
-            SaveFileDialog fd = new SaveFileDialog();
+            FolderBrowserDialog fd = new FolderBrowserDialog();
             if (DialogResult.OK != fd.ShowDialog())
             {
                 return;
             }
 
-            string dst = fd.FileName;
+            string dst = fd.SelectedPath;
             if (!CharUtil.IsValidate(dst))
             {
                 Main.ShowAlert("您选择的目录不存在！");
                 return;
             }
 
+            Card card = new Card(_SafeModel);
+            switch (key)
+            {
+                case "htm":
+                    card.ExportHtm(src, dst);
+                    break;
+                case "txt":
+                    card.ExportTxt(src, dst);
+                    break;
+                case "png":
+                    card.ExportPng(src, dst);
+                    break;
+                case "svg":
+                    card.ExportSvg(src, dst);
+                    break;
+                case "vcf":
+                    card.ExportVcf(src, dst);
+                    break;
+                default:
+                    card.ExportAll(src, dst);
+                    break;
+            }
             //mainPtn.exportCard(srcFile, dstFile, key);
         }
     }
