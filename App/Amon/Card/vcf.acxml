@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<amon>
+    <base>
+        <name>电子名片</name>
+        <type>vcf</type>
+    </base>
+    <card>
+        <template-uri>card/amon.vcf</template-uri>
+    </card>
+</amon>

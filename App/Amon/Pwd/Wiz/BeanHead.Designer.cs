@@ -75,7 +75,7 @@
             // 
             this.TbName.Location = new System.Drawing.Point(63, 29);
             this.TbName.Name = "TbName";
-            this.TbName.Size = new System.Drawing.Size(100, 21);
+            this.TbName.Size = new System.Drawing.Size(120, 21);
             this.TbName.TabIndex = 3;
             // 
             // LbMeta
@@ -131,7 +131,7 @@
             // 
             this.TbHint.Location = new System.Drawing.Point(63, 146);
             this.TbHint.Name = "TbHint";
-            this.TbHint.Size = new System.Drawing.Size(100, 21);
+            this.TbHint.Size = new System.Drawing.Size(120, 21);
             this.TbHint.TabIndex = 9;
             // 
             // LbMemo

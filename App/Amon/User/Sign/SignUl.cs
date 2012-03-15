@@ -186,6 +186,7 @@ namespace Me.Amon.User.Sign
                     return;
                 }
             }
+            TbPath.Text = path;
         }
         #endregion
 

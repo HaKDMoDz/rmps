@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml;
 using Me.Amon.Bean;
 using Me.Amon.Bean.Att;
 using Me.Amon.Event;
@@ -233,6 +234,7 @@ namespace Me.Amon.Pwd.Wiz
         }
         #endregion
 
+        #region 私有函数
         private void ChangeImgByKey(Bean.Ico ico)
         {
             _AIco = ico;
@@ -246,6 +248,152 @@ namespace Me.Amon.Pwd.Wiz
                 path = Path.Combine(_DataModel.KeyDir, ico.File + IEnv.IMG_KEY_EDIT_EXT);
             }
             PbLogo.Image = BeanUtil.ReadImage(path, BeanUtil.NaN16);
+        }
+        #endregion
+
+        private bool processing;
+        private bool NeedDo;
+        private ContextMenuStrip PmCardMenu;
+        private ToolStripMenuItem MuHtmMenu;
+        private ToolStripMenuItem MuTxtMenu;
+        private ToolStripMenuItem MuPngMenu;
+        private ToolStripMenuItem MuSvgMenu;
+        private ToolStripMenuItem MuVcfMenu;
+
+        private void dd()
+        {
+            if (processing)
+            {
+                return;
+            }
+
+            processing = true;
+            if (NeedDo)
+            {
+                //fileTM = new FileTM("card", Pattern.compile("[^.]+[.]amc$", Pattern.CASE_INSENSITIVE), false);
+
+                PmCardMenu = new ContextMenuStrip();
+                MuHtmMenu = new ToolStripMenuItem();
+                MuHtmMenu.Text = "HTM";
+                MuTxtMenu = new ToolStripMenuItem();
+                MuTxtMenu.Text = "TXT";
+                MuPngMenu = new ToolStripMenuItem();
+                MuPngMenu.Text = "PNG";
+                MuSvgMenu = new ToolStripMenuItem();
+                MuSvgMenu.Text = "SVG";
+            }
+
+            if (NeedDo)
+            {
+                MuHtmMenu.DropDownItems.Clear();
+                MuTxtMenu.DropDownItems.Clear();
+                MuPngMenu.DropDownItems.Clear();
+                MuSvgMenu.DropDownItems.Clear();
+
+                XmlDocument doc = new XmlDocument();
+                ToolStripMenuItem item;
+                foreach (string cardFile in Directory.GetFiles("card", "*.amc"))
+                {
+                    try
+                    {
+                        doc.Load(cardFile);
+
+                        XmlNode name = doc.SelectSingleNode("/magicpwd/base/name");
+                        item = new ToolStripMenuItem();
+                        //item.addActionListener(al_Listener);
+                        item.Text = (name != null ? name.InnerText : Path.GetFileName(cardFile));
+
+                        XmlNode type = doc.SelectSingleNode("/magicpwd/base/type");
+                        if (type != null)
+                        {
+                            string text = (type.InnerText + "").Trim().ToLower();
+                            if ("htm" == text)
+                            {
+                                item.Tag = "htm/" + cardFile;
+                                MuHtmMenu.DropDownItems.Add(item);
+                                continue;
+                            }
+                            if ("txt" == text)
+                            {
+                                item.Tag = "txt/" + cardFile;
+                                MuTxtMenu.DropDownItems.Add(item);
+                                continue;
+                            }
+                            if ("png" == text)
+                            {
+                                item.Tag = "png/" + cardFile;
+                                MuPngMenu.DropDownItems.Add(item);
+                                continue;
+                            }
+                            if ("svg" == text)
+                            {
+                                item.Tag = "svg/" + cardFile;
+                                MuSvgMenu.DropDownItems.Add(item);
+                                continue;
+                            }
+                        }
+                        item.Tag = "all/" + cardFile;
+                        PmCardMenu.Items.Add(item);
+                    }
+                    catch (Exception exp)
+                    {
+                        processing = false;
+                        Main.ShowError(exp);
+                        return;
+                    }
+                }
+            }
+            PmCardMenu.Show(null, 0, 0);
+
+            processing = false;
+        }
+
+        private void cardItemActionPerformed()
+        {
+            ToolStripMenuItem item = null;
+            if (item == null)
+            {
+                return;
+            }
+
+            string command = item.Tag as string;
+            if (!CharUtil.IsValidate(command))
+            {
+                return;
+            }
+
+            int dot = command.IndexOf('/');
+            if (dot < 0)
+            {
+                return;
+            }
+
+            string key = command.Substring(0, dot).ToLower();
+            string src = command.Substring(dot + 1);
+            if (!CharUtil.IsValidate(key) || !CharUtil.IsValidate(src))
+            {
+                return;
+            }
+            if (!File.Exists(src))
+            {
+                Main.ShowAlert(string.Format("无法读取卡片模板文件：{0}", src));
+                return;
+            }
+
+            SaveFileDialog fd = new SaveFileDialog();
+            if (DialogResult.OK != fd.ShowDialog())
+            {
+                return;
+            }
+
+            string dst = fd.FileName;
+            if (!CharUtil.IsValidate(dst))
+            {
+                Main.ShowAlert("您选择的目录不存在！");
+                return;
+            }
+
+            //mainPtn.exportCard(srcFile, dstFile, key);
         }
     }
 }
