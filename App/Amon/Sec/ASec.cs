@@ -3,15 +3,15 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
+using Me.Amon.Bean;
 using Me.Amon.Model;
-using Me.Amon.Sec.Uc;
-using Me.Amon.Sec.Uw;
+using Me.Amon.Sec.Pro.Uc;
+using Me.Amon.Sec.Pro.Uw;
 using Me.Amon.Uc;
+using Me.Amon.Util;
 using Me.Amon.Uw;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Paddings;
-using Me.Amon.Util;
-using Me.Amon.Bean;
 
 namespace Me.Amon.Sec
 {
@@ -53,7 +53,7 @@ namespace Me.Amon.Sec
             // 
             // UcDo
             // 
-            _UcDo = new Me.Amon.Sec.Uc.Do(this);
+            _UcDo = new Me.Amon.Sec.Pro.Uc.Do(this);
             _UcDo.Init();
             _UcDo.Location = new System.Drawing.Point(258, 155);
             _UcDo.Name = "UcDo";
@@ -64,7 +64,7 @@ namespace Me.Amon.Sec
             // 
             // UcDi
             // 
-            _UcDi = new Me.Amon.Sec.Uc.Di(this);
+            _UcDi = new Me.Amon.Sec.Pro.Uc.Di(this);
             _UcDi.Init();
             _UcDi.Location = new System.Drawing.Point(12, 155);
             _UcDi.Name = "UcDi";
@@ -75,7 +75,7 @@ namespace Me.Amon.Sec
             // 
             // UcUk
             // 
-            _UcUk = new Me.Amon.Sec.Uc.Uk(this);
+            _UcUk = new Me.Amon.Sec.Pro.Uc.Uk(this);
             _UcUk.Init();
             _UcUk.Location = new System.Drawing.Point(258, 39);
             _UcUk.Name = "UcUk";
@@ -86,7 +86,7 @@ namespace Me.Amon.Sec
             // 
             // UcCm
             // 
-            _UcCm = new Me.Amon.Sec.Uc.Cm(this);
+            _UcCm = new Me.Amon.Sec.Pro.Uc.Cm(this);
             _UcCm.Init();
             _UcCm.Location = new System.Drawing.Point(12, 39);
             _UcCm.Name = "UcCm";

@@ -338,7 +338,7 @@ namespace Me.Amon.User.Sign
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
             client.Encoding = Encoding.UTF8;
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(InitCat_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=cat&c=");
+            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=cat&c=" + _UserModel.Code);
         }
 
         private void InitCat_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -362,14 +362,22 @@ namespace Me.Amon.User.Sign
                 }
 
                 Cat cat = new Cat();
-                cat.FromXml(null);
+                cat.UserCode = _UserModel.Code;
+                while (reader.ReadToFollowing("Cat"))
+                {
+                    if (!cat.FromXml(reader))
+                    {
+                        continue;
+                    }
+                    cat.Save(_UserModel.DBAccess, false);
+                }
             }
 
             WebClient client = new WebClient();
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
             client.Encoding = Encoding.UTF8;
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(InitLib_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=lib&c=");
+            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=lib&c=" + _UserModel.Code);
         }
 
         private void InitLib_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -393,14 +401,28 @@ namespace Me.Amon.User.Sign
                 }
 
                 LibHeader header = new LibHeader();
-                header.FromXml(reader);
+                header.Order = 0;
+                header.UserCode = _UserModel.Code;
+                while (reader.ReadToFollowing("Lib"))
+                {
+                    if (!header.FromXml(reader))
+                    {
+                        continue;
+                    }
+                    header.Save(_UserModel.DBAccess, false);
+                    foreach (LibDetail detail in header.Details)
+                    {
+                        detail.Save(_UserModel.DBAccess, false);
+                    }
+                    header.Order += 1;
+                }
             }
 
             WebClient client = new WebClient();
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
             client.Encoding = Encoding.UTF8;
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(InitUdc_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=lib&c=");
+            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=udc&c=" + _UserModel.Code);
         }
 
         private void InitUdc_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -424,40 +446,18 @@ namespace Me.Amon.User.Sign
                 }
 
                 Udc udc = new Udc();
-                udc.FromXml(reader);
-            }
-
-            WebClient client = new WebClient();
-            client.Headers["Content-type"] = "application/x-www-form-urlencoded";
-            client.Encoding = Encoding.UTF8;
-            client.UploadStringCompleted += new UploadStringCompletedEventHandler(InitKey_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(IEnv.SERVER_PATH), "POST", "&o=lib&c=");
-        }
-
-        private void InitKey_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
-        {
-            if (e.Error != null)
-            {
-                _SignAc.HideWaiting();
-                _SignAc.ShowAlert(e.Error.Message);
-                return;
-            }
-
-            string xml = e.Result;
-            using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
-            {
-                if (xml.IndexOf("<Error>") > 0)
+                udc.UserCode = _UserModel.Code;
+                while (reader.ReadToFollowing("Udc"))
                 {
-                    _SignAc.HideWaiting();
-                    reader.ReadToFollowing("Error");
-                    _SignAc.ShowAlert(reader.ReadElementContentAsString());
-                    return;
+                    if (!udc.FromXml(reader))
+                    {
+                        continue;
+                    }
+                    udc.Save(_UserModel.DBAccess, false);
                 }
-
-                Key key = new Key();
-                key.FromXml(reader);
             }
 
+            BeanUtil.UnZip("Amon.dat", _UserModel.Home);
             _SignAc.CallBack(IEnv.IAPP_APWD);
         }
         #endregion

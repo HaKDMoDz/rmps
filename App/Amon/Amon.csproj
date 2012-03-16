@@ -78,13 +78,13 @@
       <HintPath>.\Lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="IconLib">
-      <HintPath>Lib\IconLib.dll</HintPath>
+      <HintPath>.\Lib\IconLib.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>Lib\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>.\Lib\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="MessagingToolkit.Barcode">
-      <HintPath>Lib\MessagingToolkit.Barcode.dll</HintPath>
+      <HintPath>.\Lib\MessagingToolkit.Barcode.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -492,100 +492,100 @@
     <Compile Include="Sec\IData.cs" />
     <Compile Include="Sec\IForm.cs" />
     <Compile Include="Sec\IView.cs" />
-    <Compile Include="Sec\Uc\ACm.cs" />
-    <Compile Include="Sec\Uc\ADi.cs" />
-    <Compile Include="Sec\Uc\ADo.cs" />
-    <Compile Include="Sec\Uc\AUk.cs" />
-    <Compile Include="Sec\Uc\Cm.cs">
+    <Compile Include="Sec\Pro\Uc\ACm.cs" />
+    <Compile Include="Sec\Pro\Uc\ADi.cs" />
+    <Compile Include="Sec\Pro\Uc\ADo.cs" />
+    <Compile Include="Sec\Pro\Uc\AUk.cs" />
+    <Compile Include="Sec\Pro\Uc\Cm.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sec\Uc\Cm.Designer.cs">
+    <Compile Include="Sec\Pro\Uc\Cm.Designer.cs">
       <DependentUpon>Cm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sec\Uc\CmUi\Acrypto.cs" />
-    <Compile Include="Sec\Uc\CmUi\Confuse.cs" />
-    <Compile Include="Sec\Uc\CmUi\Default.cs" />
-    <Compile Include="Sec\Uc\CmUi\Digest.cs" />
-    <Compile Include="Sec\Uc\CmUi\RandKey.cs" />
-    <Compile Include="Sec\Uc\CmUi\Scrypto.cs" />
-    <Compile Include="Sec\Uc\CmUi\Sstream.cs" />
-    <Compile Include="Sec\Uc\CmUi\Txt2Img.cs" />
-    <Compile Include="Sec\Uc\CmUi\Wrapper.cs" />
-    <Compile Include="Sec\Uc\Di.cs">
+    <Compile Include="Sec\Pro\Uc\CmUi\Acrypto.cs" />
+    <Compile Include="Sec\Pro\Uc\CmUi\Confuse.cs" />
+    <Compile Include="Sec\Pro\Uc\CmUi\Default.cs" />
+    <Compile Include="Sec\Pro\Uc\CmUi\Digest.cs" />
+    <Compile Include="Sec\Pro\Uc\CmUi\RandKey.cs" />
+    <Compile Include="Sec\Pro\Uc\CmUi\Scrypto.cs" />
+    <Compile Include="Sec\Pro\Uc\CmUi\Sstream.cs" />
+    <Compile Include="Sec\Pro\Uc\CmUi\Txt2Img.cs" />
+    <Compile Include="Sec\Pro\Uc\CmUi\Wrapper.cs" />
+    <Compile Include="Sec\Pro\Uc\Di.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sec\Uc\Di.Designer.cs">
+    <Compile Include="Sec\Pro\Uc\Di.Designer.cs">
       <DependentUpon>Di.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sec\Uc\DiUi\Acrypto.cs" />
-    <Compile Include="Sec\Uc\DiUi\Confuse.cs" />
-    <Compile Include="Sec\Uc\DiUi\Default.cs" />
-    <Compile Include="Sec\Uc\DiUi\Digest.cs" />
-    <Compile Include="Sec\Uc\DiUi\RandKey.cs" />
-    <Compile Include="Sec\Uc\DiUi\Scrypto.cs" />
-    <Compile Include="Sec\Uc\DiUi\ScryptoDec.cs" />
-    <Compile Include="Sec\Uc\DiUi\ScryptoDef.cs" />
-    <Compile Include="Sec\Uc\DiUi\ScryptoEnc.cs" />
-    <Compile Include="Sec\Uc\DiUi\Sstream.cs" />
-    <Compile Include="Sec\Uc\DiUi\SstreamDec.cs" />
-    <Compile Include="Sec\Uc\DiUi\SstreamDef.cs" />
-    <Compile Include="Sec\Uc\DiUi\SstreamEnc.cs" />
-    <Compile Include="Sec\Uc\DiUi\Txt2Img.cs" />
-    <Compile Include="Sec\Uc\DiUi\Wrapper.cs" />
-    <Compile Include="Sec\Uc\Do.cs">
+    <Compile Include="Sec\Pro\Uc\DiUi\Acrypto.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\Confuse.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\Default.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\Digest.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\RandKey.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\Scrypto.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\ScryptoDec.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\ScryptoDef.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\ScryptoEnc.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\Sstream.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\SstreamDec.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\SstreamDef.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\SstreamEnc.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\Txt2Img.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\Wrapper.cs" />
+    <Compile Include="Sec\Pro\Uc\Do.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sec\Uc\Do.Designer.cs">
+    <Compile Include="Sec\Pro\Uc\Do.Designer.cs">
       <DependentUpon>Do.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sec\Uc\DoUi\Acrypto.cs" />
-    <Compile Include="Sec\Uc\DoUi\Confuse.cs" />
-    <Compile Include="Sec\Uc\DoUi\Default.cs" />
-    <Compile Include="Sec\Uc\DoUi\Digest.cs" />
-    <Compile Include="Sec\Uc\DoUi\RandKey.cs" />
-    <Compile Include="Sec\Uc\DoUi\Scrypto.cs" />
-    <Compile Include="Sec\Uc\DoUi\ScryptoDec.cs" />
-    <Compile Include="Sec\Uc\DoUi\ScryptoDef.cs" />
-    <Compile Include="Sec\Uc\DoUi\ScryptoEnc.cs" />
-    <Compile Include="Sec\Uc\DoUi\Sstream.cs" />
-    <Compile Include="Sec\Uc\DoUi\SstreamDec.cs" />
-    <Compile Include="Sec\Uc\DoUi\SstreamDef.cs" />
-    <Compile Include="Sec\Uc\DoUi\SstreamEnc.cs" />
-    <Compile Include="Sec\Uc\DoUi\Txt2Img.cs" />
-    <Compile Include="Sec\Uc\DoUi\Wrapper.cs" />
-    <Compile Include="Sec\Uc\Uk.cs">
+    <Compile Include="Sec\Pro\Uc\DoUi\Acrypto.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\Confuse.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\Default.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\Digest.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\RandKey.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\Scrypto.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\ScryptoDec.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\ScryptoDef.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\ScryptoEnc.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\Sstream.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\SstreamDec.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\SstreamDef.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\SstreamEnc.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\Txt2Img.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\Wrapper.cs" />
+    <Compile Include="Sec\Pro\Uc\Uk.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sec\Uc\Uk.Designer.cs">
+    <Compile Include="Sec\Pro\Uc\Uk.Designer.cs">
       <DependentUpon>Uk.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sec\Uc\UkUi\Acrypto.cs" />
-    <Compile Include="Sec\Uc\UkUi\Confuse.cs" />
-    <Compile Include="Sec\Uc\UkUi\Default.cs" />
-    <Compile Include="Sec\Uc\UkUi\Digest.cs" />
-    <Compile Include="Sec\Uc\UkUi\RandKey.cs" />
-    <Compile Include="Sec\Uc\UkUi\Scrypto.cs" />
-    <Compile Include="Sec\Uc\UkUi\Sstream.cs" />
-    <Compile Include="Sec\Uc\UkUi\Txt2Img.cs" />
-    <Compile Include="Sec\Uc\UkUi\Wrapper.cs" />
-    <Compile Include="Sec\Uw\Edit.cs">
+    <Compile Include="Sec\Pro\Uc\UkUi\Acrypto.cs" />
+    <Compile Include="Sec\Pro\Uc\UkUi\Confuse.cs" />
+    <Compile Include="Sec\Pro\Uc\UkUi\Default.cs" />
+    <Compile Include="Sec\Pro\Uc\UkUi\Digest.cs" />
+    <Compile Include="Sec\Pro\Uc\UkUi\RandKey.cs" />
+    <Compile Include="Sec\Pro\Uc\UkUi\Scrypto.cs" />
+    <Compile Include="Sec\Pro\Uc\UkUi\Sstream.cs" />
+    <Compile Include="Sec\Pro\Uc\UkUi\Txt2Img.cs" />
+    <Compile Include="Sec\Pro\Uc\UkUi\Wrapper.cs" />
+    <Compile Include="Sec\Pro\Uw\Edit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sec\Uw\Edit.Designer.cs">
+    <Compile Include="Sec\Pro\Uw\Edit.Designer.cs">
       <DependentUpon>Edit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sec\Uw\Open.cs" />
-    <Compile Include="Sec\Uw\Pass.cs">
+    <Compile Include="Sec\Pro\Uw\Open.cs" />
+    <Compile Include="Sec\Pro\Uw\Pass.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sec\Uw\Pass.Designer.cs">
+    <Compile Include="Sec\Pro\Uw\Pass.Designer.cs">
       <DependentUpon>Pass.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sec\Uw\Save.cs" />
-    <Compile Include="Sec\Uw\Text.cs">
+    <Compile Include="Sec\Pro\Uw\Save.cs" />
+    <Compile Include="Sec\Pro\Uw\Text.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sec\Uw\Text.Designer.cs">
+    <Compile Include="Sec\Pro\Uw\Text.Designer.cs">
       <DependentUpon>Text.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
@@ -915,25 +915,25 @@
     <EmbeddedResource Include="Sec\ASec.resx">
       <DependentUpon>ASec.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sec\Uc\Cm.resx">
+    <EmbeddedResource Include="Sec\Pro\Uc\Cm.resx">
       <DependentUpon>Cm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sec\Uc\Di.resx">
+    <EmbeddedResource Include="Sec\Pro\Uc\Di.resx">
       <DependentUpon>Di.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sec\Uc\Do.resx">
+    <EmbeddedResource Include="Sec\Pro\Uc\Do.resx">
       <DependentUpon>Do.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sec\Uc\Uk.resx">
+    <EmbeddedResource Include="Sec\Pro\Uc\Uk.resx">
       <DependentUpon>Uk.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sec\Uw\Edit.resx">
+    <EmbeddedResource Include="Sec\Pro\Uw\Edit.resx">
       <DependentUpon>Edit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sec\Uw\Pass.resx">
+    <EmbeddedResource Include="Sec\Pro\Uw\Pass.resx">
       <DependentUpon>Pass.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sec\Uw\Text.resx">
+    <EmbeddedResource Include="Sec\Pro\Uw\Text.resx">
       <DependentUpon>Text.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\Auth\AuthLk.resx">
@@ -1024,20 +1024,22 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Amon.dat" />
     <Content Include="Logo\logo.ico" />
-    <None Include="Resources\Info.png" />
     <None Include="Resources\Alert.png" />
     <None Include="Resources\Error.png" />
+    <None Include="Resources\Guid.png" />
     <None Include="Resources\Hint.png" />
+    <None Include="Resources\Info.png" />
     <None Include="Resources\Loading.gif" />
     <None Include="Resources\Logo.png" />
-    <None Include="Resources\Waiting.gif" />
-    <None Include="Resources\Pupil.png" />
-    <None Include="Resources\Guid.png" />
     <None Include="Resources\Menu.png" />
-    <None Include="Amon.dat" />
+    <None Include="Resources\Pupil.png" />
+    <None Include="Resources\Waiting.gif" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Sec\Wiz\" />
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
       <Visible>False</Visible>

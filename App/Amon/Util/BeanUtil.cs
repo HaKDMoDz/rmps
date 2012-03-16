@@ -215,7 +215,7 @@ namespace Me.Amon.Util
         {
             if (srcBase == null)
             {
-                srcBase = "";
+                srcBase = "" + Path.DirectorySeparatorChar;
             }
             if (srcBase[srcBase.Length - 1] != Path.DirectorySeparatorChar)
             {

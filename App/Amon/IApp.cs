@@ -16,6 +16,8 @@ namespace Me.Amon
 
         bool IsDisposed { get; }
 
+        void Dispose();
+
         void BringToFront();
 
         bool WillExit();

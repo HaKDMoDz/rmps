@@ -256,14 +256,20 @@ namespace Me.Amon.User.Sign
                 }
 
                 LibHeader header = new LibHeader();
+                header.Order = 0;
                 header.UserCode = _UserModel.Code;
-                while (reader.ReadToFollowing("Libh"))
+                while (reader.ReadToFollowing("Lib"))
                 {
                     if (!header.FromXml(reader))
                     {
                         continue;
                     }
                     header.Save(_UserModel.DBAccess, false);
+                    foreach (LibDetail detail in header.Details)
+                    {
+                        detail.Save(_UserModel.DBAccess, false);
+                    }
+                    header.Order += 1;
                 }
             }
 
