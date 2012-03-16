@@ -100,7 +100,7 @@ namespace Me.Amon.User
             }
 
             UserModel userModel = UserModel.Current(Session);
-            if (0 == userModel.WpSignUp(userName, userPwds, userMail))
+            if (IMsg.MSG_SIGNUP_SUCCESS == userModel.WpSignUp(userName, userPwds, userMail))
             {
                 tr_RegData1.Visible = false;
                 tr_RegData2.Visible = false;

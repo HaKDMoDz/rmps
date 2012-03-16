@@ -669,6 +669,76 @@ namespace Me.Amon.Model
         }
         #endregion
 
+        public void InitUserData()
+        {
+            #region 数据初始化
+            DBAccess dba = new DBAccess();
+            dba.AddTable(DBConst.ACAT0200);
+            dba.AddWhere(DBConst.ACAT0202, Code);
+            dba.AddDeleteBatch();
+
+            dba.ReInit();
+            dba.AddParam(DBConst.ACAT0201, DBConst.ACAT0201, false);
+            dba.AddParam(DBConst.ACAT0202, Code);
+            dba.AddParam(DBConst.ACAT0203, DBConst.ACAT0203, false);
+            dba.AddParam(DBConst.ACAT0204, DBConst.ACAT0204, false);
+            dba.AddParam(DBConst.ACAT0205, DBConst.ACAT0205, false);
+            dba.AddParam(DBConst.ACAT0206, DBConst.ACAT0206, false);
+            dba.AddParam(DBConst.ACAT0207, DBConst.ACAT0207, false);
+            dba.AddParam(DBConst.ACAT0208, DBConst.ACAT0208, false);
+            dba.AddParam(DBConst.ACAT0209, DBConst.ACAT0209, false);
+            dba.AddParam(DBConst.ACAT020A, DBConst.ACAT020A, false);
+            dba.AddParam(DBConst.ACAT020B, DBConst.ACAT020B, false);
+            dba.AddParam(DBConst.ACAT020C, 1);
+            dba.AddParam(DBConst.ACAT020D, 1);
+            dba.AddWhere(DBConst.ACAT0202, IUser.AMON_CODE);
+            dba.AddBackupBatch(DBConst.ACAT0200, DBConst.ACAT0200);
+
+            dba.ReInit();
+            dba.AddTable(DBConst.APWD0300);
+            dba.AddWhere(DBConst.APWD0303, Code);
+            dba.AddDeleteBatch();
+
+            dba.ReInit();
+            dba.AddParam(DBConst.APWD0301, DBConst.APWD0301, false);
+            dba.AddParam(DBConst.APWD0302, DBConst.APWD0302, false);
+            dba.AddParam(DBConst.APWD0303, Code);
+            dba.AddParam(DBConst.APWD0304, DBConst.APWD0304, false);
+            dba.AddParam(DBConst.APWD0305, DBConst.APWD0305, false);
+            dba.AddParam(DBConst.APWD0306, DBConst.APWD0306, false);
+            dba.AddParam(DBConst.APWD0307, DBConst.APWD0307, false);
+            dba.AddParam(DBConst.APWD0308, DBConst.APWD0308, false);
+            dba.AddParam(DBConst.APWD0309, DBConst.APWD0309, false);
+            dba.AddParam(DBConst.APWD030A, DBConst.APWD030A, false);
+            dba.AddParam(DBConst.APWD030B, 1);
+            dba.AddParam(DBConst.APWD030C, 1);
+            dba.AddWhere(DBConst.APWD0303, IUser.AMON_CODE);
+            dba.AddBackupBatch(DBConst.APWD0300, DBConst.APWD0300);
+
+            dba.ReInit();
+            dba.AddTable(DBConst.AUDC0100);
+            dba.AddWhere(DBConst.AUDC0102, Code);
+            dba.AddDeleteBatch();
+
+            dba.ReInit();
+            dba.AddParam(DBConst.AUDC0101, DBConst.AUDC0101, false);
+            dba.AddParam(DBConst.AUDC0102, Code);
+            dba.AddParam(DBConst.AUDC0103, DBConst.AUDC0103, false);
+            dba.AddParam(DBConst.AUDC0104, DBConst.AUDC0104, false);
+            dba.AddParam(DBConst.AUDC0105, DBConst.AUDC0105, false);
+            dba.AddParam(DBConst.AUDC0106, DBConst.AUDC0106, false);
+            dba.AddParam(DBConst.AUDC0107, DBConst.AUDC0107, false);
+            dba.AddParam(DBConst.AUDC0108, DBConst.AUDC0108, false);
+            dba.AddParam(DBConst.AUDC0109, DBConst.AUDC0109, false);
+            dba.AddParam(DBConst.AUDC010A, 1);
+            dba.AddParam(DBConst.AUDC010B, 1);
+            dba.AddWhere(DBConst.AUDC0102, IUser.AMON_CODE);
+            dba.AddBackupBatch(DBConst.AUDC0100, DBConst.AUDC0100);
+
+            dba.ExecuteBatch();
+            #endregion
+        }
+
         #region 数据安全
         public string Digest(string name, string pass, byte[] data)
         {

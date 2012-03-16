@@ -62,7 +62,6 @@
     <Content Include="c.aspx" />
     <Content Include="c.html" />
     <Content Include="ClientBin\Amon.xap" />
-    <Content Include="down\Index.aspx" />
     <Content Include="Images\1.png" />
     <Content Include="Images\2.png" />
     <Content Include="Index.aspx" />
@@ -248,13 +247,6 @@
     </Compile>
     <Compile Include="Da\DBAccess.cs" />
     <Compile Include="Da\DBConst.cs" />
-    <Compile Include="down\Index.aspx.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="down\Index.aspx.designer.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -352,6 +344,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="blog\" />
+    <Folder Include="down\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Amon.Master" />

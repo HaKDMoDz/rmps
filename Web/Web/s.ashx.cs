@@ -385,6 +385,8 @@ namespace Me.Amon
                 SendError(writer, "系统处理异常，请稍后重试！");
                 return;
             }
+            
+            model.InitUserData();
 
             writer.WriteStartElement("User");
             model.WsSignUp(name, pass, writer);
