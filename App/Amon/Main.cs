@@ -279,7 +279,6 @@ namespace Me.Amon
             Settings.Default.LocX = Location.X;
             Settings.Default.LocY = Location.Y;
             Settings.Default.Save();
-            //HOOK.StopHook();
         }
 
         private void NiTray_DoubleClick(object sender, EventArgs e)
@@ -358,22 +357,7 @@ namespace Me.Amon
 
         private void MgSignOf_Click(object sender, EventArgs e)
         {
-            if (_IApp != null)
-            {
-                if (!_IApp.WillExit())
-                {
-                    return;
-                }
-                _IApp.Visible = false;
-            }
-
-            _UserModel.CaSignOf();
-
-            MgSignIn.Visible = true;
-            MtSignIn.Visible = true;
-
-            MgSignOf.Visible = false;
-            MtSignOf.Visible = false;
+            SignOf();
         }
 
         private void MtSignFp_Click(object sender, EventArgs e)
@@ -454,13 +438,7 @@ namespace Me.Amon
 
         private void MtSignOf_Click(object sender, EventArgs e)
         {
-            _UserModel.CaSignOf();
-
-            MgSignIn.Visible = true;
-            MtSignIn.Visible = true;
-
-            MgSignOf.Visible = false;
-            MtSignOf.Visible = false;
+            SignOf();
         }
 
         private void MgSignFp_Click(object sender, EventArgs e)
@@ -548,6 +526,30 @@ namespace Me.Amon
             _SignAc.CallBackHandler = handler;
             _SignAc.ShowView(signAc);
             _SignAc.Show();
+        }
+
+        private void SignOf()
+        {
+            if (_IApp != null)
+            {
+                if (!_IApp.WillExit())
+                {
+                    return;
+                }
+                _IApp.SaveData();
+                _IApp.Dispose();
+            }
+
+            _UserModel.CaSignOf();
+
+            MgSignUp.Visible = true;
+            MtSignUp.Visible = true;
+
+            MgSignIn.Visible = true;
+            MtSignIn.Visible = true;
+
+            MgSignOf.Visible = false;
+            MtSignOf.Visible = false;
         }
 
         private SignRc _SignRc;
