@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
+using Me.Amon.Bar;
 using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Properties;
@@ -25,6 +26,7 @@ namespace Me.Amon
         private UserModel _UserModel;
         private APwd _APwd;
         private ASec _ASec;
+        private ABar _ABar;
 
         #region 构造函数
         public Main()
@@ -333,6 +335,22 @@ namespace Me.Amon
             }
         }
 
+        private void MgABar_Click(object sender, EventArgs e)
+        {
+            if (_IApp == null || !_IApp.Visible)
+            {
+                CheckUser(new AmonHandler<int>(ShowABar));
+                return;
+            }
+
+            if (_IApp.AppId != IEnv.IAPP_ABAR)
+            {
+                _IApp.Visible = false;
+                ShowABar(IEnv.IAPP_ABAR);
+                return;
+            }
+        }
+
         private void MgSignOl_Click(object sender, EventArgs e)
         {
             //SignAc(ESignAc.SignOl, new AmonHandler<int>(DoSignOl));
@@ -410,6 +428,22 @@ namespace Me.Amon
             {
                 _IApp.Visible = false;
                 ShowASec(IEnv.IAPP_ASEC);
+                return;
+            }
+        }
+
+        private void MtABar_Click(object sender, EventArgs e)
+        {
+            if (_IApp == null || !_IApp.Visible)
+            {
+                CheckUser(new AmonHandler<int>(ShowABar));
+                return;
+            }
+
+            if (_IApp.AppId != IEnv.IAPP_ABAR)
+            {
+                _IApp.Visible = false;
+                ShowABar(IEnv.IAPP_ABAR);
                 return;
             }
         }
@@ -623,6 +657,18 @@ namespace Me.Amon
             _IApp = _ASec;
 
             _ASec.Show();
+        }
+
+        private void ShowABar(int view)
+        {
+            if (_ABar == null || _ABar.IsDisposed)
+            {
+                _ABar = new ABar(_UserModel);
+                _ABar.InitOnce();
+            }
+            _IApp = _ABar;
+
+            _ABar.Show();
         }
         #endregion
 

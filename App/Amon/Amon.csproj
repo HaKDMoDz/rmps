@@ -97,6 +97,61 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bar\ABar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bar\ABar.Designer.cs">
+      <DependentUpon>ABar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bar\Opt\Email.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\Opt\Email.Designer.cs">
+      <DependentUpon>Email.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bar\IOpt.cs" />
+    <Compile Include="Bar\Opt\Note.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\Opt\Note.Designer.cs">
+      <DependentUpon>Note.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bar\Opt\Sms.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\Opt\Sms.Designer.cs">
+      <DependentUpon>Sms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bar\Opt\Text.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\Opt\Text.Designer.cs">
+      <DependentUpon>Text.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bar\Opt\Url.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\Opt\Url.Designer.cs">
+      <DependentUpon>Url.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bar\UserSet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\UserSet.Designer.cs">
+      <DependentUpon>UserSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bar\UsetDat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\UsetDat.Designer.cs">
+      <DependentUpon>UsetDat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bar\Opt\Vcard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\Opt\Vcard.Designer.cs">
+      <DependentUpon>Vcard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Bean\Att\CallAtt.cs" />
     <Compile Include="Bean\Ico.cs" />
     <Compile Include="Bean\Png.cs" />
@@ -489,7 +544,6 @@
       <DependentUpon>ASec.cs</DependentUpon>
     </Compile>
     <Compile Include="Sec\DataModel.cs" />
-    <Compile Include="Sec\ESec.cs" />
     <Compile Include="Sec\IData.cs" />
     <Compile Include="Sec\ISec.cs" />
     <Compile Include="Sec\Pro\IForm.cs" />
@@ -805,6 +859,30 @@
     <Compile Include="Uw\Waiting.Designer.cs">
       <DependentUpon>Waiting.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Bar\ABar.resx">
+      <DependentUpon>ABar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bar\Opt\Email.resx">
+      <DependentUpon>Email.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bar\Opt\Note.resx">
+      <DependentUpon>Note.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bar\Opt\Sms.resx">
+      <DependentUpon>Sms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bar\Opt\Text.resx">
+      <DependentUpon>Text.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bar\Opt\Url.resx">
+      <DependentUpon>Url.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bar\UserSet.resx">
+      <DependentUpon>UserSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bar\Opt\Vcard.resx">
+      <DependentUpon>Vcard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ico\AIco.resx">
       <DependentUpon>AIco.cs</DependentUpon>
     </EmbeddedResource>

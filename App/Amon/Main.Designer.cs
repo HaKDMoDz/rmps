@@ -66,6 +66,8 @@
             this.MgSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.MgInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.MgExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.MgABar = new System.Windows.Forms.ToolStripMenuItem();
+            this.MtABar = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).BeginInit();
             this.CtMenu.SuspendLayout();
             this.CgMenu.SuspendLayout();
@@ -103,6 +105,7 @@
             this.MtSep0,
             this.MtAPwd,
             this.MtASec,
+            this.MtABar,
             this.MtSep1,
             this.MtSignUp,
             this.MtSignIn,
@@ -228,6 +231,7 @@
             this.MgSep0,
             this.MgAPwd,
             this.MgASec,
+            this.MgABar,
             this.MgSep1,
             this.MgSignUp,
             this.MgSignIn,
@@ -237,7 +241,7 @@
             this.MgInfo,
             this.MgExit});
             this.CgMenu.Name = "CmMenu";
-            this.CgMenu.Size = new System.Drawing.Size(164, 242);
+            this.CgMenu.Size = new System.Drawing.Size(164, 286);
             // 
             // MgTopMost
             // 
@@ -354,6 +358,20 @@
             this.MgExit.Text = "退出(&X)";
             this.MgExit.Click += new System.EventHandler(this.MgExit_Click);
             // 
+            // MgABar
+            // 
+            this.MgABar.Name = "MgABar";
+            this.MgABar.Size = new System.Drawing.Size(163, 22);
+            this.MgABar.Text = "二维码(&B)";
+            this.MgABar.Click += new System.EventHandler(this.MgABar_Click);
+            // 
+            // MtABar
+            // 
+            this.MtABar.Name = "MtABar";
+            this.MtABar.Size = new System.Drawing.Size(165, 22);
+            this.MtABar.Text = "二维码(&B)";
+            this.MtABar.Click += new System.EventHandler(this.MtABar_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -419,6 +437,8 @@
         private System.Windows.Forms.ToolStripMenuItem MtSignPc;
         private System.Windows.Forms.ToolStripMenuItem MgInfo;
         private System.Windows.Forms.ToolStripMenuItem MtInfo;
+        private System.Windows.Forms.ToolStripMenuItem MgABar;
+        private System.Windows.Forms.ToolStripMenuItem MtABar;
 
 
     }

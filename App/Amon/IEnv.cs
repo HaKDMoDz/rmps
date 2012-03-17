@@ -55,6 +55,7 @@
         public const int IAPP_NONE = 0;
         public const int IAPP_APWD = 1;
         public const int IAPP_ASEC = 2;
+        public const int IAPP_ABAR = 4;
 
         /// <summary>
         /// 视图类型
