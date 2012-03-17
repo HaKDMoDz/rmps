@@ -63,7 +63,8 @@
         </tr>
         <tr>
             <td align="center" height="120">
-                <a href="User/SignIn.aspx" class="button"><span>登录</span></a> <a href="User/SignUp.aspx" class="button"><span>注册</span></a>
+                <asp:HyperLink ID="HlSignIn" runat="server" NavigateUrl="~/User/SignIn.aspx">登录</asp:HyperLink>
+                <asp:HyperLink ID="HlSignUp" runat="server" NavigateUrl="~/User/SignUp.aspx">注册</asp:HyperLink>
             </td>
         </tr>
     </table>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Amon.Master" AutoEventWireup="true" CodeBehind="SignWs.aspx.cs" Inherits="Me.Amon.User.SignWs" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Amon.Master" AutoEventWireup="true" CodeBehind="SignWs.aspx.cs" Inherits="Me.Amon.User.SignWs" ValidateRequest="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="AmonHead" runat="server">
 </asp:Content>
@@ -47,12 +47,12 @@
                 <table border="0" cellpadding="5" cellspacing="0" width="480" class="TB_DataList_TL">
                     <tr>
                         <th align="left" class="TD_DataHead_TL_L">
-                            恭喜：用户注册成功！
+                            恭喜：密码箱开通成功！
                         </th>
                     </tr>
                     <tr>
                         <td align="left" class="TD_DataItem_TL_L">
-                            请牢记下面的信息数据，并在客户端输入。
+                            请牢记下面的信息数据，并在客户端输入：
                         </td>
                     </tr>
                     <tr>

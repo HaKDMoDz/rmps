@@ -11,19 +11,26 @@ namespace Me.Amon
             if (userModel.Rank < IUser.LEVEL_02)
             {
                 HlSignIn.Visible = true;
+                HlSignUp.Visible = true;
+                LbSignOf.Visible = false;
+
                 LbUser.Visible = false;
-                LbSignIn.Visible = false;
+                HlUser.Visible = false;
+                HlUser.Text = "";
             }
             else
             {
                 HlSignIn.Visible = false;
-                LbSignIn.Visible = true;
+                HlSignUp.Visible = false;
+                LbSignOf.Visible = true;
+
                 LbUser.Visible = true;
-                LbUser.Text = "欢迎您：" + userModel.Name + "！";
+                HlUser.Visible = true;
+                HlUser.Text = userModel.Name;
             }
         }
 
-        protected void LbSignIn_Click(object sender, EventArgs e)
+        protected void LbSignOf_Click(object sender, EventArgs e)
         {
             UserModel userModel = UserModel.Current(Session);
             userModel.WpSignOf();

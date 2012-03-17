@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="AmonHead" runat="server">
 </asp:Content>
 <asp:Content ID="AmonData" ContentPlaceHolderID="AmonView" runat="Server">
-    <table border="0" cellpadding="0" cellspacing="0" id="TB_DATA">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <tr id="TrErrMsg" runat="server">
             <td align="center">
                 <asp:Label ID="LbErrMsg" runat="server" CssClass="TEXT_NOTE1"></asp:Label>

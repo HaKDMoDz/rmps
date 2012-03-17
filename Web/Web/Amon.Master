@@ -30,8 +30,9 @@
                 <td align="right">
                     <asp:HyperLink ID="HlSignIn" runat="server" NavigateUrl="~/User/SignIn.aspx">登录</asp:HyperLink>
                     <asp:HyperLink ID="HlSignUp" runat="server" NavigateUrl="~/User/SignUp.aspx">注册</asp:HyperLink>
-                    <asp:Label ID="LbUser" runat="server"></asp:Label>
-                    <asp:LinkButton ID="LbSignIn" runat="server" OnClick="LbSignIn_Click">注销</asp:LinkButton>
+                    <asp:Label ID="LbUser" runat="server">欢迎您：</asp:Label>
+                    <asp:HyperLink ID="HlUser" runat="server" NavigateUrl="~/User/Index.aspx"></asp:HyperLink>&nbsp;
+                    <asp:LinkButton ID="LbSignOf" runat="server" OnClick="LbSignOf_Click">注销</asp:LinkButton>
                 </td>
             </tr>
         </table>
