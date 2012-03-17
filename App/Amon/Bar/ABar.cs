@@ -4,8 +4,8 @@ using System.Windows.Forms;
 using Me.Amon.Bar.Opt;
 using Me.Amon.Model;
 using Me.Amon.Uc;
-using MessagingToolkit.Barcode;
 using Me.Amon.Util;
+using MessagingToolkit.Barcode;
 
 namespace Me.Amon.Bar
 {
