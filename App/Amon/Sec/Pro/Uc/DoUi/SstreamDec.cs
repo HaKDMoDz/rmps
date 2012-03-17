@@ -6,8 +6,8 @@ namespace Me.Amon.Sec.Pro.Uc.DoUi
 {
     class SstreamDec : Sstream
     {
-        public SstreamDec(ASec asec, Do od)
-            : base(asec, od)
+        public SstreamDec(APro apro, Do od)
+            : base(apro, od)
         {
         }
 

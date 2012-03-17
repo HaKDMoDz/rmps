@@ -4,8 +4,8 @@ namespace Me.Amon.Sec.Pro.Uc.DoUi
 {
     class SstreamDef : Sstream
     {
-        public SstreamDef(ASec asec, Do od)
-            : base(asec, od)
+        public SstreamDef(APro apro, Do od)
+            : base(apro, od)
         {
         }
 

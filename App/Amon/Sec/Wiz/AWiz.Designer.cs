@@ -28,58 +28,90 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.LbOpt = new System.Windows.Forms.Label();
+            this.CbDir = new System.Windows.Forms.ComboBox();
+            this.CbFun = new System.Windows.Forms.ComboBox();
+            this.CbMod = new System.Windows.Forms.ComboBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.cipherFile1 = new Me.Amon.Sec.Wiz.CipherFile();
             this.SuspendLayout();
+            // 
+            // LbOpt
+            // 
+            this.LbOpt.AutoSize = true;
+            this.LbOpt.Location = new System.Drawing.Point(0, 3);
+            this.LbOpt.Name = "LbOpt";
+            this.LbOpt.Size = new System.Drawing.Size(47, 12);
+            this.LbOpt.TabIndex = 0;
+            this.LbOpt.Text = "操作(&T)";
+            // 
+            // CbDir
+            // 
+            this.CbDir.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbDir.FormattingEnabled = true;
+            this.CbDir.Location = new System.Drawing.Point(53, 0);
+            this.CbDir.Name = "CbDir";
+            this.CbDir.Size = new System.Drawing.Size(56, 20);
+            this.CbDir.TabIndex = 1;
+            this.CbDir.SelectedIndexChanged += new System.EventHandler(this.CbDir_SelectedIndexChanged);
+            // 
+            // CbFun
+            // 
+            this.CbFun.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbFun.FormattingEnabled = true;
+            this.CbFun.Location = new System.Drawing.Point(115, 0);
+            this.CbFun.Name = "CbFun";
+            this.CbFun.Size = new System.Drawing.Size(61, 20);
+            this.CbFun.TabIndex = 2;
+            this.CbFun.SelectedIndexChanged += new System.EventHandler(this.CbFun_SelectedIndexChanged);
+            // 
+            // CbMod
+            // 
+            this.CbMod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbMod.FormattingEnabled = true;
+            this.CbMod.Location = new System.Drawing.Point(182, 0);
+            this.CbMod.Name = "CbMod";
+            this.CbMod.Size = new System.Drawing.Size(56, 20);
+            this.CbMod.TabIndex = 3;
+            this.CbMod.SelectedIndexChanged += new System.EventHandler(this.CbMod_SelectedIndexChanged);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(53, 26);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(187, 21);
+            this.textBox1.TabIndex = 5;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 6);
+            this.label1.Location = new System.Drawing.Point(0, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "操作(&T)";
+            this.label1.TabIndex = 4;
+            this.label1.Text = "口令(&K)";
             // 
-            // comboBox1
+            // cipherFile1
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(56, 3);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(61, 20);
-            this.comboBox1.TabIndex = 1;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(123, 3);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(61, 20);
-            this.comboBox2.TabIndex = 2;
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(190, 3);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(61, 20);
-            this.comboBox3.TabIndex = 3;
+            this.cipherFile1.Location = new System.Drawing.Point(0, 53);
+            this.cipherFile1.Name = "cipherFile1";
+            this.cipherFile1.Size = new System.Drawing.Size(240, 183);
+            this.cipherFile1.TabIndex = 6;
             // 
             // AWiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cipherFile1);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.CbMod);
+            this.Controls.Add(this.CbFun);
+            this.Controls.Add(this.CbDir);
+            this.Controls.Add(this.LbOpt);
             this.Name = "AWiz";
-            this.Size = new System.Drawing.Size(266, 270);
+            this.Size = new System.Drawing.Size(240, 236);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -87,9 +119,12 @@
 
         #endregion
 
+        private System.Windows.Forms.Label LbOpt;
+        private System.Windows.Forms.ComboBox CbDir;
+        private System.Windows.Forms.ComboBox CbFun;
+        private System.Windows.Forms.ComboBox CbMod;
+        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private CipherFile cipherFile1;
     }
 }

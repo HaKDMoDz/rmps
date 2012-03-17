@@ -8,8 +8,8 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
 {
     public class RandKey : AUk
     {
-        public RandKey(ASec asec, Uk uk)
-            : base(asec, uk)
+        public RandKey(APro apro, Uk uk)
+            : base(apro, uk)
         {
         }
 

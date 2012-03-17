@@ -489,9 +489,11 @@
       <DependentUpon>ASec.cs</DependentUpon>
     </Compile>
     <Compile Include="Sec\DataModel.cs" />
+    <Compile Include="Sec\ESec.cs" />
     <Compile Include="Sec\IData.cs" />
-    <Compile Include="Sec\IForm.cs" />
-    <Compile Include="Sec\IView.cs" />
+    <Compile Include="Sec\ISec.cs" />
+    <Compile Include="Sec\Pro\IForm.cs" />
+    <Compile Include="Sec\Pro\IView.cs" />
     <Compile Include="Sec\Pro\APro.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -600,12 +602,6 @@
     <Compile Include="Sec\Wiz\AWiz.Designer.cs">
       <DependentUpon>AWiz.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sec\Wiz\Cipher.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Sec\Wiz\Cipher.Designer.cs">
-      <DependentUpon>Cipher.cs</DependentUpon>
-    </Compile>
     <Compile Include="Sec\Wiz\CipherFile.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -617,12 +613,6 @@
     </Compile>
     <Compile Include="Sec\Wiz\CipherText.Designer.cs">
       <DependentUpon>CipherText.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Sec\Wiz\Digest.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Sec\Wiz\Digest.Designer.cs">
-      <DependentUpon>Digest.cs</DependentUpon>
     </Compile>
     <Compile Include="Sec\Wiz\DigestFile.cs">
       <SubType>UserControl</SubType>
@@ -990,17 +980,17 @@
     <EmbeddedResource Include="Sec\Wiz\AWiz.resx">
       <DependentUpon>AWiz.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sec\Wiz\Cipher.resx">
-      <DependentUpon>Cipher.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Sec\Wiz\CipherFile.resx">
       <DependentUpon>CipherFile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sec\Wiz\CipherText.resx">
       <DependentUpon>CipherText.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sec\Wiz\Digest.resx">
-      <DependentUpon>Digest.cs</DependentUpon>
+    <EmbeddedResource Include="Sec\Wiz\DigestFile.resx">
+      <DependentUpon>DigestFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Wiz\DigestText.resx">
+      <DependentUpon>DigestText.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\Auth\AuthLk.resx">
       <DependentUpon>AuthLk.cs</DependentUpon>

@@ -4,8 +4,8 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
 {
     public class Wrapper : AUk
     {
-        public Wrapper(ASec asec, Uk uk)
-            : base(asec, uk)
+        public Wrapper(APro apro, Uk uk)
+            : base(apro, uk)
         {
         }
 

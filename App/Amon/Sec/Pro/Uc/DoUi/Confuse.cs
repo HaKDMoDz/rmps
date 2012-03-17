@@ -8,8 +8,8 @@ namespace Me.Amon.Sec.Pro.Uc.DoUi
 {
     public class Confuse : ADo
     {
-        public Confuse(ASec asec, Do od)
-            : base(asec, od)
+        public Confuse(APro apro, Do od)
+            : base(apro, od)
         {
         }
 
@@ -86,10 +86,10 @@ namespace Me.Amon.Sec.Pro.Uc.DoUi
             switch (_Type.K)
             {
                 case OUTPUT_FILE:
-                    _Asec.ShowSave(_Do.TbData.Text, new CallBackHandler<string>(SaveCallBack));
+                    _APro.ShowSave(_Do.TbData.Text, new CallBackHandler<string>(SaveCallBack));
                     break;
                 case OUTPUT_TEXT:
-                    _Asec.ShowText(_Do.UserData.ToString(), new CallBackHandler<string>(EditCallBack));
+                    _APro.ShowText(_Do.UserData.ToString(), new CallBackHandler<string>(EditCallBack));
                     break;
                 default:
                     _Do.TbData.Enabled = false;
@@ -107,7 +107,7 @@ namespace Me.Amon.Sec.Pro.Uc.DoUi
 
         public override void MoreMask()
         {
-            _Asec.ShowMask(_Udc);
+            _APro.ShowMask(_Udc);
         }
         #endregion
 

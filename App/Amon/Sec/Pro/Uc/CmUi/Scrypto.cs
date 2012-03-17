@@ -12,8 +12,8 @@ namespace Me.Amon.Sec.Pro.Uc.CmUi
         private IBlockCipher _Engine;
         private BufferedBlockCipher _Cipher;
 
-        public Scrypto(ASec asec, Cm cm)
-            : base(asec, cm)
+        public Scrypto(APro apro, Cm cm)
+            : base(apro, cm)
         {
         }
 

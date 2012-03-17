@@ -4,8 +4,8 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
 {
     public class Digest : AUk
     {
-        public Digest(ASec asec, Uk uk)
-            : base(asec, uk)
+        public Digest(APro apro, Uk uk)
+            : base(apro, uk)
         {
         }
 

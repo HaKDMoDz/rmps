@@ -5,8 +5,8 @@ namespace Me.Amon.Sec.Pro.Uc.DoUi
 {
     public class Txt2Img : ADo
     {
-        public Txt2Img(ASec asec, Do od)
-            : base(asec, od)
+        public Txt2Img(APro apro, Do od)
+            : base(apro, od)
         {
         }
 
@@ -43,7 +43,7 @@ namespace Me.Amon.Sec.Pro.Uc.DoUi
 
         public override void MoreMask()
         {
-            _Asec.ShowMask(_Udc);
+            _APro.ShowMask(_Udc);
         }
         #endregion
 

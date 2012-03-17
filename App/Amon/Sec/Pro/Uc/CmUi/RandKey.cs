@@ -2,8 +2,8 @@
 {
     public class RandKey : ACm
     {
-        public RandKey(ASec asec, Cm cm)
-            : base(asec, cm)
+        public RandKey(APro apro, Cm cm)
+            : base(apro, cm)
         {
         }
 

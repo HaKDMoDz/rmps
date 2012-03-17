@@ -49,16 +49,17 @@
             // 
             this.TbSrc.Location = new System.Drawing.Point(3, 21);
             this.TbSrc.Name = "TbSrc";
-            this.TbSrc.Size = new System.Drawing.Size(100, 21);
+            this.TbSrc.ReadOnly = true;
+            this.TbSrc.Size = new System.Drawing.Size(210, 21);
             this.TbSrc.TabIndex = 1;
             // 
             // BtSrc
             // 
-            this.BtSrc.Location = new System.Drawing.Point(109, 19);
+            this.BtSrc.Location = new System.Drawing.Point(219, 21);
             this.BtSrc.Name = "BtSrc";
-            this.BtSrc.Size = new System.Drawing.Size(75, 23);
+            this.BtSrc.Size = new System.Drawing.Size(21, 21);
             this.BtSrc.TabIndex = 2;
-            this.BtSrc.Text = "button1";
+            this.BtSrc.Text = ".";
             this.BtSrc.UseVisualStyleBackColor = true;
             // 
             // LbDst
@@ -74,16 +75,17 @@
             // 
             this.TbDst.Location = new System.Drawing.Point(3, 60);
             this.TbDst.Name = "TbDst";
-            this.TbDst.Size = new System.Drawing.Size(100, 21);
+            this.TbDst.ReadOnly = true;
+            this.TbDst.Size = new System.Drawing.Size(210, 21);
             this.TbDst.TabIndex = 4;
             // 
             // BtDst
             // 
-            this.BtDst.Location = new System.Drawing.Point(109, 58);
+            this.BtDst.Location = new System.Drawing.Point(219, 60);
             this.BtDst.Name = "BtDst";
-            this.BtDst.Size = new System.Drawing.Size(75, 23);
+            this.BtDst.Size = new System.Drawing.Size(21, 21);
             this.BtDst.TabIndex = 5;
-            this.BtDst.Text = "button2";
+            this.BtDst.Text = ".";
             this.BtDst.UseVisualStyleBackColor = true;
             // 
             // CipherFile
@@ -97,7 +99,7 @@
             this.Controls.Add(this.TbSrc);
             this.Controls.Add(this.LbSrc);
             this.Name = "CipherFile";
-            this.Size = new System.Drawing.Size(218, 207);
+            this.Size = new System.Drawing.Size(240, 183);
             this.ResumeLayout(false);
             this.PerformLayout();
 

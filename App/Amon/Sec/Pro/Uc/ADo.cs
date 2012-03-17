@@ -13,13 +13,13 @@ namespace Me.Amon.Sec.Pro.Uc
         protected const string USER_CHARSET = "30";
 
         #region 构造函数
-        protected ASec _Asec;
+        protected APro _APro;
         protected DataModel _DataModel;
         protected Do _Do;
 
-        public ADo(ASec asec, Do od)
+        public ADo(APro apro, Do od)
         {
-            _Asec = asec;
+            _APro = apro;
             _Do = od;
         }
         #endregion

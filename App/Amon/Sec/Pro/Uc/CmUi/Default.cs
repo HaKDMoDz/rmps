@@ -2,8 +2,8 @@
 {
     public class Default : ACm
     {
-        public Default(ASec asec, Cm cm)
-            : base(asec, cm)
+        public Default(APro apro, Cm cm)
+            : base(apro, cm)
         {
         }
 

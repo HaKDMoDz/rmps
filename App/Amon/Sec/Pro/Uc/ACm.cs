@@ -9,12 +9,12 @@ namespace Me.Amon.Sec.Pro.Uc
         public static Item _SizeDef = new Item { K = "0", V = "默认" };
         protected int _KeySize;
         protected int _IVSize;
-        protected ASec _ASec;
+        protected APro _APro;
         protected Cm _Cm;
 
-        public ACm(ASec asec, Cm cm)
+        public ACm(APro apro, Cm cm)
         {
-            _ASec = asec;
+            _APro = apro;
             _Cm = cm;
         }
 

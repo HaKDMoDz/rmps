@@ -4,8 +4,8 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
 {
     public class Txt2Img : AUk
     {
-        public Txt2Img(ASec asec, Uk uk)
-            : base(asec, uk)
+        public Txt2Img(APro apro, Uk uk)
+            : base(apro, uk)
         {
         }
 

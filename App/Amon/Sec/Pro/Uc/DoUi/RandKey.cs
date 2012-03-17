@@ -6,8 +6,8 @@ namespace Me.Amon.Sec.Pro.Uc.DoUi
 {
     public class RandKey : ADo
     {
-        public RandKey(ASec asec, Do od)
-            : base(asec, od)
+        public RandKey(APro apro, Do od)
+            : base(apro, od)
         {
         }
 

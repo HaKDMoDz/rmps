@@ -5,8 +5,8 @@ namespace Me.Amon.Sec.Pro.Uc.CmUi
 {
     public class Wrapper : ACm
     {
-        public Wrapper(ASec asec, Cm cm)
-            : base(asec, cm)
+        public Wrapper(APro apro, Cm cm)
+            : base(apro, cm)
         {
         }
 

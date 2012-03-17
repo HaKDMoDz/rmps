@@ -7,8 +7,8 @@ namespace Me.Amon.Sec.Pro.Uc.CmUi
 {
     public class Acrypto : ACm
     {
-        public Acrypto(ASec asec, Cm cm)
-            : base(asec, cm)
+        public Acrypto(APro apro, Cm cm)
+            : base(apro, cm)
         {
         }
 

@@ -5,8 +5,8 @@ namespace Me.Amon.Sec.Pro.Uc.DoUi
 {
     public class Default : ADo
     {
-        public Default(ASec asec, Do od)
-            : base(asec, od)
+        public Default(APro apro, Do od)
+            : base(apro, od)
         {
         }
 

@@ -5,12 +5,12 @@ namespace Me.Amon.Sec.Pro.Uc
     public abstract class AUk
     {
         #region 构造函数
-        protected ASec _ASec;
+        protected APro _APro;
         protected Uk _Uk;
 
-        public AUk(ASec asec, Uk uk)
+        public AUk(APro apro, Uk uk)
         {
-            _ASec = asec;
+            _APro = apro;
             _Uk = uk;
         }
         #endregion

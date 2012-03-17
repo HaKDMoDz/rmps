@@ -10,8 +10,8 @@ namespace Me.Amon.Sec.Pro.Uc.CmUi
         private IStreamCipher _Engine;
         private BufferedStreamCipher _Cipher;
 
-        public Sstream(ASec asec, Cm cm)
-            : base(asec, cm)
+        public Sstream(APro apro, Cm cm)
+            : base(apro, cm)
         {
         }
 

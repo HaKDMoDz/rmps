@@ -8,8 +8,8 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
 {
     public class Scrypto : AUk
     {
-        public Scrypto(ASec asec, Uk uk)
-            : base(asec, uk)
+        public Scrypto(APro apro, Uk uk)
+            : base(apro, uk)
         {
         }
 
@@ -275,12 +275,12 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
 
         public override void MorePass()
         {
-            _ASec.ShowPass(_Uk.TbPass.Text, new CallBackHandler<string>(PassCallBack));
+            _APro.ShowPass(_Uk.TbPass.Text, new CallBackHandler<string>(PassCallBack));
         }
 
         public override void MoreSalt()
         {
-            _ASec.ShowPass(_Uk.TbPass.Text, new CallBackHandler<string>(SaltCallBack));
+            _APro.ShowPass(_Uk.TbPass.Text, new CallBackHandler<string>(SaltCallBack));
         }
 
         public override bool Check()

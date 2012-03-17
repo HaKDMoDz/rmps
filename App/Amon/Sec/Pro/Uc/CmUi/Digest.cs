@@ -7,8 +7,8 @@ namespace Me.Amon.Sec.Pro.Uc.CmUi
 {
     public class Digest : ACm
     {
-        public Digest(ASec asec, Cm cm)
-            : base(asec, cm)
+        public Digest(APro apro, Cm cm)
+            : base(apro, cm)
         {
         }
 

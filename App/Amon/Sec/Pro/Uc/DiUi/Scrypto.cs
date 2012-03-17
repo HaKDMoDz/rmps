@@ -12,8 +12,8 @@ namespace Me.Amon.Sec.Pro.Uc.DiUi
         private ScryptoEnc _Enc;
         private ScryptoDec _Dec;
 
-        public Scrypto(ASec asec, Di di)
-            : base(asec, di)
+        public Scrypto(APro apro, Di di)
+            : base(apro, di)
         {
         }
 
@@ -60,21 +60,21 @@ namespace Me.Amon.Sec.Pro.Uc.DiUi
                 case IData.DIR_ENC:
                     if (_Enc == null)
                     {
-                        _Enc = new ScryptoEnc(_ASec, _Di);
+                        _Enc = new ScryptoEnc(_APro, _Di);
                     }
                     _Cur = _Enc;
                     break;
                 case IData.DIR_DEC:
                     if (_Dec == null)
                     {
-                        _Dec = new ScryptoDec(_ASec, _Di);
+                        _Dec = new ScryptoDec(_APro, _Di);
                     }
                     _Cur = _Dec;
                     break;
                 default:
                     if (_Def == null)
                     {
-                        _Def = new ScryptoDef(_ASec, _Di);
+                        _Def = new ScryptoDef(_APro, _Di);
                     }
                     _Cur = _Def;
                     break;
@@ -100,10 +100,10 @@ namespace Me.Amon.Sec.Pro.Uc.DiUi
                 case INPUT_FILE:
                 case INPUT_FILE_TXT:
                 case INPUT_FILE_BIN:
-                    _ASec.ShowOpen(_Di.TbData.Text, new CallBackHandler<string>(OpenCallBack));
+                    _APro.ShowOpen(_Di.TbData.Text, new CallBackHandler<string>(OpenCallBack));
                     break;
                 case INPUT_TEXT:
-                    _ASec.ShowEdit(_Di.UserData.ToString(), new CallBackHandler<string>(EditCallBack));
+                    _APro.ShowEdit(_Di.UserData.ToString(), new CallBackHandler<string>(EditCallBack));
                     break;
                 default:
                     break;
@@ -117,7 +117,7 @@ namespace Me.Amon.Sec.Pro.Uc.DiUi
 
         public override void MoreMask()
         {
-            _ASec.ShowMask(_Udc);
+            _APro.ShowMask(_Udc);
         }
         #endregion
 

@@ -4,8 +4,8 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
 {
     public class Confuse : AUk
     {
-        public Confuse(ASec asec, Uk uk)
-            : base(asec, uk)
+        public Confuse(APro apro, Uk uk)
+            : base(apro, uk)
         {
         }
 

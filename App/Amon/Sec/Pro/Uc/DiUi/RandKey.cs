@@ -5,8 +5,8 @@ namespace Me.Amon.Sec.Pro.Uc.DiUi
 {
     public class RandKey : ADi
     {
-        public RandKey(ASec asec, Di di)
-            : base(asec, di)
+        public RandKey(APro apro, Di di)
+            : base(apro, di)
         {
         }
 

@@ -12,8 +12,8 @@ namespace Me.Amon.Sec.Pro.Uc.DoUi
         private SstreamEnc _Enc;
         private SstreamDec _Dec;
 
-        public Sstream(ASec asec, Do od)
-            : base(asec, od)
+        public Sstream(APro apro, Do od)
+            : base(apro, od)
         {
         }
 
@@ -59,21 +59,21 @@ namespace Me.Amon.Sec.Pro.Uc.DoUi
                 case IData.DIR_ENC:
                     if (_Enc == null)
                     {
-                        _Enc = new SstreamEnc(_Asec, _Do);
+                        _Enc = new SstreamEnc(_APro, _Do);
                     }
                     _Cur = _Enc;
                     break;
                 case IData.DIR_DEC:
                     if (_Dec == null)
                     {
-                        _Dec = new SstreamDec(_Asec, _Do);
+                        _Dec = new SstreamDec(_APro, _Do);
                     }
                     _Cur = _Dec;
                     break;
                 default:
                     if (_Def == null)
                     {
-                        _Def = new SstreamDef(_Asec, _Do);
+                        _Def = new SstreamDef(_APro, _Do);
                     }
                     _Cur = _Def;
                     break;
@@ -99,10 +99,10 @@ namespace Me.Amon.Sec.Pro.Uc.DoUi
                 case OUTPUT_FILE:
                 case OUTPUT_FILE_BIN:
                 case OUTPUT_FILE_TXT:
-                    _Asec.ShowSave(_Do.TbData.Text, new CallBackHandler<string>(SaveCallBack));
+                    _APro.ShowSave(_Do.TbData.Text, new CallBackHandler<string>(SaveCallBack));
                     break;
                 case OUTPUT_TEXT:
-                    _Asec.ShowText(_Do.UserData.ToString(), new CallBackHandler<string>(EditCallBack));
+                    _APro.ShowText(_Do.UserData.ToString(), new CallBackHandler<string>(EditCallBack));
                     break;
                 default:
                     _Do.TbData.Enabled = false;
@@ -120,7 +120,7 @@ namespace Me.Amon.Sec.Pro.Uc.DoUi
 
         public override void MoreMask()
         {
-            _Asec.ShowMask(_Udc);
+            _APro.ShowMask(_Udc);
         }
         #endregion
 

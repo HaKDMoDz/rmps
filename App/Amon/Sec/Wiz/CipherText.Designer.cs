@@ -37,7 +37,7 @@
             // LbSrc
             // 
             this.LbSrc.AutoSize = true;
-            this.LbSrc.Location = new System.Drawing.Point(3, 9);
+            this.LbSrc.Location = new System.Drawing.Point(0, 3);
             this.LbSrc.Name = "LbSrc";
             this.LbSrc.Size = new System.Drawing.Size(47, 12);
             this.LbSrc.TabIndex = 0;
@@ -45,16 +45,16 @@
             // 
             // TbSrc
             // 
-            this.TbSrc.Location = new System.Drawing.Point(3, 24);
+            this.TbSrc.Location = new System.Drawing.Point(0, 18);
             this.TbSrc.Multiline = true;
             this.TbSrc.Name = "TbSrc";
-            this.TbSrc.Size = new System.Drawing.Size(200, 73);
+            this.TbSrc.Size = new System.Drawing.Size(240, 73);
             this.TbSrc.TabIndex = 1;
             // 
             // LbDst
             // 
             this.LbDst.AutoSize = true;
-            this.LbDst.Location = new System.Drawing.Point(3, 100);
+            this.LbDst.Location = new System.Drawing.Point(0, 94);
             this.LbDst.Name = "LbDst";
             this.LbDst.Size = new System.Drawing.Size(47, 12);
             this.LbDst.TabIndex = 2;
@@ -62,10 +62,11 @@
             // 
             // TbDst
             // 
-            this.TbDst.Location = new System.Drawing.Point(3, 115);
+            this.TbDst.Location = new System.Drawing.Point(0, 109);
             this.TbDst.Multiline = true;
             this.TbDst.Name = "TbDst";
-            this.TbDst.Size = new System.Drawing.Size(200, 73);
+            this.TbDst.ReadOnly = true;
+            this.TbDst.Size = new System.Drawing.Size(240, 73);
             this.TbDst.TabIndex = 3;
             // 
             // CipherText
@@ -77,7 +78,7 @@
             this.Controls.Add(this.TbSrc);
             this.Controls.Add(this.LbSrc);
             this.Name = "CipherText";
-            this.Size = new System.Drawing.Size(206, 206);
+            this.Size = new System.Drawing.Size(240, 183);
             this.ResumeLayout(false);
             this.PerformLayout();
 

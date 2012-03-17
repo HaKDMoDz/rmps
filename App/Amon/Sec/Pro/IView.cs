@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 
-namespace Me.Amon.Sec
+namespace Me.Amon.Sec.Pro
 {
     public interface IView
     {

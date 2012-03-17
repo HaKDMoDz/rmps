@@ -9,8 +9,8 @@ namespace Me.Amon.Sec.Pro.Uc.DiUi
 {
     public class Wrapper : ADi
     {
-        public Wrapper(ASec asec, Di di)
-            : base(asec, di)
+        public Wrapper(APro apro, Di di)
+            : base(apro, di)
         {
         }
 
@@ -84,10 +84,10 @@ namespace Me.Amon.Sec.Pro.Uc.DiUi
             switch (_Type.K)
             {
                 case INPUT_FILE:
-                    _ASec.ShowOpen(_Di.TbData.Text, new CallBackHandler<string>(OpenCallBack));
+                    _APro.ShowOpen(_Di.TbData.Text, new CallBackHandler<string>(OpenCallBack));
                     break;
                 case INPUT_TEXT:
-                    _ASec.ShowEdit(_Di.UserData.ToString(), new CallBackHandler<string>(EditCallBack));
+                    _APro.ShowEdit(_Di.UserData.ToString(), new CallBackHandler<string>(EditCallBack));
                     break;
                 default:
                     break;

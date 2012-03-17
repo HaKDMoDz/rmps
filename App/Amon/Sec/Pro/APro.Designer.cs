@@ -37,27 +37,29 @@
             // 
             this.CbKey.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CbKey.FormattingEnabled = true;
-            this.CbKey.Location = new System.Drawing.Point(153, 3);
+            this.CbKey.Location = new System.Drawing.Point(150, 0);
             this.CbKey.Name = "CbKey";
             this.CbKey.Size = new System.Drawing.Size(81, 20);
-            this.CbKey.TabIndex = 5;
+            this.CbKey.TabIndex = 2;
+            this.CbKey.SelectedIndexChanged += new System.EventHandler(this.CbKey_SelectedIndexChanged);
             // 
             // CbOpt
             // 
             this.CbOpt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CbOpt.FormattingEnabled = true;
-            this.CbOpt.Location = new System.Drawing.Point(56, 3);
+            this.CbOpt.Location = new System.Drawing.Point(53, 0);
             this.CbOpt.Name = "CbOpt";
             this.CbOpt.Size = new System.Drawing.Size(91, 20);
-            this.CbOpt.TabIndex = 4;
+            this.CbOpt.TabIndex = 1;
+            this.CbOpt.SelectedIndexChanged += new System.EventHandler(this.CbOpt_SelectedIndexChanged);
             // 
             // LbOpt
             // 
             this.LbOpt.AutoSize = true;
-            this.LbOpt.Location = new System.Drawing.Point(3, 6);
+            this.LbOpt.Location = new System.Drawing.Point(0, 3);
             this.LbOpt.Name = "LbOpt";
             this.LbOpt.Size = new System.Drawing.Size(47, 12);
-            this.LbOpt.TabIndex = 3;
+            this.LbOpt.TabIndex = 0;
             this.LbOpt.Text = "操作(&T)";
             // 
             // APro
@@ -68,7 +70,7 @@
             this.Controls.Add(this.CbOpt);
             this.Controls.Add(this.LbOpt);
             this.Name = "APro";
-            this.Size = new System.Drawing.Size(516, 333);
+            this.Size = new System.Drawing.Size(486, 236);
             this.ResumeLayout(false);
             this.PerformLayout();
 

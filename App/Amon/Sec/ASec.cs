@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using System.Xml;
 using Me.Amon.Model;
-using Me.Amon.Uc;
+using Me.Amon.Sec.Pro;
+using Me.Amon.Sec.Wiz;
 
 namespace Me.Amon.Sec
 {
@@ -12,6 +12,7 @@ namespace Me.Amon.Sec
         #region 全局变量
         private UserModel _UserModel;
         private DataModel _DataModel;
+        private ISec _ISec;
         #endregion
 
         #region 构造函数
@@ -31,7 +32,7 @@ namespace Me.Amon.Sec
         #region 接口实现
         public void InitOnce()
         {
-            //BtDo.Text = "执行(&R)";
+            ShowPro();
         }
 
         public int AppId { get; set; }
@@ -52,118 +53,52 @@ namespace Me.Amon.Sec
         #region 事件处理
         private void BtDo_Click(object sender, EventArgs e)
         {
-            //if (!Worker.IsBusy)
-            //{
-            //    Worker.RunWorkerAsync();
-            //    BtDo.Text = "取消(&R)";
-            //    return;
-            //}
+            if (!Worker.IsBusy)
+            {
+                Worker.RunWorkerAsync();
+                BtDo.Text = "取消(&R)";
+                return;
+            }
 
-            //if (DialogResult.Yes == MessageBox.Show(this, "确认要取消操作吗？", "友情提示", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
-            //{
-            //    Worker.CancelAsync();
-            //    return;
-            //}
-            DoWork(null, null);
+            if (DialogResult.Yes == MessageBox.Show(this, "确认要取消操作吗？", "友情提示", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
+            {
+                Worker.CancelAsync();
+                return;
+            }
+            _ISec.DoCrypto();
         }
 
-        private void DoWork(object sender, DoWorkEventArgs e)
+        private void PbMenu_Click(object sender, EventArgs e)
         {
-            Item opt = CbOpt.SelectedItem as Item;
-            if (opt == null || opt.K == "0")
-            {
-                Main.ShowAlert("请选择您要执行的操作！");
-                CbOpt.Focus();
-                return;
-            }
-
-            Item key = CbKey.SelectedItem as Item;
-
-            ShowInfo("处理中，请稍候……");
-
-            if (!_UcCm.Check())
-            {
-                return;
-            }
-            if (!_UcUk.Check())
-            {
-                return;
-            }
-            if (!_UcDi.Check())
-            {
-                return;
-            }
-            if (!_UcDo.Check())
-            {
-                return;
-            }
-
-            switch (opt.K)
-            {
-                case IData.OPT_DIGEST:
-                    Digest();
-                    break;
-                case IData.OPT_RANDKEY:
-                    Randkey();
-                    break;
-                case IData.OPT_WRAPPER:
-                    if (key == null || key.K == "0")
-                    {
-                        Main.ShowAlert("请选择您要执行的操作！");
-                        CbKey.Focus();
-                        return;
-                    }
-                    Wrapper();
-                    break;
-                case IData.OPT_SCRYPTO:
-                    if (key == null || key.K == "0")
-                    {
-                        Main.ShowAlert("请选择您要执行的操作！");
-                        CbKey.Focus();
-                        return;
-                    }
-                    Scrypto(key.K != IData.DIR_DEC);
-                    break;
-                case IData.OPT_SSTREAM:
-                    if (key == null || key.K == "0")
-                    {
-                        Main.ShowAlert("请选择您要执行的操作！");
-                        CbKey.Focus();
-                        return;
-                    }
-                    Sstream(key.K != IData.DIR_DEC);
-                    break;
-                case IData.OPT_ACRYPTO:
-                    if (key == null || key.K == "0")
-                    {
-                        Main.ShowAlert("请选择您要执行的操作！");
-                        CbKey.Focus();
-                        return;
-                    }
-                    Acrypto(key.K != IData.DIR_DEC);
-                    break;
-                case IData.OPT_TXT2IMG:
-                    Txt2Img();
-                    break;
-                default:
-                    break;
-            }
+            CmMenu.Show(PbMenu, 0, PbMenu.Height);
         }
 
-        private void DoWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void MiLoad_Click(object sender, EventArgs e)
         {
-            if (e.Cancelled)
-            {
-                ShowInfo("用户已取消！");
-            }
+            _ISec.LoadFav();
+        }
+
+        private void MiSave_Click(object sender, EventArgs e)
+        {
+            _ISec.SaveFav();
+        }
+
+        private void MiWiz_Click(object sender, EventArgs e)
+        {
+            ShowWiz();
+        }
+
+        private void MiPro_Click(object sender, EventArgs e)
+        {
+            ShowPro();
         }
         #endregion
 
         #region 公有方法
-        public void ShowInfo(string info)
+        public void ShowEcho(string msg)
         {
-            LbInfo.Text = info;
-            TpTips.SetToolTip(LbInfo, info);
+            LbInfo.Text = msg;
+            TpTips.SetToolTip(LbInfo, msg);
         }
 
         public void ShowTips(Control control, string caption)
@@ -172,89 +107,50 @@ namespace Me.Amon.Sec
         }
         #endregion
 
-        private void MiSave_Click(object sender, EventArgs e)
+        #region 私有函数
+        private void DoWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Item item = CbOpt.SelectedItem as Item;
-            if (item == null || item.K == "0")
+            if (e.Cancelled)
             {
-                Main.ShowAlert("默认操作不需要保存！");
-                return;
+                ShowEcho("用户已取消！");
             }
-
-            SaveFileDialog fd = new SaveFileDialog();
-            fd.AddExtension = true;
-            fd.DefaultExt = ".asxml";
-            fd.Filter = "加密器文件(*.asxml)|*.asxml";
-            if (DialogResult.OK != fd.ShowDialog())
-            {
-                return;
-            }
-
-            XmlDocument doc = new XmlDocument();
-            XmlDeclaration dec = doc.CreateXmlDeclaration("1.0", "utf-8", null);
-            doc.AppendChild(dec);
-
-            XmlElement root = doc.CreateElement("msec");
-            doc.AppendChild(root);
-
-            XmlElement node = doc.CreateElement("operation");
-            root.AppendChild(node);
-            XmlAttribute attr = doc.CreateAttribute("key");
-            node.Attributes.Append(attr);
-            if (item != null)
-            {
-                attr.Value = item.K;
-            }
-
-            attr = doc.CreateAttribute("dir");
-            node.Attributes.Append(attr);
-            item = CbKey.SelectedItem as Item;
-            if (item != null)
-            {
-                attr.Value = item.K;
-            }
-
-            root.AppendChild(_UcCm.SaveXml(doc));
-            root.AppendChild(_UcUk.SaveXml(doc));
-            root.AppendChild(_UcDi.SaveXml(doc));
-            root.AppendChild(_UcDo.SaveXml(doc));
-
-            doc.Save(fd.FileName);
         }
 
-        private void MiLoad_Click(object sender, EventArgs e)
+        private APro _APro;
+        private void ShowPro()
         {
-            OpenFileDialog fd = new OpenFileDialog();
-            fd.AddExtension = true;
-            fd.DefaultExt = ".asxml";
-            fd.Filter = "加密器文件(*.asxml)|*.asxml";
-            if (DialogResult.OK != fd.ShowDialog())
+            if (_ISec != null && _ISec.Name != "pro")
             {
-                return;
+                _ISec.HideView();
             }
 
-            XmlDocument doc = new XmlDocument();
-            doc.Load(fd.FileName);
-
-            XmlNode node = doc.SelectSingleNode("/msec/operation");
-            if (node != null)
+            if (_APro == null)
             {
-                XmlAttribute attr = node.Attributes["key"];
-                if (attr != null)
-                {
-                    CbOpt.SelectedItem = new Item { K = attr.Value };
-                }
-                attr = node.Attributes["dir"];
-                if (attr != null)
-                {
-                    CbKey.SelectedItem = new Item { K = attr.Value };
-                }
+                _APro = new APro(this);
+                _APro.InitOnce();
+                _APro.Name = "pro";
             }
-
-            _UcCm.LoadXml(doc);
-            _UcUk.LoadXml(doc);
-            _UcDi.LoadXml(doc);
-            _UcDo.LoadXml(doc);
+            _ISec = _APro;
+            _ISec.InitView();
         }
+
+        private AWiz _AWiz;
+        private void ShowWiz()
+        {
+            if (_ISec != null && _ISec.Name != "wiz")
+            {
+                _ISec.HideView();
+            }
+
+            if (_AWiz == null)
+            {
+                _AWiz = new AWiz(this);
+                _AWiz.InitOnce();
+                _AWiz.Name = "wiz";
+            }
+            _ISec = _AWiz;
+            _ISec.InitView();
+        }
+        #endregion
     }
 }

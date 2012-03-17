@@ -5,8 +5,8 @@ namespace Me.Amon.Sec.Pro.Uc.CmUi
 {
     public class Confuse : ACm
     {
-        public Confuse(ASec asec, Cm cm)
-            : base(asec, cm)
+        public Confuse(APro apro, Cm cm)
+            : base(apro, cm)
         {
         }
 

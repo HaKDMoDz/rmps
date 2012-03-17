@@ -3,8 +3,8 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
 {
     public class Default : AUk
     {
-        public Default(ASec asec, Uk uk)
-            : base(asec, uk)
+        public Default(APro apro, Uk uk)
+            : base(apro, uk)
         {
         }
 

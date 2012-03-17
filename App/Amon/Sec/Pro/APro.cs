@@ -1,18 +1,23 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
+using System.Xml;
+using Me.Amon.Bean;
+using Me.Amon.Model;
 using Me.Amon.Sec.Pro.Uc;
 using Me.Amon.Sec.Pro.Uw;
 using Me.Amon.Uc;
+using Me.Amon.Util;
 using Me.Amon.Uw;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Paddings;
-using System.Drawing;
-using Me.Amon.Util;
 
 namespace Me.Amon.Sec.Pro
 {
-    public partial class APro : UserControl
+    public partial class APro : UserControl, ISec
     {
+        private ASec _ASec;
+        private UserModel _UserModel;
         private Cm _UcCm;
         private Uk _UcUk;
         private Di _UcDi;
@@ -28,6 +33,14 @@ namespace Me.Amon.Sec.Pro
         public APro()
         {
             InitializeComponent();
+            InitOnce();
+        }
+
+        public APro(ASec asec)
+        {
+            InitializeComponent();
+
+            _ASec = asec;
         }
 
         public void InitOnce()
@@ -37,9 +50,9 @@ namespace Me.Amon.Sec.Pro
             // 
             _UcDo = new Me.Amon.Sec.Pro.Uc.Do(this);
             _UcDo.Init();
-            _UcDo.Location = new System.Drawing.Point(258, 155);
+            _UcDo.Location = new System.Drawing.Point(246, 134);
             _UcDo.Name = "UcDo";
-            _UcDo.Size = new System.Drawing.Size(240, 110);
+            _UcDo.Size = new System.Drawing.Size(240, 102);
             _UcDo.TabIndex = 6;
             Controls.Add(_UcDo);
 
@@ -48,9 +61,9 @@ namespace Me.Amon.Sec.Pro
             // 
             _UcDi = new Me.Amon.Sec.Pro.Uc.Di(this);
             _UcDi.Init();
-            _UcDi.Location = new System.Drawing.Point(12, 155);
+            _UcDi.Location = new System.Drawing.Point(0, 134);
             _UcDi.Name = "UcDi";
-            _UcDi.Size = new System.Drawing.Size(240, 110);
+            _UcDi.Size = new System.Drawing.Size(240, 102);
             _UcDi.TabIndex = 5;
             Controls.Add(_UcDi);
 
@@ -59,9 +72,9 @@ namespace Me.Amon.Sec.Pro
             // 
             _UcUk = new Me.Amon.Sec.Pro.Uc.Uk(this);
             _UcUk.Init();
-            _UcUk.Location = new System.Drawing.Point(258, 39);
+            _UcUk.Location = new System.Drawing.Point(246, 26);
             _UcUk.Name = "UcUk";
-            _UcUk.Size = new System.Drawing.Size(240, 110);
+            _UcUk.Size = new System.Drawing.Size(240, 102);
             _UcUk.TabIndex = 4;
             Controls.Add(_UcUk);
 
@@ -70,9 +83,9 @@ namespace Me.Amon.Sec.Pro
             // 
             _UcCm = new Me.Amon.Sec.Pro.Uc.Cm(this);
             _UcCm.Init();
-            _UcCm.Location = new System.Drawing.Point(12, 39);
+            _UcCm.Location = new System.Drawing.Point(0, 26);
             _UcCm.Name = "UcCm";
-            _UcCm.Size = new System.Drawing.Size(240, 110);
+            _UcCm.Size = new System.Drawing.Size(240, 102);
             _UcCm.TabIndex = 3;
             Controls.Add(_UcCm);
 
@@ -97,6 +110,20 @@ namespace Me.Amon.Sec.Pro
             //CbOpt.Items.Add(new Item { K = IData.OPT_ACRYPTO, V = "非对称算法" });
             //CbOpt.Items.Add(new Item { K = IData.OPT_TXT2IMG, V = "图文转换" });
             CbOpt.SelectedIndex = 0;
+        }
+
+        public void InitView()
+        {
+            Location = new Point(12, 12);
+            Size = new Size(486, 236);
+            TabIndex = 0;
+            _ASec.Controls.Add(this);
+            _ASec.ClientSize = new Size(510, 305);
+        }
+
+        public void HideView()
+        {
+            _ASec.Controls.Remove(this);
         }
 
         #region 事件处理
@@ -173,6 +200,12 @@ namespace Me.Amon.Sec.Pro
             _UcDo.InitAlg(alg);
         }
 
+        public void ShowInfo(string info)
+        {
+            //LbInfo.Text = info;
+            //TpTips.SetToolTip(LbInfo, info);
+        }
+
         public void ShowEdit(string data, CallBackHandler<string> handler)
         {
             if (_Edit != null && _Edit.Visible)
@@ -182,7 +215,7 @@ namespace Me.Amon.Sec.Pro
             _Edit = new Edit();
             _Edit.CallBack = handler;
             _Edit.Location = new Point(Location.X + (Width - _Edit.Width) / 2, Location.Y + (Height - _Edit.Height) / 2);
-            _Edit.Show(this, data);
+            _Edit.Show(_ASec, data);
         }
 
         public void ShowMask(Udc udc)
@@ -193,7 +226,7 @@ namespace Me.Amon.Sec.Pro
             }
             _UdcEditor = new UdcEditor(_UserModel);
             _UdcEditor.Init(null, udc);
-            BeanUtil.CenterToParent(_UdcEditor, this);
+            BeanUtil.CenterToParent(_UdcEditor, _ASec);
             _UdcEditor.ShowDialog(this);
         }
 
@@ -204,7 +237,7 @@ namespace Me.Amon.Sec.Pro
                 _Open = new Open();
             }
             _Open.CallBack = handler;
-            _Open.Show(this, file);
+            _Open.Show(_ASec, file);
         }
 
         public void ShowPass(string pass, CallBackHandler<string> handler)
@@ -216,7 +249,7 @@ namespace Me.Amon.Sec.Pro
             _Pass = new Pass();
             _Pass.CallBack = handler;
             _Pass.Location = new Point(Location.X + (Width - _Pass.Width) / 2, Location.Y + (Height - _Pass.Height) / 2);
-            _Pass.Show(this, pass);
+            _Pass.Show(_ASec, pass);
         }
 
         public void ShowSave(string file, CallBackHandler<string> handler)
@@ -226,7 +259,7 @@ namespace Me.Amon.Sec.Pro
                 _Save = new Save();
             }
             _Save.CallBack = handler;
-            _Save.Show(this, file);
+            _Save.Show(_ASec, file);
         }
 
         public void ShowText(string data, CallBackHandler<string> handler)
@@ -238,7 +271,7 @@ namespace Me.Amon.Sec.Pro
             _Text = new Text();
             _Text.CallBack = handler;
             _Text.Location = new Point(Location.X + (Width - _Text.Width) / 2, Location.Y + (Height - _Text.Height) / 2);
-            _Text.Show(this, data);
+            _Text.Show(_ASec, data);
         }
         #endregion
 
@@ -435,5 +468,172 @@ namespace Me.Amon.Sec.Pro
         }
         #endregion
 
+        public void DoCrypto()
+        {
+            Item opt = CbOpt.SelectedItem as Item;
+            if (opt == null || opt.K == "0")
+            {
+                Main.ShowAlert("请选择您要执行的操作！");
+                CbOpt.Focus();
+                return;
+            }
+
+            Item key = CbKey.SelectedItem as Item;
+
+            ShowInfo("处理中，请稍候……");
+
+            if (!_UcCm.Check())
+            {
+                return;
+            }
+            if (!_UcUk.Check())
+            {
+                return;
+            }
+            if (!_UcDi.Check())
+            {
+                return;
+            }
+            if (!_UcDo.Check())
+            {
+                return;
+            }
+
+            switch (opt.K)
+            {
+                case IData.OPT_DIGEST:
+                    Digest();
+                    break;
+                case IData.OPT_RANDKEY:
+                    Randkey();
+                    break;
+                case IData.OPT_WRAPPER:
+                    if (key == null || key.K == "0")
+                    {
+                        Main.ShowAlert("请选择您要执行的操作！");
+                        CbKey.Focus();
+                        return;
+                    }
+                    Wrapper();
+                    break;
+                case IData.OPT_SCRYPTO:
+                    if (key == null || key.K == "0")
+                    {
+                        Main.ShowAlert("请选择您要执行的操作！");
+                        CbKey.Focus();
+                        return;
+                    }
+                    Scrypto(key.K != IData.DIR_DEC);
+                    break;
+                case IData.OPT_SSTREAM:
+                    if (key == null || key.K == "0")
+                    {
+                        Main.ShowAlert("请选择您要执行的操作！");
+                        CbKey.Focus();
+                        return;
+                    }
+                    Sstream(key.K != IData.DIR_DEC);
+                    break;
+                case IData.OPT_ACRYPTO:
+                    if (key == null || key.K == "0")
+                    {
+                        Main.ShowAlert("请选择您要执行的操作！");
+                        CbKey.Focus();
+                        return;
+                    }
+                    Acrypto(key.K != IData.DIR_DEC);
+                    break;
+                case IData.OPT_TXT2IMG:
+                    Txt2Img();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void LoadFav()
+        {
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.AddExtension = true;
+            fd.DefaultExt = ".asxml";
+            fd.Filter = "加密器文件(*.asxml)|*.asxml";
+            if (DialogResult.OK != fd.ShowDialog())
+            {
+                return;
+            }
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(fd.FileName);
+
+            XmlNode node = doc.SelectSingleNode("/msec/operation");
+            if (node != null)
+            {
+                XmlAttribute attr = node.Attributes["key"];
+                if (attr != null)
+                {
+                    CbOpt.SelectedItem = new Item { K = attr.Value };
+                }
+                attr = node.Attributes["dir"];
+                if (attr != null)
+                {
+                    CbKey.SelectedItem = new Item { K = attr.Value };
+                }
+            }
+
+            _UcCm.LoadXml(doc);
+            _UcUk.LoadXml(doc);
+            _UcDi.LoadXml(doc);
+            _UcDo.LoadXml(doc);
+        }
+
+        public void SaveFav()
+        {
+            Item item = CbOpt.SelectedItem as Item;
+            if (item == null || item.K == "0")
+            {
+                Main.ShowAlert("默认操作不需要保存！");
+                return;
+            }
+
+            SaveFileDialog fd = new SaveFileDialog();
+            fd.AddExtension = true;
+            fd.DefaultExt = ".asxml";
+            fd.Filter = "加密器文件(*.asxml)|*.asxml";
+            if (DialogResult.OK != fd.ShowDialog())
+            {
+                return;
+            }
+
+            XmlDocument doc = new XmlDocument();
+            XmlDeclaration dec = doc.CreateXmlDeclaration("1.0", "utf-8", null);
+            doc.AppendChild(dec);
+
+            XmlElement root = doc.CreateElement("msec");
+            doc.AppendChild(root);
+
+            XmlElement node = doc.CreateElement("operation");
+            root.AppendChild(node);
+            XmlAttribute attr = doc.CreateAttribute("key");
+            node.Attributes.Append(attr);
+            if (item != null)
+            {
+                attr.Value = item.K;
+            }
+
+            attr = doc.CreateAttribute("dir");
+            node.Attributes.Append(attr);
+            item = CbKey.SelectedItem as Item;
+            if (item != null)
+            {
+                attr.Value = item.K;
+            }
+
+            root.AppendChild(_UcCm.SaveXml(doc));
+            root.AppendChild(_UcUk.SaveXml(doc));
+            root.AppendChild(_UcDi.SaveXml(doc));
+            root.AppendChild(_UcDo.SaveXml(doc));
+
+            doc.Save(fd.FileName);
+        }
     }
 }

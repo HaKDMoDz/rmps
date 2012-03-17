@@ -4,8 +4,8 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
 {
     public class Acrypto : AUk
     {
-        public Acrypto(ASec asec, Uk uk)
-            : base(asec, uk)
+        public Acrypto(APro apro, Uk uk)
+            : base(apro, uk)
         {
         }
 

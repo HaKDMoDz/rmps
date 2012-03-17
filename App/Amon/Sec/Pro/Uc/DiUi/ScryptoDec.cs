@@ -5,8 +5,8 @@ namespace Me.Amon.Sec.Pro.Uc.DiUi
 {
     class ScryptoDec : Scrypto
     {
-        public ScryptoDec(ASec asec, Di di)
-            : base(asec, di)
+        public ScryptoDec(APro apro, Di di)
+            : base(apro, di)
         {
         }
 

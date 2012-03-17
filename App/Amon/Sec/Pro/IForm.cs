@@ -1,5 +1,5 @@
 ﻿
-namespace Me.Amon.Sec
+namespace Me.Amon.Sec.Pro
 {
     public delegate void CallBackHandler<T>(T obj);
 

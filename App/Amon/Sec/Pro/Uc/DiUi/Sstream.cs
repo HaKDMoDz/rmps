@@ -12,8 +12,8 @@ namespace Me.Amon.Sec.Pro.Uc.DiUi
         private SstreamEnc _Enc;
         private SstreamDec _Dec;
 
-        public Sstream(ASec asec, Di di)
-            : base(asec, di)
+        public Sstream(APro apro, Di di)
+            : base(apro, di)
         {
         }
 
@@ -60,21 +60,21 @@ namespace Me.Amon.Sec.Pro.Uc.DiUi
                 case IData.DIR_ENC:
                     if (_Enc == null)
                     {
-                        _Enc = new SstreamEnc(_ASec, _Di);
+                        _Enc = new SstreamEnc(_APro, _Di);
                     }
                     _Cur = _Enc;
                     break;
                 case IData.DIR_DEC:
                     if (_Dec == null)
                     {
-                        _Dec = new SstreamDec(_ASec, _Di);
+                        _Dec = new SstreamDec(_APro, _Di);
                     }
                     _Cur = _Dec;
                     break;
                 default:
                     if (_Def == null)
                     {
-                        _Def = new SstreamDef(_ASec, _Di);
+                        _Def = new SstreamDef(_APro, _Di);
                     }
                     _Cur = _Def;
                     break;
@@ -100,10 +100,10 @@ namespace Me.Amon.Sec.Pro.Uc.DiUi
                 case INPUT_FILE:
                 case INPUT_FILE_TXT:
                 case INPUT_FILE_BIN:
-                    _ASec.ShowOpen(_Di.TbData.Text, new CallBackHandler<string>(OpenCallBack));
+                    _APro.ShowOpen(_Di.TbData.Text, new CallBackHandler<string>(OpenCallBack));
                     break;
                 case INPUT_TEXT:
-                    _ASec.ShowEdit(_Di.UserData.ToString(), new CallBackHandler<string>(EditCallBack));
+                    _APro.ShowEdit(_Di.UserData.ToString(), new CallBackHandler<string>(EditCallBack));
                     break;
                 default:
                     break;
@@ -117,7 +117,7 @@ namespace Me.Amon.Sec.Pro.Uc.DiUi
 
         public override void MoreMask()
         {
-            _ASec.ShowMask(_Udc);
+            _APro.ShowMask(_Udc);
         }
         #endregion
 

@@ -5,8 +5,8 @@ namespace Me.Amon.Sec.Pro.Uc.DiUi
 {
     public class Txt2Img : ADi
     {
-        public Txt2Img(ASec asec, Di di)
-            : base(asec, di)
+        public Txt2Img(APro apro, Di di)
+            : base(apro, di)
         {
         }
 

@@ -8,8 +8,8 @@ namespace Me.Amon.Sec.Pro.Uc.DiUi
 {
     public class Acrypto : ADi
     {
-        public Acrypto(ASec asec, Di di)
-            : base(asec, di)
+        public Acrypto(APro apro, Di di)
+            : base(apro, di)
         {
         }
 
@@ -88,10 +88,10 @@ namespace Me.Amon.Sec.Pro.Uc.DiUi
             {
                 case INPUT_FILE_BIN:
                 case INPUT_FILE_TXT:
-                    _ASec.ShowOpen(_Di.TbData.Text, new CallBackHandler<string>(SaveCallBack));
+                    _APro.ShowOpen(_Di.TbData.Text, new CallBackHandler<string>(SaveCallBack));
                     break;
                 case INPUT_TEXT:
-                    _ASec.ShowEdit(_Di.UserData.ToString(), new CallBackHandler<string>(EditCallBack));
+                    _APro.ShowEdit(_Di.UserData.ToString(), new CallBackHandler<string>(EditCallBack));
                     break;
                 default:
                     break;
