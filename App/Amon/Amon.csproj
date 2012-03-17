@@ -29,7 +29,7 @@
     <PublisherName>Amon</PublisherName>
     <SuiteName>阿木软件</SuiteName>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>5.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -492,6 +492,12 @@
     <Compile Include="Sec\IData.cs" />
     <Compile Include="Sec\IForm.cs" />
     <Compile Include="Sec\IView.cs" />
+    <Compile Include="Sec\Pro\APro.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Pro\APro.Designer.cs">
+      <DependentUpon>APro.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sec\Pro\Uc\ACm.cs" />
     <Compile Include="Sec\Pro\Uc\ADi.cs" />
     <Compile Include="Sec\Pro\Uc\ADo.cs" />
@@ -587,6 +593,48 @@
     </Compile>
     <Compile Include="Sec\Pro\Uw\Text.Designer.cs">
       <DependentUpon>Text.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Wiz\AWiz.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Wiz\AWiz.Designer.cs">
+      <DependentUpon>AWiz.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Wiz\Cipher.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Wiz\Cipher.Designer.cs">
+      <DependentUpon>Cipher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Wiz\CipherFile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Wiz\CipherFile.Designer.cs">
+      <DependentUpon>CipherFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Wiz\CipherText.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Wiz\CipherText.Designer.cs">
+      <DependentUpon>CipherText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Wiz\Digest.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Wiz\Digest.Designer.cs">
+      <DependentUpon>Digest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Wiz\DigestFile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Wiz\DigestFile.Designer.cs">
+      <DependentUpon>DigestFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Wiz\DigestText.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Wiz\DigestText.Designer.cs">
+      <DependentUpon>DigestText.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Uc\Card.cs" />
@@ -915,6 +963,9 @@
     <EmbeddedResource Include="Sec\ASec.resx">
       <DependentUpon>ASec.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Pro\APro.resx">
+      <DependentUpon>APro.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sec\Pro\Uc\Cm.resx">
       <DependentUpon>Cm.cs</DependentUpon>
     </EmbeddedResource>
@@ -935,6 +986,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sec\Pro\Uw\Text.resx">
       <DependentUpon>Text.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Wiz\AWiz.resx">
+      <DependentUpon>AWiz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Wiz\Cipher.resx">
+      <DependentUpon>Cipher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Wiz\CipherFile.resx">
+      <DependentUpon>CipherFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Wiz\CipherText.resx">
+      <DependentUpon>CipherText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Wiz\Digest.resx">
+      <DependentUpon>Digest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\Auth\AuthLk.resx">
       <DependentUpon>AuthLk.cs</DependentUpon>
@@ -1037,9 +1103,7 @@
     <None Include="Resources\Pupil.png" />
     <None Include="Resources\Waiting.gif" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Sec\Wiz\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
       <Visible>False</Visible>

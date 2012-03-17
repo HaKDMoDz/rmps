@@ -10,7 +10,7 @@ namespace Me.Amon.Sec.Pro.Uc
     public partial class Uk : UserControl, IView
     {
         #region 全局变量
-        private ASec _ASec;
+        private APro _APro;
         private AUk _Auk;
 
         private Default _Default;
@@ -30,9 +30,9 @@ namespace Me.Amon.Sec.Pro.Uc
             InitializeComponent();
         }
 
-        public Uk(ASec asec)
+        public Uk(APro apro)
         {
-            _ASec = asec;
+            _APro = apro;
 
             InitializeComponent();
         }
@@ -41,15 +41,15 @@ namespace Me.Amon.Sec.Pro.Uc
         #region 接口实现
         public void Init()
         {
-            _Default = new Default(_ASec, this);
-            _Digest = new Digest(_ASec, this);
-            _RandKey = new RandKey(_ASec, this);
-            _Wrapper = new Wrapper(_ASec, this);
-            _Confuse = new Confuse(_ASec, this);
-            _Scrypto = new Scrypto(_ASec, this);
-            _Sstream = new Sstream(_ASec, this);
-            _Acrypto = new Acrypto(_ASec, this);
-            _Txt2Img = new Txt2Img(_ASec, this);
+            _Default = new Default(_APro, this);
+            _Digest = new Digest(_APro, this);
+            _RandKey = new RandKey(_APro, this);
+            _Wrapper = new Wrapper(_APro, this);
+            _Confuse = new Confuse(_APro, this);
+            _Scrypto = new Scrypto(_APro, this);
+            _Sstream = new Sstream(_APro, this);
+            _Acrypto = new Acrypto(_APro, this);
+            _Txt2Img = new Txt2Img(_APro, this);
 
             _Auk = _Default;
 

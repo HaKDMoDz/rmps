@@ -9,7 +9,7 @@ namespace Me.Amon.Sec.Pro.Uc
 {
     public partial class Cm : UserControl, IView
     {
-        private ASec _ASec;
+        private APro _APro;
         private ACm _Acm;
 
         private Default _Default;
@@ -28,9 +28,9 @@ namespace Me.Amon.Sec.Pro.Uc
             InitializeComponent();
         }
 
-        public Cm(ASec asec)
+        public Cm(APro apro)
         {
-            _ASec = asec;
+            _APro = apro;
 
             InitializeComponent();
         }
@@ -39,15 +39,15 @@ namespace Me.Amon.Sec.Pro.Uc
         #region 接口实现
         public void Init()
         {
-            _Default = new Default(_ASec, this);
-            _Digest = new Digest(_ASec, this);
-            _RandKey = new RandKey(_ASec, this);
-            _Wrapper = new Wrapper(_ASec, this);
-            _Confuse = new Confuse(_ASec, this);
-            _Scrypto = new Scrypto(_ASec, this);
-            _Sstream = new Sstream(_ASec, this);
-            _Acrypto = new Acrypto(_ASec, this);
-            _Txt2Img = new Txt2Img(_ASec, this);
+            _Default = new Default(_APro, this);
+            _Digest = new Digest(_APro, this);
+            _RandKey = new RandKey(_APro, this);
+            _Wrapper = new Wrapper(_APro, this);
+            _Confuse = new Confuse(_APro, this);
+            _Scrypto = new Scrypto(_APro, this);
+            _Sstream = new Sstream(_APro, this);
+            _Acrypto = new Acrypto(_APro, this);
+            _Txt2Img = new Txt2Img(_APro, this);
 
             _Acm = _Default;
 
@@ -194,7 +194,7 @@ namespace Me.Amon.Sec.Pro.Uc
             Main.LogInfo("CbName_SelectedIndexChanged:" + item.K);
 #endif
             _Acm.ChangeName(item.K);
-            _ASec.ChangeAlg(item.K);
+            _APro.ChangeAlg(item.K);
         }
 
         private void CbMode_SelectedIndexChanged(object sender, EventArgs e)
