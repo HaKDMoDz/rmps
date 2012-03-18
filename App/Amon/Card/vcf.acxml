@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <amon>
-    <base>
+    <info>
         <name>电子名片</name>
         <type>vcf</type>
-    </base>
+    </info>
     <card>
-        <template-uri>card/amon.vcf</template-uri>
+		<base path="Card" />
+        <template-uri>amon.vcf</template-uri>
     </card>
 </amon>

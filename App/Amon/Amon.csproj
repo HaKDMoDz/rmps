@@ -304,6 +304,12 @@
     <Compile Include="Pwd\Wiz\BeanCall.Designer.cs">
       <DependentUpon>BeanCall.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pwd\Wiz\BeanGuid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanGuid.Designer.cs">
+      <DependentUpon>BeanGuid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pwd\_Cat\CatEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -919,6 +925,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Wiz\BeanCall.resx">
       <DependentUpon>BeanCall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanGuid.resx">
+      <DependentUpon>BeanGuid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\_Cat\CatEdit.resx">
       <DependentUpon>CatEdit.cs</DependentUpon>

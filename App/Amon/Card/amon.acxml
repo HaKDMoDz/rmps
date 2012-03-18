@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <amon>
-    <base>
+    <info>
         <name>点阵格式2</name>
         <type>png</type>
-    </base>
+    </info>
     <card>
         <base width="400" height="260" background-color="#00ffff" background-image="card/amon/amon.png" background-image-style="repeat" />
         <draw method="image" x="25" y="18" width="" height="">http://amon.me/logo/amon/logo32.png</draw>

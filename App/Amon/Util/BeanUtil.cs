@@ -108,6 +108,76 @@ namespace Me.Amon.Util
             window.Location = point;
         }
 
+        public static void Copy(string src, string dst, bool overwrite, bool copySubDir)
+        {
+            if (File.Exists(src))
+            {
+                File.Copy(src, dst, overwrite);
+                return;
+            }
+
+            if (!Directory.Exists(src))
+            {
+                return;
+            }
+            if (!Directory.Exists(dst))
+            {
+                Directory.CreateDirectory(dst);
+            }
+
+            DoCopy(src, dst, overwrite, copySubDir);
+        }
+
+        private static void DoCopy(string src, string dst, bool overwrite, bool copySubDir)
+        {
+            if (copySubDir)
+            {
+                foreach (string dir in Directory.GetDirectories(src))
+                {
+                    string tmp = Path.Combine(dst, Path.GetDirectoryName(dir));
+                    if (!Directory.Exists(tmp))
+                    {
+                        Directory.CreateDirectory(tmp);
+                    }
+                    DoCopy(dir, tmp, overwrite, copySubDir);
+                }
+            }
+
+            foreach (string file in Directory.GetFiles(src))
+            {
+                string tmp = Path.Combine(dst, Path.GetFileName(file));
+                if (File.Exists(tmp))
+                {
+                    if (!overwrite)
+                    {
+                        continue;
+                    }
+                    File.SetAttributes(tmp, FileAttributes.Normal);
+                }
+                File.Copy(file, tmp, true);
+            }
+        }
+
+        public static Stream Open(string path, string file)
+        {
+            if (Regex.IsMatch(file, "^[a-zA-z]{2,}:/{2,3}[^\\s]+"))
+            {
+                return WebRequest.Create(file).GetRequestStream();
+            }
+
+            if (!Path.IsPathRooted(file))
+            {
+                file = Path.Combine(path, file);
+            }
+
+            if (File.Exists(file))
+            {
+                return File.OpenRead(file);
+            }
+
+            return null;
+        }
+
         public static Image ReadImage(string file, Image defImg)
         {
             Stream stream;
@@ -141,7 +211,7 @@ namespace Me.Amon.Util
             Stream stream;
             if (Regex.IsMatch(file, "^[a-zA-z]{2,}:/{2,3}[^\\s]+"))
             {
-                stream = WebRequest.Create(file).GetRequestStream();
+                stream = WebRequest.Create(file).GetResponse().GetResponseStream();
             }
             else
             {
@@ -155,9 +225,6 @@ namespace Me.Amon.Util
                     return defImg;
                 }
 
-                if (Regex.IsMatch(file, "[\\w]"))
-                {
-                }
                 stream = File.OpenRead(file);
             }
 

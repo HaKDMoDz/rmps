@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <amon>
-    <base>
+    <info>
         <name>矢量格式</name>
         <type>svg</type>
-    </base>
+    </info>
     <card>
-        <template-uri>card/amon.svg</template-uri>
+		<base path="Card" />
+        <template-uri>amon.svg</template-uri>
     </card>
 </amon>

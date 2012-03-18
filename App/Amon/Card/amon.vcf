@@ -1,6 +1,6 @@
 BEGIN:VCARD
 VERSION:2.1
-N;CHARSET=utf-8:#姓##名#
+N;CHARSET=utf-8:#姓#;#名#
 FN;CHARSET=utf-8:#姓名#
 ORG;CHARSET=utf-8:#公司#
 TITLE;CHARSET=utf-8:#职位#

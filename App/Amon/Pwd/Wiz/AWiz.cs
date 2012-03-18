@@ -10,6 +10,7 @@ namespace Me.Amon.Pwd.Wiz
         private APwd _APwd;
         private IWizView _LastView;
         private BeanInfo _InfoBean;
+        private BeanGuid _GuidBean;
         private BeanHead _HeadBean;
         private BeanBody _BodyBean;
         private SafeModel _SafeModel;
@@ -67,7 +68,7 @@ namespace Me.Amon.Pwd.Wiz
 
         public void ShowData()
         {
-            ShowHead();
+            ShowGuid();
         }
 
         public void AppendKey()
@@ -163,6 +164,26 @@ namespace Me.Amon.Pwd.Wiz
         #endregion
 
         #region 私有函数
+        private void ShowGuid()
+        {
+            if (_GuidBean == null)
+            {
+                _GuidBean = new BeanGuid(this, _SafeModel);
+                _GuidBean.Init(_ViewModel);
+            }
+            if (_LastView != null && _LastView != _GuidBean)
+            {
+                _LastView.HideView(TpGrid);
+                _GuidBean.InitView(TpGrid);
+
+                BtPrev.Visible = false;
+                BtNext.Visible = true;
+            }
+
+            _LastView = _GuidBean;
+            _LastView.ShowData();
+        }
+
         private void ShowHead()
         {
             if (_HeadBean == null)
@@ -175,7 +196,7 @@ namespace Me.Amon.Pwd.Wiz
                 _LastView.HideView(TpGrid);
                 _HeadBean.InitView(TpGrid);
 
-                BtPrev.Visible = false;
+                BtPrev.Visible = true;
                 BtNext.Visible = true;
             }
 

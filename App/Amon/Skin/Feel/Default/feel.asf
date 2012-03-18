@@ -176,3 +176,9 @@ att-file-img-shaped-sel=att-file-img-shaped-sel.png
 # 控制图标
 #######################################
 att-line-options=options.png
+
+#######################################
+# 导出图标
+#######################################
+export-card-16=card16.png
+export-card-24=card24.png

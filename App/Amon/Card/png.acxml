@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <amon>
-    <base>
+    <info>
         <name>点阵格式</name>
         <type>png</type>
-    </base>
+    </info>
     <card>
         <base width="400" height="240" background-color="#FFFFFF" />
 		<draw method="image" x="12" y="12" width="32" height="32">D:\line.png</draw>

@@ -30,47 +30,61 @@ namespace Me.Amon.Uc
             XmlDocument doc = new XmlDocument();
             doc.Load(src);
 
-            XmlNode node = doc.SelectSingleNode("/amon/card/template-res");
-            string text;
-            if (node != null)
-            {
-                text = node.InnerText;
-                if (CharUtil.IsValidate(text))
-                {
-                    File.Copy(text, Path.Combine(dst, Path.GetFileName(text)));
-                }
-            }
+            XmlNode node = doc.SelectSingleNode("/amon/card/base");
+            string path = ReadString(node, "path", "Card");
 
             node = doc.SelectSingleNode("/amon/card/template-uri");
             if (node == null)
             {
                 return null;
             }
-            text = node.InnerText;
-            if (!CharUtil.IsValidate(text))
+            src = node.InnerText;
+            if (!CharUtil.IsValidate(src))
             {
                 return null;
             }
+            string file = _Text(path, src, dst, ".htm", Encoding.UTF8);
 
-            return _Text(text, dst, ".htm");
+            node = doc.SelectSingleNode("/amon/card/template-res");
+            if (node != null)
+            {
+                string text = node.InnerText;
+                if (CharUtil.IsValidate(text))
+                {
+                    if (!Path.IsPathRooted(text))
+                    {
+                        BeanUtil.Copy(Path.Combine(path, text), Path.Combine(dst, text), true, true);
+                    }
+                    else
+                    {
+                        BeanUtil.Copy(text, Path.Combine(dst, Path.GetDirectoryName(text)), true, true);
+                    }
+                }
+            }
+
+            return file;
         }
 
         public string ExportTxt(string src, string dst)
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(src);
-            XmlNode node = doc.SelectSingleNode("/amon/card/template-uri");
+
+            XmlNode node = doc.SelectSingleNode("/amon/card/base");
+            string path = ReadString(node, "path", "Card");
+
+            node = doc.SelectSingleNode("/amon/card/template-uri");
             if (node == null)
             {
                 return null;
             }
-            string text = node.InnerText;
-            if (!CharUtil.IsValidate(text))
+            src = node.InnerText;
+            if (!CharUtil.IsValidate(src))
             {
                 return null;
             }
 
-            return _Text(text, dst, ".txt");
+            return _Text(path, src, dst, ".txt", Encoding.Default);
         }
 
         public string ExportPng(string src, string dst)
@@ -78,6 +92,7 @@ namespace Me.Amon.Uc
             Stream stream = File.OpenRead(src);
             string text = _Trim(stream);
             stream.Close();
+
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(text);
             return _Draw(doc, dst);
@@ -87,55 +102,75 @@ namespace Me.Amon.Uc
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(src);
-            XmlNode node = doc.SelectSingleNode("/amon/card/template-uri");
+
+            XmlNode node = doc.SelectSingleNode("/amon/card/base");
+            string path = ReadString(node, "path", "Card");
+
+            node = doc.SelectSingleNode("/amon/card/template-uri");
             if (node == null)
             {
                 return null;
             }
-            string text = node.InnerText;
-            if (!CharUtil.IsValidate(text))
+            src = node.InnerText;
+            if (!CharUtil.IsValidate(src))
             {
                 return null;
             }
 
-            return _Text(text, dst, ".svg");
+            return _Text(path, src, dst, ".svg", Encoding.UTF8);
         }
 
         public string ExportVcf(string src, string dst)
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(src);
-            XmlNode node = doc.SelectSingleNode("/amon/card/template-uri");
+
+            XmlNode node = doc.SelectSingleNode("/amon/card/base");
+            string path = ReadString(node, "path", "Card");
+
+            node = doc.SelectSingleNode("/amon/card/template-uri");
             if (node == null)
             {
                 return null;
             }
-            string text = node.InnerText;
-            if (!CharUtil.IsValidate(text))
+            src = node.InnerText;
+            if (!CharUtil.IsValidate(src))
             {
                 return null;
             }
 
-            return _Text(text, dst, ".vcf");
+            return _Text(path, src, dst, ".vcf", Encoding.Default);
         }
 
         public string ExportQrc(string src, string dst)
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(src);
-            XmlNode node = doc.SelectSingleNode("/amon/card/template-uri");
+
+            XmlNode node = doc.SelectSingleNode("/amon/card/base");
+            string path = ReadString(node, "path", "Card");
+
+            node = doc.SelectSingleNode("/amon/card/template-uri");
             if (node == null)
             {
                 return null;
             }
-            string text = node.InnerText;
-            if (!CharUtil.IsValidate(text))
+            src = node.InnerText;
+            if (!CharUtil.IsValidate(src))
+            {
+                return null;
+            }
+            if (!Path.IsPathRooted(src))
+            {
+                src = Path.Combine(path, src);
+            }
+            if (!File.Exists(src))
             {
                 return null;
             }
 
             FileStream stream = File.OpenRead(src);
-            text = _Trim(stream);
+            string text = _Trim(stream);
             stream.Close();
 
             try
@@ -146,9 +181,9 @@ namespace Me.Amon.Uc
                 barcodeEncoder.ForeColor = Color.Black;
                 barcodeEncoder.BackColor = Color.White;
                 barcodeEncoder.QuietZone = 1;
-                barcodeEncoder.Width = 230;
-                barcodeEncoder.Height = 230;
-                Image img = barcodeEncoder.Encode(BarcodeFormat.QRCode, "");
+                barcodeEncoder.Width = 160;
+                barcodeEncoder.Height = 160;
+                Image img = barcodeEncoder.Encode(BarcodeFormat.QRCode, text);
 
                 AAtt item = _SafeModel.GetAtt(AAtt.PWDS_HEAD_META);
                 dst = Path.Combine(dst, item.Name + ".png");
@@ -167,36 +202,36 @@ namespace Me.Amon.Uc
             XmlDocument doc = new XmlDocument();
             doc.Load(src);
 
-            XmlNode node = doc.SelectSingleNode("/amon/card/template-res");
-            String text;
-            if (node != null)
-            {
-                text = node.InnerText;
-                if (CharUtil.IsValidate(text))
-                {
-                    File.Copy(text, Path.Combine(dst, Path.GetFileName(text)));
-                }
-            }
+            XmlNode node = doc.SelectSingleNode("/amon/card/base");
+            string path = ReadString(node, "path", "Card");
 
             node = doc.SelectSingleNode("/amon/card/template-uri");
             if (node == null)
             {
                 return null;
             }
-            text = node.InnerText;
-            if (!CharUtil.IsValidate(text))
+            src = node.InnerText;
+            if (!CharUtil.IsValidate(src))
             {
                 return null;
             }
+            string file = _Text(path, src, dst, Path.GetExtension(src), Encoding.Default);
 
-            int si = text.LastIndexOf('/');
-            int di = text.LastIndexOf('.');
-            String ext = "";
-            if (di > si)
+            node = doc.SelectSingleNode("/amon/card/template-res");
+            if (node != null)
             {
-                ext = text.Substring(di);
+                string text = node.InnerText;
+                if (CharUtil.IsValidate(text))
+                {
+                    if (!Path.IsPathRooted(text))
+                    {
+                        text = Path.Combine(path, text);
+                    }
+                    BeanUtil.Copy(text, Path.Combine(dst, Path.GetDirectoryName(text)), true, true);
+                }
             }
-            return _Text(text, dst, ext);
+
+            return file;
         }
 
         private string _Trim(Stream stream)
@@ -225,8 +260,17 @@ namespace Me.Amon.Uc
             return buffer.ToString();
         }
 
-        private string _Text(string src, string dst, string ext)
+        private string _Text(string path, string src, string dst, string ext, Encoding encoding)
         {
+            if (!Path.IsPathRooted(src))
+            {
+                src = Path.Combine("Card", src);
+            }
+            if (!File.Exists(src))
+            {
+                return null;
+            }
+
             FileStream stream = File.OpenRead(src);
             string text = _Trim(stream);
             stream.Close();
@@ -235,7 +279,7 @@ namespace Me.Amon.Uc
             dst = Path.Combine(dst, item.Name + ext);
 
             stream = File.Exists(dst) ? File.OpenWrite(dst) : File.Create(dst);
-            StreamWriter writer = new StreamWriter(stream);
+            StreamWriter writer = new StreamWriter(stream, encoding);
             writer.Write(text);
             writer.Flush();
             writer.Close();
@@ -364,7 +408,6 @@ namespace Me.Amon.Uc
 
             AAtt item = _SafeModel.GetAtt(AAtt.PWDS_HEAD_META);
             dst = Path.Combine(dst, item.Name + ".png");
-            dst = Path.Combine(dst, "a.png");
             image.Save(dst, ImageFormat.Png);
 
             return dst;
