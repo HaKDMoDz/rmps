@@ -1,11 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
-using Me.Amon.Bean;
 using Me.Amon.Bean.Att;
 using Me.Amon.Event;
 using Me.Amon.Model;
-using Me.Amon.Uc;
 using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.Wiz
@@ -32,7 +30,7 @@ namespace Me.Amon.Pwd.Wiz
             InitializeComponent();
         }
 
-        public void Init(DataModel dataModel)
+        public void Init(DataModel dataModel, ViewModel viewModel)
         {
             _DataModel = dataModel;
             _AIco = new Bean.Ico();
@@ -60,23 +58,6 @@ namespace Me.Amon.Pwd.Wiz
 
         public void ShowData()
         {
-            if ((_DataModel.LibModified & IEnv.KEY_AWIZ) > 0)
-            {
-                CbLib.DataSource = null;
-                CbLib.DataSource = _DataModel.LibList;
-                CbLib.DisplayMember = "Name";
-                CbLib.ValueMember = "Id";
-                _DataModel.LibModified &= ~IEnv.KEY_AWIZ;
-            }
-
-            GuidAtt guid = _SafeModel.Guid;
-            if (guid == null)
-            {
-                return;
-            }
-
-            CbLib.SelectedValue = new Item { K = guid.GetSpec(GuidAtt.SPEC_GUID_TPLT) };
-
             MetaAtt meta = _SafeModel.Meta;
             if (meta == null)
             {
@@ -127,32 +108,12 @@ namespace Me.Amon.Pwd.Wiz
                 return false;
             }
 
-            LibHeader lib = CbLib.SelectedItem as LibHeader;
-            if (lib == null || !CharUtil.IsValidateHash(lib.Id))
-            {
-                Main.ShowAlert("请选择您要使用的模板！");
-                CbLib.Focus();
-                return false;
-            }
-
             string name = TbName.Text;
             if (!CharUtil.IsValidate(name))
             {
                 Main.ShowAlert("请输入口令标题！");
                 TbName.Focus();
                 return false;
-            }
-
-            GuidAtt guid = _SafeModel.Guid;
-            if (lib.Id != guid.GetSpec(GuidAtt.SPEC_GUID_TPLT))
-            {
-                guid.SetSpec(GuidAtt.SPEC_GUID_TPLT, lib.Id);
-                if (!_SafeModel.Key.IsUpdate)
-                {
-                    _SafeModel.InitData(lib);
-                }
-                guid.Modified = true;
-                _SafeModel.Key.Modified |= guid.Modified;
             }
 
             MetaAtt meta = _SafeModel.Meta;

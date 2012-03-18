@@ -81,7 +81,7 @@ namespace Me.Amon.Pwd.Wiz
             _SafeModel.InitLogo();
             _SafeModel.InitHint();
 
-            ShowHead();
+            ShowGuid();
             _LastView.Focus();
         }
 
@@ -142,7 +142,14 @@ namespace Me.Amon.Pwd.Wiz
             {
                 return;
             }
-            ShowHead();
+
+            if (_LastView.Name == "body")
+            {
+                ShowHead();
+                return;
+            }
+
+            ShowGuid();
         }
 
         private void BtNext_Click(object sender, EventArgs e)
@@ -151,7 +158,14 @@ namespace Me.Amon.Pwd.Wiz
             {
                 return;
             }
-            ShowBody();
+
+            if (_LastView.Name == "head")
+            {
+                ShowBody();
+                return;
+            }
+
+            ShowHead();
         }
 
         private void BtCopy_Click(object sender, EventArgs e)
@@ -169,7 +183,8 @@ namespace Me.Amon.Pwd.Wiz
             if (_GuidBean == null)
             {
                 _GuidBean = new BeanGuid(this, _SafeModel);
-                _GuidBean.Init(_ViewModel);
+                _GuidBean.Init(_DataModel, _ViewModel);
+                _GuidBean.Name = "guid";
             }
             if (_LastView != null && _LastView != _GuidBean)
             {
@@ -189,7 +204,8 @@ namespace Me.Amon.Pwd.Wiz
             if (_HeadBean == null)
             {
                 _HeadBean = new BeanHead(this, _SafeModel);
-                _HeadBean.Init(_DataModel);
+                _HeadBean.Init(_DataModel, _ViewModel);
+                _HeadBean.Name = "head";
             }
             if (_LastView != null && _LastView != _HeadBean)
             {
@@ -210,6 +226,7 @@ namespace Me.Amon.Pwd.Wiz
             {
                 _BodyBean = new BeanBody(_SafeModel);
                 _BodyBean.Init(_DataModel, _ViewModel);
+                _BodyBean.Name = "body";
             }
             if (_LastView != null && _LastView != _BodyBean)
             {

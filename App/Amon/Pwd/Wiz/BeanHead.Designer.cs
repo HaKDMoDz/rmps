@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LbLib = new System.Windows.Forms.Label();
-            this.CbLib = new System.Windows.Forms.ComboBox();
             this.LbName = new System.Windows.Forms.Label();
             this.TbName = new System.Windows.Forms.TextBox();
             this.LbMeta = new System.Windows.Forms.Label();
@@ -43,67 +41,48 @@
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).BeginInit();
             this.SuspendLayout();
             // 
-            // LbLib
-            // 
-            this.LbLib.AutoSize = true;
-            this.LbLib.Location = new System.Drawing.Point(10, 6);
-            this.LbLib.Name = "LbLib";
-            this.LbLib.Size = new System.Drawing.Size(47, 12);
-            this.LbLib.TabIndex = 0;
-            this.LbLib.Text = "模板(&L)";
-            // 
-            // CbLib
-            // 
-            this.CbLib.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CbLib.FormattingEnabled = true;
-            this.CbLib.Location = new System.Drawing.Point(63, 3);
-            this.CbLib.Name = "CbLib";
-            this.CbLib.Size = new System.Drawing.Size(121, 20);
-            this.CbLib.TabIndex = 1;
-            this.CbLib.SelectedIndexChanged += new System.EventHandler(this.CbLib_SelectedIndexChanged);
-            // 
             // LbName
             // 
             this.LbName.AutoSize = true;
-            this.LbName.Location = new System.Drawing.Point(10, 32);
+            this.LbName.Location = new System.Drawing.Point(10, 6);
             this.LbName.Name = "LbName";
             this.LbName.Size = new System.Drawing.Size(47, 12);
-            this.LbName.TabIndex = 2;
+            this.LbName.TabIndex = 0;
             this.LbName.Text = "标题(&T)";
             // 
             // TbName
             // 
-            this.TbName.Location = new System.Drawing.Point(63, 29);
+            this.TbName.Location = new System.Drawing.Point(63, 3);
             this.TbName.Name = "TbName";
             this.TbName.Size = new System.Drawing.Size(120, 21);
-            this.TbName.TabIndex = 3;
+            this.TbName.TabIndex = 1;
             // 
             // LbMeta
             // 
             this.LbMeta.AutoSize = true;
-            this.LbMeta.Location = new System.Drawing.Point(10, 59);
+            this.LbMeta.Location = new System.Drawing.Point(10, 33);
             this.LbMeta.Name = "LbMeta";
             this.LbMeta.Size = new System.Drawing.Size(47, 12);
-            this.LbMeta.TabIndex = 4;
+            this.LbMeta.TabIndex = 2;
             this.LbMeta.Text = "搜索(&M)";
             // 
             // TbMeta
             // 
             this.TbMeta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TbMeta.Location = new System.Drawing.Point(63, 56);
+            this.TbMeta.Location = new System.Drawing.Point(63, 30);
             this.TbMeta.Multiline = true;
             this.TbMeta.Name = "TbMeta";
             this.TbMeta.Size = new System.Drawing.Size(284, 60);
-            this.TbMeta.TabIndex = 5;
+            this.TbMeta.TabIndex = 3;
             // 
             // LbIcon
             // 
             this.LbIcon.AutoSize = true;
-            this.LbIcon.Location = new System.Drawing.Point(10, 124);
+            this.LbIcon.Location = new System.Drawing.Point(10, 98);
             this.LbIcon.Name = "LbIcon";
             this.LbIcon.Size = new System.Drawing.Size(47, 12);
-            this.LbIcon.TabIndex = 6;
+            this.LbIcon.TabIndex = 4;
             this.LbIcon.Text = "徽标(&I)";
             // 
             // PbLogo
@@ -111,47 +90,47 @@
             this.PbLogo.BackColor = System.Drawing.SystemColors.Window;
             this.PbLogo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PbLogo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PbLogo.Location = new System.Drawing.Point(63, 122);
+            this.PbLogo.Location = new System.Drawing.Point(63, 96);
             this.PbLogo.Name = "PbLogo";
             this.PbLogo.Size = new System.Drawing.Size(18, 18);
-            this.PbLogo.TabIndex = 7;
+            this.PbLogo.TabIndex = 5;
             this.PbLogo.TabStop = false;
             this.PbLogo.Click += new System.EventHandler(this.PbLogo_Click);
             // 
             // LbHint
             // 
             this.LbHint.AutoSize = true;
-            this.LbHint.Location = new System.Drawing.Point(10, 149);
+            this.LbHint.Location = new System.Drawing.Point(10, 123);
             this.LbHint.Name = "LbHint";
             this.LbHint.Size = new System.Drawing.Size(47, 12);
-            this.LbHint.TabIndex = 8;
+            this.LbHint.TabIndex = 6;
             this.LbHint.Text = "提醒(&H)";
             // 
             // TbHint
             // 
-            this.TbHint.Location = new System.Drawing.Point(63, 146);
+            this.TbHint.Location = new System.Drawing.Point(63, 120);
             this.TbHint.Name = "TbHint";
             this.TbHint.Size = new System.Drawing.Size(120, 21);
-            this.TbHint.TabIndex = 9;
+            this.TbHint.TabIndex = 7;
             // 
             // LbMemo
             // 
             this.LbMemo.AutoSize = true;
-            this.LbMemo.Location = new System.Drawing.Point(10, 176);
+            this.LbMemo.Location = new System.Drawing.Point(10, 150);
             this.LbMemo.Name = "LbMemo";
             this.LbMemo.Size = new System.Drawing.Size(47, 12);
-            this.LbMemo.TabIndex = 10;
+            this.LbMemo.TabIndex = 8;
             this.LbMemo.Text = "备注(&R)";
             // 
             // TbMemo
             // 
             this.TbMemo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TbMemo.Location = new System.Drawing.Point(63, 173);
+            this.TbMemo.Location = new System.Drawing.Point(63, 147);
             this.TbMemo.Multiline = true;
             this.TbMemo.Name = "TbMemo";
             this.TbMemo.Size = new System.Drawing.Size(284, 60);
-            this.TbMemo.TabIndex = 11;
+            this.TbMemo.TabIndex = 9;
             // 
             // BeanHead
             // 
@@ -167,8 +146,6 @@
             this.Controls.Add(this.LbMeta);
             this.Controls.Add(this.TbName);
             this.Controls.Add(this.LbName);
-            this.Controls.Add(this.CbLib);
-            this.Controls.Add(this.LbLib);
             this.Name = "BeanHead";
             this.Size = new System.Drawing.Size(350, 250);
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).EndInit();
@@ -179,8 +156,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label LbLib;
-        private System.Windows.Forms.ComboBox CbLib;
         private System.Windows.Forms.Label LbName;
         private System.Windows.Forms.TextBox TbName;
         private System.Windows.Forms.Label LbMeta;
