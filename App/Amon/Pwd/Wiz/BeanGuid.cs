@@ -12,6 +12,7 @@ namespace Me.Amon.Pwd.Wiz
 {
     public partial class BeanGuid : UserControl, IWizView
     {
+        private AWiz _AWiz;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
 
@@ -23,9 +24,10 @@ namespace Me.Amon.Pwd.Wiz
 
         public BeanGuid(AWiz awiz, SafeModel safeModel)
         {
-            InitializeComponent();
-
+            _AWiz = awiz;
             _SafeModel = safeModel;
+
+            InitializeComponent();
         }
 
         public void Init(DataModel dataModel, ViewModel viewModel)
@@ -33,6 +35,7 @@ namespace Me.Amon.Pwd.Wiz
             _DataModel = dataModel;
 
             PbCard.Image = viewModel.GetImage("export-card-24");
+            _AWiz.ShowTips(PbCard, "导出为卡片");
 
             if (!Directory.Exists("Card"))
             {
@@ -102,7 +105,7 @@ namespace Me.Amon.Pwd.Wiz
                     }
                     item.Tag = "all:" + cardFile;
                     item.Click += exportHandler;
-                    CmCard.Items.Add(item);
+                    CcAll.DropDownItems.Add(item);
                 }
                 catch (Exception exp)
                 {
@@ -144,7 +147,8 @@ namespace Me.Amon.Pwd.Wiz
                 return;
             }
 
-            CbLib.SelectedValue = new Item { K = guid.GetSpec(GuidAtt.SPEC_GUID_TPLT) };
+            CbLib.SelectedValue = new LibHeader { Id = guid.GetSpec(GuidAtt.SPEC_GUID_TPLT) };
+            PbCard.Visible = guid.GetSpec(GuidAtt.SPEC_GUID_TPLT) == IEnv.LIB_CARD;
         }
 
         public bool SaveData()

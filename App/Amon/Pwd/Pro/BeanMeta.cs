@@ -54,16 +54,24 @@ namespace Me.Amon.Pwd.Pro
             Clipboard.SetText(_Ctl.Text);
         }
 
-        public void Save()
+        public bool Save()
         {
             if (_Att == null)
             {
-                return;
+                return false;
             }
 
-            if (TbName.Text != _Att.Name)
+            string name = TbName.Text;
+            if (string.IsNullOrEmpty(name))
             {
-                _Att.Name = TbName.Text;
+                Main.ShowAlert("请输入口令标题！");
+                TbName.Focus();
+                return false;
+            }
+
+            if (_Att.Name != name)
+            {
+                _Att.Name = name;
                 _Att.Modified = true;
             }
             if (TbData.Text != _Att.Data)
@@ -71,6 +79,8 @@ namespace Me.Amon.Pwd.Pro
                 _Att.Data = TbData.Text;
                 _Att.Modified = true;
             }
+
+            return true;
         }
         #endregion
 

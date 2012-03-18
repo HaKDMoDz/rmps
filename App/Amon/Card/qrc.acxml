@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <amon>
     <info>
-        <name>条码格式</name>
+        <name>二维码格式</name>
         <type>qrc</type>
     </info>
     <card>

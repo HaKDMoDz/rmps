@@ -114,6 +114,7 @@ namespace Me.Amon.Pwd.Pro
 
             _DataList.Rows.Clear();
             _DataList.Rows.Add(_AAtt.Order, _AAtt);
+            _LastIndex = 0;
             _UserAction = true;
 
             ShowView(_AAtt);
@@ -173,7 +174,7 @@ namespace Me.Amon.Pwd.Pro
 
         public void UpdateAtt(int type)
         {
-            if (type < AAtt.TYPE_TEXT || type > AAtt.TYPE_LINE)
+            if (type < AAtt.TYPE_TEXT || type > AAtt.TYPE_LINE || type == AAtt.TYPE_DATE)
             {
                 return;
             }
@@ -185,7 +186,13 @@ namespace Me.Amon.Pwd.Pro
             {
                 return;
             }
-            AAtt att = GvAttList.SelectedRows[0].DataBoundItem as AAtt;
+
+            int index = GvAttList.SelectedRows[0].Index;
+            if (index < AAtt.HEAD_SIZE)
+            {
+                return;
+            }
+            AAtt att = _SafeModel.GetAtt(index);
             if (att == null || att.Type >= AAtt.TYPE_GUID)
             {
                 return;
@@ -203,8 +210,12 @@ namespace Me.Amon.Pwd.Pro
 
         public void SaveAtt()
         {
+            if (!_CmpLast.Save())
+            {
+                return;
+            }
+
             _UserAction = false;
-            _CmpLast.Save();
             DataRow row = _DataList.Rows[_LastIndex];
             row[1] = _SafeModel.GetAtt(_LastIndex);
             _UserAction = true;

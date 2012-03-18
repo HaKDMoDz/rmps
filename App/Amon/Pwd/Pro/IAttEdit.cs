@@ -16,6 +16,6 @@ namespace Me.Amon.Pwd.Pro
 
         void Copy();
 
-        void Save();
+        bool Save();
     }
 }

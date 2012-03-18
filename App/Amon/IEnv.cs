@@ -90,5 +90,7 @@
 
         public const int IMG_KEY_LIST_DIM = 24;
         public const string IMG_KEY_LIST_EXT = ".24";
+
+        public const string LIB_CARD = "qqqqqaavaqdfscdv";
     }
 }

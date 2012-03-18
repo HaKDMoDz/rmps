@@ -80,11 +80,11 @@ namespace Me.Amon.Pwd.Pro
             Clipboard.SetText(_Ctl.Text);
         }
 
-        public void Save()
+        public bool Save()
         {
             if (_Att == null)
             {
-                return;
+                return false;
             }
 
             if (_Att.Name != _AIco.File)
@@ -99,6 +99,8 @@ namespace Me.Amon.Pwd.Pro
                 _Att.Data = TbData.Text;
                 _Att.Modified = true;
             }
+
+            return true;
         }
         #endregion
 

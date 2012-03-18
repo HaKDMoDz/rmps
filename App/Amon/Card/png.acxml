@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <amon>
     <info>
-        <name>点阵格式</name>
+        <name>PNG图像</name>
         <type>png</type>
     </info>
     <card>

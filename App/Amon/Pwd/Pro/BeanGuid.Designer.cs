@@ -28,9 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.LbName = new System.Windows.Forms.Label();
             this.CbName = new System.Windows.Forms.ComboBox();
-            this.BtOpt = new System.Windows.Forms.Button();
+            this.PbCard = new System.Windows.Forms.PictureBox();
+            this.CmCard = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CcHtm = new System.Windows.Forms.ToolStripMenuItem();
+            this.CcTxt = new System.Windows.Forms.ToolStripMenuItem();
+            this.CcImg = new System.Windows.Forms.ToolStripMenuItem();
+            this.CcSep0 = new System.Windows.Forms.ToolStripSeparator();
+            this.CcAll = new System.Windows.Forms.ToolStripMenuItem();
+            ((System.ComponentModel.ISupportInitialize)(this.PbCard)).BeginInit();
+            this.CmCard.SuspendLayout();
             this.SuspendLayout();
             // 
             // LbName
@@ -51,25 +60,67 @@
             this.CbName.Size = new System.Drawing.Size(121, 20);
             this.CbName.TabIndex = 1;
             // 
-            // BtOpt
+            // PbCard
             // 
-            this.BtOpt.Location = new System.Drawing.Point(56, 29);
-            this.BtOpt.Name = "BtOpt";
-            this.BtOpt.Size = new System.Drawing.Size(21, 21);
-            this.BtOpt.TabIndex = 2;
-            this.BtOpt.UseVisualStyleBackColor = true;
-            this.BtOpt.Visible = false;
-            this.BtOpt.Click += new System.EventHandler(this.button1_Click);
+            this.PbCard.Location = new System.Drawing.Point(56, 29);
+            this.PbCard.Name = "PbCard";
+            this.PbCard.Size = new System.Drawing.Size(16, 16);
+            this.PbCard.TabIndex = 2;
+            this.PbCard.TabStop = false;
+            this.PbCard.Visible = false;
+            this.PbCard.Click += new System.EventHandler(this.PbCard_Click);
+            // 
+            // CmCard
+            // 
+            this.CmCard.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CcHtm,
+            this.CcTxt,
+            this.CcImg,
+            this.CcSep0,
+            this.CcAll});
+            this.CmCard.Name = "CmCard";
+            this.CmCard.Size = new System.Drawing.Size(153, 120);
+            // 
+            // CcHtm
+            // 
+            this.CcHtm.Name = "CcHtm";
+            this.CcHtm.Size = new System.Drawing.Size(152, 22);
+            this.CcHtm.Text = "网页格式(&H)";
+            // 
+            // CcTxt
+            // 
+            this.CcTxt.Name = "CcTxt";
+            this.CcTxt.Size = new System.Drawing.Size(152, 22);
+            this.CcTxt.Text = "文本格式(&T)";
+            // 
+            // CcImg
+            // 
+            this.CcImg.Name = "CcImg";
+            this.CcImg.Size = new System.Drawing.Size(152, 22);
+            this.CcImg.Text = "图像格式(&I)";
+            // 
+            // CcSep0
+            // 
+            this.CcSep0.Name = "CcSep0";
+            this.CcSep0.Size = new System.Drawing.Size(149, 6);
+            // 
+            // CcAll
+            // 
+            this.CcAll.Name = "CcAll";
+            this.CcAll.Size = new System.Drawing.Size(152, 22);
+            this.CcAll.Text = "其它格式(&O)";
             // 
             // BeanGuid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.BtOpt);
+            this.Controls.Add(this.PbCard);
             this.Controls.Add(this.CbName);
             this.Controls.Add(this.LbName);
             this.Name = "BeanGuid";
             this.Size = new System.Drawing.Size(366, 81);
+            ((System.ComponentModel.ISupportInitialize)(this.PbCard)).EndInit();
+            this.CmCard.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -79,6 +130,12 @@
 
         private System.Windows.Forms.Label LbName;
         private System.Windows.Forms.ComboBox CbName;
-        private System.Windows.Forms.Button BtOpt;
+        private System.Windows.Forms.PictureBox PbCard;
+        private System.Windows.Forms.ContextMenuStrip CmCard;
+        private System.Windows.Forms.ToolStripMenuItem CcHtm;
+        private System.Windows.Forms.ToolStripMenuItem CcTxt;
+        private System.Windows.Forms.ToolStripMenuItem CcImg;
+        private System.Windows.Forms.ToolStripSeparator CcSep0;
+        private System.Windows.Forms.ToolStripMenuItem CcAll;
     }
 }

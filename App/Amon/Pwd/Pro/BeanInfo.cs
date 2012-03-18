@@ -31,8 +31,9 @@ namespace Me.Amon.Pwd.Pro
         {
         }
 
-        public void Save()
+        public bool Save()
         {
+            return true;
         }
         #endregion
     }

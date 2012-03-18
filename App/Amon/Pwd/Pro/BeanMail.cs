@@ -58,11 +58,11 @@ namespace Me.Amon.Pwd.Pro
             Clipboard.SetText(_Ctl.Text);
         }
 
-        public void Save()
+        public bool Save()
         {
             if (_Att == null)
             {
-                return;
+                return false;
             }
 
             string mail = TbData.Text.Trim();
@@ -70,7 +70,7 @@ namespace Me.Amon.Pwd.Pro
             {
                 MessageBox.Show("无效的邮件地址！");
                 TbData.Focus();
-                return;
+                return false;
             }
 
             if (TbName.Text != _Att.Name)
@@ -83,6 +83,8 @@ namespace Me.Amon.Pwd.Pro
                 _Att.Data = mail;
                 _Att.Modified = true;
             }
+
+            return true;
         }
         #endregion
 

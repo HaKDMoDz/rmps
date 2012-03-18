@@ -37,6 +37,7 @@
             this.CcTxt = new System.Windows.Forms.ToolStripMenuItem();
             this.CcImg = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.CcAll = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PbCard)).BeginInit();
             this.CmCard.SuspendLayout();
             this.SuspendLayout();
@@ -61,6 +62,7 @@
             // 
             // PbCard
             // 
+            this.PbCard.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PbCard.Location = new System.Drawing.Point(63, 29);
             this.PbCard.Name = "PbCard";
             this.PbCard.Size = new System.Drawing.Size(24, 24);
@@ -74,32 +76,39 @@
             this.CcHtm,
             this.CcTxt,
             this.CcImg,
-            this.toolStripSeparator1});
+            this.toolStripSeparator1,
+            this.CcAll});
             this.CmCard.Name = "CmCard";
-            this.CmCard.Size = new System.Drawing.Size(153, 98);
+            this.CmCard.Size = new System.Drawing.Size(153, 120);
             // 
             // CcHtm
             // 
             this.CcHtm.Name = "CcHtm";
             this.CcHtm.Size = new System.Drawing.Size(152, 22);
-            this.CcHtm.Text = "网页格式";
+            this.CcHtm.Text = "网页格式(&H)";
             // 
             // CcTxt
             // 
             this.CcTxt.Name = "CcTxt";
             this.CcTxt.Size = new System.Drawing.Size(152, 22);
-            this.CcTxt.Text = "文本格式";
+            this.CcTxt.Text = "文本格式(&T)";
             // 
             // CcImg
             // 
             this.CcImg.Name = "CcImg";
             this.CcImg.Size = new System.Drawing.Size(152, 22);
-            this.CcImg.Text = "图像格式";
+            this.CcImg.Text = "图像格式(&I)";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // CcAll
+            // 
+            this.CcAll.Name = "CcAll";
+            this.CcAll.Size = new System.Drawing.Size(152, 22);
+            this.CcAll.Text = "其它格式(&O)";
             // 
             // BeanGuid
             // 
@@ -127,5 +136,6 @@
         private System.Windows.Forms.ToolStripMenuItem CcTxt;
         private System.Windows.Forms.ToolStripMenuItem CcImg;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem CcAll;
     }
 }
