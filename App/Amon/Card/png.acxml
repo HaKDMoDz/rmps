@@ -6,7 +6,7 @@
     </info>
     <card>
         <base width="400" height="240" background-color="#FFFFFF" />
-		<draw method="image" x="12" y="12" width="32" height="32">D:\line.png</draw>
+		<draw method="image" x="12" y="12" width="32" height="32">amon\line.png</draw>
         <draw method="text" x="55" y="12" font-name="宋体" font-size="20" font-style="1">#公司#</draw>
         <draw method="text" x="61" y="38" color="#000000" font-name="宋体" font-size="9" font-style="0">#公司网站#</draw>
         <draw method="text" x="140" y="75" color="#000000" font-name="黑体" font-size="28" font-style="1">#姓##名#</draw>
