@@ -65,7 +65,6 @@ namespace Me.Amon.Sec
                 Worker.CancelAsync();
                 return;
             }
-            _ISec.DoCrypto();
         }
 
         private void PbMenu_Click(object sender, EventArgs e)
@@ -108,12 +107,18 @@ namespace Me.Amon.Sec
         #endregion
 
         #region 私有函数
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            _ISec.DoCrypto();
+        }
+
         private void DoWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Cancelled)
             {
                 ShowEcho("用户已取消！");
             }
+            BtDo.Text = "执行(&R)";
         }
 
         private APro _APro;

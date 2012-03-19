@@ -202,8 +202,7 @@ namespace Me.Amon.Sec.Pro
 
         public void ShowInfo(string info)
         {
-            //LbInfo.Text = info;
-            //TpTips.SetToolTip(LbInfo, info);
+            _ASec.ShowEcho(info);
         }
 
         public void ShowEdit(string data, CallBackHandler<string> handler)
@@ -480,8 +479,6 @@ namespace Me.Amon.Sec.Pro
 
             Item key = CbKey.SelectedItem as Item;
 
-            ShowInfo("处理中，请稍候……");
-
             if (!_UcCm.Check())
             {
                 return;
@@ -498,6 +495,8 @@ namespace Me.Amon.Sec.Pro
             {
                 return;
             }
+
+            ShowInfo("处理中，请稍候……");
 
             switch (opt.K)
             {

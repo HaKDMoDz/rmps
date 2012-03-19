@@ -67,6 +67,7 @@
             // Worker
             // 
             this.Worker.WorkerSupportsCancellation = true;
+            this.Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Worker_DoWork);
             this.Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.DoWorkerCompleted);
             // 
             // PbMenu
@@ -79,6 +80,7 @@
             this.PbMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PbMenu.TabIndex = 3;
             this.PbMenu.TabStop = false;
+            this.PbMenu.Visible = false;
             this.PbMenu.Click += new System.EventHandler(this.PbMenu_Click);
             // 
             // CmMenu
