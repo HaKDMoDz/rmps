@@ -1,10 +1,12 @@
-﻿using System.Windows.Forms;
+﻿using System.Text;
+using System.Windows.Forms;
+using Me.Amon.Util;
 
 namespace Me.Amon.Bar.Opt
 {
-    public partial class Text : UserControl, IOpt
+    public partial class Tel : UserControl, IOpt
     {
-        public Text()
+        public Tel()
         {
             InitializeComponent();
         }
@@ -25,10 +27,17 @@ namespace Me.Amon.Bar.Opt
 
         public bool Check()
         {
-            if (string.IsNullOrEmpty(TbTxt.Text))
+            string tel = TbTel.Text;
+            if (string.IsNullOrEmpty(tel))
             {
-                Main.ShowAlert("请输入文本！");
-                TbTxt.Focus();
+                Main.ShowAlert("请输入电话号码！");
+                TbTel.Focus();
+                return false;
+            }
+            if (!CharUtil.IsValidateCall(tel))
+            {
+                Main.ShowAlert("请输入一个有效的电话号码！");
+                TbTel.Focus();
                 return false;
             }
             return true;
@@ -36,7 +45,10 @@ namespace Me.Amon.Bar.Opt
 
         public string Encode()
         {
-            return TbTxt.Text;
+            StringBuilder buffer = new StringBuilder();
+            buffer.Append("TEL:");
+            buffer.Append(TbTel.Text);
+            return buffer.ToString();
         }
         #endregion
     }

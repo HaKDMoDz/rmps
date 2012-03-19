@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Bar.Opt
 {
-    partial class Text
+    partial class Tel
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,24 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TbTxt = new System.Windows.Forms.TextBox();
+            this.LbTel = new System.Windows.Forms.Label();
+            this.TbTel = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // TbTxt
+            // LbTel
             // 
-            this.TbTxt.Location = new System.Drawing.Point(0, 0);
-            this.TbTxt.MaxLength = 784;
-            this.TbTxt.Multiline = true;
-            this.TbTxt.Name = "TbTxt";
-            this.TbTxt.Size = new System.Drawing.Size(296, 156);
-            this.TbTxt.TabIndex = 0;
+            this.LbTel.AutoSize = true;
+            this.LbTel.Location = new System.Drawing.Point(0, 3);
+            this.LbTel.Name = "LbTel";
+            this.LbTel.Size = new System.Drawing.Size(29, 12);
+            this.LbTel.TabIndex = 0;
+            this.LbTel.Text = "号码";
             // 
-            // Text
+            // TbTel
+            // 
+            this.TbTel.Location = new System.Drawing.Point(35, 0);
+            this.TbTel.Name = "TbTel";
+            this.TbTel.Size = new System.Drawing.Size(261, 21);
+            this.TbTel.TabIndex = 1;
+            // 
+            // Tel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.TbTxt);
-            this.Name = "Text";
+            this.Controls.Add(this.TbTel);
+            this.Controls.Add(this.LbTel);
+            this.Name = "Tel";
             this.Size = new System.Drawing.Size(296, 156);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -54,6 +63,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox TbTxt;
+        private System.Windows.Forms.Label LbTel;
+        private System.Windows.Forms.TextBox TbTel;
     }
 }

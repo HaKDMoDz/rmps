@@ -21,6 +21,9 @@ namespace Me.Amon.Pwd.Pro
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
             _DataModel = dataModel;
+
+            BtOpen.Visible = false;
+            BtView.Visible = false;
         }
 
         public Control Control

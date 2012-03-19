@@ -1,10 +1,11 @@
-﻿using System.Windows.Forms;
+﻿using System.Text;
+using System.Windows.Forms;
 
 namespace Me.Amon.Bar.Opt
 {
-    public partial class Text : UserControl, IOpt
+    public partial class Wifi : UserControl, IOpt
     {
-        public Text()
+        public Wifi()
         {
             InitializeComponent();
         }
@@ -12,6 +13,8 @@ namespace Me.Amon.Bar.Opt
         #region 接口实现
         public void InitView(GroupBox gBox)
         {
+            CbType.SelectedIndex = 0;
+
             Location = new System.Drawing.Point(6, 18);
             Size = new System.Drawing.Size(296, 156);
             TabIndex = 0;
@@ -25,10 +28,11 @@ namespace Me.Amon.Bar.Opt
 
         public bool Check()
         {
-            if (string.IsNullOrEmpty(TbTxt.Text))
+            string tel = TbSsid.Text;
+            if (string.IsNullOrEmpty(tel))
             {
-                Main.ShowAlert("请输入文本！");
-                TbTxt.Focus();
+                Main.ShowAlert("请输入SSID！");
+                TbSsid.Focus();
                 return false;
             }
             return true;
@@ -36,7 +40,13 @@ namespace Me.Amon.Bar.Opt
 
         public string Encode()
         {
-            return TbTxt.Text;
+            StringBuilder buffer = new StringBuilder();
+            buffer.Append("WIFI:");
+            buffer.Append("T:").Append(CbType.SelectedText).Append(';');
+            buffer.Append("S:").Append(TbSsid.Text).Append(';');
+            buffer.Append("P:").Append(TbPass.Text).Append(';');
+            buffer.Append(';');
+            return buffer.ToString();
         }
         #endregion
     }

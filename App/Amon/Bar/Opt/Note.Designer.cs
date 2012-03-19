@@ -28,55 +28,55 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.LbSub = new System.Windows.Forms.Label();
+            this.TbSub = new System.Windows.Forms.TextBox();
+            this.LbTxt = new System.Windows.Forms.Label();
+            this.TbTxt = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // label1
+            // LbSub
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "标题";
+            this.LbSub.AutoSize = true;
+            this.LbSub.Location = new System.Drawing.Point(0, 3);
+            this.LbSub.Name = "LbSub";
+            this.LbSub.Size = new System.Drawing.Size(29, 12);
+            this.LbSub.TabIndex = 0;
+            this.LbSub.Text = "标题";
             // 
-            // textBox1
+            // TbSub
             // 
-            this.textBox1.Location = new System.Drawing.Point(35, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(261, 21);
-            this.textBox1.TabIndex = 1;
+            this.TbSub.Location = new System.Drawing.Point(35, 0);
+            this.TbSub.Name = "TbSub";
+            this.TbSub.Size = new System.Drawing.Size(261, 21);
+            this.TbSub.TabIndex = 1;
             // 
-            // label2
+            // LbTxt
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(0, 30);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "内容";
+            this.LbTxt.AutoSize = true;
+            this.LbTxt.Location = new System.Drawing.Point(0, 30);
+            this.LbTxt.Name = "LbTxt";
+            this.LbTxt.Size = new System.Drawing.Size(29, 12);
+            this.LbTxt.TabIndex = 2;
+            this.LbTxt.Text = "内容";
             // 
-            // textBox2
+            // TbTxt
             // 
-            this.textBox2.Location = new System.Drawing.Point(35, 27);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(261, 121);
-            this.textBox2.TabIndex = 3;
+            this.TbTxt.Location = new System.Drawing.Point(35, 27);
+            this.TbTxt.Multiline = true;
+            this.TbTxt.Name = "TbTxt";
+            this.TbTxt.Size = new System.Drawing.Size(261, 129);
+            this.TbTxt.TabIndex = 3;
             // 
             // Note
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.TbTxt);
+            this.Controls.Add(this.LbTxt);
+            this.Controls.Add(this.TbSub);
+            this.Controls.Add(this.LbSub);
             this.Name = "Note";
-            this.Size = new System.Drawing.Size(296, 148);
+            this.Size = new System.Drawing.Size(296, 156);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -84,9 +84,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label LbSub;
+        private System.Windows.Forms.TextBox TbSub;
+        private System.Windows.Forms.Label LbTxt;
+        private System.Windows.Forms.TextBox TbTxt;
     }
 }

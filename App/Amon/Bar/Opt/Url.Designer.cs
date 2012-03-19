@@ -37,7 +37,7 @@
             // LbSub
             // 
             this.LbSub.AutoSize = true;
-            this.LbSub.Location = new System.Drawing.Point(3, 3);
+            this.LbSub.Location = new System.Drawing.Point(0, 3);
             this.LbSub.Name = "LbSub";
             this.LbSub.Size = new System.Drawing.Size(29, 12);
             this.LbSub.TabIndex = 0;
@@ -45,7 +45,7 @@
             // 
             // TbSub
             // 
-            this.TbSub.Location = new System.Drawing.Point(38, 0);
+            this.TbSub.Location = new System.Drawing.Point(35, 0);
             this.TbSub.Name = "TbSub";
             this.TbSub.Size = new System.Drawing.Size(150, 21);
             this.TbSub.TabIndex = 1;
@@ -53,7 +53,7 @@
             // LbUrl
             // 
             this.LbUrl.AutoSize = true;
-            this.LbUrl.Location = new System.Drawing.Point(3, 30);
+            this.LbUrl.Location = new System.Drawing.Point(0, 30);
             this.LbUrl.Name = "LbUrl";
             this.LbUrl.Size = new System.Drawing.Size(29, 12);
             this.LbUrl.TabIndex = 2;
@@ -61,9 +61,9 @@
             // 
             // TbUrl
             // 
-            this.TbUrl.Location = new System.Drawing.Point(38, 27);
+            this.TbUrl.Location = new System.Drawing.Point(35, 27);
             this.TbUrl.Name = "TbUrl";
-            this.TbUrl.Size = new System.Drawing.Size(258, 21);
+            this.TbUrl.Size = new System.Drawing.Size(261, 21);
             this.TbUrl.TabIndex = 3;
             // 
             // Url
@@ -75,7 +75,7 @@
             this.Controls.Add(this.TbSub);
             this.Controls.Add(this.LbSub);
             this.Name = "Url";
-            this.Size = new System.Drawing.Size(296, 148);
+            this.Size = new System.Drawing.Size(296, 156);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -80,9 +80,10 @@
             // TbTxt
             // 
             this.TbTxt.Location = new System.Drawing.Point(35, 54);
+            this.TbTxt.MaxLength = 700;
             this.TbTxt.Multiline = true;
             this.TbTxt.Name = "TbTxt";
-            this.TbTxt.Size = new System.Drawing.Size(261, 94);
+            this.TbTxt.Size = new System.Drawing.Size(261, 102);
             this.TbTxt.TabIndex = 5;
             // 
             // Email
@@ -96,7 +97,7 @@
             this.Controls.Add(this.TbAdr);
             this.Controls.Add(this.LbAdr);
             this.Name = "Email";
-            this.Size = new System.Drawing.Size(296, 148);
+            this.Size = new System.Drawing.Size(296, 156);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -33,11 +33,11 @@
             this.CbOpt = new System.Windows.Forms.ComboBox();
             this.PbIcon = new System.Windows.Forms.PictureBox();
             this.GbSet = new System.Windows.Forms.GroupBox();
+            this.UcUserSet = new Me.Amon.Bar.UserSet();
             this.GbOpt = new System.Windows.Forms.GroupBox();
             this.BtDec = new System.Windows.Forms.Button();
             this.BtEnc = new System.Windows.Forms.Button();
             this.LbEcho = new System.Windows.Forms.Label();
-            this.UcUserSet = new Me.Amon.Bar.UserSet();
             ((System.ComponentModel.ISupportInitialize)(this.PbIcon)).BeginInit();
             this.GbSet.SuspendLayout();
             this.SuspendLayout();
@@ -64,7 +64,7 @@
             // PbIcon
             // 
             this.PbIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PbIcon.Location = new System.Drawing.Point(12, 38);
+            this.PbIcon.Location = new System.Drawing.Point(12, 45);
             this.PbIcon.Name = "PbIcon";
             this.PbIcon.Size = new System.Drawing.Size(256, 256);
             this.PbIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -81,11 +81,18 @@
             this.GbSet.TabStop = false;
             this.GbSet.Text = "设置";
             // 
+            // UcUserSet
+            // 
+            this.UcUserSet.Location = new System.Drawing.Point(6, 20);
+            this.UcUserSet.Name = "UcUserSet";
+            this.UcUserSet.Size = new System.Drawing.Size(296, 76);
+            this.UcUserSet.TabIndex = 0;
+            // 
             // GbOpt
             // 
             this.GbOpt.Location = new System.Drawing.Point(274, 120);
             this.GbOpt.Name = "GbOpt";
-            this.GbOpt.Size = new System.Drawing.Size(308, 174);
+            this.GbOpt.Size = new System.Drawing.Size(308, 181);
             this.GbOpt.TabIndex = 4;
             this.GbOpt.TabStop = false;
             this.GbOpt.Text = "数据";
@@ -93,7 +100,7 @@
             // BtDec
             // 
             this.BtDec.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtDec.Location = new System.Drawing.Point(507, 300);
+            this.BtDec.Location = new System.Drawing.Point(507, 307);
             this.BtDec.Name = "BtDec";
             this.BtDec.Size = new System.Drawing.Size(75, 23);
             this.BtDec.TabIndex = 6;
@@ -104,7 +111,7 @@
             // BtEnc
             // 
             this.BtEnc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtEnc.Location = new System.Drawing.Point(426, 300);
+            this.BtEnc.Location = new System.Drawing.Point(426, 307);
             this.BtEnc.Name = "BtEnc";
             this.BtEnc.Size = new System.Drawing.Size(75, 23);
             this.BtEnc.TabIndex = 5;
@@ -120,18 +127,11 @@
             this.LbEcho.Size = new System.Drawing.Size(0, 12);
             this.LbEcho.TabIndex = 7;
             // 
-            // UcUserSet
-            // 
-            this.UcUserSet.Location = new System.Drawing.Point(6, 20);
-            this.UcUserSet.Name = "UcUserSet";
-            this.UcUserSet.Size = new System.Drawing.Size(296, 76);
-            this.UcUserSet.TabIndex = 0;
-            // 
             // ABar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(594, 335);
+            this.ClientSize = new System.Drawing.Size(594, 342);
             this.Controls.Add(this.LbEcho);
             this.Controls.Add(this.BtEnc);
             this.Controls.Add(this.BtDec);

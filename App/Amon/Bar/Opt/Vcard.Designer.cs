@@ -48,6 +48,10 @@
             this.TbAdr = new System.Windows.Forms.TextBox();
             this.LbZip = new System.Windows.Forms.Label();
             this.TbZip = new System.Windows.Forms.TextBox();
+            this.LbIm = new System.Windows.Forms.Label();
+            this.TbIm = new System.Windows.Forms.TextBox();
+            this.LbUrl = new System.Windows.Forms.Label();
+            this.TbUrl = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // LbName
@@ -210,10 +214,46 @@
             this.TbZip.Size = new System.Drawing.Size(110, 21);
             this.TbZip.TabIndex = 19;
             // 
+            // LbIm
+            // 
+            this.LbIm.AutoSize = true;
+            this.LbIm.Location = new System.Drawing.Point(0, 137);
+            this.LbIm.Name = "LbIm";
+            this.LbIm.Size = new System.Drawing.Size(17, 12);
+            this.LbIm.TabIndex = 20;
+            this.LbIm.Text = "IM";
+            // 
+            // TbIm
+            // 
+            this.TbIm.Location = new System.Drawing.Point(35, 135);
+            this.TbIm.Name = "TbIm";
+            this.TbIm.Size = new System.Drawing.Size(110, 21);
+            this.TbIm.TabIndex = 21;
+            // 
+            // LbUrl
+            // 
+            this.LbUrl.AutoSize = true;
+            this.LbUrl.Location = new System.Drawing.Point(151, 138);
+            this.LbUrl.Name = "LbUrl";
+            this.LbUrl.Size = new System.Drawing.Size(29, 12);
+            this.LbUrl.TabIndex = 22;
+            this.LbUrl.Text = "网站";
+            // 
+            // TbUrl
+            // 
+            this.TbUrl.Location = new System.Drawing.Point(186, 135);
+            this.TbUrl.Name = "TbUrl";
+            this.TbUrl.Size = new System.Drawing.Size(110, 21);
+            this.TbUrl.TabIndex = 23;
+            // 
             // Vcard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.TbUrl);
+            this.Controls.Add(this.LbUrl);
+            this.Controls.Add(this.TbIm);
+            this.Controls.Add(this.LbIm);
             this.Controls.Add(this.TbZip);
             this.Controls.Add(this.LbZip);
             this.Controls.Add(this.TbAdr);
@@ -235,7 +275,7 @@
             this.Controls.Add(this.TbName);
             this.Controls.Add(this.LbName);
             this.Name = "Vcard";
-            this.Size = new System.Drawing.Size(296, 148);
+            this.Size = new System.Drawing.Size(296, 156);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -263,5 +303,9 @@
         private System.Windows.Forms.TextBox TbAdr;
         private System.Windows.Forms.Label LbZip;
         private System.Windows.Forms.TextBox TbZip;
+        private System.Windows.Forms.Label LbIm;
+        private System.Windows.Forms.TextBox TbIm;
+        private System.Windows.Forms.Label LbUrl;
+        private System.Windows.Forms.TextBox TbUrl;
     }
 }

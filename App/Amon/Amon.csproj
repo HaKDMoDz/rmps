@@ -122,6 +122,12 @@
     <Compile Include="Bar\Opt\Sms.Designer.cs">
       <DependentUpon>Sms.cs</DependentUpon>
     </Compile>
+    <Compile Include="Bar\Opt\Tel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\Opt\Tel.Designer.cs">
+      <DependentUpon>Tel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Bar\Opt\Text.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -133,6 +139,12 @@
     </Compile>
     <Compile Include="Bar\Opt\Url.Designer.cs">
       <DependentUpon>Url.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bar\Opt\WiFi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\Opt\WiFi.Designer.cs">
+      <DependentUpon>WiFi.cs</DependentUpon>
     </Compile>
     <Compile Include="Bar\UserSet.cs">
       <SubType>UserControl</SubType>
@@ -877,11 +889,17 @@
     <EmbeddedResource Include="Bar\Opt\Sms.resx">
       <DependentUpon>Sms.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Bar\Opt\Tel.resx">
+      <DependentUpon>Tel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Bar\Opt\Text.resx">
       <DependentUpon>Text.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Bar\Opt\Url.resx">
       <DependentUpon>Url.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bar\Opt\Wifi.resx">
+      <DependentUpon>WiFi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Bar\UserSet.resx">
       <DependentUpon>UserSet.cs</DependentUpon>

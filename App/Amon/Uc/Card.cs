@@ -43,7 +43,9 @@ namespace Me.Amon.Uc
             {
                 return null;
             }
-            string file = _Text(path, src, dst, ".htm", Encoding.UTF8);
+            StringBuilder buffer = _Text(path, src);
+            _Trim(buffer);
+            string file = _File(buffer.ToString(), dst, ".htm", Encoding.UTF8);
 
             node = doc.SelectSingleNode("/amon/card/template-res");
             if (node != null)
@@ -65,39 +67,6 @@ namespace Me.Amon.Uc
             return file;
         }
 
-        public string ExportTxt(string src, string dst)
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(src);
-
-            XmlNode node = doc.SelectSingleNode("/amon/card/base");
-            string path = ReadString(node, "path", "Card");
-
-            node = doc.SelectSingleNode("/amon/card/template-uri");
-            if (node == null)
-            {
-                return null;
-            }
-            src = node.InnerText;
-            if (!CharUtil.IsValidate(src))
-            {
-                return null;
-            }
-
-            return _Text(path, src, dst, ".txt", Encoding.Default);
-        }
-
-        public string ExportPng(string src, string dst)
-        {
-            Stream stream = File.OpenRead(src);
-            string text = _Trim(stream);
-            stream.Close();
-
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(text);
-            return _Draw(doc, dst);
-        }
-
         public string ExportSvg(string src, string dst)
         {
             XmlDocument doc = new XmlDocument();
@@ -117,7 +86,33 @@ namespace Me.Amon.Uc
                 return null;
             }
 
-            return _Text(path, src, dst, ".svg", Encoding.UTF8);
+            StringBuilder buffer = _Text(path, src);
+            _Trim(buffer);
+            return _File(buffer.ToString(), dst, ".svg", Encoding.UTF8);
+        }
+
+        public string ExportTxt(string src, string dst)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(src);
+
+            XmlNode node = doc.SelectSingleNode("/amon/card/base");
+            string path = ReadString(node, "path", "Card");
+
+            node = doc.SelectSingleNode("/amon/card/template-uri");
+            if (node == null)
+            {
+                return null;
+            }
+            src = node.InnerText;
+            if (!CharUtil.IsValidate(src))
+            {
+                return null;
+            }
+
+            StringBuilder buffer = _Text(path, src);
+            _Trim(buffer);
+            return _File(buffer.ToString(), dst, ".txt", Encoding.Default);
         }
 
         public string ExportVcf(string src, string dst)
@@ -139,7 +134,34 @@ namespace Me.Amon.Uc
                 return null;
             }
 
-            return _Text(path, src, dst, ".vcf", Encoding.Default);
+            StringBuilder buffer = _Text(path, src);
+            _Trim(buffer);
+            buffer.Replace("#REV#", DateTime.UtcNow.ToString("yyyyMMddTHHmmssZ"));
+            return _File(buffer.ToString(), dst, ".vcf", Encoding.Default);
+        }
+
+        public string ExportPng(string src, string dst)
+        {
+            Stream stream = File.OpenRead(src);
+            StreamReader reader = new StreamReader(stream);
+
+            StringBuilder buffer = new StringBuilder();
+            char[] buf = new char[1024];
+            int len = reader.Read(buf, 0, buf.Length);
+            while (len > 0)
+            {
+                buffer.Append(buf, 0, len);
+                len = reader.Read(buf, 0, buf.Length);
+            }
+
+            reader.Close();
+            stream.Close();
+
+            _Trim(buffer);
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(buffer.ToString());
+            return _Draw(doc, dst);
         }
 
         public string ExportQrc(string src, string dst)
@@ -160,18 +182,9 @@ namespace Me.Amon.Uc
             {
                 return null;
             }
-            if (!Path.IsPathRooted(src))
-            {
-                src = Path.Combine(path, src);
-            }
-            if (!File.Exists(src))
-            {
-                return null;
-            }
 
-            FileStream stream = File.OpenRead(src);
-            string text = _Trim(stream);
-            stream.Close();
+            StringBuilder buffer = _Text(path, src);
+            _Trim(buffer);
 
             try
             {
@@ -183,12 +196,12 @@ namespace Me.Amon.Uc
                 barcodeEncoder.QuietZone = 1;
                 barcodeEncoder.Width = 160;
                 barcodeEncoder.Height = 160;
-                Image img = barcodeEncoder.Encode(BarcodeFormat.QRCode, text);
+                Image img = barcodeEncoder.Encode(BarcodeFormat.QRCode, buffer.ToString());
 
                 AAtt item = _SafeModel.GetAtt(AAtt.PWDS_HEAD_META);
-                dst = Path.Combine(dst, item.Name + ".png");
+                dst = Path.Combine(dst, item.Name + ".jpg");
 
-                img.Save(dst, ImageFormat.Png);
+                img.Save(dst, ImageFormat.Jpeg);
                 return dst;
             }
             catch (Exception ex)
@@ -215,7 +228,10 @@ namespace Me.Amon.Uc
             {
                 return null;
             }
-            string file = _Text(path, src, dst, Path.GetExtension(src), Encoding.Default);
+
+            StringBuilder buffer = _Text(path, src);
+            _Trim(buffer);
+            string file = _File(buffer.ToString(), dst, Path.GetExtension(src), Encoding.Default);
 
             node = doc.SelectSingleNode("/amon/card/template-res");
             if (node != null)
@@ -234,8 +250,33 @@ namespace Me.Amon.Uc
             return file;
         }
 
-        private string _Trim(Stream stream)
+        private string _File(string text, string path, string ext, Encoding encoding)
         {
+            AAtt item = _SafeModel.GetAtt(AAtt.PWDS_HEAD_META);
+            path = Path.Combine(path, item.Name + ext);
+
+            Stream stream = File.Exists(path) ? File.OpenWrite(path) : File.Create(path);
+            StreamWriter writer = new StreamWriter(stream, encoding);
+            writer.Write(text);
+            writer.Flush();
+            writer.Close();
+            stream.Close();
+
+            return path;
+        }
+
+        private StringBuilder _Text(string path, string src)
+        {
+            if (!Path.IsPathRooted(src))
+            {
+                src = Path.Combine(path, src);
+            }
+            if (!File.Exists(src))
+            {
+                return null;
+            }
+
+            FileStream stream = File.OpenRead(src);
             StreamReader reader = new StreamReader(stream);
 
             StringBuilder buffer = new StringBuilder();
@@ -250,42 +291,17 @@ namespace Me.Amon.Uc
             reader.Close();
             stream.Close();
 
+            return buffer;
+        }
+
+        private void _Trim(StringBuilder buffer)
+        {
             AAtt item;
             for (int i = AAtt.HEAD_SIZE, j = _SafeModel.Count; i < j; i += 1)
             {
                 item = _SafeModel.GetAtt(i);
                 buffer.Replace('#' + item.Name + '#', item.Data);
             }
-
-            return buffer.ToString();
-        }
-
-        private string _Text(string path, string src, string dst, string ext, Encoding encoding)
-        {
-            if (!Path.IsPathRooted(src))
-            {
-                src = Path.Combine("Card", src);
-            }
-            if (!File.Exists(src))
-            {
-                return null;
-            }
-
-            FileStream stream = File.OpenRead(src);
-            string text = _Trim(stream);
-            stream.Close();
-
-            AAtt item = _SafeModel.GetAtt(AAtt.PWDS_HEAD_META);
-            dst = Path.Combine(dst, item.Name + ext);
-
-            stream = File.Exists(dst) ? File.OpenWrite(dst) : File.Create(dst);
-            StreamWriter writer = new StreamWriter(stream, encoding);
-            writer.Write(text);
-            writer.Flush();
-            writer.Close();
-            stream.Close();
-
-            return dst;
         }
 
         private string _Draw(XmlDocument doc, string dst)

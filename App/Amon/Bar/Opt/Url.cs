@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Me.Amon.Bar.Opt
@@ -13,8 +14,8 @@ namespace Me.Amon.Bar.Opt
         #region 接口实现
         public void InitView(GroupBox gBox)
         {
-            Location = new System.Drawing.Point(6, 20);
-            Size = new System.Drawing.Size(296, 148);
+            Location = new System.Drawing.Point(6, 18);
+            Size = new System.Drawing.Size(296, 156);
             TabIndex = 0;
             gBox.Controls.Add(this);
         }
@@ -26,6 +27,13 @@ namespace Me.Amon.Bar.Opt
 
         public bool Check()
         {
+            string url = TbUrl.Text;
+            if (!Regex.IsMatch(url, ""))
+            {
+                Main.ShowAlert("请输入一个有效的链接！");
+                TbUrl.Focus();
+                return false;
+            }
             return true;
         }
 

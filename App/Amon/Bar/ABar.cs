@@ -6,6 +6,7 @@ using Me.Amon.Model;
 using Me.Amon.Uc;
 using Me.Amon.Util;
 using MessagingToolkit.Barcode;
+using System.Collections.Generic;
 
 namespace Me.Amon.Bar
 {
@@ -35,7 +36,9 @@ namespace Me.Amon.Bar
             CbOpt.Items.Add(new Item { K = "vcard", V = "名片" });
             CbOpt.Items.Add(new Item { K = "email", V = "邮件" });
             CbOpt.Items.Add(new Item { K = "sms", V = "短信" });
-            CbOpt.Items.Add(new Item { K = "url", V = "收藏" });
+            CbOpt.Items.Add(new Item { K = "tel", V = "电话号码" });
+            CbOpt.Items.Add(new Item { K = "url", V = "网址收藏" });
+            CbOpt.Items.Add(new Item { K = "wifi", V = "WiFi网络" });
             CbOpt.SelectedIndex = 0;
 
             PbIcon.BackColor = Color.White;
@@ -99,8 +102,14 @@ namespace Me.Amon.Bar
                 case "sms":
                     _IOpt = new Sms();
                     break;
+                case "tel":
+                    _IOpt = new Tel();
+                    break;
                 case "url":
                     _IOpt = new Url();
+                    break;
+                case "wifi":
+                    _IOpt = new Wifi();
                     break;
                 default:
                     return;
@@ -164,7 +173,14 @@ namespace Me.Amon.Bar
 
             try
             {
-                Result decodedResult = _Decoder.Decode(bmp);
+                Dictionary<DecodeOptions, object> opt = new Dictionary<DecodeOptions, object>();
+                List<BarcodeFormat> format = new List<BarcodeFormat>(10);
+                format.Add(BarcodeFormat.QRCode);
+                //opt.Add(DecodeOptions.PureBarcode, "");
+                opt.Add(DecodeOptions.TryHarder, true);
+                //opt.Add(DecodeOptions.PossibleFormats, format);
+
+                Result decodedResult = _Decoder.Decode(bmp, opt);
                 if (decodedResult == null)
                 {
                     return;

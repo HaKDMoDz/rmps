@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using Me.Amon.Bean;
 using Me.Amon.Bean.Att;
 using Me.Amon.Model;
+using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.Pro
 {
@@ -39,7 +40,10 @@ namespace Me.Amon.Pwd.Pro
             if (_Att != null)
             {
                 TbName.Text = _Att.Name;
-                DtData.Text = _Att.Data;
+                if (CharUtil.IsValidateLong(_Att.Data))
+                {
+                    DtData.Value = DateTime.FromFileTimeUtc(long.Parse(_Att.Data));
+                }
             }
 
             if (string.IsNullOrEmpty(TbName.Text))

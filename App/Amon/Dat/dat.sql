@@ -198,8 +198,8 @@ INSERT INTO APWD0300 VALUES (10,4,'A0000000','qqqqqaavaqdtwtyc','qqqqqaavaqdfscd
 INSERT INTO APWD0300 VALUES (11,1,'A0000000','qqqqqaavaqdgzvcy','qqqqqaavaqdfscdv','通讯地址','','','2011-11-09 22:21:19','2011-11-09 22:21:19',1,1);
 INSERT INTO APWD0300 VALUES (12,1,'A0000000','qqqqqaavaqdgewsc','qqqqqaavaqdfscdv','邮政编码','','','2011-11-09 22:21:19','2011-11-09 22:21:19',1,1);
 INSERT INTO APWD0300 VALUES (13,1,'A0000000','qqqqqaavaqdgtzeq','qqqqqaavaqdfscdv','公司','','','2011-11-09 22:21:19','2011-11-09 22:21:19',1,1);
-INSERT INTO APWD0300 VALUES (14,1,'A0000000','qqqqqaavaqdgbaty','qqqqqaavaqdfscdv','职位','','','2011-11-09 22:21:19','2011-11-09 22:21:19',1,1);
-INSERT INTO APWD0300 VALUES (15,1,'A0000000','qqqqqazrdzvevvyw','qqqqqaavaqdfscdv','职责','','','2011-11-09 22:21:19','2011-11-09 22:21:19',1,1);
+INSERT INTO APWD0300 VALUES (14,1,'A0000000','qqqqqaavaqdgbaty','qqqqqaavaqdfscdv','部门','','','2011-11-09 22:21:19','2011-11-09 22:21:19',1,1);
+INSERT INTO APWD0300 VALUES (15,1,'A0000000','qqqqqazrdzvevvyw','qqqqqaavaqdfscdv','职位','','','2011-11-09 22:21:19','2011-11-09 22:21:19',1,1);
 INSERT INTO APWD0300 VALUES (16,3,'A0000000','qqqqqaavaqdbsxev','qqqqqaavaqdfscdv','公司网站','','','2011-11-09 22:21:19','2011-11-09 22:21:19',1,1);
 INSERT INTO APWD0300 VALUES (17,7,'A0000000','qqqqqaavaqdgyrxb','qqqqqaavaqdfscdv','商务电话','','','2011-11-09 22:21:19','2011-11-09 22:21:19',1,1);
 INSERT INTO APWD0300 VALUES (18,7,'A0000000','qqqqqaavaqdbqbeg','qqqqqaavaqdfscdv','商务传真','','','2011-11-09 22:21:19','2011-11-09 22:21:19',1,1);

@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Windows.Forms;
+using Me.Amon.Util;
 
 namespace Me.Amon.Bar.Opt
 {
@@ -13,8 +14,8 @@ namespace Me.Amon.Bar.Opt
         #region 接口实现
         public void InitView(GroupBox gBox)
         {
-            Location = new System.Drawing.Point(6, 20);
-            Size = new System.Drawing.Size(296, 148);
+            Location = new System.Drawing.Point(6, 18);
+            Size = new System.Drawing.Size(296, 156);
             TabIndex = 0;
             gBox.Controls.Add(this);
         }
@@ -26,6 +27,12 @@ namespace Me.Amon.Bar.Opt
 
         public bool Check()
         {
+            if (string.IsNullOrEmpty(TbSub.Text))
+            {
+                Main.ShowAlert("请输入标题！");
+                TbSub.Focus();
+                return false;
+            }
             return true;
         }
 
@@ -33,8 +40,11 @@ namespace Me.Amon.Bar.Opt
         {
             StringBuilder buffer = new StringBuilder();
             buffer.Append("DTXT:");
-            buffer.Append("SUB:;").Append(textBox1.Text).Append(';');
-            buffer.Append("TXT:").Append(textBox2.Text).Append(';');
+            buffer.Append("SUB:;").Append(TbSub.Text).Append(';');
+            if (CharUtil.IsValidate(TbTxt.Text))
+            {
+                buffer.Append("TXT:").Append(TbTxt.Text).Append(';');
+            }
             buffer.Append(';');
             return buffer.ToString();
         }

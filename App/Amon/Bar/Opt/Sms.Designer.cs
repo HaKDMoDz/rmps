@@ -65,7 +65,7 @@
             this.TbTxt.MaxLength = 140;
             this.TbTxt.Multiline = true;
             this.TbTxt.Name = "TbTxt";
-            this.TbTxt.Size = new System.Drawing.Size(261, 121);
+            this.TbTxt.Size = new System.Drawing.Size(261, 129);
             this.TbTxt.TabIndex = 3;
             // 
             // Sms
@@ -77,7 +77,7 @@
             this.Controls.Add(this.TbSub);
             this.Controls.Add(this.LbSub);
             this.Name = "Sms";
-            this.Size = new System.Drawing.Size(296, 148);
+            this.Size = new System.Drawing.Size(296, 156);
             this.ResumeLayout(false);
             this.PerformLayout();
 
