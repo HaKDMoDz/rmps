@@ -74,9 +74,10 @@ namespace Me.Amon.Pwd.Pro
                 _Att.Name = TbName.Text;
                 _Att.Modified = true;
             }
-            if (DtData.Text != _Att.Data)
+            string date = DtData.Value.ToFileTimeUtc().ToString();
+            if (date != _Att.Data)
             {
-                _Att.Data = DtData.Text;
+                _Att.Data = date;
                 _Att.Modified = true;
             }
 

@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Me.Amon.Bean;
 using Me.Amon.Bean.Att;
 using Me.Amon.Model;
+using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.Wiz
 {
@@ -105,9 +106,9 @@ namespace Me.Amon.Pwd.Wiz
             }
 
             _Label.Text = _Att.Name;
-            if (!string.IsNullOrEmpty(_Att.Data))
+            if (CharUtil.IsValidateLong(_Att.Data))
             {
-                DtData.Value = DateTime.FromFileTime(long.Parse(_Att.Data));
+                DtData.Value = DateTime.FromFileTimeUtc(long.Parse(_Att.Data));
             }
             return true;
         }
@@ -127,7 +128,7 @@ namespace Me.Amon.Pwd.Wiz
                 return false;
             }
 
-            string date = DtData.Value.ToFileTime().ToString();
+            string date = DtData.Value.ToFileTimeUtc().ToString();
             if (date != _Att.Data)
             {
                 _Att.Data = date;
