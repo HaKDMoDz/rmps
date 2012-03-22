@@ -18,9 +18,13 @@ namespace Me.Amon.Uc
         {
             if (key != null)
             {
-                dict[key] = new Item { V = value };
-                if (!keys.Contains(key))
+                if (dict.ContainsKey(key))
                 {
+                    dict[key].V = value;
+                }
+                else
+                {
+                    dict[key] = new Item { V = value };
                     keys.Add(key);
                 }
             }
@@ -30,18 +34,23 @@ namespace Me.Amon.Uc
         {
             if (key != null)
             {
-                dict[key] = new Item { V = value, D = comment };
-                keys.Add(key);
+                if (dict.ContainsKey(key))
+                {
+                    Item item = dict[key];
+                    item.V = value;
+                    item.D = comment;
+                }
+                else
+                {
+                    dict[key] = new Item { V = value, D = comment };
+                    keys.Add(key);
+                }
             }
         }
 
         public string Get(string key)
         {
-            if (key == null)
-            {
-                return null;
-            }
-            return dict.ContainsKey(key) ? dict[key].V : null;
+            return Get(key, null);
         }
 
         public string Get(string key, string def)
@@ -67,6 +76,7 @@ namespace Me.Amon.Uc
             {
                 return;
             }
+
             using (StreamReader reader = new StreamReader(filePath))
             {
                 string line;
@@ -84,6 +94,8 @@ namespace Me.Amon.Uc
                     {
                         continue;
                     }
+
+                    line = line.Replace("\\r", "\r").Replace("\\n", "\n").Replace("\\t", "\t");
 
                     if (line.StartsWith("#"))
                     {
@@ -108,7 +120,7 @@ namespace Me.Amon.Uc
                     }
 
                     int idx = line.IndexOf('=');
-                    if (idx > 1)
+                    if (idx > 0)
                     {
                         item.K = line.Substring(0, idx);
                         item.V = line.Substring(idx + 1);
@@ -118,7 +130,6 @@ namespace Me.Amon.Uc
 
                     item = new Item { V = "", D = "" };
                     isComment = false;
-                    multiLine = line.EndsWith("  \\");
                 }
                 reader.Close();
             }
@@ -136,8 +147,18 @@ namespace Me.Amon.Uc
                 foreach (string key in keys)
                 {
                     Item item = dict[key];
-                    writer.WriteLine("#" + item.D);
-                    writer.WriteLine(key + "=" + item.V);
+                    if (!string.IsNullOrEmpty(item.D))
+                    {
+                        writer.WriteLine("#" + item.D);
+                    }
+                    if (item.V != null)
+                    {
+                        writer.WriteLine(key + "=" + item.V.Replace("\t", "\\t").Replace("\n", "\\n").Replace("\r", "\\r"));
+                    }
+                    else
+                    {
+                        writer.WriteLine(key + "=");
+                    }
                 }
                 writer.Flush();
                 writer.Close();
@@ -149,90 +170,5 @@ namespace Me.Amon.Uc
             keys.Clear();
             dict.Clear();
         }
-
-        /// <summary>
-        /// 导入文件
-        /// </summary>
-        /// <param name="filePath">要导入的文件</param>
-        /// <returns></returns>
-        //public void Load(string filePath)
-        //{
-        //    int limit;
-        //    int keyLen;
-        //    int valueStart;
-        //    char c;
-        //    string line;
-        //    bool hasSep;
-        //    bool precedingBackslash;
-
-        //    using (StreamReader sr = new StreamReader(filePath))
-        //    {
-        //        while (sr.Peek() >= 0)
-        //        {
-        //            line = sr.ReadLine();
-        //            limit = line.Length;
-        //            valueStart = limit;
-        //            hasSep = false;
-
-        //            precedingBackslash = false;
-        //            keyLen = line.StartsWith("#") ? line.Length : 0;
-
-        //            while (keyLen < limit)
-        //            {
-        //                c = line[keyLen];
-        //                if (!precedingBackslash && (c == '=' || c == ':'))
-        //                {
-        //                    valueStart = keyLen + 1;
-        //                    hasSep = true;
-        //                    break;
-        //                }
-        //                if (!precedingBackslash && (c == ' ' || c == '\t' || c == '\f'))
-        //                {
-        //                    valueStart = keyLen + 1;
-        //                    break;
-        //                }
-        //                if (c == '\\')
-        //                {
-        //                    precedingBackslash = !precedingBackslash;
-        //                }
-        //                else
-        //                {
-        //                    precedingBackslash = false;
-        //                }
-        //                keyLen++;
-        //            }
-
-        //            while (valueStart < limit)
-        //            {
-        //                c = line[valueStart];
-        //                if (c != ' ' && c != '\t' && c != '\f')
-        //                {
-        //                    if (!hasSep && (c == '=' || c == ':'))
-        //                    {
-        //                        hasSep = true;
-        //                    }
-        //                    else
-        //                    {
-        //                        break;
-        //                    }
-        //                }
-        //                valueStart++;
-        //            }
-
-        //            string key = line.Substring(0, keyLen);
-
-        //            string values = line.Substring(valueStart, limit - valueStart);
-
-        //            if (key == "")
-        //                key += "#";
-        //            while (key.StartsWith("#") & dict.ContainsKey(key))
-        //            {
-        //                key += "#";
-        //            }
-
-        //            Set(key, values);
-        //        }
-        //    }
-        //}
     }
 }

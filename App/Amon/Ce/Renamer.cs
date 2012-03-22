@@ -1,9 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Me.Amon.Util;
 
 namespace Me.Amon.Ce
 {
+    /// <summary>
+    /// \/:*?"<b>|
+    /// : 数字
+    /// | 字母
+    /// <b> 区间
+    /// * 文件名 *&lt;&gt;替换
+    /// ? 后缀名 ?&lt;&gt;替换
+    /// " 原有字符
+    /// \ 大写 \*大写文件名 \?大写后缀名 \"大写字母 \:创建时间
+    /// / 小写 /*小写文件名 /?小写后缀名 /"小写字母 /:修改时间
+    /// </summary>
     public class Renamer
     {
         #region 交互时展示字符
@@ -19,6 +32,7 @@ namespace Me.Amon.Ce
         #endregion
 
         #region 处理时替代字符
+        private const char TMP_ESCAPE = '\u0000';
         private const char TMP_FILE_NAME_LOWER = '\u0001';
         private const char TMP_FILE_NAME_UPPER = '\u0002';
         private const char TMP_FILE_EXT_LOWER = '\u0003';
@@ -29,383 +43,515 @@ namespace Me.Amon.Ce
         private const char TMP_UPDATE_TIME = '\u0008';
         #endregion
 
-        private char[][] _UdcArray;
-        private int[] _KeyArray;
-        private StringBuilder _Buffer;
+        /// <summary>
+        /// 公式异常信息
+        /// </summary>
+        public string Error { get; set; }
+
+        /// <summary>
+        /// 用户自定义字符
+        /// </summary>
+        private List<Udc> _UdcList;
+        /// <summary>
+        /// 用户自定义数值
+        /// </summary>
+        private List<Udn> _UdnList;
+        /// <summary>
+        /// 替换字符集
+        /// </summary>
+        private List<Rpl> _RplList;
+        /// <summary>
+        /// 时间格式
+        /// </summary>
+        private List<string> _FmtList;
+        /// <summary>
+        /// 重命名公式
+        /// </summary>
         private string _Command;
+
         private bool _Enough;
 
+        /// <summary>
+        /// 当前处理索引
+        /// </summary>
+        private int Index;
+        private StringBuilder _Buffer;
+
+        #region 构造函数
         public Renamer()
         {
             _Buffer = new StringBuilder();
+            _UdcList = new List<Udc>();
+            _UdnList = new List<Udn>();
+            _RplList = new List<Rpl>();
         }
+        #endregion
 
+        #region 解析
         public bool Init(string cmd)
         {
             _Enough = false;
+            _UdcList.Clear();
+            _UdnList.Clear();
+            _RplList.Clear();
 
-            // 公式解析
-            int cnt = 0;
-            bool isU = false;//是否大写
-            bool isL = false;//是否小写
-            bool isE = false;//是否枚举
-            foreach (char c in cmd)
+            Index = 0;
+            char c;
+            while (Index < cmd.Length)
             {
-                #region 大写控制处理
-                if (isU)
-                {
-                    isU = false;
-                    if (c == FILE_NAME)
-                    {
-                        _Buffer.Append(TMP_FILE_NAME_UPPER);
-                        continue;
-                    }
-                    if (c == FILE_EXT)
-                    {
-                        _Buffer.Append(TMP_FILE_EXT_UPPER);
-                        continue;
-                    }
-                    if (c == ORIGIN)
-                    {
-                        _Buffer.Append(TMP_ORIGIN_UPPER);
-                        continue;
-                    }
-                    if (c == NUMBER)
-                    {
-                        _Buffer.Append(TMP_CREATE_TIME);
-                        continue;
-                    }
-                    return false;
-                }
-                #endregion
-
-                #region 小写控制处理
-                if (isL)
-                {
-                    isL = false;
-                    if (c == FILE_NAME)
-                    {
-                        _Buffer.Append(TMP_FILE_NAME_LOWER);
-                        continue;
-                    }
-                    if (c == FILE_EXT)
-                    {
-                        _Buffer.Append(TMP_FILE_EXT_LOWER);
-                        continue;
-                    }
-                    if (c == ORIGIN)
-                    {
-                        _Buffer.Append(TMP_ORIGIN_LOWER);
-                        continue;
-                    }
-                    if (c == NUMBER)
-                    {
-                        _Buffer.Append(TMP_UPDATE_TIME);
-                        continue;
-                    }
-                    return false;
-                }
-                #endregion
-
-                #region 大小写判断
-                if (c == CTL_LOWER)
-                {
-                    isL = true;
-                    continue;
-                }
+                c = cmd[Index];
+                // 大写控制处理
                 if (c == CTL_UPPER)
                 {
-                    isU = true;
-                    continue;
-                }
-                #endregion
-
-                #region 枚举处理
-                if (isE)
-                {
-                    if (c == CHARACTER || c == NUMBER || c == FILE_NAME || c == FILE_EXT || c == CTL_LOWER || c == CTL_UPPER || c == ORIGIN)
+                    Index += 1;
+                    if (!DecodeCtl(cmd))
                     {
                         return false;
                     }
-                    if (c == ENUM_END)
-                    {
-                        isE = false;
-                    }
-                    _Buffer.Append(c);
                     continue;
                 }
-                #endregion
-
-                #region 枚举判断
-                if (c == ENUM_START)
+                // 小写控制处理
+                if (c == CTL_LOWER)
                 {
-                    isE = true;
-                    _Buffer.Append(c);
-                    continue;
-                }
-                if (c == ENUM_END)
-                {
-                    return false;
-                }
-                #endregion
-
-                if (c == CHARACTER || c == NUMBER)
-                {
-                    cnt += 1;
-                }
-                _Buffer.Append(c);
-            }
-            cmd = _Buffer.ToString();
-            _Buffer.Clear();
-
-            _UdcArray = new char[cnt][];
-            _KeyArray = new int[cnt];
-            cnt = 0;
-            bool isC = false;// 是否为字符
-            bool isN = false;// 是否为数值
-            StringBuilder buf = new StringBuilder();
-            foreach (char c in cmd)
-            {
-                #region 字符处理
-                if (isC)
-                {
-                    if (c == ENUM_START)
+                    Index += 1;
+                    if (!DecodeCtr(cmd))
                     {
-                        isE = true;
-                        continue;
-                    }
-                    if (c == ENUM_END)
-                    {
-                        if (buf.Length < 1)
-                        {
-                            return false;
-                        }
-                        isE = false;
-                        isC = false;
-                        _UdcArray[cnt] = new char[buf.Length];
-                        buf.CopyTo(0, _UdcArray[cnt], 0, buf.Length);
-                        buf.Clear();
-                        _KeyArray[cnt++] = 0;
-                        continue;
-                    }
-                    if (isE)
-                    {
-                        buf.Append(c);
-                        continue;
-                    }
-                    _UdcArray[cnt++] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
-                    _Buffer.Append(c);
-
-                    if (c == CHARACTER)
-                    {
-                        isC = true;
-                        continue;
-                    }
-                    isC = false;
-
-                    if (c == NUMBER)
-                    {
-                        isN = true;
-                        continue;
+                        return false;
                     }
                     continue;
                 }
-                #endregion
-
-                #region 数字处理
-                if (isN)
+                // 文件名
+                if (c == FILE_NAME)
                 {
-                    if (c == ENUM_START)
-                    {
-                        isE = true;
-                        continue;
-                    }
-                    if (c == ENUM_END)
-                    {
-                        if (buf.Length < 1)
-                        {
-                            return false;
-                        }
-                        isE = false;
-                        isN = false;
-                        _UdcArray[cnt] = new char[buf.Length];
-                        buf.CopyTo(0, _UdcArray[cnt], 0, buf.Length);
-                        buf.Clear();
-                        _KeyArray[cnt++] = 0;
-                        continue;
-                    }
-                    if (isE)
-                    {
-                        buf.Append(c);
-                        continue;
-                    }
-                    _UdcArray[cnt++] = "0123456789".ToCharArray();
                     _Buffer.Append(c);
-
-                    if (c == NUMBER)
+                    Index += 1;
+                    if (!DecodeRpl(cmd))
                     {
-                        isN = true;
-                        continue;
-                    }
-                    isN = false;
-
-                    if (c == CHARACTER)
-                    {
-                        isC = true;
-                        continue;
+                        return false;
                     }
                     continue;
                 }
-                #endregion
-
+                // 扩展名
+                if (c == FILE_EXT)
+                {
+                    _Buffer.Append(c);
+                    Index += 1;
+                    if (!DecodeRpl(cmd))
+                    {
+                        return false;
+                    }
+                    continue;
+                }
+                // 字符处理
                 if (c == CHARACTER)
                 {
                     _Buffer.Append(c);
-                    isC = true;
-                    continue;
-                }
-                if (c == NUMBER)
-                {
-                    _Buffer.Append(c);
-                    isN = true;
-                    continue;
-                }
-
-                _Buffer.Append(c);
-            }
-
-            _Command = _Buffer.ToString();
-            _Buffer.Clear();
-            _Enough = true;
-            return true;
-        }
-
-        public bool Init(string cmd, char[][] arr)
-        {
-            _Enough = false;
-            if (string.IsNullOrEmpty(cmd))
-            {
-                return false;
-            }
-
-            // 公式解析
-            int cnt = 0;
-            foreach (char c in cmd)
-            {
-                if (c == CHARACTER || c == NUMBER)
-                {
-                    cnt += 1;
-                }
-                if (c == ENUM_START || c == ENUM_END)
-                {
-                    return false;
-                }
-            }
-            if (cnt != 0)
-            {
-                if (arr == null || cnt != arr.Length)
-                {
-                    return false;
-                }
-                foreach (char[] c in arr)
-                {
-                    if (c == null || c.Length < 1)
+                    Index += 1;
+                    if (!DecodeUdc(cmd))
                     {
                         return false;
                     }
+                    continue;
                 }
+                // 数值处理
+                if (c == NUMBER)
+                {
+                    _Buffer.Append(c);
+                    Index += 1;
+                    if (!DecodeUdn(cmd))
+                    {
+                        return false;
+                    }
+                    continue;
+                }
+                // 替换
+                if (c == ENUM_START || c == ENUM_END)
+                {
+                    Error = "无效的枚举字符：" + c + " @" + Index;
+                    return false;
+                }
+                _Buffer.Append(c);
+                Index += 1;
             }
+            _Command = _Buffer.ToString();
+            _Buffer.Clear();
 
-            _Command = cmd;
-            _UdcArray = arr;
-            _KeyArray = new int[cnt];
             _Enough = true;
             return true;
         }
 
         /// <summary>
-        /// \/:*?"<b>|
-        /// : 数字
-        /// | 字母
-        /// <b> 区间
-        /// * 文件名
-        /// ? 后缀名
-        /// " 原有字符
-        /// \ 大写 \*大写文件名 \?大写后缀名 \"大写字母 \:创建时间
-        /// / 小写 /*小写文件名 /?小写后缀名 /"小写字母 /:修改时间
+        /// 反向控制信息
         /// </summary>
-        public string Update(string path, string file)
+        /// <param name="cmd"></param>
+        /// <returns></returns>
+        private bool DecodeCtl(string cmd)
+        {
+            if (FILE_NAME == cmd[Index])
+            {
+                _Buffer.Append(TMP_FILE_NAME_UPPER);
+                Index += 1;
+                return DecodeRpl(cmd);
+            }
+            if (FILE_EXT == cmd[Index])
+            {
+                _Buffer.Append(TMP_FILE_EXT_UPPER);
+                Index += 1;
+                return DecodeRpl(cmd);
+            }
+            if (NUMBER == cmd[Index])
+            {
+                _Buffer.Append(TMP_CREATE_TIME);
+                Index += 1;
+                return DecodeFmt(cmd);
+            }
+            if (ORIGIN == cmd[Index])
+            {
+                _Buffer.Append(TMP_ORIGIN_UPPER);
+                Index += 1;
+                return true;
+            }
+
+            Error = "未知的转义字符：\\" + cmd[Index];
+            return false;
+        }
+
+        /// <summary>
+        /// 正向控制信息
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <returns></returns>
+        private bool DecodeCtr(string cmd)
+        {
+            if (FILE_NAME == cmd[Index])
+            {
+                _Buffer.Append(TMP_FILE_NAME_LOWER);
+                Index += 1;
+                return DecodeRpl(cmd);
+            }
+            if (FILE_EXT == cmd[Index])
+            {
+                _Buffer.Append(TMP_FILE_EXT_LOWER);
+                Index += 1;
+                return DecodeRpl(cmd);
+            }
+            if (NUMBER == cmd[Index])
+            {
+                _Buffer.Append(TMP_UPDATE_TIME);
+                Index += 1;
+                return DecodeFmt(cmd);
+            }
+            if (ORIGIN == cmd[Index])
+            {
+                _Buffer.Append(TMP_ORIGIN_LOWER);
+                Index += 1;
+                return true;
+            }
+
+            Error = "未知的转义字符：/" + cmd[Index];
+            return false;
+        }
+
+        /// <summary>
+        /// 用户自定义字符
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <returns></returns>
+        private bool DecodeUdc(string cmd)
+        {
+            StringBuilder buffer = new StringBuilder();
+            if (!DecodeEnum(cmd, buffer, TMP_ESCAPE))
+            {
+                return false;
+            }
+
+            Udc udc = new Udc();
+            if (buffer.Length < 1)
+            {
+                udc.Array = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+                _UdcList.Add(udc);
+                return true;
+            }
+
+            char[] arr = new char[buffer.Length];
+            buffer.CopyTo(0, arr, 0, arr.Length);
+            udc.Array = arr;
+            _UdcList.Add(udc);
+            return true;
+        }
+
+        /// <summary>
+        /// 用户自定义数值
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <returns></returns>
+        private bool DecodeUdn(string cmd)
+        {
+            StringBuilder buffer = new StringBuilder();
+            if (!DecodeEnum(cmd, buffer, TMP_ESCAPE))
+            {
+                return false;
+            }
+
+            Udn udn = new Udn { Start = 1, Step = 1, Fixed = 0, Char = '0' };
+            if (buffer.Length < 1)
+            {
+                _UdnList.Add(udn);
+                return true;
+            }
+
+            string[] arr = buffer.ToString().Split(',');
+            string tmp = arr[0];
+            if (!CharUtil.IsValidateLong(tmp))
+            {
+                Error = "无效的起始值：" + tmp;
+                return false;
+            }
+            udn.Start = int.Parse(tmp);
+            if (arr.Length < 2)
+            {
+                _UdnList.Add(udn);
+                return true;
+            }
+
+            tmp = arr[1];
+            if (!CharUtil.IsValidateLong(tmp))
+            {
+                Error = "无效的步增量：" + tmp;
+                return false;
+            }
+            udn.Step = int.Parse(tmp);
+            if (udn.Step == 0)
+            {
+                Error = "步增量不能为0！";
+                return false;
+            }
+            if (arr.Length < 3)
+            {
+                _UdnList.Add(udn);
+                return true;
+            }
+
+            tmp = arr[2];
+            if (!CharUtil.IsValidateLong(tmp))
+            {
+                Error = "无效的填充长度：" + tmp;
+                return false;
+            }
+            udn.Fixed = int.Parse(tmp);
+            if (udn.Fixed < 0)
+            {
+                Error = "填充长度不能为负值！";
+                return false;
+            }
+            if (arr.Length < 4)
+            {
+                _UdnList.Add(udn);
+                return true;
+            }
+
+            tmp = arr[3];
+            if (string.IsNullOrEmpty(tmp))
+            {
+                Error = "无效的填充字符！";
+                return false;
+            }
+            if (tmp.Length != 1)
+            {
+                Error = "仅允许一个填充字符！";
+                return false;
+            }
+            udn.Char = tmp[0];
+            _UdnList.Add(udn);
+            return true;
+        }
+
+        /// <summary>
+        /// 字符替换
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <returns></returns>
+        private bool DecodeRpl(string cmd)
+        {
+            StringBuilder buffer = new StringBuilder();
+            if (!DecodeEnum(cmd, buffer, NUMBER))
+            {
+                return false;
+            }
+
+            Rpl rpl = new Rpl { Src = "", Dst = "" };
+            if (buffer.Length < 1)
+            {
+                _RplList.Add(rpl);
+                return true;
+            }
+
+            string[] arr = buffer.ToString().Split(':');
+            rpl.Src = arr[0];
+            if (arr.Length < 2)
+            {
+                _RplList.Add(rpl);
+                return true;
+            }
+
+            rpl.Dst = arr[1];
+            if (arr.Length < 3)
+            {
+                _RplList.Add(rpl);
+                return true;
+            }
+
+            Error = "无效的替换信息！";
+            return false;
+        }
+
+        /// <summary>
+        /// 时间格式
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <returns></returns>
+        private bool DecodeFmt(string cmd)
+        {
+            StringBuilder buffer = new StringBuilder();
+            if (!DecodeEnum(cmd, buffer, NUMBER))
+            {
+                return false;
+            }
+
+            if (buffer.Length < 1)
+            {
+                _FmtList.Add("yyyyMMddHHmmss");
+            }
+            else
+            {
+                _FmtList.Add(buffer.ToString());
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// 枚举信息读取
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <param name="buffer"></param>
+        /// <returns></returns>
+        private bool DecodeEnum(string cmd, StringBuilder buffer, char escape)
+        {
+            if (Index >= cmd.Length || cmd[Index] != ENUM_START)
+            {
+                return true;
+            }
+            Index += 1;
+
+            char c;
+            bool e = false;
+            while (Index < cmd.Length)
+            {
+                c = cmd[Index];
+                if (c == ENUM_END)
+                {
+                    Index += 1;
+                    e = true;
+                    break;
+                }
+
+                if (c != escape)
+                {
+                    if (c == CHARACTER || c == NUMBER || c == FILE_NAME || c == FILE_EXT || c == CTL_LOWER || c == CTL_UPPER || c == ORIGIN)
+                    {
+                        Error = "枚举字符中不应包含\\/:*?\"<>|等特殊字符！";
+                        return false;
+                    }
+                }
+
+                buffer.Append(c);
+                Index += 1;
+            }
+            if (!e)
+            {
+                Error = "缺少枚举结束控制！";
+                return false;
+            }
+            if (buffer.Length < 1)
+            {
+                Error = "枚举内容不能为空！";
+                return false;
+            }
+            return true;
+        }
+        #endregion
+
+        #region 生成
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public string Update(string file)
         {
             if (!_Enough)
             {
-                return "长度不足";
+                Error = "长度不足！";
+                return "";
             }
 
             string name = Path.GetFileNameWithoutExtension(file);
             if (string.IsNullOrEmpty(name))
             {
+                Error = "无效的文件信息：" + file;
                 return "";
             }
+            string exts = Path.GetExtension(file);
+            if (!string.IsNullOrEmpty(exts))
+            {
+                exts = exts.Substring(1);
+            }
 
-            string tmp;
+            int si = 0;// 引用变量索引
+            int ci = 0;// 字符变量索引
+            int ni = 0;// 数值变量索引
+            int ri = 0;// 替换变量索引
+            int ti = 0;// 时间变量索引
             for (int i = 0; i < _Command.Length; i += 1)
             {
                 char c = _Command[i];
                 if (c == FILE_NAME)
                 {
-                    _Buffer.Append(name);
+                    _Buffer.Append(Replace(name, ri++));
                     continue;
                 }
                 if (c == TMP_FILE_NAME_LOWER)
                 {
-                    _Buffer.Append(name.ToLower());
+                    _Buffer.Append(Replace(name.ToLower(), ri++));
                     continue;
                 }
                 if (c == TMP_FILE_NAME_UPPER)
                 {
-                    _Buffer.Append(name.ToUpper());
+                    _Buffer.Append(Replace(name.ToUpper(), ri++));
                     continue;
                 }
                 if (c == FILE_EXT)
                 {
-                    tmp = Path.GetExtension(file);
-                    if (string.IsNullOrEmpty(tmp))
-                    {
-                        continue;
-                    }
-                    tmp = tmp.Substring(1);
-                    _Buffer.Append(tmp);
+                    _Buffer.Append(Replace(exts, ri++));
                     continue;
                 }
                 if (c == TMP_FILE_EXT_LOWER)
                 {
-                    tmp = Path.GetExtension(file);
-                    if (string.IsNullOrEmpty(tmp))
-                    {
-                        continue;
-                    }
-                    tmp = tmp.Substring(1);
-                    _Buffer.Append(tmp.ToLower());
+                    _Buffer.Append(Replace(exts.ToLower(), ri++));
                     continue;
                 }
                 if (c == TMP_FILE_EXT_UPPER)
                 {
-                    tmp = Path.GetExtension(file);
-                    if (string.IsNullOrEmpty(tmp))
-                    {
-                        continue;
-                    }
-                    tmp = tmp.Substring(1);
-                    _Buffer.Append(tmp.ToUpper());
+                    _Buffer.Append(Replace(exts.ToUpper(), ri++));
                     continue;
                 }
                 if (c == ORIGIN)
                 {
-                    if (i >= name.Length)
+                    if (si >= name.Length)
                     {
                         continue;
                     }
-                    _Buffer.Append(name[i]);
+                    _Buffer.Append(name[si++]);
                     continue;
                 }
                 if (c == TMP_ORIGIN_LOWER)
@@ -423,64 +569,68 @@ namespace Me.Amon.Ce
                     {
                         continue;
                     }
-                    _Buffer.Append(Char.ToLower(name[i]));
-                    continue;
-                }
-                if (c == NUMBER)
-                {
-                    _Buffer.Append(c);
+                    _Buffer.Append(Char.ToUpper(name[i]));
                     continue;
                 }
                 if (c == TMP_UPDATE_TIME)
                 {
-                    _Buffer.Append(File.GetLastWriteTime(Path.Combine(path, file)).ToString("yyyyMMddHHmmss"));
+                    _Buffer.Append(File.GetLastWriteTime(file).ToString(_FmtList[ti++]));
                     continue;
                 }
                 if (c == TMP_CREATE_TIME)
                 {
-                    _Buffer.Append(File.GetCreationTime(Path.Combine(path, file)).ToString("yyyyMMddHHmmss"));
+                    _Buffer.Append(File.GetCreationTime(file).ToString(_FmtList[ti++]));
+                    continue;
+                }
+                if (c == NUMBER)
+                {
+                    _Buffer.Append(_UdnList[ni++].Next());
                     continue;
                 }
                 if (c == CHARACTER)
                 {
-                    _Buffer.Append(c);
+                    _Buffer.Append(_UdcList[ci++].Next());
                     continue;
                 }
                 _Buffer.Append(c);
             }
 
-            string t = _KeyArray.Length > 0 ? dd(_Buffer) : _Buffer.ToString();
+            string t = _Buffer.ToString();
             _Buffer.Clear();
+            Encode();
+
             return t;
         }
 
-        private string dd(StringBuilder buffer)
+        private string Replace(string txt, int idx)
         {
-            char[] arr = new char[buffer.Length];
-            buffer.CopyTo(0, arr, 0, arr.Length);
-            buffer.Clear();
-
-            int cnt = 0;
-            for (int i = 0; i < arr.Length; i += 1)
+            Rpl rpl = _RplList[idx];
+            if (string.IsNullOrEmpty(rpl.Src))
             {
-                if (arr[i] == CHARACTER || arr[i] == NUMBER)
-                {
-                    arr[i] = _UdcArray[cnt][_KeyArray[cnt]];
-                    cnt += 1;
-                }
+                return txt;
+            }
+            return txt.Replace(rpl.Src, rpl.Dst);
+        }
+
+        private void Encode()
+        {
+            int cnt = _UdcList.Count - 1;
+            if (cnt < 0)
+            {
+                return;
             }
 
-            // 递增处理
-            cnt = _UdcArray.Length - 1;
+            Udc udc;
             while (true)
             {
-                _KeyArray[cnt] += 1;
-                if (_KeyArray[cnt] < _UdcArray[cnt].Length)
+                udc = _UdcList[cnt];
+                udc.Index += 1;
+                if (udc.Index < udc.Array.Length)
                 {
                     break;
                 }
 
-                _KeyArray[cnt] = 0;
+                udc.Index = 0;
                 cnt -= 1;
 
                 if (cnt < 0)
@@ -489,8 +639,43 @@ namespace Me.Amon.Ce
                     break;
                 }
             }
-
-            return new string(arr);
         }
+        #endregion
+    }
+
+    class Udc
+    {
+        public char[] Array { get; set; }
+        public int Index { get; set; }
+
+        public char Next()
+        {
+            return Array[Index];
+        }
+    }
+
+    class Udn
+    {
+        public int Start { get; set; }
+        public int Step { get; set; }
+        public int Fixed { get; set; }
+        public char Char { get; set; }
+
+        public string Next()
+        {
+            string tmp = Start.ToString();
+            if (Fixed > 0)
+            {
+                tmp = tmp.PadLeft(Fixed, Char);
+            }
+            Start += Step;
+            return tmp;
+        }
+    }
+
+    class Rpl
+    {
+        public string Src { get; set; }
+        public string Dst { get; set; }
     }
 }

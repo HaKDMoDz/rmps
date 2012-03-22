@@ -132,7 +132,7 @@ namespace Me.Amon.Pwd.Pro
 
         public void Copy()
         {
-            SafeUtil.Copy(_Ctl.Text);
+            SafeUtil.Copy(_Ctl.Text, 60);
         }
 
         public bool Save()

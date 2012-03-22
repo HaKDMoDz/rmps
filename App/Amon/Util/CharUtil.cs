@@ -83,7 +83,7 @@ namespace Me.Amon.Util
         /// <returns></returns>
         public static bool IsValidateLong(string text)
         {
-            return text != null ? Regex.IsMatch(text, "^\\d+$") : false;
+            return text != null ? Regex.IsMatch(text, "^[-+]?\\d+$") : false;
         }
 
         public static bool IsValidateMail(string text)

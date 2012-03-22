@@ -12,33 +12,38 @@ namespace Me.Amon.Util
         private static Timer _Timer;
         public static void Copy(string newText)
         {
-            _OldText = System.Windows.Forms.Clipboard.GetText();
-            System.Windows.Forms.Clipboard.SetText(newText);
-            if (_Timer == null)
-            {
-                _Timer = new Timer();
-                _Timer.Tick += new EventHandler(Timer_Tick);
-            }
-            _Timer.Interval = 1000 * 5;
-            _Timer.Start();
+            Copy(newText, 5);
         }
 
-        public static void Copy(string newText, int minutes)
+        public static void Copy(string newText, int seconds)
         {
-            _OldText = System.Windows.Forms.Clipboard.GetText();
-            System.Windows.Forms.Clipboard.SetText(newText);
+            if (string.IsNullOrEmpty(newText))
+            {
+                return;
+            }
+
+            _OldText = Clipboard.GetText();
+            Clipboard.SetText(newText);
             if (_Timer == null)
             {
                 _Timer = new Timer();
                 _Timer.Tick += new EventHandler(Timer_Tick);
             }
-            _Timer.Interval = 1000 * minutes;
+            _Timer.Interval = 1000 * seconds;
             _Timer.Start();
         }
 
         private static void Timer_Tick(object sender, EventArgs e)
         {
-            System.Windows.Forms.Clipboard.SetText(_OldText);
+            if (string.IsNullOrEmpty(_OldText))
+            {
+                Clipboard.Clear();
+            }
+            else
+            {
+                Clipboard.SetText(_OldText);
+            }
+            _OldText = null;
             _Timer.Stop();
         }
 

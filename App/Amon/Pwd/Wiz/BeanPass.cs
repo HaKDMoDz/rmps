@@ -161,10 +161,7 @@ namespace Me.Amon.Pwd.Wiz
 
         public void Copy()
         {
-            if (!string.IsNullOrEmpty(TbData.Text))
-            {
-                SafeUtil.Copy(TbData.Text);
-            }
+            SafeUtil.Copy(TbData.Text, 60);
         }
 
         public bool Save()
