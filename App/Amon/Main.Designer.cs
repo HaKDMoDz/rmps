@@ -38,6 +38,7 @@
             this.MtSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.MtAPwd = new System.Windows.Forms.ToolStripMenuItem();
             this.MtASec = new System.Windows.Forms.ToolStripMenuItem();
+            this.MtABar = new System.Windows.Forms.ToolStripMenuItem();
             this.MtSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.MtSignUp = new System.Windows.Forms.ToolStripMenuItem();
             this.MtSignOl = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,6 +56,7 @@
             this.MgSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.MgAPwd = new System.Windows.Forms.ToolStripMenuItem();
             this.MgASec = new System.Windows.Forms.ToolStripMenuItem();
+            this.MgABar = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.MgSignUp = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSignOl = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,8 +68,8 @@
             this.MgSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.MgInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.MgExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.MgABar = new System.Windows.Forms.ToolStripMenuItem();
-            this.MtABar = new System.Windows.Forms.ToolStripMenuItem();
+            this.MgARen = new System.Windows.Forms.ToolStripMenuItem();
+            this.MtARen = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).BeginInit();
             this.CtMenu.SuspendLayout();
             this.CgMenu.SuspendLayout();
@@ -106,6 +108,7 @@
             this.MtAPwd,
             this.MtASec,
             this.MtABar,
+            this.MtARen,
             this.MtSep1,
             this.MtSignUp,
             this.MtSignIn,
@@ -115,7 +118,7 @@
             this.MtInfo,
             this.MtExit});
             this.CtMenu.Name = "CtMenu";
-            this.CtMenu.Size = new System.Drawing.Size(166, 242);
+            this.CtMenu.Size = new System.Drawing.Size(166, 264);
             // 
             // MtGuid
             // 
@@ -144,6 +147,13 @@
             this.MtASec.Size = new System.Drawing.Size(165, 22);
             this.MtASec.Text = "加密器(&S)";
             this.MtASec.Click += new System.EventHandler(this.MtASec_Click);
+            // 
+            // MtABar
+            // 
+            this.MtABar.Name = "MtABar";
+            this.MtABar.Size = new System.Drawing.Size(165, 22);
+            this.MtABar.Text = "二维码(&B)";
+            this.MtABar.Click += new System.EventHandler(this.MtABar_Click);
             // 
             // MtSep1
             // 
@@ -232,6 +242,7 @@
             this.MgAPwd,
             this.MgASec,
             this.MgABar,
+            this.MgARen,
             this.MgSep1,
             this.MgSignUp,
             this.MgSignIn,
@@ -241,7 +252,7 @@
             this.MgInfo,
             this.MgExit});
             this.CgMenu.Name = "CmMenu";
-            this.CgMenu.Size = new System.Drawing.Size(164, 286);
+            this.CgMenu.Size = new System.Drawing.Size(164, 308);
             // 
             // MgTopMost
             // 
@@ -279,6 +290,13 @@
             this.MgASec.Size = new System.Drawing.Size(163, 22);
             this.MgASec.Text = "加密器(&S)";
             this.MgASec.Click += new System.EventHandler(this.MgASec_Click);
+            // 
+            // MgABar
+            // 
+            this.MgABar.Name = "MgABar";
+            this.MgABar.Size = new System.Drawing.Size(163, 22);
+            this.MgABar.Text = "二维码(&B)";
+            this.MgABar.Click += new System.EventHandler(this.MgABar_Click);
             // 
             // MgSep1
             // 
@@ -358,19 +376,19 @@
             this.MgExit.Text = "退出(&X)";
             this.MgExit.Click += new System.EventHandler(this.MgExit_Click);
             // 
-            // MgABar
+            // MgARen
             // 
-            this.MgABar.Name = "MgABar";
-            this.MgABar.Size = new System.Drawing.Size(163, 22);
-            this.MgABar.Text = "二维码(&B)";
-            this.MgABar.Click += new System.EventHandler(this.MgABar_Click);
+            this.MgARen.Name = "MgARen";
+            this.MgARen.Size = new System.Drawing.Size(163, 22);
+            this.MgARen.Text = "文件更名";
+            this.MgARen.Click += new System.EventHandler(this.MgARen_Click);
             // 
-            // MtABar
+            // MtARen
             // 
-            this.MtABar.Name = "MtABar";
-            this.MtABar.Size = new System.Drawing.Size(165, 22);
-            this.MtABar.Text = "二维码(&B)";
-            this.MtABar.Click += new System.EventHandler(this.MtABar_Click);
+            this.MtARen.Name = "MtARen";
+            this.MtARen.Size = new System.Drawing.Size(165, 22);
+            this.MtARen.Text = "文件更名";
+            this.MtARen.Click += new System.EventHandler(this.MtARen_Click);
             // 
             // Main
             // 
@@ -439,6 +457,8 @@
         private System.Windows.Forms.ToolStripMenuItem MtInfo;
         private System.Windows.Forms.ToolStripMenuItem MgABar;
         private System.Windows.Forms.ToolStripMenuItem MtABar;
+        private System.Windows.Forms.ToolStripMenuItem MgARen;
+        private System.Windows.Forms.ToolStripMenuItem MtARen;
 
 
     }

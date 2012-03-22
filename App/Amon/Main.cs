@@ -8,6 +8,7 @@ using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Properties;
 using Me.Amon.Pwd;
+using Me.Amon.Ren;
 using Me.Amon.Sec;
 using Me.Amon.User;
 using Me.Amon.User.Sign;
@@ -27,6 +28,7 @@ namespace Me.Amon
         private APwd _APwd;
         private ASec _ASec;
         private ABar _ABar;
+        private ARen _ARen;
 
         #region 构造函数
         public Main()
@@ -351,6 +353,22 @@ namespace Me.Amon
             }
         }
 
+        private void MgARen_Click(object sender, EventArgs e)
+        {
+            if (_IApp == null || !_IApp.Visible)
+            {
+                CheckUser(new AmonHandler<int>(ShowARen));
+                return;
+            }
+
+            if (_IApp.AppId != IEnv.IAPP_AREN)
+            {
+                _IApp.Visible = false;
+                ShowARen(IEnv.IAPP_AREN);
+                return;
+            }
+        }
+
         private void MgSignOl_Click(object sender, EventArgs e)
         {
             //SignAc(ESignAc.SignOl, new AmonHandler<int>(DoSignOl));
@@ -444,6 +462,22 @@ namespace Me.Amon
             {
                 _IApp.Visible = false;
                 ShowABar(IEnv.IAPP_ABAR);
+                return;
+            }
+        }
+
+        private void MtARen_Click(object sender, EventArgs e)
+        {
+            if (_IApp == null || !_IApp.Visible)
+            {
+                CheckUser(new AmonHandler<int>(ShowARen));
+                return;
+            }
+
+            if (_IApp.AppId != IEnv.IAPP_AREN)
+            {
+                _IApp.Visible = false;
+                ShowARen(IEnv.IAPP_AREN);
                 return;
             }
         }
@@ -669,6 +703,18 @@ namespace Me.Amon
             _IApp = _ABar;
 
             _ABar.Show();
+        }
+
+        private void ShowARen(int view)
+        {
+            if (_ARen == null || _ARen.IsDisposed)
+            {
+                _ARen = new ARen(_UserModel);
+                _ARen.InitOnce();
+            }
+            _IApp = _ARen;
+
+            _ARen.Show();
         }
         #endregion
 

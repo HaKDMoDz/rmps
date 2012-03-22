@@ -556,6 +556,12 @@
     </Compile>
     <Compile Include="Pwd\Wiz\IAttEdit.cs" />
     <Compile Include="Pwd\Wiz\IWizView.cs" />
+    <Compile Include="Ren\ARen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ren\ARen.Designer.cs">
+      <DependentUpon>ARen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sec\ASec.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1056,6 +1062,9 @@
     <EmbeddedResource Include="Pwd\Wiz\BeanText.resx">
       <DependentUpon>BeanText.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Ren\ARen.resx">
+      <DependentUpon>ARen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sec\ASec.resx">
       <DependentUpon>ASec.cs</DependentUpon>
     </EmbeddedResource>
@@ -1188,6 +1197,7 @@
   <ItemGroup>
     <Content Include="Amon.dat" />
     <Content Include="Logo\logo.ico" />
+    <None Include="Resources\Save.png" />
     <None Include="Resources\Alert.png" />
     <None Include="Resources\Error.png" />
     <None Include="Resources\Guid.png" />
