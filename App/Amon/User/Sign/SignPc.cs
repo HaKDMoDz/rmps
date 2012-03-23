@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Me.Amon.Da;
 using Me.Amon.Model;
 using Me.Amon.Util;
 
@@ -13,7 +14,7 @@ namespace Me.Amon.User.Sign
     public partial class SignPc : UserControl, ISignAc
     {
         private UserModel _UserModel;
-        private Uc.Properties _Prop;
+        private DFAccess _Prop;
         private SignAc _SignAc;
 
         #region 构造函数
@@ -65,7 +66,7 @@ namespace Me.Amon.User.Sign
             }
 
             name = name.ToLower();
-            _Prop = new Uc.Properties();
+            _Prop = new DFAccess();
             _Prop.Load(IEnv.AMON_SYS);
             string home = _Prop.Get(string.Format(IEnv.AMON_SYS_HOME, name));
             if (!string.IsNullOrEmpty(home))

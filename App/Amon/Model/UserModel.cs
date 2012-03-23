@@ -44,7 +44,7 @@ namespace Me.Amon.Model
                 return false;
             }
 
-            Uc.Properties prop = new Uc.Properties();
+            DFAccess prop = new DFAccess();
             prop.Load(file);
 
             string data = prop.Get(IEnv.AMON_CFG_DATA);
@@ -106,7 +106,7 @@ namespace Me.Amon.Model
         /// <returns></returns>
         public bool CaAuthPk(string oldPass, string newPass)
         {
-            Uc.Properties prop = new Uc.Properties();
+            DFAccess prop = new DFAccess();
             prop.Load(Path.Combine(_Home, IEnv.AMON_CFG));
 
             // 已有口令校验
@@ -224,7 +224,7 @@ namespace Me.Amon.Model
 
             _Lock = Digest(Name, newPass);
 
-            Uc.Properties prop = new Uc.Properties();
+            DFAccess prop = new DFAccess();
             prop.Load(Path.Combine(_Home, IEnv.AMON_CFG));
             prop.Set(IEnv.AMON_CFG_LOCK, _Lock);
             prop.Save(Path.Combine(_Home, IEnv.AMON_CFG));
@@ -239,7 +239,7 @@ namespace Me.Amon.Model
         /// <returns></returns>
         public bool CaAuthSk(string oldPass, string secPass)
         {
-            Uc.Properties prop = new Uc.Properties();
+            DFAccess prop = new DFAccess();
             prop.Load(Path.Combine(_Home, IEnv.AMON_CFG));
 
             // 已有口令校验
@@ -338,7 +338,7 @@ namespace Me.Amon.Model
             {
                 Directory.CreateDirectory(_Home);
             }
-            Uc.Properties prop = new Uc.Properties();
+            DFAccess prop = new DFAccess();
             prop.Set(IEnv.AMON_CFG_NAME, name);
             prop.Set(IEnv.AMON_CFG_CODE, code);
             prop.Set(IEnv.AMON_CFG_DATA, Convert.ToBase64String(_Data));
@@ -423,7 +423,7 @@ namespace Me.Amon.Model
             }
 
             _Home = home;
-            Uc.Properties prop = new Uc.Properties();
+            DFAccess prop = new DFAccess();
             prop.Set(IEnv.AMON_CFG_NAME, name);
             prop.Set(IEnv.AMON_CFG_CODE, code);
             prop.Set(IEnv.AMON_CFG_DATA, data);
@@ -501,7 +501,7 @@ namespace Me.Amon.Model
                 return false;
             }
 
-            Uc.Properties prop = new Uc.Properties();
+            DFAccess prop = new DFAccess();
             prop.Load(Path.Combine(_Home, IEnv.AMON_CFG));
             prop.Set(IEnv.AMON_CFG_NAME, oldPass);
             prop.Set(IEnv.AMON_CFG_CODE, code);

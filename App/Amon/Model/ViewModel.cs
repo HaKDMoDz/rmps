@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using Me.Amon.Da;
 using Me.Amon.Util;
 
 namespace Me.Amon.Model
@@ -10,10 +11,10 @@ namespace Me.Amon.Model
     {
         private UserModel _UserModel;
         private string _LookPath;
-        private Uc.Properties _LookProp;
+        private DFAccess _LookProp;
         private string _FeelPath;
-        private Uc.Properties _FeelProp;
-        private Uc.Properties _UserProp;
+        private DFAccess _FeelProp;
+        private DFAccess _UserProp;
 
         public ViewModel(UserModel userModel)
         {
@@ -92,13 +93,13 @@ namespace Me.Amon.Model
         {
             #region Look
             _LookPath = Path.Combine("Skin", "Look", _UserModel.Look);
-            _LookProp = new Uc.Properties();
+            _LookProp = new DFAccess();
             _LookProp.Load(Path.Combine(_LookPath, IEnv.FILE_LOOK));
             #endregion
 
             #region Feel
             _FeelPath = Path.Combine("Skin", "Feel", _UserModel.Feel);
-            _FeelProp = new Uc.Properties();
+            _FeelProp = new DFAccess();
             _FeelProp.Load(Path.Combine(_FeelPath, IEnv.FILE_FEEL));
 
             if (_Imgs == null)
@@ -112,7 +113,7 @@ namespace Me.Amon.Model
             #endregion
 
             #region 视图
-            _UserProp = new Uc.Properties();
+            _UserProp = new DFAccess();
             _UserProp.Load(Path.Combine(_UserModel.Home, IEnv.USER_CFG));
             MenuBarVisible = IEnv.VALUE_TRUE == _UserProp.Get("MenuBar", IEnv.VALUE_TRUE).ToLower();
             ToolBarVisible = IEnv.VALUE_TRUE == _UserProp.Get("ToolBar", IEnv.VALUE_TRUE).ToLower();

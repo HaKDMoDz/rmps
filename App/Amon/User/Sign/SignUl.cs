@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
+using Me.Amon.Da;
 using Me.Amon.Model;
 using Me.Amon.Util;
 
@@ -130,7 +131,7 @@ namespace Me.Amon.User.Sign
                     }
                 }
 
-                Uc.Properties prop = new Uc.Properties();
+                DFAccess prop = new DFAccess();
                 prop.Load(IEnv.AMON_SYS);
                 prop.Set(string.Format(IEnv.AMON_SYS_CODE, name), _UserModel.Code);
                 prop.Set(string.Format(IEnv.AMON_SYS_HOME, name), _UserModel.Home);

@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Bean;
+using Me.Amon.Da;
 using Me.Amon.Model;
 using Me.Amon.Util;
 using Org.BouncyCastle.Crypto;
@@ -25,7 +26,7 @@ namespace Me.Amon.User.Sign
         private string _Pass;
         private string _Root;
         private UserModel _UserModel;
-        private Uc.Properties _Prop;
+        private DFAccess _Prop;
         private SignAc _SignAc;
 
         #region 构造函数
@@ -126,7 +127,7 @@ namespace Me.Amon.User.Sign
 
             #region 本地用户判断
             _Name = _Name.ToLower();
-            _Prop = new Uc.Properties();
+            _Prop = new DFAccess();
             _Prop.Load(IEnv.AMON_SYS);
             string home = _Prop.Get(string.Format(IEnv.AMON_SYS_HOME, _Name));
             if (!string.IsNullOrEmpty(home))
@@ -290,7 +291,7 @@ namespace Me.Amon.User.Sign
                 }
                 else
                 {
-                    Uc.Properties prop = new Uc.Properties();
+                    DFAccess prop = new DFAccess();
                     prop.Load(IEnv.AMON_SYS);
                     prop.Set(string.Format(IEnv.AMON_SYS_CODE, _Name), _UserModel.Code);
                     prop.Set(string.Format(IEnv.AMON_SYS_HOME, _Name), _UserModel.Home);

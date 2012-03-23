@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using Me.Amon.Da;
 using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Properties;
@@ -17,7 +18,7 @@ namespace Me.Amon.User
     {
         private ISignAc _SignAc;
         private UserModel _UserModel;
-        private Uc.Properties _Prop;
+        private DFAccess _Prop;
 
         public AmonHandler<int> CallBackHandler { get; set; }
 
@@ -88,7 +89,7 @@ namespace Me.Amon.User
                 ShowAlert("请确认您选择的数据路径是否正确！");
                 return;
             }
-            Uc.Properties prop = new Uc.Properties();
+            DFAccess prop = new DFAccess();
             prop.Load(path);
             string name = prop.Get(IEnv.AMON_CFG_NAME);
             string code = prop.Get(IEnv.AMON_CFG_CODE);

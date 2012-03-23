@@ -89,10 +89,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SQLite">
-      <HintPath>.\Lib\System.Data.SQLite.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>Lib\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -744,7 +744,6 @@
       <DependentUpon>IcoSeeker.cs</DependentUpon>
     </Compile>
     <Compile Include="Uc\Item.cs" />
-    <Compile Include="Uc\Properties.cs" />
     <Compile Include="User\Sign\SignOl.cs">
       <SubType>UserControl</SubType>
     </Compile>
