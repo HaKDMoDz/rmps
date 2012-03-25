@@ -103,7 +103,7 @@ namespace Me.Amon.Pwd.Wiz
 
         public bool SaveData()
         {
-            if (_SafeModel.Key == null)
+            if (_SafeModel.Rec == null)
             {
                 return false;
             }
@@ -127,7 +127,7 @@ namespace Me.Amon.Pwd.Wiz
                 meta.Data = TbMeta.Text;
                 meta.Modified = true;
             }
-            _SafeModel.Key.Modified |= meta.Modified;
+            _SafeModel.Modified |= meta.Modified;
 
             LogoAtt logo = _SafeModel.Logo;
             if (logo.Name != _AIco.File)
@@ -140,7 +140,7 @@ namespace Me.Amon.Pwd.Wiz
                 logo.Path = _AIco.Path;
                 logo.Modified = true;
             }
-            _SafeModel.Key.Modified |= logo.Modified;
+            _SafeModel.Modified |= logo.Modified;
 
             HintAtt hint = _SafeModel.Hint;
             hint.Name = "";
@@ -149,7 +149,7 @@ namespace Me.Amon.Pwd.Wiz
                 hint.Data = TbHint.Text;
                 hint.Modified = true;
             }
-            _SafeModel.Key.Modified |= hint.Modified;
+            _SafeModel.Modified |= hint.Modified;
 
             return true;
         }

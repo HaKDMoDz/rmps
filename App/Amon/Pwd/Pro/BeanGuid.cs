@@ -157,7 +157,7 @@ namespace Me.Amon.Pwd.Pro
             if (header.Id != _Att.GetSpec(GuidAtt.SPEC_GUID_TPLT))
             {
                 _Att.SetSpec(GuidAtt.SPEC_GUID_TPLT, header.Id);
-                if (!_SafeModel.Key.IsUpdate)
+                if (!_SafeModel.IsUpdate)
                 {
                     AAtt att;
                     if (_SafeModel.Count < AAtt.HEAD_SIZE)

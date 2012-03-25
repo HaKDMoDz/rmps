@@ -2,6 +2,8 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Xml;
+using Me.Amon.Bean;
 using Me.Amon.Da;
 using Me.Amon.Model;
 using Me.Amon.Util;
@@ -200,21 +202,53 @@ namespace Me.Amon.User.Sign
             _UserModel.Init();
             BeanUtil.UnZip("Amon.dat", _UserModel.Home);
 
-            var tmp = '\'' + _UserModel.Code + '\'';
-            var dba = _UserModel.DBAccess;
-
-            string file = Path.Combine(_UserModel.Home, "dat.sql");
-            StreamReader reader = File.OpenText(file);
-            string line = reader.ReadLine();
-            while (line != null)
+            StreamReader stream = new StreamReader(Path.Combine(_UserModel.Home, "Cat.xml"));
+            using (XmlReader reader = XmlReader.Create(stream))
             {
-                dba.AddBatch(line.Replace("'A0000000'", tmp));
-                line = reader.ReadLine();
+                Cat cat;
+                while (reader.ReadToFollowing("Cat"))
+                {
+                    cat = new Cat();
+                    if (!cat.FromXml(reader))
+                    {
+                        continue;
+                    }
+                    _UserModel.DBObject.SaveVcs(cat);
+                }
             }
-            reader.Close();
-            File.Delete(file);
+            stream.Close();
 
-            dba.ExecuteBatch();
+            stream = new StreamReader(Path.Combine(_UserModel.Home, "Lib.xml"));
+            using (XmlReader reader = XmlReader.Create(stream))
+            {
+                LibHeader header;
+                while (reader.ReadToFollowing("Lib"))
+                {
+                    header = new LibHeader();
+                    if (!header.FromXml(reader))
+                    {
+                        continue;
+                    }
+                    _UserModel.DBObject.SaveVcs(header);
+                }
+            }
+            stream.Close();
+
+            stream = new StreamReader(Path.Combine(_UserModel.Home, "Udc.xml"));
+            using (XmlReader reader = XmlReader.Create(stream))
+            {
+                Udc udc;
+                while (reader.ReadToFollowing("Udc"))
+                {
+                    udc = new Udc();
+                    if (!udc.FromXml(reader))
+                    {
+                        continue;
+                    }
+                    _UserModel.DBObject.SaveVcs(udc);
+                }
+            }
+            stream.Close();
 
             _SignAc.CallBack(IEnv.IAPP_APWD);
         }

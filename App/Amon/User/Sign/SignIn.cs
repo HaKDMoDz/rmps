@@ -13,7 +13,6 @@ namespace Me.Amon.User.Sign
 {
     public partial class SignIn : UserControl, ISignAc
     {
-        private bool _Waiting;
         private string _Name;
         private string _Pass;
         private string _Info;
@@ -132,7 +131,6 @@ namespace Me.Amon.User.Sign
             {
                 _SignAc.HideWaiting();
                 _SignAc.ShowAlert(e.Error.Message);
-                _Waiting = false;
                 return;
             }
 
@@ -225,7 +223,7 @@ namespace Me.Amon.User.Sign
                     {
                         continue;
                     }
-                    cat.Save(_UserModel.DBAccess, false);
+                    _UserModel.DBObject.SaveVcs(cat);
                 }
             }
 
@@ -265,11 +263,7 @@ namespace Me.Amon.User.Sign
                     {
                         continue;
                     }
-                    header.Save(_UserModel.DBAccess, false);
-                    foreach (LibDetail detail in header.Details)
-                    {
-                        detail.Save(_UserModel.DBAccess, false);
-                    }
+                    _UserModel.DBObject.SaveVcs(header);
                     header.Order += 1;
                 }
             }
@@ -309,7 +303,7 @@ namespace Me.Amon.User.Sign
                     {
                         continue;
                     }
-                    udc.Save(_UserModel.DBAccess, false);
+                    _UserModel.DBObject.SaveVcs(udc);
                 }
             }
 
@@ -340,15 +334,15 @@ namespace Me.Amon.User.Sign
                     return;
                 }
 
-                Key key = new Key();
-                key.UserCode = _UserModel.Code;
+                Rec rec = new Rec();
+                rec.UserCode = _UserModel.Code;
                 while (reader.ReadToFollowing("Key"))
                 {
-                    if (!key.FromXml(reader))
+                    if (!rec.FromXml(reader))
                     {
                         continue;
                     }
-                    key.Save(_UserModel.DBAccess, false);
+                    _UserModel.DBObject.SaveVcs(rec);
                 }
             }
 

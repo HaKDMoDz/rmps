@@ -89,7 +89,7 @@ namespace Me.Amon.Pwd.Wiz
                 }
             }
 
-            _SafeModel.Key.Modified = false;
+            _SafeModel.Modified = false;
             for (int i = AAtt.HEAD_SIZE; i < _SafeModel.Count; i += 1)
             {
                 AAtt att = _SafeModel.GetAtt(i);
@@ -97,7 +97,7 @@ namespace Me.Amon.Pwd.Wiz
                 {
                     return false;
                 }
-                _SafeModel.Key.Modified |= att.Modified;
+                _SafeModel.Modified |= att.Modified;
             }
             return true;
         }

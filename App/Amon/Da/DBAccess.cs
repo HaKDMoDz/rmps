@@ -54,8 +54,7 @@ namespace Me.Amon.Da
         private int _MinLimit;
         private int _MaxLimit;
 
-
-        public DBAccess()
+        DBAccess()
         {
             // 参数列表
             _ParamList = new List<string>();

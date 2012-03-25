@@ -669,21 +669,21 @@ namespace Me.Amon.Model
             //client.UploadStringAsync(new Uri(EnvConst.SERVER_PATH), "POST", "c=" + Code + "&t=" + _Token + data);
         }
 
-        private DBAccess _DBAccess;
+        private DBObject _DBObject;
         //private DCAccess _DCAccess;
         //private DFAccess _DFAccess;
 
         public void Init()
         {
-            _DBAccess = new DBAccess();
-            _DBAccess.Init(this);
+            _DBObject = new DBObject();
+            _DBObject.Init(this);
             //_DCAccess = new DCAccess();
             //_DCAccess.Init(this);
             //_DFAccess = new DFAccess();
             //_DFAccess.Init(this);
         }
 
-        public DBAccess DBAccess { get { return _DBAccess; } }
+        public DBObject DBObject { get { return _DBObject; } }
         //public DCAccess DCAccess { get { return _DCAccess; } }
         //public DFAccess DFAccess { get { return _DFAccess; } }
     }

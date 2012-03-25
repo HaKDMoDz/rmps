@@ -18,7 +18,6 @@ namespace Me.Amon.User
     {
         private ISignAc _SignAc;
         private UserModel _UserModel;
-        private DFAccess _Prop;
 
         public AmonHandler<int> CallBackHandler { get; set; }
 

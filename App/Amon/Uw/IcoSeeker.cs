@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Bean;
-using Me.Amon.Da;
 using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Util;
@@ -45,28 +43,9 @@ namespace Me.Amon.Uw
             ShowIcoView();
 
             LsDir.Items.Add(new Dir { Id = "0", Name = "默认分类", Tips = "默认分类", Path = "." });
-
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.AICO0100);
-            dba.AddColumn(DBConst.AICO0103);
-            dba.AddColumn(DBConst.AICO0104);
-            dba.AddColumn(DBConst.AICO0105);
-            dba.AddColumn(DBConst.AICO0107);
-            dba.AddWhere(DBConst.AICO0102, _UserModel.Code);
-            dba.AddSort(DBConst.AICO0101, true);
-
-            using (DataTable dt = dba.ExecuteSelect())
+            foreach (Dir dir in _UserModel.DBObject.ListDir())
             {
-                foreach (DataRow row in dt.Rows)
-                {
-                    Dir item = new Dir();
-                    item.Id = row[DBConst.AICO0103] as string;
-                    item.Name = row[DBConst.AICO0104] as string;
-                    item.Tips = row[DBConst.AICO0105] as string;
-                    item.Memo = row[DBConst.AICO0107] as string;
-                    LsDir.Items.Add(item);
-                }
+                LsDir.Items.Add(dir);
             }
 
             LsDir.SelectedIndex = 0;
@@ -146,15 +125,7 @@ namespace Me.Amon.Uw
                 return;
             }
 
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.AICO0100);
-            dba.AddWhere(DBConst.AICO0102, _UserModel.Code);
-            dba.AddWhere(DBConst.AICO0103, item.Id);
-            if (1 != dba.ExecuteDelete())
-            {
-                return;
-            }
+            _UserModel.DBObject.DeleteVcs(item);
             if (Directory.Exists(HomeDir))
             {
                 Directory.Delete(HomeDir, true);
@@ -206,31 +177,14 @@ namespace Me.Amon.Uw
         #region 公有函数
         public void UpdateDir(Dir item)
         {
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.AICO0100);
-            dba.AddParam(DBConst.AICO0104, item.Name);
-            dba.AddParam(DBConst.AICO0105, item.Tips);
-            dba.AddParam(DBConst.AICO0107, item.Memo);
-            if (CharUtil.IsValidateHash(item.Id))
+            bool update = CharUtil.IsValidateHash(item.Id);
+            _UserModel.DBObject.SaveVcs(item);
+            if (update)
             {
-                dba.AddWhere(DBConst.AICO0102, _UserModel.Code);
-                dba.AddWhere(DBConst.AICO0103, item.Id);
-                dba.AddVcs(DBConst.AICO0108, DBConst.AICO0109, item.Operate, DBConst.OPT_INSERT);
-                dba.ExecuteUpdate();
-
                 LsDir.Items[LsDir.SelectedIndex] = item;
             }
             else
             {
-                item.Id = HashUtil.UtcTimeInHex();
-                dba.AddParam(DBConst.AICO0101, LsDir.Items.Count);
-                dba.AddParam(DBConst.AICO0102, _UserModel.Code);
-                dba.AddParam(DBConst.AICO0103, item.Id);
-                dba.AddParam(DBConst.AICO0106, item.Id);//暂时使用ID
-                dba.AddVcs(DBConst.AICO0108, DBConst.AICO0109);
-                dba.ExecuteInsert();
-
                 Directory.CreateDirectory(Path.Combine(_RootDir, item.Id));
                 LsDir.Items.Add(item);
                 LsDir.SelectedItem = item;

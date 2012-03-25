@@ -12,12 +12,12 @@ using Me.Amon.Model;
 using Me.Amon.Util;
 using MessagingToolkit.Barcode;
 using MessagingToolkit.Barcode.QRCode.Decoder;
+using Me.Amon.Pwd;
 
 namespace Me.Amon.Uc
 {
     public class Card
     {
-
         private SafeModel _SafeModel;
 
         public Card(SafeModel gridMdl)
@@ -204,8 +204,9 @@ namespace Me.Amon.Uc
                 img.Save(dst, ImageFormat.Jpeg);
                 return dst;
             }
-            catch (Exception ex)
+            catch (Exception exp)
             {
+                Main.LogInfo(exp.Message);
                 return null;
             }
         }

@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using Me.Amon.Bean;
 using Me.Amon.Da;
 using Me.Amon.Model;
-using Me.Amon.Util;
 
 namespace Me.Amon.Uw
 {
@@ -14,7 +13,7 @@ namespace Me.Amon.Uw
     {
         private Udc _Item;
         private UserModel _UserModel;
-        private DataModel _DataModel;
+        private UdcModel _UdcModel;
 
         #region 构造函数
         public UdcEditor()
@@ -29,9 +28,9 @@ namespace Me.Amon.Uw
             InitializeComponent();
         }
 
-        public void Init(DataModel dataModel, Udc udc)
+        public void Init(UdcModel udcModel, Udc udc)
         {
-            _DataModel = dataModel;
+            _UdcModel = udcModel;
 
             TbName.MaxLength = DBConst.AUDC0104_SIZE;
             TbTips.MaxLength = DBConst.AUDC0105_SIZE;
@@ -124,39 +123,20 @@ namespace Me.Amon.Uw
             }
             _Item.Data = buf.ToString();
 
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.AUDC0100);
-            dba.AddParam(DBConst.AUDC0104, _Item.Name);
-            dba.AddParam(DBConst.AUDC0105, _Item.Tips);
-            dba.AddParam(DBConst.AUDC0106, _Item.Data);
-            dba.AddParam(DBConst.AUDC0107, "");
-            dba.AddParam(DBConst.AUDC0108, DBConst.SQL_NOW, false);
-            if (CharUtil.IsValidateHash(_Item.Id))
+            _UserModel.DBObject.SaveVcs(_Item);
+            if (LsUcs.SelectedItem != null)
             {
-                dba.AddWhere(DBConst.AUDC0102, _UserModel.Code);
-                dba.AddWhere(DBConst.AUDC0103, _Item.Id);
-                dba.AddVcs(DBConst.AUDC010A, DBConst.AUDC010B, _Item.Operate, DBConst.OPT_UPDATE);
-                dba.ExecuteUpdate();
-
                 LsUcs.Items[LsUcs.SelectedIndex] = _Item;
             }
             else
             {
-                _Item.Id = HashUtil.UtcTimeInHex(false);
-                dba.AddParam(DBConst.AUDC0101, LsUcs.Items.Count);
-                dba.AddParam(DBConst.AUDC0102, _UserModel.Code);
-                dba.AddParam(DBConst.AUDC0103, _Item.Id);
-                dba.AddParam(DBConst.AUDC0109, DBConst.SQL_NOW, false);
-                dba.AddVcs(DBConst.AUDC010A, DBConst.AUDC010B);
-                dba.ExecuteInsert();
-
                 LsUcs.Items.Add(_Item);
                 ShowData(new Udc());
             }
-            if (_DataModel != null)
+
+            if (_UdcModel != null)
             {
-                _DataModel.UdcModified = -1;
+                _UdcModel.Modified = -1;
             }
         }
         #endregion

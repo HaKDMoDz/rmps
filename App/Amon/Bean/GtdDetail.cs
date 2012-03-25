@@ -1,7 +1,4 @@
-﻿using System.Data;
-using Me.Amon.Da;
-
-namespace Me.Amon.Bean
+﻿namespace Me.Amon.Bean
 {
     public class GtdDetail : Vcs
     {
@@ -26,22 +23,5 @@ namespace Me.Amon.Bean
         /// 表达式
         /// </summary>
         public string P30F0406 { get; set; }
-
-        #region 接口实现
-        public override bool Load(DataRow row)
-        {
-            return true;
-        }
-
-        public override bool Read(DBAccess dba, string Id)
-        {
-            return true;
-        }
-
-        public override bool Save(DBAccess dba, bool update)
-        {
-            return true;
-        }
-        #endregion
     }
 }

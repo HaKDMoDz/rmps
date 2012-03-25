@@ -1,5 +1,4 @@
-﻿using System.Data;
-using Me.Amon.Da;
+﻿using System;
 
 namespace Me.Amon.Bean
 {
@@ -12,18 +11,33 @@ namespace Me.Amon.Bean
         public const int OPT_UPDATE = 2;
 
         /// <summary>
+        /// 索引
+        /// </summary>
+        public string Id { get; set; }
+
+        /// <summary>
         /// 用户代码
         /// </summary>
         public string UserCode { get; set; }
 
+        /// <summary>
+        /// 当前操作
+        /// </summary>
         public int Operate { get; set; }
 
+        /// <summary>
+        /// 版本控制
+        /// </summary>
         public int Version { get; set; }
 
-        public abstract bool Load(DataRow row);
+        /// <summary>
+        /// 更新时间
+        /// </summary>
+        public DateTime UpdateTime { get; set; }
 
-        public abstract bool Read(DBAccess dba, string Id);
-
-        public abstract bool Save(DBAccess dba, bool update);
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public DateTime CreateTime { get; set; }
     }
 }

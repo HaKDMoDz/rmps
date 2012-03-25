@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Me.Amon.Bean;
 using Me.Amon.Event;
 using Me.Amon.Model;
 
@@ -74,7 +75,7 @@ namespace Me.Amon.Pwd.Wiz
         public void AppendKey()
         {
             _SafeModel.Clear();
-            _SafeModel.Key.SetDefault();
+            _SafeModel.Rec = new Rec();
 
             _SafeModel.InitGuid();
             _SafeModel.InitMeta();

@@ -196,21 +196,21 @@ namespace Me.Amon.User.Sign
             _UserModel.Init();
             BeanUtil.UnZip("Amon.dat", _UserModel.Home);
 
-            var tmp = '\'' + _UserModel.Code + '\'';
-            var dba = _UserModel.DBAccess;
+            //var tmp = '\'' + _UserModel.Code + '\'';
+            //var dba = _UserModel.DBObject;
 
-            string file = Path.Combine(_UserModel.Home, "dat.sql");
-            StreamReader reader = File.OpenText(file);
-            string line = reader.ReadLine();
-            while (line != null)
-            {
-                dba.AddBatch(line.Replace("'A0000000'", tmp));
-                line = reader.ReadLine();
-            }
-            reader.Close();
-            File.Delete(file);
+            //string file = Path.Combine(_UserModel.Home, "dat.sql");
+            //StreamReader reader = File.OpenText(file);
+            //string line = reader.ReadLine();
+            //while (line != null)
+            //{
+            //    dba.AddBatch(line.Replace("'A0000000'", tmp));
+            //    line = reader.ReadLine();
+            //}
+            //reader.Close();
+            //File.Delete(file);
 
-            dba.ExecuteBatch();
+            //dba.ExecuteBatch();
 
             _SignAc.CallBack(IEnv.IAPP_APWD);
         }

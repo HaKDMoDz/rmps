@@ -1,32 +1,13 @@
-﻿using System;
-
-namespace Me.Amon.Bean
+﻿namespace Me.Amon.Bean
 {
-    public class Log
+    public class Log : Vcs
     {
-        private string _Id;
         private string _LogDate;
-
-        /// <summary>
-        /// 日志索引
-        /// </summary>
-        public string Id
-        {
-            get
-            {
-                return _Id;
-            }
-            set
-            {
-                _Id = value;
-                _LogDate = DateTime.FromFileTime(Convert.ToInt64(_Id, 16)).ToString(IEnv.DATEIME_FORMAT);
-            }
-        }
 
         /// <summary>
         /// 口令索引
         /// </summary>
-        public Key Key { get; set; }
+        public Rec Key { get; set; }
 
         /// <summary>
         /// 日志时间
@@ -52,18 +33,18 @@ namespace Me.Amon.Bean
             }
             if (obj is Log)
             {
-                return _Id == ((Log)obj).Id;
+                return Id == ((Log)obj).Id;
             }
             if (obj is string)
             {
-                return _Id == (string)obj;
+                return Id == (string)obj;
             }
-            return _Id.Equals(obj);
+            return Id.Equals(obj);
         }
 
         public override int GetHashCode()
         {
-            return _Id.GetHashCode();
+            return Id.GetHashCode();
         }
     }
 }

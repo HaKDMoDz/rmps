@@ -84,6 +84,7 @@ namespace Me.Amon.Ce
             _UdcList = new List<Udc>();
             _UdnList = new List<Udn>();
             _RplList = new List<Rpl>();
+            _FmtList = new List<string>();
         }
         #endregion
 

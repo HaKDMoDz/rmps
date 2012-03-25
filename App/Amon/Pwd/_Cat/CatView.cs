@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Data;
 using System.Windows.Forms;
 using Me.Amon.Bean;
-using Me.Amon.Da;
 using Me.Amon.Event;
 using Me.Amon.Model;
-using Me.Amon.Util;
 
 namespace Me.Amon.Pwd._Cat
 {
@@ -41,40 +38,18 @@ namespace Me.Amon.Pwd._Cat
 
         private void InitCat(TreeNode root)
         {
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.ACAT0200);
-            dba.AddColumn(DBConst.ACAT0201);
-            dba.AddColumn(DBConst.ACAT0203);
-            dba.AddColumn(DBConst.ACAT0204);
-            dba.AddColumn(DBConst.ACAT0205);
-            dba.AddColumn(DBConst.ACAT0206);
-            dba.AddColumn(DBConst.ACAT0207);
-            dba.AddColumn(DBConst.ACAT0208);
-            dba.AddColumn(DBConst.ACAT0209);
-            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
-            dba.AddWhere(DBConst.ACAT0204, root.Name);
-            dba.AddWhere(DBConst.ACAT020D, ">", DBConst.OPT_DELETE.ToString(), false);
-            dba.AddSort(DBConst.ACAT0201, true);
-
-            using (DataTable dt = dba.ExecuteSelect())
+            foreach (Cat cat in _UserModel.DBObject.ListCat(root.Name))
             {
-                foreach (DataRow row in dt.Rows)
-                {
-                    Cat cat = new Cat();
-                    cat.Load(row);
+                TreeNode node = new TreeNode();
+                node.Name = cat.Id;
+                node.Text = cat.Text;
+                node.ToolTipText = cat.Tips;
+                node.Tag = cat;
+                node.ImageKey = cat.Icon;
+                node.SelectedImageKey = node.ImageKey;
 
-                    TreeNode node = new TreeNode();
-                    node.Name = cat.Id;
-                    node.Text = cat.Text;
-                    node.ToolTipText = cat.Tips;
-                    node.Tag = cat;
-                    node.ImageKey = cat.Icon;
-                    node.SelectedImageKey = node.ImageKey;
-
-                    root.Nodes.Add(node);
-                    InitCat(node);
-                }
+                root.Nodes.Add(node);
+                InitCat(node);
             }
         }
         #endregion

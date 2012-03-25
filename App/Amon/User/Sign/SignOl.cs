@@ -370,7 +370,7 @@ namespace Me.Amon.User.Sign
                     {
                         continue;
                     }
-                    cat.Save(_UserModel.DBAccess, false);
+                    _UserModel.DBObject.SaveVcs(cat);
                 }
             }
 
@@ -410,11 +410,7 @@ namespace Me.Amon.User.Sign
                     {
                         continue;
                     }
-                    header.Save(_UserModel.DBAccess, false);
-                    foreach (LibDetail detail in header.Details)
-                    {
-                        detail.Save(_UserModel.DBAccess, false);
-                    }
+                    _UserModel.DBObject.SaveVcs(header);
                     header.Order += 1;
                 }
             }
@@ -454,7 +450,7 @@ namespace Me.Amon.User.Sign
                     {
                         continue;
                     }
-                    udc.Save(_UserModel.DBAccess, false);
+                    _UserModel.DBObject.SaveVcs(udc);
                 }
             }
 

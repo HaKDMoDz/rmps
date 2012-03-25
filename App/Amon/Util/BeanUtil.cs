@@ -202,6 +202,7 @@ namespace Me.Amon.Util
             }
             catch (Exception exp)
             {
+                Main.LogInfo(exp.Message);
                 return defImg;
             }
         }
@@ -236,6 +237,7 @@ namespace Me.Amon.Util
             }
             catch (Exception exp)
             {
+                Main.LogInfo(exp.Message);
                 return defImg;
             }
         }

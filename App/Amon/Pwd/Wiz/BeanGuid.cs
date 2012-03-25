@@ -134,10 +134,11 @@ namespace Me.Amon.Pwd.Wiz
         {
             if ((_DataModel.LibModified & IEnv.KEY_AWIZ) > 0)
             {
-                CbLib.DataSource = null;
-                CbLib.DataSource = _DataModel.LibList;
-                CbLib.DisplayMember = "Name";
-                CbLib.ValueMember = "Id";
+                CbLib.Items.Clear();
+                foreach (LibHeader header in _DataModel.LibList)
+                {
+                    CbLib.Items.Add(header);
+                }
                 _DataModel.LibModified &= ~IEnv.KEY_AWIZ;
             }
 
@@ -153,7 +154,7 @@ namespace Me.Amon.Pwd.Wiz
 
         public bool SaveData()
         {
-            if (_SafeModel.Key == null)
+            if (_SafeModel.Rec == null)
             {
                 return false;
             }
@@ -170,12 +171,12 @@ namespace Me.Amon.Pwd.Wiz
             if (lib.Id != guid.GetSpec(GuidAtt.SPEC_GUID_TPLT))
             {
                 guid.SetSpec(GuidAtt.SPEC_GUID_TPLT, lib.Id);
-                if (!_SafeModel.Key.IsUpdate)
+                if (!_SafeModel.IsUpdate)
                 {
                     _SafeModel.InitData(lib);
                 }
                 guid.Modified = true;
-                _SafeModel.Key.Modified |= guid.Modified;
+                _SafeModel.Modified |= guid.Modified;
             }
 
             return true;

@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Bean;
-using Me.Amon.Da;
 using Me.Amon.Model;
 using Me.Amon.Util;
 
@@ -131,12 +130,7 @@ namespace Me.Amon.Pwd._Lib
 
             Bean.LibHeader header = (Bean.LibHeader)obj;
 
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.APWD0300);
-            dba.AddWhere(DBConst.APWD0303, _UserModel.Code);
-            dba.AddWhere(DBConst.APWD0304, header.Id);
-            dba.ExecuteDelete();
+            _UserModel.DBObject.DeleteVcs(header);
 
             TvLibView.Nodes.Remove(_Selected);
             _DataModel.LibList.Remove(header);
@@ -189,12 +183,7 @@ namespace Me.Amon.Pwd._Lib
                 return;
             }
 
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.APWD0300);
-            dba.AddWhere(DBConst.APWD0303, _UserModel.Code);
-            dba.AddWhere(DBConst.APWD0304, detail.Id);
-            dba.ExecuteDelete();
+            _UserModel.DBObject.DeleteVcs(detail);
 
             TvLibView.Nodes.Remove(_Selected);
             header.Details.Remove(detail);
@@ -237,36 +226,16 @@ namespace Me.Amon.Pwd._Lib
 
         public void SaveHeader(Bean.LibHeader header)
         {
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.APWD0300);
-            dba.AddParam(DBConst.APWD0302, 0);
-            dba.AddParam(DBConst.APWD0305, "0");
-            dba.AddParam(DBConst.APWD0306, header.Name);
-            dba.AddParam(DBConst.APWD0307, "");
-            dba.AddParam(DBConst.APWD0308, header.Memo);
-            dba.AddParam(DBConst.APWD0309, DBConst.SQL_NOW, false);
+            bool update = CharUtil.IsValidateHash(header.Id);
+            _UserModel.DBObject.SaveVcs(header);
 
-            if (CharUtil.IsValidateHash(header.Id))
+            if (update)
             {
-                dba.AddWhere(DBConst.APWD0303, _UserModel.Code);
-                dba.AddWhere(DBConst.APWD0304, header.Id);
-                dba.AddVcs(DBConst.APWD030B, DBConst.APWD030C, header.Operate, DBConst.OPT_UPDATE);
-                dba.ExecuteUpdate();
-
                 _Selected.Text = header.Name;
                 _Selected.ToolTipText = header.Memo;
             }
             else
             {
-                header.Id = HashUtil.UtcTimeInHex(false);
-                dba.AddParam(DBConst.APWD0301, TvLibView.Nodes.Count);
-                dba.AddParam(DBConst.APWD0303, _UserModel.Code);
-                dba.AddParam(DBConst.APWD0304, header.Id);
-                dba.AddParam(DBConst.APWD030A, DBConst.SQL_NOW, false);
-                dba.AddVcs(DBConst.APWD030B, DBConst.APWD030C);
-                dba.ExecuteInsert();
-
                 _DataModel.LibList.Add(header);
 
                 TreeNode node = new TreeNode();
@@ -284,38 +253,17 @@ namespace Me.Amon.Pwd._Lib
 
         public void SaveDetail(Bean.LibDetail detail)
         {
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.APWD0300);
-            dba.AddParam(DBConst.APWD0302, detail.Type);
-            dba.AddParam(DBConst.APWD0306, detail.Name);
-            dba.AddParam(DBConst.APWD0307, detail.Data);
-            dba.AddParam(DBConst.APWD0308, detail.Memo);
-            dba.AddParam(DBConst.APWD0309, DBConst.SQL_NOW, false);
+            bool update = CharUtil.IsValidateHash(detail.Id);
+            _UserModel.DBObject.SaveVcs(detail);
 
-            if (CharUtil.IsValidateHash(detail.Id))
+            if (update)
             {
-                dba.AddWhere(DBConst.APWD0303, _UserModel.Code);
-                dba.AddWhere(DBConst.APWD0304, detail.Id);
-                dba.AddVcs(DBConst.APWD030B, DBConst.APWD030C, detail.Operate, DBConst.OPT_UPDATE);
-                dba.ExecuteUpdate();
-
                 _Selected.Text = AAtt.SP_TPL_LS + detail.Name + AAtt.SP_TPL_RS;
                 TreeNode root = TvLibView.SelectedNode;
             }
             else
             {
                 Bean.LibHeader header = _Selected.Tag as Bean.LibHeader;
-
-                detail.Id = HashUtil.UtcTimeInHex(false);
-                dba.AddParam(DBConst.APWD0301, _Selected.Nodes.Count);
-                dba.AddParam(DBConst.APWD0303, _UserModel.Code);
-                dba.AddParam(DBConst.APWD0304, detail.Id);
-                dba.AddParam(DBConst.APWD0305, _Selected.Name);
-                dba.AddParam(DBConst.APWD030A, DBConst.SQL_NOW, false);
-                dba.AddVcs(DBConst.APWD030B, DBConst.APWD030C);
-                dba.ExecuteInsert();
-
                 header.Details.Add(detail);
 
                 TreeNode node = new TreeNode();

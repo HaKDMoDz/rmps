@@ -109,7 +109,8 @@ namespace Me.Amon.Pwd.Pro
         {
             _UserAction = false;
             _SafeModel.Clear();
-            _SafeModel.Key.SetDefault();
+            _SafeModel.Rec = new Rec();
+
             _AAtt = _SafeModel.InitGuid();
 
             _DataList.Rows.Clear();
@@ -137,7 +138,7 @@ namespace Me.Amon.Pwd.Pro
             {
                 return;
             }
-            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
+            if (_SafeModel.Rec == null || _SafeModel.Count < AAtt.HEAD_SIZE)
             {
                 return;
             }
@@ -167,7 +168,7 @@ namespace Me.Amon.Pwd.Pro
             row[1] = att;
             _DataList.Rows.InsertAt(row, index);
             _UserAction = true;
-            _SafeModel.Key.Modified = true;
+            _SafeModel.Modified = true;
 
             GvAttList.Rows[index].Selected = true;
         }
@@ -178,7 +179,7 @@ namespace Me.Amon.Pwd.Pro
             {
                 return;
             }
-            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
+            if (_SafeModel.Rec == null || _SafeModel.Count < AAtt.HEAD_SIZE)
             {
                 return;
             }
@@ -198,7 +199,7 @@ namespace Me.Amon.Pwd.Pro
                 return;
             }
             att.Type = type;
-            _SafeModel.Key.Modified = true;
+            _SafeModel.Modified = true;
 
             ShowView(att);
         }
@@ -220,7 +221,7 @@ namespace Me.Amon.Pwd.Pro
             row[1] = _SafeModel.GetAtt(_LastIndex);
             _UserAction = true;
 
-            if (!_SafeModel.Key.IsUpdate && _LastIndex < _SafeModel.Count - 1)
+            if (!_SafeModel.IsUpdate && _LastIndex < _SafeModel.Count - 1)
             {
                 _LastIndex += 1;
             }
@@ -229,7 +230,7 @@ namespace Me.Amon.Pwd.Pro
 
         public void DropAtt()
         {
-            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
+            if (_SafeModel.Rec == null || _SafeModel.Count < AAtt.HEAD_SIZE)
             {
                 return;
             }

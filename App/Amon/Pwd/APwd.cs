@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -8,7 +9,6 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Bean;
-using Me.Amon.Da;
 using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Properties;
@@ -42,6 +42,8 @@ namespace Me.Amon.Pwd
         private APro _ProView;
         private AWiz _WizView;
         private APad _PadView;
+        private Dictionary<string, Image> _RecIcon;
+        private Dictionary<string, Image> _RecHint;
         #endregion
 
         #region 构造函数
@@ -67,6 +69,12 @@ namespace Me.Amon.Pwd
             _DataModel.Init();
             _ViewModel = new ViewModel(_UserModel);
             _ViewModel.Load();
+            UdcModel udcModel = new UdcModel();
+            udcModel.Init(_UserModel);
+            _DataModel.UdcModel = udcModel;
+
+            _RecIcon = new Dictionary<string, Image>();
+            _RecHint = new Dictionary<string, Image>();
 
             #region 类别
             Cat cat = new Cat { Id = "winshineapwd0000", Text = "阿木密码箱", Tips = "阿木密码箱", Icon = "Amon" };
@@ -167,7 +175,7 @@ namespace Me.Amon.Pwd
 
         public bool WillExit()
         {
-            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            if (_SafeModel.Modified)
             {
                 return DialogResult.Yes == Main.ShowConfirm("您有数据尚未保存，确认要退出窗口吗？");
             }
@@ -187,7 +195,7 @@ namespace Me.Amon.Pwd
                 }
             }
 
-            _UserModel.DBAccess.CloseConnect();
+            _UserModel.DBObject.CloseConnect();
             string file = _UserModel.Code + '-' + DateTime.Now.ToString("yyyyMMddHHmmss") + ".apbak";
             DoBackup(Path.Combine(path, file));
             return true;
@@ -195,48 +203,26 @@ namespace Me.Amon.Pwd
 
         private void InitCat(TreeNode root)
         {
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.ACAT0200);
-            dba.AddColumn(DBConst.ACAT0201);
-            dba.AddColumn(DBConst.ACAT0203);
-            dba.AddColumn(DBConst.ACAT0204);
-            dba.AddColumn(DBConst.ACAT0205);
-            dba.AddColumn(DBConst.ACAT0206);
-            dba.AddColumn(DBConst.ACAT0207);
-            dba.AddColumn(DBConst.ACAT0208);
-            dba.AddColumn(DBConst.ACAT0209);
-            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
-            dba.AddWhere(DBConst.ACAT0204, root.Name);
-            dba.AddWhere(DBConst.ACAT020D, ">", DBConst.OPT_DELETE.ToString(), false);
-            dba.AddSort(DBConst.ACAT0201, true);
-
-            using (DataTable dt = dba.ExecuteSelect())
+            foreach (Cat cat in _UserModel.DBObject.ListCat(root.Name))
             {
-                foreach (DataRow row in dt.Rows)
+                TreeNode node = new TreeNode();
+                node.Name = cat.Id;
+                node.Text = cat.Text;
+                node.ToolTipText = cat.Tips;
+                node.Tag = cat;
+                if (CharUtil.IsValidateHash(cat.Icon))
                 {
-                    Cat cat = new Cat();
-                    cat.Load(row);
-
-                    TreeNode node = new TreeNode();
-                    node.Name = cat.Id;
-                    node.Text = cat.Text;
-                    node.ToolTipText = cat.Tips;
-                    node.Tag = cat;
-                    if (CharUtil.IsValidateHash(cat.Icon))
-                    {
-                        IlCatTree.Images.Add(cat.Icon, BeanUtil.ReadImage(Path.Combine(_DataModel.CatDir, cat.Icon + ".png"), BeanUtil.NaN16));
-                        node.ImageKey = cat.Icon;
-                    }
-                    else
-                    {
-                        node.ImageKey = "0";
-                    }
-                    node.SelectedImageKey = node.ImageKey;
-
-                    root.Nodes.Add(node);
-                    InitCat(node);
+                    IlCatTree.Images.Add(cat.Icon, BeanUtil.ReadImage(Path.Combine(_DataModel.CatDir, cat.Icon + ".png"), BeanUtil.NaN16));
+                    node.ImageKey = cat.Icon;
                 }
+                else
+                {
+                    node.ImageKey = "0";
+                }
+                node.SelectedImageKey = node.ImageKey;
+
+                root.Nodes.Add(node);
+                InitCat(node);
             }
         }
         #endregion
@@ -255,77 +241,82 @@ namespace Me.Amon.Pwd
             _LastNode = node;
         }
 
-        private void InitKey(DataTable data)
+        private void InitKey(IList<Rec> recs)
         {
             LbKeyList.Items.Clear();
-            foreach (DataRow row in data.Rows)
-            {
-                Key key = new Key();
-                key.Load(row);
-                LbKeyList.Items.Add(key);
+            _RecIcon.Clear();
+            _RecHint.Clear();
 
-                if (CharUtil.IsValidateHash(key.IcoName))
+            foreach (Rec rec in recs)
+            {
+                LbKeyList.Items.Add(rec);
+
+                if (CharUtil.IsValidateHash(rec.IcoName))
                 {
-                    if (CharUtil.IsValidateHash(key.IcoPath))
+                    if (CharUtil.IsValidateHash(rec.IcoPath))
                     {
-                        key.Icon = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoPath, key.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
+                        _RecIcon[rec.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, rec.IcoPath, rec.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
                     }
                     else
                     {
-                        key.Icon = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
+                        _RecIcon[rec.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, rec.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
                     }
                 }
                 else
                 {
-                    key.Icon = BeanUtil.NaN32;
+                    _RecIcon[rec.IcoName] = BeanUtil.NaN24;
                 }
 
-                key.Hint = CharUtil.IsValidateHash(key.GtdId) ? Resources.Hint : BeanUtil.NaN16;
+                _RecHint[rec.GtdId] = CharUtil.IsValidateHash(rec.GtdId) ? Resources.Hint : BeanUtil.NaN16;
             }
-            data.Dispose();
         }
 
         private void LbKeyList_DrawItem(object sender, DrawItemEventArgs e)
         {
             e.DrawBackground();
 
-            if (e.Index > -1 && e.Index < LbKeyList.Items.Count)
+            if (e.Index <= -1 || e.Index >= LbKeyList.Items.Count)
             {
-                Key key = LbKeyList.Items[e.Index] as Key;
-                if (key != null)
-                {
-                    e.Graphics.DrawImage(key.Icon, e.Bounds.X + 3, e.Bounds.Y + 3);
-
-                    //最后把要显示的文字画在背景图片上
-                    e.Graphics.DrawString(key.Title, this.Font, Brushes.Black, e.Bounds.X + 36, e.Bounds.Y);
-
-                    int y = e.Bounds.Y + e.Bounds.Height;
-                    e.Graphics.DrawString(key.VisitDate, this.Font, Brushes.Gray, e.Bounds.X + 36, y - 14);
-
-                    int x = e.Bounds.X + e.Bounds.Width;
-                    y -= 16;
-                    e.Graphics.DrawImage(key.Hint, x - 48, y);
-                    e.Graphics.DrawImage(_ImgLabels[key.Label], x - 32, y);
-                    e.Graphics.DrawImage(_ImgMajors[key.Major + 2], x - 16, y);
-                }
+                return;
             }
-        }
-
-        private void LbKeyList_SelectedIndexChanged(object sender, System.EventArgs e)
-        {
-            Key key = LbKeyList.SelectedItem as Key;
-            if (key == null)
+            Rec rec = LbKeyList.Items[e.Index] as Rec;
+            if (rec != null)
             {
                 return;
             }
 
-            if (!CharUtil.IsValidateHash(key.Id))
+            Image img = _RecIcon.ContainsKey(rec.IcoName) ? _RecIcon[rec.IcoName] : BeanUtil.NaN24;
+            e.Graphics.DrawImage(img, e.Bounds.X + 3, e.Bounds.Y + 3);
+
+            //最后把要显示的文字画在背景图片上
+            e.Graphics.DrawString(rec.Title, this.Font, Brushes.Black, e.Bounds.X + 36, e.Bounds.Y);
+
+            int y = e.Bounds.Y + e.Bounds.Height;
+            e.Graphics.DrawString(rec.AccessTime, this.Font, Brushes.Gray, e.Bounds.X + 36, y - 14);
+
+            int x = e.Bounds.X + e.Bounds.Width;
+            y -= 16;
+            img = _RecHint.ContainsKey(rec.GtdId) ? _RecHint[rec.GtdId] : BeanUtil.NaN16;
+            e.Graphics.DrawImage(img, x - 48, y);
+            e.Graphics.DrawImage(_ImgLabels[rec.Label], x - 32, y);
+            e.Graphics.DrawImage(_ImgMajors[rec.Major + 2], x - 16, y);
+        }
+
+        private void LbKeyList_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            Rec rec = LbKeyList.SelectedItem as Rec;
+            if (rec == null)
+            {
+                return;
+            }
+
+            if (!CharUtil.IsValidateHash(rec.Id))
             {
                 Main.ShowAlert("系统异常，请稍后重试！");
                 return;
             }
 
-            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            if (_SafeModel.Modified)
             {
                 if (DialogResult.Yes != Main.ShowConfirm("您当前的数据尚未保存，要丢弃吗？"))
                 {
@@ -333,33 +324,23 @@ namespace Me.Amon.Pwd
                 }
             }
 
-            _SafeModel.Key = key;
+            _SafeModel.Rec = rec;
 
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.APWD0200);
-            dba.AddColumn(DBConst.APWD0204);
-            dba.AddWhere(DBConst.APWD0202, _UserModel.Code);
-            dba.AddWhere(DBConst.APWD0203, key.Id);
-            dba.AddSort(DBConst.APWD0201, true);
-            using (DataTable dt = dba.ExecuteSelect())
+            Key key = _UserModel.DBObject.ReadKey(rec.Id);
+            if (key == null)
             {
-                StringBuilder buffer = new StringBuilder();
-                foreach (DataRow row in dt.Rows)
-                {
-                    buffer.Append(row[DBConst.APWD0204] as string);
-                }
-                _SafeModel.Decode(buffer.ToString(), key.CipherVer);
+                return;
             }
+            _SafeModel.Decode(key.Data, rec.CipherVer);
 
             _PwdView.ShowData();
 
             _LastLabel.Checked = false;
-            _LastLabel = _CmiLabels[key.Label];
+            _LastLabel = _CmiLabels[rec.Label];
             _LastLabel.Checked = true;
 
             _LastMajor.Checked = false;
-            _LastMajor = _CmiMajors[key.Major + 2];
+            _LastMajor = _CmiMajors[rec.Major + 2];
             _LastMajor.Checked = true;
         }
 
@@ -929,7 +910,7 @@ namespace Me.Amon.Pwd
         #region 数据导出
         private void TmiExportTxt_Click(object sender, EventArgs e)
         {
-            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            if (_SafeModel.Modified)
             {
                 if (DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
                 {
@@ -962,7 +943,7 @@ namespace Me.Amon.Pwd
 
         private void TmiExportXml_Click(object sender, EventArgs e)
         {
-            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            if (_SafeModel.Modified)
             {
                 if (DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
                 {
@@ -1005,7 +986,7 @@ namespace Me.Amon.Pwd
         #region 数据导入
         private void TmiImportTxt_Click(object sender, EventArgs e)
         {
-            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            if (_SafeModel.Modified)
             {
                 if (DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
                 {
@@ -1050,7 +1031,7 @@ namespace Me.Amon.Pwd
                     {
                         if (_SafeModel.ImportByTxt(line))
                         {
-                            _SafeModel.Key.CatId = cat.Id;
+                            _SafeModel.Rec.CatId = cat.Id;
                             ImportKey();
                         }
                     }
@@ -1063,7 +1044,7 @@ namespace Me.Amon.Pwd
 
         private void TmiImportXml_Click(object sender, EventArgs e)
         {
-            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            if (_SafeModel.Modified)
             {
                 if (DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
                 {
@@ -1107,7 +1088,7 @@ namespace Me.Amon.Pwd
                 {
                     if (_SafeModel.ImportByXml(reader))
                     {
-                        _SafeModel.Key.CatId = cat.Id;
+                        _SafeModel.Rec.CatId = cat.Id;
                         ImportKey();
                     }
                 }
@@ -1119,7 +1100,7 @@ namespace Me.Amon.Pwd
 
         private void TmiImportOld_Click(object sender, EventArgs e)
         {
-            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            if (_SafeModel.Modified)
             {
                 if (DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
                 {
@@ -1199,7 +1180,7 @@ namespace Me.Amon.Pwd
         private void TmiUcs_Click(object sender, EventArgs e)
         {
             UdcEditor edit = new UdcEditor(_UserModel);
-            edit.Init(_DataModel, new Udc());
+            edit.Init(null, new Udc());
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
@@ -1321,22 +1302,8 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            var dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.ACAT0200);
-            dba.AddParam(DBConst.ACAT0201, prevNode.Index);
-            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
-            dba.AddWhere(DBConst.ACAT0203, currCat.Id);
-            dba.AddUpdateBatch();
-
-            dba.ReInit();
-            dba.AddTable(DBConst.ACAT0200);
-            dba.AddParam(DBConst.ACAT0201, currNode.Index);
-            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
-            dba.AddWhere(DBConst.ACAT0203, prevCat.Id);
-            dba.AddUpdateBatch();
-
-            dba.ExecuteBatch();
+            _UserModel.DBObject.SaveVcs(prevCat);
+            _UserModel.DBObject.SaveVcs(currCat);
 
             TvCatTree.SelectedNode = null;
             parent.Nodes.Remove(currNode);
@@ -1376,22 +1343,8 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            var dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.ACAT0200);
-            dba.AddParam(DBConst.ACAT0201, nextNode.Index);
-            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
-            dba.AddWhere(DBConst.ACAT0203, currCat.Id);
-            dba.AddUpdateBatch();
-
-            dba.ReInit();
-            dba.AddTable(DBConst.ACAT0200);
-            dba.AddParam(DBConst.ACAT0201, currNode.Index);
-            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
-            dba.AddWhere(DBConst.ACAT0203, nextCat.Id);
-            dba.AddUpdateBatch();
-
-            dba.ExecuteBatch();
+            _UserModel.DBObject.SaveVcs(currCat);
+            _UserModel.DBObject.SaveVcs(nextCat);
 
             TvCatTree.SelectedNode = null;
             parent.Nodes.Remove(currNode);
@@ -1589,7 +1542,7 @@ namespace Me.Amon.Pwd
         private void CmiHistory_Click(object sender, EventArgs e)
         {
             LogEdit edit = new LogEdit(_UserModel);
-            edit.Init(_SafeModel.Key);
+            edit.Init(_SafeModel.Rec);
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
@@ -1800,27 +1753,8 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            cat.Id = HashUtil.UtcTimeInHex(false);
-
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.ACAT0200);
-            dba.AddParam(DBConst.ACAT0201, _LastNode.Nodes.Count);
-            dba.AddParam(DBConst.ACAT0202, _UserModel.Code);
-            dba.AddParam(DBConst.ACAT0203, cat.Id);
-            dba.AddParam(DBConst.ACAT0204, _LastNode.Name);
-            dba.AddParam(DBConst.ACAT0205, cat.Text);
-            dba.AddParam(DBConst.ACAT0206, cat.Tips);
-            dba.AddParam(DBConst.ACAT0207, cat.Icon);
-            dba.AddParam(DBConst.ACAT0208, cat.Meta);
-            dba.AddParam(DBConst.ACAT0209, cat.Memo);
-            dba.AddParam(DBConst.ACAT020A, DBConst.SQL_NOW, false);
-            dba.AddParam(DBConst.ACAT020B, DBConst.SQL_NOW, false);
-            dba.AddVcs(DBConst.ACAT020C, DBConst.ACAT020D);
-            if (1 != dba.ExecuteInsert())
-            {
-                return;
-            }
+            cat.Parent = _LastNode.Name;
+            _UserModel.DBObject.SaveVcs(cat);
 
             TreeNode node = new TreeNode();
             node.Name = cat.Id;
@@ -1860,22 +1794,7 @@ namespace Me.Amon.Pwd
         {
             TreeNode node = TvCatTree.SelectedNode;
 
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.ACAT0200);
-            dba.AddParam(DBConst.ACAT0205, cat.Text);
-            dba.AddParam(DBConst.ACAT0206, cat.Tips);
-            dba.AddParam(DBConst.ACAT0207, cat.Icon);
-            dba.AddParam(DBConst.ACAT0208, cat.Meta);
-            dba.AddParam(DBConst.ACAT0209, cat.Memo);
-            dba.AddParam(DBConst.ACAT020A, DBConst.SQL_NOW, false);
-            dba.AddVcs(DBConst.ACAT020C, DBConst.ACAT020D, cat.Operate, DBConst.OPT_UPDATE);
-            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
-            dba.AddWhere(DBConst.ACAT0203, cat.Id);
-            if (1 != dba.ExecuteUpdate())
-            {
-                return;
-            }
+            _UserModel.DBObject.SaveVcs(cat);
 
             node.Text = cat.Text;
             node.ToolTipText = cat.Tips;
@@ -1909,25 +1828,14 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.APWD0100);
-            dba.AddColumn("COUNT(0)", "CNT");
-            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
-            dba.AddWhere(DBConst.APWD0106, cat.Id);
-            long cnt = (long)dba.ExecuteScalar();
-            if (cnt > 0)
+            IList<Rec> recs = _UserModel.DBObject.ListRec(cat.Id);
+            if (recs.Count > 0)
             {
                 Main.ShowAlert("类别数据不为空，不能删除！");
                 return;
             }
 
-            dba.ReInit();
-            dba.AddTable(DBConst.ACAT0200);
-            dba.AddParam(DBConst.ACAT020D, DBConst.OPT_DELETE);
-            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
-            dba.AddWhere(DBConst.ACAT0203, cat.Id);
-            dba.ExecuteUpdate();
+            _UserModel.DBObject.DeleteVcs(cat);
 
             TreeNode root = node.Parent;
             if (root != null)
@@ -1955,29 +1863,16 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            var dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.ACAT0200);
-            dba.AddParam(DBConst.ACAT0207, png.File);
-            dba.AddWhere(DBConst.ACAT0202, _UserModel.Code);
-            dba.AddWhere(DBConst.ACAT0203, cat.Id);
-            dba.ExecuteUpdate();
+            _UserModel.DBObject.SaveVcs(cat);
         }
         #endregion
 
         #region 口令处理
         private void AppendKey()
         {
-            if (_SafeModel.Key == null)
+            if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
             {
-                _SafeModel.Key = new Key();
-            }
-            else if (_SafeModel.Key.Modified)
-            {
-                if (DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
-                {
-                    return;
-                }
+                return;
             }
 
             _PwdView.AppendKey();
@@ -1985,12 +1880,12 @@ namespace Me.Amon.Pwd
 
         private void UpdateKey()
         {
-            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
+            if (_SafeModel.Rec == null || _SafeModel.Count < AAtt.HEAD_SIZE)
             {
                 return;
             }
 
-            if (!_SafeModel.Key.IsUpdate)
+            if (!_SafeModel.IsUpdate)
             {
                 TreeNode node = TvCatTree.SelectedNode;
                 if (node == null)
@@ -2007,7 +1902,7 @@ namespace Me.Amon.Pwd
                     return;
                 }
 
-                _SafeModel.Key.CatId = cat.Id;
+                _SafeModel.Rec.CatId = cat.Id;
             }
 
             if (!_PwdView.UpdateKey())
@@ -2015,132 +1910,17 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            _SafeModel.Encode();
+            _UserModel.DBObject.SaveVcs(_SafeModel.Rec);
+            _UserModel.DBObject.SaveVcs(_SafeModel.Encode());
 
-            DBAccess dba = _UserModel.DBAccess;
-
-            bool isUpdate = CharUtil.IsValidateHash(_SafeModel.Key.Id);
-            if (isUpdate)
-            {
-                #region 数据备份
-                if (_SafeModel.Key.Backup)
-                {
-                    string t = HashUtil.UtcTimeInHex();
-                    dba.ReInit();
-                    dba.AddParam(DBConst.APWD0A01, t);
-                    dba.AddParam(DBConst.APWD0A02, DBConst.APWD0102, false);
-                    dba.AddParam(DBConst.APWD0A03, DBConst.APWD0103, false);
-                    dba.AddParam(DBConst.APWD0A04, DBConst.APWD0104, false);
-                    dba.AddParam(DBConst.APWD0A05, DBConst.APWD0105, false);
-                    dba.AddParam(DBConst.APWD0A06, DBConst.APWD0106, false);
-                    dba.AddParam(DBConst.APWD0A07, DBConst.APWD0107, false);
-                    dba.AddParam(DBConst.APWD0A08, DBConst.APWD0108, false);
-                    dba.AddParam(DBConst.APWD0A09, DBConst.APWD0109, false);
-                    dba.AddParam(DBConst.APWD0A0A, DBConst.APWD010A, false);
-                    dba.AddParam(DBConst.APWD0A0B, DBConst.APWD010B, false);
-                    dba.AddParam(DBConst.APWD0A0C, DBConst.APWD010C, false);
-                    dba.AddParam(DBConst.APWD0A0D, DBConst.APWD010D, false);
-                    dba.AddParam(DBConst.APWD0A0E, DBConst.APWD010E, false);
-                    dba.AddParam(DBConst.APWD0A0F, DBConst.APWD010F, false);
-                    dba.AddParam(DBConst.APWD0A10, DBConst.APWD0110, false);
-                    dba.AddParam(DBConst.APWD0A11, DBConst.APWD0111, false);
-                    dba.AddParam(DBConst.APWD0A12, DBConst.APWD0112, false);
-                    dba.AddParam(DBConst.APWD0A13, DBConst.APWD0113, false);
-                    dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
-                    dba.AddWhere(DBConst.APWD0105, _SafeModel.Key.Id);
-                    dba.AddBackupBatch(DBConst.APWD0A00, DBConst.APWD0100);
-
-                    dba.ReInit();
-                    dba.AddParam(DBConst.APWD0B01, t);
-                    dba.AddParam(DBConst.APWD0B02, DBConst.APWD0201, false);
-                    dba.AddParam(DBConst.APWD0B03, DBConst.APWD0202, false);
-                    dba.AddParam(DBConst.APWD0B04, DBConst.APWD0203, false);
-                    dba.AddParam(DBConst.APWD0B05, DBConst.APWD0204, false);
-                    dba.AddWhere(DBConst.APWD0203, _SafeModel.Key.Id);
-                    dba.AddBackupBatch(DBConst.APWD0B00, DBConst.APWD0200);
-                }
-                #endregion
-
-                dba.ReInit();
-                dba.AddTable(DBConst.APWD0200);
-                dba.AddWhere(DBConst.APWD0203, _SafeModel.Key.Id);
-                dba.AddDeleteBatch();
-            }
-
-            #region 口令信息
-            dba.ReInit();
-            dba.AddTable(DBConst.APWD0100);
-            dba.AddParam(DBConst.APWD0106, _SafeModel.Key.CatId);
-            dba.AddParam(DBConst.APWD0107, _SafeModel.Key.RegDate);
-            dba.AddParam(DBConst.APWD0108, _SafeModel.Key.LibId);
-            dba.AddParam(DBConst.APWD0109, _SafeModel.Key.Title);
-            dba.AddParam(DBConst.APWD010A, _SafeModel.Key.MetaKey);
-            dba.AddParam(DBConst.APWD010B, _SafeModel.Key.IcoName);
-            dba.AddParam(DBConst.APWD010C, _SafeModel.Key.IcoPath);
-            dba.AddParam(DBConst.APWD010D, _SafeModel.Key.IcoMemo);
-            dba.AddParam(DBConst.APWD010E, _SafeModel.Key.GtdId);
-            dba.AddParam(DBConst.APWD010F, _SafeModel.Key.GtdMemo);
-            dba.AddParam(DBConst.APWD0110, _SafeModel.Key.Memo);
-            dba.AddParam(DBConst.APWD0112, _SafeModel.Key.Backup ? "t" : "f");
-            dba.AddParam(DBConst.APWD0113, _SafeModel.Key.CipherVer);
-
-            if (isUpdate)
-            {
-                dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
-                dba.AddWhere(DBConst.APWD0105, _SafeModel.Key.Id);
-                _SafeModel.Key.VisitDate = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
-                dba.AddParam(DBConst.APWD0111, _SafeModel.Key.VisitDate);
-                dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115, _SafeModel.Key.Operate, DBConst.OPT_UPDATE);
-                dba.AddUpdateBatch();
-            }
-            else
-            {
-                _SafeModel.Key.Id = HashUtil.UtcTimeInHex(false);
-                dba.AddParam(DBConst.APWD0101, 0);
-                dba.AddParam(DBConst.APWD0102, 0);
-                dba.AddParam(DBConst.APWD0103, 0);
-                dba.AddParam(DBConst.APWD0104, _UserModel.Code);
-                dba.AddParam(DBConst.APWD0105, _SafeModel.Key.Id);
-                _SafeModel.Key.VisitDate = _SafeModel.Key.RegDate;
-                dba.AddParam(DBConst.APWD0111, _SafeModel.Key.VisitDate);
-                dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115);
-                dba.AddInsertBatch();
-            }
-            #endregion
-
-            #region 口令内容
-            int i = 0;
-            int j = 0;
-            while (j < _SafeModel.Key.Password.Length)
-            {
-                dba.ReInit();
-                dba.AddTable(DBConst.APWD0200);
-                dba.AddParam(DBConst.APWD0201, i++);
-                dba.AddParam(DBConst.APWD0202, _UserModel.Code);
-                dba.AddParam(DBConst.APWD0203, _SafeModel.Key.Id);
-                if (_SafeModel.Key.Password.Length - j > DBConst.APWD0204_SIZE)
-                {
-                    dba.AddParam(DBConst.APWD0204, _SafeModel.Key.Password.Substring(j, DBConst.APWD0204_SIZE));
-                }
-                else
-                {
-                    dba.AddParam(DBConst.APWD0204, _SafeModel.Key.Password.Substring(j));
-                }
-                dba.AddInsertBatch();
-                j += DBConst.APWD0204_SIZE;
-            }
-            #endregion
-
-            dba.ExecuteBatch();
-
-            _SafeModel.Key.Modified = false;
+            _SafeModel.Modified = false;
             LastOpt();
             _PwdView.ShowInfo();
         }
 
         private void DeleteKey()
         {
-            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
+            if (_SafeModel.Rec == null || _SafeModel.Count < AAtt.HEAD_SIZE)
             {
                 return;
             }
@@ -2155,16 +1935,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.APWD0100);
-            dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115, _SafeModel.Key.Operate, DBConst.OPT_DELETE);
-            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
-            dba.AddWhere(DBConst.APWD0105, _SafeModel.Key.Id);
-            if (1 != dba.ExecuteUpdate())
-            {
-                return;
-            }
+            _UserModel.DBObject.RemoveVcs(_SafeModel.Rec);
 
             LbKeyList.Items.RemoveAt(LbKeyList.SelectedIndex);
         }
@@ -2173,61 +1944,9 @@ namespace Me.Amon.Pwd
         {
             _SafeModel.Encode();
 
-            _SafeModel.Key.Id = HashUtil.UtcTimeInHex(false);
-            _SafeModel.Key.VisitDate = _SafeModel.Key.RegDate;
+            _SafeModel.Rec.AccessTime = _SafeModel.Rec.RegTime;
 
-            DBAccess dba = _UserModel.DBAccess;
-
-            #region 口令信息
-            dba.ReInit();
-            dba.AddTable(DBConst.APWD0100);
-            dba.AddParam(DBConst.APWD0101, 0);
-            dba.AddParam(DBConst.APWD0102, 0);
-            dba.AddParam(DBConst.APWD0103, 0);
-            dba.AddParam(DBConst.APWD0104, _UserModel.Code);
-            dba.AddParam(DBConst.APWD0105, _SafeModel.Key.Id);
-            dba.AddParam(DBConst.APWD0106, _SafeModel.Key.CatId);
-            dba.AddParam(DBConst.APWD0107, _SafeModel.Key.RegDate);
-            dba.AddParam(DBConst.APWD0108, _SafeModel.Key.LibId);
-            dba.AddParam(DBConst.APWD0109, _SafeModel.Key.Title);
-            dba.AddParam(DBConst.APWD010A, _SafeModel.Key.MetaKey);
-            dba.AddParam(DBConst.APWD010B, _SafeModel.Key.IcoName);
-            dba.AddParam(DBConst.APWD010C, _SafeModel.Key.IcoPath);
-            dba.AddParam(DBConst.APWD010D, _SafeModel.Key.IcoMemo);
-            dba.AddParam(DBConst.APWD010E, _SafeModel.Key.GtdId);
-            dba.AddParam(DBConst.APWD010F, _SafeModel.Key.GtdMemo);
-            dba.AddParam(DBConst.APWD0110, _SafeModel.Key.Memo);
-            dba.AddParam(DBConst.APWD0111, _SafeModel.Key.VisitDate);
-            dba.AddParam(DBConst.APWD0112, "t");
-            dba.AddParam(DBConst.APWD0113, ISec.SEC_AES);
-            dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115);
-            dba.AddInsertBatch();
-            #endregion
-
-            #region 口令内容
-            int i = 0;
-            int j = 0;
-            while (j < _SafeModel.Key.Password.Length)
-            {
-                dba.ReInit();
-                dba.AddTable(DBConst.APWD0200);
-                dba.AddParam(DBConst.APWD0201, i++);
-                dba.AddParam(DBConst.APWD0202, _UserModel.Code);
-                dba.AddParam(DBConst.APWD0203, _SafeModel.Key.Id);
-                if (_SafeModel.Key.Password.Length - j > DBConst.APWD0204_SIZE)
-                {
-                    dba.AddParam(DBConst.APWD0204, _SafeModel.Key.Password.Substring(j, DBConst.APWD0204_SIZE));
-                }
-                else
-                {
-                    dba.AddParam(DBConst.APWD0204, _SafeModel.Key.Password.Substring(j));
-                }
-                dba.AddInsertBatch();
-                j += DBConst.APWD0204_SIZE;
-            }
-            #endregion
-
-            dba.ExecuteBatch();
+            _UserModel.DBObject.SaveVcs(_SafeModel.Rec);
         }
 
         public void ListKey(string catId)
@@ -2245,17 +1964,8 @@ namespace Me.Amon.Pwd
 
         public void DoListKey(string catId)
         {
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.APWD0100);
-            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
-            dba.AddWhere(DBConst.APWD0106, catId);
-            dba.AddWhere(DBConst.APWD0115, "!=", DBConst.OPT_DELETE.ToString(), false);
-            dba.AddSort(DBConst.APWD0101, false);
-            using (DataTable dt = dba.ExecuteSelect())
-            {
-                InitKey(dt);
-            }
+            IList<Rec> recs = _UserModel.DBObject.ListRec(catId);
+            InitKey(recs);
         }
 
         public void FindKey(string meta)
@@ -2268,11 +1978,8 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            meta = meta.Replace('　', ' ').Replace('＋', '+');
-            meta = CharUtil.Text2DB(meta.ToLower());
-            meta = Regex.Replace(meta, "^[+\\s]*|[+\\s]*$", "%");
-            meta = Regex.Replace(meta, "[+%\\s]+", "%");
-            if (meta == "%")
+            meta = Regex.Replace(meta, "[+＋\\s]+", " ");
+            if (string.IsNullOrEmpty(meta))
             {
                 Main.ShowAlert("您输入的查询条件无效！");
                 return;
@@ -2288,17 +1995,8 @@ namespace Me.Amon.Pwd
 
         private void DoFindKey(string meta)
         {
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.APWD0100);
-            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
-            dba.AddWhere(string.Format("{0} LIKE '{2}' or {1} like '{2}'", DBConst.APWD0109, DBConst.APWD010A, meta));
-            dba.AddWhere(DBConst.APWD0115, "!=", DBConst.OPT_DELETE.ToString(), false);
-
-            using (DataTable dt = dba.ExecuteSelect())
-            {
-                InitKey(dt);
-            }
+            IList<Rec> recs = _UserModel.DBObject.FindRec(meta);
+            InitKey(recs);
         }
 
         public void LastOpt()
@@ -2319,24 +2017,14 @@ namespace Me.Amon.Pwd
             {
                 catId = "0";
             }
-            if (catId == _SafeModel.Key.CatId)
+            if (catId == _SafeModel.Rec.CatId)
             {
                 return;
             }
 
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.APWD0100);
-            dba.AddParam(DBConst.APWD0106, catId);
-            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
-            dba.AddWhere(DBConst.APWD0105, _SafeModel.Key.Id);
-            dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115, _SafeModel.Key.Operate, DBConst.OPT_PWD_UPDATE_CAT);
-            if (1 != dba.ExecuteUpdate())
-            {
-                return;
-            }
+            _SafeModel.Rec.CatId = catId;
+            _UserModel.DBObject.SaveVcs(_SafeModel.Rec);
 
-            _SafeModel.Key.CatId = catId;
             LastOpt();
         }
 
@@ -2347,20 +2035,9 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.APWD0100);
-            dba.AddParam(DBConst.APWD0102, label);
-            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
-            dba.AddWhere(DBConst.APWD0105, _SafeModel.Key.Id);
-            dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115, _SafeModel.Key.Operate, DBConst.OPT_PWD_UPDATE_LABEL);
-            if (1 != dba.ExecuteUpdate())
-            {
-                return;
-            }
+            _SafeModel.Rec.Label = label;
+            _UserModel.DBObject.SaveVcs(_SafeModel.Rec);
 
-            _SafeModel.Key.Label = label;
-            //LbKeyList.Items[LbKeyList.SelectedIndex] = _SafeModel.Key;
             LbKeyList.Refresh();
         }
 
@@ -2371,20 +2048,9 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            DBAccess dba = _UserModel.DBAccess;
-            dba.ReInit();
-            dba.AddTable(DBConst.APWD0100);
-            dba.AddParam(DBConst.APWD0103, major);
-            dba.AddWhere(DBConst.APWD0104, _UserModel.Code);
-            dba.AddWhere(DBConst.APWD0105, _SafeModel.Key.Id);
-            dba.AddVcs(DBConst.APWD0114, DBConst.APWD0115, _SafeModel.Key.Operate, DBConst.OPT_PWD_UPDATE_MAJOR);
-            if (1 != dba.ExecuteUpdate())
-            {
-                return;
-            }
+            _SafeModel.Rec.Major = major;
+            _UserModel.DBObject.SaveVcs(_SafeModel.Rec);
 
-            _SafeModel.Key.Major = major;
-            //LbKeyList.Items[LbKeyList.SelectedIndex] = _SafeModel.Key;
             LbKeyList.Refresh();
         }
         #endregion
@@ -2397,13 +2063,13 @@ namespace Me.Amon.Pwd
 
         private void DoBackup(string file)
         {
-            _UserModel.DBAccess.CloseConnect();
+            _UserModel.DBObject.CloseConnect();
             BeanUtil.DoZip(file, _UserModel.Home);
         }
 
         private void LocaleBackup()
         {
-            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            if (_SafeModel.Modified)
             {
                 if (DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
                 {
@@ -2501,7 +2167,7 @@ namespace Me.Amon.Pwd
 
         private void HideForm()
         {
-            if (_SafeModel.Key != null && _SafeModel.Key.Modified)
+            if (_SafeModel.Modified)
             {
                 if (DialogResult.Yes != Main.ShowConfirm("您有数据尚未保存，确认要隐藏窗口吗？"))
                 {

@@ -11,7 +11,7 @@
         /// 
         /// </summary>
         public const string FILE_LOG = "Amon.log";
-        public const string FILE_DB = "Amon.db3";
+        public const string FILE_DB = "Amon.dbo";
         /// <summary>
         /// 系统日期格式
         /// </summary>
