@@ -48,13 +48,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Amon\Amon.csproj">
-      <Project>{FD45A06E-6BB8-4EE5-87DB-DE638822E885}</Project>
-      <Name>Amon</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="XMLFile1.xml" />
+    <Content Include="Cat.xml" />
+    <Content Include="Lib.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Udc.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

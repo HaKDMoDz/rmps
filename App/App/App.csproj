@@ -34,6 +34,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Db4objects.Db4o">
+      <HintPath>..\Amon\Lib\Db4objects.Db4o.dll</HintPath>
+    </Reference>
+    <Reference Include="Db4objects.Db4o.Linq">
+      <HintPath>..\Amon\Lib\Db4objects.Db4o.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Db4objects.Db4o.NativeQueries">
+      <HintPath>..\Amon\Lib\Db4objects.Db4o.NativeQueries.dll</HintPath>
+    </Reference>
     <Reference Include="IconLib">
       <HintPath>..\Amon\Lib\IconLib.dll</HintPath>
     </Reference>
@@ -49,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Demo.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

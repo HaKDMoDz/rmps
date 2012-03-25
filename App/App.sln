@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amon", "Amon\Amon.csproj", "{FD45A06E-6BB8-4EE5-87DB-DE638822E885}"
-EndProject
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cmd", "Cmd\Cmd.csproj", "{1CF51861-61DA-4A0B-B45B-BFA2E9741304}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "App\App.csproj", "{3CA47FED-1D6E-42DB-91C8-2025CA9D401A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amon", "Amon\Amon.csproj", "{FD45A06E-6BB8-4EE5-87DB-DE638822E885}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,16 +17,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Debug|x86.ActiveCfg = Debug|x86
-		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Debug|x86.Build.0 = Debug|x86
-		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Release|Any CPU.ActiveCfg = Release|x86
-		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Release|Mixed Platforms.Build.0 = Release|x86
-		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Release|x86.ActiveCfg = Release|x86
-		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Release|x86.Build.0 = Release|x86
 		{1CF51861-61DA-4A0B-B45B-BFA2E9741304}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{1CF51861-61DA-4A0B-B45B-BFA2E9741304}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{1CF51861-61DA-4A0B-B45B-BFA2E9741304}.Debug|Mixed Platforms.Build.0 = Debug|x86
@@ -47,6 +37,16 @@ Global
 		{3CA47FED-1D6E-42DB-91C8-2025CA9D401A}.Release|Mixed Platforms.Build.0 = Release|x86
 		{3CA47FED-1D6E-42DB-91C8-2025CA9D401A}.Release|x86.ActiveCfg = Release|x86
 		{3CA47FED-1D6E-42DB-91C8-2025CA9D401A}.Release|x86.Build.0 = Release|x86
+		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Debug|x86.ActiveCfg = Debug|x86
+		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Debug|x86.Build.0 = Debug|x86
+		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Release|Any CPU.ActiveCfg = Release|x86
+		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Release|Mixed Platforms.Build.0 = Release|x86
+		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Release|x86.ActiveCfg = Release|x86
+		{FD45A06E-6BB8-4EE5-87DB-DE638822E885}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
