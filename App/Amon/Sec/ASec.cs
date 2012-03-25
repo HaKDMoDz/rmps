@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using Me.Amon.Model;
+using Me.Amon.Model.Sec;
 using Me.Amon.Sec.Pro;
 using Me.Amon.Sec.Wiz;
 

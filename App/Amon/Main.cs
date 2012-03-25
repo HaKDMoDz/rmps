@@ -82,7 +82,7 @@ namespace Me.Amon
             GenImage(_PupilCenterX, _PupilCenterY);
 
             BgWorker.Interval = 30;
-            BgWorker.Start();
+            //BgWorker.Start();
 
             _UserModel = new UserModel();
             if (File.Exists(IEnv.FILE_LOG))

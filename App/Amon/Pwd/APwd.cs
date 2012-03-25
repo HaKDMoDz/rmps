@@ -11,6 +11,7 @@ using System.Xml;
 using Me.Amon.Bean;
 using Me.Amon.Event;
 using Me.Amon.Model;
+using Me.Amon.Model.Pwd;
 using Me.Amon.Properties;
 using Me.Amon.Pwd._Cat;
 using Me.Amon.Pwd._Lib;
@@ -280,7 +281,7 @@ namespace Me.Amon.Pwd
                 return;
             }
             Rec rec = LbKeyList.Items[e.Index] as Rec;
-            if (rec != null)
+            if (rec == null)
             {
                 return;
             }
@@ -316,12 +317,9 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            if (_SafeModel.Modified)
+            if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您当前的数据尚未保存，要丢弃吗？"))
             {
-                if (DialogResult.Yes != Main.ShowConfirm("您当前的数据尚未保存，要丢弃吗？"))
-                {
-                    return;
-                }
+                return;
             }
 
             _SafeModel.Rec = rec;
@@ -331,7 +329,7 @@ namespace Me.Amon.Pwd
             {
                 return;
             }
-            _SafeModel.Decode(key.Data, rec.CipherVer);
+            _SafeModel.Decode(key, rec.CipherVer);
 
             _PwdView.ShowData();
 
@@ -1910,10 +1908,17 @@ namespace Me.Amon.Pwd
                 return;
             }
 
+            if (_SafeModel.IsUpdate && _SafeModel.Rec.Backup)
+            {
+                _UserModel.DBObject.SaveVcs(_SafeModel.Rec.ToLog());
+                _UserModel.DBObject.SaveVcs(_SafeModel.Key.ToLog());
+            }
+            _SafeModel.Encode();
             _UserModel.DBObject.SaveVcs(_SafeModel.Rec);
-            _UserModel.DBObject.SaveVcs(_SafeModel.Encode());
-
+            _SafeModel.Key.RecId = _SafeModel.Rec.Id;
+            _UserModel.DBObject.SaveVcs(_SafeModel.Key);
             _SafeModel.Modified = false;
+
             LastOpt();
             _PwdView.ShowInfo();
         }

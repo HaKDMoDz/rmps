@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Me.Amon.Bean;
 using Me.Amon.Bean.Att;
 using Me.Amon.Model;
+using Me.Amon.Model.Pwd;
 using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.Pro

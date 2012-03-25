@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using Me.Amon.Bean;
+using Me.Amon.Model.Sec;
 using Me.Amon.Uc;
 
 namespace Me.Amon.Sec.Pro.Uc

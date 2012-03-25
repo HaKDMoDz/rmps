@@ -8,11 +8,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using Me.Amon.Bean;
-using Me.Amon.Model;
+using Me.Amon.Model.Pwd;
 using Me.Amon.Util;
 using MessagingToolkit.Barcode;
 using MessagingToolkit.Barcode.QRCode.Decoder;
-using Me.Amon.Pwd;
 
 namespace Me.Amon.Uc
 {

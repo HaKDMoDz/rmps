@@ -5,14 +5,14 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using Me.Amon.Bean;
 using Me.Amon.Bean.Att;
-using Me.Amon.Model;
 using Me.Amon.Util;
 
-namespace Me.Amon.Pwd
+namespace Me.Amon.Model.Pwd
 {
     public sealed class SafeModel
     {
         private UserModel _UserModel;
+        private ObservableCollection<AAtt> _AttList;
 
         #region 构造函数
         /// <summary>
@@ -26,6 +26,7 @@ namespace Me.Amon.Pwd
 
         public void Init()
         {
+            _AttList = new ObservableCollection<AAtt>();
         }
         #endregion
 
@@ -44,14 +45,14 @@ namespace Me.Amon.Pwd
                 _IsUpdate = _Rec != null && CharUtil.IsValidateHash(_Rec.Id);
             }
         }
+        private Key _Key;
+        public Key Key { get { return _Key; } }
         private bool _IsUpdate;
-        public bool IsUpdate { get; set; }
+        public bool IsUpdate { get { return _IsUpdate; } }
         public bool Modified { get; set; }
         #endregion
 
         #region 属性信息
-        private ObservableCollection<AAtt> _AttList = new ObservableCollection<AAtt>();
-
         /// <summary>
         /// 
         /// </summary>
@@ -251,14 +252,14 @@ namespace Me.Amon.Pwd
         /// 
         /// </summary>
         /// <param name="key"></param>
-        public void Decode(string key, int sec)
+        public void Decode(Key key, int sec)
         {
             // 查询数据是否为空
-            if (string.IsNullOrEmpty(key))
+            if (string.IsNullOrEmpty(key.Data))
             {
                 return;
             }
-            key = _UserModel.Decode(key, sec);
+            string tmp = _UserModel.Decode(key.Data, sec);
 
             _AttList.Clear();
 
@@ -289,7 +290,7 @@ namespace Me.Amon.Pwd
             _AttList.Add(hint);
 
             // 处理每一个数据
-            string[] arr = key.Split(AAtt.SP_SQL_EE);
+            string[] arr = tmp.Split(AAtt.SP_SQL_EE);
             int o = 1;
             for (int i = 0, j = arr.Length - 1; i < j; i += 1)
             {
@@ -310,6 +311,8 @@ namespace Me.Amon.Pwd
                 }
                 _AttList.Add(item);
             }
+
+            _Key = key;
         }
 
         /// <summary>
@@ -317,16 +320,16 @@ namespace Me.Amon.Pwd
         /// </summary>
         /// <param name="grid"></param>
         /// <param name="header"></param>
-        public Key Encode()
+        public void Encode()
         {
             GuidAtt guid = (GuidAtt)_AttList[AAtt.PWDS_HEAD_GUID];
             Rec.RegTime = guid.Name;
-            //Key.CatId = guid.Data;
+            //Rec.CatId = guid.Data;
             Rec.LibId = guid.GetSpec(GuidAtt.SPEC_GUID_TPLT);
 
             // MetaItem
             MetaAtt meta = (MetaAtt)_AttList[AAtt.PWDS_HEAD_META];
-            //Key.Title = Key.IsUpdate ? Att.SP_TPL_LS + meta.Name + '_' + header.RegDate + Att.SP_TPL_RS : meta.Name;
+            //Rec.Title = Rec.IsUpdate ? AAtt.SP_TPL_LS + meta.Name + '_' + header.RegDate + Att.SP_TPL_RS : meta.Name;
             Rec.Title = meta.Name;
             Rec.MetaKey = meta.Data;
 
@@ -358,13 +361,13 @@ namespace Me.Amon.Pwd
             // 加密版本
             Rec.CipherVer = ISec.SEC_AES;
 
-            Key key = new Key();
-            key.RecId = Rec.Id;
-            key.Data = _UserModel.EncodeKey(buf.ToString());
+            if (_Key == null)
+            {
+                _Key = new Key();
+            }
+            _Key.Data = _UserModel.EncodeKey(buf.ToString());
 
             _AttList.Clear();
-
-            return key;
         }
         #endregion
 
@@ -383,14 +386,7 @@ namespace Me.Amon.Pwd
             }
 
             Clear();
-            if (Rec == null)
-            {
-                Rec = new Rec();
-            }
-            else
-            {
-                Rec.SetDefault();
-            }
+            Rec = new Rec();
 
             foreach (string tmp in list)
             {
@@ -445,14 +441,7 @@ namespace Me.Amon.Pwd
             }
 
             Clear();
-            if (Rec == null)
-            {
-                Rec = new Rec();
-            }
-            else
-            {
-                Rec.SetDefault();
-            }
+            Rec = new Rec();
 
             if (reader.MoveToAttribute("Cat"))
             {

@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace Me.Amon.Bean
 {
-    public sealed class Rec : Vcs
+    public class Rec : Vcs
     {
         public const int OPT_PWD_UPDATE_CAT = 3;
         public const int OPT_PWD_UPDATE_LABEL = 4;
@@ -81,27 +81,26 @@ namespace Me.Amon.Bean
         /// <summary>
         /// 恢复默认值
         /// </summary>
-        public void SetDefault()
+        public Rec()
         {
-            Id = null;
-            Order = 0;
-            Label = 0;
-            Major = 0;
-            CatId = null;
-            RegTime = null;
-            LibId = null;
-            Title = null;
-            MetaKey = null;
-            IcoName = null;
-            IcoPath = null;
-            IcoMemo = null;
-            GtdId = null;
-            GtdMemo = null;
-            Memo = null;
-            AccessTime = null;
-            CipherVer = 0;
-
+            //Id = null;
+            //Order = 0;
+            //Label = 0;
+            //Major = 0;
+            //CatId = null;
+            //RegTime = null;
+            //LibId = null;
+            //Title = null;
+            //MetaKey = null;
+            //IcoName = null;
+            //IcoPath = null;
+            //IcoMemo = null;
+            //GtdId = null;
+            //GtdMemo = null;
+            //Memo = null;
+            //AccessTime = null;
             Backup = true;
+            //CipherVer = 0;
         }
 
         public override string ToString()
@@ -109,6 +108,7 @@ namespace Me.Amon.Bean
             return Title;
         }
 
+        #region XML
         public string ToXml()
         {
             StringBuilder buffer = new StringBuilder();
@@ -219,6 +219,59 @@ namespace Me.Amon.Bean
             {
                 CipherVer = reader.ReadElementContentAsInt();
             }
+            return true;
+        }
+        #endregion
+
+        public RecLog ToLog()
+        {
+            RecLog log = new RecLog();
+            log.LogId = Id;
+            log.Order = Order;
+            log.Label = Label;
+            log.Major = Major;
+            log.CatId = CatId;
+            log.RegTime = RegTime;
+            log.LibId = LibId;
+            log.Title = Title;
+            log.MetaKey = MetaKey;
+            log.IcoName = IcoName;
+            log.IcoPath = IcoPath;
+            log.IcoMemo = IcoMemo;
+            log.GtdId = GtdId;
+            log.GtdMemo = GtdMemo;
+            log.Memo = Memo;
+            log.AccessTime = AccessTime;
+            log.Backup = Backup;
+            log.CipherVer = CipherVer;
+            return log;
+        }
+
+        public bool FromLog(RecLog log)
+        {
+            if (log == null)
+            {
+                return false;
+            }
+
+            Id = log.LogId;
+            Order = log.Order;
+            Label = log.Label;
+            Major = log.Major;
+            CatId = log.CatId;
+            RegTime = log.RegTime;
+            LibId = log.LibId;
+            Title = log.Title;
+            MetaKey = log.MetaKey;
+            IcoName = log.IcoName;
+            IcoPath = log.IcoPath;
+            IcoMemo = log.IcoMemo;
+            GtdId = log.GtdId;
+            GtdMemo = log.GtdMemo;
+            Memo = log.Memo;
+            AccessTime = log.AccessTime;
+            Backup = log.Backup;
+            CipherVer = log.CipherVer;
             return true;
         }
     }

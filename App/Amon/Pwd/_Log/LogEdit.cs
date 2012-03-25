@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Me.Amon.Bean;
 using Me.Amon.Bean.Att;
 using Me.Amon.Model;
+using Me.Amon.Model.Pwd;
 
 namespace Me.Amon.Pwd._Log
 {
@@ -11,7 +12,7 @@ namespace Me.Amon.Pwd._Log
     {
         private UserModel _UserModel;
         private SafeModel _SafeModel;
-        private Rec _Key;
+        private Rec _Rec;
 
         public LogEdit()
         {
@@ -26,39 +27,27 @@ namespace Me.Amon.Pwd._Log
             InitializeComponent();
         }
 
-        public void Init(Rec key)
+        public void Init(Rec rec)
         {
-            _Key = key;
+            _Rec = rec;
 
-            //DBAccess dba = _UserModel.DBObject;
-            //dba.ReInit();
-            //dba.AddTable(DBConst.APWD0A00);
-            //dba.AddColumn(DBConst.APWD0A01);
-            //dba.AddWhere(DBConst.APWD0A04, _UserModel.Code);
-            //dba.AddWhere(DBConst.APWD0A05, key.Id);
-            //dba.AddSort(DBConst.APWD0A01, false);
-
-            //DataTable dt = dba.ExecuteSelect();
-            //foreach (DataRow row in dt.Rows)
-            //{
-            //    Log log = new Log();
-            //    log.Id = row[DBConst.APWD0A01] as string;
-            //    LbLog.Items.Add(log);
-            //}
-            //dt.Dispose();
+            foreach (RecLog log in _UserModel.DBObject.ListLog(rec.Id))
+            {
+                LbLog.Items.Add(log);
+            }
         }
 
         private void LbLog_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Log log = LbLog.SelectedItem as Log;
+            RecLog log = LbLog.SelectedItem as RecLog;
             if (log == null)
             {
                 return;
             }
 
-            Log rec = _UserModel.DBObject.ReadLog(log.Key.Id);
-            Key key = _UserModel.DBObject.ReadKey(log.Key.Id);
-            _SafeModel.Decode(key.Data, _Key.CipherVer);
+            RecLog rec = _UserModel.DBObject.ReadLog(log.LogId);
+            Key key = _UserModel.DBObject.ReadKey(log.Id);
+            _SafeModel.Decode(key, _Rec.CipherVer);
 
             StringBuilder buffer = new StringBuilder();
             GuidAtt guid = _SafeModel.Guid;
@@ -81,7 +70,7 @@ namespace Me.Amon.Pwd._Log
 
         private void BtResume_Click(object sender, EventArgs e)
         {
-            Log log = LbLog.SelectedItem as Log;
+            RecLog log = LbLog.SelectedItem as RecLog;
             if (log == null)
             {
                 MessageBox.Show("请选择您要恢复到的记录！");
@@ -173,7 +162,7 @@ namespace Me.Amon.Pwd._Log
 
         private void BtClearCur_Click(object sender, EventArgs e)
         {
-            Log log = LbLog.SelectedItem as Log;
+            RecLog log = LbLog.SelectedItem as RecLog;
             if (log == null)
             {
                 MessageBox.Show("请选择您要恢复到的记录！");
@@ -199,7 +188,7 @@ namespace Me.Amon.Pwd._Log
 
             foreach (object obj in LbLog.Items)
             {
-                _UserModel.DBObject.DeleteVcs(obj as Log);
+                _UserModel.DBObject.DeleteVcs(obj as RecLog);
                 LbLog.Items.Remove(obj);
             }
         }

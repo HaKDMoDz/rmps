@@ -129,7 +129,7 @@ namespace Me.Amon.Da
 
         public IList<Rec> FindRec(string text)
         {
-            string[] arr = text.Split(' ');
+            string[] arr = text.ToLower().Split(' ');
 
             IList<Rec> recs = _Container.Query<Rec>(delegate(Rec rec)
             {
@@ -138,18 +138,23 @@ namespace Me.Amon.Da
                     return false;
                 }
 
-                string title = (rec.Title ?? "").ToLower();
-                string meta = (rec.MetaKey ?? "").ToLower();
-                foreach (string tmp in arr)
-                {
-                    if (title.Contains(tmp) || meta.Contains(tmp))
-                    {
-                        return true;
-                    }
-                }
-                return false;
+                bool a = string.IsNullOrEmpty(rec.Title) ? false : Contains(rec.Title.ToLower(), arr);
+                bool b = string.IsNullOrEmpty(rec.MetaKey) ? false : Contains(rec.MetaKey.ToLower(), arr);
+                return a || b;
             });
             return recs;
+        }
+
+        private bool Contains(string src, string[] arr)
+        {
+            foreach (string tmp in arr)
+            {
+                if (!src.Contains(tmp))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public IList<Rec> FindRec(int label)
@@ -177,9 +182,9 @@ namespace Me.Amon.Da
         #endregion
 
         #region 日志操作
-        public Log ReadLog(string logId)
+        public RecLog ReadLog(string logId)
         {
-            IList<Log> logs = _Container.Query<Log>(delegate(Log log)
+            IList<RecLog> logs = _Container.Query<RecLog>(delegate(RecLog log)
             {
                 return log.Id == logId;
             });
@@ -187,11 +192,11 @@ namespace Me.Amon.Da
             return logs.Count > 0 ? logs[0] : null;
         }
 
-        public IList<Log> ListLog(string recId)
+        public IList<RecLog> ListLog(string recId)
         {
-            IList<Log> logs = _Container.Query<Log>(delegate(Log log)
+            IList<RecLog> logs = _Container.Query<RecLog>(delegate(RecLog log)
             {
-                return log.Key.Id == recId;
+                return log.Id == recId;
             });
             return logs;
         }

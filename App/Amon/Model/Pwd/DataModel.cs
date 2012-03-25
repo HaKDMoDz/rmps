@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Me.Amon.Bean;
-using Me.Amon.Model;
 
-namespace Me.Amon.Pwd
+namespace Me.Amon.Model.Pwd
 {
     public sealed class DataModel
     {
