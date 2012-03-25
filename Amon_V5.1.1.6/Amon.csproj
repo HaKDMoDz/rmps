@@ -1,0 +1,1256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FD45A06E-6BB8-4EE5-87DB-DE638822E885}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Me.Amon</RootNamespace>
+    <AssemblyName>Amon</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>F:\Web\Web\down\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <SupportUrl>http://amon.me/blog</SupportUrl>
+    <ProductName>阿木密码箱</ProductName>
+    <PublisherName>Amon</PublisherName>
+    <SuiteName>阿木软件</SuiteName>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>index.html</WebPage>
+    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationVersion>5.1.1.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Me.Amon.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Logo\logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>ACBB7045CA775EE7748931576D496C38E36D6C6A</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Amon_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>.\Lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="IconLib">
+      <HintPath>.\Lib\IconLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>.\Lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="MessagingToolkit.Barcode">
+      <HintPath>.\Lib\MessagingToolkit.Barcode.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>Lib\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bar\ABar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bar\ABar.Designer.cs">
+      <DependentUpon>ABar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bar\Opt\Email.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\Opt\Email.Designer.cs">
+      <DependentUpon>Email.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bar\IOpt.cs" />
+    <Compile Include="Bar\Opt\Note.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\Opt\Note.Designer.cs">
+      <DependentUpon>Note.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bar\Opt\Sms.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\Opt\Sms.Designer.cs">
+      <DependentUpon>Sms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bar\Opt\Tel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\Opt\Tel.Designer.cs">
+      <DependentUpon>Tel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bar\Opt\Text.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\Opt\Text.Designer.cs">
+      <DependentUpon>Text.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bar\Opt\Url.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\Opt\Url.Designer.cs">
+      <DependentUpon>Url.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bar\Opt\WiFi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\Opt\WiFi.Designer.cs">
+      <DependentUpon>WiFi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bar\UserSet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\UserSet.Designer.cs">
+      <DependentUpon>UserSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bar\UsetDat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\UsetDat.Designer.cs">
+      <DependentUpon>UsetDat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bar\Opt\Vcard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Bar\Opt\Vcard.Designer.cs">
+      <DependentUpon>Vcard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bean\Att\CallAtt.cs" />
+    <Compile Include="Bean\Ico.cs" />
+    <Compile Include="Bean\Png.cs" />
+    <Compile Include="Ce\Renamer.cs" />
+    <Compile Include="Ce\Wrapper.cs" />
+    <Compile Include="Da\DBAccess.cs" />
+    <Compile Include="Da\DCAccess.cs" />
+    <Compile Include="Da\DCConst.cs" />
+    <Compile Include="Da\DFAccess.cs" />
+    <Compile Include="Da\DFConst.cs" />
+    <Compile Include="Event\AmonHandler.cs" />
+    <Compile Include="Gtd\AGtd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gtd\AGtd.Designer.cs">
+      <DependentUpon>AGtd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IApp.cs" />
+    <Compile Include="Da\DBConst.cs" />
+    <Compile Include="Ico\AIco.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ico\AIco.Designer.cs">
+      <DependentUpon>AIco.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IEnv.cs" />
+    <Compile Include="Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Info.Designer.cs">
+      <DependentUpon>Info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ISec.cs" />
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bean\AAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Att\DataAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Att\DateAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Att\FileAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Att\GuidAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Att\HintAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Att\LineAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Att\LinkAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Att\ListAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Att\LogoAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Att\MailAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Att\MemoAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Att\MetaAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Att\PassAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Att\TextAtt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Cat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\DataModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Dir.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\GtdDetail.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\GtdHeader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Key.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\LibDetail.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\LibHeader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Log.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\SafeModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Udc.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\UserModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bean\Vcs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\ViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Pwd\APwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pwd\APwd.Designer.cs">
+      <DependentUpon>APwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Demo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pwd\Demo.Designer.cs">
+      <DependentUpon>Demo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanCall.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanCall.Designer.cs">
+      <DependentUpon>BeanCall.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanCall.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanCall.Designer.cs">
+      <DependentUpon>BeanCall.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanGuid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanGuid.Designer.cs">
+      <DependentUpon>BeanGuid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\_Cat\CatEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pwd\_Cat\CatEdit.Designer.cs">
+      <DependentUpon>CatEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\FindBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\FindBar.Designer.cs">
+      <DependentUpon>FindBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\IPwd.cs" />
+    <Compile Include="Pwd\_Cat\CatView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pwd\_Cat\CatView.Designer.cs">
+      <DependentUpon>CatView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\_Lib\LibEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pwd\_Lib\LibEdit.Designer.cs">
+      <DependentUpon>LibEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\_Lib\ILibEdit.cs" />
+    <Compile Include="Pwd\_Lib\LibDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\_Lib\LibDetail.Designer.cs">
+      <DependentUpon>LibDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\_Lib\LibHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\_Lib\LibHeader.Designer.cs">
+      <DependentUpon>LibHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\_Log\LogEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pwd\_Log\LogEdit.Designer.cs">
+      <DependentUpon>LogEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pad\APad.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pad\APad.Designer.cs">
+      <DependentUpon>APad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanData.Designer.cs">
+      <DependentUpon>BeanData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanDate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanDate.Designer.cs">
+      <DependentUpon>BeanDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanFile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanFile.Designer.cs">
+      <DependentUpon>BeanFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanGuid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanGuid.Designer.cs">
+      <DependentUpon>BeanGuid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanHint.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanHint.Designer.cs">
+      <DependentUpon>BeanHint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanInfo.Designer.cs">
+      <DependentUpon>BeanInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanLink.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanLink.Designer.cs">
+      <DependentUpon>BeanLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanList.Designer.cs">
+      <DependentUpon>BeanList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanLogo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanLogo.Designer.cs">
+      <DependentUpon>BeanLogo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanMail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanMail.Designer.cs">
+      <DependentUpon>BeanMail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanMeta.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanMeta.Designer.cs">
+      <DependentUpon>BeanMeta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanPass.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanPass.Designer.cs">
+      <DependentUpon>BeanPass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanLine.Designer.cs">
+      <DependentUpon>BeanLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanText.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanText.Designer.cs">
+      <DependentUpon>BeanText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pro\APro.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pro\APro.Designer.cs">
+      <DependentUpon>APro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanMemo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Pro\BeanMemo.Designer.cs">
+      <DependentUpon>BeanMemo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Pro\IAttEdit.cs" />
+    <Compile Include="Pwd\Wiz\AWiz.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Wiz\AWiz.Designer.cs">
+      <DependentUpon>AWiz.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanMemo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanMemo.Designer.cs">
+      <DependentUpon>BeanMemo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanBody.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanBody.Designer.cs">
+      <DependentUpon>BeanBody.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanData.Designer.cs">
+      <DependentUpon>BeanData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanDate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanDate.Designer.cs">
+      <DependentUpon>BeanDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanFile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanFile.Designer.cs">
+      <DependentUpon>BeanFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanHead.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanHead.Designer.cs">
+      <DependentUpon>BeanHead.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanInfo.Designer.cs">
+      <DependentUpon>BeanInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanLink.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanLink.Designer.cs">
+      <DependentUpon>BeanLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanList.Designer.cs">
+      <DependentUpon>BeanList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanMail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanMail.Designer.cs">
+      <DependentUpon>BeanMail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanPass.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanPass.Designer.cs">
+      <DependentUpon>BeanPass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanLine.Designer.cs">
+      <DependentUpon>BeanLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanText.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Wiz\BeanText.Designer.cs">
+      <DependentUpon>BeanText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Wiz\IAttEdit.cs" />
+    <Compile Include="Pwd\Wiz\IWizView.cs" />
+    <Compile Include="Ren\ARen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ren\ARen.Designer.cs">
+      <DependentUpon>ARen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\ASec.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sec\ASec.Designer.cs">
+      <DependentUpon>ASec.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\DataModel.cs" />
+    <Compile Include="Sec\IData.cs" />
+    <Compile Include="Sec\ISec.cs" />
+    <Compile Include="Sec\Pro\IForm.cs" />
+    <Compile Include="Sec\Pro\IView.cs" />
+    <Compile Include="Sec\Pro\APro.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Pro\APro.Designer.cs">
+      <DependentUpon>APro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Pro\Uc\ACm.cs" />
+    <Compile Include="Sec\Pro\Uc\ADi.cs" />
+    <Compile Include="Sec\Pro\Uc\ADo.cs" />
+    <Compile Include="Sec\Pro\Uc\AUk.cs" />
+    <Compile Include="Sec\Pro\Uc\Cm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Pro\Uc\Cm.Designer.cs">
+      <DependentUpon>Cm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Pro\Uc\CmUi\Acrypto.cs" />
+    <Compile Include="Sec\Pro\Uc\CmUi\Confuse.cs" />
+    <Compile Include="Sec\Pro\Uc\CmUi\Default.cs" />
+    <Compile Include="Sec\Pro\Uc\CmUi\Digest.cs" />
+    <Compile Include="Sec\Pro\Uc\CmUi\RandKey.cs" />
+    <Compile Include="Sec\Pro\Uc\CmUi\Scrypto.cs" />
+    <Compile Include="Sec\Pro\Uc\CmUi\Sstream.cs" />
+    <Compile Include="Sec\Pro\Uc\CmUi\Txt2Img.cs" />
+    <Compile Include="Sec\Pro\Uc\CmUi\Wrapper.cs" />
+    <Compile Include="Sec\Pro\Uc\Di.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Pro\Uc\Di.Designer.cs">
+      <DependentUpon>Di.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Pro\Uc\DiUi\Acrypto.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\Confuse.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\Default.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\Digest.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\RandKey.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\Scrypto.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\ScryptoDec.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\ScryptoDef.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\ScryptoEnc.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\Sstream.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\SstreamDec.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\SstreamDef.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\SstreamEnc.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\Txt2Img.cs" />
+    <Compile Include="Sec\Pro\Uc\DiUi\Wrapper.cs" />
+    <Compile Include="Sec\Pro\Uc\Do.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Pro\Uc\Do.Designer.cs">
+      <DependentUpon>Do.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Pro\Uc\DoUi\Acrypto.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\Confuse.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\Default.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\Digest.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\RandKey.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\Scrypto.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\ScryptoDec.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\ScryptoDef.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\ScryptoEnc.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\Sstream.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\SstreamDec.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\SstreamDef.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\SstreamEnc.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\Txt2Img.cs" />
+    <Compile Include="Sec\Pro\Uc\DoUi\Wrapper.cs" />
+    <Compile Include="Sec\Pro\Uc\Uk.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Pro\Uc\Uk.Designer.cs">
+      <DependentUpon>Uk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Pro\Uc\UkUi\Acrypto.cs" />
+    <Compile Include="Sec\Pro\Uc\UkUi\Confuse.cs" />
+    <Compile Include="Sec\Pro\Uc\UkUi\Default.cs" />
+    <Compile Include="Sec\Pro\Uc\UkUi\Digest.cs" />
+    <Compile Include="Sec\Pro\Uc\UkUi\RandKey.cs" />
+    <Compile Include="Sec\Pro\Uc\UkUi\Scrypto.cs" />
+    <Compile Include="Sec\Pro\Uc\UkUi\Sstream.cs" />
+    <Compile Include="Sec\Pro\Uc\UkUi\Txt2Img.cs" />
+    <Compile Include="Sec\Pro\Uc\UkUi\Wrapper.cs" />
+    <Compile Include="Sec\Pro\Uw\Edit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sec\Pro\Uw\Edit.Designer.cs">
+      <DependentUpon>Edit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Pro\Uw\Open.cs" />
+    <Compile Include="Sec\Pro\Uw\Pass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sec\Pro\Uw\Pass.Designer.cs">
+      <DependentUpon>Pass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Pro\Uw\Save.cs" />
+    <Compile Include="Sec\Pro\Uw\Text.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sec\Pro\Uw\Text.Designer.cs">
+      <DependentUpon>Text.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Wiz\AWiz.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Wiz\AWiz.Designer.cs">
+      <DependentUpon>AWiz.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Wiz\CipherFile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Wiz\CipherFile.Designer.cs">
+      <DependentUpon>CipherFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Wiz\CipherText.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Wiz\CipherText.Designer.cs">
+      <DependentUpon>CipherText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Wiz\DigestFile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Wiz\DigestFile.Designer.cs">
+      <DependentUpon>DigestFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\Wiz\DigestText.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\Wiz\DigestText.Designer.cs">
+      <DependentUpon>DigestText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="Uc\Card.cs" />
+    <Compile Include="User\Auth\AuthLk.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User\Auth\AuthLk.Designer.cs">
+      <DependentUpon>AuthLk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\Auth\AuthPc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User\Auth\AuthPc.Designer.cs">
+      <DependentUpon>AuthPc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\Auth\AuthUl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User\Auth\AuthUl.Designer.cs">
+      <DependentUpon>AuthUl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\HotKeys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\HotKeys.Designer.cs">
+      <DependentUpon>HotKeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Error.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Error.Designer.cs">
+      <DependentUpon>Error.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\IcoSeeker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\IcoSeeker.Designer.cs">
+      <DependentUpon>IcoSeeker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uc\Item.cs" />
+    <Compile Include="User\Sign\SignOl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User\Sign\SignOl.Designer.cs">
+      <DependentUpon>SignOl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Util\BeanUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\CharUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\HashUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\HttpUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util\SafeUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Uw\Ico\DirEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Uw\Ico\DirEdit.Designer.cs">
+      <DependentUpon>DirEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Ico\IcoView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Uw\Ico\IcoView.Designer.cs">
+      <DependentUpon>IcoView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\PngSeeker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\PngSeeker.Designer.cs">
+      <DependentUpon>PngSeeker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\UdcEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\UdcEditor.Designer.cs">
+      <DependentUpon>UdcEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\AuthAc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\AuthAc.Designer.cs">
+      <DependentUpon>AuthAc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\AuthRc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\AuthRc.Designer.cs">
+      <DependentUpon>AuthRc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\Sign\SignFk.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User\Sign\SignFk.Designer.cs">
+      <DependentUpon>SignFk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\Auth\AuthOl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User\Auth\AuthOl.Designer.cs">
+      <DependentUpon>AuthOl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\Auth\AuthSk.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User\Auth\AuthSk.Designer.cs">
+      <DependentUpon>AuthSk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\Auth\EAuthAc.cs" />
+    <Compile Include="User\Auth\IAuthAc.cs" />
+    <Compile Include="User\SignAc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\SignAc.Designer.cs">
+      <DependentUpon>SignAc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\SignRc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\SignRc.Designer.cs">
+      <DependentUpon>SignRc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\Sign\ESignAc.cs" />
+    <Compile Include="User\Sign\ISignAc.cs" />
+    <Compile Include="User\Sign\SignIn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User\Sign\SignIn.Designer.cs">
+      <DependentUpon>SignIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\Sign\SignUl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User\Sign\SignUl.Designer.cs">
+      <DependentUpon>SignUl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\Sign\SignPc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User\Sign\SignPc.Designer.cs">
+      <DependentUpon>SignPc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Alert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Alert.Designer.cs">
+      <DependentUpon>Alert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\ImgViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\ImgViewer.Designer.cs">
+      <DependentUpon>ImgViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Input.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Input.Designer.cs">
+      <DependentUpon>Input.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\TxtEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\TxtEditor.Designer.cs">
+      <DependentUpon>TxtEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Waiting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Waiting.Designer.cs">
+      <DependentUpon>Waiting.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Bar\ABar.resx">
+      <DependentUpon>ABar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bar\Opt\Email.resx">
+      <DependentUpon>Email.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bar\Opt\Note.resx">
+      <DependentUpon>Note.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bar\Opt\Sms.resx">
+      <DependentUpon>Sms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bar\Opt\Tel.resx">
+      <DependentUpon>Tel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bar\Opt\Text.resx">
+      <DependentUpon>Text.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bar\Opt\Url.resx">
+      <DependentUpon>Url.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bar\Opt\Wifi.resx">
+      <DependentUpon>WiFi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bar\UserSet.resx">
+      <DependentUpon>UserSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bar\Opt\Vcard.resx">
+      <DependentUpon>Vcard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ico\AIco.resx">
+      <DependentUpon>AIco.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Info.resx">
+      <DependentUpon>Info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Pwd\APwd.resx">
+      <DependentUpon>APwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Demo.resx">
+      <DependentUpon>Demo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\APro.resx">
+      <DependentUpon>APro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanCall.resx">
+      <DependentUpon>BeanCall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanLogo.resx">
+      <DependentUpon>BeanLogo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanCall.resx">
+      <DependentUpon>BeanCall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanGuid.resx">
+      <DependentUpon>BeanGuid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\_Cat\CatEdit.resx">
+      <DependentUpon>CatEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\FindBar.resx">
+      <DependentUpon>FindBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\_Cat\CatView.resx">
+      <DependentUpon>CatView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\_Lib\LibEdit.resx">
+      <DependentUpon>LibEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\_Lib\LibDetail.resx">
+      <DependentUpon>LibDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\_Lib\LibHeader.resx">
+      <DependentUpon>LibHeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\_Log\LogEdit.resx">
+      <DependentUpon>LogEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pad\APad.resx">
+      <DependentUpon>APad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanMemo.resx">
+      <DependentUpon>BeanMemo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanData.resx">
+      <DependentUpon>BeanData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanDate.resx">
+      <DependentUpon>BeanDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanFile.resx">
+      <DependentUpon>BeanFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanGuid.resx">
+      <DependentUpon>BeanGuid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanHint.resx">
+      <DependentUpon>BeanHint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanInfo.resx">
+      <DependentUpon>BeanInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanLink.resx">
+      <DependentUpon>BeanLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanList.resx">
+      <DependentUpon>BeanList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanMail.resx">
+      <DependentUpon>BeanMail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanMeta.resx">
+      <DependentUpon>BeanMeta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanPass.resx">
+      <DependentUpon>BeanPass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanLine.resx">
+      <DependentUpon>BeanLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Pro\BeanText.resx">
+      <DependentUpon>BeanText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\AWiz.resx">
+      <DependentUpon>AWiz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanMemo.resx">
+      <DependentUpon>BeanMemo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanBody.resx">
+      <DependentUpon>BeanBody.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanData.resx">
+      <DependentUpon>BeanData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanDate.resx">
+      <DependentUpon>BeanDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanFile.resx">
+      <DependentUpon>BeanFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanHead.resx">
+      <DependentUpon>BeanHead.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanInfo.resx">
+      <DependentUpon>BeanInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanLink.resx">
+      <DependentUpon>BeanLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanList.resx">
+      <DependentUpon>BeanList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanMail.resx">
+      <DependentUpon>BeanMail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanPass.resx">
+      <DependentUpon>BeanPass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanLine.resx">
+      <DependentUpon>BeanLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Wiz\BeanText.resx">
+      <DependentUpon>BeanText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ren\ARen.resx">
+      <DependentUpon>ARen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\ASec.resx">
+      <DependentUpon>ASec.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Pro\APro.resx">
+      <DependentUpon>APro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Pro\Uc\Cm.resx">
+      <DependentUpon>Cm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Pro\Uc\Di.resx">
+      <DependentUpon>Di.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Pro\Uc\Do.resx">
+      <DependentUpon>Do.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Pro\Uc\Uk.resx">
+      <DependentUpon>Uk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Pro\Uw\Edit.resx">
+      <DependentUpon>Edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Pro\Uw\Pass.resx">
+      <DependentUpon>Pass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Pro\Uw\Text.resx">
+      <DependentUpon>Text.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Wiz\AWiz.resx">
+      <DependentUpon>AWiz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Wiz\CipherFile.resx">
+      <DependentUpon>CipherFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Wiz\CipherText.resx">
+      <DependentUpon>CipherText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Wiz\DigestFile.resx">
+      <DependentUpon>DigestFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\Wiz\DigestText.resx">
+      <DependentUpon>DigestText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\Auth\AuthLk.resx">
+      <DependentUpon>AuthLk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\Auth\AuthPc.resx">
+      <DependentUpon>AuthPc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\Auth\AuthUl.resx">
+      <DependentUpon>AuthUl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\HotKeys.resx">
+      <DependentUpon>HotKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Error.resx">
+      <DependentUpon>Error.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\IcoSeeker.resx">
+      <DependentUpon>IcoSeeker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\Sign\SignOl.resx">
+      <DependentUpon>SignOl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Ico\DirEdit.resx">
+      <DependentUpon>DirEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Ico\IcoView.resx">
+      <DependentUpon>IcoView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\PngSeeker.resx">
+      <DependentUpon>PngSeeker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\UdcEditor.resx">
+      <DependentUpon>UdcEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\AuthAc.resx">
+      <DependentUpon>AuthAc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\AuthRc.resx">
+      <DependentUpon>AuthRc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\Auth\AuthOl.resx">
+      <DependentUpon>AuthOl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\SignAc.resx">
+      <DependentUpon>SignAc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\SignRc.resx">
+      <DependentUpon>SignRc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\Sign\SignFk.resx">
+      <DependentUpon>SignFk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\Sign\SignIn.resx">
+      <DependentUpon>SignIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\Sign\SignUl.resx">
+      <DependentUpon>SignUl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\Sign\SignPc.resx">
+      <DependentUpon>SignPc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Alert.resx">
+      <DependentUpon>Alert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\ImgViewer.resx">
+      <DependentUpon>ImgViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Input.resx">
+      <DependentUpon>Input.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\TxtEditor.resx">
+      <DependentUpon>TxtEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Waiting.resx">
+      <DependentUpon>Waiting.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Amon_TemporaryKey.pfx" />
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Amon.dat" />
+    <Content Include="Logo\logo.ico" />
+    <None Include="Resources\Save.png" />
+    <None Include="Resources\Alert.png" />
+    <None Include="Resources\Error.png" />
+    <None Include="Resources\Guid.png" />
+    <None Include="Resources\Hint.png" />
+    <None Include="Resources\Info.png" />
+    <None Include="Resources\Loading.gif" />
+    <None Include="Resources\Logo.png" />
+    <None Include="Resources\Menu.png" />
+    <None Include="Resources\Pupil.png" />
+    <None Include="Resources\Waiting.gif" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <FileAssociation Include=".apxml">
+      <Visible>False</Visible>
+      <Description>阿木密码箱文件</Description>
+      <Progid>Apwd</Progid>
+      <DefaultIcon>Logo\logo.ico</DefaultIcon>
+    </FileAssociation>
+    <FileAssociation Include=".asxml">
+      <Visible>False</Visible>
+      <Description>阿木加密器文件</Description>
+      <Progid>Asec</Progid>
+      <DefaultIcon>Logo\logo.ico</DefaultIcon>
+    </FileAssociation>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
