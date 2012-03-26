@@ -149,7 +149,7 @@ namespace Me.Amon.Pwd.Wiz
                 return;
             }
 
-            CbLib.SelectedValue = new LibHeader { Id = guid.GetSpec(GuidAtt.SPEC_GUID_TPLT) };
+            CbLib.SelectedItem = new LibHeader { Id = guid.GetSpec(GuidAtt.SPEC_GUID_TPLT) };
             PbCard.Visible = guid.GetSpec(GuidAtt.SPEC_GUID_TPLT) == IEnv.LIB_CARD;
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -254,43 +255,48 @@ namespace Me.Amon.Model.Pwd
         /// <param name="key"></param>
         public void Decode(Key key, int sec)
         {
+            _AttList.Clear();
+            Decode(key.Data, sec, _AttList);
+            _Key = key;
+        }
+
+        public void Decode(string key, int sec, IList<AAtt> list)
+        {
             // 查询数据是否为空
-            if (string.IsNullOrEmpty(key.Data))
+            if (string.IsNullOrEmpty(key))
             {
                 return;
             }
-            string tmp = _UserModel.Decode(key.Data, sec);
-
-            _AttList.Clear();
+            key = _UserModel.Decode(key, sec);
 
             // Guid
             GuidAtt guid = new GuidAtt();
             guid.Name = Rec.RegTime;
             guid.Data = Rec.CatId;
             guid.SetSpec(GuidAtt.SPEC_GUID_TPLT, Rec.LibId);
-            _AttList.Add(guid);
+            list.Add(guid);
 
             // MetaItem
             MetaAtt meta = new MetaAtt();
             meta.Name = Rec.Title;
             meta.Data = Rec.MetaKey;
-            _AttList.Add(meta);
+            list.Add(meta);
 
             // LogoItem
             LogoAtt logo = new LogoAtt();
             logo.Name = Rec.IcoName;
             logo.Data = Rec.IcoMemo;
             logo.Path = Rec.IcoPath;
-            _AttList.Add(logo);
+            list.Add(logo);
 
             // HintItem
             HintAtt hint = new HintAtt();
             hint.Data = Rec.GtdId;
             hint.Name = Rec.GtdMemo;
-            _AttList.Add(hint);
+            list.Add(hint);
 
             // 处理每一个数据
-            string[] arr = tmp.Split(AAtt.SP_SQL_EE);
+            string[] arr = key.Split(AAtt.SP_SQL_EE);
             int o = 1;
             for (int i = 0, j = arr.Length - 1; i < j; i += 1)
             {
@@ -309,10 +315,8 @@ namespace Me.Amon.Model.Pwd
                 {
                     item.DecodeSpec(spec, AAtt.SP_SQL_KV);
                 }
-                _AttList.Add(item);
+                list.Add(item);
             }
-
-            _Key = key;
         }
 
         /// <summary>

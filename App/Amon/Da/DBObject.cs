@@ -29,7 +29,8 @@ namespace Me.Amon.Da
             config.Common.ObjectClass(typeof(Cat)).ObjectField("Id").Indexed(true);
             config.Common.ObjectClass(typeof(Rec)).ObjectField("Title").Indexed(true);
             config.Common.ObjectClass(typeof(Rec)).ObjectField("MetaKey").Indexed(true);
-            _Container = Db4oEmbedded.OpenFile(_DbPath);
+            config.Common.ObjectClass(typeof(LibHeader)).UpdateDepth(1);
+            _Container = Db4oEmbedded.OpenFile(config, _DbPath);
         }
         #endregion
 
@@ -66,6 +67,13 @@ namespace Me.Amon.Da
             _Container.Store(vcs);
         }
 
+        public void SaveLog(Log log)
+        {
+            log.Id = HashUtil.UtcTimeInHex(false);
+            log.LogTime = DateTime.Now;
+            _Container.Store(log);
+        }
+
         /// <summary>
         /// 逻辑移除
         /// </summary>
@@ -84,6 +92,11 @@ namespace Me.Amon.Da
         public void DeleteVcs(Vcs vcs)
         {
             _Container.Delete(vcs);
+        }
+
+        public void DeleteLog(Log log)
+        {
+            _Container.Delete(log);
         }
 
         #region 类别操作
@@ -182,7 +195,7 @@ namespace Me.Amon.Da
         #endregion
 
         #region 日志操作
-        public RecLog ReadLog(string logId)
+        public RecLog ReadRecLog(string logId)
         {
             IList<RecLog> logs = _Container.Query<RecLog>(delegate(RecLog log)
             {
@@ -192,11 +205,11 @@ namespace Me.Amon.Da
             return logs.Count > 0 ? logs[0] : null;
         }
 
-        public IList<RecLog> ListLog(string recId)
+        public IList<RecLog> ListRecLog(string recId)
         {
             IList<RecLog> logs = _Container.Query<RecLog>(delegate(RecLog log)
             {
-                return log.Id == recId;
+                return log.RefId == recId;
             });
             return logs;
         }

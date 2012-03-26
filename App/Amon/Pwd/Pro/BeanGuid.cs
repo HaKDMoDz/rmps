@@ -128,16 +128,17 @@ namespace Me.Amon.Pwd.Pro
         {
             if ((_DataModel.LibModified & IEnv.KEY_APWD) > 0)
             {
-                CbName.DataSource = null;
-                CbName.DataSource = _DataModel.LibList;
-                CbName.DisplayMember = "Name";
-                CbName.ValueMember = "Id";
-                _DataModel.LibModified &= ~IEnv.KEY_APWD;
+                CbName.Items.Clear();
+                foreach (LibHeader header in _DataModel.LibList)
+                {
+                    CbName.Items.Add(header);
+                }
+                _DataModel.LibModified &= ~IEnv.KEY_AWIZ;
             }
 
             _Att = att;
 
-            CbName.SelectedValue = new LibHeader { Id = att.GetSpec(GuidAtt.SPEC_GUID_TPLT) };
+            CbName.SelectedItem = new LibHeader { Id = att.GetSpec(GuidAtt.SPEC_GUID_TPLT) };
             PbCard.Visible = _Att.GetSpec(GuidAtt.SPEC_GUID_TPLT) == IEnv.LIB_CARD;
             CbName.Focus();
             return true;

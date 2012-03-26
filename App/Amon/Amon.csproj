@@ -174,7 +174,7 @@
     <Compile Include="Bean\Att\CallAtt.cs" />
     <Compile Include="Bean\Ico.cs" />
     <Compile Include="Bean\Key.cs" />
-    <Compile Include="Bean\KeyLog.cs" />
+    <Compile Include="Bean\Log.cs" />
     <Compile Include="Bean\Png.cs" />
     <Compile Include="Ce\Renamer.cs" />
     <Compile Include="Ce\Wrapper.cs" />

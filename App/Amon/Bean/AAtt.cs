@@ -18,15 +18,19 @@ namespace Me.Amon.Bean
         public bool Modified { get; set; }
 
         /// <summary>
-        /// 记录类别
+        /// 属性索引
+        /// </summary>
+        public int Id { get; set; }
+        /// <summary>
+        /// 属性类别
         /// </summary>
         public int Type { get; set; }
         /// <summary>
-        /// 记录名称
+        /// 属性名称
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// 记录内容
+        /// 属性内容
         /// </summary>
         public string Data { get; set; }
         /// <summary>

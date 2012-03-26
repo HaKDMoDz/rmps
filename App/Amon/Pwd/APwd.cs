@@ -323,7 +323,6 @@ namespace Me.Amon.Pwd
             }
 
             _SafeModel.Rec = rec;
-
             Key key = _UserModel.DBObject.ReadKey(rec.Id);
             if (key == null)
             {
@@ -331,15 +330,7 @@ namespace Me.Amon.Pwd
             }
             _SafeModel.Decode(key, rec.CipherVer);
 
-            _PwdView.ShowData();
-
-            _LastLabel.Checked = false;
-            _LastLabel = _CmiLabels[rec.Label];
-            _LastLabel.Checked = true;
-
-            _LastMajor.Checked = false;
-            _LastMajor = _CmiMajors[rec.Major + 2];
-            _LastMajor.Checked = true;
+            ShowRec(rec);
         }
 
         private void APwd_KeyDown(object sender, KeyEventArgs e)
@@ -1235,6 +1226,20 @@ namespace Me.Amon.Pwd
             DeleteKey();
         }
 
+        private void TsbCopy_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TsbPaste_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TsbClear_Click(object sender, EventArgs e)
+        {
+        }
+
         private void TsbMenu_Click(object sender, EventArgs e)
         {
             SetMenuBarVisible(!TmMenu.Visible);
@@ -1539,8 +1544,8 @@ namespace Me.Amon.Pwd
 
         private void CmiHistory_Click(object sender, EventArgs e)
         {
-            LogEdit edit = new LogEdit(_UserModel);
-            edit.Init(_SafeModel.Rec);
+            LogEdit edit = new LogEdit(this);
+            edit.Init(_UserModel, _SafeModel);
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
@@ -1576,6 +1581,35 @@ namespace Me.Amon.Pwd
 
         public void ShowPngSeeker()
         {
+        }
+
+        public void Backup()
+        {
+        }
+
+        public void Backup(Rec rec)
+        {
+        }
+
+        public void Resuma()
+        {
+        }
+
+        public void Resuma(RecLog log)
+        {
+        }
+
+        public void ShowRec(Rec rec)
+        {
+            _PwdView.ShowData();
+
+            _LastLabel.Checked = false;
+            _LastLabel = _CmiLabels[rec.Label];
+            _LastLabel.Checked = true;
+
+            _LastMajor.Checked = false;
+            _LastMajor = _CmiMajors[rec.Major + 2];
+            _LastMajor.Checked = true;
         }
         #endregion
 
@@ -1844,6 +1878,10 @@ namespace Me.Amon.Pwd
 
         private void ChangeImgByCat(Bean.Png png)
         {
+            if (png == null)
+            {
+                return;
+            }
             if (!CharUtil.IsValidateHash(png.File))
             {
                 png.File = "0";
@@ -1860,6 +1898,7 @@ namespace Me.Amon.Pwd
             {
                 return;
             }
+            cat.Icon = png.File;
 
             _UserModel.DBObject.SaveVcs(cat);
         }
@@ -1910,8 +1949,9 @@ namespace Me.Amon.Pwd
 
             if (_SafeModel.IsUpdate && _SafeModel.Rec.Backup)
             {
-                _UserModel.DBObject.SaveVcs(_SafeModel.Rec.ToLog());
-                _UserModel.DBObject.SaveVcs(_SafeModel.Key.ToLog());
+                RecLog recLog = _SafeModel.Rec.ToLog();
+                recLog.UserData = _SafeModel.Key.Data;
+                _UserModel.DBObject.SaveLog(recLog);
             }
             _SafeModel.Encode();
             _UserModel.DBObject.SaveVcs(_SafeModel.Rec);
@@ -2199,19 +2239,5 @@ namespace Me.Amon.Pwd
             Close();
         }
         #endregion
-
-        private void TsbCopy_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TsbPaste_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TsbClear_Click(object sender, EventArgs e)
-        {
-        }
     }
 }

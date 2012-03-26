@@ -32,11 +32,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LibEdit));
             this.TvLibView = new System.Windows.Forms.TreeView();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MiAppendLibh = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiDeleteLibh = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.MiAppendLibd = new System.Windows.Forms.ToolStripMenuItem();
             this.MiDeleteLibd = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiSep0 = new System.Windows.Forms.ToolStripSeparator();
+            this.MiAppendLibh = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiDeleteLibh = new System.Windows.Forms.ToolStripMenuItem();
             this.BtUpdate = new System.Windows.Forms.Button();
             this.BtCancel = new System.Windows.Forms.Button();
             this.GbGroup = new System.Windows.Forms.GroupBox();
@@ -55,46 +55,46 @@
             // CmMenu
             // 
             this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MiAppendLibh,
-            this.MiDeleteLibh,
-            this.toolStripSeparator1,
             this.MiAppendLibd,
-            this.MiDeleteLibd});
+            this.MiDeleteLibd,
+            this.MiSep0,
+            this.MiAppendLibh,
+            this.MiDeleteLibh});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(140, 98);
-            // 
-            // MiAppendLibh
-            // 
-            this.MiAppendLibh.Name = "MiAppendLibh";
-            this.MiAppendLibh.Size = new System.Drawing.Size(139, 22);
-            this.MiAppendLibh.Text = "添加模板(&1)";
-            this.MiAppendLibh.Click += new System.EventHandler(this.MiAppendLibh_Click);
-            // 
-            // MiDeleteLibh
-            // 
-            this.MiDeleteLibh.Name = "MiDeleteLibh";
-            this.MiDeleteLibh.Size = new System.Drawing.Size(139, 22);
-            this.MiDeleteLibh.Text = "删除模板(&2)";
-            this.MiDeleteLibh.Click += new System.EventHandler(this.MiDeleteLibh_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(136, 6);
+            this.CmMenu.Size = new System.Drawing.Size(153, 120);
             // 
             // MiAppendLibd
             // 
             this.MiAppendLibd.Name = "MiAppendLibd";
-            this.MiAppendLibd.Size = new System.Drawing.Size(139, 22);
-            this.MiAppendLibd.Text = "添加属性(&3)";
+            this.MiAppendLibd.Size = new System.Drawing.Size(152, 22);
+            this.MiAppendLibd.Text = "添加属性(&1)";
             this.MiAppendLibd.Click += new System.EventHandler(this.MiAppendLibd_Click);
             // 
             // MiDeleteLibd
             // 
             this.MiDeleteLibd.Name = "MiDeleteLibd";
-            this.MiDeleteLibd.Size = new System.Drawing.Size(139, 22);
-            this.MiDeleteLibd.Text = "删除属性(&4)";
+            this.MiDeleteLibd.Size = new System.Drawing.Size(152, 22);
+            this.MiDeleteLibd.Text = "删除属性(&2)";
             this.MiDeleteLibd.Click += new System.EventHandler(this.MiDeleteLibd_Click);
+            // 
+            // MiSep0
+            // 
+            this.MiSep0.Name = "MiSep0";
+            this.MiSep0.Size = new System.Drawing.Size(149, 6);
+            // 
+            // MiAppendLibh
+            // 
+            this.MiAppendLibh.Name = "MiAppendLibh";
+            this.MiAppendLibh.Size = new System.Drawing.Size(152, 22);
+            this.MiAppendLibh.Text = "添加模板(&3)";
+            this.MiAppendLibh.Click += new System.EventHandler(this.MiAppendLibh_Click);
+            // 
+            // MiDeleteLibh
+            // 
+            this.MiDeleteLibh.Name = "MiDeleteLibh";
+            this.MiDeleteLibh.Size = new System.Drawing.Size(152, 22);
+            this.MiDeleteLibh.Text = "删除模板(&4)";
+            this.MiDeleteLibh.Click += new System.EventHandler(this.MiDeleteLibh_Click);
             // 
             // BtUpdate
             // 
@@ -164,7 +164,7 @@
         private System.Windows.Forms.ContextMenuStrip CmMenu;
         private System.Windows.Forms.ToolStripMenuItem MiAppendLibh;
         private System.Windows.Forms.ToolStripMenuItem MiDeleteLibh;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator MiSep0;
         private System.Windows.Forms.ToolStripMenuItem MiAppendLibd;
         private System.Windows.Forms.ToolStripMenuItem MiDeleteLibd;
     }

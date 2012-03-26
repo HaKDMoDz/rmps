@@ -39,5 +39,29 @@ namespace Me.Amon.Bean
         /// 创建时间
         /// </summary>
         public DateTime CreateTime { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (obj is string)
+            {
+                string id = (string)obj;
+                return Id == id;
+            }
+            if (obj is Vcs)
+            {
+                Vcs vcs = (Vcs)obj;
+                return Id == vcs.Id;
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id != null ? Id.GetHashCode() : 0;
+        }
     }
 }

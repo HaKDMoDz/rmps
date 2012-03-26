@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace Me.Amon.Bean
 {
-    public class LibHeader : Vcs, IComparer
+    public class LibHeader : Vcs
     {
         public int Order { get; set; }
 
@@ -24,32 +24,9 @@ namespace Me.Amon.Bean
         {
             return Name;
         }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
-            if (obj is string)
-            {
-                string id = obj as string;
-                return Id == id;
-            }
-            if (obj is LibHeader)
-            {
-                LibHeader header = obj as LibHeader;
-                return Id == header.Id;
-            }
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
-        }
         #endregion
 
+        #region XML
         public bool FromXml(XmlReader reader)
         {
             if (reader == null || reader.Name != "Lib")
@@ -117,10 +94,6 @@ namespace Me.Amon.Bean
 
             writer.WriteEndElement();
         }
-
-        public int Compare(object x, object y)
-        {
-            return 0;
-        }
+        #endregion
     }
 }

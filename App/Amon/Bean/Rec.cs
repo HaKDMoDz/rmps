@@ -77,6 +77,10 @@ namespace Me.Amon.Bean
         /// 加密版本
         /// </summary>
         public int CipherVer { get; set; }
+        /// <summary>
+        /// 索性索引
+        /// </summary>
+        public int AttIndex { get; set; }
 
         /// <summary>
         /// 恢复默认值
@@ -226,7 +230,7 @@ namespace Me.Amon.Bean
         public RecLog ToLog()
         {
             RecLog log = new RecLog();
-            log.LogId = Id;
+            log.RefId = Id;
             log.Order = Order;
             log.Label = Label;
             log.Major = Major;
@@ -254,7 +258,7 @@ namespace Me.Amon.Bean
                 return false;
             }
 
-            Id = log.LogId;
+            Id = log.RefId;
             Order = log.Order;
             Label = log.Label;
             Major = log.Major;

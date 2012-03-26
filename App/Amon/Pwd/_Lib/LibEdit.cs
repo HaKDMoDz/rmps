@@ -255,7 +255,12 @@ namespace Me.Amon.Pwd._Lib
         public void SaveDetail(Bean.LibDetail detail)
         {
             bool update = CharUtil.IsValidateHash(detail.Id);
-            _UserModel.DBObject.SaveVcs(detail);
+
+            Bean.LibHeader header = _Selected.Tag as Bean.LibHeader;
+            detail.Header = header.Id;
+            detail.Id = HashUtil.UtcTimeInHex(false);
+            header.Details.Add(detail);
+            _UserModel.DBObject.SaveVcs(header);
 
             if (update)
             {
@@ -264,9 +269,6 @@ namespace Me.Amon.Pwd._Lib
             }
             else
             {
-                Bean.LibHeader header = _Selected.Tag as Bean.LibHeader;
-                header.Details.Add(detail);
-
                 TreeNode node = new TreeNode();
                 node.Name = detail.Id;
                 node.Tag = detail;
