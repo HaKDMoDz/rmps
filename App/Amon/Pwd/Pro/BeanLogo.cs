@@ -15,7 +15,6 @@ namespace Me.Amon.Pwd.Pro
         private Bean.Ico _AIco;
         private APro _APro;
         private DataModel _DataModel;
-        private TextBoxBase _Ctl;
 
         #region 构造函数
         public BeanLogo()
@@ -78,7 +77,7 @@ namespace Me.Amon.Pwd.Pro
 
         public void Copy()
         {
-            Clipboard.SetText(_Ctl.Text);
+            Clipboard.SetText(TbData.Text);
         }
 
         public bool Save()

@@ -33,7 +33,6 @@ namespace Me.Amon.Sec.Pro
         public APro()
         {
             InitializeComponent();
-            InitOnce();
         }
 
         public APro(ASec asec)
@@ -43,8 +42,10 @@ namespace Me.Amon.Sec.Pro
             _ASec = asec;
         }
 
-        public void InitOnce()
+        public void InitOnce(UserModel userModel)
         {
+            _UserModel = userModel;
+
             // 
             // UcDo
             // 

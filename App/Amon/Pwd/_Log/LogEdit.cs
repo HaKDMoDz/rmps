@@ -34,7 +34,7 @@ namespace Me.Amon.Pwd._Log
             _SafeModel = safeModel;
             _AttList = new List<AAtt>();
 
-            foreach (RecLog log in _UserModel.DBObject.ListRecLog(_SafeModel.Rec.Id))
+            foreach (KeyLog log in _UserModel.DBObject.ListRecLog(_SafeModel.Key.Id))
             {
                 LbLog.Items.Add(log);
             }
@@ -44,20 +44,20 @@ namespace Me.Amon.Pwd._Log
         #region 事件处理
         private void LbLog_SelectedIndexChanged(object sender, EventArgs e)
         {
-            RecLog log = LbLog.SelectedItem as RecLog;
+            KeyLog log = LbLog.SelectedItem as KeyLog;
             if (log == null)
             {
                 return;
             }
 
-            RecLog recLog = _UserModel.DBObject.ReadRecLog(log.Id);
+            KeyLog recLog = _UserModel.DBObject.ReadRecLog(log.Id);
             if (recLog == null)
             {
                 return;
             }
 
             _AttList.Clear();
-            _SafeModel.Decode(recLog.UserData, recLog.CipherVer, _AttList);
+            _SafeModel.Decode(recLog.Password, recLog.CipherVer, _AttList);
 
             StringBuilder buffer = new StringBuilder();
             buffer.Append("时间：").Append(recLog.RegTime).Append(Environment.NewLine);
@@ -76,7 +76,7 @@ namespace Me.Amon.Pwd._Log
 
         private void BtResume_Click(object sender, EventArgs e)
         {
-            RecLog oldLog = LbLog.SelectedItem as RecLog;
+            KeyLog oldLog = LbLog.SelectedItem as KeyLog;
             if (oldLog == null)
             {
                 MessageBox.Show("请选择您要恢复到的记录！");
@@ -89,21 +89,19 @@ namespace Me.Amon.Pwd._Log
                 return;
             }
 
-            RecLog newLog = _SafeModel.Rec.ToLog();
-            newLog.UserData = _SafeModel.Key.Data;
+            KeyLog newLog = _SafeModel.Key.ToLog();
             _UserModel.DBObject.SaveLog(newLog);
 
-            _SafeModel.Rec.FromLog(oldLog);
-            _SafeModel.Key.Data = oldLog.UserData;
-            _SafeModel.Decode(_SafeModel.Key, _SafeModel.Rec.CipherVer);
-            _APwd.ShowRec(_SafeModel.Rec);
+            _SafeModel.Key.FromLog(oldLog);
+            _SafeModel.Decode();
+            _APwd.ShowRec(_SafeModel.Key);
 
             LbLog.Items.Insert(0, newLog);
         }
 
         private void BtClearCur_Click(object sender, EventArgs e)
         {
-            RecLog log = LbLog.SelectedItem as RecLog;
+            KeyLog log = LbLog.SelectedItem as KeyLog;
             if (log == null)
             {
                 MessageBox.Show("请选择您要恢复到的记录！");
@@ -111,7 +109,7 @@ namespace Me.Amon.Pwd._Log
                 return;
             }
 
-            if (DialogResult.OK != MessageBox.Show("确认要删除选中的历史信息么，此操作不可恢复？", "", MessageBoxButtons.YesNo))
+            if (DialogResult.Yes != MessageBox.Show("确认要删除选中的历史信息么，此操作不可恢复？", "", MessageBoxButtons.YesNo))
             {
                 return;
             }
@@ -122,15 +120,15 @@ namespace Me.Amon.Pwd._Log
 
         private void BtClearAll_Click(object sender, EventArgs e)
         {
-            if (DialogResult.OK != MessageBox.Show("确认要删除此记录的所有历史信息吗，此操作将不可恢复？", "", MessageBoxButtons.YesNo))
+            if (DialogResult.Yes != MessageBox.Show("确认要删除此记录的所有历史信息吗，此操作将不可恢复？", "", MessageBoxButtons.YesNo))
             {
                 return;
             }
 
-            foreach (object obj in LbLog.Items)
+            for (int i = LbLog.Items.Count - 1; i >= 0; i -= 1)
             {
-                _UserModel.DBObject.DeleteLog(obj as RecLog);
-                LbLog.Items.Remove(obj);
+                _UserModel.DBObject.DeleteLog(LbLog.Items[i] as KeyLog);
+                LbLog.Items.RemoveAt(i);
             }
         }
         #endregion

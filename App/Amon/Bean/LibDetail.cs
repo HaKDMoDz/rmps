@@ -23,8 +23,9 @@ namespace Me.Amon.Bean
             {
                 return false;
             }
+            reader.ReadStartElement();
 
-            if (reader.Name == "Order" || reader.ReadToDescendant("Order"))
+            if (reader.Name == "Order" || reader.ReadToNextSibling("Order"))
             {
                 Order = reader.ReadElementContentAsInt();
             }
@@ -48,6 +49,8 @@ namespace Me.Amon.Bean
             {
                 Memo = reader.ReadElementContentAsString();
             }
+
+            reader.ReadEndElement();
             return true;
         }
 

@@ -12,7 +12,6 @@ namespace Me.Amon.Sec
     {
         #region 全局变量
         private UserModel _UserModel;
-        private DataModel _DataModel;
         private ISec _ISec;
         #endregion
 
@@ -133,7 +132,7 @@ namespace Me.Amon.Sec
             if (_APro == null)
             {
                 _APro = new APro(this);
-                _APro.InitOnce();
+                _APro.InitOnce(_UserModel);
                 _APro.Name = "pro";
             }
             _ISec = _APro;

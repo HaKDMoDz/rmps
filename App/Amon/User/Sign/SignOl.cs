@@ -401,7 +401,7 @@ namespace Me.Amon.User.Sign
                     return;
                 }
 
-                LibHeader header = new LibHeader();
+                Lib header = new Lib();
                 header.Order = 0;
                 header.UserCode = _UserModel.Code;
                 while (reader.ReadToFollowing("Lib"))

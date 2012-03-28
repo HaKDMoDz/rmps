@@ -104,7 +104,7 @@ namespace Me.Amon.Pwd.Wiz
 
         public bool SaveData()
         {
-            if (_SafeModel.Rec == null)
+            if (_SafeModel.Key == null)
             {
                 return false;
             }

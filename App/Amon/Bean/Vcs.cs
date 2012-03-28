@@ -48,13 +48,11 @@ namespace Me.Amon.Bean
             }
             if (obj is string)
             {
-                string id = (string)obj;
-                return Id == id;
+                return Id == (string)obj;
             }
             if (obj is Vcs)
             {
-                Vcs vcs = (Vcs)obj;
-                return Id == vcs.Id;
+                return Id == ((Vcs)obj).Id;
             }
             return false;
         }

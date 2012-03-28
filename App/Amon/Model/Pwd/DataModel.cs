@@ -38,7 +38,7 @@ namespace Me.Amon.Model.Pwd
             }
             #endregion
 
-            _LibList = _UserModel.DBObject.ListLibHeader();
+            _LibList = _UserModel.DBObject.ListLib();
             LibModified = 0x7FFFFFFF;
         }
 
@@ -55,8 +55,8 @@ namespace Me.Amon.Model.Pwd
         public string AcfDir { get { return _AcfDir; } }
 
         #region 口令模板
-        private IList<LibHeader> _LibList;
-        public IList<LibHeader> LibList
+        private IList<Lib> _LibList;
+        public IList<Lib> LibList
         {
             get
             {

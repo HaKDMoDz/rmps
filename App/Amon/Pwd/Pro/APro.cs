@@ -110,7 +110,7 @@ namespace Me.Amon.Pwd.Pro
         {
             _UserAction = false;
             _SafeModel.Clear();
-            _SafeModel.Rec = new Rec();
+            _SafeModel.Key = new Key();
 
             _AAtt = _SafeModel.InitGuid();
 
@@ -139,7 +139,7 @@ namespace Me.Amon.Pwd.Pro
             {
                 return;
             }
-            if (_SafeModel.Rec == null || _SafeModel.Count < AAtt.HEAD_SIZE)
+            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
             {
                 return;
             }
@@ -180,7 +180,7 @@ namespace Me.Amon.Pwd.Pro
             {
                 return;
             }
-            if (_SafeModel.Rec == null || _SafeModel.Count < AAtt.HEAD_SIZE)
+            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
             {
                 return;
             }
@@ -231,7 +231,7 @@ namespace Me.Amon.Pwd.Pro
 
         public void DropAtt()
         {
-            if (_SafeModel.Rec == null || _SafeModel.Count < AAtt.HEAD_SIZE)
+            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
             {
                 return;
             }

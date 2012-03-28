@@ -136,7 +136,7 @@ namespace Me.Amon.Pwd.Wiz
             if ((_DataModel.LibModified & IEnv.KEY_AWIZ) > 0)
             {
                 CbLib.Items.Clear();
-                foreach (LibHeader header in _DataModel.LibList)
+                foreach (Lib header in _DataModel.LibList)
                 {
                     CbLib.Items.Add(header);
                 }
@@ -149,18 +149,18 @@ namespace Me.Amon.Pwd.Wiz
                 return;
             }
 
-            CbLib.SelectedItem = new LibHeader { Id = guid.GetSpec(GuidAtt.SPEC_GUID_TPLT) };
+            CbLib.SelectedItem = new Lib { Id = guid.GetSpec(GuidAtt.SPEC_GUID_TPLT) };
             PbCard.Visible = guid.GetSpec(GuidAtt.SPEC_GUID_TPLT) == IEnv.LIB_CARD;
         }
 
         public bool SaveData()
         {
-            if (_SafeModel.Rec == null)
+            if (_SafeModel.Key == null)
             {
                 return false;
             }
 
-            LibHeader lib = CbLib.SelectedItem as LibHeader;
+            Lib lib = CbLib.SelectedItem as Lib;
             if (lib == null || !CharUtil.IsValidateHash(lib.Id))
             {
                 Main.ShowAlert("请选择您要使用的模板！");

@@ -51,7 +51,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -173,7 +173,6 @@
     </Compile>
     <Compile Include="Bean\Att\CallAtt.cs" />
     <Compile Include="Bean\Ico.cs" />
-    <Compile Include="Bean\Key.cs" />
     <Compile Include="Bean\Log.cs" />
     <Compile Include="Bean\Png.cs" />
     <Compile Include="Ce\Renamer.cs" />
@@ -273,19 +272,19 @@
     <Compile Include="Bean\GtdDetail.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\GtdHeader.cs">
+    <Compile Include="Bean\Gtd.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Rec.cs">
+    <Compile Include="Bean\Key.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bean\LibDetail.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\LibHeader.cs">
+    <Compile Include="Bean\Lib.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\RecLog.cs">
+    <Compile Include="Bean\KeyLog.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Pwd\SafeModel.cs">
@@ -575,6 +574,7 @@
     <Compile Include="Ren\ARen.Designer.cs">
       <DependentUpon>ARen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ren\M\MRen.cs" />
     <Compile Include="Sec\ASec.cs">
       <SubType>Form</SubType>
     </Compile>

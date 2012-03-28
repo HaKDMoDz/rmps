@@ -27,9 +27,9 @@ namespace Me.Amon.Bean
             {
                 return false;
             }
-            if (obj is RecLog)
+            if (obj is KeyLog)
             {
-                return Id == ((RecLog)obj).Id;
+                return Id == ((KeyLog)obj).Id;
             }
             if (obj is string)
             {

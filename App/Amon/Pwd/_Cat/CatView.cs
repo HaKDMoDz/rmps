@@ -49,7 +49,10 @@ namespace Me.Amon.Pwd._Cat
                 node.SelectedImageKey = node.ImageKey;
 
                 root.Nodes.Add(node);
-                InitCat(node);
+                if (!cat.IsLeaf)
+                {
+                    InitCat(node);
+                }
             }
         }
         #endregion

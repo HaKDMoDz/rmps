@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Xml;
 
 namespace Me.Amon.Bean
 {
-    public class LibHeader : Vcs
+    public class Lib : Vcs
     {
         public int Order { get; set; }
 
@@ -12,11 +11,10 @@ namespace Me.Amon.Bean
 
         public string Memo { get; set; }
 
-        public List<LibDetail> Details { get; set; }
+        public IList<LibDetail> Details { get; set; }
 
-        public LibHeader()
+        public Lib()
         {
-            Details = new List<LibDetail>();
         }
 
         #region 方法重写
@@ -51,11 +49,13 @@ namespace Me.Amon.Bean
                 Memo = reader.ReadElementContentAsString();
             }
 
-            Details.Clear();
+            Details = new List<LibDetail>();
             if (reader.Name == "Items" || reader.ReadToNextSibling("Items"))
             {
+                reader.ReadStartElement();
+
                 LibDetail detail;
-                if (reader.ReadToDescendant("Item"))
+                while (reader.Name == "Item" || reader.ReadToNextSibling("Item"))
                 {
                     detail = new LibDetail();
                     detail.FromXml(reader);
@@ -64,15 +64,8 @@ namespace Me.Amon.Bean
                     detail.Order = Details.Count;
                     Details.Add(detail);
                 }
-                while (reader.ReadToNextSibling("Item"))
-                {
-                    detail = new LibDetail();
-                    detail.FromXml(reader);
-                    detail.Header = Id;
-                    detail.UserCode = UserCode;
-                    detail.Order = Details.Count;
-                    Details.Add(detail);
-                }
+
+                reader.ReadEndElement();
             }
             return true;
         }
@@ -95,5 +88,24 @@ namespace Me.Amon.Bean
             writer.WriteEndElement();
         }
         #endregion
+
+        public void Add(LibDetail detail)
+        {
+            if (Details == null)
+            {
+                Details = new List<LibDetail>();
+            }
+            Details.Add(detail);
+            Details.Remove(detail);
+        }
+
+        public void Remove(LibDetail detail)
+        {
+            if (Details == null)
+            {
+                return;
+            }
+            Details.Remove(detail);
+        }
     }
 }

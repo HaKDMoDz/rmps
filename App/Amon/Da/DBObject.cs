@@ -5,6 +5,7 @@ using Db4objects.Db4o;
 using Db4objects.Db4o.Config;
 using Me.Amon.Bean;
 using Me.Amon.Model;
+using Me.Amon.Ren.M;
 using Me.Amon.Util;
 
 namespace Me.Amon.Da
@@ -27,9 +28,9 @@ namespace Me.Amon.Da
 
             IEmbeddedConfiguration config = Db4oEmbedded.NewConfiguration();
             config.Common.ObjectClass(typeof(Cat)).ObjectField("Id").Indexed(true);
-            config.Common.ObjectClass(typeof(Rec)).ObjectField("Title").Indexed(true);
-            config.Common.ObjectClass(typeof(Rec)).ObjectField("MetaKey").Indexed(true);
-            config.Common.ObjectClass(typeof(LibHeader)).UpdateDepth(1);
+            config.Common.ObjectClass(typeof(Key)).ObjectField("Title").Indexed(true);
+            config.Common.ObjectClass(typeof(Key)).ObjectField("MetaKey").Indexed(true);
+            config.Common.ObjectClass(typeof(Lib)).CascadeOnUpdate(true);
             _Container = Db4oEmbedded.OpenFile(config, _DbPath);
         }
         #endregion
@@ -45,6 +46,21 @@ namespace Me.Amon.Da
         }
         #endregion
 
+        #region 私有函数
+        private bool Contains(string src, string[] arr)
+        {
+            foreach (string tmp in arr)
+            {
+                if (!src.Contains(tmp))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        #endregion
+
+        #region 数据更新
         public void SaveVcs(Vcs vcs)
         {
             if (vcs.Operate == DBConst.OPT_DEFAULT)
@@ -73,7 +89,9 @@ namespace Me.Amon.Da
             log.LogTime = DateTime.Now;
             _Container.Store(log);
         }
+        #endregion
 
+        #region 数据删除
         /// <summary>
         /// 逻辑移除
         /// </summary>
@@ -98,6 +116,7 @@ namespace Me.Amon.Da
         {
             _Container.Delete(log);
         }
+        #endregion
 
         #region 类别操作
         public Cat ReadCat(string catId)
@@ -110,29 +129,44 @@ namespace Me.Amon.Da
             return cats.Count > 0 ? cats[0] : null;
         }
 
-        public IList<Cat> FindCat(string catName)
+        public IList<Cat> FindCat(string catMeta)
         {
-            IList<Cat> cats = _Container.Query<Cat>(delegate(Cat cat)
+            if (string.IsNullOrEmpty(catMeta))
             {
-                return cat.Text.Contains(catName);
-            });
+                return null;
+            }
+            string[] arr = catMeta.ToLower().Split(' ', ',', ';');
+            IList<Cat> cats = _Container.Query<Cat>(
+                delegate(Cat cat)
+                {
+                    return Contains(cat.Meta.ToLower(), arr);
+                },
+                delegate(Cat a, Cat b)
+                {
+                    return a.Order.CompareTo(b.Order);
+                });
             return cats;
         }
 
         public IList<Cat> ListCat(string parentId)
         {
-            IList<Cat> cats = _Container.Query<Cat>(delegate(Cat cat)
-            {
-                return cat.Parent == parentId;
-            });
+            IList<Cat> cats = _Container.Query<Cat>(
+                delegate(Cat cat)
+                {
+                    return cat.Parent == parentId;
+                },
+                delegate(Cat a, Cat b)
+                {
+                    return a.Order.CompareTo(b.Order);
+                });
             return cats;
         }
         #endregion
 
         #region 记录操作
-        public Rec ReadRec(string recId)
+        public Key ReadRec(string recId)
         {
-            IList<Rec> recs = _Container.Query<Rec>(delegate(Rec rec)
+            IList<Key> recs = _Container.Query<Key>(delegate(Key rec)
             {
                 return rec.Id == recId;
             });
@@ -140,64 +174,66 @@ namespace Me.Amon.Da
             return recs.Count > 0 ? recs[0] : null;
         }
 
-        public IList<Rec> FindRec(string text)
+        public IList<Key> FindRec(string text)
         {
             string[] arr = text.ToLower().Split(' ');
 
-            IList<Rec> recs = _Container.Query<Rec>(delegate(Rec rec)
-            {
-                if (rec.Operate == DBConst.OPT_DELETE)
+            IList<Key> recs = _Container.Query<Key>(
+                delegate(Key rec)
                 {
-                    return false;
-                }
+                    if (rec.Operate == DBConst.OPT_DELETE)
+                    {
+                        return false;
+                    }
 
-                bool a = string.IsNullOrEmpty(rec.Title) ? false : Contains(rec.Title.ToLower(), arr);
-                bool b = string.IsNullOrEmpty(rec.MetaKey) ? false : Contains(rec.MetaKey.ToLower(), arr);
-                return a || b;
-            });
+                    bool a = string.IsNullOrEmpty(rec.Title) ? false : Contains(rec.Title.ToLower(), arr);
+                    bool b = string.IsNullOrEmpty(rec.MetaKey) ? false : Contains(rec.MetaKey.ToLower(), arr);
+                    return a || b;
+                },
+                delegate(Key a, Key b)
+                {
+                    return b.Order.CompareTo(a.Order);
+                });
             return recs;
         }
 
-        private bool Contains(string src, string[] arr)
+        public IList<Key> FindKey(int label)
         {
-            foreach (string tmp in arr)
+            IList<Key> keys = _Container.Query<Key>(delegate(Key key)
             {
-                if (!src.Contains(tmp))
-                {
-                    return false;
-                }
-            }
-            return true;
+                return key.UserCode == _UserModel.Code && key.Label == label;
+            });
+            return keys;
         }
 
-        public IList<Rec> FindRec(int label)
+        public IList<Key> ListKey(string catId)
         {
-            IList<Rec> recs = _Container.Query<Rec>(delegate(Rec rec)
-            {
-                return rec.Label == label;
-            });
-            return recs;
-        }
-
-        public IList<Rec> ListRec(string catId)
-        {
-            IList<Rec> recs = _Container.Query<Rec>(delegate(Rec rec)
-            {
-                if (rec.Operate == DBConst.OPT_DELETE)
+            IList<Key> keys = _Container.Query<Key>(
+                delegate(Key key)
                 {
-                    return false;
-                }
+                    if (key.UserCode != _UserModel.Code)
+                    {
+                        return false;
+                    }
+                    if (key.Operate == DBConst.OPT_DELETE)
+                    {
+                        return false;
+                    }
 
-                return rec.CatId == catId;
-            });
-            return recs;
+                    return key.CatId == catId;
+                },
+                delegate(Key a, Key b)
+                {
+                    return b.Order.CompareTo(a.Order);
+                });
+            return keys;
         }
         #endregion
 
         #region 日志操作
-        public RecLog ReadRecLog(string logId)
+        public KeyLog ReadRecLog(string logId)
         {
-            IList<RecLog> logs = _Container.Query<RecLog>(delegate(RecLog log)
+            IList<KeyLog> logs = _Container.Query<KeyLog>(delegate(KeyLog log)
             {
                 return log.Id == logId;
             });
@@ -205,44 +241,33 @@ namespace Me.Amon.Da
             return logs.Count > 0 ? logs[0] : null;
         }
 
-        public IList<RecLog> ListRecLog(string recId)
+        public IList<KeyLog> ListRecLog(string recId)
         {
-            IList<RecLog> logs = _Container.Query<RecLog>(delegate(RecLog log)
-            {
-                return log.RefId == recId;
-            });
+            IList<KeyLog> logs = _Container.Query<KeyLog>(
+                delegate(KeyLog log)
+                {
+                    return log.RefId == recId;
+                },
+                delegate(KeyLog a, KeyLog b)
+                {
+                    return b.LogTime.CompareTo(a.LogTime);
+                });
             return logs;
         }
         #endregion
 
-        #region 属性操作
-        public Key ReadKey(string recId)
-        {
-            IList<Key> keys = _Container.Query<Key>(delegate(Key key)
-            {
-                return key.RecId == recId;
-            });
-
-            return keys.Count > 0 ? keys[0] : null;
-        }
-        #endregion
-
         #region 模板操作
-        public IList<LibHeader> ListLibHeader()
+        public IList<Lib> ListLib()
         {
-            return _Container.Query<LibHeader>();
-        }
-
-        public LibDetail ReadLibDetail(string headerId)
-        {
-            IList<LibDetail> details = _Container.Query<LibDetail>(
-                delegate(LibDetail detail)
+            return _Container.Query<Lib>(
+                delegate(Lib header)
                 {
-                    return detail.Header == headerId;
-                }
-            );
-
-            return details.Count > 0 ? details[0] : null;
+                    return header.UserCode == _UserModel.Code;
+                },
+                delegate(Lib a, Lib b)
+                {
+                    return a.Order.CompareTo(b.Order);
+                });
         }
         #endregion
 
@@ -259,5 +284,10 @@ namespace Me.Amon.Da
             return _Container.Query<Dir>();
         }
         #endregion
+
+        public IList<MRen> ListRen()
+        {
+            return _Container.Query<MRen>();
+        }
     }
 }

@@ -2,6 +2,7 @@
 using Me.Amon.Bean;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
+using System;
 
 namespace Me.Amon.Pwd.Pro
 {
@@ -25,6 +26,8 @@ namespace Me.Amon.Pwd.Pro
 
             BtOpen.Visible = false;
             BtView.Visible = false;
+
+            TbData.GotFocus += new EventHandler(TbData_GotFocus);
         }
 
         public Control Control
@@ -60,7 +63,10 @@ namespace Me.Amon.Pwd.Pro
 
         public void Copy()
         {
-            Clipboard.SetText(_Ctl.Text);
+            if (_Ctl != null)
+            {
+                Clipboard.SetText(_Ctl.Text);
+            }
         }
 
         public bool Save()
@@ -82,6 +88,13 @@ namespace Me.Amon.Pwd.Pro
             }
 
             return true;
+        }
+        #endregion
+
+        #region 事件处理
+        private void TbData_GotFocus(object sender, EventArgs e)
+        {
+            _Ctl = TbData;
         }
         #endregion
     }

@@ -42,7 +42,7 @@ namespace Me.Amon.Pwd
         private IPwd _PwdView;
         private APro _ProView;
         private AWiz _WizView;
-        private APad _PadView;
+        //private APad _PadView;
         private Dictionary<string, Image> _RecIcon;
         private Dictionary<string, Image> _RecHint;
         #endregion
@@ -223,7 +223,10 @@ namespace Me.Amon.Pwd
                 node.SelectedImageKey = node.ImageKey;
 
                 root.Nodes.Add(node);
-                InitCat(node);
+                if (!cat.IsLeaf)
+                {
+                    InitCat(node);
+                }
             }
         }
         #endregion
@@ -242,13 +245,13 @@ namespace Me.Amon.Pwd
             _LastNode = node;
         }
 
-        private void InitKey(IList<Rec> recs)
+        private void InitKey(IList<Key> recs)
         {
             LbKeyList.Items.Clear();
             _RecIcon.Clear();
             _RecHint.Clear();
 
-            foreach (Rec rec in recs)
+            foreach (Key rec in recs)
             {
                 LbKeyList.Items.Add(rec);
 
@@ -280,7 +283,7 @@ namespace Me.Amon.Pwd
             {
                 return;
             }
-            Rec rec = LbKeyList.Items[e.Index] as Rec;
+            Key rec = LbKeyList.Items[e.Index] as Key;
             if (rec == null)
             {
                 return;
@@ -305,7 +308,7 @@ namespace Me.Amon.Pwd
 
         private void LbKeyList_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            Rec rec = LbKeyList.SelectedItem as Rec;
+            Key rec = LbKeyList.SelectedItem as Key;
             if (rec == null)
             {
                 return;
@@ -322,13 +325,8 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            _SafeModel.Rec = rec;
-            Key key = _UserModel.DBObject.ReadKey(rec.Id);
-            if (key == null)
-            {
-                return;
-            }
-            _SafeModel.Decode(key, rec.CipherVer);
+            _SafeModel.Key = rec;
+            _SafeModel.Decode();
 
             ShowRec(rec);
         }
@@ -932,12 +930,30 @@ namespace Me.Amon.Pwd
 
         private void TmiExportXml_Click(object sender, EventArgs e)
         {
-            if (_SafeModel.Modified)
+            if (_SafeModel.Modified && DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
             {
-                if (DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
-                {
-                    return;
-                }
+                return;
+            }
+
+            TreeNode node = TvCatTree.SelectedNode;
+            if (node == null)
+            {
+                Main.ShowAlert("请选择您要导出的类别！");
+                TvCatTree.Focus();
+                return;
+            }
+            Cat cat = node.Tag as Cat;
+            if (cat == null)
+            {
+                return;
+            }
+
+            IList<Key> recs = _UserModel.DBObject.ListKey(cat.Id);
+            if (recs.Count < 1)
+            {
+                Main.ShowAlert("当前类别下没有记录！");
+                TvCatTree.Focus();
+                return;
             }
 
             SaveFileDialog fd = new SaveFileDialog();
@@ -959,8 +975,13 @@ namespace Me.Amon.Pwd
                     writer.WriteStartElement("Amon");
                     writer.WriteElementString("App", "APwd");
                     writer.WriteElementString("Ver", "1");
-                    writer.WriteStartElement("Keys");
-                    _SafeModel.ExportAsXml(writer);
+                    writer.WriteStartElement("Recs");
+                    foreach (Key rec in recs)
+                    {
+                        _SafeModel.Key = rec;
+                        _SafeModel.Decode();
+                        _SafeModel.ExportAsXml(writer);
+                    }
                     writer.WriteEndElement();
                     writer.WriteEndElement();
 
@@ -1020,7 +1041,7 @@ namespace Me.Amon.Pwd
                     {
                         if (_SafeModel.ImportByTxt(line))
                         {
-                            _SafeModel.Rec.CatId = cat.Id;
+                            _SafeModel.Key.CatId = cat.Id;
                             ImportKey();
                         }
                     }
@@ -1073,11 +1094,11 @@ namespace Me.Amon.Pwd
                     Main.ShowAlert("未知的文件版本，无法进行导入处理！");
                     return;
                 }
-                while (reader.ReadToFollowing("Key"))
+                while (reader.ReadToFollowing("Rec"))
                 {
                     if (_SafeModel.ImportByXml(reader))
                     {
-                        _SafeModel.Rec.CatId = cat.Id;
+                        _SafeModel.Key.CatId = cat.Id;
                         ImportKey();
                     }
                 }
@@ -1587,7 +1608,7 @@ namespace Me.Amon.Pwd
         {
         }
 
-        public void Backup(Rec rec)
+        public void Backup(Key rec)
         {
         }
 
@@ -1595,11 +1616,11 @@ namespace Me.Amon.Pwd
         {
         }
 
-        public void Resuma(RecLog log)
+        public void Resuma(KeyLog log)
         {
         }
 
-        public void ShowRec(Rec rec)
+        public void ShowRec(Key rec)
         {
             _PwdView.ShowData();
 
@@ -1860,7 +1881,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            IList<Rec> recs = _UserModel.DBObject.ListRec(cat.Id);
+            IList<Key> recs = _UserModel.DBObject.ListKey(cat.Id);
             if (recs.Count > 0)
             {
                 Main.ShowAlert("类别数据不为空，不能删除！");
@@ -1878,10 +1899,6 @@ namespace Me.Amon.Pwd
 
         private void ChangeImgByCat(Bean.Png png)
         {
-            if (png == null)
-            {
-                return;
-            }
             if (!CharUtil.IsValidateHash(png.File))
             {
                 png.File = "0";
@@ -1898,7 +1915,6 @@ namespace Me.Amon.Pwd
             {
                 return;
             }
-            cat.Icon = png.File;
 
             _UserModel.DBObject.SaveVcs(cat);
         }
@@ -1917,7 +1933,7 @@ namespace Me.Amon.Pwd
 
         private void UpdateKey()
         {
-            if (_SafeModel.Rec == null || _SafeModel.Count < AAtt.HEAD_SIZE)
+            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
             {
                 return;
             }
@@ -1939,7 +1955,7 @@ namespace Me.Amon.Pwd
                     return;
                 }
 
-                _SafeModel.Rec.CatId = cat.Id;
+                _SafeModel.Key.CatId = cat.Id;
             }
 
             if (!_PwdView.UpdateKey())
@@ -1947,15 +1963,12 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            if (_SafeModel.IsUpdate && _SafeModel.Rec.Backup)
+            if (_SafeModel.IsUpdate && _SafeModel.Key.Backup)
             {
-                RecLog recLog = _SafeModel.Rec.ToLog();
-                recLog.UserData = _SafeModel.Key.Data;
+                KeyLog recLog = _SafeModel.Key.ToLog();
                 _UserModel.DBObject.SaveLog(recLog);
             }
             _SafeModel.Encode();
-            _UserModel.DBObject.SaveVcs(_SafeModel.Rec);
-            _SafeModel.Key.RecId = _SafeModel.Rec.Id;
             _UserModel.DBObject.SaveVcs(_SafeModel.Key);
             _SafeModel.Modified = false;
 
@@ -1965,7 +1978,7 @@ namespace Me.Amon.Pwd
 
         private void DeleteKey()
         {
-            if (_SafeModel.Rec == null || _SafeModel.Count < AAtt.HEAD_SIZE)
+            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
             {
                 return;
             }
@@ -1980,7 +1993,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            _UserModel.DBObject.RemoveVcs(_SafeModel.Rec);
+            _UserModel.DBObject.RemoveVcs(_SafeModel.Key);
 
             LbKeyList.Items.RemoveAt(LbKeyList.SelectedIndex);
         }
@@ -1989,9 +2002,8 @@ namespace Me.Amon.Pwd
         {
             _SafeModel.Encode();
 
-            _SafeModel.Rec.AccessTime = _SafeModel.Rec.RegTime;
-
-            _UserModel.DBObject.SaveVcs(_SafeModel.Rec);
+            _SafeModel.Key.AccessTime = _SafeModel.Key.RegTime;
+            _UserModel.DBObject.SaveVcs(_SafeModel.Key);
         }
 
         public void ListKey(string catId)
@@ -2009,7 +2021,7 @@ namespace Me.Amon.Pwd
 
         public void DoListKey(string catId)
         {
-            IList<Rec> recs = _UserModel.DBObject.ListRec(catId);
+            IList<Key> recs = _UserModel.DBObject.ListKey(catId);
             InitKey(recs);
         }
 
@@ -2040,7 +2052,7 @@ namespace Me.Amon.Pwd
 
         private void DoFindKey(string meta)
         {
-            IList<Rec> recs = _UserModel.DBObject.FindRec(meta);
+            IList<Key> recs = _UserModel.DBObject.FindRec(meta);
             InitKey(recs);
         }
 
@@ -2062,13 +2074,13 @@ namespace Me.Amon.Pwd
             {
                 catId = "0";
             }
-            if (catId == _SafeModel.Rec.CatId)
+            if (catId == _SafeModel.Key.CatId)
             {
                 return;
             }
 
-            _SafeModel.Rec.CatId = catId;
-            _UserModel.DBObject.SaveVcs(_SafeModel.Rec);
+            _SafeModel.Key.CatId = catId;
+            _UserModel.DBObject.SaveVcs(_SafeModel.Key);
 
             LastOpt();
         }
@@ -2080,8 +2092,8 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            _SafeModel.Rec.Label = label;
-            _UserModel.DBObject.SaveVcs(_SafeModel.Rec);
+            _SafeModel.Key.Label = label;
+            _UserModel.DBObject.SaveVcs(_SafeModel.Key);
 
             LbKeyList.Refresh();
         }
@@ -2093,8 +2105,8 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            _SafeModel.Rec.Major = major;
-            _UserModel.DBObject.SaveVcs(_SafeModel.Rec);
+            _SafeModel.Key.Major = major;
+            _UserModel.DBObject.SaveVcs(_SafeModel.Key);
 
             LbKeyList.Refresh();
         }

@@ -2,7 +2,7 @@
 {
     public class HintAtt : AAtt
     {
-        public GtdHeader GtdHeader { get; set; }
+        public Gtd GtdHeader { get; set; }
 
         public HintAtt()
             : base(TYPE_HINT, "", "")

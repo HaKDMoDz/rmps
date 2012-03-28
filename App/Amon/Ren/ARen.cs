@@ -4,14 +4,18 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using Me.Amon.Bean;
+using Me.Amon.Bean.Att;
 using Me.Amon.Ce;
 using Me.Amon.Model;
-using Me.Amon.Uc;
+using Me.Amon.Model.Pwd;
+using Me.Amon.Ren.M;
 
 namespace Me.Amon.Ren
 {
     public partial class ARen : Form, IApp
     {
+        private UserModel _UserModel;
         private DataTable _DataList;
         private Renamer _Renamer;
         private string _SrcPath;
@@ -24,6 +28,8 @@ namespace Me.Amon.Ren
 
         public ARen(UserModel userModel)
         {
+            _UserModel = userModel;
+
             InitializeComponent();
         }
         #endregion
@@ -37,6 +43,11 @@ namespace Me.Amon.Ren
             GvName.DataSource = _DataList;
 
             _Renamer = new Renamer();
+
+            foreach (MRen ren in _UserModel.DBObject.ListRen())
+            {
+                LsRule.Items.Add(ren);
+            }
         }
 
         public int AppId { get; set; }
@@ -65,7 +76,11 @@ namespace Me.Amon.Ren
 
         private void PbSave_Click(object sender, EventArgs e)
         {
-
+            MRen ren = new MRen();
+            ren.Name = "renamer1";
+            ren.Command = TbRule.Text;
+            _UserModel.DBObject.SaveVcs(ren);
+            LsRule.Items.Add(ren);
         }
 
         private void BtSelect_Click(object sender, EventArgs e)
@@ -105,13 +120,13 @@ namespace Me.Amon.Ren
 
         private void LsRule_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Item item = LsRule.SelectedItem as Item;
-            if (item == null)
+            MRen ren = LsRule.SelectedItem as MRen;
+            if (ren == null)
             {
                 return;
             }
 
-            TbRule.Text = item.V;
+            TbRule.Text = ren.Command;
         }
         #endregion
 

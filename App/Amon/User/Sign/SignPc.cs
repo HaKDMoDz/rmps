@@ -221,10 +221,10 @@ namespace Me.Amon.User.Sign
             stream = new StreamReader(Path.Combine(_UserModel.Home, "Lib.xml"));
             using (XmlReader reader = XmlReader.Create(stream))
             {
-                LibHeader header;
+                Lib header;
                 while (reader.ReadToFollowing("Lib"))
                 {
-                    header = new LibHeader();
+                    header = new Lib();
                     if (!header.FromXml(reader))
                     {
                         continue;

@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Bean
 {
-    public class GtdHeader : Vcs
+    public class Gtd : Vcs
     {
         /// <summary>
         /// 显示排序

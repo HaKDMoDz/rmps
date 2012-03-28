@@ -729,5 +729,15 @@ namespace Me.Amon
             _IApp.Visible = true;
             _IApp.BringToFront();
         }
+
+        private void MgSignUp_Click(object sender, EventArgs e)
+        {
+            SignAc(ESignAc.SignPc, new AmonHandler<int>(ShowAPwd));
+        }
+
+        private void MtSignUp_Click(object sender, EventArgs e)
+        {
+            SignAc(ESignAc.SignPc, new AmonHandler<int>(ShowAPwd));
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Bean
 {
-    public class RecLog : Log
+    public class KeyLog : Log
     {
         /// <summary>
         /// 显示排序
@@ -77,6 +77,6 @@
         /// <summary>
         /// 用户数据
         /// </summary>
-        public string UserData { get; set; }
+        public string Password { get; set; }
     }
 }

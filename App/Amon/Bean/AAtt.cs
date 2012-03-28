@@ -20,7 +20,7 @@ namespace Me.Amon.Bean
         /// <summary>
         /// 属性索引
         /// </summary>
-        public int Id { get; set; }
+        public string Id { get; set; }
         /// <summary>
         /// 属性类别
         /// </summary>
@@ -192,9 +192,9 @@ namespace Me.Amon.Bean
             }
 
             StringBuilder text = new StringBuilder();
-            for (int i = 0, j = _Spec.Length; i < j; i += 1)
+            foreach (string t in _Spec)
             {
-                text.Append(c).Append(_Spec[i]);
+                text.Append(t).Append(c);
             }
             return text.ToString();
         }
@@ -204,23 +204,22 @@ namespace Me.Amon.Bean
         /// </summary>
         /// <param name="text"></param>
         /// <param name="c"></param>
-        public void DecodeSpec(string text, char c)
+        public void DecodeSpec(string[] arr, int off)
         {
-            if (text == null || text.Length < 1)
+            if (arr == null || arr.Length < off || _Spec == null)
             {
                 return;
             }
 
-            string[] tmp = text.Split(c);
-            int j = tmp.Length;
-            if (j > _Spec.Length)
+            int i = arr.Length - 1 - off;
+            if (i > _Spec.Length)
             {
-                j = _Spec.Length;
+                i = _Spec.Length;
             }
-            while (j > 0)
+            while (i > 0)
             {
-                j -= 1;
-                _Spec[j] = tmp[j];
+                i -= 1;
+                _Spec[i] = arr[i + off];
             }
         }
         #endregion

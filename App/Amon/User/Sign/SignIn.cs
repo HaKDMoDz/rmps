@@ -15,7 +15,7 @@ namespace Me.Amon.User.Sign
     {
         private string _Name;
         private string _Pass;
-        private string _Info;
+        //private string _Info;
         private string _Home;
         private UserModel _UserModel;
         private DFAccess _Prop;
@@ -254,7 +254,7 @@ namespace Me.Amon.User.Sign
                     return;
                 }
 
-                LibHeader header = new LibHeader();
+                Lib header = new Lib();
                 header.Order = 0;
                 header.UserCode = _UserModel.Code;
                 while (reader.ReadToFollowing("Lib"))
@@ -334,7 +334,7 @@ namespace Me.Amon.User.Sign
                     return;
                 }
 
-                Rec rec = new Rec();
+                Key rec = new Key();
                 rec.UserCode = _UserModel.Code;
                 while (reader.ReadToFollowing("Key"))
                 {

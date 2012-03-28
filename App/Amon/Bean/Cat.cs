@@ -10,6 +10,10 @@ namespace Me.Amon.Bean
         /// </summary>
         public string Parent { get; set; }
         /// <summary>
+        /// 是否叶子
+        /// </summary>
+        public bool IsLeaf { get; set; }
+        /// <summary>
         /// 类别图标
         /// </summary>
         public string Icon { get; set; }
@@ -56,6 +60,10 @@ namespace Me.Amon.Bean
             {
                 Parent = reader.ReadElementContentAsString();
             }
+            if (reader.Name == "IsLeaf" || reader.ReadToNextSibling("IsLeaf"))
+            {
+                IsLeaf = reader.ReadElementContentAsBoolean();
+            }
             if (reader.Name == "Text" || reader.ReadToNextSibling("Text"))
             {
                 Text = reader.ReadElementContentAsString();
@@ -86,6 +94,7 @@ namespace Me.Amon.Bean
             writer.WriteElementString("Order", Order.ToString());
             writer.WriteElementString("Id", Id);
             writer.WriteElementString("Parent", Parent);
+            writer.WriteElementString("IsLeaf", IsLeaf.ToString());
             writer.WriteElementString("Text", Text);
             writer.WriteElementString("Tips", Tips);
             writer.WriteElementString("Icon", Icon);

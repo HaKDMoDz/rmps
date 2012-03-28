@@ -76,7 +76,7 @@ namespace Me.Amon.Pwd.Wiz
         public void AppendKey()
         {
             _SafeModel.Clear();
-            _SafeModel.Rec = new Rec();
+            _SafeModel.Key = new Key();
 
             _SafeModel.InitGuid();
             _SafeModel.InitMeta();

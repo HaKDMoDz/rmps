@@ -32,22 +32,20 @@ namespace Me.Amon.Model.Pwd
         #endregion
 
         #region 公共属性
-        private Rec _Rec;
-        public Rec Rec
+        private Key _Key;
+        public Key Key
         {
             get
             {
-                return _Rec;
+                return _Key;
             }
             set
             {
-                _Rec = value;
+                _Key = value;
                 Modified = false;
-                _IsUpdate = _Rec != null && CharUtil.IsValidateHash(_Rec.Id);
+                _IsUpdate = _Key != null && CharUtil.IsValidateHash(_Key.Id);
             }
         }
-        private Key _Key;
-        public Key Key { get { return _Key; } }
         private bool _IsUpdate;
         public bool IsUpdate { get { return _IsUpdate; } }
         public bool Modified { get; set; }
@@ -185,7 +183,7 @@ namespace Me.Amon.Model.Pwd
         /// 向导初始化
         /// </summary>
         /// <returns></returns>
-        public AAtt InitGuid()
+        public GuidAtt InitGuid()
         {
             GuidAtt guid = new GuidAtt { Order = "模板" };
             guid.Name = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
@@ -197,7 +195,7 @@ namespace Me.Amon.Model.Pwd
         /// 关键搜索
         /// </summary>
         /// <returns></returns>
-        public AAtt InitMeta()
+        public MetaAtt InitMeta()
         {
             MetaAtt meta = new MetaAtt { Order = "搜索" };
             _AttList.Add(meta);
@@ -208,7 +206,7 @@ namespace Me.Amon.Model.Pwd
         /// 徽标
         /// </summary>
         /// <returns></returns>
-        public AAtt InitLogo()
+        public LogoAtt InitLogo()
         {
             LogoAtt logo = new LogoAtt { Order = "徽标" };
             _AttList.Add(logo);
@@ -219,7 +217,7 @@ namespace Me.Amon.Model.Pwd
         /// 过时提醒
         /// </summary>
         /// <returns></returns>
-        public AAtt InitHint()
+        public HintAtt InitHint()
         {
             HintAtt hint = new HintAtt { Order = "提醒" };
             _AttList.Add(hint);
@@ -230,7 +228,7 @@ namespace Me.Amon.Model.Pwd
         /// 口令数据
         /// </summary>
         /// <param name="index"></param>
-        public bool InitData(LibHeader header)
+        public bool InitData(Lib header)
         {
             for (int i = _AttList.Count - 1; i >= AAtt.HEAD_SIZE; i -= 1)
             {
@@ -253,11 +251,10 @@ namespace Me.Amon.Model.Pwd
         /// 
         /// </summary>
         /// <param name="key"></param>
-        public void Decode(Key key, int sec)
+        public void Decode()
         {
             _AttList.Clear();
-            Decode(key.Data, sec, _AttList);
-            _Key = key;
+            Decode(Key.Password, Key.CipherVer, _AttList);
         }
 
         public void Decode(string key, int sec, IList<AAtt> list)
@@ -271,50 +268,50 @@ namespace Me.Amon.Model.Pwd
 
             // Guid
             GuidAtt guid = new GuidAtt();
-            guid.Name = Rec.RegTime;
-            guid.Data = Rec.CatId;
-            guid.SetSpec(GuidAtt.SPEC_GUID_TPLT, Rec.LibId);
+            guid.Name = Key.RegTime;
+            guid.Data = Key.CatId;
+            guid.SetSpec(GuidAtt.SPEC_GUID_TPLT, Key.LibId);
             list.Add(guid);
 
             // MetaItem
             MetaAtt meta = new MetaAtt();
-            meta.Name = Rec.Title;
-            meta.Data = Rec.MetaKey;
+            meta.Name = Key.Title;
+            meta.Data = Key.MetaKey;
             list.Add(meta);
 
             // LogoItem
             LogoAtt logo = new LogoAtt();
-            logo.Name = Rec.IcoName;
-            logo.Data = Rec.IcoMemo;
-            logo.Path = Rec.IcoPath;
+            logo.Name = Key.IcoName;
+            logo.Data = Key.IcoMemo;
+            logo.Path = Key.IcoPath;
             list.Add(logo);
 
             // HintItem
             HintAtt hint = new HintAtt();
-            hint.Data = Rec.GtdId;
-            hint.Name = Rec.GtdMemo;
+            hint.Data = Key.GtdId;
+            hint.Name = Key.GtdMemo;
             list.Add(hint);
 
             // 处理每一个数据
             string[] arr = key.Split(AAtt.SP_SQL_EE);
-            int o = 1;
-            for (int i = 0, j = arr.Length - 1; i < j; i += 1)
+            int i = 0;
+            int j = arr.Length - 1;
+            while (i < j)
             {
-                string s = arr[i] + AAtt.SP_SQL_KV;
-                int dn = s.IndexOf(AAtt.SP_SQL_KV);
-                int dd = s.IndexOf(AAtt.SP_SQL_KV, dn + 1);
-                int ds = s.IndexOf(AAtt.SP_SQL_KV, dd + 1);
-
-                int type = int.Parse(s.Substring(0, dn));
-                string name = s.Substring(dn + 1, dd - dn - 1);
-                string data = s.Substring(dd + 1, ds - dd - 1);
-                string spec = s.Substring(ds + 1);
-                AAtt item = AAtt.GetInstance(type, name, data);
-                item.Order = (o++).ToString();
-                if (spec.Length > 0)
+                string[] tmp = arr[i].Split(AAtt.SP_SQL_KV);
+                if (tmp.Length < 5)
                 {
-                    item.DecodeSpec(spec, AAtt.SP_SQL_KV);
+                    return;
                 }
+
+                if (!CharUtil.IsValidateLong(tmp[1]))
+                {
+                    return;
+                }
+                AAtt item = AAtt.GetInstance(int.Parse(tmp[1]), tmp[2], tmp[3]);
+                item.Id = tmp[0];
+                item.Order = (++i).ToString();
+                item.DecodeSpec(tmp, 4);
                 list.Add(item);
             }
         }
@@ -327,49 +324,44 @@ namespace Me.Amon.Model.Pwd
         public void Encode()
         {
             GuidAtt guid = (GuidAtt)_AttList[AAtt.PWDS_HEAD_GUID];
-            Rec.RegTime = guid.Name;
+            Key.RegTime = guid.Name;
             //Rec.CatId = guid.Data;
-            Rec.LibId = guid.GetSpec(GuidAtt.SPEC_GUID_TPLT);
+            Key.LibId = guid.GetSpec(GuidAtt.SPEC_GUID_TPLT);
 
             // MetaItem
             MetaAtt meta = (MetaAtt)_AttList[AAtt.PWDS_HEAD_META];
             //Rec.Title = Rec.IsUpdate ? AAtt.SP_TPL_LS + meta.Name + '_' + header.RegDate + Att.SP_TPL_RS : meta.Name;
-            Rec.Title = meta.Name;
-            Rec.MetaKey = meta.Data;
+            Key.Title = meta.Name;
+            Key.MetaKey = meta.Data;
 
             // LogoItem
             LogoAtt logo = (LogoAtt)_AttList[AAtt.PWDS_HEAD_LOGO];
-            Rec.IcoName = logo.Name;
-            Rec.IcoMemo = logo.Data;
-            Rec.IcoPath = logo.Path;
+            Key.IcoName = logo.Name;
+            Key.IcoMemo = logo.Data;
+            Key.IcoPath = logo.Path;
 
             // HintItem
             HintAtt hint = (HintAtt)_AttList[AAtt.PWDS_HEAD_HINT];
-            Rec.GtdId = hint.Data;
-            Rec.GtdMemo = hint.Name;
+            Key.GtdId = hint.Data;
+            Key.GtdMemo = hint.Name;
 
             // 字符串拼接
             StringBuilder buf = new StringBuilder();
             for (int i = AAtt.HEAD_SIZE, j = _AttList.Count; i < j; i += 1)
             {
                 AAtt item = _AttList[i];
-                buf.Append(item.Type);
-                buf.Append(AAtt.SP_SQL_KV);
-                buf.Append(item.Name);
-                buf.Append(AAtt.SP_SQL_KV);
-                buf.Append(item.Data);
+                buf.Append(item.Id).Append(AAtt.SP_SQL_KV);
+                buf.Append(item.Type).Append(AAtt.SP_SQL_KV);
+                buf.Append(item.Name).Append(AAtt.SP_SQL_KV);
+                buf.Append(item.Data).Append(AAtt.SP_SQL_KV);
                 buf.Append(item.EncodeSpec(AAtt.SP_SQL_KV));
                 buf.Append(AAtt.SP_SQL_EE);
             }
 
             // 加密版本
-            Rec.CipherVer = ISec.SEC_AES;
+            Key.CipherVer = ISec.SEC_AES;
 
-            if (_Key == null)
-            {
-                _Key = new Key();
-            }
-            _Key.Data = _UserModel.EncodeKey(buf.ToString());
+            Key.Password = _UserModel.EncodeKey(buf.ToString());
 
             _AttList.Clear();
         }
@@ -390,7 +382,7 @@ namespace Me.Amon.Model.Pwd
             }
 
             Clear();
-            Rec = new Rec();
+            Key = new Key();
 
             foreach (string tmp in list)
             {
@@ -445,11 +437,11 @@ namespace Me.Amon.Model.Pwd
             }
 
             Clear();
-            Rec = new Rec();
+            _Key = new Key();
 
             if (reader.MoveToAttribute("Cat"))
             {
-                Rec.CatId = reader.ReadContentAsString();
+                Key.CatId = reader.ReadContentAsString();
             }
 
             do
@@ -480,8 +472,8 @@ namespace Me.Amon.Model.Pwd
                 return false;
             }
 
-            writer.WriteStartElement("Key");
-            writer.WriteElementString("Cat", Rec.CatId);
+            writer.WriteStartElement("Rec");
+            writer.WriteElementString("Cat", Key.CatId);
             foreach (AAtt att in _AttList)
             {
                 writer.WriteStartElement("Att");

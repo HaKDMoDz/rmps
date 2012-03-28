@@ -129,7 +129,7 @@ namespace Me.Amon.Pwd.Pro
             if ((_DataModel.LibModified & IEnv.KEY_APWD) > 0)
             {
                 CbName.Items.Clear();
-                foreach (LibHeader header in _DataModel.LibList)
+                foreach (Lib header in _DataModel.LibList)
                 {
                     CbName.Items.Add(header);
                 }
@@ -138,7 +138,7 @@ namespace Me.Amon.Pwd.Pro
 
             _Att = att;
 
-            CbName.SelectedItem = new LibHeader { Id = att.GetSpec(GuidAtt.SPEC_GUID_TPLT) };
+            CbName.SelectedItem = new Lib { Id = att.GetSpec(GuidAtt.SPEC_GUID_TPLT) };
             PbCard.Visible = _Att.GetSpec(GuidAtt.SPEC_GUID_TPLT) == IEnv.LIB_CARD;
             CbName.Focus();
             return true;
@@ -150,7 +150,7 @@ namespace Me.Amon.Pwd.Pro
 
         public bool Save()
         {
-            LibHeader header = CbName.SelectedItem as LibHeader;
+            Lib header = CbName.SelectedItem as Lib;
             if (header == null || header.Id == "0")
             {
                 return false;

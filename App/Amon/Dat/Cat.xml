@@ -1,5305 +1,1170 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Amon>
+﻿<Amon>
   <Cats>
     <Cat>
       <Order>0</Order>
       <Id>0</Id>
       <Parent>winshineapwd0000</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>默认类别</Text>
       <Tips>默认类别</Tips>
       <Icon>4ee3162000250620</Icon>
-      <Meta />
-      <Memo />
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>13</Order>
       <Id>qqqqqaabdvredvsv</Id>
       <Parent>sctfxrcwrqygwvxb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>Web IM</Text>
       <Tips>Web IM</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>17</Order>
       <Id>qqqqqaabwwawrctc</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>租房</Text>
       <Tips>租房</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>14</Order>
       <Id>qqqqqaagbftdvbys</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>学习</Text>
       <Tips>学习</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>14</Order>
       <Id>qqqqqaagdwexyzts</Id>
       <Parent>sctfxrcwcvzybzxc</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>Yahoo</Text>
       <Tips>Yahoo</Tips>
       <Icon>4ee43c0e01b0a24c</Icon>
-      <Meta />
-      <Memo />
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>16</Order>
       <Id>qqqqqaagdwwwgfay</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>收藏</Text>
       <Tips>收藏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>2</Order>
       <Id>qqqqqaagqzsgzbvy</Id>
       <Parent>sctfxrcwcvzybzxc</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>139</Text>
       <Tips>139</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>4</Order>
       <Id>qqqqqaarsaqferfb</Id>
       <Parent>sctfxrcwrqygwvxb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>Google Talk</Text>
       <Tips>Google Talk</Tips>
-      <Icon />
+      <Icon/>
       <Meta>im:gtalk</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>6</Order>
       <Id>qqqqqaarsaqffqxb</Id>
       <Parent>sctfxrcwrqygwvxb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>ICQ</Text>
       <Tips>ICQ</Tips>
       <Icon>4ee43a800207f948</Icon>
       <Meta>im:icq</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>3</Order>
       <Id>qqqqqaarsawbbcrx</Id>
       <Parent>sctfxrcwcvzybzxc</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>163</Text>
       <Tips>163</Tips>
       <Icon>4ee43b5602cd30c8</Icon>
-      <Meta />
-      <Memo />
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>16</Order>
       <Id>qqqqqaarsawbdydv</Id>
       <Parent>sctfxrcwrqygwvxb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>网易POPO</Text>
       <Tips>网易POPO</Tips>
-      <Icon />
+      <Icon/>
       <Meta>im:popo</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>9</Order>
       <Id>qqqqqaarsawbgeyz</Id>
       <Parent>sctfxrcwcvzybzxc</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>Gmail</Text>
       <Tips>Gmail</Tips>
       <Icon>4ee43bae048ddfac</Icon>
-      <Meta />
-      <Memo />
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>15</Order>
       <Id>qqqqqaarsawbqczc</Id>
       <Parent>sctfxrcwrqygwvxb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>Yahoo! Messenger</Text>
       <Tips>Yahoo! Messenger</Tips>
       <Icon>4ee43a9202f798a4</Icon>
       <Meta>im:yahoo</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>10</Order>
       <Id>qqqqqaarsawbtwye</Id>
       <Parent>sctfxrcwcvzybzxc</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>Live</Text>
       <Tips>Live</Tips>
       <Icon>4ee43bca0031c888</Icon>
-      <Meta />
-      <Memo />
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>12</Order>
       <Id>qqqqqaarsawbwgzw</Id>
       <Parent>sctfxrcwrqygwvxb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>UC</Text>
       <Tips>UC</Tips>
       <Icon>4ee43ad801fbd12c</Icon>
       <Meta>im:uc</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>8</Order>
       <Id>qqqqqaarsawbxxsb</Id>
       <Parent>sctfxrcwrqygwvxb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>Lava-Lava</Text>
       <Tips>Lava-Lava</Tips>
       <Icon>4ee43ae8033f3128</Icon>
       <Meta>im:lava</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>10</Order>
       <Id>qqqqqaarsawbzesy</Id>
       <Parent>sctfxrcwrqygwvxb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>QQ</Text>
       <Tips>QQ</Tips>
       <Icon>4ee43aba05cb57f0</Icon>
       <Meta>im:qq</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>14</Order>
       <Id>qqqqqaarsawgfbwa</Id>
       <Parent>sctfxrcwrqygwvxb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>Windows Live Messenger</Text>
       <Tips>Windows Live Messenger</Tips>
       <Icon>4ee43a3b04ca93e8</Icon>
       <Meta>im:wlm</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>5</Order>
       <Id>qqqqqaarsawgqcst</Id>
       <Parent>qqqqqaarsawtrver</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>邮政储蓄</Text>
       <Tips>邮政储蓄</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>2</Order>
       <Id>qqqqqaarsawgseyv</Id>
       <Parent>qqqqqaarsawtrver</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>工商银行</Text>
       <Tips>工商银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>4</Order>
       <Id>qqqqqaarsawgzsdy</Id>
       <Parent>qqqqqaarsawtrver</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>交通银行</Text>
       <Tips>交通银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>6</Order>
       <Id>qqqqqaarsawtbrye</Id>
       <Parent>qqqqqaarsawtrver</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>招商银行</Text>
       <Tips>招商银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>5</Order>
       <Id>qqqqqaarsawteyre</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>新闻</Text>
       <Tips>新闻</Tips>
-      <Icon />
+      <Icon/>
       <Meta>news</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>7</Order>
       <Id>qqqqqaarsawtrver</Id>
       <Parent>winshineapwd0000</Parent>
+      <IsLeaf>false</IsLeaf>
       <Text>银行账号</Text>
       <Tips>银行账号</Tips>
       <Icon>4ee3163b0425c6d8</Icon>
       <Meta>bank</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>3</Order>
       <Id>qqqqqaarsawttysf</Id>
       <Parent>qqqqqaarsawtrver</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>建设银行</Text>
       <Tips>建设银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>7</Order>
       <Id>qqqqqaarsawtvwwd</Id>
       <Parent>qqqqqaarsawtrver</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>中国银行</Text>
       <Tips>中国银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>12</Order>
       <Id>qqqqqaarsawyqsxv</Id>
       <Parent>sctfxrcwcvzybzxc</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>Sina</Text>
       <Tips>Sina</Tips>
       <Icon>4ee43bf1042bf4e0</Icon>
-      <Meta />
-      <Memo />
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>2</Order>
       <Id>qqqqqaarsdbfadcg</Id>
       <Parent>qqqqqaarsdbrzsby</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>亲朋好友</Text>
       <Tips>亲朋好友</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>7</Order>
       <Id>qqqqqaarsdbfsfcs</Id>
       <Parent>qqqqqaarsdbrzsby</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>其它</Text>
       <Tips>其它</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>3</Order>
       <Id>qqqqqaarsdbrdecf</Id>
       <Parent>qqqqqaarsdbrzsby</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>大学同学</Text>
       <Tips>大学同学</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>4</Order>
       <Id>qqqqqaarsdbrtayv</Id>
       <Parent>qqqqqaarsdbrzsby</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>中学同学</Text>
       <Tips>中学同学</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>1</Order>
       <Id>qqqqqaarsdbrxzxc</Id>
       <Parent>qqqqqaarsdbrzsby</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>商务同事</Text>
       <Tips>商务同事</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>8</Order>
       <Id>qqqqqaarsdbrzsby</Id>
       <Parent>winshineapwd0000</Parent>
+      <IsLeaf>false</IsLeaf>
       <Text>通讯名录</Text>
       <Tips>通讯名录</Tips>
       <Icon>4ee3164300bf25fc</Icon>
-      <Meta />
-      <Memo />
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>6</Order>
       <Id>qqqqqaarwwqzddvz</Id>
       <Parent>winshineapwd0000</Parent>
+      <IsLeaf>false</IsLeaf>
       <Text>软件注册</Text>
       <Tips>软件注册</Tips>
       <Icon>4ee3163703b607d0</Icon>
       <Meta>soft</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>13</Order>
       <Id>qqqqqaatsgsdxtac</Id>
       <Parent>sctfxrcwcvzybzxc</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>Tom</Text>
       <Tips>Tom</Tips>
       <Icon>4ee43bfe00e4483c</Icon>
-      <Meta />
-      <Memo />
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>11</Order>
       <Id>qqqqqaatsgsswrdv</Id>
       <Parent>sctfxrcwrqygwvxb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>Skype</Text>
       <Tips>Skype</Tips>
       <Icon>4ee43aaa05e9fe08</Icon>
       <Meta>im:skype</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>13</Order>
       <Id>qqqqqaatsgttxwsr</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>开发</Text>
       <Tips>开发</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>9</Order>
       <Id>qqqqqaavaqddvafs</Id>
       <Parent>winshineapwd0000</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>记事便签</Text>
       <Tips>记事便签</Tips>
       <Icon>4ee31640006e02e4</Icon>
       <Meta>note</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>3</Order>
       <Id>qqqqqaavvfxtyrgf</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>网盘</Text>
       <Tips>网盘</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>10</Order>
       <Id>qqqqqaavvqqafqaq</Id>
       <Parent>winshineapwd0000</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>公司账号</Text>
       <Tips>公司账号</Tips>
       <Icon>4ee3166204a7d628</Icon>
       <Meta>corp</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>4</Order>
       <Id>qqqqqaavwrebqxrs</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>下载</Text>
       <Tips>下载</Tips>
-      <Icon />
+      <Icon/>
       <Meta>download</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>1</Order>
       <Id>qqqqqaavwrevdbyr</Id>
       <Parent>qqqqqaarsawtrver</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>网上银行</Text>
       <Tips>网上银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>11</Order>
       <Id>qqqqqaavwsctcrzt</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>娱乐</Text>
       <Tips>娱乐</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>10</Order>
       <Id>qqqqqaavwsctebqw</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>影视</Text>
       <Tips>影视</Tips>
-      <Icon />
+      <Icon/>
       <Meta>vedio</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>12</Order>
       <Id>qqqqqaavwscvsdcs</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>购物</Text>
       <Tips>购物</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>8</Order>
       <Id>qqqqqaavwscvwqez</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>求职</Text>
       <Tips>求职</Tips>
-      <Icon />
+      <Icon/>
       <Meta>job</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>5</Order>
       <Id>qqqqqaavwsdaxdyg</Id>
       <Parent>qqqqqaarsdbrzsby</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>小学同学</Text>
       <Tips>小学同学</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>7</Order>
       <Id>qqqqqaavwsdsarvg</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>博客</Text>
       <Tips>博客</Tips>
-      <Icon />
+      <Icon/>
       <Meta>blog</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>9</Order>
       <Id>qqqqqaavwsdsedgg</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>交友</Text>
       <Tips>交友</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>22</Order>
       <Id>qqqqqaavwsdsrgtz</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>其它</Text>
       <Tips>其它</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>6</Order>
       <Id>qqqqqaavwsdwtdvx</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>论坛</Text>
       <Tips>论坛</Tips>
-      <Icon />
+      <Icon/>
       <Meta>bbs</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>5</Order>
       <Id>qqqqqaaytgscbqfy</Id>
       <Parent>sctfxrcwcvzybzxc</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>AOL</Text>
       <Tips>AOL</Tips>
       <Icon>4ee43b7000179e7c</Icon>
-      <Meta />
-      <Memo />
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>1</Order>
       <Id>qqqqqazddcwbgefx</Id>
       <Parent>sctfxrcwrbwrzcyq</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>单机游戏</Text>
       <Tips>单机游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>2</Order>
       <Id>qqqqqazddcwbyrqz</Id>
       <Parent>sctfxrcwrbwrzcyq</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>联机游戏</Text>
       <Tips>联机游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>3</Order>
       <Id>qqqqqazddcwyawsa</Id>
       <Parent>sctfxrcwrbwrzcyq</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>网络游戏</Text>
       <Tips>网络游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>5</Order>
       <Id>qqqqqazddcwyxwre</Id>
       <Parent>sctfxrcwrbwrzcyq</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>网络视频</Text>
       <Tips>网络视频</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>4</Order>
       <Id>qqqqqazddcwyzgxa</Id>
       <Parent>sctfxrcwrbwrzcyq</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>网页游戏</Text>
       <Tips>网页游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>7</Order>
       <Id>qqqqqazddcxbqtba</Id>
       <Parent>qqqqqaarwwqzddvz</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>系统安全</Text>
       <Tips>系统安全</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>2</Order>
       <Id>qqqqqazddcxgdfex</Id>
       <Parent>qqqqqaarwwqzddvz</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>办公软件</Text>
       <Tips>办公软件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>1</Order>
       <Id>qqqqqazddcxgesfv</Id>
       <Parent>qqqqqaarwwqzddvz</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>操作系统</Text>
       <Tips>操作系统</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>5</Order>
       <Id>qqqqqazddcxggrrt</Id>
       <Parent>qqqqqaarwwqzddvz</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>即时通讯</Text>
       <Tips>即时通讯</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>3</Order>
       <Id>qqqqqazddcxgrgwy</Id>
       <Parent>qqqqqaarwwqzddvz</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>文字输入</Text>
       <Tips>文字输入</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>4</Order>
       <Id>qqqqqazddcxgvfcv</Id>
       <Parent>qqqqqaarwwqzddvz</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>上传下载</Text>
       <Tips>上传下载</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>6</Order>
       <Id>qqqqqazddcxgyzqe</Id>
       <Parent>qqqqqaarwwqzddvz</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>桌面管理</Text>
       <Tips>桌面管理</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>8</Order>
       <Id>qqqqqazddcxqqycx</Id>
       <Parent>sctfxrcwcvzybzxc</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>eYou</Text>
       <Tips>eYou</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>2</Order>
       <Id>qqqqqazdddgcaaqs</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>WebOS</Text>
       <Tips>WebOS</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>1</Order>
       <Id>qqqqqazdddvgtbdv</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>OpenID</Text>
       <Tips>OpenID</Tips>
       <Icon>4ee4398a033da380</Icon>
-      <Meta />
-      <Memo />
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>4</Order>
       <Id>qqqqqazdqcqfdsyy</Id>
       <Parent>sctfxrcwcvzybzxc</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>188</Text>
       <Tips>188</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>4</Order>
       <Id>qqqqqazdvzcgdzea</Id>
       <Parent>qqqqqazdvzctvwfs</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>其它文件</Text>
       <Tips>其它文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>2</Order>
       <Id>qqqqqazdvzcgqfbt</Id>
       <Parent>qqqqqazdvzctvwfs</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>图像文件</Text>
       <Tips>图像文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>3</Order>
       <Id>qqqqqazdvzcgxavr</Id>
       <Parent>qqqqqazdvzctvwfs</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>媒体文件</Text>
       <Tips>媒体文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>11</Order>
       <Id>qqqqqazdvzctvwfs</Id>
       <Parent>winshineapwd0000</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>文件加密</Text>
       <Tips>文件加密</Tips>
       <Icon>4ee3164e04db7f8c</Icon>
       <Meta>file</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>1</Order>
       <Id>qqqqqazdvzctyszc</Id>
       <Parent>qqqqqazdvzctvwfs</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>文本文件</Text>
       <Tips>文本文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>21</Order>
       <Id>qqqqqazearaxvsax</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>办公</Text>
       <Tips>办公</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>3</Order>
       <Id>qqqqqazebgyffdbv</Id>
       <Parent>sctfxrcwrqygwvxb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>Fetion</Text>
       <Tips>Fetion</Tips>
       <Icon>4ee43ac9003e7380</Icon>
       <Meta>im:fetion</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>15</Order>
       <Id>qqqqqazessaefwaz</Id>
       <Parent>sctfxrcwcvzybzxc</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>Yeah</Text>
       <Tips>Yeah</Tips>
       <Icon>4ee43c1b01a408e8</Icon>
-      <Meta />
-      <Memo />
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>1</Order>
       <Id>qqqqqazeswxrcztw</Id>
       <Parent>sctfxrcwcvzybzxc</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>126</Text>
       <Tips>126</Tips>
       <Icon>4ee43b450121f5b0</Icon>
-      <Meta />
-      <Memo />
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>2</Order>
       <Id>qqqqqazeyvfygcqd</Id>
       <Parent>winshineapwd0000</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>网址收藏</Text>
       <Tips>网址收藏</Tips>
       <Icon>4ee3162705b6e338</Icon>
       <Meta>link</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>6</Order>
       <Id>qqqqqazgxzwvezxv</Id>
       <Parent>qqqqqaarsdbrzsby</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>公共服务</Text>
       <Tips>公共服务</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>11</Order>
       <Id>qqqqqazqaeabdede</Id>
       <Parent>sctfxrcwcvzybzxc</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>Sohu</Text>
       <Tips>Sohu</Tips>
       <Icon>4ee43bdf005e57f4</Icon>
-      <Meta />
-      <Memo />
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>19</Order>
       <Id>qqqqqazqbbdgdbqr</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>创业</Text>
       <Tips>创业</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>18</Order>
       <Id>qqqqqazqxwgteqgf</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>餐饮</Text>
       <Tips>餐饮</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>20</Order>
       <Id>qqqqqazsvasfszew</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>记事</Text>
       <Tips>记事</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>7</Order>
       <Id>qqqqqazsvasvtaqv</Id>
       <Parent>sctfxrcwrqygwvxb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>jabber</Text>
       <Tips>jabber</Tips>
-      <Icon />
+      <Icon/>
       <Meta>im:jabber</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>12</Order>
       <Id>qqqqqazttgeszezt</Id>
       <Parent>winshineapwd0000</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>单位转换</Text>
       <Tips>单位转换</Tips>
       <Icon>4ee3165800fe04e8</Icon>
       <Meta>unit</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>7</Order>
       <Id>qqqqqazvcdfaqzfb</Id>
       <Parent>sctfxrcwcvzybzxc</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>Email</Text>
       <Tips>Email</Tips>
       <Icon>4ee43b9200518524</Icon>
-      <Meta />
-      <Memo />
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>6</Order>
       <Id>qqqqqazvcdfqfyzy</Id>
       <Parent>sctfxrcwcvzybzxc</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>Baidu</Text>
       <Tips>Baidu</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
+      <Icon/>
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>5</Order>
       <Id>qqqqqazvcdrybycc</Id>
       <Parent>sctfxrcwrqygwvxb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>KC</Text>
       <Tips>KC</Tips>
-      <Icon />
+      <Icon/>
       <Meta>im:kc</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>1</Order>
       <Id>qqqqqazvcdryecbw</Id>
       <Parent>sctfxrcwrqygwvxb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>51</Text>
       <Tips>51</Tips>
       <Icon>4ee43af802729578</Icon>
       <Meta>im:51</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>8</Order>
       <Id>qqqqqazvdcdbsfqz</Id>
       <Parent>qqqqqazvdcdrqygy</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>1年内</Text>
       <Tips>1年以内的计划任务</Tips>
-      <Icon />
+      <Icon/>
       <Meta>task:1year</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>1</Order>
       <Id>qqqqqazvdcdfvqdq</Id>
       <Parent>qqqqqazvdcdrqygy</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>30分钟内</Text>
       <Tips>30分钟以内的计划任务</Tips>
-      <Icon />
+      <Icon/>
       <Meta>task:30minute</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>6</Order>
       <Id>qqqqqazvdcdgfzre</Id>
       <Parent>qqqqqazvdcdrqygy</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>1周内</Text>
       <Tips>1周以内的计划任务</Tips>
-      <Icon />
+      <Icon/>
       <Meta>task:1week</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>5</Order>
       <Id>qqqqqazvdcdgxdae</Id>
       <Parent>qqqqqazvdcdrqygy</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>2天内</Text>
       <Tips>2天以内的计划任务</Tips>
-      <Icon />
+      <Icon/>
       <Meta>task:2day</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>7</Order>
       <Id>qqqqqazvdcdgyrfy</Id>
       <Parent>qqqqqazvdcdrqygy</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>1月内</Text>
       <Tips>1月以内的计划任务</Tips>
-      <Icon />
+      <Icon/>
       <Meta>task:1month</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>13</Order>
       <Id>qqqqqazvdcdrqygy</Id>
       <Parent>winshineapwd0000</Parent>
+      <IsLeaf>false</IsLeaf>
       <Text>计划任务</Text>
       <Tips>计划任务</Tips>
       <Icon>4ee3164b058c3f98</Icon>
       <Meta>task</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>2</Order>
       <Id>qqqqqazvdcdtargs</Id>
       <Parent>qqqqqazvdcdrqygy</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>1小时内</Text>
       <Tips>1小时以内的计划任务</Tips>
-      <Icon />
+      <Icon/>
       <Meta>task:1hour</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>3</Order>
       <Id>qqqqqazvdcdtesfc</Id>
       <Parent>qqqqqazvdcdrqygy</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>2小时内</Text>
       <Tips>2小时以内的计划任务</Tips>
-      <Icon />
+      <Icon/>
       <Meta>task:2hour</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>4</Order>
       <Id>qqqqqazvdcdttyte</Id>
       <Parent>qqqqqazvdcdrqygy</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>1天内</Text>
       <Tips>1天以内的计划任务</Tips>
-      <Icon />
+      <Icon/>
       <Meta>task:1day</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>9</Order>
       <Id>qqqqqazxrgtewewq</Id>
       <Parent>sctfxrcwrqygwvxb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>meebo</Text>
       <Tips>meebo</Tips>
       <Icon>4ee43b0802e1d974</Icon>
       <Meta>im:meebo</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>2</Order>
       <Id>qqqqqazxrybbbtrw</Id>
       <Parent>sctfxrcwrqygwvxb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>eBuddy</Text>
       <Tips>eBuddy</Tips>
       <Icon>4ee43b18026ab1f0</Icon>
       <Meta>im:ebuddy</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>15</Order>
       <Id>qqqqqazyztadabqd</Id>
       <Parent>sctfxrcwcecbyarb</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>微博</Text>
       <Tips>微博</Tips>
-      <Icon />
+      <Icon/>
       <Meta>mlog</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>1</Order>
       <Id>sctfxrcwcecbyarb</Id>
       <Parent>winshineapwd0000</Parent>
+      <IsLeaf>false</IsLeaf>
       <Text>网络注册</Text>
       <Tips>网络注册</Tips>
       <Icon>4ee3162302724ec4</Icon>
-      <Meta />
-      <Memo />
+      <Meta/>
+      <Memo/>
     </Cat>
     <Cat>
       <Order>5</Order>
       <Id>sctfxrcwcvzybzxc</Id>
       <Parent>winshineapwd0000</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>电子邮件</Text>
       <Tips>电子邮件</Tips>
       <Icon>4ee31633037103d8</Icon>
       <Meta>mail</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>3</Order>
       <Id>sctfxrcwrbwrzcyq</Id>
       <Parent>winshineapwd0000</Parent>
+      <IsLeaf>false</IsLeaf>
       <Text>游戏娱乐</Text>
       <Tips>游戏娱乐</Tips>
       <Icon>4ee3162b023c1264</Icon>
       <Meta>game</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>4</Order>
       <Id>sctfxrcwrqygwvxb</Id>
       <Parent>winshineapwd0000</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>即时通讯</Text>
       <Tips>即时通讯</Tips>
       <Icon>4ee3162f03d6e7d4</Icon>
       <Meta>im</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
     <Cat>
       <Order>14</Order>
       <Id>sctfxrcwvqwdeczc</Id>
       <Parent>winshineapwd0000</Parent>
+      <IsLeaf>true</IsLeaf>
       <Text>其它账号</Text>
       <Tips>其它账号</Tips>
       <Icon>4ee3165c00dfd978</Icon>
       <Meta>rest</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>0</Order>
-      <Id>0</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>默认类别</Text>
-      <Tips>默认类别</Tips>
-      <Icon>4ee3162000250620</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>13</Order>
-      <Id>qqqqqaabdvredvsv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Web IM</Text>
-      <Tips>Web IM</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>17</Order>
-      <Id>qqqqqaabwwawrctc</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>租房</Text>
-      <Tips>租房</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>14</Order>
-      <Id>qqqqqaagbftdvbys</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>学习</Text>
-      <Tips>学习</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>14</Order>
-      <Id>qqqqqaagdwexyzts</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Yahoo</Text>
-      <Tips>Yahoo</Tips>
-      <Icon>4ee43c0e01b0a24c</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>16</Order>
-      <Id>qqqqqaagdwwwgfay</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>收藏</Text>
-      <Tips>收藏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqaagqzsgzbvy</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>139</Text>
-      <Tips>139</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqaarsaqferfb</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Google Talk</Text>
-      <Tips>Google Talk</Tips>
-      <Icon />
-      <Meta>im:gtalk</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqaarsaqffqxb</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>ICQ</Text>
-      <Tips>ICQ</Tips>
-      <Icon>4ee43a800207f948</Icon>
-      <Meta>im:icq</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqaarsawbbcrx</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>163</Text>
-      <Tips>163</Tips>
-      <Icon>4ee43b5602cd30c8</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>16</Order>
-      <Id>qqqqqaarsawbdydv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>网易POPO</Text>
-      <Tips>网易POPO</Tips>
-      <Icon />
-      <Meta>im:popo</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>9</Order>
-      <Id>qqqqqaarsawbgeyz</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Gmail</Text>
-      <Tips>Gmail</Tips>
-      <Icon>4ee43bae048ddfac</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>15</Order>
-      <Id>qqqqqaarsawbqczc</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Yahoo! Messenger</Text>
-      <Tips>Yahoo! Messenger</Tips>
-      <Icon>4ee43a9202f798a4</Icon>
-      <Meta>im:yahoo</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>10</Order>
-      <Id>qqqqqaarsawbtwye</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Live</Text>
-      <Tips>Live</Tips>
-      <Icon>4ee43bca0031c888</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>12</Order>
-      <Id>qqqqqaarsawbwgzw</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>UC</Text>
-      <Tips>UC</Tips>
-      <Icon>4ee43ad801fbd12c</Icon>
-      <Meta>im:uc</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqaarsawbxxsb</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Lava-Lava</Text>
-      <Tips>Lava-Lava</Tips>
-      <Icon>4ee43ae8033f3128</Icon>
-      <Meta>im:lava</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>10</Order>
-      <Id>qqqqqaarsawbzesy</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>QQ</Text>
-      <Tips>QQ</Tips>
-      <Icon>4ee43aba05cb57f0</Icon>
-      <Meta>im:qq</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>14</Order>
-      <Id>qqqqqaarsawgfbwa</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Windows Live Messenger</Text>
-      <Tips>Windows Live Messenger</Tips>
-      <Icon>4ee43a3b04ca93e8</Icon>
-      <Meta>im:wlm</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqaarsawgqcst</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>邮政储蓄</Text>
-      <Tips>邮政储蓄</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqaarsawgseyv</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>工商银行</Text>
-      <Tips>工商银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqaarsawgzsdy</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>交通银行</Text>
-      <Tips>交通银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqaarsawtbrye</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>招商银行</Text>
-      <Tips>招商银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqaarsawteyre</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>新闻</Text>
-      <Tips>新闻</Tips>
-      <Icon />
-      <Meta>news</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqaarsawtrver</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>银行账号</Text>
-      <Tips>银行账号</Tips>
-      <Icon>4ee3163b0425c6d8</Icon>
-      <Meta>bank</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqaarsawttysf</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>建设银行</Text>
-      <Tips>建设银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqaarsawtvwwd</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>中国银行</Text>
-      <Tips>中国银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>12</Order>
-      <Id>qqqqqaarsawyqsxv</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Sina</Text>
-      <Tips>Sina</Tips>
-      <Icon>4ee43bf1042bf4e0</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqaarsdbfadcg</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>亲朋好友</Text>
-      <Tips>亲朋好友</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqaarsdbfsfcs</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>其它</Text>
-      <Tips>其它</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqaarsdbrdecf</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>大学同学</Text>
-      <Tips>大学同学</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqaarsdbrtayv</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>中学同学</Text>
-      <Tips>中学同学</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqaarsdbrxzxc</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>商务同事</Text>
-      <Tips>商务同事</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqaarsdbrzsby</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>通讯名录</Text>
-      <Tips>通讯名录</Tips>
-      <Icon>4ee3164300bf25fc</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqaarwwqzddvz</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>软件注册</Text>
-      <Tips>软件注册</Tips>
-      <Icon>4ee3163703b607d0</Icon>
-      <Meta>soft</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>13</Order>
-      <Id>qqqqqaatsgsdxtac</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Tom</Text>
-      <Tips>Tom</Tips>
-      <Icon>4ee43bfe00e4483c</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>11</Order>
-      <Id>qqqqqaatsgsswrdv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Skype</Text>
-      <Tips>Skype</Tips>
-      <Icon>4ee43aaa05e9fe08</Icon>
-      <Meta>im:skype</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>13</Order>
-      <Id>qqqqqaatsgttxwsr</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>开发</Text>
-      <Tips>开发</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>9</Order>
-      <Id>qqqqqaavaqddvafs</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>记事便签</Text>
-      <Tips>记事便签</Tips>
-      <Icon>4ee31640006e02e4</Icon>
-      <Meta>note</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqaavvfxtyrgf</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>网盘</Text>
-      <Tips>网盘</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>10</Order>
-      <Id>qqqqqaavvqqafqaq</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>公司账号</Text>
-      <Tips>公司账号</Tips>
-      <Icon>4ee3166204a7d628</Icon>
-      <Meta>corp</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqaavwrebqxrs</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>下载</Text>
-      <Tips>下载</Tips>
-      <Icon />
-      <Meta>download</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqaavwrevdbyr</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>网上银行</Text>
-      <Tips>网上银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>11</Order>
-      <Id>qqqqqaavwsctcrzt</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>娱乐</Text>
-      <Tips>娱乐</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>10</Order>
-      <Id>qqqqqaavwsctebqw</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>影视</Text>
-      <Tips>影视</Tips>
-      <Icon />
-      <Meta>vedio</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>12</Order>
-      <Id>qqqqqaavwscvsdcs</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>购物</Text>
-      <Tips>购物</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqaavwscvwqez</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>求职</Text>
-      <Tips>求职</Tips>
-      <Icon />
-      <Meta>job</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqaavwsdaxdyg</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>小学同学</Text>
-      <Tips>小学同学</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqaavwsdsarvg</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>博客</Text>
-      <Tips>博客</Tips>
-      <Icon />
-      <Meta>blog</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>9</Order>
-      <Id>qqqqqaavwsdsedgg</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>交友</Text>
-      <Tips>交友</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>22</Order>
-      <Id>qqqqqaavwsdsrgtz</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>其它</Text>
-      <Tips>其它</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqaavwsdwtdvx</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>论坛</Text>
-      <Tips>论坛</Tips>
-      <Icon />
-      <Meta>bbs</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqaaytgscbqfy</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>AOL</Text>
-      <Tips>AOL</Tips>
-      <Icon>4ee43b7000179e7c</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazddcwbgefx</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>单机游戏</Text>
-      <Tips>单机游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazddcwbyrqz</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>联机游戏</Text>
-      <Tips>联机游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazddcwyawsa</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>网络游戏</Text>
-      <Tips>网络游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqazddcwyxwre</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>网络视频</Text>
-      <Tips>网络视频</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazddcwyzgxa</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>网页游戏</Text>
-      <Tips>网页游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqazddcxbqtba</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>系统安全</Text>
-      <Tips>系统安全</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazddcxgdfex</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>办公软件</Text>
-      <Tips>办公软件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazddcxgesfv</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>操作系统</Text>
-      <Tips>操作系统</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqazddcxggrrt</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>即时通讯</Text>
-      <Tips>即时通讯</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazddcxgrgwy</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>文字输入</Text>
-      <Tips>文字输入</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazddcxgvfcv</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>上传下载</Text>
-      <Tips>上传下载</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqazddcxgyzqe</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>桌面管理</Text>
-      <Tips>桌面管理</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqazddcxqqycx</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>eYou</Text>
-      <Tips>eYou</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazdddgcaaqs</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>WebOS</Text>
-      <Tips>WebOS</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazdddvgtbdv</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>OpenID</Text>
-      <Tips>OpenID</Tips>
-      <Icon>4ee4398a033da380</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazdqcqfdsyy</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>188</Text>
-      <Tips>188</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazdvzcgdzea</Id>
-      <Parent>qqqqqazdvzctvwfs</Parent>
-      <Text>其它文件</Text>
-      <Tips>其它文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazdvzcgqfbt</Id>
-      <Parent>qqqqqazdvzctvwfs</Parent>
-      <Text>图像文件</Text>
-      <Tips>图像文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazdvzcgxavr</Id>
-      <Parent>qqqqqazdvzctvwfs</Parent>
-      <Text>媒体文件</Text>
-      <Tips>媒体文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>11</Order>
-      <Id>qqqqqazdvzctvwfs</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>文件加密</Text>
-      <Tips>文件加密</Tips>
-      <Icon>4ee3164e04db7f8c</Icon>
-      <Meta>file</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazdvzctyszc</Id>
-      <Parent>qqqqqazdvzctvwfs</Parent>
-      <Text>文本文件</Text>
-      <Tips>文本文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>21</Order>
-      <Id>qqqqqazearaxvsax</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>办公</Text>
-      <Tips>办公</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazebgyffdbv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Fetion</Text>
-      <Tips>Fetion</Tips>
-      <Icon>4ee43ac9003e7380</Icon>
-      <Meta>im:fetion</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>15</Order>
-      <Id>qqqqqazessaefwaz</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Yeah</Text>
-      <Tips>Yeah</Tips>
-      <Icon>4ee43c1b01a408e8</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazeswxrcztw</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>126</Text>
-      <Tips>126</Tips>
-      <Icon>4ee43b450121f5b0</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazeyvfygcqd</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>网址收藏</Text>
-      <Tips>网址收藏</Tips>
-      <Icon>4ee3162705b6e338</Icon>
-      <Meta>link</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqazgxzwvezxv</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>公共服务</Text>
-      <Tips>公共服务</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>11</Order>
-      <Id>qqqqqazqaeabdede</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Sohu</Text>
-      <Tips>Sohu</Tips>
-      <Icon>4ee43bdf005e57f4</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>19</Order>
-      <Id>qqqqqazqbbdgdbqr</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>创业</Text>
-      <Tips>创业</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>18</Order>
-      <Id>qqqqqazqxwgteqgf</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>餐饮</Text>
-      <Tips>餐饮</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>20</Order>
-      <Id>qqqqqazsvasfszew</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>记事</Text>
-      <Tips>记事</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqazsvasvtaqv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>jabber</Text>
-      <Tips>jabber</Tips>
-      <Icon />
-      <Meta>im:jabber</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>12</Order>
-      <Id>qqqqqazttgeszezt</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>单位转换</Text>
-      <Tips>单位转换</Tips>
-      <Icon>4ee3165800fe04e8</Icon>
-      <Meta>unit</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqazvcdfaqzfb</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Email</Text>
-      <Tips>Email</Tips>
-      <Icon>4ee43b9200518524</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqazvcdfqfyzy</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Baidu</Text>
-      <Tips>Baidu</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqazvcdrybycc</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>KC</Text>
-      <Tips>KC</Tips>
-      <Icon />
-      <Meta>im:kc</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazvcdryecbw</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>51</Text>
-      <Tips>51</Tips>
-      <Icon>4ee43af802729578</Icon>
-      <Meta>im:51</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqazvdcdbsfqz</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1年内</Text>
-      <Tips>1年以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1year</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazvdcdfvqdq</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>30分钟内</Text>
-      <Tips>30分钟以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:30minute</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqazvdcdgfzre</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1周内</Text>
-      <Tips>1周以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1week</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqazvdcdgxdae</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>2天内</Text>
-      <Tips>2天以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:2day</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqazvdcdgyrfy</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1月内</Text>
-      <Tips>1月以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1month</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>13</Order>
-      <Id>qqqqqazvdcdrqygy</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>计划任务</Text>
-      <Tips>计划任务</Tips>
-      <Icon>4ee3164b058c3f98</Icon>
-      <Meta>task</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazvdcdtargs</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1小时内</Text>
-      <Tips>1小时以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1hour</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazvdcdtesfc</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>2小时内</Text>
-      <Tips>2小时以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:2hour</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazvdcdttyte</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1天内</Text>
-      <Tips>1天以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1day</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>9</Order>
-      <Id>qqqqqazxrgtewewq</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>meebo</Text>
-      <Tips>meebo</Tips>
-      <Icon>4ee43b0802e1d974</Icon>
-      <Meta>im:meebo</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazxrybbbtrw</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>eBuddy</Text>
-      <Tips>eBuddy</Tips>
-      <Icon>4ee43b18026ab1f0</Icon>
-      <Meta>im:ebuddy</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>15</Order>
-      <Id>qqqqqazyztadabqd</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>微博</Text>
-      <Tips>微博</Tips>
-      <Icon />
-      <Meta>mlog</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>sctfxrcwcecbyarb</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>网络注册</Text>
-      <Tips>网络注册</Tips>
-      <Icon>4ee3162302724ec4</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>sctfxrcwcvzybzxc</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>电子邮件</Text>
-      <Tips>电子邮件</Tips>
-      <Icon>4ee31633037103d8</Icon>
-      <Meta>mail</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>sctfxrcwrbwrzcyq</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>游戏娱乐</Text>
-      <Tips>游戏娱乐</Tips>
-      <Icon>4ee3162b023c1264</Icon>
-      <Meta>game</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>sctfxrcwrqygwvxb</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>即时通讯</Text>
-      <Tips>即时通讯</Tips>
-      <Icon>4ee3162f03d6e7d4</Icon>
-      <Meta>im</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>14</Order>
-      <Id>sctfxrcwvqwdeczc</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>其它账号</Text>
-      <Tips>其它账号</Tips>
-      <Icon>4ee3165c00dfd978</Icon>
-      <Meta>rest</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>0</Order>
-      <Id>0</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>默认类别</Text>
-      <Tips>默认类别</Tips>
-      <Icon>4ee3162000250620</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>13</Order>
-      <Id>qqqqqaabdvredvsv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Web IM</Text>
-      <Tips>Web IM</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>17</Order>
-      <Id>qqqqqaabwwawrctc</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>租房</Text>
-      <Tips>租房</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>14</Order>
-      <Id>qqqqqaagbftdvbys</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>学习</Text>
-      <Tips>学习</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>14</Order>
-      <Id>qqqqqaagdwexyzts</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Yahoo</Text>
-      <Tips>Yahoo</Tips>
-      <Icon>4ee43c0e01b0a24c</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>16</Order>
-      <Id>qqqqqaagdwwwgfay</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>收藏</Text>
-      <Tips>收藏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqaagqzsgzbvy</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>139</Text>
-      <Tips>139</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqaarsaqferfb</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Google Talk</Text>
-      <Tips>Google Talk</Tips>
-      <Icon />
-      <Meta>im:gtalk</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqaarsaqffqxb</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>ICQ</Text>
-      <Tips>ICQ</Tips>
-      <Icon>4ee43a800207f948</Icon>
-      <Meta>im:icq</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqaarsawbbcrx</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>163</Text>
-      <Tips>163</Tips>
-      <Icon>4ee43b5602cd30c8</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>16</Order>
-      <Id>qqqqqaarsawbdydv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>网易POPO</Text>
-      <Tips>网易POPO</Tips>
-      <Icon />
-      <Meta>im:popo</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>9</Order>
-      <Id>qqqqqaarsawbgeyz</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Gmail</Text>
-      <Tips>Gmail</Tips>
-      <Icon>4ee43bae048ddfac</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>15</Order>
-      <Id>qqqqqaarsawbqczc</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Yahoo! Messenger</Text>
-      <Tips>Yahoo! Messenger</Tips>
-      <Icon>4ee43a9202f798a4</Icon>
-      <Meta>im:yahoo</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>10</Order>
-      <Id>qqqqqaarsawbtwye</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Live</Text>
-      <Tips>Live</Tips>
-      <Icon>4ee43bca0031c888</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>12</Order>
-      <Id>qqqqqaarsawbwgzw</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>UC</Text>
-      <Tips>UC</Tips>
-      <Icon>4ee43ad801fbd12c</Icon>
-      <Meta>im:uc</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqaarsawbxxsb</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Lava-Lava</Text>
-      <Tips>Lava-Lava</Tips>
-      <Icon>4ee43ae8033f3128</Icon>
-      <Meta>im:lava</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>10</Order>
-      <Id>qqqqqaarsawbzesy</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>QQ</Text>
-      <Tips>QQ</Tips>
-      <Icon>4ee43aba05cb57f0</Icon>
-      <Meta>im:qq</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>14</Order>
-      <Id>qqqqqaarsawgfbwa</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Windows Live Messenger</Text>
-      <Tips>Windows Live Messenger</Tips>
-      <Icon>4ee43a3b04ca93e8</Icon>
-      <Meta>im:wlm</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqaarsawgqcst</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>邮政储蓄</Text>
-      <Tips>邮政储蓄</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqaarsawgseyv</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>工商银行</Text>
-      <Tips>工商银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqaarsawgzsdy</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>交通银行</Text>
-      <Tips>交通银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqaarsawtbrye</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>招商银行</Text>
-      <Tips>招商银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqaarsawteyre</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>新闻</Text>
-      <Tips>新闻</Tips>
-      <Icon />
-      <Meta>news</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqaarsawtrver</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>银行账号</Text>
-      <Tips>银行账号</Tips>
-      <Icon>4ee3163b0425c6d8</Icon>
-      <Meta>bank</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqaarsawttysf</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>建设银行</Text>
-      <Tips>建设银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqaarsawtvwwd</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>中国银行</Text>
-      <Tips>中国银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>12</Order>
-      <Id>qqqqqaarsawyqsxv</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Sina</Text>
-      <Tips>Sina</Tips>
-      <Icon>4ee43bf1042bf4e0</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqaarsdbfadcg</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>亲朋好友</Text>
-      <Tips>亲朋好友</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqaarsdbfsfcs</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>其它</Text>
-      <Tips>其它</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqaarsdbrdecf</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>大学同学</Text>
-      <Tips>大学同学</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqaarsdbrtayv</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>中学同学</Text>
-      <Tips>中学同学</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqaarsdbrxzxc</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>商务同事</Text>
-      <Tips>商务同事</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqaarsdbrzsby</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>通讯名录</Text>
-      <Tips>通讯名录</Tips>
-      <Icon>4ee3164300bf25fc</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqaarwwqzddvz</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>软件注册</Text>
-      <Tips>软件注册</Tips>
-      <Icon>4ee3163703b607d0</Icon>
-      <Meta>soft</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>13</Order>
-      <Id>qqqqqaatsgsdxtac</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Tom</Text>
-      <Tips>Tom</Tips>
-      <Icon>4ee43bfe00e4483c</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>11</Order>
-      <Id>qqqqqaatsgsswrdv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Skype</Text>
-      <Tips>Skype</Tips>
-      <Icon>4ee43aaa05e9fe08</Icon>
-      <Meta>im:skype</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>13</Order>
-      <Id>qqqqqaatsgttxwsr</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>开发</Text>
-      <Tips>开发</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>9</Order>
-      <Id>qqqqqaavaqddvafs</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>记事便签</Text>
-      <Tips>记事便签</Tips>
-      <Icon>4ee31640006e02e4</Icon>
-      <Meta>note</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqaavvfxtyrgf</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>网盘</Text>
-      <Tips>网盘</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>10</Order>
-      <Id>qqqqqaavvqqafqaq</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>公司账号</Text>
-      <Tips>公司账号</Tips>
-      <Icon>4ee3166204a7d628</Icon>
-      <Meta>corp</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqaavwrebqxrs</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>下载</Text>
-      <Tips>下载</Tips>
-      <Icon />
-      <Meta>download</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqaavwrevdbyr</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>网上银行</Text>
-      <Tips>网上银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>11</Order>
-      <Id>qqqqqaavwsctcrzt</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>娱乐</Text>
-      <Tips>娱乐</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>10</Order>
-      <Id>qqqqqaavwsctebqw</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>影视</Text>
-      <Tips>影视</Tips>
-      <Icon />
-      <Meta>vedio</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>12</Order>
-      <Id>qqqqqaavwscvsdcs</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>购物</Text>
-      <Tips>购物</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqaavwscvwqez</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>求职</Text>
-      <Tips>求职</Tips>
-      <Icon />
-      <Meta>job</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqaavwsdaxdyg</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>小学同学</Text>
-      <Tips>小学同学</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqaavwsdsarvg</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>博客</Text>
-      <Tips>博客</Tips>
-      <Icon />
-      <Meta>blog</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>9</Order>
-      <Id>qqqqqaavwsdsedgg</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>交友</Text>
-      <Tips>交友</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>22</Order>
-      <Id>qqqqqaavwsdsrgtz</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>其它</Text>
-      <Tips>其它</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqaavwsdwtdvx</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>论坛</Text>
-      <Tips>论坛</Tips>
-      <Icon />
-      <Meta>bbs</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqaaytgscbqfy</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>AOL</Text>
-      <Tips>AOL</Tips>
-      <Icon>4ee43b7000179e7c</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazddcwbgefx</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>单机游戏</Text>
-      <Tips>单机游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazddcwbyrqz</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>联机游戏</Text>
-      <Tips>联机游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazddcwyawsa</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>网络游戏</Text>
-      <Tips>网络游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqazddcwyxwre</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>网络视频</Text>
-      <Tips>网络视频</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazddcwyzgxa</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>网页游戏</Text>
-      <Tips>网页游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqazddcxbqtba</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>系统安全</Text>
-      <Tips>系统安全</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazddcxgdfex</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>办公软件</Text>
-      <Tips>办公软件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazddcxgesfv</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>操作系统</Text>
-      <Tips>操作系统</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqazddcxggrrt</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>即时通讯</Text>
-      <Tips>即时通讯</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazddcxgrgwy</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>文字输入</Text>
-      <Tips>文字输入</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazddcxgvfcv</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>上传下载</Text>
-      <Tips>上传下载</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqazddcxgyzqe</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>桌面管理</Text>
-      <Tips>桌面管理</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqazddcxqqycx</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>eYou</Text>
-      <Tips>eYou</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazdddgcaaqs</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>WebOS</Text>
-      <Tips>WebOS</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazdddvgtbdv</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>OpenID</Text>
-      <Tips>OpenID</Tips>
-      <Icon>4ee4398a033da380</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazdqcqfdsyy</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>188</Text>
-      <Tips>188</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazdvzcgdzea</Id>
-      <Parent>qqqqqazdvzctvwfs</Parent>
-      <Text>其它文件</Text>
-      <Tips>其它文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazdvzcgqfbt</Id>
-      <Parent>qqqqqazdvzctvwfs</Parent>
-      <Text>图像文件</Text>
-      <Tips>图像文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazdvzcgxavr</Id>
-      <Parent>qqqqqazdvzctvwfs</Parent>
-      <Text>媒体文件</Text>
-      <Tips>媒体文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>11</Order>
-      <Id>qqqqqazdvzctvwfs</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>文件加密</Text>
-      <Tips>文件加密</Tips>
-      <Icon>4ee3164e04db7f8c</Icon>
-      <Meta>file</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazdvzctyszc</Id>
-      <Parent>qqqqqazdvzctvwfs</Parent>
-      <Text>文本文件</Text>
-      <Tips>文本文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>21</Order>
-      <Id>qqqqqazearaxvsax</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>办公</Text>
-      <Tips>办公</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazebgyffdbv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Fetion</Text>
-      <Tips>Fetion</Tips>
-      <Icon>4ee43ac9003e7380</Icon>
-      <Meta>im:fetion</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>15</Order>
-      <Id>qqqqqazessaefwaz</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Yeah</Text>
-      <Tips>Yeah</Tips>
-      <Icon>4ee43c1b01a408e8</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazeswxrcztw</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>126</Text>
-      <Tips>126</Tips>
-      <Icon>4ee43b450121f5b0</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazeyvfygcqd</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>网址收藏</Text>
-      <Tips>网址收藏</Tips>
-      <Icon>4ee3162705b6e338</Icon>
-      <Meta>link</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqazgxzwvezxv</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>公共服务</Text>
-      <Tips>公共服务</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>11</Order>
-      <Id>qqqqqazqaeabdede</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Sohu</Text>
-      <Tips>Sohu</Tips>
-      <Icon>4ee43bdf005e57f4</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>19</Order>
-      <Id>qqqqqazqbbdgdbqr</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>创业</Text>
-      <Tips>创业</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>18</Order>
-      <Id>qqqqqazqxwgteqgf</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>餐饮</Text>
-      <Tips>餐饮</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>20</Order>
-      <Id>qqqqqazsvasfszew</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>记事</Text>
-      <Tips>记事</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqazsvasvtaqv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>jabber</Text>
-      <Tips>jabber</Tips>
-      <Icon />
-      <Meta>im:jabber</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>12</Order>
-      <Id>qqqqqazttgeszezt</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>单位转换</Text>
-      <Tips>单位转换</Tips>
-      <Icon>4ee3165800fe04e8</Icon>
-      <Meta>unit</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqazvcdfaqzfb</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Email</Text>
-      <Tips>Email</Tips>
-      <Icon>4ee43b9200518524</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqazvcdfqfyzy</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Baidu</Text>
-      <Tips>Baidu</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqazvcdrybycc</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>KC</Text>
-      <Tips>KC</Tips>
-      <Icon />
-      <Meta>im:kc</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazvcdryecbw</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>51</Text>
-      <Tips>51</Tips>
-      <Icon>4ee43af802729578</Icon>
-      <Meta>im:51</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqazvdcdbsfqz</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1年内</Text>
-      <Tips>1年以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1year</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazvdcdfvqdq</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>30分钟内</Text>
-      <Tips>30分钟以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:30minute</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqazvdcdgfzre</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1周内</Text>
-      <Tips>1周以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1week</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqazvdcdgxdae</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>2天内</Text>
-      <Tips>2天以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:2day</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqazvdcdgyrfy</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1月内</Text>
-      <Tips>1月以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1month</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>13</Order>
-      <Id>qqqqqazvdcdrqygy</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>计划任务</Text>
-      <Tips>计划任务</Tips>
-      <Icon>4ee3164b058c3f98</Icon>
-      <Meta>task</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazvdcdtargs</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1小时内</Text>
-      <Tips>1小时以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1hour</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazvdcdtesfc</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>2小时内</Text>
-      <Tips>2小时以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:2hour</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazvdcdttyte</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1天内</Text>
-      <Tips>1天以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1day</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>9</Order>
-      <Id>qqqqqazxrgtewewq</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>meebo</Text>
-      <Tips>meebo</Tips>
-      <Icon>4ee43b0802e1d974</Icon>
-      <Meta>im:meebo</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazxrybbbtrw</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>eBuddy</Text>
-      <Tips>eBuddy</Tips>
-      <Icon>4ee43b18026ab1f0</Icon>
-      <Meta>im:ebuddy</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>15</Order>
-      <Id>qqqqqazyztadabqd</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>微博</Text>
-      <Tips>微博</Tips>
-      <Icon />
-      <Meta>mlog</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>sctfxrcwcecbyarb</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>网络注册</Text>
-      <Tips>网络注册</Tips>
-      <Icon>4ee3162302724ec4</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>sctfxrcwcvzybzxc</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>电子邮件</Text>
-      <Tips>电子邮件</Tips>
-      <Icon>4ee31633037103d8</Icon>
-      <Meta>mail</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>sctfxrcwrbwrzcyq</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>游戏娱乐</Text>
-      <Tips>游戏娱乐</Tips>
-      <Icon>4ee3162b023c1264</Icon>
-      <Meta>game</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>sctfxrcwrqygwvxb</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>即时通讯</Text>
-      <Tips>即时通讯</Tips>
-      <Icon>4ee3162f03d6e7d4</Icon>
-      <Meta>im</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>14</Order>
-      <Id>sctfxrcwvqwdeczc</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>其它账号</Text>
-      <Tips>其它账号</Tips>
-      <Icon>4ee3165c00dfd978</Icon>
-      <Meta>rest</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>0</Order>
-      <Id>0</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>默认类别</Text>
-      <Tips>默认类别</Tips>
-      <Icon>4ee3162000250620</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>13</Order>
-      <Id>qqqqqaabdvredvsv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Web IM</Text>
-      <Tips>Web IM</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>17</Order>
-      <Id>qqqqqaabwwawrctc</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>租房</Text>
-      <Tips>租房</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>14</Order>
-      <Id>qqqqqaagbftdvbys</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>学习</Text>
-      <Tips>学习</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>14</Order>
-      <Id>qqqqqaagdwexyzts</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Yahoo</Text>
-      <Tips>Yahoo</Tips>
-      <Icon>4ee43c0e01b0a24c</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>16</Order>
-      <Id>qqqqqaagdwwwgfay</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>收藏</Text>
-      <Tips>收藏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqaagqzsgzbvy</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>139</Text>
-      <Tips>139</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqaarsaqferfb</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Google Talk</Text>
-      <Tips>Google Talk</Tips>
-      <Icon />
-      <Meta>im:gtalk</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqaarsaqffqxb</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>ICQ</Text>
-      <Tips>ICQ</Tips>
-      <Icon>4ee43a800207f948</Icon>
-      <Meta>im:icq</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqaarsawbbcrx</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>163</Text>
-      <Tips>163</Tips>
-      <Icon>4ee43b5602cd30c8</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>16</Order>
-      <Id>qqqqqaarsawbdydv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>网易POPO</Text>
-      <Tips>网易POPO</Tips>
-      <Icon />
-      <Meta>im:popo</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>9</Order>
-      <Id>qqqqqaarsawbgeyz</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Gmail</Text>
-      <Tips>Gmail</Tips>
-      <Icon>4ee43bae048ddfac</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>15</Order>
-      <Id>qqqqqaarsawbqczc</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Yahoo! Messenger</Text>
-      <Tips>Yahoo! Messenger</Tips>
-      <Icon>4ee43a9202f798a4</Icon>
-      <Meta>im:yahoo</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>10</Order>
-      <Id>qqqqqaarsawbtwye</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Live</Text>
-      <Tips>Live</Tips>
-      <Icon>4ee43bca0031c888</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>12</Order>
-      <Id>qqqqqaarsawbwgzw</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>UC</Text>
-      <Tips>UC</Tips>
-      <Icon>4ee43ad801fbd12c</Icon>
-      <Meta>im:uc</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqaarsawbxxsb</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Lava-Lava</Text>
-      <Tips>Lava-Lava</Tips>
-      <Icon>4ee43ae8033f3128</Icon>
-      <Meta>im:lava</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>10</Order>
-      <Id>qqqqqaarsawbzesy</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>QQ</Text>
-      <Tips>QQ</Tips>
-      <Icon>4ee43aba05cb57f0</Icon>
-      <Meta>im:qq</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>14</Order>
-      <Id>qqqqqaarsawgfbwa</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Windows Live Messenger</Text>
-      <Tips>Windows Live Messenger</Tips>
-      <Icon>4ee43a3b04ca93e8</Icon>
-      <Meta>im:wlm</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqaarsawgqcst</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>邮政储蓄</Text>
-      <Tips>邮政储蓄</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqaarsawgseyv</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>工商银行</Text>
-      <Tips>工商银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqaarsawgzsdy</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>交通银行</Text>
-      <Tips>交通银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqaarsawtbrye</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>招商银行</Text>
-      <Tips>招商银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqaarsawteyre</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>新闻</Text>
-      <Tips>新闻</Tips>
-      <Icon />
-      <Meta>news</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqaarsawtrver</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>银行账号</Text>
-      <Tips>银行账号</Tips>
-      <Icon>4ee3163b0425c6d8</Icon>
-      <Meta>bank</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqaarsawttysf</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>建设银行</Text>
-      <Tips>建设银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqaarsawtvwwd</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>中国银行</Text>
-      <Tips>中国银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>12</Order>
-      <Id>qqqqqaarsawyqsxv</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Sina</Text>
-      <Tips>Sina</Tips>
-      <Icon>4ee43bf1042bf4e0</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqaarsdbfadcg</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>亲朋好友</Text>
-      <Tips>亲朋好友</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqaarsdbfsfcs</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>其它</Text>
-      <Tips>其它</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqaarsdbrdecf</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>大学同学</Text>
-      <Tips>大学同学</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqaarsdbrtayv</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>中学同学</Text>
-      <Tips>中学同学</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqaarsdbrxzxc</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>商务同事</Text>
-      <Tips>商务同事</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqaarsdbrzsby</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>通讯名录</Text>
-      <Tips>通讯名录</Tips>
-      <Icon>4ee3164300bf25fc</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqaarwwqzddvz</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>软件注册</Text>
-      <Tips>软件注册</Tips>
-      <Icon>4ee3163703b607d0</Icon>
-      <Meta>soft</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>13</Order>
-      <Id>qqqqqaatsgsdxtac</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Tom</Text>
-      <Tips>Tom</Tips>
-      <Icon>4ee43bfe00e4483c</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>11</Order>
-      <Id>qqqqqaatsgsswrdv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Skype</Text>
-      <Tips>Skype</Tips>
-      <Icon>4ee43aaa05e9fe08</Icon>
-      <Meta>im:skype</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>13</Order>
-      <Id>qqqqqaatsgttxwsr</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>开发</Text>
-      <Tips>开发</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>9</Order>
-      <Id>qqqqqaavaqddvafs</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>记事便签</Text>
-      <Tips>记事便签</Tips>
-      <Icon>4ee31640006e02e4</Icon>
-      <Meta>note</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqaavvfxtyrgf</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>网盘</Text>
-      <Tips>网盘</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>10</Order>
-      <Id>qqqqqaavvqqafqaq</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>公司账号</Text>
-      <Tips>公司账号</Tips>
-      <Icon>4ee3166204a7d628</Icon>
-      <Meta>corp</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqaavwrebqxrs</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>下载</Text>
-      <Tips>下载</Tips>
-      <Icon />
-      <Meta>download</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqaavwrevdbyr</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>网上银行</Text>
-      <Tips>网上银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>11</Order>
-      <Id>qqqqqaavwsctcrzt</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>娱乐</Text>
-      <Tips>娱乐</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>10</Order>
-      <Id>qqqqqaavwsctebqw</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>影视</Text>
-      <Tips>影视</Tips>
-      <Icon />
-      <Meta>vedio</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>12</Order>
-      <Id>qqqqqaavwscvsdcs</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>购物</Text>
-      <Tips>购物</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqaavwscvwqez</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>求职</Text>
-      <Tips>求职</Tips>
-      <Icon />
-      <Meta>job</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqaavwsdaxdyg</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>小学同学</Text>
-      <Tips>小学同学</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqaavwsdsarvg</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>博客</Text>
-      <Tips>博客</Tips>
-      <Icon />
-      <Meta>blog</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>9</Order>
-      <Id>qqqqqaavwsdsedgg</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>交友</Text>
-      <Tips>交友</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>22</Order>
-      <Id>qqqqqaavwsdsrgtz</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>其它</Text>
-      <Tips>其它</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqaavwsdwtdvx</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>论坛</Text>
-      <Tips>论坛</Tips>
-      <Icon />
-      <Meta>bbs</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqaaytgscbqfy</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>AOL</Text>
-      <Tips>AOL</Tips>
-      <Icon>4ee43b7000179e7c</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazddcwbgefx</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>单机游戏</Text>
-      <Tips>单机游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazddcwbyrqz</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>联机游戏</Text>
-      <Tips>联机游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazddcwyawsa</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>网络游戏</Text>
-      <Tips>网络游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqazddcwyxwre</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>网络视频</Text>
-      <Tips>网络视频</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazddcwyzgxa</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>网页游戏</Text>
-      <Tips>网页游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqazddcxbqtba</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>系统安全</Text>
-      <Tips>系统安全</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazddcxgdfex</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>办公软件</Text>
-      <Tips>办公软件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazddcxgesfv</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>操作系统</Text>
-      <Tips>操作系统</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqazddcxggrrt</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>即时通讯</Text>
-      <Tips>即时通讯</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazddcxgrgwy</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>文字输入</Text>
-      <Tips>文字输入</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazddcxgvfcv</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>上传下载</Text>
-      <Tips>上传下载</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqazddcxgyzqe</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>桌面管理</Text>
-      <Tips>桌面管理</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqazddcxqqycx</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>eYou</Text>
-      <Tips>eYou</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazdddgcaaqs</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>WebOS</Text>
-      <Tips>WebOS</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazdddvgtbdv</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>OpenID</Text>
-      <Tips>OpenID</Tips>
-      <Icon>4ee4398a033da380</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazdqcqfdsyy</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>188</Text>
-      <Tips>188</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazdvzcgdzea</Id>
-      <Parent>qqqqqazdvzctvwfs</Parent>
-      <Text>其它文件</Text>
-      <Tips>其它文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazdvzcgqfbt</Id>
-      <Parent>qqqqqazdvzctvwfs</Parent>
-      <Text>图像文件</Text>
-      <Tips>图像文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazdvzcgxavr</Id>
-      <Parent>qqqqqazdvzctvwfs</Parent>
-      <Text>媒体文件</Text>
-      <Tips>媒体文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>11</Order>
-      <Id>qqqqqazdvzctvwfs</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>文件加密</Text>
-      <Tips>文件加密</Tips>
-      <Icon>4ee3164e04db7f8c</Icon>
-      <Meta>file</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazdvzctyszc</Id>
-      <Parent>qqqqqazdvzctvwfs</Parent>
-      <Text>文本文件</Text>
-      <Tips>文本文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>21</Order>
-      <Id>qqqqqazearaxvsax</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>办公</Text>
-      <Tips>办公</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazebgyffdbv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Fetion</Text>
-      <Tips>Fetion</Tips>
-      <Icon>4ee43ac9003e7380</Icon>
-      <Meta>im:fetion</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>15</Order>
-      <Id>qqqqqazessaefwaz</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Yeah</Text>
-      <Tips>Yeah</Tips>
-      <Icon>4ee43c1b01a408e8</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazeswxrcztw</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>126</Text>
-      <Tips>126</Tips>
-      <Icon>4ee43b450121f5b0</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazeyvfygcqd</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>网址收藏</Text>
-      <Tips>网址收藏</Tips>
-      <Icon>4ee3162705b6e338</Icon>
-      <Meta>link</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqazgxzwvezxv</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>公共服务</Text>
-      <Tips>公共服务</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>11</Order>
-      <Id>qqqqqazqaeabdede</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Sohu</Text>
-      <Tips>Sohu</Tips>
-      <Icon>4ee43bdf005e57f4</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>19</Order>
-      <Id>qqqqqazqbbdgdbqr</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>创业</Text>
-      <Tips>创业</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>18</Order>
-      <Id>qqqqqazqxwgteqgf</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>餐饮</Text>
-      <Tips>餐饮</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>20</Order>
-      <Id>qqqqqazsvasfszew</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>记事</Text>
-      <Tips>记事</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqazsvasvtaqv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>jabber</Text>
-      <Tips>jabber</Tips>
-      <Icon />
-      <Meta>im:jabber</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>12</Order>
-      <Id>qqqqqazttgeszezt</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>单位转换</Text>
-      <Tips>单位转换</Tips>
-      <Icon>4ee3165800fe04e8</Icon>
-      <Meta>unit</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqazvcdfaqzfb</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Email</Text>
-      <Tips>Email</Tips>
-      <Icon>4ee43b9200518524</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqazvcdfqfyzy</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Baidu</Text>
-      <Tips>Baidu</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqazvcdrybycc</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>KC</Text>
-      <Tips>KC</Tips>
-      <Icon />
-      <Meta>im:kc</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazvcdryecbw</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>51</Text>
-      <Tips>51</Tips>
-      <Icon>4ee43af802729578</Icon>
-      <Meta>im:51</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqazvdcdbsfqz</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1年内</Text>
-      <Tips>1年以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1year</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazvdcdfvqdq</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>30分钟内</Text>
-      <Tips>30分钟以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:30minute</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqazvdcdgfzre</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1周内</Text>
-      <Tips>1周以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1week</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqazvdcdgxdae</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>2天内</Text>
-      <Tips>2天以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:2day</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqazvdcdgyrfy</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1月内</Text>
-      <Tips>1月以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1month</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>13</Order>
-      <Id>qqqqqazvdcdrqygy</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>计划任务</Text>
-      <Tips>计划任务</Tips>
-      <Icon>4ee3164b058c3f98</Icon>
-      <Meta>task</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazvdcdtargs</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1小时内</Text>
-      <Tips>1小时以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1hour</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazvdcdtesfc</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>2小时内</Text>
-      <Tips>2小时以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:2hour</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazvdcdttyte</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1天内</Text>
-      <Tips>1天以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1day</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>9</Order>
-      <Id>qqqqqazxrgtewewq</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>meebo</Text>
-      <Tips>meebo</Tips>
-      <Icon>4ee43b0802e1d974</Icon>
-      <Meta>im:meebo</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazxrybbbtrw</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>eBuddy</Text>
-      <Tips>eBuddy</Tips>
-      <Icon>4ee43b18026ab1f0</Icon>
-      <Meta>im:ebuddy</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>15</Order>
-      <Id>qqqqqazyztadabqd</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>微博</Text>
-      <Tips>微博</Tips>
-      <Icon />
-      <Meta>mlog</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>sctfxrcwcecbyarb</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>网络注册</Text>
-      <Tips>网络注册</Tips>
-      <Icon>4ee3162302724ec4</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>sctfxrcwcvzybzxc</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>电子邮件</Text>
-      <Tips>电子邮件</Tips>
-      <Icon>4ee31633037103d8</Icon>
-      <Meta>mail</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>sctfxrcwrbwrzcyq</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>游戏娱乐</Text>
-      <Tips>游戏娱乐</Tips>
-      <Icon>4ee3162b023c1264</Icon>
-      <Meta>game</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>sctfxrcwrqygwvxb</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>即时通讯</Text>
-      <Tips>即时通讯</Tips>
-      <Icon>4ee3162f03d6e7d4</Icon>
-      <Meta>im</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>14</Order>
-      <Id>sctfxrcwvqwdeczc</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>其它账号</Text>
-      <Tips>其它账号</Tips>
-      <Icon>4ee3165c00dfd978</Icon>
-      <Meta>rest</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>0</Order>
-      <Id>0</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>默认类别</Text>
-      <Tips>默认类别</Tips>
-      <Icon>4ee3162000250620</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>13</Order>
-      <Id>qqqqqaabdvredvsv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Web IM</Text>
-      <Tips>Web IM</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>17</Order>
-      <Id>qqqqqaabwwawrctc</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>租房</Text>
-      <Tips>租房</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>14</Order>
-      <Id>qqqqqaagbftdvbys</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>学习</Text>
-      <Tips>学习</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>14</Order>
-      <Id>qqqqqaagdwexyzts</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Yahoo</Text>
-      <Tips>Yahoo</Tips>
-      <Icon>4ee43c0e01b0a24c</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>16</Order>
-      <Id>qqqqqaagdwwwgfay</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>收藏</Text>
-      <Tips>收藏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqaagqzsgzbvy</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>139</Text>
-      <Tips>139</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqaarsaqferfb</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Google Talk</Text>
-      <Tips>Google Talk</Tips>
-      <Icon />
-      <Meta>im:gtalk</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqaarsaqffqxb</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>ICQ</Text>
-      <Tips>ICQ</Tips>
-      <Icon>4ee43a800207f948</Icon>
-      <Meta>im:icq</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqaarsawbbcrx</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>163</Text>
-      <Tips>163</Tips>
-      <Icon>4ee43b5602cd30c8</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>16</Order>
-      <Id>qqqqqaarsawbdydv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>网易POPO</Text>
-      <Tips>网易POPO</Tips>
-      <Icon />
-      <Meta>im:popo</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>9</Order>
-      <Id>qqqqqaarsawbgeyz</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Gmail</Text>
-      <Tips>Gmail</Tips>
-      <Icon>4ee43bae048ddfac</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>15</Order>
-      <Id>qqqqqaarsawbqczc</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Yahoo! Messenger</Text>
-      <Tips>Yahoo! Messenger</Tips>
-      <Icon>4ee43a9202f798a4</Icon>
-      <Meta>im:yahoo</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>10</Order>
-      <Id>qqqqqaarsawbtwye</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Live</Text>
-      <Tips>Live</Tips>
-      <Icon>4ee43bca0031c888</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>12</Order>
-      <Id>qqqqqaarsawbwgzw</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>UC</Text>
-      <Tips>UC</Tips>
-      <Icon>4ee43ad801fbd12c</Icon>
-      <Meta>im:uc</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqaarsawbxxsb</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Lava-Lava</Text>
-      <Tips>Lava-Lava</Tips>
-      <Icon>4ee43ae8033f3128</Icon>
-      <Meta>im:lava</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>10</Order>
-      <Id>qqqqqaarsawbzesy</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>QQ</Text>
-      <Tips>QQ</Tips>
-      <Icon>4ee43aba05cb57f0</Icon>
-      <Meta>im:qq</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>14</Order>
-      <Id>qqqqqaarsawgfbwa</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Windows Live Messenger</Text>
-      <Tips>Windows Live Messenger</Tips>
-      <Icon>4ee43a3b04ca93e8</Icon>
-      <Meta>im:wlm</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqaarsawgqcst</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>邮政储蓄</Text>
-      <Tips>邮政储蓄</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqaarsawgseyv</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>工商银行</Text>
-      <Tips>工商银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqaarsawgzsdy</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>交通银行</Text>
-      <Tips>交通银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqaarsawtbrye</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>招商银行</Text>
-      <Tips>招商银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqaarsawteyre</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>新闻</Text>
-      <Tips>新闻</Tips>
-      <Icon />
-      <Meta>news</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqaarsawtrver</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>银行账号</Text>
-      <Tips>银行账号</Tips>
-      <Icon>4ee3163b0425c6d8</Icon>
-      <Meta>bank</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqaarsawttysf</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>建设银行</Text>
-      <Tips>建设银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqaarsawtvwwd</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>中国银行</Text>
-      <Tips>中国银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>12</Order>
-      <Id>qqqqqaarsawyqsxv</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Sina</Text>
-      <Tips>Sina</Tips>
-      <Icon>4ee43bf1042bf4e0</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqaarsdbfadcg</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>亲朋好友</Text>
-      <Tips>亲朋好友</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqaarsdbfsfcs</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>其它</Text>
-      <Tips>其它</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqaarsdbrdecf</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>大学同学</Text>
-      <Tips>大学同学</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqaarsdbrtayv</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>中学同学</Text>
-      <Tips>中学同学</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqaarsdbrxzxc</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>商务同事</Text>
-      <Tips>商务同事</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqaarsdbrzsby</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>通讯名录</Text>
-      <Tips>通讯名录</Tips>
-      <Icon>4ee3164300bf25fc</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqaarwwqzddvz</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>软件注册</Text>
-      <Tips>软件注册</Tips>
-      <Icon>4ee3163703b607d0</Icon>
-      <Meta>soft</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>13</Order>
-      <Id>qqqqqaatsgsdxtac</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Tom</Text>
-      <Tips>Tom</Tips>
-      <Icon>4ee43bfe00e4483c</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>11</Order>
-      <Id>qqqqqaatsgsswrdv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Skype</Text>
-      <Tips>Skype</Tips>
-      <Icon>4ee43aaa05e9fe08</Icon>
-      <Meta>im:skype</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>13</Order>
-      <Id>qqqqqaatsgttxwsr</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>开发</Text>
-      <Tips>开发</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>9</Order>
-      <Id>qqqqqaavaqddvafs</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>记事便签</Text>
-      <Tips>记事便签</Tips>
-      <Icon>4ee31640006e02e4</Icon>
-      <Meta>note</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqaavvfxtyrgf</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>网盘</Text>
-      <Tips>网盘</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>10</Order>
-      <Id>qqqqqaavvqqafqaq</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>公司账号</Text>
-      <Tips>公司账号</Tips>
-      <Icon>4ee3166204a7d628</Icon>
-      <Meta>corp</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqaavwrebqxrs</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>下载</Text>
-      <Tips>下载</Tips>
-      <Icon />
-      <Meta>download</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqaavwrevdbyr</Id>
-      <Parent>qqqqqaarsawtrver</Parent>
-      <Text>网上银行</Text>
-      <Tips>网上银行</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>11</Order>
-      <Id>qqqqqaavwsctcrzt</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>娱乐</Text>
-      <Tips>娱乐</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>10</Order>
-      <Id>qqqqqaavwsctebqw</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>影视</Text>
-      <Tips>影视</Tips>
-      <Icon />
-      <Meta>vedio</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>12</Order>
-      <Id>qqqqqaavwscvsdcs</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>购物</Text>
-      <Tips>购物</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqaavwscvwqez</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>求职</Text>
-      <Tips>求职</Tips>
-      <Icon />
-      <Meta>job</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqaavwsdaxdyg</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>小学同学</Text>
-      <Tips>小学同学</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqaavwsdsarvg</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>博客</Text>
-      <Tips>博客</Tips>
-      <Icon />
-      <Meta>blog</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>9</Order>
-      <Id>qqqqqaavwsdsedgg</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>交友</Text>
-      <Tips>交友</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>22</Order>
-      <Id>qqqqqaavwsdsrgtz</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>其它</Text>
-      <Tips>其它</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqaavwsdwtdvx</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>论坛</Text>
-      <Tips>论坛</Tips>
-      <Icon />
-      <Meta>bbs</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqaaytgscbqfy</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>AOL</Text>
-      <Tips>AOL</Tips>
-      <Icon>4ee43b7000179e7c</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazddcwbgefx</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>单机游戏</Text>
-      <Tips>单机游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazddcwbyrqz</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>联机游戏</Text>
-      <Tips>联机游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazddcwyawsa</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>网络游戏</Text>
-      <Tips>网络游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqazddcwyxwre</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>网络视频</Text>
-      <Tips>网络视频</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazddcwyzgxa</Id>
-      <Parent>sctfxrcwrbwrzcyq</Parent>
-      <Text>网页游戏</Text>
-      <Tips>网页游戏</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqazddcxbqtba</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>系统安全</Text>
-      <Tips>系统安全</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazddcxgdfex</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>办公软件</Text>
-      <Tips>办公软件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazddcxgesfv</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>操作系统</Text>
-      <Tips>操作系统</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqazddcxggrrt</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>即时通讯</Text>
-      <Tips>即时通讯</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazddcxgrgwy</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>文字输入</Text>
-      <Tips>文字输入</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazddcxgvfcv</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>上传下载</Text>
-      <Tips>上传下载</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqazddcxgyzqe</Id>
-      <Parent>qqqqqaarwwqzddvz</Parent>
-      <Text>桌面管理</Text>
-      <Tips>桌面管理</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqazddcxqqycx</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>eYou</Text>
-      <Tips>eYou</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazdddgcaaqs</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>WebOS</Text>
-      <Tips>WebOS</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazdddvgtbdv</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>OpenID</Text>
-      <Tips>OpenID</Tips>
-      <Icon>4ee4398a033da380</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazdqcqfdsyy</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>188</Text>
-      <Tips>188</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazdvzcgdzea</Id>
-      <Parent>qqqqqazdvzctvwfs</Parent>
-      <Text>其它文件</Text>
-      <Tips>其它文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazdvzcgqfbt</Id>
-      <Parent>qqqqqazdvzctvwfs</Parent>
-      <Text>图像文件</Text>
-      <Tips>图像文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazdvzcgxavr</Id>
-      <Parent>qqqqqazdvzctvwfs</Parent>
-      <Text>媒体文件</Text>
-      <Tips>媒体文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>11</Order>
-      <Id>qqqqqazdvzctvwfs</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>文件加密</Text>
-      <Tips>文件加密</Tips>
-      <Icon>4ee3164e04db7f8c</Icon>
-      <Meta>file</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazdvzctyszc</Id>
-      <Parent>qqqqqazdvzctvwfs</Parent>
-      <Text>文本文件</Text>
-      <Tips>文本文件</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>21</Order>
-      <Id>qqqqqazearaxvsax</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>办公</Text>
-      <Tips>办公</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazebgyffdbv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>Fetion</Text>
-      <Tips>Fetion</Tips>
-      <Icon>4ee43ac9003e7380</Icon>
-      <Meta>im:fetion</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>15</Order>
-      <Id>qqqqqazessaefwaz</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Yeah</Text>
-      <Tips>Yeah</Tips>
-      <Icon>4ee43c1b01a408e8</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazeswxrcztw</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>126</Text>
-      <Tips>126</Tips>
-      <Icon>4ee43b450121f5b0</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazeyvfygcqd</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>网址收藏</Text>
-      <Tips>网址收藏</Tips>
-      <Icon>4ee3162705b6e338</Icon>
-      <Meta>link</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqazgxzwvezxv</Id>
-      <Parent>qqqqqaarsdbrzsby</Parent>
-      <Text>公共服务</Text>
-      <Tips>公共服务</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>11</Order>
-      <Id>qqqqqazqaeabdede</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Sohu</Text>
-      <Tips>Sohu</Tips>
-      <Icon>4ee43bdf005e57f4</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>19</Order>
-      <Id>qqqqqazqbbdgdbqr</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>创业</Text>
-      <Tips>创业</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>18</Order>
-      <Id>qqqqqazqxwgteqgf</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>餐饮</Text>
-      <Tips>餐饮</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>20</Order>
-      <Id>qqqqqazsvasfszew</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>记事</Text>
-      <Tips>记事</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqazsvasvtaqv</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>jabber</Text>
-      <Tips>jabber</Tips>
-      <Icon />
-      <Meta>im:jabber</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>12</Order>
-      <Id>qqqqqazttgeszezt</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>单位转换</Text>
-      <Tips>单位转换</Tips>
-      <Icon>4ee3165800fe04e8</Icon>
-      <Meta>unit</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqazvcdfaqzfb</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Email</Text>
-      <Tips>Email</Tips>
-      <Icon>4ee43b9200518524</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqazvcdfqfyzy</Id>
-      <Parent>sctfxrcwcvzybzxc</Parent>
-      <Text>Baidu</Text>
-      <Tips>Baidu</Tips>
-      <Icon />
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqazvcdrybycc</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>KC</Text>
-      <Tips>KC</Tips>
-      <Icon />
-      <Meta>im:kc</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazvcdryecbw</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>51</Text>
-      <Tips>51</Tips>
-      <Icon>4ee43af802729578</Icon>
-      <Meta>im:51</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>8</Order>
-      <Id>qqqqqazvdcdbsfqz</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1年内</Text>
-      <Tips>1年以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1year</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>qqqqqazvdcdfvqdq</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>30分钟内</Text>
-      <Tips>30分钟以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:30minute</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>6</Order>
-      <Id>qqqqqazvdcdgfzre</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1周内</Text>
-      <Tips>1周以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1week</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>qqqqqazvdcdgxdae</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>2天内</Text>
-      <Tips>2天以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:2day</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>7</Order>
-      <Id>qqqqqazvdcdgyrfy</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1月内</Text>
-      <Tips>1月以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1month</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>13</Order>
-      <Id>qqqqqazvdcdrqygy</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>计划任务</Text>
-      <Tips>计划任务</Tips>
-      <Icon>4ee3164b058c3f98</Icon>
-      <Meta>task</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazvdcdtargs</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1小时内</Text>
-      <Tips>1小时以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1hour</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>qqqqqazvdcdtesfc</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>2小时内</Text>
-      <Tips>2小时以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:2hour</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>qqqqqazvdcdttyte</Id>
-      <Parent>qqqqqazvdcdrqygy</Parent>
-      <Text>1天内</Text>
-      <Tips>1天以内的计划任务</Tips>
-      <Icon />
-      <Meta>task:1day</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>9</Order>
-      <Id>qqqqqazxrgtewewq</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>meebo</Text>
-      <Tips>meebo</Tips>
-      <Icon>4ee43b0802e1d974</Icon>
-      <Meta>im:meebo</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>2</Order>
-      <Id>qqqqqazxrybbbtrw</Id>
-      <Parent>sctfxrcwrqygwvxb</Parent>
-      <Text>eBuddy</Text>
-      <Tips>eBuddy</Tips>
-      <Icon>4ee43b18026ab1f0</Icon>
-      <Meta>im:ebuddy</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>15</Order>
-      <Id>qqqqqazyztadabqd</Id>
-      <Parent>sctfxrcwcecbyarb</Parent>
-      <Text>微博</Text>
-      <Tips>微博</Tips>
-      <Icon />
-      <Meta>mlog</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>1</Order>
-      <Id>sctfxrcwcecbyarb</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>网络注册</Text>
-      <Tips>网络注册</Tips>
-      <Icon>4ee3162302724ec4</Icon>
-      <Meta />
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>5</Order>
-      <Id>sctfxrcwcvzybzxc</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>电子邮件</Text>
-      <Tips>电子邮件</Tips>
-      <Icon>4ee31633037103d8</Icon>
-      <Meta>mail</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>3</Order>
-      <Id>sctfxrcwrbwrzcyq</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>游戏娱乐</Text>
-      <Tips>游戏娱乐</Tips>
-      <Icon>4ee3162b023c1264</Icon>
-      <Meta>game</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>4</Order>
-      <Id>sctfxrcwrqygwvxb</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>即时通讯</Text>
-      <Tips>即时通讯</Tips>
-      <Icon>4ee3162f03d6e7d4</Icon>
-      <Meta>im</Meta>
-      <Memo />
-    </Cat>
-    <Cat>
-      <Order>14</Order>
-      <Id>sctfxrcwvqwdeczc</Id>
-      <Parent>winshineapwd0000</Parent>
-      <Text>其它账号</Text>
-      <Tips>其它账号</Tips>
-      <Icon>4ee3165c00dfd978</Icon>
-      <Meta>rest</Meta>
-      <Memo />
+      <Memo/>
     </Cat>
   </Cats>
 </Amon>
