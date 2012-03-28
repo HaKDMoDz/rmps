@@ -185,9 +185,10 @@ namespace Me.Amon.Pwd._Lib
             }
 
             _UserModel.DBObject.DeleteVcs(detail);
+            header.Details.Remove(detail);
+            _UserModel.DBObject.SaveVcs(header);
 
             TvLibView.Nodes.Remove(_Selected);
-            header.Details.Remove(detail);
             _DataModel.LibModified = -1;
         }
 

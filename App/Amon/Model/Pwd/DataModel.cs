@@ -38,7 +38,11 @@ namespace Me.Amon.Model.Pwd
             }
             #endregion
 
-            _LibList = _UserModel.DBObject.ListLib();
+            _LibList = new List<Lib>();
+            foreach (Lib lib in _UserModel.DBObject.ListLib())
+            {
+                _LibList.Add(lib);
+            }
             LibModified = 0x7FFFFFFF;
         }
 

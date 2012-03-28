@@ -62,8 +62,8 @@ namespace Me.Amon.Pwd._Lib
                 CbType.Focus();
                 return;
             }
-            string name = TbName.Text;
-            if (!CharUtil.IsValidate(name))
+            string name = TbName.Text.Trim();
+            if (string.IsNullOrEmpty(name))
             {
                 MessageBox.Show("请输入属性名称！");
                 TbName.Focus();

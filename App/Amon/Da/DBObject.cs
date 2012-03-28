@@ -25,17 +25,26 @@ namespace Me.Amon.Da
         {
             _UserModel = userModel;
             _DbPath = Path.Combine(userModel.Home, IEnv.FILE_DB);
-
-            IEmbeddedConfiguration config = Db4oEmbedded.NewConfiguration();
-            config.Common.ObjectClass(typeof(Cat)).ObjectField("Id").Indexed(true);
-            config.Common.ObjectClass(typeof(Key)).ObjectField("Title").Indexed(true);
-            config.Common.ObjectClass(typeof(Key)).ObjectField("MetaKey").Indexed(true);
-            config.Common.ObjectClass(typeof(Lib)).CascadeOnUpdate(true);
-            _Container = Db4oEmbedded.OpenFile(config, _DbPath);
         }
         #endregion
 
         #region 连接管理
+        private IObjectContainer Container
+        {
+            get
+            {
+                if (_Container == null)
+                {
+                    IEmbeddedConfiguration config = Db4oEmbedded.NewConfiguration();
+                    config.Common.ObjectClass(typeof(Cat)).ObjectField("Id").Indexed(true);
+                    config.Common.ObjectClass(typeof(Key)).ObjectField("Title").Indexed(true);
+                    config.Common.ObjectClass(typeof(Key)).ObjectField("MetaKey").Indexed(true);
+                    config.Common.ObjectClass(typeof(Lib)).CascadeOnUpdate(true);
+                    _Container = Db4oEmbedded.OpenFile(config, _DbPath);
+                }
+                return _Container;
+            }
+        }
         public void CloseConnect()
         {
             if (_Container != null)
@@ -80,14 +89,14 @@ namespace Me.Amon.Da
                 vcs.Id = HashUtil.UtcTimeInHex(false);
                 vcs.CreateTime = vcs.UpdateTime;
             }
-            _Container.Store(vcs);
+            Container.Store(vcs);
         }
 
         public void SaveLog(Log log)
         {
             log.Id = HashUtil.UtcTimeInHex(false);
             log.LogTime = DateTime.Now;
-            _Container.Store(log);
+            Container.Store(log);
         }
         #endregion
 
@@ -100,7 +109,7 @@ namespace Me.Amon.Da
         {
             vcs.Operate = DBConst.OPT_DELETE;
             vcs.Version += 1;
-            _Container.Store(vcs);
+            Container.Store(vcs);
         }
 
         /// <summary>
@@ -109,19 +118,19 @@ namespace Me.Amon.Da
         /// <param name="vcs"></param>
         public void DeleteVcs(Vcs vcs)
         {
-            _Container.Delete(vcs);
+            Container.Delete(vcs);
         }
 
         public void DeleteLog(Log log)
         {
-            _Container.Delete(log);
+            Container.Delete(log);
         }
         #endregion
 
         #region 类别操作
         public Cat ReadCat(string catId)
         {
-            IList<Cat> cats = _Container.Query<Cat>(delegate(Cat cat)
+            IList<Cat> cats = Container.Query<Cat>(delegate(Cat cat)
             {
                 return cat.Id == catId;
             });
@@ -136,7 +145,7 @@ namespace Me.Amon.Da
                 return null;
             }
             string[] arr = catMeta.ToLower().Split(' ', ',', ';');
-            IList<Cat> cats = _Container.Query<Cat>(
+            IList<Cat> cats = Container.Query<Cat>(
                 delegate(Cat cat)
                 {
                     return Contains(cat.Meta.ToLower(), arr);
@@ -150,7 +159,7 @@ namespace Me.Amon.Da
 
         public IList<Cat> ListCat(string parentId)
         {
-            IList<Cat> cats = _Container.Query<Cat>(
+            IList<Cat> cats = Container.Query<Cat>(
                 delegate(Cat cat)
                 {
                     return cat.Parent == parentId;
@@ -166,7 +175,7 @@ namespace Me.Amon.Da
         #region 记录操作
         public Key ReadRec(string recId)
         {
-            IList<Key> recs = _Container.Query<Key>(delegate(Key rec)
+            IList<Key> recs = Container.Query<Key>(delegate(Key rec)
             {
                 return rec.Id == recId;
             });
@@ -178,7 +187,7 @@ namespace Me.Amon.Da
         {
             string[] arr = text.ToLower().Split(' ');
 
-            IList<Key> recs = _Container.Query<Key>(
+            IList<Key> recs = Container.Query<Key>(
                 delegate(Key rec)
                 {
                     if (rec.Operate == DBConst.OPT_DELETE)
@@ -199,7 +208,7 @@ namespace Me.Amon.Da
 
         public IList<Key> FindKey(int label)
         {
-            IList<Key> keys = _Container.Query<Key>(delegate(Key key)
+            IList<Key> keys = Container.Query<Key>(delegate(Key key)
             {
                 return key.UserCode == _UserModel.Code && key.Label == label;
             });
@@ -208,7 +217,7 @@ namespace Me.Amon.Da
 
         public IList<Key> ListKey(string catId)
         {
-            IList<Key> keys = _Container.Query<Key>(
+            IList<Key> keys = Container.Query<Key>(
                 delegate(Key key)
                 {
                     if (key.UserCode != _UserModel.Code)
@@ -233,7 +242,7 @@ namespace Me.Amon.Da
         #region 日志操作
         public KeyLog ReadRecLog(string logId)
         {
-            IList<KeyLog> logs = _Container.Query<KeyLog>(delegate(KeyLog log)
+            IList<KeyLog> logs = Container.Query<KeyLog>(delegate(KeyLog log)
             {
                 return log.Id == logId;
             });
@@ -243,7 +252,7 @@ namespace Me.Amon.Da
 
         public IList<KeyLog> ListRecLog(string recId)
         {
-            IList<KeyLog> logs = _Container.Query<KeyLog>(
+            IList<KeyLog> logs = Container.Query<KeyLog>(
                 delegate(KeyLog log)
                 {
                     return log.RefId == recId;
@@ -259,7 +268,7 @@ namespace Me.Amon.Da
         #region 模板操作
         public IList<Lib> ListLib()
         {
-            return _Container.Query<Lib>(
+            return Container.Query<Lib>(
                 delegate(Lib header)
                 {
                     return header.UserCode == _UserModel.Code;
@@ -274,20 +283,20 @@ namespace Me.Amon.Da
         #region 字符操作
         public IList<Udc> ListUdc()
         {
-            return _Container.Query<Udc>();
+            return Container.Query<Udc>();
         }
         #endregion
 
         #region 字符操作
         public IList<Dir> ListDir()
         {
-            return _Container.Query<Dir>();
+            return Container.Query<Dir>();
         }
         #endregion
 
         public IList<MRen> ListRen()
         {
-            return _Container.Query<MRen>();
+            return Container.Query<MRen>();
         }
     }
 }
