@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using Me.Amon.Util;
 
 namespace Me.Amon
 {
@@ -12,15 +13,10 @@ namespace Me.Amon
         [STAThread]
         static void Main()
         {
-            if (!Directory.Exists(IEnv.DIR_DATA))
+            if (!Directory.Exists("Skin"))
             {
-                Directory.CreateDirectory(IEnv.DIR_DATA);
+                BeanUtil.UnZip("Amon.res", ".\\");
             }
-            if (!Directory.Exists(IEnv.DIR_BACK))
-            {
-                Directory.CreateDirectory(IEnv.DIR_BACK);
-            }
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Main main = new Main();

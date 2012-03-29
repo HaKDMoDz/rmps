@@ -125,6 +125,7 @@
             this.MiOnSignUp.Name = "MiOnSignUp";
             this.MiOnSignUp.Size = new System.Drawing.Size(152, 22);
             this.MiOnSignUp.Text = "联机注册(&R)";
+            this.MiOnSignUp.Visible = false;
             this.MiOnSignUp.Click += new System.EventHandler(this.MiOnSignUp_Click);
             // 
             // MiOfSignUp
@@ -132,13 +133,14 @@
             this.MiOfSignUp.Name = "MiOfSignUp";
             this.MiOfSignUp.Size = new System.Drawing.Size(152, 22);
             this.MiOfSignUp.Text = "脱机注册(&N)";
+            this.MiOfSignUp.Visible = false;
             this.MiOfSignUp.Click += new System.EventHandler(this.MiOfSignUp_Click);
             // 
             // MiPcSignUp
             // 
             this.MiPcSignUp.Name = "MiPcSignUp";
             this.MiPcSignUp.Size = new System.Drawing.Size(152, 22);
-            this.MiPcSignUp.Text = "单机注册(&P)";
+            this.MiPcSignUp.Text = "注册(&P)";
             this.MiPcSignUp.Click += new System.EventHandler(this.MiPcSignUp_Click);
             // 
             // MiSep1

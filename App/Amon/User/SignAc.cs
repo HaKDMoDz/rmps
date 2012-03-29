@@ -222,6 +222,7 @@ namespace Me.Amon.User
 
             MiOpen.Visible = true;
             MiSep0.Visible = true;
+            MiPcSignUp.Visible = true;
             MiSignFk.Visible = true;
             MiSep1.Visible = true;
             MiUpgrade.Visible = true;
@@ -285,6 +286,7 @@ namespace Me.Amon.User
 
             MiOpen.Visible = false;
             MiSep0.Visible = false;
+            MiPcSignUp.Visible = false;
             MiSignFk.Visible = false;
             MiSep1.Visible = false;
             MiUpgrade.Visible = false;
