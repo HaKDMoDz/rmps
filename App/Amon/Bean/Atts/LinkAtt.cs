@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Bean.Att
+﻿namespace Me.Amon.Bean.Atts
 {
-    public class LinkAtt : AAtt
+    public class LinkAtt : Att
     {
         public LinkAtt()
             : base(TYPE_LINK, "", "")

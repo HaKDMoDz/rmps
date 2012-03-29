@@ -10,7 +10,7 @@ namespace Me.Amon.Pwd.Pro
 {
     public partial class BeanLink : UserControl, IAttEdit
     {
-        private AAtt _Att;
+        private Att _Att;
         private TextBox _Ctl;
 
         #region 构造函数
@@ -33,7 +33,7 @@ namespace Me.Amon.Pwd.Pro
 
         public string Title { get { return "链接"; } }
 
-        public bool ShowData(AAtt att)
+        public bool ShowData(Att att)
         {
             _Att = att;
 

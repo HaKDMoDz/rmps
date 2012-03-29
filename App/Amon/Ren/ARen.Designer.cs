@@ -32,10 +32,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ARen));
             this.TcRule = new System.Windows.Forms.TabControl();
             this.TpRuleInf = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
+            this.LtInfo = new System.Windows.Forms.Label();
             this.TpRulePre = new System.Windows.Forms.TabPage();
             this.LsRule = new System.Windows.Forms.ListBox();
             this.TpFileAtt = new System.Windows.Forms.TabPage();
+            this.CkArchive = new System.Windows.Forms.CheckBox();
             this.CkHidden = new System.Windows.Forms.CheckBox();
             this.CkReadOnly = new System.Windows.Forms.CheckBox();
             this.LbRule = new System.Windows.Forms.Label();
@@ -52,14 +53,22 @@
             this.PbSave = new System.Windows.Forms.PictureBox();
             this.LbEcho = new System.Windows.Forms.Label();
             this.FdBrowser = new System.Windows.Forms.FolderBrowserDialog();
-            this.CkArchive = new System.Windows.Forms.CheckBox();
+            this.MiImport = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.GvInfo = new System.Windows.Forms.DataGridView();
+            this.KeyCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.KeyInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MiDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.TcRule.SuspendLayout();
             this.TpRuleInf.SuspendLayout();
             this.TpRulePre.SuspendLayout();
             this.TpFileAtt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GvName)).BeginInit();
+            this.CmMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbSave)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GvInfo)).BeginInit();
             this.SuspendLayout();
             // 
             // TcRule
@@ -76,7 +85,8 @@
             // 
             // TpRuleInf
             // 
-            this.TpRuleInf.Controls.Add(this.label2);
+            this.TpRuleInf.Controls.Add(this.GvInfo);
+            this.TpRuleInf.Controls.Add(this.LtInfo);
             this.TpRuleInf.Location = new System.Drawing.Point(4, 22);
             this.TpRuleInf.Name = "TpRuleInf";
             this.TpRuleInf.Padding = new System.Windows.Forms.Padding(3);
@@ -85,14 +95,13 @@
             this.TpRuleInf.Text = "规则说明";
             this.TpRuleInf.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // LtInfo
             // 
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(3, 3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(211, 180);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "label2";
+            this.LtInfo.Location = new System.Drawing.Point(6, 6);
+            this.LtInfo.Name = "LtInfo";
+            this.LtInfo.Size = new System.Drawing.Size(205, 31);
+            this.LtInfo.TabIndex = 0;
+            this.LtInfo.Text = "label2";
             // 
             // TpRulePre
             // 
@@ -108,7 +117,6 @@
             // LsRule
             // 
             this.LsRule.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LsRule.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.LsRule.FormattingEnabled = true;
             this.LsRule.ItemHeight = 12;
             this.LsRule.Location = new System.Drawing.Point(3, 3);
@@ -128,6 +136,16 @@
             this.TpFileAtt.TabIndex = 2;
             this.TpFileAtt.Text = "文件属性";
             this.TpFileAtt.UseVisualStyleBackColor = true;
+            // 
+            // CkArchive
+            // 
+            this.CkArchive.AutoSize = true;
+            this.CkArchive.Location = new System.Drawing.Point(3, 47);
+            this.CkArchive.Name = "CkArchive";
+            this.CkArchive.Size = new System.Drawing.Size(48, 16);
+            this.CkArchive.TabIndex = 2;
+            this.CkArchive.Text = "归档";
+            this.CkArchive.UseVisualStyleBackColor = true;
             // 
             // CkHidden
             // 
@@ -238,8 +256,13 @@
             // 
             // CmMenu
             // 
+            this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MiDelete,
+            this.MiSep0,
+            this.MiImport,
+            this.MiExport});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(61, 4);
+            this.CmMenu.Size = new System.Drawing.Size(118, 76);
             // 
             // PbMenu
             // 
@@ -277,15 +300,69 @@
             // 
             this.FdBrowser.Description = "请选择您要进行重命名的目录：";
             // 
-            // CkArchive
+            // MiImport
             // 
-            this.CkArchive.AutoSize = true;
-            this.CkArchive.Location = new System.Drawing.Point(3, 47);
-            this.CkArchive.Name = "CkArchive";
-            this.CkArchive.Size = new System.Drawing.Size(48, 16);
-            this.CkArchive.TabIndex = 2;
-            this.CkArchive.Text = "归档";
-            this.CkArchive.UseVisualStyleBackColor = true;
+            this.MiImport.Name = "MiImport";
+            this.MiImport.Size = new System.Drawing.Size(117, 22);
+            this.MiImport.Text = "导入(&I)";
+            this.MiImport.Click += new System.EventHandler(this.MiImport_Click);
+            // 
+            // MiExport
+            // 
+            this.MiExport.Name = "MiExport";
+            this.MiExport.Size = new System.Drawing.Size(117, 22);
+            this.MiExport.Text = "导出(&X)";
+            this.MiExport.Click += new System.EventHandler(this.MiExport_Click);
+            // 
+            // GvInfo
+            // 
+            this.GvInfo.AllowUserToAddRows = false;
+            this.GvInfo.AllowUserToDeleteRows = false;
+            this.GvInfo.AllowUserToResizeRows = false;
+            this.GvInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.GvInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GvInfo.ColumnHeadersVisible = false;
+            this.GvInfo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.KeyCode,
+            this.KeyInfo});
+            this.GvInfo.Location = new System.Drawing.Point(6, 40);
+            this.GvInfo.MultiSelect = false;
+            this.GvInfo.Name = "GvInfo";
+            this.GvInfo.ReadOnly = true;
+            this.GvInfo.RowHeadersVisible = false;
+            this.GvInfo.RowTemplate.Height = 23;
+            this.GvInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.GvInfo.Size = new System.Drawing.Size(205, 140);
+            this.GvInfo.TabIndex = 1;
+            // 
+            // KeyCode
+            // 
+            this.KeyCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.KeyCode.DataPropertyName = "KeyCode";
+            this.KeyCode.HeaderText = "字符";
+            this.KeyCode.Name = "KeyCode";
+            this.KeyCode.ReadOnly = true;
+            this.KeyCode.Width = 5;
+            // 
+            // KeyInfo
+            // 
+            this.KeyInfo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.KeyInfo.DataPropertyName = "KeyInfo";
+            this.KeyInfo.HeaderText = "说明";
+            this.KeyInfo.Name = "KeyInfo";
+            this.KeyInfo.ReadOnly = true;
+            // 
+            // MiDelete
+            // 
+            this.MiDelete.Name = "MiDelete";
+            this.MiDelete.Size = new System.Drawing.Size(117, 22);
+            this.MiDelete.Text = "删除(&D)";
+            this.MiDelete.Click += new System.EventHandler(this.MiDelete_Click);
+            // 
+            // MiSep0
+            // 
+            this.MiSep0.Name = "MiSep0";
+            this.MiSep0.Size = new System.Drawing.Size(114, 6);
             // 
             // ARen
             // 
@@ -314,8 +391,10 @@
             this.TpFileAtt.ResumeLayout(false);
             this.TpFileAtt.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GvName)).EndInit();
+            this.CmMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbSave)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GvInfo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -336,7 +415,7 @@
         private System.Windows.Forms.PictureBox PbMenu;
         private System.Windows.Forms.ContextMenuStrip CmMenu;
         private System.Windows.Forms.TabPage TpFileAtt;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label LtInfo;
         private System.Windows.Forms.ListBox LsRule;
         private System.Windows.Forms.CheckBox CkHidden;
         private System.Windows.Forms.CheckBox CkReadOnly;
@@ -346,5 +425,12 @@
         private System.Windows.Forms.Label LbEcho;
         private System.Windows.Forms.FolderBrowserDialog FdBrowser;
         private System.Windows.Forms.CheckBox CkArchive;
+        private System.Windows.Forms.ToolStripMenuItem MiImport;
+        private System.Windows.Forms.ToolStripMenuItem MiExport;
+        private System.Windows.Forms.DataGridView GvInfo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn KeyCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn KeyInfo;
+        private System.Windows.Forms.ToolStripMenuItem MiDelete;
+        private System.Windows.Forms.ToolStripSeparator MiSep0;
     }
 }

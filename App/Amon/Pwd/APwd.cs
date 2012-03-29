@@ -186,17 +186,23 @@ namespace Me.Amon.Pwd
         public bool SaveData()
         {
             string path = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), IEnv.DIR_BACK);
-            string[] files = Directory.GetFiles(path, _UserModel.Code + "*.apbak", SearchOption.TopDirectoryOnly);
-            if (files.Length >= 3)
+            if (Directory.Exists(path))
             {
-                Array.Sort(files);
-                for (int i = files.Length - 3; i >= 0; i -= 1)
+                string[] files = Directory.GetFiles(path, _UserModel.Code + "*.apbak", SearchOption.TopDirectoryOnly);
+                if (files.Length >= 3)
                 {
-                    File.Delete(files[i]);
+                    Array.Sort(files);
+                    for (int i = files.Length - 3; i >= 0; i -= 1)
+                    {
+                        File.Delete(files[i]);
+                    }
                 }
             }
+            else
+            {
+                Directory.CreateDirectory(path);
+            }
 
-            _UserModel.DBObject.CloseConnect();
             string file = _UserModel.Code + '-' + DateTime.Now.ToString("yyyyMMddHHmmss") + ".apbak";
             DoBackup(Path.Combine(path, file));
             return true;
@@ -308,13 +314,13 @@ namespace Me.Amon.Pwd
 
         private void LbKeyList_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            Key rec = LbKeyList.SelectedItem as Key;
-            if (rec == null)
+            Key key = LbKeyList.SelectedItem as Key;
+            if (key == null)
             {
                 return;
             }
 
-            if (!CharUtil.IsValidateHash(rec.Id))
+            if (!CharUtil.IsValidateHash(key.Id))
             {
                 Main.ShowAlert("系统异常，请稍后重试！");
                 return;
@@ -325,10 +331,10 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            _SafeModel.Key = rec;
+            _SafeModel.Key = key;
             _SafeModel.Decode();
 
-            ShowRec(rec);
+            ShowRec(key);
         }
 
         private void APwd_KeyDown(object sender, KeyEventArgs e)
@@ -419,52 +425,52 @@ namespace Me.Amon.Pwd
                 #region 添加属性
                 if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1)
                 {
-                    _PwdView.AppendAtt(AAtt.TYPE_TEXT);
+                    _PwdView.AppendAtt(Att.TYPE_TEXT);
                     return;
                 }
                 if (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2)
                 {
-                    _PwdView.AppendAtt(AAtt.TYPE_PASS);
+                    _PwdView.AppendAtt(Att.TYPE_PASS);
                     return;
                 }
                 if (e.KeyCode == Keys.D3 || e.KeyCode == Keys.NumPad3)
                 {
-                    _PwdView.AppendAtt(AAtt.TYPE_LINK);
+                    _PwdView.AppendAtt(Att.TYPE_LINK);
                     return;
                 }
                 if (e.KeyCode == Keys.D4 || e.KeyCode == Keys.NumPad4)
                 {
-                    _PwdView.AppendAtt(AAtt.TYPE_MAIL);
+                    _PwdView.AppendAtt(Att.TYPE_MAIL);
                     return;
                 }
                 if (e.KeyCode == Keys.D5 || e.KeyCode == Keys.NumPad5)
                 {
-                    _PwdView.AppendAtt(AAtt.TYPE_DATE);
+                    _PwdView.AppendAtt(Att.TYPE_DATE);
                     return;
                 }
                 if (e.KeyCode == Keys.D6 || e.KeyCode == Keys.NumPad6)
                 {
-                    _PwdView.AppendAtt(AAtt.TYPE_DATA);
+                    _PwdView.AppendAtt(Att.TYPE_DATA);
                     return;
                 }
                 if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7)
                 {
-                    _PwdView.AppendAtt(AAtt.TYPE_LIST);
+                    _PwdView.AppendAtt(Att.TYPE_LIST);
                     return;
                 }
                 if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8)
                 {
-                    _PwdView.AppendAtt(AAtt.TYPE_MEMO);
+                    _PwdView.AppendAtt(Att.TYPE_MEMO);
                     return;
                 }
                 if (e.KeyCode == Keys.D9 || e.KeyCode == Keys.NumPad9)
                 {
-                    _PwdView.AppendAtt(AAtt.TYPE_FILE);
+                    _PwdView.AppendAtt(Att.TYPE_FILE);
                     return;
                 }
                 if (e.KeyCode == Keys.D0 || e.KeyCode == Keys.NumPad0)
                 {
-                    _PwdView.AppendAtt(AAtt.TYPE_LINE);
+                    _PwdView.AppendAtt(Att.TYPE_LINE);
                     return;
                 }
                 #endregion
@@ -563,52 +569,52 @@ namespace Me.Amon.Pwd
                 #region 修改属性
                 if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1)
                 {
-                    _PwdView.UpdateAtt(AAtt.TYPE_TEXT);
+                    _PwdView.UpdateAtt(Att.TYPE_TEXT);
                     return;
                 }
                 if (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2)
                 {
-                    _PwdView.UpdateAtt(AAtt.TYPE_PASS);
+                    _PwdView.UpdateAtt(Att.TYPE_PASS);
                     return;
                 }
                 if (e.KeyCode == Keys.D3 || e.KeyCode == Keys.NumPad3)
                 {
-                    _PwdView.UpdateAtt(AAtt.TYPE_LINK);
+                    _PwdView.UpdateAtt(Att.TYPE_LINK);
                     return;
                 }
                 if (e.KeyCode == Keys.D4 || e.KeyCode == Keys.NumPad4)
                 {
-                    _PwdView.UpdateAtt(AAtt.TYPE_MAIL);
+                    _PwdView.UpdateAtt(Att.TYPE_MAIL);
                     return;
                 }
                 if (e.KeyCode == Keys.D5 || e.KeyCode == Keys.NumPad5)
                 {
-                    _PwdView.UpdateAtt(AAtt.TYPE_DATE);
+                    _PwdView.UpdateAtt(Att.TYPE_DATE);
                     return;
                 }
                 if (e.KeyCode == Keys.D6 || e.KeyCode == Keys.NumPad6)
                 {
-                    _PwdView.UpdateAtt(AAtt.TYPE_DATA);
+                    _PwdView.UpdateAtt(Att.TYPE_DATA);
                     return;
                 }
                 if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7)
                 {
-                    _PwdView.UpdateAtt(AAtt.TYPE_LIST);
+                    _PwdView.UpdateAtt(Att.TYPE_LIST);
                     return;
                 }
                 if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8)
                 {
-                    _PwdView.UpdateAtt(AAtt.TYPE_MEMO);
+                    _PwdView.UpdateAtt(Att.TYPE_MEMO);
                     return;
                 }
                 if (e.KeyCode == Keys.D9 || e.KeyCode == Keys.NumPad9)
                 {
-                    _PwdView.UpdateAtt(AAtt.TYPE_FILE);
+                    _PwdView.UpdateAtt(Att.TYPE_FILE);
                     return;
                 }
                 if (e.KeyCode == Keys.D0 || e.KeyCode == Keys.NumPad0)
                 {
-                    _PwdView.UpdateAtt(AAtt.TYPE_LINE);
+                    _PwdView.UpdateAtt(Att.TYPE_LINE);
                     return;
                 }
                 #endregion
@@ -677,7 +683,7 @@ namespace Me.Amon.Pwd
         }
         #endregion
 
-        #region 口令编辑
+        #region 记录编辑
         private void TmiAppendKey_Click(object sender, EventArgs e)
         {
             AppendKey();
@@ -698,114 +704,114 @@ namespace Me.Amon.Pwd
         #region 添加属性
         private void TmiAppendAttText_Click(object sender, EventArgs e)
         {
-            _PwdView.AppendAtt(AAtt.TYPE_TEXT);
+            _PwdView.AppendAtt(Att.TYPE_TEXT);
         }
 
         private void TmiAppendAttPass_Click(object sender, EventArgs e)
         {
-            _PwdView.AppendAtt(AAtt.TYPE_PASS);
+            _PwdView.AppendAtt(Att.TYPE_PASS);
         }
 
         private void TmiAppendAttLink_Click(object sender, EventArgs e)
         {
-            _PwdView.AppendAtt(AAtt.TYPE_LINK);
+            _PwdView.AppendAtt(Att.TYPE_LINK);
         }
 
         private void TmiAppendAttMail_Click(object sender, EventArgs e)
         {
-            _PwdView.AppendAtt(AAtt.TYPE_MAIL);
+            _PwdView.AppendAtt(Att.TYPE_MAIL);
         }
 
         private void TmiAppendAttDate_Click(object sender, EventArgs e)
         {
-            _PwdView.AppendAtt(AAtt.TYPE_DATE);
+            _PwdView.AppendAtt(Att.TYPE_DATE);
         }
 
         private void TmiAppendAttData_Click(object sender, EventArgs e)
         {
-            _PwdView.AppendAtt(AAtt.TYPE_DATA);
+            _PwdView.AppendAtt(Att.TYPE_DATA);
         }
 
         private void TmiUpdateAttCall_Click(object sender, EventArgs e)
         {
-            _PwdView.AppendAtt(AAtt.TYPE_CALL);
+            _PwdView.AppendAtt(Att.TYPE_CALL);
         }
 
         private void TmiAppendAttList_Click(object sender, EventArgs e)
         {
-            _PwdView.AppendAtt(AAtt.TYPE_LIST);
+            _PwdView.AppendAtt(Att.TYPE_LIST);
         }
 
         private void TmiAppendAttMemo_Click(object sender, EventArgs e)
         {
-            _PwdView.AppendAtt(AAtt.TYPE_MEMO);
+            _PwdView.AppendAtt(Att.TYPE_MEMO);
         }
 
         private void TmiAppendAttFile_Click(object sender, EventArgs e)
         {
-            _PwdView.AppendAtt(AAtt.TYPE_FILE);
+            _PwdView.AppendAtt(Att.TYPE_FILE);
         }
 
         private void TmiAppendAttLine_Click(object sender, EventArgs e)
         {
-            _PwdView.AppendAtt(AAtt.TYPE_LINE);
+            _PwdView.AppendAtt(Att.TYPE_LINE);
         }
         #endregion
 
         #region 转换属性
         private void TmiUpdateAttText_Click(object sender, EventArgs e)
         {
-            _PwdView.UpdateAtt(AAtt.TYPE_TEXT);
+            _PwdView.UpdateAtt(Att.TYPE_TEXT);
         }
 
         private void TmiUpdateAttPass_Click(object sender, EventArgs e)
         {
-            _PwdView.UpdateAtt(AAtt.TYPE_PASS);
+            _PwdView.UpdateAtt(Att.TYPE_PASS);
         }
 
         private void TmiUpdateAttLink_Click(object sender, EventArgs e)
         {
-            _PwdView.UpdateAtt(AAtt.TYPE_LINK);
+            _PwdView.UpdateAtt(Att.TYPE_LINK);
         }
 
         private void TmiUpdateAttMail_Click(object sender, EventArgs e)
         {
-            _PwdView.UpdateAtt(AAtt.TYPE_MAIL);
+            _PwdView.UpdateAtt(Att.TYPE_MAIL);
         }
 
         private void TmiUpdateAttDate_Click(object sender, EventArgs e)
         {
-            _PwdView.UpdateAtt(AAtt.TYPE_DATE);
+            _PwdView.UpdateAtt(Att.TYPE_DATE);
         }
 
         private void TmiUpdateAttData_Click(object sender, EventArgs e)
         {
-            _PwdView.UpdateAtt(AAtt.TYPE_DATA);
+            _PwdView.UpdateAtt(Att.TYPE_DATA);
         }
 
         private void TmiAppendAttCall_Click(object sender, EventArgs e)
         {
-            _PwdView.UpdateAtt(AAtt.TYPE_CALL);
+            _PwdView.UpdateAtt(Att.TYPE_CALL);
         }
 
         private void TmiUpdateAttList_Click(object sender, EventArgs e)
         {
-            _PwdView.UpdateAtt(AAtt.TYPE_LIST);
+            _PwdView.UpdateAtt(Att.TYPE_LIST);
         }
 
         private void TmiUpdateAttMemo_Click(object sender, EventArgs e)
         {
-            _PwdView.UpdateAtt(AAtt.TYPE_MEMO);
+            _PwdView.UpdateAtt(Att.TYPE_MEMO);
         }
 
         private void TmiUpdateAttFile_Click(object sender, EventArgs e)
         {
-            _PwdView.UpdateAtt(AAtt.TYPE_FILE);
+            _PwdView.UpdateAtt(Att.TYPE_FILE);
         }
 
         private void TmiUpdateAttLine_Click(object sender, EventArgs e)
         {
-            _PwdView.UpdateAtt(AAtt.TYPE_LINE);
+            _PwdView.UpdateAtt(Att.TYPE_LINE);
         }
         #endregion
 
@@ -975,7 +981,7 @@ namespace Me.Amon.Pwd
                     writer.WriteStartElement("Amon");
                     writer.WriteElementString("App", "APwd");
                     writer.WriteElementString("Ver", "1");
-                    writer.WriteStartElement("Recs");
+                    writer.WriteStartElement("Keys");
                     foreach (Key rec in recs)
                     {
                         _SafeModel.Key = rec;
@@ -1054,12 +1060,9 @@ namespace Me.Amon.Pwd
 
         private void TmiImportXml_Click(object sender, EventArgs e)
         {
-            if (_SafeModel.Modified)
+            if (_SafeModel.Modified && DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
             {
-                if (DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
-                {
-                    return;
-                }
+                return;
             }
 
             Cat cat = _LastNode.Tag as Cat;
@@ -1094,7 +1097,7 @@ namespace Me.Amon.Pwd
                     Main.ShowAlert("未知的文件版本，无法进行导入处理！");
                     return;
                 }
-                while (reader.ReadToFollowing("Rec"))
+                while (reader.ReadToFollowing("Key"))
                 {
                     if (_SafeModel.ImportByXml(reader))
                     {
@@ -1156,7 +1159,7 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 用户菜单
-        #region 口令安全
+        #region 记录安全
         private void TmiPkey_Click(object sender, EventArgs e)
         {
             AuthAc authAc = new AuthAc(_UserModel);
@@ -1413,7 +1416,7 @@ namespace Me.Amon.Pwd
         }
         #endregion
 
-        #region 口令弹出菜单
+        #region 记录弹出菜单
         private void CmiAppendKey_Click(object sender, EventArgs e)
         {
             AppendKey();
@@ -1920,7 +1923,7 @@ namespace Me.Amon.Pwd
         }
         #endregion
 
-        #region 口令处理
+        #region 记录处理
         private void AppendKey()
         {
             if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
@@ -1933,7 +1936,7 @@ namespace Me.Amon.Pwd
 
         private void UpdateKey()
         {
-            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
+            if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
             {
                 return;
             }
@@ -1969,6 +1972,7 @@ namespace Me.Amon.Pwd
                 _UserModel.DBObject.SaveLog(recLog);
             }
             _SafeModel.Encode();
+            _SafeModel.Key.AccessTime = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
             _UserModel.DBObject.SaveVcs(_SafeModel.Key);
             _SafeModel.Modified = false;
 
@@ -1978,12 +1982,12 @@ namespace Me.Amon.Pwd
 
         private void DeleteKey()
         {
-            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
+            if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
             {
                 return;
             }
 
-            if (DialogResult.Yes != Main.ShowConfirm("确认要删除选中的口令吗，此操作将不可恢复？"))
+            if (DialogResult.Yes != Main.ShowConfirm("确认要删除选中的记录吗，此操作将不可恢复？"))
             {
                 return;
             }
@@ -2002,7 +2006,7 @@ namespace Me.Amon.Pwd
         {
             _SafeModel.Encode();
 
-            _SafeModel.Key.AccessTime = _SafeModel.Key.RegTime;
+            _SafeModel.Key.AccessTime = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
             _UserModel.DBObject.SaveVcs(_SafeModel.Key);
         }
 
@@ -2124,15 +2128,20 @@ namespace Me.Amon.Pwd
             BeanUtil.DoZip(file, _UserModel.Home);
         }
 
+        private void DoResuma(string file)
+        {
+        }
+
         private void LocaleBackup()
         {
-            if (_SafeModel.Modified)
+            if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
             {
-                if (DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
-                {
-                    return;
-                }
+                return;
             }
+
+            _LastNode = null;
+            TvCatTree.SelectedNode = null;
+            LbKeyList.Items.Clear();
 
             SaveFileDialog fd = new SaveFileDialog();
             fd.Filter = "密码箱备份文件|*.apbak";
@@ -2148,13 +2157,14 @@ namespace Me.Amon.Pwd
             MessageBox.Show("远程备份功能尚在完善中，敬请期待！");
         }
 
+        private void LocaleResuma()
+        {
+            MessageBox.Show("本地恢复功能尚在完善中，敬请期待！");
+        }
+
         private void RemoteResume()
         {
             MessageBox.Show("远程恢复功能尚在完善中，敬请期待！");
-        }
-
-        private void LocaleResuma()
-        {
         }
         #endregion
 
@@ -2198,7 +2208,7 @@ namespace Me.Amon.Pwd
             dt.Rows.Add("Control E", "切换状态栏显示状态", "");
             dt.Rows.Add("Control G", "切换查找栏显示状态", "");
             dt.Rows.Add("Control K", "切换类别目录显示状态", "");
-            dt.Rows.Add("Control P", "切换口令列表显示状态", "");
+            dt.Rows.Add("Control P", "切换记录列表显示状态", "");
             dt.Rows.Add("Control J", "切换导航面板显示状态", "");
             dt.Rows.Add("Control A", "切换属性编辑显示状态", "");
             dt.Rows.Add("Control P", "显示或隐藏导航面板", "");

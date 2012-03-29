@@ -9,7 +9,7 @@ namespace Me.Amon.Pwd.Pro
 {
     public partial class BeanHint : UserControl, IAttEdit
     {
-        private AAtt _Att;
+        private Att _Att;
 
         #region 构造函数
         public BeanHint()
@@ -28,7 +28,7 @@ namespace Me.Amon.Pwd.Pro
 
         public string Title { get { return "提醒"; } }
 
-        public bool ShowData(AAtt att)
+        public bool ShowData(Att att)
         {
             _Att = att;
 

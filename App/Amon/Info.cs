@@ -121,5 +121,10 @@ namespace Me.Amon
                 Main.ShowError(exp);
             }
         }
+
+        private void BtOk_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

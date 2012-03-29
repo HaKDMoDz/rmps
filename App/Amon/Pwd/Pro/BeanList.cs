@@ -9,7 +9,7 @@ namespace Me.Amon.Pwd.Pro
 {
     public partial class BeanList : UserControl, IAttEdit
     {
-        private AAtt _Att;
+        private Att _Att;
         private Item _Item;
         private Control _Ctl;
 
@@ -31,7 +31,7 @@ namespace Me.Amon.Pwd.Pro
 
         public string Title { get { return "列表"; } }
 
-        public bool ShowData(AAtt att)
+        public bool ShowData(Att att)
         {
             _Att = att;
 

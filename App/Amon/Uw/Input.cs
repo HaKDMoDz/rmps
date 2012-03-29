@@ -14,13 +14,17 @@ namespace Me.Amon.Uw
         {
             LbTips.Text = message;
             TbText.Text = deftext;
+            TbText.Focus();
             ShowDialog(owner);
         }
 
         private void BtOk_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.OK;
-            Visible = false;
+            if (!string.IsNullOrEmpty(TbText.Text))
+            {
+                DialogResult = DialogResult.OK;
+                Visible = false;
+            }
         }
 
         private void BtCancel_Click(object sender, EventArgs e)
@@ -31,8 +35,16 @@ namespace Me.Amon.Uw
 
         private void Input_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Visible = false;
-            e.Cancel = true;
+            //Visible = false;
+            //e.Cancel = false;
+        }
+
+        public string Message
+        {
+            get
+            {
+                return TbText.Text;
+            }
         }
     }
 }

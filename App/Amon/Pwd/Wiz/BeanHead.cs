@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
-using Me.Amon.Bean.Att;
+using Me.Amon.Bean.Atts;
 using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
@@ -112,7 +112,7 @@ namespace Me.Amon.Pwd.Wiz
             string name = TbName.Text;
             if (!CharUtil.IsValidate(name))
             {
-                Main.ShowAlert("请输入口令标题！");
+                Main.ShowAlert("请输入记录标题！");
                 TbName.Focus();
                 return false;
             }

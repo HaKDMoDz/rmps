@@ -153,7 +153,7 @@
             // 
             this.MtARen.Name = "MtARen";
             this.MtARen.Size = new System.Drawing.Size(165, 22);
-            this.MtARen.Text = "文件更名";
+            this.MtARen.Text = "文件更名(&R)";
             this.MtARen.Click += new System.EventHandler(this.MtARen_Click);
             // 
             // MtSep1
@@ -279,7 +279,7 @@
             // 
             this.MgARen.Name = "MgARen";
             this.MgARen.Size = new System.Drawing.Size(163, 22);
-            this.MgARen.Text = "文件更名";
+            this.MgARen.Text = "文件更名(&R)";
             this.MgARen.Click += new System.EventHandler(this.MgARen_Click);
             // 
             // MgSep1

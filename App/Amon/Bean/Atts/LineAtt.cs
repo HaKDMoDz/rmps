@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Bean.Att
+﻿namespace Me.Amon.Bean.Atts
 {
-    public class LineAtt : AAtt
+    public class LineAtt : Att
     {
         public const int SPEC_LINE_TYPE = 0;//控制类型
         public const int SPEC_LINE_TPLT = 1;//显示模板

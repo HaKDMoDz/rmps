@@ -4,7 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Bean;
-using Me.Amon.Bean.Att;
+using Me.Amon.Bean.Atts;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
 using Me.Amon.Uc;
@@ -14,7 +14,7 @@ namespace Me.Amon.Pwd.Pro
 {
     public partial class BeanGuid : UserControl, IAttEdit
     {
-        private AAtt _Att;
+        private Att _Att;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
         private DataTable _DataTable;
@@ -124,7 +124,7 @@ namespace Me.Amon.Pwd.Pro
 
         public string Title { get { return "向导"; } }
 
-        public bool ShowData(AAtt att)
+        public bool ShowData(Att att)
         {
             if ((_DataModel.LibModified & IEnv.KEY_APWD) > 0)
             {
@@ -161,8 +161,8 @@ namespace Me.Amon.Pwd.Pro
                 _Att.SetSpec(GuidAtt.SPEC_GUID_TPLT, header.Id);
                 if (!_SafeModel.IsUpdate)
                 {
-                    AAtt att;
-                    if (_SafeModel.Count < AAtt.HEAD_SIZE)
+                    Att att;
+                    if (_SafeModel.Count < Att.HEAD_SIZE)
                     {
                         att = _SafeModel.InitMeta();
                         _DataTable.Rows.Add(att.Order, att);
@@ -172,11 +172,11 @@ namespace Me.Amon.Pwd.Pro
                         _DataTable.Rows.Add(att.Order, att);
                     }
                     _SafeModel.InitData(header);
-                    for (int i = _DataTable.Rows.Count - 1; i >= AAtt.HEAD_SIZE; i -= 1)
+                    for (int i = _DataTable.Rows.Count - 1; i >= Att.HEAD_SIZE; i -= 1)
                     {
                         _DataTable.Rows.RemoveAt(i);
                     }
-                    for (int i = AAtt.HEAD_SIZE; i < _SafeModel.Count; i += 1)
+                    for (int i = Att.HEAD_SIZE; i < _SafeModel.Count; i += 1)
                     {
                         att = _SafeModel.GetAtt(i);
                         _DataTable.Rows.Add(att.Order, att);

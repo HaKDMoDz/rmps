@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Bean;
-using Me.Amon.Bean.Att;
+using Me.Amon.Bean.Atts;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
 using Me.Amon.Util;
@@ -18,7 +18,7 @@ namespace Me.Amon.Pwd.Wiz
         private TableLayoutPanel _Grid;
         private RowStyle _Style;
         private Label _Label;
-        private AAtt _Att;
+        private Att _Att;
         private ToolStripMenuItem _LastCharLen;
         private ToolStripMenuItem _CharLenDef;
         private ToolStripSeparator _CharLenSep;
@@ -121,7 +121,7 @@ namespace Me.Amon.Pwd.Wiz
             return 27;
         }
 
-        public bool ShowData(DataModel userModel, AAtt att)
+        public bool ShowData(DataModel userModel, Att att)
         {
             _DataModel = userModel;
             if ((_DataModel.UdcModel.Modified & IEnv.KEY_AWIZ) > 0)
@@ -212,8 +212,8 @@ namespace Me.Amon.Pwd.Wiz
                 key = _DataModel.UdcModel.Default.Data;
             }
 
-            string rep = _Att.GetSpec(PassAtt.SPEC_PWDS_REP, AAtt.SPEC_VALUE_FAIL);
-            char[] tmp = CharUtil.NextRandomKey(key.ToCharArray(), int.Parse(len), AAtt.SPEC_VALUE_TRUE.Equals(rep));
+            string rep = _Att.GetSpec(PassAtt.SPEC_PWDS_REP, Att.SPEC_VALUE_FAIL);
+            char[] tmp = CharUtil.NextRandomKey(key.ToCharArray(), int.Parse(len), Att.SPEC_VALUE_TRUE.Equals(rep));
             if (tmp == null)
             {
                 Main.ShowAlert(string.Format("无法生成长度为 {0} 且{1}重复的随机口令！", len, MiRepeatable.Checked ? "可" : "不可"));
@@ -244,7 +244,7 @@ namespace Me.Amon.Pwd.Wiz
             {
                 _LastCharSet.Checked = false;
             }
-            string key = _Att.GetSpec(PassAtt.SPEC_PWDS_KEY, AAtt.SPEC_VALUE_NONE);
+            string key = _Att.GetSpec(PassAtt.SPEC_PWDS_KEY, Att.SPEC_VALUE_NONE);
             if (string.IsNullOrEmpty(key))
             {
                 _LastCharSet = _CharSetDef;
@@ -259,8 +259,8 @@ namespace Me.Amon.Pwd.Wiz
             }
             _LastCharSet.Checked = true;
 
-            string rep = _Att.GetSpec(PassAtt.SPEC_PWDS_REP, AAtt.SPEC_VALUE_FAIL);
-            MiRepeatable.Checked = AAtt.SPEC_VALUE_TRUE.Equals(rep);
+            string rep = _Att.GetSpec(PassAtt.SPEC_PWDS_REP, Att.SPEC_VALUE_FAIL);
+            MiRepeatable.Checked = Att.SPEC_VALUE_TRUE.Equals(rep);
 
             CmMenu.Show(BtOpt, 0, BtOpt.Height);
         }
@@ -306,7 +306,7 @@ namespace Me.Amon.Pwd.Wiz
             _LastCharSet = _CharSetDef;
             _LastCharSet.Checked = true;
 
-            _Att.SetSpec(PassAtt.SPEC_PWDS_KEY, AAtt.SPEC_VALUE_NONE);
+            _Att.SetSpec(PassAtt.SPEC_PWDS_KEY, Att.SPEC_VALUE_NONE);
         }
 
         private void MiCharSet_Click(object sender, EventArgs e)
@@ -337,7 +337,7 @@ namespace Me.Amon.Pwd.Wiz
         private void MiRepeatable_Click(object sender, EventArgs e)
         {
             MiRepeatable.Checked = !MiRepeatable.Checked;
-            _Att.SetSpec(PassAtt.SPEC_PWDS_REP, MiRepeatable.Checked ? AAtt.SPEC_VALUE_TRUE : AAtt.SPEC_VALUE_FAIL);
+            _Att.SetSpec(PassAtt.SPEC_PWDS_REP, MiRepeatable.Checked ? Att.SPEC_VALUE_TRUE : Att.SPEC_VALUE_FAIL);
         }
         #endregion
         #endregion

@@ -11,7 +11,7 @@ namespace Me.Amon.Pwd.Wiz
 
         int InitView(int row);
 
-        bool ShowData(DataModel dataModel, AAtt att);
+        bool ShowData(DataModel dataModel, Att att);
 
         void Copy();
 

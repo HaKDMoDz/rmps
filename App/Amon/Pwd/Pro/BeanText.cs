@@ -8,7 +8,7 @@ namespace Me.Amon.Pwd.Pro
 {
     public partial class BeanText : UserControl, IAttEdit
     {
-        private AAtt _Att;
+        private Att _Att;
         private APro _APro;
         private TextBox _Ctl;
 
@@ -39,7 +39,7 @@ namespace Me.Amon.Pwd.Pro
 
         public string Title { get { return "文本"; } }
 
-        public bool ShowData(AAtt att)
+        public bool ShowData(Att att)
         {
             _Att = att;
 

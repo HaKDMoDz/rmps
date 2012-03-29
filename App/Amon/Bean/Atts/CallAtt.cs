@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Bean.Att
+﻿namespace Me.Amon.Bean.Atts
 {
-    public class CallAtt : AAtt
+    public class CallAtt : Att
     {
         public const int SPEC_CALL_CAT1 = 0;//控制类型
         public const int SPEC_CALL_CAT2 = 1;//显示模板

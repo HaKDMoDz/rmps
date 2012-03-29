@@ -1,11 +1,11 @@
 ﻿using System.Text;
 using System.Xml;
-using Me.Amon.Bean.Att;
+using Me.Amon.Bean.Atts;
 using Me.Amon.Util;
 
 namespace Me.Amon.Bean
 {
-    public abstract class AAtt
+    public abstract class Att
     {
         #region 全局属性
         /// <summary>
@@ -44,7 +44,7 @@ namespace Me.Amon.Bean
         /// 
         /// </summary>
         /// <param name="type"></param>
-        protected AAtt(int type)
+        protected Att(int type)
             : this(type, "", "")
         {
         }
@@ -55,7 +55,7 @@ namespace Me.Amon.Bean
         /// <param name="type"></param>
         /// <param name="name"></param>
         /// <param name="data"></param>
-        protected AAtt(int type, string name, string data)
+        protected Att(int type, string name, string data)
         {
             Type = type;
             Name = name;
@@ -70,7 +70,7 @@ namespace Me.Amon.Bean
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static AAtt GetInstance(int type)
+        public static Att GetInstance(int type)
         {
             switch (type)
             {
@@ -116,9 +116,9 @@ namespace Me.Amon.Bean
         /// <param name="name"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public static AAtt GetInstance(int type, string name, string data)
+        public static Att GetInstance(int type, string name, string data)
         {
-            AAtt item = GetInstance(type);
+            Att item = GetInstance(type);
             if (item != null)
             {
                 item.Name = name;
@@ -302,6 +302,7 @@ namespace Me.Amon.Bean
             if (_Spec != null)
             {
                 writer.WriteStartElement("Spec");
+                //writer.WriteAttributeString("Count", _Spec.Length.ToString());
                 for (int i = 0; i < _Spec.Length; i += 1)
                 {
                     writer.WriteAttributeString("V" + i, _Spec[i]);
@@ -328,6 +329,19 @@ namespace Me.Amon.Bean
             if (reader.Name == "Data")
             {
                 Data = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Spec")
+            {
+                int cnt = reader.AttributeCount;
+                if (cnt > 0)
+                {
+                    _Spec = new string[cnt];
+                    for (int i = 0; i < cnt; i += 1)
+                    {
+                        reader.MoveToAttribute("V" + i);
+                        _Spec[i] = reader.ReadContentAsString();
+                    }
+                }
             }
             return true;
         }

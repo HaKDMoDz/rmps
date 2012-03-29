@@ -5,7 +5,7 @@ using Db4objects.Db4o;
 using Db4objects.Db4o.Config;
 using Me.Amon.Bean;
 using Me.Amon.Model;
-using Me.Amon.Ren.M;
+using Me.Amon.Ren;
 using Me.Amon.Util;
 
 namespace Me.Amon.Da

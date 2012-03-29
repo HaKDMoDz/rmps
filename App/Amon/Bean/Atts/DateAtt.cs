@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Bean.Att
+﻿namespace Me.Amon.Bean.Atts
 {
-    public class DateAtt : AAtt
+    public class DateAtt : Att
     {
         public const int SPEC_FORMAT = 0;// 日期显示格式
 

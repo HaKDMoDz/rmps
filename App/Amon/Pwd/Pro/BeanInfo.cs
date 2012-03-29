@@ -23,7 +23,7 @@ namespace Me.Amon.Pwd.Pro
 
         public string Title { get { return "提示"; } }
 
-        public bool ShowData(AAtt att)
+        public bool ShowData(Att att)
         {
             return true;
         }

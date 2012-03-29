@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Bean.Att
+﻿namespace Me.Amon.Bean.Atts
 {
-    public class DataAtt : AAtt
+    public class DataAtt : Att
     {
         public const int SPEC_OPT = 0;//可选输入
         public const int SPEC_SET = 1;//数据集

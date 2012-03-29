@@ -8,7 +8,7 @@ namespace Me.Amon.Pwd.Pro
 {
     public partial class BeanCall : UserControl, IAttEdit
     {
-        private AAtt _Att;
+        private Att _Att;
         private TextBox _Ctl;
         private DataModel _DataModel;
 
@@ -40,7 +40,7 @@ namespace Me.Amon.Pwd.Pro
             get { return "电话"; }
         }
 
-        public bool ShowData(Bean.AAtt att)
+        public bool ShowData(Bean.Att att)
         {
             _Att = att;
 

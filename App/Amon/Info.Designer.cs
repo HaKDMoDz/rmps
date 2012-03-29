@@ -40,7 +40,7 @@
             this.LbMail = new System.Windows.Forms.LinkLabel();
             this.TbDescription = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtOk = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -158,22 +158,23 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // button1
+            // BtOk
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(307, 238);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "确定(&O)";
-            this.button1.UseVisualStyleBackColor = true;
+            this.BtOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtOk.Location = new System.Drawing.Point(307, 238);
+            this.BtOk.Name = "BtOk";
+            this.BtOk.Size = new System.Drawing.Size(75, 23);
+            this.BtOk.TabIndex = 12;
+            this.BtOk.Text = "确定(&O)";
+            this.BtOk.UseVisualStyleBackColor = true;
+            this.BtOk.Click += new System.EventHandler(this.BtOk_Click);
             // 
             // Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(394, 272);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.BtOk);
             this.Controls.Add(this.TbDescription);
             this.Controls.Add(this.LbMail);
             this.Controls.Add(this.LtMail);
@@ -216,7 +217,7 @@
         private System.Windows.Forms.Label LtMail;
         private System.Windows.Forms.LinkLabel LbMail;
         private System.Windows.Forms.TextBox TbDescription;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BtOk;
 
     }
 }

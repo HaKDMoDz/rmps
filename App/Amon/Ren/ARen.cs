@@ -4,12 +4,9 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using Me.Amon.Bean;
-using Me.Amon.Bean.Att;
+using System.Xml;
 using Me.Amon.Ce;
 using Me.Amon.Model;
-using Me.Amon.Model.Pwd;
-using Me.Amon.Ren.M;
 
 namespace Me.Amon.Ren
 {
@@ -44,6 +41,32 @@ namespace Me.Amon.Ren
 
             _Renamer = new Renamer();
 
+            LtInfo.Text = "充分利用文件名中的禁用字符:|*?\"<>\\/来代表不同的含义：";
+            DataTable dt = new DataTable();
+            dt.Columns.Add("KeyCode", typeof(string));
+            dt.Columns.Add("KeyInfo", typeof(string));
+            dt.Rows.Add(":", "代表数字");
+            dt.Rows.Add("|", "代表字母");
+            dt.Rows.Add("*", "代表文件名");
+            dt.Rows.Add("?", "代表扩展名");
+            dt.Rows.Add("\"", "代表单个原有字符");
+            dt.Rows.Add("<>", "用于限制以上特殊含义字符的取值空间");
+            dt.Rows.Add("/", "正向转义字符");
+            dt.Rows.Add("/*", "将文件名转换为小写");
+            dt.Rows.Add("/?", "将扩展名转换为小写");
+            dt.Rows.Add("/\"", "将原有字符转换为小写");
+            dt.Rows.Add("/:", "代表文件修改时间，默认时间格式为<yyyyMMddHHmmss>");
+            dt.Rows.Add("\\", "反向转义字符");
+            dt.Rows.Add("\\*", "将文件名转换为大写");
+            dt.Rows.Add("\\?", "将扩展名转换为大写");
+            dt.Rows.Add("\\\"", "将原有字符转换为大写");
+            dt.Rows.Add("\\:", "代表文件创建时间，默认时间格式为<yyyyMMddHHmmss>");
+            dt.Rows.Add(":<a,b,c,d>", "数值的运算方式：起始值a，步增量b，结果按定长c显示，不足时填充字符d");
+            dt.Rows.Add("|<abc>", "字符的运算方式：表示循环计算abc等字符");
+            dt.Rows.Add("*<a:b>", "将文件名中的a替换为b");
+            dt.Rows.Add("?<a:b>", "将扩展名中的a替换为b");
+            GvInfo.DataSource = dt;
+
             foreach (MRen ren in _UserModel.DBObject.ListRen())
             {
                 LsRule.Items.Add(ren);
@@ -76,8 +99,14 @@ namespace Me.Amon.Ren
 
         private void PbSave_Click(object sender, EventArgs e)
         {
+            string name = Main.ShowInput("请输入模板名称：", "");
+            if (string.IsNullOrEmpty(name))
+            {
+                return;
+            }
+
             MRen ren = new MRen();
-            ren.Name = "renamer1";
+            ren.Name = name;
             ren.Command = TbRule.Text;
             _UserModel.DBObject.SaveVcs(ren);
             LsRule.Items.Add(ren);
@@ -312,5 +341,94 @@ namespace Me.Amon.Ren
             TpTips.SetToolTip(LbEcho, msg);
         }
         #endregion
+
+        private void MiDelete_Click(object sender, EventArgs e)
+        {
+            MRen ren = LsRule.SelectedItem as MRen;
+            if (ren == null)
+            {
+                Main.ShowAlert("请选择您要删除的模板！");
+                return;
+            }
+
+            if (DialogResult.Yes != Main.ShowConfirm(string.Format("确认要删除模板 {0} 吗？", ren.Name)))
+            {
+                return;
+            }
+
+            _UserModel.DBObject.DeleteVcs(ren);
+            LsRule.Items.Remove(ren);
+        }
+
+        private void MiImport_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Filter = "重命名模板文件|*.arxml";
+            if (DialogResult.OK != fd.ShowDialog(this))
+            {
+                return;
+            }
+            string file = fd.FileName;
+            if (!File.Exists(file))
+            {
+                return;
+            }
+
+            using (StreamReader sr = new StreamReader(file))
+            {
+                using (XmlReader reader = XmlReader.Create(sr))
+                {
+                    MRen ren;
+                    while (reader.ReadToFollowing("Ren"))
+                    {
+                        ren = new MRen();
+                        if (!ren.FromXml(reader))
+                        {
+                            continue;
+                        }
+                        _UserModel.DBObject.SaveVcs(ren);
+                        LsRule.Items.Add(ren);
+                    }
+                }
+
+                sr.Close();
+            }
+        }
+
+        private void MiExport_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog fd = new SaveFileDialog();
+            fd.Filter = "重命名模板文件|*.arxml";
+            if (DialogResult.OK != fd.ShowDialog(this))
+            {
+                return;
+            }
+            string file = fd.FileName;
+            if (string.IsNullOrEmpty(file))
+            {
+                return;
+            }
+
+            using (StreamWriter sw = new StreamWriter(file, false))
+            {
+                using (XmlWriter writer = XmlWriter.Create(sw))
+                {
+                    writer.WriteStartElement("Amon");
+                    writer.WriteElementString("App", "ARen");
+                    writer.WriteElementString("Ver", "1");
+                    writer.WriteStartElement("Rens");
+                    foreach (MRen ren in _UserModel.DBObject.ListRen())
+                    {
+                        ren.ToXml(writer);
+                    }
+                    writer.WriteEndElement();
+                    writer.WriteEndElement();
+
+                    writer.Flush();
+                }
+
+                sw.Close();
+            }
+        }
     }
 }

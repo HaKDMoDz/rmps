@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Bean.Att
+﻿namespace Me.Amon.Bean.Atts
 {
-    public class MetaAtt : AAtt
+    public class MetaAtt : Att
     {
         public MetaAtt()
             : base(TYPE_META, "", "")

@@ -13,7 +13,7 @@ namespace Me.Amon.Pwd.Wiz
         private TableLayoutPanel _Grid;
         private RowStyle _Style;
         private Label _Label;
-        private AAtt _Att;
+        private Att _Att;
 
         #region 构造函数
         public BeanData()
@@ -58,7 +58,7 @@ namespace Me.Amon.Pwd.Wiz
             return 27;
         }
 
-        public bool ShowData(DataModel dataModel, AAtt att)
+        public bool ShowData(DataModel dataModel, Att att)
         {
             _Att = att;
             if (_Att != null)

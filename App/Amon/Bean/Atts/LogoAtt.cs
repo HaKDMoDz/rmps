@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Bean.Att
+﻿namespace Me.Amon.Bean.Atts
 {
-    public class LogoAtt : AAtt
+    public class LogoAtt : Att
     {
         private string path;
 

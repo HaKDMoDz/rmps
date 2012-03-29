@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Bean;
-using Me.Amon.Bean.Att;
+using Me.Amon.Bean.Atts;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
 using Me.Amon.Util;
@@ -12,7 +12,7 @@ namespace Me.Amon.Pwd.Pro
 {
     public partial class BeanPass : UserControl, IAttEdit
     {
-        private AAtt _Att;
+        private Att _Att;
         private DataModel _DataModel;
         private ViewModel _ViewModel;
         private TextBox _Ctl;
@@ -86,7 +86,7 @@ namespace Me.Amon.Pwd.Pro
 
         public string Title { get { return "口令"; } }
 
-        public bool ShowData(AAtt att)
+        public bool ShowData(Att att)
         {
             if ((_DataModel.UdcModel.Modified & IEnv.KEY_AWIZ) > 0)
             {
@@ -196,8 +196,8 @@ namespace Me.Amon.Pwd.Pro
                 key = _DataModel.UdcModel.Default.Data;
             }
 
-            string rep = _Att.GetSpec(PassAtt.SPEC_PWDS_REP, AAtt.SPEC_VALUE_FAIL);
-            TbData.Text = new string(CharUtil.NextRandomKey(key.ToCharArray(), int.Parse(len), AAtt.SPEC_VALUE_TRUE.Equals(rep)));
+            string rep = _Att.GetSpec(PassAtt.SPEC_PWDS_REP, Att.SPEC_VALUE_FAIL);
+            TbData.Text = new string(CharUtil.NextRandomKey(key.ToCharArray(), int.Parse(len), Att.SPEC_VALUE_TRUE.Equals(rep)));
         }
 
         private void BtOpt_Click(object sender, EventArgs e)
@@ -222,7 +222,7 @@ namespace Me.Amon.Pwd.Pro
             {
                 _LastCharSet.Checked = false;
             }
-            string key = _Att.GetSpec(PassAtt.SPEC_PWDS_KEY, AAtt.SPEC_VALUE_NONE);
+            string key = _Att.GetSpec(PassAtt.SPEC_PWDS_KEY, Att.SPEC_VALUE_NONE);
             if (string.IsNullOrEmpty(key))
             {
                 _LastCharSet = _CharSetDef;
@@ -237,8 +237,8 @@ namespace Me.Amon.Pwd.Pro
             }
             _LastCharSet.Checked = true;
 
-            string rep = _Att.GetSpec(PassAtt.SPEC_PWDS_REP, AAtt.SPEC_VALUE_FAIL);
-            MiRepeatable.Checked = AAtt.SPEC_VALUE_TRUE.Equals(rep);
+            string rep = _Att.GetSpec(PassAtt.SPEC_PWDS_REP, Att.SPEC_VALUE_FAIL);
+            MiRepeatable.Checked = Att.SPEC_VALUE_TRUE.Equals(rep);
 
             CmMenu.Show(BtOpt, 0, BtOpt.Height);
         }
@@ -284,7 +284,7 @@ namespace Me.Amon.Pwd.Pro
             _LastCharSet = _CharSetDef;
             _LastCharSet.Checked = true;
 
-            _Att.SetSpec(PassAtt.SPEC_PWDS_KEY, AAtt.SPEC_VALUE_NONE);
+            _Att.SetSpec(PassAtt.SPEC_PWDS_KEY, Att.SPEC_VALUE_NONE);
         }
 
         private void MiCharSet_Click(object sender, EventArgs e)
@@ -315,7 +315,7 @@ namespace Me.Amon.Pwd.Pro
         private void MiRepeatable_Click(object sender, EventArgs e)
         {
             MiRepeatable.Checked = !MiRepeatable.Checked;
-            _Att.SetSpec(PassAtt.SPEC_PWDS_REP, MiRepeatable.Checked ? AAtt.SPEC_VALUE_TRUE : AAtt.SPEC_VALUE_FAIL);
+            _Att.SetSpec(PassAtt.SPEC_PWDS_REP, MiRepeatable.Checked ? Att.SPEC_VALUE_TRUE : Att.SPEC_VALUE_FAIL);
         }
         #endregion
         #endregion

@@ -26,16 +26,16 @@ namespace Me.Amon.Pwd._Lib
         public void Init()
         {
             CbType.Items.Add(new Item { K = "0", V = "请选择" });
-            CbType.Items.Add(new Item { K = AAtt.TYPE_TEXT.ToString(), V = "文本" });
-            CbType.Items.Add(new Item { K = AAtt.TYPE_PASS.ToString(), V = "口令" });
-            CbType.Items.Add(new Item { K = AAtt.TYPE_LINK.ToString(), V = "链接" });
-            CbType.Items.Add(new Item { K = AAtt.TYPE_MAIL.ToString(), V = "邮件" });
-            CbType.Items.Add(new Item { K = AAtt.TYPE_DATE.ToString(), V = "日期" });
-            CbType.Items.Add(new Item { K = AAtt.TYPE_DATA.ToString(), V = "数值" });
-            CbType.Items.Add(new Item { K = AAtt.TYPE_CALL.ToString(), V = "电话" });
+            CbType.Items.Add(new Item { K = Att.TYPE_TEXT.ToString(), V = "文本" });
+            CbType.Items.Add(new Item { K = Att.TYPE_PASS.ToString(), V = "口令" });
+            CbType.Items.Add(new Item { K = Att.TYPE_LINK.ToString(), V = "链接" });
+            CbType.Items.Add(new Item { K = Att.TYPE_MAIL.ToString(), V = "邮件" });
+            CbType.Items.Add(new Item { K = Att.TYPE_DATE.ToString(), V = "日期" });
+            CbType.Items.Add(new Item { K = Att.TYPE_DATA.ToString(), V = "数值" });
+            CbType.Items.Add(new Item { K = Att.TYPE_CALL.ToString(), V = "电话" });
             //CbType.Items.Add(new Item { K = AAtt.TYPE_LIST.ToString(), V = "列表" });
-            CbType.Items.Add(new Item { K = AAtt.TYPE_MEMO.ToString(), V = "附注" });
-            CbType.Items.Add(new Item { K = AAtt.TYPE_FILE.ToString(), V = "文件" });
+            CbType.Items.Add(new Item { K = Att.TYPE_MEMO.ToString(), V = "附注" });
+            CbType.Items.Add(new Item { K = Att.TYPE_FILE.ToString(), V = "文件" });
             //CbType.Items.Add(new Item { K = AAtt.TYPE_LINE.ToString(), V = "分组" });
 
             TbName.MaxLength = DBConst.APWD0306_SIZE;

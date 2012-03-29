@@ -56,7 +56,7 @@ namespace Me.Amon.Pwd._Lib
                     TreeNode node = new TreeNode();
                     node.Name = detail.Id;
                     node.Tag = detail;
-                    node.Text = AAtt.SP_TPL_LS + detail.Name + AAtt.SP_TPL_RS;
+                    node.Text = Att.SP_TPL_LS + detail.Name + Att.SP_TPL_RS;
                     node.ToolTipText = detail.Memo;
                     root.Nodes.Add(node);
                 }
@@ -265,7 +265,7 @@ namespace Me.Amon.Pwd._Lib
 
             if (update)
             {
-                _Selected.Text = AAtt.SP_TPL_LS + detail.Name + AAtt.SP_TPL_RS;
+                _Selected.Text = Att.SP_TPL_LS + detail.Name + Att.SP_TPL_RS;
                 TreeNode root = TvLibView.SelectedNode;
             }
             else
@@ -273,7 +273,7 @@ namespace Me.Amon.Pwd._Lib
                 TreeNode node = new TreeNode();
                 node.Name = detail.Id;
                 node.Tag = detail;
-                node.Text = AAtt.SP_TPL_LS + detail.Name + AAtt.SP_TPL_RS;
+                node.Text = Att.SP_TPL_LS + detail.Name + Att.SP_TPL_RS;
                 node.ToolTipText = detail.Memo;
                 _Selected.Nodes.Add(node);
 

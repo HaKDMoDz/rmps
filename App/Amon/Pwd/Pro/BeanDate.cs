@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Me.Amon.Bean;
-using Me.Amon.Bean.Att;
+using Me.Amon.Bean.Atts;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
 using Me.Amon.Util;
@@ -10,7 +10,7 @@ namespace Me.Amon.Pwd.Pro
 {
     public partial class BeanDate : UserControl, IAttEdit
     {
-        private AAtt _Att;
+        private Att _Att;
         private TextBox _Ctl;
 
         #region 构造函数
@@ -34,7 +34,7 @@ namespace Me.Amon.Pwd.Pro
 
         public string Title { get { return "日期"; } }
 
-        public bool ShowData(AAtt att)
+        public bool ShowData(Att att)
         {
             _Att = att;
 

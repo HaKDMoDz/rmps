@@ -18,7 +18,7 @@ namespace Me.Amon.Pwd.Pro
         private ViewModel _ViewModel;
         private int _LastIndex;
         private bool _UserAction;
-        private AAtt _AAtt;
+        private Att _AAtt;
         private IAttEdit _CmpLast;
         private BeanInfo _CmpInfo;
         private Dictionary<int, IAttEdit> _CmpList;
@@ -40,7 +40,7 @@ namespace Me.Amon.Pwd.Pro
 
             _DataList = new DataTable();
             _DataList.Columns.Add("Order", typeof(string));
-            _DataList.Columns.Add("Name", typeof(AAtt));
+            _DataList.Columns.Add("Name", typeof(Att));
             OrderCol.DataPropertyName = "Order";
             ValueCol.DataPropertyName = "Name";
             GvAttList.AutoGenerateColumns = false;
@@ -61,7 +61,7 @@ namespace Me.Amon.Pwd.Pro
             GbGroup.Controls.Add(_CmpInfo);
             _CmpLast = _CmpInfo;
 
-            _CmpList = new Dictionary<int, IAttEdit>(AAtt.TYPE_SIZE + 2);
+            _CmpList = new Dictionary<int, IAttEdit>(Att.TYPE_SIZE + 2);
         }
         #endregion
 
@@ -95,7 +95,7 @@ namespace Me.Amon.Pwd.Pro
         {
             _UserAction = false;
             _DataList.Rows.Clear();
-            AAtt att;
+            Att att;
             for (int i = 0; i < _SafeModel.Count; i += 1)
             {
                 att = _SafeModel.GetAtt(i);
@@ -135,11 +135,11 @@ namespace Me.Amon.Pwd.Pro
 
         public void AppendAtt(int type)
         {
-            if (type < AAtt.TYPE_TEXT || type > AAtt.TYPE_LINE)
+            if (type < Att.TYPE_TEXT || type > Att.TYPE_LINE)
             {
                 return;
             }
-            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
+            if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
             {
                 return;
             }
@@ -147,15 +147,15 @@ namespace Me.Amon.Pwd.Pro
             {
                 return;
             }
-            AAtt att = AAtt.GetInstance(type);
+            Att att = Att.GetInstance(type);
             int index = GvAttList.SelectedRows[0].Index;
             if (index < 0)
             {
                 index = _SafeModel.Count;
             }
-            else if (index < AAtt.HEAD_SIZE)
+            else if (index < Att.HEAD_SIZE)
             {
-                index = AAtt.HEAD_SIZE;
+                index = Att.HEAD_SIZE;
             }
             else
             {
@@ -176,11 +176,11 @@ namespace Me.Amon.Pwd.Pro
 
         public void UpdateAtt(int type)
         {
-            if (type < AAtt.TYPE_TEXT || type > AAtt.TYPE_LINE || type == AAtt.TYPE_DATE)
+            if (type < Att.TYPE_TEXT || type > Att.TYPE_LINE || type == Att.TYPE_DATE)
             {
                 return;
             }
-            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
+            if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
             {
                 return;
             }
@@ -190,12 +190,12 @@ namespace Me.Amon.Pwd.Pro
             }
 
             int index = GvAttList.SelectedRows[0].Index;
-            if (index < AAtt.HEAD_SIZE)
+            if (index < Att.HEAD_SIZE)
             {
                 return;
             }
-            AAtt att = _SafeModel.GetAtt(index);
-            if (att == null || att.Type >= AAtt.TYPE_GUID)
+            Att att = _SafeModel.GetAtt(index);
+            if (att == null || att.Type >= Att.TYPE_GUID)
             {
                 return;
             }
@@ -231,11 +231,11 @@ namespace Me.Amon.Pwd.Pro
 
         public void DropAtt()
         {
-            if (_SafeModel.Key == null || _SafeModel.Count < AAtt.HEAD_SIZE)
+            if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
             {
                 return;
             }
-            if (_LastIndex < AAtt.HEAD_SIZE || _AAtt == null)
+            if (_LastIndex < Att.HEAD_SIZE || _AAtt == null)
             {
                 return;
             }
@@ -298,114 +298,114 @@ namespace Me.Amon.Pwd.Pro
         #region 添加属性
         private void CmiAppendAttText_Click(object sender, EventArgs e)
         {
-            AppendAtt(AAtt.TYPE_TEXT);
+            AppendAtt(Att.TYPE_TEXT);
         }
 
         private void CmiAppendAttPass_Click(object sender, EventArgs e)
         {
-            AppendAtt(AAtt.TYPE_PASS);
+            AppendAtt(Att.TYPE_PASS);
         }
 
         private void CmiAppendAttLink_Click(object sender, EventArgs e)
         {
-            AppendAtt(AAtt.TYPE_LINK);
+            AppendAtt(Att.TYPE_LINK);
         }
 
         private void CmiAppendAttMail_Click(object sender, EventArgs e)
         {
-            AppendAtt(AAtt.TYPE_MAIL);
+            AppendAtt(Att.TYPE_MAIL);
         }
 
         private void CmiAppendAttDate_Click(object sender, EventArgs e)
         {
-            AppendAtt(AAtt.TYPE_DATE);
+            AppendAtt(Att.TYPE_DATE);
         }
 
         private void CmiAppendAttData_Click(object sender, EventArgs e)
         {
-            AppendAtt(AAtt.TYPE_DATA);
+            AppendAtt(Att.TYPE_DATA);
         }
 
         private void CmiAppendAttCall_Click(object sender, EventArgs e)
         {
-            AppendAtt(AAtt.TYPE_CALL);
+            AppendAtt(Att.TYPE_CALL);
         }
 
         private void CmiAppendAttList_Click(object sender, EventArgs e)
         {
-            AppendAtt(AAtt.TYPE_LIST);
+            AppendAtt(Att.TYPE_LIST);
         }
 
         private void CmiAppendAttMemo_Click(object sender, EventArgs e)
         {
-            AppendAtt(AAtt.TYPE_MEMO);
+            AppendAtt(Att.TYPE_MEMO);
         }
 
         private void CmiAppendAttFile_Click(object sender, EventArgs e)
         {
-            AppendAtt(AAtt.TYPE_FILE);
+            AppendAtt(Att.TYPE_FILE);
         }
 
         private void CmiAppendAttLine_Click(object sender, EventArgs e)
         {
-            AppendAtt(AAtt.TYPE_LINE);
+            AppendAtt(Att.TYPE_LINE);
         }
         #endregion
 
         #region 转换属性
         private void CmiUpdateAttText_Click(object sender, EventArgs e)
         {
-            UpdateAtt(AAtt.TYPE_TEXT);
+            UpdateAtt(Att.TYPE_TEXT);
         }
 
         private void CmiUpdateAttPass_Click(object sender, EventArgs e)
         {
-            UpdateAtt(AAtt.TYPE_PASS);
+            UpdateAtt(Att.TYPE_PASS);
         }
 
         private void CmiUpdateAttLink_Click(object sender, EventArgs e)
         {
-            UpdateAtt(AAtt.TYPE_LINK);
+            UpdateAtt(Att.TYPE_LINK);
         }
 
         private void CmiUpdateAttMail_Click(object sender, EventArgs e)
         {
-            UpdateAtt(AAtt.TYPE_MAIL);
+            UpdateAtt(Att.TYPE_MAIL);
         }
 
         private void CmiUpdateAttDate_Click(object sender, EventArgs e)
         {
-            UpdateAtt(AAtt.TYPE_DATE);
+            UpdateAtt(Att.TYPE_DATE);
         }
 
         private void CmiUpdateAttData_Click(object sender, EventArgs e)
         {
-            UpdateAtt(AAtt.TYPE_DATA);
+            UpdateAtt(Att.TYPE_DATA);
         }
 
         private void CmiUpdateAttCall_Click(object sender, EventArgs e)
         {
-            UpdateAtt(AAtt.TYPE_CALL);
+            UpdateAtt(Att.TYPE_CALL);
         }
 
         private void CmiUpdateAttList_Click(object sender, EventArgs e)
         {
-            UpdateAtt(AAtt.TYPE_LIST);
+            UpdateAtt(Att.TYPE_LIST);
         }
 
         private void CmiUpdateAttMemo_Click(object sender, EventArgs e)
         {
-            UpdateAtt(AAtt.TYPE_MEMO);
+            UpdateAtt(Att.TYPE_MEMO);
         }
 
         private void CmiUpdateAttFile_Click(object sender, EventArgs e)
         {
-            UpdateAtt(AAtt.TYPE_FILE);
+            UpdateAtt(Att.TYPE_FILE);
         }
 
         private void CmiUpdateAttLine_Click(object sender, EventArgs e)
         {
-            UpdateAtt(AAtt.TYPE_LINE);
+            UpdateAtt(Att.TYPE_LINE);
         }
         #endregion
 
@@ -416,7 +416,7 @@ namespace Me.Amon.Pwd.Pro
         #endregion
 
         #region 私有函数
-        private void ShowView(AAtt att)
+        private void ShowView(Att att)
         {
             if (_CmpLast != null)
             {
@@ -439,49 +439,49 @@ namespace Me.Amon.Pwd.Pro
             IAttEdit ctl;
             switch (type)
             {
-                case AAtt.TYPE_TEXT:
+                case Att.TYPE_TEXT:
                     ctl = new BeanText();
                     break;
-                case AAtt.TYPE_PASS:
+                case Att.TYPE_PASS:
                     ctl = new BeanPass();
                     break;
-                case AAtt.TYPE_LINK:
+                case Att.TYPE_LINK:
                     ctl = new BeanLink();
                     break;
-                case AAtt.TYPE_MAIL:
+                case Att.TYPE_MAIL:
                     ctl = new BeanMail();
                     break;
-                case AAtt.TYPE_DATE:
+                case Att.TYPE_DATE:
                     ctl = new BeanDate();
                     break;
-                case AAtt.TYPE_DATA:
+                case Att.TYPE_DATA:
                     ctl = new BeanData();
                     break;
-                case AAtt.TYPE_CALL:
+                case Att.TYPE_CALL:
                     ctl = new BeanCall();
                     break;
-                case AAtt.TYPE_LIST:
+                case Att.TYPE_LIST:
                     ctl = new BeanList();
                     break;
-                case AAtt.TYPE_MEMO:
+                case Att.TYPE_MEMO:
                     ctl = new BeanMemo();
                     break;
-                case AAtt.TYPE_FILE:
+                case Att.TYPE_FILE:
                     ctl = new BeanFile();
                     break;
-                case AAtt.TYPE_LINE:
+                case Att.TYPE_LINE:
                     ctl = new BeanLine();
                     break;
-                case AAtt.TYPE_GUID:
+                case Att.TYPE_GUID:
                     ctl = new BeanGuid(_SafeModel, _DataList);
                     break;
-                case AAtt.TYPE_META:
+                case Att.TYPE_META:
                     ctl = new BeanMeta();
                     break;
-                case AAtt.TYPE_LOGO:
+                case Att.TYPE_LOGO:
                     ctl = new BeanLogo(this);
                     break;
-                case AAtt.TYPE_HINT:
+                case Att.TYPE_HINT:
                     ctl = new BeanHint();
                     break;
                 default:

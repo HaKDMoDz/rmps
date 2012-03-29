@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Bean;
-using Me.Amon.Bean.Att;
+using Me.Amon.Bean.Atts;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
 using Me.Amon.Util;
@@ -13,7 +13,7 @@ namespace Me.Amon.Pwd.Pro
 {
     public partial class BeanFile : UserControl, IAttEdit
     {
-        private AAtt _Att;
+        private Att _Att;
         private TextBox _Ctl;
         private DataModel _DataModel;
 
@@ -40,7 +40,7 @@ namespace Me.Amon.Pwd.Pro
 
         public string Title { get { return "文件"; } }
 
-        public bool ShowData(AAtt att)
+        public bool ShowData(Att att)
         {
             _Att = att;
 

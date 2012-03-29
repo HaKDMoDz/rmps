@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Bean.Att
+﻿namespace Me.Amon.Bean.Atts
 {
-    public class MailAtt : AAtt
+    public class MailAtt : Att
     {
         public MailAtt()
             : base(TYPE_MAIL, "", "")

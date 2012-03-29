@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Bean.Att
+﻿namespace Me.Amon.Bean.Atts
 {
-    public class HintAtt : AAtt
+    public class HintAtt : Att
     {
         public Gtd GtdHeader { get; set; }
 

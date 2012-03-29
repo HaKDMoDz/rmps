@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Bean.Att
+﻿namespace Me.Amon.Bean.Atts
 {
-    public class GuidAtt : AAtt
+    public class GuidAtt : Att
     {
         public bool IsAppend { get; set; }
 

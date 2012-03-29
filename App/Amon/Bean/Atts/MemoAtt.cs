@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Bean.Att
+﻿namespace Me.Amon.Bean.Atts
 {
-    public class MemoAtt : AAtt
+    public class MemoAtt : Att
     {
         public MemoAtt()
             : base(TYPE_MEMO, "", "")

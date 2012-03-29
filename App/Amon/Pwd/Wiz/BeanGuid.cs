@@ -3,7 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Bean;
-using Me.Amon.Bean.Att;
+using Me.Amon.Bean.Atts;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
 using Me.Amon.Uc;

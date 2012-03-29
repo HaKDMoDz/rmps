@@ -11,7 +11,7 @@
         <draw method="text" x="61" y="38" color="#000000" font-name="宋体" font-size="9" font-style="0">#公司网站#</draw>
         <draw method="text" x="140" y="75" color="#000000" font-name="黑体" font-size="28" font-style="1">#姓##名#</draw>
         <draw method="line" x1="270" y1="75" x2="270" y2="113" width="1" color="#666666"></draw>
-        <draw method="text" x="280" y="75" color="#000000" font-name="宋体" font-size="28" font-style="1">Hank</draw>
+        <draw method="text" x="280" y="75" color="#000000" font-name="宋体" font-size="28" font-style="1">#昵称#</draw>
         <draw method="text" x="280" y="116" color="#000000" font-name="宋体" font-size="16">#职位#</draw>
         <draw method="rect" x="0" y="160" width="400" height="20" color="#DDDDDD" />
         <draw method="text" x="20" y="165" color="#000000" font-name="宋体" font-size="9" font-style="1">#工作地址#</draw>

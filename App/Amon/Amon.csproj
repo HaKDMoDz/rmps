@@ -171,7 +171,7 @@
     <Compile Include="Bar\Opt\Vcard.Designer.cs">
       <DependentUpon>Vcard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Bean\Att\CallAtt.cs" />
+    <Compile Include="Bean\Atts\CallAtt.cs" />
     <Compile Include="Bean\Ico.cs" />
     <Compile Include="Bean\Log.cs" />
     <Compile Include="Bean\Png.cs" />
@@ -217,46 +217,46 @@
     <Compile Include="Bean\AAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Att\DataAtt.cs">
+    <Compile Include="Bean\Atts\DataAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Att\DateAtt.cs">
+    <Compile Include="Bean\Atts\DateAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Att\FileAtt.cs">
+    <Compile Include="Bean\Atts\FileAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Att\GuidAtt.cs">
+    <Compile Include="Bean\Atts\GuidAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Att\HintAtt.cs">
+    <Compile Include="Bean\Atts\HintAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Att\LineAtt.cs">
+    <Compile Include="Bean\Atts\LineAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Att\LinkAtt.cs">
+    <Compile Include="Bean\Atts\LinkAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Att\ListAtt.cs">
+    <Compile Include="Bean\Atts\ListAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Att\LogoAtt.cs">
+    <Compile Include="Bean\Atts\LogoAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Att\MailAtt.cs">
+    <Compile Include="Bean\Atts\MailAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Att\MemoAtt.cs">
+    <Compile Include="Bean\Atts\MemoAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Att\MetaAtt.cs">
+    <Compile Include="Bean\Atts\MetaAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Att\PassAtt.cs">
+    <Compile Include="Bean\Atts\PassAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Att\TextAtt.cs">
+    <Compile Include="Bean\Atts\TextAtt.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bean\Cat.cs">
@@ -574,7 +574,7 @@
     <Compile Include="Ren\ARen.Designer.cs">
       <DependentUpon>ARen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Ren\M\MRen.cs" />
+    <Compile Include="Ren\MRen.cs" />
     <Compile Include="Sec\ASec.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Bean.Att
+﻿namespace Me.Amon.Bean.Atts
 {
-    public class PassAtt : AAtt
+    public class PassAtt : Att
     {
         public const int SPEC_PWDS_KEY = 0;// 字符空间索引
         public const int SPEC_PWDS_LEN = 1;// 生成口令长度

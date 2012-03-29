@@ -197,7 +197,7 @@ namespace Me.Amon.Uc
                 barcodeEncoder.Height = 160;
                 Image img = barcodeEncoder.Encode(BarcodeFormat.QRCode, buffer.ToString());
 
-                AAtt item = _SafeModel.GetAtt(AAtt.PWDS_HEAD_META);
+                Att item = _SafeModel.GetAtt(Att.PWDS_HEAD_META);
                 dst = Path.Combine(dst, item.Name + ".jpg");
 
                 img.Save(dst, ImageFormat.Jpeg);
@@ -252,7 +252,7 @@ namespace Me.Amon.Uc
 
         private string _File(string text, string path, string ext, Encoding encoding)
         {
-            AAtt item = _SafeModel.GetAtt(AAtt.PWDS_HEAD_META);
+            Att item = _SafeModel.GetAtt(Att.PWDS_HEAD_META);
             path = Path.Combine(path, item.Name + ext);
 
             Stream stream = File.Exists(path) ? File.OpenWrite(path) : File.Create(path);
@@ -296,8 +296,8 @@ namespace Me.Amon.Uc
 
         private void _Trim(StringBuilder buffer)
         {
-            AAtt item;
-            for (int i = AAtt.HEAD_SIZE, j = _SafeModel.Count; i < j; i += 1)
+            Att item;
+            for (int i = Att.HEAD_SIZE, j = _SafeModel.Count; i < j; i += 1)
             {
                 item = _SafeModel.GetAtt(i);
                 buffer.Replace('#' + item.Name + '#', item.Data);
@@ -422,7 +422,7 @@ namespace Me.Amon.Uc
                 }
             }
 
-            AAtt item = _SafeModel.GetAtt(AAtt.PWDS_HEAD_META);
+            Att item = _SafeModel.GetAtt(Att.PWDS_HEAD_META);
             dst = Path.Combine(dst, item.Name + ".png");
             image.Save(dst, ImageFormat.Png);
 

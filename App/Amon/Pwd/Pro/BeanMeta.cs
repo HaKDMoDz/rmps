@@ -8,7 +8,7 @@ namespace Me.Amon.Pwd.Pro
 {
     public partial class BeanMeta : UserControl, IAttEdit
     {
-        private AAtt _Att;
+        private Att _Att;
         private TextBox _Ctl;
 
         #region 构造函数
@@ -29,7 +29,7 @@ namespace Me.Amon.Pwd.Pro
 
         public string Title { get { return "搜索"; } }
 
-        public bool ShowData(AAtt att)
+        public bool ShowData(Att att)
         {
             _Att = att;
 
@@ -65,7 +65,7 @@ namespace Me.Amon.Pwd.Pro
             string name = TbName.Text;
             if (string.IsNullOrEmpty(name))
             {
-                Main.ShowAlert("请输入口令标题！");
+                Main.ShowAlert("请输入记录标题！");
                 TbName.Focus();
                 return false;
             }

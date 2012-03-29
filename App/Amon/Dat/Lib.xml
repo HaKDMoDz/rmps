@@ -754,7 +754,7 @@
           <Order>19</Order>
           <Id>qqqqqaavaqdgbaty</Id>
           <Type>1</Type>
-          <Name>职位</Name>
+          <Name>部门</Name>
           <Data/>
           <Memo/>
         </Item>
@@ -762,7 +762,7 @@
           <Order>20</Order>
           <Id>qqqqqazrdzvevvyw</Id>
           <Type>1</Type>
-          <Name>职责</Name>
+          <Name>职位</Name>
           <Data/>
           <Memo/>
         </Item>

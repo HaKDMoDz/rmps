@@ -562,7 +562,7 @@ namespace Me.Amon
             _Error.Show(_IApp.Form, error);
         }
 
-        public static void ShowInput(string message, string deftext)
+        public static string ShowInput(string message, string deftext)
         {
             if (_Input == null)
             {
@@ -570,6 +570,7 @@ namespace Me.Amon
             }
             BeanUtil.CenterToParent(_Input, _IApp.Form);
             _Input.Show(_IApp.Form, message, deftext);
+            return _Input.Message;
         }
 
         private static StreamWriter _Writer;

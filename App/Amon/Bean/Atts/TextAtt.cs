@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Bean.Att
+﻿namespace Me.Amon.Bean.Atts
 {
-    public class TextAtt : AAtt
+    public class TextAtt : Att
     {
         public TextAtt()
             : base(TYPE_TEXT, "", "")

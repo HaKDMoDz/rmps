@@ -13,7 +13,7 @@ namespace Me.Amon.Pwd._Log
         private APwd _APwd;
         private UserModel _UserModel;
         private SafeModel _SafeModel;
-        private List<AAtt> _AttList;
+        private List<Att> _AttList;
 
         #region 构造函数
         public LogEdit()
@@ -32,7 +32,7 @@ namespace Me.Amon.Pwd._Log
         {
             _UserModel = userModel;
             _SafeModel = safeModel;
-            _AttList = new List<AAtt>();
+            _AttList = new List<Att>();
 
             foreach (KeyLog log in _UserModel.DBObject.ListRecLog(_SafeModel.Key.Id))
             {
@@ -65,8 +65,8 @@ namespace Me.Amon.Pwd._Log
             buffer.Append("搜索：").Append(recLog.MetaKey).Append(Environment.NewLine);
             buffer.Append("徽标：").Append(recLog.IcoName).Append(Environment.NewLine);
             buffer.Append("提醒：").Append(recLog.GtdMemo).Append(Environment.NewLine);
-            AAtt temp;
-            for (int i = AAtt.HEAD_SIZE; i < _AttList.Count; i += 1)
+            Att temp;
+            for (int i = Att.HEAD_SIZE; i < _AttList.Count; i += 1)
             {
                 temp = _AttList[i];
                 buffer.Append(temp.Name).Append("：").Append(temp.Data).Append(Environment.NewLine);

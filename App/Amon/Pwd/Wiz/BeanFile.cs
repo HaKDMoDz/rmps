@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Bean;
-using Me.Amon.Bean.Att;
+using Me.Amon.Bean.Atts;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
 using Me.Amon.Util;
@@ -19,7 +19,7 @@ namespace Me.Amon.Pwd.Wiz
         private TableLayoutPanel _Grid;
         private RowStyle _Style;
         private Label _Label;
-        private AAtt _Att;
+        private Att _Att;
 
         #region 构造函数
         public BeanFile()
@@ -65,7 +65,7 @@ namespace Me.Amon.Pwd.Wiz
             return 27;
         }
 
-        public bool ShowData(DataModel dataModel, AAtt att)
+        public bool ShowData(DataModel dataModel, Att att)
         {
             _DataModel = dataModel;
 

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Bean;
-using Me.Amon.Bean.Att;
+using Me.Amon.Bean.Atts;
 using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
@@ -41,7 +41,7 @@ namespace Me.Amon.Pwd.Pro
 
         public string Title { get { return "徽标"; } }
 
-        public bool ShowData(AAtt att)
+        public bool ShowData(Att att)
         {
             _Att = att as LogoAtt;
 

@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Bean.Att
+﻿namespace Me.Amon.Bean.Atts
 {
-    public class ListAtt : AAtt
+    public class ListAtt : Att
     {
         public ListAtt()
             : base(TYPE_LIST, "", "")

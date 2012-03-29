@@ -51,7 +51,7 @@ namespace Me.Amon.Pwd.Wiz
             TpGrid.Controls.Clear();
             TpGrid.RowStyles.Clear();
 
-            for (int i = 0; i < AAtt.TYPE_SIZE - AAtt.HEAD_SIZE; i += 1)
+            for (int i = 0; i < Att.TYPE_SIZE - Att.HEAD_SIZE; i += 1)
             {
                 if (_IdxList.ContainsKey(i))
                 {
@@ -61,9 +61,9 @@ namespace Me.Amon.Pwd.Wiz
 
             int row = 0;
             int max = 0;
-            for (int i = AAtt.HEAD_SIZE; i < _SafeModel.Count; i += 1)
+            for (int i = Att.HEAD_SIZE; i < _SafeModel.Count; i += 1)
             {
-                AAtt att = _SafeModel.GetAtt(i);
+                Att att = _SafeModel.GetAtt(i);
 
                 IAttEdit ctl = GetCtl(att.Type);
                 max += ctl.InitView(row);
@@ -82,7 +82,7 @@ namespace Me.Amon.Pwd.Wiz
 
         public bool SaveData()
         {
-            for (int i = 0; i < AAtt.TYPE_SIZE - AAtt.HEAD_SIZE; i += 1)
+            for (int i = 0; i < Att.TYPE_SIZE - Att.HEAD_SIZE; i += 1)
             {
                 if (_IdxList.ContainsKey(i))
                 {
@@ -91,9 +91,9 @@ namespace Me.Amon.Pwd.Wiz
             }
 
             _SafeModel.Modified = false;
-            for (int i = AAtt.HEAD_SIZE; i < _SafeModel.Count; i += 1)
+            for (int i = Att.HEAD_SIZE; i < _SafeModel.Count; i += 1)
             {
-                AAtt att = _SafeModel.GetAtt(i);
+                Att att = _SafeModel.GetAtt(i);
                 if (!GetCtl(att.Type).Save())
                 {
                     return false;
@@ -128,37 +128,37 @@ namespace Me.Amon.Pwd.Wiz
             {
                 switch (type)
                 {
-                    case AAtt.TYPE_TEXT:
+                    case Att.TYPE_TEXT:
                         ctl = new BeanText(this);
                         break;
-                    case AAtt.TYPE_PASS:
+                    case Att.TYPE_PASS:
                         ctl = new BeanPass(this);
                         break;
-                    case AAtt.TYPE_LINK:
+                    case Att.TYPE_LINK:
                         ctl = new BeanLink(this);
                         break;
-                    case AAtt.TYPE_MAIL:
+                    case Att.TYPE_MAIL:
                         ctl = new BeanMail(this);
                         break;
-                    case AAtt.TYPE_DATE:
+                    case Att.TYPE_DATE:
                         ctl = new BeanDate(this);
                         break;
-                    case AAtt.TYPE_DATA:
+                    case Att.TYPE_DATA:
                         ctl = new BeanData(this);
                         break;
-                    case AAtt.TYPE_CALL:
+                    case Att.TYPE_CALL:
                         ctl = new BeanCall(this);
                         break;
-                    case AAtt.TYPE_LIST:
+                    case Att.TYPE_LIST:
                         ctl = new BeanList(this);
                         break;
-                    case AAtt.TYPE_MEMO:
+                    case Att.TYPE_MEMO:
                         ctl = new BeanMemo(this);
                         break;
-                    case AAtt.TYPE_FILE:
+                    case Att.TYPE_FILE:
                         ctl = new BeanFile(this);
                         break;
-                    case AAtt.TYPE_LINE:
+                    case Att.TYPE_LINE:
                         ctl = new BeanLine(this);
                         break;
                     default:
@@ -178,6 +178,6 @@ namespace Me.Amon.Pwd.Wiz
         }
 
         private Dictionary<int, int> _IdxList = new Dictionary<int, int>();
-        private Dictionary<int, List<IAttEdit>> _CmpList = new Dictionary<int, List<IAttEdit>>(AAtt.TYPE_SIZE);
+        private Dictionary<int, List<IAttEdit>> _CmpList = new Dictionary<int, List<IAttEdit>>(Att.TYPE_SIZE);
     }
 }
