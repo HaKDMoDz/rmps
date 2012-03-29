@@ -30,8 +30,8 @@
     <SuiteName>阿木软件</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>7</ApplicationRevision>
-    <ApplicationVersion>5.1.1.%2a</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>6.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -80,12 +80,6 @@
     </Reference>
     <Reference Include="Db4objects.Db4o">
       <HintPath>Lib\Db4objects.Db4o.dll</HintPath>
-    </Reference>
-    <Reference Include="Db4objects.Db4o.Linq">
-      <HintPath>Lib\Db4objects.Db4o.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="Db4objects.Db4o.NativeQueries">
-      <HintPath>Lib\Db4objects.Db4o.NativeQueries.dll</HintPath>
     </Reference>
     <Reference Include="IconLib">
       <HintPath>.\Lib\IconLib.dll</HintPath>
@@ -1208,6 +1202,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Amon.dat" />
+    <Content Include="Amon.res" />
     <Content Include="Logo\logo.ico" />
     <None Include="Resources\Save.png" />
     <None Include="Resources\Alert.png" />
