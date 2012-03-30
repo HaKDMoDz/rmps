@@ -209,37 +209,32 @@ namespace Me.Amon.Util
 
         public static Image ReadImage(string path, string file, Image defImg)
         {
-            Stream stream;
             if (Regex.IsMatch(file, "^[a-zA-z]{2,}:/{2,3}[^\\s]+"))
             {
-                stream = WebRequest.Create(file).GetResponse().GetResponseStream();
-            }
-            else
-            {
-                if (!Path.IsPathRooted(file))
+                try
                 {
-                    file = Path.Combine(path, file);
+                    Stream stream = WebRequest.Create(file).GetResponse().GetResponseStream();
+                    Image img = Image.FromStream(stream);
+                    stream.Close();
+                    return img;
                 }
-
-                if (!File.Exists(file))
+                catch (Exception exp)
                 {
+                    Main.LogInfo(exp.Message);
                     return defImg;
                 }
-
-                stream = File.OpenRead(file);
             }
 
-            try
+            if (!Path.IsPathRooted(file))
             {
-                Image img = Image.FromStream(stream);
-                stream.Close();
-                return img;
+                file = Path.Combine(path, file);
             }
-            catch (Exception exp)
+
+            if (!File.Exists(file))
             {
-                Main.LogInfo(exp.Message);
                 return defImg;
             }
+            return Image.FromFile(file);
         }
 
         public static Image ScaleImage(Image img, int dim, bool ratio)
