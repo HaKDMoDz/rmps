@@ -162,6 +162,8 @@ namespace Me.Amon.Ren
         #region 私有函数
         private bool DoReview()
         {
+            ShowEcho("");
+
             string rule = TbRule.Text;
             if (string.IsNullOrEmpty(rule))
             {
@@ -195,7 +197,7 @@ namespace Me.Amon.Ren
             foreach (DataRow row in _DataList.Rows)
             {
                 src = row["OldName"] as string;
-                dst = _Renamer.Update(src);
+                dst = _Renamer.Update(FdBrowser.SelectedPath, src);
                 if (string.IsNullOrEmpty(dst))
                 {
                     //;
@@ -225,6 +227,8 @@ namespace Me.Amon.Ren
 
         private void DoRename()
         {
+            ShowEcho("");
+
             string src = FdBrowser.SelectedPath;
             string dst = NewDir(src);
             if (string.IsNullOrEmpty(dst))

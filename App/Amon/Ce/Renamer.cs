@@ -95,6 +95,9 @@ namespace Me.Amon.Ce
             _UdcList.Clear();
             _UdnList.Clear();
             _RplList.Clear();
+            _FmtList.Clear();
+
+            _Buffer.Clear();
 
             Index = 0;
             char c;
@@ -175,7 +178,6 @@ namespace Me.Amon.Ce
                 Index += 1;
             }
             _Command = _Buffer.ToString();
-            _Buffer.Clear();
 
             _Enough = true;
             return true;
@@ -414,7 +416,7 @@ namespace Me.Amon.Ce
         private bool DecodeFmt(string cmd)
         {
             StringBuilder buffer = new StringBuilder();
-            if (!DecodeEnum(cmd, buffer, NUMBER))
+            if (!DecodeEnum(cmd, buffer, '\0'))
             {
                 return false;
             }
@@ -460,7 +462,7 @@ namespace Me.Amon.Ce
                 {
                     if (c == CHARACTER || c == NUMBER || c == FILE_NAME || c == FILE_EXT || c == CTL_LOWER || c == CTL_UPPER || c == ORIGIN)
                     {
-                        Error = "枚举字符中不应包含\\/:*?\"<>|等特殊字符！";
+                        Error = "枚举中不应包含:|*?\"<>\\/等特殊字符！";
                         return false;
                     }
                 }
@@ -488,7 +490,7 @@ namespace Me.Amon.Ce
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        public string Update(string file)
+        public string Update(string path, string file)
         {
             if (!_Enough)
             {
@@ -502,6 +504,9 @@ namespace Me.Amon.Ce
                 Error = "无效的文件信息：" + file;
                 return "";
             }
+
+            _Buffer.Clear();
+
             string exts = Path.GetExtension(file);
             if (!string.IsNullOrEmpty(exts))
             {
@@ -575,12 +580,12 @@ namespace Me.Amon.Ce
                 }
                 if (c == TMP_UPDATE_TIME)
                 {
-                    _Buffer.Append(File.GetLastWriteTime(file).ToString(_FmtList[ti++]));
+                    _Buffer.Append(File.GetLastWriteTime(Path.Combine(path, file)).ToString(_FmtList[ti++]));
                     continue;
                 }
                 if (c == TMP_CREATE_TIME)
                 {
-                    _Buffer.Append(File.GetCreationTime(file).ToString(_FmtList[ti++]));
+                    _Buffer.Append(File.GetCreationTime(Path.Combine(path, file)).ToString(_FmtList[ti++]));
                     continue;
                 }
                 if (c == NUMBER)
@@ -597,7 +602,6 @@ namespace Me.Amon.Ce
             }
 
             string t = _Buffer.ToString();
-            _Buffer.Clear();
             Encode();
 
             return t;
