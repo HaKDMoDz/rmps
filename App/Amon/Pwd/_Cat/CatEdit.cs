@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using Me.Amon.Da;
 using Me.Amon.Event;
-using Me.Amon.Bean;
+using Me.Amon.Pwd;
 using Me.Amon.Util;
 
 namespace Me.Amon.Pwd._Cat

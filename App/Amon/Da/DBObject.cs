@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Config;
-using Me.Amon.Bean;
 using Me.Amon.Model;
+using Me.Amon.Pwd;
 using Me.Amon.Ren;
 using Me.Amon.Util;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Me.Amon.Bean;
+using Me.Amon.Pwd;
 using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
@@ -131,7 +131,7 @@ namespace Me.Amon.Pwd.Wiz
             _APwd.ShowTips(control, caption);
         }
 
-        public void ShowIcoSeeker(string rootDir, AmonHandler<Bean.Ico> handler)
+        public void ShowIcoSeeker(string rootDir, AmonHandler<Pwd.Ico> handler)
         {
             _APwd.ShowIcoSeeker(rootDir, handler);
         }

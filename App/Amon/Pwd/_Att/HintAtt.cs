@@ -1,8 +1,10 @@
-﻿namespace Me.Amon.Bean.Atts
+﻿using Me.Amon.Gtd;
+
+namespace Me.Amon.Pwd._Att
 {
     public class HintAtt : Att
     {
-        public Gtd GtdHeader { get; set; }
+        public MGtd GtdHeader { get; set; }
 
         public HintAtt()
             : base(TYPE_HINT, "", "")

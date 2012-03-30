@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Windows.Forms;
-using Me.Amon.Bean;
-using Me.Amon.Bean.Atts;
+using Me.Amon.Pwd;
+using Me.Amon.Pwd._Att;
 using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
@@ -12,7 +12,7 @@ namespace Me.Amon.Pwd.Pro
     public partial class BeanLogo : UserControl, IAttEdit
     {
         private LogoAtt _Att;
-        private Bean.Ico _AIco;
+        private Pwd.Ico _AIco;
         private APro _APro;
         private DataModel _DataModel;
 
@@ -34,7 +34,7 @@ namespace Me.Amon.Pwd.Pro
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
             _DataModel = dataModel;
-            _AIco = new Bean.Ico();
+            _AIco = new Pwd.Ico();
         }
 
         public Control Control { get { return this; } }
@@ -107,11 +107,11 @@ namespace Me.Amon.Pwd.Pro
         #region 事件处理
         private void PbName_Click(object sender, System.EventArgs e)
         {
-            _APro.ShowIcoSeeker(new AmonHandler<Bean.Ico>(ChangeImgByKey));
+            _APro.ShowIcoSeeker(new AmonHandler<Pwd.Ico>(ChangeImgByKey));
         }
         #endregion
 
-        private void ChangeImgByKey(Bean.Ico ico)
+        private void ChangeImgByKey(Pwd.Ico ico)
         {
             _AIco = ico;
             string path;

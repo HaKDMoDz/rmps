@@ -1,4 +1,6 @@
-﻿namespace Me.Amon.Bean
+﻿using Me.Amon.Model;
+
+namespace Me.Amon.Pwd
 {
     public class KeyLog : Log
     {

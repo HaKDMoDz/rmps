@@ -1,4 +1,4 @@
-﻿using Me.Amon.Bean;
+﻿using Me.Amon.Pwd;
 using Me.Amon.Uc;
 
 namespace Me.Amon.Sec.Pro.Uc.DoUi

@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Bean.Atts
+﻿namespace Me.Amon.Pwd._Att
 {
     public class CallAtt : Att
     {

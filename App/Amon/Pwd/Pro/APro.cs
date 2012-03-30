@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
-using Me.Amon.Bean;
+using Me.Amon.Pwd;
 using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
@@ -254,7 +254,7 @@ namespace Me.Amon.Pwd.Pro
         #endregion
 
         #region 公有函数
-        public void ShowIcoSeeker(AmonHandler<Bean.Ico> handler)
+        public void ShowIcoSeeker(AmonHandler<Pwd.Ico> handler)
         {
             _APwd.ShowIcoSeeker(_DataModel.KeyDir, handler);
         }

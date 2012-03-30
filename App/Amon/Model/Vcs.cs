@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Me.Amon.Bean
+namespace Me.Amon.Model
 {
     public abstract class Vcs
     {

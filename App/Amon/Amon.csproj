@@ -165,10 +165,11 @@
     <Compile Include="Bar\Opt\Vcard.Designer.cs">
       <DependentUpon>Vcard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Bean\Atts\CallAtt.cs" />
-    <Compile Include="Bean\Ico.cs" />
-    <Compile Include="Bean\Log.cs" />
-    <Compile Include="Bean\Png.cs" />
+    <Compile Include="Model\Dto.cs" />
+    <Compile Include="Pwd\_Att\CallAtt.cs" />
+    <Compile Include="Pwd\Ico.cs" />
+    <Compile Include="Model\Log.cs" />
+    <Compile Include="Pwd\Png.cs" />
     <Compile Include="Ce\Renamer.cs" />
     <Compile Include="Ce\Wrapper.cs" />
     <Compile Include="Da\DBAccess.cs" />
@@ -208,90 +209,90 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Bean\AAtt.cs">
+    <Compile Include="Pwd\Att.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Atts\DataAtt.cs">
+    <Compile Include="Pwd\_Att\DataAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Atts\DateAtt.cs">
+    <Compile Include="Pwd\_Att\DateAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Atts\FileAtt.cs">
+    <Compile Include="Pwd\_Att\FileAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Atts\GuidAtt.cs">
+    <Compile Include="Pwd\_Att\GuidAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Atts\HintAtt.cs">
+    <Compile Include="Pwd\_Att\HintAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Atts\LineAtt.cs">
+    <Compile Include="Pwd\_Att\LineAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Atts\LinkAtt.cs">
+    <Compile Include="Pwd\_Att\LinkAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Atts\ListAtt.cs">
+    <Compile Include="Pwd\_Att\ListAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Atts\LogoAtt.cs">
+    <Compile Include="Pwd\_Att\LogoAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Atts\MailAtt.cs">
+    <Compile Include="Pwd\_Att\MailAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Atts\MemoAtt.cs">
+    <Compile Include="Pwd\_Att\MemoAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Atts\MetaAtt.cs">
+    <Compile Include="Pwd\_Att\MetaAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Atts\PassAtt.cs">
+    <Compile Include="Pwd\_Att\PassAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Atts\TextAtt.cs">
+    <Compile Include="Pwd\_Att\TextAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Cat.cs">
+    <Compile Include="Pwd\Cat.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\SafeModel.cs" />
     <Compile Include="Model\Pwd\DataModel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Dir.cs">
+    <Compile Include="Pwd\Dir.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\GtdDetail.cs">
+    <Compile Include="Gtd\MGtdDetail.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Gtd.cs">
+    <Compile Include="Gtd\MGtd.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Key.cs">
+    <Compile Include="Pwd\Key.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\LibDetail.cs">
+    <Compile Include="Pwd\LibDetail.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Lib.cs">
+    <Compile Include="Pwd\Lib.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\KeyLog.cs">
+    <Compile Include="Pwd\KeyLog.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Pwd\SafeModel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Udc.cs">
+    <Compile Include="Pwd\Udc.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\UdcModel.cs" />
     <Compile Include="Model\UserModel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bean\Vcs.cs">
+    <Compile Include="Model\Vcs.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\ViewModel.cs">

@@ -7,7 +7,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
-using Me.Amon.Bean;
+using Me.Amon.Pwd;
 using Me.Amon.Model.Pwd;
 using Me.Amon.Util;
 using MessagingToolkit.Barcode;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
-using Me.Amon.Bean.Atts;
+using Me.Amon.Pwd._Att;
 using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
@@ -12,7 +12,7 @@ namespace Me.Amon.Pwd.Wiz
     public partial class BeanHead : UserControl, IWizView
     {
         private AWiz _AWiz;
-        private Bean.Ico _AIco;
+        private Pwd.Ico _AIco;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
         private TextBox _TBox;
@@ -34,7 +34,7 @@ namespace Me.Amon.Pwd.Wiz
         public void Init(DataModel dataModel, ViewModel viewModel)
         {
             _DataModel = dataModel;
-            _AIco = new Bean.Ico();
+            _AIco = new Pwd.Ico();
 
             TbName.GotFocus += new EventHandler(TbName_GotFocus);
             TbMeta.GotFocus += new EventHandler(TbMeta_GotFocus);
@@ -171,7 +171,7 @@ namespace Me.Amon.Pwd.Wiz
 
         private void PbLogo_Click(object sender, EventArgs e)
         {
-            _AWiz.ShowIcoSeeker(_DataModel.KeyDir, new AmonHandler<Bean.Ico>(ChangeImgByKey));
+            _AWiz.ShowIcoSeeker(_DataModel.KeyDir, new AmonHandler<Pwd.Ico>(ChangeImgByKey));
         }
 
         private void TbName_GotFocus(object sender, EventArgs e)
@@ -196,7 +196,7 @@ namespace Me.Amon.Pwd.Wiz
         #endregion
 
         #region 私有函数
-        private void ChangeImgByKey(Bean.Ico ico)
+        private void ChangeImgByKey(Pwd.Ico ico)
         {
             _AIco = ico;
             string path;

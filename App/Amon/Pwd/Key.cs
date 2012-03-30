@@ -1,7 +1,8 @@
 ﻿using System.Text;
 using System.Xml;
+using Me.Amon.Model;
 
-namespace Me.Amon.Bean
+namespace Me.Amon.Pwd
 {
     public class Key : Vcs
     {

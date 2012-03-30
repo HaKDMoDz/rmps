@@ -1,5 +1,5 @@
 ﻿using System;
-using Me.Amon.Bean;
+using Me.Amon.Pwd;
 using Me.Amon.Uc;
 using Me.Amon.Util;
 

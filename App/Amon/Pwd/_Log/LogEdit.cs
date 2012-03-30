@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
-using Me.Amon.Bean;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
 
@@ -44,13 +43,7 @@ namespace Me.Amon.Pwd._Log
         #region 事件处理
         private void LbLog_SelectedIndexChanged(object sender, EventArgs e)
         {
-            KeyLog log = LbLog.SelectedItem as KeyLog;
-            if (log == null)
-            {
-                return;
-            }
-
-            KeyLog recLog = _UserModel.DBObject.ReadRecLog(log.Id);
+            KeyLog recLog = LbLog.SelectedItem as KeyLog;
             if (recLog == null)
             {
                 return;
@@ -95,6 +88,7 @@ namespace Me.Amon.Pwd._Log
             _SafeModel.Key.FromLog(oldLog);
             _SafeModel.Decode();
             _APwd.ShowRec(_SafeModel.Key);
+            _UserModel.DBObject.SaveVcs(_SafeModel.Key);
 
             LbLog.Items.Insert(0, newLog);
         }

@@ -2,12 +2,12 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
+using System.Net;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using ICSharpCode.SharpZipLib.Checksums;
 using ICSharpCode.SharpZipLib.Zip;
 using Me.Amon.Uc;
-using System.Text.RegularExpressions;
-using System.Net;
 
 namespace Me.Amon.Util
 {
@@ -180,31 +180,27 @@ namespace Me.Amon.Util
 
         public static Image ReadImage(string file, Image defImg)
         {
-            Stream stream;
             if (Regex.IsMatch(file, "^[a-zA-z]{2,}:/{2,3}[^\\s]+"))
             {
-                stream = WebRequest.Create(file).GetRequestStream();
-            }
-            else if (File.Exists(file))
-            {
-                stream = File.OpenRead(file);
-            }
-            else
-            {
-                return defImg;
+                Stream stream = WebRequest.Create(file).GetRequestStream();
+                try
+                {
+                    Image img = Image.FromStream(stream);
+                    stream.Close();
+                    return img;
+                }
+                catch (Exception exp)
+                {
+                    Main.LogInfo(exp.Message);
+                    return defImg;
+                }
             }
 
-            try
+            if (File.Exists(file))
             {
-                Image img = Image.FromStream(stream);
-                stream.Close();
-                return img;
+                return Image.FromFile(file);
             }
-            catch (Exception exp)
-            {
-                Main.LogInfo(exp.Message);
-                return defImg;
-            }
+            return defImg;
         }
 
         public static Image ReadImage(string path, string file, Image defImg)

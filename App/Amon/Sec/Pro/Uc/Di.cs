@@ -2,7 +2,7 @@
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using Me.Amon.Bean;
+using Me.Amon.Pwd;
 using Me.Amon.Sec.Pro.Uc.DiUi;
 using Me.Amon.Uc;
 

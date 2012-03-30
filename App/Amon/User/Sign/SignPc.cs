@@ -3,9 +3,10 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
-using Me.Amon.Bean;
 using Me.Amon.Da;
 using Me.Amon.Model;
+using Me.Amon.Pwd;
+using Me.Amon.Ren;
 using Me.Amon.Util;
 
 namespace Me.Amon.User.Sign
@@ -202,54 +203,100 @@ namespace Me.Amon.User.Sign
             _UserModel.Init();
             BeanUtil.UnZip("Amon.dat", _UserModel.Home);
 
-            StreamReader stream = new StreamReader(Path.Combine(_UserModel.Home, "Cat.xml"));
-            using (XmlReader reader = XmlReader.Create(stream))
-            {
-                Cat cat;
-                while (reader.ReadToFollowing("Cat"))
-                {
-                    cat = new Cat();
-                    if (!cat.FromXml(reader))
-                    {
-                        continue;
-                    }
-                    _UserModel.DBObject.SaveVcs(cat);
-                }
-            }
-            stream.Close();
+            string file;
+            StreamReader stream;
 
-            stream = new StreamReader(Path.Combine(_UserModel.Home, "Lib.xml"));
-            using (XmlReader reader = XmlReader.Create(stream))
+            #region 类别
+            file = Path.Combine(_UserModel.Home, "Cat.xml");
+            if (File.Exists(file))
             {
-                Lib header;
-                while (reader.ReadToFollowing("Lib"))
+                stream = new StreamReader(file);
+                using (XmlReader reader = XmlReader.Create(stream))
                 {
-                    header = new Lib();
-                    if (!header.FromXml(reader))
+                    Cat cat;
+                    while (reader.ReadToFollowing("Cat"))
                     {
-                        continue;
+                        cat = new Cat();
+                        if (!cat.FromXml(reader))
+                        {
+                            continue;
+                        }
+                        _UserModel.DBObject.SaveVcs(cat);
                     }
-                    _UserModel.DBObject.SaveVcs(header);
                 }
+                stream.Close();
+                File.Delete(file);
             }
-            stream.Close();
+            #endregion
 
-            stream = new StreamReader(Path.Combine(_UserModel.Home, "Udc.xml"));
-            using (XmlReader reader = XmlReader.Create(stream))
+            #region 模板
+            file = Path.Combine(_UserModel.Home, "Lib.xml");
+            if (File.Exists(file))
             {
-                Udc udc;
-                while (reader.ReadToFollowing("Udc"))
+                stream = new StreamReader(file);
+                using (XmlReader reader = XmlReader.Create(stream))
                 {
-                    udc = new Udc();
-                    if (!udc.FromXml(reader))
+                    Lib header;
+                    while (reader.ReadToFollowing("Lib"))
                     {
-                        continue;
+                        header = new Lib();
+                        if (!header.FromXml(reader))
+                        {
+                            continue;
+                        }
+                        _UserModel.DBObject.SaveVcs(header);
                     }
-                    _UserModel.DBObject.SaveVcs(udc);
                 }
+                stream.Close();
+                File.Delete(file);
             }
-            stream.Close();
+            #endregion
 
+            #region 字符
+            file = Path.Combine(_UserModel.Home, "Udc.xml");
+            if (File.Exists(file))
+            {
+                stream = new StreamReader(file);
+                using (XmlReader reader = XmlReader.Create(stream))
+                {
+                    Udc udc;
+                    while (reader.ReadToFollowing("Udc"))
+                    {
+                        udc = new Udc();
+                        if (!udc.FromXml(reader))
+                        {
+                            continue;
+                        }
+                        _UserModel.DBObject.SaveVcs(udc);
+                    }
+                }
+                stream.Close();
+                File.Delete(file);
+            }
+            #endregion
+
+            #region 重命名
+            file = Path.Combine(_UserModel.Home, "Ren.xml");
+            if (File.Exists(file))
+            {
+                stream = new StreamReader(file);
+                using (XmlReader reader = XmlReader.Create(stream))
+                {
+                    MRen ren;
+                    while (reader.ReadToFollowing("Ren"))
+                    {
+                        ren = new MRen();
+                        if (!ren.FromXml(reader))
+                        {
+                            continue;
+                        }
+                        _UserModel.DBObject.SaveVcs(ren);
+                    }
+                }
+                stream.Close();
+                File.Delete(file);
+            }
+            #endregion
             _SignAc.CallBack(IEnv.IAPP_APWD);
         }
         #endregion

@@ -56,7 +56,7 @@ namespace Me.Amon.Uw
             }
         }
 
-        public AmonHandler<Bean.Png> CallBackHandler { get; set; }
+        public AmonHandler<Pwd.Png> CallBackHandler { get; set; }
 
         private void BtAppend_Click(object sender, EventArgs e)
         {
@@ -75,7 +75,7 @@ namespace Me.Amon.Uw
             if (CallBackHandler != null)
             {
                 var item = LvPng.SelectedItems[0];
-                CallBackHandler.Invoke(new Bean.Png { Path = _HomeDir, File = item.ImageKey, Image = IlPng.Images[item.ImageKey] });
+                CallBackHandler.Invoke(new Pwd.Png { Path = _HomeDir, File = item.ImageKey, Image = IlPng.Images[item.ImageKey] });
             }
             Close();
         }
@@ -95,7 +95,7 @@ namespace Me.Amon.Uw
             if (CallBackHandler != null)
             {
                 var item = LvPng.SelectedItems[0];
-                CallBackHandler.Invoke(new Bean.Png { Path = _HomeDir, File = item.ImageKey, Image = IlPng.Images[item.ImageKey] });
+                CallBackHandler.Invoke(new Pwd.Png { Path = _HomeDir, File = item.ImageKey, Image = IlPng.Images[item.ImageKey] });
             }
             Close();
         }

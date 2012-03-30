@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Me.Amon.Bean;
+using Me.Amon.Pwd;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
 using Me.Amon.Util;
@@ -33,7 +33,7 @@ namespace Me.Amon.Pwd._Lib
         {
             _DataModel = dataModel;
 
-            foreach (Bean.Lib header in dataModel.LibList)
+            foreach (Pwd.Lib header in dataModel.LibList)
             {
                 if (header.Id == "0")
                 {
@@ -51,7 +51,7 @@ namespace Me.Amon.Pwd._Lib
                 {
                     continue;
                 }
-                foreach (Bean.LibDetail detail in header.Details)
+                foreach (Pwd.LibDetail detail in header.Details)
                 {
                     TreeNode node = new TreeNode();
                     node.Name = detail.Id;
@@ -70,7 +70,7 @@ namespace Me.Amon.Pwd._Lib
             _UcHeader.Location = new Point(6, 20);
             _UcHeader.Size = new Size(231, 183);
             GbGroup.Controls.Add(_UcHeader);
-            _UcHeader.Show(new Bean.Lib());
+            _UcHeader.Show(new Pwd.Lib());
             _UcEditer = _UcHeader;
         }
 
@@ -93,21 +93,21 @@ namespace Me.Amon.Pwd._Lib
             }
 
             object obj = _Selected.Tag;
-            if (obj is Bean.Lib)
+            if (obj is Pwd.Lib)
             {
-                ShowHeader(obj as Bean.Lib);
+                ShowHeader(obj as Pwd.Lib);
                 return;
             }
-            if (obj is Bean.LibDetail)
+            if (obj is Pwd.LibDetail)
             {
-                ShowDetail(obj as Bean.LibDetail);
+                ShowDetail(obj as Pwd.LibDetail);
                 return;
             }
         }
 
         private void MiAppendLibh_Click(object sender, EventArgs e)
         {
-            ShowHeader(new Bean.Lib());
+            ShowHeader(new Pwd.Lib());
         }
 
         private void MiDeleteLibh_Click(object sender, EventArgs e)
@@ -119,7 +119,7 @@ namespace Me.Amon.Pwd._Lib
             }
 
             object obj = _Selected.Tag;
-            if (!(obj is Bean.Lib))
+            if (!(obj is Pwd.Lib))
             {
                 return;
             }
@@ -129,7 +129,7 @@ namespace Me.Amon.Pwd._Lib
                 return;
             }
 
-            Bean.Lib header = (Bean.Lib)obj;
+            Pwd.Lib header = (Pwd.Lib)obj;
 
             _UserModel.DBObject.DeleteVcs(header);
 
@@ -150,7 +150,7 @@ namespace Me.Amon.Pwd._Lib
             {
                 _Selected = _Selected.Parent;
             }
-            ShowDetail(new Bean.LibDetail());
+            ShowDetail(new Pwd.LibDetail());
         }
 
         private void MiDeleteLibd_Click(object sender, EventArgs e)
@@ -161,11 +161,11 @@ namespace Me.Amon.Pwd._Lib
                 return;
             }
             object obj = _Selected.Tag;
-            if (!(obj is Bean.LibDetail))
+            if (!(obj is Pwd.LibDetail))
             {
                 return;
             }
-            Bean.LibDetail detail = (Bean.LibDetail)obj;
+            Pwd.LibDetail detail = (Pwd.LibDetail)obj;
 
             TreeNode node = _Selected.Parent;
             if (node == null)
@@ -173,11 +173,11 @@ namespace Me.Amon.Pwd._Lib
                 return;
             }
             obj = node.Tag;
-            if (!(obj is Bean.Lib))
+            if (!(obj is Pwd.Lib))
             {
                 return;
             }
-            Bean.Lib header = (Bean.Lib)obj;
+            Pwd.Lib header = (Pwd.Lib)obj;
 
             if (DialogResult.Yes != MessageBox.Show("确认要删除此属性吗，此操作将不可恢复？", "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning))
             {
@@ -192,7 +192,7 @@ namespace Me.Amon.Pwd._Lib
             _DataModel.LibModified = -1;
         }
 
-        private void ShowHeader(Bean.Lib header)
+        private void ShowHeader(Pwd.Lib header)
         {
             if (_UcEditer.Name != "LibHeader")
             {
@@ -209,7 +209,7 @@ namespace Me.Amon.Pwd._Lib
             _UcHeader.Show(header);
         }
 
-        private void ShowDetail(Bean.LibDetail detail)
+        private void ShowDetail(Pwd.LibDetail detail)
         {
             if (_UcEditer.Name != "LibDetail")
             {
@@ -226,7 +226,7 @@ namespace Me.Amon.Pwd._Lib
             _UcDetail.Show(detail);
         }
 
-        public void SaveHeader(Bean.Lib header)
+        public void SaveHeader(Pwd.Lib header)
         {
             bool update = CharUtil.IsValidateHash(header.Id);
             _UserModel.DBObject.SaveVcs(header);
@@ -253,11 +253,11 @@ namespace Me.Amon.Pwd._Lib
             _DataModel.LibModified = -1;
         }
 
-        public void SaveDetail(Bean.LibDetail detail)
+        public void SaveDetail(Pwd.LibDetail detail)
         {
             bool update = CharUtil.IsValidateHash(detail.Id);
 
-            Bean.Lib header = _Selected.Tag as Bean.Lib;
+            Pwd.Lib header = _Selected.Tag as Pwd.Lib;
             detail.Header = header.Id;
             detail.Id = HashUtil.UtcTimeInHex(false);
             header.Details.Add(detail);

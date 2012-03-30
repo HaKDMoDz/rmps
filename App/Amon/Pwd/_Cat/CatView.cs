@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Me.Amon.Bean;
+using Me.Amon.Pwd;
 using Me.Amon.Event;
 using Me.Amon.Model;
 

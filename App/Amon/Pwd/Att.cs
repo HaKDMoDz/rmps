@@ -1,9 +1,9 @@
 ﻿using System.Text;
 using System.Xml;
-using Me.Amon.Bean.Atts;
+using Me.Amon.Pwd._Att;
 using Me.Amon.Util;
 
-namespace Me.Amon.Bean
+namespace Me.Amon.Pwd
 {
     public abstract class Att
     {

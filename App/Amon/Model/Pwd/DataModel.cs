@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using Me.Amon.Bean;
+using Me.Amon.Pwd;
 
 namespace Me.Amon.Model.Pwd
 {

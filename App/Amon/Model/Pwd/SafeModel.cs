@@ -4,8 +4,8 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
-using Me.Amon.Bean;
-using Me.Amon.Bean.Atts;
+using Me.Amon.Pwd;
+using Me.Amon.Pwd._Att;
 using Me.Amon.Util;
 
 namespace Me.Amon.Model.Pwd
@@ -276,28 +276,28 @@ namespace Me.Amon.Model.Pwd
 
             // Guid
             GuidAtt guid = new GuidAtt();
-            guid.Name = Key.RegTime;
-            guid.Data = Key.CatId;
-            guid.SetSpec(GuidAtt.SPEC_GUID_TPLT, Key.LibId);
+            guid.Name = _Key.RegTime;
+            guid.Data = _Key.CatId;
+            guid.SetSpec(GuidAtt.SPEC_GUID_TPLT, _Key.LibId);
             list.Add(guid);
 
             // MetaItem
             MetaAtt meta = new MetaAtt();
-            meta.Name = Key.Title;
-            meta.Data = Key.MetaKey;
+            meta.Name = _Key.Title;
+            meta.Data = _Key.MetaKey;
             list.Add(meta);
 
             // LogoItem
             LogoAtt logo = new LogoAtt();
-            logo.Name = Key.IcoName;
-            logo.Data = Key.IcoMemo;
-            logo.Path = Key.IcoPath;
+            logo.Name = _Key.IcoName;
+            logo.Data = _Key.IcoMemo;
+            logo.Path = _Key.IcoPath;
             list.Add(logo);
 
             // HintItem
             HintAtt hint = new HintAtt();
-            hint.Data = Key.GtdId;
-            hint.Name = Key.GtdMemo;
+            hint.Data = _Key.GtdId;
+            hint.Name = _Key.GtdMemo;
             list.Add(hint);
 
             // 处理每一个数据
@@ -332,26 +332,26 @@ namespace Me.Amon.Model.Pwd
         public void Encode()
         {
             GuidAtt guid = (GuidAtt)_AttList[Att.PWDS_HEAD_GUID];
-            Key.RegTime = guid.Name;
+            _Key.RegTime = guid.Name;
             //Rec.CatId = guid.Data;
-            Key.LibId = guid.GetSpec(GuidAtt.SPEC_GUID_TPLT);
+            _Key.LibId = guid.GetSpec(GuidAtt.SPEC_GUID_TPLT);
 
             // MetaItem
             MetaAtt meta = (MetaAtt)_AttList[Att.PWDS_HEAD_META];
             //Rec.Title = Rec.IsUpdate ? AAtt.SP_TPL_LS + meta.Name + '_' + header.RegDate + Att.SP_TPL_RS : meta.Name;
-            Key.Title = meta.Name;
-            Key.MetaKey = meta.Data;
+            _Key.Title = meta.Name;
+            _Key.MetaKey = meta.Data;
 
             // LogoItem
             LogoAtt logo = (LogoAtt)_AttList[Att.PWDS_HEAD_LOGO];
-            Key.IcoName = logo.Name;
-            Key.IcoMemo = logo.Data;
-            Key.IcoPath = logo.Path;
+            _Key.IcoName = logo.Name;
+            _Key.IcoMemo = logo.Data;
+            _Key.IcoPath = logo.Path;
 
             // HintItem
             HintAtt hint = (HintAtt)_AttList[Att.PWDS_HEAD_HINT];
-            Key.GtdId = hint.Data;
-            Key.GtdMemo = hint.Name;
+            _Key.GtdId = hint.Data;
+            _Key.GtdMemo = hint.Name;
 
             // 字符串拼接
             StringBuilder buf = new StringBuilder();
@@ -367,9 +367,9 @@ namespace Me.Amon.Model.Pwd
             }
 
             // 加密版本
-            Key.CipherVer = ISec.SEC_AES;
+            _Key.CipherVer = ISec.SEC_AES;
 
-            Key.Password = _UserModel.EncodeKey(buf.ToString());
+            _Key.Password = _UserModel.EncodeKey(buf.ToString());
 
             _AttList.Clear();
         }

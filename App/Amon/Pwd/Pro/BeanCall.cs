@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using Me.Amon.Bean;
+using Me.Amon.Pwd;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
 using System;
@@ -40,7 +40,7 @@ namespace Me.Amon.Pwd.Pro
             get { return "电话"; }
         }
 
-        public bool ShowData(Bean.Att att)
+        public bool ShowData(Pwd.Att att)
         {
             _Att = att;
 

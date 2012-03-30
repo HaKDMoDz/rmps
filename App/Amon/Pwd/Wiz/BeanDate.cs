@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Me.Amon.Bean;
-using Me.Amon.Bean.Atts;
+using Me.Amon.Pwd;
+using Me.Amon.Pwd._Att;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
 using Me.Amon.Util;

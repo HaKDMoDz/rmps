@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Me.Amon.Bean
+namespace Me.Amon.Pwd
 {
     public class Png : Ico
     {

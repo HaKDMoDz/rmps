@@ -43,7 +43,7 @@ namespace Me.Amon.Uw.Ico
                 return;
             }
 
-            _IcoSeeker.CallBack(new Bean.Ico { File = LvIco.SelectedItems[0].ImageKey });
+            _IcoSeeker.CallBack(new Pwd.Ico { File = LvIco.SelectedItems[0].ImageKey });
         }
 
         private void BtAppend_Click(object sender, EventArgs e)

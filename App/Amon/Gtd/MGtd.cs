@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using Me.Amon.Model;
 
-namespace Me.Amon.Bean
+namespace Me.Amon.Gtd
 {
-    public class Gtd : Vcs
+    public class MGtd : Vcs
     {
         /// <summary>
         /// 显示排序
@@ -87,6 +88,6 @@ namespace Me.Amon.Bean
         /// <summary>s
         /// 提示列表
         /// </summary>
-        public List<GtdDetail> HintList { get; set; }
+        public List<MGtdDetail> HintList { get; set; }
     }
 }

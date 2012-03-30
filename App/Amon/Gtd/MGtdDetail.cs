@@ -1,6 +1,8 @@
-﻿namespace Me.Amon.Bean
+﻿using Me.Amon.Model;
+
+namespace Me.Amon.Gtd
 {
-    public class GtdDetail : Vcs
+    public class MGtdDetail : Vcs
     {
         public int P30F0401 { get; set; }
         /// <summary>

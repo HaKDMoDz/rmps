@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Me.Amon.Bean
+
+namespace Me.Amon.Model
 {
     public abstract class Log
     {
@@ -27,15 +28,15 @@ namespace Me.Amon.Bean
             {
                 return false;
             }
-            if (obj is KeyLog)
-            {
-                return Id == ((KeyLog)obj).Id;
-            }
             if (obj is string)
             {
                 return Id == (string)obj;
             }
-            return Id.Equals(obj);
+            if (obj is Log)
+            {
+                return Id == ((Log)obj).Id;
+            }
+            return false;
         }
 
         public override int GetHashCode()

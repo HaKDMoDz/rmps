@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using Me.Amon.Bean;
+using Me.Amon.Pwd;
 using Me.Amon.Uc;
 using Me.Amon.Util;
 

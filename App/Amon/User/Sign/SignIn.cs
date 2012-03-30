@@ -4,7 +4,7 @@ using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using Me.Amon.Bean;
+using Me.Amon.Pwd;
 using Me.Amon.Da;
 using Me.Amon.Model;
 using Me.Amon.Util;

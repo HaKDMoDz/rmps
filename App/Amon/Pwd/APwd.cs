@@ -8,7 +8,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
-using Me.Amon.Bean;
 using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
@@ -16,7 +15,6 @@ using Me.Amon.Properties;
 using Me.Amon.Pwd._Cat;
 using Me.Amon.Pwd._Lib;
 using Me.Amon.Pwd._Log;
-using Me.Amon.Pwd.Pad;
 using Me.Amon.Pwd.Pro;
 using Me.Amon.Pwd.Wiz;
 using Me.Amon.User;
@@ -1410,7 +1408,7 @@ namespace Me.Amon.Pwd
 
             PngSeeker editor = new PngSeeker(_UserModel, _DataModel.CatDir);
             editor.InitOnce(16);
-            editor.CallBackHandler = new AmonHandler<Bean.Png>(ChangeImgByCat);
+            editor.CallBackHandler = new AmonHandler<Pwd.Png>(ChangeImgByCat);
             BeanUtil.CenterToParent(editor, this);
             editor.ShowDialog(this);
         }
@@ -1594,7 +1592,7 @@ namespace Me.Amon.Pwd
             TpTips.SetToolTip(control, caption);
         }
 
-        public void ShowIcoSeeker(string rootDir, AmonHandler<Bean.Ico> handler)
+        public void ShowIcoSeeker(string rootDir, AmonHandler<Pwd.Ico> handler)
         {
             IcoSeeker seeker = new IcoSeeker(_UserModel, rootDir);
             seeker.InitOnce(24);
@@ -1900,7 +1898,7 @@ namespace Me.Amon.Pwd
             }
         }
 
-        private void ChangeImgByCat(Bean.Png png)
+        private void ChangeImgByCat(Pwd.Png png)
         {
             if (!CharUtil.IsValidateHash(png.File))
             {

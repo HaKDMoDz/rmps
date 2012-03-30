@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Me.Amon.Bean;
+using Me.Amon.Pwd;
 
 namespace Me.Amon.Model
 {

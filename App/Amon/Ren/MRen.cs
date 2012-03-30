@@ -1,5 +1,5 @@
 ﻿using System.Xml;
-using Me.Amon.Bean;
+using Me.Amon.Model;
 
 namespace Me.Amon.Ren
 {
