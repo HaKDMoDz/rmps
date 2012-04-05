@@ -4,9 +4,9 @@ using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using Me.Amon.Pwd;
 using Me.Amon.Da;
 using Me.Amon.Model;
+using Me.Amon.Pwd;
 using Me.Amon.Util;
 
 namespace Me.Amon.User.Sign
@@ -215,10 +215,10 @@ namespace Me.Amon.User.Sign
                     return;
                 }
 
-                Cat cat = new Cat();
-                cat.UserCode = _UserModel.Code;
+                Cat cat;
                 while (reader.ReadToFollowing("Cat"))
                 {
+                    cat = new Cat();
                     if (!cat.FromXml(reader))
                     {
                         continue;
@@ -254,17 +254,15 @@ namespace Me.Amon.User.Sign
                     return;
                 }
 
-                Lib header = new Lib();
-                header.Order = 0;
-                header.UserCode = _UserModel.Code;
+                Lib header;
                 while (reader.ReadToFollowing("Lib"))
                 {
+                    header = new Lib();
                     if (!header.FromXml(reader))
                     {
                         continue;
                     }
                     _UserModel.DBObject.SaveVcs(header);
-                    header.Order += 1;
                 }
             }
 
@@ -295,10 +293,10 @@ namespace Me.Amon.User.Sign
                     return;
                 }
 
-                Udc udc = new Udc();
-                udc.UserCode = _UserModel.Code;
+                Udc udc;
                 while (reader.ReadToFollowing("Udc"))
                 {
+                    udc = new Udc();
                     if (!udc.FromXml(reader))
                     {
                         continue;
@@ -334,15 +332,15 @@ namespace Me.Amon.User.Sign
                     return;
                 }
 
-                Key rec = new Key();
-                rec.UserCode = _UserModel.Code;
+                Key key;
                 while (reader.ReadToFollowing("Key"))
                 {
-                    if (!rec.FromXml(reader))
+                    key = new Key();
+                    if (!key.FromXml(reader))
                     {
                         continue;
                     }
-                    _UserModel.DBObject.SaveVcs(rec);
+                    _UserModel.DBObject.SaveVcs(key);
                 }
             }
 

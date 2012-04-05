@@ -63,7 +63,7 @@ namespace Me.Amon.Pwd
             }
             if (reader.Name == "IsLeaf" || reader.ReadToNextSibling("IsLeaf"))
             {
-                IsLeaf = reader.ReadElementContentAsBoolean();
+                IsLeaf = bool.Parse(reader.ReadElementContentAsString());
             }
             if (reader.Name == "Text" || reader.ReadToNextSibling("Text"))
             {
@@ -95,7 +95,7 @@ namespace Me.Amon.Pwd
             writer.WriteElementString("Order", Order.ToString());
             writer.WriteElementString("Id", Id);
             writer.WriteElementString("Parent", Parent);
-            writer.WriteElementString("IsLeaf", IsLeaf.ToString());
+            writer.WriteElementString("IsLeaf", IsLeaf ? "true" : "false");
             writer.WriteElementString("Text", Text);
             writer.WriteElementString("Tips", Tips);
             writer.WriteElementString("Icon", Icon);
