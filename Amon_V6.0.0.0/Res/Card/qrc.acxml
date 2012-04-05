@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<amon>
+    <info>
+        <name>二维码格式</name>
+        <type>qrc</type>
+    </info>
+    <card>
+		<base path="Card" />
+        <template-uri>amon.qrc</template-uri>
+    </card>
+</amon>

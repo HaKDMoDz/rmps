@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<amon>
+    <info>
+        <name>CSV格式</name>
+        <type>*</type>
+    </info>
+    <card>
+        <template-uri>amon.csv</template-uri>
+    </card>
+</amon>
