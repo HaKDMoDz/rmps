@@ -7,6 +7,8 @@ namespace Me.Amon.Bean
 {
     public class LibHeader : Vcs
     {
+        public int Order { get; set; }
+
         public string Id { get; set; }
 
         public string Name { get; set; }
@@ -23,6 +25,7 @@ namespace Me.Amon.Bean
         #region 接口实现
         public override bool Load(DataRow row)
         {
+            Order = (int)row[DBConst.APWD0301];
             Id = row[DBConst.APWD0304] as string;
             Name = row[DBConst.APWD0306] as string;
             Memo = row[DBConst.APWD0308] as string;
@@ -79,7 +82,11 @@ namespace Me.Amon.Bean
                 return false;
             }
 
-            if (reader.Name == "Id" || reader.ReadToDescendant("Id"))
+            if (reader.Name == "Order" || reader.ReadToDescendant("Order"))
+            {
+                Order = reader.ReadElementContentAsInt();
+            }
+            if (reader.Name == "Id" || reader.ReadToNextSibling("Id"))
             {
                 Id = reader.ReadElementContentAsString();
             }
@@ -98,6 +105,7 @@ namespace Me.Amon.Bean
         {
             writer.WriteStartElement("Lib");
 
+            writer.WriteElementString("Order", Order.ToString());
             writer.WriteElementString("Id", Id);
             writer.WriteElementString("Name", Name);
             writer.WriteElementString("Memo", Memo);

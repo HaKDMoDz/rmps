@@ -6,9 +6,11 @@ namespace Me.Amon.Bean
 {
     public class LibDetail : Vcs
     {
-        public string Id { get; set; }
+        public int Order { get; set; }
 
         public int Type { get; set; }
+
+        public string Id { get; set; }
 
         public string Name { get; set; }
 
@@ -19,6 +21,7 @@ namespace Me.Amon.Bean
         #region 接口实现
         public override bool Load(DataRow row)
         {
+            Order = (int)row[DBConst.APWD0301];
             Type = (int)row[DBConst.APWD0302];
             Id = row[DBConst.APWD0304] as string;
             Name = row[DBConst.APWD0306] as string;
@@ -46,7 +49,15 @@ namespace Me.Amon.Bean
                 return false;
             }
 
-            if (reader.Name == "Type" || reader.ReadToDescendant("Type"))
+            if (reader.Name == "Order" || reader.ReadToDescendant("Order"))
+            {
+                Order = reader.ReadElementContentAsInt();
+            }
+            if (reader.Name == "Id" || reader.ReadToNextSibling("Id"))
+            {
+                Id = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Type" || reader.ReadToNextSibling("Type"))
             {
                 Type = reader.ReadElementContentAsInt();
             }
@@ -69,6 +80,7 @@ namespace Me.Amon.Bean
         {
             writer.WriteStartElement("Item");
 
+            writer.WriteElementString("Order", Order.ToString());
             writer.WriteElementString("Id", Id);
             writer.WriteElementString("Type", Type.ToString());
             writer.WriteElementString("Name", Name);

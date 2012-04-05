@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data;
-using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
@@ -22,12 +21,11 @@ namespace Me.Amon
             context.Response.ContentType = "text/xml";
             context.Response.Charset = "UTF-8";
 
-            string c = context.Request["c"];//用户代码
-            string o = context.Request["o"];//操作类型
-
             XmlWriter writer = XmlWriter.Create(context.Response.Output);
             writer.WriteStartElement("Amon");
 
+            string c = context.Request["c"];//用户代码
+            string o = context.Request["o"];//操作类型
             switch (o)
             {
                 case "rsa":
@@ -74,24 +72,46 @@ namespace Me.Amon
         #region 事件分发
         private void ProcessCat(HttpContext context, XmlWriter writer, string code)
         {
-            string d = context.Request["d"];//操作数据
-            ListCat(new DBAccess(), writer, code, d);
+            if (!CharUtil.IsValidateCode(code))
+            {
+                writer.WriteElementString("Error", "无效的用户代码：" + code);
+                return;
+            }
+
+            ListCat(new DBAccess(), writer, code, context.Request["d"]);
         }
 
         private void ProcessLib(HttpContext context, XmlWriter writer, string code)
         {
+            if (!CharUtil.IsValidateCode(code))
+            {
+                writer.WriteElementString("Error", "无效的用户代码：" + code);
+                return;
+            }
+
             ListLib(new DBAccess(), writer, code);
         }
 
         private void ProcessUdc(HttpContext context, XmlWriter writer, string code)
         {
+            if (!CharUtil.IsValidateCode(code))
+            {
+                writer.WriteElementString("Error", "无效的用户代码：" + code);
+                return;
+            }
+
             ListUdc(new DBAccess(), writer, code);
         }
 
         private void ProcessKey(HttpContext context, XmlWriter writer, string code)
         {
-            string d = context.Request["d"];//操作数据
-            ListKey(code, d);
+            if (!CharUtil.IsValidateCode(code))
+            {
+                writer.WriteElementString("Error", "无效的用户代码：" + code);
+                return;
+            }
+
+            ListKey(code, context.Request["d"]);
         }
         #endregion
 
@@ -108,6 +128,7 @@ namespace Me.Amon
             dba.AddColumn(DBConst.ACAT0207);
             dba.AddColumn(DBConst.ACAT0208);
             dba.AddColumn(DBConst.ACAT0209);
+            dba.AddColumn(DBConst.ACAT020E);
             dba.AddWhere(DBConst.ACAT0202, code);
             if (catId == "0" || CharUtil.IsValidateHash(catId))
             {
@@ -132,6 +153,7 @@ namespace Me.Amon
         {
             dba.ReInit();
             dba.AddTable(DBConst.APWD0300);
+            dba.AddColumn(DBConst.APWD0301);
             dba.AddColumn(DBConst.APWD0304);
             dba.AddColumn(DBConst.APWD0306);
             dba.AddColumn(DBConst.APWD0308);
@@ -149,6 +171,7 @@ namespace Me.Amon
 
                     dba.ReInit();
                     dba.AddTable(DBConst.APWD0300);
+                    dba.AddColumn(DBConst.APWD0301);
                     dba.AddColumn(DBConst.APWD0302);
                     dba.AddColumn(DBConst.APWD0304);
                     dba.AddColumn(DBConst.APWD0306);
@@ -385,7 +408,7 @@ namespace Me.Amon
                 SendError(writer, "系统处理异常，请稍后重试！");
                 return;
             }
-            
+
             model.InitUserData();
 
             writer.WriteStartElement("User");

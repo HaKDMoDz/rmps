@@ -123,6 +123,10 @@
         /// 操作状态：0删除、1默认、2新增、3更新
         /// </summary>
         public const string ACAT020D = "ACAT020D";
+        /// <summary>
+        /// 是否叶子
+        /// </summary>
+        public const string ACAT020E = "ACAT020E";
         #endregion
         #endregion
 
