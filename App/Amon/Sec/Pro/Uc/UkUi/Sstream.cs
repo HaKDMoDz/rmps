@@ -173,11 +173,11 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
 
         public override ICipherParameters GenParam()
         {
-            string pass = CharUtil.GenPass(_Uk.TbPass.Text, _Uk.TbPass.MaxLength);
+            string pass = SafeUtil.GenPass(_Uk.TbPass.Text, _Uk.TbPass.MaxLength);
             ICipherParameters param = new KeyParameter(Encoding.Default.GetBytes(pass));
             if (_Uk.TbSalt.Visible)
             {
-                pass = CharUtil.GenPass(_Uk.TbSalt.Text, _Uk.TbSalt.MaxLength);
+                pass = SafeUtil.GenPass(_Uk.TbSalt.Text, _Uk.TbSalt.MaxLength);
                 param = new ParametersWithIV(param, Encoding.Default.GetBytes(pass));
             }
             return param;

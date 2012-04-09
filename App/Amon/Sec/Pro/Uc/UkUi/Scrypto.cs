@@ -302,7 +302,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
 
         public override ICipherParameters GenParam()
         {
-            string pass = CharUtil.GenPass(_Uk.TbPass.Text, _Uk.TbPass.MaxLength);
+            string pass = SafeUtil.GenPass(_Uk.TbPass.Text, _Uk.TbPass.MaxLength);
             return new KeyParameter(Encoding.Default.GetBytes(pass));
         }
 

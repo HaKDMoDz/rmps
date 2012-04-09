@@ -213,7 +213,7 @@ namespace Me.Amon.Pwd.Wiz
             }
 
             string rep = _Att.GetSpec(PassAtt.SPEC_PWDS_REP, Att.SPEC_VALUE_FAIL);
-            char[] tmp = CharUtil.NextRandomKey(key.ToCharArray(), int.Parse(len), Att.SPEC_VALUE_TRUE.Equals(rep));
+            char[] tmp = SafeUtil.NextRandomKey(key.ToCharArray(), int.Parse(len), Att.SPEC_VALUE_TRUE.Equals(rep));
             if (tmp == null)
             {
                 Main.ShowAlert(string.Format("无法生成长度为 {0} 且{1}重复的随机口令！", len, MiRepeatable.Checked ? "可" : "不可"));

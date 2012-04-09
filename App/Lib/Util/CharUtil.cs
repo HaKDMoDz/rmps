@@ -1,18 +1,22 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Me.Amon.Util
 {
     /// <summary>
-    /// StringUtil 的摘要说明
+    /// CharUtil 的摘要说明
     /// </summary>
     public class CharUtil
     {
+        private static char[] DEF_CHAR = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+        private static char[] UPPER_CHAR = { 'Q', 'A', 'Z', 'W', 'S', 'X', 'E', 'D', 'C', 'R', 'F', 'V', 'T', 'G', 'B', 'Y' };
+        private static char[] LOWER_CHAR = { 'q', 'a', 'z', 'w', 's', 'x', 'e', 'd', 'c', 'r', 'f', 'v', 't', 'g', 'b', 'y' };
+
         private CharUtil()
         {
         }
 
+        #region 字符判断
         /// <summary>
         /// 判断一个字符串是否为有效字符串
         /// </summary>
@@ -146,10 +150,33 @@ namespace Me.Amon.Util
             return path != null ? Regex.IsMatch(path, "^[A-Za-z]{4},([0-9]{4},[0-9A-Za-z]{16}|_[A-Z]{3})$") : false;
         }
 
+        public static bool IsValidateNegative(string text)
+        {
+            return true;
+        }
+
+        public static bool IsValidatePositive(string text)
+        {
+            return true;
+        }
+
+        public static bool IsValidateDecimal(string text)
+        {
+            return true;
+        }
+        #endregion
+
+        #region 字符转换
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="l"></param>
+        /// <param name="bigCase"></param>
+        /// <returns></returns>
         public static string EncodeLong(long l, bool bigCase)
         {
             // 不同进制使用的数值表示字符
-            char[] digits = bigCase ? new char[] { 'Q', 'A', 'Z', 'W', 'S', 'X', 'E', 'D', 'C', 'R', 'F', 'V', 'T', 'G', 'B', 'Y' } : new char[] { 'q', 'a', 'z', 'w', 's', 'x', 'e', 'd', 'c', 'r', 'f', 'v', 't', 'g', 'b', 'y' };
+            char[] digits = bigCase ? UPPER_CHAR : LOWER_CHAR;
 
             // 缓冲字符数组
             char[] buf = new char[16];
@@ -174,7 +201,7 @@ namespace Me.Amon.Util
         public static string EncodeBytes(byte[] b, bool bigCase)
         {
             // 不同进制使用的数值表示字符
-            char[] digits = bigCase ? new char[] { 'Q', 'A', 'Z', 'W', 'S', 'X', 'E', 'D', 'C', 'R', 'F', 'V', 'T', 'G', 'B', 'Y' } : new char[] { 'q', 'a', 'z', 'w', 's', 'x', 'e', 'd', 'c', 'r', 'f', 'v', 't', 'g', 'b', 'y' };
+            char[] digits = bigCase ? UPPER_CHAR : LOWER_CHAR;
 
             StringBuilder sb = new StringBuilder(32);
             foreach (char t in b)
@@ -280,18 +307,21 @@ namespace Me.Amon.Util
             return result.ToString();
         }
 
-        private static char[] DEF_CHAR = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
-
+        /// <summary>
+        /// 解密转换
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public static byte[] DecodeString(string s)
         {
             return DecodeString(s, DEF_CHAR);
         }
 
         /// <summary>
-        /// 按指定变换规则进行字符串到字节数组的变换
+        /// 解密转换
         /// </summary>
-        /// <param name="s"></param>
-        /// <param name="c"></param>
+        /// <param name="s">明文字符</param>
+        /// <param name="c">掩码数组</param>
         /// <returns></returns>
         public static byte[] DecodeString(string s, char[] c)
         {
@@ -326,7 +356,7 @@ namespace Me.Amon.Util
         }
 
         /// <summary>
-        /// 
+        /// 加密转换
         /// </summary>
         /// <param name="b"></param>
         /// <returns></returns>
@@ -336,10 +366,10 @@ namespace Me.Amon.Util
         }
 
         /// <summary>
-        ///指定转换参考码内的可显示字符串数据
+        /// 加密转换
         /// </summary>
-        /// <param name="b"></param>
-        /// <param name="c"></param>
+        /// <param name="b">字节数组</param>
+        /// <param name="c">掩码数组</param>
         /// <returns></returns>
         public static string EncodeString(byte[] b, char[] c)
         {
@@ -361,85 +391,6 @@ namespace Me.Amon.Util
 
             return buf.ToString();
         }
-
-        /// <summary>
-        /// 随机字符生成
-        /// </summary>
-        /// <param name="sets"></param>
-        /// <param name="size"></param>
-        /// <param name="loop"></param>
-        /// <returns></returns>
-        public static char[] NextRandomKey(char[] sets, int size, bool loop)
-        {
-            if (sets == null || (!loop && sets.Length < size))
-            {
-                return null;
-            }
-
-            char[] r = new char[size];
-            Random random = new Random();
-            for (int i = 0, l = sets.Length, t; i < size; i++)
-            {
-                t = random.Next(l);
-                r[i] = sets[t];
-                if (!loop)
-                {
-                    l -= 1;
-                    sets[t] = sets[l];
-                }
-            }
-
-            return r;
-        }
-
-        /// <summary>
-        /// 随机用户口令
-        /// </summary>
-        /// <returns></returns>
-        public static char[] GenerateUserKeys()
-        {
-            char[] c = new char[94];
-            int i = 0;
-            char t = '!';
-            while (i < 94)
-            {
-                c[i++] = t++;
-            }
-
-            return NextRandomKey(c, 8, false);
-        }
-
-        public static char[] GenerateFileKeys()
-        {
-            char[] c = new char[94];
-            int i = 0;
-            char t = '!';
-            while (i < 94)
-            {
-                c[i++] = t++;
-            }
-
-            return NextRandomKey(c, 16, false);
-        }
-
-        public static string GenPass(string data, int length)
-        {
-            StringBuilder buf = new StringBuilder(data);
-            for (int i = buf.Length, j = length; i < j; i += 1)
-            {
-                buf.Append(' ');
-            }
-            return buf.ToString();
-        }
-
-        public static string Text2DB(string text)
-        {
-            return text != null ? text.Replace("'", "''") : "";
-        }
-
-        public static string Db2Text(string text)
-        {
-            return "";
-        }
+        #endregion
     }
 }

@@ -8,11 +8,12 @@ namespace Me.Amon.Util
 {
     public sealed class SafeUtil
     {
+        #region 剪贴板事件
         private static string _OldText;
         private static Timer _Timer;
         public static void Copy(string newText)
         {
-            Copy(newText, 5);
+            Copy(newText, 60);
         }
 
         public static void Copy(string newText, int seconds)
@@ -46,7 +47,9 @@ namespace Me.Amon.Util
             _OldText = null;
             _Timer.Stop();
         }
+        #endregion
 
+        #region 文件处理
         public static bool EncryptFile(string alg, string key, string srcFile, string dstFile)
         {
             try
@@ -114,5 +117,78 @@ namespace Me.Amon.Util
                 return false;
             }
         }
+        #endregion
+
+        #region 随机口令
+        public static string GenPass(string data, int length)
+        {
+            StringBuilder buf = new StringBuilder(data);
+            for (int i = buf.Length, j = length; i < j; i += 1)
+            {
+                buf.Append(' ');
+            }
+            return buf.ToString();
+        }
+
+        /// <summary>
+        /// 随机用户口令
+        /// </summary>
+        /// <returns></returns>
+        public static char[] GenerateUserKeys()
+        {
+            char[] c = new char[94];
+            int i = 0;
+            char t = '!';
+            while (i < 94)
+            {
+                c[i++] = t++;
+            }
+
+            return NextRandomKey(c, 8, false);
+        }
+
+        public static char[] GenerateFileKeys()
+        {
+            char[] c = new char[94];
+            int i = 0;
+            char t = '!';
+            while (i < 94)
+            {
+                c[i++] = t++;
+            }
+
+            return NextRandomKey(c, 16, false);
+        }
+
+        /// <summary>
+        /// 随机字符生成
+        /// </summary>
+        /// <param name="sets"></param>
+        /// <param name="size"></param>
+        /// <param name="loop"></param>
+        /// <returns></returns>
+        public static char[] NextRandomKey(char[] sets, int size, bool loop)
+        {
+            if (sets == null || (!loop && sets.Length < size))
+            {
+                return null;
+            }
+
+            char[] r = new char[size];
+            Random random = new Random();
+            for (int i = 0, l = sets.Length, t; i < size; i++)
+            {
+                t = random.Next(l);
+                r[i] = sets[t];
+                if (!loop)
+                {
+                    l -= 1;
+                    sets[t] = sets[l];
+                }
+            }
+
+            return r;
+        }
+        #endregion
     }
 }

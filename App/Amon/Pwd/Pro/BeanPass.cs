@@ -197,7 +197,7 @@ namespace Me.Amon.Pwd.Pro
             }
 
             string rep = _Att.GetSpec(PassAtt.SPEC_PWDS_REP, Att.SPEC_VALUE_FAIL);
-            TbData.Text = new string(CharUtil.NextRandomKey(key.ToCharArray(), int.Parse(len), Att.SPEC_VALUE_TRUE.Equals(rep)));
+            TbData.Text = new string(SafeUtil.NextRandomKey(key.ToCharArray(), int.Parse(len), Att.SPEC_VALUE_TRUE.Equals(rep)));
         }
 
         private void BtOpt_Click(object sender, EventArgs e)

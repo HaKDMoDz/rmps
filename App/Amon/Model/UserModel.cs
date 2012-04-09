@@ -535,7 +535,7 @@ namespace Me.Amon.Model
             {
                 c[i++] = t++;
             }
-            return CharUtil.NextRandomKey(c, 16, false);
+            return SafeUtil.NextRandomKey(c, 16, false);
         }
 
         #region 数据安全

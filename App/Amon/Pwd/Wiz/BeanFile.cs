@@ -3,10 +3,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using Me.Amon.Pwd;
-using Me.Amon.Pwd._Att;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd._Att;
 using Me.Amon.Util;
 using Me.Amon.Uw;
 
@@ -140,7 +139,7 @@ namespace Me.Amon.Pwd.Wiz
             _Att.SetSpec(FileAtt.SPEC_FILE_NAME, name);
             _Att.SetSpec(FileAtt.SPEC_FILE_EXTS, info.Extension.ToLower());
             string alg = "aes";
-            string key = new string(CharUtil.GenerateFileKeys());
+            string key = new string(SafeUtil.GenerateFileKeys());
             _Att.SetSpec(FileAtt.SPEC_FILE_ALG, alg);
             _Att.SetSpec(FileAtt.SPEC_FILE_KEY, key);
             if (SafeUtil.EncryptFile(alg, key, srcFile, dstFile))

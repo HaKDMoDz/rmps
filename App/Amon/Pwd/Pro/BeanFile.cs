@@ -133,7 +133,7 @@ namespace Me.Amon.Pwd.Pro
             _Att.SetSpec(FileAtt.SPEC_FILE_NAME, name);
             _Att.SetSpec(FileAtt.SPEC_FILE_EXTS, info.Extension.ToLower());
             string alg = "aes";
-            string key = new string(CharUtil.GenerateFileKeys());
+            string key = new string(SafeUtil.GenerateFileKeys());
             _Att.SetSpec(FileAtt.SPEC_FILE_ALG, alg);
             _Att.SetSpec(FileAtt.SPEC_FILE_KEY, key);
             if (SafeUtil.EncryptFile(alg, key, srcFile, dstFile))

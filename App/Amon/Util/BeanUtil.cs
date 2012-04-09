@@ -46,45 +46,27 @@ namespace Me.Amon.Util
             }
         }
 
-        private static Image _NaN16;
-        public static Image NaN16
+        public static Stream Open(string path, string file)
         {
-            get
+            if (Regex.IsMatch(file, "^[a-zA-z]{2,}:/{2,3}[^\\s]+"))
             {
-                if (_NaN16 == null)
-                {
-                    _NaN16 = new Bitmap(16, 16);
-                }
-                return _NaN16;
+                return WebRequest.Create(file).GetRequestStream();
             }
+
+            if (!Path.IsPathRooted(file))
+            {
+                file = Path.Combine(path, file);
+            }
+
+            if (File.Exists(file))
+            {
+                return File.OpenRead(file);
+            }
+
+            return null;
         }
 
-        private static Image _NaN24;
-        public static Image NaN24
-        {
-            get
-            {
-                if (_NaN24 == null)
-                {
-                    _NaN24 = new Bitmap(24, 24);
-                }
-                return _NaN24;
-            }
-        }
-
-        private static Image _NaN32;
-        public static Image NaN32
-        {
-            get
-            {
-                if (_NaN32 == null)
-                {
-                    _NaN32 = new Bitmap(32, 32);
-                }
-                return _NaN32;
-            }
-        }
-
+        #region 窗口位置
         public static void CenterToParent(Form child, Form parent)
         {
             if (parent != null && parent.Visible)
@@ -107,7 +89,9 @@ namespace Me.Amon.Util
             point.Y = (SystemInformation.WorkingArea.Height - window.Height) >> 1;
             window.Location = point;
         }
+        #endregion
 
+        #region 文件复制
         public static void Copy(string src, string dst, bool overwrite, bool copySubDir)
         {
             if (File.Exists(src))
@@ -157,25 +141,46 @@ namespace Me.Amon.Util
                 File.Copy(file, tmp, true);
             }
         }
+        #endregion
 
-        public static Stream Open(string path, string file)
+        #region 图像处理
+        private static Image _NaN16;
+        public static Image NaN16
         {
-            if (Regex.IsMatch(file, "^[a-zA-z]{2,}:/{2,3}[^\\s]+"))
+            get
             {
-                return WebRequest.Create(file).GetRequestStream();
+                if (_NaN16 == null)
+                {
+                    _NaN16 = new Bitmap(16, 16);
+                }
+                return _NaN16;
             }
+        }
 
-            if (!Path.IsPathRooted(file))
+        private static Image _NaN24;
+        public static Image NaN24
+        {
+            get
             {
-                file = Path.Combine(path, file);
+                if (_NaN24 == null)
+                {
+                    _NaN24 = new Bitmap(24, 24);
+                }
+                return _NaN24;
             }
+        }
 
-            if (File.Exists(file))
+        private static Image _NaN32;
+        public static Image NaN32
+        {
+            get
             {
-                return File.OpenRead(file);
+                if (_NaN32 == null)
+                {
+                    _NaN32 = new Bitmap(32, 32);
+                }
+                return _NaN32;
             }
-
-            return null;
         }
 
         public static Image ReadImage(string file, Image defImg)
@@ -270,7 +275,9 @@ namespace Me.Amon.Util
 
             return bmp;
         }
+        #endregion
 
+        #region 压缩处理
         public static void DoZip(string zipFile, string srcBase, params string[] srcPath)
         {
             if (srcBase == null)
@@ -400,5 +407,6 @@ namespace Me.Amon.Util
             }
             iStream.Close();
         }
+        #endregion
     }
 }
