@@ -104,6 +104,8 @@
     <Compile Include="Bar\ABar.Designer.cs">
       <DependentUpon>ABar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Bar\EBar.cs" />
+    <Compile Include="Bar\MBar.cs" />
     <Compile Include="Bar\Opt\Email.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -165,13 +167,12 @@
     <Compile Include="Bar\Opt\Vcard.Designer.cs">
       <DependentUpon>Vcard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\Dto.cs" />
+    <Compile Include="Gtd\EGtd.cs" />
+    <Compile Include="Ico\EIco.cs" />
+    <Compile Include="Ico\MIco.cs" />
+    <Compile Include="Pwd\Att.cs" />
+    <Compile Include="Pwd\EPwd.cs" />
     <Compile Include="Pwd\_Att\CallAtt.cs" />
-    <Compile Include="Pwd\Ico.cs" />
-    <Compile Include="Model\Log.cs" />
-    <Compile Include="Pwd\Png.cs" />
-    <Compile Include="Ce\Renamer.cs" />
-    <Compile Include="Ce\Wrapper.cs" />
     <Compile Include="Da\DBAccess.cs" />
     <Compile Include="Da\DBObject.cs" />
     <Compile Include="Da\DCAccess.cs" />
@@ -208,9 +209,6 @@
     </Compile>
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Pwd\Att.cs">
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Pwd\_Att\DataAtt.cs">
       <SubType>Code</SubType>
@@ -254,14 +252,8 @@
     <Compile Include="Pwd\_Att\TextAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Pwd\Cat.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Model\SafeModel.cs" />
     <Compile Include="Model\Pwd\DataModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Pwd\Dir.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Gtd\MGtdDetail.cs">
@@ -270,29 +262,11 @@
     <Compile Include="Gtd\MGtd.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Pwd\Key.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Pwd\LibDetail.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Pwd\Lib.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Pwd\KeyLog.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Model\Pwd\SafeModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Pwd\Udc.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\UdcModel.cs" />
     <Compile Include="Model\UserModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Model\Vcs.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\ViewModel.cs">
@@ -569,7 +543,7 @@
     <Compile Include="Ren\ARen.Designer.cs">
       <DependentUpon>ARen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Ren\MRen.cs" />
+    <Compile Include="Ren\ERen.cs" />
     <Compile Include="Sec\ASec.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -577,8 +551,9 @@
       <DependentUpon>ASec.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Sec\DataModel.cs" />
-    <Compile Include="Sec\IData.cs" />
+    <Compile Include="Sec\ESec.cs" />
     <Compile Include="Sec\ISec.cs" />
+    <Compile Include="Sec\MSec.cs" />
     <Compile Include="Sec\Pro\IForm.cs" />
     <Compile Include="Sec\Pro\IView.cs" />
     <Compile Include="Sec\Pro\APro.cs">
@@ -759,12 +734,6 @@
       <DependentUpon>SignOl.cs</DependentUpon>
     </Compile>
     <Compile Include="Util\BeanUtil.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Util\CharUtil.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Util\HashUtil.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Util\HttpUtil.cs">
@@ -1217,7 +1186,12 @@
     <None Include="Resources\Pupil.png" />
     <None Include="Resources\Waiting.gif" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Lib\Lib.csproj">
+      <Project>{2271F95A-E5E5-4630-99B9-DEC0E5FE2EB4}</Project>
+      <Name>Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
       <Visible>False</Visible>

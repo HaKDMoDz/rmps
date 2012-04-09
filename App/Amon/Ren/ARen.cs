@@ -67,7 +67,7 @@ namespace Me.Amon.Ren
             dt.Rows.Add("?<a:b>", "将扩展名中的a替换为b");
             GvInfo.DataSource = dt;
 
-            foreach (MRen ren in _UserModel.DBObject.ListRen())
+            foreach (MRen ren in _UserModel.DBA.ListRen())
             {
                 LsRule.Items.Add(ren);
             }
@@ -108,7 +108,7 @@ namespace Me.Amon.Ren
             MRen ren = new MRen();
             ren.Name = name;
             ren.Command = TbRule.Text;
-            _UserModel.DBObject.SaveVcs(ren);
+            _UserModel.DBA.SaveVcs(ren);
             LsRule.Items.Add(ren);
         }
 
@@ -360,7 +360,7 @@ namespace Me.Amon.Ren
                 return;
             }
 
-            _UserModel.DBObject.DeleteVcs(ren);
+            _UserModel.DBA.DeleteVcs(ren);
             LsRule.Items.Remove(ren);
         }
 
@@ -390,7 +390,7 @@ namespace Me.Amon.Ren
                         {
                             continue;
                         }
-                        _UserModel.DBObject.SaveVcs(ren);
+                        _UserModel.DBA.SaveVcs(ren);
                         LsRule.Items.Add(ren);
                     }
                 }
@@ -421,7 +421,7 @@ namespace Me.Amon.Ren
                     writer.WriteElementString("App", "ARen");
                     writer.WriteElementString("Ver", "1");
                     writer.WriteStartElement("Rens");
-                    foreach (MRen ren in _UserModel.DBObject.ListRen())
+                    foreach (MRen ren in _UserModel.DBA.ListRen())
                     {
                         ren.ToXml(writer);
                     }

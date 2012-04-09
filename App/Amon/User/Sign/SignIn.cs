@@ -21,6 +21,7 @@ namespace Me.Amon.User.Sign
         private DFAccess _Prop;
         private SignAc _SignAc;
 
+        #region 构造函数
         public SignIn()
         {
             InitializeComponent();
@@ -33,6 +34,7 @@ namespace Me.Amon.User.Sign
 
             InitializeComponent();
         }
+        #endregion
 
         #region 接口实现
         public Control Control
@@ -223,7 +225,7 @@ namespace Me.Amon.User.Sign
                     {
                         continue;
                     }
-                    _UserModel.DBObject.SaveVcs(cat);
+                    _UserModel.DBA.SaveVcs(cat);
                 }
             }
 
@@ -262,7 +264,7 @@ namespace Me.Amon.User.Sign
                     {
                         continue;
                     }
-                    _UserModel.DBObject.SaveVcs(header);
+                    _UserModel.DBA.SaveVcs(header);
                 }
             }
 
@@ -301,7 +303,7 @@ namespace Me.Amon.User.Sign
                     {
                         continue;
                     }
-                    _UserModel.DBObject.SaveVcs(udc);
+                    _UserModel.DBA.SaveVcs(udc);
                 }
             }
 
@@ -340,7 +342,7 @@ namespace Me.Amon.User.Sign
                     {
                         continue;
                     }
-                    _UserModel.DBObject.SaveVcs(key);
+                    _UserModel.DBA.SaveVcs(key);
                 }
             }
 

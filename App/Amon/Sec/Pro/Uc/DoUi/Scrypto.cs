@@ -56,14 +56,14 @@ namespace Me.Amon.Sec.Pro.Uc.DoUi
 
             switch (key)
             {
-                case IData.DIR_ENC:
+                case ESec.DIR_ENC:
                     if (_Enc == null)
                     {
                         _Enc = new ScryptoEnc(_APro, _Do);
                     }
                     _Cur = _Enc;
                     break;
-                case IData.DIR_DEC:
+                case ESec.DIR_DEC:
                     if (_Dec == null)
                     {
                         _Dec = new ScryptoDec(_APro, _Do);

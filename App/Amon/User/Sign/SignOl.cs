@@ -370,7 +370,7 @@ namespace Me.Amon.User.Sign
                     {
                         continue;
                     }
-                    _UserModel.DBObject.SaveVcs(cat);
+                    _UserModel.DBA.SaveVcs(cat);
                 }
             }
 
@@ -410,7 +410,7 @@ namespace Me.Amon.User.Sign
                     {
                         continue;
                     }
-                    _UserModel.DBObject.SaveVcs(header);
+                    _UserModel.DBA.SaveVcs(header);
                     header.Order += 1;
                 }
             }
@@ -450,7 +450,7 @@ namespace Me.Amon.User.Sign
                     {
                         continue;
                     }
-                    _UserModel.DBObject.SaveVcs(udc);
+                    _UserModel.DBA.SaveVcs(udc);
                 }
             }
 

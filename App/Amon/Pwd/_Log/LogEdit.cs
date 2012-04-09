@@ -33,7 +33,7 @@ namespace Me.Amon.Pwd._Log
             _SafeModel = safeModel;
             _AttList = new List<Att>();
 
-            foreach (KeyLog log in _UserModel.DBObject.ListRecLog(_SafeModel.Key.Id))
+            foreach (KeyLog log in _UserModel.DBA.ListKeyLog(_SafeModel.Key.Id))
             {
                 LbLog.Items.Add(log);
             }
@@ -83,12 +83,12 @@ namespace Me.Amon.Pwd._Log
             }
 
             KeyLog newLog = _SafeModel.Key.ToLog();
-            _UserModel.DBObject.SaveLog(newLog);
+            _UserModel.DBA.SaveLog(newLog);
 
             _SafeModel.Key.FromLog(oldLog);
             _SafeModel.Decode();
             _APwd.ShowRec(_SafeModel.Key);
-            _UserModel.DBObject.SaveVcs(_SafeModel.Key);
+            _UserModel.DBA.SaveVcs(_SafeModel.Key);
 
             LbLog.Items.Insert(0, newLog);
         }
@@ -108,7 +108,7 @@ namespace Me.Amon.Pwd._Log
                 return;
             }
 
-            _UserModel.DBObject.DeleteLog(log);
+            _UserModel.DBA.DeleteLog(log);
             LbLog.Items.Remove(log);
         }
 
@@ -121,7 +121,7 @@ namespace Me.Amon.Pwd._Log
 
             for (int i = LbLog.Items.Count - 1; i >= 0; i -= 1)
             {
-                _UserModel.DBObject.DeleteLog(LbLog.Items[i] as KeyLog);
+                _UserModel.DBA.DeleteLog(LbLog.Items[i] as KeyLog);
                 LbLog.Items.RemoveAt(i);
             }
         }

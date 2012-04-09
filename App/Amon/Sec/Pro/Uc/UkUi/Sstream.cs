@@ -49,7 +49,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
 
             switch (alg)
             {
-                case IData.SSTREAM_HC128:
+                case ESec.SSTREAM_HC128:
                     _SizeDef.D = "16";
                     _Uk.TbPass.MaxLength = 16;
                     _Uk.TbSalt.MaxLength = 16;
@@ -59,7 +59,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                     _Uk.TbSalt.Visible = false;
                     _Uk.BtSalt.Visible = false;
                     break;
-                case IData.SSTREAM_HC256:
+                case ESec.SSTREAM_HC256:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
@@ -69,7 +69,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                     _Uk.TbSalt.Visible = false;
                     _Uk.BtSalt.Visible = false;
                     break;
-                case IData.SSTREAM_ISAAC:
+                case ESec.SSTREAM_ISAAC:
                     _SizeDef.D = "64";
                     _Uk.TbPass.MaxLength = 64;
                     _Uk.TbSalt.MaxLength = 64;
@@ -82,7 +82,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                     _Uk.TbSalt.Visible = false;
                     _Uk.BtSalt.Visible = false;
                     break;
-                case IData.SSTREAM_RC4:
+                case ESec.SSTREAM_RC4:
                     _SizeDef.D = "16";
                     _Uk.TbPass.MaxLength = 16;
                     _Uk.TbSalt.MaxLength = 16;
@@ -95,7 +95,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                     _Uk.TbSalt.Visible = false;
                     _Uk.BtSalt.Visible = false;
                     break;
-                case IData.SSTREAM_SALSA20:
+                case ESec.SSTREAM_SALSA20:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
@@ -106,7 +106,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                     _Uk.TbSalt.Visible = false;
                     _Uk.BtSalt.Visible = false;
                     break;
-                case IData.SSTREAM_VMPC:
+                case ESec.SSTREAM_VMPC:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
@@ -119,7 +119,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                     _Uk.TbSalt.Visible = true;
                     _Uk.BtSalt.Visible = true;
                     break;
-                case IData.SSTREAM_VMPCKSA3:
+                case ESec.SSTREAM_VMPCKSA3:
                     _SizeDef.D = "48";
                     _Uk.TbPass.MaxLength = 48;
                     _Uk.TbSalt.MaxLength = 48;

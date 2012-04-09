@@ -1,6 +1,9 @@
 ﻿namespace Me.Amon.Sec
 {
-    public class IData
+    /// <summary>
+    /// 枚举常量
+    /// </summary>
+    public class ESec
     {
         /// <summary>
         /// 数据散列

@@ -43,7 +43,7 @@ namespace Me.Amon.Uw
             ShowIcoView();
 
             LsDir.Items.Add(new Dir { Id = "0", Name = "默认分类", Tips = "默认分类", Path = "." });
-            foreach (Dir dir in _UserModel.DBObject.ListDir())
+            foreach (Dir dir in _UserModel.DBA.ListDir())
             {
                 LsDir.Items.Add(dir);
             }
@@ -125,7 +125,7 @@ namespace Me.Amon.Uw
                 return;
             }
 
-            _UserModel.DBObject.DeleteVcs(item);
+            _UserModel.DBA.DeleteVcs(item);
             if (Directory.Exists(HomeDir))
             {
                 Directory.Delete(HomeDir, true);
@@ -178,7 +178,7 @@ namespace Me.Amon.Uw
         public void UpdateDir(Dir item)
         {
             bool update = CharUtil.IsValidateHash(item.Id);
-            _UserModel.DBObject.SaveVcs(item);
+            _UserModel.DBA.SaveVcs(item);
             if (update)
             {
                 LsDir.Items[LsDir.SelectedIndex] = item;

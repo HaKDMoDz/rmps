@@ -20,11 +20,11 @@ namespace Me.Amon.Sec.Pro.Uc.CmUi
             _Cm.Enabled = true;
 
             BeanUtil.Clear(_Cm.CbName);
-            _Cm.CbName.Items.Add(new Item { K = IData.ACRYPTO_ELGAMAL, V = "ElGamal" });
-            _Cm.CbName.Items.Add(new Item { K = IData.ACRYPTO_NACCACHESTERN, V = "NaccacheStern" });
-            _Cm.CbName.Items.Add(new Item { K = IData.ACRYPTO_RSABLINDED, V = "RsaBlinded" });
-            _Cm.CbName.Items.Add(new Item { K = IData.ACRYPTO_RSABLINDING, V = "RsaBlinding" });
-            _Cm.CbName.Items.Add(new Item { K = IData.ACRYPTO_RSA, V = "Rsa" });
+            _Cm.CbName.Items.Add(new Item { K = ESec.ACRYPTO_ELGAMAL, V = "ElGamal" });
+            _Cm.CbName.Items.Add(new Item { K = ESec.ACRYPTO_NACCACHESTERN, V = "NaccacheStern" });
+            _Cm.CbName.Items.Add(new Item { K = ESec.ACRYPTO_RSABLINDED, V = "RsaBlinded" });
+            _Cm.CbName.Items.Add(new Item { K = ESec.ACRYPTO_RSABLINDING, V = "RsaBlinding" });
+            _Cm.CbName.Items.Add(new Item { K = ESec.ACRYPTO_RSA, V = "Rsa" });
             _Cm.CbName.Enabled = false;
 
             BeanUtil.Clear(_Cm.CbMode);
@@ -70,19 +70,19 @@ namespace Me.Amon.Sec.Pro.Uc.CmUi
 
             switch (name)
             {
-                case IData.ACRYPTO_ELGAMAL:
+                case ESec.ACRYPTO_ELGAMAL:
                     _Engine = new ElGamalEngine();
                     break;
-                case IData.ACRYPTO_NACCACHESTERN:
+                case ESec.ACRYPTO_NACCACHESTERN:
                     _Engine = new NaccacheSternEngine();
                     break;
-                case IData.ACRYPTO_RSABLINDED:
+                case ESec.ACRYPTO_RSABLINDED:
                     _Engine = new RsaBlindedEngine();
                     break;
-                case IData.ACRYPTO_RSABLINDING:
+                case ESec.ACRYPTO_RSABLINDING:
                     _Engine = new RsaBlindingEngine();
                     break;
-                case IData.ACRYPTO_RSA:
+                case ESec.ACRYPTO_RSA:
                     _Engine = new RsaEngine();
                     break;
             }

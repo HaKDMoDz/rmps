@@ -61,28 +61,28 @@ namespace Me.Amon.Sec.Pro.Uc
         {
             switch (dir)
             {
-                case IData.OPT_DIGEST:
+                case ESec.OPT_DIGEST:
                     _Auk = _Digest;
                     break;
-                case IData.OPT_RANDKEY:
+                case ESec.OPT_RANDKEY:
                     _Auk = _RandKey;
                     break;
-                case IData.OPT_WRAPPER:
+                case ESec.OPT_WRAPPER:
                     _Auk = _Wrapper;
                     break;
-                case IData.OPT_CONFUSE:
+                case ESec.OPT_CONFUSE:
                     _Auk = _Confuse;
                     break;
-                case IData.OPT_SCRYPTO:
+                case ESec.OPT_SCRYPTO:
                     _Auk = _Scrypto;
                     break;
-                case IData.OPT_SSTREAM:
+                case ESec.OPT_SSTREAM:
                     _Auk = _Sstream;
                     break;
-                case IData.OPT_ACRYPTO:
+                case ESec.OPT_ACRYPTO:
                     _Auk = _Acrypto;
                     break;
-                case IData.OPT_TXT2IMG:
+                case ESec.OPT_TXT2IMG:
                     _Auk = _Txt2Img;
                     break;
                 default:

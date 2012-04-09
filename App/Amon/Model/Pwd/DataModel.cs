@@ -39,7 +39,7 @@ namespace Me.Amon.Model.Pwd
             #endregion
 
             _LibList = new List<Lib>();
-            foreach (Lib lib in _UserModel.DBObject.ListLib())
+            foreach (Lib lib in _UserModel.DBA.ListLib())
             {
                 _LibList.Add(lib);
             }

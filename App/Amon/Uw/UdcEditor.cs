@@ -123,7 +123,7 @@ namespace Me.Amon.Uw
             }
             _Item.Data = buf.ToString();
 
-            _UserModel.DBObject.SaveVcs(_Item);
+            _UserModel.DBA.SaveVcs(_Item);
             if (LsUcs.SelectedItem != null)
             {
                 LsUcs.Items[LsUcs.SelectedIndex] = _Item;

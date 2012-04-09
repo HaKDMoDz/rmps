@@ -94,8 +94,8 @@ namespace Me.Amon.Sec.Pro
             // CbKey
             // 
             CbKey.Items.Add(new Item { K = "0", V = "请选择" });
-            CbKey.Items.Add(new Item { K = IData.DIR_ENC, V = "加密" });
-            CbKey.Items.Add(new Item { K = IData.DIR_DEC, V = "解密" });
+            CbKey.Items.Add(new Item { K = ESec.DIR_ENC, V = "加密" });
+            CbKey.Items.Add(new Item { K = ESec.DIR_DEC, V = "解密" });
             CbKey.SelectedIndex = 0;
             CbKey.Visible = false;
 
@@ -103,11 +103,11 @@ namespace Me.Amon.Sec.Pro
             // CbOpt
             // 
             CbOpt.Items.Add(new Item { K = "0", V = "请选择" });
-            CbOpt.Items.Add(new Item { K = IData.OPT_DIGEST, V = "散列算法" });
+            CbOpt.Items.Add(new Item { K = ESec.OPT_DIGEST, V = "散列算法" });
             //CbOpt.Items.Add(new Item { K = IData.OPT_RANDKEY, V = "随机口令" });
-            CbOpt.Items.Add(new Item { K = IData.OPT_WRAPPER, V = "掩码算法" });
-            CbOpt.Items.Add(new Item { K = IData.OPT_SCRYPTO, V = "块对称算法" });
-            CbOpt.Items.Add(new Item { K = IData.OPT_SSTREAM, V = "流对称算法" });
+            CbOpt.Items.Add(new Item { K = ESec.OPT_WRAPPER, V = "掩码算法" });
+            CbOpt.Items.Add(new Item { K = ESec.OPT_SCRYPTO, V = "块对称算法" });
+            CbOpt.Items.Add(new Item { K = ESec.OPT_SSTREAM, V = "流对称算法" });
             //CbOpt.Items.Add(new Item { K = IData.OPT_ACRYPTO, V = "非对称算法" });
             //CbOpt.Items.Add(new Item { K = IData.OPT_TXT2IMG, V = "图文转换" });
             CbOpt.SelectedIndex = 0;
@@ -145,28 +145,28 @@ namespace Me.Amon.Sec.Pro
 
             switch (item.K)
             {
-                case IData.OPT_DIGEST:
+                case ESec.OPT_DIGEST:
                     CbKey.Visible = false;
                     break;
-                case IData.OPT_WRAPPER:
+                case ESec.OPT_WRAPPER:
                     CbKey.SelectedIndex = 0;
                     CbKey.Visible = true;
                     CbKey.Focus();
                     break;
-                case IData.OPT_SCRYPTO:
+                case ESec.OPT_SCRYPTO:
                     CbKey.SelectedIndex = 0;
                     CbKey.Visible = true;
                     CbKey.Focus();
                     break;
-                case IData.OPT_SSTREAM:
+                case ESec.OPT_SSTREAM:
                     CbKey.SelectedIndex = 0;
                     CbKey.Visible = true;
                     CbKey.Focus();
                     break;
-                case IData.OPT_ACRYPTO:
+                case ESec.OPT_ACRYPTO:
                     CbKey.Visible = false;
                     break;
-                case IData.OPT_TXT2IMG:
+                case ESec.OPT_TXT2IMG:
                     CbKey.Visible = false;
                     break;
                 default:
@@ -285,7 +285,7 @@ namespace Me.Amon.Sec.Pro
                 _UcDi.Begin();
                 _UcDo.Begin();
 
-                byte[] buf = new byte[IData.BUF_SIZE];
+                byte[] buf = new byte[ESec.BUF_SIZE];
                 int len = _UcDi.Read(buf, 0, buf.Length);
                 while (len > 0)
                 {
@@ -312,7 +312,7 @@ namespace Me.Amon.Sec.Pro
         {
             _UcDo.Begin();
 
-            byte[] buf = new byte[IData.BUF_SIZE];
+            byte[] buf = new byte[ESec.BUF_SIZE];
             int len = _UcDi.Read(buf, 0, buf.Length);
             _UcDo.Write(buf, 0, len);
 
@@ -328,7 +328,7 @@ namespace Me.Amon.Sec.Pro
                 _UcDi.Begin();
                 _UcDo.Begin();
 
-                byte[] buf = new byte[IData.BUF_SIZE];
+                byte[] buf = new byte[ESec.BUF_SIZE];
                 int len = _UcDi.Read(buf, 0, buf.Length);
                 while (len > 0)
                 {
@@ -359,8 +359,8 @@ namespace Me.Amon.Sec.Pro
                 _UcDi.Begin();
                 _UcDo.Begin();
 
-                byte[] bi = new byte[IData.BUF_SIZE];
-                byte[] bo = new byte[IData.BUF_SIZE];
+                byte[] bi = new byte[ESec.BUF_SIZE];
+                byte[] bo = new byte[ESec.BUF_SIZE];
                 int li = _UcDi.Read(bi, 0, bi.Length);
                 int lo;
                 while (li > 0)
@@ -398,8 +398,8 @@ namespace Me.Amon.Sec.Pro
                 _UcDi.Begin();
                 _UcDo.Begin();
 
-                byte[] bi = new byte[IData.BUF_SIZE];
-                byte[] bo = new byte[IData.BUF_SIZE];
+                byte[] bi = new byte[ESec.BUF_SIZE];
+                byte[] bo = new byte[ESec.BUF_SIZE];
                 int li = _UcDi.Read(bi, 0, bi.Length);
                 int lo;
                 while (li > 0)
@@ -434,8 +434,8 @@ namespace Me.Amon.Sec.Pro
                 _UcDi.Begin();
                 _UcDo.Begin();
 
-                byte[] bi = new byte[IData.BUF_SIZE];
-                byte[] bo = new byte[IData.BUF_SIZE];
+                byte[] bi = new byte[ESec.BUF_SIZE];
+                byte[] bo = new byte[ESec.BUF_SIZE];
                 int li = _UcDi.Read(bi, 0, bi.Length);
                 int lo;
                 while (li > 0)
@@ -501,13 +501,13 @@ namespace Me.Amon.Sec.Pro
 
             switch (opt.K)
             {
-                case IData.OPT_DIGEST:
+                case ESec.OPT_DIGEST:
                     Digest();
                     break;
-                case IData.OPT_RANDKEY:
+                case ESec.OPT_RANDKEY:
                     Randkey();
                     break;
-                case IData.OPT_WRAPPER:
+                case ESec.OPT_WRAPPER:
                     if (key == null || key.K == "0")
                     {
                         Main.ShowAlert("请选择您要执行的操作！");
@@ -516,34 +516,34 @@ namespace Me.Amon.Sec.Pro
                     }
                     Wrapper();
                     break;
-                case IData.OPT_SCRYPTO:
+                case ESec.OPT_SCRYPTO:
                     if (key == null || key.K == "0")
                     {
                         Main.ShowAlert("请选择您要执行的操作！");
                         CbKey.Focus();
                         return;
                     }
-                    Scrypto(key.K != IData.DIR_DEC);
+                    Scrypto(key.K != ESec.DIR_DEC);
                     break;
-                case IData.OPT_SSTREAM:
+                case ESec.OPT_SSTREAM:
                     if (key == null || key.K == "0")
                     {
                         Main.ShowAlert("请选择您要执行的操作！");
                         CbKey.Focus();
                         return;
                     }
-                    Sstream(key.K != IData.DIR_DEC);
+                    Sstream(key.K != ESec.DIR_DEC);
                     break;
-                case IData.OPT_ACRYPTO:
+                case ESec.OPT_ACRYPTO:
                     if (key == null || key.K == "0")
                     {
                         Main.ShowAlert("请选择您要执行的操作！");
                         CbKey.Focus();
                         return;
                     }
-                    Acrypto(key.K != IData.DIR_DEC);
+                    Acrypto(key.K != ESec.DIR_DEC);
                     break;
-                case IData.OPT_TXT2IMG:
+                case ESec.OPT_TXT2IMG:
                     Txt2Img();
                     break;
                 default:

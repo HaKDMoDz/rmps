@@ -35,30 +35,30 @@ namespace Me.Amon.Sec.Pro.Uc.CmUi
             _Cm.Enabled = true;
 
             BeanUtil.Clear(_Cm.CbName);
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_AES, V = "Aes" });//0 .. 256
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_AESFAST, V = "AesFast" });
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_AESLIGHT, V = "AesLight" });
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_BLOWFISH, V = "Blowfish" });//0 .. 448
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_CAMELLIA, V = "Camellia" });//128, 192, 256
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_CAMELLIALIGHT, V = "CamelliaLight" });
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_CAST5, V = "Cast5" });//0 .. 128
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_CAST6, V = "Cast6" });//0 .. 256
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_DES, V = "Des" });//64
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_DESEDE, V = "DesEde" });//128, 192
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_GOST28147, V = "Gost28147" });//256
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_NOEKEON, V = "Noekeon" });//128
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_NULL, V = "Null" });
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_RC2, V = "RC2" });//0 .. 1024
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_RC532, V = "RC5" });//0 .. 128
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_AES, V = "Aes" });//0 .. 256
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_AESFAST, V = "AesFast" });
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_AESLIGHT, V = "AesLight" });
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_BLOWFISH, V = "Blowfish" });//0 .. 448
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_CAMELLIA, V = "Camellia" });//128, 192, 256
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_CAMELLIALIGHT, V = "CamelliaLight" });
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_CAST5, V = "Cast5" });//0 .. 128
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_CAST6, V = "Cast6" });//0 .. 256
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_DES, V = "Des" });//64
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_DESEDE, V = "DesEde" });//128, 192
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_GOST28147, V = "Gost28147" });//256
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_NOEKEON, V = "Noekeon" });//128
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_NULL, V = "Null" });
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_RC2, V = "RC2" });//0 .. 1024
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_RC532, V = "RC5" });//0 .. 128
             //_Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_RC564, V = "RC5（64位）" });//0 .. 128
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_RC6, V = "RC6" });//0 .. 256
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_RIJNDAEL, V = "Rijndael" });//0 .. 256
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_SEED, V = "Seed" });//128
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_SERPENT, V = "Serpent" });//128, 192, 256
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_SKIPJACK, V = "Skipjack" });//0 .. 128
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_TEA, V = "Tea" });//128
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_TWOFISH, V = "Twofish" });//128, 192, 256
-            _Cm.CbName.Items.Add(new Item { K = IData.SCRYPTO_XTEA, V = "Xtea" });//128
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_RC6, V = "RC6" });//0 .. 256
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_RIJNDAEL, V = "Rijndael" });//0 .. 256
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_SEED, V = "Seed" });//128
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_SERPENT, V = "Serpent" });//128, 192, 256
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_SKIPJACK, V = "Skipjack" });//0 .. 128
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_TEA, V = "Tea" });//128
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_TWOFISH, V = "Twofish" });//128, 192, 256
+            _Cm.CbName.Items.Add(new Item { K = ESec.SCRYPTO_XTEA, V = "Xtea" });//128
             _Cm.CbName.Enabled = false;
 
             BeanUtil.Clear(_Cm.CbMode);
@@ -110,122 +110,122 @@ namespace Me.Amon.Sec.Pro.Uc.CmUi
 
             switch (name)
             {
-                case IData.SCRYPTO_AES:
+                case ESec.SCRYPTO_AES:
                     _Engine = new AesEngine();
                     _KeySize = 32;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_AESFAST:
+                case ESec.SCRYPTO_AESFAST:
                     _Engine = new AesFastEngine();
                     _KeySize = 32;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_AESLIGHT:
+                case ESec.SCRYPTO_AESLIGHT:
                     _Engine = new AesLightEngine();
                     _KeySize = 32;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_BLOWFISH:
+                case ESec.SCRYPTO_BLOWFISH:
                     _Engine = new BlowfishEngine();
                     _KeySize = 56;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_CAMELLIA:
+                case ESec.SCRYPTO_CAMELLIA:
                     _Engine = new CamelliaEngine();
                     _KeySize = 32;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_CAMELLIALIGHT:
+                case ESec.SCRYPTO_CAMELLIALIGHT:
                     _Engine = new CamelliaLightEngine();
                     _KeySize = 32;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_CAST5:
+                case ESec.SCRYPTO_CAST5:
                     _Engine = new Cast5Engine();
                     _KeySize = 16;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_CAST6:
+                case ESec.SCRYPTO_CAST6:
                     _Engine = new Cast6Engine();
                     _KeySize = 32;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_DES:
+                case ESec.SCRYPTO_DES:
                     _Engine = new DesEngine();
                     _KeySize = 8;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_DESEDE:
+                case ESec.SCRYPTO_DESEDE:
                     _Engine = new DesEdeEngine();
                     _KeySize = 24;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_GOST28147:
+                case ESec.SCRYPTO_GOST28147:
                     _Engine = new Gost28147Engine();
                     _KeySize = 32;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_NOEKEON:
+                case ESec.SCRYPTO_NOEKEON:
                     _Engine = new NoekeonEngine();
                     _KeySize = 16;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_NULL:
+                case ESec.SCRYPTO_NULL:
                     _Engine = new NullEngine();
                     _KeySize = 32;
                     _IVSize = 16;
                     break;
-                case IData.SCRYPTO_RC2:
+                case ESec.SCRYPTO_RC2:
                     _Engine = new RC2Engine();
                     _KeySize = 128;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_RC532:
+                case ESec.SCRYPTO_RC532:
                     _Engine = new RC532Engine();
                     _KeySize = 16;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_RC564:
+                case ESec.SCRYPTO_RC564:
                     _Engine = new RC564Engine();
                     _KeySize = 16;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_RC6:
+                case ESec.SCRYPTO_RC6:
                     _Engine = new RC6Engine();
                     _KeySize = 32;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_RIJNDAEL:
+                case ESec.SCRYPTO_RIJNDAEL:
                     _Engine = new RijndaelEngine();
                     _KeySize = 32;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_SEED:
+                case ESec.SCRYPTO_SEED:
                     _Engine = new SeedEngine();
                     _KeySize = 16;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_SERPENT:
+                case ESec.SCRYPTO_SERPENT:
                     _Engine = new SerpentEngine();
                     _KeySize = 32;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_SKIPJACK:
+                case ESec.SCRYPTO_SKIPJACK:
                     _Engine = new SkipjackEngine();
                     _KeySize = 16;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_TEA:
+                case ESec.SCRYPTO_TEA:
                     _Engine = new TeaEngine();
                     _KeySize = 16;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_TWOFISH:
+                case ESec.SCRYPTO_TWOFISH:
                     _Engine = new TwofishEngine();
                     _KeySize = 32;
                     _IVSize = 0;
                     break;
-                case IData.SCRYPTO_XTEA:
+                case ESec.SCRYPTO_XTEA:
                     _Engine = new XteaEngine();
                     _KeySize = 16;
                     _IVSize = 0;

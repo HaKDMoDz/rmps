@@ -208,7 +208,7 @@ namespace Me.Amon.Pwd
 
         private void InitCat(TreeNode root)
         {
-            foreach (Cat cat in _UserModel.DBObject.ListCat(root.Name))
+            foreach (Cat cat in _UserModel.DBA.ListCat(root.Name))
             {
                 TreeNode node = new TreeNode();
                 node.Name = cat.Id;
@@ -952,7 +952,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            IList<Key> recs = _UserModel.DBObject.ListKey(cat.Id);
+            IList<Key> recs = _UserModel.DBA.ListKey(cat.Id);
             if (recs.Count < 1)
             {
                 Main.ShowAlert("当前类别下没有记录！");
@@ -1327,8 +1327,8 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            _UserModel.DBObject.SaveVcs(prevCat);
-            _UserModel.DBObject.SaveVcs(currCat);
+            _UserModel.DBA.SaveVcs(prevCat);
+            _UserModel.DBA.SaveVcs(currCat);
 
             TvCatTree.SelectedNode = null;
             parent.Nodes.Remove(currNode);
@@ -1368,8 +1368,8 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            _UserModel.DBObject.SaveVcs(currCat);
-            _UserModel.DBObject.SaveVcs(nextCat);
+            _UserModel.DBA.SaveVcs(currCat);
+            _UserModel.DBA.SaveVcs(nextCat);
 
             TvCatTree.SelectedNode = null;
             parent.Nodes.Remove(currNode);
@@ -1808,7 +1808,7 @@ namespace Me.Amon.Pwd
             }
 
             cat.Parent = _LastNode.Name;
-            _UserModel.DBObject.SaveVcs(cat);
+            _UserModel.DBA.SaveVcs(cat);
 
             TreeNode node = new TreeNode();
             node.Name = cat.Id;
@@ -1848,7 +1848,7 @@ namespace Me.Amon.Pwd
         {
             TreeNode node = TvCatTree.SelectedNode;
 
-            _UserModel.DBObject.SaveVcs(cat);
+            _UserModel.DBA.SaveVcs(cat);
 
             node.Text = cat.Text;
             node.ToolTipText = cat.Tips;
@@ -1882,14 +1882,14 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            IList<Key> recs = _UserModel.DBObject.ListKey(cat.Id);
+            IList<Key> recs = _UserModel.DBA.ListKey(cat.Id);
             if (recs.Count > 0)
             {
                 Main.ShowAlert("类别数据不为空，不能删除！");
                 return;
             }
 
-            _UserModel.DBObject.DeleteVcs(cat);
+            _UserModel.DBA.DeleteVcs(cat);
 
             TreeNode root = node.Parent;
             if (root != null)
@@ -1917,7 +1917,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            _UserModel.DBObject.SaveVcs(cat);
+            _UserModel.DBA.SaveVcs(cat);
         }
         #endregion
 
@@ -1967,11 +1967,11 @@ namespace Me.Amon.Pwd
             if (_SafeModel.IsUpdate && _SafeModel.Key.Backup)
             {
                 KeyLog recLog = _SafeModel.Key.ToLog();
-                _UserModel.DBObject.SaveLog(recLog);
+                _UserModel.DBA.SaveLog(recLog);
             }
             _SafeModel.Encode();
             _SafeModel.Key.AccessTime = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
-            _UserModel.DBObject.SaveVcs(_SafeModel.Key);
+            _UserModel.DBA.SaveVcs(_SafeModel.Key);
             _SafeModel.Modified = false;
 
             LastOpt();
@@ -1995,7 +1995,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            _UserModel.DBObject.RemoveVcs(_SafeModel.Key);
+            _UserModel.DBA.RemoveVcs(_SafeModel.Key);
 
             LbKeyList.Items.RemoveAt(LbKeyList.SelectedIndex);
         }
@@ -2005,7 +2005,7 @@ namespace Me.Amon.Pwd
             _SafeModel.Encode();
 
             _SafeModel.Key.AccessTime = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
-            _UserModel.DBObject.SaveVcs(_SafeModel.Key);
+            _UserModel.DBA.SaveVcs(_SafeModel.Key);
         }
 
         public void ListKey(string catId)
@@ -2023,7 +2023,7 @@ namespace Me.Amon.Pwd
 
         public void DoListKey(string catId)
         {
-            IList<Key> recs = _UserModel.DBObject.ListKey(catId);
+            IList<Key> recs = _UserModel.DBA.ListKey(catId);
             InitKey(recs);
         }
 
@@ -2054,7 +2054,7 @@ namespace Me.Amon.Pwd
 
         private void DoFindKey(string meta)
         {
-            IList<Key> recs = _UserModel.DBObject.FindRec(meta);
+            IList<Key> recs = _UserModel.DBA.FindKey(meta);
             InitKey(recs);
         }
 
@@ -2082,7 +2082,7 @@ namespace Me.Amon.Pwd
             }
 
             _SafeModel.Key.CatId = catId;
-            _UserModel.DBObject.SaveVcs(_SafeModel.Key);
+            _UserModel.DBA.SaveVcs(_SafeModel.Key);
 
             LastOpt();
         }
@@ -2095,7 +2095,7 @@ namespace Me.Amon.Pwd
             }
 
             _SafeModel.Key.Label = label;
-            _UserModel.DBObject.SaveVcs(_SafeModel.Key);
+            _UserModel.DBA.SaveVcs(_SafeModel.Key);
 
             LbKeyList.Refresh();
         }
@@ -2108,7 +2108,7 @@ namespace Me.Amon.Pwd
             }
 
             _SafeModel.Key.Major = major;
-            _UserModel.DBObject.SaveVcs(_SafeModel.Key);
+            _UserModel.DBA.SaveVcs(_SafeModel.Key);
 
             LbKeyList.Refresh();
         }
@@ -2122,7 +2122,7 @@ namespace Me.Amon.Pwd
 
         private void DoBackup(string file)
         {
-            _UserModel.DBObject.CloseConnect();
+            _UserModel.DBA.CloseConnect();
             BeanUtil.DoZip(file, _UserModel.Home);
         }
 

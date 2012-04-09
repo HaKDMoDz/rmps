@@ -131,7 +131,7 @@ namespace Me.Amon.Pwd._Lib
 
             Pwd.Lib header = (Pwd.Lib)obj;
 
-            _UserModel.DBObject.DeleteVcs(header);
+            _UserModel.DBA.DeleteVcs(header);
 
             TvLibView.Nodes.Remove(_Selected);
             _DataModel.LibList.Remove(header);
@@ -184,9 +184,9 @@ namespace Me.Amon.Pwd._Lib
                 return;
             }
 
-            _UserModel.DBObject.DeleteVcs(detail);
+            _UserModel.DBA.DeleteVcs(detail);
             header.Details.Remove(detail);
-            _UserModel.DBObject.SaveVcs(header);
+            _UserModel.DBA.SaveVcs(header);
 
             TvLibView.Nodes.Remove(_Selected);
             _DataModel.LibModified = -1;
@@ -229,7 +229,7 @@ namespace Me.Amon.Pwd._Lib
         public void SaveHeader(Pwd.Lib header)
         {
             bool update = CharUtil.IsValidateHash(header.Id);
-            _UserModel.DBObject.SaveVcs(header);
+            _UserModel.DBA.SaveVcs(header);
 
             if (update)
             {
@@ -261,7 +261,7 @@ namespace Me.Amon.Pwd._Lib
             detail.Header = header.Id;
             detail.Id = HashUtil.UtcTimeInHex(false);
             header.Details.Add(detail);
-            _UserModel.DBObject.SaveVcs(header);
+            _UserModel.DBA.SaveVcs(header);
 
             if (update)
             {

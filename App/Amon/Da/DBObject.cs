@@ -10,7 +10,7 @@ using Me.Amon.Util;
 
 namespace Me.Amon.Da
 {
-    public class DBObject
+    public class DBObject : DBA
     {
         private string _DbPath;
         private IObjectContainer _Container;
@@ -45,6 +45,7 @@ namespace Me.Amon.Da
                 return _Container;
             }
         }
+
         public void CloseConnect()
         {
             if (_Container != null)
@@ -101,10 +102,6 @@ namespace Me.Amon.Da
         #endregion
 
         #region 数据删除
-        /// <summary>
-        /// 逻辑移除
-        /// </summary>
-        /// <param name="vcs"></param>
         public void RemoveVcs(Vcs vcs)
         {
             vcs.Operate = DBConst.OPT_DELETE;
@@ -173,19 +170,19 @@ namespace Me.Amon.Da
         #endregion
 
         #region 记录操作
-        public Key ReadRec(string recId)
+        public Key ReadKey(string keyId)
         {
-            IList<Key> recs = Container.Query<Key>(delegate(Key rec)
+            IList<Key> keys = Container.Query<Key>(delegate(Key key)
             {
-                return rec.Id == recId;
+                return key.Id == keyId;
             });
 
-            return recs.Count > 0 ? recs[0] : null;
+            return keys.Count > 0 ? keys[0] : null;
         }
 
-        public IList<Key> FindRec(string text)
+        public IList<Key> FindKey(string keyMeta)
         {
-            string[] arr = text.ToLower().Split(' ');
+            string[] arr = keyMeta.ToLower().Split(' ');
 
             IList<Key> recs = Container.Query<Key>(
                 delegate(Key rec)
@@ -204,15 +201,6 @@ namespace Me.Amon.Da
                     return b.Order.CompareTo(a.Order);
                 });
             return recs;
-        }
-
-        public IList<Key> FindKey(int label)
-        {
-            IList<Key> keys = Container.Query<Key>(delegate(Key key)
-            {
-                return key.UserCode == _UserModel.Code && key.Label == label;
-            });
-            return keys;
         }
 
         public IList<Key> ListKey(string catId)
@@ -237,10 +225,28 @@ namespace Me.Amon.Da
                 });
             return keys;
         }
+
+        public IList<Key> FindKeyByLabel(int label)
+        {
+            IList<Key> keys = Container.Query<Key>(delegate(Key key)
+            {
+                return key.UserCode == _UserModel.Code && key.Label == label;
+            });
+            return keys;
+        }
+
+        public IList<Key> FindKeyByMajor(int major)
+        {
+            IList<Key> keys = Container.Query<Key>(delegate(Key key)
+            {
+                return key.UserCode == _UserModel.Code && key.Major == major;
+            });
+            return keys;
+        }
         #endregion
 
         #region 日志操作
-        public KeyLog ReadRecLog(string logId)
+        public KeyLog ReadKeyLog(string logId)
         {
             IList<KeyLog> logs = Container.Query<KeyLog>(delegate(KeyLog log)
             {
@@ -250,12 +256,12 @@ namespace Me.Amon.Da
             return logs.Count > 0 ? logs[0] : null;
         }
 
-        public IList<KeyLog> ListRecLog(string recId)
+        public IList<KeyLog> ListKeyLog(string keyId)
         {
             IList<KeyLog> logs = Container.Query<KeyLog>(
                 delegate(KeyLog log)
                 {
-                    return log.RefId == recId;
+                    return log.RefId == keyId;
                 },
                 delegate(KeyLog a, KeyLog b)
                 {
@@ -287,7 +293,7 @@ namespace Me.Amon.Da
         }
         #endregion
 
-        #region 字符操作
+        #region 目录操作
         public IList<Dir> ListDir()
         {
             return Container.Query<Dir>();

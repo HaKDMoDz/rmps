@@ -50,7 +50,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
 
             switch (alg)
             {
-                case IData.SCRYPTO_AES:
+                case ESec.SCRYPTO_AES:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
@@ -59,7 +59,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                     _Uk.CbSize.Items.Add(new Item { K = "24", V = "24 字节" });
                     _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
                     break;
-                case IData.SCRYPTO_AESFAST:
+                case ESec.SCRYPTO_AESFAST:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
@@ -68,7 +68,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                     _Uk.CbSize.Items.Add(new Item { K = "24", V = "24 字节" });
                     _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
                     break;
-                case IData.SCRYPTO_AESLIGHT:
+                case ESec.SCRYPTO_AESLIGHT:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
@@ -77,7 +77,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                     _Uk.CbSize.Items.Add(new Item { K = "24", V = "24 字节" });
                     _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
                     break;
-                case IData.SCRYPTO_BLOWFISH:
+                case ESec.SCRYPTO_BLOWFISH:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
@@ -87,7 +87,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                         _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
                     }
                     break;
-                case IData.SCRYPTO_CAMELLIA:
+                case ESec.SCRYPTO_CAMELLIA:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
@@ -96,7 +96,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                     _Uk.CbSize.Items.Add(new Item { K = "24", V = "24 字节" });
                     _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
                     break;
-                case IData.SCRYPTO_CAMELLIALIGHT:
+                case ESec.SCRYPTO_CAMELLIALIGHT:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
@@ -105,7 +105,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                     _Uk.CbSize.Items.Add(new Item { K = "24", V = "24 字节" });
                     _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
                     break;
-                case IData.SCRYPTO_CAST5:
+                case ESec.SCRYPTO_CAST5:
                     _SizeDef.D = "16";
                     _Uk.TbPass.MaxLength = 16;
                     _Uk.TbSalt.MaxLength = 16;
@@ -115,7 +115,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                         _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
                     }
                     break;
-                case IData.SCRYPTO_CAST6:
+                case ESec.SCRYPTO_CAST6:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
@@ -125,14 +125,14 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                         _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
                     }
                     break;
-                case IData.SCRYPTO_DES:
+                case ESec.SCRYPTO_DES:
                     _SizeDef.D = "8";
                     _Uk.TbPass.MaxLength = 8;
                     _Uk.TbSalt.MaxLength = 8;
                     //64
                     _Uk.CbSize.Items.Add(new Item { K = "8", V = "8 字节" });
                     break;
-                case IData.SCRYPTO_DESEDE:
+                case ESec.SCRYPTO_DESEDE:
                     _SizeDef.D = "24";
                     _Uk.TbPass.MaxLength = 24;
                     _Uk.TbSalt.MaxLength = 24;
@@ -140,27 +140,27 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                     _Uk.CbSize.Items.Add(new Item { K = "16", V = "16 字节" });
                     _Uk.CbSize.Items.Add(new Item { K = "24", V = "24 字节" });
                     break;
-                case IData.SCRYPTO_GOST28147:
+                case ESec.SCRYPTO_GOST28147:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
                     //256
                     _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
                     break;
-                case IData.SCRYPTO_NOEKEON:
+                case ESec.SCRYPTO_NOEKEON:
                     _SizeDef.D = "16";
                     _Uk.TbPass.MaxLength = 16;
                     _Uk.TbSalt.MaxLength = 16;
                     //128
                     _Uk.CbSize.Items.Add(new Item { K = "16", V = "16 字节" });
                     break;
-                case IData.SCRYPTO_NULL:
+                case ESec.SCRYPTO_NULL:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
                     _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
                     break;
-                case IData.SCRYPTO_RC2:
+                case ESec.SCRYPTO_RC2:
                     _SizeDef.D = "128";
                     _Uk.TbPass.MaxLength = 128;
                     _Uk.TbSalt.MaxLength = 128;
@@ -170,7 +170,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                         _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
                     }
                     break;
-                case IData.SCRYPTO_RC532:
+                case ESec.SCRYPTO_RC532:
                     _SizeDef.D = "16";
                     _Uk.TbPass.MaxLength = 16;
                     _Uk.TbSalt.MaxLength = 16;
@@ -180,7 +180,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                         _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
                     }
                     break;
-                case IData.SCRYPTO_RC564:
+                case ESec.SCRYPTO_RC564:
                     _SizeDef.D = "16";
                     _Uk.TbPass.MaxLength = 16;
                     _Uk.TbSalt.MaxLength = 16;
@@ -190,7 +190,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                         _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
                     }
                     break;
-                case IData.SCRYPTO_RC6:
+                case ESec.SCRYPTO_RC6:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
@@ -200,7 +200,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                         _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
                     }
                     break;
-                case IData.SCRYPTO_RIJNDAEL:
+                case ESec.SCRYPTO_RIJNDAEL:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
@@ -212,14 +212,14 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                     _Uk.CbSize.Items.Add(new Item { K = "28", V = "28 字节" });
                     _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
                     break;
-                case IData.SCRYPTO_SEED:
+                case ESec.SCRYPTO_SEED:
                     _SizeDef.D = "16";
                     _Uk.TbPass.MaxLength = 16;
                     _Uk.TbSalt.MaxLength = 16;
                     //128
                     _Uk.CbSize.Items.Add(new Item { K = "16", V = "16 字节" });
                     break;
-                case IData.SCRYPTO_SERPENT:
+                case ESec.SCRYPTO_SERPENT:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
@@ -228,7 +228,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                     _Uk.CbSize.Items.Add(new Item { K = "24", V = "24 字节" });
                     _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
                     break;
-                case IData.SCRYPTO_SKIPJACK:
+                case ESec.SCRYPTO_SKIPJACK:
                     _SizeDef.D = "16";
                     _Uk.TbPass.MaxLength = 16;
                     _Uk.TbSalt.MaxLength = 16;
@@ -238,14 +238,14 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                         _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
                     }
                     break;
-                case IData.SCRYPTO_TEA:
+                case ESec.SCRYPTO_TEA:
                     _SizeDef.D = "16";
                     _Uk.TbPass.MaxLength = 16;
                     _Uk.TbSalt.MaxLength = 16;
                     //128
                     _Uk.CbSize.Items.Add(new Item { K = "16", V = "16 字节" });
                     break;
-                case IData.SCRYPTO_TWOFISH:
+                case ESec.SCRYPTO_TWOFISH:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
@@ -254,7 +254,7 @@ namespace Me.Amon.Sec.Pro.Uc.UkUi
                     _Uk.CbSize.Items.Add(new Item { K = "24", V = "24 字节" });
                     _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
                     break;
-                case IData.SCRYPTO_XTEA:
+                case ESec.SCRYPTO_XTEA:
                     _SizeDef.D = "16";
                     _Uk.TbPass.MaxLength = 16;
                     _Uk.TbSalt.MaxLength = 16;

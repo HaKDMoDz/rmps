@@ -221,7 +221,7 @@ namespace Me.Amon.User.Sign
                         {
                             continue;
                         }
-                        _UserModel.DBObject.SaveVcs(cat);
+                        _UserModel.DBA.SaveVcs(cat);
                     }
                 }
                 stream.Close();
@@ -244,7 +244,7 @@ namespace Me.Amon.User.Sign
                         {
                             continue;
                         }
-                        _UserModel.DBObject.SaveVcs(header);
+                        _UserModel.DBA.SaveVcs(header);
                     }
                 }
                 stream.Close();
@@ -267,7 +267,7 @@ namespace Me.Amon.User.Sign
                         {
                             continue;
                         }
-                        _UserModel.DBObject.SaveVcs(udc);
+                        _UserModel.DBA.SaveVcs(udc);
                     }
                 }
                 stream.Close();
@@ -290,7 +290,7 @@ namespace Me.Amon.User.Sign
                         {
                             continue;
                         }
-                        _UserModel.DBObject.SaveVcs(ren);
+                        _UserModel.DBA.SaveVcs(ren);
                     }
                 }
                 stream.Close();

@@ -3,6 +3,9 @@ using Me.Amon.Model;
 
 namespace Me.Amon.Gtd
 {
+    /// <summary>
+    /// 数据模型
+    /// </summary>
     public class MGtd : Vcs
     {
         /// <summary>
@@ -88,6 +91,6 @@ namespace Me.Amon.Gtd
         /// <summary>s
         /// 提示列表
         /// </summary>
-        public List<MGtdDetail> HintList { get; set; }
+        public List<MGtdDetail> Details { get; set; }
     }
 }
