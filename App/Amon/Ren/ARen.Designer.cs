@@ -32,6 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ARen));
             this.TcRule = new System.Windows.Forms.TabControl();
             this.TpRuleInf = new System.Windows.Forms.TabPage();
+            this.GvInfo = new System.Windows.Forms.DataGridView();
+            this.KeyCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.KeyInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LtInfo = new System.Windows.Forms.Label();
             this.TpRulePre = new System.Windows.Forms.TabPage();
             this.LsRule = new System.Windows.Forms.ListBox();
@@ -44,31 +47,29 @@
             this.GvName = new System.Windows.Forms.DataGridView();
             this.OldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NewName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BtSelect = new System.Windows.Forms.Button();
             this.BtReview = new System.Windows.Forms.Button();
             this.BtRename = new System.Windows.Forms.Button();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.TpTips = new System.Windows.Forms.ToolTip(this.components);
-            this.PbMenu = new System.Windows.Forms.PictureBox();
-            this.PbSave = new System.Windows.Forms.PictureBox();
-            this.LbEcho = new System.Windows.Forms.Label();
-            this.FdBrowser = new System.Windows.Forms.FolderBrowserDialog();
+            this.MiSaveas = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiSep0 = new System.Windows.Forms.ToolStripSeparator();
+            this.MiDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.MiImport = new System.Windows.Forms.ToolStripMenuItem();
             this.MiExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.GvInfo = new System.Windows.Forms.DataGridView();
-            this.KeyCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.KeyInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MiDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiSep0 = new System.Windows.Forms.ToolStripSeparator();
+            this.TpTips = new System.Windows.Forms.ToolTip(this.components);
+            this.PbMenu = new System.Windows.Forms.PictureBox();
+            this.PbSelect = new System.Windows.Forms.PictureBox();
+            this.LbEcho = new System.Windows.Forms.Label();
+            this.FdBrowser = new System.Windows.Forms.FolderBrowserDialog();
             this.TcRule.SuspendLayout();
             this.TpRuleInf.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GvInfo)).BeginInit();
             this.TpRulePre.SuspendLayout();
             this.TpFileAtt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GvName)).BeginInit();
             this.CmMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PbSave)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GvInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbSelect)).BeginInit();
             this.SuspendLayout();
             // 
             // TcRule
@@ -81,7 +82,6 @@
             this.TcRule.SelectedIndex = 0;
             this.TcRule.Size = new System.Drawing.Size(225, 212);
             this.TcRule.TabIndex = 0;
-            this.TcRule.SelectedIndexChanged += new System.EventHandler(this.TcRule_SelectedIndexChanged);
             // 
             // TpRuleInf
             // 
@@ -94,6 +94,44 @@
             this.TpRuleInf.TabIndex = 0;
             this.TpRuleInf.Text = "规则说明";
             this.TpRuleInf.UseVisualStyleBackColor = true;
+            // 
+            // GvInfo
+            // 
+            this.GvInfo.AllowUserToAddRows = false;
+            this.GvInfo.AllowUserToDeleteRows = false;
+            this.GvInfo.AllowUserToResizeRows = false;
+            this.GvInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.GvInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GvInfo.ColumnHeadersVisible = false;
+            this.GvInfo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.KeyCode,
+            this.KeyInfo});
+            this.GvInfo.Location = new System.Drawing.Point(6, 40);
+            this.GvInfo.MultiSelect = false;
+            this.GvInfo.Name = "GvInfo";
+            this.GvInfo.ReadOnly = true;
+            this.GvInfo.RowHeadersVisible = false;
+            this.GvInfo.RowTemplate.Height = 23;
+            this.GvInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.GvInfo.Size = new System.Drawing.Size(205, 140);
+            this.GvInfo.TabIndex = 1;
+            // 
+            // KeyCode
+            // 
+            this.KeyCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.KeyCode.DataPropertyName = "KeyCode";
+            this.KeyCode.HeaderText = "字符";
+            this.KeyCode.Name = "KeyCode";
+            this.KeyCode.ReadOnly = true;
+            this.KeyCode.Width = 5;
+            // 
+            // KeyInfo
+            // 
+            this.KeyInfo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.KeyInfo.DataPropertyName = "KeyInfo";
+            this.KeyInfo.HeaderText = "说明";
+            this.KeyInfo.Name = "KeyInfo";
+            this.KeyInfo.ReadOnly = true;
             // 
             // LtInfo
             // 
@@ -170,17 +208,19 @@
             // LbRule
             // 
             this.LbRule.AutoSize = true;
-            this.LbRule.Location = new System.Drawing.Point(12, 233);
+            this.LbRule.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.LbRule.Location = new System.Drawing.Point(12, 236);
             this.LbRule.Name = "LbRule";
-            this.LbRule.Size = new System.Drawing.Size(71, 12);
+            this.LbRule.Size = new System.Drawing.Size(78, 12);
             this.LbRule.TabIndex = 1;
             this.LbRule.Text = "命名规则(&R)";
             // 
             // TbRule
             // 
-            this.TbRule.Location = new System.Drawing.Point(91, 230);
+            this.TbRule.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.TbRule.Location = new System.Drawing.Point(96, 230);
             this.TbRule.Name = "TbRule";
-            this.TbRule.Size = new System.Drawing.Size(124, 21);
+            this.TbRule.Size = new System.Drawing.Size(376, 25);
             this.TbRule.TabIndex = 2;
             // 
             // GvName
@@ -202,7 +242,7 @@
             this.GvName.RowHeadersVisible = false;
             this.GvName.RowTemplate.Height = 23;
             this.GvName.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GvName.Size = new System.Drawing.Size(259, 239);
+            this.GvName.Size = new System.Drawing.Size(259, 212);
             this.GvName.TabIndex = 4;
             // 
             // OldName
@@ -220,85 +260,65 @@
             this.NewName.Name = "NewName";
             this.NewName.ReadOnly = true;
             // 
-            // BtSelect
-            // 
-            this.BtSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtSelect.Location = new System.Drawing.Point(265, 257);
-            this.BtSelect.Name = "BtSelect";
-            this.BtSelect.Size = new System.Drawing.Size(75, 23);
-            this.BtSelect.TabIndex = 5;
-            this.BtSelect.Text = "选择(&C)";
-            this.TpTips.SetToolTip(this.BtSelect, "选择重命名目录");
-            this.BtSelect.UseVisualStyleBackColor = true;
-            this.BtSelect.Click += new System.EventHandler(this.BtSelect_Click);
-            // 
             // BtReview
             // 
             this.BtReview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtReview.Location = new System.Drawing.Point(346, 257);
+            this.BtReview.Location = new System.Drawing.Point(346, 261);
             this.BtReview.Name = "BtReview";
             this.BtReview.Size = new System.Drawing.Size(75, 23);
             this.BtReview.TabIndex = 6;
             this.BtReview.Text = "预览(&P)";
+            this.TpTips.SetToolTip(this.BtReview, "预览重命名结果");
             this.BtReview.UseVisualStyleBackColor = true;
             this.BtReview.Click += new System.EventHandler(this.BtReview_Click);
             // 
             // BtRename
             // 
             this.BtRename.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtRename.Location = new System.Drawing.Point(427, 257);
+            this.BtRename.Location = new System.Drawing.Point(427, 261);
             this.BtRename.Name = "BtRename";
             this.BtRename.Size = new System.Drawing.Size(75, 23);
             this.BtRename.TabIndex = 7;
             this.BtRename.Text = "执行(&R)";
+            this.TpTips.SetToolTip(this.BtRename, "执行文件重命名");
             this.BtRename.UseVisualStyleBackColor = true;
             this.BtRename.Click += new System.EventHandler(this.BtRename_Click);
             // 
             // CmMenu
             // 
             this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MiDelete,
+            this.MiSaveas,
             this.MiSep0,
+            this.MiDelete,
+            this.MiSep1,
             this.MiImport,
             this.MiExport});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(118, 76);
+            this.CmMenu.Size = new System.Drawing.Size(118, 104);
             // 
-            // PbMenu
+            // MiSaveas
             // 
-            this.PbMenu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PbMenu.Image = global::Me.Amon.Properties.Resources.Menu;
-            this.PbMenu.Location = new System.Drawing.Point(12, 261);
-            this.PbMenu.Name = "PbMenu";
-            this.PbMenu.Size = new System.Drawing.Size(16, 16);
-            this.PbMenu.TabIndex = 8;
-            this.PbMenu.TabStop = false;
-            this.TpTips.SetToolTip(this.PbMenu, "菜单");
-            this.PbMenu.Click += new System.EventHandler(this.PbMenu_Click);
+            this.MiSaveas.Name = "MiSaveas";
+            this.MiSaveas.Size = new System.Drawing.Size(117, 22);
+            this.MiSaveas.Text = "保存(&S)";
+            this.MiSaveas.Click += new System.EventHandler(this.MiSaveas_Click);
             // 
-            // PbSave
+            // MiSep0
             // 
-            this.PbSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PbSave.Image = global::Me.Amon.Properties.Resources.Save;
-            this.PbSave.Location = new System.Drawing.Point(221, 232);
-            this.PbSave.Name = "PbSave";
-            this.PbSave.Size = new System.Drawing.Size(16, 16);
-            this.PbSave.TabIndex = 3;
-            this.PbSave.TabStop = false;
-            this.TpTips.SetToolTip(this.PbSave, "另存为模板");
-            this.PbSave.Click += new System.EventHandler(this.PbSave_Click);
+            this.MiSep0.Name = "MiSep0";
+            this.MiSep0.Size = new System.Drawing.Size(114, 6);
             // 
-            // LbEcho
+            // MiDelete
             // 
-            this.LbEcho.AutoSize = true;
-            this.LbEcho.Location = new System.Drawing.Point(34, 262);
-            this.LbEcho.Name = "LbEcho";
-            this.LbEcho.Size = new System.Drawing.Size(0, 12);
-            this.LbEcho.TabIndex = 9;
+            this.MiDelete.Name = "MiDelete";
+            this.MiDelete.Size = new System.Drawing.Size(117, 22);
+            this.MiDelete.Text = "删除(&D)";
+            this.MiDelete.Click += new System.EventHandler(this.MiDelete_Click);
             // 
-            // FdBrowser
+            // MiSep1
             // 
-            this.FdBrowser.Description = "请选择您要进行重命名的目录：";
+            this.MiSep1.Name = "MiSep1";
+            this.MiSep1.Size = new System.Drawing.Size(114, 6);
             // 
             // MiImport
             // 
@@ -314,70 +334,55 @@
             this.MiExport.Text = "导出(&X)";
             this.MiExport.Click += new System.EventHandler(this.MiExport_Click);
             // 
-            // GvInfo
+            // PbMenu
             // 
-            this.GvInfo.AllowUserToAddRows = false;
-            this.GvInfo.AllowUserToDeleteRows = false;
-            this.GvInfo.AllowUserToResizeRows = false;
-            this.GvInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.GvInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GvInfo.ColumnHeadersVisible = false;
-            this.GvInfo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.KeyCode,
-            this.KeyInfo});
-            this.GvInfo.Location = new System.Drawing.Point(6, 40);
-            this.GvInfo.MultiSelect = false;
-            this.GvInfo.Name = "GvInfo";
-            this.GvInfo.ReadOnly = true;
-            this.GvInfo.RowHeadersVisible = false;
-            this.GvInfo.RowTemplate.Height = 23;
-            this.GvInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GvInfo.Size = new System.Drawing.Size(205, 140);
-            this.GvInfo.TabIndex = 1;
+            this.PbMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PbMenu.Image = global::Me.Amon.Properties.Resources.Menu;
+            this.PbMenu.Location = new System.Drawing.Point(12, 265);
+            this.PbMenu.Name = "PbMenu";
+            this.PbMenu.Size = new System.Drawing.Size(16, 16);
+            this.PbMenu.TabIndex = 8;
+            this.PbMenu.TabStop = false;
+            this.TpTips.SetToolTip(this.PbMenu, "菜单");
+            this.PbMenu.Click += new System.EventHandler(this.PbMenu_Click);
             // 
-            // KeyCode
+            // PbSelect
             // 
-            this.KeyCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.KeyCode.DataPropertyName = "KeyCode";
-            this.KeyCode.HeaderText = "字符";
-            this.KeyCode.Name = "KeyCode";
-            this.KeyCode.ReadOnly = true;
-            this.KeyCode.Width = 5;
+            this.PbSelect.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PbSelect.Image = global::Me.Amon.Properties.Resources.Open;
+            this.PbSelect.Location = new System.Drawing.Point(478, 230);
+            this.PbSelect.Name = "PbSelect";
+            this.PbSelect.Size = new System.Drawing.Size(24, 24);
+            this.PbSelect.TabIndex = 3;
+            this.PbSelect.TabStop = false;
+            this.TpTips.SetToolTip(this.PbSelect, "选择目录");
+            this.PbSelect.Click += new System.EventHandler(this.PbSelect_Click);
             // 
-            // KeyInfo
+            // LbEcho
             // 
-            this.KeyInfo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.KeyInfo.DataPropertyName = "KeyInfo";
-            this.KeyInfo.HeaderText = "说明";
-            this.KeyInfo.Name = "KeyInfo";
-            this.KeyInfo.ReadOnly = true;
+            this.LbEcho.AutoSize = true;
+            this.LbEcho.Location = new System.Drawing.Point(34, 266);
+            this.LbEcho.Name = "LbEcho";
+            this.LbEcho.Size = new System.Drawing.Size(0, 12);
+            this.LbEcho.TabIndex = 9;
             // 
-            // MiDelete
+            // FdBrowser
             // 
-            this.MiDelete.Name = "MiDelete";
-            this.MiDelete.Size = new System.Drawing.Size(117, 22);
-            this.MiDelete.Text = "删除(&D)";
-            this.MiDelete.Click += new System.EventHandler(this.MiDelete_Click);
-            // 
-            // MiSep0
-            // 
-            this.MiSep0.Name = "MiSep0";
-            this.MiSep0.Size = new System.Drawing.Size(114, 6);
+            this.FdBrowser.Description = "请选择您要进行重命名的目录：";
             // 
             // ARen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(514, 292);
+            this.ClientSize = new System.Drawing.Size(514, 296);
             this.Controls.Add(this.LbEcho);
             this.Controls.Add(this.PbMenu);
             this.Controls.Add(this.BtRename);
             this.Controls.Add(this.BtReview);
-            this.Controls.Add(this.BtSelect);
             this.Controls.Add(this.GvName);
-            this.Controls.Add(this.PbSave);
             this.Controls.Add(this.TbRule);
             this.Controls.Add(this.LbRule);
+            this.Controls.Add(this.PbSelect);
             this.Controls.Add(this.TcRule);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -387,14 +392,14 @@
             this.Text = "阿木重命名";
             this.TcRule.ResumeLayout(false);
             this.TpRuleInf.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.GvInfo)).EndInit();
             this.TpRulePre.ResumeLayout(false);
             this.TpFileAtt.ResumeLayout(false);
             this.TpFileAtt.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GvName)).EndInit();
             this.CmMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PbSave)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GvInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbSelect)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -407,9 +412,8 @@
         private System.Windows.Forms.TabPage TpRulePre;
         private System.Windows.Forms.Label LbRule;
         private System.Windows.Forms.TextBox TbRule;
-        private System.Windows.Forms.PictureBox PbSave;
+        private System.Windows.Forms.PictureBox PbSelect;
         private System.Windows.Forms.DataGridView GvName;
-        private System.Windows.Forms.Button BtSelect;
         private System.Windows.Forms.Button BtReview;
         private System.Windows.Forms.Button BtRename;
         private System.Windows.Forms.PictureBox PbMenu;
@@ -432,5 +436,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn KeyInfo;
         private System.Windows.Forms.ToolStripMenuItem MiDelete;
         private System.Windows.Forms.ToolStripSeparator MiSep0;
+        private System.Windows.Forms.ToolStripMenuItem MiSaveas;
+        private System.Windows.Forms.ToolStripSeparator MiSep1;
     }
 }

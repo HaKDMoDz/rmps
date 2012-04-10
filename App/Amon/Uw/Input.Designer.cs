@@ -39,10 +39,11 @@
             // 
             // PbIcon
             // 
+            this.PbIcon.Image = global::Me.Amon.Properties.Resources.Input;
             this.PbIcon.Location = new System.Drawing.Point(12, 27);
             this.PbIcon.Name = "PbIcon";
             this.PbIcon.Size = new System.Drawing.Size(32, 32);
-            this.PbIcon.TabIndex = 0;
+            this.PbIcon.TabIndex = 1;
             this.PbIcon.TabStop = false;
             // 
             // LbTips
@@ -51,7 +52,7 @@
             this.LbTips.Location = new System.Drawing.Point(50, 23);
             this.LbTips.Name = "LbTips";
             this.LbTips.Size = new System.Drawing.Size(41, 12);
-            this.LbTips.TabIndex = 1;
+            this.LbTips.TabIndex = 2;
             this.LbTips.Text = "label1";
             // 
             // TbText
@@ -59,7 +60,7 @@
             this.TbText.Location = new System.Drawing.Point(52, 38);
             this.TbText.Name = "TbText";
             this.TbText.Size = new System.Drawing.Size(206, 21);
-            this.TbText.TabIndex = 2;
+            this.TbText.TabIndex = 0;
             // 
             // BtOk
             // 
@@ -104,7 +105,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "输入";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Input_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.PbIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -14,7 +14,7 @@
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>F:\Web\Web\down\</PublishUrl>
+    <PublishUrl>F:\Pub\Web\down\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -28,9 +28,8 @@
     <ProductName>阿木密码箱</ProductName>
     <PublisherName>Amon</PublisherName>
     <SuiteName>阿木软件</SuiteName>
-    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>6.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -1174,6 +1173,8 @@
     <Content Include="Amon.dat" />
     <Content Include="Amon.res" />
     <Content Include="Logo\logo.ico" />
+    <None Include="Resources\Input.png" />
+    <None Include="Resources\Open.png" />
     <None Include="Resources\Save.png" />
     <None Include="Resources\Alert.png" />
     <None Include="Resources\Error.png" />
@@ -1185,12 +1186,6 @@
     <None Include="Resources\Menu.png" />
     <None Include="Resources\Pupil.png" />
     <None Include="Resources\Waiting.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Lib\Lib.csproj">
-      <Project>{2271F95A-E5E5-4630-99B9-DEC0E5FE2EB4}</Project>
-      <Name>Lib</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
@@ -1227,6 +1222,12 @@
       <Progid>Asec</Progid>
       <DefaultIcon>Logo\logo.ico</DefaultIcon>
     </FileAssociation>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lib\Lib.csproj">
+      <Project>{2271F95A-E5E5-4630-99B9-DEC0E5FE2EB4}</Project>
+      <Name>Lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

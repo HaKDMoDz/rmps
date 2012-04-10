@@ -92,27 +92,7 @@ namespace Me.Amon.Ren
         #endregion
 
         #region 事件处理
-        private void TcRule_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            TbRule.ReadOnly = (TcRule.SelectedTab != TpRuleInf);
-        }
-
-        private void PbSave_Click(object sender, EventArgs e)
-        {
-            string name = Main.ShowInput("请输入模板名称：", "");
-            if (string.IsNullOrEmpty(name))
-            {
-                return;
-            }
-
-            MRen ren = new MRen();
-            ren.Name = name;
-            ren.Command = TbRule.Text;
-            _UserModel.DBA.SaveVcs(ren);
-            LsRule.Items.Add(ren);
-        }
-
-        private void BtSelect_Click(object sender, EventArgs e)
+        private void PbSelect_Click(object sender, EventArgs e)
         {
             if (DialogResult.OK != FdBrowser.ShowDialog(this))
             {
@@ -157,6 +137,110 @@ namespace Me.Amon.Ren
 
             TbRule.Text = ren.Command;
         }
+
+        private void MiSaveas_Click(object sender, EventArgs e)
+        {
+            string name = Main.ShowInput("请输入模板名称：", "");
+            if (string.IsNullOrEmpty(name))
+            {
+                return;
+            }
+
+            MRen ren = new MRen();
+            ren.Name = name;
+            ren.Command = TbRule.Text;
+            _UserModel.DBA.SaveVcs(ren);
+            LsRule.Items.Add(ren);
+        }
+
+        private void MiDelete_Click(object sender, EventArgs e)
+        {
+            MRen ren = LsRule.SelectedItem as MRen;
+            if (ren == null)
+            {
+                Main.ShowAlert("请选择您要删除的模板！");
+                return;
+            }
+
+            if (DialogResult.Yes != Main.ShowConfirm(string.Format("确认要删除模板 {0} 吗？", ren.Name)))
+            {
+                return;
+            }
+
+            _UserModel.DBA.DeleteVcs(ren);
+            LsRule.Items.Remove(ren);
+        }
+
+        private void MiImport_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Filter = "重命名模板文件|*.arxml";
+            if (DialogResult.OK != fd.ShowDialog(this))
+            {
+                return;
+            }
+            string file = fd.FileName;
+            if (!File.Exists(file))
+            {
+                return;
+            }
+
+            using (StreamReader sr = new StreamReader(file))
+            {
+                using (XmlReader reader = XmlReader.Create(sr))
+                {
+                    MRen ren;
+                    while (reader.ReadToFollowing("Ren"))
+                    {
+                        ren = new MRen();
+                        if (!ren.FromXml(reader))
+                        {
+                            continue;
+                        }
+                        _UserModel.DBA.SaveVcs(ren);
+                        LsRule.Items.Add(ren);
+                    }
+                }
+
+                sr.Close();
+            }
+        }
+
+        private void MiExport_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog fd = new SaveFileDialog();
+            fd.Filter = "重命名模板文件|*.arxml";
+            if (DialogResult.OK != fd.ShowDialog(this))
+            {
+                return;
+            }
+            string file = fd.FileName;
+            if (string.IsNullOrEmpty(file))
+            {
+                return;
+            }
+
+            using (StreamWriter sw = new StreamWriter(file, false))
+            {
+                using (XmlWriter writer = XmlWriter.Create(sw))
+                {
+                    writer.WriteStartElement("Amon");
+                    writer.WriteElementString("App", "ARen");
+                    writer.WriteElementString("Ver", "1");
+                    writer.WriteStartElement("Rens");
+                    foreach (MRen ren in _UserModel.DBA.ListRen())
+                    {
+                        ren.ToXml(writer);
+                    }
+                    writer.WriteEndElement();
+                    writer.WriteEndElement();
+
+                    writer.Flush();
+                }
+
+                sw.Close();
+            }
+        }
         #endregion
 
         #region 私有函数
@@ -178,7 +262,7 @@ namespace Me.Amon.Ren
             if (string.IsNullOrEmpty(_SrcPath))
             {
                 Main.ShowAlert("请选择您要重命名的目录！");
-                BtSelect.Focus();
+                PbSelect.Focus();
                 return false;
             }
 
@@ -292,7 +376,7 @@ namespace Me.Amon.Ren
                     string msg = string.Format("已存在名称为{0}且创建日期为{1}，\n文件大小为{2}的文件，确认要覆盖吗？", tmp, File.GetCreationTime(dst), Length(dst));
                     if (DialogResult.Yes != Main.ShowConfirm(msg))
                     {
-                        continue;
+                        tmp2 = Repeat(src, tmp);
                     }
                 }
                 File.Move(tmp1, tmp2);
@@ -301,6 +385,20 @@ namespace Me.Amon.Ren
 
             Directory.Delete(dst);
             ShowEcho("恭喜，全部重命名成功！");
+        }
+
+        private string Repeat(string path, string file)
+        {
+            string pre = Path.GetFileNameWithoutExtension(file);
+            string ext = Path.GetExtension(file);
+            int i = 1;
+            do
+            {
+                file = string.Format("{0} ({1}){2}", pre, i++, ext);
+            } while (File.Exists(Path.Combine(path, file)));
+
+
+            return file;
         }
 
         private string Length(string path)
@@ -345,94 +443,5 @@ namespace Me.Amon.Ren
             TpTips.SetToolTip(LbEcho, msg);
         }
         #endregion
-
-        private void MiDelete_Click(object sender, EventArgs e)
-        {
-            MRen ren = LsRule.SelectedItem as MRen;
-            if (ren == null)
-            {
-                Main.ShowAlert("请选择您要删除的模板！");
-                return;
-            }
-
-            if (DialogResult.Yes != Main.ShowConfirm(string.Format("确认要删除模板 {0} 吗？", ren.Name)))
-            {
-                return;
-            }
-
-            _UserModel.DBA.DeleteVcs(ren);
-            LsRule.Items.Remove(ren);
-        }
-
-        private void MiImport_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog fd = new OpenFileDialog();
-            fd.Filter = "重命名模板文件|*.arxml";
-            if (DialogResult.OK != fd.ShowDialog(this))
-            {
-                return;
-            }
-            string file = fd.FileName;
-            if (!File.Exists(file))
-            {
-                return;
-            }
-
-            using (StreamReader sr = new StreamReader(file))
-            {
-                using (XmlReader reader = XmlReader.Create(sr))
-                {
-                    MRen ren;
-                    while (reader.ReadToFollowing("Ren"))
-                    {
-                        ren = new MRen();
-                        if (!ren.FromXml(reader))
-                        {
-                            continue;
-                        }
-                        _UserModel.DBA.SaveVcs(ren);
-                        LsRule.Items.Add(ren);
-                    }
-                }
-
-                sr.Close();
-            }
-        }
-
-        private void MiExport_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog fd = new SaveFileDialog();
-            fd.Filter = "重命名模板文件|*.arxml";
-            if (DialogResult.OK != fd.ShowDialog(this))
-            {
-                return;
-            }
-            string file = fd.FileName;
-            if (string.IsNullOrEmpty(file))
-            {
-                return;
-            }
-
-            using (StreamWriter sw = new StreamWriter(file, false))
-            {
-                using (XmlWriter writer = XmlWriter.Create(sw))
-                {
-                    writer.WriteStartElement("Amon");
-                    writer.WriteElementString("App", "ARen");
-                    writer.WriteElementString("Ver", "1");
-                    writer.WriteStartElement("Rens");
-                    foreach (MRen ren in _UserModel.DBA.ListRen())
-                    {
-                        ren.ToXml(writer);
-                    }
-                    writer.WriteEndElement();
-                    writer.WriteEndElement();
-
-                    writer.Flush();
-                }
-
-                sw.Close();
-            }
-        }
     }
 }

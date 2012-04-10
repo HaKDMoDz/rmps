@@ -14,29 +14,25 @@ namespace Me.Amon.Uw
         {
             LbTips.Text = message;
             TbText.Text = deftext;
-            TbText.Focus();
             ShowDialog(owner);
         }
 
         private void BtOk_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(TbText.Text))
+            if (string.IsNullOrEmpty(TbText.Text))
             {
-                DialogResult = DialogResult.OK;
-                Visible = false;
+                TbText.Focus();
+                return;
             }
+
+            DialogResult = DialogResult.OK;
+            Visible = false;
         }
 
         private void BtCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Visible = false;
-        }
-
-        private void Input_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //Visible = false;
-            //e.Cancel = false;
         }
 
         public string Message

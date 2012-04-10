@@ -95,6 +95,13 @@ namespace Me.Amon.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Input {
+            get {
+                object obj = ResourceManager.GetObject("Input", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Loading {
             get {
                 object obj = ResourceManager.GetObject("Loading", resourceCulture);
@@ -112,6 +119,13 @@ namespace Me.Amon.Properties {
         internal static System.Drawing.Bitmap Menu {
             get {
                 object obj = ResourceManager.GetObject("Menu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Open {
+            get {
+                object obj = ResourceManager.GetObject("Open", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
