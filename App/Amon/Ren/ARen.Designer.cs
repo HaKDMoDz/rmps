@@ -52,17 +52,17 @@
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MiSaveas = new System.Windows.Forms.ToolStripMenuItem();
             this.MiSep0 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiSep1 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiImport = new System.Windows.Forms.ToolStripMenuItem();
             this.MiExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiImport = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiSortUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiSortDown = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiSep1 = new System.Windows.Forms.ToolStripSeparator();
+            this.MiDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.PbMenu = new System.Windows.Forms.PictureBox();
             this.PbSelect = new System.Windows.Forms.PictureBox();
             this.LbEcho = new System.Windows.Forms.Label();
             this.FdBrowser = new System.Windows.Forms.FolderBrowserDialog();
-            this.MiSortUp = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiSortDown = new System.Windows.Forms.ToolStripMenuItem();
             this.TcRule.SuspendLayout();
             this.TpRuleInf.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GvInfo)).BeginInit();
@@ -164,6 +164,7 @@
             this.LsRule.Size = new System.Drawing.Size(211, 180);
             this.LsRule.TabIndex = 0;
             this.LsRule.SelectedIndexChanged += new System.EventHandler(this.LsRule_SelectedIndexChanged);
+            this.LsRule.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LsRule_MouseUp);
             // 
             // TpFileAtt
             // 
@@ -312,17 +313,12 @@
             this.MiSep0.Name = "MiSep0";
             this.MiSep0.Size = new System.Drawing.Size(149, 6);
             // 
-            // MiDelete
+            // MiExport
             // 
-            this.MiDelete.Name = "MiDelete";
-            this.MiDelete.Size = new System.Drawing.Size(152, 22);
-            this.MiDelete.Text = "删除(&R)";
-            this.MiDelete.Click += new System.EventHandler(this.MiDelete_Click);
-            // 
-            // MiSep1
-            // 
-            this.MiSep1.Name = "MiSep1";
-            this.MiSep1.Size = new System.Drawing.Size(149, 6);
+            this.MiExport.Name = "MiExport";
+            this.MiExport.Size = new System.Drawing.Size(152, 22);
+            this.MiExport.Text = "导出(&X)";
+            this.MiExport.Click += new System.EventHandler(this.MiExport_Click);
             // 
             // MiImport
             // 
@@ -331,12 +327,31 @@
             this.MiImport.Text = "导入(&I)";
             this.MiImport.Click += new System.EventHandler(this.MiImport_Click);
             // 
-            // MiExport
+            // MiSortUp
             // 
-            this.MiExport.Name = "MiExport";
-            this.MiExport.Size = new System.Drawing.Size(152, 22);
-            this.MiExport.Text = "导出(&X)";
-            this.MiExport.Click += new System.EventHandler(this.MiExport_Click);
+            this.MiSortUp.Name = "MiSortUp";
+            this.MiSortUp.Size = new System.Drawing.Size(152, 22);
+            this.MiSortUp.Text = "上移(&U)";
+            this.MiSortUp.Click += new System.EventHandler(this.MiSortUp_Click);
+            // 
+            // MiSortDown
+            // 
+            this.MiSortDown.Name = "MiSortDown";
+            this.MiSortDown.Size = new System.Drawing.Size(152, 22);
+            this.MiSortDown.Text = "下移(&D)";
+            this.MiSortDown.Click += new System.EventHandler(this.MiSortDown_Click);
+            // 
+            // MiSep1
+            // 
+            this.MiSep1.Name = "MiSep1";
+            this.MiSep1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // MiDelete
+            // 
+            this.MiDelete.Name = "MiDelete";
+            this.MiDelete.Size = new System.Drawing.Size(152, 22);
+            this.MiDelete.Text = "删除(&R)";
+            this.MiDelete.Click += new System.EventHandler(this.MiDelete_Click);
             // 
             // PbMenu
             // 
@@ -373,20 +388,6 @@
             // FdBrowser
             // 
             this.FdBrowser.Description = "请选择您要进行重命名的目录：";
-            // 
-            // MiSortUp
-            // 
-            this.MiSortUp.Name = "MiSortUp";
-            this.MiSortUp.Size = new System.Drawing.Size(152, 22);
-            this.MiSortUp.Text = "上移(&U)";
-            this.MiSortUp.Click += new System.EventHandler(this.MiSortUp_Click);
-            // 
-            // MiSortDown
-            // 
-            this.MiSortDown.Name = "MiSortDown";
-            this.MiSortDown.Size = new System.Drawing.Size(152, 22);
-            this.MiSortDown.Text = "下移(&D)";
-            this.MiSortDown.Click += new System.EventHandler(this.MiSortDown_Click);
             // 
             // ARen
             // 
