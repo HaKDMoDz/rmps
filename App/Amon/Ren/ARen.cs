@@ -124,7 +124,39 @@ namespace Me.Amon.Ren
 
         private void PbMenu_Click(object sender, EventArgs e)
         {
+            MiSaveas.Visible = true;
+            MiSep0.Visible = true;
+            MiSep1.Visible = true;
+            MiExport.Visible = true;
+            MiImport.Visible = true;
+
+            MiSortUp.Visible = false;
+            MiSortDown.Visible = false;
+            MiSep1.Visible = false;
+            MiDelete.Visible = false;
+
             CmMenu.Show(PbMenu, 0, PbMenu.Height);
+        }
+
+        private void LsRule_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Right)
+            {
+                return;
+            }
+
+            MiSaveas.Visible = false;
+            MiSep0.Visible = false;
+            MiSep1.Visible = false;
+            MiExport.Visible = false;
+            MiImport.Visible = false;
+
+            MiSortUp.Visible = true;
+            MiSortDown.Visible = true;
+            MiSep1.Visible = true;
+            MiDelete.Visible = true;
+
+            CmMenu.Show(LsRule, e.Location);
         }
 
         private void LsRule_SelectedIndexChanged(object sender, EventArgs e)
@@ -147,28 +179,11 @@ namespace Me.Amon.Ren
             }
 
             MRen ren = new MRen();
+            ren.Order = LsRule.Items.Count;
             ren.Name = name;
             ren.Command = TbRule.Text;
             _UserModel.DBA.SaveVcs(ren);
             LsRule.Items.Add(ren);
-        }
-
-        private void MiDelete_Click(object sender, EventArgs e)
-        {
-            MRen ren = LsRule.SelectedItem as MRen;
-            if (ren == null)
-            {
-                Main.ShowAlert("请选择您要删除的模板！");
-                return;
-            }
-
-            if (DialogResult.Yes != Main.ShowConfirm(string.Format("确认要删除模板 {0} 吗？", ren.Name)))
-            {
-                return;
-            }
-
-            _UserModel.DBA.DeleteVcs(ren);
-            LsRule.Items.Remove(ren);
         }
 
         private void MiImport_Click(object sender, EventArgs e)
@@ -240,6 +255,86 @@ namespace Me.Amon.Ren
 
                 sw.Close();
             }
+        }
+
+        private void MiSortUp_Click(object sender, EventArgs e)
+        {
+            MRen currRen = LsRule.SelectedItem as MRen;
+            if (currRen == null)
+            {
+                return;
+            }
+            int currIdx = LsRule.SelectedIndex;
+            if (currIdx < 1)
+            {
+                return;
+            }
+
+            int prevIdx = currIdx - 1;
+            MRen prevRen = LsRule.Items[prevIdx] as MRen;
+            if (prevRen == null)
+            {
+                return;
+            }
+
+            currRen.Order = prevIdx;
+            _UserModel.DBA.SaveVcs(currRen);
+            prevRen.Order = currIdx;
+            _UserModel.DBA.SaveVcs(prevRen);
+
+            LsRule.Items[prevIdx] = currRen;
+            LsRule.Items[currIdx] = prevRen;
+
+            LsRule.SelectedItem = currRen;
+        }
+
+        private void MiSortDown_Click(object sender, EventArgs e)
+        {
+            MRen currRen = LsRule.SelectedItem as MRen;
+            if (currRen == null)
+            {
+                return;
+            }
+            int currIdx = LsRule.SelectedIndex;
+            if (currIdx > LsRule.Items.Count - 2)
+            {
+                return;
+            }
+
+            int nextIdx = currIdx + 1;
+            MRen nextRen = LsRule.Items[nextIdx] as MRen;
+            if (nextRen == null)
+            {
+                return;
+            }
+
+            currRen.Order = nextIdx;
+            _UserModel.DBA.SaveVcs(currRen);
+            nextRen.Order = currIdx;
+            _UserModel.DBA.SaveVcs(nextRen);
+
+            LsRule.Items[nextIdx] = currRen;
+            LsRule.Items[currIdx] = nextRen;
+
+            LsRule.SelectedItem = currRen;
+        }
+
+        private void MiDelete_Click(object sender, EventArgs e)
+        {
+            MRen ren = LsRule.SelectedItem as MRen;
+            if (ren == null)
+            {
+                Main.ShowAlert("请选择您要删除的模板！");
+                return;
+            }
+
+            if (DialogResult.Yes != Main.ShowConfirm(string.Format("确认要删除模板 {0} 吗？", ren.Name)))
+            {
+                return;
+            }
+
+            _UserModel.DBA.DeleteVcs(ren);
+            LsRule.Items.Remove(ren);
         }
         #endregion
 

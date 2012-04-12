@@ -249,33 +249,33 @@ namespace Me.Amon.Pwd
             _LastNode = node;
         }
 
-        private void InitKey(IList<Key> recs)
+        private void InitKey(IList<Key> keys)
         {
             LbKeyList.Items.Clear();
             _RecIcon.Clear();
             _RecHint.Clear();
 
-            foreach (Key rec in recs)
+            foreach (Key key in keys)
             {
-                LbKeyList.Items.Add(rec);
+                LbKeyList.Items.Add(key);
 
-                if (CharUtil.IsValidateHash(rec.IcoName))
+                if (CharUtil.IsValidateHash(key.IcoName))
                 {
-                    if (CharUtil.IsValidateHash(rec.IcoPath))
+                    if (CharUtil.IsValidateHash(key.IcoPath))
                     {
-                        _RecIcon[rec.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, rec.IcoPath, rec.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
+                        _RecIcon[key.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoPath, key.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
                     }
                     else
                     {
-                        _RecIcon[rec.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, rec.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
+                        _RecIcon[key.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
                     }
                 }
                 else
                 {
-                    _RecIcon[rec.IcoName] = BeanUtil.NaN24;
+                    _RecIcon[key.IcoName] = BeanUtil.NaN24;
                 }
 
-                _RecHint[rec.GtdId] = CharUtil.IsValidateHash(rec.GtdId) ? Resources.Hint : BeanUtil.NaN16;
+                _RecHint[key.GtdId] = CharUtil.IsValidateHash(key.GtdId) ? Resources.Hint : BeanUtil.NaN16;
             }
         }
 
@@ -294,7 +294,7 @@ namespace Me.Amon.Pwd
             }
 
             Image img = _RecIcon.ContainsKey(rec.IcoName) ? _RecIcon[rec.IcoName] : BeanUtil.NaN24;
-            e.Graphics.DrawImage(img, e.Bounds.X + 3, e.Bounds.Y + 3);
+            e.Graphics.DrawImage(img, e.Bounds.X + 3, e.Bounds.Y + 3, img.Width, img.Height);
 
             //最后把要显示的文字画在背景图片上
             e.Graphics.DrawString(rec.Title, this.Font, Brushes.Black, e.Bounds.X + 36, e.Bounds.Y);

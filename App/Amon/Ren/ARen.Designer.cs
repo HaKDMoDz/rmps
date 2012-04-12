@@ -61,6 +61,8 @@
             this.PbSelect = new System.Windows.Forms.PictureBox();
             this.LbEcho = new System.Windows.Forms.Label();
             this.FdBrowser = new System.Windows.Forms.FolderBrowserDialog();
+            this.MiSortUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiSortDown = new System.Windows.Forms.ToolStripMenuItem();
             this.TcRule.SuspendLayout();
             this.TpRuleInf.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GvInfo)).BeginInit();
@@ -289,48 +291,50 @@
             this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MiSaveas,
             this.MiSep0,
-            this.MiDelete,
-            this.MiSep1,
+            this.MiExport,
             this.MiImport,
-            this.MiExport});
+            this.MiSortUp,
+            this.MiSortDown,
+            this.MiSep1,
+            this.MiDelete});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(118, 104);
+            this.CmMenu.Size = new System.Drawing.Size(153, 170);
             // 
             // MiSaveas
             // 
             this.MiSaveas.Name = "MiSaveas";
-            this.MiSaveas.Size = new System.Drawing.Size(117, 22);
+            this.MiSaveas.Size = new System.Drawing.Size(152, 22);
             this.MiSaveas.Text = "保存(&S)";
             this.MiSaveas.Click += new System.EventHandler(this.MiSaveas_Click);
             // 
             // MiSep0
             // 
             this.MiSep0.Name = "MiSep0";
-            this.MiSep0.Size = new System.Drawing.Size(114, 6);
+            this.MiSep0.Size = new System.Drawing.Size(149, 6);
             // 
             // MiDelete
             // 
             this.MiDelete.Name = "MiDelete";
-            this.MiDelete.Size = new System.Drawing.Size(117, 22);
-            this.MiDelete.Text = "删除(&D)";
+            this.MiDelete.Size = new System.Drawing.Size(152, 22);
+            this.MiDelete.Text = "删除(&R)";
             this.MiDelete.Click += new System.EventHandler(this.MiDelete_Click);
             // 
             // MiSep1
             // 
             this.MiSep1.Name = "MiSep1";
-            this.MiSep1.Size = new System.Drawing.Size(114, 6);
+            this.MiSep1.Size = new System.Drawing.Size(149, 6);
             // 
             // MiImport
             // 
             this.MiImport.Name = "MiImport";
-            this.MiImport.Size = new System.Drawing.Size(117, 22);
+            this.MiImport.Size = new System.Drawing.Size(152, 22);
             this.MiImport.Text = "导入(&I)";
             this.MiImport.Click += new System.EventHandler(this.MiImport_Click);
             // 
             // MiExport
             // 
             this.MiExport.Name = "MiExport";
-            this.MiExport.Size = new System.Drawing.Size(117, 22);
+            this.MiExport.Size = new System.Drawing.Size(152, 22);
             this.MiExport.Text = "导出(&X)";
             this.MiExport.Click += new System.EventHandler(this.MiExport_Click);
             // 
@@ -369,6 +373,20 @@
             // FdBrowser
             // 
             this.FdBrowser.Description = "请选择您要进行重命名的目录：";
+            // 
+            // MiSortUp
+            // 
+            this.MiSortUp.Name = "MiSortUp";
+            this.MiSortUp.Size = new System.Drawing.Size(152, 22);
+            this.MiSortUp.Text = "上移(&U)";
+            this.MiSortUp.Click += new System.EventHandler(this.MiSortUp_Click);
+            // 
+            // MiSortDown
+            // 
+            this.MiSortDown.Name = "MiSortDown";
+            this.MiSortDown.Size = new System.Drawing.Size(152, 22);
+            this.MiSortDown.Text = "下移(&D)";
+            this.MiSortDown.Click += new System.EventHandler(this.MiSortDown_Click);
             // 
             // ARen
             // 
@@ -438,5 +456,7 @@
         private System.Windows.Forms.ToolStripSeparator MiSep0;
         private System.Windows.Forms.ToolStripMenuItem MiSaveas;
         private System.Windows.Forms.ToolStripSeparator MiSep1;
+        private System.Windows.Forms.ToolStripMenuItem MiSortUp;
+        private System.Windows.Forms.ToolStripMenuItem MiSortDown;
     }
 }

@@ -302,7 +302,14 @@ namespace Me.Amon.Da
 
         public IList<MRen> ListRen()
         {
-            return Container.Query<MRen>();
+            return Container.Query<MRen>(delegate(MRen ren)
+                {
+                    return ren.UserCode == _UserModel.Code;
+                },
+                delegate(MRen a, MRen b)
+                {
+                    return a.Order.CompareTo(b.Order);
+                });
         }
     }
 }
