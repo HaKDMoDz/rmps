@@ -38,6 +38,11 @@ namespace Me.Amon.Bar.Opt
         {
             return TbTxt.Text;
         }
+
+        public void Decode(string data)
+        {
+            TbTxt.Text = data;
+        }
         #endregion
     }
 }

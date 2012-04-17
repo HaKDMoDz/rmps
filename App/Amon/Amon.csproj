@@ -685,6 +685,8 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Uc\Card.cs" />
+    <Compile Include="Uc\MenuBar.cs" />
+    <Compile Include="Uc\ToolBar.cs" />
     <Compile Include="User\Auth\AuthLk.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1217,9 +1219,13 @@
     </FileAssociation>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lib\Lib.csproj">
-      <Project>{2271F95A-E5E5-4630-99B9-DEC0E5FE2EB4}</Project>
-      <Name>Lib</Name>
+    <ProjectReference Include="..\CardLib\CardLib.csproj">
+      <Project>{766A4389-8109-4783-B17C-2B284F0E1AFA}</Project>
+      <Name>CardLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ComnLib\ComnLib.csproj">
+      <Project>{E57C460D-306A-4F57-AD0B-51F7EEAD8838}</Project>
+      <Name>ComnLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -58,17 +58,50 @@ namespace Me.Amon.Bar.Opt
             //buffer.Append("SUB:").Append(TbSub.Text).Append(';');
             //buffer.Append("TXT:").Append(TbTxt.Text).Append(';');
             //buffer.Append(';');
-            buffer.Append("MAILTO:");
+            buffer.Append(EBar.OPT_EMAIL).Append(':');
             buffer.Append(TbAdr.Text);
             if (CharUtil.IsValidate(TbSub.Text))
             {
-                buffer.Append("?subject=").Append(TbSub.Text);
+                buffer.Append("?SUBJECT=").Append(TbSub.Text);
             }
             if (CharUtil.IsValidate(TbTxt.Text))
             {
-                buffer.Append("&body=").Append(TbTxt.Text.Replace("\r", "%0d").Replace("\n", "%0a"));
+                buffer.Append("&BODY=").Append(TbTxt.Text.Replace("\r", "%0D").Replace("\n", "%0A"));
             }
             return buffer.ToString();
+        }
+
+        public void Decode(string data)
+        {
+            if (!CharUtil.IsValidate(data))
+            {
+                return;
+            }
+            string[] arr = data.Split('?', '&');
+            TbAdr.Text = arr[0];
+
+            for (int i = 1; i < arr.Length; i += 1)
+            {
+                if (!CharUtil.IsValidate(arr[i]))
+                {
+                    continue;
+                }
+                int idx = arr[i].IndexOf('=');
+                if (idx < 1)
+                {
+                    continue;
+                }
+                string tmp = arr[i].Substring(0, idx).Trim().ToUpper();
+                if (tmp == "SUBJECT")
+                {
+                    TbSub.Text = arr[i].Substring(idx + 1);
+                    continue;
+                }
+                if (tmp == "BODY")
+                {
+                    TbTxt.Text = arr[i].Substring(idx + 1).Replace("%0D", "\r").Replace("%0A", "\n");
+                }
+            }
         }
         #endregion
     }

@@ -89,6 +89,13 @@ namespace Me.Amon.Bar.Opt
             buffer.Append(';');
             return buffer.ToString();
         }
+
+        public void Decode(string data)
+        {
+            //TextReader reader = new StringReader("CARD:" + data);
+            //vCard card = new vCard(reader);
+            //TbName.Text = card.DisplayName;
+        }
         #endregion
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ABar));
             this.LbOpt = new System.Windows.Forms.Label();
             this.CbOpt = new System.Windows.Forms.ComboBox();
@@ -35,11 +36,20 @@
             this.GbSet = new System.Windows.Forms.GroupBox();
             this.UcUserSet = new Me.Amon.Bar.UserSet();
             this.GbOpt = new System.Windows.Forms.GroupBox();
-            this.BtDec = new System.Windows.Forms.Button();
+            this.PbMenu = new System.Windows.Forms.PictureBox();
             this.BtEnc = new System.Windows.Forms.Button();
             this.LbEcho = new System.Windows.Forms.Label();
+            this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MiDecLoc = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiDecUrl = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiSep0 = new System.Windows.Forms.ToolStripSeparator();
+            this.FdOpen = new System.Windows.Forms.OpenFileDialog();
+            this.FdSave = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.PbIcon)).BeginInit();
             this.GbSet.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).BeginInit();
+            this.CmMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // LbOpt
@@ -97,21 +107,22 @@
             this.GbOpt.TabStop = false;
             this.GbOpt.Text = "数据";
             // 
-            // BtDec
+            // PbMenu
             // 
-            this.BtDec.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtDec.Location = new System.Drawing.Point(507, 307);
-            this.BtDec.Name = "BtDec";
-            this.BtDec.Size = new System.Drawing.Size(75, 23);
-            this.BtDec.TabIndex = 6;
-            this.BtDec.Text = "解析(&D)";
-            this.BtDec.UseVisualStyleBackColor = true;
-            this.BtDec.Click += new System.EventHandler(this.BtDec_Click);
+            this.PbMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.PbMenu.Image = global::Me.Amon.Properties.Resources.Menu;
+            this.PbMenu.Location = new System.Drawing.Point(12, 309);
+            this.PbMenu.Name = "PbMenu";
+            this.PbMenu.Size = new System.Drawing.Size(16, 16);
+            this.PbMenu.TabIndex = 6;
+            this.PbMenu.TabStop = false;
+            this.PbMenu.Text = "解析(&D)";
+            this.PbMenu.Click += new System.EventHandler(this.PbMenu_Click);
             // 
             // BtEnc
             // 
             this.BtEnc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtEnc.Location = new System.Drawing.Point(426, 307);
+            this.BtEnc.Location = new System.Drawing.Point(507, 307);
             this.BtEnc.Name = "BtEnc";
             this.BtEnc.Size = new System.Drawing.Size(75, 23);
             this.BtEnc.TabIndex = 5;
@@ -122,10 +133,51 @@
             // LbEcho
             // 
             this.LbEcho.AutoSize = true;
-            this.LbEcho.Location = new System.Drawing.Point(12, 305);
+            this.LbEcho.Location = new System.Drawing.Point(34, 312);
             this.LbEcho.Name = "LbEcho";
-            this.LbEcho.Size = new System.Drawing.Size(0, 12);
+            this.LbEcho.Size = new System.Drawing.Size(35, 12);
             this.LbEcho.TabIndex = 7;
+            this.LbEcho.Text = "label";
+            // 
+            // CmMenu
+            // 
+            this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MiSave,
+            this.MiSep0,
+            this.MiDecLoc,
+            this.MiDecUrl});
+            this.CmMenu.Name = "CmMenu";
+            this.CmMenu.Size = new System.Drawing.Size(166, 76);
+            // 
+            // MiDecLoc
+            // 
+            this.MiDecLoc.Name = "MiDecLoc";
+            this.MiDecLoc.Size = new System.Drawing.Size(165, 22);
+            this.MiDecLoc.Text = "打开本地文件(&L)";
+            this.MiDecLoc.Click += new System.EventHandler(this.MiDecLoc_Click);
+            // 
+            // MiDecUrl
+            // 
+            this.MiDecUrl.Name = "MiDecUrl";
+            this.MiDecUrl.Size = new System.Drawing.Size(165, 22);
+            this.MiDecUrl.Text = "打开网络地址(&U)";
+            this.MiDecUrl.Click += new System.EventHandler(this.MiDecUrl_Click);
+            // 
+            // MiSave
+            // 
+            this.MiSave.Name = "MiSave";
+            this.MiSave.Size = new System.Drawing.Size(165, 22);
+            this.MiSave.Text = "保存(&S)";
+            this.MiSave.Click += new System.EventHandler(this.MiSave_Click);
+            // 
+            // MiSep0
+            // 
+            this.MiSep0.Name = "MiSep0";
+            this.MiSep0.Size = new System.Drawing.Size(162, 6);
+            // 
+            // FdOpen
+            // 
+            this.FdOpen.FileName = "openFileDialog1";
             // 
             // ABar
             // 
@@ -134,7 +186,7 @@
             this.ClientSize = new System.Drawing.Size(594, 342);
             this.Controls.Add(this.LbEcho);
             this.Controls.Add(this.BtEnc);
-            this.Controls.Add(this.BtDec);
+            this.Controls.Add(this.PbMenu);
             this.Controls.Add(this.GbOpt);
             this.Controls.Add(this.GbSet);
             this.Controls.Add(this.PbIcon);
@@ -148,6 +200,8 @@
             this.Text = "阿木二维码";
             ((System.ComponentModel.ISupportInitialize)(this.PbIcon)).EndInit();
             this.GbSet.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();
+            this.CmMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,9 +214,16 @@
         private System.Windows.Forms.PictureBox PbIcon;
         private System.Windows.Forms.GroupBox GbSet;
         private System.Windows.Forms.GroupBox GbOpt;
-        private System.Windows.Forms.Button BtDec;
+        private System.Windows.Forms.PictureBox PbMenu;
         private System.Windows.Forms.Button BtEnc;
         private UserSet UcUserSet;
         private System.Windows.Forms.Label LbEcho;
+        private System.Windows.Forms.ContextMenuStrip CmMenu;
+        private System.Windows.Forms.ToolStripMenuItem MiDecLoc;
+        private System.Windows.Forms.ToolStripMenuItem MiDecUrl;
+        private System.Windows.Forms.ToolStripMenuItem MiSave;
+        private System.Windows.Forms.ToolStripSeparator MiSep0;
+        private System.Windows.Forms.OpenFileDialog FdOpen;
+        private System.Windows.Forms.SaveFileDialog FdSave;
     }
 }

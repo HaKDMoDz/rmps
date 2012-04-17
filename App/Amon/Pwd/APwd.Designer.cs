@@ -38,6 +38,7 @@
             this.TmiExitApp = new System.Windows.Forms.ToolStripMenuItem();
             this.TmuEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiAppendKey = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiUpdateKey = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiDeleteKey = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiEditSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.TmuAppendAtt = new System.Windows.Forms.ToolStripMenuItem();
@@ -175,7 +176,7 @@
             this.TssTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.UcTime = new System.Windows.Forms.Timer(this.components);
-            this.TmiUpdateKey = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiImportVcf = new System.Windows.Forms.ToolStripMenuItem();
             this.TmMenu.SuspendLayout();
             this.TcTool.ContentPanel.SuspendLayout();
             this.TcTool.TopToolStripPanel.SuspendLayout();
@@ -224,26 +225,26 @@
             // TmiHideWin
             // 
             this.TmiHideWin.Name = "TmiHideWin";
-            this.TmiHideWin.Size = new System.Drawing.Size(141, 22);
+            this.TmiHideWin.Size = new System.Drawing.Size(152, 22);
             this.TmiHideWin.Text = "隐藏窗口(&H)";
             this.TmiHideWin.Click += new System.EventHandler(this.TmiHideWin_Click);
             // 
             // TmiLockWin
             // 
             this.TmiLockWin.Name = "TmiLockWin";
-            this.TmiLockWin.Size = new System.Drawing.Size(141, 22);
+            this.TmiLockWin.Size = new System.Drawing.Size(152, 22);
             this.TmiLockWin.Text = "锁定窗口(&L)";
             this.TmiLockWin.Click += new System.EventHandler(this.TmiLockWin_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(138, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // TmiExitApp
             // 
             this.TmiExitApp.Name = "TmiExitApp";
-            this.TmiExitApp.Size = new System.Drawing.Size(141, 22);
+            this.TmiExitApp.Size = new System.Drawing.Size(152, 22);
             this.TmiExitApp.Text = "退出(&X)";
             this.TmiExitApp.Click += new System.EventHandler(this.TmiExitApp_Click);
             // 
@@ -271,6 +272,13 @@
             this.TmiAppendKey.Size = new System.Drawing.Size(152, 22);
             this.TmiAppendKey.Text = "添加记录";
             this.TmiAppendKey.Click += new System.EventHandler(this.TmiAppendKey_Click);
+            // 
+            // TmiUpdateKey
+            // 
+            this.TmiUpdateKey.Name = "TmiUpdateKey";
+            this.TmiUpdateKey.Size = new System.Drawing.Size(152, 22);
+            this.TmiUpdateKey.Text = "保存记录";
+            this.TmiUpdateKey.Click += new System.EventHandler(this.TmiUpdateKey_Click);
             // 
             // TmiDeleteKey
             // 
@@ -637,14 +645,14 @@
             // TmiSync
             // 
             this.TmiSync.Name = "TmiSync";
-            this.TmiSync.Size = new System.Drawing.Size(116, 22);
+            this.TmiSync.Size = new System.Drawing.Size(152, 22);
             this.TmiSync.Text = "同步(&S)";
             this.TmiSync.Click += new System.EventHandler(this.TmiSync_Click);
             // 
             // TmiDataSep0
             // 
             this.TmiDataSep0.Name = "TmiDataSep0";
-            this.TmiDataSep0.Size = new System.Drawing.Size(113, 6);
+            this.TmiDataSep0.Size = new System.Drawing.Size(149, 6);
             // 
             // TmiBackup
             // 
@@ -652,7 +660,7 @@
             this.TmiLocaleBackup,
             this.TmiRemoteBackup});
             this.TmiBackup.Name = "TmiBackup";
-            this.TmiBackup.Size = new System.Drawing.Size(116, 22);
+            this.TmiBackup.Size = new System.Drawing.Size(152, 22);
             this.TmiBackup.Text = "备份(&B)";
             // 
             // TmiLocaleBackup
@@ -675,7 +683,7 @@
             this.TmiLocaleResuma,
             this.TmiRemoteResuma});
             this.TmiResuma.Name = "TmiResuma";
-            this.TmiResuma.Size = new System.Drawing.Size(116, 22);
+            this.TmiResuma.Size = new System.Drawing.Size(152, 22);
             this.TmiResuma.Text = "恢复(&R)";
             // 
             // TmiLocaleResuma
@@ -695,7 +703,7 @@
             // TmiDataSep1
             // 
             this.TmiDataSep1.Name = "TmiDataSep1";
-            this.TmiDataSep1.Size = new System.Drawing.Size(113, 6);
+            this.TmiDataSep1.Size = new System.Drawing.Size(149, 6);
             // 
             // TmuExport
             // 
@@ -703,20 +711,20 @@
             this.TmiExportTxt,
             this.TmiExportXml});
             this.TmuExport.Name = "TmuExport";
-            this.TmuExport.Size = new System.Drawing.Size(116, 22);
+            this.TmuExport.Size = new System.Drawing.Size(152, 22);
             this.TmuExport.Text = "导出(&I)";
             // 
             // TmiExportTxt
             // 
             this.TmiExportTxt.Name = "TmiExportTxt";
-            this.TmiExportTxt.Size = new System.Drawing.Size(126, 22);
+            this.TmiExportTxt.Size = new System.Drawing.Size(152, 22);
             this.TmiExportTxt.Text = "TXT格式";
             this.TmiExportTxt.Click += new System.EventHandler(this.TmiExportTxt_Click);
             // 
             // TmiExportXml
             // 
             this.TmiExportXml.Name = "TmiExportXml";
-            this.TmiExportXml.Size = new System.Drawing.Size(126, 22);
+            this.TmiExportXml.Size = new System.Drawing.Size(152, 22);
             this.TmiExportXml.Text = "XML格式";
             this.TmiExportXml.Click += new System.EventHandler(this.TmiExportXml_Click);
             // 
@@ -724,22 +732,23 @@
             // 
             this.TmuImport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TmiImportTxt,
-            this.TmiImportXml});
+            this.TmiImportXml,
+            this.TmiImportVcf});
             this.TmuImport.Name = "TmuImport";
-            this.TmuImport.Size = new System.Drawing.Size(116, 22);
+            this.TmuImport.Size = new System.Drawing.Size(152, 22);
             this.TmuImport.Text = "导入(&X)";
             // 
             // TmiImportTxt
             // 
             this.TmiImportTxt.Name = "TmiImportTxt";
-            this.TmiImportTxt.Size = new System.Drawing.Size(126, 22);
+            this.TmiImportTxt.Size = new System.Drawing.Size(152, 22);
             this.TmiImportTxt.Text = "TXT格式";
             this.TmiImportTxt.Click += new System.EventHandler(this.TmiImportTxt_Click);
             // 
             // TmiImportXml
             // 
             this.TmiImportXml.Name = "TmiImportXml";
-            this.TmiImportXml.Size = new System.Drawing.Size(126, 22);
+            this.TmiImportXml.Size = new System.Drawing.Size(152, 22);
             this.TmiImportXml.Text = "XML格式";
             this.TmiImportXml.Click += new System.EventHandler(this.TmiImportXml_Click);
             // 
@@ -938,57 +947,57 @@
             this.CmiCatSep1,
             this.CmiEditIcon});
             this.CmCat.Name = "CsCat";
-            this.CmCat.Size = new System.Drawing.Size(153, 170);
+            this.CmCat.Size = new System.Drawing.Size(142, 148);
             // 
             // CmiSortU
             // 
             this.CmiSortU.Name = "CmiSortU";
-            this.CmiSortU.Size = new System.Drawing.Size(152, 22);
+            this.CmiSortU.Size = new System.Drawing.Size(141, 22);
             this.CmiSortU.Text = "上移";
             this.CmiSortU.Click += new System.EventHandler(this.CmiSortU_Click);
             // 
             // CmiSortD
             // 
             this.CmiSortD.Name = "CmiSortD";
-            this.CmiSortD.Size = new System.Drawing.Size(152, 22);
+            this.CmiSortD.Size = new System.Drawing.Size(141, 22);
             this.CmiSortD.Text = "下移";
             this.CmiSortD.Click += new System.EventHandler(this.CmiSortD_Click);
             // 
             // CmiCatSep0
             // 
             this.CmiCatSep0.Name = "CmiCatSep0";
-            this.CmiCatSep0.Size = new System.Drawing.Size(149, 6);
+            this.CmiCatSep0.Size = new System.Drawing.Size(138, 6);
             // 
             // CmiAppendCat
             // 
             this.CmiAppendCat.Name = "CmiAppendCat";
-            this.CmiAppendCat.Size = new System.Drawing.Size(152, 22);
+            this.CmiAppendCat.Size = new System.Drawing.Size(141, 22);
             this.CmiAppendCat.Text = "新增类别(&A)";
             this.CmiAppendCat.Click += new System.EventHandler(this.CmiAppendCat_Click);
             // 
             // CmiUpdateCat
             // 
             this.CmiUpdateCat.Name = "CmiUpdateCat";
-            this.CmiUpdateCat.Size = new System.Drawing.Size(152, 22);
+            this.CmiUpdateCat.Size = new System.Drawing.Size(141, 22);
             this.CmiUpdateCat.Text = "更新类别(&U)";
             this.CmiUpdateCat.Click += new System.EventHandler(this.CmiUpdateCat_Click);
             // 
             // CmiDeleteCat
             // 
             this.CmiDeleteCat.Name = "CmiDeleteCat";
-            this.CmiDeleteCat.Size = new System.Drawing.Size(152, 22);
+            this.CmiDeleteCat.Size = new System.Drawing.Size(141, 22);
             this.CmiDeleteCat.Text = "删除类别(&D)";
             this.CmiDeleteCat.Click += new System.EventHandler(this.CmiDeleteCat_Click);
             // 
             // CmiCatSep1
             // 
             this.CmiCatSep1.Name = "CmiCatSep1";
-            this.CmiCatSep1.Size = new System.Drawing.Size(149, 6);
+            this.CmiCatSep1.Size = new System.Drawing.Size(138, 6);
             // 
             // CmiEditIcon
             // 
             this.CmiEditIcon.Name = "CmiEditIcon";
-            this.CmiEditIcon.Size = new System.Drawing.Size(152, 22);
+            this.CmiEditIcon.Size = new System.Drawing.Size(141, 22);
             this.CmiEditIcon.Text = "更改图标(&I)";
             this.CmiEditIcon.Click += new System.EventHandler(this.CmiEditIcon_Click);
             // 
@@ -1418,12 +1427,11 @@
             // 
             this.UcTime.Tick += new System.EventHandler(this.UcTime_Tick);
             // 
-            // TmiUpdateKey
+            // TmiImportVcf
             // 
-            this.TmiUpdateKey.Name = "TmiUpdateKey";
-            this.TmiUpdateKey.Size = new System.Drawing.Size(152, 22);
-            this.TmiUpdateKey.Text = "保存记录";
-            this.TmiUpdateKey.Click += new System.EventHandler(this.TmiUpdateKey_Click);
+            this.TmiImportVcf.Name = "TmiImportVcf";
+            this.TmiImportVcf.Size = new System.Drawing.Size(152, 22);
+            this.TmiImportVcf.Text = "VCF格式";
             // 
             // APwd
             // 
@@ -1614,5 +1622,6 @@
         private System.Windows.Forms.ToolStripButton TsbClear;
         private System.Windows.Forms.ToolStripSeparator TsbToolSep3;
         private System.Windows.Forms.ToolStripMenuItem TmiUpdateKey;
+        private System.Windows.Forms.ToolStripMenuItem TmiImportVcf;
     }
 }

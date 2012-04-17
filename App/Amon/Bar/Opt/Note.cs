@@ -39,7 +39,7 @@ namespace Me.Amon.Bar.Opt
         public string Encode()
         {
             StringBuilder buffer = new StringBuilder();
-            buffer.Append("DTXT:");
+            buffer.Append(EBar.OPT_NOTE).Append(':');
             buffer.Append("SUB:;").Append(TbSub.Text).Append(';');
             if (CharUtil.IsValidate(TbTxt.Text))
             {
@@ -47,6 +47,38 @@ namespace Me.Amon.Bar.Opt
             }
             buffer.Append(';');
             return buffer.ToString();
+        }
+
+        public void Decode(string data)
+        {
+            if (!CharUtil.IsValidate(data))
+            {
+                return;
+            }
+
+            string[] arr = data.Split(';');
+            for (int i = 1; i < arr.Length; i += 1)
+            {
+                if (!CharUtil.IsValidate(arr[i]))
+                {
+                    continue;
+                }
+                int idx = arr[i].IndexOf(':');
+                if (idx < 1)
+                {
+                    continue;
+                }
+                string tmp = arr[i].Substring(0, idx).Trim().ToUpper();
+                if (tmp == "SUB")
+                {
+                    TbSub.Text = arr[i].Substring(idx + 1);
+                    continue;
+                }
+                if (tmp == "TXT")
+                {
+                    TbTxt.Text = arr[i].Substring(idx + 1);
+                }
+            }
         }
         #endregion
     }

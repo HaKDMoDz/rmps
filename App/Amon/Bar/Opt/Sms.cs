@@ -50,13 +50,32 @@ namespace Me.Amon.Bar.Opt
             //buffer.Append("SM:").Append(TbSub.Text).Append(';');
             //buffer.Append("TXT:").Append(TbTxt.Text).Append(';');
             //buffer.Append(';');
-            buffer.Append("SMSTO:");
+            buffer.Append(EBar.OPT_SMS).Append(':');
             buffer.Append(TbSub.Text);
             if (CharUtil.IsValidate(TbTxt.Text))
             {
                 buffer.Append(':').Append(TbTxt.Text);
             }
             return buffer.ToString();
+        }
+
+        public void Decode(string data)
+        {
+            if (!CharUtil.IsValidate(data))
+            {
+                return;
+            }
+
+            int idx = data.IndexOf(':');
+            if (idx > 0)
+            {
+                TbSub.Text = data.Substring(0, idx);
+                TbTxt.Text = data.Substring(idx + 1);
+            }
+            else
+            {
+                TbSub.Text = data;
+            }
         }
         #endregion
     }

@@ -46,9 +46,14 @@ namespace Me.Amon.Bar.Opt
         public string Encode()
         {
             StringBuilder buffer = new StringBuilder();
-            buffer.Append("TEL:");
+            buffer.Append(EBar.OPT_TEL).Append(':');
             buffer.Append(TbTel.Text);
             return buffer.ToString();
+        }
+
+        public void Decode(string data)
+        {
+            TbTel.Text = data;
         }
         #endregion
     }

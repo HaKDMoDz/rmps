@@ -6,6 +6,8 @@ namespace Me.Amon.Bar
     {
         string Name { get; set; }
 
+        string Text { get; set; }
+
         void InitView(GroupBox gBox);
 
         void HideView(GroupBox gBox);
@@ -13,5 +15,7 @@ namespace Me.Amon.Bar
         bool Check();
 
         string Encode();
+
+        void Decode(string data);
     }
 }
