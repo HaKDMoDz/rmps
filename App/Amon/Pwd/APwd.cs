@@ -12,6 +12,7 @@ using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
 using Me.Amon.Properties;
+using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd._Cat;
 using Me.Amon.Pwd._Lib;
 using Me.Amon.Pwd._Log;
@@ -21,6 +22,7 @@ using Me.Amon.User;
 using Me.Amon.User.Auth;
 using Me.Amon.Util;
 using Me.Amon.Uw;
+using Thought.vCards;
 
 namespace Me.Amon.Pwd
 {
@@ -1105,6 +1107,72 @@ namespace Me.Amon.Pwd
                 }
             }
 
+            DoListKey(cat.Id);
+        }
+
+        private void TmiImportVcf_Click(object sender, EventArgs e)
+        {
+            if (_SafeModel.Modified && DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
+            {
+                return;
+            }
+
+            Cat cat = _LastNode.Tag as Cat;
+            if (cat == null)
+            {
+                Main.ShowAlert("请选择您要导入的类别！");
+                TvCatTree.Focus();
+                return;
+            }
+
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Filter = "文件|*.vcf";
+            if (DialogResult.OK != fd.ShowDialog(this))
+            {
+                return;
+            }
+            string file = fd.FileName;
+            if (string.IsNullOrEmpty(file) || !File.Exists(file))
+            {
+                return;
+            }
+
+            StreamReader reader = new StreamReader(file, Encoding.Default);
+            vCard card = new vCard(reader);
+            reader.Close();
+
+            _SafeModel.Key = new Key();
+            _SafeModel.Clear();
+            GuidAtt guid = _SafeModel.InitGuid();
+            guid.Data = cat.Id;
+            MetaAtt meta = _SafeModel.InitMeta();
+            meta.Name = "演示";
+            _SafeModel.InitLogo();
+            _SafeModel.InitHint();
+
+            Att att;
+
+            att = Att.GetInstance(Att.TYPE_TEXT);
+            att.Name = "名";
+            att.Data = card.GivenName;
+            _SafeModel.Append(att);
+
+            att = Att.GetInstance(Att.TYPE_TEXT);
+            att.Name = "姓";
+            att.Data = card.FamilyName;
+            _SafeModel.Append(att);
+
+            att = Att.GetInstance(Att.TYPE_TEXT);
+            att.Name = "昵称";
+            att.Data = card.DisplayName;
+            _SafeModel.Append(att);
+
+            att = Att.GetInstance(Att.TYPE_TEXT);
+            att.Name = "显示名称";
+            att.Data = card.FormattedName;
+            _SafeModel.Append(att);
+
+            ImportKey();
             DoListKey(cat.Id);
         }
         #endregion

@@ -333,7 +333,7 @@ namespace Me.Amon.Model.Pwd
         {
             GuidAtt guid = (GuidAtt)_AttList[Att.PWDS_HEAD_GUID];
             _Key.RegTime = guid.Name;
-            //Rec.CatId = guid.Data;
+            _Key.CatId = guid.Data;
             _Key.LibId = guid.GetSpec(GuidAtt.SPEC_GUID_TPLT);
 
             // MetaItem

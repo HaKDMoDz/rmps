@@ -99,6 +99,7 @@
             this.TmuImport = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiImportTxt = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiImportXml = new System.Windows.Forms.ToolStripMenuItem();
+            this.TmiImportVcf = new System.Windows.Forms.ToolStripMenuItem();
             this.TmuUser = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiPkey = new System.Windows.Forms.ToolStripMenuItem();
             this.TmiLkey = new System.Windows.Forms.ToolStripMenuItem();
@@ -176,7 +177,6 @@
             this.TssTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.UcTime = new System.Windows.Forms.Timer(this.components);
-            this.TmiImportVcf = new System.Windows.Forms.ToolStripMenuItem();
             this.TmMenu.SuspendLayout();
             this.TcTool.ContentPanel.SuspendLayout();
             this.TcTool.TopToolStripPanel.SuspendLayout();
@@ -225,26 +225,26 @@
             // TmiHideWin
             // 
             this.TmiHideWin.Name = "TmiHideWin";
-            this.TmiHideWin.Size = new System.Drawing.Size(152, 22);
+            this.TmiHideWin.Size = new System.Drawing.Size(141, 22);
             this.TmiHideWin.Text = "隐藏窗口(&H)";
             this.TmiHideWin.Click += new System.EventHandler(this.TmiHideWin_Click);
             // 
             // TmiLockWin
             // 
             this.TmiLockWin.Name = "TmiLockWin";
-            this.TmiLockWin.Size = new System.Drawing.Size(152, 22);
+            this.TmiLockWin.Size = new System.Drawing.Size(141, 22);
             this.TmiLockWin.Text = "锁定窗口(&L)";
             this.TmiLockWin.Click += new System.EventHandler(this.TmiLockWin_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(138, 6);
             // 
             // TmiExitApp
             // 
             this.TmiExitApp.Name = "TmiExitApp";
-            this.TmiExitApp.Size = new System.Drawing.Size(152, 22);
+            this.TmiExitApp.Size = new System.Drawing.Size(141, 22);
             this.TmiExitApp.Text = "退出(&X)";
             this.TmiExitApp.Click += new System.EventHandler(this.TmiExitApp_Click);
             // 
@@ -269,28 +269,28 @@
             // TmiAppendKey
             // 
             this.TmiAppendKey.Name = "TmiAppendKey";
-            this.TmiAppendKey.Size = new System.Drawing.Size(152, 22);
+            this.TmiAppendKey.Size = new System.Drawing.Size(124, 22);
             this.TmiAppendKey.Text = "添加记录";
             this.TmiAppendKey.Click += new System.EventHandler(this.TmiAppendKey_Click);
             // 
             // TmiUpdateKey
             // 
             this.TmiUpdateKey.Name = "TmiUpdateKey";
-            this.TmiUpdateKey.Size = new System.Drawing.Size(152, 22);
+            this.TmiUpdateKey.Size = new System.Drawing.Size(124, 22);
             this.TmiUpdateKey.Text = "保存记录";
             this.TmiUpdateKey.Click += new System.EventHandler(this.TmiUpdateKey_Click);
             // 
             // TmiDeleteKey
             // 
             this.TmiDeleteKey.Name = "TmiDeleteKey";
-            this.TmiDeleteKey.Size = new System.Drawing.Size(152, 22);
+            this.TmiDeleteKey.Size = new System.Drawing.Size(124, 22);
             this.TmiDeleteKey.Text = "删除记录";
             this.TmiDeleteKey.Click += new System.EventHandler(this.TmiDeleteKey_Click);
             // 
             // TmiEditSep0
             // 
             this.TmiEditSep0.Name = "TmiEditSep0";
-            this.TmiEditSep0.Size = new System.Drawing.Size(149, 6);
+            this.TmiEditSep0.Size = new System.Drawing.Size(121, 6);
             // 
             // TmuAppendAtt
             // 
@@ -307,7 +307,7 @@
             this.TmiAppendAttFile,
             this.TmiAppendAttLine});
             this.TmuAppendAtt.Name = "TmuAppendAtt";
-            this.TmuAppendAtt.Size = new System.Drawing.Size(152, 22);
+            this.TmuAppendAtt.Size = new System.Drawing.Size(124, 22);
             this.TmuAppendAtt.Text = "添加属性";
             // 
             // TmiAppendAttText
@@ -404,7 +404,7 @@
             this.TmiUpdateAttFile,
             this.TmiUpdateAttLine});
             this.TmuUpdateAtt.Name = "TmuUpdateAtt";
-            this.TmuUpdateAtt.Size = new System.Drawing.Size(152, 22);
+            this.TmuUpdateAtt.Size = new System.Drawing.Size(124, 22);
             this.TmuUpdateAtt.Text = "转换属性";
             // 
             // TmiUpdateAttText
@@ -489,33 +489,33 @@
             // TmiDeleteAtt
             // 
             this.TmiDeleteAtt.Name = "TmiDeleteAtt";
-            this.TmiDeleteAtt.Size = new System.Drawing.Size(152, 22);
+            this.TmiDeleteAtt.Size = new System.Drawing.Size(124, 22);
             this.TmiDeleteAtt.Text = "删除属性";
             this.TmiDeleteAtt.Click += new System.EventHandler(this.TmiDeleteAtt_Click);
             // 
             // TmiEditSep1
             // 
             this.TmiEditSep1.Name = "TmiEditSep1";
-            this.TmiEditSep1.Size = new System.Drawing.Size(149, 6);
+            this.TmiEditSep1.Size = new System.Drawing.Size(121, 6);
             // 
             // TmiAppendCat
             // 
             this.TmiAppendCat.Name = "TmiAppendCat";
-            this.TmiAppendCat.Size = new System.Drawing.Size(152, 22);
+            this.TmiAppendCat.Size = new System.Drawing.Size(124, 22);
             this.TmiAppendCat.Text = "添加类别";
             this.TmiAppendCat.Click += new System.EventHandler(this.TmiAppendCat_Click);
             // 
             // TmiUpdateCat
             // 
             this.TmiUpdateCat.Name = "TmiUpdateCat";
-            this.TmiUpdateCat.Size = new System.Drawing.Size(152, 22);
+            this.TmiUpdateCat.Size = new System.Drawing.Size(124, 22);
             this.TmiUpdateCat.Text = "更新类别";
             this.TmiUpdateCat.Click += new System.EventHandler(this.TmiUpdateCat_Click);
             // 
             // TmiDeleteCat
             // 
             this.TmiDeleteCat.Name = "TmiDeleteCat";
-            this.TmiDeleteCat.Size = new System.Drawing.Size(152, 22);
+            this.TmiDeleteCat.Size = new System.Drawing.Size(124, 22);
             this.TmiDeleteCat.Text = "删除类别";
             this.TmiDeleteCat.Click += new System.EventHandler(this.TmiDeleteCat_Click);
             // 
@@ -717,14 +717,14 @@
             // TmiExportTxt
             // 
             this.TmiExportTxt.Name = "TmiExportTxt";
-            this.TmiExportTxt.Size = new System.Drawing.Size(152, 22);
+            this.TmiExportTxt.Size = new System.Drawing.Size(126, 22);
             this.TmiExportTxt.Text = "TXT格式";
             this.TmiExportTxt.Click += new System.EventHandler(this.TmiExportTxt_Click);
             // 
             // TmiExportXml
             // 
             this.TmiExportXml.Name = "TmiExportXml";
-            this.TmiExportXml.Size = new System.Drawing.Size(152, 22);
+            this.TmiExportXml.Size = new System.Drawing.Size(126, 22);
             this.TmiExportXml.Text = "XML格式";
             this.TmiExportXml.Click += new System.EventHandler(this.TmiExportXml_Click);
             // 
@@ -751,6 +751,13 @@
             this.TmiImportXml.Size = new System.Drawing.Size(152, 22);
             this.TmiImportXml.Text = "XML格式";
             this.TmiImportXml.Click += new System.EventHandler(this.TmiImportXml_Click);
+            // 
+            // TmiImportVcf
+            // 
+            this.TmiImportVcf.Name = "TmiImportVcf";
+            this.TmiImportVcf.Size = new System.Drawing.Size(152, 22);
+            this.TmiImportVcf.Text = "VCF格式";
+            this.TmiImportVcf.Click += new System.EventHandler(this.TmiImportVcf_Click);
             // 
             // TmuUser
             // 
@@ -1426,12 +1433,6 @@
             // UcTime
             // 
             this.UcTime.Tick += new System.EventHandler(this.UcTime_Tick);
-            // 
-            // TmiImportVcf
-            // 
-            this.TmiImportVcf.Name = "TmiImportVcf";
-            this.TmiImportVcf.Size = new System.Drawing.Size(152, 22);
-            this.TmiImportVcf.Text = "VCF格式";
             // 
             // APwd
             // 
