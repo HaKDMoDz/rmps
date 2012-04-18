@@ -1152,25 +1152,174 @@ namespace Me.Amon.Pwd
 
             Att att;
 
-            att = Att.GetInstance(Att.TYPE_TEXT);
-            att.Name = "名";
-            att.Data = card.GivenName;
-            _SafeModel.Append(att);
+            if (!string.IsNullOrWhiteSpace(card.GivenName))
+            {
+                att = Att.GetInstance(Att.TYPE_TEXT);
+                att.Name = "名";
+                att.Data = card.GivenName;
+                _SafeModel.Append(att);
+            }
 
-            att = Att.GetInstance(Att.TYPE_TEXT);
-            att.Name = "姓";
-            att.Data = card.FamilyName;
-            _SafeModel.Append(att);
+            if (!string.IsNullOrWhiteSpace(card.FamilyName))
+            {
+                att = Att.GetInstance(Att.TYPE_TEXT);
+                att.Name = "姓";
+                att.Data = card.FamilyName;
+                _SafeModel.Append(att);
+            }
 
-            att = Att.GetInstance(Att.TYPE_TEXT);
-            att.Name = "昵称";
-            att.Data = card.DisplayName;
-            _SafeModel.Append(att);
+            if (card.Nicknames != null)
+            {
+                int idx = 1;
+                foreach (string nickname in card.Nicknames)
+                {
+                    att = Att.GetInstance(Att.TYPE_TEXT);
+                    att.Name = "昵称" + (idx++);
+                    att.Data = nickname;
+                    _SafeModel.Append(att);
+                }
+            }
 
-            att = Att.GetInstance(Att.TYPE_TEXT);
-            att.Name = "显示名称";
-            att.Data = card.FormattedName;
-            _SafeModel.Append(att);
+            if (!string.IsNullOrWhiteSpace(card.DisplayName))
+            {
+                att = Att.GetInstance(Att.TYPE_TEXT);
+                att.Name = "显示名称";
+                att.Data = card.DisplayName;
+                _SafeModel.Append(att);
+            }
+
+            if (!string.IsNullOrWhiteSpace(card.FormattedName))
+            {
+                att = Att.GetInstance(Att.TYPE_TEXT);
+                att.Name = "显示名称";
+                att.Data = card.FormattedName;
+                _SafeModel.Append(att);
+            }
+
+            if (card.Photos != null)
+            {
+                int idx = 1;
+                foreach (vCardPhoto photo in card.Photos)
+                {
+                    att = Att.GetInstance(Att.TYPE_FILE);
+                    att.Name = "图像" + (idx++);
+                    att.Data = "";
+                    _SafeModel.Append(att);
+                }
+            }
+
+            if (card.BirthDate != null)
+            {
+                att = Att.GetInstance(Att.TYPE_DATE);
+                att.Name = "生日";
+                att.Data = card.BirthDate.Value.ToFileTimeUtc().ToString();
+                _SafeModel.Append(att);
+            }
+
+            if (card.DeliveryAddresses != null)
+            {
+                foreach (vCardDeliveryAddress adr in card.DeliveryAddresses)
+                {
+                }
+            }
+
+            if (card.DeliveryLabels != null)
+            {
+            }
+
+            if (card.Phones != null)
+            {
+                foreach (vCardPhone tel in card.Phones)
+                {
+                }
+            }
+
+            if (card.EmailAddresses != null)
+            {
+                foreach (vCardEmailAddress mail in card.EmailAddresses)
+                {
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(card.TimeZone))
+            {
+                att = Att.GetInstance(Att.TYPE_DATE);
+                att.Name = "时区";
+                att.Data = card.TimeZone;
+                _SafeModel.Append(att);
+            }
+
+            if (card.Longitude != null)
+            {
+                att = Att.GetInstance(Att.TYPE_DATA);
+                att.Name = "经度";
+                att.Data = card.Longitude.ToString();
+                _SafeModel.Append(att);
+            }
+
+            if (card.Latitude != null)
+            {
+                att = Att.GetInstance(Att.TYPE_DATA);
+                att.Name = "纬度";
+                att.Data = card.Latitude.ToString();
+                _SafeModel.Append(att);
+            }
+
+            if (!string.IsNullOrWhiteSpace(card.Title))
+            {
+                att = Att.GetInstance(Att.TYPE_TEXT);
+                att.Name = "职务";
+                att.Data = card.Title;
+                _SafeModel.Append(att);
+            }
+
+            if (!string.IsNullOrWhiteSpace(card.Role))
+            {
+                att = Att.GetInstance(Att.TYPE_TEXT);
+                att.Name = "角色";
+                att.Data = card.Role;
+                _SafeModel.Append(att);
+            }
+
+            if (!string.IsNullOrWhiteSpace(card.Organization))
+            {
+                att = Att.GetInstance(Att.TYPE_TEXT);
+                att.Name = "单位";
+                att.Data = card.Organization;
+                _SafeModel.Append(att);
+            }
+
+            if (card.Notes != null)
+            {
+                int idx = 1;
+                foreach (vCardNote note in card.Notes)
+                {
+                    att = Att.GetInstance(Att.TYPE_TEXT);
+                    att.Name = "备注" + (idx++);
+                    att.Data = note.Text;
+                    _SafeModel.Append(att);
+                }
+            }
+
+            if (card.Websites != null)
+            {
+                int idx = 1;
+                foreach (vCardWebsite url in card.Websites)
+                {
+                    att = Att.GetInstance(Att.TYPE_LINK);
+                    att.Name = "网站" + (idx++);
+                    att.Data = url.Url;
+                    _SafeModel.Append(att);
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(card.UniqueId))
+            {
+                att = Att.GetInstance(Att.TYPE_TEXT);
+                att.Name = "标识";
+                att.Data = card.UniqueId;
+                _SafeModel.Append(att);
+            }
 
             ImportKey();
             DoListKey(cat.Id);

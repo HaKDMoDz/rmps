@@ -33,6 +33,7 @@
             this.LbData = new System.Windows.Forms.Label();
             this.TbName = new System.Windows.Forms.TextBox();
             this.LbName = new System.Windows.Forms.Label();
+            this.BtOpt = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtOpen
@@ -78,10 +79,20 @@
             this.LbName.TabIndex = 0;
             this.LbName.Text = "名称(&N)";
             // 
+            // BtOpt
+            // 
+            this.BtOpt.Location = new System.Drawing.Point(83, 57);
+            this.BtOpt.Name = "BtOpt";
+            this.BtOpt.Size = new System.Drawing.Size(21, 21);
+            this.BtOpt.TabIndex = 5;
+            this.BtOpt.UseVisualStyleBackColor = true;
+            this.BtOpt.Click += new System.EventHandler(this.BtOpt_Click);
+            // 
             // BeanLink
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.BtOpt);
             this.Controls.Add(this.BtOpen);
             this.Controls.Add(this.TbData);
             this.Controls.Add(this.LbData);
@@ -101,5 +112,6 @@
         private System.Windows.Forms.Label LbData;
         private System.Windows.Forms.TextBox TbName;
         private System.Windows.Forms.Label LbName;
+        private System.Windows.Forms.Button BtOpt;
     }
 }

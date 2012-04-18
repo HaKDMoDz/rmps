@@ -28,17 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.BtOpen = new System.Windows.Forms.Button();
-            this.MiPwdViewer = new System.Windows.Forms.ToolStripMenuItem();
             this.BtView = new System.Windows.Forms.Button();
-            this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MiSysViewer = new System.Windows.Forms.ToolStripMenuItem();
             this.TbData = new System.Windows.Forms.TextBox();
             this.LbData = new System.Windows.Forms.Label();
             this.TbName = new System.Windows.Forms.TextBox();
             this.LbName = new System.Windows.Forms.Label();
-            this.CmMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtOpen
@@ -48,12 +43,7 @@
             this.BtOpen.Size = new System.Drawing.Size(21, 21);
             this.BtOpen.TabIndex = 11;
             this.BtOpen.UseVisualStyleBackColor = true;
-            // 
-            // MiPwdViewer
-            // 
-            this.MiPwdViewer.Name = "MiPwdViewer";
-            this.MiPwdViewer.Size = new System.Drawing.Size(152, 22);
-            this.MiPwdViewer.Text = "内置查看器";
+            this.BtOpen.Click += new System.EventHandler(this.BtOpen_Click);
             // 
             // BtView
             // 
@@ -62,20 +52,7 @@
             this.BtView.Size = new System.Drawing.Size(21, 21);
             this.BtView.TabIndex = 10;
             this.BtView.UseVisualStyleBackColor = true;
-            // 
-            // CmMenu
-            // 
-            this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MiPwdViewer,
-            this.MiSysViewer});
-            this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(153, 70);
-            // 
-            // MiSysViewer
-            // 
-            this.MiSysViewer.Name = "MiSysViewer";
-            this.MiSysViewer.Size = new System.Drawing.Size(152, 22);
-            this.MiSysViewer.Text = "系统查看器";
+            this.BtView.Click += new System.EventHandler(this.BtView_Click);
             // 
             // TbData
             // 
@@ -123,7 +100,6 @@
             this.Controls.Add(this.LbName);
             this.Name = "BeanCall";
             this.Size = new System.Drawing.Size(366, 81);
-            this.CmMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -132,10 +108,7 @@
         #endregion
 
         private System.Windows.Forms.Button BtOpen;
-        private System.Windows.Forms.ToolStripMenuItem MiPwdViewer;
         private System.Windows.Forms.Button BtView;
-        private System.Windows.Forms.ContextMenuStrip CmMenu;
-        private System.Windows.Forms.ToolStripMenuItem MiSysViewer;
         private System.Windows.Forms.TextBox TbData;
         private System.Windows.Forms.Label LbData;
         private System.Windows.Forms.TextBox TbName;

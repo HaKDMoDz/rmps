@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Me.Amon.Pwd;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd.Bean;
 using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.Wiz
 {
-    public partial class BeanCall : UserControl, IAttEdit
+    public partial class BeanCall : ACall, IAttEdit
     {
         private BeanBody _Body;
         private TableLayoutPanel _Grid;
         private RowStyle _Style;
         private Label _Label;
-        private Att _Att;
 
         #region 构造函数
         public BeanCall()

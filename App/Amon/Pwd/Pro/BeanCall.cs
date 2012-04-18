@@ -1,14 +1,13 @@
-﻿using System.Windows.Forms;
-using Me.Amon.Pwd;
+﻿using System;
+using System.Windows.Forms;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
-using System;
+using Me.Amon.Pwd.Bean;
 
 namespace Me.Amon.Pwd.Pro
 {
-    public partial class BeanCall : UserControl, IAttEdit
+    public partial class BeanCall : ACall, IAttEdit
     {
-        private Att _Att;
         private TextBox _Ctl;
         private DataModel _DataModel;
 
@@ -95,6 +94,16 @@ namespace Me.Amon.Pwd.Pro
         private void TbData_GotFocus(object sender, EventArgs e)
         {
             _Ctl = TbData;
+        }
+
+        private void BtOpen_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtView_Click(object sender, EventArgs e)
+        {
+            CmMenu.Show(BtView, 0, BtView.Height);
         }
         #endregion
     }

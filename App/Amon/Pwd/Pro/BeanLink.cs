@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Me.Amon.Pwd;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd.Bean;
 
 namespace Me.Amon.Pwd.Pro
 {
-    public partial class BeanLink : UserControl, IAttEdit
+    public partial class BeanLink : ALink, IAttEdit
     {
-        private Att _Att;
         private TextBox _Ctl;
 
         #region 构造函数
@@ -23,8 +20,8 @@ namespace Me.Amon.Pwd.Pro
         #region 接口实现
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
-            this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
-            this.TbData.GotFocus += new EventHandler(TbData_GotFocus);
+            TbName.GotFocus += new EventHandler(TbName_GotFocus);
+            TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
             BtOpen.Image = viewModel.GetImage("att-link-open");
         }
@@ -96,25 +93,12 @@ namespace Me.Amon.Pwd.Pro
 
         private void BtOpen_Click(object sender, EventArgs e)
         {
-            string link = TbData.Text.Trim();
-            if (string.IsNullOrEmpty(link))
-            {
-                return;
-            }
+            OpenLink();
+        }
 
-            if (!Regex.IsMatch(link, "^\\w+://.+", RegexOptions.IgnoreCase))
-            {
-                link = "http://" + link;
-            }
+        private void BtOpt_Click(object sender, EventArgs e)
+        {
 
-            try
-            {
-                Process.Start(link);
-            }
-            catch (Exception exp)
-            {
-                Main.ShowError(exp);
-            }
         }
         #endregion
     }

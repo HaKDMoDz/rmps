@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
-using Me.Amon.Pwd;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd.Bean;
 
 namespace Me.Amon.Pwd.Pro
 {
-    public partial class BeanLine : UserControl, IAttEdit
+    public partial class BeanLine : ALine, IAttEdit
     {
-        private Att _Att;
         private TextBox _Ctl;
 
         #region 构造函数
@@ -90,12 +89,7 @@ namespace Me.Amon.Pwd.Pro
             TbData.SelectAll();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void BtOpt_Click(object sender, EventArgs e)
         {
 
         }

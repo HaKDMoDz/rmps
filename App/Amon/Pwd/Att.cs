@@ -26,9 +26,13 @@ namespace Me.Amon.Pwd
         /// </summary>
         public int Type { get; set; }
         /// <summary>
-        /// 属性名称
+        /// 属性键值
         /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// 属性名称
+        /// </summary>
+        public string Text { get; set; }
         /// <summary>
         /// 属性内容
         /// </summary>
@@ -135,7 +139,7 @@ namespace Me.Amon.Pwd
         /// <returns></returns>
         public override string ToString()
         {
-            return Name;
+            return Text;
         }
         #endregion
 
@@ -240,7 +244,7 @@ namespace Me.Amon.Pwd
             {
                 return false;
             }
-            buffer.Append(Type).Append(':').Append(DoEscape(Name)).Append(',').Append(DoEscape(Data));
+            buffer.Append(Type).Append(':').Append(Name).Append(',').Append(DoEscape(Text)).Append(',').Append(DoEscape(Data));
 
             if (_Spec != null)
             {
@@ -270,7 +274,8 @@ namespace Me.Amon.Pwd
                 return false;
             }
             int i = 0;
-            Name = UnEscape(array[i++].Replace("\f", "\\,"));
+            Name = array.Length == 3 ? UnEscape(array[i++].Replace("\f", "\\,")) : "";
+            Text = UnEscape(array[i++].Replace("\f", "\\,"));
             Data = UnEscape(array[i++].Replace("\f", "\\,"));
 
             if (_Spec != null)

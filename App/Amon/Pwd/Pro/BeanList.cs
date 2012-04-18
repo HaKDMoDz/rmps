@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Windows.Forms;
-using Me.Amon.Pwd;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd.Bean;
 using Me.Amon.Uc;
 
 namespace Me.Amon.Pwd.Pro
 {
-    public partial class BeanList : UserControl, IAttEdit
+    public partial class BeanList : AList, IAttEdit
     {
-        private Att _Att;
         private Item _Item;
         private Control _Ctl;
 

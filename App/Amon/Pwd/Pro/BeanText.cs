@@ -1,27 +1,18 @@
 ﻿using System;
 using System.Windows.Forms;
-using Me.Amon.Pwd;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd.Bean;
 
 namespace Me.Amon.Pwd.Pro
 {
-    public partial class BeanText : UserControl, IAttEdit
+    public partial class BeanText : AText, IAttEdit
     {
-        private Att _Att;
-        private APro _APro;
         private TextBox _Ctl;
 
         #region 构造函数
         public BeanText()
         {
-            InitializeComponent();
-        }
-
-        public BeanText(APro apro)
-        {
-            _APro = apro;
-
             InitializeComponent();
         }
         #endregion

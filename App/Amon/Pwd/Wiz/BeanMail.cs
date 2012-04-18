@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
-using Me.Amon.Pwd;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd.Bean;
 using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.Wiz
 {
-    public partial class BeanMail : UserControl, IAttEdit
+    public partial class BeanMail : AMail, IAttEdit
     {
         private BeanBody _Body;
         private TableLayoutPanel _Grid;
         private RowStyle _Style;
         private Label _Label;
-        private Att _Att;
 
         #region 构造函数
         public BeanMail()
@@ -109,31 +107,10 @@ namespace Me.Amon.Pwd.Wiz
             _Body.EditCtl = this;
         }
 
-        #region 按钮事件
         private void BtSend_Click(object sender, EventArgs e)
         {
-            string mail = TbData.Text.Trim();
-            if (string.IsNullOrEmpty(mail))
-            {
-                return;
-            }
-            if (!CharUtil.IsValidateMail(mail))
-            {
-                MessageBox.Show("无效的邮件地址！");
-                TbData.Focus();
-                return;
-            }
-
-            try
-            {
-                Process.Start("mailto:" + TbData.Text);
-            }
-            catch (Exception exp)
-            {
-                Main.ShowError(exp);
-            }
+            OpenMail();
         }
-        #endregion
         #endregion
     }
 }

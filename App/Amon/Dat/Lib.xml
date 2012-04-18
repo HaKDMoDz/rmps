@@ -1,16 +1,20 @@
 ﻿<Amon>
+  <App>APwd</App>
+  <Ver>2</Ver>
   <Libs>
     <Lib>
       <Order>0</Order>
       <Id>qqqqqaacbrrtysww</Id>
-      <Name>普通账号</Name>
+      <Name />
+      <Text>普通账号</Text>
       <Memo/>
       <Items>
         <Item>
           <Order>0</Order>
           <Id>qqqqqaacbrrtyssx</Id>
           <Type>1</Type>
-          <Name>登录用户</Name>
+		  <Name />
+          <Text>登录用户</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -18,7 +22,8 @@
           <Order>1</Order>
           <Id>qqqqqaacbrrtysse</Id>
           <Type>2</Type>
-          <Name>登录密码</Name>
+		  <Name />
+          <Text>登录密码</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -26,7 +31,8 @@
           <Order>2</Order>
           <Id>qqqqqaaratyqwaev</Id>
           <Type>9</Type>
-          <Name>备注信息</Name>
+		  <Name />
+          <Text>备注信息</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -35,14 +41,16 @@
     <Lib>
       <Order>1</Order>
       <Id>qqqqqaaratyvddxc</Id>
-      <Name>网络账号</Name>
+      <Name />
+      <Text>网络账号</Text>
       <Memo/>
       <Items>
         <Item>
           <Order>0</Order>
           <Id>qqqqqaaratybzqaz</Id>
           <Type>3</Type>
-          <Name>网络地址</Name>
+		  <Name />
+          <Text>网络地址</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -50,7 +58,8 @@
           <Order>1</Order>
           <Id>qqqqqaaratybeegy</Id>
           <Type>1</Type>
-          <Name>登录用户</Name>
+		  <Name />
+          <Text>登录用户</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -58,7 +67,8 @@
           <Order>2</Order>
           <Id>qqqqqaaratybrffa</Id>
           <Type>2</Type>
-          <Name>登录密码</Name>
+		  <Name />
+          <Text>登录密码</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -66,7 +76,8 @@
           <Order>3</Order>
           <Id>qqqqqazxvdcrwqgw</Id>
           <Type>4</Type>
-          <Name>电子邮件</Name>
+		  <Name />
+          <Text>电子邮件</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -74,7 +85,8 @@
           <Order>4</Order>
           <Id>qqqqqaaratybgsbv</Id>
           <Type>1</Type>
-          <Name>安全问题1</Name>
+		  <Name />
+          <Text>安全问题1</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -82,7 +94,8 @@
           <Order>5</Order>
           <Id>qqqqqaaratybyadv</Id>
           <Type>1</Type>
-          <Name>安全答案1</Name>
+		  <Name />
+          <Text>安全答案1</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -90,7 +103,8 @@
           <Order>6</Order>
           <Id>qqqqqaaratyyaeve</Id>
           <Type>1</Type>
-          <Name>安全问题2</Name>
+		  <Name />
+          <Text>安全问题2</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -98,7 +112,8 @@
           <Order>7</Order>
           <Id>qqqqqaaratyywbra</Id>
           <Type>1</Type>
-          <Name>安全答案2</Name>
+		  <Name />
+          <Text>安全答案2</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -106,7 +121,8 @@
           <Order>8</Order>
           <Id>qqqqqaaratyyxvsa</Id>
           <Type>1</Type>
-          <Name>安全问题3</Name>
+		  <Name />
+          <Text>安全问题3</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -114,7 +130,8 @@
           <Order>9</Order>
           <Id>qqqqqaaratyydcft</Id>
           <Type>1</Type>
-          <Name>安全答案3</Name>
+		  <Name />
+          <Text>安全答案3</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -122,7 +139,8 @@
           <Order>10</Order>
           <Id>qqqqqaaratyyrwzf</Id>
           <Type>9</Type>
-          <Name>备注信息</Name>
+		  <Name />
+          <Text>备注信息</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -131,14 +149,16 @@
     <Lib>
       <Order>2</Order>
       <Id>qqqqqaacbrrtyswe</Id>
-      <Name>游戏娱乐</Name>
+      <Name />
+      <Text>游戏娱乐</Text>
       <Memo/>
       <Items>
         <Item>
           <Order>0</Order>
           <Id>qqqqqazqqqyvawzd</Id>
           <Type>3</Type>
-          <Name>官方网站</Name>
+		  <Name />
+          <Text>官方网站</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -146,7 +166,8 @@
           <Order>1</Order>
           <Id>qqqqqazqqqyfrrga</Id>
           <Type>3</Type>
-          <Name>登录地址</Name>
+		  <Name />
+          <Text>登录地址</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -154,7 +175,8 @@
           <Order>2</Order>
           <Id>qqqqqazqqqyrrcaq</Id>
           <Type>1</Type>
-          <Name>登录用户</Name>
+		  <Name />
+          <Text>登录用户</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -162,7 +184,8 @@
           <Order>3</Order>
           <Id>qqqqqazqqqyrtaez</Id>
           <Type>2</Type>
-          <Name>登录密码</Name>
+		  <Name />
+          <Text>登录密码</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -170,7 +193,8 @@
           <Order>4</Order>
           <Id>qqqqqazqqqyvsfzx</Id>
           <Type>3</Type>
-          <Name>游戏论坛</Name>
+		  <Name />
+          <Text>游戏论坛</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -178,7 +202,8 @@
           <Order>5</Order>
           <Id>qqqqqazqqqytvrad</Id>
           <Type>1</Type>
-          <Name>安全问题1</Name>
+		  <Name />
+          <Text>安全问题1</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -186,7 +211,8 @@
           <Order>6</Order>
           <Id>qqqqqazqqqytbdyd</Id>
           <Type>1</Type>
-          <Name>安全答案1</Name>
+		  <Name />
+          <Text>安全答案1</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -194,7 +220,8 @@
           <Order>7</Order>
           <Id>qqqqqazqqqygqwaq</Id>
           <Type>1</Type>
-          <Name>安全问题2</Name>
+		  <Name />
+          <Text>安全问题2</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -202,7 +229,8 @@
           <Order>8</Order>
           <Id>qqqqqazqqqygagvt</Id>
           <Type>1</Type>
-          <Name>安全答案2</Name>
+		  <Name />
+          <Text>安全答案2</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -210,7 +238,8 @@
           <Order>9</Order>
           <Id>qqqqqazqqqygwwzr</Id>
           <Type>1</Type>
-          <Name>安全问题3</Name>
+		  <Name />
+          <Text>安全问题3</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -218,7 +247,8 @@
           <Order>10</Order>
           <Id>qqqqqazqqqygscwd</Id>
           <Type>1</Type>
-          <Name>安全答案3</Name>
+		  <Name />
+          <Text>安全答案3</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -226,7 +256,8 @@
           <Order>11</Order>
           <Id>qqqqqazqqqyybvws</Id>
           <Type>3</Type>
-          <Name>在线客服</Name>
+		  <Name />
+          <Text>在线客服</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -234,7 +265,8 @@
           <Order>12</Order>
           <Id>qqqqqazqqqyfwdrt</Id>
           <Type>4</Type>
-          <Name>客服邮件</Name>
+		  <Name />
+          <Text>客服邮件</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -242,7 +274,8 @@
           <Order>13</Order>
           <Id>qqqqqazqqqyfavzv</Id>
           <Type>7</Type>
-          <Name>客服电话</Name>
+		  <Name />
+          <Text>客服电话</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -250,7 +283,8 @@
           <Order>14</Order>
           <Id>qqqqqazqqqyfxwty</Id>
           <Type>7</Type>
-          <Name>客服传真</Name>
+		  <Name />
+          <Text>客服传真</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -258,7 +292,8 @@
           <Order>15</Order>
           <Id>qqqqqazqqqybqfxb</Id>
           <Type>9</Type>
-          <Name>备注信息</Name>
+		  <Name />
+          <Text>备注信息</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -267,14 +302,16 @@
     <Lib>
       <Order>3</Order>
       <Id>qqqqqaacbrrtyswx</Id>
-      <Name>电子邮件</Name>
+      <Name />
+      <Text>电子邮件</Text>
       <Memo/>
       <Items>
         <Item>
           <Order>0</Order>
           <Id>qqqqqaacbrrtyswf</Id>
           <Type>3</Type>
-          <Name>登录地址</Name>
+		  <Name />
+          <Text>登录地址</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -282,7 +319,8 @@
           <Order>1</Order>
           <Id>qqqqqaacbrrtyswv</Id>
           <Type>4</Type>
-          <Name>邮件地址</Name>
+		  <Name />
+          <Text>邮件地址</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -290,7 +328,8 @@
           <Order>2</Order>
           <Id>qqqqqaacbrrtyswr</Id>
           <Type>1</Type>
-          <Name>登录用户</Name>
+		  <Name />
+          <Text>登录用户</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -298,7 +337,8 @@
           <Order>3</Order>
           <Id>qqqqqaacbrrtyswt</Id>
           <Type>2</Type>
-          <Name>邮箱密码</Name>
+		  <Name />
+          <Text>邮箱密码</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -306,7 +346,8 @@
           <Order>4</Order>
           <Id>qqqqqazqqqysdxgv</Id>
           <Type>4</Type>
-          <Name>保密邮箱</Name>
+		  <Name />
+          <Text>保密邮箱</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -314,7 +355,8 @@
           <Order>5</Order>
           <Id>qqqqqaacbrrtyswy</Id>
           <Type>1</Type>
-          <Name>安全问题1</Name>
+		  <Name />
+          <Text>安全问题1</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -322,7 +364,8 @@
           <Order>6</Order>
           <Id>qqqqqaacbrrtyssq</Id>
           <Type>1</Type>
-          <Name>安全答案1</Name>
+		  <Name />
+          <Text>安全答案1</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -330,7 +373,8 @@
           <Order>7</Order>
           <Id>qqqqqaacbrrtyssa</Id>
           <Type>1</Type>
-          <Name>安全问题2</Name>
+		  <Name />
+          <Text>安全问题2</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -338,7 +382,8 @@
           <Order>8</Order>
           <Id>qqqqqaacbrrtyssz</Id>
           <Type>1</Type>
-          <Name>安全答案2</Name>
+		  <Name />
+          <Text>安全答案2</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -346,7 +391,8 @@
           <Order>9</Order>
           <Id>qqqqqaacbrrtyssw</Id>
           <Type>1</Type>
-          <Name>安全问题3</Name>
+		  <Name />
+          <Text>安全问题3</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -354,7 +400,8 @@
           <Order>10</Order>
           <Id>qqqqqaacbrrtysss</Id>
           <Type>1</Type>
-          <Name>安全答案3</Name>
+		  <Name />
+          <Text>安全答案3</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -362,7 +409,8 @@
           <Order>11</Order>
           <Id>qqqqqaaratydfsar</Id>
           <Type>9</Type>
-          <Name>备注信息</Name>
+		  <Name />
+          <Text>备注信息</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -371,14 +419,16 @@
     <Lib>
       <Order>4</Order>
       <Id>qqqqqaacbrrtysws</Id>
-      <Name>即时通讯</Name>
+      <Name />
+      <Text>即时通讯</Text>
       <Memo/>
       <Items>
         <Item>
           <Order>0</Order>
           <Id>qqqqqazxryyzcyrf</Id>
           <Type>3</Type>
-          <Name>网站首页</Name>
+		  <Name />
+          <Text>网站首页</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -386,7 +436,8 @@
           <Order>1</Order>
           <Id>qqqqqazxryyzwyqr</Id>
           <Type>1</Type>
-          <Name>登录用户</Name>
+		  <Name />
+          <Text>登录用户</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -394,7 +445,8 @@
           <Order>2</Order>
           <Id>qqqqqazqqaqxvcey</Id>
           <Type>2</Type>
-          <Name>登录密码</Name>
+		  <Name />
+          <Text>登录密码</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -402,7 +454,8 @@
           <Order>3</Order>
           <Id>qqqqqazqqaqxsqvb</Id>
           <Type>3</Type>
-          <Name>软件首页</Name>
+		  <Name />
+          <Text>软件首页</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -410,7 +463,8 @@
           <Order>4</Order>
           <Id>qqqqqazqqaqcbebw</Id>
           <Type>3</Type>
-          <Name>在线登录</Name>
+		  <Name />
+          <Text>在线登录</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -418,7 +472,8 @@
           <Order>5</Order>
           <Id>qqqqqazxryyzvesg</Id>
           <Type>4</Type>
-          <Name>电子邮件</Name>
+		  <Name />
+          <Text>电子邮件</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -426,7 +481,8 @@
           <Order>6</Order>
           <Id>qqqqqazqqaqxbzqq</Id>
           <Type>1</Type>
-          <Name>安全问题1</Name>
+		  <Name />
+          <Text>安全问题1</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -434,7 +490,8 @@
           <Order>7</Order>
           <Id>qqqqqazqqaqxydab</Id>
           <Type>1</Type>
-          <Name>安全答案1</Name>
+		  <Name />
+          <Text>安全答案1</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -442,7 +499,8 @@
           <Order>8</Order>
           <Id>qqqqqazqqaqeqtrf</Id>
           <Type>1</Type>
-          <Name>安全问题2</Name>
+		  <Name />
+          <Text>安全问题2</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -450,7 +508,8 @@
           <Order>9</Order>
           <Id>qqqqqazqqaqeabct</Id>
           <Type>1</Type>
-          <Name>安全答案2</Name>
+		  <Name />
+          <Text>安全答案2</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -458,7 +517,8 @@
           <Order>10</Order>
           <Id>qqqqqazqqaqewxyt</Id>
           <Type>1</Type>
-          <Name>安全问题3</Name>
+		  <Name />
+          <Text>安全问题3</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -466,7 +526,8 @@
           <Order>11</Order>
           <Id>qqqqqazqqaqesfzy</Id>
           <Type>1</Type>
-          <Name>安全答案3</Name>
+		  <Name />
+          <Text>安全答案3</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -474,7 +535,8 @@
           <Order>12</Order>
           <Id>qqqqqazqqaqczczd</Id>
           <Type>9</Type>
-          <Name>备注信息</Name>
+		  <Name />
+          <Text>备注信息</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -483,14 +545,16 @@
     <Lib>
       <Order>5</Order>
       <Id>qqqqqaacbrrtyswd</Id>
-      <Name>软件注册</Name>
+      <Name />
+      <Text>软件注册</Text>
       <Memo/>
       <Items>
         <Item>
           <Order>0</Order>
           <Id>qqqqqaacbrrtyssg</Id>
           <Type>1</Type>
-          <Name>软件名称</Name>
+		  <Name />
+          <Text>软件名称</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -498,7 +562,8 @@
           <Order>1</Order>
           <Id>qqqqqaacbrrtyssb</Id>
           <Type>1</Type>
-          <Name>软件版本</Name>
+		  <Name />
+          <Text>软件版本</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -506,7 +571,8 @@
           <Order>2</Order>
           <Id>qqqqqaacbrrtysxq</Id>
           <Type>1</Type>
-          <Name>注册用户</Name>
+		  <Name />
+          <Text>注册用户</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -514,7 +580,8 @@
           <Order>3</Order>
           <Id>qqqqqaacbrrtysxa</Id>
           <Type>1</Type>
-          <Name>注册号码</Name>
+		  <Name />
+          <Text>注册号码</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -522,7 +589,8 @@
           <Order>4</Order>
           <Id>qqqqqaacbrrtyssy</Id>
           <Type>3</Type>
-          <Name>软件首页</Name>
+		  <Name />
+          <Text>软件首页</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -530,7 +598,8 @@
           <Order>5</Order>
           <Id>qqqqqaacbrrtysxz</Id>
           <Type>5</Type>
-          <Name>注册日期</Name>
+		  <Name />
+          <Text>注册日期</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -538,7 +607,8 @@
           <Order>6</Order>
           <Id>qqqqqaacbrrtysxw</Id>
           <Type>5</Type>
-          <Name>到期日期</Name>
+		  <Name />
+          <Text>到期日期</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -546,7 +616,8 @@
           <Order>7</Order>
           <Id>qqqqqaavwssegqvr</Id>
           <Type>9</Type>
-          <Name>备注信息</Name>
+		  <Name />
+          <Text>备注信息</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -555,14 +626,16 @@
     <Lib>
       <Order>6</Order>
       <Id>qqqqqaacbrrtyswc</Id>
-      <Name>银行账号</Name>
+      <Name />
+      <Text>银行账号</Text>
       <Memo/>
       <Items>
         <Item>
           <Order>0</Order>
           <Id>qqqqqaacbrrtyssd</Id>
           <Type>1</Type>
-          <Name>开户银行</Name>
+		  <Name />
+          <Text>开户银行</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -570,7 +643,8 @@
           <Order>1</Order>
           <Id>qqqqqaacbrrtyssc</Id>
           <Type>1</Type>
-          <Name>银行账户</Name>
+		  <Name />
+          <Text>银行账户</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -578,7 +652,8 @@
           <Order>2</Order>
           <Id>qqqqqaacbrrtyssr</Id>
           <Type>2</Type>
-          <Name>账户密码</Name>
+		  <Name />
+          <Text>账户密码</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -586,7 +661,8 @@
           <Order>3</Order>
           <Id>qqqqqaavaqdyyscz</Id>
           <Type>1</Type>
-          <Name>开户姓名</Name>
+		  <Name />
+          <Text>开户姓名</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -594,7 +670,8 @@
           <Order>4</Order>
           <Id>qqqqqaacbrrtyssf</Id>
           <Type>1</Type>
-          <Name>网上银行</Name>
+		  <Name />
+          <Text>网上银行</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -602,7 +679,8 @@
           <Order>5</Order>
           <Id>qqqqqaaratywrrft</Id>
           <Type>1</Type>
-          <Name>网银账户</Name>
+		  <Name />
+          <Text>网银账户</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -610,7 +688,8 @@
           <Order>6</Order>
           <Id>qqqqqaacbrrtyssv</Id>
           <Type>2</Type>
-          <Name>查询密码</Name>
+		  <Name />
+          <Text>查询密码</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -618,7 +697,8 @@
           <Order>7</Order>
           <Id>qqqqqaacbrrtysst</Id>
           <Type>2</Type>
-          <Name>支付密码</Name>
+		  <Name />
+          <Text>支付密码</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -626,7 +706,8 @@
           <Order>8</Order>
           <Id>qqqqqaaratyxcfry</Id>
           <Type>9</Type>
-          <Name>备注信息</Name>
+		  <Name />
+          <Text>备注信息</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -635,14 +716,16 @@
     <Lib>
       <Order>7</Order>
       <Id>qqqqqaavaqdfscdv</Id>
-      <Name>通讯名录</Name>
+      <Name />
+      <Text>通讯名录</Text>
       <Memo/>
       <Items>
         <Item>
           <Order>0</Order>
           <Id>qqqqqaavaqdfdvdz</Id>
           <Type>1</Type>
-          <Name>名</Name>
+		  <Name />
+          <Text>名</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -650,7 +733,8 @@
           <Order>1</Order>
           <Id>qqqqqaavaqdffzew</Id>
           <Type>1</Type>
-          <Name>姓</Name>
+		  <Name />
+          <Text>姓</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -658,7 +742,8 @@
           <Order>2</Order>
           <Id>qqqqqazrdzfcwvxg</Id>
           <Type>1</Type>
-          <Name>昵称</Name>
+		  <Name />
+          <Text>昵称</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -666,7 +751,8 @@
           <Order>3</Order>
           <Id>qqqqqaavaqdgrssv</Id>
           <Type>5</Type>
-          <Name>生日</Name>
+		  <Name />
+          <Text>生日</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -674,7 +760,8 @@
           <Order>8</Order>
           <Id>qqqqqaavaqdtvxex</Id>
           <Type>1</Type>
-          <Name>MSN</Name>
+		  <Name />
+          <Text>MSN</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -682,7 +769,8 @@
           <Order>9</Order>
           <Id>qqqqqaavaqdttgxz</Id>
           <Type>1</Type>
-          <Name>Q Q</Name>
+		  <Name />
+          <Text>Q Q</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -690,7 +778,8 @@
           <Order>10</Order>
           <Id>qqqqqaavaqdtfsxg</Id>
           <Type>1</Type>
-          <Name>ICQ</Name>
+		  <Name />
+          <Text>ICQ</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -698,7 +787,8 @@
           <Order>11</Order>
           <Id>qqqqqaavaqdvrecd</Id>
           <Type>7</Type>
-          <Name>手机</Name>
+		  <Name />
+          <Text>手机</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -706,7 +796,8 @@
           <Order>12</Order>
           <Id>qqqqqaavaqdtcvce</Id>
           <Type>3</Type>
-          <Name>个人主页</Name>
+		  <Name />
+          <Text>个人主页</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -714,7 +805,8 @@
           <Order>13</Order>
           <Id>qqqqqaavaqdtqtss</Id>
           <Type>7</Type>
-          <Name>家庭电话</Name>
+		  <Name />
+          <Text>家庭电话</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -722,7 +814,8 @@
           <Order>14</Order>
           <Id>qqqqqaavaqdtwtyc</Id>
           <Type>4</Type>
-          <Name>电子邮件</Name>
+		  <Name />
+          <Text>电子邮件</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -730,7 +823,8 @@
           <Order>15</Order>
           <Id>qqqqqaavaqdgzvcy</Id>
           <Type>1</Type>
-          <Name>通讯地址</Name>
+		  <Name />
+          <Text>通讯地址</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -738,7 +832,8 @@
           <Order>16</Order>
           <Id>qqqqqaavaqdgewsc</Id>
           <Type>1</Type>
-          <Name>邮政编码</Name>
+		  <Name />
+          <Text>邮政编码</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -746,7 +841,8 @@
           <Order>17</Order>
           <Id>qqqqqaavaqdgtzeq</Id>
           <Type>1</Type>
-          <Name>公司</Name>
+		  <Name />
+          <Text>公司</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -754,7 +850,8 @@
           <Order>19</Order>
           <Id>qqqqqaavaqdgbaty</Id>
           <Type>1</Type>
-          <Name>部门</Name>
+		  <Name />
+          <Text>部门</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -762,7 +859,8 @@
           <Order>20</Order>
           <Id>qqqqqazrdzvevvyw</Id>
           <Type>1</Type>
-          <Name>职位</Name>
+		  <Name />
+          <Text>职位</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -770,7 +868,8 @@
           <Order>21</Order>
           <Id>qqqqqaavaqdbsxev</Id>
           <Type>3</Type>
-          <Name>公司网站</Name>
+		  <Name />
+          <Text>公司网站</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -778,7 +877,8 @@
           <Order>22</Order>
           <Id>qqqqqaavaqdgyrxb</Id>
           <Type>7</Type>
-          <Name>商务电话</Name>
+		  <Name />
+          <Text>商务电话</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -786,7 +886,8 @@
           <Order>23</Order>
           <Id>qqqqqaavaqdbqbeg</Id>
           <Type>7</Type>
-          <Name>商务传真</Name>
+		  <Name />
+          <Text>商务传真</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -794,7 +895,8 @@
           <Order>24</Order>
           <Id>qqqqqaavaqdbzcbf</Id>
           <Type>4</Type>
-          <Name>工作邮件</Name>
+		  <Name />
+          <Text>工作邮件</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -802,7 +904,8 @@
           <Order>25</Order>
           <Id>qqqqqaavaqdbewsw</Id>
           <Type>1</Type>
-          <Name>工作地址</Name>
+		  <Name />
+          <Text>工作地址</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -810,7 +913,8 @@
           <Order>26</Order>
           <Id>qqqqqaavzyctcyzr</Id>
           <Type>9</Type>
-          <Name>备注信息</Name>
+		  <Name />
+          <Text>备注信息</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -819,14 +923,16 @@
     <Lib>
       <Order>8</Order>
       <Id>qqqqqaavaqdyfbzw</Id>
-      <Name>记事便签</Name>
+      <Name />
+      <Text>记事便签</Text>
       <Memo/>
       <Items>
         <Item>
           <Order>0</Order>
           <Id>qqqqqaavwsxaxzev</Id>
           <Type>9</Type>
-          <Name>记事标题</Name>
+		  <Name />
+          <Text>记事标题</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -835,14 +941,16 @@
     <Lib>
       <Order>9</Order>
       <Id>qqqqqazdqdfztrgq</Id>
-      <Name>FTP 账号</Name>
+      <Name />
+      <Text>FTP 账号</Text>
       <Memo/>
       <Items>
         <Item>
           <Order>0</Order>
           <Id>qqqqqazdqdfevadz</Id>
           <Type>1</Type>
-          <Name>登录用户</Name>
+		  <Name />
+          <Text>登录用户</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -850,7 +958,8 @@
           <Order>1</Order>
           <Id>qqqqqazdqdfxgxcr</Id>
           <Type>2</Type>
-          <Name>登录口令</Name>
+		  <Name />
+          <Text>登录口令</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -858,7 +967,8 @@
           <Order>3</Order>
           <Id>qqqqqazdqdfsqcvc</Id>
           <Type>1</Type>
-          <Name>主机地址</Name>
+		  <Name />
+          <Text>主机地址</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -866,7 +976,8 @@
           <Order>4</Order>
           <Id>qqqqqazdqdfswcqe</Id>
           <Type>1</Type>
-          <Name>主机端口</Name>
+		  <Name />
+          <Text>主机端口</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -874,7 +985,8 @@
           <Order>5</Order>
           <Id>qqqqqazdqdfdydxy</Id>
           <Type>1</Type>
-          <Name>远程目录</Name>
+		  <Name />
+          <Text>远程目录</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -882,7 +994,8 @@
           <Order>6</Order>
           <Id>qqqqqazdqdfdcved</Id>
           <Type>1</Type>
-          <Name>登录协议</Name>
+		  <Name />
+          <Text>登录协议</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -890,7 +1003,8 @@
           <Order>7</Order>
           <Id>qqqqqazdqdfxzxss</Id>
           <Type>1</Type>
-          <Name>主机类型</Name>
+		  <Name />
+          <Text>主机类型</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -898,7 +1012,8 @@
           <Order>8</Order>
           <Id>qqqqqazdqdfxraqb</Id>
           <Type>1</Type>
-          <Name>登录类型</Name>
+		  <Name />
+          <Text>登录类型</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -906,7 +1021,8 @@
           <Order>9</Order>
           <Id>qqqqqazcfwqxzdvd</Id>
           <Type>9</Type>
-          <Name>备注信息</Name>
+		  <Name />
+          <Text>备注信息</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -915,14 +1031,16 @@
     <Lib>
       <Order>10</Order>
       <Id>qqqqqazdvqbargat</Id>
-      <Name>文件加密</Name>
+      <Name />
+      <Text>文件加密</Text>
       <Memo/>
       <Items>
         <Item>
           <Order>0</Order>
           <Id>qqqqqazdvqbzebzd</Id>
           <Type>10</Type>
-          <Name>来源文件</Name>
+		  <Name />
+          <Text>来源文件</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -930,7 +1048,8 @@
           <Order>1</Order>
           <Id>qqqqqazdvqbzftcc</Id>
           <Type>9</Type>
-          <Name>备注信息</Name>
+		  <Name />
+          <Text>备注信息</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -939,14 +1058,16 @@
     <Lib>
       <Order>11</Order>
       <Id>qqqqqazttgrvcztr</Id>
-      <Name>数值类型</Name>
+      <Name />
+      <Text>数值类型</Text>
       <Memo/>
       <Items>
         <Item>
           <Order>0</Order>
           <Id>qqqqqazttgrvvttc</Id>
           <Type>6</Type>
-          <Name>数值</Name>
+		  <Name />
+          <Text>数值</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -954,23 +1075,23 @@
           <Order>1</Order>
           <Id>qqqqqazttgrvyfeq</Id>
           <Type>9</Type>
-          <Name>备注信息</Name>
+		  <Name />
+          <Text>备注信息</Text>
           <Data/>
           <Memo/>
         </Item>
       </Items>
     </Lib>
-    <Lib>
       <Order>12</Order>
       <Id>qqqqqaztdyxwztgx</Id>
-      <Name>Address Book</Name>
+      <Text>Address Book</Text>
       <Memo/>
       <Items>
         <Item>
           <Order>0</Order>
           <Id>qqqqqaztdyxwetyd</Id>
           <Type>1</Type>
-          <Name>First Name</Name>
+          <Text>First Name</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -978,7 +1099,7 @@
           <Order>1</Order>
           <Id>qqqqqaztdyxwfvdc</Id>
           <Type>1</Type>
-          <Name>Middle Name</Name>
+          <Text>Middle Name</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -986,7 +1107,7 @@
           <Order>2</Order>
           <Id>qqqqqaztdyxwgwyv</Id>
           <Type>1</Type>
-          <Name>Last Name</Name>
+          <Text>Last Name</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -994,7 +1115,7 @@
           <Order>3</Order>
           <Id>qqqqqaztdyxsazxt</Id>
           <Type>7</Type>
-          <Name>Phone1</Name>
+          <Text>Phone1</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -1002,7 +1123,7 @@
           <Order>4</Order>
           <Id>qqqqqaztdyxszvrx</Id>
           <Type>7</Type>
-          <Name>Phone2</Name>
+          <Text>Phone2</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -1010,7 +1131,7 @@
           <Order>5</Order>
           <Id>qqqqqaztdyxswbbs</Id>
           <Type>7</Type>
-          <Name>Fax</Name>
+          <Text>Fax</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -1018,7 +1139,7 @@
           <Order>6</Order>
           <Id>qqqqqaztdyxsxcvr</Id>
           <Type>1</Type>
-          <Name>Mobile1</Name>
+          <Text>Mobile1</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -1026,7 +1147,7 @@
           <Order>7</Order>
           <Id>qqqqqaztdyxseyww</Id>
           <Type>1</Type>
-          <Name>Mobile2</Name>
+          <Text>Mobile2</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -1034,7 +1155,7 @@
           <Order>8</Order>
           <Id>qqqqqaztdyxsrzye</Id>
           <Type>3</Type>
-          <Name>Web</Name>
+          <Text>Web</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -1042,7 +1163,7 @@
           <Order>9</Order>
           <Id>qqqqqaztdyxsvvtd</Id>
           <Type>4</Type>
-          <Name>E-mail1</Name>
+          <Text>E-mail1</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -1050,7 +1171,7 @@
           <Order>10</Order>
           <Id>qqqqqaztdyxsgxwg</Id>
           <Type>4</Type>
-          <Name>E-mail2</Name>
+          <Text>E-mail2</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -1058,7 +1179,7 @@
           <Order>11</Order>
           <Id>qqqqqaztdyxxzayq</Id>
           <Type>1</Type>
-          <Name>Country</Name>
+          <Text>Country</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -1066,7 +1187,7 @@
           <Order>12</Order>
           <Id>qqqqqaztdyxxwsse</Id>
           <Type>1</Type>
-          <Name>City</Name>
+          <Text>City</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -1074,7 +1195,7 @@
           <Order>13</Order>
           <Id>qqqqqaztdyxxsfax</Id>
           <Type>1</Type>
-          <Name>Address</Name>
+          <Text>Address</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -1082,7 +1203,7 @@
           <Order>14</Order>
           <Id>qqqqqaztdyxxewdg</Id>
           <Type>1</Type>
-          <Name>Company Name</Name>
+          <Text>Company Name</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -1090,7 +1211,7 @@
           <Order>15</Order>
           <Id>qqqqqaztdyxxcdwy</Id>
           <Type>1</Type>
-          <Name>Account Number</Name>
+          <Text>Account Number</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -1098,7 +1219,7 @@
           <Order>16</Order>
           <Id>qqqqqaztdyxxfvbv</Id>
           <Type>1</Type>
-          <Name>Tax Number</Name>
+          <Text>Tax Number</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -1106,7 +1227,7 @@
           <Order>17</Order>
           <Id>qqqqqaztdyxxtcwq</Id>
           <Type>1</Type>
-          <Name>Register Number</Name>
+          <Text>Register Number</Text>
           <Data/>
           <Memo/>
         </Item>

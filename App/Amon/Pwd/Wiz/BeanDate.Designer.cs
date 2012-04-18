@@ -28,19 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.DtData = new System.Windows.Forms.DateTimePicker();
             this.BtNow = new System.Windows.Forms.Button();
             this.BtOpt = new System.Windows.Forms.Button();
-            this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MiDateDef = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiDateSep0 = new System.Windows.Forms.ToolStripSeparator();
-            this.MuDate = new System.Windows.Forms.ToolStripMenuItem();
-            this.MuTime = new System.Windows.Forms.ToolStripMenuItem();
-            this.MuDateTime = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiDateSep1 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiDateTimeDiy = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // DtData
@@ -79,61 +69,6 @@
             this.BtOpt.UseVisualStyleBackColor = true;
             this.BtOpt.Click += new System.EventHandler(this.BtOpt_Click);
             // 
-            // CmMenu
-            // 
-            this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MiDateDef,
-            this.MiDateSep0,
-            this.MuDate,
-            this.MuTime,
-            this.MuDateTime,
-            this.MiDateSep1,
-            this.MiDateTimeDiy});
-            this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(149, 126);
-            // 
-            // MiDateDef
-            // 
-            this.MiDateDef.Name = "MiDateDef";
-            this.MiDateDef.Size = new System.Drawing.Size(148, 22);
-            this.MiDateDef.Text = "默认格式";
-            this.MiDateDef.Click += new System.EventHandler(this.MiDateDef_Click);
-            // 
-            // MiDateSep0
-            // 
-            this.MiDateSep0.Name = "MiDateSep0";
-            this.MiDateSep0.Size = new System.Drawing.Size(145, 6);
-            // 
-            // MuDate
-            // 
-            this.MuDate.Name = "MuDate";
-            this.MuDate.Size = new System.Drawing.Size(148, 22);
-            this.MuDate.Text = "日期格式";
-            // 
-            // MuTime
-            // 
-            this.MuTime.Name = "MuTime";
-            this.MuTime.Size = new System.Drawing.Size(148, 22);
-            this.MuTime.Text = "时间格式";
-            // 
-            // MuDateTime
-            // 
-            this.MuDateTime.Name = "MuDateTime";
-            this.MuDateTime.Size = new System.Drawing.Size(148, 22);
-            this.MuDateTime.Text = "日期时间格式";
-            // 
-            // MiDateSep1
-            // 
-            this.MiDateSep1.Name = "MiDateSep1";
-            this.MiDateSep1.Size = new System.Drawing.Size(145, 6);
-            // 
-            // MiDateTimeDiy
-            // 
-            this.MiDateTimeDiy.Name = "MiDateTimeDiy";
-            this.MiDateTimeDiy.Size = new System.Drawing.Size(148, 22);
-            this.MiDateTimeDiy.Text = "其它…(&O)";
-            this.MiDateTimeDiy.Click += new System.EventHandler(this.MiDateDiy_Click);
-            // 
             // BeanDate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -143,7 +78,6 @@
             this.Controls.Add(this.DtData);
             this.Name = "BeanDate";
             this.Size = new System.Drawing.Size(350, 24);
-            this.CmMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -153,13 +87,5 @@
         private System.Windows.Forms.DateTimePicker DtData;
         private System.Windows.Forms.Button BtNow;
         private System.Windows.Forms.Button BtOpt;
-        private System.Windows.Forms.ContextMenuStrip CmMenu;
-        private System.Windows.Forms.ToolStripMenuItem MuDate;
-        private System.Windows.Forms.ToolStripMenuItem MuTime;
-        private System.Windows.Forms.ToolStripMenuItem MuDateTime;
-        private System.Windows.Forms.ToolStripMenuItem MiDateDef;
-        private System.Windows.Forms.ToolStripMenuItem MiDateTimeDiy;
-        private System.Windows.Forms.ToolStripSeparator MiDateSep0;
-        private System.Windows.Forms.ToolStripSeparator MiDateSep1;
     }
 }

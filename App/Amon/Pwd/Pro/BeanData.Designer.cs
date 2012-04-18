@@ -28,15 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.BtOpt = new System.Windows.Forms.Button();
             this.TbData = new System.Windows.Forms.TextBox();
             this.LbData = new System.Windows.Forms.Label();
             this.TbName = new System.Windows.Forms.TextBox();
             this.LbName = new System.Windows.Forms.Label();
-            this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.可选输入OToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtOpt
@@ -82,19 +78,6 @@
             this.LbName.TabIndex = 0;
             this.LbName.Text = "名称(&N)";
             // 
-            // CmMenu
-            // 
-            this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.可选输入OToolStripMenuItem});
-            this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(153, 48);
-            // 
-            // 可选输入OToolStripMenuItem
-            // 
-            this.可选输入OToolStripMenuItem.Name = "可选输入OToolStripMenuItem";
-            this.可选输入OToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.可选输入OToolStripMenuItem.Text = "可选输入(&O)";
-            // 
             // BeanData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -106,7 +89,6 @@
             this.Controls.Add(this.LbName);
             this.Name = "BeanData";
             this.Size = new System.Drawing.Size(366, 81);
-            this.CmMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -119,7 +101,5 @@
         private System.Windows.Forms.Label LbData;
         private System.Windows.Forms.TextBox TbName;
         private System.Windows.Forms.Label LbName;
-        private System.Windows.Forms.ContextMenuStrip CmMenu;
-        private System.Windows.Forms.ToolStripMenuItem 可选输入OToolStripMenuItem;
     }
 }

@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows.Forms;
-using Me.Amon.Pwd;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd.Bean;
 using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.Pro
 {
-    public partial class BeanMail : UserControl, IAttEdit
+    public partial class BeanMail : AMail, IAttEdit
     {
-        private Att _Att;
         private TextBox _Ctl;
 
         #region 构造函数
@@ -23,8 +21,8 @@ namespace Me.Amon.Pwd.Pro
         #region 接口实现
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
-            this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
-            this.TbData.GotFocus += new EventHandler(TbData_GotFocus);
+            TbName.GotFocus += new EventHandler(TbName_GotFocus);
+            TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
             BtSend.Image = viewModel.GetImage("att-mail-send");
         }
@@ -104,26 +102,7 @@ namespace Me.Amon.Pwd.Pro
 
         private void BtSend_Click(object sender, EventArgs e)
         {
-            string mail = TbData.Text.Trim();
-            if (string.IsNullOrEmpty(mail))
-            {
-                return;
-            }
-            if (!CharUtil.IsValidateMail(mail))
-            {
-                MessageBox.Show("无效的邮件地址！");
-                TbData.Focus();
-                return;
-            }
-
-            try
-            {
-                Process.Start("mailto:" + mail);
-            }
-            catch (Exception exp)
-            {
-                Main.ShowError(exp);
-            }
+            OpenMail();
         }
         #endregion
     }

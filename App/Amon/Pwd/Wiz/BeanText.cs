@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Me.Amon.Pwd;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd.Bean;
 
 namespace Me.Amon.Pwd.Wiz
 {
-    public partial class BeanText : UserControl, IAttEdit
+    public partial class BeanText : AText, IAttEdit
     {
         private BeanBody _Body;
         private TableLayoutPanel _Grid;
         private RowStyle _Style;
         private Label _Label;
-        private Att _Att;
 
         #region 构造函数
         public BeanText()
@@ -92,12 +91,10 @@ namespace Me.Amon.Pwd.Wiz
         #endregion
 
         #region 事件处理
-        #region 按钮事件
         private void TbData_GotFocus(object sender, EventArgs e)
         {
             _Body.EditCtl = this;
         }
-        #endregion
         #endregion
     }
 }

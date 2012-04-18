@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
-using Me.Amon.Pwd;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd.Bean;
 
 namespace Me.Amon.Pwd.Pro
 {
-    public partial class BeanData : UserControl, IAttEdit
+    public partial class BeanData : AData, IAttEdit
     {
-        private Att _Att;
         private TextBox _Ctl;
 
         #region 构造函数
@@ -94,7 +93,7 @@ namespace Me.Amon.Pwd.Pro
 
         private void BtOpt_Click(object sender, EventArgs e)
         {
-
+            CmMenu.Show(BtOpt, 0, BtOpt.Height);
         }
         #endregion
     }

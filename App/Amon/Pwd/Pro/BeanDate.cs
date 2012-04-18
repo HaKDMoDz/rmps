@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
-using Me.Amon.Pwd;
-using Me.Amon.Pwd._Att;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd.Bean;
 using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.Pro
 {
-    public partial class BeanDate : UserControl, IAttEdit
+    public partial class BeanDate : ADate, IAttEdit
     {
         private Att _Att;
         private TextBox _Ctl;
@@ -97,7 +96,6 @@ namespace Me.Amon.Pwd.Pro
         {
         }
 
-        #region 按钮事件
         private void BtNow_Click(object sender, EventArgs e)
         {
             DtData.Value = DateTime.Now;
@@ -105,38 +103,8 @@ namespace Me.Amon.Pwd.Pro
 
         private void BtOpt_Click(object sender, EventArgs e)
         {
-
+            CmMenu.Show(BtOpt, 0, BtOpt.Height);
         }
-        #endregion
-
-        #region 菜单事件
-        private void MiDateDef_Click(object sender, EventArgs e)
-        {
-            _Att.SetSpec(DateAtt.SPEC_FORMAT, DataAtt.SPEC_VALUE_NONE);
-            DtData.Format = DateTimePickerFormat.Long;
-        }
-
-        private void MiDatePre_Click(object sender, EventArgs e)
-        {
-            ToolStripMenuItem item = sender as ToolStripMenuItem;
-            if (item == null)
-            {
-                return;
-            }
-            string cmd = item.Tag as string;
-            if (string.IsNullOrEmpty(cmd))
-            {
-                return;
-            }
-            _Att.SetSpec(DateAtt.SPEC_FORMAT, cmd);
-            DtData.Format = DateTimePickerFormat.Custom;
-            DtData.CustomFormat = cmd;
-        }
-
-        private void MiDateDiy_Click(object sender, EventArgs e)
-        {
-        }
-        #endregion
         #endregion
     }
 }

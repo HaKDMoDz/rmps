@@ -28,16 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.TbData = new System.Windows.Forms.TextBox();
             this.BtOpt = new System.Windows.Forms.Button();
             this.BtGen = new System.Windows.Forms.Button();
             this.BtMod = new System.Windows.Forms.Button();
-            this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MuCharLen = new System.Windows.Forms.ToolStripMenuItem();
-            this.MuCharSet = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiRepeatable = new System.Windows.Forms.ToolStripMenuItem();
-            this.CmMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // TbData
@@ -90,34 +84,6 @@
             this.BtMod.UseVisualStyleBackColor = true;
             this.BtMod.Click += new System.EventHandler(this.BtMod_Click);
             // 
-            // CmMenu
-            // 
-            this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MuCharLen,
-            this.MuCharSet,
-            this.MiRepeatable});
-            this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(165, 70);
-            // 
-            // MuCharLen
-            // 
-            this.MuCharLen.Name = "MuCharLen";
-            this.MuCharLen.Size = new System.Drawing.Size(164, 22);
-            this.MuCharLen.Text = "口令长度(&L)";
-            // 
-            // MuCharSet
-            // 
-            this.MuCharSet.Name = "MuCharSet";
-            this.MuCharSet.Size = new System.Drawing.Size(164, 22);
-            this.MuCharSet.Text = "字符空间(&C)";
-            // 
-            // MiRepeatable
-            // 
-            this.MiRepeatable.Name = "MiRepeatable";
-            this.MiRepeatable.Size = new System.Drawing.Size(164, 22);
-            this.MiRepeatable.Text = "允许字符重复(&A)";
-            this.MiRepeatable.Click += new System.EventHandler(this.MiRepeatable_Click);
-            // 
             // BeanPass
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -128,7 +94,6 @@
             this.Controls.Add(this.TbData);
             this.Name = "BeanPass";
             this.Size = new System.Drawing.Size(350, 24);
-            this.CmMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,9 +105,5 @@
         private System.Windows.Forms.Button BtOpt;
         private System.Windows.Forms.Button BtGen;
         private System.Windows.Forms.Button BtMod;
-        private System.Windows.Forms.ContextMenuStrip CmMenu;
-        private System.Windows.Forms.ToolStripMenuItem MuCharLen;
-        private System.Windows.Forms.ToolStripMenuItem MuCharSet;
-        private System.Windows.Forms.ToolStripMenuItem MiRepeatable;
     }
 }

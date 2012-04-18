@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Me.Amon.Pwd;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd.Bean;
 
 namespace Me.Amon.Pwd.Wiz
 {
-    public partial class BeanLink : UserControl, IAttEdit
+    public partial class BeanLink : ALink, IAttEdit
     {
         private BeanBody _Body;
         private TableLayoutPanel _Grid;
         private RowStyle _Style;
         private Label _Label;
-        private Att _Att;
 
         #region 构造函数
         public BeanLink()
@@ -101,30 +98,10 @@ namespace Me.Amon.Pwd.Wiz
             _Body.EditCtl = this;
         }
 
-        #region 按钮事件
         private void BtOpen_Click(object sender, EventArgs e)
         {
-            string link = TbData.Text.Trim();
-            if (string.IsNullOrEmpty(link))
-            {
-                return;
-            }
-
-            if (!Regex.IsMatch(link, "^\\w+://.+", RegexOptions.IgnoreCase))
-            {
-                link = "http://" + link;
-            }
-
-            try
-            {
-                Process.Start(link);
-            }
-            catch (Exception exp)
-            {
-                Main.ShowError(exp);
-            }
+            OpenLink();
         }
-        #endregion
         #endregion
     }
 }

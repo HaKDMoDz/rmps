@@ -172,6 +172,72 @@
     <Compile Include="Ico\EIco.cs" />
     <Compile Include="Ico\MIco.cs" />
     <Compile Include="Pwd\Att.cs" />
+    <Compile Include="Pwd\Bean\ACall.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Bean\ACall.Designer.cs">
+      <DependentUpon>ACall.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Bean\AData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Bean\AData.Designer.cs">
+      <DependentUpon>AData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Bean\ADate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Bean\ADate.Designer.cs">
+      <DependentUpon>ADate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Bean\AFile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Bean\AFile.Designer.cs">
+      <DependentUpon>AFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Bean\ALine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Bean\ALine.Designer.cs">
+      <DependentUpon>ALine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Bean\ALink.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Bean\ALink.Designer.cs">
+      <DependentUpon>ALink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Bean\AList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Bean\AList.Designer.cs">
+      <DependentUpon>AList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Bean\AMail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Bean\AMail.Designer.cs">
+      <DependentUpon>AMail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Bean\AMemo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Bean\AMemo.Designer.cs">
+      <DependentUpon>AMemo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Bean\APass.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Bean\APass.Designer.cs">
+      <DependentUpon>APass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\Bean\AText.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\Bean\AText.Designer.cs">
+      <DependentUpon>AText.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pwd\EPwd.cs" />
     <Compile Include="Pwd\_Att\CallAtt.cs" />
     <Compile Include="Da\DBAccess.cs" />
@@ -524,9 +590,7 @@
     <Compile Include="Pwd\Wiz\BeanLine.Designer.cs">
       <DependentUpon>BeanLine.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\Wiz\BeanText.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Pwd\Wiz\BeanText.cs" />
     <Compile Include="Pwd\Wiz\BeanText.Designer.cs">
       <DependentUpon>BeanText.cs</DependentUpon>
     </Compile>
@@ -908,6 +972,24 @@
     </Compile>
     <EmbeddedResource Include="Pwd\APwd.resx">
       <DependentUpon>APwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Bean\ACall.resx">
+      <DependentUpon>ACall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Bean\AData.resx">
+      <DependentUpon>AData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Bean\ADate.resx">
+      <DependentUpon>ADate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Bean\AFile.resx">
+      <DependentUpon>AFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Bean\AMail.resx">
+      <DependentUpon>AMail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\Bean\APass.resx">
+      <DependentUpon>APass.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Pro\APro.resx">
       <DependentUpon>APro.cs</DependentUpon>
