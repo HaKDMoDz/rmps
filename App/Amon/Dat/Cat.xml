@@ -1,4 +1,7 @@
-﻿<Amon>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Amon>
+  <App>APwd</App>
+  <Ver>1</Ver>
   <Cats>
     <Cat>
       <Order>0</Order>
