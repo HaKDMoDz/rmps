@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon
 {
-    partial class Info
+    partial class About
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -27,7 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Info));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(About));
             this.LtName = new System.Windows.Forms.Label();
             this.LbName = new System.Windows.Forms.Label();
             this.LtVersion = new System.Windows.Forms.Label();

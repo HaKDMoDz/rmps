@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Amon version="1">
+  <Libs>
+    <Lib Id="Demo" Path="DemoLib.dll"/>
+  </Libs>
+
+  <Actions>
+    <Action Id="new-keys" Class="DemoLib.Demo" LibId="Demo" />
+  </Actions>
+
+  <!--系统快捷键-->
+  <Shortcut></Shortcut>
+  <Strokes Id="APwd">
+    <Stroke Key="^ Q" ActionId="exit-window" Memo="" />
+    <Stroke Key="^ Enter" ActionId="hide-window" Memo="" />
+  </Strokes>
+
+  <!--魔方密码菜单栏-->
+  <Menubar Id="APwd">
+    <Menu Id="file" Text="文件">
+      <Item Type="normal" Text="新增">
+        <Action Class="DemoLib.Demo" LibId="Demo"/>
+        <Stroke Key="^ N" />
+      </Item>
+      <Item Type="normal" Text="保存">
+        <Action Class="com.magicpwd.e.mpro.file.SaveAction"/>
+        <Stroke Key="^ S" />
+      </Item>
+      <Line />
+      <Item Type="normal" Text="查找">
+        <Action Class="com.magicpwd.e.mpro.edit.FindAction"/>
+        <Stroke Key="^ F" />
+      </Item>
+      <Line />
+      <Item Type="normal" Text="隐藏窗口">
+        <Action Class="com.magicpwd.e.mpro.file.HideAction"/>
+        <Stroke Key="^ H" />
+      </Item>
+      <Item Type="normal" Text="锁定窗口">
+        <Action Class="com.magicpwd.e.mpro.file.LockAction"/>
+        <Stroke Key="^ L" />
+      </Item>
+      <Line />
+      <Item Type="normal" Text="退出">
+        <Action Class="com.magicpwd.e.mpro.file.ExitAction"/>
+        <Stroke Key="^ Q" />
+      </Item>
+    </Menu>
+    <Menu Id="edit" Text="编辑">
+      <Item Type="normal" Text="添加记录">
+        <Action Class="com.magicpwd.e.mpro.edit.AppendTextAction"/>
+        <Stroke Key="^ 1" />
+      </Item>
+      <Item Type="normal" Text="删除记录">
+        <Action Class="com.magicpwd.e.mpro.edit.AppendTextAction"/>
+        <Stroke Key="^ 1" />
+      </Item>
+      <Line />
+      <Menu Id="" Text="添加属性">
+        <Item Type="normal" Text="文本">
+          <Action Class="com.magicpwd.e.mpro.edit.AppendTextAction"/>
+          <Stroke Key="^ 1" />
+        </Item>
+        <Item Type="normal" Text="口令">
+          <Action Id="append-keys" Class="com.magicpwd.e.mpro.edit.AppendKeysAction"/>
+          <Stroke Key="^ 2" />
+        </Item>
+        <Item Type="normal" Text="链接">
+          <Action Id="append-link" Class="com.magicpwd.e.mpro.edit.AppendLinkAction"/>
+          <Stroke Key="^ 3" />
+        </Item>
+        <Item Type="normal" Text="邮件">
+          <Action Id="append-mail" Class="com.magicpwd.e.mpro.edit.AppendMailAction"/>
+          <Stroke Key="^ 4" />
+        </Item>
+        <Item Type="normal" Text="日期">
+          <Action Id="append-date" Class="com.magicpwd.e.mpro.edit.AppendDateAction"/>
+          <Stroke Key="^ 5" />
+        </Item>
+        <Item Type="normal" Text="附注">
+          <Action Id="append-area" Class="com.magicpwd.e.mpro.edit.AppendAreaAction"/>
+          <Stroke Key="^ 6" />
+        </Item>
+        <Item Type="normal" Text="文件">
+          <Action Id="append-file" Class="com.magicpwd.e.mpro.edit.AppendFileAction"/>
+          <Stroke Key="^ 7" />
+        </Item>
+        <Item Type="normal" Text="数值">
+          <Action Id="append-data" Class="com.magicpwd.e.mpro.edit.AppendDataAction"/>
+          <Stroke Key="^ 8" />
+        </Item>
+        <Item Type="normal" Text="列表">
+          <Action Id="append-list" Class="com.magicpwd.e.mpro.edit.AppendListAction"/>
+          <Stroke Key="^ 9" />
+        </Item>
+        <Item Type="normal" Text="标记">
+          <Action Id="append-sign" Class="com.magicpwd.e.mpro.edit.AppendSignAction"/>
+          <Stroke Key="^ 0" />
+        </Item>
+      </Menu>
+      <Menu Id="" Text="转换属性">
+        <Item Type="normal" Text="文本"></Item>
+      </Menu>
+      <Item Type="normal" Text="删除属性">
+        <Action Id="append-sign" Class="com.magicpwd.e.mpro.edit.AppendSignAction"/>
+        <Stroke Key="^ 0" />
+      </Item>
+      <Line />
+      <Item Type="normal" Text="选择上一属性">
+        <Action Id="view-prev" Class="com.magicpwd.e.mpro.view.SelectPrevAction"/>
+        <Stroke Key="^ up" />
+      </Item>
+      <Item Type="normal" Text="选择下一属性">
+        <Action Id="view-next" Class="com.magicpwd.e.mpro.view.SelectNextAction"/>
+        <Stroke Key="^ down" />
+      </Item>
+      <Line />
+      <Item Type="normal" Text="添加类别">
+        <Action Id="edit-prev" Class="com.magicpwd.e.mpro.edit.MovetoPrevAction"/>
+        <Stroke Key="^ ~ up" />
+        <Stroke Key="^ U" />
+      </Item>
+      <Item Type="normal" Text="更新类别">
+        <Action Id="edit-next" Class="com.magicpwd.e.mpro.edit.MovetoNextAction"/>
+        <Stroke Key="^ ~ down" />
+        <Stroke Key="^ D" />
+      </Item>
+      <Item Type="normal" Text="删除类别">
+        <Action Id="edit-next" Class="com.magicpwd.e.mpro.edit.MovetoNextAction"/>
+        <Stroke Key="^ ~ down" />
+        <Stroke Key="^ D" />
+      </Item>
+    </Menu>
+    <Menu Id="view" Text="视图">
+      <Item Type="checkbox" Text="总在最上">
+        <Action Class="com.magicpwd.e.mpro.view.TopsAction"/>
+        <Stroke Key="F5" />
+      </Item>
+      <Line />
+      <Item Type="checkbox" Text="专业模式" Group="viewStyle">
+        <Action Id="view-prev" Class="com.magicpwd.e.mpro.view.SelectPrevAction"/>
+        <Stroke Key="^ up" />
+      </Item>
+      <Item Type="checkbox" Text="向导模式" Group="viewStyle">
+        <Action Id="view-next" Class="com.magicpwd.e.mpro.view.SelectNextAction"/>
+        <Stroke Key="^ down" />
+      </Item>
+      <Line />
+      <Item Id="Menu-Menu-visible" Type="checkbox" Text="显示菜单栏" Command="tool-Menu-visible">
+        <Action Id="Menu-visible" Class="com.magicpwd.e.mpro.view.MenuVisibleAction"/>
+        <Stroke Key="^ M" />
+      </Item>
+      <Item Id="Menu-tool-visible" Type="checkbox" Text="显示工具栏">
+        <Action Class="com.magicpwd.e.mpro.view.ToolVisibleAction"/>
+        <Stroke Key="^ T" />
+      </Item>
+      <Item Id="Menu-info-visible" Type="checkbox" Text="显示状态栏">
+        <Action Class="com.magicpwd.e.mpro.view.InfoVisibleAction"/>
+        <Stroke Key="^ I" />
+      </Item>
+      <Line />
+      <Item Id="Menu-edit-isolate" Type="checkbox" Text="显示导航" Command="tool-edit-isolate">
+        <Action Id="edit-isolate" Class="com.magicpwd.e.mpro.view.EditIsolateAction"/>
+        <Stroke Key="^ W" />
+      </Item>
+      <Item Id="Menu-edit-visible" Type="checkbox" Text="显示类别" Command="Menu-edit-isolate,tool-edit-isolate">
+        <Action Class="com.magicpwd.e.mpro.view.EditVisibleAction"/>
+        <Stroke Key="^ P" />
+      </Item>
+      <Item Id="Menu-find-visible" Type="checkbox" Text="显示列表">
+        <Action Class="com.magicpwd.e.mpro.view.FindVisibleAction"/>
+        <Stroke Key="^ J" />
+      </Item>
+      <Item Id="Menu-find-visible" Type="checkbox" Text="显示查找">
+        <Action Class="com.magicpwd.e.mpro.view.FindVisibleAction"/>
+        <Stroke Key="^ J" />
+      </Item>
+    </Menu>
+    <Menu Id="data" Text="数据">
+      <Item Type="normal" Text="同步" Enabled="false">
+        <Action Id="import" Class="com.magicpwd.e.mpro.data.ImportByKindAction" />
+      </Item>
+      <Line />
+      <Menu Type="normal" Text="导出">
+        <Item Type="normal" Text="TXT格式">
+          <Action Id="import" Class="com.magicpwd.e.mpro.data.ImportByKindAction" />
+        </Item>
+        <Item Type="normal" Text="XML格式">
+          <Action Id="import" Class="com.magicpwd.e.mpro.data.ImportByKindAction" />
+        </Item>
+      </Menu>
+      <Menu Type="normal" Text="导入">
+        <Item Type="normal" Text="TXT格式">
+          <Action Id="import" Class="com.magicpwd.e.mpro.data.ImportByKindAction" />
+        </Item>
+        <Item Type="normal" Text="XML格式">
+          <Action Id="import" Class="com.magicpwd.e.mpro.data.ImportByKindAction" />
+        </Item>
+      </Menu>
+      <Line />
+      <Item Type="normal" Text="备份到本地">
+        <Action Class="com.magicpwd.e.mpro.safe.NativeBackupAction"/>
+        <Stroke Key="^ B" />
+      </Item>
+      <Item Type="normal" Text="从本地恢复">
+        <Action Class="com.magicpwd.e.mpro.safe.NativeResumeAction"/>
+        <Stroke Key="^ R" />
+      </Item>
+      <Item Type="normal" Text="配置本地路径">
+        <Action Class="com.magicpwd.e.mpro.safe.NativeConfigAction" />
+      </Item>
+      <Line />
+      <Item Type="normal" Text="备份到云端">
+        <Action Class="com.magicpwd.e.mpro.safe.RemoteBackupAction"/>
+        <Stroke Key="^ ~ B" />
+      </Item>
+      <Item Type="normal" Text="从云端恢复">
+        <Action Class="com.magicpwd.e.mpro.safe.RemoteResumeAction"/>
+        <Stroke Key="^ ~ R" />
+      </Item>
+      <Item Type="normal" Text="配置云端帐户">
+        <Action Class="com.magicpwd.e.mpro.safe.RemoteConfigAction" />
+      </Item>
+    </Menu>
+    <Menu Id="user" Text="用户">
+      <Item Type="normal" Text="更改登录口令">
+        <Action Class="com.magicpwd.e.mpro.user.ChangePkeyAction" />
+      </Item>
+      <Item Id="mpro-skey" Type="normal" Text="设置安全口令">
+        <Action Class="com.magicpwd.e.mpro.user.CreateSkeyAction" />
+      </Item>
+      <Line />
+      <Item Type="normal" Text="常规设置">
+        <Action Class="com.magicpwd.e.mpro.user.OptionsAction" />
+      </Item>
+      <Item Type="normal" Text="口令设置">
+        <Action Class="com.magicpwd.e.mpro.user.PasswordAction" />
+      </Item>
+      <Item Type="normal" Text="模板管理">
+        <Action Class="com.magicpwd.e.mpro.user.TemplateAction" />
+      </Item>
+    </Menu>
+    <Menu Id="skin" Text="皮肤">
+    </Menu>
+    <Menu Id="help" Text="帮助">
+      <Item Type="normal" Text="帮助">
+        <Action Class="com.magicpwd.e.tray.HelpAction"/>
+        <Stroke Key="F1" />
+      </Item>
+      <Line />
+      <Item Type="normal" Text="快捷键">
+        <Action Class="com.magicpwd.e.mpro.help.KeysAction"/>
+        <Stroke Key="F6" />
+      </Item>
+      <Item Type="normal" Text="特别致谢">
+        <Action Class="com.magicpwd.e.mpro.help.IdioAction"/>
+        <Stroke Key="F8" />
+      </Item>
+      <Line />
+      <Item Type="normal" Text="关于">
+        <Action Class="com.magicpwd.e.mpro.help.InfoAction" />
+      </Item>
+    </Menu>
+    <Menu Id="plug" Text="扩展">
+      <Item Type="normal" Text="测试(@T)" Command="这是一个扩展测试！">
+        <Action Class="example.TestAction" />
+      </Item>
+    </Menu>
+  </Menubar>
+
+  <!--魔方密码工具栏-->
+  <Toolbar Id="APwd">
+    <Item Type="normal" Tips="新增">
+      <Icon Id="file-new" path="var:file-new"/>
+      <Action Id="new-keys" Class="com.magicpwd.e.mpro.file.AppendAction" />
+    </Item>
+    <Item Type="normal" Tips="保存">
+      <Icon Id="file-save" path="var:file-save"/>
+      <Action Id="save-keys" Class="com.magicpwd.e.mpro.file.SaveAction" />
+    </Item>
+    <Item Type="normal" Tips="删除">
+      <Icon Id="file-save" path="var:file-save"/>
+      <Action Id="save-keys" Class="com.magicpwd.e.mpro.file.SaveAction" />
+    </Item>
+    <Line />
+    <Item Type="normal" Tips="上移">
+      <Icon Id="file-save" path="var:edit-move-up"/>
+      <Action Id="edit-prev" Class="com.magicpwd.e.mpro.edit.PrevAction" />
+    </Item>
+    <Item Type="normal" Tips="下移">
+      <Icon Id="file-save" path="var:edit-move-down"/>
+      <Action Id="edit-next" Class="com.magicpwd.e.mpro.edit.NextAction" />
+    </Item>
+    <Line />
+    <Item Id="tool-edit-history" Type="toggle" Tips="显示菜单栏">
+      <Icon Id="edit-history" path="var:edit-history"/>
+      <Action Id="edit-history" Class="com.magicpwd.e.mpro.safe.RecordConfigAction" />
+    </Item>
+    <Item Id="tool-edit-isolate" Type="toggle" Tips="显示状态栏" Command="Menu-edit-isolate">
+      <Icon Id="edit-isolate" path="var:view-prop-isolate"/>
+      <Action Id="edit-isolate" Class="com.magicpwd.e.mpro.view.EditIsolateAction" />
+    </Item>
+    <Item Id="tool-Menu-visible" Type="toggle" Tips="显示查找栏" Command="Menu-Menu-visible">
+      <Icon Id="Menu-visible" path="var:view-menubar"/>
+      <Action Id="Menu-visible" Class="com.magicpwd.e.mpro.view.MenuVisibleAction" />
+    </Item>
+    <Line />
+    <Item Type="normal" Tips="同步" Enabled="false">
+      <Icon Id="file-help" path="var:file-exit"/>
+      <Action Id="exit-system" Class="com.magicpwd.e.mpro.file.ExitAction" />
+    </Item>
+    <Line />
+    <Item Type="normal" Tips="快捷键">
+      <Icon Id="file-help" path="var:file-exit"/>
+      <Action Id="exit-system" Class="com.magicpwd.e.mpro.file.ExitAction" />
+    </Item>
+    <Item Type="normal" Tips="帮助">
+      <Icon Id="file-help" path="var:help-topic"/>
+      <Action Class="com.magicpwd.e.tray.HelpAction" />
+    </Item>
+  </Toolbar>
+
+  <!--魔方密码弹出菜单-->
+  <Popmenu Id="ACat">
+    <Item Type="normal" Text="添加类别">
+      <Action Class="com.magicpwd.e.mpro.kind.AppendAction" />
+    </Item>
+    <Item Type="normal" Text="更新类别">
+      <Action Class="com.magicpwd.e.mpro.kind.UpdateAction" />
+    </Item>
+    <Item Type="normal" Text="删除类别">
+      <Action Class="com.magicpwd.e.mpro.kind.DeleteAction" />
+    </Item>
+    <Line />
+    <Item Type="normal" Text="上移一行">
+      <Action Class="com.magicpwd.e.mpro.kind.ForwardAction" />
+    </Item>
+    <Item Type="normal" Text="下移一行">
+      <Action Class="com.magicpwd.e.mpro.kind.BackwardAction" />
+    </Item>
+    <Item Type="normal" Text="提升一级">
+      <Action Class="com.magicpwd.e.mpro.kind.PromotionAction" />
+    </Item>
+    <Item Type="normal" Text="缩进一级">
+      <Action Class="com.magicpwd.e.mpro.kind.DemotionAction" />
+    </Item>
+    <Line />
+    <Item Type="normal" Text="导入数据">
+      <Action Id="import" Class="com.magicpwd.e.mpro.data.ImportAction" />
+    </Item>
+  </Popmenu>
+  <Popmenu Id="AKey">
+    <Item Type="normal" Text="添加记录">
+      <Action Id="new-keys" Class="com.magicpwd.e.mpro.file.AppendAction" />
+    </Item>
+    <Item Type="normal" Text="删除记录">
+      <Action Id="drop-keys" Class="com.magicpwd.e.mpro.file.DeleteAction" />
+    </Item>
+    <Line />
+    <Menu Text="标记为：">
+      <Item Type="checkbox" Text="默认(@0)" Group="label" Command="0">
+        <Icon cache-Id="label0" path="var:keys-label0"/>
+        <Action Id="change-mode" Class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
+      </Item>
+      <Line />
+      <Item Type="checkbox" Text="常使用(@1)" Group="label" Command="1">
+        <Icon cache-Id="label1" path="var:keys-label1"/>
+        <Action Id="change-mode" Class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
+      </Item>
+      <Item Type="checkbox" Text="待注册(@2)" Group="label" Command="2">
+        <Icon cache-Id="label2" path="var:keys-label2"/>
+        <Action Id="change-mode" Class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
+      </Item>
+      <Item Type="checkbox" Text="待认证(@3)" Group="label" Command="3">
+        <Icon cache-Id="label3" path="var:keys-label3"/>
+        <Action Id="change-mode" Class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
+      </Item>
+      <Item Type="checkbox" Text="待激活(@4)" Group="label" Command="4">
+        <Icon cache-Id="label4" path="var:keys-label4"/>
+        <Action Id="change-mode" Class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
+      </Item>
+      <Item Type="checkbox" Text="仅测试(@5)" Group="label" Command="5">
+        <Icon cache-Id="label5" path="var:keys-label5"/>
+        <Action Id="change-mode" Class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
+      </Item>
+      <Item Type="checkbox" Text="已过期(@6)" Group="label" Command="6">
+        <Icon cache-Id="label6" path="var:keys-label6"/>
+        <Action Id="change-mode" Class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
+      </Item>
+      <Item Type="checkbox" Text="已丢失(@7)" Group="label" Command="7">
+        <Icon cache-Id="label7" path="var:keys-label7"/>
+        <Action Id="change-mode" Class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
+      </Item>
+      <Item Type="checkbox" Text="被禁用(@8)" Group="label" Command="8">
+        <Icon cache-Id="label8" path="var:keys-label8"/>
+        <Action Id="change-mode" Class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
+      </Item>
+      <Item Type="checkbox" Text="已删除(@9)" Group="label" Command="9">
+        <Icon cache-Id="label9" path="var:keys-label9"/>
+        <Action Id="change-mode" Class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
+      </Item>
+    </Menu>
+    <Menu Text="重要性：">
+      <Item Type="checkbox" Text="最高" Group="major" Command="2">
+        <Icon cache-Id="major2" path="var:keys-major+2"/>
+        <Action Id="change-note" Class="com.magicpwd.e.mpro.list.ChangeMajorAction" />
+      </Item>
+      <Item Type="checkbox" Text="高" Group="major" Command="1">
+        <Icon cache-Id="major1" path="var:keys-major+1"/>
+        <Action Id="change-note" Class="com.magicpwd.e.mpro.list.ChangeMajorAction" />
+      </Item>
+      <Item Type="checkbox" Text="正常" Group="major" Command="0">
+        <Icon cache-Id="major0" path="var:keys-major0"/>
+        <Action Id="change-note" Class="com.magicpwd.e.mpro.list.ChangeMajorAction" />
+      </Item>
+      <Item Type="checkbox" Text="低" Group="major" Command="-1">
+        <Icon cache-Id="major-1" path="var:keys-major-1"/>
+        <Action Id="change-note" Class="com.magicpwd.e.mpro.list.ChangeMajorAction" />
+      </Item>
+      <Item Type="checkbox" Text="最低" Group="major" Command="-2">
+        <Icon cache-Id="major-2" path="var:keys-major-2"/>
+        <Action Id="change-note" Class="com.magicpwd.e.mpro.list.ChangeMajorAction" />
+      </Item>
+    </Menu>
+    <Menu Text="排序方式">
+      <Item Type="checkbox" Text="升序" Group="order-dir" Command="true">
+        <Action Id="sort-dir" Class="com.magicpwd.e.mpro.list.SortDirAction" />
+      </Item>
+      <Item Type="checkbox" Text="降序" Group="order-dir" Command="false">
+        <Action Id="sort-dir" Class="com.magicpwd.e.mpro.list.SortDirAction" />
+      </Item>
+    </Menu>
+    <Menu Text="排序依据">
+      <Item Type="checkbox" Text="使用频率" Group="order-key" Command="01">
+        <Action Id="sort-key" Class="com.magicpwd.e.mpro.list.SortKeyAction" />
+      </Item>
+      <Item Type="checkbox" Text="口令名称" Group="order-key" Command="09">
+        <Action Id="sort-key" Class="com.magicpwd.e.mpro.list.SortKeyAction" />
+      </Item>
+      <Item Type="checkbox" Text="注册时间" Group="order-key" Command="07">
+        <Action Id="sort-key" Class="com.magicpwd.e.mpro.list.SortKeyAction" />
+      </Item>
+      <Item Type="checkbox" Text="到期时间" Group="order-key" Command="0D">
+        <Action Id="sort-key" Class="com.magicpwd.e.mpro.list.SortKeyAction" />
+      </Item>
+    </Menu>
+    <Line />
+    <Item Type="normal" Text="把数据迁移到...(@M)">
+      <Action Class="com.magicpwd.e.mpro.list.MovetoAction" />
+    </Item>
+    <Line />
+    <Item Type="normal" Text="查看历史">
+      <Action Class="com.magicpwd.e.mpro.list.HistoryAction" />
+    </Item>
+  </Popmenu>
+  <Popmenu Id="AAtt">
+    <Item Type="normal" Text="复制数据">
+      <Action Class="com.magicpwd.e.mpro.grid.CopyAction" />
+    </Item>
+    <Line />
+    <Menu Text="添加属性">
+      <Item Type="normal" Text="文本">
+        <Action Id="append-text" Class="com.magicpwd.e.mpro.edit.AppendTextAction" />
+      </Item>
+      <Item Type="normal" Text="口令">
+        <Action Id="append-keys" Class="com.magicpwd.e.mpro.edit.AppendKeysAction" />
+      </Item>
+      <Item Type="normal" Text="链接">
+        <Action Id="append-link" Class="com.magicpwd.e.mpro.edit.AppendLinkAction" />
+      </Item>
+      <Item Type="normal" Text="邮件">
+        <Action Id="append-mail" Class="com.magicpwd.e.mpro.edit.AppendMailAction" />
+      </Item>
+      <Item Type="normal" Text="日期">
+        <Action Id="append-date" Class="com.magicpwd.e.mpro.edit.AppendDateAction" />
+      </Item>
+      <Item Type="normal" Text="附注">
+        <Action Id="append-area" Class="com.magicpwd.e.mpro.edit.AppendAreaAction" />
+      </Item>
+      <Item Type="normal" Text="附件">
+        <Action Id="append-file" Class="com.magicpwd.e.mpro.edit.AppendFileAction" />
+      </Item>
+      <Item Type="normal" Text="数值">
+        <Action Id="append-data" Class="com.magicpwd.e.mpro.edit.AppendDataAction" />
+      </Item>
+      <Item Type="normal" Text="列表">
+        <Action Id="append-list" Class="com.magicpwd.e.mpro.edit.AppendListAction" />
+      </Item>
+      <Item Type="normal" Text="标记">
+        <Action Id="append-sign" Class="com.magicpwd.e.mpro.edit.AppendSignAction" />
+      </Item>
+    </Menu>
+    <Menu Text="转换属性">
+      <Item Type="normal" Text="文本">
+        <Action Id="change-text" Class="com.magicpwd.e.mpro.edit.ChangeTextAction" />
+      </Item>
+      <Item Type="normal" Text="口令">
+        <Action Id="change-keys" Class="com.magicpwd.e.mpro.edit.ChangeKeysAction" />
+      </Item>
+      <Item Type="normal" Text="链接">
+        <Action Id="change-link" Class="com.magicpwd.e.mpro.edit.ChangeLinkAction" />
+      </Item>
+      <Item Type="normal" Text="邮件">
+        <Action Id="change-mail" Class="com.magicpwd.e.mpro.edit.ChangeMailAction" />
+      </Item>
+      <Item Type="normal" Text="日期">
+        <Action Id="change-date" Class="com.magicpwd.e.mpro.edit.ChangeDateAction" />
+      </Item>
+      <Item Type="normal" Text="附注">
+        <Action Id="change-area" Class="com.magicpwd.e.mpro.edit.ChangeAreaAction" />
+      </Item>
+      <Item Type="normal" Text="附件">
+        <Action Id="change-file" Class="com.magicpwd.e.mpro.edit.ChangeFileAction" />
+      </Item>
+      <Item Type="normal" Text="数值">
+        <Action Id="change-data" Class="com.magicpwd.e.mpro.edit.ChangeDataAction" />
+      </Item>
+      <Item Type="normal" Text="列表">
+        <Action Id="change-list" Class="com.magicpwd.e.mpro.edit.ChangeListAction" />
+      </Item>
+      <Item Type="normal" Text="标记">
+        <Action Id="change-sign" Class="com.magicpwd.e.mpro.edit.ChangeSignAction" />
+      </Item>
+    </Menu>
+    <Line />
+    <Item Type="normal" Text="上移">
+      <Action Id="edit-prev" Class="com.magicpwd.e.mpro.edit.PrevAction" />
+    </Item>
+    <Item Type="normal" Text="下移">
+      <Action Id="edit-next" Class="com.magicpwd.e.mpro.edit.NextAction" />
+    </Item>
+    <Line />
+    <Item Type="normal" Text="删除属性">
+      <Action Class="com.magicpwd.e.mpro.grid.DropAction" />
+    </Item>
+  </Popmenu>
+
+  <!--日期弹出菜单选项-->
+  <Submenu Id="date-template">
+    <!--日期及时间-->
+    <Menu Text="日期时间型">
+      <Item Type="checkbox" Text="完整格式" Group="date-template" Command="java:0d0t" />
+      <Item Type="checkbox" Text="长格式" Group="date-template" Command="java:1d1t" />
+      <Item Type="checkbox" Text="标准格式" Group="date-template" Command="java:2d2t" />
+      <Item Type="checkbox" Text="短格式" Group="date-template" Command="java:3d3t" />
+      <Line />
+      <Item Type="checkbox" Text="yyyyMMdd HHmmss 格式" Group="date-template" Command="user:yyyyMMdd HHmmss" />
+      <Item Type="checkbox" Text="yyyy-MM-dd HH:mm:ss 格式" Group="date-template" Command="user:yyyy-MM-dd HH:mm:ss" />
+      <Item Type="checkbox" Text="yyyy.MM.dd HH.mm.ss 格式" Group="date-template" Command="user:yyyy.MM.dd HH.mm.ss" />
+      <Item Type="checkbox" Text="yyyy年MM月dd日 HH时mm分ss秒 格式" Group="date-template" Command="user:yyyy年MM月dd日 HH时mm分ss秒" />
+    </Menu>
+    <!--日期-->
+    <Menu Text="日期型">
+      <!--系统定义-->
+      <Item Type="checkbox" Text="完整格式" Group="date-template" Command="java:0d" />
+      <Item Type="checkbox" Text="长格式" Group="date-template" Command="java:1d" />
+      <Item Type="checkbox" Text="标准格式" Group="date-template" Command="java:2d" />
+      <Item Type="checkbox" Text="短格式" Group="date-template" Command="java:3d" />
+      <Line />
+      <!--用户定义-->
+      <Item Type="checkbox" Text="yyyyMMdd 格式" Group="date-template" Command="user:yyyyMMdd" />
+      <Item Type="checkbox" Text="yyyy-MM-dd 格式" Group="date-template" Command="user:yyyy-MM-dd" />
+      <Item Type="checkbox" Text="yyyy/MM/dd 格式" Group="date-template" Command="user:yyyy/MM/dd" />
+      <Item Type="checkbox" Text="yyyy.MM.dd 格式" Group="date-template" Command="user:yyyy.MM.dd" />
+      <Item Type="checkbox" Text="yyyy MM dd 格式" Group="date-template" Command="user:yyyy MM dd" />
+      <Item Type="checkbox" Text="yyyy年MM月dd日 格式" Group="date-template" Command="user:yyyy年MM月dd日" />
+    </Menu>
+    <!--时间-->
+    <Menu Text="时间型">
+      <Item Type="checkbox" Text="完整格式" Group="date-template" Command="java:0t" />
+      <Item Type="checkbox" Text="长格式" Group="date-template" Command="java:1t" />
+      <Item Type="checkbox" Text="标准格式" Group="date-template" Command="java:2t" />
+      <Item Type="checkbox" Text="短格式" Group="date-template" Command="java:3t" />
+      <Line />
+      <Item Type="checkbox" Text="HHmmss 格式" Group="date-template" Command="user:HHmmss" />
+      <Item Type="checkbox" Text="HH:mm:ss 格式" Group="date-template" Command="user:HH:mm:ss" />
+      <Item Type="checkbox" Text="HH.mm.ss 格式" Group="date-template" Command="user:HH.mm.ss" />
+      <Item Type="checkbox" Text="HH mm ss 格式" Group="date-template" Command="user:HH mm ss" />
+      <Item Type="checkbox" Text="HH时mm分ss秒 格式" Group="date-template" Command="user:HH时mm分ss秒" />
+    </Menu>
+  </Submenu>
+  <Submenu Id="date-interval">
+    <Menu Id="hint-fixtime" Text="定时提醒">
+      <!--
+            <Item Type="normal" Text="2010-12-31 20:00:00" Command="fix:2010-12-31 20:00:00" />
+            <Line />
+            -->
+      <Menu Text="秒">
+        <Item Type="normal" Text="30秒后" Command="var:+30second" />
+      </Menu>
+      <Menu Text="分">
+        <Item Type="normal" Text="30分后" Command="var:+30minute" />
+      </Menu>
+      <Menu Text="时">
+        <Item Type="normal" Text="1小时后" Command="var:+1hour" />
+        <Item Type="normal" Text="2小时后" Command="var:+2hour" />
+      </Menu>
+      <Menu Text="天">
+        <Item Type="normal" Text="1天后" Command="var:+1day" />
+        <Item Type="normal" Text="2天后" Command="var:+2day" />
+      </Menu>
+      <Menu Text="周">
+        <Item Type="normal" Text="1周后" Command="var:+1week" />
+        <Item Type="normal" Text="2周后" Command="var:+2week" />
+      </Menu>
+      <Menu Text="月">
+        <Item Type="normal" Text="1月后" Command="var:+1month" />
+        <Item Type="normal" Text="2月后" Command="var:+2month" />
+      </Menu>
+      <Menu Text="年">
+        <Item Type="normal" Text="1年后" Command="var:+1year" />
+        <Item Type="normal" Text="2年后" Command="var:+2year" />
+      </Menu>
+    </Menu>
+    <Menu Id="hint-cycle" Text="周期提醒">
+    </Menu>
+    <Menu Id="hint-interval" Text="间隔提醒">
+    </Menu>
+    <Menu Id="hint-special" Text="特殊提醒">
+    </Menu>
+    <Menu Id="hint-function" Text="其它提醒">
+    </Menu>
+  </Submenu>
+
+  <!--数值弹出菜单选项-->
+  <Submenu Id="data-options">
+    <Item Type="checkbox" Text="整数" Group="data-template" Command="dec:0" />
+    <Menu Text="小数">
+      <Item Type="checkbox" Text="1位" Group="data-template" Command="dec:1" />
+      <Item Type="checkbox" Text="2位" Group="data-template" Command="dec:2" />
+      <Item Type="checkbox" Text="3位" Group="data-template" Command="dec:3" />
+      <Item Type="checkbox" Text="4位" Group="data-template" Command="dec:4" />
+      <Item Type="checkbox" Text="5位" Group="data-template" Command="dec:5" />
+      <Item Type="checkbox" Text="6位" Group="data-template" Command="dec:6" />
+      <Item Type="checkbox" Text="7位" Group="data-template" Command="dec:7" />
+      <Item Type="checkbox" Text="8位" Group="data-template" Command="dec:8" />
+      <Line />
+      <Item Type="checkbox" Id="data-precision" Text="其它……" Group="data-template" Command="dec:-1" />
+      <Line />
+      <Item Type="checkbox" Id="data-fixed-dec" Text="固定小数长度" Command="dec:f" />
+      <!--
+            <Item Type="checkbox" Id="data-fixed-int" Command="int:f" />
+            -->
+    </Menu>
+    <Line />
+    <Menu Id="data-collection" Text="集合">
+      <Item Type="checkbox" Id="data-pos" Text="正数" Command="set:+" />
+      <Item Type="checkbox" Id="data-0" Text="0" Command="set:0" />
+      <Item Type="checkbox" Id="data-nav" Text="负数" Command="set:-" />
+    </Menu>
+    <Menu Id="data-characters" Text="符号">
+      <Item Type="checkbox" Id="data-notation" Text="启用特殊符号" Command="notation"/>
+      <Line />
+      <Item Type="normal" Id="data-character" Tips="更改特殊符号" Command="character"/>
+      <Item Type="checkbox" Id="data-thehead" Text="符号前置" Group="data-position" Command="pos:^" />
+      <Item Type="checkbox" Id="data-thefoot" Text="符号后置" Group="data-position" Command="pos:$" />
+      <Item Type="checkbox" Id="data-optional" Text="可选输入" Command="optional"/>
+    </Menu>
+  </Submenu>
+  <Submenu Id="sign-options">
+    <Item Type="checkbox" Id="sign-sep" Text="分页控制(@S)" Group="sign-options" Command="sep:P30F7E04" />
+    <Item Type="checkbox" Id="sign-div" Text="标题面板(@P)" Group="sign-options" Command="div:P30F7E06" />
+    <Item Type="checkbox" Id="sign-tab" Text="选项面板(@T)" Group="sign-options" Command="tab:P30F7E08" />
+    <Menu Text="其它标记(@O)">
+      <Item Type="checkbox" Text="-----" Group="sign-options" Command="tip:P30F7E0B" />
+      <Item Type="checkbox" Text="--{0}--" Group="sign-options" Command="tip:P30F7E0D" />
+    </Menu>
+  </Submenu>
+
+  <!--文件查看菜单-->
+  <Submenu Id="file-preview">
+    <Item Type="normal" Text="图像查看器" init="com.magicpwd.x.docs.ImgViewer:PNG,JPG,JPEG,JFIF,GIF,BMP" />
+    <Item Type="normal" Text="源码查看器" init="com.magicpwd.x.docs.SrcViewer:JAVA,CS,JS,CSS" />
+    <Item Type="normal" Text="文本查看器" init="com.magicpwd.x.docs.TxtViewer:TXT,RTF,TEXT,HTML,HTM,XML" />
+  </Submenu>
+</Amon>

@@ -19,6 +19,7 @@ using Me.Amon.Pwd._Log;
 using Me.Amon.Pwd.Bean;
 using Me.Amon.Pwd.V.Pro;
 using Me.Amon.Pwd.V.Wiz;
+using Me.Amon.Uc;
 using Me.Amon.User;
 using Me.Amon.User.Auth;
 using Me.Amon.Util;
@@ -30,7 +31,6 @@ namespace Me.Amon.Pwd
     public partial class APwd : Form, IApp
     {
         #region 全局变量
-        private FindBar FbFind;
         private UserModel _UserModel;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
@@ -46,6 +46,7 @@ namespace Me.Amon.Pwd
         //private APad _PadView;
         private Dictionary<string, Image> _RecIcon;
         private Dictionary<string, Image> _RecHint;
+        private MenuBar _MenuBar;
         #endregion
 
         #region 构造函数
@@ -96,35 +97,36 @@ namespace Me.Amon.Pwd
             FbFind.Name = "FbFind";
             FbFind.Size = new Size(390, 26);
             FbFind.TabIndex = 0;
-            TpGrid.Controls.Add(FbFind, 0, 0);
+            //TpGrid.Controls.Add(FbFind, 0, 0);
             #endregion
 
             #region 视图
             HSplit.SplitterDistance = _ViewModel.HSplitDistance;
             HSplit.Panel1Collapsed = !_ViewModel.NavPaneVisible;
-            TmiNavPane.Checked = _ViewModel.NavPaneVisible;
+            //TmiNavPane.Checked = _ViewModel.NavPaneVisible;
 
             VSplit.SplitterDistance = _ViewModel.VSplitDistance;
             VSplit.Panel1Collapsed = !_ViewModel.CatTreeVisible;
-            TmiCatView.Checked = _ViewModel.CatTreeVisible;
+            ToolStripMenuItem item = null;// _MenuBar.GetButton("");
+            item.Checked = _ViewModel.CatTreeVisible;
 
             VSplit.Panel2Collapsed = !_ViewModel.KeyListVisible;
-            TmiKeyList.Checked = _ViewModel.KeyListVisible;
+            //TmiKeyList.Checked = _ViewModel.KeyListVisible;
 
             TmMenu.Visible = _ViewModel.MenuBarVisible;
-            TmiMenuBar.Checked = _ViewModel.MenuBarVisible;
-            TsbMenuBar.Checked = _ViewModel.MenuBarVisible;
+            //TmiMenuBar.Checked = _ViewModel.MenuBarVisible;
+            //TsbMenuBar.Checked = _ViewModel.MenuBarVisible;
 
-            TsTool.Visible = _ViewModel.ToolBarVisible;
-            TmiToolBar.Checked = _ViewModel.ToolBarVisible;
-            TsbToolBar.Checked = _ViewModel.ToolBarVisible;
+            TbTool.Visible = _ViewModel.ToolBarVisible;
+            //TmiToolBar.Checked = _ViewModel.ToolBarVisible;
+            //TsbToolBar.Checked = _ViewModel.ToolBarVisible;
 
             FbFind.Visible = _ViewModel.FindBarVisible;
-            TmiFindBar.Checked = _ViewModel.FindBarVisible;
+            //TmiFindBar.Checked = _ViewModel.FindBarVisible;
 
             SsEcho.Visible = _ViewModel.EchoBarVisible;
-            TmiEchoBar.Checked = _ViewModel.EchoBarVisible;
-            TsbEchoBar.Checked = _ViewModel.EchoBarVisible;
+            //TmiEchoBar.Checked = _ViewModel.EchoBarVisible;
+            //TsbEchoBar.Checked = _ViewModel.EchoBarVisible;
 
             Location = new Point(_ViewModel.WindowLocX, _ViewModel.WindowLocY);
             #endregion
@@ -134,40 +136,26 @@ namespace Me.Amon.Pwd
             UcTime.Start();
 
             #region 图标
-            TsbAppend.Image = _ViewModel.GetImage("menu-key-append");
-            TsbUpdate.Image = _ViewModel.GetImage("menu-key-update");
-            TsbDelete.Image = _ViewModel.GetImage("menu-key-delete");
+            //TsbAppend.Image = _ViewModel.GetImage("menu-key-append");
+            //TsbUpdate.Image = _ViewModel.GetImage("menu-key-update");
+            //TsbDelete.Image = _ViewModel.GetImage("menu-key-delete");
 
-            TsbMenuBar.Image = _ViewModel.GetImage("menu-view-menubar");
-            TsbToolBar.Image = _ViewModel.GetImage("menu-view-toolbar");
-            TsbEchoBar.Image = _ViewModel.GetImage("menu-view-echobar");
+            //TsbMenuBar.Image = _ViewModel.GetImage("menu-view-menubar");
+            //TsbToolBar.Image = _ViewModel.GetImage("menu-view-toolbar");
+            //TsbEchoBar.Image = _ViewModel.GetImage("menu-view-echobar");
 
-            TsbSync.Image = _ViewModel.GetImage("menu-data-sync");
+            //TsbSync.Image = _ViewModel.GetImage("menu-data-sync");
 
-            TsbKeys.Image = _ViewModel.GetImage("menu-help-hotkeys");
-            TsbInfo.Image = _ViewModel.GetImage("menu-help-topic");
+            //TsbKeys.Image = _ViewModel.GetImage("menu-help-hotkeys");
+            //TsbInfo.Image = _ViewModel.GetImage("menu-help-topic");
             #endregion
 
             #region 使用状态
-            _CmiLabels = new ToolStripMenuItem[] { CmiLabel0, CmiLabel1, CmiLabel2, CmiLabel3, CmiLabel4, CmiLabel5, CmiLabel6, CmiLabel7, CmiLabel8, CmiLabel9 };
-            _LastLabel = CmiLabel0;
-            _ImgLabels = new Image[_CmiLabels.Length];
-            for (int i = 0; i < _CmiLabels.Length; i += 1)
-            {
-                _ImgLabels[i] = _ViewModel.GetImage("key-label" + i);
-                _CmiLabels[i].Image = _ImgLabels[i];
-            }
+            _MenuBar.GetGroup("").ToString();
             #endregion
 
             #region 紧要程度
-            _CmiMajors = new ToolStripMenuItem[] { CmiMajorN2, CmiMajorN1, CmiMajor0, CmiMajorP1, CmiMajorP2, };
-            _ImgMajors = new Image[_CmiMajors.Length];
-            for (int i = 0; i < _CmiMajors.Length; i += 1)
-            {
-                _ImgMajors[i] = _ViewModel.GetImage("key-major" + i);
-                _CmiMajors[i].Image = _ImgMajors[i];
-            }
-            _LastMajor = CmiMajor0;
+            _MenuBar.GetGroup("").ToString();
             #endregion
         }
 
@@ -309,8 +297,8 @@ namespace Me.Amon.Pwd
             y -= 16;
             img = _RecHint.ContainsKey(rec.GtdId) ? _RecHint[rec.GtdId] : BeanUtil.NaN16;
             e.Graphics.DrawImage(img, x - 48, y);
-            e.Graphics.DrawImage(_ImgLabels[rec.Label], x - 32, y);
-            e.Graphics.DrawImage(_ImgMajors[rec.Major + 2], x - 16, y);
+            //e.Graphics.DrawImage(_ImgLabels[rec.Label], x - 32, y);
+            //e.Graphics.DrawImage(_ImgMajors[rec.Major + 2], x - 16, y);
         }
 
         private void LbKeyList_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -506,7 +494,7 @@ namespace Me.Amon.Pwd
                 // 工具栏隐现
                 if (e.KeyCode == Keys.T)
                 {
-                    SetToolBarVisible(!TsTool.Visible);
+                    SetToolBarVisible(!TbTool.Visible);
                     return;
                 }
                 // 状态栏隐现
@@ -670,26 +658,6 @@ namespace Me.Amon.Pwd
         public void SyncData()
         {
             DoSync();
-        }
-
-        public void LocaleBackup()
-        {
-            LocaleBackup();
-        }
-
-        public void LocaleResuma()
-        {
-            LocaleResuma();
-        }
-
-        public void RemoteBackup()
-        {
-            RemoteBackup();
-        }
-
-        public void RemoteResuma()
-        {
-            RemoteResume();
         }
 
         #region 数据导出
@@ -1219,68 +1187,9 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 工具栏事件区域
-        private void TsTool_EndDrag(object sender, EventArgs e)
+        private void TbTool_EndDrag(object sender, EventArgs e)
         {
 
-        }
-
-        private void TsbAppend_Click(object sender, EventArgs e)
-        {
-            AppendKey();
-        }
-
-        private void TsbUpdate_Click(object sender, EventArgs e)
-        {
-            UpdateKey();
-        }
-
-        private void TsbDelete_Click(object sender, EventArgs e)
-        {
-            DeleteKey();
-        }
-
-        private void TsbCopy_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TsbPaste_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TsbClear_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void TsbMenu_Click(object sender, EventArgs e)
-        {
-            SetMenuBarVisible(!TmMenu.Visible);
-        }
-
-        private void TsbTool_Click(object sender, EventArgs e)
-        {
-            SetToolBarVisible(false);
-        }
-
-        private void TsbEcho_Click(object sender, EventArgs e)
-        {
-            SetEchoBarVisible(!SsEcho.Visible);
-        }
-
-        private void TsbSync_Click(object sender, EventArgs e)
-        {
-            DoSync();
-        }
-
-        private void TsbKeys_Click(object sender, EventArgs e)
-        {
-            ShowKeys();
-        }
-
-        private void TsbInfo_Click(object sender, EventArgs e)
-        {
-            ShowAbout();
         }
         #endregion
 
@@ -1416,136 +1325,6 @@ namespace Me.Amon.Pwd
             DeleteKey();
         }
 
-        #region 使用状态
-        private ToolStripMenuItem _LastLabel;
-        private ToolStripMenuItem[] _CmiLabels;
-        private Image[] _ImgLabels;
-        private void CmiLabel0_Click(object sender, EventArgs e)
-        {
-            ChangeLabel(0);
-            _LastLabel.Checked = false;
-            _LastLabel = CmiLabel0;
-            _LastLabel.Checked = true;
-        }
-
-        private void CmiLabel1_Click(object sender, EventArgs e)
-        {
-            ChangeLabel(1);
-            _LastLabel.Checked = false;
-            _LastLabel = CmiLabel1;
-            _LastLabel.Checked = true;
-        }
-
-        private void CmiLabel2_Click(object sender, EventArgs e)
-        {
-            ChangeLabel(2);
-            _LastLabel.Checked = false;
-            _LastLabel = CmiLabel2;
-            _LastLabel.Checked = true;
-        }
-
-        private void CmiLabel3_Click(object sender, EventArgs e)
-        {
-            ChangeLabel(3);
-            _LastLabel.Checked = false;
-            _LastLabel = CmiLabel3;
-            _LastLabel.Checked = true;
-        }
-
-        private void CmiLabel4_Click(object sender, EventArgs e)
-        {
-            ChangeLabel(4);
-            _LastLabel.Checked = false;
-            _LastLabel = CmiLabel4;
-            _LastLabel.Checked = true;
-        }
-
-        private void CmiLabel5_Click(object sender, EventArgs e)
-        {
-            ChangeLabel(5);
-            _LastLabel.Checked = false;
-            _LastLabel = CmiLabel5;
-            _LastLabel.Checked = true;
-        }
-
-        private void CmiLabel6_Click(object sender, EventArgs e)
-        {
-            ChangeLabel(6);
-            _LastLabel.Checked = false;
-            _LastLabel = CmiLabel6;
-            _LastLabel.Checked = true;
-        }
-
-        private void CmiLabel7_Click(object sender, EventArgs e)
-        {
-            ChangeLabel(7);
-            _LastLabel.Checked = false;
-            _LastLabel = CmiLabel7;
-            _LastLabel.Checked = true;
-        }
-
-        private void CmiLabel8_Click(object sender, EventArgs e)
-        {
-            ChangeLabel(8);
-            _LastLabel.Checked = false;
-            _LastLabel = CmiLabel8;
-            _LastLabel.Checked = true;
-        }
-
-        private void CmiLabel9_Click(object sender, EventArgs e)
-        {
-            ChangeLabel(9);
-            _LastLabel.Checked = false;
-            _LastLabel = CmiLabel9;
-            _LastLabel.Checked = true;
-        }
-        #endregion
-
-        #region 优先级
-        private ToolStripMenuItem _LastMajor;
-        private ToolStripMenuItem[] _CmiMajors;
-        private Image[] _ImgMajors;
-        private void CmiMajorP2_Click(object sender, EventArgs e)
-        {
-            ChangeMajor(2);
-            _LastMajor.Checked = false;
-            _LastMajor = CmiMajorP2;
-            _LastMajor.Checked = true;
-        }
-
-        private void CmiMajorP1_Click(object sender, EventArgs e)
-        {
-            ChangeMajor(1);
-            _LastMajor.Checked = false;
-            _LastMajor = CmiMajorP1;
-            _LastMajor.Checked = true;
-        }
-
-        private void CmiMajor0_Click(object sender, EventArgs e)
-        {
-            ChangeMajor(0);
-            _LastMajor.Checked = false;
-            _LastMajor = CmiMajor0;
-            _LastMajor.Checked = true;
-        }
-
-        private void CmiMajorN1_Click(object sender, EventArgs e)
-        {
-            ChangeMajor(-1);
-            _LastMajor.Checked = false;
-            _LastMajor = CmiMajorN1;
-            _LastMajor.Checked = true;
-        }
-
-        private void CmiMajorN2_Click(object sender, EventArgs e)
-        {
-            ChangeMajor(-2);
-            _LastMajor.Checked = false;
-            _LastMajor = CmiMajorN2;
-            _LastMajor.Checked = true;
-        }
-        #endregion
-
         private void CmiMoveto_Click(object sender, EventArgs e)
         {
             CatView view = new CatView(_UserModel);
@@ -1562,6 +1341,7 @@ namespace Me.Amon.Pwd
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
+        #endregion
         #endregion
         #endregion
         #endregion
@@ -1616,13 +1396,7 @@ namespace Me.Amon.Pwd
         {
             _PwdView.ShowData();
 
-            _LastLabel.Checked = false;
-            _LastLabel = _CmiLabels[rec.Label];
-            _LastLabel.Checked = true;
-
-            _LastMajor.Checked = false;
-            _LastMajor = _CmiMajors[rec.Major + 2];
-            _LastMajor.Checked = true;
+            _MenuBar.GetGroup("");
         }
         #endregion
 
@@ -1643,15 +1417,11 @@ namespace Me.Amon.Pwd
                 {
                     return;
                 }
-                _PwdView.HideView(TpGrid);
+                //_PwdView.HideView(TpGrid);
             }
 
             _PwdView = _ProView;
-            _PwdView.InitView(TpGrid);
-
-            TmiViewPro.Checked = true;
-            TmiViewWiz.Checked = false;
-            TmiViewPad.Checked = false;
+            //_PwdView.InitView(TpGrid);
         }
 
         public void ShowAWiz()
@@ -1669,15 +1439,11 @@ namespace Me.Amon.Pwd
                 {
                     return;
                 }
-                _PwdView.HideView(TpGrid);
+                //_PwdView.HideView(TpGrid);
             }
 
             _PwdView = _WizView;
-            _PwdView.InitView(TpGrid);
-
-            TmiViewPro.Checked = false;
-            TmiViewWiz.Checked = true;
-            TmiViewPad.Checked = false;
+            //_PwdView.InitView(TpGrid);
         }
 
         public void ShowAPad()
@@ -1711,27 +1477,18 @@ namespace Me.Amon.Pwd
         public void SetMenuBarVisible(bool visible)
         {
             TmMenu.Visible = visible;
-            TmiMenuBar.Checked = visible;
-            TsbMenuBar.Checked = visible;
-
             _ViewModel.MenuBarVisible = visible;
         }
 
         public void SetToolBarVisible(bool visible)
         {
-            TsTool.Visible = visible;
-            TmiToolBar.Checked = visible;
-            TsbToolBar.Checked = visible;
-
+            TbTool.Visible = visible;
             _ViewModel.ToolBarVisible = visible;
         }
 
         public void SetEchoBarVisible(bool visible)
         {
             SsEcho.Visible = visible;
-            TmiEchoBar.Checked = visible;
-            TsbEchoBar.Checked = visible;
-
             _ViewModel.EchoBarVisible = visible;
         }
 
@@ -1744,8 +1501,6 @@ namespace Me.Amon.Pwd
             else
             {
                 VSplit.Panel1Collapsed = !visible;
-                TmiCatView.Checked = visible;
-
                 _ViewModel.CatTreeVisible = visible;
             }
         }
@@ -1759,8 +1514,6 @@ namespace Me.Amon.Pwd
             else
             {
                 VSplit.Panel2Collapsed = !visible;
-                TmiKeyList.Checked = visible;
-
                 _ViewModel.KeyListVisible = visible;
             }
         }
@@ -1768,17 +1521,13 @@ namespace Me.Amon.Pwd
         public void SetNavPaneVisible(bool visible)
         {
             HSplit.Panel1Collapsed = !visible;
-            TmiNavPane.Checked = visible;
-
             _ViewModel.NavPaneVisible = visible;
         }
 
         public void SetFindBarVisible(bool visible)
         {
-            TpGrid.RowStyles[0].Height = visible ? 32 : 0;
+            //TpGrid.RowStyles[0].Height = visible ? 32 : 0;
             FbFind.Visible = visible;
-            TmiFindBar.Checked = visible;
-
             _ViewModel.FindBarVisible = visible;
         }
         #endregion
@@ -2138,7 +1887,7 @@ namespace Me.Amon.Pwd
         {
         }
 
-        private void LocaleBackup()
+        public void LocaleBackup()
         {
             if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
             {
@@ -2158,17 +1907,17 @@ namespace Me.Amon.Pwd
             DoBackup(fd.FileName);
         }
 
-        private void RemoteBackup()
+        public void RemoteBackup()
         {
             MessageBox.Show("远程备份功能尚在完善中，敬请期待！");
         }
 
-        private void LocaleResuma()
+        public void LocaleResuma()
         {
             MessageBox.Show("本地恢复功能尚在完善中，敬请期待！");
         }
 
-        private void RemoteResume()
+        public void RemoteResume()
         {
             MessageBox.Show("远程恢复功能尚在完善中，敬请期待！");
         }
@@ -2231,7 +1980,7 @@ namespace Me.Amon.Pwd
 
         public void ShowAbout()
         {
-            new Info().ShowDialog(this);
+            new About().ShowDialog(this);
         }
         #endregion
 

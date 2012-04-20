@@ -168,6 +168,12 @@
     <Compile Include="Bar\Opt\Vcard.Designer.cs">
       <DependentUpon>Vcard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Demo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Demo.Designer.cs">
+      <DependentUpon>Demo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Gtd\EGtd.cs" />
     <Compile Include="Ico\EIco.cs" />
     <Compile Include="Ico\MIco.cs" />
@@ -240,65 +246,68 @@
     </Compile>
     <Compile Include="Pwd\EPwd.cs" />
     <Compile Include="Pwd\E\AAction.cs" />
-    <Compile Include="Pwd\E\Data\ExportTxtEvent.cs" />
-    <Compile Include="Pwd\E\Data\ExportXmlEvent.cs" />
-    <Compile Include="Pwd\E\Data\ImportTxtEvent.cs" />
-    <Compile Include="Pwd\E\Data\ImportXmlEvent.cs" />
-    <Compile Include="Pwd\E\Data\LocaleBackupEvent.cs" />
-    <Compile Include="Pwd\E\Data\LocaleResumaEvent.cs" />
-    <Compile Include="Pwd\E\Data\RemoteBackupEvent.cs" />
-    <Compile Include="Pwd\E\Data\RemoteResumaEvent.cs" />
-    <Compile Include="Pwd\E\Data\SyncEvent.cs" />
-    <Compile Include="Pwd\E\Edit\AppendAttCall.cs" />
-    <Compile Include="Pwd\E\Edit\AppendAttData.cs" />
-    <Compile Include="Pwd\E\Edit\AppendAttDate.cs" />
-    <Compile Include="Pwd\E\Edit\AppendAttFile.cs" />
-    <Compile Include="Pwd\E\Edit\AppendAttLine.cs" />
-    <Compile Include="Pwd\E\Edit\AppendAttLink.cs" />
-    <Compile Include="Pwd\E\Edit\AppendAttList.cs" />
-    <Compile Include="Pwd\E\Edit\AppendAttMail.cs" />
-    <Compile Include="Pwd\E\Edit\AppendAttMemo.cs" />
-    <Compile Include="Pwd\E\Edit\AppendAttPass.cs" />
-    <Compile Include="Pwd\E\Edit\AppendAttText.cs" />
-    <Compile Include="Pwd\E\Edit\AppendCatEvent.cs" />
-    <Compile Include="Pwd\E\Edit\AppendKeyEvent.cs" />
-    <Compile Include="Pwd\E\Edit\DeleteAttEvent.cs" />
-    <Compile Include="Pwd\E\Edit\DeleteCatEvent.cs" />
-    <Compile Include="Pwd\E\Edit\DeleteKeyEvent.cs" />
-    <Compile Include="Pwd\E\Edit\UpdateAttCall.cs" />
-    <Compile Include="Pwd\E\Edit\UpdateAttData.cs" />
-    <Compile Include="Pwd\E\Edit\UpdateAttDate.cs" />
-    <Compile Include="Pwd\E\Edit\UpdateAttFile.cs" />
-    <Compile Include="Pwd\E\Edit\UpdateAttLine.cs" />
-    <Compile Include="Pwd\E\Edit\UpdateAttLink.cs" />
-    <Compile Include="Pwd\E\Edit\UpdateAttList.cs" />
-    <Compile Include="Pwd\E\Edit\UpdateAttMail.cs" />
-    <Compile Include="Pwd\E\Edit\UpdateAttMemo.cs" />
-    <Compile Include="Pwd\E\Edit\UpdateAttPass.cs" />
-    <Compile Include="Pwd\E\Edit\UpdateAttText.cs" />
-    <Compile Include="Pwd\E\Edit\UpdateCatEvent.cs" />
-    <Compile Include="Pwd\E\Edit\UpdateKeyEvent.cs" />
-    <Compile Include="Pwd\E\File\ExitEvent.cs" />
-    <Compile Include="Pwd\E\File\HideEvent.cs" />
-    <Compile Include="Pwd\E\File\LockEvent.cs" />
-    <Compile Include="Pwd\E\Help\AboutEvent.cs" />
-    <Compile Include="Pwd\E\User\IcoEditEvent.cs" />
-    <Compile Include="Pwd\E\User\LibEditEvent.cs" />
-    <Compile Include="Pwd\E\User\LkeyEvent.cs" />
-    <Compile Include="Pwd\E\User\PkeyEvent.cs" />
-    <Compile Include="Pwd\E\User\SkeyEvent.cs" />
-    <Compile Include="Pwd\E\User\UdcEditEvent.cs" />
-    <Compile Include="Pwd\E\View\CatEvent.cs" />
-    <Compile Include="Pwd\E\View\EchobarEvent.cs" />
-    <Compile Include="Pwd\E\View\FindbarEvent.cs" />
-    <Compile Include="Pwd\E\View\NavEvent.cs" />
-    <Compile Include="Pwd\E\View\KeyEvent.cs" />
-    <Compile Include="Pwd\E\View\MenubarEvent.cs" />
-    <Compile Include="Pwd\E\View\PadPatternEvent.cs" />
-    <Compile Include="Pwd\E\View\ProPattenEvent.cs" />
-    <Compile Include="Pwd\E\View\ToolbarEvent.cs" />
-    <Compile Include="Pwd\E\View\WizPatternEvent.cs" />
-    <Compile Include="Pwd\IAction.cs" />
+    <Compile Include="Pwd\E\Data\ExportTxtAction.cs" />
+    <Compile Include="Pwd\E\Data\ExportXmlAction.cs" />
+    <Compile Include="Pwd\E\Data\ImportTxtAction.cs" />
+    <Compile Include="Pwd\E\Data\ImportXmlAction.cs" />
+    <Compile Include="Pwd\E\Data\LocaleBackupAction.cs" />
+    <Compile Include="Pwd\E\Data\LocaleResumaAction.cs" />
+    <Compile Include="Pwd\E\Data\RemoteBackupAction.cs" />
+    <Compile Include="Pwd\E\Data\RemoteResumaAction.cs" />
+    <Compile Include="Pwd\E\Data\SyncAction.cs" />
+    <Compile Include="Pwd\E\Edit\AppendAttCallAction.cs" />
+    <Compile Include="Pwd\E\Edit\AppendAttDataAction.cs" />
+    <Compile Include="Pwd\E\Edit\AppendAttDateAction.cs" />
+    <Compile Include="Pwd\E\Edit\AppendAttFileAction.cs" />
+    <Compile Include="Pwd\E\Edit\AppendAttLineAction.cs" />
+    <Compile Include="Pwd\E\Edit\AppendAttLinkAction.cs" />
+    <Compile Include="Pwd\E\Edit\AppendAttListAction.cs" />
+    <Compile Include="Pwd\E\Edit\AppendAttMailAction.cs" />
+    <Compile Include="Pwd\E\Edit\AppendAttMemoAction.cs" />
+    <Compile Include="Pwd\E\Edit\AppendAttPassAction.cs" />
+    <Compile Include="Pwd\E\Edit\AppendAttTextAction.cs" />
+    <Compile Include="Pwd\E\Edit\AppendCatAction.cs" />
+    <Compile Include="Pwd\E\Edit\AppendKeyAction.cs" />
+    <Compile Include="Pwd\E\Edit\ClearAttAction.cs" />
+    <Compile Include="Pwd\E\Edit\CopyAttAction.cs" />
+    <Compile Include="Pwd\E\Edit\DeleteAttAction.cs" />
+    <Compile Include="Pwd\E\Edit\DeleteCatAction.cs" />
+    <Compile Include="Pwd\E\Edit\DeleteKeyAction.cs" />
+    <Compile Include="Pwd\E\Edit\PasteAttAction.cs" />
+    <Compile Include="Pwd\E\Edit\UpdateAttCallAction.cs" />
+    <Compile Include="Pwd\E\Edit\UpdateAttDataAction.cs" />
+    <Compile Include="Pwd\E\Edit\UpdateAttDateAction.cs" />
+    <Compile Include="Pwd\E\Edit\UpdateAttFileAction.cs" />
+    <Compile Include="Pwd\E\Edit\UpdateAttLineAction.cs" />
+    <Compile Include="Pwd\E\Edit\UpdateAttLinkAction.cs" />
+    <Compile Include="Pwd\E\Edit\UpdateAttListAction.cs" />
+    <Compile Include="Pwd\E\Edit\UpdateAttMailAction.cs" />
+    <Compile Include="Pwd\E\Edit\UpdateAttMemoAction.cs" />
+    <Compile Include="Pwd\E\Edit\UpdateAttPassAction.cs" />
+    <Compile Include="Pwd\E\Edit\UpdateAttTextAction.cs" />
+    <Compile Include="Pwd\E\Edit\UpdateCatAction.cs" />
+    <Compile Include="Pwd\E\Edit\UpdateKeyAction.cs" />
+    <Compile Include="Pwd\E\File\ExitAction.cs" />
+    <Compile Include="Pwd\E\File\HideAction.cs" />
+    <Compile Include="Pwd\E\File\LockAction.cs" />
+    <Compile Include="Pwd\E\Help\AboutAction.cs" />
+    <Compile Include="Pwd\E\User\IcoEditAction.cs" />
+    <Compile Include="Pwd\E\User\LibEditAction.cs" />
+    <Compile Include="Pwd\E\User\LkeyAction.cs" />
+    <Compile Include="Pwd\E\User\PkeyAction.cs" />
+    <Compile Include="Pwd\E\User\SkeyAction.cs" />
+    <Compile Include="Pwd\E\User\UdcEditAction.cs" />
+    <Compile Include="Pwd\E\View\CatAction.cs" />
+    <Compile Include="Pwd\E\View\EchobarAction.cs" />
+    <Compile Include="Pwd\E\View\FindbarAction.cs" />
+    <Compile Include="Pwd\E\View\NavAction.cs" />
+    <Compile Include="Pwd\E\View\KeyAction.cs" />
+    <Compile Include="Pwd\E\View\MenubarAction.cs" />
+    <Compile Include="Pwd\E\View\PadPatternAction.cs" />
+    <Compile Include="Pwd\E\View\ProPattenAction.cs" />
+    <Compile Include="Pwd\E\View\ToolbarAction.cs" />
+    <Compile Include="Pwd\E\View\WizPatternAction.cs" />
+    <Compile Include="Pwd\E\IAction.cs" />
     <Compile Include="Pwd\_Att\CallAtt.cs" />
     <Compile Include="Da\DBAccess.cs" />
     <Compile Include="Da\DBObject.cs" />
@@ -324,11 +333,11 @@
       <DependentUpon>AIco.cs</DependentUpon>
     </Compile>
     <Compile Include="IEnv.cs" />
-    <Compile Include="Info.cs">
+    <Compile Include="About.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Info.Designer.cs">
-      <DependentUpon>Info.cs</DependentUpon>
+    <Compile Include="About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="ISec.cs" />
     <Compile Include="Main.cs">
@@ -1013,11 +1022,14 @@
     <EmbeddedResource Include="Bar\Opt\Vcard.resx">
       <DependentUpon>Vcard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Demo.resx">
+      <DependentUpon>Demo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ico\AIco.resx">
       <DependentUpon>AIco.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Info.resx">
-      <DependentUpon>Info.cs</DependentUpon>
+    <EmbeddedResource Include="About.resx">
+      <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

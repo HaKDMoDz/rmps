@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace Me.Amon
 {
-    partial class Info : Form
+    partial class About : Form
     {
-        public Info()
+        public About()
         {
             InitializeComponent();
 

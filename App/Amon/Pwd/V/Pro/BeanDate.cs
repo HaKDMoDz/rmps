@@ -9,7 +9,6 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class BeanDate : ADate, IAttEdit
     {
-        private Att _Att;
         private TextBox _Ctl;
 
         #region 构造函数

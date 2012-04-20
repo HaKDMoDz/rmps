@@ -1,77 +1,197 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
+using Me.Amon.Pwd.E;
 using Me.Amon.Util;
 
 namespace Me.Amon.Uc
 {
-    public interface IEventHandler
-    {
-        void EventHandler(object sender, EventArgs e);
-    }
-
-    public class ButtonGroup
-    {
-        public void Add(object obj, ToolStripItem item)
-        {
-        }
-    }
-
     public class MenuBar
     {
-        private XmlDocument document;
-        private Dictionary<string, ToolStripItem> buttons;
-        private Dictionary<string, IEventHandler> actions;
-        private Dictionary<string, ButtonGroup> groups;
+        private string _Error;
+        private XmlDocument _Document;
+        private Dictionary<string, Assembly> _Assemblys;
+        private Dictionary<string, ToolStripItem> _Items;
+        private Dictionary<string, ItemGroup> _Groups;
+        private Dictionary<string, IAction> _Actions;
+        private List<KeyStroke> _Strokes;
 
+        #region 构造函数
         public MenuBar()
         {
-            buttons = new Dictionary<string, ToolStripItem>();
-            actions = new Dictionary<string, IEventHandler>();
-            groups = new Dictionary<string, ButtonGroup>();
+            _Items = new Dictionary<string, ToolStripItem>();
+            _Groups = new Dictionary<string, ItemGroup>();
+            _Actions = new Dictionary<string, IAction>();
+            _Strokes = new List<KeyStroke>();
         }
+        #endregion
 
+        #region 数据加载
         public bool Load(string path)
         {
+            _Error = null;
+            _Strokes.Clear();
+
+            _Document = new XmlDocument();
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                return false;
+            }
+
             StreamReader reader = new StreamReader(path);
-            bool isOk = Load(reader);
+            _Document.Load(reader);
             reader.Close();
 
-            return isOk;
+            return Load();
         }
 
         public bool Load(TextReader reader)
         {
-            document = new XmlDocument();
-            document.Load(reader);
-            return document != null;
+            _Error = null;
+            _Strokes.Clear();
+
+            _Document.Load(reader);
+            return Load();
         }
+
+        private bool Load()
+        {
+            _Assemblys = new Dictionary<string, Assembly>();
+            _Assemblys[""] = Assembly.GetExecutingAssembly();
+
+            #region 类库
+            XmlNodeList list = _Document.SelectNodes("/Amon/Libs/Lib");
+            if (list == null || list.Count < 1)
+            {
+                return true;
+            }
+
+            try
+            {
+                string path = Application.StartupPath;
+                foreach (XmlNode node in list)
+                {
+                    string file = Attribute(node, "Path", "");
+                    if (!CharUtil.IsValidate(file))
+                    {
+                        continue;
+                    }
+                    if (!Path.IsPathRooted(file))
+                    {
+                        file = Path.Combine(path, file);
+                    }
+                    if (!File.Exists(file))
+                    {
+                        _Error = string.Format("找不到类库 {0}", file);
+                        return false;
+                    }
+                    //动态加载程序集
+                    Assembly assembly = Assembly.LoadFrom(file);
+                    string id = Attribute(node, "Id", null);
+                    if (CharUtil.IsValidate(id))
+                    {
+                        _Assemblys[id] = assembly;
+                    }
+                }
+            }
+            catch (Exception exp)
+            {
+                _Error = exp.Message;
+                return false;
+            }
+            #endregion
+
+            #region 事件
+            list = _Document.SelectNodes("/Amon/Actions/Action");
+            if (list == null || list.Count < 1)
+            {
+                return true;
+            }
+            foreach (XmlNode node in list)
+            {
+                string id = Attribute(node, "Id", "");
+                if (string.IsNullOrWhiteSpace(id))
+                {
+                    _Error = "Action的Id不能为空！";
+                    return false;
+                }
+                string type = Attribute(node, "Class", null);
+                if (string.IsNullOrWhiteSpace(type))
+                {
+                    _Error = "Action的Class不能为空！";
+                    return false;
+                }
+
+                string libId = Attribute(node, "LibId", "");
+                if (!_Assemblys.ContainsKey(libId))
+                {
+                    libId = "";
+                }
+                Assembly assembly = _Assemblys[libId];
+
+                try
+                {
+                    IAction action = assembly.CreateInstance(type) as IAction;
+                    if (action == null)
+                    {
+                        return false;
+                    }
+                    if (!string.IsNullOrWhiteSpace(id))
+                    {
+                        _Actions[id] = action;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _Error = ex.Message;
+                    return false;
+                }
+            }
+            #endregion
+
+            return true;
+        }
+        #endregion
+
+        #region 公共函数
+        public string Error
+        {
+            get
+            {
+                return _Error;
+            }
+        }
+
+        public List<KeyStroke> KeyStrokes { get { return _Strokes; } }
 
         public ToolStripItem GetButton(string id)
         {
-            return buttons[id];
+            return _Items[id];
         }
 
-        public IEventHandler GetAction(string id)
+        public IAction GetAction(string id)
         {
-            return actions[id];
+            return _Actions[id];
         }
 
-        public ButtonGroup GetGroup(string id)
+        public ItemGroup GetGroup(string id)
         {
-            return groups[id];
+            return _Groups[id];
         }
+        #endregion
 
         #region 组件初始化
         public bool GetMenuBar(string menuId, MenuStrip menuBar)
         {
-            if (!CharUtil.IsValidate(menuId) || document == null)
+            if (!CharUtil.IsValidate(menuId) || _Document == null)
             {
                 return false;
             }
-            XmlNode root = document.SelectSingleNode(string.Format("/Amon/Menubar[@id='{0}']", menuId));
+            XmlNode root = _Document.SelectSingleNode(string.Format("/Amon/Menubar[@Id='{0}']", menuId));
             if (root == null || root.ChildNodes.Count < 1)
             {
                 return false;
@@ -105,12 +225,12 @@ namespace Me.Amon.Uc
 
         public bool GetToolBar(string toolId, ToolStrip toolBar)
         {
-            if (document == null || !CharUtil.IsValidate(toolId))
+            if (_Document == null || !CharUtil.IsValidate(toolId))
             {
                 return false;
             }
 
-            XmlNode root = document.SelectSingleNode(string.Format("/Amon/Toolbar[@id='{0}']", toolId));
+            XmlNode root = _Document.SelectSingleNode(string.Format("/Amon/Toolbar[@Id='{0}']", toolId));
             if (root == null || root.ChildNodes.Count < 1)
             {
                 return false;
@@ -119,12 +239,12 @@ namespace Me.Amon.Uc
             toolBar.Name = toolId;
             foreach (XmlNode node in root.ChildNodes)
             {
-                if ("item" == node.Name)
+                if ("Item" == node.Name)
                 {
                     toolBar.Items.Add(createButton(node));
                     continue;
                 }
-                if ("seperator" == node.Name)
+                if ("Line" == node.Name)
                 {
                     toolBar.Items.Add(new ToolStripSeparator());
                     continue;
@@ -135,11 +255,11 @@ namespace Me.Amon.Uc
 
         public bool GetPopMenu(string menuId, ContextMenuStrip menuPop)
         {
-            if (!CharUtil.IsValidate(menuId) || document == null)
+            if (!CharUtil.IsValidate(menuId) || _Document == null)
             {
                 return false;
             }
-            XmlNode root = document.SelectSingleNode(string.Format("/Amon/Popmenu[@id='{0}']", menuId));
+            XmlNode root = _Document.SelectSingleNode(string.Format("/Amon/Popmenu[@Id='{0}']", menuId));
             if (root == null || root.ChildNodes.Count < 1)
             {
                 return false;
@@ -168,14 +288,14 @@ namespace Me.Amon.Uc
             return true;
         }
 
-        public bool GetSubMenu(string partId, ToolStrip menu, IEventHandler action)
+        public bool GetSubMenu(string partId, ToolStrip menu, IAction action)
         {
-            if (document == null || !CharUtil.IsValidate(partId))
+            if (_Document == null || !CharUtil.IsValidate(partId))
             {
                 return false;
             }
 
-            XmlNode root = document.SelectSingleNode(string.Format("/Amon/Submenu[@id='{0}']", partId));
+            XmlNode root = _Document.SelectSingleNode(string.Format("/Amon/Submenu[@Id='{0}']", partId));
             if (root == null || root.ChildNodes.Count < 1)
             {
                 return false;
@@ -202,14 +322,14 @@ namespace Me.Amon.Uc
             return true;
         }
 
-        public bool GetSubMenu(string partId, ToolStripDropDownItem menu, IEventHandler action)
+        public bool GetSubMenu(string partId, ToolStripDropDownItem menu, IAction action)
         {
-            if (!CharUtil.IsValidate(partId) || document == null)
+            if (_Document == null || !CharUtil.IsValidate(partId))
             {
                 return false;
             }
 
-            XmlNode root = document.SelectSingleNode(string.Format("/Amon/Submenu[@id='{0}']", partId));
+            XmlNode root = _Document.SelectSingleNode(string.Format("/Amon/Submenu[@Id='{0}']", partId));
             if (root == null || root.ChildNodes.Count < 1)
             {
                 return false;
@@ -238,29 +358,32 @@ namespace Me.Amon.Uc
 
         public bool GetStrokes(string strokesId)
         {
-            if (!CharUtil.IsValidate(strokesId) || document == null)
+            if (_Document == null || !CharUtil.IsValidate(strokesId))
             {
                 return false;
             }
 
-            XmlNode root = document.SelectSingleNode(string.Format("/Amon/Strokes[@id='{0}']", strokesId));
-            if (root == null || root.ChildNodes.Count < 1)
+            XmlNodeList list = _Document.SelectNodes(string.Format("/Amon/Strokes[@Id='{0}']/Stroke", strokesId));
+            if (list == null || list.Count < 1)
             {
                 return false;
             }
-            processAction(root, null);
+            foreach (XmlNode node in list)
+            {
+                processStrokes(node);
+            }
             return true;
         }
         #endregion
 
         #region 对象初始化
-        private ToolStripDropDownItem createMenu(XmlNode parent, IEventHandler action)
+        private ToolStripDropDownItem createMenu(XmlNode parent, IAction action)
         {
             ToolStripDropDownItem menu = new ToolStripMenuItem();
-            string id = parent.Attributes["id"].Value;
+            string id = Attribute(parent, "Id", null);
             if (CharUtil.IsValidate(id))
             {
-                buttons[id] = menu;
+                _Items[id] = menu;
             }
 
             processText(parent, menu);
@@ -269,17 +392,17 @@ namespace Me.Amon.Uc
 
             foreach (XmlNode node in parent.ChildNodes)
             {
-                if ("menu" == node.Name)
+                if ("Menu" == node.Name)
                 {
                     menu.DropDownItems.Add(createMenu(node, action));
                     continue;
                 }
-                if ("item" == node.Name)
+                if ("Item" == node.Name)
                 {
                     menu.DropDownItems.Add(createItem(node, action));
                     continue;
                 }
-                if ("seperator" == node.Name)
+                if ("Line" == node.Name)
                 {
                     menu.DropDownItems.Add(new ToolStripSeparator());
                     continue;
@@ -288,13 +411,13 @@ namespace Me.Amon.Uc
             return menu;
         }
 
-        private ToolStripItem createItem(XmlNode node, IEventHandler action)
+        private ToolStripItem createItem(XmlNode node, IAction action)
         {
             ToolStripItem item = processType(node);
-            string id = node.Attributes["id"].Value;
+            string id = Attribute(node, "Id", null);
             if (CharUtil.IsValidate(id))
             {
-                buttons[id] = item;
+                _Items[id] = item;
             }
 
             processText(node, item);
@@ -322,11 +445,10 @@ namespace Me.Amon.Uc
         private ToolStripItem createButton(XmlNode node)
         {
             ToolStripButton button = new ToolStripButton();
-
-            string id = node.Attributes["id"].InnerText;
+            string id = Attribute(node, "Id", null);
             if (CharUtil.IsValidate(id))
             {
-                buttons[id] = button;
+                _Items[id] = button;
             }
 
             processText(node, button);
@@ -338,6 +460,52 @@ namespace Me.Amon.Uc
             processAction(node, button);
             processCommand(node, button);
             return button;
+        }
+
+        private IAction CreateAction(XmlNode node)
+        {
+            string id = Attribute(node, "Id", null);
+
+            bool validate = CharUtil.IsValidate(id);
+            IAction action = null;
+            if (validate && _Actions.ContainsKey(id))
+            {
+                action = _Actions[id];
+            }
+
+            if (action == null)
+            {
+                string type = Attribute(node, "Class", null);
+                if (string.IsNullOrWhiteSpace(type))
+                {
+                    return null;
+                }
+
+                string libId = Attribute(node, "LibId", "");
+                if (!_Assemblys.ContainsKey(libId))
+                {
+                    libId = "";
+                }
+                Assembly assembly = _Assemblys[libId];
+
+                try
+                {
+                    action = assembly.CreateInstance(type) as IAction;
+                    if (action == null)
+                    {
+                        return null;
+                    }
+                    if (!string.IsNullOrWhiteSpace(id))
+                    {
+                        _Actions[id] = action;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+            return action;
         }
         #endregion
 
@@ -482,7 +650,7 @@ namespace Me.Amon.Uc
         //                        item.addActionListener(action);
         //                        Bean.setText(item, getLang(element.attributeValue("text")));
         //                        Bean.setTips(item, getLang(element.attributeValue("tips")));
-        //                        string id = dir.getName() + '.' + element.attributeValue("id");
+        //                        string id = dir.getName() + '.' + element.attributeValue("Id");
         //                        item.setSelected(lookName.equals(id));
         //                        item.setActionCommand(id);
         //                        lookMenu.add(item);
@@ -516,7 +684,7 @@ namespace Me.Amon.Uc
         //                            item.addActionListener(action);
         //                            Bean.setText(item, getLang(element.attributeValue("text")));
         //                            Bean.setTips(item, getLang(element.attributeValue("tips")));
-        //                            string id = dir.getName() + '.' + element.attributeValue("id");
+        //                            string id = dir.getName() + '.' + element.attributeValue("Id");
         //                            item.setSelected(lookName.equals(id));
         //                            item.setActionCommand(id);
         //                            subMenu.add(item);
@@ -649,66 +817,52 @@ namespace Me.Amon.Uc
         #region 数据初始化
         private ToolStripItem processType(XmlNode node)
         {
-            string type = node.Attributes["type"].InnerText;
-            if (type == "normal")
+            string type = Attribute(node, "Type", "normal");
+            if (type == "checkbox")
             {
-                return new ToolStripMenuItem();
+                ToolStripMenuItem item = new ToolStripMenuItem();
+                item.CheckOnClick = true;
+                return item;
             }
 
-            return null;
+            return new ToolStripMenuItem();
         }
 
         private ToolStripItem processText(XmlNode node, ToolStripItem button)
         {
-            string vText = node.Attributes["text"].Value;
-            string dText = node.Attributes["text-def"].InnerText;
-            if (dText == null)
-            {
-                dText = vText;
-            }
-            if (vText != null)
-            {
-                button.Text = vText.Length > 0 ? vText : "...";
-            }
+            string text = Attribute(node, "Text", "");
+            button.Text = string.IsNullOrEmpty(text) ? "..." : text;
             return button;
         }
 
         private ToolStripItem processTips(XmlNode node, ToolStripItem button)
         {
-            string vTips = node.Attributes["tips"].InnerText;
-            string dTips = node.Attributes["tips-def"].InnerText;
-            if (dTips == null)
-            {
-                dTips = vTips;
-            }
-            button.Text = string.IsNullOrEmpty(vTips) ? null : vTips;
+            string tips = Attribute(node, "Tips", "");
+            button.ToolTipText = string.IsNullOrEmpty(tips) ? null : tips;
             return button;
         }
 
         private ToolStripItem processIcon(XmlNode node, ToolStripItem button)
         {
-            string image = node.Attributes["image"].InnerText;
-            if (CharUtil.IsValidate(image))
-            {
-                //button.Image = createIcon(temp);
-            }
+            string icon = Attribute(node, "Icon", "");
+            //button.Image = null;
             return button;
         }
 
         private ToolStripItem processGroup(XmlNode node, ToolStripItem button)
         {
-            string group = node.Attributes["group"].InnerText;
-            if (CharUtil.IsValidate(group))
+            string group = Attribute(node, "Group", "");
+            if (!string.IsNullOrWhiteSpace(group))
             {
-                ButtonGroup bg;
-                if (!groups.ContainsKey(group))
+                ItemGroup bg;
+                if (!_Groups.ContainsKey(group))
                 {
-                    bg = new ButtonGroup();
-                    groups[group] = bg;
+                    bg = new ItemGroup();
+                    _Groups[group] = bg;
                 }
                 else
                 {
-                    bg = groups[group];
+                    bg = _Groups[group];
                 }
                 bg.Add(button.Tag, button);
             }
@@ -717,150 +871,87 @@ namespace Me.Amon.Uc
 
         private ToolStripItem processEnabled(XmlNode node, ToolStripItem button)
         {
-            string text = node.Attributes["enabled"].InnerText;
-            if (CharUtil.IsValidate(text))
-            {
-                button.Enabled = "true" == text;
-            }
+            string text = Attribute(node, "Enabled", "true");
+            button.Enabled = "true" == text;
             return button;
         }
 
         private ToolStripItem processVisible(XmlNode node, ToolStripItem button)
         {
-            string text = node.Attributes["visible"].InnerText;
-            if (CharUtil.IsValidate(text))
-            {
-                button.Visible = "true" == text;
-            }
+            string text = Attribute(node, "Visible", "true");
+            button.Visible = "true" == text;
             return button;
         }
 
         private static ToolStripItem processCommand(XmlNode node, ToolStripItem button)
         {
-            string command = node.Attributes["command"].InnerText;
-            if (CharUtil.IsValidate(command))
-            {
-                button.Tag = command;
-            }
+            button.Tag = Attribute(node, "Command", null);
             return button;
         }
 
-        //private static ToolStripMenuItem processStrokes(XmlNode element, ToolStripMenuItem button, IMenuEventHandler action, javax.swing.JComponent component)
-        //{
-        //    java.util.List list = element.elements("stroke");
-        //    if (list == null || list.size() < 1)
-        //    {
-        //        return button;
-        //    }
+        private KeyStroke processStrokes(XmlNode node)
+        {
+            string key = Attribute(node, "Key", null);
+            if (!CharUtil.IsValidate(key))
+            {
+                return null;
+            }
 
-
-        //    for (int i = 0, j = list.size(); i < j; i += 1)
-        //    {
-        //        string temp = ((XmlNode) list.get(i)).attributeValue("key");
-        //        if (CharUtil.IsValidate(temp))
-        //        {
-        //            temp = temp.toUpperCase().replaceAll("~|SHIFT", "shift").replaceAll("\\^|CONTROL|CTRL", "control").replaceAll("#|ALT", "alt").replaceAll("!|META", "meta").replaceAll("[^-=`;',./\\[\\]a-zA-Z0-9]+", " ").trim();
-        //            javax.swing.KeyStroke stroke = javax.swing.KeyStroke.getKeyStroke(temp);
-        //            if (component != null)
-        //            {
-        //                Bean.registerKeyStrokeAction(component, stroke, action, temp, javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
-        //            }
-        //            if (button != null && i == 0 && (button instanceof javax.swing.JMenuItem))
-        //            {
-        //                ((javax.swing.JMenuItem) button).setAccelerator(stroke);
-        //            }
-        //        }
-        //    }
-        //    return button;
-        //}
+            key = key.Replace("^", "Control").Replace("~", "Shift").Replace("#", "Alt").Replace("!", "Meta");
+            key = Regex.Replace(key, "Ctrl", "Control", RegexOptions.IgnoreCase);
+            KeyStroke stroke = new KeyStroke();
+            if (!stroke.Decode(key))
+            {
+                return null;
+            }
+            stroke.Memo = Attribute(node, "Memo", "");
+            _Strokes.Add(stroke);
+            return stroke;
+        }
 
         private ToolStripItem processAction(XmlNode parent, ToolStripItem button)
         {
-            XmlNodeList list = parent.SelectNodes("action");
-            if (list == null || list.Count < 1)
-            {
-                return button;
-            }
-            string btnInit = parent.Attributes["init"].InnerText;
+            IAction action = null;
 
-            foreach (XmlNode node in list)
+            string actionId = Attribute(parent, "ActionId", null);
+            if (!string.IsNullOrWhiteSpace(actionId))
             {
-                string name = parent.Attributes["id"].InnerText;
-                bool validate = CharUtil.IsValidate(name);
-                IEventHandler action = validate ? actions[name] : null;
-                if (action == null)
+                if (_Actions.ContainsKey(actionId))
                 {
-                    string type = parent.Attributes["class"].InnerText;
-                    if (CharUtil.IsValidate(type))
+                    action = _Actions[actionId];
+                    if (action != null)
                     {
-                        try
-                        {
-                        }
-                        catch (Exception ex)
-                        {
-                            Main.ShowError(ex);
-                        }
+                        button.Click += new EventHandler(action.EventHandler);
                     }
                 }
-                if (button != null)
-                {
-                    button.Click += new EventHandler(action.EventHandler);
-                }
-                //action.reInit(button, btnInit);
-                //processStrokes(element, button, action, component);
-                processReference(parent, button, action);
-            }
-            return button;
-        }
-
-        private ToolStripItem processReference(XmlNode element, ToolStripItem button, IEventHandler action)
-        {
-            if (button == null)
-            {
                 return button;
             }
-            XmlNodeList list = element.SelectNodes("property");
+
+            XmlNodeList list = parent.ChildNodes;
             if (list == null || list.Count < 1)
             {
                 return button;
             }
 
-            string name;
-            string refId;
             foreach (XmlNode node in list)
             {
-                // 处理属性
-                name = node.Attributes["name"].InnerText;
-                if (!CharUtil.IsValidate(name))
+                if (node.Name == "Action")
                 {
+                    action = CreateAction(node);
+                    if (action != null)
+                    {
+                        button.Click += new EventHandler(action.EventHandler);
+                    }
                     continue;
                 }
 
-                // 处理引用
-                refId = node.Attributes["ref-id"].InnerText;
-                if (!CharUtil.IsValidate(refId))
+                if (node.Name == "Stroke")
                 {
-                    continue;
-                }
-
-                // 引用对象
-                action = actions[refId];
-                if (action == null)
-                {
-                    continue;
-                }
-
-                try
-                {
-                    //java.lang.reflect.Method method = button.getAction().getClass().getDeclaredMethod("set" + Char.lUpper(name), java.net.URL.class);
-                    //if (method != null)
-                    //{
-                    //    method.invoke(button.getAction(), action);
-                    //}
-                }
-                catch (Exception exp)
-                {
-                    Main.LogInfo(exp.Message);
+                    KeyStroke stroke = processStrokes(node);
+                    if (stroke != null)
+                    {
+                        stroke.Action = action;
+                    }
                 }
             }
             return button;
@@ -875,6 +966,12 @@ namespace Me.Amon.Uc
         public bool isVisible(string id)
         {
             return true;
+        }
+
+        private static string Attribute(XmlNode node, string name, string defValue)
+        {
+            XmlAttribute attr = node.Attributes[name];
+            return attr != null ? attr.InnerText : defValue;
         }
     }
 }

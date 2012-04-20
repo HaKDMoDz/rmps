@@ -6,7 +6,7 @@
         {
             if (APwd != null)
             {
-                APwd.RemoteResuma();
+                APwd.RemoteResume();
             }
         }
     }

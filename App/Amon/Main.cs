@@ -402,7 +402,7 @@ namespace Me.Amon
 
         private void MgInfo_Click(object sender, EventArgs e)
         {
-            new Info().ShowDialog();
+            new About().ShowDialog();
         }
 
         private void MgExit_Click(object sender, EventArgs e)
@@ -516,7 +516,7 @@ namespace Me.Amon
 
         private void MtInfo_Click(object sender, EventArgs e)
         {
-            new Info().ShowDialog();
+            new About().ShowDialog();
         }
 
         private void MtExit_Click(object sender, EventArgs e)
