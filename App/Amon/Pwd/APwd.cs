@@ -16,8 +16,9 @@ using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd._Cat;
 using Me.Amon.Pwd._Lib;
 using Me.Amon.Pwd._Log;
-using Me.Amon.Pwd.Pro;
-using Me.Amon.Pwd.Wiz;
+using Me.Amon.Pwd.Bean;
+using Me.Amon.Pwd.V.Pro;
+using Me.Amon.Pwd.V.Wiz;
 using Me.Amon.User;
 using Me.Amon.User.Auth;
 using Me.Amon.Util;
@@ -247,7 +248,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            ListKey(node.Name);
+            ListKeyByCat(node.Name);
             _LastNode = node;
         }
 
@@ -665,243 +666,34 @@ namespace Me.Amon.Pwd
         }
         #endregion
 
-        #region 编辑菜单
-        #region 类别编辑
-        private void TmiAppendCat_Click(object sender, EventArgs e)
-        {
-            AppendCat();
-        }
-
-        private void TmiUpdateCat_Click(object sender, EventArgs e)
-        {
-            UpdateCat();
-        }
-
-        private void TmiDeleteCat_Click(object sender, EventArgs e)
-        {
-            DeleteCat();
-        }
-        #endregion
-
-        #region 记录编辑
-        private void TmiAppendKey_Click(object sender, EventArgs e)
-        {
-            AppendKey();
-        }
-
-        private void TmiUpdateKey_Click(object sender, EventArgs e)
-        {
-            UpdateKey();
-        }
-
-        private void TmiDeleteKey_Click(object sender, EventArgs e)
-        {
-            DeleteKey();
-        }
-        #endregion
-
-        #region 属性编辑
-        #region 添加属性
-        private void TmiAppendAttText_Click(object sender, EventArgs e)
-        {
-            _PwdView.AppendAtt(Att.TYPE_TEXT);
-        }
-
-        private void TmiAppendAttPass_Click(object sender, EventArgs e)
-        {
-            _PwdView.AppendAtt(Att.TYPE_PASS);
-        }
-
-        private void TmiAppendAttLink_Click(object sender, EventArgs e)
-        {
-            _PwdView.AppendAtt(Att.TYPE_LINK);
-        }
-
-        private void TmiAppendAttMail_Click(object sender, EventArgs e)
-        {
-            _PwdView.AppendAtt(Att.TYPE_MAIL);
-        }
-
-        private void TmiAppendAttDate_Click(object sender, EventArgs e)
-        {
-            _PwdView.AppendAtt(Att.TYPE_DATE);
-        }
-
-        private void TmiAppendAttData_Click(object sender, EventArgs e)
-        {
-            _PwdView.AppendAtt(Att.TYPE_DATA);
-        }
-
-        private void TmiUpdateAttCall_Click(object sender, EventArgs e)
-        {
-            _PwdView.AppendAtt(Att.TYPE_CALL);
-        }
-
-        private void TmiAppendAttList_Click(object sender, EventArgs e)
-        {
-            _PwdView.AppendAtt(Att.TYPE_LIST);
-        }
-
-        private void TmiAppendAttMemo_Click(object sender, EventArgs e)
-        {
-            _PwdView.AppendAtt(Att.TYPE_MEMO);
-        }
-
-        private void TmiAppendAttFile_Click(object sender, EventArgs e)
-        {
-            _PwdView.AppendAtt(Att.TYPE_FILE);
-        }
-
-        private void TmiAppendAttLine_Click(object sender, EventArgs e)
-        {
-            _PwdView.AppendAtt(Att.TYPE_LINE);
-        }
-        #endregion
-
-        #region 转换属性
-        private void TmiUpdateAttText_Click(object sender, EventArgs e)
-        {
-            _PwdView.UpdateAtt(Att.TYPE_TEXT);
-        }
-
-        private void TmiUpdateAttPass_Click(object sender, EventArgs e)
-        {
-            _PwdView.UpdateAtt(Att.TYPE_PASS);
-        }
-
-        private void TmiUpdateAttLink_Click(object sender, EventArgs e)
-        {
-            _PwdView.UpdateAtt(Att.TYPE_LINK);
-        }
-
-        private void TmiUpdateAttMail_Click(object sender, EventArgs e)
-        {
-            _PwdView.UpdateAtt(Att.TYPE_MAIL);
-        }
-
-        private void TmiUpdateAttDate_Click(object sender, EventArgs e)
-        {
-            _PwdView.UpdateAtt(Att.TYPE_DATE);
-        }
-
-        private void TmiUpdateAttData_Click(object sender, EventArgs e)
-        {
-            _PwdView.UpdateAtt(Att.TYPE_DATA);
-        }
-
-        private void TmiAppendAttCall_Click(object sender, EventArgs e)
-        {
-            _PwdView.UpdateAtt(Att.TYPE_CALL);
-        }
-
-        private void TmiUpdateAttList_Click(object sender, EventArgs e)
-        {
-            _PwdView.UpdateAtt(Att.TYPE_LIST);
-        }
-
-        private void TmiUpdateAttMemo_Click(object sender, EventArgs e)
-        {
-            _PwdView.UpdateAtt(Att.TYPE_MEMO);
-        }
-
-        private void TmiUpdateAttFile_Click(object sender, EventArgs e)
-        {
-            _PwdView.UpdateAtt(Att.TYPE_FILE);
-        }
-
-        private void TmiUpdateAttLine_Click(object sender, EventArgs e)
-        {
-            _PwdView.UpdateAtt(Att.TYPE_LINE);
-        }
-        #endregion
-
-        private void TmiDeleteAtt_Click(object sender, EventArgs e)
-        {
-            _PwdView.DropAtt();
-        }
-        #endregion
-        #endregion
-
-        #region 视图菜单
-        private void TmiViewPro_Click(object sender, EventArgs e)
-        {
-            ShowAPro();
-        }
-
-        private void TmiViewWiz_Click(object sender, EventArgs e)
-        {
-            ShowAWiz();
-        }
-
-        private void TmiViewPad_Click(object sender, EventArgs e)
-        {
-            ShowAPad();
-        }
-
-        private void TmiMenuBar_Click(object sender, EventArgs e)
-        {
-            SetMenuBarVisible(false);
-        }
-
-        private void TmiToolBar_Click(object sender, EventArgs e)
-        {
-            SetToolBarVisible(!TsTool.Visible);
-        }
-
-        private void TmiEchoBar_Click(object sender, EventArgs e)
-        {
-            SetEchoBarVisible(!SsEcho.Visible);
-        }
-
-        private void TmiKeyGuid_Click(object sender, EventArgs e)
-        {
-            SetNavPaneVisible(HSplit.Panel1Collapsed);
-        }
-
-        private void TmiCatView_Click(object sender, EventArgs e)
-        {
-            SetCatTreeVisible(VSplit.Panel1Collapsed);
-        }
-
-        private void TmiKeyList_Click(object sender, EventArgs e)
-        {
-            SetKeyListVisible(VSplit.Panel2Collapsed);
-        }
-
-        private void TmiFindBar_Click(object sender, EventArgs e)
-        {
-            SetFindBarVisible(!FbFind.Visible);
-        }
-        #endregion
-
         #region 数据菜单
-        private void TmiSync_Click(object sender, EventArgs e)
+        public void SyncData()
         {
             DoSync();
         }
 
-        private void TmiLocaleBackup_Click(object sender, EventArgs e)
+        public void LocaleBackup()
         {
             LocaleBackup();
         }
 
-        private void TmiLocaleResuma_Click(object sender, EventArgs e)
+        public void LocaleResuma()
         {
             LocaleResuma();
         }
 
-        private void TmiRemoteBackup_Click(object sender, EventArgs e)
+        public void RemoteBackup()
         {
             RemoteBackup();
         }
 
-        private void TmiRemoteResuma_Click(object sender, EventArgs e)
+        public void RemoteResuma()
         {
             RemoteResume();
         }
 
         #region 数据导出
-        private void TmiExportTxt_Click(object sender, EventArgs e)
+        public void ExportTxt()
         {
             if (_SafeModel.Modified)
             {
@@ -934,7 +726,7 @@ namespace Me.Amon.Pwd
             }
         }
 
-        private void TmiExportXml_Click(object sender, EventArgs e)
+        public void ExportXml()
         {
             if (_SafeModel.Modified && DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
             {
@@ -1000,7 +792,7 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 数据导入
-        private void TmiImportTxt_Click(object sender, EventArgs e)
+        public void ImportTxt()
         {
             if (_SafeModel.Modified)
             {
@@ -1058,7 +850,7 @@ namespace Me.Amon.Pwd
             DoListKey(cat.Id);
         }
 
-        private void TmiImportXml_Click(object sender, EventArgs e)
+        public void ImportXml()
         {
             if (_SafeModel.Modified && DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
             {
@@ -1110,7 +902,7 @@ namespace Me.Amon.Pwd
             DoListKey(cat.Id);
         }
 
-        private void TmiImportVcf_Click(object sender, EventArgs e)
+        public void ImportVcf()
         {
             if (_SafeModel.Modified && DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
             {
@@ -1375,7 +1167,7 @@ namespace Me.Amon.Pwd
 
         #region 用户菜单
         #region 记录安全
-        private void TmiPkey_Click(object sender, EventArgs e)
+        public void PkeyEdit()
         {
             AuthAc authAc = new AuthAc(_UserModel);
             authAc.InitOnce();
@@ -1383,7 +1175,7 @@ namespace Me.Amon.Pwd
             authAc.ShowDialog(this);
         }
 
-        private void TmiLkey_Click(object sender, EventArgs e)
+        public void LkeyEdit()
         {
             AuthAc authAc = new AuthAc(_UserModel);
             authAc.InitOnce();
@@ -1391,13 +1183,13 @@ namespace Me.Amon.Pwd
             authAc.ShowDialog(this);
         }
 
-        private void TmiSkey_Click(object sender, EventArgs e)
+        public void SkeyEdit()
         {
         }
         #endregion
 
         #region 系统管理
-        private void TmiLib_Click(object sender, EventArgs e)
+        public void ShowLibEdit()
         {
             LibEdit edit = new LibEdit(_UserModel);
             edit.Init(_DataModel);
@@ -1405,7 +1197,7 @@ namespace Me.Amon.Pwd
             edit.Show(this);
         }
 
-        private void TmiUcs_Click(object sender, EventArgs e)
+        public void ShowUdcEdit()
         {
             UdcEditor edit = new UdcEditor(_UserModel);
             edit.Init(null, new Udc());
@@ -1413,7 +1205,7 @@ namespace Me.Amon.Pwd
             edit.Show(this);
         }
 
-        private void TmiIco_Click(object sender, EventArgs e)
+        public void ShowIcoEdit()
         {
             IcoSeeker edit = new IcoSeeker(_UserModel, _DataModel.KeyDir);
             edit.InitOnce(IEnv.IMG_KEY_LIST_DIM);
@@ -1424,24 +1216,6 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 皮肤菜单
-        #endregion
-
-        #region 帮助菜单
-        private void TmiHelp_Click(object sender, EventArgs e)
-        {
-            ShowHelp();
-        }
-
-        private void TmiKeys_Click(object sender, EventArgs e)
-        {
-            ShowKeys();
-        }
-
-        private void TmiInfo_Click(object sender, EventArgs e)
-        {
-            ShowInfo();
-        }
-        #endregion
         #endregion
 
         #region 工具栏事件区域
@@ -1506,7 +1280,7 @@ namespace Me.Amon.Pwd
 
         private void TsbInfo_Click(object sender, EventArgs e)
         {
-            ShowInfo();
+            ShowAbout();
         }
         #endregion
 
@@ -1854,7 +1628,7 @@ namespace Me.Amon.Pwd
 
         #region 私有方法
         #region 模式切换
-        private void ShowAPro()
+        public void ShowAPro()
         {
             if (_ProView == null)
             {
@@ -1880,7 +1654,7 @@ namespace Me.Amon.Pwd
             TmiViewPad.Checked = false;
         }
 
-        private void ShowAWiz()
+        public void ShowAWiz()
         {
             if (_WizView == null)
             {
@@ -1906,7 +1680,7 @@ namespace Me.Amon.Pwd
             TmiViewPad.Checked = false;
         }
 
-        private void ShowAPad()
+        public void ShowAPad()
         {
             //if (_PadView == null)
             //{
@@ -1934,7 +1708,7 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 视图调整
-        private void SetMenuBarVisible(bool visible)
+        public void SetMenuBarVisible(bool visible)
         {
             TmMenu.Visible = visible;
             TmiMenuBar.Checked = visible;
@@ -1943,7 +1717,7 @@ namespace Me.Amon.Pwd
             _ViewModel.MenuBarVisible = visible;
         }
 
-        private void SetToolBarVisible(bool visible)
+        public void SetToolBarVisible(bool visible)
         {
             TsTool.Visible = visible;
             TmiToolBar.Checked = visible;
@@ -1952,7 +1726,7 @@ namespace Me.Amon.Pwd
             _ViewModel.ToolBarVisible = visible;
         }
 
-        private void SetEchoBarVisible(bool visible)
+        public void SetEchoBarVisible(bool visible)
         {
             SsEcho.Visible = visible;
             TmiEchoBar.Checked = visible;
@@ -1961,7 +1735,7 @@ namespace Me.Amon.Pwd
             _ViewModel.EchoBarVisible = visible;
         }
 
-        private void SetCatTreeVisible(bool visible)
+        public void SetCatTreeVisible(bool visible)
         {
             if (!visible && VSplit.Panel2Collapsed)
             {
@@ -1976,7 +1750,7 @@ namespace Me.Amon.Pwd
             }
         }
 
-        private void SetKeyListVisible(bool visible)
+        public void SetKeyListVisible(bool visible)
         {
             if (!visible && VSplit.Panel1Collapsed)
             {
@@ -1991,7 +1765,7 @@ namespace Me.Amon.Pwd
             }
         }
 
-        private void SetNavPaneVisible(bool visible)
+        public void SetNavPaneVisible(bool visible)
         {
             HSplit.Panel1Collapsed = !visible;
             TmiNavPane.Checked = visible;
@@ -1999,7 +1773,7 @@ namespace Me.Amon.Pwd
             _ViewModel.NavPaneVisible = visible;
         }
 
-        private void SetFindBarVisible(bool visible)
+        public void SetFindBarVisible(bool visible)
         {
             TpGrid.RowStyles[0].Height = visible ? 32 : 0;
             FbFind.Visible = visible;
@@ -2010,7 +1784,7 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 类别处理
-        private void AppendCat()
+        public void AppendCat()
         {
             CatEdit catEdit = new CatEdit();
             catEdit.CallBackHandler = new AmonHandler<Cat>(AppendCatHandler);
@@ -2040,7 +1814,7 @@ namespace Me.Amon.Pwd
             _LastNode.Expand();
         }
 
-        private void UpdateCat()
+        public void UpdateCat()
         {
             TreeNode node = TvCatTree.SelectedNode;
             if (node == null)
@@ -2072,7 +1846,7 @@ namespace Me.Amon.Pwd
             node.ImageKey = cat.Icon;
         }
 
-        private void DeleteCat()
+        public void DeleteCat()
         {
             TreeNode node = TvCatTree.SelectedNode;
             if (node == null)
@@ -2139,7 +1913,7 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 记录处理
-        private void AppendKey()
+        public void AppendKey()
         {
             if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
             {
@@ -2149,7 +1923,7 @@ namespace Me.Amon.Pwd
             _PwdView.AppendKey();
         }
 
-        private void UpdateKey()
+        public void UpdateKey()
         {
             if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
             {
@@ -2195,7 +1969,7 @@ namespace Me.Amon.Pwd
             _PwdView.ShowInfo();
         }
 
-        private void DeleteKey()
+        public void DeleteKey()
         {
             if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
             {
@@ -2225,7 +1999,7 @@ namespace Me.Amon.Pwd
             _UserModel.DBA.SaveVcs(_SafeModel.Key);
         }
 
-        public void ListKey(string catId)
+        public void ListKeyByCat(string catId)
         {
             if (!CharUtil.IsValidateHash(catId))
             {
@@ -2250,7 +2024,7 @@ namespace Me.Amon.Pwd
             if (string.IsNullOrEmpty(meta))
             {
                 TvCatTree.SelectedNode = _LastNode;
-                ListKey(_LastNode.Name);
+                ListKeyByCat(_LastNode.Name);
                 return;
             }
 
@@ -2331,6 +2105,23 @@ namespace Me.Amon.Pwd
         }
         #endregion
 
+        #region 属性处理
+        public void AppendAtt(int att)
+        {
+            _PwdView.AppendAtt(att);
+        }
+
+        public void UpdateAtt(int att)
+        {
+            _PwdView.UpdateAtt(att);
+        }
+
+        public void DeleteAtt()
+        {
+            _PwdView.DropAtt();
+        }
+        #endregion
+
         #region 数据同步
         private void DoSync()
         {
@@ -2383,7 +2174,8 @@ namespace Me.Amon.Pwd
         }
         #endregion
 
-        private void ShowHelp()
+        #region 帮助事件
+        public void ShowHelp()
         {
             try
             {
@@ -2395,7 +2187,7 @@ namespace Me.Amon.Pwd
             }
         }
 
-        private void ShowKeys()
+        public void ShowKeys()
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("MajorKey");
@@ -2437,17 +2229,19 @@ namespace Me.Amon.Pwd
             keys.Show(this);
         }
 
-        private void ShowInfo()
+        public void ShowAbout()
         {
             new Info().ShowDialog(this);
         }
+        #endregion
 
-        private void LockForm()
+        #region 菜单事件
+        public void LockForm()
         {
             new AuthRc(_UserModel, this).ShowDialog(this);
         }
 
-        private void HideForm()
+        public void HideForm()
         {
             if (_SafeModel.Modified)
             {
@@ -2465,7 +2259,7 @@ namespace Me.Amon.Pwd
             _ViewModel.Save();
         }
 
-        private void ExitForm()
+        public void ExitForm()
         {
             _ViewModel.WindowLocX = Location.X;
             _ViewModel.WindowLocY = Location.Y;
@@ -2475,6 +2269,7 @@ namespace Me.Amon.Pwd
 
             Close();
         }
+        #endregion
         #endregion
     }
 }
