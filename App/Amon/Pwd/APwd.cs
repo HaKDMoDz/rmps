@@ -16,7 +16,6 @@ using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd._Cat;
 using Me.Amon.Pwd._Lib;
 using Me.Amon.Pwd._Log;
-using Me.Amon.Pwd.Bean;
 using Me.Amon.Pwd.V.Pro;
 using Me.Amon.Pwd.V.Wiz;
 using Me.Amon.Uc;
@@ -44,8 +43,8 @@ namespace Me.Amon.Pwd
         private APro _ProView;
         private AWiz _WizView;
         //private APad _PadView;
-        private Dictionary<string, Image> _RecIcon;
-        private Dictionary<string, Image> _RecHint;
+        private Dictionary<string, Image> _KeyIcon;
+        private Dictionary<string, Image> _KeyHint;
         private MenuBar _MenuBar;
         #endregion
 
@@ -66,6 +65,14 @@ namespace Me.Amon.Pwd
         #region 接口实现
         public void InitOnce()
         {
+            #region 菜单栏及工具栏
+            _MenuBar = new MenuBar();
+            _MenuBar.Load(Path.Combine(_UserModel.Home, "Pwd.xml"));
+            _MenuBar.GetMenuBar("APwd", MbMenu);
+            _MenuBar.GetToolBar("APwd", TbTool);
+            #endregion
+
+            #region 数据模型
             _SafeModel = new SafeModel(_UserModel);
             _SafeModel.Init();
             _DataModel = new DataModel(_UserModel);
@@ -75,87 +82,34 @@ namespace Me.Amon.Pwd
             UdcModel udcModel = new UdcModel();
             udcModel.Init(_UserModel);
             _DataModel.UdcModel = udcModel;
-
-            _RecIcon = new Dictionary<string, Image>();
-            _RecHint = new Dictionary<string, Image>();
-
-            #region 类别
-            Cat cat = new Cat { Id = "winshineapwd0000", Text = "阿木密码箱", Tips = "阿木密码箱", Icon = "Amon" };
-            IlCatTree.Images.Add("winshineapwd0000", BeanUtil.NaN16);
-            IlCatTree.Images.Add(cat.Icon, Resources.Logo);
-            _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Icon, SelectedImageKey = cat.Icon };
-            _RootNode.Tag = cat;
-            TvCatTree.Nodes.Add(_RootNode);
-            InitCat(_RootNode);
-            _RootNode.Expand();
             #endregion
 
-            #region 查找
-            FbFind = new FindBar(this);
-            FbFind.Dock = DockStyle.Fill;
-            FbFind.Location = new Point(3, 3);
-            FbFind.Name = "FbFind";
-            FbFind.Size = new Size(390, 26);
-            FbFind.TabIndex = 0;
-            //TpGrid.Controls.Add(FbFind, 0, 0);
-            #endregion
+            InitCat();
+            InitKey();
 
-            #region 视图
-            HSplit.SplitterDistance = _ViewModel.HSplitDistance;
-            HSplit.Panel1Collapsed = !_ViewModel.NavPaneVisible;
-            //TmiNavPane.Checked = _ViewModel.NavPaneVisible;
+            // 窗口布局
+            LoadLayout();
 
-            VSplit.SplitterDistance = _ViewModel.VSplitDistance;
-            VSplit.Panel1Collapsed = !_ViewModel.CatTreeVisible;
-            ToolStripMenuItem item = null;// _MenuBar.GetButton("");
-            item.Checked = _ViewModel.CatTreeVisible;
-
-            VSplit.Panel2Collapsed = !_ViewModel.KeyListVisible;
-            //TmiKeyList.Checked = _ViewModel.KeyListVisible;
-
-            TmMenu.Visible = _ViewModel.MenuBarVisible;
-            //TmiMenuBar.Checked = _ViewModel.MenuBarVisible;
-            //TsbMenuBar.Checked = _ViewModel.MenuBarVisible;
-
-            TbTool.Visible = _ViewModel.ToolBarVisible;
-            //TmiToolBar.Checked = _ViewModel.ToolBarVisible;
-            //TsbToolBar.Checked = _ViewModel.ToolBarVisible;
-
-            FbFind.Visible = _ViewModel.FindBarVisible;
-            //TmiFindBar.Checked = _ViewModel.FindBarVisible;
-
-            SsEcho.Visible = _ViewModel.EchoBarVisible;
-            //TmiEchoBar.Checked = _ViewModel.EchoBarVisible;
-            //TsbEchoBar.Checked = _ViewModel.EchoBarVisible;
-
-            Location = new Point(_ViewModel.WindowLocX, _ViewModel.WindowLocY);
-            #endregion
-
-            ShowAWiz();
-
+            // 当前时间
             UcTime.Start();
 
-            #region 图标
-            //TsbAppend.Image = _ViewModel.GetImage("menu-key-append");
-            //TsbUpdate.Image = _ViewModel.GetImage("menu-key-update");
-            //TsbDelete.Image = _ViewModel.GetImage("menu-key-delete");
-
-            //TsbMenuBar.Image = _ViewModel.GetImage("menu-view-menubar");
-            //TsbToolBar.Image = _ViewModel.GetImage("menu-view-toolbar");
-            //TsbEchoBar.Image = _ViewModel.GetImage("menu-view-echobar");
-
-            //TsbSync.Image = _ViewModel.GetImage("menu-data-sync");
-
-            //TsbKeys.Image = _ViewModel.GetImage("menu-help-hotkeys");
-            //TsbInfo.Image = _ViewModel.GetImage("menu-help-topic");
-            #endregion
+            // 向导模式
+            ShowAWiz();
 
             #region 使用状态
-            _MenuBar.GetGroup("").ToString();
+            ItemGroup group = _MenuBar.GetGroup("");
+            if (group != null)
+            {
+                group.Checked("");
+            }
             #endregion
 
             #region 紧要程度
-            _MenuBar.GetGroup("").ToString();
+            group = _MenuBar.GetGroup("");
+            if (group != null)
+            {
+                group.Checked("");
+            }
             #endregion
         }
 
@@ -197,6 +151,21 @@ namespace Me.Amon.Pwd
             return true;
         }
 
+        /// <summary>
+        /// 类别视图初始化
+        /// </summary>
+        private void InitCat()
+        {
+            Cat cat = new Cat { Id = "winshineapwd0000", Text = "阿木密码箱", Tips = "阿木密码箱", Icon = "Amon" };
+            IlCatTree.Images.Add("winshineapwd0000", BeanUtil.NaN16);
+            IlCatTree.Images.Add(cat.Icon, Resources.Logo);
+            _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Icon, SelectedImageKey = cat.Icon };
+            _RootNode.Tag = cat;
+            TvCatTree.Nodes.Add(_RootNode);
+            InitCat(_RootNode);
+            _RootNode.Expand();
+        }
+
         private void InitCat(TreeNode root)
         {
             foreach (Cat cat in _UserModel.DBA.ListCat(root.Name))
@@ -224,6 +193,125 @@ namespace Me.Amon.Pwd
                 }
             }
         }
+
+        private void InitKey()
+        {
+            _KeyIcon = new Dictionary<string, Image>();
+            _KeyHint = new Dictionary<string, Image>();
+        }
+
+        private void LoadLayout()
+        {
+            Location = new Point(_ViewModel.WindowLocX, _ViewModel.WindowLocY);
+            ClientSize = new Size(_ViewModel.WindowDimW, _ViewModel.WindowDimH);
+
+            MbMenu.Visible = _ViewModel.MenuBarVisible;
+            ToolStripMenuItem item = _MenuBar.GetItem("menubar-visible");
+            if (item != null)
+            {
+                item.Checked = _ViewModel.MenuBarVisible;
+            }
+            ToolStripButton button = _MenuBar.GetButton("menubar-visible");
+            if (button != null)
+            {
+                button.Checked = _ViewModel.MenuBarVisible;
+            }
+
+            TbTool.Visible = _ViewModel.ToolBarVisible;
+            item = _MenuBar.GetItem("toolbar-visible");
+            if (item != null)
+            {
+                item.Checked = _ViewModel.ToolBarVisible;
+            }
+            button = _MenuBar.GetButton("toolbar-visible");
+            if (button != null)
+            {
+                button.Checked = _ViewModel.ToolBarVisible;
+            }
+
+            HSplit.SplitterDistance = _ViewModel.HSplitDistance;
+            HSplit.Panel1Collapsed = !_ViewModel.NavPaneVisible;
+            item = _MenuBar.GetItem("navpane-visible");
+            if (item != null)
+            {
+                item.Checked = _ViewModel.NavPaneVisible;
+            }
+            button = _MenuBar.GetButton("navpane-visible");
+            if (button != null)
+            {
+                button.Checked = _ViewModel.NavPaneVisible;
+            }
+
+            VSplit.SplitterDistance = _ViewModel.VSplitDistance;
+            VSplit.Panel1Collapsed = !_ViewModel.CatTreeVisible;
+            item = _MenuBar.GetItem("cattree-visible");
+            if (item != null)
+            {
+                item.Checked = _ViewModel.CatTreeVisible;
+            }
+            button = _MenuBar.GetButton("cattree-visible");
+            if (button != null)
+            {
+                button.Checked = _ViewModel.CatTreeVisible;
+            }
+
+            VSplit.Panel2Collapsed = !_ViewModel.KeyListVisible;
+            item = _MenuBar.GetItem("keylist-visible");
+            if (item != null)
+            {
+                item.Checked = _ViewModel.KeyListVisible;
+            }
+            button = _MenuBar.GetButton("keylist-visible");
+            if (button != null)
+            {
+                button.Checked = _ViewModel.KeyListVisible;
+            }
+
+            FbFind.Visible = _ViewModel.FindBarVisible;
+            item = _MenuBar.GetItem("findbar-visible");
+            if (item != null)
+            {
+                item.Checked = _ViewModel.FindBarVisible;
+            }
+            button = _MenuBar.GetButton("findbar-visible");
+            if (button != null)
+            {
+                button.Checked = _ViewModel.FindBarVisible;
+            }
+
+            SsEcho.Visible = _ViewModel.EchoBarVisible;
+            item = _MenuBar.GetItem("echobar-visible");
+            if (item != null)
+            {
+                item.Checked = _ViewModel.EchoBarVisible;
+            }
+            button = _MenuBar.GetButton("echobar-visible");
+            if (button != null)
+            {
+                button.Checked = _ViewModel.EchoBarVisible;
+            }
+        }
+
+        private void SaveLayout()
+        {
+            _ViewModel.WindowLocX = Location.X;
+            _ViewModel.WindowLocY = Location.Y;
+            _ViewModel.WindowDimW = ClientSize.Width;
+            _ViewModel.WindowDimH = ClientSize.Height;
+
+            _ViewModel.HSplitDistance = HSplit.SplitterDistance;
+            _ViewModel.NavPaneVisible = !HSplit.Panel1Collapsed;
+
+            _ViewModel.VSplitDistance = VSplit.SplitterDistance;
+            _ViewModel.CatTreeVisible = !VSplit.Panel1Collapsed;
+            _ViewModel.KeyListVisible = !VSplit.Panel2Collapsed;
+
+            _ViewModel.FindBarVisible = FbFind.Visible;
+
+            _ViewModel.EchoBarVisible = SsEcho.Visible;
+
+            _ViewModel.Save();
+        }
         #endregion
 
         #region 事件处理
@@ -243,8 +331,8 @@ namespace Me.Amon.Pwd
         private void InitKey(IList<Key> keys)
         {
             LbKeyList.Items.Clear();
-            _RecIcon.Clear();
-            _RecHint.Clear();
+            _KeyIcon.Clear();
+            _KeyHint.Clear();
 
             foreach (Key key in keys)
             {
@@ -254,19 +342,19 @@ namespace Me.Amon.Pwd
                 {
                     if (CharUtil.IsValidateHash(key.IcoPath))
                     {
-                        _RecIcon[key.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoPath, key.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
+                        _KeyIcon[key.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoPath, key.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
                     }
                     else
                     {
-                        _RecIcon[key.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
+                        _KeyIcon[key.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
                     }
                 }
                 else
                 {
-                    _RecIcon[key.IcoName] = BeanUtil.NaN24;
+                    _KeyIcon[key.IcoName] = BeanUtil.NaN24;
                 }
 
-                _RecHint[key.GtdId] = CharUtil.IsValidateHash(key.GtdId) ? Resources.Hint : BeanUtil.NaN16;
+                _KeyHint[key.GtdId] = CharUtil.IsValidateHash(key.GtdId) ? Resources.Hint : BeanUtil.NaN16;
             }
         }
 
@@ -284,18 +372,19 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            Image img = _RecIcon.ContainsKey(rec.IcoName) ? _RecIcon[rec.IcoName] : BeanUtil.NaN24;
+            Image img = _KeyIcon.ContainsKey(rec.IcoName) ? _KeyIcon[rec.IcoName] : BeanUtil.NaN24;
             e.Graphics.DrawImage(img, e.Bounds.X + 3, e.Bounds.Y + 3, img.Width, img.Height);
 
             //最后把要显示的文字画在背景图片上
-            e.Graphics.DrawString(rec.Title, this.Font, Brushes.Black, e.Bounds.X + 36, e.Bounds.Y);
+            int y = e.Bounds.Y + 2;
+            e.Graphics.DrawString(rec.Title, this.Font, Brushes.Black, e.Bounds.X + 36, y);
 
-            int y = e.Bounds.Y + e.Bounds.Height;
+            y = e.Bounds.Y + e.Bounds.Height;
             e.Graphics.DrawString(rec.AccessTime, this.Font, Brushes.Gray, e.Bounds.X + 36, y - 14);
 
             int x = e.Bounds.X + e.Bounds.Width;
             y -= 16;
-            img = _RecHint.ContainsKey(rec.GtdId) ? _RecHint[rec.GtdId] : BeanUtil.NaN16;
+            img = _KeyHint.ContainsKey(rec.GtdId) ? _KeyHint[rec.GtdId] : BeanUtil.NaN16;
             e.Graphics.DrawImage(img, x - 48, y);
             //e.Graphics.DrawImage(_ImgLabels[rec.Label], x - 32, y);
             //e.Graphics.DrawImage(_ImgMajors[rec.Major + 2], x - 16, y);
@@ -488,7 +577,7 @@ namespace Me.Amon.Pwd
                 // 菜单栏隐现
                 if (e.KeyCode == Keys.M)
                 {
-                    SetMenuBarVisible(!TmMenu.Visible);
+                    SetMenuBarVisible(!MbMenu.Visible);
                     return;
                 }
                 // 工具栏隐现
@@ -1476,7 +1565,7 @@ namespace Me.Amon.Pwd
         #region 视图调整
         public void SetMenuBarVisible(bool visible)
         {
-            TmMenu.Visible = visible;
+            MbMenu.Visible = visible;
             _ViewModel.MenuBarVisible = visible;
         }
 
@@ -2001,20 +2090,12 @@ namespace Me.Amon.Pwd
             }
             Visible = false;
 
-            _ViewModel.WindowLocX = Location.X;
-            _ViewModel.WindowLocY = Location.Y;
-            _ViewModel.WindowDimW = Width;
-            _ViewModel.WindowDimH = Height;
-            _ViewModel.Save();
+            SaveLayout();
         }
 
         public void ExitForm()
         {
-            _ViewModel.WindowLocX = Location.X;
-            _ViewModel.WindowLocY = Location.Y;
-            _ViewModel.WindowDimW = Width;
-            _ViewModel.WindowDimH = Height;
-            _ViewModel.Save();
+            SaveLayout();
 
             Close();
         }

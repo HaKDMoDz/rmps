@@ -15,7 +15,7 @@ namespace Me.Amon.Uc
         private string _Error;
         private XmlDocument _Document;
         private Dictionary<string, Assembly> _Assemblys;
-        private Dictionary<string, ToolStripItem> _Items;
+        private Dictionary<string, ToolStripMenuItem> _Items;
         private Dictionary<string, ItemGroup> _Groups;
         private Dictionary<string, IAction> _Actions;
         private List<KeyStroke> _Strokes;
@@ -23,7 +23,7 @@ namespace Me.Amon.Uc
         #region 构造函数
         public MenuBar()
         {
-            _Items = new Dictionary<string, ToolStripItem>();
+            _Items = new Dictionary<string, ToolStripMenuItem>();
             _Groups = new Dictionary<string, ItemGroup>();
             _Actions = new Dictionary<string, IAction>();
             _Strokes = new List<KeyStroke>();
@@ -37,7 +37,7 @@ namespace Me.Amon.Uc
             _Strokes.Clear();
 
             _Document = new XmlDocument();
-            if (string.IsNullOrWhiteSpace(path))
+            if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
             {
                 return false;
             }
@@ -168,19 +168,24 @@ namespace Me.Amon.Uc
 
         public List<KeyStroke> KeyStrokes { get { return _Strokes; } }
 
-        public ToolStripItem GetButton(string id)
+        public ToolStripMenuItem GetItem(string id)
         {
-            return _Items[id];
+            return _Items.ContainsKey(id) ? _Items[id] : null;
+        }
+
+        public ToolStripButton GetButton(string id)
+        {
+            return null;
         }
 
         public IAction GetAction(string id)
         {
-            return _Actions[id];
+            return _Actions.ContainsKey(id) ? _Actions[id] : null;
         }
 
         public ItemGroup GetGroup(string id)
         {
-            return _Groups[id];
+            return _Groups.ContainsKey(id) ? _Groups[id] : null;
         }
         #endregion
 
@@ -377,9 +382,9 @@ namespace Me.Amon.Uc
         #endregion
 
         #region 对象初始化
-        private ToolStripDropDownItem createMenu(XmlNode parent, IAction action)
+        private ToolStripMenuItem createMenu(XmlNode parent, IAction action)
         {
-            ToolStripDropDownItem menu = new ToolStripMenuItem();
+            ToolStripMenuItem menu = new ToolStripMenuItem();
             string id = Attribute(parent, "Id", null);
             if (CharUtil.IsValidate(id))
             {
@@ -411,9 +416,9 @@ namespace Me.Amon.Uc
             return menu;
         }
 
-        private ToolStripItem createItem(XmlNode node, IAction action)
+        private ToolStripMenuItem createItem(XmlNode node, IAction action)
         {
-            ToolStripItem item = processType(node);
+            ToolStripMenuItem item = processType(node);
             string id = Attribute(node, "Id", null);
             if (CharUtil.IsValidate(id))
             {
@@ -442,13 +447,13 @@ namespace Me.Amon.Uc
             return item;
         }
 
-        private ToolStripItem createButton(XmlNode node)
+        private ToolStripButton createButton(XmlNode node)
         {
             ToolStripButton button = new ToolStripButton();
             string id = Attribute(node, "Id", null);
             if (CharUtil.IsValidate(id))
             {
-                _Items[id] = button;
+                //_Items[id] = button;
             }
 
             processText(node, button);
@@ -456,7 +461,7 @@ namespace Me.Amon.Uc
             processIcon(node, button);
             processEnabled(node, button);
             processVisible(node, button);
-            processGroup(node, button);
+            //processGroup(node, button);
             processAction(node, button);
             processCommand(node, button);
             return button;
@@ -815,7 +820,7 @@ namespace Me.Amon.Uc
         #endregion
 
         #region 数据初始化
-        private ToolStripItem processType(XmlNode node)
+        private ToolStripMenuItem processType(XmlNode node)
         {
             string type = Attribute(node, "Type", "normal");
             if (type == "checkbox")
@@ -828,28 +833,28 @@ namespace Me.Amon.Uc
             return new ToolStripMenuItem();
         }
 
-        private ToolStripItem processText(XmlNode node, ToolStripItem button)
+        private static ToolStripItem processText(XmlNode node, ToolStripItem button)
         {
             string text = Attribute(node, "Text", "");
             button.Text = string.IsNullOrEmpty(text) ? "..." : text;
             return button;
         }
 
-        private ToolStripItem processTips(XmlNode node, ToolStripItem button)
+        private static ToolStripItem processTips(XmlNode node, ToolStripItem button)
         {
             string tips = Attribute(node, "Tips", "");
             button.ToolTipText = string.IsNullOrEmpty(tips) ? null : tips;
             return button;
         }
 
-        private ToolStripItem processIcon(XmlNode node, ToolStripItem button)
+        private static ToolStripItem processIcon(XmlNode node, ToolStripItem button)
         {
             string icon = Attribute(node, "Icon", "");
             //button.Image = null;
             return button;
         }
 
-        private ToolStripItem processGroup(XmlNode node, ToolStripItem button)
+        private ToolStripMenuItem processGroup(XmlNode node, ToolStripMenuItem button)
         {
             string group = Attribute(node, "Group", "");
             if (!string.IsNullOrWhiteSpace(group))
@@ -869,14 +874,14 @@ namespace Me.Amon.Uc
             return button;
         }
 
-        private ToolStripItem processEnabled(XmlNode node, ToolStripItem button)
+        private static ToolStripItem processEnabled(XmlNode node, ToolStripItem button)
         {
             string text = Attribute(node, "Enabled", "true");
             button.Enabled = "true" == text;
             return button;
         }
 
-        private ToolStripItem processVisible(XmlNode node, ToolStripItem button)
+        private static ToolStripItem processVisible(XmlNode node, ToolStripItem button)
         {
             string text = Attribute(node, "Visible", "true");
             button.Visible = "true" == text;

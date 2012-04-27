@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Pwd.E.View
 {
-    public class NavAction : AAction
+    public class EchobarVisibleAction : AAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
@@ -14,7 +14,7 @@ namespace Me.Amon.Pwd.E.View
 
             if (APwd != null)
             {
-                APwd.SetNavPaneVisible(item.Checked);
+                APwd.SetEchoBarVisible(item.Checked);
             }
         }
     }

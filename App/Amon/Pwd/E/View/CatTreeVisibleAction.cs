@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Pwd.E.View
 {
-    public class ToolbarAction : AAction
+    public class CatTreeVisibleAction : AAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
@@ -14,7 +14,7 @@ namespace Me.Amon.Pwd.E.View
 
             if (APwd != null)
             {
-                APwd.SetToolBarVisible(item.Checked);
+                APwd.SetCatTreeVisible(item.Checked);
             }
         }
     }

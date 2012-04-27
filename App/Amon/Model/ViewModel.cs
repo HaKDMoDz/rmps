@@ -38,7 +38,6 @@ namespace Me.Amon.Model
 
         public bool NavPaneVisible { get; set; }
 
-        private int _HSplitDistance = 200;
         public int HSplitDistance
         {
             get
@@ -47,11 +46,11 @@ namespace Me.Amon.Model
             }
             set
             {
-                _HSplitDistance = value < 0 ? 200 : value;
+                _HSplitDistance = value < 0 ? 188 : value;
             }
         }
+        private int _HSplitDistance = 188;
 
-        private int _VSplitDistance = 160;
         public int VSplitDistance
         {
             get
@@ -60,14 +59,39 @@ namespace Me.Amon.Model
             }
             set
             {
-                _VSplitDistance = value < 0 ? 160 : value;
+                _VSplitDistance = value < 0 ? 152 : value;
             }
         }
+        private int _VSplitDistance = 152;
 
         public int WindowLocX { get; set; }
         public int WindowLocY { get; set; }
-        public int WindowDimW { get; set; }
-        public int WindowDimH { get; set; }
+
+        public int WindowDimW
+        {
+            get
+            {
+                return _WindowDimW;
+            }
+            set
+            {
+                _WindowDimW = value < 1 ? 584 : value;
+            }
+        }
+        private int _WindowDimW = 584;
+
+        public int WindowDimH
+        {
+            get
+            {
+                return _WindowDimH;
+            }
+            set
+            {
+                _WindowDimH = value < 1 ? 412 : value;
+            }
+        }
+        private int _WindowDimH = 412;
 
         private Dictionary<string, Image> _Imgs;
         public Image GetImage(string key)

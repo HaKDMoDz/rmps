@@ -248,12 +248,13 @@
     <Compile Include="Pwd\E\AAction.cs" />
     <Compile Include="Pwd\E\Data\ExportTxtAction.cs" />
     <Compile Include="Pwd\E\Data\ExportXmlAction.cs" />
+    <Compile Include="Pwd\E\Data\FindAction.cs" />
     <Compile Include="Pwd\E\Data\ImportTxtAction.cs" />
     <Compile Include="Pwd\E\Data\ImportXmlAction.cs" />
-    <Compile Include="Pwd\E\Data\LocaleBackupAction.cs" />
-    <Compile Include="Pwd\E\Data\LocaleResumaAction.cs" />
+    <Compile Include="Pwd\E\Data\NativeBackupAction.cs" />
+    <Compile Include="Pwd\E\Data\NativeResumeAction.cs" />
     <Compile Include="Pwd\E\Data\RemoteBackupAction.cs" />
-    <Compile Include="Pwd\E\Data\RemoteResumaAction.cs" />
+    <Compile Include="Pwd\E\Data\RemoteResumeAction.cs" />
     <Compile Include="Pwd\E\Data\SyncAction.cs" />
     <Compile Include="Pwd\E\Edit\AppendAttCallAction.cs" />
     <Compile Include="Pwd\E\Edit\AppendAttDataAction.cs" />
@@ -291,23 +292,30 @@
     <Compile Include="Pwd\E\File\HideAction.cs" />
     <Compile Include="Pwd\E\File\LockAction.cs" />
     <Compile Include="Pwd\E\Help\AboutAction.cs" />
+    <Compile Include="Pwd\E\Help\HelpAction.cs" />
+    <Compile Include="Pwd\E\Help\ShortCutsAction.cs" />
     <Compile Include="Pwd\E\User\IcoEditAction.cs" />
     <Compile Include="Pwd\E\User\LibEditAction.cs" />
     <Compile Include="Pwd\E\User\LkeyAction.cs" />
     <Compile Include="Pwd\E\User\PkeyAction.cs" />
     <Compile Include="Pwd\E\User\SkeyAction.cs" />
     <Compile Include="Pwd\E\User\UdcEditAction.cs" />
-    <Compile Include="Pwd\E\View\CatAction.cs" />
-    <Compile Include="Pwd\E\View\EchobarAction.cs" />
-    <Compile Include="Pwd\E\View\FindbarAction.cs" />
-    <Compile Include="Pwd\E\View\NavAction.cs" />
-    <Compile Include="Pwd\E\View\KeyAction.cs" />
-    <Compile Include="Pwd\E\View\MenubarAction.cs" />
+    <Compile Include="Pwd\E\View\CatTreeVisibleAction.cs" />
+    <Compile Include="Pwd\E\View\EchobarVisibleAction.cs" />
+    <Compile Include="Pwd\E\View\FindbarVisibleAction.cs" />
+    <Compile Include="Pwd\E\View\NavPaneVisibleAction.cs" />
+    <Compile Include="Pwd\E\View\KeyListVisibleAction.cs" />
+    <Compile Include="Pwd\E\View\MenubarVisibleAction.cs" />
     <Compile Include="Pwd\E\View\PadPatternAction.cs" />
     <Compile Include="Pwd\E\View\ProPattenAction.cs" />
-    <Compile Include="Pwd\E\View\ToolbarAction.cs" />
+    <Compile Include="Pwd\E\View\ToolbarVisibleAction.cs" />
+    <Compile Include="Pwd\E\View\TopMostAction.cs" />
     <Compile Include="Pwd\E\View\WizPatternAction.cs" />
     <Compile Include="Pwd\E\IAction.cs" />
+    <Compile Include="Pwd\E\_Key\ChangeLabelAction.cs" />
+    <Compile Include="Pwd\E\_Key\ChangeMajorAction.cs" />
+    <Compile Include="Pwd\E\_Key\SortDirAction.cs" />
+    <Compile Include="Pwd\E\_Key\SortKeyAction.cs" />
     <Compile Include="Pwd\_Att\CallAtt.cs" />
     <Compile Include="Da\DBAccess.cs" />
     <Compile Include="Da\DBObject.cs" />
@@ -820,8 +828,9 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Uc\Card.cs" />
+    <Compile Include="Uc\ItemGroup.cs" />
+    <Compile Include="Uc\KeyStroke.cs" />
     <Compile Include="Uc\MenuBar.cs" />
-    <Compile Include="Uc\ToolBar.cs" />
     <Compile Include="User\Auth\AuthLk.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1389,7 +1398,6 @@
     <Folder Include="Pwd\E\Skin\" />
     <Folder Include="Pwd\E\_Att\" />
     <Folder Include="Pwd\E\_Cat\" />
-    <Folder Include="Pwd\E\_Key\" />
     <Folder Include="Pwd\M\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

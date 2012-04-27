@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Pwd.E.View
 {
-    public class MenubarAction : AAction
+    public class FindbarVisibleAction : AAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
@@ -14,7 +14,7 @@ namespace Me.Amon.Pwd.E.View
 
             if (APwd != null)
             {
-                APwd.SetMenuBarVisible(item.Checked);
+                APwd.SetFindBarVisible(item.Checked);
             }
         }
     }

@@ -1,12 +1,12 @@
-﻿namespace Me.Amon.Pwd.E.Data
+﻿namespace Me.Amon.Pwd.E.View
 {
-    public class LocaleResumaAction : AAction
+    public class TopMostAction : AAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
             if (APwd != null)
             {
-                APwd.LocaleResuma();
+                APwd.TopMost = !APwd.TopMost;
             }
         }
     }

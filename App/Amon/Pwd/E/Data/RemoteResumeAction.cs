@@ -1,12 +1,12 @@
 ﻿namespace Me.Amon.Pwd.E.Data
 {
-    public class LocaleBackupAction : AAction
+    public class RemoteResumeAction : AAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
             if (APwd != null)
             {
-                APwd.LocaleBackup();
+                APwd.RemoteResume();
             }
         }
     }

@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Pwd.E.View
 {
-    public class KeyAction : AAction
+    public class MenubarVisibleAction : AAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
@@ -14,7 +14,7 @@ namespace Me.Amon.Pwd.E.View
 
             if (APwd != null)
             {
-                APwd.SetKeyListVisible(item.Checked);
+                APwd.SetMenuBarVisible(item.Checked);
             }
         }
     }

@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Pwd.E.View
 {
-    public class CatAction : AAction
+    public class KeyListVisibleAction : AAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
@@ -14,7 +14,7 @@ namespace Me.Amon.Pwd.E.View
 
             if (APwd != null)
             {
-                APwd.SetCatTreeVisible(item.Checked);
+                APwd.SetKeyListVisible(item.Checked);
             }
         }
     }
