@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E.Edit
 {
-    public class UpdateAttCallAction : AAction
+    public class UpdateAttCallAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

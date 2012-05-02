@@ -29,9 +29,9 @@
     <Action Id="update-date" Class="Me.Amon.Pwd.E.Edit.UpdateAttDateAction"/>
     <Action Id="update-data" Class="Me.Amon.Pwd.E.Edit.UpdateAttDataAction"/>
     <Action Id="update-list" Class="Me.Amon.Pwd.E.Edit.UpdateAttListAction"/>
-    <Action Id="update-memo" Class="Me.Amon.Pwd.E.Edit.UpdateAttAreaAction"/>
+    <Action Id="update-memo" Class="Me.Amon.Pwd.E.Edit.UpdateAttMemoAction"/>
     <Action Id="update-file" Class="Me.Amon.Pwd.E.Edit.UpdateAttFileAction"/>
-    <Action Id="update-line" Class="Me.Amon.Pwd.E.Edit.UpdateAttSignAction"/>
+    <Action Id="update-line" Class="Me.Amon.Pwd.E.Edit.UpdateAttLineAction"/>
     <Action Id="delete-att" Class="Me.Amon.Pwd.E.Edit.DeleteAttAction"/>
     <Action Id="append-cat" Class="Me.Amon.Pwd.E.Edit.AppendCatAction"/>
     <Action Id="update-cat" Class="Me.Amon.Pwd.E.Edit.UpdateCatAction"/>
@@ -334,7 +334,7 @@
     <Item Id="tool-edit-history" Type="toggle" Tips="显示菜单栏" ActionId="menubar-visible">
       <Icon Id="edit-history" path="var:edit-history"/>
     </Item>
-    <Item Id="tool-edit-isolate" Type="toggle" Tips="显示状态栏" ActionId="echobar-isolate">
+    <Item Id="tool-edit-isolate" Type="toggle" Tips="显示状态栏" ActionId="echobar-visible">
       <Icon Id="edit-isolate" path="var:view-prop-isolate"/>
     </Item>
     <Item Id="tool-Menu-visible" Type="toggle" Tips="显示查找栏" ActionId="findbar-visible">

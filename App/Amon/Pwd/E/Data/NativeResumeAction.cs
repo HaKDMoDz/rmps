@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E.Data
 {
-    public class NativeResumeAction : AAction
+    public class NativeResumeAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

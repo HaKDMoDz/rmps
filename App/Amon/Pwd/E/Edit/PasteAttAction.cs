@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E.Edit
 {
-    public class PasteAttAction : AAction
+    public class PasteAttAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

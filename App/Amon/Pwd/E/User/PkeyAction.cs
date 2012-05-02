@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E.User
 {
-    public class PkeyAction : AAction
+    public class PkeyAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Pwd.E.View
 {
-    public class KeyListVisibleAction : AAction
+    public class KeyListVisibleAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

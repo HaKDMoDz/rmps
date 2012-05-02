@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Pwd.E.View
 {
-    public class ToolbarVisibleAction : AAction
+    public class ToolbarVisibleAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

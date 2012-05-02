@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E.User
 {
-    public class UdcEditAction : AAction
+    public class UdcEditAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E.Data
 {
-    public class SyncAction : AAction
+    public class SyncAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

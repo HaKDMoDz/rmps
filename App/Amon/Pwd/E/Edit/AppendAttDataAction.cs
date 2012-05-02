@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E.Edit
 {
-    public class AppendAttDataAction : AAction
+    public class AppendAttDataAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

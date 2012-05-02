@@ -5,8 +5,8 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
-using Me.Amon.Pwd.E;
 using Me.Amon.Util;
+using Me.Amon.Pwd.E;
 
 namespace Me.Amon.Uc
 {
@@ -14,16 +14,18 @@ namespace Me.Amon.Uc
     {
         private string _Error;
         private XmlDocument _Document;
-        private Dictionary<string, Assembly> _Assemblys;
-        private Dictionary<string, ToolStripMenuItem> _Items;
+        private Dictionary<string, ToolStripMenuItem> _MenuItems;
+        private Dictionary<string, ToolStripButton> _Buttons;
         private Dictionary<string, ItemGroup> _Groups;
         private Dictionary<string, IAction> _Actions;
+        private Dictionary<string, Assembly> _Assemblys;
         private List<KeyStroke> _Strokes;
 
         #region 构造函数
         public MenuBar()
         {
-            _Items = new Dictionary<string, ToolStripMenuItem>();
+            _MenuItems = new Dictionary<string, ToolStripMenuItem>();
+            _Buttons = new Dictionary<string, ToolStripButton>();
             _Groups = new Dictionary<string, ItemGroup>();
             _Actions = new Dictionary<string, IAction>();
             _Strokes = new List<KeyStroke>();
@@ -65,90 +67,83 @@ namespace Me.Amon.Uc
 
             #region 类库
             XmlNodeList list = _Document.SelectNodes("/Amon/Libs/Lib");
-            if (list == null || list.Count < 1)
+            if (list != null && list.Count > 0)
             {
-                return true;
-            }
-
-            try
-            {
-                string path = Application.StartupPath;
-                foreach (XmlNode node in list)
+                try
                 {
-                    string file = Attribute(node, "Path", "");
-                    if (!CharUtil.IsValidate(file))
+                    string path = Application.StartupPath;
+                    foreach (XmlNode node in list)
                     {
-                        continue;
-                    }
-                    if (!Path.IsPathRooted(file))
-                    {
-                        file = Path.Combine(path, file);
-                    }
-                    if (!File.Exists(file))
-                    {
-                        _Error = string.Format("找不到类库 {0}", file);
-                        return false;
-                    }
-                    //动态加载程序集
-                    Assembly assembly = Assembly.LoadFrom(file);
-                    string id = Attribute(node, "Id", null);
-                    if (CharUtil.IsValidate(id))
-                    {
-                        _Assemblys[id] = assembly;
+                        string file = Attribute(node, "Path", "");
+                        if (!CharUtil.IsValidate(file))
+                        {
+                            continue;
+                        }
+                        if (!Path.IsPathRooted(file))
+                        {
+                            file = Path.Combine(path, file);
+                        }
+                        if (!File.Exists(file))
+                        {
+                            _Error = string.Format("找不到类库 {0}", file);
+                            return false;
+                        }
+                        //动态加载程序集
+                        Assembly assembly = Assembly.LoadFrom(file);
+                        string id = Attribute(node, "Id", null);
+                        if (CharUtil.IsValidate(id))
+                        {
+                            _Assemblys[id] = assembly;
+                        }
                     }
                 }
-            }
-            catch (Exception exp)
-            {
-                _Error = exp.Message;
-                return false;
+                catch (Exception exp)
+                {
+                    _Error = exp.Message;
+                    return false;
+                }
             }
             #endregion
 
             #region 事件
             list = _Document.SelectNodes("/Amon/Actions/Action");
-            if (list == null || list.Count < 1)
+            if (list != null && list.Count > 0)
             {
-                return true;
-            }
-            foreach (XmlNode node in list)
-            {
-                string id = Attribute(node, "Id", "");
-                if (string.IsNullOrWhiteSpace(id))
+                foreach (XmlNode node in list)
                 {
-                    _Error = "Action的Id不能为空！";
-                    return false;
-                }
-                string type = Attribute(node, "Class", null);
-                if (string.IsNullOrWhiteSpace(type))
-                {
-                    _Error = "Action的Class不能为空！";
-                    return false;
-                }
-
-                string libId = Attribute(node, "LibId", "");
-                if (!_Assemblys.ContainsKey(libId))
-                {
-                    libId = "";
-                }
-                Assembly assembly = _Assemblys[libId];
-
-                try
-                {
-                    IAction action = assembly.CreateInstance(type) as IAction;
-                    if (action == null)
+                    string id = Attribute(node, "Id", "");
+                    if (string.IsNullOrWhiteSpace(id))
                     {
+                        _Error = "Action的Id不能为空！";
                         return false;
                     }
-                    if (!string.IsNullOrWhiteSpace(id))
+                    string type = Attribute(node, "Class", null);
+                    if (string.IsNullOrWhiteSpace(type))
                     {
-                        _Actions[id] = action;
+                        _Error = "Action的Class不能为空！";
+                        return false;
                     }
-                }
-                catch (Exception ex)
-                {
-                    _Error = ex.Message;
-                    return false;
+
+                    string libId = Attribute(node, "LibId", "");
+                    if (!_Assemblys.ContainsKey(libId))
+                    {
+                        libId = "";
+                    }
+                    Assembly assembly = _Assemblys[libId];
+
+                    try
+                    {
+                        IPwdAction action = assembly.CreateInstance(type) as IPwdAction;
+                        if (action != null && !string.IsNullOrWhiteSpace(id))
+                        {
+                            _Actions[id] = action;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _Error = ex.Message;
+                        return false;
+                    }
                 }
             }
             #endregion
@@ -170,7 +165,7 @@ namespace Me.Amon.Uc
 
         public ToolStripMenuItem GetItem(string id)
         {
-            return _Items.ContainsKey(id) ? _Items[id] : null;
+            return _MenuItems.ContainsKey(id) ? _MenuItems[id] : null;
         }
 
         public ToolStripButton GetButton(string id)
@@ -388,7 +383,7 @@ namespace Me.Amon.Uc
             string id = Attribute(parent, "Id", null);
             if (CharUtil.IsValidate(id))
             {
-                _Items[id] = menu;
+                _MenuItems[id] = menu;
             }
 
             processText(parent, menu);
@@ -422,7 +417,7 @@ namespace Me.Amon.Uc
             string id = Attribute(node, "Id", null);
             if (CharUtil.IsValidate(id))
             {
-                _Items[id] = item;
+                _MenuItems[id] = item;
             }
 
             processText(node, item);
@@ -430,20 +425,16 @@ namespace Me.Amon.Uc
             processIcon(node, item);
             processEnabled(node, item);
             processVisible(node, item);
-            if (action == null)
-            {
-                processAction(node, item);
-            }
-            else
-            {
-                //item.addActionListener(action);
-                //if (action is IAction)
-                //{
-                //    ((IAction) action).reInit(item, element.attributeValue("init"));
-                //}
-            }
             processCommand(node, item);
             processGroup(node, item);
+            if (action == null)
+            {
+                action = processAction(node, item);
+            }
+            if (action != null)
+            {
+                action.Add(item);
+            }
             return item;
         }
 
@@ -461,9 +452,13 @@ namespace Me.Amon.Uc
             processIcon(node, button);
             processEnabled(node, button);
             processVisible(node, button);
-            //processGroup(node, button);
-            processAction(node, button);
             processCommand(node, button);
+            //processGroup(node, button);
+            IAction action = processAction(node, button);
+            if (action != null)
+            {
+                action.Add(button);
+            }
             return button;
         }
 
@@ -914,7 +909,7 @@ namespace Me.Amon.Uc
             return stroke;
         }
 
-        private ToolStripItem processAction(XmlNode parent, ToolStripItem button)
+        private IAction processAction(XmlNode parent, ToolStripItem button)
         {
             IAction action = null;
 
@@ -929,13 +924,13 @@ namespace Me.Amon.Uc
                         button.Click += new EventHandler(action.EventHandler);
                     }
                 }
-                return button;
+                return action;
             }
 
             XmlNodeList list = parent.ChildNodes;
             if (list == null || list.Count < 1)
             {
-                return button;
+                return action;
             }
 
             foreach (XmlNode node in list)
@@ -959,19 +954,9 @@ namespace Me.Amon.Uc
                     }
                 }
             }
-            return button;
+            return action;
         }
         #endregion
-
-        public bool isEnabled(string id)
-        {
-            return true;
-        }
-
-        public bool isVisible(string id)
-        {
-            return true;
-        }
 
         private static string Attribute(XmlNode node, string name, string defValue)
         {

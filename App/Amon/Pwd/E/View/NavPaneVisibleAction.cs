@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Pwd.E.View
 {
-    public class NavPaneVisibleAction : AAction
+    public class NavPaneVisibleAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

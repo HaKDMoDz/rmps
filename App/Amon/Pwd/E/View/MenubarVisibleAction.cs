@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Pwd.E.View
 {
-    public class MenubarVisibleAction : AAction
+    public class MenubarVisibleAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

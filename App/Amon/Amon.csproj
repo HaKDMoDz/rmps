@@ -168,12 +168,6 @@
     <Compile Include="Bar\Opt\Vcard.Designer.cs">
       <DependentUpon>Vcard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Demo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Demo.Designer.cs">
-      <DependentUpon>Demo.cs</DependentUpon>
-    </Compile>
     <Compile Include="Gtd\EGtd.cs" />
     <Compile Include="Ico\EIco.cs" />
     <Compile Include="Ico\MIco.cs" />
@@ -245,7 +239,7 @@
       <DependentUpon>AText.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\EPwd.cs" />
-    <Compile Include="Pwd\E\AAction.cs" />
+    <Compile Include="Pwd\E\APwdAction.cs" />
     <Compile Include="Pwd\E\Data\ExportTxtAction.cs" />
     <Compile Include="Pwd\E\Data\ExportXmlAction.cs" />
     <Compile Include="Pwd\E\Data\FindAction.cs" />
@@ -294,6 +288,7 @@
     <Compile Include="Pwd\E\Help\AboutAction.cs" />
     <Compile Include="Pwd\E\Help\HelpAction.cs" />
     <Compile Include="Pwd\E\Help\ShortCutsAction.cs" />
+    <Compile Include="Pwd\E\IPwdAction.cs" />
     <Compile Include="Pwd\E\User\IcoEditAction.cs" />
     <Compile Include="Pwd\E\User\LibEditAction.cs" />
     <Compile Include="Pwd\E\User\LkeyAction.cs" />
@@ -311,7 +306,7 @@
     <Compile Include="Pwd\E\View\ToolbarVisibleAction.cs" />
     <Compile Include="Pwd\E\View\TopMostAction.cs" />
     <Compile Include="Pwd\E\View\WizPatternAction.cs" />
-    <Compile Include="Pwd\E\IAction.cs" />
+    <Compile Include="IAction.cs" />
     <Compile Include="Pwd\E\_Key\ChangeLabelAction.cs" />
     <Compile Include="Pwd\E\_Key\ChangeMajorAction.cs" />
     <Compile Include="Pwd\E\_Key\SortDirAction.cs" />
@@ -1030,9 +1025,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Bar\Opt\Vcard.resx">
       <DependentUpon>Vcard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Demo.resx">
-      <DependentUpon>Demo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ico\AIco.resx">
       <DependentUpon>AIco.cs</DependentUpon>

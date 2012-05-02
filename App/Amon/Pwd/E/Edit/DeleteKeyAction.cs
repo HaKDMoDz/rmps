@@ -1,7 +1,7 @@
 ﻿
 namespace Me.Amon.Pwd.E.Edit
 {
-    public class DeleteKeyAction : AAction
+    public class DeleteKeyAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

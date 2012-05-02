@@ -95,22 +95,6 @@ namespace Me.Amon.Pwd
 
             // 向导模式
             ShowAWiz();
-
-            #region 使用状态
-            ItemGroup group = _MenuBar.GetGroup("");
-            if (group != null)
-            {
-                group.Checked("");
-            }
-            #endregion
-
-            #region 紧要程度
-            group = _MenuBar.GetGroup("");
-            if (group != null)
-            {
-                group.Checked("");
-            }
-            #endregion
         }
 
         public int AppId { get; set; }
@@ -204,92 +188,6 @@ namespace Me.Amon.Pwd
         {
             Location = new Point(_ViewModel.WindowLocX, _ViewModel.WindowLocY);
             ClientSize = new Size(_ViewModel.WindowDimW, _ViewModel.WindowDimH);
-
-            MbMenu.Visible = _ViewModel.MenuBarVisible;
-            ToolStripMenuItem item = _MenuBar.GetItem("menubar-visible");
-            if (item != null)
-            {
-                item.Checked = _ViewModel.MenuBarVisible;
-            }
-            ToolStripButton button = _MenuBar.GetButton("menubar-visible");
-            if (button != null)
-            {
-                button.Checked = _ViewModel.MenuBarVisible;
-            }
-
-            TbTool.Visible = _ViewModel.ToolBarVisible;
-            item = _MenuBar.GetItem("toolbar-visible");
-            if (item != null)
-            {
-                item.Checked = _ViewModel.ToolBarVisible;
-            }
-            button = _MenuBar.GetButton("toolbar-visible");
-            if (button != null)
-            {
-                button.Checked = _ViewModel.ToolBarVisible;
-            }
-
-            HSplit.SplitterDistance = _ViewModel.HSplitDistance;
-            HSplit.Panel1Collapsed = !_ViewModel.NavPaneVisible;
-            item = _MenuBar.GetItem("navpane-visible");
-            if (item != null)
-            {
-                item.Checked = _ViewModel.NavPaneVisible;
-            }
-            button = _MenuBar.GetButton("navpane-visible");
-            if (button != null)
-            {
-                button.Checked = _ViewModel.NavPaneVisible;
-            }
-
-            VSplit.SplitterDistance = _ViewModel.VSplitDistance;
-            VSplit.Panel1Collapsed = !_ViewModel.CatTreeVisible;
-            item = _MenuBar.GetItem("cattree-visible");
-            if (item != null)
-            {
-                item.Checked = _ViewModel.CatTreeVisible;
-            }
-            button = _MenuBar.GetButton("cattree-visible");
-            if (button != null)
-            {
-                button.Checked = _ViewModel.CatTreeVisible;
-            }
-
-            VSplit.Panel2Collapsed = !_ViewModel.KeyListVisible;
-            item = _MenuBar.GetItem("keylist-visible");
-            if (item != null)
-            {
-                item.Checked = _ViewModel.KeyListVisible;
-            }
-            button = _MenuBar.GetButton("keylist-visible");
-            if (button != null)
-            {
-                button.Checked = _ViewModel.KeyListVisible;
-            }
-
-            FbFind.Visible = _ViewModel.FindBarVisible;
-            item = _MenuBar.GetItem("findbar-visible");
-            if (item != null)
-            {
-                item.Checked = _ViewModel.FindBarVisible;
-            }
-            button = _MenuBar.GetButton("findbar-visible");
-            if (button != null)
-            {
-                button.Checked = _ViewModel.FindBarVisible;
-            }
-
-            SsEcho.Visible = _ViewModel.EchoBarVisible;
-            item = _MenuBar.GetItem("echobar-visible");
-            if (item != null)
-            {
-                item.Checked = _ViewModel.EchoBarVisible;
-            }
-            button = _MenuBar.GetButton("echobar-visible");
-            if (button != null)
-            {
-                button.Checked = _ViewModel.EchoBarVisible;
-            }
         }
 
         private void SaveLayout()
