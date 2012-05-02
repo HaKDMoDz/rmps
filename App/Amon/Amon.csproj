@@ -288,7 +288,6 @@
     <Compile Include="Pwd\E\Help\AboutAction.cs" />
     <Compile Include="Pwd\E\Help\HelpAction.cs" />
     <Compile Include="Pwd\E\Help\ShortCutsAction.cs" />
-    <Compile Include="Pwd\E\IPwdAction.cs" />
     <Compile Include="Pwd\E\User\IcoEditAction.cs" />
     <Compile Include="Pwd\E\User\LibEditAction.cs" />
     <Compile Include="Pwd\E\User\LkeyAction.cs" />

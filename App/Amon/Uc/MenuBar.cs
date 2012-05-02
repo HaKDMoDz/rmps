@@ -10,25 +10,28 @@ using Me.Amon.Pwd.E;
 
 namespace Me.Amon.Uc
 {
-    public class MenuBar
+    public class MenuBar<T>
     {
         private string _Error;
         private XmlDocument _Document;
         private Dictionary<string, ToolStripMenuItem> _MenuItems;
         private Dictionary<string, ToolStripButton> _Buttons;
         private Dictionary<string, ItemGroup> _Groups;
-        private Dictionary<string, IAction> _Actions;
+        private Dictionary<string, IAction<T>> _Actions;
         private Dictionary<string, Assembly> _Assemblys;
-        private List<KeyStroke> _Strokes;
+        private List<KeyStroke<T>> _Strokes;
+        private T _IApp;
 
         #region 构造函数
-        public MenuBar()
+        public MenuBar(T iApp)
         {
+            _IApp = iApp;
+
             _MenuItems = new Dictionary<string, ToolStripMenuItem>();
             _Buttons = new Dictionary<string, ToolStripButton>();
             _Groups = new Dictionary<string, ItemGroup>();
-            _Actions = new Dictionary<string, IAction>();
-            _Strokes = new List<KeyStroke>();
+            _Actions = new Dictionary<string, IAction<T>>();
+            _Strokes = new List<KeyStroke<T>>();
         }
         #endregion
 
@@ -133,10 +136,14 @@ namespace Me.Amon.Uc
 
                     try
                     {
-                        IPwdAction action = assembly.CreateInstance(type) as IPwdAction;
-                        if (action != null && !string.IsNullOrWhiteSpace(id))
+                        IAction<T> action = assembly.CreateInstance(type) as IAction<T>;
+                        if (action != null)
                         {
-                            _Actions[id] = action;
+                            action.IApp = _IApp;
+                            if (!string.IsNullOrWhiteSpace(id))
+                            {
+                                _Actions[id] = action;
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -161,7 +168,7 @@ namespace Me.Amon.Uc
             }
         }
 
-        public List<KeyStroke> KeyStrokes { get { return _Strokes; } }
+        public List<KeyStroke<T>> KeyStrokes { get { return _Strokes; } }
 
         public ToolStripMenuItem GetItem(string id)
         {
@@ -170,10 +177,10 @@ namespace Me.Amon.Uc
 
         public ToolStripButton GetButton(string id)
         {
-            return null;
+            return _Buttons.ContainsKey(id) ? _Buttons[id] : null;
         }
 
-        public IAction GetAction(string id)
+        public IAction<T> GetAction(string id)
         {
             return _Actions.ContainsKey(id) ? _Actions[id] : null;
         }
@@ -288,7 +295,7 @@ namespace Me.Amon.Uc
             return true;
         }
 
-        public bool GetSubMenu(string partId, ToolStrip menu, IAction action)
+        public bool GetSubMenu(string partId, ToolStrip menu, IAction<T> action)
         {
             if (_Document == null || !CharUtil.IsValidate(partId))
             {
@@ -322,7 +329,7 @@ namespace Me.Amon.Uc
             return true;
         }
 
-        public bool GetSubMenu(string partId, ToolStripDropDownItem menu, IAction action)
+        public bool GetSubMenu(string partId, ToolStripDropDownItem menu, IAction<T> action)
         {
             if (_Document == null || !CharUtil.IsValidate(partId))
             {
@@ -377,7 +384,7 @@ namespace Me.Amon.Uc
         #endregion
 
         #region 对象初始化
-        private ToolStripMenuItem createMenu(XmlNode parent, IAction action)
+        private ToolStripMenuItem createMenu(XmlNode parent, IAction<T> action)
         {
             ToolStripMenuItem menu = new ToolStripMenuItem();
             string id = Attribute(parent, "Id", null);
@@ -411,9 +418,9 @@ namespace Me.Amon.Uc
             return menu;
         }
 
-        private ToolStripMenuItem createItem(XmlNode node, IAction action)
+        private ToolStripMenuItem createItem(XmlNode node, IAction<T> action)
         {
-            ToolStripMenuItem item = processType(node);
+            ToolStripMenuItem item = processMenuItem(node);
             string id = Attribute(node, "Id", null);
             if (CharUtil.IsValidate(id))
             {
@@ -440,11 +447,11 @@ namespace Me.Amon.Uc
 
         private ToolStripButton createButton(XmlNode node)
         {
-            ToolStripButton button = new ToolStripButton();
+            ToolStripButton button = processButton(node);
             string id = Attribute(node, "Id", null);
             if (CharUtil.IsValidate(id))
             {
-                //_Items[id] = button;
+                _Buttons[id] = button;
             }
 
             processText(node, button);
@@ -454,7 +461,7 @@ namespace Me.Amon.Uc
             processVisible(node, button);
             processCommand(node, button);
             //processGroup(node, button);
-            IAction action = processAction(node, button);
+            IAction<T> action = processAction(node, button);
             if (action != null)
             {
                 action.Add(button);
@@ -462,12 +469,12 @@ namespace Me.Amon.Uc
             return button;
         }
 
-        private IAction CreateAction(XmlNode node)
+        private IAction<T> CreateAction(XmlNode node)
         {
             string id = Attribute(node, "Id", null);
 
             bool validate = CharUtil.IsValidate(id);
-            IAction action = null;
+            IAction<T> action = null;
             if (validate && _Actions.ContainsKey(id))
             {
                 action = _Actions[id];
@@ -490,11 +497,12 @@ namespace Me.Amon.Uc
 
                 try
                 {
-                    action = assembly.CreateInstance(type) as IAction;
+                    action = assembly.CreateInstance(type) as IAction<T>;
                     if (action == null)
                     {
                         return null;
                     }
+                    action.IApp = _IApp;
                     if (!string.IsNullOrWhiteSpace(id))
                     {
                         _Actions[id] = action;
@@ -815,10 +823,10 @@ namespace Me.Amon.Uc
         #endregion
 
         #region 数据初始化
-        private ToolStripMenuItem processType(XmlNode node)
+        private ToolStripMenuItem processMenuItem(XmlNode node)
         {
             string type = Attribute(node, "Type", "normal");
-            if (type == "checkbox")
+            if (type == "toggle")
             {
                 ToolStripMenuItem item = new ToolStripMenuItem();
                 item.CheckOnClick = true;
@@ -826,6 +834,19 @@ namespace Me.Amon.Uc
             }
 
             return new ToolStripMenuItem();
+        }
+
+        private ToolStripButton processButton(XmlNode node)
+        {
+            string type = Attribute(node, "Type", "normal");
+            if (type == "toggle")
+            {
+                ToolStripButton item = new ToolStripButton();
+                item.CheckOnClick = true;
+                return item;
+            }
+
+            return new ToolStripButton();
         }
 
         private static ToolStripItem processText(XmlNode node, ToolStripItem button)
@@ -889,7 +910,7 @@ namespace Me.Amon.Uc
             return button;
         }
 
-        private KeyStroke processStrokes(XmlNode node)
+        private KeyStroke<T> processStrokes(XmlNode node)
         {
             string key = Attribute(node, "Key", null);
             if (!CharUtil.IsValidate(key))
@@ -899,7 +920,7 @@ namespace Me.Amon.Uc
 
             key = key.Replace("^", "Control").Replace("~", "Shift").Replace("#", "Alt").Replace("!", "Meta");
             key = Regex.Replace(key, "Ctrl", "Control", RegexOptions.IgnoreCase);
-            KeyStroke stroke = new KeyStroke();
+            KeyStroke<T> stroke = new KeyStroke<T>();
             if (!stroke.Decode(key))
             {
                 return null;
@@ -909,9 +930,9 @@ namespace Me.Amon.Uc
             return stroke;
         }
 
-        private IAction processAction(XmlNode parent, ToolStripItem button)
+        private IAction<T> processAction(XmlNode parent, ToolStripItem button)
         {
-            IAction action = null;
+            IAction<T> action = null;
 
             string actionId = Attribute(parent, "ActionId", null);
             if (!string.IsNullOrWhiteSpace(actionId))
@@ -947,7 +968,7 @@ namespace Me.Amon.Uc
 
                 if (node.Name == "Stroke")
                 {
-                    KeyStroke stroke = processStrokes(node);
+                    KeyStroke<T> stroke = processStrokes(node);
                     if (stroke != null)
                     {
                         stroke.Action = action;

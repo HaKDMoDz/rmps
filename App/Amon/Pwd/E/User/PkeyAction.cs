@@ -4,9 +4,9 @@
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
-            if (APwd != null)
+            if (IApp != null)
             {
-                APwd.PkeyEdit();
+                IApp.PkeyEdit();
             }
         }
     }

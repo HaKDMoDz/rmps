@@ -1,16 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using Me.Amon.Model;
 
 namespace Me.Amon.Pwd.E
 {
-    public abstract class APwdAction : IAction
+    public abstract class APwdAction : IAction<APwd>
     {
         protected List<ToolStripItem> _Items;
 
-        public APwd APwd { get; set; }
-
-        public ViewModel ViewModel { get; set; }
+        public APwd IApp { get; set; }
 
         public virtual void DoInit() { }
 

@@ -5,9 +5,9 @@ namespace Me.Amon.Pwd.E.Edit
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
-            if (APwd != null)
+            if (IApp != null)
             {
-                APwd.DeleteKey();
+                IApp.DeleteKey();
             }
         }
     }

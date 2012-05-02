@@ -12,9 +12,30 @@ namespace Me.Amon.Pwd.E.View
                 return;
             }
 
-            if (APwd != null)
+            if (IApp != null)
             {
-                APwd.SetMenuBarVisible(item.Checked);
+                IApp.MenuBarVisible = item.Checked;
+            }
+        }
+
+        public override void ReInit()
+        {
+            if (_Items == null)
+            {
+                return;
+            }
+
+            foreach (ToolStripItem item in _Items)
+            {
+                if (item is ToolStripMenuItem)
+                {
+                    (item as ToolStripMenuItem).Checked = IApp.MenuBarVisible;
+                    continue;
+                }
+                if (item is ToolStripButton)
+                {
+                    (item as ToolStripButton).Checked = IApp.MenuBarVisible;
+                }
             }
         }
     }

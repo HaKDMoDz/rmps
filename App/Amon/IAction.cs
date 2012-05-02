@@ -1,8 +1,12 @@
-﻿namespace Me.Amon
+﻿using System.Windows.Forms;
+
+namespace Me.Amon
 {
-    public interface IAction
+    public interface IAction<T>
     {
-        void Add(System.Windows.Forms.ToolStripItem item);
+        T IApp { get; set; }
+
+        void Add(ToolStripItem item);
 
         /// <summary>
         /// 

@@ -12,15 +12,15 @@ namespace Me.Amon.Pwd.E.View
                 return;
             }
 
-            if (APwd != null)
+            if (IApp != null)
             {
-                APwd.SetCatTreeVisible(item.Checked);
+                IApp.CatTreeVisible = item.Checked;
             }
         }
 
         public override void ReInit()
         {
-            if (_Items == null || ViewModel == null)
+            if (_Items == null)
             {
                 return;
             }
@@ -29,12 +29,12 @@ namespace Me.Amon.Pwd.E.View
             {
                 if (item is ToolStripMenuItem)
                 {
-                    (item as ToolStripMenuItem).Checked = ViewModel.CatTreeVisible;
+                    (item as ToolStripMenuItem).Checked = IApp.CatTreeVisible;
                     continue;
                 }
                 if (item is ToolStripButton)
                 {
-                    (item as ToolStripButton).Checked = ViewModel.CatTreeVisible;
+                    (item as ToolStripButton).Checked = IApp.CatTreeVisible;
                 }
             }
         }

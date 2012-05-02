@@ -184,40 +184,40 @@
       <Item Type="normal" Text="删除类别" ActionId="delete-cat"/>
     </Menu>
     <Menu Id="view" Text="视图(&amp;V)">
-      <Item Type="checkbox" Text="总在最上" ActionId="top-most">
+      <Item Type="toggle" Text="总在最上" ActionId="top-most">
         <Stroke Key="F5"/>
       </Item>
       <Line/>
-      <Item Type="checkbox" Text="专业模式" Group="viewStyle">
+      <Item Type="toggle" Text="专业模式" Group="viewStyle">
         <Stroke Key="^ up"/>
       </Item>
-      <Item Type="checkbox" Text="向导模式" Group="viewStyle">
+      <Item Type="toggle" Text="向导模式" Group="viewStyle">
         <Stroke Key="^ down"/>
       </Item>
-      <Item Type="checkbox" Text="记事模式" Group="viewStyle" Visible="false">
+      <Item Type="toggle" Text="记事模式" Group="viewStyle" Visible="false">
         <Stroke Key="^ down"/>
       </Item>
       <Line/>
-      <Item Id="menubar-visible" Type="checkbox" Text="显示菜单栏" ActionId="menubar-visible">
+      <Item Id="menubar-visible" Type="toggle" Text="显示菜单栏" ActionId="menubar-visible">
         <Stroke Key="^ M"/>
       </Item>
-      <Item Id="toolbar-visible" Type="checkbox" Text="显示工具栏" ActionId="toolbar-visible">
+      <Item Id="toolbar-visible" Type="toggle" Text="显示工具栏" ActionId="toolbar-visible">
         <Stroke Key="^ T"/>
       </Item>
-      <Item Id="echobar-visible" Type="checkbox" Text="显示状态栏" ActionId="echobar-visible">
+      <Item Id="echobar-visible" Type="toggle" Text="显示状态栏" ActionId="echobar-visible">
         <Stroke Key="^ I"/>
       </Item>
-      <Item Id="findbar-visible" Type="checkbox" Text="显示查找栏" ActionId="findbar-visible">
+      <Item Id="findbar-visible" Type="toggle" Text="显示查找栏" ActionId="findbar-visible">
         <Stroke Key="^ J"/>
       </Item>
       <Line/>
-      <Item Id="navpane-visible" Type="checkbox" Text="显示导航面板" ActionId="navpane-visible">
+      <Item Id="navpane-visible" Type="toggle" Text="显示导航面板" ActionId="navpane-visible">
         <Stroke Key="^ W"/>
       </Item>
-      <Item Id="cattree-visible" Type="checkbox" Text="显示口令类别" ActionId="cattree-visible">
+      <Item Id="cattree-visible" Type="toggle" Text="显示口令类别" ActionId="cattree-visible">
         <Stroke Key="^ P"/>
       </Item>
-      <Item Id="keylist-visible" Type="checkbox" Text="显示口令列表" ActionId="keylist-visible">
+      <Item Id="keylist-visible" Type="toggle" Text="显示口令列表" ActionId="keylist-visible">
         <Stroke Key="^ J"/>
       </Item>
     </Menu>
@@ -331,13 +331,13 @@
       <Action Id="edit-next" Class="Me.Amon.Pwd.E.Edit.NextAction"/>
     </Item>
     <Line/>
-    <Item Id="tool-edit-history" Type="toggle" Tips="显示菜单栏" ActionId="menubar-visible">
+    <Item Id="menubar-visible" Type="toggle" Tips="显示菜单栏" ActionId="menubar-visible">
       <Icon Id="edit-history" path="var:edit-history"/>
     </Item>
-    <Item Id="tool-edit-isolate" Type="toggle" Tips="显示状态栏" ActionId="echobar-visible">
+    <Item Id="echobar-visible" Type="toggle" Tips="显示状态栏" ActionId="echobar-visible">
       <Icon Id="edit-isolate" path="var:view-prop-isolate"/>
     </Item>
-    <Item Id="tool-Menu-visible" Type="toggle" Tips="显示查找栏" ActionId="findbar-visible">
+    <Item Id="findbar-visible" Type="toggle" Tips="显示查找栏" ActionId="findbar-visible">
       <Icon Id="Menu-visible" path="var:view-menubar"/>
     </Item>
     <Line/>
@@ -381,64 +381,64 @@
     <Item Type="normal" Text="删除记录" ActionId="delete-key"/>
     <Line/>
     <Menu Text="标记为：">
-      <Item Type="checkbox" Text="默认(@0)" Group="label" ActionId="change-label" Command="0">
+      <Item Type="toggle" Text="默认(@0)" Group="label" ActionId="change-label" Command="0">
         <Icon cache-Id="label0" path="var:keys-label0"/>
       </Item>
       <Line/>
-      <Item Type="checkbox" Text="常使用(@1)" Group="label" ActionId="change-label" Command="1">
+      <Item Type="toggle" Text="常使用(@1)" Group="label" ActionId="change-label" Command="1">
         <Icon cache-Id="label1" path="var:keys-label1"/>
       </Item>
-      <Item Type="checkbox" Text="待注册(@2)" Group="label" ActionId="change-label" Command="2">
+      <Item Type="toggle" Text="待注册(@2)" Group="label" ActionId="change-label" Command="2">
         <Icon cache-Id="label2" path="var:keys-label2"/>
       </Item>
-      <Item Type="checkbox" Text="待认证(@3)" Group="label" ActionId="change-label" Command="3">
+      <Item Type="toggle" Text="待认证(@3)" Group="label" ActionId="change-label" Command="3">
         <Icon cache-Id="label3" path="var:keys-label3"/>
       </Item>
-      <Item Type="checkbox" Text="待激活(@4)" Group="label" ActionId="change-label" Command="4">
+      <Item Type="toggle" Text="待激活(@4)" Group="label" ActionId="change-label" Command="4">
         <Icon cache-Id="label4" path="var:keys-label4"/>
       </Item>
-      <Item Type="checkbox" Text="仅测试(@5)" Group="label" ActionId="change-label" Command="5">
+      <Item Type="toggle" Text="仅测试(@5)" Group="label" ActionId="change-label" Command="5">
         <Icon cache-Id="label5" path="var:keys-label5"/>
       </Item>
-      <Item Type="checkbox" Text="已过期(@6)" Group="label" ActionId="change-label" Command="6">
+      <Item Type="toggle" Text="已过期(@6)" Group="label" ActionId="change-label" Command="6">
         <Icon cache-Id="label6" path="var:keys-label6"/>
       </Item>
-      <Item Type="checkbox" Text="已丢失(@7)" Group="label" ActionId="change-label" Command="7">
+      <Item Type="toggle" Text="已丢失(@7)" Group="label" ActionId="change-label" Command="7">
         <Icon cache-Id="label7" path="var:keys-label7"/>
       </Item>
-      <Item Type="checkbox" Text="被禁用(@8)" Group="label" ActionId="change-label" Command="8">
+      <Item Type="toggle" Text="被禁用(@8)" Group="label" ActionId="change-label" Command="8">
         <Icon cache-Id="label8" path="var:keys-label8"/>
       </Item>
-      <Item Type="checkbox" Text="已删除(@9)" Group="label" ActionId="change-label" Command="9">
+      <Item Type="toggle" Text="已删除(@9)" Group="label" ActionId="change-label" Command="9">
         <Icon cache-Id="label9" path="var:keys-label9"/>
       </Item>
     </Menu>
     <Menu Text="重要性：">
-      <Item Type="checkbox" Text="最高" Group="major" ActionId="change-major" Command="2">
+      <Item Type="toggle" Text="最高" Group="major" ActionId="change-major" Command="2">
         <Icon cache-Id="major2" path="var:keys-major+2"/>
       </Item>
-      <Item Type="checkbox" Text="高" Group="major" ActionId="change-major" Command="1">
+      <Item Type="toggle" Text="高" Group="major" ActionId="change-major" Command="1">
         <Icon cache-Id="major1" path="var:keys-major+1"/>
       </Item>
-      <Item Type="checkbox" Text="正常" Group="major" ActionId="change-major" Command="0">
+      <Item Type="toggle" Text="正常" Group="major" ActionId="change-major" Command="0">
         <Icon cache-Id="major0" path="var:keys-major0"/>
       </Item>
-      <Item Type="checkbox" Text="低" Group="major" ActionId="change-major" Command="-1">
+      <Item Type="toggle" Text="低" Group="major" ActionId="change-major" Command="-1">
         <Icon cache-Id="major-1" path="var:keys-major-1"/>
       </Item>
-      <Item Type="checkbox" Text="最低" Group="major" ActionId="change-major" Command="-2">
+      <Item Type="toggle" Text="最低" Group="major" ActionId="change-major" Command="-2">
         <Icon cache-Id="major-2" path="var:keys-major-2"/>
       </Item>
     </Menu>
     <Menu Text="排序方式">
-      <Item Type="checkbox" Text="升序" Group="order-dir" ActionId="sort-dir" Command="true"/>
-      <Item Type="checkbox" Text="降序" Group="order-dir" ActionId="sort-dir" Command="false"/>
+      <Item Type="toggle" Text="升序" Group="order-dir" ActionId="sort-dir" Command="true"/>
+      <Item Type="toggle" Text="降序" Group="order-dir" ActionId="sort-dir" Command="false"/>
     </Menu>
     <Menu Text="排序依据">
-      <Item Type="checkbox" Text="使用频率" Group="order-key" ActionId="sort-key" Command="01"/>
-      <Item Type="checkbox" Text="口令名称" Group="order-key" ActionId="sort-key" Command="09"/>
-      <Item Type="checkbox" Text="注册时间" Group="order-key" ActionId="sort-key" Command="07"/>
-      <Item Type="checkbox" Text="到期时间" Group="order-key" ActionId="sort-key" Command="0D"/>
+      <Item Type="toggle" Text="使用频率" Group="order-key" ActionId="sort-key" Command="01"/>
+      <Item Type="toggle" Text="口令名称" Group="order-key" ActionId="sort-key" Command="09"/>
+      <Item Type="toggle" Text="注册时间" Group="order-key" ActionId="sort-key" Command="07"/>
+      <Item Type="toggle" Text="到期时间" Group="order-key" ActionId="sort-key" Command="0D"/>
     </Menu>
     <Line/>
     <Item Type="normal" Text="把数据迁移到...(@M)">
@@ -493,44 +493,44 @@
   <Submenu Id="date-template">
     <!--日期及时间-->
     <Menu Text="日期时间型">
-      <Item Type="checkbox" Text="完整格式" Group="date-template" Command="java:0d0t"/>
-      <Item Type="checkbox" Text="长格式" Group="date-template" Command="java:1d1t"/>
-      <Item Type="checkbox" Text="标准格式" Group="date-template" Command="java:2d2t"/>
-      <Item Type="checkbox" Text="短格式" Group="date-template" Command="java:3d3t"/>
+      <Item Type="toggle" Text="完整格式" Group="date-template" Command="java:0d0t"/>
+      <Item Type="toggle" Text="长格式" Group="date-template" Command="java:1d1t"/>
+      <Item Type="toggle" Text="标准格式" Group="date-template" Command="java:2d2t"/>
+      <Item Type="toggle" Text="短格式" Group="date-template" Command="java:3d3t"/>
       <Line/>
-      <Item Type="checkbox" Text="yyyyMMdd HHmmss 格式" Group="date-template" Command="user:yyyyMMdd HHmmss"/>
-      <Item Type="checkbox" Text="yyyy-MM-dd HH:mm:ss 格式" Group="date-template" Command="user:yyyy-MM-dd HH:mm:ss"/>
-      <Item Type="checkbox" Text="yyyy.MM.dd HH.mm.ss 格式" Group="date-template" Command="user:yyyy.MM.dd HH.mm.ss"/>
-      <Item Type="checkbox" Text="yyyy年MM月dd日 HH时mm分ss秒 格式" Group="date-template" Command="user:yyyy年MM月dd日 HH时mm分ss秒"/>
+      <Item Type="toggle" Text="yyyyMMdd HHmmss 格式" Group="date-template" Command="user:yyyyMMdd HHmmss"/>
+      <Item Type="toggle" Text="yyyy-MM-dd HH:mm:ss 格式" Group="date-template" Command="user:yyyy-MM-dd HH:mm:ss"/>
+      <Item Type="toggle" Text="yyyy.MM.dd HH.mm.ss 格式" Group="date-template" Command="user:yyyy.MM.dd HH.mm.ss"/>
+      <Item Type="toggle" Text="yyyy年MM月dd日 HH时mm分ss秒 格式" Group="date-template" Command="user:yyyy年MM月dd日 HH时mm分ss秒"/>
     </Menu>
     <!--日期-->
     <Menu Text="日期型">
       <!--系统定义-->
-      <Item Type="checkbox" Text="完整格式" Group="date-template" Command="java:0d"/>
-      <Item Type="checkbox" Text="长格式" Group="date-template" Command="java:1d"/>
-      <Item Type="checkbox" Text="标准格式" Group="date-template" Command="java:2d"/>
-      <Item Type="checkbox" Text="短格式" Group="date-template" Command="java:3d"/>
+      <Item Type="toggle" Text="完整格式" Group="date-template" Command="java:0d"/>
+      <Item Type="toggle" Text="长格式" Group="date-template" Command="java:1d"/>
+      <Item Type="toggle" Text="标准格式" Group="date-template" Command="java:2d"/>
+      <Item Type="toggle" Text="短格式" Group="date-template" Command="java:3d"/>
       <Line/>
       <!--用户定义-->
-      <Item Type="checkbox" Text="yyyyMMdd 格式" Group="date-template" Command="user:yyyyMMdd"/>
-      <Item Type="checkbox" Text="yyyy-MM-dd 格式" Group="date-template" Command="user:yyyy-MM-dd"/>
-      <Item Type="checkbox" Text="yyyy/MM/dd 格式" Group="date-template" Command="user:yyyy/MM/dd"/>
-      <Item Type="checkbox" Text="yyyy.MM.dd 格式" Group="date-template" Command="user:yyyy.MM.dd"/>
-      <Item Type="checkbox" Text="yyyy MM dd 格式" Group="date-template" Command="user:yyyy MM dd"/>
-      <Item Type="checkbox" Text="yyyy年MM月dd日 格式" Group="date-template" Command="user:yyyy年MM月dd日"/>
+      <Item Type="toggle" Text="yyyyMMdd 格式" Group="date-template" Command="user:yyyyMMdd"/>
+      <Item Type="toggle" Text="yyyy-MM-dd 格式" Group="date-template" Command="user:yyyy-MM-dd"/>
+      <Item Type="toggle" Text="yyyy/MM/dd 格式" Group="date-template" Command="user:yyyy/MM/dd"/>
+      <Item Type="toggle" Text="yyyy.MM.dd 格式" Group="date-template" Command="user:yyyy.MM.dd"/>
+      <Item Type="toggle" Text="yyyy MM dd 格式" Group="date-template" Command="user:yyyy MM dd"/>
+      <Item Type="toggle" Text="yyyy年MM月dd日 格式" Group="date-template" Command="user:yyyy年MM月dd日"/>
     </Menu>
     <!--时间-->
     <Menu Text="时间型">
-      <Item Type="checkbox" Text="完整格式" Group="date-template" Command="java:0t"/>
-      <Item Type="checkbox" Text="长格式" Group="date-template" Command="java:1t"/>
-      <Item Type="checkbox" Text="标准格式" Group="date-template" Command="java:2t"/>
-      <Item Type="checkbox" Text="短格式" Group="date-template" Command="java:3t"/>
+      <Item Type="toggle" Text="完整格式" Group="date-template" Command="java:0t"/>
+      <Item Type="toggle" Text="长格式" Group="date-template" Command="java:1t"/>
+      <Item Type="toggle" Text="标准格式" Group="date-template" Command="java:2t"/>
+      <Item Type="toggle" Text="短格式" Group="date-template" Command="java:3t"/>
       <Line/>
-      <Item Type="checkbox" Text="HHmmss 格式" Group="date-template" Command="user:HHmmss"/>
-      <Item Type="checkbox" Text="HH:mm:ss 格式" Group="date-template" Command="user:HH:mm:ss"/>
-      <Item Type="checkbox" Text="HH.mm.ss 格式" Group="date-template" Command="user:HH.mm.ss"/>
-      <Item Type="checkbox" Text="HH mm ss 格式" Group="date-template" Command="user:HH mm ss"/>
-      <Item Type="checkbox" Text="HH时mm分ss秒 格式" Group="date-template" Command="user:HH时mm分ss秒"/>
+      <Item Type="toggle" Text="HHmmss 格式" Group="date-template" Command="user:HHmmss"/>
+      <Item Type="toggle" Text="HH:mm:ss 格式" Group="date-template" Command="user:HH:mm:ss"/>
+      <Item Type="toggle" Text="HH.mm.ss 格式" Group="date-template" Command="user:HH.mm.ss"/>
+      <Item Type="toggle" Text="HH mm ss 格式" Group="date-template" Command="user:HH mm ss"/>
+      <Item Type="toggle" Text="HH时mm分ss秒 格式" Group="date-template" Command="user:HH时mm分ss秒"/>
     </Menu>
   </Submenu>
   <Submenu Id="date-interval">
@@ -578,46 +578,46 @@
 
   <!--数值弹出菜单选项-->
   <Submenu Id="data-options">
-    <Item Type="checkbox" Text="整数" Group="data-template" Command="dec:0"/>
+    <Item Type="toggle" Text="整数" Group="data-template" Command="dec:0"/>
     <Menu Text="小数">
-      <Item Type="checkbox" Text="1位" Group="data-template" Command="dec:1"/>
-      <Item Type="checkbox" Text="2位" Group="data-template" Command="dec:2"/>
-      <Item Type="checkbox" Text="3位" Group="data-template" Command="dec:3"/>
-      <Item Type="checkbox" Text="4位" Group="data-template" Command="dec:4"/>
-      <Item Type="checkbox" Text="5位" Group="data-template" Command="dec:5"/>
-      <Item Type="checkbox" Text="6位" Group="data-template" Command="dec:6"/>
-      <Item Type="checkbox" Text="7位" Group="data-template" Command="dec:7"/>
-      <Item Type="checkbox" Text="8位" Group="data-template" Command="dec:8"/>
+      <Item Type="toggle" Text="1位" Group="data-template" Command="dec:1"/>
+      <Item Type="toggle" Text="2位" Group="data-template" Command="dec:2"/>
+      <Item Type="toggle" Text="3位" Group="data-template" Command="dec:3"/>
+      <Item Type="toggle" Text="4位" Group="data-template" Command="dec:4"/>
+      <Item Type="toggle" Text="5位" Group="data-template" Command="dec:5"/>
+      <Item Type="toggle" Text="6位" Group="data-template" Command="dec:6"/>
+      <Item Type="toggle" Text="7位" Group="data-template" Command="dec:7"/>
+      <Item Type="toggle" Text="8位" Group="data-template" Command="dec:8"/>
       <Line/>
-      <Item Type="checkbox" Id="data-precision" Text="其它……" Group="data-template" Command="dec:-1"/>
+      <Item Type="toggle" Id="data-precision" Text="其它……" Group="data-template" Command="dec:-1"/>
       <Line/>
-      <Item Type="checkbox" Id="data-fixed-dec" Text="固定小数长度" Command="dec:f"/>
+      <Item Type="toggle" Id="data-fixed-dec" Text="固定小数长度" Command="dec:f"/>
       <!--
-            <Item Type="checkbox" Id="data-fixed-int" Command="int:f"/>
+            <Item Type="toggle" Id="data-fixed-int" Command="int:f"/>
             -->
     </Menu>
     <Line/>
     <Menu Id="data-collection" Text="集合">
-      <Item Type="checkbox" Id="data-pos" Text="正数" Command="set:+"/>
-      <Item Type="checkbox" Id="data-0" Text="0" Command="set:0"/>
-      <Item Type="checkbox" Id="data-nav" Text="负数" Command="set:-"/>
+      <Item Type="toggle" Id="data-pos" Text="正数" Command="set:+"/>
+      <Item Type="toggle" Id="data-0" Text="0" Command="set:0"/>
+      <Item Type="toggle" Id="data-nav" Text="负数" Command="set:-"/>
     </Menu>
     <Menu Id="data-characters" Text="符号">
-      <Item Type="checkbox" Id="data-notation" Text="启用特殊符号" Command="notation"/>
+      <Item Type="toggle" Id="data-notation" Text="启用特殊符号" Command="notation"/>
       <Line/>
       <Item Type="normal" Id="data-character" Tips="更改特殊符号" Command="character"/>
-      <Item Type="checkbox" Id="data-thehead" Text="符号前置" Group="data-position" Command="pos:^"/>
-      <Item Type="checkbox" Id="data-thefoot" Text="符号后置" Group="data-position" Command="pos:$"/>
-      <Item Type="checkbox" Id="data-optional" Text="可选输入" Command="optional"/>
+      <Item Type="toggle" Id="data-thehead" Text="符号前置" Group="data-position" Command="pos:^"/>
+      <Item Type="toggle" Id="data-thefoot" Text="符号后置" Group="data-position" Command="pos:$"/>
+      <Item Type="toggle" Id="data-optional" Text="可选输入" Command="optional"/>
     </Menu>
   </Submenu>
   <Submenu Id="sign-options">
-    <Item Type="checkbox" Id="sign-sep" Text="分页控制(@S)" Group="sign-options" Command="sep:P30F7E04"/>
-    <Item Type="checkbox" Id="sign-div" Text="标题面板(@P)" Group="sign-options" Command="div:P30F7E06"/>
-    <Item Type="checkbox" Id="sign-tab" Text="选项面板(@T)" Group="sign-options" Command="tab:P30F7E08"/>
+    <Item Type="toggle" Id="sign-sep" Text="分页控制(@S)" Group="sign-options" Command="sep:P30F7E04"/>
+    <Item Type="toggle" Id="sign-div" Text="标题面板(@P)" Group="sign-options" Command="div:P30F7E06"/>
+    <Item Type="toggle" Id="sign-tab" Text="选项面板(@T)" Group="sign-options" Command="tab:P30F7E08"/>
     <Menu Text="其它标记(@O)">
-      <Item Type="checkbox" Text="-----" Group="sign-options" Command="tip:P30F7E0B"/>
-      <Item Type="checkbox" Text="--{0}--" Group="sign-options" Command="tip:P30F7E0D"/>
+      <Item Type="toggle" Text="-----" Group="sign-options" Command="tip:P30F7E0B"/>
+      <Item Type="toggle" Text="--{0}--" Group="sign-options" Command="tip:P30F7E0D"/>
     </Menu>
   </Submenu>
 

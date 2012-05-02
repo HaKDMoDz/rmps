@@ -3,7 +3,7 @@ using Me.Amon.Pwd.E;
 
 namespace Me.Amon.Uc
 {
-    public class KeyStroke
+    public class KeyStroke<T>
     {
         public bool Control { get; set; }
         public bool Alt { get; set; }
@@ -12,7 +12,7 @@ namespace Me.Amon.Uc
         public char Code { get; set; }
         public string Key { get; set; }
         public string Memo { get; set; }
-        public IAction Action { get; set; }
+        public IAction<T> Action { get; set; }
 
         public bool Decode(string key)
         {

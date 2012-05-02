@@ -45,7 +45,7 @@ namespace Me.Amon.Pwd
         //private APad _PadView;
         private Dictionary<string, Image> _KeyIcon;
         private Dictionary<string, Image> _KeyHint;
-        private MenuBar _MenuBar;
+        private MenuBar<APwd> _MenuBar;
         #endregion
 
         #region 构造函数
@@ -66,7 +66,7 @@ namespace Me.Amon.Pwd
         public void InitOnce()
         {
             #region 菜单栏及工具栏
-            _MenuBar = new MenuBar();
+            _MenuBar = new MenuBar<APwd>(this);
             _MenuBar.Load(Path.Combine(_UserModel.Home, "Pwd.xml"));
             _MenuBar.GetMenuBar("APwd", MbMenu);
             _MenuBar.GetToolBar("APwd", TbTool);
@@ -188,6 +188,92 @@ namespace Me.Amon.Pwd
         {
             Location = new Point(_ViewModel.WindowLocX, _ViewModel.WindowLocY);
             ClientSize = new Size(_ViewModel.WindowDimW, _ViewModel.WindowDimH);
+
+            MbMenu.Visible = _ViewModel.MenuBarVisible;
+            ToolStripMenuItem item = _MenuBar.GetItem("menubar-visible");
+            if (item != null)
+            {
+                item.Checked = _ViewModel.MenuBarVisible;
+            }
+            ToolStripButton button = _MenuBar.GetButton("menubar-visible");
+            if (button != null)
+            {
+                button.Checked = _ViewModel.MenuBarVisible;
+            }
+
+            TbTool.Visible = _ViewModel.ToolBarVisible;
+            item = _MenuBar.GetItem("toolbar-visible");
+            if (item != null)
+            {
+                item.Checked = _ViewModel.ToolBarVisible;
+            }
+            button = _MenuBar.GetButton("toolbar-visible");
+            if (button != null)
+            {
+                button.Checked = _ViewModel.ToolBarVisible;
+            }
+
+            HSplit.SplitterDistance = _ViewModel.HSplitDistance;
+            HSplit.Panel1Collapsed = !_ViewModel.NavPaneVisible;
+            item = _MenuBar.GetItem("navpane-visible");
+            if (item != null)
+            {
+                item.Checked = _ViewModel.NavPaneVisible;
+            }
+            button = _MenuBar.GetButton("navpane-visible");
+            if (button != null)
+            {
+                button.Checked = _ViewModel.NavPaneVisible;
+            }
+
+            VSplit.SplitterDistance = _ViewModel.VSplitDistance;
+            VSplit.Panel1Collapsed = !_ViewModel.CatTreeVisible;
+            item = _MenuBar.GetItem("cattree-visible");
+            if (item != null)
+            {
+                item.Checked = _ViewModel.CatTreeVisible;
+            }
+            button = _MenuBar.GetButton("cattree-visible");
+            if (button != null)
+            {
+                button.Checked = _ViewModel.CatTreeVisible;
+            }
+
+            VSplit.Panel2Collapsed = !_ViewModel.KeyListVisible;
+            item = _MenuBar.GetItem("keylist-visible");
+            if (item != null)
+            {
+                item.Checked = _ViewModel.KeyListVisible;
+            }
+            button = _MenuBar.GetButton("keylist-visible");
+            if (button != null)
+            {
+                button.Checked = _ViewModel.KeyListVisible;
+            }
+
+            FbFind.Visible = _ViewModel.FindBarVisible;
+            item = _MenuBar.GetItem("findbar-visible");
+            if (item != null)
+            {
+                item.Checked = _ViewModel.FindBarVisible;
+            }
+            button = _MenuBar.GetButton("findbar-visible");
+            if (button != null)
+            {
+                button.Checked = _ViewModel.FindBarVisible;
+            }
+
+            SsEcho.Visible = _ViewModel.EchoBarVisible;
+            item = _MenuBar.GetItem("echobar-visible");
+            if (item != null)
+            {
+                item.Checked = _ViewModel.EchoBarVisible;
+            }
+            button = _MenuBar.GetButton("echobar-visible");
+            if (button != null)
+            {
+                button.Checked = _ViewModel.EchoBarVisible;
+            }
         }
 
         private void SaveLayout()
@@ -475,43 +561,43 @@ namespace Me.Amon.Pwd
                 // 菜单栏隐现
                 if (e.KeyCode == Keys.M)
                 {
-                    SetMenuBarVisible(!MbMenu.Visible);
+                    MenuBarVisible = !MbMenu.Visible;
                     return;
                 }
                 // 工具栏隐现
                 if (e.KeyCode == Keys.T)
                 {
-                    SetToolBarVisible(!TbTool.Visible);
+                    ToolBarVisible = !TbTool.Visible;
                     return;
                 }
                 // 状态栏隐现
                 if (e.KeyCode == Keys.E)
                 {
-                    SetEchoBarVisible(!SsEcho.Visible);
+                    EchoBarVisible = !SsEcho.Visible;
                     return;
                 }
                 // 查找隐现
                 if (e.KeyCode == Keys.G)
                 {
-                    SetFindBarVisible(!FbFind.Visible);
+                    FindBarVisible = !FbFind.Visible;
                     return;
                 }
                 // 目录隐现
                 if (e.KeyCode == Keys.K)
                 {
-                    SetCatTreeVisible(VSplit.Panel1Collapsed);
+                    CatTreeVisible = VSplit.Panel1Collapsed;
                     return;
                 }
                 // 列表隐现
                 if (e.KeyCode == Keys.P)
                 {
-                    SetKeyListVisible(VSplit.Panel2Collapsed);
+                    KeyListVisible = VSplit.Panel2Collapsed;
                     return;
                 }
                 // 列表隐现
                 if (e.KeyCode == Keys.J)
                 {
-                    SetNavPaneVisible(HSplit.Panel1Collapsed);
+                    NavPaneVisible = HSplit.Panel1Collapsed;
                     return;
                 }
                 // 属性隐现
@@ -1461,61 +1547,110 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 视图调整
-        public void SetMenuBarVisible(bool visible)
+        public bool MenuBarVisible
         {
-            MbMenu.Visible = visible;
-            _ViewModel.MenuBarVisible = visible;
-        }
-
-        public void SetToolBarVisible(bool visible)
-        {
-            TbTool.Visible = visible;
-            _ViewModel.ToolBarVisible = visible;
-        }
-
-        public void SetEchoBarVisible(bool visible)
-        {
-            SsEcho.Visible = visible;
-            _ViewModel.EchoBarVisible = visible;
-        }
-
-        public void SetCatTreeVisible(bool visible)
-        {
-            if (!visible && VSplit.Panel2Collapsed)
+            get
             {
-                SetNavPaneVisible(false);
+                return MbMenu.Visible;
             }
-            else
+            set
             {
-                VSplit.Panel1Collapsed = !visible;
-                _ViewModel.CatTreeVisible = visible;
+                MbMenu.Visible = value;
+                _ViewModel.MenuBarVisible = value;
             }
         }
 
-        public void SetKeyListVisible(bool visible)
+        public bool ToolBarVisible
         {
-            if (!visible && VSplit.Panel1Collapsed)
+            get
             {
-                SetNavPaneVisible(false);
+                return TbTool.Visible;
             }
-            else
+            set
             {
-                VSplit.Panel2Collapsed = !visible;
-                _ViewModel.KeyListVisible = visible;
+                TbTool.Visible = value;
+                _ViewModel.ToolBarVisible = value;
             }
         }
 
-        public void SetNavPaneVisible(bool visible)
+        public bool EchoBarVisible
         {
-            HSplit.Panel1Collapsed = !visible;
-            _ViewModel.NavPaneVisible = visible;
+            get
+            {
+                return SsEcho.Visible;
+            }
+            set
+            {
+                SsEcho.Visible = value;
+                _ViewModel.EchoBarVisible = value;
+            }
         }
 
-        public void SetFindBarVisible(bool visible)
+        public bool CatTreeVisible
         {
-            //TpGrid.RowStyles[0].Height = visible ? 32 : 0;
-            FbFind.Visible = visible;
-            _ViewModel.FindBarVisible = visible;
+            get
+            {
+                return true;
+            }
+            set
+            {
+                if (!value && VSplit.Panel2Collapsed)
+                {
+                    NavPaneVisible = false;
+                }
+                else
+                {
+                    VSplit.Panel1Collapsed = !value;
+                    _ViewModel.CatTreeVisible = value;
+                }
+            }
+        }
+
+        public bool KeyListVisible
+        {
+            get
+            {
+                return true;
+            }
+            set
+            {
+                if (!value && VSplit.Panel1Collapsed)
+                {
+                    NavPaneVisible = false;
+                }
+                else
+                {
+                    VSplit.Panel2Collapsed = !value;
+                    _ViewModel.KeyListVisible = value;
+                }
+            }
+        }
+
+        public bool NavPaneVisible
+        {
+            get
+            {
+                return HSplit.Panel1Collapsed;
+            }
+            set
+            {
+                HSplit.Panel1Collapsed = !value;
+                _ViewModel.NavPaneVisible = value;
+            }
+        }
+
+        public bool FindBarVisible
+        {
+            get
+            {
+                return FbFind.Visible;
+            }
+            set
+            {
+                //TpGrid.RowStyles[0].Height = visible ? 32 : 0;
+                FbFind.Visible = value;
+                _ViewModel.FindBarVisible = value;
+            }
         }
         #endregion
 

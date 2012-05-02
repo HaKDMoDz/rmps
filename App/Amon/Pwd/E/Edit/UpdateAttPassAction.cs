@@ -4,9 +4,9 @@
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
-            if (APwd != null)
+            if (IApp != null)
             {
-                APwd.UpdateAtt(Att.TYPE_PASS);
+                IApp.UpdateAtt(Att.TYPE_PASS);
             }
         }
     }
