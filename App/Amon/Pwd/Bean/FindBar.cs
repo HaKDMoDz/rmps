@@ -5,28 +5,27 @@ namespace Me.Amon.Pwd.Bean
 {
     public partial class FindBar : UserControl
     {
-        private APwd _APwd;
-
         public FindBar()
         {
             InitializeComponent();
         }
 
-        public FindBar(APwd apwd)
-        {
-            _APwd = apwd;
-
-            InitializeComponent();
-        }
+        public APwd APwd { get; set; }
 
         private void TbFind_TextChanged(object sender, EventArgs e)
         {
-            _APwd.FindKey(TbFind.Text);
+            if (APwd != null)
+            {
+                APwd.FindKey(TbFind.Text);
+            }
         }
 
         private void BtFind_Click(object sender, EventArgs e)
         {
-            _APwd.FindKey(TbFind.Text);
+            if (APwd != null)
+            {
+                APwd.FindKey(TbFind.Text);
+            }
         }
     }
 }

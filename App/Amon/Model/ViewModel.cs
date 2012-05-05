@@ -111,6 +111,33 @@ namespace Me.Amon.Model
             _Imgs[key] = img;
             return img;
         }
+
+        public Image GetImage(string key, string file)
+        {
+            if (string.IsNullOrWhiteSpace(file))
+            {
+                return BeanUtil.NaN16;
+            }
+
+            if (Path.IsPathRooted(file))
+            {
+                file = Path.Combine(Application.StartupPath, file);
+            }
+
+            if (!string.IsNullOrEmpty(key))
+            {
+                if (_Imgs.ContainsKey(key))
+                {
+                    return _Imgs[key];
+                }
+
+                Image img = BeanUtil.ReadImage(file, BeanUtil.NaN16);
+                _Imgs[key] = img;
+                return img;
+            }
+
+            return BeanUtil.ReadImage(file, BeanUtil.NaN16);
+        }
         #endregion
 
         public void Load()

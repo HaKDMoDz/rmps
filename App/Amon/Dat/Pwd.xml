@@ -316,45 +316,45 @@
 
   <!--魔方密码工具栏-->
   <Toolbar Id="APwd">
-    <Item Type="normal" Tips="新增" ActionId="append-key">
-      <Icon Id="file-new" path="var:file-new"/>
+    <Item Type="normal" Tips="新增" IconId="" ActionId="append-key">
+      <Icon Id="file-new" path="var:menu-key-append"/>
     </Item>
     <Item Type="normal" Tips="保存" ActionId="update-key">
-      <Icon Id="file-save" path="var:file-save"/>
+      <Icon Id="file-save" path="var:menu-key-update"/>
     </Item>
     <Item Type="normal" Tips="删除" ActionId="delete-key">
-      <Icon Id="file-save" path="var:file-save"/>
+      <Icon Id="file-save" path="var:menu-key-delete"/>
     </Item>
     <Line/>
     <Item Type="normal" Tips="剪切" ActionId="cut-att">
-      <Icon Id="file-save" path="var:edit-move-up"/>
+      <Icon Id="file-save" path="var:menu-att-cut"/>
     </Item>
     <Item Type="normal" Tips="复制" ActionId="copy-att">
-      <Icon Id="file-save" path="var:edit-move-down"/>
+      <Icon Id="file-save" path="var:menu-att-copy"/>
     </Item>
     <Item Type="normal" Tips="粘贴" ActionId="paste-att">
-      <Icon Id="file-save" path="var:edit-move-down"/>
+      <Icon Id="file-save" path="var:menu-att-paste"/>
     </Item>
     <Line/>
     <Item Id="menubar-visible" Type="toggle" Tips="显示菜单栏" ActionId="menubar-visible">
-      <Icon Id="edit-history" path="var:edit-history"/>
+      <Icon Id="edit-history" path="var:menu-view-menubar"/>
     </Item>
     <Item Id="echobar-visible" Type="toggle" Tips="显示状态栏" ActionId="echobar-visible">
-      <Icon Id="edit-isolate" path="var:view-prop-isolate"/>
+      <Icon Id="edit-isolate" path="var:menu-view-echobar"/>
     </Item>
     <Item Id="findbar-visible" Type="toggle" Tips="显示查找栏" ActionId="findbar-visible">
-      <Icon Id="Menu-visible" path="var:view-menubar"/>
+      <Icon Id="Menu-visible" path="var:menu-view-findbar"/>
     </Item>
     <Line/>
     <Item Type="normal" Tips="同步" Enabled="false" ActionId="sync">
-      <Icon Id="file-help" path="var:file-exit"/>
+      <Icon Id="file-help" path="var:menu-data-sync"/>
     </Item>
     <Line/>
     <Item Type="normal" Tips="快捷键" ActionId="shortcuts">
-      <Icon Id="file-help" path="var:file-exit"/>
+      <Icon Id="file-help" path="var:menu-help-hotkeys"/>
     </Item>
     <Item Type="normal" Tips="帮助" ActionId="about">
-      <Icon Id="file-help" path="var:help-topic"/>
+      <Icon Id="file-help" path="var:menu-help-topic"/>
     </Item>
   </Toolbar>
 

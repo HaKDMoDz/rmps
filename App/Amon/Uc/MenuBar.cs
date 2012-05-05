@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
+using Me.Amon.Model;
 using Me.Amon.Util;
-using Me.Amon.Pwd.E;
 
 namespace Me.Amon.Uc
 {
@@ -21,11 +22,13 @@ namespace Me.Amon.Uc
         private Dictionary<string, Assembly> _Assemblys;
         private List<KeyStroke<T>> _Strokes;
         private T _IApp;
+        private ViewModel _ViewModel;
 
         #region 构造函数
-        public MenuBar(T iApp)
+        public MenuBar(T iApp, ViewModel viewModel)
         {
             _IApp = iApp;
+            _ViewModel = viewModel;
 
             _MenuItems = new Dictionary<string, ToolStripMenuItem>();
             _Buttons = new Dictionary<string, ToolStripButton>();
@@ -65,97 +68,127 @@ namespace Me.Amon.Uc
 
         private bool Load()
         {
+            LoadLib();
+            LoadIcon();
+            LoadAction();
+
+            return true;
+        }
+
+        private bool LoadLib()
+        {
             _Assemblys = new Dictionary<string, Assembly>();
             _Assemblys[""] = Assembly.GetExecutingAssembly();
 
-            #region 类库
             XmlNodeList list = _Document.SelectNodes("/Amon/Libs/Lib");
-            if (list != null && list.Count > 0)
+            if (list == null || list.Count < 1)
             {
+                return true;
+            }
+
+            try
+            {
+                string path = Application.StartupPath;
+                foreach (XmlNode node in list)
+                {
+                    string file = Attribute(node, "Path", "");
+                    if (!CharUtil.IsValidate(file))
+                    {
+                        continue;
+                    }
+                    if (!Path.IsPathRooted(file))
+                    {
+                        file = Path.Combine(path, file);
+                    }
+                    if (!File.Exists(file))
+                    {
+                        _Error = string.Format("找不到类库 {0}", file);
+                        return false;
+                    }
+                    //动态加载程序集
+                    Assembly assembly = Assembly.LoadFrom(file);
+                    string id = Attribute(node, "Id", null);
+                    if (CharUtil.IsValidate(id))
+                    {
+                        _Assemblys[id] = assembly;
+                    }
+                }
+                return true;
+            }
+            catch (Exception exp)
+            {
+                _Error = exp.Message;
+                return false;
+            }
+        }
+
+        private bool LoadIcon()
+        {
+            var list = _Document.SelectNodes("/Amon/Icons/Icon");
+            if (list == null || list.Count < 1)
+            {
+                return true;
+            }
+
+            foreach (XmlNode node in list)
+            {
+                string id = Attribute(node, "Id", "");
+                string path = Attribute(node, "Path", "");
+                _ViewModel.GetImage(id, path);
+            }
+
+            return true;
+        }
+
+        private bool LoadAction()
+        {
+            var list = _Document.SelectNodes("/Amon/Actions/Action");
+            if (list == null || list.Count < 1)
+            {
+                return true;
+            }
+
+            foreach (XmlNode node in list)
+            {
+                string id = Attribute(node, "Id", "");
+                if (string.IsNullOrWhiteSpace(id))
+                {
+                    _Error = "Action的Id不能为空！";
+                    return false;
+                }
+                string type = Attribute(node, "Class", null);
+                if (string.IsNullOrWhiteSpace(type))
+                {
+                    _Error = "Action的Class不能为空！";
+                    return false;
+                }
+
+                string libId = Attribute(node, "LibId", "");
+                if (!_Assemblys.ContainsKey(libId))
+                {
+                    libId = "";
+                }
+                Assembly assembly = _Assemblys[libId];
+
                 try
                 {
-                    string path = Application.StartupPath;
-                    foreach (XmlNode node in list)
+                    IAction<T> action = assembly.CreateInstance(type) as IAction<T>;
+                    if (action != null)
                     {
-                        string file = Attribute(node, "Path", "");
-                        if (!CharUtil.IsValidate(file))
+                        action.IApp = _IApp;
+                        if (!string.IsNullOrWhiteSpace(id))
                         {
-                            continue;
-                        }
-                        if (!Path.IsPathRooted(file))
-                        {
-                            file = Path.Combine(path, file);
-                        }
-                        if (!File.Exists(file))
-                        {
-                            _Error = string.Format("找不到类库 {0}", file);
-                            return false;
-                        }
-                        //动态加载程序集
-                        Assembly assembly = Assembly.LoadFrom(file);
-                        string id = Attribute(node, "Id", null);
-                        if (CharUtil.IsValidate(id))
-                        {
-                            _Assemblys[id] = assembly;
+                            _Actions[id] = action;
                         }
                     }
                 }
-                catch (Exception exp)
+                catch (Exception ex)
                 {
-                    _Error = exp.Message;
+                    _Error = ex.Message;
                     return false;
                 }
             }
-            #endregion
-
-            #region 事件
-            list = _Document.SelectNodes("/Amon/Actions/Action");
-            if (list != null && list.Count > 0)
-            {
-                foreach (XmlNode node in list)
-                {
-                    string id = Attribute(node, "Id", "");
-                    if (string.IsNullOrWhiteSpace(id))
-                    {
-                        _Error = "Action的Id不能为空！";
-                        return false;
-                    }
-                    string type = Attribute(node, "Class", null);
-                    if (string.IsNullOrWhiteSpace(type))
-                    {
-                        _Error = "Action的Class不能为空！";
-                        return false;
-                    }
-
-                    string libId = Attribute(node, "LibId", "");
-                    if (!_Assemblys.ContainsKey(libId))
-                    {
-                        libId = "";
-                    }
-                    Assembly assembly = _Assemblys[libId];
-
-                    try
-                    {
-                        IAction<T> action = assembly.CreateInstance(type) as IAction<T>;
-                        if (action != null)
-                        {
-                            action.IApp = _IApp;
-                            if (!string.IsNullOrWhiteSpace(id))
-                            {
-                                _Actions[id] = action;
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        _Error = ex.Message;
-                        return false;
-                    }
-                }
-            }
-            #endregion
-
-            return true;
+            return false;
         }
         #endregion
 
@@ -838,15 +871,19 @@ namespace Me.Amon.Uc
 
         private ToolStripButton processButton(XmlNode node)
         {
+            ToolStripButton item;
             string type = Attribute(node, "Type", "normal");
             if (type == "toggle")
             {
-                ToolStripButton item = new ToolStripButton();
+                item = new ToolStripButton();
+                item.DisplayStyle = ToolStripItemDisplayStyle.Image;
                 item.CheckOnClick = true;
                 return item;
             }
 
-            return new ToolStripButton();
+            item = new ToolStripButton();
+            item.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            return item;
         }
 
         private static ToolStripItem processText(XmlNode node, ToolStripItem button)
@@ -863,10 +900,27 @@ namespace Me.Amon.Uc
             return button;
         }
 
-        private static ToolStripItem processIcon(XmlNode node, ToolStripItem button)
+        private ToolStripItem processIcon(XmlNode parent, ToolStripItem button)
         {
-            string icon = Attribute(node, "Icon", "");
-            //button.Image = null;
+            XmlNode node = parent.SelectSingleNode("Icon");
+            if (node == null)
+            {
+                return button;
+            }
+
+            string path = Attribute(node, "path", "");
+            if (!string.IsNullOrWhiteSpace(path))
+            {
+                if (path.ToLower().StartsWith("var:"))
+                {
+                    button.Image = _ViewModel.GetImage(path.Substring(4));
+                }
+                else
+                {
+                    string id = Attribute(node, "id", "");
+                    button.Image = _ViewModel.GetImage(id, path);
+                }
+            }
             return button;
         }
 

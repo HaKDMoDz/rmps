@@ -77,11 +77,8 @@ namespace Me.Amon.Pwd
             _DataModel.UdcModel = udcModel;
             #endregion
 
-            // 窗口布局
-            LoadLayout();
-
             #region 菜单栏及工具栏
-            _MenuBar = new MenuBar<APwd>(this);
+            _MenuBar = new MenuBar<APwd>(this, _ViewModel);
             _MenuBar.Load(Path.Combine(_UserModel.Home, "Pwd.xml"));
             _MenuBar.GetMenuBar("APwd", MbMenu);
             _MenuBar.GetToolBar("APwd", TbTool);
@@ -89,6 +86,9 @@ namespace Me.Amon.Pwd
 
             InitCat();
             InitKey();
+
+            // 窗口布局
+            LoadLayout();
 
             // 当前时间
             UcTime.Start();
@@ -188,6 +188,16 @@ namespace Me.Amon.Pwd
         {
             Location = new Point(_ViewModel.WindowLocX, _ViewModel.WindowLocY);
             ClientSize = new Size(_ViewModel.WindowDimW, _ViewModel.WindowDimH);
+
+            HSplit.SplitterDistance = _ViewModel.HSplitDistance;
+            HSplit.Panel1Collapsed = !_ViewModel.NavPaneVisible;
+
+            VSplit.SplitterDistance = _ViewModel.VSplitDistance;
+
+            MbMenu.Visible = _ViewModel.MenuBarVisible;
+            TbTool.Visible = _ViewModel.ToolBarVisible;
+            SsEcho.Visible = _ViewModel.EchoBarVisible;
+            FbFind.Visible = _ViewModel.FindBarVisible;
         }
 
         private void SaveLayout()
@@ -204,9 +214,10 @@ namespace Me.Amon.Pwd
             _ViewModel.CatTreeVisible = !VSplit.Panel1Collapsed;
             _ViewModel.KeyListVisible = !VSplit.Panel2Collapsed;
 
-            _ViewModel.FindBarVisible = FbFind.Visible;
-
+            _ViewModel.MenuBarVisible = MbMenu.Visible;
+            _ViewModel.ToolBarVisible = TbTool.Visible;
             _ViewModel.EchoBarVisible = SsEcho.Visible;
+            _ViewModel.FindBarVisible = FbFind.Visible;
 
             _ViewModel.Save();
         }

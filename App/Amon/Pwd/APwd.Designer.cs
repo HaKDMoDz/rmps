@@ -215,6 +215,10 @@
             this.CmKey.Name = "CmKey";
             this.CmKey.Size = new System.Drawing.Size(61, 4);
             // 
+            // UcTime
+            // 
+            this.UcTime.Tick += new System.EventHandler(this.UcTime_Tick);
+            // 
             // APwd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
