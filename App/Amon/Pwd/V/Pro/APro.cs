@@ -66,15 +66,15 @@ namespace Me.Amon.Pwd.V.Pro
         #endregion
 
         #region 接口实现
-        public void InitView(TableLayoutPanel grid)
+        public void InitView(Panel panel)
         {
-            grid.Controls.Add(this, 0, 1);
+            panel.Controls.Add(this);
             Dock = DockStyle.Fill;
         }
 
-        public void HideView(TableLayoutPanel grid)
+        public void HideView(Panel panel)
         {
-            grid.Controls.Remove(this);
+            panel.Controls.Remove(this);
         }
 
         public void ShowInfo()

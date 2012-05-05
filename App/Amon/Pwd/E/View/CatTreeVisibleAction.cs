@@ -6,15 +6,23 @@ namespace Me.Amon.Pwd.E.View
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
-            ToolStripMenuItem item = sender as ToolStripMenuItem;
-            if (item == null)
+            if (IApp == null)
             {
                 return;
             }
 
-            if (IApp != null)
+            if (sender is ToolStripMenuItem)
             {
-                IApp.CatTreeVisible = item.Checked;
+                ToolStripMenuItem item = sender as ToolStripMenuItem;
+                IApp.MenuBarVisible = item.Checked;
+                return;
+            }
+
+            if (sender is ToolStripButton)
+            {
+                ToolStripButton item = sender as ToolStripButton;
+                IApp.MenuBarVisible = item.Checked;
+                return;
             }
         }
 

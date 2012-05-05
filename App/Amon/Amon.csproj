@@ -265,9 +265,12 @@
     <Compile Include="Pwd\E\Edit\AppendKeyAction.cs" />
     <Compile Include="Pwd\E\Edit\ClearAttAction.cs" />
     <Compile Include="Pwd\E\Edit\CopyAttAction.cs" />
+    <Compile Include="Pwd\E\Edit\CutAttAction.cs" />
     <Compile Include="Pwd\E\Edit\DeleteAttAction.cs" />
     <Compile Include="Pwd\E\Edit\DeleteCatAction.cs" />
     <Compile Include="Pwd\E\Edit\DeleteKeyAction.cs" />
+    <Compile Include="Pwd\E\Edit\MoveDownAction.cs" />
+    <Compile Include="Pwd\E\Edit\MoveUpAction.cs" />
     <Compile Include="Pwd\E\Edit\PasteAttAction.cs" />
     <Compile Include="Pwd\E\Edit\UpdateAttCallAction.cs" />
     <Compile Include="Pwd\E\Edit\UpdateAttDataAction.cs" />
@@ -302,6 +305,8 @@
     <Compile Include="Pwd\E\View\MenubarVisibleAction.cs" />
     <Compile Include="Pwd\E\View\PadPatternAction.cs" />
     <Compile Include="Pwd\E\View\ProPattenAction.cs" />
+    <Compile Include="Pwd\E\View\SelectNextAction.cs" />
+    <Compile Include="Pwd\E\View\SelectPrevAction.cs" />
     <Compile Include="Pwd\E\View\ToolbarVisibleAction.cs" />
     <Compile Include="Pwd\E\View\TopMostAction.cs" />
     <Compile Include="Pwd\E\View\WizPatternAction.cs" />

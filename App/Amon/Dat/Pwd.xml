@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Amon version="1">
   <Libs>
-    <Lib Id="Demo" Path="DemoLib.dll"/>
+    <Lib Id="Demo" Path="Lib\DemoLib.dll"/>
   </Libs>
 
   <Actions>
-    <Action Id="append-key" Class="Me.Amon.Pwd.E.Edit.AppendKeyAction"/>
-    <Action Id="update-key" Class="Me.Amon.Pwd.E.Edit.UpdateKeyAction"/>
-    <Action Id="delete-key" Class="Me.Amon.Pwd.E.Edit.DeleteKeyAction"/>
-    <Action Id="find-key" Class="Me.Amon.Pwd.E.Data.FindAction"/>
     <Action Id="hind-window" Class="Me.Amon.Pwd.E.File.HideAction"/>
     <Action Id="lock-window" Class="Me.Amon.Pwd.E.File.LockAction"/>
     <Action Id="exit-window" Class="Me.Amon.Pwd.E.File.ExitAction"/>
+    <Action Id="append-key" Class="Me.Amon.Pwd.E.Edit.AppendKeyAction"/>
+    <Action Id="update-key" Class="Me.Amon.Pwd.E.Edit.UpdateKeyAction"/>
+    <Action Id="delete-key" Class="Me.Amon.Pwd.E.Edit.DeleteKeyAction"/>
     <Action Id="append-text" Class="Me.Amon.Pwd.E.Edit.AppendAttTextAction"/>
     <Action Id="append-pass" Class="Me.Amon.Pwd.E.Edit.AppendAttPassAction"/>
     <Action Id="append-link" Class="Me.Amon.Pwd.E.Edit.AppendAttLinkAction"/>
@@ -36,9 +35,14 @@
     <Action Id="append-cat" Class="Me.Amon.Pwd.E.Edit.AppendCatAction"/>
     <Action Id="update-cat" Class="Me.Amon.Pwd.E.Edit.UpdateCatAction"/>
     <Action Id="delete-cat" Class="Me.Amon.Pwd.E.Edit.DeleteCatAction"/>
+	<Action Id="cut-att" Class="Me.Amon.Pwd.E.Edit.CutAttAction"/>
+	<Action Id="copy-att" Class="Me.Amon.Pwd.E.Edit.CopyAttAction"/>
+	<Action Id="paste-att" Class="Me.Amon.Pwd.E.Edit.PasteAttAction"/>
+    <Action Id="move-up" Class="Me.Amon.Pwd.E.Edit.MoveUpAction"/>
+    <Action Id="move-down" Class="Me.Amon.Pwd.E.Edit.MoveDownAction"/>
     <Action Id="top-most" Class="Me.Amon.Pwd.E.View.TopMostAction"/>
-    <Action Id="pro" Class="Me.Amon.Pwd.E.View.SelectPrevAction"/>
-    <Action Id="wiz" Class="Me.Amon.Pwd.E.View.SelectNextAction"/>
+    <Action Id="select-prev" Class="Me.Amon.Pwd.E.View.SelectPrevAction"/>
+    <Action Id="select-next" Class="Me.Amon.Pwd.E.View.SelectNextAction"/>
     <Action Id="menubar-visible" Class="Me.Amon.Pwd.E.View.MenubarVisibleAction"/>
     <Action Id="toolbar-visible" Class="Me.Amon.Pwd.E.View.ToolbarVisibleAction"/>
     <Action Id="echobar-visible" Class="Me.Amon.Pwd.E.View.EchobarVisibleAction"/>
@@ -46,12 +50,14 @@
     <Action Id="navpane-visible" Class="Me.Amon.Pwd.E.View.NavPaneVisibleAction"/>
     <Action Id="cattree-visible" Class="Me.Amon.Pwd.E.View.CatTreeVisibleAction"/>
     <Action Id="keylist-visible" Class="Me.Amon.Pwd.E.View.KeyListVisibleAction"/>
-    <Action Id="native-backup" Class="Me.Amon.Pwd.E.Safe.NativeBackupAction"/>
-    <Action Id="native-resume" Class="Me.Amon.Pwd.E.Safe.NativeResumeAction"/>
-    <Action Id="native-config" Class="Me.Amon.Pwd.E.Safe.NativeConfigAction"/>
-    <Action Id="remote-backup" Class="Me.Amon.Pwd.E.Safe.RemoteBackupAction"/>
-    <Action Id="remote-resume" Class="Me.Amon.Pwd.E.Safe.RemoteResumeAction"/>
-    <Action Id="remote-config" Class="Me.Amon.Pwd.E.Safe.RemoteConfigAction"/>
+    <Action Id="sync" Class="Me.Amon.Pwd.E.Data.SyncAction"/>
+    <Action Id="find-key" Class="Me.Amon.Pwd.E.Data.FindAction"/>
+	<Action Id="native-backup" Class="Me.Amon.Pwd.E.Data.NativeBackupAction"/>
+    <Action Id="native-resume" Class="Me.Amon.Pwd.E.Data.NativeResumeAction"/>
+    <Action Id="native-config" Class="Me.Amon.Pwd.E.Data.NativeConfigAction"/>
+    <Action Id="remote-backup" Class="Me.Amon.Pwd.E.Data.RemoteBackupAction"/>
+    <Action Id="remote-resume" Class="Me.Amon.Pwd.E.Data.RemoteResumeAction"/>
+    <Action Id="remote-config" Class="Me.Amon.Pwd.E.Data.RemoteConfigAction"/>
     <Action Id="help" Class="Me.Amon.Pwd.E.Help.HelpAction"/>
     <Action Id="shortcuts" Class="Me.Amon.Pwd.E.Help.ShortCutsAction"/>
     <Action Id="about" Class="Me.Amon.Pwd.E.Help.AboutAction"/>
@@ -222,9 +228,7 @@
       </Item>
     </Menu>
     <Menu Id="data" Text="数据(&amp;D)">
-      <Item Type="normal" Text="同步" Enabled="false">
-        <Action Id="sync" Class="Me.Amon.Pwd.E.Data.SyncAction"/>
-      </Item>
+      <Item Type="normal" Text="同步" Enabled="false" ActionId="sync"/>
       <Line/>
       <Menu Type="normal" Text="导出">
         <Item Type="normal" Text="TXT格式">
@@ -322,13 +326,14 @@
       <Icon Id="file-save" path="var:file-save"/>
     </Item>
     <Line/>
-    <Item Type="normal" Tips="上移">
+    <Item Type="normal" Tips="剪切" ActionId="cut-att">
       <Icon Id="file-save" path="var:edit-move-up"/>
-      <Action Id="edit-prev" Class="Me.Amon.Pwd.E.Edit.PrevAction"/>
     </Item>
-    <Item Type="normal" Tips="下移">
+    <Item Type="normal" Tips="复制" ActionId="copy-att">
       <Icon Id="file-save" path="var:edit-move-down"/>
-      <Action Id="edit-next" Class="Me.Amon.Pwd.E.Edit.NextAction"/>
+    </Item>
+    <Item Type="normal" Tips="粘贴" ActionId="paste-att">
+      <Icon Id="file-save" path="var:edit-move-down"/>
     </Item>
     <Line/>
     <Item Id="menubar-visible" Type="toggle" Tips="显示菜单栏" ActionId="menubar-visible">
@@ -348,7 +353,7 @@
     <Item Type="normal" Tips="快捷键" ActionId="shortcuts">
       <Icon Id="file-help" path="var:file-exit"/>
     </Item>
-    <Item Type="normal" Tips="帮助" ActionId="help">
+    <Item Type="normal" Tips="帮助" ActionId="about">
       <Icon Id="file-help" path="var:help-topic"/>
     </Item>
   </Toolbar>
@@ -479,12 +484,8 @@
       <Item Type="normal" Text="标记" ActionId="update-line"/>
     </Menu>
     <Line/>
-    <Item Type="normal" Text="上移">
-      <Action Id="edit-prev" Class="Me.Amon.Pwd.E.Edit.PrevAction"/>
-    </Item>
-    <Item Type="normal" Text="下移">
-      <Action Id="edit-next" Class="Me.Amon.Pwd.E.Edit.NextAction"/>
-    </Item>
+    <Item Type="normal" Text="上移" ActionId="move-up"/>
+    <Item Type="normal" Text="下移" ActionId="move-down"/>
     <Line/>
     <Item Type="normal" Text="删除属性" ActionId="delete-att"/>
   </Popmenu>

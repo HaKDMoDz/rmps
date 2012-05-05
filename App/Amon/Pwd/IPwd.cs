@@ -6,9 +6,9 @@ namespace Me.Amon.Pwd
     {
         string Name { get; }
 
-        void InitView(TableLayoutPanel grid);
+        void InitView(Panel panel);
 
-        void HideView(TableLayoutPanel grid);
+        void HideView(Panel panel);
 
         void ShowInfo();
 
@@ -24,7 +24,11 @@ namespace Me.Amon.Pwd
 
         void UpdateAtt(int type);
 
+        //void CutAtt();
+
         void CopyAtt();
+
+        //void PasteAtt();
 
         void SaveAtt();
 

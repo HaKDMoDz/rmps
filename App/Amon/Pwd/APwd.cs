@@ -65,13 +65,6 @@ namespace Me.Amon.Pwd
         #region 接口实现
         public void InitOnce()
         {
-            #region 菜单栏及工具栏
-            _MenuBar = new MenuBar<APwd>(this);
-            _MenuBar.Load(Path.Combine(_UserModel.Home, "Pwd.xml"));
-            _MenuBar.GetMenuBar("APwd", MbMenu);
-            _MenuBar.GetToolBar("APwd", TbTool);
-            #endregion
-
             #region 数据模型
             _SafeModel = new SafeModel(_UserModel);
             _SafeModel.Init();
@@ -84,11 +77,18 @@ namespace Me.Amon.Pwd
             _DataModel.UdcModel = udcModel;
             #endregion
 
-            InitCat();
-            InitKey();
-
             // 窗口布局
             LoadLayout();
+
+            #region 菜单栏及工具栏
+            _MenuBar = new MenuBar<APwd>(this);
+            _MenuBar.Load(Path.Combine(_UserModel.Home, "Pwd.xml"));
+            _MenuBar.GetMenuBar("APwd", MbMenu);
+            _MenuBar.GetToolBar("APwd", TbTool);
+            #endregion
+
+            InitCat();
+            InitKey();
 
             // 当前时间
             UcTime.Start();
@@ -188,92 +188,6 @@ namespace Me.Amon.Pwd
         {
             Location = new Point(_ViewModel.WindowLocX, _ViewModel.WindowLocY);
             ClientSize = new Size(_ViewModel.WindowDimW, _ViewModel.WindowDimH);
-
-            MbMenu.Visible = _ViewModel.MenuBarVisible;
-            ToolStripMenuItem item = _MenuBar.GetItem("menubar-visible");
-            if (item != null)
-            {
-                item.Checked = _ViewModel.MenuBarVisible;
-            }
-            ToolStripButton button = _MenuBar.GetButton("menubar-visible");
-            if (button != null)
-            {
-                button.Checked = _ViewModel.MenuBarVisible;
-            }
-
-            TbTool.Visible = _ViewModel.ToolBarVisible;
-            item = _MenuBar.GetItem("toolbar-visible");
-            if (item != null)
-            {
-                item.Checked = _ViewModel.ToolBarVisible;
-            }
-            button = _MenuBar.GetButton("toolbar-visible");
-            if (button != null)
-            {
-                button.Checked = _ViewModel.ToolBarVisible;
-            }
-
-            HSplit.SplitterDistance = _ViewModel.HSplitDistance;
-            HSplit.Panel1Collapsed = !_ViewModel.NavPaneVisible;
-            item = _MenuBar.GetItem("navpane-visible");
-            if (item != null)
-            {
-                item.Checked = _ViewModel.NavPaneVisible;
-            }
-            button = _MenuBar.GetButton("navpane-visible");
-            if (button != null)
-            {
-                button.Checked = _ViewModel.NavPaneVisible;
-            }
-
-            VSplit.SplitterDistance = _ViewModel.VSplitDistance;
-            VSplit.Panel1Collapsed = !_ViewModel.CatTreeVisible;
-            item = _MenuBar.GetItem("cattree-visible");
-            if (item != null)
-            {
-                item.Checked = _ViewModel.CatTreeVisible;
-            }
-            button = _MenuBar.GetButton("cattree-visible");
-            if (button != null)
-            {
-                button.Checked = _ViewModel.CatTreeVisible;
-            }
-
-            VSplit.Panel2Collapsed = !_ViewModel.KeyListVisible;
-            item = _MenuBar.GetItem("keylist-visible");
-            if (item != null)
-            {
-                item.Checked = _ViewModel.KeyListVisible;
-            }
-            button = _MenuBar.GetButton("keylist-visible");
-            if (button != null)
-            {
-                button.Checked = _ViewModel.KeyListVisible;
-            }
-
-            FbFind.Visible = _ViewModel.FindBarVisible;
-            item = _MenuBar.GetItem("findbar-visible");
-            if (item != null)
-            {
-                item.Checked = _ViewModel.FindBarVisible;
-            }
-            button = _MenuBar.GetButton("findbar-visible");
-            if (button != null)
-            {
-                button.Checked = _ViewModel.FindBarVisible;
-            }
-
-            SsEcho.Visible = _ViewModel.EchoBarVisible;
-            item = _MenuBar.GetItem("echobar-visible");
-            if (item != null)
-            {
-                item.Checked = _ViewModel.EchoBarVisible;
-            }
-            button = _MenuBar.GetButton("echobar-visible");
-            if (button != null)
-            {
-                button.Checked = _ViewModel.EchoBarVisible;
-            }
         }
 
         private void SaveLayout()
@@ -401,299 +315,306 @@ namespace Me.Amon.Pwd
 
         private void APwd_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control)
+            foreach (KeyStroke<APwd> stroke in _MenuBar.KeyStrokes)
             {
-                // 添加记录
-                if (e.KeyCode == Keys.N)
+                if (e.KeyValue == stroke.Code)
                 {
-                    AppendKey();
-                    return;
+                    stroke.Action.EventHandler(sender, null);
                 }
-                // 保存记录
-                if (e.KeyCode == Keys.S)
-                {
-                    UpdateKey();
-                    return;
-                }
-                // 删除记录
-                if (e.KeyCode == Keys.R)
-                {
-                    _PwdView.DeleteKey();
-                    return;
-                }
-                // 查找
-                if (e.KeyCode == Keys.F)
-                {
-                    FbFind.Focus();
-                    return;
-                }
-                // 锁定窗口
-                if (e.KeyCode == Keys.L)
-                {
-                    LockForm();
-                    return;
-                }
-                // 隐藏窗口
-                if (e.KeyCode == Keys.H || e.KeyCode == Keys.Enter)
-                {
-                    HideForm();
-                    return;
-                }
-                // 退出窗口
-                if (e.KeyCode == Keys.Q)
-                {
-                    ExitForm();
-                    return;
-                }
-                // 向上选择
-                if (e.KeyCode == Keys.U || e.KeyCode == Keys.Up)
-                {
-                    return;
-                }
-                // 向下选择
-                if (e.KeyCode == Keys.U || e.KeyCode == Keys.Down)
-                {
-                    return;
-                }
-                // 向上移动
-                if (e.Shift && (e.KeyCode == Keys.U || e.KeyCode == Keys.Up))
-                {
-                    return;
-                }
-                // 向下移动
-                if (e.Shift && (e.KeyCode == Keys.D || e.KeyCode == Keys.Down))
-                {
-                    return;
-                }
-
-                #region 切换视图
-                if (e.KeyCode == Keys.F1)
-                {
-                    ShowAPro();
-                    return;
-                }
-                if (e.KeyCode == Keys.F2)
-                {
-                    ShowAWiz();
-                    return;
-                }
-                if (e.KeyCode == Keys.F3)
-                {
-                    ShowAPad();
-                    return;
-                }
-                #endregion
-
-                #region 添加属性
-                if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1)
-                {
-                    _PwdView.AppendAtt(Att.TYPE_TEXT);
-                    return;
-                }
-                if (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2)
-                {
-                    _PwdView.AppendAtt(Att.TYPE_PASS);
-                    return;
-                }
-                if (e.KeyCode == Keys.D3 || e.KeyCode == Keys.NumPad3)
-                {
-                    _PwdView.AppendAtt(Att.TYPE_LINK);
-                    return;
-                }
-                if (e.KeyCode == Keys.D4 || e.KeyCode == Keys.NumPad4)
-                {
-                    _PwdView.AppendAtt(Att.TYPE_MAIL);
-                    return;
-                }
-                if (e.KeyCode == Keys.D5 || e.KeyCode == Keys.NumPad5)
-                {
-                    _PwdView.AppendAtt(Att.TYPE_DATE);
-                    return;
-                }
-                if (e.KeyCode == Keys.D6 || e.KeyCode == Keys.NumPad6)
-                {
-                    _PwdView.AppendAtt(Att.TYPE_DATA);
-                    return;
-                }
-                if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7)
-                {
-                    _PwdView.AppendAtt(Att.TYPE_LIST);
-                    return;
-                }
-                if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8)
-                {
-                    _PwdView.AppendAtt(Att.TYPE_MEMO);
-                    return;
-                }
-                if (e.KeyCode == Keys.D9 || e.KeyCode == Keys.NumPad9)
-                {
-                    _PwdView.AppendAtt(Att.TYPE_FILE);
-                    return;
-                }
-                if (e.KeyCode == Keys.D0 || e.KeyCode == Keys.NumPad0)
-                {
-                    _PwdView.AppendAtt(Att.TYPE_LINE);
-                    return;
-                }
-                #endregion
-
-                #region 类别管理
-                // 添加类别
-                if (e.KeyCode == Keys.Oemplus || e.KeyCode == Keys.Add)
-                {
-                    AppendCat();
-                    return;
-                }
-                // 更新类别
-                if (e.KeyCode == Keys.OemPeriod || e.KeyCode == Keys.Decimal)
-                {
-                    UpdateCat();
-                    return;
-                }
-                // 删除类别
-                if (e.KeyCode == Keys.OemMinus || e.KeyCode == Keys.Subtract)
-                {
-                    DeleteCat();
-                    return;
-                }
-                #endregion
-
-                // 菜单栏隐现
-                if (e.KeyCode == Keys.M)
-                {
-                    MenuBarVisible = !MbMenu.Visible;
-                    return;
-                }
-                // 工具栏隐现
-                if (e.KeyCode == Keys.T)
-                {
-                    ToolBarVisible = !TbTool.Visible;
-                    return;
-                }
-                // 状态栏隐现
-                if (e.KeyCode == Keys.E)
-                {
-                    EchoBarVisible = !SsEcho.Visible;
-                    return;
-                }
-                // 查找隐现
-                if (e.KeyCode == Keys.G)
-                {
-                    FindBarVisible = !FbFind.Visible;
-                    return;
-                }
-                // 目录隐现
-                if (e.KeyCode == Keys.K)
-                {
-                    CatTreeVisible = VSplit.Panel1Collapsed;
-                    return;
-                }
-                // 列表隐现
-                if (e.KeyCode == Keys.P)
-                {
-                    KeyListVisible = VSplit.Panel2Collapsed;
-                    return;
-                }
-                // 列表隐现
-                if (e.KeyCode == Keys.J)
-                {
-                    NavPaneVisible = HSplit.Panel1Collapsed;
-                    return;
-                }
-                // 属性隐现
-                if (e.KeyCode == Keys.A)
-                {
-                    //SetKeyListVisible(VSplit.Panel2Collapsed);
-                    return;
-                }
-                return;
             }
-            if (e.Alt)
-            {
-                // 复制属性
-                if (e.KeyCode == Keys.C)
-                {
-                    _PwdView.CopyAtt();
-                    return;
-                }
-                // 更新属性
-                if (e.KeyCode == Keys.U)
-                {
-                    _PwdView.SaveAtt();
-                    return;
-                }
-                // 删除属性
-                if (e.KeyCode == Keys.R)
-                {
-                    _PwdView.DropAtt();
-                    return;
-                }
-                #region 修改属性
-                if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1)
-                {
-                    _PwdView.UpdateAtt(Att.TYPE_TEXT);
-                    return;
-                }
-                if (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2)
-                {
-                    _PwdView.UpdateAtt(Att.TYPE_PASS);
-                    return;
-                }
-                if (e.KeyCode == Keys.D3 || e.KeyCode == Keys.NumPad3)
-                {
-                    _PwdView.UpdateAtt(Att.TYPE_LINK);
-                    return;
-                }
-                if (e.KeyCode == Keys.D4 || e.KeyCode == Keys.NumPad4)
-                {
-                    _PwdView.UpdateAtt(Att.TYPE_MAIL);
-                    return;
-                }
-                if (e.KeyCode == Keys.D5 || e.KeyCode == Keys.NumPad5)
-                {
-                    _PwdView.UpdateAtt(Att.TYPE_DATE);
-                    return;
-                }
-                if (e.KeyCode == Keys.D6 || e.KeyCode == Keys.NumPad6)
-                {
-                    _PwdView.UpdateAtt(Att.TYPE_DATA);
-                    return;
-                }
-                if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7)
-                {
-                    _PwdView.UpdateAtt(Att.TYPE_LIST);
-                    return;
-                }
-                if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8)
-                {
-                    _PwdView.UpdateAtt(Att.TYPE_MEMO);
-                    return;
-                }
-                if (e.KeyCode == Keys.D9 || e.KeyCode == Keys.NumPad9)
-                {
-                    _PwdView.UpdateAtt(Att.TYPE_FILE);
-                    return;
-                }
-                if (e.KeyCode == Keys.D0 || e.KeyCode == Keys.NumPad0)
-                {
-                    _PwdView.UpdateAtt(Att.TYPE_LINE);
-                    return;
-                }
-                #endregion
-                return;
-            }
-            // 帮助
-            if (e.KeyCode == Keys.F1)
-            {
-                ShowHelp();
-                return;
-            }
-            // 快捷键
-            if (e.KeyCode == Keys.F5)
-            {
-                ShowKeys();
-                return;
-            }
+            //if (e.Control)
+            //{
+            //    // 添加记录
+            //    if (e.KeyCode == Keys.N)
+            //    {
+            //        AppendKey();
+            //        return;
+            //    }
+            //    // 保存记录
+            //    if (e.KeyCode == Keys.S)
+            //    {
+            //        UpdateKey();
+            //        return;
+            //    }
+            //    // 删除记录
+            //    if (e.KeyCode == Keys.R)
+            //    {
+            //        _PwdView.DeleteKey();
+            //        return;
+            //    }
+            //    // 查找
+            //    if (e.KeyCode == Keys.F)
+            //    {
+            //        FbFind.Focus();
+            //        return;
+            //    }
+            //    // 锁定窗口
+            //    if (e.KeyCode == Keys.L)
+            //    {
+            //        LockForm();
+            //        return;
+            //    }
+            //    // 隐藏窗口
+            //    if (e.KeyCode == Keys.H || e.KeyCode == Keys.Enter)
+            //    {
+            //        HideForm();
+            //        return;
+            //    }
+            //    // 退出窗口
+            //    if (e.KeyCode == Keys.Q)
+            //    {
+            //        ExitForm();
+            //        return;
+            //    }
+            //    // 向上选择
+            //    if (e.KeyCode == Keys.U || e.KeyCode == Keys.Up)
+            //    {
+            //        return;
+            //    }
+            //    // 向下选择
+            //    if (e.KeyCode == Keys.U || e.KeyCode == Keys.Down)
+            //    {
+            //        return;
+            //    }
+            //    // 向上移动
+            //    if (e.Shift && (e.KeyCode == Keys.U || e.KeyCode == Keys.Up))
+            //    {
+            //        return;
+            //    }
+            //    // 向下移动
+            //    if (e.Shift && (e.KeyCode == Keys.D || e.KeyCode == Keys.Down))
+            //    {
+            //        return;
+            //    }
+
+            //    #region 切换视图
+            //    if (e.KeyCode == Keys.F1)
+            //    {
+            //        ShowAPro();
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.F2)
+            //    {
+            //        ShowAWiz();
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.F3)
+            //    {
+            //        ShowAPad();
+            //        return;
+            //    }
+            //    #endregion
+
+            //    #region 添加属性
+            //    if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1)
+            //    {
+            //        _PwdView.AppendAtt(Att.TYPE_TEXT);
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2)
+            //    {
+            //        _PwdView.AppendAtt(Att.TYPE_PASS);
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.D3 || e.KeyCode == Keys.NumPad3)
+            //    {
+            //        _PwdView.AppendAtt(Att.TYPE_LINK);
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.D4 || e.KeyCode == Keys.NumPad4)
+            //    {
+            //        _PwdView.AppendAtt(Att.TYPE_MAIL);
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.D5 || e.KeyCode == Keys.NumPad5)
+            //    {
+            //        _PwdView.AppendAtt(Att.TYPE_DATE);
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.D6 || e.KeyCode == Keys.NumPad6)
+            //    {
+            //        _PwdView.AppendAtt(Att.TYPE_DATA);
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7)
+            //    {
+            //        _PwdView.AppendAtt(Att.TYPE_LIST);
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8)
+            //    {
+            //        _PwdView.AppendAtt(Att.TYPE_MEMO);
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.D9 || e.KeyCode == Keys.NumPad9)
+            //    {
+            //        _PwdView.AppendAtt(Att.TYPE_FILE);
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.D0 || e.KeyCode == Keys.NumPad0)
+            //    {
+            //        _PwdView.AppendAtt(Att.TYPE_LINE);
+            //        return;
+            //    }
+            //    #endregion
+
+            //    #region 类别管理
+            //    // 添加类别
+            //    if (e.KeyCode == Keys.Oemplus || e.KeyCode == Keys.Add)
+            //    {
+            //        AppendCat();
+            //        return;
+            //    }
+            //    // 更新类别
+            //    if (e.KeyCode == Keys.OemPeriod || e.KeyCode == Keys.Decimal)
+            //    {
+            //        UpdateCat();
+            //        return;
+            //    }
+            //    // 删除类别
+            //    if (e.KeyCode == Keys.OemMinus || e.KeyCode == Keys.Subtract)
+            //    {
+            //        DeleteCat();
+            //        return;
+            //    }
+            //    #endregion
+
+            //    // 菜单栏隐现
+            //    if (e.KeyCode == Keys.M)
+            //    {
+            //        MenuBarVisible = !MbMenu.Visible;
+            //        return;
+            //    }
+            //    // 工具栏隐现
+            //    if (e.KeyCode == Keys.T)
+            //    {
+            //        ToolBarVisible = !TbTool.Visible;
+            //        return;
+            //    }
+            //    // 状态栏隐现
+            //    if (e.KeyCode == Keys.E)
+            //    {
+            //        EchoBarVisible = !SsEcho.Visible;
+            //        return;
+            //    }
+            //    // 查找隐现
+            //    if (e.KeyCode == Keys.G)
+            //    {
+            //        FindBarVisible = !FbFind.Visible;
+            //        return;
+            //    }
+            //    // 目录隐现
+            //    if (e.KeyCode == Keys.K)
+            //    {
+            //        CatTreeVisible = VSplit.Panel1Collapsed;
+            //        return;
+            //    }
+            //    // 列表隐现
+            //    if (e.KeyCode == Keys.P)
+            //    {
+            //        KeyListVisible = VSplit.Panel2Collapsed;
+            //        return;
+            //    }
+            //    // 列表隐现
+            //    if (e.KeyCode == Keys.J)
+            //    {
+            //        NavPaneVisible = HSplit.Panel1Collapsed;
+            //        return;
+            //    }
+            //    // 属性隐现
+            //    if (e.KeyCode == Keys.A)
+            //    {
+            //        //SetKeyListVisible(VSplit.Panel2Collapsed);
+            //        return;
+            //    }
+            //    return;
+            //}
+            //if (e.Alt)
+            //{
+            //    // 复制属性
+            //    if (e.KeyCode == Keys.C)
+            //    {
+            //        _PwdView.CopyAtt();
+            //        return;
+            //    }
+            //    // 更新属性
+            //    if (e.KeyCode == Keys.U)
+            //    {
+            //        _PwdView.SaveAtt();
+            //        return;
+            //    }
+            //    // 删除属性
+            //    if (e.KeyCode == Keys.R)
+            //    {
+            //        _PwdView.DropAtt();
+            //        return;
+            //    }
+            //    #region 修改属性
+            //    if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1)
+            //    {
+            //        _PwdView.UpdateAtt(Att.TYPE_TEXT);
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2)
+            //    {
+            //        _PwdView.UpdateAtt(Att.TYPE_PASS);
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.D3 || e.KeyCode == Keys.NumPad3)
+            //    {
+            //        _PwdView.UpdateAtt(Att.TYPE_LINK);
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.D4 || e.KeyCode == Keys.NumPad4)
+            //    {
+            //        _PwdView.UpdateAtt(Att.TYPE_MAIL);
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.D5 || e.KeyCode == Keys.NumPad5)
+            //    {
+            //        _PwdView.UpdateAtt(Att.TYPE_DATE);
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.D6 || e.KeyCode == Keys.NumPad6)
+            //    {
+            //        _PwdView.UpdateAtt(Att.TYPE_DATA);
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7)
+            //    {
+            //        _PwdView.UpdateAtt(Att.TYPE_LIST);
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8)
+            //    {
+            //        _PwdView.UpdateAtt(Att.TYPE_MEMO);
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.D9 || e.KeyCode == Keys.NumPad9)
+            //    {
+            //        _PwdView.UpdateAtt(Att.TYPE_FILE);
+            //        return;
+            //    }
+            //    if (e.KeyCode == Keys.D0 || e.KeyCode == Keys.NumPad0)
+            //    {
+            //        _PwdView.UpdateAtt(Att.TYPE_LINE);
+            //        return;
+            //    }
+            //    #endregion
+            //    return;
+            //}
+            //// 帮助
+            //if (e.KeyCode == Keys.F1)
+            //{
+            //    ShowHelp();
+            //    return;
+            //}
+            //// 快捷键
+            //if (e.KeyCode == Keys.F5)
+            //{
+            //    ShowKeys();
+            //    return;
+            //}
         }
 
         private void APwd_FormClosing(object sender, FormClosingEventArgs e)
@@ -1420,6 +1341,30 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 公共方法
+        public void CutAtt()
+        {
+            if (_PwdView != null)
+            {
+                //_PwdView.CutAtt();
+            }
+        }
+
+        public void CopyAtt()
+        {
+            if (_PwdView != null)
+            {
+                _PwdView.CopyAtt();
+            }
+        }
+
+        public void PasteAtt(string text)
+        {
+            if (_PwdView != null)
+            {
+                //_PwdView.PasteAtt();
+            }
+        }
+
         public void ChangeView(UserControl uc)
         {
             uc.Dock = DockStyle.Fill;
@@ -1512,11 +1457,11 @@ namespace Me.Amon.Pwd
                 {
                     return;
                 }
-                //_PwdView.HideView(TpGrid);
+                _PwdView.HideView(PlBody);
             }
 
             _PwdView = _WizView;
-            //_PwdView.InitView(TpGrid);
+            _PwdView.InitView(PlBody);
         }
 
         public void ShowAPad()
