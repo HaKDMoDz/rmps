@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using Me.Amon.Model;
 
 namespace Me.Amon
 {
@@ -6,7 +7,7 @@ namespace Me.Amon
     {
         T IApp { get; set; }
 
-        void Add(ToolStripItem item);
+        void Add(ToolStripItem item, ViewModel viewModel);
 
         /// <summary>
         /// 

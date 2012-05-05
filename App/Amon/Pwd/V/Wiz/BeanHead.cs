@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
-using Me.Amon.Pwd._Att;
 using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd._Att;
 using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.V.Wiz
@@ -155,11 +155,35 @@ namespace Me.Amon.Pwd.V.Wiz
             return true;
         }
 
+        public void CutData()
+        {
+            if (_TBox != null)
+            {
+                _TBox.Cut();
+            }
+        }
+
         public void CopyData()
         {
-            if (_TBox != null && !string.IsNullOrEmpty(_TBox.Text))
+            if (_TBox != null)
             {
-                Clipboard.SetText(_TBox.Text);
+                _TBox.Copy();
+            }
+        }
+
+        public void PasteData()
+        {
+            if (_TBox != null)
+            {
+                _TBox.Paste();
+            }
+        }
+
+        public void ClearData()
+        {
+            if (_TBox != null)
+            {
+                _TBox.Clear();
             }
         }
         #endregion

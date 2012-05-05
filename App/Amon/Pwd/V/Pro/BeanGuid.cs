@@ -3,10 +3,9 @@ using System.Data;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
-using Me.Amon.Pwd;
-using Me.Amon.Pwd._Att;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd._Att;
 using Me.Amon.Uc;
 using Me.Amon.Util;
 
@@ -144,7 +143,19 @@ namespace Me.Amon.Pwd.V.Pro
             return true;
         }
 
+        public void Cut()
+        {
+        }
+
         public void Copy()
+        {
+        }
+
+        public void Paste()
+        {
+        }
+
+        public void Clear()
         {
         }
 

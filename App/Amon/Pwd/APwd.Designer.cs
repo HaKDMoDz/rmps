@@ -203,7 +203,6 @@
             this.TbTool.Name = "TbTool";
             this.TbTool.Size = new System.Drawing.Size(111, 25);
             this.TbTool.TabIndex = 0;
-            this.TbTool.EndDrag += new System.EventHandler(this.TbTool_EndDrag);
             // 
             // CmCat
             // 

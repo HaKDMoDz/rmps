@@ -16,6 +16,12 @@ namespace Me.Amon.Pwd.V.Wiz
 
         bool SaveData();
 
+        void CutData();
+
         void CopyData();
+
+        void PasteData();
+
+        void ClearData();
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Model;
@@ -76,12 +75,21 @@ namespace Me.Amon.Pwd.V.Wiz
             return true;
         }
 
+        public void Cut()
+        {
+        }
+
         public void Copy()
         {
-            if (!string.IsNullOrEmpty(DtData.Text))
-            {
-                Clipboard.SetText(DtData.Text);
-            }
+            Clipboard.SetText(DtData.Text);
+        }
+
+        public void Paste()
+        {
+        }
+
+        public void Clear()
+        {
         }
 
         public bool Save()

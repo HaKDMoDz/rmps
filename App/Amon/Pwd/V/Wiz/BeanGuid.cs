@@ -2,10 +2,9 @@
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
-using Me.Amon.Pwd;
-using Me.Amon.Pwd._Att;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd._Att;
 using Me.Amon.Uc;
 using Me.Amon.Util;
 
@@ -183,7 +182,19 @@ namespace Me.Amon.Pwd.V.Wiz
             return true;
         }
 
+        public void CutData()
+        {
+        }
+
         public void CopyData()
+        {
+        }
+
+        public void PasteData()
+        {
+        }
+
+        public void ClearData()
         {
         }
         #endregion

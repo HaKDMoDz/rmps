@@ -1,5 +1,4 @@
 ﻿using System.Windows.Forms;
-using Me.Amon.Pwd;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
 
@@ -28,7 +27,19 @@ namespace Me.Amon.Pwd.V.Pro
             return true;
         }
 
+        public void Cut()
+        {
+        }
+
         public void Copy()
+        {
+        }
+
+        public void Paste()
+        {
+        }
+
+        public void Clear()
         {
         }
 

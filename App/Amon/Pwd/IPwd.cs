@@ -24,11 +24,13 @@ namespace Me.Amon.Pwd
 
         void UpdateAtt(int type);
 
-        //void CutAtt();
+        void CutAtt();
 
         void CopyAtt();
 
-        //void PasteAtt();
+        void PasteAtt();
+
+        void ClearAtt();
 
         void SaveAtt();
 

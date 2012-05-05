@@ -205,9 +205,24 @@ namespace Me.Amon.Pwd.V.Pro
             ShowView(att);
         }
 
+        public void CutAtt()
+        {
+            _CmpLast.Cut();
+        }
+
         public void CopyAtt()
         {
             _CmpLast.Copy();
+        }
+
+        public void PasteAtt()
+        {
+            _CmpLast.Paste();
+        }
+
+        public void ClearAtt()
+        {
+            _CmpLast.Clear();
         }
 
         public void SaveAtt()

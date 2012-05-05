@@ -64,7 +64,19 @@ namespace Me.Amon.Pwd.V.Pad
         {
         }
 
+        public void CutAtt()
+        {
+        }
+
         public void CopyAtt()
+        {
+        }
+
+        public void PasteAtt()
+        {
+        }
+
+        public void ClearAtt()
         {
         }
 

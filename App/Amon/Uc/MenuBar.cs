@@ -473,7 +473,7 @@ namespace Me.Amon.Uc
             }
             if (action != null)
             {
-                action.Add(item);
+                action.Add(item, _ViewModel);
             }
             return item;
         }
@@ -497,7 +497,7 @@ namespace Me.Amon.Uc
             IAction<T> action = processAction(node, button);
             if (action != null)
             {
-                action.Add(button);
+                action.Add(button, _ViewModel);
             }
             return button;
         }

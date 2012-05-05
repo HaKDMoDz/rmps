@@ -60,11 +60,35 @@ namespace Me.Amon.Pwd.V.Pro
             return true;
         }
 
+        public void Cut()
+        {
+            if (_Ctl != null)
+            {
+                _Ctl.Cut();
+            }
+        }
+
         public void Copy()
         {
             if (_Ctl != null)
             {
-                Clipboard.SetText(_Ctl.Text);
+                _Ctl.Copy();
+            }
+        }
+
+        public void Paste()
+        {
+            if (_Ctl != null)
+            {
+                _Ctl.Paste();
+            }
+        }
+
+        public void Clear()
+        {
+            if (_Ctl != null)
+            {
+                _Ctl.Clear();
             }
         }
 

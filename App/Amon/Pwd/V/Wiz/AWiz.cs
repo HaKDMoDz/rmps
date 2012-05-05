@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Me.Amon.Pwd;
 using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
@@ -108,11 +107,35 @@ namespace Me.Amon.Pwd.V.Wiz
         {
         }
 
+        public void CutAtt()
+        {
+            if (_LastView != null)
+            {
+                _LastView.CutData();
+            }
+        }
+
         public void CopyAtt()
         {
             if (_LastView != null)
             {
                 _LastView.CopyData();
+            }
+        }
+
+        public void PasteAtt()
+        {
+            if (_LastView != null)
+            {
+                _LastView.PasteData();
+            }
+        }
+
+        public void ClearAtt()
+        {
+            if (_LastView != null)
+            {
+                _LastView.ClearData();
             }
         }
 

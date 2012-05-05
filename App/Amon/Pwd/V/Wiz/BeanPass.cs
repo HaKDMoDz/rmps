@@ -74,9 +74,25 @@ namespace Me.Amon.Pwd.V.Wiz
             return true;
         }
 
+        public void Cut()
+        {
+            SafeUtil.Copy(TbData.Text, 60);
+            TbData.Clear();
+        }
+
         public void Copy()
         {
             SafeUtil.Copy(TbData.Text, 60);
+        }
+
+        public void Paste()
+        {
+            TbData.Paste();
+        }
+
+        public void Clear()
+        {
+            TbData.Clear();
         }
 
         public bool Save()

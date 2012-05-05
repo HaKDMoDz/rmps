@@ -68,9 +68,24 @@ namespace Me.Amon.Pwd.V.Wiz
             return true;
         }
 
+        public void Cut()
+        {
+            TbData.Cut();
+        }
+
         public void Copy()
         {
-            Clipboard.SetText(TbData.Text);
+            TbData.Copy();
+        }
+
+        public void Paste()
+        {
+            TbData.Paste();
+        }
+
+        public void Clear()
+        {
+            TbData.Clear();
         }
 
         public bool Save()

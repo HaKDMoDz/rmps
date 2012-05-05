@@ -46,7 +46,19 @@ namespace Me.Amon.Pwd.V.Wiz
             return false;
         }
 
+        public void CutData()
+        {
+        }
+
         public void CopyData()
+        {
+        }
+
+        public void PasteData()
+        {
+        }
+
+        public void ClearData()
         {
         }
 

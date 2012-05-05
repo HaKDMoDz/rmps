@@ -641,28 +641,835 @@ namespace Me.Amon.Pwd
         }
         #endregion
 
-        #region 菜单栏事件区域
-        #region 系统菜单
-        private void TmiHideWin_Click(object sender, EventArgs e)
+        #region 弹出菜单事件区域
+        #region 类别弹出菜单
+        private void CmiSortU_Click(object sender, EventArgs e)
         {
-            HideForm();
+            TreeNode currNode = TvCatTree.SelectedNode;
+            if (currNode == null)
+            {
+                return;
+            }
+
+            Cat currCat = currNode.Tag as Cat;
+            if (currCat == null || currCat.Id == "0")
+            {
+                return;
+            }
+
+            TreeNode prevNode = currNode.PrevNode;
+            if (prevNode == null)
+            {
+                return;
+            }
+
+            Cat prevCat = prevNode.Tag as Cat;
+            if (prevCat == null || prevCat.Id == "0")
+            {
+                return;
+            }
+
+            TreeNode parent = currNode.Parent;
+            if (parent == null)
+            {
+                return;
+            }
+
+            _UserModel.DBA.SaveVcs(prevCat);
+            _UserModel.DBA.SaveVcs(currCat);
+
+            TvCatTree.SelectedNode = null;
+            parent.Nodes.Remove(currNode);
+            parent.Nodes.Insert(prevNode.Index, currNode);
+            TvCatTree.SelectedNode = currNode;
         }
 
-        private void TmiLockWin_Click(object sender, EventArgs e)
+        private void CmiSortD_Click(object sender, EventArgs e)
         {
-            LockForm();
+            TreeNode currNode = TvCatTree.SelectedNode;
+            if (currNode == null)
+            {
+                return;
+            }
+
+            Cat currCat = currNode.Tag as Cat;
+            if (currCat == null || currCat.Id == "0")
+            {
+                return;
+            }
+
+            TreeNode nextNode = currNode.NextNode;
+            if (nextNode == null)
+            {
+                return;
+            }
+
+            Cat nextCat = nextNode.Tag as Cat;
+            if (nextCat == null || nextCat.Id == "0")
+            {
+                return;
+            }
+
+            TreeNode parent = currNode.Parent;
+            if (parent == null)
+            {
+                return;
+            }
+
+            _UserModel.DBA.SaveVcs(currCat);
+            _UserModel.DBA.SaveVcs(nextCat);
+
+            TvCatTree.SelectedNode = null;
+            parent.Nodes.Remove(currNode);
+            parent.Nodes.Insert(nextNode.Index + 1, currNode);
+            TvCatTree.SelectedNode = currNode;
         }
 
-        private void TmiExitApp_Click(object sender, EventArgs e)
+        private void CmiAppendCat_Click(object sender, EventArgs e)
         {
-            ExitForm();
+            AppendCat();
+        }
+
+        private void CmiUpdateCat_Click(object sender, EventArgs e)
+        {
+            UpdateCat();
+        }
+
+        private void CmiDeleteCat_Click(object sender, EventArgs e)
+        {
+            DeleteCat();
+        }
+
+        private void CmiEditIcon_Click(object sender, EventArgs e)
+        {
+            TreeNode node = TvCatTree.SelectedNode;
+            if (node == null)
+            {
+                return;
+            }
+
+            Cat cat = node.Tag as Cat;
+            if (cat == null || cat.Id == "winshineapwd0000")
+            {
+                return;
+            }
+
+            PngSeeker editor = new PngSeeker(_UserModel, _DataModel.CatDir);
+            editor.InitOnce(16);
+            editor.CallBackHandler = new AmonHandler<Pwd.Png>(ChangeImgByCat);
+            BeanUtil.CenterToParent(editor, this);
+            editor.ShowDialog(this);
         }
         #endregion
 
-        #region 数据菜单
-        public void SyncData()
+        #region 记录弹出菜单
+        private void CmiMoveto_Click(object sender, EventArgs e)
         {
-            DoSync();
+            CatView view = new CatView(_UserModel);
+            view.Init(IlCatTree);
+            view.CallBack = new AmonHandler<string>(ChangeCatByKey);
+            BeanUtil.CenterToParent(view, this);
+            view.ShowDialog(this);
+        }
+
+        private void CmiHistory_Click(object sender, EventArgs e)
+        {
+            LogEdit edit = new LogEdit(this);
+            edit.Init(_UserModel, _SafeModel);
+            BeanUtil.CenterToParent(edit, this);
+            edit.Show(this);
+        }
+        #endregion
+        #endregion
+        #endregion
+
+        #region 公共方法
+        public void ChangeView(UserControl uc)
+        {
+            uc.Dock = DockStyle.Fill;
+            uc.Location = new Point(3, 35);
+            uc.Size = new Size(350, 296);
+            uc.TabIndex = 0;
+
+            HSplit.Panel2.Controls.Clear();
+            HSplit.Panel2.Controls.Add(uc);
+        }
+
+        public void ShowTips(Control control, string caption)
+        {
+            TpTips.SetToolTip(control, caption);
+        }
+
+        public void ShowIcoSeeker(string rootDir, AmonHandler<Pwd.Ico> handler)
+        {
+            IcoSeeker seeker = new IcoSeeker(_UserModel, rootDir);
+            seeker.InitOnce(24);
+            seeker.CallBackHandler = handler;
+            BeanUtil.CenterToParent(seeker, this);
+            seeker.ShowDialog(this);
+        }
+
+        public void ShowPngSeeker()
+        {
+        }
+
+        public void Backup()
+        {
+        }
+
+        public void Backup(Key rec)
+        {
+        }
+
+        public void Resuma()
+        {
+        }
+
+        public void Resuma(KeyLog log)
+        {
+        }
+
+        public void ShowRec(Key rec)
+        {
+            _PwdView.ShowData();
+
+            _MenuBar.GetGroup("");
+        }
+        #endregion
+
+        #region 公共函数
+        #region 文件菜单
+        public void LockForm()
+        {
+            new AuthRc(_UserModel, this).ShowDialog(this);
+        }
+
+        public void HideForm()
+        {
+            if (_SafeModel.Modified)
+            {
+                if (DialogResult.Yes != Main.ShowConfirm("您有数据尚未保存，确认要隐藏窗口吗？"))
+                {
+                    return;
+                }
+            }
+            Visible = false;
+
+            SaveLayout();
+        }
+
+        public void ExitForm()
+        {
+            SaveLayout();
+
+            Close();
+        }
+        #endregion
+
+        #region 编辑菜单
+        #region 类别处理
+        public void AppendCat()
+        {
+            CatEdit catEdit = new CatEdit();
+            catEdit.CallBackHandler = new AmonHandler<Cat>(AppendCatHandler);
+            catEdit.Show(this, new Cat());
+        }
+
+        private void AppendCatHandler(Cat cat)
+        {
+            if (_LastNode == null)
+            {
+                return;
+            }
+
+            cat.Parent = _LastNode.Name;
+            _UserModel.DBA.SaveVcs(cat);
+
+            TreeNode node = new TreeNode();
+            node.Name = cat.Id;
+            node.Text = cat.Text;
+            node.ToolTipText = cat.Tips;
+            node.Tag = cat;
+            if (CharUtil.IsValidateHash(cat.Icon))
+            {
+                node.ImageKey = cat.Icon;
+            }
+            _LastNode.Nodes.Add(node);
+            _LastNode.Expand();
+        }
+
+        public void UpdateCat()
+        {
+            TreeNode node = TvCatTree.SelectedNode;
+            if (node == null)
+            {
+                Main.ShowAlert("请选择您要更新的类别！");
+                TvCatTree.Focus();
+                return;
+            }
+
+            Cat cat = node.Tag as Cat;
+            if (cat == null || cat.Id == "winshineapwd0000")
+            {
+                return;
+            }
+
+            CatEdit catEdit = new CatEdit();
+            catEdit.CallBackHandler = new AmonHandler<Cat>(UpdateCatHandler);
+            catEdit.Show(this, cat);
+        }
+
+        private void UpdateCatHandler(Cat cat)
+        {
+            TreeNode node = TvCatTree.SelectedNode;
+
+            _UserModel.DBA.SaveVcs(cat);
+
+            node.Text = cat.Text;
+            node.ToolTipText = cat.Tips;
+            node.ImageKey = cat.Icon;
+        }
+
+        public void DeleteCat()
+        {
+            TreeNode node = TvCatTree.SelectedNode;
+            if (node == null)
+            {
+                Main.ShowAlert("请选择您要删除的类别！");
+                TvCatTree.Focus();
+                return;
+            }
+
+            Cat cat = node.Tag as Cat;
+            if (cat == null || cat.Id == "winshineapwd0000")
+            {
+                return;
+            }
+
+            if (node.Nodes.Count > 0)
+            {
+                Main.ShowAlert("下级类别不为空，不能删除！");
+                return;
+            }
+
+            if (DialogResult.Yes != Main.ShowConfirm("确认要删除选中的类别吗，此操作将不可恢复？"))
+            {
+                return;
+            }
+
+            IList<Key> recs = _UserModel.DBA.ListKey(cat.Id);
+            if (recs.Count > 0)
+            {
+                Main.ShowAlert("类别数据不为空，不能删除！");
+                return;
+            }
+
+            _UserModel.DBA.DeleteVcs(cat);
+
+            TreeNode root = node.Parent;
+            if (root != null)
+            {
+                root.Nodes.Remove(node);
+            }
+        }
+
+        private void ChangeImgByCat(Pwd.Png png)
+        {
+            if (!CharUtil.IsValidateHash(png.File))
+            {
+                png.File = "0";
+            }
+            if (!IlCatTree.Images.ContainsKey(png.File))
+            {
+                IlCatTree.Images.Add(png.File, png.Image);
+            }
+            _LastNode.ImageKey = png.File;
+            _LastNode.SelectedImageKey = png.File;
+
+            Cat cat = _LastNode.Tag as Cat;
+            if (cat == null)
+            {
+                return;
+            }
+
+            _UserModel.DBA.SaveVcs(cat);
+        }
+        #endregion
+
+        #region 记录处理
+        public void AppendKey()
+        {
+            if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
+            {
+                return;
+            }
+
+            _PwdView.AppendKey();
+        }
+
+        public void UpdateKey()
+        {
+            if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
+            {
+                return;
+            }
+
+            if (!_SafeModel.IsUpdate)
+            {
+                TreeNode node = TvCatTree.SelectedNode;
+                if (node == null)
+                {
+                    Main.ShowAlert("请选择类别！");
+                    TvCatTree.Focus();
+                    return;
+                }
+
+                Cat cat = node.Tag as Cat;
+                if (cat == null)
+                {
+                    Main.ShowAlert("系统异常，请稍后重试！");
+                    return;
+                }
+
+                _SafeModel.Key.CatId = cat.Id;
+            }
+
+            if (!_PwdView.UpdateKey())
+            {
+                return;
+            }
+
+            if (_SafeModel.IsUpdate && _SafeModel.Key.Backup)
+            {
+                KeyLog recLog = _SafeModel.Key.ToLog();
+                _UserModel.DBA.SaveLog(recLog);
+            }
+            _SafeModel.Encode();
+            _SafeModel.Key.AccessTime = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
+            _UserModel.DBA.SaveVcs(_SafeModel.Key);
+            _SafeModel.Modified = false;
+
+            LastOpt();
+            _PwdView.ShowInfo();
+        }
+
+        public void DeleteKey()
+        {
+            if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
+            {
+                return;
+            }
+
+            if (DialogResult.Yes != Main.ShowConfirm("确认要删除选中的记录吗，此操作将不可恢复？"))
+            {
+                return;
+            }
+
+            if (DialogResult.No != Main.ShowConfirm("再次确认，要返回吗？"))
+            {
+                return;
+            }
+
+            _UserModel.DBA.RemoveVcs(_SafeModel.Key);
+
+            LbKeyList.Items.RemoveAt(LbKeyList.SelectedIndex);
+        }
+
+        private void ImportKey()
+        {
+            _SafeModel.Encode();
+
+            _SafeModel.Key.AccessTime = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
+            _UserModel.DBA.SaveVcs(_SafeModel.Key);
+        }
+
+        public void ListKeyByCat(string catId)
+        {
+            if (!CharUtil.IsValidateHash(catId))
+            {
+                catId = "0";
+            }
+
+            DoListKey(catId);
+
+            _IsSearch = false;
+            _LastHash = catId;
+        }
+
+        public void DoListKey(string catId)
+        {
+            IList<Key> recs = _UserModel.DBA.ListKey(catId);
+            InitKey(recs);
+        }
+
+        public void FindKey(string meta)
+        {
+            meta = meta.Trim();
+            if (string.IsNullOrEmpty(meta))
+            {
+                TvCatTree.SelectedNode = _LastNode;
+                ListKeyByCat(_LastNode.Name);
+                return;
+            }
+
+            meta = Regex.Replace(meta, "[+＋\\s]+", " ");
+            if (string.IsNullOrEmpty(meta))
+            {
+                Main.ShowAlert("您输入的查询条件无效！");
+                return;
+            }
+
+            TvCatTree.SelectedNode = null;
+
+            DoFindKey(meta);
+
+            _IsSearch = true;
+            _LastMeta = meta;
+        }
+
+        private void DoFindKey(string meta)
+        {
+            IList<Key> recs = _UserModel.DBA.FindKey(meta);
+            InitKey(recs);
+        }
+
+        public void LastOpt()
+        {
+            if (_IsSearch)
+            {
+                DoFindKey(_LastMeta);
+            }
+            else
+            {
+                DoListKey(_LastHash);
+            }
+        }
+
+        private void ChangeCatByKey(string catId)
+        {
+            if (string.IsNullOrEmpty(catId))
+            {
+                catId = "0";
+            }
+            if (catId == _SafeModel.Key.CatId)
+            {
+                return;
+            }
+
+            _SafeModel.Key.CatId = catId;
+            _UserModel.DBA.SaveVcs(_SafeModel.Key);
+
+            LastOpt();
+        }
+
+        public void ChangeLabel(int label)
+        {
+            if (label < 0 || label > 9)
+            {
+                return;
+            }
+
+            _SafeModel.Key.Label = label;
+            _UserModel.DBA.SaveVcs(_SafeModel.Key);
+
+            LbKeyList.Refresh();
+        }
+
+        public void ChangeMajor(int major)
+        {
+            if (major < -2 || major > 2)
+            {
+                return;
+            }
+
+            _SafeModel.Key.Major = major;
+            _UserModel.DBA.SaveVcs(_SafeModel.Key);
+
+            LbKeyList.Refresh();
+        }
+        #endregion
+
+        #region 属性处理
+        public void AppendAtt(int att)
+        {
+            _PwdView.AppendAtt(att);
+        }
+
+        public void UpdateAtt(int att)
+        {
+            _PwdView.UpdateAtt(att);
+        }
+
+        public void DeleteAtt()
+        {
+            _PwdView.DropAtt();
+        }
+
+        public void CutAtt()
+        {
+            if (_PwdView != null)
+            {
+                _PwdView.CutAtt();
+            }
+        }
+
+        public void CopyAtt()
+        {
+            if (_PwdView != null)
+            {
+                _PwdView.CopyAtt();
+            }
+        }
+
+        public void PasteAtt()
+        {
+            if (_PwdView != null)
+            {
+                _PwdView.PasteAtt();
+            }
+        }
+
+        public void ClearAtt()
+        {
+            if (_PwdView != null)
+            {
+                _PwdView.ClearAtt();
+            }
+        }
+        #endregion
+        #endregion
+
+        #region 视图菜单
+        #region 模式切换
+        public void ShowAPro()
+        {
+            if (_ProView == null)
+            {
+                _ProView = new APro();
+                _ProView.Name = "Pro";
+                _ProView.Init(this, _SafeModel, _DataModel, _ViewModel);
+            }
+
+            if (_PwdView != null)
+            {
+                if (_PwdView.Name == _ProView.Name)
+                {
+                    return;
+                }
+                //_PwdView.HideView(TpGrid);
+            }
+
+            _PwdView = _ProView;
+            //_PwdView.InitView(TpGrid);
+        }
+
+        public void ShowAWiz()
+        {
+            if (_WizView == null)
+            {
+                _WizView = new AWiz();
+                _WizView.Name = "Wiz";
+                _WizView.Init(this, _SafeModel, _DataModel, _ViewModel);
+            }
+
+            if (_PwdView != null)
+            {
+                if (_PwdView.Name == _WizView.Name)
+                {
+                    return;
+                }
+                _PwdView.HideView(PlBody);
+            }
+
+            _PwdView = _WizView;
+            _PwdView.InitView(PlBody);
+        }
+
+        public void ShowAPad()
+        {
+            //if (_PadView == null)
+            //{
+            //    _PadView = new APad();
+            //    _PadView.Name = "Pad";
+            //    _PadView.Init(this, _SafeModel, _DataModel);
+            //}
+
+            //if (_PwdView != null)
+            //{
+            //    if (_PwdView.Name == _PadView.Name)
+            //    {
+            //        return;
+            //    }
+            //    _PwdView.HideView(TpGrid);
+            //}
+
+            //_PwdView = _PadView;
+            //_PwdView.InitView(TpGrid);
+
+            //TmiViewPro.Checked = false;
+            //TmiViewWiz.Checked = false;
+            //TmiViewPad.Checked = true;
+        }
+        #endregion
+
+        #region 布局调整
+        public bool MenuBarVisible
+        {
+            get
+            {
+                return MbMenu.Visible;
+            }
+            set
+            {
+                MbMenu.Visible = value;
+                _ViewModel.MenuBarVisible = value;
+            }
+        }
+
+        public bool ToolBarVisible
+        {
+            get
+            {
+                return TbTool.Visible;
+            }
+            set
+            {
+                TbTool.Visible = value;
+                _ViewModel.ToolBarVisible = value;
+            }
+        }
+
+        public bool EchoBarVisible
+        {
+            get
+            {
+                return SsEcho.Visible;
+            }
+            set
+            {
+                SsEcho.Visible = value;
+                _ViewModel.EchoBarVisible = value;
+            }
+        }
+
+        public bool CatTreeVisible
+        {
+            get
+            {
+                return true;
+            }
+            set
+            {
+                if (!value && VSplit.Panel2Collapsed)
+                {
+                    NavPaneVisible = false;
+                }
+                else
+                {
+                    VSplit.Panel1Collapsed = !value;
+                    _ViewModel.CatTreeVisible = value;
+                }
+            }
+        }
+
+        public bool KeyListVisible
+        {
+            get
+            {
+                return true;
+            }
+            set
+            {
+                if (!value && VSplit.Panel1Collapsed)
+                {
+                    NavPaneVisible = false;
+                }
+                else
+                {
+                    VSplit.Panel2Collapsed = !value;
+                    _ViewModel.KeyListVisible = value;
+                }
+            }
+        }
+
+        public bool NavPaneVisible
+        {
+            get
+            {
+                return HSplit.Panel1Collapsed;
+            }
+            set
+            {
+                HSplit.Panel1Collapsed = !value;
+                _ViewModel.NavPaneVisible = value;
+            }
+        }
+
+        public bool FindBarVisible
+        {
+            get
+            {
+                return FbFind.Visible;
+            }
+            set
+            {
+                //TpGrid.RowStyles[0].Height = visible ? 32 : 0;
+                FbFind.Visible = value;
+                _ViewModel.FindBarVisible = value;
+            }
+        }
+        #endregion
+        #endregion
+
+        #region 数据菜单
+        public void DoSync()
+        {
+            MessageBox.Show("同步功能尚在完善中，敬请期待！");
+        }
+
+        public void DoBackup(string file)
+        {
+            _UserModel.DBA.CloseConnect();
+            BeanUtil.DoZip(file, _UserModel.Home);
+        }
+
+        public void DoResuma(string file)
+        {
+        }
+
+        public void LocaleBackup()
+        {
+            if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
+            {
+                return;
+            }
+
+            _LastNode = null;
+            TvCatTree.SelectedNode = null;
+            LbKeyList.Items.Clear();
+
+            SaveFileDialog fd = new SaveFileDialog();
+            fd.Filter = "密码箱备份文件|*.apbak";
+            if (DialogResult.OK != fd.ShowDialog(this))
+            {
+                return;
+            }
+            DoBackup(fd.FileName);
+        }
+
+        public void RemoteBackup()
+        {
+            MessageBox.Show("远程备份功能尚在完善中，敬请期待！");
+        }
+
+        public void LocaleResuma()
+        {
+            MessageBox.Show("本地恢复功能尚在完善中，敬请期待！");
+        }
+
+        public void RemoteResume()
+        {
+            MessageBox.Show("远程恢复功能尚在完善中，敬请期待！");
         }
 
         #region 数据导出
@@ -1091,7 +1898,7 @@ namespace Me.Amon.Pwd
         }
         #endregion
 
-        private void TmiImportOld_Click(object sender, EventArgs e)
+        public void ImportOld()
         {
             if (_SafeModel.Modified)
             {
@@ -1135,7 +1942,6 @@ namespace Me.Amon.Pwd
                 }
             }
         }
-
         #endregion
 
         #region 用户菜单
@@ -1188,820 +1994,7 @@ namespace Me.Amon.Pwd
         #endregion
         #endregion
 
-        #region 皮肤菜单
-        #endregion
-
-        #region 工具栏事件区域
-        private void TbTool_EndDrag(object sender, EventArgs e)
-        {
-
-        }
-        #endregion
-
-        #region 弹出菜单事件区域
-        #region 类别弹出菜单
-        private void CmiSortU_Click(object sender, EventArgs e)
-        {
-            TreeNode currNode = TvCatTree.SelectedNode;
-            if (currNode == null)
-            {
-                return;
-            }
-
-            Cat currCat = currNode.Tag as Cat;
-            if (currCat == null || currCat.Id == "0")
-            {
-                return;
-            }
-
-            TreeNode prevNode = currNode.PrevNode;
-            if (prevNode == null)
-            {
-                return;
-            }
-
-            Cat prevCat = prevNode.Tag as Cat;
-            if (prevCat == null || prevCat.Id == "0")
-            {
-                return;
-            }
-
-            TreeNode parent = currNode.Parent;
-            if (parent == null)
-            {
-                return;
-            }
-
-            _UserModel.DBA.SaveVcs(prevCat);
-            _UserModel.DBA.SaveVcs(currCat);
-
-            TvCatTree.SelectedNode = null;
-            parent.Nodes.Remove(currNode);
-            parent.Nodes.Insert(prevNode.Index, currNode);
-            TvCatTree.SelectedNode = currNode;
-        }
-
-        private void CmiSortD_Click(object sender, EventArgs e)
-        {
-            TreeNode currNode = TvCatTree.SelectedNode;
-            if (currNode == null)
-            {
-                return;
-            }
-
-            Cat currCat = currNode.Tag as Cat;
-            if (currCat == null || currCat.Id == "0")
-            {
-                return;
-            }
-
-            TreeNode nextNode = currNode.NextNode;
-            if (nextNode == null)
-            {
-                return;
-            }
-
-            Cat nextCat = nextNode.Tag as Cat;
-            if (nextCat == null || nextCat.Id == "0")
-            {
-                return;
-            }
-
-            TreeNode parent = currNode.Parent;
-            if (parent == null)
-            {
-                return;
-            }
-
-            _UserModel.DBA.SaveVcs(currCat);
-            _UserModel.DBA.SaveVcs(nextCat);
-
-            TvCatTree.SelectedNode = null;
-            parent.Nodes.Remove(currNode);
-            parent.Nodes.Insert(nextNode.Index + 1, currNode);
-            TvCatTree.SelectedNode = currNode;
-        }
-
-        private void CmiAppendCat_Click(object sender, EventArgs e)
-        {
-            AppendCat();
-        }
-
-        private void CmiUpdateCat_Click(object sender, EventArgs e)
-        {
-            UpdateCat();
-        }
-
-        private void CmiDeleteCat_Click(object sender, EventArgs e)
-        {
-            DeleteCat();
-        }
-
-        private void CmiEditIcon_Click(object sender, EventArgs e)
-        {
-            TreeNode node = TvCatTree.SelectedNode;
-            if (node == null)
-            {
-                return;
-            }
-
-            Cat cat = node.Tag as Cat;
-            if (cat == null || cat.Id == "winshineapwd0000")
-            {
-                return;
-            }
-
-            PngSeeker editor = new PngSeeker(_UserModel, _DataModel.CatDir);
-            editor.InitOnce(16);
-            editor.CallBackHandler = new AmonHandler<Pwd.Png>(ChangeImgByCat);
-            BeanUtil.CenterToParent(editor, this);
-            editor.ShowDialog(this);
-        }
-        #endregion
-
-        #region 记录弹出菜单
-        private void CmiAppendKey_Click(object sender, EventArgs e)
-        {
-            AppendKey();
-        }
-
-        private void CmiDeleteKey_Click(object sender, EventArgs e)
-        {
-            DeleteKey();
-        }
-
-        private void CmiMoveto_Click(object sender, EventArgs e)
-        {
-            CatView view = new CatView(_UserModel);
-            view.Init(IlCatTree);
-            view.CallBack = new AmonHandler<string>(ChangeCatByKey);
-            BeanUtil.CenterToParent(view, this);
-            view.ShowDialog(this);
-        }
-
-        private void CmiHistory_Click(object sender, EventArgs e)
-        {
-            LogEdit edit = new LogEdit(this);
-            edit.Init(_UserModel, _SafeModel);
-            BeanUtil.CenterToParent(edit, this);
-            edit.Show(this);
-        }
-        #endregion
-        #endregion
-        #endregion
-        #endregion
-
-        #region 公共方法
-        public void CutAtt()
-        {
-            if (_PwdView != null)
-            {
-                //_PwdView.CutAtt();
-            }
-        }
-
-        public void CopyAtt()
-        {
-            if (_PwdView != null)
-            {
-                _PwdView.CopyAtt();
-            }
-        }
-
-        public void PasteAtt(string text)
-        {
-            if (_PwdView != null)
-            {
-                //_PwdView.PasteAtt();
-            }
-        }
-
-        public void ChangeView(UserControl uc)
-        {
-            uc.Dock = DockStyle.Fill;
-            uc.Location = new Point(3, 35);
-            uc.Size = new Size(350, 296);
-            uc.TabIndex = 0;
-
-            HSplit.Panel2.Controls.Clear();
-            HSplit.Panel2.Controls.Add(uc);
-        }
-
-        public void ShowTips(Control control, string caption)
-        {
-            TpTips.SetToolTip(control, caption);
-        }
-
-        public void ShowIcoSeeker(string rootDir, AmonHandler<Pwd.Ico> handler)
-        {
-            IcoSeeker seeker = new IcoSeeker(_UserModel, rootDir);
-            seeker.InitOnce(24);
-            seeker.CallBackHandler = handler;
-            BeanUtil.CenterToParent(seeker, this);
-            seeker.ShowDialog(this);
-        }
-
-        public void ShowPngSeeker()
-        {
-        }
-
-        public void Backup()
-        {
-        }
-
-        public void Backup(Key rec)
-        {
-        }
-
-        public void Resuma()
-        {
-        }
-
-        public void Resuma(KeyLog log)
-        {
-        }
-
-        public void ShowRec(Key rec)
-        {
-            _PwdView.ShowData();
-
-            _MenuBar.GetGroup("");
-        }
-        #endregion
-
-        #region 私有方法
-        #region 模式切换
-        public void ShowAPro()
-        {
-            if (_ProView == null)
-            {
-                _ProView = new APro();
-                _ProView.Name = "Pro";
-                _ProView.Init(this, _SafeModel, _DataModel, _ViewModel);
-            }
-
-            if (_PwdView != null)
-            {
-                if (_PwdView.Name == _ProView.Name)
-                {
-                    return;
-                }
-                //_PwdView.HideView(TpGrid);
-            }
-
-            _PwdView = _ProView;
-            //_PwdView.InitView(TpGrid);
-        }
-
-        public void ShowAWiz()
-        {
-            if (_WizView == null)
-            {
-                _WizView = new AWiz();
-                _WizView.Name = "Wiz";
-                _WizView.Init(this, _SafeModel, _DataModel, _ViewModel);
-            }
-
-            if (_PwdView != null)
-            {
-                if (_PwdView.Name == _WizView.Name)
-                {
-                    return;
-                }
-                _PwdView.HideView(PlBody);
-            }
-
-            _PwdView = _WizView;
-            _PwdView.InitView(PlBody);
-        }
-
-        public void ShowAPad()
-        {
-            //if (_PadView == null)
-            //{
-            //    _PadView = new APad();
-            //    _PadView.Name = "Pad";
-            //    _PadView.Init(this, _SafeModel, _DataModel);
-            //}
-
-            //if (_PwdView != null)
-            //{
-            //    if (_PwdView.Name == _PadView.Name)
-            //    {
-            //        return;
-            //    }
-            //    _PwdView.HideView(TpGrid);
-            //}
-
-            //_PwdView = _PadView;
-            //_PwdView.InitView(TpGrid);
-
-            //TmiViewPro.Checked = false;
-            //TmiViewWiz.Checked = false;
-            //TmiViewPad.Checked = true;
-        }
-        #endregion
-
-        #region 视图调整
-        public bool MenuBarVisible
-        {
-            get
-            {
-                return MbMenu.Visible;
-            }
-            set
-            {
-                MbMenu.Visible = value;
-                _ViewModel.MenuBarVisible = value;
-            }
-        }
-
-        public bool ToolBarVisible
-        {
-            get
-            {
-                return TbTool.Visible;
-            }
-            set
-            {
-                TbTool.Visible = value;
-                _ViewModel.ToolBarVisible = value;
-            }
-        }
-
-        public bool EchoBarVisible
-        {
-            get
-            {
-                return SsEcho.Visible;
-            }
-            set
-            {
-                SsEcho.Visible = value;
-                _ViewModel.EchoBarVisible = value;
-            }
-        }
-
-        public bool CatTreeVisible
-        {
-            get
-            {
-                return true;
-            }
-            set
-            {
-                if (!value && VSplit.Panel2Collapsed)
-                {
-                    NavPaneVisible = false;
-                }
-                else
-                {
-                    VSplit.Panel1Collapsed = !value;
-                    _ViewModel.CatTreeVisible = value;
-                }
-            }
-        }
-
-        public bool KeyListVisible
-        {
-            get
-            {
-                return true;
-            }
-            set
-            {
-                if (!value && VSplit.Panel1Collapsed)
-                {
-                    NavPaneVisible = false;
-                }
-                else
-                {
-                    VSplit.Panel2Collapsed = !value;
-                    _ViewModel.KeyListVisible = value;
-                }
-            }
-        }
-
-        public bool NavPaneVisible
-        {
-            get
-            {
-                return HSplit.Panel1Collapsed;
-            }
-            set
-            {
-                HSplit.Panel1Collapsed = !value;
-                _ViewModel.NavPaneVisible = value;
-            }
-        }
-
-        public bool FindBarVisible
-        {
-            get
-            {
-                return FbFind.Visible;
-            }
-            set
-            {
-                //TpGrid.RowStyles[0].Height = visible ? 32 : 0;
-                FbFind.Visible = value;
-                _ViewModel.FindBarVisible = value;
-            }
-        }
-        #endregion
-
-        #region 类别处理
-        public void AppendCat()
-        {
-            CatEdit catEdit = new CatEdit();
-            catEdit.CallBackHandler = new AmonHandler<Cat>(AppendCatHandler);
-            catEdit.Show(this, new Cat());
-        }
-
-        private void AppendCatHandler(Cat cat)
-        {
-            if (_LastNode == null)
-            {
-                return;
-            }
-
-            cat.Parent = _LastNode.Name;
-            _UserModel.DBA.SaveVcs(cat);
-
-            TreeNode node = new TreeNode();
-            node.Name = cat.Id;
-            node.Text = cat.Text;
-            node.ToolTipText = cat.Tips;
-            node.Tag = cat;
-            if (CharUtil.IsValidateHash(cat.Icon))
-            {
-                node.ImageKey = cat.Icon;
-            }
-            _LastNode.Nodes.Add(node);
-            _LastNode.Expand();
-        }
-
-        public void UpdateCat()
-        {
-            TreeNode node = TvCatTree.SelectedNode;
-            if (node == null)
-            {
-                Main.ShowAlert("请选择您要更新的类别！");
-                TvCatTree.Focus();
-                return;
-            }
-
-            Cat cat = node.Tag as Cat;
-            if (cat == null || cat.Id == "winshineapwd0000")
-            {
-                return;
-            }
-
-            CatEdit catEdit = new CatEdit();
-            catEdit.CallBackHandler = new AmonHandler<Cat>(UpdateCatHandler);
-            catEdit.Show(this, cat);
-        }
-
-        private void UpdateCatHandler(Cat cat)
-        {
-            TreeNode node = TvCatTree.SelectedNode;
-
-            _UserModel.DBA.SaveVcs(cat);
-
-            node.Text = cat.Text;
-            node.ToolTipText = cat.Tips;
-            node.ImageKey = cat.Icon;
-        }
-
-        public void DeleteCat()
-        {
-            TreeNode node = TvCatTree.SelectedNode;
-            if (node == null)
-            {
-                Main.ShowAlert("请选择您要删除的类别！");
-                TvCatTree.Focus();
-                return;
-            }
-
-            Cat cat = node.Tag as Cat;
-            if (cat == null || cat.Id == "winshineapwd0000")
-            {
-                return;
-            }
-
-            if (node.Nodes.Count > 0)
-            {
-                Main.ShowAlert("下级类别不为空，不能删除！");
-                return;
-            }
-
-            if (DialogResult.Yes != Main.ShowConfirm("确认要删除选中的类别吗，此操作将不可恢复？"))
-            {
-                return;
-            }
-
-            IList<Key> recs = _UserModel.DBA.ListKey(cat.Id);
-            if (recs.Count > 0)
-            {
-                Main.ShowAlert("类别数据不为空，不能删除！");
-                return;
-            }
-
-            _UserModel.DBA.DeleteVcs(cat);
-
-            TreeNode root = node.Parent;
-            if (root != null)
-            {
-                root.Nodes.Remove(node);
-            }
-        }
-
-        private void ChangeImgByCat(Pwd.Png png)
-        {
-            if (!CharUtil.IsValidateHash(png.File))
-            {
-                png.File = "0";
-            }
-            if (!IlCatTree.Images.ContainsKey(png.File))
-            {
-                IlCatTree.Images.Add(png.File, png.Image);
-            }
-            _LastNode.ImageKey = png.File;
-            _LastNode.SelectedImageKey = png.File;
-
-            Cat cat = _LastNode.Tag as Cat;
-            if (cat == null)
-            {
-                return;
-            }
-
-            _UserModel.DBA.SaveVcs(cat);
-        }
-        #endregion
-
-        #region 记录处理
-        public void AppendKey()
-        {
-            if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
-            {
-                return;
-            }
-
-            _PwdView.AppendKey();
-        }
-
-        public void UpdateKey()
-        {
-            if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
-            {
-                return;
-            }
-
-            if (!_SafeModel.IsUpdate)
-            {
-                TreeNode node = TvCatTree.SelectedNode;
-                if (node == null)
-                {
-                    Main.ShowAlert("请选择类别！");
-                    TvCatTree.Focus();
-                    return;
-                }
-
-                Cat cat = node.Tag as Cat;
-                if (cat == null)
-                {
-                    Main.ShowAlert("系统异常，请稍后重试！");
-                    return;
-                }
-
-                _SafeModel.Key.CatId = cat.Id;
-            }
-
-            if (!_PwdView.UpdateKey())
-            {
-                return;
-            }
-
-            if (_SafeModel.IsUpdate && _SafeModel.Key.Backup)
-            {
-                KeyLog recLog = _SafeModel.Key.ToLog();
-                _UserModel.DBA.SaveLog(recLog);
-            }
-            _SafeModel.Encode();
-            _SafeModel.Key.AccessTime = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
-            _UserModel.DBA.SaveVcs(_SafeModel.Key);
-            _SafeModel.Modified = false;
-
-            LastOpt();
-            _PwdView.ShowInfo();
-        }
-
-        public void DeleteKey()
-        {
-            if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
-            {
-                return;
-            }
-
-            if (DialogResult.Yes != Main.ShowConfirm("确认要删除选中的记录吗，此操作将不可恢复？"))
-            {
-                return;
-            }
-
-            if (DialogResult.No != Main.ShowConfirm("再次确认，要返回吗？"))
-            {
-                return;
-            }
-
-            _UserModel.DBA.RemoveVcs(_SafeModel.Key);
-
-            LbKeyList.Items.RemoveAt(LbKeyList.SelectedIndex);
-        }
-
-        private void ImportKey()
-        {
-            _SafeModel.Encode();
-
-            _SafeModel.Key.AccessTime = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
-            _UserModel.DBA.SaveVcs(_SafeModel.Key);
-        }
-
-        public void ListKeyByCat(string catId)
-        {
-            if (!CharUtil.IsValidateHash(catId))
-            {
-                catId = "0";
-            }
-
-            DoListKey(catId);
-
-            _IsSearch = false;
-            _LastHash = catId;
-        }
-
-        public void DoListKey(string catId)
-        {
-            IList<Key> recs = _UserModel.DBA.ListKey(catId);
-            InitKey(recs);
-        }
-
-        public void FindKey(string meta)
-        {
-            meta = meta.Trim();
-            if (string.IsNullOrEmpty(meta))
-            {
-                TvCatTree.SelectedNode = _LastNode;
-                ListKeyByCat(_LastNode.Name);
-                return;
-            }
-
-            meta = Regex.Replace(meta, "[+＋\\s]+", " ");
-            if (string.IsNullOrEmpty(meta))
-            {
-                Main.ShowAlert("您输入的查询条件无效！");
-                return;
-            }
-
-            TvCatTree.SelectedNode = null;
-
-            DoFindKey(meta);
-
-            _IsSearch = true;
-            _LastMeta = meta;
-        }
-
-        private void DoFindKey(string meta)
-        {
-            IList<Key> recs = _UserModel.DBA.FindKey(meta);
-            InitKey(recs);
-        }
-
-        public void LastOpt()
-        {
-            if (_IsSearch)
-            {
-                DoFindKey(_LastMeta);
-            }
-            else
-            {
-                DoListKey(_LastHash);
-            }
-        }
-
-        private void ChangeCatByKey(string catId)
-        {
-            if (string.IsNullOrEmpty(catId))
-            {
-                catId = "0";
-            }
-            if (catId == _SafeModel.Key.CatId)
-            {
-                return;
-            }
-
-            _SafeModel.Key.CatId = catId;
-            _UserModel.DBA.SaveVcs(_SafeModel.Key);
-
-            LastOpt();
-        }
-
-        public void ChangeLabel(int label)
-        {
-            if (label < 0 || label > 9)
-            {
-                return;
-            }
-
-            _SafeModel.Key.Label = label;
-            _UserModel.DBA.SaveVcs(_SafeModel.Key);
-
-            LbKeyList.Refresh();
-        }
-
-        public void ChangeMajor(int major)
-        {
-            if (major < -2 || major > 2)
-            {
-                return;
-            }
-
-            _SafeModel.Key.Major = major;
-            _UserModel.DBA.SaveVcs(_SafeModel.Key);
-
-            LbKeyList.Refresh();
-        }
-        #endregion
-
-        #region 属性处理
-        public void AppendAtt(int att)
-        {
-            _PwdView.AppendAtt(att);
-        }
-
-        public void UpdateAtt(int att)
-        {
-            _PwdView.UpdateAtt(att);
-        }
-
-        public void DeleteAtt()
-        {
-            _PwdView.DropAtt();
-        }
-        #endregion
-
-        #region 数据同步
-        private void DoSync()
-        {
-            MessageBox.Show("同步功能尚在完善中，敬请期待！");
-        }
-
-        private void DoBackup(string file)
-        {
-            _UserModel.DBA.CloseConnect();
-            BeanUtil.DoZip(file, _UserModel.Home);
-        }
-
-        private void DoResuma(string file)
-        {
-        }
-
-        public void LocaleBackup()
-        {
-            if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
-            {
-                return;
-            }
-
-            _LastNode = null;
-            TvCatTree.SelectedNode = null;
-            LbKeyList.Items.Clear();
-
-            SaveFileDialog fd = new SaveFileDialog();
-            fd.Filter = "密码箱备份文件|*.apbak";
-            if (DialogResult.OK != fd.ShowDialog(this))
-            {
-                return;
-            }
-            DoBackup(fd.FileName);
-        }
-
-        public void RemoteBackup()
-        {
-            MessageBox.Show("远程备份功能尚在完善中，敬请期待！");
-        }
-
-        public void LocaleResuma()
-        {
-            MessageBox.Show("本地恢复功能尚在完善中，敬请期待！");
-        }
-
-        public void RemoteResume()
-        {
-            MessageBox.Show("远程恢复功能尚在完善中，敬请期待！");
-        }
-        #endregion
-
-        #region 帮助事件
+        #region 帮助菜单
         public void ShowHelp()
         {
             try
@@ -2059,34 +2052,6 @@ namespace Me.Amon.Pwd
         public void ShowAbout()
         {
             new About().ShowDialog(this);
-        }
-        #endregion
-
-        #region 菜单事件
-        public void LockForm()
-        {
-            new AuthRc(_UserModel, this).ShowDialog(this);
-        }
-
-        public void HideForm()
-        {
-            if (_SafeModel.Modified)
-            {
-                if (DialogResult.Yes != Main.ShowConfirm("您有数据尚未保存，确认要隐藏窗口吗？"))
-                {
-                    return;
-                }
-            }
-            Visible = false;
-
-            SaveLayout();
-        }
-
-        public void ExitForm()
-        {
-            SaveLayout();
-
-            Close();
         }
         #endregion
         #endregion

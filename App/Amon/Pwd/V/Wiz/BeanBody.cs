@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using Me.Amon.Pwd;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
 
@@ -103,11 +102,34 @@ namespace Me.Amon.Pwd.V.Wiz
             return true;
         }
 
+        public void CutData()
+        {
+            if (EditCtl != null)
+            {
+                EditCtl.Cut();
+            }
+        }
+        
         public void CopyData()
         {
             if (EditCtl != null)
             {
                 EditCtl.Copy();
+            }
+        }
+        public void PasteData()
+        {
+            if (EditCtl != null)
+            {
+                EditCtl.Paste();
+            }
+        }
+
+        public void ClearData()
+        {
+            if (EditCtl != null)
+            {
+                EditCtl.Clear();
             }
         }
 

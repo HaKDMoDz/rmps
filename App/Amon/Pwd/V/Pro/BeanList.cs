@@ -52,15 +52,35 @@ namespace Me.Amon.Pwd.V.Pro
             return true;
         }
 
+        public void Cut()
+        {
+            if (_Ctl == TbName)
+            {
+                TbName.Cut();
+            }
+        }
+
         public void Copy()
         {
             if (_Ctl == TbName)
             {
-                Clipboard.SetText(TbName.Text);
+                TbName.Copy();
             }
-            else if (_Item != null)
+        }
+
+        public void Paste()
+        {
+            if (_Ctl == TbName)
             {
-                Clipboard.SetText(_Item.K);
+                TbName.Paste();
+            }
+        }
+
+        public void Clear()
+        {
+            if (_Ctl == TbName)
+            {
+                TbName.Clear();
             }
         }
 

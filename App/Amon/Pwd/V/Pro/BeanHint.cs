@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Me.Amon.Pwd;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
 using Me.Amon.Util;
@@ -42,9 +41,25 @@ namespace Me.Amon.Pwd.V.Pro
             return true;
         }
 
+
+        public void Cut()
+        {
+            TbData.Cut();
+        }
+
         public void Copy()
         {
-            Clipboard.SetText(TbData.Text);
+            TbData.Copy();
+        }
+
+        public void Paste()
+        {
+            TbData.Paste();
+        }
+
+        public void Clear()
+        {
+            TbData.Clear();
         }
 
         public bool Save()

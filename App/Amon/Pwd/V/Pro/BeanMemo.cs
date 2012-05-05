@@ -49,11 +49,37 @@ namespace Me.Amon.Pwd.V.Pro
             return true;
         }
 
-        public void Copy()
+        public void Cut()
         {
-            Clipboard.SetText(_Ctl.Text);
+            if (_Ctl != null)
+            {
+                _Ctl.Cut();
+            }
         }
 
+        public void Copy()
+        {
+            if (_Ctl != null)
+            {
+                _Ctl.Copy();
+            }
+        }
+
+        public void Paste()
+        {
+            if (_Ctl != null)
+            {
+                _Ctl.Paste();
+            }
+        }
+
+        public void Clear()
+        {
+            if (_Ctl != null)
+            {
+                _Ctl.Clear();
+            }
+        }
         public bool Save()
         {
             if (_Att == null)
