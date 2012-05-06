@@ -673,15 +673,11 @@ namespace Me.Amon
             if (_APwd == null || _APwd.IsDisposed)
             {
                 _APwd = new APwd(_UserModel);
-                _APwd.Show();
                 _APwd.InitOnce();
             }
-            else
-            {
-                _APwd.Show();
-            }
-
             _IApp = _APwd;
+
+            _APwd.Show();
 
             DoSignIn(view);
         }

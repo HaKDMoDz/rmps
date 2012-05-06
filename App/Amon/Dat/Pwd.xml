@@ -177,11 +177,11 @@
       <Line/>
       <Item Type="normal" Text="选择上一属性">
         <Action Id="view-prev" Class="Me.Amon.Pwd.E.View.SelectPrevAction"/>
-        <Stroke Key="^ up"/>
+        <Stroke Key="^ Up"/>
       </Item>
       <Item Type="normal" Text="选择下一属性">
         <Action Id="view-next" Class="Me.Amon.Pwd.E.View.SelectNextAction"/>
-        <Stroke Key="^ down"/>
+        <Stroke Key="^ Down"/>
       </Item>
       <Line/>
       <Item Type="normal" Text="添加类别" ActionId="append-cat"/>
@@ -194,13 +194,13 @@
       </Item>
       <Line/>
       <Item Type="toggle" Text="专业模式" Group="viewStyle">
-        <Stroke Key="^ up"/>
+        <Stroke Key="^ Up"/>
       </Item>
       <Item Type="toggle" Text="向导模式" Group="viewStyle">
-        <Stroke Key="^ down"/>
+        <Stroke Key="^ Down"/>
       </Item>
       <Item Type="toggle" Text="记事模式" Group="viewStyle" Visible="false">
-        <Stroke Key="^ down"/>
+        <Stroke Key="^ Down"/>
       </Item>
       <Line/>
       <Item Id="menubar-visible" Type="toggle" Text="显示菜单栏" ActionId="menubar-visible">
