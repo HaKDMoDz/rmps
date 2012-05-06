@@ -1,6 +1,13 @@
 ﻿namespace Me.Amon.Pwd.E.Help
 {
-    class ShortCutsAction
+    public class ShortCutsAction : APwdAction
     {
+        public override void EventHandler(object sender, System.EventArgs e)
+        {
+            if (IApp != null)
+            {
+                IApp.ShowShortCuts();
+            }
+        }
     }
 }

@@ -1725,44 +1725,17 @@ namespace Me.Amon.Pwd
             }
         }
 
-        public void ShowKeys()
+        public void ShowShortCuts()
         {
             DataTable dt = new DataTable();
-            dt.Columns.Add("MajorKey");
+            dt.Columns.Add("Key");
             dt.Columns.Add("Memo");
-            dt.Columns.Add("MinorKey");
-            dt.Rows.Add("Control N", "添加记录", "");
-            dt.Rows.Add("Control S", "保存记录", "");
-            dt.Rows.Add("Control R", "删除记录", "");
-            dt.Rows.Add("Control F", "快速查找", "");
-            dt.Rows.Add("Control L", "锁定窗口", "");
-            dt.Rows.Add("Control H", "隐藏窗口", "Control Enter");
-            dt.Rows.Add("Control Q", "退出", "");
-            dt.Rows.Add("Control U", "选择上一个属性", "Control Up");
-            dt.Rows.Add("Control D", "选择下一个属性", "Control Down");
-            dt.Rows.Add("Control Shift U", "向上移动属性", "Control Shift Up");
-            dt.Rows.Add("Control Shift D", "向下移动属性", "Control Shift Down");
-            dt.Rows.Add("Control F1", "切换到专业模式", "");
-            dt.Rows.Add("Control F2", "切换到向导模式", "");
-            dt.Rows.Add("Control F3", "切换到记事模式", "");
-            dt.Rows.Add("Control +", "添加类别", "");
-            dt.Rows.Add("Control .", "更新类别", "");
-            dt.Rows.Add("Control -", "删除类别", "");
-            dt.Rows.Add("Control M", "切换菜单栏显示状态", "");
-            dt.Rows.Add("Control T", "切换工具栏显示状态", "");
-            dt.Rows.Add("Control E", "切换状态栏显示状态", "");
-            dt.Rows.Add("Control G", "切换查找栏显示状态", "");
-            dt.Rows.Add("Control K", "切换类别目录显示状态", "");
-            dt.Rows.Add("Control P", "切换记录列表显示状态", "");
-            dt.Rows.Add("Control J", "切换导航面板显示状态", "");
-            dt.Rows.Add("Control A", "切换属性编辑显示状态", "");
-            dt.Rows.Add("Control P", "显示或隐藏导航面板", "");
-            dt.Rows.Add("Alt C", "复制属性数据到剪贴板", "");
-            dt.Rows.Add("Alt U", "应用当前属性变更", "");
-            dt.Rows.Add("Alt D", "移除当前属性", "");
+            foreach (KeyStroke<APwd> stroke in _MenuBar.KeyStrokes)
+            {
+                dt.Rows.Add(stroke.Key, stroke.Memo);
+            }
 
-            HotKeys keys = new HotKeys();
-            keys.KeyList = dt;
+            HotKeys keys = new HotKeys(dt);
             BeanUtil.CenterToParent(keys, this);
             keys.Show(this);
         }

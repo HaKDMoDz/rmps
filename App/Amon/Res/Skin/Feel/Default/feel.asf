@@ -102,9 +102,12 @@ key-sort-desc=42
 #######################################
 # 属性编辑图标
 #######################################
-att-copy=att-prop-copy.png
-att-save=att-prop-save.png
-att-drop=att-prop-drop.png
+att-cut=att-edit-cut.png
+att-copy=att-edit-copy.png
+att-paste=att-edit-paste.png
+att-clear=att-edit-clear.png
+att-save=att-edit-save.png
+att-drop=att-edit-drop.png
 
 #######################################
 # 信息图标

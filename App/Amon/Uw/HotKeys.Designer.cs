@@ -30,10 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HotKeys));
             this.DvKeys = new System.Windows.Forms.DataGridView();
-            this.MajorKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Memo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MinorKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BtOk = new System.Windows.Forms.Button();
+            this.Key = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Memo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DvKeys)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,9 +46,8 @@
             this.DvKeys.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DvKeys.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DvKeys.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.MajorKey,
-            this.Memo,
-            this.MinorKey});
+            this.Key,
+            this.Memo});
             this.DvKeys.Location = new System.Drawing.Point(12, 12);
             this.DvKeys.MultiSelect = false;
             this.DvKeys.Name = "DvKeys";
@@ -60,32 +58,6 @@
             this.DvKeys.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DvKeys.Size = new System.Drawing.Size(370, 199);
             this.DvKeys.TabIndex = 0;
-            // 
-            // MajorKey
-            // 
-            this.MajorKey.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.MajorKey.DataPropertyName = "MajorKey";
-            this.MajorKey.HeaderText = "主按键";
-            this.MajorKey.Name = "MajorKey";
-            this.MajorKey.ReadOnly = true;
-            this.MajorKey.Width = 66;
-            // 
-            // Memo
-            // 
-            this.Memo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Memo.DataPropertyName = "Memo";
-            this.Memo.HeaderText = "功能";
-            this.Memo.Name = "Memo";
-            this.Memo.ReadOnly = true;
-            this.Memo.Width = 54;
-            // 
-            // MinorKey
-            // 
-            this.MinorKey.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.MinorKey.DataPropertyName = "MinorKey";
-            this.MinorKey.HeaderText = "辅按键";
-            this.MinorKey.Name = "MinorKey";
-            this.MinorKey.ReadOnly = true;
             // 
             // BtOk
             // 
@@ -98,6 +70,23 @@
             this.BtOk.Text = "确定(&O)";
             this.BtOk.UseVisualStyleBackColor = true;
             this.BtOk.Click += new System.EventHandler(this.BtOk_Click);
+            // 
+            // Key
+            // 
+            this.Key.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Key.DataPropertyName = "Key";
+            this.Key.HeaderText = "按键";
+            this.Key.Name = "Key";
+            this.Key.ReadOnly = true;
+            this.Key.Width = 54;
+            // 
+            // Memo
+            // 
+            this.Memo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Memo.DataPropertyName = "Memo";
+            this.Memo.HeaderText = "功能";
+            this.Memo.Name = "Memo";
+            this.Memo.ReadOnly = true;
             // 
             // HotKeys
             // 
@@ -124,8 +113,7 @@
 
         private System.Windows.Forms.DataGridView DvKeys;
         private System.Windows.Forms.Button BtOk;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MajorKey;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Key;
         private System.Windows.Forms.DataGridViewTextBoxColumn Memo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MinorKey;
     }
 }

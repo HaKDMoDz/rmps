@@ -35,9 +35,10 @@
     <Action Id="append-cat" Class="Me.Amon.Pwd.E.Edit.AppendCatAction"/>
     <Action Id="update-cat" Class="Me.Amon.Pwd.E.Edit.UpdateCatAction"/>
     <Action Id="delete-cat" Class="Me.Amon.Pwd.E.Edit.DeleteCatAction"/>
-	<Action Id="cut-att" Class="Me.Amon.Pwd.E.Edit.CutAttAction"/>
-	<Action Id="copy-att" Class="Me.Amon.Pwd.E.Edit.CopyAttAction"/>
-	<Action Id="paste-att" Class="Me.Amon.Pwd.E.Edit.PasteAttAction"/>
+    <Action Id="cut-att" Class="Me.Amon.Pwd.E.Edit.CutAttAction"/>
+    <Action Id="copy-att" Class="Me.Amon.Pwd.E.Edit.CopyAttAction"/>
+    <Action Id="paste-att" Class="Me.Amon.Pwd.E.Edit.PasteAttAction"/>
+	<Action Id="clear-att" Class="Me.Amon.Pwd.E.Edit.ClearAttAction"/>
     <Action Id="move-up" Class="Me.Amon.Pwd.E.Edit.MoveUpAction"/>
     <Action Id="move-down" Class="Me.Amon.Pwd.E.Edit.MoveDownAction"/>
     <Action Id="top-most" Class="Me.Amon.Pwd.E.View.TopMostAction"/>
@@ -52,7 +53,7 @@
     <Action Id="keylist-visible" Class="Me.Amon.Pwd.E.View.KeyListVisibleAction"/>
     <Action Id="sync" Class="Me.Amon.Pwd.E.Data.SyncAction"/>
     <Action Id="find-key" Class="Me.Amon.Pwd.E.Data.FindAction"/>
-	<Action Id="native-backup" Class="Me.Amon.Pwd.E.Data.NativeBackupAction"/>
+    <Action Id="native-backup" Class="Me.Amon.Pwd.E.Data.NativeBackupAction"/>
     <Action Id="native-resume" Class="Me.Amon.Pwd.E.Data.NativeResumeAction"/>
     <Action Id="native-config" Class="Me.Amon.Pwd.E.Data.NativeConfigAction"/>
     <Action Id="remote-backup" Class="Me.Amon.Pwd.E.Data.RemoteBackupAction"/>
@@ -70,15 +71,46 @@
 
   <!--系统快捷键-->
   <Strokes Id="APwd">
-    <Stroke Key="^ Q" ActionId="exit-window" Memo=""/>
-    <Stroke Key="^ Enter" ActionId="hide-window" Memo=""/>
+    <Stroke Key="^ N" ActionId="" Memo="添加记录"/>
+    <Stroke Key="^ S" ActionId="" Memo="保存记录"/>
+    <Stroke Key="^ R" ActionId="" Memo="删除记录"/>
+    <Stroke Key="^ F" ActionId="" Memo="快速查找"/>
+    <Stroke Key="^ L" ActionId="" Memo="锁定窗口"/>
+    <Stroke Key="^ H" ActionId="" Memo="隐藏窗口"/>
+    <Stroke Key="^ Enter" ActionId="hide-window" Memo="隐藏窗口"/>
+    <Stroke Key="^ Q" ActionId="exit-window" Memo="退出"/>
+    <Stroke Key="^ U" ActionId="" Memo="选择上一个属性"/>
+    <Stroke Key="^ Up" ActionId="" Memo="选择上一个属性"/>
+    <Stroke Key="^ D" ActionId="" Memo="选择下一个属性"/>
+    <Stroke Key="^ Down" ActionId="" Memo="选择下一个属性"/>
+    <Stroke Key="^ Shift U" ActionId="" Memo="向上移动属性"/>
+    <Stroke Key="^ Shift Up" ActionId="" Memo="向上移动属性"/>
+    <Stroke Key="^ Shift D" ActionId="" Memo="向下移动属性"/>
+    <Stroke Key="^ Shift Down" ActionId="" Memo="向下移动属性"/>
+    <Stroke Key="^ F1" ActionId="" Memo="切换到专业模式"/>
+    <Stroke Key="^ F2" ActionId="" Memo="切换到向导模式"/>
+    <Stroke Key="^ F3" ActionId="" Memo="切换到记事模式"/>
+    <Stroke Key="^ +" ActionId="" Memo="添加类别"/>
+    <Stroke Key="^ ." ActionId="" Memo="更新类别"/>
+    <Stroke Key="^ -" ActionId="" Memo="删除类别"/>
+    <Stroke Key="^ M" ActionId="" Memo="切换菜单栏显示状态"/>
+    <Stroke Key="^ T" ActionId="" Memo="切换工具栏显示状态"/>
+    <Stroke Key="^ E" ActionId="" Memo="切换状态栏显示状态"/>
+    <Stroke Key="^ G" ActionId="" Memo="切换查找栏显示状态"/>
+    <Stroke Key="^ K" ActionId="" Memo="切换类别目录显示状态"/>
+    <Stroke Key="^ P" ActionId="" Memo="切换记录列表显示状态"/>
+    <Stroke Key="^ J" ActionId="" Memo="切换导航面板显示状态"/>
+    <Stroke Key="^ A" ActionId="" Memo="切换属性编辑显示状态"/>
+    <Stroke Key="^ P" ActionId="" Memo="显示或隐藏导航面板"/>
+    <Stroke Key="Alt C" ActionId="" Memo="复制属性数据到剪贴板"/>
+    <Stroke Key="Alt U" ActionId="" Memo="应用当前属性变更"/>
+    <Stroke Key="Alt D" ActionId="" Memo="移除当前属性"/>
   </Strokes>
 
   <!--魔方密码菜单栏-->
   <Menubar Id="APwd">
     <Menu Id="file" Text="文件(&amp;F)">
       <Item Type="normal" Text="新增(&amp;N)" ActionId="append-key">
-        <Stroke Key="^ N"/>
       </Item>
       <Item Type="normal" Text="保存(&amp;S)" ActionId="update-key">
         <Stroke Key="^ S"/>
@@ -210,20 +242,20 @@
         <Stroke Key="^ T"/>
       </Item>
       <Item Id="echobar-visible" Type="toggle" Text="显示状态栏" ActionId="echobar-visible">
-        <Stroke Key="^ I"/>
+        <Stroke Key="^ E"/>
       </Item>
       <Item Id="findbar-visible" Type="toggle" Text="显示查找栏" ActionId="findbar-visible">
-        <Stroke Key="^ J"/>
+        <Stroke Key="^ F"/>
       </Item>
       <Line/>
       <Item Id="navpane-visible" Type="toggle" Text="显示导航面板" ActionId="navpane-visible">
-        <Stroke Key="^ W"/>
+        <Stroke Key="^ J"/>
       </Item>
       <Item Id="cattree-visible" Type="toggle" Text="显示口令类别" ActionId="cattree-visible">
         <Stroke Key="^ P"/>
       </Item>
       <Item Id="keylist-visible" Type="toggle" Text="显示口令列表" ActionId="keylist-visible">
-        <Stroke Key="^ J"/>
+        <Stroke Key="^ K"/>
       </Item>
     </Menu>
     <Menu Id="data" Text="数据(&amp;D)">
@@ -326,13 +358,16 @@
     </Item>
     <Line/>
     <Item Type="normal" Tips="剪切" ActionId="cut-att">
-      <Icon Id="file-save" path="var:menu-att-cut"/>
+      <Icon Id="file-save" path="var:att-cut"/>
     </Item>
     <Item Type="normal" Tips="复制" ActionId="copy-att">
-      <Icon Id="file-save" path="var:menu-att-copy"/>
+      <Icon Id="file-save" path="var:att-copy"/>
     </Item>
     <Item Type="normal" Tips="粘贴" ActionId="paste-att">
-      <Icon Id="file-save" path="var:menu-att-paste"/>
+      <Icon Id="file-save" path="var:att-paste"/>
+    </Item>
+    <Item Type="normal" Tips="清除" ActionId="clear-att">
+      <Icon Id="file-save" path="var:att-clear"/>
     </Item>
     <Line/>
     <Item Id="menubar-visible" Type="toggle" Tips="显示菜单栏" ActionId="menubar-visible">

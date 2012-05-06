@@ -11,18 +11,11 @@ namespace Me.Amon.Uw
             InitializeComponent();
         }
 
-        private DataTable _KeyList;
-        public DataTable KeyList
+        public HotKeys(DataTable dataTable)
         {
-            get
-            {
-                return _KeyList;
-            }
-            set
-            {
-                _KeyList = value;
-                DvKeys.DataSource = _KeyList;
-            }
+            InitializeComponent();
+
+            DvKeys.DataSource = dataTable;
         }
 
         private void BtOk_Click(object sender, EventArgs e)
