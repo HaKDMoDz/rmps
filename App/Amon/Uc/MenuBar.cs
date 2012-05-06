@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -474,6 +473,24 @@ namespace Me.Amon.Uc
             if (action != null)
             {
                 action.Add(item, _ViewModel);
+            }
+
+            XmlNodeList list = node.SelectNodes("Stroke");
+            if (list != null && list.Count > 0)
+            {
+                foreach (XmlNode temp in list)
+                {
+                    if (temp == null)
+                    {
+                        continue;
+                    }
+                    KeyStroke<T> stroke = processStrokes(temp);
+                    if (stroke != null)
+                    {
+                        stroke.Action = action;
+                        item.ShortcutKeyDisplayString = stroke.ToString();
+                    }
+                }
             }
             return item;
         }
@@ -972,8 +989,8 @@ namespace Me.Amon.Uc
                 return null;
             }
 
-            key = key.Replace("^", "Control").Replace("~", "Shift").Replace("#", "Alt").Replace("!", "Meta");
-            key = Regex.Replace(key, "Ctrl", "Control", RegexOptions.IgnoreCase);
+            key = key.Replace("^", "Ctrl").Replace("~", "Shift").Replace("#", "Alt").Replace("!", "Meta");
+            key = Regex.Replace(key, "Control", "Ctrl", RegexOptions.IgnoreCase);
             KeyStroke<T> stroke = new KeyStroke<T>();
             if (!stroke.Decode(key))
             {
@@ -984,50 +1001,26 @@ namespace Me.Amon.Uc
             return stroke;
         }
 
-        private IAction<T> processAction(XmlNode parent, ToolStripItem button)
+        private IAction<T> processAction(XmlNode parent, ToolStripItem item)
         {
             IAction<T> action = null;
 
             string actionId = Attribute(parent, "ActionId", null);
-            if (!string.IsNullOrWhiteSpace(actionId))
+            if (!string.IsNullOrWhiteSpace(actionId) && _Actions.ContainsKey(actionId))
             {
-                if (_Actions.ContainsKey(actionId))
-                {
-                    action = _Actions[actionId];
-                    if (action != null)
-                    {
-                        button.Click += new EventHandler(action.EventHandler);
-                    }
-                }
-                return action;
+                action = _Actions[actionId];
             }
-
-            XmlNodeList list = parent.ChildNodes;
-            if (list == null || list.Count < 1)
+            if (action == null)
             {
-                return action;
-            }
-
-            foreach (XmlNode node in list)
-            {
-                if (node.Name == "Action")
+                XmlNode node = parent.SelectSingleNode("Action");
+                if (node != null)
                 {
                     action = CreateAction(node);
-                    if (action != null)
-                    {
-                        button.Click += new EventHandler(action.EventHandler);
-                    }
-                    continue;
                 }
-
-                if (node.Name == "Stroke")
-                {
-                    KeyStroke<T> stroke = processStrokes(node);
-                    if (stroke != null)
-                    {
-                        stroke.Action = action;
-                    }
-                }
+            }
+            if (action != null)
+            {
+                item.Click += new EventHandler(action.EventHandler);
             }
             return action;
         }

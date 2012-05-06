@@ -38,18 +38,24 @@ namespace Me.Amon.Pwd.E.View
                 return;
             }
 
-            if (sender is ToolStripMenuItem)
+            bool status = !IApp.ToolBarVisible;
+            IApp.ToolBarVisible = status;
+            foreach (ToolStripItem item in _Items)
             {
-                ToolStripMenuItem item = sender as ToolStripMenuItem;
-                IApp.ToolBarVisible = item.Checked;
-                return;
-            }
-
-            if (sender is ToolStripButton)
-            {
-                ToolStripButton item = sender as ToolStripButton;
-                IApp.ToolBarVisible = item.Checked;
-                return;
+                if (item == sender)
+                {
+                    continue;
+                }
+                if (item is ToolStripMenuItem)
+                {
+                    (item as ToolStripMenuItem).Checked = status;
+                    continue;
+                }
+                if (item is ToolStripButton)
+                {
+                    (item as ToolStripButton).Checked = status;
+                    continue;
+                }
             }
         }
 

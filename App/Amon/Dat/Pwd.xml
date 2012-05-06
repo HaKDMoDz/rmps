@@ -69,7 +69,6 @@
   </Actions>
 
   <!--系统快捷键-->
-  <Shortcut></Shortcut>
   <Strokes Id="APwd">
     <Stroke Key="^ Q" ActionId="exit-window" Memo=""/>
     <Stroke Key="^ Enter" ActionId="hide-window" Memo=""/>

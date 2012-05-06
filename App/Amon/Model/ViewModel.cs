@@ -168,11 +168,11 @@ namespace Me.Amon.Model
             _UserProp.Load(Path.Combine(_UserModel.Home, IEnv.USER_CFG));
             MenuBarVisible = IEnv.VALUE_TRUE == _UserProp.Get("MenuBar", IEnv.VALUE_TRUE).ToLower();
             ToolBarVisible = IEnv.VALUE_TRUE == _UserProp.Get("ToolBar", IEnv.VALUE_TRUE).ToLower();
-            FindBarVisible = IEnv.VALUE_TRUE == _UserProp.Get("FindBar", IEnv.VALUE_TRUE).ToLower();
             EchoBarVisible = IEnv.VALUE_TRUE == _UserProp.Get("EchoBar", IEnv.VALUE_TRUE).ToLower();
+            FindBarVisible = IEnv.VALUE_TRUE == _UserProp.Get("FindBar", IEnv.VALUE_TRUE).ToLower();
+            NavPaneVisible = IEnv.VALUE_TRUE == _UserProp.Get("NavPane", IEnv.VALUE_TRUE).ToLower();
             CatTreeVisible = IEnv.VALUE_TRUE == _UserProp.Get("CatTree", IEnv.VALUE_TRUE).ToLower();
             KeyListVisible = IEnv.VALUE_TRUE == _UserProp.Get("KeyList", IEnv.VALUE_TRUE).ToLower();
-            NavPaneVisible = IEnv.VALUE_TRUE == _UserProp.Get("KeyGuid", IEnv.VALUE_TRUE).ToLower();
 
             string tmp = _UserProp.Get("HSplitDistance", "200");
             if (CharUtil.IsValidateLong(tmp))
@@ -218,21 +218,23 @@ namespace Me.Amon.Model
 
         public void Save()
         {
-            _UserProp.Set("MenuBar", MenuBarVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
-            _UserProp.Set("ToolBar", ToolBarVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
-            _UserProp.Set("FindBar", FindBarVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
-            _UserProp.Set("EchoBar", EchoBarVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
-            _UserProp.Set("CatTree", CatTreeVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
-            _UserProp.Set("KeyList", KeyListVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
-            _UserProp.Set("KeyGuid", NavPaneVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
-
-            _UserProp.Set("HSplitDistance", _HSplitDistance.ToString());
-            _UserProp.Set("VSplitDistance", _VSplitDistance.ToString());
-
             _UserProp.Set("LocX", WindowLocX.ToString());
             _UserProp.Set("LocY", WindowLocY.ToString());
             _UserProp.Set("DimW", WindowDimW.ToString());
             _UserProp.Set("DimH", WindowDimH.ToString());
+
+            _UserProp.Set("MenuBar", MenuBarVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
+            _UserProp.Set("ToolBar", ToolBarVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
+            _UserProp.Set("EchoBar", EchoBarVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
+            _UserProp.Set("FindBar", FindBarVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
+
+            _UserProp.Set("NavPane", NavPaneVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
+            _UserProp.Set("CatTree", CatTreeVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
+            _UserProp.Set("KeyList", KeyListVisible ? IEnv.VALUE_TRUE : IEnv.VALUE_FALSE);
+
+            _UserProp.Set("HSplitDistance", _HSplitDistance.ToString());
+            _UserProp.Set("VSplitDistance", _VSplitDistance.ToString());
+
             _UserProp.Save(Path.Combine(_UserModel.Home, IEnv.USER_CFG));
         }
     }

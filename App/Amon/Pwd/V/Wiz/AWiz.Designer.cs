@@ -30,7 +30,6 @@
         {
             this.TpGrid = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.BtCopy = new System.Windows.Forms.Button();
             this.BtNext = new System.Windows.Forms.Button();
             this.BtPrev = new System.Windows.Forms.Button();
             this.TpGrid.SuspendLayout();
@@ -53,7 +52,6 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.BtCopy);
             this.flowLayoutPanel1.Controls.Add(this.BtNext);
             this.flowLayoutPanel1.Controls.Add(this.BtPrev);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -63,19 +61,9 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(326, 26);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
-            // BtCopy
-            // 
-            this.BtCopy.Location = new System.Drawing.Point(248, 3);
-            this.BtCopy.Name = "BtCopy";
-            this.BtCopy.Size = new System.Drawing.Size(75, 23);
-            this.BtCopy.TabIndex = 2;
-            this.BtCopy.Text = "复制(&C)";
-            this.BtCopy.UseVisualStyleBackColor = true;
-            this.BtCopy.Click += new System.EventHandler(this.BtCopy_Click);
-            // 
             // BtNext
             // 
-            this.BtNext.Location = new System.Drawing.Point(167, 3);
+            this.BtNext.Location = new System.Drawing.Point(248, 3);
             this.BtNext.Name = "BtNext";
             this.BtNext.Size = new System.Drawing.Size(75, 23);
             this.BtNext.TabIndex = 1;
@@ -85,7 +73,7 @@
             // 
             // BtPrev
             // 
-            this.BtPrev.Location = new System.Drawing.Point(86, 3);
+            this.BtPrev.Location = new System.Drawing.Point(167, 3);
             this.BtPrev.Name = "BtPrev";
             this.BtPrev.Size = new System.Drawing.Size(75, 23);
             this.BtPrev.TabIndex = 0;
@@ -110,7 +98,6 @@
 
         private System.Windows.Forms.TableLayoutPanel TpGrid;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button BtCopy;
         private System.Windows.Forms.Button BtNext;
         private System.Windows.Forms.Button BtPrev;
     }

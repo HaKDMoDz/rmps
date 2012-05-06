@@ -192,14 +192,6 @@ namespace Me.Amon.Pwd.V.Wiz
 
             ShowHead();
         }
-
-        private void BtCopy_Click(object sender, EventArgs e)
-        {
-            if (_LastView != null)
-            {
-                _LastView.CopyData();
-            }
-        }
         #endregion
 
         #region 私有函数
