@@ -10,7 +10,7 @@ using Me.Amon.Util;
 
 namespace Me.Amon.Uc
 {
-    public class MenuBar<T>
+    public class XmlMenu<T>
     {
         private string _Error;
         private XmlDocument _Document;
@@ -24,7 +24,7 @@ namespace Me.Amon.Uc
         private ViewModel _ViewModel;
 
         #region 构造函数
-        public MenuBar(T iApp, ViewModel viewModel)
+        public XmlMenu(T iApp, ViewModel viewModel)
         {
             _IApp = iApp;
             _ViewModel = viewModel;

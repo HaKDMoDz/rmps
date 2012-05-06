@@ -110,8 +110,7 @@
   <!--魔方密码菜单栏-->
   <Menubar Id="APwd">
     <Menu Id="file" Text="文件(&amp;F)">
-      <Item Type="normal" Text="新增(&amp;N)" ActionId="append-key">
-      </Item>
+      <Item Type="normal" Text="新增(&amp;N)" ActionId="append-key"/>
       <Item Type="normal" Text="保存(&amp;S)" ActionId="update-key">
         <Stroke Key="^ S"/>
       </Item>
@@ -225,13 +224,13 @@
         <Stroke Key="F5"/>
       </Item>
       <Line/>
-      <Item Type="toggle" Text="专业模式" Group="viewStyle">
+      <Item Id="pro-style" Type="toggle" Text="专业模式" Group="viewStyle" Command="pro">
         <Stroke Key="^ Up"/>
       </Item>
-      <Item Type="toggle" Text="向导模式" Group="viewStyle">
+      <Item Id="wiz-style" Type="toggle" Text="向导模式" Group="viewStyle" Command="wiz">
         <Stroke Key="^ Down"/>
       </Item>
-      <Item Type="toggle" Text="记事模式" Group="viewStyle" Visible="false">
+      <Item Id="pad-style" Type="toggle" Text="记事模式" Group="viewStyle" Command="pad" Visible="false">
         <Stroke Key="^ Down"/>
       </Item>
       <Line/>

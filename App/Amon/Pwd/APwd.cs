@@ -45,7 +45,7 @@ namespace Me.Amon.Pwd
         //private APad _PadView;
         private Dictionary<string, Image> _KeyIcon;
         private Dictionary<string, Image> _KeyHint;
-        private MenuBar<APwd> _MenuBar;
+        private XmlMenu<APwd> _MenuBar;
         #endregion
 
         #region 构造函数
@@ -78,7 +78,7 @@ namespace Me.Amon.Pwd
             #endregion
 
             #region 菜单栏及工具栏
-            _MenuBar = new MenuBar<APwd>(this, _ViewModel);
+            _MenuBar = new XmlMenu<APwd>(this, _ViewModel);
             _MenuBar.Load(Path.Combine(_UserModel.Home, "Pwd.xml"));
             _MenuBar.GetMenuBar("APwd", MbMenu);
             _MenuBar.GetToolBar("APwd", TbTool);

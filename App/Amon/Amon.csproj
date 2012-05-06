@@ -829,7 +829,7 @@
     <Compile Include="Uc\Card.cs" />
     <Compile Include="Uc\ItemGroup.cs" />
     <Compile Include="Uc\KeyStroke.cs" />
-    <Compile Include="Uc\MenuBar.cs" />
+    <Compile Include="Uc\XmlMenu.cs" />
     <Compile Include="User\Auth\AuthLk.cs">
       <SubType>UserControl</SubType>
     </Compile>
