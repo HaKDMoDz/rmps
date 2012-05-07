@@ -1,4 +1,4 @@
-﻿using System;
+ using System;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -14,6 +14,7 @@ namespace Me.Amon.Uc
         public Keys Code { get; set; }
         public string Key { get; set; }
         public string Memo { get; set; }
+        public string Command { get; set; }
         public IAction<T> Action { get; set; }
 
         public bool Decode(string key)
