@@ -1,4 +1,4 @@
-﻿using System;
+ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -456,6 +456,7 @@ namespace Me.Amon.Uc
             string id = Attribute(node, "Id", null);
             if (CharUtil.IsValidate(id))
             {
+                item.Name = id;
                 _MenuItems[id] = item;
             }
 
@@ -501,6 +502,7 @@ namespace Me.Amon.Uc
             string id = Attribute(node, "Id", null);
             if (CharUtil.IsValidate(id))
             {
+                button.Name = id;
                 _Buttons[id] = button;
             }
 
@@ -956,7 +958,7 @@ namespace Me.Amon.Uc
                 {
                     bg = _Groups[group];
                 }
-                bg.Add(button.Tag, button);
+                bg.Add(button.Name, button);
             }
             return button;
         }
