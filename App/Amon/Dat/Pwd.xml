@@ -224,13 +224,13 @@
         <Stroke Key="F5"/>
       </Item>
       <Line/>
-      <Item Id="pro-style" Type="toggle" Text="专业模式" Group="viewStyle" Command="pro">
+      <Item Id="pro-style" Type="toggle" Text="专业模式" Group="viewStyle" Command="viewStyle:pro">
         <Stroke Key="^ Up"/>
       </Item>
-      <Item Id="wiz-style" Type="toggle" Text="向导模式" Group="viewStyle" Command="wiz">
+      <Item Id="wiz-style" Type="toggle" Text="向导模式" Group="viewStyle" Command="viewStyle:wiz">
         <Stroke Key="^ Down"/>
       </Item>
-      <Item Id="pad-style" Type="toggle" Text="记事模式" Group="viewStyle" Command="pad" Visible="false">
+      <Item Id="pad-style" Type="toggle" Text="记事模式" Group="viewStyle" Command="viewStyle:pad" Visible="false">
         <Stroke Key="^ Down"/>
       </Item>
       <Line/>
