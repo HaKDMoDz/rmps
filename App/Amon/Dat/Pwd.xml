@@ -38,13 +38,13 @@
     <Action Id="cut-att" Class="Me.Amon.Pwd.E.Edit.CutAttAction"/>
     <Action Id="copy-att" Class="Me.Amon.Pwd.E.Edit.CopyAttAction"/>
     <Action Id="paste-att" Class="Me.Amon.Pwd.E.Edit.PasteAttAction"/>
-	<Action Id="clear-att" Class="Me.Amon.Pwd.E.Edit.ClearAttAction"/>
+    <Action Id="clear-att" Class="Me.Amon.Pwd.E.Edit.ClearAttAction"/>
     <Action Id="move-up" Class="Me.Amon.Pwd.E.Edit.MoveUpAction"/>
     <Action Id="move-down" Class="Me.Amon.Pwd.E.Edit.MoveDownAction"/>
     <Action Id="top-most" Class="Me.Amon.Pwd.E.View.TopMostAction"/>
-	<Action Id="pattern-pro" Class="Me.Amon.Pwd.E.View.ProPatternAction"/>
-	<Action Id="pattern-wiz" Class="Me.Amon.Pwd.E.View.WizPatternAction"/>
-	<Action Id="pattern-pad" Class="Me.Amon.Pwd.E.View.PadPatternAction"/>
+    <Action Id="pattern-pro" Class="Me.Amon.Pwd.E.View.ProPatternAction"/>
+    <Action Id="pattern-wiz" Class="Me.Amon.Pwd.E.View.WizPatternAction"/>
+    <Action Id="pattern-pad" Class="Me.Amon.Pwd.E.View.PadPatternAction"/>
     <Action Id="select-prev" Class="Me.Amon.Pwd.E.View.SelectPrevAction"/>
     <Action Id="select-next" Class="Me.Amon.Pwd.E.View.SelectNextAction"/>
     <Action Id="menubar-visible" Class="Me.Amon.Pwd.E.View.MenubarVisibleAction"/>
@@ -55,6 +55,10 @@
     <Action Id="cattree-visible" Class="Me.Amon.Pwd.E.View.CatTreeVisibleAction"/>
     <Action Id="keylist-visible" Class="Me.Amon.Pwd.E.View.KeyListVisibleAction"/>
     <Action Id="sync" Class="Me.Amon.Pwd.E.Data.SyncAction"/>
+    <Action Id="export-txt" Class="Me.Amon.Pwd.E.Data.ExportTxtAction"/>
+    <Action Id="export-xml" Class="Me.Amon.Pwd.E.Data.ExportXmlAction"/>
+    <Action Id="import-txt" Class="Me.Amon.Pwd.E.Data.ImportTxtAction"/>
+    <Action Id="import-xml" Class="Me.Amon.Pwd.E.Data.ImportXmlAction"/>
     <Action Id="find-key" Class="Me.Amon.Pwd.E.Data.FindAction"/>
     <Action Id="native-backup" Class="Me.Amon.Pwd.E.Data.NativeBackupAction"/>
     <Action Id="native-resume" Class="Me.Amon.Pwd.E.Data.NativeResumeAction"/>
@@ -113,114 +117,116 @@
   <!--魔方密码菜单栏-->
   <Menubar Id="APwd">
     <Menu Id="file" Text="文件(&amp;F)">
-      <Item Type="normal" Text="新增(&amp;N)" ActionId="append-key"/>
-      <Item Type="normal" Text="保存(&amp;S)" ActionId="update-key">
-        <Stroke Key="^ S"/>
-      </Item>
-      <Line/>
       <Item Type="normal" Text="查找(&amp;F)" ActionId="find-key">
-        <Stroke Key="^ F"/>
+        <Stroke Key="^ F" Memo="快速查找"/>
       </Item>
       <Line/>
-      <Item Type="normal" Text="隐藏窗口(&amp;H)" ActionId="hind-window">
-        <Stroke Key="^ H"/>
-      </Item>
       <Item Type="normal" Text="锁定窗口(&amp;L)" ActionId="lock-window">
-        <Stroke Key="^ L"/>
+        <Stroke Key="^ L" Memo="锁定窗口"/>
+      </Item>
+      <Item Type="normal" Text="隐藏窗口(&amp;H)" ActionId="hind-window">
+        <Stroke Key="^ H" Memo="隐藏窗口"/>
+        <Stroke Key="^ Enter" Memo="隐藏窗口"/>
       </Item>
       <Line/>
       <Item Type="normal" Text="退出(&amp;X)" ActionId="exit-window">
-        <Stroke Key="^ Q"/>
+        <Stroke Key="^ Q" Memo="退出"/>
       </Item>
     </Menu>
     <Menu Id="edit" Text="编辑(&amp;E)">
       <Item Type="normal" Text="添加记录" ActionId="append-key">
-        <Stroke Key="^ 1"/>
+        <Stroke Key="^ N" Memo="添加记录"/>
       </Item>
       <Item Type="normal" Text="删除记录" ActionId="delete-key">
-        <Stroke Key="^ 1"/>
+        <Stroke Key="^ R" Memo="删除记录"/>
       </Item>
       <Line/>
       <Menu Id="append-att" Text="添加属性">
         <Item Type="normal" Text="文本" ActionId="append-text">
-          <Stroke Key="^ 1"/>
+          <Stroke Key="^ 1" Memo="添加文本属性"/>
         </Item>
         <Item Type="normal" Text="口令" ActionId="append-pass">
-          <Stroke Key="^ 2"/>
+          <Stroke Key="^ 2" Memo="添加口令属性"/>
         </Item>
         <Item Type="normal" Text="链接" ActionId="append-link">
-          <Stroke Key="^ 3"/>
+          <Stroke Key="^ 3" Memo="添加链接属性"/>
         </Item>
         <Item Type="normal" Text="邮件" ActionId="append-mail">
-          <Stroke Key="^ 4"/>
+          <Stroke Key="^ 4" Memo="添加邮件属性"/>
         </Item>
         <Item Type="normal" Text="日期" ActionId="append-date">
-          <Stroke Key="^ 5"/>
+          <Stroke Key="^ 5" Memo="添加日期属性"/>
         </Item>
         <Item Type="normal" Text="数值" ActionId="append-data">
-          <Stroke Key="^ 8"/>
+          <Stroke Key="^ 6" Memo="添加数值属性"/>
         </Item>
         <Item Type="normal" Text="列表" ActionId="append-list">
-          <Stroke Key="^ 9"/>
+          <Stroke Key="^ 7" Memo="添加列表属性"/>
         </Item>
         <Item Type="normal" Text="附注" ActionId="append-memo">
-          <Stroke Key="^ 6"/>
+          <Stroke Key="^ 8" Memo="添加附注属性"/>
         </Item>
         <Item Type="normal" Text="文件" ActionId="append-file">
-          <Stroke Key="^ 7"/>
+          <Stroke Key="^ 9" Memo="添加文件属性"/>
         </Item>
         <Item Type="normal" Text="标记" ActionId="append-line">
-          <Stroke Key="^ 0"/>
+          <Stroke Key="^ 0" Memo="添加标记属性"/>
         </Item>
       </Menu>
       <Menu Id="update-att" Text="转换属性">
         <Item Type="normal" Text="文本" ActionId="update-text">
-          <Stroke Key="^ 1"/>
+          <Stroke Key="# 1" Memo="转换文本属性"/>
         </Item>
         <Item Type="normal" Text="口令" ActionId="append-pass">
-          <Stroke Key="^ 2"/>
+          <Stroke Key="# 2" Memo="转换口令属性"/>
         </Item>
         <Item Type="normal" Text="链接" ActionId="append-link">
-          <Stroke Key="^ 3"/>
+          <Stroke Key="# 3" Memo="转换链接属性"/>
         </Item>
         <Item Type="normal" Text="邮件" ActionId="append-mail">
-          <Stroke Key="^ 4"/>
+          <Stroke Key="# 4" Memo="转换邮件属性"/>
         </Item>
         <Item Type="normal" Text="日期" ActionId="append-date">
-          <Stroke Key="^ 5"/>
+          <Stroke Key="# 5" Memo="转换日期属性"/>
         </Item>
         <Item Type="normal" Text="数值" ActionId="append-data">
-          <Stroke Key="^ 8"/>
+          <Stroke Key="# 6" Memo="转换数值属性"/>
         </Item>
         <Item Type="normal" Text="列表" ActionId="append-list">
-          <Stroke Key="^ 9"/>
+          <Stroke Key="# 7" Memo="转换列表属性"/>
         </Item>
         <Item Type="normal" Text="附注" ActionId="append-memo">
-          <Stroke Key="^ 6"/>
+          <Stroke Key="# 8" Memo="转换附注属性"/>
         </Item>
         <Item Type="normal" Text="文件" ActionId="append-file">
-          <Stroke Key="^ 7"/>
+          <Stroke Key="# 9" Memo="转换文件属性"/>
         </Item>
         <Item Type="normal" Text="标记" ActionId="append-line">
-          <Stroke Key="^ 0"/>
+          <Stroke Key="# 0" Memo="转换标记属性"/>
         </Item>
       </Menu>
       <Item Type="normal" Text="删除属性" ActionId="delete-att">
-        <Stroke Key="^ 0"/>
+        <Stroke Key="# D" Memo="移除当前属性"/>
       </Item>
       <Line/>
-      <Item Type="normal" Text="选择上一属性">
-        <Action Id="view-prev" Class="Me.Amon.Pwd.E.View.SelectPrevAction"/>
-        <Stroke Key="^ Up"/>
+      <Item Type="normal" Text="选择上一属性" ActionId="select-prev">
+        <Stroke Key="^ U" Memo="选择上一个属性"/>
+        <Stroke Key="^ Up" Memo="选择上一个属性"/>
       </Item>
-      <Item Type="normal" Text="选择下一属性">
-        <Action Id="view-next" Class="Me.Amon.Pwd.E.View.SelectNextAction"/>
-        <Stroke Key="^ Down"/>
+      <Item Type="normal" Text="选择下一属性" ActionId="select-next">
+        <Stroke Key="^ D" Memo="选择下一个属性"/>
+        <Stroke Key="^ Down" Memo="选择下一个属性"/>
       </Item>
       <Line/>
-      <Item Type="normal" Text="添加类别" ActionId="append-cat"/>
-      <Item Type="normal" Text="更新类别" ActionId="update-cat"/>
-      <Item Type="normal" Text="删除类别" ActionId="delete-cat"/>
+      <Item Type="normal" Text="添加类别" ActionId="append-cat">
+        <Stroke Key="^ Add" Memo="添加类别"/>
+      </Item>
+      <Item Type="normal" Text="更新类别" ActionId="update-cat">
+        <Stroke Key="^ Decimal" Memo="更新类别"/>
+      </Item>
+      <Item Type="normal" Text="删除类别" ActionId="delete-cat">
+        <Stroke Key="^ Subtract" Memo="删除类别"/>
+      </Item>
     </Menu>
     <Menu Id="view" Text="视图(&amp;V)">
       <Item Type="toggle" Text="总在最上" ActionId="top-most">
@@ -238,61 +244,53 @@
       </Item>
       <Line/>
       <Item Id="menubar-visible" Type="toggle" Text="显示菜单栏" ActionId="menubar-visible">
-        <Stroke Key="^ M"/>
+        <Stroke Key="^ M" Memo="切换菜单栏显示状态"/>
       </Item>
       <Item Id="toolbar-visible" Type="toggle" Text="显示工具栏" ActionId="toolbar-visible">
-        <Stroke Key="^ T"/>
+        <Stroke Key="^ T" Memo="切换工具栏显示状态"/>
       </Item>
       <Item Id="echobar-visible" Type="toggle" Text="显示状态栏" ActionId="echobar-visible">
-        <Stroke Key="^ E"/>
+        <Stroke Key="^ E" Memo="切换状态栏显示状态"/>
       </Item>
       <Item Id="findbar-visible" Type="toggle" Text="显示查找栏" ActionId="findbar-visible">
-        <Stroke Key="^ F"/>
+        <Stroke Key="^ G" Memo="切换查找栏显示状态"/>
       </Item>
       <Line/>
       <Item Id="navpane-visible" Type="toggle" Text="显示导航面板" ActionId="navpane-visible">
-        <Stroke Key="^ J"/>
+        <Stroke Key="^ J" Memo="切换导航面板显示状态"/>
       </Item>
       <Item Id="cattree-visible" Type="toggle" Text="显示口令类别" ActionId="cattree-visible">
-        <Stroke Key="^ P"/>
+        <Stroke Key="^ P" Memo="切换类别目录显示状态"/>
       </Item>
       <Item Id="keylist-visible" Type="toggle" Text="显示口令列表" ActionId="keylist-visible">
-        <Stroke Key="^ K"/>
+        <Stroke Key="^ K" Memo="切换记录列表显示状态"/>
       </Item>
     </Menu>
     <Menu Id="data" Text="数据(&amp;D)">
       <Item Type="normal" Text="同步" Enabled="false" ActionId="sync"/>
       <Line/>
       <Menu Type="normal" Text="导出">
-        <Item Type="normal" Text="TXT格式">
-          <Action Id="export-txt" Class="Me.Amon.Pwd.E.Data.ExportTxtAction"/>
-        </Item>
-        <Item Type="normal" Text="XML格式">
-          <Action Id="export-xml" Class="Me.Amon.Pwd.E.Data.ExportXmlAction"/>
-        </Item>
+        <Item Type="normal" Text="TXT格式" ActionId="export-txt"/>
+        <Item Type="normal" Text="XML格式" ActionId="export-xml"/>
       </Menu>
       <Menu Type="normal" Text="导入">
-        <Item Type="normal" Text="TXT格式">
-          <Action Id="import-txt" Class="Me.Amon.Pwd.E.Data.ImportTxtAction"/>
-        </Item>
-        <Item Type="normal" Text="XML格式">
-          <Action Id="import-xml" Class="Me.Amon.Pwd.E.Data.ImportXmlAction"/>
-        </Item>
+        <Item Type="normal" Text="TXT格式" ActionId="import-txt"/>
+        <Item Type="normal" Text="XML格式" ActionId="import-xml"/>
       </Menu>
       <Line/>
       <Item Type="normal" Text="备份到本地" ActionId="native-backup">
-        <Stroke Key="^ B"/>
+        <Stroke Key="^ B" Memo="备份到本地"/>
       </Item>
       <Item Type="normal" Text="从本地恢复" ActionId="native-resume">
-        <Stroke Key="^ R"/>
+        <Stroke Key="^ R" Memo="从本地恢复"/>
       </Item>
       <Item Type="normal" Text="配置本地路径" ActionId="native-config"/>
       <Line/>
       <Item Type="normal" Text="备份到云端" ActionId="remote-backup">
-        <Stroke Key="^ ~ B"/>
+        <Stroke Key="^ ~ B" Memo="备份到云端"/>
       </Item>
       <Item Type="normal" Text="从云端恢复" ActionId="remote-resume">
-        <Stroke Key="^ ~ R"/>
+        <Stroke Key="^ ~ R" Memo="从云端恢复"/>
       </Item>
       <Item Type="normal" Text="配置云端帐户" ActionId="remote-config"/>
     </Menu>
@@ -303,7 +301,7 @@
       <Item Type="normal" Text="更改登录口令">
         <Action Class="Me.Amon.Pwd.E.User.PkeyAction"/>
       </Item>
-      <Item Type="normal" Text="设置安全口令" Id="mpro-skey">
+      <Item Type="normal" Text="设置安全口令" Id="mpro-skey" Enabled="false">
         <Action Class="Me.Amon.Pwd.E.User.SkeyAction"/>
       </Item>
       <Line/>
@@ -333,7 +331,7 @@
       <Item Type="normal" Text="快捷键" ActionId="shortcuts">
         <Stroke Key="F6"/>
       </Item>
-      <Item Type="normal" Text="特别致谢">
+      <Item Type="normal" Text="特别致谢" Visible="false">
         <Action Class="Me.Amon.Pwd.E.Help.IdioAction"/>
         <Stroke Key="F8"/>
       </Item>

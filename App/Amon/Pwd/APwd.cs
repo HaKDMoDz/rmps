@@ -342,10 +342,12 @@ namespace Me.Amon.Pwd
         {
             foreach (KeyStroke<APwd> stroke in _MenuBar.KeyStrokes)
             {
-                if (e.KeyCode == stroke.Code &&
-                    !(e.Control ^ stroke.Control) &&
-                    !(e.Shift ^ stroke.Shift) &&
-                    !(e.Alt ^ stroke.Alt))
+                if (stroke.Action == null)
+                {
+                    continue;
+                }
+                if (e.KeyCode == stroke.Code && !(e.Control ^ stroke.Control) &&
+                    !(e.Shift ^ stroke.Shift) && !(e.Alt ^ stroke.Alt))
                 {
                     stroke.Action.EventHandler(stroke, null);
                     e.Handled = true;
@@ -1015,11 +1017,11 @@ namespace Me.Amon.Pwd
                 {
                     return;
                 }
-                //_PwdView.HideView(TpGrid);
+                _PwdView.HideView(PlBody);
             }
 
             _PwdView = _ProView;
-            //_PwdView.InitView(TpGrid);
+            _PwdView.InitView(PlBody);
         }
 
         public void ShowAWiz()

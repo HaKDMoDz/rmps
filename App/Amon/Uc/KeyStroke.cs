@@ -19,7 +19,7 @@ namespace Me.Amon.Uc
 
         public bool Decode(string key)
         {
-            Key = Regex.Replace(key, "[^-=`;',./\\[\\]a-zA-Z0-9]+", " ").Trim();
+            Key = Regex.Replace(key, "[^-+=`;',./\\[\\]a-zA-Z0-9]+", " ").Trim();
             key = Key.ToUpper();
             foreach (string t in key.Split(' '))
             {

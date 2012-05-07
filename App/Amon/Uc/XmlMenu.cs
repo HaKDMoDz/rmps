@@ -999,7 +999,7 @@ namespace Me.Amon.Uc
                 return null;
             }
             stroke.Memo = Attribute(node, "Memo", "");
-            stroke.Command = Attribute(node, "Command", "");
+            stroke.Command = Attribute(node, "Command", null);
             _Strokes.Add(stroke);
             return stroke;
         }
