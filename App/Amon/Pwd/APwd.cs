@@ -154,8 +154,8 @@ namespace Me.Amon.Pwd
         /// </summary>
         private void InitCat()
         {
-            Cat cat = new Cat { Id = "winshineapwd0000", Text = "阿木密码箱", Tips = "阿木密码箱", Icon = "Amon" };
-            IlCatTree.Images.Add("winshineapwd0000", BeanUtil.NaN16);
+            Cat cat = new Cat { Id = "0", Text = "默认类别", Tips = "默认类别", Icon = "Amon" };
+            IlCatTree.Images.Add("0", BeanUtil.NaN16);
             IlCatTree.Images.Add(cat.Icon, Resources.Logo);
             _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Icon, SelectedImageKey = cat.Icon };
             _RootNode.Tag = cat;

@@ -4,17 +4,6 @@
   <Ver>1</Ver>
   <Cats>
     <Cat>
-      <Order>0</Order>
-      <Id>0</Id>
-      <Parent>winshineapwd0000</Parent>
-      <IsLeaf>true</IsLeaf>
-      <Text>默认类别</Text>
-      <Tips>默认类别</Tips>
-      <Icon>4ee3162000250620</Icon>
-      <Meta/>
-      <Memo/>
-    </Cat>
-    <Cat>
       <Order>13</Order>
       <Id>qqqqqaabdvredvsv</Id>
       <Parent>sctfxrcwrqygwvxb</Parent>
@@ -259,7 +248,7 @@
     <Cat>
       <Order>7</Order>
       <Id>qqqqqaarsawtrver</Id>
-      <Parent>winshineapwd0000</Parent>
+      <Parent>0</Parent>
       <IsLeaf>false</IsLeaf>
       <Text>银行账号</Text>
       <Tips>银行账号</Tips>
@@ -358,7 +347,7 @@
     <Cat>
       <Order>8</Order>
       <Id>qqqqqaarsdbrzsby</Id>
-      <Parent>winshineapwd0000</Parent>
+      <Parent>0</Parent>
       <IsLeaf>false</IsLeaf>
       <Text>通讯名录</Text>
       <Tips>通讯名录</Tips>
@@ -369,7 +358,7 @@
     <Cat>
       <Order>6</Order>
       <Id>qqqqqaarwwqzddvz</Id>
-      <Parent>winshineapwd0000</Parent>
+      <Parent>0</Parent>
       <IsLeaf>false</IsLeaf>
       <Text>软件注册</Text>
       <Tips>软件注册</Tips>
@@ -413,7 +402,7 @@
     <Cat>
       <Order>9</Order>
       <Id>qqqqqaavaqddvafs</Id>
-      <Parent>winshineapwd0000</Parent>
+      <Parent>0</Parent>
       <IsLeaf>true</IsLeaf>
       <Text>记事便签</Text>
       <Tips>记事便签</Tips>
@@ -435,7 +424,7 @@
     <Cat>
       <Order>10</Order>
       <Id>qqqqqaavvqqafqaq</Id>
-      <Parent>winshineapwd0000</Parent>
+      <Parent>0</Parent>
       <IsLeaf>true</IsLeaf>
       <Text>公司账号</Text>
       <Tips>公司账号</Tips>
@@ -787,7 +776,7 @@
     <Cat>
       <Order>11</Order>
       <Id>qqqqqazdvzctvwfs</Id>
-      <Parent>winshineapwd0000</Parent>
+      <Parent>0</Parent>
       <IsLeaf>true</IsLeaf>
       <Text>文件加密</Text>
       <Tips>文件加密</Tips>
@@ -853,7 +842,7 @@
     <Cat>
       <Order>2</Order>
       <Id>qqqqqazeyvfygcqd</Id>
-      <Parent>winshineapwd0000</Parent>
+      <Parent>0</Parent>
       <IsLeaf>true</IsLeaf>
       <Text>网址收藏</Text>
       <Tips>网址收藏</Tips>
@@ -930,7 +919,7 @@
     <Cat>
       <Order>12</Order>
       <Id>qqqqqazttgeszezt</Id>
-      <Parent>winshineapwd0000</Parent>
+      <Parent>0</Parent>
       <IsLeaf>true</IsLeaf>
       <Text>单位转换</Text>
       <Tips>单位转换</Tips>
@@ -1040,7 +1029,7 @@
     <Cat>
       <Order>13</Order>
       <Id>qqqqqazvdcdrqygy</Id>
-      <Parent>winshineapwd0000</Parent>
+      <Parent>0</Parent>
       <IsLeaf>false</IsLeaf>
       <Text>计划任务</Text>
       <Tips>计划任务</Tips>
@@ -1117,7 +1106,7 @@
     <Cat>
       <Order>1</Order>
       <Id>sctfxrcwcecbyarb</Id>
-      <Parent>winshineapwd0000</Parent>
+      <Parent>0</Parent>
       <IsLeaf>false</IsLeaf>
       <Text>网络注册</Text>
       <Tips>网络注册</Tips>
@@ -1128,7 +1117,7 @@
     <Cat>
       <Order>5</Order>
       <Id>sctfxrcwcvzybzxc</Id>
-      <Parent>winshineapwd0000</Parent>
+      <Parent>0</Parent>
       <IsLeaf>true</IsLeaf>
       <Text>电子邮件</Text>
       <Tips>电子邮件</Tips>
@@ -1139,7 +1128,7 @@
     <Cat>
       <Order>3</Order>
       <Id>sctfxrcwrbwrzcyq</Id>
-      <Parent>winshineapwd0000</Parent>
+      <Parent>0</Parent>
       <IsLeaf>false</IsLeaf>
       <Text>游戏娱乐</Text>
       <Tips>游戏娱乐</Tips>
@@ -1150,7 +1139,7 @@
     <Cat>
       <Order>4</Order>
       <Id>sctfxrcwrqygwvxb</Id>
-      <Parent>winshineapwd0000</Parent>
+      <Parent>0</Parent>
       <IsLeaf>true</IsLeaf>
       <Text>即时通讯</Text>
       <Tips>即时通讯</Tips>
@@ -1161,7 +1150,7 @@
     <Cat>
       <Order>14</Order>
       <Id>sctfxrcwvqwdeczc</Id>
-      <Parent>winshineapwd0000</Parent>
+      <Parent>0</Parent>
       <IsLeaf>true</IsLeaf>
       <Text>其它账号</Text>
       <Tips>其它账号</Tips>
