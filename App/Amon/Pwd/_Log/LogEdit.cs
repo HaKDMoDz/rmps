@@ -87,7 +87,7 @@ namespace Me.Amon.Pwd._Log
 
             _SafeModel.Key.FromLog(oldLog);
             _SafeModel.Decode();
-            _APwd.ShowRec(_SafeModel.Key);
+            _APwd.ShowKey(_SafeModel.Key);
             _UserModel.DBA.SaveVcs(_SafeModel.Key);
 
             LbLog.Items.Insert(0, newLog);

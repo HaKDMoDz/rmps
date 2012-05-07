@@ -1,4 +1,4 @@
- using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -335,7 +335,7 @@ namespace Me.Amon.Pwd
             _SafeModel.Key = key;
             _SafeModel.Decode();
 
-            ShowRec(key);
+            ShowKey(key);
         }
 
         private void APwd_KeyDown(object sender, KeyEventArgs e)
@@ -343,11 +343,11 @@ namespace Me.Amon.Pwd
             foreach (KeyStroke<APwd> stroke in _MenuBar.KeyStrokes)
             {
                 if (e.KeyCode == stroke.Code &&
-                    (e.Control | !stroke.Control) &&
-                    (e.Shift | !stroke.Shift) &&
-                    (e.Alt | !stroke.Alt))
+                    !(e.Control ^ stroke.Control) &&
+                    !(e.Shift ^ stroke.Shift) &&
+                    !(e.Alt ^ stroke.Alt))
                 {
-                    stroke.Action.EventHandler(sender, null);
+                    stroke.Action.EventHandler(stroke, null);
                     e.Handled = true;
                 }
             }
@@ -509,6 +509,33 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 公共方法
+        public ToolStripMenuItem GetMenuItem(string key)
+        {
+            if (_MenuBar != null)
+            {
+                return _MenuBar.GetMenuItem(key);
+            }
+            return null;
+        }
+
+        public ToolStripButton GetToolItem(string key)
+        {
+            if (_MenuBar != null)
+            {
+                return _MenuBar.GetToolItem(key);
+            }
+            return null;
+        }
+
+        public ItemGroup GetItemGroup(string key)
+        {
+            if (_MenuBar != null)
+            {
+                return _MenuBar.GetGroup(key);
+            }
+            return null;
+        }
+
         public void ChangeView(UserControl uc)
         {
             uc.Dock = DockStyle.Fill;
@@ -554,7 +581,7 @@ namespace Me.Amon.Pwd
         {
         }
 
-        public void ShowRec(Key rec)
+        public void ShowKey(Key key)
         {
             _PwdView.ShowData();
 

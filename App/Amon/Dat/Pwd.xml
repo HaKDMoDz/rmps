@@ -42,6 +42,9 @@
     <Action Id="move-up" Class="Me.Amon.Pwd.E.Edit.MoveUpAction"/>
     <Action Id="move-down" Class="Me.Amon.Pwd.E.Edit.MoveDownAction"/>
     <Action Id="top-most" Class="Me.Amon.Pwd.E.View.TopMostAction"/>
+	<Action Id="pattern-pro" Class="Me.Amon.Pwd.E.View.ProPatternAction"/>
+	<Action Id="pattern-wiz" Class="Me.Amon.Pwd.E.View.WizPatternAction"/>
+	<Action Id="pattern-pad" Class="Me.Amon.Pwd.E.View.PadPatternAction"/>
     <Action Id="select-prev" Class="Me.Amon.Pwd.E.View.SelectPrevAction"/>
     <Action Id="select-next" Class="Me.Amon.Pwd.E.View.SelectNextAction"/>
     <Action Id="menubar-visible" Class="Me.Amon.Pwd.E.View.MenubarVisibleAction"/>
@@ -224,14 +227,14 @@
         <Stroke Key="F5"/>
       </Item>
       <Line/>
-      <Item Id="pro-style" Type="toggle" Text="专业模式" Group="viewStyle" Command="viewStyle:pro">
-        <Stroke Key="^ Up"/>
+      <Item Id="pattern-pro" Type="normal" Text="专业模式" ActionId="pattern-pro" Group="view-pattern" Command="view-pattern:pattern-pro">
+        <Stroke Key="^ F1" Memo="切换到专业模式" Command="view-pattern:pattern-pro"/>
       </Item>
-      <Item Id="wiz-style" Type="toggle" Text="向导模式" Group="viewStyle" Command="viewStyle:wiz">
-        <Stroke Key="^ Down"/>
+      <Item Id="pattern-wiz" Type="normal" Text="向导模式" ActionId="pattern-wiz" Group="view-pattern" Command="view-pattern:pattern-wiz">
+        <Stroke Key="^ F2" Memo="切换到向导模式" Command="view-pattern:pattern-wiz"/>
       </Item>
-      <Item Id="pad-style" Type="toggle" Text="记事模式" Group="viewStyle" Command="viewStyle:pad" Visible="false">
-        <Stroke Key="^ Down"/>
+      <Item Id="pattern-pad" Type="normal" Text="记事模式" ActionId="pattern-pad" Group="view-pattern" Command="view-pattern:pattern-pad" Visible="false">
+        <Stroke Key="^ F3" Memo="切换到记事模式" Command="view-pattern:pattern-pad"/>
       </Item>
       <Line/>
       <Item Id="menubar-visible" Type="toggle" Text="显示菜单栏" ActionId="menubar-visible">

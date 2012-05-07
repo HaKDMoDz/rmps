@@ -1,8 +1,9 @@
- using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Da;
+using Me.Amon.Pwd;
 using Me.Amon.Util;
 
 namespace Me.Amon.Model
@@ -10,6 +11,7 @@ namespace Me.Amon.Model
     public sealed class ViewModel
     {
         private UserModel _UserModel;
+        private string _Pattern;
         private string _LookPath;
         private DFAccess _LookProp;
         private string _FeelPath;
@@ -22,8 +24,26 @@ namespace Me.Amon.Model
         }
 
         #region 视图数据
-        public string Pattern { get; set; }
-        
+        public string Pattern
+        {
+            get
+            {
+                return _Pattern;
+            }
+            set
+            {
+                value = value.ToLower();
+                if (value == EPwd.PATTERN_PRO || value == EPwd.PATTERN_WIZ || value == EPwd.PATTERN_PAD)
+                {
+                    _Pattern = value;
+                }
+                else
+                {
+                    _Pattern = EPwd.PATTERN_WIZ;
+                }
+            }
+        }
+
         public string Skin { get; set; }
 
         public bool MenuBarVisible { get; set; }
@@ -168,6 +188,7 @@ namespace Me.Amon.Model
             #region 视图
             _UserProp = new DFAccess();
             _UserProp.Load(Path.Combine(_UserModel.Home, IEnv.USER_CFG));
+            Pattern = _UserProp.Get("Pattern", "");
             MenuBarVisible = IEnv.VALUE_TRUE == _UserProp.Get("MenuBar", IEnv.VALUE_TRUE).ToLower();
             ToolBarVisible = IEnv.VALUE_TRUE == _UserProp.Get("ToolBar", IEnv.VALUE_TRUE).ToLower();
             EchoBarVisible = IEnv.VALUE_TRUE == _UserProp.Get("EchoBar", IEnv.VALUE_TRUE).ToLower();
@@ -220,6 +241,8 @@ namespace Me.Amon.Model
 
         public void Save()
         {
+            _UserProp.Set("Pattern", Pattern);
+
             _UserProp.Set("LocX", WindowLocX.ToString());
             _UserProp.Set("LocY", WindowLocY.ToString());
             _UserProp.Set("DimW", WindowDimW.ToString());

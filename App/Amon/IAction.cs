@@ -7,12 +7,16 @@ namespace Me.Amon
     {
         T IApp { get; set; }
 
-        void Add(ToolStripItem item, ViewModel viewModel);
-
         /// <summary>
         /// 
         /// </summary>
         void DoInit();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        void Add(ToolStripItem item, ViewModel viewModel);
 
         /// <summary>
         /// 事件处理

@@ -5,32 +5,64 @@ namespace Me.Amon.Uc
 {
     public class ItemGroup
     {
-        private ToolStripMenuItem _Last;
-        private Dictionary<object, ToolStripMenuItem> _Items;
+        private ToolStripItem _Last;
+        private Dictionary<string, ToolStripItem> _Items;
 
         public ItemGroup()
         {
-            _Items = new Dictionary<object, ToolStripMenuItem>();
+            _Items = new Dictionary<string, ToolStripItem>();
         }
 
-        public void Add(object obj, ToolStripMenuItem item)
+        public void Add(string key, ToolStripItem item)
         {
-            if (obj != null)
+            if (key != null)
             {
-                _Items[obj] = item;
+                _Items[key] = item;
+            }
+
+            if (item is ToolStripMenuItem)
+            {
+                if ((item as ToolStripMenuItem).Checked)
+                {
+                    _Last = item;
+                }
+                return;
+            }
+            if (item is ToolStripButton)
+            {
+                if ((item as ToolStripButton).Checked)
+                {
+                    _Last = item;
+                }
+                return;
             }
         }
 
-        public void Checked(object key)
+        public void Checked(string key)
         {
-            if (_Last != null)
-            {
-                _Last.Checked = false;
-            }
+            DoChecked(false);
             if (_Items.ContainsKey(key))
             {
                 _Last = _Items[key];
-                _Last.Checked = true;
+                DoChecked(true);
+            }
+        }
+
+        private void DoChecked(bool value)
+        {
+            if (_Last == null)
+            {
+                return;
+            }
+            if (_Last is ToolStripMenuItem)
+            {
+                (_Last as ToolStripMenuItem).Checked = value;
+                return;
+            }
+            if (_Last is ToolStripButton)
+            {
+                (_Last as ToolStripButton).Checked = value;
+                return;
             }
         }
     }

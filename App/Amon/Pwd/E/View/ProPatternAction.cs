@@ -5,7 +5,7 @@ using Me.Amon.Uc;
 
 namespace Me.Amon.Pwd.E.View
 {
-    public class WizPatternAction : APwdAction
+    public class ProPatternAction : APwdAction
     {
         public override void Add(ToolStripItem item, ViewModel viewModel)
         {
@@ -20,7 +20,7 @@ namespace Me.Amon.Pwd.E.View
                 return;
             }
 
-            bool ok = viewModel.Pattern == EPwd.PATTERN_WIZ;
+            bool ok = viewModel.Pattern == EPwd.PATTERN_PRO;
             if (item is ToolStripMenuItem)
             {
                 (item as ToolStripMenuItem).Checked = ok;
@@ -37,10 +37,10 @@ namespace Me.Amon.Pwd.E.View
         {
             if (IApp != null)
             {
-                IApp.ShowAWiz();
+                IApp.ShowAPro();
             }
 
-            string cmd;
+            string cmd = null;
             if (sender is ToolStripItem)
             {
                 ToolStripItem item = sender as ToolStripItem;
@@ -57,7 +57,8 @@ namespace Me.Amon.Pwd.E.View
                 KeyStroke<APwd> stroke = sender as KeyStroke<APwd>;
                 cmd = stroke.Command;
             }
-            else
+
+            if (string.IsNullOrWhiteSpace(cmd))
             {
                 return;
             }

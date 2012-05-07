@@ -1,4 +1,4 @@
- using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -15,7 +15,7 @@ namespace Me.Amon.Uc
         private string _Error;
         private XmlDocument _Document;
         private Dictionary<string, ToolStripMenuItem> _MenuItems;
-        private Dictionary<string, ToolStripButton> _Buttons;
+        private Dictionary<string, ToolStripButton> _ToolItems;
         private Dictionary<string, ItemGroup> _Groups;
         private Dictionary<string, IAction<T>> _Actions;
         private Dictionary<string, Assembly> _Assemblys;
@@ -30,7 +30,7 @@ namespace Me.Amon.Uc
             _ViewModel = viewModel;
 
             _MenuItems = new Dictionary<string, ToolStripMenuItem>();
-            _Buttons = new Dictionary<string, ToolStripButton>();
+            _ToolItems = new Dictionary<string, ToolStripButton>();
             _Groups = new Dictionary<string, ItemGroup>();
             _Actions = new Dictionary<string, IAction<T>>();
             _Strokes = new List<KeyStroke<T>>();
@@ -202,14 +202,14 @@ namespace Me.Amon.Uc
 
         public List<KeyStroke<T>> KeyStrokes { get { return _Strokes; } }
 
-        public ToolStripMenuItem GetItem(string id)
+        public ToolStripMenuItem GetMenuItem(string id)
         {
             return _MenuItems.ContainsKey(id) ? _MenuItems[id] : null;
         }
 
-        public ToolStripButton GetButton(string id)
+        public ToolStripButton GetToolItem(string id)
         {
-            return _Buttons.ContainsKey(id) ? _Buttons[id] : null;
+            return _ToolItems.ContainsKey(id) ? _ToolItems[id] : null;
         }
 
         public IAction<T> GetAction(string id)
@@ -466,7 +466,6 @@ namespace Me.Amon.Uc
             processEnabled(node, item);
             processVisible(node, item);
             processCommand(node, item);
-            processGroup(node, item);
             if (action == null)
             {
                 action = processAction(node, item);
@@ -475,6 +474,7 @@ namespace Me.Amon.Uc
             {
                 action.Add(item, _ViewModel);
             }
+            processGroup(node, item);
 
             XmlNodeList list = node.SelectNodes("Stroke");
             if (list != null && list.Count > 0)
@@ -503,7 +503,7 @@ namespace Me.Amon.Uc
             if (CharUtil.IsValidate(id))
             {
                 button.Name = id;
-                _Buttons[id] = button;
+                _ToolItems[id] = button;
             }
 
             processText(node, button);
@@ -943,7 +943,7 @@ namespace Me.Amon.Uc
             return button;
         }
 
-        private ToolStripMenuItem processGroup(XmlNode node, ToolStripMenuItem button)
+        private ToolStripMenuItem processGroup(XmlNode node, ToolStripMenuItem item)
         {
             string group = Attribute(node, "Group", "");
             if (!string.IsNullOrWhiteSpace(group))
@@ -958,9 +958,9 @@ namespace Me.Amon.Uc
                 {
                     bg = _Groups[group];
                 }
-                bg.Add(button.Name, button);
+                bg.Add(item.Name, item);
             }
-            return button;
+            return item;
         }
 
         private static ToolStripItem processEnabled(XmlNode node, ToolStripItem button)
@@ -999,6 +999,7 @@ namespace Me.Amon.Uc
                 return null;
             }
             stroke.Memo = Attribute(node, "Memo", "");
+            stroke.Command = Attribute(node, "Command", "");
             _Strokes.Add(stroke);
             return stroke;
         }

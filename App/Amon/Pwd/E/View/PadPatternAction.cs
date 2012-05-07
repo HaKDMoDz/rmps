@@ -1,14 +1,45 @@
- namespace Me.Amon.Pwd.E.View
+using System.Collections.Generic;
+using System.Windows.Forms;
+using Me.Amon.Model;
+using Me.Amon.Uc;
+
+namespace Me.Amon.Pwd.E.View
 {
     public class PadPatternAction : APwdAction
     {
+        public override void Add(ToolStripItem item, ViewModel viewModel)
+        {
+            if (_Items == null)
+            {
+                _Items = new List<ToolStripItem>();
+            }
+
+            _Items.Add(item);
+            if (viewModel == null)
+            {
+                return;
+            }
+
+            bool ok = viewModel.Pattern == EPwd.PATTERN_PAD;
+            if (item is ToolStripMenuItem)
+            {
+                (item as ToolStripMenuItem).Checked = ok;
+                return;
+            }
+            if (item is ToolStripButton)
+            {
+                (item as ToolStripButton).Checked = ok;
+                return;
+            }
+        }
+
         public override void EventHandler(object sender, System.EventArgs e)
         {
             if (IApp != null)
             {
                 IApp.ShowAPad();
             }
-            
+
             string cmd;
             if (sender is ToolStripItem)
             {
@@ -21,9 +52,9 @@
 
                 cmd = obj as string;
             }
-            else if (sender is KeyStroke)
+            else if (sender is KeyStroke<APwd>)
             {
-                KeyStroke stroke = sender as KeyStroke;
+                KeyStroke<APwd> stroke = sender as KeyStroke<APwd>;
                 cmd = stroke.Command;
             }
             else
@@ -39,7 +70,7 @@
                     continue;
                 }
 
-                ItemGroup group = IApp.GetGroup(arr[0]);
+                ItemGroup group = IApp.GetItemGroup(arr[0]);
                 if (group == null)
                 {
                     continue;
