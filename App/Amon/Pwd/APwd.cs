@@ -1,4 +1,4 @@
-﻿using System;
+ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -94,8 +94,21 @@ namespace Me.Amon.Pwd
             // 当前时间
             UcTime.Start();
 
-            // 向导模式
-            ShowAWiz();
+            // 视图模式
+            switch (_ViewModel.Pattern)
+            {
+                case EPwd.PATTERN_PRO:
+                    ShowAPro();
+                    break;
+                case EPwd.PATTERN_WIZ:
+                    ShowAWiz();
+                    break;
+                case EPwd.PATTERN_PAD:
+                    ShowAPad();
+                    break;
+                default:
+                    break;
+            }
         }
 
         public int AppId { get; set; }
