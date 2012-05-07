@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -22,6 +22,8 @@ namespace Me.Amon.Model
         }
 
         #region 视图数据
+        public string Pattern { get; set; }
+        
         public string Skin { get; set; }
 
         public bool MenuBarVisible { get; set; }
