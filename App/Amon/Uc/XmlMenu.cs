@@ -409,7 +409,16 @@ namespace Me.Amon.Uc
             }
             foreach (XmlNode node in list)
             {
-                processStrokes(node);
+                KeyStroke<T> stroke = processStrokes(node);
+                if (stroke == null)
+                {
+                    continue;
+                }
+                string actionId = Attribute(node, "ActionId", null);
+                if (!string.IsNullOrWhiteSpace(actionId) && _Actions.ContainsKey(actionId))
+                {
+                    stroke.Action = _Actions[actionId];
+                }
             }
             return true;
         }
