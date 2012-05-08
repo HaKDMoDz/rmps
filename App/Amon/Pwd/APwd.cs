@@ -155,7 +155,11 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 事件处理
-        #region 界面事件
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TvCatTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeNode node = e.Node;
@@ -168,6 +172,11 @@ namespace Me.Amon.Pwd
             _LastNode = node;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LbKeyList_DrawItem(object sender, DrawItemEventArgs e)
         {
             e.DrawBackground();
@@ -200,6 +209,11 @@ namespace Me.Amon.Pwd
             //e.Graphics.DrawImage(_ImgMajors[rec.Major + 2], x - 16, y);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LbKeyList_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             Key key = LbKeyList.SelectedItem as Key;
@@ -267,270 +281,7 @@ namespace Me.Amon.Pwd
         }
         #endregion
 
-        #region 类别事件
-        public void CatMoveUp()
-        {
-            TreeNode currNode = TvCatTree.SelectedNode;
-            if (currNode == null)
-            {
-                return;
-            }
-
-            Cat currCat = currNode.Tag as Cat;
-            if (currCat == null || currCat.Id == EPwd.DEF_CAT_ID)
-            {
-                return;
-            }
-
-            TreeNode prevNode = currNode.PrevNode;
-            if (prevNode == null)
-            {
-                return;
-            }
-
-            Cat prevCat = prevNode.Tag as Cat;
-            if (prevCat == null || prevCat.Id == EPwd.DEF_CAT_ID)
-            {
-                return;
-            }
-
-            TreeNode parent = currNode.Parent;
-            if (parent == null)
-            {
-                return;
-            }
-
-            _UserModel.DBA.SaveVcs(prevCat);
-            _UserModel.DBA.SaveVcs(currCat);
-
-            TvCatTree.SelectedNode = null;
-            parent.Nodes.Remove(currNode);
-            parent.Nodes.Insert(prevNode.Index, currNode);
-            TvCatTree.SelectedNode = currNode;
-        }
-
-        public void CatMoveDown()
-        {
-            TreeNode currNode = TvCatTree.SelectedNode;
-            if (currNode == null)
-            {
-                return;
-            }
-
-            Cat currCat = currNode.Tag as Cat;
-            if (currCat == null || currCat.Id == EPwd.DEF_CAT_ID)
-            {
-                return;
-            }
-
-            TreeNode nextNode = currNode.NextNode;
-            if (nextNode == null)
-            {
-                return;
-            }
-
-            Cat nextCat = nextNode.Tag as Cat;
-            if (nextCat == null || nextCat.Id == EPwd.DEF_CAT_ID)
-            {
-                return;
-            }
-
-            TreeNode parent = currNode.Parent;
-            if (parent == null)
-            {
-                return;
-            }
-
-            _UserModel.DBA.SaveVcs(currCat);
-            _UserModel.DBA.SaveVcs(nextCat);
-
-            TvCatTree.SelectedNode = null;
-            parent.Nodes.Remove(currNode);
-            parent.Nodes.Insert(nextNode.Index + 1, currNode);
-            TvCatTree.SelectedNode = currNode;
-        }
-
-        private void CmiEditIcon_Click(object sender, EventArgs e)
-        {
-            TreeNode node = TvCatTree.SelectedNode;
-            if (node == null)
-            {
-                return;
-            }
-
-            Cat cat = node.Tag as Cat;
-            if (cat == null || cat.Id == EPwd.DEF_CAT_ID)
-            {
-                return;
-            }
-
-            PngSeeker editor = new PngSeeker(_UserModel, _DataModel.CatDir);
-            editor.InitOnce(16);
-            editor.CallBackHandler = new AmonHandler<Png>(ChangeImgByCat);
-            BeanUtil.CenterToParent(editor, this);
-            editor.ShowDialog(this);
-        }
-        #endregion
-
-        #region 记录事件
-        public void KeyMoveto(object sender, EventArgs e)
-        {
-            CatView view = new CatView(_UserModel);
-            view.Init(IlCatTree);
-            view.CallBack = new AmonHandler<string>(ChangeCatByKey);
-            BeanUtil.CenterToParent(view, this);
-            view.ShowDialog(this);
-        }
-
-        public void KeyHistory(object sender, EventArgs e)
-        {
-            LogEdit edit = new LogEdit(this);
-            edit.Init(_UserModel, _SafeModel);
-            BeanUtil.CenterToParent(edit, this);
-            edit.Show(this);
-        }
-        #endregion
-        #endregion
-
-        #region 私有方法
-        /// <summary>
-        /// 类别视图初始化
-        /// </summary>
-        private void InitCat()
-        {
-            IlCatTree.Images.Add(EPwd.DEF_CAT_IMG, BeanUtil.NaN16);
-
-            Cat cat = new Cat { Id = EPwd.DEF_CAT_ID, Text = "默认类别", Tips = "默认类别", Icon = "Amon" };
-            IlCatTree.Images.Add(cat.Icon, Resources.Logo);
-            _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Icon, SelectedImageKey = cat.Icon };
-            _RootNode.Tag = cat;
-            TvCatTree.Nodes.Add(_RootNode);
-            InitCat(_RootNode);
-            _RootNode.Expand();
-        }
-
-        private void InitCat(TreeNode root)
-        {
-            foreach (Cat cat in _UserModel.DBA.ListCat(root.Name))
-            {
-                TreeNode node = new TreeNode();
-                node.Name = cat.Id;
-                node.Text = cat.Text;
-                node.ToolTipText = cat.Tips;
-                node.Tag = cat;
-                if (CharUtil.IsValidateHash(cat.Icon))
-                {
-                    IlCatTree.Images.Add(cat.Icon, BeanUtil.ReadImage(Path.Combine(_DataModel.CatDir, cat.Icon + ".png"), BeanUtil.NaN16));
-                    node.ImageKey = cat.Icon;
-                }
-                else
-                {
-                    node.ImageKey = EPwd.DEF_CAT_IMG;
-                }
-                node.SelectedImageKey = node.ImageKey;
-
-                root.Nodes.Add(node);
-                if (!cat.IsLeaf)
-                {
-                    InitCat(node);
-                }
-            }
-        }
-
-        private void InitKey()
-        {
-            _KeyIcon = new Dictionary<string, Image>();
-            _KeyHint = new Dictionary<string, Image>();
-        }
-
-        private void InitKey(IList<Key> keys)
-        {
-            LbKeyList.Items.Clear();
-            _KeyIcon.Clear();
-            _KeyHint.Clear();
-
-            foreach (Key key in keys)
-            {
-                LbKeyList.Items.Add(key);
-
-                if (CharUtil.IsValidateHash(key.IcoName))
-                {
-                    if (CharUtil.IsValidateHash(key.IcoPath))
-                    {
-                        _KeyIcon[key.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoPath, key.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
-                    }
-                    else
-                    {
-                        _KeyIcon[key.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
-                    }
-                }
-                else
-                {
-                    _KeyIcon[key.IcoName] = BeanUtil.NaN24;
-                }
-
-                _KeyHint[key.GtdId] = CharUtil.IsValidateHash(key.GtdId) ? Resources.Hint : BeanUtil.NaN16;
-            }
-        }
-
-        private void DoListKey(string catId)
-        {
-            IList<Key> keys = _UserModel.DBA.ListKey(catId);
-            InitKey(keys);
-        }
-
-        private void DoFindKey(string meta)
-        {
-            InitKey(_UserModel.DBA.FindKey(meta));
-        }
-
-        private void ImportKey()
-        {
-            _SafeModel.Encode();
-
-            _SafeModel.Key.AccessTime = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
-            _UserModel.DBA.SaveVcs(_SafeModel.Key);
-        }
-
-        private void LoadLayout()
-        {
-            Location = new Point(_ViewModel.WindowLocX, _ViewModel.WindowLocY);
-            ClientSize = new Size(_ViewModel.WindowDimW, _ViewModel.WindowDimH);
-
-            HSplit.SplitterDistance = _ViewModel.HSplitDistance;
-            HSplit.Panel1Collapsed = !_ViewModel.NavPaneVisible;
-
-            VSplit.SplitterDistance = _ViewModel.VSplitDistance;
-
-            MbMenu.Visible = _ViewModel.MenuBarVisible;
-            TbTool.Visible = _ViewModel.ToolBarVisible;
-            SsEcho.Visible = _ViewModel.EchoBarVisible;
-            FbFind.Visible = _ViewModel.FindBarVisible;
-        }
-
-        private void SaveLayout()
-        {
-            _ViewModel.WindowLocX = Location.X;
-            _ViewModel.WindowLocY = Location.Y;
-            _ViewModel.WindowDimW = ClientSize.Width;
-            _ViewModel.WindowDimH = ClientSize.Height;
-
-            _ViewModel.HSplitDistance = HSplit.SplitterDistance;
-            _ViewModel.NavPaneVisible = !HSplit.Panel1Collapsed;
-
-            _ViewModel.VSplitDistance = VSplit.SplitterDistance;
-            _ViewModel.CatTreeVisible = !VSplit.Panel1Collapsed;
-            _ViewModel.KeyListVisible = !VSplit.Panel2Collapsed;
-
-            _ViewModel.MenuBarVisible = MbMenu.Visible;
-            _ViewModel.ToolBarVisible = TbTool.Visible;
-            _ViewModel.EchoBarVisible = SsEcho.Visible;
-            _ViewModel.FindBarVisible = FbFind.Visible;
-
-            _ViewModel.Save();
-        }
-        #endregion
-
+        #region 公共函数
         #region 公共方法
         public ToolStripMenuItem GetMenuItem(string key)
         {
@@ -612,45 +363,12 @@ namespace Me.Amon.Pwd
         }
         #endregion
 
-        #region 公共函数
-        #region 文件菜单
-        public void LockForm()
-        {
-            new AuthRc(_UserModel, this).ShowDialog(this);
-        }
-
-        public void HideForm()
-        {
-            if (_SafeModel.Modified)
-            {
-                if (DialogResult.Yes != Main.ShowConfirm("您有数据尚未保存，确认要隐藏窗口吗？"))
-                {
-                    return;
-                }
-            }
-
-            SaveLayout();
-            Visible = false;
-        }
-
-        public void ExitForm()
-        {
-            SaveLayout();
-
-            Close();
-        }
-        #endregion
-
-        #region 编辑菜单
         #region 类别处理
-        public void AppendCat()
-        {
-            CatEdit catEdit = new CatEdit();
-            catEdit.CallBackHandler = new AmonHandler<Cat>(AppendCatHandler);
-            catEdit.Show(this, new Cat());
-        }
-
-        private void AppendCatHandler(Cat cat)
+        /// <summary>
+        /// 添加口令
+        /// </summary>
+        /// <param name="cat"></param>
+        public void AppendCat(Cat cat)
         {
             if (_LastNode == null)
             {
@@ -746,6 +464,109 @@ namespace Me.Amon.Pwd
             {
                 root.Nodes.Remove(node);
             }
+        }
+
+        public void CatMoveUp()
+        {
+            TreeNode currNode = TvCatTree.SelectedNode;
+            if (currNode == null)
+            {
+                return;
+            }
+
+            Cat currCat = currNode.Tag as Cat;
+            if (currCat == null || currCat.Id == EPwd.DEF_CAT_ID)
+            {
+                return;
+            }
+
+            TreeNode prevNode = currNode.PrevNode;
+            if (prevNode == null)
+            {
+                return;
+            }
+
+            Cat prevCat = prevNode.Tag as Cat;
+            if (prevCat == null || prevCat.Id == EPwd.DEF_CAT_ID)
+            {
+                return;
+            }
+
+            TreeNode parent = currNode.Parent;
+            if (parent == null)
+            {
+                return;
+            }
+
+            _UserModel.DBA.SaveVcs(prevCat);
+            _UserModel.DBA.SaveVcs(currCat);
+
+            TvCatTree.SelectedNode = null;
+            parent.Nodes.Remove(currNode);
+            parent.Nodes.Insert(prevNode.Index, currNode);
+            TvCatTree.SelectedNode = currNode;
+        }
+
+        public void CatMoveDown()
+        {
+            TreeNode currNode = TvCatTree.SelectedNode;
+            if (currNode == null)
+            {
+                return;
+            }
+
+            Cat currCat = currNode.Tag as Cat;
+            if (currCat == null || currCat.Id == EPwd.DEF_CAT_ID)
+            {
+                return;
+            }
+
+            TreeNode nextNode = currNode.NextNode;
+            if (nextNode == null)
+            {
+                return;
+            }
+
+            Cat nextCat = nextNode.Tag as Cat;
+            if (nextCat == null || nextCat.Id == EPwd.DEF_CAT_ID)
+            {
+                return;
+            }
+
+            TreeNode parent = currNode.Parent;
+            if (parent == null)
+            {
+                return;
+            }
+
+            _UserModel.DBA.SaveVcs(currCat);
+            _UserModel.DBA.SaveVcs(nextCat);
+
+            TvCatTree.SelectedNode = null;
+            parent.Nodes.Remove(currNode);
+            parent.Nodes.Insert(nextNode.Index + 1, currNode);
+            TvCatTree.SelectedNode = currNode;
+        }
+
+        public void CmiEditIcon_Click(object sender, EventArgs e)
+        {
+            TreeNode node = TvCatTree.SelectedNode;
+            if (node == null)
+            {
+                return;
+            }
+
+            Cat cat = node.Tag as Cat;
+            if (cat == null || cat.Id == EPwd.DEF_CAT_ID)
+            {
+                return;
+            }
+
+            PngSeeker editor = new PngSeeker(_UserModel, _DataModel.CatDir);
+            editor.InitOnce(16);
+            editor.CallBackHandler = new AmonHandler<Png>(ChangeImgByCat);
+            BeanUtil.CenterToParent(editor, this);
+            editor.ShowDialog(this);
         }
 
         private void ChangeImgByCat(Png png)
@@ -960,6 +781,23 @@ namespace Me.Amon.Pwd
 
             LbKeyList.Refresh();
         }
+
+        public void KeyMoveto(object sender, EventArgs e)
+        {
+            CatView view = new CatView(_UserModel);
+            view.Init(IlCatTree);
+            view.CallBack = new AmonHandler<string>(ChangeCatByKey);
+            BeanUtil.CenterToParent(view, this);
+            view.ShowDialog(this);
+        }
+
+        public void KeyHistory(object sender, EventArgs e)
+        {
+            LogEdit edit = new LogEdit(this);
+            edit.Init(_UserModel, _SafeModel);
+            BeanUtil.CenterToParent(edit, this);
+            edit.Show(this);
+        }
         #endregion
 
         #region 属性处理
@@ -1010,16 +848,49 @@ namespace Me.Amon.Pwd
             }
         }
         #endregion
+
+        #region 文件菜单
+        public void LockForm()
+        {
+            new AuthRc(_UserModel, this).ShowDialog(this);
+        }
+
+        public void HideForm()
+        {
+            if (_SafeModel.Modified)
+            {
+                if (DialogResult.Yes != Main.ShowConfirm("您有数据尚未保存，确认要隐藏窗口吗？"))
+                {
+                    return;
+                }
+            }
+
+            SaveLayout();
+            Visible = false;
+        }
+
+        public void ExitForm()
+        {
+            SaveLayout();
+
+            Close();
+        }
+        #endregion
+
+        #region 编辑菜单
         #endregion
 
         #region 视图菜单
         #region 模式切换
+        /// <summary>
+        /// 专业模式
+        /// </summary>
         public void ShowAPro()
         {
             if (_ProView == null)
             {
                 _ProView = new APro();
-                _ProView.Name = "Pro";
+                _ProView.Name = EPwd.PATTERN_PRO;
                 _ProView.Init(this, _SafeModel, _DataModel, _ViewModel);
             }
 
@@ -1036,12 +907,15 @@ namespace Me.Amon.Pwd
             _PwdView.InitView(PlBody);
         }
 
+        /// <summary>
+        /// 向导模式
+        /// </summary>
         public void ShowAWiz()
         {
             if (_WizView == null)
             {
                 _WizView = new AWiz();
-                _WizView.Name = "Wiz";
+                _WizView.Name = EPwd.PATTERN_WIZ;
                 _WizView.Init(this, _SafeModel, _DataModel, _ViewModel);
             }
 
@@ -1058,12 +932,15 @@ namespace Me.Amon.Pwd
             _PwdView.InitView(PlBody);
         }
 
+        /// <summary>
+        /// 记事模式
+        /// </summary>
         public void ShowAPad()
         {
             //if (_PadView == null)
             //{
             //    _PadView = new APad();
-            //    _PadView.Name = "Pad";
+            //    _PadView.Name = EPwd.PATTERN_PAD;
             //    _PadView.Init(this, _SafeModel, _DataModel);
             //}
 
@@ -1086,6 +963,9 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 布局调整
+        /// <summary>
+        /// 菜单栏是否可见
+        /// </summary>
         public bool MenuBarVisible
         {
             get
@@ -1099,6 +979,9 @@ namespace Me.Amon.Pwd
             }
         }
 
+        /// <summary>
+        /// 工具栏是否可见
+        /// </summary>
         public bool ToolBarVisible
         {
             get
@@ -1112,6 +995,9 @@ namespace Me.Amon.Pwd
             }
         }
 
+        /// <summary>
+        /// 状态栏是否可见
+        /// </summary>
         public bool EchoBarVisible
         {
             get
@@ -1125,6 +1011,9 @@ namespace Me.Amon.Pwd
             }
         }
 
+        /// <summary>
+        /// 搜索栏是否可见
+        /// </summary>
         public bool FindBarVisible
         {
             get
@@ -1138,6 +1027,9 @@ namespace Me.Amon.Pwd
             }
         }
 
+        /// <summary>
+        /// 导航面板是否可见
+        /// </summary>
         public bool NavPaneVisible
         {
             get
@@ -1151,6 +1043,9 @@ namespace Me.Amon.Pwd
             }
         }
 
+        /// <summary>
+        /// 类别目录是否可见
+        /// </summary>
         public bool CatTreeVisible
         {
             get
@@ -1171,6 +1066,9 @@ namespace Me.Amon.Pwd
             }
         }
 
+        /// <summary>
+        /// 口令列表是否可见
+        /// </summary>
         public bool KeyListVisible
         {
             get
@@ -1194,7 +1092,10 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 数据菜单
-        public void DoFind()
+        /// <summary>
+        /// 查找
+        /// </summary>
+        public void ShowFind()
         {
             if (!FbFind.Visible)
             {
@@ -1204,21 +1105,17 @@ namespace Me.Amon.Pwd
             FbFind.Focus();
         }
 
-        public void DoSync()
+        /// <summary>
+        /// 同步
+        /// </summary>
+        public void SyncData()
         {
             MessageBox.Show("同步功能尚在完善中，敬请期待！");
         }
 
-        public void DoBackup(string file)
-        {
-            _UserModel.DBA.CloseConnect();
-            BeanUtil.DoZip(file, _UserModel.Home);
-        }
-
-        public void DoResuma(string file)
-        {
-        }
-
+        /// <summary>
+        /// 本地备份
+        /// </summary>
         public void LocaleBackup()
         {
             if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
@@ -1239,22 +1136,34 @@ namespace Me.Amon.Pwd
             DoBackup(fd.FileName);
         }
 
+        /// <summary>
+        /// 远程备份
+        /// </summary>
         public void RemoteBackup()
         {
             MessageBox.Show("远程备份功能尚在完善中，敬请期待！");
         }
 
+        /// <summary>
+        /// 本地恢复
+        /// </summary>
         public void LocaleResuma()
         {
             MessageBox.Show("本地恢复功能尚在完善中，敬请期待！");
         }
 
+        /// <summary>
+        /// 远程恢复
+        /// </summary>
         public void RemoteResume()
         {
             MessageBox.Show("远程恢复功能尚在完善中，敬请期待！");
         }
 
         #region 数据导出
+        /// <summary>
+        /// 导出为TXT
+        /// </summary>
         public void ExportTxt()
         {
             if (_SafeModel.Modified)
@@ -1288,6 +1197,9 @@ namespace Me.Amon.Pwd
             }
         }
 
+        /// <summary>
+        /// 导出为XML
+        /// </summary>
         public void ExportXml()
         {
             if (_SafeModel.Modified && DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
@@ -1354,6 +1266,9 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 数据导入
+        /// <summary>
+        /// 导入TXT数据
+        /// </summary>
         public void ImportTxt()
         {
             if (_SafeModel.Modified)
@@ -1402,7 +1317,7 @@ namespace Me.Amon.Pwd
                         if (_SafeModel.ImportByTxt(line))
                         {
                             _SafeModel.Key.CatId = cat.Id;
-                            ImportKey();
+                            DoImportKey();
                         }
                     }
                     line = reader.ReadLine();
@@ -1412,6 +1327,9 @@ namespace Me.Amon.Pwd
             DoListKey(cat.Id);
         }
 
+        /// <summary>
+        /// 导出XML数据
+        /// </summary>
         public void ImportXml()
         {
             if (_SafeModel.Modified && DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
@@ -1456,7 +1374,7 @@ namespace Me.Amon.Pwd
                     if (_SafeModel.ImportByXml(reader))
                     {
                         _SafeModel.Key.CatId = cat.Id;
-                        ImportKey();
+                        DoImportKey();
                     }
                 }
             }
@@ -1464,6 +1382,9 @@ namespace Me.Amon.Pwd
             DoListKey(cat.Id);
         }
 
+        /// <summary>
+        /// 导出VCF数据
+        /// </summary>
         public void ImportVcf()
         {
             if (_SafeModel.Modified && DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
@@ -1675,10 +1596,9 @@ namespace Me.Amon.Pwd
                 _SafeModel.Append(att);
             }
 
-            ImportKey();
+            DoImportKey();
             DoListKey(cat.Id);
         }
-        #endregion
 
         public void ImportOld()
         {
@@ -1725,6 +1645,7 @@ namespace Me.Amon.Pwd
             }
         }
         #endregion
+        #endregion
 
         #region 用户菜单
         #region 记录安全
@@ -1746,6 +1667,7 @@ namespace Me.Amon.Pwd
 
         public void SkeyEdit()
         {
+            MessageBox.Show("安全口令功能尚在完善中，敬请期待！");
         }
         #endregion
 
@@ -1777,6 +1699,9 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 帮助菜单
+        /// <summary>
+        /// 帮助
+        /// </summary>
         public void ShowHelp()
         {
             try
@@ -1789,6 +1714,9 @@ namespace Me.Amon.Pwd
             }
         }
 
+        /// <summary>
+        /// 快捷键
+        /// </summary>
         public void ShowShortCuts()
         {
             DataTable dt = new DataTable();
@@ -1804,11 +1732,171 @@ namespace Me.Amon.Pwd
             keys.Show(this);
         }
 
+        /// <summary>
+        /// 关于
+        /// </summary>
         public void ShowAbout()
         {
             new About().ShowDialog(this);
         }
         #endregion
+        #endregion
+
+        #region 私有函数
+        /// <summary>
+        /// 类别视图初始化
+        /// </summary>
+        private void InitCat()
+        {
+            IlCatTree.Images.Add(EPwd.DEF_CAT_IMG, BeanUtil.NaN16);
+
+            Cat cat = new Cat { Id = EPwd.DEF_CAT_ID, Text = "默认类别", Tips = "默认类别", Icon = "Amon" };
+            IlCatTree.Images.Add(cat.Icon, Resources.Logo);
+            _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Icon, SelectedImageKey = cat.Icon };
+            _RootNode.Tag = cat;
+            TvCatTree.Nodes.Add(_RootNode);
+            DoInitCat(_RootNode);
+            _RootNode.Expand();
+        }
+
+        private void DoInitCat(TreeNode root)
+        {
+            foreach (Cat cat in _UserModel.DBA.ListCat(root.Name))
+            {
+                TreeNode node = new TreeNode();
+                node.Name = cat.Id;
+                node.Text = cat.Text;
+                node.ToolTipText = cat.Tips;
+                node.Tag = cat;
+                if (CharUtil.IsValidateHash(cat.Icon))
+                {
+                    IlCatTree.Images.Add(cat.Icon, BeanUtil.ReadImage(Path.Combine(_DataModel.CatDir, cat.Icon + ".png"), BeanUtil.NaN16));
+                    node.ImageKey = cat.Icon;
+                }
+                else
+                {
+                    node.ImageKey = EPwd.DEF_CAT_IMG;
+                }
+                node.SelectedImageKey = node.ImageKey;
+
+                root.Nodes.Add(node);
+                if (!cat.IsLeaf)
+                {
+                    DoInitCat(node);
+                }
+            }
+        }
+
+        private void InitKey()
+        {
+            _KeyIcon = new Dictionary<string, Image>();
+            _KeyHint = new Dictionary<string, Image>();
+        }
+
+        private void DoInitKey(IList<Key> keys)
+        {
+            LbKeyList.Items.Clear();
+            _KeyIcon.Clear();
+            _KeyHint.Clear();
+
+            foreach (Key key in keys)
+            {
+                LbKeyList.Items.Add(key);
+
+                if (CharUtil.IsValidateHash(key.IcoName))
+                {
+                    if (CharUtil.IsValidateHash(key.IcoPath))
+                    {
+                        _KeyIcon[key.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoPath, key.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
+                    }
+                    else
+                    {
+                        _KeyIcon[key.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
+                    }
+                }
+                else
+                {
+                    _KeyIcon[key.IcoName] = BeanUtil.NaN24;
+                }
+
+                _KeyHint[key.GtdId] = CharUtil.IsValidateHash(key.GtdId) ? Resources.Hint : BeanUtil.NaN16;
+            }
+        }
+
+        private void DoListKey(string catId)
+        {
+            IList<Key> keys = _UserModel.DBA.ListKey(catId);
+            DoInitKey(keys);
+        }
+
+        private void DoFindKey(string meta)
+        {
+            DoInitKey(_UserModel.DBA.FindKey(meta));
+        }
+
+        private void DoImportKey()
+        {
+            _SafeModel.Encode();
+
+            _SafeModel.Key.AccessTime = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
+            _UserModel.DBA.SaveVcs(_SafeModel.Key);
+        }
+
+        /// <summary>
+        /// 备份
+        /// </summary>
+        /// <param name="file"></param>
+        private void DoBackup(string file)
+        {
+            _UserModel.DBA.CloseConnect();
+            BeanUtil.DoZip(file, _UserModel.Home);
+        }
+
+        /// <summary>
+        /// 恢复
+        /// </summary>
+        /// <param name="file"></param>
+        private void DoResuma(string file)
+        {
+        }
+
+        private void LoadLayout()
+        {
+            Location = new Point(_ViewModel.WindowLocX, _ViewModel.WindowLocY);
+            ClientSize = new Size(_ViewModel.WindowDimW, _ViewModel.WindowDimH);
+
+            HSplit.SplitterDistance = _ViewModel.HSplitDistance;
+            HSplit.Panel1Collapsed = !_ViewModel.NavPaneVisible;
+
+            VSplit.SplitterDistance = _ViewModel.VSplitDistance;
+
+            MbMenu.Visible = _ViewModel.MenuBarVisible;
+            TbTool.Visible = _ViewModel.ToolBarVisible;
+            SsEcho.Visible = _ViewModel.EchoBarVisible;
+            FbFind.Visible = _ViewModel.FindBarVisible;
+        }
+
+        private void SaveLayout()
+        {
+            _ViewModel.WindowLocX = Location.X;
+            _ViewModel.WindowLocY = Location.Y;
+            _ViewModel.WindowDimW = ClientSize.Width;
+            _ViewModel.WindowDimH = ClientSize.Height;
+
+            _ViewModel.HSplitDistance = HSplit.SplitterDistance;
+            _ViewModel.NavPaneVisible = !HSplit.Panel1Collapsed;
+
+            _ViewModel.VSplitDistance = VSplit.SplitterDistance;
+            _ViewModel.CatTreeVisible = !VSplit.Panel1Collapsed;
+            _ViewModel.KeyListVisible = !VSplit.Panel2Collapsed;
+
+            _ViewModel.MenuBarVisible = MbMenu.Visible;
+            _ViewModel.ToolBarVisible = TbTool.Visible;
+            _ViewModel.EchoBarVisible = SsEcho.Visible;
+            _ViewModel.FindBarVisible = FbFind.Visible;
+
+            _ViewModel.Save();
+        }
         #endregion
     }
 }

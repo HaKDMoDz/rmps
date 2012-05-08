@@ -368,10 +368,10 @@
     <Item Type="normal" Text="删除类别" ActionId="delete-cat"/>
     <Line/>
     <Item Type="normal" Text="上移一行">
-      <Action Class="Me.Amon.Pwd.E._Cat.ForwardAction"/>
+      <Action Class="Me.Amon.Pwd.E._Cat.MoveUpAction"/>
     </Item>
     <Item Type="normal" Text="下移一行">
-      <Action Class="Me.Amon.Pwd.E._Cat.BackwardAction"/>
+      <Action Class="Me.Amon.Pwd.E._Cat.MoveDownAction"/>
     </Item>
     <Item Type="normal" Text="提升一级">
       <Action Class="Me.Amon.Pwd.E._Cat.PromotionAction"/>
@@ -379,62 +379,58 @@
     <Item Type="normal" Text="缩进一级">
       <Action Class="Me.Amon.Pwd.E._Cat.DemotionAction"/>
     </Item>
-    <Line/>
-    <Item Type="normal" Text="导入数据">
-      <Action Id="import" Class="Me.Amon.Pwd.E.Data.ImportAction"/>
-    </Item>
   </Popmenu>
   <Popmenu Id="AKey">
     <Item Type="normal" Text="添加记录" ActionId="append-key"/>
     <Item Type="normal" Text="删除记录" ActionId="delete-key"/>
     <Line/>
-    <Menu Text="标记为：">
-      <Item Type="toggle" Text="默认(@0)" Group="label" ActionId="change-label" Command="0">
+    <Menu Text="标记为">
+      <Item Type="toggle" Text="默认(@0)" Group="key-label" ActionId="change-label" Command="key-label:0">
         <Icon cache-Id="label0" path="var:keys-label0"/>
       </Item>
       <Line/>
-      <Item Type="toggle" Text="常使用(@1)" Group="label" ActionId="change-label" Command="1">
+      <Item Type="toggle" Text="常使用(@1)" Group="key-label" ActionId="change-label" Command="key-label:1">
         <Icon cache-Id="label1" path="var:keys-label1"/>
       </Item>
-      <Item Type="toggle" Text="待注册(@2)" Group="label" ActionId="change-label" Command="2">
+      <Item Type="toggle" Text="待注册(@2)" Group="key-label" ActionId="change-label" Command="key-label:2">
         <Icon cache-Id="label2" path="var:keys-label2"/>
       </Item>
-      <Item Type="toggle" Text="待认证(@3)" Group="label" ActionId="change-label" Command="3">
+      <Item Type="toggle" Text="待认证(@3)" Group="key-label" ActionId="change-label" Command="key-label:3">
         <Icon cache-Id="label3" path="var:keys-label3"/>
       </Item>
-      <Item Type="toggle" Text="待激活(@4)" Group="label" ActionId="change-label" Command="4">
+      <Item Type="toggle" Text="待激活(@4)" Group="key-label" ActionId="change-label" Command="key-label:4">
         <Icon cache-Id="label4" path="var:keys-label4"/>
       </Item>
-      <Item Type="toggle" Text="仅测试(@5)" Group="label" ActionId="change-label" Command="5">
+      <Item Type="toggle" Text="仅测试(@5)" Group="key-label" ActionId="change-label" Command="key-label:5">
         <Icon cache-Id="label5" path="var:keys-label5"/>
       </Item>
-      <Item Type="toggle" Text="已过期(@6)" Group="label" ActionId="change-label" Command="6">
+      <Item Type="toggle" Text="已过期(@6)" Group="key-label" ActionId="change-label" Command="key-label:6">
         <Icon cache-Id="label6" path="var:keys-label6"/>
       </Item>
-      <Item Type="toggle" Text="已丢失(@7)" Group="label" ActionId="change-label" Command="7">
+      <Item Type="toggle" Text="已丢失(@7)" Group="key-label" ActionId="change-label" Command="key-label:7">
         <Icon cache-Id="label7" path="var:keys-label7"/>
       </Item>
-      <Item Type="toggle" Text="被禁用(@8)" Group="label" ActionId="change-label" Command="8">
+      <Item Type="toggle" Text="被禁用(@8)" Group="key-label" ActionId="change-label" Command="key-label:8">
         <Icon cache-Id="label8" path="var:keys-label8"/>
       </Item>
-      <Item Type="toggle" Text="已删除(@9)" Group="label" ActionId="change-label" Command="9">
+      <Item Type="toggle" Text="已删除(@9)" Group="key-label" ActionId="change-label" Command="key-label:9">
         <Icon cache-Id="label9" path="var:keys-label9"/>
       </Item>
     </Menu>
     <Menu Text="重要性：">
-      <Item Type="toggle" Text="最高" Group="major" ActionId="change-major" Command="2">
+      <Item Type="toggle" Text="最高" Group="key-major" ActionId="change-major" Command="key-major:2">
         <Icon cache-Id="major2" path="var:keys-major+2"/>
       </Item>
-      <Item Type="toggle" Text="高" Group="major" ActionId="change-major" Command="1">
+      <Item Type="toggle" Text="高" Group="key-major" ActionId="change-major" Command="key-major:1">
         <Icon cache-Id="major1" path="var:keys-major+1"/>
       </Item>
-      <Item Type="toggle" Text="正常" Group="major" ActionId="change-major" Command="0">
+      <Item Type="toggle" Text="正常" Group="key-major" ActionId="change-major" Command="key-major:0">
         <Icon cache-Id="major0" path="var:keys-major0"/>
       </Item>
-      <Item Type="toggle" Text="低" Group="major" ActionId="change-major" Command="-1">
+      <Item Type="toggle" Text="低" Group="key-major" ActionId="change-major" Command="key-major:-1">
         <Icon cache-Id="major-1" path="var:keys-major-1"/>
       </Item>
-      <Item Type="toggle" Text="最低" Group="major" ActionId="change-major" Command="-2">
+      <Item Type="toggle" Text="最低" Group="key-major" ActionId="change-major" Command="key-major:-2">
         <Icon cache-Id="major-2" path="var:keys-major-2"/>
       </Item>
     </Menu>
