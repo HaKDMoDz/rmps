@@ -82,6 +82,7 @@ namespace Me.Amon.Pwd
             _MenuBar.Load(Path.Combine(_UserModel.Home, "Pwd.xml"));
             _MenuBar.GetMenuBar("APwd", MbMenu);
             _MenuBar.GetToolBar("APwd", TbTool);
+            _MenuBar.GetStrokes("APwd");
             #endregion
 
             InitCat();
@@ -342,16 +343,16 @@ namespace Me.Amon.Pwd
         {
             foreach (KeyStroke<APwd> stroke in _MenuBar.KeyStrokes)
             {
-                if (stroke.Action == null)
+                if (stroke.Action == null ||
+                    e.Control ^ stroke.Control ||
+                    e.Shift ^ stroke.Shift ||
+                    e.Alt ^ stroke.Alt ||
+                    e.KeyCode != stroke.Code)
                 {
                     continue;
                 }
-                if (e.KeyCode == stroke.Code && !(e.Control ^ stroke.Control) &&
-                    !(e.Shift ^ stroke.Shift) && !(e.Alt ^ stroke.Alt))
-                {
-                    stroke.Action.EventHandler(stroke, null);
-                    e.Handled = true;
-                }
+                stroke.Action.EventHandler(stroke, null);
+                e.Handled = true;
             }
         }
 
