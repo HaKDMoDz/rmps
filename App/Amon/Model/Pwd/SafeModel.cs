@@ -245,7 +245,7 @@ namespace Me.Amon.Model.Pwd
             int order = 1;
             foreach (LibDetail detail in header.Details)
             {
-                Att att = Att.GetInstance(detail.Type, detail.Name, detail.Data);
+                Att att = Att.GetInstance(detail.Type, detail.Text, detail.Data);
                 att.Id = (_Key.AttIndex++).ToString();
                 att.Order = (order++).ToString();
                 _AttList.Add(att);
@@ -316,8 +316,9 @@ namespace Me.Amon.Model.Pwd
                 {
                     return;
                 }
-                Att item = Att.GetInstance(int.Parse(tmp[1]), tmp[2], tmp[3]);
+                Att item = Att.GetInstance(int.Parse(tmp[1]), tmp[3], tmp[4]);
                 item.Id = tmp[0];
+                item.Name = tmp[2];
                 item.Order = (++i).ToString();
                 item.DecodeSpec(tmp, 4);
                 list.Add(item);
@@ -361,6 +362,7 @@ namespace Me.Amon.Model.Pwd
                 buf.Append(item.Id).Append(Att.SP_SQL_KV);
                 buf.Append(item.Type).Append(Att.SP_SQL_KV);
                 buf.Append(item.Name).Append(Att.SP_SQL_KV);
+                buf.Append(item.Text).Append(Att.SP_SQL_KV);
                 buf.Append(item.Data).Append(Att.SP_SQL_KV);
                 buf.Append(item.EncodeSpec(Att.SP_SQL_KV));
                 buf.Append(Att.SP_SQL_EE);

@@ -67,7 +67,7 @@ namespace Me.Amon.Pwd.V.Wiz
                 return false;
             }
 
-            _Label.Text = _Att.Name;
+            _Label.Text = _Att.Text;
             if (CharUtil.IsValidateLong(_Att.Data))
             {
                 DtData.Value = DateTime.FromFileTimeUtc(long.Parse(_Att.Data));

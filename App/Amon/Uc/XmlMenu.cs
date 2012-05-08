@@ -278,12 +278,12 @@ namespace Me.Amon.Uc
             toolBar.Name = toolId;
             foreach (XmlNode node in root.ChildNodes)
             {
-                if ("Item" == node.Name)
+                if (EApp.XML_MENU_ITEM == node.Name)
                 {
                     toolBar.Items.Add(createButton(node));
                     continue;
                 }
-                if ("Line" == node.Name)
+                if (EApp.XML_MENU_LINE == node.Name)
                 {
                     toolBar.Items.Add(new ToolStripSeparator());
                     continue;
@@ -308,17 +308,17 @@ namespace Me.Amon.Uc
 
             foreach (XmlNode node in root.ChildNodes)
             {
-                if ("menu" == node.Name)
+                if (EApp.XML_MENU_MENU == node.Name)
                 {
                     menuPop.Items.Add(createMenu(node, null));
                     continue;
                 }
-                if ("item" == node.Name)
+                if (EApp.XML_MENU_ITEM == node.Name)
                 {
                     menuPop.Items.Add(createItem(node, null));
                     continue;
                 }
-                if ("seperator" == node.Name)
+                if (EApp.XML_MENU_LINE == node.Name)
                 {
                     menuPop.Items.Add(new ToolStripSeparator());
                     continue;
@@ -342,17 +342,17 @@ namespace Me.Amon.Uc
 
             foreach (XmlNode node in root.ChildNodes)
             {
-                if ("menu" == node.Name)
+                if (EApp.XML_MENU_MENU == node.Name)
                 {
                     menu.Items.Add(createMenu(node, action));
                     continue;
                 }
-                if ("item" == node.Name)
+                if (EApp.XML_MENU_ITEM == node.Name)
                 {
                     menu.Items.Add(createItem(node, action));
                     continue;
                 }
-                if ("seperator" == node.Name)
+                if (EApp.XML_MENU_LINE == node.Name)
                 {
                     menu.Items.Add(new ToolStripSeparator());
                     continue;
@@ -376,17 +376,17 @@ namespace Me.Amon.Uc
 
             foreach (XmlNode node in root.ChildNodes)
             {
-                if ("menu" == node.Name)
+                if (EApp.XML_MENU_MENU == node.Name)
                 {
                     menu.DropDownItems.Add(createMenu(node, action));
                     continue;
                 }
-                if ("item" == node.Name)
+                if (EApp.XML_MENU_ITEM == node.Name)
                 {
                     menu.DropDownItems.Add(createItem(node, action));
                     continue;
                 }
-                if ("seperator" == node.Name)
+                if (EApp.XML_MENU_LINE == node.Name)
                 {
                     menu.DropDownItems.Add(new ToolStripSeparator());
                     continue;
@@ -440,17 +440,17 @@ namespace Me.Amon.Uc
 
             foreach (XmlNode node in parent.ChildNodes)
             {
-                if ("Menu" == node.Name)
+                if (EApp.XML_MENU_MENU == node.Name)
                 {
                     menu.DropDownItems.Add(createMenu(node, action));
                     continue;
                 }
-                if ("Item" == node.Name)
+                if (EApp.XML_MENU_ITEM == node.Name)
                 {
                     menu.DropDownItems.Add(createItem(node, action));
                     continue;
                 }
-                if ("Line" == node.Name)
+                if (EApp.XML_MENU_LINE == node.Name)
                 {
                     menu.DropDownItems.Add(new ToolStripSeparator());
                     continue;
@@ -706,14 +706,14 @@ namespace Me.Amon.Uc
         //                    {
         //                        continue;
         //                    }
-        //                    java.util.List<?> items = look.elements("item");
+        //                    java.util.List<?> items = look.elements(EApp.XML_MENU_ITEM);
         //                    if (items == null || items.size() < 1)
         //                    {
         //                        continue;
         //                    }
         //                    if (items.size() == 1)
         //                    {
-        //                        XmlNode element = look.element("item");
+        //                        XmlNode element = look.element(EApp.XML_MENU_ITEM);
 
         //                        item = new javax.swing.JCheckBoxMenuItem();
         //                        item.addActionListener(action);

@@ -117,15 +117,15 @@ namespace Me.Amon.Pwd
         /// 
         /// </summary>
         /// <param name="type"></param>
-        /// <param name="name"></param>
+        /// <param name="text"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public static Att GetInstance(int type, string name, string data)
+        public static Att GetInstance(int type, string text, string data)
         {
             Att item = GetInstance(type);
             if (item != null)
             {
-                item.Name = name;
+                item.Text = text;
                 item.Data = data;
             }
             return item;

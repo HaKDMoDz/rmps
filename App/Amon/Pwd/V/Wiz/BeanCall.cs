@@ -63,7 +63,7 @@ namespace Me.Amon.Pwd.V.Wiz
             _Att = att;
             if (_Att != null)
             {
-                _Label.Text = _Att.Name;
+                _Label.Text = _Att.Text;
                 TbData.Text = _Att.Data;
             }
             return true;

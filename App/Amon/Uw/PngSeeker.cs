@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Event;
 using Me.Amon.Model;
+using Me.Amon.Pwd;
 using Me.Amon.Util;
 
 namespace Me.Amon.Uw
@@ -56,7 +57,7 @@ namespace Me.Amon.Uw
             }
         }
 
-        public AmonHandler<Pwd.Png> CallBackHandler { get; set; }
+        public AmonHandler<Png> CallBackHandler { get; set; }
 
         private void BtAppend_Click(object sender, EventArgs e)
         {
@@ -75,7 +76,7 @@ namespace Me.Amon.Uw
             if (CallBackHandler != null)
             {
                 var item = LvPng.SelectedItems[0];
-                CallBackHandler.Invoke(new Pwd.Png { Path = _HomeDir, File = item.ImageKey, Image = IlPng.Images[item.ImageKey] });
+                CallBackHandler.Invoke(new Png { Path = _HomeDir, File = item.ImageKey, Image = IlPng.Images[item.ImageKey] });
             }
             Close();
         }
@@ -95,7 +96,7 @@ namespace Me.Amon.Uw
             if (CallBackHandler != null)
             {
                 var item = LvPng.SelectedItems[0];
-                CallBackHandler.Invoke(new Pwd.Png { Path = _HomeDir, File = item.ImageKey, Image = IlPng.Images[item.ImageKey] });
+                CallBackHandler.Invoke(new Png { Path = _HomeDir, File = item.ImageKey, Image = IlPng.Images[item.ImageKey] });
             }
             Close();
         }

@@ -151,6 +151,7 @@
             // 
             // TvCatTree
             // 
+            this.TvCatTree.ContextMenuStrip = this.CmCat;
             this.TvCatTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TvCatTree.ImageIndex = 0;
             this.TvCatTree.ImageList = this.IlCatTree;
@@ -169,6 +170,7 @@
             // 
             // LbKeyList
             // 
+            this.LbKeyList.ContextMenuStrip = this.CmKey;
             this.LbKeyList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LbKeyList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.LbKeyList.FormattingEnabled = true;
@@ -190,6 +192,7 @@
             // 
             // FbFind
             // 
+            this.FbFind.APwd = null;
             this.FbFind.Dock = System.Windows.Forms.DockStyle.Top;
             this.FbFind.Location = new System.Drawing.Point(0, 0);
             this.FbFind.Name = "FbFind";
