@@ -10,5 +10,8 @@ namespace Me.Amon.Pwd
         public const string PATTERN_WIZ = "wiz";
 
         public const string PATTERN_PAD = "pad";
+
+        public const string KEY_LABEL = "key-label";
+        public const string KEY_MAJOR = "key-major";
     }
 }

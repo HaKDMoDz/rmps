@@ -205,8 +205,16 @@ namespace Me.Amon.Pwd
             y -= 16;
             img = _KeyHint.ContainsKey(rec.GtdId) ? _KeyHint[rec.GtdId] : BeanUtil.NaN16;
             e.Graphics.DrawImage(img, x - 48, y);
-            //e.Graphics.DrawImage(_ImgLabels[rec.Label], x - 32, y);
-            //e.Graphics.DrawImage(_ImgMajors[rec.Major + 2], x - 16, y);
+            img = _ViewModel.GetImage(EPwd.KEY_LABEL + rec.Label);
+            if (img != null)
+            {
+                e.Graphics.DrawImage(img, x - 32, y);
+            }
+            img = _ViewModel.GetImage(EPwd.KEY_MAJOR + (rec.Major + 2));
+            if (img != null)
+            {
+                e.Graphics.DrawImage(img, x - 16, y);
+            }
         }
 
         /// <summary>
@@ -359,7 +367,16 @@ namespace Me.Amon.Pwd
         {
             _PwdView.ShowData();
 
-            _XmlMenu.GetGroup("");
+            ItemGroup group = _XmlMenu.GetGroup(EPwd.KEY_LABEL);
+            if (group != null)
+            {
+                group.Checked(key.Label.ToString());
+            }
+            group = _XmlMenu.GetGroup(EPwd.KEY_MAJOR);
+            if (group != null)
+            {
+                group.Checked(key.Major.ToString());
+            }
         }
         #endregion
 

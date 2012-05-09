@@ -437,6 +437,8 @@ namespace Me.Amon.Uc
             processText(parent, menu);
             processTips(parent, menu);
             processIcon(parent, menu);
+            processEnabled(parent, menu);
+            processVisible(parent, menu);
 
             foreach (XmlNode node in parent.ChildNodes)
             {

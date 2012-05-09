@@ -62,7 +62,7 @@ namespace Me.Amon.Pwd._Log
             for (int i = Att.HEAD_SIZE; i < _AttList.Count; i += 1)
             {
                 temp = _AttList[i];
-                buffer.Append(temp.Name).Append("：").Append(temp.Data).Append(Environment.NewLine);
+                buffer.Append(temp.Text).Append("：").Append(temp.Data).Append(Environment.NewLine);
             }
             TbLog.Text = buffer.ToString();
         }

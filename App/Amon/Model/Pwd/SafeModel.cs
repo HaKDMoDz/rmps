@@ -189,7 +189,7 @@ namespace Me.Amon.Model.Pwd
         public GuidAtt InitGuid()
         {
             GuidAtt guid = new GuidAtt { Order = "模板" };
-            guid.Name = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
+            guid.Text = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
             guid.Id = (_Key.AttIndex++).ToString();
             _AttList.Add(guid);
             return guid;
@@ -276,27 +276,27 @@ namespace Me.Amon.Model.Pwd
 
             // Guid
             GuidAtt guid = new GuidAtt();
-            guid.Name = _Key.RegTime;
+            guid.Text = _Key.RegTime;
             guid.Data = _Key.LibId;
             list.Add(guid);
 
             // MetaItem
             MetaAtt meta = new MetaAtt();
-            meta.Name = _Key.Title;
+            meta.Text = _Key.Title;
             meta.Data = _Key.MetaKey;
             list.Add(meta);
 
             // LogoItem
             LogoAtt logo = new LogoAtt();
-            logo.Name = _Key.IcoName;
+            logo.Text = _Key.IcoName;
             logo.Data = _Key.IcoMemo;
             logo.Path = _Key.IcoPath;
             list.Add(logo);
 
             // HintItem
             HintAtt hint = new HintAtt();
+            hint.Text = _Key.GtdMemo;
             hint.Data = _Key.GtdId;
-            hint.Name = _Key.GtdMemo;
             list.Add(hint);
 
             // 处理每一个数据
@@ -332,25 +332,25 @@ namespace Me.Amon.Model.Pwd
         public void Encode()
         {
             GuidAtt guid = (GuidAtt)_AttList[Att.PWDS_HEAD_GUID];
-            _Key.RegTime = guid.Name;
+            _Key.RegTime = guid.Text;
             _Key.LibId = guid.Data;
 
             // MetaItem
             MetaAtt meta = (MetaAtt)_AttList[Att.PWDS_HEAD_META];
             //Rec.Title = Rec.IsUpdate ? AAtt.SP_TPL_LS + meta.Name + '_' + header.RegDate + Att.SP_TPL_RS : meta.Name;
-            _Key.Title = meta.Name;
+            _Key.Title = meta.Text;
             _Key.MetaKey = meta.Data;
 
             // LogoItem
             LogoAtt logo = (LogoAtt)_AttList[Att.PWDS_HEAD_LOGO];
-            _Key.IcoName = logo.Name;
+            _Key.IcoName = logo.Text;
             _Key.IcoMemo = logo.Data;
             _Key.IcoPath = logo.Path;
 
             // HintItem
             HintAtt hint = (HintAtt)_AttList[Att.PWDS_HEAD_HINT];
             _Key.GtdId = hint.Data;
-            _Key.GtdMemo = hint.Name;
+            _Key.GtdMemo = hint.Text;
 
             // 字符串拼接
             StringBuilder buf = new StringBuilder();

@@ -6,9 +6,9 @@ namespace Me.Amon.Pwd.E.View
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
-            if (IApp != null)
+            if (IApp == null)
             {
-                IApp.TopMost = !IApp.TopMost;
+                return;
             }
 
             bool status = !IApp.TopMost;

@@ -26,7 +26,7 @@ namespace Me.Amon.Pwd.E._Key
                     continue;
                 }
                 string[] arr = tmp.Split(':');
-                if (arr.Length != 2)
+                if (arr.Length != 3)
                 {
                     continue;
                 }
@@ -35,10 +35,10 @@ namespace Me.Amon.Pwd.E._Key
                 {
                     continue;
                 }
-                if (CharUtil.IsValidateLong(arr[1]))
+                group.Checked(arr[1]);
+                if (CharUtil.IsValidateLong(arr[2]))
                 {
-                    group.Checked(arr[1]);
-                    IApp.ChangeKeyMajor(int.Parse(arr[1]));
+                    IApp.ChangeKeyMajor(int.Parse(arr[2]));
                 }
             }
         }

@@ -64,7 +64,7 @@ namespace Me.Amon.Pwd.V.Wiz
             {
                 return;
             }
-            TbName.Text = meta.Name;
+            TbName.Text = meta.Text;
             TbMeta.Text = meta.Data;
 
             LogoAtt logo = _SafeModel.Logo;
@@ -109,8 +109,8 @@ namespace Me.Amon.Pwd.V.Wiz
                 return false;
             }
 
-            string name = TbName.Text;
-            if (!CharUtil.IsValidate(name))
+            string text = TbName.Text;
+            if (!CharUtil.IsValidate(text))
             {
                 Main.ShowAlert("请输入记录标题！");
                 TbName.Focus();
@@ -118,9 +118,9 @@ namespace Me.Amon.Pwd.V.Wiz
             }
 
             MetaAtt meta = _SafeModel.Meta;
-            if (meta.Name != name)
+            if (meta.Text != text)
             {
-                meta.Name = name;
+                meta.Text = text;
                 meta.Modified = true;
             }
             if (meta.Data != TbMeta.Text)
@@ -131,9 +131,9 @@ namespace Me.Amon.Pwd.V.Wiz
             _SafeModel.Modified |= meta.Modified;
 
             LogoAtt logo = _SafeModel.Logo;
-            if (logo.Name != _AIco.File)
+            if (logo.Text != _AIco.File)
             {
-                logo.Name = _AIco.File;
+                logo.Text = _AIco.File;
                 logo.Modified = true;
             }
             if (logo.Path != _AIco.Path)
@@ -144,7 +144,7 @@ namespace Me.Amon.Pwd.V.Wiz
             _SafeModel.Modified |= logo.Modified;
 
             HintAtt hint = _SafeModel.Hint;
-            hint.Name = "";
+            hint.Text = "";
             if (hint.Data != TbHint.Text)
             {
                 hint.Data = TbHint.Text;
