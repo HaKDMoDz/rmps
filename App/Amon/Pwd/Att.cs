@@ -57,12 +57,12 @@ namespace Me.Amon.Pwd
         /// 
         /// </summary>
         /// <param name="type"></param>
-        /// <param name="name"></param>
+        /// <param name="text"></param>
         /// <param name="data"></param>
-        protected Att(int type, string name, string data)
+        protected Att(int type, string text, string data)
         {
             Type = type;
-            Name = name;
+            Text = text;
             Data = data;
             SetDefault();
         }
