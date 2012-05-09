@@ -48,7 +48,7 @@ namespace Me.Amon.Pwd._Lib
             _LibDetail = detail;
 
             CbType.SelectedItem = new Item { K = detail.Type.ToString() };
-            TbName.Text = _LibDetail.Name;
+            TbName.Text = _LibDetail.Text;
             TbData.Text = _LibDetail.Data;
             TbMemo.Text = _LibDetail.Memo;
         }
@@ -62,8 +62,8 @@ namespace Me.Amon.Pwd._Lib
                 CbType.Focus();
                 return;
             }
-            string name = TbName.Text.Trim();
-            if (string.IsNullOrEmpty(name))
+            string text = TbName.Text.Trim();
+            if (string.IsNullOrEmpty(text))
             {
                 MessageBox.Show("请输入属性名称！");
                 TbName.Focus();
@@ -71,7 +71,7 @@ namespace Me.Amon.Pwd._Lib
             }
 
             _LibDetail.Type = int.Parse(item.K);
-            _LibDetail.Name = name;
+            _LibDetail.Text = text;
             _LibDetail.Data = TbData.Text;
             _LibDetail.Memo = TbMemo.Text;
 

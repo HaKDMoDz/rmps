@@ -263,6 +263,7 @@
     <Compile Include="Pwd\E\_Att\AppendPassAction.cs" />
     <Compile Include="Pwd\E\_Att\AppendTextAction.cs" />
     <Compile Include="Pwd\E\_Cat\AppendCatAction.cs" />
+    <Compile Include="Pwd\E\_Cat\ChangeIcoAction.cs" />
     <Compile Include="Pwd\E\_Key\AppendKeyAction.cs" />
     <Compile Include="Pwd\E\_Att\EditClearAction.cs" />
     <Compile Include="Pwd\E\_Att\EditCopyAction.cs" />
@@ -285,6 +286,8 @@
     <Compile Include="Pwd\E\_Att\UpdatePassAction.cs" />
     <Compile Include="Pwd\E\_Att\UpdateTextAction.cs" />
     <Compile Include="Pwd\E\_Cat\UpdateCatAction.cs" />
+    <Compile Include="Pwd\E\_Key\HistoryAction.cs" />
+    <Compile Include="Pwd\E\_Key\MovetoAction.cs" />
     <Compile Include="Pwd\E\_Key\UpdateKeyAction.cs" />
     <Compile Include="Pwd\E\File\ExitAction.cs" />
     <Compile Include="Pwd\E\File\HideAction.cs" />

@@ -28,27 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LbName = new System.Windows.Forms.Label();
-            this.TbName = new System.Windows.Forms.TextBox();
+            this.LbText = new System.Windows.Forms.Label();
+            this.TbText = new System.Windows.Forms.TextBox();
             this.LbMemo = new System.Windows.Forms.Label();
             this.TbMemo = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // LbName
+            // LbText
             // 
-            this.LbName.AutoSize = true;
-            this.LbName.Location = new System.Drawing.Point(3, 6);
-            this.LbName.Name = "LbName";
-            this.LbName.Size = new System.Drawing.Size(71, 12);
-            this.LbName.TabIndex = 0;
-            this.LbName.Text = "模板名称(&N)";
+            this.LbText.AutoSize = true;
+            this.LbText.Location = new System.Drawing.Point(3, 6);
+            this.LbText.Name = "LbText";
+            this.LbText.Size = new System.Drawing.Size(71, 12);
+            this.LbText.TabIndex = 0;
+            this.LbText.Text = "模板名称(&N)";
             // 
-            // TbName
+            // TbText
             // 
-            this.TbName.Location = new System.Drawing.Point(80, 3);
-            this.TbName.Name = "TbName";
-            this.TbName.Size = new System.Drawing.Size(100, 21);
-            this.TbName.TabIndex = 1;
+            this.TbText.Location = new System.Drawing.Point(80, 3);
+            this.TbText.Name = "TbText";
+            this.TbText.Size = new System.Drawing.Size(100, 21);
+            this.TbText.TabIndex = 1;
             // 
             // LbMemo
             // 
@@ -76,8 +76,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.TbMemo);
             this.Controls.Add(this.LbMemo);
-            this.Controls.Add(this.TbName);
-            this.Controls.Add(this.LbName);
+            this.Controls.Add(this.TbText);
+            this.Controls.Add(this.LbText);
             this.Name = "LibHeader";
             this.Size = new System.Drawing.Size(231, 183);
             this.ResumeLayout(false);
@@ -87,8 +87,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Label LbName;
-        private System.Windows.Forms.TextBox TbName;
+        private System.Windows.Forms.Label LbText;
+        private System.Windows.Forms.TextBox TbText;
         private System.Windows.Forms.Label LbMemo;
         private System.Windows.Forms.TextBox TbMemo;
     }

@@ -277,8 +277,7 @@ namespace Me.Amon.Model.Pwd
             // Guid
             GuidAtt guid = new GuidAtt();
             guid.Name = _Key.RegTime;
-            guid.Data = _Key.CatId;
-            guid.SetSpec(GuidAtt.SPEC_GUID_TPLT, _Key.LibId);
+            guid.Data = _Key.LibId;
             list.Add(guid);
 
             // MetaItem
@@ -334,8 +333,7 @@ namespace Me.Amon.Model.Pwd
         {
             GuidAtt guid = (GuidAtt)_AttList[Att.PWDS_HEAD_GUID];
             _Key.RegTime = guid.Name;
-            _Key.CatId = guid.Data;
-            _Key.LibId = guid.GetSpec(GuidAtt.SPEC_GUID_TPLT);
+            _Key.LibId = guid.Data;
 
             // MetaItem
             MetaAtt meta = (MetaAtt)_AttList[Att.PWDS_HEAD_META];

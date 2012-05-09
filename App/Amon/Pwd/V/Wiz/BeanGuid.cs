@@ -148,8 +148,8 @@ namespace Me.Amon.Pwd.V.Wiz
                 return;
             }
 
-            CbLib.SelectedItem = new Lib { Id = guid.GetSpec(GuidAtt.SPEC_GUID_TPLT) };
-            PbCard.Visible = guid.GetSpec(GuidAtt.SPEC_GUID_TPLT) == IEnv.LIB_CARD;
+            CbLib.SelectedItem = new Lib { Id = guid.Data };
+            PbCard.Visible = guid.Data == IEnv.LIB_CARD;
         }
 
         public bool SaveData()
@@ -168,9 +168,9 @@ namespace Me.Amon.Pwd.V.Wiz
             }
 
             GuidAtt guid = _SafeModel.Guid;
-            if (lib.Id != guid.GetSpec(GuidAtt.SPEC_GUID_TPLT))
+            if (lib.Id != guid.Data)
             {
-                guid.SetSpec(GuidAtt.SPEC_GUID_TPLT, lib.Id);
+                guid.Data = lib.Id;
                 if (!_SafeModel.IsUpdate)
                 {
                     _SafeModel.InitData(lib);

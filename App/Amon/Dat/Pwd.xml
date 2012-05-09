@@ -317,47 +317,47 @@
   <!--魔方密码工具栏-->
   <Toolbar Id="APwd">
     <Item Type="normal" Tips="新增" IconId="" ActionId="append-key">
-      <Icon Id="file-new" path="var:menu-key-append"/>
+      <Icon Id="file-new" Path="var:menu-key-append"/>
     </Item>
     <Item Type="normal" Tips="保存" ActionId="update-key">
-      <Icon Id="file-save" path="var:menu-key-update"/>
+      <Icon Id="file-save" Path="var:menu-key-update"/>
     </Item>
     <Item Type="normal" Tips="删除" ActionId="delete-key">
-      <Icon Id="file-save" path="var:menu-key-delete"/>
+      <Icon Id="file-save" Path="var:menu-key-delete"/>
     </Item>
     <Line/>
     <Item Type="normal" Tips="剪切" ActionId="att-edit-cut">
-      <Icon Id="file-save" path="var:att-cut"/>
+      <Icon Id="file-save" Path="var:att-cut"/>
     </Item>
     <Item Type="normal" Tips="复制" ActionId="att-edit-copy">
-      <Icon Id="file-save" path="var:att-copy"/>
+      <Icon Id="file-save" Path="var:att-copy"/>
     </Item>
     <Item Type="normal" Tips="粘贴" ActionId="att-edit-paste">
-      <Icon Id="file-save" path="var:att-paste"/>
+      <Icon Id="file-save" Path="var:att-paste"/>
     </Item>
     <Item Type="normal" Tips="清除" ActionId="att-edit-clear">
-      <Icon Id="file-save" path="var:att-clear"/>
+      <Icon Id="file-save" Path="var:att-clear"/>
     </Item>
     <Line/>
     <Item Id="menubar-visible" Type="toggle" Tips="显示菜单栏" ActionId="menubar-visible">
-      <Icon Id="edit-history" path="var:menu-view-menubar"/>
+      <Icon Id="edit-history" Path="var:menu-view-menubar"/>
     </Item>
     <Item Id="echobar-visible" Type="toggle" Tips="显示状态栏" ActionId="echobar-visible">
-      <Icon Id="edit-isolate" path="var:menu-view-echobar"/>
+      <Icon Id="edit-isolate" Path="var:menu-view-echobar"/>
     </Item>
     <Item Id="findbar-visible" Type="toggle" Tips="显示查找栏" ActionId="findbar-visible">
-      <Icon Id="Menu-visible" path="var:menu-view-findbar"/>
+      <Icon Id="Menu-visible" Path="var:menu-view-findbar"/>
     </Item>
     <Line/>
     <Item Type="normal" Tips="同步" Enabled="false" ActionId="sync">
-      <Icon Id="file-help" path="var:menu-data-sync"/>
+      <Icon Id="file-help" Path="var:menu-data-sync"/>
     </Item>
     <Line/>
     <Item Type="normal" Tips="快捷键" ActionId="shortcuts">
-      <Icon Id="file-help" path="var:menu-help-hotkeys"/>
+      <Icon Id="file-help" Path="var:menu-help-hotkeys"/>
     </Item>
     <Item Type="normal" Tips="帮助" ActionId="about">
-      <Icon Id="file-help" path="var:menu-help-topic"/>
+      <Icon Id="file-help" Path="var:menu-help-topic"/>
     </Item>
   </Toolbar>
 
@@ -386,52 +386,52 @@
     <Line/>
     <Menu Text="标记为">
       <Item Type="toggle" Text="默认(@0)" Group="key-label" ActionId="change-label" Command="key-label:0">
-        <Icon cache-Id="label0" path="var:keys-label0"/>
+        <Icon Id="label0" Path="var:key-label0"/>
       </Item>
       <Line/>
       <Item Type="toggle" Text="常使用(@1)" Group="key-label" ActionId="change-label" Command="key-label:1">
-        <Icon cache-Id="label1" path="var:keys-label1"/>
+        <Icon Id="label1" Path="var:key-label1"/>
       </Item>
       <Item Type="toggle" Text="待注册(@2)" Group="key-label" ActionId="change-label" Command="key-label:2">
-        <Icon cache-Id="label2" path="var:keys-label2"/>
+        <Icon Id="label2" Path="var:key-label2"/>
       </Item>
       <Item Type="toggle" Text="待认证(@3)" Group="key-label" ActionId="change-label" Command="key-label:3">
-        <Icon cache-Id="label3" path="var:keys-label3"/>
+        <Icon Id="label3" Path="var:key-label3"/>
       </Item>
       <Item Type="toggle" Text="待激活(@4)" Group="key-label" ActionId="change-label" Command="key-label:4">
-        <Icon cache-Id="label4" path="var:keys-label4"/>
+        <Icon Id="label4" Path="var:key-label4"/>
       </Item>
       <Item Type="toggle" Text="仅测试(@5)" Group="key-label" ActionId="change-label" Command="key-label:5">
-        <Icon cache-Id="label5" path="var:keys-label5"/>
+        <Icon Id="label5" Path="var:key-label5"/>
       </Item>
       <Item Type="toggle" Text="已过期(@6)" Group="key-label" ActionId="change-label" Command="key-label:6">
-        <Icon cache-Id="label6" path="var:keys-label6"/>
+        <Icon Id="label6" Path="var:key-label6"/>
       </Item>
       <Item Type="toggle" Text="已丢失(@7)" Group="key-label" ActionId="change-label" Command="key-label:7">
-        <Icon cache-Id="label7" path="var:keys-label7"/>
+        <Icon Id="label7" Path="var:key-label7"/>
       </Item>
       <Item Type="toggle" Text="被禁用(@8)" Group="key-label" ActionId="change-label" Command="key-label:8">
-        <Icon cache-Id="label8" path="var:keys-label8"/>
+        <Icon Id="label8" Path="var:key-label8"/>
       </Item>
       <Item Type="toggle" Text="已删除(@9)" Group="key-label" ActionId="change-label" Command="key-label:9">
-        <Icon cache-Id="label9" path="var:keys-label9"/>
+        <Icon Id="label9" Path="var:key-label9"/>
       </Item>
     </Menu>
     <Menu Text="重要性：">
       <Item Type="toggle" Text="最高" Group="key-major" ActionId="change-major" Command="key-major:2">
-        <Icon cache-Id="major2" path="var:keys-major+2"/>
+        <Icon Id="major2" Path="var:key-major0"/>
       </Item>
       <Item Type="toggle" Text="高" Group="key-major" ActionId="change-major" Command="key-major:1">
-        <Icon cache-Id="major1" path="var:keys-major+1"/>
+        <Icon Id="major1" Path="var:key-major1"/>
       </Item>
       <Item Type="toggle" Text="正常" Group="key-major" ActionId="change-major" Command="key-major:0">
-        <Icon cache-Id="major0" path="var:keys-major0"/>
+        <Icon Id="major0" Path="var:key-major2"/>
       </Item>
       <Item Type="toggle" Text="低" Group="key-major" ActionId="change-major" Command="key-major:-1">
-        <Icon cache-Id="major-1" path="var:keys-major-1"/>
+        <Icon Id="major-1" Path="var:key-major3"/>
       </Item>
       <Item Type="toggle" Text="最低" Group="key-major" ActionId="change-major" Command="key-major:-2">
-        <Icon cache-Id="major-2" path="var:keys-major-2"/>
+        <Icon Id="major-2" Path="var:key-major4"/>
       </Item>
     </Menu>
     <Menu Text="排序方式">

@@ -928,28 +928,28 @@ namespace Me.Amon.Uc
             return button;
         }
 
-        private ToolStripItem processIcon(XmlNode parent, ToolStripItem button)
+        private ToolStripItem processIcon(XmlNode parent, ToolStripItem item)
         {
             XmlNode node = parent.SelectSingleNode("Icon");
             if (node == null)
             {
-                return button;
+                return item;
             }
 
-            string path = Attribute(node, "path", "");
+            string path = Attribute(node, "Path", "");
             if (!string.IsNullOrWhiteSpace(path))
             {
                 if (path.ToLower().StartsWith("var:"))
                 {
-                    button.Image = _ViewModel.GetImage(path.Substring(4));
+                    item.Image = _ViewModel.GetImage(path.Substring(4));
                 }
                 else
                 {
                     string id = Attribute(node, "id", "");
-                    button.Image = _ViewModel.GetImage(id, path);
+                    item.Image = _ViewModel.GetImage(id, path);
                 }
             }
-            return button;
+            return item;
         }
 
         private ToolStripMenuItem processGroup(XmlNode node, ToolStripMenuItem item)

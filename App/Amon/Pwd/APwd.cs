@@ -365,11 +365,29 @@ namespace Me.Amon.Pwd
 
         #region 类别处理
         /// <summary>
-        /// 添加口令
+        /// 
+        /// </summary>
+        /// <param name="cat"></param>
+        public Cat SelectedCat
+        {
+            get
+            {
+                TreeNode node = TvCatTree.SelectedNode;
+                return node != null ? node.Tag as Cat : null;
+            }
+        }
+
+        /// <summary>
+        /// 添加类别
         /// </summary>
         /// <param name="cat"></param>
         public void AppendCat(Cat cat)
         {
+            if (cat == null)
+            {
+                return;
+            }
+
             if (_LastNode == null)
             {
                 return;
@@ -391,55 +409,56 @@ namespace Me.Amon.Pwd
             _LastNode.Expand();
         }
 
-        public void UpdateCat()
+        /// <summary>
+        /// 更新类别
+        /// </summary>
+        /// <param name="cat"></param>
+        public void UpdateCat(Cat cat)
         {
-            TreeNode node = TvCatTree.SelectedNode;
-            if (node == null)
+            if (cat == null)
+            {
+                return;
+            }
+
+            Cat cur = SelectedCat;
+            if (cur == null)
             {
                 Main.ShowAlert("请选择您要更新的类别！");
                 TvCatTree.Focus();
                 return;
             }
 
-            Cat cat = node.Tag as Cat;
-            if (cat == null || cat.Id == EPwd.DEF_CAT_ID)
+            if (cur.Id == EPwd.DEF_CAT_ID)
             {
                 return;
             }
 
-            CatEdit catEdit = new CatEdit();
-            catEdit.CallBackHandler = new AmonHandler<Cat>(UpdateCatHandler);
-            catEdit.Show(this, cat);
-        }
+            cur.Text = cat.Text;
+            cur.Tips = cat.Tips;
+            cur.Memo = cat.Memo;
+            _UserModel.DBA.SaveVcs(cur);
 
-        private void UpdateCatHandler(Cat cat)
-        {
-            TreeNode node = TvCatTree.SelectedNode;
-
-            _UserModel.DBA.SaveVcs(cat);
-
-            node.Text = cat.Text;
-            node.ToolTipText = cat.Tips;
-            node.ImageKey = cat.Icon;
+            _LastNode.Text = cat.Text;
+            _LastNode.ToolTipText = cat.Tips;
+            _LastNode.ImageKey = cat.Icon;
         }
 
         public void DeleteCat()
         {
-            TreeNode node = TvCatTree.SelectedNode;
-            if (node == null)
+            Cat cat = SelectedCat;
+            if (cat == null)
             {
                 Main.ShowAlert("请选择您要删除的类别！");
                 TvCatTree.Focus();
                 return;
             }
 
-            Cat cat = node.Tag as Cat;
-            if (cat == null || cat.Id == EPwd.DEF_CAT_ID)
+            if (cat.Id == EPwd.DEF_CAT_ID)
             {
                 return;
             }
 
-            if (node.Nodes.Count > 0)
+            if (_LastNode.Nodes.Count > 0)
             {
                 Main.ShowAlert("下级类别不为空，不能删除！");
                 return;
@@ -450,8 +469,8 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            IList<Key> recs = _UserModel.DBA.ListKey(cat.Id);
-            if (recs.Count > 0)
+            IList<Key> keys = _UserModel.DBA.ListKey(cat.Id);
+            if (keys.Count > 0)
             {
                 Main.ShowAlert("类别数据不为空，不能删除！");
                 return;
@@ -459,28 +478,22 @@ namespace Me.Amon.Pwd
 
             _UserModel.DBA.DeleteVcs(cat);
 
-            TreeNode root = node.Parent;
+            TreeNode root = _LastNode.Parent;
             if (root != null)
             {
-                root.Nodes.Remove(node);
+                root.Nodes.Remove(_LastNode);
             }
         }
 
         public void CatMoveUp()
         {
-            TreeNode currNode = TvCatTree.SelectedNode;
-            if (currNode == null)
-            {
-                return;
-            }
-
-            Cat currCat = currNode.Tag as Cat;
+            Cat currCat = SelectedCat;
             if (currCat == null || currCat.Id == EPwd.DEF_CAT_ID)
             {
                 return;
             }
 
-            TreeNode prevNode = currNode.PrevNode;
+            TreeNode prevNode = _LastNode.PrevNode;
             if (prevNode == null)
             {
                 return;
@@ -492,7 +505,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            TreeNode parent = currNode.Parent;
+            TreeNode parent = _LastNode.Parent;
             if (parent == null)
             {
                 return;
@@ -502,26 +515,20 @@ namespace Me.Amon.Pwd
             _UserModel.DBA.SaveVcs(currCat);
 
             TvCatTree.SelectedNode = null;
-            parent.Nodes.Remove(currNode);
-            parent.Nodes.Insert(prevNode.Index, currNode);
-            TvCatTree.SelectedNode = currNode;
+            parent.Nodes.Remove(_LastNode);
+            parent.Nodes.Insert(prevNode.Index, _LastNode);
+            TvCatTree.SelectedNode = _LastNode;
         }
 
         public void CatMoveDown()
         {
-            TreeNode currNode = TvCatTree.SelectedNode;
-            if (currNode == null)
-            {
-                return;
-            }
-
-            Cat currCat = currNode.Tag as Cat;
+            Cat currCat = SelectedCat;
             if (currCat == null || currCat.Id == EPwd.DEF_CAT_ID)
             {
                 return;
             }
 
-            TreeNode nextNode = currNode.NextNode;
+            TreeNode nextNode = _LastNode.NextNode;
             if (nextNode == null)
             {
                 return;
@@ -533,7 +540,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            TreeNode parent = currNode.Parent;
+            TreeNode parent = _LastNode.Parent;
             if (parent == null)
             {
                 return;
@@ -543,33 +550,21 @@ namespace Me.Amon.Pwd
             _UserModel.DBA.SaveVcs(nextCat);
 
             TvCatTree.SelectedNode = null;
-            parent.Nodes.Remove(currNode);
-            parent.Nodes.Insert(nextNode.Index + 1, currNode);
-            TvCatTree.SelectedNode = currNode;
+            parent.Nodes.Remove(_LastNode);
+            parent.Nodes.Insert(nextNode.Index + 1, _LastNode);
+            TvCatTree.SelectedNode = _LastNode;
         }
 
-        public void CmiEditIcon_Click(object sender, EventArgs e)
+        public void ChangeCatIcon()
         {
-            TreeNode node = TvCatTree.SelectedNode;
-            if (node == null)
-            {
-                return;
-            }
-
-            Cat cat = node.Tag as Cat;
-            if (cat == null || cat.Id == EPwd.DEF_CAT_ID)
-            {
-                return;
-            }
-
             PngSeeker editor = new PngSeeker(_UserModel, _DataModel.CatDir);
             editor.InitOnce(16);
-            editor.CallBackHandler = new AmonHandler<Png>(ChangeImgByCat);
+            editor.CallBackHandler = new AmonHandler<Png>(ChangeCatIcon);
             BeanUtil.CenterToParent(editor, this);
             editor.ShowDialog(this);
         }
 
-        private void ChangeImgByCat(Png png)
+        public void ChangeCatIcon(Png png)
         {
             if (!CharUtil.IsValidateHash(png.File))
             {
@@ -593,7 +588,10 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 记录处理
-        public void AppendKey()
+        /// <summary>
+        /// 新增记录
+        /// </summary>
+        public void NewKey()
         {
             if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
             {
@@ -603,7 +601,10 @@ namespace Me.Amon.Pwd
             _PwdView.AppendKey();
         }
 
-        public void UpdateKey()
+        /// <summary>
+        /// 更新记录
+        /// </summary>
+        public void SaveKey()
         {
             if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
             {
@@ -614,18 +615,11 @@ namespace Me.Amon.Pwd
             {
                 if (NavPaneVisible && CatTreeVisible)
                 {
-                    TreeNode node = TvCatTree.SelectedNode;
-                    if (node == null)
+                    Cat cat = SelectedCat;
+                    if (cat == null)
                     {
                         Main.ShowAlert("请选择类别！");
                         TvCatTree.Focus();
-                        return;
-                    }
-
-                    Cat cat = node.Tag as Cat;
-                    if (cat == null)
-                    {
-                        Main.ShowAlert("系统异常，请稍后重试！");
                         return;
                     }
 
@@ -644,8 +638,8 @@ namespace Me.Amon.Pwd
 
             if (_SafeModel.IsUpdate && _SafeModel.Key.Backup)
             {
-                KeyLog recLog = _SafeModel.Key.ToLog();
-                _UserModel.DBA.SaveLog(recLog);
+                KeyLog keyLog = _SafeModel.Key.ToLog();
+                _UserModel.DBA.SaveLog(keyLog);
             }
             _SafeModel.Encode();
             _SafeModel.Key.AccessTime = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
@@ -656,6 +650,9 @@ namespace Me.Amon.Pwd
             _PwdView.ShowInfo();
         }
 
+        /// <summary>
+        /// 删除记录
+        /// </summary>
         public void DeleteKey()
         {
             if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
@@ -731,7 +728,7 @@ namespace Me.Amon.Pwd
         /// 修改当前口令的类别为指定类别
         /// </summary>
         /// <param name="catId"></param>
-        public void ChangeCatByKey(string catId)
+        public void ChangeKeyCat(string catId)
         {
             if (!CharUtil.IsValidateHash(catId))
             {
@@ -752,9 +749,9 @@ namespace Me.Amon.Pwd
         /// 修改当前口令的标签为指定标签
         /// </summary>
         /// <param name="label"></param>
-        public void ChangeLabel(int label)
+        public void ChangeKeyLabel(int label)
         {
-            if (label < 0 || label > 9)
+            if (_SafeModel.Key == null || label < 0 || label > 9)
             {
                 return;
             }
@@ -769,9 +766,9 @@ namespace Me.Amon.Pwd
         /// 修改当前口令的重要程度为指定级别
         /// </summary>
         /// <param name="major"></param>
-        public void ChangeMajor(int major)
+        public void ChangeKeyMajor(int major)
         {
-            if (major < -2 || major > 2)
+            if (_SafeModel.Key == null || major < -2 || major > 2)
             {
                 return;
             }
@@ -782,16 +779,16 @@ namespace Me.Amon.Pwd
             LbKeyList.Refresh();
         }
 
-        public void KeyMoveto(object sender, EventArgs e)
+        public void KeyMoveto()
         {
             CatView view = new CatView(_UserModel);
             view.Init(IlCatTree);
-            view.CallBack = new AmonHandler<string>(ChangeCatByKey);
+            view.CallBack = new AmonHandler<string>(ChangeKeyCat);
             BeanUtil.CenterToParent(view, this);
             view.ShowDialog(this);
         }
 
-        public void KeyHistory(object sender, EventArgs e)
+        public void KeyHistory()
         {
             LogEdit edit = new LogEdit(this);
             edit.Init(_UserModel, _SafeModel);
@@ -1638,7 +1635,7 @@ namespace Me.Amon.Pwd
                     if (!string.IsNullOrWhiteSpace(line))
                     {
                         _SafeModel.ImportByTxt(line);
-                        UpdateKey();
+                        SaveKey();
                     }
                     line = reader.ReadLine();
                 }

@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
-using Me.Amon.Pwd._Att;
 using Me.Amon.Uc;
 using Me.Amon.Util;
 
@@ -137,8 +136,8 @@ namespace Me.Amon.Pwd.V.Pro
 
             _Att = att;
 
-            CbName.SelectedItem = new Lib { Id = att.GetSpec(GuidAtt.SPEC_GUID_TPLT) };
-            PbCard.Visible = _Att.GetSpec(GuidAtt.SPEC_GUID_TPLT) == IEnv.LIB_CARD;
+            CbName.SelectedItem = new Lib { Id = _Att.Data };
+            PbCard.Visible = _Att.Data == IEnv.LIB_CARD;
             CbName.Focus();
             return true;
         }
@@ -167,9 +166,9 @@ namespace Me.Amon.Pwd.V.Pro
                 return false;
             }
 
-            if (header.Id != _Att.GetSpec(GuidAtt.SPEC_GUID_TPLT))
+            if (header.Id != _Att.Data)
             {
-                _Att.SetSpec(GuidAtt.SPEC_GUID_TPLT, header.Id);
+                _Att.Data = header.Id;
                 if (!_SafeModel.IsUpdate)
                 {
                     Att att;

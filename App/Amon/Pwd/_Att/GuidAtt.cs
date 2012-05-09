@@ -12,15 +12,13 @@
 
         public override void SetDefault()
         {
-            if (_Spec == null)
-            {
-                _Spec = new string[2];
-            }
+            //if (_Spec == null)
+            //{
+            //    _Spec = new string[2];
+            //}
 
-            _Spec[0] = SPEC_VALUE_FAIL;
-            _Spec[1] = SPEC_VALUE_NONE;
+            //_Spec[0] = SPEC_VALUE_FAIL;
+            //_Spec[1] = SPEC_VALUE_NONE;
         }
-
-        public const int SPEC_GUID_TPLT = 0;// 口令模板索引
     }
 }

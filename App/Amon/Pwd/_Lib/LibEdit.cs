@@ -43,7 +43,7 @@ namespace Me.Amon.Pwd._Lib
                 TreeNode root = new TreeNode();
                 root.Name = header.Id;
                 root.Tag = header;
-                root.Text = header.Name;
+                root.Text = header.Text;
                 root.ToolTipText = header.Memo;
                 TvLibView.Nodes.Add(root);
 
@@ -56,7 +56,7 @@ namespace Me.Amon.Pwd._Lib
                     TreeNode node = new TreeNode();
                     node.Name = detail.Id;
                     node.Tag = detail;
-                    node.Text = Att.SP_TPL_LS + detail.Name + Att.SP_TPL_RS;
+                    node.Text = Att.SP_TPL_LS + detail.Text + Att.SP_TPL_RS;
                     node.ToolTipText = detail.Memo;
                     root.Nodes.Add(node);
                 }
@@ -233,7 +233,7 @@ namespace Me.Amon.Pwd._Lib
 
             if (update)
             {
-                _Selected.Text = header.Name;
+                _Selected.Text = header.Text;
                 _Selected.ToolTipText = header.Memo;
             }
             else
@@ -243,7 +243,7 @@ namespace Me.Amon.Pwd._Lib
                 TreeNode node = new TreeNode();
                 node.Name = header.Id;
                 node.Tag = header;
-                node.Text = header.Name;
+                node.Text = header.Text;
                 node.ToolTipText = header.Memo;
                 TvLibView.Nodes.Add(node);
 
@@ -265,7 +265,7 @@ namespace Me.Amon.Pwd._Lib
 
             if (update)
             {
-                _Selected.Text = Att.SP_TPL_LS + detail.Name + Att.SP_TPL_RS;
+                _Selected.Text = Att.SP_TPL_LS + detail.Text + Att.SP_TPL_RS;
                 TreeNode root = TvLibView.SelectedNode;
             }
             else
@@ -273,7 +273,7 @@ namespace Me.Amon.Pwd._Lib
                 TreeNode node = new TreeNode();
                 node.Name = detail.Id;
                 node.Tag = detail;
-                node.Text = Att.SP_TPL_LS + detail.Name + Att.SP_TPL_RS;
+                node.Text = Att.SP_TPL_LS + detail.Text + Att.SP_TPL_RS;
                 node.ToolTipText = detail.Memo;
                 _Selected.Nodes.Add(node);
 

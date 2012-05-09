@@ -1,4 +1,7 @@
-﻿namespace Me.Amon.Pwd.E._Cat
+﻿using Me.Amon.Event;
+using Me.Amon.Pwd._Cat;
+
+namespace Me.Amon.Pwd.E._Cat
 {
     public class UpdateCatAction : APwdAction
     {
@@ -6,7 +9,9 @@
         {
             if (IApp != null)
             {
-                IApp.UpdateCat();
+                CatEdit catEdit = new CatEdit();
+                catEdit.CallBackHandler = new AmonHandler<Cat>(IApp.UpdateCat);
+                catEdit.Show(IApp.Form, IApp.SelectedCat);
             }
         }
     }
