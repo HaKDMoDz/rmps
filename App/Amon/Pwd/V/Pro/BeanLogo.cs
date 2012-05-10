@@ -46,12 +46,12 @@ namespace Me.Amon.Pwd.V.Pro
 
             if (_Att != null)
             {
-                _AIco.File = _Att.Name;
+                _AIco.File = _Att.Text;
                 _AIco.Path = _Att.Path;
 
                 TbData.Text = _Att.Data;
 
-                if (!CharUtil.IsValidateHash(_Att.Name))
+                if (!CharUtil.IsValidateHash(_Att.Text))
                 {
                     PbName.Image = BeanUtil.NaN16;
                 }
@@ -60,11 +60,11 @@ namespace Me.Amon.Pwd.V.Pro
                     string path = _DataModel.KeyDir;
                     if (CharUtil.IsValidateHash(_Att.Path))
                     {
-                        path = Path.Combine(path, _Att.Path, _Att.Name + IEnv.IMG_KEY_EDIT_EXT);
+                        path = Path.Combine(path, _Att.Path, _Att.Text + IEnv.IMG_KEY_EDIT_EXT);
                     }
                     else
                     {
-                        path = Path.Combine(path, _Att.Name + IEnv.IMG_KEY_EDIT_EXT);
+                        path = Path.Combine(path, _Att.Text + IEnv.IMG_KEY_EDIT_EXT);
                     }
                     PbName.Image = BeanUtil.ReadImage(path, BeanUtil.NaN16);
                 }
@@ -101,9 +101,9 @@ namespace Me.Amon.Pwd.V.Pro
                 return false;
             }
 
-            if (_Att.Name != _AIco.File)
+            if (_Att.Text != _AIco.File)
             {
-                _Att.Name = _AIco.File;
+                _Att.Text = _AIco.File;
                 _Att.Path = _AIco.Path;
                 _Att.Modified = true;
             }

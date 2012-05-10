@@ -26,16 +26,16 @@
     <Action Id="append-att-memo" Class="Me.Amon.Pwd.E._Att.AppendMemoAction"/>
     <Action Id="append-att-file" Class="Me.Amon.Pwd.E._Att.AppendFileAction"/>
     <Action Id="append-att-line" Class="Me.Amon.Pwd.E._Att.AppendLineAction"/>
-    <Action Id="update-att-text" Class="Me.Amon.Pwd.E._Att.UpdateTextAction"/>
-    <Action Id="update-att-pass" Class="Me.Amon.Pwd.E._Att.UpdatePassAction"/>
-    <Action Id="update-att-link" Class="Me.Amon.Pwd.E._Att.UpdateLinkAction"/>
-    <Action Id="update-att-mail" Class="Me.Amon.Pwd.E._Att.UpdateMailAction"/>
-    <Action Id="update-att-date" Class="Me.Amon.Pwd.E._Att.UpdateDateAction"/>
-    <Action Id="update-att-data" Class="Me.Amon.Pwd.E._Att.UpdateDataAction"/>
-    <Action Id="update-att-list" Class="Me.Amon.Pwd.E._Att.UpdateListAction"/>
-    <Action Id="update-att-memo" Class="Me.Amon.Pwd.E._Att.UpdateMemoAction"/>
-    <Action Id="update-att-file" Class="Me.Amon.Pwd.E._Att.UpdateFileAction"/>
-    <Action Id="update-att-line" Class="Me.Amon.Pwd.E._Att.UpdateLineAction"/>
+    <Action Id="change-att-text" Class="Me.Amon.Pwd.E._Att.ChangeTextAction"/>
+    <Action Id="change-att-pass" Class="Me.Amon.Pwd.E._Att.ChangePassAction"/>
+    <Action Id="change-att-link" Class="Me.Amon.Pwd.E._Att.ChangeLinkAction"/>
+    <Action Id="change-att-mail" Class="Me.Amon.Pwd.E._Att.ChangeMailAction"/>
+    <Action Id="change-att-date" Class="Me.Amon.Pwd.E._Att.ChangeDateAction"/>
+    <Action Id="change-att-data" Class="Me.Amon.Pwd.E._Att.ChangeDataAction"/>
+    <Action Id="change-att-list" Class="Me.Amon.Pwd.E._Att.ChangeListAction"/>
+    <Action Id="change-att-memo" Class="Me.Amon.Pwd.E._Att.ChangeMemoAction"/>
+    <Action Id="change-att-file" Class="Me.Amon.Pwd.E._Att.ChangeFileAction"/>
+    <Action Id="change-att-line" Class="Me.Amon.Pwd.E._Att.ChangeLineAction"/>
     <Action Id="delete-att" Class="Me.Amon.Pwd.E._Att.DeleteAttAction"/>
     <Action Id="att-edit-cut" Class="Me.Amon.Pwd.E._Att.EditCutAction"/>
     <Action Id="att-edit-copy" Class="Me.Amon.Pwd.E._Att.EditCopyAction"/>
@@ -81,6 +81,9 @@
   <!--系统快捷键-->
   <Strokes Id="APwd">
     <Stroke Key="^ S" ActionId="update-key" Memo="保存记录"/>
+    <Stroke Key="# C" ActionId="att-edit-copy" Memo="复制属性"/>
+    <Stroke Key="# U" ActionId="att-edit-save" Memo="保存属性"/>
+    <Stroke Key="# D" ActionId="delete-att" Memo="删除属性"/>
   </Strokes>
 
   <!--魔方密码菜单栏-->
@@ -139,34 +142,34 @@
         </Item>
       </Menu>
       <Menu Id="update-att" Text="转换属性">
-        <Item Type="normal" Text="文本" ActionId="update-text">
+        <Item Type="normal" Text="文本" ActionId="change-att-text">
           <Stroke Key="# 1" Memo="转换文本属性"/>
         </Item>
-        <Item Type="normal" Text="口令" ActionId="update-pass">
+        <Item Type="normal" Text="口令" ActionId="change-att-pass">
           <Stroke Key="# 2" Memo="转换口令属性"/>
         </Item>
-        <Item Type="normal" Text="链接" ActionId="update-link">
+        <Item Type="normal" Text="链接" ActionId="change-att-link">
           <Stroke Key="# 3" Memo="转换链接属性"/>
         </Item>
-        <Item Type="normal" Text="邮件" ActionId="update-mail">
+        <Item Type="normal" Text="邮件" ActionId="change-att-mail">
           <Stroke Key="# 4" Memo="转换邮件属性"/>
         </Item>
-        <Item Type="normal" Text="日期" ActionId="update-date">
+        <Item Type="normal" Text="日期" ActionId="change-att-date">
           <Stroke Key="# 5" Memo="转换日期属性"/>
         </Item>
-        <Item Type="normal" Text="数值" ActionId="update-data">
+        <Item Type="normal" Text="数值" ActionId="change-att-data">
           <Stroke Key="# 6" Memo="转换数值属性"/>
         </Item>
-        <Item Type="normal" Text="列表" ActionId="update-list">
+        <Item Type="normal" Text="列表" ActionId="change-att-list">
           <Stroke Key="# 7" Memo="转换列表属性"/>
         </Item>
-        <Item Type="normal" Text="附注" ActionId="update-memo">
+        <Item Type="normal" Text="附注" ActionId="change-att-memo">
           <Stroke Key="# 8" Memo="转换附注属性"/>
         </Item>
-        <Item Type="normal" Text="文件" ActionId="update-file">
+        <Item Type="normal" Text="文件" ActionId="change-att-file">
           <Stroke Key="# 9" Memo="转换文件属性"/>
         </Item>
-        <Item Type="normal" Text="标记" ActionId="update-att-line">
+        <Item Type="normal" Text="标记" ActionId="change-att-line">
           <Stroke Key="# 0" Memo="转换标记属性"/>
         </Item>
       </Menu>

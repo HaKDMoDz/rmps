@@ -60,7 +60,7 @@ namespace Me.Amon.Pwd.V.Pad
         {
         }
 
-        public void UpdateAtt(int type)
+        public void ChangeAtt(int type)
         {
         }
 

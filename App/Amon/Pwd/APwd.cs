@@ -820,9 +820,14 @@ namespace Me.Amon.Pwd
             _PwdView.AppendAtt(att);
         }
 
-        public void UpdateAtt(int att)
+        public void ChangeAtt(int att)
         {
-            _PwdView.UpdateAtt(att);
+            _PwdView.ChangeAtt(att);
+        }
+
+        public void UpdateAtt()
+        {
+            _PwdView.SaveAtt();
         }
 
         public void DeleteAtt()

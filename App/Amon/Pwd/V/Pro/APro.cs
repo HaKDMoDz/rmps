@@ -174,7 +174,7 @@ namespace Me.Amon.Pwd.V.Pro
             GvAttList.Rows[index].Selected = true;
         }
 
-        public void UpdateAtt(int type)
+        public void ChangeAtt(int type)
         {
             if (type < Att.TYPE_TEXT || type > Att.TYPE_LINE || type == Att.TYPE_DATE)
             {
@@ -370,57 +370,57 @@ namespace Me.Amon.Pwd.V.Pro
         #region 转换属性
         private void CmiUpdateAttText_Click(object sender, EventArgs e)
         {
-            UpdateAtt(Att.TYPE_TEXT);
+            ChangeAtt(Att.TYPE_TEXT);
         }
 
         private void CmiUpdateAttPass_Click(object sender, EventArgs e)
         {
-            UpdateAtt(Att.TYPE_PASS);
+            ChangeAtt(Att.TYPE_PASS);
         }
 
         private void CmiUpdateAttLink_Click(object sender, EventArgs e)
         {
-            UpdateAtt(Att.TYPE_LINK);
+            ChangeAtt(Att.TYPE_LINK);
         }
 
         private void CmiUpdateAttMail_Click(object sender, EventArgs e)
         {
-            UpdateAtt(Att.TYPE_MAIL);
+            ChangeAtt(Att.TYPE_MAIL);
         }
 
         private void CmiUpdateAttDate_Click(object sender, EventArgs e)
         {
-            UpdateAtt(Att.TYPE_DATE);
+            ChangeAtt(Att.TYPE_DATE);
         }
 
         private void CmiUpdateAttData_Click(object sender, EventArgs e)
         {
-            UpdateAtt(Att.TYPE_DATA);
+            ChangeAtt(Att.TYPE_DATA);
         }
 
         private void CmiUpdateAttCall_Click(object sender, EventArgs e)
         {
-            UpdateAtt(Att.TYPE_CALL);
+            ChangeAtt(Att.TYPE_CALL);
         }
 
         private void CmiUpdateAttList_Click(object sender, EventArgs e)
         {
-            UpdateAtt(Att.TYPE_LIST);
+            ChangeAtt(Att.TYPE_LIST);
         }
 
         private void CmiUpdateAttMemo_Click(object sender, EventArgs e)
         {
-            UpdateAtt(Att.TYPE_MEMO);
+            ChangeAtt(Att.TYPE_MEMO);
         }
 
         private void CmiUpdateAttFile_Click(object sender, EventArgs e)
         {
-            UpdateAtt(Att.TYPE_FILE);
+            ChangeAtt(Att.TYPE_FILE);
         }
 
         private void CmiUpdateAttLine_Click(object sender, EventArgs e)
         {
-            UpdateAtt(Att.TYPE_LINE);
+            ChangeAtt(Att.TYPE_LINE);
         }
         #endregion
 

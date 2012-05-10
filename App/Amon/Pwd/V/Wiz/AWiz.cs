@@ -34,10 +34,7 @@ namespace Me.Amon.Pwd.V.Wiz
         #region 接口实现
         public void InitView(Panel panel)
         {
-            _InfoBean = new BeanInfo();
-            _InfoBean.Init(_DataModel);
-            _InfoBean.InitView(TpGrid);
-            _InfoBean.ShowData();
+            ShowInfo();
 
             panel.Controls.Add(this);
             Dock = DockStyle.Fill;
@@ -103,7 +100,7 @@ namespace Me.Amon.Pwd.V.Wiz
         {
         }
 
-        public void UpdateAtt(int type)
+        public void ChangeAtt(int type)
         {
         }
 

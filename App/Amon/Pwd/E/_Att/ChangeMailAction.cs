@@ -1,12 +1,12 @@
 ﻿namespace Me.Amon.Pwd.E._Att
 {
-    public class UpdateMailAction : APwdAction
+    public class ChangeMailAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
             if (IApp != null)
             {
-                IApp.UpdateAtt(Att.TYPE_MAIL);
+                IApp.ChangeAtt(Att.TYPE_MAIL);
             }
         }
     }

@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             this.TpGrid = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.guid = new System.Windows.Forms.FlowLayoutPanel();
             this.BtNext = new System.Windows.Forms.Button();
             this.BtPrev = new System.Windows.Forms.Button();
             this.TpGrid.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.guid.SuspendLayout();
             this.SuspendLayout();
             // 
             // TpGrid
             // 
             this.TpGrid.ColumnCount = 1;
             this.TpGrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TpGrid.Controls.Add(this.flowLayoutPanel1, 0, 1);
+            this.TpGrid.Controls.Add(this.guid, 0, 1);
             this.TpGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TpGrid.Location = new System.Drawing.Point(0, 0);
             this.TpGrid.Name = "TpGrid";
@@ -50,16 +50,16 @@
             this.TpGrid.Size = new System.Drawing.Size(332, 261);
             this.TpGrid.TabIndex = 0;
             // 
-            // flowLayoutPanel1
+            // guid
             // 
-            this.flowLayoutPanel1.Controls.Add(this.BtNext);
-            this.flowLayoutPanel1.Controls.Add(this.BtPrev);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 232);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(326, 26);
-            this.flowLayoutPanel1.TabIndex = 1;
+            this.guid.Controls.Add(this.BtNext);
+            this.guid.Controls.Add(this.BtPrev);
+            this.guid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.guid.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.guid.Location = new System.Drawing.Point(3, 232);
+            this.guid.Name = "guid";
+            this.guid.Size = new System.Drawing.Size(326, 26);
+            this.guid.TabIndex = 1;
             // 
             // BtNext
             // 
@@ -89,7 +89,7 @@
             this.Name = "AWiz";
             this.Size = new System.Drawing.Size(332, 261);
             this.TpGrid.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.guid.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -97,7 +97,7 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel TpGrid;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel guid;
         private System.Windows.Forms.Button BtNext;
         private System.Windows.Forms.Button BtPrev;
     }

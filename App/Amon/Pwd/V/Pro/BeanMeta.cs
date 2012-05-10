@@ -34,7 +34,7 @@ namespace Me.Amon.Pwd.V.Pro
 
             if (_Att != null)
             {
-                TbName.Text = _Att.Name;
+                TbName.Text = _Att.Text;
                 TbData.Text = _Att.Data;
             }
 
@@ -88,17 +88,17 @@ namespace Me.Amon.Pwd.V.Pro
                 return false;
             }
 
-            string name = TbName.Text;
-            if (string.IsNullOrEmpty(name))
+            string text = TbName.Text;
+            if (string.IsNullOrEmpty(text))
             {
                 Main.ShowAlert("请输入记录标题！");
                 TbName.Focus();
                 return false;
             }
 
-            if (_Att.Name != name)
+            if (_Att.Text != text)
             {
-                _Att.Name = name;
+                _Att.Text = text;
                 _Att.Modified = true;
             }
             if (TbData.Text != _Att.Data)

@@ -34,7 +34,7 @@
             this.BgWorker = new System.Windows.Forms.Timer(this.components);
             this.NiTray = new System.Windows.Forms.NotifyIcon(this.components);
             this.CtMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MtGuid = new System.Windows.Forms.ToolStripMenuItem();
+            this.MtIcon = new System.Windows.Forms.ToolStripMenuItem();
             this.MtSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.MtAPwd = new System.Windows.Forms.ToolStripMenuItem();
             this.MtASec = new System.Windows.Forms.ToolStripMenuItem();
@@ -97,7 +97,7 @@
             // CtMenu
             // 
             this.CtMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MtGuid,
+            this.MtIcon,
             this.MtSep0,
             this.MtAPwd,
             this.MtASec,
@@ -114,14 +114,12 @@
             this.CtMenu.Name = "CtMenu";
             this.CtMenu.Size = new System.Drawing.Size(166, 286);
             // 
-            // MtGuid
+            // MtIcon
             // 
-            this.MtGuid.Checked = true;
-            this.MtGuid.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.MtGuid.Name = "MtGuid";
-            this.MtGuid.Size = new System.Drawing.Size(165, 22);
-            this.MtGuid.Text = "显示导航窗口(&G)";
-            this.MtGuid.Click += new System.EventHandler(this.MtGuid_Click);
+            this.MtIcon.Name = "MtIcon";
+            this.MtIcon.Size = new System.Drawing.Size(165, 22);
+            this.MtIcon.Text = "显示导航窗口(&G)";
+            this.MtIcon.Click += new System.EventHandler(this.MtIcon_Click);
             // 
             // MtSep0
             // 
@@ -242,8 +240,6 @@
             // 
             // MgTray
             // 
-            this.MgTray.Checked = true;
-            this.MgTray.CheckState = System.Windows.Forms.CheckState.Checked;
             this.MgTray.Name = "MgTray";
             this.MgTray.Size = new System.Drawing.Size(163, 22);
             this.MgTray.Text = "显示托盘图标(&T)";
@@ -378,7 +374,7 @@
         private System.Windows.Forms.ToolStripMenuItem MgAPwd;
         private System.Windows.Forms.ToolStripMenuItem MgASec;
         private System.Windows.Forms.ToolStripSeparator MgSep2;
-        private System.Windows.Forms.ToolStripMenuItem MtGuid;
+        private System.Windows.Forms.ToolStripMenuItem MtIcon;
         private System.Windows.Forms.ToolStripSeparator MtSep0;
         private System.Windows.Forms.ToolStripMenuItem MtAPwd;
         private System.Windows.Forms.ToolStripMenuItem MtASec;

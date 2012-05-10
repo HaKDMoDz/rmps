@@ -22,7 +22,7 @@ namespace Me.Amon.Pwd
 
         void AppendAtt(int type);
 
-        void UpdateAtt(int type);
+        void ChangeAtt(int type);
 
         void CutAtt();
 

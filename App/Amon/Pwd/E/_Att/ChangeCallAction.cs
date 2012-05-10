@@ -1,12 +1,12 @@
 ﻿namespace Me.Amon.Pwd.E._Att
 {
-    public class UpdateListAction : APwdAction
+    public class ChangeCallAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
             if (IApp != null)
             {
-                IApp.UpdateAtt(Att.TYPE_LIST);
+                IApp.ChangeAtt(Att.TYPE_CALL);
             }
         }
     }

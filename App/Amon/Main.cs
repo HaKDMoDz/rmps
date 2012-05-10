@@ -44,6 +44,7 @@ namespace Me.Amon
             _ScreenW = Screen.PrimaryScreen.Bounds.Width;
             _ScreenH = Screen.PrimaryScreen.Bounds.Height;
 
+            // 窗口位置
             int x = Settings.Default.LocX;
             if (x < 0)
             {
@@ -55,6 +56,17 @@ namespace Me.Amon
                 y = 0;
             }
             Location = new Point(x, y);
+
+            // 视图模式
+            int pattern = Settings.Default.Pattern;
+            if (pattern == 0)
+            {
+                pattern = -1;
+            }
+            NiTray.Visible = (pattern & EApp.PATTERN_TRAY) != 0;
+            MgTray.Checked = NiTray.Visible;
+            Visible = (pattern & EApp.PATTERN_ICON) != 0;
+            MtIcon.Checked = Visible;
 
             _AlienRadius = 11;
             _AlienCenterX = 12;
@@ -303,6 +315,16 @@ namespace Me.Amon
         {
             NiTray.Visible = !NiTray.Visible;
             MgTray.Checked = NiTray.Visible;
+
+            if (NiTray.Visible)
+            {
+                Settings.Default.Pattern |= EApp.PATTERN_TRAY;
+            }
+            else
+            {
+                Settings.Default.Pattern ^= EApp.PATTERN_TRAY;
+            }
+            Settings.Default.Save();
         }
 
         private void MgAPwd_Click(object sender, EventArgs e)
@@ -412,10 +434,20 @@ namespace Me.Amon
         #endregion
 
         #region 托盘菜单
-        private void MtGuid_Click(object sender, EventArgs e)
+        private void MtIcon_Click(object sender, EventArgs e)
         {
             Visible = !Visible;
-            MtGuid.Checked = Visible;
+            MtIcon.Checked = Visible;
+
+            if (Visible)
+            {
+                Settings.Default.Pattern |= EApp.PATTERN_ICON;
+            }
+            else
+            {
+                Settings.Default.Pattern ^= EApp.PATTERN_ICON;
+            }
+            Settings.Default.Save();
         }
 
         private void MtAPwd_Click(object sender, EventArgs e)
