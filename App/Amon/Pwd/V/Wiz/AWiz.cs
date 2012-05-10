@@ -34,7 +34,15 @@ namespace Me.Amon.Pwd.V.Wiz
         #region 接口实现
         public void InitView(Panel panel)
         {
-            ShowInfo();
+            if (_LastView != null)
+            {
+                _LastView.HideView(TpGrid);
+            }
+
+            _InfoBean = new BeanInfo();
+            _InfoBean.Init(_DataModel);
+            _InfoBean.InitView(TpGrid);
+            _InfoBean.ShowData();
 
             panel.Controls.Add(this);
             Dock = DockStyle.Fill;
