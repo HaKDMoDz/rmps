@@ -4,6 +4,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Cmd
 {
@@ -11,6 +12,8 @@ namespace Cmd
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(Keys.Add.ToString());
+            Console.Read();
         }
     }
 }

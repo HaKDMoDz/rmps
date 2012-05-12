@@ -244,7 +244,7 @@ namespace Me.Amon.Pwd
             {
                 return false;
             }
-            buffer.Append(Type).Append(':').Append(Name).Append(',').Append(DoEscape(Text)).Append(',').Append(DoEscape(Data));
+            buffer.Append(Type).Append(':').Append(Name ?? "").Append(',').Append(DoEscape(Text)).Append(',').Append(DoEscape(Data));
 
             if (_Spec != null)
             {
@@ -262,21 +262,26 @@ namespace Me.Amon.Pwd
         /// </summary>
         /// <param name="txt"></param>
         /// <returns></returns>
-        public bool ImportByTxt(string txt)
+        public bool ImportByTxt(string txt, string ver)
         {
             if (!CharUtil.IsValidate(txt))
             {
                 return false;
             }
+
             string[] array = txt.Replace("\\,", "\f").Split(',');
-            if (array == null || array.Length < 2)
+            int i;
+            switch (ver)
             {
-                return false;
+                case "1":
+                    i = ImportByTxt_1(array);
+                    break;
+                case "2":
+                    i = ImportByTxt_2(array);
+                    break;
+                default:
+                    return false;
             }
-            int i = 0;
-            Name = array.Length == 3 ? UnEscape(array[i++].Replace("\f", "\\,")) : "";
-            Text = UnEscape(array[i++].Replace("\f", "\\,"));
-            Data = UnEscape(array[i++].Replace("\f", "\\,"));
 
             if (_Spec != null)
             {
@@ -293,6 +298,30 @@ namespace Me.Amon.Pwd
             }
             return true;
         }
+
+        private int ImportByTxt_1(string[] array)
+        {
+            int i = 0;
+            if (array != null && array.Length > 1)
+            {
+                Text = UnEscape(array[i++].Replace("\f", "\\,"));
+                Data = UnEscape(array[i++].Replace("\f", "\\,"));
+            }
+            return i;
+        }
+
+        private int ImportByTxt_2(string[] array)
+        {
+            int i = 0;
+            if (array != null && array.Length > 2)
+            {
+                Name = UnEscape(array[i++].Replace("\f", "\\,"));
+                Text = UnEscape(array[i++].Replace("\f", "\\,"));
+                Data = UnEscape(array[i++].Replace("\f", "\\,"));
+            }
+            return i;
+        }
+
         /// <summary>
         /// 导出为XML文件
         /// </summary>
@@ -302,6 +331,7 @@ namespace Me.Amon.Pwd
         {
             writer.WriteElementString("Type", Type.ToString());
             writer.WriteElementString("Name", Name);
+            writer.WriteElementString("Text", Text);
             writer.WriteElementString("Data", Data);
 
             if (_Spec != null)
@@ -321,20 +351,25 @@ namespace Me.Amon.Pwd
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public bool ImportByXml(XmlReader reader)
+        public bool ImportByXml(XmlReader reader, string ver)
         {
             //if (reader.Name == "Type")
             //{
             //    Type = reader.ReadElementContentAsInt();
             //}
-            if (reader.Name == "Name")
+
+            switch (ver)
             {
-                Name = reader.ReadElementContentAsString();
+                case "1":
+                    ImportByXml_1(reader);
+                    break;
+                case "2":
+                    ImportByXml_2(reader);
+                    break;
+                default:
+                    return false;
             }
-            if (reader.Name == "Data")
-            {
-                Data = reader.ReadElementContentAsString();
-            }
+
             if (reader.Name == "Spec")
             {
                 int cnt = reader.AttributeCount;
@@ -350,6 +385,36 @@ namespace Me.Amon.Pwd
             }
             return true;
         }
+
+        private bool ImportByXml_1(XmlReader reader)
+        {
+            if (reader.Name == "Name")
+            {
+                Text = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Data")
+            {
+                Data = reader.ReadElementContentAsString();
+            }
+            return true;
+        }
+
+        private bool ImportByXml_2(XmlReader reader)
+        {
+            if (reader.Name == "Name")
+            {
+                Name = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Text")
+            {
+                Text = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Data")
+            {
+                Data = reader.ReadElementContentAsString();
+            }
+            return true;
+        }
         #endregion
 
         #region 公共方法
@@ -360,7 +425,7 @@ namespace Me.Amon.Pwd
         /// <returns></returns>
         public static string DoEscape(string txt)
         {
-            return txt != null ? txt.Replace("\\", "\\\\").Replace(",", "\\,").Replace(";", "\\;").Replace("\r\n", "\\n").Replace("\r", "\\n").Replace("\n", "\\n") : txt;
+            return txt != null ? txt.Replace("\\", "\\\\").Replace(",", "\\,").Replace(";", "\\;").Replace("\r\n", "\\n").Replace("\r", "\\n").Replace("\n", "\\n") : "";
         }
 
         /// <summary>
@@ -370,7 +435,7 @@ namespace Me.Amon.Pwd
         /// <returns></returns>
         public static string UnEscape(string txt)
         {
-            return txt != null ? txt.Replace("\\n", "\n").Replace("\\;", ";").Replace("\\,", ",").Replace("\\\\", "\\") : txt;
+            return txt != null ? txt.Replace("\\n", "\n").Replace("\\;", ";").Replace("\\,", ",").Replace("\\\\", "\\") : "";
         }
         #endregion
 

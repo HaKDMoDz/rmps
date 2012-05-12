@@ -10,6 +10,8 @@ namespace Me.Amon.Pwd
 
         public string Name { get; set; }
 
+        public string Text { get; set; }
+
         public string Memo { get; set; }
 
         public IList<LibDetail> Details { get; set; }
@@ -21,7 +23,7 @@ namespace Me.Amon.Pwd
         #region 方法重写
         public override string ToString()
         {
-            return Name;
+            return Text;
         }
         #endregion
 
@@ -44,6 +46,10 @@ namespace Me.Amon.Pwd
             if (reader.Name == "Name" || reader.ReadToNextSibling("Name"))
             {
                 Name = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Text" || reader.ReadToNextSibling("Text"))
+            {
+                Text = reader.ReadElementContentAsString();
             }
             if (reader.Name == "Memo" || reader.ReadToNextSibling("Memo"))
             {
@@ -77,6 +83,7 @@ namespace Me.Amon.Pwd
 
             writer.WriteElementString("Id", Id);
             writer.WriteElementString("Name", Name);
+            writer.WriteElementString("Text", Text);
             writer.WriteElementString("Memo", Memo);
 
             writer.WriteStartElement("Items");

@@ -1207,7 +1207,7 @@ namespace Me.Amon.Pwd
 
             using (StreamWriter writer = new StreamWriter(file, false))
             {
-                writer.WriteLine("APwd-1");
+                writer.WriteLine("APwd-2");
                 StringBuilder buffer = new StringBuilder();
                 _SafeModel.ExportAsTxt(buffer);
                 writer.WriteLine(buffer.ToString());
@@ -1265,7 +1265,7 @@ namespace Me.Amon.Pwd
                 {
                     writer.WriteStartElement("Amon");
                     writer.WriteElementString("App", "APwd");
-                    writer.WriteElementString("Ver", "1");
+                    writer.WriteElementString("Ver", "2");
                     writer.WriteStartElement("Keys");
                     foreach (Key rec in recs)
                     {
@@ -1322,7 +1322,7 @@ namespace Me.Amon.Pwd
             {
                 // 版本判断
                 string ver = reader.ReadLine();
-                if ("APwd-1" != ver)
+                if ("APwd-1" != ver && "APwd-2" != ver)
                 {
                     Main.ShowAlert("未知的文件版本，无法进行导入处理！");
                     return;
@@ -1333,7 +1333,7 @@ namespace Me.Amon.Pwd
                 {
                     if (!string.IsNullOrWhiteSpace(line))
                     {
-                        if (_SafeModel.ImportByTxt(line))
+                        if (_SafeModel.ImportByTxt(line, ver.Substring(5)))
                         {
                             _SafeModel.Key.CatId = cat.Id;
                             DoImportKey();
@@ -1347,7 +1347,7 @@ namespace Me.Amon.Pwd
         }
 
         /// <summary>
-        /// 导出XML数据
+        /// 导入XML数据
         /// </summary>
         public void ImportXml()
         {
@@ -1383,14 +1383,20 @@ namespace Me.Amon.Pwd
                     Main.ShowAlert("未知的文件格式，无法进行导入处理！");
                     return;
                 }
-                if (reader.Name != "Ver" && !reader.ReadToFollowing("Ver") || reader.ReadElementContentAsString() != "1")
+                if (reader.Name != "Ver" && !reader.ReadToFollowing("Ver"))
+                {
+                    Main.ShowAlert("未知的文件版本，无法进行导入处理！");
+                    return;
+                }
+                string ver = reader.ReadElementContentAsString();
+                if (ver != "1" && ver != "2")
                 {
                     Main.ShowAlert("未知的文件版本，无法进行导入处理！");
                     return;
                 }
                 while (reader.ReadToFollowing("Key"))
                 {
-                    if (_SafeModel.ImportByXml(reader))
+                    if (_SafeModel.ImportByXml_1(reader, ver))
                     {
                         _SafeModel.Key.CatId = cat.Id;
                         DoImportKey();
@@ -1656,7 +1662,7 @@ namespace Me.Amon.Pwd
                 {
                     if (!string.IsNullOrWhiteSpace(line))
                     {
-                        _SafeModel.ImportByTxt(line);
+                        //_SafeModel.ImportByTxt(line);
                         SaveKey();
                     }
                     line = reader.ReadLine();

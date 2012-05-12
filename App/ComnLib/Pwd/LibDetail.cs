@@ -13,6 +13,8 @@ namespace Me.Amon.Pwd
 
         public string Name { get; set; }
 
+        public string Text { get; set; }
+
         public string Data { get; set; }
 
         public string Memo { get; set; }
@@ -41,6 +43,10 @@ namespace Me.Amon.Pwd
             {
                 Name = reader.ReadElementContentAsString();
             }
+            if (reader.Name == "Text" || reader.ReadToNextSibling("Text"))
+            {
+                Text = reader.ReadElementContentAsString();
+            }
             if (reader.Name == "Data" || reader.ReadToNextSibling("Data"))
             {
                 Data = reader.ReadElementContentAsString();
@@ -61,6 +67,7 @@ namespace Me.Amon.Pwd
             writer.WriteElementString("Id", Id);
             writer.WriteElementString("Type", Type.ToString());
             writer.WriteElementString("Name", Name);
+            writer.WriteElementString("Text", Text);
             writer.WriteElementString("Data", Data);
             writer.WriteElementString("Memo", Memo);
 

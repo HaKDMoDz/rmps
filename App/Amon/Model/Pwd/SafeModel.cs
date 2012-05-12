@@ -376,7 +376,7 @@ namespace Me.Amon.Model.Pwd
         #endregion
 
         #region 数据导入
-        public bool ImportByTxt(string data)
+        public bool ImportByTxt(string data, string ver)
         {
             if (string.IsNullOrEmpty(data))
             {
@@ -407,13 +407,14 @@ namespace Me.Amon.Model.Pwd
                 }
                 string tmp2 = matche.Value;
                 Att item = Att.GetInstance(int.Parse(tmp2.Substring(0, tmp2.Length - 1)));
-                if (item != null)
+                if (item == null)
                 {
-                    if (item.ImportByTxt(tmp1.Substring(tmp2.Length)))
-                    {
-                        item.Id = (_Key.AttIndex++).ToString();
-                        _AttList.Add(item);
-                    }
+                    return false;
+                }
+                if (item.ImportByTxt(tmp1.Substring(tmp2.Length), ver))
+                {
+                    item.Id = (_Key.AttIndex++).ToString();
+                    _AttList.Add(item);
                 }
             }
             return true;
@@ -433,7 +434,7 @@ namespace Me.Amon.Model.Pwd
             return true;
         }
 
-        public bool ImportByXml(XmlReader reader)
+        public bool ImportByXml_1(XmlReader reader, string ver)
         {
             if (reader == null || !reader.ReadToDescendant("Att"))
             {
@@ -457,13 +458,15 @@ namespace Me.Amon.Model.Pwd
 
                 int type = reader.ReadElementContentAsInt();
                 Att item = Att.GetInstance(type);
-                if (item != null)
+                if (item == null)
                 {
-                    if (item.ImportByXml(reader))
-                    {
-                        item.Id = (_Key.AttIndex++).ToString();
-                        _AttList.Add(item);
-                    }
+                    return false;
+                }
+
+                if (item.ImportByXml(reader, ver))
+                {
+                    item.Id = (_Key.AttIndex++).ToString();
+                    _AttList.Add(item);
                 }
             } while (reader.ReadToFollowing("Att"));
 

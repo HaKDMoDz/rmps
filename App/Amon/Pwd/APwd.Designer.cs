@@ -38,13 +38,13 @@
             this.HSplit = new System.Windows.Forms.SplitContainer();
             this.VSplit = new System.Windows.Forms.SplitContainer();
             this.TvCatTree = new System.Windows.Forms.TreeView();
+            this.CmCat = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.IlCatTree = new System.Windows.Forms.ImageList(this.components);
             this.LbKeyList = new System.Windows.Forms.ListBox();
+            this.CmKey = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.PlBody = new System.Windows.Forms.Panel();
             this.FbFind = new Me.Amon.Pwd.Bean.FindBar();
             this.TbTool = new System.Windows.Forms.ToolStrip();
-            this.CmCat = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.CmKey = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.UcTime = new System.Windows.Forms.Timer(this.components);
             this.SsEcho.SuspendLayout();
@@ -162,9 +162,14 @@
             this.TvCatTree.TabIndex = 0;
             this.TvCatTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvCatTree_AfterSelect);
             // 
+            // CmCat
+            // 
+            this.CmCat.Name = "contextMenuStrip1";
+            this.CmCat.Size = new System.Drawing.Size(61, 4);
+            // 
             // IlCatTree
             // 
-            this.IlCatTree.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.IlCatTree.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             this.IlCatTree.ImageSize = new System.Drawing.Size(16, 16);
             this.IlCatTree.TransparentColor = System.Drawing.Color.Transparent;
             // 
@@ -181,6 +186,11 @@
             this.LbKeyList.TabIndex = 0;
             this.LbKeyList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.LbKeyList_DrawItem);
             this.LbKeyList.SelectedIndexChanged += new System.EventHandler(this.LbKeyList_SelectedIndexChanged);
+            // 
+            // CmKey
+            // 
+            this.CmKey.Name = "CmKey";
+            this.CmKey.Size = new System.Drawing.Size(61, 4);
             // 
             // PlBody
             // 
@@ -206,16 +216,6 @@
             this.TbTool.Name = "TbTool";
             this.TbTool.Size = new System.Drawing.Size(111, 25);
             this.TbTool.TabIndex = 0;
-            // 
-            // CmCat
-            // 
-            this.CmCat.Name = "contextMenuStrip1";
-            this.CmCat.Size = new System.Drawing.Size(61, 4);
-            // 
-            // CmKey
-            // 
-            this.CmKey.Name = "CmKey";
-            this.CmKey.Size = new System.Drawing.Size(61, 4);
             // 
             // UcTime
             // 
