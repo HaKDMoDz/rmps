@@ -54,12 +54,12 @@ namespace Me.Amon.Pwd.Bean
                 name = HashUtil.UtcTimeInHex(true);
             }
             string dstFile = Path.Combine(_DataModel.AcfDir, name + IEnv.FILE_ACF);
+            string alg = "aes";
+            string key = new string(SafeUtil.GenerateFileKeys());
 
             FileInfo info = new FileInfo(srcFile);
             _Att.SetSpec(FileAtt.SPEC_FILE_NAME, name);
             _Att.SetSpec(FileAtt.SPEC_FILE_EXTS, info.Extension.ToLower());
-            string alg = "aes";
-            string key = new string(SafeUtil.GenerateFileKeys());
             _Att.SetSpec(FileAtt.SPEC_FILE_ALG, alg);
             _Att.SetSpec(FileAtt.SPEC_FILE_KEY, key);
             if (SafeUtil.EncryptFile(alg, key, srcFile, dstFile))
@@ -77,9 +77,13 @@ namespace Me.Amon.Pwd.Bean
                 return;
             }
             string dstFile = Path.Combine(Path.GetTempPath(), _Box.Text);
-            if (!SafeUtil.DecryptFile(_Att.GetSpec(FileAtt.SPEC_FILE_ALG), _Att.GetSpec(FileAtt.SPEC_FILE_KEY), srcFile, dstFile))
+            try
             {
-                MessageBox.Show("系统错误，无法解密指定文件！");
+                SafeUtil.DecryptFile(_Att.GetSpec(FileAtt.SPEC_FILE_ALG), _Att.GetSpec(FileAtt.SPEC_FILE_KEY), srcFile, dstFile);
+            }
+            catch (Exception exp)
+            {
+                Main.ShowError(exp);
                 return;
             }
 

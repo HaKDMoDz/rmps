@@ -52,36 +52,29 @@ namespace Me.Amon.Util
         #region 文件处理
         public static bool EncryptFile(string alg, string key, string srcFile, string dstFile)
         {
-            try
+            SymmetricAlgorithm cipher = SymmetricAlgorithm.Create(alg);
+            cipher.Key = Encoding.Default.GetBytes(key);
+            cipher.IV = cipher.Key;
+
+            FileStream iStream = File.OpenRead(srcFile);
+            FileStream oStream = new FileStream(dstFile, FileMode.Create);
+
+            CryptoStream cStream = new CryptoStream(oStream, cipher.CreateEncryptor(), CryptoStreamMode.Write);
+            byte[] buffer = new byte[4096];
+            int len = iStream.Read(buffer, 0, buffer.Length);
+            while (len > 0)
             {
-                SymmetricAlgorithm cipher = SymmetricAlgorithm.Create(alg);
-                cipher.Key = Encoding.Default.GetBytes(key);
-                cipher.IV = cipher.Key;
-
-                FileStream iStream = File.OpenRead(srcFile);
-                FileStream oStream = new FileStream(dstFile, FileMode.Create);
-
-                CryptoStream cStream = new CryptoStream(oStream, cipher.CreateEncryptor(), CryptoStreamMode.Write);
-                byte[] buffer = new byte[4096];
-                int len = iStream.Read(buffer, 0, buffer.Length);
-                while (len > 0)
-                {
-                    cStream.Write(buffer, 0, len);
-                    len = iStream.Read(buffer, 0, buffer.Length);
-                }
-
-                cStream.Flush();
-                cStream.Close();
-
-                oStream.Close();
-                iStream.Close();
-
-                return true;
+                cStream.Write(buffer, 0, len);
+                len = iStream.Read(buffer, 0, buffer.Length);
             }
-            catch
-            {
-                return false;
-            }
+
+            cStream.Flush();
+            cStream.Close();
+
+            oStream.Close();
+            iStream.Close();
+
+            return true;
         }
 
         public static bool DecryptFile(string alg, string key, string srcFile, string dstFile)
