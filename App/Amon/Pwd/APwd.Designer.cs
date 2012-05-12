@@ -236,6 +236,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "阿木密码箱";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.APwd_FormClosing);
+            this.Load += new System.EventHandler(this.APwd_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.APwd_KeyDown);
             this.SsEcho.ResumeLayout(false);
             this.SsEcho.PerformLayout();

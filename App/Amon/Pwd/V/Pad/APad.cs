@@ -64,6 +64,22 @@ namespace Me.Amon.Pwd.V.Pad
         {
         }
 
+        public void SelectPrev()
+        {
+        }
+
+        public void SelectNext()
+        {
+        }
+
+        public void MoveUp()
+        {
+        }
+
+        public void MoveDown()
+        {
+        }
+
         public void CutAtt()
         {
         }

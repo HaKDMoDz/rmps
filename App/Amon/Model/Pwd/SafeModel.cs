@@ -179,6 +179,17 @@ namespace Me.Amon.Model.Pwd
                 _AttList.RemoveAt(index);
             }
         }
+
+        public void Change(int x, int y)
+        {
+            if (x == y || x < 0 || x >= _AttList.Count || y < 0 || y >= _AttList.Count)
+            {
+                return;
+            }
+            Att att = _AttList[x];
+            _AttList[x] = _AttList[y];
+            _AttList[y] = att;
+        }
         #endregion
 
         #region 固定属性
@@ -319,7 +330,7 @@ namespace Me.Amon.Model.Pwd
                 item.Id = tmp[0];
                 item.Name = tmp[2];
                 item.Order = (++i).ToString();
-                item.DecodeSpec(tmp, 4);
+                item.DecodeSpec(tmp, 5);
                 list.Add(item);
             }
         }
@@ -434,7 +445,7 @@ namespace Me.Amon.Model.Pwd
             return true;
         }
 
-        public bool ImportByXml_1(XmlReader reader, string ver)
+        public bool ImportByXml(XmlReader reader, string ver)
         {
             if (reader == null || !reader.ReadToDescendant("Att"))
             {

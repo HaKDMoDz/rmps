@@ -87,32 +87,6 @@ namespace Me.Amon.Pwd
             _XmlMenu.GetPopMenu("AKey", CmKey);
             //_XmlMenu.GetPopMenu("AAtt", CmAtt);
             #endregion
-
-            InitCat();
-            InitKey();
-            FbFind.APwd = this;
-
-            // 窗口布局
-            LoadLayout();
-
-            // 当前时间
-            UcTime.Start();
-
-            // 视图模式
-            switch (_ViewModel.Pattern)
-            {
-                case EPwd.PATTERN_PRO:
-                    ShowAPro();
-                    break;
-                case EPwd.PATTERN_WIZ:
-                    ShowAWiz();
-                    break;
-                case EPwd.PATTERN_PAD:
-                    ShowAPad();
-                    break;
-                default:
-                    break;
-            }
         }
 
         public int AppId { get; set; }
@@ -155,6 +129,40 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 事件处理
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void APwd_Load(object sender, EventArgs e)
+        {
+            InitCat();
+            InitKey();
+            FbFind.APwd = this;
+
+            // 布局加载
+            LoadLayout();
+
+            // 当前时间
+            UcTime.Start();
+
+            // 视图模式
+            switch (_ViewModel.Pattern)
+            {
+                case EPwd.PATTERN_PRO:
+                    ShowAPro();
+                    break;
+                case EPwd.PATTERN_WIZ:
+                    ShowAWiz();
+                    break;
+                case EPwd.PATTERN_PAD:
+                    ShowAPad();
+                    break;
+                default:
+                    break;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -835,7 +843,7 @@ namespace Me.Amon.Pwd
             _PwdView.DropAtt();
         }
 
-        public void CutAtt()
+        public void AttCut()
         {
             if (_PwdView != null)
             {
@@ -843,7 +851,7 @@ namespace Me.Amon.Pwd
             }
         }
 
-        public void CopyAtt()
+        public void AttCopy()
         {
             if (_PwdView != null)
             {
@@ -851,7 +859,7 @@ namespace Me.Amon.Pwd
             }
         }
 
-        public void PasteAtt()
+        public void AttPaste()
         {
             if (_PwdView != null)
             {
@@ -859,11 +867,43 @@ namespace Me.Amon.Pwd
             }
         }
 
-        public void ClearAtt()
+        public void AttClear()
         {
             if (_PwdView != null)
             {
                 _PwdView.ClearAtt();
+            }
+        }
+
+        public void AttSelectPrev()
+        {
+            if (_PwdView != null)
+            {
+                _PwdView.SelectPrev();
+            }
+        }
+
+        public void AttSelectNext()
+        {
+            if (_PwdView != null)
+            {
+                _PwdView.SelectNext();
+            }
+        }
+
+        public void AttMoveUp()
+        {
+            if (_PwdView != null)
+            {
+                _PwdView.MoveUp();
+            }
+        }
+
+        public void AttMoveDown()
+        {
+            if (_PwdView != null)
+            {
+                _PwdView.MoveDown();
             }
         }
         #endregion
@@ -1396,7 +1436,7 @@ namespace Me.Amon.Pwd
                 }
                 while (reader.ReadToFollowing("Key"))
                 {
-                    if (_SafeModel.ImportByXml_1(reader, ver))
+                    if (_SafeModel.ImportByXml(reader, ver))
                     {
                         _SafeModel.Key.CatId = cat.Id;
                         DoImportKey();

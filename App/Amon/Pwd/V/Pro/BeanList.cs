@@ -36,7 +36,7 @@ namespace Me.Amon.Pwd.V.Pro
 
             if (_Att != null)
             {
-                TbName.Text = _Att.Name;
+                TbName.Text = _Att.Text;
                 _Item = new Item { K = _Att.Data };
                 CbData.SelectedItem = _Item;
             }
@@ -91,9 +91,9 @@ namespace Me.Amon.Pwd.V.Pro
                 return false;
             }
 
-            if (TbName.Text != _Att.Name)
+            if (TbName.Text != _Att.Text)
             {
-                _Att.Name = TbName.Text;
+                _Att.Text = TbName.Text;
                 _Att.Modified = true;
             }
             if (_Item != null && _Item.K != _Att.Data)

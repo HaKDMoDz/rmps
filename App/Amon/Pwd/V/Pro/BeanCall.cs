@@ -46,7 +46,7 @@ namespace Me.Amon.Pwd.V.Pro
 
             if (_Att != null)
             {
-                TbName.Text = _Att.Name;
+                TbName.Text = _Att.Text;
                 TbData.Text = _Att.Data;
             }
 
@@ -100,9 +100,9 @@ namespace Me.Amon.Pwd.V.Pro
                 return false;
             }
 
-            if (TbName.Text != _Att.Name)
+            if (TbName.Text != _Att.Text)
             {
-                _Att.Name = TbName.Text;
+                _Att.Text = TbName.Text;
                 _Att.Modified = true;
             }
             if (TbData.Text != _Att.Data)

@@ -33,14 +33,13 @@ namespace Me.Amon.Pwd.V.Pro
 
             if (_Att != null)
             {
-                //TbName.Text = _Att.Name;
+                //TbName.Text = _Att.Text;
                 TbData.Text = _Att.Data;
             }
 
             TbData.Focus();
             return true;
         }
-
 
         public void Cut()
         {

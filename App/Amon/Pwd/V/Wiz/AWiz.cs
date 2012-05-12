@@ -112,6 +112,22 @@ namespace Me.Amon.Pwd.V.Wiz
         {
         }
 
+        public void SelectPrev()
+        {
+        }
+
+        public void SelectNext()
+        {
+        }
+
+        public void MoveUp()
+        {
+        }
+
+        public void MoveDown()
+        {
+        }
+
         public void CutAtt()
         {
             if (_LastView != null)

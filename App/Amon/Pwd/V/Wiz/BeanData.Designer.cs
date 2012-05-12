@@ -43,6 +43,7 @@
             this.BtOpt.TabIndex = 1;
             this.BtOpt.TabStop = false;
             this.BtOpt.UseVisualStyleBackColor = true;
+            this.BtOpt.Visible = false;
             this.BtOpt.Click += new System.EventHandler(this.BtOpt_Click);
             // 
             // TbData

@@ -6,7 +6,7 @@
         {
             if (IApp != null)
             {
-                IApp.PasteAtt();
+                IApp.AttPaste();
             }
         }
     }

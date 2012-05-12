@@ -24,6 +24,14 @@ namespace Me.Amon.Pwd
 
         void ChangeAtt(int type);
 
+        void SelectPrev();
+
+        void SelectNext();
+
+        void MoveUp();
+
+        void MoveDown();
+
         void CutAtt();
 
         void CopyAtt();

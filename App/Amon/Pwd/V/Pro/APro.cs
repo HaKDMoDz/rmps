@@ -205,6 +205,92 @@ namespace Me.Amon.Pwd.V.Pro
             ShowView(att);
         }
 
+        public void SelectPrev()
+        {
+            if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
+            {
+                return;
+            }
+            if (GvAttList.SelectedRows.Count < 1)
+            {
+                return;
+            }
+            int index = GvAttList.SelectedRows[0].Index;
+            if (index <= 0)
+            {
+                return;
+            }
+
+            index -= 1;
+            GvAttList.Rows[index].Selected = true;
+            ShowView(_SafeModel.GetAtt(index));
+        }
+
+        public void SelectNext()
+        {
+            if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
+            {
+                return;
+            }
+            if (GvAttList.SelectedRows.Count < 1)
+            {
+                return;
+            }
+            int index = GvAttList.SelectedRows[0].Index;
+            if (index >= _SafeModel.Count - 1)
+            {
+                return;
+            }
+
+            index += 1;
+            GvAttList.Rows[index].Selected = true;
+            ShowView(_SafeModel.GetAtt(index));
+        }
+
+        public void MoveUp()
+        {
+            if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
+            {
+                return;
+            }
+            if (GvAttList.SelectedRows.Count < 1)
+            {
+                return;
+            }
+            int i0 = GvAttList.SelectedRows[0].Index;
+            if (i0 <= 0)
+            {
+                return;
+            }
+            int i1 = i0 - 1;
+            _SafeModel.Change(i0, i1);
+            _DataList.Rows[i0][1] = _SafeModel.GetAtt(i0);
+            _DataList.Rows[i1][1] = _SafeModel.GetAtt(i1);
+            GvAttList.Rows[i1].Selected = true;
+        }
+
+        public void MoveDown()
+        {
+            if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
+            {
+                return;
+            }
+            if (GvAttList.SelectedRows.Count < 1)
+            {
+                return;
+            }
+            int i0 = GvAttList.SelectedRows[0].Index;
+            if (i0 >= _SafeModel.Count - 1)
+            {
+                return;
+            }
+            int i1 = i0 + 1;
+            _SafeModel.Change(i0, i1);
+            _DataList.Rows[i0][1] = _SafeModel.GetAtt(i0);
+            _DataList.Rows[i1][1] = _SafeModel.GetAtt(i1);
+            GvAttList.Rows[i1].Selected = true;
+        }
+
         public void CutAtt()
         {
             _CmpLast.Cut();

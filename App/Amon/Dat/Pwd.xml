@@ -36,19 +36,20 @@
     <Action Id="change-att-memo" Class="Me.Amon.Pwd.E._Att.ChangeMemoAction"/>
     <Action Id="change-att-file" Class="Me.Amon.Pwd.E._Att.ChangeFileAction"/>
     <Action Id="change-att-line" Class="Me.Amon.Pwd.E._Att.ChangeLineAction"/>
-    <Action Id="delete-att" Class="Me.Amon.Pwd.E._Att.DeleteAttAction"/>
+    <Action Id="update-att" Class="Me.Amon.Pwd.E._Att.UpdateAttAction"/>
+	<Action Id="delete-att" Class="Me.Amon.Pwd.E._Att.DeleteAttAction"/>
     <Action Id="att-edit-cut" Class="Me.Amon.Pwd.E._Att.EditCutAction"/>
     <Action Id="att-edit-copy" Class="Me.Amon.Pwd.E._Att.EditCopyAction"/>
     <Action Id="att-edit-paste" Class="Me.Amon.Pwd.E._Att.EditPasteAction"/>
     <Action Id="att-edit-clear" Class="Me.Amon.Pwd.E._Att.EditClearAction"/>
     <Action Id="att-edit-move-up" Class="Me.Amon.Pwd.E._Att.MoveUpAction"/>
     <Action Id="att-edit-move-down" Class="Me.Amon.Pwd.E._Att.MoveDownAction"/>
+    <Action Id="att-edit-select-prev" Class="Me.Amon.Pwd.E._Att.SelectPrevAction"/>
+    <Action Id="att-edit-select-next" Class="Me.Amon.Pwd.E._Att.SelectNextAction"/>
     <Action Id="top-most" Class="Me.Amon.Pwd.E.View.TopMostAction"/>
     <Action Id="pattern-pro" Class="Me.Amon.Pwd.E.View.ProPatternAction"/>
     <Action Id="pattern-wiz" Class="Me.Amon.Pwd.E.View.WizPatternAction"/>
     <Action Id="pattern-pad" Class="Me.Amon.Pwd.E.View.PadPatternAction"/>
-    <Action Id="select-prev" Class="Me.Amon.Pwd.E.View.SelectPrevAction"/>
-    <Action Id="select-next" Class="Me.Amon.Pwd.E.View.SelectNextAction"/>
     <Action Id="menubar-visible" Class="Me.Amon.Pwd.E.View.MenubarVisibleAction"/>
     <Action Id="toolbar-visible" Class="Me.Amon.Pwd.E.View.ToolbarVisibleAction"/>
     <Action Id="echobar-visible" Class="Me.Amon.Pwd.E.View.EchobarVisibleAction"/>
@@ -81,7 +82,7 @@
   <Strokes Id="APwd">
     <Stroke Key="^ S" ActionId="update-key" Memo="保存记录"/>
     <Stroke Key="# C" ActionId="att-edit-copy" Memo="复制属性"/>
-    <Stroke Key="# U" ActionId="att-edit-save" Memo="保存属性"/>
+    <Stroke Key="# U" ActionId="update-att" Memo="保存属性"/>
     <Stroke Key="# D" ActionId="delete-att" Memo="删除属性"/>
   </Strokes>
 
@@ -176,11 +177,11 @@
         <Stroke Key="# D" Memo="移除当前属性"/>
       </Item>
       <Line/>
-      <Item Type="normal" Text="选择上一属性" ActionId="select-prev">
+      <Item Type="normal" Text="选择上一属性" ActionId="att-edit-select-prev">
         <Stroke Key="^ U" Memo="选择上一个属性"/>
         <Stroke Key="^ Up" Memo="选择上一个属性"/>
       </Item>
-      <Item Type="normal" Text="选择下一属性" ActionId="select-next">
+      <Item Type="normal" Text="选择下一属性" ActionId="att-edit-select-next">
         <Stroke Key="^ D" Memo="选择下一个属性"/>
         <Stroke Key="^ Down" Memo="选择下一个属性"/>
       </Item>

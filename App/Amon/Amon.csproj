@@ -31,7 +31,7 @@
     <SuiteName>阿木软件</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>7.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -310,8 +310,8 @@
     <Compile Include="Pwd\E\View\MenubarVisibleAction.cs" />
     <Compile Include="Pwd\E\View\PadPatternAction.cs" />
     <Compile Include="Pwd\E\View\ProPatternAction.cs" />
-    <Compile Include="Pwd\E\View\SelectNextAction.cs" />
-    <Compile Include="Pwd\E\View\SelectPrevAction.cs" />
+    <Compile Include="Pwd\E\_Att\SelectNextAction.cs" />
+    <Compile Include="Pwd\E\_Att\SelectPrevAction.cs" />
     <Compile Include="Pwd\E\View\ToolbarVisibleAction.cs" />
     <Compile Include="Pwd\E\View\TopMostAction.cs" />
     <Compile Include="Pwd\E\View\WizPatternAction.cs" />

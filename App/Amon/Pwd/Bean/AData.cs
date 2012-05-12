@@ -22,6 +22,7 @@ namespace Me.Amon.Pwd.Bean
 
         protected void ShowSpec(Control ctl)
         {
+            CmMenu.Show(ctl, 0, ctl.Height);
         }
         #endregion
 
