@@ -1,8 +1,8 @@
 ﻿using System.Windows.Forms;
 
-namespace Demo
+namespace DemoLib
 {
-    public class DemoLib : Me.Amon.Pwd.E.APwdAction
+    public class Demo : Me.Amon.Pwd.E.APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

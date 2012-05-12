@@ -9,6 +9,12 @@ namespace Me.Amon.Da
     {
         void CloseConnect();
 
+        /// <summary>
+        /// 读取数据版本
+        /// </summary>
+        /// <returns></returns>
+        Dbv DbVersion { get; }
+
         #region 数据更新
         /// <summary>
         /// 存储数据

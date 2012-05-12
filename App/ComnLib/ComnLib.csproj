@@ -41,6 +41,7 @@
     <Compile Include="Ce\Wrapper.cs" />
     <Compile Include="Da\DBA.cs" />
     <Compile Include="Da\DFA.cs" />
+    <Compile Include="Model\Dbv.cs" />
     <Compile Include="Model\Dto.cs" />
     <Compile Include="Model\Log.cs" />
     <Compile Include="Model\Vcs.cs" />

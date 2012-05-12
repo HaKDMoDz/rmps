@@ -75,7 +75,6 @@
     <Action Id="change-major" Class="Me.Amon.Pwd.E._Key.ChangeMajorAction"/>
     <Action Id="sort-dir" Class="Me.Amon.Pwd.E._Key.SortDirAction"/>
     <Action Id="sort-key" Class="Me.Amon.Pwd.E._Key.SortKeyAction"/>
-    <Action Id="demo" Class="DemoLib.Demo" LibId="Demo"/>
   </Actions>
 
   <!--系统快捷键-->
