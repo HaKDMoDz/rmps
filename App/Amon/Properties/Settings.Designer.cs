@@ -49,7 +49,7 @@ namespace Me.Amon.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public int Pattern {
             get {
                 return ((int)(this["Pattern"]));

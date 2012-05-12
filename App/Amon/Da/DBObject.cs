@@ -15,6 +15,7 @@ namespace Me.Amon.Da
         private string _DbPath;
         private IObjectContainer _Container;
         private UserModel _UserModel;
+        private Dbv _DbVersion;
 
         #region 构造函数
         public DBObject()
@@ -40,7 +41,17 @@ namespace Me.Amon.Da
                     config.Common.ObjectClass(typeof(Key)).ObjectField("Title").Indexed(true);
                     config.Common.ObjectClass(typeof(Key)).ObjectField("MetaKey").Indexed(true);
                     config.Common.ObjectClass(typeof(Lib)).CascadeOnUpdate(true);
+                    bool isNew = File.Exists(_DbPath);
                     _Container = Db4oEmbedded.OpenFile(config, _DbPath);
+                    if (isNew)
+                    {
+                        _Container.Store(new Dbv { Version = "2" });
+                    }
+                    else
+                    {
+                        IList<Dbv> dbvs = Container.Query<Dbv>();
+                        _DbVersion = dbvs.Count > 0 ? dbvs[0] : new Dbv { Version = "1" };
+                    }
                 }
                 return _Container;
             }
@@ -52,6 +63,18 @@ namespace Me.Amon.Da
             {
                 _Container.Close();
                 _Container = null;
+            }
+        }
+
+        /// <summary>
+        /// 读取数据版本
+        /// </summary>
+        /// <returns></returns>
+        public Dbv DbVersion
+        {
+            get
+            {
+                return _DbVersion;
             }
         }
         #endregion

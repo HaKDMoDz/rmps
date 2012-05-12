@@ -57,45 +57,6 @@ namespace Me.Amon
             }
             Location = new Point(x, y);
 
-            // 视图模式
-            int pattern = Settings.Default.Pattern;
-            if (pattern == 0)
-            {
-                pattern = -1;
-            }
-            NiTray.Visible = (pattern & EApp.PATTERN_TRAY) != 0;
-            MgTray.Checked = NiTray.Visible;
-            Visible = (pattern & EApp.PATTERN_ICON) != 0;
-            MtIcon.Checked = Visible;
-
-            _AlienRadius = 11;
-            _AlienCenterX = 12;
-            _AlienCenterY = 12;
-            x = _AlienRadius << 1;
-            _AlienRect = new Rectangle(0, 0, x, x);
-
-            _PupilImg = Resources.Pupil;
-            _PupilRadius = 6;
-            _PupilCenterX = _AlienRadius;
-            _PupilCenterY = _AlienRadius;
-
-            _BufImage = new Bitmap(PbLogo.Width, PbLogo.Height);
-            _BRect = new Rectangle(0, 0, PbLogo.Width, PbLogo.Height);
-            _BufBrush = new LinearGradientBrush(_BRect, Color.FromArgb(96, 96, 96), Color.FromArgb(0, 0, 0), LinearGradientMode.Vertical);
-
-            _TmpImage = new Bitmap(x, x);
-            _TmpBrush = new SolidBrush(Color.White);
-
-            x = (_BufImage.Width - _TmpImage.Width) / 3;
-            y = (_BufImage.Height - _TmpImage.Height) >> 1;
-            _LRect = new Rectangle(x, y, _AlienRadius, _TmpImage.Height);
-            _RRect = new Rectangle(x + _AlienRadius + x, y, _AlienRadius, _TmpImage.Height);
-
-            GenImage(_PupilCenterX, _PupilCenterY);
-
-            BgWorker.Interval = 30;
-            BgWorker.Start();
-
             _UserModel = new UserModel();
             if (File.Exists(IEnv.FILE_LOG))
             {
@@ -229,6 +190,45 @@ namespace Me.Amon
         #endregion
 
         #region 窗口事件
+        private void Main_Load(object sender, EventArgs e)
+        {
+            int pattern = Settings.Default.Pattern;
+            if (pattern == 0)
+            {
+                pattern = -1;
+            }
+            NiTray.Visible = (pattern & EApp.PATTERN_TRAY) != 0;
+            MgTray.Checked = NiTray.Visible;
+
+            _AlienRadius = 11;
+            _AlienCenterX = 12;
+            _AlienCenterY = 12;
+            int x = _AlienRadius << 1;
+            _AlienRect = new Rectangle(0, 0, x, x);
+
+            _PupilImg = Resources.Pupil;
+            _PupilRadius = 6;
+            _PupilCenterX = _AlienRadius;
+            _PupilCenterY = _AlienRadius;
+
+            _BufImage = new Bitmap(PbLogo.Width, PbLogo.Height);
+            _BRect = new Rectangle(0, 0, PbLogo.Width, PbLogo.Height);
+            _BufBrush = new LinearGradientBrush(_BRect, Color.FromArgb(96, 96, 96), Color.FromArgb(0, 0, 0), LinearGradientMode.Vertical);
+
+            _TmpImage = new Bitmap(x, x);
+            _TmpBrush = new SolidBrush(Color.White);
+
+            x = (_BufImage.Width - _TmpImage.Width) / 3;
+            int y = (_BufImage.Height - _TmpImage.Height) >> 1;
+            _LRect = new Rectangle(x, y, _AlienRadius, _TmpImage.Height);
+            _RRect = new Rectangle(x + _AlienRadius + x, y, _AlienRadius, _TmpImage.Height);
+
+            GenImage(_PupilCenterX, _PupilCenterY);
+
+            BgWorker.Interval = 30;
+            BgWorker.Start();
+        }
+
         private void Main_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -297,9 +297,14 @@ namespace Me.Amon
             Settings.Default.Save();
         }
 
+        private void PbLogo_DoubleClick(object sender, EventArgs e)
+        {
+            ShowLast();
+        }
+
         private void NiTray_DoubleClick(object sender, EventArgs e)
         {
-            BringToFront();
+            ShowLast();
         }
         #endregion
 
@@ -418,7 +423,7 @@ namespace Me.Amon
             SignOf();
         }
 
-        private void MtSignFp_Click(object sender, EventArgs e)
+        private void MgSignFp_Click(object sender, EventArgs e)
         {
         }
 
@@ -428,130 +433,6 @@ namespace Me.Amon
         }
 
         private void MgExit_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-        #endregion
-
-        #region 托盘菜单
-        private void MtIcon_Click(object sender, EventArgs e)
-        {
-            Visible = !Visible;
-            MtIcon.Checked = Visible;
-
-            if (Visible)
-            {
-                Settings.Default.Pattern |= EApp.PATTERN_ICON;
-            }
-            else
-            {
-                Settings.Default.Pattern ^= EApp.PATTERN_ICON;
-            }
-            Settings.Default.Save();
-        }
-
-        private void MtAPwd_Click(object sender, EventArgs e)
-        {
-            if (_IApp == null || !_IApp.Visible)
-            {
-                CheckUser(new AmonHandler<int>(ShowAPwd));
-                return;
-            }
-
-            if (_IApp.AppId != IEnv.IAPP_APWD)
-            {
-                _IApp.Visible = false;
-                ShowAPwd(IEnv.IAPP_APWD);
-                return;
-            }
-        }
-
-        private void MtASec_Click(object sender, EventArgs e)
-        {
-            if (_IApp == null || !_IApp.Visible)
-            {
-                CheckUser(new AmonHandler<int>(ShowASec));
-                return;
-            }
-
-            if (_IApp.AppId != IEnv.IAPP_ASEC)
-            {
-                _IApp.Visible = false;
-                ShowASec(IEnv.IAPP_ASEC);
-                return;
-            }
-        }
-
-        private void MtABar_Click(object sender, EventArgs e)
-        {
-            if (_IApp == null || !_IApp.Visible)
-            {
-                CheckUser(new AmonHandler<int>(ShowABar));
-                return;
-            }
-
-            if (_IApp.AppId != IEnv.IAPP_ABAR)
-            {
-                _IApp.Visible = false;
-                ShowABar(IEnv.IAPP_ABAR);
-                return;
-            }
-        }
-
-        private void MtARen_Click(object sender, EventArgs e)
-        {
-            if (_IApp == null || !_IApp.Visible)
-            {
-                CheckUser(new AmonHandler<int>(ShowARen));
-                return;
-            }
-
-            if (_IApp.AppId != IEnv.IAPP_AREN)
-            {
-                _IApp.Visible = false;
-                ShowARen(IEnv.IAPP_AREN);
-                return;
-            }
-        }
-
-        private void MtSignOl_Click(object sender, EventArgs e)
-        {
-            //SignAc(ESignAc.SignOl, new AmonHandler<int>(DoSignOl));
-            SignAc(ESignAc.SignOl, new AmonHandler<int>(ShowAPwd));
-        }
-
-        private void MtSignUl_Click(object sender, EventArgs e)
-        {
-            SignAc(ESignAc.SignUl, new AmonHandler<int>(ShowAPwd));
-        }
-
-        private void MtSignPc_Click(object sender, EventArgs e)
-        {
-            SignAc(ESignAc.SignPc, new AmonHandler<int>(ShowAPwd));
-        }
-
-        private void MtSignIn_Click(object sender, EventArgs e)
-        {
-            //SignAc(ESignAc.SignIn, new AmonHandler<int>(DoSignIn));
-            SignAc(ESignAc.SignIn, new AmonHandler<int>(ShowAPwd));
-        }
-
-        private void MtSignOf_Click(object sender, EventArgs e)
-        {
-            SignOf();
-        }
-
-        private void MgSignFp_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MtInfo_Click(object sender, EventArgs e)
-        {
-            new About().ShowDialog();
-        }
-
-        private void MtExit_Click(object sender, EventArgs e)
         {
             Close();
         }
@@ -644,13 +525,8 @@ namespace Me.Amon
             _UserModel.CaSignOf();
 
             MgSignUp.Visible = true;
-            MtSignUp.Visible = true;
-
             MgSignIn.Visible = true;
-            MtSignIn.Visible = true;
-
             MgSignOf.Visible = false;
-            MtSignOf.Visible = false;
         }
 
         private SignRc _SignRc;
@@ -675,13 +551,8 @@ namespace Me.Amon
         private void DoSignIn(int view)
         {
             MgSignIn.Visible = false;
-            MtSignIn.Visible = false;
-
             MgSignUp.Visible = false;
-            MtSignUp.Visible = false;
-
             MgSignOf.Visible = true;
-            MtSignOf.Visible = true;
         }
 
         private void DoSignOl(int view)
@@ -749,9 +620,8 @@ namespace Me.Amon
 
             _ARen.Show();
         }
-        #endregion
 
-        private void PbLogo_DoubleClick(object sender, EventArgs e)
+        private void ShowLast()
         {
             if (_IApp == null || _IApp.IsDisposed || !_IApp.Visible)
             {
@@ -762,13 +632,9 @@ namespace Me.Amon
             _IApp.Visible = true;
             _IApp.BringToFront();
         }
+        #endregion
 
         private void MgSignUp_Click(object sender, EventArgs e)
-        {
-            SignAc(ESignAc.SignPc, new AmonHandler<int>(ShowAPwd));
-        }
-
-        private void MtSignUp_Click(object sender, EventArgs e)
         {
             SignAc(ESignAc.SignPc, new AmonHandler<int>(ShowAPwd));
         }
