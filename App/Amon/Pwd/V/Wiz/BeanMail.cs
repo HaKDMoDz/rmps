@@ -42,6 +42,8 @@ namespace Me.Amon.Pwd.V.Wiz
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
             BtSend.Image = viewModel.GetImage("att-mail-send");
+
+            InitSpec(TbData);
         }
         #endregion
 

@@ -28,31 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.BtOpen = new System.Windows.Forms.Button();
-            this.BtView = new System.Windows.Forms.Button();
+            this.BtOpt = new System.Windows.Forms.Button();
             this.TbData = new System.Windows.Forms.TextBox();
             this.LbData = new System.Windows.Forms.Label();
             this.TbName = new System.Windows.Forms.TextBox();
             this.LbName = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // BtOpen
+            // BtOpt
             // 
-            this.BtOpen.Location = new System.Drawing.Point(83, 57);
-            this.BtOpen.Name = "BtOpen";
-            this.BtOpen.Size = new System.Drawing.Size(21, 21);
-            this.BtOpen.TabIndex = 11;
-            this.BtOpen.UseVisualStyleBackColor = true;
-            this.BtOpen.Click += new System.EventHandler(this.BtOpen_Click);
-            // 
-            // BtView
-            // 
-            this.BtView.Location = new System.Drawing.Point(56, 57);
-            this.BtView.Name = "BtView";
-            this.BtView.Size = new System.Drawing.Size(21, 21);
-            this.BtView.TabIndex = 10;
-            this.BtView.UseVisualStyleBackColor = true;
-            this.BtView.Click += new System.EventHandler(this.BtView_Click);
+            this.BtOpt.Location = new System.Drawing.Point(56, 57);
+            this.BtOpt.Name = "BtOpt";
+            this.BtOpt.Size = new System.Drawing.Size(21, 21);
+            this.BtOpt.TabIndex = 10;
+            this.BtOpt.UseVisualStyleBackColor = true;
+            this.BtOpt.Click += new System.EventHandler(this.BtOpt_Click);
             // 
             // TbData
             // 
@@ -92,8 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.BtOpen);
-            this.Controls.Add(this.BtView);
+            this.Controls.Add(this.BtOpt);
             this.Controls.Add(this.TbData);
             this.Controls.Add(this.LbData);
             this.Controls.Add(this.TbName);
@@ -107,8 +96,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button BtOpen;
-        private System.Windows.Forms.Button BtView;
+        private System.Windows.Forms.Button BtOpt;
         private System.Windows.Forms.TextBox TbData;
         private System.Windows.Forms.Label LbData;
         private System.Windows.Forms.TextBox TbName;

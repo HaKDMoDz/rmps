@@ -7,8 +7,8 @@ namespace Me.Amon.Pwd.Bean
     public partial class ACall : UserControl
     {
         protected Att _Att;
-        protected TextBox _Box;
-        protected ToolStripMenuItem _LastItem;
+        private TextBox _Box;
+        private ToolStripMenuItem _LastItem;
 
         #region 构造函数
         public ACall()
@@ -18,8 +18,10 @@ namespace Me.Amon.Pwd.Bean
         #endregion
 
         #region 公共函数
-        protected void InitSpec()
+        protected void InitSpec(TextBox box)
         {
+            _Box = box;
+
             EventHandler handler = new EventHandler(MiTel_Click);
             char split = ';';
 
@@ -66,7 +68,7 @@ namespace Me.Amon.Pwd.Bean
             MiTtyTdd.Click += handler;
         }
 
-        protected void ShowSpec()
+        protected void ShowSpec(Control ctl)
         {
         }
         #endregion

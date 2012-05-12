@@ -257,19 +257,21 @@ namespace Me.Amon.Pwd._Lib
         {
             bool update = CharUtil.IsValidateHash(detail.Id);
 
-            Pwd.Lib header = _Selected.Tag as Pwd.Lib;
-            detail.Header = header.Id;
-            detail.Id = HashUtil.UtcTimeInHex(false);
-            header.Details.Add(detail);
-            _UserModel.DBA.SaveVcs(header);
-
             if (update)
             {
+                _UserModel.DBA.SaveVcs(detail);
+
                 _Selected.Text = Att.SP_TPL_LS + detail.Text + Att.SP_TPL_RS;
                 TreeNode root = TvLibView.SelectedNode;
             }
             else
             {
+                Pwd.Lib header = _Selected.Tag as Pwd.Lib;
+                detail.Header = header.Id;
+                detail.Id = HashUtil.UtcTimeInHex(false);
+                header.Details.Add(detail);
+                _UserModel.DBA.SaveVcs(header);
+
                 TreeNode node = new TreeNode();
                 node.Name = detail.Id;
                 node.Tag = detail;

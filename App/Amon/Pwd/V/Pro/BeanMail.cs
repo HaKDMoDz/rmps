@@ -25,6 +25,8 @@ namespace Me.Amon.Pwd.V.Pro
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
             BtSend.Image = viewModel.GetImage("att-mail-send");
+
+            InitSpec(TbData);
         }
 
         public Control Control { get { return this; } }

@@ -62,6 +62,7 @@
             this.MiRepeatable.Name = "MiRepeatable";
             this.MiRepeatable.Size = new System.Drawing.Size(164, 22);
             this.MiRepeatable.Text = "允许字符重复(&A)";
+            this.MiRepeatable.Click += new System.EventHandler(this.MiRepeatable_Click);
             // 
             // APass
             // 
@@ -78,6 +79,6 @@
         private System.Windows.Forms.ToolStripMenuItem MuCharLen;
         private System.Windows.Forms.ToolStripMenuItem MuCharSet;
         private System.Windows.Forms.ToolStripMenuItem MiRepeatable;
-        protected System.Windows.Forms.ContextMenuStrip CmMenu;
+        private System.Windows.Forms.ContextMenuStrip CmMenu;
     }
 }

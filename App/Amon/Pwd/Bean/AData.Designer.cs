@@ -78,6 +78,6 @@
         private System.Windows.Forms.ToolStripMenuItem 可选输入OToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 数据集ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 特殊符号ToolStripMenuItem;
-        protected System.Windows.Forms.ContextMenuStrip CmMenu;
+        private System.Windows.Forms.ContextMenuStrip CmMenu;
     }
 }

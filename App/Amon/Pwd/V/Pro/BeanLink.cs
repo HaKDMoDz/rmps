@@ -24,6 +24,8 @@ namespace Me.Amon.Pwd.V.Pro
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
             BtOpen.Image = viewModel.GetImage("att-link-open");
+
+            InitSpec(TbData);
         }
 
         public Control Control { get { return this; } }
@@ -125,7 +127,7 @@ namespace Me.Amon.Pwd.V.Pro
 
         private void BtOpt_Click(object sender, EventArgs e)
         {
-
+            ShowSpec(BtOpt);
         }
         #endregion
     }

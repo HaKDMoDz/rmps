@@ -29,6 +29,8 @@ namespace Me.Amon.Pwd.V.Pro
             BtMod.Image = viewModel.GetImage(TbData.UseSystemPasswordChar ? "att-pass-hide" : "att-pass-show");
             BtGen.Image = viewModel.GetImage("att-pass-gen");
             BtOpt.Image = viewModel.GetImage("att-pass-options");
+
+            InitSpec(TbData);
         }
 
         public Control Control { get { return this; } }
@@ -135,7 +137,7 @@ namespace Me.Amon.Pwd.V.Pro
 
         private void BtOpt_Click(object sender, EventArgs e)
         {
-            CmMenu.Show(BtOpt, 0, BtOpt.Height);
+            ShowSpec(BtOpt);
         }
         #endregion
     }

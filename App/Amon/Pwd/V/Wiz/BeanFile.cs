@@ -42,6 +42,8 @@ namespace Me.Amon.Pwd.V.Wiz
 
             BtView.Image = viewModel.GetImage("att-file-preview");
             BtOpen.Image = viewModel.GetImage("att-file-append");
+
+            InitSpec(TbData);
         }
         #endregion
 
@@ -115,7 +117,7 @@ namespace Me.Amon.Pwd.V.Wiz
 
         private void BtView_Click(object sender, EventArgs e)
         {
-            CmMenu.Show(BtView, 0, BtView.Height);
+            ShowSpec(BtView);
         }
 
         private void BtOpen_Click(object sender, EventArgs e)

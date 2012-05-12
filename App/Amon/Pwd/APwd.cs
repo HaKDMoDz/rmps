@@ -1708,7 +1708,7 @@ namespace Me.Amon.Pwd
         public void ShowUdcEdit()
         {
             UdcEditor edit = new UdcEditor(_UserModel);
-            edit.Init(null, new Udc());
+            edit.Init(_DataModel.UdcModel, new Udc());
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
@@ -1887,8 +1887,19 @@ namespace Me.Amon.Pwd
 
         private void LoadLayout()
         {
-            Location = new Point(_ViewModel.WindowLocX, _ViewModel.WindowLocY);
-            ClientSize = new Size(_ViewModel.WindowDimW, _ViewModel.WindowDimH);
+            if (_ViewModel.WindowState == EPwd.WINDOW_STATE_MAXIMIZED)
+            {
+                WindowState = FormWindowState.Maximized;
+            }
+            else if (_ViewModel.WindowState == EPwd.WINDOW_STATE_MINIMIZED)
+            {
+                WindowState = FormWindowState.Minimized;
+            }
+            else
+            {
+                ClientSize = new Size(_ViewModel.WindowDimW, _ViewModel.WindowDimH);
+                Location = new Point(_ViewModel.WindowLocX, _ViewModel.WindowLocY);
+            }
 
             HSplit.SplitterDistance = _ViewModel.HSplitDistance;
             HSplit.Panel1Collapsed = !_ViewModel.NavPaneVisible;
@@ -1903,10 +1914,23 @@ namespace Me.Amon.Pwd
 
         private void SaveLayout()
         {
-            _ViewModel.WindowLocX = Location.X;
-            _ViewModel.WindowLocY = Location.Y;
-            _ViewModel.WindowDimW = ClientSize.Width;
-            _ViewModel.WindowDimH = ClientSize.Height;
+            if (WindowState == FormWindowState.Maximized)
+            {
+                _ViewModel.WindowState = EPwd.WINDOW_STATE_MAXIMIZED;
+            }
+            else if (WindowState == FormWindowState.Minimized)
+            {
+                _ViewModel.WindowState = EPwd.WINDOW_STATE_MINIMIZED;
+            }
+            else
+            {
+                _ViewModel.WindowState = EPwd.WINDOW_STATE_NORMAL;
+
+                _ViewModel.WindowLocX = Location.X;
+                _ViewModel.WindowLocY = Location.Y;
+                _ViewModel.WindowDimW = ClientSize.Width;
+                _ViewModel.WindowDimH = ClientSize.Height;
+            }
 
             _ViewModel.HSplitDistance = HSplit.SplitterDistance;
             _ViewModel.NavPaneVisible = !HSplit.Panel1Collapsed;

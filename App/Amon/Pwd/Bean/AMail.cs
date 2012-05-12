@@ -8,8 +8,8 @@ namespace Me.Amon.Pwd.Bean
     public partial class AMail : UserControl
     {
         protected Att _Att;
-        protected TextBox _Box;
-        protected ToolStripMenuItem _LastItem;
+        private TextBox _Box;
+        private ToolStripMenuItem _LastItem;
 
         #region 构造函数
         public AMail()
@@ -19,8 +19,10 @@ namespace Me.Amon.Pwd.Bean
         #endregion
 
         #region 公共函数
-        protected void InitOnce()
+        protected void InitSpec(TextBox box)
         {
+            _Box = box;
+
             EventHandler handler = new EventHandler(MiEmail_Click);
             char split = ';';
 
@@ -37,6 +39,10 @@ namespace Me.Amon.Pwd.Bean
             MiPhone.Click += handler;
             MiOther.Tag = "" + split + "";
             MiOther.Click += handler;
+        }
+
+        protected void ShowSpec(Control ctl)
+        {
         }
 
         protected void OpenMail()

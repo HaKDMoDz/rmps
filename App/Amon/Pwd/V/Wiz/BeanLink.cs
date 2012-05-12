@@ -41,6 +41,8 @@ namespace Me.Amon.Pwd.V.Wiz
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
             BtOpen.Image = viewModel.GetImage("att-link-open");
+
+            InitSpec(TbData);
         }
         #endregion
 

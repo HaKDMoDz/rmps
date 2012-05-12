@@ -23,10 +23,11 @@ namespace Me.Amon.Pwd.V.Pro
         {
             _DataModel = dataModel;
 
-            BtOpen.Visible = false;
-            BtView.Visible = false;
+            BtOpt.Visible = false;
 
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
+
+            InitSpec(TbData);
         }
 
         public Control Control
@@ -120,14 +121,9 @@ namespace Me.Amon.Pwd.V.Pro
             _Ctl = TbData;
         }
 
-        private void BtOpen_Click(object sender, EventArgs e)
+        private void BtOpt_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void BtView_Click(object sender, EventArgs e)
-        {
-            CmMenu.Show(BtView, 0, BtView.Height);
+            ShowSpec(BtOpt);
         }
         #endregion
     }

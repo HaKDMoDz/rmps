@@ -14,11 +14,11 @@ namespace Me.Amon.Pwd.Bean
         #endregion
 
         #region 公共函数
-        protected void InitSpec()
+        protected void InitSpec(TextBox box)
         {
         }
 
-        protected void ShowSpec()
+        protected void ShowSpec(Control ctl)
         {
         }
         #endregion

@@ -114,6 +114,6 @@
         private System.Windows.Forms.ToolStripMenuItem MuDateTime;
         private System.Windows.Forms.ToolStripSeparator MiDateSep1;
         private System.Windows.Forms.ToolStripMenuItem MiDateTimeDiy;
-        protected System.Windows.Forms.ContextMenuStrip CmMenu;
+        private System.Windows.Forms.ContextMenuStrip CmMenu;
     }
 }

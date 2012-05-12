@@ -20,7 +20,6 @@ namespace Me.Amon.Pwd.V.Pro
         #region 接口实现
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
-            _Box = TbData;
             _DataModel = dataModel;
 
             TbName.GotFocus += new EventHandler(TbName_GotFocus);
@@ -28,6 +27,8 @@ namespace Me.Amon.Pwd.V.Pro
 
             BtView.Image = viewModel.GetImage("att-file-preview");
             BtOpen.Image = viewModel.GetImage("att-file-append");
+
+            InitSpec(TbData);
         }
 
         public Control Control { get { return this; } }
@@ -124,7 +125,7 @@ namespace Me.Amon.Pwd.V.Pro
 
         private void BtView_Click(object sender, EventArgs e)
         {
-            CmMenu.Show(BtView, 0, BtView.Height);
+            ShowSpec(BtView);
         }
 
         private void BtOpen_Click(object sender, EventArgs e)

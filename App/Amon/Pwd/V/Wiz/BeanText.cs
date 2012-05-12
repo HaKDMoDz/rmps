@@ -39,6 +39,8 @@ namespace Me.Amon.Pwd.V.Wiz
             Dock = DockStyle.Fill;
 
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
+
+            InitSpec(TbData);
         }
         #endregion
 

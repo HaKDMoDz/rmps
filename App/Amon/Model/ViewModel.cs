@@ -46,6 +46,8 @@ namespace Me.Amon.Model
 
         public string Skin { get; set; }
 
+        public int WindowState { get; set; }
+
         public bool MenuBarVisible { get; set; }
 
         public bool ToolBarVisible { get; set; }
@@ -189,6 +191,11 @@ namespace Me.Amon.Model
             _UserProp = new DFAccess();
             _UserProp.Load(Path.Combine(_UserModel.Home, IEnv.USER_CFG));
             Pattern = _UserProp.Get("Pattern", "");
+            string tmp = _UserProp.Get("WindowState", "0");
+            if (CharUtil.IsValidateLong(tmp))
+            {
+                WindowState = int.Parse(tmp);
+            }
             MenuBarVisible = IEnv.VALUE_TRUE == _UserProp.Get("MenuBar", IEnv.VALUE_TRUE).ToLower();
             ToolBarVisible = IEnv.VALUE_TRUE == _UserProp.Get("ToolBar", IEnv.VALUE_TRUE).ToLower();
             EchoBarVisible = IEnv.VALUE_TRUE == _UserProp.Get("EchoBar", IEnv.VALUE_TRUE).ToLower();
@@ -197,7 +204,7 @@ namespace Me.Amon.Model
             CatTreeVisible = IEnv.VALUE_TRUE == _UserProp.Get("CatTree", IEnv.VALUE_TRUE).ToLower();
             KeyListVisible = IEnv.VALUE_TRUE == _UserProp.Get("KeyList", IEnv.VALUE_TRUE).ToLower();
 
-            string tmp = _UserProp.Get("HSplitDistance", "200");
+            tmp = _UserProp.Get("HSplitDistance", "200");
             if (CharUtil.IsValidateLong(tmp))
             {
                 HSplitDistance = int.Parse(tmp);
@@ -242,6 +249,8 @@ namespace Me.Amon.Model
         public void Save()
         {
             _UserProp.Set("Pattern", Pattern);
+
+            _UserProp.Set("WindowState", WindowState.ToString());
 
             _UserProp.Set("LocX", WindowLocX.ToString());
             _UserProp.Set("LocY", WindowLocY.ToString());

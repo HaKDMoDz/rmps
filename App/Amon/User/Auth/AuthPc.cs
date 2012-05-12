@@ -42,7 +42,6 @@ namespace Me.Amon.User.Auth
                 TbOldPass.Focus();
                 return;
             }
-            TbOldPass.Text = "";
             #endregion
 
             #region 新口令

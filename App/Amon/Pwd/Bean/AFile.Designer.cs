@@ -71,6 +71,6 @@
 
         private System.Windows.Forms.ToolStripMenuItem MiPwdViewer;
         private System.Windows.Forms.ToolStripMenuItem MiSysViewer;
-        protected System.Windows.Forms.ContextMenuStrip CmMenu;
+        private System.Windows.Forms.ContextMenuStrip CmMenu;
     }
 }

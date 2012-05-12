@@ -8,7 +8,7 @@ namespace Me.Amon.Pwd.Bean
     public partial class ADate : UserControl
     {
         protected Att _Att;
-        protected DateTimePicker _Box;
+        private DateTimePicker _Box;
         private ToolStripMenuItem _LastMenu;
         private Dictionary<string, ToolStripMenuItem> _MenuList;
 
@@ -20,8 +20,10 @@ namespace Me.Amon.Pwd.Bean
         #endregion
 
         #region 公共函数
-        protected void InitSpec()
+        protected void InitSpec(DateTimePicker box)
         {
+            _Box = box;
+
             _MenuList = new Dictionary<string, ToolStripMenuItem>(15);
             InitMenu("yyyyMMdd", "yyyyMMdd", MuDate);
             InitMenu("yyyy-MM-dd", "yyyy-MM-dd", MuDate);
@@ -46,7 +48,7 @@ namespace Me.Amon.Pwd.Bean
             _LastMenu.Checked = true;
         }
 
-        protected void ShowSpec()
+        protected void ShowSpec(Control ctl)
         {
             _LastMenu.Checked = false;
 
@@ -66,6 +68,8 @@ namespace Me.Amon.Pwd.Bean
             }
 
             _LastMenu.Checked = true;
+
+            CmMenu.Show(ctl, 0, ctl.Height);
         }
         #endregion
 

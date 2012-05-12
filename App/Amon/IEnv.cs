@@ -58,13 +58,6 @@
         public const int IAPP_ABAR = 4;
         public const int IAPP_AREN = 8;
 
-        /// <summary>
-        /// 视图类型
-        /// </summary>
-        public const int KEY_APWD = 0x1;
-        public const int KEY_AWIZ = 0x2;
-        public const int KEY_APAD = 0x4;
-
         public const string FILE_IMG = "图像文件|*.png;*.jpg;*.gif;*.bmp|PNG文件|*.png|JPG文件|*.jpg|BMP文件|*.bmp";
         /// <summary>
         /// 加密文件

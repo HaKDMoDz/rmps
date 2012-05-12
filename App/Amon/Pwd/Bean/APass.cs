@@ -12,9 +12,9 @@ namespace Me.Amon.Pwd.Bean
     public partial class APass : UserControl
     {
         protected Att _Att;
-        protected TextBox _Box;
         protected DataModel _DataModel;
         protected ViewModel _ViewModel;
+        private TextBox _Box;
         private ToolStripMenuItem _LastCharLen;
         private ToolStripMenuItem _CharLenDef;
         private ToolStripSeparator _CharLenSep;
@@ -34,8 +34,10 @@ namespace Me.Amon.Pwd.Bean
         #endregion
 
         #region 公共函数
-        protected void InitSpec()
+        protected void InitSpec(TextBox box)
         {
+            _Box = box;
+
             CmMenu.SuspendLayout();
             _CharLenDef = new ToolStripMenuItem();
             _CharLenDef.Size = new Size(160, 22);
@@ -71,10 +73,10 @@ namespace Me.Amon.Pwd.Bean
             _CharSetSep = new ToolStripSeparator();
         }
 
-        protected void ShowSpec()
+        protected void ShowSpec(Control ctl)
         {
             //_DataModel = userModel;
-            if ((_DataModel.UdcModel.Modified & IEnv.KEY_AWIZ) > 0)
+            if ((_DataModel.UdcModel.Modified & EPwd.KEY_AWIZ) > 0)
             {
                 MuCharSet.DropDownItems.Clear();
                 MuCharSet.DropDownItems.Add(_CharSetDef);
@@ -93,7 +95,7 @@ namespace Me.Amon.Pwd.Bean
                     MuCharSet.DropDownItems.Add(item);
                     _CharSetDict[ucs.Id] = item;
                 }
-                _DataModel.UdcModel.Modified &= IEnv.KEY_AWIZ;
+                _DataModel.UdcModel.Modified &= EPwd.KEY_AWIZ;
 
                 _LastCharSet = _CharSetDef;
                 _LastCharSet.Checked = true;
@@ -136,6 +138,8 @@ namespace Me.Amon.Pwd.Bean
 
             string rep = _Att.GetSpec(PassAtt.SPEC_PWDS_REP, Att.SPEC_VALUE_FAIL);
             MiRepeatable.Checked = Att.SPEC_VALUE_TRUE.Equals(rep);
+
+            CmMenu.Show(ctl, 0, ctl.Height);
         }
 
         protected void GenPass()

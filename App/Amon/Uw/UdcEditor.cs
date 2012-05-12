@@ -31,12 +31,19 @@ namespace Me.Amon.Uw
         public void Init(UdcModel udcModel, Udc udc)
         {
             _UdcModel = udcModel;
+            if (_UdcModel != null)
+            {
+                foreach (Udc tmp in _UdcModel.UdcList)
+                {
+                    LsUdc.Items.Add(tmp);
+                }
+            }
 
             TbName.MaxLength = DBConst.AUDC0104_SIZE;
             TbTips.MaxLength = DBConst.AUDC0105_SIZE;
             TbChar.MaxLength = DBConst.AUDC0106_SIZE;
 
-            LsUcs.SelectedItem = udc;
+            LsUdc.SelectedItem = udc;
             ShowData(udc);
         }
         #endregion
@@ -44,7 +51,7 @@ namespace Me.Amon.Uw
         #region 事件处理
         private void LsUcs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Udc item = LsUcs.SelectedItem as Udc;
+            Udc item = LsUdc.SelectedItem as Udc;
             if (item == null)
             {
                 return;
@@ -55,6 +62,7 @@ namespace Me.Amon.Uw
 
         private void BtAppend_Click(object sender, EventArgs e)
         {
+            LsUdc.SelectedIndex = -1;
             ShowData(new Udc());
         }
 
@@ -124,13 +132,13 @@ namespace Me.Amon.Uw
             _Item.Data = buf.ToString();
 
             _UserModel.DBA.SaveVcs(_Item);
-            if (LsUcs.SelectedItem != null)
+            if (LsUdc.SelectedItem != null)
             {
-                LsUcs.Items[LsUcs.SelectedIndex] = _Item;
+                LsUdc.Items[LsUdc.SelectedIndex] = _Item;
             }
             else
             {
-                LsUcs.Items.Add(_Item);
+                LsUdc.Items.Add(_Item);
                 ShowData(new Udc());
             }
 

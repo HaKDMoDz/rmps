@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UdcEditor));
-            this.LsUcs = new System.Windows.Forms.ListBox();
+            this.LsUdc = new System.Windows.Forms.ListBox();
             this.LbName = new System.Windows.Forms.Label();
             this.TbName = new System.Windows.Forms.TextBox();
             this.LbTips = new System.Windows.Forms.Label();
@@ -41,15 +41,15 @@
             this.BtCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // LsUcs
+            // LsUdc
             // 
-            this.LsUcs.FormattingEnabled = true;
-            this.LsUcs.ItemHeight = 12;
-            this.LsUcs.Location = new System.Drawing.Point(12, 12);
-            this.LsUcs.Name = "LsUcs";
-            this.LsUcs.Size = new System.Drawing.Size(120, 208);
-            this.LsUcs.TabIndex = 0;
-            this.LsUcs.SelectedIndexChanged += new System.EventHandler(this.LsUcs_SelectedIndexChanged);
+            this.LsUdc.FormattingEnabled = true;
+            this.LsUdc.ItemHeight = 12;
+            this.LsUdc.Location = new System.Drawing.Point(12, 12);
+            this.LsUdc.Name = "LsUdc";
+            this.LsUdc.Size = new System.Drawing.Size(120, 208);
+            this.LsUdc.TabIndex = 0;
+            this.LsUdc.SelectedIndexChanged += new System.EventHandler(this.LsUcs_SelectedIndexChanged);
             // 
             // LbName
             // 
@@ -154,7 +154,7 @@
             this.Controls.Add(this.LbTips);
             this.Controls.Add(this.TbName);
             this.Controls.Add(this.LbName);
-            this.Controls.Add(this.LsUcs);
+            this.Controls.Add(this.LsUdc);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -170,7 +170,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox LsUcs;
+        private System.Windows.Forms.ListBox LsUdc;
         private System.Windows.Forms.Label LbName;
         private System.Windows.Forms.TextBox TbName;
         private System.Windows.Forms.Label LbTips;

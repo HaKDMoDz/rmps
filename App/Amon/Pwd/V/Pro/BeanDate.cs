@@ -26,6 +26,8 @@ namespace Me.Amon.Pwd.V.Pro
 
             BtNow.Image = viewModel.GetImage("att-date-now");
             BtOpt.Image = viewModel.GetImage("att-date-options");
+
+            InitSpec(DtData);
         }
 
         public Control Control { get { return this; } }
@@ -129,7 +131,7 @@ namespace Me.Amon.Pwd.V.Pro
 
         private void BtOpt_Click(object sender, EventArgs e)
         {
-            CmMenu.Show(BtOpt, 0, BtOpt.Height);
+            ShowSpec(BtOpt);
         }
         #endregion
     }

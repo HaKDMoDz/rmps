@@ -270,6 +270,6 @@
         private System.Windows.Forms.ToolStripMenuItem MiPager;
         private System.Windows.Forms.ToolStripMenuItem MiIsdn;
         private System.Windows.Forms.ToolStripMenuItem MiTtyTdd;
-        protected System.Windows.Forms.ContextMenuStrip CmMenu;
+        private System.Windows.Forms.ContextMenuStrip CmMenu;
     }
 }

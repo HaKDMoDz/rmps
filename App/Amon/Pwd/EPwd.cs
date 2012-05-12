@@ -13,5 +13,16 @@ namespace Me.Amon.Pwd
 
         public const string KEY_LABEL = "key-label";
         public const string KEY_MAJOR = "key-major";
+
+        /// <summary>
+        ///  ”Õº¿‡–Õ
+        /// </summary>
+        public const int KEY_APRO = 0x1;
+        public const int KEY_AWIZ = 0x2;
+        public const int KEY_APAD = 0x4;
+
+        public const int WINDOW_STATE_NORMAL = 0;
+        public const int WINDOW_STATE_MINIMIZED = 1;
+        public const int WINDOW_STATE_MAXIMIZED = 2;
     }
 }

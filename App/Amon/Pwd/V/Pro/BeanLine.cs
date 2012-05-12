@@ -22,6 +22,8 @@ namespace Me.Amon.Pwd.V.Pro
         {
             this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
             this.TbData.GotFocus += new EventHandler(TbData_GotFocus);
+
+            InitSpec(TbData);
         }
 
         public Control Control { get { return this; } }
@@ -118,7 +120,7 @@ namespace Me.Amon.Pwd.V.Pro
 
         private void BtOpt_Click(object sender, EventArgs e)
         {
-
+            ShowSpec(BtOpt);
         }
         #endregion
     }

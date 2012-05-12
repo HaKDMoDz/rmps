@@ -41,6 +41,7 @@ namespace Me.Amon.Pwd.V.Wiz
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
             BtOpt.Image = viewModel.GetImage("att-data-options");
+            InitSpec(TbData);
         }
         #endregion
 
@@ -112,7 +113,7 @@ namespace Me.Amon.Pwd.V.Wiz
 
         private void BtOpt_Click(object sender, EventArgs e)
         {
-            CmMenu.Show(BtOpt, 0, BtOpt.Height);
+            ShowSpec(BtOpt);
         }
         #endregion
     }

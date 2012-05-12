@@ -43,6 +43,8 @@ namespace Me.Amon.Pwd.V.Wiz
 
             BtNow.Image = viewModel.GetImage("att-date-now");
             BtOpt.Image = viewModel.GetImage("att-date-options");
+
+            InitSpec(DtData);
         }
         #endregion
 
@@ -122,7 +124,7 @@ namespace Me.Amon.Pwd.V.Wiz
 
         private void BtOpt_Click(object sender, EventArgs e)
         {
-            CmMenu.Show(BtOpt, 0, BtOpt.Height);
+            ShowSpec(BtOpt);
         }
         #endregion
     }

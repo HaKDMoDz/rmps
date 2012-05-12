@@ -12,7 +12,7 @@ namespace Me.Amon.Pwd.Bean
     public partial class AFile : UserControl
     {
         protected Att _Att;
-        protected TextBox _Box;
+        private TextBox _Box;
         protected DataModel _DataModel;
 
         #region 构造函数
@@ -23,12 +23,14 @@ namespace Me.Amon.Pwd.Bean
         #endregion
 
         #region 公共函数
-        protected void InitSpec()
+        protected void InitSpec(TextBox box)
         {
+            _Box = box;
         }
 
-        protected void ShowSpec()
+        protected void ShowSpec(Control ctl)
         {
+            CmMenu.Show(ctl, 0, ctl.Height);
         }
 
         protected void OpenFile()
