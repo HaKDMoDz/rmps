@@ -743,7 +743,7 @@
           <Order>2</Order>
           <Id>qqqqqazrdzfcwvxg</Id>
           <Type>1</Type>
-		  <Name />
+		  <Name>NICKNAME</Name>
           <Text>昵称</Text>
           <Data/>
           <Memo/>
@@ -752,7 +752,7 @@
           <Order>3</Order>
           <Id>qqqqqaavaqdgrssv</Id>
           <Type>5</Type>
-		  <Name />
+		  <Name>BDAY</Name>
           <Text>生日</Text>
           <Data/>
           <Memo/>
@@ -761,7 +761,7 @@
           <Order>8</Order>
           <Id>qqqqqaavaqdtvxex</Id>
           <Type>1</Type>
-		  <Name />
+		  <Name>X-MSN</Name>
           <Text>MSN</Text>
           <Data/>
           <Memo/>
@@ -770,7 +770,7 @@
           <Order>9</Order>
           <Id>qqqqqaavaqdttgxz</Id>
           <Type>1</Type>
-		  <Name />
+		  <Name>X-QQ</Name>
           <Text>Q Q</Text>
           <Data/>
           <Memo/>
@@ -779,7 +779,7 @@
           <Order>10</Order>
           <Id>qqqqqaavaqdtfsxg</Id>
           <Type>1</Type>
-		  <Name />
+		  <Name>X-ICQ</Name>
           <Text>ICQ</Text>
           <Data/>
           <Memo/>
@@ -788,7 +788,7 @@
           <Order>11</Order>
           <Id>qqqqqaavaqdvrecd</Id>
           <Type>7</Type>
-		  <Name />
+		  <Name>TEL</Name>
           <Text>手机</Text>
           <Data/>
           <Memo/>
@@ -797,7 +797,7 @@
           <Order>12</Order>
           <Id>qqqqqaavaqdtcvce</Id>
           <Type>3</Type>
-		  <Name />
+		  <Name>URL</Name>
           <Text>个人主页</Text>
           <Data/>
           <Memo/>
@@ -806,7 +806,7 @@
           <Order>13</Order>
           <Id>qqqqqaavaqdtqtss</Id>
           <Type>7</Type>
-		  <Name />
+		  <Name>TEL</Name>
           <Text>家庭电话</Text>
           <Data/>
           <Memo/>
@@ -815,7 +815,7 @@
           <Order>14</Order>
           <Id>qqqqqaavaqdtwtyc</Id>
           <Type>4</Type>
-		  <Name />
+		  <Name>EMAIL</Name>
           <Text>电子邮件</Text>
           <Data/>
           <Memo/>
@@ -824,7 +824,7 @@
           <Order>15</Order>
           <Id>qqqqqaavaqdgzvcy</Id>
           <Type>1</Type>
-		  <Name />
+		  <Name>ADR</Name>
           <Text>通讯地址</Text>
           <Data/>
           <Memo/>
@@ -842,7 +842,7 @@
           <Order>17</Order>
           <Id>qqqqqaavaqdgtzeq</Id>
           <Type>1</Type>
-		  <Name />
+		  <Name>ORG</Name>
           <Text>公司</Text>
           <Data/>
           <Memo/>
@@ -860,7 +860,7 @@
           <Order>20</Order>
           <Id>qqqqqazrdzvevvyw</Id>
           <Type>1</Type>
-		  <Name />
+		  <Name>TITLE</Name>
           <Text>职位</Text>
           <Data/>
           <Memo/>
@@ -869,7 +869,7 @@
           <Order>21</Order>
           <Id>qqqqqaavaqdbsxev</Id>
           <Type>3</Type>
-		  <Name />
+		  <Name>URL</Name>
           <Text>公司网站</Text>
           <Data/>
           <Memo/>
@@ -878,7 +878,7 @@
           <Order>22</Order>
           <Id>qqqqqaavaqdgyrxb</Id>
           <Type>7</Type>
-		  <Name />
+		  <Name>TEL</Name>
           <Text>商务电话</Text>
           <Data/>
           <Memo/>
@@ -887,7 +887,7 @@
           <Order>23</Order>
           <Id>qqqqqaavaqdbqbeg</Id>
           <Type>7</Type>
-		  <Name />
+		  <Name>TEL</Name>
           <Text>商务传真</Text>
           <Data/>
           <Memo/>
@@ -896,7 +896,7 @@
           <Order>24</Order>
           <Id>qqqqqaavaqdbzcbf</Id>
           <Type>4</Type>
-		  <Name />
+		  <Name>EMAIL</Name>
           <Text>工作邮件</Text>
           <Data/>
           <Memo/>
@@ -905,7 +905,7 @@
           <Order>25</Order>
           <Id>qqqqqaavaqdbewsw</Id>
           <Type>1</Type>
-		  <Name />
+		  <Name>ADR</Name>
           <Text>工作地址</Text>
           <Data/>
           <Memo/>
@@ -914,7 +914,7 @@
           <Order>26</Order>
           <Id>qqqqqaavzyctcyzr</Id>
           <Type>9</Type>
-		  <Name />
+		  <Name>NOTE</Name>
           <Text>备注信息</Text>
           <Data/>
           <Memo/>
