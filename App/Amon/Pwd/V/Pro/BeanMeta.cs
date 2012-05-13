@@ -20,7 +20,7 @@ namespace Me.Amon.Pwd.V.Pro
         #region 接口实现
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
-            this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
+            this.TbText.GotFocus += new EventHandler(TbText_GotFocus);
             this.TbData.GotFocus += new EventHandler(TbData_GotFocus);
         }
 
@@ -34,13 +34,13 @@ namespace Me.Amon.Pwd.V.Pro
 
             if (_Att != null)
             {
-                TbName.Text = _Att.Text;
+                TbText.Text = _Att.Text;
                 TbData.Text = _Att.Data;
             }
 
-            if (string.IsNullOrEmpty(TbName.Text))
+            if (string.IsNullOrEmpty(TbText.Text))
             {
-                TbName.Focus();
+                TbText.Focus();
             }
             else
             {
@@ -88,11 +88,11 @@ namespace Me.Amon.Pwd.V.Pro
                 return false;
             }
 
-            string text = TbName.Text;
+            string text = TbText.Text;
             if (string.IsNullOrEmpty(text))
             {
                 Main.ShowAlert("请输入记录标题！");
-                TbName.Focus();
+                TbText.Focus();
                 return false;
             }
 
@@ -112,10 +112,10 @@ namespace Me.Amon.Pwd.V.Pro
         #endregion
 
         #region 事件处理
-        private void TbName_GotFocus(object sender, EventArgs e)
+        private void TbText_GotFocus(object sender, EventArgs e)
         {
-            _Ctl = TbName;
-            TbName.SelectAll();
+            _Ctl = TbText;
+            TbText.SelectAll();
         }
 
         private void TbData_GotFocus(object sender, EventArgs e)

@@ -21,7 +21,7 @@ namespace Me.Amon.Pwd.V.Pro
         #region 接口实现
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
-            this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
+            this.TbText.GotFocus += new EventHandler(TbName_GotFocus);
             this.DtData.GotFocus += new EventHandler(DtData_GotFocus);
 
             BtNow.Image = viewModel.GetImage("att-date-now");
@@ -40,16 +40,16 @@ namespace Me.Amon.Pwd.V.Pro
 
             if (_Att != null)
             {
-                TbName.Text = _Att.Text;
+                TbText.Text = _Att.Text;
                 if (CharUtil.IsValidateLong(_Att.Data))
                 {
                     DtData.Value = DateTime.FromFileTimeUtc(long.Parse(_Att.Data));
                 }
             }
 
-            if (string.IsNullOrEmpty(TbName.Text))
+            if (string.IsNullOrEmpty(TbText.Text))
             {
-                TbName.Focus();
+                TbText.Focus();
             }
             else
             {
@@ -97,9 +97,9 @@ namespace Me.Amon.Pwd.V.Pro
                 return false;
             }
 
-            if (TbName.Text != _Att.Text)
+            if (TbText.Text != _Att.Text)
             {
-                _Att.Text = TbName.Text;
+                _Att.Text = TbText.Text;
                 _Att.Modified = true;
             }
             string date = DtData.Value.ToFileTimeUtc().ToString();
@@ -116,8 +116,8 @@ namespace Me.Amon.Pwd.V.Pro
         #region 事件处理
         private void TbName_GotFocus(object sender, EventArgs e)
         {
-            _Ctl = TbName;
-            TbName.SelectAll();
+            _Ctl = TbText;
+            TbText.SelectAll();
         }
 
         private void DtData_GotFocus(object sender, EventArgs e)

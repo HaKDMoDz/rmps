@@ -22,7 +22,7 @@ namespace Me.Amon.Pwd.V.Pro
         #region 接口实现
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
-            this.TbName.GotFocus += new EventHandler(TbName_GotFocus);
+            this.TbText.GotFocus += new EventHandler(TbText_GotFocus);
             this.CbData.GotFocus += new EventHandler(CbData_GotFocus);
         }
 
@@ -36,14 +36,14 @@ namespace Me.Amon.Pwd.V.Pro
 
             if (_Att != null)
             {
-                TbName.Text = _Att.Text;
+                TbText.Text = _Att.Text;
                 _Item = new Item { K = _Att.Data };
                 CbData.SelectedItem = _Item;
             }
 
-            if (string.IsNullOrEmpty(TbName.Text))
+            if (string.IsNullOrEmpty(TbText.Text))
             {
-                TbName.Focus();
+                TbText.Focus();
             }
             else
             {
@@ -54,33 +54,33 @@ namespace Me.Amon.Pwd.V.Pro
 
         public void Cut()
         {
-            if (_Ctl == TbName)
+            if (_Ctl == TbText)
             {
-                TbName.Cut();
+                TbText.Cut();
             }
         }
 
         public void Copy()
         {
-            if (_Ctl == TbName)
+            if (_Ctl == TbText)
             {
-                TbName.Copy();
+                TbText.Copy();
             }
         }
 
         public void Paste()
         {
-            if (_Ctl == TbName)
+            if (_Ctl == TbText)
             {
-                TbName.Paste();
+                TbText.Paste();
             }
         }
 
         public void Clear()
         {
-            if (_Ctl == TbName)
+            if (_Ctl == TbText)
             {
-                TbName.Clear();
+                TbText.Clear();
             }
         }
 
@@ -91,9 +91,9 @@ namespace Me.Amon.Pwd.V.Pro
                 return false;
             }
 
-            if (TbName.Text != _Att.Text)
+            if (TbText.Text != _Att.Text)
             {
-                _Att.Text = TbName.Text;
+                _Att.Text = TbText.Text;
                 _Att.Modified = true;
             }
             if (_Item != null && _Item.K != _Att.Data)
@@ -107,10 +107,10 @@ namespace Me.Amon.Pwd.V.Pro
         #endregion
 
         #region 事件处理
-        private void TbName_GotFocus(object sender, EventArgs e)
+        private void TbText_GotFocus(object sender, EventArgs e)
         {
-            _Ctl = TbName;
-            TbName.SelectAll();
+            _Ctl = TbText;
+            TbText.SelectAll();
         }
 
         private void CbData_GotFocus(object sender, EventArgs e)

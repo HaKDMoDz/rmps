@@ -186,6 +186,15 @@
         <Stroke Key="^ Down" Memo="选择下一个属性"/>
       </Item>
       <Line/>
+      <Item Type="normal" Text="向上移动一行" ActionId="att-edit-move-up">
+        <Stroke Key="^ ~ U" Memo="向上移动一行"/>
+        <Stroke Key="^ ~ Up" Memo="向上移动一行"/>
+      </Item>
+      <Item Type="normal" Text="向下移动一行" ActionId="att-edit-move-down">
+        <Stroke Key="^ ~ D" Memo="向下移动一行"/>
+        <Stroke Key="^ ~ Down" Memo="向下移动一行"/>
+      </Item>
+      <Line/>
       <Item Type="normal" Text="添加类别" ActionId="append-cat">
         <Stroke Key="^ Add" Memo="添加类别"/>
       </Item>
@@ -376,10 +385,10 @@
     <Item Type="normal" Text="下移一行">
       <Action Class="Me.Amon.Pwd.E._Cat.MoveDownAction"/>
     </Item>
-    <Item Type="normal" Text="提升一级">
+    <Item Type="normal" Text="提升一级" Visible="false">
       <Action Class="Me.Amon.Pwd.E._Cat.PromotionAction"/>
     </Item>
-    <Item Type="normal" Text="缩进一级">
+    <Item Type="normal" Text="缩进一级" Visible="false">
       <Action Class="Me.Amon.Pwd.E._Cat.DemotionAction"/>
     </Item>
   </Popmenu>

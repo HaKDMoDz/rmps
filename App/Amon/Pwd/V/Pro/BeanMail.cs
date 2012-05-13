@@ -21,7 +21,7 @@ namespace Me.Amon.Pwd.V.Pro
         #region 接口实现
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
-            TbName.GotFocus += new EventHandler(TbName_GotFocus);
+            TbText.GotFocus += new EventHandler(TbText_GotFocus);
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
             BtSend.Image = viewModel.GetImage("att-mail-send");
@@ -39,13 +39,13 @@ namespace Me.Amon.Pwd.V.Pro
 
             if (_Att != null)
             {
-                TbName.Text = _Att.Text;
+                TbText.Text = _Att.Text;
                 TbData.Text = _Att.Data;
             }
 
-            if (string.IsNullOrEmpty(TbName.Text))
+            if (string.IsNullOrEmpty(TbText.Text))
             {
-                TbName.Focus();
+                TbText.Focus();
             }
             else
             {
@@ -96,14 +96,14 @@ namespace Me.Amon.Pwd.V.Pro
             string mail = TbData.Text.Trim();
             if (!string.IsNullOrEmpty(mail) && !CharUtil.IsValidateMail(mail))
             {
-                MessageBox.Show("无效的邮件地址！");
+                Main.ShowAlert("请输入一个形如 someone@host.com 的邮件地址！");
                 TbData.Focus();
                 return false;
             }
 
-            if (TbName.Text != _Att.Text)
+            if (TbText.Text != _Att.Text)
             {
-                _Att.Text = TbName.Text;
+                _Att.Text = TbText.Text;
                 _Att.Modified = true;
             }
             if (mail != _Att.Data)
@@ -117,10 +117,10 @@ namespace Me.Amon.Pwd.V.Pro
         #endregion
 
         #region 事件处理
-        private void TbName_GotFocus(object sender, EventArgs e)
+        private void TbText_GotFocus(object sender, EventArgs e)
         {
-            _Ctl = TbName;
-            TbName.SelectAll();
+            _Ctl = TbText;
+            TbText.SelectAll();
         }
 
         private void TbData_GotFocus(object sender, EventArgs e)

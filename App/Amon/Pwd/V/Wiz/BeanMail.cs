@@ -101,7 +101,7 @@ namespace Me.Amon.Pwd.V.Wiz
             string mail = TbData.Text.Trim();
             if (mail.Length > 0 && !CharUtil.IsValidateMail(mail))
             {
-                MessageBox.Show("无效的邮件地址！");
+                Main.ShowAlert("请输入一个形如 someone@host.com 的邮件地址！");
                 TbData.Focus();
                 return false;
             }

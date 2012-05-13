@@ -53,7 +53,7 @@ namespace Me.Amon.Pwd.V.Pro
 
                 if (!CharUtil.IsValidateHash(_Att.Text))
                 {
-                    PbName.Image = BeanUtil.NaN16;
+                    PbLogo.Image = BeanUtil.NaN16;
                 }
                 else
                 {
@@ -66,7 +66,7 @@ namespace Me.Amon.Pwd.V.Pro
                     {
                         path = Path.Combine(path, _Att.Text + IEnv.IMG_KEY_EDIT_EXT);
                     }
-                    PbName.Image = BeanUtil.ReadImage(path, BeanUtil.NaN16);
+                    PbLogo.Image = BeanUtil.ReadImage(path, BeanUtil.NaN16);
                 }
             }
 
@@ -137,7 +137,7 @@ namespace Me.Amon.Pwd.V.Pro
             {
                 path = Path.Combine(_DataModel.KeyDir, ico.File + IEnv.IMG_KEY_EDIT_EXT);
             }
-            PbName.Image = BeanUtil.ReadImage(path, BeanUtil.NaN16);
+            PbLogo.Image = BeanUtil.ReadImage(path, BeanUtil.NaN16);
         }
     }
 }

@@ -28,30 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LbName = new System.Windows.Forms.Label();
-            this.BtName = new System.Windows.Forms.Button();
+            this.LbText = new System.Windows.Forms.Label();
+            this.BtHint = new System.Windows.Forms.Button();
             this.LbData = new System.Windows.Forms.Label();
             this.TbData = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // LbName
+            // LbText
             // 
-            this.LbName.AutoSize = true;
-            this.LbName.Location = new System.Drawing.Point(3, 7);
-            this.LbName.Name = "LbName";
-            this.LbName.Size = new System.Drawing.Size(47, 12);
-            this.LbName.TabIndex = 0;
-            this.LbName.Text = "计划(&N)";
+            this.LbText.AutoSize = true;
+            this.LbText.Location = new System.Drawing.Point(3, 7);
+            this.LbText.Name = "LbText";
+            this.LbText.Size = new System.Drawing.Size(47, 12);
+            this.LbText.TabIndex = 0;
+            this.LbText.Text = "计划(&N)";
             // 
-            // BtName
+            // BtHint
             // 
-            this.BtName.Enabled = false;
-            this.BtName.Location = new System.Drawing.Point(56, 3);
-            this.BtName.Name = "BtName";
-            this.BtName.Size = new System.Drawing.Size(21, 21);
-            this.BtName.TabIndex = 1;
-            this.BtName.UseVisualStyleBackColor = true;
-            this.BtName.Click += new System.EventHandler(this.BtName_Click);
+            this.BtHint.Enabled = false;
+            this.BtHint.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.BtHint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtHint.Location = new System.Drawing.Point(56, 3);
+            this.BtHint.Name = "BtHint";
+            this.BtHint.Size = new System.Drawing.Size(21, 21);
+            this.BtHint.TabIndex = 1;
+            this.BtHint.UseVisualStyleBackColor = true;
+            this.BtHint.Click += new System.EventHandler(this.BtName_Click);
             // 
             // LbData
             // 
@@ -79,8 +81,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.TbData);
             this.Controls.Add(this.LbData);
-            this.Controls.Add(this.BtName);
-            this.Controls.Add(this.LbName);
+            this.Controls.Add(this.BtHint);
+            this.Controls.Add(this.LbText);
             this.Name = "BeanHint";
             this.Size = new System.Drawing.Size(366, 81);
             this.ResumeLayout(false);
@@ -90,8 +92,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Label LbName;
-        private System.Windows.Forms.Button BtName;
+        private System.Windows.Forms.Label LbText;
+        private System.Windows.Forms.Button BtHint;
         private System.Windows.Forms.Label LbData;
         private System.Windows.Forms.TextBox TbData;
     }

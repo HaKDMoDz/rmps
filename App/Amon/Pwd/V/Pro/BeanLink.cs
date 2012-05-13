@@ -20,7 +20,7 @@ namespace Me.Amon.Pwd.V.Pro
         #region 接口实现
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
-            TbName.GotFocus += new EventHandler(TbName_GotFocus);
+            TbText.GotFocus += new EventHandler(TText_GotFocus);
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
             BtOpen.Image = viewModel.GetImage("att-link-open");
@@ -38,13 +38,13 @@ namespace Me.Amon.Pwd.V.Pro
 
             if (_Att != null)
             {
-                TbName.Text = _Att.Text;
+                TbText.Text = _Att.Text;
                 TbData.Text = _Att.Data;
             }
 
-            if (string.IsNullOrEmpty(TbName.Text))
+            if (string.IsNullOrEmpty(TbText.Text))
             {
-                TbName.Focus();
+                TbText.Focus();
             }
             else
             {
@@ -92,9 +92,9 @@ namespace Me.Amon.Pwd.V.Pro
                 return false;
             }
 
-            if (TbName.Text != _Att.Text)
+            if (TbText.Text != _Att.Text)
             {
-                _Att.Text = TbName.Text;
+                _Att.Text = TbText.Text;
                 _Att.Modified = true;
             }
             if (TbData.Text != _Att.Data)
@@ -108,10 +108,10 @@ namespace Me.Amon.Pwd.V.Pro
         #endregion
 
         #region 事件处理
-        private void TbName_GotFocus(object sender, EventArgs e)
+        private void TText_GotFocus(object sender, EventArgs e)
         {
-            _Ctl = TbName;
-            TbName.SelectAll();
+            _Ctl = TbText;
+            TbText.SelectAll();
         }
 
         private void TbData_GotFocus(object sender, EventArgs e)

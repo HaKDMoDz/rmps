@@ -47,16 +47,19 @@ namespace Me.Amon.Pwd.V.Pro
             GvAttList.DataSource = _DataList;
 
             BtCopy.Image = viewModel.GetImage("att-copy");
+            BtCopy.Visible = false;
             _APwd.ShowTips(BtCopy, "复制属性");
             BtSave.Image = viewModel.GetImage("att-save");
+            BtSave.Visible = false;
             _APwd.ShowTips(BtSave, "保存属性");
             BtDrop.Image = viewModel.GetImage("att-drop");
+            BtDrop.Visible = false;
             _APwd.ShowTips(BtDrop, "移除属性");
 
             _CmpInfo = new BeanInfo();
             _CmpInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             _CmpInfo.Location = new Point(6, 20);
-            _CmpInfo.Size = new Size(347, 84);
+            _CmpInfo.Size = new Size(GbGroup.Width - 12, 84);
             _CmpInfo.TabIndex = 0;
             GbGroup.Controls.Add(_CmpInfo);
             _CmpLast = _CmpInfo;
@@ -87,6 +90,10 @@ namespace Me.Amon.Pwd.V.Pro
             GbGroup.Text = _CmpInfo.Title;
             GbGroup.Controls.Add(_CmpInfo);
             _CmpInfo.ShowData(null);
+
+            BtCopy.Visible = false;
+            BtSave.Visible = false;
+            BtDrop.Visible = false;
 
             _CmpLast = _CmpInfo;
         }
@@ -171,7 +178,7 @@ namespace Me.Amon.Pwd.V.Pro
             _UserAction = true;
             _SafeModel.Modified = true;
 
-            GvAttList.Rows[index].Selected = true;
+            SelectRow(index);
         }
 
         public void ChangeAtt(int type)
@@ -222,7 +229,7 @@ namespace Me.Amon.Pwd.V.Pro
             }
 
             index -= 1;
-            GvAttList.Rows[index].Selected = true;
+            SelectRow(index);
             ShowView(_SafeModel.GetAtt(index));
         }
 
@@ -243,7 +250,7 @@ namespace Me.Amon.Pwd.V.Pro
             }
 
             index += 1;
-            GvAttList.Rows[index].Selected = true;
+            SelectRow(index);
             ShowView(_SafeModel.GetAtt(index));
         }
 
@@ -258,7 +265,7 @@ namespace Me.Amon.Pwd.V.Pro
                 return;
             }
             int i0 = GvAttList.SelectedRows[0].Index;
-            if (i0 <= 0)
+            if (i0 <= Att.HEAD_SIZE)
             {
                 return;
             }
@@ -266,7 +273,7 @@ namespace Me.Amon.Pwd.V.Pro
             _SafeModel.Change(i0, i1);
             _DataList.Rows[i0][1] = _SafeModel.GetAtt(i0);
             _DataList.Rows[i1][1] = _SafeModel.GetAtt(i1);
-            GvAttList.Rows[i1].Selected = true;
+            SelectRow(i1);
         }
 
         public void MoveDown()
@@ -288,7 +295,7 @@ namespace Me.Amon.Pwd.V.Pro
             _SafeModel.Change(i0, i1);
             _DataList.Rows[i0][1] = _SafeModel.GetAtt(i0);
             _DataList.Rows[i1][1] = _SafeModel.GetAtt(i1);
-            GvAttList.Rows[i1].Selected = true;
+            SelectRow(i1);
         }
 
         public void CutAtt()
@@ -358,6 +365,12 @@ namespace Me.Amon.Pwd.V.Pro
         public void ShowIcoSeeker(AmonHandler<Pwd.Ico> handler)
         {
             _APwd.ShowIcoSeeker(_DataModel.KeyDir, handler);
+        }
+
+        public void SelectRow(int row)
+        {
+            GvAttList.Rows[row].Selected = true;
+            GvAttList.FirstDisplayedScrollingRowIndex = row < 1 ? row : row - 1;
         }
         #endregion
 
@@ -528,6 +541,10 @@ namespace Me.Amon.Pwd.V.Pro
             GbGroup.Text = _CmpLast.Title;
             GbGroup.Controls.Add(_CmpLast.Control);
             _CmpLast.ShowData(att);
+
+            BtCopy.Visible = true;
+            BtSave.Visible = true;
+            BtDrop.Visible = true;
         }
 
         private IAttEdit GetCtl(int type)
@@ -594,7 +611,7 @@ namespace Me.Amon.Pwd.V.Pro
 
             ctl.Control.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ctl.Control.Location = new Point(6, 20);
-            ctl.Control.Size = new Size(309, 84);
+            ctl.Control.Size = new Size(GbGroup.Width - 42, 84);
             ctl.Control.TabIndex = 0;
 
             return ctl;

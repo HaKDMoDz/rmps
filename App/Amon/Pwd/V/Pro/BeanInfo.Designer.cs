@@ -57,6 +57,7 @@
             this.textBox1.Size = new System.Drawing.Size(360, 52);
             this.textBox1.TabIndex = 1;
             this.textBox1.TabStop = false;
+            this.textBox1.Text = "欢迎使用《阿木密码箱》！";
             // 
             // BeanInfo
             // 

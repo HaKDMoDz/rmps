@@ -20,7 +20,7 @@ namespace Me.Amon.Pwd.V.Pro
         #region 接口实现
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
-            BtName.Image = BeanUtil.NaN16;
+            BtHint.Image = BeanUtil.NaN16;
         }
 
         public Control Control { get { return this; } }

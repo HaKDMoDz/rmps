@@ -30,9 +30,9 @@
         {
             this.TbData = new System.Windows.Forms.TextBox();
             this.LbData = new System.Windows.Forms.Label();
-            this.PbName = new System.Windows.Forms.PictureBox();
-            this.LbName = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.PbName)).BeginInit();
+            this.PbLogo = new System.Windows.Forms.PictureBox();
+            this.LbText = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // TbData
@@ -55,26 +55,26 @@
             this.LbData.TabIndex = 2;
             this.LbData.Text = "说明(&D)";
             // 
-            // PbName
+            // PbLogo
             // 
-            this.PbName.BackColor = System.Drawing.SystemColors.Window;
-            this.PbName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PbName.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PbName.Location = new System.Drawing.Point(56, 4);
-            this.PbName.Name = "PbName";
-            this.PbName.Size = new System.Drawing.Size(18, 18);
-            this.PbName.TabIndex = 1;
-            this.PbName.TabStop = false;
-            this.PbName.Click += new System.EventHandler(this.PbName_Click);
+            this.PbLogo.BackColor = System.Drawing.SystemColors.Window;
+            this.PbLogo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PbLogo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PbLogo.Location = new System.Drawing.Point(56, 4);
+            this.PbLogo.Name = "PbLogo";
+            this.PbLogo.Size = new System.Drawing.Size(18, 18);
+            this.PbLogo.TabIndex = 1;
+            this.PbLogo.TabStop = false;
+            this.PbLogo.Click += new System.EventHandler(this.PbName_Click);
             // 
-            // LbName
+            // LbText
             // 
-            this.LbName.AutoSize = true;
-            this.LbName.Location = new System.Drawing.Point(3, 7);
-            this.LbName.Name = "LbName";
-            this.LbName.Size = new System.Drawing.Size(47, 12);
-            this.LbName.TabIndex = 0;
-            this.LbName.Text = "徽标(&N)";
+            this.LbText.AutoSize = true;
+            this.LbText.Location = new System.Drawing.Point(3, 7);
+            this.LbText.Name = "LbText";
+            this.LbText.Size = new System.Drawing.Size(47, 12);
+            this.LbText.TabIndex = 0;
+            this.LbText.Text = "徽标(&N)";
             // 
             // BeanLogo
             // 
@@ -82,11 +82,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.TbData);
             this.Controls.Add(this.LbData);
-            this.Controls.Add(this.PbName);
-            this.Controls.Add(this.LbName);
+            this.Controls.Add(this.PbLogo);
+            this.Controls.Add(this.LbText);
             this.Name = "BeanLogo";
             this.Size = new System.Drawing.Size(366, 81);
-            ((System.ComponentModel.ISupportInitialize)(this.PbName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -96,7 +96,7 @@
 
         private System.Windows.Forms.TextBox TbData;
         private System.Windows.Forms.Label LbData;
-        private System.Windows.Forms.PictureBox PbName;
-        private System.Windows.Forms.Label LbName;
+        private System.Windows.Forms.PictureBox PbLogo;
+        private System.Windows.Forms.Label LbText;
     }
 }

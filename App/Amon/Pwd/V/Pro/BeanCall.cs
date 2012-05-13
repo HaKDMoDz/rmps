@@ -25,6 +25,7 @@ namespace Me.Amon.Pwd.V.Pro
 
             BtOpt.Visible = false;
 
+            TbText.GotFocus += new EventHandler(TbText_GotFocus);
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
             InitSpec(TbData);
@@ -46,13 +47,13 @@ namespace Me.Amon.Pwd.V.Pro
 
             if (_Att != null)
             {
-                TbName.Text = _Att.Text;
+                TbText.Text = _Att.Text;
                 TbData.Text = _Att.Data;
             }
 
-            if (string.IsNullOrEmpty(TbName.Text))
+            if (string.IsNullOrEmpty(TbText.Text))
             {
-                TbName.Focus();
+                TbText.Focus();
             }
             else
             {
@@ -100,9 +101,9 @@ namespace Me.Amon.Pwd.V.Pro
                 return false;
             }
 
-            if (TbName.Text != _Att.Text)
+            if (TbText.Text != _Att.Text)
             {
-                _Att.Text = TbName.Text;
+                _Att.Text = TbText.Text;
                 _Att.Modified = true;
             }
             if (TbData.Text != _Att.Data)
@@ -116,6 +117,11 @@ namespace Me.Amon.Pwd.V.Pro
         #endregion
 
         #region 事件处理
+        public void TbText_GotFocus(object sender, EventArgs e)
+        {
+            _Ctl = TbText;
+        }
+
         private void TbData_GotFocus(object sender, EventArgs e)
         {
             _Ctl = TbData;

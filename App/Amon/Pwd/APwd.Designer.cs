@@ -43,10 +43,10 @@
             this.LbKeyList = new System.Windows.Forms.ListBox();
             this.CmKey = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.PlBody = new System.Windows.Forms.Panel();
-            this.FbFind = new Me.Amon.Pwd.Bean.FindBar();
             this.TbTool = new System.Windows.Forms.ToolStrip();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.UcTime = new System.Windows.Forms.Timer(this.components);
+            this.FbFind = new Me.Amon.Pwd.Bean.FindBar();
             this.SsEcho.SuspendLayout();
             this.TcTool.ContentPanel.SuspendLayout();
             this.TcTool.TopToolStripPanel.SuspendLayout();
@@ -83,8 +83,9 @@
             // TssEcho
             // 
             this.TssEcho.Name = "TssEcho";
-            this.TssEcho.Size = new System.Drawing.Size(513, 17);
+            this.TssEcho.Size = new System.Drawing.Size(482, 17);
             this.TssEcho.Spring = true;
+            this.TssEcho.Text = "您暂时没有需要提醒的任务！";
             this.TssEcho.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TssTime
@@ -200,15 +201,6 @@
             this.PlBody.Size = new System.Drawing.Size(372, 292);
             this.PlBody.TabIndex = 1;
             // 
-            // FbFind
-            // 
-            this.FbFind.APwd = null;
-            this.FbFind.Dock = System.Windows.Forms.DockStyle.Top;
-            this.FbFind.Location = new System.Drawing.Point(0, 0);
-            this.FbFind.Name = "FbFind";
-            this.FbFind.Size = new System.Drawing.Size(372, 29);
-            this.FbFind.TabIndex = 0;
-            // 
             // TbTool
             // 
             this.TbTool.Dock = System.Windows.Forms.DockStyle.None;
@@ -220,6 +212,15 @@
             // UcTime
             // 
             this.UcTime.Tick += new System.EventHandler(this.UcTime_Tick);
+            // 
+            // FbFind
+            // 
+            this.FbFind.APwd = null;
+            this.FbFind.Dock = System.Windows.Forms.DockStyle.Top;
+            this.FbFind.Location = new System.Drawing.Point(0, 0);
+            this.FbFind.Name = "FbFind";
+            this.FbFind.Size = new System.Drawing.Size(372, 29);
+            this.FbFind.TabIndex = 0;
             // 
             // APwd
             // 

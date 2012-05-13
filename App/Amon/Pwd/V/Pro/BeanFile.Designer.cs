@@ -28,29 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LbName = new System.Windows.Forms.Label();
-            this.TbName = new System.Windows.Forms.TextBox();
+            this.LbText = new System.Windows.Forms.Label();
+            this.TbText = new System.Windows.Forms.TextBox();
             this.LbData = new System.Windows.Forms.Label();
             this.TbData = new System.Windows.Forms.TextBox();
             this.BtView = new System.Windows.Forms.Button();
             this.BtOpen = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // LbName
+            // LbText
             // 
-            this.LbName.AutoSize = true;
-            this.LbName.Location = new System.Drawing.Point(3, 6);
-            this.LbName.Name = "LbName";
-            this.LbName.Size = new System.Drawing.Size(47, 12);
-            this.LbName.TabIndex = 0;
-            this.LbName.Text = "名称(&N)";
+            this.LbText.AutoSize = true;
+            this.LbText.Location = new System.Drawing.Point(3, 6);
+            this.LbText.Name = "LbText";
+            this.LbText.Size = new System.Drawing.Size(47, 12);
+            this.LbText.TabIndex = 0;
+            this.LbText.Text = "名称(&N)";
             // 
-            // TbName
+            // TbText
             // 
-            this.TbName.Location = new System.Drawing.Point(56, 3);
-            this.TbName.Name = "TbName";
-            this.TbName.Size = new System.Drawing.Size(100, 21);
-            this.TbName.TabIndex = 1;
+            this.TbText.Location = new System.Drawing.Point(56, 3);
+            this.TbText.Name = "TbText";
+            this.TbText.Size = new System.Drawing.Size(100, 21);
+            this.TbText.TabIndex = 1;
             // 
             // LbData
             // 
@@ -96,8 +96,8 @@
             this.Controls.Add(this.BtView);
             this.Controls.Add(this.TbData);
             this.Controls.Add(this.LbData);
-            this.Controls.Add(this.TbName);
-            this.Controls.Add(this.LbName);
+            this.Controls.Add(this.TbText);
+            this.Controls.Add(this.LbText);
             this.Name = "BeanFile";
             this.Size = new System.Drawing.Size(366, 81);
             this.ResumeLayout(false);
@@ -107,8 +107,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Label LbName;
-        private System.Windows.Forms.TextBox TbName;
+        private System.Windows.Forms.Label LbText;
+        private System.Windows.Forms.TextBox TbText;
         private System.Windows.Forms.Label LbData;
         private System.Windows.Forms.TextBox TbData;
         private System.Windows.Forms.Button BtView;

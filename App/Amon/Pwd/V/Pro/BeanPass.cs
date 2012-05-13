@@ -22,7 +22,7 @@ namespace Me.Amon.Pwd.V.Pro
         {
             _DataModel = dataModel;
 
-            TbName.GotFocus += new EventHandler(TbName_GotFocus);
+            TbText.GotFocus += new EventHandler(TbText_GotFocus);
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
             _ViewModel = viewModel;
@@ -42,13 +42,13 @@ namespace Me.Amon.Pwd.V.Pro
             _Att = att;
             if (_Att != null)
             {
-                TbName.Text = _Att.Text;
+                TbText.Text = _Att.Text;
                 TbData.Text = _Att.Data;
             }
 
-            if (string.IsNullOrEmpty(TbName.Text))
+            if (string.IsNullOrEmpty(TbText.Text))
             {
-                TbName.Focus();
+                TbText.Focus();
             }
             else
             {
@@ -96,9 +96,9 @@ namespace Me.Amon.Pwd.V.Pro
                 return false;
             }
 
-            if (TbName.Text != _Att.Text)
+            if (TbText.Text != _Att.Text)
             {
-                _Att.Text = TbName.Text;
+                _Att.Text = TbText.Text;
                 _Att.Modified = true;
             }
             if (TbData.Text != _Att.Data)
@@ -112,10 +112,10 @@ namespace Me.Amon.Pwd.V.Pro
         #endregion
 
         #region 事件处理
-        private void TbName_GotFocus(object sender, EventArgs e)
+        private void TbText_GotFocus(object sender, EventArgs e)
         {
-            _Ctl = TbName;
-            TbName.SelectAll();
+            _Ctl = TbText;
+            TbText.SelectAll();
         }
 
         private void TbData_GotFocus(object sender, EventArgs e)

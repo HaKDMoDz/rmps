@@ -390,7 +390,7 @@ namespace Me.Amon.Pwd
 
         #region 类别处理
         /// <summary>
-        /// 
+        /// 获取选择的类别
         /// </summary>
         /// <param name="cat"></param>
         public Cat SelectedCat
@@ -536,7 +536,9 @@ namespace Me.Amon.Pwd
                 return;
             }
 
+            prevCat.Order += 1;
             _UserModel.DBA.SaveVcs(prevCat);
+            currCat.Order -= 1;
             _UserModel.DBA.SaveVcs(currCat);
 
             TvCatTree.SelectedNode = null;
@@ -571,13 +573,67 @@ namespace Me.Amon.Pwd
                 return;
             }
 
+            currCat.Order += 1;
             _UserModel.DBA.SaveVcs(currCat);
+            nextCat.Order -= 1;
             _UserModel.DBA.SaveVcs(nextCat);
 
             TvCatTree.SelectedNode = null;
             parent.Nodes.Remove(_LastNode);
             parent.Nodes.Insert(nextNode.Index + 1, _LastNode);
             TvCatTree.SelectedNode = _LastNode;
+        }
+
+        /// <summary>
+        /// 提升一级
+        /// </summary>
+        public void CatPromotion()
+        {
+            TreeNode node = TvCatTree.SelectedNode;
+            if (node == null || node == _RootNode)
+            {
+                return;
+            }
+            TreeNode parent = node.Parent;
+            if (parent == null || parent == _RootNode)
+            {
+                return;
+            }
+            TreeNode grand = parent.Parent;
+            if (grand == null)
+            {
+                return;
+            }
+            parent.Nodes.Remove(node);
+            grand.Nodes.Add(node);
+
+            TvCatTree.SelectedNode = node;
+        }
+
+        /// <summary>
+        /// 下降一级
+        /// </summary>
+        public void CatDemotion()
+        {
+            TreeNode node = TvCatTree.SelectedNode;
+            if (node == null || node == _RootNode)
+            {
+                return;
+            }
+            TreeNode prev = node.PrevNode;
+            if (prev == null || prev == _RootNode)
+            {
+                return;
+            }
+            TreeNode parent = node.Parent;
+            if (parent == null)
+            {
+                return;
+            }
+            parent.Nodes.Remove(node);
+            prev.Nodes.Add(node);
+
+            TvCatTree.SelectedNode = node;
         }
 
         public void ChangeCatIcon()
