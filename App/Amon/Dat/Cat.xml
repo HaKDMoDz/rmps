@@ -1140,7 +1140,7 @@
       <Order>4</Order>
       <Id>sctfxrcwrqygwvxb</Id>
       <Parent>0</Parent>
-      <IsLeaf>true</IsLeaf>
+      <IsLeaf>false</IsLeaf>
       <Text>即时通讯</Text>
       <Tips>即时通讯</Tips>
       <Icon>4ee3162f03d6e7d4</Icon>
