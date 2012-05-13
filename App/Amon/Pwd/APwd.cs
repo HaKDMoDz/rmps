@@ -408,18 +408,24 @@ namespace Me.Amon.Pwd
         /// <param name="cat"></param>
         public void AppendCat(Cat cat)
         {
-            if (cat == null)
+            if (cat == null || _LastNode == null)
+            {
+                return;
+            }
+            Cat parent = SelectedCat;
+            if (parent == null)
             {
                 return;
             }
 
-            if (_LastNode == null)
-            {
-                return;
-            }
-
-            cat.Parent = _LastNode.Name;
+            cat.Parent = parent.Id;
+            cat.Order = _LastNode.Nodes.Count;
             _UserModel.DBA.SaveVcs(cat);
+            if (parent.IsLeaf)
+            {
+                parent.IsLeaf = false;
+                _UserModel.DBA.SaveVcs(parent);
+            }
 
             TreeNode node = new TreeNode();
             node.Name = cat.Id;
@@ -503,10 +509,17 @@ namespace Me.Amon.Pwd
 
             _UserModel.DBA.DeleteVcs(cat);
 
-            TreeNode root = _LastNode.Parent;
-            if (root != null)
+            TreeNode parent = _LastNode.Parent;
+            if (parent != null)
             {
-                root.Nodes.Remove(_LastNode);
+                parent.Nodes.Remove(_LastNode);
+            }
+
+            cat = parent.Tag as Cat;
+            if (cat != null && !cat.IsLeaf && parent.Nodes.Count == 0)
+            {
+                cat.IsLeaf = true;
+                _UserModel.DBA.SaveVcs(cat);
             }
         }
 
@@ -664,6 +677,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
+            cat.Icon = png.File;
             _UserModel.DBA.SaveVcs(cat);
         }
         #endregion
