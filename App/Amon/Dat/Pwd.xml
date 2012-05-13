@@ -176,6 +176,14 @@
       <Item Type="normal" Text="删除属性" ActionId="delete-att">
         <Stroke Key="# D" Memo="移除当前属性"/>
       </Item>
+      <Item Type="normal" Text="向上移动一行" ActionId="att-edit-move-up">
+        <Stroke Key="^ ~ U" Memo="向上移动一行"/>
+        <Stroke Key="^ ~ Up" Memo="向上移动一行"/>
+      </Item>
+      <Item Type="normal" Text="向下移动一行" ActionId="att-edit-move-down">
+        <Stroke Key="^ ~ D" Memo="向下移动一行"/>
+        <Stroke Key="^ ~ Down" Memo="向下移动一行"/>
+      </Item>
       <Line/>
       <Item Type="normal" Text="选择上一属性" ActionId="att-edit-select-prev">
         <Stroke Key="^ U" Memo="选择上一个属性"/>
@@ -184,15 +192,6 @@
       <Item Type="normal" Text="选择下一属性" ActionId="att-edit-select-next">
         <Stroke Key="^ D" Memo="选择下一个属性"/>
         <Stroke Key="^ Down" Memo="选择下一个属性"/>
-      </Item>
-      <Line/>
-      <Item Type="normal" Text="向上移动一行" ActionId="att-edit-move-up">
-        <Stroke Key="^ ~ U" Memo="向上移动一行"/>
-        <Stroke Key="^ ~ Up" Memo="向上移动一行"/>
-      </Item>
-      <Item Type="normal" Text="向下移动一行" ActionId="att-edit-move-down">
-        <Stroke Key="^ ~ D" Memo="向下移动一行"/>
-        <Stroke Key="^ ~ Down" Memo="向下移动一行"/>
       </Item>
       <Line/>
       <Item Type="normal" Text="添加类别" ActionId="append-cat">
