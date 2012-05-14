@@ -8,11 +8,19 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class BeanPass : APass, IAttEdit
     {
+        private APro _APro;
         private TextBox _Ctl;
 
         #region 构造函数
         public BeanPass()
         {
+            InitializeComponent();
+        }
+
+        public BeanPass(APro apro)
+        {
+            _APro = apro;
+
             InitializeComponent();
         }
         #endregion
@@ -21,14 +29,17 @@ namespace Me.Amon.Pwd.V.Pro
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
             _DataModel = dataModel;
+            _ViewModel = viewModel;
 
             TbText.GotFocus += new EventHandler(TbText_GotFocus);
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
-            _ViewModel = viewModel;
             BtMod.Image = viewModel.GetImage(TbData.UseSystemPasswordChar ? "att-pass-hide" : "att-pass-show");
+            _APro.ShowTips(BtMod, TbData.UseSystemPasswordChar ? "显示口令" : "隐藏口令");
             BtGen.Image = viewModel.GetImage("att-pass-gen");
+            _APro.ShowTips(BtGen, "生成随机口令");
             BtOpt.Image = viewModel.GetImage("att-pass-options");
+            _APro.ShowTips(BtOpt, "选项");
 
             InitSpec(TbData);
         }
@@ -128,6 +139,7 @@ namespace Me.Amon.Pwd.V.Pro
         {
             TbData.UseSystemPasswordChar = !TbData.UseSystemPasswordChar;
             BtMod.Image = _ViewModel.GetImage(TbData.UseSystemPasswordChar ? "att-pass-hide" : "att-pass-show");
+            _APro.ShowTips(BtMod, TbData.UseSystemPasswordChar ? "显示口令" : "隐藏口令");
         }
 
         private void BtGen_Click(object sender, EventArgs e)

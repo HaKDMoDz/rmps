@@ -8,11 +8,19 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class BeanLink : ALink, IAttEdit
     {
+        private APro _APro;
         private TextBox _Ctl;
 
         #region 构造函数
         public BeanLink()
         {
+            InitializeComponent();
+        }
+
+        public BeanLink(APro apro)
+        {
+            _APro = apro;
+
             InitializeComponent();
         }
         #endregion
@@ -24,6 +32,7 @@ namespace Me.Amon.Pwd.V.Pro
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
             BtOpen.Image = viewModel.GetImage("att-link-open");
+            _APro.ShowTips(BtOpen, "打开链接");
 
             InitSpec(TbData);
         }

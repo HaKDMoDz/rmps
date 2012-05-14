@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AuthAc));
             this.PbLogo = new System.Windows.Forms.PictureBox();
             this.PbMenu = new System.Windows.Forms.PictureBox();
             this.BtOk = new System.Windows.Forms.Button();
             this.BtNo = new System.Windows.Forms.Button();
+            this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).BeginInit();
             this.SuspendLayout();
@@ -56,6 +58,7 @@
             this.PbMenu.Size = new System.Drawing.Size(16, 16);
             this.PbMenu.TabIndex = 2;
             this.PbMenu.TabStop = false;
+            this.TpTips.SetToolTip(this.PbMenu, "系统选单");
             this.PbMenu.Click += new System.EventHandler(this.PbMenu_Click);
             // 
             // BtOk
@@ -112,5 +115,6 @@
         private System.Windows.Forms.PictureBox PbMenu;
         private System.Windows.Forms.Button BtOk;
         private System.Windows.Forms.Button BtNo;
+        private System.Windows.Forms.ToolTip TpTips;
     }
 }

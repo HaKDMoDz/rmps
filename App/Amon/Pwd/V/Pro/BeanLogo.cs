@@ -10,9 +10,9 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class BeanLogo : UserControl, IAttEdit
     {
+        private APro _APro;
         private LogoAtt _Att;
         private Pwd.Ico _AIco;
-        private APro _APro;
         private DataModel _DataModel;
 
         #region 构造函数
@@ -34,6 +34,8 @@ namespace Me.Amon.Pwd.V.Pro
         {
             _DataModel = dataModel;
             _AIco = new Pwd.Ico();
+
+            _APro.ShowTips(PbLogo, "点击选择徽标");
         }
 
         public Control Control { get { return this; } }

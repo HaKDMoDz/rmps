@@ -9,12 +9,20 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class BeanList : AList, IAttEdit
     {
+        private APro _APro;
         private Item _Item;
         private Control _Ctl;
 
         #region 构造函数
         public BeanList()
         {
+            InitializeComponent();
+        }
+
+        public BeanList(APro apro)
+        {
+            _APro = apro;
+
             InitializeComponent();
         }
         #endregion

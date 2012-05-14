@@ -51,7 +51,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DtData.Location = new System.Drawing.Point(56, 30);
             this.DtData.Name = "DtData";
-            this.DtData.Size = new System.Drawing.Size(200, 21);
+            this.DtData.Size = new System.Drawing.Size(307, 21);
             this.DtData.TabIndex = 3;
             // 
             // LbData

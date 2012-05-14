@@ -8,11 +8,19 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class BeanLine : ALine, IAttEdit
     {
+        private APro _APro;
         private TextBox _Ctl;
 
         #region 构造函数
         public BeanLine()
         {
+            InitializeComponent();
+        }
+
+        public BeanLine(APro apro)
+        {
+            _APro = apro;
+
             InitializeComponent();
         }
         #endregion

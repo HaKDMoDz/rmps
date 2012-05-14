@@ -109,11 +109,13 @@
             // 
             // BtPath
             // 
+            this.BtPath.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.BtPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtPath.Image = global::Me.Amon.Properties.Resources.Find;
             this.BtPath.Location = new System.Drawing.Point(195, 84);
             this.BtPath.Name = "BtPath";
             this.BtPath.Size = new System.Drawing.Size(21, 21);
             this.BtPath.TabIndex = 8;
-            this.BtPath.Text = "button1";
             this.BtPath.UseVisualStyleBackColor = true;
             this.BtPath.Click += new System.EventHandler(this.BtPath_Click);
             // 

@@ -8,11 +8,19 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class BeanMemo : AMemo, IAttEdit
     {
+        private APro _APro;
         private TextBox _Ctl;
 
         #region 构造函数
         public BeanMemo()
         {
+            InitializeComponent();
+        }
+
+        public BeanMemo(APro apro)
+        {
+            _APro = apro;
+
             InitializeComponent();
         }
         #endregion

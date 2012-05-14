@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd.Bean;
 using Me.Amon.Util;
 
@@ -31,18 +32,20 @@ namespace Me.Amon.Pwd.V.Wiz
         public void InitOnce(TableLayoutPanel grid, ViewModel viewModel)
         {
             _Grid = grid;
+            _Style = new RowStyle(SizeType.Absolute, 27F);
+
+            Dock = DockStyle.Fill;
 
             _Label = new Label();
             _Label.TextAlign = ContentAlignment.MiddleRight;
             _Label.Dock = DockStyle.Fill;
 
-            _Style = new RowStyle(SizeType.Absolute, 27F);
-            Dock = DockStyle.Fill;
-
             DtData.GotFocus += new EventHandler(DtData_GotFocus);
 
             BtNow.Image = viewModel.GetImage("att-date-now");
+            _Body.ShowTips(BtNow, "当前时间");
             BtOpt.Image = viewModel.GetImage("att-date-options");
+            _Body.ShowTips(BtOpt, "选项");
 
             InitSpec(DtData);
         }
@@ -70,6 +73,16 @@ namespace Me.Amon.Pwd.V.Wiz
             }
 
             _Label.Text = _Att.Text;
+            string cmd = _Att.GetSpec(DateAtt.SPEC_FORMAT, DateAtt.SPEC_VALUE_NONE);
+            if (string.IsNullOrWhiteSpace(cmd))
+            {
+                DtData.Format = DateTimePickerFormat.Long;
+            }
+            else
+            {
+                DtData.Format = DateTimePickerFormat.Custom;
+                DtData.CustomFormat = cmd;
+            }
             if (CharUtil.IsValidateLong(_Att.Data))
             {
                 DtData.Value = DateTime.FromFileTimeUtc(long.Parse(_Att.Data));

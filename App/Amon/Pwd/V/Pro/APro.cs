@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
-using Me.Amon.Pwd;
 using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
@@ -372,6 +371,11 @@ namespace Me.Amon.Pwd.V.Pro
             GvAttList.Rows[row].Selected = true;
             GvAttList.FirstDisplayedScrollingRowIndex = row < 1 ? row : row - 1;
         }
+
+        public void ShowTips(Control control, string caption)
+        {
+            _APwd.ShowTips(control, caption);
+        }
         #endregion
 
         #region 界面事件
@@ -558,49 +562,49 @@ namespace Me.Amon.Pwd.V.Pro
             switch (type)
             {
                 case Att.TYPE_TEXT:
-                    ctl = new BeanText();
+                    ctl = new BeanText(this);
                     break;
                 case Att.TYPE_PASS:
-                    ctl = new BeanPass();
+                    ctl = new BeanPass(this);
                     break;
                 case Att.TYPE_LINK:
-                    ctl = new BeanLink();
+                    ctl = new BeanLink(this);
                     break;
                 case Att.TYPE_MAIL:
-                    ctl = new BeanMail();
+                    ctl = new BeanMail(this);
                     break;
                 case Att.TYPE_DATE:
-                    ctl = new BeanDate();
+                    ctl = new BeanDate(this);
                     break;
                 case Att.TYPE_DATA:
-                    ctl = new BeanData();
+                    ctl = new BeanData(this);
                     break;
                 case Att.TYPE_CALL:
-                    ctl = new BeanCall();
+                    ctl = new BeanCall(this);
                     break;
                 case Att.TYPE_LIST:
-                    ctl = new BeanList();
+                    ctl = new BeanList(this);
                     break;
                 case Att.TYPE_MEMO:
-                    ctl = new BeanMemo();
+                    ctl = new BeanMemo(this);
                     break;
                 case Att.TYPE_FILE:
-                    ctl = new BeanFile();
+                    ctl = new BeanFile(this);
                     break;
                 case Att.TYPE_LINE:
-                    ctl = new BeanLine();
+                    ctl = new BeanLine(this);
                     break;
                 case Att.TYPE_GUID:
-                    ctl = new BeanGuid(_SafeModel, _DataList);
+                    ctl = new BeanGuid(this, _SafeModel, _DataList);
                     break;
                 case Att.TYPE_META:
-                    ctl = new BeanMeta();
+                    ctl = new BeanMeta(this);
                     break;
                 case Att.TYPE_LOGO:
                     ctl = new BeanLogo(this);
                     break;
                 case Att.TYPE_HINT:
-                    ctl = new BeanHint();
+                    ctl = new BeanHint(this);
                     break;
                 default:
                     ctl = null;

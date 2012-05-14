@@ -35,12 +35,11 @@
             // 
             // DtData
             // 
-            this.DtData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.DtData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DtData.Location = new System.Drawing.Point(0, 0);
             this.DtData.Name = "DtData";
-            this.DtData.Size = new System.Drawing.Size(200, 21);
+            this.DtData.Size = new System.Drawing.Size(293, 21);
             this.DtData.TabIndex = 0;
             // 
             // BtNow

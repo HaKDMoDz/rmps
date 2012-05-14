@@ -7,17 +7,22 @@ namespace Me.Amon.Pwd.V.Wiz
 {
     public partial class BeanBody : UserControl, IWizView
     {
+        #region 全局变量
+        private AWiz _AWiz;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
         private ViewModel _ViewModel;
+        #endregion
 
+        #region 构造函数
         public BeanBody()
         {
             InitializeComponent();
         }
 
-        public BeanBody(SafeModel safeModel)
+        public BeanBody(AWiz awiz, SafeModel safeModel)
         {
+            _AWiz = awiz;
             _SafeModel = safeModel;
 
             InitializeComponent();
@@ -28,7 +33,9 @@ namespace Me.Amon.Pwd.V.Wiz
             _DataModel = dataModel;
             _ViewModel = viewModel;
         }
+        #endregion
 
+        #region 接口实现
         public void InitView(TableLayoutPanel grid)
         {
             grid.Controls.Add(this, 0, 0);
@@ -109,7 +116,7 @@ namespace Me.Amon.Pwd.V.Wiz
                 EditCtl.Cut();
             }
         }
-        
+
         public void CopyData()
         {
             if (EditCtl != null)
@@ -117,6 +124,7 @@ namespace Me.Amon.Pwd.V.Wiz
                 EditCtl.Copy();
             }
         }
+
         public void PasteData()
         {
             if (EditCtl != null)
@@ -132,7 +140,9 @@ namespace Me.Amon.Pwd.V.Wiz
                 EditCtl.Clear();
             }
         }
+        #endregion
 
+        #region 公共函数
         public IAttEdit EditCtl { get; set; }
 
         private IAttEdit GetCtl(int type)
@@ -198,6 +208,12 @@ namespace Me.Amon.Pwd.V.Wiz
             _IdxList[type] = ++index;
             return ctl;
         }
+
+        public void ShowTips(Control control, string caption)
+        {
+            _AWiz.ShowTips(control, caption);
+        }
+        #endregion
 
         private Dictionary<int, int> _IdxList = new Dictionary<int, int>();
         private Dictionary<int, List<IAttEdit>> _CmpList = new Dictionary<int, List<IAttEdit>>(Att.TYPE_SIZE);

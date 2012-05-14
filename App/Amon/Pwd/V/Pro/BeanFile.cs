@@ -8,11 +8,19 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class BeanFile : AFile, IAttEdit
     {
+        private APro _APro;
         private TextBox _Ctl;
 
         #region 构造函数
         public BeanFile()
         {
+            InitializeComponent();
+        }
+
+        public BeanFile(APro apro)
+        {
+            _APro = apro;
+
             InitializeComponent();
         }
         #endregion
@@ -26,7 +34,9 @@ namespace Me.Amon.Pwd.V.Pro
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
             BtView.Image = viewModel.GetImage("att-file-preview");
+            _APro.ShowTips(BtView, "查看文件");
             BtOpen.Image = viewModel.GetImage("att-file-append");
+            _APro.ShowTips(BtOpen, "添加文件");
 
             InitSpec(TbData);
         }

@@ -34,6 +34,7 @@ namespace Me.Amon.User.Sign
             InitializeComponent();
 
             TbPath.Text = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), IEnv.DIR_DATA);
+            _SignAc.ShowTips(BtPath, "选择目录");
         }
         #endregion
 
@@ -168,6 +169,7 @@ namespace Me.Amon.User.Sign
         private void BtPath_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fd = new FolderBrowserDialog();
+            fd.Description = "请选择您要存放数据的目录：";
             fd.SelectedPath = TbPath.Text;
             if (DialogResult.OK != fd.ShowDialog())
             {

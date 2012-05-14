@@ -30,15 +30,17 @@ namespace Me.Amon.Pwd.V.Wiz
         public void InitOnce(TableLayoutPanel grid, ViewModel viewModel)
         {
             _Grid = grid;
+            _Style = new RowStyle(SizeType.Absolute, 27F);
+
+            Dock = DockStyle.Fill;
 
             _Label = new Label();
             _Label.TextAlign = ContentAlignment.MiddleRight;
             _Label.Dock = DockStyle.Fill;
 
-            _Style = new RowStyle(SizeType.Absolute, 27F);
-            Dock = DockStyle.Fill;
-
             CbData.GotFocus += new EventHandler(CbData_GotFocus);
+
+            InitSpec();
         }
         #endregion
 

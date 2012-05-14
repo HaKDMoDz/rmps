@@ -31,20 +31,23 @@ namespace Me.Amon.Pwd.V.Wiz
         public void InitOnce(TableLayoutPanel grid, ViewModel viewModel)
         {
             _Grid = grid;
+            _ViewModel = viewModel;
+            _Style = new RowStyle(SizeType.Absolute, 27F);
+
+            Dock = DockStyle.Fill;
 
             _Label = new Label();
             _Label.TextAlign = ContentAlignment.MiddleRight;
             _Label.Dock = DockStyle.Fill;
 
-            _Style = new RowStyle(SizeType.Absolute, 27F);
-            Dock = DockStyle.Fill;
-
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
-            _ViewModel = viewModel;
             BtMod.Image = viewModel.GetImage(TbData.UseSystemPasswordChar ? "att-pass-hide" : "att-pass-show");
+            _Body.ShowTips(BtMod, TbData.UseSystemPasswordChar ? "显示口令" : "隐藏口令");
             BtGen.Image = viewModel.GetImage("att-pass-gen");
+            _Body.ShowTips(BtGen, "生成随机口令");
             BtOpt.Image = viewModel.GetImage("att-pass-options");
+            _Body.ShowTips(BtOpt, "选项");
 
             InitSpec(TbData);
         }
@@ -124,6 +127,7 @@ namespace Me.Amon.Pwd.V.Wiz
         {
             TbData.UseSystemPasswordChar = !TbData.UseSystemPasswordChar;
             BtMod.Image = _ViewModel.GetImage(TbData.UseSystemPasswordChar ? "att-pass-hide" : "att-pass-show");
+            _Body.ShowTips(BtMod, TbData.UseSystemPasswordChar ? "显示口令" : "隐藏口令");
         }
 
         private void BtGen_Click(object sender, EventArgs e)

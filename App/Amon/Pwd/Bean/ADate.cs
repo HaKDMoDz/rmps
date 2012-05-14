@@ -99,6 +99,14 @@ namespace Me.Amon.Pwd.Bean
 
         private void MiDateDiy_Click(object sender, EventArgs e)
         {
+            string cmd = Main.ShowInput("请输入您的日期格式：", _Att.GetSpec(DateAtt.SPEC_FORMAT, DateAtt.SPEC_VALUE_NONE));
+            if (string.IsNullOrEmpty(cmd))
+            {
+                return;
+            }
+            _Att.SetSpec(DateAtt.SPEC_FORMAT, cmd);
+            _Box.Format = DateTimePickerFormat.Custom;
+            _Box.CustomFormat = cmd;
         }
         #endregion
 

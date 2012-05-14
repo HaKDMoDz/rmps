@@ -12,6 +12,7 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class BeanGuid : UserControl, IAttEdit
     {
+        private APro _APro;
         private Att _Att;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
@@ -23,8 +24,9 @@ namespace Me.Amon.Pwd.V.Pro
             InitializeComponent();
         }
 
-        public BeanGuid(SafeModel safeModel, DataTable dataTable)
+        public BeanGuid(APro apro, SafeModel safeModel, DataTable dataTable)
         {
+            _APro = apro;
             _SafeModel = safeModel;
             _DataTable = dataTable;
 
@@ -38,13 +40,14 @@ namespace Me.Amon.Pwd.V.Pro
             _DataModel = dataModel;
 
             PbCard.Image = viewModel.GetImage("export-card-16");
-            //_AWiz.ShowTips(PbCard, "导出为卡片");
+            _APro.ShowTips(PbCard, "导出为卡片");
 
             if (!Directory.Exists("Card"))
             {
                 return;
             }
 
+            #region 名片模板初始化
             EventHandler exportHandler = new EventHandler(ExportCard_Click);
 
             XmlDocument doc = new XmlDocument();
@@ -116,6 +119,7 @@ namespace Me.Amon.Pwd.V.Pro
                     return;
                 }
             }
+            #endregion
         }
 
         public Control Control { get { return this; } }

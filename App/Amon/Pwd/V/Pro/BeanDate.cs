@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd.Bean;
 using Me.Amon.Util;
 
@@ -9,11 +10,19 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class BeanDate : ADate, IAttEdit
     {
+        private APro _APro;
         private TextBox _Ctl;
 
         #region 构造函数
         public BeanDate()
         {
+            InitializeComponent();
+        }
+
+        public BeanDate(APro apro)
+        {
+            _APro = apro;
+
             InitializeComponent();
         }
         #endregion
@@ -25,7 +34,9 @@ namespace Me.Amon.Pwd.V.Pro
             this.DtData.GotFocus += new EventHandler(DtData_GotFocus);
 
             BtNow.Image = viewModel.GetImage("att-date-now");
+            _APro.ShowTips(BtNow, "当前时间");
             BtOpt.Image = viewModel.GetImage("att-date-options");
+            _APro.ShowTips(BtOpt, "选项");
 
             InitSpec(DtData);
         }
@@ -41,6 +52,16 @@ namespace Me.Amon.Pwd.V.Pro
             if (_Att != null)
             {
                 TbText.Text = _Att.Text;
+                string cmd = _Att.GetSpec(DateAtt.SPEC_FORMAT, DateAtt.SPEC_VALUE_NONE);
+                if (string.IsNullOrWhiteSpace(cmd))
+                {
+                    DtData.Format = DateTimePickerFormat.Long;
+                }
+                else
+                {
+                    DtData.Format = DateTimePickerFormat.Custom;
+                    DtData.CustomFormat = cmd;
+                }
                 if (CharUtil.IsValidateLong(_Att.Data))
                 {
                     DtData.Value = DateTime.FromFileTimeUtc(long.Parse(_Att.Data));

@@ -9,11 +9,19 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class BeanMail : AMail, IAttEdit
     {
+        private APro _APro;
         private TextBox _Ctl;
 
         #region 构造函数
         public BeanMail()
         {
+            InitializeComponent();
+        }
+
+        public BeanMail(APro apro)
+        {
+            _APro = apro;
+
             InitializeComponent();
         }
         #endregion
@@ -25,6 +33,7 @@ namespace Me.Amon.Pwd.V.Pro
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
             BtSend.Image = viewModel.GetImage("att-mail-send");
+            _APro.ShowTips(BtSend, "撰写邮件");
 
             InitSpec(TbData);
         }

@@ -31,17 +31,18 @@ namespace Me.Amon.Pwd.V.Wiz
         public void InitOnce(TableLayoutPanel grid, ViewModel viewModel)
         {
             _Grid = grid;
+            _Style = new RowStyle(SizeType.Absolute, 27F);
+
+            Dock = DockStyle.Fill;
 
             _Label = new Label();
             _Label.TextAlign = ContentAlignment.MiddleRight;
             _Label.Dock = DockStyle.Fill;
 
-            _Style = new RowStyle(SizeType.Absolute, 27F);
-            Dock = DockStyle.Fill;
-
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
             BtOpt.Image = viewModel.GetImage("att-call-options");
+            _Body.ShowTips(BtOpt, "选项");
 
             InitSpec(TbData);
         }

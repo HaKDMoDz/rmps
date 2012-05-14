@@ -6,9 +6,18 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class BeanInfo : UserControl, IAttEdit
     {
+        private APro _APro;
+
         #region 构造函数
         public BeanInfo()
         {
+            InitializeComponent();
+        }
+
+        public BeanInfo(APro apro)
+        {
+            _APro = apro;
+
             InitializeComponent();
         }
         #endregion

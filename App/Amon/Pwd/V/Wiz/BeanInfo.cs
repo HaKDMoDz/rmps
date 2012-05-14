@@ -8,6 +8,7 @@ namespace Me.Amon.Pwd.V.Wiz
     {
         private SafeModel _SafeModel;
 
+        #region 构造函数
         public BeanInfo()
         {
             InitializeComponent();
@@ -23,7 +24,9 @@ namespace Me.Amon.Pwd.V.Wiz
         public void Init(DataModel dataModel)
         {
         }
+        #endregion
 
+        #region 接口实现
         public void InitView(TableLayoutPanel grid)
         {
             grid.Controls.Add(this, 0, 0);
@@ -61,10 +64,13 @@ namespace Me.Amon.Pwd.V.Wiz
         public void ClearData()
         {
         }
+        #endregion
 
+        #region 事件处理
         private void BeanInfo_Paint(object sender, PaintEventArgs e)
         {
             ControlPaint.DrawBorder(e.Graphics, this.ClientRectangle, Color.Red, ButtonBorderStyle.Solid);
         }
+        #endregion
     }
 }

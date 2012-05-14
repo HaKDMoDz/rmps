@@ -19,6 +19,8 @@ namespace Me.Amon.User.Sign
             _UserModel = userModel;
 
             InitializeComponent();
+
+            //_SignAc.ShowTips(null, "");
         }
 
         #region 接口实现

@@ -158,6 +158,11 @@ namespace Me.Amon.User
         #endregion
 
         #region 公共函数
+        public void ShowTips(Control control, string caption)
+        {
+            TpTips.SetToolTip(control, caption);
+        }
+
         public void ShowAlert(string alert)
         {
             MessageBox.Show(this, alert, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -196,6 +201,11 @@ namespace Me.Amon.User
                 case ESignAc.SignFk:
                     ShowSignFk();
                     break;
+            }
+
+            if (_SignAc != null)
+            {
+                _SignAc.Focus();
             }
         }
 

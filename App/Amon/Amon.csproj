@@ -1348,6 +1348,9 @@
     <Content Include="Amon.dat" />
     <Content Include="Amon.res" />
     <Content Include="Logo\logo.ico" />
+    <None Include="Resources\Find.png" />
+    <None Include="Resources\SignIn.png" />
+    <None Include="Resources\SignFp.png" />
     <None Include="Resources\Input.png" />
     <None Include="Resources\Open.png" />
     <None Include="Resources\Save.png" />

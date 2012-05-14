@@ -30,6 +30,7 @@ namespace Me.Amon.User.Sign
             InitializeComponent();
 
             TbPath.Text = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), IEnv.DIR_DATA);
+            _SignAc.ShowTips(BtPath, "选择目录");
         }
         #endregion
 

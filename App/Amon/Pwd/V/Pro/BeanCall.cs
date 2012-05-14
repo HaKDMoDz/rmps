@@ -8,12 +8,20 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class BeanCall : ACall, IAttEdit
     {
+        private APro _APro;
         private TextBox _Ctl;
         private DataModel _DataModel;
 
         #region 构造函数
         public BeanCall()
         {
+            InitializeComponent();
+        }
+
+        public BeanCall(APro apro)
+        {
+            _APro = apro;
+
             InitializeComponent();
         }
         #endregion
@@ -27,6 +35,9 @@ namespace Me.Amon.Pwd.V.Pro
 
             TbText.GotFocus += new EventHandler(TbText_GotFocus);
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
+
+            BtOpt.Image = viewModel.GetImage("att-call-options");
+            _APro.ShowTips(BtOpt, "选项");
 
             InitSpec(TbData);
         }

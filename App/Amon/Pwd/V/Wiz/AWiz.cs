@@ -262,7 +262,7 @@ namespace Me.Amon.Pwd.V.Wiz
         {
             if (_BodyBean == null)
             {
-                _BodyBean = new BeanBody(_SafeModel);
+                _BodyBean = new BeanBody(this, _SafeModel);
                 _BodyBean.Init(_DataModel, _ViewModel);
                 _BodyBean.Name = "body";
             }

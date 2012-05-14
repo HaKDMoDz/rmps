@@ -33,6 +33,9 @@ namespace Me.Amon.User.Sign
             _UserModel = userModel;
 
             InitializeComponent();
+
+            _SignAc.ShowTips(PbSignUp, "用户注册");
+            _SignAc.ShowTips(PbSignFk, "找回口令");
         }
         #endregion
 
@@ -123,6 +126,18 @@ namespace Me.Amon.User.Sign
 
         public void ShowMenu(Control control, int x, int y)
         {
+        }
+        #endregion
+
+        #region 事件处理
+        private void PbSignUp_Click(object sender, EventArgs e)
+        {
+            _SignAc.ShowView(ESignAc.SignPc);
+        }
+
+        private void PbSignFk_Click(object sender, EventArgs e)
+        {
+            _SignAc.ShowView(ESignAc.SignFk);
         }
         #endregion
 

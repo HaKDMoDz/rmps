@@ -8,11 +8,19 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class BeanHint : UserControl, IAttEdit
     {
+        private APro _APro;
         private Att _Att;
 
         #region 构造函数
         public BeanHint()
         {
+            InitializeComponent();
+        }
+
+        public BeanHint(APro apro)
+        {
+            _APro = apro;
+
             InitializeComponent();
         }
         #endregion

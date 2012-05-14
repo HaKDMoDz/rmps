@@ -8,6 +8,8 @@ namespace Me.Amon.User.Sign
 
         Control Control { get; }
 
+        bool Focus();
+
         void DoSignAc();
 
         void DoCancel();

@@ -7,12 +7,20 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class BeanMeta : UserControl, IAttEdit
     {
+        private APro _APro;
         private Att _Att;
         private TextBox _Ctl;
 
         #region 构造函数
         public BeanMeta()
         {
+            InitializeComponent();
+        }
+
+        public BeanMeta(APro apro)
+        {
+            _APro = apro;
+
             InitializeComponent();
         }
         #endregion

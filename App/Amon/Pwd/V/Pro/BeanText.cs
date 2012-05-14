@@ -8,11 +8,19 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class BeanText : AText, IAttEdit
     {
+        private APro _APro;
         private TextBox _Ctl;
 
         #region 构造函数
         public BeanText()
         {
+            InitializeComponent();
+        }
+
+        public BeanText(APro apro)
+        {
+            _APro = apro;
+
             InitializeComponent();
         }
         #endregion
@@ -24,6 +32,7 @@ namespace Me.Amon.Pwd.V.Pro
             this.TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
             BtOpt.Image = viewModel.GetImage("att-text-options");
+            _APro.ShowTips(BtOpt, "选项");
 
             InitSpec(TbData);
         }

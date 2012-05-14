@@ -9,10 +9,12 @@ namespace Me.Amon.Pwd.V.Wiz
 {
     public partial class BeanLine : ALine, IAttEdit
     {
+        #region 全局变量
         private BeanBody _Body;
         private TableLayoutPanel _Grid;
         private RowStyle _Style;
         private Label _Label;
+        #endregion
 
         #region 构造函数
         public BeanLine()
@@ -30,17 +32,18 @@ namespace Me.Amon.Pwd.V.Wiz
         public void InitOnce(TableLayoutPanel grid, ViewModel viewModel)
         {
             _Grid = grid;
+            _Style = new RowStyle(SizeType.Absolute, 27F);
+
+            Dock = DockStyle.Fill;
 
             _Label = new Label();
             _Label.TextAlign = ContentAlignment.MiddleRight;
             _Label.Dock = DockStyle.Fill;
 
-            _Style = new RowStyle(SizeType.Absolute, 27F);
-            Dock = DockStyle.Fill;
-
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
             BtOpt.Image = viewModel.GetImage("att-line-options");
+            _Body.ShowTips(BtOpt, "选项");
 
             InitSpec(TbData);
         }

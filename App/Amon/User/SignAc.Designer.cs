@@ -44,6 +44,7 @@
             this.MiSignFk = new System.Windows.Forms.ToolStripMenuItem();
             this.MiSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.MiUpgrade = new System.Windows.Forms.ToolStripMenuItem();
+            this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).BeginInit();
             this.CmMenu.SuspendLayout();
@@ -68,6 +69,7 @@
             this.PbMenu.Size = new System.Drawing.Size(16, 16);
             this.PbMenu.TabIndex = 2;
             this.PbMenu.TabStop = false;
+            this.TpTips.SetToolTip(this.PbMenu, "系统选单");
             this.PbMenu.Click += new System.EventHandler(this.PbMenu_Click);
             // 
             // BtOk
@@ -210,5 +212,6 @@
         private System.Windows.Forms.ToolStripMenuItem MiSignFk;
         private System.Windows.Forms.ToolStripSeparator MiSep2;
         private System.Windows.Forms.ToolStripMenuItem MiUpgrade;
+        private System.Windows.Forms.ToolTip TpTips;
     }
 }
