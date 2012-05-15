@@ -13,7 +13,7 @@ namespace Me.Amon
 
             this.Text = String.Format("关于 {0}", AssemblyTitle);
             this.LbName.Text = AssemblyProduct;
-            this.LbVersion.Text = IEnv.VER_APP;
+            this.LbVersion.Text = AssemblyVersion;
             this.LbCopyright.Text = AssemblyCopyright;
             this.TbDescription.Text = AssemblyDescription;
         }

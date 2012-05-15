@@ -305,7 +305,7 @@
             // 
             this.MiSaveas.Name = "MiSaveas";
             this.MiSaveas.Size = new System.Drawing.Size(152, 22);
-            this.MiSaveas.Text = "保存(&S)";
+            this.MiSaveas.Text = "另存为(&S)";
             this.MiSaveas.Click += new System.EventHandler(this.MiSaveas_Click);
             // 
             // MiSep0
@@ -362,7 +362,7 @@
             this.PbMenu.Size = new System.Drawing.Size(16, 16);
             this.PbMenu.TabIndex = 8;
             this.PbMenu.TabStop = false;
-            this.TpTips.SetToolTip(this.PbMenu, "菜单");
+            this.TpTips.SetToolTip(this.PbMenu, "系统选单");
             this.PbMenu.Click += new System.EventHandler(this.PbMenu_Click);
             // 
             // PbSelect

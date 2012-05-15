@@ -412,7 +412,7 @@ namespace Me.Amon.Pwd.V.Pro
         }
         #endregion
 
-        #region 菜单事件
+        #region 选单事件
         #region 添加属性
         private void CmiAppendAttText_Click(object sender, EventArgs e)
         {

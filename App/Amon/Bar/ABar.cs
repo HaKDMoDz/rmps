@@ -122,11 +122,17 @@ namespace Me.Amon.Bar
 
         private void PbMenu_Click(object sender, EventArgs e)
         {
+            MiSave.Enabled = PbIcon.Image != null;
             CmMenu.Show(PbMenu, 0, PbMenu.Height);
         }
 
         private void MiSave_Click(object sender, EventArgs e)
         {
+            if (PbIcon.Image == null)
+            {
+                return;
+            }
+
             FdSave.Filter = "PNG文件|*.png";
             if (DialogResult.OK != FdSave.ShowDialog(this))
             {

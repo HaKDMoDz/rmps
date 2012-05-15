@@ -308,8 +308,8 @@ namespace Me.Amon
         }
         #endregion
 
-        #region 菜单事件
-        #region 导航菜单
+        #region 选单事件
+        #region 导航选单
         private void MgTopMost_Click(object sender, EventArgs e)
         {
             TopMost = !TopMost;

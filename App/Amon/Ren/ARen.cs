@@ -124,6 +124,7 @@ namespace Me.Amon.Ren
 
         private void PbMenu_Click(object sender, EventArgs e)
         {
+            MiSaveas.Enabled = !string.IsNullOrEmpty(TbRule.Text);
             MiSaveas.Visible = true;
             MiSep0.Visible = true;
             MiSep1.Visible = true;

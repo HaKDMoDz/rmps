@@ -87,7 +87,7 @@ namespace Me.Amon.Uw
         }
         #endregion
 
-        #region 菜单事件
+        #region 选单事件
         private void MiAppend_Click(object sender, EventArgs e)
         {
             if (_Control is IcoView)

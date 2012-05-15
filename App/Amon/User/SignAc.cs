@@ -61,7 +61,7 @@ namespace Me.Amon.User
         }
         #endregion
 
-        #region 菜单事件
+        #region 选单事件
         /// <summary>
         /// 打开(&O)
         /// </summary>

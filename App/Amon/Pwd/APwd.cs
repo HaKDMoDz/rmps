@@ -77,7 +77,7 @@ namespace Me.Amon.Pwd
             _DataModel.UdcModel = udcModel;
             #endregion
 
-            #region 系统菜单
+            #region 系统选单
             _XmlMenu = new XmlMenu<APwd>(this, _ViewModel);
             _XmlMenu.Load(Path.Combine(_UserModel.Home, "Pwd.xml"));
             _XmlMenu.GetStrokes("APwd");
@@ -978,7 +978,7 @@ namespace Me.Amon.Pwd
         }
         #endregion
 
-        #region 文件菜单
+        #region 文件选单
         public void LockForm()
         {
             new AuthRc(_UserModel, this).ShowDialog(this);
@@ -1006,10 +1006,10 @@ namespace Me.Amon.Pwd
         }
         #endregion
 
-        #region 编辑菜单
+        #region 编辑选单
         #endregion
 
-        #region 视图菜单
+        #region 视图选单
         #region 模式切换
         /// <summary>
         /// 专业模式
@@ -1093,7 +1093,7 @@ namespace Me.Amon.Pwd
 
         #region 布局调整
         /// <summary>
-        /// 菜单栏是否可见
+        /// 选单栏是否可见
         /// </summary>
         public bool MenuBarVisible
         {
@@ -1220,7 +1220,7 @@ namespace Me.Amon.Pwd
         #endregion
         #endregion
 
-        #region 数据菜单
+        #region 数据选单
         /// <summary>
         /// 查找
         /// </summary>
@@ -1782,7 +1782,7 @@ namespace Me.Amon.Pwd
         #endregion
         #endregion
 
-        #region 用户菜单
+        #region 用户选单
         #region 记录安全
         public void PkeyEdit()
         {
@@ -1833,7 +1833,7 @@ namespace Me.Amon.Pwd
         #endregion
         #endregion
 
-        #region 帮助菜单
+        #region 帮助选单
         /// <summary>
         /// 帮助
         /// </summary>

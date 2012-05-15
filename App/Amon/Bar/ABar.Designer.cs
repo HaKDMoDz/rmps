@@ -34,18 +34,19 @@
             this.CbOpt = new System.Windows.Forms.ComboBox();
             this.PbIcon = new System.Windows.Forms.PictureBox();
             this.GbSet = new System.Windows.Forms.GroupBox();
-            this.UcUserSet = new Me.Amon.Bar.UserSet();
             this.GbOpt = new System.Windows.Forms.GroupBox();
             this.PbMenu = new System.Windows.Forms.PictureBox();
             this.BtEnc = new System.Windows.Forms.Button();
             this.LbEcho = new System.Windows.Forms.Label();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MiDecLoc = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiDecUrl = new System.Windows.Forms.ToolStripMenuItem();
             this.MiSave = new System.Windows.Forms.ToolStripMenuItem();
             this.MiSep0 = new System.Windows.Forms.ToolStripSeparator();
+            this.MiDecLoc = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiDecUrl = new System.Windows.Forms.ToolStripMenuItem();
             this.FdOpen = new System.Windows.Forms.OpenFileDialog();
             this.FdSave = new System.Windows.Forms.SaveFileDialog();
+            this.TpTips = new System.Windows.Forms.ToolTip(this.components);
+            this.UcUserSet = new Me.Amon.Bar.UserSet();
             ((System.ComponentModel.ISupportInitialize)(this.PbIcon)).BeginInit();
             this.GbSet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).BeginInit();
@@ -91,13 +92,6 @@
             this.GbSet.TabStop = false;
             this.GbSet.Text = "设置";
             // 
-            // UcUserSet
-            // 
-            this.UcUserSet.Location = new System.Drawing.Point(6, 20);
-            this.UcUserSet.Name = "UcUserSet";
-            this.UcUserSet.Size = new System.Drawing.Size(296, 76);
-            this.UcUserSet.TabIndex = 0;
-            // 
             // GbOpt
             // 
             this.GbOpt.Location = new System.Drawing.Point(274, 120);
@@ -110,6 +104,7 @@
             // PbMenu
             // 
             this.PbMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.PbMenu.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PbMenu.Image = global::Me.Amon.Properties.Resources.Menu;
             this.PbMenu.Location = new System.Drawing.Point(12, 309);
             this.PbMenu.Name = "PbMenu";
@@ -117,6 +112,7 @@
             this.PbMenu.TabIndex = 6;
             this.PbMenu.TabStop = false;
             this.PbMenu.Text = "解析(&D)";
+            this.TpTips.SetToolTip(this.PbMenu, "系统选单");
             this.PbMenu.Click += new System.EventHandler(this.PbMenu_Click);
             // 
             // BtEnc
@@ -135,9 +131,8 @@
             this.LbEcho.AutoSize = true;
             this.LbEcho.Location = new System.Drawing.Point(34, 312);
             this.LbEcho.Name = "LbEcho";
-            this.LbEcho.Size = new System.Drawing.Size(35, 12);
+            this.LbEcho.Size = new System.Drawing.Size(0, 12);
             this.LbEcho.TabIndex = 7;
-            this.LbEcho.Text = "label";
             // 
             // CmMenu
             // 
@@ -147,7 +142,19 @@
             this.MiDecLoc,
             this.MiDecUrl});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(166, 76);
+            this.CmMenu.Size = new System.Drawing.Size(166, 98);
+            // 
+            // MiSave
+            // 
+            this.MiSave.Name = "MiSave";
+            this.MiSave.Size = new System.Drawing.Size(165, 22);
+            this.MiSave.Text = "另存为(&S)";
+            this.MiSave.Click += new System.EventHandler(this.MiSave_Click);
+            // 
+            // MiSep0
+            // 
+            this.MiSep0.Name = "MiSep0";
+            this.MiSep0.Size = new System.Drawing.Size(162, 6);
             // 
             // MiDecLoc
             // 
@@ -163,21 +170,16 @@
             this.MiDecUrl.Text = "打开网络地址(&U)";
             this.MiDecUrl.Click += new System.EventHandler(this.MiDecUrl_Click);
             // 
-            // MiSave
-            // 
-            this.MiSave.Name = "MiSave";
-            this.MiSave.Size = new System.Drawing.Size(165, 22);
-            this.MiSave.Text = "保存(&S)";
-            this.MiSave.Click += new System.EventHandler(this.MiSave_Click);
-            // 
-            // MiSep0
-            // 
-            this.MiSep0.Name = "MiSep0";
-            this.MiSep0.Size = new System.Drawing.Size(162, 6);
-            // 
             // FdOpen
             // 
             this.FdOpen.FileName = "openFileDialog1";
+            // 
+            // UcUserSet
+            // 
+            this.UcUserSet.Location = new System.Drawing.Point(6, 20);
+            this.UcUserSet.Name = "UcUserSet";
+            this.UcUserSet.Size = new System.Drawing.Size(296, 76);
+            this.UcUserSet.TabIndex = 0;
             // 
             // ABar
             // 
@@ -225,5 +227,6 @@
         private System.Windows.Forms.ToolStripSeparator MiSep0;
         private System.Windows.Forms.OpenFileDialog FdOpen;
         private System.Windows.Forms.SaveFileDialog FdSave;
+        private System.Windows.Forms.ToolTip TpTips;
     }
 }
