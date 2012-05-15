@@ -169,7 +169,7 @@
             this.BtOk.UseVisualStyleBackColor = true;
             this.BtOk.Click += new System.EventHandler(this.BtOk_Click);
             // 
-            // Info
+            // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -191,7 +191,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Info";
+            this.Name = "About";
             this.Padding = new System.Windows.Forms.Padding(9, 8, 9, 8);
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

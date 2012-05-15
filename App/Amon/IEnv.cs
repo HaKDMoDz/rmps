@@ -2,6 +2,9 @@
 {
     public class IEnv
     {
+        public const string VER_APP = "7.0.0.2";
+        public const string VER_DB = "1";
+
         /// <summary>
         /// 默认数据目录
         /// </summary>
