@@ -1,0 +1,644 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Amon version="1">
+  <Libs>
+    <Lib Id="Demo" Path="Lib\DemoLib.dll"/>
+  </Libs>
+
+  <Actions>
+    <Action Id="hind-window" Class="Me.Amon.Pwd.E.File.HideAction"/>
+    <Action Id="lock-window" Class="Me.Amon.Pwd.E.File.LockAction"/>
+    <Action Id="exit-window" Class="Me.Amon.Pwd.E.File.ExitAction"/>
+    <Action Id="append-cat" Class="Me.Amon.Pwd.E._Cat.AppendCatAction"/>
+    <Action Id="update-cat" Class="Me.Amon.Pwd.E._Cat.UpdateCatAction"/>
+    <Action Id="delete-cat" Class="Me.Amon.Pwd.E._Cat.DeleteCatAction"/>
+    <Action Id="cat-edit-move-up" Class="Me.Amon.Pwd.E._Cat.MoveUpAction"/>
+    <Action Id="cat-edit-move-down" Class="Me.Amon.Pwd.E._Cat.MoveDownAction"/>
+    <Action Id="append-key" Class="Me.Amon.Pwd.E._Key.AppendKeyAction"/>
+    <Action Id="update-key" Class="Me.Amon.Pwd.E._Key.UpdateKeyAction"/>
+    <Action Id="delete-key" Class="Me.Amon.Pwd.E._Key.DeleteKeyAction"/>
+    <Action Id="append-att-text" Class="Me.Amon.Pwd.E._Att.AppendTextAction"/>
+    <Action Id="append-att-pass" Class="Me.Amon.Pwd.E._Att.AppendPassAction"/>
+    <Action Id="append-att-link" Class="Me.Amon.Pwd.E._Att.AppendLinkAction"/>
+    <Action Id="append-att-mail" Class="Me.Amon.Pwd.E._Att.AppendMailAction"/>
+    <Action Id="append-att-date" Class="Me.Amon.Pwd.E._Att.AppendDateAction"/>
+    <Action Id="append-att-data" Class="Me.Amon.Pwd.E._Att.AppendDataAction"/>
+    <Action Id="append-att-list" Class="Me.Amon.Pwd.E._Att.AppendListAction"/>
+    <Action Id="append-att-memo" Class="Me.Amon.Pwd.E._Att.AppendMemoAction"/>
+    <Action Id="append-att-file" Class="Me.Amon.Pwd.E._Att.AppendFileAction"/>
+    <Action Id="append-att-line" Class="Me.Amon.Pwd.E._Att.AppendLineAction"/>
+    <Action Id="change-att-text" Class="Me.Amon.Pwd.E._Att.ChangeTextAction"/>
+    <Action Id="change-att-pass" Class="Me.Amon.Pwd.E._Att.ChangePassAction"/>
+    <Action Id="change-att-link" Class="Me.Amon.Pwd.E._Att.ChangeLinkAction"/>
+    <Action Id="change-att-mail" Class="Me.Amon.Pwd.E._Att.ChangeMailAction"/>
+    <Action Id="change-att-date" Class="Me.Amon.Pwd.E._Att.ChangeDateAction"/>
+    <Action Id="change-att-data" Class="Me.Amon.Pwd.E._Att.ChangeDataAction"/>
+    <Action Id="change-att-list" Class="Me.Amon.Pwd.E._Att.ChangeListAction"/>
+    <Action Id="change-att-memo" Class="Me.Amon.Pwd.E._Att.ChangeMemoAction"/>
+    <Action Id="change-att-file" Class="Me.Amon.Pwd.E._Att.ChangeFileAction"/>
+    <Action Id="change-att-line" Class="Me.Amon.Pwd.E._Att.ChangeLineAction"/>
+    <Action Id="update-att" Class="Me.Amon.Pwd.E._Att.UpdateAttAction"/>
+	<Action Id="delete-att" Class="Me.Amon.Pwd.E._Att.DeleteAttAction"/>
+    <Action Id="att-edit-cut" Class="Me.Amon.Pwd.E._Att.EditCutAction"/>
+    <Action Id="att-edit-copy" Class="Me.Amon.Pwd.E._Att.EditCopyAction"/>
+    <Action Id="att-edit-paste" Class="Me.Amon.Pwd.E._Att.EditPasteAction"/>
+    <Action Id="att-edit-clear" Class="Me.Amon.Pwd.E._Att.EditClearAction"/>
+    <Action Id="att-edit-move-up" Class="Me.Amon.Pwd.E._Att.MoveUpAction"/>
+    <Action Id="att-edit-move-down" Class="Me.Amon.Pwd.E._Att.MoveDownAction"/>
+    <Action Id="att-edit-select-prev" Class="Me.Amon.Pwd.E._Att.SelectPrevAction"/>
+    <Action Id="att-edit-select-next" Class="Me.Amon.Pwd.E._Att.SelectNextAction"/>
+    <Action Id="top-most" Class="Me.Amon.Pwd.E.View.TopMostAction"/>
+    <Action Id="pattern-pro" Class="Me.Amon.Pwd.E.View.ProPatternAction"/>
+    <Action Id="pattern-wiz" Class="Me.Amon.Pwd.E.View.WizPatternAction"/>
+    <Action Id="pattern-pad" Class="Me.Amon.Pwd.E.View.PadPatternAction"/>
+    <Action Id="menubar-visible" Class="Me.Amon.Pwd.E.View.MenubarVisibleAction"/>
+    <Action Id="toolbar-visible" Class="Me.Amon.Pwd.E.View.ToolbarVisibleAction"/>
+    <Action Id="echobar-visible" Class="Me.Amon.Pwd.E.View.EchobarVisibleAction"/>
+    <Action Id="findbar-visible" Class="Me.Amon.Pwd.E.View.FindbarVisibleAction"/>
+    <Action Id="navpane-visible" Class="Me.Amon.Pwd.E.View.NavPaneVisibleAction"/>
+    <Action Id="cattree-visible" Class="Me.Amon.Pwd.E.View.CatTreeVisibleAction"/>
+    <Action Id="keylist-visible" Class="Me.Amon.Pwd.E.View.KeyListVisibleAction"/>
+    <Action Id="find-key" Class="Me.Amon.Pwd.E.Data.FindAction"/>
+    <Action Id="sync" Class="Me.Amon.Pwd.E.Data.SyncAction"/>
+    <Action Id="export-txt" Class="Me.Amon.Pwd.E.Data.ExportTxtAction"/>
+    <Action Id="export-xml" Class="Me.Amon.Pwd.E.Data.ExportXmlAction"/>
+    <Action Id="import-txt" Class="Me.Amon.Pwd.E.Data.ImportTxtAction"/>
+    <Action Id="import-xml" Class="Me.Amon.Pwd.E.Data.ImportXmlAction"/>
+    <Action Id="native-backup" Class="Me.Amon.Pwd.E.Data.NativeBackupAction"/>
+    <Action Id="native-resume" Class="Me.Amon.Pwd.E.Data.NativeResumeAction"/>
+    <Action Id="native-config" Class="Me.Amon.Pwd.E.Data.NativeConfigAction"/>
+    <Action Id="remote-backup" Class="Me.Amon.Pwd.E.Data.RemoteBackupAction"/>
+    <Action Id="remote-resume" Class="Me.Amon.Pwd.E.Data.RemoteResumeAction"/>
+    <Action Id="remote-config" Class="Me.Amon.Pwd.E.Data.RemoteConfigAction"/>
+    <Action Id="help" Class="Me.Amon.Pwd.E.Help.HelpAction"/>
+    <Action Id="shortcuts" Class="Me.Amon.Pwd.E.Help.ShortCutsAction"/>
+    <Action Id="about" Class="Me.Amon.Pwd.E.Help.AboutAction"/>
+    <Action Id="change-label" Class="Me.Amon.Pwd.E._Key.ChangeLabelAction"/>
+    <Action Id="change-major" Class="Me.Amon.Pwd.E._Key.ChangeMajorAction"/>
+    <Action Id="sort-dir" Class="Me.Amon.Pwd.E._Key.SortDirAction"/>
+    <Action Id="sort-key" Class="Me.Amon.Pwd.E._Key.SortKeyAction"/>
+  </Actions>
+
+  <!--系统快捷键-->
+  <Strokes Id="APwd">
+    <Stroke Key="^ S" ActionId="update-key" Memo="保存记录"/>
+    <Stroke Key="# C" ActionId="att-edit-copy" Memo="复制属性"/>
+    <Stroke Key="# U" ActionId="update-att" Memo="保存属性"/>
+    <Stroke Key="# D" ActionId="delete-att" Memo="删除属性"/>
+  </Strokes>
+
+  <!--魔方密码菜单栏-->
+  <Menubar Id="APwd">
+    <Menu Id="file" Text="文件(&amp;F)">
+      <Item Type="normal" Text="锁定窗口(&amp;L)" ActionId="lock-window">
+        <Stroke Key="^ L" Memo="锁定窗口"/>
+      </Item>
+      <Item Type="normal" Text="隐藏窗口(&amp;H)" ActionId="hind-window">
+        <Stroke Key="^ H" Memo="隐藏窗口"/>
+        <Stroke Key="^ Enter" Memo="隐藏窗口"/>
+      </Item>
+      <Line/>
+      <Item Type="normal" Text="退出(&amp;X)" ActionId="exit-window">
+        <Stroke Key="^ Q" Memo="退出"/>
+      </Item>
+    </Menu>
+    <Menu Id="edit" Text="编辑(&amp;E)">
+      <Item Type="normal" Text="添加记录" ActionId="append-key">
+        <Stroke Key="^ N" Memo="添加记录"/>
+      </Item>
+      <Item Type="normal" Text="删除记录" ActionId="delete-key">
+        <Stroke Key="^ R" Memo="删除记录"/>
+      </Item>
+      <Line/>
+      <Menu Id="append-att" Text="添加属性">
+        <Item Type="normal" Text="文本" ActionId="append-att-text">
+          <Stroke Key="^ 1" Memo="添加文本属性"/>
+        </Item>
+        <Item Type="normal" Text="口令" ActionId="append-att-pass">
+          <Stroke Key="^ 2" Memo="添加口令属性"/>
+        </Item>
+        <Item Type="normal" Text="链接" ActionId="append-att-link">
+          <Stroke Key="^ 3" Memo="添加链接属性"/>
+        </Item>
+        <Item Type="normal" Text="邮件" ActionId="append-att-mail">
+          <Stroke Key="^ 4" Memo="添加邮件属性"/>
+        </Item>
+        <Item Type="normal" Text="日期" ActionId="append-att-date">
+          <Stroke Key="^ 5" Memo="添加日期属性"/>
+        </Item>
+        <Item Type="normal" Text="数值" ActionId="append-att-data">
+          <Stroke Key="^ 6" Memo="添加数值属性"/>
+        </Item>
+        <Item Type="normal" Text="列表" ActionId="append-att-list">
+          <Stroke Key="^ 7" Memo="添加列表属性"/>
+        </Item>
+        <Item Type="normal" Text="附注" ActionId="append-att-memo">
+          <Stroke Key="^ 8" Memo="添加附注属性"/>
+        </Item>
+        <Item Type="normal" Text="文件" ActionId="append-att-file">
+          <Stroke Key="^ 9" Memo="添加文件属性"/>
+        </Item>
+        <Item Type="normal" Text="标记" ActionId="append-att-line">
+          <Stroke Key="^ 0" Memo="添加标记属性"/>
+        </Item>
+      </Menu>
+      <Menu Id="update-att" Text="转换属性">
+        <Item Type="normal" Text="文本" ActionId="change-att-text">
+          <Stroke Key="# 1" Memo="转换文本属性"/>
+        </Item>
+        <Item Type="normal" Text="口令" ActionId="change-att-pass">
+          <Stroke Key="# 2" Memo="转换口令属性"/>
+        </Item>
+        <Item Type="normal" Text="链接" ActionId="change-att-link">
+          <Stroke Key="# 3" Memo="转换链接属性"/>
+        </Item>
+        <Item Type="normal" Text="邮件" ActionId="change-att-mail">
+          <Stroke Key="# 4" Memo="转换邮件属性"/>
+        </Item>
+        <Item Type="normal" Text="日期" ActionId="change-att-date">
+          <Stroke Key="# 5" Memo="转换日期属性"/>
+        </Item>
+        <Item Type="normal" Text="数值" ActionId="change-att-data">
+          <Stroke Key="# 6" Memo="转换数值属性"/>
+        </Item>
+        <Item Type="normal" Text="列表" ActionId="change-att-list">
+          <Stroke Key="# 7" Memo="转换列表属性"/>
+        </Item>
+        <Item Type="normal" Text="附注" ActionId="change-att-memo">
+          <Stroke Key="# 8" Memo="转换附注属性"/>
+        </Item>
+        <Item Type="normal" Text="文件" ActionId="change-att-file">
+          <Stroke Key="# 9" Memo="转换文件属性"/>
+        </Item>
+        <Item Type="normal" Text="标记" ActionId="change-att-line">
+          <Stroke Key="# 0" Memo="转换标记属性"/>
+        </Item>
+      </Menu>
+      <Item Type="normal" Text="删除属性" ActionId="delete-att">
+        <Stroke Key="# D" Memo="移除当前属性"/>
+      </Item>
+      <Item Type="normal" Text="选择上一属性" ActionId="att-edit-select-prev">
+        <Stroke Key="^ U" Memo="选择上一个属性"/>
+        <Stroke Key="^ Up" Memo="选择上一个属性"/>
+      </Item>
+      <Item Type="normal" Text="选择下一属性" ActionId="att-edit-select-next">
+        <Stroke Key="^ D" Memo="选择下一个属性"/>
+        <Stroke Key="^ Down" Memo="选择下一个属性"/>
+      </Item>
+      <Item Type="normal" Text="向上移动一行" ActionId="att-edit-move-up">
+        <Stroke Key="^ ~ U" Memo="向上移动一行"/>
+        <Stroke Key="^ ~ Up" Memo="向上移动一行"/>
+      </Item>
+      <Item Type="normal" Text="向下移动一行" ActionId="att-edit-move-down">
+        <Stroke Key="^ ~ D" Memo="向下移动一行"/>
+        <Stroke Key="^ ~ Down" Memo="向下移动一行"/>
+      </Item>
+      <Line/>
+      <Item Type="normal" Text="添加类别" ActionId="append-cat">
+        <Stroke Key="^ Add" Memo="添加类别"/>
+      </Item>
+      <Item Type="normal" Text="更新类别" ActionId="update-cat">
+        <Stroke Key="^ Decimal" Memo="更新类别"/>
+      </Item>
+      <Item Type="normal" Text="删除类别" ActionId="delete-cat">
+        <Stroke Key="^ Subtract" Memo="删除类别"/>
+      </Item>
+    </Menu>
+    <Menu Id="view" Text="视图(&amp;V)">
+      <Item Type="toggle" Text="窗口置顶" ActionId="top-most">
+        <Stroke Key="F5" Memo="窗口置顶"/>
+      </Item>
+      <Line/>
+      <Item Id="pattern-pro" Type="normal" Text="专业模式" ActionId="pattern-pro" Group="view-pattern" Command="view-pattern:pattern-pro">
+        <Stroke Key="^ F1" Memo="切换到专业模式" Command="view-pattern:pattern-pro"/>
+      </Item>
+      <Item Id="pattern-wiz" Type="normal" Text="向导模式" ActionId="pattern-wiz" Group="view-pattern" Command="view-pattern:pattern-wiz">
+        <Stroke Key="^ F2" Memo="切换到向导模式" Command="view-pattern:pattern-wiz"/>
+      </Item>
+      <Item Id="pattern-pad" Type="normal" Text="记事模式" ActionId="pattern-pad" Group="view-pattern" Command="view-pattern:pattern-pad" Visible="false">
+        <Stroke Key="^ F3" Memo="切换到记事模式" Command="view-pattern:pattern-pad"/>
+      </Item>
+      <Line/>
+      <Item Id="menubar-visible" Type="toggle" Text="显示菜单栏" ActionId="menubar-visible">
+        <Stroke Key="^ M" Memo="切换菜单栏显示状态"/>
+      </Item>
+      <Item Id="toolbar-visible" Type="toggle" Text="显示工具栏" ActionId="toolbar-visible">
+        <Stroke Key="^ T" Memo="切换工具栏显示状态"/>
+      </Item>
+      <Item Id="echobar-visible" Type="toggle" Text="显示状态栏" ActionId="echobar-visible">
+        <Stroke Key="^ E" Memo="切换状态栏显示状态"/>
+      </Item>
+      <Item Id="findbar-visible" Type="toggle" Text="显示查找栏" ActionId="findbar-visible">
+        <Stroke Key="^ G" Memo="切换查找栏显示状态"/>
+      </Item>
+      <Line/>
+      <Item Id="navpane-visible" Type="toggle" Text="显示导航面板" ActionId="navpane-visible">
+        <Stroke Key="^ J" Memo="切换导航面板显示状态"/>
+      </Item>
+      <Item Id="cattree-visible" Type="toggle" Text="显示口令类别" ActionId="cattree-visible">
+        <Stroke Key="^ P" Memo="切换类别目录显示状态"/>
+      </Item>
+      <Item Id="keylist-visible" Type="toggle" Text="显示口令列表" ActionId="keylist-visible">
+        <Stroke Key="^ K" Memo="切换记录列表显示状态"/>
+      </Item>
+    </Menu>
+    <Menu Id="data" Text="数据(&amp;D)">
+      <Item Type="normal" Text="查找(&amp;F)" ActionId="find-key">
+        <Stroke Key="^ F" Memo="快速查找"/>
+      </Item>
+      <Line/>
+      <Item Type="normal" Text="同步" Enabled="false" ActionId="sync"/>
+      <Line/>
+      <Menu Type="normal" Text="导出">
+        <Item Type="normal" Text="TXT格式" ActionId="export-txt"/>
+        <Item Type="normal" Text="XML格式" ActionId="export-xml"/>
+      </Menu>
+      <Menu Type="normal" Text="导入">
+        <Item Type="normal" Text="TXT格式" ActionId="import-txt"/>
+        <Item Type="normal" Text="XML格式" ActionId="import-xml"/>
+      </Menu>
+      <Line/>
+      <Item Type="normal" Text="备份到本地" ActionId="native-backup">
+        <Stroke Key="^ B" Memo="备份到本地"/>
+      </Item>
+      <Item Type="normal" Text="从本地恢复" ActionId="native-resume">
+        <Stroke Key="^ R" Memo="从本地恢复"/>
+      </Item>
+      <Item Type="normal" Text="配置本地路径" ActionId="native-config"/>
+      <Line/>
+      <Item Type="normal" Text="备份到云端" ActionId="remote-backup">
+        <Stroke Key="^ ~ B" Memo="备份到云端"/>
+      </Item>
+      <Item Type="normal" Text="从云端恢复" ActionId="remote-resume">
+        <Stroke Key="^ ~ R" Memo="从云端恢复"/>
+      </Item>
+      <Item Type="normal" Text="配置云端帐户" ActionId="remote-config"/>
+    </Menu>
+    <Menu Id="user" Text="用户(&amp;I)">
+      <Item Type="normal" Text="修改解锁口令">
+        <Action Class="Me.Amon.Pwd.E.User.LkeyAction"/>
+      </Item>
+      <Item Type="normal" Text="更改登录口令">
+        <Action Class="Me.Amon.Pwd.E.User.PkeyAction"/>
+      </Item>
+      <Item Type="normal" Text="设置安全口令" Id="mpro-skey" Enabled="false">
+        <Action Class="Me.Amon.Pwd.E.User.SkeyAction"/>
+      </Item>
+      <Line/>
+      <Item Type="normal" Text="常规设置" Visible="false">
+        <Action Class="Me.Amon.Pwd.E.User.OptionsAction"/>
+      </Item>
+      <Item Type="normal" Text="口令设置" Visible="false">
+        <Action Class="Me.Amon.Pwd.E.User.PasswordAction"/>
+      </Item>
+      <Item Type="normal" Text="字符管理">
+        <Action Class="Me.Amon.Pwd.E.User.UdcEditAction"/>
+      </Item>
+      <Item Type="normal" Text="图标管理">
+        <Action Class="Me.Amon.Pwd.E.User.IcoEditAction"/>
+      </Item>
+      <Item Type="normal" Text="模板管理">
+        <Action Class="Me.Amon.Pwd.E.User.LibEditAction"/>
+      </Item>
+    </Menu>
+    <Menu Id="skin" Text="皮肤(&amp;S)">
+    </Menu>
+    <Menu Id="help" Text="帮助(&amp;H)">
+      <Item Type="normal" Text="帮助" ActionId="help">
+        <Stroke Key="F1" Memo="使用帮助"/>
+      </Item>
+      <Line/>
+      <Item Type="normal" Text="快捷键" ActionId="shortcuts">
+        <Stroke Key="F6" Memo="快捷键列表"/>
+      </Item>
+      <Item Type="normal" Text="特别致谢" Visible="false">
+        <Action Class="Me.Amon.Pwd.E.Help.IdioAction"/>
+        <Stroke Key="F8" Memo="特别致谢"/>
+      </Item>
+      <Line/>
+      <Item Type="normal" Text="关于" ActionId="about"/>
+    </Menu>
+    <Menu Id="plug" Text="扩展(&amp;P)">
+      <Item Type="normal" Text="测试(@T)" Command="这是一个扩展测试！">
+        <Action Class="DemoLib.Demo" LibId="Demo"/>
+      </Item>
+    </Menu>
+  </Menubar>
+
+  <!--魔方密码工具栏-->
+  <Toolbar Id="APwd">
+    <Item Type="normal" Tips="新增" IconId="" ActionId="append-key">
+      <Icon Id="file-new" Path="var:menu-key-append"/>
+    </Item>
+    <Item Type="normal" Tips="保存" ActionId="update-key">
+      <Icon Id="file-save" Path="var:menu-key-update"/>
+    </Item>
+    <Item Type="normal" Tips="删除" ActionId="delete-key">
+      <Icon Id="file-save" Path="var:menu-key-delete"/>
+    </Item>
+    <Line/>
+    <Item Type="normal" Tips="剪切" ActionId="att-edit-cut">
+      <Icon Id="file-save" Path="var:att-cut"/>
+    </Item>
+    <Item Type="normal" Tips="复制" ActionId="att-edit-copy">
+      <Icon Id="file-save" Path="var:att-copy"/>
+    </Item>
+    <Item Type="normal" Tips="粘贴" ActionId="att-edit-paste">
+      <Icon Id="file-save" Path="var:att-paste"/>
+    </Item>
+    <Item Type="normal" Tips="清除" ActionId="att-edit-clear">
+      <Icon Id="file-save" Path="var:att-clear"/>
+    </Item>
+    <Line/>
+    <Item Id="menubar-visible" Type="toggle" Tips="显示菜单栏" ActionId="menubar-visible">
+      <Icon Id="edit-history" Path="var:menu-view-menubar"/>
+    </Item>
+    <Item Id="echobar-visible" Type="toggle" Tips="显示状态栏" ActionId="echobar-visible">
+      <Icon Id="edit-isolate" Path="var:menu-view-echobar"/>
+    </Item>
+    <Item Id="findbar-visible" Type="toggle" Tips="显示查找栏" ActionId="findbar-visible">
+      <Icon Id="Menu-visible" Path="var:menu-view-findbar"/>
+    </Item>
+    <Line/>
+    <Item Type="normal" Tips="同步" Enabled="false" ActionId="sync">
+      <Icon Id="file-help" Path="var:menu-data-sync"/>
+    </Item>
+    <Line/>
+    <Item Type="normal" Tips="快捷键" ActionId="shortcuts">
+      <Icon Id="file-help" Path="var:menu-help-hotkeys"/>
+    </Item>
+    <Item Type="normal" Tips="帮助" ActionId="about">
+      <Icon Id="file-help" Path="var:menu-help-topic"/>
+    </Item>
+  </Toolbar>
+
+  <!--魔方密码弹出菜单-->
+  <Popmenu Id="ACat">
+    <Item Type="normal" Text="更改图标">
+      <Action Class="Me.Amon.Pwd.E._Cat.ChangeIcoAction"/>
+    </Item>
+    <Line/>
+    <Item Type="normal" Text="添加类别" ActionId="append-cat"/>
+    <Item Type="normal" Text="更新类别" ActionId="update-cat"/>
+    <Item Type="normal" Text="删除类别" ActionId="delete-cat"/>
+    <Line/>
+    <Item Type="normal" Text="上移一行">
+      <Action Class="Me.Amon.Pwd.E._Cat.MoveUpAction"/>
+    </Item>
+    <Item Type="normal" Text="下移一行">
+      <Action Class="Me.Amon.Pwd.E._Cat.MoveDownAction"/>
+    </Item>
+    <Item Type="normal" Text="提升一级" Visible="false">
+      <Action Class="Me.Amon.Pwd.E._Cat.PromotionAction"/>
+    </Item>
+    <Item Type="normal" Text="缩进一级" Visible="false">
+      <Action Class="Me.Amon.Pwd.E._Cat.DemotionAction"/>
+    </Item>
+  </Popmenu>
+  <Popmenu Id="AKey">
+    <Item Type="normal" Text="添加记录" ActionId="append-key"/>
+    <Item Type="normal" Text="删除记录" ActionId="delete-key"/>
+    <Line/>
+    <Menu Text="标记为">
+      <Item Id="key-label0" Type="toggle" Text="默认(@0)" ActionId="change-label" Group="key-label" Command="key-label:key-label0:0">
+        <Icon Id="label0" Path="var:key-label0"/>
+      </Item>
+      <Line/>
+      <Item Id="key-label1" Type="toggle" Text="常使用(@1)" ActionId="change-label" Group="key-label" Command="key-label:key-label1:1">
+        <Icon Id="label1" Path="var:key-label1"/>
+      </Item>
+      <Item Id="key-label2" Type="toggle" Text="待注册(@2)" ActionId="change-label" Group="key-label" Command="key-label:key-label2:2">
+        <Icon Id="label2" Path="var:key-label2"/>
+      </Item>
+      <Item Id="key-label3" Type="toggle" Text="待认证(@3)" ActionId="change-label" Group="key-label" Command="key-label:key-label3:3">
+        <Icon Id="label3" Path="var:key-label3"/>
+      </Item>
+      <Item Id="key-label4" Type="toggle" Text="待激活(@4)" ActionId="change-label" Group="key-label" Command="key-label:key-label4:4">
+        <Icon Id="label4" Path="var:key-label4"/>
+      </Item>
+      <Item Id="key-label5" Type="toggle" Text="仅测试(@5)" ActionId="change-label" Group="key-label" Command="key-label:key-label5:5">
+        <Icon Id="label5" Path="var:key-label5"/>
+      </Item>
+      <Item Id="key-label6" Type="toggle" Text="已过期(@6)" ActionId="change-label" Group="key-label" Command="key-label:key-label6:6">
+        <Icon Id="label6" Path="var:key-label6"/>
+      </Item>
+      <Item Id="key-label7" Type="toggle" Text="已丢失(@7)" ActionId="change-label" Group="key-label" Command="key-label:key-label7:7">
+        <Icon Id="label7" Path="var:key-label7"/>
+      </Item>
+      <Item Id="key-label8" Type="toggle" Text="被禁用(@8)" ActionId="change-label" Group="key-label" Command="key-label:key-label8:8">
+        <Icon Id="label8" Path="var:key-label8"/>
+      </Item>
+      <Item Id="key-label9" Type="toggle" Text="已删除(@9)" ActionId="change-label" Group="key-label" Command="key-label:key-label9:9">
+        <Icon Id="label9" Path="var:key-label9"/>
+      </Item>
+    </Menu>
+    <Menu Text="重要性">
+      <Item Id="key-majorp2" Type="toggle" Text="最高" ActionId="change-major" Group="key-major" Command="key-major:key-majorp2:2">
+        <Icon Id="major2" Path="var:key-major0"/>
+      </Item>
+      <Item Id="key-majorp1" Type="toggle" Text="高" ActionId="change-major" Group="key-major" Command="key-major:key-majorp1:1">
+        <Icon Id="major1" Path="var:key-major1"/>
+      </Item>
+      <Item Id="key-major0" Type="toggle" Text="正常" ActionId="change-major" Group="key-major" Command="key-major:key-major0:0">
+        <Icon Id="major0" Path="var:key-major2"/>
+      </Item>
+      <Item Id="key-majorn1" Type="toggle" Text="低" ActionId="change-major" Group="key-major" Command="key-major:key-majorn1:-1">
+        <Icon Id="major-1" Path="var:key-major3"/>
+      </Item>
+      <Item Id="key-majorn2" Type="toggle" Text="最低" ActionId="change-major" Group="key-major" Command="key-major:key-majorn2:-2">
+        <Icon Id="major-2" Path="var:key-major4"/>
+      </Item>
+    </Menu>
+    <Menu Text="排序方式" Visible="false">
+      <Item Type="toggle" Text="升序" Group="order-dir" ActionId="sort-dir" Command="true"/>
+      <Item Type="toggle" Text="降序" Group="order-dir" ActionId="sort-dir" Command="false"/>
+    </Menu>
+    <Menu Text="排序依据" Visible="false">
+      <Item Type="toggle" Text="使用频率" Group="order-key" ActionId="sort-key" Command="01"/>
+      <Item Type="toggle" Text="口令名称" Group="order-key" ActionId="sort-key" Command="09"/>
+      <Item Type="toggle" Text="注册时间" Group="order-key" ActionId="sort-key" Command="07"/>
+      <Item Type="toggle" Text="到期时间" Group="order-key" ActionId="sort-key" Command="0D"/>
+    </Menu>
+    <Line/>
+    <Item Type="normal" Text="把数据迁移到...(@M)">
+      <Action Class="Me.Amon.Pwd.E._Key.MovetoAction"/>
+    </Item>
+    <Line/>
+    <Item Type="normal" Text="查看历史">
+      <Action Class="Me.Amon.Pwd.E._Key.HistoryAction"/>
+    </Item>
+  </Popmenu>
+  <Popmenu Id="AAtt">
+    <Item Type="normal" Text="复制数据">
+      <Action Class="Me.Amon.Pwd.E.grid.CopyAction"/>
+    </Item>
+    <Line/>
+    <Menu Text="添加属性">
+      <Item Type="normal" Text="文本" ActionId="append-text"/>
+      <Item Type="normal" Text="口令" ActionId="append-pass"/>
+      <Item Type="normal" Text="链接" ActionId="append-link"/>
+      <Item Type="normal" Text="邮件" ActionId="append-mail"/>
+      <Item Type="normal" Text="日期" ActionId="append-date"/>
+      <Item Type="normal" Text="数值" ActionId="append-data"/>
+      <Item Type="normal" Text="列表" ActionId="append-list"/>
+      <Item Type="normal" Text="附注" ActionId="append-memo"/>
+      <Item Type="normal" Text="附件" ActionId="append-file"/>
+      <Item Type="normal" Text="标记" ActionId="append-line"/>
+    </Menu>
+    <Menu Text="转换属性">
+      <Item Type="normal" Text="文本" ActionId="update-att-text"/>
+      <Item Type="normal" Text="口令" ActionId="update-att-pass"/>
+      <Item Type="normal" Text="链接" ActionId="update-att-link"/>
+      <Item Type="normal" Text="邮件" ActionId="update-att-mail"/>
+      <Item Type="normal" Text="日期" ActionId="update-att-date"/>
+      <Item Type="normal" Text="数值" ActionId="update-att-data"/>
+      <Item Type="normal" Text="列表" ActionId="update-att-list"/>
+      <Item Type="normal" Text="附注" ActionId="update-att-memo"/>
+      <Item Type="normal" Text="附件" ActionId="update-att-file"/>
+      <Item Type="normal" Text="标记" ActionId="update-att-line"/>
+    </Menu>
+    <Line/>
+    <Item Type="normal" Text="上移" ActionId="att-edit-move-up"/>
+    <Item Type="normal" Text="下移" ActionId="att-edit-move-down"/>
+    <Line/>
+    <Item Type="normal" Text="删除属性" ActionId="delete-att"/>
+  </Popmenu>
+
+  <!--日期弹出菜单选项-->
+  <Submenu Id="date-template">
+    <!--日期及时间-->
+    <Menu Text="日期时间型">
+      <Item Type="toggle" Text="完整格式" Group="date-template" Command="java:0d0t"/>
+      <Item Type="toggle" Text="长格式" Group="date-template" Command="java:1d1t"/>
+      <Item Type="toggle" Text="标准格式" Group="date-template" Command="java:2d2t"/>
+      <Item Type="toggle" Text="短格式" Group="date-template" Command="java:3d3t"/>
+      <Line/>
+      <Item Type="toggle" Text="yyyyMMdd HHmmss 格式" Group="date-template" Command="user:yyyyMMdd HHmmss"/>
+      <Item Type="toggle" Text="yyyy-MM-dd HH:mm:ss 格式" Group="date-template" Command="user:yyyy-MM-dd HH:mm:ss"/>
+      <Item Type="toggle" Text="yyyy.MM.dd HH.mm.ss 格式" Group="date-template" Command="user:yyyy.MM.dd HH.mm.ss"/>
+      <Item Type="toggle" Text="yyyy年MM月dd日 HH时mm分ss秒 格式" Group="date-template" Command="user:yyyy年MM月dd日 HH时mm分ss秒"/>
+    </Menu>
+    <!--日期-->
+    <Menu Text="日期型">
+      <!--系统定义-->
+      <Item Type="toggle" Text="完整格式" Group="date-template" Command="java:0d"/>
+      <Item Type="toggle" Text="长格式" Group="date-template" Command="java:1d"/>
+      <Item Type="toggle" Text="标准格式" Group="date-template" Command="java:2d"/>
+      <Item Type="toggle" Text="短格式" Group="date-template" Command="java:3d"/>
+      <Line/>
+      <!--用户定义-->
+      <Item Type="toggle" Text="yyyyMMdd 格式" Group="date-template" Command="user:yyyyMMdd"/>
+      <Item Type="toggle" Text="yyyy-MM-dd 格式" Group="date-template" Command="user:yyyy-MM-dd"/>
+      <Item Type="toggle" Text="yyyy/MM/dd 格式" Group="date-template" Command="user:yyyy/MM/dd"/>
+      <Item Type="toggle" Text="yyyy.MM.dd 格式" Group="date-template" Command="user:yyyy.MM.dd"/>
+      <Item Type="toggle" Text="yyyy MM dd 格式" Group="date-template" Command="user:yyyy MM dd"/>
+      <Item Type="toggle" Text="yyyy年MM月dd日 格式" Group="date-template" Command="user:yyyy年MM月dd日"/>
+    </Menu>
+    <!--时间-->
+    <Menu Text="时间型">
+      <Item Type="toggle" Text="完整格式" Group="date-template" Command="java:0t"/>
+      <Item Type="toggle" Text="长格式" Group="date-template" Command="java:1t"/>
+      <Item Type="toggle" Text="标准格式" Group="date-template" Command="java:2t"/>
+      <Item Type="toggle" Text="短格式" Group="date-template" Command="java:3t"/>
+      <Line/>
+      <Item Type="toggle" Text="HHmmss 格式" Group="date-template" Command="user:HHmmss"/>
+      <Item Type="toggle" Text="HH:mm:ss 格式" Group="date-template" Command="user:HH:mm:ss"/>
+      <Item Type="toggle" Text="HH.mm.ss 格式" Group="date-template" Command="user:HH.mm.ss"/>
+      <Item Type="toggle" Text="HH mm ss 格式" Group="date-template" Command="user:HH mm ss"/>
+      <Item Type="toggle" Text="HH时mm分ss秒 格式" Group="date-template" Command="user:HH时mm分ss秒"/>
+    </Menu>
+  </Submenu>
+  <Submenu Id="date-interval">
+    <Menu Id="hint-fixtime" Text="定时提醒">
+      <!--
+        <Item Type="normal" Text="2010-12-31 20:00:00" Command="fix:2010-12-31 20:00:00"/>
+        <Line/>
+      -->
+      <Menu Text="秒">
+        <Item Type="normal" Text="30秒后" Command="var:+30second"/>
+      </Menu>
+      <Menu Text="分">
+        <Item Type="normal" Text="30分后" Command="var:+30minute"/>
+      </Menu>
+      <Menu Text="时">
+        <Item Type="normal" Text="1小时后" Command="var:+1hour"/>
+        <Item Type="normal" Text="2小时后" Command="var:+2hour"/>
+      </Menu>
+      <Menu Text="天">
+        <Item Type="normal" Text="1天后" Command="var:+1day"/>
+        <Item Type="normal" Text="2天后" Command="var:+2day"/>
+      </Menu>
+      <Menu Text="周">
+        <Item Type="normal" Text="1周后" Command="var:+1week"/>
+        <Item Type="normal" Text="2周后" Command="var:+2week"/>
+      </Menu>
+      <Menu Text="月">
+        <Item Type="normal" Text="1月后" Command="var:+1month"/>
+        <Item Type="normal" Text="2月后" Command="var:+2month"/>
+      </Menu>
+      <Menu Text="年">
+        <Item Type="normal" Text="1年后" Command="var:+1year"/>
+        <Item Type="normal" Text="2年后" Command="var:+2year"/>
+      </Menu>
+    </Menu>
+    <Menu Id="hint-cycle" Text="周期提醒">
+    </Menu>
+    <Menu Id="hint-interval" Text="间隔提醒">
+    </Menu>
+    <Menu Id="hint-special" Text="特殊提醒">
+    </Menu>
+    <Menu Id="hint-function" Text="其它提醒">
+    </Menu>
+  </Submenu>
+
+  <!--数值弹出菜单选项-->
+  <Submenu Id="data-options">
+    <Item Type="toggle" Text="整数" Group="data-template" Command="dec:0"/>
+    <Menu Text="小数">
+      <Item Type="toggle" Text="1位" Group="data-template" Command="dec:1"/>
+      <Item Type="toggle" Text="2位" Group="data-template" Command="dec:2"/>
+      <Item Type="toggle" Text="3位" Group="data-template" Command="dec:3"/>
+      <Item Type="toggle" Text="4位" Group="data-template" Command="dec:4"/>
+      <Item Type="toggle" Text="5位" Group="data-template" Command="dec:5"/>
+      <Item Type="toggle" Text="6位" Group="data-template" Command="dec:6"/>
+      <Item Type="toggle" Text="7位" Group="data-template" Command="dec:7"/>
+      <Item Type="toggle" Text="8位" Group="data-template" Command="dec:8"/>
+      <Line/>
+      <Item Type="toggle" Id="data-precision" Text="其它……" Group="data-template" Command="dec:-1"/>
+      <Line/>
+      <Item Type="toggle" Id="data-fixed-dec" Text="固定小数长度" Command="dec:f"/>
+      <!--
+            <Item Type="toggle" Id="data-fixed-int" Command="int:f"/>
+            -->
+    </Menu>
+    <Line/>
+    <Menu Id="data-collection" Text="集合">
+      <Item Type="toggle" Id="data-pos" Text="正数" Command="set:+"/>
+      <Item Type="toggle" Id="data-0" Text="0" Command="set:0"/>
+      <Item Type="toggle" Id="data-nav" Text="负数" Command="set:-"/>
+    </Menu>
+    <Menu Id="data-characters" Text="符号">
+      <Item Type="toggle" Id="data-notation" Text="启用特殊符号" Command="notation"/>
+      <Line/>
+      <Item Type="normal" Id="data-character" Tips="更改特殊符号" Command="character"/>
+      <Item Type="toggle" Id="data-thehead" Text="符号前置" Group="data-position" Command="pos:^"/>
+      <Item Type="toggle" Id="data-thefoot" Text="符号后置" Group="data-position" Command="pos:$"/>
+      <Item Type="toggle" Id="data-optional" Text="可选输入" Command="optional"/>
+    </Menu>
+  </Submenu>
+  <Submenu Id="sign-options">
+    <Item Type="toggle" Id="sign-sep" Text="分页控制(@S)" Group="sign-options" Command="sep:P30F7E04"/>
+    <Item Type="toggle" Id="sign-div" Text="标题面板(@P)" Group="sign-options" Command="div:P30F7E06"/>
+    <Item Type="toggle" Id="sign-tab" Text="选项面板(@T)" Group="sign-options" Command="tab:P30F7E08"/>
+    <Menu Text="其它标记(@O)">
+      <Item Type="toggle" Text="-----" Group="sign-options" Command="tip:P30F7E0B"/>
+      <Item Type="toggle" Text="--{0}--" Group="sign-options" Command="tip:P30F7E0D"/>
+    </Menu>
+  </Submenu>
+
+  <!--文件查看菜单-->
+  <Submenu Id="file-preview">
+    <Item Type="normal" Text="图像查看器" init="com.magicpwd.x.docs.ImgViewer:PNG,JPG,JPEG,JFIF,GIF,BMP"/>
+    <Item Type="normal" Text="源码查看器" init="com.magicpwd.x.docs.SrcViewer:JAVA,CS,JS,CSS"/>
+    <Item Type="normal" Text="文本查看器" init="com.magicpwd.x.docs.TxtViewer:TXT,RTF,TEXT,HTML,HTM,XML"/>
+  </Submenu>
+</Amon>
