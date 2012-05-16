@@ -31,7 +31,7 @@
     <SuiteName>阿木软件</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>7.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -99,6 +99,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\Enums\GetWindow.cs" />
+    <Compile Include="Api\Enums\InputType.cs" />
+    <Compile Include="Api\Enums\KeyEvent.cs" />
+    <Compile Include="Api\Enums\MouseButton.cs" />
+    <Compile Include="Api\Enums\MouseEvent.cs" />
+    <Compile Include="Api\Enums\PenStyles.cs" />
+    <Compile Include="Api\Enums\RopMode.cs" />
+    <Compile Include="Api\Enums\ShowWindow.cs" />
+    <Compile Include="Api\Enums\StockObjects.cs" />
+    <Compile Include="Api\Enums\SystemMetrics.cs" />
+    <Compile Include="Api\Enums\VirtualKey.cs" />
+    <Compile Include="Api\Enums\WindowMessage.cs" />
+    <Compile Include="Api\Enums\WMHotKeys.cs" />
+    <Compile Include="Api\Gdi32\Gdi32.cs" />
+    <Compile Include="Api\Gdi32\Gdi32API.cs" />
+    <Compile Include="Api\Struct\HARDWAREINPUT.cs" />
+    <Compile Include="Api\Struct\INPUT.cs" />
+    <Compile Include="Api\Struct\KEYBDINPUT.cs" />
+    <Compile Include="Api\Struct\MOUSEINPUT.cs" />
+    <Compile Include="Api\Struct\POINT.cs" />
+    <Compile Include="Api\Struct\RECT.cs" />
+    <Compile Include="Api\Struct\SIZE.cs" />
+    <Compile Include="Api\Struct\WINDOWPLACEMENT.cs" />
+    <Compile Include="Api\User32\User32.cs" />
+    <Compile Include="Api\User32\User32API.cs" />
     <Compile Include="Bar\ABar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,7 +193,6 @@
     <Compile Include="Bar\Opt\Vcard.Designer.cs">
       <DependentUpon>Vcard.cs</DependentUpon>
     </Compile>
-    <Compile Include="EApp.cs" />
     <Compile Include="Gtd\EGtd.cs" />
     <Compile Include="Ico\EIco.cs" />
     <Compile Include="Ico\MIco.cs" />
@@ -348,14 +372,13 @@
     <Compile Include="Ico\AIco.Designer.cs">
       <DependentUpon>AIco.cs</DependentUpon>
     </Compile>
-    <Compile Include="IEnv.cs" />
+    <Compile Include="EApp.cs" />
     <Compile Include="About.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="ISec.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -835,6 +858,18 @@
       <DependentUpon>DigestText.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="Spy\AppWindow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Spy\AppWindow.designer.cs">
+      <DependentUpon>AppWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Spy\ASpy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Spy\ASpy.Designer.cs">
+      <DependentUpon>ASpy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uc\Card.cs" />
     <Compile Include="Uc\ItemGroup.cs" />
     <Compile Include="Uc\KeyStroke.cs" />
@@ -1256,6 +1291,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sec\Wiz\DigestText.resx">
       <DependentUpon>DigestText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Spy\AppWindow.resx">
+      <DependentUpon>AppWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\Auth\AuthLk.resx">
       <DependentUpon>AuthLk.cs</DependentUpon>

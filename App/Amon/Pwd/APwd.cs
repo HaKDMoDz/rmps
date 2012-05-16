@@ -104,7 +104,7 @@ namespace Me.Amon.Pwd
 
         public bool SaveData()
         {
-            string path = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), IEnv.DIR_BACK);
+            string path = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), EApp.DIR_BACK);
             if (Directory.Exists(path))
             {
                 string[] files = Directory.GetFiles(path, _UserModel.Code + "*.apbak", SearchOption.TopDirectoryOnly);
@@ -262,7 +262,7 @@ namespace Me.Amon.Pwd
         /// <param name="e"></param>
         private void UcTime_Tick(object sender, EventArgs e)
         {
-            TssTime.Text = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
+            TssTime.Text = DateTime.Now.ToString(EApp.DATEIME_FORMAT);
         }
 
         /// <summary>
@@ -737,7 +737,7 @@ namespace Me.Amon.Pwd
                 _UserModel.DBA.SaveLog(keyLog);
             }
             _SafeModel.Encode();
-            _SafeModel.Key.AccessTime = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
+            _SafeModel.Key.AccessTime = DateTime.Now.ToString(EApp.DATEIME_FORMAT);
             _UserModel.DBA.SaveVcs(_SafeModel.Key);
             _SafeModel.Modified = false;
 
@@ -1826,7 +1826,7 @@ namespace Me.Amon.Pwd
         public void ShowIcoEdit()
         {
             IcoSeeker edit = new IcoSeeker(_UserModel, _DataModel.KeyDir);
-            edit.InitOnce(IEnv.IMG_KEY_LIST_DIM);
+            edit.InitOnce(EApp.IMG_KEY_LIST_DIM);
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
@@ -1942,11 +1942,11 @@ namespace Me.Amon.Pwd
                 {
                     if (CharUtil.IsValidateHash(key.IcoPath))
                     {
-                        _KeyIcon[key.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoPath, key.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
+                        _KeyIcon[key.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoPath, key.IcoName + EApp.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
                     }
                     else
                     {
-                        _KeyIcon[key.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoName + IEnv.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
+                        _KeyIcon[key.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoName + EApp.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
                     }
                 }
                 else
@@ -1973,7 +1973,7 @@ namespace Me.Amon.Pwd
         {
             _SafeModel.Encode();
 
-            _SafeModel.Key.AccessTime = DateTime.Now.ToString(IEnv.DATEIME_FORMAT);
+            _SafeModel.Key.AccessTime = DateTime.Now.ToString(EApp.DATEIME_FORMAT);
             _UserModel.DBA.SaveVcs(_SafeModel.Key);
         }
 

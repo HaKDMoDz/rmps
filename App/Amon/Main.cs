@@ -58,9 +58,9 @@ namespace Me.Amon
             Location = new Point(x, y);
 
             _UserModel = new UserModel();
-            if (File.Exists(IEnv.FILE_LOG))
+            if (File.Exists(EApp.FILE_LOG))
             {
-                _Writer = new StreamWriter(IEnv.FILE_LOG, true);
+                _Writer = new StreamWriter(EApp.FILE_LOG, true);
             }
         }
         #endregion
@@ -340,10 +340,10 @@ namespace Me.Amon
                 return;
             }
 
-            if (_IApp.AppId != IEnv.IAPP_APWD)
+            if (_IApp.AppId != EApp.IAPP_APWD)
             {
                 _IApp.Visible = false;
-                ShowAPwd(IEnv.IAPP_APWD);
+                ShowAPwd(EApp.IAPP_APWD);
                 return;
             }
         }
@@ -356,10 +356,10 @@ namespace Me.Amon
                 return;
             }
 
-            if (_IApp.AppId != IEnv.IAPP_ASEC)
+            if (_IApp.AppId != EApp.IAPP_ASEC)
             {
                 _IApp.Visible = false;
-                ShowASec(IEnv.IAPP_ASEC);
+                ShowASec(EApp.IAPP_ASEC);
                 return;
             }
         }
@@ -372,10 +372,10 @@ namespace Me.Amon
                 return;
             }
 
-            if (_IApp.AppId != IEnv.IAPP_ABAR)
+            if (_IApp.AppId != EApp.IAPP_ABAR)
             {
                 _IApp.Visible = false;
-                ShowABar(IEnv.IAPP_ABAR);
+                ShowABar(EApp.IAPP_ABAR);
                 return;
             }
         }
@@ -388,10 +388,10 @@ namespace Me.Amon
                 return;
             }
 
-            if (_IApp.AppId != IEnv.IAPP_AREN)
+            if (_IApp.AppId != EApp.IAPP_AREN)
             {
                 _IApp.Visible = false;
-                ShowARen(IEnv.IAPP_AREN);
+                ShowARen(EApp.IAPP_AREN);
                 return;
             }
         }
@@ -563,7 +563,7 @@ namespace Me.Amon
         {
             if (_IApp == null || _IApp.IsDisposed)
             {
-                ShowAPwd(IEnv.IAPP_APWD);
+                ShowAPwd(EApp.IAPP_APWD);
             }
             else
             {

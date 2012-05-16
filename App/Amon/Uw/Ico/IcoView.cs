@@ -50,7 +50,7 @@ namespace Me.Amon.Uw.Ico
         {
             OpenFileDialog fd = new OpenFileDialog();
             fd.Multiselect = false;
-            fd.Filter = IEnv.FILE_IMG;
+            fd.Filter = EApp.FILE_IMG;
             if (DialogResult.OK != fd.ShowDialog(this))
             {
                 return;
@@ -104,7 +104,7 @@ namespace Me.Amon.Uw.Ico
             IlIco.Images.Add(BeanUtil.NaN32);
             int index;
             string name;
-            foreach (string file in Directory.GetFiles(path, '*' + IEnv.IMG_KEY_LIST_EXT))
+            foreach (string file in Directory.GetFiles(path, '*' + EApp.IMG_KEY_LIST_EXT))
             {
                 index = file.LastIndexOf(Path.DirectorySeparatorChar);
                 if (index == file.Length - 1)

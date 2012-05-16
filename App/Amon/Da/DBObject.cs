@@ -25,7 +25,7 @@ namespace Me.Amon.Da
         public void Init(UserModel userModel)
         {
             _UserModel = userModel;
-            _DbPath = Path.Combine(userModel.Home, IEnv.FILE_DB);
+            _DbPath = Path.Combine(userModel.Home, EApp.FILE_DB);
         }
         #endregion
 

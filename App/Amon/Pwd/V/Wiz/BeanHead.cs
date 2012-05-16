@@ -83,11 +83,11 @@ namespace Me.Amon.Pwd.V.Wiz
                 string path = _DataModel.KeyDir;
                 if (CharUtil.IsValidateHash(logo.Path))
                 {
-                    path = Path.Combine(path, logo.Path, logo.Text + IEnv.IMG_KEY_EDIT_EXT);
+                    path = Path.Combine(path, logo.Path, logo.Text + EApp.IMG_KEY_EDIT_EXT);
                 }
                 else
                 {
-                    path = Path.Combine(path, logo.Text + IEnv.IMG_KEY_EDIT_EXT);
+                    path = Path.Combine(path, logo.Text + EApp.IMG_KEY_EDIT_EXT);
                 }
                 PbLogo.Image = BeanUtil.ReadImage(path, BeanUtil.NaN16);
             }
@@ -226,11 +226,11 @@ namespace Me.Amon.Pwd.V.Wiz
             string path;
             if (CharUtil.IsValidateHash(ico.Path))
             {
-                path = Path.Combine(_DataModel.KeyDir, ico.Path, ico.File + IEnv.IMG_KEY_EDIT_EXT);
+                path = Path.Combine(_DataModel.KeyDir, ico.Path, ico.File + EApp.IMG_KEY_EDIT_EXT);
             }
             else
             {
-                path = Path.Combine(_DataModel.KeyDir, ico.File + IEnv.IMG_KEY_EDIT_EXT);
+                path = Path.Combine(_DataModel.KeyDir, ico.File + EApp.IMG_KEY_EDIT_EXT);
             }
             PbLogo.Image = BeanUtil.ReadImage(path, BeanUtil.NaN16);
         }

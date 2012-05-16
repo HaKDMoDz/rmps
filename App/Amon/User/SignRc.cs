@@ -102,7 +102,7 @@ namespace Me.Amon.User
 
             if (CallBackHandler != null)
             {
-                CallBackHandler.Invoke(IEnv.IAPP_NONE);
+                CallBackHandler.Invoke(EApp.IAPP_NONE);
             }
             Close();
         }

@@ -33,7 +33,7 @@ namespace Me.Amon.User.Sign
 
             InitializeComponent();
 
-            TbPath.Text = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), IEnv.DIR_DATA);
+            TbPath.Text = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), EApp.DIR_DATA);
             _SignAc.ShowTips(BtPath, "选择目录");
         }
         #endregion
@@ -71,8 +71,8 @@ namespace Me.Amon.User.Sign
 
             name = name.ToLower();
             _Prop = new DFAccess();
-            _Prop.Load(IEnv.AMON_SYS);
-            string home = _Prop.Get(string.Format(IEnv.AMON_SYS_HOME, name));
+            _Prop.Load(EApp.AMON_SYS);
+            string home = _Prop.Get(string.Format(EApp.AMON_SYS_HOME, name));
             if (!string.IsNullOrEmpty(home))
             {
                 _SignAc.ShowAlert(string.Format("已存在名为 {0} 的用户，请尝试其它用户名！", name));
@@ -120,7 +120,7 @@ namespace Me.Amon.User.Sign
             #endregion
 
             #region 代码
-            string code = IEnv.USER_AMON;
+            string code = EApp.USER_AMON;
             if (Directory.Exists(Path.Combine(home, code)))
             {
                 _SignAc.ShowAlert(string.Format("指定路径下已存在名为 {0} 的目录！", code));
@@ -141,9 +141,9 @@ namespace Me.Amon.User.Sign
                     return;
                 }
 
-                _Prop.Set(string.Format(IEnv.AMON_SYS_CODE, name), _UserModel.Code);
-                _Prop.Set(string.Format(IEnv.AMON_SYS_HOME, name), _UserModel.Home);
-                _Prop.Save(IEnv.AMON_SYS);
+                _Prop.Set(string.Format(EApp.AMON_SYS_CODE, name), _UserModel.Code);
+                _Prop.Set(string.Format(EApp.AMON_SYS_HOME, name), _UserModel.Home);
+                _Prop.Save(EApp.AMON_SYS);
 
                 InitDat();
             }
@@ -299,7 +299,7 @@ namespace Me.Amon.User.Sign
                 File.Delete(file);
             }
             #endregion
-            _SignAc.CallBack(IEnv.IAPP_APWD);
+            _SignAc.CallBack(EApp.IAPP_APWD);
         }
         #endregion
     }

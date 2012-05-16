@@ -82,7 +82,7 @@ namespace Me.Amon.User
                 return;
             }
 
-            string path = Path.Combine(home, IEnv.AMON_CFG);
+            string path = Path.Combine(home, EApp.AMON_CFG);
             if (!File.Exists(path))
             {
                 ShowAlert("请确认您选择的数据路径是否正确！");
@@ -90,8 +90,8 @@ namespace Me.Amon.User
             }
             DFAccess prop = new DFAccess();
             prop.Load(path);
-            string name = prop.Get(IEnv.AMON_CFG_NAME);
-            string code = prop.Get(IEnv.AMON_CFG_CODE);
+            string name = prop.Get(EApp.AMON_CFG_NAME);
+            string code = prop.Get(EApp.AMON_CFG_CODE);
             if (!CharUtil.IsValidateCode(code) || !CharUtil.IsValidate(name))
             {
                 ShowAlert("请确认您选择的数据路径是否正确！");
@@ -99,10 +99,10 @@ namespace Me.Amon.User
             }
 
             prop.Clear();
-            prop.Load(IEnv.AMON_SYS);
-            prop.Set(string.Format(IEnv.AMON_SYS_CODE, name), code);
-            prop.Set(string.Format(IEnv.AMON_SYS_HOME, name), home);
-            prop.Save(IEnv.AMON_SYS);
+            prop.Load(EApp.AMON_SYS);
+            prop.Set(string.Format(EApp.AMON_SYS_CODE, name), code);
+            prop.Set(string.Format(EApp.AMON_SYS_HOME, name), home);
+            prop.Save(EApp.AMON_SYS);
         }
 
         /// <summary>

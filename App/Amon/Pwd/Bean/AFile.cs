@@ -53,7 +53,7 @@ namespace Me.Amon.Pwd.Bean
             {
                 name = HashUtil.UtcTimeInHex(true);
             }
-            string dstFile = Path.Combine(_DataModel.AcfDir, name + IEnv.FILE_ACF);
+            string dstFile = Path.Combine(_DataModel.AcfDir, name + EApp.FILE_ACF);
             string alg = "aes";
             string key = new string(SafeUtil.GenerateFileKeys());
 
@@ -70,7 +70,7 @@ namespace Me.Amon.Pwd.Bean
 
         protected void ViewFile(bool inner)
         {
-            string srcFile = Path.Combine(_DataModel.AcfDir, _Att.GetSpec(FileAtt.SPEC_FILE_NAME) + IEnv.FILE_ACF);
+            string srcFile = Path.Combine(_DataModel.AcfDir, _Att.GetSpec(FileAtt.SPEC_FILE_NAME) + EApp.FILE_ACF);
             if (!File.Exists(srcFile))
             {
                 MessageBox.Show("系统错误，找不到来源文件！");
