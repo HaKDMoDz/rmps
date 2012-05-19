@@ -63,8 +63,9 @@
         </tr>
         <tr>
             <td align="center" height="120">
-                <asp:HyperLink ID="HlSignIn" runat="server" NavigateUrl="~/User/SignIn.aspx">登录</asp:HyperLink>
-                <asp:HyperLink ID="HlSignUp" runat="server" NavigateUrl="~/User/SignUp.aspx">注册</asp:HyperLink>
+                <asp:HyperLink ID="HlSignUp" runat="server" NavigateUrl="~/down/amon.exe" CssClass="Down Ins" ForeColor="#ffffff">安装版</asp:HyperLink>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:HyperLink ID="HlSignIn" runat="server" NavigateUrl="~/down/amon.zip" CssClass="Down Grn" ForeColor="#555555">绿色版</asp:HyperLink>
             </td>
         </tr>
     </table>

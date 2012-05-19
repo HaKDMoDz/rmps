@@ -13,6 +13,8 @@ namespace Me.Amon.Bean
 
         public string Name { get; set; }
 
+        public string Text { get; set; }
+
         public string Memo { get; set; }
 
         public List<LibDetail> Details { get; set; }
@@ -27,7 +29,7 @@ namespace Me.Amon.Bean
         {
             Order = (int)row[DBConst.APWD0301];
             Id = row[DBConst.APWD0304] as string;
-            Name = row[DBConst.APWD0306] as string;
+            Text = row[DBConst.APWD0306] as string;
             Memo = row[DBConst.APWD0308] as string;
 
             return true;
@@ -47,7 +49,7 @@ namespace Me.Amon.Bean
         #region 方法重写
         public override string ToString()
         {
-            return Name;
+            return Text;
         }
 
         public override bool Equals(object obj)
@@ -94,6 +96,10 @@ namespace Me.Amon.Bean
             {
                 Name = reader.ReadElementContentAsString();
             }
+            if (reader.Name == "Text" || reader.ReadToNextSibling("Text"))
+            {
+                Text = reader.ReadElementContentAsString();
+            }
             if (reader.Name == "Memo" || reader.ReadToNextSibling("Memo"))
             {
                 Memo = reader.ReadElementContentAsString();
@@ -108,6 +114,7 @@ namespace Me.Amon.Bean
             writer.WriteElementString("Order", Order.ToString());
             writer.WriteElementString("Id", Id);
             writer.WriteElementString("Name", Name);
+            writer.WriteElementString("Text", Text);
             writer.WriteElementString("Memo", Memo);
 
             writer.WriteStartElement("Items");

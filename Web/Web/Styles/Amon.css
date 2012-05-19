@@ -13,15 +13,14 @@ a:active
 {
     color: #034af3;
 }
-body,table,id
+body, table, id
 {
-    font-size: 12px;
-	/*font-size: 12px;*/
-    font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
-	margin: 0;
-	padding: 0;
+    font-size: 12px; /*font-size: 12px;*/
+    font-family: "Helvetica Neue" , "Lucida Grande" , "Segoe UI" , Arial, Helvetica, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
 }
-body   
+body
 {
     /*background: #b6b7bc;*/
     color: #696969;
@@ -31,22 +30,15 @@ div
 }
 #footer
 {
-	color: #6D787D;
-	width: 100%;
-	/*margin: 15px auto 0 auto;
-	line-height: 50px;
-	clear: both;*/
-	text-align: center;
+    color: #6D787D;
+    width: 100%; /*margin: 15px auto 0 auto; 	line-height: 50px; 	clear: both;*/
+    text-align: center;
 }
 #header
 {
-	height: 42px;
-	width: 100%;
-	/*border-top: 1px solid #5C9EC8;
-	border-bottom: 1px solid #2F5B87;
-	background-color: #1E75B0;*/
-	background-color: #484848;
-	/*background-image: -webkit-linear-gradient(top,#1e75b0,#125288);*/
+    height: 42px;
+    width: 100%; /*border-top: 1px solid #5C9EC8; 	border-bottom: 1px solid #2F5B87; 	background-color: #1E75B0;*/
+    background-color: #484848; /*background-image: -webkit-linear-gradient(top,#1e75b0,#125288);*/
 }
 p
 {
@@ -55,15 +47,15 @@ p
 }
 #content
 {
-	display: block;
-	text-align: center;
-	horizontal-align: center;
+    display: block;
+    text-align: center;
+    horizontal-align: center;
 }
 /* HEADINGS   
 ----------------------------------------------------------*/
 h1, h2, h3, h4, h5, h6
 {
-    font-family: "Simsun", "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
+    font-family: "Simsun" , "Helvetica Neue" , "Lucida Grande" , "Segoe UI" , Arial, Helvetica, Verdana, sans-serif;
     color: #666666;
     font-variant: small-caps;
     text-transform: none;
@@ -112,8 +104,8 @@ first child of the left and right table columns */
 ----------------------------------------------------------*/
 div.hideSkiplink
 {
-    background-color:#3a4f63;
-    width:100%;
+    background-color: #3a4f63;
+    width: 100%;
 }
 div.menu
 {
@@ -128,8 +120,7 @@ div.menu ul
 }
 div.menu ul li a, div.menu ul li a:visited
 {
-    background-color: #484848;
-    /*border: 1px #4e667d solid;*/
+    background-color: #484848; /*border: 1px #4e667d solid;*/
     color: #dde4ec;
     display: block;
     line-height: 1.35em;
@@ -158,7 +149,7 @@ fieldset
     padding: 1em;
     border: 1px solid #ccc;
 }
-fieldset p 
+fieldset p
 {
     margin: 2px 12px 10px 10px;
 }
@@ -166,11 +157,11 @@ fieldset.login label, fieldset.register label, fieldset.changePassword label
 {
     display: block;
 }
-fieldset label.inline 
+fieldset label.inline
 {
     display: inline;
 }
-legend 
+legend
 {
     font-size: 1.1em;
     font-weight: 600;
@@ -188,7 +179,7 @@ legend
 }
 .title
 {
-	font-family: "微软雅黑";
+    font-family: "微软雅黑";
     font-weight: 700;
     font-size: 2em;
     margin: 0px;
@@ -342,4 +333,28 @@ legend
 {
     border-top: dashed 1px #CCCCCC;
     border-left: dashed 1px #CCCCCC;
+}
+.Down
+{
+    height: 35px;
+    width: 102px;
+    text-align: center;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    font-weight: 700;
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: baseline;
+    line-height: 35px;
+    outline: 0;
+    text-decoration: none;
+}
+.Ins
+{
+    background-image: url(/Images/i0.png);
+}
+.Grn
+{
+    background-image: url(/Images/g0.png);
 }

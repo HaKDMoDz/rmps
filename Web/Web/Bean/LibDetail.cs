@@ -14,6 +14,8 @@ namespace Me.Amon.Bean
 
         public string Name { get; set; }
 
+        public string Text { get; set; }
+
         public string Data { get; set; }
 
         public string Memo { get; set; }
@@ -24,7 +26,7 @@ namespace Me.Amon.Bean
             Order = (int)row[DBConst.APWD0301];
             Type = (int)row[DBConst.APWD0302];
             Id = row[DBConst.APWD0304] as string;
-            Name = row[DBConst.APWD0306] as string;
+            Text = row[DBConst.APWD0306] as string;
             Data = row[DBConst.APWD0307] as string;
             Memo = row[DBConst.APWD0308] as string;
 
@@ -65,6 +67,10 @@ namespace Me.Amon.Bean
             {
                 Name = reader.ReadElementContentAsString();
             }
+            if (reader.Name == "Text" || reader.ReadToNextSibling("Text"))
+            {
+                Text = reader.ReadElementContentAsString();
+            }
             if (reader.Name == "Data" || reader.ReadToNextSibling("Data"))
             {
                 Data = reader.ReadElementContentAsString();
@@ -84,6 +90,7 @@ namespace Me.Amon.Bean
             writer.WriteElementString("Id", Id);
             writer.WriteElementString("Type", Type.ToString());
             writer.WriteElementString("Name", Name);
+            writer.WriteElementString("Text", Text);
             writer.WriteElementString("Data", Data);
             writer.WriteElementString("Memo", Memo);
 

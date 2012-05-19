@@ -118,6 +118,9 @@ namespace Me.Amon
         #region 数据下载
         private void ListCat(DBAccess dba, XmlWriter writer, string code, string catId)
         {
+            writer.WriteElementString("App", "APwd");
+            writer.WriteElementString("Ver", "1");
+
             dba.ReInit();
             dba.AddTable(DBConst.ACAT0200);
             dba.AddColumn(DBConst.ACAT0201);
@@ -151,6 +154,9 @@ namespace Me.Amon
 
         private void ListLib(DBAccess dba, XmlWriter writer, string code)
         {
+            writer.WriteElementString("App", "APwd");
+            writer.WriteElementString("Ver", "2");
+
             dba.ReInit();
             dba.AddTable(DBConst.APWD0300);
             dba.AddColumn(DBConst.APWD0301);
@@ -196,6 +202,9 @@ namespace Me.Amon
 
         private void ListUdc(DBAccess dba, XmlWriter writer, string code)
         {
+            writer.WriteElementString("App", "APwd");
+            writer.WriteElementString("Ver", "1");
+
             dba.ReInit();
             dba.AddTable(DBConst.AUDC0100);
             dba.AddColumn(DBConst.AUDC0103);

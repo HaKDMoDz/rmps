@@ -64,6 +64,12 @@
     <Content Include="ClientBin\Amon.xap" />
     <Content Include="Images\1.png" />
     <Content Include="Images\2.png" />
+    <Content Include="Images\g0.png" />
+    <Content Include="Images\g1.png" />
+    <Content Include="Images\g2.png" />
+    <Content Include="Images\i0.png" />
+    <Content Include="Images\i1.png" />
+    <Content Include="Images\i2.png" />
     <Content Include="Index.aspx" />
     <Content Include="logo\amon\favicon.ico" />
     <Content Include="logo\amon\logo.ico" />
