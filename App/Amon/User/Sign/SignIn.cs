@@ -233,7 +233,7 @@ namespace Me.Amon.User.Sign
                 }
 
                 Cat cat;
-                while (reader.ReadToFollowing("Cat"))
+                while (reader.Name == "Cat" || reader.ReadToFollowing("Cat"))
                 {
                     cat = new Cat();
                     if (!cat.FromXml(reader))
@@ -311,7 +311,7 @@ namespace Me.Amon.User.Sign
                 }
 
                 Udc udc;
-                while (reader.ReadToFollowing("Udc"))
+                while (reader.Name == "Udc" || reader.ReadToFollowing("Udc"))
                 {
                     udc = new Udc();
                     if (!udc.FromXml(reader))

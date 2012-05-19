@@ -1,84 +1,1077 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Amon>
-  <App>ARen</App>
-  <Ver>1</Ver>
-  <Rens>
-    <Ren>
+  <App>APwd</App>
+  <Ver>2</Ver>
+  <Libs>
+    <Lib>
       <Order>0</Order>
-      <Id>qatgqbddxfqzcctr</Id>
-      <Name>去除后缀名</Name>
-      <Command>*</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>0</Order>
-      <Id>qatgqbddeafxqgsf</Id>
-      <Name>大写后缀名</Name>
-      <Command>*.\?</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>0</Order>
-      <Id>qatgqbddedegqrcd</Id>
-      <Name>小写后缀名</Name>
-      <Command>*./?</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>0</Order>
-      <Id>qatgqbddebgsdbbg</Id>
-      <Name>大写文件名</Name>
-      <Command>\*.?</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>0</Order>
-      <Id>qatgqbdddwvtcdfr</Id>
-      <Name>小写文件名</Name>
-      <Command>/*.?</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>0</Order>
-      <Id>qatgqbdddtasevgc</Id>
-      <Name>大写所有字符</Name>
-      <Command>\*.\?</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>0</Order>
-      <Id>qatgqbddczxraewz</Id>
-      <Name>小写所有字符</Name>
-      <Command>/*./?</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>0</Order>
-      <Id>qatgqbddcggcrwez</Id>
-      <Name>变长数值文件名</Name>
-      <Command>:.?</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>0</Order>
-      <Id>qatgqbddfzstsgxb</Id>
-      <Name>定长数值文件名</Name>
-      <Command>:&lt;1,1,8,0&gt;.?</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>0</Order>
-      <Id>qatgqbddbctzxszy</Id>
-      <Name>替换文件名中的字符abc为123</Name>
-      <Command>*&lt;abc:123&gt;.?</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>0</Order>
-      <Id>qatgqbddtwyztqby</Id>
-      <Name>替换后缀名中的字符abc为123</Name>
-      <Command>*.?&lt;abc:123&gt;</Command>
-      <Remark />
-    </Ren>
-  </Rens>
+      <Id>qqqqqaacbrrtysww</Id>
+      <Name />
+      <Text>普通账号</Text>
+      <Memo />
+      <Items>
+        <Item>
+          <Order>0</Order>
+          <Id>qqqqqaacbrrtyssx</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>登录用户</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>1</Order>
+          <Id>qqqqqaacbrrtysse</Id>
+          <Type>2</Type>
+          <Name />
+          <Text>登录密码</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>2</Order>
+          <Id>qqqqqaaratyqwaev</Id>
+          <Type>9</Type>
+          <Name />
+          <Text>备注信息</Text>
+          <Data />
+          <Memo />
+        </Item>
+      </Items>
+    </Lib>
+    <Lib>
+      <Order>1</Order>
+      <Id>qqqqqaaratyvddxc</Id>
+      <Name />
+      <Text>网络账号</Text>
+      <Memo />
+      <Items>
+        <Item>
+          <Order>0</Order>
+          <Id>qqqqqaaratybzqaz</Id>
+          <Type>3</Type>
+          <Name />
+          <Text>网络地址</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>1</Order>
+          <Id>qqqqqaaratybeegy</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>登录用户</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>2</Order>
+          <Id>qqqqqaaratybrffa</Id>
+          <Type>2</Type>
+          <Name />
+          <Text>登录密码</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>3</Order>
+          <Id>qqqqqazxvdcrwqgw</Id>
+          <Type>4</Type>
+          <Name />
+          <Text>电子邮件</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>4</Order>
+          <Id>qqqqqaaratybgsbv</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全问题1</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>5</Order>
+          <Id>qqqqqaaratybyadv</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全答案1</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>6</Order>
+          <Id>qqqqqaaratyyaeve</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全问题2</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>7</Order>
+          <Id>qqqqqaaratyywbra</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全答案2</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>8</Order>
+          <Id>qqqqqaaratyyxvsa</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全问题3</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>9</Order>
+          <Id>qqqqqaaratyydcft</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全答案3</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>10</Order>
+          <Id>qqqqqaaratyyrwzf</Id>
+          <Type>9</Type>
+          <Name />
+          <Text>备注信息</Text>
+          <Data />
+          <Memo />
+        </Item>
+      </Items>
+    </Lib>
+    <Lib>
+      <Order>2</Order>
+      <Id>qqqqqaacbrrtyswe</Id>
+      <Name />
+      <Text>游戏娱乐</Text>
+      <Memo />
+      <Items>
+        <Item>
+          <Order>
+            0Order><Id>qqqqqazqqqyvawzd</Id><Type>3</Type><Name /><Text>官方网站</Text><Data /><Memo />
+        </Item>
+        <Item>
+          <Order>1</Order>
+          <Id>qqqqqazqqqyfrrga</Id>
+          <Type>3</Type>
+          <Name />
+          <Text>登录地址</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>2</Order>
+          <Id>qqqqqazqqqyrrcaq</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>登录用户</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>3</Order>
+          <Id>qqqqqazqqqyrtaez</Id>
+          <Type>2</Type>
+          <Name />
+          <Text>登录密码</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>4</Order>
+          <Id>qqqqqazqqqyvsfzx</Id>
+          <Type>3</Type>
+          <Name />
+          <Text>游戏论坛</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>5</Order>
+          <Id>qqqqqazqqqytvrad</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全问题1</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>6</Order>
+          <Id>qqqqqazqqqytbdyd</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全答案1</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>7</Order>
+          <Id>qqqqqazqqqygqwaq</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全问题2</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>8</Order>
+          <Id>qqqqqazqqqygagvt</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全答案2</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>9</Order>
+          <Id>qqqqqazqqqygwwzr</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全问题3</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>10</Order>
+          <Id>qqqqqazqqqygscwd</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全答案3</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>11</Order>
+          <Id>qqqqqazqqqyybvws</Id>
+          <Type>3</Type>
+          <Name />
+          <Text>在线客服</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>12</Order>
+          <Id>qqqqqazqqqyfwdrt</Id>
+          <Type>4</Type>
+          <Name />
+          <Text>客服邮件</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>13</Order>
+          <Id>qqqqqazqqqyfavzv</Id>
+          <Type>7</Type>
+          <Name />
+          <Text>客服电话</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>14</Order>
+          <Id>qqqqqazqqqyfxwty</Id>
+          <Type>7</Type>
+          <Name />
+          <Text>客服传真</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>15</Order>
+          <Id>qqqqqazqqqybqfxb</Id>
+          <Type>9</Type>
+          <Name />
+          <Text>备注信息</Text>
+          <Data />
+          <Memo />
+        </Item>
+      </Items>
+    </Lib>
+    <Lib>
+      <Order>3</Order>
+      <Id>qqqqqaacbrrtyswx</Id>
+      <Name />
+      <Text>电子邮件</Text>
+      <Memo />
+      <Items>
+        <Item>
+          <Order>0</Order>
+          <Id>qqqqqaacbrrtyswf</Id>
+          <Type>3</Type>
+          <Name />
+          <Text>登录地址</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>1</Order>
+          <Id>qqqqqaacbrrtyswv</Id>
+          <Type>4</Type>
+          <Name />
+          <Text>邮件地址</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>2</Order>
+          <Id>qqqqqaacbrrtyswr</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>登录用户</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>3</Order>
+          <Id>qqqqqaacbrrtyswt</Id>
+          <Type>2</Type>
+          <Name />
+          <Text>邮箱密码</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>4</Order>
+          <Id>qqqqqazqqqysdxgv</Id>
+          <Type>4</Type>
+          <Name />
+          <Text>保密邮箱</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>5</Order>
+          <Id>qqqqqaacbrrtyswy</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全问题1</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>6</Order>
+          <Id>qqqqqaacbrrtyssq</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全答案1</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>7</Order>
+          <Id>qqqqqaacbrrtyssa</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全问题2</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>8</Order>
+          <Id>qqqqqaacbrrtyssz</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全答案2</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>9</Order>
+          <Id>qqqqqaacbrrtyssw</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全问题3</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>10</Order>
+          <Id>qqqqqaacbrrtysss</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全答案3</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>11</Order>
+          <Id>qqqqqaaratydfsar</Id>
+          <Type>9</Type>
+          <Name />
+          <Text>备注信息</Text>
+          <Data />
+          <Memo />
+        </Item>
+      </Items>
+    </Lib>
+    <Lib>
+      <Order>4</Order>
+      <Id>qqqqqaacbrrtysws</Id>
+      <Name />
+      <Text>即时通讯</Text>
+      <Memo />
+      <Items>
+        <Item>
+          <Order>0</Order>
+          <Id>qqqqqazxryyzcyrf</Id>
+          <Type>3</Type>
+          <Name />
+          <Text>网站首页</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>1</Order>
+          <Id>qqqqqazxryyzwyqr</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>登录用户</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>2</Order>
+          <Id>qqqqqazqqaqxvcey</Id>
+          <Type>2</Type>
+          <Name />
+          <Text>登录密码</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>3</Order>
+          <Id>qqqqqazqqaqxsqvb</Id>
+          <Type>3</Type>
+          <Name />
+          <Text>软件首页</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>4</Order>
+          <Id>qqqqqazqqaqcbebw</Id>
+          <Type>3</Type>
+          <Name />
+          <Text>在线登录</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>
+            5/Order><Id>qqqqqazxryyzvesg</Id><Type>4</Type><Name /><Text>电子邮件</Text><Data /><Memo />
+        </Item>
+        <Item>
+          <Order>6</Order>
+          <Id>qqqqqazqqaqxbzqq</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全问题1</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>7</Order>
+          <Id>qqqqqazqqaqxydab</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全答案1</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>8</Order>
+          <Id>qqqqqazqqaqeqtrf</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全问题2</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>9</Order>
+          <Id>qqqqqazqqaqeabct</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全答案2</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>10</Order>
+          <Id>qqqqqazqqaqewxyt</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全问题3</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>11</Order>
+          <Id>qqqqqazqqaqesfzy</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>安全答案3</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>12</Order>
+          <Id>qqqqqazqqaqczczd</Id>
+          <Type>9</Type>
+          <Name />
+          <Text>备注信息</Text>
+          <Data />
+          <Memo />
+        </Item>
+      </Items>
+    </Lib>
+    <Lib>
+      <Order>5</Order>
+      <Id>qqqqqaacbrrtyswd</Id>
+      <Name />
+      <Text>软件注册</Text>
+      <Memo />
+      <Items>
+        <Item>
+          <Order>0</Order>
+          <Id>qqqqqaacbrrtyssg</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>软件名称</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>1</Order>
+          <Id>qqqqqaacbrrtyssb</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>软件版本</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>2</Order>
+          <Id>qqqqqaacbrrtysxq</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>注册用户</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>3</Order>
+          <Id>qqqqqaacbrrtysxa</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>注册号码</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>4</Order>
+          <Id>qqqqqaacbrrtyssy</Id>
+          <Type>3</Type>
+          <Name />
+          <Text>软件首页</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>5</Order>
+          <Id>qqqqqaacbrrtysxz</Id>
+          <Type>5</Type>
+          <Name />
+          <Text>注册日期</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>6</Order>
+          <Id>qqqqqaacbrrtysxw</Id>
+          <Type>5</Type>
+          <Name />
+          <Text>到期日期</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>7</Order>
+          <Id>qqqqqaavwssegqvr</Id>
+          <Type>9</Type>
+          <Name />
+          <Text>备注信息</Text>
+          <Data />
+          <Memo />
+        </Item>
+      </Items>
+    </Lib>
+    <Lib>
+      <Order>6</Order>
+      <Id>qqqqqaacbrrtyswc</Id>
+      <Name />
+      <Text>银行账号</Text>
+      <Memo />
+      <Items>
+        <Item>
+          <Order>0</Order>
+          <Id>qqqqqaacbrrtyssd</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>开户银行</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>1</Order>
+          <Id>qqqqqaacbrrtyssc</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>银行账户</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>2</Order>
+          <Id>qqqqqaacbrrtyssr</Id>
+          <Type>2</Type>
+          <Name />
+          <Text>账户密码</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>3</Order>
+          <Id>qqqqqaavaqdyyscz</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>开户姓名</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>4</Order>
+          <Id>qqqqqaacbrrtyssf</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>网上银行</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>5</Order>
+          <Id>qqqqqaaratywrrft</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>网银账户</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>6</Order>
+          <Id>qqqqqaacbrrtyssv</Id>
+          <Type>2</Type>
+          <Name />
+          <Text>查询密码</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>7</Order>
+          <Id>qqqqqaacbrrtysst</Id>
+          <Type>2</Type>
+          <Name />
+          <Text>支付密码</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>8</Order>
+          <Id>qqqqqaaratyxcfry</Id>
+          <Type>9</Type>
+          <Name />
+          <Text>备注信息</Text>
+          <Data />
+          <Memo />
+        </Item>
+      </Items>
+    </Lib>
+    <Lib>
+      <Order>7</Order>
+      <Id>qqqqqaavaqdfscdv</Id>
+      <Name />
+      <Text>通讯名录</Text>
+      <Memo />
+      <Items>
+        <Item>
+          <Order>0</Order>
+          <Id>qqqqqaavaqdfdvdz</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>名</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>1</Order>
+          <Id>qqqqqaavaqdffzew</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>姓</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>2</Order>
+          <Id>qqqqqazrdzfcwvxg</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>昵称</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>3</Order>
+          <Id>qqqqqaavaqdgrssv</Id>
+          <Type>5</Type>
+          <Name />
+          <Text>生日</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>8</Order>
+          <Id>qqqqqaavaqdtvxex</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>MSN</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>9</Order>
+          <Id>qqqqqaavaqdttgxz</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>Q Q</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>10</Order>
+          <Id>qqqqqaavaqdtfsxg</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>ICQ</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>11</Order>
+          <Id>qqqqqaavaqdvrecd</Id>
+          <Type>7</Type>
+          <Name />
+          <Text>手机</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>12</Order>
+          <Id>qqqqqaavaqdtcvce</Id>
+          <Type>3</Type>
+          <Name />
+          <Text>个人主页</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>13</Order>
+          <Id>qqqqqaavaqdtqtss</Id>
+          <Type>7</Type>
+          <Name />
+          <Text>家庭电话</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>14</Order>
+          <Id>qqqqqaavaqdtwtyc</Id>
+          <Type>4</Type>
+          <Name />
+          <Text>电子邮件</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>15</Order>
+          <Id>qqqqqaavaqdgzvcy</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>通讯地址</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>16</Order>
+          <Id>qqqqqaavaqdgewsc</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>邮政编码</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>17</Order>
+          <Id>qqqqqaavaqdgtzeq</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>公司</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>19</Order>
+          <Id>qqqqqaavaqdgbaty</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>职位</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>20</Order>
+          <Id>qqqqqazrdzvevvyw</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>职责</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>21</Order>
+          <Id>qqqqqaavaqdbsxev</Id>
+          <Type>3</Type>
+          <Name />
+          <Text>公司网站</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>22</Order>
+          <Id>qqqqqaavaqdgyrxb</Id>
+          <Type>7</Type>
+          <Name />
+          <Text>商务电话</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>23</Order>
+          <Id>qqqqqaavaqdbqbeg</Id>
+          <Type>7</Type>
+          <Name />
+          <Text>商务传真</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>24</Order>
+          <Id>qqqqqaavaqdbzcbf</Id>
+          <Type>4</Type>
+          <Name />
+          <Text>工作邮件</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>25</Order>
+          <Id>qqqqqaavaqdbewsw</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>工作地址</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>26</Order>
+          <Id>qqqqqaavzyctcyzr</Id>
+          <Type>9</Type>
+          <Name />
+          <Text>备注信息</Text>
+          <Data />
+          <Memo />
+        </Item>
+      </Items>
+    </Lib>
+    <Lib>
+      <Order>8</Order>
+      <Id>qqqqqaavaqdyfbzw</Id>
+      <Name />
+      <Text>记事便签</Text>
+      <Memo />
+      <Items>
+        <Item>
+          <Order>0</Order>
+          <Id>qqqqqaavwsxaxzev</Id>
+          <Type>9</Type>
+          <Name />
+          <Text>记事标题</Text>
+          <Data />
+          <Memo />
+        </Item>
+      </Items>
+    </Lib>
+    <Lib>
+      <Order>9</Order>
+      <Id>qqqqqazdqdfztrgq</Id>
+      <Name />
+      <Text>FTP 账号</Text>
+      <Memo />
+      <Items>
+        <Item>
+          <Order>0</Order>
+          <Id>qqqqqazdqdfevadz</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>登录用户</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>1</Order>
+          <Id>qqqqqazdqdfxgxcr</Id>
+          <Type>2</Type>
+          <Name />
+          <Text>登录口令</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>3</Order>
+          <Id>qqqqqazdqdfsqcvc</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>主机地址</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>4</Order>
+          <Id>qqqqqazdqdfswcqe</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>主机端口</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>5</Order>
+          <Id>qqqqqazdqdfdydxy</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>远程目录</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>6</Order>
+          <Id>qqqqqazdqdfdcved</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>登录协议</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>7</Order>
+          <Id>qqqqqazdqdfxzxss</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>主机类型</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>8</Order>
+          <Id>qqqqqazdqdfxraqb</Id>
+          <Type>1</Type>
+          <Name />
+          <Text>登录类型</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>9</Order>
+          <Id>qqqqqazcfwqxzdvd</Id>
+          <Type>9</Type>
+          <Name />
+          <Text>备注信息</Text>
+          <Data />
+          <Memo />
+        </Item>
+      </Items>
+    </Lib>
+    <Lib>
+      <Order>10</Order>
+      <Id>qqqqqazdvqbargat</Id>
+      <Name />
+      <Text>文件加密</Text>
+      <Memo />
+      <Items>
+        <Item>
+          <Order>0</Order>
+          <Id>qqqqqazdvqbzebzd</Id>
+          <Type>10</Type>
+          <Name />
+          <Text>来源文件</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>1</Order>
+          <Id>qqqqqazdvqbzftcc</Id>
+          <Type>9</Type>
+          <Name />
+          <Text>备注信息</Text>
+          <Data />
+          <Memo />
+        </Item>
+      </Items>
+    </Lib>
+    <Lib>
+      <Order>11</Order>
+      <Id>qqqqqazttgrvcztr</Id>
+      <Name />
+      <Text>数值类型</Text>
+      <Memo />
+      <Items>
+        <Item>
+          <Order>0</Order>
+          <Id>qqqqqazttgrvvttc</Id>
+          <Type>6</Type>
+          <Name />
+          <Text>数值</Text>
+          <Data />
+          <Memo />
+        </Item>
+        <Item>
+          <Order>1</Order>
+          <Id>qqqqqazttgrvyfeq</Id>
+          <Type>9</Type>
+          <Name />
+          <Text>备注信息</Text>
+          <Data />
+          <Memo />
+        </Item>
+      </Items>
+    </Lib>
+  </Libs>
 </Amon>

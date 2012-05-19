@@ -31,8 +31,8 @@
     <SuiteName>阿木软件</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>3</ApplicationRevision>
-    <ApplicationVersion>7.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>7.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -272,8 +272,10 @@
     <Compile Include="Pwd\E\Data\ImportTxtAction.cs" />
     <Compile Include="Pwd\E\Data\ImportXmlAction.cs" />
     <Compile Include="Pwd\E\Data\NativeBackupAction.cs" />
+    <Compile Include="Pwd\E\Data\NativeConfigAction.cs" />
     <Compile Include="Pwd\E\Data\NativeResumeAction.cs" />
     <Compile Include="Pwd\E\Data\RemoteBackupAction.cs" />
+    <Compile Include="Pwd\E\Data\RemoteConfigAction.cs" />
     <Compile Include="Pwd\E\Data\RemoteResumeAction.cs" />
     <Compile Include="Pwd\E\Data\SyncAction.cs" />
     <Compile Include="Pwd\E\_Att\AppendCallAction.cs" />

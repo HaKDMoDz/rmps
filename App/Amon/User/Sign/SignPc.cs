@@ -216,7 +216,7 @@ namespace Me.Amon.User.Sign
                 using (XmlReader reader = XmlReader.Create(stream))
                 {
                     Cat cat;
-                    while (reader.ReadToFollowing("Cat"))
+                    while (reader.Name == "Cat" || reader.ReadToFollowing("Cat"))
                     {
                         cat = new Cat();
                         if (!cat.FromXml(reader))
@@ -262,7 +262,7 @@ namespace Me.Amon.User.Sign
                 using (XmlReader reader = XmlReader.Create(stream))
                 {
                     Udc udc;
-                    while (reader.ReadToFollowing("Udc"))
+                    while (reader.Name == "Udc" || reader.ReadToFollowing("Udc"))
                     {
                         udc = new Udc();
                         if (!udc.FromXml(reader))
@@ -285,7 +285,7 @@ namespace Me.Amon.User.Sign
                 using (XmlReader reader = XmlReader.Create(stream))
                 {
                     MRen ren;
-                    while (reader.ReadToFollowing("Ren"))
+                    while (reader.Name == "Ren" || reader.ReadToFollowing("Ren"))
                     {
                         ren = new MRen();
                         if (!ren.FromXml(reader))

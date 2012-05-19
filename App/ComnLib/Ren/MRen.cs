@@ -32,7 +32,7 @@ namespace Me.Amon.Ren
 
         public bool FromXml(XmlReader reader)
         {
-            if (reader == null || reader.Name != "Ren")
+            if (reader == null || reader.Name != "Ren" || !reader.IsStartElement())
             {
                 return false;
             }
@@ -56,6 +56,10 @@ namespace Me.Amon.Ren
             if (reader.Name == "Remark" || reader.ReadToNextSibling("Remark"))
             {
                 Remark = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Ren" && reader.NodeType == XmlNodeType.EndElement)
+            {
+                reader.ReadEndElement();
             }
             return true;
         }

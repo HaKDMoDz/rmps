@@ -41,7 +41,7 @@ namespace Me.Amon.Pwd
 
         public bool FromXml(XmlReader reader)
         {
-            if (reader == null || reader.Name != "Udc")
+            if (reader == null || reader.Name != "Udc" || !reader.IsStartElement())
             {
                 return false;
             }
@@ -69,6 +69,10 @@ namespace Me.Amon.Pwd
             if (reader.Name == "Memo" || reader.ReadToNextSibling("Memo"))
             {
                 Data = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Udc" && reader.NodeType == XmlNodeType.EndElement)
+            {
+                reader.ReadEndElement();
             }
             return true;
         }

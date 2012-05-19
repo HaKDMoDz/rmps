@@ -30,7 +30,7 @@ namespace Me.Amon.Pwd
         #region XML
         public bool FromXml(XmlReader reader)
         {
-            if (reader == null || reader.Name != "Lib")
+            if (reader == null || reader.Name != "Lib" || !reader.IsStartElement())
             {
                 return false;
             }
@@ -72,6 +72,10 @@ namespace Me.Amon.Pwd
                     Details.Add(detail);
                 }
 
+                reader.ReadEndElement();
+            }
+            if (reader.Name == "Lib" && reader.NodeType == XmlNodeType.EndElement)
+            {
                 reader.ReadEndElement();
             }
             return true;

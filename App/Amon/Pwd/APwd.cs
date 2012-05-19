@@ -1245,7 +1245,7 @@ namespace Me.Amon.Pwd
         /// <summary>
         /// 本地备份
         /// </summary>
-        public void LocaleBackup()
+        public void NativeBackup()
         {
             if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
             {
@@ -1266,19 +1266,24 @@ namespace Me.Amon.Pwd
         }
 
         /// <summary>
+        /// 本地恢复
+        /// </summary>
+        public void NativeResume()
+        {
+            Main.ShowAlert("本地恢复功能尚在完善中，敬请期待！");
+        }
+
+        public void NativeConfig()
+        {
+            Main.ShowAlert("本地配置功能尚在完善中，敬请期待！");
+        }
+
+        /// <summary>
         /// 远程备份
         /// </summary>
         public void RemoteBackup()
         {
-            MessageBox.Show("远程备份功能尚在完善中，敬请期待！");
-        }
-
-        /// <summary>
-        /// 本地恢复
-        /// </summary>
-        public void LocaleResuma()
-        {
-            MessageBox.Show("本地恢复功能尚在完善中，敬请期待！");
+            Main.ShowAlert("远程备份功能尚在完善中，敬请期待！");
         }
 
         /// <summary>
@@ -1286,7 +1291,12 @@ namespace Me.Amon.Pwd
         /// </summary>
         public void RemoteResume()
         {
-            MessageBox.Show("远程恢复功能尚在完善中，敬请期待！");
+            Main.ShowAlert("远程恢复功能尚在完善中，敬请期待！");
+        }
+
+        public void RemoteConfig()
+        {
+            Main.ShowAlert("远程配置功能尚在完善中，敬请期待！");
         }
 
         #region 数据导出
