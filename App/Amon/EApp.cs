@@ -33,8 +33,8 @@
         /// <summary>
         /// 服务器路径
         /// </summary>
-        public const string SERVER_PATH = "http://amon.me/s.ashx";
-        //public const string SERVER_PATH = "http://localhost:49587/s.ashx";
+        //public const string SERVER_PATH = "http://amon.me/s.ashx";
+        public const string SERVER_PATH = "http://localhost:49587/s.ashx";
         /// <summary>
         /// 服务器类型
         /// </summary>

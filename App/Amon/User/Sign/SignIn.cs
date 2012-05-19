@@ -272,7 +272,7 @@ namespace Me.Amon.User.Sign
                 }
 
                 Lib header;
-                while (reader.ReadToFollowing("Lib"))
+                while (reader.Name == "Lib" || reader.ReadToFollowing("Lib"))
                 {
                     header = new Lib();
                     if (!header.FromXml(reader))

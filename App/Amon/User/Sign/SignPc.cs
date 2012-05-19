@@ -239,7 +239,7 @@ namespace Me.Amon.User.Sign
                 using (XmlReader reader = XmlReader.Create(stream))
                 {
                     Lib header;
-                    while (reader.ReadToFollowing("Lib"))
+                    while (reader.Name == "Lib" || reader.ReadToFollowing("Lib"))
                     {
                         header = new Lib();
                         if (!header.FromXml(reader))

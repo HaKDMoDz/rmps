@@ -196,6 +196,7 @@
     <Compile Include="Gtd\EGtd.cs" />
     <Compile Include="Ico\EIco.cs" />
     <Compile Include="Ico\MIco.cs" />
+    <Compile Include="MApp.cs" />
     <Compile Include="Pwd\Att.cs" />
     <Compile Include="Pwd\Bean\ACall.cs">
       <SubType>UserControl</SubType>
