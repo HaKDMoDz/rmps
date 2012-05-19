@@ -1,0 +1,27 @@
+﻿using System.Windows.Forms;
+
+namespace Me.Amon.Pwd.V.Wiz
+{
+    public interface IWizView
+    {
+        string Name { get; set; }
+
+        void InitView(TableLayoutPanel grid);
+
+        void HideView(TableLayoutPanel grid);
+
+        bool Focus();
+
+        void ShowData();
+
+        bool SaveData();
+
+        void CutData();
+
+        void CopyData();
+
+        void PasteData();
+
+        void ClearData();
+    }
+}
