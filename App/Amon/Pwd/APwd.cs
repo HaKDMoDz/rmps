@@ -741,8 +741,11 @@ namespace Me.Amon.Pwd
             _UserModel.DBA.SaveVcs(_SafeModel.Key);
             _SafeModel.Modified = false;
 
-            LastOpt();
             _PwdView.ShowInfo();
+            if (LbKeyList.SelectedIndex > 0)
+            {
+                LbKeyList.Items[LbKeyList.SelectedIndex] = _SafeModel.Key;
+            }
         }
 
         /// <summary>
@@ -837,7 +840,12 @@ namespace Me.Amon.Pwd
             _SafeModel.Key.CatId = catId;
             _UserModel.DBA.SaveVcs(_SafeModel.Key);
 
-            LastOpt();
+            Key key = LbKeyList.SelectedItem as Key;
+            if (key == null || key.Id != _SafeModel.Key.Id)
+            {
+                return;
+            }
+            LbKeyList.Items.RemoveAt(LbKeyList.SelectedIndex);
         }
 
         /// <summary>
@@ -1755,6 +1763,14 @@ namespace Me.Amon.Pwd
                 }
             }
 
+            Cat cat = _LastNode.Tag as Cat;
+            if (cat == null)
+            {
+                Main.ShowAlert("请选择您要导入的类别！");
+                TvCatTree.Focus();
+                return;
+            }
+
             OpenFileDialog fd = new OpenFileDialog();
             fd.Filter = "所有文件|*.*";
             if (DialogResult.OK != fd.ShowDialog(this))
@@ -1767,27 +1783,25 @@ namespace Me.Amon.Pwd
                 return;
             }
 
+            int cnt = 0;
             using (StreamReader reader = File.OpenText(file))
             {
-                // 版本判断
-                string ver = reader.ReadLine();
-                if ("2" != ver)
-                {
-                    Main.ShowAlert("未知的文件版本，无法进行导入处理！");
-                    return;
-                }
-
                 string line = reader.ReadLine();
                 while (line != null)
                 {
                     if (!string.IsNullOrWhiteSpace(line))
                     {
-                        //_SafeModel.ImportByTxt(line);
-                        SaveKey();
+                        if (_SafeModel.ImportByOld(line, "0"))
+                        {
+                            _SafeModel.Key.CatId = cat.Id;
+                            DoImportKey();
+                            cnt += 1;
+                        }
                     }
                     line = reader.ReadLine();
                 }
             }
+            Main.ShowAlert(string.Format("成功导入 {0} 条记录！", cnt));
         }
         #endregion
         #endregion

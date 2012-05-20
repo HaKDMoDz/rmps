@@ -269,6 +269,7 @@
     <Compile Include="Pwd\E\Data\ExportTxtAction.cs" />
     <Compile Include="Pwd\E\Data\ExportXmlAction.cs" />
     <Compile Include="Pwd\E\Data\FindAction.cs" />
+    <Compile Include="Pwd\E\Data\ImportOldAction.cs" />
     <Compile Include="Pwd\E\Data\ImportTxtAction.cs" />
     <Compile Include="Pwd\E\Data\ImportXmlAction.cs" />
     <Compile Include="Pwd\E\Data\NativeBackupAction.cs" />

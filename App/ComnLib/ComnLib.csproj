@@ -58,6 +58,7 @@
     <Compile Include="Ren\MRen.cs" />
     <Compile Include="Util\CharUtil.cs" />
     <Compile Include="Util\HashUtil.cs" />
+    <Compile Include="Util\TimeUtil.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

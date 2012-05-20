@@ -273,6 +273,9 @@ namespace Me.Amon.Pwd
             int i;
             switch (ver)
             {
+                case "0":
+                    i = ImportByTxt_0(array);
+                    break;
                 case "1":
                     i = ImportByTxt_1(array);
                     break;
@@ -297,6 +300,24 @@ namespace Me.Amon.Pwd
                 }
             }
             return true;
+        }
+
+        private int ImportByTxt_0(string[] array)
+        {
+            int i = 0;
+            if (array == null)
+            {
+                return i;
+            }
+            if (array.Length > 0)
+            {
+                Text = UnEscape(array[i++].Replace("\f", "\\,"));
+            }
+            if (array.Length > 1)
+            {
+                Data = UnEscape(array[i++].Replace("\f", "\\,"));
+            }
+            return i;
         }
 
         private int ImportByTxt_1(string[] array)
@@ -498,19 +519,19 @@ namespace Me.Amon.Pwd
         /// </summary>
         public const int TYPE_LINE = TYPE_FILE + 1;
         /// <summary>
-        /// 属性：模板向导
+        /// 属性：模板向导12
         /// </summary>
         public const int TYPE_GUID = TYPE_LINE + 1;
         /// <summary>
-        /// 属性：关键搜索
+        /// 属性：关键搜索13
         /// </summary>
         public const int TYPE_META = TYPE_GUID + 1;
         /// <summary>
-        /// 属性：口令图标
+        /// 属性：口令图标14
         /// </summary>
         public const int TYPE_LOGO = TYPE_META + 1;
         /// <summary>
-        /// 属性：过期提示
+        /// 属性：过期提示15
         /// </summary>
         public const int TYPE_HINT = TYPE_LOGO + 1;
         /// <summary>

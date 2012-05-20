@@ -502,6 +502,69 @@ namespace Me.Amon.Model.Pwd
             writer.WriteEndElement();
             return true;
         }
+
+        public bool ImportByOld(string data, string ver)
+        {
+            if (string.IsNullOrEmpty(data))
+            {
+                return false;
+            }
+
+            string[] list = data.Replace("\\;", "\b").Split(';');
+            if (list == null || list.Length < Att.HEAD_SIZE)
+            {
+                return false;
+            }
+
+            Clear();
+            Key = new Key();
+
+            foreach (string tmp in list)
+            {
+                if (string.IsNullOrEmpty(tmp))
+                {
+                    continue;
+                }
+
+                string tmp1 = tmp.Replace("\b", "\\;").Trim();
+                Match matche = Regex.Match(tmp1, "^\\d+,");
+                if (!matche.Success)
+                {
+                    continue;
+                }
+                string tmp2 = matche.Value;
+                int idx = int.Parse(tmp2.Substring(0, tmp2.Length - 1));
+                if (idx == 6)
+                {
+                    idx = Att.TYPE_MEMO;
+                }
+                else if (idx > 6)
+                {
+                    idx += 1;
+                }
+                if (idx == Att.TYPE_DATE)
+                {
+                    idx = Att.TYPE_TEXT;
+                }
+                Att item = Att.GetInstance(idx);
+                if (item == null)
+                {
+                    return false;
+                }
+                if (idx == Att.TYPE_HINT)
+                {
+                    _AttList.Add(item);
+                    continue;
+                }
+                if (item.ImportByTxt(tmp1.Substring(tmp2.Length), ver))
+                {
+                    item.Id = (_Key.AttIndex++).ToString();
+                    _AttList.Add(item);
+                    continue;
+                }
+            }
+            return true;
+        }
         #endregion
     }
 }
