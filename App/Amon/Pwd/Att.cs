@@ -24,7 +24,8 @@ namespace Me.Amon.Pwd
         /// <summary>
         /// 属性类别
         /// </summary>
-        public int Type { get; set; }
+        public int Type { get { return _Type; } set { _Type = value; _Spec = null; } }
+        private int _Type;
         /// <summary>
         /// 属性键值
         /// </summary>
@@ -61,7 +62,7 @@ namespace Me.Amon.Pwd
         /// <param name="data"></param>
         protected Att(int type, string text, string data)
         {
-            Type = type;
+            _Type = type;
             Text = text;
             Data = data;
             SetDefault();
@@ -233,6 +234,11 @@ namespace Me.Amon.Pwd
         /// 恢复默认值
         /// </summary>
         public abstract void SetDefault();
+        #endregion
+
+        #region 公共方法
+        #region 数据交换
+        #region 数据导出
         /// <summary>
         /// 导出为TXT文件
         /// </summary>
@@ -257,6 +263,33 @@ namespace Me.Amon.Pwd
             return true;
         }
 
+        /// <summary>
+        /// 导出为XML文件
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <returns></returns>
+        public bool ExportAsXml(XmlWriter writer)
+        {
+            writer.WriteElementString("Type", Type.ToString());
+            writer.WriteElementString("Name", Name);
+            writer.WriteElementString("Text", Text);
+            writer.WriteElementString("Data", Data);
+
+            if (_Spec != null)
+            {
+                writer.WriteStartElement("Spec");
+                //writer.WriteAttributeString("Count", _Spec.Length.ToString());
+                for (int i = 0; i < _Spec.Length; i += 1)
+                {
+                    writer.WriteAttributeString("V" + i, _Spec[i]);
+                }
+                writer.WriteEndElement();
+            }
+            return true;
+        }
+        #endregion
+
+        #region 数据导入
         /// <summary>
         /// 从TXT文件导入
         /// </summary>
@@ -302,6 +335,11 @@ namespace Me.Amon.Pwd
             return true;
         }
 
+        /// <summary>
+        /// 《魔方密码》数据导入
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns></returns>
         private int ImportByTxt_0(string[] array)
         {
             int i = 0;
@@ -343,30 +381,6 @@ namespace Me.Amon.Pwd
             return i;
         }
 
-        /// <summary>
-        /// 导出为XML文件
-        /// </summary>
-        /// <param name="writer"></param>
-        /// <returns></returns>
-        public bool ExportAsXml(XmlWriter writer)
-        {
-            writer.WriteElementString("Type", Type.ToString());
-            writer.WriteElementString("Name", Name);
-            writer.WriteElementString("Text", Text);
-            writer.WriteElementString("Data", Data);
-
-            if (_Spec != null)
-            {
-                writer.WriteStartElement("Spec");
-                //writer.WriteAttributeString("Count", _Spec.Length.ToString());
-                for (int i = 0; i < _Spec.Length; i += 1)
-                {
-                    writer.WriteAttributeString("V" + i, _Spec[i]);
-                }
-                writer.WriteEndElement();
-            }
-            return true;
-        }
         /// <summary>
         /// 从XML文件导入
         /// </summary>
@@ -437,8 +451,9 @@ namespace Me.Amon.Pwd
             return true;
         }
         #endregion
+        #endregion
 
-        #region 公共方法
+        #region 文本转换
         /// <summary>
         /// 文本正向转义
         /// </summary>
@@ -458,6 +473,7 @@ namespace Me.Amon.Pwd
         {
             return txt != null ? txt.Replace("\\n", "\n").Replace("\\;", ";").Replace("\\,", ",").Replace("\\\\", "\\") : "";
         }
+        #endregion
         #endregion
 
         #region 附加属性

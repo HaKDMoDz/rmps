@@ -91,11 +91,15 @@ namespace Me.Amon.Pwd.V.Wiz
                 return false;
             }
 
-            if (CbData.SelectedValue.ToString() != _Att.Data)
-            {
-                _Att.Data = CbData.SelectedValue.ToString();
-                _Att.Modified = true;
-            }
+            //if (CbData.SelectedValue == null)
+            //{
+            //    return false;
+            //}
+            //if (CbData.SelectedValue.ToString() != _Att.Data)
+            //{
+            //    _Att.Data = CbData.SelectedValue.ToString();
+            //    _Att.Modified = true;
+            //}
             return true;
         }
         #endregion
