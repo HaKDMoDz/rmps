@@ -182,10 +182,6 @@ namespace Me.Amon.Pwd.V.Pro
 
         public void ChangeAtt(int type)
         {
-            if (type < Att.TYPE_TEXT || type > Att.TYPE_LINE || type == Att.TYPE_DATE)
-            {
-                return;
-            }
             if (_SafeModel.Key == null || _SafeModel.Count < Att.HEAD_SIZE)
             {
                 return;
@@ -200,12 +196,11 @@ namespace Me.Amon.Pwd.V.Pro
             {
                 return;
             }
-            Att att = _SafeModel.GetAtt(index);
-            if (att == null || att.Type >= Att.TYPE_GUID)
+            Att att = _SafeModel.ChangeType(index, type);
+            if (att == null)
             {
                 return;
             }
-            att.Type = type;
             _SafeModel.Modified = true;
 
             ShowView(att);
@@ -269,7 +264,7 @@ namespace Me.Amon.Pwd.V.Pro
                 return;
             }
             int i1 = i0 - 1;
-            _SafeModel.Change(i0, i1);
+            _SafeModel.ChangeOrder(i0, i1);
             _DataList.Rows[i0][1] = _SafeModel.GetAtt(i0);
             _DataList.Rows[i1][1] = _SafeModel.GetAtt(i1);
             SelectRow(i1);
@@ -291,7 +286,7 @@ namespace Me.Amon.Pwd.V.Pro
                 return;
             }
             int i1 = i0 + 1;
-            _SafeModel.Change(i0, i1);
+            _SafeModel.ChangeOrder(i0, i1);
             _DataList.Rows[i0][1] = _SafeModel.GetAtt(i0);
             _DataList.Rows[i1][1] = _SafeModel.GetAtt(i1);
             SelectRow(i1);
@@ -621,5 +616,21 @@ namespace Me.Amon.Pwd.V.Pro
             return ctl;
         }
         #endregion
+
+        private void GvAttList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (e.RowIndex >= 0)
+                {
+                    if (!GvAttList.Rows[e.RowIndex].Selected)
+                    {
+                        GvAttList.ClearSelection();
+                        GvAttList.Rows[e.RowIndex].Selected = true;
+                    }
+                    CmAtt.Show(MousePosition);
+                }
+            }
+        }
     }
 }

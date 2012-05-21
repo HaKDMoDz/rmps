@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GvAttList = new System.Windows.Forms.DataGridView();
             this.OrderCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,7 +81,6 @@
             this.GvAttList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.OrderCol,
             this.ValueCol});
-            this.GvAttList.ContextMenuStrip = this.CmAtt;
             this.GvAttList.Location = new System.Drawing.Point(0, 0);
             this.GvAttList.MultiSelect = false;
             this.GvAttList.Name = "GvAttList";
@@ -91,13 +90,14 @@
             this.GvAttList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.GvAttList.Size = new System.Drawing.Size(350, 145);
             this.GvAttList.TabIndex = 0;
+            this.GvAttList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GvAttList_CellMouseDown);
             this.GvAttList.SelectionChanged += new System.EventHandler(this.GvAttList_SelectionChanged);
             // 
             // OrderCol
             // 
             this.OrderCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OrderCol.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OrderCol.DefaultCellStyle = dataGridViewCellStyle6;
             this.OrderCol.HeaderText = "索引";
             this.OrderCol.Name = "OrderCol";
             this.OrderCol.ReadOnly = true;

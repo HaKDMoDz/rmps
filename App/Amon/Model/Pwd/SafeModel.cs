@@ -180,7 +180,19 @@ namespace Me.Amon.Model.Pwd
             }
         }
 
-        public void Change(int x, int y)
+        public Att ChangeType(int index, int type)
+        {
+            if (type < Att.TYPE_TEXT || type > Att.TYPE_LINE || type == Att.TYPE_DATE)
+            {
+                return null;
+            }
+            Att oldAtt = _AttList[index];
+            Att newAtt = Att.GetInstance(type, oldAtt.Text, oldAtt.Data);
+            _AttList[index] = newAtt;
+            return newAtt;
+        }
+
+        public void ChangeOrder(int x, int y)
         {
             if (x == y || x < 0 || x >= _AttList.Count || y < 0 || y >= _AttList.Count)
             {
