@@ -49,15 +49,17 @@ namespace Me.Amon.Pwd.V.Pro
                 CbData.SelectedItem = _Item;
             }
 
+            return true;
+        }
+
+        public bool Focus()
+        {
             if (string.IsNullOrEmpty(TbText.Text))
             {
-                TbText.Focus();
+                return TbText.Focus();
             }
-            else
-            {
-                CbData.Focus();
-            }
-            return true;
+
+            return CbData.Focus();
         }
 
         public void Cut()
@@ -70,9 +72,14 @@ namespace Me.Amon.Pwd.V.Pro
 
         public void Copy()
         {
-            if (_Ctl == TbText)
+            if (!string.IsNullOrEmpty(TbText.SelectedText))
             {
                 TbText.Copy();
+                return;
+            }
+            if (!string.IsNullOrEmpty(TbText.Text))
+            {
+                Clipboard.SetText(TbText.Text);
             }
         }
 

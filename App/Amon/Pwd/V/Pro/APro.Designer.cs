@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GvAttList = new System.Windows.Forms.DataGridView();
             this.OrderCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -96,8 +96,8 @@
             // OrderCol
             // 
             this.OrderCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OrderCol.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OrderCol.DefaultCellStyle = dataGridViewCellStyle3;
             this.OrderCol.HeaderText = "索引";
             this.OrderCol.Name = "OrderCol";
             this.OrderCol.ReadOnly = true;
@@ -119,7 +119,7 @@
             this.CmuUpdateAtt,
             this.CmiDeleteAtt});
             this.CmAtt.Name = "CmAtt";
-            this.CmAtt.Size = new System.Drawing.Size(153, 92);
+            this.CmAtt.Size = new System.Drawing.Size(125, 70);
             // 
             // CmuAppendAtt
             // 
@@ -136,7 +136,7 @@
             this.CmiAppendAttFile,
             this.CmiAppendAttLine});
             this.CmuAppendAtt.Name = "CmuAppendAtt";
-            this.CmuAppendAtt.Size = new System.Drawing.Size(152, 22);
+            this.CmuAppendAtt.Size = new System.Drawing.Size(124, 22);
             this.CmuAppendAtt.Text = "添加属性";
             // 
             // CmiAppendAttText
@@ -233,7 +233,7 @@
             this.CmiUpdateAttFile,
             this.CmiUpdateAttLine});
             this.CmuUpdateAtt.Name = "CmuUpdateAtt";
-            this.CmuUpdateAtt.Size = new System.Drawing.Size(152, 22);
+            this.CmuUpdateAtt.Size = new System.Drawing.Size(124, 22);
             this.CmuUpdateAtt.Text = "转换属性";
             // 
             // CmiUpdateAttText
@@ -319,7 +319,7 @@
             // CmiDeleteAtt
             // 
             this.CmiDeleteAtt.Name = "CmiDeleteAtt";
-            this.CmiDeleteAtt.Size = new System.Drawing.Size(152, 22);
+            this.CmiDeleteAtt.Size = new System.Drawing.Size(124, 22);
             this.CmiDeleteAtt.Text = "删除属性";
             this.CmiDeleteAtt.Click += new System.EventHandler(this.CmiDeleteAtt_Click);
             // 

@@ -14,6 +14,8 @@ namespace Me.Amon.Pwd.V.Pro
 
         bool ShowData(Att att);
 
+        bool Focus();
+
         void Cut();
 
         void Copy();

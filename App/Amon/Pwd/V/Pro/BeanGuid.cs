@@ -142,8 +142,12 @@ namespace Me.Amon.Pwd.V.Pro
 
             CbName.SelectedItem = new Lib { Id = _Att.Data };
             PbCard.Visible = _Att.Data == EApp.LIB_CARD;
-            CbName.Focus();
             return true;
+        }
+
+        public bool Focus()
+        {
+            return CbName.Focus();
         }
 
         public void Cut()
