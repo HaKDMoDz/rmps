@@ -236,13 +236,17 @@ namespace Me.Amon.Pwd
             {
                 return;
             }
-            if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您当前的数据尚未保存，要丢弃吗？"))
+            int idx = LbKeyList.IndexFromPoint(e.Location);
+            if (LbKeyList.SelectedIndex != idx)
             {
-                return;
-            }
+                if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您当前的数据尚未保存，要丢弃吗？"))
+                {
+                    return;
+                }
 
-            _SafeModel.Modified = false;
-            LbKeyList.SelectedIndex = LbKeyList.IndexFromPoint(e.Location);
+                _SafeModel.Modified = false;
+                LbKeyList.SelectedIndex = idx;
+            }
             CmKey.Show(LbKeyList, e.Location);
         }
 
@@ -803,6 +807,8 @@ namespace Me.Amon.Pwd
             }
 
             _UserModel.DBA.RemoveVcs(_SafeModel.Key);
+            _SafeModel.Modified = false;
+            _PwdView.ShowInfo();
 
             LbKeyList.Items.RemoveAt(LbKeyList.SelectedIndex);
         }
