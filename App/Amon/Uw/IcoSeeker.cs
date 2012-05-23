@@ -42,7 +42,7 @@ namespace Me.Amon.Uw
 
             ShowIcoView();
 
-            LsDir.Items.Add(new Dir { Id = "0", Name = "默认分类", Tips = "默认分类", Path = "." });
+            LsDir.Items.Add(new Dir { Id = "0", Text = "默认分类", Tips = "默认分类", Path = "." });
             foreach (Dir dir in _UserModel.DBA.ListDir())
             {
                 LsDir.Items.Add(dir);

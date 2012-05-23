@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Amon>
+  <App>APwd</App>
+  <Ver>1</Ver>
+  <Dirs>
+	<Dir>
+		<Id>qatgwcgryyqbdvas</Id>
+		<Text>电子邮件</Text>
+		<Tips>电子邮件</Tips>
+		<Path>qatgwcgryyqbdvas</Path>
+		<Memo></Memo>
+	</Dir>
+	<Dir>
+		<Id>qatgwcgfqsqcxvdv</Id>
+		<Text>即时通讯</Text>
+		<Tips>即时通讯</Tips>
+		<Path>qatgwcgfqsqcxvdv</Path>
+		<Memo></Memo>
+	</Dir>
+	<Dir>
+		<Id>qatgwcgfqrxwefxz</Id>
+		<Text>游戏娱乐</Text>
+		<Tips>游戏娱乐</Tips>
+		<Path>qatgwcgfqrxwefxz</Path>
+		<Memo></Memo>
+	</Dir>
+	<Dir>
+		<Id>qatgwcgfaqxvbday</Id>
+		<Text>办公软件</Text>
+		<Tips>办公软件</Tips>
+		<Path>qatgwcgfaqxvbday</Path>
+		<Memo></Memo>
+	</Dir>
+	<Dir>
+		<Id>qatgwcgfavzsyteg</Id>
+		<Text>银行账号</Text>
+		<Tips>银行账号</Tips>
+		<Path>qatgwcgfavzsyteg</Path>
+		<Memo></Memo>
+	</Dir>
+  </Dirs>
+</Amon>

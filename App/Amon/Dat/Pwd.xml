@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Amon version="1">
   <Libs>
     <Lib Id="Demo" Path="Lib\DemoLib.dll"/>
@@ -310,11 +310,18 @@
       <Item Type="normal" Text="快捷键" ActionId="shortcuts">
         <Stroke Key="F6" Memo="快捷键列表"/>
       </Item>
-      <Item Type="normal" Text="特别致谢" Visible="false">
-        <Action Class="Me.Amon.Pwd.E.Help.IdioAction"/>
-        <Stroke Key="F8" Memo="特别致谢"/>
+      <Line/>
+      <Item Type="normal" Text="软件首页">
+        <Action Class="Me.Amon.Pwd.E.Help.WebhostAction"/>
+      </Item>
+      <Item Type="normal" Text="项目首页">
+        <Action Class="Me.Amon.Pwd.E.Help.ProjectAction"/>
       </Item>
       <Line/>
+      <Item Type="normal" Text="特别致谢" Visible="false">
+        <Action Class="Me.Amon.Pwd.E.Help.IdioAction"/>
+        <!--Stroke Key="F8" Memo="特别致谢"/-->
+      </Item>
       <Item Type="normal" Text="关于" ActionId="about"/>
     </Menu>
     <Menu Id="plug" Text="扩展(&amp;P)">
@@ -366,7 +373,7 @@
     <Item Type="normal" Tips="快捷键" ActionId="shortcuts">
       <Icon Id="file-help" Path="var:menu-help-hotkeys"/>
     </Item>
-    <Item Type="normal" Tips="帮助" ActionId="about">
+    <Item Type="normal" Tips="帮助" ActionId="help">
       <Icon Id="file-help" Path="var:menu-help-topic"/>
     </Item>
   </Toolbar>

@@ -67,6 +67,27 @@ namespace Me.Amon.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap CurDef {
+            get {
+                object obj = ResourceManager.GetObject("CurDef", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap CurSel {
+            get {
+                object obj = ResourceManager.GetObject("CurSel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Eraser {
+            get {
+                object obj = ResourceManager.GetObject("Eraser", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Error {
             get {
                 object obj = ResourceManager.GetObject("Error", resourceCulture);
@@ -133,6 +154,20 @@ namespace Me.Amon.Properties {
         internal static System.Drawing.Bitmap Open {
             get {
                 object obj = ResourceManager.GetObject("Open", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap PosDef {
+            get {
+                object obj = ResourceManager.GetObject("PosDef", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap PosSel {
+            get {
+                object obj = ResourceManager.GetObject("PosSel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

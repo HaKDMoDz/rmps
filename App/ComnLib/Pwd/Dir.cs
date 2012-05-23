@@ -4,7 +4,7 @@ namespace Me.Amon.Pwd
 {
     public class Dir : Vcs
     {
-        public string Name { get; set; }
+        public string Text { get; set; }
         public string Tips { get; set; }
         public string Path { get; set; }
         public string Memo { get; set; }
@@ -12,7 +12,7 @@ namespace Me.Amon.Pwd
         #region 方法重写
         public override string ToString()
         {
-            return Name;
+            return Text;
         }
 
         public override bool Equals(object obj)

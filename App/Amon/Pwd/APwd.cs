@@ -230,10 +230,31 @@ namespace Me.Amon.Pwd
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void LbKeyList_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Right)
+            {
+                return;
+            }
+            if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您当前的数据尚未保存，要丢弃吗？"))
+            {
+                return;
+            }
+
+            _SafeModel.Modified = false;
+            LbKeyList.SelectedIndex = LbKeyList.IndexFromPoint(e.Location);
+            CmKey.Show(LbKeyList, e.Location);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LbKeyList_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             Key key = LbKeyList.SelectedItem as Key;
-            if (key == null)
+            if (key == null || _SafeModel.Key == key)
             {
                 return;
             }
@@ -246,6 +267,7 @@ namespace Me.Amon.Pwd
 
             if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您当前的数据尚未保存，要丢弃吗？"))
             {
+                LbKeyList.SelectedItem = _SafeModel.Key;
                 return;
             }
 
@@ -289,6 +311,11 @@ namespace Me.Amon.Pwd
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void APwd_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
@@ -385,6 +412,11 @@ namespace Me.Amon.Pwd
             {
                 group.Checked(key.Major.ToString());
             }
+        }
+
+        public void ShowEcho(string echo)
+        {
+            TssEcho.Text = echo;
         }
         #endregion
 
@@ -742,7 +774,9 @@ namespace Me.Amon.Pwd
             _SafeModel.Modified = false;
 
             _PwdView.ShowInfo();
-            if (LbKeyList.SelectedIndex > 0)
+
+            Key key = LbKeyList.SelectedItem as Key;
+            if (key != null && _SafeModel.Key == key)
             {
                 LbKeyList.Items[LbKeyList.SelectedIndex] = _SafeModel.Key;
             }

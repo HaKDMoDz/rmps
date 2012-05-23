@@ -35,7 +35,7 @@ namespace Me.Amon.Uw.Ico
         public void ShowData(Dir item)
         {
             _Item = item;
-            TbName.Text = _Item.Name;
+            TbName.Text = _Item.Text;
             TbTips.Text = _Item.Tips;
             TbMemo.Text = _Item.Memo;
         }
@@ -48,7 +48,7 @@ namespace Me.Amon.Uw.Ico
                 TbName.Focus();
                 return;
             }
-            _Item.Name = name;
+            _Item.Text = name;
             _Item.Tips = TbTips.Text;
             _IcoSeeker.UpdateDir(_Item);
         }

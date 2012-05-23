@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImgViewer));
             this.PlImg = new System.Windows.Forms.Panel();
             this.PbImg = new System.Windows.Forms.PictureBox();
@@ -36,6 +37,7 @@
             this.BtCursor = new System.Windows.Forms.Button();
             this.BtGrid = new System.Windows.Forms.Button();
             this.BtEraser = new System.Windows.Forms.Button();
+            this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.PlImg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbImg)).BeginInit();
             this.TlGrid.SuspendLayout();
@@ -93,31 +95,36 @@
             // 
             // BtCursor
             // 
+            this.BtCursor.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.BtCursor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtCursor.Image = global::Me.Amon.Properties.Resources.CurSel;
             this.BtCursor.Location = new System.Drawing.Point(3, 3);
             this.BtCursor.Name = "BtCursor";
             this.BtCursor.Size = new System.Drawing.Size(23, 23);
             this.BtCursor.TabIndex = 0;
-            this.BtCursor.Text = "button1";
+            this.TpTips.SetToolTip(this.BtCursor, "鼠标提示");
             this.BtCursor.UseVisualStyleBackColor = true;
             this.BtCursor.Click += new System.EventHandler(this.BtCursor_Click);
             // 
             // BtGrid
             // 
+            this.BtGrid.Image = global::Me.Amon.Properties.Resources.PosDef;
             this.BtGrid.Location = new System.Drawing.Point(32, 3);
             this.BtGrid.Name = "BtGrid";
             this.BtGrid.Size = new System.Drawing.Size(23, 23);
             this.BtGrid.TabIndex = 1;
-            this.BtGrid.Text = "button2";
+            this.TpTips.SetToolTip(this.BtGrid, "位置提示");
             this.BtGrid.UseVisualStyleBackColor = true;
             this.BtGrid.Click += new System.EventHandler(this.BtGrid_Click);
             // 
             // BtEraser
             // 
+            this.BtEraser.Image = global::Me.Amon.Properties.Resources.Eraser;
             this.BtEraser.Location = new System.Drawing.Point(61, 3);
             this.BtEraser.Name = "BtEraser";
             this.BtEraser.Size = new System.Drawing.Size(23, 23);
             this.BtEraser.TabIndex = 2;
-            this.BtEraser.Text = "button3";
+            this.TpTips.SetToolTip(this.BtEraser, "清除所有标记");
             this.BtEraser.UseVisualStyleBackColor = true;
             this.BtEraser.Click += new System.EventHandler(this.BtEraser_Click);
             // 
@@ -129,12 +136,14 @@
             this.Controls.Add(this.TlGrid);
             this.Controls.Add(this.PlImg);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ImgViewer";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "图像查看器";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ImgViewer_KeyDown);
             this.Resize += new System.EventHandler(this.ImgViewer_Resize);
             this.PlImg.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PbImg)).EndInit();
@@ -153,5 +162,6 @@
         private System.Windows.Forms.Button BtGrid;
         private System.Windows.Forms.Button BtEraser;
         private System.Windows.Forms.PictureBox PbImg;
+        private System.Windows.Forms.ToolTip TpTips;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Me.Amon.Properties;
 using Me.Amon.Util;
 
 namespace Me.Amon.Uw
@@ -15,13 +16,13 @@ namespace Me.Amon.Uw
         /// <summary>
         /// 是否绘制路径网格
         /// </summary>
-        private bool _MoveTip;
-        private Pen _MoveTipPen;
+        private bool _DrawCur = true;
+        private Pen _CurPen;
         /// <summary>
         /// 是否绘制选择网格
         /// </summary>
-        private bool _Choosed;
-        private Pen _ChoosedPen;
+        private bool _DrawPos;
+        private Pen _PosPen;
         #endregion
 
         #region 构造函数
@@ -41,8 +42,8 @@ namespace Me.Amon.Uw
             _TmpImage = new Bitmap(_SrcImage.Width, _SrcImage.Height);
             _DstImage = new Bitmap(_SrcImage.Width, _SrcImage.Height);
             _GroundBrush = new SolidBrush(Color.White);
-            _MoveTipPen = new Pen(Color.FromArgb(128, 255, 0, 0), 1.0f);
-            _ChoosedPen = new Pen(Color.FromArgb(128, 0, 255, 0), 2.0f);
+            _CurPen = new Pen(Color.FromArgb(128, 255, 0, 0), 1.0f);
+            _PosPen = new Pen(Color.FromArgb(128, 0, 255, 0), 2.0f);
 
             PbImg.Width = _SrcImage.Width;
             PbImg.Height = _SrcImage.Height;
@@ -53,6 +54,14 @@ namespace Me.Amon.Uw
         #endregion
 
         #region 事件处理
+        private void ImgViewer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+            {
+                TopMost = !TopMost;
+            }
+        }
+
         private void ImgViewer_Resize(object sender, EventArgs e)
         {
             PbImg.Location = new Point((PlImg.Width - PbImg.Width) >> 1, (PlImg.Height - PbImg.Height) >> 1);
@@ -65,7 +74,7 @@ namespace Me.Amon.Uw
 
         private void PbImg_MouseClick(object sender, MouseEventArgs e)
         {
-            if (!_Choosed)
+            if (!_DrawPos)
             {
                 return;
             }
@@ -73,8 +82,8 @@ namespace Me.Amon.Uw
             Point p = e.Location;
             using (Graphics g = Graphics.FromImage(_TmpImage))
             {
-                g.DrawLine(_ChoosedPen, 0, p.Y, _DstImage.Width, p.Y);
-                g.DrawLine(_ChoosedPen, p.X, 0, p.X, _DstImage.Height);
+                g.DrawLine(_PosPen, 0, p.Y, _DstImage.Width, p.Y);
+                g.DrawLine(_PosPen, p.X, 0, p.X, _DstImage.Height);
             }
 
             DoDraw(p.X, p.Y);
@@ -82,12 +91,14 @@ namespace Me.Amon.Uw
 
         private void BtCursor_Click(object sender, EventArgs e)
         {
-            _MoveTip = !_MoveTip;
+            _DrawCur = !_DrawCur;
+            BtCursor.Image = _DrawCur ? Resources.CurSel : Resources.CurDef;
         }
 
         private void BtGrid_Click(object sender, EventArgs e)
         {
-            _Choosed = !_Choosed;
+            _DrawPos = !_DrawPos;
+            BtGrid.Image = _DrawPos ? Resources.PosSel : Resources.PosDef;
         }
 
         private void BtEraser_Click(object sender, EventArgs e)
@@ -117,10 +128,10 @@ namespace Me.Amon.Uw
 
                 g.DrawImage(_TmpImage, 0, 0);
 
-                if (_MoveTip)
+                if (_DrawCur)
                 {
-                    g.DrawLine(_MoveTipPen, 0, y, _DstImage.Width, y);
-                    g.DrawLine(_MoveTipPen, x, 0, x, _DstImage.Height);
+                    g.DrawLine(_CurPen, 0, y, _DstImage.Width, y);
+                    g.DrawLine(_CurPen, x, 0, x, _DstImage.Height);
                 }
             }
 

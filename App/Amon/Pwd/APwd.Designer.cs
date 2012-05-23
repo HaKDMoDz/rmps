@@ -43,10 +43,10 @@
             this.LbKeyList = new System.Windows.Forms.ListBox();
             this.CmKey = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.PlBody = new System.Windows.Forms.Panel();
-            this.FbFind = new Me.Amon.Pwd.Bean.FindBar();
             this.TbTool = new System.Windows.Forms.ToolStrip();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.UcTime = new System.Windows.Forms.Timer(this.components);
+            this.FbFind = new Me.Amon.Pwd.Bean.FindBar();
             this.SsEcho.SuspendLayout();
             this.TcTool.ContentPanel.SuspendLayout();
             this.TcTool.TopToolStripPanel.SuspendLayout();
@@ -130,7 +130,7 @@
             this.HSplit.Panel2.Controls.Add(this.PlBody);
             this.HSplit.Panel2.Controls.Add(this.FbFind);
             this.HSplit.Size = new System.Drawing.Size(564, 321);
-            this.HSplit.SplitterDistance = 188;
+            this.HSplit.SplitterDistance = 220;
             this.HSplit.TabIndex = 0;
             // 
             // VSplit
@@ -147,7 +147,7 @@
             // VSplit.Panel2
             // 
             this.VSplit.Panel2.Controls.Add(this.LbKeyList);
-            this.VSplit.Size = new System.Drawing.Size(188, 321);
+            this.VSplit.Size = new System.Drawing.Size(220, 321);
             this.VSplit.SplitterDistance = 152;
             this.VSplit.TabIndex = 0;
             // 
@@ -160,7 +160,7 @@
             this.TvCatTree.Location = new System.Drawing.Point(0, 0);
             this.TvCatTree.Name = "TvCatTree";
             this.TvCatTree.SelectedImageIndex = 0;
-            this.TvCatTree.Size = new System.Drawing.Size(188, 152);
+            this.TvCatTree.Size = new System.Drawing.Size(220, 152);
             this.TvCatTree.TabIndex = 0;
             this.TvCatTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvCatTree_AfterSelect);
             // 
@@ -177,17 +177,17 @@
             // 
             // LbKeyList
             // 
-            this.LbKeyList.ContextMenuStrip = this.CmKey;
             this.LbKeyList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LbKeyList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.LbKeyList.FormattingEnabled = true;
             this.LbKeyList.ItemHeight = 30;
             this.LbKeyList.Location = new System.Drawing.Point(0, 0);
             this.LbKeyList.Name = "LbKeyList";
-            this.LbKeyList.Size = new System.Drawing.Size(188, 165);
+            this.LbKeyList.Size = new System.Drawing.Size(220, 165);
             this.LbKeyList.TabIndex = 0;
             this.LbKeyList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.LbKeyList_DrawItem);
             this.LbKeyList.SelectedIndexChanged += new System.EventHandler(this.LbKeyList_SelectedIndexChanged);
+            this.LbKeyList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LbKeyList_MouseUp);
             // 
             // CmKey
             // 
@@ -199,17 +199,8 @@
             this.PlBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PlBody.Location = new System.Drawing.Point(0, 29);
             this.PlBody.Name = "PlBody";
-            this.PlBody.Size = new System.Drawing.Size(372, 292);
+            this.PlBody.Size = new System.Drawing.Size(340, 292);
             this.PlBody.TabIndex = 1;
-            // 
-            // FbFind
-            // 
-            this.FbFind.APwd = null;
-            this.FbFind.Dock = System.Windows.Forms.DockStyle.Top;
-            this.FbFind.Location = new System.Drawing.Point(0, 0);
-            this.FbFind.Name = "FbFind";
-            this.FbFind.Size = new System.Drawing.Size(372, 29);
-            this.FbFind.TabIndex = 0;
             // 
             // TbTool
             // 
@@ -222,6 +213,15 @@
             // UcTime
             // 
             this.UcTime.Tick += new System.EventHandler(this.UcTime_Tick);
+            // 
+            // FbFind
+            // 
+            this.FbFind.APwd = null;
+            this.FbFind.Dock = System.Windows.Forms.DockStyle.Top;
+            this.FbFind.Location = new System.Drawing.Point(0, 0);
+            this.FbFind.Name = "FbFind";
+            this.FbFind.Size = new System.Drawing.Size(340, 29);
+            this.FbFind.TabIndex = 0;
             // 
             // APwd
             // 
