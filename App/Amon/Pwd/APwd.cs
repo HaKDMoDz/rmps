@@ -237,6 +237,10 @@ namespace Me.Amon.Pwd
                 return;
             }
             int idx = LbKeyList.IndexFromPoint(e.Location);
+            if (idx >= LbKeyList.Items.Count)
+            {
+                return;
+            }
             if (LbKeyList.SelectedIndex != idx)
             {
                 if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您当前的数据尚未保存，要丢弃吗？"))
@@ -779,11 +783,20 @@ namespace Me.Amon.Pwd
 
             _PwdView.ShowInfo();
 
-            Key key = LbKeyList.SelectedItem as Key;
-            if (key != null && _SafeModel.Key == key)
+            if (_SafeModel.IsUpdate)
             {
-                LbKeyList.Items[LbKeyList.SelectedIndex] = _SafeModel.Key;
+                Key key = LbKeyList.SelectedItem as Key;
+                if (key != null && _SafeModel.Key == key)
+                {
+                    LbKeyList.Items[LbKeyList.SelectedIndex] = _SafeModel.Key;
+                }
             }
+            else
+            {
+                LastOpt();
+            }
+
+            _SafeModel.Key = null;
         }
 
         /// <summary>
@@ -806,11 +819,12 @@ namespace Me.Amon.Pwd
                 return;
             }
 
+            LbKeyList.Items.RemoveAt(LbKeyList.SelectedIndex);
+
             _UserModel.DBA.RemoveVcs(_SafeModel.Key);
             _SafeModel.Modified = false;
+            _SafeModel.Key = null;
             _PwdView.ShowInfo();
-
-            LbKeyList.Items.RemoveAt(LbKeyList.SelectedIndex);
         }
 
         public void ListKey(string catId)
