@@ -425,16 +425,16 @@
       <Item Id="key-label5" Type="toggle" Text="仅测试(@5)" ActionId="change-label" Group="key-label" Command="key-label:key-label5:5">
         <Icon Id="label5" Path="var:key-label5"/>
       </Item>
-      <Item Id="key-label6" Type="toggle" Text="已过期(@6)" ActionId="change-label" Group="key-label" Command="key-label:key-label6:6">
+      <Item Id="key-label6" Type="toggle" Text="已失效(@6)" ActionId="change-label" Group="key-label" Command="key-label:key-label6:6">
         <Icon Id="label6" Path="var:key-label6"/>
       </Item>
-      <Item Id="key-label7" Type="toggle" Text="已丢失(@7)" ActionId="change-label" Group="key-label" Command="key-label:key-label7:7">
+      <Item Id="key-label7" Type="toggle" Text="已过期(@7)" ActionId="change-label" Group="key-label" Command="key-label:key-label7:7">
         <Icon Id="label7" Path="var:key-label7"/>
       </Item>
-      <Item Id="key-label8" Type="toggle" Text="被禁用(@8)" ActionId="change-label" Group="key-label" Command="key-label:key-label8:8">
+      <Item Id="key-label8" Type="toggle" Text="已丢失(@8)" ActionId="change-label" Group="key-label" Command="key-label:key-label8:8">
         <Icon Id="label8" Path="var:key-label8"/>
       </Item>
-      <Item Id="key-label9" Type="toggle" Text="已删除(@9)" ActionId="change-label" Group="key-label" Command="key-label:key-label9:9">
+      <Item Id="key-label9" Type="toggle" Text="被禁用(@9)" ActionId="change-label" Group="key-label" Command="key-label:key-label9:9">
         <Icon Id="label9" Path="var:key-label9"/>
       </Item>
     </Menu>

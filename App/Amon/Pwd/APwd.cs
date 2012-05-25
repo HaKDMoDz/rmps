@@ -1441,9 +1441,9 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            using (StreamWriter sw = new StreamWriter(file, false))
+            using (StreamWriter stream = new StreamWriter(file, false))
             {
-                using (XmlWriter writer = XmlWriter.Create(sw))
+                using (XmlWriter writer = XmlWriter.Create(stream))
                 {
                     writer.WriteStartElement("Amon");
                     writer.WriteElementString("App", "APwd");
@@ -1461,7 +1461,7 @@ namespace Me.Amon.Pwd
                     writer.Flush();
                 }
 
-                sw.Close();
+                stream.Close();
             }
         }
         #endregion
@@ -1523,6 +1523,7 @@ namespace Me.Amon.Pwd
                     }
                     line = reader.ReadLine();
                 }
+                reader.Close();
             }
 
             DoListKey(cat.Id);
@@ -1558,33 +1559,34 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            using (XmlReader reader = XmlReader.Create(File.OpenText(file)))
+            StreamReader stream = File.OpenText(file);
+            XmlReader reader = XmlReader.Create(stream);
+            if (!reader.ReadToFollowing("App") || reader.ReadElementContentAsString() != "APwd")
             {
-                if (!reader.ReadToFollowing("App") || reader.ReadElementContentAsString() != "APwd")
+                Main.ShowAlert("未知的文件格式，无法进行导入处理！");
+                return;
+            }
+            if (reader.Name != "Ver" && !reader.ReadToFollowing("Ver"))
+            {
+                Main.ShowAlert("未知的文件版本，无法进行导入处理！");
+                return;
+            }
+            string ver = reader.ReadElementContentAsString();
+            if (ver != "1" && ver != "2")
+            {
+                Main.ShowAlert("未知的文件版本，无法进行导入处理！");
+                return;
+            }
+            while (reader.ReadToFollowing("Key"))
+            {
+                if (_SafeModel.ImportByXml(reader, ver))
                 {
-                    Main.ShowAlert("未知的文件格式，无法进行导入处理！");
-                    return;
-                }
-                if (reader.Name != "Ver" && !reader.ReadToFollowing("Ver"))
-                {
-                    Main.ShowAlert("未知的文件版本，无法进行导入处理！");
-                    return;
-                }
-                string ver = reader.ReadElementContentAsString();
-                if (ver != "1" && ver != "2")
-                {
-                    Main.ShowAlert("未知的文件版本，无法进行导入处理！");
-                    return;
-                }
-                while (reader.ReadToFollowing("Key"))
-                {
-                    if (_SafeModel.ImportByXml(reader, ver))
-                    {
-                        _SafeModel.Key.CatId = cat.Id;
-                        DoImportKey();
-                    }
+                    _SafeModel.Key.CatId = cat.Id;
+                    DoImportKey();
                 }
             }
+            reader.Close();
+            stream.Close();
 
             DoListKey(cat.Id);
         }
@@ -1854,6 +1856,7 @@ namespace Me.Amon.Pwd
                     }
                     line = reader.ReadLine();
                 }
+                reader.Close();
             }
             Main.ShowAlert(string.Format("成功导入 {0} 条记录！", cnt));
         }

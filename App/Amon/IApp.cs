@@ -4,8 +4,6 @@ namespace Me.Amon
 {
     public interface IApp
     {
-        void InitOnce();
-
         int AppId { get; set; }
 
         Form Form { get; }

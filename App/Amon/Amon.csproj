@@ -196,6 +196,36 @@
     <Compile Include="Gtd\EGtd.cs" />
     <Compile Include="Ico\EIco.cs" />
     <Compile Include="Ico\MIco.cs" />
+    <Compile Include="Img\AImg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Img\AImg.Designer.cs">
+      <DependentUpon>AImg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Img\V\Ico\AIco.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Img\V\Ico\AIco.Designer.cs">
+      <DependentUpon>AIco.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Img\V\Ico\IclEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Img\V\Ico\IclEditor.Designer.cs">
+      <DependentUpon>IclEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Img\V\Ico\IcoEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Img\V\Ico\IcoEditor.Designer.cs">
+      <DependentUpon>IcoEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Img\V\Png\APng.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Img\V\Png\APng.Designer.cs">
+      <DependentUpon>APng.cs</DependentUpon>
+    </Compile>
     <Compile Include="MApp.cs" />
     <Compile Include="Pwd\Att.cs" />
     <Compile Include="Pwd\Bean\ACall.cs">
@@ -354,6 +384,7 @@
     <Compile Include="Pwd\E\_Key\ChangeMajorAction.cs" />
     <Compile Include="Pwd\E\_Key\SortDirAction.cs" />
     <Compile Include="Pwd\E\_Key\SortKeyAction.cs" />
+    <Compile Include="Pwd\M\ViewModel1.cs" />
     <Compile Include="Pwd\_Att\CallAtt.cs" />
     <Compile Include="Da\DBAccess.cs" />
     <Compile Include="Da\DBObject.cs" />
@@ -882,6 +913,59 @@
     <Compile Include="Sql\ASql.Designer.cs">
       <DependentUpon>ASql.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sql\ESql.cs" />
+    <Compile Include="Sql\E\ASqlAction.cs" />
+    <Compile Include="Sql\E\SQLite\SQLiteAction.cs" />
+    <Compile Include="Sql\ISql.cs" />
+    <Compile Include="Sql\MSql.cs" />
+    <Compile Include="Sql\M\Ddl.cs" />
+    <Compile Include="Sql\M\Dml.cs" />
+    <Compile Include="Sql\M\Param.cs" />
+    <Compile Include="Sql\M\Rdbms.cs" />
+    <Compile Include="Sql\V\Editor\IEditor.cs" />
+    <Compile Include="Sql\V\Editor\SqlEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sql\V\Editor\SqlEditor.Designer.cs">
+      <DependentUpon>SqlEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\V\Editor\UdfEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sql\V\Editor\UdfEditor.Designer.cs">
+      <DependentUpon>UdfEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\V\Input\Data.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sql\V\Input\Data.Designer.cs">
+      <DependentUpon>Data.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\V\Input\Date.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sql\V\Input\Date.Designer.cs">
+      <DependentUpon>Date.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\V\Input\IInput.cs" />
+    <Compile Include="Sql\V\Input\List.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sql\V\Input\List.Designer.cs">
+      <DependentUpon>List.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\V\Input\None.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sql\V\Input\None.Designer.cs">
+      <DependentUpon>None.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\V\Input\Text.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sql\V\Input\Text.Designer.cs">
+      <DependentUpon>Text.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uc\Card.cs" />
     <Compile Include="Uc\ItemGroup.cs" />
     <Compile Include="Uc\KeyStroke.cs" />
@@ -1102,6 +1186,21 @@
       <DependentUpon>About.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Img\AImg.resx">
+      <DependentUpon>AImg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Img\V\Ico\AIco.resx">
+      <DependentUpon>AIco.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Img\V\Ico\IclEditor.resx">
+      <DependentUpon>IclEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Img\V\Ico\IcoEditor.resx">
+      <DependentUpon>IcoEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Img\V\Png\APng.resx">
+      <DependentUpon>APng.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -1307,6 +1406,27 @@
     <EmbeddedResource Include="Spy\AppWindow.resx">
       <DependentUpon>AppWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sql\ASql.resx">
+      <DependentUpon>ASql.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sql\V\Editor\SqlEditor.resx">
+      <DependentUpon>SqlEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sql\V\Editor\UdfEditor.resx">
+      <DependentUpon>UdfEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sql\V\Input\Data.resx">
+      <DependentUpon>Data.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sql\V\Input\Date.resx">
+      <DependentUpon>Date.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sql\V\Input\List.resx">
+      <DependentUpon>List.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sql\V\Input\Text.resx">
+      <DependentUpon>Text.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="User\Auth\AuthLk.resx">
       <DependentUpon>AuthLk.cs</DependentUpon>
     </EmbeddedResource>
@@ -1398,6 +1518,7 @@
     <Content Include="Amon.dat" />
     <Content Include="Amon.res" />
     <Content Include="Logo\logo.ico" />
+    <Content Include="Sql\Rdbms.xml" />
     <None Include="Resources\PosSel.png" />
     <None Include="Resources\PosDef.png" />
     <None Include="Resources\Eraser.png" />
@@ -1467,13 +1588,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Img\C\" />
+    <Folder Include="Img\E\" />
+    <Folder Include="Img\M\" />
     <Folder Include="Pwd\C\" />
     <Folder Include="Pwd\E\Edit\" />
     <Folder Include="Pwd\E\Skin\" />
-    <Folder Include="Pwd\M\" />
     <Folder Include="Sql\C\" />
-    <Folder Include="Sql\M\" />
-    <Folder Include="Sql\V\" />
+    <Folder Include="Sql\V\Export\" />
+    <Folder Include="Sql\V\Import\" />
+    <Folder Include="Sql\V\Result\" />
     <Folder Include="Sql\_Ddl\" />
     <Folder Include="Sql\_Dml\" />
   </ItemGroup>

@@ -51,7 +51,7 @@ namespace Me.Amon.Pwd.V.Pro
             return true;
         }
 
-        public bool Focus()
+        public new bool Focus()
         {
             if (string.IsNullOrEmpty(TbText.Text))
             {

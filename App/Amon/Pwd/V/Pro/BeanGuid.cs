@@ -145,7 +145,7 @@ namespace Me.Amon.Pwd.V.Pro
             return true;
         }
 
-        public bool Focus()
+        public new bool Focus()
         {
             return CbName.Focus();
         }
