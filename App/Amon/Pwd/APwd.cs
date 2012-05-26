@@ -1367,12 +1367,30 @@ namespace Me.Amon.Pwd
         /// </summary>
         public void ExportTxt()
         {
-            if (_SafeModel.Modified)
+            if (_SafeModel.Modified && DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
             {
-                if (DialogResult.Yes == Main.ShowConfirm("当前记录已被修改，要保存吗？"))
-                {
-                    return;
-                }
+                return;
+            }
+
+            TreeNode node = TvCatTree.SelectedNode;
+            if (node == null)
+            {
+                Main.ShowAlert("请选择您要导出的类别！");
+                TvCatTree.Focus();
+                return;
+            }
+            Cat cat = node.Tag as Cat;
+            if (cat == null)
+            {
+                return;
+            }
+
+            IList<Key> keys = _UserModel.DBA.ListKey(cat.Id);
+            if (keys.Count < 1)
+            {
+                Main.ShowAlert("当前类别下没有记录！");
+                TvCatTree.Focus();
+                return;
             }
 
             SaveFileDialog fd = new SaveFileDialog();
@@ -1391,8 +1409,14 @@ namespace Me.Amon.Pwd
             {
                 writer.WriteLine("APwd-2");
                 StringBuilder buffer = new StringBuilder();
-                _SafeModel.ExportAsTxt(buffer);
-                writer.WriteLine(buffer.ToString());
+                foreach (Key key in keys)
+                {
+                    _SafeModel.Key = key;
+                    _SafeModel.Decode();
+                    _SafeModel.ExportAsTxt(buffer);
+                    buffer.Append(Environment.NewLine);
+                }
+                writer.Write(buffer.ToString());
 
                 writer.Close();
             }
@@ -1421,8 +1445,8 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            IList<Key> recs = _UserModel.DBA.ListKey(cat.Id);
-            if (recs.Count < 1)
+            IList<Key> keys = _UserModel.DBA.ListKey(cat.Id);
+            if (keys.Count < 1)
             {
                 Main.ShowAlert("当前类别下没有记录！");
                 TvCatTree.Focus();
@@ -1449,9 +1473,9 @@ namespace Me.Amon.Pwd
                     writer.WriteElementString("App", "APwd");
                     writer.WriteElementString("Ver", "2");
                     writer.WriteStartElement("Keys");
-                    foreach (Key rec in recs)
+                    foreach (Key key in keys)
                     {
-                        _SafeModel.Key = rec;
+                        _SafeModel.Key = key;
                         _SafeModel.Decode();
                         _SafeModel.ExportAsXml(writer);
                     }
@@ -1560,7 +1584,7 @@ namespace Me.Amon.Pwd
             }
 
             StreamReader stream = File.OpenText(file);
-            XmlReader reader = XmlReader.Create(stream);
+            XmlReader reader = XmlReader.Create(stream, new XmlReaderSettings { IgnoreComments = true, IgnoreWhitespace = true });
             if (!reader.ReadToFollowing("App") || reader.ReadElementContentAsString() != "APwd")
             {
                 Main.ShowAlert("未知的文件格式，无法进行导入处理！");
@@ -1577,7 +1601,8 @@ namespace Me.Amon.Pwd
                 Main.ShowAlert("未知的文件版本，无法进行导入处理！");
                 return;
             }
-            while (reader.ReadToFollowing("Key"))
+            reader.ReadToFollowing("Key");
+            while (reader.Name == "Key")
             {
                 if (_SafeModel.ImportByXml(reader, ver))
                 {
@@ -2052,6 +2077,11 @@ namespace Me.Amon.Pwd
 
         private void DoImportKey()
         {
+            if (_SafeModel.Count < Att.HEAD_SIZE)
+            {
+                return;
+            }
+
             _SafeModel.Encode();
 
             _SafeModel.Key.AccessTime = DateTime.Now.ToString(EApp.DATEIME_FORMAT);

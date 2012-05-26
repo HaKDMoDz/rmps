@@ -1,21 +1,27 @@
 ﻿using System;
+using System.Drawing;
 using System.Drawing.IconLib;
 using System.Windows.Forms;
+using Me.Amon.Ico.V;
 using Me.Amon.Uc;
+using Me.Amon.Util;
 
 namespace Me.Amon.Ico
 {
     public partial class AIco : Form, IApp
     {
+        private int _TpCnt;
         private IIco _IIco;
+        private MultiIcon _MIcon;
         private XmlMenu<AIco> _XmlMenu;
-        private IclEditor _IclEditor;
         private IcoEditor _IcoEditor;
 
+        #region 构造函数
         public AIco()
         {
             InitializeComponent();
         }
+        #endregion
 
         #region 接口实现
         public int AppId
@@ -45,57 +51,70 @@ namespace Me.Amon.Ico
         }
         #endregion
 
+        #region 事件处理
         private void AIco_Load(object sender, EventArgs e)
         {
             _XmlMenu = new XmlMenu<AIco>(this, null);
             _XmlMenu.GetPopMenu("AIco", CmMenu);
-
-            _IclEditor = new IclEditor(this);
-            _IclEditor.InitOnce();
-            _IclEditor.Dock = DockStyle.Fill;
-            //_IclEditor.Location = new System.Drawing.Point(3, 3);
-            _IclEditor.Name = "iclEditor1";
-            //_IclEditor.Size = new System.Drawing.Size(435, 290);
-            _IclEditor.TabIndex = 0;
-            tabPage1.Controls.Add(_IclEditor);
-
-            _IIco = _IclEditor;
         }
 
-        public void AddTab(string msg, SingleIcon ico)
+        private void PbMenu_Click(object sender, EventArgs e)
         {
+            CmMenu.Show(PbMenu, 0, PbMenu.Height);
+        }
+
+        private void BnSave_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region 公共函数
+        #endregion
+
+        private void LvIco_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (LvIco.SelectedItems.Count < 1)
+            {
+                return;
+            }
+            ListViewItem item = LvIco.SelectedItems[0];
+            SingleIcon sIcon = _MIcon[item.Name];
+            if (sIcon == null)
+            {
+                return;
+            }
+            AddTab(item.Text, sIcon);
+        }
+
+        #region 私有函数
+        private void AddTab(string msg, SingleIcon ico)
+        {
+            _TpCnt += 1;
+
             TabPage page = new TabPage();
-            page.TabIndex = tabControl1.TabCount;
+            page.TabIndex = _TpCnt;
             page.Text = msg;
             //page.UseVisualStyleBackColor = true;
+            TcIco.TabPages.Add(page);
+            TcIco.SelectedTab = page;
+
             IcoEditor png = new IcoEditor();
             png.InitOnce();
             png.Dock = DockStyle.Fill;
-            page.Controls.Add(png);
-            tabControl1.TabPages.Add(page);
-
             png.SingleIcon = ico;
+            page.Controls.Add(png);
         }
 
-        private void ShowIco()
+        private Image GetBitmap(SingleIcon sIcon)
         {
-            //if (_IImg != null)
-            //{
-            //    Controls.Remove(_IImg.Control);
-            //}
-
-            //if (_AIco == null)
-            //{
-            //    _AIco = new AIco(this);
-            //    _AIco.InitOnce();
-            //}
-
-            //_AIco.Location = new System.Drawing.Point(12, 12);
-            //_AIco.Size = new System.Drawing.Size(260, 231);
-            //_AIco.TabIndex = 0;
-            //Controls.Add(_AIco);
-
-            //_IImg = _AIco;
+            Image bmp = sIcon.Icon.ToBitmap();
+            if (bmp.Width != 32)
+            {
+                bmp = BeanUtil.ScaleImage(bmp, 32, true);
+            }
+            return bmp;
         }
+        #endregion
     }
 }

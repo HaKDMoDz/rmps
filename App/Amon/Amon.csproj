@@ -32,7 +32,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
     <ApplicationRevision>8</ApplicationRevision>
-    <ApplicationVersion>7.0.2.%2a</ApplicationVersion>
+    <ApplicationVersion>7.0.3.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -210,12 +210,6 @@
     <Compile Include="Img\E\SaveAction.cs" />
     <Compile Include="Img\IImg.cs" />
     <Compile Include="Img\MImg.cs" />
-    <Compile Include="Ico\V\IclEditor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Ico\V\IclEditor.Designer.cs">
-      <DependentUpon>IclEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="Ico\V\IcoEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -891,11 +885,11 @@
       <DependentUpon>DigestText.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
-    <Compile Include="Spy\AppWindow.cs">
+    <Compile Include="Spy\V\App.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Spy\AppWindow.designer.cs">
-      <DependentUpon>AppWindow.cs</DependentUpon>
+    <Compile Include="Spy\V\App.designer.cs">
+      <DependentUpon>App.cs</DependentUpon>
     </Compile>
     <Compile Include="Spy\ASpy.cs">
       <SubType>Form</SubType>
@@ -1185,9 +1179,6 @@
     <EmbeddedResource Include="Img\AImg.resx">
       <DependentUpon>AImg.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Ico\V\IclEditor.resx">
-      <DependentUpon>IclEditor.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Ico\V\IcoEditor.resx">
       <DependentUpon>IcoEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -1393,8 +1384,8 @@
     <EmbeddedResource Include="Sec\V\Wiz\DigestText.resx">
       <DependentUpon>DigestText.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Spy\AppWindow.resx">
-      <DependentUpon>AppWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Spy\V\App.resx">
+      <DependentUpon>App.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sql\ASql.resx">
       <DependentUpon>ASql.cs</DependentUpon>
@@ -1508,7 +1499,6 @@
     <Content Include="Amon.dat" />
     <Content Include="Amon.res" />
     <Content Include="Logo\logo.ico" />
-    <Content Include="Sql\Rdbms.xml" />
     <None Include="Resources\PosSel.png" />
     <None Include="Resources\PosDef.png" />
     <None Include="Resources\Eraser.png" />
@@ -1588,6 +1578,9 @@
     <Folder Include="Sec\C\" />
     <Folder Include="Sec\E\" />
     <Folder Include="Sec\M\" />
+    <Folder Include="Spy\C\" />
+    <Folder Include="Spy\E\" />
+    <Folder Include="Spy\M\" />
     <Folder Include="Sql\C\" />
     <Folder Include="Sql\V\Export\" />
     <Folder Include="Sql\V\Import\" />

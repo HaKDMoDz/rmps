@@ -4,7 +4,7 @@ using System.Drawing.IconLib;
 using System.Windows.Forms;
 using Me.Amon.Util;
 
-namespace Me.Amon.Ico
+namespace Me.Amon.Ico.V
 {
     public partial class IcoEditor : UserControl, IIco
     {

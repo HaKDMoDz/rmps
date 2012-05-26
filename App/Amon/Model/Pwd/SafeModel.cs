@@ -459,28 +459,24 @@ namespace Me.Amon.Model.Pwd
 
         public bool ImportByXml(XmlReader reader, string ver)
         {
-            if (reader == null || !reader.ReadToDescendant("Att"))
+            if (reader == null || reader.Name != "Key")
             {
                 return false;
             }
 
             Clear();
             _Key = new Key();
+            _Key.CatId = reader.GetAttribute("Cat");
+            reader.ReadToDescendant("Att");
 
-            if (reader.MoveToAttribute("Cat"))
+            while (reader.Name == "Att")
             {
-                Key.CatId = reader.ReadContentAsString();
-            }
-
-            do
-            {
-                if (!reader.ReadToDescendant("Type"))
+                string type = reader.GetAttribute("Type");
+                if (!CharUtil.IsValidateLong(type))
                 {
                     continue;
                 }
-
-                int type = reader.ReadElementContentAsInt();
-                Att item = Att.GetInstance(type);
+                Att item = Att.GetInstance(int.Parse(type));
                 if (item == null)
                 {
                     return false;
@@ -491,8 +487,12 @@ namespace Me.Amon.Model.Pwd
                     item.Id = (_Key.AttIndex++).ToString();
                     _AttList.Add(item);
                 }
-            } while (reader.ReadToFollowing("Att"));
+            };
 
+            if (reader.Name == "Key" && reader.NodeType == XmlNodeType.EndElement)
+            {
+                reader.ReadEndElement();
+            }
             return true;
         }
 
@@ -508,6 +508,7 @@ namespace Me.Amon.Model.Pwd
             foreach (Att att in _AttList)
             {
                 writer.WriteStartElement("Att");
+                writer.WriteAttributeString("Type", att.Type.ToString());
                 att.ExportAsXml(writer);
                 writer.WriteEndElement();
             }

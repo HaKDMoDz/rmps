@@ -270,7 +270,6 @@ namespace Me.Amon.Pwd
         /// <returns></returns>
         public bool ExportAsXml(XmlWriter writer)
         {
-            writer.WriteElementString("Type", Type.ToString());
             writer.WriteElementString("Name", Name);
             writer.WriteElementString("Text", Text);
             writer.WriteElementString("Data", Data);
@@ -413,17 +412,22 @@ namespace Me.Amon.Pwd
                     _Spec = new string[cnt];
                     for (int i = 0; i < cnt; i += 1)
                     {
-                        reader.MoveToAttribute("V" + i);
-                        _Spec[i] = reader.ReadContentAsString();
+                        _Spec[i] = reader.GetAttribute("V" + i);
                     }
                 }
+                reader.Read();
+            }
+
+            if (reader.Name == "Att" && reader.NodeType == XmlNodeType.EndElement)
+            {
+                reader.ReadEndElement();
             }
             return true;
         }
 
         private bool ImportByXml_1(XmlReader reader)
         {
-            if (reader.Name == "Name")
+            if (reader.Name == "Name" || reader.ReadToDescendant("Name"))
             {
                 Text = reader.ReadElementContentAsString();
             }
@@ -436,7 +440,7 @@ namespace Me.Amon.Pwd
 
         private bool ImportByXml_2(XmlReader reader)
         {
-            if (reader.Name == "Name")
+            if (reader.Name == "Name" || reader.ReadToDescendant("Name"))
             {
                 Name = reader.ReadElementContentAsString();
             }

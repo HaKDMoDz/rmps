@@ -350,7 +350,7 @@ namespace Me.Amon.User.Sign
                 }
 
                 Key key;
-                while (reader.ReadToFollowing("Key"))
+                while (reader.Name == "Key" || reader.ReadToFollowing("Key"))
                 {
                     key = new Key();
                     if (!key.FromXml(reader))

@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Ico
+﻿namespace Me.Amon.Ico.V
 {
     partial class IcoEditor
     {
