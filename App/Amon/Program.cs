@@ -19,9 +19,7 @@ namespace Me.Amon
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Main main = new Main();
-            main.InitOnce();
-            Application.Run(main);
+            Application.Run(new Main());
         }
     }
 }

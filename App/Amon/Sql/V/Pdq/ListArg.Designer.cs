@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Sql.V.Input
+﻿namespace Me.Amon.Sql.V.Pdq
 {
     partial class List
     {

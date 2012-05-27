@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Sec.Wiz
+﻿namespace Me.Amon.Sec.V.Wiz
 {
     partial class CipherFile
     {

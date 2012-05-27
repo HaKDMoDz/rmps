@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Sec.Wiz
+﻿namespace Me.Amon.Sec.V.Wiz
 {
     partial class DigestText
     {
@@ -36,6 +36,8 @@
             // 
             // TbDst
             // 
+            this.TbDst.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TbDst.Location = new System.Drawing.Point(0, 108);
             this.TbDst.Multiline = true;
             this.TbDst.Name = "TbDst";
@@ -45,6 +47,7 @@
             // 
             // LbDst
             // 
+            this.LbDst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LbDst.AutoSize = true;
             this.LbDst.Location = new System.Drawing.Point(0, 93);
             this.LbDst.Name = "LbDst";
@@ -54,6 +57,9 @@
             // 
             // TbSrc
             // 
+            this.TbSrc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TbSrc.Location = new System.Drawing.Point(0, 17);
             this.TbSrc.Multiline = true;
             this.TbSrc.Name = "TbSrc";

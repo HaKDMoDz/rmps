@@ -39,22 +39,6 @@ namespace Me.Amon.Bar
         #endregion
 
         #region 接口实现
-        public void InitOnce()
-        {
-            CbOpt.Items.Add(new Item { K = "", V = "请选择" });
-            CbOpt.Items.Add(new Item { K = EBar.OPT_TEXT, V = "文本" });
-            CbOpt.Items.Add(new Item { K = EBar.OPT_NOTE, V = "记事" });
-            CbOpt.Items.Add(new Item { K = EBar.OPT_VCARD, V = "名片" });
-            CbOpt.Items.Add(new Item { K = EBar.OPT_EMAIL, V = "邮件" });
-            CbOpt.Items.Add(new Item { K = EBar.OPT_SMS, V = "短信" });
-            CbOpt.Items.Add(new Item { K = EBar.OPT_TEL, V = "电话号码" });
-            CbOpt.Items.Add(new Item { K = EBar.OPT_URL, V = "网址收藏" });
-            CbOpt.Items.Add(new Item { K = EBar.OPT_WIFI, V = "WiFi网络" });
-            CbOpt.SelectedIndex = 0;
-
-            PbIcon.BackColor = Color.White;
-        }
-
         public int AppId
         {
             get;
@@ -78,6 +62,22 @@ namespace Me.Amon.Bar
         #endregion
 
         #region 事件处理
+        private void ABar_Load(object sender, EventArgs e)
+        {
+            CbOpt.Items.Add(new Item { K = "", V = "请选择" });
+            CbOpt.Items.Add(new Item { K = EBar.OPT_TEXT, V = "文本" });
+            CbOpt.Items.Add(new Item { K = EBar.OPT_NOTE, V = "记事" });
+            CbOpt.Items.Add(new Item { K = EBar.OPT_VCARD, V = "名片" });
+            CbOpt.Items.Add(new Item { K = EBar.OPT_EMAIL, V = "邮件" });
+            CbOpt.Items.Add(new Item { K = EBar.OPT_SMS, V = "短信" });
+            CbOpt.Items.Add(new Item { K = EBar.OPT_TEL, V = "电话号码" });
+            CbOpt.Items.Add(new Item { K = EBar.OPT_URL, V = "网址收藏" });
+            CbOpt.Items.Add(new Item { K = EBar.OPT_WIFI, V = "WiFi网络" });
+            CbOpt.SelectedIndex = 0;
+
+            PbIcon.BackColor = Color.White;
+        }
+
         private void CbOpt_SelectedIndexChanged(object sender, EventArgs e)
         {
             Item item = CbOpt.SelectedItem as Item;

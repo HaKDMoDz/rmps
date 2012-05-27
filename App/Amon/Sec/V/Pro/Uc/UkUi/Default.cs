@@ -1,5 +1,5 @@
 ﻿
-namespace Me.Amon.Sec.Pro.Uc.UkUi
+namespace Me.Amon.Sec.V.Pro.Uc.UkUi
 {
     public class Default : AUk
     {

@@ -34,6 +34,7 @@
             this.CbOpt = new System.Windows.Forms.ComboBox();
             this.PbIcon = new System.Windows.Forms.PictureBox();
             this.GbSet = new System.Windows.Forms.GroupBox();
+            this.UcUserSet = new Me.Amon.Bar.UserSet();
             this.GbOpt = new System.Windows.Forms.GroupBox();
             this.PbMenu = new System.Windows.Forms.PictureBox();
             this.BtEnc = new System.Windows.Forms.Button();
@@ -46,7 +47,6 @@
             this.FdOpen = new System.Windows.Forms.OpenFileDialog();
             this.FdSave = new System.Windows.Forms.SaveFileDialog();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
-            this.UcUserSet = new Me.Amon.Bar.UserSet();
             ((System.ComponentModel.ISupportInitialize)(this.PbIcon)).BeginInit();
             this.GbSet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).BeginInit();
@@ -91,6 +91,13 @@
             this.GbSet.TabIndex = 3;
             this.GbSet.TabStop = false;
             this.GbSet.Text = "设置";
+            // 
+            // UcUserSet
+            // 
+            this.UcUserSet.Location = new System.Drawing.Point(6, 20);
+            this.UcUserSet.Name = "UcUserSet";
+            this.UcUserSet.Size = new System.Drawing.Size(296, 76);
+            this.UcUserSet.TabIndex = 0;
             // 
             // GbOpt
             // 
@@ -174,13 +181,6 @@
             // 
             this.FdOpen.FileName = "openFileDialog1";
             // 
-            // UcUserSet
-            // 
-            this.UcUserSet.Location = new System.Drawing.Point(6, 20);
-            this.UcUserSet.Name = "UcUserSet";
-            this.UcUserSet.Size = new System.Drawing.Size(296, 76);
-            this.UcUserSet.TabIndex = 0;
-            // 
             // ABar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -200,6 +200,7 @@
             this.Name = "ABar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "阿木二维码";
+            this.Load += new System.EventHandler(this.ABar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PbIcon)).EndInit();
             this.GbSet.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();

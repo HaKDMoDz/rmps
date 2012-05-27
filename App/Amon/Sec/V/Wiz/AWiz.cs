@@ -2,11 +2,13 @@
 using System.Windows.Forms;
 using Me.Amon.Uc;
 
-namespace Me.Amon.Sec.Wiz
+namespace Me.Amon.Sec.V.Wiz
 {
     public partial class AWiz : UserControl, ISec
     {
         private ASec _ASec;
+        private IView _IFile;
+        private IView _IText;
 
         public AWiz()
         {
@@ -22,14 +24,10 @@ namespace Me.Amon.Sec.Wiz
 
         public void InitOnce()
         {
+            CbDir.Items.Add(new Item { K = "hash", V = "摘要" });
             CbDir.Items.Add(new Item { K = "enc", V = "加密" });
             CbDir.Items.Add(new Item { K = "dec", V = "解密" });
-            CbDir.Items.Add(new Item { K = "hash", V = "摘要" });
             CbDir.SelectedIndex = 0;
-
-            CbMod.Items.Add(new Item { K = "file", V = "文件" });
-            CbMod.Items.Add(new Item { K = "text", V = "文本" });
-            CbMod.SelectedIndex = 0;
         }
 
         public void InitView()
@@ -67,16 +65,6 @@ namespace Me.Amon.Sec.Wiz
             }
 
             CbFun.Items.Clear();
-            if (item.K == "enc" || item.K == "dec")
-            {
-                CbFun.Items.Add(new Item { K = "AES", V = "AES" });
-                CbFun.Items.Add(new Item { K = "DES", V = "DES" });
-                CbFun.Items.Add(new Item { K = "RC4", V = "RC4" });
-                CbFun.Items.Add(new Item { K = "RC6", V = "RC6" });
-                CbFun.SelectedIndex = 0;
-                ShowCipher();
-                return;
-            }
             if (item.K == "hash")
             {
                 CbFun.Items.Add(new Item { K = "MD5", V = "MD5" });
@@ -85,6 +73,16 @@ namespace Me.Amon.Sec.Wiz
                 CbFun.Items.Add(new Item { K = "SHA512", V = "SHA512" });
                 CbFun.SelectedIndex = 0;
                 ShowDigest();
+                return;
+            }
+            if (item.K == "enc" || item.K == "dec")
+            {
+                CbFun.Items.Add(new Item { K = "AES", V = "AES" });
+                CbFun.Items.Add(new Item { K = "DES", V = "DES" });
+                CbFun.Items.Add(new Item { K = "RC4", V = "RC4" });
+                CbFun.Items.Add(new Item { K = "RC6", V = "RC6" });
+                CbFun.SelectedIndex = 0;
+                ShowCipher();
                 return;
             }
         }
@@ -101,14 +99,60 @@ namespace Me.Amon.Sec.Wiz
 
         private void ShowCipher()
         {
-            //_WizView = new Cipher();
-            //_WizView.InitOnce();
+            if (_CFile == null)
+            {
+                _CFile = new CipherFile();
+                _CFile.Dock = DockStyle.Fill;
+            }
+            if (_IFile != null)
+            {
+                TpFile.Controls.Remove(_IFile.Control);
+            }
+            TpFile.Controls.Add(_CFile);
+            _IFile = _CFile;
+
+            if (_CText == null)
+            {
+                _CText = new CipherText();
+                _CText.Dock = DockStyle.Fill;
+            }
+            if (_IText != null)
+            {
+                TpText.Controls.Remove(_IText.Control);
+            }
+            TpText.Controls.Add(_CText);
+            _IText = _CText;
         }
+        private CipherFile _CFile;
+        private CipherText _CText;
 
         private void ShowDigest()
         {
-            //_WizView = new Digest();
-            //_WizView.InitOnce();
+            if (_DFile == null)
+            {
+                _DFile = new DigestFile();
+                _DFile.Dock = DockStyle.Fill;
+            }
+            if (_IFile != null)
+            {
+                TpFile.Controls.Remove(_IFile.Control);
+            }
+            TpFile.Controls.Add(_DFile);
+            _IFile = _DFile;
+
+            if (_DText == null)
+            {
+                _DText = new DigestText();
+                _DText.Dock = DockStyle.Fill;
+            }
+            if (_IText != null)
+            {
+                TpText.Controls.Remove(_IText.Control);
+            }
+            TpText.Controls.Add(_DText);
+            _IText = _DText;
         }
+        private DigestFile _DFile;
+        private DigestText _DText;
     }
 }

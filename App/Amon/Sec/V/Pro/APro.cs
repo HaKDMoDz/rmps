@@ -4,15 +4,15 @@ using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Pwd;
 using Me.Amon.Model;
-using Me.Amon.Sec.Pro.Uc;
-using Me.Amon.Sec.Pro.Uw;
+using Me.Amon.Sec.V.Pro.Uc;
+using Me.Amon.Sec.V.Pro.Uw;
 using Me.Amon.Uc;
 using Me.Amon.Util;
 using Me.Amon.Uw;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Paddings;
 
-namespace Me.Amon.Sec.Pro
+namespace Me.Amon.Sec.V.Pro
 {
     public partial class APro : UserControl, ISec
     {
@@ -49,7 +49,7 @@ namespace Me.Amon.Sec.Pro
             // 
             // UcDo
             // 
-            _UcDo = new Me.Amon.Sec.Pro.Uc.Do(this);
+            _UcDo = new Me.Amon.Sec.V.Pro.Uc.Do(this);
             _UcDo.Init();
             _UcDo.Location = new System.Drawing.Point(246, 134);
             _UcDo.Name = "UcDo";
@@ -60,7 +60,7 @@ namespace Me.Amon.Sec.Pro
             // 
             // UcDi
             // 
-            _UcDi = new Me.Amon.Sec.Pro.Uc.Di(this);
+            _UcDi = new Me.Amon.Sec.V.Pro.Uc.Di(this);
             _UcDi.Init();
             _UcDi.Location = new System.Drawing.Point(0, 134);
             _UcDi.Name = "UcDi";
@@ -71,7 +71,7 @@ namespace Me.Amon.Sec.Pro
             // 
             // UcUk
             // 
-            _UcUk = new Me.Amon.Sec.Pro.Uc.Uk(this);
+            _UcUk = new Me.Amon.Sec.V.Pro.Uc.Uk(this);
             _UcUk.Init();
             _UcUk.Location = new System.Drawing.Point(246, 26);
             _UcUk.Name = "UcUk";
@@ -82,7 +82,7 @@ namespace Me.Amon.Sec.Pro
             // 
             // UcCm
             // 
-            _UcCm = new Me.Amon.Sec.Pro.Uc.Cm(this);
+            _UcCm = new Me.Amon.Sec.V.Pro.Uc.Cm(this);
             _UcCm.Init();
             _UcCm.Location = new System.Drawing.Point(0, 26);
             _UcCm.Name = "UcCm";

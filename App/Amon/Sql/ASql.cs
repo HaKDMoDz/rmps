@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Sql.Editor;
 using Me.Amon.Sql.M;
 using Me.Amon.Sql.Model;
+using Me.Amon.Sql.V;
 using Me.Amon.Util;
 
 namespace Me.Amon.Sql
@@ -23,6 +22,8 @@ namespace Me.Amon.Sql
         private IDbCommand _Command;
         private IDbDataAdapter _Adapter;
         private Dictionary<string, Assembly> _Assemblys;
+        private List<Rdbms> _Drives;
+        private DbResult _DataGrid;
         #endregion
 
         #region 构造函数
@@ -61,83 +62,19 @@ namespace Me.Amon.Sql
         }
         #endregion
 
-        #region 私有函数
-        private void InitDB(string file, char sep)
+        public Rdbms Dbms
         {
-            string name = Path.GetFileNameWithoutExtension(file);
-            IDbConnection con = GetConnection();
-            IDbCommand cmd = GetCommand();
-            cmd.Connection = con;
-            cmd.CommandText = string.Format("drop table if exists {0}", name);
-            cmd.ExecuteNonQuery();
-
-            using (StreamReader reader = new StreamReader(file))
+            get
             {
-                string line = reader.ReadLine();
-                if (string.IsNullOrWhiteSpace(line))
-                {
-                    return;
-                }
-                string[] header = line.Split(sep);
-                StringBuilder builder = new StringBuilder();
-                builder.Append(string.Format("CREATE TABLE {0} (", name));
-                for (int i = 0; i < header.Length; i += 1)
-                {
-                    line = (header[i] ?? "").Trim();
-                    if (!Regex.IsMatch(line, "^[\\w]+$"))
-                    {
-                        return;
-                    }
-                    builder.Append(string.Format("{0} VARCHAR(8),", line));
-                }
-                builder.Remove(builder.Length - 1, 1).Append(')');
-                cmd.CommandText = builder.ToString();
-                cmd.ExecuteNonQuery();
-                builder.Clear();
-
-                IDbTransaction trans = con.BeginTransaction();
-                line = reader.ReadLine();
-                string[] detail;
-                int idx;
-                int max;
-                int cnt = 0;
-                while (line != null)
-                {
-                    if (string.IsNullOrWhiteSpace(line))
-                    {
-                        line = reader.ReadLine();
-                        continue;
-                    }
-                    idx = 0;
-
-                    detail = line.Split(sep);
-                    builder.Append(string.Format("INSERT INTO {0} VALUES (", name));
-                    max = detail.Length <= header.Length ? detail.Length : header.Length;
-                    while (idx < max)
-                    {
-                        builder.Append(string.Format("'{0}',", detail[idx]));
-                        idx += 1;
-                    }
-                    while (idx < header.Length)
-                    {
-                        builder.Append("null,");
-                        idx += 1;
-                    }
-                    builder.Remove(builder.Length - 1, 1).Append(')');
-                    cmd.CommandText = builder.ToString();
-                    cmd.ExecuteNonQuery();
-                    builder.Clear();
-                    cnt += 1;
-
-                    line = reader.ReadLine();
-                }
-                trans.Commit();
-
-                ShowEcho(string.Format("成功导入 {0} 条记录！", cnt));
+                return _Dbms;
             }
-            cmd.Dispose();
+            set
+            {
+                _Dbms = value;
+            }
         }
 
+        #region 私有函数
         private void DoExecute()
         {
             if (!_Param.Check())
@@ -150,7 +87,7 @@ namespace Me.Amon.Sql
             command.CommandText = sql;
             if (!sql.ToLower().StartsWith("select"))
             {
-                //GvDataList.Rows.Clear();
+                _DataGrid.DataSource = null;
                 int row = command.ExecuteNonQuery();
                 ShowEcho(string.Format("共影响 {0} 条数据", row));
                 return;
@@ -162,8 +99,7 @@ namespace Me.Amon.Sql
             adapter.Fill(dataSet);
             if (dataSet.Tables.Count > 0)
             {
-                //GvDataList.DataSource = dataSet.Tables[0];
-
+                _DataGrid.DataSource = dataSet.Tables[0];
                 ShowEcho(string.Format("查询结果共 {0} 条", dataSet.Tables[0].Rows.Count));
             }
         }
@@ -224,18 +160,24 @@ namespace Me.Amon.Sql
         {
             _Param = UcUdf;
 
-            StreamReader reader = File.OpenText("Rdbms.xml");
+            if (!File.Exists(ESql.DBMS_FILE))
+            {
+                return;
+            }
+
+            StreamReader reader = File.OpenText(ESql.DBMS_FILE);
             XmlDocument doc = new XmlDocument();
             doc.Load(reader);
             reader.Close();
 
             LoadLib(doc);
 
+            _Drives = new List<Rdbms>();
             foreach (XmlNode node in doc.SelectNodes("/Amon/RDBMS"))
             {
                 Rdbms dbms = new Rdbms();
                 dbms.FromXml(node);
-                _Dbms = dbms;
+                _Drives.Add(dbms);
             }
         }
 
@@ -245,6 +187,11 @@ namespace Me.Amon.Sql
             {
                 DoExecute();
             }
+        }
+
+        private void PbMenu_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void TcParams_SelectedIndexChanged(object sender, EventArgs e)
@@ -262,23 +209,25 @@ namespace Me.Amon.Sql
             }
         }
 
-        private void BtSelect_Click(object sender, EventArgs e)
+        private void TcResult_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DoExecute();
+            TabPage page = TcResult.SelectedTab;
+            _DataGrid = page.Controls[0] as DbResult;
         }
 
-        private void BtImport_Click(object sender, EventArgs e)
+        private void TcResult_TabClosing(object sender, TabControlCancelEventArgs e)
         {
-            //if (DialogResult.OK != FdOpen.ShowDialog())
-            //{
-            //    return;
-            //}
-            //InitDB(FdOpen.FileName, ',');
+            e.Cancel = TcResult.TabCount < 2;
+        }
+
+        private void BnExecute_Click(object sender, EventArgs e)
+        {
+            DoExecute();
         }
         #endregion
 
         #region 数据库操作
-        private IDbConnection GetConnection()
+        public IDbConnection GetConnection()
         {
             if (_Connect != null)
             {
@@ -295,7 +244,7 @@ namespace Me.Amon.Sql
             return _Connect;
         }
 
-        private IDbCommand GetCommand()
+        public IDbCommand GetCommand()
         {
             if (_Command != null)
             {
@@ -336,10 +285,5 @@ namespace Me.Amon.Sql
             }
         }
         #endregion
-
-        private void PbMenu_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

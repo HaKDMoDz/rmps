@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Sec.Wiz
+﻿namespace Me.Amon.Sec.V.Wiz
 {
     partial class CipherText
     {
@@ -45,6 +45,9 @@
             // 
             // TbSrc
             // 
+            this.TbSrc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TbSrc.Location = new System.Drawing.Point(0, 18);
             this.TbSrc.Multiline = true;
             this.TbSrc.Name = "TbSrc";
@@ -53,6 +56,7 @@
             // 
             // LbDst
             // 
+            this.LbDst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LbDst.AutoSize = true;
             this.LbDst.Location = new System.Drawing.Point(0, 94);
             this.LbDst.Name = "LbDst";
@@ -62,6 +66,8 @@
             // 
             // TbDst
             // 
+            this.TbDst.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TbDst.Location = new System.Drawing.Point(0, 109);
             this.TbDst.Multiline = true;
             this.TbDst.Name = "TbDst";

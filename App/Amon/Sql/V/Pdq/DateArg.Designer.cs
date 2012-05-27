@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Sql.Editor
+﻿namespace Me.Amon.Sql.V.Pdq
 {
-    partial class SqlEditor
+    partial class Date
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,31 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TbSql = new System.Windows.Forms.TextBox();
+            this.DtParam = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
-            // TbSql
+            // DtParam
             // 
-            this.TbSql.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TbSql.Location = new System.Drawing.Point(0, 0);
-            this.TbSql.Multiline = true;
-            this.TbSql.Name = "TbSql";
-            this.TbSql.Size = new System.Drawing.Size(150, 150);
-            this.TbSql.TabIndex = 0;
+            this.DtParam.Location = new System.Drawing.Point(3, 3);
+            this.DtParam.Name = "DtParam";
+            this.DtParam.Size = new System.Drawing.Size(200, 21);
+            this.DtParam.TabIndex = 0;
             // 
-            // SqlEditor
+            // Date
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.TbSql);
-            this.Name = "SqlEditor";
+            this.Controls.Add(this.DtParam);
+            this.Name = "Date";
+            this.Size = new System.Drawing.Size(150, 27);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox TbSql;
+        private System.Windows.Forms.DateTimePicker DtParam;
     }
 }

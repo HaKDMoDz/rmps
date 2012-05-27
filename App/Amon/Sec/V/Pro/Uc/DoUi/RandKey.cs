@@ -2,7 +2,7 @@
 using Me.Amon.Uc;
 using Me.Amon.Util;
 
-namespace Me.Amon.Sec.Pro.Uc.DoUi
+namespace Me.Amon.Sec.V.Pro.Uc.DoUi
 {
     public class RandKey : ADo
     {

@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using Me.Amon.Sql.Model;
 
-namespace Me.Amon.Sql.V.Input
+namespace Me.Amon.Sql.V.Pdq
 {
     public interface IInput
     {

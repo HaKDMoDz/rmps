@@ -32,7 +32,26 @@ namespace Me.Amon.Ren
         #endregion
 
         #region 接口实现
-        public void InitOnce()
+        public int AppId { get; set; }
+
+        public Form Form
+        {
+            get { return this; }
+        }
+
+        public bool WillExit()
+        {
+            return true;
+        }
+
+        public bool SaveData()
+        {
+            return true;
+        }
+        #endregion
+
+        #region 事件处理
+        private void ARen_Load(object sender, EventArgs e)
         {
             _DataList = new DataTable();
             _DataList.Columns.Add("OldName", typeof(string));
@@ -73,25 +92,6 @@ namespace Me.Amon.Ren
             }
         }
 
-        public int AppId { get; set; }
-
-        public Form Form
-        {
-            get { return this; }
-        }
-
-        public bool WillExit()
-        {
-            return true;
-        }
-
-        public bool SaveData()
-        {
-            return true;
-        }
-        #endregion
-
-        #region 事件处理
         private void PbSelect_Click(object sender, EventArgs e)
         {
             if (DialogResult.OK != FdBrowser.ShowDialog(this))

@@ -28,73 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TcParams = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.TcResult = new System.Windows.Forms.TabControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ASql));
             this.PbMenu = new System.Windows.Forms.PictureBox();
             this.LblEcho = new System.Windows.Forms.Label();
-            this.BtnOk = new System.Windows.Forms.Button();
-            this.UcUdf = new Me.Amon.Sql.Editor.UdfEditor();
+            this.BnExecute = new System.Windows.Forms.Button();
+            this.TcResult = new System.Windows.Forms.ATabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.dbResult1 = new Me.Amon.Sql.V.DbResult();
+            this.TcParams = new System.Windows.Forms.ATabControl();
+            this.TpPdq = new System.Windows.Forms.TabPage();
+            this.UcUdf = new Me.Amon.Sql.Editor.PdqEditor();
+            this.TpSql = new System.Windows.Forms.TabPage();
             this.UcSql = new Me.Amon.Sql.Editor.SqlEditor();
-            this.TcParams.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.TcResult.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).BeginInit();
+            this.TcResult.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.TcParams.SuspendLayout();
+            this.TpPdq.SuspendLayout();
+            this.TpSql.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // TcParams
-            // 
-            this.TcParams.Controls.Add(this.tabPage1);
-            this.TcParams.Controls.Add(this.tabPage2);
-            this.TcParams.Location = new System.Drawing.Point(12, 12);
-            this.TcParams.Name = "TcParams";
-            this.TcParams.SelectedIndex = 0;
-            this.TcParams.Size = new System.Drawing.Size(672, 163);
-            this.TcParams.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.UcUdf);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(664, 137);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.UcSql);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(664, 137);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // TcResult
-            // 
-            this.TcResult.Controls.Add(this.tabPage3);
-            this.TcResult.Location = new System.Drawing.Point(12, 181);
-            this.TcResult.Name = "TcResult";
-            this.TcResult.SelectedIndex = 0;
-            this.TcResult.Size = new System.Drawing.Size(672, 167);
-            this.TcResult.TabIndex = 1;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(664, 141);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "tabPage3";
-            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // PbMenu
             // 
@@ -115,30 +67,135 @@
             this.LblEcho.TabIndex = 3;
             this.LblEcho.Text = "label1";
             // 
-            // BtnOk
+            // BnExecute
             // 
-            this.BtnOk.Location = new System.Drawing.Point(609, 377);
-            this.BtnOk.Name = "BtnOk";
-            this.BtnOk.Size = new System.Drawing.Size(75, 23);
-            this.BtnOk.TabIndex = 4;
-            this.BtnOk.Text = "执行(&R)";
-            this.BtnOk.UseVisualStyleBackColor = true;
-            this.BtnOk.Click += new System.EventHandler(this.BtSelect_Click);
+            this.BnExecute.Location = new System.Drawing.Point(609, 377);
+            this.BnExecute.Name = "BnExecute";
+            this.BnExecute.Size = new System.Drawing.Size(75, 23);
+            this.BnExecute.TabIndex = 4;
+            this.BnExecute.Text = "执行(&R)";
+            this.BnExecute.UseVisualStyleBackColor = true;
+            this.BnExecute.Click += new System.EventHandler(this.BnExecute_Click);
+            // 
+            // TcResult
+            // 
+            this.TcResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TcResult.Controls.Add(this.tabPage3);
+            this.TcResult.DisplayStyle = System.Windows.Forms.TabStyle.Amon;
+            // 
+            // 
+            // 
+            this.TcResult.DisplayStyleProvider.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.TcResult.DisplayStyleProvider.BorderColorHot = System.Drawing.SystemColors.ControlDark;
+            this.TcResult.DisplayStyleProvider.BorderColorSelected = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(157)))), ((int)(((byte)(185)))));
+            this.TcResult.DisplayStyleProvider.CloserColor = System.Drawing.Color.DarkGray;
+            this.TcResult.DisplayStyleProvider.FocusTrack = true;
+            this.TcResult.DisplayStyleProvider.HotTrack = true;
+            this.TcResult.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.TcResult.DisplayStyleProvider.Opacity = 1F;
+            this.TcResult.DisplayStyleProvider.Overlap = 0;
+            this.TcResult.DisplayStyleProvider.Padding = new System.Drawing.Point(6, 3);
+            this.TcResult.DisplayStyleProvider.Radius = 2;
+            this.TcResult.DisplayStyleProvider.ShowTabCloser = true;
+            this.TcResult.DisplayStyleProvider.TextColor = System.Drawing.SystemColors.ControlText;
+            this.TcResult.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
+            this.TcResult.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
+            this.TcResult.HotTrack = true;
+            this.TcResult.Location = new System.Drawing.Point(12, 181);
+            this.TcResult.Name = "TcResult";
+            this.TcResult.SelectedIndex = 0;
+            this.TcResult.Size = new System.Drawing.Size(672, 190);
+            this.TcResult.TabIndex = 1;
+            this.TcResult.TabClosing += new System.EventHandler<System.Windows.Forms.TabControlCancelEventArgs>(this.TcResult_TabClosing);
+            this.TcResult.SelectedIndexChanged += new System.EventHandler(this.TcResult_SelectedIndexChanged);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.dbResult1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 23);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(664, 163);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "结果";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // dbResult1
+            // 
+            this.dbResult1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dbResult1.Location = new System.Drawing.Point(3, 3);
+            this.dbResult1.Name = "dbResult1";
+            this.dbResult1.Size = new System.Drawing.Size(658, 157);
+            this.dbResult1.TabIndex = 0;
+            // 
+            // TcParams
+            // 
+            this.TcParams.Controls.Add(this.TpPdq);
+            this.TcParams.Controls.Add(this.TpSql);
+            // 
+            // 
+            // 
+            this.TcParams.DisplayStyleProvider.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.TcParams.DisplayStyleProvider.BorderColorHot = System.Drawing.SystemColors.ControlDark;
+            this.TcParams.DisplayStyleProvider.BorderColorSelected = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(157)))), ((int)(((byte)(185)))));
+            this.TcParams.DisplayStyleProvider.CloserColor = System.Drawing.Color.DarkGray;
+            this.TcParams.DisplayStyleProvider.FocusTrack = true;
+            this.TcParams.DisplayStyleProvider.HotTrack = true;
+            this.TcParams.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.TcParams.DisplayStyleProvider.Opacity = 1F;
+            this.TcParams.DisplayStyleProvider.Overlap = 0;
+            this.TcParams.DisplayStyleProvider.Padding = new System.Drawing.Point(6, 3);
+            this.TcParams.DisplayStyleProvider.Radius = 2;
+            this.TcParams.DisplayStyleProvider.ShowTabCloser = false;
+            this.TcParams.DisplayStyleProvider.TextColor = System.Drawing.SystemColors.ControlText;
+            this.TcParams.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
+            this.TcParams.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
+            this.TcParams.HotTrack = true;
+            this.TcParams.Location = new System.Drawing.Point(12, 12);
+            this.TcParams.Name = "TcParams";
+            this.TcParams.SelectedIndex = 0;
+            this.TcParams.Size = new System.Drawing.Size(672, 163);
+            this.TcParams.TabIndex = 0;
+            this.TcParams.SelectedIndexChanged += new System.EventHandler(this.TcParams_SelectedIndexChanged);
+            // 
+            // TpPdq
+            // 
+            this.TpPdq.Controls.Add(this.UcUdf);
+            this.TpPdq.Location = new System.Drawing.Point(4, 23);
+            this.TpPdq.Name = "TpPdq";
+            this.TpPdq.Padding = new System.Windows.Forms.Padding(3);
+            this.TpPdq.Size = new System.Drawing.Size(664, 136);
+            this.TpPdq.TabIndex = 0;
+            this.TpPdq.Text = "向导模式";
+            this.TpPdq.UseVisualStyleBackColor = true;
             // 
             // UcUdf
             // 
             this.UcUdf.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UcUdf.Location = new System.Drawing.Point(3, 3);
             this.UcUdf.Name = "UcUdf";
-            this.UcUdf.Size = new System.Drawing.Size(658, 131);
+            this.UcUdf.Size = new System.Drawing.Size(658, 130);
             this.UcUdf.TabIndex = 0;
+            // 
+            // TpSql
+            // 
+            this.TpSql.Controls.Add(this.UcSql);
+            this.TpSql.Location = new System.Drawing.Point(4, 23);
+            this.TpSql.Name = "TpSql";
+            this.TpSql.Padding = new System.Windows.Forms.Padding(3);
+            this.TpSql.Size = new System.Drawing.Size(664, 136);
+            this.TpSql.TabIndex = 1;
+            this.TpSql.Text = "高级模式";
+            this.TpSql.UseVisualStyleBackColor = true;
             // 
             // UcSql
             // 
             this.UcSql.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UcSql.Location = new System.Drawing.Point(3, 3);
             this.UcSql.Name = "UcSql";
-            this.UcSql.Size = new System.Drawing.Size(658, 131);
+            this.UcSql.Size = new System.Drawing.Size(658, 126);
             this.UcSql.TabIndex = 0;
             // 
             // ASql
@@ -146,19 +203,21 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(696, 412);
-            this.Controls.Add(this.BtnOk);
+            this.Controls.Add(this.BnExecute);
             this.Controls.Add(this.LblEcho);
             this.Controls.Add(this.PbMenu);
             this.Controls.Add(this.TcResult);
             this.Controls.Add(this.TcParams);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ASql";
-            this.Text = "ASql";
+            this.Text = "数据库管理";
             this.Load += new System.EventHandler(this.ASql_Load);
-            this.TcParams.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.TcResult.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();
+            this.TcResult.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.TcParams.ResumeLayout(false);
+            this.TpPdq.ResumeLayout(false);
+            this.TpSql.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -166,15 +225,16 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl TcParams;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabControl TcResult;
+        private System.Windows.Forms.ATabControl TcParams;
+        private System.Windows.Forms.TabPage TpPdq;
+        private System.Windows.Forms.TabPage TpSql;
+        private System.Windows.Forms.ATabControl TcResult;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.PictureBox PbMenu;
         private System.Windows.Forms.Label LblEcho;
-        private System.Windows.Forms.Button BtnOk;
-        private Editor.UdfEditor UcUdf;
+        private System.Windows.Forms.Button BnExecute;
+        private Editor.PdqEditor UcUdf;
         private Editor.SqlEditor UcSql;
+        private V.DbResult dbResult1;
     }
 }

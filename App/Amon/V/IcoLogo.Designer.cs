@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Sql.V.Input
+﻿namespace Me.Amon.V
 {
-    partial class Text
+    partial class IcoLogo
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,30 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TbParam = new System.Windows.Forms.TextBox();
+            this.PbLogo = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).BeginInit();
             this.SuspendLayout();
             // 
-            // TbParam
+            // PbLogo
             // 
-            this.TbParam.Location = new System.Drawing.Point(3, 3);
-            this.TbParam.Name = "TbParam";
-            this.TbParam.Size = new System.Drawing.Size(144, 21);
-            this.TbParam.TabIndex = 0;
+            this.PbLogo.Image = global::Me.Amon.Properties.Resources.Logo;
+            this.PbLogo.Location = new System.Drawing.Point(0, 0);
+            this.PbLogo.Name = "PbLogo";
+            this.PbLogo.Size = new System.Drawing.Size(25, 25);
+            this.PbLogo.TabIndex = 0;
+            this.PbLogo.TabStop = false;
             // 
-            // Text
+            // IcoLogo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.TbParam);
-            this.Name = "Text";
-            this.Size = new System.Drawing.Size(150, 27);
+            this.Controls.Add(this.PbLogo);
+            this.Name = "IcoLogo";
+            this.Size = new System.Drawing.Size(25, 25);
+            ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox TbParam;
+        private System.Windows.Forms.PictureBox PbLogo;
     }
 }

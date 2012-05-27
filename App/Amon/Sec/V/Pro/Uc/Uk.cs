@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Xml;
-using Me.Amon.Sec.Pro.Uc.UkUi;
+using Me.Amon.Sec.V.Pro.Uc.UkUi;
 using Me.Amon.Uc;
 using Org.BouncyCastle.Crypto;
 
-namespace Me.Amon.Sec.Pro.Uc
+namespace Me.Amon.Sec.V.Pro.Uc
 {
     public partial class Uk : UserControl, IView
     {

@@ -1,7 +1,7 @@
 ﻿using Me.Amon.Pwd;
 using Me.Amon.Uc;
 
-namespace Me.Amon.Sec.Pro.Uc.DiUi
+namespace Me.Amon.Sec.V.Pro.Uc.DiUi
 {
     public class Txt2Img : ADi
     {

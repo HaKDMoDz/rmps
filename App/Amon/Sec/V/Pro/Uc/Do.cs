@@ -3,10 +3,10 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Pwd;
-using Me.Amon.Sec.Pro.Uc.DoUi;
+using Me.Amon.Sec.V.Pro.Uc.DoUi;
 using Me.Amon.Uc;
 
-namespace Me.Amon.Sec.Pro.Uc
+namespace Me.Amon.Sec.V.Pro.Uc
 {
     public partial class Do : UserControl, IView
     {

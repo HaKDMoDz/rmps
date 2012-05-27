@@ -1,6 +1,6 @@
 ﻿using Me.Amon.Uc;
 
-namespace Me.Amon.Sec.Pro.Uc
+namespace Me.Amon.Sec.V.Pro.Uc
 {
     public abstract class AUk
     {

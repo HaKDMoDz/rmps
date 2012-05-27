@@ -1,15 +1,14 @@
-﻿using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using Me.Amon.Sql.Model;
+using Me.Amon.Uc;
 
-namespace Me.Amon.Sql.V.Input
+namespace Me.Amon.Sql.V.Pdq
 {
-    public partial class Date : UserControl, IInput
+    public partial class List : UserControl, IInput
     {
         private Param _Param;
-        private StringBuilder _Buffer = new StringBuilder();
 
-        public Date()
+        public List()
         {
             InitializeComponent();
         }
@@ -22,17 +21,6 @@ namespace Me.Amon.Sql.V.Input
 
         public bool Check()
         {
-            _Buffer.Clear();
-            string txt = DtParam.Text;
-
-            // 无要求
-            if (Param == null)
-            {
-                _Buffer.Append(txt);
-                return true;
-            }
-
-            _Buffer.Append('\'').Append(txt).Append('\'');
             return true;
         }
 
@@ -40,11 +28,11 @@ namespace Me.Amon.Sql.V.Input
         {
             get
             {
-                return _Buffer.ToString();
+                return CbParam.SelectedItem.ToString();
             }
             set
             {
-                DtParam.Text = value;
+                CbParam.SelectedItem = value;
             }
         }
 
@@ -57,7 +45,11 @@ namespace Me.Amon.Sql.V.Input
             set
             {
                 _Param = value;
-                DtParam.CustomFormat = _Param.Format;
+                CbParam.Items.Clear();
+                foreach (Item item in _Param.Items)
+                {
+                    CbParam.Items.Add(item);
+                }
             }
         }
         #endregion

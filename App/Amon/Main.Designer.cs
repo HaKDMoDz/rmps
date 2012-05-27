@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            this.PbLogo = new System.Windows.Forms.PictureBox();
-            this.BgWorker = new System.Windows.Forms.Timer(this.components);
             this.NiTray = new System.Windows.Forms.NotifyIcon(this.components);
             this.CgMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MgTopMost = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,25 +47,13 @@
             this.MgSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.MgInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.MgExit = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).BeginInit();
+            this.UcApp = new Me.Amon.V.IcoLogo();
+            this.LvApp = new System.Windows.Forms.ListView();
+            this.IlApp = new System.Windows.Forms.ImageList(this.components);
+            this.IsApp = new System.Windows.Forms.ImageList(this.components);
+            this.MgAIco = new System.Windows.Forms.ToolStripMenuItem();
             this.CgMenu.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // PbLogo
-            // 
-            this.PbLogo.Location = new System.Drawing.Point(0, 0);
-            this.PbLogo.Name = "PbLogo";
-            this.PbLogo.Size = new System.Drawing.Size(25, 25);
-            this.PbLogo.TabIndex = 2;
-            this.PbLogo.TabStop = false;
-            this.PbLogo.DoubleClick += new System.EventHandler(this.PbLogo_DoubleClick);
-            this.PbLogo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Main_MouseDown);
-            this.PbLogo.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
-            this.PbLogo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Main_MouseUp);
-            // 
-            // BgWorker
-            // 
-            this.BgWorker.Tick += new System.EventHandler(this.BgWorker_Tick);
             // 
             // NiTray
             // 
@@ -87,6 +73,7 @@
             this.MgASec,
             this.MgABar,
             this.MgARen,
+            this.MgAIco,
             this.MgSep1,
             this.MgSignUp,
             this.MgSignIn,
@@ -96,7 +83,7 @@
             this.MgInfo,
             this.MgExit});
             this.CgMenu.Name = "CmMenu";
-            this.CgMenu.Size = new System.Drawing.Size(164, 308);
+            this.CgMenu.Size = new System.Drawing.Size(164, 330);
             // 
             // MgTopMost
             // 
@@ -163,7 +150,7 @@
             // 
             this.MgSignIn.Name = "MgSignIn";
             this.MgSignIn.Size = new System.Drawing.Size(163, 22);
-            this.MgSignIn.Text = "登录(&I)";
+            this.MgSignIn.Text = "登录(&L)";
             this.MgSignIn.Click += new System.EventHandler(this.MgSignIn_Click);
             // 
             // MgSignOf
@@ -201,13 +188,52 @@
             this.MgExit.Text = "退出(&X)";
             this.MgExit.Click += new System.EventHandler(this.MgExit_Click);
             // 
+            // UcApp
+            // 
+            this.UcApp.Location = new System.Drawing.Point(12, 12);
+            this.UcApp.Name = "UcApp";
+            this.UcApp.Size = new System.Drawing.Size(25, 25);
+            this.UcApp.TabIndex = 1;
+            // 
+            // LvApp
+            // 
+            this.LvApp.LargeImageList = this.IlApp;
+            this.LvApp.Location = new System.Drawing.Point(43, 12);
+            this.LvApp.Name = "LvApp";
+            this.LvApp.Size = new System.Drawing.Size(120, 130);
+            this.LvApp.SmallImageList = this.IsApp;
+            this.LvApp.TabIndex = 2;
+            this.LvApp.UseCompatibleStateImageBehavior = false;
+            this.LvApp.SelectedIndexChanged += new System.EventHandler(this.LvApp_SelectedIndexChanged);
+            this.LvApp.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LvApp_MouseDoubleClick);
+            // 
+            // IlApp
+            // 
+            this.IlApp.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.IlApp.ImageSize = new System.Drawing.Size(32, 32);
+            this.IlApp.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // IsApp
+            // 
+            this.IsApp.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.IsApp.ImageSize = new System.Drawing.Size(16, 16);
+            this.IsApp.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // MgAIco
+            // 
+            this.MgAIco.Name = "MgAIco";
+            this.MgAIco.Size = new System.Drawing.Size(163, 22);
+            this.MgAIco.Text = "图标编辑器(&I)";
+            this.MgAIco.Click += new System.EventHandler(this.MgAIco_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(25, 25);
+            this.ClientSize = new System.Drawing.Size(175, 154);
             this.ContextMenuStrip = this.CgMenu;
-            this.Controls.Add(this.PbLogo);
+            this.Controls.Add(this.LvApp);
+            this.Controls.Add(this.UcApp);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -222,7 +248,6 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Main_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Main_MouseUp);
-            ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).EndInit();
             this.CgMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -230,8 +255,6 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox PbLogo;
-        private System.Windows.Forms.Timer BgWorker;
         private System.Windows.Forms.NotifyIcon NiTray;
         private System.Windows.Forms.ContextMenuStrip CgMenu;
         private System.Windows.Forms.ToolStripMenuItem MgTopMost;
@@ -249,6 +272,11 @@
         private System.Windows.Forms.ToolStripMenuItem MgInfo;
         private System.Windows.Forms.ToolStripMenuItem MgABar;
         private System.Windows.Forms.ToolStripMenuItem MgARen;
+        private V.IcoLogo UcApp;
+        private System.Windows.Forms.ListView LvApp;
+        private System.Windows.Forms.ImageList IlApp;
+        private System.Windows.Forms.ImageList IsApp;
+        private System.Windows.Forms.ToolStripMenuItem MgAIco;
 
 
     }

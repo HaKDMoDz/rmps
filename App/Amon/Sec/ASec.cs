@@ -2,9 +2,8 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using Me.Amon.Model;
-using Me.Amon.Model.Sec;
-using Me.Amon.Sec.Pro;
-using Me.Amon.Sec.Wiz;
+using Me.Amon.Sec.V.Pro;
+using Me.Amon.Sec.V.Wiz;
 
 namespace Me.Amon.Sec
 {
@@ -30,11 +29,6 @@ namespace Me.Amon.Sec
         #endregion
 
         #region 接口实现
-        public void InitOnce()
-        {
-            ShowPro();
-        }
-
         public int AppId { get; set; }
 
         public Form Form { get { return this; } }
@@ -51,6 +45,11 @@ namespace Me.Amon.Sec
         #endregion
 
         #region 事件处理
+        private void ASec_Load(object sender, EventArgs e)
+        {
+            ShowWiz();
+        }
+
         private void BtDo_Click(object sender, EventArgs e)
         {
             if (!Worker.IsBusy)

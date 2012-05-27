@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Me.Amon.Uc;
 
-namespace Me.Amon.Sec.Pro.Uc.DoUi
+namespace Me.Amon.Sec.V.Pro.Uc.DoUi
 {
     class ScryptoEnc : Scrypto
     {

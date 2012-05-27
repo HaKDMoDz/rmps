@@ -2,7 +2,7 @@
 using System.Text;
 using Me.Amon.Uc;
 
-namespace Me.Amon.Sec.Pro.Uc.DiUi
+namespace Me.Amon.Sec.V.Pro.Uc.DiUi
 {
     class ScryptoEnc : Scrypto
     {

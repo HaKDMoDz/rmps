@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Sql.Editor
 {
-    partial class UdfEditor
+    partial class PdqEditor
     {
         /// <summary> 
         /// 必需的设计器变量。

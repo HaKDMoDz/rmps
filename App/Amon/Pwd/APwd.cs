@@ -63,32 +63,6 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 接口实现
-        public void InitOnce()
-        {
-            #region 数据模型
-            _SafeModel = new SafeModel(_UserModel);
-            _SafeModel.Init();
-            _DataModel = new DataModel(_UserModel);
-            _DataModel.Init();
-            _ViewModel = new ViewModel(_UserModel);
-            _ViewModel.Load();
-            UdcModel udcModel = new UdcModel();
-            udcModel.Init(_UserModel);
-            _DataModel.UdcModel = udcModel;
-            #endregion
-
-            #region 系统选单
-            _XmlMenu = new XmlMenu<APwd>(this, _ViewModel);
-            _XmlMenu.Load(Path.Combine(_UserModel.Home, "Pwd.xml"));
-            _XmlMenu.GetStrokes("APwd");
-            _XmlMenu.GetMenuBar("APwd", MbMenu);
-            _XmlMenu.GetToolBar("APwd", TbTool);
-            _XmlMenu.GetPopMenu("ACat", CmCat);
-            _XmlMenu.GetPopMenu("AKey", CmKey);
-            //_XmlMenu.GetPopMenu("AAtt", CmAtt);
-            #endregion
-        }
-
         public int AppId { get; set; }
 
         public Form Form { get { return this; } }
@@ -136,6 +110,29 @@ namespace Me.Amon.Pwd
         /// <param name="e"></param>
         private void APwd_Load(object sender, EventArgs e)
         {
+            #region 数据模型
+            _SafeModel = new SafeModel(_UserModel);
+            _SafeModel.Init();
+            _DataModel = new DataModel(_UserModel);
+            _DataModel.Init();
+            _ViewModel = new ViewModel(_UserModel);
+            _ViewModel.Load();
+            UdcModel udcModel = new UdcModel();
+            udcModel.Init(_UserModel);
+            _DataModel.UdcModel = udcModel;
+            #endregion
+
+            #region 系统选单
+            _XmlMenu = new XmlMenu<APwd>(this, _ViewModel);
+            _XmlMenu.Load(Path.Combine(_UserModel.Home, "Pwd.xml"));
+            _XmlMenu.GetStrokes("APwd");
+            _XmlMenu.GetMenuBar("APwd", MbMenu);
+            _XmlMenu.GetToolBar("APwd", TbTool);
+            _XmlMenu.GetPopMenu("ACat", CmCat);
+            _XmlMenu.GetPopMenu("AKey", CmKey);
+            //_XmlMenu.GetPopMenu("AAtt", CmAtt);
+            #endregion
+
             InitCat();
             InitKey();
             FbFind.APwd = this;

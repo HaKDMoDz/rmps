@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.IconLib;
 using System.Windows.Forms;
 using Me.Amon.Ico.V;
+using Me.Amon.Model;
 using Me.Amon.Uc;
 using Me.Amon.Util;
 
@@ -15,10 +16,18 @@ namespace Me.Amon.Ico
         private MultiIcon _MIcon;
         private XmlMenu<AIco> _XmlMenu;
         private IcoEditor _IcoEditor;
+        private UserModel _UserModel;
 
         #region 构造函数
         public AIco()
         {
+            InitializeComponent();
+        }
+
+        public AIco(UserModel userModel)
+        {
+            _UserModel = userModel;
+
             InitializeComponent();
         }
         #endregion
@@ -54,8 +63,17 @@ namespace Me.Amon.Ico
         #region 事件处理
         private void AIco_Load(object sender, EventArgs e)
         {
+            _MIcon = new MultiIcon();
+
             _XmlMenu = new XmlMenu<AIco>(this, null);
+            _XmlMenu.Load("AIco.xml");
             _XmlMenu.GetPopMenu("AIco", CmMenu);
+            _XmlMenu.GetStrokes("AIco");
+        }
+
+        private void TcIco_TabClosing(object sender, TabControlCancelEventArgs e)
+        {
+            e.Cancel = TcIco.TabCount < 2;
         }
 
         private void PbMenu_Click(object sender, EventArgs e)
@@ -70,6 +88,22 @@ namespace Me.Amon.Ico
         #endregion
 
         #region 公共函数
+        public void Open(string file)
+        {
+            _MIcon.Clear();
+            _MIcon.Load(file);
+
+            LvIco.Items.Clear();
+            IlIco.Images.Clear();
+
+            Image bmp;
+            foreach (SingleIcon sIcon in _MIcon)
+            {
+                bmp = GetBitmap(sIcon);
+                IlIco.Images.Add(sIcon.Name, bmp);
+                LvIco.Items.Add(new ListViewItem { ImageKey = sIcon.Name, Name = sIcon.Name, Text = sIcon.Name });
+            }
+        }
         #endregion
 
         private void LvIco_MouseDoubleClick(object sender, MouseEventArgs e)

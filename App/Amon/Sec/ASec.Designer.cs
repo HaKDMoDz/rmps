@@ -56,7 +56,7 @@
             // BtDo
             // 
             this.BtDo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtDo.Location = new System.Drawing.Point(177, 270);
+            this.BtDo.Location = new System.Drawing.Point(291, 217);
             this.BtDo.Name = "BtDo";
             this.BtDo.Size = new System.Drawing.Size(75, 23);
             this.BtDo.TabIndex = 1;
@@ -74,7 +74,7 @@
             // 
             this.PbMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.PbMenu.Image = global::Me.Amon.Properties.Resources.Menu;
-            this.PbMenu.Location = new System.Drawing.Point(12, 272);
+            this.PbMenu.Location = new System.Drawing.Point(12, 219);
             this.PbMenu.Name = "PbMenu";
             this.PbMenu.Size = new System.Drawing.Size(18, 18);
             this.PbMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -131,7 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(264, 305);
+            this.ClientSize = new System.Drawing.Size(378, 252);
             this.Controls.Add(this.BtDo);
             this.Controls.Add(this.PbMenu);
             this.Controls.Add(this.LbInfo);
@@ -141,6 +141,7 @@
             this.Name = "ASec";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "阿木加密器";
+            this.Load += new System.EventHandler(this.ASec_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();
             this.CmMenu.ResumeLayout(false);
             this.ResumeLayout(false);

@@ -5,11 +5,11 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Sql.Model;
-using Me.Amon.Sql.V.Input;
+using Me.Amon.Sql.V.Pdq;
 
 namespace Me.Amon.Sql.Editor
 {
-    public partial class UdfEditor : UserControl, IEditor
+    public partial class PdqEditor : UserControl, IEditor
     {
         private Dml _Sql;
         private List<Label> _LlList;
@@ -18,7 +18,7 @@ namespace Me.Amon.Sql.Editor
         private RowStyle _DefStyle;
 
         #region 构造函数
-        public UdfEditor()
+        public PdqEditor()
         {
             InitializeComponent();
 

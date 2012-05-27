@@ -45,6 +45,7 @@ namespace Me.Amon.Ico.V
         }
 
         #region 事件处理
+        private Brush _Brush = new SolidBrush(Color.Black);
         private void LbImg_DrawItem(object sender, DrawItemEventArgs e)
         {
             e.DrawBackground();
@@ -61,6 +62,8 @@ namespace Me.Amon.Ico.V
                 img = BeanUtil.ScaleImage(img, EIco.PREVIEW_ICON_DIM, true);
             }
             DrawImage(e.Graphics, img, e.Bounds);
+
+            e.Graphics.DrawString(img.Width + "-" + img.Height, LbImg.Font, _Brush, e.Bounds.X + 20, e.Bounds.Y + 40);
         }
 
         private void LbImg_SelectedIndexChanged(object sender, EventArgs e)

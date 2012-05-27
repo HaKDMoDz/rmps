@@ -409,6 +409,7 @@
             this.Name = "ARen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "阿木重命名";
+            this.Load += new System.EventHandler(this.ARen_Load);
             this.TcRule.ResumeLayout(false);
             this.TpRuleInf.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GvInfo)).EndInit();

@@ -35,21 +35,28 @@
             // 
             // LbImg
             // 
+            this.LbImg.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.LbImg.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.LbImg.FormattingEnabled = true;
             this.LbImg.IntegralHeight = false;
-            this.LbImg.Location = new System.Drawing.Point(0, 0);
+            this.LbImg.ItemHeight = 72;
+            this.LbImg.Location = new System.Drawing.Point(3, 3);
             this.LbImg.Name = "LbImg";
-            this.LbImg.Size = new System.Drawing.Size(120, 260);
+            this.LbImg.Size = new System.Drawing.Size(120, 256);
             this.LbImg.TabIndex = 0;
             this.LbImg.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.LbImg_DrawItem);
             this.LbImg.SelectedIndexChanged += new System.EventHandler(this.LbImg_SelectedIndexChanged);
             // 
             // PbImg
             // 
-            this.PbImg.Location = new System.Drawing.Point(126, 0);
+            this.PbImg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PbImg.Location = new System.Drawing.Point(129, 3);
             this.PbImg.Name = "PbImg";
-            this.PbImg.Size = new System.Drawing.Size(256, 260);
+            this.PbImg.Size = new System.Drawing.Size(256, 256);
+            this.PbImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PbImg.TabIndex = 1;
             this.PbImg.TabStop = false;
             // 
@@ -60,7 +67,7 @@
             this.Controls.Add(this.PbImg);
             this.Controls.Add(this.LbImg);
             this.Name = "IcoEditor";
-            this.Size = new System.Drawing.Size(486, 260);
+            this.Size = new System.Drawing.Size(388, 262);
             ((System.ComponentModel.ISupportInitialize)(this.PbImg)).EndInit();
             this.ResumeLayout(false);
 

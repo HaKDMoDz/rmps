@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Sec.Pro.Uc
+﻿namespace Me.Amon.Sec.V.Pro.Uc
 {
     partial class Do
     {

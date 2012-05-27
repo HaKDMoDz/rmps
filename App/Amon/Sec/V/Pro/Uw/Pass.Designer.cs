@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Sec.Pro.Uw
+﻿namespace Me.Amon.Sec.V.Pro.Uw
 {
     partial class Pass
     {

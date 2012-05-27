@@ -4,7 +4,7 @@ using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Parameters;
 
-namespace Me.Amon.Sec.Pro.Uc.UkUi
+namespace Me.Amon.Sec.V.Pro.Uc.UkUi
 {
     public class RandKey : AUk
     {

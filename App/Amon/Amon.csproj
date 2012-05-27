@@ -31,7 +31,7 @@
     <SuiteName>阿木软件</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationRevision>9</ApplicationRevision>
     <ApplicationVersion>7.0.3.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -196,6 +196,7 @@
     <Compile Include="Gtd\EGtd.cs" />
     <Compile Include="Ico\EIco.cs" />
     <Compile Include="Ico\E\AIcoAction.cs" />
+    <Compile Include="Ico\E\OpenAction.cs" />
     <Compile Include="Ico\IIco.cs" />
     <Compile Include="Ico\MIco.cs" />
     <Compile Include="Img\AImg.cs">
@@ -884,6 +885,7 @@
     <Compile Include="Sec\V\Wiz\DigestText.Designer.cs">
       <DependentUpon>DigestText.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sec\V\Wiz\IView.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Spy\V\App.cs">
       <SubType>UserControl</SubType>
@@ -912,53 +914,113 @@
     <Compile Include="Sql\M\Dml.cs" />
     <Compile Include="Sql\M\Param.cs" />
     <Compile Include="Sql\M\Rdbms.cs" />
-    <Compile Include="Sql\V\Editor\IEditor.cs" />
-    <Compile Include="Sql\V\Editor\SqlEditor.cs">
+    <Compile Include="Sql\V\DbConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sql\V\DbConfig.Designer.cs">
+      <DependentUpon>DbConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\V\DbExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sql\V\DbExport.Designer.cs">
+      <DependentUpon>DbExport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\V\DbImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sql\V\DbImport.Designer.cs">
+      <DependentUpon>DbImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\V\DbResult.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sql\V\Editor\SqlEditor.Designer.cs">
+    <Compile Include="Sql\V\DbResult.Designer.cs">
+      <DependentUpon>DbResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\V\IEditor.cs" />
+    <Compile Include="Sql\V\SqlEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sql\V\SqlEditor.Designer.cs">
       <DependentUpon>SqlEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sql\V\Editor\UdfEditor.cs">
+    <Compile Include="Sql\V\PdqEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sql\V\Editor\UdfEditor.Designer.cs">
-      <DependentUpon>UdfEditor.cs</DependentUpon>
+    <Compile Include="Sql\V\PdqEditor.Designer.cs">
+      <DependentUpon>PdqEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sql\V\Input\Data.cs">
+    <Compile Include="Sql\V\Pdq\DataArg.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sql\V\Input\Data.Designer.cs">
-      <DependentUpon>Data.cs</DependentUpon>
+    <Compile Include="Sql\V\Pdq\DataArg.Designer.cs">
+      <DependentUpon>DataArg.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sql\V\Input\Date.cs">
+    <Compile Include="Sql\V\Pdq\DateArg.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sql\V\Input\Date.Designer.cs">
-      <DependentUpon>Date.cs</DependentUpon>
+    <Compile Include="Sql\V\Pdq\DateArg.Designer.cs">
+      <DependentUpon>DateArg.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sql\V\Input\IInput.cs" />
-    <Compile Include="Sql\V\Input\List.cs">
+    <Compile Include="Sql\V\Pdq\IArg.cs" />
+    <Compile Include="Sql\V\Pdq\ListArg.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sql\V\Input\List.Designer.cs">
-      <DependentUpon>List.cs</DependentUpon>
+    <Compile Include="Sql\V\Pdq\ListArg.Designer.cs">
+      <DependentUpon>ListArg.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sql\V\Input\None.cs">
+    <Compile Include="Sql\V\Pdq\NoneArg.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sql\V\Input\None.Designer.cs">
-      <DependentUpon>None.cs</DependentUpon>
+    <Compile Include="Sql\V\Pdq\NoneArg.Designer.cs">
+      <DependentUpon>NoneArg.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sql\V\Input\Text.cs">
+    <Compile Include="Sql\V\Pdq\TextArg.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sql\V\Input\Text.Designer.cs">
-      <DependentUpon>Text.cs</DependentUpon>
+    <Compile Include="Sql\V\Pdq\TextArg.Designer.cs">
+      <DependentUpon>TextArg.cs</DependentUpon>
     </Compile>
     <Compile Include="Uc\Card.cs" />
     <Compile Include="Uc\ItemGroup.cs" />
     <Compile Include="Uc\KeyStroke.cs" />
+    <Compile Include="Uc\TabControl\ATabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\NativeMethods.cs" />
+    <Compile Include="Uc\TabControl\TabStyle.cs" />
+    <Compile Include="Uc\TabControl\TabStyleProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleAmonProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleAngledProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleChromeProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleDefaultProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleIE8Provider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleNoneProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleRoundedProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleVisualStudioProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleVS2010Provider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\ThemedColors.cs" />
     <Compile Include="Uc\XmlMenu.cs" />
     <Compile Include="User\Auth\AuthLk.cs">
       <SubType>UserControl</SubType>
@@ -1129,6 +1191,18 @@
     </Compile>
     <Compile Include="Uw\Waiting.Designer.cs">
       <DependentUpon>Waiting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="V\EyeLogo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="V\EyeLogo.Designer.cs">
+      <DependentUpon>EyeLogo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="V\IcoLogo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="V\IcoLogo.Designer.cs">
+      <DependentUpon>IcoLogo.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Bar\ABar.resx">
       <DependentUpon>ABar.cs</DependentUpon>
@@ -1390,23 +1464,35 @@
     <EmbeddedResource Include="Sql\ASql.resx">
       <DependentUpon>ASql.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sql\V\Editor\SqlEditor.resx">
+    <EmbeddedResource Include="Sql\V\DbConfig.resx">
+      <DependentUpon>DbConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sql\V\DbExport.resx">
+      <DependentUpon>DbExport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sql\V\DbImport.resx">
+      <DependentUpon>DbImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sql\V\DbResult.resx">
+      <DependentUpon>DbResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sql\V\SqlEditor.resx">
       <DependentUpon>SqlEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sql\V\Editor\UdfEditor.resx">
-      <DependentUpon>UdfEditor.cs</DependentUpon>
+    <EmbeddedResource Include="Sql\V\PdqEditor.resx">
+      <DependentUpon>PdqEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sql\V\Input\Data.resx">
-      <DependentUpon>Data.cs</DependentUpon>
+    <EmbeddedResource Include="Sql\V\Pdq\DataArg.resx">
+      <DependentUpon>DataArg.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sql\V\Input\Date.resx">
-      <DependentUpon>Date.cs</DependentUpon>
+    <EmbeddedResource Include="Sql\V\Pdq\DateArg.resx">
+      <DependentUpon>DateArg.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sql\V\Input\List.resx">
-      <DependentUpon>List.cs</DependentUpon>
+    <EmbeddedResource Include="Sql\V\Pdq\ListArg.resx">
+      <DependentUpon>ListArg.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sql\V\Input\Text.resx">
-      <DependentUpon>Text.cs</DependentUpon>
+    <EmbeddedResource Include="Sql\V\Pdq\TextArg.resx">
+      <DependentUpon>TextArg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\Auth\AuthLk.resx">
       <DependentUpon>AuthLk.cs</DependentUpon>
@@ -1482,6 +1568,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\Waiting.resx">
       <DependentUpon>Waiting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="V\EyeLogo.resx">
+      <DependentUpon>EyeLogo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="V\IcoLogo.resx">
+      <DependentUpon>IcoLogo.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Amon_TemporaryKey.pfx" />
     <None Include="app.config" />
@@ -1582,9 +1674,6 @@
     <Folder Include="Spy\E\" />
     <Folder Include="Spy\M\" />
     <Folder Include="Sql\C\" />
-    <Folder Include="Sql\V\Export\" />
-    <Folder Include="Sql\V\Import\" />
-    <Folder Include="Sql\V\Result\" />
     <Folder Include="Sql\_Ddl\" />
     <Folder Include="Sql\_Dml\" />
   </ItemGroup>
