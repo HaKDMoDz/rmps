@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 
 namespace Me.Amon.Model
 {
@@ -60,6 +61,16 @@ namespace Me.Amon.Model
         public override int GetHashCode()
         {
             return Id != null ? Id.GetHashCode() : 0;
+        }
+
+        public static string Attribute(XmlNode node, string name, string value)
+        {
+            if (node == null)
+            {
+                return value;
+            }
+            XmlAttribute attr = node.Attributes[name];
+            return attr != null ? attr.InnerText : value;
         }
     }
 }
