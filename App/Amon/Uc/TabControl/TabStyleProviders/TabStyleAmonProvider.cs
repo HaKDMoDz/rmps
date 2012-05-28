@@ -17,7 +17,7 @@ namespace System.Windows.Forms
             //this._BorderColorHot = Color.FromArgb(155, 167, 183);
 
             this._ImageAlign = ContentAlignment.MiddleRight;
-            this._Overlap = 7;
+            //this._Overlap = 7;
 
             //	Must set after the _Radius as this is used in the calculations of the actual padding
             this.Padding = new Point(14, 3);

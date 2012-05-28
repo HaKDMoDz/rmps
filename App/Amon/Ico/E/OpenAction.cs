@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Ico.E
 {
-    public class SaveIcoAction : AIcoAction
+    public class OpenAction : AIcoAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
@@ -11,12 +11,12 @@ namespace Me.Amon.Ico.E
                 return;
             }
 
-            IApp.SaveFileDialog.Filter = EApp.FILE_SAVE_ICO;
-            if (DialogResult.OK != IApp.SaveFileDialog.ShowDialog(IApp.Form))
+            IApp.OpenFileDialog.Filter = EApp.FILE_OPEN_RES;
+            if (DialogResult.OK != IApp.OpenFileDialog.ShowDialog(IApp.Form))
             {
                 return;
             }
-            IApp.SaveIco(IApp.SaveFileDialog.FileName);
+            IApp.Open(IApp.OpenFileDialog.FileName);
         }
     }
 }

@@ -1,18 +1,28 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.IconLib;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Windows.Forms;
-using Me.Amon.Util;
+using Me.Amon.Ico.M;
 
 namespace Me.Amon.Ico.V
 {
     public partial class IcoEditor : UserControl, IIco
     {
-        private Image _BgImg;
+        private Bitmap _BgImg;
         private SingleIcon _SIcon;
+        private AIco _AIco;
 
         public IcoEditor()
         {
+            InitializeComponent();
+        }
+
+        public IcoEditor(AIco aico)
+        {
+            _AIco = aico;
+
             InitializeComponent();
         }
 
@@ -20,10 +30,83 @@ namespace Me.Amon.Ico.V
         public void InitOnce()
         {
             _BgImg = DrawBg(EIco.PREVIEW_ICON_DIM, EIco.PREVIEW_BG_GAPS);
+            PbImg.BackgroundImage = DrawBg(256, 10);
+            LbImg.ItemHeight = 80;
         }
 
-        public void OpenFile(string file)
+        public void AppendImg()
         {
+        }
+
+        public void RemoveImg()
+        {
+            if (LbImg.SelectedItem != null)
+            {
+                LbImg.Items.Remove(LbImg.SelectedItem);
+            }
+        }
+
+        public void SaveIco(string file)
+        {
+            if (_SIcon == null || LbImg.Items.Count < 1)
+            {
+                return;
+            }
+
+            _SIcon.Clear();
+            foreach (Abc item in LbImg.Items)
+            {
+                _SIcon.Add(item.Source);
+            }
+            _SIcon.Save(file);
+        }
+
+        public void Import(string file)
+        {
+            Abc item = LbImg.SelectedItem as Abc;
+            if (item == null)
+            {
+                return;
+            }
+
+            if (!File.Exists(file))
+            {
+                return;
+            }
+
+            Image img = Image.FromFile(file);
+            using (Graphics g = Graphics.FromImage(item.Source))
+            {
+                int w = item.Source.Width < img.Width ? item.Source.Width : img.Width;
+                int h = item.Source.Height < img.Height ? item.Source.Height : img.Height;
+                int x = (item.Source.Width - w) >> 1;
+                int y = (item.Source.Height - h) >> 1;
+                g.DrawImage(img, x, y, w, h);
+                g.Save();
+            }
+            PbImg.Image = item.Source;
+
+            using (Graphics g = Graphics.FromImage(item.Preview))
+            {
+                int w = item.Preview.Width < img.Width ? item.Preview.Width : img.Width;
+                int h = item.Preview.Height < img.Height ? item.Preview.Height : img.Width;
+                int x = (item.Preview.Width - w) >> 1;
+                int y = (item.Preview.Height - h) >> 1;
+                g.DrawImage(img, x, y, w, h);
+                g.Save();
+            }
+            LbImg.Items[LbImg.SelectedIndex] = item;
+        }
+
+        public void Export(string file)
+        {
+            Abc item = LbImg.SelectedItem as Abc;
+            if (item == null)
+            {
+                return;
+            }
+
+            item.Source.Save(file, ImageFormat.Png);
         }
         #endregion
 
@@ -37,9 +120,12 @@ namespace Me.Amon.Ico.V
             {
                 _SIcon = value;
                 LbImg.Items.Clear();
+                Abc item;
                 foreach (IconImage ico in _SIcon)
                 {
-                    LbImg.Items.Add(ico.Icon.Width);
+                    item = new Abc();
+                    item.Decode(_BgImg, ico);
+                    LbImg.Items.Add(item);
                 }
             }
         }
@@ -50,34 +136,42 @@ namespace Me.Amon.Ico.V
         {
             e.DrawBackground();
 
-            DrawImage(e.Graphics, _BgImg, e.Bounds);
-
-            if (SingleIcon == null)
+            Abc item = LbImg.Items[e.Index] as Abc;
+            if (item == null)
             {
                 return;
             }
-            Image img = SingleIcon[e.Index].Icon.ToBitmap();
-            if (img.Width > EIco.PREVIEW_ICON_DIM)
-            {
-                img = BeanUtil.ScaleImage(img, EIco.PREVIEW_ICON_DIM, true);
-            }
-            DrawImage(e.Graphics, img, e.Bounds);
 
-            e.Graphics.DrawString(img.Width + "-" + img.Height, LbImg.Font, _Brush, e.Bounds.X + 20, e.Bounds.Y + 40);
+            SizeF size = e.Graphics.MeasureString(item.Text, LbImg.Font);
+            Rectangle rect = e.Bounds;
+
+            int x = rect.X + ((rect.Width - item.Preview.Width) >> 1);
+            int y = rect.Y + ((rect.Height - item.Preview.Height - (int)size.Height - 3) >> 1);
+            e.Graphics.DrawImage(item.Preview, x, y, item.Preview.Width, item.Preview.Height);
+
+            x = rect.X + ((rect.Width - (int)size.Width) >> 1);
+            y = y + item.Preview.Height + 3;
+            e.Graphics.DrawString(item.Text, LbImg.Font, _Brush, x, y);
         }
 
         private void LbImg_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (LbImg.SelectedIndex < 0)
+            {
+                return;
+            }
+
             IconImage ico = _SIcon[LbImg.SelectedIndex];
             Image img = ico.Icon.ToBitmap();
-            Bitmap bmp = DrawBg(img.Width, EIco.PREVIEW_BG_GAPS);
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                int x = (bmp.Width - img.Width) >> 1;
-                int y = (bmp.Height - img.Height) >> 1;
-                g.DrawImage(img, x, y, img.Width, img.Height);
-            }
-            PbImg.Image = bmp;
+            //Bitmap bmp = DrawBg(img.Width, EIco.PREVIEW_BG_GAPS);
+            //using (Graphics g = Graphics.FromImage(bmp))
+            //{
+            //    int x = (bmp.Width - img.Width) >> 1;
+            //    int y = (bmp.Height - img.Height) >> 1;
+            //    g.DrawImage(img, x, y, img.Width, img.Height);
+            //    g.Save();
+            //}
+            PbImg.Image = img;
         }
         #endregion
 
@@ -109,13 +203,17 @@ namespace Me.Amon.Ico.V
             }
             return bmp;
         }
-
-        private void DrawImage(Graphics g, Image img, Rectangle rect)
-        {
-            int x = rect.X + ((rect.Width - img.Width) >> 1);
-            int y = rect.Y + ((rect.Height - img.Height) >> 1);
-            g.DrawImage(img, x, y, img.Width, img.Height);
-        }
         #endregion
+
+        private void LbImg_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Right)
+            {
+                return;
+            }
+
+            LbImg.SelectedIndex = LbImg.IndexFromPoint(e.Location);
+            _AIco.IcoMenu.Show(MousePosition);
+        }
     }
 }

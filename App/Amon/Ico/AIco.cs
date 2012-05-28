@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.IconLib;
+using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Ico.V;
 using Me.Amon.Model;
@@ -15,7 +16,6 @@ namespace Me.Amon.Ico
         private IIco _IIco;
         private MultiIcon _MIcon;
         private XmlMenu<AIco> _XmlMenu;
-        private IcoEditor _IcoEditor;
         private UserModel _UserModel;
 
         #region 构造函数
@@ -61,45 +61,19 @@ namespace Me.Amon.Ico
         #endregion
 
         #region 公共函数
-        public void OpenIcl(string file)
-        {
-            _MIcon.Clear();
-            _MIcon.Load(file);
-
-            LvIco.Items.Clear();
-            IlIco.Images.Clear();
-
-            Image bmp;
-            foreach (SingleIcon sIcon in _MIcon)
-            {
-                bmp = GetBitmap(sIcon);
-                IlIco.Images.Add(sIcon.Name, bmp);
-                LvIco.Items.Add(new ListViewItem { ImageKey = sIcon.Name, Name = sIcon.Name, Text = sIcon.Name });
-            }
-        }
-
-        public void OpenImg(string file)
-        {
-        }
-
-        public void SaveIcl(string file)
-        {
-        }
-
-        public void SaveIco(string file)
-        {
-        }
-
-        private OpenFileDialog _FdOpen;
-        public OpenFileDialog OpenFileDialog
+        public ContextMenuStrip IclMenu
         {
             get
             {
-                if (_FdOpen == null)
-                {
-                    _FdOpen = new OpenFileDialog();
-                }
-                return _FdOpen;
+                return CmIcl;
+            }
+        }
+
+        public ContextMenuStrip IcoMenu
+        {
+            get
+            {
+                return CmIco;
             }
         }
 
@@ -115,37 +89,55 @@ namespace Me.Amon.Ico
                 return _FdSave;
             }
         }
-        #endregion
 
-        #region 事件处理
-        private void AIco_Load(object sender, EventArgs e)
+        private OpenFileDialog _FdOpen;
+        public OpenFileDialog OpenFileDialog
         {
-            _MIcon = new MultiIcon();
-
-            _XmlMenu = new XmlMenu<AIco>(this, null);
-            _XmlMenu.Load("AIco.xml");
-            _XmlMenu.GetPopMenu("AIco", CmMenu);
-            _XmlMenu.GetStrokes("AIco");
+            get
+            {
+                if (_FdOpen == null)
+                {
+                    _FdOpen = new OpenFileDialog();
+                }
+                return _FdOpen;
+            }
         }
 
-        private void TcIco_TabClosing(object sender, TabControlCancelEventArgs e)
+        public void Open(string file)
         {
-            e.Cancel = TcIco.TabCount < 2;
+            _MIcon.Clear();
+            _MIcon.Load(file);
+
+            LvIco.Items.Clear();
+            IlIco.Images.Clear();
+
+            Image bmp;
+            foreach (SingleIcon sIcon in _MIcon)
+            {
+                bmp = GetBitmap(sIcon, EIco.PREVIEW_ICL_DIM);
+                IlIco.Images.Add(sIcon.Name, bmp);
+                LvIco.Items.Add(new ListViewItem { ImageKey = sIcon.Name, Name = sIcon.Name, Text = sIcon.Name });
+            }
         }
 
-        private void PbMenu_Click(object sender, EventArgs e)
+        public void Save()
         {
-            CmMenu.Show(PbMenu, 0, PbMenu.Height);
+            if (TcIco.SelectedTab == TpIco0)
+            {
+                SaveIcl();
+            }
+            else
+            {
+                SaveIco();
+            }
         }
 
-        private void BnSave_Click(object sender, EventArgs e)
+        public void OpenIcl()
         {
-
-        }
-        #endregion
-
-        private void LvIco_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
+            if (TcIco.SelectedTab != TpIco0)
+            {
+                return;
+            }
             if (LvIco.SelectedItems.Count < 1)
             {
                 return;
@@ -159,6 +151,186 @@ namespace Me.Amon.Ico
             AddTab(item.Text, sIcon);
         }
 
+        public void SaveIcl()
+        {
+            if (TcIco.SelectedTab != TpIco0)
+            {
+                return;
+            }
+            SaveFileDialog.Filter = EApp.FILE_SAVE_ICL;
+            if (DialogResult.OK != SaveFileDialog.ShowDialog())
+            {
+                return;
+            }
+            SaveIcl(SaveFileDialog.FileName);
+        }
+
+        public void SaveIcl(string file)
+        {
+            if (_MIcon != null && _MIcon.Count > 0)
+            {
+                _MIcon.Save(file, MultiIconFormat.ICL);
+            }
+        }
+
+        public void SaveIco()
+        {
+            if (TcIco.SelectedTab == TpIco0)
+            {
+                return;
+            }
+
+            SaveFileDialog.Filter = EApp.FILE_SAVE_ICO;
+            if (DialogResult.OK != SaveFileDialog.ShowDialog())
+            {
+                return;
+            }
+            SaveIco(SaveFileDialog.FileName);
+        }
+
+        public void SaveIco(string file)
+        {
+            if (_IIco != null)
+            {
+                _IIco.SaveIco(file);
+            }
+        }
+
+        public void Import(string file)
+        {
+            if (_IIco != null)
+            {
+                _IIco.Import(file);
+            }
+        }
+
+        public void Export(string file)
+        {
+            if (_IIco != null)
+            {
+                _IIco.Export(file);
+            }
+        }
+
+        public void RemoveIco()
+        {
+            if (TcIco.SelectedTab != TpIco0)
+            {
+                return;
+            }
+            if (LvIco.SelectedItems.Count < 1)
+            {
+                return;
+            }
+            ListViewItem item = LvIco.SelectedItems[0];
+            LvIco.Items.Remove(item);
+        }
+
+        public void RemoveImg()
+        {
+            if (TcIco.SelectedTab == TpIco0)
+            {
+                return;
+            }
+            _IIco.RemoveImg();
+        }
+
+        public void AppendImg(int dim)
+        {
+            if (TcIco.SelectedTab == TpIco0)
+            {
+                return;
+            }
+            _IIco.AppendImg();
+        }
+        #endregion
+
+        #region 事件处理
+        private void AIco_Load(object sender, EventArgs e)
+        {
+            _MIcon = new MultiIcon();
+
+            _XmlMenu = new XmlMenu<AIco>(this, null);
+            if (File.Exists(EIco.XML_MENU))
+            {
+                _XmlMenu.Load(EIco.XML_MENU);
+                _XmlMenu.GetStrokes("AIco");
+                _XmlMenu.GetPopMenu("AIco", CmMenu);
+                _XmlMenu.GetPopMenu("Icl", CmIcl);
+                _XmlMenu.GetPopMenu("Ico", CmIco);
+            }
+        }
+
+        private void AIco_KeyDown(object sender, KeyEventArgs e)
+        {
+            foreach (KeyStroke<AIco> stroke in _XmlMenu.KeyStrokes)
+            {
+                if (stroke.Action == null ||
+                    e.Control ^ stroke.Control ||
+                    e.Shift ^ stroke.Shift ||
+                    e.Alt ^ stroke.Alt ||
+                    e.KeyCode != stroke.Code)
+                {
+                    continue;
+                }
+
+                e.Handled = true;
+                stroke.Action.EventHandler(stroke, null);
+                break;
+            }
+        }
+
+        private void TcIco_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (TcIco.SelectedTab == null || TcIco.SelectedTab == TpIco0)
+            {
+                _IIco = null;
+                return;
+            }
+
+            if (TcIco.SelectedTab.Controls.Count > 0)
+            {
+                _IIco = TcIco.SelectedTab.Controls[0] as IIco;
+            }
+        }
+
+        private void TcIco_TabClosing(object sender, TabControlCancelEventArgs e)
+        {
+            e.Cancel = TcIco.SelectedIndex == 0;
+        }
+
+        private void PbMenu_Click(object sender, EventArgs e)
+        {
+            CmMenu.Show(PbMenu, 0, PbMenu.Height);
+        }
+
+        private void BnSave_Click(object sender, EventArgs e)
+        {
+            Save();
+        }
+
+        private void LvIco_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            OpenIcl();
+        }
+
+        private void LvIco_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button != System.Windows.Forms.MouseButtons.Right)
+            {
+                return;
+            }
+
+            ListViewItem item = LvIco.GetItemAt(e.X, e.Y);
+            if (item == null)
+            {
+                return;
+            }
+            item.Selected = true;
+            CmIcl.Show(MousePosition);
+        }
+        #endregion
+
         #region 私有函数
         private void AddTab(string msg, SingleIcon ico)
         {
@@ -169,18 +341,42 @@ namespace Me.Amon.Ico
             page.Text = msg;
             //page.UseVisualStyleBackColor = true;
             TcIco.TabPages.Add(page);
-            TcIco.SelectedTab = page;
 
-            IcoEditor png = new IcoEditor();
-            png.InitOnce();
-            png.Dock = DockStyle.Fill;
-            png.SingleIcon = ico;
-            page.Controls.Add(png);
+            IcoEditor editor = new IcoEditor(this);
+            editor.InitOnce();
+            editor.Dock = DockStyle.Fill;
+            editor.SingleIcon = ico;
+            page.Controls.Add(editor);
+
+            TcIco.SelectedTab = page;
+            _IIco = editor;
         }
 
-        private Image GetBitmap(SingleIcon sIcon)
+        private Image GetBitmap(SingleIcon sIcon, int dim)
         {
-            Image bmp = sIcon.Icon.ToBitmap();
+            IconImage img = sIcon[0];
+            int max = img.Image.Width;
+            int tmp;
+            for (int i = 1; i < sIcon.Count; i += 1)
+            {
+                if (img.PixelFormat < sIcon[i].PixelFormat)
+                {
+                    img = sIcon[i];
+                    max = img.Image.Width;
+                    continue;
+                }
+
+                tmp = sIcon[i].Image.Width;
+                tmp = tmp > dim ? tmp - dim : dim - tmp;
+                if (tmp < max)
+                {
+                    max = tmp;
+                    img = sIcon[i];
+                    continue;
+                }
+            }
+
+            Image bmp = img.Icon.ToBitmap();
             if (bmp.Width != 32)
             {
                 bmp = BeanUtil.ScaleImage(bmp, 32, true);

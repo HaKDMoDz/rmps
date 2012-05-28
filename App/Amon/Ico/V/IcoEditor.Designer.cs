@@ -43,17 +43,19 @@
             this.LbImg.ItemHeight = 72;
             this.LbImg.Location = new System.Drawing.Point(3, 3);
             this.LbImg.Name = "LbImg";
-            this.LbImg.Size = new System.Drawing.Size(120, 256);
+            this.LbImg.Size = new System.Drawing.Size(160, 256);
             this.LbImg.TabIndex = 0;
             this.LbImg.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.LbImg_DrawItem);
             this.LbImg.SelectedIndexChanged += new System.EventHandler(this.LbImg_SelectedIndexChanged);
+            this.LbImg.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LbImg_MouseUp);
             // 
             // PbImg
             // 
             this.PbImg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PbImg.Location = new System.Drawing.Point(129, 3);
+            this.PbImg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.PbImg.Location = new System.Drawing.Point(169, 3);
             this.PbImg.Name = "PbImg";
             this.PbImg.Size = new System.Drawing.Size(256, 256);
             this.PbImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -67,7 +69,7 @@
             this.Controls.Add(this.PbImg);
             this.Controls.Add(this.LbImg);
             this.Name = "IcoEditor";
-            this.Size = new System.Drawing.Size(388, 262);
+            this.Size = new System.Drawing.Size(428, 262);
             ((System.ComponentModel.ISupportInitialize)(this.PbImg)).EndInit();
             this.ResumeLayout(false);
 

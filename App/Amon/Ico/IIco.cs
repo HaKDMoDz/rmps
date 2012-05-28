@@ -4,6 +4,14 @@
     {
         void InitOnce();
 
-        void OpenFile(string file);
+        void AppendImg();
+
+        void RemoveImg();
+
+        void SaveIco(string file);
+
+        void Import(string file);
+
+        void Export(string file);
     }
 }

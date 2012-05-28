@@ -50,7 +50,7 @@ namespace Me.Amon.Uw.Ico
         {
             OpenFileDialog fd = new OpenFileDialog();
             fd.Multiselect = false;
-            fd.Filter = EApp.FILE_IMG;
+            fd.Filter = EApp.FILE_OPEN_IMG;
             if (DialogResult.OK != fd.ShowDialog(this))
             {
                 return;

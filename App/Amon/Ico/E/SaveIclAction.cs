@@ -11,8 +11,8 @@ namespace Me.Amon.Ico.E
                 return;
             }
 
-            IApp.SaveFileDialog.Filter = "";
-            if (DialogResult.OK != IApp.SaveFileDialog.ShowDialog())
+            IApp.SaveFileDialog.Filter = EApp.FILE_SAVE_ICL;
+            if (DialogResult.OK != IApp.SaveFileDialog.ShowDialog(IApp.Form))
             {
                 return;
             }

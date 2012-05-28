@@ -1,4 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace Me.Amon.Ico.E
 {
@@ -6,17 +9,10 @@ namespace Me.Amon.Ico.E
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
-            if (IApp == null)
+            if (IApp != null)
             {
-                return;
+                IApp.OpenIcl();
             }
-
-            IApp.OpenFileDialog.Filter = "";
-            if (DialogResult.OK != IApp.OpenFileDialog.ShowDialog(IApp.Form))
-            {
-                return;
-            }
-            IApp.OpenIcl(IApp.OpenFileDialog.FileName);
         }
     }
 }

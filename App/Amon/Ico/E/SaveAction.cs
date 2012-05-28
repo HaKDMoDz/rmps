@@ -1,13 +1,15 @@
 ﻿namespace Me.Amon.Ico.E
 {
-    public class RemoveIcoAction : AIcoAction
+    public class SaveAction : AIcoAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
-            if (IApp != null)
+            if (IApp == null)
             {
-                IApp.RemoveIco();
+                return;
             }
+
+            IApp.Save();
         }
     }
 }
