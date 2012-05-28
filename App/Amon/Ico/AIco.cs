@@ -60,6 +60,63 @@ namespace Me.Amon.Ico
         }
         #endregion
 
+        #region 公共函数
+        public void OpenIcl(string file)
+        {
+            _MIcon.Clear();
+            _MIcon.Load(file);
+
+            LvIco.Items.Clear();
+            IlIco.Images.Clear();
+
+            Image bmp;
+            foreach (SingleIcon sIcon in _MIcon)
+            {
+                bmp = GetBitmap(sIcon);
+                IlIco.Images.Add(sIcon.Name, bmp);
+                LvIco.Items.Add(new ListViewItem { ImageKey = sIcon.Name, Name = sIcon.Name, Text = sIcon.Name });
+            }
+        }
+
+        public void OpenImg(string file)
+        {
+        }
+
+        public void SaveIcl(string file)
+        {
+        }
+
+        public void SaveIco(string file)
+        {
+        }
+
+        private OpenFileDialog _FdOpen;
+        public OpenFileDialog OpenFileDialog
+        {
+            get
+            {
+                if (_FdOpen == null)
+                {
+                    _FdOpen = new OpenFileDialog();
+                }
+                return _FdOpen;
+            }
+        }
+
+        private SaveFileDialog _FdSave;
+        public SaveFileDialog SaveFileDialog
+        {
+            get
+            {
+                if (_FdSave == null)
+                {
+                    _FdSave = new SaveFileDialog();
+                }
+                return _FdSave;
+            }
+        }
+        #endregion
+
         #region 事件处理
         private void AIco_Load(object sender, EventArgs e)
         {
@@ -84,25 +141,6 @@ namespace Me.Amon.Ico
         private void BnSave_Click(object sender, EventArgs e)
         {
 
-        }
-        #endregion
-
-        #region 公共函数
-        public void Open(string file)
-        {
-            _MIcon.Clear();
-            _MIcon.Load(file);
-
-            LvIco.Items.Clear();
-            IlIco.Images.Clear();
-
-            Image bmp;
-            foreach (SingleIcon sIcon in _MIcon)
-            {
-                bmp = GetBitmap(sIcon);
-                IlIco.Images.Add(sIcon.Name, bmp);
-                LvIco.Items.Add(new ListViewItem { ImageKey = sIcon.Name, Name = sIcon.Name, Text = sIcon.Name });
-            }
         }
         #endregion
 

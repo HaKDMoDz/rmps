@@ -196,7 +196,13 @@
     <Compile Include="Gtd\EGtd.cs" />
     <Compile Include="Ico\EIco.cs" />
     <Compile Include="Ico\E\AIcoAction.cs" />
-    <Compile Include="Ico\E\OpenAction.cs" />
+    <Compile Include="Ico\E\AppendImgAction.cs" />
+    <Compile Include="Ico\E\OpenIclAction.cs" />
+    <Compile Include="Ico\E\OpenImgAction.cs" />
+    <Compile Include="Ico\E\RemoveIcoAction.cs" />
+    <Compile Include="Ico\E\RemoveImgAction.cs" />
+    <Compile Include="Ico\E\SaveIclAction.cs" />
+    <Compile Include="Ico\E\SaveIcoAction.cs" />
     <Compile Include="Ico\IIco.cs" />
     <Compile Include="Ico\MIco.cs" />
     <Compile Include="Img\AImg.cs">

@@ -2,10 +2,8 @@
 
 namespace Me.Amon.Ico.E
 {
-    public class OpenAction : AIcoAction
+    public class SaveIcoAction : AIcoAction
     {
-        private OpenFileDialog _FdOpen;
-
         public override void EventHandler(object sender, System.EventArgs e)
         {
             if (IApp == null)
@@ -13,15 +11,12 @@ namespace Me.Amon.Ico.E
                 return;
             }
 
-            if (_FdOpen == null)
-            {
-                _FdOpen = new OpenFileDialog();
-            }
-            if (DialogResult.OK != _FdOpen.ShowDialog(IApp.Form))
+            IApp.SaveFileDialog.Filter = "";
+            if (DialogResult.OK != IApp.SaveFileDialog.ShowDialog())
             {
                 return;
             }
-            IApp.Open(_FdOpen.FileName);
+            IApp.SaveIco(IApp.SaveFileDialog.FileName);
         }
     }
 }
