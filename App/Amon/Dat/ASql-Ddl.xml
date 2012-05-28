@@ -3,7 +3,7 @@
   <App>ASql</App>
   <Ver>1</Ver>
   <Libs>
-	<Lib Id="SQLite" Path="D:\Demo\Amon\System.Data.SQLite.dll" />
+	<Lib Id="SQLite" Path="Lib\System.Data.SQLite.dll" />
   </Libs>
   <RDBMS Id="SQLite" Name="" Text="" LibId="SQLite">
 	<Class>
