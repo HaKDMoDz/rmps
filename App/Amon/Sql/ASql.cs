@@ -5,10 +5,12 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
+using Me.Amon.Event;
 using Me.Amon.Sql.Editor;
 using Me.Amon.Sql.M;
 using Me.Amon.Sql.Model;
 using Me.Amon.Sql.V;
+using Me.Amon.Uc;
 using Me.Amon.Util;
 
 namespace Me.Amon.Sql
@@ -24,6 +26,7 @@ namespace Me.Amon.Sql
         private Dictionary<string, Assembly> _Assemblys;
         private List<Rdbms> _Drives;
         private DbResult _DataGrid;
+        private XmlMenu<ASql> _XmlMenu;
         #endregion
 
         #region 构造函数
@@ -62,17 +65,112 @@ namespace Me.Amon.Sql
         }
         #endregion
 
-        public Rdbms Dbms
+        #region 公共函数
+        public void ChangeDdl()
         {
-            get
+            DbConfig config = new DbConfig();
+            config.DriverList = _Drives;
+            config.AmonHandler = new AmonHandler<Rdbms>(ChangeDdl);
+            config.ShowDialog(this);
+        }
+
+        public void ChangeDdl(Rdbms ddl)
+        {
+            CloseConnection();
+
+            _Dbms = ddl;
+            GetConnection();
+            GetCommand();
+        }
+        #endregion
+
+        #region 事件处理
+        private void ASql_Load(object sender, EventArgs e)
+        {
+            _Param = UcUdf;
+
+            _XmlMenu = new XmlMenu<ASql>(this, null);
+            if (File.Exists("ASql.xml"))
             {
-                return _Dbms;
+                _XmlMenu.Load("ASql.xml");
+                _XmlMenu.GetStrokes("ASql");
             }
-            set
+
+            if (!File.Exists(ESql.DBMS_FILE))
             {
-                _Dbms = value;
+                return;
+            }
+
+            StreamReader reader = File.OpenText(ESql.DBMS_FILE);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(reader);
+            reader.Close();
+
+            LoadLib(doc);
+
+            _Drives = new List<Rdbms>();
+            foreach (XmlNode node in doc.SelectNodes("/Amon/RDBMS"))
+            {
+                Rdbms dbms = new Rdbms();
+                dbms.FromXml(node);
+                _Drives.Add(dbms);
             }
         }
+
+        private void ASql_KeyDown(object sender, KeyEventArgs e)
+        {
+            foreach (KeyStroke<ASql> stroke in _XmlMenu.KeyStrokes)
+            {
+                if (stroke.Action == null ||
+                    e.Control ^ stroke.Control ||
+                    e.Shift ^ stroke.Shift ||
+                    e.Alt ^ stroke.Alt ||
+                    e.KeyCode != stroke.Code)
+                {
+                    continue;
+                }
+
+                e.Handled = true;
+                stroke.Action.EventHandler(stroke, null);
+                break;
+            }
+        }
+
+        private void PbMenu_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void TcParams_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (TcParams.SelectedIndex)
+            {
+                case 0:
+                    _Param = UcUdf;
+                    break;
+                case 1:
+                    _Param = UcSql;
+                    break;
+                default:
+                    return;
+            }
+        }
+
+        private void TcResult_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TabPage page = TcResult.SelectedTab;
+            _DataGrid = page.Controls[0] as DbResult;
+        }
+
+        private void TcResult_TabClosing(object sender, TabControlCancelEventArgs e)
+        {
+            e.Cancel = TcResult.TabCount < 2;
+        }
+
+        private void BnExecute_Click(object sender, EventArgs e)
+        {
+            DoExecute();
+        }
+        #endregion
 
         #region 私有函数
         private void DoExecute()
@@ -155,77 +253,6 @@ namespace Me.Amon.Sql
         }
         #endregion
 
-        #region 事件处理
-        private void ASql_Load(object sender, EventArgs e)
-        {
-            _Param = UcUdf;
-
-            if (!File.Exists(ESql.DBMS_FILE))
-            {
-                return;
-            }
-
-            StreamReader reader = File.OpenText(ESql.DBMS_FILE);
-            XmlDocument doc = new XmlDocument();
-            doc.Load(reader);
-            reader.Close();
-
-            LoadLib(doc);
-
-            _Drives = new List<Rdbms>();
-            foreach (XmlNode node in doc.SelectNodes("/Amon/RDBMS"))
-            {
-                Rdbms dbms = new Rdbms();
-                dbms.FromXml(node);
-                _Drives.Add(dbms);
-            }
-        }
-
-        private void Main_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F8)
-            {
-                DoExecute();
-            }
-        }
-
-        private void PbMenu_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TcParams_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (TcParams.SelectedIndex)
-            {
-                case 0:
-                    _Param = UcUdf;
-                    break;
-                case 1:
-                    _Param = UcSql;
-                    break;
-                default:
-                    return;
-            }
-        }
-
-        private void TcResult_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            TabPage page = TcResult.SelectedTab;
-            _DataGrid = page.Controls[0] as DbResult;
-        }
-
-        private void TcResult_TabClosing(object sender, TabControlCancelEventArgs e)
-        {
-            e.Cancel = TcResult.TabCount < 2;
-        }
-
-        private void BnExecute_Click(object sender, EventArgs e)
-        {
-            DoExecute();
-        }
-        #endregion
-
         #region 数据库操作
         public IDbConnection GetConnection()
         {
@@ -234,11 +261,18 @@ namespace Me.Amon.Sql
                 return _Connect;
             }
 
-            Assembly assembly = _Assemblys[_Dbms.LibId];
-            _Connect = assembly.CreateInstance(_Dbms.ConnectionClass) as IDbConnection;
+            if ("System.Data.OleDb.OleDbConnection" == _Dbms.ConnectionClass)
+            {
+                _Connect = new System.Data.OleDb.OleDbConnection();
+            }
+            else
+            {
+                Assembly assembly = _Assemblys[_Dbms.LibId];
+                _Connect = assembly.CreateInstance(_Dbms.ConnectionClass) as IDbConnection;
+            }
             if (_Connect != null)
             {
-                _Connect.ConnectionString = string.Format(_Dbms.Uri, _Dbms.User, _Dbms.Password);
+                _Connect.ConnectionString = string.Format(_Dbms.ConnectionString, _Dbms.Uri, _Dbms.User, _Dbms.Password);
                 _Connect.Open();
             }
             return _Connect;
@@ -251,8 +285,15 @@ namespace Me.Amon.Sql
                 return _Command;
             }
 
-            Assembly assembly = _Assemblys[_Dbms.LibId];
-            _Command = assembly.CreateInstance(_Dbms.CommandClass) as IDbCommand;
+            if ("System.Data.OleDb.OleDbCommand" == _Dbms.CommandClass)
+            {
+                _Command = new System.Data.OleDb.OleDbCommand();
+            }
+            else
+            {
+                Assembly assembly = _Assemblys[_Dbms.LibId];
+                _Command = assembly.CreateInstance(_Dbms.CommandClass) as IDbCommand;
+            }
             if (_Command != null)
             {
                 _Command.Connection = GetConnection();
@@ -268,8 +309,15 @@ namespace Me.Amon.Sql
                 return _Adapter;
             }
 
-            Assembly assembly = _Assemblys[_Dbms.LibId];
-            _Adapter = assembly.CreateInstance(_Dbms.AdapterClass) as IDbDataAdapter;
+            if ("System.Data.OleDb.OleDbDataAdapter" == _Dbms.AdapterClass)
+            {
+                _Adapter = new System.Data.OleDb.OleDbDataAdapter();
+            }
+            else
+            {
+                Assembly assembly = _Assemblys[_Dbms.LibId];
+                _Adapter = assembly.CreateInstance(_Dbms.AdapterClass) as IDbDataAdapter;
+            }
             return _Adapter;
         }
 
@@ -283,6 +331,7 @@ namespace Me.Amon.Sql
             {
                 _Connect.Close();
             }
+            _Adapter = null;
         }
         #endregion
     }

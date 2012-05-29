@@ -60,6 +60,9 @@ namespace Me.Amon.Sql.Model
         /// </summary>
         public string Separator { get; set; }
 
+        public bool ToUpper { get; set; }
+        public bool ToLower { get; set; }
+
         public List<Item> Items { get; set; }
 
         public void Load(XmlNode node)
@@ -79,6 +82,8 @@ namespace Me.Amon.Sql.Model
             Error = Dml.Attribute(node, "Error", "");
             Escape = Dml.Attribute(node, "Escape", "");
             Separator = Dml.Attribute(node, "Separator", "");
+            ToUpper = "true" == Dml.Attribute(node, "ToUpper", "").ToLower();
+            ToLower = "true" == Dml.Attribute(node, "ToLower", "").ToLower();
 
             if (Type == "list")
             {

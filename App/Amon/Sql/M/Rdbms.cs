@@ -5,6 +5,8 @@ namespace Me.Amon.Sql.M
 {
     public class Rdbms
     {
+        public string Id { get; set; }
+
         public string LibId { get; set; }
 
         public string Name { get; set; }
@@ -16,6 +18,8 @@ namespace Me.Amon.Sql.M
         public string CommandClass { get; set; }
 
         public string AdapterClass { get; set; }
+
+        public string ConnectionString { get; set; }
 
         public string Uri { get; set; }
 
@@ -30,11 +34,14 @@ namespace Me.Amon.Sql.M
 
         public override int GetHashCode()
         {
-            return Name.GetHashCode();
+            return Id.GetHashCode();
         }
 
         public void FromXml(XmlNode node)
         {
+            Id = Dml.Attribute(node, "Id", "");
+            Name = Dml.Attribute(node, "Name", "");
+            Text = Dml.Attribute(node, "Text", "");
             LibId = Dml.Attribute(node, "LibId", "");
 
             XmlNode temp = node.SelectSingleNode("Class/Connection");
@@ -53,6 +60,11 @@ namespace Me.Amon.Sql.M
                 AdapterClass = temp.InnerText;
             }
 
+            temp = node.SelectSingleNode("Resource/Config");
+            if (temp != null)
+            {
+                ConnectionString = temp.InnerText;
+            }
             temp = node.SelectSingleNode("Resource/Uri");
             if (temp != null)
             {

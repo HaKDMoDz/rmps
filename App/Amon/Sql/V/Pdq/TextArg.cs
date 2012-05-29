@@ -53,6 +53,16 @@ namespace Me.Amon.Sql.V.Pdq
                 return false;
             }
 
+            // 大小转换
+            if (Param.ToUpper)
+            {
+                txt = txt.ToUpper();
+            }
+            if (Param.ToLower)
+            {
+                txt = txt.ToLower();
+            }
+
             // 模糊查找
             if (!string.IsNullOrEmpty(Param.Escape))
             {
