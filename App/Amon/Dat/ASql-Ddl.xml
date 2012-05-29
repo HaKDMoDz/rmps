@@ -5,7 +5,7 @@
   <Libs>
 	<Lib Id="SQLite" Path="Lib\System.Data.SQLite.dll" />
   </Libs>
-  <RDBMS Id="SQLite" Name="" Text="" LibId="SQLite">
+  <RDBMS Id="SQLite" Name="" Text="SQLite" LibId="SQLite">
 	<Class>
 	  <Connection>System.Data.SQLite.SQLiteConnection</Connection>
 	  <Command>System.Data.SQLite.SQLiteCommand</Command>
@@ -17,14 +17,26 @@
 		<Password></Password>
 	</Resource>
   </RDBMS>
-  <RDBMS Id="XLS" Name="" Text="">
+  <RDBMS Id="CSV" Name="" Text="CSV">
 	<Class>
 	  <Connection>System.Data.OleDb.OleDbConnection</Connection>
 	  <Command>System.Data.OleDb.OleDbCommand</Command>
 	  <Adapter>System.Data.OleDb.OleDbDataAdapter</Adapter>
 	</Class>
 	<Resource>
-		<Uri>Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Extended Properties="Excel 8.0;HDR=YES;"</Uri>
+		<Uri>Provider=Microsoft.Jet.OLEDB.4.0;Data Source="{0}";Extended Properties="text;HDR=Yes;FMT=Delimited(,)"</Uri>
+		<User></User>
+		<Password></Password>
+	</Resource>
+  </RDBMS>
+  <RDBMS Id="XLS" Name="" Text="XLS">
+	<Class>
+	  <Connection>System.Data.OleDb.OleDbConnection</Connection>
+	  <Command>System.Data.OleDb.OleDbCommand</Command>
+	  <Adapter>System.Data.OleDb.OleDbDataAdapter</Adapter>
+	</Class>
+	<Resource>
+		<Uri>Provider=Microsoft.Jet.OLEDB.4.0;Data Source="{0}";Extended Properties="Excel 8.0;HDR=YES"</Uri>
 		<User></User>
 		<Password></Password>
 	</Resource>
@@ -36,7 +48,7 @@
 	  <Adapter>System.Data.OleDb.OleDbDataAdapter</Adapter>
 	</Class>
 	<Resource>
-		<Uri>Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties="Excel 12.0;HDR=YES;"</Uri>
+		<Uri>Provider=Microsoft.ACE.OLEDB.12.0;Data Source="{0}";Extended Properties="Excel 12.0;HDR=YES"</Uri>
 		<User></User>
 		<Password></Password>
 	</Resource>
