@@ -474,7 +474,7 @@ namespace Me.Amon.Model.Pwd
                 string type = reader.GetAttribute("Type");
                 if (!CharUtil.IsValidateLong(type))
                 {
-                    continue;
+                    return false;
                 }
                 Att item = Att.GetInstance(int.Parse(type));
                 if (item == null)

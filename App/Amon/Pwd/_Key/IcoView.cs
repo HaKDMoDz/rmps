@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
+using Me.Amon.Ico;
 using Me.Amon.Util;
 
 namespace Me.Amon.Pwd._Key
@@ -120,6 +121,8 @@ namespace Me.Amon.Pwd._Key
 
             if (exts == ".ico")
             {
+                //AIco ico = new AIco();
+                //ico.ShowDialog();
             }
         }
 

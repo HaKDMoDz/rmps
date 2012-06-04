@@ -1536,6 +1536,8 @@ namespace Me.Amon.Pwd
                 return;
             }
 
+            int suc = 0;
+            int err = 0;
             using (StreamReader reader = File.OpenText(file))
             {
                 // 版本判断
@@ -1551,11 +1553,15 @@ namespace Me.Amon.Pwd
                 {
                     if (!string.IsNullOrWhiteSpace(line))
                     {
-                        if (_SafeModel.ImportByTxt(line, ver.Substring(5)))
+                        if (!_SafeModel.ImportByTxt(line, ver.Substring(5)))
                         {
-                            _SafeModel.Key.CatId = cat.Id;
-                            DoImportKey();
+                            err += 1;
+                            continue;
                         }
+
+                        _SafeModel.Key.CatId = cat.Id;
+                        DoImportKey();
+                        suc += 1;
                     }
                     line = reader.ReadLine();
                 }
@@ -1563,6 +1569,8 @@ namespace Me.Amon.Pwd
             }
 
             DoListKey(cat.Id);
+
+            Main.ShowAlert(string.Format("数据导入结果：{0}成功，{1}失败！", suc, err));
         }
 
         /// <summary>
@@ -1613,19 +1621,29 @@ namespace Me.Amon.Pwd
                 Main.ShowAlert("未知的文件版本，无法进行导入处理！");
                 return;
             }
+
+            int suc = 0;
+            int err = 0;
             reader.ReadToFollowing("Key");
             while (reader.Name == "Key")
             {
-                if (_SafeModel.ImportByXml(reader, ver))
+                if (!_SafeModel.ImportByXml(reader, ver))
                 {
-                    _SafeModel.Key.CatId = cat.Id;
-                    DoImportKey();
+                    err += 1;
+                    continue;
                 }
+
+                _SafeModel.Key.CatId = cat.Id;
+                DoImportKey();
+                suc += 1;
             }
             reader.Close();
             stream.Close();
 
             DoListKey(cat.Id);
+
+            Main.ShowAlert(string.Format("数据导入结果：{0}成功，{1}失败！", suc, err));
+            //ShowEcho(string.Format("", suc, err));
         }
 
         /// <summary>
@@ -1876,7 +1894,8 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            int cnt = 0;
+            int suc = 0;
+            int err = 0;
             using (StreamReader reader = File.OpenText(file))
             {
                 string line = reader.ReadLine();
@@ -1884,18 +1903,24 @@ namespace Me.Amon.Pwd
                 {
                     if (!string.IsNullOrWhiteSpace(line))
                     {
-                        if (_SafeModel.ImportByOld(line, "0"))
+                        if (!_SafeModel.ImportByOld(line, "0"))
                         {
-                            _SafeModel.Key.CatId = cat.Id;
-                            DoImportKey();
-                            cnt += 1;
+                            err += 1;
+                            continue;
                         }
+
+                        _SafeModel.Key.CatId = cat.Id;
+                        DoImportKey();
+                        suc += 1;
                     }
                     line = reader.ReadLine();
                 }
                 reader.Close();
             }
-            Main.ShowAlert(string.Format("成功导入 {0} 条记录！", cnt));
+
+            DoListKey(cat.Id);
+
+            Main.ShowAlert(string.Format("数据导入结果：{0}成功，{1}失败！", suc, err));
         }
         #endregion
         #endregion
