@@ -16,6 +16,7 @@ using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd._Cat;
 using Me.Amon.Pwd._Lib;
 using Me.Amon.Pwd._Log;
+using Me.Amon.Pwd._Key;
 using Me.Amon.Pwd.V.Pro;
 using Me.Amon.Pwd.V.Wiz;
 using Me.Amon.Uc;
@@ -376,7 +377,7 @@ namespace Me.Amon.Pwd
 
         public void ShowIcoSeeker(string rootDir, AmonHandler<Png> handler)
         {
-            IcoSeeker seeker = new IcoSeeker(_UserModel, rootDir);
+            KeyIcon seeker = new KeyIcon(_UserModel, rootDir);
             seeker.InitOnce(24);
             seeker.CallBackHandler = handler;
             BeanUtil.CenterToParent(seeker, this);
@@ -688,11 +689,11 @@ namespace Me.Amon.Pwd
 
         public void ChangeCatIcon()
         {
-            PngSeeker editor = new PngSeeker(_UserModel, _DataModel.CatDir);
-            editor.InitOnce(16);
-            editor.CallBackHandler = new AmonHandler<Png>(ChangeCatIcon);
-            BeanUtil.CenterToParent(editor, this);
-            editor.ShowDialog(this);
+            //AImg editor = new AImg(_UserModel, _DataModel.CatDir);
+            //editor.InitOnce(16);
+            //editor.CallBackHandler = new AmonHandler<Png>(ChangeCatIcon);
+            //BeanUtil.CenterToParent(editor, this);
+            //editor.ShowDialog(this);
         }
 
         public void ChangeCatIcon(Png png)
@@ -935,7 +936,7 @@ namespace Me.Amon.Pwd
 
         public void KeyMoveto()
         {
-            CatView view = new CatView(_UserModel);
+            CatTree view = new CatTree(_UserModel);
             view.Init(IlCatTree);
             view.CallBack = new AmonHandler<string>(ChangeKeyCat);
             BeanUtil.CenterToParent(view, this);
@@ -1928,7 +1929,7 @@ namespace Me.Amon.Pwd
 
         public void ShowIcoEdit()
         {
-            IcoSeeker edit = new IcoSeeker(_UserModel, _DataModel.KeyDir);
+            KeyIcon edit = new KeyIcon(_UserModel, _DataModel.KeyDir);
             edit.InitOnce(EApp.IMG_KEY_LIST_DIM);
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);

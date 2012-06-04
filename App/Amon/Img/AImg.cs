@@ -4,6 +4,9 @@ using Me.Amon.Uc;
 
 namespace Me.Amon.Img
 {
+    /// <summary>
+    /// 图片文件查看
+    /// </summary>
     public partial class AImg : Form, IApp
     {
         private IImg _IImg;
@@ -62,28 +65,12 @@ namespace Me.Amon.Img
             }
         }
 
-        public void OpenIcl(string file)
-        {
-            _IImg.OpenFile(file);
-        }
-
         public void OpenPng(string file)
         {
         }
         #endregion
 
         #region 事件处理
-        private void PbMenu_Click(object sender, System.EventArgs e)
-        {
-            if (_IImg.PopMenu != null)
-            {
-                _IImg.PopMenu.Show(PbMenu, 0, PbMenu.Height);
-            }
-        }
-
-        private void BtnOk_Click(object sender, System.EventArgs e)
-        {
-        }
         #endregion
 
         #region 私有函数

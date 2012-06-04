@@ -5,7 +5,7 @@
     /// </summary>
     public class EImg
     {
-        public const string PATTERN_ICO = "ico";
-        public const string PATTERN_PNG = "png";
+        public const string PATTERN_SMALL = "small";
+        public const string PATTERN_LARGE = "large";
     }
 }

@@ -4,14 +4,13 @@ using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Event;
 using Me.Amon.Model;
-using Me.Amon.Pwd;
 using Me.Amon.Util;
-using Me.Amon.Uw.Ico;
 
-namespace Me.Amon.Uw
+namespace Me.Amon.Pwd._Key
 {
-    public partial class IcoSeeker : Form
+    public partial class KeyIcon : Form
     {
+        #region 全局变量
         private UserModel _UserModel;
         private DirEdit _DirEdit;
         private IcoView _IcoView;
@@ -20,14 +19,15 @@ namespace Me.Amon.Uw
         private string _HomeDir;
         private int _LastIdx;
         private int _IcoSize;
+        #endregion
 
         #region 构造函数
-        public IcoSeeker()
+        public KeyIcon()
         {
             InitializeComponent();
         }
 
-        public IcoSeeker(UserModel userModel, string rootDir)
+        public KeyIcon(UserModel userModel, string rootDir)
         {
             _UserModel = userModel;
             _RootDir = rootDir;
@@ -191,12 +191,12 @@ namespace Me.Amon.Uw
             }
         }
 
-        public void CallBack(Pwd.Ico ico)
+        public void CallBack(Png png)
         {
             if (CallBackHandler != null)
             {
-                ico.Path = (LsDir.Items[_LastIdx] as Dir).Id;
-                CallBackHandler.Invoke(ico);
+                png.Path = (LsDir.Items[_LastIdx] as Dir).Id;
+                CallBackHandler.Invoke(png);
             }
             Close();
         }

@@ -5,18 +5,18 @@ using Me.Amon.Model;
 
 namespace Me.Amon.Pwd._Cat
 {
-    public partial class CatView : Form
+    public partial class CatTree : Form
     {
         private UserModel _UserModel;
         private TreeNode _RootNode;
 
         #region 构造函数
-        public CatView()
+        public CatTree()
         {
             InitializeComponent();
         }
 
-        public CatView(UserModel userModel)
+        public CatTree(UserModel userModel)
         {
             _UserModel = userModel;
 

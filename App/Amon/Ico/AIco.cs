@@ -12,6 +12,9 @@ using Me.Amon.Util;
 
 namespace Me.Amon.Ico
 {
+    /// <summary>
+    /// 图标提取、编辑及预览。
+    /// </summary>
     public partial class AIco : Form, IApp
     {
         private int _TpCnt;

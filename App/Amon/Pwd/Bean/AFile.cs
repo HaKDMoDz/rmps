@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using Me.Amon.Img;
 using Me.Amon.Model.Pwd;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Util;
@@ -92,8 +93,8 @@ namespace Me.Amon.Pwd.Bean
                 string exts = _Att.GetSpec(FileAtt.SPEC_FILE_EXTS);
                 if (exts == ".png" || exts == ".jpg" || exts == ".jpeg" || exts == ".bmp")
                 {
-                    ImgViewer viewer = new ImgViewer();
-                    viewer.Init(dstFile);
+                    AImg viewer = new AImg();
+                    //viewer.Init(dstFile);
                     viewer.Show(this);
                     return;
                 }

@@ -225,6 +225,18 @@
     <Compile Include="Ico\V\IcoEditor.Designer.cs">
       <DependentUpon>IcoEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Img\V\Large\AImage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Img\V\Large\AImage.Designer.cs">
+      <DependentUpon>AImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Img\V\Small\ASmall.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Img\V\Small\ASmall.Designer.cs">
+      <DependentUpon>ASmall.cs</DependentUpon>
+    </Compile>
     <Compile Include="MApp.cs" />
     <Compile Include="Pwd\Att.cs" />
     <Compile Include="Pwd\Bean\ACall.cs">
@@ -1053,10 +1065,10 @@
     <Compile Include="Uw\Error.Designer.cs">
       <DependentUpon>Error.cs</DependentUpon>
     </Compile>
-    <Compile Include="Uw\IcoSeeker.cs">
+    <Compile Include="Pwd\_Png\IcoSeeker.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Uw\IcoSeeker.Designer.cs">
+    <Compile Include="Pwd\_Png\IcoSeeker.Designer.cs">
       <DependentUpon>IcoSeeker.cs</DependentUpon>
     </Compile>
     <Compile Include="Uc\Item.cs" />
@@ -1075,23 +1087,23 @@
     <Compile Include="Util\SafeUtil.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Img\V\DirEdit.cs">
+    <Compile Include="Pwd\_Png\DirEdit.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Img\V\DirEdit.Designer.cs">
+    <Compile Include="Pwd\_Png\DirEdit.Designer.cs">
       <DependentUpon>DirEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Img\V\IcoView.cs">
+    <Compile Include="Pwd\_Png\IcoView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Img\V\IcoView.Designer.cs">
+    <Compile Include="Pwd\_Png\IcoView.Designer.cs">
       <DependentUpon>IcoView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Uw\PngSeeker.cs">
+    <Compile Include="Pwd\_Cat\CatIcon.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Uw\PngSeeker.Designer.cs">
-      <DependentUpon>PngSeeker.cs</DependentUpon>
+    <Compile Include="Pwd\_Cat\CatIcon.Designer.cs">
+      <DependentUpon>CatIcon.cs</DependentUpon>
     </Compile>
     <Compile Include="Uw\UdcEditor.cs">
       <SubType>Form</SubType>
@@ -1168,12 +1180,6 @@
     </Compile>
     <Compile Include="Uw\Alert.Designer.cs">
       <DependentUpon>Alert.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Uw\ImgViewer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Uw\ImgViewer.Designer.cs">
-      <DependentUpon>ImgViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Uw\Input.cs">
       <SubType>Form</SubType>
@@ -1256,6 +1262,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ico\V\IcoEditor.resx">
       <DependentUpon>IcoEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Img\V\Large\AImage.resx">
+      <DependentUpon>AImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Img\V\Small\ASmall.resx">
+      <DependentUpon>ASmall.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
@@ -1510,20 +1522,20 @@
     <EmbeddedResource Include="Uw\Error.resx">
       <DependentUpon>Error.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Uw\IcoSeeker.resx">
+    <EmbeddedResource Include="Pwd\_Png\IcoSeeker.resx">
       <DependentUpon>IcoSeeker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\Sign\SignOl.resx">
       <DependentUpon>SignOl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Img\V\DirEdit.resx">
+    <EmbeddedResource Include="Pwd\_Png\DirEdit.resx">
       <DependentUpon>DirEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Img\V\IcoView.resx">
+    <EmbeddedResource Include="Pwd\_Png\IcoView.resx">
       <DependentUpon>IcoView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Uw\PngSeeker.resx">
-      <DependentUpon>PngSeeker.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\_Cat\CatIcon.resx">
+      <DependentUpon>CatIcon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\UdcEditor.resx">
       <DependentUpon>UdcEditor.cs</DependentUpon>
@@ -1557,9 +1569,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\Alert.resx">
       <DependentUpon>Alert.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Uw\ImgViewer.resx">
-      <DependentUpon>ImgViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\Input.resx">
       <DependentUpon>Input.cs</DependentUpon>

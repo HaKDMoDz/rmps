@@ -246,7 +246,7 @@ namespace Me.Amon.Sql
                 }
                 return true;
             }
-            catch (Exception exp)
+            catch (Exception)
             {
                 return false;
             }

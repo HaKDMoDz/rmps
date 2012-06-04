@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
-using Me.Amon.Pwd;
 using Me.Amon.Da;
 
-namespace Me.Amon.Uw.Ico
+namespace Me.Amon.Pwd._Key
 {
     public partial class DirEdit : UserControl
     {
-        private IcoSeeker _IcoSeeker;
+        private KeyIcon _IcoSeeker;
         private Dir _Item;
 
         public DirEdit()
@@ -15,7 +14,7 @@ namespace Me.Amon.Uw.Ico
             InitializeComponent();
         }
 
-        public DirEdit(IcoSeeker icoSeeker)
+        public DirEdit(KeyIcon icoSeeker)
         {
             _IcoSeeker = icoSeeker;
 

@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Uw
+﻿namespace Me.Amon.Pwd._Key
 {
-    partial class IcoSeeker
+    partial class KeyIcon
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IcoSeeker));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KeyIcon));
             this.LsDir = new System.Windows.Forms.ListBox();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MiAppend = new System.Windows.Forms.ToolStripMenuItem();

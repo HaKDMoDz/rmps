@@ -571,7 +571,7 @@ namespace Me.Amon.Uc
                         _Actions[id] = action;
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return null;
                 }

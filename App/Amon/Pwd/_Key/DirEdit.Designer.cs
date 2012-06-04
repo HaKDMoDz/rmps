@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Uw.Ico
+﻿namespace Me.Amon.Pwd._Key
 {
     partial class DirEdit
     {

@@ -4,23 +4,22 @@ using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Event;
 using Me.Amon.Model;
-using Me.Amon.Pwd;
 using Me.Amon.Util;
 
-namespace Me.Amon.Uw
+namespace Me.Amon.Pwd._Cat
 {
-    public partial class PngSeeker : Form
+    public partial class CatIcon : Form
     {
         private UserModel _UserModel;
         private string _HomeDir;
         private int _IcoSize;
 
-        public PngSeeker()
+        public CatIcon()
         {
             InitializeComponent();
         }
 
-        public PngSeeker(UserModel userModel, string homeDir)
+        public CatIcon(UserModel userModel, string homeDir)
         {
             _UserModel = userModel;
             _HomeDir = homeDir;

@@ -4,9 +4,9 @@ using System.Windows.Forms;
 using Me.Amon.Properties;
 using Me.Amon.Util;
 
-namespace Me.Amon.Uw
+namespace Me.Amon.Img.V.Large
 {
-    public partial class ImgViewer : Form
+    public partial class AImage : UserControl, IImg
     {
         #region 全局变量
         private Image _SrcImage;
@@ -26,9 +26,23 @@ namespace Me.Amon.Uw
         #endregion
 
         #region 构造函数
-        public ImgViewer()
+        public AImage()
         {
             InitializeComponent();
+        }
+        #endregion
+
+        #region 接口实现
+        public void InitOnce()
+        {
+        }
+
+        public Control Control
+        {
+            get
+            {
+                return this;
+            }
         }
 
         public void Init(string file)
@@ -54,14 +68,6 @@ namespace Me.Amon.Uw
         #endregion
 
         #region 事件处理
-        private void ImgViewer_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F5)
-            {
-                TopMost = !TopMost;
-            }
-        }
-
         private void ImgViewer_Resize(object sender, EventArgs e)
         {
             PbImg.Location = new Point((PlImg.Width - PbImg.Width) >> 1, (PlImg.Height - PbImg.Height) >> 1);

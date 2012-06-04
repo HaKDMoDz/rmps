@@ -7,9 +7,5 @@ namespace Me.Amon.Img
         void InitOnce();
 
         Control Control { get; }
-
-        ContextMenuStrip PopMenu { get; }
-
-        void OpenFile(string file);
     }
 }

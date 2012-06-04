@@ -12,7 +12,6 @@ namespace Me.Amon.Img.E
             {
                 return;
             }
-            IApp.OpenIcl(fd.FileName);
         }
     }
 }

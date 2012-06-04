@@ -5,11 +5,11 @@ using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Util;
 
-namespace Me.Amon.Uw.Ico
+namespace Me.Amon.Pwd._Key
 {
     public partial class IcoView : UserControl
     {
-        private IcoSeeker _IcoSeeker;
+        private KeyIcon _IcoSeeker;
 
         #region 构造函数
         public IcoView()
@@ -17,7 +17,7 @@ namespace Me.Amon.Uw.Ico
             InitializeComponent();
         }
 
-        public IcoView(IcoSeeker icoEdit)
+        public IcoView(KeyIcon icoEdit)
         {
             _IcoSeeker = icoEdit;
 
@@ -43,7 +43,7 @@ namespace Me.Amon.Uw.Ico
                 return;
             }
 
-            _IcoSeeker.CallBack(new Pwd.Ico { File = LvIco.SelectedItems[0].ImageKey });
+            _IcoSeeker.CallBack(new Png { File = LvIco.SelectedItems[0].ImageKey });
         }
 
         private void BtAppend_Click(object sender, EventArgs e)
