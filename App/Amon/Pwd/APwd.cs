@@ -794,6 +794,20 @@ namespace Me.Amon.Pwd
                 LastOpt();
             }
 
+            if (!_KeyIcon.ContainsKey(_SafeModel.Key.IcoName))
+            {
+                string path;
+                if (CharUtil.IsValidateHash(_SafeModel.Key.IcoPath))
+                {
+                    path = Path.Combine(_DataModel.KeyDir, _SafeModel.Key.IcoPath, _SafeModel.Key.IcoName + EApp.IMG_KEY_LIST_EXT);
+                }
+                else
+                {
+                    path = Path.Combine(_DataModel.KeyDir, _SafeModel.Key.IcoName + EApp.IMG_KEY_LIST_EXT);
+                }
+                _KeyIcon.Add(_SafeModel.Key.IcoName, BeanUtil.ReadImage(path, BeanUtil.NaN24));
+            }
+
             _SafeModel.Key = null;
         }
 

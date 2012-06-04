@@ -36,19 +36,24 @@
             this.BtEraser = new System.Windows.Forms.Button();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.TlGrid = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.PbImg)).BeginInit();
             this.FlGrid.SuspendLayout();
             this.TlGrid.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // PbImg
             // 
-            this.PbImg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PbImg.Location = new System.Drawing.Point(3, 3);
+            this.PbImg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.PbImg.Location = new System.Drawing.Point(78, 62);
             this.PbImg.Name = "PbImg";
-            this.PbImg.Size = new System.Drawing.Size(294, 213);
+            this.PbImg.Size = new System.Drawing.Size(128, 81);
+            this.PbImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PbImg.TabIndex = 0;
             this.PbImg.TabStop = false;
+            this.PbImg.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PbImg_MouseClick);
+            this.PbImg.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PbImg_MouseMove);
             // 
             // FlGrid
             // 
@@ -71,6 +76,7 @@
             this.BtCursor.TabIndex = 0;
             this.TpTips.SetToolTip(this.BtCursor, "鼠标提示");
             this.BtCursor.UseVisualStyleBackColor = true;
+            this.BtCursor.Click += new System.EventHandler(this.BtCursor_Click);
             // 
             // BtGrid
             // 
@@ -81,6 +87,7 @@
             this.BtGrid.TabIndex = 1;
             this.TpTips.SetToolTip(this.BtGrid, "位置提示");
             this.BtGrid.UseVisualStyleBackColor = true;
+            this.BtGrid.Click += new System.EventHandler(this.BtGrid_Click);
             // 
             // BtEraser
             // 
@@ -91,6 +98,7 @@
             this.BtEraser.TabIndex = 2;
             this.TpTips.SetToolTip(this.BtEraser, "清除所有标记");
             this.BtEraser.UseVisualStyleBackColor = true;
+            this.BtEraser.Click += new System.EventHandler(this.BtEraser_Click);
             // 
             // TlGrid
             // 
@@ -106,19 +114,32 @@
             this.TlGrid.RowCount = 1;
             this.TlGrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TlGrid.Size = new System.Drawing.Size(294, 35);
-            this.TlGrid.TabIndex = 3;
+            this.TlGrid.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.PbImg);
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(294, 213);
+            this.panel1.TabIndex = 0;
             // 
             // ALarge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.PbImg);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.TlGrid);
             this.Name = "ALarge";
             this.Size = new System.Drawing.Size(300, 260);
             ((System.ComponentModel.ISupportInitialize)(this.PbImg)).EndInit();
             this.FlGrid.ResumeLayout(false);
             this.TlGrid.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -132,5 +153,6 @@
         private System.Windows.Forms.Button BtEraser;
         private System.Windows.Forms.FlowLayoutPanel FlGrid;
         private System.Windows.Forms.TableLayoutPanel TlGrid;
+        private System.Windows.Forms.Panel panel1;
     }
 }

@@ -35,6 +35,9 @@ namespace Me.Amon.Img.V
         #region 接口实现
         public void InitOnce()
         {
+            _GroundBrush = new SolidBrush(Color.White);
+            _CurPen = new Pen(Color.FromArgb(128, 255, 0, 0), 1.0f);
+            _PosPen = new Pen(Color.FromArgb(128, 0, 255, 0), 2.0f);
         }
 
         public Control Control
@@ -47,10 +50,6 @@ namespace Me.Amon.Img.V
 
         public void OpenFile(string file)
         {
-        }
-
-        public void Init(string file)
-        {
             _SrcImage = BeanUtil.ReadImage(file, null);
             if (_SrcImage == null)
             {
@@ -59,24 +58,15 @@ namespace Me.Amon.Img.V
 
             _TmpImage = new Bitmap(_SrcImage.Width, _SrcImage.Height);
             _DstImage = new Bitmap(_SrcImage.Width, _SrcImage.Height);
-            _GroundBrush = new SolidBrush(Color.White);
-            _CurPen = new Pen(Color.FromArgb(128, 255, 0, 0), 1.0f);
-            _PosPen = new Pen(Color.FromArgb(128, 0, 255, 0), 2.0f);
-
             PbImg.Width = _SrcImage.Width;
             PbImg.Height = _SrcImage.Height;
-            PbImg.Location = new Point((PlImg.Width - _SrcImage.Width) >> 1, (PlImg.Height - _SrcImage.Height) >> 1);
+            PbImg.Location = new Point((panel1.Width - _SrcImage.Width) >> 1, (panel1.Height - _SrcImage.Height) >> 1);
 
             ReDraw();
         }
         #endregion
 
         #region 事件处理
-        private void ImgViewer_Resize(object sender, EventArgs e)
-        {
-            PbImg.Location = new Point((PlImg.Width - PbImg.Width) >> 1, (PlImg.Height - PbImg.Height) >> 1);
-        }
-
         private void PbImg_MouseMove(object sender, MouseEventArgs e)
         {
             DoDraw(e.Location.X, e.Location.Y);

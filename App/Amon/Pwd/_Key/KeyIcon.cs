@@ -36,9 +36,39 @@ namespace Me.Amon.Pwd._Key
         }
         #endregion
 
+        #region 公有函数
         public int IcoSize { get; set; }
+
         public string HomeDir { get { return _HomeDir; } }
+
         public AmonHandler<Png> CallBackHandler { get; set; }
+
+        public void UpdateDir(Dir item)
+        {
+            bool update = CharUtil.IsValidateHash(item.Id);
+            _UserModel.DBA.SaveVcs(item);
+            if (update)
+            {
+                LsDir.Items[LsDir.SelectedIndex] = item;
+            }
+            else
+            {
+                Directory.CreateDirectory(Path.Combine(_RootDir, item.Id));
+                LsDir.Items.Add(item);
+                LsDir.SelectedItem = item;
+            }
+        }
+
+        public void CallBack(Png png)
+        {
+            if (CallBackHandler != null)
+            {
+                png.Path = (LsDir.Items[_LastIdx] as Dir).Id;
+                CallBackHandler.Invoke(png);
+            }
+            Close();
+        }
+        #endregion
 
         #region 事件处理
         private void KeyIcon_Load(object sender, EventArgs e)
@@ -168,34 +198,6 @@ namespace Me.Amon.Pwd._Key
             }
             Controls.Add(_IcoView);
             _Control = _IcoView;
-        }
-        #endregion
-
-        #region 公有函数
-        public void UpdateDir(Dir item)
-        {
-            bool update = CharUtil.IsValidateHash(item.Id);
-            _UserModel.DBA.SaveVcs(item);
-            if (update)
-            {
-                LsDir.Items[LsDir.SelectedIndex] = item;
-            }
-            else
-            {
-                Directory.CreateDirectory(Path.Combine(_RootDir, item.Id));
-                LsDir.Items.Add(item);
-                LsDir.SelectedItem = item;
-            }
-        }
-
-        public void CallBack(Png png)
-        {
-            if (CallBackHandler != null)
-            {
-                png.Path = (LsDir.Items[_LastIdx] as Dir).Id;
-                CallBackHandler.Invoke(png);
-            }
-            Close();
         }
         #endregion
     }

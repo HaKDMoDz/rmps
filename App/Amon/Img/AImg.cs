@@ -9,9 +9,11 @@ namespace Me.Amon.Img
     /// </summary>
     public partial class AImg : Form, IApp
     {
+        #region 全局变量
         private IImg _IImg;
         private UserModel _UserModel;
         //private ViewModel _ViewModel;
+        #endregion
 
         #region 构造函数
         public AImg()
@@ -66,6 +68,14 @@ namespace Me.Amon.Img
         private void AImg_Load(object sender, System.EventArgs e)
         {
             ShowLarge();
+        }
+
+        private void AImg_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+            {
+                TopMost = !TopMost;
+            }
         }
         #endregion
 

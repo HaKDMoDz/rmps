@@ -37,9 +37,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 262);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "AImg";
             this.Text = "图像查看器";
             this.Load += new System.EventHandler(this.AImg_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AImg_KeyDown);
             this.ResumeLayout(false);
 
         }
