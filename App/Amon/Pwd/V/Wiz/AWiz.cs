@@ -175,7 +175,7 @@ namespace Me.Amon.Pwd.V.Wiz
             _APwd.ShowTips(control, caption);
         }
 
-        public void ShowIcoSeeker(string rootDir, AmonHandler<Pwd.Ico> handler)
+        public void ShowIcoSeeker(string rootDir, AmonHandler<Png> handler)
         {
             _APwd.ShowIcoSeeker(rootDir, handler);
         }

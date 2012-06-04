@@ -76,7 +76,7 @@ namespace Me.Amon.Uw
             if (CallBackHandler != null)
             {
                 var item = LvPng.SelectedItems[0];
-                CallBackHandler.Invoke(new Png { Path = _HomeDir, File = item.ImageKey, Image = IlPng.Images[item.ImageKey] });
+                CallBackHandler.Invoke(new Png { Path = _HomeDir, File = item.ImageKey, LargeImage = IlPng.Images[item.ImageKey] });
             }
             Close();
         }
@@ -96,7 +96,7 @@ namespace Me.Amon.Uw
             if (CallBackHandler != null)
             {
                 var item = LvPng.SelectedItems[0];
-                CallBackHandler.Invoke(new Png { Path = _HomeDir, File = item.ImageKey, Image = IlPng.Images[item.ImageKey] });
+                CallBackHandler.Invoke(new Png { Path = _HomeDir, File = item.ImageKey, LargeImage = IlPng.Images[item.ImageKey] });
             }
             Close();
         }

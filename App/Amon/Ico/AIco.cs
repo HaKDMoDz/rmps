@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.IconLib;
 using System.IO;
 using System.Windows.Forms;
+using Me.Amon.Event;
 using Me.Amon.Ico.V;
 using Me.Amon.Model;
 using Me.Amon.Uc;
@@ -61,6 +63,9 @@ namespace Me.Amon.Ico
         #endregion
 
         #region 公共函数
+        public TIco TIco { get; set; }
+        public AmonHandler<TIco> AmonHandler { get; set; }
+
         public ContextMenuStrip IclMenu
         {
             get
@@ -157,12 +162,37 @@ namespace Me.Amon.Ico
             {
                 return;
             }
-            SaveFileDialog.Filter = EApp.FILE_SAVE_ICL;
-            if (DialogResult.OK != SaveFileDialog.ShowDialog())
+
+            // 外部调用模式
+            if (AmonHandler == null)
             {
+                SaveFileDialog.Filter = EApp.FILE_SAVE_ICL;
+                if (DialogResult.OK == SaveFileDialog.ShowDialog())
+                {
+                    SaveIcl(SaveFileDialog.FileName);
+                }
                 return;
             }
-            SaveIcl(SaveFileDialog.FileName);
+
+            // 独立编辑模式
+            if (TIco.Images == null)
+            {
+                List<Image> list = new List<Image>();
+            }
+            else
+            {
+                TIco.Images.Clear();
+            }
+            ListViewItem item = LvIco.SelectedItems[0];
+            SingleIcon sIcon = _MIcon[item.Name];
+            if (sIcon != null)
+            {
+                foreach (IconImage ico in sIcon)
+                {
+                    TIco.Images.Add(ico.Icon.ToBitmap());
+                }
+            }
+            AmonHandler.Invoke(TIco);
         }
 
         public void SaveIcl(string file)
@@ -180,19 +210,34 @@ namespace Me.Amon.Ico
                 return;
             }
 
-            SaveFileDialog.Filter = EApp.FILE_SAVE_ICO;
-            if (DialogResult.OK != SaveFileDialog.ShowDialog())
+            // 独立编辑模式
+            if (AmonHandler == null)
             {
+                SaveFileDialog.Filter = EApp.FILE_SAVE_ICO;
+                if (DialogResult.OK == SaveFileDialog.ShowDialog())
+                {
+                    SaveIco(SaveFileDialog.FileName);
+                }
                 return;
             }
-            SaveIco(SaveFileDialog.FileName);
+
+            // 独立编辑模式
+            if (TIco.Images == null)
+            {
+                List<Image> list = new List<Image>();
+            }
+            else
+            {
+                TIco.Images.Clear();
+            }
+            _IIco.ToImages(TIco.Images);
         }
 
         public void SaveIco(string file)
         {
             if (_IIco != null)
             {
-                _IIco.SaveIco(file);
+                _IIco.SingleIcon.Save(file);
             }
         }
 

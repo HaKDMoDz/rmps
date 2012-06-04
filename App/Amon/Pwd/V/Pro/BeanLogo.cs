@@ -12,7 +12,7 @@ namespace Me.Amon.Pwd.V.Pro
     {
         private APro _APro;
         private LogoAtt _Att;
-        private Pwd.Ico _AIco;
+        private Png _APng;
         private DataModel _DataModel;
 
         #region 构造函数
@@ -33,7 +33,7 @@ namespace Me.Amon.Pwd.V.Pro
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
             _DataModel = dataModel;
-            _AIco = new Pwd.Ico();
+            _APng = new Png();
 
             _APro.ShowTips(PbLogo, "点击选择徽标");
         }
@@ -48,8 +48,8 @@ namespace Me.Amon.Pwd.V.Pro
 
             if (_Att != null)
             {
-                _AIco.File = _Att.Text;
-                _AIco.Path = _Att.Path;
+                _APng.File = _Att.Text;
+                _APng.Path = _Att.Path;
 
                 TbData.Text = _Att.Data;
 
@@ -115,10 +115,10 @@ namespace Me.Amon.Pwd.V.Pro
                 return false;
             }
 
-            if (_Att.Text != _AIco.File)
+            if (_Att.Text != _APng.File)
             {
-                _Att.Text = _AIco.File;
-                _Att.Path = _AIco.Path;
+                _Att.Text = _APng.File;
+                _Att.Path = _APng.Path;
                 _Att.Modified = true;
             }
 
@@ -135,21 +135,21 @@ namespace Me.Amon.Pwd.V.Pro
         #region 事件处理
         private void PbName_Click(object sender, System.EventArgs e)
         {
-            _APro.ShowIcoSeeker(new AmonHandler<Pwd.Ico>(ChangeImgByKey));
+            _APro.ShowIcoSeeker(new AmonHandler<Png>(ChangeImgByKey));
         }
         #endregion
 
-        private void ChangeImgByKey(Pwd.Ico ico)
+        private void ChangeImgByKey(Png png)
         {
-            _AIco = ico;
+            _APng = png;
             string path;
-            if (CharUtil.IsValidateHash(ico.Path))
+            if (CharUtil.IsValidateHash(png.Path))
             {
-                path = Path.Combine(_DataModel.KeyDir, ico.Path, ico.File + EApp.IMG_KEY_EDIT_EXT);
+                path = Path.Combine(_DataModel.KeyDir, png.Path, png.File + EApp.IMG_KEY_EDIT_EXT);
             }
             else
             {
-                path = Path.Combine(_DataModel.KeyDir, ico.File + EApp.IMG_KEY_EDIT_EXT);
+                path = Path.Combine(_DataModel.KeyDir, png.File + EApp.IMG_KEY_EDIT_EXT);
             }
             PbLogo.Image = BeanUtil.ReadImage(path, BeanUtil.NaN16);
         }

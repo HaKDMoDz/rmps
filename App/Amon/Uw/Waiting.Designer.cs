@@ -43,7 +43,7 @@
             // 
             // PbImg
             // 
-            this.PbImg.Image = global::Me.Amon.Properties.Resources.Loading;
+            this.PbImg.Image = global::Me.Amon.Properties.Resources.Waiting;
             this.PbImg.Location = new System.Drawing.Point(12, 12);
             this.PbImg.Name = "PbImg";
             this.PbImg.Size = new System.Drawing.Size(160, 20);

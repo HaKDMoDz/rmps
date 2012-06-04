@@ -9,7 +9,7 @@ namespace Me.Amon.Ico.M
         public int Dim { get; set; }
         public string Text { get; set; }
         public Bitmap Source { get; set; }
-        public Bitmap Preview { get; set; }
+        public Bitmap Thumbs { get; set; }
 
         public void Decode(Bitmap bgImg, IconImage ico)
         {
@@ -19,8 +19,8 @@ namespace Me.Amon.Ico.M
             //Text = string.Format("{0}*{0}-{1} {2}", Dim, GetImageFormat(ico.IconImageFormat), GetPixelFormat(ico.PixelFormat));
             Text = string.Format("{0}*{0} {1}", Dim, GetPixelFormat(ico.PixelFormat));
 
-            Preview = new Bitmap(bgImg.Width, bgImg.Height);
-            using (Graphics g = Graphics.FromImage(Preview))
+            Thumbs = new Bitmap(bgImg.Width, bgImg.Height);
+            using (Graphics g = Graphics.FromImage(Thumbs))
             {
                 g.DrawImage(bgImg, 0, 0, bgImg.Width, bgImg.Height);
                 int w = bgImg.Width < Source.Width ? bgImg.Width : Source.Width;

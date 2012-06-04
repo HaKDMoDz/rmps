@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.IconLib;
 using System.Drawing.Imaging;
@@ -46,19 +47,17 @@ namespace Me.Amon.Ico.V
             }
         }
 
-        public void SaveIco(string file)
+        public void ToImages(List<Image> images)
         {
             if (_SIcon == null || LbImg.Items.Count < 1)
             {
                 return;
             }
 
-            _SIcon.Clear();
             foreach (Abc item in LbImg.Items)
             {
-                _SIcon.Add(item.Source);
+                images.Add(item.Source);
             }
-            _SIcon.Save(file);
         }
 
         public void Import(string file)
@@ -86,12 +85,12 @@ namespace Me.Amon.Ico.V
             }
             PbImg.Image = item.Source;
 
-            using (Graphics g = Graphics.FromImage(item.Preview))
+            using (Graphics g = Graphics.FromImage(item.Thumbs))
             {
-                int w = item.Preview.Width < img.Width ? item.Preview.Width : img.Width;
-                int h = item.Preview.Height < img.Height ? item.Preview.Height : img.Width;
-                int x = (item.Preview.Width - w) >> 1;
-                int y = (item.Preview.Height - h) >> 1;
+                int w = item.Thumbs.Width < img.Width ? item.Thumbs.Width : img.Width;
+                int h = item.Thumbs.Height < img.Height ? item.Thumbs.Height : img.Width;
+                int x = (item.Thumbs.Width - w) >> 1;
+                int y = (item.Thumbs.Height - h) >> 1;
                 g.DrawImage(img, x, y, w, h);
                 g.Save();
             }
@@ -114,6 +113,11 @@ namespace Me.Amon.Ico.V
         {
             get
             {
+                _SIcon.Clear();
+                foreach (Abc item in LbImg.Items)
+                {
+                    _SIcon.Add(item.Source);
+                }
                 return _SIcon;
             }
             set
@@ -145,12 +149,12 @@ namespace Me.Amon.Ico.V
             SizeF size = e.Graphics.MeasureString(item.Text, LbImg.Font);
             Rectangle rect = e.Bounds;
 
-            int x = rect.X + ((rect.Width - item.Preview.Width) >> 1);
-            int y = rect.Y + ((rect.Height - item.Preview.Height - (int)size.Height - 3) >> 1);
-            e.Graphics.DrawImage(item.Preview, x, y, item.Preview.Width, item.Preview.Height);
+            int x = rect.X + ((rect.Width - item.Thumbs.Width) >> 1);
+            int y = rect.Y + ((rect.Height - item.Thumbs.Height - (int)size.Height - 3) >> 1);
+            e.Graphics.DrawImage(item.Thumbs, x, y, item.Thumbs.Width, item.Thumbs.Height);
 
             x = rect.X + ((rect.Width - (int)size.Width) >> 1);
-            y = y + item.Preview.Height + 3;
+            y = y + item.Thumbs.Height + 3;
             e.Graphics.DrawString(item.Text, LbImg.Font, _Brush, x, y);
         }
 

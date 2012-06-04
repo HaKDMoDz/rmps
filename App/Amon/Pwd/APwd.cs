@@ -374,7 +374,7 @@ namespace Me.Amon.Pwd
             TpTips.SetToolTip(control, caption);
         }
 
-        public void ShowIcoSeeker(string rootDir, AmonHandler<Pwd.Ico> handler)
+        public void ShowIcoSeeker(string rootDir, AmonHandler<Png> handler)
         {
             IcoSeeker seeker = new IcoSeeker(_UserModel, rootDir);
             seeker.InitOnce(24);
@@ -703,7 +703,7 @@ namespace Me.Amon.Pwd
             }
             if (!IlCatTree.Images.ContainsKey(png.File))
             {
-                IlCatTree.Images.Add(png.File, png.Image);
+                IlCatTree.Images.Add(png.File, png.LargeImage);
             }
             _LastNode.ImageKey = png.File;
             _LastNode.SelectedImageKey = png.File;

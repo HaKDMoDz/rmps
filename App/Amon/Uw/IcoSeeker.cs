@@ -2,9 +2,9 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using Me.Amon.Pwd;
 using Me.Amon.Event;
 using Me.Amon.Model;
+using Me.Amon.Pwd;
 using Me.Amon.Util;
 using Me.Amon.Uw.Ico;
 
@@ -55,7 +55,7 @@ namespace Me.Amon.Uw
 
         public int IcoSize { get { return _IcoSize; } }
         public string HomeDir { get { return _HomeDir; } }
-        public AmonHandler<Pwd.Ico> CallBackHandler { get; set; }
+        public AmonHandler<Png> CallBackHandler { get; set; }
 
         #region 事件处理
         #region 界面事件

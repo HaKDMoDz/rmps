@@ -131,7 +131,6 @@
       <DependentUpon>ABar.cs</DependentUpon>
     </Compile>
     <Compile Include="Bar\EBar.cs" />
-    <Compile Include="Bar\MBar.cs" />
     <Compile Include="Bar\Opt\Email.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -207,8 +206,8 @@
     <Compile Include="Ico\E\SaveIclAction.cs" />
     <Compile Include="Ico\E\SaveIcoAction.cs" />
     <Compile Include="Ico\IIco.cs" />
-    <Compile Include="Ico\MIco.cs" />
     <Compile Include="Ico\M\Abc.cs" />
+    <Compile Include="Ico\TIco.cs" />
     <Compile Include="Img\AImg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,7 +219,6 @@
     <Compile Include="Img\E\OpenAction.cs" />
     <Compile Include="Img\E\SaveAction.cs" />
     <Compile Include="Img\IImg.cs" />
-    <Compile Include="Img\MImg.cs" />
     <Compile Include="Ico\V\IcoEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -386,6 +384,7 @@
     <Compile Include="Pwd\E\_Key\SortDirAction.cs" />
     <Compile Include="Pwd\E\_Key\SortKeyAction.cs" />
     <Compile Include="Pwd\M\ViewModel1.cs" />
+    <Compile Include="Pwd\Png.cs" />
     <Compile Include="Pwd\_Att\CallAtt.cs" />
     <Compile Include="Da\DBAccess.cs" />
     <Compile Include="Da\DBObject.cs" />
@@ -467,12 +466,6 @@
     </Compile>
     <Compile Include="Model\SafeModel.cs" />
     <Compile Include="Model\Pwd\DataModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Gtd\MGtdDetail.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Gtd\MGtd.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Pwd\SafeModel.cs">
@@ -760,7 +753,6 @@
     <Compile Include="Model\Sec\DataModel.cs" />
     <Compile Include="Sec\ESec.cs" />
     <Compile Include="Sec\ISec.cs" />
-    <Compile Include="Sec\MSec.cs" />
     <Compile Include="Sec\V\Pro\IForm.cs" />
     <Compile Include="Sec\V\Pro\IView.cs" />
     <Compile Include="Sec\V\Pro\APro.cs">
@@ -919,7 +911,6 @@
     <Compile Include="Sql\E\ASqlAction.cs" />
     <Compile Include="Sql\E\SQLite\SQLiteAction.cs" />
     <Compile Include="Sql\ISql.cs" />
-    <Compile Include="Sql\MSql.cs" />
     <Compile Include="Sql\M\Ddl.cs" />
     <Compile Include="Sql\M\Dml.cs" />
     <Compile Include="Sql\M\Param.cs" />

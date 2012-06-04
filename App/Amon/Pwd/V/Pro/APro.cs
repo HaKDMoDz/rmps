@@ -356,7 +356,7 @@ namespace Me.Amon.Pwd.V.Pro
         #endregion
 
         #region 公有函数
-        public void ShowIcoSeeker(AmonHandler<Pwd.Ico> handler)
+        public void ShowIcoSeeker(AmonHandler<Png> handler)
         {
             _APwd.ShowIcoSeeker(_DataModel.KeyDir, handler);
         }

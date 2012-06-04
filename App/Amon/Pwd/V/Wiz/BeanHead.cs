@@ -12,7 +12,7 @@ namespace Me.Amon.Pwd.V.Wiz
     public partial class BeanHead : UserControl, IWizView
     {
         private AWiz _AWiz;
-        private Pwd.Ico _AIco;
+        private Png _APng;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
         private TextBox _TBox;
@@ -34,7 +34,7 @@ namespace Me.Amon.Pwd.V.Wiz
         public void Init(DataModel dataModel, ViewModel viewModel)
         {
             _DataModel = dataModel;
-            _AIco = new Pwd.Ico();
+            _APng = new Png();
 
             TbName.GotFocus += new EventHandler(TbName_GotFocus);
             TbMeta.GotFocus += new EventHandler(TbMeta_GotFocus);
@@ -72,8 +72,8 @@ namespace Me.Amon.Pwd.V.Wiz
             {
                 return;
             }
-            _AIco.File = logo.Text;
-            _AIco.Path = logo.Path;
+            _APng.File = logo.Text;
+            _APng.Path = logo.Path;
             if (!CharUtil.IsValidateHash(logo.Text))
             {
                 PbLogo.Image = BeanUtil.NaN16;
@@ -131,14 +131,14 @@ namespace Me.Amon.Pwd.V.Wiz
             _SafeModel.Modified |= meta.Modified;
 
             LogoAtt logo = _SafeModel.Logo;
-            if (logo.Text != _AIco.File)
+            if (logo.Text != _APng.File)
             {
-                logo.Text = _AIco.File;
+                logo.Text = _APng.File;
                 logo.Modified = true;
             }
-            if (logo.Path != _AIco.Path)
+            if (logo.Path != _APng.Path)
             {
-                logo.Path = _AIco.Path;
+                logo.Path = _APng.Path;
                 logo.Modified = true;
             }
             _SafeModel.Modified |= logo.Modified;
@@ -195,7 +195,7 @@ namespace Me.Amon.Pwd.V.Wiz
 
         private void PbLogo_Click(object sender, EventArgs e)
         {
-            _AWiz.ShowIcoSeeker(_DataModel.KeyDir, new AmonHandler<Pwd.Ico>(ChangeImgByKey));
+            _AWiz.ShowIcoSeeker(_DataModel.KeyDir, new AmonHandler<Png>(ChangeImgByKey));
         }
 
         private void TbName_GotFocus(object sender, EventArgs e)
@@ -220,17 +220,17 @@ namespace Me.Amon.Pwd.V.Wiz
         #endregion
 
         #region 私有函数
-        private void ChangeImgByKey(Pwd.Ico ico)
+        private void ChangeImgByKey(Png png)
         {
-            _AIco = ico;
+            _APng = png;
             string path;
-            if (CharUtil.IsValidateHash(ico.Path))
+            if (CharUtil.IsValidateHash(png.Path))
             {
-                path = Path.Combine(_DataModel.KeyDir, ico.Path, ico.File + EApp.IMG_KEY_EDIT_EXT);
+                path = Path.Combine(_DataModel.KeyDir, png.Path, png.File + EApp.IMG_KEY_EDIT_EXT);
             }
             else
             {
-                path = Path.Combine(_DataModel.KeyDir, ico.File + EApp.IMG_KEY_EDIT_EXT);
+                path = Path.Combine(_DataModel.KeyDir, png.File + EApp.IMG_KEY_EDIT_EXT);
             }
             PbLogo.Image = BeanUtil.ReadImage(path, BeanUtil.NaN16);
         }

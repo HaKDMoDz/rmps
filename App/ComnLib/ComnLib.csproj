@@ -37,10 +37,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bar\MBar.cs" />
     <Compile Include="Ce\Renamer.cs" />
     <Compile Include="Ce\Wrapper.cs" />
     <Compile Include="Da\DBA.cs" />
     <Compile Include="Da\DFA.cs" />
+    <Compile Include="Gtd\MGtd.cs" />
+    <Compile Include="Gtd\MGtdDetail.cs" />
+    <Compile Include="Ico\MIco.cs" />
+    <Compile Include="Img\MImg.cs" />
     <Compile Include="Model\Dbv.cs" />
     <Compile Include="Model\Dto.cs" />
     <Compile Include="Model\Log.cs" />
@@ -48,18 +53,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pwd\Cat.cs" />
     <Compile Include="Pwd\Dir.cs" />
-    <Compile Include="Pwd\Ico.cs" />
     <Compile Include="Pwd\Key.cs" />
     <Compile Include="Pwd\KeyLog.cs" />
     <Compile Include="Pwd\Lib.cs" />
     <Compile Include="Pwd\LibDetail.cs" />
-    <Compile Include="Pwd\Png.cs" />
     <Compile Include="Pwd\Udc.cs" />
     <Compile Include="Ren\MRen.cs" />
+    <Compile Include="Sec\MSec.cs" />
+    <Compile Include="Spy\MSpy.cs" />
+    <Compile Include="Sql\MSql.cs" />
     <Compile Include="Util\CharUtil.cs" />
     <Compile Include="Util\HashUtil.cs" />
     <Compile Include="Util\TimeUtil.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
