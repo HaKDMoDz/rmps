@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Img.V.Small
+﻿namespace Me.Amon.Img.V
 {
     partial class ASmall
     {

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
+using Me.Amon.Img.V;
 using Me.Amon.Model;
-using Me.Amon.Uc;
 
 namespace Me.Amon.Img
 {
@@ -11,8 +11,7 @@ namespace Me.Amon.Img
     {
         private IImg _IImg;
         private UserModel _UserModel;
-        private ViewModel _ViewModel;
-        private XmlMenu<AImg> _Menu;
+        //private ViewModel _ViewModel;
 
         #region 构造函数
         public AImg()
@@ -33,7 +32,7 @@ namespace Me.Amon.Img
         {
             get
             {
-                return 0;
+                return EApp.IAPP_AIMG;
             }
             set
             {
@@ -57,61 +56,65 @@ namespace Me.Amon.Img
         #endregion
 
         #region 公共函数
-        public XmlMenu<AImg> XmlMenu
+        public void OpenFile(string file)
         {
-            get
-            {
-                return _Menu;
-            }
-        }
-
-        public void OpenPng(string file)
-        {
+            _IImg.OpenFile(file);
         }
         #endregion
 
         #region 事件处理
+        private void AImg_Load(object sender, System.EventArgs e)
+        {
+            ShowLarge();
+        }
         #endregion
 
         #region 私有函数
-
-        private void ShowPng()
+        private void ShowLarge()
         {
-            //if (_IImg != null)
-            //{
-            //    Controls.Remove(_IImg.Control);
-            //}
+            if (_IImg != null)
+            {
+                Controls.Remove(_IImg.Control);
+            }
 
-            //if (_APng == null)
-            //{
-            //    _APng = new AIco();
-            //    _APng.InitOnce();
-            //}
+            if (_ALarge == null)
+            {
+                _ALarge = new ALarge();
+                _ALarge.InitOnce();
+            }
 
-            //_APng.Location = new System.Drawing.Point(12, 12);
-            //_APng.Size = new System.Drawing.Size(449, 322);
-            //_APng.TabIndex = 0;
-            //Controls.Add(_APng);
+            _ALarge.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            _ALarge.Location = new System.Drawing.Point(12, 12);
+            _ALarge.Size = new System.Drawing.Size(360, 238);
+            _ALarge.TabIndex = 0;
+            Controls.Add(_ALarge);
 
-            //_IImg = _AIco;
+            _IImg = _ALarge;
         }
-        //private AIco _APng;
+        private ALarge _ALarge;
+
+        private void ShowSmall()
+        {
+            if (_IImg != null)
+            {
+                Controls.Remove(_IImg.Control);
+            }
+
+            if (_ASmall == null)
+            {
+                _ASmall = new ASmall();
+                _ASmall.InitOnce();
+            }
+
+            _ASmall.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            _ASmall.Location = new System.Drawing.Point(12, 12);
+            _ASmall.Size = new System.Drawing.Size(360, 238);
+            _ASmall.TabIndex = 0;
+            Controls.Add(_ASmall);
+
+            _IImg = _ALarge;
+        }
+        private ASmall _ASmall;
         #endregion
-
-        private void AImg_Load(object sender, System.EventArgs e)
-        {
-            //if (_UserModel == null)
-            //{
-            //    return;
-            //}
-
-            //_ViewModel = new ViewModel(_UserModel);
-            //_ViewModel.Load();
-
-            _Menu = new XmlMenu<AImg>(this, _ViewModel);
-            _Menu.Load("Img.xml");
-
-            //ShowIco();
-        }
     }
 }

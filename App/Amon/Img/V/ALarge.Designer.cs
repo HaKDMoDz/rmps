@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Img.V.Large
+﻿namespace Me.Amon.Img.V
 {
-    partial class AImage
+    partial class ALarge
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -29,31 +29,26 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.PlImg = new System.Windows.Forms.Panel();
-            this.FlGrid = new System.Windows.Forms.FlowLayoutPanel();
-            this.TpTips = new System.Windows.Forms.ToolTip(this.components);
-            this.TlGrid = new System.Windows.Forms.TableLayoutPanel();
             this.PbImg = new System.Windows.Forms.PictureBox();
+            this.FlGrid = new System.Windows.Forms.FlowLayoutPanel();
             this.BtCursor = new System.Windows.Forms.Button();
             this.BtGrid = new System.Windows.Forms.Button();
             this.BtEraser = new System.Windows.Forms.Button();
-            this.PlImg.SuspendLayout();
+            this.TpTips = new System.Windows.Forms.ToolTip(this.components);
+            this.TlGrid = new System.Windows.Forms.TableLayoutPanel();
+            ((System.ComponentModel.ISupportInitialize)(this.PbImg)).BeginInit();
             this.FlGrid.SuspendLayout();
             this.TlGrid.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PbImg)).BeginInit();
             this.SuspendLayout();
             // 
-            // PlImg
+            // PbImg
             // 
-            this.PlImg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PlImg.AutoScroll = true;
-            this.PlImg.Controls.Add(this.PbImg);
-            this.PlImg.Location = new System.Drawing.Point(3, 3);
-            this.PlImg.Name = "PlImg";
-            this.PlImg.Size = new System.Drawing.Size(294, 213);
-            this.PlImg.TabIndex = 2;
+            this.PbImg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PbImg.Location = new System.Drawing.Point(3, 3);
+            this.PbImg.Name = "PbImg";
+            this.PbImg.Size = new System.Drawing.Size(294, 213);
+            this.PbImg.TabIndex = 0;
+            this.PbImg.TabStop = false;
             // 
             // FlGrid
             // 
@@ -64,31 +59,6 @@
             this.FlGrid.Name = "FlGrid";
             this.FlGrid.Size = new System.Drawing.Size(87, 29);
             this.FlGrid.TabIndex = 0;
-            // 
-            // TlGrid
-            // 
-            this.TlGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TlGrid.ColumnCount = 3;
-            this.TlGrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TlGrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
-            this.TlGrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TlGrid.Controls.Add(this.FlGrid, 1, 0);
-            this.TlGrid.Location = new System.Drawing.Point(3, 222);
-            this.TlGrid.Name = "TlGrid";
-            this.TlGrid.RowCount = 1;
-            this.TlGrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TlGrid.Size = new System.Drawing.Size(294, 35);
-            this.TlGrid.TabIndex = 3;
-            // 
-            // PbImg
-            // 
-            this.PbImg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PbImg.Location = new System.Drawing.Point(103, 76);
-            this.PbImg.Name = "PbImg";
-            this.PbImg.Size = new System.Drawing.Size(100, 50);
-            this.PbImg.TabIndex = 0;
-            this.PbImg.TabStop = false;
             // 
             // BtCursor
             // 
@@ -122,18 +92,33 @@
             this.TpTips.SetToolTip(this.BtEraser, "清除所有标记");
             this.BtEraser.UseVisualStyleBackColor = true;
             // 
-            // AImage
+            // TlGrid
+            // 
+            this.TlGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TlGrid.ColumnCount = 3;
+            this.TlGrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TlGrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
+            this.TlGrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TlGrid.Controls.Add(this.FlGrid, 1, 0);
+            this.TlGrid.Location = new System.Drawing.Point(3, 222);
+            this.TlGrid.Name = "TlGrid";
+            this.TlGrid.RowCount = 1;
+            this.TlGrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TlGrid.Size = new System.Drawing.Size(294, 35);
+            this.TlGrid.TabIndex = 3;
+            // 
+            // ALarge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.PlImg);
+            this.Controls.Add(this.PbImg);
             this.Controls.Add(this.TlGrid);
-            this.Name = "AImage";
+            this.Name = "ALarge";
             this.Size = new System.Drawing.Size(300, 260);
-            this.PlImg.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PbImg)).EndInit();
             this.FlGrid.ResumeLayout(false);
             this.TlGrid.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.PbImg)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -142,7 +127,6 @@
 
         private System.Windows.Forms.Button BtCursor;
         private System.Windows.Forms.ToolTip TpTips;
-        private System.Windows.Forms.Panel PlImg;
         private System.Windows.Forms.PictureBox PbImg;
         private System.Windows.Forms.Button BtGrid;
         private System.Windows.Forms.Button BtEraser;

@@ -1,4 +1,4 @@
- namespace Me.Amon
+namespace Me.Amon
 {
     public class EApp
     {
@@ -70,6 +70,9 @@
         public const int IAPP_ASEC = 2;
         public const int IAPP_ABAR = 4;
         public const int IAPP_AREN = 8;
+        public const int IAPP_AICO = 16;
+        public const int IAPP_AIMG = 32;
+        public const int IAPP_ASPY = 64;
 
         public const string FILE_OPEN_IMG = "图片文件（*.png,*.jpg,*.bmp）|*.png;*.jpg;*.jpeg;*.jpe;*.jfif;*.bmp;*.dib;*.rle|PNG文件（*.png）|*.png|JPG文件（*.jpg,*.jpeg,*.jpe,*.jfif）|*.jpg;*.jpeg;*.jpe;*.jfif|BMP文件（*.bmp,*dib,*.rle）|*.bmp;*.dib;*.rle";
         public const string FILE_OPEN_IMG_GIF = "图片文件（*.png,*.jpg,*.bmp,*.gif）|*.png;*.jpg;*.jpeg;*.jpe;*.jfif;*.bmp;*.dib;*.rle;*.gif|PNG文件（*.png）|*.png|JPG文件（*.jpg,*.jpeg,*.jpe,*.jfif）|*.jpg;*.jpeg;*.jpe;*.jfif|BMP文件（*.bmp,*dib,*.rle）|*.bmp;*.dib;*.rle|GIF文件（*.gif）|*.gif";

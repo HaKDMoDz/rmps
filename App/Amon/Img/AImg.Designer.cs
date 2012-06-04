@@ -35,15 +35,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(384, 262);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AImg";
-            this.Text = "AImg";
+            this.Text = "图像查看器";
+            this.Load += new System.EventHandler(this.AImg_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
 
     }
 }

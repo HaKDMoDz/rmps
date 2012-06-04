@@ -4,9 +4,9 @@ using System.Windows.Forms;
 using Me.Amon.Properties;
 using Me.Amon.Util;
 
-namespace Me.Amon.Img.V.Large
+namespace Me.Amon.Img.V
 {
-    public partial class AImage : UserControl, IImg
+    public partial class ALarge : UserControl, IImg
     {
         #region 全局变量
         private Image _SrcImage;
@@ -26,7 +26,7 @@ namespace Me.Amon.Img.V.Large
         #endregion
 
         #region 构造函数
-        public AImage()
+        public ALarge()
         {
             InitializeComponent();
         }
@@ -43,6 +43,10 @@ namespace Me.Amon.Img.V.Large
             {
                 return this;
             }
+        }
+
+        public void OpenFile(string file)
+        {
         }
 
         public void Init(string file)

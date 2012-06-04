@@ -7,5 +7,7 @@ namespace Me.Amon.Img
         void InitOnce();
 
         Control Control { get; }
+
+        void OpenFile(string file);
     }
 }

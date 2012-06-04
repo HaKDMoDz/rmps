@@ -225,16 +225,16 @@
     <Compile Include="Ico\V\IcoEditor.Designer.cs">
       <DependentUpon>IcoEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Img\V\Large\AImage.cs">
+    <Compile Include="Img\V\ALarge.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Img\V\Large\AImage.Designer.cs">
-      <DependentUpon>AImage.cs</DependentUpon>
+    <Compile Include="Img\V\ALarge.Designer.cs">
+      <DependentUpon>ALarge.cs</DependentUpon>
     </Compile>
-    <Compile Include="Img\V\Small\ASmall.cs">
+    <Compile Include="Img\V\ASmall.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Img\V\Small\ASmall.Designer.cs">
+    <Compile Include="Img\V\ASmall.Designer.cs">
       <DependentUpon>ASmall.cs</DependentUpon>
     </Compile>
     <Compile Include="MApp.cs" />
@@ -1263,10 +1263,10 @@
     <EmbeddedResource Include="Ico\V\IcoEditor.resx">
       <DependentUpon>IcoEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Img\V\Large\AImage.resx">
-      <DependentUpon>AImage.cs</DependentUpon>
+    <EmbeddedResource Include="Img\V\ALarge.resx">
+      <DependentUpon>ALarge.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Img\V\Small\ASmall.resx">
+    <EmbeddedResource Include="Img\V\ASmall.resx">
       <DependentUpon>ASmall.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">

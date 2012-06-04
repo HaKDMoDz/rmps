@@ -94,8 +94,8 @@ namespace Me.Amon.Pwd.Bean
                 if (exts == ".png" || exts == ".jpg" || exts == ".jpeg" || exts == ".bmp")
                 {
                     AImg viewer = new AImg();
-                    //viewer.Init(dstFile);
                     viewer.Show(this);
+                    viewer.OpenFile(dstFile);
                     return;
                 }
                 if (exts == ".txt" || exts == ".ini")

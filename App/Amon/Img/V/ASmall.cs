@@ -7,7 +7,7 @@ using Me.Amon.Model;
 using Me.Amon.Pwd;
 using Me.Amon.Util;
 
-namespace Me.Amon.Img.V.Small
+namespace Me.Amon.Img.V
 {
     public partial class ASmall : UserControl, IImg
     {
@@ -35,6 +35,10 @@ namespace Me.Amon.Img.V.Small
             {
                 return this;
             }
+        }
+
+        public void OpenFile(string file)
+        {
         }
 
         public void InitOnce(int icoSize)
