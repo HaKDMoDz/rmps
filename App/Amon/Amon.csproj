@@ -529,11 +529,11 @@
       <DependentUpon>FindBar.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\IPwd.cs" />
-    <Compile Include="Pwd\_Cat\CatView.cs">
+    <Compile Include="Pwd\_Cat\CatTree.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pwd\_Cat\CatView.Designer.cs">
-      <DependentUpon>CatView.cs</DependentUpon>
+    <Compile Include="Pwd\_Cat\CatTree.Designer.cs">
+      <DependentUpon>CatTree.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\_Lib\LibEdit.cs">
       <SubType>Form</SubType>
@@ -1065,11 +1065,11 @@
     <Compile Include="Uw\Error.Designer.cs">
       <DependentUpon>Error.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\_Png\IcoSeeker.cs">
+    <Compile Include="Pwd\_Key\KeyIcon.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pwd\_Png\IcoSeeker.Designer.cs">
-      <DependentUpon>IcoSeeker.cs</DependentUpon>
+    <Compile Include="Pwd\_Key\KeyIcon.Designer.cs">
+      <DependentUpon>KeyIcon.cs</DependentUpon>
     </Compile>
     <Compile Include="Uc\Item.cs" />
     <Compile Include="User\Sign\SignOl.cs">
@@ -1087,16 +1087,16 @@
     <Compile Include="Util\SafeUtil.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Pwd\_Png\DirEdit.cs">
+    <Compile Include="Pwd\_Key\DirEdit.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\_Png\DirEdit.Designer.cs">
+    <Compile Include="Pwd\_Key\DirEdit.Designer.cs">
       <DependentUpon>DirEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\_Png\IcoView.cs">
+    <Compile Include="Pwd\_Key\IcoView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\_Png\IcoView.Designer.cs">
+    <Compile Include="Pwd\_Key\IcoView.Designer.cs">
       <DependentUpon>IcoView.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\_Cat\CatIcon.cs">
@@ -1324,8 +1324,8 @@
     <EmbeddedResource Include="Pwd\Bean\FindBar.resx">
       <DependentUpon>FindBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\_Cat\CatView.resx">
-      <DependentUpon>CatView.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\_Cat\CatTree.resx">
+      <DependentUpon>CatTree.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\_Lib\LibEdit.resx">
       <DependentUpon>LibEdit.cs</DependentUpon>
@@ -1522,16 +1522,16 @@
     <EmbeddedResource Include="Uw\Error.resx">
       <DependentUpon>Error.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\_Png\IcoSeeker.resx">
-      <DependentUpon>IcoSeeker.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\_Key\KeyIcon.resx">
+      <DependentUpon>KeyIcon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\Sign\SignOl.resx">
       <DependentUpon>SignOl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\_Png\DirEdit.resx">
+    <EmbeddedResource Include="Pwd\_Key\DirEdit.resx">
       <DependentUpon>DirEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\_Png\IcoView.resx">
+    <EmbeddedResource Include="Pwd\_Key\IcoView.resx">
       <DependentUpon>IcoView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\_Cat\CatIcon.resx">
@@ -1587,6 +1587,7 @@
     </EmbeddedResource>
     <None Include="Amon_TemporaryKey.pfx" />
     <None Include="app.config" />
+    <None Include="Logo\logo.icns" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -1601,6 +1602,17 @@
     <Content Include="Amon.dat" />
     <Content Include="Amon.res" />
     <Content Include="Logo\logo.ico" />
+    <Content Include="Logo\logo.svg" />
+    <Content Include="Logo\logo128.png" />
+    <Content Include="Logo\logo16.png" />
+    <Content Include="Logo\logo24.png" />
+    <Content Include="Logo\logo256.png" />
+    <Content Include="Logo\logo32.png" />
+    <Content Include="Logo\logo48.png" />
+    <Content Include="Logo\logo64.png" />
+    <Content Include="Logo\logo96.png" />
+    <None Include="Resources\Logo32.png" />
+    <None Include="Resources\Logo24.png" />
     <None Include="Resources\PosSel.png" />
     <None Include="Resources\PosDef.png" />
     <None Include="Resources\Eraser.png" />

@@ -18,7 +18,6 @@ namespace Me.Amon.Pwd._Key
         private string _RootDir;
         private string _HomeDir;
         private int _LastIdx;
-        private int _IcoSize;
         #endregion
 
         #region 构造函数
@@ -35,11 +34,15 @@ namespace Me.Amon.Pwd._Key
 
             InitializeComponent();
         }
+        #endregion
 
-        public void InitOnce(int icoSize)
+        public int IcoSize { get; set; }
+        public string HomeDir { get { return _HomeDir; } }
+        public AmonHandler<Png> CallBackHandler { get; set; }
+
+        #region 事件处理
+        private void KeyIcon_Load(object sender, EventArgs e)
         {
-            _IcoSize = icoSize;
-
             ShowIcoView();
 
             LsDir.Items.Add(new Dir { Id = "0", Text = "默认分类", Tips = "默认分类", Path = "." });
@@ -51,13 +54,7 @@ namespace Me.Amon.Pwd._Key
             LsDir.SelectedIndex = 0;
             _IcoView.ShowData(_HomeDir);
         }
-        #endregion
 
-        public int IcoSize { get { return _IcoSize; } }
-        public string HomeDir { get { return _HomeDir; } }
-        public AmonHandler<Png> CallBackHandler { get; set; }
-
-        #region 事件处理
         #region 界面事件
         private void LsDir_SelectedIndexChanged(object sender, EventArgs e)
         {

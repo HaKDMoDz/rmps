@@ -43,6 +43,7 @@
             // 
             this.LsDir.ContextMenuStrip = this.CmMenu;
             this.LsDir.FormattingEnabled = true;
+            this.LsDir.IntegralHeight = false;
             this.LsDir.ItemHeight = 12;
             this.LsDir.Location = new System.Drawing.Point(12, 12);
             this.LsDir.Name = "LsDir";
@@ -82,11 +83,11 @@
             // 
             // IlIco
             // 
-            this.IlIco.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.IlIco.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             this.IlIco.ImageSize = new System.Drawing.Size(16, 16);
             this.IlIco.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // IcoSeeker
+            // KeyIcon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -96,10 +97,11 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "IcoSeeker";
+            this.Name = "KeyIcon";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "图标管理";
+            this.Load += new System.EventHandler(this.KeyIcon_Load);
             this.CmMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 

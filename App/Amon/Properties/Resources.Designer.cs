@@ -144,6 +144,20 @@ namespace Me.Amon.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Logo24 {
+            get {
+                object obj = ResourceManager.GetObject("Logo24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Logo32 {
+            get {
+                object obj = ResourceManager.GetObject("Logo32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Menu {
             get {
                 object obj = ResourceManager.GetObject("Menu", resourceCulture);

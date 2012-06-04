@@ -14,9 +14,9 @@ using Me.Amon.Model.Pwd;
 using Me.Amon.Properties;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd._Cat;
+using Me.Amon.Pwd._Key;
 using Me.Amon.Pwd._Lib;
 using Me.Amon.Pwd._Log;
-using Me.Amon.Pwd._Key;
 using Me.Amon.Pwd.V.Pro;
 using Me.Amon.Pwd.V.Wiz;
 using Me.Amon.Uc;
@@ -378,7 +378,7 @@ namespace Me.Amon.Pwd
         public void ShowIcoSeeker(string rootDir, AmonHandler<Png> handler)
         {
             KeyIcon seeker = new KeyIcon(_UserModel, rootDir);
-            seeker.InitOnce(24);
+            seeker.IcoSize = 24;
             seeker.CallBackHandler = handler;
             BeanUtil.CenterToParent(seeker, this);
             seeker.ShowDialog(this);
@@ -1930,7 +1930,7 @@ namespace Me.Amon.Pwd
         public void ShowIcoEdit()
         {
             KeyIcon edit = new KeyIcon(_UserModel, _DataModel.KeyDir);
-            edit.InitOnce(EApp.IMG_KEY_LIST_DIM);
+            edit.IcoSize = EApp.IMG_KEY_LIST_DIM;
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }

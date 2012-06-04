@@ -34,7 +34,7 @@
             // 
             // PbLogo
             // 
-            this.PbLogo.Image = global::Me.Amon.Properties.Resources.Logo;
+            this.PbLogo.Image = global::Me.Amon.Properties.Resources.Logo24;
             this.PbLogo.Location = new System.Drawing.Point(0, 0);
             this.PbLogo.Name = "PbLogo";
             this.PbLogo.Size = new System.Drawing.Size(25, 25);

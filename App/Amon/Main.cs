@@ -89,7 +89,7 @@ namespace Me.Amon
                 app.FromXml(node);
                 _AppList.Add(app);
 
-                IlApp.Images.Add(app.Id, BeanUtil.ReadImage(app.Logo, BeanUtil.NaN32));
+                IlApp.Images.Add(app.Id, BeanUtil.ReadImage(app.Logo, Resources.Logo32));
                 LvApp.Items.Add(new ListViewItem { Name = app.Id, Text = app.Text, ImageKey = app.Id });
             }
         }
