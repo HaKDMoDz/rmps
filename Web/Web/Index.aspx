@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Amon.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="Me.Amon.Index1" %>
+﻿<%@ Page Title="阿木密码箱，免费且开源的密码管理软件！" Language="C#" MasterPageFile="~/Amon.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="Me.Amon.Index1" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="AmonHead">
     <style type="text/css">
@@ -56,6 +56,9 @@
                 <h2>
                     阿木密码箱
                 </h2>
+                <h3>
+                    免费且开源的密码管理软件！
+                </h3>
             </td>
         </tr>
         <tr>

@@ -62,6 +62,7 @@
     <Content Include="c.aspx" />
     <Content Include="c.html" />
     <Content Include="ClientBin\Amon.xap" />
+    <Content Include="favicon.ico" />
     <Content Include="Images\1.png" />
     <Content Include="Images\2.png" />
     <Content Include="Images\g0.png" />
