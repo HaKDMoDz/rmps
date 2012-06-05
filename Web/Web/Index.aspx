@@ -28,11 +28,10 @@
             wrapperid: "simplegallery1", //ID of main gallery container,
             dimensions: [480, 240], //width/height of gallery in pixels. Should reflect dimensions of the images exactly
             imagearray: [
-				["Images/1.png", "", "_new", "用户登录界面"],
-				["Images/2.png", "", "_new", "密码箱主界面"],
-				["Images/3.png", "", "_new", "专业用户界面"],
-				["Images/4.png", "", "_new", "向导用户界面"],
-				["Images/5.png", "", "_new", "系统提示界面"],
+				["Images/1.png", "Images/1.png", "_new", "用户登录界面"],
+				["Images/2.png", "Images/l2.png", "_new", "密码箱主界面"],
+				["Images/3.png", "Images/l3.png", "_new", "专业用户界面"],
+				["Images/4.png", "Images/l4.png", "_new", "向导用户界面"],
             //["path_to_image", "optional_link", "optional_linktarget", "optional_textdescription"]
 			],
             autoplay: [true, 2500, 1], //[auto_play_boolean, delay_btw_slide_millisec, cycles_before_stopping_int]
