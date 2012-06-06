@@ -1,4 +1,4 @@
-﻿using System;
+ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -92,43 +92,104 @@ namespace Me.Amon.Pwd._Key
             }
 
             string exts = Path.GetExtension(fd.FileName).ToLower();
-            if (exts == ".png" || exts == ".jpg" || exts == ".jpe" || exts == ".jpeg" || exts == ".jfif"
-                || exts == ".bmp" || exts == ".dib" || exts == ".rle")
+            if (DealPng(fd.FileName, exts))
             {
-                using (Image img = Image.FromFile(fd.FileName))
-                {
-                    string key = HashUtil.UtcTimeInHex(true);
-                    int[] dim = { 16, 24, 32 };
-
-                    Image tmp;
-                    foreach (int t in dim)
-                    {
-                        tmp = BeanUtil.ScaleImage(img, t, true);
-                        tmp.Save(Path.Combine(_KeyIcon.HomeDir, key + "." + t), ImageFormat.Png);
-                        if (_KeyIcon.IcoSize == t)
-                        {
-                            IlIco.Images.Add(key, tmp);
-
-                            LvIco.SelectedItems.Clear();
-                            var item = new ListViewItem((LvIco.Items.Count + 1).ToString(), key);
-                            LvIco.Items.Add(item);
-                            item.Selected = true;
-                        }
-                    }
-                }
                 return;
             }
-
-            if (exts == ".ico")
+            if (DealIco(fd.FileName, exts))
             {
-                //AIco ico = new AIco();
-                //ico.ShowDialog();
+                return;
             }
         }
 
         private void BtCancel_Click(object sender, EventArgs e)
         {
             _KeyIcon.Close();
+        }
+        #endregion
+
+        #region 私有函数
+        private bool DealPng(string file, string exts)
+        {
+            if (!(exts == ".png" || exts == ".jpg" || exts == ".jpe" || exts == ".jpeg" || exts == ".jfif"
+                || exts == ".bmp" || exts == ".dib" || exts == ".rle"))
+            {
+                return false;
+            }
+
+            using (Image img = Image.FromFile(file))
+            {
+                string key = HashUtil.UtcTimeInHex(true);
+                int[] dim = { 16, 24, 32 };
+
+                Image tmp;
+                foreach (int t in dim)
+                {
+                    tmp = BeanUtil.ScaleImage(img, t, true);
+                    tmp.Save(Path.Combine(_KeyIcon.HomeDir, key + "." + t), ImageFormat.Png);
+                    if (_KeyIcon.IcoSize == t)
+                    {
+                        IlIco.Images.Add(key, tmp);
+
+                        LvIco.SelectedItems.Clear();
+                        var item = new ListViewItem((LvIco.Items.Count + 1).ToString(), key);
+                        LvIco.Items.Add(item);
+                        item.Selected = true;
+                    }
+                }
+            }
+            return true;
+        }
+
+        private bool DealIco(string file, string exts)
+        {
+            SingleIcon sIcon;
+            if (!(exts == ".ico" || exts == ".icl" || exts == ".dll" || exts == ".exe"
+                || exts == ".ocx" || exts == ".cpl" || exts == ".src"))
+            {
+                return false;
+            }
+
+            MultiIcon mIcon = new MultiIcon();
+            mIcon.Load(file);
+            if (mIcon.Count < 1)
+            {
+                return false;
+            }
+
+            if (mIcon.Count == 1)
+            {
+                sIcon = mIcon[0];
+            }
+            else
+            {
+                IconList dlg = new IconList(mIcon);
+                if (DialogResult.OK != dlg.ShowDialog(this))
+                {
+                    return false;
+                }
+                sIcon = dlg.SelectedIcon;
+            }
+
+            string key = HashUtil.UtcTimeInHex(true);
+            int[] dim = { 16, 24, 32 };
+            Image img;
+            foreach (int t in dim)
+            {
+                img = AIco.GetBitmap(sIcon, t);
+                img.Save(Path.Combine(_KeyIcon.HomeDir, key + "." + t), ImageFormat.Png);
+
+                if (_KeyIcon.IcoSize == t)
+                {
+                    IlIco.Images.Add(key, img);
+
+                    LvIco.SelectedItems.Clear();
+                    var item = new ListViewItem((LvIco.Items.Count + 1).ToString(), key);
+                    LvIco.Items.Add(item);
+                    item.Selected = true;
+                }
+            }
+            return true;
         }
         #endregion
     }
