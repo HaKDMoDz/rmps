@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -6,8 +6,11 @@ using Me.Amon.Properties;
 
 namespace Me.Amon.V
 {
-    public partial class EyeLogo : UserControl
+    public class EyeLogo : ILogo
     {
+        #region 全局变量
+        private PictureBox _PBox;
+
         /// <summary>
         /// 屏幕
         /// </summary>
@@ -37,15 +40,14 @@ namespace Me.Amon.V
         private Rectangle _BRect;
         private Rectangle _LRect;
         private Rectangle _RRect;
+        #endregion
 
-        private Point _MouseOffset;
-        private bool _IsMouseDown;
-
-        public EyeLogo()
+        public EyeLogo(PictureBox pBox)
         {
-            InitializeComponent();
+            _PBox = pBox;
         }
 
+        #region 接口实现
         public void InitOnce()
         {
             _AlienRadius = 11;
@@ -59,8 +61,8 @@ namespace Me.Amon.V
             _PupilCenterX = _AlienRadius;
             _PupilCenterY = _AlienRadius;
 
-            _BufImage = new Bitmap(PbLogo.Width, PbLogo.Height);
-            _BRect = new Rectangle(0, 0, PbLogo.Width, PbLogo.Height);
+            _BufImage = new Bitmap(_PBox.Width, _PBox.Height);
+            _BRect = new Rectangle(0, 0, _PBox.Width, _PBox.Height);
             _BufBrush = new LinearGradientBrush(_BRect, Color.FromArgb(96, 96, 96), Color.FromArgb(0, 0, 0), LinearGradientMode.Vertical);
 
             _TmpImage = new Bitmap(x, x);
@@ -74,13 +76,19 @@ namespace Me.Amon.V
             GenImage(_PupilCenterX, _PupilCenterY);
         }
 
+        public void MouseMove()
+        {
+        }
+
+        public void KeyPress()
+        {
+        }
+        #endregion
+
         #region 眼睛动画
         private void BgWorker_Tick(object sender, System.EventArgs e)
         {
-            if (!_IsMouseDown)
-            {
-                DoSpy(Cursor.Position.X, Cursor.Position.Y);
-            }
+            DoSpy(Cursor.Position.X, Cursor.Position.Y);
         }
 
         private void DoSpy(int x, int y)
@@ -103,8 +111,8 @@ namespace Me.Amon.V
             }
 
             // 眼睛中心坐标
-            int cx = Location.X + _AlienCenterX;
-            int cy = Location.Y + _AlienCenterY;
+            int cx = _PBox.Location.X + _AlienCenterX;
+            int cy = _PBox.Location.Y + _AlienCenterY;
 
             int mw = x - cx;//象限水平鼠标距离
             int mh = y - cy;//象限垂直鼠标距离
@@ -161,7 +169,7 @@ namespace Me.Amon.V
 
                 g1.Flush();
             }
-            PbLogo.Image = _BufImage;
+            _PBox.Image = _BufImage;
         }
         #endregion
     }
