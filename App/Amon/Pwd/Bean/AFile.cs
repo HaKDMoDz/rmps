@@ -52,7 +52,7 @@ namespace Me.Amon.Pwd.Bean
             string name = _Att.GetSpec(FileAtt.SPEC_FILE_NAME);
             if (!CharUtil.IsValidateHash(name))
             {
-                name = HashUtil.UtcTimeInHex(true);
+                name = HashUtil.UtcTimeInEnc(true);
             }
             string dstFile = Path.Combine(_DataModel.AcfDir, name + EApp.FILE_ACF);
             string alg = "aes";

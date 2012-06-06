@@ -110,7 +110,7 @@ namespace Me.Amon.Da
             vcs.UpdateTime = DateTime.Now;
             if (!CharUtil.IsValidateHash(vcs.Id))
             {
-                vcs.Id = HashUtil.UtcTimeInHex(false);
+                vcs.Id = HashUtil.UtcTimeInEnc(false);
                 vcs.CreateTime = vcs.UpdateTime;
             }
             Container.Store(vcs);
@@ -118,7 +118,7 @@ namespace Me.Amon.Da
 
         public void SaveLog(Log log)
         {
-            log.Id = HashUtil.UtcTimeInHex(false);
+            log.Id = HashUtil.UtcTimeInEnc(false);
             log.LogTime = DateTime.Now;
             Container.Store(log);
         }

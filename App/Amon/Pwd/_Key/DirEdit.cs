@@ -9,6 +9,7 @@ namespace Me.Amon.Pwd._Key
         private KeyIcon _IcoSeeker;
         private Dir _Item;
 
+        #region 构造函数
         public DirEdit()
         {
             InitializeComponent();
@@ -20,6 +21,7 @@ namespace Me.Amon.Pwd._Key
 
             InitializeComponent();
         }
+        #endregion
 
         public void Init()
         {

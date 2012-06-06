@@ -120,7 +120,7 @@ namespace Me.Amon.Pwd._Key
 
             using (Image img = Image.FromFile(file))
             {
-                string key = HashUtil.UtcTimeInHex(true);
+                string key = HashUtil.UtcTimeInEnc(true);
                 int[] dim = { 16, 24, 32 };
 
                 Image tmp;
@@ -172,7 +172,7 @@ namespace Me.Amon.Pwd._Key
                 sIcon = dlg.SelectedIcon;
             }
 
-            string key = HashUtil.UtcTimeInHex(true);
+            string key = HashUtil.UtcTimeInEnc(true);
             int[] dim = { 16, 24, 32 };
             Image img;
             foreach (int t in dim)

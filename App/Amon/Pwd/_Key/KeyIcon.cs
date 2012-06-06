@@ -53,7 +53,8 @@ namespace Me.Amon.Pwd._Key
             }
             else
             {
-                Directory.CreateDirectory(Path.Combine(_RootDir, item.Id));
+                item.Path = HashUtil.UtcTimeInHex();
+                Directory.CreateDirectory(Path.Combine(_RootDir, item.Path));
                 LsDir.Items.Add(item);
                 LsDir.SelectedItem = item;
             }
@@ -125,7 +126,7 @@ namespace Me.Amon.Pwd._Key
                 return;
             }
 
-            _HomeDir = CharUtil.IsValidateHash(item.Id) ? Path.Combine(_RootDir, item.Id) : _RootDir;
+            _HomeDir = CharUtil.IsValidateHash(item.Path) ? Path.Combine(_RootDir, item.Path) : _RootDir;
             if (!Directory.Exists(_HomeDir))
             {
                 return;
