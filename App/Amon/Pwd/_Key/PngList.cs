@@ -9,17 +9,17 @@ using Me.Amon.Util;
 
 namespace Me.Amon.Pwd._Key
 {
-    public partial class IcoView : UserControl
+    public partial class PngList : UserControl
     {
         private KeyIcon _KeyIcon;
 
         #region 构造函数
-        public IcoView()
+        public PngList()
         {
             InitializeComponent();
         }
 
-        public IcoView(KeyIcon icoEdit)
+        public PngList(KeyIcon icoEdit)
         {
             _KeyIcon = icoEdit;
 
@@ -120,7 +120,7 @@ namespace Me.Amon.Pwd._Key
 
             using (Image img = Image.FromFile(file))
             {
-                string key = HashUtil.UtcTimeInEnc(true);
+                string key = HashUtil.UtcTimeInHex();
                 int[] dim = { 16, 24, 32 };
 
                 Image tmp;
@@ -172,7 +172,7 @@ namespace Me.Amon.Pwd._Key
                 sIcon = dlg.SelectedIcon;
             }
 
-            string key = HashUtil.UtcTimeInEnc(true);
+            string key = HashUtil.UtcTimeInHex();
             int[] dim = { 16, 24, 32 };
             Image img;
             foreach (int t in dim)

@@ -1,4 +1,4 @@
- using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.IconLib;
@@ -331,9 +331,8 @@ namespace Me.Amon.Ico
             _MIcon = new MultiIcon();
 
             _XmlMenu = new XmlMenu<AIco>(this, null);
-            if (File.Exists(EIco.XML_MENU))
+            if (_XmlMenu.Load(Path.Combine(_UserModel.Home, EIco.XML_MENU)))
             {
-                _XmlMenu.Load(EIco.XML_MENU);
                 _XmlMenu.GetStrokes("AIco");
                 _XmlMenu.GetPopMenu("AIco", CmMenu);
                 _XmlMenu.GetPopMenu("Icl", CmIcl);

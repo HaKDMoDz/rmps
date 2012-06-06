@@ -125,7 +125,7 @@ namespace Me.Amon.Pwd
 
             #region 系统选单
             _XmlMenu = new XmlMenu<APwd>(this, _ViewModel);
-            if (_XmlMenu.Load(Path.Combine(_UserModel.Home, "APwd.xml")))
+            if (_XmlMenu.Load(Path.Combine(_UserModel.Home, EPwd.XML_MENU)))
             {
                 _XmlMenu.GetStrokes("APwd");
                 _XmlMenu.GetMenuBar("APwd", MbMenu);

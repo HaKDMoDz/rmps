@@ -110,11 +110,7 @@ namespace Me.Amon
         #region 窗口事件
         private void Main_Load(object sender, EventArgs e)
         {
-            // TODO:
-            LvApp.Visible = false;
-            Size = new Size(25, 25);
-            Region = new Region(new Rectangle(0, 0, 25, 25));
-            //Region = new Region(new Rectangle(0, 0, 225, 225));
+            ChangeAppVisible(false);
 
             // 窗口位置
             int x = Settings.Default.LocX;
@@ -133,28 +129,6 @@ namespace Me.Amon
             //BackColor = Color.Green;
             TransparencyKey = this.BackColor;
 
-            // 应用列表
-            const string APP_FILE = "App.xml";
-            if (File.Exists(APP_FILE))
-            {
-                StreamReader reader = File.OpenText(APP_FILE);
-                XmlDocument doc = new XmlDocument();
-                doc.Load(reader);
-                reader.Close();
-
-                MApp app;
-                _AppList = new List<MApp>();
-                foreach (XmlNode node in doc.SelectNodes("/Amon/Apps/App"))
-                {
-                    app = new MApp();
-                    app.FromXml(node);
-                    _AppList.Add(app);
-
-                    IlApp.Images.Add(app.Id, BeanUtil.ReadImage(app.Logo, Resources.Logo32));
-                    LvApp.Items.Add(new ListViewItem { Name = app.Id, Text = app.Text, ImageKey = app.Id });
-                }
-            }
-
             // 托盘图标状态
             int pattern = Settings.Default.Pattern;
             if (pattern == 0)
@@ -169,10 +143,15 @@ namespace Me.Amon
             _ILogo.InitOnce();
 
             // 系统日志
-            _UserModel = new UserModel();
             if (File.Exists(EApp.FILE_LOG))
             {
                 _Writer = new StreamWriter(EApp.FILE_LOG, true);
+            }
+
+            if (_UserModel == null)
+            {
+                _UserModel = new UserModel();
+                SignAc(ESignAc.SignIn, new AmonHandler<int>(DoSignIn));
             }
         }
 
@@ -372,8 +351,7 @@ namespace Me.Amon
 
         private void MgSignOl_Click(object sender, EventArgs e)
         {
-            //SignAc(ESignAc.SignOl, new AmonHandler<int>(DoSignOl));
-            SignAc(ESignAc.SignOl, new AmonHandler<int>(ShowAPwd));
+            SignAc(ESignAc.SignOl, new AmonHandler<int>(DoSignOl));
         }
 
         private void MgSignUl_Click(object sender, EventArgs e)
@@ -388,8 +366,7 @@ namespace Me.Amon
 
         private void MgSignIn_Click(object sender, EventArgs e)
         {
-            //SignAc(ESignAc.SignIn, new AmonHandler<int>(DoSignIn));
-            SignAc(ESignAc.SignIn, new AmonHandler<int>(ShowAPwd));
+            SignAc(ESignAc.SignIn, new AmonHandler<int>(DoSignIn));
         }
 
         private void MgSignOf_Click(object sender, EventArgs e)
@@ -470,6 +447,33 @@ namespace Me.Amon
             MgSignIn.Visible = false;
             MgSignUp.Visible = false;
             MgSignOf.Visible = true;
+
+            // 应用列表
+            string path = Path.Combine(_UserModel.Home, "App.xml");
+            if (!File.Exists(path))
+            {
+                LvApp.Visible = false;
+                return;
+            }
+
+            StreamReader reader = File.OpenText(path);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(reader);
+            reader.Close();
+
+            MApp app;
+            _AppList = new List<MApp>();
+            foreach (XmlNode node in doc.SelectNodes("/Amon/Apps/App"))
+            {
+                app = new MApp();
+                app.FromXml(node);
+                _AppList.Add(app);
+
+                IlApp.Images.Add(app.Id, BeanUtil.ReadImage(app.Logo, Resources.Logo32));
+                LvApp.Items.Add(new ListViewItem { Name = app.Id, Text = app.Text, ImageKey = app.Id });
+            }
+            ChangeAppVisible(true);
+            return;
         }
 
         private void DoSignOl(int view)
@@ -556,6 +560,21 @@ namespace Me.Amon
             _IApp.Visible = true;
             _IApp.BringToFront();
         }
+
+        private void ChangeAppVisible(bool visible)
+        {
+            if (visible)
+            {
+                Size = new Size(225, 225);
+                Region = new Region(new Rectangle(0, 0, 225, 225));
+            }
+            else
+            {
+                Size = new Size(25, 25);
+                Region = new Region(new Rectangle(0, 0, 25, 25));
+            }
+            LvApp.Visible = visible;
+        }
         #endregion
 
         private void MgSignUp_Click(object sender, EventArgs e)
@@ -565,8 +584,6 @@ namespace Me.Amon
 
         private void LvApp_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            ASql sql = new ASql();
-            sql.Show();
         }
 
         private void LvApp_SelectedIndexChanged(object sender, EventArgs e)

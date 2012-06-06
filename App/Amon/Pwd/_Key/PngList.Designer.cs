@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd._Key
 {
-    partial class IcoView
+    partial class PngList
     {
         /// <summary> 
         /// 必需的设计器变量。

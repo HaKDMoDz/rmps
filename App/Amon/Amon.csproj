@@ -1099,11 +1099,11 @@
     <Compile Include="Pwd\_Key\DirEdit.Designer.cs">
       <DependentUpon>DirEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\_Key\IcoView.cs">
+    <Compile Include="Pwd\_Key\PngList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\_Key\IcoView.Designer.cs">
-      <DependentUpon>IcoView.cs</DependentUpon>
+    <Compile Include="Pwd\_Key\PngList.Designer.cs">
+      <DependentUpon>PngList.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\_Cat\CatIcon.cs">
       <SubType>Form</SubType>
@@ -1531,8 +1531,8 @@
     <EmbeddedResource Include="Pwd\_Key\DirEdit.resx">
       <DependentUpon>DirEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\_Key\IcoView.resx">
-      <DependentUpon>IcoView.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\_Key\PngList.resx">
+      <DependentUpon>PngList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\_Cat\CatIcon.resx">
       <DependentUpon>CatIcon.cs</DependentUpon>

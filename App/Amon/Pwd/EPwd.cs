@@ -14,6 +14,8 @@ namespace Me.Amon.Pwd
         public const string KEY_LABEL = "key-label";
         public const string KEY_MAJOR = "key-major";
 
+        public const string XML_MENU = "APwd.xml";
+
         /// <summary>
         ///  ”Õº¿‡–Õ
         /// </summary>

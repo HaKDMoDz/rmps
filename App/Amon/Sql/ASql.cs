@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Event;
+using Me.Amon.Model;
 using Me.Amon.Sql.Editor;
 using Me.Amon.Sql.M;
 using Me.Amon.Sql.Model;
@@ -27,11 +28,19 @@ namespace Me.Amon.Sql
         private List<Rdbms> _Drives;
         private DbResult _DataGrid;
         private XmlMenu<ASql> _XmlMenu;
+        private UserModel _UserModel;
         #endregion
 
         #region 构造函数
         public ASql()
         {
+            InitializeComponent();
+        }
+
+        public ASql(UserModel userModel)
+        {
+            _UserModel = userModel;
+
             InitializeComponent();
         }
         #endregion
@@ -90,18 +99,18 @@ namespace Me.Amon.Sql
             _Param = UcUdf;
 
             _XmlMenu = new XmlMenu<ASql>(this, null);
-            if (File.Exists("ASql.xml"))
+            if (_XmlMenu.Load(Path.Combine(_UserModel.Home, ESql.XML_MENU)))
             {
-                _XmlMenu.Load("ASql.xml");
                 _XmlMenu.GetStrokes("ASql");
             }
 
-            if (!File.Exists(ESql.DBMS_FILE))
+            string path = Path.Combine(_UserModel.Home, ESql.DDL_FILE);
+            if (!File.Exists(path))
             {
                 return;
             }
 
-            StreamReader reader = File.OpenText(ESql.DBMS_FILE);
+            StreamReader reader = File.OpenText(path);
             XmlDocument doc = new XmlDocument();
             doc.Load(reader);
             reader.Close();
