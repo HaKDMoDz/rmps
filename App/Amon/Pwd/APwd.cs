@@ -125,13 +125,15 @@ namespace Me.Amon.Pwd
 
             #region 系统选单
             _XmlMenu = new XmlMenu<APwd>(this, _ViewModel);
-            _XmlMenu.Load(Path.Combine(_UserModel.Home, "Pwd.xml"));
-            _XmlMenu.GetStrokes("APwd");
-            _XmlMenu.GetMenuBar("APwd", MbMenu);
-            _XmlMenu.GetToolBar("APwd", TbTool);
-            _XmlMenu.GetPopMenu("ACat", CmCat);
-            _XmlMenu.GetPopMenu("AKey", CmKey);
-            //_XmlMenu.GetPopMenu("AAtt", CmAtt);
+            if (_XmlMenu.Load(Path.Combine(_UserModel.Home, "APwd.xml")))
+            {
+                _XmlMenu.GetStrokes("APwd");
+                _XmlMenu.GetMenuBar("APwd", MbMenu);
+                _XmlMenu.GetToolBar("APwd", TbTool);
+                _XmlMenu.GetPopMenu("ACat", CmCat);
+                _XmlMenu.GetPopMenu("AKey", CmKey);
+                //_XmlMenu.GetPopMenu("AAtt", CmAtt);
+            }
             #endregion
 
             InitCat();

@@ -110,9 +110,10 @@ namespace Me.Amon
         #region 窗口事件
         private void Main_Load(object sender, EventArgs e)
         {
-            //BackColor = Color.Green;
-            TransparencyKey = this.BackColor;
-            //Region = new Region(new Rectangle(0, 0, 25, 25));
+            // TODO:
+            LvApp.Visible = false;
+            Size = new Size(25, 25);
+            Region = new Region(new Rectangle(0, 0, 25, 25));
             //Region = new Region(new Rectangle(0, 0, 225, 225));
 
             // 窗口位置
@@ -128,23 +129,15 @@ namespace Me.Amon
             }
             Location = new Point(x, y);
 
-            _UserModel = new UserModel();
-            if (File.Exists(EApp.FILE_LOG))
-            {
-                _Writer = new StreamWriter(EApp.FILE_LOG, true);
-            }
+            // 背景透明
+            //BackColor = Color.Green;
+            TransparencyKey = this.BackColor;
 
-            int pattern = Settings.Default.Pattern;
-            if (pattern == 0)
+            // 应用列表
+            const string APP_FILE = "App.xml";
+            if (File.Exists(APP_FILE))
             {
-                pattern = -1;
-            }
-            NiTray.Visible = (pattern & EApp.PATTERN_TRAY) != 0;
-            MgTray.Checked = NiTray.Visible;
-
-            if (File.Exists("App.xml"))
-            {
-                StreamReader reader = File.OpenText("App.xml");
+                StreamReader reader = File.OpenText(APP_FILE);
                 XmlDocument doc = new XmlDocument();
                 doc.Load(reader);
                 reader.Close();
@@ -161,10 +154,26 @@ namespace Me.Amon
                     LvApp.Items.Add(new ListViewItem { Name = app.Id, Text = app.Text, ImageKey = app.Id });
                 }
             }
-            LvApp.Visible = false;
 
-            _ILogo = new IcoLogo(PbLogo);
+            // 托盘图标状态
+            int pattern = Settings.Default.Pattern;
+            if (pattern == 0)
+            {
+                pattern = -1;
+            }
+            NiTray.Visible = (pattern & EApp.PATTERN_TRAY) != 0;
+            MgTray.Checked = NiTray.Visible;
+
+            // 系统徽标
+            _ILogo = new IcoLogo(UcApp);
             _ILogo.InitOnce();
+
+            // 系统日志
+            _UserModel = new UserModel();
+            if (File.Exists(EApp.FILE_LOG))
+            {
+                _Writer = new StreamWriter(EApp.FILE_LOG, true);
+            }
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)

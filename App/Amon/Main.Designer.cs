@@ -39,6 +39,7 @@
             this.MgASec = new System.Windows.Forms.ToolStripMenuItem();
             this.MgABar = new System.Windows.Forms.ToolStripMenuItem();
             this.MgARen = new System.Windows.Forms.ToolStripMenuItem();
+            this.MgAIco = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.MgSignUp = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSignIn = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,12 +48,12 @@
             this.MgSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.MgInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.MgExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.UcApp = new Me.Amon.V.IcoLogo();
+            this.UcApp = new System.Windows.Forms.PictureBox();
             this.LvApp = new System.Windows.Forms.ListView();
             this.IlApp = new System.Windows.Forms.ImageList(this.components);
             this.IsApp = new System.Windows.Forms.ImageList(this.components);
-            this.MgAIco = new System.Windows.Forms.ToolStripMenuItem();
             this.CgMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UcApp)).BeginInit();
             this.SuspendLayout();
             // 
             // NiTray
@@ -134,6 +135,13 @@
             this.MgARen.Text = "文件重命名(&R)";
             this.MgARen.Click += new System.EventHandler(this.MgARen_Click);
             // 
+            // MgAIco
+            // 
+            this.MgAIco.Name = "MgAIco";
+            this.MgAIco.Size = new System.Drawing.Size(163, 22);
+            this.MgAIco.Text = "图标编辑器(&I)";
+            this.MgAIco.Click += new System.EventHandler(this.MgAIco_Click);
+            // 
             // MgSep1
             // 
             this.MgSep1.Name = "MgSep1";
@@ -190,17 +198,22 @@
             // 
             // UcApp
             // 
-            this.UcApp.Location = new System.Drawing.Point(12, 12);
+            this.UcApp.Location = new System.Drawing.Point(0, 0);
             this.UcApp.Name = "UcApp";
             this.UcApp.Size = new System.Drawing.Size(25, 25);
             this.UcApp.TabIndex = 1;
+            this.UcApp.TabStop = false;
+            this.UcApp.DoubleClick += new System.EventHandler(this.PbLogo_DoubleClick);
+            this.UcApp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PbLogo_MouseDown);
+            this.UcApp.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PbLogo_MouseMove);
+            this.UcApp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PbLogo_MouseUp);
             // 
             // LvApp
             // 
             this.LvApp.LargeImageList = this.IlApp;
-            this.LvApp.Location = new System.Drawing.Point(43, 12);
+            this.LvApp.Location = new System.Drawing.Point(31, 22);
             this.LvApp.Name = "LvApp";
-            this.LvApp.Size = new System.Drawing.Size(120, 130);
+            this.LvApp.Size = new System.Drawing.Size(120, 120);
             this.LvApp.SmallImageList = this.IsApp;
             this.LvApp.TabIndex = 2;
             this.LvApp.UseCompatibleStateImageBehavior = false;
@@ -219,21 +232,14 @@
             this.IsApp.ImageSize = new System.Drawing.Size(16, 16);
             this.IsApp.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // MgAIco
-            // 
-            this.MgAIco.Name = "MgAIco";
-            this.MgAIco.Size = new System.Drawing.Size(163, 22);
-            this.MgAIco.Text = "图标编辑器(&I)";
-            this.MgAIco.Click += new System.EventHandler(this.MgAIco_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(175, 154);
+            this.ClientSize = new System.Drawing.Size(163, 154);
             this.ContextMenuStrip = this.CgMenu;
-            this.Controls.Add(this.LvApp);
             this.Controls.Add(this.UcApp);
+            this.Controls.Add(this.LvApp);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -245,10 +251,8 @@
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Main_MouseDown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Main_MouseUp);
             this.CgMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.UcApp)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -272,7 +276,7 @@
         private System.Windows.Forms.ToolStripMenuItem MgInfo;
         private System.Windows.Forms.ToolStripMenuItem MgABar;
         private System.Windows.Forms.ToolStripMenuItem MgARen;
-        private V.IcoLogo UcApp;
+        private System.Windows.Forms.PictureBox UcApp;
         private System.Windows.Forms.ListView LvApp;
         private System.Windows.Forms.ImageList IlApp;
         private System.Windows.Forms.ImageList IsApp;

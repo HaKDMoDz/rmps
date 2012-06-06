@@ -1,5 +1,6 @@
- using System;
+using System;
 using System.Drawing;
+using System.Drawing.IconLib;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
@@ -80,7 +81,7 @@ namespace Me.Amon.Pwd._Key
         {
             OpenFileDialog fd = new OpenFileDialog();
             fd.Multiselect = false;
-            fd.Filter = EApp.FILE_OPEN_IMG_ICO;
+            fd.Filter = EApp.FILE_OPEN_IMG_RES;
             if (DialogResult.OK != fd.ShowDialog(this))
             {
                 return;
@@ -163,7 +164,7 @@ namespace Me.Amon.Pwd._Key
             }
             else
             {
-                IconList dlg = new IconList(mIcon);
+                IcoList dlg = new IcoList(mIcon);
                 if (DialogResult.OK != dlg.ShowDialog(this))
                 {
                     return false;

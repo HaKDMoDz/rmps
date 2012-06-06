@@ -535,6 +535,12 @@
     <Compile Include="Pwd\_Cat\CatTree.Designer.cs">
       <DependentUpon>CatTree.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pwd\_Key\IcoList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pwd\_Key\IcoList.Designer.cs">
+      <DependentUpon>IcoList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pwd\_Lib\LibEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1199,18 +1205,9 @@
     <Compile Include="Uw\Waiting.Designer.cs">
       <DependentUpon>Waiting.cs</DependentUpon>
     </Compile>
-    <Compile Include="V\EyeLogo.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="V\EyeLogo.Designer.cs">
-      <DependentUpon>EyeLogo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="V\IcoLogo.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="V\IcoLogo.Designer.cs">
-      <DependentUpon>IcoLogo.cs</DependentUpon>
-    </Compile>
+    <Compile Include="V\EyeLogo.cs" />
+    <Compile Include="V\IcoLogo.cs" />
+    <Compile Include="V\ILogo.cs" />
     <EmbeddedResource Include="Bar\ABar.resx">
       <DependentUpon>ABar.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1326,6 +1323,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\_Cat\CatTree.resx">
       <DependentUpon>CatTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\_Key\IcoList.resx">
+      <DependentUpon>IcoList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\_Lib\LibEdit.resx">
       <DependentUpon>LibEdit.cs</DependentUpon>
@@ -1578,12 +1578,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\Waiting.resx">
       <DependentUpon>Waiting.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="V\EyeLogo.resx">
-      <DependentUpon>EyeLogo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="V\IcoLogo.resx">
-      <DependentUpon>IcoLogo.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Amon_TemporaryKey.pfx" />
     <None Include="app.config" />
