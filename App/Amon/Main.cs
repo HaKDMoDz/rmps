@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -17,23 +17,31 @@ using Me.Amon.User;
 using Me.Amon.User.Sign;
 using Me.Amon.Util;
 using Me.Amon.Uw;
+using Me.Amon.V;
 
 namespace Me.Amon
 {
     public partial class Main : Form
     {
+        #region 全局变量
         private static IApp _IApp;
         private static Alert _Alert;
         private static Error _Error;
         private static Input _Input;
         private static Waiting _Waiting;
+
         private UserModel _UserModel;
+        private List<MApp> _AppList;
         private APwd _APwd;
         private ASec _ASec;
         private ABar _ABar;
         private ARen _ARen;
         private AIco _AIco;
-        private List<MApp> _AppList;
+
+        private ILogo _ILogo;
+        private bool _IsMouseDown;
+        private Point _MouseOffset;
+        #endregion
 
         #region 构造函数
         public Main()
@@ -42,12 +50,70 @@ namespace Me.Amon
         }
         #endregion
 
+        #region 全局函数
+        public static DialogResult ShowConfirm(string message)
+        {
+            return MessageBox.Show(_IApp.Form, message, "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+        }
+
+        public static void ShowWaiting(string message)
+        {
+            if (_Waiting == null)
+            {
+                _Waiting = new Waiting();
+            }
+            BeanUtil.CenterToParent(_Waiting, _IApp.Form);
+            _Waiting.Show(_IApp.Form, message);
+        }
+
+        public static void ShowAlert(string alert)
+        {
+            if (_Alert == null)
+            {
+                _Alert = new Alert();
+            }
+            BeanUtil.CenterToParent(_Alert, _IApp.Form);
+            _Alert.Show(_IApp.Form, alert);
+        }
+
+        public static void ShowError(Exception error)
+        {
+            if (_Error == null)
+            {
+                _Error = new Error();
+            }
+            BeanUtil.CenterToParent(_Error, _IApp.Form);
+            _Error.Show(_IApp.Form, error);
+        }
+
+        public static string ShowInput(string message, string deftext)
+        {
+            if (_Input == null)
+            {
+                _Input = new Input();
+            }
+            BeanUtil.CenterToParent(_Input, _IApp.Form);
+            _Input.Show(_IApp.Form, message, deftext);
+            return _Input.Message;
+        }
+
+        private static StreamWriter _Writer;
+        public static void LogInfo(string msg)
+        {
+            if (_Writer != null)
+            {
+                _Writer.WriteLine(msg);
+            }
+        }
+        #endregion
+
         #region 窗口事件
         private void Main_Load(object sender, EventArgs e)
         {
-            //Region = new Region(new Rectangle(0, 0, 25, 25));
-            Region = new Region(new Rectangle(0, 0, 225, 225));
+            //BackColor = Color.Green;
             TransparencyKey = this.BackColor;
+            //Region = new Region(new Rectangle(0, 0, 25, 25));
+            //Region = new Region(new Rectangle(0, 0, 225, 225));
 
             // 窗口位置
             int x = Settings.Default.LocX;
@@ -76,73 +142,29 @@ namespace Me.Amon
             NiTray.Visible = (pattern & EApp.PATTERN_TRAY) != 0;
             MgTray.Checked = NiTray.Visible;
 
-            StreamReader reader = File.OpenText("App.xml");
-            XmlDocument doc = new XmlDocument();
-            doc.Load(reader);
-            reader.Close();
-
-            MApp app;
-            _AppList = new List<MApp>();
-            foreach (XmlNode node in doc.SelectNodes("/Amon/Apps/App"))
+            if (File.Exists("App.xml"))
             {
-                app = new MApp();
-                app.FromXml(node);
-                _AppList.Add(app);
+                StreamReader reader = File.OpenText("App.xml");
+                XmlDocument doc = new XmlDocument();
+                doc.Load(reader);
+                reader.Close();
 
-                IlApp.Images.Add(app.Id, BeanUtil.ReadImage(app.Logo, Resources.Logo32));
-                LvApp.Items.Add(new ListViewItem { Name = app.Id, Text = app.Text, ImageKey = app.Id });
-            }
-        }
+                MApp app;
+                _AppList = new List<MApp>();
+                foreach (XmlNode node in doc.SelectNodes("/Amon/Apps/App"))
+                {
+                    app = new MApp();
+                    app.FromXml(node);
+                    _AppList.Add(app);
 
-        private void Main_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                //_MouseOffset = new Point(-e.X, -e.Y);
-                //_IsMouseDown = true;
+                    IlApp.Images.Add(app.Id, BeanUtil.ReadImage(app.Logo, Resources.Logo32));
+                    LvApp.Items.Add(new ListViewItem { Name = app.Id, Text = app.Text, ImageKey = app.Id });
+                }
             }
-        }
+            LvApp.Visible = false;
 
-        private void Main_MouseMove(object sender, MouseEventArgs e)
-        {
-            //if (_IsMouseDown)
-            {
-                Point mousePos = Control.MousePosition;
-                //mousePos.Offset(_MouseOffset.X, _MouseOffset.Y);
-                if (mousePos.X < 10)
-                {
-                    mousePos.X = 0;
-                }
-                else
-                {
-                    int t = SystemInformation.WorkingArea.Width - Width;
-                    if (mousePos.X > t - 10)
-                    {
-                        mousePos.X = t;
-                    }
-                }
-                if (mousePos.Y < 10)
-                {
-                    mousePos.Y = 0;
-                }
-                else
-                {
-                    int t = SystemInformation.WorkingArea.Height - Height;
-                    if (mousePos.Y > t - 10)
-                    {
-                        mousePos.Y = t;
-                    }
-                }
-                Location = mousePos;
-            }
-        }
-
-        private void Main_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                //_IsMouseDown = false;
-            }
+            _ILogo = new IcoLogo(PbLogo);
+            _ILogo.InitOnce();
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
@@ -162,6 +184,67 @@ namespace Me.Amon
             Settings.Default.Save();
         }
 
+        private void PbLogo_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                _MouseOffset = MousePosition;
+                _MouseOffset.X = Location.X - _MouseOffset.X;
+                _MouseOffset.Y = Location.Y - _MouseOffset.Y;
+                _IsMouseDown = true;
+            }
+        }
+
+        private void PbLogo_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!_IsMouseDown)
+            {
+                _ILogo.MouseMove();
+                return;
+            }
+
+            Point pos = MousePosition;
+            pos.X += _MouseOffset.X;
+            pos.Y += _MouseOffset.Y;
+
+            // 水平停靠
+            if (pos.X < 10)
+            {
+                pos.X = 0;
+            }
+            else
+            {
+                int t = SystemInformation.WorkingArea.Width - Width;
+                if (pos.X > t - 10)
+                {
+                    pos.X = t;
+                }
+            }
+
+            // 垂直停靠
+            if (pos.Y < 10)
+            {
+                pos.Y = 0;
+            }
+            else
+            {
+                int t = SystemInformation.WorkingArea.Height - Height;
+                if (pos.Y > t - 10)
+                {
+                    pos.Y = t;
+                }
+            }
+            Location = pos;
+        }
+
+        private void PbLogo_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                _IsMouseDown = false;
+            }
+        }
+
         private void PbLogo_DoubleClick(object sender, EventArgs e)
         {
             ShowLast();
@@ -179,6 +262,23 @@ namespace Me.Amon
         {
             TopMost = !TopMost;
             MgTopMost.Checked = TopMost;
+        }
+
+        /// <summary>
+        /// 是否鼠标穿透
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MgTopMost0_Click(object sender, EventArgs e)
+        {
+            if (BackColor == Color.Red)
+            {
+                BackColor = DefaultBackColor;
+            }
+            else
+            {
+                BackColor = Color.Red;
+            }
         }
 
         private void MgTray_Click(object sender, EventArgs e)
@@ -302,63 +402,6 @@ namespace Me.Amon
             Close();
         }
         #endregion
-        #endregion
-
-        #region 全局函数
-        public static DialogResult ShowConfirm(string message)
-        {
-            return MessageBox.Show(_IApp.Form, message, "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-        }
-
-        public static void ShowWaiting(string message)
-        {
-            if (_Waiting == null)
-            {
-                _Waiting = new Waiting();
-            }
-            BeanUtil.CenterToParent(_Waiting, _IApp.Form);
-            _Waiting.Show(_IApp.Form, message);
-        }
-
-        public static void ShowAlert(string alert)
-        {
-            if (_Alert == null)
-            {
-                _Alert = new Alert();
-            }
-            BeanUtil.CenterToParent(_Alert, _IApp.Form);
-            _Alert.Show(_IApp.Form, alert);
-        }
-
-        public static void ShowError(Exception error)
-        {
-            if (_Error == null)
-            {
-                _Error = new Error();
-            }
-            BeanUtil.CenterToParent(_Error, _IApp.Form);
-            _Error.Show(_IApp.Form, error);
-        }
-
-        public static string ShowInput(string message, string deftext)
-        {
-            if (_Input == null)
-            {
-                _Input = new Input();
-            }
-            BeanUtil.CenterToParent(_Input, _IApp.Form);
-            _Input.Show(_IApp.Form, message, deftext);
-            return _Input.Message;
-        }
-
-        private static StreamWriter _Writer;
-        public static void LogInfo(string msg)
-        {
-            if (_Writer != null)
-            {
-                _Writer.WriteLine(msg);
-            }
-        }
         #endregion
 
         #region 私有函数
