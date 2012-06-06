@@ -1,4 +1,4 @@
-﻿using System;
+ using System;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -209,7 +209,7 @@ namespace Me.Amon.User.Sign
             StreamReader stream;
 
             #region 类别
-            file = Path.Combine(_UserModel.Home, "Cat.xml");
+            file = Path.Combine(_UserModel.Home, "APwd-Cat.xml");
             if (File.Exists(file))
             {
                 stream = new StreamReader(file);
@@ -232,7 +232,7 @@ namespace Me.Amon.User.Sign
             #endregion
 
             #region 模板
-            file = Path.Combine(_UserModel.Home, "Lib.xml");
+            file = Path.Combine(_UserModel.Home, "APwd-Lib.xml");
             if (File.Exists(file))
             {
                 stream = new StreamReader(file);
@@ -255,7 +255,7 @@ namespace Me.Amon.User.Sign
             #endregion
 
             #region 字符
-            file = Path.Combine(_UserModel.Home, "Udc.xml");
+            file = Path.Combine(_UserModel.Home, "APwd-Udc.xml");
             if (File.Exists(file))
             {
                 stream = new StreamReader(file);
@@ -278,7 +278,7 @@ namespace Me.Amon.User.Sign
             #endregion
 
             #region 重命名
-            file = Path.Combine(_UserModel.Home, "Ren.xml");
+            file = Path.Combine(_UserModel.Home, "ARen.xml");
             if (File.Exists(file))
             {
                 stream = new StreamReader(file);
