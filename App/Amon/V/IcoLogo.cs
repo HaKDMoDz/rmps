@@ -1,23 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using Me.Amon.Properties;
 
 namespace Me.Amon.V
 {
-    public partial class IcoLogo : UserControl
+    public class IcoLogo : ILogo
     {
-        public IcoLogo()
+        public IcoLogo(PictureBox pBox)
         {
-            InitializeComponent();
+            pBox.Image = Resources.Logo24;
         }
 
+        #region 接口实现
         public void InitOnce()
         {
         }
+
+        public void MouseMove()
+        {
+        }
+
+        public void KeyPress()
+        {
+        }
+        #endregion
     }
 }
