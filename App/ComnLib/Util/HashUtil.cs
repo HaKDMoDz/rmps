@@ -30,7 +30,7 @@ namespace Me.Amon.Util
         /// </summary>
         /// <param name="bigCase"></param>
         /// <returns></returns>
-        public static String UtcTimeInHex(bool bigCase)
+        public static String UtcTimeInEnc(bool bigCase)
         {
             return CharUtil.EncodeLong(DateTime.UtcNow.ToFileTime(), bigCase);
         }
