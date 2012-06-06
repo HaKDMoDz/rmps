@@ -1,4 +1,4 @@
-﻿using System;
+ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.IconLib;
@@ -291,6 +291,38 @@ namespace Me.Amon.Ico
             }
             _IIco.AppendImg();
         }
+
+        public static Image GetBitmap(SingleIcon sIcon, int dim)
+        {
+            IconImage img = sIcon[0];
+            int max = img.Image.Width;
+            int tmp;
+            for (int i = 1; i < sIcon.Count; i += 1)
+            {
+                if (img.PixelFormat < sIcon[i].PixelFormat)
+                {
+                    img = sIcon[i];
+                    max = img.Image.Width;
+                    continue;
+                }
+
+                tmp = sIcon[i].Image.Width;
+                tmp = tmp > dim ? tmp - dim : dim - tmp;
+                if (tmp < max)
+                {
+                    max = tmp;
+                    img = sIcon[i];
+                    continue;
+                }
+            }
+
+            Image bmp = img.Icon.ToBitmap();
+            if (bmp.Width != dim)
+            {
+                bmp = BeanUtil.ScaleImage(bmp, dim, true);
+            }
+            return bmp;
+        }
         #endregion
 
         #region 事件处理
@@ -398,38 +430,6 @@ namespace Me.Amon.Ico
 
             TcIco.SelectedTab = page;
             _IIco = editor;
-        }
-
-        private Image GetBitmap(SingleIcon sIcon, int dim)
-        {
-            IconImage img = sIcon[0];
-            int max = img.Image.Width;
-            int tmp;
-            for (int i = 1; i < sIcon.Count; i += 1)
-            {
-                if (img.PixelFormat < sIcon[i].PixelFormat)
-                {
-                    img = sIcon[i];
-                    max = img.Image.Width;
-                    continue;
-                }
-
-                tmp = sIcon[i].Image.Width;
-                tmp = tmp > dim ? tmp - dim : dim - tmp;
-                if (tmp < max)
-                {
-                    max = tmp;
-                    img = sIcon[i];
-                    continue;
-                }
-            }
-
-            Image bmp = img.Icon.ToBitmap();
-            if (bmp.Width != 32)
-            {
-                bmp = BeanUtil.ScaleImage(bmp, 32, true);
-            }
-            return bmp;
         }
         #endregion
     }
