@@ -42,13 +42,15 @@
             // LsDir
             // 
             this.LsDir.ContextMenuStrip = this.CmMenu;
+            this.LsDir.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.LsDir.FormattingEnabled = true;
             this.LsDir.IntegralHeight = false;
-            this.LsDir.ItemHeight = 12;
+            this.LsDir.ItemHeight = 20;
             this.LsDir.Location = new System.Drawing.Point(12, 12);
             this.LsDir.Name = "LsDir";
             this.LsDir.Size = new System.Drawing.Size(120, 220);
             this.LsDir.TabIndex = 0;
+            this.LsDir.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.LsDir_DrawItem);
             this.LsDir.SelectedIndexChanged += new System.EventHandler(this.LsDir_SelectedIndexChanged);
             // 
             // CmMenu

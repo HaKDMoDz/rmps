@@ -1,4 +1,4 @@
- using System;
+using System;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -207,13 +207,14 @@ namespace Me.Amon.User.Sign
 
             string file;
             StreamReader stream;
+            XmlReaderSettings setting = new XmlReaderSettings { IgnoreWhitespace = true };
 
             #region 类别
             file = Path.Combine(_UserModel.Home, "APwd-Cat.xml");
             if (File.Exists(file))
             {
                 stream = new StreamReader(file);
-                using (XmlReader reader = XmlReader.Create(stream))
+                using (XmlReader reader = XmlReader.Create(stream, setting))
                 {
                     Cat cat;
                     while (reader.Name == "Cat" || reader.ReadToFollowing("Cat"))
@@ -236,7 +237,7 @@ namespace Me.Amon.User.Sign
             if (File.Exists(file))
             {
                 stream = new StreamReader(file);
-                using (XmlReader reader = XmlReader.Create(stream))
+                using (XmlReader reader = XmlReader.Create(stream, setting))
                 {
                     Lib header;
                     while (reader.Name == "Lib" || reader.ReadToFollowing("Lib"))
@@ -259,7 +260,7 @@ namespace Me.Amon.User.Sign
             if (File.Exists(file))
             {
                 stream = new StreamReader(file);
-                using (XmlReader reader = XmlReader.Create(stream))
+                using (XmlReader reader = XmlReader.Create(stream, setting))
                 {
                     Udc udc;
                     while (reader.Name == "Udc" || reader.ReadToFollowing("Udc"))
@@ -277,12 +278,35 @@ namespace Me.Amon.User.Sign
             }
             #endregion
 
+            #region 目录
+            file = Path.Combine(_UserModel.Home, "APwd-Dir.xml");
+            if (File.Exists(file))
+            {
+                stream = new StreamReader(file);
+                using (XmlReader reader = XmlReader.Create(stream, setting))
+                {
+                    Dir dir;
+                    while (reader.Name == "Dir" || reader.ReadToFollowing("Dir"))
+                    {
+                        dir = new Dir();
+                        if (!dir.FromXml(reader))
+                        {
+                            continue;
+                        }
+                        _UserModel.DBA.SaveVcs(dir);
+                    }
+                }
+                stream.Close();
+                File.Delete(file);
+            }
+            #endregion
+
             #region 重命名
             file = Path.Combine(_UserModel.Home, "ARen.xml");
             if (File.Exists(file))
             {
                 stream = new StreamReader(file);
-                using (XmlReader reader = XmlReader.Create(stream))
+                using (XmlReader reader = XmlReader.Create(stream, setting))
                 {
                     MRen ren;
                     while (reader.Name == "Ren" || reader.ReadToFollowing("Ren"))

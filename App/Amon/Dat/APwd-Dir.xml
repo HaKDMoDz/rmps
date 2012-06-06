@@ -4,6 +4,7 @@
   <Ver>1</Ver>
   <Dirs>
 	<Dir>
+		<Order>1</Order>
 		<Id>qatgwcgryyqbdvas</Id>
 		<Text>电子邮件</Text>
 		<Tips>电子邮件</Tips>
@@ -11,6 +12,7 @@
 		<Memo></Memo>
 	</Dir>
 	<Dir>
+		<Order>2</Order>
 		<Id>qatgwcgfqsqcxvdv</Id>
 		<Text>即时通讯</Text>
 		<Tips>即时通讯</Tips>
@@ -18,6 +20,7 @@
 		<Memo></Memo>
 	</Dir>
 	<Dir>
+		<Order>3</Order>
 		<Id>qatgwcgfqrxwefxz</Id>
 		<Text>游戏娱乐</Text>
 		<Tips>游戏娱乐</Tips>
@@ -25,6 +28,7 @@
 		<Memo></Memo>
 	</Dir>
 	<Dir>
+		<Order>4</Order>
 		<Id>qatgwcgfaqxvbday</Id>
 		<Text>办公软件</Text>
 		<Tips>办公软件</Tips>
@@ -32,10 +36,51 @@
 		<Memo></Memo>
 	</Dir>
 	<Dir>
+		<Order>5</Order>
 		<Id>qatgwcgfavzsyteg</Id>
 		<Text>银行账号</Text>
 		<Tips>银行账号</Tips>
 		<Path>qatgwcgfavzsyteg</Path>
+		<Memo></Memo>
+	</Dir>
+	<Dir>
+		<Order>6</Order>
+		<Id>qatgswbsebyfysws</Id>
+		<Text>文本记事</Text>
+		<Tips>文本记事</Tips>
+		<Path>qatgswbsebyfysws</Path>
+		<Memo></Memo>
+	</Dir>
+	<Dir>
+		<Order>7</Order>
+		<Id>qatgswbsgraayzrq</Id>
+		<Text>图形图像</Text>
+		<Tips>图形图像</Tips>
+		<Path>qatgswbsgraayzrq</Path>
+		<Memo></Memo>
+	</Dir>
+	<Dir>
+		<Order>8</Order>
+		<Id>qatgswbxqtzwfrfb</Id>
+		<Text>影音播放</Text>
+		<Tips>影音播放</Tips>
+		<Path>qatgswbxqtzwfrfb</Path>
+		<Memo></Memo>
+	</Dir>
+	<Dir>
+		<Order>9</Order>
+		<Id>qatgswbxwvcqygdf</Id>
+		<Text>系统安全</Text>
+		<Tips>系统安全</Tips>
+		<Path>qatgswbxwvcqygdf</Path>
+		<Memo></Memo>
+	</Dir>
+	<Dir>
+		<Order>10</Order>
+		<Id>qatgswbxczeaxefd</Id>
+		<Text>系统辅助</Text>
+		<Tips>系统辅助</Tips>
+		<Path>qatgswbxczeaxefd</Path>
 		<Memo></Memo>
 	</Dir>
   </Dirs>

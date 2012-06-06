@@ -85,6 +85,26 @@ namespace Me.Amon.Pwd._Key
             _IcoView.ShowData(_HomeDir);
         }
 
+        private void LsDir_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.DrawBackground();
+
+            if (e.Index <= -1 || e.Index >= LsDir.Items.Count)
+            {
+                return;
+            }
+            Dir dir = LsDir.Items[e.Index] as Dir;
+            if (dir == null)
+            {
+                return;
+            }
+
+            SizeF s = e.Graphics.MeasureString(dir.Text, Font);
+            int x = (e.Bounds.Width - (int)s.Width) >> 1;
+            int y = (e.Bounds.Height - (int)s.Height) >> 1;
+            e.Graphics.DrawString(dir.Text, Font, Brushes.Black, e.Bounds.X + x, e.Bounds.Y + y);
+        }
+
         #region 界面事件
         private void LsDir_SelectedIndexChanged(object sender, EventArgs e)
         {
