@@ -6,24 +6,24 @@
 	<Dir>
 		<Order>1</Order>
 		<Id>qatgwcgryyqbdvas</Id>
-		<Text>电子邮件</Text>
-		<Tips>电子邮件</Tips>
+		<Text>邮件通讯</Text>
+		<Tips>邮件通讯</Tips>
 		<Path>01CD43E80DF5500E</Path>
 		<Memo></Memo>
 	</Dir>
 	<Dir>
 		<Order>2</Order>
 		<Id>qatgwcgfqsqcxvdv</Id>
-		<Text>即时通讯</Text>
-		<Tips>即时通讯</Tips>
+		<Text>网络应用</Text>
+		<Tips>网络应用</Tips>
 		<Path>01CD43E836A9AD92</Path>
 		<Memo></Memo>
 	</Dir>
 	<Dir>
 		<Order>3</Order>
 		<Id>qatgwcgfqrxwefxz</Id>
-		<Text>游戏娱乐</Text>
-		<Tips>游戏娱乐</Tips>
+		<Text>影音游戏</Text>
+		<Tips>影音游戏</Tips>
 		<Path>01CD43E859D1FAAB</Path>
 		<Memo></Memo>
 	</Dir>
@@ -38,8 +38,8 @@
 	<Dir>
 		<Order>5</Order>
 		<Id>qatgwcgfavzsyteg</Id>
-		<Text>银行账号</Text>
-		<Tips>银行账号</Tips>
+		<Text>金融证券</Text>
+		<Tips>金融证券</Tips>
 		<Path>01CD43E85DE0B451</Path>
 		<Memo></Memo>
 	</Dir>
@@ -62,16 +62,16 @@
 	<Dir>
 		<Order>8</Order>
 		<Id>qatgswbxqtzwfrfb</Id>
-		<Text>影音播放</Text>
-		<Tips>影音播放</Tips>
+		<Text>教育学习</Text>
+		<Tips>教育学习</Tips>
 		<Path>01CD43E8631E2E65</Path>
 		<Memo></Memo>
 	</Dir>
 	<Dir>
 		<Order>9</Order>
 		<Id>qatgswbxwvcqygdf</Id>
-		<Text>系统安全</Text>
-		<Tips>系统安全</Tips>
+		<Text>编程开发</Text>
+		<Tips>编程开发</Tips>
 		<Path>01CD43E864B74AF3</Path>
 		<Memo></Memo>
 	</Dir>
