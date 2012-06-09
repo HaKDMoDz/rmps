@@ -313,8 +313,8 @@ namespace Me.Amon.Pwd
                     continue;
                 }
 
-                e.Handled = true;
                 stroke.Action.EventHandler(stroke, null);
+                e.Handled = true;
                 break;
             }
         }

@@ -7,6 +7,7 @@
 	<Action Id="save-file" Class="Me.Amon.Ico.E.SaveAction"/>
 	<Action Id="import" Class="Me.Amon.Ico.E.ImportAction"/>
 	<Action Id="export" Class="Me.Amon.Ico.E.ExportAction"/>
+	<Action Id="append-img" Class="Me.Amon.Ico.E.AppendImgAction"/>
   </Actions>
 
   <!--系统快捷键-->
@@ -33,9 +34,14 @@
   </Popmenu>
 
   <Popmenu Id="Ico">
-    <Item Type="normal" Text="追加(&amp;N)">
-		<Action Class="Me.Amon.Ico.E.AppendImgAction"/>
-	</Item>
+	<Menu Text="追加(&amp;N)">
+		<Item Type="normal" Text="48 * 48" ActionId="append-img" Command="48"/>
+		<Item Type="normal" Text="32 * 32" ActionId="append-img" Command="32"/>
+		<Item Type="normal" Text="24 * 24" ActionId="append-img" Command="24"/>
+		<Item Type="normal" Text="16 * 16" ActionId="append-img" Command="16"/>
+		<Line/>
+		<Item Type="normal" Text="其它……" ActionId="append-img" Command="0"/>
+	</Menu>
 	<Item Type="normal" Text="移除(&amp;R)">
 		<Action Class="Me.Amon.Ico.E.RemoveImgAction"/>
 	</Item>

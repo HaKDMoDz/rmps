@@ -15,6 +15,7 @@ namespace Me.Amon.Ico.V
         private SingleIcon _SIcon;
         private AIco _AIco;
 
+        #region 构造函数
         public IcoEditor()
         {
             InitializeComponent();
@@ -26,6 +27,7 @@ namespace Me.Amon.Ico.V
 
             InitializeComponent();
         }
+        #endregion
 
         #region 接口实现
         public void InitOnce()
@@ -62,13 +64,13 @@ namespace Me.Amon.Ico.V
 
         public void Import(string file)
         {
-            Abc item = LbImg.SelectedItem as Abc;
-            if (item == null)
+            if (!File.Exists(file))
             {
                 return;
             }
 
-            if (!File.Exists(file))
+            Abc item = LbImg.SelectedItem as Abc;
+            if (item == null)
             {
                 return;
             }
@@ -160,13 +162,12 @@ namespace Me.Amon.Ico.V
 
         private void LbImg_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (LbImg.SelectedIndex < 0)
+            Abc item = LbImg.SelectedItem as Abc;
+            if (item == null)
             {
                 return;
             }
 
-            IconImage ico = _SIcon[LbImg.SelectedIndex];
-            Image img = ico.Icon.ToBitmap();
             //Bitmap bmp = DrawBg(img.Width, EIco.PREVIEW_BG_GAPS);
             //using (Graphics g = Graphics.FromImage(bmp))
             //{
@@ -175,7 +176,18 @@ namespace Me.Amon.Ico.V
             //    g.DrawImage(img, x, y, img.Width, img.Height);
             //    g.Save();
             //}
-            PbImg.Image = img;
+            PbImg.Image = item.Source;
+        }
+
+        private void LbImg_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Right)
+            {
+                return;
+            }
+
+            LbImg.SelectedIndex = LbImg.IndexFromPoint(e.Location);
+            _AIco.IcoMenu.Show(MousePosition);
         }
         #endregion
 
@@ -208,16 +220,5 @@ namespace Me.Amon.Ico.V
             return bmp;
         }
         #endregion
-
-        private void LbImg_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (e.Button != MouseButtons.Right)
-            {
-                return;
-            }
-
-            LbImg.SelectedIndex = LbImg.IndexFromPoint(e.Location);
-            _AIco.IcoMenu.Show(MousePosition);
-        }
     }
 }

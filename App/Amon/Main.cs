@@ -608,7 +608,18 @@ namespace Me.Amon
 
         private void MgAIco_Click(object sender, EventArgs e)
         {
-            ShowAIco(0);
+            if (_IApp == null || !_IApp.Visible)
+            {
+                CheckUser(new AmonHandler<int>(ShowAIco));
+                return;
+            }
+
+            if (_IApp.AppId != EApp.IAPP_AICO)
+            {
+                _IApp.Visible = false;
+                ShowAIco(EApp.IAPP_AICO);
+                return;
+            }
         }
     }
 }
