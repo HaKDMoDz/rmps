@@ -47,7 +47,7 @@ namespace Me.Amon.Sec
         #region 事件处理
         private void ASec_Load(object sender, EventArgs e)
         {
-            ShowWiz();
+            ShowPro();
         }
 
         private void BtDo_Click(object sender, EventArgs e)

@@ -289,7 +289,7 @@ namespace Me.Amon.Ico
             {
                 return;
             }
-            _IIco.AppendImg();
+            _IIco.AppendImg(dim);
         }
 
         public static Image GetBitmap(SingleIcon sIcon, int dim)

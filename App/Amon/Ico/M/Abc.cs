@@ -10,26 +10,46 @@ namespace Me.Amon.Ico.M
         public string Text { get; set; }
         public Bitmap Source { get; set; }
         public Bitmap Thumbs { get; set; }
+        public PixelFormat Format { get; set; }
 
         public void Decode(Bitmap bgImg, IconImage ico)
         {
             Source = ico.Icon.ToBitmap();
             Dim = Source.Width;
-
+            Format = ico.PixelFormat;
             //Text = string.Format("{0}*{0}-{1} {2}", Dim, GetImageFormat(ico.IconImageFormat), GetPixelFormat(ico.PixelFormat));
             Text = string.Format("{0}*{0} {1}", Dim, GetPixelFormat(ico.PixelFormat));
+            Thumbs = GetThumbs(bgImg, Source, Dim);
+        }
 
-            Thumbs = new Bitmap(bgImg.Width, bgImg.Height);
-            using (Graphics g = Graphics.FromImage(Thumbs))
+        public void Decode(Bitmap bgImg, Bitmap image, PixelFormat format)
+        {
+            Source = image;
+            Dim = Source.Width;
+            Format = format;
+            Text = string.Format("{0}*{0} {1}", Dim, GetPixelFormat(format));
+            Thumbs = GetThumbs(bgImg, Source, Dim);
+        }
+
+        public static Bitmap GetThumbs(Bitmap bgImg, Image image, int dim)
+        {
+            if (dim > EIco.PREVIEW_ICON_DIM)
+            {
+                dim = EIco.PREVIEW_ICON_DIM;
+            }
+
+            Bitmap bitmap = new Bitmap(bgImg.Width, bgImg.Height);
+            using (Graphics g = Graphics.FromImage(bitmap))
             {
                 g.DrawImage(bgImg, 0, 0, bgImg.Width, bgImg.Height);
-                int w = bgImg.Width < Source.Width ? bgImg.Width : Source.Width;
-                int h = bgImg.Height < Source.Height ? bgImg.Height : Source.Height;
+                int w = dim < image.Width ? dim : image.Width;
+                int h = dim < image.Height ? dim : image.Height;
                 int x = (bgImg.Width - w) >> 1;
                 int y = (bgImg.Height - h) >> 1;
-                g.DrawImage(Source, x, y, w, h);
+                g.DrawImage(image, x, y, w, h);
                 g.Save();
             }
+            return bitmap;
         }
 
         public static string GetImageFormat(IconImageFormat format)

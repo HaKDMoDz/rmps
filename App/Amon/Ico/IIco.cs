@@ -10,7 +10,7 @@ namespace Me.Amon.Ico
 
         SingleIcon SingleIcon { get; set; }
 
-        void AppendImg();
+        void AppendImg(int size);
 
         void RemoveImg();
 

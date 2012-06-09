@@ -37,8 +37,42 @@ namespace Me.Amon.Ico.V
             LbImg.ItemHeight = 80;
         }
 
-        public void AppendImg()
+        public void AppendImg(int size)
         {
+            if (size < 8 || size > 256)
+            {
+                return;
+            }
+
+            Abc item;
+            for (int i = 0; i < LbImg.Items.Count; i += 1)
+            {
+                item = LbImg.Items[i] as Abc;
+                if (item == null)
+                {
+                    continue;
+                }
+                if (item.Format != PixelFormat.Format32bppArgb || item.Dim > size)
+                {
+                    continue;
+                }
+                if (item.Dim == size)
+                {
+                    LbImg.SelectedItem = item;
+                    return;
+                }
+
+                item = new Abc();
+                item.Decode(_BgImg, new Bitmap(size, size), PixelFormat.Format32bppArgb);
+                LbImg.Items.Insert(i, item);
+                LbImg.SelectedItem = item;
+                return;
+            }
+
+            item = new Abc();
+            item.Decode(_BgImg, new Bitmap(size, size), PixelFormat.Format32bppArgb);
+            LbImg.Items.Add(item);
+            LbImg.SelectedItem = item;
         }
 
         public void RemoveImg()
@@ -87,15 +121,7 @@ namespace Me.Amon.Ico.V
             }
             PbImg.Image = item.Source;
 
-            using (Graphics g = Graphics.FromImage(item.Thumbs))
-            {
-                int w = item.Thumbs.Width < img.Width ? item.Thumbs.Width : img.Width;
-                int h = item.Thumbs.Height < img.Height ? item.Thumbs.Height : img.Width;
-                int x = (item.Thumbs.Width - w) >> 1;
-                int y = (item.Thumbs.Height - h) >> 1;
-                g.DrawImage(img, x, y, w, h);
-                g.Save();
-            }
+            item.Thumbs = Abc.GetThumbs(item.Thumbs, img, item.Dim);
             LbImg.Items[LbImg.SelectedIndex] = item;
         }
 
@@ -126,12 +152,13 @@ namespace Me.Amon.Ico.V
             {
                 _SIcon = value;
                 LbImg.Items.Clear();
+
                 Abc item;
                 foreach (IconImage ico in _SIcon)
                 {
                     item = new Abc();
                     item.Decode(_BgImg, ico);
-                    LbImg.Items.Add(item);
+                    DoSort(item);
                 }
             }
         }
@@ -218,6 +245,40 @@ namespace Me.Amon.Ico.V
                 }
             }
             return bmp;
+        }
+
+        private Abc DoSort(Abc item)
+        {
+            Abc temp;
+            for (int i = 0; i < LbImg.Items.Count; i += 1)
+            {
+                temp = LbImg.Items[i] as Abc;
+                if (temp == null)
+                {
+                    continue;
+                }
+                if (temp.Format > item.Format)
+                {
+                    continue;
+                }
+                if (temp.Format == item.Format)
+                {
+                    if (temp.Dim > item.Dim)
+                    {
+                        continue;
+                    }
+                    if (temp.Dim == item.Dim)
+                    {
+                        return temp;
+                    }
+                    LbImg.Items.Insert(i, item);
+                    return item;
+                }
+                LbImg.Items.Insert(i, item);
+                return item;
+            }
+            LbImg.Items.Add(item);
+            return item;
         }
         #endregion
     }
