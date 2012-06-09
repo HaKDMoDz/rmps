@@ -2,10 +2,12 @@ namespace Me.Amon.V
 {
     public interface ILogo
     {
-        void InitOnce();
+        void DoWork();
 
         void MouseMove();
 
         void KeyPress();
+
+        void DoStop();
     }
 }

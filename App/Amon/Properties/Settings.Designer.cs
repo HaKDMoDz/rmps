@@ -58,5 +58,17 @@ namespace Me.Amon.Properties {
                 this["Pattern"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Emotion {
+            get {
+                return ((int)(this["Emotion"]));
+            }
+            set {
+                this["Emotion"] = value;
+            }
+        }
     }
 }

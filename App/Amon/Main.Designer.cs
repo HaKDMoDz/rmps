@@ -48,12 +48,12 @@
             this.MgSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.MgInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.MgExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.UcApp = new System.Windows.Forms.PictureBox();
-            this.LvApp = new System.Windows.Forms.ListView();
+            this.PbApp = new System.Windows.Forms.PictureBox();
             this.IlApp = new System.Windows.Forms.ImageList(this.components);
             this.IsApp = new System.Windows.Forms.ImageList(this.components);
+            this.LbApp = new System.Windows.Forms.ListBox();
             this.CgMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.UcApp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbApp)).BeginInit();
             this.SuspendLayout();
             // 
             // NiTray
@@ -84,7 +84,7 @@
             this.MgInfo,
             this.MgExit});
             this.CgMenu.Name = "CmMenu";
-            this.CgMenu.Size = new System.Drawing.Size(164, 330);
+            this.CgMenu.Size = new System.Drawing.Size(164, 308);
             // 
             // MgTopMost
             // 
@@ -196,29 +196,18 @@
             this.MgExit.Text = "退出(&X)";
             this.MgExit.Click += new System.EventHandler(this.MgExit_Click);
             // 
-            // UcApp
+            // PbApp
             // 
-            this.UcApp.Location = new System.Drawing.Point(0, 0);
-            this.UcApp.Name = "UcApp";
-            this.UcApp.Size = new System.Drawing.Size(25, 25);
-            this.UcApp.TabIndex = 1;
-            this.UcApp.TabStop = false;
-            this.UcApp.DoubleClick += new System.EventHandler(this.PbLogo_DoubleClick);
-            this.UcApp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PbLogo_MouseDown);
-            this.UcApp.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PbLogo_MouseMove);
-            this.UcApp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PbLogo_MouseUp);
-            // 
-            // LvApp
-            // 
-            this.LvApp.LargeImageList = this.IlApp;
-            this.LvApp.Location = new System.Drawing.Point(31, 22);
-            this.LvApp.Name = "LvApp";
-            this.LvApp.Size = new System.Drawing.Size(120, 120);
-            this.LvApp.SmallImageList = this.IsApp;
-            this.LvApp.TabIndex = 2;
-            this.LvApp.UseCompatibleStateImageBehavior = false;
-            this.LvApp.SelectedIndexChanged += new System.EventHandler(this.LvApp_SelectedIndexChanged);
-            this.LvApp.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LvApp_MouseDoubleClick);
+            this.PbApp.Location = new System.Drawing.Point(0, 0);
+            this.PbApp.Name = "PbApp";
+            this.PbApp.Size = new System.Drawing.Size(25, 25);
+            this.PbApp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.PbApp.TabIndex = 1;
+            this.PbApp.TabStop = false;
+            this.PbApp.DoubleClick += new System.EventHandler(this.PbLogo_DoubleClick);
+            this.PbApp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PbLogo_MouseDown);
+            this.PbApp.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PbLogo_MouseMove);
+            this.PbApp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PbLogo_MouseUp);
             // 
             // IlApp
             // 
@@ -232,14 +221,24 @@
             this.IsApp.ImageSize = new System.Drawing.Size(16, 16);
             this.IsApp.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // LbApp
+            // 
+            this.LbApp.FormattingEnabled = true;
+            this.LbApp.IntegralHeight = false;
+            this.LbApp.ItemHeight = 12;
+            this.LbApp.Location = new System.Drawing.Point(12, 31);
+            this.LbApp.Name = "LbApp";
+            this.LbApp.Size = new System.Drawing.Size(120, 111);
+            this.LbApp.TabIndex = 2;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(163, 154);
+            this.ClientSize = new System.Drawing.Size(144, 154);
             this.ContextMenuStrip = this.CgMenu;
-            this.Controls.Add(this.UcApp);
-            this.Controls.Add(this.LvApp);
+            this.Controls.Add(this.LbApp);
+            this.Controls.Add(this.PbApp);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -252,7 +251,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
             this.CgMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.UcApp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbApp)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -276,11 +275,11 @@
         private System.Windows.Forms.ToolStripMenuItem MgInfo;
         private System.Windows.Forms.ToolStripMenuItem MgABar;
         private System.Windows.Forms.ToolStripMenuItem MgARen;
-        private System.Windows.Forms.PictureBox UcApp;
-        private System.Windows.Forms.ListView LvApp;
+        private System.Windows.Forms.PictureBox PbApp;
         private System.Windows.Forms.ImageList IlApp;
         private System.Windows.Forms.ImageList IsApp;
         private System.Windows.Forms.ToolStripMenuItem MgAIco;
+        private System.Windows.Forms.ListBox LbApp;
 
 
     }

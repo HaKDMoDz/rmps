@@ -214,6 +214,7 @@
     <Compile Include="Img\AImg.Designer.cs">
       <DependentUpon>AImg.cs</DependentUpon>
     </Compile>
+    <Compile Include="Img\C\Ani.cs" />
     <Compile Include="Img\EImg.cs" />
     <Compile Include="Img\E\AImgAction.cs" />
     <Compile Include="Img\E\OpenAction.cs" />
@@ -1677,7 +1678,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Ico\C\" />
-    <Folder Include="Img\C\" />
     <Folder Include="Img\M\" />
     <Folder Include="Pwd\C\" />
     <Folder Include="Pwd\E\Edit\" />

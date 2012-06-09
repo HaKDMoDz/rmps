@@ -12,7 +12,6 @@ using Me.Amon.Properties;
 using Me.Amon.Pwd;
 using Me.Amon.Ren;
 using Me.Amon.Sec;
-using Me.Amon.Sql;
 using Me.Amon.User;
 using Me.Amon.User.Sign;
 using Me.Amon.Util;
@@ -139,8 +138,7 @@ namespace Me.Amon
             MgTray.Checked = NiTray.Visible;
 
             // 系统徽标
-            _ILogo = new IcoLogo(UcApp);
-            _ILogo.InitOnce();
+            ChangeEmotion(Settings.Default.Emotion);
 
             // 系统日志
             if (File.Exists(EApp.FILE_LOG))
@@ -151,7 +149,7 @@ namespace Me.Amon
             if (_UserModel == null)
             {
                 _UserModel = new UserModel();
-                SignAc(ESignAc.SignIn, new AmonHandler<int>(DoSignIn));
+                //SignAc(ESignAc.SignIn, new AmonHandler<int>(DoSignIn));
             }
         }
 
@@ -452,7 +450,7 @@ namespace Me.Amon
             string path = Path.Combine(_UserModel.Home, "App.xml");
             if (!File.Exists(path))
             {
-                LvApp.Visible = false;
+                //LvApp.Visible = false;
                 return;
             }
 
@@ -470,7 +468,7 @@ namespace Me.Amon
                 _AppList.Add(app);
 
                 IlApp.Images.Add(app.Id, BeanUtil.ReadImage(app.Logo, Resources.Logo32));
-                LvApp.Items.Add(new ListViewItem { Name = app.Id, Text = app.Text, ImageKey = app.Id });
+                //LvApp.Items.Add(new ListViewItem { Name = app.Id, Text = app.Text, ImageKey = app.Id });
             }
             ChangeAppVisible(true);
             return;
@@ -573,7 +571,25 @@ namespace Me.Amon
                 Size = new Size(25, 25);
                 Region = new Region(new Rectangle(0, 0, 25, 25));
             }
-            LvApp.Visible = visible;
+            LbApp.Visible = visible;
+        }
+
+        private void ChangeEmotion(int emotion)
+        {
+            if (_ILogo != null)
+            {
+                _ILogo.DoStop();
+            }
+
+            if (emotion == 0)
+            {
+                _ILogo = new EyeLogo(PbApp, this.components);
+            }
+            else
+            {
+                _ILogo = new IcoLogo(PbApp, this.components);
+            }
+            _ILogo.DoWork();
         }
         #endregion
 
@@ -588,7 +604,6 @@ namespace Me.Amon
 
         private void LvApp_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
 
         private void MgAIco_Click(object sender, EventArgs e)

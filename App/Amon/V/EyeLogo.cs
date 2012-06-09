@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -10,6 +11,7 @@ namespace Me.Amon.V
     {
         #region 全局变量
         private PictureBox _PBox;
+        private Timer _Timer;
 
         /// <summary>
         /// 屏幕
@@ -42,14 +44,18 @@ namespace Me.Amon.V
         private Rectangle _RRect;
         #endregion
 
-        public EyeLogo(PictureBox pBox)
+        public EyeLogo(PictureBox pBox, IContainer container)
         {
             _PBox = pBox;
+            _Timer = new Timer(container);
         }
 
         #region 接口实现
-        public void InitOnce()
+        public void DoWork()
         {
+            _ScreenW = Screen.PrimaryScreen.Bounds.Width;
+            _ScreenH = Screen.PrimaryScreen.Bounds.Height;
+
             _AlienRadius = 11;
             _AlienCenterX = 12;
             _AlienCenterY = 12;
@@ -74,6 +80,10 @@ namespace Me.Amon.V
             _RRect = new Rectangle(x + _AlienRadius + x, y, _AlienRadius, _TmpImage.Height);
 
             GenImage(_PupilCenterX, _PupilCenterY);
+
+            _Timer.Interval = 200;
+            _Timer.Tick += new EventHandler(Timer_Tick);
+            _Timer.Start();
         }
 
         public void MouseMove()
@@ -83,10 +93,15 @@ namespace Me.Amon.V
         public void KeyPress()
         {
         }
+
+        public void DoStop()
+        {
+            _Timer.Stop();
+        }
         #endregion
 
         #region 眼睛动画
-        private void BgWorker_Tick(object sender, System.EventArgs e)
+        private void Timer_Tick(object sender, System.EventArgs e)
         {
             DoSpy(Cursor.Position.X, Cursor.Position.Y);
         }
@@ -111,8 +126,9 @@ namespace Me.Amon.V
             }
 
             // 眼睛中心坐标
-            int cx = _PBox.Location.X + _AlienCenterX;
-            int cy = _PBox.Location.Y + _AlienCenterY;
+            Point p = _PBox.PointToScreen(_PBox.Location);
+            int cx = p.X + _AlienCenterX;
+            int cy = p.Y + _AlienCenterY;
 
             int mw = x - cx;//象限水平鼠标距离
             int mh = y - cy;//象限垂直鼠标距离
