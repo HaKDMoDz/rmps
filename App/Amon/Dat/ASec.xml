@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Amon>
-  <App>AIco</App>
+  <App>ASec</App>
   <Ver>1</Ver>
   <Actions>
     <Action Id="open-file" Class="Me.Amon.Ico.E.OpenAction"/>

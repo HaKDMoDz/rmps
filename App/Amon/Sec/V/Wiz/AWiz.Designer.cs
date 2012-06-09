@@ -97,14 +97,14 @@
             this.TcCrypto.Multiline = true;
             this.TcCrypto.Name = "TcCrypto";
             this.TcCrypto.SelectedIndex = 0;
-            this.TcCrypto.Size = new System.Drawing.Size(354, 211);
+            this.TcCrypto.Size = new System.Drawing.Size(357, 211);
             this.TcCrypto.TabIndex = 3;
             // 
             // TpFile
             // 
             this.TpFile.Location = new System.Drawing.Point(4, 4);
             this.TpFile.Name = "TpFile";
-            this.TpFile.Size = new System.Drawing.Size(327, 203);
+            this.TpFile.Size = new System.Drawing.Size(330, 203);
             this.TpFile.TabIndex = 2;
             this.TpFile.Text = "文件";
             this.TpFile.UseVisualStyleBackColor = true;

@@ -214,7 +214,7 @@
     <Compile Include="Img\AImg.Designer.cs">
       <DependentUpon>AImg.cs</DependentUpon>
     </Compile>
-    <Compile Include="Img\C\Ani.cs" />
+    <Compile Include="Img\C\Animator.cs" />
     <Compile Include="Img\EImg.cs" />
     <Compile Include="Img\E\AImgAction.cs" />
     <Compile Include="Img\E\OpenAction.cs" />

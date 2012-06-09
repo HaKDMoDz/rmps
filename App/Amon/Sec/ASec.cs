@@ -95,8 +95,8 @@ namespace Me.Amon.Sec
         #region 公有方法
         public void ShowEcho(string msg)
         {
-            LbInfo.Text = msg;
-            TpTips.SetToolTip(LbInfo, msg);
+            LblEcho.Text = msg;
+            TpTips.SetToolTip(LblEcho, msg);
         }
 
         public void ShowTips(Control control, string caption)

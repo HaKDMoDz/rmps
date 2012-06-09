@@ -28,78 +28,81 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LbSrc = new System.Windows.Forms.Label();
-            this.TbSrc = new System.Windows.Forms.TextBox();
-            this.BtSrc = new System.Windows.Forms.Button();
-            this.LbDst = new System.Windows.Forms.Label();
-            this.TbDst = new System.Windows.Forms.TextBox();
-            this.BtDst = new System.Windows.Forms.Button();
+            this.GvFile = new System.Windows.Forms.DataGridView();
+            this.LlPass = new System.Windows.Forms.Label();
+            this.TbPass = new System.Windows.Forms.TextBox();
+            this.SrcFile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DstFile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.GvFile)).BeginInit();
             this.SuspendLayout();
             // 
-            // LbSrc
+            // GvFile
             // 
-            this.LbSrc.AutoSize = true;
-            this.LbSrc.Location = new System.Drawing.Point(3, 6);
-            this.LbSrc.Name = "LbSrc";
-            this.LbSrc.Size = new System.Drawing.Size(71, 12);
-            this.LbSrc.TabIndex = 0;
-            this.LbSrc.Text = "输入文件(&I)";
+            this.GvFile.AllowDrop = true;
+            this.GvFile.AllowUserToAddRows = false;
+            this.GvFile.AllowUserToDeleteRows = false;
+            this.GvFile.AllowUserToResizeRows = false;
+            this.GvFile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GvFile.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GvFile.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SrcFile,
+            this.DstFile});
+            this.GvFile.Location = new System.Drawing.Point(3, 3);
+            this.GvFile.MultiSelect = false;
+            this.GvFile.Name = "GvFile";
+            this.GvFile.ReadOnly = true;
+            this.GvFile.RowHeadersVisible = false;
+            this.GvFile.RowTemplate.Height = 23;
+            this.GvFile.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.GvFile.Size = new System.Drawing.Size(234, 150);
+            this.GvFile.TabIndex = 0;
+            this.GvFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.GvFile_DragDrop);
+            this.GvFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.GvFile_DragEnter);
             // 
-            // TbSrc
+            // LlPass
             // 
-            this.TbSrc.Location = new System.Drawing.Point(3, 21);
-            this.TbSrc.Name = "TbSrc";
-            this.TbSrc.ReadOnly = true;
-            this.TbSrc.Size = new System.Drawing.Size(210, 21);
-            this.TbSrc.TabIndex = 1;
+            this.LlPass.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LlPass.AutoSize = true;
+            this.LlPass.Location = new System.Drawing.Point(3, 162);
+            this.LlPass.Name = "LlPass";
+            this.LlPass.Size = new System.Drawing.Size(47, 12);
+            this.LlPass.TabIndex = 1;
+            this.LlPass.Text = "口令(&K)";
             // 
-            // BtSrc
+            // TbPass
             // 
-            this.BtSrc.Location = new System.Drawing.Point(219, 21);
-            this.BtSrc.Name = "BtSrc";
-            this.BtSrc.Size = new System.Drawing.Size(21, 21);
-            this.BtSrc.TabIndex = 2;
-            this.BtSrc.Text = ".";
-            this.BtSrc.UseVisualStyleBackColor = true;
+            this.TbPass.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TbPass.Location = new System.Drawing.Point(56, 159);
+            this.TbPass.Name = "TbPass";
+            this.TbPass.Size = new System.Drawing.Size(181, 21);
+            this.TbPass.TabIndex = 2;
             // 
-            // LbDst
+            // SrcFile
             // 
-            this.LbDst.AutoSize = true;
-            this.LbDst.Location = new System.Drawing.Point(3, 45);
-            this.LbDst.Name = "LbDst";
-            this.LbDst.Size = new System.Drawing.Size(71, 12);
-            this.LbDst.TabIndex = 3;
-            this.LbDst.Text = "输出文件(&S)";
+            this.SrcFile.HeaderText = "文件";
+            this.SrcFile.Name = "SrcFile";
+            this.SrcFile.ReadOnly = true;
             // 
-            // TbDst
+            // DstFile
             // 
-            this.TbDst.Location = new System.Drawing.Point(3, 60);
-            this.TbDst.Name = "TbDst";
-            this.TbDst.ReadOnly = true;
-            this.TbDst.Size = new System.Drawing.Size(210, 21);
-            this.TbDst.TabIndex = 4;
-            // 
-            // BtDst
-            // 
-            this.BtDst.Location = new System.Drawing.Point(219, 60);
-            this.BtDst.Name = "BtDst";
-            this.BtDst.Size = new System.Drawing.Size(21, 21);
-            this.BtDst.TabIndex = 5;
-            this.BtDst.Text = ".";
-            this.BtDst.UseVisualStyleBackColor = true;
+            this.DstFile.HeaderText = "文件";
+            this.DstFile.Name = "DstFile";
+            this.DstFile.ReadOnly = true;
             // 
             // CipherFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.BtDst);
-            this.Controls.Add(this.TbDst);
-            this.Controls.Add(this.LbDst);
-            this.Controls.Add(this.BtSrc);
-            this.Controls.Add(this.TbSrc);
-            this.Controls.Add(this.LbSrc);
+            this.Controls.Add(this.TbPass);
+            this.Controls.Add(this.LlPass);
+            this.Controls.Add(this.GvFile);
             this.Name = "CipherFile";
             this.Size = new System.Drawing.Size(240, 183);
+            ((System.ComponentModel.ISupportInitialize)(this.GvFile)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -107,11 +110,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Label LbSrc;
-        private System.Windows.Forms.TextBox TbSrc;
-        private System.Windows.Forms.Button BtSrc;
-        private System.Windows.Forms.Label LbDst;
-        private System.Windows.Forms.TextBox TbDst;
-        private System.Windows.Forms.Button BtDst;
+        private System.Windows.Forms.DataGridView GvFile;
+        private System.Windows.Forms.Label LlPass;
+        private System.Windows.Forms.TextBox TbPass;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SrcFile;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DstFile;
     }
 }

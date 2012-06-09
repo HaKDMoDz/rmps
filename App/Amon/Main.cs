@@ -459,18 +459,18 @@ namespace Me.Amon
             doc.Load(reader);
             reader.Close();
 
-            MApp app;
-            _AppList = new List<MApp>();
-            foreach (XmlNode node in doc.SelectNodes("/Amon/Apps/App"))
-            {
-                app = new MApp();
-                app.FromXml(node);
-                _AppList.Add(app);
+            //MApp app;
+            //_AppList = new List<MApp>();
+            //foreach (XmlNode node in doc.SelectNodes("/Amon/Apps/App"))
+            //{
+            //    app = new MApp();
+            //    app.FromXml(node);
+            //    _AppList.Add(app);
 
-                IlApp.Images.Add(app.Id, BeanUtil.ReadImage(app.Logo, Resources.Logo32));
-                //LvApp.Items.Add(new ListViewItem { Name = app.Id, Text = app.Text, ImageKey = app.Id });
-            }
-            ChangeAppVisible(true);
+            //    IlApp.Images.Add(app.Id, BeanUtil.ReadImage(app.Logo, Resources.Logo32));
+            //    LvApp.Items.Add(new ListViewItem { Name = app.Id, Text = app.Text, ImageKey = app.Id });
+            //}
+            //ChangeAppVisible(true);
             return;
         }
 

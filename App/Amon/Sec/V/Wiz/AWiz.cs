@@ -6,10 +6,13 @@ namespace Me.Amon.Sec.V.Wiz
 {
     public partial class AWiz : UserControl, ISec
     {
+        #region 全局变量
         private ASec _ASec;
         private IView _IFile;
         private IView _IText;
+        #endregion
 
+        #region 构造函数
         public AWiz()
         {
             InitializeComponent();
@@ -21,7 +24,9 @@ namespace Me.Amon.Sec.V.Wiz
 
             _ASec = asec;
         }
+        #endregion
 
+        #region 接口实现
         public void InitOnce()
         {
             CbDir.Items.Add(new Item { K = "hash", V = "摘要" });
@@ -33,10 +38,10 @@ namespace Me.Amon.Sec.V.Wiz
         public void InitView()
         {
             Location = new Point(12, 12);
-            Size = new Size(240, 236);
+            Size = new Size(356, 207);
             TabIndex = 0;
             _ASec.Controls.Add(this);
-            _ASec.ClientSize = new Size(264, 305);
+            _ASec.ClientSize = new Size(380, 260);
         }
 
         public void HideView()
@@ -55,7 +60,9 @@ namespace Me.Amon.Sec.V.Wiz
         public void DoCrypto()
         {
         }
+        #endregion
 
+        #region 事件处理
         private void CbDir_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             Item item = CbDir.SelectedItem as Item;
@@ -96,7 +103,9 @@ namespace Me.Amon.Sec.V.Wiz
         {
 
         }
+        #endregion
 
+        #region 私有函数
         private void ShowCipher()
         {
             if (_CFile == null)
@@ -154,5 +163,6 @@ namespace Me.Amon.Sec.V.Wiz
         }
         private DigestFile _DFile;
         private DigestText _DText;
+        #endregion
     }
 }

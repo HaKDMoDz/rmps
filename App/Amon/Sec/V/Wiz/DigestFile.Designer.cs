@@ -28,67 +28,56 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TbDst = new System.Windows.Forms.TextBox();
-            this.LbDst = new System.Windows.Forms.Label();
-            this.TbSrc = new System.Windows.Forms.TextBox();
-            this.LbSrc = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.GvFile = new System.Windows.Forms.DataGridView();
+            this.TbHash = new System.Windows.Forms.TextBox();
+            this.LlHash = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.GvFile)).BeginInit();
             this.SuspendLayout();
             // 
-            // TbDst
+            // GvFile
             // 
-            this.TbDst.Location = new System.Drawing.Point(0, 108);
-            this.TbDst.Multiline = true;
-            this.TbDst.Name = "TbDst";
-            this.TbDst.ReadOnly = true;
-            this.TbDst.Size = new System.Drawing.Size(240, 73);
-            this.TbDst.TabIndex = 4;
+            this.GvFile.AllowDrop = true;
+            this.GvFile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GvFile.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GvFile.Location = new System.Drawing.Point(3, 3);
+            this.GvFile.Name = "GvFile";
+            this.GvFile.RowTemplate.Height = 23;
+            this.GvFile.Size = new System.Drawing.Size(234, 150);
+            this.GvFile.TabIndex = 0;
             // 
-            // LbDst
+            // TbHash
             // 
-            this.LbDst.AutoSize = true;
-            this.LbDst.Location = new System.Drawing.Point(0, 93);
-            this.LbDst.Name = "LbDst";
-            this.LbDst.Size = new System.Drawing.Size(47, 12);
-            this.LbDst.TabIndex = 3;
-            this.LbDst.Text = "密文(&D)";
+            this.TbHash.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TbHash.Location = new System.Drawing.Point(56, 159);
+            this.TbHash.Name = "TbHash";
+            this.TbHash.ReadOnly = true;
+            this.TbHash.Size = new System.Drawing.Size(181, 21);
+            this.TbHash.TabIndex = 1;
             // 
-            // TbSrc
+            // LlHash
             // 
-            this.TbSrc.Location = new System.Drawing.Point(0, 17);
-            this.TbSrc.Name = "TbSrc";
-            this.TbSrc.Size = new System.Drawing.Size(213, 21);
-            this.TbSrc.TabIndex = 1;
-            // 
-            // LbSrc
-            // 
-            this.LbSrc.AutoSize = true;
-            this.LbSrc.Location = new System.Drawing.Point(0, 2);
-            this.LbSrc.Name = "LbSrc";
-            this.LbSrc.Size = new System.Drawing.Size(47, 12);
-            this.LbSrc.TabIndex = 0;
-            this.LbSrc.Text = "明文(&S)";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(219, 17);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(21, 21);
-            this.button1.TabIndex = 2;
-            this.button1.Text = ".";
-            this.button1.UseVisualStyleBackColor = true;
+            this.LlHash.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LlHash.AutoSize = true;
+            this.LlHash.Location = new System.Drawing.Point(3, 162);
+            this.LlHash.Name = "LlHash";
+            this.LlHash.Size = new System.Drawing.Size(47, 12);
+            this.LlHash.TabIndex = 2;
+            this.LlHash.Text = "摘要(&K)";
             // 
             // DigestFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.TbDst);
-            this.Controls.Add(this.LbDst);
-            this.Controls.Add(this.TbSrc);
-            this.Controls.Add(this.LbSrc);
+            this.Controls.Add(this.TbHash);
+            this.Controls.Add(this.LlHash);
+            this.Controls.Add(this.GvFile);
             this.Name = "DigestFile";
             this.Size = new System.Drawing.Size(240, 183);
+            ((System.ComponentModel.ISupportInitialize)(this.GvFile)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -96,10 +85,10 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox TbDst;
-        private System.Windows.Forms.Label LbDst;
-        private System.Windows.Forms.TextBox TbSrc;
-        private System.Windows.Forms.Label LbSrc;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView GvFile;
+        private System.Windows.Forms.TextBox TbHash;
+        private System.Windows.Forms.Label LlHash;
+
+
     }
 }
