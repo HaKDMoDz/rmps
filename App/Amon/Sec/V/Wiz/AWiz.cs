@@ -1,4 +1,7 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Uc;
 
@@ -8,8 +11,9 @@ namespace Me.Amon.Sec.V.Wiz
     {
         #region 全局变量
         private ASec _ASec;
-        private IView _IFile;
-        private IView _IText;
+        private ICrypto _IFile;
+        private ICrypto _IText;
+        private List<Item> _FileList;
         #endregion
 
         #region 构造函数
@@ -33,6 +37,7 @@ namespace Me.Amon.Sec.V.Wiz
             CbDir.Items.Add(new Item { K = "enc", V = "加密" });
             CbDir.Items.Add(new Item { K = "dec", V = "解密" });
             CbDir.SelectedIndex = 0;
+            _FileList = new List<Item>();
         }
 
         public void InitView()
@@ -79,7 +84,6 @@ namespace Me.Amon.Sec.V.Wiz
                 CbFun.Items.Add(new Item { K = "SHA256", V = "SHA256" });
                 CbFun.Items.Add(new Item { K = "SHA512", V = "SHA512" });
                 CbFun.SelectedIndex = 0;
-                ShowDigest();
                 return;
             }
             if (item.K == "enc" || item.K == "dec")
@@ -89,7 +93,6 @@ namespace Me.Amon.Sec.V.Wiz
                 CbFun.Items.Add(new Item { K = "RC4", V = "RC4" });
                 CbFun.Items.Add(new Item { K = "RC6", V = "RC6" });
                 CbFun.SelectedIndex = 0;
-                ShowCipher();
                 return;
             }
         }
@@ -105,64 +108,68 @@ namespace Me.Amon.Sec.V.Wiz
         }
         #endregion
 
+        private void GvFile_DragDrop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                object obj = e.Data.GetData(DataFormats.FileDrop);
+                if (obj == null)
+                {
+                    return;
+                }
+                string[] arr = obj as string[];
+                if (arr == null)
+                {
+                    return;
+                }
+
+                foreach (string file in arr)
+                {
+                    if (!File.Exists(file))
+                    {
+                        continue;
+                    }
+
+                    if (GetD(file) != null)
+                    {
+                        continue;
+                    }
+
+                    Item item = new Item { K = file, V = Path.GetFileName(file) };
+                    _FileList.Add(item);
+                    GvFile.Rows.Add(item.V, "");
+                }
+            }
+            catch (Exception ex)
+            {
+                Main.ShowError(ex);
+            }
+        }
+
+        private void GvFile_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Link;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
         #region 私有函数
-        private void ShowCipher()
+        private Item GetD(string file)
         {
-            if (_CFile == null)
+            foreach (Item item in _FileList)
             {
-                _CFile = new CipherFile();
-                _CFile.Dock = DockStyle.Fill;
+                if (item.K == file)
+                {
+                    return item;
+                }
             }
-            if (_IFile != null)
-            {
-                TpFile.Controls.Remove(_IFile.Control);
-            }
-            TpFile.Controls.Add(_CFile);
-            _IFile = _CFile;
-
-            if (_CText == null)
-            {
-                _CText = new CipherText();
-                _CText.Dock = DockStyle.Fill;
-            }
-            if (_IText != null)
-            {
-                TpText.Controls.Remove(_IText.Control);
-            }
-            TpText.Controls.Add(_CText);
-            _IText = _CText;
+            return null;
         }
-        private CipherFile _CFile;
-        private CipherText _CText;
-
-        private void ShowDigest()
-        {
-            if (_DFile == null)
-            {
-                _DFile = new DigestFile();
-                _DFile.Dock = DockStyle.Fill;
-            }
-            if (_IFile != null)
-            {
-                TpFile.Controls.Remove(_IFile.Control);
-            }
-            TpFile.Controls.Add(_DFile);
-            _IFile = _DFile;
-
-            if (_DText == null)
-            {
-                _DText = new DigestText();
-                _DText.Dock = DockStyle.Fill;
-            }
-            if (_IText != null)
-            {
-                TpText.Controls.Remove(_IText.Control);
-            }
-            TpText.Controls.Add(_DText);
-            _IText = _DText;
-        }
-        private DigestFile _DFile;
-        private DigestText _DText;
         #endregion
     }
 }

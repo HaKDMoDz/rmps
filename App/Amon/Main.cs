@@ -139,6 +139,7 @@ namespace Me.Amon
 
             // 系统徽标
             ChangeEmotion(Settings.Default.Emotion);
+            MgLogo.Checked = (Settings.Default.Emotion == 0);
 
             // 系统日志
             if (File.Exists(EApp.FILE_LOG))
@@ -267,22 +268,6 @@ namespace Me.Amon
             }
         }
 
-        private void MgTray_Click(object sender, EventArgs e)
-        {
-            NiTray.Visible = !NiTray.Visible;
-            MgTray.Checked = NiTray.Visible;
-
-            if (NiTray.Visible)
-            {
-                Settings.Default.Pattern |= EApp.PATTERN_TRAY;
-            }
-            else
-            {
-                Settings.Default.Pattern ^= EApp.PATTERN_TRAY;
-            }
-            Settings.Default.Save();
-        }
-
         private void MgAPwd_Click(object sender, EventArgs e)
         {
             if (_IApp == null || !_IApp.Visible)
@@ -345,6 +330,30 @@ namespace Me.Amon
                 ShowARen(EApp.IAPP_AREN);
                 return;
             }
+        }
+
+        private void MgLogo_Click(object sender, EventArgs e)
+        {
+            Settings.Default.Emotion = 1 - Settings.Default.Emotion;
+            ChangeEmotion(Settings.Default.Emotion);
+            MgLogo.Checked = (Settings.Default.Emotion == 0);
+            Settings.Default.Save();
+        }
+
+        private void MgTray_Click(object sender, EventArgs e)
+        {
+            NiTray.Visible = !NiTray.Visible;
+            MgTray.Checked = NiTray.Visible;
+
+            if (NiTray.Visible)
+            {
+                Settings.Default.Pattern |= EApp.PATTERN_TRAY;
+            }
+            else
+            {
+                Settings.Default.Pattern ^= EApp.PATTERN_TRAY;
+            }
+            Settings.Default.Save();
         }
 
         private void MgSignOl_Click(object sender, EventArgs e)

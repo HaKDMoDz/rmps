@@ -33,8 +33,23 @@
             this.CbFun = new System.Windows.Forms.ComboBox();
             this.TcCrypto = new System.Windows.Forms.ATabControl();
             this.TpFile = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.LbData = new System.Windows.Forms.Label();
+            this.GvFile = new System.Windows.Forms.DataGridView();
             this.TpText = new System.Windows.Forms.TabPage();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.TbSrc = new System.Windows.Forms.TextBox();
+            this.TbDst = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.TcCrypto.SuspendLayout();
+            this.TpFile.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GvFile)).BeginInit();
+            this.TpText.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // LbOpt
@@ -93,30 +108,116 @@
             this.TcCrypto.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.TcCrypto.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
             this.TcCrypto.HotTrack = true;
-            this.TcCrypto.Location = new System.Drawing.Point(3, 26);
+            this.TcCrypto.Location = new System.Drawing.Point(0, 26);
             this.TcCrypto.Multiline = true;
             this.TcCrypto.Name = "TcCrypto";
             this.TcCrypto.SelectedIndex = 0;
-            this.TcCrypto.Size = new System.Drawing.Size(357, 211);
+            this.TcCrypto.Size = new System.Drawing.Size(360, 214);
             this.TcCrypto.TabIndex = 3;
             // 
             // TpFile
             // 
+            this.TpFile.Controls.Add(this.pictureBox1);
+            this.TpFile.Controls.Add(this.textBox1);
+            this.TpFile.Controls.Add(this.LbData);
+            this.TpFile.Controls.Add(this.GvFile);
             this.TpFile.Location = new System.Drawing.Point(4, 4);
             this.TpFile.Name = "TpFile";
-            this.TpFile.Size = new System.Drawing.Size(330, 203);
+            this.TpFile.Size = new System.Drawing.Size(333, 206);
             this.TpFile.TabIndex = 2;
             this.TpFile.Text = "文件";
             this.TpFile.UseVisualStyleBackColor = true;
             // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(56, 182);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(252, 21);
+            this.textBox1.TabIndex = 2;
+            // 
+            // LbData
+            // 
+            this.LbData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.LbData.AutoSize = true;
+            this.LbData.Location = new System.Drawing.Point(3, 185);
+            this.LbData.Name = "LbData";
+            this.LbData.Size = new System.Drawing.Size(47, 12);
+            this.LbData.TabIndex = 1;
+            this.LbData.Text = "口令(&K)";
+            // 
+            // GvFile
+            // 
+            this.GvFile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GvFile.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GvFile.Location = new System.Drawing.Point(3, 3);
+            this.GvFile.Name = "GvFile";
+            this.GvFile.RowTemplate.Height = 23;
+            this.GvFile.Size = new System.Drawing.Size(327, 173);
+            this.GvFile.TabIndex = 0;
+            this.GvFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.GvFile_DragDrop);
+            this.GvFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.GvFile_DragEnter);
+            // 
             // TpText
             // 
+            this.TpText.Controls.Add(this.splitContainer1);
             this.TpText.Location = new System.Drawing.Point(4, 4);
             this.TpText.Name = "TpText";
-            this.TpText.Size = new System.Drawing.Size(327, 203);
+            this.TpText.Size = new System.Drawing.Size(333, 206);
             this.TpText.TabIndex = 3;
             this.TpText.Text = "文本";
             this.TpText.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.TbSrc);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.TbDst);
+            this.splitContainer1.Size = new System.Drawing.Size(323, 200);
+            this.splitContainer1.SplitterDistance = 107;
+            this.splitContainer1.TabIndex = 0;
+            // 
+            // TbSrc
+            // 
+            this.TbSrc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TbSrc.Location = new System.Drawing.Point(0, 0);
+            this.TbSrc.Multiline = true;
+            this.TbSrc.Name = "TbSrc";
+            this.TbSrc.Size = new System.Drawing.Size(323, 107);
+            this.TbSrc.TabIndex = 0;
+            // 
+            // TbDst
+            // 
+            this.TbDst.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TbDst.Location = new System.Drawing.Point(0, 0);
+            this.TbDst.Multiline = true;
+            this.TbDst.Name = "TbDst";
+            this.TbDst.ReadOnly = true;
+            this.TbDst.Size = new System.Drawing.Size(323, 89);
+            this.TbDst.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Location = new System.Drawing.Point(314, 185);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
             // 
             // AWiz
             // 
@@ -129,6 +230,17 @@
             this.Name = "AWiz";
             this.Size = new System.Drawing.Size(360, 240);
             this.TcCrypto.ResumeLayout(false);
+            this.TpFile.ResumeLayout(false);
+            this.TpFile.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GvFile)).EndInit();
+            this.TpText.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -142,5 +254,12 @@
         private System.Windows.Forms.ATabControl TcCrypto;
         private System.Windows.Forms.TabPage TpFile;
         private System.Windows.Forms.TabPage TpText;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label LbData;
+        private System.Windows.Forms.DataGridView GvFile;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.TextBox TbDst;
+        private System.Windows.Forms.TextBox TbSrc;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

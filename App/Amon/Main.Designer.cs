@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.NiTray = new System.Windows.Forms.NotifyIcon(this.components);
-            this.CgMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MgTopMost = new System.Windows.Forms.ToolStripMenuItem();
             this.MgTray = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSep0 = new System.Windows.Forms.ToolStripSeparator();
@@ -52,7 +52,9 @@
             this.IlApp = new System.Windows.Forms.ImageList(this.components);
             this.IsApp = new System.Windows.Forms.ImageList(this.components);
             this.LbApp = new System.Windows.Forms.ListBox();
-            this.CgMenu.SuspendLayout();
+            this.MgLogo = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.CmMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbApp)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,11 +66,10 @@
             this.NiTray.Visible = true;
             this.NiTray.DoubleClick += new System.EventHandler(this.NiTray_DoubleClick);
             // 
-            // CgMenu
+            // CmMenu
             // 
-            this.CgMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MgTopMost,
-            this.MgTray,
             this.MgSep0,
             this.MgAPwd,
             this.MgASec,
@@ -81,10 +82,13 @@
             this.MgSignOf,
             this.MgSignFp,
             this.MgSep2,
+            this.MgLogo,
+            this.MgTray,
+            this.toolStripSeparator1,
             this.MgInfo,
             this.MgExit});
-            this.CgMenu.Name = "CmMenu";
-            this.CgMenu.Size = new System.Drawing.Size(164, 308);
+            this.CmMenu.Name = "CmMenu";
+            this.CmMenu.Size = new System.Drawing.Size(164, 358);
             // 
             // MgTopMost
             // 
@@ -231,12 +235,24 @@
             this.LbApp.Size = new System.Drawing.Size(120, 111);
             this.LbApp.TabIndex = 2;
             // 
+            // MgLogo
+            // 
+            this.MgLogo.Name = "MgLogo";
+            this.MgLogo.Size = new System.Drawing.Size(163, 22);
+            this.MgLogo.Text = "显示眼睛动画(&E)";
+            this.MgLogo.Click += new System.EventHandler(this.MgLogo_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(160, 6);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(144, 154);
-            this.ContextMenuStrip = this.CgMenu;
+            this.ContextMenuStrip = this.CmMenu;
             this.Controls.Add(this.LbApp);
             this.Controls.Add(this.PbApp);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -250,7 +266,7 @@
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
-            this.CgMenu.ResumeLayout(false);
+            this.CmMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PbApp)).EndInit();
             this.ResumeLayout(false);
 
@@ -259,7 +275,7 @@
         #endregion
 
         private System.Windows.Forms.NotifyIcon NiTray;
-        private System.Windows.Forms.ContextMenuStrip CgMenu;
+        private System.Windows.Forms.ContextMenuStrip CmMenu;
         private System.Windows.Forms.ToolStripMenuItem MgTopMost;
         private System.Windows.Forms.ToolStripMenuItem MgTray;
         private System.Windows.Forms.ToolStripMenuItem MgExit;
@@ -280,6 +296,8 @@
         private System.Windows.Forms.ImageList IsApp;
         private System.Windows.Forms.ToolStripMenuItem MgAIco;
         private System.Windows.Forms.ListBox LbApp;
+        private System.Windows.Forms.ToolStripMenuItem MgLogo;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 
 
     }

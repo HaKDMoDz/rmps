@@ -882,31 +882,11 @@
     <Compile Include="Sec\V\Wiz\AWiz.Designer.cs">
       <DependentUpon>AWiz.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sec\V\Wiz\CipherFile.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Sec\V\Wiz\CipherFile.Designer.cs">
-      <DependentUpon>CipherFile.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Sec\V\Wiz\CipherText.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Sec\V\Wiz\CipherText.Designer.cs">
-      <DependentUpon>CipherText.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Sec\V\Wiz\DigestFile.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Sec\V\Wiz\DigestFile.Designer.cs">
-      <DependentUpon>DigestFile.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Sec\V\Wiz\DigestText.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Sec\V\Wiz\DigestText.Designer.cs">
-      <DependentUpon>DigestText.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Sec\V\Wiz\IView.cs" />
+    <Compile Include="Sec\V\Wiz\CipherFile.cs" />
+    <Compile Include="Sec\V\Wiz\CipherText.cs" />
+    <Compile Include="Sec\V\Wiz\DigestFile.cs" />
+    <Compile Include="Sec\V\Wiz\DigestText.cs" />
+    <Compile Include="Sec\V\Wiz\ICrypto.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Spy\V\App.cs">
       <SubType>UserControl</SubType>
@@ -1459,18 +1439,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sec\V\Wiz\AWiz.resx">
       <DependentUpon>AWiz.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sec\V\Wiz\CipherFile.resx">
-      <DependentUpon>CipherFile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sec\V\Wiz\CipherText.resx">
-      <DependentUpon>CipherText.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sec\V\Wiz\DigestFile.resx">
-      <DependentUpon>DigestFile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sec\V\Wiz\DigestText.resx">
-      <DependentUpon>DigestText.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Spy\V\App.resx">
       <DependentUpon>App.cs</DependentUpon>

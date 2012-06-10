@@ -1,19 +1,16 @@
-﻿using System.Windows.Forms;
-
+﻿
 namespace Me.Amon.Sec.V.Wiz
 {
-    public partial class DigestText : UserControl, IView
+    class DigestText : ICrypto
     {
-        public DigestText()
+        public bool Encrypt(string src, string dst)
         {
-            InitializeComponent();
+            return true;
         }
 
-        #region 接口实现
-        public Control Control
+        public bool Decrypt(string src, string dst)
         {
-            get { return this; }
+            return true;
         }
-        #endregion
     }
 }

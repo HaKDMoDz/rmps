@@ -74,6 +74,7 @@
             // PbMenu
             // 
             this.PbMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.PbMenu.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PbMenu.Image = global::Me.Amon.Properties.Resources.Menu;
             this.PbMenu.Location = new System.Drawing.Point(12, 227);
             this.PbMenu.Name = "PbMenu";

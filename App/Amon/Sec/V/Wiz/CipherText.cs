@@ -1,26 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-
+﻿
 namespace Me.Amon.Sec.V.Wiz
 {
-    public partial class CipherText : UserControl, IView
+    class CipherText : ICrypto
     {
-        public CipherText()
+        public bool Encrypt(string src, string dst)
         {
-            InitializeComponent();
+            return true;
         }
 
-        #region 接口实现
-        public Control Control
+        public bool Decrypt(string src, string dst)
         {
-            get { return this; }
+            return true;
         }
-        #endregion
     }
 }
