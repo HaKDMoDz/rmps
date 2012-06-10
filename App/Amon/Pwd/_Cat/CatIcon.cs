@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Event;
@@ -60,7 +61,30 @@ namespace Me.Amon.Pwd._Cat
 
         private void BtAppend_Click(object sender, EventArgs e)
         {
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Multiselect = false;
+            fd.Filter = EApp.FILE_OPEN_IMG;
+            if (DialogResult.OK != fd.ShowDialog(this))
+            {
+                return;
+            }
+            if (!File.Exists(fd.FileName))
+            {
+                MessageBox.Show("您选择的文件不存在！");
+                return;
+            }
 
+            using (Image img = Image.FromFile(fd.FileName))
+            {
+                string key = HashUtil.UtcTimeInHex();
+                Image tmp = BeanUtil.ScaleImage(img, 16, true);
+                tmp.Save(Path.Combine(_HomeDir, key + ".png"), ImageFormat.Png);
+                IlPng.Images.Add(key, tmp);
+                LvPng.SelectedItems.Clear();
+                var item = new ListViewItem((LvPng.Items.Count + 1).ToString(), key);
+                LvPng.Items.Add(item);
+                item.Selected = true;
+            }
         }
 
         private void BtSelect_Click(object sender, EventArgs e)

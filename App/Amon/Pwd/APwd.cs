@@ -691,11 +691,11 @@ namespace Me.Amon.Pwd
 
         public void ChangeCatIcon()
         {
-            //AImg editor = new AImg(_UserModel, _DataModel.CatDir);
-            //editor.InitOnce(16);
-            //editor.CallBackHandler = new AmonHandler<Png>(ChangeCatIcon);
-            //BeanUtil.CenterToParent(editor, this);
-            //editor.ShowDialog(this);
+            CatIcon editor = new CatIcon(_UserModel, _DataModel.CatDir);
+            editor.InitOnce(16);
+            editor.CallBackHandler = new AmonHandler<Png>(ChangeCatIcon);
+            BeanUtil.CenterToParent(editor, this);
+            editor.ShowDialog(this);
         }
 
         public void ChangeCatIcon(Png png)
