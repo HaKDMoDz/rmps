@@ -516,11 +516,6 @@ namespace Me.Amon.Pwd
 
             _LastNode.Text = cat.Text;
             _LastNode.ToolTipText = cat.Tips;
-            if (CharUtil.IsValidateHash(cat.Icon))
-            {
-                _LastNode.ImageKey = cat.Icon;
-            }
-            _LastNode.SelectedImageKey = _LastNode.ImageKey;
         }
 
         public void DeleteCat()
