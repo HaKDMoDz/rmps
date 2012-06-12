@@ -1,9 +1,13 @@
-﻿namespace Me.Amon.Sec.V.Wiz
+namespace Me.Amon.Sec.V.Wiz
 {
     interface ICrypto
     {
-        bool Encrypt(string src, string dst);
+        void Init();
 
-        bool Decrypt(string src, string dst);
+        bool IsText { get; set; }
+
+        string Algorithm { get; set; }
+
+        bool DoCrypto();
     }
 }
