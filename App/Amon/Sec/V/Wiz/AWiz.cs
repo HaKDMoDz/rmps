@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Uc;
 
@@ -11,9 +8,10 @@ namespace Me.Amon.Sec.V.Wiz
     {
         #region 全局变量
         private ASec _ASec;
-        private ICrypto _IFile;
-        private ICrypto _IText;
-        private List<Item> _FileList;
+        private ICrypto _Crypto;
+        private Encode _Encode;
+        private Decode _Decode;
+        private Digest _Digest;
         #endregion
 
         #region 构造函数
@@ -37,7 +35,6 @@ namespace Me.Amon.Sec.V.Wiz
             CbDir.Items.Add(new Item { K = "enc", V = "加密" });
             CbDir.Items.Add(new Item { K = "dec", V = "解密" });
             CbDir.SelectedIndex = 0;
-            _FileList = new List<Item>();
         }
 
         public void InitView()
@@ -47,6 +44,11 @@ namespace Me.Amon.Sec.V.Wiz
             TabIndex = 0;
             _ASec.Controls.Add(this);
             _ASec.ClientSize = new Size(380, 260);
+
+            _Digest = new Digest(UcFile, UcText);
+            _Crypto = _Digest;
+            _Encode = new Encode(UcFile, UcText);
+            _Decode = new Decode(UcFile, UcText);
         }
 
         public void HideView()
@@ -64,6 +66,12 @@ namespace Me.Amon.Sec.V.Wiz
 
         public void DoCrypto()
         {
+            if (_Crypto == null)
+            {
+                return;
+            }
+
+            _Crypto.DoCrypto();
         }
         #endregion
 
@@ -84,91 +92,48 @@ namespace Me.Amon.Sec.V.Wiz
                 CbFun.Items.Add(new Item { K = "SHA256", V = "SHA256" });
                 CbFun.Items.Add(new Item { K = "SHA512", V = "SHA512" });
                 CbFun.SelectedIndex = 0;
+                _Crypto = _Digest;
                 return;
             }
-            if (item.K == "enc" || item.K == "dec")
+            if (item.K == "dec")
             {
                 CbFun.Items.Add(new Item { K = "AES", V = "AES" });
                 CbFun.Items.Add(new Item { K = "DES", V = "DES" });
                 CbFun.Items.Add(new Item { K = "RC4", V = "RC4" });
                 CbFun.Items.Add(new Item { K = "RC6", V = "RC6" });
                 CbFun.SelectedIndex = 0;
+                _Crypto = _Encode;
+                return;
+            }
+            if (item.K == "enc")
+            {
+                CbFun.Items.Add(new Item { K = "AES", V = "AES" });
+                CbFun.Items.Add(new Item { K = "DES", V = "DES" });
+                CbFun.Items.Add(new Item { K = "RC4", V = "RC4" });
+                CbFun.Items.Add(new Item { K = "RC6", V = "RC6" });
+                CbFun.SelectedIndex = 0;
+                _Crypto = _Decode;
                 return;
             }
         }
 
         private void CbFun_SelectedIndexChanged(object sender, System.EventArgs e)
         {
+            Item item = CbDir.SelectedItem as Item;
+            if (item == null)
+            {
+                return;
+            }
 
+            if (_Crypto != null)
+            {
+                _Crypto.Algorithm = item.K;
+            }
         }
 
         private void CbMod_SelectedIndexChanged(object sender, System.EventArgs e)
         {
 
-        }
-        #endregion
-
-        private void GvFile_DragDrop(object sender, DragEventArgs e)
-        {
-            try
-            {
-                object obj = e.Data.GetData(DataFormats.FileDrop);
-                if (obj == null)
-                {
-                    return;
-                }
-                string[] arr = obj as string[];
-                if (arr == null)
-                {
-                    return;
-                }
-
-                foreach (string file in arr)
-                {
-                    if (!File.Exists(file))
-                    {
-                        continue;
-                    }
-
-                    if (GetD(file) != null)
-                    {
-                        continue;
-                    }
-
-                    Item item = new Item { K = file, V = Path.GetFileName(file) };
-                    _FileList.Add(item);
-                    GvFile.Rows.Add(item.V, "");
-                }
-            }
-            catch (Exception ex)
-            {
-                Main.ShowError(ex);
-            }
-        }
-
-        private void GvFile_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                e.Effect = DragDropEffects.Link;
-            }
-            else
-            {
-                e.Effect = DragDropEffects.None;
-            }
-        }
-
-        #region 私有函数
-        private Item GetD(string file)
-        {
-            foreach (Item item in _FileList)
-            {
-                if (item.K == file)
-                {
-                    return item;
-                }
-            }
-            return null;
         }
         #endregion
     }
