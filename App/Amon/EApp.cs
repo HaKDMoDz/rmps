@@ -2,8 +2,8 @@ namespace Me.Amon
 {
     public class EApp
     {
+        public const int PATTERN_LOGO = 0;
         public const int PATTERN_TRAY = 1;
-        public const int PATTERN_ICON = 2;
 
         public const int SEC_NONE = 0;
         public const int SEC_BASE64 = 1;
