@@ -408,6 +408,10 @@ namespace Me.Amon.Pwd
 
         public void ShowKey(Key key)
         {
+            if (key == null)
+            {
+                return;
+            }
             _PwdView.ShowData();
 
             ItemGroup group = _XmlMenu.GetGroup(EPwd.KEY_LABEL);
@@ -1110,6 +1114,7 @@ namespace Me.Amon.Pwd
 
             _PwdView = _ProView;
             _PwdView.InitView(PlBody);
+            ShowKey(_SafeModel.Key);
         }
 
         /// <summary>
@@ -1135,6 +1140,7 @@ namespace Me.Amon.Pwd
 
             _PwdView = _WizView;
             _PwdView.InitView(PlBody);
+            ShowKey(_SafeModel.Key);
         }
 
         /// <summary>
