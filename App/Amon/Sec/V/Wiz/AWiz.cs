@@ -67,11 +67,23 @@ namespace Me.Amon.Sec.V.Wiz
 
         public void DoCrypto()
         {
-            if (_Crypto == null)
+            Item dir = CbDir.SelectedItem as Item;
+            if (dir == null)
             {
+                Main.ShowAlert("请选择操作类型！");
+                CbDir.Focus();
                 return;
             }
 
+            Item fun = CbFun.SelectedItem as Item;
+            if (fun == null)
+            {
+                Main.ShowAlert("请选择算法！");
+                CbFun.Focus();
+                return;
+            }
+
+            _Crypto.Algorithm = fun.K;
             _Crypto.DoCrypto();
         }
         #endregion
@@ -120,16 +132,16 @@ namespace Me.Amon.Sec.V.Wiz
 
         private void CbFun_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            Item item = CbDir.SelectedItem as Item;
-            if (item == null)
-            {
-                return;
-            }
+            //Item item = CbDir.SelectedItem as Item;
+            //if (item == null)
+            //{
+            //    return;
+            //}
 
-            if (_Crypto != null)
-            {
-                _Crypto.Algorithm = item.K;
-            }
+            //if (_Crypto != null)
+            //{
+            //    _Crypto.Algorithm = item.K;
+            //}
         }
 
         private void CbMod_SelectedIndexChanged(object sender, System.EventArgs e)

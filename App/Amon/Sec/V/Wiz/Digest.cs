@@ -46,13 +46,14 @@ namespace Me.Amon.Sec.V.Wiz
             }
             foreach (Item item in _AFile.FileList)
             {
-                DigestFile(item.K, item.D);
+                DigestFile(item);
             }
             return true;
         }
 
-        private bool DigestFile(string src, string dst)
+        private bool DigestFile(Item item)
         {
+            string src = Path.Combine(item.K, item.V);
             if (!File.Exists(src))
             {
                 return false;
@@ -63,7 +64,7 @@ namespace Me.Amon.Sec.V.Wiz
                 FileStream stream = File.OpenRead(src);
                 byte[] buf = alg.ComputeHash(stream);
                 stream.Close();
-                dst = CharUtil.EncodeString(buf);
+                item.D = CharUtil.EncodeString(buf);
             }
             return true;
         }

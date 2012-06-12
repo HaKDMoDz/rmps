@@ -52,18 +52,19 @@ namespace Me.Amon.Sec
 
         private void BtDo_Click(object sender, EventArgs e)
         {
-            if (!Worker.IsBusy)
-            {
-                Worker.RunWorkerAsync();
-                BtDo.Text = "取消(&R)";
-                return;
-            }
+            //if (!Worker.IsBusy)
+            //{
+            //    Worker.RunWorkerAsync();
+            //    BtDo.Text = "取消(&R)";
+            //    return;
+            //}
 
-            if (DialogResult.Yes == MessageBox.Show(this, "确认要取消操作吗？", "友情提示", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
-            {
-                Worker.CancelAsync();
-                return;
-            }
+            //if (DialogResult.Yes == MessageBox.Show(this, "确认要取消操作吗？", "友情提示", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
+            //{
+            //    Worker.CancelAsync();
+            //    return;
+            //}
+            _ISec.DoCrypto();
         }
 
         private void PbMenu_Click(object sender, EventArgs e)

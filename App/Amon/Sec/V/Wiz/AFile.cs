@@ -13,6 +13,11 @@ namespace Me.Amon.Sec.V.Wiz
         public AFile()
         {
             InitializeComponent();
+
+            GvFile.AutoGenerateColumns = false;
+            ClSrc.DataPropertyName = "V";
+            ClDst.DataPropertyName = "D";
+            GvFile.DataSource = FileList;
         }
 
         private void GvFile_DragDrop(object sender, DragEventArgs e)
@@ -44,7 +49,6 @@ namespace Me.Amon.Sec.V.Wiz
 
                     Item item = new Item { K = file, V = Path.GetFileName(file) };
                     FileList.Add(item);
-                    GvFile.Rows.Add(item.V, "");
                 }
             }
             catch (Exception ex)
