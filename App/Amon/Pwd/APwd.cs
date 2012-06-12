@@ -480,6 +480,7 @@ namespace Me.Amon.Pwd
             {
                 node.ImageKey = cat.Icon;
             }
+            node.SelectedImageKey = node.ImageKey;
             _LastNode.Nodes.Add(node);
             _LastNode.Expand();
         }
@@ -515,7 +516,11 @@ namespace Me.Amon.Pwd
 
             _LastNode.Text = cat.Text;
             _LastNode.ToolTipText = cat.Tips;
-            _LastNode.ImageKey = cat.Icon;
+            if (CharUtil.IsValidateHash(cat.Icon))
+            {
+                _LastNode.ImageKey = cat.Icon;
+            }
+            _LastNode.SelectedImageKey = _LastNode.ImageKey;
         }
 
         public void DeleteCat()
