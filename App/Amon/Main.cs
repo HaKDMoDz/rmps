@@ -130,10 +130,6 @@ namespace Me.Amon
 
             // 托盘图标状态
             int pattern = Settings.Default.Pattern;
-            if (pattern == 0)
-            {
-                pattern = -1;
-            }
             NiTray.Visible = (pattern & EApp.PATTERN_TRAY) != 0;
             MgTray.Checked = NiTray.Visible;
 
