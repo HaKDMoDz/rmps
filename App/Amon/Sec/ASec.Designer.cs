@@ -82,7 +82,6 @@
             this.PbMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PbMenu.TabIndex = 3;
             this.PbMenu.TabStop = false;
-            this.PbMenu.Visible = false;
             this.PbMenu.Click += new System.EventHandler(this.PbMenu_Click);
             // 
             // CmMenu

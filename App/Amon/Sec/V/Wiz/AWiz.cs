@@ -46,9 +46,10 @@ namespace Me.Amon.Sec.V.Wiz
             _ASec.ClientSize = new Size(380, 260);
 
             _Digest = new Digest(UcFile, UcText);
-            _Crypto = _Digest;
             _Encode = new Encode(UcFile, UcText);
             _Decode = new Decode(UcFile, UcText);
+            _Crypto = _Digest;
+            _Crypto.Init();
         }
 
         public void HideView()

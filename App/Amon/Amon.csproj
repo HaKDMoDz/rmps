@@ -876,16 +876,27 @@
     <Compile Include="Sec\V\Pro\Uw\Text.Designer.cs">
       <DependentUpon>Text.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sec\V\Wiz\AFile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\AFile.Designer.cs">
+      <DependentUpon>AFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\AText.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\AText.Designer.cs">
+      <DependentUpon>AText.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sec\V\Wiz\AWiz.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Sec\V\Wiz\AWiz.Designer.cs">
       <DependentUpon>AWiz.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sec\V\Wiz\CipherFile.cs" />
-    <Compile Include="Sec\V\Wiz\CipherText.cs" />
-    <Compile Include="Sec\V\Wiz\DigestFile.cs" />
-    <Compile Include="Sec\V\Wiz\DigestText.cs" />
+    <Compile Include="Sec\V\Wiz\Decode.cs" />
+    <Compile Include="Sec\V\Wiz\Digest.cs" />
+    <Compile Include="Sec\V\Wiz\Encode.cs" />
     <Compile Include="Sec\V\Wiz\ICrypto.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Spy\V\App.cs">
@@ -1436,6 +1447,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sec\V\Pro\Uw\Text.resx">
       <DependentUpon>Text.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\V\Wiz\AFile.resx">
+      <DependentUpon>AFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\V\Wiz\AText.resx">
+      <DependentUpon>AText.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sec\V\Wiz\AWiz.resx">
       <DependentUpon>AWiz.cs</DependentUpon>
