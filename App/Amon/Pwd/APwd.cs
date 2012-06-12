@@ -965,6 +965,10 @@ namespace Me.Amon.Pwd
 
         public void KeyHistory()
         {
+            if (_SafeModel.Key == null)
+            {
+                return;
+            }
             LogEdit edit = new LogEdit(this);
             edit.Init(_UserModel, _SafeModel);
             BeanUtil.CenterToParent(edit, this);
