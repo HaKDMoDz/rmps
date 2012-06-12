@@ -1,4 +1,4 @@
-﻿using System;
+ using System;
 using System.Windows.Forms;
 using Me.Amon.Da;
 using Me.Amon.Event;
@@ -62,7 +62,6 @@ namespace Me.Amon.Pwd._Cat
                 _Cat = new Cat();
             }
 
-            _Cat.Icon = "";
             _Cat.Text = name;
             _Cat.Tips = TbTips.Text;
             _Cat.Meta = TbMeta.Text;
