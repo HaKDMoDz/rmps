@@ -35,26 +35,12 @@ namespace Me.Amon.Sec.V.Wiz
 
         public bool DoCrypto()
         {
-            if (IsText)
-            {
-                return EncryptText();
-            }
-
-            if (_AFile.FileList == null || _AFile.FileList.Count < 1)
+            if (IsText && string.IsNullOrEmpty(_AText.TbSrc.Text))
             {
                 return false;
             }
-            foreach (Item item in _AFile.FileList)
-            {
-                item.D = item.V + ".bin";
-                EncryptFile(Path.Combine(item.K, item.V), Path.Combine(item.K, item.D));
-            }
-            return true;
-        }
 
-        private bool EncryptFile(string src, string dst)
-        {
-            if (!File.Exists(src))
+            if (_AFile.FileList == null || _AFile.FileList.Count < 1)
             {
                 return false;
             }
@@ -64,8 +50,32 @@ namespace Me.Amon.Sec.V.Wiz
                 alg.Key = null;
                 alg.IV = null;
 
+                if (IsText)
+                {
+                    EncryptText(alg);
+                }
+                else
+                {
+                    EncryptFile(alg);
+                }
+            }
+            return true;
+        }
+
+        private bool EncryptFile(SymmetricAlgorithm alg)
+        {
+            string src;
+            foreach (Item item in _AFile.FileList)
+            {
+                item.D = item.V + ".bin";
+                src = Path.Combine(item.K, item.V);
+                if (!File.Exists(src))
+                {
+                    continue;
+                }
+
                 FileStream iStream = File.OpenRead(src);
-                FileStream oStream = File.OpenWrite(dst);
+                FileStream oStream = File.OpenWrite(Path.Combine(item.K, item.D));
                 using (CryptoStream cStream = new CryptoStream(oStream, alg.CreateEncryptor(), CryptoStreamMode.Write))
                 {
                     byte[] buf = new byte[4096];
@@ -78,11 +88,12 @@ namespace Me.Amon.Sec.V.Wiz
                 }
                 oStream.Close();
                 iStream.Close();
+                alg.Clear();
             }
             return true;
         }
 
-        private bool EncryptText()
+        private bool EncryptText(SymmetricAlgorithm alg)
         {
             string src = _AText.TbSrc.Text;
             if (string.IsNullOrEmpty(src))
@@ -90,23 +101,17 @@ namespace Me.Amon.Sec.V.Wiz
                 return false;
             }
 
-            using (SymmetricAlgorithm alg = SymmetricAlgorithm.Create(Algorithm))
+            byte[] buf;
+            MemoryStream mStream = new MemoryStream();
+            using (CryptoStream cStream = new CryptoStream(mStream, alg.CreateEncryptor(), CryptoStreamMode.Write))
             {
-                alg.Key = null;
-                alg.IV = null;
-
-                byte[] buf;
-                MemoryStream mStream = new MemoryStream();
-                using (CryptoStream cStream = new CryptoStream(mStream, alg.CreateEncryptor(), CryptoStreamMode.Write))
-                {
-                    buf = Encoding.UTF8.GetBytes(src);
-                    cStream.Write(buf, 0, buf.Length);
-                    cStream.FlushFinalBlock();
-                }
-                buf = mStream.ToArray();
-                _AText.TbDst.Text = CharUtil.EncodeString(buf);
-                mStream.Close();
+                buf = Encoding.UTF8.GetBytes(src);
+                cStream.Write(buf, 0, buf.Length);
+                cStream.FlushFinalBlock();
             }
+            buf = mStream.ToArray();
+            _AText.TbDst.Text = CharUtil.EncodeString(buf);
+            mStream.Close();
             return true;
         }
     }
