@@ -313,7 +313,7 @@ namespace Me.Amon.Model.Pwd
             LogoAtt logo = new LogoAtt();
             logo.Text = _Key.IcoName;
             logo.Data = _Key.IcoMemo;
-            logo.Path = _Key.IcoPath;
+            logo.SetSpec(LogoAtt.SPEC_LOGO_DIR, _Key.IcoPath);
             list.Add(logo);
 
             // HintItem
@@ -368,7 +368,7 @@ namespace Me.Amon.Model.Pwd
             LogoAtt logo = (LogoAtt)_AttList[Att.PWDS_HEAD_LOGO];
             _Key.IcoName = logo.Text;
             _Key.IcoMemo = logo.Data;
-            _Key.IcoPath = logo.Path;
+            _Key.IcoPath = logo.GetSpec(LogoAtt.SPEC_LOGO_DIR, ".");
 
             // HintItem
             HintAtt hint = (HintAtt)_AttList[Att.PWDS_HEAD_HINT];

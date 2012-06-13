@@ -48,8 +48,9 @@ namespace Me.Amon.Pwd.V.Pro
 
             if (_Att != null)
             {
+                string temp = _Att.GetSpec(LogoAtt.SPEC_LOGO_DIR);
                 _APng.File = _Att.Text;
-                _APng.Path = _Att.Path;
+                _APng.Path = temp;
 
                 TbData.Text = _Att.Data;
 
@@ -60,9 +61,9 @@ namespace Me.Amon.Pwd.V.Pro
                 else
                 {
                     string path = _DataModel.KeyDir;
-                    if (CharUtil.IsValidateHash(_Att.Path))
+                    if (CharUtil.IsValidateHash(temp))
                     {
-                        path = Path.Combine(path, _Att.Path, _Att.Text + EApp.IMG_KEY_EDIT_EXT);
+                        path = Path.Combine(path, temp, _Att.Text + EApp.IMG_KEY_EDIT_EXT);
                     }
                     else
                     {
@@ -118,7 +119,7 @@ namespace Me.Amon.Pwd.V.Pro
             if (_Att.Text != _APng.File)
             {
                 _Att.Text = _APng.File;
-                _Att.Path = _APng.Path;
+                _Att.SetSpec(LogoAtt.SPEC_LOGO_DIR, _APng.Path);
                 _Att.Modified = true;
             }
 

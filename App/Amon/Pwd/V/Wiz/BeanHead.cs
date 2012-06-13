@@ -72,8 +72,9 @@ namespace Me.Amon.Pwd.V.Wiz
             {
                 return;
             }
+            string temp = logo.GetSpec(LogoAtt.SPEC_LOGO_DIR);
             _APng.File = logo.Text;
-            _APng.Path = logo.Path;
+            _APng.Path = temp;
             if (!CharUtil.IsValidateHash(logo.Text))
             {
                 PbLogo.Image = BeanUtil.NaN16;
@@ -81,9 +82,9 @@ namespace Me.Amon.Pwd.V.Wiz
             else
             {
                 string path = _DataModel.KeyDir;
-                if (CharUtil.IsValidateHash(logo.Path))
+                if (CharUtil.IsValidateHash(temp))
                 {
-                    path = Path.Combine(path, logo.Path, logo.Text + EApp.IMG_KEY_EDIT_EXT);
+                    path = Path.Combine(path, temp, logo.Text + EApp.IMG_KEY_EDIT_EXT);
                 }
                 else
                 {
@@ -134,11 +135,7 @@ namespace Me.Amon.Pwd.V.Wiz
             if (logo.Text != _APng.File)
             {
                 logo.Text = _APng.File;
-                logo.Modified = true;
-            }
-            if (logo.Path != _APng.Path)
-            {
-                logo.Path = _APng.Path;
+                logo.SetSpec(LogoAtt.SPEC_LOGO_DIR, _APng.Path);
                 logo.Modified = true;
             }
             _SafeModel.Modified |= logo.Modified;

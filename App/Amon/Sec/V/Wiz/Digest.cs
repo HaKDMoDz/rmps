@@ -44,9 +44,15 @@ namespace Me.Amon.Sec.V.Wiz
             {
                 return false;
             }
-            foreach (Item item in _AFile.FileList)
+
+            Item item;
+            for (int i = 0; i < _AFile.FileList.Count; i += 1)
             {
-                DigestFile(item);
+                item = _AFile.FileList[i];
+                if (DigestFile(item))
+                {
+                    _AFile.GvFile.Rows[i].DataBoundItem = item;
+                }
             }
             return true;
         }

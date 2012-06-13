@@ -2,7 +2,7 @@
 {
     public class LogoAtt : Att
     {
-        private string path;
+        public const int SPEC_LOGO_DIR = 0;// 字符空间索引
 
         public LogoAtt()
             : base(TYPE_LOGO, "", "")
@@ -12,23 +12,17 @@
 
         public override void SetDefault()
         {
+            if (_Spec == null)
+            {
+                _Spec = new string[1];
+            }
+
+            _Spec[SPEC_LOGO_DIR] = ".";
         }
 
         public override string ToString()
         {
             return Data;
-        }
-
-        public string Path
-        {
-            get
-            {
-                return path;
-            }
-            set
-            {
-                path = value;
-            }
         }
     }
 }

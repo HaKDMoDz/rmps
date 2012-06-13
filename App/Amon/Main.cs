@@ -104,6 +104,32 @@ namespace Me.Amon
                 _Writer.WriteLine(msg);
             }
         }
+
+        private static OpenFileDialog _FdOpen;
+        public static OpenFileDialog OpenFileDialog
+        {
+            get
+            {
+                if (_FdOpen == null)
+                {
+                    _FdOpen = new OpenFileDialog();
+                }
+                return _FdOpen;
+            }
+        }
+
+        private static SaveFileDialog _FdSave;
+        private static SaveFileDialog SaveFileDialog
+        {
+            get
+            {
+                if (_FdSave == null)
+                {
+                    _FdSave = new SaveFileDialog();
+                }
+                return _FdSave;
+            }
+        }
         #endregion
 
         #region 窗口事件

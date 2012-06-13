@@ -31,6 +31,10 @@ namespace Me.Amon.Sec.V.Wiz
         #region 接口实现
         public void InitOnce()
         {
+            _Digest = new Digest(UcFile, UcText);
+            _Encode = new Encode(UcFile, UcText);
+            _Decode = new Decode(UcFile, UcText);
+
             CbDir.Items.Add(new Item { K = "hash", V = "摘要" });
             CbDir.Items.Add(new Item { K = "enc", V = "加密" });
             CbDir.Items.Add(new Item { K = "dec", V = "解密" });
@@ -44,12 +48,6 @@ namespace Me.Amon.Sec.V.Wiz
             TabIndex = 0;
             _ASec.Controls.Add(this);
             _ASec.ClientSize = new Size(380, 260);
-
-            _Digest = new Digest(UcFile, UcText);
-            _Encode = new Encode(UcFile, UcText);
-            _Decode = new Decode(UcFile, UcText);
-            _Crypto = _Digest;
-            _Crypto.Init();
         }
 
         public void HideView()
@@ -100,6 +98,9 @@ namespace Me.Amon.Sec.V.Wiz
             CbFun.Items.Clear();
             if (item.K == "hash")
             {
+                _Crypto = _Digest;
+                _Crypto.Init();
+
                 CbFun.Items.Add(new Item { K = "MD5", V = "MD5" });
                 CbFun.Items.Add(new Item { K = "SHA1", V = "SHA1" });
                 CbFun.Items.Add(new Item { K = "SHA256", V = "SHA256" });
@@ -108,24 +109,30 @@ namespace Me.Amon.Sec.V.Wiz
                 _Crypto = _Digest;
                 return;
             }
-            if (item.K == "dec")
-            {
-                CbFun.Items.Add(new Item { K = "AES", V = "AES" });
-                CbFun.Items.Add(new Item { K = "DES", V = "DES" });
-                CbFun.Items.Add(new Item { K = "RC4", V = "RC4" });
-                CbFun.Items.Add(new Item { K = "RC6", V = "RC6" });
-                CbFun.SelectedIndex = 0;
-                _Crypto = _Encode;
-                return;
-            }
             if (item.K == "enc")
             {
+                _Crypto = _Encode;
+                _Crypto.Init();
+
                 CbFun.Items.Add(new Item { K = "AES", V = "AES" });
                 CbFun.Items.Add(new Item { K = "DES", V = "DES" });
                 CbFun.Items.Add(new Item { K = "RC4", V = "RC4" });
                 CbFun.Items.Add(new Item { K = "RC6", V = "RC6" });
                 CbFun.SelectedIndex = 0;
                 _Crypto = _Decode;
+                return;
+            }
+            if (item.K == "dec")
+            {
+                _Crypto = _Decode;
+                _Crypto.Init();
+
+                CbFun.Items.Add(new Item { K = "AES", V = "AES" });
+                CbFun.Items.Add(new Item { K = "DES", V = "DES" });
+                CbFun.Items.Add(new Item { K = "RC4", V = "RC4" });
+                CbFun.Items.Add(new Item { K = "RC6", V = "RC6" });
+                CbFun.SelectedIndex = 0;
+                _Crypto = _Encode;
                 return;
             }
         }
