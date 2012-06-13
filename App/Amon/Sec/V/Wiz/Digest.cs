@@ -51,7 +51,6 @@ namespace Me.Amon.Sec.V.Wiz
                 item = _AFile.FileList[i];
                 if (DigestFile(item))
                 {
-                    _AFile.GvFile.Rows[i].DataBoundItem = item;
                 }
             }
             return true;
