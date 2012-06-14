@@ -64,8 +64,10 @@ namespace Me.Amon.Sec.V.Wiz
         private bool DecryptFile(SymmetricAlgorithm alg)
         {
             string src;
-            foreach (Item item in _AFile.FileList)
+            Item item;
+            for (int i = 0; i < _AFile.FileList.Count; i += 1)
             {
+                item = _AFile.FileList[i];
                 if (item.V.ToLower().EndsWith(".bin"))
                 {
                     item.D = item.V.Substring(0, item.V.Length - 4);
@@ -91,6 +93,11 @@ namespace Me.Amon.Sec.V.Wiz
                 oStream.Close();
                 iStream.Close();
                 alg.Clear();
+
+                if (i < _AFile.GvFile.Rows.Count)
+                {
+                    _AFile.GvFile.Rows[i].Cells[1].Value = item.D;
+                }
             }
             return true;
         }
