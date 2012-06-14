@@ -1,4 +1,4 @@
-﻿using System;
+ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -109,7 +109,7 @@ namespace Me.Amon.Sec.V.Wiz
                     continue;
                 }
 
-                Item item = new Item { K = file, V = Path.GetFileName(file) };
+                Item item = new Item { K = Path.GetDirectoryName(file), V = Path.GetFileName(file) };
                 FileList.Add(item);
                 GvFile.Rows.Add(item);
             }
