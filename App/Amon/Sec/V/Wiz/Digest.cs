@@ -49,8 +49,13 @@ namespace Me.Amon.Sec.V.Wiz
             for (int i = 0; i < _AFile.FileList.Count; i += 1)
             {
                 item = _AFile.FileList[i];
-                if (DigestFile(item))
+                if (!DigestFile(item))
                 {
+                    continue;
+                }
+                if (i < _AFile.GvFile.Rows.Count)
+                {
+                    _AFile.GvFile.Rows[i].Cells[1].Value = item.D;
                 }
             }
             return true;
