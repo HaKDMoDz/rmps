@@ -1,4 +1,4 @@
- using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -84,8 +84,12 @@ namespace Me.Amon.Sec.V.Wiz
             }
 
             DataGridViewRow row = GvFile.SelectedRows[0];
-            GvFile.Rows.Remove(row);
+            if (row.Index < 0)
+            {
+                return;
+            }
             FileList.RemoveAt(row.Index);
+            GvFile.Rows.Remove(row);
         }
         #endregion
 
@@ -109,7 +113,7 @@ namespace Me.Amon.Sec.V.Wiz
                     continue;
                 }
 
-                Item item = new Item { K = Path.GetDirectoryName(file), V = Path.GetFileName(file) };
+                Item item = new Item { K = file, V = Path.GetFileName(file) };
                 FileList.Add(item);
                 GvFile.Rows.Add(item);
             }

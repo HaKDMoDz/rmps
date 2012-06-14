@@ -10,6 +10,7 @@ namespace Me.Amon.Sec.V.Wiz
     {
         private AFile _AFile;
         private AText _AText;
+
         public Decode(AFile file, AText text)
         {
             _AFile = file;
@@ -34,28 +35,47 @@ namespace Me.Amon.Sec.V.Wiz
 
         public bool DoCrypto()
         {
-            if (IsText && string.IsNullOrEmpty(_AText.TbSrc.Text))
+            string pass;
+
+            if (IsText)
             {
-                return false;
+                if (string.IsNullOrEmpty(_AText.TbSrc.Text))
+                {
+                    Main.ShowAlert("请输入您要解密的文本！");
+                    _AText.TbSrc.Focus();
+                    return false;
+                }
+
+                pass = "";
             }
 
             if (_AFile.FileList == null || _AFile.FileList.Count < 1)
             {
+                Main.ShowAlert("请选择您要解密的文件！");
+                _AFile.GvFile.Focus();
+                return false;
+            }
+
+            pass = _AFile.TbData.Text;
+            if (string.IsNullOrEmpty(pass))
+            {
+                Main.ShowAlert("请输入您的密码！");
+                _AFile.TbData.Focus();
                 return false;
             }
 
             using (SymmetricAlgorithm alg = SymmetricAlgorithm.Create(Algorithm))
             {
-                alg.Key = null;
-                alg.IV = null;
+                alg.Key = Encoding.UTF8.GetBytes(SafeUtil.GenPass(pass, 32));
+                alg.IV = Encoding.UTF8.GetBytes(SafeUtil.GenPass(pass, 16));
 
                 if (IsText)
                 {
-                    DecryptFile(alg);
+                    DecryptText(alg);
                 }
                 else
                 {
-                    DecryptText(alg);
+                    DecryptFile(alg);
                 }
             }
             return true;
@@ -63,7 +83,6 @@ namespace Me.Amon.Sec.V.Wiz
 
         private bool DecryptFile(SymmetricAlgorithm alg)
         {
-            string src;
             Item item;
             for (int i = 0; i < _AFile.FileList.Count; i += 1)
             {
@@ -72,14 +91,13 @@ namespace Me.Amon.Sec.V.Wiz
                 {
                     item.D = item.V.Substring(0, item.V.Length - 4);
                 }
-                src = Path.Combine(item.K, item.V);
-                if (!File.Exists(src))
+                if (!File.Exists(item.K))
                 {
                     continue;
                 }
 
-                FileStream iStream = File.OpenRead(src);
-                FileStream oStream = File.OpenWrite(Path.Combine(item.K, item.D));
+                FileStream iStream = File.OpenRead(item.K);
+                FileStream oStream = File.OpenWrite(Path.Combine(Path.GetDirectoryName(item.K), item.D));
                 using (CryptoStream cStream = new CryptoStream(oStream, alg.CreateDecryptor(), CryptoStreamMode.Write))
                 {
                     byte[] buf = new byte[4096];
@@ -87,6 +105,7 @@ namespace Me.Amon.Sec.V.Wiz
                     while (len > 0)
                     {
                         cStream.Write(buf, 0, len);
+                        len = iStream.Read(buf, 0, buf.Length);
                     }
                     cStream.FlushFinalBlock();
                 }

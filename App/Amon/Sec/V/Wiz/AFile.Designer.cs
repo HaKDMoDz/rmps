@@ -30,17 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             this.GvFile = new System.Windows.Forms.DataGridView();
-            this.LlData = new System.Windows.Forms.Label();
-            this.TbData = new System.Windows.Forms.TextBox();
-            this.PbData = new System.Windows.Forms.PictureBox();
+            this.ClSrc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MiAppendFile = new System.Windows.Forms.ToolStripMenuItem();
             this.MiRemoveFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.ClSrc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LlData = new System.Windows.Forms.Label();
+            this.TbData = new System.Windows.Forms.TextBox();
+            this.PbData = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.GvFile)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PbData)).BeginInit();
             this.CmMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PbData)).BeginInit();
             this.SuspendLayout();
             // 
             // GvFile
@@ -53,6 +53,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.GvFile.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.GvFile.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.GvFile.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GvFile.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ClSrc,
@@ -68,6 +69,42 @@
             this.GvFile.TabIndex = 0;
             this.GvFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.GvFile_DragDrop);
             this.GvFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.GvFile_DragEnter);
+            // 
+            // ClSrc
+            // 
+            this.ClSrc.DataPropertyName = "V";
+            this.ClSrc.HeaderText = "Column1";
+            this.ClSrc.Name = "ClSrc";
+            this.ClSrc.ReadOnly = true;
+            // 
+            // ClDst
+            // 
+            this.ClDst.DataPropertyName = "D";
+            this.ClDst.HeaderText = "Column1";
+            this.ClDst.Name = "ClDst";
+            this.ClDst.ReadOnly = true;
+            // 
+            // CmMenu
+            // 
+            this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MiAppendFile,
+            this.MiRemoveFile});
+            this.CmMenu.Name = "CmMenu";
+            this.CmMenu.Size = new System.Drawing.Size(125, 48);
+            // 
+            // MiAppendFile
+            // 
+            this.MiAppendFile.Name = "MiAppendFile";
+            this.MiAppendFile.Size = new System.Drawing.Size(152, 22);
+            this.MiAppendFile.Text = "添加文件";
+            this.MiAppendFile.Click += new System.EventHandler(this.MiAppendFile_Click);
+            // 
+            // MiRemoveFile
+            // 
+            this.MiRemoveFile.Name = "MiRemoveFile";
+            this.MiRemoveFile.Size = new System.Drawing.Size(152, 22);
+            this.MiRemoveFile.Text = "移除文件";
+            this.MiRemoveFile.Click += new System.EventHandler(this.MiRemoveFile_Click);
             // 
             // LlData
             // 
@@ -97,42 +134,6 @@
             this.PbData.TabIndex = 3;
             this.PbData.TabStop = false;
             // 
-            // CmMenu
-            // 
-            this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MiAppendFile,
-            this.MiRemoveFile});
-            this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(125, 48);
-            // 
-            // MiAppendFile
-            // 
-            this.MiAppendFile.Name = "MiAppendFile";
-            this.MiAppendFile.Size = new System.Drawing.Size(152, 22);
-            this.MiAppendFile.Text = "添加文件";
-            this.MiAppendFile.Click += new System.EventHandler(this.MiAppendFile_Click);
-            // 
-            // MiRemoveFile
-            // 
-            this.MiRemoveFile.Name = "MiRemoveFile";
-            this.MiRemoveFile.Size = new System.Drawing.Size(152, 22);
-            this.MiRemoveFile.Text = "移除文件";
-            this.MiRemoveFile.Click += new System.EventHandler(this.MiRemoveFile_Click);
-            // 
-            // ClSrc
-            // 
-            this.ClSrc.DataPropertyName = "V";
-            this.ClSrc.HeaderText = "Column1";
-            this.ClSrc.Name = "ClSrc";
-            this.ClSrc.ReadOnly = true;
-            // 
-            // ClDst
-            // 
-            this.ClDst.DataPropertyName = "D";
-            this.ClDst.HeaderText = "Column1";
-            this.ClDst.Name = "ClDst";
-            this.ClDst.ReadOnly = true;
-            // 
             // AFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -143,8 +144,8 @@
             this.Controls.Add(this.GvFile);
             this.Name = "AFile";
             ((System.ComponentModel.ISupportInitialize)(this.GvFile)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PbData)).EndInit();
             this.CmMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PbData)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

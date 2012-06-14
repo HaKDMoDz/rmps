@@ -65,23 +65,6 @@ namespace Me.Amon.Sec.V.Wiz
 
         public void DoCrypto()
         {
-            Item dir = CbDir.SelectedItem as Item;
-            if (dir == null)
-            {
-                Main.ShowAlert("请选择操作类型！");
-                CbDir.Focus();
-                return;
-            }
-
-            Item fun = CbFun.SelectedItem as Item;
-            if (fun == null)
-            {
-                Main.ShowAlert("请选择算法！");
-                CbFun.Focus();
-                return;
-            }
-
-            _Crypto.Algorithm = fun.K;
             _Crypto.DoCrypto();
         }
         #endregion
@@ -106,7 +89,6 @@ namespace Me.Amon.Sec.V.Wiz
                 CbFun.Items.Add(new Item { K = "SHA256", V = "SHA256" });
                 CbFun.Items.Add(new Item { K = "SHA512", V = "SHA512" });
                 CbFun.SelectedIndex = 0;
-                _Crypto = _Digest;
                 return;
             }
             if (item.K == "enc")
@@ -119,7 +101,6 @@ namespace Me.Amon.Sec.V.Wiz
                 CbFun.Items.Add(new Item { K = "RC4", V = "RC4" });
                 CbFun.Items.Add(new Item { K = "RC6", V = "RC6" });
                 CbFun.SelectedIndex = 0;
-                _Crypto = _Decode;
                 return;
             }
             if (item.K == "dec")
@@ -132,23 +113,22 @@ namespace Me.Amon.Sec.V.Wiz
                 CbFun.Items.Add(new Item { K = "RC4", V = "RC4" });
                 CbFun.Items.Add(new Item { K = "RC6", V = "RC6" });
                 CbFun.SelectedIndex = 0;
-                _Crypto = _Encode;
                 return;
             }
         }
 
         private void CbFun_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            //Item item = CbDir.SelectedItem as Item;
-            //if (item == null)
-            //{
-            //    return;
-            //}
+            Item item = CbFun.SelectedItem as Item;
+            if (item == null)
+            {
+                return;
+            }
 
-            //if (_Crypto != null)
-            //{
-            //    _Crypto.Algorithm = item.K;
-            //}
+            if (_Crypto != null)
+            {
+                _Crypto.Algorithm = item.K;
+            }
         }
 
         private void CbMod_SelectedIndexChanged(object sender, System.EventArgs e)
