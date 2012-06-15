@@ -8,16 +8,15 @@ namespace Me.Amon.Sec.V.Pro.Uw
 
         public void Show(ASec asec, string data)
         {
-            SaveFileDialog fd = new SaveFileDialog();
-            fd.Filter = "所有文档(*.*)|*.*";
-            fd.FileName = data;
-            if (DialogResult.OK != fd.ShowDialog(asec))
+            Main.SaveFileDialog.Filter = EApp.FILE_OPEN_ALL;
+            Main.SaveFileDialog.FileName = data;
+            if (DialogResult.OK != Main.SaveFileDialog.ShowDialog(asec))
             {
                 return;
             }
             if (CallBack != null)
             {
-                CallBack.Invoke(fd.FileName);
+                CallBack.Invoke(Main.SaveFileDialog.FileName);
             }
         }
     }

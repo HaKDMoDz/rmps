@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -93,10 +94,13 @@ namespace Me.Amon.Sec.V.Wiz
                     continue;
                 }
 
-                FileStream iStream = File.OpenRead(item.K);
-                FileStream oStream = File.OpenWrite(Path.Combine(Path.GetDirectoryName(item.K), item.D));
-                using (CryptoStream cStream = new CryptoStream(oStream, alg.CreateEncryptor(), CryptoStreamMode.Write))
+                FileStream iStream = null;
+                FileStream oStream = null;
+                try
                 {
+                    iStream = File.OpenRead(item.K);
+                    oStream = File.OpenWrite(Path.Combine(Path.GetDirectoryName(item.K), item.D));
+                    CryptoStream cStream = new CryptoStream(oStream, alg.CreateEncryptor(), CryptoStreamMode.Write);
                     byte[] buf = new byte[4096];
                     int len = iStream.Read(buf, 0, buf.Length);
                     while (len > 0)
@@ -106,8 +110,21 @@ namespace Me.Amon.Sec.V.Wiz
                     }
                     cStream.FlushFinalBlock();
                 }
-                oStream.Close();
-                iStream.Close();
+                catch (Exception exp)
+                {
+                    Main.ShowError(exp);
+                }
+                finally
+                {
+                    if (oStream != null)
+                    {
+                        oStream.Close();
+                    }
+                    if (iStream != null)
+                    {
+                        iStream.Close();
+                    }
+                }
                 alg.Clear();
 
                 if (i < _AFile.GvFile.Rows.Count)

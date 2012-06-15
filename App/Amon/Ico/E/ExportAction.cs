@@ -10,12 +10,12 @@ namespace Me.Amon.Ico.E
             {
                 return;
             }
-            IApp.SaveFileDialog.Filter = EApp.FILE_SAVE_PNG;
-            if (DialogResult.OK != IApp.SaveFileDialog.ShowDialog())
+            Main.SaveFileDialog.Filter = EApp.FILE_SAVE_PNG;
+            if (DialogResult.OK != Main.SaveFileDialog.ShowDialog())
             {
                 return;
             }
-            IApp.Export(IApp.SaveFileDialog.FileName);
+            IApp.Export(Main.SaveFileDialog.FileName);
         }
     }
 }

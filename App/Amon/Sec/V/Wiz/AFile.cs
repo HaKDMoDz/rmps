@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Uc;
@@ -90,6 +91,62 @@ namespace Me.Amon.Sec.V.Wiz
             }
             FileList.RemoveAt(row.Index);
             GvFile.Rows.Remove(row);
+        }
+
+        private void MiClearAllFile_Click(object sender, EventArgs e)
+        {
+            FileList.Clear();
+            GvFile.Rows.Clear();
+        }
+
+        private void MiCopy_Click(object sender, EventArgs e)
+        {
+            if (GvFile.SelectedRows.Count < 1)
+            {
+                return;
+            }
+
+            DataGridViewRow row = GvFile.SelectedRows[0];
+            if (row.Index < 0)
+            {
+                return;
+            }
+
+            Item item = FileList[row.Index];
+            if (item != null)
+            {
+                if (!string.IsNullOrEmpty(item.D))
+                {
+                    Clipboard.SetText(item.D);
+                }
+            }
+        }
+
+        private void MiOpen_Click(object sender, EventArgs e)
+        {
+            if (GvFile.SelectedRows.Count < 1)
+            {
+                return;
+            }
+
+            DataGridViewRow row = GvFile.SelectedRows[0];
+            if (row.Index < 0)
+            {
+                return;
+            }
+
+            Item item = FileList[row.Index];
+            if (item != null)
+            {
+                try
+                {
+                    Process.Start(Directory.GetParent(item.K).FullName);
+                }
+                catch (Exception exp)
+                {
+                    Main.ShowError(exp);
+                }
+            }
         }
         #endregion
 

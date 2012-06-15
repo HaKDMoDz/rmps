@@ -189,13 +189,13 @@ namespace Me.Amon.Ren
 
         private void MiImport_Click(object sender, EventArgs e)
         {
-            OpenFileDialog fd = new OpenFileDialog();
-            fd.Filter = "重命名模板文件|*.arxml";
-            if (DialogResult.OK != fd.ShowDialog(this))
+            Main.OpenFileDialog.Filter = "重命名模板文件|*.arxml";
+            Main.OpenFileDialog.Multiselect = false;
+            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog(this))
             {
                 return;
             }
-            string file = fd.FileName;
+            string file = Main.OpenFileDialog.FileName;
             if (!File.Exists(file))
             {
                 return;
@@ -224,13 +224,12 @@ namespace Me.Amon.Ren
 
         private void MiExport_Click(object sender, EventArgs e)
         {
-            SaveFileDialog fd = new SaveFileDialog();
-            fd.Filter = "重命名模板文件|*.arxml";
-            if (DialogResult.OK != fd.ShowDialog(this))
+            Main.SaveFileDialog.Filter = "重命名模板文件|*.arxml";
+            if (DialogResult.OK != Main.SaveFileDialog.ShowDialog(this))
             {
                 return;
             }
-            string file = fd.FileName;
+            string file = Main.SaveFileDialog.FileName;
             if (string.IsNullOrEmpty(file))
             {
                 return;

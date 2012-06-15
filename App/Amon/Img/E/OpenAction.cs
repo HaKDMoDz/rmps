@@ -6,9 +6,9 @@ namespace Me.Amon.Img.E
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
-            OpenFileDialog fd = new OpenFileDialog();
-            fd.Filter = "EXE图像|*.exe";
-            if (DialogResult.OK != fd.ShowDialog(IApp))
+            Main.OpenFileDialog.Filter = "EXE图像|*.exe";
+            Main.OpenFileDialog.Multiselect = false;
+            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog(IApp))
             {
                 return;
             }

@@ -44,10 +44,10 @@ namespace Me.Amon.Sec.V.Wiz
         public void InitView()
         {
             Location = new Point(12, 12);
-            Size = new Size(356, 207);
+            Size = new Size(370, 219);
             TabIndex = 0;
             _ASec.Controls.Add(this);
-            _ASec.ClientSize = new Size(380, 260);
+            _ASec.ClientSize = new Size(394, 272);
         }
 
         public void HideView()

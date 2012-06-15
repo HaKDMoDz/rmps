@@ -85,32 +85,6 @@ namespace Me.Amon.Ico
             }
         }
 
-        private SaveFileDialog _FdSave;
-        public SaveFileDialog SaveFileDialog
-        {
-            get
-            {
-                if (_FdSave == null)
-                {
-                    _FdSave = new SaveFileDialog();
-                }
-                return _FdSave;
-            }
-        }
-
-        private OpenFileDialog _FdOpen;
-        public OpenFileDialog OpenFileDialog
-        {
-            get
-            {
-                if (_FdOpen == null)
-                {
-                    _FdOpen = new OpenFileDialog();
-                }
-                return _FdOpen;
-            }
-        }
-
         public void Open(string file)
         {
             _MIcon.Clear();
@@ -169,10 +143,10 @@ namespace Me.Amon.Ico
             // 外部调用模式
             if (AmonHandler == null)
             {
-                SaveFileDialog.Filter = EApp.FILE_SAVE_ICL;
-                if (DialogResult.OK == SaveFileDialog.ShowDialog())
+                Main.SaveFileDialog.Filter = EApp.FILE_SAVE_ICL;
+                if (DialogResult.OK == Main.SaveFileDialog.ShowDialog())
                 {
-                    SaveIcl(SaveFileDialog.FileName);
+                    SaveIcl(Main.SaveFileDialog.FileName);
                 }
                 return;
             }
@@ -216,10 +190,10 @@ namespace Me.Amon.Ico
             // 独立编辑模式
             if (AmonHandler == null)
             {
-                SaveFileDialog.Filter = EApp.FILE_SAVE_ICO;
-                if (DialogResult.OK == SaveFileDialog.ShowDialog())
+                Main.SaveFileDialog.Filter = EApp.FILE_SAVE_ICO;
+                if (DialogResult.OK == Main.SaveFileDialog.ShowDialog())
                 {
-                    SaveIco(SaveFileDialog.FileName);
+                    SaveIco(Main.SaveFileDialog.FileName);
                 }
                 return;
             }

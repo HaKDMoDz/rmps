@@ -63,15 +63,14 @@ namespace Me.Amon.Sec.V.Wiz
 
         private bool DigestFile(Item item)
         {
-            string src = Path.Combine(item.K, item.V);
-            if (!File.Exists(src))
+            if (!File.Exists(item.K))
             {
                 return false;
             }
 
             using (HashAlgorithm alg = HashAlgorithm.Create(Algorithm))
             {
-                FileStream stream = File.OpenRead(src);
+                FileStream stream = File.OpenRead(item.K);
                 byte[] buf = alg.ComputeHash(stream);
                 stream.Close();
                 item.D = CharUtil.EncodeString(buf);

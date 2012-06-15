@@ -133,13 +133,13 @@ namespace Me.Amon.Bar
                 return;
             }
 
-            FdSave.Filter = "PNG文件|*.png";
-            if (DialogResult.OK != FdSave.ShowDialog(this))
+            Main.SaveFileDialog.Filter = EApp.FILE_SAVE_PNG;
+            if (DialogResult.OK != Main.SaveFileDialog.ShowDialog(this))
             {
                 return;
             }
 
-            PbIcon.Image.Save(FdSave.FileName);
+            PbIcon.Image.Save(Main.SaveFileDialog.FileName);
         }
 
         private void MiDecUrl_Click(object sender, EventArgs e)
@@ -169,18 +169,19 @@ namespace Me.Amon.Bar
 
         private void MiDecLoc_Click(object sender, EventArgs e)
         {
-            FdOpen.Filter = "PNG文件|*.png|JPG文件|*.jpg|BMP文件|*.bmp";
-            if (DialogResult.OK != FdOpen.ShowDialog(this))
+            Main.OpenFileDialog.Filter = EApp.FILE_OPEN_IMG;
+            Main.OpenFileDialog.Multiselect = false;
+            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog(this))
             {
                 return;
             }
 
-            if (!File.Exists(FdOpen.FileName))
+            if (!File.Exists(Main.OpenFileDialog.FileName))
             {
                 return;
             }
 
-            Decode(Image.FromFile(FdOpen.FileName));
+            Decode(Image.FromFile(Main.OpenFileDialog.FileName));
         }
         #endregion
 

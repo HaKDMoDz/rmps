@@ -8,17 +8,17 @@ namespace Me.Amon.Sec.V.Pro.Uw
 
         public void Show(ASec asec, string data)
         {
-            OpenFileDialog fd = new OpenFileDialog();
-            fd.Filter = "所有文档(*.*)|*.*";
-            fd.FileName = data;
-            if (DialogResult.OK != fd.ShowDialog(asec))
+            Main.OpenFileDialog.Filter = EApp.FILE_OPEN_ALL;
+            Main.OpenFileDialog.FileName = data;
+            Main.OpenFileDialog.Multiselect = false;
+            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog(asec))
             {
                 return;
             }
 
             if (CallBack != null)
             {
-                CallBack.Invoke(fd.FileName);
+                CallBack.Invoke(Main.OpenFileDialog.FileName);
             }
         }
     }

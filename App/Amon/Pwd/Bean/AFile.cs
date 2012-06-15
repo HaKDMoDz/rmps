@@ -36,14 +36,14 @@ namespace Me.Amon.Pwd.Bean
 
         protected void OpenFile()
         {
-            OpenFileDialog fd = new OpenFileDialog();
-            fd.Filter = "所有文件|*.*";
-            if (DialogResult.OK != fd.ShowDialog())
+            Main.OpenFileDialog.Filter = EApp.FILE_OPEN_ALL;
+            Main.OpenFileDialog.Multiselect = false;
+            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog())
             {
                 return;
             }
 
-            string srcFile = fd.FileName;
+            string srcFile = Main.OpenFileDialog.FileName;
             if (!File.Exists(srcFile))
             {
                 MessageBox.Show("您选择的文件不存在！");

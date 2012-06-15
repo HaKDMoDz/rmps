@@ -61,20 +61,19 @@ namespace Me.Amon.Pwd._Cat
 
         private void BtAppend_Click(object sender, EventArgs e)
         {
-            OpenFileDialog fd = new OpenFileDialog();
-            fd.Multiselect = false;
-            fd.Filter = EApp.FILE_OPEN_IMG;
-            if (DialogResult.OK != fd.ShowDialog(this))
+            Main.OpenFileDialog.Filter = EApp.FILE_OPEN_IMG;
+            Main.OpenFileDialog.Multiselect = false;
+            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog(this))
             {
                 return;
             }
-            if (!File.Exists(fd.FileName))
+            if (!File.Exists(Main.OpenFileDialog.FileName))
             {
                 MessageBox.Show("您选择的文件不存在！");
                 return;
             }
 
-            using (Image img = Image.FromFile(fd.FileName))
+            using (Image img = Image.FromFile(Main.OpenFileDialog.FileName))
             {
                 string key = HashUtil.UtcTimeInHex();
                 Image tmp = BeanUtil.ScaleImage(img, 16, true);

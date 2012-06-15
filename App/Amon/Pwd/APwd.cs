@@ -1342,13 +1342,12 @@ namespace Me.Amon.Pwd
             TvCatTree.SelectedNode = null;
             LbKeyList.Items.Clear();
 
-            SaveFileDialog fd = new SaveFileDialog();
-            fd.Filter = "密码箱备份文件|*.apbak";
-            if (DialogResult.OK != fd.ShowDialog(this))
+            Main.SaveFileDialog.Filter = "密码箱备份文件|*.apbak";
+            if (DialogResult.OK != Main.SaveFileDialog.ShowDialog(this))
             {
                 return;
             }
-            DoBackup(fd.FileName);
+            DoBackup(Main.SaveFileDialog.FileName);
         }
 
         /// <summary>
@@ -1417,13 +1416,12 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            SaveFileDialog fd = new SaveFileDialog();
-            fd.Filter = "文件|*.aptxt";
-            if (DialogResult.OK != fd.ShowDialog(this))
+            Main.SaveFileDialog.Filter = "文件|*.aptxt";
+            if (DialogResult.OK != Main.SaveFileDialog.ShowDialog(this))
             {
                 return;
             }
-            string file = fd.FileName;
+            string file = Main.SaveFileDialog.FileName;
             if (string.IsNullOrEmpty(file))
             {
                 return;
@@ -1477,13 +1475,12 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            SaveFileDialog fd = new SaveFileDialog();
-            fd.Filter = "文件|*.apxml";
-            if (DialogResult.OK != fd.ShowDialog(this))
+            Main.SaveFileDialog.Filter = "文件|*.apxml";
+            if (DialogResult.OK != Main.SaveFileDialog.ShowDialog(this))
             {
                 return;
             }
-            string file = fd.FileName;
+            string file = Main.SaveFileDialog.FileName;
             if (string.IsNullOrEmpty(file))
             {
                 return;
@@ -1536,13 +1533,13 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            OpenFileDialog fd = new OpenFileDialog();
-            fd.Filter = "文件|*.aptxt";
-            if (DialogResult.OK != fd.ShowDialog(this))
+            Main.OpenFileDialog.Filter = "文件|*.aptxt";
+            Main.OpenFileDialog.Multiselect = false;
+            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog(this))
             {
                 return;
             }
-            string file = fd.FileName;
+            string file = Main.OpenFileDialog.FileName;
             if (string.IsNullOrEmpty(file) || !File.Exists(file))
             {
                 return;
@@ -1603,13 +1600,13 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            OpenFileDialog fd = new OpenFileDialog();
-            fd.Filter = "文件|*.apxml";
-            if (DialogResult.OK != fd.ShowDialog(this))
+            Main.OpenFileDialog.Filter = "文件|*.apxml";
+            Main.OpenFileDialog.Multiselect = false;
+            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog(this))
             {
                 return;
             }
-            string file = fd.FileName;
+            string file = Main.OpenFileDialog.FileName;
             if (string.IsNullOrEmpty(file) || !File.Exists(file))
             {
                 return;
@@ -1676,13 +1673,13 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            OpenFileDialog fd = new OpenFileDialog();
-            fd.Filter = "文件|*.vcf";
-            if (DialogResult.OK != fd.ShowDialog(this))
+            Main.OpenFileDialog.Filter = "文件|*.vcf";
+            Main.OpenFileDialog.Multiselect = false;
+            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog(this))
             {
                 return;
             }
-            string file = fd.FileName;
+            string file = Main.OpenFileDialog.FileName;
             if (string.IsNullOrEmpty(file) || !File.Exists(file))
             {
                 return;
@@ -1894,13 +1891,13 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            OpenFileDialog fd = new OpenFileDialog();
-            fd.Filter = "所有文件|*.*";
-            if (DialogResult.OK != fd.ShowDialog(this))
+            Main.OpenFileDialog.Filter = EApp.FILE_OPEN_ALL;
+            Main.OpenFileDialog.Multiselect = false;
+            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog(this))
             {
                 return;
             }
-            string file = fd.FileName;
+            string file = Main.OpenFileDialog.FileName;
             if (string.IsNullOrEmpty(file) || !File.Exists(file))
             {
                 return;

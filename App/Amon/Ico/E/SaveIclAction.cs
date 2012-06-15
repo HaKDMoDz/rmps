@@ -11,12 +11,12 @@ namespace Me.Amon.Ico.E
                 return;
             }
 
-            IApp.SaveFileDialog.Filter = EApp.FILE_SAVE_ICL;
-            if (DialogResult.OK != IApp.SaveFileDialog.ShowDialog(IApp.Form))
+            Main.SaveFileDialog.Filter = EApp.FILE_SAVE_ICL;
+            if (DialogResult.OK != Main.SaveFileDialog.ShowDialog(IApp.Form))
             {
                 return;
             }
-            IApp.SaveIcl(IApp.SaveFileDialog.FileName);
+            IApp.SaveIcl(Main.SaveFileDialog.FileName);
         }
     }
 }

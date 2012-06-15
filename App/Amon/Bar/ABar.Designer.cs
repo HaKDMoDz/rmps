@@ -44,8 +44,6 @@
             this.MiSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.MiDecLoc = new System.Windows.Forms.ToolStripMenuItem();
             this.MiDecUrl = new System.Windows.Forms.ToolStripMenuItem();
-            this.FdOpen = new System.Windows.Forms.OpenFileDialog();
-            this.FdSave = new System.Windows.Forms.SaveFileDialog();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.PbIcon)).BeginInit();
             this.GbSet.SuspendLayout();
@@ -177,10 +175,6 @@
             this.MiDecUrl.Text = "打开网络地址(&U)";
             this.MiDecUrl.Click += new System.EventHandler(this.MiDecUrl_Click);
             // 
-            // FdOpen
-            // 
-            this.FdOpen.FileName = "openFileDialog1";
-            // 
             // ABar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -226,8 +220,6 @@
         private System.Windows.Forms.ToolStripMenuItem MiDecUrl;
         private System.Windows.Forms.ToolStripMenuItem MiSave;
         private System.Windows.Forms.ToolStripSeparator MiSep0;
-        private System.Windows.Forms.OpenFileDialog FdOpen;
-        private System.Windows.Forms.SaveFileDialog FdSave;
         private System.Windows.Forms.ToolTip TpTips;
     }
 }

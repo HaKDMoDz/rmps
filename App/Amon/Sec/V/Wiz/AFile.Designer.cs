@@ -38,6 +38,11 @@
             this.LlData = new System.Windows.Forms.Label();
             this.TbData = new System.Windows.Forms.TextBox();
             this.PbData = new System.Windows.Forms.PictureBox();
+            this.MiSep0 = new System.Windows.Forms.ToolStripSeparator();
+            this.MiCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiClearAllFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.GvFile)).BeginInit();
             this.CmMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbData)).BeginInit();
@@ -60,6 +65,7 @@
             this.ClDst});
             this.GvFile.ContextMenuStrip = this.CmMenu;
             this.GvFile.Location = new System.Drawing.Point(3, 3);
+            this.GvFile.MultiSelect = false;
             this.GvFile.Name = "GvFile";
             this.GvFile.ReadOnly = true;
             this.GvFile.RowHeadersVisible = false;
@@ -88,9 +94,14 @@
             // 
             this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MiAppendFile,
-            this.MiRemoveFile});
+            this.MiSep0,
+            this.MiRemoveFile,
+            this.MiClearAllFile,
+            this.toolStripSeparator1,
+            this.MiCopy,
+            this.MiOpen});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(125, 48);
+            this.CmMenu.Size = new System.Drawing.Size(153, 148);
             // 
             // MiAppendFile
             // 
@@ -103,7 +114,7 @@
             // 
             this.MiRemoveFile.Name = "MiRemoveFile";
             this.MiRemoveFile.Size = new System.Drawing.Size(152, 22);
-            this.MiRemoveFile.Text = "移除文件";
+            this.MiRemoveFile.Text = "移除选择";
             this.MiRemoveFile.Click += new System.EventHandler(this.MiRemoveFile_Click);
             // 
             // LlData
@@ -134,6 +145,37 @@
             this.PbData.TabIndex = 3;
             this.PbData.TabStop = false;
             // 
+            // MiSep0
+            // 
+            this.MiSep0.Name = "MiSep0";
+            this.MiSep0.Size = new System.Drawing.Size(149, 6);
+            // 
+            // MiCopy
+            // 
+            this.MiCopy.Name = "MiCopy";
+            this.MiCopy.Size = new System.Drawing.Size(152, 22);
+            this.MiCopy.Text = "复制结果";
+            this.MiCopy.Click += new System.EventHandler(this.MiCopy_Click);
+            // 
+            // MiOpen
+            // 
+            this.MiOpen.Name = "MiOpen";
+            this.MiOpen.Size = new System.Drawing.Size(152, 22);
+            this.MiOpen.Text = "打开目录";
+            this.MiOpen.Click += new System.EventHandler(this.MiOpen_Click);
+            // 
+            // MiClearAllFile
+            // 
+            this.MiClearAllFile.Name = "MiClearAllFile";
+            this.MiClearAllFile.Size = new System.Drawing.Size(152, 22);
+            this.MiClearAllFile.Text = "清除所有";
+            this.MiClearAllFile.Click += new System.EventHandler(this.MiClearAllFile_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
             // AFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -162,5 +204,10 @@
         private System.Windows.Forms.ToolStripMenuItem MiRemoveFile;
         public System.Windows.Forms.DataGridViewTextBoxColumn ClSrc;
         public System.Windows.Forms.DataGridViewTextBoxColumn ClDst;
+        private System.Windows.Forms.ToolStripSeparator MiSep0;
+        private System.Windows.Forms.ToolStripMenuItem MiCopy;
+        private System.Windows.Forms.ToolStripMenuItem MiOpen;
+        private System.Windows.Forms.ToolStripMenuItem MiClearAllFile;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

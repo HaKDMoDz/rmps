@@ -11,12 +11,12 @@ namespace Me.Amon.Ico.E
                 return;
             }
 
-            IApp.OpenFileDialog.Filter = EApp.FILE_OPEN_IMG;
-            if (DialogResult.OK != IApp.OpenFileDialog.ShowDialog())
+            Main.OpenFileDialog.Filter = EApp.FILE_OPEN_IMG;
+            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog())
             {
                 return;
             }
-            IApp.Import(IApp.OpenFileDialog.FileName);
+            IApp.Import(Main.OpenFileDialog.FileName);
         }
     }
 }

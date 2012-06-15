@@ -553,17 +553,14 @@ namespace Me.Amon.Sec.V.Pro
 
         public void LoadFav()
         {
-            OpenFileDialog fd = new OpenFileDialog();
-            fd.AddExtension = true;
-            fd.DefaultExt = ".asxml";
-            fd.Filter = "加密器文件(*.asxml)|*.asxml";
-            if (DialogResult.OK != fd.ShowDialog())
+            Main.OpenFileDialog.Filter = "加密器文件(*.asxml)|*.asxml";
+            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog())
             {
                 return;
             }
 
             XmlDocument doc = new XmlDocument();
-            doc.Load(fd.FileName);
+            doc.Load(Main.OpenFileDialog.FileName);
 
             XmlNode node = doc.SelectSingleNode("/msec/operation");
             if (node != null)
@@ -595,11 +592,8 @@ namespace Me.Amon.Sec.V.Pro
                 return;
             }
 
-            SaveFileDialog fd = new SaveFileDialog();
-            fd.AddExtension = true;
-            fd.DefaultExt = ".asxml";
-            fd.Filter = "加密器文件(*.asxml)|*.asxml";
-            if (DialogResult.OK != fd.ShowDialog())
+            Main.SaveFileDialog.Filter = "加密器文件(*.asxml)|*.asxml";
+            if (DialogResult.OK != Main.SaveFileDialog.ShowDialog())
             {
                 return;
             }
@@ -633,7 +627,7 @@ namespace Me.Amon.Sec.V.Pro
             root.AppendChild(_UcDi.SaveXml(doc));
             root.AppendChild(_UcDo.SaveXml(doc));
 
-            doc.Save(fd.FileName);
+            doc.Save(Main.SaveFileDialog.FileName);
         }
     }
 }

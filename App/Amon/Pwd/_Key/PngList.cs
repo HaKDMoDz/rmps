@@ -79,25 +79,24 @@ namespace Me.Amon.Pwd._Key
 
         private void BtAppend_Click(object sender, EventArgs e)
         {
-            OpenFileDialog fd = new OpenFileDialog();
-            fd.Multiselect = false;
-            fd.Filter = EApp.FILE_OPEN_IMG_RES;
-            if (DialogResult.OK != fd.ShowDialog(this))
+            Main.OpenFileDialog.Filter = EApp.FILE_OPEN_IMG_RES;
+            Main.OpenFileDialog.Multiselect = false;
+            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog(this))
             {
                 return;
             }
-            if (!File.Exists(fd.FileName))
+            if (!File.Exists(Main.OpenFileDialog.FileName))
             {
                 MessageBox.Show("您选择的文件不存在！");
                 return;
             }
 
-            string exts = Path.GetExtension(fd.FileName).ToLower();
-            if (DealPng(fd.FileName, exts))
+            string exts = Path.GetExtension(Main.OpenFileDialog.FileName).ToLower();
+            if (DealPng(Main.OpenFileDialog.FileName, exts))
             {
                 return;
             }
-            if (DealIco(fd.FileName, exts))
+            if (DealIco(Main.OpenFileDialog.FileName, exts))
             {
                 return;
             }

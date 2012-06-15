@@ -119,7 +119,7 @@ namespace Me.Amon
         }
 
         private static SaveFileDialog _FdSave;
-        private static SaveFileDialog SaveFileDialog
+        public static SaveFileDialog SaveFileDialog
         {
             get
             {
