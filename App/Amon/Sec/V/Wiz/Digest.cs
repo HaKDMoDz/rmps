@@ -26,14 +26,13 @@ namespace Me.Amon.Sec.V.Wiz
 
             _AFile.ClSrc.HeaderText = "输入文件";
             _AFile.ClDst.HeaderText = "输出文件";
-            _AFile.LlData.Text = "口令(&K)";
         }
 
         public bool IsText { get; set; }
 
         public string Algorithm { get; set; }
 
-        public bool DoCrypto()
+        public bool DoCrypto(string pass)
         {
             if (IsText)
             {

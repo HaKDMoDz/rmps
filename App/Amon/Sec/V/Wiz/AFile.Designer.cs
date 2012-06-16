@@ -34,18 +34,14 @@
             this.ClDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MiAppendFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiRemoveFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.LlData = new System.Windows.Forms.Label();
-            this.TbData = new System.Windows.Forms.TextBox();
-            this.PbData = new System.Windows.Forms.PictureBox();
             this.MiSep0 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiCopy = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiRemoveFile = new System.Windows.Forms.ToolStripMenuItem();
             this.MiClearAllFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.MiCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiOpen = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.GvFile)).BeginInit();
             this.CmMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PbData)).BeginInit();
             this.SuspendLayout();
             // 
             // GvFile
@@ -71,7 +67,7 @@
             this.GvFile.RowHeadersVisible = false;
             this.GvFile.RowTemplate.Height = 23;
             this.GvFile.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GvFile.Size = new System.Drawing.Size(144, 117);
+            this.GvFile.Size = new System.Drawing.Size(144, 144);
             this.GvFile.TabIndex = 0;
             this.GvFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.GvFile_DragDrop);
             this.GvFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.GvFile_DragEnter);
@@ -110,6 +106,11 @@
             this.MiAppendFile.Text = "添加文件";
             this.MiAppendFile.Click += new System.EventHandler(this.MiAppendFile_Click);
             // 
+            // MiSep0
+            // 
+            this.MiSep0.Name = "MiSep0";
+            this.MiSep0.Size = new System.Drawing.Size(149, 6);
+            // 
             // MiRemoveFile
             // 
             this.MiRemoveFile.Name = "MiRemoveFile";
@@ -117,38 +118,17 @@
             this.MiRemoveFile.Text = "移除选择";
             this.MiRemoveFile.Click += new System.EventHandler(this.MiRemoveFile_Click);
             // 
-            // LlData
+            // MiClearAllFile
             // 
-            this.LlData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.LlData.AutoSize = true;
-            this.LlData.Location = new System.Drawing.Point(3, 129);
-            this.LlData.Name = "LlData";
-            this.LlData.Size = new System.Drawing.Size(47, 12);
-            this.LlData.TabIndex = 1;
-            this.LlData.Text = "中文(&C)";
+            this.MiClearAllFile.Name = "MiClearAllFile";
+            this.MiClearAllFile.Size = new System.Drawing.Size(152, 22);
+            this.MiClearAllFile.Text = "清除所有";
+            this.MiClearAllFile.Click += new System.EventHandler(this.MiClearAllFile_Click);
             // 
-            // TbData
+            // toolStripSeparator1
             // 
-            this.TbData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TbData.Location = new System.Drawing.Point(56, 126);
-            this.TbData.Name = "TbData";
-            this.TbData.Size = new System.Drawing.Size(69, 21);
-            this.TbData.TabIndex = 2;
-            // 
-            // PbData
-            // 
-            this.PbData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.PbData.Location = new System.Drawing.Point(131, 129);
-            this.PbData.Name = "PbData";
-            this.PbData.Size = new System.Drawing.Size(16, 16);
-            this.PbData.TabIndex = 3;
-            this.PbData.TabStop = false;
-            // 
-            // MiSep0
-            // 
-            this.MiSep0.Name = "MiSep0";
-            this.MiSep0.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // MiCopy
             // 
@@ -164,41 +144,21 @@
             this.MiOpen.Text = "打开目录";
             this.MiOpen.Click += new System.EventHandler(this.MiOpen_Click);
             // 
-            // MiClearAllFile
-            // 
-            this.MiClearAllFile.Name = "MiClearAllFile";
-            this.MiClearAllFile.Size = new System.Drawing.Size(152, 22);
-            this.MiClearAllFile.Text = "清除所有";
-            this.MiClearAllFile.Click += new System.EventHandler(this.MiClearAllFile_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
-            // 
             // AFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.PbData);
-            this.Controls.Add(this.TbData);
-            this.Controls.Add(this.LlData);
             this.Controls.Add(this.GvFile);
             this.Name = "AFile";
             ((System.ComponentModel.ISupportInitialize)(this.GvFile)).EndInit();
             this.CmMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.PbData)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         public System.Windows.Forms.DataGridView GvFile;
-        public System.Windows.Forms.Label LlData;
-        public System.Windows.Forms.TextBox TbData;
-        public System.Windows.Forms.PictureBox PbData;
         private System.Windows.Forms.ContextMenuStrip CmMenu;
         private System.Windows.Forms.ToolStripMenuItem MiAppendFile;
         private System.Windows.Forms.ToolStripMenuItem MiRemoveFile;

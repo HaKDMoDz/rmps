@@ -32,13 +32,17 @@
             this.CbDir = new System.Windows.Forms.ComboBox();
             this.CbFun = new System.Windows.Forms.ComboBox();
             this.TpText = new System.Windows.Forms.TabPage();
-            this.TpFile = new System.Windows.Forms.TabPage();
-            this.TcCrypto = new System.Windows.Forms.ATabControl();
-            this.UcFile = new Me.Amon.Sec.V.Wiz.AFile();
             this.UcText = new Me.Amon.Sec.V.Wiz.AText();
+            this.TpFile = new System.Windows.Forms.TabPage();
+            this.UcFile = new Me.Amon.Sec.V.Wiz.AFile();
+            this.TcCrypto = new System.Windows.Forms.ATabControl();
+            this.LlPass = new System.Windows.Forms.Label();
+            this.TbPass = new System.Windows.Forms.TextBox();
+            this.PbPass = new System.Windows.Forms.PictureBox();
             this.TpText.SuspendLayout();
             this.TpFile.SuspendLayout();
             this.TcCrypto.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PbPass)).BeginInit();
             this.SuspendLayout();
             // 
             // LbOpt
@@ -75,20 +79,36 @@
             this.TpText.Controls.Add(this.UcText);
             this.TpText.Location = new System.Drawing.Point(4, 4);
             this.TpText.Name = "TpText";
-            this.TpText.Size = new System.Drawing.Size(333, 206);
+            this.TpText.Size = new System.Drawing.Size(333, 176);
             this.TpText.TabIndex = 3;
             this.TpText.Text = "文本";
             this.TpText.UseVisualStyleBackColor = true;
+            // 
+            // UcText
+            // 
+            this.UcText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UcText.Location = new System.Drawing.Point(0, 0);
+            this.UcText.Name = "UcText";
+            this.UcText.Size = new System.Drawing.Size(333, 206);
+            this.UcText.TabIndex = 0;
             // 
             // TpFile
             // 
             this.TpFile.Controls.Add(this.UcFile);
             this.TpFile.Location = new System.Drawing.Point(4, 4);
             this.TpFile.Name = "TpFile";
-            this.TpFile.Size = new System.Drawing.Size(333, 206);
+            this.TpFile.Size = new System.Drawing.Size(333, 176);
             this.TpFile.TabIndex = 2;
             this.TpFile.Text = "文件";
             this.TpFile.UseVisualStyleBackColor = true;
+            // 
+            // UcFile
+            // 
+            this.UcFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UcFile.Location = new System.Drawing.Point(0, 0);
+            this.UcFile.Name = "UcFile";
+            this.UcFile.Size = new System.Drawing.Size(333, 176);
+            this.UcFile.TabIndex = 0;
             // 
             // TcCrypto
             // 
@@ -121,29 +141,44 @@
             this.TcCrypto.Multiline = true;
             this.TcCrypto.Name = "TcCrypto";
             this.TcCrypto.SelectedIndex = 0;
-            this.TcCrypto.Size = new System.Drawing.Size(360, 214);
+            this.TcCrypto.Size = new System.Drawing.Size(360, 184);
             this.TcCrypto.TabIndex = 3;
             // 
-            // UcFile
+            // LlPass
             // 
-            this.UcFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.UcFile.Location = new System.Drawing.Point(0, 0);
-            this.UcFile.Name = "UcFile";
-            this.UcFile.Size = new System.Drawing.Size(333, 206);
-            this.UcFile.TabIndex = 0;
+            this.LlPass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.LlPass.AutoSize = true;
+            this.LlPass.Location = new System.Drawing.Point(3, 219);
+            this.LlPass.Name = "LlPass";
+            this.LlPass.Size = new System.Drawing.Size(47, 12);
+            this.LlPass.TabIndex = 4;
+            this.LlPass.Text = "口令(&K)";
             // 
-            // UcText
+            // TbPass
             // 
-            this.UcText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.UcText.Location = new System.Drawing.Point(0, 0);
-            this.UcText.Name = "UcText";
-            this.UcText.Size = new System.Drawing.Size(333, 206);
-            this.UcText.TabIndex = 0;
+            this.TbPass.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TbPass.Location = new System.Drawing.Point(56, 216);
+            this.TbPass.Name = "TbPass";
+            this.TbPass.Size = new System.Drawing.Size(279, 21);
+            this.TbPass.TabIndex = 5;
+            // 
+            // PbPass
+            // 
+            this.PbPass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.PbPass.Location = new System.Drawing.Point(341, 219);
+            this.PbPass.Name = "PbPass";
+            this.PbPass.Size = new System.Drawing.Size(16, 16);
+            this.PbPass.TabIndex = 6;
+            this.PbPass.TabStop = false;
             // 
             // AWiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.PbPass);
+            this.Controls.Add(this.TbPass);
+            this.Controls.Add(this.LlPass);
             this.Controls.Add(this.TcCrypto);
             this.Controls.Add(this.CbFun);
             this.Controls.Add(this.CbDir);
@@ -153,6 +188,7 @@
             this.TpText.ResumeLayout(false);
             this.TpFile.ResumeLayout(false);
             this.TcCrypto.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PbPass)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -168,5 +204,8 @@
         private System.Windows.Forms.ATabControl TcCrypto;
         private AText UcText;
         private AFile UcFile;
+        private System.Windows.Forms.Label LlPass;
+        private System.Windows.Forms.TextBox TbPass;
+        private System.Windows.Forms.PictureBox PbPass;
     }
 }

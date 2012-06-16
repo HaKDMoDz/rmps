@@ -65,7 +65,27 @@ namespace Me.Amon.Sec.V.Wiz
 
         public void DoCrypto()
         {
-            _Crypto.DoCrypto();
+            string pass = "";
+
+            if (TbPass.Enabled)
+            {
+                pass = TbPass.Text;
+                if (string.IsNullOrEmpty(pass))
+                {
+                    Main.ShowAlert("请输入您的密码！");
+                    TbPass.Focus();
+                }
+            }
+
+            _Crypto.IsText = TcCrypto.SelectedIndex == 1;
+            if (_Crypto.DoCrypto(pass))
+            {
+                _ASec.ShowEcho("处理完成！");
+            }
+            else
+            {
+                _ASec.ShowEcho("处理失败！");
+            }
         }
         #endregion
 
@@ -89,6 +109,10 @@ namespace Me.Amon.Sec.V.Wiz
                 CbFun.Items.Add(new Item { K = "SHA256", V = "SHA256" });
                 CbFun.Items.Add(new Item { K = "SHA512", V = "SHA512" });
                 CbFun.SelectedIndex = 0;
+
+                LlPass.Enabled = false;
+                TbPass.Enabled = false;
+                PbPass.Enabled = false;
                 return;
             }
             if (item.K == "enc")
@@ -101,6 +125,10 @@ namespace Me.Amon.Sec.V.Wiz
                 CbFun.Items.Add(new Item { K = "RC4", V = "RC4" });
                 CbFun.Items.Add(new Item { K = "RC6", V = "RC6" });
                 CbFun.SelectedIndex = 0;
+
+                LlPass.Enabled = true;
+                TbPass.Enabled = true;
+                PbPass.Enabled = true;
                 return;
             }
             if (item.K == "dec")
@@ -113,6 +141,10 @@ namespace Me.Amon.Sec.V.Wiz
                 CbFun.Items.Add(new Item { K = "RC4", V = "RC4" });
                 CbFun.Items.Add(new Item { K = "RC6", V = "RC6" });
                 CbFun.SelectedIndex = 0;
+
+                LlPass.Enabled = true;
+                TbPass.Enabled = true;
+                PbPass.Enabled = true;
                 return;
             }
         }

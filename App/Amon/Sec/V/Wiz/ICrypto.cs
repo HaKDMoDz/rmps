@@ -8,6 +8,6 @@ namespace Me.Amon.Sec.V.Wiz
 
         string Algorithm { get; set; }
 
-        bool DoCrypto();
+        bool DoCrypto(string pass);
     }
 }

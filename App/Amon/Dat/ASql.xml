@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Amon>
+  <App>ASql</App>
+  <Ver>1</Ver>
+  <Actions>
+    <Action Id="open-file" Class="Me.Amon.Ico.E.OpenAction"/>
+  </Actions>
+
+  <!--系统快捷键-->
+  <Strokes Id="ASql">
+    <Stroke Key="^ T" ActionId="new-sql" Memo="新建高级查询"/>
+    <Stroke Key="^ Q" ActionId="new-pdq" Memo="新建向导查询"/>
+    <Stroke Key="^ N" ActionId="new-dbs" Memo="新建查询结果"/>
+  </Strokes>
+</Amon>

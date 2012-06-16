@@ -26,18 +26,15 @@ namespace Me.Amon.Sec.V.Wiz
             }
 
             _AFile.ClSrc.HeaderText = "输入文件";
-            _AFile.ClDst.HeaderText = "输出文件";
-            _AFile.LlData.Text = "口令(&K)";
+            _AFile.ClDst.HeaderText = "摘要结果";
         }
 
         public bool IsText { get; set; }
 
         public string Algorithm { get; set; }
 
-        public bool DoCrypto()
+        public bool DoCrypto(string pass)
         {
-            string pass;
-
             if (IsText)
             {
                 if (string.IsNullOrEmpty(_AText.TbSrc.Text))
@@ -54,14 +51,6 @@ namespace Me.Amon.Sec.V.Wiz
             {
                 Main.ShowAlert("请选择您要解密的文件！");
                 _AFile.GvFile.Focus();
-                return false;
-            }
-
-            pass = _AFile.TbData.Text;
-            if (string.IsNullOrEmpty(pass))
-            {
-                Main.ShowAlert("请输入您的密码！");
-                _AFile.TbData.Focus();
                 return false;
             }
 

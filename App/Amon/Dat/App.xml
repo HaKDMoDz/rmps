@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Amon>
-  <App>APwd</App>
+  <App>Amon</App>
   <Ver>1</Ver>
   <Apps>
     <App type="app" Id="ASec" Logo="" Uri="Me.Amon.Sec.ASec" Text="加密器" Tips=""/>

@@ -39,8 +39,8 @@
             // 
             // ScText
             // 
-            this.ScText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.ScText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ScText.Location = new System.Drawing.Point(3, 3);
             this.ScText.Name = "ScText";
@@ -63,6 +63,7 @@
             this.TbSrc.Location = new System.Drawing.Point(0, 0);
             this.TbSrc.Multiline = true;
             this.TbSrc.Name = "TbSrc";
+            this.TbSrc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.TbSrc.Size = new System.Drawing.Size(144, 89);
             this.TbSrc.TabIndex = 0;
             // 
@@ -72,6 +73,8 @@
             this.TbDst.Location = new System.Drawing.Point(0, 0);
             this.TbDst.Multiline = true;
             this.TbDst.Name = "TbDst";
+            this.TbDst.ReadOnly = true;
+            this.TbDst.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.TbDst.Size = new System.Drawing.Size(144, 51);
             this.TbDst.TabIndex = 0;
             // 
