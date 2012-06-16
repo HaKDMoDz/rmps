@@ -11,8 +11,7 @@ namespace Me.Amon.Ico.E
                 return;
             }
 
-            Main.OpenFileDialog.Filter = EApp.FILE_OPEN_RES;
-            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog(IApp.Form))
+            if (DialogResult.OK != Main.ShowOpenFileDialog(IApp.Form, EApp.FILE_OPEN_RES, "", false))
             {
                 return;
             }

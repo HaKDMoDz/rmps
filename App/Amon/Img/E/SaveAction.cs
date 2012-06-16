@@ -1,12 +1,12 @@
 ﻿using System.Windows.Forms;
+
 namespace Me.Amon.Img.E
 {
     public class SaveAction : AImgAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
-            Main.SaveFileDialog.Filter = "PNG图像|*.png";
-            if (DialogResult.OK != Main.SaveFileDialog.ShowDialog(IApp))
+            if (DialogResult.OK != Main.ShowSaveFileDialog(IApp.Form, EApp.FILE_SAVE_PNG, ""))
             {
                 return;
             }

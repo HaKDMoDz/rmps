@@ -118,6 +118,22 @@ namespace Me.Amon
             }
         }
 
+        public static DialogResult ShowOpenFileDialog(string filter, string file, bool multi)
+        {
+            OpenFileDialog.Filter = filter;
+            OpenFileDialog.FileName = file;
+            OpenFileDialog.Multiselect = multi;
+            return OpenFileDialog.ShowDialog();
+        }
+
+        public static DialogResult ShowOpenFileDialog(IWin32Window owner, string filter, string file, bool multi)
+        {
+            OpenFileDialog.Filter = filter;
+            OpenFileDialog.FileName = file;
+            OpenFileDialog.Multiselect = multi;
+            return OpenFileDialog.ShowDialog(owner);
+        }
+
         private static SaveFileDialog _FdSave;
         public static SaveFileDialog SaveFileDialog
         {
@@ -129,6 +145,20 @@ namespace Me.Amon
                 }
                 return _FdSave;
             }
+        }
+
+        public static DialogResult ShowSaveFileDialog(string filter, string file)
+        {
+            SaveFileDialog.Filter = filter;
+            SaveFileDialog.FileName = file;
+            return SaveFileDialog.ShowDialog();
+        }
+
+        public static DialogResult ShowSaveFileDialog(IWin32Window owner, string filter, string file)
+        {
+            SaveFileDialog.Filter = filter;
+            SaveFileDialog.FileName = file;
+            return SaveFileDialog.ShowDialog(owner);
         }
         #endregion
 

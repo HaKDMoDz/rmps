@@ -4,49 +4,49 @@
   <Ver>1</Ver>
   <Actions>
     <Action Id="open-file" Class="Me.Amon.Ico.E.OpenAction"/>
-	<Action Id="save-file" Class="Me.Amon.Ico.E.SaveAction"/>
-	<Action Id="import" Class="Me.Amon.Ico.E.ImportAction"/>
-	<Action Id="export" Class="Me.Amon.Ico.E.ExportAction"/>
-	<Action Id="append-img" Class="Me.Amon.Ico.E.AppendImgAction"/>
+    <Action Id="save-file" Class="Me.Amon.Ico.E.SaveAction"/>
+    <Action Id="import" Class="Me.Amon.Ico.E.ImportAction"/>
+    <Action Id="export" Class="Me.Amon.Ico.E.ExportAction"/>
+    <Action Id="append-img" Class="Me.Amon.Ico.E.AppendImgAction"/>
   </Actions>
 
   <!--系统快捷键-->
   <Strokes Id="AIco">
     <Stroke Key="^ O" ActionId="open-file" Memo="打开文件"/>
-	<Stroke Key="^ S" ActionId="save-file" Memo="保存文件"/>
-	<Stroke Key="^ I" ActionId="import" Memo="导入图片"/>
-	<Stroke Key="^ E" ActionId="export" Memo="导出图片"/>
+    <Stroke Key="^ S" ActionId="save-file" Memo="保存文件"/>
+    <Stroke Key="^ I" ActionId="import" Memo="导入图片"/>
+    <Stroke Key="^ E" ActionId="export" Memo="导出图片"/>
   </Strokes>
 
   <Popmenu Id="AIco">
     <Item Type="normal" Text="打开(&amp;O)" ActionId="open-file"/>
-	<Line/>
-	<Item Type="normal" Text="保存(&amp;S)" ActionId="save-file"/>
+    <Line/>
+    <Item Type="normal" Text="保存(&amp;S)" ActionId="save-file"/>
   </Popmenu>
 
   <Popmenu Id="Icl">
     <Item Type="normal" Text="打开(&amp;O)">
-		<Action Class="Me.Amon.Ico.E.OpenIclAction"/>
-	</Item>
-	<Item Type="normal" Text="移除(&amp;R)">
-		<Action Class="Me.Amon.Ico.E.RemoveIcoAction"/>
-	</Item>
+      <Action Class="Me.Amon.Ico.E.OpenIclAction"/>
+    </Item>
+    <Item Type="normal" Text="移除(&amp;R)">
+      <Action Class="Me.Amon.Ico.E.RemoveIcoAction"/>
+    </Item>
   </Popmenu>
 
   <Popmenu Id="Ico">
-	<Menu Text="追加(&amp;N)">
-		<Item Type="normal" Text="48 * 48" ActionId="append-img" Command="48"/>
-		<Item Type="normal" Text="32 * 32" ActionId="append-img" Command="32"/>
-		<Item Type="normal" Text="24 * 24" ActionId="append-img" Command="24"/>
-		<Item Type="normal" Text="16 * 16" ActionId="append-img" Command="16"/>
-		<Line/>
-		<Item Type="normal" Text="其它……" ActionId="append-img" Command="0"/>
-	</Menu>
-	<Item Type="normal" Text="移除(&amp;R)">
-		<Action Class="Me.Amon.Ico.E.RemoveImgAction"/>
-	</Item>
-	<Line/>
-	<Item Type="normal" Text="导入图片(&amp;I)" ActionId="import"/>
-	<Item Type="normal" Text="导出图片(&amp;E)" ActionId="export"/>
+    <Menu Text="追加(&amp;N)">
+      <Item Type="normal" Text="48 * 48" ActionId="append-img" Command="48"/>
+      <Item Type="normal" Text="32 * 32" ActionId="append-img" Command="32"/>
+      <Item Type="normal" Text="24 * 24" ActionId="append-img" Command="24"/>
+      <Item Type="normal" Text="16 * 16" ActionId="append-img" Command="16"/>
+      <Line/>
+      <Item Type="normal" Text="其它……" ActionId="append-img" Command="0"/>
+    </Menu>
+    <Item Type="normal" Text="移除(&amp;R)">
+      <Action Class="Me.Amon.Ico.E.RemoveImgAction"/>
+    </Item>
+    <Line/>
+    <Item Type="normal" Text="导入图片(&amp;I)" ActionId="import"/>
+    <Item Type="normal" Text="导出图片(&amp;E)" ActionId="export"/>
   </Popmenu>
 </Amon>

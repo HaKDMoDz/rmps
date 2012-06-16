@@ -8,10 +8,7 @@ namespace Me.Amon.Sec.V.Pro.Uw
 
         public void Show(ASec asec, string data)
         {
-            Main.OpenFileDialog.Filter = EApp.FILE_OPEN_ALL;
-            Main.OpenFileDialog.FileName = data;
-            Main.OpenFileDialog.Multiselect = false;
-            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog(asec))
+            if (DialogResult.OK != Main.ShowOpenFileDialog(asec, EApp.FILE_OPEN_ALL, data, false))
             {
                 return;
             }

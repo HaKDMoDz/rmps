@@ -36,9 +36,7 @@ namespace Me.Amon.Pwd.Bean
 
         protected void OpenFile()
         {
-            Main.OpenFileDialog.Filter = EApp.FILE_OPEN_ALL;
-            Main.OpenFileDialog.Multiselect = false;
-            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog())
+            if (DialogResult.OK != Main.ShowOpenFileDialog(EApp.FILE_OPEN_ALL, "", false))
             {
                 return;
             }

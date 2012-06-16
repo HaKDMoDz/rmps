@@ -8,9 +8,7 @@ namespace Me.Amon.Sec.V.Pro.Uw
 
         public void Show(ASec asec, string data)
         {
-            Main.SaveFileDialog.Filter = EApp.FILE_OPEN_ALL;
-            Main.SaveFileDialog.FileName = data;
-            if (DialogResult.OK != Main.SaveFileDialog.ShowDialog(asec))
+            if (DialogResult.OK != Main.ShowSaveFileDialog(asec, EApp.FILE_SAVE_ALL, data))
             {
                 return;
             }

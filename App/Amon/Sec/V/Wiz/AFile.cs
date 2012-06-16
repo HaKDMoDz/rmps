@@ -67,9 +67,7 @@ namespace Me.Amon.Sec.V.Wiz
 
         private void MiAppendFile_Click(object sender, EventArgs e)
         {
-            Main.OpenFileDialog.Filter = EApp.FILE_OPEN_ALL;
-            Main.OpenFileDialog.Multiselect = true;
-            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog())
+            if (DialogResult.OK != Main.ShowOpenFileDialog(_ASec, EApp.FILE_OPEN_ALL, "", true))
             {
                 return;
             }

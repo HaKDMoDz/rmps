@@ -1342,8 +1342,7 @@ namespace Me.Amon.Pwd
             TvCatTree.SelectedNode = null;
             LbKeyList.Items.Clear();
 
-            Main.SaveFileDialog.Filter = "密码箱备份文件|*.apbak";
-            if (DialogResult.OK != Main.SaveFileDialog.ShowDialog(this))
+            if (DialogResult.OK != Main.ShowSaveFileDialog(this, "密码箱备份文件|*.apbak", ""))
             {
                 return;
             }
@@ -1416,8 +1415,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            Main.SaveFileDialog.Filter = "文件|*.aptxt";
-            if (DialogResult.OK != Main.SaveFileDialog.ShowDialog(this))
+            if (DialogResult.OK != Main.ShowSaveFileDialog(this, "文件|*.aptxt", ""))
             {
                 return;
             }
@@ -1475,8 +1473,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            Main.SaveFileDialog.Filter = "文件|*.apxml";
-            if (DialogResult.OK != Main.SaveFileDialog.ShowDialog(this))
+            if (DialogResult.OK != Main.ShowSaveFileDialog(this, "文件|*.apxml", ""))
             {
                 return;
             }
@@ -1533,9 +1530,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            Main.OpenFileDialog.Filter = "文件|*.aptxt";
-            Main.OpenFileDialog.Multiselect = false;
-            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog(this))
+            if (DialogResult.OK != Main.ShowOpenFileDialog(this, "文件|*.aptxt", "", false))
             {
                 return;
             }
@@ -1578,6 +1573,7 @@ namespace Me.Amon.Pwd
             }
 
             DoListKey(cat.Id);
+            _SafeModel.Key = null;
 
             Main.ShowAlert(string.Format("数据导入结果：{0}成功，{1}失败！", suc, err));
         }
@@ -1600,9 +1596,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            Main.OpenFileDialog.Filter = "文件|*.apxml";
-            Main.OpenFileDialog.Multiselect = false;
-            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog(this))
+            if (DialogResult.OK != Main.ShowOpenFileDialog(this, "文件|*.apxml", "", false))
             {
                 return;
             }
@@ -1650,6 +1644,7 @@ namespace Me.Amon.Pwd
             stream.Close();
 
             DoListKey(cat.Id);
+            _SafeModel.Key = null;
 
             Main.ShowAlert(string.Format("数据导入结果：{0}成功，{1}失败！", suc, err));
             //ShowEcho(string.Format("", suc, err));
@@ -1673,9 +1668,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            Main.OpenFileDialog.Filter = "文件|*.vcf";
-            Main.OpenFileDialog.Multiselect = false;
-            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog(this))
+            if (DialogResult.OK != Main.ShowOpenFileDialog(this, "文件|*.vcf", "", false))
             {
                 return;
             }
@@ -1871,6 +1864,7 @@ namespace Me.Amon.Pwd
 
             DoImportKey();
             DoListKey(cat.Id);
+            _SafeModel.Key = null;
         }
 
         public void ImportOld()
@@ -1891,9 +1885,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            Main.OpenFileDialog.Filter = EApp.FILE_OPEN_ALL;
-            Main.OpenFileDialog.Multiselect = false;
-            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog(this))
+            if (DialogResult.OK != Main.ShowOpenFileDialog(this, EApp.FILE_OPEN_ALL, "", false))
             {
                 return;
             }
@@ -1928,6 +1920,7 @@ namespace Me.Amon.Pwd
             }
 
             DoListKey(cat.Id);
+            _SafeModel.Key = null;
 
             Main.ShowAlert(string.Format("数据导入结果：{0}成功，{1}失败！", suc, err));
         }

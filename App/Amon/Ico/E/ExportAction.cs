@@ -10,8 +10,8 @@ namespace Me.Amon.Ico.E
             {
                 return;
             }
-            Main.SaveFileDialog.Filter = EApp.FILE_SAVE_PNG;
-            if (DialogResult.OK != Main.SaveFileDialog.ShowDialog())
+
+            if (DialogResult.OK != Main.ShowSaveFileDialog(IApp.Form, EApp.FILE_SAVE_PNG, ""))
             {
                 return;
             }

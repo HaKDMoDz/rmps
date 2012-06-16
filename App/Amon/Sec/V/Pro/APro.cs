@@ -553,8 +553,7 @@ namespace Me.Amon.Sec.V.Pro
 
         public void LoadFav()
         {
-            Main.OpenFileDialog.Filter = "加密器文件(*.asxml)|*.asxml";
-            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog())
+            if (DialogResult.OK != Main.ShowOpenFileDialog(_ASec, "加密器文件(*.asxml)|*.asxml", "", false))
             {
                 return;
             }
@@ -592,8 +591,7 @@ namespace Me.Amon.Sec.V.Pro
                 return;
             }
 
-            Main.SaveFileDialog.Filter = "加密器文件(*.asxml)|*.asxml";
-            if (DialogResult.OK != Main.SaveFileDialog.ShowDialog())
+            if (DialogResult.OK != Main.ShowSaveFileDialog(_ASec, "加密器文件(*.asxml)|*.asxml", ""))
             {
                 return;
             }

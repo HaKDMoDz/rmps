@@ -133,8 +133,7 @@ namespace Me.Amon.Bar
                 return;
             }
 
-            Main.SaveFileDialog.Filter = EApp.FILE_SAVE_PNG;
-            if (DialogResult.OK != Main.SaveFileDialog.ShowDialog(this))
+            if (DialogResult.OK != Main.ShowSaveFileDialog(this, EApp.FILE_SAVE_PNG, ""))
             {
                 return;
             }
@@ -169,9 +168,7 @@ namespace Me.Amon.Bar
 
         private void MiDecLoc_Click(object sender, EventArgs e)
         {
-            Main.OpenFileDialog.Filter = EApp.FILE_OPEN_IMG;
-            Main.OpenFileDialog.Multiselect = false;
-            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog(this))
+            if (DialogResult.OK != Main.ShowOpenFileDialog(this, EApp.FILE_OPEN_IMG, "", false))
             {
                 return;
             }

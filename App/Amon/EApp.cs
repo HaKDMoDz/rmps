@@ -80,6 +80,7 @@ namespace Me.Amon
         public const string FILE_OPEN_IMG_ICO = "图片文件（*.png,*.jpg,*.bmp,*.ico）|*.png;*.jpg;*.jpeg;*.jpe;*.jfif;*.bmp;*.dib;*.rle;*.ico|PNG文件（*.png）|*.png|JPG文件（*.jpg,*.jpeg,*.jpe,*.jfif）|*.jpg;*.jpeg;*.jpe;*.jfif|BMP文件（*.bmp,*dib,*.rle）|*.bmp;*.dib;*.rle|ICO文件（*.ico）|*.ico";
         public const string FILE_OPEN_IMG_RES = "图片文件（*.png,*.jpg,*.bmp,*.ico,*.exe,*.dll）|*.png;*.jpg;*.jpeg;*.jpe;*.jfif;*.bmp;*.dib;*.rle;*.ico;*.icl;*.dll;*.exe;*.ocx;*.cpl;*.src|PNG文件（*.png）|*.png|JPG文件（*.jpg,*.jpeg,*.jpe,*.jfif）|*.jpg;*.jpeg;*.jpe;*.jfif|BMP文件（*.bmp,*dib,*.rle）|*.bmp;*.dib;*.rle|ICO文件（*.ico）|*.ico|ICL文件（*.icl）|*.icl|DLL文件（*.dll）|*.dll|EXE文件（*.exe）|*.exe|OCX文件（*.ocx）|*.ocx|CPL文件（*.cpl）|*.cpl|SRC文件（*.src）|*.src";
         public const string FILE_OPEN_RES = "资源文件|*.ico;*.icl;*.dll;*.exe;*.ocx;*.cpl;*.src|ICO文件（*.ico）|*.ico|ICL文件（*.icl）|*.icl|DLL文件（*.dll）|*.dll|EXE文件（*.exe）|*.exe|OCX文件（*.ocx）|*.ocx|CPL文件（*.cpl）|*.cpl|SRC文件（*.src）|*.src";
+        public const string FILE_SAVE_ALL = "所有文件|*.*";
         public const string FILE_SAVE_PNG = "图片文件（*.png）|*.png";
         public const string FILE_SAVE_ICO = "图标文件（*.ico）|*.ico";
         public const string FILE_SAVE_ICL = "图集文件（*.icl）|*.icl";

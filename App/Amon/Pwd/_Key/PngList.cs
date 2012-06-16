@@ -79,9 +79,7 @@ namespace Me.Amon.Pwd._Key
 
         private void BtAppend_Click(object sender, EventArgs e)
         {
-            Main.OpenFileDialog.Filter = EApp.FILE_OPEN_IMG_RES;
-            Main.OpenFileDialog.Multiselect = false;
-            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog(this))
+            if (DialogResult.OK != Main.ShowOpenFileDialog(this, EApp.FILE_OPEN_IMG_RES, "", false))
             {
                 return;
             }

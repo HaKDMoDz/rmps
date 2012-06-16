@@ -11,8 +11,7 @@ namespace Me.Amon.Ico.E
                 return;
             }
 
-            Main.OpenFileDialog.Filter = EApp.FILE_OPEN_IMG;
-            if (DialogResult.OK != Main.OpenFileDialog.ShowDialog())
+            if (DialogResult.OK != Main.ShowOpenFileDialog(IApp.Form, EApp.FILE_OPEN_IMG, "", false))
             {
                 return;
             }

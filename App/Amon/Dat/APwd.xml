@@ -1,4 +1,4 @@
- <?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Amon version="1">
   <Libs>
     <Lib Id="Demo" Path="Lib\DemoLib.dll"/>
@@ -37,7 +37,7 @@
     <Action Id="change-att-file" Class="Me.Amon.Pwd.E._Att.ChangeFileAction"/>
     <Action Id="change-att-line" Class="Me.Amon.Pwd.E._Att.ChangeLineAction"/>
     <Action Id="update-att" Class="Me.Amon.Pwd.E._Att.UpdateAttAction"/>
-	<Action Id="delete-att" Class="Me.Amon.Pwd.E._Att.DeleteAttAction"/>
+    <Action Id="delete-att" Class="Me.Amon.Pwd.E._Att.DeleteAttAction"/>
     <Action Id="att-edit-cut" Class="Me.Amon.Pwd.E._Att.EditCutAction"/>
     <Action Id="att-edit-copy" Class="Me.Amon.Pwd.E._Att.EditCopyAction"/>
     <Action Id="att-edit-paste" Class="Me.Amon.Pwd.E._Att.EditPasteAction"/>
@@ -112,85 +112,85 @@
       <Menu Id="append-att" Text="添加属性">
         <Item Type="normal" Text="文本" ActionId="append-att-text">
           <Stroke Key="^ D1" Memo="添加文本属性"/>
-		  <Stroke Key="^ NumPad1" Memo="添加文本属性"/>
+          <Stroke Key="^ NumPad1" Memo="添加文本属性"/>
         </Item>
         <Item Type="normal" Text="口令" ActionId="append-att-pass">
           <Stroke Key="^ D2" Memo="添加口令属性"/>
-		  <Stroke Key="^ NumPad2" Memo="添加口令属性"/>
+          <Stroke Key="^ NumPad2" Memo="添加口令属性"/>
         </Item>
         <Item Type="normal" Text="链接" ActionId="append-att-link">
           <Stroke Key="^ D3" Memo="添加链接属性"/>
-		  <Stroke Key="^ NumPad3" Memo="添加链接属性"/>
+          <Stroke Key="^ NumPad3" Memo="添加链接属性"/>
         </Item>
         <Item Type="normal" Text="邮件" ActionId="append-att-mail">
           <Stroke Key="^ D4" Memo="添加邮件属性"/>
-		  <Stroke Key="^ NumPad4" Memo="添加邮件属性"/>
+          <Stroke Key="^ NumPad4" Memo="添加邮件属性"/>
         </Item>
         <Item Type="normal" Text="日期" ActionId="append-att-date">
           <Stroke Key="^ D5" Memo="添加日期属性"/>
-		  <Stroke Key="^ NumPad5" Memo="添加日期属性"/>
+          <Stroke Key="^ NumPad5" Memo="添加日期属性"/>
         </Item>
         <Item Type="normal" Text="数值" ActionId="append-att-data">
           <Stroke Key="^ D6" Memo="添加数值属性"/>
-		  <Stroke Key="^ NumPad6" Memo="添加数值属性"/>
+          <Stroke Key="^ NumPad6" Memo="添加数值属性"/>
         </Item>
         <Item Type="normal" Text="列表" ActionId="append-att-list">
           <Stroke Key="^ D7" Memo="添加列表属性"/>
-		  <Stroke Key="^ NumPad7" Memo="添加列表属性"/>
+          <Stroke Key="^ NumPad7" Memo="添加列表属性"/>
         </Item>
         <Item Type="normal" Text="附注" ActionId="append-att-memo">
           <Stroke Key="^ D8" Memo="添加附注属性"/>
-		  <Stroke Key="^ NumPad8" Memo="添加附注属性"/>
+          <Stroke Key="^ NumPad8" Memo="添加附注属性"/>
         </Item>
         <Item Type="normal" Text="文件" ActionId="append-att-file">
           <Stroke Key="^ D9" Memo="添加文件属性"/>
-		  <Stroke Key="^ NumPad9" Memo="添加文件属性"/>
+          <Stroke Key="^ NumPad9" Memo="添加文件属性"/>
         </Item>
         <Item Type="normal" Text="标记" ActionId="append-att-line">
           <Stroke Key="^ D0" Memo="添加标记属性"/>
-		  <Stroke Key="^ NumPad0" Memo="添加标记属性"/>
+          <Stroke Key="^ NumPad0" Memo="添加标记属性"/>
         </Item>
       </Menu>
       <Menu Id="update-att" Text="转换属性">
         <Item Type="normal" Text="文本" ActionId="change-att-text">
           <Stroke Key="# D1" Memo="转换文本属性"/>
-		  <Stroke Key="# NumPad1" Memo="转换文本属性"/>
+          <Stroke Key="# NumPad1" Memo="转换文本属性"/>
         </Item>
         <Item Type="normal" Text="口令" ActionId="change-att-pass">
           <Stroke Key="# D2" Memo="转换口令属性"/>
-		  <Stroke Key="# NumPad2" Memo="转换口令属性"/>
+          <Stroke Key="# NumPad2" Memo="转换口令属性"/>
         </Item>
         <Item Type="normal" Text="链接" ActionId="change-att-link">
           <Stroke Key="# D3" Memo="转换链接属性"/>
-		  <Stroke Key="# NumPad3" Memo="转换链接属性"/>
+          <Stroke Key="# NumPad3" Memo="转换链接属性"/>
         </Item>
         <Item Type="normal" Text="邮件" ActionId="change-att-mail">
           <Stroke Key="# D4" Memo="转换邮件属性"/>
-		  <Stroke Key="# NumPad4" Memo="转换邮件属性"/>
+          <Stroke Key="# NumPad4" Memo="转换邮件属性"/>
         </Item>
         <Item Type="normal" Text="日期" ActionId="change-att-date">
           <Stroke Key="# D5" Memo="转换日期属性"/>
-		  <Stroke Key="# NumPad5" Memo="转换日期属性"/>
+          <Stroke Key="# NumPad5" Memo="转换日期属性"/>
         </Item>
         <Item Type="normal" Text="数值" ActionId="change-att-data">
           <Stroke Key="# D6" Memo="转换数值属性"/>
-		  <Stroke Key="# NumPad6" Memo="转换数值属性"/>
+          <Stroke Key="# NumPad6" Memo="转换数值属性"/>
         </Item>
         <Item Type="normal" Text="列表" ActionId="change-att-list">
           <Stroke Key="# D7" Memo="转换列表属性"/>
-		  <Stroke Key="# NumPad7" Memo="转换列表属性"/>
+          <Stroke Key="# NumPad7" Memo="转换列表属性"/>
         </Item>
         <Item Type="normal" Text="附注" ActionId="change-att-memo">
           <Stroke Key="# D8" Memo="转换附注属性"/>
-		  <Stroke Key="# NumPad8" Memo="转换附注属性"/>
+          <Stroke Key="# NumPad8" Memo="转换附注属性"/>
         </Item>
         <Item Type="normal" Text="文件" ActionId="change-att-file">
           <Stroke Key="# D9" Memo="转换文件属性"/>
-		  <Stroke Key="# NumPad9" Memo="转换文件属性"/>
+          <Stroke Key="# NumPad9" Memo="转换文件属性"/>
         </Item>
         <Item Type="normal" Text="标记" ActionId="change-att-line">
           <Stroke Key="# D0" Memo="转换标记属性"/>
-		  <Stroke Key="# NumPad0" Memo="转换标记属性"/>
+          <Stroke Key="# NumPad0" Memo="转换标记属性"/>
         </Item>
       </Menu>
       <Item Type="normal" Text="删除属性" ActionId="delete-att">
