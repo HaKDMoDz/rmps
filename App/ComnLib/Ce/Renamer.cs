@@ -263,22 +263,25 @@ namespace Me.Amon.Ce
         private bool DecodeUdc(string cmd)
         {
             StringBuilder buffer = new StringBuilder();
-            if (!DecodeEnum(cmd, buffer, TMP_ESCAPE))
+            if (!DecodeEnum(cmd, buffer, NUMBER))
             {
                 return false;
             }
 
             Udc udc = new Udc();
-            if (buffer.Length < 1)
+            string tmp = buffer.Length < 1 ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ" : buffer.ToString().Trim(NUMBER);
+            if (tmp.IndexOf(NUMBER) < 0)
             {
-                udc.Array = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
-                _UdcList.Add(udc);
-                return true;
+                udc.Array = new string[tmp.Length];
+                for (int i = 0; i < tmp.Length; i += 1)
+                {
+                    udc.Array[i] = "" + tmp[i];
+                }
             }
-
-            char[] arr = new char[buffer.Length];
-            buffer.CopyTo(0, arr, 0, arr.Length);
-            udc.Array = arr;
+            else
+            {
+                udc.Array = tmp.Split(NUMBER);
+            }
             _UdcList.Add(udc);
             return true;
         }
@@ -389,7 +392,7 @@ namespace Me.Amon.Ce
                 return true;
             }
 
-            string[] arr = buffer.ToString().Split(':');
+            string[] arr = buffer.ToString().Split(NUMBER);
             rpl.Src = arr[0];
             if (arr.Length < 2)
             {
@@ -416,7 +419,7 @@ namespace Me.Amon.Ce
         private bool DecodeFmt(string cmd)
         {
             StringBuilder buffer = new StringBuilder();
-            if (!DecodeEnum(cmd, buffer, '\0'))
+            if (!DecodeEnum(cmd, buffer, TMP_ESCAPE))
             {
                 return false;
             }
@@ -650,10 +653,10 @@ namespace Me.Amon.Ce
 
     class Udc
     {
-        public char[] Array { get; set; }
+        public string[] Array { get; set; }
         public int Index { get; set; }
 
-        public char Next()
+        public string Next()
         {
             return Array[Index];
         }

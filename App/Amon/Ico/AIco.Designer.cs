@@ -35,14 +35,14 @@
             this.LlEcho = new System.Windows.Forms.Label();
             this.BnSave = new System.Windows.Forms.Button();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.TpIco0 = new System.Windows.Forms.TabPage();
-            this.LvIco = new System.Windows.Forms.ListView();
-            this.TcIco = new System.Windows.Forms.ATabControl();
             this.CmIcl = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CmIco = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.TcIco = new System.Windows.Forms.ATabControl();
+            this.TpIco0 = new System.Windows.Forms.TabPage();
+            this.LvIco = new System.Windows.Forms.ListView();
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).BeginInit();
-            this.TpIco0.SuspendLayout();
             this.TcIco.SuspendLayout();
+            this.TpIco0.SuspendLayout();
             this.SuspendLayout();
             // 
             // IlIco
@@ -69,9 +69,8 @@
             this.LlEcho.AutoSize = true;
             this.LlEcho.Location = new System.Drawing.Point(34, 332);
             this.LlEcho.Name = "LlEcho";
-            this.LlEcho.Size = new System.Drawing.Size(41, 12);
+            this.LlEcho.Size = new System.Drawing.Size(0, 12);
             this.LlEcho.TabIndex = 2;
-            this.LlEcho.Text = "label1";
             // 
             // BnSave
             // 
@@ -89,28 +88,15 @@
             this.CmMenu.Name = "CmMenu";
             this.CmMenu.Size = new System.Drawing.Size(61, 4);
             // 
-            // TpIco0
+            // CmIcl
             // 
-            this.TpIco0.Controls.Add(this.LvIco);
-            this.TpIco0.Location = new System.Drawing.Point(4, 23);
-            this.TpIco0.Name = "TpIco0";
-            this.TpIco0.Padding = new System.Windows.Forms.Padding(3);
-            this.TpIco0.Size = new System.Drawing.Size(492, 282);
-            this.TpIco0.TabIndex = 0;
-            this.TpIco0.Text = "图标";
-            this.TpIco0.UseVisualStyleBackColor = true;
+            this.CmIcl.Name = "CmIcl";
+            this.CmIcl.Size = new System.Drawing.Size(61, 4);
             // 
-            // LvIco
+            // CmIco
             // 
-            this.LvIco.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LvIco.LargeImageList = this.IlIco;
-            this.LvIco.Location = new System.Drawing.Point(3, 3);
-            this.LvIco.Name = "LvIco";
-            this.LvIco.Size = new System.Drawing.Size(486, 276);
-            this.LvIco.TabIndex = 0;
-            this.LvIco.UseCompatibleStateImageBehavior = false;
-            this.LvIco.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LvIco_MouseDoubleClick);
-            this.LvIco.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LvIco_MouseUp);
+            this.CmIco.Name = "CmIco";
+            this.CmIco.Size = new System.Drawing.Size(61, 4);
             // 
             // TcIco
             // 
@@ -144,15 +130,28 @@
             this.TcIco.TabIndex = 0;
             this.TcIco.TabClosing += new System.EventHandler<System.Windows.Forms.TabControlCancelEventArgs>(this.TcIco_TabClosing);
             // 
-            // CmIcl
+            // TpIco0
             // 
-            this.CmIcl.Name = "CmIcl";
-            this.CmIcl.Size = new System.Drawing.Size(61, 4);
+            this.TpIco0.Controls.Add(this.LvIco);
+            this.TpIco0.Location = new System.Drawing.Point(4, 23);
+            this.TpIco0.Name = "TpIco0";
+            this.TpIco0.Padding = new System.Windows.Forms.Padding(3);
+            this.TpIco0.Size = new System.Drawing.Size(492, 282);
+            this.TpIco0.TabIndex = 0;
+            this.TpIco0.Text = "图标";
+            this.TpIco0.UseVisualStyleBackColor = true;
             // 
-            // CmIco
+            // LvIco
             // 
-            this.CmIco.Name = "CmIco";
-            this.CmIco.Size = new System.Drawing.Size(61, 4);
+            this.LvIco.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LvIco.LargeImageList = this.IlIco;
+            this.LvIco.Location = new System.Drawing.Point(3, 3);
+            this.LvIco.Name = "LvIco";
+            this.LvIco.Size = new System.Drawing.Size(486, 276);
+            this.LvIco.TabIndex = 0;
+            this.LvIco.UseCompatibleStateImageBehavior = false;
+            this.LvIco.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LvIco_MouseDoubleClick);
+            this.LvIco.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LvIco_MouseUp);
             // 
             // AIco
             // 
@@ -166,12 +165,13 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "AIco";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "图标编辑";
             this.Load += new System.EventHandler(this.AIco_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AIco_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();
-            this.TpIco0.ResumeLayout(false);
             this.TcIco.ResumeLayout(false);
+            this.TpIco0.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

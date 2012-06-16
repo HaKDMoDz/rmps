@@ -60,7 +60,7 @@ namespace Me.Amon.Ren
 
             _Renamer = new Renamer();
 
-            LtInfo.Text = "充分利用文件名中的禁用字符:|*?\"<>\\/来代表不同的含义：";
+            LtInfo.Text = "一些特殊字符（:|*?\"<>\\/）在命名表达式中的含义：";
             DataTable dt = new DataTable();
             dt.Columns.Add("KeyCode", typeof(string));
             dt.Columns.Add("KeyInfo", typeof(string));
@@ -82,6 +82,7 @@ namespace Me.Amon.Ren
             dt.Rows.Add("\\:", "代表文件创建时间，默认时间格式为<yyyyMMddHHmmss>");
             dt.Rows.Add(":<a,b,c,d>", "数值的运算方式：起始值a，步增量b，结果按定长c显示，不足时填充字符d");
             dt.Rows.Add("|<abc>", "字符的运算方式：表示循环计算abc等字符");
+            dt.Rows.Add("|<ab:c:def>", "单词的运算方式：表示循环计算ab、c、def等单词");
             dt.Rows.Add("*<a:b>", "将文件名中的a替换为b");
             dt.Rows.Add("?<a:b>", "将扩展名中的a替换为b");
             GvInfo.DataSource = dt;
