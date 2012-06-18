@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<amon>
+    <info>
+        <name>网页格式</name>
+        <type>htm</type>
+    </info>
+    <card>
+		<base path="Card" />
+        <template-uri>amon.htm</template-uri>
+        <template-res>amon</template-res>
+    </card>
+</amon>
