@@ -682,5 +682,10 @@ namespace Me.Amon
                 return;
             }
         }
+
+        private void MiReset_Click(object sender, EventArgs e)
+        {
+            new Reset(_UserModel).ShowDialog();
+        }
     }
 }

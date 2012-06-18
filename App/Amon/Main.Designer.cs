@@ -33,7 +33,6 @@
             this.NiTray = new System.Windows.Forms.NotifyIcon(this.components);
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MgTopMost = new System.Windows.Forms.ToolStripMenuItem();
-            this.MgTray = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.MgAPwd = new System.Windows.Forms.ToolStripMenuItem();
             this.MgASec = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,14 +45,16 @@
             this.MgSignOf = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSignFp = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSep2 = new System.Windows.Forms.ToolStripSeparator();
+            this.MgLogo = new System.Windows.Forms.ToolStripMenuItem();
+            this.MgTray = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.MgInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.MgExit = new System.Windows.Forms.ToolStripMenuItem();
             this.PbApp = new System.Windows.Forms.PictureBox();
             this.IlApp = new System.Windows.Forms.ImageList(this.components);
             this.IsApp = new System.Windows.Forms.ImageList(this.components);
             this.LbApp = new System.Windows.Forms.ListBox();
-            this.MgLogo = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.MiReset = new System.Windows.Forms.ToolStripMenuItem();
             this.CmMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbApp)).BeginInit();
             this.SuspendLayout();
@@ -86,9 +87,10 @@
             this.MgTray,
             this.toolStripSeparator1,
             this.MgInfo,
-            this.MgExit});
+            this.MgExit,
+            this.MiReset});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(164, 358);
+            this.CmMenu.Size = new System.Drawing.Size(164, 380);
             // 
             // MgTopMost
             // 
@@ -98,13 +100,6 @@
             this.MgTopMost.Size = new System.Drawing.Size(163, 22);
             this.MgTopMost.Text = "窗口置项(&W)";
             this.MgTopMost.Click += new System.EventHandler(this.MgTopMost_Click);
-            // 
-            // MgTray
-            // 
-            this.MgTray.Name = "MgTray";
-            this.MgTray.Size = new System.Drawing.Size(163, 22);
-            this.MgTray.Text = "显示托盘图标(&T)";
-            this.MgTray.Click += new System.EventHandler(this.MgTray_Click);
             // 
             // MgSep0
             // 
@@ -186,6 +181,25 @@
             this.MgSep2.Name = "MgSep2";
             this.MgSep2.Size = new System.Drawing.Size(160, 6);
             // 
+            // MgLogo
+            // 
+            this.MgLogo.Name = "MgLogo";
+            this.MgLogo.Size = new System.Drawing.Size(163, 22);
+            this.MgLogo.Text = "显示眼睛动画(&E)";
+            this.MgLogo.Click += new System.EventHandler(this.MgLogo_Click);
+            // 
+            // MgTray
+            // 
+            this.MgTray.Name = "MgTray";
+            this.MgTray.Size = new System.Drawing.Size(163, 22);
+            this.MgTray.Text = "显示托盘图标(&T)";
+            this.MgTray.Click += new System.EventHandler(this.MgTray_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(160, 6);
+            // 
             // MgInfo
             // 
             this.MgInfo.Name = "MgInfo";
@@ -235,17 +249,12 @@
             this.LbApp.Size = new System.Drawing.Size(120, 111);
             this.LbApp.TabIndex = 2;
             // 
-            // MgLogo
+            // MiReset
             // 
-            this.MgLogo.Name = "MgLogo";
-            this.MgLogo.Size = new System.Drawing.Size(163, 22);
-            this.MgLogo.Text = "显示眼睛动画(&E)";
-            this.MgLogo.Click += new System.EventHandler(this.MgLogo_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(160, 6);
+            this.MiReset.Name = "MiReset";
+            this.MiReset.Size = new System.Drawing.Size(163, 22);
+            this.MiReset.Text = "重置(&R)";
+            this.MiReset.Click += new System.EventHandler(this.MiReset_Click);
             // 
             // Main
             // 
@@ -298,6 +307,7 @@
         private System.Windows.Forms.ListBox LbApp;
         private System.Windows.Forms.ToolStripMenuItem MgLogo;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem MiReset;
 
 
     }

@@ -763,6 +763,12 @@
       <DependentUpon>ARen.cs</DependentUpon>
     </Compile>
     <Compile Include="Ren\ERen.cs" />
+    <Compile Include="Reset.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reset.Designer.cs">
+      <DependentUpon>Reset.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sec\ASec.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1420,6 +1426,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ren\ARen.resx">
       <DependentUpon>ARen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reset.resx">
+      <DependentUpon>Reset.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sec\ASec.resx">
       <DependentUpon>ASec.cs</DependentUpon>

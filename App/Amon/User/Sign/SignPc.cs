@@ -228,7 +228,6 @@ namespace Me.Amon.User.Sign
                     }
                 }
                 stream.Close();
-                File.Delete(file);
             }
             #endregion
 
@@ -251,7 +250,6 @@ namespace Me.Amon.User.Sign
                     }
                 }
                 stream.Close();
-                File.Delete(file);
             }
             #endregion
 
@@ -274,7 +272,6 @@ namespace Me.Amon.User.Sign
                     }
                 }
                 stream.Close();
-                File.Delete(file);
             }
             #endregion
 
@@ -297,7 +294,6 @@ namespace Me.Amon.User.Sign
                     }
                 }
                 stream.Close();
-                File.Delete(file);
             }
             #endregion
 
@@ -320,7 +316,6 @@ namespace Me.Amon.User.Sign
                     }
                 }
                 stream.Close();
-                File.Delete(file);
             }
             #endregion
             _SignAc.CallBack(EApp.IAPP_APWD);
