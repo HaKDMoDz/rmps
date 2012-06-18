@@ -17,6 +17,7 @@ using Me.Amon.User.Sign;
 using Me.Amon.Util;
 using Me.Amon.Uw;
 using Me.Amon.V;
+using Me.Amon.Sql;
 
 namespace Me.Amon
 {
@@ -36,6 +37,7 @@ namespace Me.Amon
         private ABar _ABar;
         private ARen _ARen;
         private AIco _AIco;
+        private ASql _ASql;
 
         private ILogo _ILogo;
         private bool _IsMouseDown;
@@ -557,9 +559,9 @@ namespace Me.Amon
             {
                 _APwd = new APwd(_UserModel);
             }
-            _IApp = _APwd;
 
-            _APwd.Show();
+            _IApp = _APwd;
+            _IApp.Show();
 
             DoSignIn(view);
         }
@@ -570,9 +572,9 @@ namespace Me.Amon
             {
                 _ASec = new ASec(_UserModel);
             }
-            _IApp = _ASec;
 
-            _ASec.Show();
+            _IApp = _ASec;
+            _IApp.Show();
         }
 
         private void ShowABar(int view)
@@ -581,9 +583,9 @@ namespace Me.Amon
             {
                 _ABar = new ABar(_UserModel);
             }
-            _IApp = _ABar;
 
-            _ABar.Show();
+            _IApp = _ABar;
+            _IApp.Show();
         }
 
         private void ShowARen(int view)
@@ -592,9 +594,9 @@ namespace Me.Amon
             {
                 _ARen = new ARen(_UserModel);
             }
-            _IApp = _ARen;
 
-            _ARen.Show();
+            _IApp = _ARen;
+            _IApp.Show();
         }
 
         private void ShowAIco(int view)
@@ -603,9 +605,20 @@ namespace Me.Amon
             {
                 _AIco = new AIco(_UserModel);
             }
-            _IApp = _AIco;
 
-            _AIco.Show();
+            _IApp = _AIco;
+            _IApp.Show();
+        }
+
+        private void ShowASql(int view)
+        {
+            if (_ASql == null || _ASql.IsDisposed)
+            {
+                _ASql = new ASql(_UserModel);
+            }
+
+            _IApp = _ASql;
+            _IApp.Show();
         }
 
         private void ShowLast()
@@ -686,6 +699,22 @@ namespace Me.Amon
         private void MiReset_Click(object sender, EventArgs e)
         {
             new Reset(_UserModel).ShowDialog();
+        }
+
+        private void MiASql_Click(object sender, EventArgs e)
+        {
+            if (_IApp == null || !_IApp.Visible)
+            {
+                CheckUser(new AmonHandler<int>(ShowASql));
+                return;
+            }
+
+            if (_IApp.AppId != EApp.IAPP_AICO)
+            {
+                _IApp.Visible = false;
+                ShowASql(EApp.IAPP_AICO);
+                return;
+            }
         }
     }
 }

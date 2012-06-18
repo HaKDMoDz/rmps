@@ -56,5 +56,10 @@ namespace Me.Amon.Sql.Editor
             return _Buffer;
         }
         #endregion
+
+        private void GvObj_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+        }
     }
 }

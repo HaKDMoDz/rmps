@@ -50,11 +50,12 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.MgInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.MgExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiReset = new System.Windows.Forms.ToolStripMenuItem();
             this.PbApp = new System.Windows.Forms.PictureBox();
             this.IlApp = new System.Windows.Forms.ImageList(this.components);
             this.IsApp = new System.Windows.Forms.ImageList(this.components);
             this.LbApp = new System.Windows.Forms.ListBox();
-            this.MiReset = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiASql = new System.Windows.Forms.ToolStripMenuItem();
             this.CmMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbApp)).BeginInit();
             this.SuspendLayout();
@@ -77,6 +78,7 @@
             this.MgABar,
             this.MgARen,
             this.MgAIco,
+            this.MiASql,
             this.MgSep1,
             this.MgSignUp,
             this.MgSignIn,
@@ -90,7 +92,7 @@
             this.MgExit,
             this.MiReset});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(164, 380);
+            this.CmMenu.Size = new System.Drawing.Size(164, 402);
             // 
             // MgTopMost
             // 
@@ -214,6 +216,13 @@
             this.MgExit.Text = "退出(&X)";
             this.MgExit.Click += new System.EventHandler(this.MgExit_Click);
             // 
+            // MiReset
+            // 
+            this.MiReset.Name = "MiReset";
+            this.MiReset.Size = new System.Drawing.Size(163, 22);
+            this.MiReset.Text = "重置(&R)";
+            this.MiReset.Click += new System.EventHandler(this.MiReset_Click);
+            // 
             // PbApp
             // 
             this.PbApp.Location = new System.Drawing.Point(0, 0);
@@ -249,12 +258,12 @@
             this.LbApp.Size = new System.Drawing.Size(120, 111);
             this.LbApp.TabIndex = 2;
             // 
-            // MiReset
+            // MiASql
             // 
-            this.MiReset.Name = "MiReset";
-            this.MiReset.Size = new System.Drawing.Size(163, 22);
-            this.MiReset.Text = "重置(&R)";
-            this.MiReset.Click += new System.EventHandler(this.MiReset_Click);
+            this.MiASql.Name = "MiASql";
+            this.MiASql.Size = new System.Drawing.Size(163, 22);
+            this.MiASql.Text = "数据库工具(&D)";
+            this.MiASql.Click += new System.EventHandler(this.MiASql_Click);
             // 
             // Main
             // 
@@ -308,6 +317,7 @@
         private System.Windows.Forms.ToolStripMenuItem MgLogo;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem MiReset;
+        private System.Windows.Forms.ToolStripMenuItem MiASql;
 
 
     }

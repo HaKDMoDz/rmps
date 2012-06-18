@@ -96,8 +96,6 @@ namespace Me.Amon.Sql
         #region 事件处理
         private void ASql_Load(object sender, EventArgs e)
         {
-            _Param = UcUdf;
-
             _XmlMenu = new XmlMenu<ASql>(this, null);
             if (_XmlMenu.Load(Path.Combine(_UserModel.Home, ESql.XML_MENU)))
             {
@@ -151,17 +149,6 @@ namespace Me.Amon.Sql
 
         private void TcParams_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (TcParams.SelectedIndex)
-            {
-                case 0:
-                    _Param = UcUdf;
-                    break;
-                case 1:
-                    _Param = UcSql;
-                    break;
-                default:
-                    return;
-            }
         }
 
         private void TcResult_SelectedIndexChanged(object sender, EventArgs e)
