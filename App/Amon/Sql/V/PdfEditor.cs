@@ -9,7 +9,7 @@ using Me.Amon.Sql.V.Pdq;
 
 namespace Me.Amon.Sql.Editor
 {
-    public partial class PdqEditor : UserControl, IEditor
+    public partial class PdfEditor : UserControl, IEditor
     {
         private Dml _Sql;
         private List<Label> _LlList;
@@ -18,7 +18,7 @@ namespace Me.Amon.Sql.Editor
         private RowStyle _DefStyle;
 
         #region 构造函数
-        public PdqEditor()
+        public PdfEditor()
         {
             InitializeComponent();
 

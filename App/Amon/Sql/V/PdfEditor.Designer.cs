@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Sql.Editor
 {
-    partial class PdqEditor
+    partial class PdfEditor
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -56,6 +56,7 @@
             this.CbSqlList.Name = "CbSqlList";
             this.CbSqlList.Size = new System.Drawing.Size(121, 20);
             this.CbSqlList.TabIndex = 1;
+            this.CbSqlList.SelectedIndexChanged += new System.EventHandler(this.CbSqlList_SelectedIndexChanged);
             // 
             // SpPanel
             // 
