@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Sql
+ namespace Me.Amon.Sql
 {
     partial class ASql
     {
@@ -126,6 +126,8 @@
             this.TcEditor.SelectedIndex = 0;
             this.TcEditor.Size = new System.Drawing.Size(640, 164);
             this.TcEditor.TabIndex = 0;
+            this.TcEditor.TabClosing += new System.EventHandler<System.Windows.Forms.TabControlCancelEventArgs>(this.TcEditor_TabClosing);
+            this.TcEditor.SelectedIndexChanged += new System.EventHandler(this.TcEditor_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -174,6 +176,8 @@
             this.TcResult.SelectedIndex = 0;
             this.TcResult.Size = new System.Drawing.Size(640, 201);
             this.TcResult.TabIndex = 0;
+            this.TcResult.TabClosing += new System.EventHandler<System.Windows.Forms.TabControlCancelEventArgs>(this.TcResult_TabClosing);
+            this.TcResult.SelectedIndexChanged += new System.EventHandler(this.TcResult_SelectedIndexChanged);
             // 
             // tabPage3
             // 
@@ -208,6 +212,7 @@
             this.Name = "ASql";
             this.Text = "数据库管理";
             this.Load += new System.EventHandler(this.ASql_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ASql_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();
             this.ScPanel.Panel1.ResumeLayout(false);
             this.ScPanel.Panel2.ResumeLayout(false);
