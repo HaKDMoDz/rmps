@@ -2,13 +2,13 @@
 using Me.Amon.Sql.Model;
 using Me.Amon.Uc;
 
-namespace Me.Amon.Sql.V.Pdq
+namespace Me.Amon.Sql.V.Pdf
 {
-    public partial class List : UserControl, IInput
+    public partial class ListArg : UserControl, IInput
     {
         private Param _Param;
 
-        public List()
+        public ListArg()
         {
             InitializeComponent();
         }

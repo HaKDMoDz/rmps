@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Sql.V.Pdq
+﻿namespace Me.Amon.Sql.V.Pdf
 {
-    partial class Date
+    partial class DateArg
     {
         /// <summary> 
         /// 必需的设计器变量。

@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Sql.V.Pdq
+﻿namespace Me.Amon.Sql.V.Pdf
 {
-    partial class Data
+    partial class NoneArg
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,33 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TbParam = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // TbParam
-            // 
-            this.TbParam.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TbParam.Location = new System.Drawing.Point(3, 3);
-            this.TbParam.Name = "TbParam";
-            this.TbParam.Size = new System.Drawing.Size(244, 21);
-            this.TbParam.TabIndex = 0;
-            // 
-            // Data
+            // None
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.TbParam);
-            this.Name = "Data";
+            this.Name = "None";
             this.Size = new System.Drawing.Size(250, 27);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox TbParam;
-
     }
 }

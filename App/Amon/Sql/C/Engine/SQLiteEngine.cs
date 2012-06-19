@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Me.Amon.Sql.C.SQLite
+namespace Me.Amon.Sql.C.Engine
 {
     public class SQLiteEngine : IEngine
     {

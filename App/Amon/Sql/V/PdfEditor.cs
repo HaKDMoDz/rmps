@@ -7,7 +7,7 @@ using System.Xml;
 using Me.Amon.Model;
 using Me.Amon.Sql.C;
 using Me.Amon.Sql.Model;
-using Me.Amon.Sql.V.Pdq;
+using Me.Amon.Sql.V.Pdf;
 
 namespace Me.Amon.Sql.V
 {
@@ -178,19 +178,19 @@ namespace Me.Amon.Sql.V
                 switch (type)
                 {
                     case "text":
-                        input = new Text();
+                        input = new TextArg();
                         break;
                     case "date":
-                        input = new Date();
+                        input = new DateArg();
                         break;
                     case "data":
-                        input = new Data();
+                        input = new DataArg();
                         break;
                     case "list":
-                        input = new List();
+                        input = new ListArg();
                         break;
                     default:
-                        input = new None();
+                        input = new NoneArg();
                         break;
                 }
                 list.Add(input);

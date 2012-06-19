@@ -3,16 +3,16 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Me.Amon.Sql.Model;
 
-namespace Me.Amon.Sql.V.Pdq
+namespace Me.Amon.Sql.V.Pdf
 {
-    public partial class Text : UserControl, IInput
+    public partial class TextArg : UserControl, IInput
     {
         private const char COMMA = '\'';
         private const char LIKE = '%';
         private Param _Param;
         private StringBuilder _Buffer = new StringBuilder();
 
-        public Text()
+        public TextArg()
         {
             InitializeComponent();
         }

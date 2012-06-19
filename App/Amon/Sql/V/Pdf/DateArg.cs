@@ -2,14 +2,14 @@
 using System.Windows.Forms;
 using Me.Amon.Sql.Model;
 
-namespace Me.Amon.Sql.V.Pdq
+namespace Me.Amon.Sql.V.Pdf
 {
-    public partial class Date : UserControl, IInput
+    public partial class DateArg : UserControl, IInput
     {
         private Param _Param;
         private StringBuilder _Buffer = new StringBuilder();
 
-        public Date()
+        public DateArg()
         {
             InitializeComponent();
         }
@@ -26,7 +26,7 @@ namespace Me.Amon.Sql.V.Pdq
             string txt = DtParam.Text;
 
             // 无要求
-            if (Param == null)
+            if (_Param == null)
             {
                 _Buffer.Append(txt);
                 return true;

@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Sql.E.SQLite
+﻿namespace Me.Amon.Sql.E.Engine
 {
     public class SQLiteAction : ASqlAction
     {

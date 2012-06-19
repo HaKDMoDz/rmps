@@ -3,15 +3,15 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Me.Amon.Sql.Model;
 
-namespace Me.Amon.Sql.V.Pdq
+namespace Me.Amon.Sql.V.Pdf
 {
-    public partial class Data : UserControl, IInput
+    public partial class DataArg : UserControl, IInput
     {
         private const char LIKE = '%';
         private Param _Param;
         private StringBuilder _Buffer = new StringBuilder();
 
-        public Data()
+        public DataArg()
         {
             InitializeComponent();
         }
@@ -27,7 +27,7 @@ namespace Me.Amon.Sql.V.Pdq
             string txt = TbParam.Text;
 
             // 无要求
-            if (Param == null)
+            if (_Param == null)
             {
                 _Buffer.Append(txt);
                 return true;
@@ -36,22 +36,22 @@ namespace Me.Amon.Sql.V.Pdq
             // 为空判断
             if (string.IsNullOrEmpty(txt))
             {
-                if (string.IsNullOrEmpty(Param.Empty))
+                if (string.IsNullOrEmpty(_Param.Empty))
                 {
                     return true;
                 }
-                MessageBox.Show(Param.Empty);
+                MessageBox.Show(_Param.Empty);
                 return false;
             }
 
-            bool isMatch = !string.IsNullOrWhiteSpace(Param.Format);
+            bool isMatch = !string.IsNullOrWhiteSpace(_Param.Format);
 
             // 无分隔符
-            if (string.IsNullOrEmpty(Param.Separator))
+            if (string.IsNullOrEmpty(_Param.Separator))
             {
-                if (isMatch && !Regex.IsMatch(txt, Param.Format))
+                if (isMatch && !Regex.IsMatch(txt, _Param.Format))
                 {
-                    MessageBox.Show(string.Format(Param.Error, txt));
+                    MessageBox.Show(string.Format(_Param.Error, txt));
                     return false;
                 }
                 _Buffer.Append(txt);
@@ -59,11 +59,11 @@ namespace Me.Amon.Sql.V.Pdq
             }
 
             // 有分隔符
-            foreach (string tmp in txt.Split(Param.Separator.ToCharArray()))
+            foreach (string tmp in txt.Split(_Param.Separator.ToCharArray()))
             {
-                if (isMatch && !Regex.IsMatch(tmp, Param.Format))
+                if (isMatch && !Regex.IsMatch(tmp, _Param.Format))
                 {
-                    MessageBox.Show(string.Format(Param.Error, tmp));
+                    MessageBox.Show(string.Format(_Param.Error, tmp));
                     return false;
                 }
                 _Buffer.Append(tmp).Append(',');
