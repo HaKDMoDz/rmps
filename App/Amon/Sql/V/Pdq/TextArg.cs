@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Me.Amon.Sql.Model;
@@ -9,7 +9,7 @@ namespace Me.Amon.Sql.V.Pdq
     {
         private const char COMMA = '\'';
         private const char LIKE = '%';
-
+        private Param _Param;
         private StringBuilder _Buffer = new StringBuilder();
 
         public Text()
@@ -29,44 +29,44 @@ namespace Me.Amon.Sql.V.Pdq
             string txt = TbParam.Text;
 
             // 无要求
-            if (Param == null)
+            if (_Param == null)
             {
                 _Buffer.Append(COMMA).Append(txt).Append(COMMA);
                 return true;
             }
 
             // 消除空白
-            if (!string.IsNullOrEmpty(Param.Trim))
+            if (!string.IsNullOrEmpty(_Param.Trim))
             {
-                txt = txt.Trim(Param.Trim.ToCharArray());
+                txt = txt.Trim(_Param.Trim.ToCharArray());
             }
 
             // 为空判断
             if (string.IsNullOrEmpty(txt))
             {
-                if (string.IsNullOrEmpty(Param.Empty))
+                if (string.IsNullOrEmpty(_Param.Empty))
                 {
                     _Buffer.Append(COMMA).Append(txt).Append(COMMA);
                     return true;
                 }
-                MessageBox.Show(Param.Empty);
+                MessageBox.Show(_Param.Empty);
                 return false;
             }
 
             // 大小转换
-            if (Param.ToUpper)
+            if (_Param.ToUpper)
             {
                 txt = txt.ToUpper();
             }
-            if (Param.ToLower)
+            if (_Param.ToLower)
             {
                 txt = txt.ToLower();
             }
 
             // 模糊查找
-            if (!string.IsNullOrEmpty(Param.Escape))
+            if (!string.IsNullOrEmpty(_Param.Escape))
             {
-                txt = txt.Replace(Param.Escape, "" + LIKE);
+                txt = txt.Replace(_Param.Escape, "" + LIKE);
                 txt = Regex.Replace(txt, LIKE + "{2,}", "" + LIKE);
                 if (txt[0] != LIKE)
                 {
@@ -80,14 +80,14 @@ namespace Me.Amon.Sql.V.Pdq
                 return true;
             }
 
-            bool isMatch = !string.IsNullOrWhiteSpace(Param.Format);
+            bool isMatch = !string.IsNullOrWhiteSpace(_Param.Format);
 
             // 无分隔符
-            if (string.IsNullOrEmpty(Param.Separator))
+            if (string.IsNullOrEmpty(_Param.Separator))
             {
-                if (isMatch && !Regex.IsMatch(txt, Param.Format))
+                if (isMatch && !Regex.IsMatch(txt, _Param.Format))
                 {
-                    MessageBox.Show(string.Format(Param.Error, txt));
+                    MessageBox.Show(string.Format(_Param.Error, txt));
                     return false;
                 }
                 _Buffer.Append(COMMA).Append(txt).Append(COMMA);
@@ -95,11 +95,11 @@ namespace Me.Amon.Sql.V.Pdq
             }
 
             // 有分隔符
-            foreach (string tmp in txt.Split(Param.Separator.ToCharArray()))
+            foreach (string tmp in txt.Split(_Param.Separator.ToCharArray()))
             {
-                if (isMatch && !Regex.IsMatch(tmp, Param.Format))
+                if (isMatch && !Regex.IsMatch(tmp, _Param.Format))
                 {
-                    MessageBox.Show(string.Format(Param.Error, tmp));
+                    MessageBox.Show(string.Format(_Param.Error, tmp));
                     return false;
                 }
                 _Buffer.Append(COMMA).Append(tmp).Append(COMMA).Append(',');
@@ -109,19 +109,20 @@ namespace Me.Amon.Sql.V.Pdq
             return true;
         }
 
-        public string Value
+        public Param Param
         {
             get
             {
-                return _Buffer.ToString();
+                _Param.Input = TbParam.Text;
+                _Param.Value = _Buffer.ToString();
+                return _Param;
             }
             set
             {
-                TbParam.Text = value;
+                _Param = value;
+                TbParam.Text = _Param.Input;
             }
         }
-
-        public Param Param { get; set; }
         #endregion
     }
 }
