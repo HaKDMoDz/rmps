@@ -33,9 +33,11 @@
             // 
             // TbParam
             // 
+            this.TbParam.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TbParam.Location = new System.Drawing.Point(3, 3);
             this.TbParam.Name = "TbParam";
-            this.TbParam.Size = new System.Drawing.Size(144, 21);
+            this.TbParam.Size = new System.Drawing.Size(244, 21);
             this.TbParam.TabIndex = 0;
             // 
             // Data
@@ -44,7 +46,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.TbParam);
             this.Name = "Data";
-            this.Size = new System.Drawing.Size(150, 27);
+            this.Size = new System.Drawing.Size(250, 27);
             this.ResumeLayout(false);
             this.PerformLayout();
 

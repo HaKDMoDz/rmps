@@ -20,8 +20,6 @@ namespace Me.Amon.Sql.V.Pdq
             return true;
         }
 
-        public string Value { get; set; }
-
         public Param Param { get; set; }
     }
 }

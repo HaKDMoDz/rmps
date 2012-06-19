@@ -9,8 +9,6 @@ namespace Me.Amon.Sql.V.Pdq
 
         bool Check();
 
-        string Value { get; set; }
-
         Param Param { get; set; }
     }
 }

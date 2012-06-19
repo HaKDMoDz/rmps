@@ -13,12 +13,6 @@ namespace Me.Amon.Sql.M
 
         public string Text { get; set; }
 
-        public string ConnectionClass { get; set; }
-
-        public string CommandClass { get; set; }
-
-        public string AdapterClass { get; set; }
-
         public string ConnectionString { get; set; }
 
         public string Uri { get; set; }
@@ -44,23 +38,7 @@ namespace Me.Amon.Sql.M
             Text = Dml.Attribute(node, "Text", "");
             LibId = Dml.Attribute(node, "LibId", "");
 
-            XmlNode temp = node.SelectSingleNode("Class/Connection");
-            if (temp != null)
-            {
-                ConnectionClass = temp.InnerText;
-            }
-            temp = node.SelectSingleNode("Class/Command");
-            if (temp != null)
-            {
-                CommandClass = temp.InnerText;
-            }
-            temp = node.SelectSingleNode("Class/Adapter");
-            if (temp != null)
-            {
-                AdapterClass = temp.InnerText;
-            }
-
-            temp = node.SelectSingleNode("Resource/Config");
+            XmlNode temp = node.SelectSingleNode("Resource/Config");
             if (temp != null)
             {
                 ConnectionString = temp.InnerText;

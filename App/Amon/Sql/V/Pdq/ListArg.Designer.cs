@@ -46,7 +46,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.CbParam);
             this.Name = "List";
-            this.Size = new System.Drawing.Size(150, 27);
+            this.Size = new System.Drawing.Size(250, 27);
             this.ResumeLayout(false);
 
         }

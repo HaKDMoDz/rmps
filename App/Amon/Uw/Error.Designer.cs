@@ -64,6 +64,7 @@
             this.TbInfo.Multiline = true;
             this.TbInfo.Name = "TbInfo";
             this.TbInfo.ReadOnly = true;
+            this.TbInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.TbInfo.Size = new System.Drawing.Size(360, 160);
             this.TbInfo.TabIndex = 2;
             // 

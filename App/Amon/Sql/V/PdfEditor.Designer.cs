@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Sql.Editor
+﻿namespace Me.Amon.Sql.V
 {
     partial class PdfEditor
     {
@@ -44,15 +44,15 @@
             this.LblSqlList.AutoSize = true;
             this.LblSqlList.Location = new System.Drawing.Point(3, 6);
             this.LblSqlList.Name = "LblSqlList";
-            this.LblSqlList.Size = new System.Drawing.Size(53, 12);
+            this.LblSqlList.Size = new System.Drawing.Size(71, 12);
             this.LblSqlList.TabIndex = 0;
-            this.LblSqlList.Text = "功能列表";
+            this.LblSqlList.Text = "功能列表(&F)";
             // 
             // CbSqlList
             // 
             this.CbSqlList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CbSqlList.FormattingEnabled = true;
-            this.CbSqlList.Location = new System.Drawing.Point(62, 3);
+            this.CbSqlList.Location = new System.Drawing.Point(80, 3);
             this.CbSqlList.Name = "CbSqlList";
             this.CbSqlList.Size = new System.Drawing.Size(121, 20);
             this.CbSqlList.TabIndex = 1;
@@ -63,6 +63,7 @@
             this.SpPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.SpPanel.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.SpPanel.Location = new System.Drawing.Point(3, 29);
             this.SpPanel.Name = "SpPanel";
             // 
@@ -79,15 +80,16 @@
             // 
             // TpInput
             // 
+            this.TpInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TpInput.ColumnCount = 2;
-            this.TpInput.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TpInput.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TpInput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TpInput.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.TpInput.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TpInput.Location = new System.Drawing.Point(0, 0);
             this.TpInput.Name = "TpInput";
             this.TpInput.RowCount = 1;
-            this.TpInput.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TpInput.Size = new System.Drawing.Size(280, 184);
+            this.TpInput.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TpInput.Size = new System.Drawing.Size(280, 25);
             this.TpInput.TabIndex = 0;
             // 
             // TbSql
@@ -101,14 +103,14 @@
             this.TbSql.Size = new System.Drawing.Size(150, 184);
             this.TbSql.TabIndex = 0;
             // 
-            // PdqEditor
+            // PdfEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.SpPanel);
             this.Controls.Add(this.CbSqlList);
             this.Controls.Add(this.LblSqlList);
-            this.Name = "PdqEditor";
+            this.Name = "PdfEditor";
             this.Size = new System.Drawing.Size(440, 216);
             this.SpPanel.Panel1.ResumeLayout(false);
             this.SpPanel.Panel2.ResumeLayout(false);

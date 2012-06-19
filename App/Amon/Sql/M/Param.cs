@@ -31,9 +31,14 @@ namespace Me.Amon.Sql.Model
         public string Trim { get; set; }
 
         /// <summary>
-        /// 参数默认显示内容
+        /// 格式化输入内容
         /// </summary>
         public string Value { get; set; }
+
+        /// <summary>
+        /// 用户实际输入内容
+        /// </summary>
+        public string Input { get; set; }
 
         /// <summary>
         /// 输入内容为空时的提示信息
@@ -60,9 +65,18 @@ namespace Me.Amon.Sql.Model
         /// </summary>
         public string Separator { get; set; }
 
+        /// <summary>
+        /// 是否转换大写
+        /// </summary>
         public bool ToUpper { get; set; }
+        /// <summary>
+        /// 是否转换小写
+        /// </summary>
         public bool ToLower { get; set; }
 
+        /// <summary>
+        /// 下拉列表
+        /// </summary>
         public List<Item> Items { get; set; }
 
         public void Load(XmlNode node)
@@ -76,7 +90,7 @@ namespace Me.Amon.Sql.Model
             Type = Dml.Attribute(node, "Type", "");
             Text = Dml.Attribute(node, "Text", "");
             Trim = Dml.Attribute(node, "Trim", "");
-            Value = Dml.Attribute(node, "Value", "");
+            Input = Dml.Attribute(node, "Value", "");
             Empty = Dml.Attribute(node, "Empty", "");
             Format = Dml.Attribute(node, "Format", "");
             Error = Dml.Attribute(node, "Error", "");

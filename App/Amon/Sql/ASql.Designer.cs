@@ -28,24 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ASql));
             this.PbMenu = new System.Windows.Forms.PictureBox();
             this.LblEcho = new System.Windows.Forms.Label();
             this.BnExecute = new System.Windows.Forms.Button();
             this.ScPanel = new System.Windows.Forms.SplitContainer();
+            this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TcEditor = new System.Windows.Forms.ATabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.TcResult = new System.Windows.Forms.ATabControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScPanel)).BeginInit();
             this.ScPanel.Panel1.SuspendLayout();
             this.ScPanel.Panel2.SuspendLayout();
             this.ScPanel.SuspendLayout();
-            this.TcEditor.SuspendLayout();
-            this.TcResult.SuspendLayout();
             this.SuspendLayout();
             // 
             // PbMenu
@@ -86,6 +82,7 @@
             this.ScPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ScPanel.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.ScPanel.Location = new System.Drawing.Point(12, 12);
             this.ScPanel.Name = "ScPanel";
             this.ScPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -101,10 +98,13 @@
             this.ScPanel.SplitterDistance = 164;
             this.ScPanel.TabIndex = 0;
             // 
+            // CmMenu
+            // 
+            this.CmMenu.Name = "CmMenu";
+            this.CmMenu.Size = new System.Drawing.Size(61, 4);
+            // 
             // TcEditor
             // 
-            this.TcEditor.Controls.Add(this.tabPage1);
-            this.TcEditor.Controls.Add(this.tabPage2);
             // 
             // 
             // 
@@ -133,28 +133,8 @@
             this.TcEditor.TabClosing += new System.EventHandler<System.Windows.Forms.TabControlCancelEventArgs>(this.TcEditor_TabClosing);
             this.TcEditor.SelectedIndexChanged += new System.EventHandler(this.TcEditor_SelectedIndexChanged);
             // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 23);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(632, 137);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 23);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(632, 137);
-            this.tabPage2.TabIndex = 0;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // TcResult
             // 
-            this.TcResult.Controls.Add(this.tabPage3);
-            this.TcResult.Controls.Add(this.tabPage4);
             // 
             // 
             // 
@@ -183,26 +163,6 @@
             this.TcResult.TabClosing += new System.EventHandler<System.Windows.Forms.TabControlCancelEventArgs>(this.TcResult_TabClosing);
             this.TcResult.SelectedIndexChanged += new System.EventHandler(this.TcResult_SelectedIndexChanged);
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 23);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(632, 174);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "tabPage3";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 23);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(632, 174);
-            this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "tabPage4";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
             // ASql
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -214,7 +174,8 @@
             this.Controls.Add(this.PbMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ASql";
-            this.Text = "数据库管理";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "数据库工具";
             this.Load += new System.EventHandler(this.ASql_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ASql_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();
@@ -222,8 +183,6 @@
             this.ScPanel.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ScPanel)).EndInit();
             this.ScPanel.ResumeLayout(false);
-            this.TcEditor.ResumeLayout(false);
-            this.TcResult.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -236,10 +195,7 @@
         private System.Windows.Forms.Button BnExecute;
         private System.Windows.Forms.SplitContainer ScPanel;
         private System.Windows.Forms.ATabControl TcEditor;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ATabControl TcResult;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.ContextMenuStrip CmMenu;
     }
 }

@@ -94,6 +94,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>Lib\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -923,8 +926,21 @@
     <Compile Include="Sql\ASql.Designer.cs">
       <DependentUpon>ASql.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sql\C\CsvConfig.cs" />
+    <Compile Include="Sql\C\IEngine.cs" />
+    <Compile Include="Sql\C\SqlConfig.cs" />
+    <Compile Include="Sql\C\SQLite\SQLiteEngine.cs" />
+    <Compile Include="Sql\C\XmlConfig.cs" />
     <Compile Include="Sql\ESql.cs" />
     <Compile Include="Sql\E\ASqlAction.cs" />
+    <Compile Include="Sql\E\ConnectAction.cs" />
+    <Compile Include="Sql\E\ExecuteAction.cs" />
+    <Compile Include="Sql\E\ExportAction.cs" />
+    <Compile Include="Sql\E\ImportAction.cs" />
+    <Compile Include="Sql\E\NewDbmsAction.cs" />
+    <Compile Include="Sql\E\NewDbrAction.cs" />
+    <Compile Include="Sql\E\NewPdqAction.cs" />
+    <Compile Include="Sql\E\NewSqlAction.cs" />
     <Compile Include="Sql\E\SQLite\SQLiteAction.cs" />
     <Compile Include="Sql\ISql.cs" />
     <Compile Include="Sql\M\Ddl.cs" />
@@ -956,17 +972,18 @@
       <DependentUpon>DbResult.cs</DependentUpon>
     </Compile>
     <Compile Include="Sql\V\IEditor.cs" />
+    <Compile Include="Sql\V\IResult.cs" />
     <Compile Include="Sql\V\SqlEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Sql\V\SqlEditor.Designer.cs">
       <DependentUpon>SqlEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sql\V\PdqEditor.cs">
+    <Compile Include="Sql\V\PdfEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sql\V\PdqEditor.Designer.cs">
-      <DependentUpon>PdqEditor.cs</DependentUpon>
+    <Compile Include="Sql\V\PdfEditor.Designer.cs">
+      <DependentUpon>PdfEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Sql\V\Pdq\DataArg.cs">
       <SubType>UserControl</SubType>
@@ -1484,11 +1501,14 @@
     <EmbeddedResource Include="Sql\V\DbResult.resx">
       <DependentUpon>DbResult.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sql\V\Pdq\NoneArg.resx">
+      <DependentUpon>NoneArg.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sql\V\SqlEditor.resx">
       <DependentUpon>SqlEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sql\V\PdqEditor.resx">
-      <DependentUpon>PdqEditor.cs</DependentUpon>
+    <EmbeddedResource Include="Sql\V\PdfEditor.resx">
+      <DependentUpon>PdfEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sql\V\Pdq\DataArg.resx">
       <DependentUpon>DataArg.cs</DependentUpon>
@@ -1686,9 +1706,6 @@
     <Folder Include="Spy\C\" />
     <Folder Include="Spy\E\" />
     <Folder Include="Spy\M\" />
-    <Folder Include="Sql\C\" />
-    <Folder Include="Sql\_Ddl\" />
-    <Folder Include="Sql\_Dml\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

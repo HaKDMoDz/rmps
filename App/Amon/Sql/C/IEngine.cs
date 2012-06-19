@@ -1,17 +1,38 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 
 namespace Me.Amon.Sql.C
 {
     public interface IEngine
     {
-        IDbConnection GetConnection(string uri, string user, string pass);
+        void Begin();
 
-        IDbCommand GetCommand();
+        void Close();
 
-        IDbDataAdapter GetAdapter();
+        List<string> TableList { get; }
+
+        List<string> ViewList { get; }
+
+        List<string> ProcedureList { get; }
+
+        List<string> FunctionList { get; }
 
         bool DropTable(string table);
 
-        void Close();
+        DataSet DoSelect(string sql);
+
+        int DoExecute(string sql);
+
+        int ImportSql(string sqlFile, SqlConfig sqlCfg);
+
+        int ImportCsv(string csvFile, CsvConfig csvCfg);
+
+        int ImportXml(string xmlFile, XmlConfig xmlCfg);
+
+        int ExportSql(string sqlFile, SqlConfig sqlCfg);
+
+        int ExportCsv(string csvFile, CsvConfig csvCfg);
+
+        int ExportXml(string xmlFile, XmlConfig xmlCfg);
     }
 }

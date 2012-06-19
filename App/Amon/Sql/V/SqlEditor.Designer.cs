@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Sql.Editor
+﻿namespace Me.Amon.Sql.V
 {
     partial class SqlEditor
     {
@@ -30,7 +30,7 @@
         {
             this.ScPanel = new System.Windows.Forms.SplitContainer();
             this.TbSql = new System.Windows.Forms.TextBox();
-            this.GvObj = new System.Windows.Forms.TreeView();
+            this.TvObj = new System.Windows.Forms.TreeView();
             ((System.ComponentModel.ISupportInitialize)(this.ScPanel)).BeginInit();
             this.ScPanel.Panel1.SuspendLayout();
             this.ScPanel.Panel2.SuspendLayout();
@@ -42,6 +42,7 @@
             this.ScPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ScPanel.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.ScPanel.Location = new System.Drawing.Point(3, 3);
             this.ScPanel.Name = "ScPanel";
             // 
@@ -51,7 +52,7 @@
             // 
             // ScPanel.Panel2
             // 
-            this.ScPanel.Panel2.Controls.Add(this.GvObj);
+            this.ScPanel.Panel2.Controls.Add(this.TvObj);
             this.ScPanel.Size = new System.Drawing.Size(434, 210);
             this.ScPanel.SplitterDistance = 280;
             this.ScPanel.TabIndex = 0;
@@ -67,14 +68,14 @@
             this.TbSql.Size = new System.Drawing.Size(280, 210);
             this.TbSql.TabIndex = 0;
             // 
-            // GvObj
+            // TvObj
             // 
-            this.GvObj.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GvObj.Location = new System.Drawing.Point(0, 0);
-            this.GvObj.Name = "GvObj";
-            this.GvObj.Size = new System.Drawing.Size(150, 210);
-            this.GvObj.TabIndex = 0;
-            this.GvObj.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.GvObj_AfterSelect);
+            this.TvObj.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TvObj.Location = new System.Drawing.Point(0, 0);
+            this.TvObj.Name = "TvObj";
+            this.TvObj.Size = new System.Drawing.Size(150, 210);
+            this.TvObj.TabIndex = 0;
+            this.TvObj.DoubleClick += new System.EventHandler(this.TvObj_DoubleClick);
             // 
             // SqlEditor
             // 
@@ -95,7 +96,7 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer ScPanel;
-        private System.Windows.Forms.TreeView GvObj;
+        private System.Windows.Forms.TreeView TvObj;
         private System.Windows.Forms.TextBox TbSql;
 
     }
