@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using System.Windows.Forms;
 using Me.Amon.Sql.Model;
 
@@ -36,28 +36,19 @@ namespace Me.Amon.Sql.V.Pdq
             return true;
         }
 
-        public string Value
-        {
-            get
-            {
-                return _Buffer.ToString();
-            }
-            set
-            {
-                DtParam.Text = value;
-            }
-        }
-
         public Param Param
         {
             get
             {
+                //_Param.Input = DtParam.Value;
+                _Param.Value = _Buffer.ToString();
                 return _Param;
             }
             set
             {
                 _Param = value;
                 DtParam.CustomFormat = _Param.Format;
+                //DtParam.Value = _Param.Value;
             }
         }
         #endregion
