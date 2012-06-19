@@ -50,6 +50,8 @@
             // 
             // PbMenu
             // 
+            this.PbMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.PbMenu.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PbMenu.Image = global::Me.Amon.Properties.Resources.Menu;
             this.PbMenu.Location = new System.Drawing.Point(12, 390);
             this.PbMenu.Name = "PbMenu";
@@ -60,6 +62,7 @@
             // 
             // LblEcho
             // 
+            this.LblEcho.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LblEcho.AutoSize = true;
             this.LblEcho.Location = new System.Drawing.Point(34, 392);
             this.LblEcho.Name = "LblEcho";
@@ -69,6 +72,7 @@
             // 
             // BnExecute
             // 
+            this.BnExecute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BnExecute.Location = new System.Drawing.Point(577, 387);
             this.BnExecute.Name = "BnExecute";
             this.BnExecute.Size = new System.Drawing.Size(75, 23);
