@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Me.Amon.Sql.Model;
@@ -8,6 +8,7 @@ namespace Me.Amon.Sql.V.Pdq
     public partial class Data : UserControl, IInput
     {
         private const char LIKE = '%';
+        private Param _Param;
         private StringBuilder _Buffer = new StringBuilder();
 
         public Data()
@@ -72,18 +73,19 @@ namespace Me.Amon.Sql.V.Pdq
             return true;
         }
 
-        public string Value
+        public Param Param
         {
             get
             {
-                return _Buffer.ToString();
+                _Param.Input = TbParam.Text;
+                _Param.Value = _Buffer.ToString();
+                return _Param;
             }
             set
             {
-                TbParam.Text = value;
+                _Param = value;
+                TbParam.Text = _Param.Input;
             }
         }
-
-        public Param Param { get; set; }
     }
 }
