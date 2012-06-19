@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Sql.V
+ namespace Me.Amon.Sql.V
 {
     partial class DbResult
     {
@@ -36,6 +36,7 @@
             // 
             this.GvList.AllowUserToAddRows = false;
             this.GvList.AllowUserToDeleteRows = false;
+            this.GvList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GvList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GvList.Location = new System.Drawing.Point(0, 0);
