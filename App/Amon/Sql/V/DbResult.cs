@@ -1,8 +1,8 @@
-﻿using System.Windows.Forms;
+ using System.Windows.Forms;
 
 namespace Me.Amon.Sql.V
 {
-    public partial class DbResult : UserControl
+    public partial class DbResult : UserControl, IResult
     {
         public DbResult()
         {
