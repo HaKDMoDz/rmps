@@ -1,4 +1,4 @@
-﻿using System.Windows.Forms;
+using System.Windows.Forms;
 using Me.Amon.Sql.Model;
 using Me.Amon.Uc;
 
@@ -21,25 +21,21 @@ namespace Me.Amon.Sql.V.Pdq
 
         public bool Check()
         {
+            if (CbParam.SelectedItem == null)
+            {
+                Main.ShowAlert(_Param.Error);
+                CbParam.Focus();
+                return false;
+            }
             return true;
-        }
-
-        public string Value
-        {
-            get
-            {
-                return CbParam.SelectedItem.ToString();
-            }
-            set
-            {
-                CbParam.SelectedItem = value;
-            }
         }
 
         public Param Param
         {
             get
             {
+                _Param.Input = CbParam.SelectedItem.ToString();
+                _Param.Value = _Param.Input;
                 return _Param;
             }
             set
@@ -50,6 +46,7 @@ namespace Me.Amon.Sql.V.Pdq
                 {
                     CbParam.Items.Add(item);
                 }
+                CbParam.SelectedItem = _Param.Input;
             }
         }
         #endregion
