@@ -41,12 +41,12 @@
             this.CmCat = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.IlCatTree = new System.Windows.Forms.ImageList(this.components);
             this.LbKeyList = new System.Windows.Forms.ListBox();
-            this.CmKey = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.PlBody = new System.Windows.Forms.Panel();
+            this.FbFind = new Me.Amon.Pwd.Bean.FindBar();
             this.TbTool = new System.Windows.Forms.ToolStrip();
+            this.CmKey = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.UcTime = new System.Windows.Forms.Timer(this.components);
-            this.FbFind = new Me.Amon.Pwd.Bean.FindBar();
             this.SsEcho.SuspendLayout();
             this.TcTool.ContentPanel.SuspendLayout();
             this.TcTool.TopToolStripPanel.SuspendLayout();
@@ -153,6 +153,7 @@
             // 
             // TvCatTree
             // 
+            this.TvCatTree.AllowDrop = true;
             this.TvCatTree.ContextMenuStrip = this.CmCat;
             this.TvCatTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TvCatTree.ImageIndex = 0;
@@ -162,7 +163,10 @@
             this.TvCatTree.SelectedImageIndex = 0;
             this.TvCatTree.Size = new System.Drawing.Size(220, 152);
             this.TvCatTree.TabIndex = 0;
+            this.TvCatTree.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.TvCatTree_ItemDrag);
             this.TvCatTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvCatTree_AfterSelect);
+            this.TvCatTree.DragDrop += new System.Windows.Forms.DragEventHandler(this.TvCatTree_DragDrop);
+            this.TvCatTree.DragOver += new System.Windows.Forms.DragEventHandler(this.TvCatTree_DragOver);
             // 
             // CmCat
             // 
@@ -177,6 +181,7 @@
             // 
             // LbKeyList
             // 
+            this.LbKeyList.AllowDrop = true;
             this.LbKeyList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LbKeyList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.LbKeyList.FormattingEnabled = true;
@@ -187,12 +192,10 @@
             this.LbKeyList.TabIndex = 0;
             this.LbKeyList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.LbKeyList_DrawItem);
             this.LbKeyList.SelectedIndexChanged += new System.EventHandler(this.LbKeyList_SelectedIndexChanged);
+            this.LbKeyList.DragDrop += new System.Windows.Forms.DragEventHandler(this.LbKeyList_DragDrop);
+            this.LbKeyList.DragOver += new System.Windows.Forms.DragEventHandler(this.LbKeyList_DragOver);
+            this.LbKeyList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LbKeyList_MouseDown);
             this.LbKeyList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LbKeyList_MouseUp);
-            // 
-            // CmKey
-            // 
-            this.CmKey.Name = "CmKey";
-            this.CmKey.Size = new System.Drawing.Size(61, 4);
             // 
             // PlBody
             // 
@@ -202,18 +205,6 @@
             this.PlBody.Size = new System.Drawing.Size(340, 292);
             this.PlBody.TabIndex = 1;
             // 
-            // TbTool
-            // 
-            this.TbTool.Dock = System.Windows.Forms.DockStyle.None;
-            this.TbTool.Location = new System.Drawing.Point(3, 0);
-            this.TbTool.Name = "TbTool";
-            this.TbTool.Size = new System.Drawing.Size(111, 25);
-            this.TbTool.TabIndex = 0;
-            // 
-            // UcTime
-            // 
-            this.UcTime.Tick += new System.EventHandler(this.UcTime_Tick);
-            // 
             // FbFind
             // 
             this.FbFind.APwd = null;
@@ -222,6 +213,23 @@
             this.FbFind.Name = "FbFind";
             this.FbFind.Size = new System.Drawing.Size(340, 29);
             this.FbFind.TabIndex = 0;
+            // 
+            // TbTool
+            // 
+            this.TbTool.Dock = System.Windows.Forms.DockStyle.None;
+            this.TbTool.Location = new System.Drawing.Point(3, 0);
+            this.TbTool.Name = "TbTool";
+            this.TbTool.Size = new System.Drawing.Size(111, 25);
+            this.TbTool.TabIndex = 0;
+            // 
+            // CmKey
+            // 
+            this.CmKey.Name = "CmKey";
+            this.CmKey.Size = new System.Drawing.Size(61, 4);
+            // 
+            // UcTime
+            // 
+            this.UcTime.Tick += new System.EventHandler(this.UcTime_Tick);
             // 
             // APwd
             // 

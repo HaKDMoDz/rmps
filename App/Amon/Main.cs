@@ -18,6 +18,7 @@ using Me.Amon.Util;
 using Me.Amon.Uw;
 using Me.Amon.V;
 using Me.Amon.Sql;
+using System.Text;
 
 namespace Me.Amon
 {
@@ -104,6 +105,7 @@ namespace Me.Amon
             if (_Writer != null)
             {
                 _Writer.WriteLine(msg);
+                _Writer.Flush();
             }
         }
 
@@ -198,7 +200,8 @@ namespace Me.Amon
             // 系统日志
             if (File.Exists(EApp.FILE_LOG))
             {
-                _Writer = new StreamWriter(EApp.FILE_LOG, true);
+                _Writer = new StreamWriter(EApp.FILE_LOG, true, Encoding.UTF8, 8);
+                _Writer.AutoFlush = true;
             }
 
             if (_UserModel == null)
@@ -218,6 +221,11 @@ namespace Me.Amon
                     return;
                 }
                 _IApp.SaveData();
+            }
+
+            if (_Writer != null)
+            {
+                _Writer.Close();
             }
 
             Settings.Default.LocX = Location.X;

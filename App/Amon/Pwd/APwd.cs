@@ -163,6 +163,7 @@ namespace Me.Amon.Pwd
             }
         }
 
+        #region CatTree拖拽事件
         /// <summary>
         /// 
         /// </summary>
@@ -170,6 +171,7 @@ namespace Me.Amon.Pwd
         /// <param name="e"></param>
         private void TvCatTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            Main.LogInfo("TvCatTree_AfterSelect");
             TreeNode node = e.Node;
             if (node == null || node == _LastNode)
             {
@@ -180,6 +182,187 @@ namespace Me.Amon.Pwd
             _LastNode = node;
         }
 
+        private void TvCatTree_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            Main.LogInfo("TvCatTree_ItemDrag");
+            if (e.Button == MouseButtons.Left)
+            {
+                TvCatTree.DoDragDrop(e.Item, DragDropEffects.All);
+            }
+        }
+
+        private void TvCatTree_DragDrop(object sender, DragEventArgs e)
+        {
+            Main.LogInfo("TvCatTree_DragDrop");
+            if (_LastDnDNode != null)
+            {
+                _LastDnDNode.BackColor = Color.Empty;
+                _LastDnDNode = null;
+            }
+
+            if (e.Data.GetDataPresent(typeof(TreeNode)))
+            {
+                SortCat_DragDrop(e);
+                return;
+            }
+
+            if (e.Data.GetDataPresent(typeof(Key)))
+            {
+                MoveKey_DragDrop(e);
+                return;
+            }
+        }
+
+        private void SortCat_DragDrop(DragEventArgs e)
+        {
+            TreeNode srcNode = e.Data.GetData(typeof(TreeNode)) as TreeNode;
+            if (srcNode == null)
+            {
+                return;
+            }
+
+            Point point = TvCatTree.PointToClient(new Point(e.X, e.Y));
+            TreeNode dstNode = TvCatTree.GetNodeAt(point);
+            // 同级不可移动
+            if (dstNode == null || dstNode == srcNode)
+            {
+                return;
+            }
+            // 上一级不可移动
+            if (dstNode == srcNode.Parent)
+            {
+                return;
+            }
+            // 下级不可移动
+            TreeNode tmpNode = dstNode.Parent;
+            while (tmpNode != null)
+            {
+                if (tmpNode == srcNode)
+                {
+                    return;
+                }
+                tmpNode = tmpNode.Parent;
+            }
+
+            Cat srcCat = srcNode.Tag as Cat;
+            if (srcCat == null)
+            {
+                return;
+            }
+            Cat dstCat = dstNode.Tag as Cat;
+            if (dstCat == null)
+            {
+                return;
+            }
+            srcCat.Parent = dstCat.Id;
+            dstCat.IsLeaf = false;
+
+            tmpNode = srcNode.Parent;
+            srcNode.Remove();
+            dstNode.Nodes.Add(srcNode);
+
+            _UserModel.DBA.SaveVcs(dstCat);
+            SortCat(tmpNode);
+            SortCat(dstNode);
+        }
+
+        private void MoveKey_DragDrop(DragEventArgs e)
+        {
+            Key key = e.Data.GetData(typeof(Key)) as Key;
+            if (key == null)
+            {
+                return;
+            }
+
+            Point point = TvCatTree.PointToClient(new Point(e.X, e.Y));
+            TreeNode dstNode = TvCatTree.GetNodeAt(point);
+            if (dstNode == null)
+            {
+                return;
+            }
+            Cat cat = dstNode.Tag as Cat;
+            if (cat == null || cat.Id == key.CatId)
+            {
+                return;
+            }
+
+            key.CatId = cat.Id;
+            _UserModel.DBA.SaveVcs(key);
+
+            LastOpt();
+        }
+
+        private void TvCatTree_DragOver(object sender, DragEventArgs e)
+        {
+            Main.LogInfo("TvCatTree_DragOver");
+            if (e.Data.GetDataPresent(typeof(TreeNode)))
+            {
+                SortCat_DragOver(e);
+                return;
+            }
+
+            if (e.Data.GetDataPresent(typeof(Key)))
+            {
+                MoveKey_DragOver(e);
+                return;
+            }
+
+            e.Effect = DragDropEffects.None;
+        }
+
+        private void SortCat_DragOver(DragEventArgs e)
+        {
+            if (_LastDnDNode != null)
+            {
+                _LastDnDNode.BackColor = Color.Empty;
+            }
+            TreeNode srcNode = (TreeNode)e.Data.GetData(typeof(TreeNode));
+            if (srcNode == null)
+            {
+                return;
+            }
+
+            Point point = TvCatTree.PointToClient(new Point(e.X, e.Y));
+            TreeNode dstNode = TvCatTree.GetNodeAt(point);
+            if (dstNode == null || dstNode == srcNode)
+            {
+                e.Effect = DragDropEffects.None;
+                return;
+            }
+
+            dstNode.BackColor = Color.LightBlue;
+            e.Effect = DragDropEffects.Move;
+            _LastDnDNode = dstNode;
+        }
+
+        private void MoveKey_DragOver(DragEventArgs e)
+        {
+            if (_LastDnDNode != null)
+            {
+                _LastDnDNode.BackColor = Color.Empty;
+            }
+            Key key = e.Data.GetData(typeof(Key)) as Key;
+            if (key == null)
+            {
+                return;
+            }
+
+            Point point = TvCatTree.PointToClient(new Point(e.X, e.Y));
+            TreeNode dstNode = TvCatTree.GetNodeAt(point);
+            if (dstNode == null)
+            {
+                e.Effect = DragDropEffects.None;
+                return;
+            }
+
+            dstNode.BackColor = Color.LightBlue;
+            e.Effect = DragDropEffects.Move;
+            _LastDnDNode = dstNode;
+        }
+        private TreeNode _LastDnDNode;
+        #endregion
+
+        #region KeyList拖拽事件
         /// <summary>
         /// 
         /// </summary>
@@ -225,6 +408,52 @@ namespace Me.Amon.Pwd
             }
         }
 
+        private void LbKeyList_MouseDown(object sender, MouseEventArgs e)
+        {
+            Main.LogInfo("LbKeyList_MouseDown");
+            int idx = LbKeyList.IndexFromPoint(e.X, e.Y);
+            if (idx < 0 || idx >= LbKeyList.Items.Count)
+            {
+                return;
+            }
+
+            //LbKeyList.SelectedIndex = idx;
+            Key key = LbKeyList.Items[idx] as Key;
+            if (key != null)
+            {
+                LbKeyList.DoDragDrop(key, DragDropEffects.All);
+            }
+        }
+
+        private void LbKeyList_DragDrop(object sender, DragEventArgs e)
+        {
+            Main.LogInfo("LbKeyList_DragDrop");
+            //Point point = LbKeyList.PointToClient(new Point(e.X, e.Y));
+            //int idx = LbKeyList.IndexFromPoint(point);
+            //if (idx < 0)
+            //{
+            //    return;
+            //}
+
+            //LbKeyList.SelectedIndex = idx;
+        }
+
+        private void LbKeyList_DragOver(object sender, DragEventArgs e)
+        {
+            Main.LogInfo("LbKeyList_DragOver");
+            //Type type = typeof(Key);
+            //if (!e.Data.GetDataPresent(type))
+            //{
+            //    e.Effect = DragDropEffects.None;
+            //    return;
+            //}
+            //Key srcObj = e.Data.GetData(type) as Key;
+
+            //Point point = LbKeyList.PointToClient(new Point(e.X, e.Y));
+            //int idx = LbKeyList.IndexFromPoint(point);
+            e.Effect = DragDropEffects.Move;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -232,6 +461,7 @@ namespace Me.Amon.Pwd
         /// <param name="e"></param>
         private void LbKeyList_MouseUp(object sender, MouseEventArgs e)
         {
+            Main.LogInfo("LbKeyList_MouseUp");
             if (e.Button != MouseButtons.Right)
             {
                 return;
@@ -261,6 +491,7 @@ namespace Me.Amon.Pwd
         /// <param name="e"></param>
         private void LbKeyList_SelectedIndexChanged(object sender, System.EventArgs e)
         {
+            Main.LogInfo("LbKeyList_SelectedIndexChanged");
             Key key = LbKeyList.SelectedItem as Key;
             if (key == null || _SafeModel.Key == key)
             {
@@ -284,6 +515,7 @@ namespace Me.Amon.Pwd
 
             ShowKey(key);
         }
+        #endregion
 
         /// <summary>
         /// 时钟信息
@@ -2064,6 +2296,26 @@ namespace Me.Amon.Pwd
                 {
                     DoInitCat(node);
                 }
+            }
+        }
+
+        private void SortCat(TreeNode root)
+        {
+            if (root == null)
+            {
+                return;
+            }
+
+            Cat cat;
+            foreach (TreeNode node in root.Nodes)
+            {
+                cat = node.Tag as Cat;
+                if (cat == null)
+                {
+                    continue;
+                }
+                cat.Order = node.Index;
+                _UserModel.DBA.SaveVcs(cat);
             }
         }
 
