@@ -87,8 +87,16 @@ namespace Me.Amon.Ico
 
         public void Open(string file)
         {
-            _MIcon.Clear();
-            _MIcon.Load(file);
+            try
+            {
+                _MIcon.Clear();
+                _MIcon.Load(file);
+            }
+            catch (Exception exp)
+            {
+                Main.ShowError(exp);
+                return;
+            }
 
             LvIco.Items.Clear();
             IlIco.Images.Clear();

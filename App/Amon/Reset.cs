@@ -25,10 +25,10 @@ namespace Me.Amon
         #endregion
 
         #region 全局函数
-        public static void Reddd(UserModel userModel)
+        public static void Import(UserModel userModel)
         {
             XmlReaderSettings setting = new XmlReaderSettings { IgnoreWhitespace = true };
-            ResetAPwdDir(userModel, setting);
+            ImportAPwdDir(userModel, setting);
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Me.Amon
         /// </summary>
         /// <param name="userModel"></param>
         /// <param name="setting"></param>
-        private static void ResetAPwdCat(UserModel userModel, XmlReaderSettings setting)
+        private static void ImportAPwdCat(UserModel userModel, XmlReaderSettings setting)
         {
             string file = Path.Combine(userModel.Home, "APwd-Cat.xml");
             if (!File.Exists(file))
@@ -62,7 +62,7 @@ namespace Me.Amon
             stream.Close();
         }
 
-        private static void ResetAPwdLib(UserModel userModel, XmlReaderSettings setting)
+        private static void ImportAPwdLib(UserModel userModel, XmlReaderSettings setting)
         {
             string file = Path.Combine(userModel.Home, "APwd-Lib.xml");
             if (File.Exists(file))
@@ -93,7 +93,7 @@ namespace Me.Amon
         /// </summary>
         /// <param name="userModel"></param>
         /// <param name="setting"></param>
-        private static void ResetAPwdDir(UserModel userModel, XmlReaderSettings setting)
+        private static void ImportAPwdDir(UserModel userModel, XmlReaderSettings setting)
         {
             string file = Path.Combine(userModel.Home, "APwd-Dir.xml");
             if (!File.Exists(file))
@@ -120,9 +120,40 @@ namespace Me.Amon
         }
         #endregion
 
+        #region
+        public static void Export(UserModel userModel)
+        {
+            XmlWriterSettings setting = new XmlWriterSettings { Indent = true };
+            ExportAPwdCat(userModel, setting);
+        }
+
+        private static void ExportAPwdCat(UserModel userModel, XmlWriterSettings setting)
+        {
+            string file = Path.Combine(userModel.Home, "APwd-Cat.xml");
+            StreamWriter stream = new StreamWriter(file);
+            using (XmlWriter writer = XmlWriter.Create(stream, setting))
+            {
+                writer.WriteStartElement("Amon");
+
+                writer.WriteElementString("App", "APwd");
+                writer.WriteElementString("Ver", "1");
+
+                writer.WriteStartElement("Cats");
+                foreach (Cat cat in userModel.DBA.ListCat(""))
+                {
+                    cat.ToXml(writer);
+                }
+                writer.WriteEndElement();
+
+                writer.WriteEndElement();
+            }
+            stream.Close();
+        }
+        #endregion
+
         private void BtOk_Click(object sender, System.EventArgs e)
         {
-            Reddd(_UserModel);
+            Export(_UserModel);
         }
 
         private void BtNo_Click(object sender, System.EventArgs e)

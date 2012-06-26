@@ -179,7 +179,12 @@ namespace Me.Amon.Da
 
         public IList<Cat> ListCat(string parentId)
         {
-            IList<Cat> cats = Container.Query<Cat>(
+            if (string.IsNullOrWhiteSpace(parentId))
+            {
+                return Container.Query<Cat>();
+            }
+
+            return Container.Query<Cat>(
                 delegate(Cat cat)
                 {
                     return cat.Parent == parentId;
@@ -188,7 +193,6 @@ namespace Me.Amon.Da
                 {
                     return a.Order.CompareTo(b.Order);
                 });
-            return cats;
         }
         #endregion
 
