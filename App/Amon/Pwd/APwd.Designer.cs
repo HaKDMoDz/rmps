@@ -42,11 +42,11 @@
             this.IlCatTree = new System.Windows.Forms.ImageList(this.components);
             this.LbKeyList = new System.Windows.Forms.ListBox();
             this.PlBody = new System.Windows.Forms.Panel();
-            this.FbFind = new Me.Amon.Pwd.Bean.FindBar();
             this.TbTool = new System.Windows.Forms.ToolStrip();
             this.CmKey = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.UcTime = new System.Windows.Forms.Timer(this.components);
+            this.FbFind = new Me.Amon.Pwd.Bean.FindBar();
             this.SsEcho.SuspendLayout();
             this.TcTool.ContentPanel.SuspendLayout();
             this.TcTool.TopToolStripPanel.SuspendLayout();
@@ -191,11 +191,8 @@
             this.LbKeyList.Size = new System.Drawing.Size(220, 165);
             this.LbKeyList.TabIndex = 0;
             this.LbKeyList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.LbKeyList_DrawItem);
-            this.LbKeyList.SelectedIndexChanged += new System.EventHandler(this.LbKeyList_SelectedIndexChanged);
-            this.LbKeyList.DragDrop += new System.Windows.Forms.DragEventHandler(this.LbKeyList_DragDrop);
-            this.LbKeyList.DragOver += new System.Windows.Forms.DragEventHandler(this.LbKeyList_DragOver);
-            this.LbKeyList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LbKeyList_MouseDown);
             this.LbKeyList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LbKeyList_MouseUp);
+            this.LbKeyList.SelectedIndexChanged += new System.EventHandler(this.LbKeyList_SelectedIndexChanged);
             // 
             // PlBody
             // 
@@ -204,15 +201,6 @@
             this.PlBody.Name = "PlBody";
             this.PlBody.Size = new System.Drawing.Size(340, 292);
             this.PlBody.TabIndex = 1;
-            // 
-            // FbFind
-            // 
-            this.FbFind.APwd = null;
-            this.FbFind.Dock = System.Windows.Forms.DockStyle.Top;
-            this.FbFind.Location = new System.Drawing.Point(0, 0);
-            this.FbFind.Name = "FbFind";
-            this.FbFind.Size = new System.Drawing.Size(340, 29);
-            this.FbFind.TabIndex = 0;
             // 
             // TbTool
             // 
@@ -230,6 +218,15 @@
             // UcTime
             // 
             this.UcTime.Tick += new System.EventHandler(this.UcTime_Tick);
+            // 
+            // FbFind
+            // 
+            this.FbFind.APwd = null;
+            this.FbFind.Dock = System.Windows.Forms.DockStyle.Top;
+            this.FbFind.Location = new System.Drawing.Point(0, 0);
+            this.FbFind.Name = "FbFind";
+            this.FbFind.Size = new System.Drawing.Size(340, 29);
+            this.FbFind.TabIndex = 0;
             // 
             // APwd
             // 

@@ -411,18 +411,18 @@ namespace Me.Amon.Pwd
         private void LbKeyList_MouseDown(object sender, MouseEventArgs e)
         {
             Main.LogInfo("LbKeyList_MouseDown");
-            int idx = LbKeyList.IndexFromPoint(e.X, e.Y);
-            if (idx < 0 || idx >= LbKeyList.Items.Count)
-            {
-                return;
-            }
+            //int idx = LbKeyList.SelectedIndex;
+            //if (idx < 0 || idx != LbKeyList.IndexFromPoint(e.X, e.Y))
+            //{
+            //    return;
+            //}
 
-            //LbKeyList.SelectedIndex = idx;
-            Key key = LbKeyList.Items[idx] as Key;
-            if (key != null)
-            {
-                LbKeyList.DoDragDrop(key, DragDropEffects.All);
-            }
+            //////LbKeyList.SelectedIndex = idx;
+            //Key key = LbKeyList.SelectedItem as Key;
+            //if (key != null)
+            //{
+            //    //LbKeyList.DoDragDrop(key, DragDropEffects.All);
+            //}
         }
 
         private void LbKeyList_DragDrop(object sender, DragEventArgs e)
@@ -436,6 +436,11 @@ namespace Me.Amon.Pwd
             //}
 
             //LbKeyList.SelectedIndex = idx;
+        }
+
+        private void LbKeyList_DragEnter(object sender, DragEventArgs e)
+        {
+            Main.LogInfo("LbKeyList_DragEnter");
         }
 
         private void LbKeyList_DragOver(object sender, DragEventArgs e)
@@ -883,18 +888,42 @@ namespace Me.Amon.Pwd
             {
                 return;
             }
+            Cat curCat = node.Tag as Cat;
+            if (curCat == null)
+            {
+                return;
+            }
+
             TreeNode parent = node.Parent;
             if (parent == null || parent == _RootNode)
             {
                 return;
             }
+            Cat parentCat = parent.Tag as Cat;
+            if (parentCat == null)
+            {
+                return;
+            }
+
             TreeNode grand = parent.Parent;
             if (grand == null)
             {
                 return;
             }
-            parent.Nodes.Remove(node);
+            Cat grandCat = grand.Tag as Cat;
+            if (grandCat == null)
+            {
+                return;
+            }
+
+            node.Remove();
             grand.Nodes.Add(node);
+
+            curCat.Parent = grandCat.Id;
+            parentCat.IsLeaf = parent.Nodes.Count < 1;
+
+            SortCat(parent);
+            SortCat(grand);
 
             TvCatTree.SelectedNode = node;
         }
@@ -909,18 +938,36 @@ namespace Me.Amon.Pwd
             {
                 return;
             }
+            Cat curCat = node.Tag as Cat;
+            if (curCat == null)
+            {
+                return;
+            }
+
             TreeNode prev = node.PrevNode;
             if (prev == null || prev == _RootNode)
             {
                 return;
             }
+            Cat prevCat = prev.Tag as Cat;
+            if (prevCat == null)
+            {
+                return;
+            }
+
             TreeNode parent = node.Parent;
             if (parent == null)
             {
                 return;
             }
-            parent.Nodes.Remove(node);
+            node.Remove();
             prev.Nodes.Add(node);
+
+            curCat.Parent = prevCat.Id;
+            prevCat.IsLeaf = false;
+
+            SortCat(parent);
+            SortCat(prev);
 
             TvCatTree.SelectedNode = node;
         }
