@@ -33,6 +33,8 @@ namespace Me.Amon.Pwd._Key
             _HomeDir = rootDir;
 
             InitializeComponent();
+
+            this.Icon = Me.Amon.Properties.Resources.Icon;
         }
         #endregion
 

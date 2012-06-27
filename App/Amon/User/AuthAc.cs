@@ -26,6 +26,8 @@ namespace Me.Amon.User
             _UserModel = userModel;
 
             InitializeComponent();
+
+            this.Icon = Me.Amon.Properties.Resources.Icon;
         }
 
         public void InitOnce()

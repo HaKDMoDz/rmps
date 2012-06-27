@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Text));
             this.TbText = new System.Windows.Forms.TextBox();
             this.BtOk = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -66,7 +65,6 @@
             this.Controls.Add(this.BtOk);
             this.Controls.Add(this.TbText);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Text";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

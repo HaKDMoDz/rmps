@@ -26,6 +26,8 @@ namespace Me.Amon.Pwd._Cat
             _HomeDir = homeDir;
 
             InitializeComponent();
+
+            this.Icon = Me.Amon.Properties.Resources.Icon;
         }
 
         public void InitOnce(int icoSize)

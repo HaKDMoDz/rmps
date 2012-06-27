@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Alert));
             this.PbIcon = new System.Windows.Forms.PictureBox();
             this.TbInfo = new System.Windows.Forms.TextBox();
             this.BtOk = new System.Windows.Forms.Button();
@@ -78,7 +77,6 @@
             this.Controls.Add(this.TbInfo);
             this.Controls.Add(this.PbIcon);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Alert";

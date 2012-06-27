@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(APwd));
             this.MbMenu = new System.Windows.Forms.MenuStrip();
             this.SsEcho = new System.Windows.Forms.StatusStrip();
             this.TssEcho = new System.Windows.Forms.ToolStripStatusLabel();
@@ -236,7 +235,6 @@
             this.Controls.Add(this.TcTool);
             this.Controls.Add(this.SsEcho);
             this.Controls.Add(this.MbMenu);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.MbMenu;
             this.Name = "APwd";

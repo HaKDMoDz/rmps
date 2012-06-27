@@ -24,7 +24,7 @@ namespace Me.Amon
         }
         #endregion
 
-        #region 全局函数
+        #region 数据导入
         public static void Import(UserModel userModel)
         {
             XmlReaderSettings setting = new XmlReaderSettings { IgnoreWhitespace = true };
@@ -120,7 +120,7 @@ namespace Me.Amon
         }
         #endregion
 
-        #region
+        #region 数据导出
         public static void Export(UserModel userModel)
         {
             XmlWriterSettings setting = new XmlWriterSettings { Indent = true };

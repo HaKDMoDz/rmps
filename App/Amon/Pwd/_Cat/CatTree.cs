@@ -21,6 +21,8 @@ namespace Me.Amon.Pwd._Cat
             _UserModel = userModel;
 
             InitializeComponent();
+
+            this.Icon = Me.Amon.Properties.Resources.Icon;
         }
 
         public void Init(ImageList imgList)

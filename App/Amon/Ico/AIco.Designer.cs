@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AIco));
             this.IlIco = new System.Windows.Forms.ImageList(this.components);
             this.PbMenu = new System.Windows.Forms.PictureBox();
             this.LlEcho = new System.Windows.Forms.Label();
@@ -162,7 +161,6 @@
             this.Controls.Add(this.LlEcho);
             this.Controls.Add(this.PbMenu);
             this.Controls.Add(this.TcIco);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "AIco";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogEdit));
             this.LbLog = new System.Windows.Forms.ListBox();
             this.TbLog = new System.Windows.Forms.TextBox();
             this.BtResume = new System.Windows.Forms.Button();
@@ -97,7 +96,6 @@
             this.Controls.Add(this.TbLog);
             this.Controls.Add(this.LbLog);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LogEdit";

@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            this.NiTray = new System.Windows.Forms.NotifyIcon(this.components);
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MgTopMost = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSep0 = new System.Windows.Forms.ToolStripSeparator();
@@ -39,6 +37,7 @@
             this.MgABar = new System.Windows.Forms.ToolStripMenuItem();
             this.MgARen = new System.Windows.Forms.ToolStripMenuItem();
             this.MgAIco = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiASql = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.MgSignUp = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSignIn = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,18 +54,10 @@
             this.IlApp = new System.Windows.Forms.ImageList(this.components);
             this.IsApp = new System.Windows.Forms.ImageList(this.components);
             this.LbApp = new System.Windows.Forms.ListBox();
-            this.MiASql = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiASpy = new System.Windows.Forms.ToolStripMenuItem();
             this.CmMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbApp)).BeginInit();
             this.SuspendLayout();
-            // 
-            // NiTray
-            // 
-            this.NiTray.BalloonTipTitle = "阿木提示";
-            this.NiTray.Icon = ((System.Drawing.Icon)(resources.GetObject("NiTray.Icon")));
-            this.NiTray.Text = "阿木导航";
-            this.NiTray.Visible = true;
-            this.NiTray.DoubleClick += new System.EventHandler(this.NiTray_DoubleClick);
             // 
             // CmMenu
             // 
@@ -90,9 +81,10 @@
             this.toolStripSeparator1,
             this.MgInfo,
             this.MgExit,
-            this.MiReset});
+            this.MiReset,
+            this.MiASpy});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(164, 402);
+            this.CmMenu.Size = new System.Drawing.Size(164, 424);
             // 
             // MgTopMost
             // 
@@ -142,6 +134,13 @@
             this.MgAIco.Size = new System.Drawing.Size(163, 22);
             this.MgAIco.Text = "图标编辑器(&I)";
             this.MgAIco.Click += new System.EventHandler(this.MgAIco_Click);
+            // 
+            // MiASql
+            // 
+            this.MiASql.Name = "MiASql";
+            this.MiASql.Size = new System.Drawing.Size(163, 22);
+            this.MiASql.Text = "数据库工具(&D)";
+            this.MiASql.Click += new System.EventHandler(this.MiASql_Click);
             // 
             // MgSep1
             // 
@@ -258,12 +257,12 @@
             this.LbApp.Size = new System.Drawing.Size(120, 111);
             this.LbApp.TabIndex = 2;
             // 
-            // MiASql
+            // MiASpy
             // 
-            this.MiASql.Name = "MiASql";
-            this.MiASql.Size = new System.Drawing.Size(163, 22);
-            this.MiASql.Text = "数据库工具(&D)";
-            this.MiASql.Click += new System.EventHandler(this.MiASql_Click);
+            this.MiASpy.Name = "MiASpy";
+            this.MiASpy.Size = new System.Drawing.Size(163, 22);
+            this.MiASpy.Text = "对象查看器(&Y)";
+            this.MiASpy.Click += new System.EventHandler(this.MiASpy_Click);
             // 
             // Main
             // 
@@ -274,7 +273,6 @@
             this.Controls.Add(this.LbApp);
             this.Controls.Add(this.PbApp);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Main";
@@ -292,7 +290,6 @@
 
         #endregion
 
-        private System.Windows.Forms.NotifyIcon NiTray;
         private System.Windows.Forms.ContextMenuStrip CmMenu;
         private System.Windows.Forms.ToolStripMenuItem MgTopMost;
         private System.Windows.Forms.ToolStripMenuItem MgTray;
@@ -318,6 +315,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem MiReset;
         private System.Windows.Forms.ToolStripMenuItem MiASql;
+        private System.Windows.Forms.ToolStripMenuItem MiASpy;
 
 
     }

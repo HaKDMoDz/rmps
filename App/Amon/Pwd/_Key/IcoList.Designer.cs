@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IcoList));
             this.LvIco = new System.Windows.Forms.ListView();
+            this.IlIco = new System.Windows.Forms.ImageList(this.components);
             this.BnOk = new System.Windows.Forms.Button();
             this.BnNo = new System.Windows.Forms.Button();
-            this.IlIco = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
             // 
             // LvIco
@@ -46,6 +45,12 @@
             this.LvIco.TabIndex = 0;
             this.LvIco.UseCompatibleStateImageBehavior = false;
             this.LvIco.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LvIco_MouseDoubleClick);
+            // 
+            // IlIco
+            // 
+            this.IlIco.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.IlIco.ImageSize = new System.Drawing.Size(32, 32);
+            this.IlIco.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // BnOk
             // 
@@ -68,12 +73,6 @@
             this.BnNo.UseVisualStyleBackColor = true;
             this.BnNo.Click += new System.EventHandler(this.BnNo_Click);
             // 
-            // IlIco
-            // 
-            this.IlIco.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.IlIco.ImageSize = new System.Drawing.Size(32, 32);
-            this.IlIco.TransparentColor = System.Drawing.Color.Transparent;
-            // 
             // IcoList
             // 
             this.AcceptButton = this.BnOk;
@@ -85,7 +84,6 @@
             this.Controls.Add(this.BnOk);
             this.Controls.Add(this.LvIco);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "IcoList";

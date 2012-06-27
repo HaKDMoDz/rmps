@@ -29,6 +29,7 @@ namespace Me.Amon.User
 
             InitializeComponent();
 
+            this.Icon = Me.Amon.Properties.Resources.Icon;
             BeanUtil.CenterToParent(this, owner);
         }
         #endregion

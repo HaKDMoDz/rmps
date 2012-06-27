@@ -1,9 +1,10 @@
- using System;
+using System;
 using System.Windows.Forms;
 using Me.Amon.Da;
 using Me.Amon.Event;
 using Me.Amon.Pwd;
 using Me.Amon.Util;
+using Me.Amon.Properties;
 
 namespace Me.Amon.Pwd._Cat
 {
@@ -14,6 +15,8 @@ namespace Me.Amon.Pwd._Cat
         public CatEdit()
         {
             InitializeComponent();
+
+            this.Icon = Me.Amon.Properties.Resources.Icon;
         }
 
         public void Init()

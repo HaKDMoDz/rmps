@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SignAc));
             this.PbLogo = new System.Windows.Forms.PictureBox();
             this.PbMenu = new System.Windows.Forms.PictureBox();
             this.BtOk = new System.Windows.Forms.Button();
@@ -183,7 +182,6 @@
             this.Controls.Add(this.PbMenu);
             this.Controls.Add(this.PbLogo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SignAc";

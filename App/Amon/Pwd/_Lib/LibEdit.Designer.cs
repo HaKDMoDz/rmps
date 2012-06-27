@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LibEdit));
             this.TvLibView = new System.Windows.Forms.TreeView();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MiAppendLibd = new System.Windows.Forms.ToolStripMenuItem();
@@ -143,7 +142,6 @@
             this.Controls.Add(this.TvLibView);
             this.Controls.Add(this.BtUpdate);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LibEdit";

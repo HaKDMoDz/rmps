@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AuthRc));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LbPass = new System.Windows.Forms.Label();
             this.TbPass = new System.Windows.Forms.TextBox();
@@ -101,7 +100,6 @@
             this.Controls.Add(this.LbPass);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AuthRc";

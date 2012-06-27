@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ABar));
             this.LbOpt = new System.Windows.Forms.Label();
             this.CbOpt = new System.Windows.Forms.ComboBox();
             this.PbIcon = new System.Windows.Forms.PictureBox();
@@ -189,7 +188,6 @@
             this.Controls.Add(this.CbOpt);
             this.Controls.Add(this.LbOpt);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "ABar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DbConfig));
             this.LlDriver = new System.Windows.Forms.Label();
             this.CbDriver = new System.Windows.Forms.ComboBox();
             this.LlUri = new System.Windows.Forms.Label();
@@ -149,7 +148,6 @@
             this.Controls.Add(this.CbDriver);
             this.Controls.Add(this.LlDriver);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DbConfig";

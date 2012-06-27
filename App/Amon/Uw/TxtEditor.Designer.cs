@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TxtEditor));
             this.TbTxt = new System.Windows.Forms.TextBox();
             this.CkWrap = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
@@ -63,7 +62,6 @@
             this.ClientSize = new System.Drawing.Size(384, 262);
             this.Controls.Add(this.CkWrap);
             this.Controls.Add(this.TbTxt);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TxtEditor";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

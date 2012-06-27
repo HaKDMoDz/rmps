@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ARen));
             this.TcRule = new System.Windows.Forms.TabControl();
             this.TpRuleInf = new System.Windows.Forms.TabPage();
             this.GvInfo = new System.Windows.Forms.DataGridView();
@@ -404,7 +403,6 @@
             this.Controls.Add(this.PbSelect);
             this.Controls.Add(this.TcRule);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "ARen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KeyIcon));
             this.LsDir = new System.Windows.Forms.ListBox();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MiAppend = new System.Windows.Forms.ToolStripMenuItem();
@@ -96,7 +95,6 @@
             this.ClientSize = new System.Drawing.Size(398, 273);
             this.Controls.Add(this.LsDir);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "KeyIcon";

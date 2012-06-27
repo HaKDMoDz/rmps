@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Pass));
             this.TbPass = new System.Windows.Forms.TextBox();
             this.BtOk = new System.Windows.Forms.Button();
             this.Worker = new System.ComponentModel.BackgroundWorker();
@@ -73,7 +72,6 @@
             this.Controls.Add(this.BtOk);
             this.Controls.Add(this.TbPass);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Pass";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

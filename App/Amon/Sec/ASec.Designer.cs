@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ASec));
             this.BtDo = new System.Windows.Forms.Button();
             this.LblEcho = new System.Windows.Forms.Label();
             this.Worker = new System.ComponentModel.BackgroundWorker();
@@ -137,7 +136,6 @@
             this.Controls.Add(this.PbMenu);
             this.Controls.Add(this.LblEcho);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "ASec";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

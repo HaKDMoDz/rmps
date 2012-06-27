@@ -28,6 +28,8 @@ namespace Me.Amon.Ren
             _UserModel = userModel;
 
             InitializeComponent();
+
+            this.Icon = Me.Amon.Properties.Resources.Icon;
         }
         #endregion
 

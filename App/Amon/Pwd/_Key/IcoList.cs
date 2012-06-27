@@ -21,6 +21,8 @@ namespace Me.Amon.Pwd._Key
 
             InitializeComponent();
 
+            this.Icon = Me.Amon.Properties.Resources.Icon;
+
             if (_MIcon != null)
             {
                 foreach (SingleIcon sIcon in mIcon)

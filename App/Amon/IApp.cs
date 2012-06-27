@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace Me.Amon
 {
@@ -7,6 +8,8 @@ namespace Me.Amon
         int AppId { get; set; }
 
         Form Form { get; }
+
+        Icon Icon { get; set; }
 
         void Show();
 

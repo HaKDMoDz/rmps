@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Edit));
             this.TbText = new System.Windows.Forms.TextBox();
             this.BtNo = new System.Windows.Forms.Button();
             this.BtOk = new System.Windows.Forms.Button();
@@ -80,7 +79,6 @@
             this.Controls.Add(this.BtNo);
             this.Controls.Add(this.TbText);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Edit";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

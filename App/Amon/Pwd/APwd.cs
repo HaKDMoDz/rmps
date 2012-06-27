@@ -60,6 +60,8 @@ namespace Me.Amon.Pwd
             _UserModel = userModel;
 
             InitializeComponent();
+
+            this.Icon = Me.Amon.Properties.Resources.Icon;
         }
         #endregion
 
@@ -2296,7 +2298,7 @@ namespace Me.Amon.Pwd
         /// </summary>
         public void ShowAbout()
         {
-            new About().ShowDialog(this);
+            Main.ShowAbout(this);
         }
         #endregion
         #endregion

@@ -67,6 +67,20 @@ namespace Me.Amon.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap AppCur {
+            get {
+                object obj = ResourceManager.GetObject("AppCur", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap AppNan {
+            get {
+                object obj = ResourceManager.GetObject("AppNan", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap CurDef {
             get {
                 object obj = ResourceManager.GetObject("CurDef", resourceCulture);
@@ -116,6 +130,13 @@ namespace Me.Amon.Properties {
             }
         }
         
+        internal static System.Drawing.Icon Icon {
+            get {
+                object obj = ResourceManager.GetObject("Icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Info {
             get {
                 object obj = ResourceManager.GetObject("Info", resourceCulture);
@@ -140,6 +161,13 @@ namespace Me.Amon.Properties {
         internal static System.Drawing.Bitmap Logo {
             get {
                 object obj = ResourceManager.GetObject("Logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Logo16 {
+            get {
+                object obj = ResourceManager.GetObject("Logo16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

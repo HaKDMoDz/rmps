@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CatIcon));
             this.IlPng = new System.Windows.Forms.ImageList(this.components);
             this.LvPng = new System.Windows.Forms.ListView();
             this.BtSelect = new System.Windows.Forms.Button();
@@ -84,7 +83,7 @@
             this.BtCancel.UseVisualStyleBackColor = true;
             this.BtCancel.Click += new System.EventHandler(this.BtCancel_Click);
             // 
-            // PngSeeker
+            // CatIcon
             // 
             this.AcceptButton = this.BtSelect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -96,10 +95,9 @@
             this.Controls.Add(this.BtSelect);
             this.Controls.Add(this.LvPng);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "PngSeeker";
+            this.Name = "CatIcon";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "图标管理";
             this.ResumeLayout(false);

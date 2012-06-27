@@ -8,6 +8,8 @@ namespace Me.Amon.Uw
         public Error()
         {
             InitializeComponent();
+
+            this.Icon = Me.Amon.Properties.Resources.Icon;
         }
 
         public void Show(Form owner, Exception error)

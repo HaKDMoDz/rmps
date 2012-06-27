@@ -116,13 +116,14 @@
             // 
             // PbApp
             // 
+            this.PbApp.Image = global::Me.Amon.Properties.Resources.AppCur;
             this.PbApp.Location = new System.Drawing.Point(10, 16);
             this.PbApp.Name = "PbApp";
             this.PbApp.Size = new System.Drawing.Size(32, 32);
             this.PbApp.TabIndex = 0;
             this.PbApp.TabStop = false;
-            this.PbApp.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PbApp_MouseMove);
             this.PbApp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PbApp_MouseDown);
+            this.PbApp.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PbApp_MouseMove);
             this.PbApp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PbApp_MouseUp);
             // 
             // AppWindow

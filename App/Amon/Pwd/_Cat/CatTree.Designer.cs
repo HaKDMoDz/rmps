@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CatTree));
             this.TvCatTree = new System.Windows.Forms.TreeView();
             this.BtSelect = new System.Windows.Forms.Button();
             this.BtCancel = new System.Windows.Forms.Button();
@@ -67,7 +66,7 @@
             this.BtCancel.UseVisualStyleBackColor = true;
             this.BtCancel.Click += new System.EventHandler(this.BtCancel_Click);
             // 
-            // CatView
+            // CatTree
             // 
             this.AcceptButton = this.BtSelect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -78,10 +77,9 @@
             this.Controls.Add(this.BtSelect);
             this.Controls.Add(this.TvCatTree);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "CatView";
+            this.Name = "CatTree";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "类别";

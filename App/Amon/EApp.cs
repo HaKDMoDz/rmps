@@ -73,6 +73,7 @@ namespace Me.Amon
         public const int IAPP_AICO = 16;
         public const int IAPP_AIMG = 32;
         public const int IAPP_ASPY = 64;
+        public const int IAPP_ASQL = 128;
 
         public const string FILE_OPEN_ALL = "所有文件|*.*";
         public const string FILE_OPEN_IMG = "图片文件（*.png,*.jpg,*.bmp）|*.png;*.jpg;*.jpeg;*.jpe;*.jfif;*.bmp;*.dib;*.rle|PNG文件（*.png）|*.png|JPG文件（*.jpg,*.jpeg,*.jpe,*.jfif）|*.jpg;*.jpeg;*.jpe;*.jfif|BMP文件（*.bmp,*dib,*.rle）|*.bmp;*.dib;*.rle";

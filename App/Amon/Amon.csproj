@@ -1485,6 +1485,9 @@
     <EmbeddedResource Include="Sec\V\Wiz\AWiz.resx">
       <DependentUpon>AWiz.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Spy\ASpy.resx">
+      <DependentUpon>ASpy.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Spy\V\App.resx">
       <DependentUpon>App.cs</DependentUpon>
     </EmbeddedResource>
@@ -1615,13 +1618,17 @@
     <Content Include="Logo\logo.ico" />
     <Content Include="Logo\logo.svg" />
     <Content Include="Logo\logo128.png" />
-    <Content Include="Logo\logo16.png" />
+    <Content Include="Logo\Logo16.png" />
     <Content Include="Logo\logo24.png" />
     <Content Include="Logo\logo256.png" />
     <Content Include="Logo\logo32.png" />
     <Content Include="Logo\logo48.png" />
     <Content Include="Logo\logo64.png" />
     <Content Include="Logo\logo96.png" />
+    <None Include="Resources\Icon.ico" />
+    <None Include="Resources\Logo16.png" />
+    <None Include="Resources\AppCur.png" />
+    <None Include="Resources\AppNan.png" />
     <None Include="Resources\Logo32.png" />
     <None Include="Resources\Logo24.png" />
     <None Include="Resources\PosSel.png" />

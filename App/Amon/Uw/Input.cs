@@ -8,6 +8,8 @@ namespace Me.Amon.Uw
         public Input()
         {
             InitializeComponent();
+
+            this.Icon = Me.Amon.Properties.Resources.Icon;
         }
 
         public void Show(Form owner, string message, string deftext)

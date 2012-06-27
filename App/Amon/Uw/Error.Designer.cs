@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Error));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LbInfo = new System.Windows.Forms.Label();
             this.TbInfo = new System.Windows.Forms.TextBox();
@@ -89,7 +88,6 @@
             this.Controls.Add(this.TbInfo);
             this.Controls.Add(this.LbInfo);
             this.Controls.Add(this.pictureBox1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Name = "Error";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

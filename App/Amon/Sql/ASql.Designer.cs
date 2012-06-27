@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ASql));
             this.PbMenu = new System.Windows.Forms.PictureBox();
             this.LblEcho = new System.Windows.Forms.Label();
             this.BnExecute = new System.Windows.Forms.Button();
@@ -172,7 +171,6 @@
             this.Controls.Add(this.BnExecute);
             this.Controls.Add(this.LblEcho);
             this.Controls.Add(this.PbMenu);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ASql";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "数据库工具";

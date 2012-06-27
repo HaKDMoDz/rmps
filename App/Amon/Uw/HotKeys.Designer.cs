@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HotKeys));
             this.DvKeys = new System.Windows.Forms.DataGridView();
             this.BtOk = new System.Windows.Forms.Button();
             this.Key = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -98,7 +97,6 @@
             this.Controls.Add(this.BtOk);
             this.Controls.Add(this.DvKeys);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "HotKeys";

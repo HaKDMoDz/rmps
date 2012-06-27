@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Bar;
@@ -12,13 +13,13 @@ using Me.Amon.Properties;
 using Me.Amon.Pwd;
 using Me.Amon.Ren;
 using Me.Amon.Sec;
+using Me.Amon.Spy;
+using Me.Amon.Sql;
 using Me.Amon.User;
 using Me.Amon.User.Sign;
 using Me.Amon.Util;
 using Me.Amon.Uw;
 using Me.Amon.V;
-using Me.Amon.Sql;
-using System.Text;
 
 namespace Me.Amon
 {
@@ -39,6 +40,7 @@ namespace Me.Amon
         private ARen _ARen;
         private AIco _AIco;
         private ASql _ASql;
+        private ASpy _ASpy;
 
         private ILogo _ILogo;
         private bool _IsMouseDown;
@@ -58,11 +60,18 @@ namespace Me.Amon
             return MessageBox.Show(_IApp.Form, message, "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
         }
 
+        public static void ShowAbout(IWin32Window owner)
+        {
+            About about = new About();
+            about.ShowDialog(owner);
+        }
+
         public static void ShowWaiting(string message)
         {
             if (_Waiting == null)
             {
                 _Waiting = new Waiting();
+
             }
             BeanUtil.CenterToParent(_Waiting, _IApp.Form);
             _Waiting.Show(_IApp.Form, message);
@@ -169,6 +178,8 @@ namespace Me.Amon
         #region 窗口事件
         private void Main_Load(object sender, EventArgs e)
         {
+            Icon = Me.Amon.Properties.Resources.Icon;
+
             ChangeAppVisible(false);
 
             // 窗口位置
@@ -190,8 +201,7 @@ namespace Me.Amon
 
             // 托盘图标状态
             int pattern = Settings.Default.Pattern;
-            NiTray.Visible = (pattern & EApp.PATTERN_TRAY) != 0;
-            MgTray.Checked = NiTray.Visible;
+            SetTrayVisible((pattern & EApp.PATTERN_TRAY) != 0);
 
             // 系统徽标
             ChangeEmotion(Settings.Default.Emotion);
@@ -404,10 +414,11 @@ namespace Me.Amon
 
         private void MgTray_Click(object sender, EventArgs e)
         {
-            NiTray.Visible = !NiTray.Visible;
-            MgTray.Checked = NiTray.Visible;
+            bool visible = !MgTray.Checked;
+            MgTray.Checked = visible;
+            SetTrayVisible(visible);
 
-            if (NiTray.Visible)
+            if (visible)
             {
                 Settings.Default.Pattern |= EApp.PATTERN_TRAY;
             }
@@ -449,7 +460,7 @@ namespace Me.Amon
 
         private void MgInfo_Click(object sender, EventArgs e)
         {
-            new About().ShowDialog();
+            ShowAbout(this);
         }
 
         private void MgExit_Click(object sender, EventArgs e)
@@ -460,6 +471,33 @@ namespace Me.Amon
         #endregion
 
         #region 私有函数
+        private NotifyIcon NiTray;
+        private void SetTrayVisible(bool visible)
+        {
+            if (!visible)
+            {
+                if (NiTray != null)
+                {
+                    NiTray.Visible = false;
+                }
+            }
+            else
+            {
+                if (NiTray == null)
+                {
+                    NiTray = new NotifyIcon();
+                    NiTray.BalloonTipTitle = "阿木导航";
+                    NiTray.Icon = Me.Amon.Properties.Resources.Icon;
+                    NiTray.Text = "阿木导航";
+                    NiTray.Visible = true;
+                    NiTray.DoubleClick += new EventHandler(NiTray_DoubleClick);
+                }
+                NiTray.Visible = visible;
+            }
+
+            MgTray.Checked = visible;
+        }
+
         private SignAc _SignAc;
         private void SignAc(ESignAc signAc, AmonHandler<int> handler)
         {
@@ -629,6 +667,17 @@ namespace Me.Amon
             _IApp.Show();
         }
 
+        private void ShowASpy(int view)
+        {
+            if (_ASpy == null || _ASpy.IsDisposed)
+            {
+                _ASpy = new ASpy(_UserModel);
+            }
+
+            _IApp = _ASpy;
+            _IApp.Show();
+        }
+
         private void ShowLast()
         {
             if (_IApp == null || _IApp.IsDisposed || !_IApp.Visible)
@@ -717,10 +766,26 @@ namespace Me.Amon
                 return;
             }
 
-            if (_IApp.AppId != EApp.IAPP_AICO)
+            if (_IApp.AppId != EApp.IAPP_ASQL)
             {
                 _IApp.Visible = false;
-                ShowASql(EApp.IAPP_AICO);
+                ShowASql(EApp.IAPP_ASQL);
+                return;
+            }
+        }
+
+        private void MiASpy_Click(object sender, EventArgs e)
+        {
+            if (_IApp == null || !_IApp.Visible)
+            {
+                CheckUser(new AmonHandler<int>(ShowASpy));
+                return;
+            }
+
+            if (_IApp.AppId != EApp.IAPP_ASPY)
+            {
+                _IApp.Visible = false;
+                ShowASpy(EApp.IAPP_ASPY);
                 return;
             }
         }

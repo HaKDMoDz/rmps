@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
-using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using Me.Amon.Api.User32;
+using Me.Amon.Properties;
 
 namespace com.magickms.target.app
 {
@@ -37,11 +37,12 @@ namespace com.magickms.target.app
         {
             if (e.Button == MouseButtons.Left)
             {
-                Stream stream = File.OpenRead(@"ico\_cur.png");
-                var bmp = (Bitmap)Image.FromStream(stream);
-                stream.Close();
-                Cursor = new Cursor(bmp.GetHicon());
-                //PbApp.Image = Properties.Resources._run;
+                //Stream stream = File.OpenRead(@"ico\_cur.png");
+                //var bmp = (Bitmap)Image.FromStream(stream);
+                //stream.Close();
+                //Cursor = new Cursor(bmp.GetHicon());
+                Cursor = Cursors.Hand;
+                PbApp.Image = Resources.AppNan;
             }
         }
 
@@ -82,7 +83,7 @@ namespace com.magickms.target.app
                 _lastWindow = IntPtr.Zero;
 
                 Cursor = Cursors.Default;
-                //PbApp.Image = Properties.Resources._def;
+                PbApp.Image = Resources.AppCur;
             }
         }
 

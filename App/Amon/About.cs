@@ -11,6 +11,7 @@ namespace Me.Amon
         {
             InitializeComponent();
 
+            this.Icon = Me.Amon.Properties.Resources.Icon;
             this.Text = String.Format("关于 {0}", AssemblyTitle);
             this.LbName.Text = AssemblyProduct;
             this.LbVersion.Text = AssemblyVersion;

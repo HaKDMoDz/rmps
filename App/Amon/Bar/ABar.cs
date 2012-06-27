@@ -35,6 +35,8 @@ namespace Me.Amon.Bar
         public ABar(UserModel userModel)
         {
             InitializeComponent();
+
+            this.Icon = Me.Amon.Properties.Resources.Icon;
         }
         #endregion
 
