@@ -31,8 +31,8 @@
     <SuiteName>阿木软件</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>11</ApplicationRevision>
-    <ApplicationVersion>7.1.4.%2a</ApplicationVersion>
+    <ApplicationRevision>13</ApplicationRevision>
+    <ApplicationVersion>7.1.5.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -766,6 +766,7 @@
       <DependentUpon>ARen.cs</DependentUpon>
     </Compile>
     <Compile Include="Ren\ERen.cs" />
+    <Compile Include="Ren\TRen.cs" />
     <Compile Include="Reset.cs">
       <SubType>Form</SubType>
     </Compile>

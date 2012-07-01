@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using Me.Amon.Da;
 using Me.Amon.Event;
 using Me.Amon.Model;
-using Me.Amon.Properties;
 using Me.Amon.User.Sign;
 using Me.Amon.Util;
 
@@ -32,6 +31,8 @@ namespace Me.Amon.User
             _UserModel = userModel;
 
             InitializeComponent();
+
+            this.Icon = Me.Amon.Properties.Resources.Icon;
         }
 
         public void InitOnce()
@@ -170,14 +171,14 @@ namespace Me.Amon.User
 
         public void ShowWaiting()
         {
-            PbMenu.Image = Resources.Loading;
+            PbMenu.Image = Me.Amon.Properties.Resources.Loading;
             BtOk.Enabled = false;
             BtNo.Enabled = false;
         }
 
         public void HideWaiting()
         {
-            PbMenu.Image = Resources.Menu;
+            PbMenu.Image = Me.Amon.Properties.Resources.Menu;
             BtNo.Enabled = true;
             BtOk.Enabled = true;
         }

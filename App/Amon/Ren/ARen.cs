@@ -13,9 +13,8 @@ namespace Me.Amon.Ren
     public partial class ARen : Form, IApp
     {
         private UserModel _UserModel;
-        private DataTable _DataList;
         private Renamer _Renamer;
-        private string _SrcPath;
+        private List<TRen> _FileList;
 
         #region 构造函数
         public ARen()
@@ -55,10 +54,8 @@ namespace Me.Amon.Ren
         #region 事件处理
         private void ARen_Load(object sender, EventArgs e)
         {
-            _DataList = new DataTable();
-            _DataList.Columns.Add("OldName", typeof(string));
-            _DataList.Columns.Add("NewName", typeof(string));
-            GvName.DataSource = _DataList;
+            GvName.AutoGenerateColumns = false;
+            _FileList = new List<TRen>();
 
             _Renamer = new Renamer();
 
@@ -102,12 +99,9 @@ namespace Me.Amon.Ren
                 return;
             }
 
-            _SrcPath = FdBrowser.SelectedPath;
-            _DataList.Rows.Clear();
             int index = 0;
-            foreach (string file in Directory.GetFiles(_SrcPath))
+            foreach (string file in Directory.GetFiles(FdBrowser.SelectedPath))
             {
-                _DataList.Rows.Add(Path.GetFileName(file), "");
                 GvName.Rows[index++].DefaultCellStyle.BackColor = Color.White;
             }
         }
@@ -336,13 +330,91 @@ namespace Me.Amon.Ren
             _UserModel.DBA.DeleteVcs(ren);
             LsRule.Items.Remove(ren);
         }
+
+        private void GvName_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Link;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void GvName_DragDrop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                object obj = e.Data.GetData(DataFormats.FileDrop);
+                if (obj == null)
+                {
+                    return;
+                }
+                string[] arr = obj as string[];
+
+                AddFiles(arr);
+            }
+            catch (Exception ex)
+            {
+                Main.ShowError(ex);
+            }
+        }
+
+        private void GvName_MouseUp(object sender, MouseEventArgs e)
+        {
+
+        }
         #endregion
 
         #region 私有函数
+        private void AddFiles(string[] files)
+        {
+            if (files == null)
+            {
+                return;
+            }
+
+            int idx;
+            foreach (string file in files)
+            {
+                if (!File.Exists(file))
+                {
+                    continue;
+                }
+
+                if (GetDup(file) != null)
+                {
+                    continue;
+                }
+
+                idx = file.LastIndexOf(Path.DirectorySeparatorChar);
+                if (idx < 0)
+                {
+                    continue;
+                }
+
+                TRen item = new TRen { File = file, Path = file.Substring(0, idx), SrcName = Path.GetFileName(file) };
+                _FileList.Add(item);
+                GvName.Rows.Add(item.SrcName, "");
+            }
+        }
+
+        private TRen GetDup(string file)
+        {
+            foreach (TRen item in _FileList)
+            {
+                if (item.File == file)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+
         private bool DoReview()
         {
-            ShowEcho("");
-
             string rule = TbRule.Text;
             if (string.IsNullOrEmpty(rule))
             {
@@ -354,12 +426,14 @@ namespace Me.Amon.Ren
                 return false;
             }
 
-            if (string.IsNullOrEmpty(_SrcPath))
+            if (_FileList.Count < 1)
             {
-                Main.ShowAlert("请选择您要重命名的目录！");
+                Main.ShowAlert("请选择您要重命名的对象！");
                 PbSelect.Focus();
                 return false;
             }
+
+            ShowEcho("正在计算重命名……");
 
             if (!_Renamer.Init(rule))
             {
@@ -368,32 +442,29 @@ namespace Me.Amon.Ren
             }
 
             Dictionary<string, int> dic = new Dictionary<string, int>();
-            string src;
-            string dst;
             int idx = 0;
             int nc = 0;//无效命名数量
             int ec = 0;//重复命名数量
-            foreach (DataRow row in _DataList.Rows)
+            foreach (TRen ren in _FileList)
             {
-                src = row["OldName"] as string;
-                dst = _Renamer.Update(FdBrowser.SelectedPath, src);
-                if (string.IsNullOrEmpty(dst))
+                ren.DstName = _Renamer.Update(ren.File);
+                if (string.IsNullOrEmpty(ren.DstName))
                 {
                     //;
                     GvName.Rows[idx++].DefaultCellStyle.BackColor = Color.Blue;
                     nc += 1;
                     continue;
                 }
-                if (dic.ContainsKey(dst))
+                if (dic.ContainsKey(ren.DstName))
                 {
-                    row["NewName"] = dst;
+                    GvName.Rows[idx].Cells[""].Value = ren;
                     GvName.Rows[idx++].DefaultCellStyle.BackColor = Color.Red;
                     ec += 1;
                     continue;
                 }
 
-                row["NewName"] = dst;
-                dic[dst] = idx;
+                dic[ren.DstName] = idx;
+                GvName.Rows[idx].Cells[1].Value = ren.DstName;
                 GvName.Rows[idx++].DefaultCellStyle.BackColor = Color.White;
             }
             if (nc > 0 || ec > 0)
@@ -401,47 +472,68 @@ namespace Me.Amon.Ren
                 ShowEcho(string.Format("存在命名冲突，请调整命名规则后重试！", nc, ec));
                 return false;
             }
+            ShowEcho("您可以进行重命名了……");
             return true;
         }
 
         private void DoRename()
         {
-            ShowEcho("");
+            ShowEcho("正在进行重命名……");
+            string tmp = string.Format(ERen.TMP_PREFIX, DateTime.Now.ToFileTimeUtc());
 
-            string src = FdBrowser.SelectedPath;
-            string dst = NewDir(src);
-            if (string.IsNullOrEmpty(dst))
+            // 原有文件名更改为临时文件名
+            foreach (TRen ren in _FileList)
             {
-                Main.ShowAlert("请确认您是否拥有访问权限！");
-                return;
+                if (!File.Exists(ren.File))
+                {
+                    ren.Temp = null;
+                    continue;
+                }
+                if (ren.SrcName == ren.DstName)
+                {
+                    ren.Temp = null;
+                    continue;
+                }
+
+                ren.Temp = Path.Combine(ren.Path, tmp + ren.SrcName);
+                ren.FileAtt = File.GetAttributes(ren.Path);
+                File.Move(ren.File, ren.Temp);
             }
 
-            Directory.CreateDirectory(dst);
-            File.SetAttributes(dst, FileAttributes.Hidden);
+            FileAttributes att = GetAtt("");
 
-            string tmp;
-            string tmp1;
-            string tmp2;
-            foreach (DataRow row in _DataList.Rows)
+            // 临时文件名更改为目标文件名
+            foreach (TRen ren in _FileList)
             {
-                tmp1 = Path.Combine(src, row["OldName"] as string);
-                if (!File.Exists(tmp1))
+                if (string.IsNullOrEmpty(ren.Temp))
+                {
+                    continue;
+                }
+                if (!File.Exists(ren.Temp))
                 {
                     continue;
                 }
 
-                tmp = row["NewName"] as string;
-                tmp2 = Path.Combine(dst, tmp);
-                if (File.Exists(tmp2))
-                {
-                    string msg = string.Format("已存在名称为{0}且创建日期为{1}，\n文件大小为{2}的文件，确认要覆盖吗？", tmp, File.GetCreationTime(dst), Length(dst));
-                    if (DialogResult.Yes != Main.ShowConfirm(msg))
-                    {
-                        continue;
-                    }
-                }
-                File.Move(tmp1, tmp2);
+                tmp = Path.Combine(ren.Path, ren.DstName);
+                File.Move(ren.Temp, tmp);
+                File.SetAttributes(tmp, att);
             }
+
+            ShowEcho("恭喜，全部重命名成功！");
+        }
+
+        public void ShowEcho(string msg)
+        {
+            LbEcho.Text = msg;
+            TpTips.SetToolTip(LbEcho, msg);
+        }
+
+        private FileAttributes GetAtt(string file)
+        {
+            //if (CkArchive.Checked)
+            //{
+            //    return File.GetAttributes(file);
+            //}
 
             FileAttributes att = FileAttributes.Normal;
             if (CkReadOnly.Checked)
@@ -456,87 +548,23 @@ namespace Me.Amon.Ren
             {
                 att |= FileAttributes.Archive;
             }
-            foreach (DataRow row in _DataList.Rows)
-            {
-                tmp1 = Path.Combine(dst, row["NewName"] as string);
-                if (!File.Exists(tmp1))
-                {
-                    continue;
-                }
-
-                tmp = row["NewName"] as string;
-                tmp2 = Path.Combine(src, tmp);
-                if (File.Exists(tmp2))
-                {
-                    string msg = string.Format("已存在名称为{0}且创建日期为{1}，\n文件大小为{2}的文件，确认要覆盖吗？", tmp, File.GetCreationTime(dst), Length(dst));
-                    if (DialogResult.Yes != Main.ShowConfirm(msg))
-                    {
-                        tmp2 = Repeat(src, tmp);
-                    }
-                }
-                File.Move(tmp1, tmp2);
-                File.SetAttributes(tmp2, att);
-            }
-
-            Directory.Delete(dst);
-            ShowEcho("恭喜，全部重命名成功！");
-        }
-
-        private string Repeat(string path, string file)
-        {
-            string pre = Path.GetFileNameWithoutExtension(file);
-            string ext = Path.GetExtension(file);
-            int i = 1;
-            do
-            {
-                file = string.Format("{0} ({1}){2}", pre, i++, ext);
-            } while (File.Exists(Path.Combine(path, file)));
-
-
-            return file;
-        }
-
-        private string Length(string path)
-        {
-            long size = new FileInfo(path).Length;
-            if (size > 0x20000000)
-            {
-                size >>= 30;
-                return size + "G";
-            }
-            if (size > 0x20000)
-            {
-                size >>= 20;
-                return size + "M";
-            }
-            if (size > 0x200)
-            {
-                size >>= 10;
-                return size + "K";
-            }
-
-            return size + "B";
-        }
-
-        private string NewDir(string path)
-        {
-            string tmp;
-            for (int i = 0; i < 10; i += 1)
-            {
-                tmp = Path.Combine(path, "__amon__" + DateTime.UtcNow.ToFileTime().ToString() + "__amon__");
-                if (!Directory.Exists(tmp))
-                {
-                    return tmp;
-                }
-            }
-            return null;
-        }
-
-        private void ShowEcho(string msg)
-        {
-            LbEcho.Text = msg;
-            TpTips.SetToolTip(LbEcho, msg);
+            return att;
         }
         #endregion
+
+        private void BgWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+
+        }
+
+        private void BgWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+
+        }
+
+        private void BgWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+
+        }
     }
 }

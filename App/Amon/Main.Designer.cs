@@ -50,11 +50,11 @@
             this.MgInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.MgExit = new System.Windows.Forms.ToolStripMenuItem();
             this.MiReset = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiASpy = new System.Windows.Forms.ToolStripMenuItem();
             this.PbApp = new System.Windows.Forms.PictureBox();
             this.IlApp = new System.Windows.Forms.ImageList(this.components);
             this.IsApp = new System.Windows.Forms.ImageList(this.components);
             this.LbApp = new System.Windows.Forms.ListBox();
-            this.MiASpy = new System.Windows.Forms.ToolStripMenuItem();
             this.CmMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbApp)).BeginInit();
             this.SuspendLayout();
@@ -70,6 +70,7 @@
             this.MgARen,
             this.MgAIco,
             this.MiASql,
+            this.MiASpy,
             this.MgSep1,
             this.MgSignUp,
             this.MgSignIn,
@@ -81,10 +82,9 @@
             this.toolStripSeparator1,
             this.MgInfo,
             this.MgExit,
-            this.MiReset,
-            this.MiASpy});
+            this.MiReset});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(164, 424);
+            this.CmMenu.Size = new System.Drawing.Size(164, 402);
             // 
             // MgTopMost
             // 
@@ -220,7 +220,16 @@
             this.MiReset.Name = "MiReset";
             this.MiReset.Size = new System.Drawing.Size(163, 22);
             this.MiReset.Text = "重置(&R)";
+            this.MiReset.Visible = false;
             this.MiReset.Click += new System.EventHandler(this.MiReset_Click);
+            // 
+            // MiASpy
+            // 
+            this.MiASpy.Name = "MiASpy";
+            this.MiASpy.Size = new System.Drawing.Size(163, 22);
+            this.MiASpy.Text = "对象查看器(&Y)";
+            this.MiASpy.Visible = false;
+            this.MiASpy.Click += new System.EventHandler(this.MiASpy_Click);
             // 
             // PbApp
             // 
@@ -256,13 +265,6 @@
             this.LbApp.Name = "LbApp";
             this.LbApp.Size = new System.Drawing.Size(120, 111);
             this.LbApp.TabIndex = 2;
-            // 
-            // MiASpy
-            // 
-            this.MiASpy.Name = "MiASpy";
-            this.MiASpy.Size = new System.Drawing.Size(163, 22);
-            this.MiASpy.Text = "对象查看器(&Y)";
-            this.MiASpy.Click += new System.EventHandler(this.MiASpy_Click);
             // 
             // Main
             // 

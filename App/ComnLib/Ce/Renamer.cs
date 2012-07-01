@@ -491,9 +491,9 @@ namespace Me.Amon.Ce
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="file"></param>
+        /// <param name="filePath"></param>
         /// <returns></returns>
-        public string Update(string path, string file)
+        public string Update(string filePath)
         {
             if (!_Enough)
             {
@@ -501,16 +501,16 @@ namespace Me.Amon.Ce
                 return "";
             }
 
-            string name = Path.GetFileNameWithoutExtension(file);
+            string name = Path.GetFileNameWithoutExtension(filePath);
             if (string.IsNullOrEmpty(name))
             {
-                Error = "无效的文件信息：" + file;
+                Error = "无效的文件信息：" + filePath;
                 return "";
             }
 
             _Buffer.Clear();
 
-            string exts = Path.GetExtension(file);
+            string exts = Path.GetExtension(filePath);
             if (!string.IsNullOrEmpty(exts))
             {
                 exts = exts.Substring(1);
@@ -583,12 +583,12 @@ namespace Me.Amon.Ce
                 }
                 if (c == TMP_UPDATE_TIME)
                 {
-                    _Buffer.Append(File.GetLastWriteTime(Path.Combine(path, file)).ToString(_FmtList[ti++]));
+                    _Buffer.Append(File.GetLastWriteTime(filePath).ToString(_FmtList[ti++]));
                     continue;
                 }
                 if (c == TMP_CREATE_TIME)
                 {
-                    _Buffer.Append(File.GetCreationTime(Path.Combine(path, file)).ToString(_FmtList[ti++]));
+                    _Buffer.Append(File.GetCreationTime(filePath).ToString(_FmtList[ti++]));
                     continue;
                 }
                 if (c == NUMBER)
