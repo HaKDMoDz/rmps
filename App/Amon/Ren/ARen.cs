@@ -51,6 +51,14 @@ namespace Me.Amon.Ren
         }
         #endregion
 
+        #region 公共函数
+        public void ShowEcho(string msg)
+        {
+            LbEcho.Text = msg;
+            TpTips.SetToolTip(LbEcho, msg);
+        }
+        #endregion
+
         #region 事件处理
         private void ARen_Load(object sender, EventArgs e)
         {
@@ -362,9 +370,130 @@ namespace Me.Amon.Ren
             }
         }
 
-        private void GvName_MouseUp(object sender, MouseEventArgs e)
+        private void GvName_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Right)
+            {
+                return;
+            }
+            int idx = e.RowIndex;
+            if (idx < 0)
+            {
+                return;
+            }
+
+            GvName.Rows[idx].Selected = true;
+            CmFile.Show(MousePosition);
+        }
+
+        private void BgWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
 
+        }
+
+        private void BgWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+
+        }
+
+        private void BgWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+
+        }
+
+        private void MiAppend_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.OK != Main.ShowOpenFileDialog(this, EApp.FILE_OPEN_ALL, "", true))
+            {
+                return;
+            }
+            AddFiles(Main.OpenFileDialog.FileNames);
+        }
+
+        private void MiRemove_Click(object sender, EventArgs e)
+        {
+            if (GvName.SelectedRows.Count < 1)
+            {
+                return;
+            }
+            DataGridViewRow row = GvName.SelectedRows[0];
+            GvName.Rows.RemoveAt(row.Index);
+        }
+
+        private void MiMoveUp_Click(object sender, EventArgs e)
+        {
+            if (GvName.SelectedRows.Count < 1)
+            {
+                return;
+            }
+            DataGridViewRow row = GvName.SelectedRows[0];
+            //获取当前行
+            int idx = row.Index;
+
+            //如果当前行不是第一行
+            if (idx < 1)
+            {
+                return;
+            }
+
+            //获取当前行的上一行的索引
+            int tmp = idx - 1;
+
+            //当前行绑定的数据对象
+            TRen currRen = _FileList[idx];
+            //下一行绑定的数据对象
+            TRen nextRen = _FileList[tmp];
+
+            //将数据对象位置互换
+            _FileList[idx] = nextRen;
+            _FileList[tmp] = currRen;
+
+            GvName.Rows.RemoveAt(idx);
+            GvName.Rows.Insert(tmp, row);
+            GvName.Rows[tmp].Selected = true;
+
+            GvName.FirstDisplayedScrollingRowIndex = tmp;
+        }
+
+        private void MiMoveDown_Click(object sender, EventArgs e)
+        {
+            if (GvName.SelectedRows.Count < 1)
+            {
+                return;
+            }
+            DataGridViewRow row = GvName.SelectedRows[0];
+            //获取当前行
+            int idx = row.Index;
+
+            //如果当前行不是第一行
+            if (idx > _FileList.Count - 2)
+            {
+                return;
+            }
+
+            //获取当前行的上一行的索引
+            int tmp = idx + 1;
+
+            //当前行绑定的数据对象
+            TRen currRen = _FileList[idx];
+            //下一行绑定的数据对象
+            TRen nextRen = _FileList[tmp];
+
+            //将数据对象位置互换
+            _FileList[idx] = nextRen;
+            _FileList[tmp] = currRen;
+
+            GvName.Rows.RemoveAt(idx);
+            GvName.Rows.Insert(tmp, row);
+            GvName.Rows[tmp].Selected = true;
+
+            GvName.FirstDisplayedScrollingRowIndex = tmp;
+        }
+
+        private void MiClear_Click(object sender, EventArgs e)
+        {
+            GvName.Rows.Clear();
+            _FileList.Clear();
         }
         #endregion
 
@@ -395,9 +524,9 @@ namespace Me.Amon.Ren
                     continue;
                 }
 
-                TRen item = new TRen { File = file, Path = file.Substring(0, idx), SrcName = Path.GetFileName(file) };
-                _FileList.Add(item);
-                GvName.Rows.Add(item.SrcName, "");
+                TRen ren = new TRen { File = file, Path = file.Substring(0, idx), SrcName = Path.GetFileName(file) };
+                _FileList.Add(ren);
+                GvName.Rows.Add(ren.SrcName, "");
             }
         }
 
@@ -411,6 +540,29 @@ namespace Me.Amon.Ren
                 }
             }
             return null;
+        }
+
+        private FileAttributes GetAtt(string file)
+        {
+            //if (CkArchive.Checked)
+            //{
+            //    return File.GetAttributes(file);
+            //}
+
+            FileAttributes att = FileAttributes.Normal;
+            if (CkReadOnly.Checked)
+            {
+                att |= FileAttributes.ReadOnly;
+            }
+            if (CkHidden.Checked)
+            {
+                att |= FileAttributes.Hidden;
+            }
+            if (CkArchive.Checked)
+            {
+                att |= FileAttributes.Archive;
+            }
+            return att;
         }
 
         private bool DoReview()
@@ -521,50 +673,6 @@ namespace Me.Amon.Ren
 
             ShowEcho("恭喜，全部重命名成功！");
         }
-
-        public void ShowEcho(string msg)
-        {
-            LbEcho.Text = msg;
-            TpTips.SetToolTip(LbEcho, msg);
-        }
-
-        private FileAttributes GetAtt(string file)
-        {
-            //if (CkArchive.Checked)
-            //{
-            //    return File.GetAttributes(file);
-            //}
-
-            FileAttributes att = FileAttributes.Normal;
-            if (CkReadOnly.Checked)
-            {
-                att |= FileAttributes.ReadOnly;
-            }
-            if (CkHidden.Checked)
-            {
-                att |= FileAttributes.Hidden;
-            }
-            if (CkArchive.Checked)
-            {
-                att |= FileAttributes.Archive;
-            }
-            return att;
-        }
         #endregion
-
-        private void BgWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-
-        }
-
-        private void BgWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
-        {
-
-        }
-
-        private void BgWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-
-        }
     }
 }

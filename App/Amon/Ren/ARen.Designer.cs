@@ -257,9 +257,9 @@
             this.GvName.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.GvName.Size = new System.Drawing.Size(259, 212);
             this.GvName.TabIndex = 4;
+            this.GvName.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GvName_CellMouseUp);
             this.GvName.DragDrop += new System.Windows.Forms.DragEventHandler(this.GvName_DragDrop);
             this.GvName.DragEnter += new System.Windows.Forms.DragEventHandler(this.GvName_DragEnter);
-            this.GvName.MouseUp += new System.Windows.Forms.MouseEventHandler(this.GvName_MouseUp);
             // 
             // OldName
             // 
@@ -419,19 +419,21 @@
             this.toolStripSeparator2,
             this.MiClear});
             this.CmFile.Name = "CmFile";
-            this.CmFile.Size = new System.Drawing.Size(153, 148);
+            this.CmFile.Size = new System.Drawing.Size(142, 126);
             // 
             // MiAppend
             // 
             this.MiAppend.Name = "MiAppend";
             this.MiAppend.Size = new System.Drawing.Size(152, 22);
             this.MiAppend.Text = "追加(&A)";
+            this.MiAppend.Click += new System.EventHandler(this.MiAppend_Click);
             // 
             // MiRemove
             // 
             this.MiRemove.Name = "MiRemove";
             this.MiRemove.Size = new System.Drawing.Size(152, 22);
             this.MiRemove.Text = "移除(&R)";
+            this.MiRemove.Click += new System.EventHandler(this.MiRemove_Click);
             // 
             // toolStripSeparator1
             // 
@@ -443,12 +445,14 @@
             this.MiMoveUp.Name = "MiMoveUp";
             this.MiMoveUp.Size = new System.Drawing.Size(152, 22);
             this.MiMoveUp.Text = "上移一行(&U)";
+            this.MiMoveUp.Click += new System.EventHandler(this.MiMoveUp_Click);
             // 
             // MiMoveDown
             // 
             this.MiMoveDown.Name = "MiMoveDown";
             this.MiMoveDown.Size = new System.Drawing.Size(152, 22);
             this.MiMoveDown.Text = "下移一行(&D)";
+            this.MiMoveDown.Click += new System.EventHandler(this.MiMoveDown_Click);
             // 
             // toolStripSeparator2
             // 
@@ -460,6 +464,7 @@
             this.MiClear.Name = "MiClear";
             this.MiClear.Size = new System.Drawing.Size(152, 22);
             this.MiClear.Text = "清除所有(&C)";
+            this.MiClear.Click += new System.EventHandler(this.MiClear_Click);
             // 
             // ARen
             // 
