@@ -44,9 +44,7 @@
             this.CkReadOnly = new System.Windows.Forms.CheckBox();
             this.LbRule = new System.Windows.Forms.Label();
             this.TbRule = new System.Windows.Forms.TextBox();
-            this.GvName = new System.Windows.Forms.DataGridView();
-            this.OldName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GvFile = new System.Windows.Forms.DataGridView();
             this.BtReview = new System.Windows.Forms.Button();
             this.BtRename = new System.Windows.Forms.Button();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -58,12 +56,14 @@
             this.BgWorker = new System.ComponentModel.BackgroundWorker();
             this.CmFile = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CmRule = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.SrcFile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DstFile = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TcRule.SuspendLayout();
             this.TpRuleInf.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GvInfo)).BeginInit();
             this.TpRulePre.SuspendLayout();
             this.TpFileAtt.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GvName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GvFile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbSaveas)).BeginInit();
             this.SuspendLayout();
@@ -220,46 +220,31 @@
             this.TbRule.Size = new System.Drawing.Size(376, 25);
             this.TbRule.TabIndex = 2;
             // 
-            // GvName
+            // GvFile
             // 
-            this.GvName.AllowDrop = true;
-            this.GvName.AllowUserToAddRows = false;
-            this.GvName.AllowUserToDeleteRows = false;
-            this.GvName.AllowUserToResizeRows = false;
-            this.GvName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.GvFile.AllowDrop = true;
+            this.GvFile.AllowUserToAddRows = false;
+            this.GvFile.AllowUserToDeleteRows = false;
+            this.GvFile.AllowUserToResizeRows = false;
+            this.GvFile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.GvName.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GvName.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.OldName,
-            this.NewName});
-            this.GvName.Location = new System.Drawing.Point(243, 12);
-            this.GvName.MultiSelect = false;
-            this.GvName.Name = "GvName";
-            this.GvName.ReadOnly = true;
-            this.GvName.RowHeadersVisible = false;
-            this.GvName.RowTemplate.Height = 23;
-            this.GvName.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GvName.Size = new System.Drawing.Size(259, 212);
-            this.GvName.TabIndex = 4;
-            this.GvName.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GvName_CellMouseUp);
-            this.GvName.DragDrop += new System.Windows.Forms.DragEventHandler(this.GvName_DragDrop);
-            this.GvName.DragEnter += new System.Windows.Forms.DragEventHandler(this.GvName_DragEnter);
-            // 
-            // OldName
-            // 
-            this.OldName.DataPropertyName = "SrcName";
-            this.OldName.HeaderText = "原文件名";
-            this.OldName.Name = "OldName";
-            this.OldName.ReadOnly = true;
-            // 
-            // NewName
-            // 
-            this.NewName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NewName.DataPropertyName = "DstName";
-            this.NewName.HeaderText = "新文件名";
-            this.NewName.Name = "NewName";
-            this.NewName.ReadOnly = true;
+            this.GvFile.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GvFile.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SrcFile,
+            this.DstFile});
+            this.GvFile.Location = new System.Drawing.Point(243, 12);
+            this.GvFile.MultiSelect = false;
+            this.GvFile.Name = "GvFile";
+            this.GvFile.ReadOnly = true;
+            this.GvFile.RowHeadersVisible = false;
+            this.GvFile.RowTemplate.Height = 23;
+            this.GvFile.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.GvFile.Size = new System.Drawing.Size(259, 212);
+            this.GvFile.TabIndex = 4;
+            this.GvFile.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GvFile_CellMouseUp);
+            this.GvFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.GvFile_DragDrop);
+            this.GvFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.GvFile_DragEnter);
             // 
             // BtReview
             // 
@@ -342,6 +327,21 @@
             this.CmRule.Name = "CmRule";
             this.CmRule.Size = new System.Drawing.Size(61, 4);
             // 
+            // SrcFile
+            // 
+            this.SrcFile.DataPropertyName = "SrcName";
+            this.SrcFile.HeaderText = "原文件名";
+            this.SrcFile.Name = "SrcFile";
+            this.SrcFile.ReadOnly = true;
+            // 
+            // DstFile
+            // 
+            this.DstFile.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.DstFile.DataPropertyName = "DstName";
+            this.DstFile.HeaderText = "新文件名";
+            this.DstFile.Name = "DstFile";
+            this.DstFile.ReadOnly = true;
+            // 
             // ARen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -351,7 +351,7 @@
             this.Controls.Add(this.PbMenu);
             this.Controls.Add(this.BtRename);
             this.Controls.Add(this.BtReview);
-            this.Controls.Add(this.GvName);
+            this.Controls.Add(this.GvFile);
             this.Controls.Add(this.TbRule);
             this.Controls.Add(this.LbRule);
             this.Controls.Add(this.PbSaveas);
@@ -368,7 +368,7 @@
             this.TpRulePre.ResumeLayout(false);
             this.TpFileAtt.ResumeLayout(false);
             this.TpFileAtt.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GvName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GvFile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbSaveas)).EndInit();
             this.ResumeLayout(false);
@@ -384,7 +384,7 @@
         private System.Windows.Forms.Label LbRule;
         private System.Windows.Forms.TextBox TbRule;
         private System.Windows.Forms.PictureBox PbSaveas;
-        private System.Windows.Forms.DataGridView GvName;
+        private System.Windows.Forms.DataGridView GvFile;
         private System.Windows.Forms.Button BtReview;
         private System.Windows.Forms.Button BtRename;
         private System.Windows.Forms.PictureBox PbMenu;
@@ -401,10 +401,10 @@
         private System.Windows.Forms.DataGridView GvInfo;
         private System.Windows.Forms.DataGridViewTextBoxColumn KeyCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn KeyInfo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OldName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NewName;
         private System.ComponentModel.BackgroundWorker BgWorker;
         private System.Windows.Forms.ContextMenuStrip CmFile;
         private System.Windows.Forms.ContextMenuStrip CmRule;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SrcFile;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DstFile;
     }
 }

@@ -103,21 +103,21 @@ namespace Me.Amon.Ren
                 if (string.IsNullOrEmpty(ren.DstName))
                 {
                     //;
-                    GvName.Rows[idx++].DefaultCellStyle.BackColor = Color.Blue;
+                    GvFile.Rows[idx++].DefaultCellStyle.BackColor = Color.Blue;
                     nc += 1;
                     continue;
                 }
                 if (dic.ContainsKey(ren.DstName))
                 {
-                    GvName.Rows[idx].Cells[""].Value = ren;
-                    GvName.Rows[idx++].DefaultCellStyle.BackColor = Color.Red;
+                    GvFile.Rows[idx].Cells[""].Value = ren;
+                    GvFile.Rows[idx++].DefaultCellStyle.BackColor = Color.Red;
                     ec += 1;
                     continue;
                 }
 
                 dic[ren.DstName] = idx;
-                GvName.Rows[idx].Cells[1].Value = ren.DstName;
-                GvName.Rows[idx++].DefaultCellStyle.BackColor = Color.White;
+                GvFile.Rows[idx].Cells[1].Value = ren.DstName;
+                GvFile.Rows[idx++].DefaultCellStyle.BackColor = Color.White;
             }
             if (nc > 0 || ec > 0)
             {
@@ -314,6 +314,12 @@ namespace Me.Amon.Ren
 
         public void SaveRuleAs()
         {
+            string rule = TbRule.Text.Trim();
+            if (string.IsNullOrEmpty(rule))
+            {
+                return;
+            }
+
             string name = Main.ShowInput("请输入模板名称：", "");
             if (string.IsNullOrEmpty(name))
             {
@@ -323,7 +329,7 @@ namespace Me.Amon.Ren
             MRen ren = new MRen();
             ren.Order = LsRule.Items.Count;
             ren.Name = name;
-            ren.Command = TbRule.Text;
+            ren.Command = rule;
             _UserModel.DBA.SaveVcs(ren);
             LsRule.Items.Add(ren);
         }
@@ -358,27 +364,27 @@ namespace Me.Amon.Ren
 
                 TRen ren = new TRen { File = file, Path = file.Substring(0, idx), SrcName = Path.GetFileName(file) };
                 _FileList.Add(ren);
-                GvName.Rows.Add(ren.SrcName, "");
+                GvFile.Rows.Add(ren.SrcName, "");
             }
         }
 
         public void RemoveSelectedFile()
         {
-            if (GvName.SelectedRows.Count < 1)
+            if (GvFile.SelectedRows.Count < 1)
             {
                 return;
             }
-            DataGridViewRow row = GvName.SelectedRows[0];
-            GvName.Rows.RemoveAt(row.Index);
+            DataGridViewRow row = GvFile.SelectedRows[0];
+            GvFile.Rows.RemoveAt(row.Index);
         }
 
         public void MoveUpSelectedFile()
         {
-            if (GvName.SelectedRows.Count < 1)
+            if (GvFile.SelectedRows.Count < 1)
             {
                 return;
             }
-            DataGridViewRow row = GvName.SelectedRows[0];
+            DataGridViewRow row = GvFile.SelectedRows[0];
             //获取当前行
             int idx = row.Index;
 
@@ -400,20 +406,20 @@ namespace Me.Amon.Ren
             _FileList[idx] = nextRen;
             _FileList[tmp] = currRen;
 
-            GvName.Rows.RemoveAt(idx);
-            GvName.Rows.Insert(tmp, row);
-            GvName.Rows[tmp].Selected = true;
+            GvFile.Rows.RemoveAt(idx);
+            GvFile.Rows.Insert(tmp, row);
+            GvFile.Rows[tmp].Selected = true;
 
-            GvName.FirstDisplayedScrollingRowIndex = tmp;
+            GvFile.FirstDisplayedScrollingRowIndex = tmp;
         }
 
         public void MoveDownSelectedFile()
         {
-            if (GvName.SelectedRows.Count < 1)
+            if (GvFile.SelectedRows.Count < 1)
             {
                 return;
             }
-            DataGridViewRow row = GvName.SelectedRows[0];
+            DataGridViewRow row = GvFile.SelectedRows[0];
             //获取当前行
             int idx = row.Index;
 
@@ -435,16 +441,16 @@ namespace Me.Amon.Ren
             _FileList[idx] = nextRen;
             _FileList[tmp] = currRen;
 
-            GvName.Rows.RemoveAt(idx);
-            GvName.Rows.Insert(tmp, row);
-            GvName.Rows[tmp].Selected = true;
+            GvFile.Rows.RemoveAt(idx);
+            GvFile.Rows.Insert(tmp, row);
+            GvFile.Rows[tmp].Selected = true;
 
-            GvName.FirstDisplayedScrollingRowIndex = tmp;
+            GvFile.FirstDisplayedScrollingRowIndex = tmp;
         }
 
         public void ClearAllFile()
         {
-            GvName.Rows.Clear();
+            GvFile.Rows.Clear();
             _FileList.Clear();
         }
         #endregion
@@ -453,7 +459,7 @@ namespace Me.Amon.Ren
         #region 事件处理
         private void ARen_Load(object sender, EventArgs e)
         {
-            GvName.AutoGenerateColumns = false;
+            GvFile.AutoGenerateColumns = false;
             _FileList = new List<TRen>();
 
             _Renamer = new Renamer();
@@ -546,7 +552,7 @@ namespace Me.Amon.Ren
             TbRule.Text = ren.Command;
         }
 
-        private void GvName_DragEnter(object sender, DragEventArgs e)
+        private void GvFile_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
@@ -558,7 +564,7 @@ namespace Me.Amon.Ren
             }
         }
 
-        private void GvName_DragDrop(object sender, DragEventArgs e)
+        private void GvFile_DragDrop(object sender, DragEventArgs e)
         {
             try
             {
@@ -577,7 +583,7 @@ namespace Me.Amon.Ren
             }
         }
 
-        private void GvName_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        private void GvFile_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.Button != MouseButtons.Right)
             {
@@ -589,7 +595,7 @@ namespace Me.Amon.Ren
                 return;
             }
 
-            GvName.Rows[idx].Selected = true;
+            GvFile.Rows[idx].Selected = true;
             CmFile.Show(MousePosition);
         }
 

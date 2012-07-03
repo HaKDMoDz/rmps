@@ -1654,7 +1654,6 @@
     <None Include="Resources\SignIn.png" />
     <None Include="Resources\SignFp.png" />
     <None Include="Resources\Input.png" />
-    <None Include="Resources\Open.png" />
     <None Include="Resources\Save.png" />
     <None Include="Resources\Alert.png" />
     <None Include="Resources\Error.png" />
