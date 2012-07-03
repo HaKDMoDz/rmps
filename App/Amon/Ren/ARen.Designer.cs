@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ARen));
             this.TcRule = new System.Windows.Forms.TabControl();
             this.TpRuleInf = new System.Windows.Forms.TabPage();
             this.GvInfo = new System.Windows.Forms.DataGridView();
@@ -304,7 +305,7 @@
             // PbSaveas
             // 
             this.PbSaveas.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PbSaveas.Image = global::Me.Amon.Properties.Resources.Open;
+            this.PbSaveas.Image = ((System.Drawing.Image)(resources.GetObject("PbSaveas.Image")));
             this.PbSaveas.Location = new System.Drawing.Point(478, 230);
             this.PbSaveas.Name = "PbSaveas";
             this.PbSaveas.Size = new System.Drawing.Size(24, 24);
@@ -334,7 +335,7 @@
             // CmFile
             // 
             this.CmFile.Name = "CmFile";
-            this.CmFile.Size = new System.Drawing.Size(153, 26);
+            this.CmFile.Size = new System.Drawing.Size(61, 4);
             // 
             // CmRule
             // 

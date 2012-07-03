@@ -193,13 +193,6 @@ namespace Me.Amon.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap Open {
-            get {
-                object obj = ResourceManager.GetObject("Open", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap PosDef {
             get {
                 object obj = ResourceManager.GetObject("PosDef", resourceCulture);
