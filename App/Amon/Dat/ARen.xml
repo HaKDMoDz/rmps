@@ -1,84 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Amon>
+<Amon version="1">
   <App>ARen</App>
   <Ver>1</Ver>
-  <Rens>
-    <Ren>
-      <Order>0</Order>
-      <Id>qatgqbddxfqzcctr</Id>
-      <Name>去除后缀名</Name>
-      <Command>*</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>1</Order>
-      <Id>qatgqbddeafxqgsf</Id>
-      <Name>大写后缀名</Name>
-      <Command>*.\?</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>2</Order>
-      <Id>qatgqbddedegqrcd</Id>
-      <Name>小写后缀名</Name>
-      <Command>*./?</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>3</Order>
-      <Id>qatgqbddebgsdbbg</Id>
-      <Name>大写文件名</Name>
-      <Command>\*.?</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>4</Order>
-      <Id>qatgqbdddwvtcdfr</Id>
-      <Name>小写文件名</Name>
-      <Command>/*.?</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>5</Order>
-      <Id>qatgqbdddtasevgc</Id>
-      <Name>大写所有字符</Name>
-      <Command>\*.\?</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>6</Order>
-      <Id>qatgqbddczxraewz</Id>
-      <Name>小写所有字符</Name>
-      <Command>/*./?</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>7</Order>
-      <Id>qatgqbddcggcrwez</Id>
-      <Name>变长数值文件名</Name>
-      <Command>:.?</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>8</Order>
-      <Id>qatgqbddfzstsgxb</Id>
-      <Name>定长数值文件名</Name>
-      <Command>:&lt;1,1,8,0&gt;.?</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>9</Order>
-      <Id>qatgqbddtwyztqby</Id>
-      <Name>替换后缀名中的字符abc为123</Name>
-      <Command>*.?&lt;abc:123&gt;</Command>
-      <Remark />
-    </Ren>
-    <Ren>
-      <Order>10</Order>
-      <Id>qatgqbddbctzxszy</Id>
-      <Name>替换文件名中的字符abc为123</Name>
-      <Command>*&lt;abc:123&gt;.?</Command>
-      <Remark />
-    </Ren>
-  </Rens>
+
+  <Actions>
+    <Action Id="exit-app" Class="Me.Amon.Ren.E.ExitAction"/>
+    <Action Id="append-file" Class="Me.Amon.Ren.E.File.AppendAction"/>
+    <Action Id="delete-file" Class="Me.Amon.Ren.E.File.DeleteAction"/>
+    <Action Id="moveup-file" Class="Me.Amon.Ren.E.File.MoveUpAction"/>
+    <Action Id="movedown-file" Class="Me.Amon.Ren.E.File.MoveDownAction"/>
+    <Action Id="clearall" Class="Me.Amon.Ren.E.File.ClearAction"/>
+    <Action Id="moveup-rule" Class="Me.Amon.Ren.E.Rule.MoveUpAction"/>
+    <Action Id="movedown-rule" Class="Me.Amon.Ren.E.Rule.MoveDownAction"/>
+    <Action Id="delete-rule" Class="Me.Amon.Ren.E.Rule.DeleteAction"/>
+	<Action Id="saveas-rule" Class="Me.Amon.Ren.E.Rule.SaveasAction"/>
+    <Action Id="import" Class="Me.Amon.Ren.E.Rule.ImportAction"/>
+    <Action Id="export" Class="Me.Amon.Ren.E.Rule.ExportAction"/>
+  </Actions>
+
+  <!--系统快捷键-->
+  <Strokes Id="APwd">
+    <Stroke Key="^ F" ActionId="append-file" Memo="追加文件"/>
+	<Stroke Key="^ S" ActionId="saveas-rule" Memo="追加文件"/>
+  </Strokes>
+
+  <!--魔方密码弹出菜单-->
+  <Popmenu Id="ARen">
+	<Item Type="normal" Text="退出(&amp;X)" ActionId="exit-app"/>
+  </Popmenu>
+  <!--命名规则弹出选单-->
+  <Popmenu Id="ARule">
+    <Item Type="normal" Text="上移一行(&amp;U)" ActionId="moveup-rule"/>
+    <Item Type="normal" Text="下移一行(&amp;D)" ActionId="movedown-rule"/>
+    <Line/>
+    <Item Type="normal" Text="删除(&amp;D)" ActionId="delete-rule"/>
+  </Popmenu>
+  <!--文件列表弹出选单-->
+  <Popmenu Id="AFile">
+    <Item Type="normal" Text="追加(&amp;A)" ActionId="append-file"/>
+    <Item Type="normal" Text="删除(&amp;R)" ActionId="delete-file"/>
+    <Line/>
+    <Item Type="normal" Text="上移一行(&amp;U)" ActionId="moveup-file"/>
+    <Item Type="normal" Text="下移一行(&amp;D)" ActionId="movedown-file"/>
+	<Line/>
+    <Item Type="normal" Text="清除所有(&amp;C)" ActionId="clearall"/>
+  </Popmenu>
 </Amon>

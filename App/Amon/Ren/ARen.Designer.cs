@@ -49,38 +49,22 @@
             this.BtReview = new System.Windows.Forms.Button();
             this.BtRename = new System.Windows.Forms.Button();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MiSaveas = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiSep0 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiImport = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiSortUp = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiSortDown = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiSep1 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.PbMenu = new System.Windows.Forms.PictureBox();
-            this.PbSelect = new System.Windows.Forms.PictureBox();
+            this.PbSaveas = new System.Windows.Forms.PictureBox();
             this.LbEcho = new System.Windows.Forms.Label();
             this.FdBrowser = new System.Windows.Forms.FolderBrowserDialog();
             this.BgWorker = new System.ComponentModel.BackgroundWorker();
             this.CmFile = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MiAppend = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiRemove = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiMoveUp = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiMoveDown = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiClear = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmRule = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TcRule.SuspendLayout();
             this.TpRuleInf.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GvInfo)).BeginInit();
             this.TpRulePre.SuspendLayout();
             this.TpFileAtt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GvName)).BeginInit();
-            this.CmMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PbSelect)).BeginInit();
-            this.CmFile.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PbSaveas)).BeginInit();
             this.SuspendLayout();
             // 
             // TcRule
@@ -302,69 +286,8 @@
             // 
             // CmMenu
             // 
-            this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MiSaveas,
-            this.MiSep0,
-            this.MiExport,
-            this.MiImport,
-            this.MiSortUp,
-            this.MiSortDown,
-            this.MiSep1,
-            this.MiDelete});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(153, 170);
-            // 
-            // MiSaveas
-            // 
-            this.MiSaveas.Name = "MiSaveas";
-            this.MiSaveas.Size = new System.Drawing.Size(152, 22);
-            this.MiSaveas.Text = "另存为(&S)";
-            this.MiSaveas.Click += new System.EventHandler(this.MiSaveas_Click);
-            // 
-            // MiSep0
-            // 
-            this.MiSep0.Name = "MiSep0";
-            this.MiSep0.Size = new System.Drawing.Size(149, 6);
-            // 
-            // MiExport
-            // 
-            this.MiExport.Name = "MiExport";
-            this.MiExport.Size = new System.Drawing.Size(152, 22);
-            this.MiExport.Text = "导出(&X)";
-            this.MiExport.Click += new System.EventHandler(this.MiExport_Click);
-            // 
-            // MiImport
-            // 
-            this.MiImport.Name = "MiImport";
-            this.MiImport.Size = new System.Drawing.Size(152, 22);
-            this.MiImport.Text = "导入(&I)";
-            this.MiImport.Click += new System.EventHandler(this.MiImport_Click);
-            // 
-            // MiSortUp
-            // 
-            this.MiSortUp.Name = "MiSortUp";
-            this.MiSortUp.Size = new System.Drawing.Size(152, 22);
-            this.MiSortUp.Text = "上移(&U)";
-            this.MiSortUp.Click += new System.EventHandler(this.MiSortUp_Click);
-            // 
-            // MiSortDown
-            // 
-            this.MiSortDown.Name = "MiSortDown";
-            this.MiSortDown.Size = new System.Drawing.Size(152, 22);
-            this.MiSortDown.Text = "下移(&D)";
-            this.MiSortDown.Click += new System.EventHandler(this.MiSortDown_Click);
-            // 
-            // MiSep1
-            // 
-            this.MiSep1.Name = "MiSep1";
-            this.MiSep1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // MiDelete
-            // 
-            this.MiDelete.Name = "MiDelete";
-            this.MiDelete.Size = new System.Drawing.Size(152, 22);
-            this.MiDelete.Text = "删除(&R)";
-            this.MiDelete.Click += new System.EventHandler(this.MiDelete_Click);
+            this.CmMenu.Size = new System.Drawing.Size(61, 4);
             // 
             // PbMenu
             // 
@@ -378,17 +301,17 @@
             this.TpTips.SetToolTip(this.PbMenu, "系统选单");
             this.PbMenu.Click += new System.EventHandler(this.PbMenu_Click);
             // 
-            // PbSelect
+            // PbSaveas
             // 
-            this.PbSelect.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PbSelect.Image = global::Me.Amon.Properties.Resources.Open;
-            this.PbSelect.Location = new System.Drawing.Point(478, 230);
-            this.PbSelect.Name = "PbSelect";
-            this.PbSelect.Size = new System.Drawing.Size(24, 24);
-            this.PbSelect.TabIndex = 3;
-            this.PbSelect.TabStop = false;
-            this.TpTips.SetToolTip(this.PbSelect, "选择目录");
-            this.PbSelect.Click += new System.EventHandler(this.PbSelect_Click);
+            this.PbSaveas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PbSaveas.Image = global::Me.Amon.Properties.Resources.Open;
+            this.PbSaveas.Location = new System.Drawing.Point(478, 230);
+            this.PbSaveas.Name = "PbSaveas";
+            this.PbSaveas.Size = new System.Drawing.Size(24, 24);
+            this.PbSaveas.TabIndex = 3;
+            this.PbSaveas.TabStop = false;
+            this.TpTips.SetToolTip(this.PbSaveas, "选择目录");
+            this.PbSaveas.Click += new System.EventHandler(this.PbSaveas_Click);
             // 
             // LbEcho
             // 
@@ -410,61 +333,13 @@
             // 
             // CmFile
             // 
-            this.CmFile.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MiAppend,
-            this.MiRemove,
-            this.toolStripSeparator1,
-            this.MiMoveUp,
-            this.MiMoveDown,
-            this.toolStripSeparator2,
-            this.MiClear});
             this.CmFile.Name = "CmFile";
-            this.CmFile.Size = new System.Drawing.Size(142, 126);
+            this.CmFile.Size = new System.Drawing.Size(153, 26);
             // 
-            // MiAppend
+            // CmRule
             // 
-            this.MiAppend.Name = "MiAppend";
-            this.MiAppend.Size = new System.Drawing.Size(152, 22);
-            this.MiAppend.Text = "追加(&A)";
-            this.MiAppend.Click += new System.EventHandler(this.MiAppend_Click);
-            // 
-            // MiRemove
-            // 
-            this.MiRemove.Name = "MiRemove";
-            this.MiRemove.Size = new System.Drawing.Size(152, 22);
-            this.MiRemove.Text = "移除(&R)";
-            this.MiRemove.Click += new System.EventHandler(this.MiRemove_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // MiMoveUp
-            // 
-            this.MiMoveUp.Name = "MiMoveUp";
-            this.MiMoveUp.Size = new System.Drawing.Size(152, 22);
-            this.MiMoveUp.Text = "上移一行(&U)";
-            this.MiMoveUp.Click += new System.EventHandler(this.MiMoveUp_Click);
-            // 
-            // MiMoveDown
-            // 
-            this.MiMoveDown.Name = "MiMoveDown";
-            this.MiMoveDown.Size = new System.Drawing.Size(152, 22);
-            this.MiMoveDown.Text = "下移一行(&D)";
-            this.MiMoveDown.Click += new System.EventHandler(this.MiMoveDown_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
-            // 
-            // MiClear
-            // 
-            this.MiClear.Name = "MiClear";
-            this.MiClear.Size = new System.Drawing.Size(152, 22);
-            this.MiClear.Text = "清除所有(&C)";
-            this.MiClear.Click += new System.EventHandler(this.MiClear_Click);
+            this.CmRule.Name = "CmRule";
+            this.CmRule.Size = new System.Drawing.Size(61, 4);
             // 
             // ARen
             // 
@@ -478,7 +353,7 @@
             this.Controls.Add(this.GvName);
             this.Controls.Add(this.TbRule);
             this.Controls.Add(this.LbRule);
-            this.Controls.Add(this.PbSelect);
+            this.Controls.Add(this.PbSaveas);
             this.Controls.Add(this.TcRule);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -493,10 +368,8 @@
             this.TpFileAtt.ResumeLayout(false);
             this.TpFileAtt.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GvName)).EndInit();
-            this.CmMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PbSelect)).EndInit();
-            this.CmFile.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PbSaveas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -509,7 +382,7 @@
         private System.Windows.Forms.TabPage TpRulePre;
         private System.Windows.Forms.Label LbRule;
         private System.Windows.Forms.TextBox TbRule;
-        private System.Windows.Forms.PictureBox PbSelect;
+        private System.Windows.Forms.PictureBox PbSaveas;
         private System.Windows.Forms.DataGridView GvName;
         private System.Windows.Forms.Button BtReview;
         private System.Windows.Forms.Button BtRename;
@@ -524,27 +397,13 @@
         private System.Windows.Forms.Label LbEcho;
         private System.Windows.Forms.FolderBrowserDialog FdBrowser;
         private System.Windows.Forms.CheckBox CkArchive;
-        private System.Windows.Forms.ToolStripMenuItem MiImport;
-        private System.Windows.Forms.ToolStripMenuItem MiExport;
         private System.Windows.Forms.DataGridView GvInfo;
         private System.Windows.Forms.DataGridViewTextBoxColumn KeyCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn KeyInfo;
-        private System.Windows.Forms.ToolStripMenuItem MiDelete;
-        private System.Windows.Forms.ToolStripSeparator MiSep0;
-        private System.Windows.Forms.ToolStripMenuItem MiSaveas;
-        private System.Windows.Forms.ToolStripSeparator MiSep1;
-        private System.Windows.Forms.ToolStripMenuItem MiSortUp;
-        private System.Windows.Forms.ToolStripMenuItem MiSortDown;
         private System.Windows.Forms.DataGridViewTextBoxColumn OldName;
         private System.Windows.Forms.DataGridViewTextBoxColumn NewName;
         private System.ComponentModel.BackgroundWorker BgWorker;
         private System.Windows.Forms.ContextMenuStrip CmFile;
-        private System.Windows.Forms.ToolStripMenuItem MiAppend;
-        private System.Windows.Forms.ToolStripMenuItem MiRemove;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem MiMoveUp;
-        private System.Windows.Forms.ToolStripMenuItem MiMoveDown;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem MiClear;
+        private System.Windows.Forms.ContextMenuStrip CmRule;
     }
 }

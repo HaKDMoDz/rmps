@@ -766,6 +766,19 @@
       <DependentUpon>ARen.cs</DependentUpon>
     </Compile>
     <Compile Include="Ren\ERen.cs" />
+    <Compile Include="Ren\E\ARenAction.cs" />
+    <Compile Include="Ren\E\ExitAction.cs" />
+    <Compile Include="Ren\E\File\AppendAction.cs" />
+    <Compile Include="Ren\E\File\ClearAction.cs" />
+    <Compile Include="Ren\E\File\DeleteAction.cs" />
+    <Compile Include="Ren\E\File\MoveDownAction.cs" />
+    <Compile Include="Ren\E\File\MoveUpAction.cs" />
+    <Compile Include="Ren\E\Rule\DeleteAction.cs" />
+    <Compile Include="Ren\E\Rule\ExportAction.cs" />
+    <Compile Include="Ren\E\Rule\ImportAction.cs" />
+    <Compile Include="Ren\E\Rule\MoveDownAction.cs" />
+    <Compile Include="Ren\E\Rule\MoveUpAction.cs" />
+    <Compile Include="Ren\E\Rule\SaveasAction.cs" />
     <Compile Include="Ren\TRen.cs" />
     <Compile Include="Reset.cs">
       <SubType>Form</SubType>
@@ -1707,7 +1720,6 @@
     <Folder Include="Pwd\E\Edit\" />
     <Folder Include="Pwd\E\Skin\" />
     <Folder Include="Ren\C\" />
-    <Folder Include="Ren\E\" />
     <Folder Include="Ren\M\" />
     <Folder Include="Ren\V\" />
     <Folder Include="Sec\C\" />
