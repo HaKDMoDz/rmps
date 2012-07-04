@@ -13,9 +13,25 @@ namespace Me.Amon.Gtd
         {
         }
 
+        #region 接口实现
         public int AppId { get; set; }
 
         public Form Form { get { return this; } }
+
+        public void ShowTips(Control control, string caption)
+        {
+            //TpTips.SetToolTip(control, caption);
+        }
+
+        public void ShowEcho(string message)
+        {
+            //LbEcho.Text = message;
+        }
+
+        public void ShowEcho(string message, int delay)
+        {
+            //LbEcho.Text = message;
+        }
 
         public bool WillExit()
         {
@@ -26,5 +42,6 @@ namespace Me.Amon.Gtd
         {
             return true;
         }
+        #endregion
     }
 }

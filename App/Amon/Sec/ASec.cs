@@ -35,6 +35,22 @@ namespace Me.Amon.Sec
 
         public Form Form { get { return this; } }
 
+        public void ShowTips(Control control, string caption)
+        {
+            TpTips.SetToolTip(control, caption);
+        }
+
+        public void ShowEcho(string message)
+        {
+            LblEcho.Text = message;
+            TpTips.SetToolTip(LblEcho, message);
+        }
+
+        public void ShowEcho(string message, int delay)
+        {
+            LblEcho.Text = message;
+        }
+
         public bool WillExit()
         {
             return true;
@@ -96,16 +112,6 @@ namespace Me.Amon.Sec
         #endregion
 
         #region 公有方法
-        public void ShowEcho(string msg)
-        {
-            LblEcho.Text = msg;
-            TpTips.SetToolTip(LblEcho, msg);
-        }
-
-        public void ShowTips(Control control, string caption)
-        {
-            TpTips.SetToolTip(control, caption);
-        }
         #endregion
 
         #region 私有函数

@@ -42,6 +42,22 @@ namespace Me.Amon.Ren
             get { return this; }
         }
 
+        public void ShowTips(Control control, string caption)
+        {
+            TpTips.SetToolTip(control, caption);
+        }
+
+        public void ShowEcho(string message)
+        {
+            LbEcho.Text = message;
+            TpTips.SetToolTip(LbEcho, message);
+        }
+
+        public void ShowEcho(string message, int delay)
+        {
+            LbEcho.Text = message;
+        }
+
         public bool WillExit()
         {
             return true;
@@ -54,17 +70,6 @@ namespace Me.Amon.Ren
         #endregion
 
         #region 公共函数
-        public void ShowEcho(string msg)
-        {
-            LbEcho.Text = msg;
-            TpTips.SetToolTip(LbEcho, msg);
-        }
-
-        public void ShowTips(Control control, string caption)
-        {
-            TpTips.SetToolTip(control, caption);
-        }
-
         public bool Review()
         {
             string rule = TbRule.Text;

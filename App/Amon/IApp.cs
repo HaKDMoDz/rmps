@@ -13,6 +13,12 @@ namespace Me.Amon
 
         void Show();
 
+        void ShowTips(Control control, string caption);
+
+        void ShowEcho(string message);
+
+        void ShowEcho(string message, int delay);
+
         bool Visible { get; set; }
 
         bool IsDisposed { get; }

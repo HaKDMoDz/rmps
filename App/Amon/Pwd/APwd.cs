@@ -70,6 +70,21 @@ namespace Me.Amon.Pwd
 
         public Form Form { get { return this; } }
 
+        public void ShowTips(Control control, string caption)
+        {
+            TpTips.SetToolTip(control, caption);
+        }
+
+        public void ShowEcho(string message)
+        {
+            TssEcho.Text = message;
+        }
+
+        public void ShowEcho(string message, int delay)
+        {
+            TssEcho.Text = message;
+        }
+
         public bool WillExit()
         {
             if (_SafeModel.Modified)
@@ -611,11 +626,6 @@ namespace Me.Amon.Pwd
             HSplit.Panel2.Controls.Add(uc);
         }
 
-        public void ShowTips(Control control, string caption)
-        {
-            TpTips.SetToolTip(control, caption);
-        }
-
         public void ShowIcoSeeker(string rootDir, AmonHandler<Png> handler)
         {
             KeyIcon seeker = new KeyIcon(_UserModel, rootDir);
@@ -663,11 +673,6 @@ namespace Me.Amon.Pwd
             {
                 group.Checked(key.Major.ToString());
             }
-        }
-
-        public void ShowEcho(string echo)
-        {
-            TssEcho.Text = echo;
         }
         #endregion
 

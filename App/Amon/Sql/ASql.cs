@@ -57,6 +57,21 @@ namespace Me.Amon.Sql
             get { return this; }
         }
 
+        public void ShowTips(Control control, string caption)
+        {
+            //TpTips.SetToolTip(control, caption);
+        }
+
+        public void ShowEcho(string message)
+        {
+            LblEcho.Text = message;
+        }
+
+        public void ShowEcho(string message, int delay)
+        {
+            LblEcho.Text = message;
+        }
+
         public bool WillExit()
         {
             if (_SqlEngine != null)
@@ -337,11 +352,6 @@ namespace Me.Amon.Sql
             {
                 Main.ShowError(exp);
             }
-        }
-
-        private void ShowEcho(string echo)
-        {
-            LblEcho.Text = echo;
         }
 
         private bool LoadLib(XmlDocument doc)

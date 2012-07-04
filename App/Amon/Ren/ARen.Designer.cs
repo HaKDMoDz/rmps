@@ -45,6 +45,8 @@
             this.LbRule = new System.Windows.Forms.Label();
             this.TbRule = new System.Windows.Forms.TextBox();
             this.GvFile = new System.Windows.Forms.DataGridView();
+            this.SrcFile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DstFile = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BtReview = new System.Windows.Forms.Button();
             this.BtRename = new System.Windows.Forms.Button();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -56,8 +58,6 @@
             this.BgWorker = new System.ComponentModel.BackgroundWorker();
             this.CmFile = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CmRule = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.SrcFile = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DstFile = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TcRule.SuspendLayout();
             this.TpRuleInf.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GvInfo)).BeginInit();
@@ -246,6 +246,21 @@
             this.GvFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.GvFile_DragDrop);
             this.GvFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.GvFile_DragEnter);
             // 
+            // SrcFile
+            // 
+            this.SrcFile.DataPropertyName = "SrcName";
+            this.SrcFile.HeaderText = "原文件名";
+            this.SrcFile.Name = "SrcFile";
+            this.SrcFile.ReadOnly = true;
+            // 
+            // DstFile
+            // 
+            this.DstFile.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.DstFile.DataPropertyName = "DstName";
+            this.DstFile.HeaderText = "新文件名";
+            this.DstFile.Name = "DstFile";
+            this.DstFile.ReadOnly = true;
+            // 
             // BtReview
             // 
             this.BtReview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -296,7 +311,7 @@
             this.PbSaveas.Size = new System.Drawing.Size(24, 24);
             this.PbSaveas.TabIndex = 3;
             this.PbSaveas.TabStop = false;
-            this.TpTips.SetToolTip(this.PbSaveas, "选择目录");
+            this.TpTips.SetToolTip(this.PbSaveas, "另存为模板");
             this.PbSaveas.Click += new System.EventHandler(this.PbSaveas_Click);
             // 
             // LbEcho
@@ -326,21 +341,6 @@
             // 
             this.CmRule.Name = "CmRule";
             this.CmRule.Size = new System.Drawing.Size(61, 4);
-            // 
-            // SrcFile
-            // 
-            this.SrcFile.DataPropertyName = "SrcName";
-            this.SrcFile.HeaderText = "原文件名";
-            this.SrcFile.Name = "SrcFile";
-            this.SrcFile.ReadOnly = true;
-            // 
-            // DstFile
-            // 
-            this.DstFile.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DstFile.DataPropertyName = "DstName";
-            this.DstFile.HeaderText = "新文件名";
-            this.DstFile.Name = "DstFile";
-            this.DstFile.ReadOnly = true;
             // 
             // ARen
             // 
