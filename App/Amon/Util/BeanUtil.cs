@@ -66,6 +66,21 @@ namespace Me.Amon.Util
             return null;
         }
 
+        public static GraphicsPath CreateRoundedRectanglePath(int x, int y, int w, int h, int aw, int ah)
+        {
+            GraphicsPath roundedRect = new GraphicsPath();
+            roundedRect.AddArc(x, y, aw * 2, ah * 2, 180, 90);
+            roundedRect.AddLine(x + aw, y, x + w - aw * 2, y);
+            roundedRect.AddArc(x + w - aw * 2, y, aw * 2, ah * 2, 270, 90);
+            roundedRect.AddLine(x + w, y + ah * 2, x + w, y + h - ah * 2);
+            roundedRect.AddArc(x + w - aw * 2, y + h - ah * 2, aw * 2, ah * 2, 0, 90);
+            roundedRect.AddLine(x + w - aw * 2, y + h, x + aw * 2, y + h);
+            roundedRect.AddArc(x, y + h - ah * 2, aw * 2, ah * 2, 90, 90);
+            roundedRect.AddLine(x, y + h - ah * 2, x, y + ah * 2);
+            roundedRect.CloseFigure();
+            return roundedRect;
+        }
+
         #region 窗口位置
         public static void CenterToParent(Form child, Form parent)
         {

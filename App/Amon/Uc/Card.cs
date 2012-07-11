@@ -7,8 +7,8 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
-using Me.Amon.Pwd;
 using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd;
 using Me.Amon.Util;
 using MessagingToolkit.Barcode;
 using MessagingToolkit.Barcode.QRCode.Decoder;
@@ -527,26 +527,11 @@ namespace Me.Amon.Uc
             Color c = ReadColor(node, "color", Color.Transparent);
             if (c != Color.Transparent)
             {
-                g.FillPath(new SolidBrush(c), CreateRoundedRectanglePath(x, y, w, h, aw, ah));
+                g.FillPath(new SolidBrush(c), BeanUtil.CreateRoundedRectanglePath(x, y, w, h, aw, ah));
             }
 
             c = ReadColor(node, "border-color", Color.Black);
-            g.DrawPath(new Pen(c, ReadInt(node, "border-width", 1)), CreateRoundedRectanglePath(x, y, w, h, aw, ah));
-        }
-
-        internal static GraphicsPath CreateRoundedRectanglePath(int x, int y, int w, int h, int aw, int ah)
-        {
-            GraphicsPath roundedRect = new GraphicsPath();
-            roundedRect.AddArc(x, y, aw * 2, ah * 2, 180, 90);
-            roundedRect.AddLine(x + aw, y, x + w - aw * 2, y);
-            roundedRect.AddArc(x + w - aw * 2, y, aw * 2, ah * 2, 270, 90);
-            roundedRect.AddLine(x + w, y + ah * 2, x + w, y + h - ah * 2);
-            roundedRect.AddArc(x + w - aw * 2, y + h - ah * 2, aw * 2, ah * 2, 0, 90);
-            roundedRect.AddLine(x + w - aw * 2, y + h, x + aw * 2, y + h);
-            roundedRect.AddArc(x, y + h - ah * 2, aw * 2, ah * 2, 90, 90);
-            roundedRect.AddLine(x, y + h - ah * 2, x, y + ah * 2);
-            roundedRect.CloseFigure();
-            return roundedRect;
+            g.DrawPath(new Pen(c, ReadInt(node, "border-width", 1)), BeanUtil.CreateRoundedRectanglePath(x, y, w, h, aw, ah));
         }
 
         internal static void drawArc(XmlNode node, Graphics g2d)

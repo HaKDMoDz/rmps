@@ -38,6 +38,7 @@
             this.MgARen = new System.Windows.Forms.ToolStripMenuItem();
             this.MgAIco = new System.Windows.Forms.ToolStripMenuItem();
             this.MiASql = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiASpy = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.MgSignUp = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSignIn = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,11 +51,10 @@
             this.MgInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.MgExit = new System.Windows.Forms.ToolStripMenuItem();
             this.MiReset = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiASpy = new System.Windows.Forms.ToolStripMenuItem();
             this.PbApp = new System.Windows.Forms.PictureBox();
             this.IlApp = new System.Windows.Forms.ImageList(this.components);
             this.IsApp = new System.Windows.Forms.ImageList(this.components);
-            this.LbApp = new System.Windows.Forms.ListBox();
+            this.LvApp = new System.Windows.Forms.ListView();
             this.CmMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbApp)).BeginInit();
             this.SuspendLayout();
@@ -142,6 +142,14 @@
             this.MiASql.Text = "数据库工具(&D)";
             this.MiASql.Click += new System.EventHandler(this.MiASql_Click);
             // 
+            // MiASpy
+            // 
+            this.MiASpy.Name = "MiASpy";
+            this.MiASpy.Size = new System.Drawing.Size(163, 22);
+            this.MiASpy.Text = "对象查看器(&Y)";
+            this.MiASpy.Visible = false;
+            this.MiASpy.Click += new System.EventHandler(this.MiASpy_Click);
+            // 
             // MgSep1
             // 
             this.MgSep1.Name = "MgSep1";
@@ -223,17 +231,9 @@
             this.MiReset.Visible = false;
             this.MiReset.Click += new System.EventHandler(this.MiReset_Click);
             // 
-            // MiASpy
-            // 
-            this.MiASpy.Name = "MiASpy";
-            this.MiASpy.Size = new System.Drawing.Size(163, 22);
-            this.MiASpy.Text = "对象查看器(&Y)";
-            this.MiASpy.Visible = false;
-            this.MiASpy.Click += new System.EventHandler(this.MiASpy_Click);
-            // 
             // PbApp
             // 
-            this.PbApp.Location = new System.Drawing.Point(0, 0);
+            this.PbApp.Location = new System.Drawing.Point(12, 12);
             this.PbApp.Name = "PbApp";
             this.PbApp.Size = new System.Drawing.Size(25, 25);
             this.PbApp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -241,6 +241,7 @@
             this.PbApp.TabStop = false;
             this.PbApp.DoubleClick += new System.EventHandler(this.PbLogo_DoubleClick);
             this.PbApp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PbLogo_MouseDown);
+            this.PbApp.MouseEnter += new System.EventHandler(this.PbApp_MouseEnter);
             this.PbApp.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PbLogo_MouseMove);
             this.PbApp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PbLogo_MouseUp);
             // 
@@ -256,24 +257,31 @@
             this.IsApp.ImageSize = new System.Drawing.Size(16, 16);
             this.IsApp.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // LbApp
+            // LvApp
             // 
-            this.LbApp.FormattingEnabled = true;
-            this.LbApp.IntegralHeight = false;
-            this.LbApp.ItemHeight = 12;
-            this.LbApp.Location = new System.Drawing.Point(12, 31);
-            this.LbApp.Name = "LbApp";
-            this.LbApp.Size = new System.Drawing.Size(120, 111);
-            this.LbApp.TabIndex = 2;
+            this.LvApp.AllowDrop = true;
+            this.LvApp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LvApp.LargeImageList = this.IlApp;
+            this.LvApp.Location = new System.Drawing.Point(43, 12);
+            this.LvApp.MultiSelect = false;
+            this.LvApp.Name = "LvApp";
+            this.LvApp.Size = new System.Drawing.Size(257, 130);
+            this.LvApp.SmallImageList = this.IsApp;
+            this.LvApp.TabIndex = 2;
+            this.LvApp.UseCompatibleStateImageBehavior = false;
+            this.LvApp.DragDrop += new System.Windows.Forms.DragEventHandler(this.LvApp_DragDrop);
+            this.LvApp.DragEnter += new System.Windows.Forms.DragEventHandler(this.LvApp_DragEnter);
+            this.LvApp.DoubleClick += new System.EventHandler(this.LvApp_DoubleClick);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(144, 154);
-            this.ContextMenuStrip = this.CmMenu;
-            this.Controls.Add(this.LbApp);
+            this.ClientSize = new System.Drawing.Size(312, 154);
             this.Controls.Add(this.PbApp);
+            this.Controls.Add(this.LvApp);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -284,6 +292,7 @@
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
+            this.MouseLeave += new System.EventHandler(this.Main_MouseLeave);
             this.CmMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PbApp)).EndInit();
             this.ResumeLayout(false);
@@ -312,7 +321,7 @@
         private System.Windows.Forms.ImageList IlApp;
         private System.Windows.Forms.ImageList IsApp;
         private System.Windows.Forms.ToolStripMenuItem MgAIco;
-        private System.Windows.Forms.ListBox LbApp;
+        private System.Windows.Forms.ListView LvApp;
         private System.Windows.Forms.ToolStripMenuItem MgLogo;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem MiReset;

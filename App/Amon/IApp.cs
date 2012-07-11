@@ -7,6 +7,8 @@ namespace Me.Amon
     {
         int AppId { get; set; }
 
+        string Name { get; }
+
         Form Form { get; }
 
         Icon Icon { get; set; }

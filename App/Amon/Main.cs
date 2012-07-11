@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -46,6 +47,15 @@ namespace Me.Amon
         private bool _IsMouseDown;
         private Point _MouseOffset;
         #endregion
+
+        private int _Width = 312;
+        private int _Height = 164;
+        private int _ArcWidth = 4;
+        private int _ArcHeight = 4;
+        private Color _StartColor = Color.White;
+        private Color _EndColor = Color.Gainsboro;
+        private Color _TransColor = Color.Cyan;
+        private Image _BgImage;
 
         #region 构造函数
         public Main()
@@ -180,6 +190,7 @@ namespace Me.Amon
         {
             Icon = Me.Amon.Properties.Resources.Icon;
 
+            GenBgImage();
             ChangeAppVisible(false);
 
             // 窗口位置
@@ -196,8 +207,8 @@ namespace Me.Amon
             Location = new Point(x, y);
 
             // 背景透明
-            //BackColor = Color.Green;
-            TransparencyKey = this.BackColor;
+            BackColor = _TransColor;
+            TransparencyKey = _TransColor;
 
             // 托盘图标状态
             int pattern = Settings.Default.Pattern;
@@ -217,7 +228,7 @@ namespace Me.Amon
             if (_UserModel == null)
             {
                 _UserModel = new UserModel();
-                //SignAc(ESignAc.SignIn, new AmonHandler<int>(DoSignIn));
+                SignAc(ESignAc.SignIn, new AmonHandler<int>(DoSignIn));
             }
         }
 
@@ -261,6 +272,7 @@ namespace Me.Amon
                 _ILogo.MouseMove();
                 return;
             }
+            ChangeAppVisible(false);
 
             Point pos = MousePosition;
             pos.X += _MouseOffset.X;
@@ -298,9 +310,16 @@ namespace Me.Amon
 
         private void PbLogo_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Right)
+            {
+                CmMenu.Show(PbApp, e.Location);
+            }
+
+            if (_IsMouseDown)
             {
                 _IsMouseDown = false;
+                ChangeAppVisible(true);
+                return;
             }
         }
 
@@ -559,7 +578,7 @@ namespace Me.Amon
             string path = Path.Combine(_UserModel.Home, "App.xml");
             if (!File.Exists(path))
             {
-                //LvApp.Visible = false;
+                //LbApp.Visible = false;
                 return;
             }
 
@@ -568,18 +587,18 @@ namespace Me.Amon
             doc.Load(reader);
             reader.Close();
 
-            //MApp app;
-            //_AppList = new List<MApp>();
-            //foreach (XmlNode node in doc.SelectNodes("/Amon/Apps/App"))
-            //{
-            //    app = new MApp();
-            //    app.FromXml(node);
-            //    _AppList.Add(app);
+            MApp app;
+            _AppList = new List<MApp>();
+            foreach (XmlNode node in doc.SelectNodes("/Amon/Apps/App"))
+            {
+                app = new MApp();
+                app.FromXml(node);
+                _AppList.Add(app);
 
-            //    IlApp.Images.Add(app.Id, BeanUtil.ReadImage(app.Logo, Resources.Logo32));
-            //    LvApp.Items.Add(new ListViewItem { Name = app.Id, Text = app.Text, ImageKey = app.Id });
-            //}
-            //ChangeAppVisible(true);
+                IlApp.Images.Add(app.Id, BeanUtil.ReadImage(app.Logo, Resources.Logo32));
+                LvApp.Items.Add(new ListViewItem { Text = app.Text, ImageKey = app.Id, Tag = app });
+            }
+            ChangeAppVisible(true);
             return;
         }
 
@@ -690,19 +709,60 @@ namespace Me.Amon
             _IApp.BringToFront();
         }
 
+        private void ShowIApp(MApp app)
+        {
+            if (_AppList == null)
+            {
+                _AppList = new List<MApp>();
+            }
+            IApp iapp = null;
+            foreach (MApp mapp in _AppList)
+            {
+                if (mapp.Id == app.Id)
+                {
+                    iapp = mapp.App;
+                    break;
+                }
+            }
+            if (iapp == null)
+            {
+            }
+        }
+
         private void ChangeAppVisible(bool visible)
         {
             if (visible)
             {
-                Size = new Size(225, 225);
-                Region = new Region(new Rectangle(0, 0, 225, 225));
+                Size = new Size(_Width, _Height);
+                GraphicsPath path = BeanUtil.CreateRoundedRectanglePath(0, 0, _Width, _Height, _ArcWidth, _ArcHeight);
+                Region = new Region(path);
             }
             else
             {
-                Size = new Size(25, 25);
-                Region = new Region(new Rectangle(0, 0, 25, 25));
+                Point point = PbApp.Location;
+                Size size = PbApp.Size;
+                Size = new Size(point.X + size.Width, point.Y + size.Height);
+                Region = new Region(new Rectangle(point.X, point.Y, size.Width, size.Height));
             }
-            LbApp.Visible = visible;
+            LvApp.Visible = visible;
+        }
+
+        private void GenBgImage()
+        {
+            if (_BgImage == null)
+            {
+                _BgImage = new Bitmap(_Width, _Height);
+                using (Graphics g = Graphics.FromImage(_BgImage))
+                {
+                    Rectangle rect = new Rectangle(0, 0, _Width, _Height);
+                    LinearGradientBrush brush = new LinearGradientBrush(rect, _StartColor, _EndColor, LinearGradientMode.Vertical);
+                    g.FillPath(brush, BeanUtil.CreateRoundedRectanglePath(0, 0, _Width, _Height, _ArcWidth, _ArcHeight));
+                    Pen pen = new Pen(Color.Gray);
+                    g.DrawPath(pen, BeanUtil.CreateRoundedRectanglePath(0, 0, _Width - 1, _Height - 1, _ArcWidth, _ArcHeight));
+                    g.Save();
+                }
+            }
+            BackgroundImage = _BgImage;
         }
 
         private void ChangeEmotion(int emotion)
@@ -788,6 +848,48 @@ namespace Me.Amon
                 ShowASpy(EApp.IAPP_ASPY);
                 return;
             }
+        }
+
+        private void LvApp_DragEnter(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void LvApp_DragDrop(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void LvApp_DoubleClick(object sender, EventArgs e)
+        {
+            if (LvApp.SelectedItems.Count < 1)
+            {
+                return;
+            }
+            ListViewItem item = LvApp.SelectedItems[0];
+            MApp app = item.Tag as MApp;
+            if (app == null)
+            {
+                return;
+            }
+
+            ShowIApp(app);
+        }
+
+        private void Main_MouseLeave(object sender, EventArgs e)
+        {
+            if (MousePosition.X < Location.X
+                || MousePosition.Y < Location.Y
+                || MousePosition.X > Location.X + Width
+                || MousePosition.Y > Location.Y + Height)
+            {
+                ChangeAppVisible(false);
+            }
+        }
+
+        private void PbApp_MouseEnter(object sender, EventArgs e)
+        {
+            ChangeAppVisible(true);
         }
     }
 }
