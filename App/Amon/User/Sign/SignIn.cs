@@ -115,7 +115,7 @@ namespace Me.Amon.User.Sign
             }
 
             _UserModel.Init();
-            _SignAc.CallBack(0);
+            _SignAc.CallBack(EApp.IAPP_NONE);
             #endregion
         }
 

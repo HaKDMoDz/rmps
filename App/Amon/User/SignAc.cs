@@ -18,7 +18,7 @@ namespace Me.Amon.User
         private ISignAc _SignAc;
         private UserModel _UserModel;
 
-        public AmonHandler<int> CallBackHandler { get; set; }
+        public AmonHandler<string> CallBackHandler { get; set; }
 
         #region 构造函数
         public SignAc()
@@ -210,7 +210,7 @@ namespace Me.Amon.User
             }
         }
 
-        public void CallBack(int view)
+        public void CallBack(string view)
         {
             if (CallBackHandler != null)
             {

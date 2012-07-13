@@ -35,7 +35,7 @@ namespace Me.Amon.User
         }
         #endregion
 
-        public AmonHandler<int> CallBackHandler { get; set; }
+        public AmonHandler<string> CallBackHandler { get; set; }
 
         #region 事件处理
         private void BtOk_Click(object sender, EventArgs e)

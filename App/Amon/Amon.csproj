@@ -196,6 +196,12 @@
       <DependentUpon>Vcard.cs</DependentUpon>
     </Compile>
     <Compile Include="Gtd\EGtd.cs" />
+    <Compile Include="Gtd\V\GtdEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gtd\V\GtdEditor.Designer.cs">
+      <DependentUpon>GtdEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ico\EIco.cs" />
     <Compile Include="Ico\E\AIcoAction.cs" />
     <Compile Include="Ico\E\AppendImgAction.cs" />
@@ -241,7 +247,7 @@
     <Compile Include="Img\V\ASmall.Designer.cs">
       <DependentUpon>ASmall.cs</DependentUpon>
     </Compile>
-    <Compile Include="MApp.cs" />
+    <Compile Include="TApp.cs" />
     <Compile Include="Pwd\Att.cs" />
     <Compile Include="Pwd\Bean\ACall.cs">
       <SubType>UserControl</SubType>
@@ -1278,6 +1284,12 @@
       <DependentUpon>Vcard.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Gtd\AGtd.resx">
+      <DependentUpon>AGtd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gtd\V\GtdEditor.resx">
+      <DependentUpon>GtdEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ico\AIco.resx">
       <DependentUpon>AIco.cs</DependentUpon>
     </EmbeddedResource>
@@ -1639,6 +1651,7 @@
     <Content Include="Logo\logo48.png" />
     <Content Include="Logo\logo64.png" />
     <Content Include="Logo\logo96.png" />
+    <None Include="Resources\Logo25.png" />
     <None Include="Resources\Icon.ico" />
     <None Include="Resources\Logo16.png" />
     <None Include="Resources\AppCur.png" />
@@ -1713,6 +1726,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Gtd\C\" />
+    <Folder Include="Gtd\E\" />
+    <Folder Include="Gtd\M\" />
     <Folder Include="Ico\C\" />
     <Folder Include="Img\M\" />
     <Folder Include="Pwd\C\" />

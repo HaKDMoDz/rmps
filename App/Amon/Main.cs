@@ -6,16 +6,9 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using Me.Amon.Bar;
 using Me.Amon.Event;
-using Me.Amon.Ico;
 using Me.Amon.Model;
 using Me.Amon.Properties;
-using Me.Amon.Pwd;
-using Me.Amon.Ren;
-using Me.Amon.Sec;
-using Me.Amon.Spy;
-using Me.Amon.Sql;
 using Me.Amon.User;
 using Me.Amon.User.Sign;
 using Me.Amon.Util;
@@ -34,28 +27,26 @@ namespace Me.Amon
         private static Waiting _Waiting;
 
         private UserModel _UserModel;
-        private List<MApp> _AppList;
-        private APwd _APwd;
-        private ASec _ASec;
-        private ABar _ABar;
-        private ARen _ARen;
-        private AIco _AIco;
-        private ASql _ASql;
-        private ASpy _ASpy;
-
         private ILogo _ILogo;
+        private Pwd.APwd _APwd;
+        private Dictionary<string, IApp> _Apps;
+
+        #region 窗口移动
         private bool _IsMouseDown;
         private Point _MouseOffset;
         #endregion
 
-        private int _Width = 312;
-        private int _Height = 164;
+        #region 窗口视觉
         private int _ArcWidth = 4;
         private int _ArcHeight = 4;
         private Color _StartColor = Color.White;
         private Color _EndColor = Color.Gainsboro;
         private Color _TransColor = Color.Cyan;
         private Image _BgImage;
+        private Region _MaxRegion;
+        private Region _MinRegion;
+        #endregion
+        #endregion
 
         #region 构造函数
         public Main()
@@ -191,7 +182,6 @@ namespace Me.Amon
             Icon = Me.Amon.Properties.Resources.Icon;
 
             GenBgImage();
-            ChangeAppVisible(false);
 
             // 窗口位置
             int x = Settings.Default.LocX;
@@ -214,6 +204,9 @@ namespace Me.Amon
             int pattern = Settings.Default.Pattern;
             SetTrayVisible((pattern & EApp.PATTERN_TRAY) != 0);
 
+            // 
+            MgPlugIns.Checked = Settings.Default.PlugIns;
+
             // 系统徽标
             ChangeEmotion(Settings.Default.Emotion);
             MgLogo.Checked = (Settings.Default.Emotion == 0);
@@ -228,8 +221,14 @@ namespace Me.Amon
             if (_UserModel == null)
             {
                 _UserModel = new UserModel();
-                SignAc(ESignAc.SignIn, new AmonHandler<int>(DoSignIn));
             }
+
+            ListViewItem item = new ListViewItem { Text = "登录", ImageKey = "" };
+            LvApp.Items.Add(item);
+            item = new ListViewItem { Text = "注册", ImageKey = "" };
+            LvApp.Items.Add(item);
+
+            ChangeAppVisible(false);
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
@@ -254,7 +253,7 @@ namespace Me.Amon
             Settings.Default.Save();
         }
 
-        private void PbLogo_MouseDown(object sender, MouseEventArgs e)
+        private void Main_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -265,14 +264,12 @@ namespace Me.Amon
             }
         }
 
-        private void PbLogo_MouseMove(object sender, MouseEventArgs e)
+        private void Main_MouseMove(object sender, MouseEventArgs e)
         {
             if (!_IsMouseDown)
             {
-                _ILogo.MouseMove();
                 return;
             }
-            ChangeAppVisible(false);
 
             Point pos = MousePosition;
             pos.X += _MouseOffset.X;
@@ -308,24 +305,88 @@ namespace Me.Amon
             Location = pos;
         }
 
-        private void PbLogo_MouseUp(object sender, MouseEventArgs e)
+        private void Main_MouseUp(object sender, MouseEventArgs e)
+        {
+            _IsMouseDown = false;
+        }
+
+        private void Main_MouseLeave(object sender, EventArgs e)
+        {
+            if (MousePosition.X < Location.X
+                || MousePosition.Y < Location.Y
+                || MousePosition.X > Location.X + Width
+                || MousePosition.Y > Location.Y + Height)
+            {
+                ChangeAppVisible(false);
+            }
+        }
+
+        private void PbApp_MouseEnter(object sender, EventArgs e)
+        {
+            ChangeAppVisible(true);
+        }
+
+        private void PbApp_MouseDown(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void PbApp_MouseMove(object sender, MouseEventArgs e)
+        {
+            _ILogo.MouseMove();
+        }
+
+        private void PbApp_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
                 CmMenu.Show(PbApp, e.Location);
             }
-
-            if (_IsMouseDown)
-            {
-                _IsMouseDown = false;
-                ChangeAppVisible(true);
-                return;
-            }
         }
 
-        private void PbLogo_DoubleClick(object sender, EventArgs e)
+        private void PbApp_DoubleClick(object sender, EventArgs e)
         {
             ShowLast();
+        }
+
+        private void LvApp_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void LvApp_DragEnter(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void LvApp_DragDrop(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void LvApp_DoubleClick(object sender, EventArgs e)
+        {
+            if (LvApp.SelectedItems.Count < 1)
+            {
+                return;
+            }
+            ListViewItem item = LvApp.SelectedItems[0];
+            TApp app = item.Tag as TApp;
+            if (app == null)
+            {
+                return;
+            }
+
+            if (_IApp == null || !_IApp.Visible)
+            {
+                CheckUser(new AmonHandler<string>(ShowLast));
+                return;
+            }
+
+            if (_IApp.Name != app.Id)
+            {
+                _IApp.Visible = false;
+                ShowIApp(app.Id);
+                return;
+            }
         }
 
         private void NiTray_DoubleClick(object sender, EventArgs e)
@@ -335,7 +396,11 @@ namespace Me.Amon
         #endregion
 
         #region 选单事件
-        #region 导航选单
+        /// <summary>
+        /// 窗口是否置顶
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MgTopMost_Click(object sender, EventArgs e)
         {
             TopMost = !TopMost;
@@ -347,7 +412,7 @@ namespace Me.Amon
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MgTopMost0_Click(object sender, EventArgs e)
+        private void MgThrough_Click(object sender, EventArgs e)
         {
             if (BackColor == Color.Red)
             {
@@ -359,70 +424,7 @@ namespace Me.Amon
             }
         }
 
-        private void MgAPwd_Click(object sender, EventArgs e)
-        {
-            if (_IApp == null || !_IApp.Visible)
-            {
-                CheckUser(new AmonHandler<int>(ShowAPwd));
-                return;
-            }
-
-            if (_IApp.AppId != EApp.IAPP_APWD)
-            {
-                _IApp.Visible = false;
-                ShowAPwd(EApp.IAPP_APWD);
-                return;
-            }
-        }
-
-        private void MgASec_Click(object sender, EventArgs e)
-        {
-            if (_IApp == null || !_IApp.Visible)
-            {
-                CheckUser(new AmonHandler<int>(ShowASec));
-                return;
-            }
-
-            if (_IApp.AppId != EApp.IAPP_ASEC)
-            {
-                _IApp.Visible = false;
-                ShowASec(EApp.IAPP_ASEC);
-                return;
-            }
-        }
-
-        private void MgABar_Click(object sender, EventArgs e)
-        {
-            if (_IApp == null || !_IApp.Visible)
-            {
-                CheckUser(new AmonHandler<int>(ShowABar));
-                return;
-            }
-
-            if (_IApp.AppId != EApp.IAPP_ABAR)
-            {
-                _IApp.Visible = false;
-                ShowABar(EApp.IAPP_ABAR);
-                return;
-            }
-        }
-
-        private void MgARen_Click(object sender, EventArgs e)
-        {
-            if (_IApp == null || !_IApp.Visible)
-            {
-                CheckUser(new AmonHandler<int>(ShowARen));
-                return;
-            }
-
-            if (_IApp.AppId != EApp.IAPP_AREN)
-            {
-                _IApp.Visible = false;
-                ShowARen(EApp.IAPP_AREN);
-                return;
-            }
-        }
-
+        #region
         private void MgLogo_Click(object sender, EventArgs e)
         {
             Settings.Default.Emotion = 1 - Settings.Default.Emotion;
@@ -447,36 +449,75 @@ namespace Me.Amon
             }
             Settings.Default.Save();
         }
+        #endregion
 
+        #region 权限相关
+        /// <summary>
+        /// 在线注册
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MgSignOl_Click(object sender, EventArgs e)
         {
-            SignAc(ESignAc.SignOl, new AmonHandler<int>(DoSignOl));
+            SignAc(ESignAc.SignOl, new AmonHandler<string>(DoSignOl));
         }
 
+        /// <summary>
+        /// 离线注册
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MgSignUl_Click(object sender, EventArgs e)
         {
-            SignAc(ESignAc.SignUl, new AmonHandler<int>(ShowAPwd));
+            SignAc(ESignAc.SignUl, new AmonHandler<string>(ShowAPwd));
         }
 
+        /// <summary>
+        /// 脱机注册
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MgSignPc_Click(object sender, EventArgs e)
         {
-            SignAc(ESignAc.SignPc, new AmonHandler<int>(ShowAPwd));
+            SignAc(ESignAc.SignPc, new AmonHandler<string>(ShowAPwd));
         }
 
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MgSignIn_Click(object sender, EventArgs e)
         {
-            SignAc(ESignAc.SignIn, new AmonHandler<int>(DoSignIn));
+            SignAc(ESignAc.SignIn, new AmonHandler<string>(DoSignIn));
         }
 
+        /// <summary>
+        /// 注销
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MgSignOf_Click(object sender, EventArgs e)
         {
             SignOf();
         }
 
+        /// <summary>
+        /// 口令找回
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MgSignFp_Click(object sender, EventArgs e)
         {
         }
+        #endregion
 
+        private void MiReset_Click(object sender, EventArgs e)
+        {
+            new Reset(_UserModel).ShowDialog();
+        }
+
+        #region
         private void MgInfo_Click(object sender, EventArgs e)
         {
             ShowAbout(this);
@@ -517,8 +558,9 @@ namespace Me.Amon
             MgTray.Checked = visible;
         }
 
+        #region 权限相关
         private SignAc _SignAc;
-        private void SignAc(ESignAc signAc, AmonHandler<int> handler)
+        private void SignAc(ESignAc signAc, AmonHandler<string> handler)
         {
             if (_SignAc == null || !_SignAc.Visible)
             {
@@ -528,6 +570,25 @@ namespace Me.Amon
             _SignAc.CallBackHandler = handler;
             _SignAc.ShowView(signAc);
             _SignAc.Show();
+        }
+
+        private SignRc _SignRc;
+        private void CheckUser(AmonHandler<string> handler)
+        {
+            if (!CharUtil.IsValidateCode(_UserModel.Code))
+            {
+                SignAc(ESignAc.SignIn, handler);
+            }
+            else
+            {
+                if (_SignRc == null || !_SignRc.Visible)
+                {
+                    _SignRc = new SignRc(_UserModel);
+                    _SignRc.InitOnce();
+                    _SignRc.Show();
+                }
+                _SignRc.CallBackHandler = handler;
+            }
         }
 
         private void SignOf()
@@ -549,26 +610,7 @@ namespace Me.Amon
             MgSignOf.Visible = false;
         }
 
-        private SignRc _SignRc;
-        private void CheckUser(AmonHandler<int> handler)
-        {
-            if (!CharUtil.IsValidateCode(_UserModel.Code))
-            {
-                SignAc(ESignAc.SignIn, handler);
-            }
-            else
-            {
-                if (_SignRc == null || !_SignRc.Visible)
-                {
-                    _SignRc = new SignRc(_UserModel);
-                    _SignRc.InitOnce();
-                    _SignRc.Show();
-                }
-                _SignRc.CallBackHandler = handler;
-            }
-        }
-
-        private void DoSignIn(int view)
+        private void DoSignIn(string view)
         {
             MgSignIn.Visible = false;
             MgSignUp.Visible = false;
@@ -587,13 +629,13 @@ namespace Me.Amon
             doc.Load(reader);
             reader.Close();
 
-            MApp app;
-            _AppList = new List<MApp>();
+            TApp app;
+            _Apps = new Dictionary<string, IApp>();
             foreach (XmlNode node in doc.SelectNodes("/Amon/Apps/App"))
             {
-                app = new MApp();
+                app = new TApp();
                 app.FromXml(node);
-                _AppList.Add(app);
+                _Apps[app.Id] = null;
 
                 IlApp.Images.Add(app.Id, BeanUtil.ReadImage(app.Logo, Resources.Logo32));
                 LvApp.Items.Add(new ListViewItem { Text = app.Text, ImageKey = app.Id, Tag = app });
@@ -602,11 +644,62 @@ namespace Me.Amon
             return;
         }
 
-        private void DoSignOl(int view)
+        private void DoSignOl(string view)
         {
         }
+        #endregion
 
-        private void ShowLast(int view)
+        private void ShowAPwd(string view)
+        {
+            if (_APwd == null || _APwd.IsDisposed)
+            {
+                _APwd = new Pwd.APwd(_UserModel);
+            }
+
+            _IApp = _APwd;
+            _IApp.Show();
+        }
+
+        private void ShowIApp(string app)
+        {
+            IApp iapp = _Apps[app];
+            if (iapp == null || iapp.IsDisposed)
+            {
+                iapp = GetIApp(app);
+                if (iapp == null)
+                {
+                    return;
+                }
+                _Apps[app] = iapp;
+            }
+
+            iapp.Show();
+        }
+
+        public IApp GetIApp(string app)
+        {
+            switch (app)
+            {
+                case EApp.IAPP_ASEC_NAME:
+                    return new Sec.ASec(_UserModel);
+                case EApp.IAPP_ABAR_NAME:
+                    return new Bar.ABar(_UserModel);
+                case EApp.IAPP_AREN_NAME:
+                    return new Ren.ARen(_UserModel);
+                case EApp.IAPP_AICO_NAME:
+                    return new Ico.AIco(_UserModel);
+                case EApp.IAPP_AIMG_NAME:
+                    return new Img.AImg(_UserModel);
+                case EApp.IAPP_ASPY_NAME:
+                    return new Spy.ASpy(_UserModel);
+                case EApp.IAPP_ASQL_NAME:
+                    return new Sql.ASql(_UserModel);
+                default:
+                    return null;
+            }
+        }
+
+        private void ShowLast(string view)
         {
             if (_IApp == null || _IApp.IsDisposed)
             {
@@ -618,90 +711,11 @@ namespace Me.Amon
             }
         }
 
-        private void ShowAPwd(int view)
-        {
-            if (_APwd == null || _APwd.IsDisposed)
-            {
-                _APwd = new APwd(_UserModel);
-            }
-
-            _IApp = _APwd;
-            _IApp.Show();
-
-            DoSignIn(view);
-        }
-
-        private void ShowASec(int view)
-        {
-            if (_ASec == null || _ASec.IsDisposed)
-            {
-                _ASec = new ASec(_UserModel);
-            }
-
-            _IApp = _ASec;
-            _IApp.Show();
-        }
-
-        private void ShowABar(int view)
-        {
-            if (_ABar == null || _ABar.IsDisposed)
-            {
-                _ABar = new ABar(_UserModel);
-            }
-
-            _IApp = _ABar;
-            _IApp.Show();
-        }
-
-        private void ShowARen(int view)
-        {
-            if (_ARen == null || _ARen.IsDisposed)
-            {
-                _ARen = new ARen(_UserModel);
-            }
-
-            _IApp = _ARen;
-            _IApp.Show();
-        }
-
-        private void ShowAIco(int view)
-        {
-            if (_AIco == null || _AIco.IsDisposed)
-            {
-                _AIco = new AIco(_UserModel);
-            }
-
-            _IApp = _AIco;
-            _IApp.Show();
-        }
-
-        private void ShowASql(int view)
-        {
-            if (_ASql == null || _ASql.IsDisposed)
-            {
-                _ASql = new ASql(_UserModel);
-            }
-
-            _IApp = _ASql;
-            _IApp.Show();
-        }
-
-        private void ShowASpy(int view)
-        {
-            if (_ASpy == null || _ASpy.IsDisposed)
-            {
-                _ASpy = new ASpy(_UserModel);
-            }
-
-            _IApp = _ASpy;
-            _IApp.Show();
-        }
-
         private void ShowLast()
         {
             if (_IApp == null || _IApp.IsDisposed || !_IApp.Visible)
             {
-                CheckUser(new AmonHandler<int>(ShowLast));
+                CheckUser(new AmonHandler<string>(ShowLast));
                 return;
             }
 
@@ -709,56 +723,37 @@ namespace Me.Amon
             _IApp.BringToFront();
         }
 
-        private void ShowIApp(MApp app)
-        {
-            if (_AppList == null)
-            {
-                _AppList = new List<MApp>();
-            }
-            IApp iapp = null;
-            foreach (MApp mapp in _AppList)
-            {
-                if (mapp.Id == app.Id)
-                {
-                    iapp = mapp.App;
-                    break;
-                }
-            }
-            if (iapp == null)
-            {
-            }
-        }
-
         private void ChangeAppVisible(bool visible)
         {
-            if (visible)
+            if (MgPlugIns.Checked && visible)
             {
-                Size = new Size(_Width, _Height);
-                GraphicsPath path = BeanUtil.CreateRoundedRectanglePath(0, 0, _Width, _Height, _ArcWidth, _ArcHeight);
-                Region = new Region(path);
+                if (_MaxRegion == null)
+                {
+                    _MaxRegion = new Region(BeanUtil.CreateRoundedRectanglePath(0, 0, Width, Height, _ArcWidth, _ArcHeight));
+                }
+                Region = _MaxRegion.Clone();
             }
             else
             {
-                Point point = PbApp.Location;
-                Size size = PbApp.Size;
-                Size = new Size(point.X + size.Width, point.Y + size.Height);
-                Region = new Region(new Rectangle(point.X, point.Y, size.Width, size.Height));
+                if (_MinRegion == null)
+                {
+                    _MinRegion = new Region(PbApp.Bounds);
+                }
+                Region = _MinRegion.Clone();
             }
-            LvApp.Visible = visible;
         }
 
         private void GenBgImage()
         {
             if (_BgImage == null)
             {
-                _BgImage = new Bitmap(_Width, _Height);
+                _BgImage = new Bitmap(Width, Height);
                 using (Graphics g = Graphics.FromImage(_BgImage))
                 {
-                    Rectangle rect = new Rectangle(0, 0, _Width, _Height);
-                    LinearGradientBrush brush = new LinearGradientBrush(rect, _StartColor, _EndColor, LinearGradientMode.Vertical);
-                    g.FillPath(brush, BeanUtil.CreateRoundedRectanglePath(0, 0, _Width, _Height, _ArcWidth, _ArcHeight));
+                    LinearGradientBrush brush = new LinearGradientBrush(Bounds, _StartColor, _EndColor, LinearGradientMode.Vertical);
+                    g.FillPath(brush, BeanUtil.CreateRoundedRectanglePath(0, 0, Width, Height, _ArcWidth, _ArcHeight));
                     Pen pen = new Pen(Color.Gray);
-                    g.DrawPath(pen, BeanUtil.CreateRoundedRectanglePath(0, 0, _Width - 1, _Height - 1, _ArcWidth, _ArcHeight));
+                    g.DrawPath(pen, BeanUtil.CreateRoundedRectanglePath(0, 0, Width - 1, Height - 1, _ArcWidth, _ArcHeight));
                     g.Save();
                 }
             }
@@ -786,110 +781,12 @@ namespace Me.Amon
 
         private void MgSignUp_Click(object sender, EventArgs e)
         {
-            SignAc(ESignAc.SignPc, new AmonHandler<int>(ShowAPwd));
+            SignAc(ESignAc.SignPc, new AmonHandler<string>(ShowAPwd));
         }
 
-        private void LvApp_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-        }
-
-        private void LvApp_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void MgAIco_Click(object sender, EventArgs e)
-        {
-            if (_IApp == null || !_IApp.Visible)
-            {
-                CheckUser(new AmonHandler<int>(ShowAIco));
-                return;
-            }
-
-            if (_IApp.AppId != EApp.IAPP_AICO)
-            {
-                _IApp.Visible = false;
-                ShowAIco(EApp.IAPP_AICO);
-                return;
-            }
-        }
-
-        private void MiReset_Click(object sender, EventArgs e)
-        {
-            new Reset(_UserModel).ShowDialog();
-        }
-
-        private void MiASql_Click(object sender, EventArgs e)
-        {
-            if (_IApp == null || !_IApp.Visible)
-            {
-                CheckUser(new AmonHandler<int>(ShowASql));
-                return;
-            }
-
-            if (_IApp.AppId != EApp.IAPP_ASQL)
-            {
-                _IApp.Visible = false;
-                ShowASql(EApp.IAPP_ASQL);
-                return;
-            }
-        }
-
-        private void MiASpy_Click(object sender, EventArgs e)
-        {
-            if (_IApp == null || !_IApp.Visible)
-            {
-                CheckUser(new AmonHandler<int>(ShowASpy));
-                return;
-            }
-
-            if (_IApp.AppId != EApp.IAPP_ASPY)
-            {
-                _IApp.Visible = false;
-                ShowASpy(EApp.IAPP_ASPY);
-                return;
-            }
-        }
-
-        private void LvApp_DragEnter(object sender, DragEventArgs e)
+        private void MgPlugIns_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void LvApp_DragDrop(object sender, DragEventArgs e)
-        {
-
-        }
-
-        private void LvApp_DoubleClick(object sender, EventArgs e)
-        {
-            if (LvApp.SelectedItems.Count < 1)
-            {
-                return;
-            }
-            ListViewItem item = LvApp.SelectedItems[0];
-            MApp app = item.Tag as MApp;
-            if (app == null)
-            {
-                return;
-            }
-
-            ShowIApp(app);
-        }
-
-        private void Main_MouseLeave(object sender, EventArgs e)
-        {
-            if (MousePosition.X < Location.X
-                || MousePosition.Y < Location.Y
-                || MousePosition.X > Location.X + Width
-                || MousePosition.Y > Location.Y + Height)
-            {
-                ChangeAppVisible(false);
-            }
-        }
-
-        private void PbApp_MouseEnter(object sender, EventArgs e)
-        {
-            ChangeAppVisible(true);
         }
     }
 }

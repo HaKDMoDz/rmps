@@ -70,5 +70,17 @@ namespace Me.Amon.Properties {
                 this["Emotion"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool PlugIns {
+            get {
+                return ((bool)(this["PlugIns"]));
+            }
+            set {
+                this["PlugIns"] = value;
+            }
+        }
     }
 }

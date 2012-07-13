@@ -3,7 +3,7 @@ using Me.Amon.Model;
 
 namespace Me.Amon
 {
-    public class MApp : Vcs
+    public class TApp : Vcs
     {
         public string Type { get; set; }
 

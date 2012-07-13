@@ -172,9 +172,9 @@ namespace Me.Amon.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap Logo24 {
+        internal static System.Drawing.Bitmap Logo25 {
             get {
-                object obj = ResourceManager.GetObject("Logo24", resourceCulture);
+                object obj = ResourceManager.GetObject("Logo25", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
