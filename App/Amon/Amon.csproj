@@ -196,11 +196,41 @@
       <DependentUpon>Vcard.cs</DependentUpon>
     </Compile>
     <Compile Include="Gtd\EGtd.cs" />
+    <Compile Include="Gtd\V\Cyclist.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gtd\V\Cyclist.Designer.cs">
+      <DependentUpon>Cyclist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gtd\V\FixTime.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gtd\V\FixTime.Designer.cs">
+      <DependentUpon>FixTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Gtd\V\GtdEditor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Gtd\V\GtdEditor.Designer.cs">
       <DependentUpon>GtdEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gtd\V\Interval.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gtd\V\Interval.Designer.cs">
+      <DependentUpon>Interval.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gtd\V\Others.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gtd\V\Others.Designer.cs">
+      <DependentUpon>Others.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gtd\V\Repeat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gtd\V\Repeat.Designer.cs">
+      <DependentUpon>Repeat.cs</DependentUpon>
     </Compile>
     <Compile Include="Ico\EIco.cs" />
     <Compile Include="Ico\E\AIcoAction.cs" />
@@ -1287,8 +1317,23 @@
     <EmbeddedResource Include="Gtd\AGtd.resx">
       <DependentUpon>AGtd.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Gtd\V\Cyclist.resx">
+      <DependentUpon>Cyclist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gtd\V\FixTime.resx">
+      <DependentUpon>FixTime.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Gtd\V\GtdEditor.resx">
       <DependentUpon>GtdEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gtd\V\Interval.resx">
+      <DependentUpon>Interval.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gtd\V\Others.resx">
+      <DependentUpon>Others.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gtd\V\Repeat.resx">
+      <DependentUpon>Repeat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ico\AIco.resx">
       <DependentUpon>AIco.cs</DependentUpon>
@@ -1657,7 +1702,6 @@
     <None Include="Resources\AppCur.png" />
     <None Include="Resources\AppNan.png" />
     <None Include="Resources\Logo32.png" />
-    <None Include="Resources\Logo24.png" />
     <None Include="Resources\PosSel.png" />
     <None Include="Resources\PosDef.png" />
     <None Include="Resources\Eraser.png" />
