@@ -78,7 +78,7 @@ namespace Me.Amon.Pwd._Cat
             DialogResult = DialogResult.OK;
             if (CallBack != null)
             {
-                CallBack.Invoke(item.Id);
+                CallBack(item.Id);
             }
             Close();
         }

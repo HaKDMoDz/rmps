@@ -67,7 +67,7 @@ namespace Me.Amon.Pwd._Key
             if (CallBackHandler != null)
             {
                 png.Path = (LsDir.Items[_LastIdx] as Dir).Path;
-                CallBackHandler.Invoke(png);
+                CallBackHandler(png);
             }
             Close();
         }

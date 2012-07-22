@@ -15,6 +15,8 @@ namespace Me.Amon
 
         public string Tips { get; set; }
 
+        public bool Default { get; set; }
+
         public IApp App { get; set; }
 
         public override string ToString()
@@ -39,6 +41,7 @@ namespace Me.Amon
             Uri = Attribute(node, "Uri", "");
             Text = Attribute(node, "Text", "");
             Tips = Attribute(node, "Tips", "");
+            Default = "true" == Attribute(node, "Default", "").ToLower();
         }
     }
 }

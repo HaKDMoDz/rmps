@@ -70,7 +70,7 @@ namespace Me.Amon.Img.C
         {
             if (Redraw != null)
             {
-                Redraw.Invoke(this, new PaintEventArgs(dc, clipRectangle));
+                Redraw(this, new PaintEventArgs(dc, clipRectangle));
             }
         }
 
@@ -83,7 +83,7 @@ namespace Me.Amon.Img.C
             drawStarted = true;
             if (DrawStarted != null)
             {
-                DrawStarted.Invoke(sender, e);
+                DrawStarted(sender, e);
             }
         }
 
@@ -97,7 +97,7 @@ namespace Me.Amon.Img.C
             cancelEvent.Reset();
             if (DrawCompleted != null)
             {
-                DrawCompleted.Invoke(sender, e);
+                DrawCompleted(sender, e);
             }
         }
 

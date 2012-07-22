@@ -2,9 +2,7 @@ using System;
 using System.Windows.Forms;
 using Me.Amon.Da;
 using Me.Amon.Event;
-using Me.Amon.Pwd;
 using Me.Amon.Util;
-using Me.Amon.Properties;
 
 namespace Me.Amon.Pwd._Cat
 {
@@ -72,7 +70,7 @@ namespace Me.Amon.Pwd._Cat
 
             if (CallBackHandler != null)
             {
-                CallBackHandler.Invoke(_Cat);
+                CallBackHandler(_Cat);
             }
             Close();
         }

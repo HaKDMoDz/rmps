@@ -15,7 +15,7 @@ namespace Me.Amon.Sec.V.Pro.Uw
 
             if (CallBack != null)
             {
-                CallBack.Invoke(Main.OpenFileDialog.FileName);
+                CallBack(Main.OpenFileDialog.FileName);
             }
         }
     }

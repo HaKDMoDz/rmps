@@ -21,7 +21,7 @@ namespace Me.Amon.Sec.V.Pro.Uw
         {
             if (CallBack != null)
             {
-                CallBack.Invoke(TbText.Text);
+                CallBack(TbText.Text);
             }
             Close();
         }

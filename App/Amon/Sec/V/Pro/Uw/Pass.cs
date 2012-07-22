@@ -66,7 +66,7 @@ namespace Me.Amon.Sec.V.Pro.Uw
         {
             if (CallBack != null)
             {
-                CallBack.Invoke(TbPass.Text);
+                CallBack(TbPass.Text);
             }
 
             Close();

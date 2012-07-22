@@ -1108,22 +1108,22 @@
     </Compile>
     <Compile Include="Uc\TabControl\ThemedColors.cs" />
     <Compile Include="Uc\XmlMenu.cs" />
-    <Compile Include="User\Auth\AuthLk.cs">
+    <Compile Include="V\Auth\AuthLk.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="User\Auth\AuthLk.Designer.cs">
+    <Compile Include="V\Auth\AuthLk.Designer.cs">
       <DependentUpon>AuthLk.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\Auth\AuthPc.cs">
+    <Compile Include="V\Auth\AuthPc.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="User\Auth\AuthPc.Designer.cs">
+    <Compile Include="V\Auth\AuthPc.Designer.cs">
       <DependentUpon>AuthPc.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\Auth\AuthUl.cs">
+    <Compile Include="V\Auth\AuthUl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="User\Auth\AuthUl.Designer.cs">
+    <Compile Include="V\Auth\AuthUl.Designer.cs">
       <DependentUpon>AuthUl.cs</DependentUpon>
     </Compile>
     <Compile Include="Uw\HotKeys.cs">
@@ -1145,10 +1145,10 @@
       <DependentUpon>KeyIcon.cs</DependentUpon>
     </Compile>
     <Compile Include="Uc\Item.cs" />
-    <Compile Include="User\Sign\SignOl.cs">
+    <Compile Include="V\Sign\SignOl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="User\Sign\SignOl.Designer.cs">
+    <Compile Include="V\Sign\SignOl.Designer.cs">
       <DependentUpon>SignOl.cs</DependentUpon>
     </Compile>
     <Compile Include="Util\BeanUtil.cs">
@@ -1184,68 +1184,62 @@
     <Compile Include="Uw\UdcEditor.Designer.cs">
       <DependentUpon>UdcEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\AuthAc.cs">
+    <Compile Include="V\Auth\AuthAc.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="User\AuthAc.Designer.cs">
+    <Compile Include="V\Auth\AuthAc.Designer.cs">
       <DependentUpon>AuthAc.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\AuthRc.cs">
+    <Compile Include="V\Auth\AuthRc.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="User\AuthRc.Designer.cs">
+    <Compile Include="V\Auth\AuthRc.Designer.cs">
       <DependentUpon>AuthRc.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\Sign\SignFk.cs">
+    <Compile Include="V\Sign\SignFk.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="User\Sign\SignFk.Designer.cs">
+    <Compile Include="V\Sign\SignFk.Designer.cs">
       <DependentUpon>SignFk.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\Auth\AuthOl.cs">
+    <Compile Include="V\Auth\AuthOl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="User\Auth\AuthOl.Designer.cs">
+    <Compile Include="V\Auth\AuthOl.Designer.cs">
       <DependentUpon>AuthOl.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\Auth\AuthSk.cs">
+    <Compile Include="V\Auth\AuthSk.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="User\Auth\AuthSk.Designer.cs">
+    <Compile Include="V\Auth\AuthSk.Designer.cs">
       <DependentUpon>AuthSk.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\Auth\EAuthAc.cs" />
-    <Compile Include="User\Auth\IAuthAc.cs" />
-    <Compile Include="User\SignAc.cs">
+    <Compile Include="V\Auth\EAuthAc.cs" />
+    <Compile Include="V\Auth\IAuthAc.cs" />
+    <Compile Include="V\Sign\SignRc.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="User\SignAc.Designer.cs">
-      <DependentUpon>SignAc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="User\SignRc.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="User\SignRc.Designer.cs">
+    <Compile Include="V\Sign\SignRc.Designer.cs">
       <DependentUpon>SignRc.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\Sign\ESignAc.cs" />
-    <Compile Include="User\Sign\ISignAc.cs" />
-    <Compile Include="User\Sign\SignIn.cs">
+    <Compile Include="V\Sign\ESignAc.cs" />
+    <Compile Include="V\Sign\ISignAc.cs" />
+    <Compile Include="V\Sign\SignIn.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="User\Sign\SignIn.Designer.cs">
+    <Compile Include="V\Sign\SignIn.Designer.cs">
       <DependentUpon>SignIn.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\Sign\SignUl.cs">
+    <Compile Include="V\Sign\SignUl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="User\Sign\SignUl.Designer.cs">
+    <Compile Include="V\Sign\SignUl.Designer.cs">
       <DependentUpon>SignUl.cs</DependentUpon>
     </Compile>
-    <Compile Include="User\Sign\SignPc.cs">
+    <Compile Include="V\Sign\SignPc.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="User\Sign\SignPc.Designer.cs">
+    <Compile Include="V\Sign\SignPc.Designer.cs">
       <DependentUpon>SignPc.cs</DependentUpon>
     </Compile>
     <Compile Include="Uw\Alert.cs">
@@ -1272,9 +1266,22 @@
     <Compile Include="Uw\Waiting.Designer.cs">
       <DependentUpon>Waiting.cs</DependentUpon>
     </Compile>
-    <Compile Include="V\EyeLogo.cs" />
-    <Compile Include="V\IcoLogo.cs" />
-    <Compile Include="V\ILogo.cs" />
+    <Compile Include="V\Sign\SignAc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="V\Sign\SignAc.Designer.cs">
+      <DependentUpon>SignAc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="V\IAuth.cs" />
+    <Compile Include="V\Guid\AGuid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="V\Guid\AGuid.Designer.cs">
+      <DependentUpon>AGuid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="V\Guid\LogoEye.cs" />
+    <Compile Include="V\Guid\LogoIco.cs" />
+    <Compile Include="V\Guid\ILogo.cs" />
     <EmbeddedResource Include="Bar\ABar.resx">
       <DependentUpon>ABar.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1598,13 +1605,13 @@
     <EmbeddedResource Include="Sql\V\Pdf\TextArg.resx">
       <DependentUpon>TextArg.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\Auth\AuthLk.resx">
+    <EmbeddedResource Include="V\Auth\AuthLk.resx">
       <DependentUpon>AuthLk.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\Auth\AuthPc.resx">
+    <EmbeddedResource Include="V\Auth\AuthPc.resx">
       <DependentUpon>AuthPc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\Auth\AuthUl.resx">
+    <EmbeddedResource Include="V\Auth\AuthUl.resx">
       <DependentUpon>AuthUl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\HotKeys.resx">
@@ -1616,7 +1623,7 @@
     <EmbeddedResource Include="Pwd\_Key\KeyIcon.resx">
       <DependentUpon>KeyIcon.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\Sign\SignOl.resx">
+    <EmbeddedResource Include="V\Sign\SignOl.resx">
       <DependentUpon>SignOl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\_Key\DirEdit.resx">
@@ -1631,31 +1638,28 @@
     <EmbeddedResource Include="Uw\UdcEditor.resx">
       <DependentUpon>UdcEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\AuthAc.resx">
+    <EmbeddedResource Include="V\Auth\AuthAc.resx">
       <DependentUpon>AuthAc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\AuthRc.resx">
+    <EmbeddedResource Include="V\Auth\AuthRc.resx">
       <DependentUpon>AuthRc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\Auth\AuthOl.resx">
+    <EmbeddedResource Include="V\Auth\AuthOl.resx">
       <DependentUpon>AuthOl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\SignAc.resx">
-      <DependentUpon>SignAc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="User\SignRc.resx">
+    <EmbeddedResource Include="V\Sign\SignRc.resx">
       <DependentUpon>SignRc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\Sign\SignFk.resx">
+    <EmbeddedResource Include="V\Sign\SignFk.resx">
       <DependentUpon>SignFk.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\Sign\SignIn.resx">
+    <EmbeddedResource Include="V\Sign\SignIn.resx">
       <DependentUpon>SignIn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\Sign\SignUl.resx">
+    <EmbeddedResource Include="V\Sign\SignUl.resx">
       <DependentUpon>SignUl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User\Sign\SignPc.resx">
+    <EmbeddedResource Include="V\Sign\SignPc.resx">
       <DependentUpon>SignPc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\Alert.resx">
@@ -1669,6 +1673,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\Waiting.resx">
       <DependentUpon>Waiting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="V\Sign\SignAc.resx">
+      <DependentUpon>SignAc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="V\Guid\AGuid.resx">
+      <DependentUpon>AGuid.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Amon_TemporaryKey.pfx" />
     <None Include="app.config" />
@@ -1770,11 +1780,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="C\" />
     <Folder Include="Gtd\C\" />
     <Folder Include="Gtd\E\" />
     <Folder Include="Gtd\M\" />
     <Folder Include="Ico\C\" />
     <Folder Include="Img\M\" />
+    <Folder Include="M\" />
     <Folder Include="Pwd\C\" />
     <Folder Include="Pwd\E\Edit\" />
     <Folder Include="Pwd\E\Skin\" />
@@ -1787,6 +1799,7 @@
     <Folder Include="Spy\C\" />
     <Folder Include="Spy\E\" />
     <Folder Include="Spy\M\" />
+    <Folder Include="User\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

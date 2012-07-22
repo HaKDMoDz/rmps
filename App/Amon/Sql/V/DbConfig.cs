@@ -52,7 +52,7 @@ namespace Me.Amon.Sql.V
 
             if (AmonHandler != null)
             {
-                AmonHandler.Invoke(ddl);
+                AmonHandler(ddl);
             }
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.V
 {
-    partial class SignAc
+    partial class AuthAc
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -33,20 +33,9 @@
             this.PbMenu = new System.Windows.Forms.PictureBox();
             this.BtOk = new System.Windows.Forms.Button();
             this.BtNo = new System.Windows.Forms.Button();
-            this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MiOpen = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiSep0 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiOnSignUp = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiOfSignUp = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiPcSignUp = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiSep1 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiSignFk = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiSep2 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiUpgrade = new System.Windows.Forms.ToolStripMenuItem();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).BeginInit();
-            this.CmMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // PbLogo
@@ -94,83 +83,7 @@
             this.BtNo.UseVisualStyleBackColor = true;
             this.BtNo.Click += new System.EventHandler(this.BtNo_Click);
             // 
-            // CmMenu
-            // 
-            this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MiOpen,
-            this.MiSep0,
-            this.MiOnSignUp,
-            this.MiOfSignUp,
-            this.MiPcSignUp,
-            this.MiSep1,
-            this.MiSignFk,
-            this.MiSep2,
-            this.MiUpgrade});
-            this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(153, 176);
-            // 
-            // MiOpen
-            // 
-            this.MiOpen.Name = "MiOpen";
-            this.MiOpen.Size = new System.Drawing.Size(152, 22);
-            this.MiOpen.Text = "打开(&O)";
-            this.MiOpen.Click += new System.EventHandler(this.MiOpen_Click);
-            // 
-            // MiSep0
-            // 
-            this.MiSep0.Name = "MiSep0";
-            this.MiSep0.Size = new System.Drawing.Size(149, 6);
-            // 
-            // MiOnSignUp
-            // 
-            this.MiOnSignUp.Name = "MiOnSignUp";
-            this.MiOnSignUp.Size = new System.Drawing.Size(152, 22);
-            this.MiOnSignUp.Text = "联机注册(&R)";
-            this.MiOnSignUp.Visible = false;
-            this.MiOnSignUp.Click += new System.EventHandler(this.MiOnSignUp_Click);
-            // 
-            // MiOfSignUp
-            // 
-            this.MiOfSignUp.Name = "MiOfSignUp";
-            this.MiOfSignUp.Size = new System.Drawing.Size(152, 22);
-            this.MiOfSignUp.Text = "脱机注册(&N)";
-            this.MiOfSignUp.Visible = false;
-            this.MiOfSignUp.Click += new System.EventHandler(this.MiOfSignUp_Click);
-            // 
-            // MiPcSignUp
-            // 
-            this.MiPcSignUp.Name = "MiPcSignUp";
-            this.MiPcSignUp.Size = new System.Drawing.Size(152, 22);
-            this.MiPcSignUp.Text = "注册(&P)";
-            this.MiPcSignUp.Click += new System.EventHandler(this.MiPcSignUp_Click);
-            // 
-            // MiSep1
-            // 
-            this.MiSep1.Name = "MiSep1";
-            this.MiSep1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // MiSignFk
-            // 
-            this.MiSignFk.Enabled = false;
-            this.MiSignFk.Name = "MiSignFk";
-            this.MiSignFk.Size = new System.Drawing.Size(152, 22);
-            this.MiSignFk.Text = "找回口令(&F)";
-            this.MiSignFk.Click += new System.EventHandler(this.MiSignFk_Click);
-            // 
-            // MiSep2
-            // 
-            this.MiSep2.Name = "MiSep2";
-            this.MiSep2.Size = new System.Drawing.Size(149, 6);
-            // 
-            // MiUpgrade
-            // 
-            this.MiUpgrade.Enabled = false;
-            this.MiUpgrade.Name = "MiUpgrade";
-            this.MiUpgrade.Size = new System.Drawing.Size(152, 22);
-            this.MiUpgrade.Text = "升级(&U)";
-            this.MiUpgrade.Click += new System.EventHandler(this.MiUpgrade_Click);
-            // 
-            // SignAc
+            // AuthAc
             // 
             this.AcceptButton = this.BtOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -184,12 +97,12 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "SignAc";
+            this.Name = "AuthAc";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "登录";
+            this.Text = "修改口令";
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();
-            this.CmMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -200,16 +113,6 @@
         private System.Windows.Forms.PictureBox PbMenu;
         private System.Windows.Forms.Button BtOk;
         private System.Windows.Forms.Button BtNo;
-        private System.Windows.Forms.ContextMenuStrip CmMenu;
-        private System.Windows.Forms.ToolStripMenuItem MiOpen;
-        private System.Windows.Forms.ToolStripSeparator MiSep0;
-        private System.Windows.Forms.ToolStripMenuItem MiOnSignUp;
-        private System.Windows.Forms.ToolStripMenuItem MiOfSignUp;
-        private System.Windows.Forms.ToolStripMenuItem MiPcSignUp;
-        private System.Windows.Forms.ToolStripSeparator MiSep1;
-        private System.Windows.Forms.ToolStripMenuItem MiSignFk;
-        private System.Windows.Forms.ToolStripSeparator MiSep2;
-        private System.Windows.Forms.ToolStripMenuItem MiUpgrade;
         private System.Windows.Forms.ToolTip TpTips;
     }
 }

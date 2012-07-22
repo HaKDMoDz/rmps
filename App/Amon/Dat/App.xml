@@ -3,7 +3,7 @@
   <App>Amon</App>
   <Ver>1</Ver>
   <Apps>
-    <App type="app" Id="ASec" Logo="" Uri="Me.Amon.Sec.ASec" Text="加密器" Tips=""/>
+    <App type="app" Id="ASec" Logo="" Uri="Me.Amon.Sec.ASec" Text="加密器" Tips="" Default="true"/>
     <App type="app" Id="ABar" Logo="" Uri="Me.Amon.Bar.ABar" Text="二维码" Tips=""/>
     <App type="app" Id="AImg" Logo="" Uri="Me.Amon.Img.AImg" Text="文件重命名" Tips=""/>
     <App type="app" Id="AIco" Logo="" Uri="Me.Amon.Ico.AIco" Text="图标编辑器" Tips=""/>

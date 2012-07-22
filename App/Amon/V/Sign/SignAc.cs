@@ -5,20 +5,16 @@ using System.Windows.Forms;
 using Me.Amon.Da;
 using Me.Amon.Event;
 using Me.Amon.Model;
-using Me.Amon.V.Sign;
 using Me.Amon.Util;
+using Me.Amon.V.Sign;
 
-namespace Me.Amon.V
+namespace Me.Amon.V.Auth
 {
-    /// <summary>
-    /// 权限认证
-    /// </summary>
-    public partial class SignAc : Form
+    public partial class SignAc : UserControl
     {
+        private Main _Main;
         private ISignAc _SignAc;
         private UserModel _UserModel;
-
-        public AmonHandler<string> CallBackHandler { get; set; }
 
         #region 构造函数
         public SignAc()
@@ -26,20 +22,27 @@ namespace Me.Amon.V
             InitializeComponent();
         }
 
-        public SignAc(UserModel userModel)
+        public SignAc(Main main)
+        {
+            _Main = main;
+
+            InitializeComponent();
+        }
+        #endregion
+
+        public void Init(UserModel userModel)
         {
             _UserModel = userModel;
 
-            InitializeComponent();
-
-            this.Icon = Me.Amon.Properties.Resources.Icon;
+            ShowSignIn();
         }
 
-        public void InitOnce()
+        public void ShowTips(Control control, string caption)
         {
-            BeanUtil.CenterToScreen(this);
+            _Main.ShowTips(control, caption);
         }
-        #endregion
+
+        public AmonHandler<string> CallBack;
 
         #region 事件处理
         #region 界面事件
@@ -79,14 +82,14 @@ namespace Me.Amon.V
             string home = fd.SelectedPath;
             if (!Directory.Exists(home))
             {
-                ShowAlert("您选择的路径不存在！");
+                Main.ShowAlert("您选择的路径不存在！");
                 return;
             }
 
             string path = Path.Combine(home, EApp.AMON_CFG);
             if (!File.Exists(path))
             {
-                ShowAlert("请确认您选择的数据路径是否正确！");
+                Main.ShowAlert("请确认您选择的数据路径是否正确！");
                 return;
             }
             DFAccess prop = new DFAccess();
@@ -95,7 +98,7 @@ namespace Me.Amon.V
             string code = prop.Get(EApp.AMON_CFG_CODE);
             if (!CharUtil.IsValidateCode(code) || !CharUtil.IsValidate(name))
             {
-                ShowAlert("请确认您选择的数据路径是否正确！");
+                Main.ShowAlert("请确认您选择的数据路径是否正确！");
                 return;
             }
 
@@ -113,7 +116,7 @@ namespace Me.Amon.V
         /// <param name="e"></param>
         private void MiOnSignUp_Click(object sender, EventArgs e)
         {
-            ShowSignOl();
+            //ShowSignOl();
         }
 
         /// <summary>
@@ -123,7 +126,7 @@ namespace Me.Amon.V
         /// <param name="e"></param>
         private void MiOfSignUp_Click(object sender, EventArgs e)
         {
-            ShowSignUl();
+            //ShowSignUl();
         }
 
         /// <summary>
@@ -133,7 +136,7 @@ namespace Me.Amon.V
         /// <param name="e"></param>
         private void MiPcSignUp_Click(object sender, EventArgs e)
         {
-            ShowSignPc();
+            //ShowSignPc();
         }
 
         /// <summary>
@@ -144,7 +147,7 @@ namespace Me.Amon.V
 
         private void MiSignFk_Click(object sender, EventArgs e)
         {
-            ShowSignFk();
+            //ShowSignFk();
         }
 
         /// <summary>
@@ -157,17 +160,6 @@ namespace Me.Amon.V
         }
         #endregion
         #endregion
-
-        #region 公共函数
-        public void ShowTips(Control control, string caption)
-        {
-            TpTips.SetToolTip(control, caption);
-        }
-
-        public void ShowAlert(string alert)
-        {
-            MessageBox.Show(this, alert, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
 
         public void ShowWaiting()
         {
@@ -209,16 +201,6 @@ namespace Me.Amon.V
                 _SignAc.Focus();
             }
         }
-
-        public void CallBack(string view)
-        {
-            if (CallBackHandler != null)
-            {
-                CallBackHandler.Invoke(view);
-            }
-            Close();
-        }
-        #endregion
 
         #region 私有函数
         private SignIn _SignIn;
@@ -327,7 +309,6 @@ namespace Me.Amon.V
             if (_SignAc == null)
             {
                 step = 0;
-                BeanUtil.CenterToScreen(this);
             }
             else
             {
@@ -346,9 +327,9 @@ namespace Me.Amon.V
 
             step -= control.Height;
             Height -= step;
-            Point p = Location;
-            p.Y += (step >> 1);
-            Location = p;
+            //Point p = Location;
+            //p.Y += (step >> 1);
+            //Location = p;
         }
         #endregion
     }

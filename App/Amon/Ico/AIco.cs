@@ -193,7 +193,7 @@ namespace Me.Amon.Ico
                     TIco.Images.Add(ico.Icon.ToBitmap());
                 }
             }
-            AmonHandler.Invoke(TIco);
+            AmonHandler(TIco);
         }
 
         public void SaveIcl(string file)
