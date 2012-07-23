@@ -34,13 +34,8 @@ namespace Me.Amon.Img
         #region 接口实现
         public int AppId
         {
-            get
-            {
-                return EApp.IAPP_AIMG;
-            }
-            set
-            {
-            }
+            get;
+            set;
         }
 
         public Form Form

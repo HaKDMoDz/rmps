@@ -17,8 +17,8 @@ namespace Me.Amon.V.Guid
         private Main _Main;
         private UserModel _UserModel;
         private ILogo _ILogo;
-        private TApp _TApp;
-        private IApp _IApp;
+        private TApp _TiApp;
+        private TApp _TdApp;
         private IApp _DApp;
         private Dictionary<string, IApp> _Apps;
         #region 窗口移动
@@ -89,55 +89,25 @@ namespace Me.Amon.V.Guid
 
             ChangeAppVisible(true);
 
-            string path = Path.Combine(_UserModel.Home, "App.xml");
-            if (!File.Exists(path))
-            {
-                return;
-            }
+            LoadIApp();
 
-            StreamReader reader = File.OpenText(path);
-            XmlDocument doc = new XmlDocument();
-            doc.Load(reader);
-            reader.Close();
-
-            TApp tApp;
-            TApp dApp = null;
-            foreach (XmlNode node in doc.SelectNodes("/Amon/Apps/App"))
-            {
-                tApp = new TApp();
-                tApp.FromXml(node);
-
-                IlApp.Images.Add(tApp.Id, BeanUtil.ReadImage(tApp.Logo, Resources.Logo32));
-                LvApp.Items.Add(new ListViewItem { Text = tApp.Text, ImageKey = tApp.Id, Tag = tApp });
-
-                if (tApp.Default)
-                {
-                    dApp = tApp;
-                }
-            }
-
-            if (dApp == null)
-            {
-                _DApp = GetIApp(dApp.Id);
-                _DApp.Show();
-                return;
-            }
+            ShowDApp(0);
         }
 
-        public AmonHandler<string> CallBack;
+        public AmonHandler<int> CallBack;
 
         public bool ddd()
         {
-            //foreach (IApp iapp in _Apps)
+            foreach (IApp iapp in _Apps.Values)
             {
-                if (_IApp != null)
+                if (iapp != null)
                 {
-                    if (!_IApp.WillExit())
+                    if (!iapp.WillExit())
                     {
                         return false;
                     }
-                    _IApp.SaveData();
-                    _IApp.Dispose();
+                    iapp.SaveData();
+                    iapp.Dispose();
                 }
             }
             return true;
@@ -261,24 +231,27 @@ namespace Me.Amon.V.Guid
             }
 
             ListViewItem item = LvApp.SelectedItems[0];
-            _TApp = item.Tag as TApp;
-            if (_TApp == null)
+            _TiApp = item.Tag as TApp;
+            if (_TiApp == null)
             {
                 return;
             }
 
-            if (_IApp == null || !_IApp.Visible)
+            IApp app = _Apps[_TiApp.Id];
+            if (app == null || app.IsDisposed)
             {
-                _Main.CheckUser(new AmonHandler<string>(ShowIApp));
+                app = GetIApp(_TiApp);
+                _Apps[_TiApp.Id] = app;
+                app.Show();
+                //_Main.CheckUser(new AmonHandler<int>(ShowIApp));
                 return;
             }
 
-            if (_IApp.Name != _TApp.Id)
+            if (!app.Visible)
             {
-                _IApp.Visible = false;
-                ShowIApp(_TApp.Id);
-                return;
+                app.Visible = true;
             }
+            app.BringToFront();
         }
 
         #region 选单事件
@@ -485,87 +458,100 @@ namespace Me.Amon.V.Guid
         private void LoadIApp()
         {
             _Apps = new Dictionary<string, IApp>();
+
+            string path = Path.Combine(_UserModel.Home, "App.xml");
+            if (!File.Exists(path))
+            {
+                return;
+            }
+
+            StreamReader reader = File.OpenText(path);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(reader);
+            reader.Close();
+
+            TApp tApp;
+            foreach (XmlNode node in doc.SelectNodes("/Amon/Apps/App"))
+            {
+                tApp = new TApp();
+                tApp.FromXml(node);
+                _Apps[tApp.Id] = null;
+
+                IlApp.Images.Add(tApp.Id, BeanUtil.ReadImage(tApp.Logo, Resources.Logo32));
+                LvApp.Items.Add(new ListViewItem { Text = tApp.Text, ImageKey = tApp.Id, Tag = tApp });
+
+                if (tApp.Default)
+                {
+                    _TdApp = tApp;
+                }
+            }
         }
 
-        private void ShowIApp(string app)
+        private void ShowDApp(int ptn)
         {
-            IApp iapp = _Apps[app];
+            if (_DApp == null || _DApp.IsDisposed)
+            {
+                _DApp = GetIApp(_TdApp);
+            }
+            if (_DApp != null)
+            {
+                _DApp.Show();
+            }
+        }
+
+        private void ShowIApp(int ptn)
+        {
+            if (_TiApp == null)
+            {
+                return;
+            }
+
+            IApp iapp = _Apps[_TiApp.Id];
             if (iapp == null || iapp.IsDisposed)
             {
-                iapp = GetIApp(app);
+                iapp = GetIApp(_TiApp);
                 if (iapp == null)
                 {
                     return;
                 }
-                _Apps[app] = iapp;
+                _Apps[_TiApp.Id] = iapp;
             }
 
-            iapp.Show();
-        }
-
-        private void ShowDApp(string app)
-        {
-            if (_DApp == null || _DApp.IsDisposed)
+            if (iapp != null)
             {
-
+                iapp.Show();
             }
-            _DApp.Show();
         }
 
-        public IApp GetIApp(string app)
+        public IApp GetIApp(TApp app)
         {
-            switch (app)
+            if (app == null)
             {
-                case EApp.IAPP_ASEC_NAME:
+                return null;
+            }
+
+            switch ((app.Id ?? "").ToLower())
+            {
+                case EApp.IAPP_APWD:
+                    app.NeedAuth = true;
+                    return new Pwd.APwd(_UserModel);
+                case EApp.IAPP_ASEC:
                     return new Sec.ASec(_UserModel);
-                case EApp.IAPP_ABAR_NAME:
+                case EApp.IAPP_ABAR:
                     return new Bar.ABar(_UserModel);
-                case EApp.IAPP_AREN_NAME:
+                case EApp.IAPP_AREN:
                     return new Ren.ARen(_UserModel);
-                case EApp.IAPP_AICO_NAME:
+                case EApp.IAPP_AICO:
                     return new Ico.AIco(_UserModel);
-                case EApp.IAPP_AIMG_NAME:
+                case EApp.IAPP_AIMG:
                     return new Img.AImg(_UserModel);
-                case EApp.IAPP_ASPY_NAME:
+                case EApp.IAPP_ASPY:
                     return new Spy.ASpy(_UserModel);
-                case EApp.IAPP_ASQL_NAME:
+                case EApp.IAPP_ASQL:
                     return new Sql.ASql(_UserModel);
                 default:
                     return null;
             }
-        }
-
-        private void ShowLast(string view)
-        {
-            if (_TApp == null)
-            {
-                ShowDApp("");
-                return;
-            }
-
-            if (_IApp == null || _IApp.IsDisposed)
-            {
-                _IApp = GetIApp(_TApp.Id);
-                _TApp = null;
-                if (_IApp == null)
-                {
-                    return;
-                }
-            }
-
-            _IApp.Visible = true; 
-        }
-
-        private void ShowLast()
-        {
-            if (_IApp == null || _IApp.IsDisposed || !_IApp.Visible)
-            {
-                _Main.CheckUser(new AmonHandler<string>(ShowLast));
-                return;
-            }
-
-            _IApp.Visible = true;
-            _IApp.BringToFront();
         }
         #endregion
         #endregion

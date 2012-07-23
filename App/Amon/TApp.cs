@@ -3,8 +3,10 @@ using Me.Amon.Model;
 
 namespace Me.Amon
 {
-    public class TApp : Vcs
+    public class TApp
     {
+        public string Id { get; set; }
+
         public string Type { get; set; }
 
         public string Logo { get; set; }
@@ -16,6 +18,8 @@ namespace Me.Amon
         public string Tips { get; set; }
 
         public bool Default { get; set; }
+
+        public bool NeedAuth { get; set; }
 
         public IApp App { get; set; }
 
@@ -35,13 +39,13 @@ namespace Me.Amon
             {
                 return;
             }
-            Id = Attribute(node, "Id", "");
-            Type = Attribute(node, "Type", "");
-            Logo = Attribute(node, "Logo", "");
-            Uri = Attribute(node, "Uri", "");
-            Text = Attribute(node, "Text", "");
-            Tips = Attribute(node, "Tips", "");
-            Default = "true" == Attribute(node, "Default", "").ToLower();
+            Id = Vcs.Attribute(node, "Id", "");
+            Type = Vcs.Attribute(node, "Type", "");
+            Logo = Vcs.Attribute(node, "Logo", "");
+            Uri = Vcs.Attribute(node, "Uri", "");
+            Text = Vcs.Attribute(node, "Text", "");
+            Tips = Vcs.Attribute(node, "Tips", "");
+            Default = "true" == Vcs.Attribute(node, "Default", "").ToLower();
         }
     }
 }

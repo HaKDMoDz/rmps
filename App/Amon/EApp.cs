@@ -67,20 +67,13 @@ namespace Me.Amon
         /// </summary>
         public const string IAPP_NONE = "";
         public const string IAPP_APWD = "apwd";
-        public const int IAPP_ASEC = 2;
-        public const string IAPP_ASEC_NAME = "asec";
-        public const int IAPP_ABAR = 4;
-        public const string IAPP_ABAR_NAME = "abar";
-        public const int IAPP_AREN = 8;
-        public const string IAPP_AREN_NAME = "aren";
-        public const int IAPP_AICO = 16;
-        public const string IAPP_AICO_NAME = "aico";
-        public const int IAPP_AIMG = 32;
-        public const string IAPP_AIMG_NAME = "aimg";
-        public const int IAPP_ASPY = 64;
-        public const string IAPP_ASPY_NAME = "aspy";
-        public const int IAPP_ASQL = 128;
-        public const string IAPP_ASQL_NAME = "asql";
+        public const string IAPP_ASEC = "asec";
+        public const string IAPP_ABAR = "abar";
+        public const string IAPP_AREN = "aren";
+        public const string IAPP_AICO = "aico";
+        public const string IAPP_AIMG = "aimg";
+        public const string IAPP_ASPY = "aspy";
+        public const string IAPP_ASQL = "asql";
 
         public const string FILE_OPEN_ALL = "所有文件|*.*";
         public const string FILE_OPEN_IMG = "图片文件（*.png,*.jpg,*.bmp）|*.png;*.jpg;*.jpeg;*.jpe;*.jfif;*.bmp;*.dib;*.rle|PNG文件（*.png）|*.png|JPG文件（*.jpg,*.jpeg,*.jpe,*.jfif）|*.jpg;*.jpeg;*.jpe;*.jfif|BMP文件（*.bmp,*dib,*.rle）|*.bmp;*.dib;*.rle";

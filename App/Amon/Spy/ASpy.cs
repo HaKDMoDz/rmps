@@ -26,13 +26,8 @@ namespace Me.Amon.Spy
         #region 接口实现
         public int AppId
         {
-            get
-            {
-                return EApp.IAPP_ASPY;
-            }
-            set
-            {
-            }
+            get;
+            set;
         }
 
         public Form Form
