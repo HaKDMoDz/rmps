@@ -37,16 +37,17 @@
             this.MgTopMost = new System.Windows.Forms.ToolStripMenuItem();
             this.MgPlugIns = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSep0 = new System.Windows.Forms.ToolStripSeparator();
+            this.MgApps = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiReset = new System.Windows.Forms.ToolStripMenuItem();
+            this.MgSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.MgSignUp = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSignIn = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSignOf = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSignFp = new System.Windows.Forms.ToolStripMenuItem();
-            this.MgSep1 = new System.Windows.Forms.ToolStripSeparator();
+            this.MgSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.MgLogo = new System.Windows.Forms.ToolStripMenuItem();
             this.MgTray = new System.Windows.Forms.ToolStripMenuItem();
-            this.MgSep2 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiReset = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.MgSep3 = new System.Windows.Forms.ToolStripSeparator();
             this.MgInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.MgExit = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PbApp)).BeginInit();
@@ -63,6 +64,9 @@
             this.PbApp.TabIndex = 3;
             this.PbApp.TabStop = false;
             this.PbApp.DoubleClick += new System.EventHandler(this.PbApp_DoubleClick);
+            this.PbApp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PbApp_MouseDown);
+            this.PbApp.MouseEnter += new System.EventHandler(this.PbApp_MouseEnter);
+            this.PbApp.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PbApp_MouseMove);
             this.PbApp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PbApp_MouseUp);
             // 
             // LvApp
@@ -100,20 +104,21 @@
             this.MgTopMost,
             this.MgPlugIns,
             this.MgSep0,
+            this.MgApps,
+            this.MiReset,
+            this.MgSep1,
             this.MgSignUp,
             this.MgSignIn,
             this.MgSignOf,
             this.MgSignFp,
-            this.MgSep1,
+            this.MgSep2,
             this.MgLogo,
             this.MgTray,
-            this.MgSep2,
-            this.MiReset,
-            this.toolStripSeparator1,
+            this.MgSep3,
             this.MgInfo,
             this.MgExit});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(164, 270);
+            this.CmMenu.Size = new System.Drawing.Size(164, 314);
             // 
             // MgTopMost
             // 
@@ -136,6 +141,25 @@
             // 
             this.MgSep0.Name = "MgSep0";
             this.MgSep0.Size = new System.Drawing.Size(160, 6);
+            // 
+            // MgApps
+            // 
+            this.MgApps.Name = "MgApps";
+            this.MgApps.Size = new System.Drawing.Size(163, 22);
+            this.MgApps.Text = "应用(&A)";
+            // 
+            // MiReset
+            // 
+            this.MiReset.Name = "MiReset";
+            this.MiReset.Size = new System.Drawing.Size(163, 22);
+            this.MiReset.Text = "重置(&R)";
+            this.MiReset.Visible = false;
+            this.MiReset.Click += new System.EventHandler(this.MiReset_Click);
+            // 
+            // MgSep1
+            // 
+            this.MgSep1.Name = "MgSep1";
+            this.MgSep1.Size = new System.Drawing.Size(160, 6);
             // 
             // MgSignUp
             // 
@@ -166,10 +190,10 @@
             this.MgSignFp.Visible = false;
             this.MgSignFp.Click += new System.EventHandler(this.MgSignFp_Click);
             // 
-            // MgSep1
+            // MgSep2
             // 
-            this.MgSep1.Name = "MgSep1";
-            this.MgSep1.Size = new System.Drawing.Size(160, 6);
+            this.MgSep2.Name = "MgSep2";
+            this.MgSep2.Size = new System.Drawing.Size(160, 6);
             // 
             // MgLogo
             // 
@@ -185,29 +209,16 @@
             this.MgTray.Text = "显示托盘图标(&T)";
             this.MgTray.Click += new System.EventHandler(this.MgTray_Click);
             // 
-            // MgSep2
+            // MgSep3
             // 
-            this.MgSep2.Name = "MgSep2";
-            this.MgSep2.Size = new System.Drawing.Size(160, 6);
-            // 
-            // MiReset
-            // 
-            this.MiReset.Name = "MiReset";
-            this.MiReset.Size = new System.Drawing.Size(163, 22);
-            this.MiReset.Text = "重置(&R)";
-            this.MiReset.Visible = false;
-            this.MiReset.Click += new System.EventHandler(this.MiReset_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(160, 6);
+            this.MgSep3.Name = "MgSep3";
+            this.MgSep3.Size = new System.Drawing.Size(160, 6);
             // 
             // MgInfo
             // 
             this.MgInfo.Name = "MgInfo";
             this.MgInfo.Size = new System.Drawing.Size(163, 22);
-            this.MgInfo.Text = "关于(&A)";
+            this.MgInfo.Text = "关于(&I)";
             this.MgInfo.Click += new System.EventHandler(this.MgInfo_Click);
             // 
             // MgExit
@@ -225,6 +236,10 @@
             this.Controls.Add(this.LvApp);
             this.Name = "AGuid";
             this.Size = new System.Drawing.Size(312, 154);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AGuid_MouseDown);
+            this.MouseLeave += new System.EventHandler(this.AGuid_MouseLeave);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.AGuid_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.AGuid_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.PbApp)).EndInit();
             this.CmMenu.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -250,8 +265,9 @@
         private System.Windows.Forms.ToolStripMenuItem MgTray;
         private System.Windows.Forms.ToolStripSeparator MgSep2;
         private System.Windows.Forms.ToolStripMenuItem MiReset;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator MgSep3;
         private System.Windows.Forms.ToolStripMenuItem MgInfo;
         private System.Windows.Forms.ToolStripMenuItem MgExit;
+        private System.Windows.Forms.ToolStripMenuItem MgApps;
     }
 }

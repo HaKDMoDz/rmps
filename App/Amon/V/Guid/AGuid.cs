@@ -75,18 +75,22 @@ namespace Me.Amon.V.Guid
                 y = 40;
             }
             _Main.Location = new Point(x, y);
+            _Main.TopMost = true;
             _Main.Visible = true;
 
             // 
             MgPlugIns.Checked = Settings.Default.PlugIns;
+            MgApps.Visible = !Settings.Default.PlugIns;
+            MgSep1.Visible = !Settings.Default.PlugIns;
 
             // 系统徽标
             MgLogo.Checked = (Settings.Default.Emotion == 0);
 
             // 托盘图标状态
-            //int pattern = Settings.Default.Pattern;
-            //SetTrayVisible((pattern & EApp.PATTERN_TRAY) != 0);
+            int pattern = Settings.Default.Pattern;
+            _Main.SetTrayVisible((pattern & EApp.PATTERN_TRAY) != 0);
 
+            ChangeEmotion(Settings.Default.Emotion);
             ChangeAppVisible(true);
 
             LoadIApp();
@@ -114,69 +118,38 @@ namespace Me.Amon.V.Guid
         }
 
         #region 事件处理
-        private void Main_MouseDown(object sender, MouseEventArgs e)
+        private void AGuid_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                _MouseOffset = MousePosition;
-                _MouseOffset.X = Location.X - _MouseOffset.X;
-                _MouseOffset.Y = Location.Y - _MouseOffset.Y;
+                _MouseOffset = e.Location;
+                _MouseOffset.X -= Location.X;
+                _MouseOffset.Y -= Location.Y;
                 _IsMouseDown = true;
             }
         }
 
-        private void Main_MouseMove(object sender, MouseEventArgs e)
+        private void AGuid_MouseMove(object sender, MouseEventArgs e)
         {
             if (!_IsMouseDown)
             {
                 return;
             }
 
-            Point pos = MousePosition;
-            pos.X += _MouseOffset.X;
-            pos.Y += _MouseOffset.Y;
-
-            // 水平停靠
-            if (pos.X < 10)
-            {
-                pos.X = 0;
-            }
-            else
-            {
-                int t = SystemInformation.WorkingArea.Width - Width;
-                if (pos.X > t - 10)
-                {
-                    pos.X = t;
-                }
-            }
-
-            // 垂直停靠
-            if (pos.Y < 10)
-            {
-                pos.Y = 0;
-            }
-            else
-            {
-                int t = SystemInformation.WorkingArea.Height - Height;
-                if (pos.Y > t - 10)
-                {
-                    pos.Y = t;
-                }
-            }
-            Location = pos;
+            MoveFormTo();
         }
 
-        private void Main_MouseUp(object sender, MouseEventArgs e)
+        private void AGuid_MouseUp(object sender, MouseEventArgs e)
         {
             _IsMouseDown = false;
         }
 
-        private void Main_MouseLeave(object sender, EventArgs e)
+        private void AGuid_MouseLeave(object sender, EventArgs e)
         {
-            if (MousePosition.X < Location.X
-                || MousePosition.Y < Location.Y
-                || MousePosition.X > Location.X + Width
-                || MousePosition.Y > Location.Y + Height)
+            if (MousePosition.X < _Main.Location.X
+                || MousePosition.Y < _Main.Location.Y
+                || MousePosition.X > _Main.Location.X + _Main.Width
+                || MousePosition.Y > _Main.Location.Y + _Main.Height)
             {
                 ChangeAppVisible(false);
             }
@@ -189,15 +162,30 @@ namespace Me.Amon.V.Guid
 
         private void PbApp_MouseDown(object sender, MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.Left)
+            {
+                _MouseOffset = MousePosition;
+                _MouseOffset.X -= Location.X;
+                _MouseOffset.Y -= Location.Y;
+                _IsMouseDown = true;
+            }
         }
 
         private void PbApp_MouseMove(object sender, MouseEventArgs e)
         {
-            _ILogo.MouseMove();
+            if (!_IsMouseDown)
+            {
+                _ILogo.MouseMove();
+                return;
+            }
+
+            MoveFormTo();
         }
 
         private void PbApp_MouseUp(object sender, MouseEventArgs e)
         {
+            _IsMouseDown = false;
+
             if (e.Button == MouseButtons.Right)
             {
                 CmMenu.Show(PbApp, e.Location);
@@ -287,8 +275,8 @@ namespace Me.Amon.V.Guid
         private void MgLogo_Click(object sender, EventArgs e)
         {
             Settings.Default.Emotion = 1 - Settings.Default.Emotion;
-            //ChangeEmotion(Settings.Default.Emotion);
-            //MgLogo.Checked = (Settings.Default.Emotion == 0);
+            ChangeEmotion(Settings.Default.Emotion);
+            MgLogo.Checked = (Settings.Default.Emotion == 0);
             Settings.Default.Save();
         }
 
@@ -296,7 +284,7 @@ namespace Me.Amon.V.Guid
         {
             bool visible = !MgTray.Checked;
             MgTray.Checked = visible;
-            //SetTrayVisible(visible);
+            _Main.SetTrayVisible(visible);
 
             if (visible)
             {
@@ -311,7 +299,8 @@ namespace Me.Amon.V.Guid
 
         private void MgPlugIns_Click(object sender, EventArgs e)
         {
-
+            Settings.Default.PlugIns = MgPlugIns.Checked;
+            MgApps.Visible = !MgPlugIns.Checked;
         }
         #endregion
 
@@ -451,6 +440,42 @@ namespace Me.Amon.V.Guid
             _ILogo.DoWork();
         }
 
+        private void MoveFormTo()
+        {
+            Point pos = MousePosition;
+            pos.X -= _MouseOffset.X;
+            pos.Y -= _MouseOffset.Y;
+
+            // 水平停靠
+            if (pos.X < 10)
+            {
+                pos.X = 0;
+            }
+            else
+            {
+                int t = SystemInformation.WorkingArea.Width - Width;
+                if (pos.X > t - 10)
+                {
+                    pos.X = t;
+                }
+            }
+
+            // 垂直停靠
+            if (pos.Y < 10)
+            {
+                pos.Y = 0;
+            }
+            else
+            {
+                int t = SystemInformation.WorkingArea.Height - Height;
+                if (pos.Y > t - 10)
+                {
+                    pos.Y = t;
+                }
+            }
+            _Main.Location = pos;
+        }
+
         #region 应用相关
         /// <summary>
         /// 应用加载
@@ -471,6 +496,7 @@ namespace Me.Amon.V.Guid
             reader.Close();
 
             TApp tApp;
+            ToolStripMenuItem item;
             foreach (XmlNode node in doc.SelectNodes("/Amon/Apps/App"))
             {
                 tApp = new TApp();
@@ -480,11 +506,30 @@ namespace Me.Amon.V.Guid
                 IlApp.Images.Add(tApp.Id, BeanUtil.ReadImage(tApp.Logo, Resources.Logo32));
                 LvApp.Items.Add(new ListViewItem { Text = tApp.Text, ImageKey = tApp.Id, Tag = tApp });
 
+                item = new ToolStripMenuItem { Text = tApp.Text, Tag = tApp };
+                item.Click += new EventHandler(AppItem_Click);
+                MgApps.DropDownItems.Add(item);
+
                 if (tApp.Default)
                 {
                     _TdApp = tApp;
                 }
             }
+        }
+
+        public void AppItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            if (item == null)
+            {
+                return;
+            }
+            _TiApp = item.Tag as TApp;
+            if (_TiApp == null)
+            {
+                return;
+            }
+            ShowIApp(0);
         }
 
         private void ShowDApp(int ptn)
