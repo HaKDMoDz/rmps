@@ -223,6 +223,8 @@ namespace Me.Amon.V.Auth
 
             Text = "用户登录";
             BtOk.Text = "登录(&O)";
+
+            _Main.ClientSize = this.Size;
         }
 
         private SignOl _SignOl;

@@ -93,6 +93,8 @@ namespace Me.Amon.V.Guid
             ChangeEmotion(Settings.Default.Emotion);
             ChangeAppVisible(true);
 
+            _Main.ClientSize = this.Size;
+
             LoadIApp();
 
             ShowDApp(0);
@@ -501,6 +503,13 @@ namespace Me.Amon.V.Guid
             {
                 tApp = new TApp();
                 tApp.FromXml(node);
+
+                if (tApp.Default)
+                {
+                    _TdApp = tApp;
+                    continue;
+                }
+
                 _Apps[tApp.Id] = null;
 
                 IlApp.Images.Add(tApp.Id, BeanUtil.ReadImage(tApp.Logo, Resources.Logo32));
@@ -509,11 +518,6 @@ namespace Me.Amon.V.Guid
                 item = new ToolStripMenuItem { Text = tApp.Text, Tag = tApp };
                 item.Click += new EventHandler(AppItem_Click);
                 MgApps.DropDownItems.Add(item);
-
-                if (tApp.Default)
-                {
-                    _TdApp = tApp;
-                }
             }
         }
 
