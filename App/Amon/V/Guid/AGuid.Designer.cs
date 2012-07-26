@@ -34,20 +34,19 @@
             this.IlApp = new System.Windows.Forms.ImageList(this.components);
             this.IsApp = new System.Windows.Forms.ImageList(this.components);
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MgTopMost = new System.Windows.Forms.ToolStripMenuItem();
-            this.MgPlugIns = new System.Windows.Forms.ToolStripMenuItem();
-            this.MgSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.MgApps = new System.Windows.Forms.ToolStripMenuItem();
             this.MiReset = new System.Windows.Forms.ToolStripMenuItem();
-            this.MgSep1 = new System.Windows.Forms.ToolStripSeparator();
+            this.MgSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.MgSignUp = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSignIn = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSignOf = new System.Windows.Forms.ToolStripMenuItem();
             this.MgSignFp = new System.Windows.Forms.ToolStripMenuItem();
-            this.MgSep2 = new System.Windows.Forms.ToolStripSeparator();
+            this.MgSep1 = new System.Windows.Forms.ToolStripSeparator();
+            this.MgTopMost = new System.Windows.Forms.ToolStripMenuItem();
+            this.MgPlugIns = new System.Windows.Forms.ToolStripMenuItem();
             this.MgLogo = new System.Windows.Forms.ToolStripMenuItem();
             this.MgTray = new System.Windows.Forms.ToolStripMenuItem();
-            this.MgSep3 = new System.Windows.Forms.ToolStripSeparator();
+            this.MgSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.MgInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.MgExit = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PbApp)).BeginInit();
@@ -79,6 +78,7 @@
             this.LvApp.Location = new System.Drawing.Point(43, 12);
             this.LvApp.MultiSelect = false;
             this.LvApp.Name = "LvApp";
+            this.LvApp.ShowItemToolTips = true;
             this.LvApp.Size = new System.Drawing.Size(257, 130);
             this.LvApp.SmallImageList = this.IsApp;
             this.LvApp.TabIndex = 4;
@@ -101,46 +101,23 @@
             // CmMenu
             // 
             this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MgTopMost,
-            this.MgPlugIns,
-            this.MgSep0,
             this.MgApps,
             this.MiReset,
+            this.MgSep0,
+            this.MgTopMost,
+            this.MgPlugIns,
+            this.MgLogo,
+            this.MgTray,
             this.MgSep1,
             this.MgSignUp,
             this.MgSignIn,
             this.MgSignOf,
             this.MgSignFp,
             this.MgSep2,
-            this.MgLogo,
-            this.MgTray,
-            this.MgSep3,
             this.MgInfo,
             this.MgExit});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(164, 314);
-            // 
-            // MgTopMost
-            // 
-            this.MgTopMost.Checked = true;
-            this.MgTopMost.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.MgTopMost.Name = "MgTopMost";
-            this.MgTopMost.Size = new System.Drawing.Size(163, 22);
-            this.MgTopMost.Text = "窗口置项(&W)";
-            this.MgTopMost.Click += new System.EventHandler(this.MgTopMost_Click);
-            // 
-            // MgPlugIns
-            // 
-            this.MgPlugIns.CheckOnClick = true;
-            this.MgPlugIns.Name = "MgPlugIns";
-            this.MgPlugIns.Size = new System.Drawing.Size(163, 22);
-            this.MgPlugIns.Text = "显示扩展(&P)";
-            this.MgPlugIns.Click += new System.EventHandler(this.MgPlugIns_Click);
-            // 
-            // MgSep0
-            // 
-            this.MgSep0.Name = "MgSep0";
-            this.MgSep0.Size = new System.Drawing.Size(160, 6);
+            this.CmMenu.Size = new System.Drawing.Size(164, 308);
             // 
             // MgApps
             // 
@@ -156,22 +133,24 @@
             this.MiReset.Visible = false;
             this.MiReset.Click += new System.EventHandler(this.MiReset_Click);
             // 
-            // MgSep1
+            // MgSep0
             // 
-            this.MgSep1.Name = "MgSep1";
-            this.MgSep1.Size = new System.Drawing.Size(160, 6);
+            this.MgSep0.Name = "MgSep0";
+            this.MgSep0.Size = new System.Drawing.Size(160, 6);
             // 
             // MgSignUp
             // 
             this.MgSignUp.Name = "MgSignUp";
             this.MgSignUp.Size = new System.Drawing.Size(163, 22);
             this.MgSignUp.Text = "注册(&U)";
+            this.MgSignUp.Visible = false;
             // 
             // MgSignIn
             // 
             this.MgSignIn.Name = "MgSignIn";
             this.MgSignIn.Size = new System.Drawing.Size(163, 22);
             this.MgSignIn.Text = "登录(&L)";
+            this.MgSignIn.Visible = false;
             this.MgSignIn.Click += new System.EventHandler(this.MgSignIn_Click);
             // 
             // MgSignOf
@@ -179,7 +158,6 @@
             this.MgSignOf.Name = "MgSignOf";
             this.MgSignOf.Size = new System.Drawing.Size(163, 22);
             this.MgSignOf.Text = "注销(&O)";
-            this.MgSignOf.Visible = false;
             this.MgSignOf.Click += new System.EventHandler(this.MgSignOf_Click);
             // 
             // MgSignFp
@@ -190,10 +168,27 @@
             this.MgSignFp.Visible = false;
             this.MgSignFp.Click += new System.EventHandler(this.MgSignFp_Click);
             // 
-            // MgSep2
+            // MgSep1
             // 
-            this.MgSep2.Name = "MgSep2";
-            this.MgSep2.Size = new System.Drawing.Size(160, 6);
+            this.MgSep1.Name = "MgSep1";
+            this.MgSep1.Size = new System.Drawing.Size(160, 6);
+            // 
+            // MgTopMost
+            // 
+            this.MgTopMost.Checked = true;
+            this.MgTopMost.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.MgTopMost.Name = "MgTopMost";
+            this.MgTopMost.Size = new System.Drawing.Size(163, 22);
+            this.MgTopMost.Text = "窗口置项(&W)";
+            this.MgTopMost.Click += new System.EventHandler(this.MgTopMost_Click);
+            // 
+            // MgPlugIns
+            // 
+            this.MgPlugIns.CheckOnClick = true;
+            this.MgPlugIns.Name = "MgPlugIns";
+            this.MgPlugIns.Size = new System.Drawing.Size(163, 22);
+            this.MgPlugIns.Text = "显示扩展窗口(&P)";
+            this.MgPlugIns.Click += new System.EventHandler(this.MgPlugIns_Click);
             // 
             // MgLogo
             // 
@@ -209,10 +204,10 @@
             this.MgTray.Text = "显示托盘图标(&T)";
             this.MgTray.Click += new System.EventHandler(this.MgTray_Click);
             // 
-            // MgSep3
+            // MgSep2
             // 
-            this.MgSep3.Name = "MgSep3";
-            this.MgSep3.Size = new System.Drawing.Size(160, 6);
+            this.MgSep2.Name = "MgSep2";
+            this.MgSep2.Size = new System.Drawing.Size(160, 6);
             // 
             // MgInfo
             // 
@@ -265,7 +260,6 @@
         private System.Windows.Forms.ToolStripMenuItem MgTray;
         private System.Windows.Forms.ToolStripSeparator MgSep2;
         private System.Windows.Forms.ToolStripMenuItem MiReset;
-        private System.Windows.Forms.ToolStripSeparator MgSep3;
         private System.Windows.Forms.ToolStripMenuItem MgInfo;
         private System.Windows.Forms.ToolStripMenuItem MgExit;
         private System.Windows.Forms.ToolStripMenuItem MgApps;

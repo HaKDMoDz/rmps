@@ -54,6 +54,8 @@ namespace Me.Amon.V.Guid
         public void Init(UserModel userModel)
         {
             _UserModel = userModel;
+            _Main.AcceptButton = null;
+            _Main.CancelButton = null;
 
             // 背景透明
             _Main.Visible = false;
@@ -81,7 +83,7 @@ namespace Me.Amon.V.Guid
             // 
             MgPlugIns.Checked = Settings.Default.PlugIns;
             MgApps.Visible = !Settings.Default.PlugIns;
-            MgSep1.Visible = !Settings.Default.PlugIns;
+            MgSep0.Visible = !Settings.Default.PlugIns;
 
             // 系统徽标
             MgLogo.Checked = (Settings.Default.Emotion == 0);
@@ -102,33 +104,15 @@ namespace Me.Amon.V.Guid
 
         public AmonHandler<int> CallBack;
 
-        public bool ddd()
-        {
-            foreach (IApp iapp in _Apps.Values)
-            {
-                if (iapp != null)
-                {
-                    if (!iapp.WillExit())
-                    {
-                        return false;
-                    }
-                    iapp.SaveData();
-                    iapp.Dispose();
-                }
-            }
-            return true;
-        }
-
         #region 事件处理
         private void AGuid_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e.Button != MouseButtons.Left)
             {
-                _MouseOffset = e.Location;
-                _MouseOffset.X -= Location.X;
-                _MouseOffset.Y -= Location.Y;
-                _IsMouseDown = true;
+                return;
             }
+
+            BeginMove();
         }
 
         private void AGuid_MouseMove(object sender, MouseEventArgs e)
@@ -138,7 +122,7 @@ namespace Me.Amon.V.Guid
                 return;
             }
 
-            MoveFormTo();
+            DoMove();
         }
 
         private void AGuid_MouseUp(object sender, MouseEventArgs e)
@@ -164,13 +148,12 @@ namespace Me.Amon.V.Guid
 
         private void PbApp_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e.Button != MouseButtons.Left)
             {
-                _MouseOffset = MousePosition;
-                _MouseOffset.X -= Location.X;
-                _MouseOffset.Y -= Location.Y;
-                _IsMouseDown = true;
+                return;
             }
+
+            BeginMove();
         }
 
         private void PbApp_MouseMove(object sender, MouseEventArgs e)
@@ -181,7 +164,7 @@ namespace Me.Amon.V.Guid
                 return;
             }
 
-            MoveFormTo();
+            DoMove();
         }
 
         private void PbApp_MouseUp(object sender, MouseEventArgs e)
@@ -196,7 +179,7 @@ namespace Me.Amon.V.Guid
 
         private void PbApp_DoubleClick(object sender, EventArgs e)
         {
-            //ShowLast();
+            ShowDApp(0);
         }
 
         private void LvApp_SelectedIndexChanged(object sender, EventArgs e)
@@ -303,6 +286,9 @@ namespace Me.Amon.V.Guid
         {
             Settings.Default.PlugIns = MgPlugIns.Checked;
             MgApps.Visible = !MgPlugIns.Checked;
+            MgSep0.Visible = !MgPlugIns.Checked;
+
+            ChangeAppVisible(MgPlugIns.Checked);
         }
         #endregion
 
@@ -354,7 +340,20 @@ namespace Me.Amon.V.Guid
         /// <param name="e"></param>
         private void MgSignOf_Click(object sender, EventArgs e)
         {
-            //SignOf();
+            foreach (IApp iapp in _Apps.Values)
+            {
+                if (iapp != null)
+                {
+                    if (!iapp.WillExit())
+                    {
+                        return;
+                    }
+                    iapp.SaveData();
+                    iapp.Dispose();
+                }
+            }
+
+            _Main.SignOf();
         }
 
         /// <summary>
@@ -442,7 +441,15 @@ namespace Me.Amon.V.Guid
             _ILogo.DoWork();
         }
 
-        private void MoveFormTo()
+        private void BeginMove()
+        {
+            _MouseOffset = MousePosition;
+            _MouseOffset.X -= _Main.Location.X;
+            _MouseOffset.Y -= _Main.Location.Y;
+            _IsMouseDown = true;
+        }
+
+        private void DoMove()
         {
             Point pos = MousePosition;
             pos.X -= _MouseOffset.X;
@@ -513,7 +520,7 @@ namespace Me.Amon.V.Guid
                 _Apps[tApp.Id] = null;
 
                 IlApp.Images.Add(tApp.Id, BeanUtil.ReadImage(tApp.Logo, Resources.Logo32));
-                LvApp.Items.Add(new ListViewItem { Text = tApp.Text, ImageKey = tApp.Id, Tag = tApp });
+                LvApp.Items.Add(new ListViewItem { Text = tApp.Text, ToolTipText = tApp.Text, ImageKey = tApp.Id, Tag = tApp });
 
                 item = new ToolStripMenuItem { Text = tApp.Text, Tag = tApp };
                 item.Click += new EventHandler(AppItem_Click);

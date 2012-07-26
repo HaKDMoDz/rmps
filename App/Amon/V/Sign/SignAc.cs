@@ -33,6 +33,8 @@ namespace Me.Amon.V.Auth
         public void Init(UserModel userModel)
         {
             _UserModel = userModel;
+            _Main.AcceptButton = BtOk;
+            _Main.CancelButton = BtNo;
 
             ShowSignIn();
         }

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -272,9 +271,9 @@ namespace Me.Amon
         /// </summary>
         public void SignOf()
         {
-            _Guid.ddd();
-
             _UserModel.CaSignOf();
+
+            ShowSign();
         }
 
         private void DoSignIn(string view)
