@@ -3,12 +3,11 @@
   <App>Amon</App>
   <Ver>1</Ver>
   <Apps>
-    <App type="app" Id="ASec" Logo="" Uri="Me.Amon.Sec.ASec" Text="加密器" Tips="" Default="true"/>
-    <App type="app" Id="ABar" Logo="" Uri="Me.Amon.Bar.ABar" Text="二维码" Tips=""/>
-    <App type="app" Id="AImg" Logo="" Uri="Me.Amon.Img.AImg" Text="文件重命名" Tips=""/>
-    <App type="app" Id="AIco" Logo="" Uri="Me.Amon.Ico.AIco" Text="图标编辑器" Tips=""/>
-    <App type="app" Id="ASql" Logo="" Uri="Me.Amon.Sql.ASql" Text="数据库工具" Tips=""/>
-    <!--App type="exe" Id="" Logo="" Uri="" Text="" Tips="" Arg=""/>
-    <App type="dir" Id="" Logo="" Uri="" Text="" Tips="" --/>
+    <App type="app" Id="APwd" Logo="F:\App\Amon\Logo\logo32.png" Text="加密器" Tips="加密器" Default="true"/>
+    <App type="app" Id="ASec" Logo="F:\App\Amon\Logo\logo32.png" Text="加密器" Tips="加密器"/>
+    <App type="app" Id="ABar" Logo="F:\App\Amon\Logo\logo32.png" Text="二维码" Tips="二维码"/>
+    <App type="app" Id="ASql" Logo="F:\App\Amon\Logo\logo32.png" Text="数据库管理" Tips="数据库管理"/>
+    <App type="app" Id="AIco" Logo="F:\App\Amon\Logo\logo32.png" Text="图标编辑器" Tips="图标编辑器"/>
+    <App type="app" Id="AImg" Logo="F:\App\Amon\Logo\logo32.png" Text="图像查看器" Tips="图像查看器"/>
   </Apps>
 </Amon>

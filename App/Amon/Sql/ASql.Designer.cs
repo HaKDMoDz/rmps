@@ -33,9 +33,9 @@
             this.LblEcho = new System.Windows.Forms.Label();
             this.BnExecute = new System.Windows.Forms.Button();
             this.ScPanel = new System.Windows.Forms.SplitContainer();
-            this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TcEditor = new System.Windows.Forms.ATabControl();
             this.TcResult = new System.Windows.Forms.ATabControl();
+            this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScPanel)).BeginInit();
             this.ScPanel.Panel1.SuspendLayout();
@@ -97,11 +97,6 @@
             this.ScPanel.SplitterDistance = 164;
             this.ScPanel.TabIndex = 0;
             // 
-            // CmMenu
-            // 
-            this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(61, 4);
-            // 
             // TcEditor
             // 
             // 
@@ -162,6 +157,11 @@
             this.TcResult.TabClosing += new System.EventHandler<System.Windows.Forms.TabControlCancelEventArgs>(this.TcResult_TabClosing);
             this.TcResult.SelectedIndexChanged += new System.EventHandler(this.TcResult_SelectedIndexChanged);
             // 
+            // CmMenu
+            // 
+            this.CmMenu.Name = "CmMenu";
+            this.CmMenu.Size = new System.Drawing.Size(61, 4);
+            // 
             // ASql
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -174,6 +174,7 @@
             this.Name = "ASql";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "数据库工具";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ASql_FormClosing);
             this.Load += new System.EventHandler(this.ASql_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ASql_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();

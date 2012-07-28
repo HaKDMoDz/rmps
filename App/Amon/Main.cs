@@ -207,6 +207,7 @@ namespace Me.Amon
             {
                 _Writer = new StreamWriter(EApp.FILE_LOG, true, Encoding.UTF8, 8);
                 _Writer.AutoFlush = true;
+                _Writer.WriteLine(string.Format("============{0}============", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
             }
 
             _UserModel = new UserModel();

@@ -340,20 +340,10 @@ namespace Me.Amon.V.Guid
         /// <param name="e"></param>
         private void MgSignOf_Click(object sender, EventArgs e)
         {
-            foreach (IApp iapp in _Apps.Values)
+            if (SaveData())
             {
-                if (iapp != null)
-                {
-                    if (!iapp.WillExit())
-                    {
-                        return;
-                    }
-                    iapp.SaveData();
-                    iapp.Dispose();
-                }
+                _Main.SignOf();
             }
-
-            _Main.SignOf();
         }
 
         /// <summary>
@@ -379,7 +369,10 @@ namespace Me.Amon.V.Guid
 
         private void MgExit_Click(object sender, EventArgs e)
         {
-            _Main.Close();
+            if (SaveData())
+            {
+                _Main.Close();
+            }
         }
         #endregion
         #endregion
@@ -439,6 +432,25 @@ namespace Me.Amon.V.Guid
                 _ILogo = new LogoIco(PbApp, this.components);
             }
             _ILogo.DoWork();
+        }
+
+        private bool SaveData()
+        {
+            foreach (IApp iapp in _Apps.Values)
+            {
+                if (iapp == null)
+                {
+                    continue;
+                }
+
+                if (!iapp.WillExit())
+                {
+                    return false;
+                }
+                iapp.SaveData();
+                iapp.Dispose();
+            }
+            return true;
         }
 
         private void BeginMove()
@@ -581,6 +593,8 @@ namespace Me.Amon.V.Guid
 
         public IApp GetIApp(TApp app)
         {
+            Main.LogInfo("创建新实例：" + app.Id);
+
             if (app == null)
             {
                 return null;

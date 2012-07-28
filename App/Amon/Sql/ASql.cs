@@ -291,6 +291,11 @@ namespace Me.Amon.Sql
             }
         }
 
+        private void ASql_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            WillExit();
+        }
+
         private void PbMenu_Click(object sender, EventArgs e)
         {
             CmMenu.Show(PbMenu, 0, PbMenu.Height);
