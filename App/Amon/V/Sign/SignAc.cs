@@ -46,6 +46,52 @@ namespace Me.Amon.V.Auth
 
         public AmonHandler<string> CallBack;
 
+        public void ShowWaiting()
+        {
+            PbMenu.Image = Me.Amon.Properties.Resources.Loading;
+            BtOk.Enabled = false;
+            BtNo.Enabled = false;
+        }
+
+        public void HideWaiting()
+        {
+            PbMenu.Image = Me.Amon.Properties.Resources.Menu;
+            BtNo.Enabled = true;
+            BtOk.Enabled = true;
+        }
+
+        public void ShowView(ESignAc signAc)
+        {
+            switch (signAc)
+            {
+                case ESignAc.SignIn:
+                    ShowSignIn();
+                    break;
+                case ESignAc.SignOl:
+                    ShowSignOl();
+                    break;
+                case ESignAc.SignUl:
+                    ShowSignUl();
+                    break;
+                case ESignAc.SignPc:
+                    ShowSignPc();
+                    break;
+                case ESignAc.SignFk:
+                    ShowSignFk();
+                    break;
+            }
+
+            if (_SignAc != null)
+            {
+                _SignAc.Focus();
+            }
+        }
+
+        public void Exit()
+        {
+            _Main.Close();
+        }
+
         #region 事件处理
         #region 界面事件
         private void BtOk_Click(object sender, EventArgs e)
@@ -138,7 +184,7 @@ namespace Me.Amon.V.Auth
         /// <param name="e"></param>
         private void MiPcSignUp_Click(object sender, EventArgs e)
         {
-            //ShowSignPc();
+            ShowSignPc();
         }
 
         /// <summary>
@@ -163,47 +209,6 @@ namespace Me.Amon.V.Auth
         #endregion
         #endregion
 
-        public void ShowWaiting()
-        {
-            PbMenu.Image = Me.Amon.Properties.Resources.Loading;
-            BtOk.Enabled = false;
-            BtNo.Enabled = false;
-        }
-
-        public void HideWaiting()
-        {
-            PbMenu.Image = Me.Amon.Properties.Resources.Menu;
-            BtNo.Enabled = true;
-            BtOk.Enabled = true;
-        }
-
-        public void ShowView(ESignAc signAc)
-        {
-            switch (signAc)
-            {
-                case ESignAc.SignIn:
-                    ShowSignIn();
-                    break;
-                case ESignAc.SignOl:
-                    ShowSignOl();
-                    break;
-                case ESignAc.SignUl:
-                    ShowSignUl();
-                    break;
-                case ESignAc.SignPc:
-                    ShowSignPc();
-                    break;
-                case ESignAc.SignFk:
-                    ShowSignFk();
-                    break;
-            }
-
-            if (_SignAc != null)
-            {
-                _SignAc.Focus();
-            }
-        }
-
         #region 私有函数
         private SignIn _SignIn;
         private void ShowSignIn()
@@ -225,8 +230,6 @@ namespace Me.Amon.V.Auth
 
             Text = "用户登录";
             BtOk.Text = "登录(&O)";
-
-            _Main.ClientSize = this.Size;
         }
 
         private SignOl _SignOl;
@@ -329,11 +332,13 @@ namespace Me.Amon.V.Auth
             control.TabIndex = 1;
             Controls.Add(control);
 
+            _Main.Width = this.Width;
             step -= control.Height;
             Height -= step;
-            //Point p = Location;
-            //p.Y += (step >> 1);
-            //Location = p;
+            _Main.ClientSize = this.Size;
+            Point p = _Main.Location;
+            p.Y += (step >> 1);
+            _Main.Location = p;
         }
         #endregion
     }

@@ -122,7 +122,7 @@ namespace Me.Amon.V.Sign
 
         public void DoCancel()
         {
-            //_SignAc.Close();
+            _SignAc.Exit();
         }
 
         public void ShowMenu(Control control, int x, int y)
