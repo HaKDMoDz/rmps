@@ -374,7 +374,7 @@ namespace Me.Amon.V.Guid
         #region
         private void MgInfo_Click(object sender, EventArgs e)
         {
-            //ShowAbout(this);
+            Main.ShowAbout(_Main);
         }
 
         private void MgExit_Click(object sender, EventArgs e)
