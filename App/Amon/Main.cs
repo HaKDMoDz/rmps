@@ -2,15 +2,14 @@ using System;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using Me.Amon.Auth;
 using Me.Amon.Event;
+using Me.Amon.Guid;
 using Me.Amon.Model;
 using Me.Amon.Properties;
+using Me.Amon.User;
 using Me.Amon.Util;
 using Me.Amon.Uw;
-using Me.Amon.V;
-using Me.Amon.V.Auth;
-using Me.Amon.V.Guid;
-using Me.Amon.V.Sign;
 
 namespace Me.Amon
 {
@@ -23,6 +22,7 @@ namespace Me.Amon
         private static Waiting _Waiting;
 
         private UserModel _UserModel;
+        private IAmon _Amon;
         #endregion
 
         #region 构造函数
@@ -178,22 +178,19 @@ namespace Me.Amon
                 {
                     NiTray.Visible = false;
                 }
-            }
-            else
-            {
-                if (NiTray == null)
-                {
-                    NiTray = new NotifyIcon();
-                    NiTray.BalloonTipTitle = "阿木导航";
-                    NiTray.Icon = Me.Amon.Properties.Resources.Icon;
-                    NiTray.Text = "阿木导航";
-                    NiTray.Visible = true;
-                    NiTray.DoubleClick += new EventHandler(NiTray_DoubleClick);
-                }
-                NiTray.Visible = visible;
+                return;
             }
 
-            //MgTray.Checked = visible;
+            if (NiTray == null)
+            {
+                NiTray = new NotifyIcon();
+                NiTray.BalloonTipTitle = "阿木导航";
+                NiTray.Icon = Me.Amon.Properties.Resources.Icon;
+                NiTray.Text = "阿木导航";
+                NiTray.Visible = true;
+                NiTray.DoubleClick += new EventHandler(NiTray_DoubleClick);
+            }
+            NiTray.Visible = visible;
         }
         #endregion
 
@@ -217,6 +214,12 @@ namespace Me.Amon
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (!_Amon.ExitForm())
+            {
+                e.Cancel = false;
+                return;
+            }
+
             if (_Writer != null)
             {
                 _Writer.Close();
@@ -229,7 +232,11 @@ namespace Me.Amon
 
         private void NiTray_DoubleClick(object sender, EventArgs e)
         {
-            //ShowLast();
+            if (!Visible)
+            {
+                Visible = true;
+            }
+            BringToFront();
         }
         #endregion
 
@@ -301,6 +308,7 @@ namespace Me.Amon
                 _Sign.CallBack = new AmonHandler<string>(DoSignIn);
             }
             _Sign.Init(_UserModel);
+            _Amon = _Sign;
 
             Controls.Clear();
             Controls.Add(_Sign);

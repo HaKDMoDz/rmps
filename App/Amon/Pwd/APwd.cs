@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
+using Me.Amon.Auth;
 using Me.Amon.Event;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
@@ -20,15 +21,13 @@ using Me.Amon.Pwd._Log;
 using Me.Amon.Pwd.V.Pro;
 using Me.Amon.Pwd.V.Wiz;
 using Me.Amon.Uc;
-using Me.Amon.V;
-using Me.Amon.V.Auth;
 using Me.Amon.Util;
 using Me.Amon.Uw;
 using Thought.vCards;
 
 namespace Me.Amon.Pwd
 {
-    public partial class APwd : Form, IApp
+    public partial class APwd : UserControl
     {
         #region 全局变量
         private UserModel _UserModel;
@@ -48,6 +47,7 @@ namespace Me.Amon.Pwd
         private Dictionary<string, Image> _KeyHint;
         private XmlMenu<APwd> _XmlMenu;
         #endregion
+        private Main _Main;
 
         #region 构造函数
         public APwd()
@@ -61,14 +61,19 @@ namespace Me.Amon.Pwd
 
             InitializeComponent();
 
-            this.Icon = Me.Amon.Properties.Resources.Icon;
+            _Main.Icon = Me.Amon.Properties.Resources.Icon;
+        }
+
+        public void Init()
+        {
+            _Main.KeyPreview = true;
+            _Main.MainMenuStrip = this.MbMenu;
+            _Main.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
         }
         #endregion
 
         #region 接口实现
         public int AppId { get; set; }
-
-        public Form Form { get { return this; } }
 
         public void ShowTips(Control control, string caption)
         {
@@ -1351,7 +1356,7 @@ namespace Me.Amon.Pwd
         #region 文件选单
         public void LockForm()
         {
-            new AuthRc(_UserModel, this).ShowDialog(this);
+            new AuthLs(_UserModel, this).ShowDialog(this);
         }
 
         public void HideForm()

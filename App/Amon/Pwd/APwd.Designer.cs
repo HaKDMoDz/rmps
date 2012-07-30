@@ -235,12 +235,8 @@
             this.Controls.Add(this.TcTool);
             this.Controls.Add(this.SsEcho);
             this.Controls.Add(this.MbMenu);
-            this.KeyPreview = true;
-            this.MainMenuStrip = this.MbMenu;
             this.Name = "APwd";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "阿木密码箱";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.APwd_FormClosing);
             this.Load += new System.EventHandler(this.APwd_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.APwd_KeyDown);
             this.SsEcho.ResumeLayout(false);

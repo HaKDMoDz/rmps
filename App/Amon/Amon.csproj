@@ -533,7 +533,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pwd\APwd.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Pwd\APwd.Designer.cs">
       <DependentUpon>APwd.cs</DependentUpon>
@@ -1108,22 +1108,22 @@
     </Compile>
     <Compile Include="Uc\TabControl\ThemedColors.cs" />
     <Compile Include="Uc\XmlMenu.cs" />
-    <Compile Include="V\Auth\AuthLk.cs">
+    <Compile Include="Auth\Uc\AuthLk.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="V\Auth\AuthLk.Designer.cs">
+    <Compile Include="Auth\Uc\AuthLk.Designer.cs">
       <DependentUpon>AuthLk.cs</DependentUpon>
     </Compile>
-    <Compile Include="V\Auth\AuthPc.cs">
+    <Compile Include="Auth\Uc\AuthPc.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="V\Auth\AuthPc.Designer.cs">
+    <Compile Include="Auth\Uc\AuthPc.Designer.cs">
       <DependentUpon>AuthPc.cs</DependentUpon>
     </Compile>
-    <Compile Include="V\Auth\AuthUl.cs">
+    <Compile Include="Auth\Uc\AuthUl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="V\Auth\AuthUl.Designer.cs">
+    <Compile Include="Auth\Uc\AuthUl.Designer.cs">
       <DependentUpon>AuthUl.cs</DependentUpon>
     </Compile>
     <Compile Include="Uw\HotKeys.cs">
@@ -1145,10 +1145,10 @@
       <DependentUpon>KeyIcon.cs</DependentUpon>
     </Compile>
     <Compile Include="Uc\Item.cs" />
-    <Compile Include="V\Sign\SignOl.cs">
+    <Compile Include="User\Uc\SignOl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="V\Sign\SignOl.Designer.cs">
+    <Compile Include="User\Uc\SignOl.Designer.cs">
       <DependentUpon>SignOl.cs</DependentUpon>
     </Compile>
     <Compile Include="Util\BeanUtil.cs">
@@ -1184,62 +1184,62 @@
     <Compile Include="Uw\UdcEditor.Designer.cs">
       <DependentUpon>UdcEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="V\Auth\AuthAc.cs">
+    <Compile Include="Auth\AuthAc.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="V\Auth\AuthAc.Designer.cs">
+    <Compile Include="Auth\AuthAc.Designer.cs">
       <DependentUpon>AuthAc.cs</DependentUpon>
     </Compile>
-    <Compile Include="V\Auth\AuthRc.cs">
+    <Compile Include="Auth\AuthLs.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="V\Auth\AuthRc.Designer.cs">
-      <DependentUpon>AuthRc.cs</DependentUpon>
+    <Compile Include="Auth\AuthLs.Designer.cs">
+      <DependentUpon>AuthLs.cs</DependentUpon>
     </Compile>
-    <Compile Include="V\Sign\SignFk.cs">
+    <Compile Include="User\Uc\SignFk.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="V\Sign\SignFk.Designer.cs">
+    <Compile Include="User\Uc\SignFk.Designer.cs">
       <DependentUpon>SignFk.cs</DependentUpon>
     </Compile>
-    <Compile Include="V\Auth\AuthOl.cs">
+    <Compile Include="Auth\Uc\AuthOl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="V\Auth\AuthOl.Designer.cs">
+    <Compile Include="Auth\Uc\AuthOl.Designer.cs">
       <DependentUpon>AuthOl.cs</DependentUpon>
     </Compile>
-    <Compile Include="V\Auth\AuthSk.cs">
+    <Compile Include="Auth\Uc\AuthSk.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="V\Auth\AuthSk.Designer.cs">
+    <Compile Include="Auth\Uc\AuthSk.Designer.cs">
       <DependentUpon>AuthSk.cs</DependentUpon>
     </Compile>
-    <Compile Include="V\Auth\EAuthAc.cs" />
-    <Compile Include="V\Auth\IAuthAc.cs" />
-    <Compile Include="V\Sign\SignRc.cs">
+    <Compile Include="Auth\EAuthAc.cs" />
+    <Compile Include="Auth\IAuthAc.cs" />
+    <Compile Include="Auth\AuthCa.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="V\Sign\SignRc.Designer.cs">
-      <DependentUpon>SignRc.cs</DependentUpon>
+    <Compile Include="Auth\AuthCa.Designer.cs">
+      <DependentUpon>AuthCa.cs</DependentUpon>
     </Compile>
-    <Compile Include="V\Sign\ESignAc.cs" />
-    <Compile Include="V\Sign\ISignAc.cs" />
-    <Compile Include="V\Sign\SignIn.cs">
+    <Compile Include="User\ESignAc.cs" />
+    <Compile Include="User\ISignAc.cs" />
+    <Compile Include="User\Uc\SignIn.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="V\Sign\SignIn.Designer.cs">
+    <Compile Include="User\Uc\SignIn.Designer.cs">
       <DependentUpon>SignIn.cs</DependentUpon>
     </Compile>
-    <Compile Include="V\Sign\SignUl.cs">
+    <Compile Include="User\Uc\SignUl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="V\Sign\SignUl.Designer.cs">
+    <Compile Include="User\Uc\SignUl.Designer.cs">
       <DependentUpon>SignUl.cs</DependentUpon>
     </Compile>
-    <Compile Include="V\Sign\SignPc.cs">
+    <Compile Include="User\Uc\SignPc.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="V\Sign\SignPc.Designer.cs">
+    <Compile Include="User\Uc\SignPc.Designer.cs">
       <DependentUpon>SignPc.cs</DependentUpon>
     </Compile>
     <Compile Include="Uw\Alert.cs">
@@ -1266,22 +1266,22 @@
     <Compile Include="Uw\Waiting.Designer.cs">
       <DependentUpon>Waiting.cs</DependentUpon>
     </Compile>
-    <Compile Include="V\Sign\SignAc.cs">
+    <Compile Include="User\SignAc.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="V\Sign\SignAc.Designer.cs">
+    <Compile Include="User\SignAc.Designer.cs">
       <DependentUpon>SignAc.cs</DependentUpon>
     </Compile>
-    <Compile Include="V\IAuth.cs" />
-    <Compile Include="V\Guid\AGuid.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="IAmon.cs" />
+    <Compile Include="Guid\AGuid.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="V\Guid\AGuid.Designer.cs">
+    <Compile Include="Guid\AGuid.Designer.cs">
       <DependentUpon>AGuid.cs</DependentUpon>
     </Compile>
-    <Compile Include="V\Guid\LogoEye.cs" />
-    <Compile Include="V\Guid\LogoIco.cs" />
-    <Compile Include="V\Guid\ILogo.cs" />
+    <Compile Include="Guid\Uc\LogoEye.cs" />
+    <Compile Include="Guid\Uc\LogoIco.cs" />
+    <Compile Include="Guid\ILogo.cs" />
     <EmbeddedResource Include="Bar\ABar.resx">
       <DependentUpon>ABar.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1605,13 +1605,13 @@
     <EmbeddedResource Include="Sql\V\Pdf\TextArg.resx">
       <DependentUpon>TextArg.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="V\Auth\AuthLk.resx">
+    <EmbeddedResource Include="Auth\Uc\AuthLk.resx">
       <DependentUpon>AuthLk.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="V\Auth\AuthPc.resx">
+    <EmbeddedResource Include="Auth\Uc\AuthPc.resx">
       <DependentUpon>AuthPc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="V\Auth\AuthUl.resx">
+    <EmbeddedResource Include="Auth\Uc\AuthUl.resx">
       <DependentUpon>AuthUl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\HotKeys.resx">
@@ -1623,7 +1623,7 @@
     <EmbeddedResource Include="Pwd\_Key\KeyIcon.resx">
       <DependentUpon>KeyIcon.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="V\Sign\SignOl.resx">
+    <EmbeddedResource Include="User\Uc\SignOl.resx">
       <DependentUpon>SignOl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\_Key\DirEdit.resx">
@@ -1638,28 +1638,28 @@
     <EmbeddedResource Include="Uw\UdcEditor.resx">
       <DependentUpon>UdcEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="V\Auth\AuthAc.resx">
+    <EmbeddedResource Include="Auth\AuthAc.resx">
       <DependentUpon>AuthAc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="V\Auth\AuthRc.resx">
-      <DependentUpon>AuthRc.cs</DependentUpon>
+    <EmbeddedResource Include="Auth\AuthLs.resx">
+      <DependentUpon>AuthLs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="V\Auth\AuthOl.resx">
+    <EmbeddedResource Include="Auth\Uc\AuthOl.resx">
       <DependentUpon>AuthOl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="V\Sign\SignRc.resx">
-      <DependentUpon>SignRc.cs</DependentUpon>
+    <EmbeddedResource Include="Auth\AuthCa.resx">
+      <DependentUpon>AuthCa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="V\Sign\SignFk.resx">
+    <EmbeddedResource Include="User\Uc\SignFk.resx">
       <DependentUpon>SignFk.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="V\Sign\SignIn.resx">
+    <EmbeddedResource Include="User\Uc\SignIn.resx">
       <DependentUpon>SignIn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="V\Sign\SignUl.resx">
+    <EmbeddedResource Include="User\Uc\SignUl.resx">
       <DependentUpon>SignUl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="V\Sign\SignPc.resx">
+    <EmbeddedResource Include="User\Uc\SignPc.resx">
       <DependentUpon>SignPc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\Alert.resx">
@@ -1674,10 +1674,10 @@
     <EmbeddedResource Include="Uw\Waiting.resx">
       <DependentUpon>Waiting.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="V\Sign\SignAc.resx">
+    <EmbeddedResource Include="User\SignAc.resx">
       <DependentUpon>SignAc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="V\Guid\AGuid.resx">
+    <EmbeddedResource Include="Guid\AGuid.resx">
       <DependentUpon>AGuid.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Amon_TemporaryKey.pfx" />
@@ -1780,13 +1780,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="C\" />
     <Folder Include="Gtd\C\" />
     <Folder Include="Gtd\E\" />
     <Folder Include="Gtd\M\" />
     <Folder Include="Ico\C\" />
     <Folder Include="Img\M\" />
-    <Folder Include="M\" />
     <Folder Include="Pwd\C\" />
     <Folder Include="Pwd\E\Edit\" />
     <Folder Include="Pwd\E\Skin\" />
