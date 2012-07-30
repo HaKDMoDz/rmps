@@ -323,6 +323,7 @@ namespace Me.Amon
 
             Controls.Clear();
             Controls.Add(_Guid);
+            _Guid.ShowDApp(0);
         }
         #endregion
     }

@@ -98,8 +98,6 @@ namespace Me.Amon.V.Guid
             _Main.ClientSize = this.Size;
 
             LoadIApp();
-
-            ShowDApp(0);
         }
 
         public AmonHandler<int> CallBack;
@@ -555,7 +553,7 @@ namespace Me.Amon.V.Guid
             ShowIApp(0);
         }
 
-        private void ShowDApp(int ptn)
+        public void ShowDApp(int ptn)
         {
             if (_DApp == null || _DApp.IsDisposed)
             {

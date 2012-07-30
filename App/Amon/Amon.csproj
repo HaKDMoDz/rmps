@@ -1799,7 +1799,6 @@
     <Folder Include="Spy\C\" />
     <Folder Include="Spy\E\" />
     <Folder Include="Spy\M\" />
-    <Folder Include="User\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
