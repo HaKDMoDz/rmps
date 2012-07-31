@@ -287,6 +287,7 @@ namespace Me.Amon
         private void DoSignIn(string view)
         {
             ShowGuid();
+            ShowAPwd();
         }
 
         private void DoSignOl(string view)
@@ -314,6 +315,22 @@ namespace Me.Amon
             Controls.Add(_Sign);
         }
 
+        private Pwd.APwd _APwd;
+        private void ShowAPwd()
+        {
+            if (_APwd == null)
+            {
+                _APwd = new Pwd.APwd(_UserModel);
+                _APwd.Dock = DockStyle.Fill;
+                _APwd.TabIndex = 0;
+                _APwd.Init(this);
+
+                Controls.Clear();
+                Controls.Add(_APwd);
+            }
+            _Amon = _APwd;
+        }
+
         private AGuid _Guid;
         private void ShowGuid()
         {
@@ -321,17 +338,14 @@ namespace Me.Amon
             {
                 _Guid = new AGuid(this);
                 //_AGuid.Location = new System.Drawing.Point(0, 0);
-                _Guid.Name = "panel1";
+                //_Guid.Name = "panel1";
                 //_AGuid.Size = new System.Drawing.Size(310, 100);
-                _Guid.TabIndex = 0;
 
                 //_Guid.CallBack = new AmonHandler<string>(ShowDApp);
+                _Guid.Init(_UserModel);
             }
-            _Guid.Init(_UserModel);
-
-            Controls.Clear();
-            Controls.Add(_Guid);
-            _Guid.ShowDApp(0);
+            _Guid.Show();
+            //_Guid.ShowDApp(0);
         }
         #endregion
     }

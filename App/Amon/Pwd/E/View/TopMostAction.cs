@@ -11,8 +11,8 @@ namespace Me.Amon.Pwd.E.View
                 return;
             }
 
-            bool status = !IApp.TopMost;
-            IApp.TopMost = status;
+            bool status = !IApp.Form.TopMost;
+            IApp.Form.TopMost = status;
             foreach (ToolStripItem item in _Items)
             {
                 if (item == sender)
@@ -43,12 +43,12 @@ namespace Me.Amon.Pwd.E.View
             {
                 if (item is ToolStripMenuItem)
                 {
-                    (item as ToolStripMenuItem).Checked = IApp.TopMost;
+                    (item as ToolStripMenuItem).Checked = IApp.Form.TopMost;
                     continue;
                 }
                 if (item is ToolStripButton)
                 {
-                    (item as ToolStripButton).Checked = IApp.TopMost;
+                    (item as ToolStripButton).Checked = IApp.Form.TopMost;
                 }
             }
         }

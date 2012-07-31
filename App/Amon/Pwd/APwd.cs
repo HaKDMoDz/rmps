@@ -27,7 +27,7 @@ using Thought.vCards;
 
 namespace Me.Amon.Pwd
 {
-    public partial class APwd : UserControl
+    public partial class APwd : UserControl, IApp, IAmon
     {
         #region 全局变量
         private UserModel _UserModel;
@@ -60,20 +60,79 @@ namespace Me.Amon.Pwd
             _UserModel = userModel;
 
             InitializeComponent();
-
-            _Main.Icon = Me.Amon.Properties.Resources.Icon;
         }
 
-        public void Init()
+        public void Init(Main main)
         {
+            _Main = main;
+
+            #region 数据模型
+            _SafeModel = new SafeModel(_UserModel);
+            _SafeModel.Init();
+            _DataModel = new DataModel(_UserModel);
+            _DataModel.Init();
+            _ViewModel = new ViewModel(_UserModel);
+            _ViewModel.Load();
+            UdcModel udcModel = new UdcModel();
+            udcModel.Init(_UserModel);
+            _DataModel.UdcModel = udcModel;
+            #endregion
+
+            #region 系统选单
+            _XmlMenu = new XmlMenu<APwd>(this, _ViewModel);
+            if (_XmlMenu.Load(Path.Combine(_UserModel.Home, EPwd.XML_MENU)))
+            {
+                _XmlMenu.GetStrokes("APwd");
+                _XmlMenu.GetMenuBar("APwd", MbMenu);
+                _XmlMenu.GetToolBar("APwd", TbTool);
+                _XmlMenu.GetPopMenu("ACat", CmCat);
+                _XmlMenu.GetPopMenu("AKey", CmKey);
+                //_XmlMenu.GetPopMenu("AAtt", CmAtt);
+            }
+            #endregion
+
+            InitCat();
+            InitKey();
+            FbFind.APwd = this;
+
+            // 当前时间
+            UcTime.Start();
+
+            // 视图模式
+            switch (_ViewModel.Pattern)
+            {
+                case EPwd.PATTERN_PRO:
+                    ShowAPro();
+                    break;
+                case EPwd.PATTERN_WIZ:
+                    ShowAWiz();
+                    break;
+                case EPwd.PATTERN_PAD:
+                    ShowAPad();
+                    break;
+                default:
+                    break;
+            }
+
+            _Main.FormBorderStyle = FormBorderStyle.Sizable;
             _Main.KeyPreview = true;
             _Main.MainMenuStrip = this.MbMenu;
-            _Main.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            _Main.MaximizeBox = true;
+
+            LoadLayout();
         }
         #endregion
 
         #region 接口实现
         public int AppId { get; set; }
+
+
+        public Form Form
+        {
+            get { return _Main; }
+        }
+
+        public Icon Icon { get; set; }
 
         public void ShowTips(Control control, string caption)
         {
@@ -126,65 +185,6 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 事件处理
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void APwd_Load(object sender, EventArgs e)
-        {
-            #region 数据模型
-            _SafeModel = new SafeModel(_UserModel);
-            _SafeModel.Init();
-            _DataModel = new DataModel(_UserModel);
-            _DataModel.Init();
-            _ViewModel = new ViewModel(_UserModel);
-            _ViewModel.Load();
-            UdcModel udcModel = new UdcModel();
-            udcModel.Init(_UserModel);
-            _DataModel.UdcModel = udcModel;
-            #endregion
-
-            #region 系统选单
-            _XmlMenu = new XmlMenu<APwd>(this, _ViewModel);
-            if (_XmlMenu.Load(Path.Combine(_UserModel.Home, EPwd.XML_MENU)))
-            {
-                _XmlMenu.GetStrokes("APwd");
-                _XmlMenu.GetMenuBar("APwd", MbMenu);
-                _XmlMenu.GetToolBar("APwd", TbTool);
-                _XmlMenu.GetPopMenu("ACat", CmCat);
-                _XmlMenu.GetPopMenu("AKey", CmKey);
-                //_XmlMenu.GetPopMenu("AAtt", CmAtt);
-            }
-            #endregion
-
-            InitCat();
-            InitKey();
-            FbFind.APwd = this;
-
-            // 布局加载
-            LoadLayout();
-
-            // 当前时间
-            UcTime.Start();
-
-            // 视图模式
-            switch (_ViewModel.Pattern)
-            {
-                case EPwd.PATTERN_PRO:
-                    ShowAPro();
-                    break;
-                case EPwd.PATTERN_WIZ:
-                    ShowAWiz();
-                    break;
-                case EPwd.PATTERN_PAD:
-                    ShowAPad();
-                    break;
-                default:
-                    break;
-            }
-        }
-
         #region CatTree拖拽事件
         /// <summary>
         /// 
@@ -636,7 +636,7 @@ namespace Me.Amon.Pwd
             KeyIcon seeker = new KeyIcon(_UserModel, rootDir);
             seeker.IcoSize = 24;
             seeker.CallBackHandler = handler;
-            BeanUtil.CenterToParent(seeker, this);
+            BeanUtil.CenterToParent(seeker, _Main);
             seeker.ShowDialog(this);
         }
 
@@ -989,7 +989,7 @@ namespace Me.Amon.Pwd
             CatIcon editor = new CatIcon(_UserModel, _DataModel.CatDir);
             editor.InitOnce(16);
             editor.CallBackHandler = new AmonHandler<Png>(ChangeCatIcon);
-            BeanUtil.CenterToParent(editor, this);
+            BeanUtil.CenterToParent(editor, _Main);
             editor.ShowDialog(this);
         }
 
@@ -1250,7 +1250,7 @@ namespace Me.Amon.Pwd
             CatTree view = new CatTree(_UserModel);
             view.Init(IlCatTree);
             view.CallBack = new AmonHandler<string>(ChangeKeyCat);
-            BeanUtil.CenterToParent(view, this);
+            BeanUtil.CenterToParent(view, _Main);
             view.ShowDialog(this);
         }
 
@@ -1262,7 +1262,7 @@ namespace Me.Amon.Pwd
             }
             LogEdit edit = new LogEdit(this);
             edit.Init(_UserModel, _SafeModel);
-            BeanUtil.CenterToParent(edit, this);
+            BeanUtil.CenterToParent(edit, _Main);
             edit.Show(this);
         }
         #endregion
@@ -1356,28 +1356,27 @@ namespace Me.Amon.Pwd
         #region 文件选单
         public void LockForm()
         {
-            new AuthLs(_UserModel, this).ShowDialog(this);
+            new AuthLs(_UserModel, _Main).ShowDialog(this);
         }
 
-        public void HideForm()
+        public bool HideForm()
         {
             if (_SafeModel.Modified)
             {
                 if (DialogResult.Yes != Main.ShowConfirm("您有数据尚未保存，确认要隐藏窗口吗？"))
                 {
-                    return;
+                    return false;
                 }
             }
 
             SaveLayout();
-            Visible = false;
+            return true;
         }
 
-        public void ExitForm()
+        public bool ExitForm()
         {
             SaveLayout();
-
-            Close();
+            return true;
         }
         #endregion
 
@@ -2247,7 +2246,7 @@ namespace Me.Amon.Pwd
         {
             LibEdit edit = new LibEdit(_UserModel);
             edit.Init(_DataModel);
-            BeanUtil.CenterToParent(edit, this);
+            BeanUtil.CenterToParent(edit, _Main);
             edit.Show(this);
         }
 
@@ -2255,7 +2254,7 @@ namespace Me.Amon.Pwd
         {
             UdcEditor edit = new UdcEditor(_UserModel);
             edit.Init(_DataModel.UdcModel, new Udc());
-            BeanUtil.CenterToParent(edit, this);
+            BeanUtil.CenterToParent(edit, _Main);
             edit.Show(this);
         }
 
@@ -2263,7 +2262,7 @@ namespace Me.Amon.Pwd
         {
             KeyIcon edit = new KeyIcon(_UserModel, _DataModel.KeyDir);
             edit.IcoSize = EApp.IMG_KEY_LIST_DIM;
-            BeanUtil.CenterToParent(edit, this);
+            BeanUtil.CenterToParent(edit, _Main);
             edit.Show(this);
         }
         #endregion
@@ -2299,7 +2298,7 @@ namespace Me.Amon.Pwd
             }
 
             HotKeys keys = new HotKeys(dt);
-            BeanUtil.CenterToParent(keys, this);
+            BeanUtil.CenterToParent(keys, _Main);
             keys.Show(this);
         }
 
@@ -2456,20 +2455,20 @@ namespace Me.Amon.Pwd
         {
         }
 
-        private void LoadLayout()
+        public void LoadLayout()
         {
             if (_ViewModel.WindowState == EPwd.WINDOW_STATE_MAXIMIZED)
             {
-                WindowState = FormWindowState.Maximized;
+                _Main.WindowState = FormWindowState.Maximized;
             }
             else if (_ViewModel.WindowState == EPwd.WINDOW_STATE_MINIMIZED)
             {
-                WindowState = FormWindowState.Minimized;
+                _Main.WindowState = FormWindowState.Minimized;
             }
             else
             {
-                ClientSize = new Size(_ViewModel.WindowDimW, _ViewModel.WindowDimH);
-                Location = new Point(_ViewModel.WindowLocX, _ViewModel.WindowLocY);
+                _Main.ClientSize = new Size(_ViewModel.WindowDimW, _ViewModel.WindowDimH);
+                _Main.Location = new Point(_ViewModel.WindowLocX, _ViewModel.WindowLocY);
             }
 
             HSplit.SplitterDistance = _ViewModel.HSplitDistance;
@@ -2483,13 +2482,13 @@ namespace Me.Amon.Pwd
             FbFind.Visible = _ViewModel.FindBarVisible;
         }
 
-        private void SaveLayout()
+        public void SaveLayout()
         {
-            if (WindowState == FormWindowState.Maximized)
+            if (_Main.WindowState == FormWindowState.Maximized)
             {
                 _ViewModel.WindowState = EPwd.WINDOW_STATE_MAXIMIZED;
             }
-            else if (WindowState == FormWindowState.Minimized)
+            else if (_Main.WindowState == FormWindowState.Minimized)
             {
                 _ViewModel.WindowState = EPwd.WINDOW_STATE_MINIMIZED;
             }

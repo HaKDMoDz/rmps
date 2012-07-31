@@ -19,8 +19,6 @@ namespace Me.Amon.Guid
         private UserModel _UserModel;
         private ILogo _ILogo;
         private TApp _TiApp;
-        private TApp _TdApp;
-        private IApp _DApp;
         private Dictionary<string, IApp> _Apps;
         #region 窗口移动
         private bool _IsMouseDown;
@@ -55,16 +53,11 @@ namespace Me.Amon.Guid
         public void Init(UserModel userModel)
         {
             _UserModel = userModel;
-            _Main.AcceptButton = null;
-            _Main.CancelButton = null;
 
             // 背景透明
-            _Main.Visible = false;
-            _Main.FormBorderStyle = FormBorderStyle.None;
-            _Main.ShowInTaskbar = false;
             GenBgImage();
-            _Main.BackColor = _TransColor;
-            _Main.TransparencyKey = _TransColor;
+            BackColor = _TransColor;
+            TransparencyKey = _TransColor;
 
             // 窗口位置
             int x = Settings.Default.LocX;
@@ -77,9 +70,8 @@ namespace Me.Amon.Guid
             {
                 y = 40;
             }
-            _Main.Location = new Point(x, y);
-            _Main.TopMost = true;
-            _Main.Visible = true;
+            Location = new Point(x, y);
+            TopMost = true;
 
             // 
             MgPlugIns.Checked = Settings.Default.PlugIns;
@@ -94,9 +86,7 @@ namespace Me.Amon.Guid
             _Main.SetTrayVisible((pattern & EApp.PATTERN_TRAY) != 0);
 
             ChangeEmotion(Settings.Default.Emotion);
-            ChangeAppVisible(true);
-
-            _Main.ClientSize = this.Size;
+            //ChangeAppVisible(true);
 
             LoadIApp();
         }
@@ -131,10 +121,10 @@ namespace Me.Amon.Guid
 
         private void AGuid_MouseLeave(object sender, EventArgs e)
         {
-            if (MousePosition.X < _Main.Location.X
-                || MousePosition.Y < _Main.Location.Y
-                || MousePosition.X > _Main.Location.X + _Main.Width
-                || MousePosition.Y > _Main.Location.Y + _Main.Height)
+            if (MousePosition.X < Location.X
+                || MousePosition.Y < Location.Y
+                || MousePosition.X > Location.X + Width
+                || MousePosition.Y > Location.Y + Height)
             {
                 ChangeAppVisible(false);
             }
@@ -178,7 +168,11 @@ namespace Me.Amon.Guid
 
         private void PbApp_DoubleClick(object sender, EventArgs e)
         {
-            ShowDApp(0);
+            if (!_Main.Visible)
+            {
+                _Main.Visible = true;
+            }
+            _Main.BringToFront();
         }
 
         private void LvApp_SelectedIndexChanged(object sender, EventArgs e)
@@ -384,9 +378,9 @@ namespace Me.Amon.Guid
             {
                 if (_MaxRegion == null)
                 {
-                    _MaxRegion = new Region(Bounds);
+                    _MaxRegion = new Region(new Rectangle(0, 0, 320, 120));
                 }
-                _Main.Region = _MaxRegion.Clone();
+                this.Region = _MaxRegion.Clone();
             }
             else
             {
@@ -394,7 +388,7 @@ namespace Me.Amon.Guid
                 {
                     _MinRegion = new Region(PbApp.Bounds);
                 }
-                _Main.Region = _MinRegion.Clone();
+                this.Region = _MinRegion.Clone();
             }
         }
 
@@ -455,8 +449,8 @@ namespace Me.Amon.Guid
         private void BeginMove()
         {
             _MouseOffset = MousePosition;
-            _MouseOffset.X -= _Main.Location.X;
-            _MouseOffset.Y -= _Main.Location.Y;
+            _MouseOffset.X -= Location.X;
+            _MouseOffset.Y -= Location.Y;
             _IsMouseDown = true;
         }
 
@@ -493,7 +487,7 @@ namespace Me.Amon.Guid
                     pos.Y = t;
                 }
             }
-            _Main.Location = pos;
+            Location = pos;
         }
 
         #region 应用相关
@@ -522,12 +516,6 @@ namespace Me.Amon.Guid
                 tApp = new TApp();
                 tApp.FromXml(node);
 
-                if (tApp.Default)
-                {
-                    _TdApp = tApp;
-                    continue;
-                }
-
                 _Apps[tApp.Id] = null;
 
                 IlApp.Images.Add(tApp.Id, BeanUtil.ReadImage(tApp.Logo, Resources.Logo32));
@@ -552,18 +540,6 @@ namespace Me.Amon.Guid
                 return;
             }
             ShowIApp(0);
-        }
-
-        public void ShowDApp(int ptn)
-        {
-            if (_DApp == null || _DApp.IsDisposed)
-            {
-                _DApp = GetIApp(_TdApp);
-            }
-            if (_DApp != null)
-            {
-                _DApp.Show();
-            }
         }
 
         private void ShowIApp(int ptn)

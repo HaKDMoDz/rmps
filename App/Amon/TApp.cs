@@ -17,8 +17,6 @@ namespace Me.Amon
 
         public string Tips { get; set; }
 
-        public bool Default { get; set; }
-
         public bool NeedAuth { get; set; }
 
         public IApp App { get; set; }
@@ -45,7 +43,6 @@ namespace Me.Amon
             Uri = Vcs.Attribute(node, "Uri", "");
             Text = Vcs.Attribute(node, "Text", "");
             Tips = Vcs.Attribute(node, "Tips", "");
-            Default = "true" == Vcs.Attribute(node, "Default", "").ToLower();
         }
     }
 }
