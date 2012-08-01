@@ -86,7 +86,7 @@ namespace Me.Amon.Guid
             _Main.SetTrayVisible((pattern & EApp.PATTERN_TRAY) != 0);
 
             ChangeEmotion(Settings.Default.Emotion);
-            //ChangeAppVisible(true);
+            ChangeAppVisible(false);
 
             LoadIApp();
         }

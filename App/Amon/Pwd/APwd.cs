@@ -1376,7 +1376,7 @@ namespace Me.Amon.Pwd
         public bool ExitForm()
         {
             SaveLayout();
-            return true;
+            return false;
         }
         #endregion
 
@@ -2496,10 +2496,10 @@ namespace Me.Amon.Pwd
             {
                 _ViewModel.WindowState = EPwd.WINDOW_STATE_NORMAL;
 
-                _ViewModel.WindowLocX = Location.X;
-                _ViewModel.WindowLocY = Location.Y;
-                _ViewModel.WindowDimW = ClientSize.Width;
-                _ViewModel.WindowDimH = ClientSize.Height;
+                _ViewModel.WindowLocX = _Main.Location.X;
+                _ViewModel.WindowLocY = _Main.Location.Y;
+                _ViewModel.WindowDimW = _Main.ClientSize.Width;
+                _ViewModel.WindowDimH = _Main.ClientSize.Height;
             }
 
             _ViewModel.HSplitDistance = HSplit.SplitterDistance;

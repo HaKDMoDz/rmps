@@ -49,6 +49,9 @@ namespace Me.Amon.Auth
             _Main.AcceptButton = BtOk;
             _Main.CancelButton = BtNo;
 
+            _Main.MaximizeBox = false;
+            _Main.FormBorderStyle = FormBorderStyle.FixedSingle;
+
             ShowSignIn();
         }
 
