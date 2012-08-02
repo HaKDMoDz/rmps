@@ -28,13 +28,6 @@ namespace Me.Amon.Sql
         public ASql()
         {
             InitializeComponent();
-        }
-
-        public ASql(UserModel userModel)
-        {
-            _UserModel = userModel;
-
-            InitializeComponent();
 
             this.Icon = Me.Amon.Properties.Resources.Icon;
         }

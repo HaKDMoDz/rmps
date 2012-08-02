@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5F42827D-46C8-4B16-A565-7BB61B7AFAE2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Me.Amon</RootNamespace>
+    <AssemblyName>ASql</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>ASql.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>Lib\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ASql\ASql.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ASql\ASql.Designer.cs">
+      <DependentUpon>ASql.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ASql\C\CsvConfig.cs" />
+    <Compile Include="ASql\C\Engine\MSSQLEngine.cs" />
+    <Compile Include="ASql\C\Engine\SQLiteEngine.cs" />
+    <Compile Include="ASql\C\IEngine.cs" />
+    <Compile Include="ASql\C\SqlConfig.cs" />
+    <Compile Include="ASql\C\XmlConfig.cs" />
+    <Compile Include="ASql\ESql.cs" />
+    <Compile Include="ASql\E\ASqlAction.cs" />
+    <Compile Include="ASql\E\ConnectAction.cs" />
+    <Compile Include="ASql\E\Engine\MSSQLAction.cs" />
+    <Compile Include="ASql\E\Engine\SQLiteAction.cs" />
+    <Compile Include="ASql\E\ExecuteAction.cs" />
+    <Compile Include="ASql\E\ExportAction.cs" />
+    <Compile Include="ASql\E\ImportAction.cs" />
+    <Compile Include="ASql\E\NewDbmsAction.cs" />
+    <Compile Include="ASql\E\NewDbrAction.cs" />
+    <Compile Include="ASql\E\NewPdqAction.cs" />
+    <Compile Include="ASql\E\NewSqlAction.cs" />
+    <Compile Include="ASql\ISql.cs" />
+    <Compile Include="ASql\M\Ddl.cs" />
+    <Compile Include="ASql\M\Dml.cs" />
+    <Compile Include="ASql\M\Param.cs" />
+    <Compile Include="ASql\M\Rdbms.cs" />
+    <Compile Include="ASql\V\DbConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ASql\V\DbConfig.Designer.cs">
+      <DependentUpon>DbConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ASql\V\DbExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ASql\V\DbExport.Designer.cs">
+      <DependentUpon>DbExport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ASql\V\DbImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ASql\V\DbImport.Designer.cs">
+      <DependentUpon>DbImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ASql\V\DbResult.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ASql\V\DbResult.Designer.cs">
+      <DependentUpon>DbResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ASql\V\IEditor.cs" />
+    <Compile Include="ASql\V\IResult.cs" />
+    <Compile Include="ASql\V\PdfEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ASql\V\PdfEditor.Designer.cs">
+      <DependentUpon>PdfEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ASql\V\Pdf\DataArg.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ASql\V\Pdf\DataArg.Designer.cs">
+      <DependentUpon>DataArg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ASql\V\Pdf\DateArg.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ASql\V\Pdf\DateArg.Designer.cs">
+      <DependentUpon>DateArg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ASql\V\Pdf\IInput.cs" />
+    <Compile Include="ASql\V\Pdf\ListArg.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ASql\V\Pdf\ListArg.Designer.cs">
+      <DependentUpon>ListArg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ASql\V\Pdf\NoneArg.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ASql\V\Pdf\NoneArg.Designer.cs">
+      <DependentUpon>NoneArg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ASql\V\Pdf\TextArg.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ASql\V\Pdf\TextArg.Designer.cs">
+      <DependentUpon>TextArg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ASql\V\SqlEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ASql\V\SqlEditor.Designer.cs">
+      <DependentUpon>SqlEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Event\AmonHandler.cs" />
+    <Compile Include="IApp.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ASql\ASql.resx">
+      <DependentUpon>ASql.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASql\V\DbConfig.resx">
+      <DependentUpon>DbConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASql\V\DbExport.resx">
+      <DependentUpon>DbExport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASql\V\DbImport.resx">
+      <DependentUpon>DbImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASql\V\DbResult.resx">
+      <DependentUpon>DbResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASql\V\PdfEditor.resx">
+      <DependentUpon>PdfEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASql\V\Pdf\DataArg.resx">
+      <DependentUpon>DataArg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASql\V\Pdf\DateArg.resx">
+      <DependentUpon>DateArg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASql\V\Pdf\ListArg.resx">
+      <DependentUpon>ListArg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASql\V\Pdf\NoneArg.resx">
+      <DependentUpon>NoneArg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASql\V\Pdf\TextArg.resx">
+      <DependentUpon>TextArg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASql\V\SqlEditor.resx">
+      <DependentUpon>SqlEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icon.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
