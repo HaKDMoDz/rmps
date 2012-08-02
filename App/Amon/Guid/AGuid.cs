@@ -592,8 +592,6 @@ namespace Me.Amon.Guid
                     return new Img.AImg(_UserModel);
                 case EApp.IAPP_ASPY:
                     return new Spy.ASpy(_UserModel);
-                case EApp.IAPP_ASQL:
-                    return new Sql.ASql(_UserModel);
                 default:
                     return null;
             }

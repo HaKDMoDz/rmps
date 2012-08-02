@@ -1376,6 +1376,11 @@ namespace Me.Amon.Pwd
         public bool ExitForm()
         {
             SaveLayout();
+
+            Settings.Default.LocX = _Main.Location.X;
+            Settings.Default.LocY = _Main.Location.Y;
+            Settings.Default.Save();
+
             return false;
         }
         #endregion
