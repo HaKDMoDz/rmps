@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.User
 {
-    partial class SignRc
+    partial class AuthCa
     {
         /// <summary>
         /// 必需的设计器变量。

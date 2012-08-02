@@ -973,42 +973,6 @@
     <Compile Include="Uc\Card.cs" />
     <Compile Include="Uc\ItemGroup.cs" />
     <Compile Include="Uc\KeyStroke.cs" />
-    <Compile Include="Uc\TabControl\ATabControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\NativeMethods.cs" />
-    <Compile Include="Uc\TabControl\TabStyle.cs" />
-    <Compile Include="Uc\TabControl\TabStyleProvider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleAmonProvider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleAngledProvider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleChromeProvider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleDefaultProvider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleIE8Provider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleNoneProvider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleRoundedProvider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleVisualStudioProvider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleVS2010Provider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\ThemedColors.cs" />
     <Compile Include="Uc\XmlMenu.cs" />
     <Compile Include="Auth\Uc\AuthLk.cs">
       <SubType>UserControl</SubType>
@@ -1027,18 +991,6 @@
     </Compile>
     <Compile Include="Auth\Uc\AuthUl.Designer.cs">
       <DependentUpon>AuthUl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Uw\HotKeys.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Uw\HotKeys.Designer.cs">
-      <DependentUpon>HotKeys.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Uw\Error.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Uw\Error.Designer.cs">
-      <DependentUpon>Error.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\_Key\KeyIcon.cs">
       <SubType>Form</SubType>
@@ -1144,29 +1096,11 @@
     <Compile Include="User\Uc\SignPc.Designer.cs">
       <DependentUpon>SignPc.cs</DependentUpon>
     </Compile>
-    <Compile Include="Uw\Alert.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Uw\Alert.Designer.cs">
-      <DependentUpon>Alert.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Uw\Input.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Uw\Input.Designer.cs">
-      <DependentUpon>Input.cs</DependentUpon>
-    </Compile>
     <Compile Include="Uw\TxtEditor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Uw\TxtEditor.Designer.cs">
       <DependentUpon>TxtEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Uw\Waiting.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Uw\Waiting.Designer.cs">
-      <DependentUpon>Waiting.cs</DependentUpon>
     </Compile>
     <Compile Include="User\SignAc.cs">
       <SubType>UserControl</SubType>
@@ -1480,12 +1414,6 @@
     <EmbeddedResource Include="Auth\Uc\AuthUl.resx">
       <DependentUpon>AuthUl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Uw\HotKeys.resx">
-      <DependentUpon>HotKeys.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Uw\Error.resx">
-      <DependentUpon>Error.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Pwd\_Key\KeyIcon.resx">
       <DependentUpon>KeyIcon.cs</DependentUpon>
     </EmbeddedResource>
@@ -1528,17 +1456,8 @@
     <EmbeddedResource Include="User\Uc\SignPc.resx">
       <DependentUpon>SignPc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Uw\Alert.resx">
-      <DependentUpon>Alert.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Uw\Input.resx">
-      <DependentUpon>Input.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Uw\TxtEditor.resx">
       <DependentUpon>TxtEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Uw\Waiting.resx">
-      <DependentUpon>Waiting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\SignAc.resx">
       <DependentUpon>SignAc.cs</DependentUpon>
@@ -1643,6 +1562,10 @@
     <ProjectReference Include="..\ComnLib\ComnLib.csproj">
       <Project>{E57C460D-306A-4F57-AD0B-51F7EEAD8838}</Project>
       <Name>ComnLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FormLib\FormLib.csproj">
+      <Project>{8EAB76F7-3B5C-490E-BDDE-CBEFD3D5BF25}</Project>
+      <Name>FormLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

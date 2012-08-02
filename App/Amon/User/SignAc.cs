@@ -16,6 +16,8 @@ namespace Me.Amon.Auth
         private Main _Main;
         private ISignAc _SignAc;
         private UserModel _UserModel;
+        private KeyEventHandler _KeyDownHandler;
+        private FormClosingEventHandler _ClosingHandler;
 
         #region 构造函数
         public SignAc()
@@ -23,37 +25,51 @@ namespace Me.Amon.Auth
             InitializeComponent();
         }
 
-        public SignAc(Main main)
+        public SignAc(Main main, UserModel userModel)
         {
             _Main = main;
+            _UserModel = userModel;
 
             InitializeComponent();
         }
         #endregion
 
         #region 接口实现
-        public bool HideForm()
+        public void InitData()
         {
-            return true;
-        }
-
-        public bool ExitForm()
-        {
-            return true;
-        }
-        #endregion
-
-        public void Init(UserModel userModel)
-        {
-            _UserModel = userModel;
             _Main.AcceptButton = BtOk;
             _Main.CancelButton = BtNo;
-
-            _Main.MaximizeBox = false;
             _Main.FormBorderStyle = FormBorderStyle.FixedSingle;
+            _Main.MaximizeBox = false;
+
+            if (_ClosingHandler == null)
+            {
+                _ClosingHandler = new FormClosingEventHandler(Main_FormClosing);
+            }
+            _Main.FormClosing -= _ClosingHandler;
+            if (_KeyDownHandler == null)
+            {
+                _KeyDownHandler = new KeyEventHandler(Main_KeyDown);
+            }
+            _Main.KeyDown += _KeyDownHandler;
 
             ShowSignIn();
         }
+
+        public void LoadView()
+        {
+        }
+
+        public void SaveView()
+        {
+        }
+
+        public void DeInit()
+        {
+            _Main.KeyDown -= _KeyDownHandler;
+            _Main.FormClosing -= _ClosingHandler;
+        }
+        #endregion
 
         public void ShowTips(Control control, string caption)
         {
@@ -109,6 +125,15 @@ namespace Me.Amon.Auth
         }
 
         #region 事件处理
+        private void Main_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+        }
+
         #region 界面事件
         private void BtOk_Click(object sender, EventArgs e)
         {

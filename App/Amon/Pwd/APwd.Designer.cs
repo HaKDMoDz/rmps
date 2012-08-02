@@ -237,7 +237,6 @@
             this.Controls.Add(this.MbMenu);
             this.Name = "APwd";
             this.Text = "阿木密码箱";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.APwd_KeyDown);
             this.SsEcho.ResumeLayout(false);
             this.SsEcho.PerformLayout();
             this.TcTool.ContentPanel.ResumeLayout(false);

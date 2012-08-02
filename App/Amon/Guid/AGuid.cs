@@ -577,9 +577,6 @@ namespace Me.Amon.Guid
 
             switch ((app.Id ?? "").ToLower())
             {
-                case EApp.IAPP_APWD:
-                    app.NeedAuth = true;
-                    return new Pwd.APwd(_UserModel);
                 case EApp.IAPP_ASEC:
                     return new Sec.ASec(_UserModel);
                 case EApp.IAPP_ABAR:

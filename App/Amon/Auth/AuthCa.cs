@@ -10,17 +10,17 @@ namespace Me.Amon.User
     /// <summary>
     /// 重新验证
     /// </summary>
-    public partial class SignRc : Form
+    public partial class AuthCa : Form
     {
         private UserModel _UserModel;
 
         #region 构造函数
-        public SignRc()
+        public AuthCa()
         {
             InitializeComponent();
         }
 
-        public SignRc(UserModel userModel)
+        public AuthCa(UserModel userModel)
         {
             _UserModel = userModel;
 

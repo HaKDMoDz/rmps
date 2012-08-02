@@ -60,13 +60,6 @@ namespace Me.Amon.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap Alert {
-            get {
-                object obj = ResourceManager.GetObject("Alert", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap AppCur {
             get {
                 object obj = ResourceManager.GetObject("AppCur", resourceCulture);
@@ -102,13 +95,6 @@ namespace Me.Amon.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap Error {
-            get {
-                object obj = ResourceManager.GetObject("Error", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap Find {
             get {
                 object obj = ResourceManager.GetObject("Find", resourceCulture);
@@ -140,13 +126,6 @@ namespace Me.Amon.Properties {
         internal static System.Drawing.Bitmap Info {
             get {
                 object obj = ResourceManager.GetObject("Info", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap Input {
-            get {
-                object obj = ResourceManager.GetObject("Input", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -231,13 +210,6 @@ namespace Me.Amon.Properties {
         internal static System.Drawing.Bitmap SignIn {
             get {
                 object obj = ResourceManager.GetObject("SignIn", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap Waiting {
-            get {
-                object obj = ResourceManager.GetObject("Waiting", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

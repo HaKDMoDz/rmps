@@ -48,6 +48,8 @@ namespace Me.Amon.Pwd
         private XmlMenu<APwd> _XmlMenu;
         #endregion
         private Main _Main;
+        private KeyEventHandler _KeyDownHandler;
+        private FormClosingEventHandler _ClosingHandler;
 
         #region 构造函数
         public APwd()
@@ -55,17 +57,16 @@ namespace Me.Amon.Pwd
             InitializeComponent();
         }
 
-        public APwd(UserModel userModel)
+        public APwd(Main main, UserModel userModel)
         {
+            _Main = main;
             _UserModel = userModel;
 
             InitializeComponent();
         }
 
-        public void Init(Main main)
+        public void InitData()
         {
-            _Main = main;
-
             #region 数据模型
             _SafeModel = new SafeModel(_UserModel);
             _SafeModel.Init();
@@ -118,8 +119,32 @@ namespace Me.Amon.Pwd
             _Main.KeyPreview = true;
             _Main.MainMenuStrip = this.MbMenu;
             _Main.MaximizeBox = true;
+            if (_ClosingHandler == null)
+            {
+                _ClosingHandler = new FormClosingEventHandler(Main_FormClosing);
+            }
+            _Main.FormClosing += _ClosingHandler;
+            if (_KeyDownHandler == null)
+            {
+                _KeyDownHandler = new KeyEventHandler(Main_KeyDown);
+            }
+            _Main.KeyDown += _KeyDownHandler;
 
             LoadLayout();
+        }
+
+        public void LoadView()
+        {
+        }
+
+        public void SaveView()
+        {
+        }
+
+        public void DeInit()
+        {
+            _Main.KeyDown -= _KeyDownHandler;
+            _Main.FormClosing -= _ClosingHandler;
         }
         #endregion
 
@@ -185,6 +210,32 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 事件处理
+        private void Main_KeyDown(object sender, KeyEventArgs e)
+        {
+            foreach (KeyStroke<APwd> stroke in _XmlMenu.KeyStrokes)
+            {
+                if (stroke.Action == null ||
+                    e.Control ^ stroke.Control ||
+                    e.Shift ^ stroke.Shift ||
+                    e.Alt ^ stroke.Alt ||
+                    e.KeyCode != stroke.Code)
+                {
+                    continue;
+                }
+
+                stroke.Action.EventHandler(stroke, null);
+                e.Handled = true;
+                break;
+            }
+        }
+
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+
+            HideForm();
+        }
+
         #region CatTree拖拽事件
         /// <summary>
         /// 
@@ -552,42 +603,6 @@ namespace Me.Amon.Pwd
         private void UcTime_Tick(object sender, EventArgs e)
         {
             TssTime.Text = DateTime.Now.ToString(EApp.DATEIME_FORMAT);
-        }
-
-        /// <summary>
-        /// 窗口快捷键
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void APwd_KeyDown(object sender, KeyEventArgs e)
-        {
-            foreach (KeyStroke<APwd> stroke in _XmlMenu.KeyStrokes)
-            {
-                if (stroke.Action == null ||
-                    e.Control ^ stroke.Control ||
-                    e.Shift ^ stroke.Shift ||
-                    e.Alt ^ stroke.Alt ||
-                    e.KeyCode != stroke.Code)
-                {
-                    continue;
-                }
-
-                stroke.Action.EventHandler(stroke, null);
-                e.Handled = true;
-                break;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void APwd_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            e.Cancel = true;
-
-            HideForm();
         }
         #endregion
 
@@ -1359,29 +1374,27 @@ namespace Me.Amon.Pwd
             new AuthLs(_UserModel, _Main).ShowDialog(this);
         }
 
-        public bool HideForm()
+        public void HideForm()
         {
             if (_SafeModel.Modified)
             {
                 if (DialogResult.Yes != Main.ShowConfirm("您有数据尚未保存，确认要隐藏窗口吗？"))
                 {
-                    return false;
+                    return;
                 }
             }
 
             SaveLayout();
-            return true;
+            _Main.Visible = false;
         }
 
-        public bool ExitForm()
+        public void ExitForm()
         {
             SaveLayout();
 
-            Settings.Default.LocX = _Main.Location.X;
-            Settings.Default.LocY = _Main.Location.Y;
-            Settings.Default.Save();
+            _Main.SaveGuid();
 
-            return false;
+            _Main.Close();
         }
         #endregion
 

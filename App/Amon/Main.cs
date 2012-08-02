@@ -209,25 +209,7 @@ namespace Me.Amon
 
             _UserModel = new UserModel();
 
-            ShowSign();
-        }
-
-        private void Main_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (!_Amon.ExitForm())
-            {
-                e.Cancel = false;
-                return;
-            }
-
-            if (_Writer != null)
-            {
-                _Writer.Close();
-            }
-
-            Settings.Default.LocX = Location.X;
-            Settings.Default.LocY = Location.Y;
-            Settings.Default.Save();
+            ShowUser();
         }
 
         private void NiTray_DoubleClick(object sender, EventArgs e)
@@ -243,31 +225,30 @@ namespace Me.Amon
         #region 私有函数
 
         #region 权限相关
-        private SignAc _SignAc;
-        private void SignAc(ESignAc signAc, AmonHandler<string> handler)
+        private AuthCa _SignRc;
+        private void SignRc(ESignAc signAc, AmonHandler<string> handler)
         {
-            if (_SignAc == null || !_SignAc.Visible)
+            if (_SignRc == null || !_SignRc.Visible)
             {
-                _SignAc = new SignAc(this);
-                _SignAc.Init(_UserModel);
+                _SignRc = new AuthCa(_UserModel);
+                _SignRc.InitOnce();
             }
-            _SignAc.CallBack = handler;
-            _SignAc.ShowView(signAc);
-            _SignAc.Show();
+            //_SignRc.CallBack = handler;
+            //_SignRc.ShowView(signAc);
+            _SignRc.Show();
         }
 
-        private SignRc _SignRc;
         public void CheckUser(AmonHandler<string> handler)
         {
             if (!CharUtil.IsValidateCode(_UserModel.Code))
             {
-                SignAc(ESignAc.SignIn, handler);
+                SignRc(ESignAc.SignIn, handler);
                 return;
             }
 
             if (_SignRc == null || !_SignRc.Visible)
             {
-                _SignRc = new SignRc(_UserModel);
+                _SignRc = new AuthCa(_UserModel);
                 _SignRc.InitOnce();
                 _SignRc.Show();
             }
@@ -281,12 +262,13 @@ namespace Me.Amon
         {
             _UserModel.CaSignOf();
 
-            ShowSign();
+            ShowUser();
         }
 
         private void DoSignIn(string view)
         {
-            ShowGuid();
+            LoadGuid();
+
             ShowAPwd();
         }
 
@@ -295,24 +277,26 @@ namespace Me.Amon
         }
         #endregion
 
-        private SignAc _Sign;
-        private void ShowSign()
+        private SignAc _User;
+        private void ShowUser()
         {
-            if (_Sign == null)
+            if (_User == null)
             {
-                _Sign = new SignAc(this);
-                //_AAuth.Location = new System.Drawing.Point(0, 0);
-                _Sign.Name = "panel1";
-                //_AAuth.Size = new System.Drawing.Size(310, 100);
-                _Sign.TabIndex = 0;
+                _User = new SignAc(this, _UserModel);
+                //_User.Location = new System.Drawing.Point(0, 0);
+                _User.Name = "panel1";
+                //_User.Size = new System.Drawing.Size(310, 100);
+                _User.TabIndex = 0;
 
-                _Sign.CallBack = new AmonHandler<string>(DoSignIn);
+                _User.CallBack = new AmonHandler<string>(DoSignIn);
+                _User.InitData();
+
+                Controls.Clear();
+                Controls.Add(_User);
             }
-            _Sign.Init(_UserModel);
-            _Amon = _Sign;
 
-            Controls.Clear();
-            Controls.Add(_Sign);
+            _Amon = _User;
+            _Amon.LoadView();
         }
 
         private Pwd.APwd _APwd;
@@ -320,19 +304,29 @@ namespace Me.Amon
         {
             if (_APwd == null)
             {
-                _APwd = new Pwd.APwd(_UserModel);
+                _APwd = new Pwd.APwd(this, _UserModel);
                 _APwd.Dock = DockStyle.Fill;
                 _APwd.TabIndex = 0;
-                _APwd.Init(this);
+                _APwd.InitData();
 
                 Controls.Clear();
                 Controls.Add(_APwd);
             }
+
             _Amon = _APwd;
+            _Amon.LoadView();
+        }
+
+        public void SaveGuid()
+        {
+            Settings settings = Settings.Default;
+            settings.LocX = Location.X;
+            settings.LocY = Location.Y;
+            settings.Save();
         }
 
         private AGuid _Guid;
-        private void ShowGuid()
+        public void LoadGuid()
         {
             if (_Guid == null)
             {

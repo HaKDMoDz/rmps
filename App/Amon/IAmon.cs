@@ -2,8 +2,12 @@
 {
     public interface IAmon
     {
-        bool HideForm();
+        void InitData();
 
-        bool ExitForm();
+        void LoadView();
+
+        void SaveView();
+
+        void DeInit();
     }
 }
