@@ -320,8 +320,8 @@ namespace Me.Amon
         public void SaveGuid()
         {
             Settings settings = Settings.Default;
-            settings.LocX = Location.X;
-            settings.LocY = Location.Y;
+            settings.LocX = _Guid.Location.X;
+            settings.LocY = _Guid.Location.Y;
             settings.Save();
         }
 

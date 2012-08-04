@@ -47,6 +47,7 @@ namespace Me.Amon.Pwd
         private Dictionary<string, Image> _KeyHint;
         private XmlMenu<APwd> _XmlMenu;
         #endregion
+        private bool _Exit;
         private Main _Main;
         private KeyEventHandler _KeyDownHandler;
         private FormClosingEventHandler _ClosingHandler;
@@ -231,6 +232,11 @@ namespace Me.Amon.Pwd
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (_Exit)
+            {
+                return;
+            }
+
             e.Cancel = true;
 
             HideForm();
@@ -1394,6 +1400,7 @@ namespace Me.Amon.Pwd
 
             _Main.SaveGuid();
 
+            _Exit = true;
             _Main.Close();
         }
         #endregion
@@ -2502,6 +2509,11 @@ namespace Me.Amon.Pwd
 
         public void SaveLayout()
         {
+            if (!_Main.Visible)
+            {
+                return;
+            }
+
             if (_Main.WindowState == FormWindowState.Maximized)
             {
                 _ViewModel.WindowState = EPwd.WINDOW_STATE_MAXIMIZED;
