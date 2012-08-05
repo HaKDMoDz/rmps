@@ -50,7 +50,7 @@ namespace Me.Amon.Guid
         }
         #endregion
 
-        public void Init(UserModel userModel)
+        public void InitView(UserModel userModel)
         {
             _UserModel = userModel;
 
@@ -74,12 +74,12 @@ namespace Me.Amon.Guid
             TopMost = true;
 
             // 
-            MgPlugIns.Checked = Settings.Default.PlugIns;
-            MgApps.Visible = !Settings.Default.PlugIns;
-            MgSep0.Visible = !Settings.Default.PlugIns;
+            MiPlugIns.Checked = Settings.Default.PlugIns;
+            MiApps.Visible = !Settings.Default.PlugIns;
+            MiSep0.Visible = !Settings.Default.PlugIns;
 
             // 系统徽标
-            MgLogo.Checked = (Settings.Default.Emotion == 0);
+            MiLogo.Checked = (Settings.Default.Emotion == 0);
 
             // 托盘图标状态
             int pattern = Settings.Default.Pattern;
@@ -89,6 +89,21 @@ namespace Me.Amon.Guid
             ChangeAppVisible(false);
 
             LoadIApp();
+        }
+
+        public bool WillExit()
+        {
+            Settings settings = Settings.Default;
+            settings.LocX = Location.X;
+            settings.LocY = Location.Y;
+            settings.Save();
+
+            return true;
+        }
+
+        public bool ExitForm()
+        {
+            return true;
         }
 
         public AmonHandler<int> CallBack;
@@ -226,10 +241,10 @@ namespace Me.Amon.Guid
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MgTopMost_Click(object sender, EventArgs e)
+        private void MiTopMost_Click(object sender, EventArgs e)
         {
             _Main.TopMost = !_Main.TopMost;
-            MgTopMost.Checked = _Main.TopMost;
+            MiTopMost.Checked = _Main.TopMost;
         }
 
         /// <summary>
@@ -237,7 +252,7 @@ namespace Me.Amon.Guid
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MgThrough_Click(object sender, EventArgs e)
+        private void MiThrough_Click(object sender, EventArgs e)
         {
             if (BackColor == Color.Red)
             {
@@ -250,18 +265,18 @@ namespace Me.Amon.Guid
         }
 
         #region
-        private void MgLogo_Click(object sender, EventArgs e)
+        private void MiLogo_Click(object sender, EventArgs e)
         {
             Settings.Default.Emotion = 1 - Settings.Default.Emotion;
             ChangeEmotion(Settings.Default.Emotion);
-            MgLogo.Checked = (Settings.Default.Emotion == 0);
+            MiLogo.Checked = (Settings.Default.Emotion == 0);
             Settings.Default.Save();
         }
 
-        private void MgTray_Click(object sender, EventArgs e)
+        private void MiTray_Click(object sender, EventArgs e)
         {
-            bool visible = !MgTray.Checked;
-            MgTray.Checked = visible;
+            bool visible = !MiTray.Checked;
+            MiTray.Checked = visible;
             _Main.SetTrayVisible(visible);
 
             if (visible)
@@ -275,13 +290,13 @@ namespace Me.Amon.Guid
             Settings.Default.Save();
         }
 
-        private void MgPlugIns_Click(object sender, EventArgs e)
+        private void MiPlugIns_Click(object sender, EventArgs e)
         {
-            Settings.Default.PlugIns = MgPlugIns.Checked;
-            MgApps.Visible = !MgPlugIns.Checked;
-            MgSep0.Visible = !MgPlugIns.Checked;
+            Settings.Default.PlugIns = MiPlugIns.Checked;
+            MiApps.Visible = !MiPlugIns.Checked;
+            MiSep0.Visible = !MiPlugIns.Checked;
 
-            ChangeAppVisible(MgPlugIns.Checked);
+            ChangeAppVisible(MiPlugIns.Checked);
         }
         #endregion
 
@@ -291,7 +306,7 @@ namespace Me.Amon.Guid
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MgSignOl_Click(object sender, EventArgs e)
+        private void MiSignOl_Click(object sender, EventArgs e)
         {
             //SignAc(ESignAc.SignOl, new AmonHandler<string>(DoSignOl));
         }
@@ -301,7 +316,7 @@ namespace Me.Amon.Guid
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MgSignUl_Click(object sender, EventArgs e)
+        private void MiSignUl_Click(object sender, EventArgs e)
         {
             //SignAc(ESignAc.SignUl, new AmonHandler<string>(ShowAPwd));
         }
@@ -311,7 +326,7 @@ namespace Me.Amon.Guid
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MgSignPc_Click(object sender, EventArgs e)
+        private void MiSignPc_Click(object sender, EventArgs e)
         {
             //SignAc(ESignAc.SignPc, new AmonHandler<string>(ShowAPwd));
         }
@@ -321,7 +336,7 @@ namespace Me.Amon.Guid
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MgSignIn_Click(object sender, EventArgs e)
+        private void MiSignIn_Click(object sender, EventArgs e)
         {
             //SignAc(ESignAc.SignIn, new AmonHandler<string>(DoSignIn));
         }
@@ -331,7 +346,7 @@ namespace Me.Amon.Guid
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MgSignOf_Click(object sender, EventArgs e)
+        private void MiSignOf_Click(object sender, EventArgs e)
         {
             if (SaveData())
             {
@@ -344,7 +359,7 @@ namespace Me.Amon.Guid
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MgSignFp_Click(object sender, EventArgs e)
+        private void MiSignFp_Click(object sender, EventArgs e)
         {
         }
         #endregion
@@ -355,17 +370,14 @@ namespace Me.Amon.Guid
         }
 
         #region
-        private void MgInfo_Click(object sender, EventArgs e)
+        private void MiInfo_Click(object sender, EventArgs e)
         {
             Main.ShowAbout(_Main);
         }
 
-        private void MgExit_Click(object sender, EventArgs e)
+        private void MiExit_Click(object sender, EventArgs e)
         {
-            if (SaveData())
-            {
-                _Main.Close();
-            }
+            _Main.ExitSystem();
         }
         #endregion
         #endregion
@@ -374,7 +386,7 @@ namespace Me.Amon.Guid
         #region 私有函数
         private void ChangeAppVisible(bool visible)
         {
-            if (MgPlugIns.Checked && visible)
+            if (MiPlugIns.Checked && visible)
             {
                 if (_MaxRegion == null)
                 {
@@ -523,7 +535,7 @@ namespace Me.Amon.Guid
 
                 item = new ToolStripMenuItem { Text = tApp.Text, Tag = tApp };
                 item.Click += new EventHandler(AppItem_Click);
-                MgApps.DropDownItems.Add(item);
+                MiApps.DropDownItems.Add(item);
             }
         }
 

@@ -69,6 +69,16 @@ namespace Me.Amon.Auth
             _Main.KeyDown -= _KeyDownHandler;
             _Main.FormClosing -= _ClosingHandler;
         }
+
+        public bool WillExit()
+        {
+            return true;
+        }
+
+        public bool ExitForm()
+        {
+            return true;
+        }
         #endregion
 
         public void ShowTips(Control control, string caption)

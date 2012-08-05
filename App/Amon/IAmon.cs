@@ -9,5 +9,9 @@
         void SaveView();
 
         void DeInit();
+
+        bool WillExit();
+
+        bool ExitForm();
     }
 }

@@ -179,8 +179,15 @@ namespace Me.Amon.Pwd
         {
             if (_SafeModel.Modified)
             {
-                return DialogResult.Yes == Main.ShowConfirm("您有数据尚未保存，确认要退出窗口吗？");
+                if (DialogResult.Yes != Main.ShowConfirm("您有数据尚未保存，确认要退出窗口吗？"))
+                {
+                    return false;
+                }
             }
+
+            SaveLayout();
+            _Exit = true;
+
             return true;
         }
 
@@ -232,14 +239,11 @@ namespace Me.Amon.Pwd
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_Exit)
+            if (!_Exit)
             {
-                return;
+                e.Cancel = true;
+                HideForm();
             }
-
-            e.Cancel = true;
-
-            HideForm();
         }
 
         #region CatTree拖拽事件
@@ -1394,14 +1398,10 @@ namespace Me.Amon.Pwd
             _Main.Visible = false;
         }
 
-        public void ExitForm()
+        public bool ExitForm()
         {
-            SaveLayout();
-
-            _Main.SaveGuid();
-
-            _Exit = true;
-            _Main.Close();
+            _Main.ExitSystem();
+            return true;
         }
         #endregion
 

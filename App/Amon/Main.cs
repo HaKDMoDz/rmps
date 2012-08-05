@@ -6,7 +6,6 @@ using Me.Amon.Auth;
 using Me.Amon.Event;
 using Me.Amon.Guid;
 using Me.Amon.Model;
-using Me.Amon.Properties;
 using Me.Amon.User;
 using Me.Amon.Util;
 using Me.Amon.Uw;
@@ -319,10 +318,6 @@ namespace Me.Amon
 
         public void SaveGuid()
         {
-            Settings settings = Settings.Default;
-            settings.LocX = _Guid.Location.X;
-            settings.LocY = _Guid.Location.Y;
-            settings.Save();
         }
 
         private AGuid _Guid;
@@ -336,10 +331,29 @@ namespace Me.Amon
                 //_AGuid.Size = new System.Drawing.Size(310, 100);
 
                 //_Guid.CallBack = new AmonHandler<string>(ShowDApp);
-                _Guid.Init(_UserModel);
+                _Guid.InitView(_UserModel);
             }
             _Guid.Show();
             //_Guid.ShowDApp(0);
+        }
+
+        public void ExitSystem()
+        {
+            if (_Guid != null)
+            {
+                if (_Guid.WillExit())
+                {
+                    _Guid.ExitForm();
+                }
+            }
+
+            if (_Amon != null)
+            {
+                if (_Amon.WillExit())
+                {
+                    Close();
+                }
+            }
         }
         #endregion
     }
