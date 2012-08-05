@@ -130,12 +130,11 @@ namespace Me.Amon.Pwd
                 _KeyDownHandler = new KeyEventHandler(Main_KeyDown);
             }
             _Main.KeyDown += _KeyDownHandler;
-
-            LoadLayout();
         }
 
         public void LoadView()
         {
+            LoadLayout();
         }
 
         public void SaveView()
@@ -2496,15 +2495,15 @@ namespace Me.Amon.Pwd
                 _Main.Location = new Point(_ViewModel.WindowLocX, _ViewModel.WindowLocY);
             }
 
-            HSplit.SplitterDistance = _ViewModel.HSplitDistance;
-            HSplit.Panel1Collapsed = !_ViewModel.NavPaneVisible;
-
-            VSplit.SplitterDistance = _ViewModel.VSplitDistance;
-
             MbMenu.Visible = _ViewModel.MenuBarVisible;
             TbTool.Visible = _ViewModel.ToolBarVisible;
             SsEcho.Visible = _ViewModel.EchoBarVisible;
             FbFind.Visible = _ViewModel.FindBarVisible;
+
+            HSplit.SplitterDistance = _ViewModel.HSplitDistance;
+            HSplit.Panel1Collapsed = !_ViewModel.NavPaneVisible;
+
+            VSplit.SplitterDistance = _ViewModel.VSplitDistance;
         }
 
         public void SaveLayout()
@@ -2532,17 +2531,17 @@ namespace Me.Amon.Pwd
                 _ViewModel.WindowDimH = _Main.ClientSize.Height;
             }
 
+            _ViewModel.MenuBarVisible = MbMenu.Visible;
+            _ViewModel.ToolBarVisible = TbTool.Visible;
+            _ViewModel.EchoBarVisible = SsEcho.Visible;
+            _ViewModel.FindBarVisible = FbFind.Visible;
+
             _ViewModel.HSplitDistance = HSplit.SplitterDistance;
             _ViewModel.NavPaneVisible = !HSplit.Panel1Collapsed;
 
             _ViewModel.VSplitDistance = VSplit.SplitterDistance;
             _ViewModel.CatTreeVisible = !VSplit.Panel1Collapsed;
             _ViewModel.KeyListVisible = !VSplit.Panel2Collapsed;
-
-            _ViewModel.MenuBarVisible = MbMenu.Visible;
-            _ViewModel.ToolBarVisible = TbTool.Visible;
-            _ViewModel.EchoBarVisible = SsEcho.Visible;
-            _ViewModel.FindBarVisible = FbFind.Visible;
 
             _ViewModel.Save();
         }
