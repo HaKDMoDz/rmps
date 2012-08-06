@@ -75,9 +75,9 @@ namespace Me.Amon.Auth
             return true;
         }
 
-        public bool ExitForm()
+        public void Close()
         {
-            return true;
+            _Main.ExitSystem();
         }
         #endregion
 
@@ -127,11 +127,6 @@ namespace Me.Amon.Auth
             {
                 _SignAc.Focus();
             }
-        }
-
-        public void Exit()
-        {
-            _Main.Close();
         }
 
         #region 事件处理

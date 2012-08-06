@@ -12,6 +12,6 @@
 
         bool WillExit();
 
-        bool ExitForm();
+        void Close();
     }
 }

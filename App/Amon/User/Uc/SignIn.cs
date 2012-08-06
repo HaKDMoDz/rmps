@@ -122,7 +122,7 @@ namespace Me.Amon.User.Uc
 
         public void DoCancel()
         {
-            _SignAc.Exit();
+            _SignAc.Close();
         }
 
         public void ShowMenu(Control control, int x, int y)

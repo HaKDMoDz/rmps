@@ -1397,10 +1397,9 @@ namespace Me.Amon.Pwd
             _Main.Visible = false;
         }
 
-        public bool ExitForm()
+        public void Close()
         {
             _Main.ExitSystem();
-            return true;
         }
         #endregion
 
