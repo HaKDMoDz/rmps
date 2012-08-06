@@ -14,7 +14,7 @@
     <AssemblyName>Amon</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
-    <SilverlightApplicationList>{5CA46E16-A312-467B-9114-D3DAC0E11CC9}|..\Amon\Amon.csproj|ClientBin|False</SilverlightApplicationList>
+    <SilverlightApplicationList>{5CA46E16-A312-467B-9114-D3DAC0E11CC9}|..\Amon\Amon.csproj|ClientBin|False,{B9668F70-5B08-4CB7-A58B-9F1517452FBC}|..\ALot\ALot.csproj|ClientBin|False</SilverlightApplicationList>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -59,18 +59,28 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="ALotTestPage.aspx" />
+    <Content Include="ALotTestPage.html" />
     <Content Include="c.aspx" />
     <Content Include="c.html" />
+    <Content Include="ClientBin\ALot.xap" />
     <Content Include="ClientBin\Amon.xap" />
     <Content Include="favicon.ico" />
+    <Content Include="idea\Index.aspx" />
     <Content Include="Images\1.png" />
     <Content Include="Images\2.png" />
+    <Content Include="Images\3.png" />
+    <Content Include="Images\4.png" />
+    <Content Include="Images\5.png" />
     <Content Include="Images\g0.png" />
     <Content Include="Images\g1.png" />
     <Content Include="Images\g2.png" />
     <Content Include="Images\i0.png" />
     <Content Include="Images\i1.png" />
     <Content Include="Images\i2.png" />
+    <Content Include="Images\l2.png" />
+    <Content Include="Images\l3.png" />
+    <Content Include="Images\l4.png" />
     <Content Include="Index.aspx" />
     <Content Include="logo\amon\favicon.ico" />
     <Content Include="logo\amon\logo.ico" />
@@ -256,6 +266,13 @@
     <Compile Include="Da\DBConst.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="idea\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="idea\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="IEnv.cs" />
     <Compile Include="IMsg.cs" />

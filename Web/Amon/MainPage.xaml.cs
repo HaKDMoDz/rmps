@@ -1,8 +1,6 @@
 ﻿using System.Windows.Controls;
 using Me.Amon.Utils;
-using Me.Amon.Views;
 using Me.Amon.Views.Demo;
-using Me.Amon.Views.Home;
 using Me.Amon.Views.Mopt;
 
 namespace Me.Amon
@@ -18,7 +16,7 @@ namespace Me.Amon
 
         private void LayoutRoot_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            _View = new Home();
+            _View = new Home.Home();
             _View.InitView(this);
             _View.InitData();
             BeanUtil.Loading = Loading;
@@ -50,7 +48,7 @@ namespace Me.Amon
 
         private void HbUser_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            _View = new Home();
+            _View = new Home.Home();
             _View.InitView(this);
             _View.InitData();
             DvOpts.Visibility = System.Windows.Visibility.Collapsed;
@@ -79,7 +77,7 @@ namespace Me.Amon
             }
             else
             {
-                _View = new Home();
+                _View = new Home.Home();
                 _View.InitView(this);
                 _View.InitData();
             }

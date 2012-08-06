@@ -5,7 +5,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Me.Amon.Views.Home
+namespace Me.Amon.Home
 {
     public partial class Cube : UserControl
     {

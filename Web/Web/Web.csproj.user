@@ -7,7 +7,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <StartPageUrl>c.aspx</StartPageUrl>
+          <StartPageUrl>ALotTestPage.aspx</StartPageUrl>
           <StartAction>SpecificPage</StartAction>
           <AspNetDebugging>True</AspNetDebugging>
           <SilverlightDebugging>True</SilverlightDebugging>
@@ -25,6 +25,7 @@
           <AlwaysStartWebServerOnDebug>True</AlwaysStartWebServerOnDebug>
           <ProjectOutputReferences>
             <Ref Project="{5CA46E16-A312-467B-9114-D3DAC0E11CC9}" Folder="ClientBin">Amon.xap</Ref>
+            <Ref Project="{B9668F70-5B08-4CB7-A58B-9F1517452FBC}" Folder="ClientBin">ALot.xap</Ref>
           </ProjectOutputReferences>
         </WebProjectProperties>
       </FlavorProperties>

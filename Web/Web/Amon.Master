@@ -24,7 +24,7 @@
                             <li class="static" style="position: relative; float: left;"><a class="level1 static" href="/blog" tabindex="-1">博客</a></li>
                             <li class="static" style="position: relative; float: left;"><a class="level1 static" href="http://rmps.googlecode.com/" tabindex="-1">源码</a></li>
                             <li class="static" style="position: relative; float: left;"><a class="level1 static" href="/down" tabindex="-1">关于</a></li>
-                            <!--li class="static" style="position: relative; float: left;"><a class="level1 static" href="/About.aspx" tabindex="-1">关于</a></li-->
+                            <li class="static" style="position: relative; float: left;"><a class="level1 static" href="/idea" tabindex="-1">交流</a></li>
                         </ul>
                     </div>
                 </td>

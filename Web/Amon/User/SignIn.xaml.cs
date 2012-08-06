@@ -84,11 +84,13 @@ namespace Me.Amon.Views.User
 
             if (string.IsNullOrEmpty(_Name))
             {
+                TbName.Focus();
                 return;
             }
 
             if (string.IsNullOrEmpty(_Pass))
             {
+                tbPass.Focus();
                 return;
             }
 

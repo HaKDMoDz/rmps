@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using Me.Amon.Views.User;
 
-namespace Me.Amon.Views.Home
+namespace Me.Amon.Home
 {
     public partial class Home : UserControl, IView
     {
