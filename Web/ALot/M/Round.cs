@@ -1,0 +1,30 @@
+﻿using System.Collections.Generic;
+
+namespace Me.Amon.Lot.M
+{
+    public class Round
+    {
+        public string Id { get; set; }
+        /// <summary>
+        /// 显示排序
+        /// </summary>
+        public int Order { get; set; }
+        /// <summary>
+        /// 显示名称
+        /// </summary>
+        public string Text { get; set; }
+        /// <summary>
+        /// 中的数量
+        /// </summary>
+        public int Count { get; set; }
+        /// <summary>
+        /// 必中对象
+        /// </summary>
+        public List<string> PLists { get; set; }
+        /// <summary>
+        /// 不中对象
+        /// </summary>
+        public List<string> NLists { get; set; }
+    }
+
+}
