@@ -7,6 +7,6 @@
     d:DesignHeight="48" d:DesignWidth="200">
 
     <Grid x:Name="LayoutRoot" Background="DarkRed" Margin="2">
-        <TextBlock Name="TbValue" Title="Demo" TextAlignment="Center" Foreground="Yellow" FontSize="32"/>
+        <TextBlock Name="TbValue" Text="Demo" Foreground="Yellow" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </UserControl>

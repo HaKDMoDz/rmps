@@ -45,9 +45,9 @@ namespace Me.Amon.Lot.V.V01
         #region 私有函数
         private void ShowView(Grid grid)
         {
-            grid.RowDefinitions.Clear();
-            grid.ColumnDefinitions.Clear();
-            grid.Children.Clear();
+            //grid.RowDefinitions.Clear();
+            //grid.ColumnDefinitions.Clear();
+            //grid.Children.Clear();
 
             for (int i = 0; i < _Cfg.ColCount; i += 1)
             {

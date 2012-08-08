@@ -1,4 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Me.Amon.Lot.C;
 using Me.Amon.Lot.M;
 using Me.Amon.Lot.V;
@@ -21,12 +24,30 @@ namespace Me.Amon.Lot
             string key = "";
 
             GenM(key);
+
+            if (!string.IsNullOrWhiteSpace(_MLot.Title))
+            {
+                TbTitle.Text = _MLot.Title;
+                TbTitle.Visibility = System.Windows.Visibility.Visible;
+                GdPanel.Margin = new System.Windows.Thickness(0, 40, 0, 0);
+            }
+            else
+            {
+                TbTitle.Visibility = System.Windows.Visibility.Collapsed;
+                GdPanel.Margin = new System.Windows.Thickness(0);
+            }
+            ImageBrush image = new ImageBrush();
+            image.ImageSource = new BitmapImage(new Uri(_MLot.Fav.BackgroundImage, UriKind.Relative));
+            image.Stretch = Stretch.Fill;
+            LayoutRoot.Background = image;
+
             GenV(key);
-            GenC(key);
 
             _VLot.Control.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             _VLot.Control.VerticalAlignment = System.Windows.VerticalAlignment.Center;
             LayoutRoot.Children.Add(_VLot.Control);
+
+            GenC(key);
         }
 
         private void ALot_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -88,11 +109,12 @@ namespace Me.Amon.Lot
 
             LotCfg cfg = new LotCfg();
             cfg.RowCount = 3;
-            cfg.ColCount = 2;
+            cfg.ColCount = 1;
             cfg.Speed = 30;
             _MLot.Cfg = cfg;
 
             LotFav fav = new LotFav();
+            fav.BackgroundImage = "/demo.jpg";
             fav.Run = System.Windows.Input.Key.R;
             fav.AmonMe = System.Windows.Input.Key.Space;
             fav.KeepOn = System.Windows.Input.Key.Enter;
