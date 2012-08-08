@@ -22,5 +22,8 @@ namespace Me.Amon.Lot.M
         /// 标的权重
         /// </summary>
         public int Weight { get; set; }
+
+        public string Exclude { get; set; }
+        public string Include { get; set; }
     }
 }

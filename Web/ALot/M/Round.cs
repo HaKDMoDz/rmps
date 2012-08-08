@@ -20,11 +20,11 @@ namespace Me.Amon.Lot.M
         /// <summary>
         /// 必中对象
         /// </summary>
-        public List<string> PLists { get; set; }
+        public Dictionary<string, int> Includes;
         /// <summary>
         /// 不中对象
         /// </summary>
-        public List<string> NLists { get; set; }
+        public Dictionary<string, int> Excludes;
     }
 
 }

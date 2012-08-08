@@ -9,5 +9,9 @@ namespace Me.Amon.Lot.M
         public string Title { get; set; }
 
         public List<Node> Nodes;
+
+        public LotCfg Cfg;
+
+        public LotFav Fav;
     }
 }
