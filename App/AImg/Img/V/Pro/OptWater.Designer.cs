@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Img.V.Pro
 {
-    partial class BeanScale
+    partial class OptWater
     {
         /// <summary> 
         /// 必需的设计器变量。

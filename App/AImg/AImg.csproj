@@ -66,23 +66,24 @@
     <Compile Include="Img\V\Pro\BeanPos.Designer.cs">
       <DependentUpon>BeanPos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Img\V\Pro\BeanRound.cs">
+    <Compile Include="Img\V\Pro\IOpt.cs" />
+    <Compile Include="Img\V\Pro\OptRound.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Img\V\Pro\BeanRound.Designer.cs">
-      <DependentUpon>BeanRound.cs</DependentUpon>
+    <Compile Include="Img\V\Pro\OptRound.Designer.cs">
+      <DependentUpon>OptRound.cs</DependentUpon>
     </Compile>
-    <Compile Include="Img\V\Pro\BeanScale.cs">
+    <Compile Include="Img\V\Pro\OptScale.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Img\V\Pro\BeanScale.Designer.cs">
-      <DependentUpon>BeanScale.cs</DependentUpon>
+    <Compile Include="Img\V\Pro\OptScale.Designer.cs">
+      <DependentUpon>OptScale.cs</DependentUpon>
     </Compile>
-    <Compile Include="Img\V\Pro\BeanWater.cs">
+    <Compile Include="Img\V\Pro\OptWater.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Img\V\Pro\BeanWater.Designer.cs">
-      <DependentUpon>BeanWater.cs</DependentUpon>
+    <Compile Include="Img\V\Pro\OptWater.Designer.cs">
+      <DependentUpon>OptWater.cs</DependentUpon>
     </Compile>
     <Compile Include="Img\V\Pro\UcImg.cs">
       <SubType>UserControl</SubType>
@@ -104,8 +105,8 @@
     <EmbeddedResource Include="Img\V\Pro\APro.resx">
       <DependentUpon>APro.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Img\V\Pro\BeanRound.resx">
-      <DependentUpon>BeanRound.cs</DependentUpon>
+    <EmbeddedResource Include="Img\V\Pro\OptRound.resx">
+      <DependentUpon>OptRound.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Img\V\Pro\UcImg.resx">
       <DependentUpon>UcImg.cs</DependentUpon>

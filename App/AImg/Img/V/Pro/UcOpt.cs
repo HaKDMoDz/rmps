@@ -5,6 +5,8 @@ namespace Me.Amon.Img.V.Pro
 {
     public partial class UcOpt : UserControl
     {
+        private IOpt _IOpt;
+
         public UcOpt()
         {
             InitializeComponent();
@@ -13,16 +15,22 @@ namespace Me.Amon.Img.V.Pro
         #region 事件处理
         private void BtApply_Click(object sender, EventArgs e)
         {
-
+            if (_IOpt != null)
+            {
+                _IOpt.Deal(null);
+            }
         }
 
         private void BtReset_Click(object sender, EventArgs e)
         {
-
+            if (_IOpt != null)
+            {
+                _IOpt.Reset();
+            }
         }
 
         #region 菜单事件
-        private BeanScale _Scale;
+        private OptScale _Scale;
         private void MiScale_Click(object sender, EventArgs e)
         {
             LlText.Text = "缩放";
@@ -30,14 +38,14 @@ namespace Me.Amon.Img.V.Pro
 
             if (_Scale == null)
             {
-                _Scale = new BeanScale();
+                _Scale = new OptScale();
                 _Scale.Dock = DockStyle.Fill;
             }
             GbBody.Controls.Clear();
             GbBody.Controls.Add(_Scale);
         }
 
-        private BeanRound _Round;
+        private OptRound _Round;
         private void MiRound_Click(object sender, EventArgs e)
         {
             LlText.Text = "圆角";
@@ -45,14 +53,14 @@ namespace Me.Amon.Img.V.Pro
 
             if (_Round == null)
             {
-                _Round = new BeanRound();
+                _Round = new OptRound();
                 _Round.Dock = DockStyle.Fill;
             }
             GbBody.Controls.Clear();
             GbBody.Controls.Add(_Round);
         }
 
-        private BeanWater _Water;
+        private OptWater _Water;
         private void MIWater_Click(object sender, EventArgs e)
         {
             LlText.Text = "水印";
@@ -60,7 +68,7 @@ namespace Me.Amon.Img.V.Pro
 
             if (_Water == null)
             {
-                _Water = new BeanWater();
+                _Water = new OptWater();
                 _Water.Dock = DockStyle.Fill;
             }
             GbBody.Controls.Clear();

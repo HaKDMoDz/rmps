@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace Me.Amon.Img.V.Pro
 {
-    public partial class BeanScale : UserControl
+    public partial class OptWater : UserControl
     {
-        public BeanScale()
+        public OptWater()
         {
             InitializeComponent();
         }
