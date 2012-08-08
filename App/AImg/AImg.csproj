@@ -105,6 +105,9 @@
     <EmbeddedResource Include="Img\V\Pro\APro.resx">
       <DependentUpon>APro.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Img\V\Pro\BeanPos.resx">
+      <DependentUpon>BeanPos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Img\V\Pro\OptRound.resx">
       <DependentUpon>OptRound.cs</DependentUpon>
     </EmbeddedResource>

@@ -5,10 +5,18 @@ namespace Me.Amon.Img.V.Pro
 {
     public partial class UcOpt : UserControl
     {
+        private APro _APro;
         private IOpt _IOpt;
 
         public UcOpt()
         {
+            InitializeComponent();
+        }
+
+        public UcOpt(APro apro)
+        {
+            _APro = apro;
+
             InitializeComponent();
         }
 
@@ -17,7 +25,7 @@ namespace Me.Amon.Img.V.Pro
         {
             if (_IOpt != null)
             {
-                _IOpt.Deal(null);
+                _APro.DstImage = _IOpt.Deal(_APro.SrcImage);
             }
         }
 
@@ -39,10 +47,12 @@ namespace Me.Amon.Img.V.Pro
             if (_Scale == null)
             {
                 _Scale = new OptScale();
+                _Scale.Init();
                 _Scale.Dock = DockStyle.Fill;
             }
             GbBody.Controls.Clear();
             GbBody.Controls.Add(_Scale);
+            _IOpt = _Scale;
         }
 
         private OptRound _Round;
@@ -54,10 +64,12 @@ namespace Me.Amon.Img.V.Pro
             if (_Round == null)
             {
                 _Round = new OptRound();
+                _Round.Init();
                 _Round.Dock = DockStyle.Fill;
             }
             GbBody.Controls.Clear();
             GbBody.Controls.Add(_Round);
+            _IOpt = _Round;
         }
 
         private OptWater _Water;
@@ -69,10 +81,12 @@ namespace Me.Amon.Img.V.Pro
             if (_Water == null)
             {
                 _Water = new OptWater();
+                _Water.Init();
                 _Water.Dock = DockStyle.Fill;
             }
             GbBody.Controls.Clear();
             GbBody.Controls.Add(_Water);
+            _IOpt = _Water;
         }
         #endregion
 

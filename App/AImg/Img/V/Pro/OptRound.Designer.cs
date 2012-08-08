@@ -29,16 +29,20 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            this.LtWidth = new System.Windows.Forms.Label();
+            this.SpWidth = new System.Windows.Forms.NumericUpDown();
+            this.SpHeight = new System.Windows.Forms.NumericUpDown();
+            this.LtHeight = new System.Windows.Forms.Label();
+            this.LvWidth = new System.Windows.Forms.Label();
+            this.LvHeight = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.PbColor = new System.Windows.Forms.PictureBox();
+            this.CkColor = new System.Windows.Forms.CheckBox();
+            this.UcLoc = new Me.Amon.Img.V.Pro.BeanPos();
+            ((System.ComponentModel.ISupportInitialize)(this.SpWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbColor)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -50,14 +54,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "位置";
             // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(28, 24);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(130, 75);
-            this.panel1.TabIndex = 1;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -67,73 +63,115 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "大小";
             // 
-            // label3
+            // LtWidth
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 145);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "水平";
+            this.LtWidth.AutoSize = true;
+            this.LtWidth.Location = new System.Drawing.Point(28, 145);
+            this.LtWidth.Name = "LtWidth";
+            this.LtWidth.Size = new System.Drawing.Size(29, 12);
+            this.LtWidth.TabIndex = 3;
+            this.LtWidth.Text = "水平";
             // 
-            // numericUpDown1
+            // SpWidth
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(63, 141);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(61, 21);
-            this.numericUpDown1.TabIndex = 4;
+            this.SpWidth.Location = new System.Drawing.Point(63, 141);
+            this.SpWidth.Name = "SpWidth";
+            this.SpWidth.Size = new System.Drawing.Size(61, 21);
+            this.SpWidth.TabIndex = 4;
             // 
-            // numericUpDown2
+            // SpHeight
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(63, 168);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(61, 21);
-            this.numericUpDown2.TabIndex = 6;
+            this.SpHeight.Location = new System.Drawing.Point(63, 168);
+            this.SpHeight.Name = "SpHeight";
+            this.SpHeight.Size = new System.Drawing.Size(61, 21);
+            this.SpHeight.TabIndex = 6;
             // 
-            // label4
+            // LtHeight
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(28, 172);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "垂直";
+            this.LtHeight.AutoSize = true;
+            this.LtHeight.Location = new System.Drawing.Point(28, 172);
+            this.LtHeight.Name = "LtHeight";
+            this.LtHeight.Size = new System.Drawing.Size(29, 12);
+            this.LtHeight.TabIndex = 5;
+            this.LtHeight.Text = "垂直";
             // 
-            // label5
+            // LvWidth
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(130, 145);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 12);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "像素";
+            this.LvWidth.AutoSize = true;
+            this.LvWidth.Location = new System.Drawing.Point(130, 145);
+            this.LvWidth.Name = "LvWidth";
+            this.LvWidth.Size = new System.Drawing.Size(29, 12);
+            this.LvWidth.TabIndex = 7;
+            this.LvWidth.Text = "像素";
             // 
-            // label6
+            // LvHeight
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(129, 172);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(29, 12);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "像素";
+            this.LvHeight.AutoSize = true;
+            this.LvHeight.Location = new System.Drawing.Point(129, 172);
+            this.LvHeight.Name = "LvHeight";
+            this.LvHeight.Size = new System.Drawing.Size(29, 12);
+            this.LvHeight.TabIndex = 8;
+            this.LvHeight.Text = "像素";
             // 
-            // BeanRound
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 208);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(29, 12);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "背景";
+            // 
+            // PbColor
+            // 
+            this.PbColor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PbColor.Location = new System.Drawing.Point(38, 205);
+            this.PbColor.Name = "PbColor";
+            this.PbColor.Size = new System.Drawing.Size(20, 20);
+            this.PbColor.TabIndex = 10;
+            this.PbColor.TabStop = false;
+            this.PbColor.Click += new System.EventHandler(this.PbColor_Click);
+            // 
+            // CkColor
+            // 
+            this.CkColor.AutoSize = true;
+            this.CkColor.Location = new System.Drawing.Point(64, 207);
+            this.CkColor.Name = "CkColor";
+            this.CkColor.Size = new System.Drawing.Size(48, 16);
+            this.CkColor.TabIndex = 11;
+            this.CkColor.Text = "透明";
+            this.CkColor.UseVisualStyleBackColor = true;
+            this.CkColor.CheckedChanged += new System.EventHandler(this.CkColor_CheckedChanged);
+            // 
+            // UcLoc
+            // 
+            this.UcLoc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.UcLoc.Location = new System.Drawing.Point(28, 24);
+            this.UcLoc.Name = "UcLoc";
+            this.UcLoc.Size = new System.Drawing.Size(130, 75);
+            this.UcLoc.TabIndex = 1;
+            // 
+            // OptRound
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.numericUpDown2);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.CkColor);
+            this.Controls.Add(this.PbColor);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.LvHeight);
+            this.Controls.Add(this.LvWidth);
+            this.Controls.Add(this.SpHeight);
+            this.Controls.Add(this.LtHeight);
+            this.Controls.Add(this.SpWidth);
+            this.Controls.Add(this.LtWidth);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.UcLoc);
             this.Controls.Add(this.label1);
-            this.Name = "BeanRound";
-            this.Size = new System.Drawing.Size(194, 256);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            this.Name = "OptRound";
+            this.Size = new System.Drawing.Size(194, 310);
+            ((System.ComponentModel.ISupportInitialize)(this.SpWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbColor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -142,13 +180,16 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel1;
+        private BeanPos UcLoc;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label LtWidth;
+        private System.Windows.Forms.NumericUpDown SpWidth;
+        private System.Windows.Forms.NumericUpDown SpHeight;
+        private System.Windows.Forms.Label LtHeight;
+        private System.Windows.Forms.Label LvWidth;
+        private System.Windows.Forms.Label LvHeight;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.PictureBox PbColor;
+        private System.Windows.Forms.CheckBox CkColor;
     }
 }

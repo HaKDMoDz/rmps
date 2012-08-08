@@ -15,5 +15,25 @@ namespace Me.Amon.Img.V.Pro
         {
             InitializeComponent();
         }
+
+        private void TlLabel_Click(object sender, EventArgs e)
+        {
+            TlLabel.BackColor = Color.Gray;
+        }
+
+        private void TrLabel_Click(object sender, EventArgs e)
+        {
+            TrLabel.BackColor = Color.Gray;
+        }
+
+        private void BlLabel_Click(object sender, EventArgs e)
+        {
+            BlLabel.BackColor = Color.Gray;
+        }
+
+        private void BrLabel_Click(object sender, EventArgs e)
+        {
+            BrLabel.BackColor = Color.Gray;
+        }
     }
 }

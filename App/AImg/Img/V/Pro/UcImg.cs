@@ -7,8 +7,17 @@ namespace Me.Amon.Img.V.Pro
 {
     public partial class UcImg : UserControl
     {
+        private APro _APro;
+
         public UcImg()
         {
+            InitializeComponent();
+        }
+
+        public UcImg(APro apro)
+        {
+            _APro = apro;
+
             InitializeComponent();
         }
 
@@ -19,7 +28,8 @@ namespace Me.Amon.Img.V.Pro
                 return;
             }
 
-            Image = Image.FromFile(path);
+            _APro.SrcImage = Image.FromFile(path);
+            Image = _APro.SrcImage;
         }
 
         public Image Image
