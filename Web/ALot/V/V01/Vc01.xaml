@@ -7,7 +7,7 @@
     d:DesignHeight="300" d:DesignWidth="400">
 
     <Grid x:Name="LayoutRoot" Background="White">
-        <TextBlock Name="TbTitle" VerticalAlignment="Top" Text="Demo" TextAlignment="Center" Height="100" FontSize="40" FontWeight="Bold" />
+        <TextBlock Name="TbTitle" VerticalAlignment="Top" Title="Demo" TextAlignment="Center" Height="100" FontSize="40" FontWeight="Bold" />
         <Grid Name="GdPanel" Margin="0,100,0,0">
         </Grid>
     </Grid>

@@ -12,7 +12,7 @@ namespace Me.Amon.Lot.M
         /// <summary>
         /// 显示名称
         /// </summary>
-        public string Text { get; set; }
+        public string Title { get; set; }
         /// <summary>
         /// 中的数量
         /// </summary>
