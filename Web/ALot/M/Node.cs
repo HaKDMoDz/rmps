@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml;
 
 namespace Me.Amon.Lot.M
 {
@@ -13,5 +14,10 @@ namespace Me.Amon.Lot.M
         /// 值域
         /// </summary>
         public List<Item> Items { get; set; }
+
+        public bool FromXml(XmlReader reader)
+        {
+            return true;
+        }
     }
 }

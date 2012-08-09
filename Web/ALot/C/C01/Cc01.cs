@@ -56,30 +56,100 @@ namespace Me.Amon.Lot.C.C01
             {
                 return;
             }
-            if ((round.Includes == null || round.Includes.Count < 1) && (round.Excludes == null || round.Excludes.Count < 1))
+            bool bi = round.Includes != null && round.Includes.Count > 0;
+            bool be = round.Excludes != null && round.Excludes.Count > 0;
+            if (!(bi || be))
             {
                 return;
             }
 
-            Item[] tmp = new Item[_Result.Length];
-            int idx = 0;
-            int m = _Items.Count - 1;
-            int n;
-            Item item;
-            foreach (string key in round.Includes.Keys)
+            Item[] arr = new Item[_Result.Length];
+            int idx1 = _Items.Count;
+            int idx2;
+            Item tmp1;
+            Item tmp2;
+            int i = 0;
+            // 列选必中项
+            if (bi)
             {
-                n = round.Includes[key];
-                tmp[idx++] = _Items[n];
-                item = _Items[n];
-                _Items[n] = _Items[m];
-                _Items[m] = item;
+                while (i < round.Includes.Count)
+                {
+                    idx1 -= 1;
+                    tmp1 = _Items[idx1];
+
+                    tmp2 = round.Includes[i];
+                    idx2 = tmp2.Index;
+
+                    tmp1.Index = idx2;
+                    _Items[idx2] = tmp1;
+
+                    if (_MLot.Cfg.Resualbe)
+                    {
+                        tmp2.Index = idx1;
+                        _Items[idx1] = tmp2;
+                    }
+                    else
+                    {
+                        _Items.RemoveAt(idx1);
+                    }
+
+                    arr[i++] = tmp2;
+                }
             }
-            //foreach (Item t in _Items)
-            //{
-            //    foreach (string key in round.Includes.Keys)
-            //    {
-            //    }
-            //}
+            // 排除不中项
+            if (be)
+            {
+                foreach (Item t in round.Excludes)
+                {
+                    idx1 -= 1;
+                    tmp1 = _Items[idx1];
+
+                    idx2 = t.Index;
+
+                    tmp1.Index = idx2;
+                    _Items[idx2] = tmp1;
+
+                    t.Index = idx1;
+                    _Items[idx1] = t;
+                }
+            }
+            // 列选随机项
+            while (i < arr.Length)
+            {
+                idx1 -= 1;
+                tmp1 = _Items[idx1];
+
+                idx2 = _Random.Next(idx1);
+                tmp2 = _Items[idx2];
+
+                tmp1.Index = idx2;
+                _Items[idx2] = tmp1;
+
+                if (_MLot.Cfg.Resualbe)
+                {
+                    tmp2.Index = idx1;
+                    _Items[idx1] = tmp2;
+                }
+                else
+                {
+                    _Items.RemoveAt(idx1);
+                }
+
+                arr[i++] = tmp2;
+            }
+
+            // 随机分配
+            idx1 = arr.Length;
+            i = _Result.Length - 1;
+            while (i > 0)
+            {
+                idx1 -= 1;
+                idx2 = _Random.Next(idx1);
+
+                _Result[i--] = arr[idx2];
+                arr[idx2] = arr[idx1];
+            }
+            _Result[0] = arr[0];
 
             _VLot.Value(_Result, _Result.Length);
         }
@@ -97,20 +167,28 @@ namespace Me.Amon.Lot.C.C01
 
         private int Value(Item[] result)
         {
-            int m;
-            int n;
-            Item item;
+            int idx1 = _Items.Count;
+            int idx2;
+            Item tmp1;
+            Item tmp2;
             int i = 0;
             while (i < result.Length)
             {
-                m = _Items.Count - i - 1;
-                n = _Random.Next(_Items.Count - i);
-                item = _Items[n];
-                _Items[n] = _Items[m];
-                _Items[m] = item;
-                result[i] = item;
-                i += 1;
+                idx1 -= 1;
+                tmp1 = _Items[idx1];
+
+                idx2 = _Random.Next(idx1);
+                tmp2 = _Items[idx2];
+
+                tmp1.Index = idx2;
+                _Items[idx2] = tmp1;
+
+                tmp2.Index = idx1;
+                _Items[idx1] = tmp2;
+
+                result[i++] = tmp2;
             }
+
             return i;
         }
 

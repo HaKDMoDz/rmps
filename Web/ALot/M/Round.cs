@@ -20,11 +20,11 @@ namespace Me.Amon.Lot.M
         /// <summary>
         /// 必中对象
         /// </summary>
-        public Dictionary<string, int> Includes;
+        public List<Item> Includes;
         /// <summary>
         /// 不中对象
         /// </summary>
-        public Dictionary<string, int> Excludes;
+        public List<Item> Excludes;
     }
 
 }

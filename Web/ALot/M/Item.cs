@@ -23,6 +23,7 @@ namespace Me.Amon.Lot.M
         /// </summary>
         public int Weight { get; set; }
 
+        public int Index { get; set; }
         public string Exclude { get; set; }
         public string Include { get; set; }
     }
