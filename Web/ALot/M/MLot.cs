@@ -11,34 +11,50 @@ namespace Me.Amon.Lot.M
 
         public List<Node> Nodes { get; private set; }
 
-        public LotCfg Cfg { get; private set; }
+        public LotCfg Cfg { get; set; }
 
-        public LotFav Fav { get; private set; }
+        public LotFav Fav { get; set; }
 
         public bool FromXml(XmlReader reader)
         {
-            if (reader == null || reader.Name != "Lot" || !reader.IsStartElement())
+            if (reader.Name != "Lot")
             {
                 return false;
             }
 
-            if (reader.Name == "Title" || reader.ReadToDescendant("Title"))
+            reader.ReadStartElement();
+
+            if (reader.Name == "Title")
             {
                 Title = reader.ReadElementContentAsString();
             }
 
             Nodes = new List<Node>();
-            while (reader.ReadToNextSibling("Node"))
+            if (reader.Name == "Nodes")
             {
+                reader.ReadStartElement();
+
                 Node node;
-                while (reader.Name == "Node" || reader.ReadToNextSibling("Node"))
+                while (reader.Name == "Node")
                 {
                     node = new Node();
-                    node.FromXml(reader);
+                    if (!node.FromXml(reader))
+                    {
+                        return false;
+                    }
                     Nodes.Add(node);
+                }
+
+                if (reader.Name == "Nodes" && reader.NodeType == XmlNodeType.EndElement)
+                {
+                    reader.ReadEndElement();
                 }
             }
 
+            if (reader.Name == "Lot" && reader.NodeType == XmlNodeType.EndElement)
+            {
+                reader.ReadEndElement();
+            }
             return true;
         }
     }

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Net;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Xml;
 using Me.Amon.Lot.C;
 using Me.Amon.Lot.M;
 using Me.Amon.Lot.V;
@@ -79,33 +82,9 @@ namespace Me.Amon.Lot
         {
             _MLot = new MLot();
 
-            _MLot.Title = "Demo";
-            _MLot.Nodes = new System.Collections.Generic.List<Node>();
-
-            Node node = new Node();
-            node.Items = new System.Collections.Generic.List<Item>();
-            _MLot.Nodes.Add(node);
-
-            Item item = new Item { Key = "demo", Value = "Demo" };
-            node.Items.Add(item);
-
-            item = new Item { Key = "test", Value = "Test" };
-            node.Items.Add(item);
-
-            item = new Item { Key = "foo", Value = "Foo" };
-            node.Items.Add(item);
-
-            item = new Item { Key = "bar", Value = "Bar" };
-            node.Items.Add(item);
-
-            item = new Item { Key = "中文", Value = "中文" };
-            node.Items.Add(item);
-
-            item = new Item { Key = "测试", Value = "测试" };
-            node.Items.Add(item);
-
-            item = new Item { Key = "演示", Value = "演示" };
-            node.Items.Add(item);
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri("/l.ashx", UriKind.Relative));
 
             LotCfg cfg = new LotCfg();
             cfg.RowCount = 3;
@@ -127,7 +106,7 @@ namespace Me.Amon.Lot
         private VLot GenV(string key)
         {
             _VLot = new V.V01.Vc01();
-            _VLot.Init(_MLot.Cfg);
+            //_VLot.Init(_MLot.Cfg);
             return _VLot;
         }
 
@@ -138,5 +117,27 @@ namespace Me.Amon.Lot
             return _CLot;
         }
         #endregion
+
+        private void DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show(e.Error.Message);
+                return;
+            }
+            string xml = e.Result;
+            if (string.IsNullOrWhiteSpace(xml))
+            {
+                return;
+            }
+            System.IO.StringReader input = new System.IO.StringReader(xml);
+            XmlReader reader = XmlReader.Create(input, new XmlReaderSettings { IgnoreComments = true, IgnoreWhitespace = true });
+            if (reader.ReadToFollowing("Lot"))
+            {
+                _MLot.FromXml(reader);
+            }
+            reader.Close();
+            input.Close();
+        }
     }
 }

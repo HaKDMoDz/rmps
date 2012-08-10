@@ -5,7 +5,7 @@ namespace Me.Amon.Lot.V
 {
     public interface VLot
     {
-        void Init(LotCfg cfg);
+        void Init(Round round);
 
         UserControl Control { get; }
 

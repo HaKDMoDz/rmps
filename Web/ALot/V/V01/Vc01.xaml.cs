@@ -6,7 +6,7 @@ namespace Me.Amon.Lot.V.V01
 {
     public partial class Vc01 : UserControl, VLot
     {
-        private LotCfg _Cfg;
+        private Round _Round;
         private List<Uc1> _Ucs;
 
         public Vc01()
@@ -15,11 +15,11 @@ namespace Me.Amon.Lot.V.V01
         }
 
         #region 接口实现
-        public void Init(LotCfg cfg)
+        public void Init(Round round)
         {
-            _Cfg = cfg;
+            _Round = round;
 
-            TbTitle.Text = "Demo....";
+            TbTitle.Text = round.Title;
 
             ShowView(GdPanel);
         }
@@ -49,23 +49,23 @@ namespace Me.Amon.Lot.V.V01
             //grid.ColumnDefinitions.Clear();
             //grid.Children.Clear();
 
-            for (int i = 0; i < _Cfg.ColCount; i += 1)
+            for (int i = 0; i < _Round.ColCount; i += 1)
             {
                 ColumnDefinition col = new ColumnDefinition();
                 grid.ColumnDefinitions.Add(col);
             }
 
-            for (int i = 0; i < _Cfg.RowCount; i += 1)
+            for (int i = 0; i < _Round.RowCount; i += 1)
             {
                 RowDefinition row = new RowDefinition();
                 grid.RowDefinitions.Add(row);
             }
 
-            _Ucs = new List<Uc1>(_Cfg.ColCount * _Cfg.RowCount);
+            _Ucs = new List<Uc1>(_Round.ColCount * _Round.RowCount);
             Uc1 uc;
-            for (int i = 0; i < _Cfg.RowCount; i += 1)
+            for (int i = 0; i < _Round.RowCount; i += 1)
             {
-                for (int j = 0; j < _Cfg.ColCount; j += 1)
+                for (int j = 0; j < _Round.ColCount; j += 1)
                 {
                     uc = new Uc1();
                     uc.SetValue(Grid.RowProperty, i);

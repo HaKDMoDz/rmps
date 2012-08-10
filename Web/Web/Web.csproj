@@ -59,10 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
-    <Content Include="ALotTestPage.aspx" />
-    <Content Include="ALotTestPage.html" />
+    <Content Include="l.aspx" />
+    <Content Include="l.html" />
+    <Content Include="ALot\ALot.xml" />
     <Content Include="c.aspx" />
     <Content Include="c.html" />
+    <Content Include="ClientBin\demo.jpg" />
     <Content Include="ClientBin\ALot.xap" />
     <Content Include="ClientBin\Amon.xap" />
     <Content Include="favicon.ico" />
@@ -308,6 +310,9 @@
     <Compile Include="Bean\LibHeader.cs" />
     <Compile Include="Bean\Log.cs" />
     <Compile Include="Bean\Udc.cs" />
+    <Compile Include="l.ashx.cs">
+      <DependentUpon>l.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Bean\Vcs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -374,6 +379,7 @@
     <Content Include="Amon.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="l.ashx" />
     <None Include="logo\amon\logo.icns" />
     <None Include="logo\amon\logo.psd" />
     <None Include="logo\blog\guid.psd" />

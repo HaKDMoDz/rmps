@@ -27,6 +27,25 @@ namespace Me.Amon.Lot.C.C01
             _MLot = mlot;
             _VLot = vlot;
 
+            #region 数据检测
+            if (mlot.Cfg.Count < 1)
+            {
+                mlot.Cfg.Count = 1;
+            }
+            if (mlot.Cfg.ColCount < 1 || mlot.Cfg.ColCount > 9)
+            {
+                mlot.Cfg.ColCount = 1;
+            }
+            if (mlot.Cfg.RowCount < 1 || mlot.Cfg.RowCount > 9)
+            {
+                mlot.Cfg.RowCount = 1;
+            }
+            if (mlot.Cfg.Speed < 1 || mlot.Cfg.Speed > 100)
+            {
+                mlot.Cfg.Speed = 10;
+            }
+            #endregion
+
             _Items = mlot.Nodes[0].Items;
             _Rounds = mlot.Nodes[0].Rounds;
             _Result = new Item[mlot.Cfg.ColCount * mlot.Cfg.RowCount];
@@ -206,34 +225,5 @@ namespace Me.Amon.Lot.C.C01
             }
         }
         #endregion
-
-        private bool ExistN(Round round, Item item)
-        {
-            if (round.Excludes == null || round.Excludes.Count < 1)
-            {
-                return false;
-            }
-            foreach (string n in round.Excludes.Keys)
-            {
-                if (n == item.Key || n == item.Value)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private bool ReplaceP(Round round, string[] result)
-        {
-            if (round.Includes == null || round.Includes.Count < 1)
-            {
-                return true;
-            }
-            foreach (string n in round.Includes.Keys)
-            {
-                result[_Random.Next(1)] = n;
-            }
-            return true;
-        }
     }
 }
