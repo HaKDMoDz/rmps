@@ -30,28 +30,26 @@ namespace Me.Amon.Img.V.Pro
         }
         #endregion
 
-        public static Image ScaleImage(Image img, int dim, bool ratio)
+        public static Image ScaleImage(Image image, int width, int height, bool ratio)
         {
-            if (img.Width == dim && img.Height == dim)
+            if (image.Width == width && image.Height == height)
             {
-                return img;
+                return image;
             }
 
-            Bitmap bmp = new Bitmap(dim, dim);
-            int w = img.Width;
-            int h = img.Height;
+            Bitmap bmp = new Bitmap(width, height);
             int x;
             int y;
             if (ratio)
             {
-                double rw = (double)dim / w;
-                double rh = (double)dim / h;
+                double rw = (double)width / image.Width;
+                double rh = (double)height / image.Height;
                 double r = rw <= rh ? rw : rh;
-                w = (int)(r * w);
-                h = (int)(r * h);
+                width = (int)(r * image.Width);
+                height = (int)(r * image.Height);
 
-                x = (dim - w) >> 1;
-                y = (dim - h) >> 1;
+                x = (bmp.Width - width) >> 1;
+                y = (bmp.Height - height) >> 1;
             }
             else
             {
@@ -59,11 +57,12 @@ namespace Me.Amon.Img.V.Pro
                 y = 0;
             }
 
-            Graphics g = Graphics.FromImage(bmp);
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            g.DrawImage(img, x, y, w, h);
-            g.Flush();
-            g.Dispose();
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                g.DrawImage(image, x, y, width, height);
+                g.Dispose();
+            }
 
             return bmp;
         }

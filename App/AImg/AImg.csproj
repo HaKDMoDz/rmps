@@ -111,6 +111,9 @@
     <EmbeddedResource Include="Img\V\Pro\OptRound.resx">
       <DependentUpon>OptRound.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Img\V\Pro\OptWater.resx">
+      <DependentUpon>OptWater.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Img\V\Pro\UcImg.resx">
       <DependentUpon>UcImg.cs</DependentUpon>
     </EmbeddedResource>
