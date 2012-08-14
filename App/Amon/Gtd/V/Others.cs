@@ -1,19 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Me.Amon.Gtd.V
 {
-    public partial class Others : UserControl
+    public partial class Others : UserControl, IEdit
     {
         public Others()
         {
             InitializeComponent();
         }
+
+        #region 接口实现
+        public MGtd MGtd { get; set; }
+
+        public void ShowData()
+        {
+        }
+
+        public bool SaveData()
+        {
+            return true;
+        }
+        #endregion
     }
 }

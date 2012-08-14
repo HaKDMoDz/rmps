@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
 using Me.Amon.Util;
+using Me.Amon.Gtd.V;
 
 namespace Me.Amon.Pwd.V.Pro
 {
@@ -101,7 +102,8 @@ namespace Me.Amon.Pwd.V.Pro
         #region 事件处理
         private void BtName_Click(object sender, EventArgs e)
         {
-
+            GtdEditor detail = new GtdEditor();
+            detail.ShowDialog();
         }
         #endregion
     }

@@ -45,7 +45,6 @@
             // 
             // BtHint
             // 
-            this.BtHint.Enabled = false;
             this.BtHint.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.BtHint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtHint.Location = new System.Drawing.Point(56, 3);

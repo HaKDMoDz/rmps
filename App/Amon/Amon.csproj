@@ -94,9 +94,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.SQLite">
-      <HintPath>Lib\System.Data.SQLite.dll</HintPath>
-    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -214,6 +211,7 @@
     <Compile Include="Gtd\V\GtdEditor.Designer.cs">
       <DependentUpon>GtdEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Gtd\V\IEdit.cs" />
     <Compile Include="Gtd\V\Interval.cs">
       <SubType>UserControl</SubType>
     </Compile>
