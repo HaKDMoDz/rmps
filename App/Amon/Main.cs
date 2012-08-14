@@ -168,28 +168,28 @@ namespace Me.Amon
             TpTips.SetToolTip(control, caption);
         }
 
-        private NotifyIcon NiTray;
+        private NotifyIcon _Tray;
         public void SetTrayVisible(bool visible)
         {
             if (!visible)
             {
-                if (NiTray != null)
+                if (_Tray != null)
                 {
-                    NiTray.Visible = false;
+                    _Tray.Visible = false;
                 }
                 return;
             }
 
-            if (NiTray == null)
+            if (_Tray == null)
             {
-                NiTray = new NotifyIcon();
-                NiTray.BalloonTipTitle = "阿木导航";
-                NiTray.Icon = Me.Amon.Properties.Resources.Icon;
-                NiTray.Text = "阿木导航";
-                NiTray.Visible = true;
-                NiTray.DoubleClick += new EventHandler(NiTray_DoubleClick);
+                _Tray = new NotifyIcon();
+                _Tray.BalloonTipTitle = "阿木导航";
+                _Tray.Icon = Me.Amon.Properties.Resources.Icon;
+                _Tray.Text = "阿木导航";
+                _Tray.Visible = true;
+                _Tray.DoubleClick += new EventHandler(NiTray_DoubleClick);
             }
-            NiTray.Visible = visible;
+            _Tray.Visible = visible;
         }
         #endregion
 
@@ -345,6 +345,11 @@ namespace Me.Amon
                 {
                     _Guid.ExitForm();
                 }
+            }
+
+            if (_Tray != null)
+            {
+                _Tray.Visible = false;
             }
 
             if (_Amon != null)
