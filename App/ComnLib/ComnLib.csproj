@@ -42,6 +42,7 @@
     <Compile Include="Ce\Wrapper.cs" />
     <Compile Include="Da\DBA.cs" />
     <Compile Include="Da\DFA.cs" />
+    <Compile Include="Gtd\CGtd.cs" />
     <Compile Include="Gtd\MGtd.cs" />
     <Compile Include="Gtd\MGtdDetail.cs" />
     <Compile Include="Ico\MIco.cs" />

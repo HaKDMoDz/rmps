@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Me.Amon.Gtd;
 using Me.Amon.Model;
 using Me.Amon.Pwd;
 using Me.Amon.Ren;
@@ -82,6 +83,8 @@ namespace Me.Amon.Da
         #region 目录操作
         IList<Dir> ListDir();
         #endregion
+
+        IList<MGtd> FindKeyByGtd();
 
         IList<MRen> ListRen();
     }

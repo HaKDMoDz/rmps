@@ -14,13 +14,13 @@ namespace Me.Amon.Gtd.V
         public void Init()
         {
             CbUnit.Items.Add(new Item { K = "", V = "请选择" });
-            CbUnit.Items.Add(new Item { K = "1", V = "秒" });
-            CbUnit.Items.Add(new Item { K = "2", V = "分" });
-            CbUnit.Items.Add(new Item { K = "3", V = "时" });
-            CbUnit.Items.Add(new Item { K = "4", V = "天" });
-            CbUnit.Items.Add(new Item { K = "5", V = "周" });
-            CbUnit.Items.Add(new Item { K = "6", V = "月" });
-            CbUnit.Items.Add(new Item { K = "7", V = "年" });
+            CbUnit.Items.Add(new Item { K = CGtd.GTD_UNIT_SECOND, V = "秒" });
+            CbUnit.Items.Add(new Item { K = CGtd.GTD_UNIT_MINUTE, V = "分" });
+            CbUnit.Items.Add(new Item { K = CGtd.GTD_UNIT_HOUR, V = "时" });
+            CbUnit.Items.Add(new Item { K = CGtd.GTD_UNIT_DAY, V = "天" });
+            CbUnit.Items.Add(new Item { K = CGtd.GTD_UNIT_WEEK, V = "周" });
+            CbUnit.Items.Add(new Item { K = CGtd.GTD_UNIT_MONTH, V = "月" });
+            CbUnit.Items.Add(new Item { K = CGtd.GTD_UNIT_YEAR, V = "年" });
         }
         #region 接口实现
         public MGtd MGtd { get; set; }
@@ -35,7 +35,7 @@ namespace Me.Amon.Gtd.V
             {
                 return;
             }
-            if (MGtd.Type != EGtd.GTD_TYPE_INTERVAL || MGtd.Details.Count != 1)
+            if (MGtd.Type != CGtd.GTD_TYPE_INTERVAL || MGtd.Details.Count != 1)
             {
                 return;
             }
@@ -60,9 +60,9 @@ namespace Me.Amon.Gtd.V
             {
                 return false;
             }
-            if (MGtd.Type != EGtd.GTD_TYPE_INTERVAL)
+            if (MGtd.Type != CGtd.GTD_TYPE_INTERVAL)
             {
-                MGtd.Type = EGtd.GTD_TYPE_INTERVAL;
+                MGtd.Type = CGtd.GTD_TYPE_INTERVAL;
                 if (MGtd.Details.Count > 1)
                 {
                     MGtd.Details.RemoveRange(1, MGtd.Details.Count - 1);

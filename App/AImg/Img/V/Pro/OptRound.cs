@@ -36,18 +36,16 @@ namespace Me.Amon.Img.V.Pro
             }
 
             Brush brush = new SolidBrush(CkColor.Checked ? Color.Transparent : PbColor.BackColor);
-            Bitmap bmp = new Bitmap(image.Width, image.Height);
-            using (Graphics g = Graphics.FromImage(bmp))
+            using (Graphics g = Graphics.FromImage(image))
             {
                 g.CompositingQuality = CompositingQuality.HighQuality;
-                g.SmoothingMode = SmoothingMode.HighQuality;
                 g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                g.FillRectangle(brush, 0, 0, bmp.Width, bmp.Height);
-                g.Clip = new Region(CreateRoundedRectanglePath(0, 0, bmp.Width, bmp.Height, aw, ah));
-                g.DrawImage(image, 0, 0, bmp.Width, bmp.Height);
+                g.SmoothingMode = SmoothingMode.HighQuality;
+                GraphicsPath path = CreateRoundRectanglePath(0, 0, image.Width, image.Height, 5, 5, Corner.TopLeft);
+                g.FillPath(brush, path);
                 g.Save();
             }
-            return bmp;
+            return image;
         }
 
         public void Reset()
@@ -77,19 +75,45 @@ namespace Me.Amon.Img.V.Pro
         }
         #endregion
 
-        private static GraphicsPath CreateRoundedRectanglePath(int x, int y, int w, int h, int aw, int ah)
+        private static GraphicsPath CreateRoundRectanglePath(int x, int y, int w, int h, int width, int height, Corner rrPosition)
         {
-            GraphicsPath roundedRect = new GraphicsPath();
-            roundedRect.AddArc(x, y, aw * 2, ah * 2, 180, 90);
-            roundedRect.AddLine(x + aw, y, x + w - aw * 2, y);
-            roundedRect.AddArc(x + w - aw * 2, y, aw * 2, ah * 2, 270, 90);
-            roundedRect.AddLine(x + w, y + ah * 2, x + w, y + h - ah * 2);
-            roundedRect.AddArc(x + w - aw * 2, y + h - ah * 2, aw * 2, ah * 2, 0, 90);
-            roundedRect.AddLine(x + w - aw * 2, y + h, x + aw * 2, y + h);
-            roundedRect.AddArc(x, y + h - ah * 2, aw * 2, ah * 2, 90, 90);
-            roundedRect.AddLine(x, y + h - ah * 2, x, y + ah * 2);
-            roundedRect.CloseFigure();
-            return roundedRect;
+            int aw = width << 1;
+            int ah = height << 1;
+            GraphicsPath path = new GraphicsPath();
+            path.StartFigure();
+            switch (rrPosition)
+            {
+                case Corner.TopLeft:
+                    {
+                        x -= 1;
+                        y -= 1;
+                        path.AddLine(x, y, x, y + height);
+                        path.AddArc(x, y, aw, ah, 180, 90);
+                        break;
+                    }
+                case Corner.TopRight:
+                    {
+                        y -= 1;
+                        path.AddLine(x + w, y, x + w - width, y);
+                        path.AddArc(w - aw, y, aw, ah, 270, 90);
+                        break;
+                    }
+                case Corner.BottomLeft:
+                    {
+                        x -= 1;
+                        path.AddLine(x, y + h, x + width, y + h);
+                        path.AddArc(x, y + h - aw, aw, ah, 90, 90);
+                        break;
+                    }
+                case Corner.BottomRight:
+                    {
+                        path.AddLine(x + w, y + h, x + w, y + h - height);
+                        path.AddArc(x + w - aw, y + h - aw, aw, ah, 0, 90);
+                        break;
+                    }
+            }
+            path.CloseFigure();
+            return path;
         }
     }
 }

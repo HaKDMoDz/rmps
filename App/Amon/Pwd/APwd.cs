@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Auth;
 using Me.Amon.Event;
+using Me.Amon.Gtd;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
 using Me.Amon.Properties;
@@ -51,6 +52,8 @@ namespace Me.Amon.Pwd
         private Main _Main;
         private KeyEventHandler _KeyDownHandler;
         private FormClosingEventHandler _ClosingHandler;
+        private int _Delay = 5;
+        private IList<MGtd> _GtdList;
 
         #region 构造函数
         public APwd()
@@ -611,7 +614,39 @@ namespace Me.Amon.Pwd
         /// <param name="e"></param>
         private void UcTime_Tick(object sender, EventArgs e)
         {
-            TssTime.Text = DateTime.Now.ToString(EApp.DATEIME_FORMAT);
+            DateTime now = DateTime.Now;
+            TssTime.Text = now.ToString(EApp.DATEIME_FORMAT);
+
+
+            if (_Delay-- > 0)
+            {
+                return;
+            }
+
+
+            _Delay = 5;
+            if (_GtdList == null)
+            {
+                _GtdList = _UserModel.DBA.FindKeyByGtd();
+            }
+            int stat;
+            int pastCnt = 0;
+            int todoCnt = 0;
+            foreach (MGtd gtd in _GtdList)
+            {
+                stat = TimeUtil.isOnTime(now, gtd, 43200);//12 * 60 * 60
+                if (stat == 0)
+                {
+                    todoCnt += 1;
+                }
+                else if (stat == -1)
+                {
+                    pastCnt += 1;
+                }
+            }
+
+
+            TssEcho.Text = string.Format("您有{0}个过期事项及{1}个待办事项", pastCnt, todoCnt);
         }
         #endregion
 

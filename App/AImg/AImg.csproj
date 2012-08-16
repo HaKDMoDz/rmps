@@ -46,13 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Img\AImg.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Img\AImg.Designer.cs">
       <DependentUpon>AImg.cs</DependentUpon>
     </Compile>
-    <Compile Include="Img\EImg.cs" />
+    <Compile Include="Img\CImg.cs" />
     <Compile Include="Img\IImg.cs" />
     <Compile Include="Img\V\Pro\APro.cs">
       <SubType>UserControl</SubType>
@@ -66,6 +72,7 @@
     <Compile Include="Img\V\Pro\BeanPos.Designer.cs">
       <DependentUpon>BeanPos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Img\V\Pro\Corner.cs" />
     <Compile Include="Img\V\Pro\IOpt.cs" />
     <Compile Include="Img\V\Pro\OptRound.cs">
       <SubType>UserControl</SubType>
@@ -99,6 +106,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Img\AImg.resx">
       <DependentUpon>AImg.cs</DependentUpon>
     </EmbeddedResource>

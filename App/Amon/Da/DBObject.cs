@@ -7,6 +7,7 @@ using Me.Amon.Model;
 using Me.Amon.Pwd;
 using Me.Amon.Ren;
 using Me.Amon.Util;
+using Me.Amon.Gtd;
 
 namespace Me.Amon.Da
 {
@@ -326,6 +327,16 @@ namespace Me.Amon.Da
             return Container.Query<Dir>();
         }
         #endregion
+
+        public IList<MGtd> FindKeyByGtd()
+        {
+            IList<MGtd> gtds = Container.Query<MGtd>(
+                delegate(MGtd gtd)
+                {
+                    return CharUtil.IsValidateHash(gtd.Id) && gtd.Status > CGtd.GTD_STAT_ERROR;
+                });
+            return gtds;
+        }
 
         public IList<MRen> ListRen()
         {

@@ -19,7 +19,7 @@ namespace Me.Amon.Gtd.V
             {
                 return;
             }
-            if (MGtd.Type != EGtd.GTD_TYPE_FIXTIME || MGtd.Details.Count != 1)
+            if (MGtd.Type != CGtd.GTD_TYPE_FIXTIME || MGtd.Details.Count != 1)
             {
                 return;
             }
@@ -33,9 +33,9 @@ namespace Me.Amon.Gtd.V
             {
                 return false;
             }
-            if (MGtd.Type != EGtd.GTD_TYPE_FIXTIME)
+            if (MGtd.Type != CGtd.GTD_TYPE_FIXTIME)
             {
-                MGtd.Type = EGtd.GTD_TYPE_FIXTIME;
+                MGtd.Type = CGtd.GTD_TYPE_FIXTIME;
                 if (MGtd.Details.Count > 1)
                 {
                     MGtd.Details.RemoveRange(1, MGtd.Details.Count - 1);
