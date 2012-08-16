@@ -42,8 +42,8 @@ namespace Me.Amon.Gtd.V
 
             MGtdDetail detail = MGtd.Details[0];
             DtDate.Value = DateTime.FromBinary(detail.Time);
-            SpData.Value = detail.Interval;
-            CbUnit.SelectedItem = new Item { K = detail.Unit };
+            SpData.Value = detail.MajorTime;
+            CbUnit.SelectedItem = new Item { K = detail.MajorUnit };
         }
 
         public bool SaveData()
@@ -75,8 +75,8 @@ namespace Me.Amon.Gtd.V
 
             MGtdDetail detail = MGtd.Details[0];
             detail.Time = DtDate.Value.ToFileTimeUtc();
-            detail.Interval = decimal.ToInt32(SpData.Value);
-            detail.Unit = item.K;
+            detail.MajorTime = decimal.ToInt32(SpData.Value);
+            detail.MajorUnit = item.K;
             return true;
         }
         #endregion
