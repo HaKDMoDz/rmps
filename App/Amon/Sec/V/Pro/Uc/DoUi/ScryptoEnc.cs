@@ -13,9 +13,9 @@ namespace Me.Amon.Sec.V.Pro.Uc.DoUi
         public override void InitKey(string key)
         {
 
-            _Do.CbType.Items.Add(new Item { K = OUTPUT_FILE_BIN, V = "字节文件" });
-            _Do.CbType.Items.Add(new Item { K = OUTPUT_FILE_TXT, V = "字符文件" });
-            _Do.CbType.Items.Add(new Item { K = OUTPUT_TEXT, V = "文本" });
+            _Do.CbType.Items.Add(new Items { K = OUTPUT_FILE_BIN, V = "字节文件" });
+            _Do.CbType.Items.Add(new Items { K = OUTPUT_FILE_TXT, V = "字符文件" });
+            _Do.CbType.Items.Add(new Items { K = OUTPUT_TEXT, V = "文本" });
 
             _Do.CbType.SelectedIndex = 0;
 
@@ -24,7 +24,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.DoUi
             _Do.BtMask.Visible = false;
         }
 
-        public override void ChangedType(Item type)
+        public override void ChangedType(Items type)
         {
             _Do.TbData.Text = "";
             switch (_Type.K)

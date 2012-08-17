@@ -18,7 +18,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.DoUi
             _Do.BtMask.Visible = false;
         }
 
-        public override void ChangedType(Item type)
+        public override void ChangedType(Items type)
         {
             _Do.TbData.Text = "";
         }

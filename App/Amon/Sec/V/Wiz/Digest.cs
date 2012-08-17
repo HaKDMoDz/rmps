@@ -44,7 +44,7 @@ namespace Me.Amon.Sec.V.Wiz
                 return false;
             }
 
-            Item item;
+            Items item;
             for (int i = 0; i < _AFile.FileList.Count; i += 1)
             {
                 item = _AFile.FileList[i];
@@ -60,7 +60,7 @@ namespace Me.Amon.Sec.V.Wiz
             return true;
         }
 
-        private bool DigestFile(Item item)
+        private bool DigestFile(Items item)
         {
             if (!File.Exists(item.K))
             {

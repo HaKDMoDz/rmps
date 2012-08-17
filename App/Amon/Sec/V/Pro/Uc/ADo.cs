@@ -26,16 +26,16 @@ namespace Me.Amon.Sec.V.Pro.Uc
         #endregion
 
         #region 用户交互
-        public static Item _TypeDef = new Item { K = "0", V = "请选择" };
+        public static Items _TypeDef = new Items { K = "0", V = "请选择" };
         public static Udc _MaskDef = new Udc { Id = "0", Name = "默认", Data = "" };
-        protected static Item _Type;
+        protected static Items _Type;
         protected static Udc _Udc;
 
         public abstract void InitOpt();
 
         public abstract void InitKey(string key);
 
-        public abstract void ChangedType(Item type);
+        public abstract void ChangedType(Items type);
 
         public abstract void MoreData();
 

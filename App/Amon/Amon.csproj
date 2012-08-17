@@ -193,42 +193,92 @@
       <DependentUpon>Vcard.cs</DependentUpon>
     </Compile>
     <Compile Include="Gtd\EGtd.cs" />
-    <Compile Include="Gtd\V\Cyclist.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Gtd\V\Cyclist.Designer.cs">
-      <DependentUpon>Cyclist.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Gtd\V\FixTime.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Gtd\V\FixTime.Designer.cs">
-      <DependentUpon>FixTime.cs</DependentUpon>
-    </Compile>
     <Compile Include="Gtd\V\GtdEditor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Gtd\V\GtdEditor.Designer.cs">
       <DependentUpon>GtdEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gtd\V\IEdit.cs" />
-    <Compile Include="Gtd\V\Interval.cs">
+    <Compile Include="Gtd\V\IHint.cs" />
+    <Compile Include="Gtd\V\IDate.cs" />
+    <Compile Include="Gtd\V\ITime.cs" />
+    <Compile Include="Gtd\V\Uc\UcDay.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Gtd\V\Interval.Designer.cs">
-      <DependentUpon>Interval.cs</DependentUpon>
+    <Compile Include="Gtd\V\Uc\UcDay.Designer.cs">
+      <DependentUpon>UcDay.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gtd\V\Others.cs">
+    <Compile Include="Gtd\V\Uc\UcHour.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Gtd\V\Others.Designer.cs">
-      <DependentUpon>Others.cs</DependentUpon>
+    <Compile Include="Gtd\V\Uc\UcHour.Designer.cs">
+      <DependentUpon>UcHour.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gtd\V\Repeat.cs">
+    <Compile Include="Gtd\V\Uc\UcMinute.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Gtd\V\Repeat.Designer.cs">
-      <DependentUpon>Repeat.cs</DependentUpon>
+    <Compile Include="Gtd\V\Uc\UcMinute.Designer.cs">
+      <DependentUpon>UcMinute.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gtd\V\Uc\UcMonth.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gtd\V\Uc\UcMonth.Designer.cs">
+      <DependentUpon>UcMonth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gtd\V\Uc\UcSecond.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gtd\V\Uc\UcSecond.Designer.cs">
+      <DependentUpon>UcSecond.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gtd\V\Uc\UcWeek.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gtd\V\Uc\UcWeek.Designer.cs">
+      <DependentUpon>UcWeek.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gtd\V\Uc\UcYear.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gtd\V\Uc\UcYear.Designer.cs">
+      <DependentUpon>UcYear.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gtd\V\UhAlert.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gtd\V\UhAlert.Designer.cs">
+      <DependentUpon>UhAlert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gtd\V\UhApps.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gtd\V\UhApps.Designer.cs">
+      <DependentUpon>UhApps.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gtd\V\UhEmail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gtd\V\UhEmail.Designer.cs">
+      <DependentUpon>UhEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gtd\V\UtEvent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gtd\V\UtEvent.Designer.cs">
+      <DependentUpon>UtEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gtd\V\UtMaths.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gtd\V\UtMaths.Designer.cs">
+      <DependentUpon>UtMaths.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gtd\V\UtDates.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gtd\V\UtDates.Designer.cs">
+      <DependentUpon>UtDates.cs</DependentUpon>
     </Compile>
     <Compile Include="Ico\EIco.cs" />
     <Compile Include="Ico\E\AIcoAction.cs" />
@@ -970,6 +1020,7 @@
     </Compile>
     <Compile Include="Uc\Card.cs" />
     <Compile Include="Uc\ItemGroup.cs" />
+    <Compile Include="Uc\Itemi.cs" />
     <Compile Include="Uc\KeyStroke.cs" />
     <Compile Include="Uc\XmlMenu.cs" />
     <Compile Include="Auth\Uc\AuthLk.cs">
@@ -996,7 +1047,7 @@
     <Compile Include="Pwd\_Key\KeyIcon.Designer.cs">
       <DependentUpon>KeyIcon.cs</DependentUpon>
     </Compile>
-    <Compile Include="Uc\Item.cs" />
+    <Compile Include="Uc\Items.cs" />
     <Compile Include="User\Uc\SignOl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1158,23 +1209,41 @@
     <EmbeddedResource Include="Gtd\AGtd.resx">
       <DependentUpon>AGtd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gtd\V\Cyclist.resx">
-      <DependentUpon>Cyclist.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gtd\V\FixTime.resx">
-      <DependentUpon>FixTime.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Gtd\V\GtdEditor.resx">
       <DependentUpon>GtdEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gtd\V\Interval.resx">
-      <DependentUpon>Interval.cs</DependentUpon>
+    <EmbeddedResource Include="Gtd\V\Uc\UcDay.resx">
+      <DependentUpon>UcDay.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gtd\V\Others.resx">
-      <DependentUpon>Others.cs</DependentUpon>
+    <EmbeddedResource Include="Gtd\V\Uc\UcHour.resx">
+      <DependentUpon>UcHour.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gtd\V\Repeat.resx">
-      <DependentUpon>Repeat.cs</DependentUpon>
+    <EmbeddedResource Include="Gtd\V\Uc\UcMinute.resx">
+      <DependentUpon>UcMinute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gtd\V\Uc\UcMonth.resx">
+      <DependentUpon>UcMonth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gtd\V\Uc\UcSecond.resx">
+      <DependentUpon>UcSecond.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gtd\V\Uc\UcWeek.resx">
+      <DependentUpon>UcWeek.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gtd\V\Uc\UcYear.resx">
+      <DependentUpon>UcYear.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gtd\V\UhAlert.resx">
+      <DependentUpon>UhAlert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gtd\V\UtDates.resx">
+      <DependentUpon>UtDates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gtd\V\UtEvent.resx">
+      <DependentUpon>UtEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gtd\V\UtMaths.resx">
+      <DependentUpon>UtMaths.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ico\AIco.resx">
       <DependentUpon>AIco.cs</DependentUpon>

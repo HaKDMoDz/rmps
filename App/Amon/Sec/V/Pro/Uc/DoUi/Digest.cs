@@ -20,9 +20,9 @@ namespace Me.Amon.Sec.V.Pro.Uc.DoUi
             _Do.Enabled = true;
 
             BeanUtil.Clear(_Do.CbType);
-            _Do.CbType.Items.Add(new Item { K = OUTPUT_TEXT, V = "文本" });
-            _Do.CbType.Items.Add(new Item { K = OUTPUT_FILE_TXT, V = "字符文件" });
-            _Do.CbType.Items.Add(new Item { K = OUTPUT_FILE_BIN, V = "字节文件" });
+            _Do.CbType.Items.Add(new Items { K = OUTPUT_TEXT, V = "文本" });
+            _Do.CbType.Items.Add(new Items { K = OUTPUT_FILE_TXT, V = "字符文件" });
+            _Do.CbType.Items.Add(new Items { K = OUTPUT_FILE_BIN, V = "字节文件" });
 
             _Do.TbData.Enabled = false;
             _Do.BtData.Enabled = false;
@@ -51,7 +51,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.DoUi
         {
         }
 
-        public override void ChangedType(Item type)
+        public override void ChangedType(Items type)
         {
             _Type = type;
 

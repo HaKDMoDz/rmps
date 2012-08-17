@@ -32,7 +32,7 @@ namespace Me.Amon.Util
             }
         }
 
-        public static void Clear(ComboBox cBox, Item[] items)
+        public static void Clear(ComboBox cBox, Items[] items)
         {
             int idx = cBox.SelectedIndex;
             for (int i = cBox.Items.Count - 1; i > 1; i -= 1)

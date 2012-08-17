@@ -15,9 +15,9 @@ namespace Me.Amon.Sec.V.Pro.Uc.CmUi
             _Cm.Enabled = true;
 
             BeanUtil.Clear(_Cm.CbName);
-            _Cm.CbName.Items.Add(new Item { K = "png", V = "PNG" });
-            _Cm.CbName.Items.Add(new Item { K = "jpg", V = "JPG" });
-            _Cm.CbName.Items.Add(new Item { K = "gif", V = "GIF" });
+            _Cm.CbName.Items.Add(new Items { K = "png", V = "PNG" });
+            _Cm.CbName.Items.Add(new Items { K = "jpg", V = "JPG" });
+            _Cm.CbName.Items.Add(new Items { K = "gif", V = "GIF" });
         }
 
         public override void InitKey(string key)

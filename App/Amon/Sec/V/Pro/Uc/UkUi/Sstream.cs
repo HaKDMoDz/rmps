@@ -54,7 +54,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     _Uk.TbPass.MaxLength = 16;
                     _Uk.TbSalt.MaxLength = 16;
                     //128
-                    _Uk.CbSize.Items.Add(new Item { K = "16", V = "16 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "16", V = "16 字节" });
                     _Uk.LbSalt.Visible = false;
                     _Uk.TbSalt.Visible = false;
                     _Uk.BtSalt.Visible = false;
@@ -64,7 +64,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
                     //256
-                    _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "32", V = "32 字节" });
                     _Uk.LbSalt.Visible = false;
                     _Uk.TbSalt.Visible = false;
                     _Uk.BtSalt.Visible = false;
@@ -76,7 +76,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     //32 .. 8192
                     for (int i = 64; i <= 1024; i += 64)
                     {
-                        _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
+                        _Uk.CbSize.Items.Add(new Items { K = i.ToString(), V = i + " 字节" });
                     }
                     _Uk.LbSalt.Visible = false;
                     _Uk.TbSalt.Visible = false;
@@ -89,7 +89,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     //40 .. 2048
                     for (int i = 16; i <= 256; i += 16)
                     {
-                        _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
+                        _Uk.CbSize.Items.Add(new Items { K = i.ToString(), V = i + " 字节" });
                     }
                     _Uk.LbSalt.Visible = false;
                     _Uk.TbSalt.Visible = false;
@@ -100,8 +100,8 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
                     //128/256
-                    _Uk.CbSize.Items.Add(new Item { K = "16", V = "16 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "16", V = "16 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "32", V = "32 字节" });
                     _Uk.LbSalt.Visible = false;
                     _Uk.TbSalt.Visible = false;
                     _Uk.BtSalt.Visible = false;
@@ -113,7 +113,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     //8 .. 6144
                     for (int i = 48; i <= 768; i += 48)
                     {
-                        _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
+                        _Uk.CbSize.Items.Add(new Items { K = i.ToString(), V = i + " 字节" });
                     }
                     _Uk.LbSalt.Visible = true;
                     _Uk.TbSalt.Visible = true;
@@ -126,7 +126,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     //8 .. 6144
                     for (int i = 48; i <= 768; i += 48)
                     {
-                        _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
+                        _Uk.CbSize.Items.Add(new Items { K = i.ToString(), V = i + " 字节" });
                     }
                     _Uk.LbSalt.Visible = true;
                     _Uk.TbSalt.Visible = true;

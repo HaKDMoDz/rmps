@@ -83,7 +83,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.DiUi
             _Cur.InitKey(key);
         }
 
-        public override void ChangedType(Item type)
+        public override void ChangedType(Items type)
         {
             _Type = type;
 

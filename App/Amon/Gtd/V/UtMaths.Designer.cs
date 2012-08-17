@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Gtd.V
 {
-    partial class Others
+    partial class UtMaths
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -29,48 +29,33 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 4);
+            this.label1.Location = new System.Drawing.Point(3, 6);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "触发时间";
+            this.label1.Text = "公式";
             // 
-            // checkBox1
+            // textBox1
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(62, 3);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(102, 16);
-            this.checkBox1.TabIndex = 1;
-            this.checkBox1.Text = "程序启动时(&S)";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.textBox1.Location = new System.Drawing.Point(38, 3);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.TabIndex = 1;
             // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(62, 25);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(102, 16);
-            this.checkBox2.TabIndex = 2;
-            this.checkBox2.Text = "程序退出时(&X)";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // Others
+            // UtMaths
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
-            this.Name = "Others";
-            this.Size = new System.Drawing.Size(373, 242);
+            this.Name = "UtMaths";
+            this.Size = new System.Drawing.Size(296, 150);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -79,7 +64,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

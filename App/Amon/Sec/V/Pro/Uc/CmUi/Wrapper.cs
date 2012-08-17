@@ -24,7 +24,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.CmUi
             _Cm.Enabled = false;
 
             BeanUtil.Clear(_Cm.CbName);
-            _Cm.CbName.Items.Add(new Item { K = "wrapper", V = "掩码算法" });
+            _Cm.CbName.Items.Add(new Items { K = "wrapper", V = "掩码算法" });
             _Cm.CbName.SelectedIndex = 1;
 
             _Cm.LbMode.Visible = false;

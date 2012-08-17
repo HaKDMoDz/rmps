@@ -10,7 +10,7 @@ namespace Me.Amon.Pwd.V.Pro
     public partial class BeanList : AList, IAttEdit
     {
         private APro _APro;
-        private Item _Item;
+        private Items _Item;
         private Control _Ctl;
 
         #region 构造函数
@@ -45,7 +45,7 @@ namespace Me.Amon.Pwd.V.Pro
             if (_Att != null)
             {
                 TbText.Text = _Att.Text;
-                _Item = new Item { K = _Att.Data };
+                _Item = new Items { K = _Att.Data };
                 CbData.SelectedItem = _Item;
             }
 
@@ -145,7 +145,7 @@ namespace Me.Amon.Pwd.V.Pro
 
         private void CbData_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _Item = CbData.SelectedItem as Item;
+            _Item = CbData.SelectedItem as Items;
         }
         #endregion
     }

@@ -20,8 +20,8 @@ namespace Me.Amon.Sec.V.Pro.Uc.DoUi
             _Do.Enabled = true;
 
             BeanUtil.Clear(_Do.CbType);
-            _Do.CbType.Items.Add(new Item { K = OUTPUT_FILE, V = "文件" });
-            _Do.CbType.Items.Add(new Item { K = OUTPUT_TEXT, V = "文本" });
+            _Do.CbType.Items.Add(new Items { K = OUTPUT_FILE, V = "文件" });
+            _Do.CbType.Items.Add(new Items { K = OUTPUT_TEXT, V = "文本" });
             _Do.CbType.Enabled = true;
 
             _Do.TbData.Enabled = false;
@@ -56,7 +56,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.DoUi
             _Do.CbMask.SelectedIndex = 0;
         }
 
-        public override void ChangedType(Item type)
+        public override void ChangedType(Items type)
         {
             _Type = type;
 

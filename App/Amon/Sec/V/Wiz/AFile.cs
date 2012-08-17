@@ -10,7 +10,7 @@ namespace Me.Amon.Sec.V.Wiz
     public partial class AFile : UserControl
     {
         private ASec _ASec;
-        public List<Item> FileList = new List<Item>();
+        public List<Items> FileList = new List<Items>();
 
         public AFile()
         {
@@ -110,7 +110,7 @@ namespace Me.Amon.Sec.V.Wiz
                 return;
             }
 
-            Item item = FileList[row.Index];
+            Items item = FileList[row.Index];
             if (item != null)
             {
                 if (!string.IsNullOrEmpty(item.D))
@@ -133,7 +133,7 @@ namespace Me.Amon.Sec.V.Wiz
                 return;
             }
 
-            Item item = FileList[row.Index];
+            Items item = FileList[row.Index];
             if (item != null)
             {
                 try
@@ -168,15 +168,15 @@ namespace Me.Amon.Sec.V.Wiz
                     continue;
                 }
 
-                Item item = new Item { K = file, V = Path.GetFileName(file) };
+                Items item = new Items { K = file, V = Path.GetFileName(file) };
                 FileList.Add(item);
                 GvFile.Rows.Add(item);
             }
         }
 
-        private Item GetDup(string file)
+        private Items GetDup(string file)
         {
-            foreach (Item item in FileList)
+            foreach (Items item in FileList)
             {
                 if (item.K == file)
                 {

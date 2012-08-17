@@ -18,8 +18,8 @@ namespace Me.Amon.Sec.V.Pro.Uc.DoUi
             _Do.Enabled = true;
 
             BeanUtil.Clear(_Do.CbType);
-            _Do.CbType.Items.Add(new Item { K = OUTPUT_FILE, V = "剪贴板" });
-            _Do.CbType.Items.Add(new Item { K = OUTPUT_TEXT, V = "文本" });
+            _Do.CbType.Items.Add(new Items { K = OUTPUT_FILE, V = "剪贴板" });
+            _Do.CbType.Items.Add(new Items { K = OUTPUT_TEXT, V = "文本" });
             _Do.CbType.Enabled = true;
 
             _Do.LbMask.Visible = false;
@@ -31,7 +31,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.DoUi
         {
         }
 
-        public override void ChangedType(Item type)
+        public override void ChangedType(Items type)
         {
         }
 

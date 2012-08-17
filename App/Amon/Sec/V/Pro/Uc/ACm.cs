@@ -4,9 +4,9 @@ namespace Me.Amon.Sec.V.Pro.Uc
 {
     public abstract class ACm
     {
-        public static Item _NameDef = new Item { K = "0", V = "请选择" };
-        public static Item _ModeDef = new Item { K = "0", V = "默认" };
-        public static Item _SizeDef = new Item { K = "0", V = "默认" };
+        public static Items _NameDef = new Items { K = "0", V = "请选择" };
+        public static Items _ModeDef = new Items { K = "0", V = "默认" };
+        public static Items _SizeDef = new Items { K = "0", V = "默认" };
         protected int _KeySize;
         protected int _IVSize;
         protected APro _APro;

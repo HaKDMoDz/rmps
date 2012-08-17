@@ -81,15 +81,15 @@ namespace Me.Amon.Bar
         #region 事件处理
         private void ABar_Load(object sender, EventArgs e)
         {
-            CbOpt.Items.Add(new Item { K = "", V = "请选择" });
-            CbOpt.Items.Add(new Item { K = EBar.OPT_TEXT, V = "文本" });
-            CbOpt.Items.Add(new Item { K = EBar.OPT_NOTE, V = "记事" });
-            CbOpt.Items.Add(new Item { K = EBar.OPT_VCARD, V = "名片" });
-            CbOpt.Items.Add(new Item { K = EBar.OPT_EMAIL, V = "邮件" });
-            CbOpt.Items.Add(new Item { K = EBar.OPT_SMS, V = "短信" });
-            CbOpt.Items.Add(new Item { K = EBar.OPT_TEL, V = "电话号码" });
-            CbOpt.Items.Add(new Item { K = EBar.OPT_URL, V = "网址收藏" });
-            CbOpt.Items.Add(new Item { K = EBar.OPT_WIFI, V = "WiFi网络" });
+            CbOpt.Items.Add(new Items { K = "", V = "请选择" });
+            CbOpt.Items.Add(new Items { K = EBar.OPT_TEXT, V = "文本" });
+            CbOpt.Items.Add(new Items { K = EBar.OPT_NOTE, V = "记事" });
+            CbOpt.Items.Add(new Items { K = EBar.OPT_VCARD, V = "名片" });
+            CbOpt.Items.Add(new Items { K = EBar.OPT_EMAIL, V = "邮件" });
+            CbOpt.Items.Add(new Items { K = EBar.OPT_SMS, V = "短信" });
+            CbOpt.Items.Add(new Items { K = EBar.OPT_TEL, V = "电话号码" });
+            CbOpt.Items.Add(new Items { K = EBar.OPT_URL, V = "网址收藏" });
+            CbOpt.Items.Add(new Items { K = EBar.OPT_WIFI, V = "WiFi网络" });
             CbOpt.SelectedIndex = 0;
 
             PbIcon.BackColor = Color.White;
@@ -97,7 +97,7 @@ namespace Me.Amon.Bar
 
         private void CbOpt_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Item item = CbOpt.SelectedItem as Item;
+            Items item = CbOpt.SelectedItem as Items;
             if (item == null)
             {
                 return;

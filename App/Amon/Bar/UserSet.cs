@@ -18,16 +18,16 @@ namespace Me.Amon.Bar
 
         public void InitOnce()
         {
-            CbError.Items.Add(new Item { K = "L", V = "L" });
-            CbError.Items.Add(new Item { K = "M", V = "M" });
-            CbError.Items.Add(new Item { K = "Q", V = "Q" });
-            CbError.Items.Add(new Item { K = "H", V = "H" });
+            CbError.Items.Add(new Items { K = "L", V = "L" });
+            CbError.Items.Add(new Items { K = "M", V = "M" });
+            CbError.Items.Add(new Items { K = "Q", V = "Q" });
+            CbError.Items.Add(new Items { K = "H", V = "H" });
             CbError.SelectedIndex = 0;
 
-            Item item;
+            Items item;
             foreach (EncodingInfo encoding in Encoding.GetEncodings())
             {
-                item = new Item { K = encoding.Name, V = encoding.DisplayName };
+                item = new Items { K = encoding.Name, V = encoding.DisplayName };
                 CbCoding.Items.Add(item);
                 if (item.K.ToLower() == "utf-8")
                 {
@@ -38,7 +38,7 @@ namespace Me.Amon.Bar
 
         public void EncodeUserSet(BarcodeEncoder encoder)
         {
-            Item item = CbError.SelectedItem as Item;
+            Items item = CbError.SelectedItem as Items;
             if (item != null)
             {
                 switch (item.K)
@@ -58,7 +58,7 @@ namespace Me.Amon.Bar
                 }
             }
 
-            item = CbCoding.SelectedItem as Item;
+            item = CbCoding.SelectedItem as Items;
             if (item != null)
             {
                 encoder.CharacterSet = item.K;
@@ -75,7 +75,7 @@ namespace Me.Amon.Bar
             ErrorCorrectionLevel level = result.ResultMetadata[ResultMetadataType.ErrorCorrectionLevel] as ErrorCorrectionLevel;
             if (level != null)
             {
-                CbError.SelectedItem = new Item { K = level.Name };
+                CbError.SelectedItem = new Items { K = level.Name };
             }
         }
 

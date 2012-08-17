@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Gtd.V
 {
-    partial class Repeat
+    partial class UhEmail
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,16 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // Repeat
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "Repeat";
-            this.Size = new System.Drawing.Size(373, 242);
-            this.ResumeLayout(false);
-
         }
 
         #endregion

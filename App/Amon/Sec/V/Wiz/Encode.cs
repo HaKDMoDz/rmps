@@ -73,7 +73,7 @@ namespace Me.Amon.Sec.V.Wiz
 
         private bool EncryptFile(SymmetricAlgorithm alg)
         {
-            Item item;
+            Items item;
             for (int i = 0; i < _AFile.FileList.Count; i += 1)
             {
                 item = _AFile.FileList[i];

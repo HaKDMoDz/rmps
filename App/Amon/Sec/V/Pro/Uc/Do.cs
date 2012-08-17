@@ -111,7 +111,7 @@ namespace Me.Amon.Sec.V.Pro.Uc
 
         public bool Check()
         {
-            Item item = CbType.SelectedItem as Item;
+            Items item = CbType.SelectedItem as Items;
             if (item == null || item.K == "0")
             {
                 Main.ShowAlert("请选择输出方式！");
@@ -127,7 +127,7 @@ namespace Me.Amon.Sec.V.Pro.Uc
 
             XmlAttribute attr = doc.CreateAttribute("type");
             node.Attributes.Append(attr);
-            Item item = CbType.SelectedItem as Item;
+            Items item = CbType.SelectedItem as Items;
             if (item != null)
             {
                 attr.Value = item.K;
@@ -135,7 +135,7 @@ namespace Me.Amon.Sec.V.Pro.Uc
 
             attr = doc.CreateAttribute("key");
             node.Attributes.Append(attr);
-            item = CbMask.SelectedItem as Item;
+            item = CbMask.SelectedItem as Items;
             if (item != null)
             {
                 attr.Value = item.K;
@@ -159,7 +159,7 @@ namespace Me.Amon.Sec.V.Pro.Uc
                 XmlAttribute attr = node.Attributes["type"];
                 if (attr != null)
                 {
-                    CbType.SelectedItem = new Item { K = attr.Value };
+                    CbType.SelectedItem = new Items { K = attr.Value };
                 }
 
                 attr = node.Attributes["key"];
@@ -169,7 +169,7 @@ namespace Me.Amon.Sec.V.Pro.Uc
                 }
                 for (int i = 0, j = CbMask.Items.Count; i < j; i += 1)
                 {
-                    Item item = CbMask.Items[i] as Item;
+                    Items item = CbMask.Items[i] as Items;
                     if (item == null)
                     {
                         continue;
@@ -196,7 +196,7 @@ namespace Me.Amon.Sec.V.Pro.Uc
 #if DEBUG
             Main.LogInfo("DO:    CbType_SelectedIndexChanged...");
 #endif
-            Item item = CbType.SelectedItem as Item;
+            Items item = CbType.SelectedItem as Items;
             if (item == null)
             {
                 return;

@@ -1,8 +1,9 @@
-﻿namespace Me.Amon.Uc
+﻿
+namespace Me.Amon.Uc
 {
-    public class Item
+    public class Itemi
     {
-        public string K { get; set; }
+        public int K { get; set; }
         public string V { get; set; }
         public string D { get; set; }
 
@@ -13,7 +14,7 @@
 
         public override int GetHashCode()
         {
-            return K.GetHashCode();
+            return K;
         }
 
         public override string ToString()

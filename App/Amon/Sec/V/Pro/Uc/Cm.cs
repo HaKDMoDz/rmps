@@ -112,7 +112,7 @@ namespace Me.Amon.Sec.V.Pro.Uc
 
         public bool Check()
         {
-            Item item = CbName.SelectedItem as Item;
+            Items item = CbName.SelectedItem as Items;
             if (item == null || item.K == "0")
             {
                 Main.ShowAlert("请选择算法名称！");
@@ -129,7 +129,7 @@ namespace Me.Amon.Sec.V.Pro.Uc
             XmlAttribute attr = doc.CreateAttribute("name");
             node.Attributes.Append(attr);
 
-            Item item = CbName.SelectedItem as Item;
+            Items item = CbName.SelectedItem as Items;
             if (item != null)
             {
                 attr.Value = item.K;
@@ -137,7 +137,7 @@ namespace Me.Amon.Sec.V.Pro.Uc
 
             attr = doc.CreateAttribute("mode");
             node.Attributes.Append(attr);
-            item = CbMode.SelectedItem as Item;
+            item = CbMode.SelectedItem as Items;
             if (item != null)
             {
                 attr.Value = item.K;
@@ -145,7 +145,7 @@ namespace Me.Amon.Sec.V.Pro.Uc
 
             attr = doc.CreateAttribute("padding");
             node.Attributes.Append(attr);
-            item = CbPads.SelectedItem as Item;
+            item = CbPads.SelectedItem as Items;
             if (item != null)
             {
                 attr.Value = item.K;
@@ -162,17 +162,17 @@ namespace Me.Amon.Sec.V.Pro.Uc
                 XmlAttribute attr = node.Attributes["name"];
                 if (attr != null)
                 {
-                    CbName.SelectedItem = new Item { K = attr.Value };
+                    CbName.SelectedItem = new Items { K = attr.Value };
                 }
                 attr = node.Attributes["mode"];
                 if (attr != null)
                 {
-                    CbMode.SelectedItem = new Item { K = attr.Value };
+                    CbMode.SelectedItem = new Items { K = attr.Value };
                 }
                 attr = node.Attributes["padding"];
                 if (attr != null)
                 {
-                    CbPads.SelectedItem = new Item { K = attr.Value };
+                    CbPads.SelectedItem = new Items { K = attr.Value };
                 }
             }
         }
@@ -184,7 +184,7 @@ namespace Me.Amon.Sec.V.Pro.Uc
 #if DEBUG
             Main.LogInfo("CbName_SelectedIndexChanged...");
 #endif
-            Item item = CbName.SelectedItem as Item;
+            Items item = CbName.SelectedItem as Items;
             if (item == null)
             {
                 return;
@@ -202,7 +202,7 @@ namespace Me.Amon.Sec.V.Pro.Uc
 #if DEBUG
             Main.LogInfo("CbMode_SelectedIndexChanged...");
 #endif
-            Item item = CbMode.SelectedItem as Item;
+            Items item = CbMode.SelectedItem as Items;
             if (item == null)
             {
                 return;
@@ -223,7 +223,7 @@ namespace Me.Amon.Sec.V.Pro.Uc
 #if DEBUG
             Main.LogInfo("CbPads_SelectedIndexChanged...");
 #endif
-            Item item = CbPads.SelectedItem as Item;
+            Items item = CbPads.SelectedItem as Items;
             if (item == null)
             {
                 return;

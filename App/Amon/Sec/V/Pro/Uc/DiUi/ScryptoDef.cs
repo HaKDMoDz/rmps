@@ -18,7 +18,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.DiUi
             _Di.BtMask.Visible = false;
         }
 
-        public override void ChangedType(Item type)
+        public override void ChangedType(Items type)
         {
             _Di.BtData.Enabled = false;
         }

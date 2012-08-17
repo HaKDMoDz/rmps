@@ -117,7 +117,7 @@ namespace Me.Amon.Sec.V.Pro.Uc
 
             XmlAttribute attr = doc.CreateAttribute("size");
             node.Attributes.Append(attr);
-            Item item = CbSize.SelectedItem as Item;
+            Items item = CbSize.SelectedItem as Items;
             if (item != null)
             {
                 attr.Value = item.K;
@@ -134,7 +134,7 @@ namespace Me.Amon.Sec.V.Pro.Uc
                 XmlAttribute attr = node.Attributes["size"];
                 if (attr != null)
                 {
-                    CbSize.SelectedItem = new Item { K = attr.Value };
+                    CbSize.SelectedItem = new Items { K = attr.Value };
                 }
             }
         }
@@ -146,7 +146,7 @@ namespace Me.Amon.Sec.V.Pro.Uc
 #if DEBUG
             Main.LogInfo("CbSize_SelectedIndexChanged...");
 #endif
-            Item item = CbSize.SelectedItem as Item;
+            Items item = CbSize.SelectedItem as Items;
             if (item == null)
             {
                 return;

@@ -93,21 +93,21 @@ namespace Me.Amon.Sec.V.Pro
             // 
             // CbKey
             // 
-            CbKey.Items.Add(new Item { K = "0", V = "请选择" });
-            CbKey.Items.Add(new Item { K = ESec.DIR_ENC, V = "加密" });
-            CbKey.Items.Add(new Item { K = ESec.DIR_DEC, V = "解密" });
+            CbKey.Items.Add(new Items { K = "0", V = "请选择" });
+            CbKey.Items.Add(new Items { K = ESec.DIR_ENC, V = "加密" });
+            CbKey.Items.Add(new Items { K = ESec.DIR_DEC, V = "解密" });
             CbKey.SelectedIndex = 0;
             CbKey.Visible = false;
 
             // 
             // CbOpt
             // 
-            CbOpt.Items.Add(new Item { K = "0", V = "请选择" });
-            CbOpt.Items.Add(new Item { K = ESec.OPT_DIGEST, V = "散列算法" });
+            CbOpt.Items.Add(new Items { K = "0", V = "请选择" });
+            CbOpt.Items.Add(new Items { K = ESec.OPT_DIGEST, V = "散列算法" });
             //CbOpt.Items.Add(new Item { K = IData.OPT_RANDKEY, V = "随机口令" });
-            CbOpt.Items.Add(new Item { K = ESec.OPT_WRAPPER, V = "掩码算法" });
-            CbOpt.Items.Add(new Item { K = ESec.OPT_SCRYPTO, V = "块对称算法" });
-            CbOpt.Items.Add(new Item { K = ESec.OPT_SSTREAM, V = "流对称算法" });
+            CbOpt.Items.Add(new Items { K = ESec.OPT_WRAPPER, V = "掩码算法" });
+            CbOpt.Items.Add(new Items { K = ESec.OPT_SCRYPTO, V = "块对称算法" });
+            CbOpt.Items.Add(new Items { K = ESec.OPT_SSTREAM, V = "流对称算法" });
             //CbOpt.Items.Add(new Item { K = IData.OPT_ACRYPTO, V = "非对称算法" });
             //CbOpt.Items.Add(new Item { K = IData.OPT_TXT2IMG, V = "图文转换" });
             CbOpt.SelectedIndex = 0;
@@ -132,7 +132,7 @@ namespace Me.Amon.Sec.V.Pro
         {
             Main.LogInfo("CbOpt_SelectedIndexChanged...");
 
-            Item item = CbOpt.SelectedItem as Item;
+            Items item = CbOpt.SelectedItem as Items;
             if (item == null)
             {
                 return;
@@ -180,7 +180,7 @@ namespace Me.Amon.Sec.V.Pro
         {
             Main.LogInfo("CbKey_SelectedIndexChanged...");
 
-            Item item = CbKey.SelectedItem as Item;
+            Items item = CbKey.SelectedItem as Items;
             if (item == null)
             {
                 return;
@@ -470,7 +470,7 @@ namespace Me.Amon.Sec.V.Pro
 
         public void DoCrypto()
         {
-            Item opt = CbOpt.SelectedItem as Item;
+            Items opt = CbOpt.SelectedItem as Items;
             if (opt == null || opt.K == "0")
             {
                 Main.ShowAlert("请选择您要执行的操作！");
@@ -478,7 +478,7 @@ namespace Me.Amon.Sec.V.Pro
                 return;
             }
 
-            Item key = CbKey.SelectedItem as Item;
+            Items key = CbKey.SelectedItem as Items;
 
             if (!_UcCm.Check())
             {
@@ -567,12 +567,12 @@ namespace Me.Amon.Sec.V.Pro
                 XmlAttribute attr = node.Attributes["key"];
                 if (attr != null)
                 {
-                    CbOpt.SelectedItem = new Item { K = attr.Value };
+                    CbOpt.SelectedItem = new Items { K = attr.Value };
                 }
                 attr = node.Attributes["dir"];
                 if (attr != null)
                 {
-                    CbKey.SelectedItem = new Item { K = attr.Value };
+                    CbKey.SelectedItem = new Items { K = attr.Value };
                 }
             }
 
@@ -584,7 +584,7 @@ namespace Me.Amon.Sec.V.Pro
 
         public void SaveFav()
         {
-            Item item = CbOpt.SelectedItem as Item;
+            Items item = CbOpt.SelectedItem as Items;
             if (item == null || item.K == "0")
             {
                 Main.ShowAlert("默认操作不需要保存！");
@@ -614,7 +614,7 @@ namespace Me.Amon.Sec.V.Pro
 
             attr = doc.CreateAttribute("dir");
             node.Attributes.Append(attr);
-            item = CbKey.SelectedItem as Item;
+            item = CbKey.SelectedItem as Items;
             if (item != null)
             {
                 attr.Value = item.K;

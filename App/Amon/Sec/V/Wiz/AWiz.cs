@@ -35,9 +35,9 @@ namespace Me.Amon.Sec.V.Wiz
             _Encode = new Encode(UcFile, UcText);
             _Decode = new Decode(UcFile, UcText);
 
-            CbDir.Items.Add(new Item { K = "hash", V = "摘要" });
-            CbDir.Items.Add(new Item { K = "enc", V = "加密" });
-            CbDir.Items.Add(new Item { K = "dec", V = "解密" });
+            CbDir.Items.Add(new Items { K = "hash", V = "摘要" });
+            CbDir.Items.Add(new Items { K = "enc", V = "加密" });
+            CbDir.Items.Add(new Items { K = "dec", V = "解密" });
             CbDir.SelectedIndex = 0;
         }
 
@@ -92,7 +92,7 @@ namespace Me.Amon.Sec.V.Wiz
         #region 事件处理
         private void CbDir_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            Item item = CbDir.SelectedItem as Item;
+            Items item = CbDir.SelectedItem as Items;
             if (item == null)
             {
                 return;
@@ -104,10 +104,10 @@ namespace Me.Amon.Sec.V.Wiz
                 _Crypto = _Digest;
                 _Crypto.Init();
 
-                CbFun.Items.Add(new Item { K = "MD5", V = "MD5" });
-                CbFun.Items.Add(new Item { K = "SHA1", V = "SHA1" });
-                CbFun.Items.Add(new Item { K = "SHA256", V = "SHA256" });
-                CbFun.Items.Add(new Item { K = "SHA512", V = "SHA512" });
+                CbFun.Items.Add(new Items { K = "MD5", V = "MD5" });
+                CbFun.Items.Add(new Items { K = "SHA1", V = "SHA1" });
+                CbFun.Items.Add(new Items { K = "SHA256", V = "SHA256" });
+                CbFun.Items.Add(new Items { K = "SHA512", V = "SHA512" });
                 CbFun.SelectedIndex = 0;
 
                 LlPass.Enabled = false;
@@ -120,10 +120,10 @@ namespace Me.Amon.Sec.V.Wiz
                 _Crypto = _Encode;
                 _Crypto.Init();
 
-                CbFun.Items.Add(new Item { K = "AES", V = "AES" });
-                CbFun.Items.Add(new Item { K = "DES", V = "DES" });
-                CbFun.Items.Add(new Item { K = "RC4", V = "RC4" });
-                CbFun.Items.Add(new Item { K = "RC6", V = "RC6" });
+                CbFun.Items.Add(new Items { K = "AES", V = "AES" });
+                CbFun.Items.Add(new Items { K = "DES", V = "DES" });
+                CbFun.Items.Add(new Items { K = "RC4", V = "RC4" });
+                CbFun.Items.Add(new Items { K = "RC6", V = "RC6" });
                 CbFun.SelectedIndex = 0;
 
                 LlPass.Enabled = true;
@@ -136,10 +136,10 @@ namespace Me.Amon.Sec.V.Wiz
                 _Crypto = _Decode;
                 _Crypto.Init();
 
-                CbFun.Items.Add(new Item { K = "AES", V = "AES" });
-                CbFun.Items.Add(new Item { K = "DES", V = "DES" });
-                CbFun.Items.Add(new Item { K = "RC4", V = "RC4" });
-                CbFun.Items.Add(new Item { K = "RC6", V = "RC6" });
+                CbFun.Items.Add(new Items { K = "AES", V = "AES" });
+                CbFun.Items.Add(new Items { K = "DES", V = "DES" });
+                CbFun.Items.Add(new Items { K = "RC4", V = "RC4" });
+                CbFun.Items.Add(new Items { K = "RC6", V = "RC6" });
                 CbFun.SelectedIndex = 0;
 
                 LlPass.Enabled = true;
@@ -151,7 +151,7 @@ namespace Me.Amon.Sec.V.Wiz
 
         private void CbFun_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            Item item = CbFun.SelectedItem as Item;
+            Items item = CbFun.SelectedItem as Items;
             if (item == null)
             {
                 return;

@@ -21,27 +21,27 @@ namespace Me.Amon.Sec.V.Pro.Uc.DiUi
             _Di.Enabled = true;
 
             BeanUtil.Clear(_Di.CbType);
-            _Di.CbType.Items.Add(new Item { K = INPUT_FILE, V = "文件" });
-            _Di.CbType.Items.Add(new Item { K = INPUT_TEXT, V = "文本" });
+            _Di.CbType.Items.Add(new Items { K = INPUT_FILE, V = "文件" });
+            _Di.CbType.Items.Add(new Items { K = INPUT_TEXT, V = "文本" });
             _Di.CbType.Enabled = true;
 
             _Di.TbData.Enabled = false;
             _Di.BtData.Enabled = false;
 
             BeanUtil.Clear(_Di.CbMask);
-            _Di.CbMask.Items.Add(new Item { K = "11", V = "2进制", D = "01" });
-            _Di.CbMask.Items.Add(new Item { K = "12", V = "4进制", D = "0123" });
-            _Di.CbMask.Items.Add(new Item { K = "13", V = "8进制", D = "01234567" });
-            _Di.CbMask.Items.Add(new Item { K = "14", V = "16进制", D = "0123456789ABCDEF" });
-            _Di.CbMask.Items.Add(new Item { K = "15", V = "32进制", D = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
-            _Di.CbMask.Items.Add(new Item { K = "16", V = "64进制", D = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz*." });
-            _Di.CbMask.Items.Add(new Item { K = "21", V = "仅数字", D = "0123456789" });
-            _Di.CbMask.Items.Add(new Item { K = "22", V = "大写字母", D = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
-            _Di.CbMask.Items.Add(new Item { K = "23", V = "小写字母", D = "abcdefghijklmnopqrstuvwxyz" });
-            _Di.CbMask.Items.Add(new Item { K = "24", V = "大小写字母", D = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
-            _Di.CbMask.Items.Add(new Item { K = "25", V = "数字及字母", D = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
-            _Di.CbMask.Items.Add(new Item { K = "26", V = "可输入英文符号", D = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" });
-            _Di.CbMask.Items.Add(new Item { K = USER_CHARSET, V = "自定义字符集", D = "" });
+            _Di.CbMask.Items.Add(new Items { K = "11", V = "2进制", D = "01" });
+            _Di.CbMask.Items.Add(new Items { K = "12", V = "4进制", D = "0123" });
+            _Di.CbMask.Items.Add(new Items { K = "13", V = "8进制", D = "01234567" });
+            _Di.CbMask.Items.Add(new Items { K = "14", V = "16进制", D = "0123456789ABCDEF" });
+            _Di.CbMask.Items.Add(new Items { K = "15", V = "32进制", D = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
+            _Di.CbMask.Items.Add(new Items { K = "16", V = "64进制", D = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz*." });
+            _Di.CbMask.Items.Add(new Items { K = "21", V = "仅数字", D = "0123456789" });
+            _Di.CbMask.Items.Add(new Items { K = "22", V = "大写字母", D = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
+            _Di.CbMask.Items.Add(new Items { K = "23", V = "小写字母", D = "abcdefghijklmnopqrstuvwxyz" });
+            _Di.CbMask.Items.Add(new Items { K = "24", V = "大小写字母", D = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
+            _Di.CbMask.Items.Add(new Items { K = "25", V = "数字及字母", D = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
+            _Di.CbMask.Items.Add(new Items { K = "26", V = "可输入英文符号", D = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" });
+            _Di.CbMask.Items.Add(new Items { K = USER_CHARSET, V = "自定义字符集", D = "" });
 
             _Di.LbMask.Visible = false;
             _Di.CbMask.Visible = false;
@@ -57,7 +57,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.DiUi
             _Di.CbMask.SelectedIndex = 0;
         }
 
-        public override void ChangedType(Item type)
+        public override void ChangedType(Items type)
         {
             _Type = type;
 

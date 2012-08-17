@@ -55,27 +55,27 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
                     //128,192,256--0 .. 256
-                    _Uk.CbSize.Items.Add(new Item { K = "16", V = "16 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "24", V = "24 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "16", V = "16 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "24", V = "24 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "32", V = "32 字节" });
                     break;
                 case ESec.SCRYPTO_AESFAST:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
                     //128,192,256--0 .. 256
-                    _Uk.CbSize.Items.Add(new Item { K = "16", V = "16 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "24", V = "24 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "16", V = "16 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "24", V = "24 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "32", V = "32 字节" });
                     break;
                 case ESec.SCRYPTO_AESLIGHT:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
                     //128,192,256--0 .. 256
-                    _Uk.CbSize.Items.Add(new Item { K = "16", V = "16 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "24", V = "24 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "16", V = "16 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "24", V = "24 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "32", V = "32 字节" });
                     break;
                 case ESec.SCRYPTO_BLOWFISH:
                     _SizeDef.D = "32";
@@ -84,7 +84,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     //0 .. 448
                     for (int i = 4; i <= 56; i += 4)
                     {
-                        _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
+                        _Uk.CbSize.Items.Add(new Items { K = i.ToString(), V = i + " 字节" });
                     }
                     break;
                 case ESec.SCRYPTO_CAMELLIA:
@@ -92,18 +92,18 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
                     //128, 192, 256
-                    _Uk.CbSize.Items.Add(new Item { K = "16", V = "16 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "24", V = "24 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "16", V = "16 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "24", V = "24 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "32", V = "32 字节" });
                     break;
                 case ESec.SCRYPTO_CAMELLIALIGHT:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
                     //128, 192, 256
-                    _Uk.CbSize.Items.Add(new Item { K = "16", V = "16 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "24", V = "24 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "16", V = "16 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "24", V = "24 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "32", V = "32 字节" });
                     break;
                 case ESec.SCRYPTO_CAST5:
                     _SizeDef.D = "16";
@@ -112,7 +112,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     //0 .. 128
                     for (int i = 4; i <= 16; i += 4)
                     {
-                        _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
+                        _Uk.CbSize.Items.Add(new Items { K = i.ToString(), V = i + " 字节" });
                     }
                     break;
                 case ESec.SCRYPTO_CAST6:
@@ -122,7 +122,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     //0 .. 256
                     for (int i = 4; i <= 32; i += 4)
                     {
-                        _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
+                        _Uk.CbSize.Items.Add(new Items { K = i.ToString(), V = i + " 字节" });
                     }
                     break;
                 case ESec.SCRYPTO_DES:
@@ -130,35 +130,35 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     _Uk.TbPass.MaxLength = 8;
                     _Uk.TbSalt.MaxLength = 8;
                     //64
-                    _Uk.CbSize.Items.Add(new Item { K = "8", V = "8 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "8", V = "8 字节" });
                     break;
                 case ESec.SCRYPTO_DESEDE:
                     _SizeDef.D = "24";
                     _Uk.TbPass.MaxLength = 24;
                     _Uk.TbSalt.MaxLength = 24;
                     //128, 192
-                    _Uk.CbSize.Items.Add(new Item { K = "16", V = "16 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "24", V = "24 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "16", V = "16 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "24", V = "24 字节" });
                     break;
                 case ESec.SCRYPTO_GOST28147:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
                     //256
-                    _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "32", V = "32 字节" });
                     break;
                 case ESec.SCRYPTO_NOEKEON:
                     _SizeDef.D = "16";
                     _Uk.TbPass.MaxLength = 16;
                     _Uk.TbSalt.MaxLength = 16;
                     //128
-                    _Uk.CbSize.Items.Add(new Item { K = "16", V = "16 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "16", V = "16 字节" });
                     break;
                 case ESec.SCRYPTO_NULL:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
-                    _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "32", V = "32 字节" });
                     break;
                 case ESec.SCRYPTO_RC2:
                     _SizeDef.D = "128";
@@ -167,7 +167,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     //0 .. 1024
                     for (int i = 8; i <= 128; i += 8)
                     {
-                        _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
+                        _Uk.CbSize.Items.Add(new Items { K = i.ToString(), V = i + " 字节" });
                     }
                     break;
                 case ESec.SCRYPTO_RC532:
@@ -177,7 +177,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     //0 .. 128
                     for (int i = 4; i <= 16; i += 4)
                     {
-                        _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
+                        _Uk.CbSize.Items.Add(new Items { K = i.ToString(), V = i + " 字节" });
                     }
                     break;
                 case ESec.SCRYPTO_RC564:
@@ -187,7 +187,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     //0 .. 128
                     for (int i = 4; i <= 16; i += 4)
                     {
-                        _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
+                        _Uk.CbSize.Items.Add(new Items { K = i.ToString(), V = i + " 字节" });
                     }
                     break;
                 case ESec.SCRYPTO_RC6:
@@ -197,7 +197,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     //0 .. 256
                     for (int i = 4; i <= 32; i += 4)
                     {
-                        _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
+                        _Uk.CbSize.Items.Add(new Items { K = i.ToString(), V = i + " 字节" });
                     }
                     break;
                 case ESec.SCRYPTO_RIJNDAEL:
@@ -206,27 +206,27 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     _Uk.TbSalt.MaxLength = 32;
                     //0 .. 256
                     //128,160,192,224,256
-                    _Uk.CbSize.Items.Add(new Item { K = "16", V = "16 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "20", V = "20 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "24", V = "24 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "28", V = "28 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "16", V = "16 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "20", V = "20 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "24", V = "24 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "28", V = "28 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "32", V = "32 字节" });
                     break;
                 case ESec.SCRYPTO_SEED:
                     _SizeDef.D = "16";
                     _Uk.TbPass.MaxLength = 16;
                     _Uk.TbSalt.MaxLength = 16;
                     //128
-                    _Uk.CbSize.Items.Add(new Item { K = "16", V = "16 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "16", V = "16 字节" });
                     break;
                 case ESec.SCRYPTO_SERPENT:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
                     //128, 192, 256
-                    _Uk.CbSize.Items.Add(new Item { K = "16", V = "16 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "24", V = "24 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "16", V = "16 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "24", V = "24 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "32", V = "32 字节" });
                     break;
                 case ESec.SCRYPTO_SKIPJACK:
                     _SizeDef.D = "16";
@@ -235,7 +235,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     //0 .. 128
                     for (int i = 10; i <= 16; i += 1)
                     {
-                        _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
+                        _Uk.CbSize.Items.Add(new Items { K = i.ToString(), V = i + " 字节" });
                     }
                     break;
                 case ESec.SCRYPTO_TEA:
@@ -243,23 +243,23 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
                     _Uk.TbPass.MaxLength = 16;
                     _Uk.TbSalt.MaxLength = 16;
                     //128
-                    _Uk.CbSize.Items.Add(new Item { K = "16", V = "16 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "16", V = "16 字节" });
                     break;
                 case ESec.SCRYPTO_TWOFISH:
                     _SizeDef.D = "32";
                     _Uk.TbPass.MaxLength = 32;
                     _Uk.TbSalt.MaxLength = 32;
                     //128, 192, 256
-                    _Uk.CbSize.Items.Add(new Item { K = "16", V = "16 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "24", V = "24 字节" });
-                    _Uk.CbSize.Items.Add(new Item { K = "32", V = "32 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "16", V = "16 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "24", V = "24 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "32", V = "32 字节" });
                     break;
                 case ESec.SCRYPTO_XTEA:
                     _SizeDef.D = "16";
                     _Uk.TbPass.MaxLength = 16;
                     _Uk.TbSalt.MaxLength = 16;
                     //128
-                    _Uk.CbSize.Items.Add(new Item { K = "16", V = "16 字节" });
+                    _Uk.CbSize.Items.Add(new Items { K = "16", V = "16 字节" });
                     break;
                 default:
                     _SizeDef.D = "32767";

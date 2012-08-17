@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Gtd.V
 {
-    partial class FixTime
+    partial class UhAlert
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,46 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.DtData = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // DtData
-            // 
-            this.DtData.Location = new System.Drawing.Point(80, 3);
-            this.DtData.Name = "DtData";
-            this.DtData.Size = new System.Drawing.Size(200, 21);
-            this.DtData.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 9);
+            this.label1.Location = new System.Drawing.Point(3, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 12);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "提醒时间(&T)";
+            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "信息";
             // 
-            // label2
+            // textBox1
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label2.Location = new System.Drawing.Point(3, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(367, 2);
-            this.label2.TabIndex = 4;
+            this.textBox1.Location = new System.Drawing.Point(3, 28);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(226, 119);
+            this.textBox1.TabIndex = 1;
             // 
-            // FixTime
+            // UhAlert
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.DtData);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
-            this.Name = "FixTime";
-            this.Size = new System.Drawing.Size(373, 242);
+            this.Name = "UhAlert";
+            this.Size = new System.Drawing.Size(232, 150);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -75,8 +64,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DateTimePicker DtData;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

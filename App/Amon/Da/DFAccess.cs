@@ -10,7 +10,7 @@ namespace Me.Amon.Da
     public class DFAccess
     {
         private List<string> keys = new List<string>();
-        private Dictionary<string, Item> dict = new Dictionary<string, Item>();
+        private Dictionary<string, Items> dict = new Dictionary<string, Items>();
 
         /// <summary>
         /// 重写Add方法,实现按添加顺序排列
@@ -28,7 +28,7 @@ namespace Me.Amon.Da
                 }
                 else
                 {
-                    dict[key] = new Item { V = value };
+                    dict[key] = new Items { V = value };
                     keys.Add(key);
                 }
             }
@@ -40,13 +40,13 @@ namespace Me.Amon.Da
             {
                 if (dict.ContainsKey(key))
                 {
-                    Item item = dict[key];
+                    Items item = dict[key];
                     item.V = value;
                     item.D = comment;
                 }
                 else
                 {
-                    dict[key] = new Item { V = value, D = comment };
+                    dict[key] = new Items { V = value, D = comment };
                     keys.Add(key);
                 }
             }
@@ -86,7 +86,7 @@ namespace Me.Amon.Da
                 string line;
                 bool multiLine = false;
                 bool isComment = false;
-                Item item = new Item { V = "", D = "" };
+                Items item = new Items { V = "", D = "" };
                 while (true)
                 {
                     line = reader.ReadLine();
@@ -132,7 +132,7 @@ namespace Me.Amon.Da
                     dict[item.K] = item;
                     keys.Add(item.K);
 
-                    item = new Item { V = "", D = "" };
+                    item = new Items { V = "", D = "" };
                     isComment = false;
                 }
                 reader.Close();
@@ -150,7 +150,7 @@ namespace Me.Amon.Da
             {
                 foreach (string key in keys)
                 {
-                    Item item = dict[key];
+                    Items item = dict[key];
                     if (!string.IsNullOrEmpty(item.D))
                     {
                         writer.WriteLine("#" + item.D);

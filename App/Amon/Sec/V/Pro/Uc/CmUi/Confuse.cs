@@ -24,7 +24,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.CmUi
             _Cm.Enabled = false;
 
             BeanUtil.Clear(_Cm.CbName);
-            _Cm.CbName.Items.Add(new Item { K = "confuse", V = "混淆算法" });
+            _Cm.CbName.Items.Add(new Items { K = "confuse", V = "混淆算法" });
             _Cm.CbName.SelectedIndex = 1;
 
             _Cm.LbMode.Visible = false;

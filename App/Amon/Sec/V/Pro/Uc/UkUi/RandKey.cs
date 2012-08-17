@@ -39,7 +39,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.UkUi
             //0 .. 256
             for (int i = 6; i <= 32; i += 2)
             {
-                _Uk.CbSize.Items.Add(new Item { K = i.ToString(), V = i + " 字节" });
+                _Uk.CbSize.Items.Add(new Items { K = i.ToString(), V = i + " 字节" });
             }
 
             _Uk.LbSize.Enabled = true;

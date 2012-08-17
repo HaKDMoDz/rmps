@@ -13,8 +13,8 @@ namespace Me.Amon.Sec.V.Pro.Uc.DiUi
 
         public override void InitKey(string key)
         {
-            _Di.CbType.Items.Add(new Item { K = INPUT_FILE, V = "文件" });
-            _Di.CbType.Items.Add(new Item { K = INPUT_TEXT, V = "文本" });
+            _Di.CbType.Items.Add(new Items { K = INPUT_FILE, V = "文件" });
+            _Di.CbType.Items.Add(new Items { K = INPUT_TEXT, V = "文本" });
 
             _Di.CbType.SelectedIndex = 0;
 
@@ -23,7 +23,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.DiUi
             _Di.BtMask.Visible = false;
         }
 
-        public override void ChangedType(Item type)
+        public override void ChangedType(Items type)
         {
             switch (type.K)
             {

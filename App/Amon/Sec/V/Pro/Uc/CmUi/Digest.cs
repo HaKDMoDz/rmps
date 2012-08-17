@@ -27,22 +27,22 @@ namespace Me.Amon.Sec.V.Pro.Uc.CmUi
             _Cm.Enabled = true;
 
             BeanUtil.Clear(_Cm.CbName);
-            _Cm.CbName.Items.Add(new Item { K = ESec.DIGEST_GOST3411, V = "Gost3411" });
-            _Cm.CbName.Items.Add(new Item { K = ESec.DIGEST_MD2, V = "MD2" });
-            _Cm.CbName.Items.Add(new Item { K = ESec.DIGEST_MD4, V = "MD4" });
-            _Cm.CbName.Items.Add(new Item { K = ESec.DIGEST_MD5, V = "MD5" });
-            _Cm.CbName.Items.Add(new Item { K = ESec.DIGEST_NULL, V = "Null" });
-            _Cm.CbName.Items.Add(new Item { K = ESec.DIGEST_RIPEMD128, V = "RipeMD128" });
-            _Cm.CbName.Items.Add(new Item { K = ESec.DIGEST_RIPEMD160, V = "RipeMD160" });
-            _Cm.CbName.Items.Add(new Item { K = ESec.DIGEST_RIPEMD256, V = "RipeMD256" });
-            _Cm.CbName.Items.Add(new Item { K = ESec.DIGEST_RIPEMD320, V = "RipeMD320" });
-            _Cm.CbName.Items.Add(new Item { K = ESec.DIGEST_SHA1, V = "Sha1" });
-            _Cm.CbName.Items.Add(new Item { K = ESec.DIGEST_SHA224, V = "Sha224" });
-            _Cm.CbName.Items.Add(new Item { K = ESec.DIGEST_SHA256, V = "Sha256" });
-            _Cm.CbName.Items.Add(new Item { K = ESec.DIGEST_SHA384, V = "Sha384" });
-            _Cm.CbName.Items.Add(new Item { K = ESec.DIGEST_SHA512, V = "Sha512" });
-            _Cm.CbName.Items.Add(new Item { K = ESec.DIGEST_TIGER, V = "Tiger" });
-            _Cm.CbName.Items.Add(new Item { K = ESec.DIGEST_WHIRLPOOL, V = "Whirlpool" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.DIGEST_GOST3411, V = "Gost3411" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.DIGEST_MD2, V = "MD2" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.DIGEST_MD4, V = "MD4" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.DIGEST_MD5, V = "MD5" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.DIGEST_NULL, V = "Null" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.DIGEST_RIPEMD128, V = "RipeMD128" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.DIGEST_RIPEMD160, V = "RipeMD160" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.DIGEST_RIPEMD256, V = "RipeMD256" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.DIGEST_RIPEMD320, V = "RipeMD320" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.DIGEST_SHA1, V = "Sha1" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.DIGEST_SHA224, V = "Sha224" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.DIGEST_SHA256, V = "Sha256" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.DIGEST_SHA384, V = "Sha384" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.DIGEST_SHA512, V = "Sha512" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.DIGEST_TIGER, V = "Tiger" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.DIGEST_WHIRLPOOL, V = "Whirlpool" });
             _Cm.CbName.Enabled = true;
 
             _Cm.LbMode.Visible = false;

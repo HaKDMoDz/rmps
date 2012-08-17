@@ -634,7 +634,7 @@ namespace Me.Amon.Pwd
             int todoCnt = 0;
             foreach (MGtd gtd in _GtdList)
             {
-                stat = gtd.Test(now, gtd, 43200);//12 * 60 * 60
+                stat = gtd.Test(now, 43200);//12 * 60 * 60
                 if (stat == 0)
                 {
                     todoCnt += 1;

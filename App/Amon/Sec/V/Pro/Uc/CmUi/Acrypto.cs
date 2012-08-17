@@ -20,25 +20,25 @@ namespace Me.Amon.Sec.V.Pro.Uc.CmUi
             _Cm.Enabled = true;
 
             BeanUtil.Clear(_Cm.CbName);
-            _Cm.CbName.Items.Add(new Item { K = ESec.ACRYPTO_ELGAMAL, V = "ElGamal" });
-            _Cm.CbName.Items.Add(new Item { K = ESec.ACRYPTO_NACCACHESTERN, V = "NaccacheStern" });
-            _Cm.CbName.Items.Add(new Item { K = ESec.ACRYPTO_RSABLINDED, V = "RsaBlinded" });
-            _Cm.CbName.Items.Add(new Item { K = ESec.ACRYPTO_RSABLINDING, V = "RsaBlinding" });
-            _Cm.CbName.Items.Add(new Item { K = ESec.ACRYPTO_RSA, V = "Rsa" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.ACRYPTO_ELGAMAL, V = "ElGamal" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.ACRYPTO_NACCACHESTERN, V = "NaccacheStern" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.ACRYPTO_RSABLINDED, V = "RsaBlinded" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.ACRYPTO_RSABLINDING, V = "RsaBlinding" });
+            _Cm.CbName.Items.Add(new Items { K = ESec.ACRYPTO_RSA, V = "Rsa" });
             _Cm.CbName.Enabled = false;
 
             BeanUtil.Clear(_Cm.CbMode);
-            _Cm.CbMode.Items.Add(new Item { K = "1", V = "CBC" });
-            _Cm.CbMode.Items.Add(new Item { K = "1", V = "CCM" });
-            _Cm.CbMode.Items.Add(new Item { K = "4", V = "CFB" });
-            _Cm.CbMode.Items.Add(new Item { K = "2", V = "EAX" });
-            _Cm.CbMode.Items.Add(new Item { K = "2", V = "ECB" });
-            _Cm.CbMode.Items.Add(new Item { K = "2", V = "GCM" });
-            _Cm.CbMode.Items.Add(new Item { K = "3", V = "GOFB" });
-            _Cm.CbMode.Items.Add(new Item { K = "3", V = "OFB" });
-            _Cm.CbMode.Items.Add(new Item { K = "5", V = "CTS" });
-            _Cm.CbMode.Items.Add(new Item { K = "5", V = "OpenPgpCfb" });
-            _Cm.CbMode.Items.Add(new Item { K = "5", V = "SIC" });
+            _Cm.CbMode.Items.Add(new Items { K = "1", V = "CBC" });
+            _Cm.CbMode.Items.Add(new Items { K = "1", V = "CCM" });
+            _Cm.CbMode.Items.Add(new Items { K = "4", V = "CFB" });
+            _Cm.CbMode.Items.Add(new Items { K = "2", V = "EAX" });
+            _Cm.CbMode.Items.Add(new Items { K = "2", V = "ECB" });
+            _Cm.CbMode.Items.Add(new Items { K = "2", V = "GCM" });
+            _Cm.CbMode.Items.Add(new Items { K = "3", V = "GOFB" });
+            _Cm.CbMode.Items.Add(new Items { K = "3", V = "OFB" });
+            _Cm.CbMode.Items.Add(new Items { K = "5", V = "CTS" });
+            _Cm.CbMode.Items.Add(new Items { K = "5", V = "OpenPgpCfb" });
+            _Cm.CbMode.Items.Add(new Items { K = "5", V = "SIC" });
             _Cm.CbMode.Enabled = false;
 
             _Cm.LbMode.Visible = true;
