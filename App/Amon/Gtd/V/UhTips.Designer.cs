@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Gtd.V
 {
-    partial class UhAlert
+    partial class UhTips
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,35 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TbTips = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // label1
+            // TbTips
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "信息";
+            this.TbTips.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TbTips.Location = new System.Drawing.Point(0, 0);
+            this.TbTips.Multiline = true;
+            this.TbTips.Name = "TbTips";
+            this.TbTips.Size = new System.Drawing.Size(219, 74);
+            this.TbTips.TabIndex = 1;
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(3, 28);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(226, 119);
-            this.textBox1.TabIndex = 1;
-            // 
-            // UhAlert
+            // UhTips
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
-            this.Name = "UhAlert";
-            this.Size = new System.Drawing.Size(232, 150);
+            this.Controls.Add(this.TbTips);
+            this.Name = "UhTips";
+            this.Size = new System.Drawing.Size(219, 74);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -64,7 +54,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TbTips;
     }
 }

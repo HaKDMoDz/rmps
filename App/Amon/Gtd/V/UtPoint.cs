@@ -5,22 +5,25 @@ using Me.Amon.Uc;
 
 namespace Me.Amon.Gtd.V
 {
-    public partial class UtDates : UserControl, IDate
+    public partial class UtPoint : UserControl, IDate
     {
+        private MGtd _MGtd;
         private ITime _ITime;
 
-        public UtDates()
+        public UtPoint()
         {
             InitializeComponent();
 
-            CbMajorUnit.Items.Add(new Itemi { K = 0, V = "请选择" });
-            CbMajorUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_SECOND, V = "秒" });
-            CbMajorUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_MINUTE, V = "分" });
-            CbMajorUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_HOUR, V = "时" });
-            CbMajorUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_DAY, V = "日" });
-            CbMajorUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_WEEK, V = "周" });
-            CbMajorUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_MONTH, V = "月" });
-            CbMajorUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_YEAR, V = "年" });
+            DtStart.CustomFormat = EApp.DATEIME_FORMAT;
+
+            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_NONE, V = "无" });
+            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_SECOND, V = "秒" });
+            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_MINUTE, V = "分" });
+            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_HOUR, V = "时" });
+            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_DAY, V = "日" });
+            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_WEEK, V = "周" });
+            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_MONTH, V = "月" });
+            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_YEAR, V = "年" });
         }
 
         #region 接口实现
@@ -31,25 +34,63 @@ namespace Me.Amon.Gtd.V
 
         public void ShowData(MGtd mgtd)
         {
+            _MGtd = mgtd;
+            if (_MGtd == null)
+            {
+                return;
+            }
+
+            if (_MGtd.Start > DtStart.MinDate && _MGtd.Start < DtStart.MaxDate)
+            {
+                DtStart.Value = _MGtd.Start;
+            }
+            CbRedoUnit.SelectedItem = new Itemi { K = _MGtd.RedoUnit };
         }
 
         public bool SaveData(MGtd mgtd)
         {
+            if (mgtd == null || _ITime == null)
+            {
+                return false;
+            }
+
+            Itemi item = CbRedoUnit.SelectedItem as Itemi;
+            if (item == null)
+            {
+                MessageBox.Show("请选择重复周期！");
+                CbRedoUnit.Focus();
+                return false;
+            }
+
+            mgtd.Start = DtStart.Value;
+            if (mgtd.Start.Kind == DateTimeKind.Unspecified)
+            {
+                DateTime.SpecifyKind(mgtd.Start, DateTimeKind.Local);
+            }
+            mgtd.RedoUnit = item.K;
+
+            if (!_ITime.SaveData(mgtd))
+            {
+                return false;
+            }
             return true;
         }
         #endregion
 
         #region 事件处理
-        private void CbMajorUnit_SelectedIndexChanged(object sender, EventArgs e)
+        private void CbRedoUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Itemi item = CbMajorUnit.SelectedItem as Itemi;
-            if (item == null || item.K <= 0)
+            Itemi item = CbRedoUnit.SelectedItem as Itemi;
+            if (item == null)
             {
                 return;
             }
             ShowTime(item.K);
         }
+        #endregion
 
+        #region 私有函数
+        private UcNone _UcNone;
         private UcSecond _UcSecond;
         private UcMinute _UcMinute;
         private UcHour _UcHour;
@@ -59,17 +100,28 @@ namespace Me.Amon.Gtd.V
         private UcYear _UcYear;
         private void ShowTime(int unit)
         {
-            ITime iTime;
+            if (_ITime != null)
+            {
+                Controls.Remove(_ITime.Control);
+            }
 
             switch (unit)
             {
+                case CGtd.UNIT_MAJOR_NONE:
+                    if (_UcNone == null)
+                    {
+                        _UcNone = new UcNone();
+                        InitView(_UcNone);
+                    }
+                    _ITime = _UcNone;
+                    break;
                 case CGtd.UNIT_MAJOR_SECOND:
                     if (_UcSecond == null)
                     {
                         _UcSecond = new UcSecond();
                         InitView(_UcSecond);
                     }
-                    iTime = _UcSecond;
+                    _ITime = _UcSecond;
                     break;
                 case CGtd.UNIT_MAJOR_MINUTE:
                     if (_UcMinute == null)
@@ -77,7 +129,7 @@ namespace Me.Amon.Gtd.V
                         _UcMinute = new UcMinute();
                         InitView(_UcMinute);
                     }
-                    iTime = _UcMinute;
+                    _ITime = _UcMinute;
                     break;
                 case CGtd.UNIT_MAJOR_HOUR:
                     if (_UcHour == null)
@@ -85,7 +137,7 @@ namespace Me.Amon.Gtd.V
                         _UcHour = new UcHour();
                         InitView(_UcHour);
                     }
-                    iTime = _UcHour;
+                    _ITime = _UcHour;
                     break;
                 case CGtd.UNIT_MAJOR_DAY:
                     if (_UcDay == null)
@@ -93,7 +145,7 @@ namespace Me.Amon.Gtd.V
                         _UcDay = new UcDay();
                         InitView(_UcDay);
                     }
-                    iTime = _UcDay;
+                    _ITime = _UcDay;
                     break;
                 case CGtd.UNIT_MAJOR_WEEK:
                     if (_UcWeek == null)
@@ -101,7 +153,7 @@ namespace Me.Amon.Gtd.V
                         _UcWeek = new UcWeek();
                         InitView(_UcWeek);
                     }
-                    iTime = _UcWeek;
+                    _ITime = _UcWeek;
                     break;
                 case CGtd.UNIT_MAJOR_MONTH:
                     if (_UcMonth == null)
@@ -109,7 +161,7 @@ namespace Me.Amon.Gtd.V
                         _UcMonth = new UcMonth();
                         InitView(_UcMonth);
                     }
-                    iTime = _UcMonth;
+                    _ITime = _UcMonth;
                     break;
                 case CGtd.UNIT_MAJOR_YEAR:
                     if (_UcYear == null)
@@ -117,23 +169,19 @@ namespace Me.Amon.Gtd.V
                         _UcYear = new UcYear();
                         InitView(_UcYear);
                     }
-                    iTime = _UcYear;
+                    _ITime = _UcYear;
                     break;
                 default:
                     return;
             }
 
-            if (_ITime != null)
-            {
-                Controls.Remove(_ITime.Control);
-            }
-            _ITime = iTime;
             Controls.Add(_ITime.Control);
+            _ITime.ShowData(_MGtd);
         }
 
         private void InitView(Control control)
         {
-            control.Location = new System.Drawing.Point(3, 29);
+            control.Location = new System.Drawing.Point(3, 55);
             control.Size = new System.Drawing.Size(200, 100);
             control.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
         }

@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Gtd.V
+﻿namespace Me.Amon.Gtd.V.Uc
 {
-    partial class UhEmail
+    partial class UcNone
     {
         /// <summary> 
         /// 必需的设计器变量。
