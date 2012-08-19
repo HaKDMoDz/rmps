@@ -265,18 +265,24 @@ namespace Me.Amon.Pwd
             _LastNode = node;
 
             Cat cat = node.Tag as Cat;
-            if (cat == null || string.IsNullOrWhiteSpace(cat.Meta))
+            if (cat != null && !string.IsNullOrWhiteSpace(cat.Meta))
             {
-                ListKey(node.Name);
-                return;
+                string meta = cat.Meta.ToLower();
+                // 已过期
+                if (meta == "task")
+                {
+                    return;
+                }
+                // 未过期
+                if (meta.StartsWith("task:"))
+                {
+                    ListGtd(meta.Substring(5));
+                    return;
+                }
             }
 
-            string meta = cat.Meta.ToLower();
-            if (meta.StartsWith("task:"))
-            {
-                ListGtd(meta.Substring(5));
-                return;
-            }
+            ListKey(node.Name);
+            return;
         }
 
         private void TvCatTree_ItemDrag(object sender, ItemDragEventArgs e)
@@ -1218,39 +1224,48 @@ namespace Me.Amon.Pwd
             {
                 return;
             }
-            string str = match.Value;
-            meta = meta.Substring(str.Length);
-            int tmp = 0;
+
+            meta = meta.Substring(match.Value.Length);
+            int tmp = int.Parse(match.Value);
+            DateTime end = DateTime.Now;
             switch (meta)
             {
                 case "second":
-                    tmp = 1;
+                    end.AddSeconds(tmp);
                     break;
                 case "minute":
-                    tmp = 60;
+                    end.AddMinutes(tmp);
                     break;
                 case "hour":
-                    tmp = 3600;
+                    end.AddHours(tmp);
                     break;
                 case "day":
-                    tmp = 86400;
+                    end.AddDays(tmp);
                     break;
                 case "week":
-                    tmp = 604800;
+                    end.AddDays(tmp * 7);
                     break;
+                case "month":
+                    end.AddMonths(tmp);
+                    break;
+                case "year":
+                    end.AddYears(tmp);
+                    break;
+                default:
+                    return;
             }
-            tmp *= int.Parse(str);
 
             IList<MGtd> gtds = _UserModel.DBA.FindKeyByGtd();
             DateTime now = DateTime.Now;
-            List<string> pwdIds = new List<string>();
+            List<Key> keys = new List<Key>();
             foreach (MGtd gtd in gtds)
             {
-                if (CGtd.GTD_STAT_ONTIME == gtd.Test(now, tmp))
+                if (CGtd.GTD_STAT_ONTIME == gtd.Test(now, end))
                 {
-                    pwdIds.Add(gtd.RefId);
+                    keys.Add(_UserModel.DBA.ReadKey(gtd.RefId));
                 }
             }
+            DoInitKey(keys);
         }
 
         public void ListKey(string catId)
