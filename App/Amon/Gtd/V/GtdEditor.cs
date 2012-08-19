@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Windows.Forms;
-using Me.Amon.Uc;
 
 namespace Me.Amon.Gtd.V
 {
     public partial class GtdEditor : Form
     {
         private IDate _IDate;
-        private UtDates _UtDates;
+        private UtPoint _UtDates;
         private UtEvent _UtEvent;
         private UtMaths _UtMaths;
         private IHint _IHint;
-        private UhAlert _UhAlert;
+        private UhTips _UhAlert;
         private UhApps _UhApps;
-        private UhEmail _UhEmail;
+        private UhMail _UhEmail;
 
         #region 构造函数
         public GtdEditor()
@@ -24,7 +23,11 @@ namespace Me.Amon.Gtd.V
         }
         #endregion
 
-        public MGtd MGtd { get; set; }
+        public MGtd MGtd
+        {
+            get;
+            set;
+        }
 
         #region 事件处理
         private void GtdEditor_Load(object sender, EventArgs e)
@@ -34,39 +37,99 @@ namespace Me.Amon.Gtd.V
                 MGtd = new MGtd();
             }
 
-            CbType.Items.Add(new Itemi { K = 0, V = "请选择" });
-            CbType.Items.Add(new Itemi { K = CGtd.TYPE_MAJOR_TIME, V = "时间" });
-            CbType.Items.Add(new Itemi { K = CGtd.TYPE_MAJOR_EVENT, V = "事件" });
-            CbType.Items.Add(new Itemi { K = CGtd.TYPE_MAJOR_FORMULA, V = "公式" });
+            TbTitle.Text = MGtd.Title;
+            switch (MGtd.Type)
+            {
+                case CGtd.TYPE_MAJOR_EVENT:
+                    RbEvent.Checked = true;
+                    break;
+                case CGtd.TYPE_MAJOR_MATHS:
+                    RbMaths.Checked = true;
+                    break;
+                default:
+                    RbDate.Checked = true;
+                    break;
+            }
+            switch (MGtd.HintType)
+            {
+                case CGtd.HINT_TYPE_APPS:
+                    RbApps.Checked = true;
+                    break;
+                case CGtd.HINT_TYPE_MAIL:
+                    RbMail.Checked = true;
+                    break;
+                default:
+                    RbTips.Checked = true;
+                    break;
+            }
         }
 
-        private void CbType_SelectedIndexChanged(object sender, EventArgs e)
+        private void RbDate_CheckedChanged(object sender, EventArgs e)
         {
-            Itemi item = CbType.SelectedItem as Itemi;
-            if (item == null || item.K <= 0)
-            {
-                return;
-            }
+            MGtd.Type = CGtd.TYPE_MAJOR_POINT;
+            ShowDate(CGtd.TYPE_MAJOR_POINT);
+        }
 
-            ShowDate(item.K);
+        private void RbEvent_CheckedChanged(object sender, EventArgs e)
+        {
+            MGtd.Type = CGtd.TYPE_MAJOR_EVENT;
+            ShowDate(CGtd.TYPE_MAJOR_EVENT);
+        }
+
+        private void RbMaths_CheckedChanged(object sender, EventArgs e)
+        {
+            MGtd.Type = CGtd.TYPE_MAJOR_MATHS;
+            ShowDate(CGtd.TYPE_MAJOR_MATHS);
+        }
+
+        private void RbTips_CheckedChanged(object sender, EventArgs e)
+        {
+            ShowHint(CGtd.HINT_TYPE_TIPS);
+        }
+
+        private void RbApps_CheckedChanged(object sender, EventArgs e)
+        {
+            ShowHint(CGtd.HINT_TYPE_APPS);
+        }
+
+        private void RbMail_CheckedChanged(object sender, EventArgs e)
+        {
+            ShowHint(CGtd.HINT_TYPE_MAIL);
         }
 
         private void BtOk_Click(object sender, EventArgs e)
         {
-            IDate edit = null;
-            if (edit == null)
+            string text = TbTitle.Text.Trim();
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                Main.ShowAlert("请输入提醒标题！");
+                TbTitle.Focus();
+                return;
+            }
+            MGtd.Title = text;
+
+            if (MGtd.Type == 0)
+            {
+                Main.ShowAlert("请选择提醒方案！");
+                return;
+            }
+
+            if (_IDate == null || !_IDate.SaveData(MGtd))
+            {
+                return;
+            }
+            if (_IHint == null || !_IHint.SaveData(MGtd))
             {
                 return;
             }
 
-            if (edit.SaveData(MGtd))
-            {
-                Close();
-            }
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void BtNo_Click(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.Cancel;
             Close();
         }
         #endregion
@@ -74,16 +137,21 @@ namespace Me.Amon.Gtd.V
         #region 私有函数
         private void ShowDate(int type)
         {
-            IDate iDate;
+            if (_IDate != null)
+            {
+                GpDate.Controls.Remove(_IDate.Control);
+            }
+
             switch (type)
             {
-                case CGtd.TYPE_MAJOR_TIME:
+                case CGtd.TYPE_MAJOR_POINT:
                     if (_UtDates == null)
                     {
-                        _UtDates = new UtDates();
+                        _UtDates = new UtPoint();
                         _UtDates.Dock = DockStyle.Fill;
                     }
-                    iDate = _UtDates;
+                    GpDate.Text = "时间";
+                    _IDate = _UtDates;
                     break;
                 case CGtd.TYPE_MAJOR_EVENT:
                     if (_UtEvent == null)
@@ -91,26 +159,24 @@ namespace Me.Amon.Gtd.V
                         _UtEvent = new UtEvent();
                         _UtEvent.Dock = DockStyle.Fill;
                     }
-                    iDate = _UtEvent;
+                    GpDate.Text = "事件";
+                    _IDate = _UtEvent;
                     break;
-                case CGtd.TYPE_MAJOR_FORMULA:
+                case CGtd.TYPE_MAJOR_MATHS:
                     if (_UtMaths == null)
                     {
                         _UtMaths = new UtMaths();
                         _UtMaths.Dock = DockStyle.Fill;
                     }
-                    iDate = _UtMaths;
+                    GpDate.Text = "公式";
+                    _IDate = _UtMaths;
                     break;
                 default:
                     return;
             }
 
-            if (_IDate != null)
-            {
-                GpTime.Controls.Remove(_IDate.Control);
-            }
-            _IDate = iDate;
-            GpTime.Controls.Add(_IDate.Control);
+            GpDate.Controls.Add(_IDate.Control);
+            _IDate.ShowData(MGtd);
         }
 
         private void ShowHint(int type)
@@ -118,10 +184,10 @@ namespace Me.Amon.Gtd.V
             IHint iHint;
             switch (type)
             {
-                case CGtd.TYPE_MAJOR_TIME:
+                case CGtd.TYPE_MAJOR_POINT:
                     if (_UhAlert == null)
                     {
-                        _UhAlert = new UhAlert();
+                        _UhAlert = new UhTips();
                         _UhAlert.Dock = DockStyle.Fill;
                     }
                     iHint = _UhAlert;
@@ -134,10 +200,10 @@ namespace Me.Amon.Gtd.V
                     }
                     iHint = _UhApps;
                     break;
-                case CGtd.TYPE_MAJOR_FORMULA:
+                case CGtd.TYPE_MAJOR_MATHS:
                     if (_UhEmail == null)
                     {
-                        _UhEmail = new UhEmail();
+                        _UhEmail = new UhMail();
                         _UhEmail.Dock = DockStyle.Fill;
                     }
                     iHint = _UhEmail;

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Config;
+using Me.Amon.Gtd;
 using Me.Amon.Model;
 using Me.Amon.Pwd;
 using Me.Amon.Ren;
 using Me.Amon.Util;
-using Me.Amon.Gtd;
 
 namespace Me.Amon.Da
 {
@@ -333,7 +333,11 @@ namespace Me.Amon.Da
             IList<MGtd> gtds = Container.Query<MGtd>(
                 delegate(MGtd gtd)
                 {
-                    return CharUtil.IsValidateHash(gtd.Id) && gtd.Status > CGtd.GTD_STAT_ERROR;
+                    if (gtd.UserCode != _UserModel.Code)
+                    {
+                        return false;
+                    }
+                    return CharUtil.IsValidateHash(gtd.Id) && gtd.Status > CGtd.GTD_STAT_EXPIRED;
                 });
             return gtds;
         }

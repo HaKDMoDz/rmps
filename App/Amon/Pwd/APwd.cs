@@ -101,7 +101,7 @@ namespace Me.Amon.Pwd
             FbFind.APwd = this;
 
             // 当前时间
-            UcTime.Start();
+            UcTimer.Start();
 
             // 视图模式
             switch (_ViewModel.Pattern)
@@ -262,9 +262,21 @@ namespace Me.Amon.Pwd
             {
                 return;
             }
-
-            ListKey(node.Name);
             _LastNode = node;
+
+            Cat cat = node.Tag as Cat;
+            if (cat == null || string.IsNullOrWhiteSpace(cat.Meta))
+            {
+                ListKey(node.Name);
+                return;
+            }
+
+            string meta = cat.Meta.ToLower();
+            if (meta.StartsWith("task:"))
+            {
+                ListGtd(meta.Substring(5));
+                return;
+            }
         }
 
         private void TvCatTree_ItemDrag(object sender, ItemDragEventArgs e)
@@ -617,14 +629,12 @@ namespace Me.Amon.Pwd
             DateTime now = DateTime.Now;
             TssTime.Text = now.ToString(EApp.DATEIME_FORMAT);
 
-
             if (_Delay-- > 0)
             {
                 return;
             }
 
-
-            _Delay = 5;
+            _Delay = 50000;
             if (_GtdList == null)
             {
                 _GtdList = _UserModel.DBA.FindKeyByGtd();
@@ -635,16 +645,15 @@ namespace Me.Amon.Pwd
             foreach (MGtd gtd in _GtdList)
             {
                 stat = gtd.Test(now, 43200);//12 * 60 * 60
-                if (stat == 0)
+                if (stat == CGtd.GTD_STAT_ONTIME)
                 {
                     todoCnt += 1;
                 }
-                else if (stat == -1)
+                else if (stat == CGtd.GTD_STAT_EXPIRED)
                 {
                     pastCnt += 1;
                 }
             }
-
 
             TssEcho.Text = string.Format("您有{0}个过期事项及{1}个待办事项", pastCnt, todoCnt);
         }
@@ -1133,7 +1142,14 @@ namespace Me.Amon.Pwd
             _SafeModel.Encode();
             _SafeModel.Key.AccessTime = DateTime.Now.ToString(EApp.DATEIME_FORMAT);
             _UserModel.DBA.SaveVcs(_SafeModel.Key);
+            if (_SafeModel.Key.Gtd != null)
+            {
+                _SafeModel.Key.Gtd.RefId = _SafeModel.Key.Id;
+                _UserModel.DBA.SaveVcs(_SafeModel.Key.Gtd);
+            }
             _SafeModel.Modified = false;
+
+            _Delay = 0;
 
             _PwdView.ShowInfo();
 
@@ -1193,6 +1209,48 @@ namespace Me.Amon.Pwd
             _SafeModel.Modified = false;
             _SafeModel.Key = null;
             _PwdView.ShowInfo();
+        }
+
+        public void ListGtd(string meta)
+        {
+            Match match = Regex.Match(meta, "^\\d+");
+            if (!match.Success)
+            {
+                return;
+            }
+            string str = match.Value;
+            meta = meta.Substring(str.Length);
+            int tmp = 0;
+            switch (meta)
+            {
+                case "second":
+                    tmp = 1;
+                    break;
+                case "minute":
+                    tmp = 60;
+                    break;
+                case "hour":
+                    tmp = 3600;
+                    break;
+                case "day":
+                    tmp = 86400;
+                    break;
+                case "week":
+                    tmp = 604800;
+                    break;
+            }
+            tmp *= int.Parse(str);
+
+            IList<MGtd> gtds = _UserModel.DBA.FindKeyByGtd();
+            DateTime now = DateTime.Now;
+            List<string> pwdIds = new List<string>();
+            foreach (MGtd gtd in gtds)
+            {
+                if (CGtd.GTD_STAT_ONTIME == gtd.Test(now, tmp))
+                {
+                    pwdIds.Add(gtd.RefId);
+                }
+            }
         }
 
         public void ListKey(string catId)
@@ -2580,5 +2638,10 @@ namespace Me.Amon.Pwd
             _ViewModel.Save();
         }
         #endregion
+
+        private void BgWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+
+        }
     }
 }

@@ -35,10 +35,12 @@
             this.LbIcon = new System.Windows.Forms.Label();
             this.PbLogo = new System.Windows.Forms.PictureBox();
             this.LbHint = new System.Windows.Forms.Label();
-            this.TbHint = new System.Windows.Forms.TextBox();
+            this.BtHint = new System.Windows.Forms.PictureBox();
+            this.TbHint = new System.Windows.Forms.Label();
             this.LbMemo = new System.Windows.Forms.Label();
             this.TbMemo = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtHint)).BeginInit();
             this.SuspendLayout();
             // 
             // LbName
@@ -106,31 +108,43 @@
             this.LbHint.TabIndex = 6;
             this.LbHint.Text = "提醒(&H)";
             // 
+            // BtHint
+            // 
+            this.BtHint.BackColor = System.Drawing.SystemColors.Window;
+            this.BtHint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BtHint.Location = new System.Drawing.Point(63, 120);
+            this.BtHint.Name = "BtHint";
+            this.BtHint.Size = new System.Drawing.Size(18, 18);
+            this.BtHint.TabIndex = 7;
+            this.BtHint.TabStop = false;
+            this.BtHint.Click += new System.EventHandler(this.BtHint_Click);
+            // 
             // TbHint
             // 
-            this.TbHint.Location = new System.Drawing.Point(63, 120);
+            this.TbHint.AutoSize = true;
+            this.TbHint.Location = new System.Drawing.Point(87, 123);
             this.TbHint.Name = "TbHint";
-            this.TbHint.Size = new System.Drawing.Size(120, 21);
-            this.TbHint.TabIndex = 7;
+            this.TbHint.Size = new System.Drawing.Size(0, 12);
+            this.TbHint.TabIndex = 8;
             // 
             // LbMemo
             // 
             this.LbMemo.AutoSize = true;
-            this.LbMemo.Location = new System.Drawing.Point(10, 150);
+            this.LbMemo.Location = new System.Drawing.Point(10, 147);
             this.LbMemo.Name = "LbMemo";
             this.LbMemo.Size = new System.Drawing.Size(47, 12);
-            this.LbMemo.TabIndex = 8;
+            this.LbMemo.TabIndex = 9;
             this.LbMemo.Text = "备注(&R)";
             // 
             // TbMemo
             // 
             this.TbMemo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TbMemo.Location = new System.Drawing.Point(63, 147);
+            this.TbMemo.Location = new System.Drawing.Point(63, 144);
             this.TbMemo.Multiline = true;
             this.TbMemo.Name = "TbMemo";
             this.TbMemo.Size = new System.Drawing.Size(284, 60);
-            this.TbMemo.TabIndex = 9;
+            this.TbMemo.TabIndex = 10;
             // 
             // BeanHead
             // 
@@ -139,6 +153,7 @@
             this.Controls.Add(this.TbMemo);
             this.Controls.Add(this.LbMemo);
             this.Controls.Add(this.TbHint);
+            this.Controls.Add(this.BtHint);
             this.Controls.Add(this.LbHint);
             this.Controls.Add(this.PbLogo);
             this.Controls.Add(this.LbIcon);
@@ -149,6 +164,7 @@
             this.Name = "BeanHead";
             this.Size = new System.Drawing.Size(350, 250);
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,7 +179,8 @@
         private System.Windows.Forms.Label LbIcon;
         private System.Windows.Forms.PictureBox PbLogo;
         private System.Windows.Forms.Label LbHint;
-        private System.Windows.Forms.TextBox TbHint;
+        private System.Windows.Forms.PictureBox BtHint;
+        private System.Windows.Forms.Label TbHint;
         private System.Windows.Forms.Label LbMemo;
         private System.Windows.Forms.TextBox TbMemo;
 

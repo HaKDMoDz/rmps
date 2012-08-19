@@ -226,6 +226,12 @@
     <Compile Include="Gtd\V\Uc\UcMonth.Designer.cs">
       <DependentUpon>UcMonth.cs</DependentUpon>
     </Compile>
+    <Compile Include="Gtd\V\Uc\UcNone.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gtd\V\Uc\UcNone.Designer.cs">
+      <DependentUpon>UcNone.cs</DependentUpon>
+    </Compile>
     <Compile Include="Gtd\V\Uc\UcSecond.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -244,11 +250,11 @@
     <Compile Include="Gtd\V\Uc\UcYear.Designer.cs">
       <DependentUpon>UcYear.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gtd\V\UhAlert.cs">
+    <Compile Include="Gtd\V\UhTips.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Gtd\V\UhAlert.Designer.cs">
-      <DependentUpon>UhAlert.cs</DependentUpon>
+    <Compile Include="Gtd\V\UhTips.Designer.cs">
+      <DependentUpon>UhTips.cs</DependentUpon>
     </Compile>
     <Compile Include="Gtd\V\UhApps.cs">
       <SubType>UserControl</SubType>
@@ -256,11 +262,11 @@
     <Compile Include="Gtd\V\UhApps.Designer.cs">
       <DependentUpon>UhApps.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gtd\V\UhEmail.cs">
+    <Compile Include="Gtd\V\UhMail.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Gtd\V\UhEmail.Designer.cs">
-      <DependentUpon>UhEmail.cs</DependentUpon>
+    <Compile Include="Gtd\V\UhMail.Designer.cs">
+      <DependentUpon>UhMail.cs</DependentUpon>
     </Compile>
     <Compile Include="Gtd\V\UtEvent.cs">
       <SubType>UserControl</SubType>
@@ -274,11 +280,11 @@
     <Compile Include="Gtd\V\UtMaths.Designer.cs">
       <DependentUpon>UtMaths.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gtd\V\UtDates.cs">
+    <Compile Include="Gtd\V\UtPoint.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Gtd\V\UtDates.Designer.cs">
-      <DependentUpon>UtDates.cs</DependentUpon>
+    <Compile Include="Gtd\V\UtPoint.Designer.cs">
+      <DependentUpon>UtPoint.cs</DependentUpon>
     </Compile>
     <Compile Include="Ico\EIco.cs" />
     <Compile Include="Ico\E\AIcoAction.cs" />
@@ -1233,11 +1239,17 @@
     <EmbeddedResource Include="Gtd\V\Uc\UcYear.resx">
       <DependentUpon>UcYear.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gtd\V\UhAlert.resx">
-      <DependentUpon>UhAlert.cs</DependentUpon>
+    <EmbeddedResource Include="Gtd\V\UhApps.resx">
+      <DependentUpon>UhApps.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gtd\V\UtDates.resx">
-      <DependentUpon>UtDates.cs</DependentUpon>
+    <EmbeddedResource Include="Gtd\V\UhMail.resx">
+      <DependentUpon>UhMail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gtd\V\UhTips.resx">
+      <DependentUpon>UhTips.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gtd\V\UtPoint.resx">
+      <DependentUpon>UtPoint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gtd\V\UtEvent.resx">
       <DependentUpon>UtEvent.cs</DependentUpon>

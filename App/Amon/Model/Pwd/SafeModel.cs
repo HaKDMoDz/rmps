@@ -320,6 +320,7 @@ namespace Me.Amon.Model.Pwd
             HintAtt hint = new HintAtt();
             hint.Text = _Key.GtdMemo;
             hint.Data = _Key.GtdId;
+            hint.Gtd = _Key.Gtd;
             list.Add(hint);
 
             // 处理每一个数据
@@ -374,6 +375,7 @@ namespace Me.Amon.Model.Pwd
             HintAtt hint = (HintAtt)_AttList[Att.PWDS_HEAD_HINT];
             _Key.GtdId = hint.Data;
             _Key.GtdMemo = hint.Text;
+            _Key.Gtd = hint.Gtd;
 
             // 字符串拼接
             StringBuilder buf = new StringBuilder();

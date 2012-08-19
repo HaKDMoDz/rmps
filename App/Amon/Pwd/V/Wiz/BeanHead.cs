@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Event;
+using Me.Amon.Gtd.V;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
 using Me.Amon.Pwd._Att;
@@ -38,7 +39,6 @@ namespace Me.Amon.Pwd.V.Wiz
 
             TbName.GotFocus += new EventHandler(TbName_GotFocus);
             TbMeta.GotFocus += new EventHandler(TbMeta_GotFocus);
-            TbHint.GotFocus += new EventHandler(TbHint_GotFocus);
             TbMemo.GotFocus += new EventHandler(TbMemo_GotFocus);
         }
         #endregion
@@ -98,7 +98,7 @@ namespace Me.Amon.Pwd.V.Wiz
             {
                 return;
             }
-            TbHint.Text = hint.Data;
+            TbHint.Text = hint.Gtd == null ? "<无提醒>" : hint.Gtd.Title;
 
             Focus();
         }
@@ -195,6 +195,20 @@ namespace Me.Amon.Pwd.V.Wiz
             _AWiz.ShowIcoSeeker(_DataModel.KeyDir, new AmonHandler<Png>(ChangeImgByKey));
         }
 
+        private void BtHint_Click(object sender, EventArgs e)
+        {
+            if (_SafeModel.Hint.Gtd == null)
+            {
+                _SafeModel.Hint.Gtd = new Gtd.MGtd();
+            }
+            GtdEditor editor = new GtdEditor();
+            editor.MGtd = _SafeModel.Hint.Gtd;
+            if (DialogResult.OK == editor.ShowDialog())
+            {
+                TbHint.Text = "";
+            }
+        }
+
         private void TbName_GotFocus(object sender, EventArgs e)
         {
             _TBox = TbName;
@@ -203,11 +217,6 @@ namespace Me.Amon.Pwd.V.Wiz
         private void TbMeta_GotFocus(object sender, EventArgs e)
         {
             _TBox = TbMeta;
-        }
-
-        private void TbHint_GotFocus(object sender, EventArgs e)
-        {
-            _TBox = TbHint;
         }
 
         private void TbMemo_GotFocus(object sender, EventArgs e)

@@ -4,7 +4,7 @@ namespace Me.Amon.Pwd._Att
 {
     public class HintAtt : Att
     {
-        public MGtd GtdHeader { get; set; }
+        public MGtd Gtd { get; set; }
 
         public HintAtt()
             : base(TYPE_HINT, "", "")

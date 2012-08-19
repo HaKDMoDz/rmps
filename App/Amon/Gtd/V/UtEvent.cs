@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Me.Amon.Gtd.V
 {
@@ -24,10 +17,41 @@ namespace Me.Amon.Gtd.V
 
         public void ShowData(MGtd mgtd)
         {
+            if (mgtd == null)
+            {
+                return;
+            }
+            foreach (int val in mgtd.Events)
+            {
+                if (val == CGtd.EVENT_LOAD)
+                {
+                    CkLoad.Checked = true;
+                    continue;
+                }
+                if (val == CGtd.EVENT_EXIT)
+                {
+                    CkExit.Checked = true;
+                    continue;
+                }
+            }
         }
 
         public bool SaveData(MGtd mgtd)
         {
+            mgtd.Events.Clear();
+            if (CkLoad.Checked)
+            {
+                mgtd.Events.Add(CGtd.EVENT_LOAD);
+            }
+            if (CkExit.Checked)
+            {
+                mgtd.Events.Add(CGtd.EVENT_EXIT);
+            }
+            if (mgtd.Events.Count < 1)
+            {
+                Main.ShowAlert("请至少选择一个事件！");
+                return false;
+            }
             return true;
         }
         #endregion

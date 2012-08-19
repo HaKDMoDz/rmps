@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Windows.Forms;
+using Me.Amon.Gtd;
+using Me.Amon.Gtd.V;
 using Me.Amon.Model;
 using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd._Att;
 using Me.Amon.Util;
-using Me.Amon.Gtd.V;
 
 namespace Me.Amon.Pwd.V.Pro
 {
     public partial class BeanHint : UserControl, IAttEdit
     {
         private APro _APro;
-        private Att _Att;
+        private HintAtt _Att;
 
         #region 构造函数
         public BeanHint()
@@ -38,14 +40,13 @@ namespace Me.Amon.Pwd.V.Pro
 
         public bool ShowData(Att att)
         {
-            _Att = att;
+            _Att = att as HintAtt;
 
             if (_Att != null)
             {
-                //TbName.Text = _Att.Text;
+                LlHint.Text = _Att.Gtd == null ? "<无提醒>" : _Att.Gtd.Title;
                 TbData.Text = _Att.Data;
             }
-
             return true;
         }
 
@@ -94,7 +95,6 @@ namespace Me.Amon.Pwd.V.Pro
                 _Att.Data = TbData.Text;
                 _Att.Modified = true;
             }
-
             return true;
         }
         #endregion
@@ -102,8 +102,17 @@ namespace Me.Amon.Pwd.V.Pro
         #region 事件处理
         private void BtName_Click(object sender, EventArgs e)
         {
+            if (_Att.Gtd == null)
+            {
+                _Att.Gtd = new MGtd();
+            }
+
             GtdEditor detail = new GtdEditor();
-            detail.ShowDialog();
+            detail.MGtd = _Att.Gtd;
+            if (DialogResult.OK == detail.ShowDialog())
+            {
+                LlHint.Text = _Att.Gtd.Title;
+            }
         }
         #endregion
     }

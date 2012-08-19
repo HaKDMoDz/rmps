@@ -117,29 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="MbMenu.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  <metadata name="MbMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
-  </data>
-  <data name="SsEcho.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  </metadata>
+  <metadata name="SsEcho.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>121, 17</value>
-  </data>
-  <data name="CmCat.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  </metadata>
+  <metadata name="CmCat.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>411, 17</value>
-  </data>
-  <data name="IlCatTree.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  </metadata>
+  <metadata name="IlCatTree.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>307, 17</value>
-  </data>
-  <data name="TbTool.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  </metadata>
+  <metadata name="TbTool.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>214, 17</value>
-  </data>
-  <data name="CmKey.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  </metadata>
+  <metadata name="CmKey.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>502, 17</value>
-  </data>
-  <data name="TpTips.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  </metadata>
+  <metadata name="TpTips.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>595, 17</value>
-  </data>
-  <data name="UcTime.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  </metadata>
+  <metadata name="UcTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>685, 17</value>
-  </data>
+  </metadata>
+  <metadata name="BgWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>786, 17</value>
+  </metadata>
 </root>

@@ -41,11 +41,12 @@
             this.IlCatTree = new System.Windows.Forms.ImageList(this.components);
             this.LbKeyList = new System.Windows.Forms.ListBox();
             this.PlBody = new System.Windows.Forms.Panel();
+            this.FbFind = new Me.Amon.Pwd.Bean.FindBar();
             this.TbTool = new System.Windows.Forms.ToolStrip();
             this.CmKey = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
-            this.UcTime = new System.Windows.Forms.Timer(this.components);
-            this.FbFind = new Me.Amon.Pwd.Bean.FindBar();
+            this.UcTimer = new System.Windows.Forms.Timer(this.components);
+            this.BgWorker = new System.ComponentModel.BackgroundWorker();
             this.SsEcho.SuspendLayout();
             this.TcTool.ContentPanel.SuspendLayout();
             this.TcTool.TopToolStripPanel.SuspendLayout();
@@ -190,8 +191,8 @@
             this.LbKeyList.Size = new System.Drawing.Size(220, 165);
             this.LbKeyList.TabIndex = 0;
             this.LbKeyList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.LbKeyList_DrawItem);
-            this.LbKeyList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LbKeyList_MouseUp);
             this.LbKeyList.SelectedIndexChanged += new System.EventHandler(this.LbKeyList_SelectedIndexChanged);
+            this.LbKeyList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LbKeyList_MouseUp);
             // 
             // PlBody
             // 
@@ -200,6 +201,15 @@
             this.PlBody.Name = "PlBody";
             this.PlBody.Size = new System.Drawing.Size(340, 292);
             this.PlBody.TabIndex = 1;
+            // 
+            // FbFind
+            // 
+            this.FbFind.APwd = null;
+            this.FbFind.Dock = System.Windows.Forms.DockStyle.Top;
+            this.FbFind.Location = new System.Drawing.Point(0, 0);
+            this.FbFind.Name = "FbFind";
+            this.FbFind.Size = new System.Drawing.Size(340, 29);
+            this.FbFind.TabIndex = 0;
             // 
             // TbTool
             // 
@@ -214,29 +224,23 @@
             this.CmKey.Name = "CmKey";
             this.CmKey.Size = new System.Drawing.Size(61, 4);
             // 
-            // UcTime
+            // UcTimer
             // 
-            this.UcTime.Tick += new System.EventHandler(this.UcTime_Tick);
+            this.UcTimer.Tick += new System.EventHandler(this.UcTime_Tick);
             // 
-            // FbFind
+            // BgWorker
             // 
-            this.FbFind.APwd = null;
-            this.FbFind.Dock = System.Windows.Forms.DockStyle.Top;
-            this.FbFind.Location = new System.Drawing.Point(0, 0);
-            this.FbFind.Name = "FbFind";
-            this.FbFind.Size = new System.Drawing.Size(340, 29);
-            this.FbFind.TabIndex = 0;
+            this.BgWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BgWorker_DoWork);
             // 
             // APwd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 412);
             this.Controls.Add(this.TcTool);
             this.Controls.Add(this.SsEcho);
             this.Controls.Add(this.MbMenu);
             this.Name = "APwd";
-            this.Text = "阿木密码箱";
+            this.Size = new System.Drawing.Size(584, 412);
             this.SsEcho.ResumeLayout(false);
             this.SsEcho.PerformLayout();
             this.TcTool.ContentPanel.ResumeLayout(false);
@@ -273,9 +277,10 @@
         private System.Windows.Forms.ContextMenuStrip CmCat;
         private System.Windows.Forms.ContextMenuStrip CmKey;
         private System.Windows.Forms.ToolTip TpTips;
-        private System.Windows.Forms.Timer UcTime;
+        private System.Windows.Forms.Timer UcTimer;
         private System.Windows.Forms.ToolStripStatusLabel TssEcho;
         private System.Windows.Forms.ToolStripStatusLabel TssTime;
+        private System.ComponentModel.BackgroundWorker BgWorker;
 
     }
 }

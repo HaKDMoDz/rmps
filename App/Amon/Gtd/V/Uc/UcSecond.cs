@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Me.Amon.Gtd.V.Uc
@@ -21,11 +15,51 @@ namespace Me.Amon.Gtd.V.Uc
 
         public void ShowData(MGtd mgtd)
         {
+            if (mgtd != null)
+            {
+                if (mgtd.RedoType == CGtd.TYPE_MINOR_EACH)
+                {
+                    RbEach.Checked = true;
+                    SpEach.Value = mgtd.EachValue;
+                    return;
+                }
+
+                if (mgtd.RedoType == CGtd.TYPE_MINOR_WHEN)
+                {
+                    RbWhen.Checked = true;
+                    foreach (int val in mgtd.WhenValues)
+                    {
+                        SpWhen.Value = val;
+                    }
+                    return;
+                }
+            }
+            RbEach.Checked = true;
         }
 
         public bool SaveData(MGtd mgtd)
         {
-            return true;
+            if (mgtd == null)
+            {
+                return false;
+            }
+
+            if (RbEach.Checked)
+            {
+                mgtd.RedoType = CGtd.TYPE_MINOR_EACH;
+                mgtd.EachValue = decimal.ToInt32(SpEach.Value);
+                return true;
+            }
+
+            if (RbWhen.Checked)
+            {
+                mgtd.RedoType = CGtd.TYPE_MINOR_WHEN;
+                mgtd.WhenValues.Clear();
+                mgtd.WhenValues.Add(decimal.ToInt32(SpWhen.Value));
+                return true;
+            }
+
+            return false;
         }
         #endregion
 

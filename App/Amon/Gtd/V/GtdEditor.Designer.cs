@@ -31,16 +31,19 @@
             this.LbTitle = new System.Windows.Forms.Label();
             this.TbTitle = new System.Windows.Forms.TextBox();
             this.LbType = new System.Windows.Forms.Label();
-            this.CbType = new System.Windows.Forms.ComboBox();
-            this.GpTime = new System.Windows.Forms.GroupBox();
+            this.GpDate = new System.Windows.Forms.GroupBox();
             this.GpHint = new System.Windows.Forms.GroupBox();
+            this.NpHint = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.RbMail = new System.Windows.Forms.RadioButton();
+            this.RbApps = new System.Windows.Forms.RadioButton();
+            this.RbTips = new System.Windows.Forms.RadioButton();
             this.BtOk = new System.Windows.Forms.Button();
             this.BtNo = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.NpHint = new System.Windows.Forms.Panel();
+            this.RbDate = new System.Windows.Forms.RadioButton();
+            this.RbEvent = new System.Windows.Forms.RadioButton();
+            this.RbMaths = new System.Windows.Forms.RadioButton();
+            this.CkControl = new System.Windows.Forms.CheckBox();
             this.GpHint.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,106 +60,55 @@
             // 
             this.TbTitle.Location = new System.Drawing.Point(65, 12);
             this.TbTitle.Name = "TbTitle";
-            this.TbTitle.Size = new System.Drawing.Size(100, 21);
+            this.TbTitle.Size = new System.Drawing.Size(171, 21);
             this.TbTitle.TabIndex = 1;
             // 
             // LbType
             // 
             this.LbType.AutoSize = true;
-            this.LbType.Location = new System.Drawing.Point(12, 42);
+            this.LbType.Location = new System.Drawing.Point(12, 41);
             this.LbType.Name = "LbType";
             this.LbType.Size = new System.Drawing.Size(47, 12);
             this.LbType.TabIndex = 2;
-            this.LbType.Text = "类型(&T)";
+            this.LbType.Text = "方案(&S)";
             // 
-            // CbType
+            // GpDate
             // 
-            this.CbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CbType.FormattingEnabled = true;
-            this.CbType.Location = new System.Drawing.Point(65, 39);
-            this.CbType.Name = "CbType";
-            this.CbType.Size = new System.Drawing.Size(121, 20);
-            this.CbType.TabIndex = 3;
-            this.CbType.SelectedIndexChanged += new System.EventHandler(this.CbType_SelectedIndexChanged);
-            // 
-            // GpTime
-            // 
-            this.GpTime.Location = new System.Drawing.Point(12, 65);
-            this.GpTime.Name = "GpTime";
-            this.GpTime.Size = new System.Drawing.Size(306, 150);
-            this.GpTime.TabIndex = 4;
-            this.GpTime.TabStop = false;
-            this.GpTime.Text = "时间";
+            this.GpDate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GpDate.Location = new System.Drawing.Point(12, 65);
+            this.GpDate.Name = "GpDate";
+            this.GpDate.Size = new System.Drawing.Size(310, 180);
+            this.GpDate.TabIndex = 6;
+            this.GpDate.TabStop = false;
+            this.GpDate.Text = "时间";
             // 
             // GpHint
             // 
+            this.GpHint.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.GpHint.Controls.Add(this.NpHint);
             this.GpHint.Controls.Add(this.label1);
-            this.GpHint.Controls.Add(this.radioButton3);
-            this.GpHint.Controls.Add(this.radioButton2);
-            this.GpHint.Controls.Add(this.radioButton1);
-            this.GpHint.Location = new System.Drawing.Point(12, 221);
+            this.GpHint.Controls.Add(this.RbMail);
+            this.GpHint.Controls.Add(this.RbApps);
+            this.GpHint.Controls.Add(this.RbTips);
+            this.GpHint.Location = new System.Drawing.Point(12, 251);
             this.GpHint.Name = "GpHint";
-            this.GpHint.Size = new System.Drawing.Size(306, 100);
-            this.GpHint.TabIndex = 5;
+            this.GpHint.Size = new System.Drawing.Size(310, 100);
+            this.GpHint.TabIndex = 7;
             this.GpHint.TabStop = false;
             this.GpHint.Text = "提示";
             // 
-            // BtOk
+            // NpHint
             // 
-            this.BtOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtOk.Location = new System.Drawing.Point(164, 364);
-            this.BtOk.Name = "BtOk";
-            this.BtOk.Size = new System.Drawing.Size(75, 23);
-            this.BtOk.TabIndex = 6;
-            this.BtOk.Text = "确定(&O)";
-            this.BtOk.UseVisualStyleBackColor = true;
-            this.BtOk.Click += new System.EventHandler(this.BtOk_Click);
-            // 
-            // BtNo
-            // 
-            this.BtNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtNo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.BtNo.Location = new System.Drawing.Point(245, 364);
-            this.BtNo.Name = "BtNo";
-            this.BtNo.Size = new System.Drawing.Size(75, 23);
-            this.BtNo.TabIndex = 7;
-            this.BtNo.Text = "取消(&C)";
-            this.BtNo.UseVisualStyleBackColor = true;
-            this.BtNo.Click += new System.EventHandler(this.BtNo_Click);
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(6, 20);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(65, 16);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "消息(&I)";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(6, 42);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(65, 16);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "应用(&S)";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(6, 64);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(65, 16);
-            this.radioButton3.TabIndex = 2;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "邮件(&M)";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.NpHint.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NpHint.Location = new System.Drawing.Point(85, 20);
+            this.NpHint.Name = "NpHint";
+            this.NpHint.Size = new System.Drawing.Size(219, 74);
+            this.NpHint.TabIndex = 4;
             // 
             // label1
             // 
@@ -166,15 +118,103 @@
             this.label1.Size = new System.Drawing.Size(2, 80);
             this.label1.TabIndex = 3;
             // 
-            // NpHint
+            // RbMail
             // 
-            this.NpHint.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.NpHint.Location = new System.Drawing.Point(85, 20);
-            this.NpHint.Name = "NpHint";
-            this.NpHint.Size = new System.Drawing.Size(215, 74);
-            this.NpHint.TabIndex = 4;
+            this.RbMail.AutoSize = true;
+            this.RbMail.Enabled = false;
+            this.RbMail.Location = new System.Drawing.Point(6, 64);
+            this.RbMail.Name = "RbMail";
+            this.RbMail.Size = new System.Drawing.Size(65, 16);
+            this.RbMail.TabIndex = 2;
+            this.RbMail.TabStop = true;
+            this.RbMail.Text = "邮件(&M)";
+            this.RbMail.UseVisualStyleBackColor = true;
+            this.RbMail.CheckedChanged += new System.EventHandler(this.RbMail_CheckedChanged);
+            // 
+            // RbApps
+            // 
+            this.RbApps.AutoSize = true;
+            this.RbApps.Location = new System.Drawing.Point(6, 42);
+            this.RbApps.Name = "RbApps";
+            this.RbApps.Size = new System.Drawing.Size(65, 16);
+            this.RbApps.TabIndex = 1;
+            this.RbApps.TabStop = true;
+            this.RbApps.Text = "应用(&A)";
+            this.RbApps.UseVisualStyleBackColor = true;
+            this.RbApps.CheckedChanged += new System.EventHandler(this.RbApps_CheckedChanged);
+            // 
+            // RbTips
+            // 
+            this.RbTips.AutoSize = true;
+            this.RbTips.Location = new System.Drawing.Point(6, 20);
+            this.RbTips.Name = "RbTips";
+            this.RbTips.Size = new System.Drawing.Size(65, 16);
+            this.RbTips.TabIndex = 0;
+            this.RbTips.TabStop = true;
+            this.RbTips.Text = "消息(&I)";
+            this.RbTips.UseVisualStyleBackColor = true;
+            this.RbTips.CheckedChanged += new System.EventHandler(this.RbTips_CheckedChanged);
+            // 
+            // BtOk
+            // 
+            this.BtOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtOk.Location = new System.Drawing.Point(166, 357);
+            this.BtOk.Name = "BtOk";
+            this.BtOk.Size = new System.Drawing.Size(75, 23);
+            this.BtOk.TabIndex = 8;
+            this.BtOk.Text = "确定(&O)";
+            this.BtOk.UseVisualStyleBackColor = true;
+            this.BtOk.Click += new System.EventHandler(this.BtOk_Click);
+            // 
+            // BtNo
+            // 
+            this.BtNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtNo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.BtNo.Location = new System.Drawing.Point(247, 357);
+            this.BtNo.Name = "BtNo";
+            this.BtNo.Size = new System.Drawing.Size(75, 23);
+            this.BtNo.TabIndex = 9;
+            this.BtNo.Text = "取消(&C)";
+            this.BtNo.UseVisualStyleBackColor = true;
+            this.BtNo.Click += new System.EventHandler(this.BtNo_Click);
+            // 
+            // RbDate
+            // 
+            this.RbDate.Location = new System.Drawing.Point(65, 39);
+            this.RbDate.Name = "RbDate";
+            this.RbDate.Size = new System.Drawing.Size(47, 16);
+            this.RbDate.TabIndex = 3;
+            this.RbDate.Text = "时间";
+            this.RbDate.CheckedChanged += new System.EventHandler(this.RbDate_CheckedChanged);
+            // 
+            // RbEvent
+            // 
+            this.RbEvent.Location = new System.Drawing.Point(118, 39);
+            this.RbEvent.Name = "RbEvent";
+            this.RbEvent.Size = new System.Drawing.Size(47, 16);
+            this.RbEvent.TabIndex = 4;
+            this.RbEvent.Text = "事件";
+            this.RbEvent.CheckedChanged += new System.EventHandler(this.RbEvent_CheckedChanged);
+            // 
+            // RbMaths
+            // 
+            this.RbMaths.Enabled = false;
+            this.RbMaths.Location = new System.Drawing.Point(171, 39);
+            this.RbMaths.Name = "RbMaths";
+            this.RbMaths.Size = new System.Drawing.Size(47, 16);
+            this.RbMaths.TabIndex = 5;
+            this.RbMaths.Text = "公式";
+            this.RbMaths.CheckedChanged += new System.EventHandler(this.RbMaths_CheckedChanged);
+            // 
+            // CkControl
+            // 
+            this.CkControl.AutoSize = true;
+            this.CkControl.Location = new System.Drawing.Point(12, 361);
+            this.CkControl.Name = "CkControl";
+            this.CkControl.Size = new System.Drawing.Size(78, 16);
+            this.CkControl.TabIndex = 10;
+            this.CkControl.Text = "checkBox1";
+            this.CkControl.UseVisualStyleBackColor = true;
             // 
             // GtdEditor
             // 
@@ -182,12 +222,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.BtNo;
-            this.ClientSize = new System.Drawing.Size(332, 399);
+            this.ClientSize = new System.Drawing.Size(334, 392);
+            this.Controls.Add(this.CkControl);
             this.Controls.Add(this.BtNo);
             this.Controls.Add(this.BtOk);
             this.Controls.Add(this.GpHint);
-            this.Controls.Add(this.GpTime);
-            this.Controls.Add(this.CbType);
+            this.Controls.Add(this.GpDate);
+            this.Controls.Add(this.RbMaths);
+            this.Controls.Add(this.RbEvent);
+            this.Controls.Add(this.RbDate);
             this.Controls.Add(this.LbType);
             this.Controls.Add(this.TbTitle);
             this.Controls.Add(this.LbTitle);
@@ -195,6 +238,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GtdEditor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "提醒";
             this.Load += new System.EventHandler(this.GtdEditor_Load);
             this.GpHint.ResumeLayout(false);
@@ -209,16 +253,19 @@
         private System.Windows.Forms.Label LbTitle;
         private System.Windows.Forms.TextBox TbTitle;
         private System.Windows.Forms.Label LbType;
-        private System.Windows.Forms.ComboBox CbType;
-        private System.Windows.Forms.GroupBox GpTime;
+        private System.Windows.Forms.GroupBox GpDate;
         private System.Windows.Forms.GroupBox GpHint;
         private System.Windows.Forms.Button BtOk;
         private System.Windows.Forms.Button BtNo;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton RbMail;
+        private System.Windows.Forms.RadioButton RbApps;
+        private System.Windows.Forms.RadioButton RbTips;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel NpHint;
+        private System.Windows.Forms.RadioButton RbDate;
+        private System.Windows.Forms.RadioButton RbEvent;
+        private System.Windows.Forms.RadioButton RbMaths;
+        private System.Windows.Forms.CheckBox CkControl;
 
     }
 }

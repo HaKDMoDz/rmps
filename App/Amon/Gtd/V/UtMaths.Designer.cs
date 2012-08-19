@@ -28,34 +28,52 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.LlMaths = new System.Windows.Forms.Label();
+            this.TbMaths = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // label1
+            // LlMaths
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "公式";
+            this.LlMaths.AutoSize = true;
+            this.LlMaths.Location = new System.Drawing.Point(3, 6);
+            this.LlMaths.Name = "LlMaths";
+            this.LlMaths.Size = new System.Drawing.Size(29, 12);
+            this.LlMaths.TabIndex = 0;
+            this.LlMaths.Text = "公式";
             // 
-            // textBox1
+            // TbMaths
             // 
-            this.textBox1.Location = new System.Drawing.Point(38, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
-            this.textBox1.TabIndex = 1;
+            this.TbMaths.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TbMaths.Location = new System.Drawing.Point(38, 3);
+            this.TbMaths.Name = "TbMaths";
+            this.TbMaths.Size = new System.Drawing.Size(263, 21);
+            this.TbMaths.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.label2.Location = new System.Drawing.Point(3, 27);
+            this.label2.Multiline = true;
+            this.label2.Name = "label2";
+            this.label2.ReadOnly = true;
+            this.label2.Size = new System.Drawing.Size(298, 130);
+            this.label2.TabIndex = 2;
+            this.label2.TabStop = false;
             // 
             // UtMaths
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.TbMaths);
+            this.Controls.Add(this.LlMaths);
             this.Name = "UtMaths";
-            this.Size = new System.Drawing.Size(296, 150);
+            this.Size = new System.Drawing.Size(304, 160);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -63,7 +81,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label LlMaths;
+        private System.Windows.Forms.TextBox TbMaths;
+        private System.Windows.Forms.TextBox label2;
     }
 }

@@ -45,7 +45,7 @@
             this.LlWhen.Name = "LlWhen";
             this.LlWhen.Size = new System.Drawing.Size(17, 12);
             this.LlWhen.TabIndex = 23;
-            this.LlWhen.Text = "时";
+            this.LlWhen.Text = "月";
             // 
             // SpWhen
             // 
@@ -78,7 +78,7 @@
             this.LlEach.Name = "LlEach";
             this.LlEach.Size = new System.Drawing.Size(17, 12);
             this.LlEach.TabIndex = 20;
-            this.LlEach.Text = "时";
+            this.LlEach.Text = "月";
             // 
             // SpEach
             // 

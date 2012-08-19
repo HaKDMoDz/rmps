@@ -37,9 +37,9 @@
             this.CkLoad.AutoSize = true;
             this.CkLoad.Location = new System.Drawing.Point(3, 3);
             this.CkLoad.Name = "CkLoad";
-            this.CkLoad.Size = new System.Drawing.Size(48, 16);
+            this.CkLoad.Size = new System.Drawing.Size(60, 16);
             this.CkLoad.TabIndex = 0;
-            this.CkLoad.Text = "启动";
+            this.CkLoad.Text = "启动后";
             this.CkLoad.UseVisualStyleBackColor = true;
             // 
             // CkExit
@@ -47,9 +47,9 @@
             this.CkExit.AutoSize = true;
             this.CkExit.Location = new System.Drawing.Point(3, 25);
             this.CkExit.Name = "CkExit";
-            this.CkExit.Size = new System.Drawing.Size(48, 16);
+            this.CkExit.Size = new System.Drawing.Size(60, 16);
             this.CkExit.TabIndex = 1;
-            this.CkExit.Text = "退出";
+            this.CkExit.Text = "退出前";
             this.CkExit.UseVisualStyleBackColor = true;
             // 
             // UtEvent
@@ -59,7 +59,7 @@
             this.Controls.Add(this.CkExit);
             this.Controls.Add(this.CkLoad);
             this.Name = "UtEvent";
-            this.Size = new System.Drawing.Size(346, 150);
+            this.Size = new System.Drawing.Size(304, 160);
             this.ResumeLayout(false);
             this.PerformLayout();
 

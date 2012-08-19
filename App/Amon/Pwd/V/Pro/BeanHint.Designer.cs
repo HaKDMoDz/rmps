@@ -32,6 +32,7 @@
             this.BtHint = new System.Windows.Forms.Button();
             this.LbData = new System.Windows.Forms.Label();
             this.TbData = new System.Windows.Forms.TextBox();
+            this.LlHint = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LbText
@@ -74,10 +75,20 @@
             this.TbData.Size = new System.Drawing.Size(307, 48);
             this.TbData.TabIndex = 3;
             // 
+            // LlHint
+            // 
+            this.LlHint.AutoSize = true;
+            this.LlHint.Location = new System.Drawing.Point(83, 7);
+            this.LlHint.Name = "LlHint";
+            this.LlHint.Size = new System.Drawing.Size(53, 12);
+            this.LlHint.TabIndex = 4;
+            this.LlHint.Text = "<无提醒>";
+            // 
             // BeanHint
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.LlHint);
             this.Controls.Add(this.TbData);
             this.Controls.Add(this.LbData);
             this.Controls.Add(this.BtHint);
@@ -95,5 +106,6 @@
         private System.Windows.Forms.Button BtHint;
         private System.Windows.Forms.Label LbData;
         private System.Windows.Forms.TextBox TbData;
+        private System.Windows.Forms.Label LlHint;
     }
 }
