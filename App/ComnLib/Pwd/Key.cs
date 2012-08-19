@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Xml;
+using Me.Amon.Gtd;
 using Me.Amon.Model;
 
 namespace Me.Amon.Pwd
@@ -86,6 +87,8 @@ namespace Me.Amon.Pwd
         /// 用户数据
         /// </summary>
         public string Password { get; set; }
+
+        public MGtd Gtd { get; set; }
 
         /// <summary>
         /// 恢复默认值
