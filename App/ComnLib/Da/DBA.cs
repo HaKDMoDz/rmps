@@ -86,6 +86,8 @@ namespace Me.Amon.Da
 
         IList<MGtd> FindKeyByGtd();
 
+        IList<MGtd> FindKeyByGtdExpired();
+
         IList<MRen> ListRen();
     }
 }
