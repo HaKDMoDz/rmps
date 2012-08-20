@@ -42,6 +42,7 @@ namespace Me.Amon.Da
                     config.Common.ObjectClass(typeof(Key)).ObjectField("Title").Indexed(true);
                     config.Common.ObjectClass(typeof(Key)).ObjectField("MetaKey").Indexed(true);
                     config.Common.ObjectClass(typeof(Lib)).CascadeOnUpdate(true);
+                    config.Common.ObjectClass(typeof(MGtd)).CascadeOnUpdate(true);
                     bool isNew = File.Exists(_DbPath);
                     _Container = Db4oEmbedded.OpenFile(config, _DbPath);
                     if (isNew)
@@ -337,7 +338,21 @@ namespace Me.Amon.Da
                     {
                         return false;
                     }
-                    return CharUtil.IsValidateHash(gtd.Id) && gtd.Status > CGtd.GTD_STAT_EXPIRED;
+                    return CharUtil.IsValidateHash(gtd.Id) && gtd.Status > CGtd.GTD_STAT_FINISHED;
+                });
+            return gtds;
+        }
+
+        public IList<MGtd> FindKeyByGtdExpired()
+        {
+            IList<MGtd> gtds = Container.Query<MGtd>(
+                delegate(MGtd gtd)
+                {
+                    if (gtd.UserCode != _UserModel.Code)
+                    {
+                        return false;
+                    }
+                    return gtd.Status == CGtd.GTD_STAT_EXPIRED;
                 });
             return gtds;
         }

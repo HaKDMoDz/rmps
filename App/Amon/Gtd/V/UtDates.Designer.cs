@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Gtd.V
 {
-    partial class UtPoint
+    partial class UtDates
     {
         /// <summary> 
         /// 必需的设计器变量。

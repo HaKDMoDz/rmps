@@ -5,12 +5,12 @@ using Me.Amon.Uc;
 
 namespace Me.Amon.Gtd.V
 {
-    public partial class UtPoint : UserControl, IDate
+    public partial class UtDates : UserControl, IDate
     {
-        private MGtd _MGtd;
+        private MGtdDates _Dates;
         private ITime _ITime;
 
-        public UtPoint()
+        public UtDates()
         {
             InitializeComponent();
 
@@ -32,24 +32,30 @@ namespace Me.Amon.Gtd.V
             get { return this; }
         }
 
-        public void ShowData(MGtd mgtd)
+        public MGtd MGtd { get; set; }
+
+        public void ShowData()
         {
-            _MGtd = mgtd;
-            if (_MGtd == null)
+            if (MGtd == null)
             {
                 return;
             }
 
-            if (_MGtd.Start > DtStart.MinDate && _MGtd.Start < DtStart.MaxDate)
+            _Dates = MGtd.Dates;
+            if (_Dates == null)
             {
-                DtStart.Value = _MGtd.Start;
+                _Dates = new MGtdDates();
             }
-            CbRedoUnit.SelectedItem = new Itemi { K = _MGtd.RedoUnit };
+            if (_Dates.Start > DtStart.MinDate && _Dates.Start < DtStart.MaxDate)
+            {
+                DtStart.Value = _Dates.Start;
+            }
+            CbRedoUnit.SelectedItem = new Itemi { K = _Dates.RedoUnit };
         }
 
-        public bool SaveData(MGtd mgtd)
+        public bool SaveData()
         {
-            if (mgtd == null || _ITime == null)
+            if (MGtd == null || _ITime == null)
             {
                 return false;
             }
@@ -62,17 +68,18 @@ namespace Me.Amon.Gtd.V
                 return false;
             }
 
-            mgtd.Start = DtStart.Value;
-            if (mgtd.Start.Kind == DateTimeKind.Unspecified)
+            _Dates.Start = DtStart.Value;
+            if (_Dates.Start.Kind == DateTimeKind.Unspecified)
             {
-                DateTime.SpecifyKind(mgtd.Start, DateTimeKind.Local);
+                DateTime.SpecifyKind(_Dates.Start, DateTimeKind.Local);
             }
-            mgtd.RedoUnit = item.K;
+            _Dates.RedoUnit = item.K;
 
-            if (!_ITime.SaveData(mgtd))
+            if (!_ITime.SaveData(_Dates))
             {
                 return false;
             }
+            MGtd.Dates = _Dates;
             return true;
         }
         #endregion
@@ -176,7 +183,7 @@ namespace Me.Amon.Gtd.V
             }
 
             Controls.Add(_ITime.Control);
-            _ITime.ShowData(_MGtd);
+            _ITime.ShowData(_Dates);
         }
 
         private void InitView(Control control)

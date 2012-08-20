@@ -640,22 +640,18 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            _Delay = 50000;
-            if (_GtdList == null)
-            {
-                _GtdList = _UserModel.DBA.FindKeyByGtd();
-            }
-            int stat;
+            _Delay = 5;
+            _GtdList = _UserModel.DBA.FindKeyByGtd();
             int pastCnt = 0;
             int todoCnt = 0;
             foreach (MGtd gtd in _GtdList)
             {
-                stat = gtd.Test(now, 43200);//12 * 60 * 60
-                if (stat == CGtd.GTD_STAT_ONTIME)
+                gtd.Init();
+                if (gtd.Test(now, 43200))//12 * 60 * 60
                 {
                     todoCnt += 1;
                 }
-                else if (stat == CGtd.GTD_STAT_EXPIRED)
+                else if (gtd.Status == CGtd.GTD_STAT_EXPIRED)
                 {
                     pastCnt += 1;
                 }
@@ -1217,6 +1213,17 @@ namespace Me.Amon.Pwd
             _PwdView.ShowInfo();
         }
 
+        public void ListGtdExpired()
+        {
+            IList<MGtd> gtds = _UserModel.DBA.FindKeyByGtdExpired();
+            List<Key> keys = new List<Key>();
+            foreach (MGtd gtd in gtds)
+            {
+                keys.Add(_UserModel.DBA.ReadKey(gtd.RefId));
+            }
+            DoInitKey(keys);
+        }
+
         public void ListGtd(string meta)
         {
             Match match = Regex.Match(meta, "^\\d+");
@@ -1227,40 +1234,41 @@ namespace Me.Amon.Pwd
 
             meta = meta.Substring(match.Value.Length);
             int tmp = int.Parse(match.Value);
-            DateTime end = DateTime.Now;
+            DateTime now = DateTime.Now;
+            DateTime end;
             switch (meta)
             {
                 case "second":
-                    end.AddSeconds(tmp);
+                    end = now.AddSeconds(tmp);
                     break;
                 case "minute":
-                    end.AddMinutes(tmp);
+                    end = now.AddMinutes(tmp);
                     break;
                 case "hour":
-                    end.AddHours(tmp);
+                    end = now.AddHours(tmp);
                     break;
                 case "day":
-                    end.AddDays(tmp);
+                    end = now.AddDays(tmp);
                     break;
                 case "week":
-                    end.AddDays(tmp * 7);
+                    end = now.AddDays(tmp * 7);
                     break;
                 case "month":
-                    end.AddMonths(tmp);
+                    end = now.AddMonths(tmp);
                     break;
                 case "year":
-                    end.AddYears(tmp);
+                    end = now.AddYears(tmp);
                     break;
                 default:
                     return;
             }
 
+            int length = (int)Math.Ceiling((end - now).TotalSeconds);
             IList<MGtd> gtds = _UserModel.DBA.FindKeyByGtd();
-            DateTime now = DateTime.Now;
             List<Key> keys = new List<Key>();
             foreach (MGtd gtd in gtds)
             {
-                if (CGtd.GTD_STAT_ONTIME == gtd.Test(now, end))
+                if (gtd.Test(now, length))
                 {
                     keys.Add(_UserModel.DBA.ReadKey(gtd.RefId));
                 }

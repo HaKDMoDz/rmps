@@ -280,11 +280,11 @@
     <Compile Include="Gtd\V\UtMaths.Designer.cs">
       <DependentUpon>UtMaths.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gtd\V\UtPoint.cs">
+    <Compile Include="Gtd\V\UtDates.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Gtd\V\UtPoint.Designer.cs">
-      <DependentUpon>UtPoint.cs</DependentUpon>
+    <Compile Include="Gtd\V\UtDates.Designer.cs">
+      <DependentUpon>UtDates.cs</DependentUpon>
     </Compile>
     <Compile Include="Ico\EIco.cs" />
     <Compile Include="Ico\E\AIcoAction.cs" />
@@ -1248,8 +1248,8 @@
     <EmbeddedResource Include="Gtd\V\UhTips.resx">
       <DependentUpon>UhTips.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gtd\V\UtPoint.resx">
-      <DependentUpon>UtPoint.cs</DependentUpon>
+    <EmbeddedResource Include="Gtd\V\UtDates.resx">
+      <DependentUpon>UtDates.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gtd\V\UtEvent.resx">
       <DependentUpon>UtEvent.cs</DependentUpon>

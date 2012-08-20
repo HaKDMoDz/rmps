@@ -197,15 +197,12 @@ namespace Me.Amon.Pwd.V.Wiz
 
         private void BtHint_Click(object sender, EventArgs e)
         {
-            if (_SafeModel.Hint.Gtd == null)
-            {
-                _SafeModel.Hint.Gtd = new Gtd.MGtd();
-            }
             GtdEditor editor = new GtdEditor();
             editor.MGtd = _SafeModel.Hint.Gtd;
             if (DialogResult.OK == editor.ShowDialog())
             {
-                TbHint.Text = "";
+                _SafeModel.Hint.Gtd = editor.MGtd;
+                TbHint.Text = _SafeModel.Hint.Gtd == null ? "<无提醒>" : _SafeModel.Hint.Gtd.Title;
             }
         }
 

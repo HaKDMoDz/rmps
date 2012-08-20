@@ -4,6 +4,8 @@ namespace Me.Amon.Gtd.V
 {
     public partial class UtEvent : UserControl, IDate
     {
+        private MGtdEvent _Event;
+
         public UtEvent()
         {
             InitializeComponent();
@@ -15,13 +17,21 @@ namespace Me.Amon.Gtd.V
             get { return this; }
         }
 
-        public void ShowData(MGtd mgtd)
+        public MGtd MGtd { get; set; }
+
+        public void ShowData()
         {
-            if (mgtd == null)
+            if (MGtd == null)
             {
                 return;
             }
-            foreach (int val in mgtd.Events)
+
+            _Event = MGtd.Event;
+            if (_Event == null)
+            {
+                _Event = new MGtdEvent();
+            }
+            foreach (int val in _Event.Events)
             {
                 if (val == CGtd.EVENT_LOAD)
                 {
@@ -36,22 +46,28 @@ namespace Me.Amon.Gtd.V
             }
         }
 
-        public bool SaveData(MGtd mgtd)
+        public bool SaveData()
         {
-            mgtd.Events.Clear();
+            if (MGtd == null)
+            {
+                return false;
+            }
+
+            _Event.Events.Clear();
             if (CkLoad.Checked)
             {
-                mgtd.Events.Add(CGtd.EVENT_LOAD);
+                _Event.Events.Add(CGtd.EVENT_LOAD);
             }
             if (CkExit.Checked)
             {
-                mgtd.Events.Add(CGtd.EVENT_EXIT);
+                _Event.Events.Add(CGtd.EVENT_EXIT);
             }
-            if (mgtd.Events.Count < 1)
+            if (_Event.Events.Count < 1)
             {
                 Main.ShowAlert("请至少选择一个事件！");
                 return false;
             }
+            MGtd.Event = _Event;
             return true;
         }
         #endregion

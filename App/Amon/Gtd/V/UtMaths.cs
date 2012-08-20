@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Me.Amon.Gtd.V
 {
     public partial class UtMaths : UserControl, IDate
     {
+        private MGtdMaths _Maths;
+
         public UtMaths()
         {
             InitializeComponent();
@@ -24,12 +20,31 @@ namespace Me.Amon.Gtd.V
             get { return this; }
         }
 
-        public void ShowData(MGtd mgtd)
+        public MGtd MGtd { get; set; }
+
+        public void ShowData()
         {
+            if (MGtd == null)
+            {
+                return;
+            }
+            _Maths = MGtd.Maths;
+            if (_Maths == null)
+            {
+                _Maths = new MGtdMaths();
+            }
+            TbMaths.Text = _Maths.Maths;
         }
 
-        public bool SaveData(MGtd mgtd)
+        public bool SaveData()
         {
+            if (MGtd == null)
+            {
+                return false;
+            }
+
+            _Maths.Maths = TbMaths.Text;
+            MGtd.Maths = _Maths;
             return true;
         }
         #endregion

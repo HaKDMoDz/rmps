@@ -6,7 +6,7 @@ namespace Me.Amon.Gtd.V
     public partial class GtdEditor : Form
     {
         private IDate _IDate;
-        private UtPoint _UtDates;
+        private UtDates _UtDates;
         private UtEvent _UtEvent;
         private UtMaths _UtMaths;
         private IHint _IHint;
@@ -114,7 +114,7 @@ namespace Me.Amon.Gtd.V
                 return;
             }
 
-            if (_IDate == null || !_IDate.SaveData(MGtd))
+            if (_IDate == null || !_IDate.SaveData())
             {
                 return;
             }
@@ -147,7 +147,7 @@ namespace Me.Amon.Gtd.V
                 case CGtd.TYPE_MAJOR_POINT:
                     if (_UtDates == null)
                     {
-                        _UtDates = new UtPoint();
+                        _UtDates = new UtDates();
                         _UtDates.Dock = DockStyle.Fill;
                     }
                     GpDate.Text = "时间";
@@ -176,7 +176,8 @@ namespace Me.Amon.Gtd.V
             }
 
             GpDate.Controls.Add(_IDate.Control);
-            _IDate.ShowData(MGtd);
+            _IDate.MGtd = MGtd;
+            _IDate.ShowData();
         }
 
         private void ShowHint(int type)

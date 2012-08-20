@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Security.Cryptography;
@@ -6,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using Me.Amon.Da;
+using Me.Amon.Event;
 using Me.Amon.Util;
 
 namespace Me.Amon.Model
@@ -521,23 +523,6 @@ namespace Me.Amon.Model
         }
         #endregion
 
-        private char[] GenChar()
-        {
-            char[] c = new char[93];
-            char t = '!';
-            int i = 0;
-            while (i < 6)
-            {
-                c[i++] = t++;
-            }
-            t = '(';
-            while (i < 93)
-            {
-                c[i++] = t++;
-            }
-            return SafeUtil.NextRandomKey(c, 16, false);
-        }
-
         #region 数据安全
         private string Digest(string name, string pass)
         {
@@ -658,6 +643,23 @@ namespace Me.Amon.Model
         }
         #endregion
 
+        private char[] GenChar()
+        {
+            char[] c = new char[93];
+            char t = '!';
+            int i = 0;
+            while (i < 6)
+            {
+                c[i++] = t++;
+            }
+            t = '(';
+            while (i < 93)
+            {
+                c[i++] = t++;
+            }
+            return SafeUtil.NextRandomKey(c, 16, false);
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -681,10 +683,37 @@ namespace Me.Amon.Model
             //DFAccess dfa = new DFAccess();
             //dfa.Init(this);
             //_DFA = dfa;
+
+            _Timer = new System.Threading.Timer(new System.Threading.TimerCallback(Timer_Callback), "", 10000, 5000);
         }
 
         public DBA DBA { get { return _DBA; } }
         //public DCAccess DCAccess { get { return _DCAccess; } }
         //public DFA DFA { get { return _DFA; } }
+
+        #region 任务提醒
+        private List<AmonHandler<string>> _Hints = new List<AmonHandler<string>>();
+        public void AppendHandler(AmonHandler<string> handler)
+        {
+            foreach (AmonHandler<string> h in _Hints)
+            {
+                if (h == handler)
+                {
+                    return;
+                }
+            }
+            _Hints.Add(handler);
+        }
+
+        public void RemoveHandler(AmonHandler<string> handler)
+        {
+            _Hints.Remove(handler);
+        }
+
+        private System.Threading.Timer _Timer;
+        private void Timer_Callback(object state)
+        {
+        }
+        #endregion
     }
 }
