@@ -47,12 +47,10 @@
     <Compile Include="Gtd\Hint\MAlert.cs" />
     <Compile Include="Gtd\Hint\MApp.cs" />
     <Compile Include="Gtd\Hint\MEmail.cs" />
-    <Compile Include="Gtd\MGtdEvent.cs" />
-    <Compile Include="Gtd\MGtdMaths.cs" />
-    <Compile Include="Gtd\MGtdDates.cs" />
-    <Compile Include="Gtd\Redo\MEach.cs" />
+    <Compile Include="Gtd\Time\Second.cs" />
+    <Compile Include="Gtd\Time\Hour.cs" />
+    <Compile Include="Gtd\Time\Minute.cs" />
     <Compile Include="Gtd\MGtd.cs" />
-    <Compile Include="Gtd\Redo\MWhen.cs" />
     <Compile Include="Ico\MIco.cs" />
     <Compile Include="Img\MImg.cs" />
     <Compile Include="Model\Dbv.cs" />

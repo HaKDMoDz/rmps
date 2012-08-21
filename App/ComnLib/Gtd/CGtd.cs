@@ -8,7 +8,7 @@ namespace Me.Amon.Gtd
         /// <summary>
         /// 时间型
         /// </summary>
-        public const int TYPE_MAJOR_POINT = 1;
+        public const int TYPE_MAJOR_DATES = 1;
         /// <summary>
         /// 事件型
         /// </summary>
@@ -62,9 +62,21 @@ namespace Me.Amon.Gtd
         /// </summary>
         public const int UNIT_MAJOR_MONTH = 6;
         /// <summary>
+        /// 季
+        /// </summary>
+        public const int UNIT_MAJOR_SEASON = 7;
+        /// <summary>
         /// 年
         /// </summary>
-        public const int UNIT_MAJOR_YEAR = 7;
+        public const int UNIT_MAJOR_YEAR = 8;
+        /// <summary>
+        /// 月周
+        /// </summary>
+        public const int UNIT_MAJOR_WEEKOFMONTH = 9;
+        /// <summary>
+        /// 年周
+        /// </summary>
+        public const int UNIT_MAJOR_WEEKOFYEAR = 10;
         #endregion
 
         #region 辅单位
@@ -113,15 +125,23 @@ namespace Me.Amon.Gtd
         /// <summary>
         /// 过期
         /// </summary>
-        public const int GTD_STAT_EXPIRED = 1;
+        public const int GTD_STAT_EXPIRED = 2;
+        /// <summary>
+        /// 到点
+        /// </summary>
+        public const int GTD_STAT_ONTIME = 1;
         /// <summary>
         /// 未到
         /// </summary>
         public const int GTD_STAT_NORMAL = 0;
         /// <summary>
-        /// 已完成
+        /// 暂停
         /// </summary>
-        public const int GTD_STAT_FINISHED = -1;
+        public const int GTD_STAT_SUSPEND = -1;
+        /// <summary>
+        /// 完成
+        /// </summary>
+        public const int GTD_STAT_FINISHED = -2;
         #endregion
 
         #region 事件
@@ -141,6 +161,21 @@ namespace Me.Amon.Gtd
         /// 退出前
         /// </summary>
         public const int EVENT_EXIT = 4;
+        #endregion
+
+        #region 结束
+        /// <summary>
+        /// 无结束
+        /// </summary>
+        public const int STOP_TYPE_NONE = 0;
+        /// <summary>
+        /// 循环
+        /// </summary>
+        public const int STOP_TYPE_LOOP = 1;
+        /// <summary>
+        /// 定时
+        /// </summary>
+        public const int STOP_TYPE_TIME = 2;
         #endregion
     }
 }
