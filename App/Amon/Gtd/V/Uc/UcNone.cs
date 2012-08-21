@@ -12,11 +12,11 @@ namespace Me.Amon.Gtd.V.Uc
         #region 接口实现
         public Control Control { get { return this; } }
 
-        public void ShowData(MGtdDates mgtd)
+        public void ShowData(MGtd mgtd)
         {
         }
 
-        public bool SaveData(MGtdDates mgtd)
+        public bool SaveData(MGtd mgtd)
         {
             return true;
         }

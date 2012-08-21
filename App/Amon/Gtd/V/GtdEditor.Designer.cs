@@ -32,19 +32,15 @@
             this.TbTitle = new System.Windows.Forms.TextBox();
             this.LbType = new System.Windows.Forms.Label();
             this.GpDate = new System.Windows.Forms.GroupBox();
-            this.GpHint = new System.Windows.Forms.GroupBox();
-            this.NpHint = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.RbMail = new System.Windows.Forms.RadioButton();
-            this.RbApps = new System.Windows.Forms.RadioButton();
-            this.RbTips = new System.Windows.Forms.RadioButton();
+            this.GpStop = new System.Windows.Forms.GroupBox();
             this.BtOk = new System.Windows.Forms.Button();
             this.BtNo = new System.Windows.Forms.Button();
             this.RbDate = new System.Windows.Forms.RadioButton();
             this.RbEvent = new System.Windows.Forms.RadioButton();
             this.RbMaths = new System.Windows.Forms.RadioButton();
-            this.CkControl = new System.Windows.Forms.CheckBox();
-            this.GpHint.SuspendLayout();
+            this.CkSwitch = new System.Windows.Forms.CheckBox();
+            this.UcStop = new Me.Amon.Gtd.V.UcStop();
+            this.GpStop.SuspendLayout();
             this.SuspendLayout();
             // 
             // LbTitle
@@ -60,7 +56,7 @@
             // 
             this.TbTitle.Location = new System.Drawing.Point(65, 12);
             this.TbTitle.Name = "TbTitle";
-            this.TbTitle.Size = new System.Drawing.Size(171, 21);
+            this.TbTitle.Size = new System.Drawing.Size(257, 21);
             this.TbTitle.TabIndex = 1;
             // 
             // LbType
@@ -82,78 +78,19 @@
             this.GpDate.Size = new System.Drawing.Size(310, 180);
             this.GpDate.TabIndex = 6;
             this.GpDate.TabStop = false;
-            this.GpDate.Text = "时间";
+            this.GpDate.Text = "周期";
             // 
-            // GpHint
+            // GpStop
             // 
-            this.GpHint.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.GpStop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.GpHint.Controls.Add(this.NpHint);
-            this.GpHint.Controls.Add(this.label1);
-            this.GpHint.Controls.Add(this.RbMail);
-            this.GpHint.Controls.Add(this.RbApps);
-            this.GpHint.Controls.Add(this.RbTips);
-            this.GpHint.Location = new System.Drawing.Point(12, 251);
-            this.GpHint.Name = "GpHint";
-            this.GpHint.Size = new System.Drawing.Size(310, 100);
-            this.GpHint.TabIndex = 7;
-            this.GpHint.TabStop = false;
-            this.GpHint.Text = "提示";
-            // 
-            // NpHint
-            // 
-            this.NpHint.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.NpHint.Location = new System.Drawing.Point(85, 20);
-            this.NpHint.Name = "NpHint";
-            this.NpHint.Size = new System.Drawing.Size(219, 74);
-            this.NpHint.TabIndex = 4;
-            // 
-            // label1
-            // 
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Location = new System.Drawing.Point(77, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(2, 80);
-            this.label1.TabIndex = 3;
-            // 
-            // RbMail
-            // 
-            this.RbMail.AutoSize = true;
-            this.RbMail.Enabled = false;
-            this.RbMail.Location = new System.Drawing.Point(6, 64);
-            this.RbMail.Name = "RbMail";
-            this.RbMail.Size = new System.Drawing.Size(65, 16);
-            this.RbMail.TabIndex = 2;
-            this.RbMail.TabStop = true;
-            this.RbMail.Text = "邮件(&M)";
-            this.RbMail.UseVisualStyleBackColor = true;
-            this.RbMail.CheckedChanged += new System.EventHandler(this.RbMail_CheckedChanged);
-            // 
-            // RbApps
-            // 
-            this.RbApps.AutoSize = true;
-            this.RbApps.Location = new System.Drawing.Point(6, 42);
-            this.RbApps.Name = "RbApps";
-            this.RbApps.Size = new System.Drawing.Size(65, 16);
-            this.RbApps.TabIndex = 1;
-            this.RbApps.TabStop = true;
-            this.RbApps.Text = "应用(&A)";
-            this.RbApps.UseVisualStyleBackColor = true;
-            this.RbApps.CheckedChanged += new System.EventHandler(this.RbApps_CheckedChanged);
-            // 
-            // RbTips
-            // 
-            this.RbTips.AutoSize = true;
-            this.RbTips.Location = new System.Drawing.Point(6, 20);
-            this.RbTips.Name = "RbTips";
-            this.RbTips.Size = new System.Drawing.Size(65, 16);
-            this.RbTips.TabIndex = 0;
-            this.RbTips.TabStop = true;
-            this.RbTips.Text = "消息(&I)";
-            this.RbTips.UseVisualStyleBackColor = true;
-            this.RbTips.CheckedChanged += new System.EventHandler(this.RbTips_CheckedChanged);
+            this.GpStop.Controls.Add(this.UcStop);
+            this.GpStop.Location = new System.Drawing.Point(12, 251);
+            this.GpStop.Name = "GpStop";
+            this.GpStop.Size = new System.Drawing.Size(310, 100);
+            this.GpStop.TabIndex = 7;
+            this.GpStop.TabStop = false;
+            this.GpStop.Text = "结束";
             // 
             // BtOk
             // 
@@ -206,15 +143,23 @@
             this.RbMaths.Text = "公式";
             this.RbMaths.CheckedChanged += new System.EventHandler(this.RbMaths_CheckedChanged);
             // 
-            // CkControl
+            // CkSwitch
             // 
-            this.CkControl.AutoSize = true;
-            this.CkControl.Location = new System.Drawing.Point(12, 361);
-            this.CkControl.Name = "CkControl";
-            this.CkControl.Size = new System.Drawing.Size(78, 16);
-            this.CkControl.TabIndex = 10;
-            this.CkControl.Text = "checkBox1";
-            this.CkControl.UseVisualStyleBackColor = true;
+            this.CkSwitch.AutoSize = true;
+            this.CkSwitch.Location = new System.Drawing.Point(12, 361);
+            this.CkSwitch.Name = "CkSwitch";
+            this.CkSwitch.Size = new System.Drawing.Size(84, 16);
+            this.CkSwitch.TabIndex = 10;
+            this.CkSwitch.Text = "保存为模板";
+            this.CkSwitch.UseVisualStyleBackColor = true;
+            // 
+            // UcStop
+            // 
+            this.UcStop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UcStop.Location = new System.Drawing.Point(3, 17);
+            this.UcStop.Name = "UcStop";
+            this.UcStop.Size = new System.Drawing.Size(304, 80);
+            this.UcStop.TabIndex = 0;
             // 
             // GtdEditor
             // 
@@ -223,10 +168,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.BtNo;
             this.ClientSize = new System.Drawing.Size(334, 392);
-            this.Controls.Add(this.CkControl);
+            this.Controls.Add(this.CkSwitch);
             this.Controls.Add(this.BtNo);
             this.Controls.Add(this.BtOk);
-            this.Controls.Add(this.GpHint);
+            this.Controls.Add(this.GpStop);
             this.Controls.Add(this.GpDate);
             this.Controls.Add(this.RbMaths);
             this.Controls.Add(this.RbEvent);
@@ -241,8 +186,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "提醒";
             this.Load += new System.EventHandler(this.GtdEditor_Load);
-            this.GpHint.ResumeLayout(false);
-            this.GpHint.PerformLayout();
+            this.GpStop.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -254,18 +198,14 @@
         private System.Windows.Forms.TextBox TbTitle;
         private System.Windows.Forms.Label LbType;
         private System.Windows.Forms.GroupBox GpDate;
-        private System.Windows.Forms.GroupBox GpHint;
+        private System.Windows.Forms.GroupBox GpStop;
         private System.Windows.Forms.Button BtOk;
         private System.Windows.Forms.Button BtNo;
-        private System.Windows.Forms.RadioButton RbMail;
-        private System.Windows.Forms.RadioButton RbApps;
-        private System.Windows.Forms.RadioButton RbTips;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel NpHint;
         private System.Windows.Forms.RadioButton RbDate;
         private System.Windows.Forms.RadioButton RbEvent;
         private System.Windows.Forms.RadioButton RbMaths;
-        private System.Windows.Forms.CheckBox CkControl;
+        private System.Windows.Forms.CheckBox CkSwitch;
+        private UcStop UcStop;
 
     }
 }

@@ -5,8 +5,6 @@ namespace Me.Amon.Gtd.V
 {
     public partial class UtMaths : UserControl, IDate
     {
-        private MGtdMaths _Maths;
-
         public UtMaths()
         {
             InitializeComponent();
@@ -28,12 +26,8 @@ namespace Me.Amon.Gtd.V
             {
                 return;
             }
-            _Maths = MGtd.Maths;
-            if (_Maths == null)
-            {
-                _Maths = new MGtdMaths();
-            }
-            TbMaths.Text = _Maths.Maths;
+
+            TbMaths.Text = MGtd.Maths;
         }
 
         public bool SaveData()
@@ -43,8 +37,7 @@ namespace Me.Amon.Gtd.V
                 return false;
             }
 
-            _Maths.Maths = TbMaths.Text;
-            MGtd.Maths = _Maths;
+            MGtd.Maths = TbMaths.Text;
             return true;
         }
         #endregion

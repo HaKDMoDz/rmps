@@ -13,7 +13,7 @@ namespace Me.Amon.Gtd.V.Uc
         #region 接口实现
         public Control Control { get { return this; } }
 
-        public void ShowData(MGtdDates mgtd)
+        public void ShowData(MGtd mgtd)
         {
             if (mgtd != null)
             {
@@ -37,7 +37,7 @@ namespace Me.Amon.Gtd.V.Uc
             RbEach.Checked = true;
         }
 
-        public bool SaveData(MGtdDates mgtd)
+        public bool SaveData(MGtd mgtd)
         {
             if (mgtd == null)
             {

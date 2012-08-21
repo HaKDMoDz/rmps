@@ -684,7 +684,7 @@ namespace Me.Amon.Model
             //dfa.Init(this);
             //_DFA = dfa;
 
-            _Timer = new System.Threading.Timer(new System.Threading.TimerCallback(Timer_Callback), "", 10000, 5000);
+            _Timer = new System.Threading.Timer(new System.Threading.TimerCallback(Timer_Callback), null, System.Threading.Timeout.Infinite, 5000);
         }
 
         public DBA DBA { get { return _DBA; } }

@@ -199,9 +199,22 @@
     <Compile Include="Gtd\V\GtdEditor.Designer.cs">
       <DependentUpon>GtdEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Gtd\V\IEnd.cs" />
     <Compile Include="Gtd\V\IHint.cs" />
     <Compile Include="Gtd\V\IDate.cs" />
     <Compile Include="Gtd\V\ITime.cs" />
+    <Compile Include="Gtd\V\UcHint.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gtd\V\UcHint.Designer.cs">
+      <DependentUpon>UcHint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gtd\V\UcStop.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gtd\V\UcStop.Designer.cs">
+      <DependentUpon>UcStop.cs</DependentUpon>
+    </Compile>
     <Compile Include="Gtd\V\Uc\UcDay.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1217,6 +1230,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Gtd\V\GtdEditor.resx">
       <DependentUpon>GtdEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gtd\V\UcHint.resx">
+      <DependentUpon>UcHint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gtd\V\UcStop.resx">
+      <DependentUpon>UcStop.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gtd\V\Uc\UcDay.resx">
       <DependentUpon>UcDay.cs</DependentUpon>

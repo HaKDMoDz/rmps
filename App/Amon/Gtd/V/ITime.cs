@@ -6,8 +6,8 @@ namespace Me.Amon.Gtd.V
     {
         Control Control { get; }
 
-        void ShowData(MGtdDates mgtd);
+        void ShowData(MGtd mgtd);
 
-        bool SaveData(MGtdDates mgtd);
+        bool SaveData(MGtd mgtd);
     }
 }
