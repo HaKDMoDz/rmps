@@ -40,12 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAction.cs" />
+    <Compile Include="IViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Uc\ItemGroup.cs" />
+    <Compile Include="Uc\KeyStroke.cs" />
     <Compile Include="Uc\TabControl\ATabControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -112,6 +116,7 @@
     <Compile Include="Uw\Waiting.Designer.cs">
       <DependentUpon>Waiting.cs</DependentUpon>
     </Compile>
+    <Compile Include="Uc\XmlMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
