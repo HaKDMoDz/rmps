@@ -165,17 +165,21 @@ namespace Me.Amon.Gtd
 
         #region 结束
         /// <summary>
-        /// 无结束
+        /// 无效
         /// </summary>
-        public const int STOP_TYPE_NONE = 0;
+        public const int END_TYPE_NONE = 0;
         /// <summary>
-        /// 循环
+        /// 永远
         /// </summary>
-        public const int STOP_TYPE_LOOP = 1;
+        public const int END_TYPE_EVER = 1;
+        /// <summary>
+        /// 重复
+        /// </summary>
+        public const int END_TYPE_LOOP = 2;
         /// <summary>
         /// 定时
         /// </summary>
-        public const int STOP_TYPE_TIME = 2;
+        public const int END_TYPE_TIME = 3;
         #endregion
     }
 }

@@ -35,24 +35,32 @@ namespace Me.Amon.Gtd
         /// </summary>
         public int Percent { get; set; }
         /// <summary>
+        /// 起始时间
+        /// </summary>
+        public DateTime StartTime { get; set; }
+        /// <summary>
         /// 相关说明
         /// </summary>
         public string Memo { get; set; }
         #endregion
 
-        #region 结束方式
+        #region 重复控制
         /// <summary>
-        /// 结束方式
+        /// 重复方式
         /// </summary>
-        public int StopType { get; set; }
+        public int EndType { get; set; }
         /// <summary>
-        /// 循环次数
+        /// 执行次数
         /// </summary>
-        public int Cycles { get; set; }
+        public int ExeCount { get; set; }
         /// <summary>
         /// 结束时间
         /// </summary>
         public DateTime EndTime { get; set; }
+        /// <summary>
+        /// 上次时间
+        /// </summary>
+        public DateTime LastTime { get; set; }
         #endregion
 
         #region 提醒方式
@@ -83,9 +91,6 @@ namespace Me.Amon.Gtd
         /// 前置任务
         /// </summary>
         public string PreGtd { get; set; }
-        #endregion
-
-        #region 对外接口
         /// <summary>
         /// 相关引用
         /// </summary>
@@ -94,13 +99,13 @@ namespace Me.Amon.Gtd
 
         public MGtd()
         {
-            WhenValues = new List<int>();
+            Dates = new List<ADates>();
 
             Events = new List<int>();
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="time"></param>
         /// <param name="length"></param>
@@ -128,20 +133,10 @@ namespace Me.Amon.Gtd
         }
 
         #region 时间型
-        #region 属性
-        #region 时间信息
-        /// <summary>
-        /// 起始时间
-        /// </summary>
-        public DateTime Start { get; set; }
         /// <summary>
         /// 下次时间
         /// </summary>
         public DateTime NextTime { get; set; }
-        /// <summary>
-        /// 上次时间
-        /// </summary>
-        public DateTime LastTime { get; set; }
         /// <summary>
         /// 是否提前
         /// </summary>
@@ -150,61 +145,40 @@ namespace Me.Amon.Gtd
         /// 提前间隔
         /// </summary>
         public int PreTime { get; set; }
-        #endregion
-
-        #region 重复提醒
-        /// <summary>
-        /// 重复单位
-        /// </summary>
-        public int RedoUnit { get; set; }
-        /// <summary>
-        /// 重复方式
-        /// </summary>
-        public int RedoType { get; set; }
-
-        #region 每隔重复
-        /// <summary>
-        /// 最大值
-        /// </summary>
-        public int MaxValue { get; private set; }
-        /// <summary>
-        /// 最小值
-        /// </summary>
-        public int MinValue { get; private set; }
-        /// <summary>
-        /// 每隔值
-        /// </summary>
-        public int EachValue { get; set; }
-        #endregion
-
-        #region 每到重复
-        /// <summary>
-        /// 参照单位
-        /// </summary>
-        public int ReferUnit { get; set; }
-        /// <summary>
-        /// 是否反向
-        /// </summary>
-        public bool Reverse { get; set; }
         /// <summary>
         /// 数值列表
         /// </summary>
-        public List<int> WhenValues { get; private set; }
-        #endregion
-        #endregion
-        #endregion
+        public List<ADates> Dates { get; private set; }
 
-        #region 函数
         public bool TestDates(DateTime time, int length)
         {
             // 计算下次提醒时间
-            if (NextTime == DateTime.MinValue)
+            //if (NextTime == DateTime.MinValue)
+            if (NextTime < StartTime)
             {
-                NextTime = Start;
+                NextTime = StartTime;
             }
             else if (Status == CGtd.GTD_STAT_NORMAL && NextTime < time)
             {
-                NextDates(NextTime);
+                bool changed = false;
+                foreach (ADates date in Dates)
+                {
+                    NextTime = date.Next(NextTime, out changed);
+                    if (!changed)
+                    {
+                        break;
+                    }
+                }
+
+                // 完成
+                if ((EndType == CGtd.END_TYPE_NONE && time > EndTime)
+                    || (EndType == CGtd.END_TYPE_LOOP && ExeCount < 1)
+                    || (EndType == CGtd.END_TYPE_TIME && (NextTime > EndTime || time > EndTime)))
+                {
+                    Status = CGtd.GTD_STAT_FINISHED;
+                    return true;
+                }
+                ExeCount -= 1;
             }
 
             // 判断是否过期
@@ -234,7 +208,7 @@ namespace Me.Amon.Gtd
                     time.AddDays(PreTime);
                     break;
                 case CGtd.UNIT_MAJOR_WEEK:
-                    time.AddDays(7 * PreTime);
+                    time.AddDays(PreTime * 7);
                     break;
                 case CGtd.UNIT_MAJOR_MONTH:
                     time.AddMonths(PreTime);
@@ -252,277 +226,12 @@ namespace Me.Amon.Gtd
             }
             return false;
         }
-
-        public void ChangeUnit(int unit)
-        {
-            switch (unit)
-            {
-                case CGtd.UNIT_MAJOR_SECOND:
-                    MaxValue = 59;
-                    MinValue = 0;
-                    break;
-                case CGtd.UNIT_MAJOR_MINUTE:
-                    MaxValue = 59;
-                    MinValue = 0;
-                    break;
-                case CGtd.UNIT_MAJOR_HOUR:
-                    MaxValue = 23;
-                    MinValue = 0;
-                    break;
-                case CGtd.UNIT_MAJOR_DAY:
-                    MaxValue = 31;
-                    MinValue = 1;
-                    break;
-                case CGtd.UNIT_MAJOR_WEEK:
-                    MaxValue = 59;
-                    MinValue = 0;
-                    break;
-                case CGtd.UNIT_MAJOR_MONTH:
-                    MaxValue = 12;
-                    MinValue = 1;
-                    break;
-                case CGtd.UNIT_MAJOR_YEAR:
-                    MaxValue = 100;
-                    MinValue = 0;
-                    break;
-            }
-        }
-
-        private void NextDates(DateTime time)
-        {
-            if (RedoType == CGtd.TYPE_MINOR_EACH)
-            {
-                switch (RedoUnit)
-                {
-                    // 间隔n秒
-                    case CGtd.UNIT_MAJOR_SECOND:
-                        NextTime = time.AddSeconds(EachValue);
-                        break;
-                    // 间隔n分
-                    case CGtd.UNIT_MAJOR_MINUTE:
-                        NextTime = time.AddMinutes(EachValue);
-                        break;
-                    // 间隔n时
-                    case CGtd.UNIT_MAJOR_HOUR:
-                        NextTime = time.AddHours(EachValue);
-                        break;
-                    // 间隔n天
-                    case CGtd.UNIT_MAJOR_DAY:
-                        NextTime = time.AddDays(EachValue);
-                        break;
-                    // 间隔n周
-                    case CGtd.UNIT_MAJOR_WEEK:
-                        NextTime = time.AddDays(EachValue * 7);
-                        break;
-                    // 间隔n月
-                    case CGtd.UNIT_MAJOR_MONTH:
-                        NextTime = time.AddMonths(EachValue);
-                        break;
-                    // 间隔n季
-                    case CGtd.UNIT_MAJOR_SEASON:
-                        break;
-                    // 间隔n年
-                    case CGtd.UNIT_MAJOR_YEAR:
-                        NextTime = time.AddYears(EachValue);
-                        break;
-                    default:
-                        break;
-                }
-                return;
-            }
-            if (RedoType == CGtd.TYPE_MINOR_WHEN)
-            {
-                int tmp;
-                switch (RedoUnit)
-                {
-                    // 每到n秒
-                    case CGtd.UNIT_MAJOR_SECOND:
-                        tmp = NextValue(time.Second);
-                        if (tmp > 0)
-                        {
-                            NextTime = NextTime.AddSeconds(tmp);
-                        }
-                        else
-                        {
-                            NextTime = NextTime.AddMinutes(1).AddSeconds(WhenValues[0] - time.Second);
-                        }
-                        break;
-                    // 每到n分
-                    case CGtd.UNIT_MAJOR_MINUTE:
-                        tmp = NextValue(time.Minute);
-                        if (tmp > 0)
-                        {
-                            NextTime = NextTime.AddMinutes(tmp);
-                        }
-                        else
-                        {
-                            NextTime = NextTime.AddHours(1).AddMinutes(WhenValues[0] - time.Minute);
-                        }
-                        break;
-                    // 每到n时
-                    case CGtd.UNIT_MAJOR_HOUR:
-                        tmp = NextValue(time.Hour);
-                        if (tmp > 0)
-                        {
-                            NextTime = NextTime.AddHours(tmp);
-                        }
-                        else
-                        {
-                            NextTime = NextTime.AddDays(1).AddHours(WhenValues[0] - time.Hour);
-                        }
-                        break;
-                    // 每到n天
-                    case CGtd.UNIT_MAJOR_DAY:
-                        tmp = NextValue(time.Day);
-                        if (tmp > 0)
-                        {
-                            NextTime = NextTime.AddDays(tmp);
-                        }
-                        else
-                        {
-                            NextTime = NextTime.AddMonths(1).AddDays(WhenValues[0] - time.Day);
-                        }
-                        break;
-                    // 每到n周
-                    case CGtd.UNIT_MAJOR_WEEK:
-                        tmp = NextValue(0);
-                        if (tmp > 0)
-                        {
-                            NextTime = NextTime.AddDays(tmp);
-                        }
-                        else
-                        {
-                            NextTime = NextTime.AddDays(7 + WhenValues[0] - (int)time.DayOfWeek);
-                            //if (ReferUnit == CGtd.UNIT_MINOR_BYMONTH)
-                            //{
-                            //    NextTime = NextTime.AddMonths(1);
-                            //    NextTime = GetWeekDayOfMonth(NextTime, 1, WhenValues[0]);
-                            //}
-                            //else if (ReferUnit == CGtd.UNIT_MINOR_BYSEASON)
-                            //{
-                            //}
-                            //else if (ReferUnit == CGtd.UNIT_MINOR_BYYEAR)
-                            //{
-                            //    NextTime = NextTime.AddYears(1);
-                            //    NextTime = GetWeekDayOfMonth(NextTime, 1, 0);
-                            //}
-                        }
-                        break;
-                    // 每到n月
-                    case CGtd.UNIT_MAJOR_MONTH:
-                        tmp = NextValue(time.Month);
-                        if (tmp > 0)
-                        {
-                            NextTime = NextTime.AddMonths(tmp);
-                        }
-                        else
-                        {
-                            NextTime = NextTime.AddYears(1).AddMonths(WhenValues[0] - time.Month);
-                        }
-                        break;
-                    // 间隔n季
-                    case CGtd.UNIT_MAJOR_SEASON:
-                        break;
-                    // 每到n年
-                    case CGtd.UNIT_MAJOR_YEAR:
-                        tmp = NextValue(time.Year);
-                        if (tmp > 0)
-                        {
-                            NextTime = NextTime.AddYears(tmp);
-                        }
-                        break;
-
-                    default:
-                        break;
-                }
-                return;
-            }
-        }
-
-        private int NextValue(int key)
-        {
-            foreach (int tmp in WhenValues)
-            {
-                if (key < tmp)
-                {
-                    return tmp - key;
-                }
-            }
-            return -1;
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="time"></param>
-        /// <param name="weekIndex">从0开始</param>
-        /// <param name="dayOfWeek"></param>
-        /// <returns></returns>
-        private static DateTime GetWeekDayOfMonth(DateTime time, int weekIndex, int dayOfWeek)
-        {
-            if (weekIndex > 0)
-            {
-                // 每周第一天星期几
-                time = time.AddDays(1 - time.Day);
-                int fdw = (int)time.DayOfWeek;
-
-                if (dayOfWeek < fdw)
-                {
-                    weekIndex++;
-                }
-
-                return time.AddDays(dayOfWeek - fdw + (weekIndex - 1) * 7);
-            }
-
-            if (weekIndex < 0)
-            {
-                time = time.AddDays(1 - time.Day).AddMonths(1);
-                int fdw = (int)time.DayOfWeek;
-
-                if (dayOfWeek > fdw)
-                {
-                    weekIndex--;
-                }
-
-                return time.AddDays(dayOfWeek - fdw + (weekIndex + 1) * 7);
-            }
-            return time;
-        }
-
-        private static DateTime GetWeekDayOfYear(DateTime time, int weekIndex, int dayOfWeek)
-        {
-            if (weekIndex > 0)
-            {
-                // 每周第一天星期几
-                time = time.AddDays(1 - time.DayOfYear);
-                int fdw = (int)time.DayOfWeek;
-
-                if (dayOfWeek < fdw)
-                {
-                    weekIndex++;
-                }
-
-                return time.AddDays(dayOfWeek - fdw + (weekIndex - 1) * 7);
-            }
-
-            if (weekIndex < 0)
-            {
-                time = time.AddDays(1 - time.DayOfYear).AddYears(1);
-                int fdw = (int)time.DayOfWeek;
-
-                if (dayOfWeek > fdw)
-                {
-                    weekIndex--;
-                }
-
-                return time.AddDays(dayOfWeek - fdw + (weekIndex + 1) * 7);
-            }
-            return time;
-        }
-        #endregion
         #endregion
 
         #region 事件型
+        /// <summary>
+        /// 事件列表
+        /// </summary>
         public List<int> Events { get; private set; }
 
         public bool TestEvent()
@@ -532,6 +241,9 @@ namespace Me.Amon.Gtd
         #endregion
 
         #region 公式型
+        /// <summary>
+        /// 计算公式 
+        /// </summary>
         public string Maths { get; set; }
 
         public bool TestMaths(DateTime time)
