@@ -493,7 +493,6 @@
     <Compile Include="Pwd\E\View\ToolbarVisibleAction.cs" />
     <Compile Include="Pwd\E\View\TopMostAction.cs" />
     <Compile Include="Pwd\E\View\WizPatternAction.cs" />
-    <Compile Include="IAction.cs" />
     <Compile Include="Pwd\E\_Cat\DemotionAction.cs" />
     <Compile Include="Pwd\E\_Cat\MoveDownAction.cs" />
     <Compile Include="Pwd\E\_Cat\MoveUpAction.cs" />
@@ -502,7 +501,6 @@
     <Compile Include="Pwd\E\_Key\ChangeMajorAction.cs" />
     <Compile Include="Pwd\E\_Key\SortDirAction.cs" />
     <Compile Include="Pwd\E\_Key\SortKeyAction.cs" />
-    <Compile Include="Pwd\M\ViewModel1.cs" />
     <Compile Include="Pwd\Png.cs" />
     <Compile Include="Pwd\_Att\CallAtt.cs" />
     <Compile Include="Da\DBAccess.cs" />
@@ -584,17 +582,17 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\SafeModel.cs" />
-    <Compile Include="Model\Pwd\DataModel.cs">
+    <Compile Include="Pwd\M\DataModel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Pwd\SafeModel.cs">
+    <Compile Include="Pwd\M\SafeModel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\UdcModel.cs" />
     <Compile Include="Model\UserModel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\ViewModel.cs">
+    <Compile Include="Pwd\M\ViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Program.cs" />
@@ -1038,10 +1036,7 @@
       <DependentUpon>ASpy.cs</DependentUpon>
     </Compile>
     <Compile Include="Uc\Card.cs" />
-    <Compile Include="Uc\ItemGroup.cs" />
     <Compile Include="Uc\Itemi.cs" />
-    <Compile Include="Uc\KeyStroke.cs" />
-    <Compile Include="Uc\XmlMenu.cs" />
     <Compile Include="Auth\Uc\AuthLk.cs">
       <SubType>UserControl</SubType>
     </Compile>

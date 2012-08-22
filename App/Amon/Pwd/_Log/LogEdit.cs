@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using Me.Amon.Model;
-using Me.Amon.Model.Pwd;
+using Me.Amon.Pwd.M;
 
 namespace Me.Amon.Pwd._Log
 {

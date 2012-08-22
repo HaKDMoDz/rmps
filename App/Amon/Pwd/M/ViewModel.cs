@@ -3,12 +3,12 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Da;
-using Me.Amon.Pwd;
+using Me.Amon.Model;
 using Me.Amon.Util;
 
-namespace Me.Amon.Model
+namespace Me.Amon.Pwd.M
 {
-    public sealed class ViewModel
+    public sealed class ViewModel : IViewModel
     {
         private UserModel _UserModel;
         private string _Pattern;

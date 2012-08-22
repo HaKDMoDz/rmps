@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using Me.Amon.Model;
 
 namespace Me.Amon.Pwd.E.View
 {
     public class MenubarVisibleAction : APwdAction
     {
-        public override void Add(ToolStripItem item, ViewModel viewModel)
+        public override void Add(ToolStripItem item, IViewModel viewModel)
         {
             if (_Items == null)
             {
@@ -14,19 +13,20 @@ namespace Me.Amon.Pwd.E.View
             }
 
             _Items.Add(item);
-            if (viewModel == null)
+            M.ViewModel model = viewModel as M.ViewModel;
+            if (model == null)
             {
                 return;
             }
 
             if (item is ToolStripMenuItem)
             {
-                (item as ToolStripMenuItem).Checked = viewModel.MenuBarVisible;
+                (item as ToolStripMenuItem).Checked = model.MenuBarVisible;
                 return;
             }
             if (item is ToolStripButton)
             {
-                (item as ToolStripButton).Checked = viewModel.MenuBarVisible;
+                (item as ToolStripButton).Checked = model.MenuBarVisible;
                 return;
             }
         }

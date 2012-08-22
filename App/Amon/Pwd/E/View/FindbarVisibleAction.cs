@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using Me.Amon.Model;
 
 namespace Me.Amon.Pwd.E.View
 {
     public class FindbarVisibleAction : APwdAction
     {
-        public override void Add(ToolStripItem item, ViewModel viewModel)
+        public override void Add(ToolStripItem item, IViewModel viewModel)
         {
             if (_Items == null)
             {
@@ -14,19 +13,20 @@ namespace Me.Amon.Pwd.E.View
             }
 
             _Items.Add(item);
-            if (viewModel == null)
+            M.ViewModel model = viewModel as M.ViewModel;
+            if (model == null)
             {
                 return;
             }
 
             if (item is ToolStripMenuItem)
             {
-                (item as ToolStripMenuItem).Checked = viewModel.FindBarVisible;
+                (item as ToolStripMenuItem).Checked = model.FindBarVisible;
                 return;
             }
             if (item is ToolStripButton)
             {
-                (item as ToolStripButton).Checked = viewModel.FindBarVisible;
+                (item as ToolStripButton).Checked = model.FindBarVisible;
                 return;
             }
         }

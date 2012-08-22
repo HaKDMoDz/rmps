@@ -4,11 +4,11 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
-using Me.Amon.Pwd;
+using Me.Amon.Model;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Util;
 
-namespace Me.Amon.Model.Pwd
+namespace Me.Amon.Pwd.M
 {
     public sealed class SafeModel
     {

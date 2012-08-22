@@ -2,9 +2,8 @@
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
-using Me.Amon.Model;
-using Me.Amon.Model.Pwd;
 using Me.Amon.Pwd._Att;
+using Me.Amon.Pwd.M;
 using Me.Amon.Uc;
 using Me.Amon.Util;
 

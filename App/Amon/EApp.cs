@@ -9,10 +9,6 @@ namespace Me.Amon
         public const int SEC_BASE64 = 1;
         public const int SEC_AES = 2;
 
-        public const string XML_MENU_MENU = "Menu";
-        public const string XML_MENU_ITEM = "Item";
-        public const string XML_MENU_LINE = "Line";
-
         public const string VER_DB = "1";
 
         /// <summary>

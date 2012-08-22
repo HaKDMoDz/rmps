@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using Me.Amon.Model;
 
 namespace Me.Amon.Ren.E
 {
@@ -16,7 +15,7 @@ namespace Me.Amon.Ren.E
 
         public virtual void ReInit() { }
 
-        public virtual void Add(ToolStripItem item, ViewModel viewModel)
+        public virtual void Add(ToolStripItem item, IViewModel viewModel)
         {
             if (_Items == null)
             {

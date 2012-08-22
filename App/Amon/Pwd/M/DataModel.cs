@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using Me.Amon.Pwd;
+using Me.Amon.Model;
 
-namespace Me.Amon.Model.Pwd
+namespace Me.Amon.Pwd.M
 {
     public sealed class DataModel
     {

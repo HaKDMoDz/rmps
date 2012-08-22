@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using Me.Amon.Gtd;
 using Me.Amon.Gtd.V;
-using Me.Amon.Model;
-using Me.Amon.Model.Pwd;
 using Me.Amon.Pwd._Att;
+using Me.Amon.Pwd.M;
 using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.V.Pro

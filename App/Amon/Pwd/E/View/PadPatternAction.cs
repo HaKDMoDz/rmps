@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Me.Amon.Model;
 using Me.Amon.Uc;
 
 namespace Me.Amon.Pwd.E.View
 {
     public class PadPatternAction : APwdAction
     {
-        public override void Add(ToolStripItem item, ViewModel viewModel)
+        public override void Add(ToolStripItem item, IViewModel viewModel)
         {
             if (_Items == null)
             {
@@ -15,12 +14,13 @@ namespace Me.Amon.Pwd.E.View
             }
 
             _Items.Add(item);
-            if (viewModel == null)
+            M.ViewModel model = viewModel as M.ViewModel;
+            if (model == null)
             {
                 return;
             }
 
-            bool ok = viewModel.Pattern == CPwd.PATTERN_PAD;
+            bool ok = model.Pattern == CPwd.PATTERN_PAD;
             if (item is ToolStripMenuItem)
             {
                 (item as ToolStripMenuItem).Checked = ok;

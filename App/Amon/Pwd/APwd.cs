@@ -12,13 +12,13 @@ using Me.Amon.Auth;
 using Me.Amon.Event;
 using Me.Amon.Gtd;
 using Me.Amon.Model;
-using Me.Amon.Model.Pwd;
 using Me.Amon.Properties;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd._Cat;
 using Me.Amon.Pwd._Key;
 using Me.Amon.Pwd._Lib;
 using Me.Amon.Pwd._Log;
+using Me.Amon.Pwd.M;
 using Me.Amon.Pwd.V.Pro;
 using Me.Amon.Pwd.V.Wiz;
 using Me.Amon.Uc;
@@ -2685,7 +2685,7 @@ namespace Me.Amon.Pwd
 
         }
 
-        private void TssEcho_Click(object sender, EventArgs e)
+        private void TssEcho_DoubleClick(object sender, EventArgs e)
         {
             if (_TaskNode != null)
             {
