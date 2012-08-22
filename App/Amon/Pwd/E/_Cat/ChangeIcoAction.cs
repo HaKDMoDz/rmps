@@ -7,7 +7,7 @@
             if (IApp != null)
             {
                 Cat cat = IApp.SelectedCat;
-                if (cat == null || cat.Id == EPwd.DEF_CAT_ID)
+                if (cat == null || cat.Id == CPwd.DEF_CAT_ID)
                 {
                     return;
                 }

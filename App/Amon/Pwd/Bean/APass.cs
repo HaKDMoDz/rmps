@@ -76,7 +76,7 @@ namespace Me.Amon.Pwd.Bean
         protected void ShowSpec(Control ctl)
         {
             //_DataModel = userModel;
-            if ((_DataModel.UdcModel.Modified & EPwd.KEY_AWIZ) > 0)
+            if ((_DataModel.UdcModel.Modified & CPwd.KEY_AWIZ) > 0)
             {
                 MuCharSet.DropDownItems.Clear();
                 MuCharSet.DropDownItems.Add(_CharSetDef);
@@ -95,7 +95,7 @@ namespace Me.Amon.Pwd.Bean
                     MuCharSet.DropDownItems.Add(item);
                     _CharSetDict[ucs.Id] = item;
                 }
-                _DataModel.UdcModel.Modified &= EPwd.KEY_AWIZ;
+                _DataModel.UdcModel.Modified &= CPwd.KEY_AWIZ;
 
                 _LastCharSet = _CharSetDef;
                 _LastCharSet.Checked = true;

@@ -87,6 +87,7 @@
             this.TssEcho.Spring = true;
             this.TssEcho.Text = "系统处理中，请稍后……";
             this.TssEcho.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.TssEcho.Click += new System.EventHandler(this.TssEcho_Click);
             // 
             // TssTime
             // 

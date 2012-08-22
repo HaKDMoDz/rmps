@@ -29,7 +29,7 @@ namespace Me.Amon.Pwd._Cat
         {
             TvCatTree.ImageList = imgList;
 
-            Cat cat = new Cat { Id = EPwd.DEF_CAT_ID, Text = "阿木密码箱", Tips = "阿木密码箱", Icon = "Amon" };
+            Cat cat = new Cat { Id = CPwd.DEF_CAT_ID, Text = "阿木密码箱", Tips = "阿木密码箱", Icon = "Amon" };
             _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Icon, SelectedImageKey = cat.Icon };
             _RootNode.Tag = cat;
             TvCatTree.Nodes.Add(_RootNode);

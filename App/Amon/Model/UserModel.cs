@@ -756,7 +756,7 @@ namespace Me.Amon.Model
                     }
                 }
 
-                string info = string.Format("您有{0}个过期事项及{1}个待办事项", _PastCnt, _TodoCnt);
+                string info = string.Format("您有 {0} 个过期事项及 {1} 个待办事项", _PastCnt, _TodoCnt);
                 foreach (AmonHandler<string> hint in _Hints)
                 {
                     hint(info);

@@ -48,6 +48,20 @@ namespace Me.Amon.Pwd
         private Dictionary<string, Image> _KeyHint;
         private XmlMenu<APwd> _XmlMenu;
         #endregion
+
+        /// <summary>
+        /// 待提示节点
+        /// </summary>
+        private TreeNode _TaskNode;
+        /// <summary>
+        /// 快过期节点
+        /// </summary>
+        private TreeNode _TaskExpiredNode;
+        /// <summary>
+        /// 消息等待时间
+        /// </summary>
+        private int _EchoDelay;
+
         private bool _Exit;
         private Main _Main;
         private KeyEventHandler _KeyDownHandler;
@@ -83,7 +97,7 @@ namespace Me.Amon.Pwd
 
             #region 系统选单
             _XmlMenu = new XmlMenu<APwd>(this, _ViewModel);
-            if (_XmlMenu.Load(Path.Combine(_UserModel.Home, EPwd.XML_MENU)))
+            if (_XmlMenu.Load(Path.Combine(_UserModel.Home, CPwd.XML_MENU)))
             {
                 _XmlMenu.GetStrokes("APwd");
                 _XmlMenu.GetMenuBar("APwd", MbMenu);
@@ -104,13 +118,13 @@ namespace Me.Amon.Pwd
             // 视图模式
             switch (_ViewModel.Pattern)
             {
-                case EPwd.PATTERN_PRO:
+                case CPwd.PATTERN_PRO:
                     ShowAPro();
                     break;
-                case EPwd.PATTERN_WIZ:
+                case CPwd.PATTERN_WIZ:
                     ShowAWiz();
                     break;
-                case EPwd.PATTERN_PAD:
+                case CPwd.PATTERN_PAD:
                     ShowAPad();
                     break;
                 default:
@@ -169,12 +183,16 @@ namespace Me.Amon.Pwd
 
         public void ShowEcho(string message)
         {
-            TssEcho.Text = message;
+            if (_EchoDelay < 1)
+            {
+                TssEcho.Text = message;
+            }
         }
 
         public void ShowEcho(string message, int delay)
         {
             TssEcho.Text = message;
+            _EchoDelay = delay;
         }
 
         public bool WillExit()
@@ -268,14 +286,20 @@ namespace Me.Amon.Pwd
             if (cat != null && !string.IsNullOrWhiteSpace(cat.Meta))
             {
                 string meta = cat.Meta.ToLower();
+                // 待提示
+                if (meta == CPwd.KEY_TASK)
+                {
+                    ListGtd(DateTime.Now, 43200);
+                    return;
+                }
                 // 已过期
-                if (meta == "task")
+                if (meta == CPwd.KEY_TASK_VAL_EXPIRED)
                 {
                     ListGtdExpired();
                     return;
                 }
                 // 未过期
-                if (meta.StartsWith("task:"))
+                if (meta.StartsWith(CPwd.KEY_TASK_VAR))
                 {
                     ListGtd(meta.Substring(5));
                     return;
@@ -500,12 +524,12 @@ namespace Me.Amon.Pwd
             y -= 16;
             img = _KeyHint.ContainsKey(rec.GtdId) ? _KeyHint[rec.GtdId] : BeanUtil.NaN16;
             e.Graphics.DrawImage(img, x - 48, y);
-            img = _ViewModel.GetImage(EPwd.KEY_LABEL + rec.Label);
+            img = _ViewModel.GetImage(CPwd.KEY_LABEL + rec.Label);
             if (img != null)
             {
                 e.Graphics.DrawImage(img, x - 32, y);
             }
-            img = _ViewModel.GetImage(EPwd.KEY_MAJOR + (rec.Major + 2));
+            img = _ViewModel.GetImage(CPwd.KEY_MAJOR + (rec.Major + 2));
             if (img != null)
             {
                 e.Graphics.DrawImage(img, x - 16, y);
@@ -635,6 +659,10 @@ namespace Me.Amon.Pwd
         {
             DateTime now = DateTime.Now;
             TssTime.Text = now.ToString(EApp.DATEIME_FORMAT);
+            if (_EchoDelay > 0)
+            {
+                _EchoDelay -= 1;
+            }
         }
         #endregion
 
@@ -715,12 +743,12 @@ namespace Me.Amon.Pwd
             }
             _PwdView.ShowData();
 
-            ItemGroup group = _XmlMenu.GetGroup(EPwd.KEY_LABEL);
+            ItemGroup group = _XmlMenu.GetGroup(CPwd.KEY_LABEL);
             if (group != null)
             {
                 group.Checked(key.Label.ToString());
             }
-            group = _XmlMenu.GetGroup(EPwd.KEY_MAJOR);
+            group = _XmlMenu.GetGroup(CPwd.KEY_MAJOR);
             if (group != null)
             {
                 group.Checked(key.Major.ToString());
@@ -800,7 +828,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            if (cur.Id == EPwd.DEF_CAT_ID)
+            if (cur.Id == CPwd.DEF_CAT_ID)
             {
                 return;
             }
@@ -824,7 +852,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            if (cat.Id == EPwd.DEF_CAT_ID)
+            if (cat.Id == CPwd.DEF_CAT_ID)
             {
                 return;
             }
@@ -866,7 +894,7 @@ namespace Me.Amon.Pwd
         public void CatMoveUp()
         {
             Cat currCat = SelectedCat;
-            if (currCat == null || currCat.Id == EPwd.DEF_CAT_ID)
+            if (currCat == null || currCat.Id == CPwd.DEF_CAT_ID)
             {
                 return;
             }
@@ -878,7 +906,7 @@ namespace Me.Amon.Pwd
             }
 
             Cat prevCat = prevNode.Tag as Cat;
-            if (prevCat == null || prevCat.Id == EPwd.DEF_CAT_ID)
+            if (prevCat == null || prevCat.Id == CPwd.DEF_CAT_ID)
             {
                 return;
             }
@@ -903,7 +931,7 @@ namespace Me.Amon.Pwd
         public void CatMoveDown()
         {
             Cat currCat = SelectedCat;
-            if (currCat == null || currCat.Id == EPwd.DEF_CAT_ID)
+            if (currCat == null || currCat.Id == CPwd.DEF_CAT_ID)
             {
                 return;
             }
@@ -915,7 +943,7 @@ namespace Me.Amon.Pwd
             }
 
             Cat nextCat = nextNode.Tag as Cat;
-            if (nextCat == null || nextCat.Id == EPwd.DEF_CAT_ID)
+            if (nextCat == null || nextCat.Id == CPwd.DEF_CAT_ID)
             {
                 return;
             }
@@ -1044,7 +1072,7 @@ namespace Me.Amon.Pwd
         {
             if (!CharUtil.IsValidateHash(png.File))
             {
-                png.File = EPwd.DEF_CAT_IMG;
+                png.File = CPwd.DEF_CAT_IMG;
             }
             if (!IlCatTree.Images.ContainsKey(png.File))
             {
@@ -1104,7 +1132,7 @@ namespace Me.Amon.Pwd
                 }
                 else
                 {
-                    _SafeModel.Key.CatId = EPwd.DEF_CAT_ID;
+                    _SafeModel.Key.CatId = CPwd.DEF_CAT_ID;
                 }
             }
 
@@ -1199,6 +1227,20 @@ namespace Me.Amon.Pwd
             DoInitKey(keys);
         }
 
+        public void ListGtd(DateTime time, int seconds)
+        {
+            IList<MGtd> gtds = _UserModel.DBA.FindKeyByGtd();
+            List<Key> keys = new List<Key>();
+            foreach (MGtd gtd in gtds)
+            {
+                if (gtd.Test(time, seconds))
+                {
+                    keys.Add(_UserModel.DBA.ReadKey(gtd.RefId));
+                }
+            }
+            DoInitKey(keys);
+        }
+
         public void ListGtd(string meta)
         {
             Match match = Regex.Match(meta, "^\\d+");
@@ -1238,24 +1280,14 @@ namespace Me.Amon.Pwd
                     return;
             }
 
-            int length = (int)Math.Ceiling((end - now).TotalSeconds);
-            IList<MGtd> gtds = _UserModel.DBA.FindKeyByGtd();
-            List<Key> keys = new List<Key>();
-            foreach (MGtd gtd in gtds)
-            {
-                if (gtd.Test(now, length))
-                {
-                    keys.Add(_UserModel.DBA.ReadKey(gtd.RefId));
-                }
-            }
-            DoInitKey(keys);
+            ListGtd(now, (int)Math.Ceiling((end - now).TotalSeconds));
         }
 
         public void ListKey(string catId)
         {
             if (!CharUtil.IsValidateHash(catId))
             {
-                catId = EPwd.DEF_CAT_ID;
+                catId = CPwd.DEF_CAT_ID;
             }
 
             DoListKey(catId);
@@ -1308,7 +1340,7 @@ namespace Me.Amon.Pwd
         {
             if (!CharUtil.IsValidateHash(catId))
             {
-                catId = EPwd.DEF_CAT_ID;
+                catId = CPwd.DEF_CAT_ID;
             }
             if (catId == _SafeModel.Key.CatId)
             {
@@ -1507,7 +1539,7 @@ namespace Me.Amon.Pwd
             if (_ProView == null)
             {
                 _ProView = new APro();
-                _ProView.Name = EPwd.PATTERN_PRO;
+                _ProView.Name = CPwd.PATTERN_PRO;
                 _ProView.Init(this, _SafeModel, _DataModel, _ViewModel);
             }
 
@@ -1533,7 +1565,7 @@ namespace Me.Amon.Pwd
             if (_WizView == null)
             {
                 _WizView = new AWiz();
-                _WizView.Name = EPwd.PATTERN_WIZ;
+                _WizView.Name = CPwd.PATTERN_WIZ;
                 _WizView.Init(this, _SafeModel, _DataModel, _ViewModel);
             }
 
@@ -2432,9 +2464,9 @@ namespace Me.Amon.Pwd
         /// </summary>
         private void InitCat()
         {
-            IlCatTree.Images.Add(EPwd.DEF_CAT_IMG, BeanUtil.NaN16);
+            IlCatTree.Images.Add(CPwd.DEF_CAT_IMG, BeanUtil.NaN16);
 
-            Cat cat = new Cat { Id = EPwd.DEF_CAT_ID, Text = "默认类别", Tips = "默认类别", Icon = "Amon" };
+            Cat cat = new Cat { Id = CPwd.DEF_CAT_ID, Text = "默认类别", Tips = "默认类别", Icon = "Amon" };
             IlCatTree.Images.Add(cat.Icon, Resources.Logo);
             _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Icon, SelectedImageKey = cat.Icon };
             _RootNode.Tag = cat;
@@ -2459,7 +2491,7 @@ namespace Me.Amon.Pwd
                 }
                 else
                 {
-                    node.ImageKey = EPwd.DEF_CAT_IMG;
+                    node.ImageKey = CPwd.DEF_CAT_IMG;
                 }
                 node.SelectedImageKey = node.ImageKey;
 
@@ -2467,6 +2499,17 @@ namespace Me.Amon.Pwd
                 if (!cat.IsLeaf)
                 {
                     DoInitCat(node);
+                }
+
+                if (cat.Meta == CPwd.KEY_TASK)
+                {
+                    _TaskNode = node;
+                    continue;
+                }
+                if (cat.Meta == CPwd.KEY_TASK_VAL_EXPIRED)
+                {
+                    _TaskExpiredNode = node;
+                    continue;
                 }
             }
         }
@@ -2571,11 +2614,11 @@ namespace Me.Amon.Pwd
 
         public void LoadLayout()
         {
-            if (_ViewModel.WindowState == EPwd.WINDOW_STATE_MAXIMIZED)
+            if (_ViewModel.WindowState == CPwd.WINDOW_STATE_MAXIMIZED)
             {
                 _Main.WindowState = FormWindowState.Maximized;
             }
-            else if (_ViewModel.WindowState == EPwd.WINDOW_STATE_MINIMIZED)
+            else if (_ViewModel.WindowState == CPwd.WINDOW_STATE_MINIMIZED)
             {
                 _Main.WindowState = FormWindowState.Minimized;
             }
@@ -2605,15 +2648,15 @@ namespace Me.Amon.Pwd
 
             if (_Main.WindowState == FormWindowState.Maximized)
             {
-                _ViewModel.WindowState = EPwd.WINDOW_STATE_MAXIMIZED;
+                _ViewModel.WindowState = CPwd.WINDOW_STATE_MAXIMIZED;
             }
             else if (_Main.WindowState == FormWindowState.Minimized)
             {
-                _ViewModel.WindowState = EPwd.WINDOW_STATE_MINIMIZED;
+                _ViewModel.WindowState = CPwd.WINDOW_STATE_MINIMIZED;
             }
             else
             {
-                _ViewModel.WindowState = EPwd.WINDOW_STATE_NORMAL;
+                _ViewModel.WindowState = CPwd.WINDOW_STATE_NORMAL;
 
                 _ViewModel.WindowLocX = _Main.Location.X;
                 _ViewModel.WindowLocY = _Main.Location.Y;
@@ -2640,6 +2683,14 @@ namespace Me.Amon.Pwd
         private void BgWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
 
+        }
+
+        private void TssEcho_Click(object sender, EventArgs e)
+        {
+            if (_TaskNode != null)
+            {
+                TvCatTree.SelectedNode = _TaskNode;
+            }
         }
     }
 }

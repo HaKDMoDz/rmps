@@ -20,7 +20,7 @@ namespace Me.Amon.Pwd.E.View
                 return;
             }
 
-            bool ok = viewModel.Pattern == EPwd.PATTERN_PAD;
+            bool ok = viewModel.Pattern == CPwd.PATTERN_PAD;
             if (item is ToolStripMenuItem)
             {
                 (item as ToolStripMenuItem).Checked = ok;

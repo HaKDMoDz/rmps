@@ -132,14 +132,14 @@ namespace Me.Amon.Pwd.V.Wiz
 
         public void ShowData()
         {
-            if ((_DataModel.LibModified & EPwd.KEY_AWIZ) > 0)
+            if ((_DataModel.LibModified & CPwd.KEY_AWIZ) > 0)
             {
                 CbLib.Items.Clear();
                 foreach (Lib header in _DataModel.LibList)
                 {
                     CbLib.Items.Add(header);
                 }
-                _DataModel.LibModified &= ~EPwd.KEY_AWIZ;
+                _DataModel.LibModified &= ~CPwd.KEY_AWIZ;
             }
 
             GuidAtt guid = _SafeModel.Guid;

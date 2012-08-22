@@ -128,14 +128,14 @@ namespace Me.Amon.Pwd.V.Pro
 
         public bool ShowData(Att att)
         {
-            if ((_DataModel.LibModified & EPwd.KEY_APRO) > 0)
+            if ((_DataModel.LibModified & CPwd.KEY_APRO) > 0)
             {
                 CbName.Items.Clear();
                 foreach (Lib header in _DataModel.LibList)
                 {
                     CbName.Items.Add(header);
                 }
-                _DataModel.LibModified &= ~EPwd.KEY_APRO;
+                _DataModel.LibModified &= ~CPwd.KEY_APRO;
             }
 
             _Att = att;

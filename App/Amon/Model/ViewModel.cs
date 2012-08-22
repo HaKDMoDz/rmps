@@ -33,13 +33,13 @@ namespace Me.Amon.Model
             set
             {
                 value = value.ToLower();
-                if (value == EPwd.PATTERN_PRO || value == EPwd.PATTERN_WIZ || value == EPwd.PATTERN_PAD)
+                if (value == CPwd.PATTERN_PRO || value == CPwd.PATTERN_WIZ || value == CPwd.PATTERN_PAD)
                 {
                     _Pattern = value;
                 }
                 else
                 {
-                    _Pattern = EPwd.PATTERN_WIZ;
+                    _Pattern = CPwd.PATTERN_WIZ;
                 }
             }
         }

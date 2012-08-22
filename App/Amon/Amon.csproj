@@ -412,7 +412,7 @@
     <Compile Include="Pwd\Bean\AText.Designer.cs">
       <DependentUpon>AText.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\EPwd.cs" />
+    <Compile Include="Pwd\CPwd.cs" />
     <Compile Include="Pwd\E\APwdAction.cs" />
     <Compile Include="Pwd\E\Data\ExportTxtAction.cs" />
     <Compile Include="Pwd\E\Data\ExportXmlAction.cs" />
