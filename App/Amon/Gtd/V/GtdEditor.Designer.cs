@@ -33,13 +33,13 @@
             this.LbType = new System.Windows.Forms.Label();
             this.GpDate = new System.Windows.Forms.GroupBox();
             this.GpStop = new System.Windows.Forms.GroupBox();
+            this.UcStop = new Me.Amon.Gtd.V.UcStop();
             this.BtOk = new System.Windows.Forms.Button();
             this.BtNo = new System.Windows.Forms.Button();
-            this.RbDate = new System.Windows.Forms.RadioButton();
+            this.RbDates = new System.Windows.Forms.RadioButton();
             this.RbEvent = new System.Windows.Forms.RadioButton();
             this.RbMaths = new System.Windows.Forms.RadioButton();
             this.CkSwitch = new System.Windows.Forms.CheckBox();
-            this.UcStop = new Me.Amon.Gtd.V.UcStop();
             this.GpStop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,6 +92,14 @@
             this.GpStop.TabStop = false;
             this.GpStop.Text = "结束";
             // 
+            // UcStop
+            // 
+            this.UcStop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UcStop.Location = new System.Drawing.Point(3, 17);
+            this.UcStop.Name = "UcStop";
+            this.UcStop.Size = new System.Drawing.Size(304, 80);
+            this.UcStop.TabIndex = 0;
+            // 
             // BtOk
             // 
             this.BtOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -115,14 +123,14 @@
             this.BtNo.UseVisualStyleBackColor = true;
             this.BtNo.Click += new System.EventHandler(this.BtNo_Click);
             // 
-            // RbDate
+            // RbDates
             // 
-            this.RbDate.Location = new System.Drawing.Point(65, 39);
-            this.RbDate.Name = "RbDate";
-            this.RbDate.Size = new System.Drawing.Size(47, 16);
-            this.RbDate.TabIndex = 3;
-            this.RbDate.Text = "时间";
-            this.RbDate.CheckedChanged += new System.EventHandler(this.RbDate_CheckedChanged);
+            this.RbDates.Location = new System.Drawing.Point(65, 39);
+            this.RbDates.Name = "RbDates";
+            this.RbDates.Size = new System.Drawing.Size(47, 16);
+            this.RbDates.TabIndex = 3;
+            this.RbDates.Text = "定时";
+            this.RbDates.CheckedChanged += new System.EventHandler(this.RbDates_CheckedChanged);
             // 
             // RbEvent
             // 
@@ -153,14 +161,6 @@
             this.CkSwitch.Text = "保存为模板";
             this.CkSwitch.UseVisualStyleBackColor = true;
             // 
-            // UcStop
-            // 
-            this.UcStop.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.UcStop.Location = new System.Drawing.Point(3, 17);
-            this.UcStop.Name = "UcStop";
-            this.UcStop.Size = new System.Drawing.Size(304, 80);
-            this.UcStop.TabIndex = 0;
-            // 
             // GtdEditor
             // 
             this.AcceptButton = this.BtOk;
@@ -175,7 +175,7 @@
             this.Controls.Add(this.GpDate);
             this.Controls.Add(this.RbMaths);
             this.Controls.Add(this.RbEvent);
-            this.Controls.Add(this.RbDate);
+            this.Controls.Add(this.RbDates);
             this.Controls.Add(this.LbType);
             this.Controls.Add(this.TbTitle);
             this.Controls.Add(this.LbTitle);
@@ -201,7 +201,7 @@
         private System.Windows.Forms.GroupBox GpStop;
         private System.Windows.Forms.Button BtOk;
         private System.Windows.Forms.Button BtNo;
-        private System.Windows.Forms.RadioButton RbDate;
+        private System.Windows.Forms.RadioButton RbDates;
         private System.Windows.Forms.RadioButton RbEvent;
         private System.Windows.Forms.RadioButton RbMaths;
         private System.Windows.Forms.CheckBox CkSwitch;

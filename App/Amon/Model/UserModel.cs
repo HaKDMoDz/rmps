@@ -5,6 +5,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Xml;
 using Me.Amon.Da;
 using Me.Amon.Event;
@@ -684,7 +685,7 @@ namespace Me.Amon.Model
             //dfa.Init(this);
             //_DFA = dfa;
 
-            _Timer = new System.Threading.Timer(new System.Threading.TimerCallback(Timer_Callback), null, System.Threading.Timeout.Infinite, 5000);
+            _Timer = new Timer(new TimerCallback(Timer_Callback), null, 5000, 10000);
         }
 
         public DBA DBA { get { return _DBA; } }
@@ -710,9 +711,73 @@ namespace Me.Amon.Model
             _Hints.Remove(handler);
         }
 
-        private System.Threading.Timer _Timer;
+        private Timer _Timer;
+        private IList<Gtd.MGtd> _MGtds;
+        private int _TodoCnt = 0;
+        private int _PastCnt = 0;
+        private int _Delay = 5;
         private void Timer_Callback(object state)
         {
+            bool locked = false;
+
+            try
+            {
+                Monitor.TryEnter(_Delay, ref locked);
+                if (!locked)
+                {
+                    return;
+                }
+                Monitor.Enter(_Delay);
+
+                _TodoCnt = 0;
+                _PastCnt = 0;
+
+                if (_Delay < 1 || _MGtds == null)
+                {
+                    ReloadGtds();
+                }
+
+                DateTime now = DateTime.Now;
+                foreach (Gtd.MGtd gtd in _MGtds)
+                {
+                    if (gtd.Test(now, 43200))//12 * 60 * 60
+                    {
+                        _DBA.SaveVcs(gtd);
+                    }
+                    if (gtd.Status == Gtd.CGtd.GTD_STAT_ONTIME)
+                    {
+                        _TodoCnt += 1;
+                        continue;
+                    }
+                    if (gtd.Status == Gtd.CGtd.GTD_STAT_EXPIRED)
+                    {
+                        _PastCnt += 1;
+                        continue;
+                    }
+                }
+
+                string info = string.Format("您有{0}个过期事项及{1}个待办事项", _PastCnt, _TodoCnt);
+                foreach (AmonHandler<string> hint in _Hints)
+                {
+                    hint(info);
+                }
+                _Delay -= 1;
+
+                //Monitor.Pulse(_Delay);
+            }
+            //catch (Exception exp)
+            //{
+            //    string t = exp.Message;
+            //}
+            finally
+            {
+                //Monitor.Exit(_Delay);
+            }
+        }
+
+        public void ReloadGtds()
+        {
+            _MGtds = _DBA.FindKeyByGtd();
         }
         #endregion
     }

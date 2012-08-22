@@ -43,14 +43,14 @@ namespace Me.Amon.Gtd.V
                     RbMaths.Checked = true;
                     break;
                 default:
-                    RbDate.Checked = true;
+                    RbDates.Checked = true;
                     break;
             }
 
             UcStop.ShowData(MGtd);
         }
 
-        private void RbDate_CheckedChanged(object sender, EventArgs e)
+        private void RbDates_CheckedChanged(object sender, EventArgs e)
         {
             MGtd.Type = CGtd.TYPE_MAJOR_DATES;
             ShowDate(CGtd.TYPE_MAJOR_DATES);

@@ -40,11 +40,14 @@ namespace Me.Amon.Gtd.V
                 return;
             }
 
-            if (MGtd.Start > DtStart.MinDate && MGtd.Start < DtStart.MaxDate)
+            if (MGtd.StartTime > DtStart.MinDate && MGtd.StartTime < DtStart.MaxDate)
             {
-                DtStart.Value = MGtd.Start;
+                DtStart.Value = MGtd.StartTime;
             }
-            CbRedoUnit.SelectedItem = new Itemi { K = MGtd.RedoUnit };
+            if (MGtd.Dates.Count > 0)
+            {
+                CbRedoUnit.SelectedItem = new Itemi { K = MGtd.Dates[0].Unit };
+            }
         }
 
         public bool SaveData()
@@ -62,12 +65,11 @@ namespace Me.Amon.Gtd.V
                 return false;
             }
 
-            MGtd.Start = DtStart.Value;
-            if (MGtd.Start.Kind == DateTimeKind.Unspecified)
+            MGtd.StartTime = DtStart.Value;
+            if (MGtd.StartTime.Kind == DateTimeKind.Unspecified)
             {
-                DateTime.SpecifyKind(MGtd.Start, DateTimeKind.Local);
+                DateTime.SpecifyKind(MGtd.StartTime, DateTimeKind.Local);
             }
-            MGtd.RedoUnit = item.K;
 
             if (!_ITime.SaveData(MGtd))
             {

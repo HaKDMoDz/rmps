@@ -15,19 +15,20 @@ namespace Me.Amon.Gtd.V.Uc
 
         public void ShowData(MGtd mgtd)
         {
-            if (mgtd != null)
+            if (mgtd != null && mgtd.Dates.Count == 1)
             {
-                if (mgtd.RedoType == CGtd.TYPE_MINOR_EACH)
+                ADates dates = mgtd.Dates[0];
+                if (dates.Type == CGtd.TYPE_MINOR_EACH)
                 {
                     RbEach.Checked = true;
-                    SpEach.Value = mgtd.EachValue;
+                    SpEach.Value = dates.Values[0];
                     return;
                 }
 
-                if (mgtd.RedoType == CGtd.TYPE_MINOR_WHEN)
+                if (dates.Type == CGtd.TYPE_MINOR_WHEN)
                 {
                     RbWhen.Checked = true;
-                    foreach (int val in mgtd.WhenValues)
+                    foreach (int val in dates.Values)
                     {
                         SpWhen.Value = val;
                     }
@@ -44,18 +45,30 @@ namespace Me.Amon.Gtd.V.Uc
                 return false;
             }
 
+            ADates dates;
+            if (mgtd.Dates.Count == 1)
+            {
+                dates = mgtd.Dates[0];
+            }
+            else
+            {
+                dates = new Dates.Month();
+                mgtd.Dates.Add(dates);
+            }
+
             if (RbEach.Checked)
             {
-                mgtd.RedoType = CGtd.TYPE_MINOR_EACH;
-                mgtd.EachValue = decimal.ToInt32(SpEach.Value);
+                dates.Type = CGtd.TYPE_MINOR_EACH;
+                dates.Values.Clear();
+                dates.Values.Add(decimal.ToInt32(SpEach.Value));
                 return true;
             }
 
             if (RbWhen.Checked)
             {
-                mgtd.RedoType = CGtd.TYPE_MINOR_WHEN;
-                mgtd.WhenValues.Clear();
-                mgtd.WhenValues.Add(decimal.ToInt32(SpWhen.Value));
+                dates.Type = CGtd.TYPE_MINOR_WHEN;
+                dates.Values.Clear();
+                dates.Values.Add(decimal.ToInt32(SpWhen.Value));
                 return true;
             }
 

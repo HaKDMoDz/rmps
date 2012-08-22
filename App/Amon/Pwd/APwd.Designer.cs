@@ -83,9 +83,9 @@
             // TssEcho
             // 
             this.TssEcho.Name = "TssEcho";
-            this.TssEcho.Size = new System.Drawing.Size(513, 17);
+            this.TssEcho.Size = new System.Drawing.Size(482, 17);
             this.TssEcho.Spring = true;
-            this.TssEcho.Text = "您暂时没有需要提醒的任务！";
+            this.TssEcho.Text = "系统处理中，请稍后……";
             this.TssEcho.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TssTime

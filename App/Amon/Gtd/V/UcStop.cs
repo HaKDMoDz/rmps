@@ -20,15 +20,15 @@ namespace Me.Amon.Gtd.V
                 return;
             }
 
-            RbNone.Checked = mgtd.StopType == CGtd.STOP_TYPE_NONE;
+            RbNone.Checked = mgtd.EndType == CGtd.END_TYPE_NONE;
 
-            RbLoop.Checked = mgtd.StopType == CGtd.STOP_TYPE_LOOP;
-            if (mgtd.Cycles > 0)
+            RbLoop.Checked = mgtd.EndType == CGtd.END_TYPE_LOOP;
+            if (mgtd.ExeCount > 0)
             {
-                SpLoop.Value = mgtd.Cycles;
+                SpLoop.Value = mgtd.ExeCount;
             }
 
-            RbTime.Checked = mgtd.StopType == CGtd.STOP_TYPE_TIME;
+            RbTime.Checked = mgtd.EndType == CGtd.END_TYPE_TIME;
             if (mgtd.EndTime > DtTime.MinDate && mgtd.EndTime < DtTime.MaxDate)
             {
                 DtTime.Value = mgtd.EndTime;
@@ -43,18 +43,18 @@ namespace Me.Amon.Gtd.V
             }
             if (RbNone.Checked)
             {
-                mgtd.StopType = CGtd.STOP_TYPE_NONE;
+                mgtd.EndType = CGtd.END_TYPE_EVER;
                 return true;
             }
             if (RbLoop.Checked)
             {
-                mgtd.StopType = CGtd.STOP_TYPE_LOOP;
-                mgtd.Cycles = decimal.ToInt32(SpLoop.Value);
+                mgtd.EndType = CGtd.END_TYPE_LOOP;
+                mgtd.ExeCount = decimal.ToInt32(SpLoop.Value);
                 return true;
             }
             if (RbTime.Checked)
             {
-                mgtd.StopType = CGtd.STOP_TYPE_TIME;
+                mgtd.EndType = CGtd.END_TYPE_TIME;
                 mgtd.EndTime = DtTime.Value;
                 return true;
             }

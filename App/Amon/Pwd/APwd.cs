@@ -52,8 +52,6 @@ namespace Me.Amon.Pwd
         private Main _Main;
         private KeyEventHandler _KeyDownHandler;
         private FormClosingEventHandler _ClosingHandler;
-        private int _Delay = 5;
-        private IList<MGtd> _GtdList;
 
         #region 构造函数
         public APwd()
@@ -133,6 +131,8 @@ namespace Me.Amon.Pwd
                 _KeyDownHandler = new KeyEventHandler(Main_KeyDown);
             }
             _Main.KeyDown += _KeyDownHandler;
+
+            _UserModel.AppendHandler(new AmonHandler<string>(ShowEcho));
         }
 
         public void LoadView()
@@ -271,6 +271,7 @@ namespace Me.Amon.Pwd
                 // 已过期
                 if (meta == "task")
                 {
+                    ListGtdExpired();
                     return;
                 }
                 // 未过期
@@ -634,29 +635,6 @@ namespace Me.Amon.Pwd
         {
             DateTime now = DateTime.Now;
             TssTime.Text = now.ToString(EApp.DATEIME_FORMAT);
-
-            if (_Delay-- > 0)
-            {
-                return;
-            }
-
-            _Delay = 5;
-            _GtdList = _UserModel.DBA.FindKeyByGtd();
-            int pastCnt = 0;
-            int todoCnt = 0;
-            foreach (MGtd gtd in _GtdList)
-            {
-                if (gtd.Test(now, 43200))//12 * 60 * 60
-                {
-                    todoCnt += 1;
-                }
-                else if (gtd.Status == CGtd.GTD_STAT_EXPIRED)
-                {
-                    pastCnt += 1;
-                }
-            }
-
-            TssEcho.Text = string.Format("您有{0}个过期事项及{1}个待办事项", pastCnt, todoCnt);
         }
         #endregion
 
@@ -1149,8 +1127,6 @@ namespace Me.Amon.Pwd
                 _UserModel.DBA.SaveVcs(_SafeModel.Key.Gtd);
             }
             _SafeModel.Modified = false;
-
-            _Delay = 0;
 
             _PwdView.ShowInfo();
 

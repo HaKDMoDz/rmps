@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Me.Amon.Uc;
 
 namespace Me.Amon.Gtd.V.Uc
 {
@@ -8,6 +9,16 @@ namespace Me.Amon.Gtd.V.Uc
         public UcWeek()
         {
             InitializeComponent();
+
+            CbWhen.Items.Add(new Itemi { K = 0, V = "星期日" });
+            CbWhen.Items.Add(new Itemi { K = 0, V = "星期一" });
+            CbWhen.Items.Add(new Itemi { K = 0, V = "星期二" });
+            CbWhen.Items.Add(new Itemi { K = 0, V = "星期三" });
+            CbWhen.Items.Add(new Itemi { K = 0, V = "星期四" });
+            CbWhen.Items.Add(new Itemi { K = 0, V = "星期五" });
+            CbWhen.Items.Add(new Itemi { K = 0, V = "星期六" });
+
+            CbWhen.SelectedIndex = (int)DateTime.Now.DayOfWeek;
         }
 
         #region 接口实现
@@ -15,24 +26,31 @@ namespace Me.Amon.Gtd.V.Uc
 
         public void ShowData(MGtd mgtd)
         {
-            if (mgtd != null)
+            if (mgtd == null)
             {
-                if (mgtd.RedoType == CGtd.TYPE_MINOR_EACH)
-                {
-                    RbEach.Checked = true;
-                    SpEach.Value = mgtd.EachValue;
-                    return;
-                }
+                RbEach.Checked = true;
+                return;
+            }
 
-                if (mgtd.RedoType == CGtd.TYPE_MINOR_WHEN)
-                {
-                    RbWhen.Checked = true;
-                    foreach (int val in mgtd.WhenValues)
-                    {
-                        SpWhen.Value = val;
-                    }
-                    return;
-                }
+            ADates dates;
+            if (mgtd.Dates.Count == 1)
+            {
+                RbEach.Checked = true;
+                dates = mgtd.Dates[0];
+                SpEach.Value = dates.Values[0];
+                return;
+            }
+            if (mgtd.Dates.Count == 1)
+            {
+                RbWhen.Checked = true;
+                dates = mgtd.Dates[0];
+                CbWhen.SelectedIndex = dates.Values[0];
+
+                dates = mgtd.Dates[1];
+                SpWhen.Minimum = dates.MinValue;
+                SpWhen.Maximum = dates.MaxValue;
+                SpWhen.Value = dates.Values[0];
+                return;
             }
             RbEach.Checked = true;
         }
@@ -42,21 +60,6 @@ namespace Me.Amon.Gtd.V.Uc
             if (mgtd == null)
             {
                 return false;
-            }
-
-            if (RbEach.Checked)
-            {
-                mgtd.RedoType = CGtd.TYPE_MINOR_EACH;
-                mgtd.EachValue = decimal.ToInt32(SpEach.Value);
-                return true;
-            }
-
-            if (RbWhen.Checked)
-            {
-                mgtd.RedoType = CGtd.TYPE_MINOR_WHEN;
-                mgtd.WhenValues.Clear();
-                mgtd.WhenValues.Add(decimal.ToInt32(SpWhen.Value));
-                return true;
             }
 
             return false;

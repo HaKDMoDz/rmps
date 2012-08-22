@@ -19,8 +19,8 @@ namespace Me.Amon
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Main());
-            Application.Run(new Gtd.V.GtdEditor());
+            Application.Run(new Main());
+            //Application.Run(new Gtd.V.GtdEditor());
         }
     }
 }

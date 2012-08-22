@@ -42,10 +42,10 @@
             this.RbNone.AutoSize = true;
             this.RbNone.Location = new System.Drawing.Point(3, 3);
             this.RbNone.Name = "RbNone";
-            this.RbNone.Size = new System.Drawing.Size(83, 16);
+            this.RbNone.Size = new System.Drawing.Size(71, 16);
             this.RbNone.TabIndex = 0;
             this.RbNone.TabStop = true;
-            this.RbNone.Text = "无结束时间";
+            this.RbNone.Text = "永不结束";
             this.RbNone.UseVisualStyleBackColor = true;
             this.RbNone.CheckedChanged += new System.EventHandler(this.RbNone_CheckedChanged);
             // 
@@ -78,7 +78,7 @@
             this.SpLoop.Size = new System.Drawing.Size(56, 21);
             this.SpLoop.TabIndex = 2;
             this.SpLoop.Value = new decimal(new int[] {
-            65535,
+            3,
             0,
             0,
             0});
