@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Event;
-using Me.Amon.Model;
+using Me.Amon.M;
 using Me.Amon.Util;
 
 namespace Me.Amon.Pwd._Cat

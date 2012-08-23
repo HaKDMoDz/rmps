@@ -299,6 +299,7 @@
     <Compile Include="Gtd\V\UtDates.Designer.cs">
       <DependentUpon>UtDates.cs</DependentUpon>
     </Compile>
+    <Compile Include="IAction.cs" />
     <Compile Include="Ico\EIco.cs" />
     <Compile Include="Ico\E\AIcoAction.cs" />
     <Compile Include="Ico\E\AppendImgAction.cs" />
@@ -344,6 +345,7 @@
     <Compile Include="Img\V\ASmall.Designer.cs">
       <DependentUpon>ASmall.cs</DependentUpon>
     </Compile>
+    <Compile Include="M\IViewModel.cs" />
     <Compile Include="TApp.cs" />
     <Compile Include="Pwd\Att.cs" />
     <Compile Include="Pwd\Bean\ACall.cs">
@@ -581,15 +583,14 @@
     <Compile Include="Pwd\_Att\TextAtt.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\SafeModel.cs" />
     <Compile Include="Pwd\M\DataModel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Pwd\M\SafeModel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\UdcModel.cs" />
-    <Compile Include="Model\UserModel.cs">
+    <Compile Include="M\UdcModel.cs" />
+    <Compile Include="M\UserModel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Pwd\M\ViewModel.cs">
@@ -893,7 +894,7 @@
     <Compile Include="Sec\ASec.Designer.cs">
       <DependentUpon>ASec.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\Sec\DataModel.cs" />
+    <Compile Include="Sec\M\DataModel.cs" />
     <Compile Include="Sec\ESec.cs" />
     <Compile Include="Sec\ISec.cs" />
     <Compile Include="Sec\V\Pro\IForm.cs" />
@@ -1036,6 +1037,7 @@
       <DependentUpon>ASpy.cs</DependentUpon>
     </Compile>
     <Compile Include="Uc\Card.cs" />
+    <Compile Include="Uc\ItemGroup.cs" />
     <Compile Include="Uc\Itemi.cs" />
     <Compile Include="Auth\Uc\AuthLk.cs">
       <SubType>UserControl</SubType>
@@ -1062,6 +1064,8 @@
       <DependentUpon>KeyIcon.cs</DependentUpon>
     </Compile>
     <Compile Include="Uc\Items.cs" />
+    <Compile Include="Uc\KeyStroke.cs" />
+    <Compile Include="Uc\XmlMenu.cs" />
     <Compile Include="User\Uc\SignOl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1675,7 +1679,6 @@
     <Folder Include="Ren\V\" />
     <Folder Include="Sec\C\" />
     <Folder Include="Sec\E\" />
-    <Folder Include="Sec\M\" />
     <Folder Include="Spy\C\" />
     <Folder Include="Spy\E\" />
     <Folder Include="Spy\M\" />

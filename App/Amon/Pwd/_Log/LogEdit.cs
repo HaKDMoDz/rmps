@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
-using Me.Amon.Model;
+using Me.Amon.M;
 using Me.Amon.Pwd.M;
 
 namespace Me.Amon.Pwd._Log

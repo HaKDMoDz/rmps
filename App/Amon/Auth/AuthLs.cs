@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Me.Amon.Event;
-using Me.Amon.Model;
+using Me.Amon.M;
 using Me.Amon.Util;
 
 namespace Me.Amon.Auth

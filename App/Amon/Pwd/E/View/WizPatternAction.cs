@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Me.Amon.M;
 using Me.Amon.Uc;
 
 namespace Me.Amon.Pwd.E.View
@@ -14,7 +15,7 @@ namespace Me.Amon.Pwd.E.View
             }
 
             _Items.Add(item);
-            M.ViewModel model = viewModel as M.ViewModel;
+            Pwd.M.ViewModel model = viewModel as Pwd.M.ViewModel;
             if (model == null)
             {
                 return;

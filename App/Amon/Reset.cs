@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Windows.Forms;
 using System.Xml;
-using Me.Amon.Model;
+using Me.Amon.M;
 using Me.Amon.Pwd;
 
 namespace Me.Amon

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Me.Amon.Model;
+using Me.Amon.M;
 using Me.Amon.Pwd.Bean;
 using Me.Amon.Pwd.M;
 

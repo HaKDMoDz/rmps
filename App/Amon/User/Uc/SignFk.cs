@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 using Me.Amon.Auth;
-using Me.Amon.Model;
+using Me.Amon.M;
 
 namespace Me.Amon.User.Uc
 {

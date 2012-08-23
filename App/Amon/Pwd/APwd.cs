@@ -11,7 +11,7 @@ using System.Xml;
 using Me.Amon.Auth;
 using Me.Amon.Event;
 using Me.Amon.Gtd;
-using Me.Amon.Model;
+using Me.Amon.M;
 using Me.Amon.Properties;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd._Cat;

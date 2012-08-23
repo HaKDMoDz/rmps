@@ -4,7 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Da;
 using Me.Amon.Event;
-using Me.Amon.Model;
+using Me.Amon.M;
 using Me.Amon.User;
 using Me.Amon.User.Uc;
 using Me.Amon.Util;

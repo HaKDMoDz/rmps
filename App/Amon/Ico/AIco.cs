@@ -6,7 +6,7 @@ using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Event;
 using Me.Amon.Ico.V;
-using Me.Amon.Model;
+using Me.Amon.M;
 using Me.Amon.Uc;
 using Me.Amon.Util;
 

@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Auth.Uc;
-using Me.Amon.Model;
+using Me.Amon.M;
 using Me.Amon.Properties;
 using Me.Amon.Util;
 

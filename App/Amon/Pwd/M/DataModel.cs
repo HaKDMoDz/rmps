@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using Me.Amon.Model;
+using Me.Amon.M;
 
 namespace Me.Amon.Pwd.M
 {

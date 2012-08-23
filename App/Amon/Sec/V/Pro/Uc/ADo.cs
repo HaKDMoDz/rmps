@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 using Me.Amon.Pwd;
-using Me.Amon.Model.Sec;
+using Me.Amon.Sec.M;
 using Me.Amon.Uc;
 
 namespace Me.Amon.Sec.V.Pro.Uc

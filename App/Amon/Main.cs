@@ -4,8 +4,8 @@ using System.Text;
 using System.Windows.Forms;
 using Me.Amon.Auth;
 using Me.Amon.Event;
-using Me.Amon.Guid;
-using Me.Amon.Model;
+using Me.Amon.V;
+using Me.Amon.M;
 using Me.Amon.User;
 using Me.Amon.Util;
 using Me.Amon.Uw;
@@ -266,9 +266,11 @@ namespace Me.Amon
 
         private void DoSignIn(string view)
         {
+            ShowAPwd();
+
             LoadGuid();
 
-            ShowAPwd();
+            this.Focus();
         }
 
         private void DoSignOl(string view)

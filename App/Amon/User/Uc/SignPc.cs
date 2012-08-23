@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Auth;
 using Me.Amon.Da;
-using Me.Amon.Model;
+using Me.Amon.M;
 using Me.Amon.Pwd;
 using Me.Amon.Ren;
 using Me.Amon.Util;
