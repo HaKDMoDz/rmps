@@ -299,7 +299,7 @@
     <Compile Include="Gtd\V\UtDates.Designer.cs">
       <DependentUpon>UtDates.cs</DependentUpon>
     </Compile>
-    <Compile Include="IAction.cs" />
+    <Compile Include="E\IAction.cs" />
     <Compile Include="Ico\EIco.cs" />
     <Compile Include="Ico\E\AIcoAction.cs" />
     <Compile Include="Ico\E\AppendImgAction.cs" />
@@ -528,7 +528,7 @@
     <Compile Include="Ico\AIco.Designer.cs">
       <DependentUpon>AIco.cs</DependentUpon>
     </Compile>
-    <Compile Include="EApp.cs" />
+    <Compile Include="CApp.cs" />
     <Compile Include="About.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -882,10 +882,10 @@
     <Compile Include="Ren\E\Rule\MoveUpAction.cs" />
     <Compile Include="Ren\E\Rule\SaveasAction.cs" />
     <Compile Include="Ren\TRen.cs" />
-    <Compile Include="Reset.cs">
+    <Compile Include="V\Reset.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reset.Designer.cs">
+    <Compile Include="V\Reset.Designer.cs">
       <DependentUpon>Reset.cs</DependentUpon>
     </Compile>
     <Compile Include="Sec\ASec.cs">
@@ -1176,15 +1176,15 @@
       <DependentUpon>SignAc.cs</DependentUpon>
     </Compile>
     <Compile Include="IAmon.cs" />
-    <Compile Include="Guid\AGuid.cs">
+    <Compile Include="V\AGuid.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Guid\AGuid.Designer.cs">
+    <Compile Include="V\AGuid.Designer.cs">
       <DependentUpon>AGuid.cs</DependentUpon>
     </Compile>
-    <Compile Include="Guid\Uc\LogoEye.cs" />
-    <Compile Include="Guid\Uc\LogoIco.cs" />
-    <Compile Include="Guid\ILogo.cs" />
+    <Compile Include="V\Uc\LogoEye.cs" />
+    <Compile Include="V\Uc\LogoIco.cs" />
+    <Compile Include="V\ILogo.cs" />
     <EmbeddedResource Include="Bar\ABar.resx">
       <DependentUpon>ABar.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1457,7 +1457,7 @@
     <EmbeddedResource Include="Ren\ARen.resx">
       <DependentUpon>ARen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reset.resx">
+    <EmbeddedResource Include="V\Reset.resx">
       <DependentUpon>Reset.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sec\ASec.resx">
@@ -1559,7 +1559,7 @@
     <EmbeddedResource Include="User\SignAc.resx">
       <DependentUpon>SignAc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Guid\AGuid.resx">
+    <EmbeddedResource Include="V\AGuid.resx">
       <DependentUpon>AGuid.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Amon_TemporaryKey.pfx" />
@@ -1666,6 +1666,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="C\" />
     <Folder Include="Gtd\C\" />
     <Folder Include="Gtd\E\" />
     <Folder Include="Gtd\M\" />

@@ -212,7 +212,7 @@ namespace Me.Amon.Pwd.M
         public GuidAtt InitGuid()
         {
             GuidAtt guid = new GuidAtt { Order = "模板" };
-            guid.Text = DateTime.Now.ToString(EApp.DATEIME_FORMAT);
+            guid.Text = DateTime.Now.ToString(CApp.DATEIME_FORMAT);
             guid.Id = (_Key.AttIndex++).ToString();
             _AttList.Add(guid);
             return guid;
@@ -392,7 +392,7 @@ namespace Me.Amon.Pwd.M
             }
 
             // 加密版本
-            _Key.CipherVer = EApp.SEC_AES;
+            _Key.CipherVer = CApp.SEC_AES;
 
             _Key.Password = _UserModel.EncodeKey(buf.ToString());
 

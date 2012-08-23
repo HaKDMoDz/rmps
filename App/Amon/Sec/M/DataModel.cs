@@ -1,4 +1,6 @@
-﻿namespace Me.Amon.Model.Sec
+﻿using Me.Amon.M;
+
+namespace Me.Amon.Sec.M
 {
     public class DataModel
     {

@@ -5,7 +5,7 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using Me.Amon.Properties;
 
-namespace Me.Amon.Guid.Uc
+namespace Me.Amon.V.Uc
 {
     public class LogoEye : ILogo
     {

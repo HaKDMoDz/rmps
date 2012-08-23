@@ -75,7 +75,7 @@ namespace Me.Amon.Da
 
         public void Init(UserModel userModel)
         {
-            _DbPath = Path.Combine(userModel.Home, EApp.FILE_DB);
+            _DbPath = Path.Combine(userModel.Home, CApp.FILE_DB);
 
             if (!File.Exists(_DbPath))
             {

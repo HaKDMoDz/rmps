@@ -11,7 +11,7 @@ using Me.Amon.Da;
 using Me.Amon.Event;
 using Me.Amon.Util;
 
-namespace Me.Amon.Model
+namespace Me.Amon.M
 {
     public sealed class UserModel
     {
@@ -41,7 +41,7 @@ namespace Me.Amon.Model
         /// <returns></returns>
         public bool CaSignIn(string home, string code, string name, string pass)
         {
-            string file = Path.Combine(home, EApp.AMON_CFG);
+            string file = Path.Combine(home, CApp.AMON_CFG);
             if (!File.Exists(file))
             {
                 return false;
@@ -50,7 +50,7 @@ namespace Me.Amon.Model
             DFAccess prop = new DFAccess();
             prop.Load(file);
 
-            string data = prop.Get(EApp.AMON_CFG_DATA);
+            string data = prop.Get(CApp.AMON_CFG_DATA);
             if (!CharUtil.IsValidate(data, 344))
             {
                 return false;
@@ -58,18 +58,18 @@ namespace Me.Amon.Model
             _Data = Convert.FromBase64String(data);
 
             string info = Digest(name, pass);
-            if (info != prop.Get(EApp.AMON_CFG_INFO))
+            if (info != prop.Get(CApp.AMON_CFG_INFO))
             {
                 return false;
             }
 
-            string main = prop.Get(EApp.AMON_CFG_MAIN);
+            string main = prop.Get(CApp.AMON_CFG_MAIN);
             if (!Decrypt(name, code, pass, main))
             {
                 return false;
             }
 
-            _Lock = prop.Get(EApp.AMON_CFG_LOCK);
+            _Lock = prop.Get(CApp.AMON_CFG_LOCK);
 
             _Name = name;
             _Code = code;
@@ -110,11 +110,11 @@ namespace Me.Amon.Model
         public bool CaAuthPk(string oldPass, string newPass)
         {
             DFAccess prop = new DFAccess();
-            prop.Load(Path.Combine(_Home, EApp.AMON_CFG));
+            prop.Load(Path.Combine(_Home, CApp.AMON_CFG));
 
             // 已有口令校验
             string info = Digest(Name, oldPass);
-            if (info != prop.Get(EApp.AMON_CFG_INFO))
+            if (info != prop.Get(CApp.AMON_CFG_INFO))
             {
                 return false;
             }
@@ -155,9 +155,9 @@ namespace Me.Amon.Model
             info = Digest(Name, newPass);
 
             string main = Convert.ToBase64String(t);
-            prop.Set(EApp.AMON_CFG_INFO, info);
-            prop.Set(EApp.AMON_CFG_MAIN, main);
-            prop.Save(Path.Combine(_Home, EApp.AMON_CFG));
+            prop.Set(CApp.AMON_CFG_INFO, info);
+            prop.Set(CApp.AMON_CFG_MAIN, main);
+            prop.Save(Path.Combine(_Home, CApp.AMON_CFG));
 
             return true;
         }
@@ -228,9 +228,9 @@ namespace Me.Amon.Model
             _Lock = Digest(Name, newPass);
 
             DFAccess prop = new DFAccess();
-            prop.Load(Path.Combine(_Home, EApp.AMON_CFG));
-            prop.Set(EApp.AMON_CFG_LOCK, _Lock);
-            prop.Save(Path.Combine(_Home, EApp.AMON_CFG));
+            prop.Load(Path.Combine(_Home, CApp.AMON_CFG));
+            prop.Set(CApp.AMON_CFG_LOCK, _Lock);
+            prop.Save(Path.Combine(_Home, CApp.AMON_CFG));
             return true;
         }
 
@@ -243,11 +243,11 @@ namespace Me.Amon.Model
         public bool CaAuthSk(string oldPass, string secPass)
         {
             DFAccess prop = new DFAccess();
-            prop.Load(Path.Combine(_Home, EApp.AMON_CFG));
+            prop.Load(Path.Combine(_Home, CApp.AMON_CFG));
 
             // 已有口令校验
             string info = Digest(Name, oldPass);
-            if (info != prop.Get(EApp.AMON_CFG_INFO))
+            if (info != prop.Get(CApp.AMON_CFG_INFO))
             {
                 return false;
             }
@@ -284,8 +284,8 @@ namespace Me.Amon.Model
             aes.Clear();
             #endregion
 
-            prop.Set(EApp.AMON_CFG_SAFE, Convert.ToBase64String(t));
-            prop.Save(Path.Combine(_Home, EApp.AMON_CFG));
+            prop.Set(CApp.AMON_CFG_SAFE, Convert.ToBase64String(t));
+            prop.Save(Path.Combine(_Home, CApp.AMON_CFG));
             return true;
         }
 
@@ -342,14 +342,14 @@ namespace Me.Amon.Model
                 Directory.CreateDirectory(_Home);
             }
             DFAccess prop = new DFAccess();
-            prop.Set(EApp.AMON_CFG_NAME, name);
-            prop.Set(EApp.AMON_CFG_CODE, code);
-            prop.Set(EApp.AMON_CFG_DATA, Convert.ToBase64String(_Data));
-            prop.Set(EApp.AMON_CFG_INFO, info);
-            prop.Set(EApp.AMON_CFG_LOCK, info);
-            prop.Set(EApp.AMON_CFG_MAIN, main);
-            prop.Set(EApp.AMON_CFG_SAFE, "");
-            prop.Save(Path.Combine(_Home, EApp.AMON_CFG));
+            prop.Set(CApp.AMON_CFG_NAME, name);
+            prop.Set(CApp.AMON_CFG_CODE, code);
+            prop.Set(CApp.AMON_CFG_DATA, Convert.ToBase64String(_Data));
+            prop.Set(CApp.AMON_CFG_INFO, info);
+            prop.Set(CApp.AMON_CFG_LOCK, info);
+            prop.Set(CApp.AMON_CFG_MAIN, main);
+            prop.Set(CApp.AMON_CFG_SAFE, "");
+            prop.Save(Path.Combine(_Home, CApp.AMON_CFG));
 
             _Name = name;
             _Code = code;
@@ -427,14 +427,14 @@ namespace Me.Amon.Model
 
             _Home = home;
             DFAccess prop = new DFAccess();
-            prop.Set(EApp.AMON_CFG_NAME, name);
-            prop.Set(EApp.AMON_CFG_CODE, code);
-            prop.Set(EApp.AMON_CFG_DATA, data);
-            prop.Set(EApp.AMON_CFG_INFO, info);
-            prop.Set(EApp.AMON_CFG_LOCK, info);
-            prop.Set(EApp.AMON_CFG_MAIN, main);
-            prop.Set(EApp.AMON_CFG_SAFE, safe);
-            prop.Save(Path.Combine(_Home, EApp.AMON_CFG));
+            prop.Set(CApp.AMON_CFG_NAME, name);
+            prop.Set(CApp.AMON_CFG_CODE, code);
+            prop.Set(CApp.AMON_CFG_DATA, data);
+            prop.Set(CApp.AMON_CFG_INFO, info);
+            prop.Set(CApp.AMON_CFG_LOCK, info);
+            prop.Set(CApp.AMON_CFG_MAIN, main);
+            prop.Set(CApp.AMON_CFG_SAFE, safe);
+            prop.Save(Path.Combine(_Home, CApp.AMON_CFG));
 
             _Name = name;
             _Code = code;
@@ -505,15 +505,15 @@ namespace Me.Amon.Model
             }
 
             DFAccess prop = new DFAccess();
-            prop.Load(Path.Combine(_Home, EApp.AMON_CFG));
-            prop.Set(EApp.AMON_CFG_NAME, oldPass);
-            prop.Set(EApp.AMON_CFG_CODE, code);
-            prop.Set(EApp.AMON_CFG_DATA, data);
-            prop.Set(EApp.AMON_CFG_INFO, info);
-            prop.Set(EApp.AMON_CFG_LOCK, _Lock);
-            prop.Set(EApp.AMON_CFG_MAIN, main);
-            prop.Set(EApp.AMON_CFG_SAFE, safe);
-            prop.Save(Path.Combine(_Home, EApp.AMON_CFG));
+            prop.Load(Path.Combine(_Home, CApp.AMON_CFG));
+            prop.Set(CApp.AMON_CFG_NAME, oldPass);
+            prop.Set(CApp.AMON_CFG_CODE, code);
+            prop.Set(CApp.AMON_CFG_DATA, data);
+            prop.Set(CApp.AMON_CFG_INFO, info);
+            prop.Set(CApp.AMON_CFG_LOCK, _Lock);
+            prop.Set(CApp.AMON_CFG_MAIN, main);
+            prop.Set(CApp.AMON_CFG_SAFE, safe);
+            prop.Save(Path.Combine(_Home, CApp.AMON_CFG));
 
             return true;
         }
@@ -596,7 +596,7 @@ namespace Me.Amon.Model
         public string Decode(string dat, int sec)
         {
             byte[] buf;
-            if (sec == EApp.SEC_AES)
+            if (sec == CApp.SEC_AES)
             {
                 AesManaged aes = new AesManaged();
 
@@ -615,7 +615,7 @@ namespace Me.Amon.Model
                 return Encoding.UTF8.GetString(buf, 0, buf.Length);
             }
 
-            if (sec == EApp.SEC_BASE64)
+            if (sec == CApp.SEC_BASE64)
             {
                 buf = Convert.FromBase64String(dat);
                 return Encoding.UTF8.GetString(buf, 0, buf.Length);
@@ -716,6 +716,7 @@ namespace Me.Amon.Model
         private int _TodoCnt = 0;
         private int _PastCnt = 0;
         private int _Delay = 5;
+        private string _SyncObj = "";
         private void Timer_Callback(object state)
         {
             bool locked = false;
@@ -727,7 +728,7 @@ namespace Me.Amon.Model
                 {
                     return;
                 }
-                Monitor.Enter(_Delay);
+                Monitor.Enter(_SyncObj);
 
                 _TodoCnt = 0;
                 _PastCnt = 0;
@@ -765,13 +766,9 @@ namespace Me.Amon.Model
 
                 //Monitor.Pulse(_Delay);
             }
-            //catch (Exception exp)
-            //{
-            //    string t = exp.Message;
-            //}
             finally
             {
-                //Monitor.Exit(_Delay);
+                Monitor.Exit(_SyncObj);
             }
         }
 

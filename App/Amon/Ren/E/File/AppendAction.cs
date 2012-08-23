@@ -12,7 +12,7 @@ namespace Me.Amon.Ren.E.File
                 return;
             }
 
-            if (DialogResult.OK != Main.ShowOpenFileDialog(IApp.Form, EApp.FILE_OPEN_ALL, "", true))
+            if (DialogResult.OK != Main.ShowOpenFileDialog(IApp.Form, CApp.FILE_OPEN_ALL, "", true))
             {
                 return;
             }

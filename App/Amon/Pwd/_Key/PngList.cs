@@ -44,7 +44,7 @@ namespace Me.Amon.Pwd._Key
             IlIco.Images.Add(BeanUtil.NaN32);
             int index;
             string name;
-            foreach (string file in Directory.GetFiles(path, '*' + EApp.IMG_KEY_LIST_EXT))
+            foreach (string file in Directory.GetFiles(path, '*' + CApp.IMG_KEY_LIST_EXT))
             {
                 index = file.LastIndexOf(Path.DirectorySeparatorChar);
                 if (index == file.Length - 1)
@@ -79,7 +79,7 @@ namespace Me.Amon.Pwd._Key
 
         private void BtAppend_Click(object sender, EventArgs e)
         {
-            if (DialogResult.OK != Main.ShowOpenFileDialog(this, EApp.FILE_OPEN_IMG_RES, "", false))
+            if (DialogResult.OK != Main.ShowOpenFileDialog(this, CApp.FILE_OPEN_IMG_RES, "", false))
             {
                 return;
             }

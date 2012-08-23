@@ -168,7 +168,7 @@ namespace Me.Amon.Ico
             // 外部调用模式
             if (AmonHandler == null)
             {
-                if (DialogResult.OK == Main.ShowSaveFileDialog(this, EApp.FILE_SAVE_ICL, ""))
+                if (DialogResult.OK == Main.ShowSaveFileDialog(this, CApp.FILE_SAVE_ICL, ""))
                 {
                     SaveIcl(Main.SaveFileDialog.FileName);
                 }
@@ -214,7 +214,7 @@ namespace Me.Amon.Ico
             // 独立编辑模式
             if (AmonHandler == null)
             {
-                if (DialogResult.OK == Main.ShowSaveFileDialog(this, EApp.FILE_SAVE_ICO, ""))
+                if (DialogResult.OK == Main.ShowSaveFileDialog(this, CApp.FILE_SAVE_ICO, ""))
                 {
                     SaveIco(Main.SaveFileDialog.FileName);
                 }

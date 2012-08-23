@@ -34,7 +34,7 @@ namespace Me.Amon.User.Uc
 
             InitializeComponent();
 
-            TbPath.Text = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), EApp.DIR_DATA);
+            TbPath.Text = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), CApp.DIR_DATA);
             _SignAc.ShowTips(BtPath, "选择目录");
         }
         #endregion
@@ -72,8 +72,8 @@ namespace Me.Amon.User.Uc
 
             name = name.ToLower();
             _Prop = new DFAccess();
-            _Prop.Load(EApp.AMON_SYS);
-            string home = _Prop.Get(string.Format(EApp.AMON_SYS_HOME, name));
+            _Prop.Load(CApp.AMON_SYS);
+            string home = _Prop.Get(string.Format(CApp.AMON_SYS_HOME, name));
             if (!string.IsNullOrEmpty(home))
             {
                 Main.ShowAlert(string.Format("已存在名为 {0} 的用户，请尝试其它用户名！", name));
@@ -121,7 +121,7 @@ namespace Me.Amon.User.Uc
             #endregion
 
             #region 代码
-            string code = EApp.USER_AMON;
+            string code = CApp.USER_AMON;
             if (Directory.Exists(Path.Combine(home, code)))
             {
                 Main.ShowAlert(string.Format("指定路径下已存在名为 {0} 的目录！", code));
@@ -142,9 +142,9 @@ namespace Me.Amon.User.Uc
                     return;
                 }
 
-                _Prop.Set(string.Format(EApp.AMON_SYS_CODE, name), _UserModel.Code);
-                _Prop.Set(string.Format(EApp.AMON_SYS_HOME, name), _UserModel.Home);
-                _Prop.Save(EApp.AMON_SYS);
+                _Prop.Set(string.Format(CApp.AMON_SYS_CODE, name), _UserModel.Code);
+                _Prop.Set(string.Format(CApp.AMON_SYS_HOME, name), _UserModel.Home);
+                _Prop.Save(CApp.AMON_SYS);
 
                 InitDat();
             }
@@ -319,7 +319,7 @@ namespace Me.Amon.User.Uc
                 stream.Close();
             }
             #endregion
-            _SignAc.CallBack(EApp.IAPP_APWD);
+            _SignAc.CallBack(CApp.IAPP_APWD);
         }
         #endregion
     }

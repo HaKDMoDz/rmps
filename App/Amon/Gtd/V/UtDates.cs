@@ -13,7 +13,7 @@ namespace Me.Amon.Gtd.V
         {
             InitializeComponent();
 
-            DtStart.CustomFormat = EApp.DATEIME_FORMAT;
+            DtStart.CustomFormat = CApp.DATEIME_FORMAT;
 
             CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_NONE, V = "无" });
             CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_SECOND, V = "秒" });

@@ -67,7 +67,7 @@ namespace Me.Amon.Sec.V.Wiz
 
         private void MiAppendFile_Click(object sender, EventArgs e)
         {
-            if (DialogResult.OK != Main.ShowOpenFileDialog(_ASec, EApp.FILE_OPEN_ALL, "", true))
+            if (DialogResult.OK != Main.ShowOpenFileDialog(_ASec, CApp.FILE_OPEN_ALL, "", true))
             {
                 return;
             }

@@ -30,7 +30,7 @@ namespace Me.Amon.User.Uc
 
             InitializeComponent();
 
-            TbPath.Text = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), EApp.DIR_DATA);
+            TbPath.Text = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), CApp.DIR_DATA);
             _SignAc.ShowTips(BtPath, "选择目录");
         }
         #endregion
@@ -73,7 +73,7 @@ namespace Me.Amon.User.Uc
             string path = TbPath.Text;
             if (string.IsNullOrEmpty(path))
             {
-                path = EApp.DIR_DATA;
+                path = CApp.DIR_DATA;
             }
             if (!Directory.Exists(path))
             {
@@ -134,10 +134,10 @@ namespace Me.Amon.User.Uc
                 }
 
                 DFAccess prop = new DFAccess();
-                prop.Load(EApp.AMON_SYS);
-                prop.Set(string.Format(EApp.AMON_SYS_CODE, name), _UserModel.Code);
-                prop.Set(string.Format(EApp.AMON_SYS_HOME, name), _UserModel.Home);
-                prop.Save(EApp.AMON_SYS);
+                prop.Load(CApp.AMON_SYS);
+                prop.Set(string.Format(CApp.AMON_SYS_CODE, name), _UserModel.Code);
+                prop.Set(string.Format(CApp.AMON_SYS_HOME, name), _UserModel.Home);
+                prop.Save(CApp.AMON_SYS);
 
                 InitDat();
             }
@@ -214,7 +214,7 @@ namespace Me.Amon.User.Uc
 
             //dba.ExecuteBatch();
 
-            _SignAc.CallBack(EApp.IAPP_APWD);
+            _SignAc.CallBack(CApp.IAPP_APWD);
         }
     }
 }

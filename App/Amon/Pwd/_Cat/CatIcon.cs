@@ -63,7 +63,7 @@ namespace Me.Amon.Pwd._Cat
 
         private void BtAppend_Click(object sender, EventArgs e)
         {
-            if (DialogResult.OK != Main.ShowOpenFileDialog(this, EApp.FILE_OPEN_IMG, "", false))
+            if (DialogResult.OK != Main.ShowOpenFileDialog(this, CApp.FILE_OPEN_IMG, "", false))
             {
                 return;
             }

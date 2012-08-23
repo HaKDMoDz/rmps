@@ -8,7 +8,7 @@ namespace Me.Amon.Sec.V.Pro.Uw
 
         public void Show(ASec asec, string data)
         {
-            if (DialogResult.OK != Main.ShowSaveFileDialog(asec, EApp.FILE_SAVE_ALL, data))
+            if (DialogResult.OK != Main.ShowSaveFileDialog(asec, CApp.FILE_SAVE_ALL, data))
             {
                 return;
             }

@@ -6,12 +6,12 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Event;
-using Me.Amon.Guid.Uc;
-using Me.Amon.Model;
+using Me.Amon.M;
 using Me.Amon.Properties;
 using Me.Amon.Util;
+using Me.Amon.V.Uc;
 
-namespace Me.Amon.Guid
+namespace Me.Amon.V
 {
     public partial class AGuid : Form
     {
@@ -83,7 +83,7 @@ namespace Me.Amon.Guid
 
             // 托盘图标状态
             int pattern = Settings.Default.Pattern;
-            _Main.SetTrayVisible((pattern & EApp.PATTERN_TRAY) != 0);
+            _Main.SetTrayVisible((pattern & CApp.PATTERN_TRAY) != 0);
 
             ChangeEmotion(Settings.Default.Emotion);
             ChangeAppVisible(false);
@@ -281,11 +281,11 @@ namespace Me.Amon.Guid
 
             if (visible)
             {
-                Settings.Default.Pattern |= EApp.PATTERN_TRAY;
+                Settings.Default.Pattern |= CApp.PATTERN_TRAY;
             }
             else
             {
-                Settings.Default.Pattern ^= EApp.PATTERN_TRAY;
+                Settings.Default.Pattern ^= CApp.PATTERN_TRAY;
             }
             Settings.Default.Save();
         }
@@ -589,17 +589,17 @@ namespace Me.Amon.Guid
 
             switch ((app.Id ?? "").ToLower())
             {
-                case EApp.IAPP_ASEC:
+                case CApp.IAPP_ASEC:
                     return new Sec.ASec(_UserModel);
-                case EApp.IAPP_ABAR:
+                case CApp.IAPP_ABAR:
                     return new Bar.ABar(_UserModel);
-                case EApp.IAPP_AREN:
+                case CApp.IAPP_AREN:
                     return new Ren.ARen(_UserModel);
-                case EApp.IAPP_AICO:
+                case CApp.IAPP_AICO:
                     return new Ico.AIco(_UserModel);
-                case EApp.IAPP_AIMG:
+                case CApp.IAPP_AIMG:
                     return new Img.AImg(_UserModel);
-                case EApp.IAPP_ASPY:
+                case CApp.IAPP_ASPY:
                     return new Spy.ASpy(_UserModel);
                 default:
                     return null;

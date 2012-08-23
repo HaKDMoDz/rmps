@@ -11,7 +11,7 @@ namespace Me.Amon.Ico.E
                 return;
             }
 
-            if (DialogResult.OK != Main.ShowOpenFileDialog(IApp.Form, EApp.FILE_OPEN_RES, "", false))
+            if (DialogResult.OK != Main.ShowOpenFileDialog(IApp.Form, CApp.FILE_OPEN_RES, "", false))
             {
                 return;
             }

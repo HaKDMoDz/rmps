@@ -148,7 +148,7 @@ namespace Me.Amon.Pwd.V.Wiz
             }
 
             CbLib.SelectedItem = new Lib { Id = guid.Data };
-            PbCard.Visible = guid.Data == EApp.LIB_CARD;
+            PbCard.Visible = guid.Data == CApp.LIB_CARD;
         }
 
         public bool SaveData()

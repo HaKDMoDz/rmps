@@ -43,7 +43,7 @@ namespace Me.Amon.User.Uc
 
             InitializeComponent();
 
-            TbPath.Text = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), EApp.DIR_DATA);
+            TbPath.Text = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), CApp.DIR_DATA);
             _SignAc.ShowTips(BtPath, "选择目录");
         }
         #endregion
@@ -121,7 +121,7 @@ namespace Me.Amon.User.Uc
             _Root = TbPath.Text;
             if (string.IsNullOrEmpty(_Root))
             {
-                _Root = EApp.DIR_DATA;
+                _Root = CApp.DIR_DATA;
             }
             #endregion
 
@@ -130,8 +130,8 @@ namespace Me.Amon.User.Uc
             #region 本地用户判断
             _Name = _Name.ToLower();
             _Prop = new DFAccess();
-            _Prop.Load(EApp.AMON_SYS);
-            string home = _Prop.Get(string.Format(EApp.AMON_SYS_HOME, _Name));
+            _Prop.Load(CApp.AMON_SYS);
+            string home = _Prop.Get(string.Format(CApp.AMON_SYS_HOME, _Name));
             if (!string.IsNullOrEmpty(home))
             {
                 _SignAc.HideWaiting();
@@ -146,7 +146,7 @@ namespace Me.Amon.User.Uc
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
             client.Encoding = Encoding.UTF8;
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignUpV_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(EApp.SERVER_PATH), "POST", "&o=rsa&m=0");
+            client.UploadStringAsync(new Uri(CApp.SERVER_PATH), "POST", "&o=rsa&m=0");
         }
 
         public void DoCancel()
@@ -226,7 +226,7 @@ namespace Me.Amon.User.Uc
                 }
             }
 
-            switch (EApp.SERVER_TYPE)
+            switch (CApp.SERVER_TYPE)
             {
                 case "NET":
                     d = Net(d);
@@ -242,7 +242,7 @@ namespace Me.Amon.User.Uc
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
             client.Encoding = Encoding.UTF8;
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignUpS_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(EApp.SERVER_PATH), "POST", "&o=sup&t=" + t + "&d=" + d);
+            client.UploadStringAsync(new Uri(CApp.SERVER_PATH), "POST", "&o=sup&t=" + t + "&d=" + d);
         }
 
         private void SignUpS_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -294,10 +294,10 @@ namespace Me.Amon.User.Uc
                 else
                 {
                     DFAccess prop = new DFAccess();
-                    prop.Load(EApp.AMON_SYS);
-                    prop.Set(string.Format(EApp.AMON_SYS_CODE, _Name), _UserModel.Code);
-                    prop.Set(string.Format(EApp.AMON_SYS_HOME, _Name), _UserModel.Home);
-                    prop.Save(EApp.AMON_SYS);
+                    prop.Load(CApp.AMON_SYS);
+                    prop.Set(string.Format(CApp.AMON_SYS_CODE, _Name), _UserModel.Code);
+                    prop.Set(string.Format(CApp.AMON_SYS_HOME, _Name), _UserModel.Home);
+                    prop.Save(CApp.AMON_SYS);
 
                     InitDat();
                 }
@@ -341,7 +341,7 @@ namespace Me.Amon.User.Uc
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
             client.Encoding = Encoding.UTF8;
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(InitCat_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(EApp.SERVER_PATH), "POST", "&o=cat&c=" + _UserModel.Code);
+            client.UploadStringAsync(new Uri(CApp.SERVER_PATH), "POST", "&o=cat&c=" + _UserModel.Code);
         }
 
         private void InitCat_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -380,7 +380,7 @@ namespace Me.Amon.User.Uc
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
             client.Encoding = Encoding.UTF8;
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(InitLib_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(EApp.SERVER_PATH), "POST", "&o=lib&c=" + _UserModel.Code);
+            client.UploadStringAsync(new Uri(CApp.SERVER_PATH), "POST", "&o=lib&c=" + _UserModel.Code);
         }
 
         private void InitLib_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -421,7 +421,7 @@ namespace Me.Amon.User.Uc
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
             client.Encoding = Encoding.UTF8;
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(InitUdc_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(EApp.SERVER_PATH), "POST", "&o=udc&c=" + _UserModel.Code);
+            client.UploadStringAsync(new Uri(CApp.SERVER_PATH), "POST", "&o=udc&c=" + _UserModel.Code);
         }
 
         private void InitUdc_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -457,7 +457,7 @@ namespace Me.Amon.User.Uc
             }
 
             BeanUtil.UnZip("Amon.dat", _UserModel.Home);
-            _SignAc.CallBack(EApp.IAPP_APWD);
+            _SignAc.CallBack(CApp.IAPP_APWD);
         }
         #endregion
     }

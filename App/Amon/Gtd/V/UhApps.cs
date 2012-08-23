@@ -45,7 +45,7 @@ namespace Me.Amon.Gtd.V
 
         private void BtPath_Click(object sender, EventArgs e)
         {
-            if (DialogResult.OK == Main.ShowOpenFileDialog(EApp.FILE_OPEN_ALL, TbPath.Text, false))
+            if (DialogResult.OK == Main.ShowOpenFileDialog(CApp.FILE_OPEN_ALL, TbPath.Text, false))
             {
                 TbPath.Text = Main.OpenFileDialog.FileName;
             }

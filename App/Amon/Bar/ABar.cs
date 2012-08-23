@@ -150,7 +150,7 @@ namespace Me.Amon.Bar
                 return;
             }
 
-            if (DialogResult.OK != Main.ShowSaveFileDialog(this, EApp.FILE_SAVE_PNG, ""))
+            if (DialogResult.OK != Main.ShowSaveFileDialog(this, CApp.FILE_SAVE_PNG, ""))
             {
                 return;
             }
@@ -185,7 +185,7 @@ namespace Me.Amon.Bar
 
         private void MiDecLoc_Click(object sender, EventArgs e)
         {
-            if (DialogResult.OK != Main.ShowOpenFileDialog(this, EApp.FILE_OPEN_IMG, "", false))
+            if (DialogResult.OK != Main.ShowOpenFileDialog(this, CApp.FILE_OPEN_IMG, "", false))
             {
                 return;
             }

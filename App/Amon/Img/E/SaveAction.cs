@@ -6,7 +6,7 @@ namespace Me.Amon.Img.E
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
-            if (DialogResult.OK != Main.ShowSaveFileDialog(IApp.Form, EApp.FILE_SAVE_PNG, ""))
+            if (DialogResult.OK != Main.ShowSaveFileDialog(IApp.Form, CApp.FILE_SAVE_PNG, ""))
             {
                 return;
             }

@@ -140,7 +140,7 @@ namespace Me.Amon.Pwd.V.Pro
             _Att = att;
 
             CbName.SelectedItem = new Lib { Id = _Att.Data };
-            PbCard.Visible = _Att.Data == EApp.LIB_CARD;
+            PbCard.Visible = _Att.Data == CApp.LIB_CARD;
             return true;
         }
 

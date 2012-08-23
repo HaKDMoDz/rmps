@@ -92,7 +92,7 @@ namespace Me.Amon.Auth.Uc
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
             client.Encoding = Encoding.UTF8;
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignUpV_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(EApp.SERVER_PATH), "POST", "&o=rsa&m=0");
+            client.UploadStringAsync(new Uri(CApp.SERVER_PATH), "POST", "&o=rsa&m=0");
         }
 
         public void DoCancel()
@@ -139,7 +139,7 @@ namespace Me.Amon.Auth.Uc
                 }
             }
 
-            switch (EApp.SERVER_TYPE)
+            switch (CApp.SERVER_TYPE)
             {
                 case "NET":
                     d = Net(d);
@@ -155,7 +155,7 @@ namespace Me.Amon.Auth.Uc
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
             client.Encoding = Encoding.UTF8;
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignUpS_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(EApp.SERVER_PATH), "POST", "c=" + _UserModel.Code + "&o=spk&t=" + t + "&d=" + d);
+            client.UploadStringAsync(new Uri(CApp.SERVER_PATH), "POST", "c=" + _UserModel.Code + "&o=spk&t=" + t + "&d=" + d);
         }
 
         private void SignUpS_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)

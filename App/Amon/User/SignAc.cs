@@ -180,7 +180,7 @@ namespace Me.Amon.Auth
                 return;
             }
 
-            string path = Path.Combine(home, EApp.AMON_CFG);
+            string path = Path.Combine(home, CApp.AMON_CFG);
             if (!File.Exists(path))
             {
                 Main.ShowAlert("请确认您选择的数据路径是否正确！");
@@ -188,8 +188,8 @@ namespace Me.Amon.Auth
             }
             DFAccess prop = new DFAccess();
             prop.Load(path);
-            string name = prop.Get(EApp.AMON_CFG_NAME);
-            string code = prop.Get(EApp.AMON_CFG_CODE);
+            string name = prop.Get(CApp.AMON_CFG_NAME);
+            string code = prop.Get(CApp.AMON_CFG_CODE);
             if (!CharUtil.IsValidateCode(code) || !CharUtil.IsValidate(name))
             {
                 Main.ShowAlert("请确认您选择的数据路径是否正确！");
@@ -197,10 +197,10 @@ namespace Me.Amon.Auth
             }
 
             prop.Clear();
-            prop.Load(EApp.AMON_SYS);
-            prop.Set(string.Format(EApp.AMON_SYS_CODE, name), code);
-            prop.Set(string.Format(EApp.AMON_SYS_HOME, name), home);
-            prop.Save(EApp.AMON_SYS);
+            prop.Load(CApp.AMON_SYS);
+            prop.Set(string.Format(CApp.AMON_SYS_CODE, name), code);
+            prop.Set(string.Format(CApp.AMON_SYS_HOME, name), home);
+            prop.Save(CApp.AMON_SYS);
         }
 
         /// <summary>

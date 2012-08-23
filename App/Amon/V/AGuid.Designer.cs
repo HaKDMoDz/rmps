@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Guid
+﻿namespace Me.Amon.V
 {
     partial class AGuid
     {

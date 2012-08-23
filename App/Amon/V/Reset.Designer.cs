@@ -1,4 +1,4 @@
-﻿namespace Me.Amon
+﻿namespace Me.Amon.V
 {
     partial class Reset
     {

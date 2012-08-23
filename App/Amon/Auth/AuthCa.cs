@@ -104,7 +104,7 @@ namespace Me.Amon.User
 
             if (CallBackHandler != null)
             {
-                CallBackHandler(EApp.IAPP_NONE);
+                CallBackHandler(CApp.IAPP_NONE);
             }
             Close();
         }

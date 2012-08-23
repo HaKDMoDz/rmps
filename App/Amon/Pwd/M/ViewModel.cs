@@ -169,13 +169,13 @@ namespace Me.Amon.Pwd.M
             #region Look
             _LookPath = Path.Combine("Skin", "Look", _UserModel.Look);
             _LookProp = new DFAccess();
-            _LookProp.Load(Path.Combine(_LookPath, EApp.FILE_LOOK));
+            _LookProp.Load(Path.Combine(_LookPath, CApp.FILE_LOOK));
             #endregion
 
             #region Feel
             _FeelPath = Path.Combine("Skin", "Feel", _UserModel.Feel);
             _FeelProp = new DFAccess();
-            _FeelProp.Load(Path.Combine(_FeelPath, EApp.FILE_FEEL));
+            _FeelProp.Load(Path.Combine(_FeelPath, CApp.FILE_FEEL));
 
             if (_Imgs == null)
             {
@@ -189,20 +189,20 @@ namespace Me.Amon.Pwd.M
 
             #region 视图
             _UserProp = new DFAccess();
-            _UserProp.Load(Path.Combine(_UserModel.Home, EApp.USER_CFG));
+            _UserProp.Load(Path.Combine(_UserModel.Home, CApp.USER_CFG));
             Pattern = _UserProp.Get("Pattern", "");
             string tmp = _UserProp.Get("WindowState", "0");
             if (CharUtil.IsValidateLong(tmp))
             {
                 WindowState = int.Parse(tmp);
             }
-            MenuBarVisible = EApp.VALUE_TRUE == _UserProp.Get("MenuBar", EApp.VALUE_TRUE).ToLower();
-            ToolBarVisible = EApp.VALUE_TRUE == _UserProp.Get("ToolBar", EApp.VALUE_TRUE).ToLower();
-            EchoBarVisible = EApp.VALUE_TRUE == _UserProp.Get("EchoBar", EApp.VALUE_TRUE).ToLower();
-            FindBarVisible = EApp.VALUE_TRUE == _UserProp.Get("FindBar", EApp.VALUE_TRUE).ToLower();
-            NavPaneVisible = EApp.VALUE_TRUE == _UserProp.Get("NavPane", EApp.VALUE_TRUE).ToLower();
-            CatTreeVisible = EApp.VALUE_TRUE == _UserProp.Get("CatTree", EApp.VALUE_TRUE).ToLower();
-            KeyListVisible = EApp.VALUE_TRUE == _UserProp.Get("KeyList", EApp.VALUE_TRUE).ToLower();
+            MenuBarVisible = CApp.VALUE_TRUE == _UserProp.Get("MenuBar", CApp.VALUE_TRUE).ToLower();
+            ToolBarVisible = CApp.VALUE_TRUE == _UserProp.Get("ToolBar", CApp.VALUE_TRUE).ToLower();
+            EchoBarVisible = CApp.VALUE_TRUE == _UserProp.Get("EchoBar", CApp.VALUE_TRUE).ToLower();
+            FindBarVisible = CApp.VALUE_TRUE == _UserProp.Get("FindBar", CApp.VALUE_TRUE).ToLower();
+            NavPaneVisible = CApp.VALUE_TRUE == _UserProp.Get("NavPane", CApp.VALUE_TRUE).ToLower();
+            CatTreeVisible = CApp.VALUE_TRUE == _UserProp.Get("CatTree", CApp.VALUE_TRUE).ToLower();
+            KeyListVisible = CApp.VALUE_TRUE == _UserProp.Get("KeyList", CApp.VALUE_TRUE).ToLower();
 
             tmp = _UserProp.Get("HSplitDistance", "200");
             if (CharUtil.IsValidateLong(tmp))
@@ -257,19 +257,19 @@ namespace Me.Amon.Pwd.M
             _UserProp.Set("DimW", WindowDimW.ToString());
             _UserProp.Set("DimH", WindowDimH.ToString());
 
-            _UserProp.Set("MenuBar", MenuBarVisible ? EApp.VALUE_TRUE : EApp.VALUE_FALSE);
-            _UserProp.Set("ToolBar", ToolBarVisible ? EApp.VALUE_TRUE : EApp.VALUE_FALSE);
-            _UserProp.Set("EchoBar", EchoBarVisible ? EApp.VALUE_TRUE : EApp.VALUE_FALSE);
-            _UserProp.Set("FindBar", FindBarVisible ? EApp.VALUE_TRUE : EApp.VALUE_FALSE);
+            _UserProp.Set("MenuBar", MenuBarVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
+            _UserProp.Set("ToolBar", ToolBarVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
+            _UserProp.Set("EchoBar", EchoBarVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
+            _UserProp.Set("FindBar", FindBarVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
 
-            _UserProp.Set("NavPane", NavPaneVisible ? EApp.VALUE_TRUE : EApp.VALUE_FALSE);
-            _UserProp.Set("CatTree", CatTreeVisible ? EApp.VALUE_TRUE : EApp.VALUE_FALSE);
-            _UserProp.Set("KeyList", KeyListVisible ? EApp.VALUE_TRUE : EApp.VALUE_FALSE);
+            _UserProp.Set("NavPane", NavPaneVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
+            _UserProp.Set("CatTree", CatTreeVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
+            _UserProp.Set("KeyList", KeyListVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
 
             _UserProp.Set("HSplitDistance", _HSplitDistance.ToString());
             _UserProp.Set("VSplitDistance", _VSplitDistance.ToString());
 
-            _UserProp.Save(Path.Combine(_UserModel.Home, EApp.USER_CFG));
+            _UserProp.Save(Path.Combine(_UserModel.Home, CApp.USER_CFG));
         }
     }
 }

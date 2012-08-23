@@ -8,7 +8,7 @@ namespace Me.Amon.Sec.V.Pro.Uw
 
         public void Show(ASec asec, string data)
         {
-            if (DialogResult.OK != Main.ShowOpenFileDialog(asec, EApp.FILE_OPEN_ALL, data, false))
+            if (DialogResult.OK != Main.ShowOpenFileDialog(asec, CApp.FILE_OPEN_ALL, data, false))
             {
                 return;
             }

@@ -4,7 +4,7 @@ using System.Xml;
 using Me.Amon.M;
 using Me.Amon.Pwd;
 
-namespace Me.Amon
+namespace Me.Amon.V
 {
     public partial class Reset : Form
     {

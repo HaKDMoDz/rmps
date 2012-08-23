@@ -9,7 +9,7 @@ namespace Me.Amon.Gtd.V
         {
             InitializeComponent();
 
-            DtTime.CustomFormat = EApp.DATEIME_FORMAT;
+            DtTime.CustomFormat = CApp.DATEIME_FORMAT;
         }
 
         public void ShowData(MGtd mgtd)

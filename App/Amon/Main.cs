@@ -199,9 +199,9 @@ namespace Me.Amon
             Icon = Me.Amon.Properties.Resources.Icon;
 
             // 系统日志
-            if (File.Exists(EApp.FILE_LOG))
+            if (File.Exists(CApp.FILE_LOG))
             {
-                _Writer = new StreamWriter(EApp.FILE_LOG, true, Encoding.UTF8, 8);
+                _Writer = new StreamWriter(CApp.FILE_LOG, true, Encoding.UTF8, 8);
                 _Writer.AutoFlush = true;
                 _Writer.WriteLine(string.Format("============{0}============", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
             }

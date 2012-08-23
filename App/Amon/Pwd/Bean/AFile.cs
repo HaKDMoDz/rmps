@@ -36,7 +36,7 @@ namespace Me.Amon.Pwd.Bean
 
         protected void OpenFile()
         {
-            if (DialogResult.OK != Main.ShowOpenFileDialog(EApp.FILE_OPEN_ALL, "", false))
+            if (DialogResult.OK != Main.ShowOpenFileDialog(CApp.FILE_OPEN_ALL, "", false))
             {
                 return;
             }
@@ -52,7 +52,7 @@ namespace Me.Amon.Pwd.Bean
             {
                 name = HashUtil.UtcTimeInEnc(true);
             }
-            string dstFile = Path.Combine(_DataModel.AcfDir, name + EApp.FILE_ACF);
+            string dstFile = Path.Combine(_DataModel.AcfDir, name + CApp.FILE_ACF);
             string alg = "aes";
             string key = new string(SafeUtil.GenerateFileKeys());
 
@@ -69,7 +69,7 @@ namespace Me.Amon.Pwd.Bean
 
         protected void ViewFile(bool inner)
         {
-            string srcFile = Path.Combine(_DataModel.AcfDir, _Att.GetSpec(FileAtt.SPEC_FILE_NAME) + EApp.FILE_ACF);
+            string srcFile = Path.Combine(_DataModel.AcfDir, _Att.GetSpec(FileAtt.SPEC_FILE_NAME) + CApp.FILE_ACF);
             if (!File.Exists(srcFile))
             {
                 MessageBox.Show("系统错误，找不到来源文件！");
