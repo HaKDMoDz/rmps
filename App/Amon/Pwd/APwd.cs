@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Auth;
-using Me.Amon.Event;
+using Me.Amon.C;
 using Me.Amon.Gtd;
 using Me.Amon.M;
 using Me.Amon.Properties;

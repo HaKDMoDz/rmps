@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Event
+﻿namespace Me.Amon.C
 {
     public delegate void AmonHandler<T>(T obj);
 }

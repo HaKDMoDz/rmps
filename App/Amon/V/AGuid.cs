@@ -5,7 +5,7 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
-using Me.Amon.Event;
+using Me.Amon.C;
 using Me.Amon.M;
 using Me.Amon.Properties;
 using Me.Amon.Util;

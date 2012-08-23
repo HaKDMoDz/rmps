@@ -513,7 +513,7 @@
     <Compile Include="Da\DFAccess.cs" />
     <Compile Include="Da\DFConst.cs" />
     <Compile Include="Da\DFObject.cs" />
-    <Compile Include="Event\AmonHandler.cs" />
+    <Compile Include="C\AmonHandler.cs" />
     <Compile Include="Gtd\AGtd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1666,7 +1666,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="C\" />
     <Folder Include="Gtd\C\" />
     <Folder Include="Gtd\E\" />
     <Folder Include="Gtd\M\" />

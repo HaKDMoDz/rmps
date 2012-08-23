@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using Me.Amon.Auth;
-using Me.Amon.Event;
+using Me.Amon.C;
 using Me.Amon.V;
 using Me.Amon.M;
 using Me.Amon.User;
