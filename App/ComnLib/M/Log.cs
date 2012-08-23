@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Me.Amon.Model
+namespace Me.Amon.M
 {
     public abstract class Log
     {

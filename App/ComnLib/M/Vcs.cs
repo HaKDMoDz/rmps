@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml;
 
-namespace Me.Amon.Model
+namespace Me.Amon.M
 {
     public abstract class Vcs
     {
