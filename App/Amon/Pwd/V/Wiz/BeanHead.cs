@@ -202,6 +202,7 @@ namespace Me.Amon.Pwd.V.Wiz
             {
                 _SafeModel.Hint.Gtd = editor.MGtd;
                 TbHint.Text = _SafeModel.Hint.Gtd == null ? "<无提醒>" : _SafeModel.Hint.Gtd.Title;
+                _SafeModel.Modified = true;
             }
         }
 

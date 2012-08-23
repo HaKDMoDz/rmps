@@ -106,6 +106,7 @@ namespace Me.Amon.Pwd.V.Pro
             {
                 _Att.Gtd = detail.MGtd;
                 LlHint.Text = _Att.Gtd.Title;
+                _Att.Modified = true;
             }
         }
         #endregion
