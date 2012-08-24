@@ -1,7 +1,6 @@
 ﻿using System.Xml;
-using Me.Amon.M;
 
-namespace Me.Amon.Pwd
+namespace Me.Amon.M
 {
     public class Cat : Vcs
     {
@@ -34,6 +33,10 @@ namespace Me.Amon.Pwd
         /// 类别说明
         /// </summary>
         public string Memo { get; set; }
+        /// <summary>
+        /// 应用代码
+        /// </summary>
+        public string AppId { get; set; }
 
         #region 方法重写
         public override string ToString()
@@ -85,6 +88,10 @@ namespace Me.Amon.Pwd
             {
                 Memo = reader.ReadElementContentAsString();
             }
+            if (reader.Name == "AppId" || reader.ReadToNextSibling("AppId"))
+            {
+                AppId = reader.ReadElementContentAsString();
+            }
 
             if (reader.Name == "Cat" && reader.NodeType == XmlNodeType.EndElement)
             {
@@ -106,6 +113,7 @@ namespace Me.Amon.Pwd
             writer.WriteElementString("Icon", Icon);
             writer.WriteElementString("Meta", Meta);
             writer.WriteElementString("Memo", Memo);
+            writer.WriteElementString("AppId", AppId);
 
             writer.WriteEndElement();
         }

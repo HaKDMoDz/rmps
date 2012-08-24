@@ -1,7 +1,6 @@
 ﻿using System.Xml;
-using Me.Amon.M;
 
-namespace Me.Amon.Pwd
+namespace Me.Amon.M
 {
     /// <summary>
     /// 
@@ -9,9 +8,21 @@ namespace Me.Amon.Pwd
     public class Udc : Vcs
     {
         public int Order { get; set; }
+        /// <summary>
+        /// 显示名称
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// 简短提示
+        /// </summary>
         public string Tips { get; set; }
+        /// <summary>
+        /// 字符空间
+        /// </summary>
         public string Data { get; set; }
+        /// <summary>
+        /// 相关说明
+        /// </summary>
         public string Memo { get; set; }
 
         #region 方法重写
