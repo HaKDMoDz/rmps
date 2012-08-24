@@ -390,7 +390,7 @@ namespace Me.Amon.V
             {
                 if (_MaxRegion == null)
                 {
-                    _MaxRegion = new Region(new Rectangle(0, 0, 320, 120));
+                    _MaxRegion = new Region(new Rectangle(0, 0, 340, 140));
                 }
                 this.Region = _MaxRegion.Clone();
             }

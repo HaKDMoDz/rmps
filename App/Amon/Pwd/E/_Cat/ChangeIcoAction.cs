@@ -1,4 +1,6 @@
-﻿namespace Me.Amon.Pwd.E._Cat
+﻿using Me.Amon.M;
+
+namespace Me.Amon.Pwd.E._Cat
 {
     public class ChangeIcoAction : APwdAction
     {

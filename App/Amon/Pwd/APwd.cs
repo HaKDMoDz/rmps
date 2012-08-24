@@ -44,8 +44,6 @@ namespace Me.Amon.Pwd
         private APro _ProView;
         private AWiz _WizView;
         //private APad _PadView;
-        private Dictionary<string, Image> _KeyIcon;
-        private Dictionary<string, Image> _KeyHint;
         private XmlMenu<APwd> _XmlMenu;
         #endregion
 
@@ -504,32 +502,32 @@ namespace Me.Amon.Pwd
             {
                 return;
             }
-            Key rec = LbKeyList.Items[e.Index] as Key;
-            if (rec == null)
+            Key key = LbKeyList.Items[e.Index] as Key;
+            if (key == null)
             {
                 return;
             }
 
-            Image img = _KeyIcon.ContainsKey(rec.IcoName) ? _KeyIcon[rec.IcoName] : BeanUtil.NaN24;
+            Image img = key.Icon ?? BeanUtil.NaN24;
             e.Graphics.DrawImage(img, e.Bounds.X + 3, e.Bounds.Y + 3, img.Width, img.Height);
 
             //最后把要显示的文字画在背景图片上
             int y = e.Bounds.Y + 2;
-            e.Graphics.DrawString(rec.Title, this.Font, Brushes.Black, e.Bounds.X + 36, y);
+            e.Graphics.DrawString(key.Title, this.Font, Brushes.Black, e.Bounds.X + 36, y);
 
             y = e.Bounds.Y + e.Bounds.Height;
-            e.Graphics.DrawString(rec.AccessTime, this.Font, Brushes.Gray, e.Bounds.X + 36, y - 14);
+            e.Graphics.DrawString(key.AccessTime, this.Font, Brushes.Gray, e.Bounds.X + 36, y - 14);
 
             int x = e.Bounds.X + e.Bounds.Width;
             y -= 16;
-            img = _KeyHint.ContainsKey(rec.GtdId) ? _KeyHint[rec.GtdId] : BeanUtil.NaN16;
+            img = key.Hint ?? BeanUtil.NaN16;
             e.Graphics.DrawImage(img, x - 48, y);
-            img = _ViewModel.GetImage(CPwd.KEY_LABEL + rec.Label);
+            img = _ViewModel.GetImage(CPwd.KEY_LABEL + key.Label);
             if (img != null)
             {
                 e.Graphics.DrawImage(img, x - 32, y);
             }
-            img = _ViewModel.GetImage(CPwd.KEY_MAJOR + (rec.Major + 2));
+            img = _ViewModel.GetImage(CPwd.KEY_MAJOR + (key.Major + 2));
             if (img != null)
             {
                 e.Graphics.DrawImage(img, x - 16, y);
@@ -788,6 +786,7 @@ namespace Me.Amon.Pwd
 
             cat.Parent = parent.Id;
             cat.Order = _LastNode.Nodes.Count;
+            cat.AppId = CApp.IAPP_APWD;
             _UserModel.DBA.SaveVcs(cat);
             if (parent.IsLeaf)
             {
@@ -1171,19 +1170,19 @@ namespace Me.Amon.Pwd
                 LastOpt();
             }
 
-            if (!_KeyIcon.ContainsKey(_SafeModel.Key.IcoName))
-            {
-                string path;
-                if (CharUtil.IsValidateHash(_SafeModel.Key.IcoPath))
-                {
-                    path = Path.Combine(_DataModel.KeyDir, _SafeModel.Key.IcoPath, _SafeModel.Key.IcoName + CApp.IMG_KEY_LIST_EXT);
-                }
-                else
-                {
-                    path = Path.Combine(_DataModel.KeyDir, _SafeModel.Key.IcoName + CApp.IMG_KEY_LIST_EXT);
-                }
-                _KeyIcon.Add(_SafeModel.Key.IcoName, BeanUtil.ReadImage(path, BeanUtil.NaN24));
-            }
+            //if (!_KeyIcon.ContainsKey(_SafeModel.Key.IcoName))
+            //{
+            //    string path;
+            //    if (CharUtil.IsValidateHash(_SafeModel.Key.IcoPath))
+            //    {
+            //        path = Path.Combine(_DataModel.KeyDir, _SafeModel.Key.IcoPath, _SafeModel.Key.IcoName + CApp.IMG_KEY_LIST_EXT);
+            //    }
+            //    else
+            //    {
+            //        path = Path.Combine(_DataModel.KeyDir, _SafeModel.Key.IcoName + CApp.IMG_KEY_LIST_EXT);
+            //    }
+            //    _KeyIcon.Add(_SafeModel.Key.IcoName, BeanUtil.ReadImage(path, BeanUtil.NaN24));
+            //}
 
             _SafeModel.Key = null;
         }
@@ -2536,15 +2535,11 @@ namespace Me.Amon.Pwd
 
         private void InitKey()
         {
-            _KeyIcon = new Dictionary<string, Image>();
-            _KeyHint = new Dictionary<string, Image>();
         }
 
         private void DoInitKey(IList<Key> keys)
         {
             LbKeyList.Items.Clear();
-            _KeyIcon.Clear();
-            _KeyHint.Clear();
 
             foreach (Key key in keys)
             {
@@ -2554,19 +2549,19 @@ namespace Me.Amon.Pwd
                 {
                     if (CharUtil.IsValidateHash(key.IcoPath))
                     {
-                        _KeyIcon[key.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoPath, key.IcoName + CApp.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
+                        key.Icon = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoPath, key.IcoName + CApp.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
                     }
                     else
                     {
-                        _KeyIcon[key.IcoName] = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoName + CApp.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
+                        key.Icon = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoName + CApp.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
                     }
                 }
                 else
                 {
-                    _KeyIcon[key.IcoName] = BeanUtil.NaN24;
+                    key.Icon = BeanUtil.NaN24;
                 }
 
-                _KeyHint[key.GtdId] = CharUtil.IsValidateHash(key.GtdId) ? Resources.Hint : BeanUtil.NaN16;
+                key.Hint = CharUtil.IsValidateHash(key.GtdId) ? Resources.Hint : BeanUtil.NaN16;
             }
         }
 

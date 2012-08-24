@@ -76,7 +76,7 @@
             this.LvApp.MultiSelect = false;
             this.LvApp.Name = "LvApp";
             this.LvApp.ShowItemToolTips = true;
-            this.LvApp.Size = new System.Drawing.Size(241, 92);
+            this.LvApp.Size = new System.Drawing.Size(265, 116);
             this.LvApp.SmallImageList = this.IsApp;
             this.LvApp.TabIndex = 4;
             this.LvApp.UseCompatibleStateImageBehavior = false;
@@ -127,9 +127,9 @@
             this.MiReset.Visible = false;
             this.MiReset.Click += new System.EventHandler(this.MiReset_Click);
             // 
-            // MgSep0
+            // MiSep0
             // 
-            this.MiSep0.Name = "MgSep0";
+            this.MiSep0.Name = "MiSep0";
             this.MiSep0.Size = new System.Drawing.Size(160, 6);
             // 
             // MiTopMost
@@ -163,21 +163,21 @@
             this.MiTray.Text = "显示托盘图标(&T)";
             this.MiTray.Click += new System.EventHandler(this.MiTray_Click);
             // 
-            // MgSep1
+            // MiSep1
             // 
-            this.MiSep1.Name = "MgSep1";
+            this.MiSep1.Name = "MiSep1";
             this.MiSep1.Size = new System.Drawing.Size(160, 6);
             // 
-            // MgSignOf
+            // MiSignOf
             // 
-            this.MiSignOf.Name = "MgSignOf";
+            this.MiSignOf.Name = "MiSignOf";
             this.MiSignOf.Size = new System.Drawing.Size(163, 22);
             this.MiSignOf.Text = "注销(&O)";
             this.MiSignOf.Click += new System.EventHandler(this.MiSignOf_Click);
             // 
-            // MgSep2
+            // MiSep2
             // 
-            this.MiSep2.Name = "MgSep2";
+            this.MiSep2.Name = "MiSep2";
             this.MiSep2.Size = new System.Drawing.Size(160, 6);
             // 
             // MiInfo
@@ -198,7 +198,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(296, 116);
+            this.ClientSize = new System.Drawing.Size(320, 140);
             this.Controls.Add(this.PbApp);
             this.Controls.Add(this.LvApp);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
