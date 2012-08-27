@@ -2,6 +2,8 @@
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
+using Me.Amon.C;
+using Me.Amon.M;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd.M;
 using Me.Amon.Uc;
@@ -12,8 +14,10 @@ namespace Me.Amon.Pwd.V.Wiz
     public partial class BeanGuid : UserControl, IWizView
     {
         private AWiz _AWiz;
+        private UserModel _UserModel;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
+        private TableLayoutPanel _TlPanel;
 
         #region 构造函数
         public BeanGuid()
@@ -21,20 +25,24 @@ namespace Me.Amon.Pwd.V.Wiz
             InitializeComponent();
         }
 
-        public BeanGuid(AWiz awiz, SafeModel safeModel)
+        public BeanGuid(AWiz awiz, UserModel userModel, SafeModel safeModel)
         {
             _AWiz = awiz;
+            _UserModel = userModel;
             _SafeModel = safeModel;
 
             InitializeComponent();
         }
 
-        public void Init(DataModel dataModel, ViewModel viewModel)
+        public void Init(TableLayoutPanel grid, DataModel dataModel, ViewModel viewModel)
         {
+            _TlPanel = grid;
             _DataModel = dataModel;
 
             PbCard.Image = viewModel.GetImage("export-card-24");
             _AWiz.ShowTips(PbCard, "导出为卡片");
+
+            UcTips.CallBack = new VoidHandler(CloseTips);
 
             if (!Directory.Exists("Card"))
             {
@@ -116,17 +124,16 @@ namespace Me.Amon.Pwd.V.Wiz
         #endregion
 
         #region 接口实现
-        public void InitView(TableLayoutPanel grid)
+        public void InitView()
         {
-            grid.Controls.Add(this, 0, 0);
+            _TlPanel.Controls.Add(this, 0, 0);
             Dock = DockStyle.Fill;
             TabIndex = 0;
-            grid.RowStyles[1].Height = 32;
         }
 
-        public void HideView(TableLayoutPanel grid)
+        public void HideView()
         {
-            grid.Controls.Remove(this);
+            _TlPanel.Controls.Remove(this);
         }
 
         public void ShowData()
@@ -144,11 +151,39 @@ namespace Me.Amon.Pwd.V.Wiz
             GuidAtt guid = _SafeModel.Guid;
             if (guid == null)
             {
+                CbLib.Enabled = true;
+                UcTips.Visible = false;
+                _TlPanel.RowStyles[1].Height = 32;
                 return;
             }
 
             CbLib.SelectedItem = new Lib { Id = guid.Data };
             PbCard.Visible = guid.Data == CApp.LIB_CARD;
+
+            Gtd.MGtd gtd = _SafeModel.Key.Gtd;
+            if (gtd != null)
+            {
+                if (gtd.Status == Gtd.CGtd.GTD_STAT_EXPIRED)
+                {
+                    CbLib.Enabled = false;
+                    UcTips.Visible = true;
+                    _TlPanel.RowStyles[1].Height = 0;
+                    UcTips.Text = string.Format("您有一个过期提醒：{0}{0}　　{1}{0}{0}{2}", Environment.NewLine, gtd.Title, gtd.NextTime.ToString(CApp.DATEIME_FORMAT));
+                    return;
+                }
+                if (gtd.Status == Gtd.CGtd.GTD_STAT_ONTIME)
+                {
+                    CbLib.Enabled = false;
+                    UcTips.Visible = true;
+                    _TlPanel.RowStyles[1].Height = 0;
+                    UcTips.Text = string.Format("您有一个到期提醒：{0}{0}　　{1}{0}{0}{2}", Environment.NewLine, gtd.Title, gtd.NextTime.ToString(CApp.DATEIME_FORMAT));
+                    return;
+                }
+            }
+
+            CbLib.Enabled = true;
+            UcTips.Visible = false;
+            _TlPanel.RowStyles[1].Height = 32;
         }
 
         public bool SaveData()
@@ -276,6 +311,20 @@ namespace Me.Amon.Pwd.V.Wiz
                 default:
                     return;
             }
+        }
+
+        private void CloseTips()
+        {
+            Gtd.MGtd gtd = _SafeModel.Key.Gtd;
+            if (gtd != null)
+            {
+                gtd.Status = Gtd.CGtd.GTD_STAT_NORMAL;
+                _UserModel.DBA.SaveVcs(gtd);
+                _UserModel.ReloadGtds();
+            }
+            CbLib.Enabled = true;
+            UcTips.Visible = false;
+            _TlPanel.RowStyles[1].Height = 32;
         }
         #endregion
     }

@@ -318,8 +318,8 @@ namespace Me.Amon.Pwd.M
 
             // HintItem
             HintAtt hint = new HintAtt();
-            hint.Text = _Key.GtdMemo;
-            hint.Data = _Key.GtdId;
+            hint.Text = _Key.Gtd == null ? "<无提醒>" : _Key.Gtd.Title;
+            hint.Data = _Key.GtdMemo;
             hint.Gtd = _Key.Gtd;
             list.Add(hint);
 
@@ -373,8 +373,8 @@ namespace Me.Amon.Pwd.M
 
             // HintItem
             HintAtt hint = (HintAtt)_AttList[Att.PWDS_HEAD_HINT];
-            _Key.GtdId = hint.Data;
-            _Key.GtdMemo = hint.Text;
+            _Key.GtdId = hint.Gtd.Id;
+            _Key.GtdMemo = hint.Data;
             _Key.Gtd = hint.Gtd;
 
             // 字符串拼接

@@ -6,9 +6,9 @@ namespace Me.Amon.Pwd.V.Wiz
     {
         string Name { get; set; }
 
-        void InitView(TableLayoutPanel grid);
+        void InitView();
 
-        void HideView(TableLayoutPanel grid);
+        void HideView();
 
         bool Focus();
 

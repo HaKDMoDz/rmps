@@ -192,6 +192,7 @@
     <Compile Include="Bar\Opt\Vcard.Designer.cs">
       <DependentUpon>Vcard.cs</DependentUpon>
     </Compile>
+    <Compile Include="C\VoidHandler.cs" />
     <Compile Include="Gtd\EGtd.cs" />
     <Compile Include="Gtd\V\GtdEditor.cs">
       <SubType>Form</SubType>
@@ -882,6 +883,12 @@
     <Compile Include="Ren\E\Rule\MoveUpAction.cs" />
     <Compile Include="Ren\E\Rule\SaveasAction.cs" />
     <Compile Include="Ren\TRen.cs" />
+    <Compile Include="Uc\GtdTips.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Uc\GtdTips.Designer.cs">
+      <DependentUpon>GtdTips.cs</DependentUpon>
+    </Compile>
     <Compile Include="V\Reset.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1457,6 +1464,9 @@
     <EmbeddedResource Include="Ren\ARen.resx">
       <DependentUpon>ARen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Uc\GtdTips.resx">
+      <DependentUpon>GtdTips.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="V\Reset.resx">
       <DependentUpon>Reset.cs</DependentUpon>
     </EmbeddedResource>
@@ -1588,6 +1598,8 @@
     <Content Include="Logo\logo48.png" />
     <Content Include="Logo\logo64.png" />
     <Content Include="Logo\logo96.png" />
+    <None Include="Resources\OK.png" />
+    <None Include="Resources\Tips.png" />
     <None Include="Resources\Logo25.png" />
     <None Include="Resources\Icon.ico" />
     <None Include="Resources\Logo16.png" />

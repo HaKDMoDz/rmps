@@ -7,6 +7,7 @@ namespace Me.Amon.Pwd.V.Wiz
     public partial class BeanInfo : UserControl, IWizView
     {
         private SafeModel _SafeModel;
+        private TableLayoutPanel _TlPanel;
 
         #region 构造函数
         public BeanInfo()
@@ -21,27 +22,28 @@ namespace Me.Amon.Pwd.V.Wiz
             InitializeComponent();
         }
 
-        public void Init(DataModel dataModel)
+        public void Init(TableLayoutPanel grid, DataModel dataModel)
         {
+            _TlPanel = grid;
         }
         #endregion
 
         #region 接口实现
-        public void InitView(TableLayoutPanel grid)
+        public void InitView()
         {
-            grid.Controls.Add(this, 0, 0);
+            _TlPanel.Controls.Add(this, 0, 0);
             Dock = DockStyle.Fill;
             TabIndex = 0;
-            grid.RowStyles[1].Height = 0;
         }
 
-        public void HideView(TableLayoutPanel grid)
+        public void HideView()
         {
-            grid.Controls.Remove(this);
+            _TlPanel.Controls.Remove(this);
         }
 
         public void ShowData()
         {
+            _TlPanel.RowStyles[1].Height = 0;
         }
 
         public bool SaveData()

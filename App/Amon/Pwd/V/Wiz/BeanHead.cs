@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 using Me.Amon.C;
 using Me.Amon.Gtd.V;
+using Me.Amon.M;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd.M;
 using Me.Amon.Util;
@@ -13,8 +14,10 @@ namespace Me.Amon.Pwd.V.Wiz
     {
         private AWiz _AWiz;
         private Png _APng;
+        private UserModel _UserModel;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
+        private TableLayoutPanel _TlPanel;
         private TextBox _TBox;
 
         #region 构造函数
@@ -23,16 +26,18 @@ namespace Me.Amon.Pwd.V.Wiz
             InitializeComponent();
         }
 
-        public BeanHead(AWiz awiz, SafeModel safeModel)
+        public BeanHead(AWiz awiz, UserModel userModel, SafeModel safeModel)
         {
             _AWiz = awiz;
+            _UserModel = userModel;
             _SafeModel = safeModel;
 
             InitializeComponent();
         }
 
-        public void Init(DataModel dataModel, ViewModel viewModel)
+        public void Init(TableLayoutPanel grid, DataModel dataModel, ViewModel viewModel)
         {
+            _TlPanel = grid;
             _DataModel = dataModel;
             _APng = new Png();
 
@@ -43,21 +48,22 @@ namespace Me.Amon.Pwd.V.Wiz
         #endregion
 
         #region 接口实现
-        public void InitView(TableLayoutPanel grid)
+        public void InitView()
         {
-            grid.Controls.Add(this, 0, 0);
+            _TlPanel.Controls.Add(this, 0, 0);
             Dock = DockStyle.Fill;
             TabIndex = 0;
-            grid.RowStyles[1].Height = 32;
         }
 
-        public void HideView(TableLayoutPanel grid)
+        public void HideView()
         {
-            grid.Controls.Remove(this);
+            _TlPanel.Controls.Remove(this);
         }
 
         public void ShowData()
         {
+            _TlPanel.RowStyles[1].Height = 32;
+
             MetaAtt meta = _SafeModel.Meta;
             if (meta == null)
             {
@@ -97,7 +103,7 @@ namespace Me.Amon.Pwd.V.Wiz
             {
                 return;
             }
-            TbHint.Text = hint.Gtd == null ? "<无提醒>" : hint.Gtd.Title;
+            TbHint.Text = hint.Text;
 
             Focus();
         }
@@ -140,10 +146,9 @@ namespace Me.Amon.Pwd.V.Wiz
             _SafeModel.Modified |= logo.Modified;
 
             HintAtt hint = _SafeModel.Hint;
-            hint.Text = "";
-            if (hint.Data != TbHint.Text)
+            if (hint.Text != TbHint.Text)
             {
-                hint.Data = TbHint.Text;
+                hint.Text = TbHint.Text;
                 hint.Modified = true;
             }
             _SafeModel.Modified |= hint.Modified;
@@ -200,9 +205,21 @@ namespace Me.Amon.Pwd.V.Wiz
             editor.MGtd = _SafeModel.Hint.Gtd;
             if (DialogResult.OK == editor.ShowDialog())
             {
-                _SafeModel.Hint.Gtd = editor.MGtd;
                 TbHint.Text = _SafeModel.Hint.Gtd == null ? "<无提醒>" : _SafeModel.Hint.Gtd.Title;
-                _SafeModel.Modified = true;
+                if (_SafeModel.IsUpdate)
+                {
+                    if (_SafeModel.Hint.Gtd == null)
+                    {
+                        editor.MGtd.RefId = _SafeModel.Key.Id;
+                    }
+                    if (editor.MGtd.Status == Gtd.CGtd.GTD_STAT_FINISHED)
+                    {
+                        editor.MGtd.Status = Gtd.CGtd.GTD_STAT_NORMAL;
+                    }
+                    _UserModel.DBA.SaveVcs(editor.MGtd);
+                    _UserModel.ReloadGtds();
+                }
+                _SafeModel.Hint.Gtd = editor.MGtd;
             }
         }
 

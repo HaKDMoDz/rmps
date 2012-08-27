@@ -513,10 +513,10 @@ namespace Me.Amon.Pwd
 
             //最后把要显示的文字画在背景图片上
             int y = e.Bounds.Y + 2;
-            e.Graphics.DrawString(key.Title, this.Font, Brushes.Black, e.Bounds.X + 36, y);
+            e.Graphics.DrawString(key.Title, this.Font, Brushes.Black, e.Bounds.X + 30, y);
 
             y = e.Bounds.Y + e.Bounds.Height;
-            e.Graphics.DrawString(key.AccessTime, this.Font, Brushes.Gray, e.Bounds.X + 36, y - 14);
+            e.Graphics.DrawString(key.AccessTime, this.Font, Brushes.Gray, e.Bounds.X + 30, y - 14);
 
             int x = e.Bounds.X + e.Bounds.Width;
             y -= 16;
@@ -1152,6 +1152,7 @@ namespace Me.Amon.Pwd
             {
                 _SafeModel.Key.Gtd.RefId = _SafeModel.Key.Id;
                 _UserModel.DBA.SaveVcs(_SafeModel.Key.Gtd);
+                _SafeModel.Key.Hint = Resources.Hint;
             }
             _SafeModel.Modified = false;
 
@@ -1565,7 +1566,7 @@ namespace Me.Amon.Pwd
             {
                 _WizView = new AWiz();
                 _WizView.Name = CPwd.PATTERN_WIZ;
-                _WizView.Init(this, _SafeModel, _DataModel, _ViewModel);
+                _WizView.Init(this, _UserModel, _SafeModel, _DataModel, _ViewModel);
             }
 
             if (_PwdView != null)

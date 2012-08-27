@@ -81,10 +81,6 @@ namespace Me.Amon.V
             // 系统徽标
             MiLogo.Checked = (Settings.Default.Emotion == 0);
 
-            // 托盘图标状态
-            int pattern = Settings.Default.Pattern;
-            _Main.SetTrayVisible((pattern & CApp.PATTERN_TRAY) != 0);
-
             ChangeEmotion(Settings.Default.Emotion);
             ChangeAppVisible(false);
 
@@ -277,14 +273,15 @@ namespace Me.Amon.V
         {
             bool visible = !MiTray.Checked;
             MiTray.Checked = visible;
-            _Main.SetTrayVisible(visible);
 
             if (visible)
             {
+                _Main.ShowTray();
                 Settings.Default.Pattern |= CApp.PATTERN_TRAY;
             }
             else
             {
+                _Main.HideTray();
                 Settings.Default.Pattern ^= CApp.PATTERN_TRAY;
             }
             Settings.Default.Save();

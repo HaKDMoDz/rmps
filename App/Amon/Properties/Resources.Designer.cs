@@ -172,6 +172,13 @@ namespace Me.Amon.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap OK {
+            get {
+                object obj = ResourceManager.GetObject("OK", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap PosDef {
             get {
                 object obj = ResourceManager.GetObject("PosDef", resourceCulture);
@@ -210,6 +217,13 @@ namespace Me.Amon.Properties {
         internal static System.Drawing.Bitmap SignIn {
             get {
                 object obj = ResourceManager.GetObject("SignIn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Tips {
+            get {
+                object obj = ResourceManager.GetObject("Tips", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

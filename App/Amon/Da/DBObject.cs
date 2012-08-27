@@ -338,7 +338,7 @@ namespace Me.Amon.Da
                     {
                         return false;
                     }
-                    return CharUtil.IsValidateHash(gtd.Id) && gtd.Status > CGtd.GTD_STAT_FINISHED;
+                    return CharUtil.IsValidateHash(gtd.RefId) && gtd.Status > CGtd.GTD_STAT_SUSPEND;
                 });
             return gtds;
         }
@@ -352,7 +352,7 @@ namespace Me.Amon.Da
                     {
                         return false;
                     }
-                    return gtd.Status == CGtd.GTD_STAT_EXPIRED;
+                    return CharUtil.IsValidateHash(gtd.RefId) && gtd.Status == CGtd.GTD_STAT_EXPIRED;
                 });
             return gtds;
         }

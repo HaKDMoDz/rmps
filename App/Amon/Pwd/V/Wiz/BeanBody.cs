@@ -11,6 +11,7 @@ namespace Me.Amon.Pwd.V.Wiz
         private SafeModel _SafeModel;
         private DataModel _DataModel;
         private ViewModel _ViewModel;
+        private TableLayoutPanel _TlPanel;
         #endregion
 
         #region 构造函数
@@ -27,29 +28,31 @@ namespace Me.Amon.Pwd.V.Wiz
             InitializeComponent();
         }
 
-        public void Init(DataModel dataModel, ViewModel viewModel)
+        public void Init(TableLayoutPanel grid, DataModel dataModel, ViewModel viewModel)
         {
+            _TlPanel = grid;
             _DataModel = dataModel;
             _ViewModel = viewModel;
         }
         #endregion
 
         #region 接口实现
-        public void InitView(TableLayoutPanel grid)
+        public void InitView()
         {
-            grid.Controls.Add(this, 0, 0);
+            _TlPanel.Controls.Add(this, 0, 0);
             Dock = DockStyle.Fill;
             TabIndex = 0;
-            grid.RowStyles[1].Height = 32;
         }
 
-        public void HideView(TableLayoutPanel grid)
+        public void HideView()
         {
-            grid.Controls.Remove(this);
+            _TlPanel.Controls.Remove(this);
         }
 
         public void ShowData()
         {
+            _TlPanel.RowStyles[1].Height = 32;
+
             SuspendLayout();
             TpGrid.SuspendLayout();
 

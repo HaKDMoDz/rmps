@@ -4,11 +4,12 @@ using System.Text;
 using System.Windows.Forms;
 using Me.Amon.Auth;
 using Me.Amon.C;
-using Me.Amon.V;
 using Me.Amon.M;
+using Me.Amon.Properties;
 using Me.Amon.User;
 using Me.Amon.Util;
 using Me.Amon.Uw;
+using Me.Amon.V;
 
 namespace Me.Amon
 {
@@ -167,30 +168,6 @@ namespace Me.Amon
         {
             TpTips.SetToolTip(control, caption);
         }
-
-        private NotifyIcon _Tray;
-        public void SetTrayVisible(bool visible)
-        {
-            if (!visible)
-            {
-                if (_Tray != null)
-                {
-                    _Tray.Visible = false;
-                }
-                return;
-            }
-
-            if (_Tray == null)
-            {
-                _Tray = new NotifyIcon();
-                _Tray.BalloonTipTitle = "阿木导航";
-                _Tray.Icon = Me.Amon.Properties.Resources.Icon;
-                _Tray.Text = "阿木导航";
-                _Tray.Visible = true;
-                _Tray.DoubleClick += new EventHandler(NiTray_DoubleClick);
-            }
-            _Tray.Visible = visible;
-        }
         #endregion
 
         #region 窗口事件
@@ -215,8 +192,14 @@ namespace Me.Amon
         {
             if (!Visible)
             {
+                //Show();
                 Visible = true;
             }
+            //if (WindowState == FormWindowState.Minimized)
+            //{
+            //    Show();
+                //WindowState = FormWindowState.Normal;
+            //}
             BringToFront();
         }
         #endregion
@@ -268,7 +251,14 @@ namespace Me.Amon
         {
             ShowAPwd();
 
-            LoadGuid();
+            if (Settings.Default.Pattern == CApp.PATTERN_TRAY)
+            {
+                ShowTray();
+            }
+            else
+            {
+                ShowGuid();
+            }
 
             this.Focus();
         }
@@ -323,7 +313,7 @@ namespace Me.Amon
         }
 
         private AGuid _Guid;
-        public void LoadGuid()
+        public void ShowGuid()
         {
             if (_Guid == null)
             {
@@ -337,6 +327,37 @@ namespace Me.Amon
             }
             _Guid.Show();
             //_Guid.ShowDApp(0);
+        }
+
+        public void HideGuid()
+        {
+            if (_Guid != null)
+            {
+                _Guid.Visible = false;
+            }
+        }
+
+        private NotifyIcon _Tray;
+        public void ShowTray()
+        {
+            if (_Tray == null)
+            {
+                _Tray = new NotifyIcon();
+                _Tray.BalloonTipTitle = "阿木导航";
+                _Tray.Icon = Me.Amon.Properties.Resources.Icon;
+                _Tray.Text = "阿木导航";
+                _Tray.Visible = true;
+                _Tray.DoubleClick += new EventHandler(NiTray_DoubleClick);
+            }
+            _Tray.Visible = true;
+        }
+
+        public void HideTray()
+        {
+            if (_Tray != null)
+            {
+                _Tray.Visible = false;
+            }
         }
 
         public void ExitSystem()
