@@ -53,9 +53,9 @@ namespace Me.Amon.Da
         #region 类别操作
         Cat ReadCat(string catId);
 
-        IList<Cat> FindCat(string catMeta);
+        IList<Cat> FindCat(string appId, string catMeta);
 
-        IList<Cat> ListCat(string parentId);
+        IList<Cat> ListCat(string appId, string parentId);
         #endregion
 
         #region 记录操作

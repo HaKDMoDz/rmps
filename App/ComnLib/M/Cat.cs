@@ -51,6 +51,7 @@ namespace Me.Amon.M
             {
                 return false;
             }
+            AppId = reader.GetAttribute("AppId");
 
             if (reader.Name == "Order" || reader.ReadToDescendant("Order"))
             {
@@ -88,10 +89,6 @@ namespace Me.Amon.M
             {
                 Memo = reader.ReadElementContentAsString();
             }
-            if (reader.Name == "AppId" || reader.ReadToNextSibling("AppId"))
-            {
-                AppId = reader.ReadElementContentAsString();
-            }
 
             if (reader.Name == "Cat" && reader.NodeType == XmlNodeType.EndElement)
             {
@@ -103,6 +100,7 @@ namespace Me.Amon.M
         public void ToXml(XmlWriter writer)
         {
             writer.WriteStartElement("Cat");
+            writer.WriteAttributeString("AppId", AppId);
 
             writer.WriteElementString("Order", Order.ToString());
             writer.WriteElementString("Id", Id);
@@ -113,7 +111,6 @@ namespace Me.Amon.M
             writer.WriteElementString("Icon", Icon);
             writer.WriteElementString("Meta", Meta);
             writer.WriteElementString("Memo", Memo);
-            writer.WriteElementString("AppId", AppId);
 
             writer.WriteEndElement();
         }
