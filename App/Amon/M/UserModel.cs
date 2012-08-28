@@ -7,8 +7,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Xml;
-using Me.Amon.Da;
 using Me.Amon.C;
+using Me.Amon.Da;
 using Me.Amon.Util;
 
 namespace Me.Amon.M
@@ -735,7 +735,7 @@ namespace Me.Amon.M
 
                 if (_Delay < 1 || _MGtds == null)
                 {
-                    ReloadGtds();
+                    _MGtds = _DBA.FindKeyByGtd();
                 }
 
                 DateTime now = DateTime.Now;
@@ -774,7 +774,15 @@ namespace Me.Amon.M
 
         public void ReloadGtds()
         {
-            _MGtds = _DBA.FindKeyByGtd();
+            try
+            {
+                Monitor.Enter(_SyncObj);
+                _Delay = 0;
+            }
+            finally
+            {
+                Monitor.Exit(_SyncObj);
+            }
         }
         #endregion
     }

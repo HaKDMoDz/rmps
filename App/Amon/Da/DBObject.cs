@@ -160,7 +160,7 @@ namespace Me.Amon.Da
             return cats.Count > 0 ? cats[0] : null;
         }
 
-        public IList<Cat> FindCat(string catMeta)
+        public IList<Cat> FindCat(string appId, string catMeta)
         {
             if (string.IsNullOrEmpty(catMeta))
             {
@@ -170,7 +170,7 @@ namespace Me.Amon.Da
             IList<Cat> cats = Container.Query<Cat>(
                 delegate(Cat cat)
                 {
-                    return Contains(cat.Meta.ToLower(), arr);
+                    return cat.AppId == appId && Contains(cat.Meta.ToLower(), arr);
                 },
                 delegate(Cat a, Cat b)
                 {
@@ -179,7 +179,7 @@ namespace Me.Amon.Da
             return cats;
         }
 
-        public IList<Cat> ListCat(string parentId)
+        public IList<Cat> ListCat(string appId, string parentId)
         {
             if (string.IsNullOrWhiteSpace(parentId))
             {
@@ -189,7 +189,7 @@ namespace Me.Amon.Da
             return Container.Query<Cat>(
                 delegate(Cat cat)
                 {
-                    return cat.Parent == parentId;
+                    return cat.AppId == appId && cat.Parent == parentId;
                 },
                 delegate(Cat a, Cat b)
                 {

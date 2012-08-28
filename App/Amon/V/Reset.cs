@@ -139,7 +139,7 @@ namespace Me.Amon.V
                 writer.WriteElementString("Ver", "1");
 
                 writer.WriteStartElement("Cats");
-                foreach (Cat cat in userModel.DBA.ListCat(""))
+                foreach (Cat cat in userModel.DBA.ListCat(CApp.IAPP_APWD, ""))
                 {
                     cat.ToXml(writer);
                 }

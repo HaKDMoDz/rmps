@@ -1614,10 +1614,7 @@
     <None Include="Resources\Find.png" />
     <None Include="Resources\SignIn.png" />
     <None Include="Resources\SignFp.png" />
-    <None Include="Resources\Input.png" />
     <None Include="Resources\Save.png" />
-    <None Include="Resources\Alert.png" />
-    <None Include="Resources\Error.png" />
     <None Include="Resources\Guid.png" />
     <None Include="Resources\Hint.png" />
     <None Include="Resources\Info.png" />
@@ -1625,7 +1622,6 @@
     <None Include="Resources\Logo.png" />
     <None Include="Resources\Menu.png" />
     <None Include="Resources\Pupil.png" />
-    <None Include="Resources\Waiting.gif" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">

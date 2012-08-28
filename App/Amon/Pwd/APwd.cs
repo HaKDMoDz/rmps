@@ -2477,7 +2477,7 @@ namespace Me.Amon.Pwd
 
         private void DoInitCat(TreeNode root)
         {
-            foreach (Cat cat in _UserModel.DBA.ListCat(root.Name))
+            foreach (Cat cat in _UserModel.DBA.ListCat(CApp.IAPP_APWD, root.Name))
             {
                 TreeNode node = new TreeNode();
                 node.Name = cat.Id;
