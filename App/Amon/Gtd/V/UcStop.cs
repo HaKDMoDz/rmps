@@ -16,23 +16,31 @@ namespace Me.Amon.Gtd.V
         {
             if (mgtd == null)
             {
-                RbNone.Checked = true;
+                RbEver.Checked = true;
                 return;
             }
 
-            RbNone.Checked = mgtd.EndType == CGtd.END_TYPE_NONE;
-
-            RbLoop.Checked = mgtd.EndType == CGtd.END_TYPE_LOOP;
-            if (mgtd.ExeCount > 0)
+            if (mgtd.EndType == CGtd.END_TYPE_LOOP)
             {
-                SpLoop.Value = mgtd.ExeCount;
+                RbLoop.Checked = true;
+                if (mgtd.ExeCount > 0)
+                {
+                    SpLoop.Value = mgtd.ExeCount;
+                }
+                return;
             }
 
-            RbTime.Checked = mgtd.EndType == CGtd.END_TYPE_TIME;
-            if (mgtd.EndTime > DtTime.MinDate && mgtd.EndTime < DtTime.MaxDate)
+            if (mgtd.EndType == CGtd.END_TYPE_TIME)
             {
-                DtTime.Value = mgtd.EndTime;
+                RbTime.Checked = true;
+                if (mgtd.EndTime > DtTime.MinDate && mgtd.EndTime < DtTime.MaxDate)
+                {
+                    DtTime.Value = mgtd.EndTime;
+                }
+                return;
             }
+
+            RbEver.Checked = true;
         }
 
         public bool SaveData(MGtd mgtd)
@@ -41,7 +49,7 @@ namespace Me.Amon.Gtd.V
             {
                 return false;
             }
-            if (RbNone.Checked)
+            if (RbEver.Checked)
             {
                 mgtd.EndType = CGtd.END_TYPE_EVER;
                 return true;
@@ -62,9 +70,9 @@ namespace Me.Amon.Gtd.V
         }
 
         #region 事件处理
-        private void RbNone_CheckedChanged(object sender, EventArgs e)
+        private void RbEver_CheckedChanged(object sender, EventArgs e)
         {
-            if (RbNone.Checked)
+            if (RbEver.Checked)
             {
                 SpLoop.Enabled = false;
                 DtTime.Enabled = false;

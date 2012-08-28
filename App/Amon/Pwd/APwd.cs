@@ -1233,7 +1233,8 @@ namespace Me.Amon.Pwd
             List<Key> keys = new List<Key>();
             foreach (MGtd gtd in gtds)
             {
-                if (gtd.Test(time, seconds))
+                gtd.Test(time, seconds);
+                if (gtd.Status == CGtd.GTD_STAT_ONTIME)
                 {
                     keys.Add(_UserModel.DBA.ReadKey(gtd.RefId));
                 }

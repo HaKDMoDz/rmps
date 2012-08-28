@@ -56,6 +56,8 @@ namespace Me.Amon.Gtd.V.Uc
                 mgtd.Dates.Add(dates);
             }
 
+            dates.Unit = CGtd.UNIT_MAJOR_YEAR;
+
             if (RbEach.Checked)
             {
                 dates.Type = CGtd.TYPE_MINOR_EACH;

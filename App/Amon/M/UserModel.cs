@@ -685,7 +685,7 @@ namespace Me.Amon.M
             //dfa.Init(this);
             //_DFA = dfa;
 
-            _Timer = new Timer(new TimerCallback(Timer_Callback), null, 5000, 10000);
+            _Timer = new Timer(new TimerCallback(Timer_Callback), null, 5000, 1000);
         }
 
         public DBA DBA { get { return _DBA; } }

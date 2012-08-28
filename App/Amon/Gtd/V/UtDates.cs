@@ -8,9 +8,17 @@ namespace Me.Amon.Gtd.V
     public partial class UtDates : UserControl, IDate
     {
         private ITime _ITime;
+        private GtdEditor _Editor;
 
         public UtDates()
         {
+            InitializeComponent();
+        }
+
+        public UtDates(GtdEditor editor)
+        {
+            _Editor = editor;
+
             InitializeComponent();
 
             DtStart.CustomFormat = CApp.DATEIME_FORMAT;
@@ -109,20 +117,13 @@ namespace Me.Amon.Gtd.V
 
             switch (unit)
             {
-                case CGtd.UNIT_MAJOR_NONE:
-                    if (_UcNone == null)
-                    {
-                        _UcNone = new UcNone();
-                        InitView(_UcNone);
-                    }
-                    _ITime = _UcNone;
-                    break;
                 case CGtd.UNIT_MAJOR_SECOND:
                     if (_UcSecond == null)
                     {
                         _UcSecond = new UcSecond();
                         InitView(_UcSecond);
                     }
+                    _Editor.StopEnabled = true;
                     _ITime = _UcSecond;
                     break;
                 case CGtd.UNIT_MAJOR_MINUTE:
@@ -131,6 +132,7 @@ namespace Me.Amon.Gtd.V
                         _UcMinute = new UcMinute();
                         InitView(_UcMinute);
                     }
+                    _Editor.StopEnabled = true;
                     _ITime = _UcMinute;
                     break;
                 case CGtd.UNIT_MAJOR_HOUR:
@@ -139,6 +141,7 @@ namespace Me.Amon.Gtd.V
                         _UcHour = new UcHour();
                         InitView(_UcHour);
                     }
+                    _Editor.StopEnabled = true;
                     _ITime = _UcHour;
                     break;
                 case CGtd.UNIT_MAJOR_DAY:
@@ -147,6 +150,7 @@ namespace Me.Amon.Gtd.V
                         _UcDay = new UcDay();
                         InitView(_UcDay);
                     }
+                    _Editor.StopEnabled = true;
                     _ITime = _UcDay;
                     break;
                 case CGtd.UNIT_MAJOR_WEEK:
@@ -155,6 +159,7 @@ namespace Me.Amon.Gtd.V
                         _UcWeek = new UcWeek();
                         InitView(_UcWeek);
                     }
+                    _Editor.StopEnabled = true;
                     _ITime = _UcWeek;
                     break;
                 case CGtd.UNIT_MAJOR_MONTH:
@@ -163,6 +168,7 @@ namespace Me.Amon.Gtd.V
                         _UcMonth = new UcMonth();
                         InitView(_UcMonth);
                     }
+                    _Editor.StopEnabled = true;
                     _ITime = _UcMonth;
                     break;
                 case CGtd.UNIT_MAJOR_YEAR:
@@ -171,9 +177,17 @@ namespace Me.Amon.Gtd.V
                         _UcYear = new UcYear();
                         InitView(_UcYear);
                     }
+                    _Editor.StopEnabled = true;
                     _ITime = _UcYear;
                     break;
                 default:
+                    if (_UcNone == null)
+                    {
+                        _UcNone = new UcNone();
+                        InitView(_UcNone);
+                    }
+                    _Editor.StopEnabled = false;
+                    _ITime = _UcNone;
                     return;
             }
 

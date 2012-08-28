@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.RbNone = new System.Windows.Forms.RadioButton();
+            this.RbEver = new System.Windows.Forms.RadioButton();
             this.RbLoop = new System.Windows.Forms.RadioButton();
             this.SpLoop = new System.Windows.Forms.NumericUpDown();
             this.LlLoop = new System.Windows.Forms.Label();
@@ -37,17 +37,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.SpLoop)).BeginInit();
             this.SuspendLayout();
             // 
-            // RbNone
+            // RbEver
             // 
-            this.RbNone.AutoSize = true;
-            this.RbNone.Location = new System.Drawing.Point(3, 3);
-            this.RbNone.Name = "RbNone";
-            this.RbNone.Size = new System.Drawing.Size(71, 16);
-            this.RbNone.TabIndex = 0;
-            this.RbNone.TabStop = true;
-            this.RbNone.Text = "永不结束";
-            this.RbNone.UseVisualStyleBackColor = true;
-            this.RbNone.CheckedChanged += new System.EventHandler(this.RbNone_CheckedChanged);
+            this.RbEver.AutoSize = true;
+            this.RbEver.Location = new System.Drawing.Point(3, 3);
+            this.RbEver.Name = "RbEver";
+            this.RbEver.Size = new System.Drawing.Size(71, 16);
+            this.RbEver.TabIndex = 0;
+            this.RbEver.TabStop = true;
+            this.RbEver.Text = "永不结束";
+            this.RbEver.UseVisualStyleBackColor = true;
+            this.RbEver.CheckedChanged += new System.EventHandler(this.RbEver_CheckedChanged);
             // 
             // RbLoop
             // 
@@ -121,7 +121,7 @@
             this.Controls.Add(this.LlLoop);
             this.Controls.Add(this.SpLoop);
             this.Controls.Add(this.RbLoop);
-            this.Controls.Add(this.RbNone);
+            this.Controls.Add(this.RbEver);
             this.Name = "UcStop";
             this.Size = new System.Drawing.Size(304, 80);
             ((System.ComponentModel.ISupportInitialize)(this.SpLoop)).EndInit();
@@ -132,7 +132,7 @@
 
         #endregion
 
-        private System.Windows.Forms.RadioButton RbNone;
+        private System.Windows.Forms.RadioButton RbEver;
         private System.Windows.Forms.RadioButton RbLoop;
         private System.Windows.Forms.NumericUpDown SpLoop;
         private System.Windows.Forms.Label LlLoop;

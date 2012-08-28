@@ -19,11 +19,25 @@ namespace Me.Amon.Gtd.V
         }
         #endregion
 
+        #region 公共函数
         public MGtd MGtd
         {
             get;
             set;
         }
+
+        public bool StopEnabled
+        {
+            get
+            {
+                return UcStop.Enabled;
+            }
+            set
+            {
+                UcStop.Enabled = value;
+            }
+        }
+        #endregion
 
         #region 事件处理
         private void GtdEditor_Load(object sender, EventArgs e)
@@ -90,6 +104,11 @@ namespace Me.Amon.Gtd.V
                 return;
             }
 
+            if (UcStop.Enabled)
+            {
+                UcStop.SaveData(MGtd);
+            }
+
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -114,7 +133,7 @@ namespace Me.Amon.Gtd.V
                 case CGtd.TYPE_MAJOR_DATES:
                     if (_UtDates == null)
                     {
-                        _UtDates = new UtDates();
+                        _UtDates = new UtDates(this);
                         _UtDates.Dock = DockStyle.Fill;
                     }
                     GpDate.Text = "时间";

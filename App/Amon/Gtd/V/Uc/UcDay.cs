@@ -18,6 +18,7 @@ namespace Me.Amon.Gtd.V.Uc
             if (mgtd != null && mgtd.Dates.Count == 1)
             {
                 ADates dates = mgtd.Dates[0];
+
                 if (dates.Type == CGtd.TYPE_MINOR_EACH)
                 {
                     RbEach.Checked = true;
@@ -55,6 +56,8 @@ namespace Me.Amon.Gtd.V.Uc
                 dates = new Dates.Day();
                 mgtd.Dates.Add(dates);
             }
+
+            dates.Unit = CGtd.UNIT_MAJOR_DAY;
 
             if (RbEach.Checked)
             {
