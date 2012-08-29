@@ -10,10 +10,6 @@ using Me.Amon.Da;
 using Me.Amon.M;
 using Me.Amon.Pwd;
 using Me.Amon.Util;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Encodings;
-using Org.BouncyCastle.Crypto.Engines;
-using Org.BouncyCastle.OpenSsl;
 
 namespace Me.Amon.User.Uc
 {
@@ -226,17 +222,7 @@ namespace Me.Amon.User.Uc
                 }
             }
 
-            switch (CApp.SERVER_TYPE)
-            {
-                case "NET":
-                    d = Net(d);
-                    break;
-                case "PHP":
-                    d = Php(d);
-                    break;
-                default:
-                    break;
-            }
+            d = Net(d);
 
             WebClient client = new WebClient();
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
@@ -313,23 +299,6 @@ namespace Me.Amon.User.Uc
 
             byte[] b = Encoding.UTF8.GetBytes(_Name + '\n' + _Mail + '\n' + _Pass);
             b = rsa.Encrypt(b, false);
-            return HttpUtil.ToBase64String(b);
-        }
-
-        private string Php(string t)
-        {
-            AsymmetricKeyParameter keyPair;
-            using (StringReader sr = new StringReader(t))
-            {
-                PemReader pr = new PemReader(sr);
-                keyPair = (AsymmetricKeyParameter)pr.ReadObject();
-            }
-
-            IAsymmetricBlockCipher rsa = new Pkcs1Encoding(new RsaEngine());
-            rsa.Init(true, keyPair);
-
-            byte[] b = Encoding.UTF8.GetBytes(_Name + '\n' + _Mail + '\n' + _Pass);
-            b = rsa.ProcessBlock(b, 0, b.Length);
             return HttpUtil.ToBase64String(b);
         }
 

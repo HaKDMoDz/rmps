@@ -586,8 +586,6 @@ namespace Me.Amon.V
 
             switch ((app.Id ?? "").ToLower())
             {
-                case CApp.IAPP_ASEC:
-                    return new Sec.ASec(_UserModel);
                 case CApp.IAPP_ABAR:
                     return new Bar.ABar(_UserModel);
                 case CApp.IAPP_AREN:

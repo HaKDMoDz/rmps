@@ -31,10 +31,6 @@ namespace Me.Amon
         /// </summary>
         public const string SERVER_PATH = "http://amon.me/s.ashx";
         //public const string SERVER_PATH = "http://localhost:49587/s.ashx";
-        /// <summary>
-        /// 服务器类型
-        /// </summary>
-        public const string SERVER_TYPE = "NET";
 
         /// <summary>
         /// 系统配置数据

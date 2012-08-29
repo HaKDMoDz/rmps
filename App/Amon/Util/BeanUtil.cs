@@ -15,37 +15,6 @@ namespace Me.Amon.Util
     {
         public static IApp IApp { get; set; }
 
-        public static void Clear(ComboBox cBox)
-        {
-            if (cBox.Items.Count < 1)
-            {
-                return;
-            }
-            int idx = cBox.SelectedIndex;
-            for (int i = cBox.Items.Count - 1; i > 0; i -= 1)
-            {
-                cBox.Items.RemoveAt(i);
-            }
-            if (idx != 0)
-            {
-                cBox.SelectedIndex = 0;
-            }
-        }
-
-        public static void Clear(ComboBox cBox, Items[] items)
-        {
-            int idx = cBox.SelectedIndex;
-            for (int i = cBox.Items.Count - 1; i > 1; i -= 1)
-            {
-                cBox.Items.RemoveAt(i);
-            }
-            cBox.Items.AddRange(items);
-            if (idx != 0)
-            {
-                cBox.SelectedIndex = 0;
-            }
-        }
-
         public static Stream Open(string path, string file)
         {
             if (Regex.IsMatch(file, "^[a-zA-z]{2,}:/{2,3}[^\\s]+"))
