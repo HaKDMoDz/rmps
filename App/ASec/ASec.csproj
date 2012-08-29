@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AEFEFB11-7398-40C4-BD65-21B1B6BEA7CB}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Me.Amon</RootNamespace>
+    <AssemblyName>ASec</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Me.Amon.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>Lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sec\ASec.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sec\ASec.Designer.cs">
+      <DependentUpon>ASec.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\ESec.cs" />
+    <Compile Include="Sec\ISec.cs" />
+    <Compile Include="Sec\M\DataModel.cs" />
+    <Compile Include="Sec\T\Util.cs" />
+    <Compile Include="Sec\V\Pro\APro.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\V\Pro\APro.Designer.cs">
+      <DependentUpon>APro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\V\Pro\IForm.cs" />
+    <Compile Include="Sec\V\Pro\IView.cs" />
+    <Compile Include="Sec\V\Pro\Uc\ACm.cs" />
+    <Compile Include="Sec\V\Pro\Uc\ADi.cs" />
+    <Compile Include="Sec\V\Pro\Uc\ADo.cs" />
+    <Compile Include="Sec\V\Pro\Uc\AUk.cs" />
+    <Compile Include="Sec\V\Pro\Uc\Cm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\V\Pro\Uc\Cm.Designer.cs">
+      <DependentUpon>Cm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\V\Pro\Uc\CmUi\Acrypto.cs" />
+    <Compile Include="Sec\V\Pro\Uc\CmUi\Confuse.cs" />
+    <Compile Include="Sec\V\Pro\Uc\CmUi\Default.cs" />
+    <Compile Include="Sec\V\Pro\Uc\CmUi\Digest.cs" />
+    <Compile Include="Sec\V\Pro\Uc\CmUi\RandKey.cs" />
+    <Compile Include="Sec\V\Pro\Uc\CmUi\Scrypto.cs" />
+    <Compile Include="Sec\V\Pro\Uc\CmUi\Sstream.cs" />
+    <Compile Include="Sec\V\Pro\Uc\CmUi\Txt2Img.cs" />
+    <Compile Include="Sec\V\Pro\Uc\CmUi\Wrapper.cs" />
+    <Compile Include="Sec\V\Pro\Uc\Di.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\V\Pro\Uc\Di.Designer.cs">
+      <DependentUpon>Di.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\V\Pro\Uc\DiUi\Acrypto.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DiUi\Confuse.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DiUi\Default.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DiUi\Digest.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DiUi\RandKey.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DiUi\Scrypto.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DiUi\ScryptoDec.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DiUi\ScryptoDef.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DiUi\ScryptoEnc.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DiUi\Sstream.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DiUi\SstreamDec.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DiUi\SstreamDef.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DiUi\SstreamEnc.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DiUi\Txt2Img.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DiUi\Wrapper.cs" />
+    <Compile Include="Sec\V\Pro\Uc\Do.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\V\Pro\Uc\Do.Designer.cs">
+      <DependentUpon>Do.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\V\Pro\Uc\DoUi\Acrypto.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DoUi\Confuse.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DoUi\Default.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DoUi\Digest.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DoUi\RandKey.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DoUi\Scrypto.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DoUi\ScryptoDec.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DoUi\ScryptoDef.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DoUi\ScryptoEnc.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DoUi\Sstream.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DoUi\SstreamDec.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DoUi\SstreamDef.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DoUi\SstreamEnc.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DoUi\Txt2Img.cs" />
+    <Compile Include="Sec\V\Pro\Uc\DoUi\Wrapper.cs" />
+    <Compile Include="Sec\V\Pro\Uc\Uk.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\V\Pro\Uc\Uk.Designer.cs">
+      <DependentUpon>Uk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\V\Pro\Uc\UkUi\Acrypto.cs" />
+    <Compile Include="Sec\V\Pro\Uc\UkUi\Confuse.cs" />
+    <Compile Include="Sec\V\Pro\Uc\UkUi\Default.cs" />
+    <Compile Include="Sec\V\Pro\Uc\UkUi\Digest.cs" />
+    <Compile Include="Sec\V\Pro\Uc\UkUi\RandKey.cs" />
+    <Compile Include="Sec\V\Pro\Uc\UkUi\Scrypto.cs" />
+    <Compile Include="Sec\V\Pro\Uc\UkUi\Sstream.cs" />
+    <Compile Include="Sec\V\Pro\Uc\UkUi\Txt2Img.cs" />
+    <Compile Include="Sec\V\Pro\Uc\UkUi\Wrapper.cs" />
+    <Compile Include="Sec\V\Pro\Uw\Edit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sec\V\Pro\Uw\Edit.Designer.cs">
+      <DependentUpon>Edit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\V\Pro\Uw\Open.cs" />
+    <Compile Include="Sec\V\Pro\Uw\Pass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sec\V\Pro\Uw\Pass.Designer.cs">
+      <DependentUpon>Pass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\V\Pro\Uw\Save.cs" />
+    <Compile Include="Sec\V\Pro\Uw\Text.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sec\V\Pro\Uw\Text.Designer.cs">
+      <DependentUpon>Text.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\AFile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\AFile.Designer.cs">
+      <DependentUpon>AFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\AText.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\AText.Designer.cs">
+      <DependentUpon>AText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\AWiz.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\AWiz.Designer.cs">
+      <DependentUpon>AWiz.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\Decode.cs" />
+    <Compile Include="Sec\V\Wiz\Digest.cs" />
+    <Compile Include="Sec\V\Wiz\Encode.cs" />
+    <Compile Include="Sec\V\Wiz\ICrypto.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Sec\ASec.resx">
+      <DependentUpon>ASec.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\V\Pro\APro.resx">
+      <DependentUpon>APro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\V\Pro\Uc\Cm.resx">
+      <DependentUpon>Cm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\V\Pro\Uc\Di.resx">
+      <DependentUpon>Di.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\V\Pro\Uc\Do.resx">
+      <DependentUpon>Do.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\V\Pro\Uc\Uk.resx">
+      <DependentUpon>Uk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\V\Pro\Uw\Edit.resx">
+      <DependentUpon>Edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\V\Pro\Uw\Pass.resx">
+      <DependentUpon>Pass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\V\Pro\Uw\Text.resx">
+      <DependentUpon>Text.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\V\Wiz\AFile.resx">
+      <DependentUpon>AFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\V\Wiz\AText.resx">
+      <DependentUpon>AText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\V\Wiz\AWiz.resx">
+      <DependentUpon>AWiz.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Sec\C\" />
+    <Folder Include="Sec\E\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ComnLib\ComnLib.csproj">
+      <Project>{E57C460D-306A-4F57-AD0B-51F7EEAD8838}</Project>
+      <Name>ComnLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FormLib\FormLib.csproj">
+      <Project>{8EAB76F7-3B5C-490E-BDDE-CBEFD3D5BF25}</Project>
+      <Name>FormLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

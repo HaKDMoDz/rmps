@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormLib", "FormLib\FormLib.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AImg", "AImg\AImg.csproj", "{02B5C5F2-A66B-4FFF-9F93-E7C323F73CAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASec", "ASec\ASec.csproj", "{AEFEFB11-7398-40C4-BD65-21B1B6BEA7CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +109,16 @@ Global
 		{02B5C5F2-A66B-4FFF-9F93-E7C323F73CAB}.Release|Mixed Platforms.Build.0 = Release|x86
 		{02B5C5F2-A66B-4FFF-9F93-E7C323F73CAB}.Release|x86.ActiveCfg = Release|x86
 		{02B5C5F2-A66B-4FFF-9F93-E7C323F73CAB}.Release|x86.Build.0 = Release|x86
+		{AEFEFB11-7398-40C4-BD65-21B1B6BEA7CB}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{AEFEFB11-7398-40C4-BD65-21B1B6BEA7CB}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{AEFEFB11-7398-40C4-BD65-21B1B6BEA7CB}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{AEFEFB11-7398-40C4-BD65-21B1B6BEA7CB}.Debug|x86.ActiveCfg = Debug|x86
+		{AEFEFB11-7398-40C4-BD65-21B1B6BEA7CB}.Debug|x86.Build.0 = Debug|x86
+		{AEFEFB11-7398-40C4-BD65-21B1B6BEA7CB}.Release|Any CPU.ActiveCfg = Release|x86
+		{AEFEFB11-7398-40C4-BD65-21B1B6BEA7CB}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{AEFEFB11-7398-40C4-BD65-21B1B6BEA7CB}.Release|Mixed Platforms.Build.0 = Release|x86
+		{AEFEFB11-7398-40C4-BD65-21B1B6BEA7CB}.Release|x86.ActiveCfg = Release|x86
+		{AEFEFB11-7398-40C4-BD65-21B1B6BEA7CB}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
