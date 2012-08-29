@@ -163,7 +163,7 @@ namespace Me.Amon.Gtd
                 bool changed = false;
                 foreach (ADates date in Dates)
                 {
-                    NextTime = date.Next(NextTime, out changed);
+                    NextTime = date.Next(time, LastTime, out changed);
                     if (!changed)
                     {
                         break;

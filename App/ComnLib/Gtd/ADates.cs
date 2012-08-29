@@ -35,7 +35,7 @@ namespace Me.Amon.Gtd
             Values = new List<int>();
         }
 
-        public abstract DateTime Next(DateTime time, out bool changed);
+        public abstract DateTime Next(DateTime currTime, DateTime lastTime, out bool changed);
 
         protected int NextValue(int key, bool equals)
         {

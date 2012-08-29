@@ -76,6 +76,8 @@
     <Compile Include="Sec\MSec.cs" />
     <Compile Include="Spy\MSpy.cs" />
     <Compile Include="Sql\MSql.cs" />
+    <Compile Include="Uc\Itemi.cs" />
+    <Compile Include="Uc\Items.cs" />
     <Compile Include="Util\CharUtil.cs" />
     <Compile Include="Util\HashUtil.cs" />
     <Compile Include="Util\TimeUtil.cs" />
