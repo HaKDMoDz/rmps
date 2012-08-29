@@ -198,7 +198,7 @@ namespace Me.Amon
             //if (WindowState == FormWindowState.Minimized)
             //{
             //    Show();
-                //WindowState = FormWindowState.Normal;
+            //WindowState = FormWindowState.Normal;
             //}
             BringToFront();
         }
@@ -343,9 +343,9 @@ namespace Me.Amon
             if (_Tray == null)
             {
                 _Tray = new NotifyIcon();
-                _Tray.BalloonTipTitle = "阿木导航";
+                _Tray.BalloonTipTitle = "阿木密码箱";
                 _Tray.Icon = Me.Amon.Properties.Resources.Icon;
-                _Tray.Text = "阿木导航";
+                _Tray.Text = "阿木密码箱";
                 _Tray.Visible = true;
                 _Tray.DoubleClick += new EventHandler(NiTray_DoubleClick);
             }

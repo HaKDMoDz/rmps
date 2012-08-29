@@ -757,7 +757,24 @@ namespace Me.Amon.M
                     }
                 }
 
-                string info = string.Format("您有 {0} 个过期事项及 {1} 个待办事项", _PastCnt, _TodoCnt);
+                string info;
+                if (_PastCnt > 0 && _TodoCnt > 0)
+                {
+                    info = string.Format("您有 {0} 个过期事项及 {1} 个待办事项！", _PastCnt, _TodoCnt);
+                }
+                else if (_PastCnt > 0)
+                {
+                    info = string.Format(" {0} 个过期事项", _PastCnt);
+                }
+                else if (_TodoCnt > 0)
+                {
+                    info = string.Format(" {0} 个待办事项", _TodoCnt);
+                }
+                else
+                {
+                    info = "您目前没有需要提醒的事项。";
+                }
+
                 foreach (AmonHandler<string> hint in _Hints)
                 {
                     hint(info);
