@@ -82,6 +82,7 @@
             // 
             // TssEcho
             // 
+            this.TssEcho.DoubleClickEnabled = true;
             this.TssEcho.Name = "TssEcho";
             this.TssEcho.Size = new System.Drawing.Size(482, 17);
             this.TssEcho.Spring = true;

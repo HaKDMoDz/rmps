@@ -319,6 +319,7 @@ namespace Me.Amon.Pwd.V.Wiz
             if (gtd != null)
             {
                 gtd.Status = Gtd.CGtd.GTD_STAT_NORMAL;
+                gtd.LastTime = DateTime.Now;
                 _UserModel.DBA.SaveVcs(gtd);
                 _UserModel.ReloadGtds();
             }
