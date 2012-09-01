@@ -25,6 +25,8 @@ namespace Me.Amon.Pwd._Log
             _APwd = apwd;
 
             InitializeComponent();
+
+            this.Icon = Me.Amon.Properties.Resources.Icon;
         }
 
         public void Init(UserModel userModel, SafeModel safeModel)

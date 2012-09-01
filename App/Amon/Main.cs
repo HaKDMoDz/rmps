@@ -50,7 +50,7 @@ namespace Me.Amon
             Form window = null;
             if (_Alert == null)
             {
-                _Alert = new Alert();
+                _Alert = new Alert(Me.Amon.Properties.Resources.Icon);
             }
             BeanUtil.CenterToParent(_Alert, window);
             _Alert.Show(window, alert);
@@ -61,7 +61,7 @@ namespace Me.Amon
             Form window = null;
             if (_Error == null)
             {
-                _Error = new Error();
+                _Error = new Error(Me.Amon.Properties.Resources.Icon);
             }
             BeanUtil.CenterToParent(_Error, window);
             _Error.Show(window, error);
@@ -72,7 +72,7 @@ namespace Me.Amon
             Form window = null;
             if (_Input == null)
             {
-                _Input = new Input();
+                _Input = new Input(Me.Amon.Properties.Resources.Icon);
             }
             BeanUtil.CenterToParent(_Input, window);
             _Input.Show(window, message, deftext);
@@ -192,7 +192,11 @@ namespace Me.Amon
         {
             if (Visible)
             {
-                BringToFront();
+                if (WindowState == FormWindowState.Minimized)
+                {
+                    WindowState = FormWindowState.Normal;
+                }
+                Activate();
                 return;
             }
 

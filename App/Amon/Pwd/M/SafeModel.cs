@@ -373,7 +373,10 @@ namespace Me.Amon.Pwd.M
 
             // HintItem
             HintAtt hint = (HintAtt)_AttList[Att.PWDS_HEAD_HINT];
-            _Key.GtdId = hint.Gtd.Id;
+            if (hint.Gtd != null)
+            {
+                _Key.GtdId = hint.Gtd.Id;
+            }
             _Key.GtdMemo = hint.Data;
             _Key.Gtd = hint.Gtd;
 

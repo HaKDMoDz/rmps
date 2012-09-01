@@ -28,10 +28,10 @@
     <SupportUrl>http://amon.me/blog</SupportUrl>
     <ProductName>阿木密码箱</ProductName>
     <PublisherName>Amon</PublisherName>
-    <SuiteName>阿木软件</SuiteName>
+    <SuiteName>阿木密码箱</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>7.1.9.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

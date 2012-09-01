@@ -10,6 +10,8 @@ namespace Me.Amon.Uw
         public TxtEditor()
         {
             InitializeComponent();
+
+            this.Icon = Me.Amon.Properties.Resources.Icon;
         }
 
         public void Init(string file)

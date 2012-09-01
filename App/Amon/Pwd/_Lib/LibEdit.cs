@@ -26,6 +26,8 @@ namespace Me.Amon.Pwd._Lib
             _UserModel = userModel;
 
             InitializeComponent();
+
+            this.Icon = Me.Amon.Properties.Resources.Icon;
         }
 
         public void Init(DataModel dataModel)

@@ -2458,7 +2458,7 @@ namespace Me.Amon.Pwd
                 dt.Rows.Add(stroke.Key, stroke.Memo);
             }
 
-            HotKeys keys = new HotKeys(dt);
+            HotKeys keys = new HotKeys(Me.Amon.Properties.Resources.Icon, dt);
             BeanUtil.CenterToParent(keys, _Main);
             keys.Show(this);
         }
