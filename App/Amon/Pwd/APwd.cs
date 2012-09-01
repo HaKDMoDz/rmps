@@ -63,6 +63,7 @@ namespace Me.Amon.Pwd
         private bool _Exit;
         private Main _Main;
         private KeyEventHandler _KeyDownHandler;
+        private EventHandler _MinimizeHandler;
         private FormClosingEventHandler _ClosingHandler;
 
         #region 构造函数
@@ -133,6 +134,11 @@ namespace Me.Amon.Pwd
             _Main.KeyPreview = true;
             _Main.MainMenuStrip = this.MbMenu;
             _Main.MaximizeBox = true;
+            if (_MinimizeHandler == null)
+            {
+                _MinimizeHandler = new EventHandler(Main_Resize);
+            }
+            //_Main.Resize += _MinimizeHandler;
             if (_ClosingHandler == null)
             {
                 _ClosingHandler = new FormClosingEventHandler(Main_FormClosing);
@@ -252,6 +258,14 @@ namespace Me.Amon.Pwd
                 stroke.Action.EventHandler(stroke, null);
                 e.Handled = true;
                 break;
+            }
+        }
+
+        private void Main_Resize(object sender, EventArgs e)
+        {
+            if (_Main.WindowState == FormWindowState.Minimized)
+            {
+                _Main.Visible = false;
             }
         }
 

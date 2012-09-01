@@ -190,16 +190,26 @@ namespace Me.Amon
 
         private void NiTray_DoubleClick(object sender, EventArgs e)
         {
-            if (!Visible)
+            if (Visible)
             {
-                //Show();
-                Visible = true;
+                BringToFront();
+                return;
             }
-            //if (WindowState == FormWindowState.Minimized)
-            //{
-            //    Show();
-            //WindowState = FormWindowState.Normal;
-            //}
+
+            AuthCa authCa = new AuthCa(_UserModel);
+            authCa.CallBackHandler = new AmonHandler<string>(Dd);
+            authCa.InitOnce();
+            authCa.ShowDialog();
+        }
+
+        private void Dd(string key)
+        {
+            //Show();
+            if (WindowState == FormWindowState.Minimized)
+            {
+                WindowState = FormWindowState.Normal;
+            }
+            Visible = true;
             BringToFront();
         }
         #endregion
