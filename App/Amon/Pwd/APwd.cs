@@ -130,6 +130,7 @@ namespace Me.Amon.Pwd
                     break;
             }
 
+            _Main.Text = "阿木密码箱";
             _Main.FormBorderStyle = FormBorderStyle.Sizable;
             _Main.KeyPreview = true;
             _Main.MainMenuStrip = this.MbMenu;
