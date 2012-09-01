@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Me.Amon.Uw
@@ -11,10 +12,11 @@ namespace Me.Amon.Uw
             InitializeComponent();
         }
 
-        public HotKeys(DataTable dataTable)
+        public HotKeys(Icon icon, DataTable dataTable)
         {
             InitializeComponent();
 
+            this.Icon = icon;
             DvKeys.DataSource = dataTable;
         }
 
