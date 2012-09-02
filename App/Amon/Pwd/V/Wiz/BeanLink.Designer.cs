@@ -30,6 +30,7 @@
         {
             this.TbData = new System.Windows.Forms.TextBox();
             this.BtOpen = new System.Windows.Forms.Button();
+            this.BtCopy = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TbData
@@ -39,7 +40,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TbData.Location = new System.Drawing.Point(0, 0);
             this.TbData.Name = "TbData";
-            this.TbData.Size = new System.Drawing.Size(323, 21);
+            this.TbData.Size = new System.Drawing.Size(293, 21);
             this.TbData.TabIndex = 0;
             // 
             // BtOpen
@@ -47,7 +48,7 @@
             this.BtOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtOpen.FlatAppearance.BorderSize = 0;
             this.BtOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtOpen.Location = new System.Drawing.Point(329, 0);
+            this.BtOpen.Location = new System.Drawing.Point(299, 0);
             this.BtOpen.Name = "BtOpen";
             this.BtOpen.Size = new System.Drawing.Size(21, 21);
             this.BtOpen.TabIndex = 1;
@@ -55,10 +56,24 @@
             this.BtOpen.UseVisualStyleBackColor = true;
             this.BtOpen.Click += new System.EventHandler(this.BtOpen_Click);
             // 
+            // BtCopy
+            // 
+            this.BtCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtCopy.FlatAppearance.BorderSize = 0;
+            this.BtCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtCopy.Location = new System.Drawing.Point(326, 0);
+            this.BtCopy.Name = "BtCopy";
+            this.BtCopy.Size = new System.Drawing.Size(21, 21);
+            this.BtCopy.TabIndex = 2;
+            this.BtCopy.TabStop = false;
+            this.BtCopy.UseVisualStyleBackColor = true;
+            this.BtCopy.Click += new System.EventHandler(this.BtCopy_Click);
+            // 
             // BeanLink
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.BtCopy);
             this.Controls.Add(this.BtOpen);
             this.Controls.Add(this.TbData);
             this.Name = "BeanLink";
@@ -72,5 +87,6 @@
 
         private System.Windows.Forms.TextBox TbData;
         private System.Windows.Forms.Button BtOpen;
+        private System.Windows.Forms.Button BtCopy;
     }
 }

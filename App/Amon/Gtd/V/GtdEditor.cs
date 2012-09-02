@@ -9,12 +9,28 @@ namespace Me.Amon.Gtd.V
         private UtDates _UtDates;
         private UtEvent _UtEvent;
         private UtMaths _UtMaths;
+        private bool _Associated;
 
         #region 构造函数
         public GtdEditor()
         {
             InitializeComponent();
+        }
 
+        public GtdEditor(bool associated)
+        {
+            _Associated = associated;
+
+            InitializeComponent();
+
+            if (associated)
+            {
+                CkSwitch.Text = "已禁用(&D)";
+            }
+            else
+            {
+                CkSwitch.Text = "保存为模板(&T)";
+            }
             this.Icon = Me.Amon.Properties.Resources.Icon;
         }
         #endregion
@@ -107,6 +123,15 @@ namespace Me.Amon.Gtd.V
             if (UcStop.Enabled)
             {
                 UcStop.SaveData(MGtd);
+            }
+
+            if (_Associated)
+            {
+                MGtd.Status = CkSwitch.Checked ? CGtd.GTD_STAT_SUSPEND : CGtd.GTD_STAT_NORMAL;
+            }
+            else
+            {
+                MGtd.Shared = CkSwitch.Checked;
             }
 
             DialogResult = DialogResult.OK;

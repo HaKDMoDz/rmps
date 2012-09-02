@@ -21,6 +21,7 @@ namespace Me.Amon
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());
             //Application.Run(new Gtd.V.GtdEditor());
+            //Application.Run(new Demo());
         }
     }
 }

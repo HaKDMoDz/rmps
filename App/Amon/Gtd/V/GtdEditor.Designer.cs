@@ -156,9 +156,9 @@
             this.CkSwitch.AutoSize = true;
             this.CkSwitch.Location = new System.Drawing.Point(12, 361);
             this.CkSwitch.Name = "CkSwitch";
-            this.CkSwitch.Size = new System.Drawing.Size(84, 16);
+            this.CkSwitch.Size = new System.Drawing.Size(78, 16);
             this.CkSwitch.TabIndex = 10;
-            this.CkSwitch.Text = "保存为模板";
+            this.CkSwitch.Text = "已禁用(&D)";
             this.CkSwitch.UseVisualStyleBackColor = true;
             // 
             // GtdEditor

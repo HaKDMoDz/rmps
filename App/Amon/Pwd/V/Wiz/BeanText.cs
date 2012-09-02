@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Pwd.Bean;
 using Me.Amon.Pwd.M;
+using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.V.Wiz
 {
@@ -38,6 +39,9 @@ namespace Me.Amon.Pwd.V.Wiz
             _Label.Dock = DockStyle.Fill;
 
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
+
+            BtCopy.Image = viewModel.GetImage("att-copy");
+            _Body.ShowTips(BtCopy, "复制");
 
             InitSpec(TbData);
         }
@@ -107,6 +111,12 @@ namespace Me.Amon.Pwd.V.Wiz
         private void TbData_GotFocus(object sender, EventArgs e)
         {
             _Body.EditCtl = this;
+        }
+
+        private void BtCopy_Click(object sender, EventArgs e)
+        {
+            SafeUtil.Copy(TbData.Text);
+            TbData.Focus();
         }
         #endregion
     }

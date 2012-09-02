@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Pwd.Bean;
 using Me.Amon.Pwd.M;
+using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.V.Wiz
 {
@@ -118,6 +119,12 @@ namespace Me.Amon.Pwd.V.Wiz
         private void BtOpt_Click(object sender, EventArgs e)
         {
             ShowSpec(BtOpt);
+        }
+
+        private void BtCopy_Click(object sender, EventArgs e)
+        {
+            SafeUtil.Copy(TbData.Text);
+            TbData.Focus();
         }
         #endregion
         #endregion

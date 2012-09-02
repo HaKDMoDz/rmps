@@ -48,6 +48,9 @@ namespace Me.Amon.Pwd.V.Wiz
             BtOpt.Image = viewModel.GetImage("att-pass-options");
             _Body.ShowTips(BtOpt, "选项");
 
+            BtCopy.Image = viewModel.GetImage("att-copy");
+            _Body.ShowTips(BtCopy, "复制");
+
             InitSpec(TbData);
         }
         #endregion
@@ -137,6 +140,12 @@ namespace Me.Amon.Pwd.V.Wiz
         private void BtOpt_Click(object sender, EventArgs e)
         {
             ShowSpec(BtOpt);
+        }
+
+        private void BtCopy_Click(object sender, EventArgs e)
+        {
+            SafeUtil.Copy(TbData.Text, 60);
+            TbData.Focus();
         }
         #endregion
     }

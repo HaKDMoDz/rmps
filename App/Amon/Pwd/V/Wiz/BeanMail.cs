@@ -43,6 +43,9 @@ namespace Me.Amon.Pwd.V.Wiz
             BtSend.Image = viewModel.GetImage("att-mail-send");
             _Body.ShowTips(BtSend, "撰写邮件");
 
+            BtCopy.Image = viewModel.GetImage("att-copy");
+            _Body.ShowTips(BtCopy, "复制");
+
             InitSpec(TbData);
         }
         #endregion
@@ -124,6 +127,12 @@ namespace Me.Amon.Pwd.V.Wiz
         private void BtSend_Click(object sender, EventArgs e)
         {
             OpenMail();
+        }
+
+        private void BtCopy_Click(object sender, EventArgs e)
+        {
+            SafeUtil.Copy(TbData.Text);
+            TbData.Focus();
         }
         #endregion
     }

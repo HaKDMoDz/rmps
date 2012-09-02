@@ -13,7 +13,10 @@ namespace Me.Amon.Util
         private static Timer _Timer;
         public static void Copy(string newText)
         {
-            Copy(newText, 60);
+            if (!string.IsNullOrEmpty(newText))
+            {
+                Copy(newText, 60);
+            }
         }
 
         public static void Copy(string newText, int seconds)

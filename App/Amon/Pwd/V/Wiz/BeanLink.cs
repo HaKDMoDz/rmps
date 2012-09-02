@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Pwd.Bean;
 using Me.Amon.Pwd.M;
+using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.V.Wiz
 {
@@ -41,6 +42,9 @@ namespace Me.Amon.Pwd.V.Wiz
 
             BtOpen.Image = viewModel.GetImage("att-link-open");
             _Body.ShowTips(BtOpen, "打开链接");
+
+            BtCopy.Image = viewModel.GetImage("att-copy");
+            _Body.ShowTips(BtCopy, "复制");
 
             InitSpec(TbData);
         }
@@ -115,6 +119,12 @@ namespace Me.Amon.Pwd.V.Wiz
         private void BtOpen_Click(object sender, EventArgs e)
         {
             OpenLink();
+        }
+
+        private void BtCopy_Click(object sender, EventArgs e)
+        {
+            SafeUtil.Copy(TbData.Text);
+            TbData.Focus();
         }
         #endregion
     }

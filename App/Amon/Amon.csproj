@@ -88,6 +88,9 @@
     <Reference Include="MessagingToolkit.Barcode">
       <HintPath>.\Lib\MessagingToolkit.Barcode.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -190,6 +193,12 @@
       <DependentUpon>Vcard.cs</DependentUpon>
     </Compile>
     <Compile Include="C\VoidHandler.cs" />
+    <Compile Include="Demo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Demo.Designer.cs">
+      <DependentUpon>Demo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Gtd\EGtd.cs" />
     <Compile Include="Gtd\V\GtdEditor.cs">
       <SubType>Form</SubType>
@@ -344,6 +353,21 @@
       <DependentUpon>ASmall.cs</DependentUpon>
     </Compile>
     <Compile Include="M\IViewModel.cs" />
+    <Compile Include="OS\IOsd.cs" />
+    <Compile Include="OS\KuaipanOsd.cs" />
+    <Compile Include="OS\Kuaipan\AccountInfo.cs" />
+    <Compile Include="OS\Kuaipan\Consumer.cs" />
+    <Compile Include="OS\Kuaipan\Account.cs" />
+    <Compile Include="OS\Kuaipan\File.cs" />
+    <Compile Include="OS\Kuaipan\Folder.cs" />
+    <Compile Include="OS\Kuaipan\OauthCore.cs" />
+    <Compile Include="OS\Kuaipan\KConst.cs" />
+    <Compile Include="OS\Kuaipan\KMetadata.cs" />
+    <Compile Include="OS\Kuaipan\KNet.cs" />
+    <Compile Include="OS\Kuaipan\MetaType.cs" />
+    <Compile Include="OS\Kuaipan\Param.cs" />
+    <Compile Include="OS\Kuaipan\Oauth.cs" />
+    <Compile Include="OS\Kuaipan\OauthToken.cs" />
     <Compile Include="TApp.cs" />
     <Compile Include="Pwd\Att.cs" />
     <Compile Include="Pwd\Bean\ACall.cs">
@@ -1091,6 +1115,9 @@
       <DependentUpon>Vcard.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Demo.resx">
+      <DependentUpon>Demo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Gtd\AGtd.resx">
       <DependentUpon>AGtd.cs</DependentUpon>
     </EmbeddedResource>
@@ -1503,6 +1530,7 @@
     <Folder Include="Gtd\M\" />
     <Folder Include="Ico\C\" />
     <Folder Include="Img\M\" />
+    <Folder Include="OS\VDisk\" />
     <Folder Include="Pwd\C\" />
     <Folder Include="Pwd\E\Edit\" />
     <Folder Include="Pwd\E\Skin\" />
