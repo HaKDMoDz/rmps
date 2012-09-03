@@ -23,6 +23,8 @@ namespace Me.Amon
 
         bool Visible { get; set; }
 
+        bool Focus();
+
         bool IsDisposed { get; }
 
         void Dispose();

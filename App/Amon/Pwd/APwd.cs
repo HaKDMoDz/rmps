@@ -161,6 +161,11 @@ namespace Me.Amon.Pwd
             _EchoDelay = delay;
         }
 
+        public new bool Focus()
+        {
+            return FbFind.Focus();
+        }
+
         public bool WillExit()
         {
             if (_SafeModel.Modified)

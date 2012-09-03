@@ -303,9 +303,9 @@ namespace Me.Amon
 
         private void DoSignIn(string view)
         {
-            //DefaultApp = new TApp { Id = "APwd", Type = "app", NeedAuth = true };
-            //ShowDefaultApp();
-            ShowAPwd();
+            DefaultApp = new TApp { Id = "APwd", Type = "app", NeedAuth = true };
+            DefaultApp.App = new Pwd.APwd(_UserModel);
+            DefaultApp.App.Show();
 
             Visible = false;
 
@@ -317,6 +317,8 @@ namespace Me.Amon
             {
                 ShowGuid();
             }
+
+            DefaultApp.App.Focus();
 
             LoadApps();
         }
@@ -346,17 +348,6 @@ namespace Me.Amon
         }
 
         #region 应用相关
-        private Pwd.APwd _APwd;
-        private void ShowAPwd()
-        {
-            if (_APwd == null)
-            {
-                _APwd = new Pwd.APwd(_UserModel);
-                _APwd.Show();
-                return;
-            }
-        }
-
         public void SaveGuid()
         {
         }
