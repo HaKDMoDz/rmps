@@ -28,7 +28,7 @@ using Thought.vCards;
 
 namespace Me.Amon.Pwd
 {
-    public partial class APwd : UserControl, IApp, IAmon
+    public partial class APwd : Form, IApp
     {
         #region 全局变量
         private UserModel _UserModel;
@@ -61,10 +61,6 @@ namespace Me.Amon.Pwd
         private int _EchoDelay;
 
         private bool _Exit;
-        private Main _Main;
-        private KeyEventHandler _KeyDownHandler;
-        private EventHandler _MinimizeHandler;
-        private FormClosingEventHandler _ClosingHandler;
 
         #region 构造函数
         public APwd()
@@ -72,15 +68,14 @@ namespace Me.Amon.Pwd
             InitializeComponent();
         }
 
-        public APwd(Main main, UserModel userModel)
+        public APwd(UserModel userModel)
         {
-            _Main = main;
             _UserModel = userModel;
 
             InitializeComponent();
         }
 
-        public void InitData()
+        private void APwd_Load(object sender, EventArgs e)
         {
             #region 数据模型
             _SafeModel = new SafeModel(_UserModel);
@@ -107,6 +102,8 @@ namespace Me.Amon.Pwd
             }
             #endregion
 
+            LoadLayout();
+
             InitCat();
             InitKey();
             FbFind.APwd = this;
@@ -130,56 +127,20 @@ namespace Me.Amon.Pwd
                     break;
             }
 
-            _Main.Text = "阿木密码箱";
-            _Main.FormBorderStyle = FormBorderStyle.Sizable;
-            _Main.KeyPreview = true;
-            _Main.MainMenuStrip = this.MbMenu;
-            _Main.MaximizeBox = true;
-            if (_MinimizeHandler == null)
-            {
-                _MinimizeHandler = new EventHandler(Main_Resize);
-            }
-            //_Main.Resize += _MinimizeHandler;
-            if (_ClosingHandler == null)
-            {
-                _ClosingHandler = new FormClosingEventHandler(Main_FormClosing);
-            }
-            _Main.FormClosing += _ClosingHandler;
-            if (_KeyDownHandler == null)
-            {
-                _KeyDownHandler = new KeyEventHandler(Main_KeyDown);
-            }
-            _Main.KeyDown += _KeyDownHandler;
+            Text = "阿木密码箱";
+            KeyPreview = true;
 
             _UserModel.AppendHandler(new AmonHandler<string>(ShowEcho));
-        }
-
-        public void LoadView()
-        {
-            LoadLayout();
-        }
-
-        public void SaveView()
-        {
-        }
-
-        public void DeInit()
-        {
-            _Main.KeyDown -= _KeyDownHandler;
-            _Main.FormClosing -= _ClosingHandler;
         }
         #endregion
 
         #region 接口实现
         public int AppId { get; set; }
 
-
         public Form Form
         {
-            get { return _Main; }
+            get { return this; }
         }
-
-        public Icon Icon { get; set; }
 
         public void ShowTips(Control control, string caption)
         {
@@ -264,9 +225,9 @@ namespace Me.Amon.Pwd
 
         private void Main_Resize(object sender, EventArgs e)
         {
-            if (_Main.WindowState == FormWindowState.Minimized)
+            if (WindowState == FormWindowState.Minimized)
             {
-                _Main.Visible = false;
+                Visible = false;
             }
         }
 
@@ -724,7 +685,7 @@ namespace Me.Amon.Pwd
             KeyIcon seeker = new KeyIcon(_UserModel, rootDir);
             seeker.IcoSize = 24;
             seeker.CallBackHandler = handler;
-            BeanUtil.CenterToParent(seeker, _Main);
+            BeanUtil.CenterToParent(seeker, this);
             seeker.ShowDialog(this);
         }
 
@@ -1078,7 +1039,7 @@ namespace Me.Amon.Pwd
             CatIcon editor = new CatIcon(_UserModel, _DataModel.CatDir);
             editor.InitOnce(16);
             editor.CallBackHandler = new AmonHandler<Png>(ChangeCatIcon);
-            BeanUtil.CenterToParent(editor, _Main);
+            BeanUtil.CenterToParent(editor, this);
             editor.ShowDialog(this);
         }
 
@@ -1413,7 +1374,7 @@ namespace Me.Amon.Pwd
             CatTree view = new CatTree(_UserModel);
             view.Init(IlCatTree);
             view.CallBack = new AmonHandler<string>(ChangeKeyCat);
-            BeanUtil.CenterToParent(view, _Main);
+            BeanUtil.CenterToParent(view, this);
             view.ShowDialog(this);
         }
 
@@ -1425,7 +1386,7 @@ namespace Me.Amon.Pwd
             }
             LogEdit edit = new LogEdit(this);
             edit.Init(_UserModel, _SafeModel);
-            BeanUtil.CenterToParent(edit, _Main);
+            BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
         #endregion
@@ -1519,7 +1480,7 @@ namespace Me.Amon.Pwd
         #region 文件选单
         public void LockForm()
         {
-            new AuthLs(_UserModel, _Main).ShowDialog(this);
+            new AuthLs(_UserModel, this).ShowDialog(this);
         }
 
         public void HideForm()
@@ -1533,12 +1494,7 @@ namespace Me.Amon.Pwd
             }
 
             SaveLayout();
-            _Main.Visible = false;
-        }
-
-        public void Close()
-        {
-            _Main.ExitSystem();
+            Visible = false;
         }
         #endregion
 
@@ -2408,7 +2364,7 @@ namespace Me.Amon.Pwd
         {
             LibEdit edit = new LibEdit(_UserModel);
             edit.Init(_DataModel);
-            BeanUtil.CenterToParent(edit, _Main);
+            BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
 
@@ -2416,7 +2372,7 @@ namespace Me.Amon.Pwd
         {
             UdcEditor edit = new UdcEditor(_UserModel);
             edit.Init(_DataModel.UdcModel, new Udc());
-            BeanUtil.CenterToParent(edit, _Main);
+            BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
 
@@ -2424,7 +2380,7 @@ namespace Me.Amon.Pwd
         {
             KeyIcon edit = new KeyIcon(_UserModel, _DataModel.KeyDir);
             edit.IcoSize = CApp.IMG_KEY_LIST_DIM;
-            BeanUtil.CenterToParent(edit, _Main);
+            BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
         #endregion
@@ -2460,7 +2416,7 @@ namespace Me.Amon.Pwd
             }
 
             HotKeys keys = new HotKeys(Me.Amon.Properties.Resources.Icon, dt);
-            BeanUtil.CenterToParent(keys, _Main);
+            BeanUtil.CenterToParent(keys, this);
             keys.Show(this);
         }
 
@@ -2628,16 +2584,16 @@ namespace Me.Amon.Pwd
         {
             if (_ViewModel.WindowState == CPwd.WINDOW_STATE_MAXIMIZED)
             {
-                _Main.WindowState = FormWindowState.Maximized;
+                WindowState = FormWindowState.Maximized;
             }
             else if (_ViewModel.WindowState == CPwd.WINDOW_STATE_MINIMIZED)
             {
-                _Main.WindowState = FormWindowState.Minimized;
+                WindowState = FormWindowState.Minimized;
             }
             else
             {
-                _Main.ClientSize = new Size(_ViewModel.WindowDimW, _ViewModel.WindowDimH);
-                _Main.Location = new Point(_ViewModel.WindowLocX, _ViewModel.WindowLocY);
+                ClientSize = new Size(_ViewModel.WindowDimW, _ViewModel.WindowDimH);
+                Location = new Point(_ViewModel.WindowLocX, _ViewModel.WindowLocY);
             }
 
             MbMenu.Visible = _ViewModel.MenuBarVisible;
@@ -2653,16 +2609,16 @@ namespace Me.Amon.Pwd
 
         public void SaveLayout()
         {
-            if (!_Main.Visible)
+            if (!Visible)
             {
                 return;
             }
 
-            if (_Main.WindowState == FormWindowState.Maximized)
+            if (WindowState == FormWindowState.Maximized)
             {
                 _ViewModel.WindowState = CPwd.WINDOW_STATE_MAXIMIZED;
             }
-            else if (_Main.WindowState == FormWindowState.Minimized)
+            else if (WindowState == FormWindowState.Minimized)
             {
                 _ViewModel.WindowState = CPwd.WINDOW_STATE_MINIMIZED;
             }
@@ -2670,10 +2626,10 @@ namespace Me.Amon.Pwd
             {
                 _ViewModel.WindowState = CPwd.WINDOW_STATE_NORMAL;
 
-                _ViewModel.WindowLocX = _Main.Location.X;
-                _ViewModel.WindowLocY = _Main.Location.Y;
-                _ViewModel.WindowDimW = _Main.ClientSize.Width;
-                _ViewModel.WindowDimH = _Main.ClientSize.Height;
+                _ViewModel.WindowLocX = Location.X;
+                _ViewModel.WindowLocY = Location.Y;
+                _ViewModel.WindowDimW = ClientSize.Width;
+                _ViewModel.WindowDimH = ClientSize.Height;
             }
 
             _ViewModel.MenuBarVisible = MbMenu.Visible;

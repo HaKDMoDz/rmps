@@ -41,12 +41,12 @@
             this.IlCatTree = new System.Windows.Forms.ImageList(this.components);
             this.LbKeyList = new System.Windows.Forms.ListBox();
             this.PlBody = new System.Windows.Forms.Panel();
-            this.FbFind = new Me.Amon.Pwd.Bean.FindBar();
             this.TbTool = new System.Windows.Forms.ToolStrip();
             this.CmKey = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.UcTimer = new System.Windows.Forms.Timer(this.components);
             this.BgWorker = new System.ComponentModel.BackgroundWorker();
+            this.FbFind = new Me.Amon.Pwd.Bean.FindBar();
             this.SsEcho.SuspendLayout();
             this.TcTool.ContentPanel.SuspendLayout();
             this.TcTool.TopToolStripPanel.SuspendLayout();
@@ -74,7 +74,7 @@
             this.SsEcho.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TssEcho,
             this.TssTime});
-            this.SsEcho.Location = new System.Drawing.Point(0, 390);
+            this.SsEcho.Location = new System.Drawing.Point(0, 420);
             this.SsEcho.Name = "SsEcho";
             this.SsEcho.Size = new System.Drawing.Size(584, 22);
             this.SsEcho.TabIndex = 1;
@@ -84,7 +84,7 @@
             // 
             this.TssEcho.DoubleClickEnabled = true;
             this.TssEcho.Name = "TssEcho";
-            this.TssEcho.Size = new System.Drawing.Size(482, 17);
+            this.TssEcho.Size = new System.Drawing.Size(513, 17);
             this.TssEcho.Spring = true;
             this.TssEcho.Text = "系统处理中，请稍后……";
             this.TssEcho.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -102,11 +102,11 @@
             // TcTool.ContentPanel
             // 
             this.TcTool.ContentPanel.Controls.Add(this.HSplit);
-            this.TcTool.ContentPanel.Size = new System.Drawing.Size(584, 341);
+            this.TcTool.ContentPanel.Size = new System.Drawing.Size(584, 371);
             this.TcTool.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TcTool.Location = new System.Drawing.Point(0, 24);
             this.TcTool.Name = "TcTool";
-            this.TcTool.Size = new System.Drawing.Size(584, 366);
+            this.TcTool.Size = new System.Drawing.Size(584, 396);
             this.TcTool.TabIndex = 2;
             this.TcTool.Text = "toolStripContainer1";
             // 
@@ -131,7 +131,7 @@
             // 
             this.HSplit.Panel2.Controls.Add(this.PlBody);
             this.HSplit.Panel2.Controls.Add(this.FbFind);
-            this.HSplit.Size = new System.Drawing.Size(564, 321);
+            this.HSplit.Size = new System.Drawing.Size(564, 351);
             this.HSplit.SplitterDistance = 220;
             this.HSplit.TabIndex = 0;
             // 
@@ -149,8 +149,8 @@
             // VSplit.Panel2
             // 
             this.VSplit.Panel2.Controls.Add(this.LbKeyList);
-            this.VSplit.Size = new System.Drawing.Size(220, 321);
-            this.VSplit.SplitterDistance = 152;
+            this.VSplit.Size = new System.Drawing.Size(220, 351);
+            this.VSplit.SplitterDistance = 165;
             this.VSplit.TabIndex = 0;
             // 
             // TvCatTree
@@ -163,7 +163,7 @@
             this.TvCatTree.Location = new System.Drawing.Point(0, 0);
             this.TvCatTree.Name = "TvCatTree";
             this.TvCatTree.SelectedImageIndex = 0;
-            this.TvCatTree.Size = new System.Drawing.Size(220, 152);
+            this.TvCatTree.Size = new System.Drawing.Size(220, 165);
             this.TvCatTree.TabIndex = 0;
             this.TvCatTree.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.TvCatTree_ItemDrag);
             this.TvCatTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvCatTree_AfterSelect);
@@ -190,7 +190,7 @@
             this.LbKeyList.ItemHeight = 30;
             this.LbKeyList.Location = new System.Drawing.Point(0, 0);
             this.LbKeyList.Name = "LbKeyList";
-            this.LbKeyList.Size = new System.Drawing.Size(220, 165);
+            this.LbKeyList.Size = new System.Drawing.Size(220, 182);
             this.LbKeyList.TabIndex = 0;
             this.LbKeyList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.LbKeyList_DrawItem);
             this.LbKeyList.SelectedIndexChanged += new System.EventHandler(this.LbKeyList_SelectedIndexChanged);
@@ -201,17 +201,8 @@
             this.PlBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PlBody.Location = new System.Drawing.Point(0, 29);
             this.PlBody.Name = "PlBody";
-            this.PlBody.Size = new System.Drawing.Size(340, 292);
+            this.PlBody.Size = new System.Drawing.Size(340, 322);
             this.PlBody.TabIndex = 1;
-            // 
-            // FbFind
-            // 
-            this.FbFind.APwd = null;
-            this.FbFind.Dock = System.Windows.Forms.DockStyle.Top;
-            this.FbFind.Location = new System.Drawing.Point(0, 0);
-            this.FbFind.Name = "FbFind";
-            this.FbFind.Size = new System.Drawing.Size(340, 29);
-            this.FbFind.TabIndex = 0;
             // 
             // TbTool
             // 
@@ -234,15 +225,29 @@
             // 
             this.BgWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BgWorker_DoWork);
             // 
+            // FbFind
+            // 
+            this.FbFind.APwd = null;
+            this.FbFind.Dock = System.Windows.Forms.DockStyle.Top;
+            this.FbFind.Location = new System.Drawing.Point(0, 0);
+            this.FbFind.Name = "FbFind";
+            this.FbFind.Size = new System.Drawing.Size(340, 29);
+            this.FbFind.TabIndex = 0;
+            // 
             // APwd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(584, 442);
             this.Controls.Add(this.TcTool);
             this.Controls.Add(this.SsEcho);
             this.Controls.Add(this.MbMenu);
+            this.MainMenuStrip = this.MbMenu;
             this.Name = "APwd";
-            this.Size = new System.Drawing.Size(584, 412);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
+            this.Load += new System.EventHandler(this.APwd_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Main_KeyDown);
+            this.Resize += new System.EventHandler(this.Main_Resize);
             this.SsEcho.ResumeLayout(false);
             this.SsEcho.PerformLayout();
             this.TcTool.ContentPanel.ResumeLayout(false);

@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml;
 using Me.Amon.Auth;
 using Me.Amon.C;
 using Me.Amon.M;
@@ -23,6 +25,8 @@ namespace Me.Amon
 
         private UserModel _UserModel;
         private IAmon _Amon;
+        private List<TApp> _Apps;
+        private TApp _TApp;
         #endregion
 
         #region 构造函数
@@ -33,6 +37,18 @@ namespace Me.Amon
         #endregion
 
         #region 全局函数
+        public static TApp DefaultApp
+        {
+            get;
+            private set;
+        }
+
+        public static TApp CurrentApp
+        {
+            get;
+            private set;
+        }
+
         public static DialogResult ShowConfirm(string message)
         {
             Form window = null;
@@ -168,6 +184,31 @@ namespace Me.Amon
         {
             TpTips.SetToolTip(control, caption);
         }
+
+        public void ShowDefaultApp()
+        {
+            if (DefaultApp == null)
+            {
+                return;
+            }
+
+            ShowIApp(DefaultApp);
+        }
+
+        public void ShowCurrentApp()
+        {
+            if (CurrentApp == null)
+            {
+                return;
+            }
+
+            ShowIApp(CurrentApp);
+        }
+
+        public void ShowReset()
+        {
+            new Reset(_UserModel).ShowDialog();
+        }
         #endregion
 
         #region 窗口事件
@@ -219,7 +260,6 @@ namespace Me.Amon
         #endregion
 
         #region 私有函数
-
         #region 权限相关
         private AuthCa _SignRc;
         private void SignRc(ESignAc signAc, AmonHandler<string> handler)
@@ -263,7 +303,11 @@ namespace Me.Amon
 
         private void DoSignIn(string view)
         {
+            //DefaultApp = new TApp { Id = "APwd", Type = "app", NeedAuth = true };
+            //ShowDefaultApp();
             ShowAPwd();
+
+            Visible = false;
 
             if (Settings.Default.Pattern == CApp.PATTERN_TRAY)
             {
@@ -274,7 +318,7 @@ namespace Me.Amon
                 ShowGuid();
             }
 
-            this.Focus();
+            LoadApps();
         }
 
         private void DoSignOl(string view)
@@ -299,27 +343,18 @@ namespace Me.Amon
                 Controls.Clear();
                 Controls.Add(_User);
             }
-
-            _Amon = _User;
-            _Amon.LoadView();
         }
 
+        #region 应用相关
         private Pwd.APwd _APwd;
         private void ShowAPwd()
         {
             if (_APwd == null)
             {
-                _APwd = new Pwd.APwd(this, _UserModel);
-                _APwd.Dock = DockStyle.Fill;
-                _APwd.TabIndex = 0;
-                _APwd.InitData();
-
-                Controls.Clear();
-                Controls.Add(_APwd);
+                _APwd = new Pwd.APwd(_UserModel);
+                _APwd.Show();
+                return;
             }
-
-            _Amon = _APwd;
-            _Amon.LoadView();
         }
 
         public void SaveGuid()
@@ -332,47 +367,143 @@ namespace Me.Amon
             if (_Guid == null)
             {
                 _Guid = new AGuid(this);
-                //_AGuid.Location = new System.Drawing.Point(0, 0);
+                _Guid.Location = new System.Drawing.Point(0, 0);
                 //_Guid.Name = "panel1";
-                //_AGuid.Size = new System.Drawing.Size(310, 100);
 
                 //_Guid.CallBack = new AmonHandler<string>(ShowDApp);
-                _Guid.InitView(_UserModel);
+                _Guid.InitData();
+
+                this.Controls.Clear();
+                this.Controls.Add(_Guid);
+                this.Size = _Guid.Size;
             }
-            _Guid.Show();
+
             //_Guid.ShowDApp(0);
-        }
+            _Amon = _Guid;
 
-        public void HideGuid()
-        {
-            if (_Guid != null)
-            {
-                _Guid.Visible = false;
-            }
-        }
-
-        private NotifyIcon _Tray;
-        public void ShowTray()
-        {
-            if (_Tray == null)
-            {
-                _Tray = new NotifyIcon();
-                _Tray.BalloonTipTitle = "阿木密码箱";
-                _Tray.Icon = Me.Amon.Properties.Resources.Icon;
-                _Tray.Text = "阿木密码箱";
-                _Tray.Visible = true;
-                _Tray.DoubleClick += new EventHandler(NiTray_DoubleClick);
-            }
-            _Tray.Visible = true;
-        }
-
-        public void HideTray()
-        {
             if (_Tray != null)
             {
                 _Tray.Visible = false;
             }
+            this.Visible = true;
         }
+
+        /// <summary>
+        /// 应用加载
+        /// </summary>
+        private void LoadApps()
+        {
+            _Apps = new List<TApp>();
+
+            string path = Path.Combine(_UserModel.Home, "App.xml");
+            if (!File.Exists(path))
+            {
+                return;
+            }
+
+            StreamReader reader = File.OpenText(path);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(reader);
+            reader.Close();
+
+            TApp tApp;
+            foreach (XmlNode node in doc.SelectNodes("/Amon/Apps/App"))
+            {
+                tApp = new TApp();
+                tApp.FromXml(node);
+                if (!tApp.IsDefault)
+                {
+                    _Apps.Add(tApp);
+                }
+            }
+
+            _Amon.LoadMenu(_Apps);
+        }
+
+        private ATray _Tray;
+        public void ShowTray()
+        {
+            if (_Tray == null)
+            {
+                _Tray = new ATray(this);
+                _Tray.InitData();
+                //_Tray.Init(_Apps);
+            }
+            _Amon = _Tray;
+
+            _Tray.Visible = true;
+            this.Visible = false;
+        }
+
+        public bool SaveData()
+        {
+            foreach (TApp tapp in _Apps)
+            {
+                if (tapp == null)
+                {
+                    continue;
+                }
+                IApp iapp = tapp.App;
+                if (iapp == null)
+                {
+                    continue;
+                }
+
+                if (!iapp.WillExit())
+                {
+                    return false;
+                }
+                iapp.SaveData();
+                iapp.Dispose();
+            }
+            return true;
+        }
+
+        public void ShowIApp(TApp tApp)
+        {
+            if (tApp == null)
+            {
+                return;
+            }
+
+            IApp iApp = tApp.App;
+            if (iApp != null && iApp.Visible)
+            {
+                iApp.Activate();
+                return;
+            }
+
+            _TApp = tApp;
+            if (!tApp.NeedAuth)
+            {
+                DoShowIApp("");
+                return;
+            }
+
+            CheckUser(new AmonHandler<string>(DoShowIApp));
+        }
+
+        private void DoShowIApp(string vm)
+        {
+            IApp iApp = _TApp.App;
+            if (iApp == null || iApp.IsDisposed)
+            {
+                iApp = _TApp.CreateApp(_UserModel);
+                if (iApp == null)
+                {
+                    return;
+                }
+
+                iApp.Show();
+                return;
+            }
+
+            if (!iApp.Visible)
+            {
+                iApp.Visible = true;
+            }
+        }
+        #endregion
 
         public void ExitSystem()
         {

@@ -27,7 +27,7 @@ namespace Me.Amon
 
         void Dispose();
 
-        void BringToFront();
+        void Activate();
 
         bool WillExit();
 

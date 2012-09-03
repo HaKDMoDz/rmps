@@ -2,8 +2,8 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using Me.Amon.Da;
 using Me.Amon.C;
+using Me.Amon.Da;
 using Me.Amon.M;
 using Me.Amon.User;
 using Me.Amon.User.Uc;
@@ -11,7 +11,7 @@ using Me.Amon.Util;
 
 namespace Me.Amon.Auth
 {
-    public partial class SignAc : UserControl, IAmon
+    public partial class SignAc : UserControl
     {
         private Main _Main;
         private ISignAc _SignAc;
@@ -54,14 +54,6 @@ namespace Me.Amon.Auth
             _Main.KeyDown += _KeyDownHandler;
 
             ShowSignIn();
-        }
-
-        public void LoadView()
-        {
-        }
-
-        public void SaveView()
-        {
         }
 
         public void DeInit()

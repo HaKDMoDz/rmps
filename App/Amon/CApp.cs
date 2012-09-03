@@ -104,5 +104,8 @@ namespace Me.Amon
         public const string IMG_KEY_LIST_EXT = ".24";
 
         public const string LIB_CARD = "qqqqqaavaqdfscdv";
+
+        public const int EMOTION_EYE = 0;
+        public const int EMOTION_ICO = 1;
     }
 }

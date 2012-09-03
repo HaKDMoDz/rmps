@@ -17,6 +17,8 @@ namespace Me.Amon
 
         public string Tips { get; set; }
 
+        public bool IsDefault { get; set; }
+
         public bool NeedAuth { get; set; }
 
         public IApp App { get; set; }
@@ -43,6 +45,35 @@ namespace Me.Amon
             Uri = Vcs.Attribute(node, "Uri", "");
             Text = Vcs.Attribute(node, "Text", "");
             Tips = Vcs.Attribute(node, "Tips", "");
+            IsDefault = "true" == Vcs.Attribute(node, "Default", "").ToLower();
+        }
+
+        public IApp CreateApp(UserModel userModel)
+        {
+            Main.LogInfo("创建新实例：" + Id);
+
+            switch ((Id ?? "").ToLower())
+            {
+                case CApp.IAPP_ABAR:
+                    App = new Bar.ABar(userModel);
+                    break;
+                case CApp.IAPP_AREN:
+                    App = new Ren.ARen(userModel);
+                    break;
+                case CApp.IAPP_AICO:
+                    App = new Ico.AIco(userModel);
+                    break;
+                case CApp.IAPP_AIMG:
+                    App = new Img.AImg(userModel);
+                    break;
+                case CApp.IAPP_ASPY:
+                    App = new Spy.ASpy(userModel);
+                    break;
+                default:
+                    break;
+            }
+
+            return App;
         }
     }
 }

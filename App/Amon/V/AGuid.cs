@@ -2,24 +2,18 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.IO;
 using System.Windows.Forms;
-using System.Xml;
 using Me.Amon.C;
-using Me.Amon.M;
 using Me.Amon.Properties;
 using Me.Amon.Util;
 using Me.Amon.V.Uc;
 
 namespace Me.Amon.V
 {
-    public partial class AGuid : Form
+    public partial class AGuid : UserControl, IAmon
     {
         private Main _Main;
-        private UserModel _UserModel;
         private ILogo _ILogo;
-        private TApp _TiApp;
-        private Dictionary<string, IApp> _Apps;
         #region 窗口移动
         private bool _IsMouseDown;
         private Point _MouseOffset;
@@ -50,14 +44,15 @@ namespace Me.Amon.V
         }
         #endregion
 
-        public void InitView(UserModel userModel)
+        #region 接口实现
+        public void InitData()
         {
-            _UserModel = userModel;
-
             // 背景透明
             GenBgImage();
-            BackColor = _TransColor;
-            TransparencyKey = _TransColor;
+            _Main.FormBorderStyle = FormBorderStyle.None;
+            _Main.ShowInTaskbar = false;
+            _Main.BackColor = _TransColor;
+            _Main.TransparencyKey = _TransColor;
 
             // 窗口位置
             int x = Settings.Default.LocX;
@@ -70,32 +65,54 @@ namespace Me.Amon.V
             {
                 y = 40;
             }
-            Location = new Point(x, y);
-            TopMost = true;
-
-            // 
-            MiPlugIns.Checked = Settings.Default.PlugIns;
-            MiApps.Visible = !Settings.Default.PlugIns;
-            MiSep0.Visible = !Settings.Default.PlugIns;
-
-            // 系统徽标
-            MiLogo.Checked = (Settings.Default.Emotion == 0);
+            _Main.Location = new Point(x, y);
+            _Main.TopMost = true;
+            //_Main.Visible = true;
 
             ChangeEmotion(Settings.Default.Emotion);
-            ChangeAppVisible(false);
+            // 系统徽标
+            MiMeye.Checked = (Settings.Default.Emotion == CApp.EMOTION_EYE);
 
-            LoadIApp();
+            ChangeAppVisible(false);
+            MiApps.Checked = Settings.Default.PlugIns;
+            MuApps.Visible = !Settings.Default.PlugIns;
+        }
+
+        public void LoadMenu(List<TApp> apps)
+        {
+            foreach (TApp app in apps)
+            {
+                IlApp.Images.Add(app.Id, BeanUtil.ReadImage(app.Logo, Resources.Logo32));
+                LvApp.Items.Add(new ListViewItem { Text = app.Text, ToolTipText = app.Text, ImageKey = app.Id, Tag = app });
+
+                ToolStripMenuItem item = new ToolStripMenuItem { Text = app.Text, Tag = app };
+                item.Click += new EventHandler(AppItem_Click);
+                MuApps.DropDownItems.Add(item);
+            }
+        }
+
+        public void SaveView()
+        {
+        }
+
+        public void DeInit()
+        {
         }
 
         public bool WillExit()
         {
             Settings settings = Settings.Default;
-            settings.LocX = Location.X;
-            settings.LocY = Location.Y;
+            settings.LocX = _Main.Location.X;
+            settings.LocY = _Main.Location.Y;
             settings.Save();
 
             return true;
         }
+
+        public void Close()
+        {
+        }
+        #endregion
 
         public bool ExitForm()
         {
@@ -132,10 +149,10 @@ namespace Me.Amon.V
 
         private void AGuid_MouseLeave(object sender, EventArgs e)
         {
-            if (MousePosition.X < Location.X
-                || MousePosition.Y < Location.Y
-                || MousePosition.X > Location.X + Width
-                || MousePosition.Y > Location.Y + Height)
+            if (MousePosition.X < _Main.Location.X
+                || MousePosition.Y < _Main.Location.Y
+                || MousePosition.X > _Main.Location.X + Width
+                || MousePosition.Y > _Main.Location.Y + Height)
             {
                 ChangeAppVisible(false);
             }
@@ -143,7 +160,10 @@ namespace Me.Amon.V
 
         private void PbApp_MouseEnter(object sender, EventArgs e)
         {
-            ChangeAppVisible(true);
+            if (MiApps.Checked)
+            {
+                ChangeAppVisible(true);
+            }
         }
 
         private void PbApp_MouseDown(object sender, MouseEventArgs e)
@@ -179,11 +199,7 @@ namespace Me.Amon.V
 
         private void PbApp_DoubleClick(object sender, EventArgs e)
         {
-            if (!_Main.Visible)
-            {
-                _Main.Visible = true;
-            }
-            _Main.BringToFront();
+            _Main.ShowDefaultApp();
         }
 
         private void LvApp_SelectedIndexChanged(object sender, EventArgs e)
@@ -208,35 +224,20 @@ namespace Me.Amon.V
             }
 
             ListViewItem item = LvApp.SelectedItems[0];
-            _TiApp = item.Tag as TApp;
-            if (_TiApp == null)
+            TApp app = item.Tag as TApp;
+            if (app == null)
             {
                 return;
             }
-
-            IApp app = _Apps[_TiApp.Id];
-            if (app == null || app.IsDisposed)
-            {
-                app = GetIApp(_TiApp);
-                _Apps[_TiApp.Id] = app;
-                app.Show();
-                //_Main.CheckUser(new AmonHandler<int>(ShowIApp));
-                return;
-            }
-
-            if (!app.Visible)
-            {
-                app.Visible = true;
-            }
-            app.BringToFront();
+            _Main.ShowIApp(app);
         }
 
         #region 选单事件
-        /// <summary>
-        /// 窗口是否置顶
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        private void MiReset_Click(object sender, EventArgs e)
+        {
+            _Main.ShowReset();
+        }
+
         private void MiTopMost_Click(object sender, EventArgs e)
         {
             _Main.TopMost = !_Main.TopMost;
@@ -250,123 +251,60 @@ namespace Me.Amon.V
         /// <param name="e"></param>
         private void MiThrough_Click(object sender, EventArgs e)
         {
-            if (BackColor == Color.Red)
+            if (_Main.BackColor == Color.Red)
             {
-                BackColor = DefaultBackColor;
+                _Main.BackColor = Control.DefaultBackColor;
             }
             else
             {
-                BackColor = Color.Red;
+                _Main.BackColor = Color.Red;
             }
         }
 
-        #region
-        private void MiLogo_Click(object sender, EventArgs e)
+        private void MiApps_Click(object sender, EventArgs e)
         {
-            Settings.Default.Emotion = 1 - Settings.Default.Emotion;
-            ChangeEmotion(Settings.Default.Emotion);
-            MiLogo.Checked = (Settings.Default.Emotion == 0);
+            Settings.Default.PlugIns = MiApps.Checked;
+            MuApps.Visible = !MiApps.Checked;
+
+            ChangeAppVisible(MiApps.Checked);
             Settings.Default.Save();
         }
 
         private void MiTray_Click(object sender, EventArgs e)
         {
-            bool visible = !MiTray.Checked;
-            MiTray.Checked = visible;
+            _Main.ShowTray();
 
-            if (visible)
+            ChangeAppVisible(false);
+
+            Settings.Default.Pattern = CApp.PATTERN_TRAY;
+            Settings.Default.Save();
+        }
+
+        private void MiMeye_Click(object sender, EventArgs e)
+        {
+            if (MiMeye.Checked)
             {
-                _Main.ShowTray();
-                Settings.Default.Pattern |= CApp.PATTERN_TRAY;
+                ChangeEmotion(CApp.EMOTION_ICO);
+                Settings.Default.Emotion = CApp.EMOTION_ICO;
+                MiMeye.Checked = false;
             }
             else
             {
-                _Main.HideTray();
-                Settings.Default.Pattern ^= CApp.PATTERN_TRAY;
+                ChangeEmotion(CApp.EMOTION_EYE);
+                Settings.Default.Emotion = CApp.EMOTION_EYE;
+                MiMeye.Checked = true;
             }
             Settings.Default.Save();
         }
 
-        private void MiPlugIns_Click(object sender, EventArgs e)
-        {
-            Settings.Default.PlugIns = MiPlugIns.Checked;
-            MiApps.Visible = !MiPlugIns.Checked;
-            MiSep0.Visible = !MiPlugIns.Checked;
-
-            ChangeAppVisible(MiPlugIns.Checked);
-        }
-        #endregion
-
-        #region 权限相关
-        /// <summary>
-        /// 在线注册
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MiSignOl_Click(object sender, EventArgs e)
-        {
-            //SignAc(ESignAc.SignOl, new AmonHandler<string>(DoSignOl));
-        }
-
-        /// <summary>
-        /// 离线注册
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MiSignUl_Click(object sender, EventArgs e)
-        {
-            //SignAc(ESignAc.SignUl, new AmonHandler<string>(ShowAPwd));
-        }
-
-        /// <summary>
-        /// 脱机注册
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MiSignPc_Click(object sender, EventArgs e)
-        {
-            //SignAc(ESignAc.SignPc, new AmonHandler<string>(ShowAPwd));
-        }
-
-        /// <summary>
-        /// 登录
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MiSignIn_Click(object sender, EventArgs e)
-        {
-            //SignAc(ESignAc.SignIn, new AmonHandler<string>(DoSignIn));
-        }
-
-        /// <summary>
-        /// 注销
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void MiSignOf_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            if (_Main.SaveData())
             {
                 _Main.SignOf();
             }
         }
 
-        /// <summary>
-        /// 口令找回
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MiSignFp_Click(object sender, EventArgs e)
-        {
-        }
-        #endregion
-
-        private void MiReset_Click(object sender, EventArgs e)
-        {
-            new Reset(_UserModel).ShowDialog();
-        }
-
-        #region
         private void MiInfo_Click(object sender, EventArgs e)
         {
             Main.ShowAbout(_Main);
@@ -378,18 +316,17 @@ namespace Me.Amon.V
         }
         #endregion
         #endregion
-        #endregion
 
         #region 私有函数
-        private void ChangeAppVisible(bool visible)
+        public void ChangeAppVisible(bool visible)
         {
-            if (MiPlugIns.Checked && visible)
+            if (visible)
             {
                 if (_MaxRegion == null)
                 {
                     _MaxRegion = new Region(new Rectangle(0, 0, 340, 140));
                 }
-                this.Region = _MaxRegion.Clone();
+                _Main.Region = _MaxRegion.Clone();
             }
             else
             {
@@ -397,7 +334,7 @@ namespace Me.Amon.V
                 {
                     _MinRegion = new Region(PbApp.Bounds);
                 }
-                this.Region = _MinRegion.Clone();
+                _Main.Region = _MinRegion.Clone();
             }
         }
 
@@ -418,14 +355,14 @@ namespace Me.Amon.V
             BackgroundImage = _BgImage;
         }
 
-        private void ChangeEmotion(int emotion)
+        public void ChangeEmotion(int emotion)
         {
             if (_ILogo != null)
             {
                 _ILogo.DoStop();
             }
 
-            if (emotion == 0)
+            if (emotion == CApp.EMOTION_EYE)
             {
                 _ILogo = new LogoEye(PbApp, this.components);
             }
@@ -436,30 +373,11 @@ namespace Me.Amon.V
             _ILogo.DoWork();
         }
 
-        private bool SaveData()
-        {
-            foreach (IApp iapp in _Apps.Values)
-            {
-                if (iapp == null)
-                {
-                    continue;
-                }
-
-                if (!iapp.WillExit())
-                {
-                    return false;
-                }
-                iapp.SaveData();
-                iapp.Dispose();
-            }
-            return true;
-        }
-
         private void BeginMove()
         {
             _MouseOffset = MousePosition;
-            _MouseOffset.X -= Location.X;
-            _MouseOffset.Y -= Location.Y;
+            _MouseOffset.X -= _Main.Location.X;
+            _MouseOffset.Y -= _Main.Location.Y;
             _IsMouseDown = true;
         }
 
@@ -496,46 +414,10 @@ namespace Me.Amon.V
                     pos.Y = t;
                 }
             }
-            Location = pos;
+            _Main.Location = pos;
         }
 
         #region 应用相关
-        /// <summary>
-        /// 应用加载
-        /// </summary>
-        private void LoadIApp()
-        {
-            _Apps = new Dictionary<string, IApp>();
-
-            string path = Path.Combine(_UserModel.Home, "App.xml");
-            if (!File.Exists(path))
-            {
-                return;
-            }
-
-            StreamReader reader = File.OpenText(path);
-            XmlDocument doc = new XmlDocument();
-            doc.Load(reader);
-            reader.Close();
-
-            TApp tApp;
-            ToolStripMenuItem item;
-            foreach (XmlNode node in doc.SelectNodes("/Amon/Apps/App"))
-            {
-                tApp = new TApp();
-                tApp.FromXml(node);
-
-                _Apps[tApp.Id] = null;
-
-                IlApp.Images.Add(tApp.Id, BeanUtil.ReadImage(tApp.Logo, Resources.Logo32));
-                LvApp.Items.Add(new ListViewItem { Text = tApp.Text, ToolTipText = tApp.Text, ImageKey = tApp.Id, Tag = tApp });
-
-                item = new ToolStripMenuItem { Text = tApp.Text, Tag = tApp };
-                item.Click += new EventHandler(AppItem_Click);
-                MiApps.DropDownItems.Add(item);
-            }
-        }
-
         public void AppItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem item = sender as ToolStripMenuItem;
@@ -543,62 +425,13 @@ namespace Me.Amon.V
             {
                 return;
             }
-            _TiApp = item.Tag as TApp;
-            if (_TiApp == null)
-            {
-                return;
-            }
-            ShowIApp(0);
-        }
-
-        private void ShowIApp(int ptn)
-        {
-            if (_TiApp == null)
-            {
-                return;
-            }
-
-            IApp iapp = _Apps[_TiApp.Id];
-            if (iapp == null || iapp.IsDisposed)
-            {
-                iapp = GetIApp(_TiApp);
-                if (iapp == null)
-                {
-                    return;
-                }
-                _Apps[_TiApp.Id] = iapp;
-            }
-
-            if (iapp != null)
-            {
-                iapp.Show();
-            }
-        }
-
-        public IApp GetIApp(TApp app)
-        {
-            Main.LogInfo("创建新实例：" + app.Id);
-
+            TApp app = item.Tag as TApp;
             if (app == null)
             {
-                return null;
+                return;
             }
 
-            switch ((app.Id ?? "").ToLower())
-            {
-                case CApp.IAPP_ABAR:
-                    return new Bar.ABar(_UserModel);
-                case CApp.IAPP_AREN:
-                    return new Ren.ARen(_UserModel);
-                case CApp.IAPP_AICO:
-                    return new Ico.AIco(_UserModel);
-                case CApp.IAPP_AIMG:
-                    return new Img.AImg(_UserModel);
-                case CApp.IAPP_ASPY:
-                    return new Spy.ASpy(_UserModel);
-                default:
-                    return null;
-            }
+            _Main.ShowIApp(app);
         }
         #endregion
         #endregion
