@@ -502,7 +502,7 @@ namespace Me.Amon
             {
                 if (_Guid.WillExit())
                 {
-                    _Guid.ExitForm();
+                    _Guid.Visible = false;
                 }
             }
 

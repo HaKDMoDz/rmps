@@ -73,6 +73,8 @@ namespace Me.Amon.Pwd
             _UserModel = userModel;
 
             InitializeComponent();
+
+            this.Icon = Me.Amon.Properties.Resources.Icon;
         }
 
         private void APwd_Load(object sender, EventArgs e)
@@ -1210,12 +1212,12 @@ namespace Me.Amon.Pwd
 
         public void ListGtd(DateTime time, int seconds)
         {
-            IList<MGtd> gtds = _UserModel.DBA.FindKeyByGtd();
+            IList<MGtd> gtds = _UserModel.DBA.ListGtdWithRef(0);
             List<Key> keys = new List<Key>();
             foreach (MGtd gtd in gtds)
             {
                 gtd.Test(time, seconds);
-                if (gtd.Status == CGtd.GTD_STAT_ONTIME)
+                if (gtd.Status == CGtd.STATUS_ONTIME)
                 {
                     keys.Add(_UserModel.DBA.ReadKey(gtd.RefId));
                 }

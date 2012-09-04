@@ -1424,6 +1424,7 @@
     <EmbeddedResource Include="V\AGuid.resx">
       <DependentUpon>AGuid.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Amon.tag" />
     <None Include="Amon_TemporaryKey.pfx" />
     <None Include="app.config" />
     <None Include="Logo\logo.icns" />

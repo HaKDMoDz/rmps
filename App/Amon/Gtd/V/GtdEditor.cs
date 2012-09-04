@@ -66,10 +66,10 @@ namespace Me.Amon.Gtd.V
             TbTitle.Text = MGtd.Title;
             switch (MGtd.Type)
             {
-                case CGtd.TYPE_MAJOR_EVENT:
+                case CGtd.TYPE_EVENT:
                     RbEvent.Checked = true;
                     break;
-                case CGtd.TYPE_MAJOR_MATHS:
+                case CGtd.TYPE_MATHS:
                     RbMaths.Checked = true;
                     break;
                 default:
@@ -82,20 +82,20 @@ namespace Me.Amon.Gtd.V
 
         private void RbDates_CheckedChanged(object sender, EventArgs e)
         {
-            MGtd.Type = CGtd.TYPE_MAJOR_DATES;
-            ShowDate(CGtd.TYPE_MAJOR_DATES);
+            MGtd.Type = CGtd.TYPE_DATES;
+            ShowDate(CGtd.TYPE_DATES);
         }
 
         private void RbEvent_CheckedChanged(object sender, EventArgs e)
         {
-            MGtd.Type = CGtd.TYPE_MAJOR_EVENT;
-            ShowDate(CGtd.TYPE_MAJOR_EVENT);
+            MGtd.Type = CGtd.TYPE_EVENT;
+            ShowDate(CGtd.TYPE_EVENT);
         }
 
         private void RbMaths_CheckedChanged(object sender, EventArgs e)
         {
-            MGtd.Type = CGtd.TYPE_MAJOR_MATHS;
-            ShowDate(CGtd.TYPE_MAJOR_MATHS);
+            MGtd.Type = CGtd.TYPE_MATHS;
+            ShowDate(CGtd.TYPE_MATHS);
         }
 
         private void BtOk_Click(object sender, EventArgs e)
@@ -127,7 +127,7 @@ namespace Me.Amon.Gtd.V
 
             if (_Associated)
             {
-                MGtd.Status = CkSwitch.Checked ? CGtd.GTD_STAT_SUSPEND : CGtd.GTD_STAT_NORMAL;
+                MGtd.Status = CkSwitch.Checked ? CGtd.STATUS_SUSPEND : CGtd.STATUS_NORMAL;
             }
             else
             {
@@ -155,7 +155,7 @@ namespace Me.Amon.Gtd.V
 
             switch (type)
             {
-                case CGtd.TYPE_MAJOR_DATES:
+                case CGtd.TYPE_DATES:
                     if (_UtDates == null)
                     {
                         _UtDates = new UtDates(this);
@@ -164,7 +164,7 @@ namespace Me.Amon.Gtd.V
                     GpDate.Text = "时间";
                     _IDate = _UtDates;
                     break;
-                case CGtd.TYPE_MAJOR_EVENT:
+                case CGtd.TYPE_EVENT:
                     if (_UtEvent == null)
                     {
                         _UtEvent = new UtEvent();
@@ -173,7 +173,7 @@ namespace Me.Amon.Gtd.V
                     GpDate.Text = "事件";
                     _IDate = _UtEvent;
                     break;
-                case CGtd.TYPE_MAJOR_MATHS:
+                case CGtd.TYPE_MATHS:
                     if (_UtMaths == null)
                     {
                         _UtMaths = new UtMaths();

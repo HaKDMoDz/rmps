@@ -69,7 +69,7 @@ namespace Me.Amon.Auth
 
         public void Close()
         {
-            _Main.ExitSystem();
+            _Main.Close();
         }
         #endregion
 

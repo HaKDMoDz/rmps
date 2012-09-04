@@ -23,14 +23,14 @@ namespace Me.Amon.Gtd.V
 
             DtStart.CustomFormat = CApp.DATEIME_FORMAT;
 
-            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_NONE, V = "无" });
-            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_SECOND, V = "秒" });
-            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_MINUTE, V = "分" });
-            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_HOUR, V = "时" });
-            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_DAY, V = "日" });
-            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_WEEK, V = "周" });
-            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_MONTH, V = "月" });
-            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MAJOR_YEAR, V = "年" });
+            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_NONE, V = "无" });
+            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_SECOND, V = "秒" });
+            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MINUTE, V = "分" });
+            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_HOUR, V = "时" });
+            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_DAY, V = "日" });
+            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_WEEK, V = "周" });
+            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MONTH, V = "月" });
+            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_YEAR, V = "年" });
         }
 
         #region 接口实现
@@ -117,7 +117,7 @@ namespace Me.Amon.Gtd.V
 
             switch (unit)
             {
-                case CGtd.UNIT_MAJOR_SECOND:
+                case CGtd.UNIT_SECOND:
                     if (_UcSecond == null)
                     {
                         _UcSecond = new UcSecond();
@@ -126,7 +126,7 @@ namespace Me.Amon.Gtd.V
                     _Editor.StopEnabled = true;
                     _ITime = _UcSecond;
                     break;
-                case CGtd.UNIT_MAJOR_MINUTE:
+                case CGtd.UNIT_MINUTE:
                     if (_UcMinute == null)
                     {
                         _UcMinute = new UcMinute();
@@ -135,7 +135,7 @@ namespace Me.Amon.Gtd.V
                     _Editor.StopEnabled = true;
                     _ITime = _UcMinute;
                     break;
-                case CGtd.UNIT_MAJOR_HOUR:
+                case CGtd.UNIT_HOUR:
                     if (_UcHour == null)
                     {
                         _UcHour = new UcHour();
@@ -144,7 +144,7 @@ namespace Me.Amon.Gtd.V
                     _Editor.StopEnabled = true;
                     _ITime = _UcHour;
                     break;
-                case CGtd.UNIT_MAJOR_DAY:
+                case CGtd.UNIT_DAY:
                     if (_UcDay == null)
                     {
                         _UcDay = new UcDay();
@@ -153,7 +153,7 @@ namespace Me.Amon.Gtd.V
                     _Editor.StopEnabled = true;
                     _ITime = _UcDay;
                     break;
-                case CGtd.UNIT_MAJOR_WEEK:
+                case CGtd.UNIT_WEEK:
                     if (_UcWeek == null)
                     {
                         _UcWeek = new UcWeek();
@@ -162,7 +162,7 @@ namespace Me.Amon.Gtd.V
                     _Editor.StopEnabled = true;
                     _ITime = _UcWeek;
                     break;
-                case CGtd.UNIT_MAJOR_MONTH:
+                case CGtd.UNIT_MONTH:
                     if (_UcMonth == null)
                     {
                         _UcMonth = new UcMonth();
@@ -171,7 +171,7 @@ namespace Me.Amon.Gtd.V
                     _Editor.StopEnabled = true;
                     _ITime = _UcMonth;
                     break;
-                case CGtd.UNIT_MAJOR_YEAR:
+                case CGtd.UNIT_YEAR:
                     if (_UcYear == null)
                     {
                         _UcYear = new UcYear();

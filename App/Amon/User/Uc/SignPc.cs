@@ -34,7 +34,14 @@ namespace Me.Amon.User.Uc
 
             InitializeComponent();
 
-            TbPath.Text = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), CApp.DIR_DATA);
+            if (File.Exists("Amon.tag"))
+            {
+                TbPath.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "阿木密码箱");
+            }
+            else
+            {
+                TbPath.Text = Path.Combine(Application.StartupPath, CApp.DIR_DATA);
+            }
             _SignAc.ShowTips(BtPath, "选择目录");
         }
         #endregion

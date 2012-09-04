@@ -62,7 +62,7 @@ namespace Me.Amon.Gtd.V
             IHint iHint;
             switch (type)
             {
-                case CGtd.TYPE_MAJOR_DATES:
+                case CGtd.TYPE_DATES:
                     if (_UhAlert == null)
                     {
                         _UhAlert = new UhTips();
@@ -70,7 +70,7 @@ namespace Me.Amon.Gtd.V
                     }
                     iHint = _UhAlert;
                     break;
-                case CGtd.TYPE_MAJOR_EVENT:
+                case CGtd.TYPE_EVENT:
                     if (_UhApps == null)
                     {
                         _UhApps = new UhApps();
@@ -78,7 +78,7 @@ namespace Me.Amon.Gtd.V
                     }
                     iHint = _UhApps;
                     break;
-                case CGtd.TYPE_MAJOR_MATHS:
+                case CGtd.TYPE_MATHS:
                     if (_UhEmail == null)
                     {
                         _UhEmail = new UhMail();

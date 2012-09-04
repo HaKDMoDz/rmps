@@ -212,9 +212,9 @@ namespace Me.Amon.Pwd.V.Wiz
                     {
                         editor.MGtd.RefId = _SafeModel.Key.Id;
                     }
-                    if (editor.MGtd.Status == Gtd.CGtd.GTD_STAT_FINISHED)
+                    if (editor.MGtd.Status == Gtd.CGtd.STATUS_FINISHED)
                     {
-                        editor.MGtd.Status = Gtd.CGtd.GTD_STAT_NORMAL;
+                        editor.MGtd.Status = Gtd.CGtd.STATUS_NORMAL;
                     }
                     _UserModel.DBA.SaveVcs(editor.MGtd);
                     _UserModel.ReloadGtds();

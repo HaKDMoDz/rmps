@@ -112,6 +112,7 @@
             // 
             this.BtHint.BackColor = System.Drawing.SystemColors.Window;
             this.BtHint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BtHint.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtHint.Location = new System.Drawing.Point(63, 120);
             this.BtHint.Name = "BtHint";
             this.BtHint.Size = new System.Drawing.Size(18, 18);

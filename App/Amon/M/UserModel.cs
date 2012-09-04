@@ -733,24 +733,38 @@ namespace Me.Amon.M
                 _TodoCnt = 0;
                 _PastCnt = 0;
 
-                if (_Delay < 1 || _MGtds == null)
+                DateTime now = DateTime.Now;
+
+                // 启动
+                if (_MGtds == null)
                 {
-                    _MGtds = _DBA.FindKeyByGtd();
+                    _MGtds = _DBA.ListGtdWithRef(Gtd.CGtd.TYPE_EVENT);
+                    foreach (Gtd.MGtd gtd in _MGtds)
+                    {
+                        if (gtd.TestEvent(now, Gtd.CGtd.EVENT_LOAD))
+                        {
+                            _DBA.SaveVcs(gtd);
+                        }
+                    }
                 }
 
-                DateTime now = DateTime.Now;
+                if (_Delay < 1)
+                {
+                    _MGtds = _DBA.ListGtdWithRef(Gtd.CGtd.TYPE_MATHS);
+                }
+
                 foreach (Gtd.MGtd gtd in _MGtds)
                 {
                     if (gtd.Test(now, 43200))//12 * 60 * 60
                     {
                         _DBA.SaveVcs(gtd);
                     }
-                    if (gtd.Status == Gtd.CGtd.GTD_STAT_ONTIME)
+                    if (gtd.Status == Gtd.CGtd.STATUS_ONTIME)
                     {
                         _TodoCnt += 1;
                         continue;
                     }
-                    if (gtd.Status == Gtd.CGtd.GTD_STAT_EXPIRED)
+                    if (gtd.Status == Gtd.CGtd.STATUS_EXPIRED)
                     {
                         _PastCnt += 1;
                         continue;

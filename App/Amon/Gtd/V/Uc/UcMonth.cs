@@ -19,14 +19,14 @@ namespace Me.Amon.Gtd.V.Uc
             {
                 ADates dates = mgtd.Dates[0];
 
-                if (dates.Type == CGtd.TYPE_MINOR_EACH)
+                if (dates.Type == CGtd.DATES_TYPE_EACH)
                 {
                     RbEach.Checked = true;
                     SpEach.Value = dates.Values[0];
                     return;
                 }
 
-                if (dates.Type == CGtd.TYPE_MINOR_WHEN)
+                if (dates.Type == CGtd.DATES_TYPE_WHEN)
                 {
                     RbWhen.Checked = true;
                     foreach (int val in dates.Values)
@@ -57,11 +57,11 @@ namespace Me.Amon.Gtd.V.Uc
                 mgtd.Dates.Add(dates);
             }
 
-            dates.Unit = CGtd.UNIT_MAJOR_MONTH;
+            dates.Unit = CGtd.UNIT_MONTH;
 
             if (RbEach.Checked)
             {
-                dates.Type = CGtd.TYPE_MINOR_EACH;
+                dates.Type = CGtd.DATES_TYPE_EACH;
                 dates.Values.Clear();
                 dates.Values.Add(decimal.ToInt32(SpEach.Value));
                 return true;
@@ -69,7 +69,7 @@ namespace Me.Amon.Gtd.V.Uc
 
             if (RbWhen.Checked)
             {
-                dates.Type = CGtd.TYPE_MINOR_WHEN;
+                dates.Type = CGtd.DATES_TYPE_WHEN;
                 dates.Values.Clear();
                 dates.Values.Add(decimal.ToInt32(SpWhen.Value));
                 return true;

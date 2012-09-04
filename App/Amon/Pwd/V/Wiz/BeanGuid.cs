@@ -163,7 +163,7 @@ namespace Me.Amon.Pwd.V.Wiz
             Gtd.MGtd gtd = _SafeModel.Key.Gtd;
             if (gtd != null)
             {
-                if (gtd.Status == Gtd.CGtd.GTD_STAT_EXPIRED)
+                if (gtd.Status == Gtd.CGtd.STATUS_EXPIRED)
                 {
                     CbLib.Enabled = false;
                     UcTips.Visible = true;
@@ -171,7 +171,7 @@ namespace Me.Amon.Pwd.V.Wiz
                     UcTips.Text = string.Format("您有一个过期提醒：{0}{0}　　{1}{0}{0}{2}", Environment.NewLine, gtd.Title, gtd.NextTime.ToString(CApp.DATEIME_FORMAT));
                     return;
                 }
-                if (gtd.Status == Gtd.CGtd.GTD_STAT_ONTIME)
+                if (gtd.Status == Gtd.CGtd.STATUS_ONTIME)
                 {
                     CbLib.Enabled = false;
                     UcTips.Visible = true;
@@ -318,7 +318,7 @@ namespace Me.Amon.Pwd.V.Wiz
             Gtd.MGtd gtd = _SafeModel.Key.Gtd;
             if (gtd != null)
             {
-                gtd.Status = Gtd.CGtd.GTD_STAT_NORMAL;
+                gtd.Status = Gtd.CGtd.STATUS_NORMAL;
                 gtd.LastTime = DateTime.Now;
                 _UserModel.DBA.SaveVcs(gtd);
                 _UserModel.ReloadGtds();

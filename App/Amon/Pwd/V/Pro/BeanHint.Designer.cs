@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             this.LbText = new System.Windows.Forms.Label();
-            this.BtHint = new System.Windows.Forms.Button();
+            this.BtHint = new System.Windows.Forms.PictureBox();
             this.LbData = new System.Windows.Forms.Label();
             this.TbData = new System.Windows.Forms.TextBox();
             this.LlHint = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.BtHint)).BeginInit();
             this.SuspendLayout();
             // 
             // LbText
@@ -46,13 +47,14 @@
             // 
             // BtHint
             // 
-            this.BtHint.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.BtHint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtHint.Location = new System.Drawing.Point(56, 3);
+            this.BtHint.BackColor = System.Drawing.SystemColors.Window;
+            this.BtHint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BtHint.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtHint.Location = new System.Drawing.Point(56, 4);
             this.BtHint.Name = "BtHint";
-            this.BtHint.Size = new System.Drawing.Size(21, 21);
+            this.BtHint.Size = new System.Drawing.Size(18, 18);
             this.BtHint.TabIndex = 1;
-            this.BtHint.UseVisualStyleBackColor = true;
+            this.BtHint.TabStop = false;
             this.BtHint.Click += new System.EventHandler(this.BtName_Click);
             // 
             // LbData
@@ -78,7 +80,7 @@
             // LlHint
             // 
             this.LlHint.AutoSize = true;
-            this.LlHint.Location = new System.Drawing.Point(83, 7);
+            this.LlHint.Location = new System.Drawing.Point(80, 7);
             this.LlHint.Name = "LlHint";
             this.LlHint.Size = new System.Drawing.Size(53, 12);
             this.LlHint.TabIndex = 4;
@@ -95,6 +97,7 @@
             this.Controls.Add(this.LbText);
             this.Name = "BeanHint";
             this.Size = new System.Drawing.Size(366, 81);
+            ((System.ComponentModel.ISupportInitialize)(this.BtHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,7 +106,7 @@
         #endregion
 
         private System.Windows.Forms.Label LbText;
-        private System.Windows.Forms.Button BtHint;
+        private System.Windows.Forms.PictureBox BtHint;
         private System.Windows.Forms.Label LbData;
         private System.Windows.Forms.TextBox TbData;
         private System.Windows.Forms.Label LlHint;

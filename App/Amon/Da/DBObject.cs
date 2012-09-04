@@ -329,16 +329,16 @@ namespace Me.Amon.Da
         }
         #endregion
 
-        public IList<MGtd> FindKeyByGtd()
+        public IList<MGtd> ListGtdWithRef(int type)
         {
             IList<MGtd> gtds = Container.Query<MGtd>(
                 delegate(MGtd gtd)
                 {
-                    if (gtd.UserCode != _UserModel.Code)
+                    if (gtd.UserCode != _UserModel.Code || gtd.Type < type)
                     {
                         return false;
                     }
-                    return CharUtil.IsValidateHash(gtd.RefId) && gtd.Status > CGtd.GTD_STAT_SUSPEND;
+                    return gtd.Status > CGtd.STATUS_SUSPEND && CharUtil.IsValidateHash(gtd.RefId);
                 });
             return gtds;
         }
@@ -352,7 +352,7 @@ namespace Me.Amon.Da
                     {
                         return false;
                     }
-                    return CharUtil.IsValidateHash(gtd.RefId) && gtd.Status == CGtd.GTD_STAT_EXPIRED;
+                    return gtd.Status == CGtd.STATUS_EXPIRED && CharUtil.IsValidateHash(gtd.RefId);
                 });
             return gtds;
         }

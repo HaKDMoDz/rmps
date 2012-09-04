@@ -114,11 +114,6 @@ namespace Me.Amon.V
         }
         #endregion
 
-        public bool ExitForm()
-        {
-            return true;
-        }
-
         public AmonHandler<int> CallBack;
 
         #region 事件处理
