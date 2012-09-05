@@ -270,7 +270,7 @@ namespace Me.Amon.Pwd._Lib
                 Pwd.Lib header = _Selected.Tag as Pwd.Lib;
                 detail.Header = header.Id;
                 detail.Id = HashUtil.UtcTimeInEnc(false);
-                header.Details.Add(detail);
+                header.Add(detail);
                 _UserModel.DBA.SaveVcs(header);
 
                 TreeNode node = new TreeNode();

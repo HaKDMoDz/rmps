@@ -329,12 +329,12 @@ namespace Me.Amon.Da
         }
         #endregion
 
-        public IList<MGtd> ListGtdWithRef(int type)
+        public IList<MGtd> ListGtdWithRef()
         {
             IList<MGtd> gtds = Container.Query<MGtd>(
                 delegate(MGtd gtd)
                 {
-                    if (gtd.UserCode != _UserModel.Code || gtd.Type < type)
+                    if (gtd.UserCode != _UserModel.Code)
                     {
                         return false;
                     }

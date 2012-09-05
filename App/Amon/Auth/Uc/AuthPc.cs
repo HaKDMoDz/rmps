@@ -56,19 +56,18 @@ namespace Me.Amon.Auth.Uc
             if (newPass.Length < 4)
             {
                 _AuthAc.ShowAlert("登录口令不能少于4个字符！");
-                TbNewPass1.Text = "";
-                TbNewPass2.Text = "";
                 TbNewPass1.Focus();
                 return;
             }
 
             if (newPass != TbNewPass2.Text)
             {
-                TbNewPass2.Text = "";
                 _AuthAc.ShowAlert("您两次输入的口令不一致！");
-                TbNewPass1.Focus();
+                TbNewPass2.Text = "";
+                TbNewPass2.Focus();
                 return;
             }
+            TbOldPass.Text = "";
             TbNewPass1.Text = "";
             TbNewPass2.Text = "";
             #endregion

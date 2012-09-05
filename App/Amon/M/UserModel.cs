@@ -685,12 +685,23 @@ namespace Me.Amon.M
             //dfa.Init(this);
             //_DFA = dfa;
 
-            _Timer = new Timer(new TimerCallback(Timer_Callback), null, 5000, 1000);
+            _Timer = new Timer(new TimerCallback(Timer_Callback), null, 5000, 2000);
         }
 
         public DBA DBA { get { return _DBA; } }
         //public DCAccess DCAccess { get { return _DCAccess; } }
         //public DFA DFA { get { return _DFA; } }
+
+        public void Suspend()
+        {
+            Monitor.Enter(_SyncObj);
+            _DBA.CloseConnect();
+        }
+
+        public void Resuma()
+        {
+            Monitor.Exit(_SyncObj);
+        }
 
         #region 任务提醒
         private List<AmonHandler<string>> _Hints = new List<AmonHandler<string>>();
@@ -721,24 +732,20 @@ namespace Me.Amon.M
         {
             bool locked = false;
 
+            Monitor.TryEnter(_SyncObj, ref locked);
+            if (!locked)
+            {
+                return;
+            }
+            //Monitor.Enter(_SyncObj);
+
             try
             {
-                Monitor.TryEnter(_Delay, ref locked);
-                if (!locked)
-                {
-                    return;
-                }
-                Monitor.Enter(_SyncObj);
-
-                _TodoCnt = 0;
-                _PastCnt = 0;
-
                 DateTime now = DateTime.Now;
 
-                // 启动
                 if (_MGtds == null)
                 {
-                    _MGtds = _DBA.ListGtdWithRef(Gtd.CGtd.TYPE_EVENT);
+                    _MGtds = _DBA.ListGtdWithRef();
                     foreach (Gtd.MGtd gtd in _MGtds)
                     {
                         if (gtd.TestEvent(now, Gtd.CGtd.EVENT_LOAD))
@@ -750,8 +757,13 @@ namespace Me.Amon.M
 
                 if (_Delay < 1)
                 {
-                    _MGtds = _DBA.ListGtdWithRef(Gtd.CGtd.TYPE_MATHS);
+                    // 启动
+                    _MGtds = _DBA.ListGtdWithRef();
+                    _Delay = 5;
                 }
+
+                _TodoCnt = 0;
+                _PastCnt = 0;
 
                 foreach (Gtd.MGtd gtd in _MGtds)
                 {
@@ -795,7 +807,7 @@ namespace Me.Amon.M
                 }
                 _Delay -= 1;
 
-                //Monitor.Pulse(_Delay);
+                //Monitor.Pulse(_SyncObj);
             }
             finally
             {

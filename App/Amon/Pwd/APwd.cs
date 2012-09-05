@@ -1212,7 +1212,7 @@ namespace Me.Amon.Pwd
 
         public void ListGtd(DateTime time, int seconds)
         {
-            IList<MGtd> gtds = _UserModel.DBA.ListGtdWithRef(0);
+            IList<MGtd> gtds = _UserModel.DBA.ListGtdWithRef();
             List<Key> keys = new List<Key>();
             foreach (MGtd gtd in gtds)
             {
@@ -2575,8 +2575,9 @@ namespace Me.Amon.Pwd
         /// <param name="file"></param>
         private void DoBackup(string file)
         {
-            _UserModel.DBA.CloseConnect();
+            _UserModel.Suspend();
             BeanUtil.DoZip(file, _UserModel.Home);
+            _UserModel.Resuma();
         }
 
         /// <summary>

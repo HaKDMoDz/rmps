@@ -113,14 +113,16 @@ namespace Me.Amon.Uw
             StringBuilder buf = new StringBuilder(text);
             Dictionary<char, int> dic = new Dictionary<char, int>();
             char[] tmp = text.ToCharArray();
-            for (int i = tmp.Length - 1; i >= 0; i -= 1)
+            int j = 0;
+            for (int i = 0; i < tmp.Length; i += 1)
             {
                 if (dic.ContainsKey(tmp[i]))
                 {
-                    buf.Remove(i, 1);
+                    buf.Remove(j, 1);
                     continue;
                 }
                 dic[tmp[i]] = i;
+                j += 1;
             }
 
             TbChar.Text = buf.ToString();
