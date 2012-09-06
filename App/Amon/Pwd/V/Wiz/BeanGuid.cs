@@ -272,6 +272,7 @@ namespace Me.Amon.Pwd.V.Wiz
             }
 
             FolderBrowserDialog fd = new FolderBrowserDialog();
+            fd.Description = "请选择卡片保存目录：";
             if (DialogResult.OK != fd.ShowDialog())
             {
                 return;
@@ -318,10 +319,13 @@ namespace Me.Amon.Pwd.V.Wiz
             Gtd.MGtd gtd = _SafeModel.Key.Gtd;
             if (gtd != null)
             {
-                gtd.Status = Gtd.CGtd.STATUS_NORMAL;
-                gtd.LastTime = DateTime.Now;
-                _UserModel.DBA.SaveVcs(gtd);
-                _UserModel.ReloadGtds();
+                DateTime now = DateTime.Now;
+                gtd.LastTime = now;
+                if (gtd.Next(now, 0))
+                {
+                    _UserModel.DBA.SaveVcs(gtd);
+                    _UserModel.ReloadGtds();
+                }
             }
             CbLib.Enabled = true;
             UcTips.Visible = false;

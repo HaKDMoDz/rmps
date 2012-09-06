@@ -852,7 +852,7 @@
           <Id>qqqqqaavaqdgbaty</Id>
           <Type>1</Type>
           <Name/>
-          <Text>职位</Text>
+          <Text>部门</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -861,7 +861,7 @@
           <Id>qqqqqazrdzvevvyw</Id>
           <Type>1</Type>
           <Name/>
-          <Text>职责</Text>
+          <Text>职务</Text>
           <Data/>
           <Memo/>
         </Item>

@@ -685,7 +685,7 @@ namespace Me.Amon.M
             //dfa.Init(this);
             //_DFA = dfa;
 
-            _Timer = new Timer(new TimerCallback(Timer_Callback), null, 5000, 2000);
+            _Timer = new Timer(new TimerCallback(Timer_Callback), null, 5000, 20000);
         }
 
         public DBA DBA { get { return _DBA; } }
@@ -748,7 +748,7 @@ namespace Me.Amon.M
                     _MGtds = _DBA.ListGtdWithRef();
                     foreach (Gtd.MGtd gtd in _MGtds)
                     {
-                        if (gtd.TestEvent(now, Gtd.CGtd.EVENT_LOAD))
+                        if (gtd.NextEvent(now, Gtd.CGtd.EVENT_LOAD))
                         {
                             _DBA.SaveVcs(gtd);
                         }

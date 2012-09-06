@@ -4,6 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.C;
+using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd.M;
 
 namespace Me.Amon.Pwd.V.Pro
@@ -129,6 +130,14 @@ namespace Me.Amon.Pwd.V.Pro
 
         public bool UpdateKey()
         {
+            MetaAtt meta = _SafeModel.Meta;
+            if (string.IsNullOrWhiteSpace(meta.Text))
+            {
+                Main.ShowAlert("请输入记录标题！");
+                GvAttList.Rows[1].Selected = true;
+                return false;
+            }
+
             _LastIndex = -1;
             _AAtt = null;
             return true;

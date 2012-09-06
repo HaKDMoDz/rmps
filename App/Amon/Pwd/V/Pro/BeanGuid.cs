@@ -245,6 +245,7 @@ namespace Me.Amon.Pwd.V.Pro
             }
 
             FolderBrowserDialog fd = new FolderBrowserDialog();
+            fd.Description = "请选择卡片保存目录：";
             if (DialogResult.OK != fd.ShowDialog())
             {
                 return;

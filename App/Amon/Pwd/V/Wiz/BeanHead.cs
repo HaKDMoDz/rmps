@@ -203,24 +203,16 @@ namespace Me.Amon.Pwd.V.Wiz
         {
             GtdEditor editor = new GtdEditor();
             editor.MGtd = _SafeModel.Hint.Gtd;
-            if (DialogResult.OK == editor.ShowDialog())
+            if (DialogResult.OK != editor.ShowDialog())
             {
-                TbHint.Text = _SafeModel.Hint.Gtd == null ? "<无提醒>" : _SafeModel.Hint.Gtd.Title;
-                if (_SafeModel.IsUpdate)
-                {
-                    if (_SafeModel.Hint.Gtd == null)
-                    {
-                        editor.MGtd.RefId = _SafeModel.Key.Id;
-                    }
-                    if (editor.MGtd.Status == Gtd.CGtd.STATUS_FINISHED)
-                    {
-                        editor.MGtd.Status = Gtd.CGtd.STATUS_NORMAL;
-                    }
-                    _UserModel.DBA.SaveVcs(editor.MGtd);
-                    _UserModel.ReloadGtds();
-                }
-                _SafeModel.Hint.Gtd = editor.MGtd;
+                return;
             }
+
+            Gtd.MGtd gtd = editor.MGtd;
+            TbHint.Text = gtd.Title;
+            _SafeModel.Hint.Text = gtd.Title;
+            _SafeModel.Modified = true;
+            _SafeModel.Hint.Gtd = gtd;
         }
 
         private void TbName_GotFocus(object sender, EventArgs e)

@@ -62,6 +62,7 @@
             // 
             // PbCard
             // 
+            this.PbCard.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PbCard.Location = new System.Drawing.Point(56, 29);
             this.PbCard.Name = "PbCard";
             this.PbCard.Size = new System.Drawing.Size(16, 16);

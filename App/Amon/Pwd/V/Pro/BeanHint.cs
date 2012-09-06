@@ -100,14 +100,18 @@ namespace Me.Amon.Pwd.V.Pro
         #region 事件处理
         private void BtName_Click(object sender, EventArgs e)
         {
-            GtdEditor detail = new GtdEditor();
-            detail.MGtd = _Att.Gtd;
-            if (DialogResult.OK == detail.ShowDialog())
+            GtdEditor editor = new GtdEditor();
+            editor.MGtd = _Att.Gtd;
+            if (DialogResult.OK != editor.ShowDialog())
             {
-                _Att.Gtd = detail.MGtd;
-                LlHint.Text = _Att.Gtd.Title;
-                _Att.Modified = true;
+                return;
             }
+
+            Gtd.MGtd gtd = editor.MGtd;
+            LlHint.Text = gtd.Title;
+            _Att.Text = gtd.Title;
+            _Att.Modified = true;
+            _Att.Gtd = gtd;
         }
         #endregion
     }
