@@ -10,33 +10,33 @@ namespace Me.Amon.Gtd.Dates
             MaxValue = 59;
         }
 
-        public override DateTime Next(DateTime currTime, DateTime lastTime, out bool changed)
+        public override DateTime Next(DateTime time, out bool changed)
         {
             changed = false;
 
             if (Values.Count < 1)
             {
-                return currTime;
+                return time;
             }
-            if (Type == CGtd.TYPE_MINOR_EACH)
+            if (Type == CGtd.DATES_TYPE_EACH)
             {
-                return lastTime.AddMinutes(Values[0]);
+                return time.AddMinutes(Values[0]);
             }
-            if (Type == CGtd.TYPE_MINOR_WHEN)
+            if (Type == CGtd.DATES_TYPE_WHEN)
             {
-                int idx = currTime.Minute;
+                int idx = time.Minute;
                 int tmp = NextValue(idx, changed);
                 if (tmp > 0)
                 {
-                    return currTime.AddMinutes(tmp);
+                    return time.AddMinutes(tmp);
                 }
                 if (tmp < 0)
                 {
                     changed = true;
-                    return currTime.AddHours(1).AddMinutes(Values[0] - idx);
+                    return time.AddHours(1).AddMinutes(Values[0] - idx);
                 }
             }
-            return currTime;
+            return time;
         }
     }
 }

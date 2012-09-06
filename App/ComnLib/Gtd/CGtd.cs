@@ -4,109 +4,118 @@ namespace Me.Amon.Gtd
     public class CGtd
     {
         #region 类型
-        #region 主类型
         /// <summary>
-        /// 时间型
+        /// 未定义
         /// </summary>
-        public const int TYPE_MAJOR_DATES = 1;
+        public const int TYPE_NONE = 0;
         /// <summary>
         /// 事件型
         /// </summary>
-        public const int TYPE_MAJOR_EVENT = 2;
+        public const int TYPE_EVENT = 1;
         /// <summary>
         /// 公式型
         /// </summary>
-        public const int TYPE_MAJOR_MATHS = 3;
-        #endregion
-
-        #region 辅类型
+        public const int TYPE_MATHS = 2;
         /// <summary>
-        /// 每隔
+        /// 时间型
         /// </summary>
-        public const int TYPE_MINOR_EACH = 1;
-        /// <summary>
-        /// 每到
-        /// </summary>
-        public const int TYPE_MINOR_WHEN = 2;
-        #endregion
+        public const int TYPE_DATES = 3;
         #endregion
 
         #region 单位
-        #region 主单位
         /// <summary>
         /// 无
         /// </summary>
-        public const int UNIT_MAJOR_NONE = 0;
+        public const int UNIT_NONE = 0;
         /// <summary>
         /// 秒
         /// </summary>
-        public const int UNIT_MAJOR_SECOND = 1;
+        public const int UNIT_SECOND = 1;
         /// <summary>
         /// 分
         /// </summary>
-        public const int UNIT_MAJOR_MINUTE = 2;
+        public const int UNIT_MINUTE = 2;
         /// <summary>
         /// 时
         /// </summary>
-        public const int UNIT_MAJOR_HOUR = 3;
+        public const int UNIT_HOUR = 3;
         /// <summary>
         /// 日
         /// </summary>
-        public const int UNIT_MAJOR_DAY = 4;
+        public const int UNIT_DAY = 4;
         /// <summary>
         /// 周
         /// </summary>
-        public const int UNIT_MAJOR_WEEK = 5;
+        public const int UNIT_WEEK = 5;
         /// <summary>
         /// 月
         /// </summary>
-        public const int UNIT_MAJOR_MONTH = 6;
+        public const int UNIT_MONTH = 6;
         /// <summary>
         /// 季
         /// </summary>
-        public const int UNIT_MAJOR_SEASON = 7;
+        public const int UNIT_SEASON = 7;
         /// <summary>
         /// 年
         /// </summary>
-        public const int UNIT_MAJOR_YEAR = 8;
+        public const int UNIT_YEAR = 8;
         /// <summary>
         /// 月周
         /// </summary>
-        public const int UNIT_MAJOR_WEEKOFMONTH = 9;
+        public const int UNIT_WEEKOFMONTH = 9;
         /// <summary>
         /// 年周
         /// </summary>
-        public const int UNIT_MAJOR_WEEKOFYEAR = 10;
+        public const int UNIT_WEEKOFYEAR = 10;
         #endregion
 
-        #region 辅单位
+        #region 结束
         /// <summary>
-        /// 按月
+        /// 无效
         /// </summary>
-        public const int UNIT_MINOR_BYMONTH = 1;
+        public const int END_TYPE_NONE = 0;
         /// <summary>
-        /// 按季
+        /// 永远
         /// </summary>
-        public const int UNIT_MINOR_BYSEASON = 2;
-        /// <summary>
-        /// 按年
-        /// </summary>
-        public const int UNIT_MINOR_BYYEAR = 3;
-        #endregion
-        #endregion
-
-        #region 重复
+        public const int END_TYPE_EVER = -1;
         /// <summary>
         /// 重复
         /// </summary>
-        public const int LIMIT_REPEAT = 1;
+        public const int END_TYPE_LOOP = -2;
         /// <summary>
-        /// 结束
+        /// 定时
         /// </summary>
-        public const int LIMIT_ENDING = 2;
+        public const int END_TYPE_TIME = -3;
         #endregion
 
-        #region 重复
+        #region 状态
+        /// <summary>
+        /// 过期
+        /// </summary>
+        public const int STATUS_EXPIRED = 2;
+        /// <summary>
+        /// 到点
+        /// </summary>
+        public const int STATUS_ONTIME = 1;
+        /// <summary>
+        /// 未到
+        /// </summary>
+        public const int STATUS_NORMAL = 0;
+        /// <summary>
+        /// 暂停
+        /// </summary>
+        public const int STATUS_SUSPEND = -1;
+        /// <summary>
+        /// 完成
+        /// </summary>
+        public const int STATUS_FINISHED = -2;
+        #endregion
+
+        #region 提示
+        /// <summary>
+        /// 未知
+        /// </summary>
+        public const int HINT_TYPE_NONE = 0;
         /// <summary>
         /// 提示
         /// </summary>
@@ -121,30 +130,26 @@ namespace Me.Amon.Gtd
         public const int HINT_TYPE_MAIL = 3;
         #endregion
 
-        #region 状态
+        #region 日期类型
         /// <summary>
-        /// 过期
+        /// 未知
         /// </summary>
-        public const int GTD_STAT_EXPIRED = 2;
+        public const int DATES_TYPE_NONE = 0;
         /// <summary>
-        /// 到点
+        /// 每隔
         /// </summary>
-        public const int GTD_STAT_ONTIME = 1;
+        public const int DATES_TYPE_EACH = 1;
         /// <summary>
-        /// 未到
+        /// 每到
         /// </summary>
-        public const int GTD_STAT_NORMAL = 0;
-        /// <summary>
-        /// 暂停
-        /// </summary>
-        public const int GTD_STAT_SUSPEND = -1;
-        /// <summary>
-        /// 完成
-        /// </summary>
-        public const int GTD_STAT_FINISHED = -2;
+        public const int DATES_TYPE_WHEN = 2;
         #endregion
 
-        #region 事件
+        #region 事件类型
+        /// <summary>
+        /// 未知
+        /// </summary>
+        public const int EVENT_NONE = 0;
         /// <summary>
         /// 启动后
         /// </summary>
@@ -161,25 +166,6 @@ namespace Me.Amon.Gtd
         /// 退出前
         /// </summary>
         public const int EVENT_EXIT = 4;
-        #endregion
-
-        #region 结束
-        /// <summary>
-        /// 无效
-        /// </summary>
-        public const int END_TYPE_NONE = 0;
-        /// <summary>
-        /// 永远
-        /// </summary>
-        public const int END_TYPE_EVER = 1;
-        /// <summary>
-        /// 重复
-        /// </summary>
-        public const int END_TYPE_LOOP = 2;
-        /// <summary>
-        /// 定时
-        /// </summary>
-        public const int END_TYPE_TIME = 3;
         #endregion
     }
 }

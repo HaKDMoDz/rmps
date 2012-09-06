@@ -108,7 +108,6 @@ namespace Me.Amon.Pwd
                 Details = new List<LibDetail>();
             }
             Details.Add(detail);
-            Details.Remove(detail);
         }
 
         public void Remove(LibDetail detail)

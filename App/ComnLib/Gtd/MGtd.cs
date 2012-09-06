@@ -108,26 +108,48 @@ namespace Me.Amon.Gtd
         /// 
         /// </summary>
         /// <param name="time"></param>
-        /// <param name="length"></param>
+        /// <param name="opt"></param>
         /// <returns>状态是否发生改变：true是，false否</returns>
-        public bool Test(DateTime time, int length)
+        public bool Test(DateTime time, int opt)
         {
-            if (Status == CGtd.GTD_STAT_EXPIRED)
+            if (Status != CGtd.STATUS_NORMAL && Status != CGtd.STATUS_ONTIME)
             {
                 return false;
             }
 
-            if (Type == CGtd.TYPE_MAJOR_DATES)
+            if (Type == CGtd.TYPE_DATES)
             {
-                return TestDates(time, length);
+                return TestDates(time, opt);
             }
-            if (Type == CGtd.TYPE_MAJOR_EVENT)
-            {
-                return TestEvent();
-            }
-            if (Type == CGtd.TYPE_MAJOR_MATHS)
+            if (Type == CGtd.TYPE_MATHS)
             {
                 return TestMaths(time);
+            }
+            if (Type == CGtd.TYPE_EVENT)
+            {
+                return TestEvent(time);
+            }
+            return false;
+        }
+
+        public bool Next(DateTime time, int opt)
+        {
+            if (Status < CGtd.STATUS_ONTIME)
+            {
+                return false;
+            }
+
+            if (Type == CGtd.TYPE_DATES)
+            {
+                return NextDates(time);
+            }
+            if (Type == CGtd.TYPE_MATHS)
+            {
+                return NextMaths(time);
+            }
+            if (Type == CGtd.TYPE_EVENT)
+            {
+                return NextEvent(time, opt);
             }
             return false;
         }
@@ -150,7 +172,7 @@ namespace Me.Amon.Gtd
         /// </summary>
         public List<ADates> Dates { get; private set; }
 
-        public bool TestDates(DateTime time, int length)
+        private bool TestDates(DateTime time, int length)
         {
             // 计算下次提醒时间
             //if (NextTime == DateTime.MinValue)
@@ -158,35 +180,13 @@ namespace Me.Amon.Gtd
             {
                 NextTime = StartTime;
             }
-            else if (Status == CGtd.GTD_STAT_NORMAL && NextTime < time)
-            {
-                bool changed = false;
-                foreach (ADates date in Dates)
-                {
-                    NextTime = date.Next(time, LastTime, out changed);
-                    if (!changed)
-                    {
-                        break;
-                    }
-                }
-
-                // 完成
-                if ((EndType == CGtd.END_TYPE_NONE && time > EndTime)
-                    || (EndType == CGtd.END_TYPE_LOOP && ExeCount < 1)
-                    || (EndType == CGtd.END_TYPE_TIME && (NextTime > EndTime || time > EndTime)))
-                {
-                    Status = CGtd.GTD_STAT_FINISHED;
-                    return true;
-                }
-                ExeCount -= 1;
-            }
 
             // 判断是否过期
-            if (Status == CGtd.GTD_STAT_ONTIME)
+            if (Status == CGtd.STATUS_ONTIME)
             {
                 if (time > NextTime)
                 {
-                    Status = CGtd.GTD_STAT_EXPIRED;
+                    Status = CGtd.STATUS_EXPIRED;
                     return true;
                 }
                 return false;
@@ -195,25 +195,25 @@ namespace Me.Amon.Gtd
             #region 提前
             switch (PrePose)
             {
-                case CGtd.UNIT_MAJOR_SECOND:
+                case CGtd.UNIT_SECOND:
                     time.AddSeconds(PreTime);
                     break;
-                case CGtd.UNIT_MAJOR_MINUTE:
+                case CGtd.UNIT_MINUTE:
                     time.AddMinutes(PreTime);
                     break;
-                case CGtd.UNIT_MAJOR_HOUR:
+                case CGtd.UNIT_HOUR:
                     time.AddHours(PreTime);
                     break;
-                case CGtd.UNIT_MAJOR_DAY:
+                case CGtd.UNIT_DAY:
                     time.AddDays(PreTime);
                     break;
-                case CGtd.UNIT_MAJOR_WEEK:
+                case CGtd.UNIT_WEEK:
                     time.AddDays(PreTime * 7);
                     break;
-                case CGtd.UNIT_MAJOR_MONTH:
+                case CGtd.UNIT_MONTH:
                     time.AddMonths(PreTime);
                     break;
-                case CGtd.UNIT_MAJOR_YEAR:
+                case CGtd.UNIT_YEAR:
                     time.AddYears(PreTime);
                     break;
             }
@@ -221,10 +221,75 @@ namespace Me.Amon.Gtd
 
             if (time >= NextTime.AddSeconds(-length))
             {
-                Status = CGtd.GTD_STAT_ONTIME;
+                Status = CGtd.STATUS_ONTIME;
                 return true;
             }
             return false;
+        }
+
+        /// <summary>
+        /// 计算下次时间
+        /// </summary>
+        /// <param name="time">当前时间</param>
+        /// <returns></returns>
+        private bool NextDates(DateTime time)
+        {
+            // 没有重复
+            if (EndType == CGtd.END_TYPE_NONE)
+            {
+                Status = CGtd.STATUS_FINISHED;
+                return true;
+            }
+
+            // 计数
+            if (EndType == CGtd.END_TYPE_LOOP)
+            {
+                ExeCount -= 1;
+                if (ExeCount < 1)
+                {
+                    Status = CGtd.STATUS_FINISHED;
+                    return true;
+                }
+            }
+
+            // 定时
+            if (EndType == CGtd.END_TYPE_TIME)
+            {
+                if (time > EndTime)
+                {
+                    Status = CGtd.STATUS_FINISHED;
+                    return true;
+                }
+            }
+
+            // 到点，取下次时间
+            if (Status == CGtd.STATUS_ONTIME)
+            {
+                time = NextTime;
+            }
+
+            bool changed = false;
+            foreach (ADates date in Dates)
+            {
+                NextTime = date.Next(time, out changed);
+                if (!changed)
+                {
+                    break;
+                }
+            }
+
+            // 定时
+            if (EndType == CGtd.END_TYPE_TIME)
+            {
+                if (NextTime > EndTime)
+                {
+                    Status = CGtd.STATUS_FINISHED;
+                    return true;
+                }
+            }
+
+            Status = CGtd.STATUS_NORMAL;
+            return true;
         }
         #endregion
 
@@ -234,9 +299,42 @@ namespace Me.Amon.Gtd
         /// </summary>
         public List<int> Events { get; private set; }
 
-        public bool TestEvent()
+        private bool TestEvent(DateTime time)
         {
-            return true;
+            return false;
+        }
+
+        /// <summary>
+        /// 计算下次时间
+        /// </summary>
+        /// <param name="time"></param>
+        public bool NextEvent(DateTime time, int type)
+        {
+            foreach (int evt in Events)
+            {
+                if (evt != type)
+                {
+                    continue;
+                }
+
+                if (EndType == CGtd.END_TYPE_EVER)
+                {
+                    Status = CGtd.STATUS_ONTIME;
+                    return true;
+                }
+                if (EndType == CGtd.END_TYPE_LOOP)
+                {
+                    ExeCount -= 1;
+                    Status = ExeCount < 0 ? CGtd.STATUS_FINISHED : CGtd.STATUS_ONTIME;
+                    return true;
+                }
+                if (EndType == CGtd.END_TYPE_TIME)
+                {
+                    Status = time > EndTime ? CGtd.STATUS_FINISHED : CGtd.STATUS_ONTIME;
+                    return true;
+                }
+            }
+            return false;
         }
         #endregion
 
@@ -246,9 +344,14 @@ namespace Me.Amon.Gtd
         /// </summary>
         public string Maths { get; set; }
 
-        public bool TestMaths(DateTime time)
+        private bool TestMaths(DateTime time)
         {
-            return true;
+            return false;
+        }
+
+        private bool NextMaths(DateTime time)
+        {
+            return false;
         }
         #endregion
     }

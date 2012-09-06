@@ -10,39 +10,39 @@ namespace Me.Amon.Gtd.Dates
             MaxValue = 4;
         }
 
-        public override DateTime Next(DateTime currTime, DateTime lastTime, out bool changed)
+        public override DateTime Next(DateTime time, out bool changed)
         {
             changed = false;
 
             if (Values.Count < 1)
             {
-                return currTime;
+                return time;
             }
-            if (Type == CGtd.TYPE_MINOR_EACH)
+            if (Type == CGtd.DATES_TYPE_EACH)
             {
-                return lastTime.AddDays(Values[0] * 7);
+                return time.AddDays(Values[0] * 7);
             }
-            if (Type == CGtd.TYPE_MINOR_WHEN)
+            if (Type == CGtd.DATES_TYPE_WHEN)
             {
                 // 当前日期
-                int day = currTime.Day;
+                int day = time.Day;
                 // 当月天数
-                int cnt = DateTime.DaysInMonth(currTime.Year, currTime.Month);
+                int cnt = DateTime.DaysInMonth(time.Year, time.Month);
 
                 if (Reverse)
                 {
                     // 当前周数
-                    int idx = currTime.Day / 7 + 1;
+                    int idx = time.Day / 7 + 1;
                     // 下个周数
                     int tmp = NextValue(idx, changed);
                     if (tmp > 0)
                     {
-                        return currTime.AddDays(tmp * 7);
+                        return time.AddDays(tmp * 7);
                     }
                     if (tmp < 0)
                     {
                         changed = true;
-                        return currTime.AddDays((Values[0] - idx) * 7).AddMonths(1);
+                        return time.AddDays((Values[0] - idx) * 7).AddMonths(1);
                     }
                 }
                 else
@@ -53,16 +53,16 @@ namespace Me.Amon.Gtd.Dates
                     int tmp = NextValue(idx, changed);
                     if (tmp > 0)
                     {
-                        return currTime.AddDays(tmp * -7);
+                        return time.AddDays(tmp * -7);
                     }
                     if (tmp < 0)
                     {
                         changed = true;
-                        return currTime.AddDays((Values[0] - idx) * -7).AddMonths(1);
+                        return time.AddDays((Values[0] - idx) * -7).AddMonths(1);
                     }
                 }
             }
-            return currTime;
+            return time;
         }
     }
 }

@@ -84,9 +84,11 @@ namespace Me.Amon.Da
         IList<Dir> ListDir();
         #endregion
 
-        IList<MGtd> FindKeyByGtd();
+        #region 定时任务
+        IList<MGtd> ListGtdWithRef();
 
         IList<MGtd> FindKeyByGtdExpired();
+        #endregion
 
         IList<MRen> ListRen();
     }
