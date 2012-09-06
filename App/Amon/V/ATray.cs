@@ -183,7 +183,14 @@ namespace Me.Amon.V
         #region
         private void MiInfo_Click(object sender, EventArgs e)
         {
-            Main.ShowAbout(_Main);
+            if (Main.DefaultApp.App.Visible)
+            {
+                Main.ShowAbout(Main.DefaultApp.App.Form);
+            }
+            else
+            {
+                Main.ShowAbout(null);
+            }
         }
 
         private void MiExit_Click(object sender, EventArgs e)
@@ -200,8 +207,6 @@ namespace Me.Amon.V
         private ToolStripSeparator MiSep0;
         private ToolStripMenuItem MiLogo;
         private ToolStripSeparator MiSep1;
-        private ToolStripMenuItem MiSignOf;
-        private ToolStripSeparator MiSep2;
         private ToolStripMenuItem MiInfo;
         private ToolStripMenuItem MiExit;
         private void LoadMenu()
@@ -217,6 +222,7 @@ namespace Me.Amon.V
             // 
             MuApps = new ToolStripMenuItem();
             MuApps.Text = "应用(&A)";
+            MuApps.Visible = false;
             _Menu.Items.Add(MuApps);
             // 
             // MiReset
@@ -230,6 +236,7 @@ namespace Me.Amon.V
             // MiSep0
             // 
             MiSep0 = new ToolStripSeparator();
+            MiSep0.Visible = false;
             _Menu.Items.Add(MiSep0);
             // 
             // MiLogo
@@ -243,18 +250,6 @@ namespace Me.Amon.V
             // 
             MiSep1 = new ToolStripSeparator();
             _Menu.Items.Add(MiSep1);
-            // 
-            // MiSignOf
-            // 
-            MiSignOf = new ToolStripMenuItem();
-            MiSignOf.Text = "注销(&O)";
-            MiSignOf.Click += new EventHandler(MiSignOf_Click);
-            _Menu.Items.Add(MiSignOf);
-            // 
-            // MiSep2
-            // 
-            MiSep2 = new ToolStripSeparator();
-            _Menu.Items.Add(MiSep2);
             // 
             // MiInfo
             // 

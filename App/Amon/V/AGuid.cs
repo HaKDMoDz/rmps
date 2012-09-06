@@ -75,7 +75,8 @@ namespace Me.Amon.V
 
             ChangeAppVisible(false);
             MiApps.Checked = Settings.Default.PlugIns;
-            MuApps.Visible = !Settings.Default.PlugIns;
+            //MuApps.Visible = !Settings.Default.PlugIns;
+            MuApps.Visible = false;
         }
 
         public void LoadMenu(List<TApp> apps)
@@ -302,7 +303,14 @@ namespace Me.Amon.V
 
         private void MiInfo_Click(object sender, EventArgs e)
         {
-            Main.ShowAbout(_Main);
+            if (Main.DefaultApp.App.Visible)
+            {
+                Main.ShowAbout(Main.DefaultApp.App.Form);
+            }
+            else
+            {
+                Main.ShowAbout(_Main);
+            }
         }
 
         private void MiExit_Click(object sender, EventArgs e)
@@ -319,7 +327,7 @@ namespace Me.Amon.V
             {
                 if (_MaxRegion == null)
                 {
-                    _MaxRegion = new Region(new Rectangle(0, 0, 340, 140));
+                    _MaxRegion = new Region(new Rectangle(0, 0, 240, 160));
                 }
                 _Main.Region = _MaxRegion.Clone();
             }

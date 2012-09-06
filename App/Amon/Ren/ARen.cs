@@ -114,7 +114,7 @@ namespace Me.Amon.Ren
                 }
                 if (dic.ContainsKey(ren.DstName))
                 {
-                    GvFile.Rows[idx].Cells[""].Value = ren;
+                    GvFile.Rows[idx].Cells[1].Value = ren.DstName;
                     GvFile.Rows[idx++].DefaultCellStyle.BackColor = Color.Red;
                     ec += 1;
                     continue;
@@ -345,6 +345,7 @@ namespace Me.Amon.Ren
         {
             if (files == null)
             {
+                ShowEcho("");
                 return;
             }
 
@@ -371,6 +372,8 @@ namespace Me.Amon.Ren
                 _FileList.Add(ren);
                 GvFile.Rows.Add(ren.SrcName, "");
             }
+
+            ShowEcho("执行重命名前请记得预览一下结果哟！");
         }
 
         public void RemoveSelectedFile()

@@ -2369,7 +2369,7 @@ namespace Me.Amon.Pwd
         #region 系统管理
         public void ShowLibEdit()
         {
-            LibEdit edit = new LibEdit(_UserModel);
+            LibEditer edit = new LibEditer(_UserModel);
             edit.Init(_DataModel);
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);

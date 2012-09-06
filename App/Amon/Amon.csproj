@@ -669,24 +669,24 @@
     <Compile Include="Pwd\_Key\IcoList.Designer.cs">
       <DependentUpon>IcoList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\_Lib\LibEdit.cs">
+    <Compile Include="Pwd\_Lib\LibEditer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pwd\_Lib\LibEdit.Designer.cs">
-      <DependentUpon>LibEdit.cs</DependentUpon>
+    <Compile Include="Pwd\_Lib\LibEditer.Designer.cs">
+      <DependentUpon>LibEditer.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\_Lib\ILibEdit.cs" />
-    <Compile Include="Pwd\_Lib\LibDetail.cs">
+    <Compile Include="Pwd\_Lib\UcDetail.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\_Lib\LibDetail.Designer.cs">
-      <DependentUpon>LibDetail.cs</DependentUpon>
+    <Compile Include="Pwd\_Lib\UcDetail.Designer.cs">
+      <DependentUpon>UcDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\_Lib\LibHeader.cs">
+    <Compile Include="Pwd\_Lib\UcHeader.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\_Lib\LibHeader.Designer.cs">
-      <DependentUpon>LibHeader.cs</DependentUpon>
+    <Compile Include="Pwd\_Lib\UcHeader.Designer.cs">
+      <DependentUpon>UcHeader.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\_Log\LogEdit.cs">
       <SubType>Form</SubType>
@@ -1250,14 +1250,14 @@
     <EmbeddedResource Include="Pwd\_Key\IcoList.resx">
       <DependentUpon>IcoList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\_Lib\LibEdit.resx">
-      <DependentUpon>LibEdit.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\_Lib\LibEditer.resx">
+      <DependentUpon>LibEditer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\_Lib\LibDetail.resx">
-      <DependentUpon>LibDetail.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\_Lib\UcDetail.resx">
+      <DependentUpon>UcDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\_Lib\LibHeader.resx">
-      <DependentUpon>LibHeader.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\_Lib\UcHeader.resx">
+      <DependentUpon>UcHeader.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\_Log\LogEdit.resx">
       <DependentUpon>LogEdit.cs</DependentUpon>

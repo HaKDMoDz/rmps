@@ -82,7 +82,7 @@ namespace Me.Amon.User
             TbPass.Text = "";
             if (string.IsNullOrEmpty(pass))
             {
-                ShowAlert("请输入解屏口令！");
+                ShowAlert("请输入登录口令！");
                 TbPass.Focus();
                 return;
             }
@@ -98,7 +98,7 @@ namespace Me.Amon.User
             if (!_UserModel.CaSignRc(name, pass))
             {
                 ShowAlert("身份验证错误，请确认您的用户及口令输入是否正确！");
-                TbName.Focus();
+                TbPass.Focus();
                 return;
             }
 

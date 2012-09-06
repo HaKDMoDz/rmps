@@ -36,13 +36,12 @@
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MuApps = new System.Windows.Forms.ToolStripMenuItem();
             this.MiReset = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiApps = new System.Windows.Forms.ToolStripMenuItem();
             this.MiSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.MiTopMost = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiTray = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiApps = new System.Windows.Forms.ToolStripMenuItem();
             this.MiMeye = new System.Windows.Forms.ToolStripMenuItem();
             this.MiSep1 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiSignOf = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiTray = new System.Windows.Forms.ToolStripMenuItem();
             this.MiSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.MiInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.MiExit = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,7 +75,7 @@
             this.LvApp.MultiSelect = false;
             this.LvApp.Name = "LvApp";
             this.LvApp.ShowItemToolTips = true;
-            this.LvApp.Size = new System.Drawing.Size(265, 116);
+            this.LvApp.Size = new System.Drawing.Size(185, 136);
             this.LvApp.SmallImageList = this.IsApp;
             this.LvApp.TabIndex = 4;
             this.LvApp.UseCompatibleStateImageBehavior = false;
@@ -101,17 +100,16 @@
             this.MuApps,
             this.MiReset,
             this.MiApps,
-            this.MiMeye,
             this.MiSep0,
             this.MiTopMost,
-            this.MiTray,
+            this.MiMeye,
             this.MiSep1,
-            this.MiSignOf,
+            this.MiTray,
             this.MiSep2,
             this.MiInfo,
             this.MiExit});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(176, 242);
+            this.CmMenu.Size = new System.Drawing.Size(176, 220);
             // 
             // MuApps
             // 
@@ -127,10 +125,20 @@
             this.MiReset.Visible = false;
             this.MiReset.Click += new System.EventHandler(this.MiReset_Click);
             // 
+            // MiApps
+            // 
+            this.MiApps.CheckOnClick = true;
+            this.MiApps.Name = "MiApps";
+            this.MiApps.Size = new System.Drawing.Size(175, 22);
+            this.MiApps.Text = "显示应用面板(&P)";
+            this.MiApps.Visible = false;
+            this.MiApps.Click += new System.EventHandler(this.MiApps_Click);
+            // 
             // MiSep0
             // 
             this.MiSep0.Name = "MiSep0";
             this.MiSep0.Size = new System.Drawing.Size(172, 6);
+            this.MiSep0.Visible = false;
             // 
             // MiTopMost
             // 
@@ -140,21 +148,6 @@
             this.MiTopMost.Size = new System.Drawing.Size(175, 22);
             this.MiTopMost.Text = "窗口置项(&W)";
             this.MiTopMost.Click += new System.EventHandler(this.MiTopMost_Click);
-            // 
-            // MiTray
-            // 
-            this.MiTray.Name = "MiTray";
-            this.MiTray.Size = new System.Drawing.Size(175, 22);
-            this.MiTray.Text = "显示为托盘图标(&T)";
-            this.MiTray.Click += new System.EventHandler(this.MiTray_Click);
-            // 
-            // MiApps
-            // 
-            this.MiApps.CheckOnClick = true;
-            this.MiApps.Name = "MiApps";
-            this.MiApps.Size = new System.Drawing.Size(175, 22);
-            this.MiApps.Text = "显示扩展窗口(&P)";
-            this.MiApps.Click += new System.EventHandler(this.MiApps_Click);
             // 
             // MiMeye
             // 
@@ -168,12 +161,12 @@
             this.MiSep1.Name = "MiSep1";
             this.MiSep1.Size = new System.Drawing.Size(172, 6);
             // 
-            // MiSignOf
+            // MiTray
             // 
-            this.MiSignOf.Name = "MiSignOf";
-            this.MiSignOf.Size = new System.Drawing.Size(175, 22);
-            this.MiSignOf.Text = "注销(&O)";
-            this.MiSignOf.Click += new System.EventHandler(this.MiSignOf_Click);
+            this.MiTray.Name = "MiTray";
+            this.MiTray.Size = new System.Drawing.Size(175, 22);
+            this.MiTray.Text = "显示为托盘图标(&T)";
+            this.MiTray.Click += new System.EventHandler(this.MiTray_Click);
             // 
             // MiSep2
             // 
@@ -201,7 +194,7 @@
             this.Controls.Add(this.PbApp);
             this.Controls.Add(this.LvApp);
             this.Name = "AGuid";
-            this.Size = new System.Drawing.Size(320, 140);
+            this.Size = new System.Drawing.Size(240, 160);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AGuid_MouseDown);
             this.MouseLeave += new System.EventHandler(this.AGuid_MouseLeave);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.AGuid_MouseMove);
@@ -222,14 +215,13 @@
         private System.Windows.Forms.ToolStripMenuItem MiTopMost;
         private System.Windows.Forms.ToolStripMenuItem MiApps;
         private System.Windows.Forms.ToolStripSeparator MiSep0;
-        private System.Windows.Forms.ToolStripMenuItem MiSignOf;
         private System.Windows.Forms.ToolStripSeparator MiSep1;
         private System.Windows.Forms.ToolStripMenuItem MiMeye;
         private System.Windows.Forms.ToolStripMenuItem MiTray;
-        private System.Windows.Forms.ToolStripSeparator MiSep2;
         private System.Windows.Forms.ToolStripMenuItem MiReset;
         private System.Windows.Forms.ToolStripMenuItem MiInfo;
         private System.Windows.Forms.ToolStripMenuItem MiExit;
         private System.Windows.Forms.ToolStripMenuItem MuApps;
+        private System.Windows.Forms.ToolStripSeparator MiSep2;
     }
 }

@@ -318,7 +318,10 @@ namespace Me.Amon
                 ShowGuid();
             }
 
-            DefaultApp.App.Focus();
+            if (DefaultApp.App != null)
+            {
+                DefaultApp.App.Focus();
+            }
 
             LoadApps();
         }

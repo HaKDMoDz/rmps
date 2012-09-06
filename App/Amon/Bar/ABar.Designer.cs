@@ -159,12 +159,14 @@
             // 
             this.MiSep0.Name = "MiSep0";
             this.MiSep0.Size = new System.Drawing.Size(162, 6);
+            this.MiSep0.Visible = false;
             // 
             // MiDecLoc
             // 
             this.MiDecLoc.Name = "MiDecLoc";
             this.MiDecLoc.Size = new System.Drawing.Size(165, 22);
             this.MiDecLoc.Text = "打开本地文件(&L)";
+            this.MiDecLoc.Visible = false;
             this.MiDecLoc.Click += new System.EventHandler(this.MiDecLoc_Click);
             // 
             // MiDecUrl
@@ -172,6 +174,7 @@
             this.MiDecUrl.Name = "MiDecUrl";
             this.MiDecUrl.Size = new System.Drawing.Size(165, 22);
             this.MiDecUrl.Text = "打开网络地址(&U)";
+            this.MiDecUrl.Visible = false;
             this.MiDecUrl.Click += new System.EventHandler(this.MiDecUrl_Click);
             // 
             // ABar
