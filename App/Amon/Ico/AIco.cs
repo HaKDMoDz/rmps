@@ -328,7 +328,7 @@ namespace Me.Amon.Ico
             _MIcon = new MultiIcon();
 
             _XmlMenu = new XmlMenu<AIco>(this, null);
-            if (_XmlMenu.Load(Path.Combine(_UserModel.Home, EIco.XML_MENU)))
+            if (_XmlMenu.Load(Path.Combine(_UserModel.DatHome, EIco.XML_MENU)))
             {
                 _XmlMenu.GetStrokes("AIco");
                 _XmlMenu.GetPopMenu("AIco", CmMenu);

@@ -31,6 +31,7 @@ namespace Me.Amon.Pwd
     public partial class APwd : Form, IApp
     {
         #region 全局变量
+        private Main _Main;
         private UserModel _UserModel;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
@@ -68,8 +69,9 @@ namespace Me.Amon.Pwd
             InitializeComponent();
         }
 
-        public APwd(UserModel userModel)
+        public APwd(Main main, UserModel userModel)
         {
+            _Main = main;
             _UserModel = userModel;
 
             InitializeComponent();
@@ -93,7 +95,7 @@ namespace Me.Amon.Pwd
 
             #region 系统选单
             _XmlMenu = new XmlMenu<APwd>(this, _ViewModel);
-            if (_XmlMenu.Load(Path.Combine(_UserModel.Home, CPwd.XML_MENU)))
+            if (_XmlMenu.Load(Path.Combine(_UserModel.DatHome, CPwd.XML_MENU)))
             {
                 _XmlMenu.GetStrokes("APwd");
                 _XmlMenu.GetMenuBar("APwd", MbMenu);
@@ -186,7 +188,7 @@ namespace Me.Amon.Pwd
 
         public bool SaveData()
         {
-            string path = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), CApp.DIR_BACK);
+            string path = Path.Combine(_UserModel.SysHome, CApp.DIR_BACK);
             if (Directory.Exists(path))
             {
                 string[] files = Directory.GetFiles(path, _UserModel.Code + "*.apbak", SearchOption.TopDirectoryOnly);
@@ -1135,7 +1137,6 @@ namespace Me.Amon.Pwd
             {
                 _SafeModel.Key.Gtd.RefId = _SafeModel.Key.Id;
                 _UserModel.DBA.SaveVcs(_SafeModel.Key.Gtd);
-                _SafeModel.Key.Hint = Resources.Hint;
             }
             _SafeModel.Modified = false;
 
@@ -1153,20 +1154,6 @@ namespace Me.Amon.Pwd
             {
                 LastOpt();
             }
-
-            //if (!_KeyIcon.ContainsKey(_SafeModel.Key.IcoName))
-            //{
-            //    string path;
-            //    if (CharUtil.IsValidateHash(_SafeModel.Key.IcoPath))
-            //    {
-            //        path = Path.Combine(_DataModel.KeyDir, _SafeModel.Key.IcoPath, _SafeModel.Key.IcoName + CApp.IMG_KEY_LIST_EXT);
-            //    }
-            //    else
-            //    {
-            //        path = Path.Combine(_DataModel.KeyDir, _SafeModel.Key.IcoName + CApp.IMG_KEY_LIST_EXT);
-            //    }
-            //    _KeyIcon.Add(_SafeModel.Key.IcoName, BeanUtil.ReadImage(path, BeanUtil.NaN24));
-            //}
 
             _SafeModel.Key = null;
         }
@@ -1502,6 +1489,11 @@ namespace Me.Amon.Pwd
 
             SaveLayout();
             Visible = false;
+        }
+
+        public void ExitForm()
+        {
+            _Main.ExitSystem();
         }
         #endregion
 
@@ -2576,7 +2568,7 @@ namespace Me.Amon.Pwd
         private void DoBackup(string file)
         {
             _UserModel.Suspend();
-            BeanUtil.DoZip(file, _UserModel.Home);
+            BeanUtil.DoZip(file, _UserModel.DatHome);
             _UserModel.Resuma();
         }
 

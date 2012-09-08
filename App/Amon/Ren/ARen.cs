@@ -501,7 +501,7 @@ namespace Me.Amon.Ren
 
             #region 系统选单
             _XmlMenu = new XmlMenu<ARen>(this, null);
-            if (_XmlMenu.Load(Path.Combine(_UserModel.Home, ERen.XML_MENU)))
+            if (_XmlMenu.Load(Path.Combine(_UserModel.DatHome, ERen.XML_MENU)))
             {
                 _XmlMenu.GetStrokes("ARen");
                 _XmlMenu.GetPopMenu("ARen", CmMenu);

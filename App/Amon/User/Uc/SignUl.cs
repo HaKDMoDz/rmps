@@ -30,7 +30,7 @@ namespace Me.Amon.User.Uc
 
             InitializeComponent();
 
-            TbPath.Text = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), CApp.DIR_DATA);
+            TbPath.Text = Path.Combine(_UserModel.SysHome, CApp.DIR_DATA);
             _SignAc.ShowTips(BtPath, "选择目录");
         }
         #endregion
@@ -133,11 +133,12 @@ namespace Me.Amon.User.Uc
                     }
                 }
 
+                string sysFile = Path.Combine(_UserModel.SysHome, CApp.AMON_SYS);
                 DFAccess prop = new DFAccess();
-                prop.Load(CApp.AMON_SYS);
+                prop.Load(sysFile);
                 prop.Set(string.Format(CApp.AMON_SYS_CODE, name), _UserModel.Code);
-                prop.Set(string.Format(CApp.AMON_SYS_HOME, name), _UserModel.Home);
-                prop.Save(CApp.AMON_SYS);
+                prop.Set(string.Format(CApp.AMON_SYS_HOME, name), _UserModel.DatHome);
+                prop.Save(sysFile);
 
                 InitDat();
             }
@@ -195,8 +196,8 @@ namespace Me.Amon.User.Uc
 
         private void InitDat()
         {
-            _UserModel.Init();
-            BeanUtil.UnZip("Amon.dat", _UserModel.Home);
+            _UserModel.Load();
+            BeanUtil.UnZip("Amon.dat", _UserModel.DatHome);
 
             //var tmp = '\'' + _UserModel.Code + '\'';
             //var dba = _UserModel.DBObject;

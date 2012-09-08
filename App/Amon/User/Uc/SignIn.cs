@@ -85,7 +85,7 @@ namespace Me.Amon.User.Uc
             _SignAc.ShowWaiting();
 
             _Prop = new DFAccess();
-            _Prop.Load(CApp.AMON_SYS);
+            _Prop.Load(Path.Combine(_UserModel.SysHome, CApp.AMON_SYS));
 
             _Name = _Name.ToLower();
             string code = _Prop.Get(string.Format(CApp.AMON_SYS_CODE, _Name));
@@ -115,7 +115,7 @@ namespace Me.Amon.User.Uc
                 return;
             }
 
-            _UserModel.Init();
+            _UserModel.Load();
             _SignAc.CallBack(CApp.IAPP_NONE);
             #endregion
         }
@@ -189,11 +189,12 @@ namespace Me.Amon.User.Uc
                 }
                 else
                 {
+                    string sysFile = Path.Combine(_UserModel.SysHome, CApp.AMON_SYS);
                     DFAccess prop = new DFAccess();
-                    prop.Load(CApp.AMON_SYS);
-                    prop.Set(string.Format(CApp.AMON_SYS_HOME, _Name), _UserModel.Home);
-                    prop.Set(string.Format(CApp.AMON_SYS_CODE, _Name), _UserModel.Code);
-                    prop.Save(CApp.AMON_SYS);
+                    prop.Load(sysFile);
+                    prop.Set(string.Format(CApp.AMON_SYS_HOME, _Name), _Home);
+                    prop.Set(string.Format(CApp.AMON_SYS_CODE, _Name), code);
+                    prop.Save(sysFile);
 
                     InitDat();
                 }
@@ -204,7 +205,7 @@ namespace Me.Amon.User.Uc
 
         private void InitDat()
         {
-            _UserModel.Init();
+            _UserModel.Load();
 
             WebClient client = new WebClient();
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
@@ -362,7 +363,7 @@ namespace Me.Amon.User.Uc
                 }
             }
 
-            BeanUtil.UnZip("Amon.dat", _UserModel.Home);
+            BeanUtil.UnZip("Amon.dat", _UserModel.DatHome);
             _SignAc.CallBack(CApp.IAPP_APWD);
         }
         #endregion

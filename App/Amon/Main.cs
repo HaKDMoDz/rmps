@@ -216,15 +216,17 @@ namespace Me.Amon
         {
             Icon = Me.Amon.Properties.Resources.Icon;
 
+            _UserModel = new UserModel();
+            _UserModel.Init();
+
             // 系统日志
-            if (File.Exists(CApp.FILE_LOG))
+            string logFile = Path.Combine(_UserModel.SysHome, CApp.FILE_LOG);
+            if (File.Exists(logFile))
             {
-                _Writer = new StreamWriter(CApp.FILE_LOG, true, Encoding.UTF8, 8);
+                _Writer = new StreamWriter(logFile, true, Encoding.UTF8);
                 _Writer.AutoFlush = true;
                 _Writer.WriteLine(string.Format("============{0}============", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
             }
-
-            _UserModel = new UserModel();
 
             ShowUser();
         }
@@ -255,7 +257,7 @@ namespace Me.Amon
                 WindowState = FormWindowState.Normal;
             }
             Visible = true;
-            BringToFront();
+            Activate();
         }
         #endregion
 
@@ -304,7 +306,7 @@ namespace Me.Amon
         private void DoSignIn(string view)
         {
             DefaultApp = new TApp { Id = "APwd", Type = "app", NeedAuth = true };
-            DefaultApp.App = new Pwd.APwd(_UserModel);
+            DefaultApp.App = new Pwd.APwd(this, _UserModel);
             DefaultApp.App.Show();
 
             Visible = false;
@@ -389,7 +391,7 @@ namespace Me.Amon
         {
             _Apps = new List<TApp>();
 
-            string path = Path.Combine(_UserModel.Home, "App.xml");
+            string path = Path.Combine(_UserModel.DatHome, "App.xml");
             if (!File.Exists(path))
             {
                 return;

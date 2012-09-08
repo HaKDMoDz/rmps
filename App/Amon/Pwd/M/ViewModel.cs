@@ -167,13 +167,13 @@ namespace Me.Amon.Pwd.M
         public void Load()
         {
             #region Look
-            _LookPath = Path.Combine("Skin", "Look", _UserModel.Look);
+            _LookPath = Path.Combine(_UserModel.ResHome, "Skin", "Look", _UserModel.Look);
             _LookProp = new DFAccess();
             _LookProp.Load(Path.Combine(_LookPath, CApp.FILE_LOOK));
             #endregion
 
             #region Feel
-            _FeelPath = Path.Combine("Skin", "Feel", _UserModel.Feel);
+            _FeelPath = Path.Combine(_UserModel.ResHome, "Skin", "Feel", _UserModel.Feel);
             _FeelProp = new DFAccess();
             _FeelProp.Load(Path.Combine(_FeelPath, CApp.FILE_FEEL));
 
@@ -189,7 +189,7 @@ namespace Me.Amon.Pwd.M
 
             #region 视图
             _UserProp = new DFAccess();
-            _UserProp.Load(Path.Combine(_UserModel.Home, CApp.USER_CFG));
+            _UserProp.Load(Path.Combine(_UserModel.DatHome, CApp.USER_CFG));
             Pattern = _UserProp.Get("Pattern", "");
             string tmp = _UserProp.Get("WindowState", "0");
             if (CharUtil.IsValidateLong(tmp))
@@ -269,7 +269,7 @@ namespace Me.Amon.Pwd.M
             _UserProp.Set("HSplitDistance", _HSplitDistance.ToString());
             _UserProp.Set("VSplitDistance", _VSplitDistance.ToString());
 
-            _UserProp.Save(Path.Combine(_UserModel.Home, CApp.USER_CFG));
+            _UserProp.Save(Path.Combine(_UserModel.DatHome, CApp.USER_CFG));
         }
     }
 }

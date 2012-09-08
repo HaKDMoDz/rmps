@@ -34,14 +34,7 @@ namespace Me.Amon.User.Uc
 
             InitializeComponent();
 
-            if (File.Exists("Amon.tag"))
-            {
-                TbPath.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "阿木密码箱");
-            }
-            else
-            {
-                TbPath.Text = Path.Combine(Application.StartupPath, CApp.DIR_DATA);
-            }
+            TbPath.Text = Path.Combine(_UserModel.SysHome, CApp.DIR_DATA);
             _SignAc.ShowTips(BtPath, "选择目录");
         }
         #endregion
@@ -78,8 +71,9 @@ namespace Me.Amon.User.Uc
             }
 
             name = name.ToLower();
+            string sysFile = Path.Combine(_UserModel.SysHome, CApp.AMON_SYS);
             _Prop = new DFAccess();
-            _Prop.Load(CApp.AMON_SYS);
+            _Prop.Load(sysFile);
             string home = _Prop.Get(string.Format(CApp.AMON_SYS_HOME, name));
             if (!string.IsNullOrEmpty(home))
             {
@@ -150,8 +144,8 @@ namespace Me.Amon.User.Uc
                 }
 
                 _Prop.Set(string.Format(CApp.AMON_SYS_CODE, name), _UserModel.Code);
-                _Prop.Set(string.Format(CApp.AMON_SYS_HOME, name), _UserModel.Home);
-                _Prop.Save(CApp.AMON_SYS);
+                _Prop.Set(string.Format(CApp.AMON_SYS_HOME, name), _UserModel.DatHome);
+                _Prop.Save(sysFile);
 
                 InitDat();
             }
@@ -210,15 +204,15 @@ namespace Me.Amon.User.Uc
         #region 私有函数
         private void InitDat()
         {
-            _UserModel.Init();
-            BeanUtil.UnZip("Amon.dat", _UserModel.Home);
+            _UserModel.Load();
+            BeanUtil.UnZip("Amon.dat", _UserModel.DatHome);
 
             string file;
             StreamReader stream;
             XmlReaderSettings setting = new XmlReaderSettings { IgnoreWhitespace = true };
 
             #region 类别
-            file = Path.Combine(_UserModel.Home, "APwd-Cat.xml");
+            file = Path.Combine(_UserModel.DatHome, "APwd-Cat.xml");
             if (File.Exists(file))
             {
                 stream = new StreamReader(file);
@@ -240,7 +234,7 @@ namespace Me.Amon.User.Uc
             #endregion
 
             #region 模板
-            file = Path.Combine(_UserModel.Home, "APwd-Lib.xml");
+            file = Path.Combine(_UserModel.DatHome, "APwd-Lib.xml");
             if (File.Exists(file))
             {
                 stream = new StreamReader(file);
@@ -262,7 +256,7 @@ namespace Me.Amon.User.Uc
             #endregion
 
             #region 字符
-            file = Path.Combine(_UserModel.Home, "APwd-Udc.xml");
+            file = Path.Combine(_UserModel.DatHome, "APwd-Udc.xml");
             if (File.Exists(file))
             {
                 stream = new StreamReader(file);
@@ -284,7 +278,7 @@ namespace Me.Amon.User.Uc
             #endregion
 
             #region 目录
-            file = Path.Combine(_UserModel.Home, "APwd-Dir.xml");
+            file = Path.Combine(_UserModel.DatHome, "APwd-Dir.xml");
             if (File.Exists(file))
             {
                 stream = new StreamReader(file);
@@ -306,7 +300,7 @@ namespace Me.Amon.User.Uc
             #endregion
 
             #region 重命名
-            file = Path.Combine(_UserModel.Home, "ARen.xml");
+            file = Path.Combine(_UserModel.DatHome, "ARen.xml");
             if (File.Exists(file))
             {
                 stream = new StreamReader(file);

@@ -159,25 +159,30 @@ namespace Me.Amon.Auth
         /// <param name="e"></param>
         private void MiOpen_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog fd = new FolderBrowserDialog();
-            if (DialogResult.OK != fd.ShowDialog())
+            OpenFileDialog fdOpen = Main.OpenFileDialog;
+            fdOpen.Filter = "阿木密码箱配置文件|*.cfg";
+            fdOpen.FileName = CApp.AMON_CFG;
+            fdOpen.InitialDirectory = _UserModel.SysHome;
+            fdOpen.Multiselect = false;
+            if (DialogResult.OK != fdOpen.ShowDialog())
             {
                 return;
             }
 
-            string home = fd.SelectedPath;
-            if (!Directory.Exists(home))
-            {
-                Main.ShowAlert("您选择的路径不存在！");
-                return;
-            }
-
-            string path = Path.Combine(home, CApp.AMON_CFG);
+            string path = fdOpen.FileName;
             if (!File.Exists(path))
             {
-                Main.ShowAlert("请确认您选择的数据路径是否正确！");
+                Main.ShowAlert("无法访问您选择的文件！");
                 return;
             }
+
+            string file = (Path.GetFileName(path) ?? "").ToLower();
+            if (CApp.AMON_CFG.ToLower() != file)
+            {
+                Main.ShowAlert(string.Format("请确认您选择的文件名是否为：{0}！", CApp.AMON_CFG));
+                return;
+            }
+
             DFAccess prop = new DFAccess();
             prop.Load(path);
             string name = prop.Get(CApp.AMON_CFG_NAME);
@@ -189,10 +194,11 @@ namespace Me.Amon.Auth
             }
 
             prop.Clear();
-            prop.Load(CApp.AMON_SYS);
+            string sysFile = Path.Combine(_UserModel.SysHome, CApp.AMON_SYS);
+            prop.Load(sysFile);
             prop.Set(string.Format(CApp.AMON_SYS_CODE, name), code);
-            prop.Set(string.Format(CApp.AMON_SYS_HOME, name), home);
-            prop.Save(CApp.AMON_SYS);
+            prop.Set(string.Format(CApp.AMON_SYS_HOME, name), Path.GetDirectoryName(path));
+            prop.Save(sysFile);
         }
 
         /// <summary>

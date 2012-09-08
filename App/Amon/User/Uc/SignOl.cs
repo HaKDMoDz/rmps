@@ -39,7 +39,7 @@ namespace Me.Amon.User.Uc
 
             InitializeComponent();
 
-            TbPath.Text = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), CApp.DIR_DATA);
+            TbPath.Text = Path.Combine(_UserModel.SysHome, CApp.DIR_DATA);
             _SignAc.ShowTips(BtPath, "选择目录");
         }
         #endregion
@@ -126,7 +126,7 @@ namespace Me.Amon.User.Uc
             #region 本地用户判断
             _Name = _Name.ToLower();
             _Prop = new DFAccess();
-            _Prop.Load(CApp.AMON_SYS);
+            _Prop.Load(Path.Combine(_UserModel.SysHome, CApp.AMON_SYS));
             string home = _Prop.Get(string.Format(CApp.AMON_SYS_HOME, _Name));
             if (!string.IsNullOrEmpty(home))
             {
@@ -279,11 +279,12 @@ namespace Me.Amon.User.Uc
                 }
                 else
                 {
+                    string sysFile = Path.Combine(_UserModel.SysHome, CApp.AMON_SYS);
                     DFAccess prop = new DFAccess();
-                    prop.Load(CApp.AMON_SYS);
+                    prop.Load(sysFile);
                     prop.Set(string.Format(CApp.AMON_SYS_CODE, _Name), _UserModel.Code);
-                    prop.Set(string.Format(CApp.AMON_SYS_HOME, _Name), _UserModel.Home);
-                    prop.Save(CApp.AMON_SYS);
+                    prop.Set(string.Format(CApp.AMON_SYS_HOME, _Name), _UserModel.DatHome);
+                    prop.Save(sysFile);
 
                     InitDat();
                 }
@@ -304,7 +305,7 @@ namespace Me.Amon.User.Uc
 
         private void InitDat()
         {
-            _UserModel.Init();
+            _UserModel.Load();
 
             WebClient client = new WebClient();
             client.Headers["Content-type"] = "application/x-www-form-urlencoded";
@@ -425,7 +426,7 @@ namespace Me.Amon.User.Uc
                 }
             }
 
-            BeanUtil.UnZip("Amon.dat", _UserModel.Home);
+            BeanUtil.UnZip("Amon.dat", _UserModel.DatHome);
             _SignAc.CallBack(CApp.IAPP_APWD);
         }
         #endregion

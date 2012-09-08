@@ -51,13 +51,23 @@
             // 
             this.SpWhen.Location = new System.Drawing.Point(56, 30);
             this.SpWhen.Maximum = new decimal(new int[] {
-            23,
+            12,
+            0,
+            0,
+            0});
+            this.SpWhen.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             0});
             this.SpWhen.Name = "SpWhen";
             this.SpWhen.Size = new System.Drawing.Size(55, 21);
             this.SpWhen.TabIndex = 22;
+            this.SpWhen.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // RbWhen
             // 

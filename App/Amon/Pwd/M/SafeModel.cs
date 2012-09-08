@@ -375,6 +375,10 @@ namespace Me.Amon.Pwd.M
             HintAtt hint = (HintAtt)_AttList[Att.PWDS_HEAD_HINT];
             if (hint.Gtd != null)
             {
+                if (!CharUtil.IsValidateHash(hint.Gtd.Id))
+                {
+                    hint.Gtd.Id = HashUtil.UtcTimeInEnc(false);
+                }
                 _Key.GtdId = hint.Gtd.Id;
             }
             _Key.GtdMemo = hint.Data;

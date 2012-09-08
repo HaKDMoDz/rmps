@@ -51,7 +51,7 @@
             // 
             this.SpWhen.Location = new System.Drawing.Point(56, 30);
             this.SpWhen.Maximum = new decimal(new int[] {
-            23,
+            2100,
             0,
             0,
             0});

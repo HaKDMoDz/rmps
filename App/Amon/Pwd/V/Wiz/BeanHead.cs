@@ -201,7 +201,7 @@ namespace Me.Amon.Pwd.V.Wiz
 
         private void BtHint_Click(object sender, EventArgs e)
         {
-            GtdEditor editor = new GtdEditor();
+            GtdEditor editor = new GtdEditor(true);
             editor.MGtd = _SafeModel.Hint.Gtd;
             if (DialogResult.OK != editor.ShowDialog())
             {

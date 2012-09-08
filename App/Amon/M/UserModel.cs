@@ -24,15 +24,71 @@ namespace Me.Amon.M
         private byte[] _Salt;
         private char[] _Mask;
 
-        public string Code { get { return _Code; } }
-        private string _Code;
-        public string Name { get { return _Name; } }
-        private string _Name;
-        public string Home { get { return _Home; } }
-        private string _Home;
+        public string Code { get; private set; }
+        public string Name { get; private set; }
+        /// <summary>
+        /// 用户数据所在目录
+        /// </summary>
+        public string DatHome { get; private set; }
+        /// <summary>
+        /// 系统配置所在目录
+        /// </summary>
+        public string SysHome { get; private set; }
+        /// <summary>
+        /// 资源文件所在目录
+        /// </summary>
+        public string ResHome { get; private set; }
         public string Look { get; set; }
         public string Feel { get; set; }
         #endregion
+
+        public UserModel()
+        {
+        }
+
+        private DBA _DBA;
+        //private DFA _DFA;
+
+        public void Init()
+        {
+            if (File.Exists("Amon.tag"))
+            {
+                SysHome = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "阿木密码箱");
+                if (!Directory.Exists(SysHome))
+                {
+                    Directory.CreateDirectory(SysHome);
+                }
+            }
+            else
+            {
+                SysHome = Environment.CurrentDirectory;
+            }
+
+            ResHome = SysHome;
+
+            if (File.Exists(CApp.FILE_VER))
+            {
+                BeanUtil.UnZip(CApp.FILE_RES, ResHome);
+                File.Delete(CApp.FILE_VER);
+            }
+            if (!Directory.Exists(Path.Combine(SysHome, "Skin")))
+            {
+                BeanUtil.UnZip(CApp.FILE_RES, ResHome);
+            }
+        }
+
+        public void Load()
+        {
+            DBObject dba = new DBObject();
+            dba.Init(this);
+            _DBA = dba;
+
+            //DFAccess dfa = new DFAccess();
+            //dfa.Init(this);
+            //_DFA = dfa;
+
+            _Timer = new Timer(new TimerCallback(Timer_Callback), null, 5000, 1000);
+        }
 
         #region 权限认证
         /// <summary>
@@ -71,9 +127,9 @@ namespace Me.Amon.M
 
             _Lock = prop.Get(CApp.AMON_CFG_LOCK);
 
-            _Name = name;
-            _Code = code;
-            _Home = home;
+            this.Name = name;
+            this.Code = code;
+            this.DatHome = home;
             _Info = info;
             Look = "Default";
             Feel = "Default";
@@ -88,7 +144,7 @@ namespace Me.Amon.M
         /// <returns></returns>
         public bool CaSignRc(string name, string pass)
         {
-            return (name == _Name && _Info == Digest(_Name, pass));
+            return (name == this.Name && _Info == Digest(this.Name, pass));
         }
 
         /// <summary>
@@ -98,7 +154,7 @@ namespace Me.Amon.M
         /// <returns></returns>
         public bool CaAuthRc(string pass)
         {
-            return _Lock == Digest(_Name, pass);
+            return _Lock == Digest(this.Name, pass);
         }
 
         /// <summary>
@@ -110,7 +166,7 @@ namespace Me.Amon.M
         public bool CaAuthPk(string oldPass, string newPass)
         {
             DFAccess prop = new DFAccess();
-            prop.Load(Path.Combine(_Home, CApp.AMON_CFG));
+            prop.Load(Path.Combine(this.DatHome, CApp.AMON_CFG));
 
             // 已有口令校验
             string info = Digest(Name, oldPass);
@@ -157,7 +213,7 @@ namespace Me.Amon.M
             string main = Convert.ToBase64String(t);
             prop.Set(CApp.AMON_CFG_INFO, info);
             prop.Set(CApp.AMON_CFG_MAIN, main);
-            prop.Save(Path.Combine(_Home, CApp.AMON_CFG));
+            prop.Save(Path.Combine(this.DatHome, CApp.AMON_CFG));
 
             return true;
         }
@@ -220,7 +276,7 @@ namespace Me.Amon.M
         /// <returns></returns>
         public bool CaAuthLk(string oldPass, string newPass)
         {
-            if (_Lock != Digest(_Name, oldPass))
+            if (_Lock != Digest(this.Name, oldPass))
             {
                 return false;
             }
@@ -228,9 +284,9 @@ namespace Me.Amon.M
             _Lock = Digest(Name, newPass);
 
             DFAccess prop = new DFAccess();
-            prop.Load(Path.Combine(_Home, CApp.AMON_CFG));
+            prop.Load(Path.Combine(this.DatHome, CApp.AMON_CFG));
             prop.Set(CApp.AMON_CFG_LOCK, _Lock);
-            prop.Save(Path.Combine(_Home, CApp.AMON_CFG));
+            prop.Save(Path.Combine(this.DatHome, CApp.AMON_CFG));
             return true;
         }
 
@@ -243,7 +299,7 @@ namespace Me.Amon.M
         public bool CaAuthSk(string oldPass, string secPass)
         {
             DFAccess prop = new DFAccess();
-            prop.Load(Path.Combine(_Home, CApp.AMON_CFG));
+            prop.Load(Path.Combine(this.DatHome, CApp.AMON_CFG));
 
             // 已有口令校验
             string info = Digest(Name, oldPass);
@@ -285,7 +341,7 @@ namespace Me.Amon.M
             #endregion
 
             prop.Set(CApp.AMON_CFG_SAFE, Convert.ToBase64String(t));
-            prop.Save(Path.Combine(_Home, CApp.AMON_CFG));
+            prop.Save(Path.Combine(this.DatHome, CApp.AMON_CFG));
             return true;
         }
 
@@ -336,10 +392,10 @@ namespace Me.Amon.M
             r.NextBytes(_Data);
             string info = Digest(name, pass);
 
-            _Home = Path.Combine(root, code);
-            if (!Directory.Exists(_Home))
+            this.DatHome = Path.Combine(root, code);
+            if (!Directory.Exists(this.DatHome))
             {
-                Directory.CreateDirectory(_Home);
+                Directory.CreateDirectory(this.DatHome);
             }
             DFAccess prop = new DFAccess();
             prop.Set(CApp.AMON_CFG_NAME, name);
@@ -349,10 +405,10 @@ namespace Me.Amon.M
             prop.Set(CApp.AMON_CFG_LOCK, info);
             prop.Set(CApp.AMON_CFG_MAIN, main);
             prop.Set(CApp.AMON_CFG_SAFE, "");
-            prop.Save(Path.Combine(_Home, CApp.AMON_CFG));
+            prop.Save(Path.Combine(this.DatHome, CApp.AMON_CFG));
 
-            _Name = name;
-            _Code = code;
+            this.Name = name;
+            this.Code = code;
             _Info = info;
             _Lock = info;
             Look = "Default";
@@ -367,9 +423,9 @@ namespace Me.Amon.M
             _Salt = null;
             _Mask = null;
 
-            _Name = null;
-            _Code = null;
-            _Home = null;
+            this.Name = null;
+            this.Code = null;
+            this.DatHome = null;
         }
 
         /// <summary>
@@ -425,7 +481,7 @@ namespace Me.Amon.M
                 return false;
             }
 
-            _Home = home;
+            this.DatHome = home;
             DFAccess prop = new DFAccess();
             prop.Set(CApp.AMON_CFG_NAME, name);
             prop.Set(CApp.AMON_CFG_CODE, code);
@@ -434,10 +490,10 @@ namespace Me.Amon.M
             prop.Set(CApp.AMON_CFG_LOCK, info);
             prop.Set(CApp.AMON_CFG_MAIN, main);
             prop.Set(CApp.AMON_CFG_SAFE, safe);
-            prop.Save(Path.Combine(_Home, CApp.AMON_CFG));
+            prop.Save(Path.Combine(this.DatHome, CApp.AMON_CFG));
 
-            _Name = name;
-            _Code = code;
+            this.Name = name;
+            this.Code = code;
             _Info = info;
             _Lock = info;
             Look = "Default";
@@ -505,7 +561,7 @@ namespace Me.Amon.M
             }
 
             DFAccess prop = new DFAccess();
-            prop.Load(Path.Combine(_Home, CApp.AMON_CFG));
+            prop.Load(Path.Combine(this.DatHome, CApp.AMON_CFG));
             prop.Set(CApp.AMON_CFG_NAME, oldPass);
             prop.Set(CApp.AMON_CFG_CODE, code);
             prop.Set(CApp.AMON_CFG_DATA, data);
@@ -513,7 +569,7 @@ namespace Me.Amon.M
             prop.Set(CApp.AMON_CFG_LOCK, _Lock);
             prop.Set(CApp.AMON_CFG_MAIN, main);
             prop.Set(CApp.AMON_CFG_SAFE, safe);
-            prop.Save(Path.Combine(_Home, CApp.AMON_CFG));
+            prop.Save(Path.Combine(this.DatHome, CApp.AMON_CFG));
 
             return true;
         }
@@ -581,7 +637,7 @@ namespace Me.Amon.M
                 return false;
             }
 
-            _Code = Encoding.UTF8.GetString(t, 0, 8);
+            this.Code = Encoding.UTF8.GetString(t, 0, 8);
             int i = 8;
             _Salt = new byte[16];
             Array.Copy(t, i, _Salt, 0, _Salt.Length);
@@ -672,21 +728,6 @@ namespace Me.Amon.M
             //client.UploadStringAsync(new Uri(EnvConst.SERVER_PATH), "POST", "c=" + Code + "&t=" + _Token + data);
         }
 
-        private DBA _DBA;
-        //private DFA _DFA;
-
-        public void Init()
-        {
-            DBObject dba = new DBObject();
-            dba.Init(this);
-            _DBA = dba;
-
-            //DFAccess dfa = new DFAccess();
-            //dfa.Init(this);
-            //_DFA = dfa;
-
-            _Timer = new Timer(new TimerCallback(Timer_Callback), null, 5000, 20000);
-        }
 
         public DBA DBA { get { return _DBA; } }
         //public DCAccess DCAccess { get { return _DCAccess; } }

@@ -1416,6 +1416,7 @@
       <DependentUpon>AGuid.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Amon.tag" />
+    <None Include="Amon.ver" />
     <None Include="Amon_TemporaryKey.pfx" />
     <None Include="app.config" />
     <None Include="Logo\logo.icns" />

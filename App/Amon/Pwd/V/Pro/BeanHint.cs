@@ -100,7 +100,7 @@ namespace Me.Amon.Pwd.V.Pro
         #region 事件处理
         private void BtName_Click(object sender, EventArgs e)
         {
-            GtdEditor editor = new GtdEditor();
+            GtdEditor editor = new GtdEditor(true);
             editor.MGtd = _Att.Gtd;
             if (DialogResult.OK != editor.ShowDialog())
             {

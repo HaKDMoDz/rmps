@@ -38,7 +38,7 @@ namespace Me.Amon.V
         /// <param name="setting"></param>
         private static void ImportAPwdCat(UserModel userModel, XmlReaderSettings setting)
         {
-            string file = Path.Combine(userModel.Home, "APwd-Cat.xml");
+            string file = Path.Combine(userModel.DatHome, "APwd-Cat.xml");
             if (!File.Exists(file))
             {
                 return;
@@ -64,7 +64,7 @@ namespace Me.Amon.V
 
         private static void ImportAPwdLib(UserModel userModel, XmlReaderSettings setting)
         {
-            string file = Path.Combine(userModel.Home, "APwd-Lib.xml");
+            string file = Path.Combine(userModel.DatHome, "APwd-Lib.xml");
             if (File.Exists(file))
             {
                 return;
@@ -95,7 +95,7 @@ namespace Me.Amon.V
         /// <param name="setting"></param>
         private static void ImportAPwdDir(UserModel userModel, XmlReaderSettings setting)
         {
-            string file = Path.Combine(userModel.Home, "APwd-Dir.xml");
+            string file = Path.Combine(userModel.DatHome, "APwd-Dir.xml");
             if (!File.Exists(file))
             {
                 return;
@@ -129,7 +129,7 @@ namespace Me.Amon.V
 
         private static void ExportAPwdCat(UserModel userModel, XmlWriterSettings setting)
         {
-            string file = Path.Combine(userModel.Home, "APwd-Cat.xml");
+            string file = Path.Combine(userModel.DatHome, "APwd-Cat.xml");
             StreamWriter stream = new StreamWriter(file);
             using (XmlWriter writer = XmlWriter.Create(stream, setting))
             {

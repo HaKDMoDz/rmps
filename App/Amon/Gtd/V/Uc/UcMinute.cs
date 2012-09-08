@@ -18,22 +18,24 @@ namespace Me.Amon.Gtd.V.Uc
             if (mgtd != null && mgtd.Dates.Count == 1)
             {
                 ADates dates = mgtd.Dates[0];
-
-                if (dates.Type == CGtd.DATES_TYPE_EACH)
+                if (dates.Unit == CGtd.UNIT_MINUTE)
                 {
-                    RbEach.Checked = true;
-                    SpEach.Value = dates.Values[0];
-                    return;
-                }
-
-                if (dates.Type == CGtd.DATES_TYPE_WHEN)
-                {
-                    RbWhen.Checked = true;
-                    foreach (int val in dates.Values)
+                    if (dates.Type == CGtd.DATES_TYPE_EACH)
                     {
-                        SpWhen.Value = val;
+                        RbEach.Checked = true;
+                        SpEach.Value = dates.Values[0];
+                        return;
                     }
-                    return;
+
+                    if (dates.Type == CGtd.DATES_TYPE_WHEN)
+                    {
+                        RbWhen.Checked = true;
+                        foreach (int val in dates.Values)
+                        {
+                            SpWhen.Value = val;
+                        }
+                        return;
+                    }
                 }
             }
             RbEach.Checked = true;

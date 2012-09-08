@@ -23,14 +23,6 @@ namespace Me.Amon.Gtd.V
 
             InitializeComponent();
 
-            if (associated)
-            {
-                CkSwitch.Text = "已禁用(&D)";
-            }
-            else
-            {
-                CkSwitch.Text = "保存为模板(&T)";
-            }
             this.Icon = Me.Amon.Properties.Resources.Icon;
         }
         #endregion
@@ -78,6 +70,17 @@ namespace Me.Amon.Gtd.V
             }
 
             UcStop.ShowData(MGtd);
+
+            if (_Associated)
+            {
+                CkSwitch.Text = "已禁用(&D)";
+                CkSwitch.Checked = MGtd.Status == CGtd.STATUS_SUSPEND;
+            }
+            else
+            {
+                CkSwitch.Text = "保存为模板(&T)";
+                CkSwitch.Checked = MGtd.Shared;
+            }
         }
 
         private void RbDates_CheckedChanged(object sender, EventArgs e)

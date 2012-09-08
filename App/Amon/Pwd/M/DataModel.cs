@@ -16,22 +16,22 @@ namespace Me.Amon.Pwd.M
         public void Init()
         {
             #region 数据目录
-            _CatDir = Path.Combine(_UserModel.Home, "CAT");
+            _CatDir = Path.Combine(_UserModel.DatHome, "CAT");
             if (!Directory.Exists(_CatDir))
             {
                 Directory.CreateDirectory(_CatDir);
             }
-            _KeyDir = Path.Combine(_UserModel.Home, "KEY");
+            _KeyDir = Path.Combine(_UserModel.DatHome, "KEY");
             if (!Directory.Exists(_KeyDir))
             {
                 Directory.CreateDirectory(_KeyDir);
             }
-            _AttDir = Path.Combine(_UserModel.Home, "ATT");
+            _AttDir = Path.Combine(_UserModel.DatHome, "ATT");
             if (!Directory.Exists(_AttDir))
             {
                 Directory.CreateDirectory(_AttDir);
             }
-            _AcfDir = Path.Combine(_UserModel.Home, "ACF");
+            _AcfDir = Path.Combine(_UserModel.DatHome, "ACF");
             if (!Directory.Exists(_AcfDir))
             {
                 Directory.CreateDirectory(_AcfDir);

@@ -21,6 +21,9 @@ namespace Me.Amon
         /// </summary>
         public const string FILE_LOG = "Amon.log";
         public const string FILE_DB = "Amon.dbo";
+        public const string FILE_VER = "Amon.ver";
+        public const string FILE_RES = "Amon.res";
+        public const string FILE_DAT = "Amon.dat";
         /// <summary>
         /// 系统日期格式
         /// </summary>
