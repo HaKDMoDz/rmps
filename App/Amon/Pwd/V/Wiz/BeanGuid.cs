@@ -176,7 +176,7 @@ namespace Me.Amon.Pwd.V.Wiz
                     CbLib.Enabled = false;
                     UcTips.Visible = true;
                     _TlPanel.RowStyles[1].Height = 0;
-                    UcTips.Text = string.Format("您有一个到期提醒：{0}{0}　　{1}{0}{0}{2}", Environment.NewLine, gtd.Title, gtd.NextTime.ToString(CApp.DATEIME_FORMAT));
+                    UcTips.Text = string.Format("您有一个待办提醒：{0}{0}　　{1}{0}{0}{2}", Environment.NewLine, gtd.Title, gtd.NextTime.ToString(CApp.DATEIME_FORMAT));
                     return;
                 }
             }

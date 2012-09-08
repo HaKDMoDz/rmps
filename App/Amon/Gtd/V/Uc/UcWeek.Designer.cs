@@ -29,13 +29,12 @@
         private void InitializeComponent()
         {
             this.LlWhen = new System.Windows.Forms.Label();
-            this.SpWhen = new System.Windows.Forms.NumericUpDown();
+            this.CbWhen = new System.Windows.Forms.ComboBox();
             this.RbWhen = new System.Windows.Forms.RadioButton();
             this.LlEach = new System.Windows.Forms.Label();
             this.SpEach = new System.Windows.Forms.NumericUpDown();
             this.RbEach = new System.Windows.Forms.RadioButton();
-            this.CbWhen = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.SpWhen)).BeginInit();
+            this.CbDate = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.SpEach)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,27 +47,13 @@
             this.LlWhen.TabIndex = 23;
             this.LlWhen.Text = "周的";
             // 
-            // SpWhen
+            // CbWhen
             // 
-            this.SpWhen.Location = new System.Drawing.Point(56, 30);
-            this.SpWhen.Maximum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            this.SpWhen.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.SpWhen.Name = "SpWhen";
-            this.SpWhen.Size = new System.Drawing.Size(55, 21);
-            this.SpWhen.TabIndex = 22;
-            this.SpWhen.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.CbWhen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbWhen.Location = new System.Drawing.Point(56, 30);
+            this.CbWhen.Name = "CbWhen";
+            this.CbWhen.Size = new System.Drawing.Size(55, 20);
+            this.CbWhen.TabIndex = 22;
             // 
             // RbWhen
             // 
@@ -125,29 +110,28 @@
             this.RbEach.UseVisualStyleBackColor = true;
             this.RbEach.CheckedChanged += new System.EventHandler(this.RbEach_CheckedChanged);
             // 
-            // CbWhen
+            // CbDate
             // 
-            this.CbWhen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CbWhen.FormattingEnabled = true;
-            this.CbWhen.Location = new System.Drawing.Point(152, 31);
-            this.CbWhen.Name = "CbWhen";
-            this.CbWhen.Size = new System.Drawing.Size(78, 20);
-            this.CbWhen.TabIndex = 24;
+            this.CbDate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbDate.FormattingEnabled = true;
+            this.CbDate.Location = new System.Drawing.Point(152, 31);
+            this.CbDate.Name = "CbDate";
+            this.CbDate.Size = new System.Drawing.Size(78, 20);
+            this.CbDate.TabIndex = 24;
             // 
             // UcWeek
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.CbWhen);
+            this.Controls.Add(this.CbDate);
             this.Controls.Add(this.LlWhen);
-            this.Controls.Add(this.SpWhen);
+            this.Controls.Add(this.CbWhen);
             this.Controls.Add(this.RbWhen);
             this.Controls.Add(this.LlEach);
             this.Controls.Add(this.SpEach);
             this.Controls.Add(this.RbEach);
             this.Name = "UcWeek";
             this.Size = new System.Drawing.Size(251, 150);
-            ((System.ComponentModel.ISupportInitialize)(this.SpWhen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpEach)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -157,11 +141,11 @@
         #endregion
 
         private System.Windows.Forms.Label LlWhen;
-        private System.Windows.Forms.NumericUpDown SpWhen;
+        private System.Windows.Forms.ComboBox CbWhen;
         private System.Windows.Forms.RadioButton RbWhen;
         private System.Windows.Forms.Label LlEach;
         private System.Windows.Forms.NumericUpDown SpEach;
         private System.Windows.Forms.RadioButton RbEach;
-        private System.Windows.Forms.ComboBox CbWhen;
+        private System.Windows.Forms.ComboBox CbDate;
     }
 }

@@ -107,7 +107,7 @@
             this.BtOk.Name = "BtOk";
             this.BtOk.Size = new System.Drawing.Size(75, 23);
             this.BtOk.TabIndex = 8;
-            this.BtOk.Text = "确定(&O)";
+            this.BtOk.Text = "保存(&S)";
             this.BtOk.UseVisualStyleBackColor = true;
             this.BtOk.Click += new System.EventHandler(this.BtOk_Click);
             // 
@@ -183,7 +183,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GtdEditor";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "提醒";
             this.Load += new System.EventHandler(this.GtdEditor_Load);
             this.GpStop.ResumeLayout(false);

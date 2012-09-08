@@ -5,6 +5,7 @@ namespace Me.Amon.Uc
 {
     public class ItemGroup
     {
+        private int _Index;
         private ToolStripItem _Last;
         private Dictionary<string, ToolStripItem> _Items;
 
@@ -15,10 +16,11 @@ namespace Me.Amon.Uc
 
         public void Add(string key, ToolStripItem item)
         {
-            if (key != null)
+            if (string.IsNullOrEmpty(key))
             {
-                _Items[key] = item;
+                key = "_Item" + _Index++;
             }
+            _Items[key] = item;
 
             if (item is ToolStripMenuItem)
             {
@@ -45,6 +47,22 @@ namespace Me.Amon.Uc
             {
                 _Last = _Items[key];
                 DoChecked(true);
+            }
+        }
+
+        public void Visible(bool visible)
+        {
+            foreach (ToolStripItem item in _Items.Values)
+            {
+                item.Visible = visible;
+            }
+        }
+
+        public void Enabled(bool enabled)
+        {
+            foreach (ToolStripItem item in _Items.Values)
+            {
+                item.Enabled = enabled;
             }
         }
 

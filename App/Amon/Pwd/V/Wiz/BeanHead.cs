@@ -86,16 +86,7 @@ namespace Me.Amon.Pwd.V.Wiz
             }
             else
             {
-                string path = _DataModel.KeyDir;
-                if (CharUtil.IsValidateHash(temp))
-                {
-                    path = Path.Combine(path, temp, logo.Text + CApp.IMG_KEY_EDIT_EXT);
-                }
-                else
-                {
-                    path = Path.Combine(path, logo.Text + CApp.IMG_KEY_EDIT_EXT);
-                }
-                PbLogo.Image = BeanUtil.ReadImage(path, BeanUtil.NaN16);
+                PbLogo.Image = _APng.LoadImage(_DataModel.KeyDir, CApp.IMG_KEY_EDIT_EXT, BeanUtil.NaN16);
             }
 
             HintAtt hint = _SafeModel.Hint;
@@ -141,6 +132,7 @@ namespace Me.Amon.Pwd.V.Wiz
             {
                 logo.Text = _APng.File;
                 logo.SetSpec(LogoAtt.SPEC_LOGO_DIR, _APng.Path);
+                logo.MaxIcon = _APng.LoadImage(_DataModel.KeyDir, CApp.IMG_KEY_LIST_EXT, BeanUtil.NaN24);
                 logo.Modified = true;
             }
             _SafeModel.Modified |= logo.Modified;
@@ -235,16 +227,8 @@ namespace Me.Amon.Pwd.V.Wiz
         private void ChangeImgByKey(Png png)
         {
             _APng = png;
-            string path;
-            if (CharUtil.IsValidateHash(png.Path))
-            {
-                path = Path.Combine(_DataModel.KeyDir, png.Path, png.File + CApp.IMG_KEY_EDIT_EXT);
-            }
-            else
-            {
-                path = Path.Combine(_DataModel.KeyDir, png.File + CApp.IMG_KEY_EDIT_EXT);
-            }
-            PbLogo.Image = BeanUtil.ReadImage(path, BeanUtil.NaN16);
+            png.SmallImage = png.LoadImage(_DataModel.KeyDir, CApp.IMG_KEY_EDIT_EXT, BeanUtil.NaN16);
+            PbLogo.Image = png.SmallImage;
         }
         #endregion
     }

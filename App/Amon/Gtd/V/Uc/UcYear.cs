@@ -8,13 +8,13 @@ namespace Me.Amon.Gtd.V.Uc
         public UcYear()
         {
             InitializeComponent();
-
-            int year = DateTime.Now.Year;
-            SpWhen.Minimum = year;
-            SpWhen.Value = year;
         }
 
         #region 接口实现
+        public void Init(DateTime time)
+        {
+        }
+
         public Control Control { get { return this; } }
 
         public void ShowData(MGtd mgtd)
@@ -30,16 +30,6 @@ namespace Me.Amon.Gtd.V.Uc
                         SpEach.Value = dates.Values[0];
                         return;
                     }
-
-                    if (dates.Type == CGtd.DATES_TYPE_WHEN)
-                    {
-                        RbWhen.Checked = true;
-                        foreach (int val in dates.Values)
-                        {
-                            SpWhen.Value = val;
-                        }
-                        return;
-                    }
                 }
             }
             RbEach.Checked = true;
@@ -52,32 +42,23 @@ namespace Me.Amon.Gtd.V.Uc
                 return false;
             }
 
-            ADates dates;
+            ADates dates = null;
             if (mgtd.Dates.Count == 1)
             {
                 dates = mgtd.Dates[0];
             }
-            else
+            if (dates == null || dates.Unit != CGtd.UNIT_YEAR)
             {
                 dates = new Dates.Year();
+                mgtd.Dates.Clear();
                 mgtd.Dates.Add(dates);
             }
-
-            dates.Unit = CGtd.UNIT_YEAR;
 
             if (RbEach.Checked)
             {
                 dates.Type = CGtd.DATES_TYPE_EACH;
                 dates.Values.Clear();
                 dates.Values.Add(decimal.ToInt32(SpEach.Value));
-                return true;
-            }
-
-            if (RbWhen.Checked)
-            {
-                dates.Type = CGtd.DATES_TYPE_WHEN;
-                dates.Values.Clear();
-                dates.Values.Add(decimal.ToInt32(SpWhen.Value));
                 return true;
             }
 
@@ -89,13 +70,6 @@ namespace Me.Amon.Gtd.V.Uc
         private void RbEach_CheckedChanged(object sender, EventArgs e)
         {
             SpEach.Enabled = true;
-            SpWhen.Enabled = false;
-        }
-
-        private void RbWhen_CheckedChanged(object sender, EventArgs e)
-        {
-            SpEach.Enabled = false;
-            SpWhen.Enabled = true;
         }
         #endregion
     }

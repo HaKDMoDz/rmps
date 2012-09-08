@@ -831,11 +831,11 @@ namespace Me.Amon.M
                 }
                 else if (_PastCnt > 0)
                 {
-                    info = string.Format(" {0} 个过期事项", _PastCnt);
+                    info = string.Format("您有 {0} 个过期事项", _PastCnt);
                 }
                 else if (_TodoCnt > 0)
                 {
-                    info = string.Format(" {0} 个待办事项", _TodoCnt);
+                    info = string.Format("您有 {0} 个待办事项", _TodoCnt);
                 }
                 else
                 {

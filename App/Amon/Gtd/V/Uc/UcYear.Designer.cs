@@ -28,48 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LlWhen = new System.Windows.Forms.Label();
-            this.SpWhen = new System.Windows.Forms.NumericUpDown();
-            this.RbWhen = new System.Windows.Forms.RadioButton();
             this.LlEach = new System.Windows.Forms.Label();
             this.SpEach = new System.Windows.Forms.NumericUpDown();
             this.RbEach = new System.Windows.Forms.RadioButton();
-            ((System.ComponentModel.ISupportInitialize)(this.SpWhen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpEach)).BeginInit();
             this.SuspendLayout();
-            // 
-            // LlWhen
-            // 
-            this.LlWhen.AutoSize = true;
-            this.LlWhen.Location = new System.Drawing.Point(117, 34);
-            this.LlWhen.Name = "LlWhen";
-            this.LlWhen.Size = new System.Drawing.Size(17, 12);
-            this.LlWhen.TabIndex = 23;
-            this.LlWhen.Text = "年";
-            // 
-            // SpWhen
-            // 
-            this.SpWhen.Location = new System.Drawing.Point(56, 30);
-            this.SpWhen.Maximum = new decimal(new int[] {
-            2100,
-            0,
-            0,
-            0});
-            this.SpWhen.Name = "SpWhen";
-            this.SpWhen.Size = new System.Drawing.Size(55, 21);
-            this.SpWhen.TabIndex = 22;
-            // 
-            // RbWhen
-            // 
-            this.RbWhen.AutoSize = true;
-            this.RbWhen.Location = new System.Drawing.Point(3, 32);
-            this.RbWhen.Name = "RbWhen";
-            this.RbWhen.Size = new System.Drawing.Size(47, 16);
-            this.RbWhen.TabIndex = 21;
-            this.RbWhen.TabStop = true;
-            this.RbWhen.Text = "每到";
-            this.RbWhen.UseVisualStyleBackColor = true;
-            this.RbWhen.CheckedChanged += new System.EventHandler(this.RbWhen_CheckedChanged);
             // 
             // LlEach
             // 
@@ -112,21 +75,16 @@
             this.RbEach.TabStop = true;
             this.RbEach.Text = "每隔";
             this.RbEach.UseVisualStyleBackColor = true;
-            this.RbEach.CheckedChanged += new System.EventHandler(this.RbEach_CheckedChanged);
             // 
             // UcYear
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.LlWhen);
-            this.Controls.Add(this.SpWhen);
-            this.Controls.Add(this.RbWhen);
             this.Controls.Add(this.LlEach);
             this.Controls.Add(this.SpEach);
             this.Controls.Add(this.RbEach);
             this.Name = "UcYear";
             this.Size = new System.Drawing.Size(243, 150);
-            ((System.ComponentModel.ISupportInitialize)(this.SpWhen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpEach)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -135,9 +93,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label LlWhen;
-        private System.Windows.Forms.NumericUpDown SpWhen;
-        private System.Windows.Forms.RadioButton RbWhen;
         private System.Windows.Forms.Label LlEach;
         private System.Windows.Forms.NumericUpDown SpEach;
         private System.Windows.Forms.RadioButton RbEach;

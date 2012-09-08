@@ -230,35 +230,6 @@ namespace Me.Amon
 
             ShowUser();
         }
-
-        private void NiTray_DoubleClick(object sender, EventArgs e)
-        {
-            if (Visible)
-            {
-                if (WindowState == FormWindowState.Minimized)
-                {
-                    WindowState = FormWindowState.Normal;
-                }
-                Activate();
-                return;
-            }
-
-            AuthCa authCa = new AuthCa(_UserModel);
-            authCa.CallBackHandler = new AmonHandler<string>(Dd);
-            authCa.InitOnce();
-            authCa.ShowDialog();
-        }
-
-        private void Dd(string key)
-        {
-            //Show();
-            if (WindowState == FormWindowState.Minimized)
-            {
-                WindowState = FormWindowState.Normal;
-            }
-            Visible = true;
-            Activate();
-        }
         #endregion
 
         #region 私有函数
@@ -291,6 +262,7 @@ namespace Me.Amon
                 _SignRc.Show();
             }
             _SignRc.CallBackHandler = handler;
+            Activate();
         }
 
         /// <summary>
@@ -494,7 +466,11 @@ namespace Me.Amon
                 return;
             }
 
-            if (!iApp.Visible)
+            if (iApp.Visible)
+            {
+                iApp.Activate();
+            }
+            else
             {
                 iApp.Visible = true;
             }

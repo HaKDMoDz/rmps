@@ -1,8 +1,12 @@
-﻿namespace Me.Amon.Pwd._Att
+﻿using System.Drawing;
+
+namespace Me.Amon.Pwd._Att
 {
     public class LogoAtt : Att
     {
         public const int SPEC_LOGO_DIR = 0;// 字符空间索引
+        public Image MinIcon { get; set; }
+        public Image MaxIcon { get; set; }
 
         public LogoAtt()
             : base(TYPE_LOGO, "", "")

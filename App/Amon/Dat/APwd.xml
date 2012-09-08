@@ -112,7 +112,7 @@
         <Stroke Key="^ R" Memo="删除记录"/>
       </Item>
       <Line/>
-      <Menu Id="append-att" Text="添加属性">
+      <Menu Id="append-att" Text="添加属性" Group="att-edit">
         <Item Type="normal" Text="文本" ActionId="append-att-text">
           <Stroke Key="^ D1" Memo="添加文本属性"/>
           <Stroke Key="^ NumPad1" Memo="添加文本属性"/>
@@ -154,7 +154,7 @@
           <Stroke Key="^ NumPad0" Memo="添加标记属性"/>
         </Item>
       </Menu>
-      <Menu Id="update-att" Text="转换属性">
+      <Menu Id="update-att" Text="转换属性" Group="att-edit">
         <Item Type="normal" Text="文本" ActionId="change-att-text">
           <Stroke Key="# D1" Memo="转换文本属性"/>
           <Stroke Key="# NumPad1" Memo="转换文本属性"/>
@@ -196,26 +196,26 @@
           <Stroke Key="# NumPad0" Memo="转换标记属性"/>
         </Item>
       </Menu>
-      <Item Type="normal" Text="删除属性" ActionId="delete-att">
+      <Item Type="normal" Text="删除属性" ActionId="delete-att" Group="att-edit">
         <Stroke Key="# D" Memo="移除当前属性"/>
       </Item>
-      <Item Type="normal" Text="选择上一属性" ActionId="att-edit-select-prev">
+      <Item Type="normal" Text="选择上一属性" ActionId="att-edit-select-prev" Group="att-edit">
         <Stroke Key="^ U" Memo="选择上一个属性"/>
         <Stroke Key="^ Up" Memo="选择上一个属性"/>
       </Item>
-      <Item Type="normal" Text="选择下一属性" ActionId="att-edit-select-next">
+      <Item Type="normal" Text="选择下一属性" ActionId="att-edit-select-next" Group="att-edit">
         <Stroke Key="^ D" Memo="选择下一个属性"/>
         <Stroke Key="^ Down" Memo="选择下一个属性"/>
       </Item>
-      <Item Type="normal" Text="向上移动一行" ActionId="att-edit-move-up">
+      <Item Type="normal" Text="向上移动一行" ActionId="att-edit-move-up" Group="att-edit">
         <Stroke Key="^ ~ U" Memo="向上移动一行"/>
         <Stroke Key="^ ~ Up" Memo="向上移动一行"/>
       </Item>
-      <Item Type="normal" Text="向下移动一行" ActionId="att-edit-move-down">
+      <Item Type="normal" Text="向下移动一行" ActionId="att-edit-move-down" Group="att-edit">
         <Stroke Key="^ ~ D" Memo="向下移动一行"/>
         <Stroke Key="^ ~ Down" Memo="向下移动一行"/>
       </Item>
-      <Line/>
+      <Line Group="att-edit"/>
       <Item Type="normal" Text="添加类别" ActionId="append-cat">
         <Stroke Key="^ Add" Memo="添加类别"/>
       </Item>
@@ -324,6 +324,7 @@
       </Item>
     </Menu>
     <Menu Id="skin" Text="皮肤(&amp;S)">
+	  <Item Type="normal" Text="默认"/>
     </Menu>
     <Menu Id="help" Text="帮助(&amp;H)">
       <Item Type="normal" Text="帮助" ActionId="help">
@@ -348,7 +349,7 @@
       <Item Type="normal" Text="关于" ActionId="about"/>
     </Menu>
     <Menu Id="plug" Text="扩展(&amp;P)">
-      <Item Type="normal" Text="测试(@T)" Command="这是一个扩展测试！">
+      <Item Type="normal" Text="测试(&amp;T)" Command="这是一个扩展测试！">
         <Action Class="DemoLib.Demo" LibId="Demo"/>
       </Item>
     </Menu>
@@ -429,53 +430,53 @@
     <Item Type="normal" Text="删除记录" ActionId="delete-key"/>
     <Line/>
     <Menu Text="标记为">
-      <Item Id="key-label0" Type="toggle" Text="默认(@0)" ActionId="change-label" Group="key-label" Command="key-label:key-label0:0">
+      <Item Id="key-label0" Type="toggle" Text="默认(&amp;0)" ActionId="change-label" Group="key-label" Command="key-label:key-label0:0">
         <Icon Id="label0" Path="var:key-label0"/>
       </Item>
       <Line/>
-      <Item Id="key-label1" Type="toggle" Text="常使用(@1)" ActionId="change-label" Group="key-label" Command="key-label:key-label1:1">
+      <Item Id="key-label1" Type="toggle" Text="常使用(&amp;1)" ActionId="change-label" Group="key-label" Command="key-label:key-label1:1">
         <Icon Id="label1" Path="var:key-label1"/>
       </Item>
-      <Item Id="key-label2" Type="toggle" Text="待注册(@2)" ActionId="change-label" Group="key-label" Command="key-label:key-label2:2">
+      <Item Id="key-label2" Type="toggle" Text="待注册(&amp;2)" ActionId="change-label" Group="key-label" Command="key-label:key-label2:2">
         <Icon Id="label2" Path="var:key-label2"/>
       </Item>
-      <Item Id="key-label3" Type="toggle" Text="待认证(@3)" ActionId="change-label" Group="key-label" Command="key-label:key-label3:3">
+      <Item Id="key-label3" Type="toggle" Text="待认证(&amp;3)" ActionId="change-label" Group="key-label" Command="key-label:key-label3:3">
         <Icon Id="label3" Path="var:key-label3"/>
       </Item>
-      <Item Id="key-label4" Type="toggle" Text="待激活(@4)" ActionId="change-label" Group="key-label" Command="key-label:key-label4:4">
+      <Item Id="key-label4" Type="toggle" Text="待激活(&amp;4)" ActionId="change-label" Group="key-label" Command="key-label:key-label4:4">
         <Icon Id="label4" Path="var:key-label4"/>
       </Item>
-      <Item Id="key-label5" Type="toggle" Text="仅测试(@5)" ActionId="change-label" Group="key-label" Command="key-label:key-label5:5">
+      <Item Id="key-label5" Type="toggle" Text="仅测试(&amp;5)" ActionId="change-label" Group="key-label" Command="key-label:key-label5:5">
         <Icon Id="label5" Path="var:key-label5"/>
       </Item>
-      <Item Id="key-label6" Type="toggle" Text="已失效(@6)" ActionId="change-label" Group="key-label" Command="key-label:key-label6:6">
+      <Item Id="key-label6" Type="toggle" Text="已失效(&amp;6)" ActionId="change-label" Group="key-label" Command="key-label:key-label6:6">
         <Icon Id="label6" Path="var:key-label6"/>
       </Item>
-      <Item Id="key-label7" Type="toggle" Text="已过期(@7)" ActionId="change-label" Group="key-label" Command="key-label:key-label7:7">
+      <Item Id="key-label7" Type="toggle" Text="已过期(&amp;7)" ActionId="change-label" Group="key-label" Command="key-label:key-label7:7">
         <Icon Id="label7" Path="var:key-label7"/>
       </Item>
-      <Item Id="key-label8" Type="toggle" Text="已丢失(@8)" ActionId="change-label" Group="key-label" Command="key-label:key-label8:8">
+      <Item Id="key-label8" Type="toggle" Text="已丢失(&amp;8)" ActionId="change-label" Group="key-label" Command="key-label:key-label8:8">
         <Icon Id="label8" Path="var:key-label8"/>
       </Item>
-      <Item Id="key-label9" Type="toggle" Text="被禁用(@9)" ActionId="change-label" Group="key-label" Command="key-label:key-label9:9">
+      <Item Id="key-label9" Type="toggle" Text="被禁用(&amp;9)" ActionId="change-label" Group="key-label" Command="key-label:key-label9:9">
         <Icon Id="label9" Path="var:key-label9"/>
       </Item>
     </Menu>
     <Menu Text="重要性">
       <Item Id="key-majorp2" Type="toggle" Text="最高" ActionId="change-major" Group="key-major" Command="key-major:key-majorp2:2">
-        <Icon Id="major2" Path="var:key-major0"/>
+        <Icon Id="major2" Path="var:key-major4"/>
       </Item>
       <Item Id="key-majorp1" Type="toggle" Text="高" ActionId="change-major" Group="key-major" Command="key-major:key-majorp1:1">
-        <Icon Id="major1" Path="var:key-major1"/>
+        <Icon Id="major1" Path="var:key-major3"/>
       </Item>
       <Item Id="key-major0" Type="toggle" Text="正常" ActionId="change-major" Group="key-major" Command="key-major:key-major0:0">
         <Icon Id="major0" Path="var:key-major2"/>
       </Item>
       <Item Id="key-majorn1" Type="toggle" Text="低" ActionId="change-major" Group="key-major" Command="key-major:key-majorn1:-1">
-        <Icon Id="major-1" Path="var:key-major3"/>
+        <Icon Id="major-1" Path="var:key-major1"/>
       </Item>
       <Item Id="key-majorn2" Type="toggle" Text="最低" ActionId="change-major" Group="key-major" Command="key-major:key-majorn2:-2">
-        <Icon Id="major-2" Path="var:key-major4"/>
+        <Icon Id="major-2" Path="var:key-major0"/>
       </Item>
     </Menu>
     <Menu Text="排序方式" Visible="false">
@@ -489,7 +490,7 @@
       <Item Type="toggle" Text="到期时间" Group="order-key" ActionId="sort-key" Command="0D"/>
     </Menu>
     <Line/>
-    <Item Type="normal" Text="把数据迁移到...(@M)">
+    <Item Type="normal" Text="把数据迁移到...(&amp;M)">
       <Action Class="Me.Amon.Pwd.E._Key.MovetoAction"/>
     </Item>
     <Line/>
@@ -656,10 +657,10 @@
     </Menu>
   </Submenu>
   <Submenu Id="sign-options">
-    <Item Type="toggle" Id="sign-sep" Text="分页控制(@S)" Group="sign-options" Command="sep:P30F7E04"/>
-    <Item Type="toggle" Id="sign-div" Text="标题面板(@P)" Group="sign-options" Command="div:P30F7E06"/>
-    <Item Type="toggle" Id="sign-tab" Text="选项面板(@T)" Group="sign-options" Command="tab:P30F7E08"/>
-    <Menu Text="其它标记(@O)">
+    <Item Type="toggle" Id="sign-sep" Text="分页控制(&amp;S)" Group="sign-options" Command="sep:P30F7E04"/>
+    <Item Type="toggle" Id="sign-div" Text="标题面板(&amp;P)" Group="sign-options" Command="div:P30F7E06"/>
+    <Item Type="toggle" Id="sign-tab" Text="选项面板(&amp;T)" Group="sign-options" Command="tab:P30F7E08"/>
+    <Menu Text="其它标记(&amp;O)">
       <Item Type="toggle" Text="-----" Group="sign-options" Command="tip:P30F7E0B"/>
       <Item Type="toggle" Text="--{0}--" Group="sign-options" Command="tip:P30F7E0D"/>
     </Menu>

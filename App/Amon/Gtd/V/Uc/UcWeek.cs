@@ -9,19 +9,28 @@ namespace Me.Amon.Gtd.V.Uc
         public UcWeek()
         {
             InitializeComponent();
-
-            CbWhen.Items.Add(new Itemi { K = 0, V = "星期日" });
-            CbWhen.Items.Add(new Itemi { K = 0, V = "星期一" });
-            CbWhen.Items.Add(new Itemi { K = 0, V = "星期二" });
-            CbWhen.Items.Add(new Itemi { K = 0, V = "星期三" });
-            CbWhen.Items.Add(new Itemi { K = 0, V = "星期四" });
-            CbWhen.Items.Add(new Itemi { K = 0, V = "星期五" });
-            CbWhen.Items.Add(new Itemi { K = 0, V = "星期六" });
-
-            CbWhen.SelectedIndex = (int)DateTime.Now.DayOfWeek;
         }
 
         #region 接口实现
+        public void Init(DateTime time)
+        {
+            CbWhen.Items.Add(new Itemi { K = 1, V = "第一个" });
+            CbWhen.Items.Add(new Itemi { K = 2, V = "第二个" });
+            CbWhen.Items.Add(new Itemi { K = 3, V = "第三个" });
+            CbWhen.Items.Add(new Itemi { K = 4, V = "第四个" });
+            CbWhen.Items.Add(new Itemi { K = -1, V = "最后一个" });
+            CbWhen.SelectedIndex = time.Day / 7;
+
+            CbDate.Items.Add(new Itemi { K = 0, V = "星期日" });
+            CbDate.Items.Add(new Itemi { K = 1, V = "星期一" });
+            CbDate.Items.Add(new Itemi { K = 2, V = "星期二" });
+            CbDate.Items.Add(new Itemi { K = 3, V = "星期三" });
+            CbDate.Items.Add(new Itemi { K = 4, V = "星期四" });
+            CbDate.Items.Add(new Itemi { K = 5, V = "星期五" });
+            CbDate.Items.Add(new Itemi { K = 6, V = "星期六" });
+            CbDate.SelectedIndex = (int)time.DayOfWeek;
+        }
+
         public Control Control { get { return this; } }
 
         public void ShowData(MGtd mgtd)
@@ -40,16 +49,14 @@ namespace Me.Amon.Gtd.V.Uc
                 SpEach.Value = dates.Values[0];
                 return;
             }
-            if (mgtd.Dates.Count == 1)
+            if (mgtd.Dates.Count == 2)
             {
                 RbWhen.Checked = true;
                 dates = mgtd.Dates[0];
-                CbWhen.SelectedIndex = dates.Values[0];
+                CbDate.SelectedItem = new Itemi { K = dates.Values[0] };
 
                 dates = mgtd.Dates[1];
-                SpWhen.Minimum = dates.MinValue;
-                SpWhen.Maximum = dates.MaxValue;
-                SpWhen.Value = dates.Values[0];
+                CbWhen.SelectedItem = new Itemi { K = dates.Values[0] };
                 return;
             }
             RbEach.Checked = true;
@@ -70,13 +77,13 @@ namespace Me.Amon.Gtd.V.Uc
         private void RbEach_CheckedChanged(object sender, EventArgs e)
         {
             SpEach.Enabled = true;
-            SpWhen.Enabled = false;
+            CbWhen.Enabled = false;
         }
 
         private void RbWhen_CheckedChanged(object sender, EventArgs e)
         {
             SpEach.Enabled = false;
-            SpWhen.Enabled = true;
+            CbWhen.Enabled = true;
         }
         #endregion
     }

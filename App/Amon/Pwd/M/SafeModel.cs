@@ -370,6 +370,7 @@ namespace Me.Amon.Pwd.M
             _Key.IcoName = logo.Text;
             _Key.IcoMemo = logo.Data;
             _Key.IcoPath = logo.GetSpec(LogoAtt.SPEC_LOGO_DIR, ".");
+            _Key.Icon = logo.MaxIcon;
 
             // HintItem
             HintAtt hint = (HintAtt)_AttList[Att.PWDS_HEAD_HINT];

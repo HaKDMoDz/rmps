@@ -155,7 +155,15 @@ namespace Me.Amon.Pwd
         {
             if (_EchoDelay < 1)
             {
-                TssEcho.Text = message;
+                if (SsEcho.InvokeRequired)
+                {
+                    SsEcho.Invoke(new MethodInvoker(() => TssEcho.Text = message));
+                }
+                else
+                {
+                    TssEcho.Text = message;
+                }
+                //TssEcho.Text = message;
             }
         }
 
@@ -493,8 +501,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            Image img = key.Icon ?? BeanUtil.NaN24;
-            e.Graphics.DrawImage(img, e.Bounds.X + 3, e.Bounds.Y + 3, img.Width, img.Height);
+            e.Graphics.DrawImage(key.Icon, e.Bounds.X + 3, e.Bounds.Y + 3, 24, 24);
 
             //最后把要显示的文字画在背景图片上
             int y = e.Bounds.Y + 2;
@@ -505,17 +512,17 @@ namespace Me.Amon.Pwd
 
             int x = e.Bounds.X + e.Bounds.Width;
             y -= 16;
-            img = key.Hint ?? BeanUtil.NaN16;
-            e.Graphics.DrawImage(img, x - 48, y);
-            img = _ViewModel.GetImage(CPwd.KEY_LABEL + key.Label);
-            if (img != null)
+            if (key.GtdIcon != null)
             {
-                e.Graphics.DrawImage(img, x - 32, y);
+                e.Graphics.DrawImage(key.GtdIcon, x - 48, y);
             }
-            img = _ViewModel.GetImage(CPwd.KEY_MAJOR + (key.Major + 2));
-            if (img != null)
+            if (key.LabelIcon != null)
             {
-                e.Graphics.DrawImage(img, x - 16, y);
+                e.Graphics.DrawImage(key.LabelIcon, x - 32, y);
+            }
+            if (key.MajorIcon != null)
+            {
+                e.Graphics.DrawImage(key.MajorIcon, x - 16, y);
             }
         }
 
@@ -1341,6 +1348,7 @@ namespace Me.Amon.Pwd
             }
 
             _SafeModel.Key.Label = label;
+            _SafeModel.Key.LabelIcon = _ViewModel.GetImage(CPwd.KEY_LABEL + label);
             _UserModel.DBA.SaveVcs(_SafeModel.Key);
 
             LbKeyList.Refresh();
@@ -1358,6 +1366,7 @@ namespace Me.Amon.Pwd
             }
 
             _SafeModel.Key.Major = major;
+            _SafeModel.Key.MajorIcon = _ViewModel.GetImage(CPwd.KEY_MAJOR + (major + 2));
             _UserModel.DBA.SaveVcs(_SafeModel.Key);
 
             LbKeyList.Refresh();
@@ -1526,6 +1535,12 @@ namespace Me.Amon.Pwd
             _PwdView = _ProView;
             _PwdView.InitView(PlBody);
             ShowKey(_SafeModel.Key);
+
+            ItemGroup group = _XmlMenu.GetGroup("att-edit");
+            if (group != null)
+            {
+                group.Visible(true);
+            }
         }
 
         /// <summary>
@@ -1552,6 +1567,12 @@ namespace Me.Amon.Pwd
             _PwdView = _WizView;
             _PwdView.InitView(PlBody);
             ShowKey(_SafeModel.Key);
+
+            ItemGroup group = _XmlMenu.GetGroup("att-edit");
+            if (group != null)
+            {
+                group.Visible(false);
+            }
         }
 
         /// <summary>
@@ -2533,7 +2554,9 @@ namespace Me.Amon.Pwd
                     key.Icon = BeanUtil.NaN24;
                 }
 
-                key.Hint = CharUtil.IsValidateHash(key.GtdId) ? Resources.Hint : BeanUtil.NaN16;
+                key.LabelIcon = _ViewModel.GetImage(CPwd.KEY_LABEL + key.Label);
+                key.MajorIcon = _ViewModel.GetImage(CPwd.KEY_MAJOR + (key.Major + 2));
+                key.GtdIcon = CharUtil.IsValidateHash(key.GtdId) ? Resources.Hint : BeanUtil.NaN16;
             }
         }
 

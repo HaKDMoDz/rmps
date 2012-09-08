@@ -74,7 +74,9 @@ namespace Me.Amon.Pwd._Key
                 return;
             }
 
-            _KeyIcon.CallBack(new Png { File = LvIco.SelectedItems[0].ImageKey });
+            Png png = new Png { File = LvIco.SelectedItems[0].ImageKey };
+            png.LargeImage = IlIco.Images[png.File];
+            _KeyIcon.CallBack(png);
         }
 
         private void BtAppend_Click(object sender, EventArgs e)

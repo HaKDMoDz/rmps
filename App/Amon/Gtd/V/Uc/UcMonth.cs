@@ -8,11 +8,14 @@ namespace Me.Amon.Gtd.V.Uc
         public UcMonth()
         {
             InitializeComponent();
-
-            SpWhen.Value = DateTime.Now.Month;
         }
 
         #region 接口实现
+        public void Init(DateTime time)
+        {
+            SpWhen.Value = time.Month;
+        }
+
         public Control Control { get { return this; } }
 
         public void ShowData(MGtd mgtd)
@@ -50,18 +53,17 @@ namespace Me.Amon.Gtd.V.Uc
                 return false;
             }
 
-            ADates dates;
+            ADates dates = null;
             if (mgtd.Dates.Count == 1)
             {
                 dates = mgtd.Dates[0];
             }
-            else
+            if (dates == null || dates.Unit != CGtd.UNIT_MONTH)
             {
                 dates = new Dates.Month();
+                mgtd.Dates.Clear();
                 mgtd.Dates.Add(dates);
             }
-
-            dates.Unit = CGtd.UNIT_MONTH;
 
             if (RbEach.Checked)
             {

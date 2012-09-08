@@ -87,11 +87,11 @@ key-label9=key-label9.png
 #######################################
 # 重要性
 #######################################
-key-major0=key-major+2.png
-key-major1=key-major+1.png
+key-major0=key-major-2.png
+key-major1=key-major-1.png
 key-major2=key-major0.png
-key-major3=key-major-1.png
-key-major4=key-major-2.png
+key-major3=key-major+1.png
+key-major4=key-major+2.png
 
 #######################################
 # 排序方式

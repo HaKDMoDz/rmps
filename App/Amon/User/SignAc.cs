@@ -164,7 +164,7 @@ namespace Me.Amon.Auth
             fdOpen.FileName = CApp.AMON_CFG;
             fdOpen.InitialDirectory = _UserModel.SysHome;
             fdOpen.Multiselect = false;
-            if (DialogResult.OK != fdOpen.ShowDialog())
+            if (DialogResult.OK != fdOpen.ShowDialog(_Main))
             {
                 return;
             }

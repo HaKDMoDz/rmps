@@ -28,7 +28,7 @@ namespace Me.Amon.Gtd.V
             CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MINUTE, V = "分" });
             CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_HOUR, V = "时" });
             CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_DAY, V = "日" });
-            CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_WEEK, V = "周" });
+            //CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_WEEK, V = "周" });
             CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_MONTH, V = "月" });
             CbRedoUnit.Items.Add(new Itemi { K = CGtd.UNIT_YEAR, V = "年" });
         }
@@ -45,6 +45,7 @@ namespace Me.Amon.Gtd.V
         {
             if (MGtd == null)
             {
+                CbRedoUnit.SelectedIndex = 0;
                 return;
             }
 
@@ -55,6 +56,10 @@ namespace Me.Amon.Gtd.V
             if (MGtd.Dates.Count > 0)
             {
                 CbRedoUnit.SelectedItem = new Itemi { K = MGtd.Dates[0].Unit };
+            }
+            else
+            {
+                CbRedoUnit.SelectedIndex = 0;
             }
         }
 
@@ -121,6 +126,7 @@ namespace Me.Amon.Gtd.V
                     if (_UcSecond == null)
                     {
                         _UcSecond = new UcSecond();
+                        _UcSecond.Init(DtStart.Value);
                         InitView(_UcSecond);
                     }
                     _Editor.StopEnabled = true;
@@ -130,6 +136,7 @@ namespace Me.Amon.Gtd.V
                     if (_UcMinute == null)
                     {
                         _UcMinute = new UcMinute();
+                        _UcMinute.Init(DtStart.Value);
                         InitView(_UcMinute);
                     }
                     _Editor.StopEnabled = true;
@@ -139,6 +146,7 @@ namespace Me.Amon.Gtd.V
                     if (_UcHour == null)
                     {
                         _UcHour = new UcHour();
+                        _UcHour.Init(DtStart.Value);
                         InitView(_UcHour);
                     }
                     _Editor.StopEnabled = true;
@@ -148,6 +156,7 @@ namespace Me.Amon.Gtd.V
                     if (_UcDay == null)
                     {
                         _UcDay = new UcDay();
+                        _UcDay.Init(DtStart.Value);
                         InitView(_UcDay);
                     }
                     _Editor.StopEnabled = true;
@@ -157,6 +166,7 @@ namespace Me.Amon.Gtd.V
                     if (_UcWeek == null)
                     {
                         _UcWeek = new UcWeek();
+                        _UcWeek.Init(DtStart.Value);
                         InitView(_UcWeek);
                     }
                     _Editor.StopEnabled = true;
@@ -166,6 +176,7 @@ namespace Me.Amon.Gtd.V
                     if (_UcMonth == null)
                     {
                         _UcMonth = new UcMonth();
+                        _UcMonth.Init(DtStart.Value);
                         InitView(_UcMonth);
                     }
                     _Editor.StopEnabled = true;
@@ -175,6 +186,7 @@ namespace Me.Amon.Gtd.V
                     if (_UcYear == null)
                     {
                         _UcYear = new UcYear();
+                        _UcYear.Init(DtStart.Value);
                         InitView(_UcYear);
                     }
                     _Editor.StopEnabled = true;
@@ -184,6 +196,7 @@ namespace Me.Amon.Gtd.V
                     if (_UcNone == null)
                     {
                         _UcNone = new UcNone();
+                        _UcNone.Init(DtStart.Value);
                         InitView(_UcNone);
                     }
                     _Editor.StopEnabled = false;
@@ -197,8 +210,8 @@ namespace Me.Amon.Gtd.V
 
         private void InitView(Control control)
         {
-            control.Location = new System.Drawing.Point(3, 55);
-            control.Size = new System.Drawing.Size(200, 100);
+            control.Location = new System.Drawing.Point(3, 56);
+            control.Size = new System.Drawing.Size(298, 101);
             control.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
         }
         #endregion

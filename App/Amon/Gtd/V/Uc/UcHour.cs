@@ -11,6 +11,11 @@ namespace Me.Amon.Gtd.V.Uc
         }
 
         #region 接口实现
+        public void Init(DateTime time)
+        {
+            SpWhen.Value = time.Hour;
+        }
+
         public Control Control { get { return this; } }
 
         public void ShowData(MGtd mgtd)
@@ -48,18 +53,17 @@ namespace Me.Amon.Gtd.V.Uc
                 return false;
             }
 
-            ADates dates;
+            ADates dates = null;
             if (mgtd.Dates.Count == 1)
             {
                 dates = mgtd.Dates[0];
             }
-            else
+            if (dates == null || dates.Unit != CGtd.UNIT_HOUR)
             {
                 dates = new Dates.Hour();
+                mgtd.Dates.Clear();
                 mgtd.Dates.Add(dates);
             }
-
-            dates.Unit = CGtd.UNIT_HOUR;
 
             if (RbEach.Checked)
             {

@@ -292,7 +292,7 @@ namespace Me.Amon.Uc
                 }
                 if (XML_MENU_LINE == node.Name)
                 {
-                    toolBar.Items.Add(new ToolStripSeparator());
+                    toolBar.Items.Add(createLine(node));
                     continue;
                 }
             }
@@ -327,7 +327,7 @@ namespace Me.Amon.Uc
                 }
                 if (XML_MENU_LINE == node.Name)
                 {
-                    menuPop.Items.Add(new ToolStripSeparator());
+                    menuPop.Items.Add(createLine(node));
                     continue;
                 }
             }
@@ -361,7 +361,7 @@ namespace Me.Amon.Uc
                 }
                 if (XML_MENU_LINE == node.Name)
                 {
-                    menu.Items.Add(new ToolStripSeparator());
+                    menu.Items.Add(createLine(node));
                     continue;
                 }
             }
@@ -395,7 +395,7 @@ namespace Me.Amon.Uc
                 }
                 if (XML_MENU_LINE == node.Name)
                 {
-                    menu.DropDownItems.Add(new ToolStripSeparator());
+                    menu.DropDownItems.Add(createLine(node));
                     continue;
                 }
             }
@@ -438,6 +438,7 @@ namespace Me.Amon.Uc
             string id = Attribute(parent, "Id", null);
             if (!string.IsNullOrWhiteSpace(id))
             {
+                menu.Name = id;
                 _MenuItems[id] = menu;
             }
 
@@ -446,6 +447,7 @@ namespace Me.Amon.Uc
             processIcon(parent, menu);
             processEnabled(parent, menu);
             processVisible(parent, menu);
+            processGroup(parent, menu);
 
             foreach (XmlNode node in parent.ChildNodes)
             {
@@ -461,7 +463,7 @@ namespace Me.Amon.Uc
                 }
                 if (XML_MENU_LINE == node.Name)
                 {
-                    menu.DropDownItems.Add(new ToolStripSeparator());
+                    menu.DropDownItems.Add(createLine(node));
                     continue;
                 }
             }
@@ -537,6 +539,18 @@ namespace Me.Amon.Uc
                 action.Add(button, _ViewModel);
             }
             return button;
+        }
+
+        private ToolStripSeparator createLine(XmlNode node)
+        {
+            ToolStripSeparator line = new ToolStripSeparator();
+            string id = Attribute(node, "Id", null);
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                line.Name = id;
+            }
+            processGroup(node, line);
+            return line;
         }
 
         private IAction<T> CreateAction(XmlNode node)
@@ -961,7 +975,7 @@ namespace Me.Amon.Uc
             return item;
         }
 
-        private ToolStripMenuItem processGroup(XmlNode node, ToolStripMenuItem item)
+        private ToolStripItem processGroup(XmlNode node, ToolStripItem item)
         {
             string group = Attribute(node, "Group", "");
             if (!string.IsNullOrWhiteSpace(group))

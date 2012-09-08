@@ -70,7 +70,7 @@
             this.LbRedoUnit.TabIndex = 2;
             this.LbRedoUnit.Text = "提醒周期(&U)";
             // 
-            // UtDate
+            // UtDates
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -78,7 +78,7 @@
             this.Controls.Add(this.LbRedoUnit);
             this.Controls.Add(this.DtStart);
             this.Controls.Add(this.LlStart);
-            this.Name = "UtDate";
+            this.Name = "UtDates";
             this.Size = new System.Drawing.Size(304, 160);
             this.ResumeLayout(false);
             this.PerformLayout();
