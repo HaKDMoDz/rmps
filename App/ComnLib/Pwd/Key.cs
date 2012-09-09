@@ -1,9 +1,9 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Text;
 using System.Xml;
 using Me.Amon.Gtd;
 using Me.Amon.M;
-using System;
 
 namespace Me.Amon.Pwd
 {
@@ -21,10 +21,14 @@ namespace Me.Amon.Pwd
         /// 使用状态
         /// </summary>
         public int Label { get; set; }
+        [NonSerialized]
+        public Image LabelIcon;
         /// <summary>
         /// 紧要程度
         /// </summary>
         public int Major { get; set; }
+        [NonSerialized]
+        public Image MajorIcon;
         /// <summary>
         /// 所属类别
         /// </summary>
@@ -57,6 +61,8 @@ namespace Me.Amon.Pwd
         /// 图标说明
         /// </summary>
         public string IcoMemo { get; set; }
+        [NonSerialized]
+        public Image Icon;
         /// <summary>
         /// 提醒索引
         /// </summary>
@@ -65,6 +71,9 @@ namespace Me.Amon.Pwd
         /// 提醒备注
         /// </summary>
         public string GtdMemo { get; set; }
+        public MGtd Gtd { get; set; }
+        [NonSerialized]
+        public Image GtdIcon;
         /// <summary>
         /// 相关说明
         /// </summary>
@@ -89,13 +98,6 @@ namespace Me.Amon.Pwd
         /// 用户数据
         /// </summary>
         public string Password { get; set; }
-
-        [NonSerialized]
-        public Image Icon;
-        [NonSerialized]
-        public Image Hint;
-
-        public MGtd Gtd { get; set; }
 
         /// <summary>
         /// 恢复默认值

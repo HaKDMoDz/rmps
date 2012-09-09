@@ -319,22 +319,27 @@ namespace Me.Amon.Gtd
 
                 if (EndType == CGtd.END_TYPE_EVER)
                 {
+                    NextTime = time;
                     Status = CGtd.STATUS_ONTIME;
                     return true;
                 }
                 if (EndType == CGtd.END_TYPE_LOOP)
                 {
                     ExeCount -= 1;
+                    NextTime = time;
                     Status = ExeCount < 0 ? CGtd.STATUS_FINISHED : CGtd.STATUS_ONTIME;
                     return true;
                 }
                 if (EndType == CGtd.END_TYPE_TIME)
                 {
+                    NextTime = time;
                     Status = time > EndTime ? CGtd.STATUS_FINISHED : CGtd.STATUS_ONTIME;
                     return true;
                 }
             }
-            return false;
+
+            Status = CGtd.STATUS_NORMAL;
+            return true;
         }
         #endregion
 
