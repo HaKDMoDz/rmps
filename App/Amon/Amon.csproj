@@ -80,13 +80,13 @@
       <HintPath>Lib\Db4objects.Db4o.dll</HintPath>
     </Reference>
     <Reference Include="IconLib">
-      <HintPath>.\Lib\IconLib.dll</HintPath>
+      <HintPath>Lib\IconLib.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>.\Lib\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>Lib\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="MessagingToolkit.Barcode">
-      <HintPath>.\Lib\MessagingToolkit.Barcode.dll</HintPath>
+      <HintPath>Lib\MessagingToolkit.Barcode.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Lib\Newtonsoft.Json.dll</HintPath>
@@ -1415,6 +1415,7 @@
     <EmbeddedResource Include="V\AGuid.resx">
       <DependentUpon>AGuid.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Amon.lib" />
     <None Include="Amon.tag" />
     <None Include="Amon.ver" />
     <None Include="Amon_TemporaryKey.pfx" />

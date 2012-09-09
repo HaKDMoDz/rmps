@@ -69,6 +69,7 @@ namespace Me.Amon.M
             if (File.Exists(CApp.FILE_VER))
             {
                 BeanUtil.UnZip(CApp.FILE_RES, ResHome);
+                BeanUtil.UnZip("Amon.lib", "Lib");
                 File.Delete(CApp.FILE_VER);
             }
             if (!Directory.Exists(Path.Combine(SysHome, "Skin")))
