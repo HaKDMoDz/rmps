@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace DemoLib
 {
@@ -14,7 +15,7 @@ namespace DemoLib
             }
             if (string.IsNullOrEmpty(cmd))
             {
-                cmd = "这是一个演示！^_^";
+                cmd = "这是一个演示！^_^" + Environment.NewLine + Environment.CurrentDirectory;
             }
             MessageBox.Show(cmd, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
