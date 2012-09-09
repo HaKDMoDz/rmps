@@ -31,7 +31,7 @@
     <SuiteName>阿木密码箱</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>7.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -1415,12 +1415,8 @@
     <EmbeddedResource Include="V\AGuid.resx">
       <DependentUpon>AGuid.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Amon.lib" />
-    <None Include="Amon.tag" />
-    <None Include="Amon.ver" />
     <None Include="Amon_TemporaryKey.pfx" />
     <None Include="app.config" />
-    <None Include="Logo\logo.icns" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -1433,7 +1429,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Amon.dat" />
+    <Content Include="Amon.lib" />
     <Content Include="Amon.res" />
+    <Content Include="Amon.tag" />
+    <Content Include="Amon.ver" />
+    <Content Include="Logo\logo.icns" />
     <Content Include="Logo\logo.ico" />
     <Content Include="Logo\logo.svg" />
     <Content Include="Logo\logo128.png" />
