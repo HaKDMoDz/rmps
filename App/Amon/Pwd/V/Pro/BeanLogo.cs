@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using Me.Amon.C;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd.M;
@@ -11,7 +10,6 @@ namespace Me.Amon.Pwd.V.Pro
     {
         private APro _APro;
         private LogoAtt _Att;
-        private Png _APng;
         private DataModel _DataModel;
 
         #region 构造函数
@@ -32,7 +30,6 @@ namespace Me.Amon.Pwd.V.Pro
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
             _DataModel = dataModel;
-            _APng = new Png();
 
             _APro.ShowTips(PbLogo, "点击选择徽标");
         }
@@ -47,29 +44,19 @@ namespace Me.Amon.Pwd.V.Pro
 
             if (_Att != null)
             {
-                string temp = _Att.GetSpec(LogoAtt.SPEC_LOGO_DIR);
-                _APng.File = _Att.Text;
-                _APng.Path = temp;
-
                 TbData.Text = _Att.Data;
-
-                if (!CharUtil.IsValidateHash(_Att.Text))
+                if (_Att.SmallIcon == null)
                 {
-                    PbLogo.Image = BeanUtil.NaN16;
-                }
-                else
-                {
-                    string path = _DataModel.KeyDir;
-                    if (CharUtil.IsValidateHash(temp))
+                    if (!CharUtil.IsValidateHash(_Att.Text))
                     {
-                        path = Path.Combine(path, temp, _Att.Text + CApp.IMG_KEY_EDIT_EXT);
+                        _Att.SmallIcon = BeanUtil.NaN16;
                     }
                     else
                     {
-                        path = Path.Combine(path, _Att.Text + CApp.IMG_KEY_EDIT_EXT);
+                        _Att.SmallIcon = _Att.LoadImage(_DataModel.KeyDir, _Att.GetSpec(LogoAtt.SPEC_LOGO_DIR), _Att.Text, CApp.IMG_KEY_EDIT_EXT, BeanUtil.NaN16);
                     }
-                    PbLogo.Image = BeanUtil.ReadImage(path, BeanUtil.NaN16);
                 }
+                PbLogo.Image = _Att.SmallIcon;
             }
 
             return true;
@@ -115,13 +102,6 @@ namespace Me.Amon.Pwd.V.Pro
                 return false;
             }
 
-            if (_Att.Text != _APng.File)
-            {
-                _Att.Text = _APng.File;
-                _Att.SetSpec(LogoAtt.SPEC_LOGO_DIR, _APng.Path);
-                _Att.Modified = true;
-            }
-
             if (TbData.Text != _Att.Data)
             {
                 _Att.Data = TbData.Text;
@@ -141,17 +121,15 @@ namespace Me.Amon.Pwd.V.Pro
 
         private void ChangeImgByKey(Png png)
         {
-            _APng = png;
-            string path;
-            if (CharUtil.IsValidateHash(png.Path))
+            if (png != null && _Att.Text != png.File)
             {
-                path = Path.Combine(_DataModel.KeyDir, png.Path, png.File + CApp.IMG_KEY_EDIT_EXT);
+                _Att.Text = png.File;
+                _Att.SetSpec(LogoAtt.SPEC_LOGO_DIR, png.Path);
+                _Att.LargeIcon = png.LargeImage ?? BeanUtil.NaN24;
+                _Att.SmallIcon = _Att.LoadImage(_DataModel.KeyDir, png.Path, png.File, CApp.IMG_KEY_EDIT_EXT, BeanUtil.NaN16);
+                _Att.Modified = true;
             }
-            else
-            {
-                path = Path.Combine(_DataModel.KeyDir, png.File + CApp.IMG_KEY_EDIT_EXT);
-            }
-            PbLogo.Image = BeanUtil.ReadImage(path, BeanUtil.NaN16);
+            PbLogo.Image = _Att.SmallIcon;
         }
     }
 }

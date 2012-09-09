@@ -326,6 +326,7 @@ namespace Me.Amon.Pwd.V.Pro
             {
                 return;
             }
+            _SafeModel.Modified |= _AAtt.Modified;
 
             _UserAction = false;
             DataRow row = _DataList.Rows[_LastIndex];

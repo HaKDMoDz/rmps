@@ -314,6 +314,7 @@ namespace Me.Amon.Pwd.M
             logo.Text = _Key.IcoName;
             logo.Data = _Key.IcoMemo;
             logo.SetSpec(LogoAtt.SPEC_LOGO_DIR, _Key.IcoPath);
+            logo.LargeIcon = _Key.Icon;
             list.Add(logo);
 
             // HintItem
@@ -321,6 +322,7 @@ namespace Me.Amon.Pwd.M
             hint.Text = _Key.Gtd == null ? "<无提醒>" : _Key.Gtd.Title;
             hint.Data = _Key.GtdMemo;
             hint.Gtd = _Key.Gtd;
+            hint.Icon = _Key.GtdIcon;
             list.Add(hint);
 
             // 处理每一个数据
@@ -370,7 +372,7 @@ namespace Me.Amon.Pwd.M
             _Key.IcoName = logo.Text;
             _Key.IcoMemo = logo.Data;
             _Key.IcoPath = logo.GetSpec(LogoAtt.SPEC_LOGO_DIR, ".");
-            _Key.Icon = logo.MaxIcon;
+            _Key.Icon = logo.LargeIcon;
 
             // HintItem
             HintAtt hint = (HintAtt)_AttList[Att.PWDS_HEAD_HINT];
@@ -384,6 +386,7 @@ namespace Me.Amon.Pwd.M
             }
             _Key.GtdMemo = hint.Data;
             _Key.Gtd = hint.Gtd;
+            _Key.GtdIcon = hint.Icon;
 
             // 字符串拼接
             StringBuilder buf = new StringBuilder();

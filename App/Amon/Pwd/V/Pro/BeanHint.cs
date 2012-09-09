@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Me.Amon.Gtd.V;
+using Me.Amon.Properties;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd.M;
 using Me.Amon.Util;
@@ -29,7 +30,7 @@ namespace Me.Amon.Pwd.V.Pro
         #region 接口实现
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
-            BtHint.Image = BeanUtil.NaN16;
+            PbHint.Image = BeanUtil.NaN16;
         }
 
         public Control Control { get { return this; } }
@@ -42,8 +43,9 @@ namespace Me.Amon.Pwd.V.Pro
 
             if (_Att != null)
             {
-                LlHint.Text = _Att.Gtd == null ? "<无提醒>" : _Att.Gtd.Title;
+                LlHint.Text = _Att.Text;
                 TbData.Text = _Att.Data;
+                PbHint.Image = _Att.Icon;
             }
             return true;
         }
@@ -108,10 +110,13 @@ namespace Me.Amon.Pwd.V.Pro
             }
 
             Gtd.MGtd gtd = editor.MGtd;
-            LlHint.Text = gtd.Title;
-            _Att.Text = gtd.Title;
-            _Att.Modified = true;
             _Att.Gtd = gtd;
+            _Att.Text = gtd.Title;
+            _Att.Icon = Resources.Hint;
+            _Att.Modified = true;
+
+            LlHint.Text = _Att.Text;
+            PbHint.Image = _Att.Icon;
         }
         #endregion
     }

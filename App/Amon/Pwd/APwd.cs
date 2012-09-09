@@ -1156,6 +1156,7 @@ namespace Me.Amon.Pwd
                 {
                     LbKeyList.Items[LbKeyList.SelectedIndex] = _SafeModel.Key;
                 }
+                LbKeyList.Refresh();
             }
             else
             {

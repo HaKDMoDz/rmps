@@ -1,9 +1,9 @@
 ﻿using System;
-using System.IO;
 using System.Windows.Forms;
 using Me.Amon.C;
 using Me.Amon.Gtd.V;
 using Me.Amon.M;
+using Me.Amon.Properties;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd.M;
 using Me.Amon.Util;
@@ -13,7 +13,6 @@ namespace Me.Amon.Pwd.V.Wiz
     public partial class BeanHead : UserControl, IWizView
     {
         private AWiz _AWiz;
-        private Png _APng;
         private UserModel _UserModel;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
@@ -39,7 +38,6 @@ namespace Me.Amon.Pwd.V.Wiz
         {
             _TlPanel = grid;
             _DataModel = dataModel;
-            _APng = new Png();
 
             TbName.GotFocus += new EventHandler(TbName_GotFocus);
             TbMeta.GotFocus += new EventHandler(TbMeta_GotFocus);
@@ -77,17 +75,18 @@ namespace Me.Amon.Pwd.V.Wiz
             {
                 return;
             }
-            string temp = logo.GetSpec(LogoAtt.SPEC_LOGO_DIR);
-            _APng.File = logo.Text;
-            _APng.Path = temp;
-            if (!CharUtil.IsValidateHash(logo.Text))
+            if (logo.SmallIcon == null)
             {
-                PbLogo.Image = BeanUtil.NaN16;
+                if (!CharUtil.IsValidateHash(logo.Text))
+                {
+                    logo.SmallIcon = BeanUtil.NaN16;
+                }
+                else
+                {
+                    logo.SmallIcon = logo.LoadImage(_DataModel.KeyDir, logo.GetSpec(LogoAtt.SPEC_LOGO_DIR), logo.Text, CApp.IMG_KEY_EDIT_EXT, BeanUtil.NaN16);
+                }
             }
-            else
-            {
-                PbLogo.Image = _APng.LoadImage(_DataModel.KeyDir, CApp.IMG_KEY_EDIT_EXT, BeanUtil.NaN16);
-            }
+            PbLogo.Image = logo.SmallIcon;
 
             HintAtt hint = _SafeModel.Hint;
             if (hint == null)
@@ -95,6 +94,7 @@ namespace Me.Amon.Pwd.V.Wiz
                 return;
             }
             TbHint.Text = hint.Text;
+            PbHint.Image = hint.Icon;
 
             Focus();
         }
@@ -126,24 +126,6 @@ namespace Me.Amon.Pwd.V.Wiz
                 meta.Modified = true;
             }
             _SafeModel.Modified |= meta.Modified;
-
-            LogoAtt logo = _SafeModel.Logo;
-            if (logo.Text != _APng.File)
-            {
-                logo.Text = _APng.File;
-                logo.SetSpec(LogoAtt.SPEC_LOGO_DIR, _APng.Path);
-                logo.MaxIcon = _APng.LoadImage(_DataModel.KeyDir, CApp.IMG_KEY_LIST_EXT, BeanUtil.NaN24);
-                logo.Modified = true;
-            }
-            _SafeModel.Modified |= logo.Modified;
-
-            HintAtt hint = _SafeModel.Hint;
-            if (hint.Text != TbHint.Text)
-            {
-                hint.Text = TbHint.Text;
-                hint.Modified = true;
-            }
-            _SafeModel.Modified |= hint.Modified;
 
             return true;
         }
@@ -201,10 +183,14 @@ namespace Me.Amon.Pwd.V.Wiz
             }
 
             Gtd.MGtd gtd = editor.MGtd;
-            TbHint.Text = gtd.Title;
-            _SafeModel.Hint.Text = gtd.Title;
+            HintAtt hint = _SafeModel.Hint;
+            hint.Gtd = gtd;
+            hint.Text = gtd.Title;
+            hint.Icon = Resources.Hint;
             _SafeModel.Modified = true;
-            _SafeModel.Hint.Gtd = gtd;
+
+            TbHint.Text = hint.Text;
+            PbHint.Image = hint.Icon;
         }
 
         private void TbName_GotFocus(object sender, EventArgs e)
@@ -226,9 +212,17 @@ namespace Me.Amon.Pwd.V.Wiz
         #region 私有函数
         private void ChangeImgByKey(Png png)
         {
-            _APng = png;
-            png.SmallImage = png.LoadImage(_DataModel.KeyDir, CApp.IMG_KEY_EDIT_EXT, BeanUtil.NaN16);
-            PbLogo.Image = png.SmallImage;
+            LogoAtt logo = _SafeModel.Logo;
+            if (png != null && logo.Text != png.File)
+            {
+                logo.Text = png.File;
+                logo.SetSpec(LogoAtt.SPEC_LOGO_DIR, png.Path);
+                logo.LargeIcon = png.LargeImage ?? BeanUtil.NaN24;
+                logo.SmallIcon = logo.LoadImage(_DataModel.KeyDir, png.Path, png.File, CApp.IMG_KEY_EDIT_EXT, BeanUtil.NaN16);
+                logo.Modified = true;
+            }
+            _SafeModel.Modified |= logo.Modified;
+            PbLogo.Image = logo.SmallIcon;
         }
         #endregion
     }
