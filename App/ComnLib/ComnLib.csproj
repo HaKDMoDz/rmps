@@ -38,7 +38,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bar\MBar.cs" />
-    <Compile Include="Ce\Renamer.cs" />
     <Compile Include="Ce\Wrapper.cs" />
     <Compile Include="Da\DBA.cs" />
     <Compile Include="Da\DFA.cs" />
@@ -72,7 +71,6 @@
     <Compile Include="Pwd\Lib.cs" />
     <Compile Include="Pwd\LibDetail.cs" />
     <Compile Include="M\Udc.cs" />
-    <Compile Include="Ren\MRen.cs" />
     <Compile Include="Sec\MSec.cs" />
     <Compile Include="Spy\MSpy.cs" />
     <Compile Include="Sql\MSql.cs" />

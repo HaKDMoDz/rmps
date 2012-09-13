@@ -2,7 +2,6 @@
 using Me.Amon.Gtd;
 using Me.Amon.M;
 using Me.Amon.Pwd;
-using Me.Amon.Ren;
 
 namespace Me.Amon.Da
 {
@@ -89,7 +88,5 @@ namespace Me.Amon.Da
 
         IList<MGtd> FindKeyByGtdExpired();
         #endregion
-
-        IList<MRen> ListRen();
     }
 }
