@@ -197,7 +197,7 @@ namespace Me.Amon.User.Uc
         private void InitDat()
         {
             _UserModel.Load();
-            BeanUtil.UnZip("Amon.dat", _UserModel.DatHome);
+            BeanUtil.UnZip(CApp.FILE_DAT, _UserModel.DatHome);
 
             //var tmp = '\'' + _UserModel.Code + '\'';
             //var dba = _UserModel.DBObject;

@@ -402,7 +402,7 @@ namespace Me.Amon.Uc
             return true;
         }
 
-        public bool GetStrokes(string strokesId)
+        public bool GetStrokes(string strokesId, Form form)
         {
             if (_Document == null || string.IsNullOrWhiteSpace(strokesId))
             {
@@ -426,6 +426,12 @@ namespace Me.Amon.Uc
                 {
                     stroke.Action = _Actions[actionId];
                 }
+            }
+
+            if (form != null)
+            {
+                form.KeyPreview = true;
+                form.KeyDown += new KeyEventHandler(FormKeyDown);
             }
             return true;
         }
@@ -1061,10 +1067,31 @@ namespace Me.Amon.Uc
         }
         #endregion
 
+        #region 私有函数
         private static string Attribute(XmlNode node, string name, string defValue)
         {
             XmlAttribute attr = node.Attributes[name];
             return attr != null ? attr.InnerText : defValue;
         }
+
+        private void FormKeyDown(object sender, KeyEventArgs e)
+        {
+            foreach (KeyStroke<T> stroke in _Strokes)
+            {
+                if (stroke.Action == null ||
+                    e.Control ^ stroke.Control ||
+                    e.Shift ^ stroke.Shift ||
+                    e.Alt ^ stroke.Alt ||
+                    e.KeyCode != stroke.Code)
+                {
+                    continue;
+                }
+
+                stroke.Action.EventHandler(stroke, null);
+                e.Handled = true;
+                break;
+            }
+        }
+        #endregion
     }
 }

@@ -161,12 +161,10 @@
             this.Controls.Add(this.LlEcho);
             this.Controls.Add(this.PbMenu);
             this.Controls.Add(this.TcIco);
-            this.KeyPreview = true;
             this.Name = "AIco";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "图标编辑";
             this.Load += new System.EventHandler(this.AIco_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AIco_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();
             this.TcIco.ResumeLayout(false);
             this.TpIco0.ResumeLayout(false);

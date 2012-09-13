@@ -64,7 +64,6 @@ namespace Me.Amon
         public const string IAPP_APWD = "apwd";
         public const string IAPP_ASEC = "asec";
         public const string IAPP_ABAR = "abar";
-        public const string IAPP_AREN = "aren";
         public const string IAPP_AICO = "aico";
         public const string IAPP_AIMG = "aimg";
         public const string IAPP_ASPY = "aspy";

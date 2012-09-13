@@ -363,7 +363,7 @@ namespace Me.Amon.User.Uc
                 }
             }
 
-            BeanUtil.UnZip("Amon.dat", _UserModel.DatHome);
+            BeanUtil.UnZip(CApp.FILE_DAT, _UserModel.DatHome);
             _SignAc.CallBack(CApp.IAPP_APWD);
         }
         #endregion

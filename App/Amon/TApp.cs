@@ -57,9 +57,6 @@ namespace Me.Amon
                 case CApp.IAPP_ABAR:
                     App = new Bar.ABar(userModel);
                     break;
-                case CApp.IAPP_AREN:
-                    App = new Ren.ARen(userModel);
-                    break;
                 case CApp.IAPP_AICO:
                     App = new Ico.AIco(userModel);
                     break;

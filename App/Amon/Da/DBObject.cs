@@ -6,7 +6,6 @@ using Db4objects.Db4o.Config;
 using Me.Amon.Gtd;
 using Me.Amon.M;
 using Me.Amon.Pwd;
-using Me.Amon.Ren;
 using Me.Amon.Util;
 
 namespace Me.Amon.Da
@@ -355,18 +354,6 @@ namespace Me.Amon.Da
                     return gtd.Status == CGtd.STATUS_EXPIRED && CharUtil.IsValidateHash(gtd.RefId);
                 });
             return gtds;
-        }
-
-        public IList<MRen> ListRen()
-        {
-            return Container.Query<MRen>(delegate(MRen ren)
-                {
-                    return ren.UserCode == _UserModel.Code;
-                },
-                delegate(MRen a, MRen b)
-                {
-                    return a.Order.CompareTo(b.Order);
-                });
         }
     }
 }

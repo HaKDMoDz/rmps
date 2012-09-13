@@ -35,7 +35,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 262);
-            this.KeyPreview = true;
             this.Name = "AImg";
             this.Text = "图像查看器";
             this.Load += new System.EventHandler(this.AImg_Load);

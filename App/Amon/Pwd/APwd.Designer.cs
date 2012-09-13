@@ -41,12 +41,12 @@
             this.IlCatTree = new System.Windows.Forms.ImageList(this.components);
             this.LbKeyList = new System.Windows.Forms.ListBox();
             this.PlBody = new System.Windows.Forms.Panel();
+            this.FbFind = new Me.Amon.Pwd.Bean.FindBar();
             this.TbTool = new System.Windows.Forms.ToolStrip();
             this.CmKey = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.UcTimer = new System.Windows.Forms.Timer(this.components);
             this.BgWorker = new System.ComponentModel.BackgroundWorker();
-            this.FbFind = new Me.Amon.Pwd.Bean.FindBar();
             this.SsEcho.SuspendLayout();
             this.TcTool.ContentPanel.SuspendLayout();
             this.TcTool.TopToolStripPanel.SuspendLayout();
@@ -204,6 +204,15 @@
             this.PlBody.Size = new System.Drawing.Size(340, 322);
             this.PlBody.TabIndex = 1;
             // 
+            // FbFind
+            // 
+            this.FbFind.APwd = null;
+            this.FbFind.Dock = System.Windows.Forms.DockStyle.Top;
+            this.FbFind.Location = new System.Drawing.Point(0, 0);
+            this.FbFind.Name = "FbFind";
+            this.FbFind.Size = new System.Drawing.Size(340, 29);
+            this.FbFind.TabIndex = 0;
+            // 
             // TbTool
             // 
             this.TbTool.Dock = System.Windows.Forms.DockStyle.None;
@@ -225,15 +234,6 @@
             // 
             this.BgWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BgWorker_DoWork);
             // 
-            // FbFind
-            // 
-            this.FbFind.APwd = null;
-            this.FbFind.Dock = System.Windows.Forms.DockStyle.Top;
-            this.FbFind.Location = new System.Drawing.Point(0, 0);
-            this.FbFind.Name = "FbFind";
-            this.FbFind.Size = new System.Drawing.Size(340, 29);
-            this.FbFind.TabIndex = 0;
-            // 
             // APwd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -244,9 +244,9 @@
             this.Controls.Add(this.MbMenu);
             this.MainMenuStrip = this.MbMenu;
             this.Name = "APwd";
+            this.Text = "阿木密码箱";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.APwd_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Main_KeyDown);
             this.Resize += new System.EventHandler(this.Main_Resize);
             this.SsEcho.ResumeLayout(false);
             this.SsEcho.PerformLayout();

@@ -330,29 +330,10 @@ namespace Me.Amon.Ico
             _XmlMenu = new XmlMenu<AIco>(this, null);
             if (_XmlMenu.Load(Path.Combine(_UserModel.DatHome, EIco.XML_MENU)))
             {
-                _XmlMenu.GetStrokes("AIco");
+                _XmlMenu.GetStrokes("AIco", this);
                 _XmlMenu.GetPopMenu("AIco", CmMenu);
                 _XmlMenu.GetPopMenu("Icl", CmIcl);
                 _XmlMenu.GetPopMenu("Ico", CmIco);
-            }
-        }
-
-        private void AIco_KeyDown(object sender, KeyEventArgs e)
-        {
-            foreach (KeyStroke<AIco> stroke in _XmlMenu.KeyStrokes)
-            {
-                if (stroke.Action == null ||
-                    e.Control ^ stroke.Control ||
-                    e.Shift ^ stroke.Shift ||
-                    e.Alt ^ stroke.Alt ||
-                    e.KeyCode != stroke.Code)
-                {
-                    continue;
-                }
-
-                e.Handled = true;
-                stroke.Action.EventHandler(stroke, null);
-                break;
             }
         }
 

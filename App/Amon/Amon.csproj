@@ -32,7 +32,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
     <ApplicationRevision>2</ApplicationRevision>
-    <ApplicationVersion>7.2.0.%2a</ApplicationVersion>
+    <ApplicationVersion>7.2.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -877,27 +877,6 @@
     </Compile>
     <Compile Include="Pwd\V\Wiz\IAttEdit.cs" />
     <Compile Include="Pwd\V\Wiz\IWizView.cs" />
-    <Compile Include="Ren\ARen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Ren\ARen.Designer.cs">
-      <DependentUpon>ARen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Ren\ERen.cs" />
-    <Compile Include="Ren\E\ARenAction.cs" />
-    <Compile Include="Ren\E\ExitAction.cs" />
-    <Compile Include="Ren\E\File\AppendAction.cs" />
-    <Compile Include="Ren\E\File\ClearAction.cs" />
-    <Compile Include="Ren\E\File\DeleteAction.cs" />
-    <Compile Include="Ren\E\File\MoveDownAction.cs" />
-    <Compile Include="Ren\E\File\MoveUpAction.cs" />
-    <Compile Include="Ren\E\Rule\DeleteAction.cs" />
-    <Compile Include="Ren\E\Rule\ExportAction.cs" />
-    <Compile Include="Ren\E\Rule\ImportAction.cs" />
-    <Compile Include="Ren\E\Rule\MoveDownAction.cs" />
-    <Compile Include="Ren\E\Rule\MoveUpAction.cs" />
-    <Compile Include="Ren\E\Rule\SaveasAction.cs" />
-    <Compile Include="Ren\TRen.cs" />
     <Compile Include="Uc\GtdTips.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1340,9 +1319,6 @@
     <EmbeddedResource Include="Pwd\V\Wiz\BeanText.resx">
       <DependentUpon>BeanText.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Ren\ARen.resx">
-      <DependentUpon>ARen.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Uc\GtdTips.resx">
       <DependentUpon>GtdTips.cs</DependentUpon>
     </EmbeddedResource>
@@ -1529,9 +1505,6 @@
     <Folder Include="Pwd\C\" />
     <Folder Include="Pwd\E\Edit\" />
     <Folder Include="Pwd\E\Skin\" />
-    <Folder Include="Ren\C\" />
-    <Folder Include="Ren\M\" />
-    <Folder Include="Ren\V\" />
     <Folder Include="Spy\C\" />
     <Folder Include="Spy\E\" />
     <Folder Include="Spy\M\" />

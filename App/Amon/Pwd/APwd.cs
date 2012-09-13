@@ -97,12 +97,12 @@ namespace Me.Amon.Pwd
             _XmlMenu = new XmlMenu<APwd>(this, _ViewModel);
             if (_XmlMenu.Load(Path.Combine(_UserModel.DatHome, CPwd.XML_MENU)))
             {
-                _XmlMenu.GetStrokes("APwd");
                 _XmlMenu.GetMenuBar("APwd", MbMenu);
                 _XmlMenu.GetToolBar("APwd", TbTool);
                 _XmlMenu.GetPopMenu("ACat", CmCat);
                 _XmlMenu.GetPopMenu("AKey", CmKey);
                 //_XmlMenu.GetPopMenu("AAtt", CmAtt);
+                _XmlMenu.GetStrokes("APwd", this);
             }
             #endregion
 
@@ -130,9 +130,6 @@ namespace Me.Amon.Pwd
                 default:
                     break;
             }
-
-            Text = "阿木密码箱";
-            KeyPreview = true;
 
             _UserModel.AppendHandler(new AmonHandler<string>(ShowEcho));
         }
@@ -221,25 +218,6 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 事件处理
-        private void Main_KeyDown(object sender, KeyEventArgs e)
-        {
-            foreach (KeyStroke<APwd> stroke in _XmlMenu.KeyStrokes)
-            {
-                if (stroke.Action == null ||
-                    e.Control ^ stroke.Control ||
-                    e.Shift ^ stroke.Shift ||
-                    e.Alt ^ stroke.Alt ||
-                    e.KeyCode != stroke.Code)
-                {
-                    continue;
-                }
-
-                stroke.Action.EventHandler(stroke, null);
-                e.Handled = true;
-                break;
-            }
-        }
-
         private void Main_Resize(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Minimized)
@@ -505,10 +483,10 @@ namespace Me.Amon.Pwd
 
             //最后把要显示的文字画在背景图片上
             int y = e.Bounds.Y + 2;
-            e.Graphics.DrawString(key.Title, this.Font, Brushes.Black, e.Bounds.X + 30, y);
+            e.Graphics.DrawString(key.Title, LbKeyList.Font, Brushes.Black, e.Bounds.X + 30, y);
 
             y = e.Bounds.Y + e.Bounds.Height;
-            e.Graphics.DrawString(key.AccessTime, this.Font, Brushes.Gray, e.Bounds.X + 30, y - 14);
+            e.Graphics.DrawString(key.AccessTime, LbKeyList.Font, Brushes.Gray, e.Bounds.X + 30, y - 14);
 
             int x = e.Bounds.X + e.Bounds.Width;
             y -= 16;

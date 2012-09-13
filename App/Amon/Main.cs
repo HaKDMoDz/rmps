@@ -92,7 +92,7 @@ namespace Me.Amon
             }
             BeanUtil.CenterToParent(_Input, window);
             _Input.Show(window, message, deftext);
-            return _Input.Message;
+            return _Input.DialogResult == DialogResult.OK ? _Input.Message : null;
         }
 
         public static void ShowWaiting(string message)

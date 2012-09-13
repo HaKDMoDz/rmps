@@ -7,14 +7,11 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using ICSharpCode.SharpZipLib.Checksums;
 using ICSharpCode.SharpZipLib.Zip;
-using Me.Amon.Uc;
 
 namespace Me.Amon.Util
 {
     public class BeanUtil
     {
-        public static IApp IApp { get; set; }
-
         public static Stream Open(string path, string file)
         {
             if (Regex.IsMatch(file, "^[a-zA-z]{2,}:/{2,3}[^\\s]+"))

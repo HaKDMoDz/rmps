@@ -7,7 +7,6 @@ using Me.Amon.Auth;
 using Me.Amon.Da;
 using Me.Amon.M;
 using Me.Amon.Pwd;
-using Me.Amon.Ren;
 using Me.Amon.Util;
 
 namespace Me.Amon.User.Uc
@@ -205,7 +204,7 @@ namespace Me.Amon.User.Uc
         private void InitDat()
         {
             _UserModel.Load();
-            BeanUtil.UnZip("Amon.dat", _UserModel.DatHome);
+            BeanUtil.UnZip(CApp.FILE_DAT, _UserModel.DatHome);
 
             string file;
             StreamReader stream;
@@ -299,27 +298,6 @@ namespace Me.Amon.User.Uc
             }
             #endregion
 
-            #region 重命名
-            file = Path.Combine(_UserModel.DatHome, "ARen.xml");
-            if (File.Exists(file))
-            {
-                stream = new StreamReader(file);
-                using (XmlReader reader = XmlReader.Create(stream, setting))
-                {
-                    MRen ren;
-                    while (reader.Name == "Ren" || reader.ReadToFollowing("Ren"))
-                    {
-                        ren = new MRen();
-                        if (!ren.FromXml(reader))
-                        {
-                            continue;
-                        }
-                        _UserModel.DBA.SaveVcs(ren);
-                    }
-                }
-                stream.Close();
-            }
-            #endregion
             _SignAc.CallBack(CApp.IAPP_APWD);
         }
         #endregion
