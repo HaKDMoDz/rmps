@@ -385,7 +385,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "ARen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "阿木更名器";
+            this.Text = "阿木重命名";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ARen_FormClosing);
             this.Load += new System.EventHandler(this.ARen_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

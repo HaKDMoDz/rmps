@@ -90,6 +90,12 @@ namespace Me.Amon.M
             return _RuleList[idx];
         }
 
+        public void RemoveRuleAt(int index)
+        {
+            _RuleList.RemoveAt(index);
+            Modified = true;
+        }
+
         public void SaveRules()
         {
             StreamWriter output = new StreamWriter(Path.Combine(DatHome, "ARen-Lib.xml"));

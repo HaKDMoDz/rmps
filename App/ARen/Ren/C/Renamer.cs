@@ -222,6 +222,18 @@ namespace Me.Amon.Ce
         /// <returns></returns>
         private bool DecodeCtl(string cmd)
         {
+            if (NUMBER == cmd[Index])
+            {
+                _Buffer.Append(TMP_CREATE_TIME);
+                Index += 1;
+                return DecodeFmt(cmd);
+            }
+            if (CHARACTER == cmd[Index])
+            {
+                _Buffer.Append(TMP_HOLD);
+                Index += 1;
+                return DecodeCut(cmd);
+            }
             if (FILE_NAME == cmd[Index])
             {
                 _Buffer.Append(TMP_FILE_NAME_UPPER);
@@ -234,22 +246,11 @@ namespace Me.Amon.Ce
                 Index += 1;
                 return DecodeRpl(cmd);
             }
-            if (NUMBER == cmd[Index])
-            {
-                _Buffer.Append(TMP_CREATE_TIME);
-                Index += 1;
-                return DecodeFmt(cmd);
-            }
             if (ORIGIN == cmd[Index])
             {
                 _Buffer.Append(TMP_ORIGIN_UPPER);
                 Index += 1;
                 return true;
-            }
-            if (ENUM_START == cmd[Index])
-            {
-                _Buffer.Append(TMP_HOLD);
-                return DecodeCut(cmd);
             }
 
             Error = "未知的转义字符：\\" + cmd[Index];
@@ -263,6 +264,18 @@ namespace Me.Amon.Ce
         /// <returns></returns>
         private bool DecodeCtr(string cmd)
         {
+            if (NUMBER == cmd[Index])
+            {
+                _Buffer.Append(TMP_UPDATE_TIME);
+                Index += 1;
+                return DecodeFmt(cmd);
+            }
+            if (CHARACTER == cmd[Index])
+            {
+                _Buffer.Append(TMP_TRIM);
+                Index += 1;
+                return DecodeCut(cmd);
+            }
             if (FILE_NAME == cmd[Index])
             {
                 _Buffer.Append(TMP_FILE_NAME_LOWER);
@@ -275,22 +288,11 @@ namespace Me.Amon.Ce
                 Index += 1;
                 return DecodeRpl(cmd);
             }
-            if (NUMBER == cmd[Index])
-            {
-                _Buffer.Append(TMP_UPDATE_TIME);
-                Index += 1;
-                return DecodeFmt(cmd);
-            }
             if (ORIGIN == cmd[Index])
             {
                 _Buffer.Append(TMP_ORIGIN_LOWER);
                 Index += 1;
                 return true;
-            }
-            if (ENUM_START == cmd[Index])
-            {
-                _Buffer.Append(TMP_TRIM);
-                return DecodeCut(cmd);
             }
 
             Error = "未知的转义字符：/" + cmd[Index];

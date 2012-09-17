@@ -70,14 +70,14 @@
       <Order>9</Order>
       <Id />
       <Name>使用文件创建日期命名</Name>
-      <Command>\:.?</Command>
+      <Command>\:_:&lt;1,1,4,0&gt;.?</Command>
       <Remark />
     </Ren>
     <Ren>
       <Order>10</Order>
       <Id />
       <Name>使用文件修改日期命名</Name>
-      <Command>/:.?</Command>
+      <Command>/:_:&lt;1,1,4,0&gt;.?</Command>
       <Remark />
     </Ren>
     <Ren>
@@ -105,14 +105,14 @@
       <Order>14</Order>
       <Id />
       <Name>从第2个位置起截取3个字符</Name>
-      <Command>\&lt;2:3&gt;.?</Command>
+      <Command>\|&lt;2:3&gt;.?</Command>
       <Remark />
     </Ren>
     <Ren>
       <Order>15</Order>
       <Id />
       <Name>从第2个位置起去除3个字符</Name>
-      <Command>/&lt;2:3&gt;.?</Command>
+      <Command>/|&lt;2:3&gt;.?</Command>
       <Remark />
     </Ren>
   </Rens>

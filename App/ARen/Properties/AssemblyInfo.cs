@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("ARen")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("阿木重命名")]
+[assembly: AssemblyDescription("　　阿木重命名是一款免费且开源的文件重命名软件，以文件名中的禁用字符为特殊功能来实现基于表达式的重命名，支持自定义命名规则、支持多文件重命名。")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ARen")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyCompany("Winshine")]
+[assembly: AssemblyProduct("阿木重命名")]
+[assembly: AssemblyCopyright("Copyright © Amon 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

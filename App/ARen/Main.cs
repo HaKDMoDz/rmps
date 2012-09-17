@@ -23,8 +23,8 @@ namespace Me.Amon
 
         public static void ShowAbout(IWin32Window owner)
         {
-            //About about = new About();
-            //about.ShowDialog(owner);
+            About about = new About();
+            about.ShowDialog(owner);
         }
 
         public static void ShowAlert(IWin32Window owner, string alert)

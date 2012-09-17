@@ -9,10 +9,11 @@ using Me.Amon.Ce;
 using Me.Amon.M;
 using Me.Amon.Ren.M;
 using Me.Amon.Uc;
+using Me.Amon.Uw;
 
 namespace Me.Amon.Ren
 {
-    public partial class ARen : Form
+    public partial class ARen : Form, IApp
     {
         private UserModel _UserModel;
         private Renamer _Renamer;
@@ -31,6 +32,17 @@ namespace Me.Amon.Ren
         #endregion
 
         #region 公共函数
+        public int AppId
+        {
+            get;
+            set;
+        }
+
+        public Form Form
+        {
+            get { return this; }
+        }
+
         public void ShowTips(Control control, string caption)
         {
             TpTips.SetToolTip(control, caption);
@@ -45,6 +57,16 @@ namespace Me.Amon.Ren
         public void ShowEcho(string message, int delay)
         {
             LlEcho.Text = message;
+        }
+
+        public bool WillExit()
+        {
+            return true;
+        }
+
+        public bool SaveData()
+        {
+            return true;
         }
 
         public bool Review()
@@ -157,20 +179,23 @@ namespace Me.Amon.Ren
             // 临时文件名更改为目标文件名
             try
             {
+                int idx = 0;
                 foreach (TRen ren in _FileList)
                 {
-                    if (string.IsNullOrEmpty(ren.Temp))
+                    if (string.IsNullOrEmpty(ren.Temp) || !File.Exists(ren.Temp))
                     {
-                        continue;
-                    }
-                    if (!File.Exists(ren.Temp))
-                    {
+                        idx += 1;
                         continue;
                     }
 
-                    tmp = Path.Combine(ren.Path, ren.DstName);
+                    tmp = GenDup(ren);
+
                     File.Move(ren.Temp, tmp);
                     File.SetAttributes(tmp, GetAtt(ren.FileAtt));
+
+                    ren.SrcName = ren.DstName;
+                    ren.File = Path.Combine(ren.Path, ren.SrcName);
+                    GvFile.Rows[idx++].Cells[0].Value = ren.SrcName;
                 }
             }
             catch (Exception exp)
@@ -240,13 +265,14 @@ namespace Me.Amon.Ren
 
         public void DeleteSelectedRule()
         {
-            MRen ren = LbRule.SelectedItem as MRen;
-            if (ren == null)
+            int idx = LbRule.SelectedIndex;
+            if (idx < 0 || idx >= LbRule.Items.Count)
             {
                 Main.ShowAlert(this, "请选择您要删除的模板！");
                 return;
             }
 
+            MRen ren = _UserModel.GetRule(idx);
             string msg = string.Format("确认要删除模板 {0} 吗？", ren.Name);
             if (DialogResult.Yes != MessageBox.Show(this, msg, "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
             {
@@ -254,6 +280,7 @@ namespace Me.Amon.Ren
             }
 
             LbRule.Items.Remove(ren);
+            _UserModel.RemoveRuleAt(idx);
         }
 
         public void MoveUpSelectedRule()
@@ -356,6 +383,7 @@ namespace Me.Amon.Ren
                 return;
             }
             DataGridViewRow row = GvFile.SelectedRows[0];
+            _FileList.RemoveAt(row.Index);
             GvFile.Rows.RemoveAt(row.Index);
             _Reviewed = false;
         }
@@ -439,6 +467,23 @@ namespace Me.Amon.Ren
             _Reviewed = false;
         }
         #endregion
+
+        /// <summary>
+        /// 快捷键
+        /// </summary>
+        public void ShowShortCuts()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Key");
+            dt.Columns.Add("Memo");
+            foreach (KeyStroke<ARen> stroke in _XmlMenu.KeyStrokes)
+            {
+                dt.Rows.Add(stroke.Key, stroke.Memo);
+            }
+
+            HotKeys keys = new HotKeys(Me.Amon.Properties.Resources.Icon, dt);
+            keys.ShowDialog(this);
+        }
         #endregion
 
         #region 事件处理
@@ -453,7 +498,7 @@ namespace Me.Amon.Ren
             _Renamer = new Renamer();
 
             GvInfo.AutoGenerateColumns = false;
-            LlInfo.Text = "一些特殊字符（:|*?\"<>\\/）在命名表达式中的含义：";
+            LlInfo.Text = "一些文件名中的禁用字符（:|*?\"<>\\/）在命名表达式中的用法：";
             DataTable dt = new DataTable();
             dt.Columns.Add("KeyCode", typeof(string));
             dt.Columns.Add("KeyInfo", typeof(string));
@@ -466,22 +511,22 @@ namespace Me.Amon.Ren
             dt.Rows.Add("*<ab:c>", "文件名表达式：将文件名中的ab替换为c");
             dt.Rows.Add("?", "扩展名表达式：引用原扩展名");
             dt.Rows.Add("?<ab:c>", "扩展名表达式：将扩展名中的ab替换为c");
-            dt.Rows.Add("\"", "字符表达式：对应位置的单个原有字符");
+            //dt.Rows.Add("\"", "字符表达式：对应位置的单个原有字符");
             dt.Rows.Add("<>", "区间表达式：用于限制以上特殊含义字符的取值空间");
-            dt.Rows.Add("/", "正向转义字符");
-            dt.Rows.Add("/*", "转义：将文件名转换为小写");
-            dt.Rows.Add("/?", "转义：将扩展名转换为小写");
-            dt.Rows.Add("/\"", "转义：将原有字符转换为小写");
+            dt.Rows.Add("/", "正向转义字符，不能单独使用");
             dt.Rows.Add("/:", "转义：使用文件修改时间，默认格式为 yyyyMMddHHmmss");
             dt.Rows.Add("/:<yyyy-MM-dd HH.mm.ss>", "转义：使用文件修改时间，使用指定格式");
-            dt.Rows.Add("/<1,4>", "转义：字符裁剪，从第1个字符开始裁剪掉后续4个字符");
-            dt.Rows.Add("\\", "反向转义字符");
-            dt.Rows.Add("\\*", "转义：将文件名转换为大写");
-            dt.Rows.Add("\\?", "转义：将扩展名转换为大写");
-            dt.Rows.Add("\\\"", "转义：将原有字符转换为大写");
+            dt.Rows.Add("/|<1,4>", "转义：字符裁剪，从第1个字符开始裁剪掉后续4个字符");
+            dt.Rows.Add("/*", "转义：将文件名转换为小写");
+            dt.Rows.Add("/?", "转义：将扩展名转换为小写");
+            //dt.Rows.Add("/\"", "转义：将原有字符转换为小写");
+            dt.Rows.Add("\\", "反向转义字符，不能单独使用");
             dt.Rows.Add("\\:", "转义：使用文件创建时间，默认时间格式为 yyyyMMddHHmmss");
             dt.Rows.Add("\\:<yyyy-MM-dd HH.mm.ss>", "转义：使用文件创建时间，使用指定格式");
-            dt.Rows.Add("/<1,4>", "转义：字符截取，从第1个字符开始仅保留后续4个字符");
+            dt.Rows.Add("\\|<1,4>", "转义：字符截取，从第1个字符开始仅保留后续4个字符");
+            dt.Rows.Add("\\*", "转义：将文件名转换为大写");
+            dt.Rows.Add("\\?", "转义：将扩展名转换为大写");
+            //dt.Rows.Add("\\\"", "转义：将原有字符转换为大写");
             GvInfo.DataSource = dt;
 
             foreach (MRen ren in _UserModel.LoadRules())
@@ -610,7 +655,7 @@ namespace Me.Amon.Ren
         {
             if (_LastRule != TbRule.Text.Trim() || !_Reviewed)
             {
-                if (Review())
+                if (!Review())
                 {
                     return;
                 }
@@ -647,6 +692,23 @@ namespace Me.Amon.Ren
                 att |= FileAttributes.Archive;
             }
             return att;
+        }
+
+        private string GenDup(TRen ren)
+        {
+            string tmp = Path.Combine(ren.Path, ren.DstName);
+            if (File.Exists(tmp))
+            {
+                string fn = Path.GetFileNameWithoutExtension(ren.DstName);
+                string fe = Path.GetExtension(ren.DstName);
+                int idx = 1;
+                do
+                {
+                    ren.DstName = string.Format("{0} ({1}){2}", fn, idx++, fe);
+                    tmp = Path.Combine(ren.Path, ren.DstName);
+                } while (File.Exists(tmp));
+            }
+            return tmp;
         }
         #endregion
     }
