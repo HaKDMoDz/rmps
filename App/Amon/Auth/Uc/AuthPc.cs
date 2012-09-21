@@ -9,7 +9,7 @@ namespace Me.Amon.Auth.Uc
     public partial class AuthPc : UserControl, IAuthAc
     {
         private AuthAc _AuthAc;
-        private UserModel _UserModel;
+        private AUserModel _UserModel;
 
         #region 构造函数
         public AuthPc()
@@ -17,7 +17,7 @@ namespace Me.Amon.Auth.Uc
             InitializeComponent();
         }
 
-        public AuthPc(AuthAc authAc, UserModel userModel)
+        public AuthPc(AuthAc authAc, AUserModel userModel)
         {
             _AuthAc = authAc;
             _UserModel = userModel;

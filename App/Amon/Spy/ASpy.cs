@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using Me.Amon.M;
+using Me.Amon.Spy.M;
 
 namespace Me.Amon.Spy
 {
@@ -13,9 +14,9 @@ namespace Me.Amon.Spy
             InitializeComponent();
         }
 
-        public ASpy(UserModel userModel)
+        public ASpy(AUserModel userModel)
         {
-            _UserModel = userModel;
+            _UserModel = userModel as UserModel;
 
             InitializeComponent();
 

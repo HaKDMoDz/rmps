@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Auth;
-using Me.Amon.Da;
+using Me.Amon.Da.Df;
 using Me.Amon.M;
 using Me.Amon.Pwd;
 using Me.Amon.Util;
@@ -16,8 +16,8 @@ namespace Me.Amon.User.Uc
     /// </summary>
     public partial class SignPc : UserControl, ISignAc
     {
-        private UserModel _UserModel;
-        private DFAccess _Prop;
+        private AUserModel _UserModel;
+        private DFEngine _Prop;
         private SignAc _SignAc;
 
         #region 构造函数
@@ -26,7 +26,7 @@ namespace Me.Amon.User.Uc
             InitializeComponent();
         }
 
-        public SignPc(SignAc signAc, UserModel userModel)
+        public SignPc(SignAc signAc, AUserModel userModel)
         {
             _SignAc = signAc;
             _UserModel = userModel;
@@ -71,7 +71,7 @@ namespace Me.Amon.User.Uc
 
             name = name.ToLower();
             string sysFile = Path.Combine(_UserModel.SysHome, CApp.AMON_SYS);
-            _Prop = new DFAccess();
+            _Prop = new DFEngine();
             _Prop.Load(sysFile);
             string home = _Prop.Get(string.Format(CApp.AMON_SYS_HOME, name));
             if (!string.IsNullOrEmpty(home))

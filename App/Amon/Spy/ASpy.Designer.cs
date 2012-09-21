@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.appWindow1 = new com.magickms.target.app.AppWindow();
+            this.appWindow1 = new Me.Amon.Target.App.AppWindow();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.SuspendLayout();
             // 
@@ -62,7 +62,7 @@
 
         #endregion
 
-        private com.magickms.target.app.AppWindow appWindow1;
+        private Me.Amon.Target.App.AppWindow appWindow1;
         private System.Windows.Forms.PropertyGrid propertyGrid1;
     }
 }

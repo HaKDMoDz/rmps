@@ -16,7 +16,7 @@ namespace Me.Amon.Auth.Uc
     public partial class AuthOl : UserControl, IAuthAc
     {
         private AuthAc _AuthAc;
-        private UserModel _UserModel;
+        private AUserModel _UserModel;
         private string _OldPass;
         private string _NewPass;
 
@@ -26,7 +26,7 @@ namespace Me.Amon.Auth.Uc
             InitializeComponent();
         }
 
-        public AuthOl(AuthAc authAc, UserModel userModel)
+        public AuthOl(AuthAc authAc, AUserModel userModel)
         {
             _AuthAc = authAc;
             _UserModel = userModel;

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using Me.Amon.Api.User32;
 using Me.Amon.Properties;
 
-namespace com.magickms.target.app
+namespace Me.Amon.Target.App
 {
     public partial class AppWindow : UserControl
     {

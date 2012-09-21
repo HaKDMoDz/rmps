@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Me.Amon.Pwd;
 
 namespace Me.Amon.M
 {
@@ -13,7 +12,7 @@ namespace Me.Amon.M
             _UdcKey = "aucs000000000005";
         }
 
-        public void Init(UserModel userModel)
+        public void Init(AUserModel userModel)
         {
             _UdcList = new List<Udc>();
             _UdcList.Add(new Udc { Id = "aucs000000000001", Name = "仅数字", Tips = "仅数字", Data = "0123456789" });

@@ -32,7 +32,7 @@ namespace Me.Amon.Bar
             InitializeComponent();
         }
 
-        public ABar(UserModel userModel)
+        public ABar(AUserModel userModel)
         {
             InitializeComponent();
 

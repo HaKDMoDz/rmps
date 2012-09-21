@@ -6,7 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Auth;
-using Me.Amon.Da;
+using Me.Amon.Da.Df;
 using Me.Amon.M;
 using Me.Amon.Pwd;
 using Me.Amon.Util;
@@ -22,7 +22,7 @@ namespace Me.Amon.User.Uc
         private string _Mail;
         private string _Pass;
         private string _Root;
-        private UserModel _UserModel;
+        private AUserModel _UserModel;
         private DFAccess _Prop;
         private SignAc _SignAc;
 
@@ -32,7 +32,7 @@ namespace Me.Amon.User.Uc
             InitializeComponent();
         }
 
-        public SignOl(SignAc signAc, UserModel userModel)
+        public SignOl(SignAc signAc, AUserModel userModel)
         {
             _SignAc = signAc;
             _UserModel = userModel;

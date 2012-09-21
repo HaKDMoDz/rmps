@@ -11,7 +11,7 @@ namespace Me.Amon.Uw
     public partial class UdcEditor : Form
     {
         private Udc _Item;
-        private UserModel _UserModel;
+        private AUserModel _UserModel;
         private UdcModel _UdcModel;
 
         #region 构造函数
@@ -20,7 +20,7 @@ namespace Me.Amon.Uw
             InitializeComponent();
         }
 
-        public UdcEditor(UserModel userModel)
+        public UdcEditor(AUserModel userModel)
         {
             _UserModel = userModel;
 

@@ -1,4 +1,4 @@
-﻿namespace com.magickms.target.app
+﻿namespace Me.Amon.Target.App
 {
     partial class AppWindow
     {

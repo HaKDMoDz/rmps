@@ -82,5 +82,29 @@ namespace Me.Amon.Properties {
                 this["PlugIns"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RobotName {
+            get {
+                return ((string)(this["RobotName"]));
+            }
+            set {
+                this["RobotName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string OwnerName {
+            get {
+                return ((string)(this["OwnerName"]));
+            }
+            set {
+                this["OwnerName"] = value;
+            }
+        }
     }
 }

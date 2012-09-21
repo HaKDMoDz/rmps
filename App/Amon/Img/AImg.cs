@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using Me.Amon.Img.M;
 using Me.Amon.Img.V;
 using Me.Amon.M;
 
@@ -21,9 +22,9 @@ namespace Me.Amon.Img
             InitializeComponent();
         }
 
-        public AImg(UserModel userModel)
+        public AImg(AUserModel userModel)
         {
-            _UserModel = userModel;
+            _UserModel = userModel as UserModel;
 
             InitializeComponent();
 

@@ -23,7 +23,7 @@ namespace Me.Amon
         private static Input _Input;
         private static Waiting _Waiting;
 
-        private UserModel _UserModel;
+        private AUserModel _UserModel;
         private IAmon _Amon;
         private List<TApp> _Apps;
         private TApp _TApp;
@@ -216,7 +216,7 @@ namespace Me.Amon
         {
             Icon = Me.Amon.Properties.Resources.Icon;
 
-            _UserModel = new UserModel();
+            _UserModel = new AUserModel();
             _UserModel.Init();
 
             // 系统日志

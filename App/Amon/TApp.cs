@@ -48,7 +48,7 @@ namespace Me.Amon
             IsDefault = "true" == Vcs.Attribute(node, "Default", "").ToLower();
         }
 
-        public IApp CreateApp(UserModel userModel)
+        public IApp CreateApp(AUserModel userModel)
         {
             Main.LogInfo("创建新实例：" + Id);
 
@@ -64,7 +64,7 @@ namespace Me.Amon
                     App = new Img.AImg(userModel);
                     break;
                 case CApp.IAPP_ASPY:
-                    App = new Spy.ASpy(userModel);
+                    //App = new Spy.ASpy(userModel);
                     break;
                 default:
                     break;

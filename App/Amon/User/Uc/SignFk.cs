@@ -7,14 +7,14 @@ namespace Me.Amon.User.Uc
     public partial class SignFk : UserControl, ISignAc
     {
         private SignAc _SignAc;
-        private UserModel _UserModel;
+        private AUserModel _UserModel;
 
         public SignFk()
         {
             InitializeComponent();
         }
 
-        public SignFk(SignAc signAc, UserModel userModel)
+        public SignFk(SignAc signAc, AUserModel userModel)
         {
             _SignAc = signAc;
             _UserModel = userModel;

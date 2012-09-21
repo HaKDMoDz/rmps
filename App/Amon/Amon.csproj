@@ -99,31 +99,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\Enums\GetWindow.cs" />
-    <Compile Include="Api\Enums\InputType.cs" />
-    <Compile Include="Api\Enums\KeyEvent.cs" />
-    <Compile Include="Api\Enums\MouseButton.cs" />
-    <Compile Include="Api\Enums\MouseEvent.cs" />
-    <Compile Include="Api\Enums\PenStyles.cs" />
-    <Compile Include="Api\Enums\RopMode.cs" />
-    <Compile Include="Api\Enums\ShowWindow.cs" />
-    <Compile Include="Api\Enums\StockObjects.cs" />
-    <Compile Include="Api\Enums\SystemMetrics.cs" />
-    <Compile Include="Api\Enums\VirtualKey.cs" />
-    <Compile Include="Api\Enums\WindowMessage.cs" />
-    <Compile Include="Api\Enums\WMHotKeys.cs" />
-    <Compile Include="Api\Gdi32\Gdi32.cs" />
-    <Compile Include="Api\Gdi32\Gdi32API.cs" />
-    <Compile Include="Api\Struct\HARDWAREINPUT.cs" />
-    <Compile Include="Api\Struct\INPUT.cs" />
-    <Compile Include="Api\Struct\KEYBDINPUT.cs" />
-    <Compile Include="Api\Struct\MOUSEINPUT.cs" />
-    <Compile Include="Api\Struct\POINT.cs" />
-    <Compile Include="Api\Struct\RECT.cs" />
-    <Compile Include="Api\Struct\SIZE.cs" />
-    <Compile Include="Api\Struct\WINDOWPLACEMENT.cs" />
-    <Compile Include="Api\User32\User32.cs" />
-    <Compile Include="Api\User32\User32API.cs" />
     <Compile Include="Bar\ABar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,7 +168,10 @@
       <DependentUpon>Vcard.cs</DependentUpon>
     </Compile>
     <Compile Include="C\VoidHandler.cs" />
+    <Compile Include="Da\DBA.cs" />
+    <Compile Include="Da\DFA.cs" />
     <Compile Include="Gtd\EGtd.cs" />
+    <Compile Include="Gtd\M\UserModel.cs" />
     <Compile Include="Gtd\V\GtdEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -315,6 +293,7 @@
     <Compile Include="Ico\E\SaveIcoAction.cs" />
     <Compile Include="Ico\IIco.cs" />
     <Compile Include="Ico\M\Abc.cs" />
+    <Compile Include="Ico\M\UserModel.cs" />
     <Compile Include="Ico\TIco.cs" />
     <Compile Include="Img\AImg.cs">
       <SubType>Form</SubType>
@@ -334,6 +313,7 @@
     <Compile Include="Ico\V\IcoEditor.Designer.cs">
       <DependentUpon>IcoEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Img\M\UserModel.cs" />
     <Compile Include="Img\V\ALarge.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -346,6 +326,7 @@
     <Compile Include="Img\V\ASmall.Designer.cs">
       <DependentUpon>ASmall.cs</DependentUpon>
     </Compile>
+    <Compile Include="M\AUserModel.cs" />
     <Compile Include="M\IViewModel.cs" />
     <Compile Include="OS\IOsd.cs" />
     <Compile Include="OS\KuaipanOsd.cs" />
@@ -362,6 +343,11 @@
     <Compile Include="OS\Kuaipan\Param.cs" />
     <Compile Include="OS\Kuaipan\Oauth.cs" />
     <Compile Include="OS\Kuaipan\OauthToken.cs" />
+    <Compile Include="Pwd\M\Dir.cs" />
+    <Compile Include="Pwd\M\Key.cs" />
+    <Compile Include="Pwd\M\KeyLog.cs" />
+    <Compile Include="Pwd\M\Lib.cs" />
+    <Compile Include="Pwd\M\LibDetail.cs" />
     <Compile Include="TApp.cs" />
     <Compile Include="Pwd\Att.cs" />
     <Compile Include="Pwd\Bean\ACall.cs">
@@ -521,14 +507,14 @@
     <Compile Include="Pwd\E\_Key\SortKeyAction.cs" />
     <Compile Include="Pwd\Png.cs" />
     <Compile Include="Pwd\_Att\CallAtt.cs" />
-    <Compile Include="Da\DBAccess.cs" />
-    <Compile Include="Da\DBObject.cs" />
-    <Compile Include="Da\DCAccess.cs" />
-    <Compile Include="Da\DCConst.cs" />
-    <Compile Include="Da\DCObject.cs" />
-    <Compile Include="Da\DFAccess.cs" />
-    <Compile Include="Da\DFConst.cs" />
-    <Compile Include="Da\DFObject.cs" />
+    <Compile Include="Da\Db\DBAccess.cs" />
+    <Compile Include="Da\Db\DBObject.cs" />
+    <Compile Include="Da\Dc\DCAccess.cs" />
+    <Compile Include="Da\Dc\DCConst.cs" />
+    <Compile Include="Da\Dc\DCObject.cs" />
+    <Compile Include="Da\Df\DFAccess.cs" />
+    <Compile Include="Da\Df\DFConst.cs" />
+    <Compile Include="Da\Df\DFObject.cs" />
     <Compile Include="C\AmonHandler.cs" />
     <Compile Include="Gtd\AGtd.cs">
       <SubType>Form</SubType>
@@ -537,7 +523,7 @@
       <DependentUpon>AGtd.cs</DependentUpon>
     </Compile>
     <Compile Include="IApp.cs" />
-    <Compile Include="Da\DBConst.cs" />
+    <Compile Include="Da\Db\DBConst.cs" />
     <Compile Include="Ico\AIco.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -606,7 +592,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="M\UdcModel.cs" />
-    <Compile Include="M\UserModel.cs">
+    <Compile Include="Pwd\M\UserModel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Pwd\M\ViewModel.cs">
@@ -883,6 +869,77 @@
     <Compile Include="Uc\GtdTips.Designer.cs">
       <DependentUpon>GtdTips.cs</DependentUpon>
     </Compile>
+    <Compile Include="Uc\Itemi.cs" />
+    <Compile Include="Uc\Items.cs" />
+    <Compile Include="Uc\TabControl\ATabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\NativeMethods.cs" />
+    <Compile Include="Uc\TabControl\TabStyle.cs" />
+    <Compile Include="Uc\TabControl\TabStyleProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleAmonProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleAngledProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleChromeProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleDefaultProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleIE8Provider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleNoneProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleRoundedProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleVisualStudioProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleVS2010Provider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\ThemedColors.cs" />
+    <Compile Include="Util\CharUtil.cs" />
+    <Compile Include="Util\HashUtil.cs" />
+    <Compile Include="Util\TimeUtil.cs" />
+    <Compile Include="Uw\Alert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Alert.Designer.cs">
+      <DependentUpon>Alert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Error.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Error.Designer.cs">
+      <DependentUpon>Error.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\HotKeys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\HotKeys.Designer.cs">
+      <DependentUpon>HotKeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Input.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Input.Designer.cs">
+      <DependentUpon>Input.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Waiting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Waiting.Designer.cs">
+      <DependentUpon>Waiting.cs</DependentUpon>
+    </Compile>
     <Compile Include="V\ATray.cs" />
     <Compile Include="V\Reset.cs">
       <SubType>Form</SubType>
@@ -891,18 +948,6 @@
       <DependentUpon>Reset.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
-    <Compile Include="Spy\V\App.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Spy\V\App.designer.cs">
-      <DependentUpon>App.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Spy\ASpy.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Spy\ASpy.Designer.cs">
-      <DependentUpon>ASpy.cs</DependentUpon>
-    </Compile>
     <Compile Include="Uc\Card.cs" />
     <Compile Include="Uc\ItemGroup.cs" />
     <Compile Include="Auth\Uc\AuthLk.cs">
@@ -1322,14 +1367,23 @@
     <EmbeddedResource Include="Uc\GtdTips.resx">
       <DependentUpon>GtdTips.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Alert.resx">
+      <DependentUpon>Alert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Error.resx">
+      <DependentUpon>Error.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\HotKeys.resx">
+      <DependentUpon>HotKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Input.resx">
+      <DependentUpon>Input.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Waiting.resx">
+      <DependentUpon>Waiting.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="V\Reset.resx">
       <DependentUpon>Reset.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Spy\ASpy.resx">
-      <DependentUpon>ASpy.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Spy\V\App.resx">
-      <DependentUpon>App.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Auth\Uc\AuthLk.resx">
       <DependentUpon>AuthLk.cs</DependentUpon>
@@ -1404,11 +1458,21 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Amon.dat" />
-    <Content Include="Amon.lib" />
-    <Content Include="Amon.res" />
-    <Content Include="Amon.tag" />
-    <Content Include="Amon.ver" />
+    <Content Include="Amon.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Amon.lib">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Amon.res">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Amon.tag">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Amon.ver">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Logo\logo.icns" />
     <Content Include="Logo\logo.ico" />
     <Content Include="Logo\logo.svg" />
@@ -1420,6 +1484,40 @@
     <Content Include="Logo\logo48.png" />
     <Content Include="Logo\logo64.png" />
     <Content Include="Logo\logo96.png" />
+    <None Include="Resources\Waiting.gif" />
+    <None Include="Resources\Input.png" />
+    <None Include="Resources\Error.png" />
+    <None Include="Resources\Alert.png" />
+    <None Include="Resources\vote.png" />
+    <None Include="Resources\open.png" />
+    <None Include="Resources\no.png" />
+    <None Include="Resources\na.png" />
+    <None Include="Resources\MenuP.png" />
+    <None Include="Resources\MenuD.png" />
+    <None Include="Resources\HideP.png" />
+    <None Include="Resources\HideD.png" />
+    <None Include="Resources\Hand.png" />
+    <None Include="Resources\ExitP.png" />
+    <None Include="Resources\ExitD.png" />
+    <None Include="Resources\exit.png" />
+    <None Include="Resources\edit.png" />
+    <None Include="Resources\doc.png" />
+    <None Include="Resources\chat.png" />
+    <None Include="Resources\au.png" />
+    <None Include="Resources\ar.png" />
+    <None Include="Resources\al.png" />
+    <None Include="Resources\ad.png" />
+    <None Include="Resources\_win.png" />
+    <None Include="Resources\_tag.png" />
+    <None Include="Resources\_sub.png" />
+    <None Include="Resources\_run.png" />
+    <None Include="Resources\_opt.png" />
+    <None Include="Resources\_new.png" />
+    <None Include="Resources\_fav.png" />
+    <None Include="Resources\_del.png" />
+    <None Include="Resources\_def.png" />
+    <None Include="Resources\_cur.png" />
+    <None Include="Resources\_add.png" />
     <None Include="Resources\OK.png" />
     <None Include="Resources\Tips.png" />
     <None Include="Resources\Logo25.png" />
@@ -1490,24 +1588,15 @@
       <Project>{E57C460D-306A-4F57-AD0B-51F7EEAD8838}</Project>
       <Name>ComnLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FormLib\FormLib.csproj">
-      <Project>{8EAB76F7-3B5C-490E-BDDE-CBEFD3D5BF25}</Project>
-      <Name>FormLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Gtd\C\" />
     <Folder Include="Gtd\E\" />
-    <Folder Include="Gtd\M\" />
     <Folder Include="Ico\C\" />
-    <Folder Include="Img\M\" />
     <Folder Include="OS\VDisk\" />
     <Folder Include="Pwd\C\" />
     <Folder Include="Pwd\E\Edit\" />
     <Folder Include="Pwd\E\Skin\" />
-    <Folder Include="Spy\C\" />
-    <Folder Include="Spy\E\" />
-    <Folder Include="Spy\M\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

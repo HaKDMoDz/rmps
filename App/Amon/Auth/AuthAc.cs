@@ -12,7 +12,7 @@ namespace Me.Amon.Auth
     /// </summary>
     public partial class AuthAc : Form
     {
-        private UserModel _UserModel;
+        private AUserModel _UserModel;
         private IAuthAc _AuthAc;
 
         #region 构造函数
@@ -21,7 +21,7 @@ namespace Me.Amon.Auth
             InitializeComponent();
         }
 
-        public AuthAc(UserModel userModel)
+        public AuthAc(AUserModel userModel)
         {
             _UserModel = userModel;
 

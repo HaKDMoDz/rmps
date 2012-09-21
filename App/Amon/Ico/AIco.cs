@@ -5,6 +5,7 @@ using System.Drawing.IconLib;
 using System.IO;
 using System.Windows.Forms;
 using Me.Amon.C;
+using Me.Amon.Ico.M;
 using Me.Amon.Ico.V;
 using Me.Amon.M;
 using Me.Amon.Uc;
@@ -29,9 +30,9 @@ namespace Me.Amon.Ico
             InitializeComponent();
         }
 
-        public AIco(UserModel userModel)
+        public AIco(AUserModel userModel)
         {
-            _UserModel = userModel;
+            _UserModel = userModel as UserModel;
 
             InitializeComponent();
 

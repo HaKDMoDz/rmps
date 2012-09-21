@@ -3,7 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using Me.Amon.C;
-using Me.Amon.Da;
+using Me.Amon.Da.Df;
 using Me.Amon.M;
 using Me.Amon.User;
 using Me.Amon.User.Uc;
@@ -15,7 +15,7 @@ namespace Me.Amon.Auth
     {
         private Main _Main;
         private ISignAc _SignAc;
-        private UserModel _UserModel;
+        private AUserModel _UserModel;
         private KeyEventHandler _KeyDownHandler;
         private FormClosingEventHandler _ClosingHandler;
 
@@ -25,7 +25,7 @@ namespace Me.Amon.Auth
             InitializeComponent();
         }
 
-        public SignAc(Main main, UserModel userModel)
+        public SignAc(Main main, AUserModel userModel)
         {
             _Main = main;
             _UserModel = userModel;
@@ -183,7 +183,7 @@ namespace Me.Amon.Auth
                 return;
             }
 
-            DFAccess prop = new DFAccess();
+            DFEngine prop = new DFEngine();
             prop.Load(path);
             string name = prop.Get(CApp.AMON_CFG_NAME);
             string code = prop.Get(CApp.AMON_CFG_CODE);

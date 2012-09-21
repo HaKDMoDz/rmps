@@ -11,7 +11,7 @@ namespace Me.Amon.Auth
     /// </summary>
     public partial class AuthLs : Form
     {
-        private UserModel _UserModel;
+        private AUserModel _UserModel;
         private bool _SysAction;
         private int _ErrorCnt;
         private int _DelayTime = 30;
@@ -23,7 +23,7 @@ namespace Me.Amon.Auth
             InitializeComponent();
         }
 
-        public AuthLs(UserModel userModel, Form owner)
+        public AuthLs(AUserModel userModel, Form owner)
         {
             _UserModel = userModel;
 

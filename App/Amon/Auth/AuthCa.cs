@@ -12,7 +12,7 @@ namespace Me.Amon.User
     /// </summary>
     public partial class AuthCa : Form
     {
-        private UserModel _UserModel;
+        private AUserModel _UserModel;
 
         #region 构造函数
         public AuthCa()
@@ -20,7 +20,7 @@ namespace Me.Amon.User
             InitializeComponent();
         }
 
-        public AuthCa(UserModel userModel)
+        public AuthCa(AUserModel userModel)
         {
             _UserModel = userModel;
 

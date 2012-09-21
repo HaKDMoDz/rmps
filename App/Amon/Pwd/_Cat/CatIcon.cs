@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Me.Amon.C;
 using Me.Amon.M;
 using Me.Amon.Util;
+using Me.Amon.Pwd.M;
 
 namespace Me.Amon.Pwd._Cat
 {

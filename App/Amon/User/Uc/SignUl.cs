@@ -3,7 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Auth;
-using Me.Amon.Da;
+using Me.Amon.Da.Df;
 using Me.Amon.M;
 using Me.Amon.Util;
 
@@ -14,7 +14,7 @@ namespace Me.Amon.User.Uc
     /// </summary>
     public partial class SignUl : UserControl, ISignAc
     {
-        private UserModel _UserModel;
+        private AUserModel _UserModel;
         private SignAc _SignAc;
 
         #region 构造函数
@@ -23,7 +23,7 @@ namespace Me.Amon.User.Uc
             InitializeComponent();
         }
 
-        public SignUl(SignAc signAc, UserModel userModel)
+        public SignUl(SignAc signAc, AUserModel userModel)
         {
             _SignAc = signAc;
             _UserModel = userModel;

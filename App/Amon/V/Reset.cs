@@ -8,7 +8,7 @@ namespace Me.Amon.V
 {
     public partial class Reset : Form
     {
-        private UserModel _UserModel;
+        private AUserModel _UserModel;
 
         #region 构造函数
         public Reset()
@@ -16,7 +16,7 @@ namespace Me.Amon.V
             InitializeComponent();
         }
 
-        public Reset(UserModel userModel)
+        public Reset(AUserModel userModel)
         {
             _UserModel = userModel;
 
@@ -25,7 +25,7 @@ namespace Me.Amon.V
         #endregion
 
         #region 数据导入
-        public static void Import(UserModel userModel)
+        public static void Import(AUserModel userModel)
         {
             XmlReaderSettings setting = new XmlReaderSettings { IgnoreWhitespace = true };
             ImportAPwdDir(userModel, setting);
@@ -36,7 +36,7 @@ namespace Me.Amon.V
         /// </summary>
         /// <param name="userModel"></param>
         /// <param name="setting"></param>
-        private static void ImportAPwdCat(UserModel userModel, XmlReaderSettings setting)
+        private static void ImportAPwdCat(AUserModel userModel, XmlReaderSettings setting)
         {
             string file = Path.Combine(userModel.DatHome, "APwd-Cat.xml");
             if (!File.Exists(file))
@@ -62,7 +62,7 @@ namespace Me.Amon.V
             stream.Close();
         }
 
-        private static void ImportAPwdLib(UserModel userModel, XmlReaderSettings setting)
+        private static void ImportAPwdLib(AUserModel userModel, XmlReaderSettings setting)
         {
             string file = Path.Combine(userModel.DatHome, "APwd-Lib.xml");
             if (File.Exists(file))
@@ -93,7 +93,7 @@ namespace Me.Amon.V
         /// </summary>
         /// <param name="userModel"></param>
         /// <param name="setting"></param>
-        private static void ImportAPwdDir(UserModel userModel, XmlReaderSettings setting)
+        private static void ImportAPwdDir(AUserModel userModel, XmlReaderSettings setting)
         {
             string file = Path.Combine(userModel.DatHome, "APwd-Dir.xml");
             if (!File.Exists(file))
@@ -121,13 +121,13 @@ namespace Me.Amon.V
         #endregion
 
         #region 数据导出
-        public static void Export(UserModel userModel)
+        public static void Export(AUserModel userModel)
         {
             XmlWriterSettings setting = new XmlWriterSettings { Indent = true };
             ExportAPwdCat(userModel, setting);
         }
 
-        private static void ExportAPwdCat(UserModel userModel, XmlWriterSettings setting)
+        private static void ExportAPwdCat(AUserModel userModel, XmlWriterSettings setting)
         {
             string file = Path.Combine(userModel.DatHome, "APwd-Cat.xml");
             StreamWriter stream = new StreamWriter(file);

@@ -69,10 +69,10 @@ namespace Me.Amon.Pwd
             InitializeComponent();
         }
 
-        public APwd(Main main, UserModel userModel)
+        public APwd(Main main, AUserModel userModel)
         {
             _Main = main;
-            _UserModel = userModel;
+            _UserModel = userModel as UserModel;
 
             InitializeComponent();
 
