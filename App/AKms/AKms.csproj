@@ -1,0 +1,733 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{466FBDB0-9D1D-4503-B59A-CE87DD180B44}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Me.Amon</RootNamespace>
+    <AssemblyName>AKms</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Me.Amon.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>Lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>Lib\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Api\Enums\GetWindow.cs" />
+    <Compile Include="Api\Enums\InputType.cs" />
+    <Compile Include="Api\Enums\KeyEvent.cs" />
+    <Compile Include="Api\Enums\MouseButton.cs" />
+    <Compile Include="Api\Enums\MouseEvent.cs" />
+    <Compile Include="Api\Enums\PenStyles.cs" />
+    <Compile Include="Api\Enums\RopMode.cs" />
+    <Compile Include="Api\Enums\ShowWindow.cs" />
+    <Compile Include="Api\Enums\StockObjects.cs" />
+    <Compile Include="Api\Enums\SystemMetrics.cs" />
+    <Compile Include="Api\Enums\VirtualKey.cs" />
+    <Compile Include="Api\Enums\VirtualKeyCode.cs" />
+    <Compile Include="Api\Enums\WindowMessage.cs" />
+    <Compile Include="Api\Enums\WMHotKeys.cs" />
+    <Compile Include="Api\Enums\XButton.cs" />
+    <Compile Include="Api\Gdi32\Gdi32.cs" />
+    <Compile Include="Api\Gdi32\Gdi32API.cs" />
+    <Compile Include="Api\Input\IInputDeviceStateAdaptor.cs" />
+    <Compile Include="Api\Input\IInputMessageDispatcher.cs" />
+    <Compile Include="Api\Input\IInputSimulator.cs" />
+    <Compile Include="Api\Input\IKeyboardSimulator.cs" />
+    <Compile Include="Api\Input\IMouseSimulator.cs" />
+    <Compile Include="Api\Input\InputBuilder.cs" />
+    <Compile Include="Api\Input\InputSimulator.cs" />
+    <Compile Include="Api\Input\KeyboardSimulator.cs" />
+    <Compile Include="Api\Input\MouseButtonExtensions.cs" />
+    <Compile Include="Api\Input\MouseSimulator.cs" />
+    <Compile Include="Api\Input\WindowsInputDeviceStateAdaptor.cs" />
+    <Compile Include="Api\Input\WindowsInputMessageDispatcher.cs" />
+    <Compile Include="Api\Struct\HARDWAREINPUT.cs" />
+    <Compile Include="Api\Struct\INPUT.cs" />
+    <Compile Include="Api\Struct\KEYBDINPUT.cs" />
+    <Compile Include="Api\Struct\MOUSEINPUT.cs" />
+    <Compile Include="Api\Struct\MOUSEKEYBDHARDWAREINPUT.cs" />
+    <Compile Include="Api\Struct\POINT.cs" />
+    <Compile Include="Api\Struct\RECT.cs" />
+    <Compile Include="Api\Struct\WINDOWPLACEMENT.cs" />
+    <Compile Include="Api\User32\User32.cs" />
+    <Compile Include="Api\User32\User32API.cs" />
+    <Compile Include="CApp.cs" />
+    <Compile Include="C\AmonHandler.cs" />
+    <Compile Include="C\VoidHandler.cs" />
+    <Compile Include="Da\DBA.cs" />
+    <Compile Include="Da\Db\ODBEngine.cs" />
+    <Compile Include="Da\Db\RDBEngine.cs" />
+    <Compile Include="Da\DFA.cs" />
+    <Compile Include="Da\Df\DFAccess.cs" />
+    <Compile Include="Da\Df\DFConst.cs" />
+    <Compile Include="Da\Df\DFObject.cs" />
+    <Compile Include="IApp.cs" />
+    <Compile Include="Kms\AKms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kms\AKms.Designer.cs">
+      <DependentUpon>AKms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Enums\EAction.cs" />
+    <Compile Include="Kms\Enums\EMessage.cs" />
+    <Compile Include="Kms\Enums\EMethod.cs" />
+    <Compile Include="Kms\Enums\EOptions.cs" />
+    <Compile Include="Kms\Enums\EOutput.cs" />
+    <Compile Include="Kms\Enums\EStyle.cs" />
+    <Compile Include="Kms\Enums\ETarget.cs" />
+    <Compile Include="Kms\M\DataConst.cs" />
+    <Compile Include="Kms\M\DataModel.cs" />
+    <Compile Include="Kms\M\MCategory.cs" />
+    <Compile Include="Kms\M\MFunction.cs" />
+    <Compile Include="Kms\M\MLanguage.cs" />
+    <Compile Include="Kms\M\MRequest.cs" />
+    <Compile Include="Kms\M\MSentence.cs" />
+    <Compile Include="Kms\M\MSession.cs" />
+    <Compile Include="Kms\M\MSolution.cs" />
+    <Compile Include="Kms\M\UserModel.cs" />
+    <Compile Include="Kms\Robot\cal\ConstUI.cs" />
+    <Compile Include="Kms\Robot\cal\Mc.cs" />
+    <Compile Include="Kms\Robot\cal\Op.cs" />
+    <Compile Include="Kms\Robot\IHuman.cs" />
+    <Compile Include="Kms\Robot\img\ImgControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\Robot\img\ImgControl.Designer.cs">
+      <DependentUpon>ImgControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Robot\img\ImgDefault.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\Robot\img\ImgDefault.Designer.cs">
+      <DependentUpon>ImgDefault.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Robot\img\ImgRegion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\Robot\img\ImgRegion.Designer.cs">
+      <DependentUpon>ImgRegion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Robot\img\ImgScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\Robot\img\ImgScreen.Designer.cs">
+      <DependentUpon>ImgScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Robot\img\ImgWindow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\Robot\img\ImgWindow.Designer.cs">
+      <DependentUpon>ImgWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Robot\IRobot.cs" />
+    <Compile Include="Kms\Robot\KmsHuman.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\Robot\KmsHuman.Designer.cs">
+      <DependentUpon>KmsHuman.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Robot\KmsRobot.cs" />
+    <Compile Include="Kms\Robot\txt\TxtDefault.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\Robot\txt\TxtDefault.Designer.cs">
+      <DependentUpon>TxtDefault.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Target\App\AppTarget.cs" />
+    <Compile Include="Kms\Target\App\AppWindow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\Target\App\AppWindow.Designer.cs">
+      <DependentUpon>AppWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Target\App\SubWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kms\Target\App\SubWindow.Designer.cs">
+      <DependentUpon>SubWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Target\Asc\AscTarget.cs" />
+    <Compile Include="Kms\Target\Asc\AscWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kms\Target\Asc\AscWindow.Designer.cs">
+      <DependentUpon>AscWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Target\ATarget.cs" />
+    <Compile Include="Kms\Target\Img\ImgTarget.cs" />
+    <Compile Include="Kms\Target\ITarget.cs" />
+    <Compile Include="Kms\Target\Kms\KmsTarget.cs" />
+    <Compile Include="Kms\Target\Kms\KmsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kms\Target\Kms\KmsWindow.Designer.cs">
+      <DependentUpon>KmsWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Target\Man\ManTarget.cs" />
+    <Compile Include="Kms\Target\Man\ManWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kms\Target\Man\ManWindow.Designer.cs">
+      <DependentUpon>ManWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Target\Net\NetTarget.cs" />
+    <Compile Include="Kms\Target\Net\NetWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kms\Target\Net\NetWindow.Designer.cs">
+      <DependentUpon>NetWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Target\Scb\ScbTarget.cs" />
+    <Compile Include="Kms\Target\Scb\ScbWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kms\Target\Scb\ScbWindow.Designer.cs">
+      <DependentUpon>ScbWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Training\IOptions.cs" />
+    <Compile Include="Kms\Training\opt\BaseInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\Training\opt\BaseInfo.Designer.cs">
+      <DependentUpon>BaseInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Training\opt\Category.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\Training\opt\Category.Designer.cs">
+      <DependentUpon>Category.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Training\opt\Opinions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\Training\opt\Opinions.Designer.cs">
+      <DependentUpon>Opinions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Training\opt\Question.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\Training\opt\Question.Designer.cs">
+      <DependentUpon>Question.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Training\opt\RateInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\Training\opt\RateInfo.Designer.cs">
+      <DependentUpon>RateInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Training\opt\Response.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\Training\opt\Response.Designer.cs">
+      <DependentUpon>Response.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\Training\Training.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\Training\Training.Designer.cs">
+      <DependentUpon>Training.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\V\Cfg\About.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\V\Cfg\About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\V\Cfg\IConfig.cs" />
+    <Compile Include="Kms\V\Cfg\Robot.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\V\Cfg\Robot.Designer.cs">
+      <DependentUpon>Robot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\V\Cfg\TagList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\V\Cfg\TagList.Designer.cs">
+      <DependentUpon>TagList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\V\Cfg\UserCfg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kms\V\Cfg\UserCfg.Designer.cs">
+      <DependentUpon>UserCfg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\V\MagicPtn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kms\V\MagicPtn.Designer.cs">
+      <DependentUpon>MagicPtn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\V\Sln\EditSln.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kms\V\Sln\EditSln.Designer.cs">
+      <DependentUpon>EditSln.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\V\Sln\HotKeys.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\V\Sln\HotKeys.Designer.cs">
+      <DependentUpon>HotKeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\V\_uc\ExecuteApp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\V\_uc\ExecuteApp.Designer.cs">
+      <DependentUpon>ExecuteApp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\V\_uc\GetControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\V\_uc\GetControl.Designer.cs">
+      <DependentUpon>GetControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\V\_uc\HideWindow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\V\_uc\HideWindow.Designer.cs">
+      <DependentUpon>HideWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\V\_uc\IFunction.cs" />
+    <Compile Include="Kms\V\_uc\KeybdInput.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\V\_uc\KeybdInput.Designer.cs">
+      <DependentUpon>KeybdInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\V\_uc\MouseInput.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\V\_uc\MouseInput.Designer.cs">
+      <DependentUpon>MouseInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\V\_uc\PostAction.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\V\_uc\PostAction.Designer.cs">
+      <DependentUpon>PostAction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\V\_uc\ShowWindow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\V\_uc\ShowWindow.Designer.cs">
+      <DependentUpon>ShowWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kms\V\_uc\ThreadWait.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kms\V\_uc\ThreadWait.Designer.cs">
+      <DependentUpon>ThreadWait.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main.cs" />
+    <Compile Include="M\AUserModel.cs" />
+    <Compile Include="M\Cat.cs" />
+    <Compile Include="M\Dbv.cs" />
+    <Compile Include="M\Dto.cs" />
+    <Compile Include="M\IViewModel.cs" />
+    <Compile Include="M\Log.cs" />
+    <Compile Include="M\Udc.cs" />
+    <Compile Include="M\UdcModel.cs" />
+    <Compile Include="M\Vcs.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TApp.cs" />
+    <Compile Include="Uc\Itemi.cs" />
+    <Compile Include="Uc\Items.cs" />
+    <Compile Include="Uc\ListModel.cs" />
+    <Compile Include="Uc\Properties.cs" />
+    <Compile Include="Util\BeanUtil.cs" />
+    <Compile Include="Util\CharUtil.cs" />
+    <Compile Include="Util\HashUtil.cs" />
+    <Compile Include="Util\HttpUtil.cs" />
+    <Compile Include="Util\SafeUtil.cs" />
+    <Compile Include="Util\TimeUtil.cs" />
+    <Compile Include="Uw\Alert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Alert.Designer.cs">
+      <DependentUpon>Alert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Error.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Error.Designer.cs">
+      <DependentUpon>Error.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\HotKeys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\HotKeys.Designer.cs">
+      <DependentUpon>HotKeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Input.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Input.Designer.cs">
+      <DependentUpon>Input.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\TxtEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\TxtEditor.Designer.cs">
+      <DependentUpon>TxtEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\UdcEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\UdcEditor.Designer.cs">
+      <DependentUpon>UdcEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Waiting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Waiting.Designer.cs">
+      <DependentUpon>Waiting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="V\Reset.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="V\Reset.Designer.cs">
+      <DependentUpon>Reset.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Kms\AKms.resx">
+      <DependentUpon>AKms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\Robot\img\ImgControl.resx">
+      <DependentUpon>ImgControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\Robot\img\ImgDefault.resx">
+      <DependentUpon>ImgDefault.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\Robot\img\ImgRegion.resx">
+      <DependentUpon>ImgRegion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\Robot\img\ImgScreen.resx">
+      <DependentUpon>ImgScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\Robot\img\ImgWindow.resx">
+      <DependentUpon>ImgWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\Robot\KmsHuman.resx">
+      <DependentUpon>KmsHuman.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\Robot\txt\TxtDefault.resx">
+      <DependentUpon>TxtDefault.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\Target\App\AppWindow.resx">
+      <DependentUpon>AppWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\Target\App\SubWindow.resx">
+      <DependentUpon>SubWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\Target\Asc\AscWindow.resx">
+      <DependentUpon>AscWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\Training\opt\BaseInfo.resx">
+      <DependentUpon>BaseInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\Training\opt\Category.resx">
+      <DependentUpon>Category.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\Training\opt\Opinions.resx">
+      <DependentUpon>Opinions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\Training\opt\Question.resx">
+      <DependentUpon>Question.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\Training\opt\RateInfo.resx">
+      <DependentUpon>RateInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\Training\opt\Response.resx">
+      <DependentUpon>Response.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\Training\Training.resx">
+      <DependentUpon>Training.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\V\Cfg\About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\V\Cfg\Robot.resx">
+      <DependentUpon>Robot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\V\Cfg\TagList.resx">
+      <DependentUpon>TagList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\V\Cfg\UserCfg.resx">
+      <DependentUpon>UserCfg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\V\MagicPtn.resx">
+      <DependentUpon>MagicPtn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\V\Sln\EditSln.resx">
+      <DependentUpon>EditSln.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\V\Sln\HotKeys.resx">
+      <DependentUpon>HotKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\V\_uc\ExecuteApp.resx">
+      <DependentUpon>ExecuteApp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\V\_uc\GetControl.resx">
+      <DependentUpon>GetControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\V\_uc\HideWindow.resx">
+      <DependentUpon>HideWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\V\_uc\KeybdInput.resx">
+      <DependentUpon>KeybdInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\V\_uc\MouseInput.resx">
+      <DependentUpon>MouseInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\V\_uc\PostAction.resx">
+      <DependentUpon>PostAction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\V\_uc\ShowWindow.resx">
+      <DependentUpon>ShowWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kms\V\_uc\ThreadWait.resx">
+      <DependentUpon>ThreadWait.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Uw\Alert.resx">
+      <DependentUpon>Alert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Error.resx">
+      <DependentUpon>Error.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\HotKeys.resx">
+      <DependentUpon>HotKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Input.resx">
+      <DependentUpon>Input.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\TxtEditor.resx">
+      <DependentUpon>TxtEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\UdcEditor.resx">
+      <DependentUpon>UdcEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Waiting.resx">
+      <DependentUpon>Waiting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="V\Reset.resx">
+      <DependentUpon>Reset.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Find.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Guid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Input.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pupil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SignFp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SignIn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Waiting.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Kms\C\" />
+    <Folder Include="oAuth\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\_cur.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\_def.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\_del.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\_fav.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\_opt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\_run.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\_sub.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\_tag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\_win.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\al.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\au.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\doc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExitD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExitP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Hand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HideD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HideP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MenuD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MenuP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\na.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\no.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vote.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
