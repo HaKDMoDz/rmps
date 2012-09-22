@@ -63,5 +63,7 @@ namespace Me.Amon.Api.Input
         /// </summary>
         /// <param name="text">The text to be simulated.</param>
         void TextEntry(string text);
+
+        void TextEntry(char text);
     }
 }

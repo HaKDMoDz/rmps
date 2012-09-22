@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using Me.Amon.Properties;
 using Me.Amon.Api.User32;
 using Me.Amon.Kms.Enums;
 using Me.Amon.Kms.M;
@@ -32,10 +33,7 @@ namespace Me.Amon._uc
             {
                 return;
             }
-            Stream stream = File.OpenRead(@"ico\_cur.png");
-            var bmp = (Bitmap)Image.FromStream(stream);
-            stream.Close();
-            Cursor = new Cursor(bmp.GetHicon());
+            Cursor = new Cursor(Resources._cur.GetHicon());
         }
         /// <summary>
         /// 

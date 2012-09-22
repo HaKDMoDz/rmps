@@ -46,18 +46,6 @@ namespace Me.Amon.Api.User32
             System.Windows.Forms.SendKeys.Flush();
         }
 
-        public static string ReadMessage(IntPtr txtHnd)
-        {
-            if (txtHnd != IntPtr.Zero)
-            {
-                int TextLen = SendMessage(txtHnd, (int)WindowMessage.WM_GETTEXTLENGTH, IntPtr.Zero, IntPtr.Zero);
-                var byt = new Byte[TextLen];
-                SendMessageA(txtHnd, WindowMessage.WM_GETTEXT, TextLen + 1, byt);
-                return Encoding.Default.GetString(byt);
-            }
-            return null;
-        }
-
         public static void RestoreWindow(IntPtr handle)
         {
             var wp = new WINDOWPLACEMENT();
@@ -67,14 +55,6 @@ namespace Me.Amon.Api.User32
             {
                 wp.showCmd = cmd; // 1- Normal; 2 - Minimize; 3 - Maximize;
                 SetWindowPlacement(handle, ref wp);
-            }
-        }
-
-        public static void SendMessage(IntPtr txtHnd, string txt)
-        {
-            if (txtHnd != IntPtr.Zero)
-            {
-                SendMessageA(txtHnd, WindowMessage.WM_SETTEXT, IntPtr.Zero, txt);
             }
         }
 

@@ -26,7 +26,7 @@ namespace Me.Amon.Kms.M
         }
 
         #region Language
-        public static List<MLanguage> ListLanguage()
+        public List<MLanguage> ListLanguage()
         {
             var list = new List<MLanguage>();
 
@@ -54,17 +54,13 @@ namespace Me.Amon.Kms.M
         #endregion
 
         #region Category
-        public static MCategory FindCategory(string text)
+        public MCategory FindCategory(string text)
         {
-            return FindCategory(new RDBEngine(), text);
-        }
+            _DBE.ReInit();
+            _DBE.AddTable(DataConst.C2010200);
+            _DBE.AddWhere(DataConst.C2010205, text);
 
-        public static MCategory FindCategory(RDBEngine _DBA, string text)
-        {
-            _DBA.AddTable(DataConst.C2010200);
-            _DBA.AddWhere(DataConst.C2010205, text);
-
-            DataTable dt = _DBA.ExecuteSelect();
+            DataTable dt = _DBE.ExecuteSelect();
             return dt.Rows.Count == 1 ? ReadCategory(dt.Rows[0]) : null;
         }
 
@@ -72,22 +68,12 @@ namespace Me.Amon.Kms.M
         /// 
         /// </summary>
         /// <returns></returns>
-        public static List<MCategory> ListCategory()
+        public List<MCategory> ListCategory()
         {
-            return ListCategory(new RDBEngine());
-        }
+            _DBE.AddTable(DataConst.C2010200);
+            _DBE.AddSort(DataConst.C2010201, true);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="_DBA"></param>
-        /// <returns></returns>
-        private static List<MCategory> ListCategory(RDBEngine _DBA)
-        {
-            _DBA.AddTable(DataConst.C2010200);
-            _DBA.AddSort(DataConst.C2010201, true);
-
-            DataTable dt = _DBA.ExecuteSelect();
+            DataTable dt = _DBE.ExecuteSelect();
             var list = (from DataRow row in dt.Rows select ReadCategory(row)).ToList();
             dt.Dispose();
 
@@ -114,12 +100,7 @@ namespace Me.Amon.Kms.M
             return cat;
         }
 
-        public static MCategory SaveCategory(string cat)
-        {
-            return SaveCategory(new RDBEngine(), cat);
-        }
-
-        public static MCategory SaveCategory(RDBEngine _DBA, string text)
+        public MCategory SaveCategory(string text)
         {
             var cat = new MCategory();
             cat.C2010204 = "P3100100";
@@ -128,22 +109,20 @@ namespace Me.Amon.Kms.M
             cat.C2010207 = "";
             cat.C2010208 = "";
             cat.C2010209 = "";
-            SaveCategory(_DBA, cat);
+            SaveCategory(cat);
             return cat;
         }
 
-        public static List<MCategory> SaveCategory(ICollection<string> cats)
+        public List<MCategory> SaveCategory(ICollection<string> cats)
         {
             var list = new List<MCategory>();
 
-
             foreach (var tmp in cats)
             {
-                var cat = FindCategory(_DBE, tmp);
-                _DBE.ReInit();
+                var cat = FindCategory(tmp);
                 if (cat == null)
                 {
-                    cat = SaveCategory(_DBE, tmp);
+                    cat = SaveCategory(tmp);
                     _DBE.ReInit();
                 }
                 list.Add(cat);
@@ -155,39 +134,30 @@ namespace Me.Amon.Kms.M
         /// 
         /// </summary>
         /// <param name="cat"></param>
-        public static void SaveCategory(MCategory cat)
+        public void SaveCategory(MCategory cat)
         {
-            SaveCategory(new RDBEngine(), cat);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="_DBA"></param>
-        /// <param name="cat"></param>
-        private static void SaveCategory(RDBEngine _DBA, MCategory cat)
-        {
-            _DBA.AddTable(DataConst.C2010200);
-            _DBA.AddParam(DataConst.C2010201, cat.C2010201);
-            _DBA.AddParam(DataConst.C2010202, cat.C2010202);
-            _DBA.AddParam(DataConst.C2010204, cat.C2010204);
-            _DBA.AddParam(DataConst.C2010205, cat.C2010205);
-            _DBA.AddParam(DataConst.C2010206, cat.C2010206);
-            _DBA.AddParam(DataConst.C2010207, cat.C2010207);
-            _DBA.AddParam(DataConst.C2010208, cat.C2010208);
-            _DBA.AddParam(DataConst.C2010209, cat.C2010209);
-            _DBA.AddParam(DataConst.C201020A, DataConst.NOW, false);
+            _DBE.ReInit();
+            _DBE.AddTable(DataConst.C2010200);
+            _DBE.AddParam(DataConst.C2010201, cat.C2010201);
+            _DBE.AddParam(DataConst.C2010202, cat.C2010202);
+            _DBE.AddParam(DataConst.C2010204, cat.C2010204);
+            _DBE.AddParam(DataConst.C2010205, cat.C2010205);
+            _DBE.AddParam(DataConst.C2010206, cat.C2010206);
+            _DBE.AddParam(DataConst.C2010207, cat.C2010207);
+            _DBE.AddParam(DataConst.C2010208, cat.C2010208);
+            _DBE.AddParam(DataConst.C2010209, cat.C2010209);
+            _DBE.AddParam(DataConst.C201020A, DataConst.NOW, false);
             if (CharUtil.IsValidateHash(cat.C2010203))
             {
-                _DBA.AddWhere(DataConst.C2010203, cat.C2010203);
-                _DBA.ExecuteUpdate();
+                _DBE.AddWhere(DataConst.C2010203, cat.C2010203);
+                _DBE.ExecuteUpdate();
             }
             else
             {
                 cat.C2010203 = HashUtil.UtcTimeInEnc(false);
-                _DBA.AddParam(DataConst.C2010203, cat.C2010203);
-                _DBA.AddParam(DataConst.C201020B, DataConst.NOW, false);
-                _DBA.ExecuteInsert();
+                _DBE.AddParam(DataConst.C2010203, cat.C2010203);
+                _DBE.AddParam(DataConst.C201020B, DataConst.NOW, false);
+                _DBE.ExecuteInsert();
             }
         }
 
@@ -195,21 +165,12 @@ namespace Me.Amon.Kms.M
         /// 
         /// </summary>
         /// <param name="lang"></param>
-        public static void DropCategory(MCategory lang)
+        public void DropCategory(MCategory cat)
         {
-            DropCategory(new RDBEngine(), lang);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="_DBA"></param>
-        /// <param name="cat"></param>
-        private static void DropCategory(RDBEngine _DBA, MCategory cat)
-        {
-            _DBA.AddTable(DataConst.C2010200);
-            _DBA.AddWhere(DataConst.C2010203, cat.C2010203);
-            _DBA.ExecuteDelete();
+            _DBE.ReInit();
+            _DBE.AddTable(DataConst.C2010200);
+            _DBE.AddWhere(DataConst.C2010203, cat.C2010203);
+            _DBE.ExecuteDelete();
         }
         #endregion
 
@@ -218,7 +179,7 @@ namespace Me.Amon.Kms.M
         /// 
         /// </summary>
         /// <returns></returns>
-        public static List<MSolution> ListSolution()
+        public List<MSolution> ListSolution()
         {
             _DBE.ReInit();
             _DBE.AddTable(DataConst.P3100500);
@@ -237,7 +198,7 @@ namespace Me.Amon.Kms.M
         /// </summary>
         /// <param name="hash">方案索引</param>
         /// <returns></returns>
-        public static MSolution ReadSolution(string hash)
+        public MSolution ReadSolution(string hash)
         {
             _DBE.ReInit();
             _DBE.AddTable(DataConst.P3100500);
@@ -255,11 +216,11 @@ namespace Me.Amon.Kms.M
 
             // 前置动作
             _DBE.ReInit();
-            sol.PreFunction = ListFunction(_DBE, hash, -1);
+            sol.PreFunction = ListFunction(hash, -1);
 
             // 后置动作
             _DBE.ReInit();
-            sol.SufFunction = ListFunction(_DBE, hash, 1);
+            sol.SufFunction = ListFunction(hash, 1);
 
             // 标签资源
             _DBE.ReInit();
@@ -281,16 +242,16 @@ namespace Me.Amon.Kms.M
         /// </summary>
         /// <param name="sol"></param>
         /// <returns></returns>
-        public static MSolution ReadSolution(MSolution sol)
+        public MSolution ReadSolution(MSolution sol)
         {
             _DBE.ReInit();
 
             // 前置动作
-            sol.PreFunction = ListFunction(_DBE, sol.Hash, -1);
+            sol.PreFunction = ListFunction(sol.Hash, -1);
 
             // 后置动作
             _DBE.ReInit();
-            sol.SufFunction = ListFunction(_DBE, sol.Hash, 1);
+            sol.SufFunction = ListFunction(sol.Hash, 1);
 
             // 标签资源
             _DBE.ReInit();
@@ -337,7 +298,7 @@ namespace Me.Amon.Kms.M
         /// 
         /// </summary>
         /// <param name="sol"></param>
-        public static void SaveSolution(MSolution sol)
+        public void SaveSolution(MSolution sol)
         {
             _DBE.ReInit();
             _DBE.AddTable(DataConst.P3100500);
@@ -430,7 +391,7 @@ namespace Me.Amon.Kms.M
         /// 
         /// </summary>
         /// <param name="sol"></param>
-        public static void DropSolution(MSolution sol)
+        public void DropSolution(MSolution sol)
         {
             _DBE.ReInit();
 
@@ -459,26 +420,16 @@ namespace Me.Amon.Kms.M
         /// </summary>
         /// <param name="fun"></param>
         /// <param name="cat"></param>
-        public static void SaveFunction(MFunction fun, int cat)
+        public void SaveFunction(MFunction fun, int cat)
         {
-            SaveFunction(new RDBEngine(), fun, cat);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="_DBA"></param>
-        /// <param name="fun"></param>
-        /// <param name="cat">前置操作-1，后置操作1</param>
-        private static void SaveFunction(RDBEngine _DBA, MFunction fun, int cat)
-        {
-            _DBA.AddTable(DataConst.P3100600);
-            _DBA.AddParam(DataConst.P3100601, fun.Order);
-            _DBA.AddParam(DataConst.P3100602, fun.SolId);
-            _DBA.AddParam(DataConst.P3100603, cat);
-            _DBA.AddParam(DataConst.P3100604, (long)fun.Action);
-            _DBA.AddParam(DataConst.P3100605, fun.Param);
-            _DBA.ExecuteInsert();
+            _DBE.ReInit();
+            _DBE.AddTable(DataConst.P3100600);
+            _DBE.AddParam(DataConst.P3100601, fun.Order);
+            _DBE.AddParam(DataConst.P3100602, fun.SolId);
+            _DBE.AddParam(DataConst.P3100603, cat);
+            _DBE.AddParam(DataConst.P3100604, (long)fun.Action);
+            _DBE.AddParam(DataConst.P3100605, fun.Param);
+            _DBE.ExecuteInsert();
         }
 
         /// <summary>
@@ -487,25 +438,14 @@ namespace Me.Amon.Kms.M
         /// <param name="solId"></param>
         /// <param name="cat"></param>
         /// <returns></returns>
-        public static List<MFunction> ListFunction(string solId, int cat)
+        public List<MFunction> ListFunction(string solId, int cat)
         {
-            return ListFunction(new RDBEngine(), solId, cat);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="_DBA"></param>
-        /// <param name="solId"></param>
-        /// <param name="cat"></param>
-        /// <returns></returns>
-        private static List<MFunction> ListFunction(RDBEngine _DBA, string solId, int cat)
-        {
-            _DBA.AddTable(DataConst.P3100600);
-            _DBA.AddWhere(DataConst.P3100602, solId);
-            _DBA.AddWhere(DataConst.P3100603, cat.ToString());
-            _DBA.AddSort(DataConst.P3100601);
-            DataTable dt = _DBA.ExecuteSelect();
+            _DBE.ReInit();
+            _DBE.AddTable(DataConst.P3100600);
+            _DBE.AddWhere(DataConst.P3100602, solId);
+            _DBE.AddWhere(DataConst.P3100603, cat.ToString());
+            _DBE.AddSort(DataConst.P3100601);
+            DataTable dt = _DBE.ExecuteSelect();
             var list = (from DataRow row in dt.Rows select ReadFunction(row)).ToList();
             dt.Dispose();
 
@@ -532,24 +472,14 @@ namespace Me.Amon.Kms.M
         /// </summary>
         /// <param name="fun"></param>
         /// <param name="cat"></param>
-        public static void DropFunction(MFunction fun, int cat)
+        public void DropFunction(MFunction fun, int cat)
         {
-            DropFunction(new RDBEngine(), fun, cat);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="_DBA"></param>
-        /// <param name="fun"></param>
-        /// <param name="cat">前置操作-1，后置操作1</param>
-        private static void DropFunction(RDBEngine _DBA, MFunction fun, int cat)
-        {
-            _DBA.AddTable(DataConst.P3100600);
-            _DBA.AddWhere(DataConst.P3100601, fun.Order.ToString());
-            _DBA.AddWhere(DataConst.P3100602, fun.SolId);
-            _DBA.AddWhere(DataConst.P3100603, cat.ToString());
-            _DBA.ExecuteDelete();
+            _DBE.ReInit();
+            _DBE.AddTable(DataConst.P3100600);
+            _DBE.AddWhere(DataConst.P3100601, fun.Order.ToString());
+            _DBE.AddWhere(DataConst.P3100602, fun.SolId);
+            _DBE.AddWhere(DataConst.P3100603, cat.ToString());
+            _DBE.ExecuteDelete();
         }
         #endregion
 
@@ -559,7 +489,7 @@ namespace Me.Amon.Kms.M
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public static MSentence FindSentence(string text)
+        public MSentence FindSentence(string text)
         {
             text = ToLike(text);
             if (string.IsNullOrEmpty(text) || text == "%")
@@ -580,7 +510,7 @@ namespace Me.Amon.Kms.M
         /// </summary>
         /// <param name="catId">标签索引</param>
         /// <returns></returns>
-        public static List<MSentence> ListSentence(string catId)
+        public List<MSentence> ListSentence(string catId)
         {
             _DBE.ReInit();
             _DBE.AddTable(DataConst.P3100100);
@@ -608,7 +538,7 @@ namespace Me.Amon.Kms.M
         /// </summary>
         /// <param name="catList"></param>
         /// <returns></returns>
-        public static List<MSentence> ListSentence(List<string> catList)
+        public List<MSentence> ListSentence(List<string> catList)
         {
             var buf = new StringBuilder();
             foreach (string cat in catList)
@@ -645,7 +575,7 @@ namespace Me.Amon.Kms.M
         /// </summary>
         /// <param name="style"></param>
         /// <returns></returns>
-        public static List<MSentence> ListSentence(EStyle style)
+        public List<MSentence> ListSentence(EStyle style)
         {
             _DBE.ReInit();
             _DBE.AddTable(DataConst.P3100100);
@@ -671,7 +601,7 @@ namespace Me.Amon.Kms.M
         /// </summary>
         /// <param name="lanId"></param>
         /// <returns></returns>
-        public static MSentence ReadSentence(string lanId)
+        public MSentence ReadSentence(string lanId)
         {
             _DBE.ReInit();
             _DBE.AddTable(DataConst.P3100100);
@@ -712,7 +642,7 @@ namespace Me.Amon.Kms.M
         /// </summary>
         /// <param name="sentence"></param>
         /// <returns></returns>
-        public static int SaveSentence(MSentence sentence)
+        public int SaveSentence(MSentence sentence)
         {
             _DBE.ReInit();
             _DBE.AddTable(DataConst.P3100100);
@@ -740,21 +670,12 @@ namespace Me.Amon.Kms.M
         /// 
         /// </summary>
         /// <param name="lan"></param>
-        public static void DropSentence(MSentence lan)
+        public void DropSentence(MSentence lan)
         {
-            DropSentence(new RDBEngine(), lan);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="_DBA"></param>
-        /// <param name="lan"></param>
-        private static void DropSentence(RDBEngine _DBA, MSentence lan)
-        {
-            _DBA.AddTable(DataConst.P3100100);
-            _DBA.AddWhere(DataConst.P3100103, lan.P3100103);
-            _DBA.ExecuteDelete();
+            _DBE.ReInit();
+            _DBE.AddTable(DataConst.P3100100);
+            _DBE.AddWhere(DataConst.P3100103, lan.P3100103);
+            _DBE.ExecuteDelete();
         }
         #endregion
 
@@ -768,7 +689,7 @@ namespace Me.Amon.Kms.M
         /// <param name="lanId">语言索引</param>
         /// <param name="catIds">标签索引</param>
         /// <returns></returns>
-        public static bool FindQuestion(List<MSentence> list, string input, EStyle style, string lanId, List<string> catIds)
+        public bool FindQuestion(List<MSentence> list, string input, EStyle style, string lanId, List<string> catIds)
         {
             input = ToLike(input);
 
@@ -825,8 +746,16 @@ namespace Me.Amon.Kms.M
             return true;
         }
 
-
-        public static bool FindResponse(List<MSentence> list, string askId, EStyle style, string lanId, List<string> catIds)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="askId"></param>
+        /// <param name="style"></param>
+        /// <param name="lanId"></param>
+        /// <param name="catIds"></param>
+        /// <returns></returns>
+        public bool FindResponse(List<MSentence> list, string askId, EStyle style, string lanId, List<string> catIds)
         {
             var buf = new StringBuilder();
             if (catIds != null && catIds.Count > 0)
@@ -876,7 +805,7 @@ namespace Me.Amon.Kms.M
             return true;
         }
 
-        public static void UpdateResponse(string qId, string rId, int rate)
+        public void UpdateResponse(string qId, string rId, int rate)
         {
             _DBE.ReInit();
             _DBE.AddTable(DataConst.P3100200);
@@ -887,7 +816,7 @@ namespace Me.Amon.Kms.M
             _DBE.ExecuteUpdate();
         }
 
-        public static void AppendResponse(string qId, string rId)
+        public void AppendResponse(string qId, string rId)
         {
             _DBE.ReInit();
             _DBE.AddTable(DataConst.P3100200);
@@ -897,7 +826,7 @@ namespace Me.Amon.Kms.M
             _DBE.AddParam(DataConst.P3100204, 0);
             _DBE.ExecuteInsert();
         }
-        public static void RemoveResponse(string qId, string rId)
+        public void RemoveResponse(string qId, string rId)
         {
             _DBE.ReInit();
             _DBE.AddTable(DataConst.P3100200);
@@ -906,7 +835,7 @@ namespace Me.Amon.Kms.M
             _DBE.ExecuteDelete();
         }
 
-        public static List<MCategory> ListTags(string sid)
+        public List<MCategory> ListTags(string sid)
         {
             _DBE.ReInit();
             _DBE.AddTable(DataConst.C2010200);
@@ -932,7 +861,7 @@ namespace Me.Amon.Kms.M
             return list;
         }
 
-        public static void RemoveTags(string sId, string cId)
+        public void RemoveTags(string sId, string cId)
         {
             _DBE.ReInit();
             _DBE.AddTable(DataConst.P3100300);
@@ -941,7 +870,7 @@ namespace Me.Amon.Kms.M
             _DBE.ExecuteDelete();
         }
 
-        public static void RemoveTags(string cId)
+        public void RemoveTags(string cId)
         {
             _DBE.ReInit();
             _DBE.AddTable(DataConst.P3100300);
@@ -949,7 +878,7 @@ namespace Me.Amon.Kms.M
             _DBE.ExecuteDelete();
         }
 
-        public static void SaveTags(string sId, List<MCategory> newCats)
+        public void SaveTags(string sId, List<MCategory> newCats)
         {
             _DBE.ReInit();
             _DBE.AddTable(DataConst.P3100300);

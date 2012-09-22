@@ -150,22 +150,14 @@ namespace Me.Amon.Kms.Target.App
                     break;
                 // 消息发送
                 case EOutput.SendMessage:
-                    SendKeys.SendWait(text);
-                    SendKeys.Flush();
+                    _KeyboardSimulator.TextEntry(text);
                     break;
                 // 模拟输入
-                case EOutput.EmulateInput:
+                case EOutput.SimulateInput:
                     foreach (char item in text)
                     {
-                        if (item > 0xa0)
-                        {
-                            User32API.SendMessageW(DstControl, (int)WindowMessage.WM_IME_CHAR, item, 1);
-                        }
-                        else
-                        {
-                            User32API.SendMessageA(DstControl, (int)WindowMessage.WM_IME_CHAR, item, 1);
-                        }
-                        Thread.Sleep(150);
+                        _KeyboardSimulator.TextEntry(item);
+                        Thread.Sleep(100);
                     }
                     break;
                 default:
@@ -289,7 +281,7 @@ namespace Me.Amon.Kms.Target.App
                 return false;
             }
 
-            if (!Regex.IsMatch(param, "^\\d+,[$@.\\w]+$"))
+            if (!Regex.IsMatch(param, "^\\d+,[$@.\\s\\w]+$"))
             {
                 if (HintByStep)
                 {

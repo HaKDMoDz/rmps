@@ -464,16 +464,8 @@ namespace Me.Amon.Api.User32
         /// <returns></returns>
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
-        [DllImport("user32.dll")]
-        public static extern void SendMessage(IntPtr hWnd, WindowMessage wMsg, int wParam, ref RECT lParam);
-        [DllImport("user32.dll", EntryPoint = "SendMessageA")]
-        public static extern int SendMessageA(IntPtr hwnd, WindowMessage wMsg, int wParam, byte[] lParam);
-        [DllImport("user32.dll", EntryPoint = "SendMessageA")]
-        public static extern int SendMessageA(IntPtr hwnd, WindowMessage wMsg, IntPtr wParam, string lParam);
         [DllImport("user32.dll", EntryPoint = "SendMessageA")]
         public static extern int SendMessageA(IntPtr hwnd, int wMsg, int wParam, int lParam);
-        [DllImport("user32.dll", EntryPoint = "SendMessageW")]
-        public static extern int SendMessageW(IntPtr hwnd, int wMsg, int wParam, int lParam);
 
         /// <summary>
         /// 将存放有数据的内存块放入剪切板的资源管理中

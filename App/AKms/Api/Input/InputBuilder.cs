@@ -185,7 +185,6 @@ namespace Me.Amon.Api.Input
         {
             return AddCharacters(characters.ToCharArray());
         }
-
         #region Mouse
 
         public InputBuilder AddRelativeMouseMovement(int x, int y)
@@ -293,10 +292,10 @@ namespace Me.Amon.Api.Input
         public InputBuilder AddMouseVerticalWheelScroll(int scrollAmount)
         {
             var scroll = new INPUT();
-            scroll.Type = (UInt32) InputType.Mouse;
+            scroll.Type = (UInt32)InputType.Mouse;
             scroll.Data.Mouse.Flags = (UInt32)MouseEvent.VerticalWheel;
-            scroll.Data.Mouse.MouseData = (UInt32) scrollAmount;
-            
+            scroll.Data.Mouse.MouseData = (UInt32)scrollAmount;
+
             _inputList.Add(scroll);
 
             return this;
@@ -305,10 +304,10 @@ namespace Me.Amon.Api.Input
         public InputBuilder AddMouseHorizontalWheelScroll(int scrollAmount)
         {
             var scroll = new INPUT();
-            scroll.Type = (UInt32) InputType.Mouse;
+            scroll.Type = (UInt32)InputType.Mouse;
             scroll.Data.Mouse.Flags = (UInt32)MouseEvent.HorizontalWheel;
-            scroll.Data.Mouse.MouseData = (UInt32) scrollAmount;
-            
+            scroll.Data.Mouse.MouseData = (UInt32)scrollAmount;
+
             _inputList.Add(scroll);
 
             return this;

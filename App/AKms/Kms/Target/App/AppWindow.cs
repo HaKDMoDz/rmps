@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Drawing;
-using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using Me.Amon.Api.User32;
 using Me.Amon.Kms.V;
+using Me.Amon.Properties;
 
 namespace Me.Amon.Kms.Target.App
 {
@@ -54,10 +54,7 @@ namespace Me.Amon.Kms.Target.App
         {
             if (e.Button == MouseButtons.Left)
             {
-                Stream stream = File.OpenRead(@"ico\_cur.png");
-                var bmp = (Bitmap)Image.FromStream(stream);
-                stream.Close();
-                Cursor = new Cursor(bmp.GetHicon());
+                Cursor = new Cursor(Resources._cur.GetHicon());
                 PbApp.Image = Properties.Resources._run;
             }
         }

@@ -1,14 +1,14 @@
 ﻿using System.Windows.Forms;
-using Me.Amon.Da;
-using Me.Amon.Uc;
 using Me.Amon.Kms.Enums;
 using Me.Amon.Kms.M;
+using Me.Amon.Uc;
 
 namespace Me.Amon.Kms.Training.Opt
 {
     public partial class BaseInfo : UserControl, IOptions
     {
         private Training _target;
+        private DataModel _DataModel;
 
         #region 构造函数
         public BaseInfo()
@@ -16,9 +16,10 @@ namespace Me.Amon.Kms.Training.Opt
             InitializeComponent();
         }
 
-        public BaseInfo(Training target)
+        public BaseInfo(Training target, DataModel dataModel)
         {
             _target = target;
+            _DataModel = dataModel;
 
             InitializeComponent();
         }
@@ -29,7 +30,7 @@ namespace Me.Amon.Kms.Training.Opt
         public void Init()
         {
             CbLanguage.Items.Add(new MLanguage { C1010103 = "0", C1010106 = "全部" });
-            CbLanguage.Items.AddRange(DataModel.ListLanguage().ToArray());
+            CbLanguage.Items.AddRange(_DataModel.ListLanguage().ToArray());
             CbLanguage.SelectedIndex = 0;
 
             CbStyle.Items.Add(new ListModel<EStyle>(EStyle.Elegant, "高雅"));

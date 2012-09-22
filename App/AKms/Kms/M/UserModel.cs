@@ -13,9 +13,12 @@ namespace Me.Amon.Kms.M
             SysHome = Environment.CurrentDirectory;
             DatHome = Path.Combine(SysHome, "Dat");
         }
+
         public override void Load()
         {
             _DBA = new DataModel(this);
         }
+
+        public DataModel DataModel { get { return _DBA; } }
     }
 }

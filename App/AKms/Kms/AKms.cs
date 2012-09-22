@@ -54,7 +54,7 @@ namespace Me.Amon.Kms
 
             ShowView(Settings.Default.TrayIcon);
 
-            _Robot = new KmsRobot();
+            _Robot = new KmsRobot(_UserModel.DataModel);
             _Robot.TrayPtn = this;
             _LastMethod = MiMethod;
             _LastTarget = MiTarget;
@@ -175,7 +175,7 @@ namespace Me.Amon.Kms
             string solHash = Configure.Get("sln.hash", "");
             if (CharUtil.IsValidateHash(solHash))
             {
-                _solution = DataModel.ReadSolution(solHash);
+                _solution = _UserModel.DataModel.ReadSolution(solHash);
             }
         }
 
@@ -191,7 +191,7 @@ namespace Me.Amon.Kms
             }
             MuSolution.DropDownItems.Add(_solutionEdit);
 
-            List<MSolution> list = DataModel.ListSolution();
+            List<MSolution> list = _UserModel.DataModel.ListSolution();
             if (list.Count > 0)
             {
                 //ToolStripSeparator MiSol0 = new ToolStripSeparator();
@@ -247,7 +247,7 @@ namespace Me.Amon.Kms
 
             if (_training == null)
             {
-                _training = new Training.Training(this);
+                _training = new Training.Training(this, _UserModel.DataModel);
             }
             _training.Start();
         }
@@ -434,7 +434,7 @@ namespace Me.Amon.Kms
         /// <param name="e"></param>
         private void SlnEdit_Click(object sender, EventArgs e)
         {
-            new EditSln(this).ShowDialog();
+            new EditSln(this, _UserModel.DataModel).ShowDialog();
         }
 
         /// <summary>
@@ -455,7 +455,7 @@ namespace Me.Amon.Kms
                 return;
             }
 
-            MSolution sln = DataModel.ReadSolution(hash);
+            MSolution sln = _UserModel.DataModel.ReadSolution(hash);
             if (_solutionLast != null)
             {
                 _solutionLast.Checked = false;
@@ -680,7 +680,7 @@ namespace Me.Amon.Kms
             if (_solution != null)
             {
                 DelHotKey();
-                _solution = DataModel.ReadSolution(_solution.Hash);
+                _solution = _UserModel.DataModel.ReadSolution(_solution.Hash);
                 SetHotKey();
             }
         }

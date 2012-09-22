@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Me.Amon.Da;
 using Me.Amon._uc;
-using Me.Amon.Uc;
 using Me.Amon.Kms.Enums;
 using Me.Amon.Kms.M;
+using Me.Amon.Uc;
 using Me.Amon.Util;
 
 namespace Me.Amon.Kms.V.Sln
 {
     public partial class EditSln : Form
     {
+        private DataModel _DataModel;
+
         #region 全局变量
         private readonly AKms _trayPtn;
         private MSolution _curSln;
@@ -37,9 +38,10 @@ namespace Me.Amon.Kms.V.Sln
             InitData();
         }
 
-        public EditSln(AKms trayPtn)
+        public EditSln(AKms trayPtn, DataModel dataModel)
         {
             _trayPtn = trayPtn;
+            _DataModel = dataModel;
 
             InitializeComponent();
 
@@ -49,10 +51,10 @@ namespace Me.Amon.Kms.V.Sln
         private void InitData()
         {
             CbLanguage.Items.Add(new MLanguage { C1010103 = "0", C1010106 = "全部" });
-            CbLanguage.Items.AddRange(DataModel.ListLanguage().ToArray());
+            CbLanguage.Items.AddRange(_DataModel.ListLanguage().ToArray());
             CbLanguage.SelectedIndex = 0;
 
-            LsCategory.Items.AddRange(DataModel.ListCategory().ToArray());
+            LsCategory.Items.AddRange(_DataModel.ListCategory().ToArray());
 
             CbTarget.Items.Add(new ListModel<ETarget>(ETarget.None, "请选择"));
             CbTarget.Items.Add(new ListModel<ETarget>(ETarget.Man, "人"));
@@ -72,10 +74,10 @@ namespace Me.Amon.Kms.V.Sln
             CbOutput.Items.Add(new ListModel<EOutput>(EOutput.None, "请选择"));
             CbOutput.Items.Add(new ListModel<EOutput>(EOutput.ClipBoard, "粘贴输入"));
             CbOutput.Items.Add(new ListModel<EOutput>(EOutput.SendMessage, "消息输入"));
-            CbOutput.Items.Add(new ListModel<EOutput>(EOutput.EmulateInput, "模拟输入"));
+            CbOutput.Items.Add(new ListModel<EOutput>(EOutput.SimulateInput, "模拟输入"));
             CbOutput.SelectedIndex = 0;
 
-            LsSolution.Items.AddRange(DataModel.ListSolution().ToArray());
+            LsSolution.Items.AddRange(_DataModel.ListSolution().ToArray());
         }
         #endregion
 
@@ -110,7 +112,7 @@ namespace Me.Amon.Kms.V.Sln
             {
                 return;
             }
-            _curSln = DataModel.ReadSolution(sln);
+            _curSln = _DataModel.ReadSolution(sln);
             ShowData();
         }
         #endregion
@@ -819,7 +821,7 @@ namespace Me.Amon.Kms.V.Sln
 
             // 数据保存
             bool isUpdate = CharUtil.IsValidateHash(_curSln.Hash);
-            DataModel.SaveSolution(_curSln);
+            _DataModel.SaveSolution(_curSln);
             if (isUpdate)
             {
                 LsSolution.DisplayMember = "";

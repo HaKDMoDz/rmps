@@ -27,7 +27,7 @@ namespace Me.Amon.Api.Input
                 throw new InvalidOperationException(
                     string.Format("The {0} cannot operate with a null {1}. Please provide a valid {1} instance to use for dispatching {2} messages.",
                     typeof(KeyboardSimulator).Name, typeof(IInputMessageDispatcher).Name, typeof(INPUT).Name));
-            
+
             _messageDispatcher = messageDispatcher;
         }
 
@@ -57,7 +57,7 @@ namespace Me.Amon.Api.Input
         public void KeyDown(VirtualKeyCode keyCode)
         {
             var inputList = new InputBuilder().AddKeyDown(keyCode).ToArray();
-            
+
             SendSimulatedInput(inputList);
         }
 
@@ -160,6 +160,12 @@ namespace Me.Amon.Api.Input
         {
             if (text.Length > UInt32.MaxValue / 2) throw new ArgumentException(string.Format("The text parameter is too long. It must be less than {0} characters.", UInt32.MaxValue / 2), "text");
             var inputList = new InputBuilder().AddCharacters(text).ToArray();
+            SendSimulatedInput(inputList);
+        }
+
+        public void TextEntry(char text)
+        {
+            var inputList = new InputBuilder().AddCharacter(text).ToArray();
             SendSimulatedInput(inputList);
         }
     }

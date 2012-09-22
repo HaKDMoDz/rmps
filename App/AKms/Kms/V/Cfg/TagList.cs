@@ -1,13 +1,21 @@
 ﻿using System.Windows.Forms;
-using Me.Amon.Da;
 using Me.Amon.Kms.M;
 
 namespace Me.Amon.Kms.V.Cfg
 {
     public partial class TagList : UserControl, IConfig
     {
+        private DataModel _DataModel;
+
         public TagList()
         {
+            InitializeComponent();
+        }
+
+        public TagList(DataModel dataModel)
+        {
+            _DataModel = dataModel;
+
             InitializeComponent();
         }
 
@@ -15,7 +23,7 @@ namespace Me.Amon.Kms.V.Cfg
 
         public void Init()
         {
-            LsTags.Items.AddRange(DataModel.ListCategory().ToArray());
+            LsTags.Items.AddRange(_DataModel.ListCategory().ToArray());
         }
 
         public bool Save()
@@ -43,8 +51,8 @@ namespace Me.Amon.Kms.V.Cfg
                 return;
             }
 
-            DataModel.RemoveTags(cat.C2010203);
-            DataModel.DropCategory(cat);
+            _DataModel.RemoveTags(cat.C2010203);
+            _DataModel.DropCategory(cat);
             LsTags.Items.Remove(cat);
         }
     }

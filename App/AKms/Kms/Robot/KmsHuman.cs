@@ -16,29 +16,31 @@ namespace Me.Amon.Kms.Robot
         private readonly AKms _TrayPtn;
         private readonly MagicPtn _MagicPtn;
         private readonly KmsRobot _Robot;
+        private DataModel _DataModel;
 
         #region 构造函数
         public KmsHuman()
-            : this(null, null)
         {
+            InitializeComponent();
         }
 
-        public KmsHuman(AKms trayPtn, KmsRobot robot)
+        public KmsHuman(AKms trayPtn, KmsRobot robot, DataModel dataModel)
         {
             _TrayPtn = trayPtn;
             _Robot = robot;
+            _DataModel = dataModel;
 
             InitializeComponent();
             BtRes.Image = _ResLeave;
 
             CbRes.Items.Add(new MCategory { C2010203 = "0", C2010205 = "请选择" });
-            CbRes.Items.AddRange(DataModel.ListCategory().ToArray());
+            CbRes.Items.AddRange(_DataModel.ListCategory().ToArray());
             CbRes.SelectedIndex = 0;
             MiTxt.Checked = true;
 
             if (_TxtLast == null)
             {
-                _TxtLast = new TxtDefault(this);
+                _TxtLast = new TxtDefault(this, _DataModel);
             }
             ShowControl(_TxtLast.Control);
 
@@ -257,13 +259,13 @@ namespace Me.Amon.Kms.Robot
 
             CbRes.Items.Clear();
             CbRes.Items.Add(new MCategory { C2010205 = "请选择", C2010203 = "0" });
-            CbRes.Items.AddRange(DataModel.ListCategory().ToArray());
+            CbRes.Items.AddRange(_DataModel.ListCategory().ToArray());
             CbRes.SelectedIndex = 0;
             CbRes.Focus();
 
             if (_TxtLast == null)
             {
-                _TxtLast = new TxtDefault(this);
+                _TxtLast = new TxtDefault(this, _DataModel);
             }
             ShowControl(_TxtLast.Control);
         }

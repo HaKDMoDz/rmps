@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Me.Amon.Da;
 using Me.Amon.Kms.Enums;
 using Me.Amon.Kms.M;
+using Me.Amon.Kms.Robot.cal;
 using Me.Amon.Kms.Training.Opt;
 using Me.Amon.Kms.V;
-using Me.Amon.Kms.Robot.cal;
 
 namespace Me.Amon.Kms.Training
 {
     public partial class Training : UserControl
     {
+        private DataModel _DataModel;
+
         #region 全局变量
         private MagicPtn _MagicPtn;
         private AKms _TrayPtn;
@@ -22,13 +23,14 @@ namespace Me.Amon.Kms.Training
         #endregion
 
         public Training()
-            : this(null)
         {
+            InitializeComponent();
         }
 
-        public Training(AKms trayPtn)
+        public Training(AKms trayPtn, DataModel dataModel)
         {
             _TrayPtn = trayPtn;
+            _DataModel = dataModel;
 
             InitializeComponent();
 
@@ -62,11 +64,11 @@ namespace Me.Amon.Kms.Training
                 question.P3100104 = _Session.Language;
                 question.P3100105 = _Session.LastInput;
                 question.P3100106 = Trim(_Session.LastInput);
-                DataModel.SaveSentence(question);
+                _DataModel.SaveSentence(question);
                 _Session.Question.Add(question);
                 _Session.QIndex = _Session.Question.Count - 1;
 
-                MSentence response = DataModel.FindSentence(text);
+                MSentence response = _DataModel.FindSentence(text);
                 if (response == null)
                 {
                     response = new MSentence();
@@ -74,12 +76,12 @@ namespace Me.Amon.Kms.Training
                     response.P3100104 = _Session.Language;
                     response.P3100105 = text;
                     response.P3100106 = Trim(text);
-                    DataModel.SaveSentence(response);
+                    _DataModel.SaveSentence(response);
                 }
                 _Session.Response.Add(response);
                 //_session.RIndex = _session.Response.Count - 1;
 
-                DataModel.AppendResponse(question.P3100103, response.P3100103);
+                _DataModel.AppendResponse(question.P3100103, response.P3100103);
                 TbText.Text = "";
                 ShowOptions(EOptions.UpdateCategory, "给您的回答加个标签吧！");
                 return;
@@ -91,7 +93,7 @@ namespace Me.Amon.Kms.Training
             {
                 MSentence question = _Session.Question[_Session.QIndex];
                 question.P3100105 = text;
-                DataModel.SaveSentence(question);
+                _DataModel.SaveSentence(question);
 
                 TbText.Text = "";
                 ShowOptions(EOptions.Default, "谢谢您的更新，$robot_name$会做得更好！");
@@ -104,7 +106,7 @@ namespace Me.Amon.Kms.Training
             {
                 MSentence question = _Session.Question[0];
 
-                MSentence response = DataModel.FindSentence(MSentence.Encode(text));
+                MSentence response = _DataModel.FindSentence(MSentence.Encode(text));
                 if (response == null)
                 {
                     response = new MSentence();
@@ -112,16 +114,16 @@ namespace Me.Amon.Kms.Training
                     response.P3100104 = _Session.Language;
                     response.P3100105 = text;
                     response.P3100106 = Trim(text);
-                    DataModel.SaveSentence(response);
+                    _DataModel.SaveSentence(response);
                 }
                 else
                 {
-                    DataModel.RemoveResponse(question.P3100103, response.P3100103);
+                    _DataModel.RemoveResponse(question.P3100103, response.P3100103);
                 }
                 _Session.Response.Add(response);
                 //_session.RIndex = _session.Response.Count - 1;
 
-                DataModel.AppendResponse(question.P3100103, response.P3100103);
+                _DataModel.AppendResponse(question.P3100103, response.P3100103);
                 TbText.Text = "";
                 ShowOptions(EOptions.UpdateCategory, "给您的回答加个标签吧！");
                 return;
@@ -133,7 +135,7 @@ namespace Me.Amon.Kms.Training
             {
                 MSentence response = _Session.Response[_Session.RIndex];
                 response.P3100105 = text;
-                DataModel.SaveSentence(response);
+                _DataModel.SaveSentence(response);
 
                 TbText.Text = "";
                 ShowOptions(EOptions.Default, "谢谢您的更新，$robot_name$会做得更好！");
@@ -150,8 +152,8 @@ namespace Me.Amon.Kms.Training
                     return;
                 }
 
-                List<MCategory> catList = DataModel.SaveCategory(arr);
-                DataModel.SaveTags(_Session.Response[_Session.Response.Count - 1].P3100103, catList);
+                List<MCategory> catList = _DataModel.SaveCategory(arr);
+                _DataModel.SaveTags(_Session.Response[_Session.Response.Count - 1].P3100103, catList);
                 TbText.Text = "";
                 ShowOptions(EOptions.AppendResponse, "还有其它候选回答吗？您可继续输入哟！");
                 return;
@@ -193,7 +195,7 @@ namespace Me.Amon.Kms.Training
             // 查询提问
             _Session.Question.Clear();
             _Session.QIndex = 0;
-            DataModel.FindQuestion(_Session.Question, text, _Session.Style, _Session.Language, _Session.Category);
+            _DataModel.FindQuestion(_Session.Question, text, _Session.Style, _Session.Language, _Session.Category);
             if (_Session.Question.Count < 1)
             {
                 ShowOptions(EOptions.AppendQuestion, "无法回答您的提问，教一下$robot_name$吧？");
@@ -203,7 +205,7 @@ namespace Me.Amon.Kms.Training
             // 查询应答
             _Session.Response.Clear();
             _Session.RIndex = 0;
-            DataModel.FindResponse(_Session.Response, _Session.Question[0].P3100103, _Session.Style, _Session.Language, _Session.Category);
+            _DataModel.FindResponse(_Session.Response, _Session.Question[0].P3100103, _Session.Style, _Session.Language, _Session.Category);
             if (_Session.Response.Count < 1)
             {
                 ShowOptions(EOptions.AppendResponse, "无法回答您的提问，教一下$robot_name$吧？");
@@ -241,18 +243,18 @@ namespace Me.Amon.Kms.Training
 
         public void RemoveResponse()
         {
-            DataModel.RemoveResponse(_Session.Question[_Session.QIndex].P3100103, _Session.Response[_Session.RIndex].P3100103);
+            _DataModel.RemoveResponse(_Session.Question[_Session.QIndex].P3100103, _Session.Response[_Session.RIndex].P3100103);
             ShowOptions(EOptions.Default, "输入一个问，看$robot_name$回答的怎么样：");
         }
 
         public void UpdateResponse(int rate)
         {
-            DataModel.UpdateResponse(_Session.Question[_Session.QIndex].P3100103, _Session.Response[_Session.RIndex].P3100103, rate);
+            _DataModel.UpdateResponse(_Session.Question[_Session.QIndex].P3100103, _Session.Response[_Session.RIndex].P3100103, rate);
         }
 
         public void AppendResponse(string qId, string aId)
         {
-            DataModel.AppendResponse(qId, aId);
+            _DataModel.AppendResponse(qId, aId);
         }
 
         public void ChangeLanguage(string lanId)
@@ -327,7 +329,7 @@ namespace Me.Amon.Kms.Training
                 switch (options)
                 {
                     case EOptions.Default:
-                        control = new BaseInfo(this);
+                        control = new BaseInfo(this, _DataModel);
                         _ucList[options] = control;
                         break;
                     case EOptions.Opinions:
@@ -359,7 +361,7 @@ namespace Me.Amon.Kms.Training
                         _ucList[EOptions.AppendResponse] = control;
                         break;
                     case EOptions.UpdateCategory:
-                        control = new Category(this);
+                        control = new Category(this, _DataModel);
                         _ucList[options] = control;
                         break;
                     default:

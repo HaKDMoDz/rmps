@@ -92,6 +92,7 @@ namespace Me.Amon.Kms.V.Sln
             this.MiGetControl = new System.Windows.Forms.ToolStripMenuItem();
             this.MiKeybdInput = new System.Windows.Forms.ToolStripMenuItem();
             this.MiMouseInput = new System.Windows.Forms.ToolStripMenuItem();
+            this.LlIntval = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PbAdd1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbTop1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbNew1)).BeginInit();
@@ -393,6 +394,7 @@ namespace Me.Amon.Kms.V.Sln
             // 
             // TpFun
             // 
+            this.TpFun.Controls.Add(this.LlIntval);
             this.TpFun.Controls.Add(this.PaPost);
             this.TpFun.Controls.Add(this.LbPost);
             this.TpFun.Controls.Add(this.LbInit);
@@ -721,6 +723,15 @@ namespace Me.Amon.Kms.V.Sln
             this.MiMouseInput.Text = "鼠标点击(&6)";
             this.MiMouseInput.Click += new System.EventHandler(this.MiMouseInput_Click);
             // 
+            // LlIntval
+            // 
+            this.LlIntval.AutoSize = true;
+            this.LlIntval.Location = new System.Drawing.Point(150, 89);
+            this.LlIntval.Name = "LlIntval";
+            this.LlIntval.Size = new System.Drawing.Size(17, 12);
+            this.LlIntval.TabIndex = 12;
+            this.LlIntval.Text = "秒";
+            // 
             // EditSln
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -738,8 +749,8 @@ namespace Me.Amon.Kms.V.Sln
             this.Name = "EditSln";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "方案";
-            this.Load += new System.EventHandler(this.EditSln_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EditSln_FormClosed);
+            this.Load += new System.EventHandler(this.EditSln_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PbAdd1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbTop1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbNew1)).EndInit();
@@ -827,5 +838,6 @@ namespace Me.Amon.Kms.V.Sln
         private System.Windows.Forms.Label LbNext;
         private HotKeys HkHalt;
         private System.Windows.Forms.Label LbHalt;
+        private System.Windows.Forms.Label LlIntval;
     }
 }

@@ -9,6 +9,7 @@ namespace Me.Amon.Kms.Training.Opt
     {
         private Training _target;
         private MSentence _response;
+        private DataModel _DataModel;
 
         #region 构造函数
         public Category()
@@ -16,11 +17,12 @@ namespace Me.Amon.Kms.Training.Opt
             InitializeComponent();
         }
 
-        public Category(Training target)
+        public Category(Training target,DataModel dataModel)
         {
-            InitializeComponent();
-
             _target = target;
+            _DataModel = dataModel;
+
+            InitializeComponent();
         }
         #endregion
 
@@ -34,7 +36,7 @@ namespace Me.Amon.Kms.Training.Opt
         {
             _response = response;
             CbCategory.Items.Clear();
-            CbCategory.Items.AddRange(DataModel.ListTags(response.P3100103).ToArray());
+            CbCategory.Items.AddRange(_DataModel.ListTags(response.P3100103).ToArray());
         }
 
         public UserControl GetControl()
@@ -58,7 +60,7 @@ namespace Me.Amon.Kms.Training.Opt
                 return;
             }
 
-            DataModel.RemoveTags(_response.P3100103, cat.C2010203);
+            _DataModel.RemoveTags(_response.P3100103, cat.C2010203);
             CbCategory.Items.Remove(cat);
         }
 
@@ -75,8 +77,8 @@ namespace Me.Amon.Kms.Training.Opt
                 return;
             }
 
-            DataModel.RemoveTags(cat.C2010203);
-            DataModel.DropCategory(cat);
+            _DataModel.RemoveTags(cat.C2010203);
+            _DataModel.DropCategory(cat);
         }
 
         private void BtNa_Click(object sender, System.EventArgs e)

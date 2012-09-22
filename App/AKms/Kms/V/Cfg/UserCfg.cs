@@ -1,15 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Me.Amon.Kms.M;
 using Me.Amon.Uc;
 
 namespace Me.Amon.Kms.V.Cfg
 {
     public partial class UserCfg : Form
     {
+        private DataModel _DataModel;
         private Dictionary<string, IConfig> _itemList;
+
         public UserCfg()
         {
+            InitializeComponent();
+        }
+
+        public UserCfg(DataModel dataModel)
+        {
+            _DataModel = dataModel;
+
             InitializeComponent();
         }
 
@@ -47,7 +57,7 @@ namespace Me.Amon.Kms.V.Cfg
                         _itemList[item.K] = robot;
                         break;
                     case "taglist":
-                        var tagList = new TagList();
+                        var tagList = new TagList(_DataModel);
                         tagList.Init();
                         _itemList[item.K] = tagList;
                         break;

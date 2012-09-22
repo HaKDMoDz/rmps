@@ -11,6 +11,7 @@ namespace Me.Amon.Kms.Robot
 {
     public class KmsRobot : IRobot
     {
+        private DataModel _DataModel;
         #region 全局变量
         /// <summary>
         /// 线程控制：是否运行中
@@ -38,6 +39,11 @@ namespace Me.Amon.Kms.Robot
         /// 显示逐步提示
         /// </summary>
         public bool HintByStep { get; set; }
+
+        public KmsRobot(DataModel dataModel)
+        {
+            _DataModel = dataModel;
+        }
 
         public void AppendTarget(ITarget target)
         {
@@ -229,7 +235,7 @@ namespace Me.Amon.Kms.Robot
 
                 session.Question.Clear();
                 session.QIndex = 0;
-                DataModel.FindQuestion(session.Question, session.LastInput, session.Style, session.Language, session.Category);
+                _DataModel.FindQuestion(session.Question, session.LastInput, session.Style, session.Language, session.Category);
                 if (session.Question.Count < 1)
                 {
                     _Target.SendMessage(session.LastInput);
@@ -238,7 +244,7 @@ namespace Me.Amon.Kms.Robot
 
                 session.Response.Clear();
                 session.RIndex = 0;
-                DataModel.FindResponse(session.Response, session.Question[0].P3100103, session.Style, session.Language, session.Category);
+                _DataModel.FindResponse(session.Response, session.Question[0].P3100103, session.Style, session.Language, session.Category);
                 if (session.Response.Count < 1)
                 {
                     _Target.SendMessage(session.LastInput);
@@ -253,7 +259,7 @@ namespace Me.Amon.Kms.Robot
         {
             if (_TxtHuman == null)
             {
-                _TxtHuman = new KmsHuman(TrayPtn, this);
+                _TxtHuman = new KmsHuman(TrayPtn, this, _DataModel);
             }
             _TxtHuman.Start();
         }
@@ -262,7 +268,7 @@ namespace Me.Amon.Kms.Robot
         {
             MSolution sln = TrayPtn.Solution;
             // 语言资源
-            sln.Sentence = DataModel.ListSentence(sln.Category);
+            sln.Sentence = _DataModel.ListSentence(sln.Category);
             if (sln.Sentence.Count < 1)
             {
                 _Target.ShowWarning("大哥，$robot_name$没的可说，给点提示吧！");

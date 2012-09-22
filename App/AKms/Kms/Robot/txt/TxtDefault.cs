@@ -8,15 +8,17 @@ namespace Me.Amon.Kms.Robot.txt
     public partial class TxtDefault : UserControl, IHuman<MSentence>
     {
         private KmsHuman _KmsHuman;
+        private DataModel _DataModel;
 
         public TxtDefault()
-            : this(null)
         {
+            InitializeComponent();
         }
 
-        public TxtDefault(KmsHuman human)
+        public TxtDefault(KmsHuman human, DataModel dataModel)
         {
             _KmsHuman = human;
+            _DataModel = dataModel;
 
             InitializeComponent();
         }
@@ -36,7 +38,7 @@ namespace Me.Amon.Kms.Robot.txt
         public void Init(string catId)
         {
             LsRes.Items.Clear();
-            LsRes.Items.AddRange(DataModel.ListSentence(catId).ToArray());
+            LsRes.Items.AddRange(_DataModel.ListSentence(catId).ToArray());
         }
 
         public MSentence Deal()

@@ -15,6 +15,6 @@ namespace Me.Amon.Kms.Enums
         /// <summary>
         /// 模拟输入
         /// </summary>
-        EmulateInput
+        SimulateInput
     }
 }
