@@ -1,5 +1,4 @@
 using System;
-using System.Drawing;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -45,23 +44,19 @@ namespace Me.Amon.Sec.V.Wiz
             //_Decode = new Decode(UcFile, UcText);
 
             CbDir.Items.Add(new Items { K = "hash", V = "摘要" });
+            CbDir.Items.Add(new Items { K = "wrap", V = "转换" });
             CbDir.Items.Add(new Items { K = "enc", V = "加密" });
             CbDir.Items.Add(new Items { K = "dec", V = "解密" });
             CbDir.SelectedIndex = 0;
-        }
 
-        public void InitView()
-        {
-            Location = new Point(10, 10);
-            Size = new Size(546, 296);
-            TabIndex = 0;
-            _ASec.Controls.Add(this);
-            _ASec.ClientSize = new Size(564, 344);
-        }
+            _ASec.ShowTips(PbAlg, "切换算法");
+            _ASec.ShowTips(PbIUdc, "选择掩码");
 
-        public void HideView()
-        {
-            _ASec.Controls.Remove(this);
+            _ASec.ShowTips(PbKey, "口令选项");
+            _ASec.ShowTips(PbOUdc, "选择掩码");
+
+            _ASec.ShowTips(PbSrcPath, "打开文件");
+            _ASec.ShowTips(PbDstPath, "选择输出目录");
         }
 
         public void LoadFav()
@@ -188,7 +183,16 @@ namespace Me.Amon.Sec.V.Wiz
         #region 事件处理
         private void CbDir_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            Items item = CbDir.SelectedItem as Items;
+            if (item == null)
+            {
+                return;
+            }
+            bool b = item.K == "enc" || item.K == "dec";
+            LlKey.Visible = b;
+            TbKey.Visible = b;
+            PbKey.Visible = b;
+            PbOUdc.Visible = b;
         }
 
         private void PbAlg_Click(object sender, EventArgs e)
@@ -252,19 +256,13 @@ namespace Me.Amon.Sec.V.Wiz
 
         private void PbDstPath_Click(object sender, EventArgs e)
         {
-            OpenFileDialog fdOpen = new OpenFileDialog();
-            fdOpen.ShowDialog();
-            AppendFiles(fdOpen.FileNames);
-        }
-
-        private void LbDstFile_DragEnter(object sender, DragEventArgs e)
-        {
-
-        }
-
-        private void LbDstFile_DragDrop(object sender, DragEventArgs e)
-        {
-
+            FolderBrowserDialog fdOpen = new FolderBrowserDialog();
+            fdOpen.Description = "请选择文件输出目录：";
+            if (DialogResult.OK != fdOpen.ShowDialog())
+            {
+                return;
+            }
+            //AppendFiles(fdOpen.SelectedPath);
         }
 
         private void PbMenu_Click(object sender, EventArgs e)

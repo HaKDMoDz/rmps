@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Sec.M;
 using Me.Amon.Sec.V.Pro;
@@ -18,6 +19,8 @@ namespace Me.Amon.Sec
         public ASec()
         {
             InitializeComponent();
+
+            this.Icon = Me.Amon.Properties.Resources.Icon;
         }
 
         public ASec(UserModel userModel)
@@ -42,13 +45,13 @@ namespace Me.Amon.Sec
 
         public void ShowEcho(string message)
         {
-            LblEcho.Text = message;
-            TpTips.SetToolTip(LblEcho, message);
+            LlEcho.Text = message;
+            TpTips.SetToolTip(LlEcho, message);
         }
 
         public void ShowEcho(string message, int delay)
         {
-            LblEcho.Text = message;
+            LlEcho.Text = message;
         }
 
         public bool WillExit()
@@ -65,6 +68,8 @@ namespace Me.Amon.Sec
         #region 事件处理
         private void ASec_Load(object sender, EventArgs e)
         {
+            _UserModel = new UserModel();
+
             ShowWiz();
         }
 
@@ -132,27 +137,36 @@ namespace Me.Amon.Sec
         private APro _APro;
         private void ShowPro()
         {
-            if (_ISec != null && _ISec.Name != "pro")
+            if (_ISec != null && _ISec.Name == "pro")
             {
-                _ISec.HideView();
+                return;
             }
 
             if (_APro == null)
             {
                 _APro = new APro(this);
                 _APro.InitOnce(_UserModel);
+                _APro.Dock = DockStyle.Fill;
                 _APro.Name = "pro";
+                _APro.TabIndex = 0;
             }
+
+            Size size = _APro.Size;
+            size.Width += 24;
+            size.Height += 60;
+            PlMain.Controls.Clear();
+            PlMain.Controls.Add(_APro);
+            ClientSize = size;
+
             _ISec = _APro;
-            _ISec.InitView();
         }
 
         private AWiz _AWiz;
         private void ShowWiz()
         {
-            if (_ISec != null && _ISec.Name != "wiz")
+            if (_ISec != null && _ISec.Name == "wiz")
             {
-                _ISec.HideView();
+                return;
             }
 
             if (_AWiz == null)
@@ -160,9 +174,19 @@ namespace Me.Amon.Sec
                 _AWiz = new AWiz(this);
                 _AWiz.InitOnce();
                 _AWiz.Name = "wiz";
+                _AWiz.Dock = DockStyle.Fill;
+                _AWiz.TabIndex = 0;
             }
+
+            Size size = _AWiz.Size;
+            size.Width += 24;
+            size.Height += 60;
+
+            PlMain.Controls.Clear();
+            PlMain.Controls.Add(_AWiz);
+            ClientSize = size;
+
             _ISec = _AWiz;
-            _ISec.InitView();
         }
         #endregion
     }

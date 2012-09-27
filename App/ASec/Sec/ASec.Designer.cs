@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.BtDo = new System.Windows.Forms.Button();
-            this.LblEcho = new System.Windows.Forms.Label();
-            this.Worker = new System.ComponentModel.BackgroundWorker();
-            this.TpTips = new System.Windows.Forms.ToolTip(this.components);
+            this.PlMain = new System.Windows.Forms.Panel();
             this.PbMenu = new System.Windows.Forms.PictureBox();
+            this.LlEcho = new System.Windows.Forms.Label();
+            this.BtDo = new System.Windows.Forms.Button();
+            this.TpTips = new System.Windows.Forms.ToolTip(this.components);
+            this.Worker = new System.ComponentModel.BackgroundWorker();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MiOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.MiSave = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,31 +45,15 @@
             this.CmMenu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // BtDo
+            // PlMain
             // 
-            this.BtDo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtDo.Location = new System.Drawing.Point(307, 237);
-            this.BtDo.Name = "BtDo";
-            this.BtDo.Size = new System.Drawing.Size(75, 23);
-            this.BtDo.TabIndex = 1;
-            this.BtDo.Text = "执行(&R)";
-            this.BtDo.UseVisualStyleBackColor = true;
-            this.BtDo.Click += new System.EventHandler(this.BtDo_Click);
-            // 
-            // LblEcho
-            // 
-            this.LblEcho.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.LblEcho.AutoSize = true;
-            this.LblEcho.Location = new System.Drawing.Point(36, 242);
-            this.LblEcho.Name = "LblEcho";
-            this.LblEcho.Size = new System.Drawing.Size(0, 12);
-            this.LblEcho.TabIndex = 2;
-            // 
-            // Worker
-            // 
-            this.Worker.WorkerSupportsCancellation = true;
-            this.Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Worker_DoWork);
-            this.Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.DoWorkerCompleted);
+            this.PlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PlMain.Location = new System.Drawing.Point(12, 12);
+            this.PlMain.Name = "PlMain";
+            this.PlMain.Size = new System.Drawing.Size(370, 219);
+            this.PlMain.TabIndex = 0;
             // 
             // PbMenu
             // 
@@ -79,9 +64,36 @@
             this.PbMenu.Name = "PbMenu";
             this.PbMenu.Size = new System.Drawing.Size(18, 18);
             this.PbMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PbMenu.TabIndex = 3;
+            this.PbMenu.TabIndex = 1;
             this.PbMenu.TabStop = false;
+            this.TpTips.SetToolTip(this.PbMenu, "选单");
             this.PbMenu.Click += new System.EventHandler(this.PbMenu_Click);
+            // 
+            // LlEcho
+            // 
+            this.LlEcho.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.LlEcho.AutoSize = true;
+            this.LlEcho.Location = new System.Drawing.Point(36, 242);
+            this.LlEcho.Name = "LlEcho";
+            this.LlEcho.Size = new System.Drawing.Size(0, 12);
+            this.LlEcho.TabIndex = 2;
+            // 
+            // BtDo
+            // 
+            this.BtDo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtDo.Location = new System.Drawing.Point(307, 237);
+            this.BtDo.Name = "BtDo";
+            this.BtDo.Size = new System.Drawing.Size(75, 23);
+            this.BtDo.TabIndex = 3;
+            this.BtDo.Text = "执行(&R)";
+            this.BtDo.UseVisualStyleBackColor = true;
+            this.BtDo.Click += new System.EventHandler(this.BtDo_Click);
+            // 
+            // Worker
+            // 
+            this.Worker.WorkerSupportsCancellation = true;
+            this.Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Worker_DoWork);
+            this.Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.DoWorkerCompleted);
             // 
             // CmMenu
             // 
@@ -132,9 +144,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(394, 272);
-            this.Controls.Add(this.BtDo);
+            this.Controls.Add(this.PlMain);
             this.Controls.Add(this.PbMenu);
-            this.Controls.Add(this.LblEcho);
+            this.Controls.Add(this.LlEcho);
+            this.Controls.Add(this.BtDo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "ASec";
@@ -150,11 +163,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Button BtDo;
-        private System.Windows.Forms.Label LblEcho;
-        private System.ComponentModel.BackgroundWorker Worker;
-        private System.Windows.Forms.ToolTip TpTips;
+        private System.Windows.Forms.Panel PlMain;
         private System.Windows.Forms.PictureBox PbMenu;
+        private System.Windows.Forms.Label LlEcho;
+        private System.Windows.Forms.Button BtDo;
+        private System.Windows.Forms.ToolTip TpTips;
+        private System.ComponentModel.BackgroundWorker Worker;
         private System.Windows.Forms.ContextMenuStrip CmMenu;
         private System.Windows.Forms.ToolStripMenuItem MiWiz;
         private System.Windows.Forms.ToolStripMenuItem MiPro;

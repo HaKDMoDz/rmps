@@ -8,13 +8,8 @@ namespace Me.Amon.Sec.V.Wiz
 {
     class Digest : ICrypto
     {
-        private AFile _AFile;
-        private AText _AText;
-
-        public Digest(AFile file, AText text)
+        public Digest()
         {
-            _AFile = file;
-            _AText = text;
         }
 
         public void Init()
@@ -24,8 +19,8 @@ namespace Me.Amon.Sec.V.Wiz
                 return;
             }
 
-            _AFile.ClSrc.HeaderText = "输入文件";
-            _AFile.ClDst.HeaderText = "输出文件";
+            //_AFile.ClSrc.HeaderText = "输入文件";
+            //_AFile.ClDst.HeaderText = "输出文件";
         }
 
         public bool IsText { get; set; }
@@ -39,24 +34,24 @@ namespace Me.Amon.Sec.V.Wiz
                 return DigestText();
             }
 
-            if (_AFile.FileList == null || _AFile.FileList.Count < 1)
-            {
-                return false;
-            }
+            //if (_AFile.FileList == null || _AFile.FileList.Count < 1)
+            //{
+            //    return false;
+            //}
 
-            Items item;
-            for (int i = 0; i < _AFile.FileList.Count; i += 1)
-            {
-                item = _AFile.FileList[i];
-                if (!DigestFile(item))
-                {
-                    continue;
-                }
-                if (i < _AFile.GvFile.Rows.Count)
-                {
-                    _AFile.GvFile.Rows[i].Cells[1].Value = item.D;
-                }
-            }
+            //Items item;
+            //for (int i = 0; i < _AFile.FileList.Count; i += 1)
+            //{
+            //    item = _AFile.FileList[i];
+            //    if (!DigestFile(item))
+            //    {
+            //        continue;
+            //    }
+            //    if (i < _AFile.GvFile.Rows.Count)
+            //    {
+            //        _AFile.GvFile.Rows[i].Cells[1].Value = item.D;
+            //    }
+            //}
             return true;
         }
 
@@ -79,18 +74,18 @@ namespace Me.Amon.Sec.V.Wiz
 
         private bool DigestText()
         {
-            string src = _AText.TbSrc.Text;
-            if (string.IsNullOrEmpty(src))
-            {
-                return false;
-            }
+            //string src = _AText.TbSrc.Text;
+            //if (string.IsNullOrEmpty(src))
+            //{
+            //    return false;
+            //}
 
-            using (HashAlgorithm alg = HashAlgorithm.Create(Algorithm))
-            {
-                byte[] buf = Encoding.UTF8.GetBytes(src);
-                buf = alg.ComputeHash(buf);
-                _AText.TbDst.Text = CharUtil.EncodeString(buf);
-            }
+            //using (HashAlgorithm alg = HashAlgorithm.Create(Algorithm))
+            //{
+            //    byte[] buf = Encoding.UTF8.GetBytes(src);
+            //    buf = alg.ComputeHash(buf);
+            //    _AText.TbDst.Text = CharUtil.EncodeString(buf);
+            //}
             return true;
         }
     }

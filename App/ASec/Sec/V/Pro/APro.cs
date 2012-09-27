@@ -114,20 +114,6 @@ namespace Me.Amon.Sec.V.Pro
             CbOpt.SelectedIndex = 0;
         }
 
-        public void InitView()
-        {
-            Location = new Point(12, 12);
-            Size = new Size(486, 236);
-            TabIndex = 0;
-            _ASec.Controls.Add(this);
-            _ASec.ClientSize = new Size(510, 305);
-        }
-
-        public void HideView()
-        {
-            _ASec.Controls.Remove(this);
-        }
-
         #region 事件处理
         private void CbOpt_SelectedIndexChanged(object sender, EventArgs e)
         {

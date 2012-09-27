@@ -7,10 +7,6 @@
     {
         string Name { get; set; }
 
-        void InitView();
-
-        void HideView();
-
         void LoadFav();
 
         void SaveFav();
