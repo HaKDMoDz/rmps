@@ -73,6 +73,9 @@
     <Compile Include="M\AUserModel.cs" />
     <Compile Include="M\IViewModel.cs" />
     <Compile Include="M\UdcModel.cs" />
+    <Compile Include="Sec\E\ASecAction.cs" />
+    <Compile Include="Sec\E\LoadFavAction.cs" />
+    <Compile Include="Sec\E\SaveFavAction.cs" />
     <Compile Include="Sec\M\UserModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -201,6 +204,18 @@
     <Compile Include="Sec\V\Wiz\Digest.cs" />
     <Compile Include="Sec\V\Wiz\Encode.cs" />
     <Compile Include="Sec\V\Wiz\ICrypto.cs" />
+    <Compile Include="Sec\V\Wiz\UcAlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\UcAlg.Designer.cs">
+      <DependentUpon>UcAlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\UcKey.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\UcKey.Designer.cs">
+      <DependentUpon>UcKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uc\ItemGroup.cs" />
     <Compile Include="Uc\Itemi.cs" />
     <Compile Include="Uc\Items.cs" />
@@ -325,6 +340,12 @@
     <EmbeddedResource Include="Sec\V\Wiz\AWiz.resx">
       <DependentUpon>AWiz.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sec\V\Wiz\UcAlg.resx">
+      <DependentUpon>UcAlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\V\Wiz\UcKey.resx">
+      <DependentUpon>UcKey.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Uw\Alert.resx">
       <DependentUpon>Alert.cs</DependentUpon>
     </EmbeddedResource>
@@ -356,7 +377,6 @@
   <ItemGroup>
     <Folder Include="Da\Db\" />
     <Folder Include="Sec\C\" />
-    <Folder Include="Sec\E\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ComnLib\ComnLib.csproj">

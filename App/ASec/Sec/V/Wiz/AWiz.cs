@@ -30,9 +30,9 @@ namespace Me.Amon.Sec.V.Wiz
 
         public AWiz(ASec asec)
         {
-            InitializeComponent();
-
             _ASec = asec;
+
+            InitializeComponent();
         }
         #endregion
 
@@ -197,7 +197,9 @@ namespace Me.Amon.Sec.V.Wiz
 
         private void PbAlg_Click(object sender, EventArgs e)
         {
-
+            UcAlg alg = new UcAlg();
+            alg.Init();
+            alg.ShowDialog(_ASec);
         }
 
         private void PbIUdc_Click(object sender, EventArgs e)
@@ -207,7 +209,9 @@ namespace Me.Amon.Sec.V.Wiz
 
         private void PbKey_Click(object sender, EventArgs e)
         {
-
+            UcKey key = new UcKey();
+            key.Init();
+            key.ShowDialog(_ASec);
         }
 
         private void PbOUdc_Click(object sender, EventArgs e)

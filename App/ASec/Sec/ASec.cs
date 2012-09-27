@@ -1,19 +1,22 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Sec.M;
 using Me.Amon.Sec.V.Pro;
 using Me.Amon.Sec.V.Wiz;
+using Me.Amon.Uc;
 
 namespace Me.Amon.Sec
 {
-    public partial class ASec : Form
+    public partial class ASec : Form, IApp
     {
         #region 全局变量
         private UserModel _UserModel;
         private ISec _ISec;
         #endregion
+        private XmlMenu<ASec> _XmlMenu;
 
         #region 构造函数
         public ASec()
@@ -65,11 +68,33 @@ namespace Me.Amon.Sec
         }
         #endregion
 
+        #region 公共函数
+        public void LoadFav()
+        {
+            _ISec.LoadFav();
+        }
+
+        public void SaveFav()
+        {
+            _ISec.SaveFav();
+        }
+        #endregion
+
         #region 事件处理
         private void ASec_Load(object sender, EventArgs e)
         {
             _UserModel = new UserModel();
+            _UserModel.Init();
+            _UserModel.Load();
 
+            _XmlMenu = new XmlMenu<ASec>(this, null);
+            if (_XmlMenu.Load(Path.Combine(_UserModel.DatHome, "ASec.xml")))
+            {
+                _XmlMenu.GetStrokes("ASec", this);
+                _XmlMenu.GetPopMenu("ASec", CmMenu);
+                _XmlMenu.GetPopMenu("ASec-Src", CmSrc);
+                _XmlMenu.GetPopMenu("ASec-Dst", CmDst);
+            }
             ShowWiz();
         }
 
@@ -93,26 +118,6 @@ namespace Me.Amon.Sec
         private void PbMenu_Click(object sender, EventArgs e)
         {
             CmMenu.Show(PbMenu, 0, PbMenu.Height);
-        }
-
-        private void MiLoad_Click(object sender, EventArgs e)
-        {
-            _ISec.LoadFav();
-        }
-
-        private void MiSave_Click(object sender, EventArgs e)
-        {
-            _ISec.SaveFav();
-        }
-
-        private void MiWiz_Click(object sender, EventArgs e)
-        {
-            ShowWiz();
-        }
-
-        private void MiPro_Click(object sender, EventArgs e)
-        {
-            ShowPro();
         }
         #endregion
 

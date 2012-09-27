@@ -36,13 +36,9 @@
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.Worker = new System.ComponentModel.BackgroundWorker();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MiOpen = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiSave = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiSep0 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiWiz = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiPro = new System.Windows.Forms.ToolStripMenuItem();
+            this.CmSrc = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CmDst = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).BeginInit();
-            this.CmMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // PlMain
@@ -97,47 +93,18 @@
             // 
             // CmMenu
             // 
-            this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MiOpen,
-            this.MiSave,
-            this.MiSep0,
-            this.MiWiz,
-            this.MiPro});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(145, 98);
+            this.CmMenu.Size = new System.Drawing.Size(153, 26);
             // 
-            // MiOpen
+            // CmSrc
             // 
-            this.MiOpen.Name = "MiOpen";
-            this.MiOpen.Size = new System.Drawing.Size(144, 22);
-            this.MiOpen.Text = "打开(&O)";
-            this.MiOpen.Click += new System.EventHandler(this.MiLoad_Click);
+            this.CmSrc.Name = "CmSrc";
+            this.CmSrc.Size = new System.Drawing.Size(61, 4);
             // 
-            // MiSave
+            // CmDst
             // 
-            this.MiSave.Name = "MiSave";
-            this.MiSave.Size = new System.Drawing.Size(144, 22);
-            this.MiSave.Text = "保存(&S)";
-            this.MiSave.Click += new System.EventHandler(this.MiSave_Click);
-            // 
-            // MiSep0
-            // 
-            this.MiSep0.Name = "MiSep0";
-            this.MiSep0.Size = new System.Drawing.Size(141, 6);
-            // 
-            // MiWiz
-            // 
-            this.MiWiz.Name = "MiWiz";
-            this.MiWiz.Size = new System.Drawing.Size(144, 22);
-            this.MiWiz.Text = "向导模式(&W)";
-            this.MiWiz.Click += new System.EventHandler(this.MiWiz_Click);
-            // 
-            // MiPro
-            // 
-            this.MiPro.Name = "MiPro";
-            this.MiPro.Size = new System.Drawing.Size(144, 22);
-            this.MiPro.Text = "专业模式(&P)";
-            this.MiPro.Click += new System.EventHandler(this.MiPro_Click);
+            this.CmDst.Name = "CmDst";
+            this.CmDst.Size = new System.Drawing.Size(61, 4);
             // 
             // ASec
             // 
@@ -155,7 +122,6 @@
             this.Text = "阿木加密器";
             this.Load += new System.EventHandler(this.ASec_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();
-            this.CmMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -170,10 +136,7 @@
         private System.Windows.Forms.ToolTip TpTips;
         private System.ComponentModel.BackgroundWorker Worker;
         private System.Windows.Forms.ContextMenuStrip CmMenu;
-        private System.Windows.Forms.ToolStripMenuItem MiWiz;
-        private System.Windows.Forms.ToolStripMenuItem MiPro;
-        private System.Windows.Forms.ToolStripSeparator MiSep0;
-        private System.Windows.Forms.ToolStripMenuItem MiOpen;
-        private System.Windows.Forms.ToolStripMenuItem MiSave;
+        private System.Windows.Forms.ContextMenuStrip CmSrc;
+        private System.Windows.Forms.ContextMenuStrip CmDst;
     }
 }
