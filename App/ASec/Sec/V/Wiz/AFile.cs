@@ -35,7 +35,7 @@ namespace Me.Amon.Sec.V.Wiz
             }
             catch (Exception ex)
             {
-                Main.ShowError(ex);
+                Main.ShowError(_ASec, ex);
             }
         }
 
@@ -142,7 +142,7 @@ namespace Me.Amon.Sec.V.Wiz
                 }
                 catch (Exception exp)
                 {
-                    Main.ShowError(exp);
+                    Main.ShowError(_ASec, exp);
                 }
             }
         }

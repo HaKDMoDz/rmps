@@ -1,4 +1,5 @@
-﻿using Me.Amon.M;
+﻿using System.Collections.Generic;
+using Me.Amon.M;
 
 namespace Me.Amon.Sec.M
 {
@@ -12,6 +13,15 @@ namespace Me.Amon.Sec.M
         {
         }
 
-        public UdcModel UdcModel { get; set; }
+        //public UdcModel UdcModel { get; set; }
+
+        public List<Udc> ListUdc()
+        {
+            return new List<Udc>();
+        }
+
+        public void SaveUdc(Udc udc)
+        {
+        }
     }
 }

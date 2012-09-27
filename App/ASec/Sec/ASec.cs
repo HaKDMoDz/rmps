@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using Me.Amon.M;
+using Me.Amon.Sec.M;
 using Me.Amon.Sec.V.Pro;
 using Me.Amon.Sec.V.Wiz;
 

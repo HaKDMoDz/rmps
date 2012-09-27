@@ -40,6 +40,9 @@
     <Reference Include="BouncyCastle.Crypto">
       <HintPath>Lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>Lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,6 +55,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CApp.cs" />
+    <Compile Include="Da\DBA.cs" />
+    <Compile Include="Da\DFA.cs" />
+    <Compile Include="Da\Df\DFConst.cs" />
+    <Compile Include="Da\Df\DFEngine.cs" />
+    <Compile Include="Da\Df\DFObject.cs" />
+    <Compile Include="E\IAction.cs" />
+    <Compile Include="IApp.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="M\AUserModel.cs" />
+    <Compile Include="M\IViewModel.cs" />
+    <Compile Include="M\UdcModel.cs" />
+    <Compile Include="Sec\M\UserModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sec\ASec.cs">
@@ -63,6 +85,7 @@
     <Compile Include="Sec\ESec.cs" />
     <Compile Include="Sec\ISec.cs" />
     <Compile Include="Sec\M\DataModel.cs" />
+    <Compile Include="Sec\M\MSec.cs" />
     <Compile Include="Sec\T\Util.cs" />
     <Compile Include="Sec\V\Pro\APro.cs">
       <SubType>UserControl</SubType>
@@ -190,6 +213,90 @@
     <Compile Include="Sec\V\Wiz\Digest.cs" />
     <Compile Include="Sec\V\Wiz\Encode.cs" />
     <Compile Include="Sec\V\Wiz\ICrypto.cs" />
+    <Compile Include="Uc\ItemGroup.cs" />
+    <Compile Include="Uc\Itemi.cs" />
+    <Compile Include="Uc\Items.cs" />
+    <Compile Include="Uc\KeyStroke.cs" />
+    <Compile Include="Uc\TabControl\ATabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\NativeMethods.cs" />
+    <Compile Include="Uc\TabControl\TabStyle.cs" />
+    <Compile Include="Uc\TabControl\TabStyleProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleAmonProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleAngledProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleChromeProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleDefaultProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleIE8Provider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleNoneProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleRoundedProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleVisualStudioProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleVS2010Provider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\TabControl\ThemedColors.cs" />
+    <Compile Include="Uc\XmlMenu.cs" />
+    <Compile Include="Util\BeanUtil.cs" />
+    <Compile Include="Util\CharUtil.cs" />
+    <Compile Include="Util\SafeUtil.cs" />
+    <Compile Include="Uw\Alert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Alert.Designer.cs">
+      <DependentUpon>Alert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Error.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Error.Designer.cs">
+      <DependentUpon>Error.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\HotKeys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\HotKeys.Designer.cs">
+      <DependentUpon>HotKeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Input.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Input.Designer.cs">
+      <DependentUpon>Input.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\UdcEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\UdcEditor.Designer.cs">
+      <DependentUpon>UdcEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Waiting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Waiting.Designer.cs">
+      <DependentUpon>Waiting.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -236,6 +343,24 @@
     <EmbeddedResource Include="Sec\V\Wiz\AWiz.resx">
       <DependentUpon>AWiz.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Alert.resx">
+      <DependentUpon>Alert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Error.resx">
+      <DependentUpon>Error.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\HotKeys.resx">
+      <DependentUpon>HotKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Input.resx">
+      <DependentUpon>Input.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\UdcEditor.resx">
+      <DependentUpon>UdcEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Waiting.resx">
+      <DependentUpon>Waiting.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -247,6 +372,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Da\Db\" />
     <Folder Include="Sec\C\" />
     <Folder Include="Sec\E\" />
   </ItemGroup>
@@ -259,6 +385,27 @@
       <Project>{8EAB76F7-3B5C-490E-BDDE-CBEFD3D5BF25}</Project>
       <Name>FormLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Input.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Waiting.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Menu.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

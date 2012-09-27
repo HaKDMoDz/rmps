@@ -101,7 +101,7 @@ namespace Me.Amon.Sec.V.Wiz
                 }
                 catch (Exception exp)
                 {
-                    Main.ShowError(exp);
+                    Main.ShowError(null, exp);
                 }
                 finally
                 {

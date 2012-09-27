@@ -2,8 +2,8 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
-using Me.Amon.Pwd;
 using Me.Amon.M;
+using Me.Amon.Sec.M;
 using Me.Amon.Sec.V.Pro.Uc;
 using Me.Amon.Sec.V.Pro.Uw;
 using Me.Amon.Uc;
@@ -18,6 +18,7 @@ namespace Me.Amon.Sec.V.Pro
     {
         private ASec _ASec;
         private UserModel _UserModel;
+        private DataModel _DataModel;
         private Cm _UcCm;
         private Uk _UcUk;
         private Di _UcDi;
@@ -224,7 +225,7 @@ namespace Me.Amon.Sec.V.Pro
             {
                 return;
             }
-            _UdcEditor = new UdcEditor(_UserModel);
+            _UdcEditor = new UdcEditor(_DataModel);
             _UdcEditor.Init(null, udc);
             BeanUtil.CenterToParent(_UdcEditor, _ASec);
             _UdcEditor.ShowDialog(this);
@@ -473,7 +474,7 @@ namespace Me.Amon.Sec.V.Pro
             Items opt = CbOpt.SelectedItem as Items;
             if (opt == null || opt.K == "0")
             {
-                Main.ShowAlert("请选择您要执行的操作！");
+                Main.ShowAlert(_ASec, "请选择您要执行的操作！");
                 CbOpt.Focus();
                 return;
             }
@@ -510,7 +511,7 @@ namespace Me.Amon.Sec.V.Pro
                 case ESec.OPT_WRAPPER:
                     if (key == null || key.K == "0")
                     {
-                        Main.ShowAlert("请选择您要执行的操作！");
+                        Main.ShowAlert(_ASec, "请选择您要执行的操作！");
                         CbKey.Focus();
                         return;
                     }
@@ -519,7 +520,7 @@ namespace Me.Amon.Sec.V.Pro
                 case ESec.OPT_SCRYPTO:
                     if (key == null || key.K == "0")
                     {
-                        Main.ShowAlert("请选择您要执行的操作！");
+                        Main.ShowAlert(_ASec, "请选择您要执行的操作！");
                         CbKey.Focus();
                         return;
                     }
@@ -528,7 +529,7 @@ namespace Me.Amon.Sec.V.Pro
                 case ESec.OPT_SSTREAM:
                     if (key == null || key.K == "0")
                     {
-                        Main.ShowAlert("请选择您要执行的操作！");
+                        Main.ShowAlert(_ASec, "请选择您要执行的操作！");
                         CbKey.Focus();
                         return;
                     }
@@ -537,7 +538,7 @@ namespace Me.Amon.Sec.V.Pro
                 case ESec.OPT_ACRYPTO:
                     if (key == null || key.K == "0")
                     {
-                        Main.ShowAlert("请选择您要执行的操作！");
+                        Main.ShowAlert(_ASec, "请选择您要执行的操作！");
                         CbKey.Focus();
                         return;
                     }
@@ -587,7 +588,7 @@ namespace Me.Amon.Sec.V.Pro
             Items item = CbOpt.SelectedItem as Items;
             if (item == null || item.K == "0")
             {
-                Main.ShowAlert("默认操作不需要保存！");
+                Main.ShowAlert(_ASec, "默认操作不需要保存！");
                 return;
             }
 
