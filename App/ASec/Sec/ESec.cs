@@ -6,6 +6,14 @@
     public class ESec
     {
         /// <summary>
+        /// 混淆处理
+        /// </summary>
+        public const string OPT_CONFUSE = "confuse";
+        /// <summary>
+        /// 掩码转换
+        /// </summary>
+        public const string OPT_WRAPPER = "wrapper";
+        /// <summary>
         /// 数据散列
         /// </summary>
         public const string OPT_DIGEST = "digest";
@@ -13,14 +21,6 @@
         /// 随机口令
         /// </summary>
         public const string OPT_RANDKEY = "randkey";
-        /// <summary>
-        /// 掩码转换
-        /// </summary>
-        public const string OPT_WRAPPER = "wrapper";
-        /// <summary>
-        /// 混淆处理
-        /// </summary>
-        public const string OPT_CONFUSE = "confuse";
         /// <summary>
         /// 对称块加密
         /// </summary>
@@ -38,8 +38,14 @@
         /// </summary>
         public const string OPT_TXT2IMG = "txt2img";
 
-        public const string DIR_ENC = "enc";
-        public const string DIR_DEC = "dec";
+        /// <summary>
+        /// 加密
+        /// </summary>
+        public const string DIR_ENCRYPT = "encrypt";
+        /// <summary>
+        /// 解密
+        /// </summary>
+        public const string DIR_DECRYPT = "decrypt";
 
         public const string ACRYPTO_ELGAMAL = "ElGamal";
         public const string ACRYPTO_NACCACHESTERN = "NaccacheStern";
@@ -96,6 +102,20 @@
         public const string SSTREAM_SALSA20 = "Salsa20";
         public const string SSTREAM_VMPC = "Vmpc";
         public const string SSTREAM_VMPCKSA3 = "VmpcKsa3";
+
+        public const string MODE_CBC = "CBC";
+        public const string MODE_CFB = "CFB";
+        public const string MODE_GOFB = "GOFB";
+        public const string MODE_OFB = "OFB";
+        public const string MODE_OPENPGPCFB = "OpenPgpCFB";
+        public const string MODE_SIC = "SIC";
+
+        public const string PADDING_ISO10126d2 = "ISO10126d2";
+        public const string PADDING_ISO7816d4 = "ISO7816d4";
+        public const string PADDING_PKCS7 = "Pkcs7";
+        public const string PADDING_TBC = "Tbc";
+        public const string PADDING_X923 = "X923";
+        public const string PADDING_ZEROBYTE = "ZeroByte";
 
         public const int BUF_SIZE = 1024;
     }

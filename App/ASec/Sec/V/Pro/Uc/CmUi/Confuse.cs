@@ -10,8 +10,8 @@ namespace Me.Amon.Sec.V.Pro.Uc.CmUi
         {
         }
 
-        private Ce.Wrapper _Cipher;
-        public Ce.Wrapper Cipher
+        private Ce.WrapperEngine _Cipher;
+        public Ce.WrapperEngine Cipher
         {
             get
             {
@@ -40,7 +40,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.CmUi
 
         public override void ChangeName(string name)
         {
-            _Cipher = new Ce.Wrapper();
+            _Cipher = new Ce.WrapperEngine();
 
             _Cm.CbMode.SelectedIndex = 0;
 

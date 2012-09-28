@@ -95,8 +95,8 @@ namespace Me.Amon.Sec.V.Pro
             // CbKey
             // 
             CbKey.Items.Add(new Items { K = "0", V = "请选择" });
-            CbKey.Items.Add(new Items { K = ESec.DIR_ENC, V = "加密" });
-            CbKey.Items.Add(new Items { K = ESec.DIR_DEC, V = "解密" });
+            CbKey.Items.Add(new Items { K = ESec.DIR_ENCRYPT, V = "加密" });
+            CbKey.Items.Add(new Items { K = ESec.DIR_DECRYPT, V = "解密" });
             CbKey.SelectedIndex = 0;
             CbKey.Visible = false;
 
@@ -510,7 +510,7 @@ namespace Me.Amon.Sec.V.Pro
                         CbKey.Focus();
                         return;
                     }
-                    Scrypto(key.K != ESec.DIR_DEC);
+                    Scrypto(key.K != ESec.DIR_DECRYPT);
                     break;
                 case ESec.OPT_SSTREAM:
                     if (key == null || key.K == "0")
@@ -519,7 +519,7 @@ namespace Me.Amon.Sec.V.Pro
                         CbKey.Focus();
                         return;
                     }
-                    Sstream(key.K != ESec.DIR_DEC);
+                    Sstream(key.K != ESec.DIR_DECRYPT);
                     break;
                 case ESec.OPT_ACRYPTO:
                     if (key == null || key.K == "0")
@@ -528,7 +528,7 @@ namespace Me.Amon.Sec.V.Pro
                         CbKey.Focus();
                         return;
                     }
-                    Acrypto(key.K != ESec.DIR_DEC);
+                    Acrypto(key.K != ESec.DIR_DECRYPT);
                     break;
                 case ESec.OPT_TXT2IMG:
                     Txt2Img();

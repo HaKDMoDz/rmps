@@ -49,7 +49,7 @@ namespace Me.Amon.Sec.V.Pro.Uc.DoUi
 
         public override void InitKey(string key)
         {
-            bool b = key == ESec.DIR_ENC;
+            bool b = key == ESec.DIR_ENCRYPT;
             _Do.LbMask.Visible = b;
             _Do.CbMask.Visible = b;
             _Do.BtMask.Visible = b;

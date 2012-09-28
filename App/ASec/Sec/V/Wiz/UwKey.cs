@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace Me.Amon.Sec.V.Wiz
 {
-    public partial class UcKey : Form
+    public partial class UwKey : Form
     {
-        public UcKey()
+        public UwKey()
         {
             InitializeComponent();
         }

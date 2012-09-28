@@ -94,7 +94,7 @@
             // CmMenu
             // 
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(153, 26);
+            this.CmMenu.Size = new System.Drawing.Size(61, 4);
             // 
             // CmSrc
             // 
@@ -115,8 +115,6 @@
             this.Controls.Add(this.PbMenu);
             this.Controls.Add(this.LlEcho);
             this.Controls.Add(this.BtDo);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
             this.Name = "ASec";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "阿木加密器";

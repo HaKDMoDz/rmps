@@ -1,19 +1,27 @@
 using System.IO;
 using System.Security.Cryptography;
-using System.Text;
+using Me.Amon.Sec.M;
 using Me.Amon.Uc;
 using Me.Amon.Util;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Crypto.Digests;
 
 namespace Me.Amon.Sec.V.Wiz
 {
     class Digest : ICrypto
     {
+        private MSec _MSec;
+        private IDigest _Cipher;
+
         public Digest()
         {
         }
 
-        public void Init()
+        #region 接口实现
+        public void Init(MSec msec)
         {
+            _MSec = msec;
+
             if (IsText)
             {
                 return;
@@ -24,8 +32,6 @@ namespace Me.Amon.Sec.V.Wiz
         }
 
         public bool IsText { get; set; }
-
-        public string Algorithm { get; set; }
 
         public bool DoCrypto(string pass)
         {
@@ -54,7 +60,62 @@ namespace Me.Amon.Sec.V.Wiz
             //}
             return true;
         }
+        #endregion
 
+        private void CreateEngine()
+        {
+            switch (_MSec.Algorithm)
+            {
+                case ESec.DIGEST_GOST3411:
+                    _Cipher = new Gost3411Digest();
+                    break;
+                case ESec.DIGEST_MD2:
+                    _Cipher = new MD2Digest();
+                    break;
+                case ESec.DIGEST_MD4:
+                    _Cipher = new MD4Digest();
+                    break;
+                case ESec.DIGEST_MD5:
+                    _Cipher = new MD5Digest();
+                    break;
+                case ESec.DIGEST_NULL:
+                    _Cipher = new NullDigest();
+                    break;
+                case ESec.DIGEST_RIPEMD128:
+                    _Cipher = new RipeMD128Digest();
+                    break;
+                case ESec.DIGEST_RIPEMD160:
+                    _Cipher = new RipeMD160Digest();
+                    break;
+                case ESec.DIGEST_RIPEMD256:
+                    _Cipher = new RipeMD256Digest();
+                    break;
+                case ESec.DIGEST_RIPEMD320:
+                    _Cipher = new RipeMD320Digest();
+                    break;
+                case ESec.DIGEST_SHA1:
+                    _Cipher = new Sha1Digest();
+                    break;
+                case ESec.DIGEST_SHA224:
+                    _Cipher = new Sha224Digest();
+                    break;
+                case ESec.DIGEST_SHA256:
+                    _Cipher = new Sha256Digest();
+                    break;
+                case ESec.DIGEST_SHA384:
+                    _Cipher = new Sha384Digest();
+                    break;
+                case ESec.DIGEST_SHA512:
+                    _Cipher = new Sha512Digest();
+                    break;
+                case ESec.DIGEST_TIGER:
+                    _Cipher = new TigerDigest();
+                    break;
+                case ESec.DIGEST_WHIRLPOOL:
+                    _Cipher = new WhirlpoolDigest();
+                    break;
+            }
+        }
         private bool DigestFile(Items item)
         {
             if (!File.Exists(item.K))
@@ -62,7 +123,7 @@ namespace Me.Amon.Sec.V.Wiz
                 return false;
             }
 
-            using (HashAlgorithm alg = HashAlgorithm.Create(Algorithm))
+            using (HashAlgorithm alg = HashAlgorithm.Create(_MSec.Algorithm))
             {
                 FileStream stream = File.OpenRead(item.K);
                 byte[] buf = alg.ComputeHash(stream);

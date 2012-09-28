@@ -264,7 +264,7 @@ namespace Me.Amon.Sec.V.Pro.Uc
             }
         }
 
-        public Ce.Wrapper Wrapper
+        public Ce.WrapperEngine Wrapper
         {
             get
             {

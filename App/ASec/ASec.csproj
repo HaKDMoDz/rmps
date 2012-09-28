@@ -62,6 +62,8 @@
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="CApp.cs" />
+    <Compile Include="Ce\ConfuseEngine.cs" />
+    <Compile Include="Ce\WrapperEngine.cs" />
     <Compile Include="Da\DBA.cs" />
     <Compile Include="Da\DFA.cs" />
     <Compile Include="Da\Df\DFConst.cs" />
@@ -72,7 +74,9 @@
     <Compile Include="Main.cs" />
     <Compile Include="M\AUserModel.cs" />
     <Compile Include="M\IViewModel.cs" />
+    <Compile Include="M\Udc.cs" />
     <Compile Include="M\UdcModel.cs" />
+    <Compile Include="M\Vcs.cs" />
     <Compile Include="Sec\E\ASecAction.cs" />
     <Compile Include="Sec\E\LoadFavAction.cs" />
     <Compile Include="Sec\E\SaveFavAction.cs" />
@@ -194,28 +198,44 @@
     <Compile Include="Sec\V\Pro\Uw\Text.Designer.cs">
       <DependentUpon>Text.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sec\V\Wiz\Acrypto.cs" />
     <Compile Include="Sec\V\Wiz\AWiz.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Sec\V\Wiz\AWiz.Designer.cs">
       <DependentUpon>AWiz.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sec\V\Wiz\Decode.cs" />
+    <Compile Include="Sec\V\Wiz\Confuse.cs" />
+    <Compile Include="Sec\V\Wiz\Sstream.cs" />
     <Compile Include="Sec\V\Wiz\Digest.cs" />
-    <Compile Include="Sec\V\Wiz\Encode.cs" />
+    <Compile Include="Sec\V\Wiz\Scrypto.cs" />
     <Compile Include="Sec\V\Wiz\ICrypto.cs" />
-    <Compile Include="Sec\V\Wiz\UcAlg.cs">
+    <Compile Include="Sec\V\Wiz\IWiz.cs" />
+    <Compile Include="Sec\V\Wiz\UwAlg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sec\V\Wiz\UcAlg.Designer.cs">
-      <DependentUpon>UcAlg.cs</DependentUpon>
+    <Compile Include="Sec\V\Wiz\UwAlg.Designer.cs">
+      <DependentUpon>UwAlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sec\V\Wiz\UcKey.cs">
+    <Compile Include="Sec\V\Wiz\UwKey.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sec\V\Wiz\UcKey.Designer.cs">
-      <DependentUpon>UcKey.cs</DependentUpon>
+    <Compile Include="Sec\V\Wiz\UwKey.Designer.cs">
+      <DependentUpon>UwKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sec\V\Wiz\UcSrc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\UcSrc.Designer.cs">
+      <DependentUpon>UcSrc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\UcDst.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\UcDst.Designer.cs">
+      <DependentUpon>UcDst.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\Wrapper.cs" />
     <Compile Include="Uc\ItemGroup.cs" />
     <Compile Include="Uc\Itemi.cs" />
     <Compile Include="Uc\Items.cs" />
@@ -340,11 +360,17 @@
     <EmbeddedResource Include="Sec\V\Wiz\AWiz.resx">
       <DependentUpon>AWiz.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sec\V\Wiz\UcAlg.resx">
-      <DependentUpon>UcAlg.cs</DependentUpon>
+    <EmbeddedResource Include="Sec\V\Wiz\UwAlg.resx">
+      <DependentUpon>UwAlg.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sec\V\Wiz\UcKey.resx">
-      <DependentUpon>UcKey.cs</DependentUpon>
+    <EmbeddedResource Include="Sec\V\Wiz\UwKey.resx">
+      <DependentUpon>UwKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\V\Wiz\UcSrc.resx">
+      <DependentUpon>UcSrc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\V\Wiz\UcDst.resx">
+      <DependentUpon>UcDst.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\Alert.resx">
       <DependentUpon>Alert.cs</DependentUpon>
@@ -377,16 +403,6 @@
   <ItemGroup>
     <Folder Include="Da\Db\" />
     <Folder Include="Sec\C\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ComnLib\ComnLib.csproj">
-      <Project>{E57C460D-306A-4F57-AD0B-51F7EEAD8838}</Project>
-      <Name>ComnLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FormLib\FormLib.csproj">
-      <Project>{8EAB76F7-3B5C-490E-BDDE-CBEFD3D5BF25}</Project>
-      <Name>FormLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Icon.ico" />

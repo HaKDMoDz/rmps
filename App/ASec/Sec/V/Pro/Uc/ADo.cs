@@ -106,7 +106,7 @@ namespace Me.Amon.Sec.V.Pro.Uc
         #endregion
 
         #region 数据处理
-        protected static Ce.Wrapper _Wrapper = new Ce.Wrapper();
+        protected static Ce.WrapperEngine _Wrapper = new Ce.WrapperEngine();
         protected static char[] _CharBuf = new char[8192];
         protected static System.IO.Stream _Stream;
         protected static System.IO.TextWriter _Writer;

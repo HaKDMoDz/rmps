@@ -4,22 +4,16 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using Me.Amon.Sec.M;
 using Me.Amon.Uc;
 
 namespace Me.Amon.Sec.V.Wiz
 {
     public partial class AWiz : UserControl, ISec
     {
-        private string _Alg;
-        private int _BlockSize;
-        private byte[] _Salt;
-        private char[] _Mask;
         #region 全局变量
         private ASec _ASec;
-        private ICrypto _Crypto;
-        private Encode _Encode;
-        private Decode _Decode;
-        private Digest _Digest;
+        private MSec _MSec;
         #endregion
 
         #region 构造函数
@@ -42,21 +36,18 @@ namespace Me.Amon.Sec.V.Wiz
             //_Digest = new Digest(UcFile, UcText);
             //_Encode = new Encode(UcFile, UcText);
             //_Decode = new Decode(UcFile, UcText);
+            System.Security.Cryptography.SymmetricAlgorithm d;
 
-            CbDir.Items.Add(new Items { K = "hash", V = "摘要" });
-            CbDir.Items.Add(new Items { K = "wrap", V = "转换" });
-            CbDir.Items.Add(new Items { K = "enc", V = "加密" });
-            CbDir.Items.Add(new Items { K = "dec", V = "解密" });
-            CbDir.SelectedIndex = 0;
+            CbOpt.Items.Add(new Items { K = ESec.OPT_CONFUSE, V = "混淆算法" });
+            CbOpt.Items.Add(new Items { K = ESec.OPT_WRAPPER, V = "掩码算法" });
+            CbOpt.Items.Add(new Items { K = ESec.OPT_DIGEST, V = "摘要算法" });
+            CbOpt.Items.Add(new Items { K = ESec.OPT_SCRYPTO, V = "块对称算法" });
+            CbOpt.Items.Add(new Items { K = ESec.OPT_SSTREAM, V = "流对称算法" });
+            CbOpt.Items.Add(new Items { K = ESec.OPT_ACRYPTO, V = "非对称算法" });
+            CbOpt.SelectedIndex = 0;
 
-            _ASec.ShowTips(PbAlg, "切换算法");
-            _ASec.ShowTips(PbIUdc, "选择掩码");
-
+            _ASec.ShowTips(PbOpt, "算法选项");
             _ASec.ShowTips(PbKey, "口令选项");
-            _ASec.ShowTips(PbOUdc, "选择掩码");
-
-            _ASec.ShowTips(PbSrcPath, "打开文件");
-            _ASec.ShowTips(PbDstPath, "选择输出目录");
         }
 
         public void LoadFav()
@@ -69,32 +60,12 @@ namespace Me.Amon.Sec.V.Wiz
 
         public void DoCrypto()
         {
-            Items opt = CbDir.SelectedItem as Items;
+            Items opt = CbOpt.SelectedItem as Items;
             if (opt == null)
             {
                 MessageBox.Show(this, "请选择您要进行的操作！");
-                CbDir.Focus();
+                CbOpt.Focus();
                 return;
-            }
-
-            if (TcSrc.SelectedTab == TpSrcText)
-            {
-                string text = TbSrcText.Text;
-                if (string.IsNullOrEmpty(text))
-                {
-                    MessageBox.Show(this, "请输入您要处理的文本！");
-                    TbSrcText.Focus();
-                    return;
-                }
-            }
-            else if (TcSrc.SelectedTab == TpSrcFile)
-            {
-                if (LbSrcFile.Items.Count < 1)
-                {
-                    MessageBox.Show(this, "请选择您要处理的文件！");
-                    LbSrcFile.Focus();
-                    return;
-                }
             }
 
             if (TbKey.Visible)
@@ -108,59 +79,49 @@ namespace Me.Amon.Sec.V.Wiz
                 }
             }
 
-            //string pass = "";
+            if (!_UcSrc.CheckInput())
+            {
+                return;
+            }
 
-            //if (TbPass.Enabled)
-            //{
-            //    pass = TbPass.Text;
-            //    if (string.IsNullOrEmpty(pass))
-            //    {
-            //        Main.ShowAlert("请输入您的密码！");
-            //        TbPass.Focus();
-            //    }
-            //}
+            if (!_UcDst.CheckInput())
+            {
+                return;
+            }
 
-            //_Crypto.IsText = TcCrypto.SelectedIndex == 1;
-            //if (_Crypto.DoCrypto(pass))
-            //{
-            //    _ASec.ShowEcho("处理完成！");
-            //}
-            //else
-            //{
-            //    _ASec.ShowEcho("处理失败！");
-            //}
+            switch (opt.K)
+            {
+                case ESec.OPT_CONFUSE:
+                    DoConfuse();
+                    break;
+                case ESec.OPT_WRAPPER:
+                    DoWrapper();
+                    break;
+                case ESec.OPT_DIGEST:
+                    DoDigest();
+                    break;
+                case ESec.OPT_SCRYPTO:
+                    DoScrypto();
+                    break;
+                case ESec.OPT_SSTREAM:
+                    DoSstream();
+                    break;
+                case ESec.OPT_ACRYPTO:
+                    DoAcrypto();
+                    break;
+                default:
+                    return;
+            }
         }
         #endregion
 
         #region 公共函数
         public void AppendFiles(string[] files)
         {
-            foreach (string file in files)
-            {
-                if (Exists(file))
-                {
-                    continue;
-                }
-                LbSrcFile.Items.Add(new Items { K = file, V = Path.GetFileName(file) });
-            }
         }
 
         public void RemoveSelectedFile()
         {
-            var idx = LbSrcFile.SelectedIndex;
-            if (idx < 0)
-            {
-                return;
-            }
-            LbSrcFile.Items.RemoveAt(idx);
-            if (idx == LbSrcFile.Items.Count)
-            {
-                idx -= 1;
-            }
-            if (idx > 0)
-            {
-                LbSrcFile.SelectedIndex = idx;
-            }
         }
 
         /// <summary>
@@ -183,90 +144,30 @@ namespace Me.Amon.Sec.V.Wiz
         #region 事件处理
         private void CbDir_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Items item = CbDir.SelectedItem as Items;
+            Items item = CbOpt.SelectedItem as Items;
             if (item == null)
             {
                 return;
             }
-            bool b = item.K == "enc" || item.K == "dec";
+
+            bool b = item.K == ESec.OPT_SCRYPTO || item.K == ESec.OPT_SSTREAM || item.K == ESec.OPT_ACRYPTO;
             LlKey.Visible = b;
             TbKey.Visible = b;
             PbKey.Visible = b;
-            PbOUdc.Visible = b;
         }
 
         private void PbAlg_Click(object sender, EventArgs e)
         {
-            UcAlg alg = new UcAlg();
+            UwAlg alg = new UwAlg();
             alg.Init();
             alg.ShowDialog(_ASec);
         }
 
-        private void PbIUdc_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void PbKey_Click(object sender, EventArgs e)
         {
-            UcKey key = new UcKey();
+            UwKey key = new UwKey();
             key.Init();
             key.ShowDialog(_ASec);
-        }
-
-        private void PbOUdc_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TcSrc_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            PbSrcPath.Visible = TcSrc.SelectedTab == TpSrcFile;
-        }
-
-        private void PbSrcPath_Click(object sender, EventArgs e)
-        {
-            if (DialogResult.OK != Main.ShowOpenFileDialog(null, CApp.FILE_OPEN_ALL, null, true))
-            {
-                return;
-            }
-            AppendFiles(Main.OpenFileDialog.FileNames);
-        }
-
-        private void LbSrcFile_DragEnter(object sender, DragEventArgs e)
-        {
-
-        }
-
-        private void LbSrcFile_DragDrop(object sender, DragEventArgs e)
-        {
-
-        }
-
-        private void TbSrcText_DragEnter(object sender, DragEventArgs e)
-        {
-
-        }
-
-        private void TbSrcText_DragDrop(object sender, DragEventArgs e)
-        {
-
-        }
-
-        private void TcDst_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            PbDstPath.Visible = TcDst.SelectedTab == TpDstFile;
-        }
-
-        private void PbDstPath_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog fdOpen = new FolderBrowserDialog();
-            fdOpen.Description = "请选择文件输出目录：";
-            if (DialogResult.OK != fdOpen.ShowDialog())
-            {
-                return;
-            }
-            //AppendFiles(fdOpen.SelectedPath);
         }
 
         private void PbMenu_Click(object sender, EventArgs e)
@@ -281,13 +182,82 @@ namespace Me.Amon.Sec.V.Wiz
         #endregion
 
         #region 私有函数
-        private void Encode()
+        #region 密码处理
+        private Confuse _Confuse;
+        private void DoConfuse()
         {
+            if (_Confuse == null)
+            {
+                _Confuse = new Confuse();
+            }
+            _Confuse.Init(_MSec);
+
+            _UcSrc.Begin();
+            _UcDst.Begin();
+
+            char[] buf = new char[ESec.BUF_SIZE];
+
+            int len = _UcSrc.Process(buf, 0, buf.Length);
+            while (len > 0)
+            {
+                _UcDst.Append(buf, 0, len);
+                len = _UcSrc.Process(buf, 0, buf.Length);
+            }
+
+            _UcDst.End();
+            _UcSrc.End();
         }
 
-        private void Decode()
+        private Wrapper _Wrapper;
+        private void DoWrapper()
         {
+            if (_Wrapper == null)
+            {
+                _Wrapper = new Wrapper();
+            }
+            _Wrapper.Init(_MSec);
         }
+
+        private Digest _Digest;
+        private void DoDigest()
+        {
+            if (_Digest == null)
+            {
+                _Digest = new Digest();
+            }
+            _Digest.Init(_MSec);
+        }
+
+        private Scrypto _Scrypto;
+        private void DoScrypto()
+        {
+            if (_Scrypto == null)
+            {
+                _Scrypto = new Scrypto();
+            }
+            _Scrypto.Init(_MSec);
+        }
+
+        private Sstream _Sstream;
+        private void DoSstream()
+        {
+            if (_Sstream == null)
+            {
+                _Sstream = new Sstream();
+            }
+            _Sstream.Init(_MSec);
+        }
+
+        private Acrypto _Acrypto;
+        private void DoAcrypto()
+        {
+            if (_Acrypto == null)
+            {
+                _Acrypto = new Acrypto();
+            }
+            _Acrypto.Init(_MSec);
+        }
+        #endregion
 
         private void WriteHeader(Stream stream)
         {
@@ -340,18 +310,6 @@ namespace Me.Amon.Sec.V.Wiz
             string salt = arr[2];
         }
 
-        private bool Exists(string file)
-        {
-            foreach (Items item in LbSrcFile.Items)
-            {
-                if (file == item.K)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         /// <summary>
         /// 单独保存加密结果
         /// </summary>
@@ -359,16 +317,6 @@ namespace Me.Amon.Sec.V.Wiz
         {
             XmlWriter writer = XmlWriter.Create("");
 
-            // 算法
-            writer.WriteElementString("Alg", _Alg);
-            // 块大小
-            writer.WriteElementString("BlockSize", _BlockSize.ToString());
-            // 随机向量
-            writer.WriteElementString("Salt", "");
-            // 掩码文本
-            writer.WriteElementString("Mask", "");
-            // 文件摘要
-            writer.WriteElementString("Hash", FileHash(""));
 
             writer.Close();
         }
@@ -379,18 +327,8 @@ namespace Me.Amon.Sec.V.Wiz
         private void LoadFromXml()
         {
             XmlReader reader = XmlReader.Create("");
-
-            _Alg = reader.ReadElementContentAsString();
-            CbDir.SelectedItem = new Items { K = _Alg };
-
-            _BlockSize = reader.ReadElementContentAsInt();
-
-            string salt = reader.ReadElementContentAsString();
-            _Salt = null;
-
-            string mask = reader.ReadElementContentAsString();
-            _Mask = null;
-
+            _MSec.FromXml(reader);
+            CbOpt.SelectedItem = new Items { K = _MSec.Operation };
             reader.Close();
         }
 

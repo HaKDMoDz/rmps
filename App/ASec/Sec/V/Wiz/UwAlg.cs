@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace Me.Amon.Sec.V.Wiz
 {
-    public partial class UcAlg : Form
+    public partial class UwAlg : Form
     {
-        public UcAlg()
+        public UwAlg()
         {
             InitializeComponent();
         }
