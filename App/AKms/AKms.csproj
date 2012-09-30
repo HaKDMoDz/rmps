@@ -36,6 +36,9 @@
   <PropertyGroup>
     <StartupObject>Me.Amon.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>Lib\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -105,11 +108,11 @@
     <Compile Include="Da\Df\DFConst.cs" />
     <Compile Include="Da\Df\DFObject.cs" />
     <Compile Include="IApp.cs" />
-    <Compile Include="Kms\AKms.cs">
+    <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Kms\AKms.Designer.cs">
-      <DependentUpon>AKms.cs</DependentUpon>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Kms\Enums\EAction.cs" />
     <Compile Include="Kms\Enums\EMessage.cs" />
@@ -196,7 +199,6 @@
     <Compile Include="Kms\Target\Asc\AscWindow.Designer.cs">
       <DependentUpon>AscWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kms\Target\ATarget.cs" />
     <Compile Include="Kms\Target\Img\ImgTarget.cs" />
     <Compile Include="Kms\Target\ITarget.cs" />
     <Compile Include="Kms\Target\Kms\KmsTarget.cs" />
@@ -207,12 +209,6 @@
       <DependentUpon>KmsWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Kms\Target\Man\ManTarget.cs" />
-    <Compile Include="Kms\Target\Man\ManWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Kms\Target\Man\ManWindow.Designer.cs">
-      <DependentUpon>ManWindow.cs</DependentUpon>
-    </Compile>
     <Compile Include="Kms\Target\Net\NetTarget.cs" />
     <Compile Include="Kms\Target\Net\NetWindow.cs">
       <SubType>Form</SubType>
@@ -227,48 +223,48 @@
     <Compile Include="Kms\Target\Scb\ScbWindow.Designer.cs">
       <DependentUpon>ScbWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kms\Training\IOptions.cs" />
-    <Compile Include="Kms\Training\opt\BaseInfo.cs">
+    <Compile Include="Kms\Target\Man\IOptions.cs" />
+    <Compile Include="Kms\Target\Man\opt\BaseInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Kms\Training\opt\BaseInfo.Designer.cs">
+    <Compile Include="Kms\Target\Man\opt\BaseInfo.Designer.cs">
       <DependentUpon>BaseInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kms\Training\opt\Category.cs">
+    <Compile Include="Kms\Target\Man\opt\Category.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Kms\Training\opt\Category.Designer.cs">
+    <Compile Include="Kms\Target\Man\opt\Category.Designer.cs">
       <DependentUpon>Category.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kms\Training\opt\Opinions.cs">
+    <Compile Include="Kms\Target\Man\opt\Opinions.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Kms\Training\opt\Opinions.Designer.cs">
+    <Compile Include="Kms\Target\Man\opt\Opinions.Designer.cs">
       <DependentUpon>Opinions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kms\Training\opt\Question.cs">
+    <Compile Include="Kms\Target\Man\opt\Question.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Kms\Training\opt\Question.Designer.cs">
+    <Compile Include="Kms\Target\Man\opt\Question.Designer.cs">
       <DependentUpon>Question.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kms\Training\opt\RateInfo.cs">
+    <Compile Include="Kms\Target\Man\opt\RateInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Kms\Training\opt\RateInfo.Designer.cs">
+    <Compile Include="Kms\Target\Man\opt\RateInfo.Designer.cs">
       <DependentUpon>RateInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kms\Training\opt\Response.cs">
+    <Compile Include="Kms\Target\Man\opt\Response.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Kms\Training\opt\Response.Designer.cs">
+    <Compile Include="Kms\Target\Man\opt\Response.Designer.cs">
       <DependentUpon>Response.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kms\Training\Training.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="Kms\Target\Man\ManWindow.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Kms\Training\Training.Designer.cs">
-      <DependentUpon>Training.cs</DependentUpon>
+    <Compile Include="Kms\Target\Man\ManWindow.Designer.cs">
+      <DependentUpon>ManWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Kms\V\Cfg\About.cs">
       <SubType>UserControl</SubType>
@@ -301,11 +297,11 @@
     <Compile Include="Kms\V\MagicPtn.Designer.cs">
       <DependentUpon>MagicPtn.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kms\V\Sln\EditSln.cs">
+    <Compile Include="Kms\AKms.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Kms\V\Sln\EditSln.Designer.cs">
-      <DependentUpon>EditSln.cs</DependentUpon>
+    <Compile Include="Kms\AKms.Designer.cs">
+      <DependentUpon>AKms.cs</DependentUpon>
     </Compile>
     <Compile Include="Kms\V\Sln\HotKeys.cs">
       <SubType>UserControl</SubType>
@@ -313,56 +309,55 @@
     <Compile Include="Kms\V\Sln\HotKeys.Designer.cs">
       <DependentUpon>HotKeys.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kms\V\_uc\ExecuteApp.cs">
+    <Compile Include="Kms\V\Uc\ExecuteApp.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Kms\V\_uc\ExecuteApp.Designer.cs">
+    <Compile Include="Kms\V\Uc\ExecuteApp.Designer.cs">
       <DependentUpon>ExecuteApp.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kms\V\_uc\GetControl.cs">
+    <Compile Include="Kms\V\Uc\GetControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Kms\V\_uc\GetControl.Designer.cs">
+    <Compile Include="Kms\V\Uc\GetControl.Designer.cs">
       <DependentUpon>GetControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kms\V\_uc\HideWindow.cs">
+    <Compile Include="Kms\V\Uc\HideWindow.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Kms\V\_uc\HideWindow.Designer.cs">
+    <Compile Include="Kms\V\Uc\HideWindow.Designer.cs">
       <DependentUpon>HideWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kms\V\_uc\IFunction.cs" />
-    <Compile Include="Kms\V\_uc\KeybdInput.cs">
+    <Compile Include="Kms\V\Uc\IFunction.cs" />
+    <Compile Include="Kms\V\Uc\KeybdInput.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Kms\V\_uc\KeybdInput.Designer.cs">
+    <Compile Include="Kms\V\Uc\KeybdInput.Designer.cs">
       <DependentUpon>KeybdInput.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kms\V\_uc\MouseInput.cs">
+    <Compile Include="Kms\V\Uc\MouseInput.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Kms\V\_uc\MouseInput.Designer.cs">
+    <Compile Include="Kms\V\Uc\MouseInput.Designer.cs">
       <DependentUpon>MouseInput.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kms\V\_uc\PostAction.cs">
+    <Compile Include="Kms\V\Uc\PostAction.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Kms\V\_uc\PostAction.Designer.cs">
+    <Compile Include="Kms\V\Uc\PostAction.Designer.cs">
       <DependentUpon>PostAction.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kms\V\_uc\ShowWindow.cs">
+    <Compile Include="Kms\V\Uc\ShowWindow.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Kms\V\_uc\ShowWindow.Designer.cs">
+    <Compile Include="Kms\V\Uc\ShowWindow.Designer.cs">
       <DependentUpon>ShowWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kms\V\_uc\ThreadWait.cs">
+    <Compile Include="Kms\V\Uc\ThreadWait.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Kms\V\_uc\ThreadWait.Designer.cs">
+    <Compile Include="Kms\V\Uc\ThreadWait.Designer.cs">
       <DependentUpon>ThreadWait.cs</DependentUpon>
     </Compile>
-    <Compile Include="Main.cs" />
     <Compile Include="M\AUserModel.cs" />
     <Compile Include="M\Cat.cs" />
     <Compile Include="M\Dbv.cs" />
@@ -377,7 +372,7 @@
     <Compile Include="TApp.cs" />
     <Compile Include="Uc\Itemi.cs" />
     <Compile Include="Uc\Items.cs" />
-    <Compile Include="Uc\ListModel.cs" />
+    <Compile Include="Uc\ListItem.cs" />
     <Compile Include="Uc\Properties.cs" />
     <Compile Include="Util\BeanUtil.cs" />
     <Compile Include="Util\CharUtil.cs" />
@@ -415,12 +410,6 @@
     <Compile Include="Uw\TxtEditor.Designer.cs">
       <DependentUpon>TxtEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Uw\UdcEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Uw\UdcEditor.Designer.cs">
-      <DependentUpon>UdcEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="Uw\Waiting.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -433,8 +422,8 @@
     <Compile Include="V\Reset.Designer.cs">
       <DependentUpon>Reset.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Kms\AKms.resx">
-      <DependentUpon>AKms.cs</DependentUpon>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Kms\Robot\img\ImgControl.resx">
       <DependentUpon>ImgControl.cs</DependentUpon>
@@ -466,26 +455,26 @@
     <EmbeddedResource Include="Kms\Target\Asc\AscWindow.resx">
       <DependentUpon>AscWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kms\Training\opt\BaseInfo.resx">
+    <EmbeddedResource Include="Kms\Target\Man\opt\BaseInfo.resx">
       <DependentUpon>BaseInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kms\Training\opt\Category.resx">
+    <EmbeddedResource Include="Kms\Target\Man\opt\Category.resx">
       <DependentUpon>Category.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kms\Training\opt\Opinions.resx">
+    <EmbeddedResource Include="Kms\Target\Man\opt\Opinions.resx">
       <DependentUpon>Opinions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kms\Training\opt\Question.resx">
+    <EmbeddedResource Include="Kms\Target\Man\opt\Question.resx">
       <DependentUpon>Question.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kms\Training\opt\RateInfo.resx">
+    <EmbeddedResource Include="Kms\Target\Man\opt\RateInfo.resx">
       <DependentUpon>RateInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kms\Training\opt\Response.resx">
+    <EmbeddedResource Include="Kms\Target\Man\opt\Response.resx">
       <DependentUpon>Response.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kms\Training\Training.resx">
-      <DependentUpon>Training.cs</DependentUpon>
+    <EmbeddedResource Include="Kms\Target\Man\ManWindow.resx">
+      <DependentUpon>ManWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Kms\V\Cfg\About.resx">
       <DependentUpon>About.cs</DependentUpon>
@@ -502,34 +491,34 @@
     <EmbeddedResource Include="Kms\V\MagicPtn.resx">
       <DependentUpon>MagicPtn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kms\V\Sln\EditSln.resx">
-      <DependentUpon>EditSln.cs</DependentUpon>
+    <EmbeddedResource Include="Kms\AKms.resx">
+      <DependentUpon>AKms.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Kms\V\Sln\HotKeys.resx">
       <DependentUpon>HotKeys.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kms\V\_uc\ExecuteApp.resx">
+    <EmbeddedResource Include="Kms\V\Uc\ExecuteApp.resx">
       <DependentUpon>ExecuteApp.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kms\V\_uc\GetControl.resx">
+    <EmbeddedResource Include="Kms\V\Uc\GetControl.resx">
       <DependentUpon>GetControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kms\V\_uc\HideWindow.resx">
+    <EmbeddedResource Include="Kms\V\Uc\HideWindow.resx">
       <DependentUpon>HideWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kms\V\_uc\KeybdInput.resx">
+    <EmbeddedResource Include="Kms\V\Uc\KeybdInput.resx">
       <DependentUpon>KeybdInput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kms\V\_uc\MouseInput.resx">
+    <EmbeddedResource Include="Kms\V\Uc\MouseInput.resx">
       <DependentUpon>MouseInput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kms\V\_uc\PostAction.resx">
+    <EmbeddedResource Include="Kms\V\Uc\PostAction.resx">
       <DependentUpon>PostAction.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kms\V\_uc\ShowWindow.resx">
+    <EmbeddedResource Include="Kms\V\Uc\ShowWindow.resx">
       <DependentUpon>ShowWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kms\V\_uc\ThreadWait.resx">
+    <EmbeddedResource Include="Kms\V\Uc\ThreadWait.resx">
       <DependentUpon>ThreadWait.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -556,9 +545,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\TxtEditor.resx">
       <DependentUpon>TxtEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Uw\UdcEditor.resx">
-      <DependentUpon>UdcEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\Waiting.resx">
       <DependentUpon>Waiting.cs</DependentUpon>
@@ -627,7 +613,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Kms\C\" />
-    <Folder Include="oAuth\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\_add.png" />

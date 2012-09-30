@@ -10,7 +10,7 @@ namespace Me.Amon.Kms.Robot
         /// <summary>
         /// 总控引用
         /// </summary>
-        AKms TrayPtn { set; }
+        Main TrayPtn { set; }
 
         /// <summary>
         /// 输出方式

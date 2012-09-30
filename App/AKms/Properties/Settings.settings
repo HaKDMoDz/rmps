@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="OwnerName" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">阿木</Value>
     </Setting>
     <Setting Name="RobotName" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">小木</Value>
     </Setting>
     <Setting Name="TrayIcon" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

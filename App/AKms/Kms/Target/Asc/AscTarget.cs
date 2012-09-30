@@ -24,7 +24,7 @@ namespace Me.Amon.Kms.Target.Asc
             get { return ""; }
         }
 
-        public AKms TrayWin
+        public Main TrayWin
         {
             get;
             set;

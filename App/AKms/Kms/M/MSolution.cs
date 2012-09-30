@@ -12,7 +12,7 @@ namespace Me.Amon.Kms.M
         /// <summary>
         /// 索引
         /// </summary>
-        public string Hash { get; set; }
+        public string Id { get; set; }
         /// <summary>
         /// 方案名称
         /// </summary>
@@ -84,18 +84,18 @@ namespace Me.Amon.Kms.M
             if (obj is MSolution)
             {
                 var sln = obj as MSolution;
-                return Hash == sln.Hash;
+                return Id == sln.Id;
             }
             if (obj is string)
             {
-                return Hash == (string)obj;
+                return Id == (string)obj;
             }
             return base.Equals(obj);
         }
 
         public override int GetHashCode()
         {
-            return Hash.GetHashCode();
+            return Id.GetHashCode();
         }
     }
 }

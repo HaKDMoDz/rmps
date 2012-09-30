@@ -11,6 +11,7 @@ namespace Me.Amon.Kms.Robot
 {
     public class KmsRobot : IRobot
     {
+        private UserModel _UserModel;
         private DataModel _DataModel;
         #region 全局变量
         /// <summary>
@@ -31,7 +32,7 @@ namespace Me.Amon.Kms.Robot
 
         #region 对外接口
 
-        public AKms TrayPtn { get; set; }
+        public Main TrayPtn { get; set; }
 
         public EMethod Method { get; set; }
 
@@ -92,7 +93,7 @@ namespace Me.Amon.Kms.Robot
                 return false;
             }
 
-            MSolution sln = TrayPtn.Solution;
+            MSolution sln = _UserModel.Solution;
 
             // 方案为空判断
             if (sln == null)
@@ -139,7 +140,7 @@ namespace Me.Amon.Kms.Robot
             }
 
             _Halted = true;
-            if (EMethod.Active == (Method == EMethod.None ? TrayPtn.Solution.Method : Method))
+            if (EMethod.Active == (Method == EMethod.None ? _UserModel.Solution.Method : Method))
             {
                 _TxtHuman.Enabled = false;
             }
@@ -154,7 +155,7 @@ namespace Me.Amon.Kms.Robot
             }
 
             _Halted = false;
-            if (EMethod.Active == (Method == EMethod.None ? TrayPtn.Solution.Method : Method))
+            if (EMethod.Active == (Method == EMethod.None ? _UserModel.Solution.Method : Method))
             {
                 _TxtHuman.Enabled = true;
             }
@@ -170,7 +171,7 @@ namespace Me.Amon.Kms.Robot
 
             _Running = false;
             _Halted = false;
-            if (EMethod.Active == (Method == EMethod.None ? TrayPtn.Solution.Method : Method))
+            if (EMethod.Active == (Method == EMethod.None ? _UserModel.Solution.Method : Method))
             {
                 _TxtHuman.Visible = false;
             }
@@ -266,7 +267,7 @@ namespace Me.Amon.Kms.Robot
 
         private void Attack()
         {
-            MSolution sln = TrayPtn.Solution;
+            MSolution sln = _UserModel.Solution;
             // 语言资源
             sln.Sentence = _DataModel.ListSentence(sln.Category);
             if (sln.Sentence.Count < 1)

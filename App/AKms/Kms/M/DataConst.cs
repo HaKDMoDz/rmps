@@ -162,21 +162,21 @@
         /// <summary>
         /// 类别键值
         /// </summary>
-        public const string C2010208 = "C2010207";
+        public const string C2010208 = "C2010208";
         public const int C2010208_SIZE = 64;
         /// <summary>
         /// 类别描述
         /// </summary>
-        public const string C2010209 = "C2010208";
+        public const string C2010209 = "C2010209";
         public const int C2010209_SIZE = 2048;
         /// <summary>
         /// 更新时间
         /// </summary>
-        public const string C201020A = "C2010209";
+        public const string C201020A = "C201020A";
         /// <summary>
         /// 创建时间
         /// </summary>
-        public const string C201020B = "C201020A";
+        public const string C201020B = "C201020B";
         #endregion
 
         #region 语言资源

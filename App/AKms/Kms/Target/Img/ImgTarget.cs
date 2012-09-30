@@ -20,7 +20,7 @@ namespace Me.Amon.Kms.Target.Img
             get { return "文件系统"; }
         }
 
-        public AKms TrayWin
+        public Main TrayWin
         {
             get;
             set;

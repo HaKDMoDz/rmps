@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Media;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
@@ -15,6 +16,7 @@ namespace Me.Amon.Kms.Target.App
 {
     class AppTarget : ITarget
     {
+        private UserModel _UserModel;
         private MSession _session;
 
         /// <summary>
@@ -31,6 +33,7 @@ namespace Me.Amon.Kms.Target.App
         /// The <see cref="IInputDeviceStateAdaptor"/> instance to use for interpreting the state of the input devices.
         /// </summary>
         private readonly IInputDeviceStateAdaptor _InputDeviceState;
+        private SoundPlayer _MediaPlayer;
 
         #region 公共属性
 
@@ -56,11 +59,15 @@ namespace Me.Amon.Kms.Target.App
 
         #endregion
 
-        public AppTarget()
+        public AppTarget(UserModel userModel)
         {
+            _UserModel = userModel;
+
             _KeyboardSimulator = new KeyboardSimulator();
             _MouseSimulator = new MouseSimulator();
             _InputDeviceState = new WindowsInputDeviceStateAdaptor();
+            _MediaPlayer = new SoundPlayer("letter.wav");
+            _MediaPlayer.LoadAsync();
         }
 
         #region ITarget 成员
@@ -87,7 +94,7 @@ namespace Me.Amon.Kms.Target.App
             set;
         }
 
-        public AKms TrayWin
+        public Main TrayWin
         {
             get;
             set;
@@ -105,7 +112,7 @@ namespace Me.Amon.Kms.Target.App
             DstWindow = IntPtr.Zero;
             DstControl = IntPtr.Zero;
 
-            return Deal(TrayWin.Solution.PreFunction);
+            return Deal(_UserModel.Solution.PreFunction);
         }
 
         public void SendMessage(string text)
@@ -128,7 +135,7 @@ namespace Me.Amon.Kms.Target.App
             Thread.Sleep(100);
 
             // 准备输入
-            MSolution sln = TrayWin.Solution;
+            MSolution sln = _UserModel.Solution;
             if (!string.IsNullOrEmpty(sln.PostPrepare))
             {
                 if (Regex.IsMatch(sln.PostPrepare, "^[@&]\\[\\d+,\\d+\\]\\(\\w+,\\d+\\)$"))
@@ -141,7 +148,7 @@ namespace Me.Amon.Kms.Target.App
                 }
             }
 
-            text = MSentence.Decode(text);
+            text = _UserModel.Decode(text);
             switch (sln.Output)
             {
                 // 剪贴板
@@ -157,6 +164,7 @@ namespace Me.Amon.Kms.Target.App
                     foreach (char item in text)
                     {
                         _KeyboardSimulator.TextEntry(item);
+                        _MediaPlayer.Play();
                         Thread.Sleep(100);
                     }
                     break;
@@ -198,7 +206,7 @@ namespace Me.Amon.Kms.Target.App
             Thread.Sleep(100);
 
             // 准备输入
-            MSolution sln = TrayWin.Solution;
+            MSolution sln = _UserModel.Solution;
             if (!string.IsNullOrEmpty(sln.PostPrepare))
             {
                 if (Regex.IsMatch(sln.PostPrepare, "^[@&]\\[\\d+,\\d+\\]\\(\\w+,\\d+\\)$"))
@@ -229,17 +237,17 @@ namespace Me.Amon.Kms.Target.App
 
         public void ShowWarning(string text)
         {
-            MessageBox.Show(null, MSentence.Decode(text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(null, _UserModel.Decode(text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         public DialogResult ShowConfirm(string text)
         {
-            return MessageBox.Show(null, MSentence.Decode(text), "确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            return MessageBox.Show(null, _UserModel.Decode(text), "确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
 
         public bool Close()
         {
-            bool b = Deal(TrayWin.Solution.SufFunction);
+            bool b = Deal(_UserModel.Solution.SufFunction);
             TrayWin.SessionClose();
             return b;
         }

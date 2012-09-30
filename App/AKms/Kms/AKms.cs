@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
-using Me.Amon.Api.Enums;
-using Me.Amon.Api.User32;
 using Me.Amon.Kms.Enums;
 using Me.Amon.Kms.M;
-using Me.Amon.Kms.Robot;
-using Me.Amon.Kms.Target;
-using Me.Amon.Kms.V.Cfg;
-using Me.Amon.Kms.V.Sln;
-using Me.Amon.Properties;
+using Me.Amon.Kms.V.Uc;
+using Me.Amon.Uc;
 using Me.Amon.Util;
 
 namespace Me.Amon.Kms
@@ -19,724 +12,841 @@ namespace Me.Amon.Kms
     public partial class AKms : Form
     {
         private UserModel _UserModel;
+        private DataModel _DataModel;
 
         #region 全局变量
-        private MSolution _solution;
-        private readonly IRobot _Robot;
+        private readonly Main _trayPtn;
+        private MSolution _curSln;
+        private TabPage _curTab;
 
-        //private ManTarget _manTarget;
-        //private AppTarget _appTarget;
-        //private ScbTarget _scbTarget;
+        private bool _reload;
 
-        private Training.Training _training;
+        private bool _isPreNew;
+        private readonly Dictionary<EAction, IFunction> _preList = new Dictionary<EAction, IFunction>(8);
+        private IFunction _preIF;
 
-        /// <summary>
-        /// 用户配置
-        /// </summary>
-        private static Uc.Properties _Configure;
-        /// <summary>
-        /// 方案管理菜单
-        /// </summary>
-        private ToolStripMenuItem _solutionEdit;
-        /// <summary>
-        /// 当前选择菜单
-        /// </summary>
-        private ToolStripMenuItem _solutionLast;
+        private bool _isSufNew;
+        private readonly Dictionary<EAction, IFunction> _sufList = new Dictionary<EAction, IFunction>(8);
+        private IFunction _sufIF;
+
         #endregion
 
         #region 构造函数
-        /// <summary>
-        /// 
-        /// </summary>
         public AKms()
         {
             InitializeComponent();
 
-            ShowView(Settings.Default.TrayIcon);
-
-            _Robot = new KmsRobot(_UserModel.DataModel);
-            _Robot.TrayPtn = this;
-            _LastMethod = MiMethod;
-            _LastTarget = MiTarget;
+            InitData();
         }
 
-        #region 事件处理
-        private void AKms_Load(object sender, EventArgs e)
+        public AKms(Main trayPtn, UserModel userModel, DataModel dataModel)
         {
-            Point loc = Settings.Default.WinLoc;
-            if (loc.X < 0 || loc.Y < 0)
-            {
-                loc.X = Screen.PrimaryScreen.WorkingArea.Width - 160;
-                loc.Y = 80;
-            }
-            Location = loc;
+            _trayPtn = trayPtn;
+            _UserModel = userModel;
+            _DataModel = dataModel;
 
-            _UserModel = new UserModel();
-            _UserModel.Init();
-            _UserModel.Load();
+            InitializeComponent();
 
             InitData();
-            LoadMenu();
-            SetHotKey();
         }
-
-        private void AKms_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            DelHotKey();
-        }
-
-        protected override void WndProc(ref Message m)
-        {
-            if (m.Msg == (int)WindowMessage.WM_HOTKEY)
-            {
-                RunHotKey(m.WParam.ToInt32());
-            }
-            base.WndProc(ref m);
-        }
-
-        #region 窗口移动
-        private Point _mouseOffset;
-        private bool _isLeftDown;
-        private bool _isMoving;
-        /// <summary>
-        /// 窗口移动事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TrayPtn_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (!_isLeftDown)
-            {
-                return;
-            }
-
-            var mousePos = MousePosition;
-            mousePos.Offset(_mouseOffset);
-            Location = mousePos;
-            _isMoving = true;
-        }
-
-        /// <summary>
-        /// 鼠标放松事件，用于窗口最后定位
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TrayPtn_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button != MouseButtons.Left)
-            {
-                return;
-            }
-
-            _mouseOffset = new Point(-e.X, -e.Y);
-            _isLeftDown = true;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TrayPtn_MouseUp(object sender, MouseEventArgs e)
-        {
-            _isLeftDown = false;
-            if (e.Button == MouseButtons.Left && _isMoving)
-            {
-                _isMoving = false;
-                Settings.Default.WinLoc = Location;
-                Settings.Default.Save();
-            }
-        }
-        #endregion
-        #endregion
 
         private void InitData()
         {
-            ITarget target = ATarget.ManTarget;
-            var handler = new EventHandler(MiTarget_Click);
-            var item = new ToolStripMenuItem { Name = target.TargetName, Text = target.TargetName };
-            item.Click += handler;
-            MuTarget.DropDownItems.Add(item);
+            CbLanguage.Items.Add(new MLanguage { C1010103 = "0", C1010106 = "全部" });
+            CbLanguage.Items.AddRange(_DataModel.ListLanguage().ToArray());
+            CbLanguage.SelectedIndex = 0;
 
-            target = ATarget.AppTarget;
-            item = new ToolStripMenuItem { Name = target.TargetName, Text = target.TargetName };
-            item.Click += handler;
-            MuTarget.DropDownItems.Add(item);
+            LsCategory.Items.AddRange(_DataModel.ListCategory().ToArray());
 
-            target = ATarget.ScbTarget;
-            item = new ToolStripMenuItem { Name = target.TargetName, Text = target.TargetName };
-            item.Click += handler;
-            MuTarget.DropDownItems.Add(item);
+            CbTarget.Items.Add(new ListItem<ETarget>(ETarget.None, "请选择"));
+            CbTarget.Items.Add(new ListItem<ETarget>(ETarget.Man, "人"));
+            CbTarget.Items.Add(new ListItem<ETarget>(ETarget.App, "程序"));
+            CbTarget.Items.Add(new ListItem<ETarget>(ETarget.Scb, "剪贴板"));
+            CbTarget.Items.Add(new ListItem<ETarget>(ETarget.Img, "文件系统"));
+            //CbTarget.Items.Add(new ListModel<ETarget>(ETarget.Net, "网络消息"));
+            //CbTarget.Items.Add(new ListModel<ETarget>(ETarget.Kms, "其它机器人"));
+            CbTarget.SelectedIndex = 0;
 
-            target = ATarget.ImgTarget;
-            item = new ToolStripMenuItem { Name = target.TargetName, Text = target.TargetName };
-            item.Click += handler;
-            MuTarget.DropDownItems.Add(item);
+            CbMethod.Items.Add(new ListItem<EMethod>(EMethod.None, "请选择"));
+            CbMethod.Items.Add(new ListItem<EMethod>(EMethod.Answer, "应答式交互"));
+            CbMethod.Items.Add(new ListItem<EMethod>(EMethod.Active, "手控式交互"));
+            CbMethod.Items.Add(new ListItem<EMethod>(EMethod.Attack, "攻击式交互"));
+            CbMethod.SelectedIndex = 0;
 
-            string solHash = Configure.Get("sln.hash", "");
-            if (CharUtil.IsValidateHash(solHash))
-            {
-                _solution = _UserModel.DataModel.ReadSolution(solHash);
-            }
+            CbOutput.Items.Add(new ListItem<EOutput>(EOutput.None, "请选择"));
+            CbOutput.Items.Add(new ListItem<EOutput>(EOutput.ClipBoard, "粘贴输入"));
+            CbOutput.Items.Add(new ListItem<EOutput>(EOutput.SendMessage, "消息输入"));
+            CbOutput.Items.Add(new ListItem<EOutput>(EOutput.SimulateInput, "模拟输入"));
+            CbOutput.SelectedIndex = 0;
+
+            LsSolution.Items.AddRange(_DataModel.ListSolution().ToArray());
+        }
+        #endregion
+
+        #region 窗体事件
+
+        private void EditSln_Load(object sender, EventArgs e)
+        {
+            _curSln = _UserModel.Solution;
+            LsSolution.SelectedItem = _curSln;
         }
 
-        private void LoadMenu()
+        private void EditSln_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (_solutionEdit == null)
+            if (_reload)
             {
-                _solutionEdit = new ToolStripMenuItem();
-                _solutionEdit.Click += SlnEdit_Click;
-                _solutionEdit.Name = "0";
-                //_slnItem.Size = new System.Drawing.Size(152, 22);
-                _solutionEdit.Text = "管理(&M)";
-            }
-            MuSolution.DropDownItems.Add(_solutionEdit);
-
-            List<MSolution> list = _UserModel.DataModel.ListSolution();
-            if (list.Count > 0)
-            {
-                //ToolStripSeparator MiSol0 = new ToolStripSeparator();
-                //MiSol0.Name = "MiSol0";
-                //MiSol0.Size = new System.Drawing.Size(149, 6);
-                MuSolution.DropDownItems.Add(new ToolStripSeparator());
-            }
-
-            ToolStripMenuItem item;
-            string hash = _solution != null ? _solution.Hash : "";
-            var handler = new EventHandler(SlnItem_Click);
-            foreach (MSolution sol in list)
-            {
-                item = new ToolStripMenuItem();
-                item.Click += handler;
-                if (hash == sol.Hash)
-                {
-                    item.Checked = true;
-                    _solutionLast = item;
-                }
-                item.Name = sol.Hash;
-                item.Text = sol.Name;
-                MuSolution.DropDownItems.Add(item);
+                _UserModel.ReloadData("");
+                _trayPtn.ReloadMenu();
             }
         }
+        #endregion
 
-        private void ShowView(bool tray)
+        #region 列表事件
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LsSlns_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Visible = !tray;
-
-            if (tray)
+            var sln = LsSolution.SelectedItem as MSolution;
+            if (sln == null)
             {
-                WindowState = FormWindowState.Minimized;
-                MiTray.Text = "显示为罗盘模式(&V)";
+                return;
+            }
+            _curSln = _DataModel.ReadSolution(sln);
+            ShowData();
+        }
+        #endregion
+
+        #region 前置操作
+        private void LsPre_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var mFun = LsPre.SelectedItem as MFunction;
+            if (mFun == null)
+            {
+                return;
+            }
+
+            EAction key = mFun.Action;
+            IFunction iFun = _preList.ContainsKey(key) ? _preList[key] : null;
+            if (iFun == null)
+            {
+                iFun = CreateControl(mFun);
+                iFun.UserControl.Name = TpPre.Name + key;
+                _preList[key] = iFun;
+            }
+
+            ShowControlPre(iFun, mFun);
+            _isPreNew = false;
+        }
+
+        private void PbTop1_Click(object sender, EventArgs e)
+        {
+            int idx = LsPre.SelectedIndex;
+            if (idx <= 0)
+            {
+                return;
+            }
+            object obj = LsPre.SelectedItem;
+            LsPre.Items.RemoveAt(idx--);
+            LsPre.Items.Insert(idx, obj);
+            LsPre.SelectedIndex = idx;
+        }
+
+        private void PbBot1_Click(object sender, EventArgs e)
+        {
+            int idx = LsPre.SelectedIndex;
+            if (idx < 0 || idx >= LsPre.Items.Count)
+            {
+                return;
+            }
+            object obj = LsPre.SelectedItem;
+            LsPre.Items.RemoveAt(idx++);
+            LsPre.Items.Insert(idx, obj);
+            LsPre.SelectedIndex = idx;
+        }
+
+        private void PbDel1_Click(object sender, EventArgs e)
+        {
+            int idx = LsPre.SelectedIndex;
+            if (idx < 0)
+            {
+                return;
+            }
+            if (DialogResult.Yes != MessageBox.Show(this, "确认要删除此动作吗？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
+            {
+                return;
+            }
+            LsPre.Items.RemoveAt(idx);
+            if (idx >= LsPre.Items.Count)
+            {
+                idx = LsPre.Items.Count - 1;
+            }
+            if (idx < 0)
+            {
+                return;
+            }
+            LsPre.SelectedIndex = idx;
+        }
+
+        private void PbNew1_Click(object sender, EventArgs e)
+        {
+            _curTab = TpPre;
+            CmMenu.Show(PbNew1, 0, PbNew1.Height);
+        }
+
+        private void PbAdd1_Click(object sender, EventArgs e)
+        {
+            if (_preIF == null)
+            {
+                return;
+            }
+
+            if (!_preIF.SaveFunction())
+            {
+                return;
+            }
+
+            if (_isPreNew)
+            {
+                LsPre.Items.Add(_preIF.UserFunction);
+                LsPre.SelectedItem = _preIF.UserFunction;
             }
             else
             {
-                WindowState = FormWindowState.Normal;
-                MiTray.Text = "显示为托盘模式(&V)";
-                ClientSize = new Size(24, 24);
-            }
-
-            NiTray.Visible = tray;
-        }
-
-        private void ShowTalk()
-        {
-            if (_solution == null)
-            {
-                MessageBox.Show(this, "请先选择一个会话方案！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            if (_training == null)
-            {
-                _training = new Training.Training(this, _UserModel.DataModel);
-            }
-            _training.Start();
-        }
-        #endregion
-
-        #region 快捷键
-        private const int DO_WORK = 1;
-        private const int DO_HALT = 2;
-        private const int DO_NEXT = 3;
-        private const int DO_STOP = 4;
-        private void RegHotKey(int key, string text)
-        {
-            if (string.IsNullOrEmpty(text))
-            {
-                return;
-            }
-            string[] arr = text.Split(' ');
-            int j = arr.Length - 1;
-            WMHotKeys tmpDat = 0;
-            for (int i = 0; i < j; i += 1)
-            {
-                if ("control" == arr[i].ToLower())
-                {
-                    tmpDat |= WMHotKeys.Ctrl;
-                    continue;
-                }
-                if ("alt" == arr[i].ToLower())
-                {
-                    tmpDat |= WMHotKeys.Alt;
-                }
-                if ("shift" == arr[i].ToLower())
-                {
-                    tmpDat |= WMHotKeys.Shift;
-                }
-            }
-
-            var tmpKey = (Keys)Enum.Parse(typeof(Keys), arr[j]);
-            User32API.RegisterHotKey(Handle, key, (int)tmpDat, (int)tmpKey);
-        }
-
-        private void SetHotKey()
-        {
-            if (_solution == null)
-            {
-                return;
-            }
-            RegHotKey(DO_WORK, _solution.WorkKey);
-            RegHotKey(DO_HALT, _solution.HaltKey);
-            RegHotKey(DO_NEXT, _solution.NextKey);
-            RegHotKey(DO_STOP, _solution.StopKey);
-        }
-
-        private void DelHotKey()
-        {
-            if (_solution == null)
-            {
-                return;
-            }
-            User32API.UnregisterHotKey(Handle, DO_WORK);
-            User32API.UnregisterHotKey(Handle, DO_HALT);
-            User32API.UnregisterHotKey(Handle, DO_NEXT);
-            User32API.UnregisterHotKey(Handle, DO_STOP);
-        }
-
-        private void RunHotKey(int key)
-        {
-            switch (key)
-            {
-                case DO_WORK:
-                    DoWork();
-                    break;
-                case DO_HALT:
-                    DoHalt();
-                    break;
-                case DO_NEXT:
-                    DoNext();
-                    break;
-                case DO_STOP:
-                    DoStop();
-                    break;
+                LsPre.DisplayMember = "";
+                LsPre.DisplayMember = _preIF.UserFunction.ToString();
             }
         }
         #endregion
 
-        #region 机器人控制
-        private void DoWork()
+        #region 后置操作
+        private void LsSuf_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (_Robot.Running)
+            var mFun = LsSuf.SelectedItem as MFunction;
+            if (mFun == null)
             {
                 return;
             }
 
-            if (_solution == null)
+            EAction key = mFun.Action;
+            IFunction iFun = _preList.ContainsKey(key) ? _preList[key] : null;
+            if (iFun == null)
             {
-                MessageBox.Show(this, "请选择会话方案！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                iFun = CreateControl(mFun);
+                iFun.UserControl.Name = TpPre.Name + key;
+                _preList[key] = iFun;
             }
 
-            ITarget target = ATarget.GetTarget(_solution.Target);
-            target.TrayWin = this;
-
-            // 会话对象开始工作
-            if (!target.Start())
-            {
-                return;
-            }
-
-            // 机器人开始工作
-            _Robot.AppendTarget(target);
-            if (!_Robot.Work())
-            {
-                return;
-            }
-
-            SessionStart();
+            ShowControlSuf(iFun, mFun);
+            _isSufNew = false;
         }
 
-        private void DoHalt()
+        private void PbTop3_Click(object sender, EventArgs e)
         {
-            if (!_Robot.Running)
+            int idx = LsSuf.SelectedIndex;
+            if (idx <= 0)
             {
                 return;
             }
-
-            if (_solution == null)
-            {
-                MessageBox.Show(this, "请选择会话方案！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            MiWork.Enabled = false;
-            MiHalt.Enabled = false;
-            MiNext.Enabled = true;
-            MiStop.Enabled = true;
-
-            _Robot.Halt();
+            object obj = LsSuf.SelectedItem;
+            LsSuf.Items.RemoveAt(idx--);
+            LsSuf.Items.Insert(idx, obj);
+            LsSuf.SelectedIndex = idx;
         }
 
-        private void DoNext()
+        private void PbBot3_Click(object sender, EventArgs e)
         {
-            if (!_Robot.Running)
+            int idx = LsSuf.SelectedIndex;
+            if (idx < 0 || idx >= LsSuf.Items.Count)
             {
                 return;
             }
-
-            if (_solution == null)
-            {
-                MessageBox.Show(this, "请选择会话方案！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            MiWork.Enabled = false;
-            MiHalt.Enabled = true;
-            MiNext.Enabled = false;
-            MiStop.Enabled = true;
-
-            _Robot.Next();
+            object obj = LsSuf.SelectedItem;
+            LsSuf.Items.RemoveAt(idx++);
+            LsSuf.Items.Insert(idx, obj);
+            LsSuf.SelectedIndex = idx;
         }
 
-        private void DoStop()
+        private void PbDel3_Click(object sender, EventArgs e)
         {
-            if (!_Robot.Running)
+            int idx = LsSuf.SelectedIndex;
+            if (idx < 0)
+            {
+                return;
+            }
+            if (DialogResult.Yes != MessageBox.Show(this, "确认要删除此动作吗？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
+            {
+                return;
+            }
+            LsSuf.Items.RemoveAt(idx);
+            if (idx >= LsSuf.Items.Count)
+            {
+                idx = LsSuf.Items.Count - 1;
+            }
+            if (idx < 0)
+            {
+                return;
+            }
+            LsSuf.SelectedIndex = idx;
+        }
+
+        private void PbNew3_Click(object sender, EventArgs e)
+        {
+            _curTab = TpSuf;
+            CmMenu.Show(PbNew3, 0, PbNew3.Height);
+        }
+
+        private void PbAdd3_Click(object sender, EventArgs e)
+        {
+            if (_sufIF == null)
             {
                 return;
             }
 
-            if (_solution == null)
+            if (!_sufIF.SaveFunction())
             {
-                MessageBox.Show(this, "请选择会话方案！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            SessionClose();
-
-            _Robot.Stop();
+            if (_isSufNew)
+            {
+                LsSuf.Items.Add(_sufIF.UserFunction);
+                LsSuf.SelectedItem = _sufIF.UserFunction;
+            }
+            else
+            {
+                LsSuf.DisplayMember = "";
+                LsSuf.DisplayMember = _sufIF.UserFunction.Action.ToString();
+            }
         }
         #endregion
 
-        #region 右键菜单事件
+        #region 按钮事件
         /// <summary>
-        /// 管理方案
+        /// 添加方案
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SlnEdit_Click(object sender, EventArgs e)
+        private void BtAppend_Click(object sender, EventArgs e)
         {
-            new EditSln(this, _UserModel.DataModel).ShowDialog();
+            _curSln = new MSolution { Language = "0", PreFunction = new List<MFunction>(), SufFunction = new List<MFunction>(), Category = new List<string>() };
+            LsSolution.SelectedItem = null;
+            TcSln.SelectedTab = TpSln;
+            TbName.Focus();
+            ShowData();
         }
 
         /// <summary>
-        /// 选择方案
+        /// 保存方案
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SlnItem_Click(object sender, EventArgs e)
+        private void BtUpdate_Click(object sender, EventArgs e)
         {
-            var item = sender as ToolStripMenuItem;
-            if (item == null)
-            {
-                return;
-            }
-            string hash = item.Name;
-            if (!CharUtil.IsValidateHash(hash))
-            {
-                return;
-            }
-
-            MSolution sln = _UserModel.DataModel.ReadSolution(hash);
-            if (_solutionLast != null)
-            {
-                _solutionLast.Checked = false;
-            }
-            DelHotKey();
-
-            _solution = sln;
-            _solutionLast = item;
-            _solutionLast.Checked = true;
-            SetHotKey();
-            Configure.Set("sln.hash", hash);
+            SaveData();
         }
 
-        #region 会话对象
-        private void MiTargetDef_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 取消
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtCancel_Click(object sender, EventArgs e)
         {
-            //_Robot.Target = _solution.Target;
-            ChangeTarget(MiTarget);
-        }
-
-        private void MiTarget_Click(object sender, EventArgs e)
-        {
-            var item = sender as ToolStripMenuItem;
-            if (item == null)
-            {
-                return;
-            }
-
-            //_Robot.Target = (ETarget)Enum.Parse(typeof(ETarget), item.Name);
-            ChangeTarget(item);
-        }
-
-        private ToolStripMenuItem _LastTarget;
-        private void ChangeTarget(ToolStripMenuItem item)
-        {
-            if (_LastTarget != null)
-            {
-                _LastTarget.Checked = false;
-            }
-            _LastTarget = item;
-            _LastTarget.Checked = true;
+            Close();
         }
         #endregion
 
-        #region 会话控制
-        private void MiWork_Click(object sender, EventArgs e)
+        #region 动作菜单事件
+        private void MiThreadWait_Click(object sender, EventArgs e)
         {
-            DoWork();
-        }
-
-        private void MiHalt_Click(object sender, EventArgs e)
-        {
-            DoHalt();
-        }
-
-        private void MiNext_Click(object sender, EventArgs e)
-        {
-            DoNext();
-        }
-
-        private void MiStop_Click(object sender, EventArgs e)
-        {
-            DoStop();
-        }
-        #endregion
-
-        #region 会话方式
-        private void MiMethod_Click(object sender, EventArgs e)
-        {
-            _Robot.Method = _solution.Method;
-
-            ChangeMethod(MiMethod);
-        }
-
-        private void MiAnswer_Click(object sender, EventArgs e)
-        {
-            _Robot.Method = EMethod.Answer;
-
-            ChangeMethod(MiAnswer);
-        }
-
-        private void MiActive_Click(object sender, EventArgs e)
-        {
-            _Robot.Method = EMethod.Active;
-
-            ChangeMethod(MiActive);
-        }
-
-        private void MiAttack_Click(object sender, EventArgs e)
-        {
-            _Robot.Method = EMethod.Attack;
-
-            ChangeMethod(MiAttack);
-        }
-
-        private ToolStripMenuItem _LastMethod;
-        private void ChangeMethod(ToolStripMenuItem item)
-        {
-            if (_LastMethod != null)
+            const EAction key = EAction.ThreadWait;
+            if (_curTab.Name == TpPre.Name)
             {
-                _LastMethod.Checked = false;
+                IFunction iFun = _preList.ContainsKey(key) ? _preList[key] : null;
+                if (iFun == null)
+                {
+                    iFun = new ThreadWait();
+                    iFun.UserControl.Name = TpPre.Name + key;
+                    _preList[key] = iFun;
+                }
+
+                ShowControlPre(iFun, new MFunction());
+                _isPreNew = true;
+
+                return;
             }
-            _LastMethod = item;
-            _LastMethod.Checked = true;
+
+            if (_curTab.Name == TpSuf.Name)
+            {
+                IFunction iFun = _sufList.ContainsKey(key) ? _sufList[key] : null;
+                if (iFun == null)
+                {
+                    iFun = new ThreadWait();
+                    iFun.UserControl.Name = TpSuf.Name + key;
+                    _sufList[key] = iFun;
+                }
+
+                ShowControlSuf(iFun, new MFunction());
+                _isSufNew = true;
+
+                return;
+            }
         }
-        #endregion
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MiAction_Click(object sender, EventArgs e)
+        private void MiExecuteApp_Click(object sender, EventArgs e)
         {
-
-        }
-
-        /// <summary>
-        /// 对话
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MiTalk_Click(object sender, EventArgs e)
-        {
-            ShowTalk();
-        }
-
-        /// <summary>
-        /// 管理
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MiOpts_Click(object sender, EventArgs e)
-        {
-            new UserCfg().ShowDialog(this);
-        }
-
-        /// <summary>
-        /// 视图模式
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MiTray_Click(object sender, EventArgs e)
-        {
-            bool tray = !Settings.Default.TrayIcon;
-            ShowView(tray);
-            Settings.Default.TrayIcon = tray;
-            Settings.Default.Save();
-        }
-
-        /// <summary>
-        /// 退出
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MiExit_Click(object sender, EventArgs e)
-        {
-            Configure.Save(Application.StartupPath + @"\magickms.cfg");
-            Application.Exit();
-        }
-        #endregion
-
-        #region 系统托盘事件
-        /// <summary>
-        /// 托盘事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void NiTray_DoubleClick(object sender, EventArgs e)
-        {
-            ShowTalk();
-        }
-        #endregion
-
-        #region 系统徽标事件
-        /// <summary>
-        /// 徽标事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void PbLogo_DoubleClick(object sender, EventArgs e)
-        {
-            ShowTalk();
-        }
-        #endregion
-
-        #region 公共属性
-        /// <summary>
-        /// 
-        /// </summary>
-        public MSolution Solution
-        {
-            get
+            const EAction key = EAction.ExecuteApp;
+            if (_curTab.Name == TpPre.Name)
             {
-                return _solution;
-            }
-        }
-
-        public static Uc.Properties Configure
-        {
-            get
-            {
-                if (_Configure == null)
+                IFunction iFun = _preList.ContainsKey(key) ? _preList[key] : null;
+                if (iFun == null)
                 {
-                    _Configure = new Uc.Properties();
-                    const string file = "magickms.cfg";
-                    if (!File.Exists(file))
-                    {
-                        File.Create(file).Close();
-                    }
-                    _Configure.Load(file);
+                    iFun = new ExecuteApp();
+                    iFun.UserControl.Name = TpPre.Name + key;
+                    _preList[key] = iFun;
                 }
-                return _Configure;
+
+                ShowControlPre(iFun, new MFunction());
+                _isPreNew = true;
+
+                return;
+            }
+
+            if (_curTab.Name == TpSuf.Name)
+            {
+                IFunction iFun = _sufList.ContainsKey(key) ? _sufList[key] : null;
+                if (iFun == null)
+                {
+                    iFun = new ExecuteApp();
+                    iFun.UserControl.Name = TpSuf.Name + key;
+                    _sufList[key] = iFun;
+                }
+
+                ShowControlSuf(iFun, new MFunction());
+                _isSufNew = true;
+
+                return;
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public void ReloadData()
+        private void MiShowWindow_Click(object sender, EventArgs e)
         {
-            if (_solution != null)
+            const EAction key = EAction.ShowWindow;
+            if (_curTab.Name == TpPre.Name)
             {
-                DelHotKey();
-                _solution = _UserModel.DataModel.ReadSolution(_solution.Hash);
-                SetHotKey();
+                IFunction iFun = _preList.ContainsKey(key) ? _preList[key] : null;
+                if (iFun == null)
+                {
+                    iFun = new ShowWindow();
+                    iFun.UserControl.Name = TpPre.Name + key;
+                    _preList[key] = iFun;
+                }
+
+                ShowControlPre(iFun, new MFunction());
+                _isPreNew = true;
+
+                return;
+            }
+
+            if (_curTab.Name == TpSuf.Name)
+            {
+                IFunction iFun = _sufList.ContainsKey(key) ? _sufList[key] : null;
+                if (iFun == null)
+                {
+                    iFun = new ShowWindow();
+                    iFun.UserControl.Name = TpSuf.Name + key;
+                    _sufList[key] = iFun;
+                }
+
+                ShowControlSuf(iFun, new MFunction());
+                _isSufNew = true;
+
+                return;
             }
         }
 
-        public void ReloadMenu()
+        private void MiHideWindow_Click(object sender, EventArgs e)
         {
-            MuSolution.DropDownItems.Clear();
+            const EAction key = EAction.HideWindow;
+            if (_curTab.Name == TpPre.Name)
+            {
+                IFunction iFun = _preList.ContainsKey(key) ? _preList[key] : null;
+                if (iFun == null)
+                {
+                    iFun = new HideWindow();
+                    iFun.UserControl.Name = TpPre.Name + key;
+                    _preList[key] = iFun;
+                }
 
-            LoadMenu();
+                ShowControlPre(iFun, new MFunction());
+                _isPreNew = true;
+
+                return;
+            }
+
+            if (_curTab.Name == TpSuf.Name)
+            {
+                IFunction iFun = _sufList.ContainsKey(key) ? _sufList[key] : null;
+                if (iFun == null)
+                {
+                    iFun = new HideWindow();
+                    iFun.UserControl.Name = TpSuf.Name + key;
+                    _sufList[key] = iFun;
+                }
+
+                ShowControlSuf(iFun, new MFunction());
+                _isSufNew = true;
+
+                return;
+            }
         }
 
-        /// <summary>
-        /// 会话开始
-        /// </summary>
-        public void SessionStart()
+        private void MiGetControl_Click(object sender, EventArgs e)
         {
-            if (InvokeRequired)
+            const EAction key = EAction.GetControl;
+            if (_curTab.Name == TpPre.Name)
             {
-                Invoke(new ChangeMenuStatus(SessionStart));
-            }
-            else
-            {
-                MuSolution.Enabled = false;
-                MuTarget.Enabled = false;
-                MuMethod.Enabled = false;
+                IFunction iFun = _preList.ContainsKey(key) ? _preList[key] : null;
+                if (iFun == null)
+                {
+                    iFun = new GetControl();
+                    iFun.UserControl.Name = TpPre.Name + key;
+                    _preList[key] = iFun;
+                }
 
-                MiWork.Enabled = false;
-                MiHalt.Enabled = true;
-                MiNext.Enabled = false;
-                MiStop.Enabled = true;
+                ShowControlPre(iFun, new MFunction());
+                _isPreNew = true;
+
+                return;
+            }
+
+            if (_curTab.Name == TpSuf.Name)
+            {
+                IFunction iFun = _sufList.ContainsKey(key) ? _sufList[key] : null;
+                if (iFun == null)
+                {
+                    iFun = new GetControl();
+                    iFun.UserControl.Name = TpSuf.Name + key;
+                    _sufList[key] = iFun;
+                }
+
+                ShowControlSuf(iFun, new MFunction());
+                _isSufNew = true;
+
+                return;
             }
         }
 
-        /// <summary>
-        /// 会话结束
-        /// </summary>
-        public void SessionClose()
+        private void MiKeybdInput_Click(object sender, EventArgs e)
         {
-            if (InvokeRequired)
+            const EAction key = EAction.KeybdInput;
+            if (_curTab.Name == TpPre.Name)
             {
-                Invoke(new ChangeMenuStatus(SessionClose));
-            }
-            else
-            {
-                MuSolution.Enabled = true;
-                MuTarget.Enabled = true;
-                MuMethod.Enabled = true;
+                IFunction iFun = _preList.ContainsKey(key) ? _preList[key] : null;
+                if (iFun == null)
+                {
+                    iFun = new KeybdInput();
+                    iFun.UserControl.Name = TpPre.Name + key;
+                    _preList[key] = iFun;
+                }
 
-                MiWork.Enabled = true;
-                MiHalt.Enabled = false;
-                MiNext.Enabled = false;
-                MiStop.Enabled = false;
+                ShowControlPre(iFun, new MFunction());
+                _isPreNew = true;
+
+                return;
+            }
+
+            if (_curTab.Name == TpSuf.Name)
+            {
+                IFunction iFun = _sufList.ContainsKey(key) ? _sufList[key] : null;
+                if (iFun == null)
+                {
+                    iFun = new KeybdInput();
+                    iFun.UserControl.Name = TpSuf.Name + key;
+                    _sufList[key] = iFun;
+                }
+
+                ShowControlSuf(iFun, new MFunction());
+                _isSufNew = true;
+
+                return;
             }
         }
 
-        public delegate void ChangeMenuStatus();
+        private void MiMouseInput_Click(object sender, EventArgs e)
+        {
+            const EAction key = EAction.MouseInput;
+            if (_curTab.Name == TpPre.Name)
+            {
+                IFunction iFun = _preList.ContainsKey(key) ? _preList[key] : null;
+                if (iFun == null)
+                {
+                    iFun = new MouseInput();
+                    iFun.UserControl.Name = TpPre.Name + key;
+                    _preList[key] = iFun;
+                }
+
+                ShowControlPre(iFun, new MFunction());
+                _isPreNew = true;
+
+                return;
+            }
+
+            if (_curTab.Name == TpSuf.Name)
+            {
+                IFunction iFun = _sufList.ContainsKey(key) ? _sufList[key] : null;
+                if (iFun == null)
+                {
+                    iFun = new MouseInput();
+                    iFun.UserControl.Name = TpSuf.Name + key;
+                    _sufList[key] = iFun;
+                }
+
+                ShowControlSuf(iFun, new MFunction());
+                _isSufNew = true;
+
+                return;
+            }
+        }
+
+        private static IFunction CreateControl(MFunction mFun)
+        {
+            switch (mFun.Action)
+            {
+                case EAction.ThreadWait:
+                    return new ThreadWait();
+                case EAction.ExecuteApp:
+                    return new ExecuteApp();
+                case EAction.ShowWindow:
+                    return new ShowWindow();
+                case EAction.HideWindow:
+                    return new HideWindow();
+                case EAction.GetControl:
+                    return new GetControl();
+                case EAction.KeybdInput:
+                    return new KeybdInput();
+                case EAction.MouseInput:
+                    return new MouseInput();
+                default:
+                    return null;
+            }
+        }
+
+        private void ShowControlPre(IFunction iFun, MFunction mFun)
+        {
+            iFun.UserControl.Location = new System.Drawing.Point(0, 0);
+            iFun.UserControl.Size = new System.Drawing.Size(262, 27);
+            iFun.UserControl.TabIndex = 1;
+            iFun.UserFunction = mFun;
+
+            if (_preIF != null)
+            {
+                PlPre.Controls.Remove(_preIF.UserControl);
+            }
+            _preIF = iFun;
+            PlPre.Controls.Add(_preIF.UserControl);
+        }
+
+        private void ShowControlSuf(IFunction iFun, MFunction mFun)
+        {
+            iFun.UserControl.Location = new System.Drawing.Point(0, 0);
+            iFun.UserControl.Size = new System.Drawing.Size(262, 27);
+            iFun.UserControl.TabIndex = 1;
+            iFun.UserFunction = mFun;
+
+            if (_sufIF != null)
+            {
+                PlSuf.Controls.Remove(_sufIF.UserControl);
+            }
+            _sufIF = iFun;
+            PlSuf.Controls.Add(_sufIF.UserControl);
+        }
         #endregion
+
+        #region 数据交互
+        private void ShowData()
+        {
+            // 会话方案
+            TbName.Text = _curSln.Name;
+            CbLanguage.SelectedItem = _curSln.Language ?? "0";
+            LsCategory.SelectedItems.Clear();
+            if (_curSln.Category != null)
+            {
+                foreach (string cat in _curSln.Category)
+                {
+                    LsCategory.SelectedItems.Add(new MCategory { C2010203 = cat });
+                }
+            }
+
+            // 前置动作
+            LsPre.Items.Clear();
+            LsPre.Items.AddRange(_curSln.PreFunction.ToArray());
+            _preIF = null;
+            PlPre.Controls.Clear();
+
+            // 响应方式
+            CbTarget.SelectedItem = new ListItem<ETarget>(_curSln.Target, "");
+            CbMethod.SelectedItem = new ListItem<EMethod>(_curSln.Method, "");
+            CbOutput.SelectedItem = new ListItem<EOutput>(_curSln.Output, "");
+            CbOutput.Enabled = ETarget.App == _curSln.Target;
+            SpIntval.Value = _curSln.Intval < 1 ? 1 : _curSln.Intval;
+
+            // 准备输入
+            PaInit.UserAction = _curSln.PostPrepare;
+
+            // 输入确认
+            PaPost.UserAction = _curSln.PostConfirm;
+
+            // 后置动作
+            LsSuf.Items.Clear();
+            LsSuf.Items.AddRange(_curSln.SufFunction.ToArray());
+            PlSuf.Controls.Clear();
+            _sufIF = null;
+
+            // 快捷键
+            HkWork.HotKey = _curSln.WorkKey;
+            HkHalt.HotKey = _curSln.HaltKey;
+            HkNext.HotKey = _curSln.NextKey;
+            HkStop.HotKey = _curSln.StopKey;
+        }
+
+        private void SaveData()
+        {
+            if (_curSln == null)
+            {
+                _curSln = new MSolution { PreFunction = new List<MFunction>(), SufFunction = new List<MFunction>(), Category = new List<string>() };
+            }
+
+            // 会话方案
+            string name = (TbName.Text ?? "").Trim();
+            if (!CharUtil.IsValidate(name))
+            {
+                MessageBox.Show(this, "请输入方案名称！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TbName.Focus();
+                return;
+            }
+            _curSln.Name = name;
+
+            // 交互语言
+            var lang = CbLanguage.SelectedItem as MLanguage;
+            _curSln.Language = lang == null ? "0" : lang.C1010103;
+
+            // 语言资源
+            _curSln.Category.Clear();
+            ListBox.SelectedObjectCollection cats = LsCategory.SelectedItems;
+            foreach (Object obj in cats)
+            {
+                _curSln.Category.Add(((MCategory)obj).C2010203);
+            }
+
+            // 前置动作
+            _curSln.PreFunction.Clear();
+            ListBox.ObjectCollection preF = LsPre.Items;
+            if (preF.Count > 0)
+            {
+                foreach (Object obj in preF)
+                {
+                    _curSln.PreFunction.Add(obj as MFunction);
+                }
+            }
+
+            // 会话目标
+            var target = CbTarget.SelectedItem as ListItem<ETarget>;
+            if (target == null || target.K == ETarget.None)
+            {
+                MessageBox.Show(this, "请选择会话目标！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CbLanguage.Focus();
+                return;
+            }
+            _curSln.Target = target.K;
+
+            // 会话模式
+            var method = CbMethod.SelectedItem as ListItem<EMethod>;
+            if (method == null || method.K == EMethod.None)
+            {
+                MessageBox.Show(this, "请选择会话模式！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CbOutput.Focus();
+                return;
+            }
+            _curSln.Method = method.K;
+
+            // 输出方式
+            if (target.K == ETarget.App)
+            {
+                var output = CbOutput.SelectedItem as ListItem<EOutput>;
+                if (output == null || output.K == EOutput.None)
+                {
+                    MessageBox.Show(this, "请选择输出方式！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LsCategory.Focus();
+                    return;
+                }
+                _curSln.Output = output.K;
+            }
+
+            // 会话间隔
+            decimal intval = SpIntval.Value;
+            if (intval >= 0)
+            {
+                _curSln.Intval = decimal.ToInt32(intval);
+            }
+
+            // 准备输入
+            _curSln.PostPrepare = PaInit.UserAction;
+
+            // 输入确认
+            _curSln.PostConfirm = PaPost.UserAction;
+
+            // 后置动作
+            _curSln.SufFunction.Clear();
+            ListBox.ObjectCollection sufF = LsSuf.Items;
+            if (sufF.Count > 0)
+            {
+                foreach (Object obj in sufF)
+                {
+                    _curSln.SufFunction.Add(obj as MFunction);
+                }
+            }
+
+            // 快捷键
+            _curSln.WorkKey = HkWork.HotKey;
+            _curSln.HaltKey = HkHalt.HotKey;
+            _curSln.NextKey = HkNext.HotKey;
+            _curSln.StopKey = HkStop.HotKey;
+
+            // 数据保存
+            bool isUpdate = CharUtil.IsValidateHash(_curSln.Id);
+            _DataModel.SaveSolution(_curSln);
+            if (isUpdate)
+            {
+                LsSolution.DisplayMember = "";
+                LsSolution.DisplayMember = _curSln.Name;
+            }
+            else
+            {
+                LsSolution.Items.Add(_curSln);
+                LsSolution.SelectedItem = _curSln;
+            }
+
+            _reload = true;
+        }
+        #endregion
+
+        private void CbTarget_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var target = CbTarget.SelectedItem as ListItem<ETarget>;
+            if (target == null)
+            {
+                return;
+            }
+            CbOutput.Enabled = target.K == ETarget.App;
+        }
     }
 }

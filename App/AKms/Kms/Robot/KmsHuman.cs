@@ -2,18 +2,17 @@
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
-using Me.Amon.Uc;
-using Me.Amon.Da;
 using Me.Amon.Kms.M;
 using Me.Amon.Kms.Robot.img;
 using Me.Amon.Kms.Robot.txt;
 using Me.Amon.Kms.V;
+using Me.Amon.Uc;
 
 namespace Me.Amon.Kms.Robot
 {
     public partial class KmsHuman : UserControl
     {
-        private readonly AKms _TrayPtn;
+        private readonly Main _TrayPtn;
         private readonly MagicPtn _MagicPtn;
         private readonly KmsRobot _Robot;
         private DataModel _DataModel;
@@ -24,7 +23,7 @@ namespace Me.Amon.Kms.Robot
             InitializeComponent();
         }
 
-        public KmsHuman(AKms trayPtn, KmsRobot robot, DataModel dataModel)
+        public KmsHuman(Main trayPtn, KmsRobot robot, DataModel dataModel)
         {
             _TrayPtn = trayPtn;
             _Robot = robot;

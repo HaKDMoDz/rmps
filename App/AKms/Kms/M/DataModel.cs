@@ -12,10 +12,13 @@ namespace Me.Amon.Kms.M
 {
     public class DataModel
     {
+        private UserModel _UserModel;
         private static RDBEngine _DBE;
 
         public DataModel(UserModel userModel)
         {
+            _UserModel = userModel;
+
             _DBE = new RDBEngine();
             _DBE.Init(userModel);
         }
@@ -247,17 +250,17 @@ namespace Me.Amon.Kms.M
             _DBE.ReInit();
 
             // 前置动作
-            sol.PreFunction = ListFunction(sol.Hash, -1);
+            sol.PreFunction = ListFunction(sol.Id, -1);
 
             // 后置动作
             _DBE.ReInit();
-            sol.SufFunction = ListFunction(sol.Hash, 1);
+            sol.SufFunction = ListFunction(sol.Id, 1);
 
             // 标签资源
             _DBE.ReInit();
             sol.Category = new List<string>();
             _DBE.AddTable(DataConst.P3100700);
-            _DBE.AddWhere(DataConst.P3100702, sol.Hash);
+            _DBE.AddWhere(DataConst.P3100702, sol.Id);
             DataTable dt = _DBE.ExecuteSelect();
             foreach (DataRow row in dt.Rows)
             {
@@ -277,7 +280,7 @@ namespace Me.Amon.Kms.M
         {
             var sol = new MSolution();
             sol.Order = (int)row[DataConst.P3100501];
-            sol.Hash = row[DataConst.P3100502] + "";
+            sol.Id = row[DataConst.P3100502] + "";
             sol.Name = row[DataConst.P3100503] + "";
             sol.Language = row[DataConst.P3100504] + "";
             sol.Target = (ETarget)Enum.Parse(typeof(ETarget), row[DataConst.P3100505] + "");
@@ -316,22 +319,22 @@ namespace Me.Amon.Kms.M
             _DBE.AddParam(DataConst.P310050D, sol.HaltKey);
             _DBE.AddParam(DataConst.P310050E, sol.NextKey);
             _DBE.AddParam(DataConst.P310050F, sol.StopKey);
-            if (CharUtil.IsValidateHash(sol.Hash))
+            if (CharUtil.IsValidateHash(sol.Id))
             {
-                _DBE.AddWhere(DataConst.P3100502, sol.Hash);
+                _DBE.AddWhere(DataConst.P3100502, sol.Id);
                 _DBE.AddUpdateBatch();
             }
             else
             {
-                sol.Hash = HashUtil.UtcTimeInEnc(false);
-                _DBE.AddParam(DataConst.P3100502, sol.Hash);
+                sol.Id = HashUtil.UtcTimeInEnc(false);
+                _DBE.AddParam(DataConst.P3100502, sol.Id);
                 _DBE.AddInsertBatch();
             }
 
             // 清空已有操作
             _DBE.ReInit();
             _DBE.AddTable(DataConst.P3100600);
-            _DBE.AddWhere(DataConst.P3100602, sol.Hash);
+            _DBE.AddWhere(DataConst.P3100602, sol.Id);
             _DBE.AddDeleteBatch();
 
             int order = 1;
@@ -343,7 +346,7 @@ namespace Me.Amon.Kms.M
 
                 _DBE.AddTable(DataConst.P3100600);
                 _DBE.AddParam(DataConst.P3100601, fun.Order);
-                _DBE.AddParam(DataConst.P3100602, sol.Hash);
+                _DBE.AddParam(DataConst.P3100602, sol.Id);
                 _DBE.AddParam(DataConst.P3100603, -1);
                 _DBE.AddParam(DataConst.P3100604, (long)fun.Action);
                 _DBE.AddParam(DataConst.P3100605, fun.Param);
@@ -359,7 +362,7 @@ namespace Me.Amon.Kms.M
 
                 _DBE.AddTable(DataConst.P3100600);
                 _DBE.AddParam(DataConst.P3100601, fun.Order);
-                _DBE.AddParam(DataConst.P3100602, sol.Hash);
+                _DBE.AddParam(DataConst.P3100602, sol.Id);
                 _DBE.AddParam(DataConst.P3100603, 1);
                 _DBE.AddParam(DataConst.P3100604, (long)fun.Action);
                 _DBE.AddParam(DataConst.P3100605, fun.Param);
@@ -369,7 +372,7 @@ namespace Me.Amon.Kms.M
             // 清空已有
             _DBE.ReInit();
             _DBE.AddTable(DataConst.P3100700);
-            _DBE.AddWhere(DataConst.P3100702, sol.Hash);
+            _DBE.AddWhere(DataConst.P3100702, sol.Id);
             _DBE.AddDeleteBatch();
 
             order = 1;
@@ -379,7 +382,7 @@ namespace Me.Amon.Kms.M
                 _DBE.ReInit();
                 _DBE.AddTable(DataConst.P3100700);
                 _DBE.AddParam(DataConst.P3100701, order++);
-                _DBE.AddParam(DataConst.P3100702, sol.Hash);
+                _DBE.AddParam(DataConst.P3100702, sol.Id);
                 _DBE.AddParam(DataConst.P3100703, cat);
                 _DBE.AddInsertBatch();
             }
@@ -397,19 +400,19 @@ namespace Me.Amon.Kms.M
 
             // 语言选项
             _DBE.AddTable(DataConst.P3100700);
-            _DBE.AddWhere(DataConst.P3100702, sol.Hash);
+            _DBE.AddWhere(DataConst.P3100702, sol.Id);
             _DBE.ExecuteDelete();
 
             // 预定动作
             _DBE.ReInit();
             _DBE.AddTable(DataConst.P3100600);
-            _DBE.AddWhere(DataConst.P3100601, sol.Hash);
+            _DBE.AddWhere(DataConst.P3100601, sol.Id);
             _DBE.ExecuteDelete();
 
             // 方案信息
             _DBE.ReInit();
             _DBE.AddTable(DataConst.P3100500);
-            _DBE.AddWhere(DataConst.P3100502, sol.Hash);
+            _DBE.AddWhere(DataConst.P3100502, sol.Id);
             _DBE.ExecuteDelete();
         }
         #endregion
@@ -499,7 +502,7 @@ namespace Me.Amon.Kms.M
 
             _DBE.ReInit();
             _DBE.AddTable(DataConst.P3100100);
-            _DBE.AddWhere(DataConst.P3100106, "LIKE", MSentence.Encode(text), true);
+            _DBE.AddWhere(DataConst.P3100106, "LIKE", _UserModel.Encode(text), true);
 
             DataTable dt = _DBE.ExecuteSelect();
             return dt.Rows.Count != 1 ? null : ReadSentence(dt.Rows[0]);
@@ -650,8 +653,8 @@ namespace Me.Amon.Kms.M
             _DBE.AddParam(DataConst.P3100101, sentence.P3100101);
             _DBE.AddParam(DataConst.P3100102, (long)sentence.P3100102);
             _DBE.AddParam(DataConst.P3100104, sentence.P3100104);
-            _DBE.AddParam(DataConst.P3100105, MSentence.Encode(sentence.P3100105));
-            _DBE.AddParam(DataConst.P3100106, MSentence.Encode(sentence.P3100106));
+            _DBE.AddParam(DataConst.P3100105, _UserModel.Encode(sentence.P3100105));
+            _DBE.AddParam(DataConst.P3100106, _UserModel.Encode(sentence.P3100106));
             _DBE.AddParam(DataConst.P3100107, DataConst.NOW, false);
 
             if (CharUtil.IsValidateHash(sentence.P3100103))
@@ -728,7 +731,7 @@ namespace Me.Amon.Kms.M
             buf.Append(DataConst.P3100102).Append('=').Append((long)style);
             if (input.Length > 0 || input != "%")
             {
-                buf.Append("  AND ").Append(DataConst.P3100106).Append(" LIKE '").Append(MSentence.Encode(input)).Append('\'');
+                buf.Append("  AND ").Append(DataConst.P3100106).Append(" LIKE '").Append(_UserModel.Encode(input)).Append('\'');
             }
             if (CharUtil.IsValidateHash(lanId))
             {
@@ -740,7 +743,7 @@ namespace Me.Amon.Kms.M
             }
             buf.Append(" ORDER BY ").Append(DataConst.P3100101).Append(" DESC");
 
-            DataTable dt = new RDBEngine().ExecuteSelect(buf.ToString());
+            DataTable dt = _DBE.ExecuteSelect(buf.ToString());
             list.AddRange(from DataRow row in dt.Rows select ReadSentence(row));
             dt.Dispose();
             return true;
@@ -791,7 +794,7 @@ namespace Me.Amon.Kms.M
                 _DBE.AddWhere(DataConst.P3100103, DataConst.P3100302, false);
                 _DBE.AddWhere(DataConst.P3100301, "IN", '(' + buf.ToString(0, buf.Length - 1) + ')', false);
             }
-            _DBE.AddWhere(DataConst.P3100102, "" + style, false);
+            _DBE.AddWhere(DataConst.P3100102, "" + (int)style, false);
             _DBE.AddWhere(DataConst.P3100201, askId);
             if (CharUtil.IsValidateHash(lanId))
             {

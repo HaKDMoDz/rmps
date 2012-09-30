@@ -25,7 +25,7 @@ namespace Me.Amon.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("阿木")]
         public string OwnerName {
             get {
                 return ((string)(this["OwnerName"]));
@@ -37,7 +37,7 @@ namespace Me.Amon.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("小木")]
         public string RobotName {
             get {
                 return ((string)(this["RobotName"]));

@@ -18,7 +18,7 @@ namespace Me.Amon.Kms.Target
         /// </summary>
         string TargetName { get; }
 
-        AKms TrayWin { set; }
+        Main TrayWin { set; }
 
         /// <summary>
         /// 逐步提示

@@ -13,7 +13,7 @@ namespace Me.Amon
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Kms.AKms());
+            Application.Run(new Main());
         }
     }
 }

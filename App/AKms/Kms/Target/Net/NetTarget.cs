@@ -29,7 +29,7 @@ namespace Me.Amon.Kms.Target.Net
             set;
         }
 
-        public AKms TrayWin
+        public Main TrayWin
         {
             get;
             set;

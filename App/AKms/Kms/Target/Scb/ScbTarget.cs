@@ -11,7 +11,8 @@ namespace Me.Amon.Kms.Target.Scb
     /// </summary>
     public class ScbTarget : ITarget
     {
-        //private ScbWindow _ScbWindow;
+        private UserModel _UserModel;
+        private ScbWindow _ScbWindow;
 
         #region ITarget 成员
 
@@ -37,7 +38,7 @@ namespace Me.Amon.Kms.Target.Scb
             set;
         }
 
-        public AKms TrayWin
+        public Main TrayWin
         {
             get;
             set;
@@ -73,14 +74,12 @@ namespace Me.Amon.Kms.Target.Scb
 
         public void ShowWarning(string text)
         {
-            //MessageBox.Show(_ScbWindow, MSentence.Decode(text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            MessageBox.Show(null, MSentence.Decode(text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(_ScbWindow, _UserModel.Decode(text), "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         public DialogResult ShowConfirm(string text)
         {
-            //return MessageBox.Show(_ScbWindow, MSentence.Decode(text), "确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            return MessageBox.Show(null, MSentence.Decode(text), "确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            return MessageBox.Show(_ScbWindow, _UserModel.Decode(text), "确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
 
         public bool Confirm(List<MFunction> functions)

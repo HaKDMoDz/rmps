@@ -10,6 +10,10 @@ namespace Me.Amon.Kms.Target.Man
     {
         private ManWindow _ManWindow;
 
+        public ManTarget()
+        {
+        }
+
         #region ITarget 成员
 
         public ETarget Target
@@ -34,7 +38,7 @@ namespace Me.Amon.Kms.Target.Man
             set;
         }
 
-        public AKms TrayWin
+        public Main TrayWin
         {
             get;
             set;
@@ -52,7 +56,8 @@ namespace Me.Amon.Kms.Target.Man
 
         public bool Prepare(List<MFunction> functions)
         {
-            return _ManWindow.Prepare(functions);
+            //return _ManWindow.Prepare(functions);
+            return false;
         }
 
         public void SendMessage(string text)
@@ -74,7 +79,8 @@ namespace Me.Amon.Kms.Target.Man
 
         public bool Confirm(List<MFunction> functions)
         {
-            return _ManWindow.Confirm(functions);
+            return false;
+            //return _ManWindow.Confirm(functions);
         }
 
         public bool Close()

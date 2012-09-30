@@ -1,5 +1,4 @@
 ﻿using Me.Amon.Kms.Enums;
-using Me.Amon.Properties;
 
 namespace Me.Amon.Kms.M
 {
@@ -30,19 +29,9 @@ namespace Me.Amon.Kms.M
         /// </summary>
         public string P3100106 { get; set; }
 
-        public static string Encode(string text)
-        {
-            return text != null ? text.Replace(Settings.Default.RobotName, "$robot_name$").Replace(Settings.Default.OwnerName, "$owner_name$") : "";
-        }
-
-        public static string Decode(string text)
-        {
-            return text != null ? text.Replace("$owner_name$", Settings.Default.OwnerName).Replace("$robot_name$", Settings.Default.RobotName) : "";
-        }
-
         public override string ToString()
         {
-            return Decode(P3100105);
+            return P3100105;
         }
     }
 }

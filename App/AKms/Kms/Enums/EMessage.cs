@@ -1,5 +1,4 @@
-﻿
-namespace Me.Amon.Kms.Enums
+﻿namespace Me.Amon.Kms.Enums
 {
     public enum EMessage
     {
