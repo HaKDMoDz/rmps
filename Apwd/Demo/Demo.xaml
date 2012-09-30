@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="Me.Amon.Apwd.Views.Demo.Demo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="470" d:DesignWidth="640" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk">
+    <Grid>
+        <sdk:TreeView Height="200" HorizontalAlignment="Left" Margin="208,85,0,0" Name="treeView1" VerticalAlignment="Top" Width="120" Drop="treeView1_Drop" DragEnter="treeView1_DragEnter">
+            <sdk:TreeViewItem Header="1" />
+            <sdk:TreeViewItem Header="2" />
+            <sdk:TreeViewItem Header="4" />
+            <sdk:TreeViewItem Header="5" />
+        </sdk:TreeView>
+    </Grid>
+</UserControl>
