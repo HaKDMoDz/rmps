@@ -146,6 +146,7 @@ namespace Me.Amon.Bean
         public void ToXml(XmlWriter writer)
         {
             writer.WriteStartElement("Cat");
+            writer.WriteAttributeString("AppId", "apwd");
 
             writer.WriteElementString("Order", Order.ToString());
             writer.WriteElementString("Id", Id);
