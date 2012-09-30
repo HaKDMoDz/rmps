@@ -48,6 +48,7 @@ namespace Me.Amon.Sec.V.Wiz
 
             _ASec.ShowTips(PbOpt, "算法选项");
             _ASec.ShowTips(PbKey, "口令选项");
+            _ASec.ShowTips(PbDir, "加密/解密");
         }
 
         public void LoadFav()

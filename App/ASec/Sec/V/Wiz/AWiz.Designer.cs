@@ -30,15 +30,16 @@
         {
             this.ScMain = new System.Windows.Forms.SplitContainer();
             this.PlSrc = new System.Windows.Forms.Panel();
+            this._UcSrc = new Me.Amon.Sec.V.Wiz.UcSrc();
             this.PbOpt = new System.Windows.Forms.PictureBox();
             this.CbOpt = new System.Windows.Forms.ComboBox();
             this.LlOpt = new System.Windows.Forms.Label();
             this.PlDst = new System.Windows.Forms.Panel();
+            this._UcDst = new Me.Amon.Sec.V.Wiz.UcDst();
             this.PbKey = new System.Windows.Forms.PictureBox();
             this.TbKey = new System.Windows.Forms.TextBox();
             this.LlKey = new System.Windows.Forms.Label();
-            this._UcSrc = new Me.Amon.Sec.V.Wiz.UcSrc();
-            this._UcDst = new Me.Amon.Sec.V.Wiz.UcDst();
+            this.PbDir = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.ScMain)).BeginInit();
             this.ScMain.Panel1.SuspendLayout();
             this.ScMain.Panel2.SuspendLayout();
@@ -47,6 +48,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PbOpt)).BeginInit();
             this.PlDst.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbKey)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbDir)).BeginInit();
             this.SuspendLayout();
             // 
             // ScMain
@@ -81,6 +83,16 @@
             this.PlSrc.Size = new System.Drawing.Size(261, 266);
             this.PlSrc.TabIndex = 0;
             // 
+            // _UcSrc
+            // 
+            this._UcSrc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._UcSrc.Location = new System.Drawing.Point(3, 30);
+            this._UcSrc.Name = "_UcSrc";
+            this._UcSrc.Size = new System.Drawing.Size(255, 200);
+            this._UcSrc.TabIndex = 3;
+            // 
             // PbOpt
             // 
             this.PbOpt.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -114,6 +126,7 @@
             // 
             // PlDst
             // 
+            this.PlDst.Controls.Add(this.PbDir);
             this.PlDst.Controls.Add(this._UcDst);
             this.PlDst.Controls.Add(this.PbKey);
             this.PlDst.Controls.Add(this.TbKey);
@@ -123,6 +136,16 @@
             this.PlDst.Name = "PlDst";
             this.PlDst.Size = new System.Drawing.Size(261, 266);
             this.PlDst.TabIndex = 0;
+            // 
+            // _UcDst
+            // 
+            this._UcDst.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._UcDst.Location = new System.Drawing.Point(3, 30);
+            this._UcDst.Name = "_UcDst";
+            this._UcDst.Size = new System.Drawing.Size(255, 200);
+            this._UcDst.TabIndex = 4;
             // 
             // PbKey
             // 
@@ -154,25 +177,14 @@
             this.LlKey.Text = "口令(&K)";
             this.LlKey.Visible = false;
             // 
-            // _UcSrc
+            // PbDir
             // 
-            this._UcSrc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this._UcSrc.Location = new System.Drawing.Point(3, 30);
-            this._UcSrc.Name = "_UcSrc";
-            this._UcSrc.Size = new System.Drawing.Size(255, 200);
-            this._UcSrc.TabIndex = 3;
-            // 
-            // _UcDst
-            // 
-            this._UcDst.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this._UcDst.Location = new System.Drawing.Point(3, 30);
-            this._UcDst.Name = "_UcDst";
-            this._UcDst.Size = new System.Drawing.Size(255, 200);
-            this._UcDst.TabIndex = 4;
+            this.PbDir.Image = global::Me.Amon.Properties.Resources.Menu;
+            this.PbDir.Location = new System.Drawing.Point(174, 3);
+            this.PbDir.Name = "PbDir";
+            this.PbDir.Size = new System.Drawing.Size(42, 20);
+            this.PbDir.TabIndex = 5;
+            this.PbDir.TabStop = false;
             // 
             // AWiz
             // 
@@ -191,6 +203,7 @@
             this.PlDst.ResumeLayout(false);
             this.PlDst.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbKey)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbDir)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -208,6 +221,7 @@
         private System.Windows.Forms.PictureBox PbKey;
         private UcSrc _UcSrc;
         private UcDst _UcDst;
+        private System.Windows.Forms.PictureBox PbDir;
 
     }
 }
