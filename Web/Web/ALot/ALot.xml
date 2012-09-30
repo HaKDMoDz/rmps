@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Amon>
+  <App>ALot</App>
+  <Ver>1</Ver>
+  <Lot>
+    <Rounds>
+      <Round Count="1" Rows="1" Cols="1">第一轮</Round>
+      <Round Count="6" Rows="3" Cols="2">第二轮</Round>
+    </Rounds>
+    <Nodes>
+      <Node>
+        <Items>
+          <Item Key="demo" Weight="" Include="" Exclude="">Demo</Item>
+          <Item Key="test" Weight="" Include="" Exclude="">Test</Item>
+          <Item Key="foo" Weight="" Include="" Exclude="">Foo</Item>
+          <Item Key="bar" Weight="" Include="" Exclude="">Bar</Item>
+          <Item Key="中文" Weight="" Include="" Exclude="">中文</Item>
+          <Item Key="测试" Weight="" Include="" Exclude="">测试</Item>
+          <Item Key="演示" Weight="" Include="" Exclude="">演示</Item>
+        </Items>
+      </Node>
+    </Nodes>
+  </Lot>
+</Amon>
