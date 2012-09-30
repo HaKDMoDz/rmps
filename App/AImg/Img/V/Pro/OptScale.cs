@@ -15,7 +15,7 @@ namespace Me.Amon.Img.V.Pro
         {
         }
 
-        public new Control Control
+        public Control Control
         {
             get { return this; }
         }
