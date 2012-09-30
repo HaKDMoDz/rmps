@@ -2,10 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectView>ProjectFiles</ProjectView>
-    <PublishUrlHistory>publish\</PublishUrlHistory>
-    <InstallUrlHistory />
-    <SupportUrlHistory />
-    <UpdateUrlHistory />
+    <PublishUrlHistory>F:\Pub\Web\|publish\</PublishUrlHistory>
+    <InstallUrlHistory>http://amon.me/down/</InstallUrlHistory>
+    <SupportUrlHistory>http://amon.me/%3fren</SupportUrlHistory>
+    <UpdateUrlHistory>http://amon.me/down/|http://amon.me/aren/</UpdateUrlHistory>
     <BootstrapperUrlHistory />
     <ErrorReportUrlHistory />
     <FallbackCulture>zh-CN</FallbackCulture>
