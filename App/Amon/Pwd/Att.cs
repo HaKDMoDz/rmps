@@ -109,6 +109,8 @@ namespace Me.Amon.Pwd
                     return new LogoAtt();
                 case TYPE_HINT:
                     return new HintAtt();
+                case TYPE_AUTO:
+                    return new AutoAtt();
                 default:
                     return null;
             }
@@ -555,9 +557,13 @@ namespace Me.Amon.Pwd
         /// </summary>
         public const int TYPE_HINT = TYPE_LOGO + 1;
         /// <summary>
+        /// 属性：自动填充16
+        /// </summary>
+        public const int TYPE_AUTO = TYPE_HINT + 1;
+        /// <summary>
         /// 属性：组件个数
         /// </summary>
-        public const int TYPE_SIZE = TYPE_HINT + 1;
+        public const int TYPE_SIZE = TYPE_AUTO + 1;
         #endregion
 
         #region 分隔字符
@@ -586,7 +592,8 @@ namespace Me.Amon.Pwd
         public const int PWDS_HEAD_META = PWDS_HEAD_GUID + 1;
         public const int PWDS_HEAD_LOGO = PWDS_HEAD_META + 1;
         public const int PWDS_HEAD_HINT = PWDS_HEAD_LOGO + 1;
-        public const int HEAD_SIZE = PWDS_HEAD_HINT + 1;
+        public const int PWDS_HEAD_AUTO = PWDS_HEAD_HINT + 1;
+        public const int HEAD_SIZE = PWDS_HEAD_AUTO + 1;
         #endregion
     }
 }

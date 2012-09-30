@@ -98,7 +98,7 @@ namespace Me.Amon.Pwd.M
         }
 
         private Timer _Timer;
-        private IList<Gtd.MGtd> _MGtds;
+        private IList<Gtd.M.MGtd> _MGtds;
         private int _TodoCnt = 0;
         private int _PastCnt = 0;
         private int _Delay = 5;
@@ -121,7 +121,7 @@ namespace Me.Amon.Pwd.M
                 if (_MGtds == null)
                 {
                     _MGtds = DBA.ListGtdWithRef();
-                    foreach (Gtd.MGtd gtd in _MGtds)
+                    foreach (Gtd.M.MGtd gtd in _MGtds)
                     {
                         if (gtd.NextEvent(now, Gtd.CGtd.EVENT_LOAD))
                         {
@@ -140,7 +140,7 @@ namespace Me.Amon.Pwd.M
                 _TodoCnt = 0;
                 _PastCnt = 0;
 
-                foreach (Gtd.MGtd gtd in _MGtds)
+                foreach (Gtd.M.MGtd gtd in _MGtds)
                 {
                     if (gtd.Test(now, 43200))//12 * 60 * 60
                     {

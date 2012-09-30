@@ -187,6 +187,8 @@ namespace Me.Amon.Pwd.V.Pro
                         _DataTable.Rows.Add(att.Order, att);
                         att = _SafeModel.InitHint();
                         _DataTable.Rows.Add(att.Order, att);
+                        att = _SafeModel.InitAuto();
+                        _DataTable.Rows.Add(att.Order, att);
                     }
                     _SafeModel.InitData(header);
                     for (int i = _DataTable.Rows.Count - 1; i >= Att.HEAD_SIZE; i -= 1)

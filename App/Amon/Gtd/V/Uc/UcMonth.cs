@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Me.Amon.Gtd.M;
 
 namespace Me.Amon.Gtd.V.Uc
 {
@@ -60,7 +61,7 @@ namespace Me.Amon.Gtd.V.Uc
             }
             if (dates == null || dates.Unit != CGtd.UNIT_MONTH)
             {
-                dates = new Dates.Month();
+                dates = new M.Dates.Month();
                 mgtd.Dates.Clear();
                 mgtd.Dates.Add(dates);
             }

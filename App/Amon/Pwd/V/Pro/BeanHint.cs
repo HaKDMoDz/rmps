@@ -109,7 +109,7 @@ namespace Me.Amon.Pwd.V.Pro
                 return;
             }
 
-            Gtd.MGtd gtd = editor.MGtd;
+            Gtd.M.MGtd gtd = editor.MGtd;
             _Att.Gtd = gtd;
             _Att.Text = gtd.Title;
             _Att.Icon = Resources.Hint;

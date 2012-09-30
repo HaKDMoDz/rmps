@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Text;
 using System.Xml;
-using Me.Amon.Gtd;
+using Me.Amon.Gtd.M;
 using Me.Amon.M;
 
 namespace Me.Amon.Pwd
@@ -98,6 +98,14 @@ namespace Me.Amon.Pwd
         /// 用户数据
         /// </summary>
         public string Password { get; set; }
+        /// <summary>
+        /// 窗口对象
+        /// </summary>
+        public string Window { get; set; }
+        /// <summary>
+        /// 执行脚本
+        /// </summary>
+        public string Script { get; set; }
 
         /// <summary>
         /// 恢复默认值

@@ -39,7 +39,7 @@
             // LbText
             // 
             this.LbText.AutoSize = true;
-            this.LbText.Location = new System.Drawing.Point(3, 7);
+            this.LbText.Location = new System.Drawing.Point(3, 6);
             this.LbText.Name = "LbText";
             this.LbText.Size = new System.Drawing.Size(47, 12);
             this.LbText.TabIndex = 0;
@@ -50,7 +50,7 @@
             this.PbHint.BackColor = System.Drawing.SystemColors.Window;
             this.PbHint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PbHint.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PbHint.Location = new System.Drawing.Point(56, 4);
+            this.PbHint.Location = new System.Drawing.Point(56, 3);
             this.PbHint.Name = "PbHint";
             this.PbHint.Size = new System.Drawing.Size(18, 18);
             this.PbHint.TabIndex = 1;
@@ -80,7 +80,7 @@
             // LlHint
             // 
             this.LlHint.AutoSize = true;
-            this.LlHint.Location = new System.Drawing.Point(80, 7);
+            this.LlHint.Location = new System.Drawing.Point(80, 6);
             this.LlHint.Name = "LlHint";
             this.LlHint.Size = new System.Drawing.Size(53, 12);
             this.LlHint.TabIndex = 4;

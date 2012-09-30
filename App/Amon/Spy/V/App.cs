@@ -42,7 +42,7 @@ namespace Me.Amon.Target.App
                 //stream.Close();
                 //Cursor = new Cursor(bmp.GetHicon());
                 Cursor = Cursors.Hand;
-                PbApp.Image = Resources.AppNan;
+                //PbApp.Image = Resources.AppNan;
             }
         }
 
@@ -83,7 +83,7 @@ namespace Me.Amon.Target.App
                 _lastWindow = IntPtr.Zero;
 
                 Cursor = Cursors.Default;
-                PbApp.Image = Resources.AppCur;
+                //PbApp.Image = Resources.AppCur;
             }
         }
 

@@ -8,6 +8,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
+using Me.Amon.Api.Enums;
+using Me.Amon.Api.User32;
 using Me.Amon.Auth;
 using Me.Amon.C;
 using Me.Amon.Gtd;
@@ -132,6 +134,8 @@ namespace Me.Amon.Pwd
             }
 
             _UserModel.AppendHandler(new AmonHandler<string>(ShowEcho));
+
+            User32.RegisterHotKey(this.Handle, this.Handle.ToInt32(), 0, (int)VirtualKeyCode.F2);
         }
         #endregion
 
@@ -185,6 +189,8 @@ namespace Me.Amon.Pwd
                 }
             }
 
+            User32.UnregisterHotKey(this.Handle, this.Handle.ToInt32());
+
             SaveLayout();
             _Exit = true;
 
@@ -233,6 +239,19 @@ namespace Me.Amon.Pwd
                 e.Cancel = true;
                 HideForm();
             }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == (int)WindowMessage.WM_HOTKEY)
+            {
+                int t = m.WParam.ToInt32();
+                if (t == this.Handle.ToInt32())
+                {
+                    FillData();
+                }
+            }
+            base.WndProc(ref m);
         }
 
         #region CatTree拖拽事件
@@ -722,6 +741,29 @@ namespace Me.Amon.Pwd
                 group.Checked(key.Major.ToString());
             }
         }
+
+        public void FillData()
+        {
+            IntPtr hWnd = User32.GetForegroundWindow();
+            if (hWnd == IntPtr.Zero || hWnd == this.Handle)
+            {
+                return;
+            }
+
+            if (_SafeModel.Key == null || string.IsNullOrEmpty(_SafeModel.Key.Script))
+            {
+                return;
+            }
+
+            StringBuilder buffer = new StringBuilder(_SafeModel.Key.Script);
+            Att item;
+            for (int i = Att.HEAD_SIZE, j = _SafeModel.Count; i < j; i += 1)
+            {
+                item = _SafeModel.GetAtt(i);
+                buffer.Replace('{' + item.Text + '}', item.Data);
+            }
+            SendKeys.SendWait(buffer.ToString());
+        }
         #endregion
 
         #region 类别处理
@@ -1174,9 +1216,9 @@ namespace Me.Amon.Pwd
 
         public void ListGtdExpired()
         {
-            IList<MGtd> gtds = _UserModel.DBA.FindKeyByGtdExpired();
+            IList<Gtd.M.MGtd> gtds = _UserModel.DBA.FindKeyByGtdExpired();
             List<Key> keys = new List<Key>();
-            foreach (MGtd gtd in gtds)
+            foreach (Gtd.M.MGtd gtd in gtds)
             {
                 keys.Add(_UserModel.DBA.ReadKey(gtd.RefId));
             }
@@ -1185,9 +1227,9 @@ namespace Me.Amon.Pwd
 
         public void ListGtd(DateTime time, int seconds)
         {
-            IList<MGtd> gtds = _UserModel.DBA.ListGtdWithRef();
+            IList<Gtd.M.MGtd> gtds = _UserModel.DBA.ListGtdWithRef();
             List<Key> keys = new List<Key>();
-            foreach (MGtd gtd in gtds)
+            foreach (Gtd.M.MGtd gtd in gtds)
             {
                 gtd.Test(time, seconds);
                 if (gtd.Status == CGtd.STATUS_ONTIME)

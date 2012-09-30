@@ -60,7 +60,7 @@
             this.PbLogo.BackColor = System.Drawing.SystemColors.Window;
             this.PbLogo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PbLogo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PbLogo.Location = new System.Drawing.Point(56, 4);
+            this.PbLogo.Location = new System.Drawing.Point(56, 3);
             this.PbLogo.Name = "PbLogo";
             this.PbLogo.Size = new System.Drawing.Size(18, 18);
             this.PbLogo.TabIndex = 1;
@@ -70,7 +70,7 @@
             // LbText
             // 
             this.LbText.AutoSize = true;
-            this.LbText.Location = new System.Drawing.Point(3, 7);
+            this.LbText.Location = new System.Drawing.Point(3, 6);
             this.LbText.Name = "LbText";
             this.LbText.Size = new System.Drawing.Size(47, 12);
             this.LbText.TabIndex = 0;

@@ -44,14 +44,14 @@
             // 
             this.propertyGrid1.Location = new System.Drawing.Point(12, 140);
             this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(260, 110);
+            this.propertyGrid1.Size = new System.Drawing.Size(260, 178);
             this.propertyGrid1.TabIndex = 1;
             // 
             // ASpy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(284, 330);
             this.Controls.Add(this.propertyGrid1);
             this.Controls.Add(this.appWindow1);
             this.Name = "ASpy";

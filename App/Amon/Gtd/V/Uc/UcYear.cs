@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Me.Amon.Gtd.M;
 
 namespace Me.Amon.Gtd.V.Uc
 {
@@ -49,7 +50,7 @@ namespace Me.Amon.Gtd.V.Uc
             }
             if (dates == null || dates.Unit != CGtd.UNIT_YEAR)
             {
-                dates = new Dates.Year();
+                dates = new M.Dates.Year();
                 mgtd.Dates.Clear();
                 mgtd.Dates.Add(dates);
             }

@@ -610,6 +610,9 @@ namespace Me.Amon.Pwd.V.Pro
                 case Att.TYPE_HINT:
                     ctl = new BeanHint(this);
                     break;
+                case Att.TYPE_AUTO:
+                    ctl = new BeanAuto(this);
+                    break;
                 default:
                     ctl = null;
                     break;

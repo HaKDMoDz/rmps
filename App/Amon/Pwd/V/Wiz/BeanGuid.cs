@@ -160,7 +160,7 @@ namespace Me.Amon.Pwd.V.Wiz
             CbLib.SelectedItem = new Lib { Id = guid.Data };
             PbCard.Visible = guid.Data == CApp.LIB_CARD;
 
-            Gtd.MGtd gtd = _SafeModel.Key.Gtd;
+            Gtd.M.MGtd gtd = _SafeModel.Key.Gtd;
             if (gtd != null)
             {
                 if (gtd.Status == Gtd.CGtd.STATUS_EXPIRED)
@@ -316,7 +316,7 @@ namespace Me.Amon.Pwd.V.Wiz
 
         private void CloseTips()
         {
-            Gtd.MGtd gtd = _SafeModel.Key.Gtd;
+            Gtd.M.MGtd gtd = _SafeModel.Key.Gtd;
             if (gtd != null)
             {
                 DateTime now = DateTime.Now;

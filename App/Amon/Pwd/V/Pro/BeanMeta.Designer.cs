@@ -48,7 +48,7 @@
             // LbData
             // 
             this.LbData.AutoSize = true;
-            this.LbData.Location = new System.Drawing.Point(3, 35);
+            this.LbData.Location = new System.Drawing.Point(3, 33);
             this.LbData.Name = "LbData";
             this.LbData.Size = new System.Drawing.Size(47, 12);
             this.LbData.TabIndex = 2;
@@ -68,7 +68,7 @@
             this.LbText.Name = "LbText";
             this.LbText.Size = new System.Drawing.Size(47, 12);
             this.LbText.TabIndex = 0;
-            this.LbText.Text = "名称(&N)";
+            this.LbText.Text = "标题(&N)";
             // 
             // BeanMeta
             // 

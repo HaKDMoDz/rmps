@@ -88,6 +88,7 @@ namespace Me.Amon.Pwd.V.Wiz
             _SafeModel.InitMeta();
             _SafeModel.InitLogo();
             _SafeModel.InitHint();
+            _SafeModel.InitAuto();
 
             ShowGuid();
             _LastView.Focus();

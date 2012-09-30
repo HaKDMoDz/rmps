@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
-using Me.Amon.M;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Util;
 
@@ -59,7 +58,7 @@ namespace Me.Amon.Pwd.M
         {
             get
             {
-                return (GuidAtt)GetAtt(0);
+                return (GuidAtt)GetAtt(Att.PWDS_HEAD_GUID);
             }
         }
 
@@ -70,7 +69,7 @@ namespace Me.Amon.Pwd.M
         {
             get
             {
-                return (MetaAtt)GetAtt(1);
+                return (MetaAtt)GetAtt(Att.PWDS_HEAD_META);
             }
         }
 
@@ -81,7 +80,7 @@ namespace Me.Amon.Pwd.M
         {
             get
             {
-                return (LogoAtt)GetAtt(2);
+                return (LogoAtt)GetAtt(Att.PWDS_HEAD_LOGO);
             }
         }
 
@@ -92,7 +91,15 @@ namespace Me.Amon.Pwd.M
         {
             get
             {
-                return (HintAtt)GetAtt(3);
+                return (HintAtt)GetAtt(Att.PWDS_HEAD_HINT);
+            }
+        }
+
+        public AutoAtt Auto
+        {
+            get
+            {
+                return (AutoAtt)GetAtt(Att.PWDS_HEAD_AUTO);
             }
         }
 
@@ -255,6 +262,18 @@ namespace Me.Amon.Pwd.M
         }
 
         /// <summary>
+        /// 过时提醒
+        /// </summary>
+        /// <returns></returns>
+        public AutoAtt InitAuto()
+        {
+            AutoAtt auto = new AutoAtt { Order = "填充" };
+            auto.Id = (_Key.AttIndex++).ToString();
+            _AttList.Add(auto);
+            return auto;
+        }
+
+        /// <summary>
         /// 口令数据
         /// </summary>
         /// <param name="index"></param>
@@ -265,10 +284,14 @@ namespace Me.Amon.Pwd.M
                 _AttList.RemoveAt(i);
             }
 
+            Att att = _AttList[Att.PWDS_HEAD_AUTO];
+            att.Text = header.Target;
+            att.Data = header.Script;
+
             int order = 1;
             foreach (LibDetail detail in header.Details)
             {
-                Att att = Att.GetInstance(detail.Type, detail.Text, detail.Data);
+                att = Att.GetInstance(detail.Type, detail.Text, detail.Data);
                 att.Id = (_Key.AttIndex++).ToString();
                 att.Order = (order++).ToString();
                 _AttList.Add(att);
@@ -324,6 +347,12 @@ namespace Me.Amon.Pwd.M
             hint.Gtd = _Key.Gtd;
             hint.Icon = _Key.GtdIcon;
             list.Add(hint);
+
+            // AutoItem
+            AutoAtt auto = new AutoAtt();
+            auto.Text = _Key.Window;
+            auto.Data = _Key.Script;
+            list.Add(auto);
 
             // 处理每一个数据
             string[] arr = key.Split(Att.SP_SQL_EE);
@@ -387,6 +416,11 @@ namespace Me.Amon.Pwd.M
             _Key.GtdMemo = hint.Data;
             _Key.Gtd = hint.Gtd;
             _Key.GtdIcon = hint.Icon;
+
+            // AutoItem
+            AutoAtt auto = (AutoAtt)_AttList[Att.PWDS_HEAD_AUTO];
+            _Key.Window = auto.Text;
+            _Key.Script = auto.Data;
 
             // 字符串拼接
             StringBuilder buf = new StringBuilder();

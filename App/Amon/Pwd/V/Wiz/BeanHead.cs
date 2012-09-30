@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using Me.Amon.C;
 using Me.Amon.Gtd.V;
-using Me.Amon.M;
 using Me.Amon.Properties;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd.M;
@@ -41,7 +40,7 @@ namespace Me.Amon.Pwd.V.Wiz
 
             TbName.GotFocus += new EventHandler(TbName_GotFocus);
             TbMeta.GotFocus += new EventHandler(TbMeta_GotFocus);
-            TbMemo.GotFocus += new EventHandler(TbMemo_GotFocus);
+            TbAuto.GotFocus += new EventHandler(TbMemo_GotFocus);
         }
         #endregion
 
@@ -96,6 +95,11 @@ namespace Me.Amon.Pwd.V.Wiz
             TbHint.Text = hint.Text;
             PbHint.Image = hint.Icon;
 
+            AutoAtt auto = _SafeModel.Auto;
+            if (auto != null)
+            {
+                TbAuto.Text = auto.Data;
+            }
             Focus();
         }
 
@@ -126,6 +130,14 @@ namespace Me.Amon.Pwd.V.Wiz
                 meta.Modified = true;
             }
             _SafeModel.Modified |= meta.Modified;
+
+            AutoAtt auto = _SafeModel.Auto;
+            if (auto.Data != TbAuto.Text)
+            {
+                auto.Data = TbAuto.Text;
+                auto.Modified = true;
+            }
+            _SafeModel.Modified |= auto.Modified;
 
             return true;
         }
@@ -182,7 +194,7 @@ namespace Me.Amon.Pwd.V.Wiz
                 return;
             }
 
-            Gtd.MGtd gtd = editor.MGtd;
+            Gtd.M.MGtd gtd = editor.MGtd;
             HintAtt hint = _SafeModel.Hint;
             hint.Gtd = gtd;
             hint.Text = gtd.Title;
@@ -205,7 +217,7 @@ namespace Me.Amon.Pwd.V.Wiz
 
         private void TbMemo_GotFocus(object sender, EventArgs e)
         {
-            _TBox = TbMemo;
+            _TBox = TbAuto;
         }
         #endregion
 

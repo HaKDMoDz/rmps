@@ -12,6 +12,10 @@ namespace Me.Amon.Pwd
 
         public string Text { get; set; }
 
+        public string Target { get; set; }
+
+        public string Script { get; set; }
+
         public string Memo { get; set; }
 
         public IList<LibDetail> Details { get; set; }

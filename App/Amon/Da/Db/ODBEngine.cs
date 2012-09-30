@@ -4,6 +4,7 @@ using System.IO;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Config;
 using Me.Amon.Gtd;
+using Me.Amon.Gtd.M;
 using Me.Amon.M;
 using Me.Amon.Pwd;
 using Me.Amon.Util;
@@ -42,6 +43,7 @@ namespace Me.Amon.Da.Db
                     config.Common.ObjectClass(typeof(Key)).ObjectField("MetaKey").Indexed(true);
                     config.Common.ObjectClass(typeof(Lib)).CascadeOnUpdate(true);
                     config.Common.ObjectClass(typeof(MGtd)).CascadeOnUpdate(true);
+                    //config.Common.AddAlias(new WildcardAlias("Me.Amon.Model.*", "Me.Amon.M.*"));
                     bool isNew = File.Exists(_DbPath);
                     _Container = Db4oEmbedded.OpenFile(config, _DbPath);
                     if (isNew)

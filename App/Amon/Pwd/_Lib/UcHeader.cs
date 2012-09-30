@@ -24,7 +24,7 @@ namespace Me.Amon.Pwd._Lib
         public void Init()
         {
             TbText.MaxLength = DBConst.APWD0306_SIZE;
-            TbMemo.MaxLength = DBConst.APWD0308_SIZE;
+            TbTarget.MaxLength = DBConst.APWD0308_SIZE;
         }
 
         public void Show(Me.Amon.Pwd.Lib header)
@@ -32,6 +32,8 @@ namespace Me.Amon.Pwd._Lib
             _LibHeader = header;
 
             TbText.Text = _LibHeader.Text;
+            TbTarget.Text = _LibHeader.Target;
+            TbScript.Text = _LibHeader.Script;
             TbMemo.Text = _LibHeader.Memo;
         }
 
@@ -45,6 +47,8 @@ namespace Me.Amon.Pwd._Lib
 
             _LibHeader.Name = "";
             _LibHeader.Text = text;
+            _LibHeader.Target = TbTarget.Text;
+            _LibHeader.Script = TbScript.Text;
             _LibHeader.Memo = TbMemo.Text;
 
             _LibEdit.SaveHeader(_LibHeader);

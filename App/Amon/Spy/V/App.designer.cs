@@ -116,7 +116,6 @@
             // 
             // PbApp
             // 
-            this.PbApp.Image = global::Me.Amon.Properties.Resources.AppCur;
             this.PbApp.Location = new System.Drawing.Point(10, 16);
             this.PbApp.Name = "PbApp";
             this.PbApp.Size = new System.Drawing.Size(32, 32);

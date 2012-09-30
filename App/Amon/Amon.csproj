@@ -99,6 +99,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\Enums\GetWindow.cs" />
+    <Compile Include="Api\Enums\InputType.cs" />
+    <Compile Include="Api\Enums\KeyEvent.cs" />
+    <Compile Include="Api\Enums\MouseButton.cs" />
+    <Compile Include="Api\Enums\MouseEvent.cs" />
+    <Compile Include="Api\Enums\PenStyles.cs" />
+    <Compile Include="Api\Enums\RopMode.cs" />
+    <Compile Include="Api\Enums\ShowWindow.cs" />
+    <Compile Include="Api\Enums\StockObjects.cs" />
+    <Compile Include="Api\Enums\SystemMetrics.cs" />
+    <Compile Include="Api\Enums\VirtualKey.cs" />
+    <Compile Include="Api\Enums\VirtualKeyCode.cs" />
+    <Compile Include="Api\Enums\WindowMessage.cs" />
+    <Compile Include="Api\Enums\WMHotKeys.cs" />
+    <Compile Include="Api\Enums\XButton.cs" />
+    <Compile Include="Api\Gdi32\Gdi32.cs" />
+    <Compile Include="Api\Gdi32\Gdi32API.cs" />
+    <Compile Include="Api\Input\IInputDeviceStateAdaptor.cs" />
+    <Compile Include="Api\Input\IInputMessageDispatcher.cs" />
+    <Compile Include="Api\Input\IInputSimulator.cs" />
+    <Compile Include="Api\Input\IKeyboardSimulator.cs" />
+    <Compile Include="Api\Input\IMouseSimulator.cs" />
+    <Compile Include="Api\Input\InputBuilder.cs" />
+    <Compile Include="Api\Input\InputSimulator.cs" />
+    <Compile Include="Api\Input\KeyboardSimulator.cs" />
+    <Compile Include="Api\Input\MouseButtonExtensions.cs" />
+    <Compile Include="Api\Input\MouseSimulator.cs" />
+    <Compile Include="Api\Input\WindowsInputDeviceStateAdaptor.cs" />
+    <Compile Include="Api\Input\WindowsInputMessageDispatcher.cs" />
+    <Compile Include="Api\Struct\HARDWAREINPUT.cs" />
+    <Compile Include="Api\Struct\INPUT.cs" />
+    <Compile Include="Api\Struct\KEYBDINPUT.cs" />
+    <Compile Include="Api\Struct\MOUSEINPUT.cs" />
+    <Compile Include="Api\Struct\MOUSEKEYBDHARDWAREINPUT.cs" />
+    <Compile Include="Api\Struct\POINT.cs" />
+    <Compile Include="Api\Struct\RECT.cs" />
+    <Compile Include="Api\Struct\WINDOWPLACEMENT.cs" />
+    <Compile Include="Api\User32\User32.cs" />
+    <Compile Include="Api\User32\User32API.cs" />
     <Compile Include="Bar\ABar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +145,7 @@
       <DependentUpon>ABar.cs</DependentUpon>
     </Compile>
     <Compile Include="Bar\EBar.cs" />
+    <Compile Include="Bar\M\MBar.cs" />
     <Compile Include="Bar\Opt\Email.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -170,7 +210,29 @@
     <Compile Include="C\VoidHandler.cs" />
     <Compile Include="Da\DBA.cs" />
     <Compile Include="Da\DFA.cs" />
+    <Compile Include="Demo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Demo.Designer.cs">
+      <DependentUpon>Demo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Gtd\EGtd.cs" />
+    <Compile Include="Gtd\M\ADates.cs" />
+    <Compile Include="Gtd\CGtd.cs" />
+    <Compile Include="Gtd\M\Dates\Day.cs" />
+    <Compile Include="Gtd\M\Dates\Hour.cs" />
+    <Compile Include="Gtd\M\Dates\Minute.cs" />
+    <Compile Include="Gtd\M\Dates\Month.cs" />
+    <Compile Include="Gtd\M\Dates\Season.cs" />
+    <Compile Include="Gtd\M\Dates\Second.cs" />
+    <Compile Include="Gtd\M\Dates\Weekday.cs" />
+    <Compile Include="Gtd\M\Dates\WeekOfMonth.cs" />
+    <Compile Include="Gtd\M\Dates\WeekOfYear.cs" />
+    <Compile Include="Gtd\M\Dates\Year.cs" />
+    <Compile Include="Gtd\M\Hint\MAlert.cs" />
+    <Compile Include="Gtd\M\Hint\MApp.cs" />
+    <Compile Include="Gtd\M\Hint\MEmail.cs" />
+    <Compile Include="Gtd\M\MGtd.cs" />
     <Compile Include="Gtd\M\UserModel.cs" />
     <Compile Include="Gtd\V\GtdEditor.cs">
       <SubType>Form</SubType>
@@ -293,6 +355,7 @@
     <Compile Include="Ico\E\SaveIcoAction.cs" />
     <Compile Include="Ico\IIco.cs" />
     <Compile Include="Ico\M\Abc.cs" />
+    <Compile Include="Ico\M\MIco.cs" />
     <Compile Include="Ico\M\UserModel.cs" />
     <Compile Include="Ico\TIco.cs" />
     <Compile Include="Img\AImg.cs">
@@ -313,6 +376,7 @@
     <Compile Include="Ico\V\IcoEditor.Designer.cs">
       <DependentUpon>IcoEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Img\M\MImg.cs" />
     <Compile Include="Img\M\UserModel.cs" />
     <Compile Include="Img\V\ALarge.cs">
       <SubType>UserControl</SubType>
@@ -327,7 +391,45 @@
       <DependentUpon>ASmall.cs</DependentUpon>
     </Compile>
     <Compile Include="M\AUserModel.cs" />
+    <Compile Include="M\Cat.cs" />
+    <Compile Include="M\Dbv.cs" />
+    <Compile Include="M\Dto.cs" />
     <Compile Include="M\IViewModel.cs" />
+    <Compile Include="M\Log.cs" />
+    <Compile Include="M\Udc.cs" />
+    <Compile Include="M\Vcs.cs" />
+    <Compile Include="Open\NameValueComparer.cs" />
+    <Compile Include="Open\OAuthConsumer.cs" />
+    <Compile Include="Open\OAuthToken.cs" />
+    <Compile Include="Open\OAuthUtility.cs" />
+    <Compile Include="Open\OAuthVersion.cs" />
+    <Compile Include="Open\UI\Auth.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Open\UI\Auth.Designer.cs">
+      <DependentUpon>Auth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Open\V1\App\Client\KuaipanClient.cs" />
+    <Compile Include="Open\V1\App\OAuthV1Client.cs" />
+    <Compile Include="Open\V1\App\OAuthV1Server.cs" />
+    <Compile Include="Open\V1\App\Server\KuaipanServer.cs" />
+    <Compile Include="Open\V1\OAuthConstants.cs" />
+    <Compile Include="Open\V1\OAuthPhrases.cs" />
+    <Compile Include="Open\V1\OAuthTokenV1.cs" />
+    <Compile Include="Open\V2\AccountInfo.cs" />
+    <Compile Include="Open\V2\App\Client\WeiboClient.cs" />
+    <Compile Include="Open\V2\App\OAuthV2Client.cs" />
+    <Compile Include="Open\V2\App\OAuthV2Server.cs" />
+    <Compile Include="Open\V2\App\Server\WeiboServer.cs" />
+    <Compile Include="Open\V2\Enums\DisplayType.cs" />
+    <Compile Include="Open\V2\Enums\ErrorCode.cs" />
+    <Compile Include="Open\V2\Enums\GrantType.cs" />
+    <Compile Include="Open\V2\Enums\RequestMethod.cs" />
+    <Compile Include="Open\V2\Enums\ResponseType.cs" />
+    <Compile Include="Open\V2\Enums\TokenResult.cs" />
+    <Compile Include="Open\V2\OAuthError.cs" />
+    <Compile Include="Open\V2\OAuthPhrases.cs" />
+    <Compile Include="Open\V2\OAuthTokenV2.cs" />
     <Compile Include="OS\IOsd.cs" />
     <Compile Include="OS\KuaipanOsd.cs" />
     <Compile Include="OS\Kuaipan\AccountInfo.cs" />
@@ -348,6 +450,27 @@
     <Compile Include="Pwd\M\KeyLog.cs" />
     <Compile Include="Pwd\M\Lib.cs" />
     <Compile Include="Pwd\M\LibDetail.cs" />
+    <Compile Include="Pwd\V\Pro\BeanAuto.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\V\Pro\BeanAuto.Designer.cs">
+      <DependentUpon>BeanAuto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\_Att\AutoAtt.cs" />
+    <Compile Include="Spy\ASpy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Spy\ASpy.Designer.cs">
+      <DependentUpon>ASpy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Spy\M\MSpy.cs" />
+    <Compile Include="Spy\M\UserModel.cs" />
+    <Compile Include="Spy\V\App.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Spy\V\App.designer.cs">
+      <DependentUpon>App.cs</DependentUpon>
+    </Compile>
     <Compile Include="TApp.cs" />
     <Compile Include="Pwd\Att.cs" />
     <Compile Include="Pwd\Bean\ACall.cs">
@@ -523,7 +646,7 @@
       <DependentUpon>AGtd.cs</DependentUpon>
     </Compile>
     <Compile Include="IApp.cs" />
-    <Compile Include="Da\Db\DBConst.cs" />
+    <Compile Include="Pwd\D\DBConst.cs" />
     <Compile Include="Ico\AIco.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -871,42 +994,6 @@
     </Compile>
     <Compile Include="Uc\Itemi.cs" />
     <Compile Include="Uc\Items.cs" />
-    <Compile Include="Uc\TabControl\ATabControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\NativeMethods.cs" />
-    <Compile Include="Uc\TabControl\TabStyle.cs" />
-    <Compile Include="Uc\TabControl\TabStyleProvider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleAmonProvider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleAngledProvider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleChromeProvider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleDefaultProvider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleIE8Provider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleNoneProvider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleRoundedProvider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleVisualStudioProvider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\TabStyleProviders\TabStyleVS2010Provider.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Uc\TabControl\ThemedColors.cs" />
     <Compile Include="Util\CharUtil.cs" />
     <Compile Include="Util\HashUtil.cs" />
     <Compile Include="Util\TimeUtil.cs" />
@@ -934,6 +1021,42 @@
     <Compile Include="Uw\Input.Designer.cs">
       <DependentUpon>Input.cs</DependentUpon>
     </Compile>
+    <Compile Include="Uw\TabControl\ATabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uw\TabControl\NativeMethods.cs" />
+    <Compile Include="Uw\TabControl\TabStyle.cs" />
+    <Compile Include="Uw\TabControl\TabStyleProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uw\TabControl\TabStyleProviders\TabStyleAmonProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uw\TabControl\TabStyleProviders\TabStyleAngledProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uw\TabControl\TabStyleProviders\TabStyleChromeProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uw\TabControl\TabStyleProviders\TabStyleDefaultProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uw\TabControl\TabStyleProviders\TabStyleIE8Provider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uw\TabControl\TabStyleProviders\TabStyleNoneProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uw\TabControl\TabStyleProviders\TabStyleRoundedProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uw\TabControl\TabStyleProviders\TabStyleVisualStudioProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uw\TabControl\TabStyleProviders\TabStyleVS2010Provider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uw\TabControl\ThemedColors.cs" />
     <Compile Include="Uw\Waiting.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1134,6 +1257,9 @@
       <DependentUpon>Vcard.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Demo.resx">
+      <DependentUpon>Demo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Gtd\AGtd.resx">
       <DependentUpon>AGtd.cs</DependentUpon>
     </EmbeddedResource>
@@ -1207,6 +1333,9 @@
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Open\UI\Auth.resx">
+      <DependentUpon>Auth.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -1240,6 +1369,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\V\Pro\APro.resx">
       <DependentUpon>APro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\V\Pro\BeanAuto.resx">
+      <DependentUpon>BeanAuto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\V\Pro\BeanCall.resx">
       <DependentUpon>BeanCall.cs</DependentUpon>
@@ -1363,6 +1495,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\V\Wiz\BeanText.resx">
       <DependentUpon>BeanText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Spy\ASpy.resx">
+      <DependentUpon>ASpy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Spy\V\App.resx">
+      <DependentUpon>App.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uc\GtdTips.resx">
       <DependentUpon>GtdTips.cs</DependentUpon>
@@ -1584,19 +1722,20 @@
       <Project>{766A4389-8109-4783-B17C-2B284F0E1AFA}</Project>
       <Name>CardLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ComnLib\ComnLib.csproj">
-      <Project>{E57C460D-306A-4F57-AD0B-51F7EEAD8838}</Project>
-      <Name>ComnLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Gtd\C\" />
     <Folder Include="Gtd\E\" />
     <Folder Include="Ico\C\" />
+    <Folder Include="Open\V1\Enums\" />
+    <Folder Include="Open\V1\Web\" />
+    <Folder Include="Open\V2\Web\" />
     <Folder Include="OS\VDisk\" />
     <Folder Include="Pwd\C\" />
     <Folder Include="Pwd\E\Edit\" />
     <Folder Include="Pwd\E\Skin\" />
+    <Folder Include="Spy\C\" />
+    <Folder Include="Spy\E\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
