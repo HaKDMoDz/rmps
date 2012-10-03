@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Key
+﻿namespace Me.Amon.Rcg
 {
-    partial class AKey
+    partial class ARcg
     {
         /// <summary>
         /// Required designer variable.
@@ -35,6 +35,7 @@
             this.CbCharset = new System.Windows.Forms.ComboBox();
             this.LlRepeatable = new System.Windows.Forms.Label();
             this.CbRepeatable = new System.Windows.Forms.CheckBox();
+            this.BtGen = new System.Windows.Forms.Button();
             this.BtOk = new System.Windows.Forms.Button();
             this.BtNo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SpLength)).BeginInit();
@@ -63,9 +64,24 @@
             // SpLength
             // 
             this.SpLength.Location = new System.Drawing.Point(65, 75);
+            this.SpLength.Maximum = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+            this.SpLength.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.SpLength.Name = "SpLength";
             this.SpLength.Size = new System.Drawing.Size(85, 21);
             this.SpLength.TabIndex = 2;
+            this.SpLength.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // LlCharset
             // 
@@ -104,38 +120,50 @@
             this.CbRepeatable.Text = "允许重复(&A)";
             this.CbRepeatable.UseVisualStyleBackColor = true;
             // 
+            // BtGen
+            // 
+            this.BtGen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtGen.Location = new System.Drawing.Point(35, 153);
+            this.BtGen.Name = "BtGen";
+            this.BtGen.Size = new System.Drawing.Size(75, 23);
+            this.BtGen.TabIndex = 7;
+            this.BtGen.Text = "生成(&G)";
+            this.BtGen.UseVisualStyleBackColor = true;
+            this.BtGen.Click += new System.EventHandler(this.BtGen_Click);
+            // 
             // BtOk
             // 
             this.BtOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtOk.Location = new System.Drawing.Point(116, 158);
+            this.BtOk.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.BtOk.Location = new System.Drawing.Point(116, 153);
             this.BtOk.Name = "BtOk";
             this.BtOk.Size = new System.Drawing.Size(75, 23);
-            this.BtOk.TabIndex = 7;
-            this.BtOk.Text = "生成(&G)";
+            this.BtOk.TabIndex = 8;
+            this.BtOk.Text = "确定(&O)";
             this.BtOk.UseVisualStyleBackColor = true;
             this.BtOk.Click += new System.EventHandler(this.BtOk_Click);
             // 
             // BtNo
             // 
             this.BtNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtNo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.BtNo.Location = new System.Drawing.Point(197, 158);
+            this.BtNo.Location = new System.Drawing.Point(197, 153);
             this.BtNo.Name = "BtNo";
             this.BtNo.Size = new System.Drawing.Size(75, 23);
-            this.BtNo.TabIndex = 8;
+            this.BtNo.TabIndex = 9;
             this.BtNo.Text = "取消(&C)";
             this.BtNo.UseVisualStyleBackColor = true;
             this.BtNo.Click += new System.EventHandler(this.BtNo_Click);
             // 
-            // AKey
+            // ARcg
             // 
-            this.AcceptButton = this.BtOk;
+            this.AcceptButton = this.BtGen;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.BtNo;
-            this.ClientSize = new System.Drawing.Size(284, 193);
+            this.CancelButton = this.BtOk;
+            this.ClientSize = new System.Drawing.Size(284, 188);
             this.Controls.Add(this.BtNo);
             this.Controls.Add(this.BtOk);
+            this.Controls.Add(this.BtGen);
             this.Controls.Add(this.CbRepeatable);
             this.Controls.Add(this.LlRepeatable);
             this.Controls.Add(this.CbCharset);
@@ -146,8 +174,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "AKey";
-            this.Text = "AKey";
+            this.Name = "ARcg";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "随机字符生成器";
             ((System.ComponentModel.ISupportInitialize)(this.SpLength)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -163,6 +192,7 @@
         private System.Windows.Forms.ComboBox CbCharset;
         private System.Windows.Forms.Label LlRepeatable;
         private System.Windows.Forms.CheckBox CbRepeatable;
+        private System.Windows.Forms.Button BtGen;
         private System.Windows.Forms.Button BtOk;
         private System.Windows.Forms.Button BtNo;
     }

@@ -487,7 +487,7 @@ namespace Me.Amon.Pwd
         /// 附加属性常量
         /// </summary>
         public const string SPEC_VALUE_TRUE = "1";
-        public const string SPEC_VALUE_FAIL = "0";
+        public const string SPEC_VALUE_FALSE = "0";
         public const string SPEC_VALUE_NONE = "";
         #endregion
 

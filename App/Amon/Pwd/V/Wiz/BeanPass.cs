@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd.Bean;
 using Me.Amon.Pwd.M;
+using Me.Amon.Rcg;
 using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.V.Wiz
@@ -20,9 +22,10 @@ namespace Me.Amon.Pwd.V.Wiz
             InitializeComponent();
         }
 
-        public BeanPass(BeanBody body)
+        public BeanPass(BeanBody body, UserModel userModel)
         {
             _Body = body;
+            _UserModel = userModel;
 
             InitializeComponent();
         }
@@ -130,7 +133,38 @@ namespace Me.Amon.Pwd.V.Wiz
 
         private void BtGen_Click(object sender, EventArgs e)
         {
-            //GenPass();
+            ARcg rcg = new ARcg(_DataModel.UdcModel.UdcList);
+            string tmp = _Att.GetSpec(PassAtt.SPEC_PWDS_LEN);
+            if (string.IsNullOrEmpty(tmp) || tmp == "0")
+            {
+                rcg.Length = _UserModel.PasswordLength;
+            }
+            else
+            {
+                rcg.Length = int.Parse(tmp);
+            }
+
+            tmp = _Att.GetSpec(PassAtt.SPEC_PWDS_KEY);
+            if (CharUtil.IsValidateHash(tmp))
+            {
+                rcg.SelectedUdc = tmp;
+            }
+            else
+            {
+                rcg.SelectedUdc = _UserModel.PasswordUdc;
+            }
+
+            tmp = _Att.GetSpec(PassAtt.SPEC_PWDS_REP, Att.SPEC_VALUE_FALSE);
+            rcg.Repeatable = Att.SPEC_VALUE_TRUE.Equals(tmp);
+            if (DialogResult.OK != rcg.ShowDialog())
+            {
+                return;
+            }
+            TbData.Text = rcg.Key;
+            _Att.SetSpec(PassAtt.SPEC_PWDS_LEN, rcg.Length.ToString());
+            _Att.SetSpec(PassAtt.SPEC_PWDS_KEY, rcg.SelectedUdc);
+            _Att.SetSpec(PassAtt.SPEC_PWDS_REP, rcg.Repeatable ? Att.SPEC_VALUE_TRUE : Att.SPEC_VALUE_FALSE);
+            _Att.Modified = true;
         }
 
         private void BtCopy_Click(object sender, EventArgs e)

@@ -8,6 +8,7 @@ namespace Me.Amon.Pwd.V.Wiz
     {
         #region 全局变量
         private AWiz _AWiz;
+        private UserModel _UserModel;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
         private ViewModel _ViewModel;
@@ -20,9 +21,10 @@ namespace Me.Amon.Pwd.V.Wiz
             InitializeComponent();
         }
 
-        public BeanBody(AWiz awiz, SafeModel safeModel)
+        public BeanBody(AWiz awiz, UserModel userModel, SafeModel safeModel)
         {
             _AWiz = awiz;
+            _UserModel = userModel;
             _SafeModel = safeModel;
 
             InitializeComponent();
@@ -166,7 +168,7 @@ namespace Me.Amon.Pwd.V.Wiz
                         ctl = new BeanText(this);
                         break;
                     case Att.TYPE_PASS:
-                        ctl = new BeanPass(this);
+                        ctl = new BeanPass(this, _UserModel);
                         break;
                     case Att.TYPE_LINK:
                         ctl = new BeanLink(this);

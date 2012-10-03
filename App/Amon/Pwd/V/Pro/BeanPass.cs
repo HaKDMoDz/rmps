@@ -279,7 +279,7 @@ namespace Me.Amon.Pwd.V.Pro
         private void MiRepeatable_Click(object sender, EventArgs e)
         {
             MiRepeatable.Checked = !MiRepeatable.Checked;
-            _Att.SetSpec(PassAtt.SPEC_PWDS_REP, MiRepeatable.Checked ? Att.SPEC_VALUE_TRUE : Att.SPEC_VALUE_FAIL);
+            _Att.SetSpec(PassAtt.SPEC_PWDS_REP, MiRepeatable.Checked ? Att.SPEC_VALUE_TRUE : Att.SPEC_VALUE_FALSE);
         }
         #endregion
         #endregion
@@ -359,7 +359,7 @@ namespace Me.Amon.Pwd.V.Pro
             }
             _LastCharSet.Checked = true;
 
-            string rep = _Att.GetSpec(PassAtt.SPEC_PWDS_REP, Att.SPEC_VALUE_FAIL);
+            string rep = _Att.GetSpec(PassAtt.SPEC_PWDS_REP, Att.SPEC_VALUE_FALSE);
             MiRepeatable.Checked = Att.SPEC_VALUE_TRUE.Equals(rep);
 
             CmMenu.Show(ctl, 0, ctl.Height);
@@ -367,10 +367,15 @@ namespace Me.Amon.Pwd.V.Pro
 
         private void GenPass()
         {
-            string len = _Att.GetSpec(PassAtt.SPEC_PWDS_LEN);
-            if (string.IsNullOrEmpty(len) || len == "0")
+            int len;
+            string tmp = _Att.GetSpec(PassAtt.SPEC_PWDS_LEN);
+            if (string.IsNullOrEmpty(tmp) || tmp == "0")
             {
-                len = "8";
+                len = _UserModel.PasswordLength;
+            }
+            else
+            {
+                len = int.Parse(tmp);
             }
 
             string key = _Att.GetSpec(PassAtt.SPEC_PWDS_KEY);
@@ -383,14 +388,14 @@ namespace Me.Amon.Pwd.V.Pro
                 key = _DataModel.UdcModel.Default.Data;
             }
 
-            string rep = _Att.GetSpec(PassAtt.SPEC_PWDS_REP, Att.SPEC_VALUE_FAIL);
-            char[] tmp = SafeUtil.NextRandomKey(key.ToCharArray(), int.Parse(len), Att.SPEC_VALUE_TRUE.Equals(rep));
+            string rep = _Att.GetSpec(PassAtt.SPEC_PWDS_REP, Att.SPEC_VALUE_FALSE);
+            char[] arr = SafeUtil.NextRandomKey(key.ToCharArray(), len, Att.SPEC_VALUE_TRUE.Equals(rep));
             if (tmp == null)
             {
                 Main.ShowAlert(string.Format("无法生成长度为 {0} 且{1}重复的随机口令！", len, MiRepeatable.Checked ? "可" : "不可"));
                 return;
             }
-            TbData.Text = new string(tmp);
+            TbData.Text = new string(arr);
         }
         #endregion
     }

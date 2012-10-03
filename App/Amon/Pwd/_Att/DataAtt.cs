@@ -30,7 +30,7 @@
             _Spec[4] = SPEC_VALUE_NONE;
             _Spec[5] = SPEC_VALUE_TRUE;
             _Spec[6] = "^";
-            _Spec[7] = SPEC_VALUE_FAIL;
+            _Spec[7] = SPEC_VALUE_FALSE;
         }
     }
 }

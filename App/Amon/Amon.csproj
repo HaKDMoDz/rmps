@@ -391,6 +391,12 @@
     <Compile Include="Img\V\ASmall.Designer.cs">
       <DependentUpon>ASmall.cs</DependentUpon>
     </Compile>
+    <Compile Include="Rcg\ARcg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rcg\ARcg.Designer.cs">
+      <DependentUpon>ARcg.cs</DependentUpon>
+    </Compile>
     <Compile Include="M\AUserModel.cs" />
     <Compile Include="M\Cat.cs" />
     <Compile Include="M\Dbv.cs" />
@@ -1339,6 +1345,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Img\V\ASmall.resx">
       <DependentUpon>ASmall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rcg\ARcg.resx">
+      <DependentUpon>ARcg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
