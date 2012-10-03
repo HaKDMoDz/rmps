@@ -24,18 +24,28 @@ namespace Me.Amon.M
         public string Code { get; protected set; }
         public string Name { get; protected set; }
         /// <summary>
-        /// 用户数据所在目录
-        /// </summary>
-        public string DatHome { get; protected set; }
-        /// <summary>
         /// 系统配置所在目录
         /// </summary>
         public string SysHome { get; protected set; }
         /// <summary>
+        /// 用户数据所在目录
+        /// </summary>
+        public string DatHome { get; protected set; }
+        /// <summary>
+        /// 备份数据所在目录
+        /// </summary>
+        public string BakHome { get; protected set; }
+        /// <summary>
         /// 资源文件所在目录
         /// </summary>
         public string ResHome { get; protected set; }
+        /// <summary>
+        /// 外观文件
+        /// </summary>
         public string Look { get; set; }
+        /// <summary>
+        /// 风格文件
+        /// </summary>
         public string Feel { get; set; }
 
         public DBA DBA { get; protected set; }

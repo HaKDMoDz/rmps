@@ -1,10 +1,13 @@
 ﻿using System.Text;
 using System.Windows.Forms;
+using Me.Amon.Pwd.M;
 
 namespace Me.Amon.Pwd.V.Cfg
 {
     public partial class UcSecurity : UserControl
     {
+        private UserModel _UserModel;
+
         public UcSecurity()
         {
             InitializeComponent();
@@ -12,6 +15,14 @@ namespace Me.Amon.Pwd.V.Cfg
 
         #region 接口实现
         public ACfg ACfg { private get; set; }
+
+        public void InitView(UserModel userModel)
+        {
+            _UserModel = userModel;
+
+            SpClear.Value = userModel.ResidenceDuration;
+            TbFillKey.Text = userModel.AutoFillKey;
+        }
 
         public bool CheckInput()
         {

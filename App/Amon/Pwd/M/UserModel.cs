@@ -14,6 +14,19 @@ namespace Me.Amon.Pwd.M
 {
     public sealed class UserModel : AUserModel
     {
+        /// <summary>
+        /// 剪贴板驻留时间
+        /// </summary>
+        public int ResidenceDuration { get; set; }
+        /// <summary>
+        /// 备份文件数量
+        /// </summary>
+        public int BackFileCount { get; set; }
+        /// <summary>
+        /// 自动填充快捷键
+        /// </summary>
+        public string AutoFillKey { get; set; }
+
         #region 数据初始化
         public override void Init()
         {

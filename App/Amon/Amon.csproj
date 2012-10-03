@@ -431,26 +431,35 @@
     <Compile Include="Open\V2\OAuthError.cs" />
     <Compile Include="Open\V2\OAuthPhrases.cs" />
     <Compile Include="Open\V2\OAuthTokenV2.cs" />
-    <Compile Include="OS\IOsd.cs" />
-    <Compile Include="OS\KuaipanOsd.cs" />
-    <Compile Include="OS\Kuaipan\AccountInfo.cs" />
-    <Compile Include="OS\Kuaipan\Consumer.cs" />
-    <Compile Include="OS\Kuaipan\Account.cs" />
-    <Compile Include="OS\Kuaipan\File.cs" />
-    <Compile Include="OS\Kuaipan\Folder.cs" />
-    <Compile Include="OS\Kuaipan\OauthCore.cs" />
-    <Compile Include="OS\Kuaipan\KConst.cs" />
-    <Compile Include="OS\Kuaipan\KMetadata.cs" />
-    <Compile Include="OS\Kuaipan\KNet.cs" />
-    <Compile Include="OS\Kuaipan\MetaType.cs" />
-    <Compile Include="OS\Kuaipan\Param.cs" />
-    <Compile Include="OS\Kuaipan\Oauth.cs" />
-    <Compile Include="OS\Kuaipan\OauthToken.cs" />
     <Compile Include="Pwd\M\Dir.cs" />
     <Compile Include="Pwd\M\Key.cs" />
     <Compile Include="Pwd\M\KeyLog.cs" />
     <Compile Include="Pwd\M\Lib.cs" />
     <Compile Include="Pwd\M\LibDetail.cs" />
+    <Compile Include="Pwd\V\Cfg\ACfg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pwd\V\Cfg\ACfg.Designer.cs">
+      <DependentUpon>ACfg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\V\Cfg\UcGeneral.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\V\Cfg\UcGeneral.Designer.cs">
+      <DependentUpon>UcGeneral.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\V\Cfg\UcSecurity.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\V\Cfg\UcSecurity.Designer.cs">
+      <DependentUpon>UcSecurity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\V\Cfg\UcStorage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\V\Cfg\UcStorage.Designer.cs">
+      <DependentUpon>UcStorage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pwd\V\Pro\BeanAuto.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1368,6 +1377,18 @@
     <EmbeddedResource Include="Pwd\Bean\APass.resx">
       <DependentUpon>APass.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\V\Cfg\ACfg.resx">
+      <DependentUpon>ACfg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\V\Cfg\UcGeneral.resx">
+      <DependentUpon>UcGeneral.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\V\Cfg\UcSecurity.resx">
+      <DependentUpon>UcSecurity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\V\Cfg\UcStorage.resx">
+      <DependentUpon>UcStorage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pwd\V\Pro\APro.resx">
       <DependentUpon>APro.cs</DependentUpon>
     </EmbeddedResource>
@@ -1731,7 +1752,6 @@
     <Folder Include="Open\V1\Enums\" />
     <Folder Include="Open\V1\Web\" />
     <Folder Include="Open\V2\Web\" />
-    <Folder Include="OS\VDisk\" />
     <Folder Include="Pwd\C\" />
     <Folder Include="Pwd\E\Edit\" />
     <Folder Include="Pwd\E\Skin\" />

@@ -28,51 +28,51 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label2 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
+            this.LdBakCount = new System.Windows.Forms.Label();
+            this.SpBakCount = new System.Windows.Forms.NumericUpDown();
+            this.LtBakCount = new System.Windows.Forms.Label();
             this.PbBakPath = new System.Windows.Forms.PictureBox();
             this.TbBakPath = new System.Windows.Forms.TextBox();
             this.LtBakPath = new System.Windows.Forms.Label();
             this.PbDatPath = new System.Windows.Forms.PictureBox();
             this.TbDatPath = new System.Windows.Forms.TextBox();
             this.LtDatPath = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpBakCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbBakPath)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbDatPath)).BeginInit();
             this.SuspendLayout();
             // 
-            // label2
+            // LdBakCount
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(227, 59);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(17, 12);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "个";
+            this.LdBakCount.AutoSize = true;
+            this.LdBakCount.Location = new System.Drawing.Point(227, 61);
+            this.LdBakCount.Name = "LdBakCount";
+            this.LdBakCount.Size = new System.Drawing.Size(17, 12);
+            this.LdBakCount.TabIndex = 8;
+            this.LdBakCount.Text = "个";
             // 
-            // numericUpDown1
+            // SpBakCount
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(171, 57);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(50, 21);
-            this.numericUpDown1.TabIndex = 16;
+            this.SpBakCount.Location = new System.Drawing.Point(171, 57);
+            this.SpBakCount.Name = "SpBakCount";
+            this.SpBakCount.Size = new System.Drawing.Size(50, 21);
+            this.SpBakCount.TabIndex = 7;
             // 
-            // label1
+            // LtBakCount
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(64, 59);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 12);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "最大备份文件数量";
+            this.LtBakCount.AutoSize = true;
+            this.LtBakCount.Location = new System.Drawing.Point(64, 61);
+            this.LtBakCount.Name = "LtBakCount";
+            this.LtBakCount.Size = new System.Drawing.Size(101, 12);
+            this.LtBakCount.TabIndex = 6;
+            this.LtBakCount.Text = "最大备份文件数量";
             // 
             // PbBakPath
             // 
             this.PbBakPath.Location = new System.Drawing.Point(297, 33);
             this.PbBakPath.Name = "PbBakPath";
             this.PbBakPath.Size = new System.Drawing.Size(16, 16);
-            this.PbBakPath.TabIndex = 14;
+            this.PbBakPath.TabIndex = 5;
             this.PbBakPath.TabStop = false;
             // 
             // TbBakPath
@@ -80,7 +80,7 @@
             this.TbBakPath.Location = new System.Drawing.Point(66, 30);
             this.TbBakPath.Name = "TbBakPath";
             this.TbBakPath.Size = new System.Drawing.Size(225, 21);
-            this.TbBakPath.TabIndex = 13;
+            this.TbBakPath.TabIndex = 4;
             // 
             // LtBakPath
             // 
@@ -89,7 +89,7 @@
             this.LtBakPath.Location = new System.Drawing.Point(3, 33);
             this.LtBakPath.Name = "LtBakPath";
             this.LtBakPath.Size = new System.Drawing.Size(57, 12);
-            this.LtBakPath.TabIndex = 12;
+            this.LtBakPath.TabIndex = 3;
             this.LtBakPath.Text = "备份路径";
             // 
             // PbDatPath
@@ -97,7 +97,7 @@
             this.PbDatPath.Location = new System.Drawing.Point(297, 6);
             this.PbDatPath.Name = "PbDatPath";
             this.PbDatPath.Size = new System.Drawing.Size(16, 16);
-            this.PbDatPath.TabIndex = 11;
+            this.PbDatPath.TabIndex = 2;
             this.PbDatPath.TabStop = false;
             // 
             // TbDatPath
@@ -106,7 +106,7 @@
             this.TbDatPath.Name = "TbDatPath";
             this.TbDatPath.ReadOnly = true;
             this.TbDatPath.Size = new System.Drawing.Size(225, 21);
-            this.TbDatPath.TabIndex = 10;
+            this.TbDatPath.TabIndex = 1;
             // 
             // LtDatPath
             // 
@@ -115,16 +115,16 @@
             this.LtDatPath.Location = new System.Drawing.Point(3, 6);
             this.LtDatPath.Name = "LtDatPath";
             this.LtDatPath.Size = new System.Drawing.Size(57, 12);
-            this.LtDatPath.TabIndex = 9;
+            this.LtDatPath.TabIndex = 0;
             this.LtDatPath.Text = "数据路径";
             // 
             // UcGeneral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.LdBakCount);
+            this.Controls.Add(this.SpBakCount);
+            this.Controls.Add(this.LtBakCount);
             this.Controls.Add(this.PbBakPath);
             this.Controls.Add(this.TbBakPath);
             this.Controls.Add(this.LtBakPath);
@@ -133,7 +133,7 @@
             this.Controls.Add(this.LtDatPath);
             this.Name = "UcGeneral";
             this.Size = new System.Drawing.Size(322, 163);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SpBakCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbBakPath)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbDatPath)).EndInit();
             this.ResumeLayout(false);
@@ -143,9 +143,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LdBakCount;
+        private System.Windows.Forms.NumericUpDown SpBakCount;
+        private System.Windows.Forms.Label LtBakCount;
         private System.Windows.Forms.PictureBox PbBakPath;
         private System.Windows.Forms.TextBox TbBakPath;
         private System.Windows.Forms.Label LtBakPath;
