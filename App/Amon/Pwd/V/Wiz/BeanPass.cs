@@ -45,13 +45,9 @@ namespace Me.Amon.Pwd.V.Wiz
             _Body.ShowTips(BtMod, TbData.UseSystemPasswordChar ? "显示口令" : "隐藏口令");
             BtGen.Image = viewModel.GetImage("att-pass-gen");
             _Body.ShowTips(BtGen, "生成随机口令");
-            BtOpt.Image = viewModel.GetImage("att-pass-options");
-            _Body.ShowTips(BtOpt, "选项");
 
             BtCopy.Image = viewModel.GetImage("att-copy");
             _Body.ShowTips(BtCopy, "复制");
-
-            InitSpec(TbData);
         }
         #endregion
 
@@ -134,12 +130,7 @@ namespace Me.Amon.Pwd.V.Wiz
 
         private void BtGen_Click(object sender, EventArgs e)
         {
-            GenPass();
-        }
-
-        private void BtOpt_Click(object sender, EventArgs e)
-        {
-            ShowSpec(BtOpt);
+            //GenPass();
         }
 
         private void BtCopy_Click(object sender, EventArgs e)

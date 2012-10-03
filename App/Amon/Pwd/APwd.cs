@@ -21,6 +21,7 @@ using Me.Amon.Pwd._Key;
 using Me.Amon.Pwd._Lib;
 using Me.Amon.Pwd._Log;
 using Me.Amon.Pwd.M;
+using Me.Amon.Pwd.V.Pad;
 using Me.Amon.Pwd.V.Pro;
 using Me.Amon.Pwd.V.Wiz;
 using Me.Amon.Uc;
@@ -46,7 +47,7 @@ namespace Me.Amon.Pwd
         private IPwd _PwdView;
         private APro _ProView;
         private AWiz _WizView;
-        //private APad _PadView;
+        private APad _PadView;
         private XmlMenu<APwd> _XmlMenu;
         #endregion
 
@@ -226,10 +227,18 @@ namespace Me.Amon.Pwd
         #region 事件处理
         private void APwd_Resize(object sender, EventArgs e)
         {
-            if (WindowState == FormWindowState.Minimized)
+            if (!Visible)
             {
-                Visible = false;
+                return;
             }
+            if (Width < 360 || Height < 360)
+            {
+                ShowAPad();
+            }
+            //if (WindowState == FormWindowState.Minimized)
+            //{
+            //    Visible = false;
+            //}
         }
 
         private void APwd_FormClosing(object sender, FormClosingEventArgs e)
@@ -1609,28 +1618,27 @@ namespace Me.Amon.Pwd
         /// </summary>
         public void ShowAPad()
         {
-            //if (_PadView == null)
-            //{
-            //    _PadView = new APad();
-            //    _PadView.Name = EPwd.PATTERN_PAD;
-            //    _PadView.Init(this, _SafeModel, _DataModel);
-            //}
+            if (_PadView == null)
+            {
+                _PadView = new APad();
+                _PadView.Name = CPwd.PATTERN_PAD;
+                _PadView.Init(this, _SafeModel, _DataModel);
+                _PadView.Dock = System.Windows.Forms.DockStyle.Fill;
+            }
 
-            //if (_PwdView != null)
-            //{
-            //    if (_PwdView.Name == _PadView.Name)
-            //    {
-            //        return;
-            //    }
-            //    _PwdView.HideView(TpGrid);
-            //}
+            if (_PwdView != null)
+            {
+                if (_PwdView.Name == _PadView.Name)
+                {
+                    return;
+                }
+                MbMenu.Visible = false;
+                TbTool.Visible = false;
+                TcTool.Visible = false;
+            }
 
-            //_PwdView = _PadView;
-            //_PwdView.InitView(TpGrid);
-
-            //TmiViewPro.Checked = false;
-            //TmiViewWiz.Checked = false;
-            //TmiViewPad.Checked = true;
+            PlMain.Controls.Remove(TcTool);
+            PlMain.Controls.Add(_PadView);
         }
         #endregion
 

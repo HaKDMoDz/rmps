@@ -7,5 +7,14 @@ namespace Me.Amon.Bar.M
     /// </summary>
     public class MBar : Vcs
     {
+        public override bool FromXml(System.Xml.XmlReader reader)
+        {
+            return true;
+        }
+
+        public override bool ToXml(System.Xml.XmlWriter writer)
+        {
+            return true;
+        }
     }
 }

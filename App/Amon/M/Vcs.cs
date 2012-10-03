@@ -72,5 +72,9 @@ namespace Me.Amon.M
             XmlAttribute attr = node.Attributes[name];
             return attr != null ? attr.InnerText : value;
         }
+
+        public abstract bool FromXml(XmlReader reader);
+
+        public abstract bool ToXml(XmlWriter writer);
     }
 }

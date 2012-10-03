@@ -33,6 +33,7 @@
             this.SsEcho = new System.Windows.Forms.StatusStrip();
             this.TssEcho = new System.Windows.Forms.ToolStripStatusLabel();
             this.TssTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.PlMain = new System.Windows.Forms.Panel();
             this.TcTool = new System.Windows.Forms.ToolStripContainer();
             this.HSplit = new System.Windows.Forms.SplitContainer();
             this.VSplit = new System.Windows.Forms.SplitContainer();
@@ -48,6 +49,7 @@
             this.UcTimer = new System.Windows.Forms.Timer(this.components);
             this.BgWorker = new System.ComponentModel.BackgroundWorker();
             this.SsEcho.SuspendLayout();
+            this.PlMain.SuspendLayout();
             this.TcTool.ContentPanel.SuspendLayout();
             this.TcTool.TopToolStripPanel.SuspendLayout();
             this.TcTool.SuspendLayout();
@@ -96,6 +98,15 @@
             this.TssTime.Size = new System.Drawing.Size(56, 17);
             this.TssTime.Text = "当前时间";
             // 
+            // PlMain
+            // 
+            this.PlMain.Controls.Add(this.TcTool);
+            this.PlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PlMain.Location = new System.Drawing.Point(0, 24);
+            this.PlMain.Name = "PlMain";
+            this.PlMain.Size = new System.Drawing.Size(584, 396);
+            this.PlMain.TabIndex = 2;
+            // 
             // TcTool
             // 
             // 
@@ -107,7 +118,7 @@
             this.TcTool.Location = new System.Drawing.Point(0, 24);
             this.TcTool.Name = "TcTool";
             this.TcTool.Size = new System.Drawing.Size(584, 396);
-            this.TcTool.TabIndex = 2;
+            this.TcTool.TabIndex = 0;
             this.TcTool.Text = "toolStripContainer1";
             // 
             // TcTool.TopToolStripPanel
@@ -116,9 +127,9 @@
             // 
             // HSplit
             // 
-            this.HSplit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.HSplit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.HSplit.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.HSplit.Location = new System.Drawing.Point(10, 10);
             this.HSplit.Name = "HSplit";
@@ -239,7 +250,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 442);
-            this.Controls.Add(this.TcTool);
+            this.Controls.Add(this.PlMain);
             this.Controls.Add(this.SsEcho);
             this.Controls.Add(this.MbMenu);
             this.MainMenuStrip = this.MbMenu;
@@ -250,6 +261,7 @@
             this.Resize += new System.EventHandler(this.APwd_Resize);
             this.SsEcho.ResumeLayout(false);
             this.SsEcho.PerformLayout();
+            this.PlMain.ResumeLayout(false);
             this.TcTool.ContentPanel.ResumeLayout(false);
             this.TcTool.TopToolStripPanel.ResumeLayout(false);
             this.TcTool.TopToolStripPanel.PerformLayout();
@@ -272,6 +284,7 @@
 
         private System.Windows.Forms.MenuStrip MbMenu;
         private System.Windows.Forms.StatusStrip SsEcho;
+        private System.Windows.Forms.Panel PlMain;
         private System.Windows.Forms.ToolStripContainer TcTool;
         private System.Windows.Forms.SplitContainer HSplit;
         private System.Windows.Forms.SplitContainer VSplit;

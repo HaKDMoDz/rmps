@@ -173,7 +173,7 @@ namespace Me.Amon.Pwd.M
             return buffer.Replace("utf-16", "utf-8").ToString();
         }
 
-        public bool FromXml(XmlReader reader)
+        public override bool FromXml(XmlReader reader)
         {
             if (reader == null || reader.Name != "Key")
             {
@@ -248,6 +248,11 @@ namespace Me.Amon.Pwd.M
             {
                 CipherVer = reader.ReadElementContentAsInt();
             }
+            return true;
+        }
+
+        public override bool ToXml(XmlWriter writer)
+        {
             return true;
         }
         #endregion

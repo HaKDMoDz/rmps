@@ -7,5 +7,14 @@ namespace Me.Amon.Img.M
     /// </summary>
     public class MImg : Vcs
     {
+        public override bool FromXml(System.Xml.XmlReader reader)
+        {
+            return true;
+        }
+
+        public override bool ToXml(System.Xml.XmlWriter writer)
+        {
+            return true;
+        }
     }
 }

@@ -359,5 +359,15 @@ namespace Me.Amon.Gtd.M
             return false;
         }
         #endregion
+
+        public override bool FromXml(System.Xml.XmlReader reader)
+        {
+            return true;
+        }
+
+        public override bool ToXml(System.Xml.XmlWriter writer)
+        {
+            return true;
+        }
     }
 }

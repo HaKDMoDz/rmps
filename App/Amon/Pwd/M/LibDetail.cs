@@ -5,21 +5,34 @@ namespace Me.Amon.Pwd.M
 {
     public class LibDetail : Vcs
     {
+        /// <summary>
+        /// 显示排序
+        /// </summary>
         public int Order { get; set; }
-
+        /// <summary>
+        /// 属性类型
+        /// </summary>
         public int Type { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public string Header { get; set; }
 
         public string Name { get; set; }
-
+        /// <summary>
+        /// 显示名称
+        /// </summary>
         public string Text { get; set; }
-
+        /// <summary>
+        /// 默认数据
+        /// </summary>
         public string Data { get; set; }
-
+        /// <summary>
+        /// 相关说明
+        /// </summary>
         public string Memo { get; set; }
 
-        public bool FromXml(XmlReader reader)
+        public override bool FromXml(XmlReader reader)
         {
             if (reader == null || reader.Name != "Item")
             {
@@ -60,7 +73,7 @@ namespace Me.Amon.Pwd.M
             return true;
         }
 
-        public void ToXml(XmlWriter writer)
+        public override bool ToXml(XmlWriter writer)
         {
             writer.WriteStartElement("Item");
 
@@ -72,6 +85,8 @@ namespace Me.Amon.Pwd.M
             writer.WriteElementString("Memo", Memo);
 
             writer.WriteEndElement();
+
+            return true;
         }
     }
 }

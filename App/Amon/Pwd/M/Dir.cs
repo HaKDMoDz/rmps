@@ -36,7 +36,7 @@ namespace Me.Amon.Pwd.M
         }
         #endregion
 
-        public bool FromXml(XmlReader reader)
+        public override bool FromXml(XmlReader reader)
         {
             if (reader == null || reader.Name != "Dir" || !reader.IsStartElement())
             {
@@ -75,7 +75,7 @@ namespace Me.Amon.Pwd.M
             return true;
         }
 
-        public void ToXml(XmlWriter writer)
+        public override bool ToXml(XmlWriter writer)
         {
             writer.WriteStartElement("Dir");
 
@@ -87,6 +87,8 @@ namespace Me.Amon.Pwd.M
             writer.WriteElementString("Memo", Memo);
 
             writer.WriteEndElement();
+
+            return true;
         }
     }
 }

@@ -45,7 +45,7 @@ namespace Me.Amon.M
         }
         #endregion
 
-        public bool FromXml(XmlReader reader)
+        public override bool FromXml(XmlReader reader)
         {
             if (reader == null || reader.Name != "Cat" || !reader.IsStartElement())
             {
@@ -97,7 +97,7 @@ namespace Me.Amon.M
             return true;
         }
 
-        public void ToXml(XmlWriter writer)
+        public override bool ToXml(XmlWriter writer)
         {
             writer.WriteStartElement("Cat");
             writer.WriteAttributeString("AppId", AppId);
@@ -113,6 +113,8 @@ namespace Me.Amon.M
             writer.WriteElementString("Memo", Memo);
 
             writer.WriteEndElement();
+
+            return true;
         }
     }
 }

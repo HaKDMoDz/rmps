@@ -26,6 +26,14 @@ namespace Me.Amon.Pwd.M
         /// 自动填充快捷键
         /// </summary>
         public string AutoFillKey { get; set; }
+        /// <summary>
+        /// 口令长度
+        /// </summary>
+        public int PasswordLength { get; set; }
+        /// <summary>
+        /// 默认字符空间
+        /// </summary>
+        public string PasswordUdc { get; set; }
 
         #region 数据初始化
         public override void Init()

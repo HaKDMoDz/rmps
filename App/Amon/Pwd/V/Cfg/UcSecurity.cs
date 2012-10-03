@@ -22,6 +22,8 @@ namespace Me.Amon.Pwd.V.Cfg
 
             SpClear.Value = userModel.ResidenceDuration;
             TbFillKey.Text = userModel.AutoFillKey;
+            SpPassLength.Value = userModel.PasswordLength;
+            CbPassCharset.SelectedItem = userModel.PasswordUdc;
         }
 
         public bool CheckInput()
