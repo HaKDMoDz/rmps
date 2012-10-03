@@ -14,6 +14,7 @@ namespace Me.Amon.Pwd.M
 {
     public sealed class UserModel : AUserModel
     {
+        #region 数据初始化
         public override void Init()
         {
             if (File.Exists("Amon.tag"))
@@ -46,7 +47,11 @@ namespace Me.Amon.Pwd.M
         public override void Load()
         {
             ODBEngine dba = new ODBEngine();
-            dba.Init(this);
+            dba.DbInit(this);
+            if (dba.DbVersion.Version != 2)
+            {
+                dba.Upgrade();
+            }
             DBA = dba;
 
             DFEngine dfa = new DFEngine();
@@ -55,9 +60,10 @@ namespace Me.Amon.Pwd.M
 
             _Timer = new Timer(new TimerCallback(Timer_Callback), null, 5000, 1000);
         }
+        #endregion
 
         /// <summary>
-        /// 
+        /// 网络访问
         /// </summary>
         /// <param name="data"></param>
         public void Post(string data)

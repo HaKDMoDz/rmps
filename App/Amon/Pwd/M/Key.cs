@@ -5,7 +5,7 @@ using System.Xml;
 using Me.Amon.Gtd.M;
 using Me.Amon.M;
 
-namespace Me.Amon.Pwd
+namespace Me.Amon.Pwd.M
 {
     public class Key : Vcs
     {

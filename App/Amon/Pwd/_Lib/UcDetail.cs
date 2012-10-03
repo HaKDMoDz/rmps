@@ -1,15 +1,14 @@
 ﻿using System.Windows.Forms;
 using Me.Amon.Da;
-using Me.Amon.Pwd;
+using Me.Amon.Pwd.M;
 using Me.Amon.Uc;
-using Me.Amon.Util;
 
 namespace Me.Amon.Pwd._Lib
 {
     public partial class UcDetail : UserControl, ILibEdit
     {
         private LibEditer _LibEdit;
-        private Me.Amon.Pwd.LibDetail _LibDetail;
+        private LibDetail _LibDetail;
 
         public UcDetail()
         {
@@ -43,7 +42,7 @@ namespace Me.Amon.Pwd._Lib
             TbMemo.MaxLength = DBConst.APWD0308_SIZE;
         }
 
-        public void Show(Me.Amon.Pwd.LibDetail detail)
+        public void Show(LibDetail detail)
         {
             _LibDetail = detail;
 
@@ -76,7 +75,7 @@ namespace Me.Amon.Pwd._Lib
             _LibDetail.Memo = TbMemo.Text;
 
             _LibEdit.SaveDetail(_LibDetail);
-            Show(new Me.Amon.Pwd.LibDetail());
+            Show(new LibDetail());
         }
     }
 }

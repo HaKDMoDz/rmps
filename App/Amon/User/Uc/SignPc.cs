@@ -6,7 +6,7 @@ using System.Xml;
 using Me.Amon.Auth;
 using Me.Amon.Da.Df;
 using Me.Amon.M;
-using Me.Amon.Pwd;
+using Me.Amon.Pwd.M;
 using Me.Amon.Util;
 
 namespace Me.Amon.User.Uc

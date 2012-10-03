@@ -72,9 +72,9 @@ namespace Me.Amon.Api.Input
         /// <summary>
         /// Adds a key down to the list of <see cref="INPUT"/> messages.
         /// </summary>
-        /// <param name="keyCode">The <see cref="VirtualKeyCode"/>.</param>
+        /// <param name="keyCode">The <see cref="VirtualKey"/>.</param>
         /// <returns>This <see cref="InputBuilder"/> instance.</returns>
-        public InputBuilder AddKeyDown(VirtualKeyCode keyCode)
+        public InputBuilder AddKeyDown(VirtualKey keyCode)
         {
             var down = new INPUT();
             down.Type = (UInt32)InputType.Keyboard;
@@ -92,9 +92,9 @@ namespace Me.Amon.Api.Input
         /// <summary>
         /// Adds a key up to the list of <see cref="INPUT"/> messages.
         /// </summary>
-        /// <param name="keyCode">The <see cref="VirtualKeyCode"/>.</param>
+        /// <param name="keyCode">The <see cref="VirtualKey"/>.</param>
         /// <returns>This <see cref="InputBuilder"/> instance.</returns>
-        public InputBuilder AddKeyUp(VirtualKeyCode keyCode)
+        public InputBuilder AddKeyUp(VirtualKey keyCode)
         {
             var up = new INPUT();
             up.Type = (UInt32)InputType.Keyboard;
@@ -112,9 +112,9 @@ namespace Me.Amon.Api.Input
         /// <summary>
         /// Adds a key press to the list of <see cref="INPUT"/> messages which is equivalent to a key down followed by a key up.
         /// </summary>
-        /// <param name="keyCode">The <see cref="VirtualKeyCode"/>.</param>
+        /// <param name="keyCode">The <see cref="VirtualKey"/>.</param>
         /// <returns>This <see cref="InputBuilder"/> instance.</returns>
-        public InputBuilder AddKeyPress(VirtualKeyCode keyCode)
+        public InputBuilder AddKeyPress(VirtualKey keyCode)
         {
             AddKeyDown(keyCode);
             AddKeyUp(keyCode);

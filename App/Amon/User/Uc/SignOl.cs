@@ -8,7 +8,7 @@ using System.Xml;
 using Me.Amon.Auth;
 using Me.Amon.Da.Df;
 using Me.Amon.M;
-using Me.Amon.Pwd;
+using Me.Amon.Pwd.M;
 using Me.Amon.Util;
 
 namespace Me.Amon.User.Uc
@@ -23,7 +23,7 @@ namespace Me.Amon.User.Uc
         private string _Pass;
         private string _Root;
         private AUserModel _UserModel;
-        private DFAccess _Prop;
+        private DFEngine _Prop;
         private SignAc _SignAc;
 
         #region 构造函数
@@ -125,7 +125,7 @@ namespace Me.Amon.User.Uc
 
             #region 本地用户判断
             _Name = _Name.ToLower();
-            _Prop = new DFAccess();
+            _Prop = new DFEngine();
             _Prop.Load(Path.Combine(_UserModel.SysHome, CApp.AMON_SYS));
             string home = _Prop.Get(string.Format(CApp.AMON_SYS_HOME, _Name));
             if (!string.IsNullOrEmpty(home))
@@ -280,7 +280,7 @@ namespace Me.Amon.User.Uc
                 else
                 {
                     string sysFile = Path.Combine(_UserModel.SysHome, CApp.AMON_SYS);
-                    DFAccess prop = new DFAccess();
+                    DFEngine prop = new DFEngine();
                     prop.Load(sysFile);
                     prop.Set(string.Format(CApp.AMON_SYS_CODE, _Name), _UserModel.Code);
                     prop.Set(string.Format(CApp.AMON_SYS_HOME, _Name), _UserModel.DatHome);

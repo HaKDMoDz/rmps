@@ -245,9 +245,9 @@
             this.MainMenuStrip = this.MbMenu;
             this.Name = "APwd";
             this.Text = "阿木密码箱";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.APwd_FormClosing);
             this.Load += new System.EventHandler(this.APwd_Load);
-            this.Resize += new System.EventHandler(this.Main_Resize);
+            this.Resize += new System.EventHandler(this.APwd_Resize);
             this.SsEcho.ResumeLayout(false);
             this.SsEcho.PerformLayout();
             this.TcTool.ContentPanel.ResumeLayout(false);

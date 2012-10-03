@@ -26,6 +26,7 @@ namespace Me.Amon.Img.V
         #region 接口实现
         public void InitOnce()
         {
+            _HomeDir = "";
         }
 
         public Control Control

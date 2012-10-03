@@ -89,7 +89,7 @@ namespace Me.Amon.Pwd
             _DataModel = new DataModel(_UserModel);
             _DataModel.Init();
             _ViewModel = new ViewModel(_UserModel);
-            _ViewModel.Load();
+            _ViewModel.LoadLayout();
             UdcModel udcModel = new UdcModel();
             udcModel.Init(_UserModel);
             _DataModel.UdcModel = udcModel;
@@ -135,7 +135,7 @@ namespace Me.Amon.Pwd
 
             _UserModel.AppendHandler(new AmonHandler<string>(ShowEcho));
 
-            User32.RegisterHotKey(this.Handle, this.Handle.ToInt32(), 0, (int)VirtualKeyCode.F2);
+            User32.RegisterHotKey(this.Handle, this.Handle.ToInt32(), 0, (int)VirtualKey.F2);
         }
         #endregion
 
@@ -224,7 +224,7 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 事件处理
-        private void Main_Resize(object sender, EventArgs e)
+        private void APwd_Resize(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Minimized)
             {
@@ -232,7 +232,7 @@ namespace Me.Amon.Pwd
             }
         }
 
-        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        private void APwd_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!_Exit)
             {
@@ -241,14 +241,22 @@ namespace Me.Amon.Pwd
             }
         }
 
+        /// <summary>
+        /// 是否处于模态
+        /// </summary>
+        public bool Modaled { get; set; }
+
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == (int)WindowMessage.WM_HOTKEY)
             {
-                int t = m.WParam.ToInt32();
-                if (t == this.Handle.ToInt32())
+                if (Visible && !Modaled)
                 {
-                    FillData();
+                    int t = m.WParam.ToInt32();
+                    if (t == this.Handle.ToInt32())
+                    {
+                        FillData();
+                    }
                 }
             }
             base.WndProc(ref m);
@@ -2624,6 +2632,9 @@ namespace Me.Amon.Pwd
         {
         }
 
+        /// <summary>
+        /// 布局加载
+        /// </summary>
         public void LoadLayout()
         {
             if (_ViewModel.WindowState == CPwd.WINDOW_STATE_MAXIMIZED)
@@ -2651,6 +2662,9 @@ namespace Me.Amon.Pwd
             VSplit.SplitterDistance = _ViewModel.VSplitDistance;
         }
 
+        /// <summary>
+        /// 布局保存
+        /// </summary>
         public void SaveLayout()
         {
             if (!Visible)
@@ -2688,7 +2702,7 @@ namespace Me.Amon.Pwd
             _ViewModel.CatTreeVisible = !VSplit.Panel1Collapsed;
             _ViewModel.KeyListVisible = !VSplit.Panel2Collapsed;
 
-            _ViewModel.Save();
+            _ViewModel.SaveLayout();
         }
         #endregion
 

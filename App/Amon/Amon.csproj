@@ -110,7 +110,6 @@
     <Compile Include="Api\Enums\StockObjects.cs" />
     <Compile Include="Api\Enums\SystemMetrics.cs" />
     <Compile Include="Api\Enums\VirtualKey.cs" />
-    <Compile Include="Api\Enums\VirtualKeyCode.cs" />
     <Compile Include="Api\Enums\WindowMessage.cs" />
     <Compile Include="Api\Enums\WMHotKeys.cs" />
     <Compile Include="Api\Enums\XButton.cs" />
@@ -209,6 +208,8 @@
     </Compile>
     <Compile Include="C\VoidHandler.cs" />
     <Compile Include="Da\DBA.cs" />
+    <Compile Include="Da\Db\ODBUpgradeConfig.cs" />
+    <Compile Include="Da\DCA.cs" />
     <Compile Include="Da\DFA.cs" />
     <Compile Include="Demo.cs">
       <SubType>Form</SubType>

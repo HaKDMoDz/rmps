@@ -46,6 +46,21 @@ namespace Me.Amon.M
         #region 初始化
         public virtual void Init()
         {
+            if (File.Exists("Amon.tag"))
+            {
+                SysHome = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "阿木密码箱");
+                if (!Directory.Exists(SysHome))
+                {
+                    Directory.CreateDirectory(SysHome);
+                }
+            }
+            else
+            {
+                SysHome = Environment.CurrentDirectory;
+            }
+
+            ResHome = SysHome;
+            DatHome = Path.Combine(SysHome, "Dat/A0000000");
         }
 
         public virtual void Load()

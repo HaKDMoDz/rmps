@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.M;
-using Me.Amon.Pwd;
+using Me.Amon.Pwd.M;
 
 namespace Me.Amon.V
 {

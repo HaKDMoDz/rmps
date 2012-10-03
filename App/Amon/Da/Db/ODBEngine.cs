@@ -6,7 +6,7 @@ using Db4objects.Db4o.Config;
 using Me.Amon.Gtd;
 using Me.Amon.Gtd.M;
 using Me.Amon.M;
-using Me.Amon.Pwd;
+using Me.Amon.Pwd.M;
 using Me.Amon.Util;
 
 namespace Me.Amon.Da.Db
@@ -22,15 +22,47 @@ namespace Me.Amon.Da.Db
         public ODBEngine()
         {
         }
-
-        public void Init(AUserModel userModel)
-        {
-            _UserModel = userModel;
-            _DbPath = Path.Combine(userModel.DatHome, CApp.FILE_DB);
-        }
         #endregion
 
         #region 连接管理
+        public void DbInit(AUserModel userModel)
+        {
+            _UserModel = userModel;
+            _DbPath = Path.Combine(userModel.DatHome, CApp.FILE_DB);
+
+            IList<Dbv> dbvs = Container.Query<Dbv>();
+            if (dbvs.Count > 0)
+            {
+                _DbVersion = dbvs[0];
+            }
+            else
+            {
+                _DbVersion = new Dbv { Version = 2 };
+                _Container.Store(_DbVersion);
+            }
+        }
+
+        public void Upgrade()
+        {
+            CloseConnect();
+
+            string oldDb = _DbPath + ".old";
+            File.Move(_DbPath, oldDb);
+            IEmbeddedConfiguration config = Db4oEmbedded.NewConfiguration();
+            config.Common.ObjectClass(typeof(Me.Amon.M.Vcs)).CascadeOnActivate(true);
+            config.Common.ObjectClass(typeof(Me.Amon.M.Log)).CascadeOnActivate(true);
+            config.Common.AddAlias(new ODBUpgradeConfig());
+            IObjectContainer oldContainer = Db4oEmbedded.OpenFile(config, oldDb);
+            IObjectContainer newContainer = Container;
+            IList<Key> logs = oldContainer.Query<Key>();
+            foreach (var log in logs)
+            {
+                newContainer.Store(log);
+            }
+
+            oldContainer.Close();
+        }
+
         private IObjectContainer Container
         {
             get
@@ -43,18 +75,7 @@ namespace Me.Amon.Da.Db
                     config.Common.ObjectClass(typeof(Key)).ObjectField("MetaKey").Indexed(true);
                     config.Common.ObjectClass(typeof(Lib)).CascadeOnUpdate(true);
                     config.Common.ObjectClass(typeof(MGtd)).CascadeOnUpdate(true);
-                    //config.Common.AddAlias(new WildcardAlias("Me.Amon.Model.*", "Me.Amon.M.*"));
-                    bool isNew = File.Exists(_DbPath);
                     _Container = Db4oEmbedded.OpenFile(config, _DbPath);
-                    if (isNew)
-                    {
-                        _Container.Store(new Dbv { Version = "2" });
-                    }
-                    else
-                    {
-                        IList<Dbv> dbvs = Container.Query<Dbv>();
-                        _DbVersion = dbvs.Count > 0 ? dbvs[0] : new Dbv { Version = "1" };
-                    }
                 }
                 return _Container;
             }

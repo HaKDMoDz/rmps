@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using Me.Amon.Da;
 using Me.Amon.M;
 
 namespace Me.Amon.Pwd.M
@@ -46,6 +47,7 @@ namespace Me.Amon.Pwd.M
             LibModified = 0x7FFFFFFF;
         }
 
+        #region 数据目录
         private string _CatDir;
         public string CatDir { get { return _CatDir; } }
 
@@ -57,6 +59,7 @@ namespace Me.Amon.Pwd.M
 
         private string _AcfDir;
         public string AcfDir { get { return _AcfDir; } }
+        #endregion
 
         #region 口令模板
         private IList<Lib> _LibList;

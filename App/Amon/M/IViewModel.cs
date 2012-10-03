@@ -6,5 +6,9 @@ namespace Me.Amon.M
         System.Drawing.Image GetImage(string path);
 
         System.Drawing.Image GetImage(string id, string path);
+
+        void SaveLayout();
+
+        void LoadLayout();
     }
 }

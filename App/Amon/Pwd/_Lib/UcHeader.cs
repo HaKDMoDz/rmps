@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using Me.Amon.Da;
+using Me.Amon.Pwd.M;
 using Me.Amon.Util;
 
 namespace Me.Amon.Pwd._Lib
@@ -7,7 +8,7 @@ namespace Me.Amon.Pwd._Lib
     public partial class UcHeader : UserControl, ILibEdit
     {
         private LibEditer _LibEdit;
-        private Me.Amon.Pwd.Lib _LibHeader;
+        private Lib _LibHeader;
 
         public UcHeader()
         {
@@ -27,7 +28,7 @@ namespace Me.Amon.Pwd._Lib
             TbTarget.MaxLength = DBConst.APWD0308_SIZE;
         }
 
-        public void Show(Me.Amon.Pwd.Lib header)
+        public void Show(Lib header)
         {
             _LibHeader = header;
 
@@ -52,7 +53,7 @@ namespace Me.Amon.Pwd._Lib
             _LibHeader.Memo = TbMemo.Text;
 
             _LibEdit.SaveHeader(_LibHeader);
-            Show(new Me.Amon.Pwd.Lib());
+            Show(new Lib());
         }
     }
 }

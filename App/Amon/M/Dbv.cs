@@ -5,6 +5,6 @@
         /// <summary>
         /// 数据版本
         /// </summary>
-        public string Version { get; set; }
+        public int Version { get; set; }
     }
 }

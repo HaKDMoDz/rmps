@@ -73,7 +73,7 @@ namespace Me.Amon.Da.Db
             _BatchList = new List<string>();
         }
 
-        public void Init(AUserModel userModel)
+        public void DbInit(AUserModel userModel)
         {
             _DbPath = Path.Combine(userModel.DatHome, CApp.FILE_DB);
 
@@ -372,6 +372,10 @@ namespace Me.Amon.Da.Db
                 }
                 mytransaction.Commit();
             }
+        }
+
+        public void Upgrade()
+        {
         }
 
         /// <summary>

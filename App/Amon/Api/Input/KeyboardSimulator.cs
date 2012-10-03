@@ -53,8 +53,8 @@ namespace Me.Amon.Api.Input
         /// <summary>
         /// Calls the Win32 SendInput method to simulate a KeyDown.
         /// </summary>
-        /// <param name="keyCode">The <see cref="VirtualKeyCode"/> to press</param>
-        public void KeyDown(VirtualKeyCode keyCode)
+        /// <param name="keyCode">The <see cref="VirtualKey"/> to press</param>
+        public void KeyDown(VirtualKey keyCode)
         {
             var inputList = new InputBuilder().AddKeyDown(keyCode).ToArray();
 
@@ -64,8 +64,8 @@ namespace Me.Amon.Api.Input
         /// <summary>
         /// Calls the Win32 SendInput method to simulate a KeyUp.
         /// </summary>
-        /// <param name="keyCode">The <see cref="VirtualKeyCode"/> to lift up</param>
-        public void KeyUp(VirtualKeyCode keyCode)
+        /// <param name="keyCode">The <see cref="VirtualKey"/> to lift up</param>
+        public void KeyUp(VirtualKey keyCode)
         {
             var inputList = new InputBuilder().AddKeyUp(keyCode).ToArray();
             SendSimulatedInput(inputList);
@@ -74,8 +74,8 @@ namespace Me.Amon.Api.Input
         /// <summary>
         /// Calls the Win32 SendInput method with a KeyDown and KeyUp message in the same input sequence in order to simulate a Key PRESS.
         /// </summary>
-        /// <param name="keyCode">The <see cref="VirtualKeyCode"/> to press</param>
-        public void KeyPress(VirtualKeyCode keyCode)
+        /// <param name="keyCode">The <see cref="VirtualKey"/> to press</param>
+        public void KeyPress(VirtualKey keyCode)
         {
             var inputList =
                 new InputBuilder()
@@ -92,7 +92,7 @@ namespace Me.Amon.Api.Input
         /// </summary>
         /// <param name="modifierKeyCode">The modifier key</param>
         /// <param name="keyCode">The key to simulate</param>
-        public void ModifiedKeyStroke(VirtualKeyCode modifierKeyCode, VirtualKeyCode keyCode)
+        public void ModifiedKeyStroke(VirtualKey modifierKeyCode, VirtualKey keyCode)
         {
             var inputList =
                 new InputBuilder()
@@ -110,7 +110,7 @@ namespace Me.Amon.Api.Input
         /// </summary>
         /// <param name="modifierKeyCodes">The list of modifier keys</param>
         /// <param name="keyCode">The key to simulate</param>
-        public void ModifiedKeyStroke(IEnumerable<VirtualKeyCode> modifierKeyCodes, VirtualKeyCode keyCode)
+        public void ModifiedKeyStroke(IEnumerable<VirtualKey> modifierKeyCodes, VirtualKey keyCode)
         {
             var builder = new InputBuilder();
             if (modifierKeyCodes != null) modifierKeyCodes.ToList().ForEach(x => builder.AddKeyDown(x));
@@ -126,7 +126,7 @@ namespace Me.Amon.Api.Input
         /// </summary>
         /// <param name="modifierKey">The modifier key</param>
         /// <param name="keyCodes">The list of keys to simulate</param>
-        public void ModifiedKeyStroke(VirtualKeyCode modifierKey, IEnumerable<VirtualKeyCode> keyCodes)
+        public void ModifiedKeyStroke(VirtualKey modifierKey, IEnumerable<VirtualKey> keyCodes)
         {
             var builder = new InputBuilder();
             builder.AddKeyDown(modifierKey);
@@ -142,7 +142,7 @@ namespace Me.Amon.Api.Input
         /// </summary>
         /// <param name="modifierKeyCodes">The list of modifier keys</param>
         /// <param name="keyCodes">The list of keys to simulate</param>
-        public void ModifiedKeyStroke(IEnumerable<VirtualKeyCode> modifierKeyCodes, IEnumerable<VirtualKeyCode> keyCodes)
+        public void ModifiedKeyStroke(IEnumerable<VirtualKey> modifierKeyCodes, IEnumerable<VirtualKey> keyCodes)
         {
             var builder = new InputBuilder();
             if (modifierKeyCodes != null) modifierKeyCodes.ToList().ForEach(x => builder.AddKeyUp(x));
