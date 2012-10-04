@@ -7,6 +7,12 @@ namespace Me.Amon.Da
 {
     public interface DBA
     {
+        bool Suspended { get; }
+
+        void Suspend();
+
+        void Resume();
+
         void CloseConnect();
 
         /// <summary>

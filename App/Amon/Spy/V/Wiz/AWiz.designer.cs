@@ -1,6 +1,6 @@
-﻿namespace Me.Amon.Target.App
+﻿namespace Me.Amon.Spy.V.Wiz
 {
-    partial class AppWindow
+    partial class AWiz
     {
         /// <summary>
         /// Required designer variable.
@@ -125,7 +125,7 @@
             this.PbApp.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PbApp_MouseMove);
             this.PbApp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PbApp_MouseUp);
             // 
-            // AppWindow
+            // AWiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -138,8 +138,8 @@
             this.Controls.Add(this.TbCmpLoc);
             this.Controls.Add(this.LbCmpLoc);
             this.Controls.Add(this.PbApp);
-            this.Name = "AppWindow";
-            this.Size = new System.Drawing.Size(240, 122);
+            this.Name = "AWiz";
+            this.Size = new System.Drawing.Size(244, 122);
             ((System.ComponentModel.ISupportInitialize)(this.PbApp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

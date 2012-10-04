@@ -200,14 +200,13 @@ namespace Me.Amon.Pwd
 
         public bool SaveData()
         {
-            string path = Path.Combine(_UserModel.SysHome, CApp.DIR_BACK);
-            if (Directory.Exists(path))
+            if (Directory.Exists(_UserModel.BakHome))
             {
-                string[] files = Directory.GetFiles(path, _UserModel.Code + "*.apbak", SearchOption.TopDirectoryOnly);
-                if (files.Length >= 3)
+                string[] files = Directory.GetFiles(_UserModel.BakHome, _UserModel.Code + "*.apbak", SearchOption.TopDirectoryOnly);
+                if (files.Length >= _UserModel.BackFileCount)
                 {
                     Array.Sort(files);
-                    for (int i = files.Length - 3; i >= 0; i -= 1)
+                    for (int i = files.Length - _UserModel.BackFileCount; i >= 0; i -= 1)
                     {
                         File.Delete(files[i]);
                     }
@@ -215,11 +214,13 @@ namespace Me.Amon.Pwd
             }
             else
             {
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(_UserModel.BakHome);
             }
 
             string file = _UserModel.Code + '-' + DateTime.Now.ToString("yyyyMMddHHmmss") + ".apbak";
-            DoBackup(Path.Combine(path, file));
+            _UserModel.Suspend();
+            BeanUtil.DoZip(Path.Combine(_UserModel.BakHome, file), _UserModel.DatHome);
+            _UserModel.Resume();
             return true;
         }
         #endregion
@@ -1811,7 +1812,9 @@ namespace Me.Amon.Pwd
             {
                 return;
             }
-            DoBackup(Main.SaveFileDialog.FileName);
+            _UserModel.Suspend();
+            BeanUtil.DoZip(Main.SaveFileDialog.FileName, _UserModel.DatHome);
+            _UserModel.Resume();
         }
 
         /// <summary>
@@ -1819,7 +1822,22 @@ namespace Me.Amon.Pwd
         /// </summary>
         public void NativeResume()
         {
-            Main.ShowAlert("本地恢复功能尚在完善中，敬请期待！");
+            if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
+            {
+                return;
+            }
+
+            _UserModel.Suspend();
+            SaveData();
+
+            if (DialogResult.OK != Main.ShowOpenFileDialog(this, "密码箱备份文件|*.apbak", "", false))
+            {
+                return;
+            }
+
+            BeanUtil.UnZip(Main.OpenFileDialog.FileName, _UserModel.DatHome);
+            Main.ShowAlert("数据恢复成功，请重新启动软件！");
+            _Main.ExitSystem();
         }
 
         public void NativeConfig()
@@ -2619,25 +2637,6 @@ namespace Me.Amon.Pwd
 
             _SafeModel.Key.AccessTime = DateTime.Now.ToString(CApp.DATEIME_FORMAT);
             _UserModel.DBA.SaveVcs(_SafeModel.Key);
-        }
-
-        /// <summary>
-        /// 备份
-        /// </summary>
-        /// <param name="file"></param>
-        private void DoBackup(string file)
-        {
-            _UserModel.Suspend();
-            BeanUtil.DoZip(file, _UserModel.DatHome);
-            _UserModel.Resuma();
-        }
-
-        /// <summary>
-        /// 恢复
-        /// </summary>
-        /// <param name="file"></param>
-        private void DoResuma(string file)
-        {
         }
 
         /// <summary>

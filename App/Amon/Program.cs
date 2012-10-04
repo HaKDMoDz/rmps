@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Me.Amon.Spy;
 
 namespace Me.Amon
 {
@@ -16,6 +17,7 @@ namespace Me.Amon
             Application.Run(new Main());
             //Application.Run(new Gtd.V.GtdEditor());
             //Application.Run(new Demo());
+            //Application.Run(new ASpy());
         }
     }
 }

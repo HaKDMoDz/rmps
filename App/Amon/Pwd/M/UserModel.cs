@@ -7,6 +7,7 @@ using Me.Amon.C;
 using Me.Amon.Da;
 using Me.Amon.Da.Db;
 using Me.Amon.Da.Df;
+using Me.Amon.Gtd.M;
 using Me.Amon.M;
 using Me.Amon.Util;
 
@@ -14,6 +15,7 @@ namespace Me.Amon.Pwd.M
 {
     public sealed class UserModel : AUserModel
     {
+        #region 用户配置
         /// <summary>
         /// 剪贴板驻留时间
         /// </summary>
@@ -34,6 +36,14 @@ namespace Me.Amon.Pwd.M
         /// 默认字符空间
         /// </summary>
         public string PasswordUdc { get; set; }
+        /// <summary>
+        /// 提醒检测间隔
+        /// </summary>
+        public int NoticeInterval { get; set; }
+
+        #endregion
+
+        private bool IsStartup;
 
         #region 数据初始化
         public override void Init()
@@ -52,6 +62,7 @@ namespace Me.Amon.Pwd.M
             }
 
             ResHome = SysHome;
+            BakHome = Path.Combine(SysHome, CApp.DIR_BACK);
 
             if (File.Exists(CApp.FILE_VER))
             {
@@ -63,6 +74,8 @@ namespace Me.Amon.Pwd.M
             {
                 BeanUtil.UnZip(CApp.FILE_RES, ResHome);
             }
+
+            IsStartup = true;
         }
 
         public override void Load()
@@ -79,6 +92,8 @@ namespace Me.Amon.Pwd.M
             //dfa.Init(this);
             DFA = dfa;
 
+            BackFileCount = 3;
+            NoticeInterval = 5;
             _Timer = new Timer(new TimerCallback(Timer_Callback), null, 5000, 1000);
         }
         #endregion
@@ -97,11 +112,13 @@ namespace Me.Amon.Pwd.M
         public void Suspend()
         {
             Monitor.Enter(_SyncObj);
-            DBA.CloseConnect();
+            _MGtds = null;
+            DBA.Suspend();
         }
 
-        public void Resuma()
+        public void Resume()
         {
+            DBA.Resume();
             Monitor.Exit(_SyncObj);
         }
 
@@ -125,13 +142,18 @@ namespace Me.Amon.Pwd.M
         }
 
         private Timer _Timer;
-        private IList<Gtd.M.MGtd> _MGtds;
-        private int _TodoCnt = 0;
-        private int _PastCnt = 0;
-        private int _Delay = 5;
+        private IList<MGtd> _MGtds;
+        private int _TodoCnt;
+        private int _PastCnt;
+        private int _Delay;
         private string _SyncObj = "";
         private void Timer_Callback(object state)
         {
+            if (DBA.Suspended)
+            {
+                return;
+            }
+
             bool locked = false;
 
             Monitor.TryEnter(_SyncObj, ref locked);
@@ -145,23 +167,23 @@ namespace Me.Amon.Pwd.M
             {
                 DateTime now = DateTime.Now;
 
-                if (_MGtds == null)
+                if (_Delay < 1 || _MGtds == null)
                 {
                     _MGtds = DBA.ListGtdWithRef();
-                    foreach (Gtd.M.MGtd gtd in _MGtds)
-                    {
-                        if (gtd.NextEvent(now, Gtd.CGtd.EVENT_LOAD))
-                        {
-                            DBA.SaveVcs(gtd);
-                        }
-                    }
-                }
+                    _Delay = NoticeInterval;
 
-                if (_Delay < 1)
-                {
-                    // 启动
-                    _MGtds = DBA.ListGtdWithRef();
-                    _Delay = 5;
+                    // 启动事件
+                    if (IsStartup)
+                    {
+                        foreach (Gtd.M.MGtd gtd in _MGtds)
+                        {
+                            if (gtd.NextEvent(now, Gtd.CGtd.EVENT_LOAD))
+                            {
+                                DBA.SaveVcs(gtd);
+                            }
+                        }
+                        IsStartup = false;
+                    }
                 }
 
                 _TodoCnt = 0;

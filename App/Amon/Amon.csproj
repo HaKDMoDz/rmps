@@ -481,11 +481,17 @@
     </Compile>
     <Compile Include="Spy\M\MSpy.cs" />
     <Compile Include="Spy\M\UserModel.cs" />
-    <Compile Include="Spy\V\App.cs">
+    <Compile Include="Spy\V\Pro\APro.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Spy\V\App.designer.cs">
-      <DependentUpon>App.cs</DependentUpon>
+    <Compile Include="Spy\V\Pro\APro.Designer.cs">
+      <DependentUpon>APro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Spy\V\Wiz\AWiz.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Spy\V\Wiz\AWiz.designer.cs">
+      <DependentUpon>AWiz.cs</DependentUpon>
     </Compile>
     <Compile Include="TApp.cs" />
     <Compile Include="Pwd\Att.cs" />
@@ -1530,8 +1536,11 @@
     <EmbeddedResource Include="Spy\ASpy.resx">
       <DependentUpon>ASpy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Spy\V\App.resx">
-      <DependentUpon>App.cs</DependentUpon>
+    <EmbeddedResource Include="Spy\V\Pro\APro.resx">
+      <DependentUpon>APro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Spy\V\Wiz\AWiz.resx">
+      <DependentUpon>AWiz.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uc\GtdTips.resx">
       <DependentUpon>GtdTips.cs</DependentUpon>

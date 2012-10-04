@@ -63,22 +63,17 @@ namespace Me.Amon.Da.Db
             oldContainer.Close();
         }
 
-        private IObjectContainer Container
+        public bool Suspended { get; private set; }
+
+        public void Suspend()
         {
-            get
-            {
-                if (_Container == null)
-                {
-                    IEmbeddedConfiguration config = Db4oEmbedded.NewConfiguration();
-                    config.Common.ObjectClass(typeof(Cat)).ObjectField("Id").Indexed(true);
-                    config.Common.ObjectClass(typeof(Key)).ObjectField("Title").Indexed(true);
-                    config.Common.ObjectClass(typeof(Key)).ObjectField("MetaKey").Indexed(true);
-                    config.Common.ObjectClass(typeof(Lib)).CascadeOnUpdate(true);
-                    config.Common.ObjectClass(typeof(MGtd)).CascadeOnUpdate(true);
-                    _Container = Db4oEmbedded.OpenFile(config, _DbPath);
-                }
-                return _Container;
-            }
+            CloseConnect();
+            Suspended = true;
+        }
+
+        public void Resume()
+        {
+            Suspended = false;
         }
 
         public void CloseConnect()
@@ -99,6 +94,24 @@ namespace Me.Amon.Da.Db
             get
             {
                 return _DbVersion;
+            }
+        }
+
+        private IObjectContainer Container
+        {
+            get
+            {
+                if (_Container == null && !Suspended)
+                {
+                    IEmbeddedConfiguration config = Db4oEmbedded.NewConfiguration();
+                    config.Common.ObjectClass(typeof(Cat)).ObjectField("Id").Indexed(true);
+                    config.Common.ObjectClass(typeof(Key)).ObjectField("Title").Indexed(true);
+                    config.Common.ObjectClass(typeof(Key)).ObjectField("MetaKey").Indexed(true);
+                    config.Common.ObjectClass(typeof(Lib)).CascadeOnUpdate(true);
+                    config.Common.ObjectClass(typeof(MGtd)).CascadeOnUpdate(true);
+                    _Container = Db4oEmbedded.OpenFile(config, _DbPath);
+                }
+                return _Container;
             }
         }
         #endregion

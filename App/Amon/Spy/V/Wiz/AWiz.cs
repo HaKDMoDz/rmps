@@ -3,15 +3,14 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Me.Amon.Api.User32;
-using Me.Amon.Properties;
 
-namespace Me.Amon.Target.App
+namespace Me.Amon.Spy.V.Wiz
 {
-    public partial class AppWindow : UserControl
+    public partial class AWiz : UserControl
     {
         private IntPtr _findWindow;
 
-        public AppWindow()
+        public AWiz()
         {
             InitializeComponent();
 
