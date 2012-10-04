@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Amon>
+  <App>ASql</App>
+  <Ver>1</Ver>
+  <Actions>
+	<Action Id="execute" Class="Me.Amon.Sql.E.ExecuteAction"/>
+	<Action Id="new-pdq" Class="Me.Amon.Sql.E.NewPdqAction"/>
+	<Action Id="new-sql" Class="Me.Amon.Sql.E.NewSqlAction"/>
+	<Action Id="new-dbr" Class="Me.Amon.Sql.E.NewDbrAction"/>
+	<Action Id="new-dbms" Class="Me.Amon.Sql.E.NewDbmsAction"/>
+	<Action Id="import" Class="Me.Amon.Sql.E.ImportAction"/>
+	<Action Id="export" Class="Me.Amon.Sql.E.ExportAction"/>
+  </Actions>
+
+  <!--系统快捷键-->
+  <Strokes Id="ASql">
+	<Stroke Key="F5" ActionId="execute" Memo=""/>
+	<Stroke Key="^ Enter" ActionId="execute" Memo=""/>
+    <Stroke Key="^ N" ActionId="new-sql" Memo="新建查询"/>
+	<Stroke Key="^ T" ActionId="new-dbr" Memo="新建结果"/>
+	<Stroke Key="^ R" ActionId="new-dbms" Memo="新建结果"/>
+  </Strokes>
+
+  <Popmenu Id="ASql">
+    <Item Type="normal" Text="新建连接(&amp;N)" ActionId="new-dbms"/>
+	<Menu Text="预置连接">
+		<Item Type="normal" Text="SQLite" ActionId="new-dbms"/>
+		<Item Type="normal" Text="MS SQL" ActionId="new-dbms"/>
+	</Menu>
+	<Line/>
+	<Item Type="normal" Text="新建预设查询页(&amp;P)" ActionId="new-pdq"/>
+	<Item Type="normal" Text="新建高级查询页(&amp;S)" ActionId="new-sql"/>
+	<Item Type="normal" Text="新建查询结果页(&amp;R)" ActionId="new-dbr"/>
+	<Line/>
+	<Item Type="normal" Text="导入(&amp;I)" ActionId="import"/>
+	<Item Type="normal" Text="导出(&amp;E)" ActionId="export"/>
+  </Popmenu>
+</Amon>
