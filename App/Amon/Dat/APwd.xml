@@ -84,9 +84,9 @@
   <!--系统快捷键-->
   <Strokes Id="APwd">
     <Stroke Key="^ S" ActionId="update-key" Memo="保存记录"/>
-    <Stroke Key="# C" ActionId="att-edit-copy" Memo="复制属性"/>
-    <Stroke Key="# U" ActionId="update-att" Memo="保存属性"/>
-    <Stroke Key="# D" ActionId="delete-att" Memo="删除属性"/>
+    <Stroke Key="% C" ActionId="att-edit-copy" Memo="复制属性"/>
+    <Stroke Key="% U" ActionId="update-att" Memo="保存属性"/>
+    <Stroke Key="% D" ActionId="delete-att" Memo="删除属性"/>
   </Strokes>
 
   <!--魔方密码菜单栏-->
@@ -156,48 +156,48 @@
       </Menu>
       <Menu Id="update-att" Text="转换属性" Group="att-edit">
         <Item Type="normal" Text="文本" ActionId="change-att-text">
-          <Stroke Key="# D1" Memo="转换文本属性"/>
-          <Stroke Key="# NumPad1" Memo="转换文本属性"/>
+          <Stroke Key="% D1" Memo="转换文本属性"/>
+          <Stroke Key="% NumPad1" Memo="转换文本属性"/>
         </Item>
         <Item Type="normal" Text="口令" ActionId="change-att-pass">
-          <Stroke Key="# D2" Memo="转换口令属性"/>
-          <Stroke Key="# NumPad2" Memo="转换口令属性"/>
+          <Stroke Key="% D2" Memo="转换口令属性"/>
+          <Stroke Key="% NumPad2" Memo="转换口令属性"/>
         </Item>
         <Item Type="normal" Text="链接" ActionId="change-att-link">
-          <Stroke Key="# D3" Memo="转换链接属性"/>
-          <Stroke Key="# NumPad3" Memo="转换链接属性"/>
+          <Stroke Key="% D3" Memo="转换链接属性"/>
+          <Stroke Key="% NumPad3" Memo="转换链接属性"/>
         </Item>
         <Item Type="normal" Text="邮件" ActionId="change-att-mail">
-          <Stroke Key="# D4" Memo="转换邮件属性"/>
-          <Stroke Key="# NumPad4" Memo="转换邮件属性"/>
+          <Stroke Key="% D4" Memo="转换邮件属性"/>
+          <Stroke Key="% NumPad4" Memo="转换邮件属性"/>
         </Item>
         <Item Type="normal" Text="日期" ActionId="change-att-date">
-          <Stroke Key="# D5" Memo="转换日期属性"/>
-          <Stroke Key="# NumPad5" Memo="转换日期属性"/>
+          <Stroke Key="% D5" Memo="转换日期属性"/>
+          <Stroke Key="% NumPad5" Memo="转换日期属性"/>
         </Item>
         <Item Type="normal" Text="数值" ActionId="change-att-data">
-          <Stroke Key="# D6" Memo="转换数值属性"/>
-          <Stroke Key="# NumPad6" Memo="转换数值属性"/>
+          <Stroke Key="% D6" Memo="转换数值属性"/>
+          <Stroke Key="% NumPad6" Memo="转换数值属性"/>
         </Item>
         <Item Type="normal" Text="列表" ActionId="change-att-list">
-          <Stroke Key="# D7" Memo="转换列表属性"/>
-          <Stroke Key="# NumPad7" Memo="转换列表属性"/>
+          <Stroke Key="% D7" Memo="转换列表属性"/>
+          <Stroke Key="% NumPad7" Memo="转换列表属性"/>
         </Item>
         <Item Type="normal" Text="附注" ActionId="change-att-memo">
-          <Stroke Key="# D8" Memo="转换附注属性"/>
-          <Stroke Key="# NumPad8" Memo="转换附注属性"/>
+          <Stroke Key="% D8" Memo="转换附注属性"/>
+          <Stroke Key="% NumPad8" Memo="转换附注属性"/>
         </Item>
         <Item Type="normal" Text="文件" ActionId="change-att-file">
-          <Stroke Key="# D9" Memo="转换文件属性"/>
-          <Stroke Key="# NumPad9" Memo="转换文件属性"/>
+          <Stroke Key="% D9" Memo="转换文件属性"/>
+          <Stroke Key="% NumPad9" Memo="转换文件属性"/>
         </Item>
         <Item Type="normal" Text="标记" ActionId="change-att-line">
-          <Stroke Key="# D0" Memo="转换标记属性"/>
-          <Stroke Key="# NumPad0" Memo="转换标记属性"/>
+          <Stroke Key="% D0" Memo="转换标记属性"/>
+          <Stroke Key="% NumPad0" Memo="转换标记属性"/>
         </Item>
       </Menu>
       <Item Type="normal" Text="删除属性" ActionId="delete-att" Group="att-edit">
-        <Stroke Key="# D" Memo="移除当前属性"/>
+        <Stroke Key="% D" Memo="移除当前属性"/>
       </Item>
       <Item Type="normal" Text="选择上一属性" ActionId="att-edit-select-prev" Group="att-edit">
         <Stroke Key="^ U" Memo="选择上一个属性"/>
@@ -208,12 +208,12 @@
         <Stroke Key="^ Down" Memo="选择下一个属性"/>
       </Item>
       <Item Type="normal" Text="向上移动一行" ActionId="att-edit-move-up" Group="att-edit">
-        <Stroke Key="^ ~ U" Memo="向上移动一行"/>
-        <Stroke Key="^ ~ Up" Memo="向上移动一行"/>
+        <Stroke Key="^ + U" Memo="向上移动一行"/>
+        <Stroke Key="^ + Up" Memo="向上移动一行"/>
       </Item>
       <Item Type="normal" Text="向下移动一行" ActionId="att-edit-move-down" Group="att-edit">
-        <Stroke Key="^ ~ D" Memo="向下移动一行"/>
-        <Stroke Key="^ ~ Down" Memo="向下移动一行"/>
+        <Stroke Key="^ + D" Memo="向下移动一行"/>
+        <Stroke Key="^ + Down" Memo="向下移动一行"/>
       </Item>
       <Line Group="att-edit"/>
       <Item Type="normal" Text="添加类别" ActionId="append-cat">
@@ -289,10 +289,10 @@
       <Item Type="normal" Text="配置本地路径" ActionId="native-config" Enabled="false"/>
       <Line/>
       <Item Type="normal" Text="备份到云端" ActionId="remote-backup">
-        <Stroke Key="^ ~ B" Memo="备份到云端"/>
+        <Stroke Key="^ + B" Memo="备份到云端"/>
       </Item>
       <Item Type="normal" Text="从云端恢复" ActionId="remote-resume">
-        <Stroke Key="^ ~ R" Memo="从云端恢复"/>
+        <Stroke Key="^ + R" Memo="从云端恢复"/>
       </Item>
       <Item Type="normal" Text="配置云端帐户" ActionId="remote-config" Enabled="false"/-->
     </Menu>
@@ -638,8 +638,8 @@
       <Line/>
       <Item Type="toggle" Id="data-fixed-dec" Text="固定小数长度" Command="dec:f"/>
       <!--
-            <Item Type="toggle" Id="data-fixed-int" Command="int:f"/>
-            -->
+		<Item Type="toggle" Id="data-fixed-int" Command="int:f"/>
+		-->
     </Menu>
     <Line/>
     <Menu Id="data-collection" Text="集合">

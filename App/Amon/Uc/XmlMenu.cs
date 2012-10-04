@@ -1029,7 +1029,7 @@ namespace Me.Amon.Uc
                 return null;
             }
 
-            key = key.Replace("^", "Ctrl").Replace("~", "Shift").Replace("#", "Alt").Replace("!", "Meta");
+            key = key.Replace("^", "Ctrl").Replace("+", "Shift").Replace("%", "Alt").Replace("!", "Meta");
             key = Regex.Replace(key, "Control", "Ctrl", RegexOptions.IgnoreCase);
             KeyStroke<T> stroke = new KeyStroke<T>();
             if (!stroke.Decode(key))

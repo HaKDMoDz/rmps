@@ -780,6 +780,22 @@ namespace Me.Amon.Pwd
                 item = _SafeModel.GetAtt(i);
                 buffer.Replace('{' + item.Text + '}', item.Data);
             }
+
+            Match match = Regex.Match(buffer.ToString(), "{\\w*}");
+            while (match.Success)
+            {
+                string tmp = match.Value.ToUpper();
+                match = match.NextMatch();
+                if (tmp == "{TAB}"
+                    || tmp == "{BACKSPACE}"
+                    || tmp == "{BKSP}"
+                    || tmp == "{BS}"
+                    || tmp == "{ENTER}")
+                {
+                    continue;
+                }
+                buffer.Replace(tmp, "");
+            }
             SendKeys.SendWait(buffer.ToString());
         }
         #endregion
