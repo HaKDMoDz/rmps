@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Api.Enums;
@@ -773,30 +774,81 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            StringBuilder buffer = new StringBuilder(_SafeModel.Key.Script);
+            int i1 = 0;
+            int i2;
+            string s1;
+            string s2;
+            string t;
+            string script = _SafeModel.Key.Script;
+            Match match = Regex.Match(script, "{[^}]*}");
+            while (match.Success)
+            {
+                i2 = match.Index;
+                s1 = match.Value;
+                s2 = s1.ToUpper();
+
+                match = match.NextMatch();
+                if (s2 == "{TAB}"
+                    || s2 == "{BACKSPACE}"
+                    || s2 == "{BKSP}"
+                    || s2 == "{BS}"
+                    || s2 == "{ENTER}")
+                {
+                    if (i2 > i1)
+                    {
+                        t = script.Substring(i1, i2 - i1);
+                        i1 = i2 + s1.Length;
+                        SendKeys.SendWait(t);//已有字符
+                    }
+                    SendKeys.SendWait(s2);// 功能键
+                    Thread.Sleep(200);// 执行等待
+                    continue;
+                }
+
+                if (i2 > i1)
+                {
+                    s2 = script.Substring(i1, i2 - i1) + TrimFillData(s1);
+                }
+                else
+                {
+                    s2 = TrimFillData(s1);
+                }
+                i1 = i2 + s1.Length;
+                SendKeys.SendWait(s2);
+            }
+        }
+
+        /// <summary>
+        /// 特殊字符处理
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        private string TrimFillData(string data)
+        {
             Att item;
+            data = data.Substring(1, data.Length - 2);
             for (int i = Att.HEAD_SIZE, j = _SafeModel.Count; i < j; i += 1)
             {
                 item = _SafeModel.GetAtt(i);
-                buffer.Replace('{' + item.Text + '}', item.Data);
-            }
-
-            Match match = Regex.Match(buffer.ToString(), "{\\w*}");
-            while (match.Success)
-            {
-                string tmp = match.Value.ToUpper();
-                match = match.NextMatch();
-                if (tmp == "{TAB}"
-                    || tmp == "{BACKSPACE}"
-                    || tmp == "{BKSP}"
-                    || tmp == "{BS}"
-                    || tmp == "{ENTER}")
+                if (item.Text != data)
                 {
                     continue;
                 }
-                buffer.Replace(tmp, "");
+                data = item.Data;
+                data = data.Replace('{', '\b').Replace('}', '\f');
+                data = data.Replace("\b", "{{}");
+                data = data.Replace("\f", "{}}");
+                data = data.Replace("[", "{[}");
+                data = data.Replace("]", "{]}");
+                data = data.Replace("(", "{(}");
+                data = data.Replace(")", "{)}");
+                data = data.Replace("+", "{+}");
+                data = data.Replace("^", "{^}");
+                data = data.Replace("%", "{%}");
+                data = data.Replace("~", "{~}");
+                return data;
             }
-            SendKeys.SendWait(buffer.ToString());
+            return "{{}" + data + "{}}";
         }
         #endregion
 
