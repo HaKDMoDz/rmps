@@ -53,7 +53,7 @@ namespace Me.Amon.Spy
             //LbEcho.Text = message;
         }
 
-        public bool WillExit()
+        public bool CanExit()
         {
             return true;
         }

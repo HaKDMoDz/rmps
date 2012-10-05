@@ -59,7 +59,7 @@ namespace Me.Amon.Img
             //LbEcho.Text = message;
         }
 
-        public bool WillExit()
+        public bool CanExit()
         {
             return true;
         }

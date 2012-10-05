@@ -72,7 +72,7 @@ namespace Me.Amon.Ico
             //LbEcho.Text = message;
         }
 
-        public bool WillExit()
+        public bool CanExit()
         {
             return true;
         }

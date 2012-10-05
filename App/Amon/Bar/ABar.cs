@@ -67,7 +67,7 @@ namespace Me.Amon.Bar
             LbEcho.Text = message;
         }
 
-        public bool WillExit()
+        public bool CanExit()
         {
             return true;
         }

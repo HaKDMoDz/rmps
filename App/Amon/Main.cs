@@ -418,7 +418,7 @@ namespace Me.Amon
                     continue;
                 }
 
-                if (!iapp.WillExit())
+                if (!iapp.CanExit())
                 {
                     return false;
                 }

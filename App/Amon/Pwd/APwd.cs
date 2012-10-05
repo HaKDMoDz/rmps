@@ -181,7 +181,7 @@ namespace Me.Amon.Pwd
             return FbFind.Focus();
         }
 
-        public bool WillExit()
+        public bool CanExit()
         {
             if (_SafeModel.Modified)
             {
@@ -797,9 +797,9 @@ namespace Me.Amon.Pwd
                     if (i2 > i1)
                     {
                         t = script.Substring(i1, i2 - i1);
-                        i1 = i2 + s1.Length;
                         SendKeys.SendWait(t);//已有字符
                     }
+                    i1 = i2 + s1.Length;
                     SendKeys.SendWait(s2);// 功能键
                     Thread.Sleep(200);// 执行等待
                     continue;

@@ -31,7 +31,7 @@ namespace Me.Amon
 
         void Activate();
 
-        bool WillExit();
+        bool CanExit();
 
         bool SaveData();
     }

@@ -43,7 +43,7 @@ namespace Me.Amon.Gtd
             SblEcho.Text = message;
         }
 
-        public bool WillExit()
+        public bool CanExit()
         {
             return true;
         }
