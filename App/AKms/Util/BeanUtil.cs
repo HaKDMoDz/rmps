@@ -9,7 +9,7 @@ using ICSharpCode.SharpZipLib.Checksums;
 using ICSharpCode.SharpZipLib.Zip;
 using Me.Amon.Api.Gdi32;
 using Me.Amon.Api.User32;
-using Me.Amon.Api.Struct;
+using Me.Amon.Api.Structures;
 
 namespace Me.Amon.Util
 {

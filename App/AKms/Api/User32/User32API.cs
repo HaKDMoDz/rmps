@@ -2,8 +2,9 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
+using Me.Amon.Api.Delegates;
 using Me.Amon.Api.Enums;
-using Me.Amon.Api.Struct;
+using Me.Amon.Api.Structures;
 
 namespace Me.Amon.Api.User32
 {
@@ -83,8 +84,10 @@ namespace Me.Amon.Api.User32
         /// <param name="lpEnumFunc"></param>
         /// <param name="lParam"></param>
         /// <returns></returns>
-        [DllImport("user32.dll", EntryPoint = "EnumWindows", SetLastError = true)]
-        public static extern bool EnumWindows(WNDENUMPROC lpEnumFunc, uint lParam);
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lParam);
+
 
         /// <summary>
         /// 该函数用指定的画刷填充矩形，此函数包括矩形的左上边界，但不包括矩形的右下边界。
@@ -176,6 +179,21 @@ namespace Me.Amon.Api.User32
         /// </summary>
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr GetDC(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        public static extern DispChange ChangeDisplaySettings(ref DEVMODE devMode, int flags);
+        [DllImport("user32.dll")]
+        static extern DispChange ChangeDisplaySettingsEx(string lpszDeviceName, ref DEVMODE lpDevMode, IntPtr hwnd, uint dwflags, IntPtr lParam);
+
+
+        [DllImport("user32.dll")]
+        static extern bool EnumDisplayDevices(string lpDevice, uint iDevNum, ref DISPLAY_DEVICE lpDisplayDevice, uint dwFlags);
+
+        [DllImport("user32.dll")]
+        public static extern bool EnumDisplaySettings(string deviceName, int modeNum, ref DEVMODE devMode);
+        [DllImport("user32.dll")]
+        static extern bool EnumDisplaySettingsEx(string lpszDeviceName, int iModeNum, ref DEVMODE lpDevMode, uint dwFlags);
+
 
         /// <summary>
         /// 该函数检索指定窗口客户区域或整个屏幕的显示设备上下文环境的句柄，在随后的GDI函数中可以使用该句柄在设备上下文环境中绘图。
@@ -609,12 +627,6 @@ namespace Me.Amon.Api.User32
         [DllImport("user32.dll")]
         public static extern IntPtr WindowFromPoint(Point point);
 
-        #endregion
-
-        #region 代理
-        public delegate bool WNDENUMPROC(IntPtr hwnd, uint lParam);
-
-        public delegate int HookProc(int nCode, Int32 wParam, IntPtr lParam);
         #endregion
     }
 }

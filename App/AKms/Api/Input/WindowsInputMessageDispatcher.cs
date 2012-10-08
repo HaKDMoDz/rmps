@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Runtime.InteropServices;
-using Me.Amon.Api.Struct;
+using Me.Amon.Api.Structures;
 using Me.Amon.Api.User32;
 
 namespace Me.Amon.Api.Input

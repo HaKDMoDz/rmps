@@ -58,6 +58,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\Delegates\EnumWindowsProc.cs" />
+    <Compile Include="Api\Delegates\HookProc.cs" />
+    <Compile Include="Api\Enums\DisplayDeviceStateFlags.cs" />
+    <Compile Include="Api\Enums\DispChange.cs" />
     <Compile Include="Api\Enums\GetWindow.cs" />
     <Compile Include="Api\Enums\InputType.cs" />
     <Compile Include="Api\Enums\KeyEvent.cs" />
@@ -87,14 +91,16 @@
     <Compile Include="Api\Input\MouseSimulator.cs" />
     <Compile Include="Api\Input\WindowsInputDeviceStateAdaptor.cs" />
     <Compile Include="Api\Input\WindowsInputMessageDispatcher.cs" />
-    <Compile Include="Api\Struct\HARDWAREINPUT.cs" />
-    <Compile Include="Api\Struct\INPUT.cs" />
-    <Compile Include="Api\Struct\KEYBDINPUT.cs" />
-    <Compile Include="Api\Struct\MOUSEINPUT.cs" />
-    <Compile Include="Api\Struct\MOUSEKEYBDHARDWAREINPUT.cs" />
-    <Compile Include="Api\Struct\POINT.cs" />
-    <Compile Include="Api\Struct\RECT.cs" />
-    <Compile Include="Api\Struct\WINDOWPLACEMENT.cs" />
+    <Compile Include="Api\Structures\DEVMODE.cs" />
+    <Compile Include="Api\Structures\DISPLAY_DEVICE.cs" />
+    <Compile Include="Api\Structures\HARDWAREINPUT.cs" />
+    <Compile Include="Api\Structures\INPUT.cs" />
+    <Compile Include="Api\Structures\KEYBDINPUT.cs" />
+    <Compile Include="Api\Structures\MOUSEINPUT.cs" />
+    <Compile Include="Api\Structures\MOUSEKEYBDHARDWAREINPUT.cs" />
+    <Compile Include="Api\Structures\POINT.cs" />
+    <Compile Include="Api\Structures\RECT.cs" />
+    <Compile Include="Api\Structures\WINDOWPLACEMENT.cs" />
     <Compile Include="Api\User32\User32.cs" />
     <Compile Include="Api\User32\User32API.cs" />
     <Compile Include="CApp.cs" />
@@ -612,6 +618,7 @@
     <None Include="Resources\Waiting.gif" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Api\Interfaces\" />
     <Folder Include="Kms\C\" />
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
-using Me.Amon.Api.Struct;
+using Me.Amon.Api.Structures;
 using Me.Amon.Api.User32;
 using Me.Amon.Uc;
 using Me.Amon.Util;

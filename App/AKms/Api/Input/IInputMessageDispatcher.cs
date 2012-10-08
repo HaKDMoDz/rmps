@@ -1,5 +1,5 @@
 ﻿using System;
-using Me.Amon.Api.Struct;
+using Me.Amon.Api.Structures;
 
 namespace Me.Amon.Api.Input
 {

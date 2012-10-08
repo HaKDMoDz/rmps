@@ -6,7 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using Me.Amon.Api.Enums;
 using Me.Amon.Api.Input;
-using Me.Amon.Api.Struct;
+using Me.Amon.Api.Structures;
 
 namespace Me.Amon.Api.User32
 {
