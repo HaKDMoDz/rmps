@@ -37,6 +37,9 @@
     <StartupObject>Me.Amon.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>Lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,12 +52,66 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main.cs">
+    <Compile Include="About.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.cs">
-      <DependentUpon>Main.cs</DependentUpon>
+    <Compile Include="About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Api\Delegates\EnumWindowsProc.cs" />
+    <Compile Include="Api\Delegates\HookProc.cs" />
+    <Compile Include="Api\Enums\DispChange.cs" />
+    <Compile Include="Api\Enums\DisplayDeviceStateFlags.cs" />
+    <Compile Include="Api\Enums\GetWindow.cs" />
+    <Compile Include="Api\Enums\InputType.cs" />
+    <Compile Include="Api\Enums\KeyEvent.cs" />
+    <Compile Include="Api\Enums\MouseButton.cs" />
+    <Compile Include="Api\Enums\MouseEvent.cs" />
+    <Compile Include="Api\Enums\PenStyles.cs" />
+    <Compile Include="Api\Enums\RopMode.cs" />
+    <Compile Include="Api\Enums\ShowWindow.cs" />
+    <Compile Include="Api\Enums\StockObjects.cs" />
+    <Compile Include="Api\Enums\SystemMetrics.cs" />
+    <Compile Include="Api\Enums\VirtualKey.cs" />
+    <Compile Include="Api\Enums\VirtualKeyCode.cs" />
+    <Compile Include="Api\Enums\WindowMessage.cs" />
+    <Compile Include="Api\Enums\WMHotKeys.cs" />
+    <Compile Include="Api\Enums\XButton.cs" />
+    <Compile Include="Api\Gdi32\Gdi32.cs" />
+    <Compile Include="Api\Gdi32\Gdi32API.cs" />
+    <Compile Include="Api\Input\IInputDeviceStateAdaptor.cs" />
+    <Compile Include="Api\Input\IInputMessageDispatcher.cs" />
+    <Compile Include="Api\Input\IInputSimulator.cs" />
+    <Compile Include="Api\Input\IKeyboardSimulator.cs" />
+    <Compile Include="Api\Input\IMouseSimulator.cs" />
+    <Compile Include="Api\Input\InputBuilder.cs" />
+    <Compile Include="Api\Input\InputSimulator.cs" />
+    <Compile Include="Api\Input\KeyboardSimulator.cs" />
+    <Compile Include="Api\Input\MouseButtonExtensions.cs" />
+    <Compile Include="Api\Input\MouseSimulator.cs" />
+    <Compile Include="Api\Input\WindowsInputDeviceStateAdaptor.cs" />
+    <Compile Include="Api\Input\WindowsInputMessageDispatcher.cs" />
+    <Compile Include="Api\Structures\DEVMODE.cs" />
+    <Compile Include="Api\Structures\DISPLAY_DEVICE.cs" />
+    <Compile Include="Api\Structures\HARDWAREINPUT.cs" />
+    <Compile Include="Api\Structures\INPUT.cs" />
+    <Compile Include="Api\Structures\KEYBDINPUT.cs" />
+    <Compile Include="Api\Structures\MOUSEINPUT.cs" />
+    <Compile Include="Api\Structures\MOUSEKEYBDHARDWAREINPUT.cs" />
+    <Compile Include="Api\Structures\POINT.cs" />
+    <Compile Include="Api\Structures\RECT.cs" />
+    <Compile Include="Api\Structures\WINDOWPLACEMENT.cs" />
+    <Compile Include="Api\User32\User32.cs" />
+    <Compile Include="Api\User32\User32API.cs" />
+    <Compile Include="CApp.cs" />
+    <Compile Include="Da\DBA.cs" />
+    <Compile Include="Da\Db\ODBEngine.cs" />
+    <Compile Include="Da\Db\RDBEngine.cs" />
+    <Compile Include="Da\DFA.cs" />
+    <Compile Include="Da\Df\DFAccess.cs" />
+    <Compile Include="Da\Df\DFConst.cs" />
+    <Compile Include="Da\Df\DFObject.cs" />
+    <Compile Include="IApp.cs" />
     <Compile Include="Img\AImg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,10 +164,68 @@
     <Compile Include="Img\V\Pro\UcOpt.Designer.cs">
       <DependentUpon>UcOpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Main.cs" />
+    <Compile Include="M\AUserModel.cs" />
+    <Compile Include="M\Cat.cs" />
+    <Compile Include="M\Dbv.cs" />
+    <Compile Include="M\Dto.cs" />
+    <Compile Include="M\IViewModel.cs" />
+    <Compile Include="M\Log.cs" />
+    <Compile Include="M\Udc.cs" />
+    <Compile Include="M\UdcModel.cs" />
+    <Compile Include="M\Vcs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Main.resx">
-      <DependentUpon>Main.cs</DependentUpon>
+    <Compile Include="TApp.cs" />
+    <Compile Include="Uc\Itemi.cs" />
+    <Compile Include="Uc\Items.cs" />
+    <Compile Include="Uc\ListItem.cs" />
+    <Compile Include="Uc\Properties.cs" />
+    <Compile Include="Util\BeanUtil.cs" />
+    <Compile Include="Util\CharUtil.cs" />
+    <Compile Include="Util\HashUtil.cs" />
+    <Compile Include="Util\HttpUtil.cs" />
+    <Compile Include="Util\SafeUtil.cs" />
+    <Compile Include="Util\TimeUtil.cs" />
+    <Compile Include="Uw\Alert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Alert.Designer.cs">
+      <DependentUpon>Alert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Error.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Error.Designer.cs">
+      <DependentUpon>Error.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\HotKeys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\HotKeys.Designer.cs">
+      <DependentUpon>HotKeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Input.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Input.Designer.cs">
+      <DependentUpon>Input.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\TxtEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\TxtEditor.Designer.cs">
+      <DependentUpon>TxtEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uw\Waiting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uw\Waiting.Designer.cs">
+      <DependentUpon>Waiting.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Img\AImg.resx">
       <DependentUpon>AImg.cs</DependentUpon>
@@ -143,6 +258,24 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Uw\Alert.resx">
+      <DependentUpon>Alert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Error.resx">
+      <DependentUpon>Error.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\HotKeys.resx">
+      <DependentUpon>HotKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Input.resx">
+      <DependentUpon>Input.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\TxtEditor.resx">
+      <DependentUpon>TxtEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uw\Waiting.resx">
+      <DependentUpon>Waiting.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -154,8 +287,30 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Api\Interfaces\" />
     <Folder Include="Img\C\" />
     <Folder Include="Img\M\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Guid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Input.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Waiting.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
