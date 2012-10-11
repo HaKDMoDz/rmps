@@ -13,15 +13,14 @@ using Me.Amon.Api.Enums;
 using Me.Amon.Api.User32;
 using Me.Amon.Auth;
 using Me.Amon.C;
-using Me.Amon.Gtd;
 using Me.Amon.M;
-using Me.Amon.Properties;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd._Cat;
 using Me.Amon.Pwd._Key;
 using Me.Amon.Pwd._Lib;
 using Me.Amon.Pwd._Log;
 using Me.Amon.Pwd.M;
+using Me.Amon.Pwd.V;
 using Me.Amon.Pwd.V.Pad;
 using Me.Amon.Pwd.V.Pro;
 using Me.Amon.Pwd.V.Wiz;
@@ -34,6 +33,9 @@ namespace Me.Amon.Pwd
 {
     public partial class APwd : Form, IApp
     {
+        private ICatTree _CatTree;
+        private IKeyList _KeyList;
+        private IFindBar _FindBar;
         #region 全局变量
         private Main _Main;
         private UserModel _UserModel;
@@ -52,14 +54,6 @@ namespace Me.Amon.Pwd
         private XmlMenu<APwd> _XmlMenu;
         #endregion
 
-        /// <summary>
-        /// 待提示节点
-        /// </summary>
-        private TreeNode _TaskNode;
-        /// <summary>
-        /// 快过期节点
-        /// </summary>
-        private TreeNode _TaskExpiredNode;
         /// <summary>
         /// 消息等待时间
         /// </summary>
@@ -111,10 +105,6 @@ namespace Me.Amon.Pwd
             #endregion
 
             LoadLayout();
-
-            InitCat();
-            InitKey();
-            FbFind.APwd = this;
 
             // 当前时间
             UcTimer.Start();
@@ -178,7 +168,7 @@ namespace Me.Amon.Pwd
 
         public new bool Focus()
         {
-            return FbFind.Focus();
+            return _PwdView.Focus();
         }
 
         public bool CanExit()
@@ -273,389 +263,6 @@ namespace Me.Amon.Pwd
             base.WndProc(ref m);
         }
 
-        #region CatTree拖拽事件
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TvCatTree_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            Main.LogInfo("TvCatTree_AfterSelect");
-            TreeNode node = e.Node;
-            if (node == null || node == _LastNode)
-            {
-                return;
-            }
-            _LastNode = node;
-
-            Cat cat = node.Tag as Cat;
-            if (cat != null && !string.IsNullOrWhiteSpace(cat.Meta))
-            {
-                string meta = cat.Meta.ToLower();
-                // 待提示
-                if (meta == CPwd.KEY_TASK)
-                {
-                    ListGtd(DateTime.Now, 43200);
-                    return;
-                }
-                // 已过期
-                if (meta == CPwd.KEY_TASK_VAL_EXPIRED)
-                {
-                    ListGtdExpired();
-                    return;
-                }
-                // 未过期
-                if (meta.StartsWith(CPwd.KEY_TASK_VAR))
-                {
-                    ListGtd(meta.Substring(5));
-                    return;
-                }
-            }
-
-            ListKey(node.Name);
-            return;
-        }
-
-        private void TvCatTree_ItemDrag(object sender, ItemDragEventArgs e)
-        {
-            Main.LogInfo("TvCatTree_ItemDrag");
-            if (e.Button == MouseButtons.Left)
-            {
-                TvCatTree.DoDragDrop(e.Item, DragDropEffects.All);
-            }
-        }
-
-        private void TvCatTree_DragDrop(object sender, DragEventArgs e)
-        {
-            Main.LogInfo("TvCatTree_DragDrop");
-            if (_LastDnDNode != null)
-            {
-                _LastDnDNode.BackColor = Color.Empty;
-                _LastDnDNode = null;
-            }
-
-            if (e.Data.GetDataPresent(typeof(TreeNode)))
-            {
-                SortCat_DragDrop(e);
-                return;
-            }
-
-            if (e.Data.GetDataPresent(typeof(Key)))
-            {
-                MoveKey_DragDrop(e);
-                return;
-            }
-        }
-
-        private void SortCat_DragDrop(DragEventArgs e)
-        {
-            TreeNode srcNode = e.Data.GetData(typeof(TreeNode)) as TreeNode;
-            if (srcNode == null)
-            {
-                return;
-            }
-
-            Point point = TvCatTree.PointToClient(new Point(e.X, e.Y));
-            TreeNode dstNode = TvCatTree.GetNodeAt(point);
-            // 同级不可移动
-            if (dstNode == null || dstNode == srcNode)
-            {
-                return;
-            }
-            // 上一级不可移动
-            if (dstNode == srcNode.Parent)
-            {
-                return;
-            }
-            // 下级不可移动
-            TreeNode tmpNode = dstNode.Parent;
-            while (tmpNode != null)
-            {
-                if (tmpNode == srcNode)
-                {
-                    return;
-                }
-                tmpNode = tmpNode.Parent;
-            }
-
-            Cat srcCat = srcNode.Tag as Cat;
-            if (srcCat == null)
-            {
-                return;
-            }
-            Cat dstCat = dstNode.Tag as Cat;
-            if (dstCat == null)
-            {
-                return;
-            }
-            srcCat.Parent = dstCat.Id;
-            dstCat.IsLeaf = false;
-
-            tmpNode = srcNode.Parent;
-            srcNode.Remove();
-            dstNode.Nodes.Add(srcNode);
-
-            _UserModel.DBA.SaveVcs(dstCat);
-            SortCat(tmpNode);
-            SortCat(dstNode);
-        }
-
-        private void MoveKey_DragDrop(DragEventArgs e)
-        {
-            Key key = e.Data.GetData(typeof(Key)) as Key;
-            if (key == null)
-            {
-                return;
-            }
-
-            Point point = TvCatTree.PointToClient(new Point(e.X, e.Y));
-            TreeNode dstNode = TvCatTree.GetNodeAt(point);
-            if (dstNode == null)
-            {
-                return;
-            }
-            Cat cat = dstNode.Tag as Cat;
-            if (cat == null || cat.Id == key.CatId)
-            {
-                return;
-            }
-
-            key.CatId = cat.Id;
-            _UserModel.DBA.SaveVcs(key);
-
-            LastOpt();
-        }
-
-        private void TvCatTree_DragOver(object sender, DragEventArgs e)
-        {
-            Main.LogInfo("TvCatTree_DragOver");
-            if (e.Data.GetDataPresent(typeof(TreeNode)))
-            {
-                SortCat_DragOver(e);
-                return;
-            }
-
-            if (e.Data.GetDataPresent(typeof(Key)))
-            {
-                MoveKey_DragOver(e);
-                return;
-            }
-
-            e.Effect = DragDropEffects.None;
-        }
-
-        private void SortCat_DragOver(DragEventArgs e)
-        {
-            if (_LastDnDNode != null)
-            {
-                _LastDnDNode.BackColor = Color.Empty;
-            }
-            TreeNode srcNode = (TreeNode)e.Data.GetData(typeof(TreeNode));
-            if (srcNode == null)
-            {
-                return;
-            }
-
-            Point point = TvCatTree.PointToClient(new Point(e.X, e.Y));
-            TreeNode dstNode = TvCatTree.GetNodeAt(point);
-            if (dstNode == null || dstNode == srcNode)
-            {
-                e.Effect = DragDropEffects.None;
-                return;
-            }
-
-            dstNode.BackColor = Color.LightBlue;
-            e.Effect = DragDropEffects.Move;
-            _LastDnDNode = dstNode;
-        }
-
-        private void MoveKey_DragOver(DragEventArgs e)
-        {
-            if (_LastDnDNode != null)
-            {
-                _LastDnDNode.BackColor = Color.Empty;
-            }
-            Key key = e.Data.GetData(typeof(Key)) as Key;
-            if (key == null)
-            {
-                return;
-            }
-
-            Point point = TvCatTree.PointToClient(new Point(e.X, e.Y));
-            TreeNode dstNode = TvCatTree.GetNodeAt(point);
-            if (dstNode == null)
-            {
-                e.Effect = DragDropEffects.None;
-                return;
-            }
-
-            dstNode.BackColor = Color.LightBlue;
-            e.Effect = DragDropEffects.Move;
-            _LastDnDNode = dstNode;
-        }
-        private TreeNode _LastDnDNode;
-        #endregion
-
-        #region KeyList拖拽事件
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void LbKeyList_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            e.DrawBackground();
-
-            if (e.Index <= -1 || e.Index >= LbKeyList.Items.Count)
-            {
-                return;
-            }
-            Key key = LbKeyList.Items[e.Index] as Key;
-            if (key == null)
-            {
-                return;
-            }
-
-            e.Graphics.DrawImage(key.Icon, e.Bounds.X + 3, e.Bounds.Y + 3, 24, 24);
-
-            //最后把要显示的文字画在背景图片上
-            int y = e.Bounds.Y + 2;
-            e.Graphics.DrawString(key.Title, LbKeyList.Font, Brushes.Black, e.Bounds.X + 30, y);
-
-            y = e.Bounds.Y + e.Bounds.Height;
-            e.Graphics.DrawString(key.AccessTime, LbKeyList.Font, Brushes.Gray, e.Bounds.X + 30, y - 14);
-
-            int x = e.Bounds.X + e.Bounds.Width;
-            y -= 16;
-            if (key.GtdIcon != null)
-            {
-                e.Graphics.DrawImage(key.GtdIcon, x - 48, y);
-            }
-            if (key.LabelIcon != null)
-            {
-                e.Graphics.DrawImage(key.LabelIcon, x - 32, y);
-            }
-            if (key.MajorIcon != null)
-            {
-                e.Graphics.DrawImage(key.MajorIcon, x - 16, y);
-            }
-        }
-
-        private void LbKeyList_MouseDown(object sender, MouseEventArgs e)
-        {
-            Main.LogInfo("LbKeyList_MouseDown");
-            //int idx = LbKeyList.SelectedIndex;
-            //if (idx < 0 || idx != LbKeyList.IndexFromPoint(e.X, e.Y))
-            //{
-            //    return;
-            //}
-
-            //////LbKeyList.SelectedIndex = idx;
-            //Key key = LbKeyList.SelectedItem as Key;
-            //if (key != null)
-            //{
-            //    //LbKeyList.DoDragDrop(key, DragDropEffects.All);
-            //}
-        }
-
-        private void LbKeyList_DragDrop(object sender, DragEventArgs e)
-        {
-            Main.LogInfo("LbKeyList_DragDrop");
-            //Point point = LbKeyList.PointToClient(new Point(e.X, e.Y));
-            //int idx = LbKeyList.IndexFromPoint(point);
-            //if (idx < 0)
-            //{
-            //    return;
-            //}
-
-            //LbKeyList.SelectedIndex = idx;
-        }
-
-        private void LbKeyList_DragEnter(object sender, DragEventArgs e)
-        {
-            Main.LogInfo("LbKeyList_DragEnter");
-        }
-
-        private void LbKeyList_DragOver(object sender, DragEventArgs e)
-        {
-            Main.LogInfo("LbKeyList_DragOver");
-            //Type type = typeof(Key);
-            //if (!e.Data.GetDataPresent(type))
-            //{
-            //    e.Effect = DragDropEffects.None;
-            //    return;
-            //}
-            //Key srcObj = e.Data.GetData(type) as Key;
-
-            //Point point = LbKeyList.PointToClient(new Point(e.X, e.Y));
-            //int idx = LbKeyList.IndexFromPoint(point);
-            e.Effect = DragDropEffects.Move;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void LbKeyList_MouseUp(object sender, MouseEventArgs e)
-        {
-            Main.LogInfo("LbKeyList_MouseUp");
-            if (e.Button != MouseButtons.Right)
-            {
-                return;
-            }
-            int idx = LbKeyList.IndexFromPoint(e.Location);
-            if (idx >= LbKeyList.Items.Count)
-            {
-                return;
-            }
-            if (LbKeyList.SelectedIndex != idx)
-            {
-                if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您当前的数据尚未保存，要丢弃吗？"))
-                {
-                    return;
-                }
-
-                _SafeModel.Modified = false;
-                LbKeyList.SelectedIndex = idx;
-            }
-            CmKey.Show(LbKeyList, e.Location);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void LbKeyList_SelectedIndexChanged(object sender, System.EventArgs e)
-        {
-            Main.LogInfo("LbKeyList_SelectedIndexChanged");
-            Key key = LbKeyList.SelectedItem as Key;
-            if (key == null || _SafeModel.Key == key)
-            {
-                return;
-            }
-
-            if (!CharUtil.IsValidateHash(key.Id))
-            {
-                Main.ShowAlert("系统异常，请稍后重试！");
-                return;
-            }
-
-            if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您当前的数据尚未保存，要丢弃吗？"))
-            {
-                LbKeyList.SelectedItem = _SafeModel.Key;
-                return;
-            }
-
-            _SafeModel.Key = key;
-            _SafeModel.Decode();
-
-            ShowKey(key);
-        }
-        #endregion
-
         /// <summary>
         /// 时钟信息
         /// </summary>
@@ -699,17 +306,6 @@ namespace Me.Amon.Pwd
                 return _XmlMenu.GetGroup(key);
             }
             return null;
-        }
-
-        public void ChangeView(UserControl uc)
-        {
-            uc.Dock = DockStyle.Fill;
-            uc.Location = new Point(3, 35);
-            uc.Size = new Size(350, 296);
-            uc.TabIndex = 0;
-
-            HSplit.Panel2.Controls.Clear();
-            HSplit.Panel2.Controls.Add(uc);
         }
 
         public void ShowIcoSeeker(string rootDir, AmonHandler<Png> handler)
@@ -861,8 +457,9 @@ namespace Me.Amon.Pwd
         {
             get
             {
-                TreeNode node = TvCatTree.SelectedNode;
-                return node != null ? node.Tag as Cat : null;
+                //TreeNode node = TvCatTree.SelectedNode;
+                //return node != null ? node.Tag as Cat : null;
+                return null;
             }
         }
 
@@ -921,7 +518,7 @@ namespace Me.Amon.Pwd
             if (cur == null)
             {
                 Main.ShowAlert("请选择您要更新的类别！");
-                TvCatTree.Focus();
+                //TvCatTree.Focus();
                 return;
             }
 
@@ -945,7 +542,7 @@ namespace Me.Amon.Pwd
             if (cat == null)
             {
                 Main.ShowAlert("请选择您要删除的类别！");
-                TvCatTree.Focus();
+                //TvCatTree.Focus();
                 return;
             }
 
@@ -1019,10 +616,10 @@ namespace Me.Amon.Pwd
             currCat.Order -= 1;
             _UserModel.DBA.SaveVcs(currCat);
 
-            TvCatTree.SelectedNode = null;
+            //TvCatTree.SelectedNode = null;
             parent.Nodes.Remove(_LastNode);
             parent.Nodes.Insert(prevNode.Index, _LastNode);
-            TvCatTree.SelectedNode = _LastNode;
+            //TvCatTree.SelectedNode = _LastNode;
         }
 
         public void CatMoveDown()
@@ -1056,10 +653,10 @@ namespace Me.Amon.Pwd
             nextCat.Order -= 1;
             _UserModel.DBA.SaveVcs(nextCat);
 
-            TvCatTree.SelectedNode = null;
+            //TvCatTree.SelectedNode = null;
             parent.Nodes.Remove(_LastNode);
             parent.Nodes.Insert(nextNode.Index + 1, _LastNode);
-            TvCatTree.SelectedNode = _LastNode;
+            //TvCatTree.SelectedNode = _LastNode;
         }
 
         /// <summary>
@@ -1067,49 +664,6 @@ namespace Me.Amon.Pwd
         /// </summary>
         public void CatPromotion()
         {
-            TreeNode node = TvCatTree.SelectedNode;
-            if (node == null || node == _RootNode)
-            {
-                return;
-            }
-            Cat curCat = node.Tag as Cat;
-            if (curCat == null)
-            {
-                return;
-            }
-
-            TreeNode parent = node.Parent;
-            if (parent == null || parent == _RootNode)
-            {
-                return;
-            }
-            Cat parentCat = parent.Tag as Cat;
-            if (parentCat == null)
-            {
-                return;
-            }
-
-            TreeNode grand = parent.Parent;
-            if (grand == null)
-            {
-                return;
-            }
-            Cat grandCat = grand.Tag as Cat;
-            if (grandCat == null)
-            {
-                return;
-            }
-
-            node.Remove();
-            grand.Nodes.Add(node);
-
-            curCat.Parent = grandCat.Id;
-            parentCat.IsLeaf = parent.Nodes.Count < 1;
-
-            SortCat(parent);
-            SortCat(grand);
-
-            TvCatTree.SelectedNode = node;
         }
 
         /// <summary>
@@ -1117,43 +671,6 @@ namespace Me.Amon.Pwd
         /// </summary>
         public void CatDemotion()
         {
-            TreeNode node = TvCatTree.SelectedNode;
-            if (node == null || node == _RootNode)
-            {
-                return;
-            }
-            Cat curCat = node.Tag as Cat;
-            if (curCat == null)
-            {
-                return;
-            }
-
-            TreeNode prev = node.PrevNode;
-            if (prev == null || prev == _RootNode)
-            {
-                return;
-            }
-            Cat prevCat = prev.Tag as Cat;
-            if (prevCat == null)
-            {
-                return;
-            }
-
-            TreeNode parent = node.Parent;
-            if (parent == null)
-            {
-                return;
-            }
-            node.Remove();
-            prev.Nodes.Add(node);
-
-            curCat.Parent = prevCat.Id;
-            prevCat.IsLeaf = false;
-
-            SortCat(parent);
-            SortCat(prev);
-
-            TvCatTree.SelectedNode = node;
         }
 
         public void ChangeCatIcon()
@@ -1221,7 +738,7 @@ namespace Me.Amon.Pwd
                     if (cat == null)
                     {
                         Main.ShowAlert("请选择类别！");
-                        TvCatTree.Focus();
+                        //TvCatTree.Focus();
                         return;
                     }
 
@@ -1257,12 +774,12 @@ namespace Me.Amon.Pwd
 
             if (_SafeModel.IsUpdate)
             {
-                Key key = LbKeyList.SelectedItem as Key;
-                if (key != null && _SafeModel.Key == key)
-                {
-                    LbKeyList.Items[LbKeyList.SelectedIndex] = _SafeModel.Key;
-                }
-                LbKeyList.Refresh();
+                //Key key = LbKeyList.SelectedItem as Key;
+                //if (key != null && _SafeModel.Key == key)
+                //{
+                //    LbKeyList.Items[LbKeyList.SelectedIndex] = _SafeModel.Key;
+                //}
+                //LbKeyList.Refresh();
             }
             else
             {
@@ -1292,7 +809,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            LbKeyList.Items.RemoveAt(LbKeyList.SelectedIndex);
+            //LbKeyList.Items.RemoveAt(LbKeyList.SelectedIndex);
 
             _UserModel.DBA.RemoveVcs(_SafeModel.Key);
             _SafeModel.Modified = false;
@@ -1302,70 +819,11 @@ namespace Me.Amon.Pwd
 
         public void ListGtdExpired()
         {
-            IList<Gtd.M.MGtd> gtds = _UserModel.DBA.FindKeyByGtdExpired();
-            List<Key> keys = new List<Key>();
-            foreach (Gtd.M.MGtd gtd in gtds)
-            {
-                keys.Add(_UserModel.DBA.ReadKey(gtd.RefId));
-            }
-            DoInitKey(keys);
         }
 
         public void ListGtd(DateTime time, int seconds)
         {
-            IList<Gtd.M.MGtd> gtds = _UserModel.DBA.ListGtdWithRef();
-            List<Key> keys = new List<Key>();
-            foreach (Gtd.M.MGtd gtd in gtds)
-            {
-                gtd.Test(time, seconds);
-                if (gtd.Status == CGtd.STATUS_ONTIME)
-                {
-                    keys.Add(_UserModel.DBA.ReadKey(gtd.RefId));
-                }
-            }
-            DoInitKey(keys);
-        }
 
-        public void ListGtd(string meta)
-        {
-            Match match = Regex.Match(meta, "^\\d+");
-            if (!match.Success)
-            {
-                return;
-            }
-
-            meta = meta.Substring(match.Value.Length);
-            int tmp = int.Parse(match.Value);
-            DateTime now = DateTime.Now;
-            DateTime end;
-            switch (meta)
-            {
-                case "second":
-                    end = now.AddSeconds(tmp);
-                    break;
-                case "minute":
-                    end = now.AddMinutes(tmp);
-                    break;
-                case "hour":
-                    end = now.AddHours(tmp);
-                    break;
-                case "day":
-                    end = now.AddDays(tmp);
-                    break;
-                case "week":
-                    end = now.AddDays(tmp * 7);
-                    break;
-                case "month":
-                    end = now.AddMonths(tmp);
-                    break;
-                case "year":
-                    end = now.AddYears(tmp);
-                    break;
-                default:
-                    return;
-            }
-
-            ListGtd(now, (int)Math.Ceiling((end - now).TotalSeconds));
         }
 
         public void ListKey(string catId)
@@ -1383,23 +841,7 @@ namespace Me.Amon.Pwd
 
         public void FindKey(string meta)
         {
-            if (!CharUtil.IsValidate(meta))
-            {
-                TvCatTree.SelectedNode = _LastNode;
-                ListKey(_LastNode.Name);
-                return;
-            }
-
-            meta = Regex.Replace(meta, "[+＋\\s]+", " ");
-            if (string.IsNullOrEmpty(meta))
-            {
-                Main.ShowAlert("您输入的查询条件无效！");
-                return;
-            }
-
-            TvCatTree.SelectedNode = null;
-
-            DoFindKey(meta);
+            _KeyList.FindKeys(meta);
 
             _IsSearch = true;
             _LastMeta = meta;
@@ -1409,11 +851,11 @@ namespace Me.Amon.Pwd
         {
             if (_IsSearch)
             {
-                DoFindKey(_LastMeta);
+                _KeyList.FindKeys(_LastMeta);
             }
             else
             {
-                DoListKey(_LastHash);
+                _KeyList.ListKeys(_LastHash);
             }
         }
 
@@ -1435,12 +877,12 @@ namespace Me.Amon.Pwd
             _SafeModel.Key.CatId = catId;
             _UserModel.DBA.SaveVcs(_SafeModel.Key);
 
-            Key key = LbKeyList.SelectedItem as Key;
-            if (key == null || key.Id != _SafeModel.Key.Id)
-            {
-                return;
-            }
-            LbKeyList.Items.RemoveAt(LbKeyList.SelectedIndex);
+            //Key key = LbKeyList.SelectedItem as Key;
+            //if (key == null || key.Id != _SafeModel.Key.Id)
+            //{
+            //    return;
+            //}
+            //LbKeyList.Items.RemoveAt(LbKeyList.SelectedIndex);
         }
 
         /// <summary>
@@ -1449,16 +891,7 @@ namespace Me.Amon.Pwd
         /// <param name="label"></param>
         public void ChangeKeyLabel(int label)
         {
-            if (_SafeModel.Key == null || label < 0 || label > 9)
-            {
-                return;
-            }
-
-            _SafeModel.Key.Label = label;
-            _SafeModel.Key.LabelIcon = _ViewModel.GetImage(CPwd.KEY_LABEL + label);
-            _UserModel.DBA.SaveVcs(_SafeModel.Key);
-
-            LbKeyList.Refresh();
+            _KeyList.ChangeKeyLabel(label);
         }
 
         /// <summary>
@@ -1467,21 +900,12 @@ namespace Me.Amon.Pwd
         /// <param name="major"></param>
         public void ChangeKeyMajor(int major)
         {
-            if (_SafeModel.Key == null || major < -2 || major > 2)
-            {
-                return;
-            }
-
-            _SafeModel.Key.Major = major;
-            _SafeModel.Key.MajorIcon = _ViewModel.GetImage(CPwd.KEY_MAJOR + (major + 2));
-            _UserModel.DBA.SaveVcs(_SafeModel.Key);
-
-            LbKeyList.Refresh();
+            _KeyList.ChangeKeyMajor(major);
         }
 
         public void KeyMoveto()
         {
-            CatTree view = new CatTree(_UserModel);
+            Me.Amon.Pwd._Cat.CatDialog view = new Me.Amon.Pwd._Cat.CatDialog(_UserModel);
             view.Init(IlCatTree);
             view.CallBack = new AmonHandler<string>(ChangeKeyCat);
             BeanUtil.CenterToParent(view, this);
@@ -1636,11 +1060,11 @@ namespace Me.Amon.Pwd
                 {
                     return;
                 }
-                _PwdView.HideView(PlBody);
+                _PwdView.HideView(TcTool.ContentPanel);
             }
 
             _PwdView = _ProView;
-            _PwdView.InitView(PlBody);
+            _PwdView.InitView(TcTool.ContentPanel);
             ShowKey(_SafeModel.Key);
 
             ItemGroup group = _XmlMenu.GetGroup("att-edit");
@@ -1668,11 +1092,11 @@ namespace Me.Amon.Pwd
                 {
                     return;
                 }
-                _PwdView.HideView(PlBody);
+                _PwdView.HideView(TcTool.ContentPanel);
             }
 
             _PwdView = _WizView;
-            _PwdView.InitView(PlBody);
+            _PwdView.InitView(TcTool.ContentPanel);
             ShowKey(_SafeModel.Key);
 
             ItemGroup group = _XmlMenu.GetGroup("att-edit");
@@ -1767,11 +1191,11 @@ namespace Me.Amon.Pwd
         {
             get
             {
-                return FbFind.Visible;
+                return _FindBar.Visible;
             }
             set
             {
-                FbFind.Visible = value;
+                _FindBar.Visible = value;
                 _ViewModel.FindBarVisible = value;
             }
         }
@@ -1783,12 +1207,11 @@ namespace Me.Amon.Pwd
         {
             get
             {
-                return !HSplit.Panel1Collapsed;
+                return _PwdView.NavPaneVisible;
             }
             set
             {
-                HSplit.Panel1Collapsed = !value;
-                _ViewModel.NavPaneVisible = value;
+                _PwdView.NavPaneVisible = value;
             }
         }
 
@@ -1799,19 +1222,11 @@ namespace Me.Amon.Pwd
         {
             get
             {
-                return !VSplit.Panel1Collapsed;
+                return _PwdView.CatTreeVisible;
             }
             set
             {
-                if (!value && VSplit.Panel2Collapsed)
-                {
-                    NavPaneVisible = false;
-                }
-                else
-                {
-                    VSplit.Panel1Collapsed = !value;
-                    _ViewModel.CatTreeVisible = value;
-                }
+                _PwdView.CatTreeVisible = value;
             }
         }
 
@@ -1822,19 +1237,11 @@ namespace Me.Amon.Pwd
         {
             get
             {
-                return !VSplit.Panel2Collapsed;
+                return _PwdView.KeyListVisible;
             }
             set
             {
-                if (!value && VSplit.Panel1Collapsed)
-                {
-                    NavPaneVisible = false;
-                }
-                else
-                {
-                    VSplit.Panel2Collapsed = !value;
-                    _ViewModel.KeyListVisible = value;
-                }
+                _PwdView.KeyListVisible = value;
             }
         }
         #endregion
@@ -1846,12 +1253,7 @@ namespace Me.Amon.Pwd
         /// </summary>
         public void ShowFind()
         {
-            if (!FbFind.Visible)
-            {
-                FbFind.Visible = true;
-            }
-
-            FbFind.Focus();
+            _FindBar.Visible = true;
         }
 
         /// <summary>
@@ -1873,8 +1275,8 @@ namespace Me.Amon.Pwd
             }
 
             _LastNode = null;
-            TvCatTree.SelectedNode = null;
-            LbKeyList.Items.Clear();
+            //TvCatTree.SelectedNode = null;
+            //LbKeyList.Items.Clear();
 
             if (DialogResult.OK != Main.ShowSaveFileDialog(this, "密码箱备份文件|*.apbak", ""))
             {
@@ -1945,16 +1347,11 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            TreeNode node = TvCatTree.SelectedNode;
-            if (node == null)
-            {
-                Main.ShowAlert("请选择您要导出的类别！");
-                TvCatTree.Focus();
-                return;
-            }
-            Cat cat = node.Tag as Cat;
+            Cat cat = _CatTree.SelectedCat;
             if (cat == null)
             {
+                Main.ShowAlert("请选择您要导出的类别！");
+                _CatTree.Focus();
                 return;
             }
 
@@ -1962,7 +1359,7 @@ namespace Me.Amon.Pwd
             if (keys.Count < 1)
             {
                 Main.ShowAlert("当前类别下没有记录！");
-                TvCatTree.Focus();
+                _CatTree.Focus();
                 return;
             }
 
@@ -2003,16 +1400,11 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            TreeNode node = TvCatTree.SelectedNode;
-            if (node == null)
-            {
-                Main.ShowAlert("请选择您要导出的类别！");
-                TvCatTree.Focus();
-                return;
-            }
-            Cat cat = node.Tag as Cat;
+            Cat cat = _CatTree.SelectedCat;
             if (cat == null)
             {
+                Main.ShowAlert("请选择您要导出的类别！");
+                _CatTree.Focus();
                 return;
             }
 
@@ -2020,7 +1412,7 @@ namespace Me.Amon.Pwd
             if (keys.Count < 1)
             {
                 Main.ShowAlert("当前类别下没有记录！");
-                TvCatTree.Focus();
+                _CatTree.Focus();
                 return;
             }
 
@@ -2073,11 +1465,11 @@ namespace Me.Amon.Pwd
                 }
             }
 
-            Cat cat = _LastNode.Tag as Cat;
+            Cat cat = _CatTree.SelectedCat;
             if (cat == null)
             {
                 Main.ShowAlert("请选择您要导入的类别！");
-                TvCatTree.Focus();
+                _CatTree.Focus();
                 return;
             }
 
@@ -2139,11 +1531,11 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            Cat cat = _LastNode.Tag as Cat;
+            Cat cat = _CatTree.SelectedCat;
             if (cat == null)
             {
                 Main.ShowAlert("请选择您要导入的类别！");
-                TvCatTree.Focus();
+                _CatTree.Focus();
                 return;
             }
 
@@ -2211,11 +1603,11 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            Cat cat = _LastNode.Tag as Cat;
+            Cat cat = _CatTree.SelectedCat;
             if (cat == null)
             {
                 Main.ShowAlert("请选择您要导入的类别！");
-                TvCatTree.Focus();
+                _CatTree.Focus();
                 return;
             }
 
@@ -2428,11 +1820,11 @@ namespace Me.Amon.Pwd
                 }
             }
 
-            Cat cat = _LastNode.Tag as Cat;
+            Cat cat = _CatTree.SelectedCat;
             if (cat == null)
             {
                 Main.ShowAlert("请选择您要导入的类别！");
-                TvCatTree.Focus();
+                _CatTree.Focus();
                 return;
             }
 
@@ -2574,124 +1966,8 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 私有函数
-        /// <summary>
-        /// 类别视图初始化
-        /// </summary>
-        private void InitCat()
-        {
-            IlCatTree.Images.Add(CPwd.DEF_CAT_IMG, BeanUtil.NaN16);
-
-            Cat cat = new Cat { Id = CPwd.DEF_CAT_ID, Text = "默认类别", Tips = "默认类别", Icon = "Amon" };
-            IlCatTree.Images.Add(cat.Icon, Resources.Logo);
-            _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Icon, SelectedImageKey = cat.Icon };
-            _RootNode.Tag = cat;
-            TvCatTree.Nodes.Add(_RootNode);
-            DoInitCat(_RootNode);
-            _RootNode.Expand();
-        }
-
-        private void DoInitCat(TreeNode root)
-        {
-            foreach (Cat cat in _UserModel.DBA.ListCat(CApp.IAPP_APWD, root.Name))
-            {
-                TreeNode node = new TreeNode();
-                node.Name = cat.Id;
-                node.Text = cat.Text;
-                node.ToolTipText = cat.Tips;
-                node.Tag = cat;
-                if (CharUtil.IsValidateHash(cat.Icon))
-                {
-                    IlCatTree.Images.Add(cat.Icon, BeanUtil.ReadImage(Path.Combine(_DataModel.CatDir, cat.Icon + ".png"), BeanUtil.NaN16));
-                    node.ImageKey = cat.Icon;
-                }
-                else
-                {
-                    node.ImageKey = CPwd.DEF_CAT_IMG;
-                }
-                node.SelectedImageKey = node.ImageKey;
-
-                root.Nodes.Add(node);
-                if (!cat.IsLeaf)
-                {
-                    DoInitCat(node);
-                }
-
-                if (cat.Meta == CPwd.KEY_TASK)
-                {
-                    _TaskNode = node;
-                    continue;
-                }
-                if (cat.Meta == CPwd.KEY_TASK_VAL_EXPIRED)
-                {
-                    _TaskExpiredNode = node;
-                    continue;
-                }
-            }
-        }
-
-        private void SortCat(TreeNode root)
-        {
-            if (root == null)
-            {
-                return;
-            }
-
-            Cat cat;
-            foreach (TreeNode node in root.Nodes)
-            {
-                cat = node.Tag as Cat;
-                if (cat == null)
-                {
-                    continue;
-                }
-                cat.Order = node.Index;
-                _UserModel.DBA.SaveVcs(cat);
-            }
-        }
-
-        private void InitKey()
-        {
-        }
-
-        private void DoInitKey(IList<Key> keys)
-        {
-            LbKeyList.Items.Clear();
-
-            foreach (Key key in keys)
-            {
-                LbKeyList.Items.Add(key);
-
-                if (CharUtil.IsValidateHash(key.IcoName))
-                {
-                    if (CharUtil.IsValidateHash(key.IcoPath))
-                    {
-                        key.Icon = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoPath, key.IcoName + CApp.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
-                    }
-                    else
-                    {
-                        key.Icon = BeanUtil.ReadImage(Path.Combine(_DataModel.KeyDir, key.IcoName + CApp.IMG_KEY_LIST_EXT), BeanUtil.NaN24);
-                    }
-                }
-                else
-                {
-                    key.Icon = BeanUtil.NaN24;
-                }
-
-                key.LabelIcon = _ViewModel.GetImage(CPwd.KEY_LABEL + key.Label);
-                key.MajorIcon = _ViewModel.GetImage(CPwd.KEY_MAJOR + (key.Major + 2));
-                key.GtdIcon = CharUtil.IsValidateHash(key.GtdId) ? Resources.Hint : BeanUtil.NaN16;
-            }
-        }
-
         private void DoListKey(string catId)
         {
-            IList<Key> keys = _UserModel.DBA.ListKey(catId);
-            DoInitKey(keys);
-        }
-
-        private void DoFindKey(string meta)
-        {
-            DoInitKey(_UserModel.DBA.FindKey(meta));
         }
 
         private void DoImportKey()
@@ -2729,12 +2005,6 @@ namespace Me.Amon.Pwd
             MbMenu.Visible = _ViewModel.MenuBarVisible;
             TbTool.Visible = _ViewModel.ToolBarVisible;
             SsEcho.Visible = _ViewModel.EchoBarVisible;
-            FbFind.Visible = _ViewModel.FindBarVisible;
-
-            HSplit.SplitterDistance = _ViewModel.HSplitDistance;
-            HSplit.Panel1Collapsed = !_ViewModel.NavPaneVisible;
-
-            VSplit.SplitterDistance = _ViewModel.VSplitDistance;
         }
 
         /// <summary>
@@ -2768,14 +2038,6 @@ namespace Me.Amon.Pwd
             _ViewModel.MenuBarVisible = MbMenu.Visible;
             _ViewModel.ToolBarVisible = TbTool.Visible;
             _ViewModel.EchoBarVisible = SsEcho.Visible;
-            _ViewModel.FindBarVisible = FbFind.Visible;
-
-            _ViewModel.HSplitDistance = HSplit.SplitterDistance;
-            _ViewModel.NavPaneVisible = !HSplit.Panel1Collapsed;
-
-            _ViewModel.VSplitDistance = VSplit.SplitterDistance;
-            _ViewModel.CatTreeVisible = !VSplit.Panel1Collapsed;
-            _ViewModel.KeyListVisible = !VSplit.Panel2Collapsed;
 
             _ViewModel.SaveLayout();
         }
@@ -2788,10 +2050,10 @@ namespace Me.Amon.Pwd
 
         private void TssEcho_DoubleClick(object sender, EventArgs e)
         {
-            if (_TaskNode != null)
-            {
-                TvCatTree.SelectedNode = _TaskNode;
-            }
+            //if (_TaskNode != null)
+            //{
+            //    TvCatTree.SelectedNode = _TaskNode;
+            //}
         }
     }
 }

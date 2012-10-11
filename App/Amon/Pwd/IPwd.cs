@@ -43,5 +43,15 @@ namespace Me.Amon.Pwd
         void SaveAtt();
 
         void DropAtt();
+
+        void FindKey(string meta);
+
+        bool Focus();
+
+        bool NavPaneVisible { get; set; }
+
+        bool CatTreeVisible { get; set; }
+
+        bool KeyListVisible { get; set; }
     }
 }

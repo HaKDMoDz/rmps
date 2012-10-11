@@ -163,7 +163,7 @@ namespace Me.Amon.Pwd._Key
             }
             else
             {
-                IcoList dlg = new IcoList(mIcon);
+                ResViewer dlg = new ResViewer(mIcon);
                 if (DialogResult.OK != dlg.ShowDialog(this))
                 {
                     return false;

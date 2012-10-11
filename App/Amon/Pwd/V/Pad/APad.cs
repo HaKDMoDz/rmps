@@ -109,5 +109,48 @@ namespace Me.Amon.Pwd.V.Pad
         {
             _APwd.ShowTips(control, caption);
         }
+
+
+        public void FindKey(string meta)
+        {
+            throw new System.NotImplementedException();
+        }
+
+
+        public bool NavPaneVisible
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+                throw new System.NotImplementedException();
+            }
+        }
+
+        public bool CatTreeVisible
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+                throw new System.NotImplementedException();
+            }
+        }
+
+        public bool KeyListVisible
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+                throw new System.NotImplementedException();
+            }
+        }
     }
 }

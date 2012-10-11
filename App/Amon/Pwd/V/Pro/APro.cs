@@ -4,8 +4,10 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.C;
+using Me.Amon.M;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd.M;
+using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.V.Pro
 {
@@ -68,10 +70,29 @@ namespace Me.Amon.Pwd.V.Pro
         #endregion
 
         #region 接口实现
+        public ICatTree CatTree { get; set; }
+        public IKeyList KeyList { get; set; }
+
         public void InitView(Panel panel)
         {
             panel.Controls.Add(this);
             Dock = DockStyle.Fill;
+
+            VSplit.Panel1.Controls.Add(CatTree.Control);
+            CatTree.Control.Dock = System.Windows.Forms.DockStyle.Fill;
+            //this.catTree1.Location = new System.Drawing.Point(0, 0);
+            //this.catTree1.Name = "catTree1";
+            //this.catTree1.Size = new System.Drawing.Size(152, 151);
+            //this.catTree1.TabIndex = 0;
+
+            VSplit.Panel2.Controls.Add(KeyList.Control);
+            KeyList.Control.Dock = System.Windows.Forms.DockStyle.Fill;
+            //this.keyList1.Location = new System.Drawing.Point(0, 0);
+            //this.keyList1.Name = "keyList1";
+            //this.keyList1.Size = new System.Drawing.Size(152, 148);
+            //this.keyList1.TabIndex = 0;
+
+            //KeyList.AttView = this;
         }
 
         public void HideView(Panel panel)
@@ -362,6 +383,12 @@ namespace Me.Amon.Pwd.V.Pro
             }
             GvAttList.Rows[_LastIndex].Selected = true;
         }
+
+        public Cat SelectedCat
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region 公有函数
@@ -640,7 +667,103 @@ namespace Me.Amon.Pwd.V.Pro
                         GvAttList.ClearSelection();
                         GvAttList.Rows[e.RowIndex].Selected = true;
                     }
-                    CmAtt.Show(MousePosition);
+                    //CmAtt.Show(MousePosition);
+                }
+            }
+        }
+
+        public void LoadLayout(ViewModel _ViewModel)
+        {
+            findBar1.Visible = _ViewModel.FindBarVisible;
+
+            HSplit.SplitterDistance = _ViewModel.HSplitDistance;
+            HSplit.Panel1Collapsed = !_ViewModel.NavPaneVisible;
+
+            VSplit.SplitterDistance = _ViewModel.VSplitDistance;
+        }
+
+        public void SaveLayout(ViewModel _ViewModel)
+        {
+            _ViewModel.FindBarVisible = findBar1.Visible;
+
+            _ViewModel.HSplitDistance = HSplit.SplitterDistance;
+            _ViewModel.NavPaneVisible = !HSplit.Panel1Collapsed;
+
+            _ViewModel.VSplitDistance = VSplit.SplitterDistance;
+            _ViewModel.CatTreeVisible = !VSplit.Panel1Collapsed;
+            _ViewModel.KeyListVisible = !VSplit.Panel2Collapsed;
+        }
+
+        public void FindKey(string meta)
+        {
+            if (!CharUtil.IsValidate(meta))
+            {
+                //keyList1.ListKeys(_LastNode.Name);
+                return;
+            }
+
+            KeyList.FindKeys(meta);
+        }
+
+        /// <summary>
+        /// 查找
+        /// </summary>
+        public void ShowFind()
+        {
+            if (!findBar1.Visible)
+            {
+                findBar1.Visible = true;
+            }
+
+            findBar1.Focus();
+        }
+        public bool NavPaneVisible
+        {
+            get
+            {
+                return !HSplit.Panel1Collapsed;
+            }
+            set
+            {
+                HSplit.Panel1Collapsed = !value;
+                _ViewModel.NavPaneVisible = value;
+            }
+        }
+        public bool CatTreeVisible
+        {
+            get
+            {
+                return !VSplit.Panel1Collapsed;
+            }
+            set
+            {
+                if (!value && VSplit.Panel2Collapsed)
+                {
+                    NavPaneVisible = false;
+                }
+                else
+                {
+                    VSplit.Panel1Collapsed = !value;
+                    _ViewModel.CatTreeVisible = value;
+                }
+            }
+        }
+        public bool KeyListVisible
+        {
+            get
+            {
+                return !VSplit.Panel2Collapsed;
+            }
+            set
+            {
+                if (!value && VSplit.Panel1Collapsed)
+                {
+                    NavPaneVisible = false;
+                }
+                else
+                {
+                    VSplit.Panel2Collapsed = !value;
+                    _ViewModel.KeyListVisible = value;
                 }
             }
         }

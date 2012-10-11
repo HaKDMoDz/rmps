@@ -3,7 +3,7 @@ using Me.Amon.Pwd.M;
 
 namespace Me.Amon.Pwd.V.Pro
 {
-    public interface IAttEdit
+    interface IAttEdit
     {
         void InitOnce(DataModel dataModel, ViewModel viewModel);
 

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Me.Amon.Api.Struct
+namespace Me.Amon.Api.Structures
 {
 #pragma warning disable 649
     /// <summary>

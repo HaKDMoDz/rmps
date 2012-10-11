@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd._Key
 {
-    partial class IcoList
+    partial class ResViewer
     {
         /// <summary>
         /// 必需的设计器变量。

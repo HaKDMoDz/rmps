@@ -5,17 +5,20 @@ using Me.Amon.Ico;
 
 namespace Me.Amon.Pwd._Key
 {
-    public partial class IcoList : Form
+    /// <summary>
+    /// 资源图标浏览器
+    /// </summary>
+    public partial class ResViewer : Form
     {
         private MultiIcon _MIcon;
 
         #region 构造函数
-        public IcoList()
+        public ResViewer()
         {
             InitializeComponent();
         }
 
-        public IcoList(MultiIcon mIcon)
+        public ResViewer(MultiIcon mIcon)
         {
             _MIcon = mIcon;
 

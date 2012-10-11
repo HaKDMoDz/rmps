@@ -10,7 +10,7 @@ namespace Me.Amon.Pwd.E._Cat
         {
             if (IApp != null)
             {
-                CatEdit catEdit = new CatEdit();
+                CatEditer catEdit = new CatEditer();
                 catEdit.CallBackHandler = new AmonHandler<Cat>(IApp.AppendCat);
                 catEdit.Show(IApp.Form, new Cat());
             }

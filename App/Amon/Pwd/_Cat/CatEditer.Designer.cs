@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd._Cat
 {
-    partial class CatEdit
+    partial class CatEditer
     {
         /// <summary>
         /// 必需的设计器变量。

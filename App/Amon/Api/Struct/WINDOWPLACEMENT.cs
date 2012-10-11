@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Api.Struct
+﻿namespace Me.Amon.Api.Structures
 {
     public struct WINDOWPLACEMENT
     {

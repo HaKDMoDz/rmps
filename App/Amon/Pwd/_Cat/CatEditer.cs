@@ -7,11 +7,11 @@ using Me.Amon.Util;
 
 namespace Me.Amon.Pwd._Cat
 {
-    public partial class CatEdit : Form
+    public partial class CatEditer : Form
     {
         private Cat _Cat;
 
-        public CatEdit()
+        public CatEditer()
         {
             InitializeComponent();
 

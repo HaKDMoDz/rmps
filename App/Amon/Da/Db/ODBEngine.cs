@@ -116,6 +116,26 @@ namespace Me.Amon.Da.Db
         }
         #endregion
 
+        public IList<T> Query<T>()
+        {
+            return Container.Query<T>();
+        }
+
+        public IList<T> Query<T>(Predicate<T> match, Comparison<T> comparison)
+        {
+            return Container.Query<T>(match, comparison);
+        }
+
+        public IList<T> Query<T>(Predicate<T> match)
+        {
+            return Container.Query<T>(match);
+        }
+
+        public void Store(object obj)
+        {
+            Container.Store(obj);
+        }
+
         #region 私有函数
         private bool Contains(string src, string[] arr)
         {
@@ -133,31 +153,12 @@ namespace Me.Amon.Da.Db
         #region 数据更新
         public void SaveVcs(Vcs vcs)
         {
-            if (vcs.Operate == DBConst.OPT_DEFAULT)
-            {
-                vcs.Version += 1;
-            }
-
-            if (vcs.Operate > DBConst.OPT_INSERT)
-            {
-                vcs.Operate += 1;
-            }
-
-            vcs.UserCode = _UserModel.Code;
-            vcs.UpdateTime = DateTime.Now;
-            if (!CharUtil.IsValidateHash(vcs.Id))
-            {
-                vcs.Id = HashUtil.UtcTimeInEnc(false);
-                vcs.CreateTime = vcs.UpdateTime;
-            }
-            Container.Store(vcs);
+            throw new Exception("TODO");
         }
 
         public void SaveLog(Log log)
         {
-            log.Id = HashUtil.UtcTimeInEnc(false);
-            log.LogTime = DateTime.Now;
-            Container.Store(log);
+            throw new Exception("TODO");
         }
         #endregion
 
@@ -236,12 +237,7 @@ namespace Me.Amon.Da.Db
         #region 记录操作
         public Key ReadKey(string keyId)
         {
-            IList<Key> keys = Container.Query<Key>(delegate(Key key)
-            {
-                return key.Id == keyId;
-            });
-
-            return keys.Count > 0 ? keys[0] : null;
+            throw new Exception("TODO");
         }
 
         public IList<Key> FindKey(string keyMeta)
@@ -269,25 +265,7 @@ namespace Me.Amon.Da.Db
 
         public IList<Key> ListKey(string catId)
         {
-            IList<Key> keys = Container.Query<Key>(
-                delegate(Key key)
-                {
-                    if (key.UserCode != _UserModel.Code)
-                    {
-                        return false;
-                    }
-                    if (key.Operate == DBConst.OPT_DELETE)
-                    {
-                        return false;
-                    }
-
-                    return key.CatId == catId;
-                },
-                delegate(Key a, Key b)
-                {
-                    return b.Order.CompareTo(a.Order);
-                });
-            return keys;
+            throw new Exception("TODO");
         }
 
         public IList<Key> FindKeyByLabel(int label)
@@ -366,30 +344,12 @@ namespace Me.Amon.Da.Db
 
         public IList<MGtd> ListGtdWithRef()
         {
-            IList<MGtd> gtds = Container.Query<MGtd>(
-                delegate(MGtd gtd)
-                {
-                    if (gtd.UserCode != _UserModel.Code)
-                    {
-                        return false;
-                    }
-                    return gtd.Status > CGtd.STATUS_SUSPEND && CharUtil.IsValidateHash(gtd.RefId);
-                });
-            return gtds;
+            throw new Exception("TODO");
         }
 
         public IList<MGtd> FindKeyByGtdExpired()
         {
-            IList<MGtd> gtds = Container.Query<MGtd>(
-                delegate(MGtd gtd)
-                {
-                    if (gtd.UserCode != _UserModel.Code)
-                    {
-                        return false;
-                    }
-                    return gtd.Status == CGtd.STATUS_EXPIRED && CharUtil.IsValidateHash(gtd.RefId);
-                });
-            return gtds;
+            throw new Exception("TODO");
         }
     }
 }

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
 using Me.Amon.C;
-using Me.Amon.M;
 using Me.Amon.Pwd.M;
 
 namespace Me.Amon.Pwd.V.Wiz
 {
     public partial class AWiz : UserControl, IPwd
     {
+        #region 全局变量
         private APwd _APwd;
         private IWizView _LastView;
         private BeanInfo _InfoBean;
@@ -18,11 +18,14 @@ namespace Me.Amon.Pwd.V.Wiz
         private SafeModel _SafeModel;
         private DataModel _DataModel;
         private ViewModel _ViewModel;
+        #endregion
 
+        #region 构造函数
         public AWiz()
         {
             InitializeComponent();
         }
+        #endregion
 
         public void Init(APwd apwd, UserModel userModel, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
         {
@@ -34,6 +37,9 @@ namespace Me.Amon.Pwd.V.Wiz
         }
 
         #region 接口实现
+        public ICatTree CatTree { get; set; }
+        public IKeyList KeyList { get; set; }
+
         public void InitView(Panel panel)
         {
             if (_LastView != null)
@@ -50,6 +56,22 @@ namespace Me.Amon.Pwd.V.Wiz
             Dock = DockStyle.Fill;
 
             _LastView = _InfoBean;
+
+            //VSplit.Panel1.Controls.Add(CatTree.Control);
+            //CatTree.Control.Dock = System.Windows.Forms.DockStyle.Fill;
+            //this.catTree1.Location = new System.Drawing.Point(0, 0);
+            //this.catTree1.Name = "catTree1";
+            //this.catTree1.Size = new System.Drawing.Size(152, 151);
+            //this.catTree1.TabIndex = 0;
+
+            //VSplit.Panel2.Controls.Add(KeyList.Control);
+            //KeyList.Control.Dock = System.Windows.Forms.DockStyle.Fill;
+            //this.keyList1.Location = new System.Drawing.Point(0, 0);
+            //this.keyList1.Name = "keyList1";
+            //this.keyList1.Size = new System.Drawing.Size(152, 148);
+            //this.keyList1.TabIndex = 0;
+
+            //KeyList.AttView = this;
         }
 
         public void HideView(Panel panel)
@@ -282,5 +304,48 @@ namespace Me.Amon.Pwd.V.Wiz
             _LastView.ShowData();
         }
         #endregion
+
+
+        public void FindKey(string meta)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public bool NavPaneVisible
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool CatTreeVisible
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool KeyListVisible
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

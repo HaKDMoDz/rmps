@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
 using Me.Amon.Api.Enums;
-using Me.Amon.Api.Struct;
+using Me.Amon.Api.Structures;
 
 namespace Me.Amon.Api.User32
 {

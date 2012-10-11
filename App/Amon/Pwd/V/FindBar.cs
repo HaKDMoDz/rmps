@@ -10,7 +10,7 @@ namespace Me.Amon.Pwd.Bean
             InitializeComponent();
         }
 
-        public APwd APwd { get; set; }
+        public IPwd APwd { get; set; }
 
         private void TbFind_TextChanged(object sender, EventArgs e)
         {

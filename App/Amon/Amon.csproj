@@ -391,6 +391,29 @@
     <Compile Include="Img\V\ASmall.Designer.cs">
       <DependentUpon>ASmall.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pwd\EKeyType.cs" />
+    <Compile Include="Pwd\V\IAttView.cs" />
+    <Compile Include="Pwd\_Cat\CatTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\_Cat\CatTree.Designer.cs">
+      <DependentUpon>CatTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\V\ICatTree.cs" />
+    <Compile Include="Pwd\V\IFindBar.cs" />
+    <Compile Include="Pwd\V\IKeyList.cs" />
+    <Compile Include="Pwd\_Key\KeyList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\_Key\KeyList.Designer.cs">
+      <DependentUpon>KeyList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pwd\V\Wiz\AAA.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pwd\V\Wiz\AAA.Designer.cs">
+      <DependentUpon>AAA.cs</DependentUpon>
+    </Compile>
     <Compile Include="Rcg\ARcg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -769,30 +792,30 @@
     <Compile Include="Pwd\V\Wiz\BeanGuid.Designer.cs">
       <DependentUpon>BeanGuid.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\_Cat\CatEdit.cs">
+    <Compile Include="Pwd\_Cat\CatEditer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pwd\_Cat\CatEdit.Designer.cs">
-      <DependentUpon>CatEdit.cs</DependentUpon>
+    <Compile Include="Pwd\_Cat\CatEditer.Designer.cs">
+      <DependentUpon>CatEditer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\Bean\FindBar.cs">
+    <Compile Include="Pwd\V\FindBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\Bean\FindBar.Designer.cs">
+    <Compile Include="Pwd\V\FindBar.Designer.cs">
       <DependentUpon>FindBar.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\IPwd.cs" />
-    <Compile Include="Pwd\_Cat\CatTree.cs">
+    <Compile Include="Pwd\_Cat\CatDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pwd\_Cat\CatTree.Designer.cs">
-      <DependentUpon>CatTree.cs</DependentUpon>
+    <Compile Include="Pwd\_Cat\CatDialog.Designer.cs">
+      <DependentUpon>CatDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\_Key\IcoList.cs">
+    <Compile Include="Pwd\_Key\ResViewer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pwd\_Key\IcoList.Designer.cs">
-      <DependentUpon>IcoList.cs</DependentUpon>
+    <Compile Include="Pwd\_Key\ResViewer.Designer.cs">
+      <DependentUpon>ResViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\_Lib\LibEditer.cs">
       <SubType>Form</SubType>
@@ -1352,6 +1375,15 @@
     <EmbeddedResource Include="Img\V\ASmall.resx">
       <DependentUpon>ASmall.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\_Cat\CatTree.resx">
+      <DependentUpon>CatTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\_Key\KeyList.resx">
+      <DependentUpon>KeyList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pwd\V\Wiz\AAA.resx">
+      <DependentUpon>AAA.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Rcg\ARcg.resx">
       <DependentUpon>ARcg.cs</DependentUpon>
     </EmbeddedResource>
@@ -1422,17 +1454,17 @@
     <EmbeddedResource Include="Pwd\V\Wiz\BeanGuid.resx">
       <DependentUpon>BeanGuid.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\_Cat\CatEdit.resx">
-      <DependentUpon>CatEdit.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\_Cat\CatEditer.resx">
+      <DependentUpon>CatEditer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\Bean\FindBar.resx">
+    <EmbeddedResource Include="Pwd\V\FindBar.resx">
       <DependentUpon>FindBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\_Cat\CatTree.resx">
-      <DependentUpon>CatTree.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\_Cat\CatDialog.resx">
+      <DependentUpon>CatDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\_Key\IcoList.resx">
-      <DependentUpon>IcoList.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\_Key\ResViewer.resx">
+      <DependentUpon>ResViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\_Lib\LibEditer.resx">
       <DependentUpon>LibEditer.cs</DependentUpon>
