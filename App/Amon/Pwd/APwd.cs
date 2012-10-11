@@ -918,7 +918,7 @@ namespace Me.Amon.Pwd
             {
                 return;
             }
-            LogEdit edit = new LogEdit(this);
+            LogViewer edit = new LogViewer(this);
             edit.Init(_UserModel, _SafeModel);
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
