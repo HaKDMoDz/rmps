@@ -9,17 +9,17 @@ using Me.Amon.Util;
 
 namespace Me.Amon.Pwd._Key
 {
-    public partial class PngList : UserControl
+    public partial class IcoEditer : UserControl
     {
         private KeyIcon _KeyIcon;
 
         #region 构造函数
-        public PngList()
+        public IcoEditer()
         {
             InitializeComponent();
         }
 
-        public PngList(KeyIcon icoEdit)
+        public IcoEditer(KeyIcon icoEdit)
         {
             _KeyIcon = icoEdit;
 

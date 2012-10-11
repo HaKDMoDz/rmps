@@ -12,8 +12,8 @@ namespace Me.Amon.Pwd._Key
     {
         #region 全局变量
         private UserModel _UserModel;
-        private DirEdit _DirEdit;
-        private PngList _IcoView;
+        private DirEditer _DirEdit;
+        private IcoEditer _IcoView;
         private Control _Control;
         private string _RootDir;
         private string _HomeDir;
@@ -117,7 +117,7 @@ namespace Me.Amon.Pwd._Key
             }
             _LastIdx = LsDir.SelectedIndex;
 
-            if (_Control is DirEdit)
+            if (_Control is DirEditer)
             {
                 ShowIcoView();
             }
@@ -140,7 +140,7 @@ namespace Me.Amon.Pwd._Key
         #region 选单事件
         private void MiAppend_Click(object sender, EventArgs e)
         {
-            if (_Control is PngList)
+            if (_Control is IcoEditer)
             {
                 ShowDirEdit();
             }
@@ -155,7 +155,7 @@ namespace Me.Amon.Pwd._Key
                 return;
             }
 
-            if (_Control is PngList)
+            if (_Control is IcoEditer)
             {
                 ShowDirEdit();
             }
@@ -191,7 +191,7 @@ namespace Me.Amon.Pwd._Key
         {
             if (_DirEdit == null)
             {
-                _DirEdit = new DirEdit(this);
+                _DirEdit = new DirEditer(this);
                 _DirEdit.Init();
                 _DirEdit.Location = new Point(138, 12);
                 _DirEdit.Size = new Size(248, 249);
@@ -209,7 +209,7 @@ namespace Me.Amon.Pwd._Key
         {
             if (_IcoView == null)
             {
-                _IcoView = new PngList(this);
+                _IcoView = new IcoEditer(this);
                 _IcoView.InitOnce();
                 _IcoView.Location = new Point(138, 12);
                 _IcoView.Size = new Size(248, 249);

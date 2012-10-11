@@ -1159,17 +1159,17 @@
     <Compile Include="Util\SafeUtil.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Pwd\_Key\DirEdit.cs">
+    <Compile Include="Pwd\_Key\DirEditer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\_Key\DirEdit.Designer.cs">
-      <DependentUpon>DirEdit.cs</DependentUpon>
+    <Compile Include="Pwd\_Key\DirEditer.Designer.cs">
+      <DependentUpon>DirEditer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\_Key\PngList.cs">
+    <Compile Include="Pwd\_Key\IcoEditer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\_Key\PngList.Designer.cs">
-      <DependentUpon>PngList.cs</DependentUpon>
+    <Compile Include="Pwd\_Key\IcoEditer.Designer.cs">
+      <DependentUpon>IcoEditer.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\_Cat\CatIcon.cs">
       <SubType>Form</SubType>
@@ -1610,11 +1610,11 @@
     <EmbeddedResource Include="User\Uc\SignOl.resx">
       <DependentUpon>SignOl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\_Key\DirEdit.resx">
-      <DependentUpon>DirEdit.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\_Key\DirEditer.resx">
+      <DependentUpon>DirEditer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\_Key\PngList.resx">
-      <DependentUpon>PngList.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\_Key\IcoEditer.resx">
+      <DependentUpon>IcoEditer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\_Cat\CatIcon.resx">
       <DependentUpon>CatIcon.cs</DependentUpon>

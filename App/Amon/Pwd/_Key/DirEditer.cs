@@ -5,18 +5,18 @@ using Me.Amon.Pwd.M;
 
 namespace Me.Amon.Pwd._Key
 {
-    public partial class DirEdit : UserControl
+    public partial class DirEditer : UserControl
     {
         private KeyIcon _IcoSeeker;
         private Dir _Item;
 
         #region 构造函数
-        public DirEdit()
+        public DirEditer()
         {
             InitializeComponent();
         }
 
-        public DirEdit(KeyIcon icoSeeker)
+        public DirEditer(KeyIcon icoSeeker)
         {
             _IcoSeeker = icoSeeker;
 
