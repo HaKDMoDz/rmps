@@ -32,7 +32,7 @@
             this.TpText = new System.Windows.Forms.TabPage();
             this.TbText = new System.Windows.Forms.TextBox();
             this.TpFile = new System.Windows.Forms.TabPage();
-            this.LbFile = new System.Windows.Forms.ListBox();
+            this.LbFile = new UcFileInfo();
             this.PbMask = new System.Windows.Forms.PictureBox();
             this.PbFile = new System.Windows.Forms.PictureBox();
             this.TcDst.SuspendLayout();
@@ -112,12 +112,8 @@
             // LbFile
             // 
             this.LbFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LbFile.FormattingEnabled = true;
-            this.LbFile.IntegralHeight = false;
-            this.LbFile.ItemHeight = 12;
             this.LbFile.Location = new System.Drawing.Point(3, 3);
             this.LbFile.Name = "LbFile";
-            this.LbFile.ScrollAlwaysVisible = true;
             this.LbFile.Size = new System.Drawing.Size(207, 186);
             this.LbFile.TabIndex = 0;
             // 
@@ -170,7 +166,7 @@
         private System.Windows.Forms.TabPage TpText;
         private System.Windows.Forms.TabPage TpFile;
         private System.Windows.Forms.TextBox TbText;
-        private System.Windows.Forms.ListBox LbFile;
+        private UcFileInfo LbFile;
         private System.Windows.Forms.PictureBox PbMask;
         private System.Windows.Forms.PictureBox PbFile;
     }

@@ -34,7 +34,7 @@
             this.TpText = new System.Windows.Forms.TabPage();
             this.TbText = new System.Windows.Forms.TextBox();
             this.TpFile = new System.Windows.Forms.TabPage();
-            this.LbFile = new System.Windows.Forms.ListBox();
+            this.UcFile = new Me.Amon.Sec.V.Wiz.UcFileInfo();
             ((System.ComponentModel.ISupportInitialize)(this.PbMask)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbFile)).BeginInit();
             this.TcSrc.SuspendLayout();
@@ -125,7 +125,7 @@
             // 
             // TpFile
             // 
-            this.TpFile.Controls.Add(this.LbFile);
+            this.TpFile.Controls.Add(this.UcFile);
             this.TpFile.Location = new System.Drawing.Point(23, 4);
             this.TpFile.Name = "TpFile";
             this.TpFile.Padding = new System.Windows.Forms.Padding(3);
@@ -134,21 +134,16 @@
             this.TpFile.Text = "文件";
             this.TpFile.UseVisualStyleBackColor = true;
             // 
-            // LbFile
+            // UcFile
             // 
-            this.LbFile.AllowDrop = true;
-            this.LbFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LbFile.FormattingEnabled = true;
-            this.LbFile.IntegralHeight = false;
-            this.LbFile.ItemHeight = 12;
-            this.LbFile.Location = new System.Drawing.Point(3, 3);
-            this.LbFile.Name = "LbFile";
-            this.LbFile.ScrollAlwaysVisible = true;
-            this.LbFile.Size = new System.Drawing.Size(203, 186);
-            this.LbFile.TabIndex = 0;
-            this.LbFile.SelectedIndexChanged += new System.EventHandler(this.LbFile_SelectedIndexChanged);
-            this.LbFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.LbFile_DragDrop);
-            this.LbFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.LbFile_DragEnter);
+            this.UcFile.AllowDrop = true;
+            this.UcFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UcFile.Location = new System.Drawing.Point(3, 3);
+            this.UcFile.Name = "UcFile";
+            this.UcFile.Size = new System.Drawing.Size(207, 186);
+            this.UcFile.TabIndex = 0;
+            this.UcFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.LbFile_DragDrop);
+            this.UcFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.LbFile_DragEnter);
             // 
             // UcSrc
             // 
@@ -175,7 +170,7 @@
         private System.Windows.Forms.TabPage TpText;
         private System.Windows.Forms.TabPage TpFile;
         private System.Windows.Forms.TextBox TbText;
-        private System.Windows.Forms.ListBox LbFile;
+        private UcFileInfo UcFile;
         private System.Windows.Forms.PictureBox PbMask;
         private System.Windows.Forms.PictureBox PbFile;
     }

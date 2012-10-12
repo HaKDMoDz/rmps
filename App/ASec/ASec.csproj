@@ -64,6 +64,11 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Api\Enums\FileAttributes.cs" />
+    <Compile Include="Api\Enums\FileInfoFlags.cs" />
+    <Compile Include="Api\Structures\SHFILEINFO.cs" />
+    <Compile Include="Api\User32\User32.cs" />
+    <Compile Include="Api\User32\User32API.cs" />
     <Compile Include="CApp.cs" />
     <Compile Include="Ce\ConfuseEngine.cs" />
     <Compile Include="Ce\WrapperEngine.cs" />
@@ -214,6 +219,12 @@
     <Compile Include="Sec\V\Wiz\Scrypto.cs" />
     <Compile Include="Sec\V\Wiz\ICrypto.cs" />
     <Compile Include="Sec\V\Wiz\IWiz.cs" />
+    <Compile Include="Sec\V\Wiz\UcFileInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\UcFileInfo.Designer.cs">
+      <DependentUpon>UcFileInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sec\V\Wiz\UwAlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -362,6 +373,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sec\V\Wiz\AWiz.resx">
       <DependentUpon>AWiz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\V\Wiz\UcFileInfo.resx">
+      <DependentUpon>UcFileInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sec\V\Wiz\UwAlg.resx">
       <DependentUpon>UwAlg.cs</DependentUpon>

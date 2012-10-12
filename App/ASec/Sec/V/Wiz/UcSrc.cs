@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
-using Me.Amon.Uc;
 
 namespace Me.Amon.Sec.V.Wiz
 {
@@ -26,34 +25,15 @@ namespace Me.Amon.Sec.V.Wiz
             _ASec.ShowTips(PbFile, "打开文件");
         }
 
-        public void AppendFiles(string[] files)
+        public void ChangeFile(string file)
         {
-            foreach (string file in files)
+            if (!File.Exists(file))
             {
-                if (Exists(file))
-                {
-                    continue;
-                }
-                LbFile.Items.Add(new Items { K = file, V = Path.GetFileName(file) });
-            }
-        }
-
-        public void RemoveSelectedFile()
-        {
-            var idx = LbFile.SelectedIndex;
-            if (idx < 0)
-            {
+                _ASec.ShowEcho(string.Format("不存在的文件：{0}", file));
                 return;
             }
-            LbFile.Items.RemoveAt(idx);
-            if (idx == LbFile.Items.Count)
-            {
-                idx -= 1;
-            }
-            if (idx > 0)
-            {
-                LbFile.SelectedIndex = idx;
-            }
+
+            UcFile.ShowFileInfo(file);
         }
 
         public void ChangeOpt(string opt)
@@ -83,12 +63,12 @@ namespace Me.Amon.Sec.V.Wiz
             }
             else if (TcSrc.SelectedTab == TpFile)
             {
-                if (LbFile.Items.Count < 1)
-                {
-                    MessageBox.Show(this, "请选择您要处理的文件！");
-                    LbFile.Focus();
-                    return false;
-                }
+                //if (LbFile.Items.Count < 1)
+                //{
+                //    MessageBox.Show(this, "请选择您要处理的文件！");
+                //    LbFile.Focus();
+                //    return false;
+                //}
             }
             return true;
         }
@@ -179,8 +159,14 @@ namespace Me.Amon.Sec.V.Wiz
                 {
                     return;
                 }
-                string[] arr = obj as string[];
-                AppendFiles(arr);
+                foreach (var tmp in obj as string[])
+                {
+                    if (string.IsNullOrWhiteSpace(tmp))
+                    {
+                        continue;
+                    }
+                    ChangeFile(tmp);
+                }
             }
             catch (Exception ex)
             {
@@ -200,26 +186,15 @@ namespace Me.Amon.Sec.V.Wiz
 
         private void PbFile_Click(object sender, EventArgs e)
         {
-            if (DialogResult.OK != Main.ShowOpenFileDialog(null, CApp.FILE_OPEN_ALL, null, true))
+            if (DialogResult.OK != Main.ShowOpenFileDialog(_ASec, CApp.FILE_OPEN_ALL, UcFile.UserFile, false))
             {
                 return;
             }
-            AppendFiles(Main.OpenFileDialog.FileNames);
+            ChangeFile(Main.OpenFileDialog.FileName);
         }
         #endregion
 
         #region 私有函数
-        private bool Exists(string file)
-        {
-            foreach (Items item in LbFile.Items)
-            {
-                if (file == item.K)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
         #endregion
     }
 }

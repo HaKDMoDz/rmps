@@ -117,8 +117,9 @@ namespace Me.Amon.Sec.V.Wiz
         #endregion
 
         #region 公共函数
-        public void AppendFiles(string[] files)
+        public void ChangeFile(string file)
         {
+            _UcSrc.ChangeFile(file);
         }
 
         public void RemoveSelectedFile()
