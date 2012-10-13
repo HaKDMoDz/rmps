@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Sec.V.Wiz
 {
-    partial class UcFileInfo
+    partial class UcSrcFile
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.PbIcon = new System.Windows.Forms.PictureBox();
             this.TbName = new System.Windows.Forms.TextBox();
             this.LlType = new System.Windows.Forms.Label();
             this.TbType = new System.Windows.Forms.TextBox();
@@ -44,17 +43,10 @@
             this.TbAccessTime = new System.Windows.Forms.TextBox();
             this.LlAccessTime = new System.Windows.Forms.Label();
             this.PbFile = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.PbIcon)).BeginInit();
+            this.PbIcon = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.PbFile)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbIcon)).BeginInit();
             this.SuspendLayout();
-            // 
-            // PbIcon
-            // 
-            this.PbIcon.Location = new System.Drawing.Point(15, 3);
-            this.PbIcon.Name = "PbIcon";
-            this.PbIcon.Size = new System.Drawing.Size(32, 32);
-            this.PbIcon.TabIndex = 0;
-            this.PbIcon.TabStop = false;
             // 
             // TbName
             // 
@@ -107,14 +99,14 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label3.Location = new System.Drawing.Point(3, 96);
+            this.label3.Location = new System.Drawing.Point(3, 98);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(201, 2);
             this.label3.TabIndex = 6;
             // 
             // TbSize
             // 
-            this.TbSize.Location = new System.Drawing.Point(62, 101);
+            this.TbSize.Location = new System.Drawing.Point(62, 108);
             this.TbSize.Name = "TbSize";
             this.TbSize.ReadOnly = true;
             this.TbSize.Size = new System.Drawing.Size(142, 21);
@@ -123,7 +115,7 @@
             // LlSize
             // 
             this.LlSize.AutoSize = true;
-            this.LlSize.Location = new System.Drawing.Point(3, 104);
+            this.LlSize.Location = new System.Drawing.Point(3, 111);
             this.LlSize.Name = "LlSize";
             this.LlSize.Size = new System.Drawing.Size(53, 12);
             this.LlSize.TabIndex = 7;
@@ -131,7 +123,7 @@
             // 
             // TbCreateTime
             // 
-            this.TbCreateTime.Location = new System.Drawing.Point(62, 128);
+            this.TbCreateTime.Location = new System.Drawing.Point(62, 135);
             this.TbCreateTime.Name = "TbCreateTime";
             this.TbCreateTime.ReadOnly = true;
             this.TbCreateTime.Size = new System.Drawing.Size(142, 21);
@@ -140,7 +132,7 @@
             // LlCreateTime
             // 
             this.LlCreateTime.AutoSize = true;
-            this.LlCreateTime.Location = new System.Drawing.Point(3, 131);
+            this.LlCreateTime.Location = new System.Drawing.Point(3, 138);
             this.LlCreateTime.Name = "LlCreateTime";
             this.LlCreateTime.Size = new System.Drawing.Size(53, 12);
             this.LlCreateTime.TabIndex = 9;
@@ -148,7 +140,7 @@
             // 
             // TbModifyTime
             // 
-            this.TbModifyTime.Location = new System.Drawing.Point(62, 155);
+            this.TbModifyTime.Location = new System.Drawing.Point(62, 162);
             this.TbModifyTime.Name = "TbModifyTime";
             this.TbModifyTime.ReadOnly = true;
             this.TbModifyTime.Size = new System.Drawing.Size(142, 21);
@@ -157,7 +149,7 @@
             // LlModifyTime
             // 
             this.LlModifyTime.AutoSize = true;
-            this.LlModifyTime.Location = new System.Drawing.Point(3, 158);
+            this.LlModifyTime.Location = new System.Drawing.Point(3, 165);
             this.LlModifyTime.Name = "LlModifyTime";
             this.LlModifyTime.Size = new System.Drawing.Size(53, 12);
             this.LlModifyTime.TabIndex = 11;
@@ -165,7 +157,7 @@
             // 
             // TbAccessTime
             // 
-            this.TbAccessTime.Location = new System.Drawing.Point(62, 182);
+            this.TbAccessTime.Location = new System.Drawing.Point(62, 189);
             this.TbAccessTime.Name = "TbAccessTime";
             this.TbAccessTime.ReadOnly = true;
             this.TbAccessTime.Size = new System.Drawing.Size(142, 21);
@@ -174,7 +166,7 @@
             // LlAccessTime
             // 
             this.LlAccessTime.AutoSize = true;
-            this.LlAccessTime.Location = new System.Drawing.Point(3, 185);
+            this.LlAccessTime.Location = new System.Drawing.Point(3, 192);
             this.LlAccessTime.Name = "LlAccessTime";
             this.LlAccessTime.Size = new System.Drawing.Size(53, 12);
             this.LlAccessTime.TabIndex = 13;
@@ -182,13 +174,25 @@
             // 
             // PbFile
             // 
-            this.PbFile.Location = new System.Drawing.Point(230, 11);
+            this.PbFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.PbFile.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PbFile.Image = global::Me.Amon.Properties.Resources.Open;
+            this.PbFile.Location = new System.Drawing.Point(188, 16);
             this.PbFile.Name = "PbFile";
             this.PbFile.Size = new System.Drawing.Size(16, 16);
             this.PbFile.TabIndex = 15;
             this.PbFile.TabStop = false;
+            this.PbFile.Click += new System.EventHandler(this.PbFile_Click);
             // 
-            // UcFileInfo
+            // PbIcon
+            // 
+            this.PbIcon.Location = new System.Drawing.Point(15, 3);
+            this.PbIcon.Name = "PbIcon";
+            this.PbIcon.Size = new System.Drawing.Size(32, 32);
+            this.PbIcon.TabIndex = 0;
+            this.PbIcon.TabStop = false;
+            // 
+            // UcSrcFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -208,10 +212,10 @@
             this.Controls.Add(this.LlType);
             this.Controls.Add(this.TbName);
             this.Controls.Add(this.PbIcon);
-            this.Name = "UcFileInfo";
-            this.Size = new System.Drawing.Size(207, 209);
-            ((System.ComponentModel.ISupportInitialize)(this.PbIcon)).EndInit();
+            this.Name = "UcSrcFile";
+            this.Size = new System.Drawing.Size(207, 216);
             ((System.ComponentModel.ISupportInitialize)(this.PbFile)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

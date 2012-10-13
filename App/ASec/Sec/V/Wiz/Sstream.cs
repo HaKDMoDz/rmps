@@ -7,7 +7,7 @@ using Org.BouncyCastle.Crypto.Paddings;
 
 namespace Me.Amon.Sec.V.Wiz
 {
-    class Sstream : ICrypto
+    class Sstream : ICrypto<byte, byte>
     {
         private MSec _MSec;
         private IBlockCipher _Engine;
@@ -18,22 +18,10 @@ namespace Me.Amon.Sec.V.Wiz
         }
 
         #region 接口实现
-        public void Init(MSec msec)
+        public void Init(MSec msec, string pass)
         {
             _MSec = msec;
-
-            if (IsText)
-            {
-                return;
-            }
-
-            //_AFile.ClSrc.HeaderText = "输入文件";
-            //_AFile.ClDst.HeaderText = "摘要结果";
         }
-
-        public bool IsText { get; set; }
-
-        public string Algorithm { get; set; }
 
         public bool DoCrypto(string pass)
         {
@@ -75,184 +63,6 @@ namespace Me.Amon.Sec.V.Wiz
         #endregion
 
         #region 私有函数
-        private void CreateEngine()
-        {
-            switch (_MSec.Algorithm)
-            {
-                case ESec.SCRYPTO_AES:
-                    _Engine = new AesEngine();
-                    _MSec.KeySize = 32;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_AESFAST:
-                    _Engine = new AesFastEngine();
-                    _MSec.KeySize = 32;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_AESLIGHT:
-                    _Engine = new AesLightEngine();
-                    _MSec.KeySize = 32;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_BLOWFISH:
-                    _Engine = new BlowfishEngine();
-                    _MSec.KeySize = 56;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_CAMELLIA:
-                    _Engine = new CamelliaEngine();
-                    _MSec.KeySize = 32;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_CAMELLIALIGHT:
-                    _Engine = new CamelliaLightEngine();
-                    _MSec.KeySize = 32;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_CAST5:
-                    _Engine = new Cast5Engine();
-                    _MSec.KeySize = 16;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_CAST6:
-                    _Engine = new Cast6Engine();
-                    _MSec.KeySize = 32;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_DES:
-                    _Engine = new DesEngine();
-                    _MSec.KeySize = 8;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_DESEDE:
-                    _Engine = new DesEdeEngine();
-                    _MSec.KeySize = 24;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_GOST28147:
-                    _Engine = new Gost28147Engine();
-                    _MSec.KeySize = 32;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_NOEKEON:
-                    _Engine = new NoekeonEngine();
-                    _MSec.KeySize = 16;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_NULL:
-                    _Engine = new NullEngine();
-                    _MSec.KeySize = 32;
-                    _MSec.IVSize = 16;
-                    break;
-                case ESec.SCRYPTO_RC2:
-                    _Engine = new RC2Engine();
-                    _MSec.KeySize = 128;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_RC532:
-                    _Engine = new RC532Engine();
-                    _MSec.KeySize = 16;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_RC564:
-                    _Engine = new RC564Engine();
-                    _MSec.KeySize = 16;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_RC6:
-                    _Engine = new RC6Engine();
-                    _MSec.KeySize = 32;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_RIJNDAEL:
-                    _Engine = new RijndaelEngine();
-                    _MSec.KeySize = 32;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_SEED:
-                    _Engine = new SeedEngine();
-                    _MSec.KeySize = 16;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_SERPENT:
-                    _Engine = new SerpentEngine();
-                    _MSec.KeySize = 32;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_SKIPJACK:
-                    _Engine = new SkipjackEngine();
-                    _MSec.KeySize = 16;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_TEA:
-                    _Engine = new TeaEngine();
-                    _MSec.KeySize = 16;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_TWOFISH:
-                    _Engine = new TwofishEngine();
-                    _MSec.KeySize = 32;
-                    _MSec.IVSize = 0;
-                    break;
-                case ESec.SCRYPTO_XTEA:
-                    _Engine = new XteaEngine();
-                    _MSec.KeySize = 16;
-                    _MSec.IVSize = 0;
-                    break;
-                default:
-                    _Engine = null;
-                    _MSec.KeySize = 0;
-                    _MSec.IVSize = 0;
-                    break;
-            }
-
-            switch (_MSec.Mode)
-            {
-                case ESec.MODE_CBC:
-                    _Engine = new CbcBlockCipher(_Engine);
-                    break;
-                case ESec.MODE_CFB:
-                    _Engine = new CfbBlockCipher(_Engine, 8);
-                    break;
-                case ESec.MODE_GOFB:
-                    _Engine = new GOfbBlockCipher(_Engine);
-                    break;
-                case ESec.MODE_OFB:
-                    _Engine = new OfbBlockCipher(_Engine, 8);
-                    break;
-                case ESec.MODE_OPENPGPCFB:
-                    _Engine = new OpenPgpCfbBlockCipher(_Engine);
-                    break;
-                case ESec.MODE_SIC:
-                    _Engine = new SicBlockCipher(_Engine);
-                    break;
-            }
-
-            IBlockCipherPadding padding = null;
-            switch (_MSec.Padding)
-            {
-                case ESec.PADDING_ISO10126d2:
-                    padding = new ISO10126d2Padding();
-                    break;
-                case ESec.PADDING_ISO7816d4:
-                    padding = new ISO7816d4Padding();
-                    break;
-                case ESec.PADDING_PKCS7:
-                    padding = new Pkcs7Padding();
-                    break;
-                case ESec.PADDING_TBC:
-                    padding = new TbcPadding();
-                    break;
-                case ESec.PADDING_X923:
-                    padding = new X923Padding();
-                    break;
-                case ESec.PADDING_ZEROBYTE:
-                    padding = new ZeroBytePadding();
-                    break;
-            }
-
-            _Cipher = new PaddedBufferedBlockCipher(_Engine, padding);
-        }
         #endregion
 
         private bool DecryptFile(SymmetricAlgorithm alg)
@@ -331,6 +141,17 @@ namespace Me.Amon.Sec.V.Wiz
             //_AText.TbDst.Text = Encoding.UTF8.GetString(buf);
             //mStream.Close();
             return true;
+        }
+
+
+        public int Process(byte[] srcArray, int srcFrom, int length, byte[] dstArray, int dstFrom)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int DoFinal(byte[] output, int outOff)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

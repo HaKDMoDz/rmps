@@ -8,7 +8,8 @@ namespace Me.Amon.Sec.V.Wiz
     public partial class UcDst : UserControl
     {
         private ASec _ASec;
-        private TextWriter _Writer;
+        private BinaryWriter _Writer;
+        private MemoryStream _Stream;
 
         #region 构造函数
         public UcDst()
@@ -23,7 +24,16 @@ namespace Me.Amon.Sec.V.Wiz
             _ASec = asec;
 
             _ASec.ShowTips(PbMask, "选择掩码");
-            _ASec.ShowTips(PbFile, "选择输出目录");
+        }
+
+        public void ChangeOpt(string opt)
+        {
+            bool b = opt == ESec.OPT_SCRYPTO || opt == ESec.OPT_SSTREAM || opt == ESec.OPT_ACRYPTO;
+            PbMask.Visible = b;
+        }
+
+        public void ChangeDir(bool encrypt)
+        {
         }
 
         public bool CheckInput()
@@ -31,24 +41,26 @@ namespace Me.Amon.Sec.V.Wiz
             return true;
         }
 
-        private StringBuilder _Builder;
-        public void Begin()
+        public bool Begin()
         {
             if (TcDst.SelectedTab == TpText)
             {
-                _Builder = new StringBuilder();
-                _Writer = new StringWriter(_Builder);
-                return;
+                _Stream = new MemoryStream();
+                _Writer = new BinaryWriter(_Stream);
+                return true;
             }
 
             if (TcDst.SelectedTab == TpFile)
             {
-                _Writer = new StreamWriter("");
+                _Writer = new BinaryWriter(File.OpenWrite(LbFile.UserFile));
+                return true;
             }
+            return false;
         }
 
         public void Append(byte[] buffer, int offset, int length)
         {
+            _Writer.Write(buffer, offset, length);
         }
 
         public void Append(char[] buffer, int offset, int length)
@@ -63,7 +75,8 @@ namespace Me.Amon.Sec.V.Wiz
 
             if (TcDst.SelectedTab == TpText)
             {
-                TbText.Text = _Builder.ToString();
+                _Stream.Close();
+                TbText.Text = Encoding.UTF8.GetString(_Stream.ToArray());
                 return;
             }
         }
@@ -72,7 +85,6 @@ namespace Me.Amon.Sec.V.Wiz
         #region 事件处理
         private void TcDst_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PbFile.Visible = TcDst.SelectedTab == TpFile;
         }
 
         private void PbMask_Click(object sender, EventArgs e)

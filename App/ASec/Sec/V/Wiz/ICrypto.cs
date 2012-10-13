@@ -1,12 +1,12 @@
 using Me.Amon.Sec.M;
 namespace Me.Amon.Sec.V.Wiz
 {
-    interface ICrypto
+    interface ICrypto<T1, T2>
     {
-        void Init(MSec msec);
+        void Init(MSec msec, string pass);
 
-        bool IsText { get; set; }
+        //int Process(T1[] srcArray, int srcFrom, int length, T2[] dstArray, int dstFrom);
 
-        bool DoCrypto(string pass);
+        int DoFinal(T2[] output, int outOff);
     }
 }

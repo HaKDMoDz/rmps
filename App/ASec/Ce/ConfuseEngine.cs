@@ -49,13 +49,10 @@
         {
             if (_Encrypt)
             {
-                DoEncode(srcArray, srcFrom, length, dstArray, dstFrom);
+                return DoEncode(srcArray, srcFrom, length, dstArray, dstFrom);
             }
-            else
-            {
-                DoDecode(srcArray, srcFrom, length, dstArray, dstFrom);
-            }
-            return 0;
+
+            return DoDecode(srcArray, srcFrom, length, dstArray, dstFrom);
         }
 
         /// <summary>
@@ -71,13 +68,10 @@
         {
             if (_Encrypt)
             {
-                DoEncode(srcArray, srcFrom, length, dstArray, dstFrom);
+                return DoEncode(srcArray, srcFrom, length, dstArray, dstFrom);
             }
-            else
-            {
-                DoDecode(srcArray, srcFrom, length, dstArray, dstFrom);
-            }
-            return 0;
+
+            return DoDecode(srcArray, srcFrom, length, dstArray, dstFrom);
         }
 
         /// <summary>
@@ -111,7 +105,7 @@
         /// <param name="length"></param>
         /// <param name="dstArray"></param>
         /// <param name="dstFrom"></param>
-        private void DoEncode(char[] srcArray, int srcFrom, int length, char[] dstArray, int dstFrom)
+        private int DoEncode(char[] srcArray, int srcFrom, int length, char[] dstArray, int dstFrom)
         {
             // 圈长
             int t1 = length / Rounds;
@@ -143,6 +137,7 @@
             {
                 dstArray[t2++] = srcArray[_Indexes[t1++]];
             }
+            return t2 - dstFrom;
         }
 
         /// <summary>
@@ -153,7 +148,7 @@
         /// <param name="length"></param>
         /// <param name="dstArray"></param>
         /// <param name="dstFrom"></param>
-        private void DoDecode(char[] srcArray, int srcFrom, int length, char[] dstArray, int dstFrom)
+        private int DoDecode(char[] srcArray, int srcFrom, int length, char[] dstArray, int dstFrom)
         {
             // 圈长
             int t1 = length / Rounds;
@@ -185,6 +180,7 @@
             {
                 dstArray[_Indexes[t1++]] = srcArray[t2++];
             }
+            return t2 - dstFrom;
         }
         #endregion
     }

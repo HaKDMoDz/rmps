@@ -8,9 +8,9 @@ using Me.Amon.Api.User32;
 
 namespace Me.Amon.Sec.V.Wiz
 {
-    public partial class UcFileInfo : UserControl
+    public partial class UcSrcFile : UserControl
     {
-        public UcFileInfo()
+        public UcSrcFile()
         {
             InitializeComponent();
         }
@@ -19,6 +19,8 @@ namespace Me.Amon.Sec.V.Wiz
 
         public void ShowFileInfo(string file)
         {
+            UserFile = file;
+
             SHFILEINFO shInfo = User32.GetFileInfo(file, false);
             PbIcon.Image = Icon.FromHandle(shInfo.hIcon).ToBitmap();
 
@@ -58,6 +60,16 @@ namespace Me.Amon.Sec.V.Wiz
             TbModifyTime.Text = time.ToLongDateString() + ' ' + time.ToLongTimeString();
             time = info.LastAccessTime;
             TbAccessTime.Text = time.ToLongDateString() + ' ' + time.ToLongTimeString();
+        }
+
+        private void PbFile_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.OK != Main.ShowOpenFileDialog(CApp.FILE_OPEN_ALL, UserFile, false))
+            {
+                return;
+            }
+
+            ShowFileInfo(Main.OpenFileDialog.FileName);
         }
     }
 }

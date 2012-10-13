@@ -1,21 +1,21 @@
-﻿
+﻿using Me.Amon.Sec.M;
+
 namespace Me.Amon.Sec.V.Wiz
 {
-    class Acrypto : ICrypto
+    class Acrypto : ICrypto<byte, byte>
     {
-        public void Init(M.MSec msec)
+        public void Init(MSec msec, string pass)
         {
         }
 
-        public bool IsText
+        public int Process(byte[] srcArray, int srcFrom, int length, byte[] dstArray, int dstFrom)
         {
-            get;
-            set;
+            throw new System.NotImplementedException();
         }
 
-        public bool DoCrypto(string pass)
+        public int DoFinal(byte[] output, int outOff)
         {
-            return true;
+            throw new System.NotImplementedException();
         }
     }
 }

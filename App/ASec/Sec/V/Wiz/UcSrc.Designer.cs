@@ -29,14 +29,12 @@
         private void InitializeComponent()
         {
             this.PbMask = new System.Windows.Forms.PictureBox();
-            this.PbFile = new System.Windows.Forms.PictureBox();
             this.TcSrc = new System.Windows.Forms.ATabControl();
             this.TpText = new System.Windows.Forms.TabPage();
             this.TbText = new System.Windows.Forms.TextBox();
             this.TpFile = new System.Windows.Forms.TabPage();
-            this.UcFile = new Me.Amon.Sec.V.Wiz.UcFileInfo();
+            this.UcFile = new Me.Amon.Sec.V.Wiz.UcSrcFile();
             ((System.ComponentModel.ISupportInitialize)(this.PbMask)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PbFile)).BeginInit();
             this.TcSrc.SuspendLayout();
             this.TpText.SuspendLayout();
             this.TpFile.SuspendLayout();
@@ -47,24 +45,12 @@
             this.PbMask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.PbMask.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PbMask.Image = global::Me.Amon.Properties.Resources.Menu;
-            this.PbMask.Location = new System.Drawing.Point(3, 159);
+            this.PbMask.Location = new System.Drawing.Point(3, 181);
             this.PbMask.Name = "PbMask";
             this.PbMask.Size = new System.Drawing.Size(16, 16);
             this.PbMask.TabIndex = 1;
             this.PbMask.TabStop = false;
             this.PbMask.Click += new System.EventHandler(this.PbMask_Click);
-            // 
-            // PbFile
-            // 
-            this.PbFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.PbFile.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PbFile.Image = global::Me.Amon.Properties.Resources.Menu;
-            this.PbFile.Location = new System.Drawing.Point(3, 181);
-            this.PbFile.Name = "PbFile";
-            this.PbFile.Size = new System.Drawing.Size(16, 16);
-            this.PbFile.TabIndex = 2;
-            this.PbFile.TabStop = false;
-            this.PbFile.Click += new System.EventHandler(this.PbFile_Click);
             // 
             // TcSrc
             // 
@@ -142,6 +128,7 @@
             this.UcFile.Name = "UcFile";
             this.UcFile.Size = new System.Drawing.Size(207, 186);
             this.UcFile.TabIndex = 0;
+            this.UcFile.UserFile = null;
             this.UcFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.LbFile_DragDrop);
             this.UcFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.LbFile_DragEnter);
             // 
@@ -149,13 +136,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.PbFile);
             this.Controls.Add(this.PbMask);
             this.Controls.Add(this.TcSrc);
             this.Name = "UcSrc";
             this.Size = new System.Drawing.Size(240, 200);
             ((System.ComponentModel.ISupportInitialize)(this.PbMask)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PbFile)).EndInit();
             this.TcSrc.ResumeLayout(false);
             this.TpText.ResumeLayout(false);
             this.TpText.PerformLayout();
@@ -170,8 +155,7 @@
         private System.Windows.Forms.TabPage TpText;
         private System.Windows.Forms.TabPage TpFile;
         private System.Windows.Forms.TextBox TbText;
-        private UcFileInfo UcFile;
+        private UcSrcFile UcFile;
         private System.Windows.Forms.PictureBox PbMask;
-        private System.Windows.Forms.PictureBox PbFile;
     }
 }

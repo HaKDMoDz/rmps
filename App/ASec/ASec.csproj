@@ -213,17 +213,21 @@
     <Compile Include="Sec\V\Wiz\AWiz.Designer.cs">
       <DependentUpon>AWiz.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sec\V\Wiz\Confuse.cs" />
     <Compile Include="Sec\V\Wiz\Sstream.cs" />
     <Compile Include="Sec\V\Wiz\Digest.cs" />
-    <Compile Include="Sec\V\Wiz\Scrypto.cs" />
     <Compile Include="Sec\V\Wiz\ICrypto.cs" />
     <Compile Include="Sec\V\Wiz\IWiz.cs" />
-    <Compile Include="Sec\V\Wiz\UcFileInfo.cs">
+    <Compile Include="Sec\V\Wiz\UcDstFile.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sec\V\Wiz\UcFileInfo.Designer.cs">
-      <DependentUpon>UcFileInfo.cs</DependentUpon>
+    <Compile Include="Sec\V\Wiz\UcDstFile.Designer.cs">
+      <DependentUpon>UcDstFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\UcSrcFile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sec\V\Wiz\UcSrcFile.Designer.cs">
+      <DependentUpon>UcSrcFile.cs</DependentUpon>
     </Compile>
     <Compile Include="Sec\V\Wiz\UwAlg.cs">
       <SubType>Form</SubType>
@@ -249,11 +253,16 @@
     <Compile Include="Sec\V\Wiz\UcDst.Designer.cs">
       <DependentUpon>UcDst.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sec\V\Wiz\Wrapper.cs" />
     <Compile Include="Uc\ItemGroup.cs" />
     <Compile Include="Uc\Itemi.cs" />
     <Compile Include="Uc\Items.cs" />
     <Compile Include="Uc\KeyStroke.cs" />
+    <Compile Include="Uc\SwitchButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Uc\SwitchButton.Designer.cs">
+      <DependentUpon>SwitchButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uc\TabControl\ATabControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -374,8 +383,11 @@
     <EmbeddedResource Include="Sec\V\Wiz\AWiz.resx">
       <DependentUpon>AWiz.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sec\V\Wiz\UcFileInfo.resx">
-      <DependentUpon>UcFileInfo.cs</DependentUpon>
+    <EmbeddedResource Include="Sec\V\Wiz\UcDstFile.resx">
+      <DependentUpon>UcDstFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sec\V\Wiz\UcSrcFile.resx">
+      <DependentUpon>UcSrcFile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sec\V\Wiz\UwAlg.resx">
       <DependentUpon>UwAlg.cs</DependentUpon>
@@ -388,6 +400,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sec\V\Wiz\UcDst.resx">
       <DependentUpon>UcDst.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uc\SwitchButton.resx">
+      <DependentUpon>SwitchButton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\Alert.resx">
       <DependentUpon>Alert.cs</DependentUpon>
@@ -441,6 +456,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Encode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Decode.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

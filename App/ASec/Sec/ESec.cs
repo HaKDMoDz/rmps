@@ -104,9 +104,14 @@
         public const string SSTREAM_VMPCKSA3 = "VmpcKsa3";
 
         public const string MODE_CBC = "CBC";
+        public const string MODE_CCM = "CCM";
         public const string MODE_CFB = "CFB";
+        public const string MODE_EAX = "EAX";
+        public const string MODE_ECB = "ECB";
+        public const string MODE_GCM = "GCM";
         public const string MODE_GOFB = "GOFB";
         public const string MODE_OFB = "OFB";
+        public const string MODE_CTS = "CTS";
         public const string MODE_OPENPGPCFB = "OpenPgpCFB";
         public const string MODE_SIC = "SIC";
 

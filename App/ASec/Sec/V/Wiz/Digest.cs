@@ -8,7 +8,7 @@ using Org.BouncyCastle.Crypto.Digests;
 
 namespace Me.Amon.Sec.V.Wiz
 {
-    class Digest : ICrypto
+    class Digest : ICrypto<byte, byte>
     {
         private MSec _MSec;
         private IDigest _Cipher;
@@ -18,47 +18,9 @@ namespace Me.Amon.Sec.V.Wiz
         }
 
         #region 接口实现
-        public void Init(MSec msec)
+        public void Init(MSec msec, string pass)
         {
             _MSec = msec;
-
-            if (IsText)
-            {
-                return;
-            }
-
-            //_AFile.ClSrc.HeaderText = "输入文件";
-            //_AFile.ClDst.HeaderText = "输出文件";
-        }
-
-        public bool IsText { get; set; }
-
-        public bool DoCrypto(string pass)
-        {
-            if (IsText)
-            {
-                return DigestText();
-            }
-
-            //if (_AFile.FileList == null || _AFile.FileList.Count < 1)
-            //{
-            //    return false;
-            //}
-
-            //Items item;
-            //for (int i = 0; i < _AFile.FileList.Count; i += 1)
-            //{
-            //    item = _AFile.FileList[i];
-            //    if (!DigestFile(item))
-            //    {
-            //        continue;
-            //    }
-            //    if (i < _AFile.GvFile.Rows.Count)
-            //    {
-            //        _AFile.GvFile.Rows[i].Cells[1].Value = item.D;
-            //    }
-            //}
-            return true;
         }
         #endregion
 
@@ -116,8 +78,10 @@ namespace Me.Amon.Sec.V.Wiz
                     break;
             }
         }
+
         private bool DigestFile(Items item)
         {
+            _Cipher.BlockUpdate(null, 0, 0);
             if (!File.Exists(item.K))
             {
                 return false;
@@ -148,6 +112,17 @@ namespace Me.Amon.Sec.V.Wiz
             //    _AText.TbDst.Text = CharUtil.EncodeString(buf);
             //}
             return true;
+        }
+
+
+        public int Process(byte[] srcArray, int srcFrom, int length, byte[] dstArray, int dstFrom)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int DoFinal(byte[] output, int outOff)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Me.Amon.Sec.V.Wiz
@@ -7,7 +8,7 @@ namespace Me.Amon.Sec.V.Wiz
     public partial class UcSrc : UserControl
     {
         private ASec _ASec;
-        private TextReader _Reader;
+        private BinaryReader _Reader;
 
         #region 构造函数
         public UcSrc()
@@ -22,7 +23,6 @@ namespace Me.Amon.Sec.V.Wiz
             _ASec = asec;
 
             _ASec.ShowTips(PbMask, "选择掩码");
-            _ASec.ShowTips(PbFile, "打开文件");
         }
 
         public void ChangeFile(string file)
@@ -38,14 +38,11 @@ namespace Me.Amon.Sec.V.Wiz
 
         public void ChangeOpt(string opt)
         {
-            bool b = opt == "enc" || opt == "dec";
-            //LlKey.Visible = b;
-            //TbKey.Visible = b;
-            //PbKey.Visible = b;
-            //PbOUdc.Visible = b;
+            bool b = opt == ESec.OPT_SCRYPTO || opt == ESec.OPT_SSTREAM || opt == ESec.OPT_ACRYPTO;
+            PbMask.Visible = b;
         }
 
-        public void ChangeDir(string dir)
+        public void ChangeDir(bool encrypt)
         {
         }
 
@@ -73,23 +70,34 @@ namespace Me.Amon.Sec.V.Wiz
             return true;
         }
 
-        public void Begin()
+        public bool Begin()
         {
             if (TcSrc.SelectedTab == TpText)
             {
-                _Reader = new StringReader(TbText.Text);
-                return;
+                string text = TbText.Text;
+                if (string.IsNullOrEmpty(text))
+                {
+                    return false;
+                }
+                _Reader = new BinaryReader(new MemoryStream(Encoding.UTF8.GetBytes(TbText.Text)));
+                return true;
             }
 
             if (TcSrc.SelectedTab == TpFile)
             {
-                _Reader = new StreamReader("");
+                if (string.IsNullOrEmpty(UcFile.UserFile) || !File.Exists(UcFile.UserFile))
+                {
+                    return false;
+                }
+                _Reader = new BinaryReader(File.OpenRead(UcFile.UserFile));
+                return true;
             }
+            return false;
         }
 
         public int Process(byte[] buffer, int offset, int length)
         {
-            return -1;
+            return _Reader.Read(buffer, offset, length);
         }
 
         public int Process(char[] buffer, int offset, int length)
@@ -106,7 +114,6 @@ namespace Me.Amon.Sec.V.Wiz
         #region 事件处理
         private void TcSrc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PbFile.Visible = TcSrc.SelectedTab == TpFile;
         }
 
         private void TbText_DragEnter(object sender, DragEventArgs e)
@@ -172,11 +179,6 @@ namespace Me.Amon.Sec.V.Wiz
             {
                 MessageBox.Show(ex.Message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void LbFile_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void PbMask_Click(object sender, EventArgs e)
