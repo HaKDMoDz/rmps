@@ -41,7 +41,6 @@ namespace Me.Amon.Sec.V.Wiz
         {
             _MSec = new MSec();
 
-
             CbOpt.Items.Add(new Items { K = ESec.OPT_CONFUSE, V = "混淆算法" });
             CbOpt.Items.Add(new Items { K = ESec.OPT_WRAPPER, V = "掩码算法" });
             CbOpt.Items.Add(new Items { K = ESec.OPT_DIGEST, V = "摘要算法" });
@@ -73,7 +72,7 @@ namespace Me.Amon.Sec.V.Wiz
             Items opt = CbOpt.SelectedItem as Items;
             if (opt == null)
             {
-                MessageBox.Show(this, "请选择您要进行的操作！");
+                MessageBox.Show(_ASec, "请选择您要进行的操作！");
                 CbOpt.Focus();
                 return;
             }
@@ -84,7 +83,7 @@ namespace Me.Amon.Sec.V.Wiz
                 key = TbKey.Text;
                 if (string.IsNullOrEmpty(key))
                 {
-                    MessageBox.Show(this, "请输入您的口令！");
+                    MessageBox.Show(_ASec, "请输入您的口令！");
                     TbKey.Focus();
                     return;
                 }
@@ -164,6 +163,7 @@ namespace Me.Amon.Sec.V.Wiz
 
             _MSec.Operation = item.K;
             SetKeyVisible(item.K == ESec.OPT_SCRYPTO || item.K == ESec.OPT_SSTREAM || item.K == ESec.OPT_ACRYPTO);
+            SbDir.Visible = (item.K != ESec.OPT_DIGEST);
         }
 
         private void PbAlg_Click(object sender, EventArgs e)
@@ -196,11 +196,14 @@ namespace Me.Amon.Sec.V.Wiz
         #region 混淆
         private void DoConfuse(string key)
         {
+            if (!_UcSrc.Begin())
+            {
+                return;
+            }
+            _UcDst.Begin();
+
             var engine = CreateConfuseEngine();
             engine.Init(SbDir.On, 5, 4);
-
-            _UcSrc.Begin();
-            _UcDst.Begin();
 
             char[] src = new char[ESec.BUF_SIZE];
             char[] dst = new char[ESec.BUF_SIZE];
@@ -236,14 +239,14 @@ namespace Me.Amon.Sec.V.Wiz
         #region 掩码
         private void DoWrapper(string key)
         {
-            var engine = CreateWrapperEngine();
-            engine.Init(SbDir.On, null);
-
             if (!_UcSrc.Begin())
             {
                 return;
             }
             _UcDst.Begin();
+
+            var engine = CreateWrapperEngine();
+            engine.Init(SbDir.On, null);
 
             byte[] src = new byte[ESec.BUF_SIZE];
             char[] dst = new char[ESec.BUF_SIZE << 3];
@@ -279,13 +282,13 @@ namespace Me.Amon.Sec.V.Wiz
         #region 摘要
         private void DoDigest(string key)
         {
-            var engine = CreateDigestEngine();
-
             if (!_UcSrc.Begin())
             {
                 return;
             }
             _UcDst.Begin();
+
+            var engine = CreateDigestEngine();
 
             byte[] src = new byte[ESec.BUF_SIZE];
 
@@ -357,15 +360,15 @@ namespace Me.Amon.Sec.V.Wiz
         #region 块对称加密
         private void DoScrypto(string key)
         {
-            key = GenPass(key, _MSec.KeySize);
-            BufferedBlockCipher engine = CreateScryptoEngine();
-            engine.Init(SbDir.On, new KeyParameter(Encoding.Default.GetBytes(key)));
-
             if (!_UcSrc.Begin())
             {
                 return;
             }
             _UcDst.Begin();
+
+            key = GenPass(key, _MSec.KeySize);
+            BufferedBlockCipher engine = CreateScryptoEngine();
+            engine.Init(SbDir.On, new KeyParameter(Encoding.Default.GetBytes(key)));
 
             byte[] src = new byte[ESec.BUF_SIZE];
             byte[] dst = new byte[ESec.BUF_SIZE];
@@ -585,15 +588,15 @@ namespace Me.Amon.Sec.V.Wiz
         #region 流对称加密
         private void DoSstream(string key)
         {
-            key = GenPass(key, _MSec.KeySize);
-            BufferedStreamCipher engine = CreateSstreamEngine();
-            engine.Init(SbDir.On, new KeyParameter(Encoding.Default.GetBytes(key)));
-
             if (!_UcSrc.Begin())
             {
                 return;
             }
             _UcDst.Begin();
+
+            key = GenPass(key, _MSec.KeySize);
+            BufferedStreamCipher engine = CreateSstreamEngine();
+            engine.Init(SbDir.On, new KeyParameter(Encoding.Default.GetBytes(key)));
 
             byte[] src = new byte[ESec.BUF_SIZE];
             byte[] dst = new byte[ESec.BUF_SIZE];
@@ -808,7 +811,6 @@ namespace Me.Amon.Sec.V.Wiz
             LlKey.Visible = visible;
             TbKey.Visible = visible;
             PbKey.Visible = visible;
-            SbDir.Visible = visible;
         }
         #endregion
     }

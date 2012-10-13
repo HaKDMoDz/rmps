@@ -206,16 +206,12 @@
     <Compile Include="Sec\V\Pro\Uw\Text.Designer.cs">
       <DependentUpon>Text.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sec\V\Wiz\Acrypto.cs" />
     <Compile Include="Sec\V\Wiz\AWiz.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Sec\V\Wiz\AWiz.Designer.cs">
       <DependentUpon>AWiz.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sec\V\Wiz\Sstream.cs" />
-    <Compile Include="Sec\V\Wiz\Digest.cs" />
-    <Compile Include="Sec\V\Wiz\ICrypto.cs" />
     <Compile Include="Sec\V\Wiz\IWiz.cs" />
     <Compile Include="Sec\V\Wiz\UcDstFile.cs">
       <SubType>UserControl</SubType>

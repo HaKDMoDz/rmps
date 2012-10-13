@@ -52,6 +52,11 @@ namespace Me.Amon.Sec.V.Wiz
 
             if (TcDst.SelectedTab == TpFile)
             {
+                if (string.IsNullOrEmpty(LbFile.UserFile) || !File.Exists(LbFile.UserFile))
+                {
+                    MessageBox.Show("请选择输出文件！");
+                    return false;
+                }
                 _Writer = new BinaryWriter(File.OpenWrite(LbFile.UserFile));
                 return true;
             }
