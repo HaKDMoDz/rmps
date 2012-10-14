@@ -38,6 +38,8 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
             _TlPanel = grid;
             _DataModel = dataModel;
 
+            PbFill.Image = viewModel.GetImage("script-fill-24");
+            _AWiz.ShowTips(PbFill, "执行脚本");
             PbCard.Image = viewModel.GetImage("export-card-24");
             _AWiz.ShowTips(PbCard, "导出为卡片");
 
@@ -233,6 +235,11 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
         #endregion
 
         #region 事件处理
+        private void PbFill_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void PbCard_Click(object sender, EventArgs e)
         {
             CmCard.Show(PbCard, 0, PbCard.Height);

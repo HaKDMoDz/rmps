@@ -42,11 +42,11 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
 
             BtView.Image = viewModel.GetImage("att-file-preview");
             _Body.ShowTips(BtView, "查看文件");
-            BtOpen.Image = viewModel.GetImage("att-file-append");
-            _Body.ShowTips(BtOpen, "添加文件");
 
             BtCopy.Image = viewModel.GetImage("att-copy");
             _Body.ShowTips(BtCopy, "复制");
+            //BtFill.Image = viewModel.GetImage("script-fill-16");
+            //_Body.ShowTips(BtFill, "填充");
 
             InitSpec(TbData);
         }

@@ -44,6 +44,10 @@ namespace Me.Amon.Pwd.V.Wiz
             AttView = new AttViewer();
             AttView.Control.Dock = DockStyle.Fill;
             KeyList.AttView = AttView;
+            VSplit.Panel2.Controls.Add(AttView.Control);
+
+            Dock = DockStyle.Fill;
+            panel.Controls.Add(this);
         }
 
         public void HideView(Panel panel)

@@ -40,8 +40,10 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.CcAll = new System.Windows.Forms.ToolStripMenuItem();
             this.UcTips = new Me.Amon.Uc.GtdTips();
+            this.PbFill = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.PbCard)).BeginInit();
             this.CmCard.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PbFill)).BeginInit();
             this.SuspendLayout();
             // 
             // CbLib
@@ -65,7 +67,7 @@
             // PbCard
             // 
             this.PbCard.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PbCard.Location = new System.Drawing.Point(63, 29);
+            this.PbCard.Location = new System.Drawing.Point(93, 29);
             this.PbCard.Name = "PbCard";
             this.PbCard.Size = new System.Drawing.Size(24, 24);
             this.PbCard.TabIndex = 4;
@@ -116,16 +118,28 @@
             // 
             this.UcTips.BackColor = System.Drawing.Color.Transparent;
             this.UcTips.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("UcTips.BackgroundImage")));
+            this.UcTips.CallBack = null;
             this.UcTips.Location = new System.Drawing.Point(42, 59);
             this.UcTips.Name = "UcTips";
             this.UcTips.Size = new System.Drawing.Size(270, 208);
             this.UcTips.TabIndex = 5;
             this.UcTips.Visible = false;
             // 
+            // PbFill
+            // 
+            this.PbFill.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PbFill.Location = new System.Drawing.Point(63, 29);
+            this.PbFill.Name = "PbFill";
+            this.PbFill.Size = new System.Drawing.Size(24, 24);
+            this.PbFill.TabIndex = 6;
+            this.PbFill.TabStop = false;
+            this.PbFill.Click += new System.EventHandler(this.PbFill_Click);
+            // 
             // BeanGuid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.PbFill);
             this.Controls.Add(this.PbCard);
             this.Controls.Add(this.CbLib);
             this.Controls.Add(this.UcTips);
@@ -134,6 +148,7 @@
             this.Size = new System.Drawing.Size(350, 250);
             ((System.ComponentModel.ISupportInitialize)(this.PbCard)).EndInit();
             this.CmCard.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PbFill)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,5 +166,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem CcAll;
         private Uc.GtdTips UcTips;
+        private System.Windows.Forms.PictureBox PbFill;
     }
 }

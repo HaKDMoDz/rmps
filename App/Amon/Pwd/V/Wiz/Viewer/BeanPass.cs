@@ -46,11 +46,10 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
 
             BtMod.Image = viewModel.GetImage(TbData.UseSystemPasswordChar ? "att-pass-hide" : "att-pass-show");
             _Body.ShowTips(BtMod, TbData.UseSystemPasswordChar ? "显示口令" : "隐藏口令");
-            BtGen.Image = viewModel.GetImage("att-pass-gen");
-            _Body.ShowTips(BtGen, "生成随机口令");
-
             BtCopy.Image = viewModel.GetImage("att-copy");
             _Body.ShowTips(BtCopy, "复制");
+            BtFill.Image = viewModel.GetImage("script-fill-16");
+            _Body.ShowTips(BtFill, "填充");
         }
         #endregion
 

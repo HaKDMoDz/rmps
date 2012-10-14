@@ -31,16 +31,17 @@
             this.TbData = new System.Windows.Forms.TextBox();
             this.BtSend = new System.Windows.Forms.Button();
             this.BtCopy = new System.Windows.Forms.Button();
+            this.BtFill = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TbData
             // 
-            this.TbData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TbData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.TbData.Location = new System.Drawing.Point(0, 0);
             this.TbData.Name = "TbData";
-            this.TbData.Size = new System.Drawing.Size(293, 21);
+            this.TbData.Size = new System.Drawing.Size(266, 21);
             this.TbData.TabIndex = 0;
             // 
             // BtSend
@@ -48,7 +49,7 @@
             this.BtSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtSend.FlatAppearance.BorderSize = 0;
             this.BtSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtSend.Location = new System.Drawing.Point(299, 0);
+            this.BtSend.Location = new System.Drawing.Point(272, 0);
             this.BtSend.Name = "BtSend";
             this.BtSend.Size = new System.Drawing.Size(21, 21);
             this.BtSend.TabIndex = 1;
@@ -61,7 +62,7 @@
             this.BtCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtCopy.FlatAppearance.BorderSize = 0;
             this.BtCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtCopy.Location = new System.Drawing.Point(326, 0);
+            this.BtCopy.Location = new System.Drawing.Point(299, 0);
             this.BtCopy.Name = "BtCopy";
             this.BtCopy.Size = new System.Drawing.Size(21, 21);
             this.BtCopy.TabIndex = 2;
@@ -69,10 +70,24 @@
             this.BtCopy.UseVisualStyleBackColor = true;
             this.BtCopy.Click += new System.EventHandler(this.BtCopy_Click);
             // 
+            // BtFill
+            // 
+            this.BtFill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtFill.FlatAppearance.BorderSize = 0;
+            this.BtFill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtFill.Location = new System.Drawing.Point(326, 0);
+            this.BtFill.Name = "BtFill";
+            this.BtFill.Size = new System.Drawing.Size(21, 21);
+            this.BtFill.TabIndex = 3;
+            this.BtFill.TabStop = false;
+            this.BtFill.UseVisualStyleBackColor = true;
+            this.BtFill.Click += new System.EventHandler(this.BtFill_Click);
+            // 
             // BeanMail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.BtFill);
             this.Controls.Add(this.BtCopy);
             this.Controls.Add(this.BtSend);
             this.Controls.Add(this.TbData);
@@ -88,5 +103,6 @@
         private System.Windows.Forms.TextBox TbData;
         private System.Windows.Forms.Button BtSend;
         private System.Windows.Forms.Button BtCopy;
+        private System.Windows.Forms.Button BtFill;
     }
 }

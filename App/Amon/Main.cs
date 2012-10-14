@@ -279,8 +279,11 @@ namespace Me.Amon
         private void DoSignIn(string view)
         {
             DefaultApp = new TApp { Id = "APwd", Type = "app", NeedAuth = true };
-            DefaultApp.App = new Pwd.APwd(this, _UserModel);
-            DefaultApp.App.Show();
+            Pwd.APwd aPwd = new Pwd.APwd(this, _UserModel);
+            aPwd.Show();
+            aPwd.Init();
+            DefaultApp.App = aPwd;
+            //DefaultApp.App.Show();
 
             Visible = false;
 

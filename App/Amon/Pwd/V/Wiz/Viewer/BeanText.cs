@@ -43,6 +43,9 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
             BtCopy.Image = viewModel.GetImage("att-copy");
             _Body.ShowTips(BtCopy, "复制");
 
+            BtFill.Image = viewModel.GetImage("script-fill-16");
+            _Body.ShowTips(BtFill, "填充");
+
             InitSpec(TbData);
         }
         #endregion
@@ -117,6 +120,11 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
         {
             SafeUtil.Copy(TbData.Text);
             TbData.Focus();
+        }
+
+        private void BtFill_Click(object sender, EventArgs e)
+        {
+
         }
         #endregion
     }

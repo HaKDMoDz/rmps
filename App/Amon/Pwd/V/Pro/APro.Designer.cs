@@ -34,13 +34,12 @@ namespace Me.Amon.Pwd.V.Pro
             this.VSplit = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.GbGroup = new System.Windows.Forms.GroupBox();
-            this.BtDrop = new System.Windows.Forms.Button();
-            this.BtSave = new System.Windows.Forms.Button();
-            this.BtCopy = new System.Windows.Forms.Button();
+            this.BtOpt2 = new System.Windows.Forms.Button();
+            this.BtOpt1 = new System.Windows.Forms.Button();
             this.GvAttList = new System.Windows.Forms.DataGridView();
+            this.findBar1 = new Me.Amon.Pwd.Bean.FindBar();
             this.OrderCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.findBar1 = new Me.Amon.Pwd.Bean.FindBar();
             ((System.ComponentModel.ISupportInitialize)(this.HSplit)).BeginInit();
             this.HSplit.Panel1.SuspendLayout();
             this.HSplit.Panel2.SuspendLayout();
@@ -94,67 +93,58 @@ namespace Me.Amon.Pwd.V.Pro
             // 
             this.GbGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.GbGroup.Controls.Add(this.BtDrop);
-            this.GbGroup.Controls.Add(this.BtSave);
-            this.GbGroup.Controls.Add(this.BtCopy);
+            this.GbGroup.Controls.Add(this.BtOpt2);
+            this.GbGroup.Controls.Add(this.BtOpt1);
             this.GbGroup.Location = new System.Drawing.Point(3, 161);
             this.GbGroup.Name = "GbGroup";
             this.GbGroup.Size = new System.Drawing.Size(296, 110);
             this.GbGroup.TabIndex = 1;
             this.GbGroup.TabStop = false;
-            this.GbGroup.Text = "groupBox1";
+            this.GbGroup.Text = "属性";
             // 
-            // BtDrop
+            // BtOpt2
             // 
-            this.BtDrop.Location = new System.Drawing.Point(215, 81);
-            this.BtDrop.Name = "BtDrop";
-            this.BtDrop.Size = new System.Drawing.Size(75, 23);
-            this.BtDrop.TabIndex = 2;
-            this.BtDrop.Text = "button1";
-            this.BtDrop.UseVisualStyleBackColor = true;
+            this.BtOpt2.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.BtOpt2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtOpt2.Location = new System.Drawing.Point(274, 88);
+            this.BtOpt2.Name = "BtOpt2";
+            this.BtOpt2.Size = new System.Drawing.Size(16, 16);
+            this.BtOpt2.TabIndex = 1;
+            this.BtOpt2.UseVisualStyleBackColor = true;
+            this.BtOpt2.Click += new System.EventHandler(this.BtOpt2_Click);
             // 
-            // BtSave
+            // BtOpt1
             // 
-            this.BtSave.Location = new System.Drawing.Point(215, 52);
-            this.BtSave.Name = "BtSave";
-            this.BtSave.Size = new System.Drawing.Size(75, 23);
-            this.BtSave.TabIndex = 1;
-            this.BtSave.Text = "button1";
-            this.BtSave.UseVisualStyleBackColor = true;
-            // 
-            // BtCopy
-            // 
-            this.BtCopy.Location = new System.Drawing.Point(215, 23);
-            this.BtCopy.Name = "BtCopy";
-            this.BtCopy.Size = new System.Drawing.Size(75, 23);
-            this.BtCopy.TabIndex = 0;
-            this.BtCopy.Text = "button1";
-            this.BtCopy.UseVisualStyleBackColor = true;
+            this.BtOpt1.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.BtOpt1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtOpt1.Location = new System.Drawing.Point(274, 66);
+            this.BtOpt1.Name = "BtOpt1";
+            this.BtOpt1.Size = new System.Drawing.Size(16, 16);
+            this.BtOpt1.TabIndex = 0;
+            this.BtOpt1.UseVisualStyleBackColor = true;
+            this.BtOpt1.Click += new System.EventHandler(this.BtOpt1_Click);
             // 
             // GvAttList
             // 
+            this.GvAttList.AllowUserToAddRows = false;
+            this.GvAttList.AllowUserToDeleteRows = false;
             this.GvAttList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.GvAttList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GvAttList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GvAttList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.OrderCol,
             this.ValueCol});
             this.GvAttList.Location = new System.Drawing.Point(3, 3);
+            this.GvAttList.MultiSelect = false;
             this.GvAttList.Name = "GvAttList";
+            this.GvAttList.ReadOnly = true;
+            this.GvAttList.RowHeadersVisible = false;
             this.GvAttList.RowTemplate.Height = 23;
+            this.GvAttList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.GvAttList.Size = new System.Drawing.Size(296, 152);
             this.GvAttList.TabIndex = 0;
-            // 
-            // OrderCol
-            // 
-            this.OrderCol.HeaderText = "排序";
-            this.OrderCol.Name = "OrderCol";
-            // 
-            // ValueCol
-            // 
-            this.ValueCol.HeaderText = "属性";
-            this.ValueCol.Name = "ValueCol";
             // 
             // findBar1
             // 
@@ -164,6 +154,20 @@ namespace Me.Amon.Pwd.V.Pro
             this.findBar1.Name = "findBar1";
             this.findBar1.Size = new System.Drawing.Size(302, 29);
             this.findBar1.TabIndex = 0;
+            // 
+            // OrderCol
+            // 
+            this.OrderCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.OrderCol.HeaderText = "排序";
+            this.OrderCol.Name = "OrderCol";
+            this.OrderCol.ReadOnly = true;
+            this.OrderCol.Width = 54;
+            // 
+            // ValueCol
+            // 
+            this.ValueCol.HeaderText = "属性";
+            this.ValueCol.Name = "ValueCol";
+            this.ValueCol.ReadOnly = true;
             // 
             // APro
             // 
@@ -193,9 +197,8 @@ namespace Me.Amon.Pwd.V.Pro
         private Bean.FindBar findBar1;
         private System.Windows.Forms.DataGridView GvAttList;
         private System.Windows.Forms.GroupBox GbGroup;
-        private System.Windows.Forms.Button BtDrop;
-        private System.Windows.Forms.Button BtSave;
-        private System.Windows.Forms.Button BtCopy;
+        private System.Windows.Forms.Button BtOpt2;
+        private System.Windows.Forms.Button BtOpt1;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn ValueCol;
 

@@ -40,11 +40,12 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
 
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
-            BtOpt.Image = viewModel.GetImage("att-data-options");
-            _Body.ShowTips(BtOpt, "选项");
-
+            BtFill.Image = viewModel.GetImage("att-data-options");
+            _Body.ShowTips(BtFill, "选项");
             BtCopy.Image = viewModel.GetImage("att-copy");
             _Body.ShowTips(BtCopy, "复制");
+            BtFill.Image = viewModel.GetImage("script-fill-16");
+            _Body.ShowTips(BtFill, "填充");
 
             InitSpec(TbData);
         }
@@ -116,9 +117,9 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
             _Body.EditCtl = this;
         }
 
-        private void BtOpt_Click(object sender, EventArgs e)
+        private void BtFill_Click(object sender, EventArgs e)
         {
-            ShowSpec(BtOpt);
+            ShowSpec(BtFill);
         }
 
         private void BtCopy_Click(object sender, EventArgs e)

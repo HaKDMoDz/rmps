@@ -41,13 +41,12 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
 
             DtData.GotFocus += new EventHandler(DtData_GotFocus);
 
-            BtNow.Image = viewModel.GetImage("att-date-now");
-            _Body.ShowTips(BtNow, "当前时间");
-            BtOpt.Image = viewModel.GetImage("att-date-options");
-            _Body.ShowTips(BtOpt, "选项");
-
+            BtFill.Image = viewModel.GetImage("att-date-options");
+            _Body.ShowTips(BtFill, "选项");
             BtCopy.Image = viewModel.GetImage("att-copy");
             _Body.ShowTips(BtCopy, "复制");
+            BtFill.Image = viewModel.GetImage("script-fill-16");
+            _Body.ShowTips(BtFill, "填充");
 
             InitSpec(DtData);
         }
@@ -132,14 +131,9 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
             _Body.EditCtl = this;
         }
 
-        private void BtNow_Click(object sender, EventArgs e)
+        private void BtFill_Click(object sender, EventArgs e)
         {
-            DtData.Value = DateTime.Now;
-        }
-
-        private void BtOpt_Click(object sender, EventArgs e)
-        {
-            ShowSpec(BtOpt);
+            ShowSpec(BtFill);
         }
 
         private void BtCopy_Click(object sender, EventArgs e)

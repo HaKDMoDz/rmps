@@ -42,11 +42,11 @@ namespace Me.Amon.Pwd.M
             {
                 _Key = value;
                 Modified = false;
-                _IsUpdate = _Key != null && CharUtil.IsValidateHash(_Key.Id);
+                IsUpdate = _Key != null && CharUtil.IsValidateHash(_Key.Id);
             }
         }
-        private bool _IsUpdate;
-        public bool IsUpdate { get { return _IsUpdate; } }
+        public bool EditMode { get; set; }
+        public bool IsUpdate { get; private set; }
         public bool Modified { get; set; }
         #endregion
 

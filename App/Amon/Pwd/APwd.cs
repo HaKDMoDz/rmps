@@ -79,6 +79,10 @@ namespace Me.Amon.Pwd
 
         private void APwd_Load(object sender, EventArgs e)
         {
+        }
+
+        public void Init()
+        {
             #region 数据模型
             _SafeModel = new SafeModel(_UserModel);
             _SafeModel.Init();
@@ -234,7 +238,7 @@ namespace Me.Amon.Pwd
             }
             if (Width < 360 || Height < 360)
             {
-                ShowAPad();
+                //ShowAPad();
             }
             //if (WindowState == FormWindowState.Minimized)
             //{

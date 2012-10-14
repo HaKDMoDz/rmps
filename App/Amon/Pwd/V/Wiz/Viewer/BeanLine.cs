@@ -41,10 +41,7 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
             _Label.Dock = DockStyle.Fill;
 
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
-
-            BtOpt.Image = viewModel.GetImage("att-line-options");
-            _Body.ShowTips(BtOpt, "选项");
-
+            
             InitSpec(TbData);
         }
         #endregion
@@ -118,7 +115,7 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
         #region 按钮事件
         private void BtOpt_Click(object sender, EventArgs e)
         {
-            ShowSpec(BtOpt);
+            //ShowSpec(BtOpt);
         }
 
         private void BtCopy_Click(object sender, EventArgs e)

@@ -47,16 +47,6 @@ namespace Me.Amon.Pwd.V.Pro
             GvAttList.AutoGenerateColumns = false;
             GvAttList.DataSource = _DataList;
 
-            BtCopy.Image = viewModel.GetImage("att-copy");
-            BtCopy.Visible = false;
-            _APwd.ShowTips(BtCopy, "复制属性");
-            BtSave.Image = viewModel.GetImage("att-save");
-            BtSave.Visible = false;
-            _APwd.ShowTips(BtSave, "保存属性");
-            BtDrop.Image = viewModel.GetImage("att-drop");
-            BtDrop.Visible = false;
-            _APwd.ShowTips(BtDrop, "移除属性");
-
             _CmpInfo = new BeanInfo();
             _CmpInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             _CmpInfo.Location = new Point(6, 20);
@@ -103,6 +93,28 @@ namespace Me.Amon.Pwd.V.Pro
             VSplit.Panel2.Controls.Remove(KeyList.Control);
         }
 
+        public void ChangeMode(bool edit)
+        {
+            if (edit)
+            {
+                BtOpt1.Image = _ViewModel.GetImage("att-save");
+                BtOpt1.Visible = false;
+                _APwd.ShowTips(BtOpt1, "保存属性");
+                BtOpt2.Image = _ViewModel.GetImage("att-drop");
+                BtOpt2.Visible = false;
+                _APwd.ShowTips(BtOpt2, "移除属性");
+            }
+            else
+            {
+                BtOpt1.Image = _ViewModel.GetImage("att-copy");
+                BtOpt1.Visible = false;
+                _APwd.ShowTips(BtOpt1, "复制");
+                BtOpt2.Image = _ViewModel.GetImage("att-fill");
+                BtOpt2.Visible = false;
+                _APwd.ShowTips(BtOpt2, "填充");
+            }
+        }
+
         public void ShowInfo()
         {
             _DataList.Rows.Clear();
@@ -114,9 +126,8 @@ namespace Me.Amon.Pwd.V.Pro
             GbGroup.Controls.Add(_CmpInfo);
             _CmpInfo.ShowData(null);
 
-            BtCopy.Visible = false;
-            BtSave.Visible = false;
-            BtDrop.Visible = false;
+            BtOpt1.Visible = false;
+            BtOpt2.Visible = false;
 
             _CmpLast = _CmpInfo;
         }
@@ -387,6 +398,10 @@ namespace Me.Amon.Pwd.V.Pro
             GvAttList.Rows[_LastIndex].Selected = true;
         }
 
+        public void FillAtt()
+        {
+        }
+
         public Cat SelectedCat
         {
             get;
@@ -430,19 +445,28 @@ namespace Me.Amon.Pwd.V.Pro
             ShowView(_AAtt);
         }
 
-        private void BtCopy_Click(object sender, EventArgs e)
+        private void BtOpt1_Click(object sender, EventArgs e)
         {
-            CopyAtt();
+            if (_SafeModel.EditMode)
+            {
+                SaveAtt();
+            }
+            else
+            {
+                CopyAtt();
+            }
         }
 
-        private void BtSave_Click(object sender, EventArgs e)
+        private void BtOpt2_Click(object sender, EventArgs e)
         {
-            SaveAtt();
-        }
-
-        private void BtDrop_Click(object sender, EventArgs e)
-        {
-            DropAtt();
+            if (_SafeModel.EditMode)
+            {
+                DropAtt();
+            }
+            else
+            {
+                FillAtt();
+            }
         }
         #endregion
 
@@ -580,9 +604,8 @@ namespace Me.Amon.Pwd.V.Pro
             GbGroup.Controls.Add(_CmpLast.Control);
             _CmpLast.ShowData(att);
 
-            BtCopy.Visible = true;
-            BtSave.Visible = true;
-            BtDrop.Visible = true;
+            BtOpt1.Visible = true;
+            BtOpt2.Visible = true;
         }
 
         private IAttEdit GetCtl(int type)

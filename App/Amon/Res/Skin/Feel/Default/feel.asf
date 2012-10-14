@@ -185,3 +185,5 @@ att-line-options=options.png
 #######################################
 export-card-16=card16.png
 export-card-24=card24.png
+script-fill-16=fill16.png
+script-fill-24=fill24.png

@@ -43,7 +43,6 @@
             // 
             // aTabControl1
             // 
-            this.aTabControl1.Alignment = System.Windows.Forms.TabAlignment.Right;
             this.aTabControl1.Controls.Add(this.TpGuid);
             this.aTabControl1.Controls.Add(this.TpHead);
             this.aTabControl1.Controls.Add(this.TpBody);
@@ -68,7 +67,6 @@
             this.aTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.aTabControl1.HotTrack = true;
             this.aTabControl1.Location = new System.Drawing.Point(0, 0);
-            this.aTabControl1.Multiline = true;
             this.aTabControl1.Name = "aTabControl1";
             this.aTabControl1.SelectedIndex = 0;
             this.aTabControl1.Size = new System.Drawing.Size(339, 259);
@@ -77,10 +75,10 @@
             // TpGuid
             // 
             this.TpGuid.Controls.Add(this.beanGuid1);
-            this.TpGuid.Location = new System.Drawing.Point(4, 4);
+            this.TpGuid.Location = new System.Drawing.Point(4, 23);
             this.TpGuid.Name = "TpGuid";
             this.TpGuid.Padding = new System.Windows.Forms.Padding(3);
-            this.TpGuid.Size = new System.Drawing.Size(312, 251);
+            this.TpGuid.Size = new System.Drawing.Size(331, 232);
             this.TpGuid.TabIndex = 0;
             this.TpGuid.Text = "信息";
             this.TpGuid.UseVisualStyleBackColor = true;
@@ -90,16 +88,16 @@
             this.beanGuid1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.beanGuid1.Location = new System.Drawing.Point(3, 3);
             this.beanGuid1.Name = "beanGuid1";
-            this.beanGuid1.Size = new System.Drawing.Size(306, 245);
+            this.beanGuid1.Size = new System.Drawing.Size(325, 226);
             this.beanGuid1.TabIndex = 0;
             // 
             // TpHead
             // 
             this.TpHead.Controls.Add(this.beanHead1);
-            this.TpHead.Location = new System.Drawing.Point(4, 4);
+            this.TpHead.Location = new System.Drawing.Point(4, 23);
             this.TpHead.Name = "TpHead";
             this.TpHead.Padding = new System.Windows.Forms.Padding(3);
-            this.TpHead.Size = new System.Drawing.Size(312, 251);
+            this.TpHead.Size = new System.Drawing.Size(331, 232);
             this.TpHead.TabIndex = 1;
             this.TpHead.Text = "摘要";
             this.TpHead.UseVisualStyleBackColor = true;
@@ -109,15 +107,15 @@
             this.beanHead1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.beanHead1.Location = new System.Drawing.Point(3, 3);
             this.beanHead1.Name = "beanHead1";
-            this.beanHead1.Size = new System.Drawing.Size(306, 245);
+            this.beanHead1.Size = new System.Drawing.Size(325, 222);
             this.beanHead1.TabIndex = 0;
             // 
             // TpBody
             // 
             this.TpBody.Controls.Add(this.beanBody1);
-            this.TpBody.Location = new System.Drawing.Point(4, 4);
+            this.TpBody.Location = new System.Drawing.Point(4, 23);
             this.TpBody.Name = "TpBody";
-            this.TpBody.Size = new System.Drawing.Size(312, 251);
+            this.TpBody.Size = new System.Drawing.Size(331, 232);
             this.TpBody.TabIndex = 2;
             this.TpBody.Text = "详细";
             this.TpBody.UseVisualStyleBackColor = true;
@@ -129,7 +127,7 @@
             this.beanBody1.EditCtl = null;
             this.beanBody1.Location = new System.Drawing.Point(0, 0);
             this.beanBody1.Name = "beanBody1";
-            this.beanBody1.Size = new System.Drawing.Size(312, 251);
+            this.beanBody1.Size = new System.Drawing.Size(331, 228);
             this.beanBody1.TabIndex = 0;
             // 
             // AttViewer
