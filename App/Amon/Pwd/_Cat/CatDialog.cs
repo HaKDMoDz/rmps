@@ -8,7 +8,7 @@ namespace Me.Amon.Pwd._Cat
 {
     public partial class CatDialog : Form
     {
-        private UserModel _UserModel;
+        private DataModel _DataModel;
         private TreeNode _RootNode;
 
         #region 构造函数
@@ -17,9 +17,9 @@ namespace Me.Amon.Pwd._Cat
             InitializeComponent();
         }
 
-        public CatDialog(UserModel userModel)
+        public CatDialog(DataModel dataModel)
         {
-            _UserModel = userModel;
+            _DataModel = dataModel;
 
             InitializeComponent();
 
@@ -40,7 +40,7 @@ namespace Me.Amon.Pwd._Cat
 
         private void InitCat(TreeNode root)
         {
-            foreach (Cat cat in _UserModel.DBA.ListCat(CApp.IAPP_APWD, root.Name))
+            foreach (Cat cat in _DataModel.ListCat(CApp.IAPP_APWD, root.Name))
             {
                 TreeNode node = new TreeNode();
                 node.Name = cat.Id;

@@ -299,7 +299,7 @@ namespace Me.Amon.Pwd.V.Pro
         private void ShowSpec(Control ctl)
         {
             //_DataModel = userModel;
-            if ((_DataModel.UdcModel.Modified & CPwd.KEY_AWIZ) > 0)
+            if ((_DataModel.UdcModified & CPwd.KEY_AWIZ) > 0)
             {
                 MuCharSet.DropDownItems.Clear();
                 MuCharSet.DropDownItems.Add(_CharSetDef);
@@ -307,7 +307,7 @@ namespace Me.Amon.Pwd.V.Pro
 
                 _CharSetDict.Clear();
                 ToolStripMenuItem item;
-                foreach (Udc ucs in _DataModel.UdcModel.UdcList)
+                foreach (Udc ucs in _DataModel.UdcList)
                 {
                     item = new ToolStripMenuItem();
                     item.Click += new EventHandler(MiCharSet_Click);
@@ -318,7 +318,7 @@ namespace Me.Amon.Pwd.V.Pro
                     MuCharSet.DropDownItems.Add(item);
                     _CharSetDict[ucs.Id] = item;
                 }
-                _DataModel.UdcModel.Modified &= CPwd.KEY_AWIZ;
+                _DataModel.UdcModified &= CPwd.KEY_AWIZ;
 
                 _LastCharSet = _CharSetDef;
                 _LastCharSet.Checked = true;
@@ -385,7 +385,7 @@ namespace Me.Amon.Pwd.V.Pro
             }
             else
             {
-                key = _DataModel.UdcModel.Default.Data;
+                key = _DataModel.DefaultUdc.Data;
             }
 
             string rep = _Att.GetSpec(PassAtt.SPEC_PWDS_REP, Att.SPEC_VALUE_FALSE);

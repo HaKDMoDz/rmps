@@ -9,7 +9,6 @@ namespace Me.Amon.Pwd._Lib
     public partial class LibEditer : Form
     {
         private TreeNode _Selected;
-        private UserModel _UserModel;
         private DataModel _DataModel;
         private ILibEdit _UcEditer;
         private UcHeader _UcHeader;
@@ -20,9 +19,9 @@ namespace Me.Amon.Pwd._Lib
             InitializeComponent();
         }
 
-        public LibEditer(UserModel userModel)
+        public LibEditer(DataModel dataModel)
         {
-            _UserModel = userModel;
+            _DataModel = dataModel;
 
             InitializeComponent();
 
@@ -131,7 +130,7 @@ namespace Me.Amon.Pwd._Lib
 
             Lib header = (Lib)obj;
 
-            _UserModel.DBA.DeleteVcs(header);
+            _DataModel.DeleteVcs(header);
 
             TvLibView.Nodes.Remove(_Selected);
             _DataModel.LibList.Remove(header);
@@ -184,9 +183,9 @@ namespace Me.Amon.Pwd._Lib
                 return;
             }
 
-            _UserModel.DBA.DeleteVcs(detail);
+            _DataModel.DeleteVcs(detail);
             header.Details.Remove(detail);
-            _UserModel.DBA.SaveVcs(header);
+            _DataModel.SaveVcs(header);
 
             TvLibView.Nodes.Remove(_Selected);
             _DataModel.LibModified = -1;
@@ -247,7 +246,7 @@ namespace Me.Amon.Pwd._Lib
                 TvLibView.SelectedNode = null;
             }
 
-            _UserModel.DBA.SaveVcs(header);
+            _DataModel.SaveVcs(header);
             _DataModel.LibModified = -1;
         }
 
@@ -255,7 +254,7 @@ namespace Me.Amon.Pwd._Lib
         {
             if (CharUtil.IsValidateHash(detail.Id))
             {
-                _UserModel.DBA.SaveVcs(detail);
+                _DataModel.SaveVcs(detail);
 
                 _Selected.Text = Att.SP_TPL_LS + detail.Text + Att.SP_TPL_RS;
                 TreeNode root = TvLibView.SelectedNode;
@@ -266,7 +265,7 @@ namespace Me.Amon.Pwd._Lib
                 detail.Header = header.Id;
                 detail.Id = HashUtil.UtcTimeInEnc(false);
                 header.Add(detail);
-                _UserModel.DBA.SaveVcs(header);
+                _DataModel.SaveVcs(header);
 
                 TreeNode node = new TreeNode();
                 node.Name = detail.Id;

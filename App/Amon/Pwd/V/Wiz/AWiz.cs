@@ -24,22 +24,37 @@ namespace Me.Amon.Pwd.V.Wiz
         #region 接口实现
         public ICatTree CatTree { get; set; }
         public IKeyList KeyList { get; set; }
+        public IFindBar FindBar { get; set; }
 
         public void InitView(Panel panel)
         {
-            HSplit.Panel1.Controls.Add(CatTree.Control);
-            CatTree.Control.Dock = DockStyle.Fill;
-            //this.catTree1.Location = new System.Drawing.Point(0, 0);
-            //this.catTree1.Name = "catTree1";
-            //this.catTree1.Size = new System.Drawing.Size(152, 151);
-            //this.catTree1.TabIndex = 0;
+            if (CatTree != null)
+            {
+                CatTree.Control.Dock = DockStyle.Fill;
+                //this.catTree1.Location = new System.Drawing.Point(0, 0);
+                //this.catTree1.Name = "catTree1";
+                //this.catTree1.Size = new System.Drawing.Size(152, 151);
+                //this.catTree1.TabIndex = 0;
+                HSplit.Panel1.Controls.Add(CatTree.Control);
+            }
 
-            VSplit.Panel1.Controls.Add(KeyList.Control);
-            KeyList.Control.Dock = DockStyle.Fill;
-            //this.keyList1.Location = new System.Drawing.Point(0, 0);
-            //this.keyList1.Name = "keyList1";
-            //this.keyList1.Size = new System.Drawing.Size(152, 148);
-            //this.keyList1.TabIndex = 0;
+            if (FindBar != null)
+            {
+                FindBar.Control.Dock = DockStyle.Top;
+                FindBar.Control.Location = new System.Drawing.Point(0, 0);
+                FindBar.Control.Size = new System.Drawing.Size(152, 29);
+                VSplit.Panel1.Controls.Add(FindBar.Control);
+            }
+
+            if (KeyList != null)
+            {
+                KeyList.Control.Dock = DockStyle.Fill;
+                KeyList.Control.Location = new System.Drawing.Point(0, 29);
+                //this.keyList1.Name = "keyList1";
+                KeyList.Control.Size = new System.Drawing.Size(152, 121);
+                //this.keyList1.TabIndex = 0;
+                VSplit.Panel1.Controls.Add(KeyList.Control);
+            }
 
             AttView = new AttViewer();
             AttView.Control.Dock = DockStyle.Fill;

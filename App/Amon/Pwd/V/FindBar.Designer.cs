@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Pwd.Bean
+﻿namespace Me.Amon.Pwd.V
 {
     partial class FindBar
     {

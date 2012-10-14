@@ -38,8 +38,11 @@
             this.TvCat.AllowDrop = true;
             this.TvCat.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TvCat.HideSelection = false;
+            this.TvCat.ImageIndex = 0;
+            this.TvCat.ImageList = this.IlCat;
             this.TvCat.Location = new System.Drawing.Point(0, 0);
             this.TvCat.Name = "TvCat";
+            this.TvCat.SelectedImageIndex = 0;
             this.TvCat.Size = new System.Drawing.Size(150, 150);
             this.TvCat.TabIndex = 0;
             this.TvCat.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.TvCat_ItemDrag);

@@ -52,6 +52,21 @@ namespace Me.Amon.Pwd._Cat
         public IKeyList KeyList { get; set; }
 
         public Cat SelectedCat { get; set; }
+
+        public void Init(DataModel dataModel)
+        {
+            _DataModel = dataModel;
+
+            IlCat.Images.Add(CPwd.DEF_CAT_IMG, BeanUtil.NaN16);
+
+            Cat cat = new Cat { Id = CPwd.DEF_CAT_ID, Text = "默认类别", Tips = "默认类别", Icon = "Amon" };
+            IlCat.Images.Add(cat.Icon, Resources.Logo);
+            _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Icon, SelectedImageKey = cat.Icon };
+            _RootNode.Tag = cat;
+            TvCat.Nodes.Add(_RootNode);
+            DoInitCat(_RootNode);
+            _RootNode.Expand();
+        }
         #endregion
 
         #region 公共函数
@@ -465,19 +480,6 @@ namespace Me.Amon.Pwd._Cat
         /// <summary>
         /// 类别视图初始化
         /// </summary>
-        private void InitCat()
-        {
-            IlCat.Images.Add(CPwd.DEF_CAT_IMG, BeanUtil.NaN16);
-
-            Cat cat = new Cat { Id = CPwd.DEF_CAT_ID, Text = "默认类别", Tips = "默认类别", Icon = "Amon" };
-            IlCat.Images.Add(cat.Icon, Resources.Logo);
-            _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Icon, SelectedImageKey = cat.Icon };
-            _RootNode.Tag = cat;
-            TvCat.Nodes.Add(_RootNode);
-            DoInitCat(_RootNode);
-            _RootNode.Expand();
-        }
-
         private void DoInitCat(TreeNode root)
         {
             foreach (Cat cat in _DataModel.ListCat(CApp.IAPP_APWD, root.Name))

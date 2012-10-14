@@ -90,13 +90,11 @@ namespace Me.Amon.Pwd
             _DataModel.Init();
             _ViewModel = new ViewModel(_UserModel);
             _ViewModel.LoadLayout();
-            UdcModel udcModel = new UdcModel();
-            udcModel.Init(_UserModel);
-            _DataModel.UdcModel = udcModel;
             #endregion
 
             _CatTree = new CatTree(this);
             _KeyList = new KeyList(this);
+            _FindBar = new FindBar();
 
             #region 系统选单
             _XmlMenu = new XmlMenu<APwd>(this, _ViewModel);
@@ -137,6 +135,8 @@ namespace Me.Amon.Pwd
                 default:
                     break;
             }
+
+            _CatTree.Init(_DataModel);
 
             //_UserModel.AppendHandler(new AmonHandler<string>(ShowEcho));
 
@@ -222,9 +222,9 @@ namespace Me.Amon.Pwd
             }
 
             string file = _UserModel.Code + '-' + DateTime.Now.ToString("yyyyMMddHHmmss") + ".apbak";
-            _UserModel.Suspend();
+            _DataModel.Suspend();
             BeanUtil.DoZip(Path.Combine(_UserModel.BakHome, file), _UserModel.DatHome);
-            _UserModel.Resume();
+            _DataModel.Resume();
             return true;
         }
         #endregion
@@ -323,7 +323,7 @@ namespace Me.Amon.Pwd
 
         public void ShowIcoSeeker(string rootDir, AmonHandler<Png> handler)
         {
-            KeyIcon seeker = new KeyIcon(_UserModel, rootDir);
+            KeyIcon seeker = new KeyIcon(_DataModel, rootDir);
             seeker.IcoSize = 24;
             seeker.CallBackHandler = handler;
             BeanUtil.CenterToParent(seeker, this);
@@ -495,11 +495,11 @@ namespace Me.Amon.Pwd
             cat.Parent = parent.Id;
             cat.Order = _LastNode.Nodes.Count;
             cat.AppId = CApp.IAPP_APWD;
-            _UserModel.DBA.SaveVcs(cat);
+            _DataModel.SaveVcs(cat);
             if (parent.IsLeaf)
             {
                 parent.IsLeaf = false;
-                _UserModel.DBA.SaveVcs(parent);
+                _DataModel.SaveVcs(parent);
             }
 
             TreeNode node = new TreeNode();
@@ -543,7 +543,7 @@ namespace Me.Amon.Pwd
             cur.Text = cat.Text;
             cur.Tips = cat.Tips;
             cur.Memo = cat.Memo;
-            _UserModel.DBA.SaveVcs(cur);
+            _DataModel.SaveVcs(cur);
 
             _LastNode.Text = cat.Text;
             _LastNode.ToolTipText = cat.Tips;
@@ -575,14 +575,14 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            IList<Key> keys = _UserModel.DBA.ListKey(cat.Id);
+            IList<Key> keys = _DataModel.ListKey(cat.Id);
             if (keys.Count > 0)
             {
                 Main.ShowAlert("类别数据不为空，不能删除！");
                 return;
             }
 
-            _UserModel.DBA.DeleteVcs(cat);
+            _DataModel.DeleteVcs(cat);
 
             TreeNode parent = _LastNode.Parent;
             if (parent != null)
@@ -594,7 +594,7 @@ namespace Me.Amon.Pwd
             if (cat != null && !cat.IsLeaf && parent.Nodes.Count == 0)
             {
                 cat.IsLeaf = true;
-                _UserModel.DBA.SaveVcs(cat);
+                _DataModel.SaveVcs(cat);
             }
         }
 
@@ -625,9 +625,9 @@ namespace Me.Amon.Pwd
             }
 
             prevCat.Order += 1;
-            _UserModel.DBA.SaveVcs(prevCat);
+            _DataModel.SaveVcs(prevCat);
             currCat.Order -= 1;
-            _UserModel.DBA.SaveVcs(currCat);
+            _DataModel.SaveVcs(currCat);
 
             //TvCatTree.SelectedNode = null;
             parent.Nodes.Remove(_LastNode);
@@ -662,9 +662,9 @@ namespace Me.Amon.Pwd
             }
 
             currCat.Order += 1;
-            _UserModel.DBA.SaveVcs(currCat);
+            _DataModel.SaveVcs(currCat);
             nextCat.Order -= 1;
-            _UserModel.DBA.SaveVcs(nextCat);
+            _DataModel.SaveVcs(nextCat);
 
             //TvCatTree.SelectedNode = null;
             parent.Nodes.Remove(_LastNode);
@@ -753,15 +753,15 @@ namespace Me.Amon.Pwd
             if (_SafeModel.IsUpdate && _SafeModel.Key.Backup)
             {
                 KeyLog keyLog = _SafeModel.Key.ToLog();
-                _UserModel.DBA.SaveLog(keyLog);
+                _DataModel.SaveLog(keyLog);
             }
             _SafeModel.Encode();
             _SafeModel.Key.AccessTime = DateTime.Now.ToString(CApp.DATEIME_FORMAT);
-            _UserModel.DBA.SaveVcs(_SafeModel.Key);
+            _DataModel.SaveVcs(_SafeModel.Key);
             if (_SafeModel.Key.Gtd != null)
             {
                 _SafeModel.Key.Gtd.RefId = _SafeModel.Key.Id;
-                _UserModel.DBA.SaveVcs(_SafeModel.Key.Gtd);
+                _DataModel.SaveVcs(_SafeModel.Key.Gtd);
             }
             _SafeModel.Modified = false;
 
@@ -806,7 +806,7 @@ namespace Me.Amon.Pwd
 
             //LbKeyList.Items.RemoveAt(LbKeyList.SelectedIndex);
 
-            _UserModel.DBA.RemoveVcs(_SafeModel.Key);
+            _DataModel.RemoveVcs(_SafeModel.Key);
             _SafeModel.Modified = false;
             _SafeModel.Key = null;
             _PwdView.ShowInfo();
@@ -870,7 +870,7 @@ namespace Me.Amon.Pwd
             }
 
             _SafeModel.Key.CatId = catId;
-            _UserModel.DBA.SaveVcs(_SafeModel.Key);
+            _DataModel.SaveVcs(_SafeModel.Key);
 
             //Key key = LbKeyList.SelectedItem as Key;
             //if (key == null || key.Id != _SafeModel.Key.Id)
@@ -900,7 +900,7 @@ namespace Me.Amon.Pwd
 
         public void KeyMoveto()
         {
-            CatDialog view = new CatDialog(_UserModel);
+            CatDialog view = new CatDialog(_DataModel);
             //view.Init(IlCatTree);
             view.CallBack = new AmonHandler<string>(ChangeKeyCat);
             BeanUtil.CenterToParent(view, this);
@@ -914,7 +914,7 @@ namespace Me.Amon.Pwd
                 return;
             }
             LogViewer edit = new LogViewer(this);
-            edit.Init(_UserModel, _SafeModel);
+            edit.Init(_DataModel, _SafeModel);
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
@@ -1061,6 +1061,7 @@ namespace Me.Amon.Pwd
             _PwdView = _ProView;
             _PwdView.CatTree = _CatTree;
             _PwdView.KeyList = _KeyList;
+            _PwdView.FindBar = _FindBar;
             _PwdView.InitView(PlMain);
             ShowKey(_SafeModel.Key);
 
@@ -1095,6 +1096,7 @@ namespace Me.Amon.Pwd
             _PwdView = _WizView;
             _PwdView.CatTree = _CatTree;
             _PwdView.KeyList = _KeyList;
+            _PwdView.FindBar = _FindBar;
             _PwdView.InitView(PlMain);
             ShowKey(_SafeModel.Key);
 
@@ -1279,9 +1281,9 @@ namespace Me.Amon.Pwd
             {
                 return;
             }
-            _UserModel.Suspend();
+            _DataModel.Suspend();
             BeanUtil.DoZip(Main.SaveFileDialog.FileName, _UserModel.DatHome);
-            _UserModel.Resume();
+            _DataModel.Resume();
         }
 
         /// <summary>
@@ -1294,7 +1296,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            _UserModel.Suspend();
+            _DataModel.Suspend();
             SaveData();
 
             if (DialogResult.OK != Main.ShowOpenFileDialog(this, "密码箱备份文件|*.apbak", "", false))
@@ -1352,7 +1354,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            IList<Key> keys = _UserModel.DBA.ListKey(cat.Id);
+            IList<Key> keys = _DataModel.ListKey(cat.Id);
             if (keys.Count < 1)
             {
                 Main.ShowAlert("当前类别下没有记录！");
@@ -1405,7 +1407,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            IList<Key> keys = _UserModel.DBA.ListKey(cat.Id);
+            IList<Key> keys = _DataModel.ListKey(cat.Id);
             if (keys.Count < 1)
             {
                 Main.ShowAlert("当前类别下没有记录！");
@@ -1894,7 +1896,7 @@ namespace Me.Amon.Pwd
         #region 系统管理
         public void ShowLibEdit()
         {
-            LibEditer edit = new LibEditer(_UserModel);
+            LibEditer edit = new LibEditer(_DataModel);
             edit.Init(_DataModel);
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
@@ -1902,15 +1904,15 @@ namespace Me.Amon.Pwd
 
         public void ShowUdcEdit()
         {
-            UdcEditor edit = new UdcEditor(_UserModel);
-            edit.Init(_DataModel.UdcModel, new Udc());
+            UdcEditor edit = new UdcEditor(_DataModel);
+            edit.Init(new Udc());
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
         }
 
         public void ShowIcoEdit()
         {
-            KeyIcon edit = new KeyIcon(_UserModel, _DataModel.KeyDir);
+            KeyIcon edit = new KeyIcon(_DataModel, _DataModel.KeyDir);
             edit.IcoSize = CApp.IMG_KEY_LIST_DIM;
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);
@@ -1977,7 +1979,7 @@ namespace Me.Amon.Pwd
             _SafeModel.Encode();
 
             _SafeModel.Key.AccessTime = DateTime.Now.ToString(CApp.DATEIME_FORMAT);
-            _UserModel.DBA.SaveVcs(_SafeModel.Key);
+            _DataModel.SaveVcs(_SafeModel.Key);
         }
 
         /// <summary>

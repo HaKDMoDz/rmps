@@ -396,6 +396,7 @@
     <Compile Include="Img\V\ASmall.Designer.cs">
       <DependentUpon>ASmall.cs</DependentUpon>
     </Compile>
+    <Compile Include="M\ADataModel.cs" />
     <Compile Include="Pwd\EKeyType.cs" />
     <Compile Include="Pwd\V\IAttView.cs" />
     <Compile Include="Pwd\V\Wiz\Editer\AttEditer.cs">
@@ -866,7 +867,6 @@
     <Compile Include="Pwd\M\SafeModel.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="M\UdcModel.cs" />
     <Compile Include="Pwd\M\UserModel.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -17,6 +17,7 @@ namespace Me.Amon.User.Uc
     public partial class SignPc : UserControl, ISignAc
     {
         private AUserModel _UserModel;
+        private DataModel _DataModel;
         private DFEngine _Prop;
         private SignAc _SignAc;
 
@@ -225,7 +226,7 @@ namespace Me.Amon.User.Uc
                         {
                             continue;
                         }
-                        _UserModel.DBA.SaveVcs(cat);
+                        _DataModel.SaveVcs(cat);
                     }
                 }
                 stream.Close();
@@ -247,7 +248,7 @@ namespace Me.Amon.User.Uc
                         {
                             continue;
                         }
-                        _UserModel.DBA.SaveVcs(header);
+                        _DataModel.SaveVcs(header);
                     }
                 }
                 stream.Close();
@@ -269,7 +270,7 @@ namespace Me.Amon.User.Uc
                         {
                             continue;
                         }
-                        _UserModel.DBA.SaveVcs(udc);
+                        _DataModel.SaveVcs(udc);
                     }
                 }
                 stream.Close();
@@ -291,7 +292,7 @@ namespace Me.Amon.User.Uc
                         {
                             continue;
                         }
-                        _UserModel.DBA.SaveVcs(dir);
+                        _DataModel.SaveVcs(dir);
                     }
                 }
                 stream.Close();

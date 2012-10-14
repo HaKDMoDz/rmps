@@ -4,7 +4,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
-using Me.Amon.Da;
 using Me.Amon.Da.Df;
 using Me.Amon.Util;
 
@@ -47,10 +46,10 @@ namespace Me.Amon.M
         /// 风格文件
         /// </summary>
         public string Feel { get; set; }
-
-        public DBA DBA { get; protected set; }
-        //public DCAccess DCAccess { get { return _DCAccess; } }
-        public DFA DFA { get; protected set; }
+        /// <summary>
+        /// 提醒检测间隔
+        /// </summary>
+        public int NoticeInterval { get; set; }
         #endregion
 
         #region 初始化

@@ -37,7 +37,7 @@ namespace Me.Amon.Pwd.V.Pro
             this.BtOpt2 = new System.Windows.Forms.Button();
             this.BtOpt1 = new System.Windows.Forms.Button();
             this.GvAttList = new System.Windows.Forms.DataGridView();
-            this.findBar1 = new Me.Amon.Pwd.Bean.FindBar();
+            this.findBar1 = new Me.Amon.Pwd.V.FindBar();
             this.OrderCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.HSplit)).BeginInit();
@@ -194,7 +194,7 @@ namespace Me.Amon.Pwd.V.Pro
         private System.Windows.Forms.SplitContainer HSplit;
         private System.Windows.Forms.SplitContainer VSplit;
         private System.Windows.Forms.Panel panel1;
-        private Bean.FindBar findBar1;
+        private V.FindBar findBar1;
         private System.Windows.Forms.DataGridView GvAttList;
         private System.Windows.Forms.GroupBox GbGroup;
         private System.Windows.Forms.Button BtOpt2;

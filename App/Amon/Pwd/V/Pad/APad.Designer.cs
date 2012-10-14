@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.findBar1 = new Me.Amon.Pwd.Bean.FindBar();
+            this.findBar1 = new Me.Amon.Pwd.V.FindBar();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.BtFill = new System.Windows.Forms.Button();
             this.LbKey = new System.Windows.Forms.ListBox();
@@ -121,7 +121,7 @@
 
         #endregion
 
-        private Bean.FindBar findBar1;
+        private V.FindBar findBar1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button BtFill;
         private System.Windows.Forms.ListBox LbKey;

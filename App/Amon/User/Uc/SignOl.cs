@@ -23,6 +23,7 @@ namespace Me.Amon.User.Uc
         private string _Pass;
         private string _Root;
         private AUserModel _UserModel;
+        private DataModel _DataModel;
         private DFEngine _Prop;
         private SignAc _SignAc;
 
@@ -342,7 +343,7 @@ namespace Me.Amon.User.Uc
                     {
                         continue;
                     }
-                    _UserModel.DBA.SaveVcs(cat);
+                    _DataModel.SaveVcs(cat);
                 }
             }
 
@@ -382,7 +383,7 @@ namespace Me.Amon.User.Uc
                     {
                         continue;
                     }
-                    _UserModel.DBA.SaveVcs(header);
+                    _DataModel.SaveVcs(header);
                     header.Order += 1;
                 }
             }
@@ -422,7 +423,7 @@ namespace Me.Amon.User.Uc
                     {
                         continue;
                     }
-                    _UserModel.DBA.SaveVcs(udc);
+                    _DataModel.SaveVcs(udc);
                 }
             }
 

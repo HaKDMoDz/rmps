@@ -9,7 +9,7 @@ namespace Me.Amon.Pwd._Log
     public partial class LogViewer : Form
     {
         private APwd _APwd;
-        private UserModel _UserModel;
+        private DataModel _DataModel;
         private SafeModel _SafeModel;
         private List<Att> _AttList;
 
@@ -28,13 +28,13 @@ namespace Me.Amon.Pwd._Log
             this.Icon = Me.Amon.Properties.Resources.Icon;
         }
 
-        public void Init(UserModel userModel, SafeModel safeModel)
+        public void Init(DataModel dataModel, SafeModel safeModel)
         {
-            _UserModel = userModel;
+            _DataModel = dataModel;
             _SafeModel = safeModel;
             _AttList = new List<Att>();
 
-            foreach (KeyLog log in _UserModel.DBA.ListKeyLog(_SafeModel.Key.Id))
+            foreach (KeyLog log in _DataModel.ListKeyLog(_SafeModel.Key.Id))
             {
                 LbLog.Items.Add(log);
             }
@@ -84,12 +84,12 @@ namespace Me.Amon.Pwd._Log
             }
 
             KeyLog newLog = _SafeModel.Key.ToLog();
-            _UserModel.DBA.SaveLog(newLog);
+            _DataModel.SaveLog(newLog);
 
             _SafeModel.Key.FromLog(oldLog);
             _SafeModel.Decode();
             _APwd.ShowKey(_SafeModel.Key);
-            _UserModel.DBA.SaveVcs(_SafeModel.Key);
+            _DataModel.SaveVcs(_SafeModel.Key);
 
             LbLog.Items.Insert(0, newLog);
         }
@@ -109,7 +109,7 @@ namespace Me.Amon.Pwd._Log
                 return;
             }
 
-            _UserModel.DBA.DeleteLog(log);
+            _DataModel.DeleteLog(log);
             LbLog.Items.Remove(log);
         }
 
@@ -122,7 +122,7 @@ namespace Me.Amon.Pwd._Log
 
             for (int i = LbLog.Items.Count - 1; i >= 0; i -= 1)
             {
-                _UserModel.DBA.DeleteLog(LbLog.Items[i] as KeyLog);
+                _DataModel.DeleteLog(LbLog.Items[i] as KeyLog);
                 LbLog.Items.RemoveAt(i);
             }
         }

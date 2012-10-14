@@ -11,7 +11,7 @@ namespace Me.Amon.Pwd._Key
     public partial class KeyIcon : Form
     {
         #region 全局变量
-        private UserModel _UserModel;
+        private DataModel _DataModel;
         private DirEditer _DirEdit;
         private IcoEditer _IcoView;
         private Control _Control;
@@ -26,9 +26,9 @@ namespace Me.Amon.Pwd._Key
             InitializeComponent();
         }
 
-        public KeyIcon(UserModel userModel, string rootDir)
+        public KeyIcon(DataModel dataModel, string rootDir)
         {
-            _UserModel = userModel;
+            _DataModel = dataModel;
             _RootDir = rootDir;
             _HomeDir = rootDir;
 
@@ -48,7 +48,7 @@ namespace Me.Amon.Pwd._Key
         public void UpdateDir(Dir item)
         {
             bool update = CharUtil.IsValidateHash(item.Id);
-            _UserModel.DBA.SaveVcs(item);
+            _DataModel.SaveVcs(item);
             if (update)
             {
                 LsDir.Items[LsDir.SelectedIndex] = item;
@@ -79,7 +79,7 @@ namespace Me.Amon.Pwd._Key
             ShowIcoView();
 
             LsDir.Items.Add(new Dir { Id = "0", Text = "默认分类", Tips = "默认分类", Path = "." });
-            foreach (Dir dir in _UserModel.DBA.ListDir())
+            foreach (Dir dir in _DataModel.ListDir())
             {
                 LsDir.Items.Add(dir);
             }
@@ -175,7 +175,7 @@ namespace Me.Amon.Pwd._Key
                 return;
             }
 
-            _UserModel.DBA.DeleteVcs(item);
+            _DataModel.DeleteVcs(item);
             if (Directory.Exists(HomeDir))
             {
                 Directory.Delete(HomeDir, true);

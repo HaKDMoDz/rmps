@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using Me.Amon.Da;
 using Me.Amon.Da.Db;
@@ -10,11 +9,8 @@ using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.M
 {
-    public sealed class DataModel
+    public sealed class DataModel : ADataModel
     {
-        private UserModel _UserModel;
-        private ODBEngine _DbEngine;
-
         public DataModel(UserModel userModel)
         {
             _UserModel = userModel;
@@ -45,102 +41,19 @@ namespace Me.Amon.Pwd.M
             }
             #endregion
 
+            _DbEngine = new ODBEngine();
+            _DbEngine.DbInit(_UserModel);
+            if (_DbEngine.DbVersion.Version != 2)
+            {
+                _DbEngine.Upgrade();
+            }
+
             _LibList = new List<Lib>();
-            foreach (Lib lib in _UserModel.DBA.ListLib())
+            foreach (Lib lib in ListLib())
             {
                 _LibList.Add(lib);
             }
             LibModified = 0x7FFFFFFF;
-        }
-
-        public void SaveVcs(Vcs vcs)
-        {
-            if (vcs.Operate == DBConst.OPT_DEFAULT)
-            {
-                vcs.Version += 1;
-            }
-
-            if (vcs.Operate > DBConst.OPT_INSERT)
-            {
-                vcs.Operate += 1;
-            }
-
-            vcs.UserCode = _UserModel.Code;
-            vcs.UpdateTime = DateTime.Now;
-            if (!CharUtil.IsValidateHash(vcs.Id))
-            {
-                vcs.Id = HashUtil.UtcTimeInEnc(false);
-                vcs.CreateTime = vcs.UpdateTime;
-            }
-            _DbEngine.Store(vcs);
-        }
-
-        public void SaveLog(Log log)
-        {
-            log.Id = HashUtil.UtcTimeInEnc(false);
-            log.LogTime = DateTime.Now;
-            _DbEngine.Store(log);
-        }
-
-        public IList<Key> ListKey(string catId)
-        {
-            IList<Key> keys = _DbEngine.Query<Key>(
-                delegate(Key key)
-                {
-                    if (key.UserCode != _UserModel.Code)
-                    {
-                        return false;
-                    }
-                    if (key.Operate == DBConst.OPT_DELETE)
-                    {
-                        return false;
-                    }
-
-                    return key.CatId == catId;
-                },
-                delegate(Key a, Key b)
-                {
-                    return b.Order.CompareTo(a.Order);
-                });
-            return keys;
-        }
-
-        public Key ReadKey(string keyId)
-        {
-            IList<Key> keys = _DbEngine.Query<Key>(delegate(Key key)
-            {
-                return key.Id == keyId;
-            });
-
-            return keys.Count > 0 ? keys[0] : null;
-        }
-
-        public IList<MGtd> FindGtdExpired()
-        {
-            IList<MGtd> gtds = _DbEngine.Query<MGtd>(
-                delegate(MGtd gtd)
-                {
-                    if (gtd.UserCode != _UserModel.Code)
-                    {
-                        return false;
-                    }
-                    return gtd.Status == CGtd.STATUS_EXPIRED && CharUtil.IsValidateHash(gtd.RefId);
-                });
-            return gtds;
-        }
-
-        public IList<MGtd> ListGtdWithRef()
-        {
-            IList<MGtd> gtds = _DbEngine.Query<MGtd>(
-                delegate(MGtd gtd)
-                {
-                    if (gtd.UserCode != _UserModel.Code)
-                    {
-                        return false;
-                    }
-                    return gtd.Status > CGtd.STATUS_SUSPEND && CharUtil.IsValidateHash(gtd.RefId);
-                });
-            return gtds;
         }
 
         #region 数据目录
@@ -169,24 +82,142 @@ namespace Me.Amon.Pwd.M
         public int LibModified { get; set; }
         #endregion
 
-        public IList<Cat> ListCat(string appId, string parentId)
+        #region 模板操作
+        public IList<Lib> ListLib()
         {
-            if (string.IsNullOrWhiteSpace(parentId))
-            {
-                return _DbEngine.Query<Cat>();
-            }
-
-            return _DbEngine.Query<Cat>(
-                delegate(Cat cat)
+            return _DbEngine.Query<Lib>(
+                delegate(Lib header)
                 {
-                    return cat.AppId == appId && cat.Parent == parentId;
+                    return header.UserCode == _UserModel.Code;
                 },
-                delegate(Cat a, Cat b)
+                delegate(Lib a, Lib b)
                 {
                     return a.Order.CompareTo(b.Order);
                 });
         }
+        #endregion
 
-        public UdcModel UdcModel { get; set; }
+        #region 记录操作
+        public Key ReadKey(string keyId)
+        {
+            IList<Key> keys = _DbEngine.Query<Key>(delegate(Key key)
+            {
+                return key.Id == keyId;
+            });
+
+            return keys.Count > 0 ? keys[0] : null;
+        }
+
+        public IList<Key> FindKey(string keyMeta)
+        {
+            string[] arr = keyMeta.ToLower().Split(' ');
+
+            IList<Key> recs = _DbEngine.Query<Key>(
+                delegate(Key rec)
+                {
+                    if (rec.Operate == DBConst.OPT_DELETE)
+                    {
+                        return false;
+                    }
+
+                    bool a = string.IsNullOrEmpty(rec.Title) ? false : Contains(rec.Title.ToLower(), arr);
+                    bool b = string.IsNullOrEmpty(rec.MetaKey) ? false : Contains(rec.MetaKey.ToLower(), arr);
+                    return a || b;
+                },
+                delegate(Key a, Key b)
+                {
+                    return b.Order.CompareTo(a.Order);
+                });
+            return recs;
+        }
+
+        public IList<Key> ListKey(string catId)
+        {
+            IList<Key> keys = _DbEngine.Query<Key>(
+                delegate(Key key)
+                {
+                    if (key.UserCode != _UserModel.Code)
+                    {
+                        return false;
+                    }
+                    if (key.Operate == DBConst.OPT_DELETE)
+                    {
+                        return false;
+                    }
+
+                    return key.CatId == catId;
+                },
+                delegate(Key a, Key b)
+                {
+                    return b.Order.CompareTo(a.Order);
+                });
+            return keys;
+        }
+
+        public IList<Key> FindKeyByLabel(int label)
+        {
+            IList<Key> keys = _DbEngine.Query<Key>(delegate(Key key)
+            {
+                return key.UserCode == _UserModel.Code && key.Label == label;
+            });
+            return keys;
+        }
+
+        public IList<Key> FindKeyByMajor(int major)
+        {
+            IList<Key> keys = _DbEngine.Query<Key>(delegate(Key key)
+            {
+                return key.UserCode == _UserModel.Code && key.Major == major;
+            });
+            return keys;
+        }
+
+        public IList<MGtd> FindGtdExpired()
+        {
+            IList<MGtd> gtds = _DbEngine.Query<MGtd>(
+                delegate(MGtd gtd)
+                {
+                    if (gtd.UserCode != _UserModel.Code)
+                    {
+                        return false;
+                    }
+                    return gtd.Status == CGtd.STATUS_EXPIRED && CharUtil.IsValidateHash(gtd.RefId);
+                });
+            return gtds;
+        }
+        #endregion
+
+        #region 日志操作
+        public KeyLog ReadKeyLog(string logId)
+        {
+            IList<KeyLog> logs = _DbEngine.Query<KeyLog>(delegate(KeyLog log)
+            {
+                return log.Id == logId;
+            });
+
+            return logs.Count > 0 ? logs[0] : null;
+        }
+
+        public IList<KeyLog> ListKeyLog(string keyId)
+        {
+            IList<KeyLog> logs = _DbEngine.Query<KeyLog>(
+                delegate(KeyLog log)
+                {
+                    return log.RefId == keyId;
+                },
+                delegate(KeyLog a, KeyLog b)
+                {
+                    return b.LogTime.CompareTo(a.LogTime);
+                });
+            return logs;
+        }
+        #endregion
+
+        #region 目录操作
+        public IList<Dir> ListDir()
+        {
+            return _DbEngine.Query<Dir>();
+        }
+        #endregion
     }
 }

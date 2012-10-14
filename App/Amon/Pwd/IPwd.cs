@@ -6,10 +6,12 @@ namespace Me.Amon.Pwd
     public interface IPwd
     {
         string Name { get; }
-        
+
         ICatTree CatTree { get; set; }
-        
+
         IKeyList KeyList { get; set; }
+
+        IFindBar FindBar { get; set; }
 
         void InitView(Panel panel);
 

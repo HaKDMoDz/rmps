@@ -329,8 +329,8 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
                 gtd.LastTime = now;
                 if (gtd.Next(now, 0))
                 {
-                    _UserModel.DBA.SaveVcs(gtd);
-                    _UserModel.ReloadGtds();
+                    _DataModel.SaveVcs(gtd);
+                    _DataModel.ReloadGtds();
                 }
             }
             CbLib.Enabled = true;

@@ -9,6 +9,7 @@ namespace Me.Amon.V
     public partial class Reset : Form
     {
         private AUserModel _UserModel;
+        private DataModel _DataModel;
 
         #region 构造函数
         public Reset()
@@ -25,7 +26,7 @@ namespace Me.Amon.V
         #endregion
 
         #region 数据导入
-        public static void Import(AUserModel userModel)
+        public void Import(AUserModel userModel)
         {
             XmlReaderSettings setting = new XmlReaderSettings { IgnoreWhitespace = true };
             ImportAPwdDir(userModel, setting);
@@ -36,7 +37,7 @@ namespace Me.Amon.V
         /// </summary>
         /// <param name="userModel"></param>
         /// <param name="setting"></param>
-        private static void ImportAPwdCat(AUserModel userModel, XmlReaderSettings setting)
+        private void ImportAPwdCat(AUserModel userModel, XmlReaderSettings setting)
         {
             string file = Path.Combine(userModel.DatHome, "APwd-Cat.xml");
             if (!File.Exists(file))
@@ -55,14 +56,14 @@ namespace Me.Amon.V
                     {
                         continue;
                     }
-                    userModel.DBA.DeleteVcs(cat);
-                    userModel.DBA.SaveVcs(cat);
+                    _DataModel.DeleteVcs(cat);
+                    _DataModel.SaveVcs(cat);
                 }
             }
             stream.Close();
         }
 
-        private static void ImportAPwdLib(AUserModel userModel, XmlReaderSettings setting)
+        private void ImportAPwdLib(AUserModel userModel, XmlReaderSettings setting)
         {
             string file = Path.Combine(userModel.DatHome, "APwd-Lib.xml");
             if (File.Exists(file))
@@ -81,8 +82,8 @@ namespace Me.Amon.V
                     {
                         continue;
                     }
-                    userModel.DBA.DeleteVcs(header);
-                    userModel.DBA.SaveVcs(header);
+                    _DataModel.DeleteVcs(header);
+                    _DataModel.SaveVcs(header);
                 }
             }
             stream.Close();
@@ -93,7 +94,7 @@ namespace Me.Amon.V
         /// </summary>
         /// <param name="userModel"></param>
         /// <param name="setting"></param>
-        private static void ImportAPwdDir(AUserModel userModel, XmlReaderSettings setting)
+        private void ImportAPwdDir(AUserModel userModel, XmlReaderSettings setting)
         {
             string file = Path.Combine(userModel.DatHome, "APwd-Dir.xml");
             if (!File.Exists(file))
@@ -112,8 +113,8 @@ namespace Me.Amon.V
                     {
                         continue;
                     }
-                    userModel.DBA.DeleteVcs(dir);
-                    userModel.DBA.SaveVcs(dir);
+                    _DataModel.DeleteVcs(dir);
+                    _DataModel.SaveVcs(dir);
                 }
             }
             stream.Close();
@@ -121,13 +122,13 @@ namespace Me.Amon.V
         #endregion
 
         #region 数据导出
-        public static void Export(AUserModel userModel)
+        public void Export(AUserModel userModel)
         {
             XmlWriterSettings setting = new XmlWriterSettings { Indent = true };
             ExportAPwdCat(userModel, setting);
         }
 
-        private static void ExportAPwdCat(AUserModel userModel, XmlWriterSettings setting)
+        private void ExportAPwdCat(AUserModel userModel, XmlWriterSettings setting)
         {
             string file = Path.Combine(userModel.DatHome, "APwd-Cat.xml");
             StreamWriter stream = new StreamWriter(file);
@@ -139,7 +140,7 @@ namespace Me.Amon.V
                 writer.WriteElementString("Ver", "1");
 
                 writer.WriteStartElement("Cats");
-                foreach (Cat cat in userModel.DBA.ListCat(CApp.IAPP_APWD, ""))
+                foreach (Cat cat in _DataModel.ListCat(CApp.IAPP_APWD, ""))
                 {
                     cat.ToXml(writer);
                 }

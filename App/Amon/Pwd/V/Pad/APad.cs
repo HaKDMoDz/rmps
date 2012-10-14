@@ -26,6 +26,7 @@ namespace Me.Amon.Pwd.V.Pad
         #region 接口实现
         public ICatTree CatTree { get; set; }
         public IKeyList KeyList { get; set; }
+        public IFindBar FindBar { get; set; }
 
         public void InitView(Panel panel)
         {

@@ -5,14 +5,14 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Me.Amon.Da;
 using Me.Amon.M;
+using Me.Amon.Pwd.M;
 
 namespace Me.Amon.Uw
 {
     public partial class UdcEditor : Form
     {
         private Udc _Item;
-        private AUserModel _UserModel;
-        private UdcModel _UdcModel;
+        private DataModel _DataModel;
 
         #region 构造函数
         public UdcEditor()
@@ -20,24 +20,20 @@ namespace Me.Amon.Uw
             InitializeComponent();
         }
 
-        public UdcEditor(AUserModel userModel)
+        public UdcEditor(DataModel dataModel)
         {
-            _UserModel = userModel;
+            _DataModel = dataModel;
 
             InitializeComponent();
 
             this.Icon = Me.Amon.Properties.Resources.Icon;
         }
 
-        public void Init(UdcModel udcModel, Udc udc)
+        public void Init(Udc udc)
         {
-            _UdcModel = udcModel;
-            if (_UdcModel != null)
+            foreach (Udc tmp in _DataModel.UdcList)
             {
-                foreach (Udc tmp in _UdcModel.UdcList)
-                {
-                    LsUdc.Items.Add(tmp);
-                }
+                LsUdc.Items.Add(tmp);
             }
 
             TbName.MaxLength = DBConst.AUDC0104_SIZE;
@@ -134,7 +130,7 @@ namespace Me.Amon.Uw
             }
             _Item.Data = buf.ToString();
 
-            _UserModel.DBA.SaveVcs(_Item);
+            _DataModel.SaveVcs(_Item);
             if (LsUdc.SelectedItem != null)
             {
                 LsUdc.Items[LsUdc.SelectedIndex] = _Item;
@@ -145,10 +141,7 @@ namespace Me.Amon.Uw
                 ShowData(new Udc());
             }
 
-            if (_UdcModel != null)
-            {
-                _UdcModel.Modified = -1;
-            }
+            _DataModel.UdcModified = -1;
         }
         #endregion
     }
