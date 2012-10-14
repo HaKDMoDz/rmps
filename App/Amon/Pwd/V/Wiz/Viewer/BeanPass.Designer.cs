@@ -69,7 +69,7 @@
             this.BtCopy.TabIndex = 2;
             this.BtCopy.TabStop = false;
             this.BtCopy.UseVisualStyleBackColor = true;
-            this.BtCopy.Click += new System.EventHandler(this.BtGen_Click);
+            this.BtCopy.Click += new System.EventHandler(this.BtCopy_Click);
             // 
             // BtFill
             // 
@@ -82,7 +82,7 @@
             this.BtFill.TabIndex = 4;
             this.BtFill.TabStop = false;
             this.BtFill.UseVisualStyleBackColor = true;
-            this.BtFill.Click += new System.EventHandler(this.BtCopy_Click);
+            this.BtFill.Click += new System.EventHandler(this.BtFill_Click);
             // 
             // BeanPass
             // 
