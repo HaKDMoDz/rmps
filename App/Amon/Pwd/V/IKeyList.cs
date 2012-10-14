@@ -7,6 +7,8 @@ namespace Me.Amon.Pwd.V
     {
         Control Control { get; }
 
+        ContextMenuStrip PopupMenu { get; set; }
+
         IAttView AttView { get; set; }
 
         void ListKeys(string catId);

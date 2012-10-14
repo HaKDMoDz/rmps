@@ -11,7 +11,7 @@ using Me.Amon.Util;
 
 namespace Me.Amon.Pwd._Cat
 {
-    public partial class CatTree : UserControl
+    public partial class CatTree : UserControl, ICatTree
     {
         #region 全局变量
         private APwd _APwd;
@@ -44,15 +44,17 @@ namespace Me.Amon.Pwd._Cat
         }
         #endregion
 
+        #region 接口实现
         public Control Control { get { return this; } }
 
-        #region 公共函数
-        public ContextMenuStrip PopMenu { get; set; }
+        public ContextMenuStrip PopupMenu { get; set; }
 
         public IKeyList KeyList { get; set; }
 
-        public Key SelectedCat { get; set; }
+        public Cat SelectedCat { get; set; }
+        #endregion
 
+        #region 公共函数
         /// <summary>
         /// 提升一级
         /// </summary>
@@ -145,6 +147,29 @@ namespace Me.Amon.Pwd._Cat
             SortCat(prev);
 
             TvCat.SelectedNode = node;
+        }
+
+        public void ChangeIcon(Png png)
+        {
+            if (!CharUtil.IsValidateHash(png.File))
+            {
+                png.File = CPwd.DEF_CAT_IMG;
+            }
+            if (!IlCat.Images.ContainsKey(png.File))
+            {
+                IlCat.Images.Add(png.File, png.LargeImage);
+            }
+            _LastNode.ImageKey = png.File;
+            _LastNode.SelectedImageKey = png.File;
+
+            Cat cat = _LastNode.Tag as Cat;
+            if (cat == null)
+            {
+                return;
+            }
+
+            cat.Icon = png.File;
+            _DataModel.SaveVcs(cat);
         }
         #endregion
 

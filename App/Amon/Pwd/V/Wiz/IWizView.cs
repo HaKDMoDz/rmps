@@ -1,6 +1,4 @@
-﻿using System.Windows.Forms;
-
-namespace Me.Amon.Pwd.V.Wiz
+﻿namespace Me.Amon.Pwd.V.Wiz
 {
     public interface IWizView
     {

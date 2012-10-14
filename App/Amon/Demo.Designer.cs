@@ -28,39 +28,122 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.components = new System.ComponentModel.Container();
+            this.MbMenu = new System.Windows.Forms.MenuStrip();
+            this.SsEcho = new System.Windows.Forms.StatusStrip();
+            this.TlEcho = new System.Windows.Forms.ToolStripStatusLabel();
+            this.TlTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.TcTool = new System.Windows.Forms.ToolStripContainer();
+            this.TbTool = new System.Windows.Forms.ToolStrip();
+            this.TpTips = new System.Windows.Forms.ToolTip(this.components);
+            this.BgWorker = new System.ComponentModel.BackgroundWorker();
+            this.PlMain = new System.Windows.Forms.Panel();
+            this.PlNote = new System.Windows.Forms.Panel();
+            this.SsEcho.SuspendLayout();
+            this.TcTool.ContentPanel.SuspendLayout();
+            this.TcTool.TopToolStripPanel.SuspendLayout();
+            this.TcTool.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // MbMenu
             // 
-            this.button1.Location = new System.Drawing.Point(197, 227);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.MbMenu.Location = new System.Drawing.Point(0, 0);
+            this.MbMenu.Name = "MbMenu";
+            this.MbMenu.Size = new System.Drawing.Size(584, 24);
+            this.MbMenu.TabIndex = 0;
+            this.MbMenu.Text = "menuStrip1";
             // 
-            // label1
+            // SsEcho
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(79, 73);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
+            this.SsEcho.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TlEcho,
+            this.TlTime});
+            this.SsEcho.Location = new System.Drawing.Point(0, 420);
+            this.SsEcho.Name = "SsEcho";
+            this.SsEcho.Size = new System.Drawing.Size(584, 22);
+            this.SsEcho.TabIndex = 1;
+            this.SsEcho.Text = "statusStrip1";
+            // 
+            // TlEcho
+            // 
+            this.TlEcho.Name = "TlEcho";
+            this.TlEcho.Size = new System.Drawing.Size(513, 17);
+            this.TlEcho.Spring = true;
+            this.TlEcho.Text = "系统处理中，请稍后……";
+            this.TlEcho.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // TlTime
+            // 
+            this.TlTime.Name = "TlTime";
+            this.TlTime.Size = new System.Drawing.Size(56, 17);
+            this.TlTime.Text = "当前时间";
+            this.TlTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // TcTool
+            // 
+            // 
+            // TcTool.ContentPanel
+            // 
+            this.TcTool.ContentPanel.Controls.Add(this.PlNote);
+            this.TcTool.ContentPanel.Controls.Add(this.PlMain);
+            this.TcTool.ContentPanel.Size = new System.Drawing.Size(584, 371);
+            this.TcTool.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TcTool.Location = new System.Drawing.Point(0, 24);
+            this.TcTool.Name = "TcTool";
+            this.TcTool.Size = new System.Drawing.Size(584, 396);
+            this.TcTool.TabIndex = 2;
+            this.TcTool.Text = "toolStripContainer1";
+            // 
+            // TcTool.TopToolStripPanel
+            // 
+            this.TcTool.TopToolStripPanel.Controls.Add(this.TbTool);
+            // 
+            // TbTool
+            // 
+            this.TbTool.Dock = System.Windows.Forms.DockStyle.None;
+            this.TbTool.Location = new System.Drawing.Point(3, 0);
+            this.TbTool.Name = "TbTool";
+            this.TbTool.Size = new System.Drawing.Size(111, 25);
+            this.TbTool.TabIndex = 0;
+            // 
+            // PlMain
+            // 
+            this.PlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.PlMain.Location = new System.Drawing.Point(12, 3);
+            this.PlMain.Name = "PlMain";
+            this.PlMain.Size = new System.Drawing.Size(560, 365);
+            this.PlMain.TabIndex = 0;
+            // 
+            // PlNote
+            // 
+            this.PlNote.BackColor = System.Drawing.Color.Transparent;
+            this.PlNote.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PlNote.Location = new System.Drawing.Point(0, 0);
+            this.PlNote.Name = "PlNote";
+            this.PlNote.Size = new System.Drawing.Size(584, 371);
+            this.PlNote.TabIndex = 1;
+            this.PlNote.Visible = false;
             // 
             // Demo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
-            this.ControlBox = false;
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(584, 442);
+            this.Controls.Add(this.TcTool);
+            this.Controls.Add(this.SsEcho);
+            this.Controls.Add(this.MbMenu);
+            this.MainMenuStrip = this.MbMenu;
             this.Name = "Demo";
             this.Text = "Demo";
+            this.SsEcho.ResumeLayout(false);
+            this.SsEcho.PerformLayout();
+            this.TcTool.ContentPanel.ResumeLayout(false);
+            this.TcTool.TopToolStripPanel.ResumeLayout(false);
+            this.TcTool.TopToolStripPanel.PerformLayout();
+            this.TcTool.ResumeLayout(false);
+            this.TcTool.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -68,7 +151,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.MenuStrip MbMenu;
+        private System.Windows.Forms.StatusStrip SsEcho;
+        private System.Windows.Forms.ToolStripStatusLabel TlEcho;
+        private System.Windows.Forms.ToolStripStatusLabel TlTime;
+        private System.Windows.Forms.ToolStripContainer TcTool;
+        private System.Windows.Forms.ToolStrip TbTool;
+        private System.Windows.Forms.ToolTip TpTips;
+        private System.ComponentModel.BackgroundWorker BgWorker;
+        private System.Windows.Forms.Panel PlMain;
+        private System.Windows.Forms.Panel PlNote;
+
     }
 }

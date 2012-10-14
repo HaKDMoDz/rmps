@@ -98,6 +98,9 @@ namespace Me.Amon.Pwd.V.Pro
         public void HideView(Panel panel)
         {
             panel.Controls.Remove(this);
+
+            VSplit.Panel1.Controls.Remove(CatTree.Control);
+            VSplit.Panel2.Controls.Remove(KeyList.Control);
         }
 
         public void ShowInfo()

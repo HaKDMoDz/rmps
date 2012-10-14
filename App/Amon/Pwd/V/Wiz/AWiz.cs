@@ -1,7 +1,5 @@
-﻿using System;
-using System.Windows.Forms;
-using Me.Amon.C;
-using Me.Amon.Pwd.M;
+﻿using System.Windows.Forms;
+using Me.Amon.Pwd.V.Wiz.Viewer;
 
 namespace Me.Amon.Pwd.V.Wiz
 {
@@ -9,15 +7,7 @@ namespace Me.Amon.Pwd.V.Wiz
     {
         #region 全局变量
         private APwd _APwd;
-        private IWizView _LastView;
-        private BeanInfo _InfoBean;
-        private BeanGuid _GuidBean;
-        private BeanHead _HeadBean;
-        private BeanBody _BodyBean;
-        private UserModel _UserModel;
-        private SafeModel _SafeModel;
-        private DataModel _DataModel;
-        private ViewModel _ViewModel;
+        private IAttView AttView;
         #endregion
 
         #region 构造函数
@@ -27,13 +17,8 @@ namespace Me.Amon.Pwd.V.Wiz
         }
         #endregion
 
-        public void Init(APwd apwd, UserModel userModel, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
+        public void ShowTips(Control control, string caption)
         {
-            _APwd = apwd;
-            _UserModel = userModel;
-            _SafeModel = safeModel;
-            _DataModel = dataModel;
-            _ViewModel = viewModel;
         }
 
         #region 接口实现
@@ -42,285 +27,131 @@ namespace Me.Amon.Pwd.V.Wiz
 
         public void InitView(Panel panel)
         {
-            if (_LastView != null)
-            {
-                _LastView.HideView();
-            }
-
-            _InfoBean = new BeanInfo();
-            _InfoBean.Init(TpGrid, _DataModel);
-            _InfoBean.InitView();
-            _InfoBean.ShowData();
-
-            panel.Controls.Add(this);
-            Dock = DockStyle.Fill;
-
-            _LastView = _InfoBean;
-
-            //VSplit.Panel1.Controls.Add(CatTree.Control);
-            //CatTree.Control.Dock = System.Windows.Forms.DockStyle.Fill;
+            HSplit.Panel1.Controls.Add(CatTree.Control);
+            CatTree.Control.Dock = DockStyle.Fill;
             //this.catTree1.Location = new System.Drawing.Point(0, 0);
             //this.catTree1.Name = "catTree1";
             //this.catTree1.Size = new System.Drawing.Size(152, 151);
             //this.catTree1.TabIndex = 0;
 
-            //VSplit.Panel2.Controls.Add(KeyList.Control);
-            //KeyList.Control.Dock = System.Windows.Forms.DockStyle.Fill;
+            VSplit.Panel1.Controls.Add(KeyList.Control);
+            KeyList.Control.Dock = DockStyle.Fill;
             //this.keyList1.Location = new System.Drawing.Point(0, 0);
             //this.keyList1.Name = "keyList1";
             //this.keyList1.Size = new System.Drawing.Size(152, 148);
             //this.keyList1.TabIndex = 0;
 
-            //KeyList.AttView = this;
+            AttView = new AttViewer();
+            AttView.Control.Dock = DockStyle.Fill;
+            KeyList.AttView = AttView;
         }
 
         public void HideView(Panel panel)
         {
-            panel.Controls.Remove(this);
+            HSplit.Panel1.Controls.Remove(CatTree.Control);
+
+            VSplit.Panel1.Controls.Remove(KeyList.Control);
         }
 
         public void ShowInfo()
         {
-            if (_InfoBean == null)
-            {
-                _InfoBean = new BeanInfo();
-                _InfoBean.Init(TpGrid, _DataModel);
-            }
-            if (_LastView != null && _LastView != _InfoBean)
-            {
-                _LastView.HideView();
-                _InfoBean.InitView();
-            }
-
-            _LastView = _InfoBean;
-            _LastView.ShowData();
+            throw new System.NotImplementedException();
         }
 
         public void ShowData()
         {
-            ShowGuid();
+            throw new System.NotImplementedException();
         }
 
         public void AppendKey()
         {
-            _SafeModel.Clear();
-            _SafeModel.Key = new Key();
-
-            _SafeModel.InitGuid();
-            _SafeModel.InitMeta();
-            _SafeModel.InitLogo();
-            _SafeModel.InitHint();
-            _SafeModel.InitAuto();
-
-            ShowGuid();
-            _LastView.Focus();
+            throw new System.NotImplementedException();
         }
 
         public bool UpdateKey()
         {
-            if (_LastView == null)
-            {
-                return false;
-            }
-            return _LastView.SaveData();
+            throw new System.NotImplementedException();
         }
 
         public void DeleteKey()
         {
+            throw new System.NotImplementedException();
         }
 
         public void AppendAtt(int type)
         {
+            throw new System.NotImplementedException();
         }
 
         public void ChangeAtt(int type)
         {
+            throw new System.NotImplementedException();
         }
 
         public void SelectPrev()
         {
+            throw new System.NotImplementedException();
         }
 
         public void SelectNext()
         {
+            throw new System.NotImplementedException();
         }
 
         public void MoveUp()
         {
+            throw new System.NotImplementedException();
         }
 
         public void MoveDown()
         {
+            throw new System.NotImplementedException();
         }
 
         public void CutAtt()
         {
-            if (_LastView != null)
-            {
-                _LastView.CutData();
-            }
+            throw new System.NotImplementedException();
         }
 
         public void CopyAtt()
         {
-            if (_LastView != null)
-            {
-                _LastView.CopyData();
-            }
+            throw new System.NotImplementedException();
         }
 
         public void PasteAtt()
         {
-            if (_LastView != null)
-            {
-                _LastView.PasteData();
-            }
+            throw new System.NotImplementedException();
         }
 
         public void ClearAtt()
         {
-            if (_LastView != null)
-            {
-                _LastView.ClearData();
-            }
+            throw new System.NotImplementedException();
         }
 
         public void SaveAtt()
         {
+            throw new System.NotImplementedException();
         }
 
         public void DropAtt()
         {
+            throw new System.NotImplementedException();
         }
-        #endregion
-
-        #region 公共函数
-        public void ShowTips(Control control, string caption)
-        {
-            _APwd.ShowTips(control, caption);
-        }
-
-        public void ShowIcoSeeker(string rootDir, AmonHandler<Png> handler)
-        {
-            _APwd.ShowIcoSeeker(rootDir, handler);
-        }
-        #endregion
-
-        #region 事件处理
-        private void BtPrev_Click(object sender, EventArgs e)
-        {
-            if (_LastView != null && !_LastView.SaveData())
-            {
-                return;
-            }
-
-            if (_LastView.Name == "body")
-            {
-                ShowHead();
-                return;
-            }
-
-            ShowGuid();
-        }
-
-        private void BtNext_Click(object sender, EventArgs e)
-        {
-            if (_LastView != null && !_LastView.SaveData())
-            {
-                return;
-            }
-
-            if (_LastView.Name == "head")
-            {
-                ShowBody();
-                return;
-            }
-
-            ShowHead();
-        }
-        #endregion
-
-        #region 私有函数
-        private void ShowGuid()
-        {
-            if (_GuidBean == null)
-            {
-                _GuidBean = new BeanGuid(this, _UserModel, _SafeModel);
-                _GuidBean.Init(TpGrid, _DataModel, _ViewModel);
-                _GuidBean.Name = "guid";
-            }
-            if (_LastView != null && _LastView != _GuidBean)
-            {
-                _LastView.HideView();
-                _GuidBean.InitView();
-
-                BtPrev.Enabled = false;
-                BtNext.Enabled = true;
-            }
-
-            _LastView = _GuidBean;
-            _LastView.ShowData();
-        }
-
-        private void ShowHead()
-        {
-            if (_HeadBean == null)
-            {
-                _HeadBean = new BeanHead(this, _UserModel, _SafeModel);
-                _HeadBean.Init(TpGrid, _DataModel, _ViewModel);
-                _HeadBean.Name = "head";
-            }
-            if (_LastView != null && _LastView != _HeadBean)
-            {
-                _LastView.HideView();
-                _HeadBean.InitView();
-
-                BtPrev.Enabled = true;
-                BtNext.Enabled = true;
-            }
-
-            _LastView = _HeadBean;
-            _LastView.ShowData();
-        }
-
-        private void ShowBody()
-        {
-            if (_BodyBean == null)
-            {
-                _BodyBean = new BeanBody(this, _UserModel, _SafeModel);
-                _BodyBean.Init(TpGrid, _DataModel, _ViewModel);
-                _BodyBean.Name = "body";
-            }
-            if (_LastView != null && _LastView != _BodyBean)
-            {
-                _LastView.HideView();
-                _BodyBean.InitView();
-
-                BtPrev.Enabled = true;
-                BtNext.Enabled = false;
-            }
-
-            _LastView = _BodyBean;
-            _LastView.ShowData();
-        }
-        #endregion
-
 
         public void FindKey(string meta)
         {
-            throw new NotImplementedException();
+            throw new System.NotImplementedException();
         }
-
 
         public bool NavPaneVisible
         {
             get
             {
-                throw new NotImplementedException();
+                throw new System.NotImplementedException();
             }
             set
             {
-                throw new NotImplementedException();
+                throw new System.NotImplementedException();
             }
         }
 
@@ -328,11 +159,11 @@ namespace Me.Amon.Pwd.V.Wiz
         {
             get
             {
-                throw new NotImplementedException();
+                throw new System.NotImplementedException();
             }
             set
             {
-                throw new NotImplementedException();
+                throw new System.NotImplementedException();
             }
         }
 
@@ -340,12 +171,13 @@ namespace Me.Amon.Pwd.V.Wiz
         {
             get
             {
-                throw new NotImplementedException();
+                throw new System.NotImplementedException();
             }
             set
             {
-                throw new NotImplementedException();
+                throw new System.NotImplementedException();
             }
         }
+        #endregion
     }
 }

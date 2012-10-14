@@ -5,10 +5,14 @@ namespace Me.Amon.Pwd.V
 {
     public interface ICatTree
     {
-        bool Focus();
-
         Control Control { get; }
 
+        ContextMenuStrip PopupMenu { get; set; }
+
         Cat SelectedCat { get; set; }
+
+        bool Focus();
+
+        void ChangeIcon(Png png);
     }
 }

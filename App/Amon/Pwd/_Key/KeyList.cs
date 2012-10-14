@@ -12,16 +12,29 @@ using Me.Amon.Util;
 
 namespace Me.Amon.Pwd._Key
 {
-    public partial class KeyList : UserControl
+    public partial class KeyList : UserControl, IKeyList
     {
+        #region 全局变量
+        private APwd _APwd;
         private DataModel _DataModel;
         private ViewModel _ViewModel;
+        #endregion
 
+        #region 构造函数
         public KeyList()
         {
             InitializeComponent();
         }
 
+        public KeyList(APwd aPwd)
+        {
+            _APwd = aPwd;
+
+            InitializeComponent();
+        }
+        #endregion
+
+        #region 接口实现
         public Control Control { get { return this; } }
 
         public ContextMenuStrip PopupMenu { get; set; }
@@ -29,6 +42,7 @@ namespace Me.Amon.Pwd._Key
         public IAttView AttView { get; set; }
 
         public Key SelectedKey { get; set; }
+        #endregion
 
         public void ListKeys(string catId)
         {
@@ -235,6 +249,17 @@ namespace Me.Amon.Pwd._Key
                 key.MajorIcon = _ViewModel.GetImage(CPwd.KEY_MAJOR + (key.Major + 2));
                 key.GtdIcon = CharUtil.IsValidateHash(key.GtdId) ? Resources.Hint : BeanUtil.NaN16;
             }
+        }
+
+
+        public void ListKeysWithGtd(int status)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ListKeysWithGtd(DateTime time, int seconds)
+        {
+            throw new NotImplementedException();
         }
     }
 }

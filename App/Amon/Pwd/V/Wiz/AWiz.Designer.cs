@@ -1,4 +1,6 @@
-﻿namespace Me.Amon.Pwd.V.Wiz
+﻿using Me.Amon.Pwd._Cat;
+using Me.Amon.Pwd._Key;
+namespace Me.Amon.Pwd.V.Wiz
 {
     partial class AWiz
     {
@@ -28,77 +30,57 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TpGrid = new System.Windows.Forms.TableLayoutPanel();
-            this.guid = new System.Windows.Forms.FlowLayoutPanel();
-            this.BtNext = new System.Windows.Forms.Button();
-            this.BtPrev = new System.Windows.Forms.Button();
-            this.TpGrid.SuspendLayout();
-            this.guid.SuspendLayout();
+            this.HSplit = new System.Windows.Forms.SplitContainer();
+            this.VSplit = new System.Windows.Forms.SplitContainer();
+            ((System.ComponentModel.ISupportInitialize)(this.HSplit)).BeginInit();
+            this.HSplit.Panel2.SuspendLayout();
+            this.HSplit.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.VSplit)).BeginInit();
+            this.VSplit.SuspendLayout();
             this.SuspendLayout();
             // 
-            // TpGrid
+            // HSplit
             // 
-            this.TpGrid.ColumnCount = 1;
-            this.TpGrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TpGrid.Controls.Add(this.guid, 0, 1);
-            this.TpGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TpGrid.Location = new System.Drawing.Point(0, 0);
-            this.TpGrid.Name = "TpGrid";
-            this.TpGrid.RowCount = 2;
-            this.TpGrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TpGrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-            this.TpGrid.Size = new System.Drawing.Size(332, 261);
-            this.TpGrid.TabIndex = 0;
+            this.HSplit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.HSplit.Location = new System.Drawing.Point(0, 0);
+            this.HSplit.Name = "HSplit";
             // 
-            // guid
+            // HSplit.Panel2
             // 
-            this.guid.Controls.Add(this.BtNext);
-            this.guid.Controls.Add(this.BtPrev);
-            this.guid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.guid.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.guid.Location = new System.Drawing.Point(3, 232);
-            this.guid.Name = "guid";
-            this.guid.Size = new System.Drawing.Size(326, 26);
-            this.guid.TabIndex = 1;
+            this.HSplit.Panel2.Controls.Add(this.VSplit);
+            this.HSplit.Size = new System.Drawing.Size(485, 316);
+            this.HSplit.SplitterDistance = 161;
+            this.HSplit.TabIndex = 0;
             // 
-            // BtNext
+            // VSplit
             // 
-            this.BtNext.Location = new System.Drawing.Point(248, 3);
-            this.BtNext.Name = "BtNext";
-            this.BtNext.Size = new System.Drawing.Size(75, 23);
-            this.BtNext.TabIndex = 1;
-            this.BtNext.Text = "下一步(&N)";
-            this.BtNext.UseVisualStyleBackColor = true;
-            this.BtNext.Click += new System.EventHandler(this.BtNext_Click);
-            // 
-            // BtPrev
-            // 
-            this.BtPrev.Location = new System.Drawing.Point(167, 3);
-            this.BtPrev.Name = "BtPrev";
-            this.BtPrev.Size = new System.Drawing.Size(75, 23);
-            this.BtPrev.TabIndex = 0;
-            this.BtPrev.Text = "上一步(&P)";
-            this.BtPrev.UseVisualStyleBackColor = true;
-            this.BtPrev.Click += new System.EventHandler(this.BtPrev_Click);
+            this.VSplit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.VSplit.Location = new System.Drawing.Point(0, 0);
+            this.VSplit.Name = "VSplit";
+            this.VSplit.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.VSplit.Size = new System.Drawing.Size(320, 316);
+            this.VSplit.SplitterDistance = 103;
+            this.VSplit.TabIndex = 0;
             // 
             // AWiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.TpGrid);
+            this.Controls.Add(this.HSplit);
             this.Name = "AWiz";
-            this.Size = new System.Drawing.Size(332, 261);
-            this.TpGrid.ResumeLayout(false);
-            this.guid.ResumeLayout(false);
+            this.Size = new System.Drawing.Size(485, 316);
+            this.HSplit.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.HSplit)).EndInit();
+            this.HSplit.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.VSplit)).EndInit();
+            this.VSplit.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel TpGrid;
-        private System.Windows.Forms.FlowLayoutPanel guid;
-        private System.Windows.Forms.Button BtNext;
-        private System.Windows.Forms.Button BtPrev;
+        private System.Windows.Forms.SplitContainer HSplit;
+        private System.Windows.Forms.SplitContainer VSplit;
     }
 }

@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
+using Me.Amon.Api.Delegates;
 using Me.Amon.Api.Enums;
 using Me.Amon.Api.Structures;
 
@@ -84,7 +85,7 @@ namespace Me.Amon.Api.User32
         /// <param name="lParam"></param>
         /// <returns></returns>
         [DllImport("user32.dll", EntryPoint = "EnumWindows", SetLastError = true)]
-        public static extern bool EnumWindows(WNDENUMPROC lpEnumFunc, uint lParam);
+        public static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, uint lParam);
 
         /// <summary>
         /// 该函数用指定的画刷填充矩形，此函数包括矩形的左上边界，但不包括矩形的右下边界。
@@ -554,6 +555,9 @@ namespace Me.Amon.Api.User32
         [DllImport("user32.dll")]
         public static extern int SetWindowText(IntPtr hWnd, string text);
 
+        [DllImport("shell32.dll", CharSet = CharSet.Auto)]
+        public static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes, ref SHFILEINFO psfi, uint cbFileInfo, uint uFlags);
+
         /// <summary>
         /// 该函数显示或隐藏所指定的滚动条。
         /// </summary>
@@ -609,12 +613,6 @@ namespace Me.Amon.Api.User32
         [DllImport("user32.dll")]
         public static extern IntPtr WindowFromPoint(Point point);
 
-        #endregion
-
-        #region 代理
-        public delegate bool WNDENUMPROC(IntPtr hwnd, uint lParam);
-
-        public delegate int HookProc(int nCode, Int32 wParam, IntPtr lParam);
         #endregion
     }
 }

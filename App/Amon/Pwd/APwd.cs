@@ -91,14 +91,23 @@ namespace Me.Amon.Pwd
             _DataModel.UdcModel = udcModel;
             #endregion
 
+            _CatTree = new CatTree(this);
+            _KeyList = new KeyList(this);
+
             #region 系统选单
             _XmlMenu = new XmlMenu<APwd>(this, _ViewModel);
             if (_XmlMenu.Load(Path.Combine(_UserModel.DatHome, CPwd.XML_MENU)))
             {
                 _XmlMenu.GetMenuBar("APwd", MbMenu);
                 _XmlMenu.GetToolBar("APwd", TbTool);
+                ContextMenuStrip CmCat = new ContextMenuStrip();
                 _XmlMenu.GetPopMenu("ACat", CmCat);
+                _CatTree.PopupMenu = CmCat;
+
+                ContextMenuStrip CmKey = new ContextMenuStrip();
                 _XmlMenu.GetPopMenu("AKey", CmKey);
+                _KeyList.PopupMenu = CmKey;
+
                 //_XmlMenu.GetPopMenu("AAtt", CmAtt);
                 _XmlMenu.GetStrokes("APwd", this);
             }
@@ -107,7 +116,7 @@ namespace Me.Amon.Pwd
             LoadLayout();
 
             // 当前时间
-            UcTimer.Start();
+            //UcTimer.Start();
 
             // 视图模式
             switch (_ViewModel.Pattern)
@@ -125,7 +134,7 @@ namespace Me.Amon.Pwd
                     break;
             }
 
-            _UserModel.AppendHandler(new AmonHandler<string>(ShowEcho));
+            //_UserModel.AppendHandler(new AmonHandler<string>(ShowEcho));
 
             User32.RegisterHotKey(this.Handle, this.Handle.ToInt32(), 0, (int)VirtualKey.F2);
         }
@@ -148,13 +157,13 @@ namespace Me.Amon.Pwd
         {
             if (_EchoDelay < 1)
             {
-                if (SsEcho.InvokeRequired)
+                if (SbEcho.InvokeRequired)
                 {
-                    SsEcho.Invoke(new MethodInvoker(() => TssEcho.Text = message));
+                    SbEcho.Invoke(new MethodInvoker(() => TlEcho.Text = message));
                 }
                 else
                 {
-                    TssEcho.Text = message;
+                    TlEcho.Text = message;
                 }
                 //TssEcho.Text = message;
             }
@@ -162,7 +171,7 @@ namespace Me.Amon.Pwd
 
         public void ShowEcho(string message, int delay)
         {
-            TssEcho.Text = message;
+            TlEcho.Text = message;
             _EchoDelay = delay;
         }
 
@@ -271,7 +280,7 @@ namespace Me.Amon.Pwd
         private void UcTime_Tick(object sender, EventArgs e)
         {
             DateTime now = DateTime.Now;
-            TssTime.Text = now.ToString(CApp.DATEIME_FORMAT);
+            TlTime.Text = now.ToString(CApp.DATEIME_FORMAT);
             if (_EchoDelay > 0)
             {
                 _EchoDelay -= 1;
@@ -684,25 +693,7 @@ namespace Me.Amon.Pwd
 
         public void ChangeCatIcon(Png png)
         {
-            if (!CharUtil.IsValidateHash(png.File))
-            {
-                png.File = CPwd.DEF_CAT_IMG;
-            }
-            if (!IlCatTree.Images.ContainsKey(png.File))
-            {
-                IlCatTree.Images.Add(png.File, png.LargeImage);
-            }
-            _LastNode.ImageKey = png.File;
-            _LastNode.SelectedImageKey = png.File;
-
-            Cat cat = _LastNode.Tag as Cat;
-            if (cat == null)
-            {
-                return;
-            }
-
-            cat.Icon = png.File;
-            _UserModel.DBA.SaveVcs(cat);
+            _CatTree.ChangeIcon(png);
         }
         #endregion
 
@@ -905,8 +896,8 @@ namespace Me.Amon.Pwd
 
         public void KeyMoveto()
         {
-            Me.Amon.Pwd._Cat.CatDialog view = new Me.Amon.Pwd._Cat.CatDialog(_UserModel);
-            view.Init(IlCatTree);
+            CatDialog view = new CatDialog(_UserModel);
+            //view.Init(IlCatTree);
             view.CallBack = new AmonHandler<string>(ChangeKeyCat);
             BeanUtil.CenterToParent(view, this);
             view.ShowDialog(this);
@@ -1060,11 +1051,13 @@ namespace Me.Amon.Pwd
                 {
                     return;
                 }
-                _PwdView.HideView(TcTool.ContentPanel);
+                _PwdView.HideView(PlMain);
             }
 
             _PwdView = _ProView;
-            _PwdView.InitView(TcTool.ContentPanel);
+            _PwdView.CatTree = _CatTree;
+            _PwdView.KeyList = _KeyList;
+            _PwdView.InitView(PlMain);
             ShowKey(_SafeModel.Key);
 
             ItemGroup group = _XmlMenu.GetGroup("att-edit");
@@ -1083,7 +1076,7 @@ namespace Me.Amon.Pwd
             {
                 _WizView = new AWiz();
                 _WizView.Name = CPwd.PATTERN_WIZ;
-                _WizView.Init(this, _UserModel, _SafeModel, _DataModel, _ViewModel);
+                //_WizView.Init(this, _UserModel, _SafeModel, _DataModel, _ViewModel);
             }
 
             if (_PwdView != null)
@@ -1092,11 +1085,13 @@ namespace Me.Amon.Pwd
                 {
                     return;
                 }
-                _PwdView.HideView(TcTool.ContentPanel);
+                _PwdView.HideView(PlMain);
             }
 
             _PwdView = _WizView;
-            _PwdView.InitView(TcTool.ContentPanel);
+            _PwdView.CatTree = _CatTree;
+            _PwdView.KeyList = _KeyList;
+            _PwdView.InitView(PlMain);
             ShowKey(_SafeModel.Key);
 
             ItemGroup group = _XmlMenu.GetGroup("att-edit");
@@ -1116,7 +1111,7 @@ namespace Me.Amon.Pwd
                 _PadView = new APad();
                 _PadView.Name = CPwd.PATTERN_PAD;
                 _PadView.Init(this, _SafeModel, _DataModel);
-                _PadView.Dock = System.Windows.Forms.DockStyle.Fill;
+                _PadView.Dock = DockStyle.Fill;
             }
 
             if (_PwdView != null)
@@ -1125,13 +1120,11 @@ namespace Me.Amon.Pwd
                 {
                     return;
                 }
-                MbMenu.Visible = false;
-                TbTool.Visible = false;
-                TcTool.Visible = false;
+                _PwdView.HideView(PlMain);
             }
 
-            PlMain.Controls.Remove(TcTool);
-            PlMain.Controls.Add(_PadView);
+            //PlMain.Controls.Remove(TcTool);
+            //PlMain.Controls.Add(_PadView);
         }
         #endregion
 
@@ -1175,11 +1168,11 @@ namespace Me.Amon.Pwd
         {
             get
             {
-                return SsEcho.Visible;
+                return SbEcho.Visible;
             }
             set
             {
-                SsEcho.Visible = value;
+                SbEcho.Visible = value;
                 _ViewModel.EchoBarVisible = value;
             }
         }
@@ -2004,7 +1997,7 @@ namespace Me.Amon.Pwd
 
             MbMenu.Visible = _ViewModel.MenuBarVisible;
             TbTool.Visible = _ViewModel.ToolBarVisible;
-            SsEcho.Visible = _ViewModel.EchoBarVisible;
+            SbEcho.Visible = _ViewModel.EchoBarVisible;
         }
 
         /// <summary>
@@ -2037,7 +2030,7 @@ namespace Me.Amon.Pwd
 
             _ViewModel.MenuBarVisible = MbMenu.Visible;
             _ViewModel.ToolBarVisible = TbTool.Visible;
-            _ViewModel.EchoBarVisible = SsEcho.Visible;
+            _ViewModel.EchoBarVisible = SbEcho.Visible;
 
             _ViewModel.SaveLayout();
         }

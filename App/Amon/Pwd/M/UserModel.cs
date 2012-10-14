@@ -94,7 +94,7 @@ namespace Me.Amon.Pwd.M
 
             BackFileCount = 3;
             NoticeInterval = 5;
-            _Timer = new Timer(new TimerCallback(Timer_Callback), null, 5000, 1000);
+            //_Timer = new Timer(new TimerCallback(Timer_Callback), null, 5000, 1000);
         }
         #endregion
 
