@@ -36,9 +36,10 @@ namespace Me.Amon.Pwd._Cat
             InitializeComponent();
         }
 
-        public CatTree(APwd aPwd)
+        public CatTree(APwd aPwd, DataModel dataModel)
         {
             _APwd = aPwd;
+            _DataModel = dataModel;
 
             InitializeComponent();
         }
@@ -53,10 +54,8 @@ namespace Me.Amon.Pwd._Cat
 
         public Cat SelectedCat { get; set; }
 
-        public void Init(DataModel dataModel)
+        public void Init()
         {
-            _DataModel = dataModel;
-
             IlCat.Images.Add(CPwd.DEF_CAT_IMG, BeanUtil.NaN16);
 
             Cat cat = new Cat { Id = CPwd.DEF_CAT_ID, Text = "默认类别", Tips = "默认类别", Icon = "Amon" };
@@ -228,10 +227,7 @@ namespace Me.Amon.Pwd._Cat
                 }
             }
 
-            if (KeyList != null)
-            {
-                KeyList.ListKeys(node.Name);
-            }
+            KeyList.ListKeys(node.Name);
         }
 
         #region 拖拽事件

@@ -92,9 +92,11 @@ namespace Me.Amon.Pwd
             _ViewModel.LoadLayout();
             #endregion
 
-            _CatTree = new CatTree(this);
-            _KeyList = new KeyList(this);
+            _KeyList = new KeyList(this, _DataModel, _ViewModel);
+            _CatTree = new CatTree(this, _DataModel);
+            _CatTree.KeyList = _KeyList;
             _FindBar = new FindBar();
+            _FindBar.KeyList = _KeyList;
 
             #region 系统选单
             _XmlMenu = new XmlMenu<APwd>(this, _ViewModel);
@@ -136,7 +138,7 @@ namespace Me.Amon.Pwd
                     break;
             }
 
-            _CatTree.Init(_DataModel);
+            _CatTree.Init();
 
             //_UserModel.AppendHandler(new AmonHandler<string>(ShowEcho));
 

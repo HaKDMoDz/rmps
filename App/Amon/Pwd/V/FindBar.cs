@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Me.Amon.Pwd.V;
 
 namespace Me.Amon.Pwd.V
 {
@@ -16,10 +15,9 @@ namespace Me.Amon.Pwd.V
         #region 接口实现
         public IPwd APwd { get; set; }
 
-        public new Control Control
-        {
-            get { return this; }
-        }
+        public new Control Control { get { return this; } }
+
+        public IKeyList KeyList { get; set; }
         #endregion
 
         #region 事件处理

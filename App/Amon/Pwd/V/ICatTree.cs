@@ -1,6 +1,5 @@
 ﻿using System.Windows.Forms;
 using Me.Amon.M;
-using Me.Amon.Pwd.M;
 
 namespace Me.Amon.Pwd.V
 {
@@ -12,9 +11,11 @@ namespace Me.Amon.Pwd.V
 
         Cat SelectedCat { get; set; }
 
+        IKeyList KeyList { get; set; }
+
         bool Focus();
 
-        void Init(DataModel dataModel);
+        void Init();
 
         void ChangeIcon(Png png);
     }

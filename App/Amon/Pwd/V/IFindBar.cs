@@ -7,5 +7,7 @@ namespace Me.Amon.Pwd.V
         Control Control { get; }
 
         bool Visible { get; set; }
+
+        IKeyList KeyList { get; set; }
     }
 }

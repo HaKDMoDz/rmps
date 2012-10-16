@@ -26,9 +26,11 @@ namespace Me.Amon.Pwd._Key
             InitializeComponent();
         }
 
-        public KeyList(APwd aPwd)
+        public KeyList(APwd aPwd, DataModel dataModel, ViewModel viewModel)
         {
             _APwd = aPwd;
+            _DataModel = dataModel;
+            _ViewModel = viewModel;
 
             InitializeComponent();
         }
@@ -250,7 +252,6 @@ namespace Me.Amon.Pwd._Key
                 key.GtdIcon = CharUtil.IsValidateHash(key.GtdId) ? Resources.Hint : BeanUtil.NaN16;
             }
         }
-
 
         public void ListKeysWithGtd(int status)
         {

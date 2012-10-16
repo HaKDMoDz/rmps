@@ -67,8 +67,9 @@ namespace Me.Amon.Pwd.V.Wiz
 
         public void HideView(Panel panel)
         {
-            HSplit.Panel1.Controls.Remove(CatTree.Control);
+            panel.Controls.Remove(this);
 
+            HSplit.Panel1.Controls.Remove(CatTree.Control);
             VSplit.Panel1.Controls.Remove(KeyList.Control);
         }
 
