@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.V.Wiz
 {
-    public interface IWizView
+    public interface IViewer
     {
         string Name { get; set; }
 
@@ -12,14 +12,6 @@
 
         void ShowData();
 
-        bool SaveData();
-
-        void CutData();
-
         void CopyData();
-
-        void PasteData();
-
-        void ClearData();
     }
 }

@@ -2,8 +2,6 @@
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
-using Me.Amon.C;
-using Me.Amon.M;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd.M;
 using Me.Amon.Uc;
@@ -11,7 +9,7 @@ using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.V.Wiz.Editer
 {
-    public partial class BeanGuid : UserControl, IWizView
+    public partial class BeanGuid : UserControl, IEditer
     {
         private AWiz _AWiz;
         private UserModel _UserModel;
@@ -41,8 +39,6 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
 
             PbCard.Image = viewModel.GetImage("export-card-24");
             _AWiz.ShowTips(PbCard, "导出为卡片");
-
-            UcTips.CallBack = new VoidHandler(CloseTips);
 
             if (!Directory.Exists("Card"))
             {
@@ -152,37 +148,14 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             if (guid == null)
             {
                 CbLib.Enabled = true;
-                UcTips.Visible = false;
                 _TlPanel.RowStyles[1].Height = 32;
                 return;
             }
 
             CbLib.SelectedItem = new Lib { Id = guid.Data };
             PbCard.Visible = guid.Data == CApp.LIB_CARD;
-
-            Gtd.M.MGtd gtd = _SafeModel.Key.Gtd;
-            if (gtd != null)
-            {
-                if (gtd.Status == Gtd.CGtd.STATUS_EXPIRED)
-                {
-                    CbLib.Enabled = false;
-                    UcTips.Visible = true;
-                    _TlPanel.RowStyles[1].Height = 0;
-                    UcTips.Text = string.Format("您有一个过期提醒：{0}{0}　　{1}{0}{0}{2}", Environment.NewLine, gtd.Title, gtd.NextTime.ToString(CApp.DATEIME_FORMAT));
-                    return;
-                }
-                if (gtd.Status == Gtd.CGtd.STATUS_ONTIME)
-                {
-                    CbLib.Enabled = false;
-                    UcTips.Visible = true;
-                    _TlPanel.RowStyles[1].Height = 0;
-                    UcTips.Text = string.Format("您有一个待办提醒：{0}{0}　　{1}{0}{0}{2}", Environment.NewLine, gtd.Title, gtd.NextTime.ToString(CApp.DATEIME_FORMAT));
-                    return;
-                }
-            }
-
+            
             CbLib.Enabled = true;
-            UcTips.Visible = false;
             _TlPanel.RowStyles[1].Height = 32;
         }
 
@@ -312,24 +285,6 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
                 default:
                     return;
             }
-        }
-
-        private void CloseTips()
-        {
-            Gtd.M.MGtd gtd = _SafeModel.Key.Gtd;
-            if (gtd != null)
-            {
-                DateTime now = DateTime.Now;
-                gtd.LastTime = now;
-                if (gtd.Next(now, 0))
-                {
-                    _DataModel.SaveVcs(gtd);
-                    _DataModel.ReloadGtds();
-                }
-            }
-            CbLib.Enabled = true;
-            UcTips.Visible = false;
-            _TlPanel.RowStyles[1].Height = 32;
         }
         #endregion
     }

@@ -9,7 +9,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
     {
         #region 全局变量
         private APwd _APwd;
-        private IWizView _LastView;
+        private IEditer _LastView;
         private BeanInfo _InfoBean;
         private BeanGuid _GuidBean;
         private BeanHead _HeadBean;

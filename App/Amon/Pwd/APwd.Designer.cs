@@ -34,11 +34,10 @@
             this.TlEcho = new System.Windows.Forms.ToolStripStatusLabel();
             this.TlTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.TcTool = new System.Windows.Forms.ToolStripContainer();
+            this.PlMain = new System.Windows.Forms.Panel();
             this.TbTool = new System.Windows.Forms.ToolStrip();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.BgWorker = new System.ComponentModel.BackgroundWorker();
-            this.PlMain = new System.Windows.Forms.Panel();
-            this.PlNote = new System.Windows.Forms.Panel();
             this.SbEcho.SuspendLayout();
             this.TcTool.ContentPanel.SuspendLayout();
             this.TcTool.TopToolStripPanel.SuspendLayout();
@@ -53,13 +52,13 @@
             this.MbMenu.TabIndex = 0;
             this.MbMenu.Text = "菜单栏";
             // 
-            // SsEcho
+            // SbEcho
             // 
             this.SbEcho.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TlEcho,
             this.TlTime});
             this.SbEcho.Location = new System.Drawing.Point(0, 420);
-            this.SbEcho.Name = "SsEcho";
+            this.SbEcho.Name = "SbEcho";
             this.SbEcho.Size = new System.Drawing.Size(584, 22);
             this.SbEcho.TabIndex = 1;
             this.SbEcho.Text = "状态栏";
@@ -84,7 +83,6 @@
             // 
             // TcTool.ContentPanel
             // 
-            this.TcTool.ContentPanel.Controls.Add(this.PlNote);
             this.TcTool.ContentPanel.Controls.Add(this.PlMain);
             this.TcTool.ContentPanel.Size = new System.Drawing.Size(584, 371);
             this.TcTool.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -98,6 +96,16 @@
             // 
             this.TcTool.TopToolStripPanel.Controls.Add(this.TbTool);
             // 
+            // PlMain
+            // 
+            this.PlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.PlMain.Location = new System.Drawing.Point(12, 3);
+            this.PlMain.Name = "PlMain";
+            this.PlMain.Size = new System.Drawing.Size(560, 365);
+            this.PlMain.TabIndex = 0;
+            // 
             // TbTool
             // 
             this.TbTool.Dock = System.Windows.Forms.DockStyle.None;
@@ -109,26 +117,6 @@
             // BgWorker
             // 
             this.BgWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BgWorker_DoWork);
-            // 
-            // PlMain
-            // 
-            this.PlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.PlMain.Location = new System.Drawing.Point(12, 3);
-            this.PlMain.Name = "PlMain";
-            this.PlMain.Size = new System.Drawing.Size(560, 365);
-            this.PlMain.TabIndex = 0;
-            // 
-            // PlNote
-            // 
-            this.PlNote.BackColor = System.Drawing.Color.Transparent;
-            this.PlNote.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PlNote.Location = new System.Drawing.Point(0, 0);
-            this.PlNote.Name = "PlNote";
-            this.PlNote.Size = new System.Drawing.Size(584, 371);
-            this.PlNote.TabIndex = 1;
-            this.PlNote.Visible = false;
             // 
             // APwd
             // 
@@ -167,7 +155,6 @@
         private System.Windows.Forms.ToolTip TpTips;
         private System.ComponentModel.BackgroundWorker BgWorker;
         private System.Windows.Forms.Panel PlMain;
-        private System.Windows.Forms.Panel PlNote;
 
     }
 }

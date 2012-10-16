@@ -4,7 +4,7 @@ using Me.Amon.Pwd.M;
 
 namespace Me.Amon.Pwd.V.Wiz.Viewer
 {
-    public partial class BeanInfo : UserControl, IWizView
+    public partial class BeanInfo : UserControl, IViewer
     {
         private SafeModel _SafeModel;
         private TableLayoutPanel _TlPanel;
@@ -46,24 +46,11 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
             _TlPanel.RowStyles[1].Height = 0;
         }
 
-        public bool SaveData()
-        {
-            return false;
-        }
-
-        public void CutData()
-        {
-        }
-
         public void CopyData()
         {
         }
 
-        public void PasteData()
-        {
-        }
-
-        public void ClearData()
+        public void FillData()
         {
         }
         #endregion

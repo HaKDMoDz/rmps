@@ -17,6 +17,10 @@ namespace Me.Amon.Pwd.V.Wiz
         }
         #endregion
 
+        public void ShowHint(string hints)
+        {
+        }
+
         public void ShowTips(Control control, string caption)
         {
         }
@@ -38,22 +42,22 @@ namespace Me.Amon.Pwd.V.Wiz
                 HSplit.Panel1.Controls.Add(CatTree.Control);
             }
 
-            if (FindBar != null)
-            {
-                FindBar.Control.Dock = DockStyle.Top;
-                FindBar.Control.Location = new System.Drawing.Point(0, 0);
-                FindBar.Control.Size = new System.Drawing.Size(152, 29);
-                VSplit.Panel1.Controls.Add(FindBar.Control);
-            }
-
             if (KeyList != null)
             {
                 KeyList.Control.Dock = DockStyle.Fill;
                 KeyList.Control.Location = new System.Drawing.Point(0, 29);
                 //this.keyList1.Name = "keyList1";
-                KeyList.Control.Size = new System.Drawing.Size(152, 121);
+                KeyList.Control.Size = new System.Drawing.Size(320, 74);
                 //this.keyList1.TabIndex = 0;
                 VSplit.Panel1.Controls.Add(KeyList.Control);
+            }
+
+            if (FindBar != null)
+            {
+                FindBar.Control.Dock = DockStyle.Top;
+                FindBar.Control.Location = new System.Drawing.Point(0, 0);
+                FindBar.Control.Size = new System.Drawing.Size(320, 29);
+                VSplit.Panel1.Controls.Add(FindBar.Control);
             }
 
             AttView = new AttViewer();

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Me.Amon.C;
 using Me.Amon.Gtd.V;
 using Me.Amon.Properties;
 using Me.Amon.Pwd._Att;
@@ -9,7 +8,7 @@ using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.V.Wiz.Viewer
 {
-    public partial class BeanHead : UserControl, IWizView
+    public partial class BeanHead : UserControl, IViewer
     {
         private AWiz _AWiz;
         private UserModel _UserModel;
@@ -102,54 +101,7 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
             }
             Focus();
         }
-
-        public bool SaveData()
-        {
-            if (_SafeModel.Key == null)
-            {
-                return false;
-            }
-
-            string text = TbName.Text;
-            if (!CharUtil.IsValidate(text))
-            {
-                Main.ShowAlert("请输入记录标题！");
-                TbName.Focus();
-                return false;
-            }
-
-            MetaAtt meta = _SafeModel.Meta;
-            if (meta.Text != text)
-            {
-                meta.Text = text;
-                meta.Modified = true;
-            }
-            if (meta.Data != TbMeta.Text)
-            {
-                meta.Data = TbMeta.Text;
-                meta.Modified = true;
-            }
-            _SafeModel.Modified |= meta.Modified;
-
-            AutoAtt auto = _SafeModel.Auto;
-            if (auto.Data != TbAuto.Text)
-            {
-                auto.Data = TbAuto.Text;
-                auto.Modified = true;
-            }
-            _SafeModel.Modified |= auto.Modified;
-
-            return true;
-        }
-
-        public void CutData()
-        {
-            if (_TBox != null)
-            {
-                _TBox.Cut();
-            }
-        }
-
+        
         public void CopyData()
         {
             if (_TBox != null)
@@ -158,19 +110,11 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
             }
         }
 
-        public void PasteData()
+        public void FillData()
         {
             if (_TBox != null)
             {
                 _TBox.Paste();
-            }
-        }
-
-        public void ClearData()
-        {
-            if (_TBox != null)
-            {
-                _TBox.Clear();
             }
         }
         #endregion

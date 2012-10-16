@@ -405,6 +405,7 @@
     <Compile Include="Pwd\V\Wiz\Editer\AttEditer.Designer.cs">
       <DependentUpon>AttEditer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pwd\V\Wiz\IViewer.cs" />
     <Compile Include="Pwd\V\Wiz\Viewer\AttViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1131,12 +1132,12 @@
       <DependentUpon>BeanText.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\V\Wiz\IAttEdit.cs" />
-    <Compile Include="Pwd\V\Wiz\IWizView.cs" />
-    <Compile Include="Uc\GtdTips.cs">
+    <Compile Include="Pwd\V\Wiz\IEditer.cs" />
+    <Compile Include="Uc\GtdHint.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Uc\GtdTips.Designer.cs">
-      <DependentUpon>GtdTips.cs</DependentUpon>
+    <Compile Include="Uc\GtdHint.Designer.cs">
+      <DependentUpon>GtdHint.cs</DependentUpon>
     </Compile>
     <Compile Include="Uc\Itemi.cs" />
     <Compile Include="Uc\Items.cs" />
@@ -1723,8 +1724,8 @@
     <EmbeddedResource Include="Spy\V\Wiz\AWiz.resx">
       <DependentUpon>AWiz.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Uc\GtdTips.resx">
-      <DependentUpon>GtdTips.cs</DependentUpon>
+    <EmbeddedResource Include="Uc\GtdHint.resx">
+      <DependentUpon>GtdHint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uw\Alert.resx">
       <DependentUpon>Alert.cs</DependentUpon>

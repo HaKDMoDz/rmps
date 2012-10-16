@@ -1,11 +1,14 @@
-﻿using System.Windows.Forms;
-using Me.Amon.C;
+﻿using System;
+using System.Windows.Forms;
+using Me.Amon.Pwd.M;
 
 namespace Me.Amon.Uc
 {
-    public partial class GtdTips : UserControl
+    public partial class GtdHint : UserControl
     {
-        public GtdTips()
+        private SafeModel _SafeModel;
+
+        public GtdHint()
         {
             InitializeComponent();
         }
@@ -22,13 +25,13 @@ namespace Me.Amon.Uc
             }
         }
 
-        public VoidHandler CallBack { get; set; }
+        public EventHandler Handler { get; set; }
 
-        private void PbHide_Click(object sender, System.EventArgs e)
+        private void PbHide_Click(object sender, EventArgs e)
         {
-            if (CallBack != null)
+            if (Handler != null)
             {
-                CallBack();
+                Handler.Invoke(sender, e);
             }
         }
     }

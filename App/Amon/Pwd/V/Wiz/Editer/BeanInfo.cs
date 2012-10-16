@@ -4,7 +4,7 @@ using Me.Amon.Pwd.M;
 
 namespace Me.Amon.Pwd.V.Wiz.Editer
 {
-    public partial class BeanInfo : UserControl, IWizView
+    public partial class BeanInfo : UserControl, IEditer
     {
         private SafeModel _SafeModel;
         private TableLayoutPanel _TlPanel;

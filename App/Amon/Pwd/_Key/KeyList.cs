@@ -255,12 +255,10 @@ namespace Me.Amon.Pwd._Key
 
         public void ListKeysWithGtd(int status)
         {
-            throw new NotImplementedException();
         }
 
         public void ListKeysWithGtd(DateTime time, int seconds)
         {
-            throw new NotImplementedException();
         }
     }
 }

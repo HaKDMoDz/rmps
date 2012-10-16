@@ -154,6 +154,22 @@ namespace Me.Amon.Pwd
             get { return this; }
         }
 
+        private GtdHint _UcHint;
+        public void ShowHint(string hints)
+        {
+            if (_UcHint == null)
+            {
+                _UcHint = new GtdHint();
+                _UcHint.Dock = DockStyle.Fill;
+                _UcHint.Handler = new EventHandler(Hint_Click);
+                _UcHint.TabIndex = 1;
+                TcTool.ContentPanel.Controls.Add(_UcHint);
+            }
+
+            PlMain.Enabled = false;
+            _UcHint.Visible = true;
+        }
+
         public void ShowTips(Control control, string caption)
         {
             TpTips.SetToolTip(control, caption);
@@ -2043,6 +2059,23 @@ namespace Me.Amon.Pwd
             _ViewModel.SaveLayout();
         }
         #endregion
+
+        private void Hint_Click(object sender, EventArgs e)
+        {
+            Gtd.M.MGtd gtd = _SafeModel.Key.Gtd;
+            if (gtd != null)
+            {
+                DateTime now = DateTime.Now;
+                gtd.LastTime = now;
+                if (gtd.Next(now, 0))
+                {
+                    _DataModel.SaveVcs(gtd);
+                    _DataModel.ReloadGtds();
+                }
+            }
+            _UcHint.Visible = false;
+            PlMain.Enabled = true;
+        }
 
         private void BgWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {

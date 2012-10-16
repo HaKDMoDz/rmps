@@ -4,7 +4,7 @@ using Me.Amon.Pwd.M;
 
 namespace Me.Amon.Pwd.V.Wiz.Viewer
 {
-    public partial class BeanBody : UserControl, IWizView
+    public partial class BeanBody : UserControl, IViewer
     {
         #region 全局变量
         private AWiz _AWiz;
@@ -90,37 +90,6 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
             Focus();
         }
 
-        public bool SaveData()
-        {
-            for (int i = 0; i < Att.TYPE_SIZE - Att.HEAD_SIZE; i += 1)
-            {
-                if (_IdxList.ContainsKey(i))
-                {
-                    _IdxList[i] = 0;
-                }
-            }
-
-            _SafeModel.Modified = false;
-            for (int i = Att.HEAD_SIZE; i < _SafeModel.Count; i += 1)
-            {
-                Att att = _SafeModel.GetAtt(i);
-                if (!GetCtl(att.Type).Save())
-                {
-                    return false;
-                }
-                _SafeModel.Modified |= att.Modified;
-            }
-            return true;
-        }
-
-        public void CutData()
-        {
-            if (EditCtl != null)
-            {
-                EditCtl.Cut();
-            }
-        }
-
         public void CopyData()
         {
             if (EditCtl != null)
@@ -129,19 +98,11 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
             }
         }
 
-        public void PasteData()
+        public void FillData()
         {
             if (EditCtl != null)
             {
                 EditCtl.Paste();
-            }
-        }
-
-        public void ClearData()
-        {
-            if (EditCtl != null)
-            {
-                EditCtl.Clear();
             }
         }
         #endregion

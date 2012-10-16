@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Uc
 {
-    partial class GtdTips
+    partial class GtdHint
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,10 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TbTips = new System.Windows.Forms.TextBox();
+            this.PlHint = new System.Windows.Forms.Panel();
             this.PbHide = new System.Windows.Forms.PictureBox();
+            this.TbTips = new System.Windows.Forms.TextBox();
+            this.PlHint.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbHide)).BeginInit();
             this.SuspendLayout();
+            // 
+            // PlHint
+            // 
+            this.PlHint.BackgroundImage = global::Me.Amon.Properties.Resources.Tips;
+            this.PlHint.Controls.Add(this.PbHide);
+            this.PlHint.Controls.Add(this.TbTips);
+            this.PlHint.Location = new System.Drawing.Point(15, 46);
+            this.PlHint.Name = "PlHint";
+            this.PlHint.Size = new System.Drawing.Size(270, 208);
+            this.PlHint.TabIndex = 0;
+            // 
+            // PbHide
+            // 
+            this.PbHide.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PbHide.Image = global::Me.Amon.Properties.Resources.OK;
+            this.PbHide.Location = new System.Drawing.Point(180, 170);
+            this.PbHide.Name = "PbHide";
+            this.PbHide.Size = new System.Drawing.Size(64, 23);
+            this.PbHide.TabIndex = 2;
+            this.PbHide.TabStop = false;
+            this.PbHide.Click += new System.EventHandler(this.PbHide_Click);
             // 
             // TbTips
             // 
@@ -42,38 +65,27 @@
             this.TbTips.Name = "TbTips";
             this.TbTips.ReadOnly = true;
             this.TbTips.Size = new System.Drawing.Size(218, 85);
-            this.TbTips.TabIndex = 0;
+            this.TbTips.TabIndex = 1;
             this.TbTips.TabStop = false;
             // 
-            // PbHide
-            // 
-            this.PbHide.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PbHide.Image = global::Me.Amon.Properties.Resources.OK;
-            this.PbHide.Location = new System.Drawing.Point(180, 170);
-            this.PbHide.Name = "PbHide";
-            this.PbHide.Size = new System.Drawing.Size(64, 23);
-            this.PbHide.TabIndex = 1;
-            this.PbHide.TabStop = false;
-            this.PbHide.Click += new System.EventHandler(this.PbHide_Click);
-            // 
-            // GtdTips
+            // GtdHint
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.BackgroundImage = global::Me.Amon.Properties.Resources.Tips;
-            this.Controls.Add(this.TbTips);
-            this.Controls.Add(this.PbHide);
-            this.Name = "GtdTips";
-            this.Size = new System.Drawing.Size(270, 208);
+            this.Controls.Add(this.PlHint);
+            this.Name = "GtdHint";
+            this.Size = new System.Drawing.Size(300, 300);
+            this.PlHint.ResumeLayout(false);
+            this.PlHint.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbHide)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
+        private System.Windows.Forms.Panel PlHint;
         private System.Windows.Forms.TextBox TbTips;
         private System.Windows.Forms.PictureBox PbHide;
     }

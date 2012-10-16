@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BeanGuid));
-            this.CbLib = new System.Windows.Forms.ComboBox();
             this.LbLib = new System.Windows.Forms.Label();
             this.PbCard = new System.Windows.Forms.PictureBox();
             this.CmCard = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -39,26 +38,16 @@
             this.CcImg = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.CcAll = new System.Windows.Forms.ToolStripMenuItem();
-            this.UcTips = new Me.Amon.Uc.GtdTips();
             this.PbFill = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.PbCard)).BeginInit();
             this.CmCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbFill)).BeginInit();
             this.SuspendLayout();
             // 
-            // CbLib
-            // 
-            this.CbLib.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CbLib.FormattingEnabled = true;
-            this.CbLib.Location = new System.Drawing.Point(63, 3);
-            this.CbLib.Name = "CbLib";
-            this.CbLib.Size = new System.Drawing.Size(121, 20);
-            this.CbLib.TabIndex = 3;
-            // 
             // LbLib
             // 
             this.LbLib.AutoSize = true;
-            this.LbLib.Location = new System.Drawing.Point(10, 6);
+            this.LbLib.Location = new System.Drawing.Point(3, 9);
             this.LbLib.Name = "LbLib";
             this.LbLib.Size = new System.Drawing.Size(47, 12);
             this.LbLib.TabIndex = 2;
@@ -67,7 +56,7 @@
             // PbCard
             // 
             this.PbCard.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PbCard.Location = new System.Drawing.Point(93, 29);
+            this.PbCard.Location = new System.Drawing.Point(93, 3);
             this.PbCard.Name = "PbCard";
             this.PbCard.Size = new System.Drawing.Size(24, 24);
             this.PbCard.TabIndex = 4;
@@ -114,21 +103,10 @@
             this.CcAll.Size = new System.Drawing.Size(142, 22);
             this.CcAll.Text = "其它格式(&O)";
             // 
-            // UcTips
-            // 
-            this.UcTips.BackColor = System.Drawing.Color.Transparent;
-            this.UcTips.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("UcTips.BackgroundImage")));
-            this.UcTips.CallBack = null;
-            this.UcTips.Location = new System.Drawing.Point(42, 59);
-            this.UcTips.Name = "UcTips";
-            this.UcTips.Size = new System.Drawing.Size(270, 208);
-            this.UcTips.TabIndex = 5;
-            this.UcTips.Visible = false;
-            // 
             // PbFill
             // 
             this.PbFill.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PbFill.Location = new System.Drawing.Point(63, 29);
+            this.PbFill.Location = new System.Drawing.Point(63, 3);
             this.PbFill.Name = "PbFill";
             this.PbFill.Size = new System.Drawing.Size(24, 24);
             this.PbFill.TabIndex = 6;
@@ -141,8 +119,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.PbFill);
             this.Controls.Add(this.PbCard);
-            this.Controls.Add(this.CbLib);
-            this.Controls.Add(this.UcTips);
             this.Controls.Add(this.LbLib);
             this.Name = "BeanGuid";
             this.Size = new System.Drawing.Size(350, 250);
@@ -156,7 +132,6 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox CbLib;
         private System.Windows.Forms.Label LbLib;
         private System.Windows.Forms.PictureBox PbCard;
         private System.Windows.Forms.ContextMenuStrip CmCard;
@@ -165,7 +140,6 @@
         private System.Windows.Forms.ToolStripMenuItem CcImg;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem CcAll;
-        private Uc.GtdTips UcTips;
         private System.Windows.Forms.PictureBox PbFill;
     }
 }

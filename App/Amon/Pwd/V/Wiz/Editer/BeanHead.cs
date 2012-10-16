@@ -9,7 +9,7 @@ using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.V.Wiz.Editer
 {
-    public partial class BeanHead : UserControl, IWizView
+    public partial class BeanHead : UserControl, IEditer
     {
         private AWiz _AWiz;
         private UserModel _UserModel;

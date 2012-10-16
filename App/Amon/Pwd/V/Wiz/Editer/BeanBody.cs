@@ -4,7 +4,7 @@ using Me.Amon.Pwd.M;
 
 namespace Me.Amon.Pwd.V.Wiz.Editer
 {
-    public partial class BeanBody : UserControl, IWizView
+    public partial class BeanBody : UserControl, IEditer
     {
         #region 全局变量
         private AWiz _AWiz;

@@ -35,9 +35,10 @@
             // 
             this.LbKey.AllowDrop = true;
             this.LbKey.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LbKey.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.LbKey.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.LbKey.FormattingEnabled = true;
             this.LbKey.IntegralHeight = false;
+            this.LbKey.ItemHeight = 32;
             this.LbKey.Location = new System.Drawing.Point(0, 0);
             this.LbKey.Name = "LbKey";
             this.LbKey.Size = new System.Drawing.Size(150, 150);
