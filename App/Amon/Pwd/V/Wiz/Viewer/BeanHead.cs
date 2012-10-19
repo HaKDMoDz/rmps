@@ -14,7 +14,6 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
         private UserModel _UserModel;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
-        private TableLayoutPanel _TlPanel;
         private TextBox _TBox;
 
         #region 构造函数
@@ -23,18 +22,11 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
             InitializeComponent();
         }
 
-        public BeanHead(AWiz awiz, UserModel userModel, SafeModel safeModel)
+        public void Init(AWiz aWiz, UserModel userModel, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
         {
-            _AWiz = awiz;
+            _AWiz = aWiz;
             _UserModel = userModel;
             _SafeModel = safeModel;
-
-            InitializeComponent();
-        }
-
-        public void Init(TableLayoutPanel grid, DataModel dataModel, ViewModel viewModel)
-        {
-            _TlPanel = grid;
             _DataModel = dataModel;
 
             TbName.GotFocus += new EventHandler(TbName_GotFocus);
@@ -44,22 +36,8 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
         #endregion
 
         #region 接口实现
-        public void InitView()
-        {
-            _TlPanel.Controls.Add(this, 0, 0);
-            Dock = DockStyle.Fill;
-            TabIndex = 0;
-        }
-
-        public void HideView()
-        {
-            _TlPanel.Controls.Remove(this);
-        }
-
         public void ShowData()
         {
-            _TlPanel.RowStyles[1].Height = 32;
-
             MetaAtt meta = _SafeModel.Meta;
             if (meta == null)
             {
@@ -101,7 +79,7 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
             }
             Focus();
         }
-        
+
         public void CopyData()
         {
             if (_TBox != null)

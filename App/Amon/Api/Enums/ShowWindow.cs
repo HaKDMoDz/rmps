@@ -1,7 +1,7 @@
 ﻿
 namespace Me.Amon.Api.Enums
 {
-    public enum ShowWindow : short
+    public enum ShowWindowCmd : short
     {
         SW_HIDE = 0,
         SW_SHOWNORMAL = 1,

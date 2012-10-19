@@ -78,6 +78,10 @@ namespace Me.Amon.Api.User32
         [DllImport("user32.dll")]
         public static extern int EnableScrollBar(IntPtr hWnd, uint flags, uint arrows);
 
+        [DllImport("user32.dll")]
+        public static extern bool EnumDesktopWindows(IntPtr hDesktop, EnumWindowsProc lpfn, IntPtr lParam);
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -277,7 +281,7 @@ namespace Me.Amon.Api.User32
         /// <param name="uCmd"></param>
         /// <returns></returns>
         [DllImport("user32.dll")]
-        public static extern IntPtr GetWindow(IntPtr hWnd, uint uCmd);
+        public static extern IntPtr GetWindow(IntPtr hWnd, GetWindowCmd uCmd);
 
         /// <summary>
         /// 获取整个窗口（包括边框、滚动条、标题栏、菜单等）的设备场景 返回值 Long。
@@ -341,7 +345,16 @@ namespace Me.Amon.Api.User32
         /// 该函数确定给定的窗口句柄是否识别一个已存在的窗口。
         /// </summary>
         [DllImport("user32.dll")]
-        public static extern int IsWindow(IntPtr hWnd);
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool IsWindow(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool IsWindowEnabled(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool IsWindowVisible(IntPtr hWnd);
 
         /// <summary>
         /// 
@@ -568,7 +581,7 @@ namespace Me.Amon.Api.User32
         /// 该函数设置指定窗口的显示状态。
         /// </summary>
         [DllImport("user32.dll")]
-        public static extern bool ShowWindow(IntPtr hWnd, ShowWindow State);
+        public static extern bool ShowWindow(IntPtr hWnd, ShowWindowCmd State);
 
         /// <summary>
         /// 该函数将指定的虚拟键码和键盘状态翻译为相应的字符或字符串。该函数使用由给定的键盘布局句柄标识的物理键盘布局和输入语言来翻译代码。

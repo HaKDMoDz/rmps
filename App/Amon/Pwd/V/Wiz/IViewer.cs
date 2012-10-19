@@ -4,10 +4,6 @@
     {
         string Name { get; set; }
 
-        void InitView();
-
-        void HideView();
-
         bool Focus();
 
         void ShowData();

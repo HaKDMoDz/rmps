@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -12,6 +13,45 @@ namespace Me.Amon.Api.User32
 {
     public class User32 : User32API
     {
+        public static List<IntPtr> EnumWindows()
+        {
+            List<IntPtr> windows = new List<IntPtr>();
+            StringBuilder title = new StringBuilder(255);
+            int len;
+            EnumDesktopWindows(IntPtr.Zero, delegate(IntPtr hWnd, IntPtr lParam)
+            {
+                len = GetWindowText(hWnd, title, title.Capacity + 1);
+                if (IsWindowVisible(hWnd) && len > 0)
+                {
+                    windows.Add(hWnd);
+                }
+                return true;
+            }, IntPtr.Zero);
+
+            return windows;
+        }
+
+        public static IntPtr NextWindow(IntPtr curr)
+        {
+            IntPtr last = IntPtr.Zero;
+            StringBuilder title = new StringBuilder(255);
+            int len;
+            bool find;
+            EnumDesktopWindows(IntPtr.Zero, delegate(IntPtr hWnd, IntPtr lParam)
+            {
+                len = GetWindowText(hWnd, title, title.Capacity + 1);
+                if (!IsWindowVisible(hWnd) || len < 1)
+                {
+                    return true;
+                }
+                find = (last != curr);
+                last = hWnd;
+                return find;
+            }, IntPtr.Zero);
+
+            return last;
+        }
+
         public static void SwitchWindow(IntPtr dstWnd)
         {
             if (GetForegroundWindow() == dstWnd || dstWnd == IntPtr.Zero)
@@ -19,7 +59,7 @@ namespace Me.Amon.Api.User32
                 return;
             }
 
-            ShowWindow(dstWnd, Enums.ShowWindow.SW_RESTORE);
+            ShowWindow(dstWnd, ShowWindowCmd.SW_RESTORE);
             SetForegroundWindow(dstWnd);
 
             //IntPtr curWnd = GetForegroundWindow();
@@ -40,7 +80,7 @@ namespace Me.Amon.Api.User32
                 wndHnd = GetParent(txtHnd);
             }
 
-            ShowWindow(txtHnd, Enums.ShowWindow.SW_RESTORE);
+            ShowWindow(txtHnd, ShowWindowCmd.SW_RESTORE);
             SetForegroundWindow(txtHnd);
             System.Windows.Forms.SendKeys.SendWait(text);
             System.Windows.Forms.SendKeys.Flush();
@@ -50,7 +90,7 @@ namespace Me.Amon.Api.User32
         {
             var wp = new WINDOWPLACEMENT();
             GetWindowPlacement(handle, ref wp);
-            const int cmd = (int)Enums.ShowWindow.SW_SHOWNORMAL;
+            const int cmd = (int)Enums.ShowWindowCmd.SW_SHOWNORMAL;
             if (cmd != wp.showCmd)
             {
                 wp.showCmd = cmd; // 1- Normal; 2 - Minimize; 3 - Maximize;
@@ -220,7 +260,7 @@ namespace Me.Amon.Api.User32
                 Rectangle rect = GetWindowRect(Window);
                 if (rect.Contains(point))
                     WindowList.Add(Window);
-                Window = GetWindow(Window, (uint)Enums.GetWindow.GW_HWNDNEXT);
+                Window = GetWindow(Window, GetWindowCmd.GW_HWNDNEXT);
             }
 
             // search for the smallest window in the list

@@ -117,15 +117,15 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
             _Body.EditCtl = this;
         }
 
-        private void BtFill_Click(object sender, EventArgs e)
-        {
-            ShowSpec(BtFill);
-        }
-
         private void BtCopy_Click(object sender, EventArgs e)
         {
             SafeUtil.Copy(TbData.Text);
             TbData.Focus();
+        }
+
+        private void BtFill_Click(object sender, EventArgs e)
+        {
+            _Body.FillData(TbData.Text);
         }
         #endregion
     }

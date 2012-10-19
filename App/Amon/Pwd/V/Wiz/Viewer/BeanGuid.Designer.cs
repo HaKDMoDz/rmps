@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BeanGuid));
             this.LbLib = new System.Windows.Forms.Label();
             this.PbCard = new System.Windows.Forms.PictureBox();
             this.CmCard = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -51,7 +50,7 @@
             this.LbLib.Name = "LbLib";
             this.LbLib.Size = new System.Drawing.Size(47, 12);
             this.LbLib.TabIndex = 2;
-            this.LbLib.Text = "模板(&L)";
+            this.LbLib.Text = "操作(&O)";
             // 
             // PbCard
             // 
@@ -59,6 +58,7 @@
             this.PbCard.Location = new System.Drawing.Point(93, 3);
             this.PbCard.Name = "PbCard";
             this.PbCard.Size = new System.Drawing.Size(24, 24);
+            this.PbCard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PbCard.TabIndex = 4;
             this.PbCard.TabStop = false;
             this.PbCard.Click += new System.EventHandler(this.PbCard_Click);
@@ -109,6 +109,7 @@
             this.PbFill.Location = new System.Drawing.Point(63, 3);
             this.PbFill.Name = "PbFill";
             this.PbFill.Size = new System.Drawing.Size(24, 24);
+            this.PbFill.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PbFill.TabIndex = 6;
             this.PbFill.TabStop = false;
             this.PbFill.Click += new System.EventHandler(this.PbFill_Click);

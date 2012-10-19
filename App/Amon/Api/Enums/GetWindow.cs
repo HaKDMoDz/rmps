@@ -1,7 +1,7 @@
 ﻿
 namespace Me.Amon.Api.Enums
 {
-    enum GetWindow : uint
+    public enum GetWindowCmd : uint
     {
         GW_HWNDFIRST = 0,
         GW_HWNDLAST = 1,

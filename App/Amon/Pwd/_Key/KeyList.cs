@@ -172,16 +172,17 @@ namespace Me.Amon.Pwd._Key
                 return;
             }
 
-            //if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您当前的数据尚未保存，要丢弃吗？"))
-            //{
-            //    LbKey.SelectedItem = _SafeModel.Key;
-            //    return;
-            //}
+            if (!_APwd.CanChange(key))
+            {
+                LbKey.SelectedItem = SelectedKey;
+                return;
+            }
 
-            //_SafeModel.Key = key;
-            //_SafeModel.Decode();
-
-            //ShowKey(key);
+            SelectedKey = key;
+            if (AttView != null)
+            {
+                AttView.ShowData();
+            }
         }
 
         private void LbKey_MouseDown(object sender, MouseEventArgs e)

@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using Me.Amon.Pwd.M;
 using Me.Amon.Pwd.V.Wiz.Viewer;
 
 namespace Me.Amon.Pwd.V.Wiz
@@ -7,6 +8,10 @@ namespace Me.Amon.Pwd.V.Wiz
     {
         #region 全局变量
         private APwd _APwd;
+        private UserModel _UserModel;
+        private SafeModel _SafeModel;
+        private DataModel _DataModel;
+        private ViewModel _ViewModel;
         private IAttView AttView;
         #endregion
 
@@ -15,14 +20,35 @@ namespace Me.Amon.Pwd.V.Wiz
         {
             InitializeComponent();
         }
+
+        public void Init(APwd aPwd, UserModel userModel, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
+        {
+            _APwd = aPwd;
+            _UserModel = userModel;
+            _SafeModel = safeModel;
+            _DataModel = dataModel;
+            _ViewModel = viewModel;
+        }
         #endregion
+
+        public void FillData()
+        {
+            _APwd.FillData();
+        }
+
+        public void FillData(string data)
+        {
+            _APwd.FillData(data);
+        }
 
         public void ShowHint(string hints)
         {
+            _APwd.ShowHint(hints);
         }
 
         public void ShowTips(Control control, string caption)
         {
+            _APwd.ShowTips(control, caption);
         }
 
         #region 接口实现
@@ -60,10 +86,12 @@ namespace Me.Amon.Pwd.V.Wiz
                 VSplit.Panel1.Controls.Add(FindBar.Control);
             }
 
-            AttView = new AttViewer();
-            AttView.Control.Dock = DockStyle.Fill;
+            AttViewer viewer = new AttViewer();
+            viewer.Dock = DockStyle.Fill;
+            viewer.Init(this, _UserModel, _SafeModel, _DataModel, _ViewModel);
+            VSplit.Panel2.Controls.Add(viewer);
+            AttView = viewer;
             KeyList.AttView = AttView;
-            VSplit.Panel2.Controls.Add(AttView.Control);
 
             Dock = DockStyle.Fill;
             panel.Controls.Add(this);

@@ -133,7 +133,7 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
 
         private void BtFill_Click(object sender, EventArgs e)
         {
-            ShowSpec(BtFill);
+            _Body.FillData(TbData.Text);
         }
         #endregion
     }

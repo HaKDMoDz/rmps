@@ -124,7 +124,7 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
 
         private void BtFill_Click(object sender, EventArgs e)
         {
-
+            _Body.FillData(TbData.Text);
         }
         #endregion
     }

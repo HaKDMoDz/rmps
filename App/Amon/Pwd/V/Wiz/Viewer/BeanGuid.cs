@@ -2,7 +2,6 @@
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
-using Me.Amon.C;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd.M;
 using Me.Amon.Uc;
@@ -16,7 +15,6 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
         private UserModel _UserModel;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
-        private TableLayoutPanel _TlPanel;
 
         #region 构造函数
         public BeanGuid()
@@ -24,18 +22,11 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
             InitializeComponent();
         }
 
-        public BeanGuid(AWiz awiz, UserModel userModel, SafeModel safeModel)
+        public void Init(AWiz awiz, UserModel userModel, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
         {
             _AWiz = awiz;
             _UserModel = userModel;
             _SafeModel = safeModel;
-
-            InitializeComponent();
-        }
-
-        public void Init(TableLayoutPanel grid, DataModel dataModel, ViewModel viewModel)
-        {
-            _TlPanel = grid;
             _DataModel = dataModel;
 
             PbFill.Image = viewModel.GetImage("script-fill-24");
@@ -123,18 +114,6 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
         #endregion
 
         #region 接口实现
-        public void InitView()
-        {
-            _TlPanel.Controls.Add(this, 0, 0);
-            Dock = DockStyle.Fill;
-            TabIndex = 0;
-        }
-
-        public void HideView()
-        {
-            _TlPanel.Controls.Remove(this);
-        }
-
         public void ShowData()
         {
             GuidAtt guid = _SafeModel.Guid;
@@ -175,7 +154,7 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
         #region 事件处理
         private void PbFill_Click(object sender, EventArgs e)
         {
-
+            _AWiz.FillData();
         }
 
         private void PbCard_Click(object sender, EventArgs e)

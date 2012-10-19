@@ -352,6 +352,17 @@ namespace Me.Amon.Pwd
         {
         }
 
+        public bool CanChange(Key key)
+        {
+            if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您当前的数据尚未保存，要丢弃吗？"))
+            {
+                return false;
+            }
+            _SafeModel.Key = key;
+            _SafeModel.Decode();
+            return true;
+        }
+
         public void Backup()
         {
         }
@@ -390,13 +401,20 @@ namespace Me.Amon.Pwd
 
         public void FillData()
         {
-            IntPtr hWnd = User32.GetForegroundWindow();
-            if (hWnd == IntPtr.Zero || hWnd == this.Handle)
+            if (_SafeModel.Key == null || string.IsNullOrEmpty(_SafeModel.Key.Script))
             {
                 return;
             }
 
-            if (_SafeModel.Key == null || string.IsNullOrEmpty(_SafeModel.Key.Script))
+            bool visible = Visible;
+            if (visible)
+            {
+                Visible = false;
+                Thread.Sleep(300);
+            }
+
+            IntPtr hWnd = User32.GetForegroundWindow();
+            if (hWnd == IntPtr.Zero || hWnd == this.Handle)
             {
                 return;
             }
@@ -443,6 +461,28 @@ namespace Me.Amon.Pwd
                 i1 = i2 + s1.Length;
                 SendKeys.SendWait(s2);
             }
+
+            Visible = visible;
+        }
+
+        public void FillData(string data)
+        {
+            if (string.IsNullOrEmpty(data))
+            {
+                return;
+            }
+
+            IntPtr hWnd = User32.NextWindow(Handle);
+            if (hWnd == IntPtr.Zero)
+            {
+                return;
+            }
+            User32.BringWindowToTop(hWnd);
+            Thread.Sleep(100);
+
+            SendKeys.SendWait(data);
+            Thread.Sleep(100);
+            Activate();
         }
 
         /// <summary>
@@ -1099,7 +1139,7 @@ namespace Me.Amon.Pwd
             {
                 _WizView = new AWiz();
                 _WizView.Name = CPwd.PATTERN_WIZ;
-                //_WizView.Init(this, _UserModel, _SafeModel, _DataModel, _ViewModel);
+                _WizView.Init(this, _UserModel, _SafeModel, _DataModel, _ViewModel);
             }
 
             if (_PwdView != null)

@@ -12,7 +12,6 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
         private SafeModel _SafeModel;
         private DataModel _DataModel;
         private ViewModel _ViewModel;
-        private TableLayoutPanel _TlPanel;
         #endregion
 
         #region 构造函数
@@ -21,40 +20,19 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
             InitializeComponent();
         }
 
-        public BeanBody(AWiz awiz, UserModel userModel, SafeModel safeModel)
+        public void Init(AWiz aWiz, UserModel userModel, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
         {
-            _AWiz = awiz;
+            _AWiz = aWiz;
             _UserModel = userModel;
             _SafeModel = safeModel;
-
-            InitializeComponent();
-        }
-
-        public void Init(TableLayoutPanel grid, DataModel dataModel, ViewModel viewModel)
-        {
-            _TlPanel = grid;
             _DataModel = dataModel;
             _ViewModel = viewModel;
         }
         #endregion
 
         #region 接口实现
-        public void InitView()
-        {
-            _TlPanel.Controls.Add(this, 0, 0);
-            Dock = DockStyle.Fill;
-            TabIndex = 0;
-        }
-
-        public void HideView()
-        {
-            _TlPanel.Controls.Remove(this);
-        }
-
         public void ShowData()
         {
-            _TlPanel.RowStyles[1].Height = 32;
-
             SuspendLayout();
             TpGrid.SuspendLayout();
 
@@ -172,6 +150,11 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
 
             _IdxList[type] = ++index;
             return ctl;
+        }
+
+        public void FillData(string data)
+        {
+            _AWiz.FillData(data);
         }
 
         public void ShowTips(Control control, string caption)
