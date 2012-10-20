@@ -51,8 +51,6 @@ namespace Me.Amon.Pwd
 
         void DropAtt();
 
-        void FindKey(string meta);
-
         bool Focus();
 
         bool NavPaneVisible { get; set; }

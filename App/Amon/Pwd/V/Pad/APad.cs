@@ -113,14 +113,7 @@ namespace Me.Amon.Pwd.V.Pad
         {
             _APwd.ShowTips(control, caption);
         }
-
-
-        public void FindKey(string meta)
-        {
-            throw new System.NotImplementedException();
-        }
-
-
+        
         public bool NavPaneVisible
         {
             get

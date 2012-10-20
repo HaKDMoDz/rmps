@@ -13,9 +13,7 @@ namespace Me.Amon.Pwd.V
         #endregion
 
         #region 接口实现
-        public IPwd APwd { get; set; }
-
-        public new Control Control { get { return this; } }
+        public Control Control { get { return this; } }
 
         public IKeyList KeyList { get; set; }
         #endregion
@@ -23,17 +21,17 @@ namespace Me.Amon.Pwd.V
         #region 事件处理
         private void TbFind_TextChanged(object sender, EventArgs e)
         {
-            if (APwd != null)
+            if (KeyList != null)
             {
-                APwd.FindKey(TbFind.Text);
+                KeyList.FindKeys(TbFind.Text);
             }
         }
 
         private void BtFind_Click(object sender, EventArgs e)
         {
-            if (APwd != null)
+            if (KeyList != null)
             {
-                APwd.FindKey(TbFind.Text);
+                KeyList.FindKeys(TbFind.Text);
             }
         }
         #endregion

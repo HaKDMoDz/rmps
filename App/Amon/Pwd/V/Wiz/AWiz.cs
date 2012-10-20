@@ -132,67 +132,50 @@ namespace Me.Amon.Pwd.V.Wiz
 
         public void AppendAtt(int type)
         {
-            throw new System.NotImplementedException();
         }
 
         public void ChangeAtt(int type)
         {
-            throw new System.NotImplementedException();
         }
 
         public void SelectPrev()
         {
-            throw new System.NotImplementedException();
         }
 
         public void SelectNext()
         {
-            throw new System.NotImplementedException();
         }
 
         public void MoveUp()
         {
-            throw new System.NotImplementedException();
         }
 
         public void MoveDown()
         {
-            throw new System.NotImplementedException();
         }
 
         public void CutAtt()
         {
-            throw new System.NotImplementedException();
         }
 
         public void CopyAtt()
         {
-            throw new System.NotImplementedException();
         }
 
         public void PasteAtt()
         {
-            throw new System.NotImplementedException();
         }
 
         public void ClearAtt()
         {
-            throw new System.NotImplementedException();
         }
 
         public void SaveAtt()
         {
-            throw new System.NotImplementedException();
         }
 
         public void DropAtt()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void FindKey(string meta)
-        {
-            throw new System.NotImplementedException();
         }
 
         public bool NavPaneVisible

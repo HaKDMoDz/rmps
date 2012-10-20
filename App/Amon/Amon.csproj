@@ -405,103 +405,104 @@
     <Compile Include="Pwd\V\Wiz\Editer\AttEditer.Designer.cs">
       <DependentUpon>AttEditer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\IViewer.cs" />
+    <Compile Include="Pwd\V\Wiz\IKeyViewer.cs" />
     <Compile Include="Pwd\V\Wiz\Viewer\AttViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Pwd\V\Wiz\Viewer\AttViewer.Designer.cs">
       <DependentUpon>AttViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanBody.cs">
+    <Compile Include="Pwd\V\Wiz\Viewer\KeyBody.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanBody.Designer.cs">
-      <DependentUpon>BeanBody.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Viewer\KeyBody.Designer.cs">
+      <DependentUpon>KeyBody.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanCall.cs">
+    <Compile Include="Pwd\V\Wiz\Viewer\AttCall.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanCall.Designer.cs">
-      <DependentUpon>BeanCall.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Viewer\AttCall.Designer.cs">
+      <DependentUpon>AttCall.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanData.cs">
+    <Compile Include="Pwd\V\Wiz\Viewer\AttData.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanData.Designer.cs">
-      <DependentUpon>BeanData.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Viewer\AttData.Designer.cs">
+      <DependentUpon>AttData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanDate.cs">
+    <Compile Include="Pwd\V\Wiz\Viewer\AttDate.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanDate.Designer.cs">
-      <DependentUpon>BeanDate.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Viewer\AttDate.Designer.cs">
+      <DependentUpon>AttDate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanFile.cs">
+    <Compile Include="Pwd\V\Wiz\Viewer\AttFile.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanFile.Designer.cs">
-      <DependentUpon>BeanFile.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Viewer\AttFile.Designer.cs">
+      <DependentUpon>AttFile.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanGuid.cs">
+    <Compile Include="Pwd\V\Wiz\Viewer\KeyGuid.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanGuid.Designer.cs">
-      <DependentUpon>BeanGuid.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Viewer\KeyGuid.Designer.cs">
+      <DependentUpon>KeyGuid.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanHead.cs">
+    <Compile Include="Pwd\V\Wiz\Viewer\KeyHead.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanHead.Designer.cs">
-      <DependentUpon>BeanHead.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Viewer\KeyHead.Designer.cs">
+      <DependentUpon>KeyHead.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanInfo.cs">
+    <Compile Include="Pwd\V\Wiz\KeyInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanInfo.Designer.cs">
-      <DependentUpon>BeanInfo.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\KeyInfo.Designer.cs">
+      <DependentUpon>KeyInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanLine.cs">
+    <Compile Include="Pwd\V\Wiz\Viewer\AttLine.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanLine.Designer.cs">
-      <DependentUpon>BeanLine.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Viewer\AttLine.Designer.cs">
+      <DependentUpon>AttLine.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanLink.cs">
+    <Compile Include="Pwd\V\Wiz\Viewer\AttLink.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanLink.Designer.cs">
-      <DependentUpon>BeanLink.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Viewer\AttLink.Designer.cs">
+      <DependentUpon>AttLink.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanList.cs">
+    <Compile Include="Pwd\V\Wiz\Viewer\AttList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanList.Designer.cs">
-      <DependentUpon>BeanList.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Viewer\AttList.Designer.cs">
+      <DependentUpon>AttList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanMail.cs">
+    <Compile Include="Pwd\V\Wiz\Viewer\AttMail.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanMail.Designer.cs">
-      <DependentUpon>BeanMail.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Viewer\AttMail.Designer.cs">
+      <DependentUpon>AttMail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanMemo.cs">
+    <Compile Include="Pwd\V\Wiz\Viewer\AttMemo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanMemo.Designer.cs">
-      <DependentUpon>BeanMemo.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Viewer\AttMemo.Designer.cs">
+      <DependentUpon>AttMemo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanPass.cs">
+    <Compile Include="Pwd\V\Wiz\Viewer\AttPass.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanPass.Designer.cs">
-      <DependentUpon>BeanPass.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Viewer\AttPass.Designer.cs">
+      <DependentUpon>AttPass.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanText.cs">
+    <Compile Include="Pwd\V\Wiz\Viewer\AttText.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Viewer\BeanText.Designer.cs">
-      <DependentUpon>BeanText.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Viewer\AttText.Designer.cs">
+      <DependentUpon>AttText.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pwd\V\Wiz\Viewer\IAttViewer.cs" />
     <Compile Include="Pwd\_Cat\CatTree.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -888,17 +889,11 @@
     <Compile Include="Pwd\V\Pro\BeanCall.Designer.cs">
       <DependentUpon>BeanCall.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanCall.cs">
+    <Compile Include="Pwd\V\Wiz\Editer\AttCall.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanCall.Designer.cs">
-      <DependentUpon>BeanCall.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanGuid.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanGuid.Designer.cs">
-      <DependentUpon>BeanGuid.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Editer\AttCall.Designer.cs">
+      <DependentUpon>AttCall.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\_Cat\CatEditer.cs">
       <SubType>Form</SubType>
@@ -1053,86 +1048,80 @@
       <DependentUpon>BeanMemo.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\V\Pro\IAttEdit.cs" />
-    <Compile Include="Pwd\V\Wiz\Editer\BeanMemo.cs">
+    <Compile Include="Pwd\V\Wiz\Editer\AttMemo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanMemo.Designer.cs">
-      <DependentUpon>BeanMemo.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Editer\AttMemo.Designer.cs">
+      <DependentUpon>AttMemo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanBody.cs">
+    <Compile Include="Pwd\V\Wiz\Editer\KeyBody.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanBody.Designer.cs">
-      <DependentUpon>BeanBody.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Editer\KeyBody.Designer.cs">
+      <DependentUpon>KeyBody.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanData.cs">
+    <Compile Include="Pwd\V\Wiz\Editer\AttData.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanData.Designer.cs">
-      <DependentUpon>BeanData.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Editer\AttData.Designer.cs">
+      <DependentUpon>AttData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanDate.cs">
+    <Compile Include="Pwd\V\Wiz\Editer\AttDate.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanDate.Designer.cs">
-      <DependentUpon>BeanDate.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Editer\AttDate.Designer.cs">
+      <DependentUpon>AttDate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanFile.cs">
+    <Compile Include="Pwd\V\Wiz\Editer\AttFile.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanFile.Designer.cs">
-      <DependentUpon>BeanFile.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Editer\AttFile.Designer.cs">
+      <DependentUpon>AttFile.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanHead.cs">
+    <Compile Include="Pwd\V\Wiz\Editer\KeyHead.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanHead.Designer.cs">
-      <DependentUpon>BeanHead.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Editer\KeyHead.Designer.cs">
+      <DependentUpon>KeyHead.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanInfo.cs">
+    <Compile Include="Pwd\V\Wiz\Editer\AttLink.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanInfo.Designer.cs">
-      <DependentUpon>BeanInfo.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Editer\AttLink.Designer.cs">
+      <DependentUpon>AttLink.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanLink.cs">
+    <Compile Include="Pwd\V\Wiz\Editer\AttList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanLink.Designer.cs">
-      <DependentUpon>BeanLink.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Editer\AttList.Designer.cs">
+      <DependentUpon>AttList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanList.cs">
+    <Compile Include="Pwd\V\Wiz\Editer\AttMail.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanList.Designer.cs">
-      <DependentUpon>BeanList.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Editer\AttMail.Designer.cs">
+      <DependentUpon>AttMail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanMail.cs">
+    <Compile Include="Pwd\V\Wiz\Editer\AttPass.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanMail.Designer.cs">
-      <DependentUpon>BeanMail.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Editer\AttPass.Designer.cs">
+      <DependentUpon>AttPass.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanPass.cs">
+    <Compile Include="Pwd\V\Wiz\Editer\AttLine.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanPass.Designer.cs">
-      <DependentUpon>BeanPass.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Editer\AttLine.Designer.cs">
+      <DependentUpon>AttLine.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanLine.cs">
+    <Compile Include="Pwd\V\Wiz\Editer\AttText.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanLine.Designer.cs">
-      <DependentUpon>BeanLine.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\Editer\AttText.Designer.cs">
+      <DependentUpon>AttText.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanText.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Pwd\V\Wiz\Editer\BeanText.Designer.cs">
-      <DependentUpon>BeanText.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Pwd\V\Wiz\IAttEdit.cs" />
-    <Compile Include="Pwd\V\Wiz\IEditer.cs" />
+    <Compile Include="Pwd\V\Wiz\Editer\IAttEditer.cs" />
+    <Compile Include="Pwd\V\Wiz\IKeyEditer.cs" />
     <Compile Include="Uc\GtdHint.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1483,50 +1472,50 @@
     <EmbeddedResource Include="Pwd\V\Wiz\Viewer\AttViewer.resx">
       <DependentUpon>AttViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\BeanBody.resx">
-      <DependentUpon>BeanBody.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\KeyBody.resx">
+      <DependentUpon>KeyBody.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\BeanCall.resx">
-      <DependentUpon>BeanCall.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\AttCall.resx">
+      <DependentUpon>AttCall.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\BeanData.resx">
-      <DependentUpon>BeanData.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\AttData.resx">
+      <DependentUpon>AttData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\BeanDate.resx">
-      <DependentUpon>BeanDate.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\AttDate.resx">
+      <DependentUpon>AttDate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\BeanFile.resx">
-      <DependentUpon>BeanFile.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\AttFile.resx">
+      <DependentUpon>AttFile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\BeanGuid.resx">
-      <DependentUpon>BeanGuid.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\KeyGuid.resx">
+      <DependentUpon>KeyGuid.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\BeanHead.resx">
-      <DependentUpon>BeanHead.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\KeyHead.resx">
+      <DependentUpon>KeyHead.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\BeanInfo.resx">
-      <DependentUpon>BeanInfo.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\KeyInfo.resx">
+      <DependentUpon>KeyInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\BeanLine.resx">
-      <DependentUpon>BeanLine.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\AttLine.resx">
+      <DependentUpon>AttLine.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\BeanLink.resx">
-      <DependentUpon>BeanLink.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\AttLink.resx">
+      <DependentUpon>AttLink.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\BeanList.resx">
-      <DependentUpon>BeanList.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\AttList.resx">
+      <DependentUpon>AttList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\BeanMail.resx">
-      <DependentUpon>BeanMail.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\AttMail.resx">
+      <DependentUpon>AttMail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\BeanMemo.resx">
-      <DependentUpon>BeanMemo.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\AttMemo.resx">
+      <DependentUpon>AttMemo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\BeanPass.resx">
-      <DependentUpon>BeanPass.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\AttPass.resx">
+      <DependentUpon>AttPass.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\BeanText.resx">
-      <DependentUpon>BeanText.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Viewer\AttText.resx">
+      <DependentUpon>AttText.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\_Cat\CatTree.resx">
       <DependentUpon>CatTree.cs</DependentUpon>
@@ -1601,11 +1590,8 @@
     <EmbeddedResource Include="Pwd\V\Pro\BeanLogo.resx">
       <DependentUpon>BeanLogo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Editer\BeanCall.resx">
-      <DependentUpon>BeanCall.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Editer\BeanGuid.resx">
-      <DependentUpon>BeanGuid.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Editer\AttCall.resx">
+      <DependentUpon>AttCall.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\_Cat\CatEditer.resx">
       <DependentUpon>CatEditer.cs</DependentUpon>
@@ -1676,44 +1662,41 @@
     <EmbeddedResource Include="Pwd\V\Pro\BeanText.resx">
       <DependentUpon>BeanText.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Editer\BeanMemo.resx">
-      <DependentUpon>BeanMemo.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Editer\AttMemo.resx">
+      <DependentUpon>AttMemo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Editer\BeanBody.resx">
-      <DependentUpon>BeanBody.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Editer\KeyBody.resx">
+      <DependentUpon>KeyBody.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Editer\BeanData.resx">
-      <DependentUpon>BeanData.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Editer\AttData.resx">
+      <DependentUpon>AttData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Editer\BeanDate.resx">
-      <DependentUpon>BeanDate.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Editer\AttDate.resx">
+      <DependentUpon>AttDate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Editer\BeanFile.resx">
-      <DependentUpon>BeanFile.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Editer\AttFile.resx">
+      <DependentUpon>AttFile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Editer\BeanHead.resx">
-      <DependentUpon>BeanHead.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Editer\KeyHead.resx">
+      <DependentUpon>KeyHead.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Editer\BeanInfo.resx">
-      <DependentUpon>BeanInfo.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Editer\AttLink.resx">
+      <DependentUpon>AttLink.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Editer\BeanLink.resx">
-      <DependentUpon>BeanLink.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Editer\AttList.resx">
+      <DependentUpon>AttList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Editer\BeanList.resx">
-      <DependentUpon>BeanList.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Editer\AttMail.resx">
+      <DependentUpon>AttMail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Editer\BeanMail.resx">
-      <DependentUpon>BeanMail.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Editer\AttPass.resx">
+      <DependentUpon>AttPass.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Editer\BeanPass.resx">
-      <DependentUpon>BeanPass.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Editer\AttLine.resx">
+      <DependentUpon>AttLine.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Editer\BeanLine.resx">
-      <DependentUpon>BeanLine.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\Editer\BeanText.resx">
-      <DependentUpon>BeanText.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\Editer\AttText.resx">
+      <DependentUpon>AttText.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Spy\ASpy.resx">
       <DependentUpon>ASpy.cs</DependentUpon>

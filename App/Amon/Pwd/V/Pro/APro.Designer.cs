@@ -37,9 +37,9 @@ namespace Me.Amon.Pwd.V.Pro
             this.BtOpt2 = new System.Windows.Forms.Button();
             this.BtOpt1 = new System.Windows.Forms.Button();
             this.GvAttList = new System.Windows.Forms.DataGridView();
-            this.findBar1 = new Me.Amon.Pwd.V.FindBar();
             this.OrderCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.findBar1 = new Me.Amon.Pwd.V.FindBar();
             ((System.ComponentModel.ISupportInitialize)(this.HSplit)).BeginInit();
             this.HSplit.Panel1.SuspendLayout();
             this.HSplit.Panel2.SuspendLayout();
@@ -104,6 +104,7 @@ namespace Me.Amon.Pwd.V.Pro
             // 
             // BtOpt2
             // 
+            this.BtOpt2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtOpt2.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.BtOpt2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtOpt2.Location = new System.Drawing.Point(274, 88);
@@ -115,6 +116,7 @@ namespace Me.Amon.Pwd.V.Pro
             // 
             // BtOpt1
             // 
+            this.BtOpt1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtOpt1.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.BtOpt1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtOpt1.Location = new System.Drawing.Point(274, 66);
@@ -146,15 +148,6 @@ namespace Me.Amon.Pwd.V.Pro
             this.GvAttList.Size = new System.Drawing.Size(296, 152);
             this.GvAttList.TabIndex = 0;
             // 
-            // findBar1
-            // 
-            this.findBar1.APwd = null;
-            this.findBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.findBar1.Location = new System.Drawing.Point(0, 0);
-            this.findBar1.Name = "findBar1";
-            this.findBar1.Size = new System.Drawing.Size(302, 29);
-            this.findBar1.TabIndex = 0;
-            // 
             // OrderCol
             // 
             this.OrderCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -168,6 +161,15 @@ namespace Me.Amon.Pwd.V.Pro
             this.ValueCol.HeaderText = "属性";
             this.ValueCol.Name = "ValueCol";
             this.ValueCol.ReadOnly = true;
+            // 
+            // findBar1
+            // 
+            this.findBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.findBar1.KeyList = null;
+            this.findBar1.Location = new System.Drawing.Point(0, 0);
+            this.findBar1.Name = "findBar1";
+            this.findBar1.Size = new System.Drawing.Size(302, 29);
+            this.findBar1.TabIndex = 0;
             // 
             // APro
             // 

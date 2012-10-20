@@ -9,11 +9,9 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
     {
         #region 全局变量
         private APwd _APwd;
-        private IEditer _LastView;
-        private BeanInfo _InfoBean;
-        private BeanGuid _GuidBean;
-        private BeanHead _HeadBean;
-        private BeanBody _BodyBean;
+        private IKeyEditer _LastView;
+        private KeyHead _HeadBean;
+        private KeyBody _BodyBean;
         private UserModel _UserModel;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
@@ -47,15 +45,15 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
                 _LastView.HideView();
             }
 
-            _InfoBean = new BeanInfo();
-            _InfoBean.Init(null, _DataModel);
-            _InfoBean.InitView();
-            _InfoBean.ShowData();
+            _HeadBean = new KeyHead();
+            _HeadBean.Init(null, _DataModel, _ViewModel);
+            _HeadBean.InitView();
+            _HeadBean.ShowData();
 
             panel.Controls.Add(this);
             Dock = DockStyle.Fill;
 
-            _LastView = _InfoBean;
+            _LastView = _HeadBean;
         }
 
         public void HideView(Panel panel)
@@ -63,26 +61,9 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             panel.Controls.Remove(this);
         }
 
-        public void ShowInfo()
-        {
-            if (_InfoBean == null)
-            {
-                _InfoBean = new BeanInfo();
-                _InfoBean.Init(null, _DataModel);
-            }
-            if (_LastView != null && _LastView != _InfoBean)
-            {
-                _LastView.HideView();
-                _InfoBean.InitView();
-            }
-
-            _LastView = _InfoBean;
-            _LastView.ShowData();
-        }
-
         public void ShowData()
         {
-            ShowGuid();
+            ShowHead();
         }
 
         public void AppendKey()
@@ -96,7 +77,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             _SafeModel.InitHint();
             _SafeModel.InitAuto();
 
-            ShowGuid();
+            ShowHead();
             _LastView.Focus();
         }
 
@@ -204,7 +185,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
                 return;
             }
 
-            ShowGuid();
+            ShowHead();
         }
 
         private void BtNext_Click(object sender, EventArgs e)
@@ -225,27 +206,6 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
         #endregion
 
         #region 私有函数
-        private void ShowGuid()
-        {
-            if (_GuidBean == null)
-            {
-                _GuidBean = new BeanGuid(null, _UserModel, _SafeModel);
-                _GuidBean.Init(null, _DataModel, _ViewModel);
-                _GuidBean.Name = "guid";
-            }
-            if (_LastView != null && _LastView != _GuidBean)
-            {
-                _LastView.HideView();
-                _GuidBean.InitView();
-
-                //BtPrev.Enabled = false;
-                //BtNext.Enabled = true;
-            }
-
-            _LastView = _GuidBean;
-            _LastView.ShowData();
-        }
-
         private void ShowHead()
         {
             if (_HeadBean == null)
@@ -288,5 +248,20 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             _LastView.ShowData();
         }
         #endregion
+
+        private void BtStep_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtOk_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtNo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

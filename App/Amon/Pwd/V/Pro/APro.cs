@@ -721,17 +721,6 @@ namespace Me.Amon.Pwd.V.Pro
             _ViewModel.KeyListVisible = !VSplit.Panel2Collapsed;
         }
 
-        public void FindKey(string meta)
-        {
-            if (!CharUtil.IsValidate(meta))
-            {
-                //keyList1.ListKeys(_LastNode.Name);
-                return;
-            }
-
-            KeyList.FindKeys(meta);
-        }
-
         /// <summary>
         /// 查找
         /// </summary>

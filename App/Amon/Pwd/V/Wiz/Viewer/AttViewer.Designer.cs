@@ -32,9 +32,9 @@
             this.TpGuid = new System.Windows.Forms.TabPage();
             this.TpHead = new System.Windows.Forms.TabPage();
             this.TpBody = new System.Windows.Forms.TabPage();
-            this.beanGuid1 = new Me.Amon.Pwd.V.Wiz.Viewer.BeanGuid();
-            this.beanHead1 = new Me.Amon.Pwd.V.Wiz.Viewer.BeanHead();
-            this.beanBody1 = new Me.Amon.Pwd.V.Wiz.Viewer.BeanBody();
+            this.beanGuid1 = new Me.Amon.Pwd.V.Wiz.Viewer.KeyGuid();
+            this.beanHead1 = new Me.Amon.Pwd.V.Wiz.Viewer.KeyHead();
+            this.beanBody1 = new Me.Amon.Pwd.V.Wiz.Viewer.KeyBody();
             this.aTabControl1.SuspendLayout();
             this.TpGuid.SuspendLayout();
             this.TpHead.SuspendLayout();
@@ -132,8 +132,8 @@
         private System.Windows.Forms.TabPage TpGuid;
         private System.Windows.Forms.TabPage TpHead;
         private System.Windows.Forms.TabPage TpBody;
-        private BeanGuid beanGuid1;
-        private BeanHead beanHead1;
-        private BeanBody beanBody1;
+        private KeyGuid beanGuid1;
+        private KeyHead beanHead1;
+        private KeyBody beanBody1;
     }
 }

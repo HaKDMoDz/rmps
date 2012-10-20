@@ -43,7 +43,6 @@
             // 
             this.findBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.findBar1.APwd = null;
             this.findBar1.Location = new System.Drawing.Point(3, 3);
             this.findBar1.Name = "findBar1";
             this.findBar1.Size = new System.Drawing.Size(294, 29);
