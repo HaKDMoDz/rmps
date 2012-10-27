@@ -30,101 +30,16 @@ namespace Me.Amon.Pwd.V.Pro
         /// </summary>
         private void InitializeComponent()
         {
-            this.HSplit = new System.Windows.Forms.SplitContainer();
-            this.VSplit = new System.Windows.Forms.SplitContainer();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.GbGroup = new System.Windows.Forms.GroupBox();
-            this.BtOpt2 = new System.Windows.Forms.Button();
-            this.BtOpt1 = new System.Windows.Forms.Button();
             this.GvAttList = new System.Windows.Forms.DataGridView();
             this.OrderCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.findBar1 = new Me.Amon.Pwd.V.FindBar();
-            ((System.ComponentModel.ISupportInitialize)(this.HSplit)).BeginInit();
-            this.HSplit.Panel1.SuspendLayout();
-            this.HSplit.Panel2.SuspendLayout();
-            this.HSplit.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.VSplit)).BeginInit();
-            this.VSplit.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.GbGroup.SuspendLayout();
+            this.GbGroup = new System.Windows.Forms.GroupBox();
+            this.BtDrop = new System.Windows.Forms.Button();
+            this.BtSave = new System.Windows.Forms.Button();
+            this.BtFill = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.GvAttList)).BeginInit();
+            this.GbGroup.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // HSplit
-            // 
-            this.HSplit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.HSplit.Location = new System.Drawing.Point(0, 0);
-            this.HSplit.Name = "HSplit";
-            // 
-            // HSplit.Panel1
-            // 
-            this.HSplit.Panel1.Controls.Add(this.VSplit);
-            // 
-            // HSplit.Panel2
-            // 
-            this.HSplit.Panel2.Controls.Add(this.panel1);
-            this.HSplit.Panel2.Controls.Add(this.findBar1);
-            this.HSplit.Size = new System.Drawing.Size(458, 303);
-            this.HSplit.SplitterDistance = 152;
-            this.HSplit.TabIndex = 0;
-            // 
-            // VSplit
-            // 
-            this.VSplit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.VSplit.Location = new System.Drawing.Point(0, 0);
-            this.VSplit.Name = "VSplit";
-            this.VSplit.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.VSplit.Size = new System.Drawing.Size(152, 303);
-            this.VSplit.SplitterDistance = 151;
-            this.VSplit.TabIndex = 0;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.GbGroup);
-            this.panel1.Controls.Add(this.GvAttList);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 29);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(302, 274);
-            this.panel1.TabIndex = 1;
-            // 
-            // GbGroup
-            // 
-            this.GbGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.GbGroup.Controls.Add(this.BtOpt2);
-            this.GbGroup.Controls.Add(this.BtOpt1);
-            this.GbGroup.Location = new System.Drawing.Point(3, 161);
-            this.GbGroup.Name = "GbGroup";
-            this.GbGroup.Size = new System.Drawing.Size(296, 110);
-            this.GbGroup.TabIndex = 1;
-            this.GbGroup.TabStop = false;
-            this.GbGroup.Text = "属性";
-            // 
-            // BtOpt2
-            // 
-            this.BtOpt2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtOpt2.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.BtOpt2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtOpt2.Location = new System.Drawing.Point(274, 88);
-            this.BtOpt2.Name = "BtOpt2";
-            this.BtOpt2.Size = new System.Drawing.Size(16, 16);
-            this.BtOpt2.TabIndex = 1;
-            this.BtOpt2.UseVisualStyleBackColor = true;
-            this.BtOpt2.Click += new System.EventHandler(this.BtOpt2_Click);
-            // 
-            // BtOpt1
-            // 
-            this.BtOpt1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtOpt1.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.BtOpt1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtOpt1.Location = new System.Drawing.Point(274, 66);
-            this.BtOpt1.Name = "BtOpt1";
-            this.BtOpt1.Size = new System.Drawing.Size(16, 16);
-            this.BtOpt1.TabIndex = 0;
-            this.BtOpt1.UseVisualStyleBackColor = true;
-            this.BtOpt1.Click += new System.EventHandler(this.BtOpt1_Click);
             // 
             // GvAttList
             // 
@@ -145,7 +60,7 @@ namespace Me.Amon.Pwd.V.Pro
             this.GvAttList.RowHeadersVisible = false;
             this.GvAttList.RowTemplate.Height = 23;
             this.GvAttList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GvAttList.Size = new System.Drawing.Size(296, 152);
+            this.GvAttList.Size = new System.Drawing.Size(376, 160);
             this.GvAttList.TabIndex = 0;
             // 
             // OrderCol
@@ -162,47 +77,75 @@ namespace Me.Amon.Pwd.V.Pro
             this.ValueCol.Name = "ValueCol";
             this.ValueCol.ReadOnly = true;
             // 
-            // findBar1
+            // GbGroup
             // 
-            this.findBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.findBar1.KeyList = null;
-            this.findBar1.Location = new System.Drawing.Point(0, 0);
-            this.findBar1.Name = "findBar1";
-            this.findBar1.Size = new System.Drawing.Size(302, 29);
-            this.findBar1.TabIndex = 0;
+            this.GbGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.GbGroup.Controls.Add(this.BtDrop);
+            this.GbGroup.Controls.Add(this.BtSave);
+            this.GbGroup.Controls.Add(this.BtFill);
+            this.GbGroup.Location = new System.Drawing.Point(3, 169);
+            this.GbGroup.Name = "GbGroup";
+            this.GbGroup.Size = new System.Drawing.Size(376, 110);
+            this.GbGroup.TabIndex = 1;
+            this.GbGroup.TabStop = false;
+            this.GbGroup.Text = "属性";
+            // 
+            // BtDrop
+            // 
+            this.BtDrop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtDrop.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.BtDrop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtDrop.Location = new System.Drawing.Point(354, 88);
+            this.BtDrop.Name = "BtDrop";
+            this.BtDrop.Size = new System.Drawing.Size(16, 16);
+            this.BtDrop.TabIndex = 2;
+            this.BtDrop.UseVisualStyleBackColor = true;
+            // 
+            // BtSave
+            // 
+            this.BtSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtSave.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.BtSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtSave.Location = new System.Drawing.Point(354, 66);
+            this.BtSave.Name = "BtSave";
+            this.BtSave.Size = new System.Drawing.Size(16, 16);
+            this.BtSave.TabIndex = 1;
+            this.BtSave.UseVisualStyleBackColor = true;
+            // 
+            // BtFill
+            // 
+            this.BtFill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtFill.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.BtFill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtFill.Location = new System.Drawing.Point(354, 44);
+            this.BtFill.Name = "BtFill";
+            this.BtFill.Size = new System.Drawing.Size(16, 16);
+            this.BtFill.TabIndex = 0;
+            this.BtFill.UseVisualStyleBackColor = true;
             // 
             // APro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.HSplit);
+            this.Controls.Add(this.GbGroup);
+            this.Controls.Add(this.GvAttList);
             this.Name = "APro";
-            this.Size = new System.Drawing.Size(458, 303);
-            this.HSplit.Panel1.ResumeLayout(false);
-            this.HSplit.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.HSplit)).EndInit();
-            this.HSplit.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.VSplit)).EndInit();
-            this.VSplit.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.GbGroup.ResumeLayout(false);
+            this.Size = new System.Drawing.Size(382, 282);
             ((System.ComponentModel.ISupportInitialize)(this.GvAttList)).EndInit();
+            this.GbGroup.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.SplitContainer HSplit;
-        private System.Windows.Forms.SplitContainer VSplit;
-        private System.Windows.Forms.Panel panel1;
-        private V.FindBar findBar1;
         private System.Windows.Forms.DataGridView GvAttList;
-        private System.Windows.Forms.GroupBox GbGroup;
-        private System.Windows.Forms.Button BtOpt2;
-        private System.Windows.Forms.Button BtOpt1;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn ValueCol;
-
+        private System.Windows.Forms.GroupBox GbGroup;
+        private System.Windows.Forms.Button BtFill;
+        private System.Windows.Forms.Button BtSave;
+        private System.Windows.Forms.Button BtDrop;
     }
 }

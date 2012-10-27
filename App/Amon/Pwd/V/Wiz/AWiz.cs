@@ -1,21 +1,25 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
+using Me.Amon.C;
 using Me.Amon.Pwd.M;
-using Me.Amon.Pwd.V.Wiz.Viewer;
+using Me.Amon.Pwd.V.Wiz.Editer;
 
 namespace Me.Amon.Pwd.V.Wiz
 {
     public partial class AWiz : UserControl, IPwd
     {
-        #region 全局变量
         private APwd _APwd;
         private UserModel _UserModel;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
         private ViewModel _ViewModel;
-        private IAttView AttView;
-        #endregion
+        private IKeyEditer _LastView;
+        private Panel TpGrid;
+        private KeyGuid _GuidBean;
+        private KeyHead _HeadBean;
+        private KeyBody _BodyBean;
 
-        #region 构造函数
+        #region
         public AWiz()
         {
             InitializeComponent();
@@ -46,63 +50,17 @@ namespace Me.Amon.Pwd.V.Wiz
             _APwd.ShowHint(hints);
         }
 
-        public void ShowTips(Control control, string caption)
-        {
-            _APwd.ShowTips(control, caption);
-        }
-
         #region 接口实现
-        public ICatTree CatTree { get; set; }
-        public IKeyList KeyList { get; set; }
-        public IFindBar FindBar { get; set; }
-
         public void InitView(Panel panel)
         {
-            if (CatTree != null)
-            {
-                CatTree.Control.Dock = DockStyle.Fill;
-                //this.catTree1.Location = new System.Drawing.Point(0, 0);
-                //this.catTree1.Name = "catTree1";
-                //this.catTree1.Size = new System.Drawing.Size(152, 151);
-                //this.catTree1.TabIndex = 0;
-                HSplit.Panel1.Controls.Add(CatTree.Control);
-            }
-
-            if (KeyList != null)
-            {
-                KeyList.Control.Dock = DockStyle.Fill;
-                KeyList.Control.Location = new System.Drawing.Point(0, 29);
-                //this.keyList1.Name = "keyList1";
-                KeyList.Control.Size = new System.Drawing.Size(320, 74);
-                //this.keyList1.TabIndex = 0;
-                VSplit.Panel1.Controls.Add(KeyList.Control);
-            }
-
-            if (FindBar != null)
-            {
-                FindBar.Control.Dock = DockStyle.Top;
-                FindBar.Control.Location = new System.Drawing.Point(0, 0);
-                FindBar.Control.Size = new System.Drawing.Size(320, 29);
-                VSplit.Panel1.Controls.Add(FindBar.Control);
-            }
-
-            AttViewer viewer = new AttViewer();
-            viewer.Dock = DockStyle.Fill;
-            viewer.Init(this, _UserModel, _SafeModel, _DataModel, _ViewModel);
-            VSplit.Panel2.Controls.Add(viewer);
-            AttView = viewer;
-            KeyList.AttView = AttView;
-
             Dock = DockStyle.Fill;
             panel.Controls.Add(this);
+            Dock = DockStyle.Fill;
         }
 
         public void HideView(Panel panel)
         {
             panel.Controls.Remove(this);
-
-            HSplit.Panel1.Controls.Remove(CatTree.Control);
-            VSplit.Panel1.Controls.Remove(KeyList.Control);
         }
 
         public void ShowInfo()
@@ -178,41 +136,116 @@ namespace Me.Amon.Pwd.V.Wiz
         {
         }
 
-        public bool NavPaneVisible
+        #region 公共函数
+        public void ShowTips(Control control, string caption)
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-                throw new System.NotImplementedException();
-            }
+            _APwd.ShowTips(control, caption);
         }
 
-        public bool CatTreeVisible
+        public void ShowIcoSeeker(string rootDir, AmonHandler<Png> handler)
         {
-            get
+            _APwd.ShowIcoSeeker(rootDir, handler);
+        }
+        #endregion
+
+        #region 事件处理
+        private void BtPrev_Click(object sender, EventArgs e)
+        {
+            if (_LastView != null && !_LastView.SaveData())
             {
-                throw new System.NotImplementedException();
+                return;
             }
-            set
+
+            if (_LastView.Name == "body")
             {
-                throw new System.NotImplementedException();
+                ShowHead();
+                return;
             }
+
+            ShowGuid();
         }
 
-        public bool KeyListVisible
+        private void BtNext_Click(object sender, EventArgs e)
         {
-            get
+            if (_LastView != null && !_LastView.SaveData())
             {
-                throw new System.NotImplementedException();
+                return;
             }
-            set
+
+            if (_LastView.Name == "head")
             {
-                throw new System.NotImplementedException();
+                ShowBody();
+                return;
             }
+
+            ShowHead();
         }
+        #endregion
+
+        #region 私有函数
+        private void ShowGuid()
+        {
+            if (_GuidBean == null)
+            {
+                _GuidBean = new KeyGuid();
+                _GuidBean.Init(this, _UserModel, _SafeModel, _DataModel, _ViewModel);
+                _GuidBean.Name = "guid";
+            }
+            if (_LastView != null && _LastView != _GuidBean)
+            {
+                _LastView.HideView();
+                _GuidBean.InitView();
+
+                BtPrevStep.Enabled = false;
+                BtNextStep.Enabled = true;
+            }
+
+            _LastView = _GuidBean;
+            _LastView.ShowData();
+        }
+
+        private void ShowHead()
+        {
+            if (_HeadBean == null)
+            {
+                _HeadBean = new KeyHead(this, _UserModel, _SafeModel);
+                _HeadBean.Init(TpGrid, _DataModel, _ViewModel);
+                _HeadBean.Name = "head";
+            }
+            if (_LastView != null && _LastView != _HeadBean)
+            {
+                _LastView.HideView();
+                _HeadBean.InitView();
+
+                BtPrevStep.Enabled = true;
+                BtNextStep.Enabled = true;
+            }
+
+            _LastView = _HeadBean;
+            _LastView.ShowData();
+        }
+
+        private void ShowBody()
+        {
+            if (_BodyBean == null)
+            {
+                _BodyBean = new KeyBody(this, _UserModel, _SafeModel);
+                _BodyBean.Init(TpGrid, _DataModel, _ViewModel);
+                _BodyBean.Name = "body";
+            }
+            if (_LastView != null && _LastView != _BodyBean)
+            {
+                _LastView.HideView();
+                _BodyBean.InitView();
+
+                BtPrevStep.Enabled = true;
+                BtNextStep.Enabled = false;
+            }
+
+            _LastView = _BodyBean;
+            _LastView.ShowData();
+        }
+        #endregion
         #endregion
     }
 }

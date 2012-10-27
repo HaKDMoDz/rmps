@@ -29,28 +29,31 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.MbMenu = new System.Windows.Forms.MenuStrip();
             this.SbEcho = new System.Windows.Forms.StatusStrip();
             this.TlEcho = new System.Windows.Forms.ToolStripStatusLabel();
             this.TlTime = new System.Windows.Forms.ToolStripStatusLabel();
-            this.TcTool = new System.Windows.Forms.ToolStripContainer();
-            this.PlMain = new System.Windows.Forms.Panel();
+            this.MbMenu = new System.Windows.Forms.MenuStrip();
+            this.TcMain = new System.Windows.Forms.ToolStripContainer();
+            this.ScMain = new System.Windows.Forms.SplitContainer();
+            this.ScGuid = new System.Windows.Forms.SplitContainer();
+            this.ScData = new System.Windows.Forms.SplitContainer();
+            this.UcFind = new System.Windows.Forms.Panel();
             this.TbTool = new System.Windows.Forms.ToolStrip();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.BgWorker = new System.ComponentModel.BackgroundWorker();
             this.SbEcho.SuspendLayout();
-            this.TcTool.ContentPanel.SuspendLayout();
-            this.TcTool.TopToolStripPanel.SuspendLayout();
-            this.TcTool.SuspendLayout();
+            this.TcMain.ContentPanel.SuspendLayout();
+            this.TcMain.TopToolStripPanel.SuspendLayout();
+            this.TcMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ScMain)).BeginInit();
+            this.ScMain.Panel1.SuspendLayout();
+            this.ScMain.Panel2.SuspendLayout();
+            this.ScMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ScGuid)).BeginInit();
+            this.ScGuid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ScData)).BeginInit();
+            this.ScData.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // MbMenu
-            // 
-            this.MbMenu.Location = new System.Drawing.Point(0, 0);
-            this.MbMenu.Name = "MbMenu";
-            this.MbMenu.Size = new System.Drawing.Size(584, 24);
-            this.MbMenu.TabIndex = 0;
-            this.MbMenu.Text = "菜单栏";
             // 
             // SbEcho
             // 
@@ -60,16 +63,17 @@
             this.SbEcho.Location = new System.Drawing.Point(0, 420);
             this.SbEcho.Name = "SbEcho";
             this.SbEcho.Size = new System.Drawing.Size(584, 22);
-            this.SbEcho.TabIndex = 1;
+            this.SbEcho.TabIndex = 0;
             this.SbEcho.Text = "状态栏";
             // 
             // TlEcho
             // 
             this.TlEcho.Name = "TlEcho";
-            this.TlEcho.Size = new System.Drawing.Size(513, 17);
+            this.TlEcho.Size = new System.Drawing.Size(482, 17);
             this.TlEcho.Spring = true;
-            this.TlEcho.Text = "系统处理中，请稍后……";
+            this.TlEcho.Text = "系统处理中，请稍候……";
             this.TlEcho.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.TlEcho.Click += new System.EventHandler(this.TlEcho_DoubleClick);
             // 
             // TlTime
             // 
@@ -77,34 +81,78 @@
             this.TlTime.Size = new System.Drawing.Size(56, 17);
             this.TlTime.Text = "当前时间";
             this.TlTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TlTime.ToolTipText = "当前时间";
             // 
-            // TcTool
+            // MbMenu
+            // 
+            this.MbMenu.Location = new System.Drawing.Point(0, 0);
+            this.MbMenu.Name = "MbMenu";
+            this.MbMenu.Size = new System.Drawing.Size(584, 24);
+            this.MbMenu.TabIndex = 1;
+            this.MbMenu.Text = "菜单栏";
+            // 
+            // TcMain
             // 
             // 
-            // TcTool.ContentPanel
+            // TcMain.ContentPanel
             // 
-            this.TcTool.ContentPanel.Controls.Add(this.PlMain);
-            this.TcTool.ContentPanel.Size = new System.Drawing.Size(584, 371);
-            this.TcTool.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TcTool.Location = new System.Drawing.Point(0, 24);
-            this.TcTool.Name = "TcTool";
-            this.TcTool.Size = new System.Drawing.Size(584, 396);
-            this.TcTool.TabIndex = 2;
-            this.TcTool.Text = "主窗体";
+            this.TcMain.ContentPanel.Controls.Add(this.ScMain);
+            this.TcMain.ContentPanel.Size = new System.Drawing.Size(584, 371);
+            this.TcMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TcMain.Location = new System.Drawing.Point(0, 24);
+            this.TcMain.Name = "TcMain";
+            this.TcMain.Size = new System.Drawing.Size(584, 396);
+            this.TcMain.TabIndex = 2;
+            this.TcMain.Text = "toolStripContainer1";
             // 
-            // TcTool.TopToolStripPanel
+            // TcMain.TopToolStripPanel
             // 
-            this.TcTool.TopToolStripPanel.Controls.Add(this.TbTool);
+            this.TcMain.TopToolStripPanel.Controls.Add(this.TbTool);
             // 
-            // PlMain
+            // ScMain
             // 
-            this.PlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.PlMain.Location = new System.Drawing.Point(12, 3);
-            this.PlMain.Name = "PlMain";
-            this.PlMain.Size = new System.Drawing.Size(560, 365);
-            this.PlMain.TabIndex = 0;
+            this.ScMain.Location = new System.Drawing.Point(3, 3);
+            this.ScMain.Name = "ScMain";
+            // 
+            // ScMain.Panel1
+            // 
+            this.ScMain.Panel1.Controls.Add(this.ScGuid);
+            // 
+            // ScMain.Panel2
+            // 
+            this.ScMain.Panel2.Controls.Add(this.ScData);
+            this.ScMain.Panel2.Controls.Add(this.UcFind);
+            this.ScMain.Size = new System.Drawing.Size(578, 365);
+            this.ScMain.SplitterDistance = 192;
+            this.ScMain.TabIndex = 0;
+            // 
+            // ScGuid
+            // 
+            this.ScGuid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ScGuid.Location = new System.Drawing.Point(0, 0);
+            this.ScGuid.Name = "ScGuid";
+            this.ScGuid.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.ScGuid.Size = new System.Drawing.Size(192, 365);
+            this.ScGuid.SplitterDistance = 64;
+            this.ScGuid.TabIndex = 0;
+            // 
+            // ScData
+            // 
+            this.ScData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ScData.Location = new System.Drawing.Point(0, 29);
+            this.ScData.Name = "ScData";
+            this.ScData.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.ScData.Size = new System.Drawing.Size(382, 336);
+            this.ScData.SplitterDistance = 126;
+            this.ScData.TabIndex = 1;
+            // 
+            // UcFind
+            // 
+            this.UcFind.Dock = System.Windows.Forms.DockStyle.Top;
+            this.UcFind.Location = new System.Drawing.Point(0, 0);
+            this.UcFind.Name = "UcFind";
+            this.UcFind.Size = new System.Drawing.Size(382, 29);
+            this.UcFind.TabIndex = 0;
             // 
             // TbTool
             // 
@@ -113,6 +161,7 @@
             this.TbTool.Name = "TbTool";
             this.TbTool.Size = new System.Drawing.Size(111, 25);
             this.TbTool.TabIndex = 0;
+            this.TbTool.Text = "工具栏";
             // 
             // BgWorker
             // 
@@ -123,22 +172,29 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 442);
-            this.Controls.Add(this.TcTool);
+            this.Controls.Add(this.TcMain);
             this.Controls.Add(this.SbEcho);
             this.Controls.Add(this.MbMenu);
             this.MainMenuStrip = this.MbMenu;
             this.Name = "APwd";
             this.Text = "阿木密码箱";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.APwd_FormClosing);
             this.Load += new System.EventHandler(this.APwd_Load);
             this.Resize += new System.EventHandler(this.APwd_Resize);
             this.SbEcho.ResumeLayout(false);
             this.SbEcho.PerformLayout();
-            this.TcTool.ContentPanel.ResumeLayout(false);
-            this.TcTool.TopToolStripPanel.ResumeLayout(false);
-            this.TcTool.TopToolStripPanel.PerformLayout();
-            this.TcTool.ResumeLayout(false);
-            this.TcTool.PerformLayout();
+            this.TcMain.ContentPanel.ResumeLayout(false);
+            this.TcMain.TopToolStripPanel.ResumeLayout(false);
+            this.TcMain.TopToolStripPanel.PerformLayout();
+            this.TcMain.ResumeLayout(false);
+            this.TcMain.PerformLayout();
+            this.ScMain.Panel1.ResumeLayout(false);
+            this.ScMain.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ScMain)).EndInit();
+            this.ScMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ScGuid)).EndInit();
+            this.ScGuid.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ScData)).EndInit();
+            this.ScData.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -146,15 +202,17 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip MbMenu;
         private System.Windows.Forms.StatusStrip SbEcho;
-        private System.Windows.Forms.ToolStripStatusLabel TlEcho;
-        private System.Windows.Forms.ToolStripStatusLabel TlTime;
-        private System.Windows.Forms.ToolStripContainer TcTool;
+        private System.Windows.Forms.MenuStrip MbMenu;
+        private System.Windows.Forms.ToolStripContainer TcMain;
         private System.Windows.Forms.ToolStrip TbTool;
+        private System.Windows.Forms.SplitContainer ScMain;
+        private System.Windows.Forms.SplitContainer ScGuid;
+        private System.Windows.Forms.Panel UcFind;
+        private System.Windows.Forms.SplitContainer ScData;
         private System.Windows.Forms.ToolTip TpTips;
         private System.ComponentModel.BackgroundWorker BgWorker;
-        private System.Windows.Forms.Panel PlMain;
-
+        private System.Windows.Forms.ToolStripStatusLabel TlEcho;
+        private System.Windows.Forms.ToolStripStatusLabel TlTime;
     }
 }

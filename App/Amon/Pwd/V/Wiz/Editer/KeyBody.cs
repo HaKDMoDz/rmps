@@ -163,37 +163,37 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
                 switch (type)
                 {
                     case Att.TYPE_TEXT:
-                        ctl = new AttText(this);
+                        ctl = new UcTextAtt(this);
                         break;
                     case Att.TYPE_PASS:
-                        ctl = new AttPass(this, _UserModel);
+                        ctl = new UcPassAtt(this, _UserModel);
                         break;
                     case Att.TYPE_LINK:
-                        ctl = new AttLink(this);
+                        ctl = new UcLinkAtt(this);
                         break;
                     case Att.TYPE_MAIL:
-                        ctl = new AttMail(this);
+                        ctl = new UcMailAtt(this);
                         break;
                     case Att.TYPE_DATE:
-                        ctl = new AttDate(this);
+                        ctl = new UcDateAtt(this);
                         break;
                     case Att.TYPE_DATA:
-                        ctl = new AttData(this);
+                        ctl = new UcDataAtt(this);
                         break;
                     case Att.TYPE_CALL:
-                        ctl = new AttCall(this);
+                        ctl = new UcCallAtt(this);
                         break;
                     case Att.TYPE_LIST:
-                        ctl = new AttList(this);
+                        ctl = new UcListAtt(this);
                         break;
                     case Att.TYPE_MEMO:
-                        ctl = new AttMemo(this);
+                        ctl = new UcMemoAtt(this);
                         break;
                     case Att.TYPE_FILE:
-                        ctl = new AttFile(this);
+                        ctl = new UcFileAtt(this);
                         break;
                     case Att.TYPE_LINE:
-                        ctl = new AttLine(this);
+                        ctl = new UcLineAtt(this);
                         break;
                     default:
                         ctl = null;

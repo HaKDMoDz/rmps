@@ -20,9 +20,8 @@ namespace Me.Amon.Pwd.V.Pro
         private int _LastIndex;
         private bool _UserAction;
         private Att _AAtt;
-        private IAttEdit _CmpLast;
-        private BeanInfo _CmpInfo;
-        private Dictionary<int, IAttEdit> _CmpList;
+        private IAttEditer _CmpLast;
+        private Dictionary<int, IAttEditer> _CmpList;
         private DataTable _DataList;
 
         #region 构造函数
@@ -47,90 +46,26 @@ namespace Me.Amon.Pwd.V.Pro
             GvAttList.AutoGenerateColumns = false;
             GvAttList.DataSource = _DataList;
 
-            _CmpInfo = new BeanInfo();
-            _CmpInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            _CmpInfo.Location = new Point(6, 20);
-            _CmpInfo.Size = new Size(GbGroup.Width - 12, 84);
-            _CmpInfo.TabIndex = 0;
-            GbGroup.Controls.Add(_CmpInfo);
-            _CmpLast = _CmpInfo;
+            _CmpList = new Dictionary<int, IAttEditer>(Att.TYPE_SIZE + 2);
 
-            _CmpList = new Dictionary<int, IAttEdit>(Att.TYPE_SIZE + 2);
+            BtSave.Image = _ViewModel.GetImage("att-save");
+            _APwd.ShowTips(BtSave, "保存属性");
+
+            BtDrop.Image = _ViewModel.GetImage("att-drop");
+            _APwd.ShowTips(BtDrop, "移除属性");
         }
         #endregion
 
         #region 接口实现
-        public ICatTree CatTree { get; set; }
-        public IKeyList KeyList { get; set; }
-        public IFindBar FindBar { get; set; }
-
         public void InitView(Panel panel)
         {
             panel.Controls.Add(this);
             Dock = DockStyle.Fill;
-
-            VSplit.Panel1.Controls.Add(CatTree.Control);
-            CatTree.Control.Dock = System.Windows.Forms.DockStyle.Fill;
-            //this.catTree1.Location = new System.Drawing.Point(0, 0);
-            //this.catTree1.Name = "catTree1";
-            //this.catTree1.Size = new System.Drawing.Size(152, 151);
-            //this.catTree1.TabIndex = 0;
-
-            VSplit.Panel2.Controls.Add(KeyList.Control);
-            KeyList.Control.Dock = System.Windows.Forms.DockStyle.Fill;
-            //this.keyList1.Location = new System.Drawing.Point(0, 0);
-            //this.keyList1.Name = "keyList1";
-            //this.keyList1.Size = new System.Drawing.Size(152, 148);
-            //this.keyList1.TabIndex = 0;
-
-            //KeyList.AttView = this;
         }
 
         public void HideView(Panel panel)
         {
             panel.Controls.Remove(this);
-
-            VSplit.Panel1.Controls.Remove(CatTree.Control);
-            VSplit.Panel2.Controls.Remove(KeyList.Control);
-        }
-
-        public void ChangeMode(bool edit)
-        {
-            if (edit)
-            {
-                BtOpt1.Image = _ViewModel.GetImage("att-save");
-                BtOpt1.Visible = false;
-                _APwd.ShowTips(BtOpt1, "保存属性");
-                BtOpt2.Image = _ViewModel.GetImage("att-drop");
-                BtOpt2.Visible = false;
-                _APwd.ShowTips(BtOpt2, "移除属性");
-            }
-            else
-            {
-                BtOpt1.Image = _ViewModel.GetImage("att-copy");
-                BtOpt1.Visible = false;
-                _APwd.ShowTips(BtOpt1, "复制");
-                BtOpt2.Image = _ViewModel.GetImage("att-fill");
-                BtOpt2.Visible = false;
-                _APwd.ShowTips(BtOpt2, "填充");
-            }
-        }
-
-        public void ShowInfo()
-        {
-            _DataList.Rows.Clear();
-            //GvAttList.DataSource = null;
-
-            GbGroup.Controls.Remove(_CmpLast.Control);
-
-            GbGroup.Text = _CmpInfo.Title;
-            GbGroup.Controls.Add(_CmpInfo);
-            _CmpInfo.ShowData(null);
-
-            BtOpt1.Visible = false;
-            BtOpt2.Visible = false;
-
-            _CmpLast = _CmpInfo;
         }
 
         public void ShowData()
@@ -604,68 +539,65 @@ namespace Me.Amon.Pwd.V.Pro
             GbGroup.Text = _CmpLast.Title;
             GbGroup.Controls.Add(_CmpLast.Control);
             _CmpLast.ShowData(att);
-
-            BtOpt1.Visible = true;
-            BtOpt2.Visible = true;
         }
 
-        private IAttEdit GetCtl(int type)
+        private IAttEditer GetCtl(int type)
         {
             if (_CmpList.ContainsKey(type))
             {
                 return _CmpList[type];
             }
 
-            IAttEdit ctl;
+            IAttEditer ctl;
             switch (type)
             {
                 case Att.TYPE_TEXT:
-                    ctl = new BeanText(this);
+                    ctl = new UcTextAtt(this);
                     break;
                 case Att.TYPE_PASS:
-                    ctl = new BeanPass(this);
+                    ctl = new UcPassAtt(this);
                     break;
                 case Att.TYPE_LINK:
-                    ctl = new BeanLink(this);
+                    ctl = new UcLinkAtt(this);
                     break;
                 case Att.TYPE_MAIL:
-                    ctl = new BeanMail(this);
+                    ctl = new UcMailAtt(this);
                     break;
                 case Att.TYPE_DATE:
-                    ctl = new BeanDate(this);
+                    ctl = new UcDateAtt(this);
                     break;
                 case Att.TYPE_DATA:
-                    ctl = new BeanData(this);
+                    ctl = new UcDataAtt(this);
                     break;
                 case Att.TYPE_CALL:
-                    ctl = new BeanCall(this);
+                    ctl = new UcCallAtt(this);
                     break;
                 case Att.TYPE_LIST:
-                    ctl = new BeanList(this);
+                    ctl = new UcListAtt(this);
                     break;
                 case Att.TYPE_MEMO:
-                    ctl = new BeanMemo(this);
+                    ctl = new UcMemoAtt(this);
                     break;
                 case Att.TYPE_FILE:
-                    ctl = new BeanFile(this);
+                    ctl = new UcFileAtt(this);
                     break;
                 case Att.TYPE_LINE:
-                    ctl = new BeanLine(this);
+                    ctl = new UcLineAtt(this);
                     break;
                 case Att.TYPE_GUID:
-                    ctl = new BeanGuid(this, _SafeModel, _DataList);
+                    ctl = new UcGuidAtt(this, _SafeModel, _DataList);
                     break;
                 case Att.TYPE_META:
-                    ctl = new BeanMeta(this);
+                    ctl = new UcMetaAtt(this);
                     break;
                 case Att.TYPE_LOGO:
-                    ctl = new BeanLogo(this);
+                    ctl = new UcLogoAtt(this);
                     break;
                 case Att.TYPE_HINT:
-                    ctl = new BeanHint(this);
+                    ctl = new UcHintAtt(this);
                     break;
                 case Att.TYPE_AUTO:
-                    ctl = new BeanAuto(this);
+                    ctl = new UcAutoAtt(this);
                     break;
                 default:
                     ctl = null;
@@ -695,91 +627,6 @@ namespace Me.Amon.Pwd.V.Pro
                         GvAttList.Rows[e.RowIndex].Selected = true;
                     }
                     //CmAtt.Show(MousePosition);
-                }
-            }
-        }
-
-        public void LoadLayout(ViewModel _ViewModel)
-        {
-            findBar1.Visible = _ViewModel.FindBarVisible;
-
-            HSplit.SplitterDistance = _ViewModel.HSplitDistance;
-            HSplit.Panel1Collapsed = !_ViewModel.NavPaneVisible;
-
-            VSplit.SplitterDistance = _ViewModel.VSplitDistance;
-        }
-
-        public void SaveLayout(ViewModel _ViewModel)
-        {
-            _ViewModel.FindBarVisible = findBar1.Visible;
-
-            _ViewModel.HSplitDistance = HSplit.SplitterDistance;
-            _ViewModel.NavPaneVisible = !HSplit.Panel1Collapsed;
-
-            _ViewModel.VSplitDistance = VSplit.SplitterDistance;
-            _ViewModel.CatTreeVisible = !VSplit.Panel1Collapsed;
-            _ViewModel.KeyListVisible = !VSplit.Panel2Collapsed;
-        }
-
-        /// <summary>
-        /// 查找
-        /// </summary>
-        public void ShowFind()
-        {
-            if (!findBar1.Visible)
-            {
-                findBar1.Visible = true;
-            }
-
-            findBar1.Focus();
-        }
-        public bool NavPaneVisible
-        {
-            get
-            {
-                return !HSplit.Panel1Collapsed;
-            }
-            set
-            {
-                HSplit.Panel1Collapsed = !value;
-                _ViewModel.NavPaneVisible = value;
-            }
-        }
-        public bool CatTreeVisible
-        {
-            get
-            {
-                return !VSplit.Panel1Collapsed;
-            }
-            set
-            {
-                if (!value && VSplit.Panel2Collapsed)
-                {
-                    NavPaneVisible = false;
-                }
-                else
-                {
-                    VSplit.Panel1Collapsed = !value;
-                    _ViewModel.CatTreeVisible = value;
-                }
-            }
-        }
-        public bool KeyListVisible
-        {
-            get
-            {
-                return !VSplit.Panel2Collapsed;
-            }
-            set
-            {
-                if (!value && VSplit.Panel1Collapsed)
-                {
-                    NavPaneVisible = false;
-                }
-                else
-                {
-                    VSplit.Panel2Collapsed = !value;
-                    _ViewModel.KeyListVisible = value;
                 }
             }
         }

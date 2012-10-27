@@ -163,10 +163,10 @@ namespace Me.Amon.Pwd
                 _UcHint.Dock = DockStyle.Fill;
                 _UcHint.Handler = new EventHandler(Hint_Click);
                 _UcHint.TabIndex = 1;
-                TcTool.ContentPanel.Controls.Add(_UcHint);
+                TcMain.ContentPanel.Controls.Add(_UcHint);
             }
 
-            PlMain.Enabled = false;
+            //PlMain.Enabled = false;
             _UcHint.Visible = true;
         }
 
@@ -823,7 +823,7 @@ namespace Me.Amon.Pwd
             }
             _SafeModel.Modified = false;
 
-            _PwdView.ShowInfo();
+            ShowInfo();
 
             if (_SafeModel.IsUpdate)
             {
@@ -867,7 +867,7 @@ namespace Me.Amon.Pwd
             _DataModel.RemoveVcs(_SafeModel.Key);
             _SafeModel.Modified = false;
             _SafeModel.Key = null;
-            _PwdView.ShowInfo();
+            ShowInfo();
         }
 
         public void ListGtdExpired()
@@ -1113,14 +1113,11 @@ namespace Me.Amon.Pwd
                 {
                     return;
                 }
-                _PwdView.HideView(PlMain);
+                _PwdView.HideView(ScData.Panel2);
             }
 
             _PwdView = _ProView;
-            _PwdView.CatTree = _CatTree;
-            _PwdView.KeyList = _KeyList;
-            _PwdView.FindBar = _FindBar;
-            _PwdView.InitView(PlMain);
+            _PwdView.InitView(ScData.Panel2);
             ShowKey(_SafeModel.Key);
 
             ItemGroup group = _XmlMenu.GetGroup("att-edit");
@@ -1148,14 +1145,11 @@ namespace Me.Amon.Pwd
                 {
                     return;
                 }
-                _PwdView.HideView(PlMain);
+                _PwdView.HideView(ScData.Panel2);
             }
 
             _PwdView = _WizView;
-            _PwdView.CatTree = _CatTree;
-            _PwdView.KeyList = _KeyList;
-            _PwdView.FindBar = _FindBar;
-            _PwdView.InitView(PlMain);
+            _PwdView.InitView(ScData.Panel2);
             ShowKey(_SafeModel.Key);
 
             ItemGroup group = _XmlMenu.GetGroup("att-edit");
@@ -1184,11 +1178,15 @@ namespace Me.Amon.Pwd
                 {
                     return;
                 }
-                _PwdView.HideView(PlMain);
+                _PwdView.HideView(ScData.Panel2);
             }
 
             //PlMain.Controls.Remove(TcTool);
             //PlMain.Controls.Add(_PadView);
+        }
+
+        public void ShowInfo()
+        {
         }
         #endregion
 
@@ -1264,11 +1262,11 @@ namespace Me.Amon.Pwd
         {
             get
             {
-                return _PwdView.NavPaneVisible;
+                return !ScMain.Panel1Collapsed;
             }
             set
             {
-                _PwdView.NavPaneVisible = value;
+                ScMain.Panel1Collapsed = !value;
             }
         }
 
@@ -1279,11 +1277,11 @@ namespace Me.Amon.Pwd
         {
             get
             {
-                return _PwdView.CatTreeVisible;
+                return !ScGuid.Panel1Collapsed;
             }
             set
             {
-                _PwdView.CatTreeVisible = value;
+                ScGuid.Panel1Collapsed = !value;
             }
         }
 
@@ -1294,11 +1292,11 @@ namespace Me.Amon.Pwd
         {
             get
             {
-                return _PwdView.KeyListVisible;
+                return !ScData.Panel1Collapsed;
             }
             set
             {
-                _PwdView.KeyListVisible = value;
+                ScData.Panel1Collapsed = !value;
             }
         }
         #endregion
@@ -2062,6 +2060,15 @@ namespace Me.Amon.Pwd
             MbMenu.Visible = _ViewModel.MenuBarVisible;
             TbTool.Visible = _ViewModel.ToolBarVisible;
             SbEcho.Visible = _ViewModel.EchoBarVisible;
+
+            UcFind.Visible = _ViewModel.FindBarVisible;
+
+            ScMain.SplitterDistance = _ViewModel.HSplitDistance;
+            ScMain.Panel1Collapsed = !_ViewModel.NavPaneVisible;
+
+            ScGuid.SplitterDistance = _ViewModel.VSplitDistance;
+
+            ScData.SplitterDistance = _ViewModel.VSplitDistance;
         }
 
         /// <summary>
@@ -2096,6 +2103,19 @@ namespace Me.Amon.Pwd
             _ViewModel.ToolBarVisible = TbTool.Visible;
             _ViewModel.EchoBarVisible = SbEcho.Visible;
 
+            _ViewModel.FindBarVisible = UcFind.Visible;
+
+            _ViewModel.HSplitDistance = ScMain.SplitterDistance;
+            _ViewModel.NavPaneVisible = !ScMain.Panel1Collapsed;
+
+            _ViewModel.VSplitDistance = ScGuid.SplitterDistance;
+            _ViewModel.CatTreeVisible = !ScGuid.Panel1Collapsed;
+            _ViewModel.KeyListVisible = !ScGuid.Panel2Collapsed;
+
+            _ViewModel.VSplitDistance = ScData.SplitterDistance;
+            _ViewModel.CatTreeVisible = !ScData.Panel1Collapsed;
+            _ViewModel.KeyListVisible = !ScData.Panel2Collapsed;
+
             _ViewModel.SaveLayout();
         }
         #endregion
@@ -2114,7 +2134,7 @@ namespace Me.Amon.Pwd
                 }
             }
             _UcHint.Visible = false;
-            PlMain.Enabled = true;
+            //PlMain.Enabled = true;
         }
 
         private void BgWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -2122,7 +2142,7 @@ namespace Me.Amon.Pwd
 
         }
 
-        private void TssEcho_DoubleClick(object sender, EventArgs e)
+        private void TlEcho_DoubleClick(object sender, EventArgs e)
         {
             //if (_TaskNode != null)
             //{
