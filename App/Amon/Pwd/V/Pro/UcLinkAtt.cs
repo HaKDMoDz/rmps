@@ -7,7 +7,7 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class UcLinkAtt : ALink, IAttEditer
     {
-        private APro _APro;
+        private WPro _APro;
         private TextBox _Ctl;
 
         #region 构造函数
@@ -16,7 +16,7 @@ namespace Me.Amon.Pwd.V.Pro
             InitializeComponent();
         }
 
-        public UcLinkAtt(APro aPro)
+        public UcLinkAtt(WPro aPro)
         {
             _APro = aPro;
 

@@ -22,12 +22,12 @@ namespace Me.Amon.Pwd.E.View
 
             if (item is ToolStripMenuItem)
             {
-                (item as ToolStripMenuItem).Checked = model.NavPaneVisible;
+                (item as ToolStripMenuItem).Checked = model.KeyGuidVisible;
                 return;
             }
             if (item is ToolStripButton)
             {
-                (item as ToolStripButton).Checked = model.NavPaneVisible;
+                (item as ToolStripButton).Checked = model.KeyGuidVisible;
                 return;
             }
         }

@@ -7,7 +7,7 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class UcFileAtt : AFile, IAttEditer
     {
-        private APro _APro;
+        private WPro _APro;
         private TextBox _Ctl;
 
         #region 构造函数
@@ -16,7 +16,7 @@ namespace Me.Amon.Pwd.V.Pro
             InitializeComponent();
         }
 
-        public UcFileAtt(APro aPro)
+        public UcFileAtt(WPro aPro)
         {
             _APro = aPro;
 

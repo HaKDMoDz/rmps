@@ -37,7 +37,7 @@
             this.ScMain = new System.Windows.Forms.SplitContainer();
             this.ScGuid = new System.Windows.Forms.SplitContainer();
             this.ScData = new System.Windows.Forms.SplitContainer();
-            this.UcFind = new System.Windows.Forms.Panel();
+            this.UcFind = new Me.Amon.Pwd.V.FindBar();
             this.TbTool = new System.Windows.Forms.ToolStrip();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.BgWorker = new System.ComponentModel.BackgroundWorker();
@@ -111,6 +111,9 @@
             // 
             // ScMain
             // 
+            this.ScMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ScMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.ScMain.Location = new System.Drawing.Point(3, 3);
             this.ScMain.Name = "ScMain";
@@ -152,6 +155,7 @@
             // UcFind
             // 
             this.UcFind.Dock = System.Windows.Forms.DockStyle.Top;
+            this.UcFind.KeyList = null;
             this.UcFind.Location = new System.Drawing.Point(0, 0);
             this.UcFind.Name = "UcFind";
             this.UcFind.Size = new System.Drawing.Size(374, 29);
@@ -211,7 +215,7 @@
         private System.Windows.Forms.ToolStrip TbTool;
         private System.Windows.Forms.SplitContainer ScMain;
         private System.Windows.Forms.SplitContainer ScGuid;
-        private System.Windows.Forms.Panel UcFind;
+        private Me.Amon.Pwd.V.FindBar UcFind;
         private System.Windows.Forms.SplitContainer ScData;
         private System.Windows.Forms.ToolTip TpTips;
         private System.ComponentModel.BackgroundWorker BgWorker;

@@ -6,7 +6,7 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class UcMetaAtt : UserControl, IAttEditer
     {
-        private APro _APro;
+        private WPro _APro;
         private Att _Att;
         private TextBox _Ctl;
 
@@ -16,7 +16,7 @@ namespace Me.Amon.Pwd.V.Pro
             InitializeComponent();
         }
 
-        public UcMetaAtt(APro aPro)
+        public UcMetaAtt(WPro aPro)
         {
             _APro = aPro;
 

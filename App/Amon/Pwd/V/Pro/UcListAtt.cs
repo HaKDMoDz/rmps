@@ -8,7 +8,7 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class UcListAtt : AList, IAttEditer
     {
-        private APro _APro;
+        private WPro _APro;
         private Items _Item;
         private Control _Ctl;
 
@@ -18,7 +18,7 @@ namespace Me.Amon.Pwd.V.Pro
             InitializeComponent();
         }
 
-        public UcListAtt(APro aPro)
+        public UcListAtt(WPro aPro)
         {
             _APro = aPro;
 

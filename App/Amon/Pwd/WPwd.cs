@@ -35,7 +35,6 @@ namespace Me.Amon.Pwd
     {
         private ICatTree _CatTree;
         private IKeyList _KeyList;
-        private IFindBar _FindBar;
         #region 全局变量
         private Main _Main;
         private UserModel _UserModel;
@@ -48,7 +47,7 @@ namespace Me.Amon.Pwd
         private string _LastMeta;
         private bool _IsSearch;
         private IPwd _PwdView;
-        private APro _ProView;
+        private WPro _ProView;
         private AWiz _WizView;
         private APad _PadView;
         private XmlMenu<WPwd> _XmlMenu;
@@ -79,24 +78,33 @@ namespace Me.Amon.Pwd
 
         private void WPwd_Load(object sender, EventArgs e)
         {
+            Init();
         }
 
+        private bool _Inited;
         public void Init()
         {
+            if (_Inited)
+            {
+                return;
+            }
+            _Inited = true;
+
             #region 数据模型
             _SafeModel = new SafeModel(_UserModel);
             _SafeModel.Init();
             _DataModel = new DataModel(_UserModel);
             _DataModel.Init();
             _ViewModel = new ViewModel(_UserModel);
+            _ViewModel.Init();
             _ViewModel.LoadLayout();
             #endregion
 
             _KeyList = new KeyList(this, _DataModel, _ViewModel);
+            _KeyList.Control.Dock = DockStyle.Fill;
             _CatTree = new CatTree(this, _DataModel);
+            _CatTree.Control.Dock = DockStyle.Fill;
             _CatTree.KeyList = _KeyList;
-            _FindBar = new FindBar();
-            _FindBar.KeyList = _KeyList;
 
             #region 系统选单
             _XmlMenu = new XmlMenu<WPwd>(this, _ViewModel);
@@ -119,9 +127,6 @@ namespace Me.Amon.Pwd
 
             LoadLayout();
 
-            // 当前时间
-            //UcTimer.Start();
-
             // 视图模式
             switch (_ViewModel.Pattern)
             {
@@ -140,6 +145,8 @@ namespace Me.Amon.Pwd
 
             _CatTree.Init();
 
+            // 当前时间
+            //UcTimer.Start();
             //_UserModel.AppendHandler(new AmonHandler<string>(ShowEcho));
 
             User32.RegisterHotKey(this.Handle, this.Handle.ToInt32(), 0, (int)VirtualKey.F2);
@@ -166,7 +173,7 @@ namespace Me.Amon.Pwd
                 TcMain.ContentPanel.Controls.Add(_UcHint);
             }
 
-            //PlMain.Enabled = false;
+            ScMain.Enabled = false;
             _UcHint.Visible = true;
         }
 
@@ -177,18 +184,20 @@ namespace Me.Amon.Pwd
 
         public void ShowEcho(string message)
         {
-            if (_EchoDelay < 1)
+            if (_EchoDelay > 0)
             {
-                if (SbEcho.InvokeRequired)
-                {
-                    SbEcho.Invoke(new MethodInvoker(() => TlEcho.Text = message));
-                }
-                else
-                {
-                    TlEcho.Text = message;
-                }
-                //TssEcho.Text = message;
+                return;
             }
+
+            if (SbEcho.InvokeRequired)
+            {
+                SbEcho.Invoke(new MethodInvoker(() => TlEcho.Text = message));
+            }
+            else
+            {
+                TlEcho.Text = message;
+            }
+            //TlEcho.Text = message;
         }
 
         public void ShowEcho(string message, int delay)
@@ -250,14 +259,14 @@ namespace Me.Amon.Pwd
         #region 事件处理
         private void WPwd_Resize(object sender, EventArgs e)
         {
-            if (!Visible)
-            {
-                return;
-            }
-            if (Width < 360 || Height < 360)
-            {
-                //ShowAPad();
-            }
+            //if (!Visible)
+            //{
+            //    return;
+            //}
+            //if (Width < 360 || Height < 360)
+            //{
+            //ShowAPad();
+            //}
             //if (WindowState == FormWindowState.Minimized)
             //{
             //    Visible = false;
@@ -1102,7 +1111,7 @@ namespace Me.Amon.Pwd
         {
             if (_ProView == null)
             {
-                _ProView = new APro();
+                _ProView = new WPro();
                 _ProView.Name = CPwd.PATTERN_PRO;
                 _ProView.Init(this, _SafeModel, _DataModel, _ViewModel);
             }
@@ -1149,7 +1158,7 @@ namespace Me.Amon.Pwd
             }
 
             _PwdView = _WizView;
-            _PwdView.InitView(ScData.Panel2);
+            //_PwdView.InitView(ScData.Panel2);
             ShowKey(_SafeModel.Key);
 
             ItemGroup group = _XmlMenu.GetGroup("att-edit");
@@ -1246,11 +1255,11 @@ namespace Me.Amon.Pwd
         {
             get
             {
-                return _FindBar.Visible;
+                return UcFind.Visible;
             }
             set
             {
-                _FindBar.Visible = value;
+                UcFind.Visible = value;
                 _ViewModel.FindBarVisible = value;
             }
         }
@@ -1308,7 +1317,7 @@ namespace Me.Amon.Pwd
         /// </summary>
         public void ShowFind()
         {
-            _FindBar.Visible = true;
+            UcFind.Visible = true;
         }
 
         /// <summary>
@@ -2063,12 +2072,24 @@ namespace Me.Amon.Pwd
 
             UcFind.Visible = _ViewModel.FindBarVisible;
 
-            ScMain.SplitterDistance = _ViewModel.HSplitDistance;
-            ScMain.Panel1Collapsed = !_ViewModel.NavPaneVisible;
+            ScMain.Panel1Collapsed = !_ViewModel.KeyGuidVisible;
+            ScMain.SplitterDistance = _ViewModel.KeyGuidWidth;
 
-            ScGuid.SplitterDistance = _ViewModel.VSplitDistance;
+            ScGuid.Panel1.Controls.Add(_CatTree.Control);
+            ScGuid.Panel1Collapsed = !_ViewModel.CatTreeVisible;
+            ScGuid.SplitterDistance = _ViewModel.CatTreeHeight;
 
-            ScData.SplitterDistance = _ViewModel.VSplitDistance;
+            if (!_ViewModel.KeyListLocation)
+            {
+                ScGuid.Panel2Collapsed = !_ViewModel.KeyListVisible;
+                ScGuid.Panel2.Controls.Add(_KeyList.Control);
+            }
+            else
+            {
+                ScData.Panel1Collapsed = !_ViewModel.KeyListVisible;
+                ScData.Panel1.Controls.Add(_KeyList.Control);
+                ScData.SplitterDistance = _ViewModel.CatTreeHeight;
+            }
         }
 
         /// <summary>
@@ -2105,14 +2126,14 @@ namespace Me.Amon.Pwd
 
             _ViewModel.FindBarVisible = UcFind.Visible;
 
-            _ViewModel.HSplitDistance = ScMain.SplitterDistance;
-            _ViewModel.NavPaneVisible = !ScMain.Panel1Collapsed;
+            _ViewModel.KeyGuidWidth = ScMain.SplitterDistance;
+            _ViewModel.KeyGuidVisible = !ScMain.Panel1Collapsed;
 
-            _ViewModel.VSplitDistance = ScGuid.SplitterDistance;
+            _ViewModel.CatTreeHeight = ScGuid.SplitterDistance;
             _ViewModel.CatTreeVisible = !ScGuid.Panel1Collapsed;
             _ViewModel.KeyListVisible = !ScGuid.Panel2Collapsed;
 
-            _ViewModel.VSplitDistance = ScData.SplitterDistance;
+            _ViewModel.CatTreeHeight = ScData.SplitterDistance;
             _ViewModel.CatTreeVisible = !ScData.Panel1Collapsed;
             _ViewModel.KeyListVisible = !ScData.Panel2Collapsed;
 

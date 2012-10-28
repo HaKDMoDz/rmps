@@ -11,7 +11,7 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class UcGuidAtt : UserControl, IAttEditer
     {
-        private APro _APro;
+        private WPro _APro;
         private Att _Att;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
@@ -23,7 +23,7 @@ namespace Me.Amon.Pwd.V.Pro
             InitializeComponent();
         }
 
-        public UcGuidAtt(APro aPro, SafeModel safeModel, DataTable dataTable)
+        public UcGuidAtt(WPro aPro, SafeModel safeModel, DataTable dataTable)
         {
             _APro = aPro;
             _SafeModel = safeModel;

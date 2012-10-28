@@ -11,7 +11,7 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class UcPassAtt : APass, IAttEditer
     {
-        private APro _APro;
+        private WPro _APro;
         private TextBox _Ctl;
         private ToolStripMenuItem _LastCharLen;
         private ToolStripMenuItem _CharLenDef;
@@ -30,7 +30,7 @@ namespace Me.Amon.Pwd.V.Pro
             InitializeComponent();
         }
 
-        public UcPassAtt(APro aPro)
+        public UcPassAtt(WPro aPro)
         {
             _APro = aPro;
 

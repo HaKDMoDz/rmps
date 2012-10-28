@@ -2,7 +2,7 @@
 using Me.Amon.Pwd._Key;
 namespace Me.Amon.Pwd.V.Pro
 {
-    partial class APro
+    partial class WPro
     {
         /// <summary> 
         /// 必需的设计器变量。

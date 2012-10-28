@@ -7,7 +7,7 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class UcMemoAtt : AMemo, IAttEditer
     {
-        private APro _APro;
+        private WPro _APro;
         private TextBox _Ctl;
 
         #region 构造函数
@@ -16,7 +16,7 @@ namespace Me.Amon.Pwd.V.Pro
             InitializeComponent();
         }
 
-        public UcMemoAtt(APro aPro)
+        public UcMemoAtt(WPro aPro)
         {
             _APro = aPro;
 

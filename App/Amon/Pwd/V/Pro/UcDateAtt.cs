@@ -9,7 +9,7 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class UcDateAtt : ADate, IAttEditer
     {
-        private APro _APro;
+        private WPro _APro;
         private TextBox _Ctl;
 
         #region 构造函数
@@ -18,7 +18,7 @@ namespace Me.Amon.Pwd.V.Pro
             InitializeComponent();
         }
 
-        public UcDateAtt(APro aPro)
+        public UcDateAtt(WPro aPro)
         {
             _APro = aPro;
 

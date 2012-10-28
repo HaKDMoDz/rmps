@@ -11,7 +11,7 @@ using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.V.Pro
 {
-    public partial class APro : UserControl, IPwd
+    public partial class WPro : UserControl, IPwd
     {
         private WPwd _WPwd;
         private SafeModel _SafeModel;
@@ -25,7 +25,7 @@ namespace Me.Amon.Pwd.V.Pro
         private DataTable _DataList;
 
         #region 构造函数
-        public APro()
+        public WPro()
         {
             InitializeComponent();
         }

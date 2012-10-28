@@ -7,7 +7,7 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class UcLogoAtt : UserControl, IAttEditer
     {
-        private APro _APro;
+        private WPro _APro;
         private LogoAtt _Att;
         private DataModel _DataModel;
 
@@ -17,7 +17,7 @@ namespace Me.Amon.Pwd.V.Pro
             InitializeComponent();
         }
 
-        public UcLogoAtt(APro aPro)
+        public UcLogoAtt(WPro aPro)
         {
             _APro = aPro;
 

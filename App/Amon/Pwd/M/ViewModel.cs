@@ -10,6 +10,7 @@ namespace Me.Amon.Pwd.M
 {
     public sealed class ViewModel : IViewModel
     {
+        #region 全局变量
         private UserModel _UserModel;
         private string _Pattern;
         private string _LookPath;
@@ -17,11 +18,18 @@ namespace Me.Amon.Pwd.M
         private string _FeelPath;
         private DFEngine _FeelProp;
         private DFEngine _UserProp;
+        #endregion
 
+        #region 构造函数
         public ViewModel(UserModel userModel)
         {
             _UserModel = userModel;
         }
+
+        public void Init()
+        {
+        }
+        #endregion
 
         #region 接口实现
         private Dictionary<string, Image> _Imgs;
@@ -109,19 +117,19 @@ namespace Me.Amon.Pwd.M
             ToolBarVisible = CApp.VALUE_TRUE == _UserProp.Get("ToolBar", CApp.VALUE_TRUE).ToLower();
             EchoBarVisible = CApp.VALUE_TRUE == _UserProp.Get("EchoBar", CApp.VALUE_TRUE).ToLower();
             FindBarVisible = CApp.VALUE_TRUE == _UserProp.Get("FindBar", CApp.VALUE_TRUE).ToLower();
-            NavPaneVisible = CApp.VALUE_TRUE == _UserProp.Get("NavPane", CApp.VALUE_TRUE).ToLower();
+            KeyGuidVisible = CApp.VALUE_TRUE == _UserProp.Get("NavPane", CApp.VALUE_TRUE).ToLower();
             CatTreeVisible = CApp.VALUE_TRUE == _UserProp.Get("CatTree", CApp.VALUE_TRUE).ToLower();
             KeyListVisible = CApp.VALUE_TRUE == _UserProp.Get("KeyList", CApp.VALUE_TRUE).ToLower();
 
             tmp = _UserProp.Get("HSplitDistance", "200");
             if (CharUtil.IsValidateLong(tmp))
             {
-                HSplitDistance = int.Parse(tmp);
+                KeyGuidWidth = int.Parse(tmp);
             }
             tmp = _UserProp.Get("VSplitDistance", "160");
             if (CharUtil.IsValidateLong(tmp))
             {
-                VSplitDistance = int.Parse(tmp);
+                CatTreeHeight = int.Parse(tmp);
             }
 
             tmp = _UserProp.Get("DimW", "600");
@@ -174,12 +182,12 @@ namespace Me.Amon.Pwd.M
             _UserProp.Set("EchoBar", EchoBarVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
             _UserProp.Set("FindBar", FindBarVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
 
-            _UserProp.Set("NavPane", NavPaneVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
+            _UserProp.Set("NavPane", KeyGuidVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
             _UserProp.Set("CatTree", CatTreeVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
             _UserProp.Set("KeyList", KeyListVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
 
-            _UserProp.Set("HSplitDistance", _HSplitDistance.ToString());
-            _UserProp.Set("VSplitDistance", _VSplitDistance.ToString());
+            _UserProp.Set("HSplitDistance", _KeyGuidWidth.ToString());
+            _UserProp.Set("VSplitDistance", _CatTreeHeight.ToString());
 
             _UserProp.Save(Path.Combine(_UserModel.DatHome, CApp.USER_CFG));
         }
@@ -218,37 +226,41 @@ namespace Me.Amon.Pwd.M
 
         public bool EchoBarVisible { get; set; }
 
+        public bool KeyGuidVisible { get; set; }
+
+        public int KeyGuidWidth
+        {
+            get
+            {
+                return _KeyGuidWidth;
+            }
+            set
+            {
+                _KeyGuidWidth = value < 0 ? 188 : value;
+            }
+        }
+        private int _KeyGuidWidth = 188;
+
         public bool CatTreeVisible { get; set; }
 
+        public int CatTreeHeight
+        {
+            get
+            {
+                return _CatTreeHeight;
+            }
+            set
+            {
+                _CatTreeHeight = value < 0 ? 152 : value;
+            }
+        }
+        private int _CatTreeHeight = 152;
+
         public bool KeyListVisible { get; set; }
+        public bool KeyListLocation { get; set; }
+        public bool KeyListHeight { get; set; }
 
-        public bool NavPaneVisible { get; set; }
-
-        public int HSplitDistance
-        {
-            get
-            {
-                return _HSplitDistance;
-            }
-            set
-            {
-                _HSplitDistance = value < 0 ? 188 : value;
-            }
-        }
-        private int _HSplitDistance = 188;
-
-        public int VSplitDistance
-        {
-            get
-            {
-                return _VSplitDistance;
-            }
-            set
-            {
-                _VSplitDistance = value < 0 ? 152 : value;
-            }
-        }
-        private int _VSplitDistance = 152;
+        public bool AttViewVisible { get; set; }
 
         public int WindowLocX { get; set; }
         public int WindowLocY { get; set; }

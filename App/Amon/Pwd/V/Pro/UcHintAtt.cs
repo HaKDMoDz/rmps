@@ -10,7 +10,7 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class UcHintAtt : UserControl, IAttEditer
     {
-        private APro _APro;
+        private WPro _APro;
         private HintAtt _Att;
 
         #region 构造函数
@@ -19,7 +19,7 @@ namespace Me.Amon.Pwd.V.Pro
             InitializeComponent();
         }
 
-        public UcHintAtt(APro aPro)
+        public UcHintAtt(WPro aPro)
         {
             _APro = aPro;
 

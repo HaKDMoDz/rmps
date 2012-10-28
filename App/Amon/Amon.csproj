@@ -1029,11 +1029,11 @@
     <Compile Include="Pwd\V\Pro\UcTextAtt.Designer.cs">
       <DependentUpon>UcTextAtt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Pro\APro.cs">
+    <Compile Include="Pwd\V\Pro\WPro.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Pro\APro.Designer.cs">
-      <DependentUpon>APro.cs</DependentUpon>
+    <Compile Include="Pwd\V\Pro\WPro.Designer.cs">
+      <DependentUpon>WPro.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\V\Pro\UcMemoAtt.cs">
       <SubType>UserControl</SubType>
@@ -1572,8 +1572,8 @@
     <EmbeddedResource Include="Pwd\V\Cfg\UcStorage.resx">
       <DependentUpon>UcStorage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Pro\APro.resx">
-      <DependentUpon>APro.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Pro\WPro.resx">
+      <DependentUpon>WPro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\V\Pro\UcAutoAtt.resx">
       <DependentUpon>UcAutoAtt.cs</DependentUpon>

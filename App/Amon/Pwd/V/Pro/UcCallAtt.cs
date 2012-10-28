@@ -7,7 +7,7 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class UcCallAtt : ACall, IAttEditer
     {
-        private APro _APro;
+        private WPro _APro;
         private TextBox _Ctl;
         private DataModel _DataModel;
 
@@ -17,7 +17,7 @@ namespace Me.Amon.Pwd.V.Pro
             InitializeComponent();
         }
 
-        public UcCallAtt(APro aPro)
+        public UcCallAtt(WPro aPro)
         {
             _APro = aPro;
 
