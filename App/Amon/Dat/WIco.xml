@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Amon>
-  <App>AIco</App>
+  <App>WIco</App>
   <Ver>1</Ver>
   <Actions>
     <Action Id="open-file" Class="Me.Amon.Ico.E.OpenAction"/>
@@ -11,14 +11,14 @@
   </Actions>
 
   <!--系统快捷键-->
-  <Strokes Id="AIco">
+  <Strokes Id="WIco">
     <Stroke Key="^ O" ActionId="open-file" Memo="打开文件"/>
     <Stroke Key="^ S" ActionId="save-file" Memo="保存文件"/>
     <Stroke Key="^ I" ActionId="import" Memo="导入图片"/>
     <Stroke Key="^ E" ActionId="export" Memo="导出图片"/>
   </Strokes>
 
-  <Popmenu Id="AIco">
+  <Popmenu Id="WIco">
     <Item Type="normal" Text="打开(&amp;O)" ActionId="open-file"/>
     <Line/>
     <Item Type="normal" Text="保存(&amp;S)" ActionId="save-file"/>

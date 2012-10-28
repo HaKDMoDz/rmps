@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Amon version="1">
-  <App>APwd</App>
+  <App>WPwd</App>
   <Ver>1</Ver>
 
   <Libs>
@@ -82,7 +82,7 @@
   </Actions>
 
   <!--系统快捷键-->
-  <Strokes Id="APwd">
+  <Strokes Id="WPwd">
     <Stroke Key="^ S" ActionId="update-key" Memo="保存记录"/>
     <Stroke Key="% C" ActionId="att-edit-copy" Memo="复制属性"/>
     <Stroke Key="% U" ActionId="update-att" Memo="保存属性"/>
@@ -90,7 +90,7 @@
   </Strokes>
 
   <!--魔方密码菜单栏-->
-  <Menubar Id="APwd">
+  <Menubar Id="WPwd">
     <Menu Id="file" Text="文件(&amp;F)">
       <Item Type="normal" Text="锁定窗口(&amp;L)" ActionId="lock-window">
         <Stroke Key="^ L" Memo="锁定窗口"/>
@@ -356,7 +356,7 @@
   </Menubar>
 
   <!--魔方密码工具栏-->
-  <Toolbar Id="APwd">
+  <Toolbar Id="WPwd">
     <Item Type="normal" Tips="新增" IconId="" ActionId="append-key">
       <Icon Id="file-new" Path="var:menu-key-append"/>
     </Item>
