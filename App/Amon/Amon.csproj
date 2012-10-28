@@ -142,11 +142,11 @@
     <Compile Include="Api\Structures\WINDOWPLACEMENT.cs" />
     <Compile Include="Api\User32\User32.cs" />
     <Compile Include="Api\User32\User32API.cs" />
-    <Compile Include="Bar\ABar.cs">
+    <Compile Include="Bar\WBar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Bar\ABar.Designer.cs">
-      <DependentUpon>ABar.cs</DependentUpon>
+    <Compile Include="Bar\WBar.Designer.cs">
+      <DependentUpon>WBar.cs</DependentUpon>
     </Compile>
     <Compile Include="Bar\EBar.cs" />
     <Compile Include="Bar\M\MBar.cs" />
@@ -216,12 +216,6 @@
     <Compile Include="Da\Db\ODBUpgradeConfig.cs" />
     <Compile Include="Da\DCA.cs" />
     <Compile Include="Da\DFA.cs" />
-    <Compile Include="Demo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Demo.Designer.cs">
-      <DependentUpon>Demo.cs</DependentUpon>
-    </Compile>
     <Compile Include="Gtd\EGtd.cs" />
     <Compile Include="Gtd\M\ADates.cs" />
     <Compile Include="Gtd\CGtd.cs" />
@@ -530,11 +524,11 @@
     <Compile Include="Pwd\V\Wiz\AWiz.Designer.cs">
       <DependentUpon>AWiz.cs</DependentUpon>
     </Compile>
-    <Compile Include="Rcg\ARcg.cs">
+    <Compile Include="Rcg\WRcg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Rcg\ARcg.Designer.cs">
-      <DependentUpon>ARcg.cs</DependentUpon>
+    <Compile Include="Rcg\WRcg.Designer.cs">
+      <DependentUpon>WRcg.cs</DependentUpon>
     </Compile>
     <Compile Include="M\AUserModel.cs" />
     <Compile Include="M\Cat.cs" />
@@ -883,11 +877,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Pwd\APwd.cs">
+    <Compile Include="Pwd\WPwd.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pwd\APwd.Designer.cs">
-      <DependentUpon>APwd.cs</DependentUpon>
+    <Compile Include="Pwd\WPwd.Designer.cs">
+      <DependentUpon>WPwd.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\V\Pro\UcCallAtt.cs">
       <SubType>UserControl</SubType>
@@ -1354,8 +1348,8 @@
     <Compile Include="V\Uc\LogoEye.cs" />
     <Compile Include="V\Uc\LogoIco.cs" />
     <Compile Include="V\ILogo.cs" />
-    <EmbeddedResource Include="Bar\ABar.resx">
-      <DependentUpon>ABar.cs</DependentUpon>
+    <EmbeddedResource Include="Bar\WBar.resx">
+      <DependentUpon>WBar.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Bar\Opt\Email.resx">
@@ -1392,9 +1386,6 @@
     <EmbeddedResource Include="Bar\Opt\Vcard.resx">
       <DependentUpon>Vcard.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Demo.resx">
-      <DependentUpon>Demo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gtd\AGtd.resx">
       <DependentUpon>AGtd.cs</DependentUpon>
@@ -1529,8 +1520,8 @@
     <EmbeddedResource Include="Pwd\V\Wiz\AWiz.resx">
       <DependentUpon>AWiz.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Rcg\ARcg.resx">
-      <DependentUpon>ARcg.cs</DependentUpon>
+    <EmbeddedResource Include="Rcg\WRcg.resx">
+      <DependentUpon>WRcg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
@@ -1548,8 +1539,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Pwd\APwd.resx">
-      <DependentUpon>APwd.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\WPwd.resx">
+      <DependentUpon>WPwd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pwd\Bean\ACall.resx">
       <DependentUpon>ACall.cs</DependentUpon>

@@ -5,11 +5,11 @@ using Me.Amon.M;
 
 namespace Me.Amon.Img.E
 {
-    public abstract class AImgAction : IAction<AImg>
+    public abstract class WImgAction : IAction<WImg>
     {
         protected List<ToolStripItem> _Items;
 
-        public AImg IApp { get; set; }
+        public WImg IApp { get; set; }
 
         public virtual void DoInit() { }
 

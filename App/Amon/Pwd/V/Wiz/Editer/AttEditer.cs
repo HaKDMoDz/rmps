@@ -8,7 +8,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
     public partial class AttEditer : Form
     {
         #region 全局变量
-        private APwd _APwd;
+        private WPwd _WPwd;
         private IKeyEditer _LastView;
         private KeyHead _HeadBean;
         private KeyBody _BodyBean;
@@ -25,9 +25,9 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
         }
         #endregion
 
-        public void Init(APwd apwd, UserModel userModel, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
+        public void Init(WPwd wPwd, UserModel userModel, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
         {
-            _APwd = apwd;
+            _WPwd = wPwd;
             _UserModel = userModel;
             _SafeModel = safeModel;
             _DataModel = dataModel;
@@ -162,12 +162,12 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
         #region 公共函数
         public void ShowTips(Control control, string caption)
         {
-            _APwd.ShowTips(control, caption);
+            _WPwd.ShowTips(control, caption);
         }
 
         public void ShowIcoSeeker(string rootDir, AmonHandler<Png> handler)
         {
-            _APwd.ShowIcoSeeker(rootDir, handler);
+            _WPwd.ShowIcoSeeker(rootDir, handler);
         }
         #endregion
 

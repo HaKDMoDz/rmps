@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Bar
 {
-    partial class ABar
+    partial class WBar
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -177,7 +177,7 @@
             this.MiDecUrl.Visible = false;
             this.MiDecUrl.Click += new System.EventHandler(this.MiDecUrl_Click);
             // 
-            // ABar
+            // WBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -192,10 +192,10 @@
             this.Controls.Add(this.LbOpt);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "ABar";
+            this.Name = "WBar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "阿木二维码";
-            this.Load += new System.EventHandler(this.ABar_Load);
+            this.Load += new System.EventHandler(this.WBar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PbIcon)).EndInit();
             this.GbSet.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();

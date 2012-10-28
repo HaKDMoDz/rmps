@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Ico.E
 {
-    public class SaveAction : AIcoAction
+    public class SaveAction : WIcoAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

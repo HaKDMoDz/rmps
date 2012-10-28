@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E.Help
 {
-    public class AboutAction : APwdAction
+    public class AboutAction : WPwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

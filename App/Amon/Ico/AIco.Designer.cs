@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Ico
 {
-    partial class AIco
+    partial class WIco
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -152,7 +152,7 @@
             this.LvIco.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LvIco_MouseDoubleClick);
             this.LvIco.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LvIco_MouseUp);
             // 
-            // AIco
+            // WIco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -161,10 +161,10 @@
             this.Controls.Add(this.LlEcho);
             this.Controls.Add(this.PbMenu);
             this.Controls.Add(this.TcIco);
-            this.Name = "AIco";
+            this.Name = "WIco";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "图标编辑";
-            this.Load += new System.EventHandler(this.AIco_Load);
+            this.Load += new System.EventHandler(this.WIco_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PbMenu)).EndInit();
             this.TcIco.ResumeLayout(false);
             this.TpIco0.ResumeLayout(false);

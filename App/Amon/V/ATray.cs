@@ -134,7 +134,7 @@ namespace Me.Amon.V
         /// <param name="e"></param>
         private void MiSignUl_Click(object sender, EventArgs e)
         {
-            //SignAc(ESignAc.SignUl, new AmonHandler<string>(ShowAPwd));
+            //SignAc(ESignAc.SignUl, new AmonHandler<string>(ShowWPwd));
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace Me.Amon.V
         /// <param name="e"></param>
         private void MiSignPc_Click(object sender, EventArgs e)
         {
-            //SignAc(ESignAc.SignPc, new AmonHandler<string>(ShowAPwd));
+            //SignAc(ESignAc.SignPc, new AmonHandler<string>(ShowWPwd));
         }
 
         /// <summary>

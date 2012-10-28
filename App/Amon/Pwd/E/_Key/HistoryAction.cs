@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E._Key
 {
-    public class HistoryAction : APwdAction
+    public class HistoryAction : WPwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

@@ -3,17 +3,17 @@ using Me.Amon.Gtd.M;
 
 namespace Me.Amon.Gtd
 {
-    public partial class AGtd : Form, IApp
+    public partial class WGtd : Form, IApp
     {
         private UserModel _UserModel;
 
         #region 构造函数
-        public AGtd()
+        public WGtd()
         {
             InitializeComponent();
         }
 
-        public AGtd(UserModel userModel)
+        public WGtd(UserModel userModel)
         {
             _UserModel = userModel;
 
@@ -55,7 +55,7 @@ namespace Me.Amon.Gtd
         #endregion
 
         #region 事件处理
-        private void AGtd_Load(object sender, System.EventArgs e)
+        private void WGtd_Load(object sender, System.EventArgs e)
         {
 
         }

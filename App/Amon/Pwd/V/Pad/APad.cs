@@ -5,7 +5,7 @@ namespace Me.Amon.Pwd.V.Pad
 {
     public partial class APad : UserControl, IPwd
     {
-        private APwd _APwd;
+        private WPwd _WPwd;
         private SafeModel _SafeModel;
 
         public APad()
@@ -13,9 +13,9 @@ namespace Me.Amon.Pwd.V.Pad
             InitializeComponent();
         }
 
-        public void Init(APwd apwd, SafeModel safeModel, DataModel dataModel)
+        public void Init(WPwd wPwd, SafeModel safeModel, DataModel dataModel)
         {
-            _APwd = apwd;
+            _WPwd = wPwd;
             _SafeModel = safeModel;
         }
 
@@ -111,7 +111,7 @@ namespace Me.Amon.Pwd.V.Pad
 
         public void ShowTips(Control control, string caption)
         {
-            _APwd.ShowTips(control, caption);
+            _WPwd.ShowTips(control, caption);
         }
         
         public bool NavPaneVisible

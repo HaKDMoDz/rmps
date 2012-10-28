@@ -8,7 +8,7 @@ namespace Me.Amon.Pwd.V.Wiz
 {
     public partial class AWiz : UserControl, IPwd
     {
-        private APwd _APwd;
+        private WPwd _WPwd;
         private UserModel _UserModel;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
@@ -25,9 +25,9 @@ namespace Me.Amon.Pwd.V.Wiz
             InitializeComponent();
         }
 
-        public void Init(APwd aPwd, UserModel userModel, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
+        public void Init(WPwd wPwd, UserModel userModel, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
         {
-            _APwd = aPwd;
+            _WPwd = wPwd;
             _UserModel = userModel;
             _SafeModel = safeModel;
             _DataModel = dataModel;
@@ -37,17 +37,17 @@ namespace Me.Amon.Pwd.V.Wiz
 
         public void FillData()
         {
-            _APwd.FillData();
+            _WPwd.FillData();
         }
 
         public void FillData(string data)
         {
-            _APwd.FillData(data);
+            _WPwd.FillData(data);
         }
 
         public void ShowHint(string hints)
         {
-            _APwd.ShowHint(hints);
+            _WPwd.ShowHint(hints);
         }
 
         #region 接口实现
@@ -139,12 +139,12 @@ namespace Me.Amon.Pwd.V.Wiz
         #region 公共函数
         public void ShowTips(Control control, string caption)
         {
-            _APwd.ShowTips(control, caption);
+            _WPwd.ShowTips(control, caption);
         }
 
         public void ShowIcoSeeker(string rootDir, AmonHandler<Png> handler)
         {
-            _APwd.ShowIcoSeeker(rootDir, handler);
+            _WPwd.ShowIcoSeeker(rootDir, handler);
         }
         #endregion
 

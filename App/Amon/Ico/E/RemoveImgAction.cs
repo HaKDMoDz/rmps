@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Ico.E
 {
-    public class RemoveImgAction : AIcoAction
+    public class RemoveImgAction : WIcoAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

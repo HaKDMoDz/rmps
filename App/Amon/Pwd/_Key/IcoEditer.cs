@@ -176,7 +176,7 @@ namespace Me.Amon.Pwd._Key
             Image img;
             foreach (int t in dim)
             {
-                img = AIco.GetBitmap(sIcon, t);
+                img = WIco.GetBitmap(sIcon, t);
                 img.Save(Path.Combine(_KeyIcon.HomeDir, key + "." + t), ImageFormat.Png);
 
                 if (_KeyIcon.IcoSize == t)

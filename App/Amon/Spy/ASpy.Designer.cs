@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Spy
 {
-    partial class ASpy
+    partial class WSpy
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -74,7 +74,7 @@
             this.PbCopy.TabIndex = 3;
             this.PbCopy.TabStop = false;
             // 
-            // ASpy
+            // WSpy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -86,8 +86,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ASpy";
-            this.Text = "ASpy";
+            this.Name = "WSpy";
+            this.Text = "WSpy";
             ((System.ComponentModel.ISupportInitialize)(this.PbSpy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbCopy)).EndInit();
             this.ResumeLayout(false);

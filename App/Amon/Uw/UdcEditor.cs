@@ -36,9 +36,9 @@ namespace Me.Amon.Uw
                 LsUdc.Items.Add(tmp);
             }
 
-            TbName.MaxLength = DBConst.AUDC0104_SIZE;
-            TbTips.MaxLength = DBConst.AUDC0105_SIZE;
-            TbChar.MaxLength = DBConst.AUDC0106_SIZE;
+            TbName.MaxLength = DBConst.WUDC0104_SIZE;
+            TbTips.MaxLength = DBConst.WUDC0105_SIZE;
+            TbChar.MaxLength = DBConst.WUDC0106_SIZE;
 
             LsUdc.SelectedItem = udc;
             ShowData(udc);

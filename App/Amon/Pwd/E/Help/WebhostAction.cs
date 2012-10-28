@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Me.Amon.Pwd.E.Help
 {
-    public class WebhostAction : APwdAction
+    public class WebhostAction : WPwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

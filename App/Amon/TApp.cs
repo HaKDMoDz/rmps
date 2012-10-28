@@ -54,16 +54,16 @@ namespace Me.Amon
 
             switch ((Id ?? "").ToLower())
             {
-                case CApp.IAPP_ABAR:
-                    App = new Bar.ABar(userModel);
+                case CApp.IAPP_WBAR:
+                    App = new Bar.WBar(userModel);
                     break;
-                case CApp.IAPP_AICO:
-                    App = new Ico.AIco(userModel);
+                case CApp.IAPP_WICO:
+                    App = new Ico.WIco(userModel);
                     break;
-                case CApp.IAPP_AIMG:
-                    App = new Img.AImg(userModel);
+                case CApp.IAPP_WIMG:
+                    App = new Img.WImg(userModel);
                     break;
-                case CApp.IAPP_ASPY:
+                case CApp.IAPP_WSPY:
                     //App = new Spy.ASpy(userModel);
                     break;
                 default:

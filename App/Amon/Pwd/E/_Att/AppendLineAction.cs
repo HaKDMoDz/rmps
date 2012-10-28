@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E._Att
 {
-    public class AppendLineAction : APwdAction
+    public class AppendLineAction : WPwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

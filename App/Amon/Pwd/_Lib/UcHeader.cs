@@ -24,8 +24,8 @@ namespace Me.Amon.Pwd._Lib
 
         public void Init()
         {
-            TbText.MaxLength = DBConst.APWD0306_SIZE;
-            TbTarget.MaxLength = DBConst.APWD0308_SIZE;
+            TbText.MaxLength = DBConst.WPWD0306_SIZE;
+            TbTarget.MaxLength = DBConst.WPWD0308_SIZE;
         }
 
         public void Show(Lib header)

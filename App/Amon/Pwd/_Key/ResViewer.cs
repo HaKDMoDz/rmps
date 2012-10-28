@@ -30,7 +30,7 @@ namespace Me.Amon.Pwd._Key
             {
                 foreach (SingleIcon sIcon in mIcon)
                 {
-                    IlIco.Images.Add(sIcon.Name, AIco.GetBitmap(sIcon, 32));
+                    IlIco.Images.Add(sIcon.Name, WIco.GetBitmap(sIcon, 32));
                     LvIco.Items.Add(new ListViewItem { Text = sIcon.Name, ImageIndex = LvIco.Items.Count });
                 }
             }

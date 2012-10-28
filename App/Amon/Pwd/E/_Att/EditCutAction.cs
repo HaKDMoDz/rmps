@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E._Att
 {
-    public class EditCutAction : APwdAction
+    public class EditCutAction : WPwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

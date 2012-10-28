@@ -9,6 +9,6 @@
          public const int PREVIEW_ICON_DIM = 48;
          public const int PREVIEW_BG_GAPS = 4;
 
-         public const string XML_MENU = "AIco.xml";
+         public const string XML_MENU = "WIco.xml";
      }
  }

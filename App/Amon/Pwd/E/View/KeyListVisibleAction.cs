@@ -4,7 +4,7 @@ using Me.Amon.M;
 
 namespace Me.Amon.Pwd.E.View
 {
-    public class KeyListVisibleAction : APwdAction
+    public class KeyListVisibleAction : WPwdAction
     {
         public override void Add(ToolStripItem item, IViewModel viewModel)
         {

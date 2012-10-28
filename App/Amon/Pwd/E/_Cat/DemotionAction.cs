@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E._Cat
 {
-    public class DemotionAction : APwdAction
+    public class DemotionAction : WPwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

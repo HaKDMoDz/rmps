@@ -4,7 +4,7 @@ using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.E._Key
 {
-    public class ChangeLabelAction : APwdAction
+    public class ChangeLabelAction : WPwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E._Att
 {
-    public class AppendDateAction : APwdAction
+    public class AppendDateAction : WPwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

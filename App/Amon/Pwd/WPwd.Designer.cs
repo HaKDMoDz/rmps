@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd
 {
-    partial class APwd
+    partial class WPwd
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -69,7 +69,7 @@
             // TlEcho
             // 
             this.TlEcho.Name = "TlEcho";
-            this.TlEcho.Size = new System.Drawing.Size(482, 17);
+            this.TlEcho.Size = new System.Drawing.Size(513, 17);
             this.TlEcho.Spring = true;
             this.TlEcho.Text = "系统处理中，请稍候……";
             this.TlEcho.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -111,19 +111,21 @@
             // 
             // ScMain
             // 
+            this.ScMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.ScMain.Location = new System.Drawing.Point(3, 3);
             this.ScMain.Name = "ScMain";
             // 
             // ScMain.Panel1
             // 
             this.ScMain.Panel1.Controls.Add(this.ScGuid);
+            this.ScMain.Panel1MinSize = 120;
             // 
             // ScMain.Panel2
             // 
             this.ScMain.Panel2.Controls.Add(this.ScData);
             this.ScMain.Panel2.Controls.Add(this.UcFind);
             this.ScMain.Size = new System.Drawing.Size(578, 365);
-            this.ScMain.SplitterDistance = 192;
+            this.ScMain.SplitterDistance = 200;
             this.ScMain.TabIndex = 0;
             // 
             // ScGuid
@@ -132,18 +134,19 @@
             this.ScGuid.Location = new System.Drawing.Point(0, 0);
             this.ScGuid.Name = "ScGuid";
             this.ScGuid.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.ScGuid.Size = new System.Drawing.Size(192, 365);
-            this.ScGuid.SplitterDistance = 64;
+            this.ScGuid.Size = new System.Drawing.Size(200, 365);
+            this.ScGuid.SplitterDistance = 180;
             this.ScGuid.TabIndex = 0;
             // 
             // ScData
             // 
             this.ScData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ScData.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.ScData.Location = new System.Drawing.Point(0, 29);
             this.ScData.Name = "ScData";
             this.ScData.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.ScData.Size = new System.Drawing.Size(382, 336);
-            this.ScData.SplitterDistance = 126;
+            this.ScData.Size = new System.Drawing.Size(374, 336);
+            this.ScData.SplitterDistance = 120;
             this.ScData.TabIndex = 1;
             // 
             // UcFind
@@ -151,7 +154,7 @@
             this.UcFind.Dock = System.Windows.Forms.DockStyle.Top;
             this.UcFind.Location = new System.Drawing.Point(0, 0);
             this.UcFind.Name = "UcFind";
-            this.UcFind.Size = new System.Drawing.Size(382, 29);
+            this.UcFind.Size = new System.Drawing.Size(374, 29);
             this.UcFind.TabIndex = 0;
             // 
             // TbTool
@@ -167,7 +170,7 @@
             // 
             this.BgWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BgWorker_DoWork);
             // 
-            // APwd
+            // WPwd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -176,10 +179,10 @@
             this.Controls.Add(this.SbEcho);
             this.Controls.Add(this.MbMenu);
             this.MainMenuStrip = this.MbMenu;
-            this.Name = "APwd";
+            this.Name = "WPwd";
             this.Text = "阿木密码箱";
-            this.Load += new System.EventHandler(this.APwd_Load);
-            this.Resize += new System.EventHandler(this.APwd_Resize);
+            this.Load += new System.EventHandler(this.WPwd_Load);
+            this.Resize += new System.EventHandler(this.WPwd_Resize);
             this.SbEcho.ResumeLayout(false);
             this.SbEcho.PerformLayout();
             this.TcMain.ContentPanel.ResumeLayout(false);

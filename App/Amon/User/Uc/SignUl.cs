@@ -134,7 +134,7 @@ namespace Me.Amon.User.Uc
                 }
 
                 string sysFile = Path.Combine(_UserModel.SysHome, CApp.AMON_SYS);
-                DFAccess prop = new DFAccess();
+                DFEngine prop = new DFEngine();
                 prop.Load(sysFile);
                 prop.Set(string.Format(CApp.AMON_SYS_CODE, name), _UserModel.Code);
                 prop.Set(string.Format(CApp.AMON_SYS_HOME, name), _UserModel.DatHome);
@@ -215,7 +215,7 @@ namespace Me.Amon.User.Uc
 
             //dba.ExecuteBatch();
 
-            _SignAc.CallBack(CApp.IAPP_APWD);
+            _SignAc.CallBack(CApp.IAPP_WPWD);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Me.Amon.Pwd._Key
     public partial class KeyList : UserControl, IKeyList
     {
         #region 全局变量
-        private APwd _APwd;
+        private WPwd _WPwd;
         private DataModel _DataModel;
         private ViewModel _ViewModel;
         #endregion
@@ -26,9 +26,9 @@ namespace Me.Amon.Pwd._Key
             InitializeComponent();
         }
 
-        public KeyList(APwd aPwd, DataModel dataModel, ViewModel viewModel)
+        public KeyList(WPwd wPwd, DataModel dataModel, ViewModel viewModel)
         {
-            _APwd = aPwd;
+            _WPwd = wPwd;
             _DataModel = dataModel;
             _ViewModel = viewModel;
 
@@ -172,7 +172,7 @@ namespace Me.Amon.Pwd._Key
                 return;
             }
 
-            if (!_APwd.CanChange(key))
+            if (!_WPwd.CanChange(key))
             {
                 LbKey.SelectedItem = SelectedKey;
                 return;

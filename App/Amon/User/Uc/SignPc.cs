@@ -212,7 +212,7 @@ namespace Me.Amon.User.Uc
             XmlReaderSettings setting = new XmlReaderSettings { IgnoreWhitespace = true };
 
             #region 类别
-            file = Path.Combine(_UserModel.DatHome, "APwd-Cat.xml");
+            file = Path.Combine(_UserModel.DatHome, "WPwd-Cat.xml");
             if (File.Exists(file))
             {
                 stream = new StreamReader(file);
@@ -234,7 +234,7 @@ namespace Me.Amon.User.Uc
             #endregion
 
             #region 模板
-            file = Path.Combine(_UserModel.DatHome, "APwd-Lib.xml");
+            file = Path.Combine(_UserModel.DatHome, "WPwd-Lib.xml");
             if (File.Exists(file))
             {
                 stream = new StreamReader(file);
@@ -256,7 +256,7 @@ namespace Me.Amon.User.Uc
             #endregion
 
             #region 字符
-            file = Path.Combine(_UserModel.DatHome, "APwd-Udc.xml");
+            file = Path.Combine(_UserModel.DatHome, "WPwd-Udc.xml");
             if (File.Exists(file))
             {
                 stream = new StreamReader(file);
@@ -278,7 +278,7 @@ namespace Me.Amon.User.Uc
             #endregion
 
             #region 目录
-            file = Path.Combine(_UserModel.DatHome, "APwd-Dir.xml");
+            file = Path.Combine(_UserModel.DatHome, "WPwd-Dir.xml");
             if (File.Exists(file))
             {
                 stream = new StreamReader(file);
@@ -299,7 +299,7 @@ namespace Me.Amon.User.Uc
             }
             #endregion
 
-            _SignAc.CallBack(CApp.IAPP_APWD);
+            _SignAc.CallBack(CApp.IAPP_WPWD);
         }
         #endregion
     }

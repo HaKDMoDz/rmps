@@ -428,7 +428,7 @@ namespace Me.Amon.User.Uc
             }
 
             BeanUtil.UnZip(CApp.FILE_DAT, _UserModel.DatHome);
-            _SignAc.CallBack(CApp.IAPP_APWD);
+            _SignAc.CallBack(CApp.IAPP_WPWD);
         }
         #endregion
     }

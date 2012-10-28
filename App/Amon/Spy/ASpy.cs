@@ -6,17 +6,17 @@ using Me.Amon.Spy.M;
 
 namespace Me.Amon.Spy
 {
-    public partial class ASpy : Form, IApp
+    public partial class WSpy : Form, IApp
     {
         private UserModel _UserModel;
 
         #region 构造函数
-        public ASpy()
+        public WSpy()
         {
             InitializeComponent();
         }
 
-        public ASpy(AUserModel userModel)
+        public WSpy(AUserModel userModel)
         {
             _UserModel = userModel as UserModel;
 

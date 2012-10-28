@@ -13,7 +13,7 @@ namespace Me.Amon.Ico.V
     {
         private Bitmap _BgImg;
         private SingleIcon _SIcon;
-        private AIco _AIco;
+        private WIco _WIco;
 
         #region 构造函数
         public IcoEditor()
@@ -21,9 +21,9 @@ namespace Me.Amon.Ico.V
             InitializeComponent();
         }
 
-        public IcoEditor(AIco aico)
+        public IcoEditor(WIco wIco)
         {
-            _AIco = aico;
+            _WIco = wIco;
 
             InitializeComponent();
         }
@@ -214,7 +214,7 @@ namespace Me.Amon.Ico.V
             }
 
             LbImg.SelectedIndex = LbImg.IndexFromPoint(e.Location);
-            _AIco.IcoMenu.Show(MousePosition);
+            _WIco.IcoMenu.Show(MousePosition);
         }
         #endregion
 

@@ -91,7 +91,7 @@ namespace Me.Amon.Pwd.Bean
                 string exts = _Att.GetSpec(FileAtt.SPEC_FILE_EXTS);
                 if (exts == ".png" || exts == ".jpg" || exts == ".jpeg" || exts == ".bmp")
                 {
-                    AImg viewer = new AImg();
+                    WImg viewer = new WImg();
                     viewer.Show(this);
                     viewer.OpenFile(dstFile);
                     return;

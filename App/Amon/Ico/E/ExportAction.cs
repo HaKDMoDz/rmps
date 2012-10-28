@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Ico.E
 {
-    public class ExportAction : AIcoAction
+    public class ExportAction : WIcoAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

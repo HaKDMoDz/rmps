@@ -8,7 +8,7 @@ namespace Me.Amon.Img
     /// <summary>
     /// 图片文件查看
     /// </summary>
-    public partial class AImg : Form, IApp
+    public partial class WImg : Form, IApp
     {
         #region 全局变量
         private IImg _IImg;
@@ -17,12 +17,12 @@ namespace Me.Amon.Img
         #endregion
 
         #region 构造函数
-        public AImg()
+        public WImg()
         {
             InitializeComponent();
         }
 
-        public AImg(AUserModel userModel)
+        public WImg(AUserModel userModel)
         {
             _UserModel = userModel as UserModel;
 
@@ -78,12 +78,12 @@ namespace Me.Amon.Img
         #endregion
 
         #region 事件处理
-        private void AImg_Load(object sender, System.EventArgs e)
+        private void WImg_Load(object sender, System.EventArgs e)
         {
             ShowLarge();
         }
 
-        private void AImg_KeyDown(object sender, KeyEventArgs e)
+        private void WImg_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F5)
             {

@@ -14,7 +14,7 @@ namespace Me.Amon.Pwd._Cat
     public partial class CatTree : UserControl, ICatTree
     {
         #region 全局变量
-        private APwd _APwd;
+        private WPwd _WPwd;
         private DataModel _DataModel;
 
         private TreeNode _RootNode;
@@ -36,9 +36,9 @@ namespace Me.Amon.Pwd._Cat
             InitializeComponent();
         }
 
-        public CatTree(APwd aPwd, DataModel dataModel)
+        public CatTree(WPwd wPwd, DataModel dataModel)
         {
-            _APwd = aPwd;
+            _WPwd = wPwd;
             _DataModel = dataModel;
 
             InitializeComponent();
@@ -478,7 +478,7 @@ namespace Me.Amon.Pwd._Cat
         /// </summary>
         private void DoInitCat(TreeNode root)
         {
-            foreach (Cat cat in _DataModel.ListCat(CApp.IAPP_APWD, root.Name))
+            foreach (Cat cat in _DataModel.ListCat(CApp.IAPP_WPWD, root.Name))
             {
                 TreeNode node = new TreeNode();
                 node.Name = cat.Id;

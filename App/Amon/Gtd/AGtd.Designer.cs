@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Gtd
 {
-    partial class AGtd
+    partial class WGtd
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -79,7 +79,7 @@
             this.SblEcho.Size = new System.Drawing.Size(131, 17);
             this.SblEcho.Text = "toolStripStatusLabel1";
             // 
-            // AGtd
+            // WGtd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -87,9 +87,9 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.SbEcho);
             this.Controls.Add(this.TbTool);
-            this.Name = "AGtd";
-            this.Text = "AGtd";
-            this.Load += new System.EventHandler(this.AGtd_Load);
+            this.Name = "WGtd";
+            this.Text = "WGtd";
+            this.Load += new System.EventHandler(this.WGtd_Load);
             this.SbEcho.ResumeLayout(false);
             this.SbEcho.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

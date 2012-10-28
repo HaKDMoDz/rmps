@@ -13,7 +13,7 @@ namespace Me.Amon.Pwd.V.Pro
 {
     public partial class APro : UserControl, IPwd
     {
-        private APwd _APwd;
+        private WPwd _WPwd;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
         private ViewModel _ViewModel;
@@ -30,9 +30,9 @@ namespace Me.Amon.Pwd.V.Pro
             InitializeComponent();
         }
 
-        public void Init(APwd apwd, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
+        public void Init(WPwd wPwd, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
         {
-            _APwd = apwd;
+            _WPwd = wPwd;
             _SafeModel = safeModel;
             _DataModel = dataModel;
             _ViewModel = viewModel;
@@ -49,10 +49,10 @@ namespace Me.Amon.Pwd.V.Pro
             _CmpList = new Dictionary<int, IAttEditer>(Att.TYPE_SIZE + 2);
 
             BtSave.Image = _ViewModel.GetImage("att-save");
-            _APwd.ShowTips(BtSave, "保存属性");
+            _WPwd.ShowTips(BtSave, "保存属性");
 
             BtDrop.Image = _ViewModel.GetImage("att-drop");
-            _APwd.ShowTips(BtDrop, "移除属性");
+            _WPwd.ShowTips(BtDrop, "移除属性");
         }
         #endregion
 
@@ -348,7 +348,7 @@ namespace Me.Amon.Pwd.V.Pro
         #region 公有函数
         public void ShowIcoSeeker(AmonHandler<Png> handler)
         {
-            _APwd.ShowIcoSeeker(_DataModel.KeyDir, handler);
+            _WPwd.ShowIcoSeeker(_DataModel.KeyDir, handler);
         }
 
         public void SelectRow(int row)
@@ -359,7 +359,7 @@ namespace Me.Amon.Pwd.V.Pro
 
         public void ShowTips(Control control, string caption)
         {
-            _APwd.ShowTips(control, caption);
+            _WPwd.ShowTips(control, caption);
         }
         #endregion
 

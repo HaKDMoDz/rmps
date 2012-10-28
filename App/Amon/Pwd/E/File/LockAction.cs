@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E.File
 {
-    public class LockAction : APwdAction
+    public class LockAction : WPwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

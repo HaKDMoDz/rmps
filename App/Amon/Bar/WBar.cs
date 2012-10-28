@@ -12,7 +12,7 @@ using MessagingToolkit.Barcode;
 
 namespace Me.Amon.Bar
 {
-    public partial class ABar : Form, IApp
+    public partial class WBar : Form, IApp
     {
         private BarcodeEncoder _Encoder;
         private BarcodeDecoder _Decoder;
@@ -27,12 +27,12 @@ namespace Me.Amon.Bar
         private Wifi _OptWifi;
 
         #region 构造函数
-        public ABar()
+        public WBar()
         {
             InitializeComponent();
         }
 
-        public ABar(AUserModel userModel)
+        public WBar(AUserModel userModel)
         {
             InitializeComponent();
 
@@ -79,7 +79,7 @@ namespace Me.Amon.Bar
         #endregion
 
         #region 事件处理
-        private void ABar_Load(object sender, EventArgs e)
+        private void WBar_Load(object sender, EventArgs e)
         {
             CbOpt.Items.Add(new Items { K = "", V = "请选择" });
             CbOpt.Items.Add(new Items { K = EBar.OPT_TEXT, V = "文本" });

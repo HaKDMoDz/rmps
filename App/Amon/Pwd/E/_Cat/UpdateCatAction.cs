@@ -4,7 +4,7 @@ using Me.Amon.Pwd._Cat;
 
 namespace Me.Amon.Pwd.E._Cat
 {
-    public class UpdateCatAction : APwdAction
+    public class UpdateCatAction : WPwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

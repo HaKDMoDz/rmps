@@ -61,13 +61,13 @@ namespace Me.Amon
         /// 系统应用
         /// </summary>
         public const string IAPP_NONE = "";
-        public const string IAPP_APWD = "apwd";
-        public const string IAPP_ASEC = "asec";
-        public const string IAPP_ABAR = "abar";
-        public const string IAPP_AICO = "aico";
-        public const string IAPP_AIMG = "aimg";
-        public const string IAPP_ASPY = "aspy";
-        public const string IAPP_ASQL = "asql";
+        public const string IAPP_WPWD = "wpwd";
+        public const string IAPP_WSEC = "wsec";
+        public const string IAPP_WBAR = "wbar";
+        public const string IAPP_WICO = "wico";
+        public const string IAPP_WIMG = "wimg";
+        public const string IAPP_WSPY = "wspy";
+        public const string IAPP_WSQL = "wsql";
 
         public const string FILE_OPEN_ALL = "所有文件|*.*";
         public const string FILE_OPEN_IMG = "图片文件（*.png,*.jpg,*.bmp）|*.png;*.jpg;*.jpeg;*.jpe;*.jfif;*.bmp;*.dib;*.rle|PNG文件（*.png）|*.png|JPG文件（*.jpg,*.jpeg,*.jpe,*.jfif）|*.jpg;*.jpeg;*.jpe;*.jfif|BMP文件（*.bmp,*dib,*.rle）|*.bmp;*.dib;*.rle";

@@ -17,7 +17,7 @@ namespace Me.Amon
             Application.Run(new Main());
             //Application.Run(new Gtd.V.GtdEditor());
             //Application.Run(new Demo());
-            //Application.Run(new ASpy());
+            //Application.Run(new WSpy());
         }
     }
 }

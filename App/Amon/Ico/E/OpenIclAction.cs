@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Me.Amon.Ico.E
 {
-    public class OpenIclAction : AIcoAction
+    public class OpenIclAction : WIcoAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

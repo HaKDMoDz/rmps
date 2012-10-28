@@ -16,21 +16,21 @@ namespace Me.Amon.Ico
     /// <summary>
     /// 图标提取、编辑及预览。
     /// </summary>
-    public partial class AIco : Form, IApp
+    public partial class WIco : Form, IApp
     {
         private int _TpCnt;
         private IIco _IIco;
         private MultiIcon _MIcon;
-        private XmlMenu<AIco> _XmlMenu;
+        private XmlMenu<WIco> _XmlMenu;
         private UserModel _UserModel;
 
         #region 构造函数
-        public AIco()
+        public WIco()
         {
             InitializeComponent();
         }
 
-        public AIco(AUserModel userModel)
+        public WIco(AUserModel userModel)
         {
             _UserModel = userModel as UserModel;
 
@@ -324,15 +324,15 @@ namespace Me.Amon.Ico
         #endregion
 
         #region 事件处理
-        private void AIco_Load(object sender, EventArgs e)
+        private void WIco_Load(object sender, EventArgs e)
         {
             _MIcon = new MultiIcon();
 
-            _XmlMenu = new XmlMenu<AIco>(this, null);
+            _XmlMenu = new XmlMenu<WIco>(this, null);
             if (_XmlMenu.Load(Path.Combine(_UserModel.DatHome, EIco.XML_MENU)))
             {
-                _XmlMenu.GetStrokes("AIco", this);
-                _XmlMenu.GetPopMenu("AIco", CmMenu);
+                _XmlMenu.GetStrokes("WIco", this);
+                _XmlMenu.GetPopMenu("WIco", CmMenu);
                 _XmlMenu.GetPopMenu("Icl", CmIcl);
                 _XmlMenu.GetPopMenu("Ico", CmIco);
             }

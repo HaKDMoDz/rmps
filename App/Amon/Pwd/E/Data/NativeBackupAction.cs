@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E.Data
 {
-    public class NativeBackupAction : APwdAction
+    public class NativeBackupAction : WPwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

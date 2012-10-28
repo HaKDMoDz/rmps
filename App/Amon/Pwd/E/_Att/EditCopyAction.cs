@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E._Att
 {
-    public class EditCopyAction : APwdAction
+    public class EditCopyAction : WPwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

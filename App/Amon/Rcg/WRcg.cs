@@ -6,14 +6,14 @@ using Me.Amon.Util;
 
 namespace Me.Amon.Rcg
 {
-    public partial class ARcg : Form
+    public partial class WRcg : Form
     {
-        public ARcg()
+        public WRcg()
         {
             InitializeComponent();
         }
 
-        public ARcg(IList<Udc> udcs)
+        public WRcg(IList<Udc> udcs)
         {
             InitializeComponent();
 

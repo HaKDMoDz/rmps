@@ -4,7 +4,7 @@ using Me.Amon.M;
 
 namespace Me.Amon.Pwd.E.View
 {
-    public class NavPaneVisibleAction : APwdAction
+    public class NavPaneVisibleAction : WPwdAction
     {
         public override void Add(ToolStripItem item, IViewModel viewModel)
         {

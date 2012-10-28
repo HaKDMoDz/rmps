@@ -37,9 +37,9 @@ namespace Me.Amon.Pwd._Lib
             CbType.Items.Add(new Items { K = Att.TYPE_FILE.ToString(), V = "文件" });
             //CbType.Items.Add(new Item { K = AAtt.TYPE_LINE.ToString(), V = "分组" });
 
-            TbName.MaxLength = DBConst.APWD0306_SIZE;
-            TbData.MaxLength = DBConst.APWD0307_SIZE;
-            TbMemo.MaxLength = DBConst.APWD0308_SIZE;
+            TbName.MaxLength = DBConst.WPWD0306_SIZE;
+            TbData.MaxLength = DBConst.WPWD0307_SIZE;
+            TbMemo.MaxLength = DBConst.WPWD0308_SIZE;
         }
 
         public void Show(LibDetail detail)

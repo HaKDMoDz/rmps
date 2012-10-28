@@ -5,11 +5,11 @@ using Me.Amon.M;
 
 namespace Me.Amon.Ico.E
 {
-    public abstract class AIcoAction : IAction<AIco>
+    public abstract class WIcoAction : IAction<WIco>
     {
         protected List<ToolStripItem> _Items;
 
-        public AIco IApp { get; set; }
+        public WIco IApp { get; set; }
 
         public virtual void DoInit() { }
 

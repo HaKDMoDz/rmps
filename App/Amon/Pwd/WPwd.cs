@@ -31,7 +31,7 @@ using Thought.vCards;
 
 namespace Me.Amon.Pwd
 {
-    public partial class APwd : Form, IApp
+    public partial class WPwd : Form, IApp
     {
         private ICatTree _CatTree;
         private IKeyList _KeyList;
@@ -51,7 +51,7 @@ namespace Me.Amon.Pwd
         private APro _ProView;
         private AWiz _WizView;
         private APad _PadView;
-        private XmlMenu<APwd> _XmlMenu;
+        private XmlMenu<WPwd> _XmlMenu;
         #endregion
 
         /// <summary>
@@ -62,12 +62,12 @@ namespace Me.Amon.Pwd
         private bool _Exit;
 
         #region 构造函数
-        public APwd()
+        public WPwd()
         {
             InitializeComponent();
         }
 
-        public APwd(Main main, AUserModel userModel)
+        public WPwd(Main main, AUserModel userModel)
         {
             _Main = main;
             _UserModel = userModel as UserModel;
@@ -77,7 +77,7 @@ namespace Me.Amon.Pwd
             this.Icon = Me.Amon.Properties.Resources.Icon;
         }
 
-        private void APwd_Load(object sender, EventArgs e)
+        private void WPwd_Load(object sender, EventArgs e)
         {
         }
 
@@ -99,21 +99,21 @@ namespace Me.Amon.Pwd
             _FindBar.KeyList = _KeyList;
 
             #region 系统选单
-            _XmlMenu = new XmlMenu<APwd>(this, _ViewModel);
+            _XmlMenu = new XmlMenu<WPwd>(this, _ViewModel);
             if (_XmlMenu.Load(Path.Combine(_UserModel.DatHome, CPwd.XML_MENU)))
             {
-                _XmlMenu.GetMenuBar("APwd", MbMenu);
-                _XmlMenu.GetToolBar("APwd", TbTool);
+                _XmlMenu.GetMenuBar("WPwd", MbMenu);
+                _XmlMenu.GetToolBar("WPwd", TbTool);
                 ContextMenuStrip CmCat = new ContextMenuStrip();
-                _XmlMenu.GetPopMenu("ACat", CmCat);
+                _XmlMenu.GetPopMenu("WCat", CmCat);
                 _CatTree.PopupMenu = CmCat;
 
                 ContextMenuStrip CmKey = new ContextMenuStrip();
-                _XmlMenu.GetPopMenu("AKey", CmKey);
+                _XmlMenu.GetPopMenu("WKey", CmKey);
                 _KeyList.PopupMenu = CmKey;
 
-                //_XmlMenu.GetPopMenu("AAtt", CmAtt);
-                _XmlMenu.GetStrokes("APwd", this);
+                //_XmlMenu.GetPopMenu("WAtt", CmAtt);
+                _XmlMenu.GetStrokes("WPwd", this);
             }
             #endregion
 
@@ -248,7 +248,7 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 事件处理
-        private void APwd_Resize(object sender, EventArgs e)
+        private void WPwd_Resize(object sender, EventArgs e)
         {
             if (!Visible)
             {
@@ -264,7 +264,7 @@ namespace Me.Amon.Pwd
             //}
         }
 
-        private void APwd_FormClosing(object sender, FormClosingEventArgs e)
+        private void WPwd_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!_Exit)
             {
@@ -552,7 +552,7 @@ namespace Me.Amon.Pwd
 
             cat.Parent = parent.Id;
             cat.Order = _LastNode.Nodes.Count;
-            cat.AppId = CApp.IAPP_APWD;
+            cat.AppId = CApp.IAPP_WPWD;
             _DataModel.SaveVcs(cat);
             if (parent.IsLeaf)
             {
@@ -1430,7 +1430,7 @@ namespace Me.Amon.Pwd
 
             using (StreamWriter writer = new StreamWriter(file, false))
             {
-                writer.WriteLine("APwd-2");
+                writer.WriteLine("WPwd-2");
                 StringBuilder buffer = new StringBuilder();
                 foreach (Key key in keys)
                 {
@@ -1486,7 +1486,7 @@ namespace Me.Amon.Pwd
                 using (XmlWriter writer = XmlWriter.Create(stream))
                 {
                     writer.WriteStartElement("Amon");
-                    writer.WriteElementString("App", "APwd");
+                    writer.WriteElementString("App", "WPwd");
                     writer.WriteElementString("Ver", "2");
                     writer.WriteStartElement("Keys");
                     foreach (Key key in keys)
@@ -1544,7 +1544,7 @@ namespace Me.Amon.Pwd
             {
                 // 版本判断
                 string ver = reader.ReadLine();
-                if ("APwd-1" != ver && "APwd-2" != ver)
+                if ("WPwd-1" != ver && "WPwd-2" != ver)
                 {
                     Main.ShowAlert("未知的文件版本，无法进行导入处理！");
                     return;
@@ -1606,7 +1606,7 @@ namespace Me.Amon.Pwd
 
             StreamReader stream = File.OpenText(file);
             XmlReader reader = XmlReader.Create(stream, new XmlReaderSettings { IgnoreComments = true, IgnoreWhitespace = true });
-            if (!reader.ReadToFollowing("App") || reader.ReadElementContentAsString() != "APwd")
+            if (!reader.ReadToFollowing("App") || reader.ReadElementContentAsString() != "WPwd")
             {
                 Main.ShowAlert("未知的文件格式，无法进行导入处理！");
                 return;
@@ -2000,7 +2000,7 @@ namespace Me.Amon.Pwd
             DataTable dt = new DataTable();
             dt.Columns.Add("Key");
             dt.Columns.Add("Memo");
-            foreach (KeyStroke<APwd> stroke in _XmlMenu.KeyStrokes)
+            foreach (KeyStroke<WPwd> stroke in _XmlMenu.KeyStrokes)
             {
                 dt.Rows.Add(stroke.Key, stroke.Memo);
             }

@@ -5,11 +5,11 @@ using Me.Amon.M;
 
 namespace Me.Amon.Pwd.E
 {
-    public abstract class APwdAction : IAction<APwd>
+    public abstract class WPwdAction : IAction<WPwd>
     {
         protected List<ToolStripItem> _Items;
 
-        public APwd IApp { get; set; }
+        public WPwd IApp { get; set; }
 
         public virtual void DoInit() { }
 

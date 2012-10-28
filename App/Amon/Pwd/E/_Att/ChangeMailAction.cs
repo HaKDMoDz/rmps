@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E._Att
 {
-    public class ChangeMailAction : APwdAction
+    public class ChangeMailAction : WPwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

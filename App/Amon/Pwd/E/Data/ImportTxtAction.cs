@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E.Data
 {
-    public class ImportTxtAction : APwdAction
+    public class ImportTxtAction : WPwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

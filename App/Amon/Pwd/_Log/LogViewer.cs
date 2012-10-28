@@ -8,7 +8,7 @@ namespace Me.Amon.Pwd._Log
 {
     public partial class LogViewer : Form
     {
-        private APwd _APwd;
+        private WPwd _WPwd;
         private DataModel _DataModel;
         private SafeModel _SafeModel;
         private List<Att> _AttList;
@@ -19,9 +19,9 @@ namespace Me.Amon.Pwd._Log
             InitializeComponent();
         }
 
-        public LogViewer(APwd apwd)
+        public LogViewer(WPwd wPwd)
         {
-            _APwd = apwd;
+            _WPwd = wPwd;
 
             InitializeComponent();
 
@@ -88,7 +88,7 @@ namespace Me.Amon.Pwd._Log
 
             _SafeModel.Key.FromLog(oldLog);
             _SafeModel.Decode();
-            _APwd.ShowKey(_SafeModel.Key);
+            _WPwd.ShowKey(_SafeModel.Key);
             _DataModel.SaveVcs(_SafeModel.Key);
 
             LbLog.Items.Insert(0, newLog);

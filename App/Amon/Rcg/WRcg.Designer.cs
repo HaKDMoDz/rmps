@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Rcg
 {
-    partial class ARcg
+    partial class WRcg
     {
         /// <summary>
         /// Required designer variable.
@@ -154,7 +154,7 @@
             this.BtNo.UseVisualStyleBackColor = true;
             this.BtNo.Click += new System.EventHandler(this.BtNo_Click);
             // 
-            // ARcg
+            // WRcg
             // 
             this.AcceptButton = this.BtGen;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -174,7 +174,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ARcg";
+            this.Name = "WRcg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "随机字符生成器";
             ((System.ComponentModel.ISupportInitialize)(this.SpLength)).EndInit();

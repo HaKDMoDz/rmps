@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Img
 {
-    partial class AImg
+    partial class WImg
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -30,15 +30,15 @@
         {
             this.SuspendLayout();
             // 
-            // AImg
+            // WImg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 262);
-            this.Name = "AImg";
+            this.Name = "WImg";
             this.Text = "图像查看器";
-            this.Load += new System.EventHandler(this.AImg_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AImg_KeyDown);
+            this.Load += new System.EventHandler(this.WImg_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.WImg_KeyDown);
             this.ResumeLayout(false);
 
         }

@@ -26,9 +26,9 @@ namespace Me.Amon.Pwd._Key
 
         public void Init()
         {
-            TbName.MaxLength = DBConst.AICO0104_SIZE;
-            TbTips.MaxLength = DBConst.AICO0105_SIZE;
-            TbMemo.MaxLength = DBConst.AICO0107_SIZE;
+            TbName.MaxLength = DBConst.WICO0104_SIZE;
+            TbTips.MaxLength = DBConst.WICO0105_SIZE;
+            TbMemo.MaxLength = DBConst.WICO0107_SIZE;
 
             _IcoSeeker.AcceptButton = BtUpdate;
             _IcoSeeker.CancelButton = BtCancel;

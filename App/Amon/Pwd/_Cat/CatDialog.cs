@@ -40,7 +40,7 @@ namespace Me.Amon.Pwd._Cat
 
         private void InitCat(TreeNode root)
         {
-            foreach (Cat cat in _DataModel.ListCat(CApp.IAPP_APWD, root.Name))
+            foreach (Cat cat in _DataModel.ListCat(CApp.IAPP_WPWD, root.Name))
             {
                 TreeNode node = new TreeNode();
                 node.Name = cat.Id;

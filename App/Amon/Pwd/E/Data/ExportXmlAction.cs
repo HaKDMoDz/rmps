@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E.Data
 {
-    public class ExportXmlAction : APwdAction
+    public class ExportXmlAction : WPwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

@@ -4,7 +4,7 @@ using Me.Amon.M;
 
 namespace Me.Amon.Pwd.E.View
 {
-    public class CatTreeVisibleAction : APwdAction
+    public class CatTreeVisibleAction : WPwdAction
     {
         public override void Add(ToolStripItem item, IViewModel viewModel)
         {

@@ -29,7 +29,7 @@ namespace Me.Amon.V
         public void Import(AUserModel userModel)
         {
             XmlReaderSettings setting = new XmlReaderSettings { IgnoreWhitespace = true };
-            ImportAPwdDir(userModel, setting);
+            ImportWPwdDir(userModel, setting);
         }
 
         /// <summary>
@@ -37,9 +37,9 @@ namespace Me.Amon.V
         /// </summary>
         /// <param name="userModel"></param>
         /// <param name="setting"></param>
-        private void ImportAPwdCat(AUserModel userModel, XmlReaderSettings setting)
+        private void ImportWPwdCat(AUserModel userModel, XmlReaderSettings setting)
         {
-            string file = Path.Combine(userModel.DatHome, "APwd-Cat.xml");
+            string file = Path.Combine(userModel.DatHome, "WPwd-Cat.xml");
             if (!File.Exists(file))
             {
                 return;
@@ -63,9 +63,9 @@ namespace Me.Amon.V
             stream.Close();
         }
 
-        private void ImportAPwdLib(AUserModel userModel, XmlReaderSettings setting)
+        private void ImportWPwdLib(AUserModel userModel, XmlReaderSettings setting)
         {
-            string file = Path.Combine(userModel.DatHome, "APwd-Lib.xml");
+            string file = Path.Combine(userModel.DatHome, "WPwd-Lib.xml");
             if (File.Exists(file))
             {
                 return;
@@ -94,9 +94,9 @@ namespace Me.Amon.V
         /// </summary>
         /// <param name="userModel"></param>
         /// <param name="setting"></param>
-        private void ImportAPwdDir(AUserModel userModel, XmlReaderSettings setting)
+        private void ImportWPwdDir(AUserModel userModel, XmlReaderSettings setting)
         {
-            string file = Path.Combine(userModel.DatHome, "APwd-Dir.xml");
+            string file = Path.Combine(userModel.DatHome, "WPwd-Dir.xml");
             if (!File.Exists(file))
             {
                 return;
@@ -125,22 +125,22 @@ namespace Me.Amon.V
         public void Export(AUserModel userModel)
         {
             XmlWriterSettings setting = new XmlWriterSettings { Indent = true };
-            ExportAPwdCat(userModel, setting);
+            ExportWPwdCat(userModel, setting);
         }
 
-        private void ExportAPwdCat(AUserModel userModel, XmlWriterSettings setting)
+        private void ExportWPwdCat(AUserModel userModel, XmlWriterSettings setting)
         {
-            string file = Path.Combine(userModel.DatHome, "APwd-Cat.xml");
+            string file = Path.Combine(userModel.DatHome, "WPwd-Cat.xml");
             StreamWriter stream = new StreamWriter(file);
             using (XmlWriter writer = XmlWriter.Create(stream, setting))
             {
                 writer.WriteStartElement("Amon");
 
-                writer.WriteElementString("App", "APwd");
+                writer.WriteElementString("App", "WPwd");
                 writer.WriteElementString("Ver", "1");
 
                 writer.WriteStartElement("Cats");
-                foreach (Cat cat in _DataModel.ListCat(CApp.IAPP_APWD, ""))
+                foreach (Cat cat in _DataModel.ListCat(CApp.IAPP_WPWD, ""))
                 {
                     cat.ToXml(writer);
                 }

@@ -133,7 +133,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
 
         private void BtGen_Click(object sender, EventArgs e)
         {
-            ARcg rcg = new ARcg(_DataModel.UdcList);
+            WRcg rcg = new WRcg(_DataModel.UdcList);
             string tmp = _Att.GetSpec(PassAtt.SPEC_PWDS_LEN);
             if (string.IsNullOrEmpty(tmp) || tmp == "0")
             {

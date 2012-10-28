@@ -5,7 +5,7 @@ using Me.Amon.Uc;
 
 namespace Me.Amon.Pwd.E.View
 {
-    public class WizPatternAction : APwdAction
+    public class WizPatternAction : WPwdAction
     {
         public override void Add(ToolStripItem item, IViewModel viewModel)
         {
@@ -53,9 +53,9 @@ namespace Me.Amon.Pwd.E.View
 
                 cmd = obj as string;
             }
-            else if (sender is KeyStroke<APwd>)
+            else if (sender is KeyStroke<WPwd>)
             {
-                KeyStroke<APwd> stroke = sender as KeyStroke<APwd>;
+                KeyStroke<WPwd> stroke = sender as KeyStroke<WPwd>;
                 cmd = stroke.Command;
             }
             else
