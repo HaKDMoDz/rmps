@@ -391,6 +391,67 @@
       <DependentUpon>ASmall.cs</DependentUpon>
     </Compile>
     <Compile Include="M\ADataModel.cs" />
+    <Compile Include="Open\NameValueComparer.cs" />
+    <Compile Include="Open\OAuthClient.cs" />
+    <Compile Include="Open\OAuthConsumer.cs" />
+    <Compile Include="Open\OAuthPcs.cs" />
+    <Compile Include="Open\OAuthSns.cs" />
+    <Compile Include="Open\OAuthToken.cs" />
+    <Compile Include="Open\OAuthUtility.cs" />
+    <Compile Include="Open\OAuthVersion.cs" />
+    <Compile Include="Open\PC\NativeClient.cs" />
+    <Compile Include="Open\PC\NativeServer.cs" />
+    <Compile Include="Open\UI\Auth.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Open\UI\Auth.Designer.cs">
+      <DependentUpon>Auth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Open\V1\App\OAuthV1Client.cs" />
+    <Compile Include="Open\V1\App\OAuthV1Server.cs" />
+    <Compile Include="Open\V1\App\Pcs\KuaipanClient.cs" />
+    <Compile Include="Open\V1\App\Pcs\KuaipanHttpStatus.cs" />
+    <Compile Include="Open\V1\App\Pcs\KuaipanServer.cs" />
+    <Compile Include="Open\V1\OAuthConstants.cs" />
+    <Compile Include="Open\V1\OAuthPhrases.cs" />
+    <Compile Include="Open\V1\OAuthTokenV1.cs" />
+    <Compile Include="Open\V2\AccountInfo.cs" />
+    <Compile Include="Open\V2\App\OAuthV2Client.cs" />
+    <Compile Include="Open\V2\App\OAuthV2Server.cs" />
+    <Compile Include="Open\V2\App\Pcs\WeiboClient.cs" />
+    <Compile Include="Open\V2\App\Pcs\WeiboServer.cs" />
+    <Compile Include="Open\V2\Enums\DisplayType.cs" />
+    <Compile Include="Open\V2\Enums\ErrorCode.cs" />
+    <Compile Include="Open\V2\Enums\GrantType.cs" />
+    <Compile Include="Open\V2\Enums\RequestMethod.cs" />
+    <Compile Include="Open\V2\Enums\ResponseType.cs" />
+    <Compile Include="Open\V2\Enums\TokenResult.cs" />
+    <Compile Include="Open\V2\OAuthError.cs" />
+    <Compile Include="Open\V2\OAuthPhrases.cs" />
+    <Compile Include="Open\V2\OAuthTokenV2.cs" />
+    <Compile Include="Pcs\CPcs.cs" />
+    <Compile Include="Pcs\C\PcEngine.cs" />
+    <Compile Include="Pcs\EPcs.cs" />
+    <Compile Include="Pcs\M\CsFile.cs" />
+    <Compile Include="Pcs\M\CsMeta.cs" />
+    <Compile Include="Pcs\V\MetaUri.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pcs\V\MetaUri.Designer.cs">
+      <DependentUpon>MetaUri.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pcs\V\PcsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pcs\V\PcsView.Designer.cs">
+      <DependentUpon>PcsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pcs\WPcs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pcs\WPcs.designer.cs">
+      <DependentUpon>WPcs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pwd\EKeyType.cs" />
     <Compile Include="Pwd\V\IAttView.cs" />
     <Compile Include="Pwd\V\Wiz\Editer\AttEditer.cs">
@@ -518,11 +579,11 @@
     <Compile Include="Pwd\_Key\KeyList.Designer.cs">
       <DependentUpon>KeyList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\AWiz.cs">
+    <Compile Include="Pwd\V\Wiz\WWiz.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pwd\V\Wiz\AWiz.Designer.cs">
-      <DependentUpon>AWiz.cs</DependentUpon>
+    <Compile Include="Pwd\V\Wiz\WWiz.Designer.cs">
+      <DependentUpon>WWiz.cs</DependentUpon>
     </Compile>
     <Compile Include="Rcg\WRcg.cs">
       <SubType>Form</SubType>
@@ -538,38 +599,6 @@
     <Compile Include="M\Log.cs" />
     <Compile Include="M\Udc.cs" />
     <Compile Include="M\Vcs.cs" />
-    <Compile Include="Open\NameValueComparer.cs" />
-    <Compile Include="Open\OAuthConsumer.cs" />
-    <Compile Include="Open\OAuthToken.cs" />
-    <Compile Include="Open\OAuthUtility.cs" />
-    <Compile Include="Open\OAuthVersion.cs" />
-    <Compile Include="Open\UI\Auth.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Open\UI\Auth.Designer.cs">
-      <DependentUpon>Auth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Open\V1\App\Client\KuaipanClient.cs" />
-    <Compile Include="Open\V1\App\OAuthV1Client.cs" />
-    <Compile Include="Open\V1\App\OAuthV1Server.cs" />
-    <Compile Include="Open\V1\App\Server\KuaipanServer.cs" />
-    <Compile Include="Open\V1\OAuthConstants.cs" />
-    <Compile Include="Open\V1\OAuthPhrases.cs" />
-    <Compile Include="Open\V1\OAuthTokenV1.cs" />
-    <Compile Include="Open\V2\AccountInfo.cs" />
-    <Compile Include="Open\V2\App\Client\WeiboClient.cs" />
-    <Compile Include="Open\V2\App\OAuthV2Client.cs" />
-    <Compile Include="Open\V2\App\OAuthV2Server.cs" />
-    <Compile Include="Open\V2\App\Server\WeiboServer.cs" />
-    <Compile Include="Open\V2\Enums\DisplayType.cs" />
-    <Compile Include="Open\V2\Enums\ErrorCode.cs" />
-    <Compile Include="Open\V2\Enums\GrantType.cs" />
-    <Compile Include="Open\V2\Enums\RequestMethod.cs" />
-    <Compile Include="Open\V2\Enums\ResponseType.cs" />
-    <Compile Include="Open\V2\Enums\TokenResult.cs" />
-    <Compile Include="Open\V2\OAuthError.cs" />
-    <Compile Include="Open\V2\OAuthPhrases.cs" />
-    <Compile Include="Open\V2\OAuthTokenV2.cs" />
     <Compile Include="Pwd\M\Dir.cs" />
     <Compile Include="Pwd\M\Key.cs" />
     <Compile Include="Pwd\M\KeyLog.cs" />
@@ -1457,6 +1486,18 @@
     <EmbeddedResource Include="Img\V\ASmall.resx">
       <DependentUpon>ASmall.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Open\UI\Auth.resx">
+      <DependentUpon>Auth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pcs\V\MetaUri.resx">
+      <DependentUpon>MetaUri.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pcs\V\PcsView.resx">
+      <DependentUpon>PcsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pcs\WPcs.resx">
+      <DependentUpon>WPcs.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pwd\V\Wiz\Editer\AttEditer.resx">
       <DependentUpon>AttEditer.cs</DependentUpon>
     </EmbeddedResource>
@@ -1517,17 +1558,14 @@
     <EmbeddedResource Include="Pwd\_Key\KeyList.resx">
       <DependentUpon>KeyList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pwd\V\Wiz\AWiz.resx">
-      <DependentUpon>AWiz.cs</DependentUpon>
+    <EmbeddedResource Include="Pwd\V\Wiz\WWiz.resx">
+      <DependentUpon>WWiz.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Rcg\WRcg.resx">
       <DependentUpon>WRcg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Open\UI\Auth.resx">
-      <DependentUpon>Auth.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -1924,8 +1962,10 @@
     <Folder Include="Gtd\C\" />
     <Folder Include="Gtd\E\" />
     <Folder Include="Ico\C\" />
+    <Folder Include="Open\V1\App\Sns\" />
     <Folder Include="Open\V1\Enums\" />
     <Folder Include="Open\V1\Web\" />
+    <Folder Include="Open\V2\App\Sns\" />
     <Folder Include="Open\V2\Web\" />
     <Folder Include="Pwd\C\" />
     <Folder Include="Pwd\E\Edit\" />

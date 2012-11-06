@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Amon version="1">
+  <App>WPcs</App>
+  <Ver>1</Ver>
+
+  <Libs>
+    <Lib Id="Demo" Path="Lib\DemoLib.dll"/>
+  </Libs>
+
+  <Actions>
+    <Action Id="hind-window" Class="Me.Amon.Pwd.E.File.HideAction"/>
+    <Action Id="lock-window" Class="Me.Amon.Pwd.E.File.LockAction"/>
+    <Action Id="exit-window" Class="Me.Amon.Pwd.E.File.ExitAction"/>
+  </Actions>
+
+  <!--系统快捷键-->
+  <Strokes Id="WPcs">
+  </Strokes>
+
+  <!--魔方密码菜单栏-->
+  <Menubar Id="WPcs">
+    <Menu Id="file" Text="文件(&amp;F)">
+      <Item Type="normal" Text="锁定窗口(&amp;L)" ActionId="lock-window">
+        <Stroke Key="^ L" Memo="锁定窗口"/>
+      </Item>
+      <Item Type="normal" Text="隐藏窗口(&amp;H)" ActionId="hind-window">
+        <Stroke Key="^ H" Memo="隐藏窗口"/>
+        <Stroke Key="^ Enter" Memo="隐藏窗口"/>
+      </Item>
+      <Line/>
+      <Item Type="normal" Text="退出(&amp;X)" ActionId="exit-window">
+        <Stroke Key="^ Q" Memo="退出"/>
+      </Item>
+    </Menu>
+      <Item Type="normal" Text="添加记录" ActionId="append-key">
+        <Stroke Key="^ N" Memo="添加记录"/>
+      </Item>
+      <Item Type="normal" Text="删除记录" ActionId="delete-key">
+        <Stroke Key="^ R" Memo="删除记录"/>
+      </Item>
+      <Line/>
+      <Menu Id="append-att" Text="添加属性" Group="att-edit">
+        <Item Type="normal" Text="文本" ActionId="append-att-text">
+          <Stroke Key="^ D1" Memo="添加文本属性"/>
+          <Stroke Key="^ NumPad1" Memo="添加文本属性"/>
+        </Item>
+        <Item Type="normal" Text="口令" ActionId="append-att-pass">
+          <Stroke Key="^ D2" Memo="添加口令属性"/>
+          <Stroke Key="^ NumPad2" Memo="添加口令属性"/>
+        </Item>
+        <Item Type="normal" Text="链接" ActionId="append-att-link">
+          <Stroke Key="^ D3" Memo="添加链接属性"/>
+          <Stroke Key="^ NumPad3" Memo="添加链接属性"/>
+        </Item>
+        <Item Type="normal" Text="邮件" ActionId="append-att-mail">
+          <Stroke Key="^ D4" Memo="添加邮件属性"/>
+          <Stroke Key="^ NumPad4" Memo="添加邮件属性"/>
+        </Item>
+        <Item Type="normal" Text="日期" ActionId="append-att-date">
+          <Stroke Key="^ D5" Memo="添加日期属性"/>
+          <Stroke Key="^ NumPad5" Memo="添加日期属性"/>
+        </Item>
+        <Item Type="normal" Text="数值" ActionId="append-att-data">
+          <Stroke Key="^ D6" Memo="添加数值属性"/>
+          <Stroke Key="^ NumPad6" Memo="添加数值属性"/>
+        </Item>
+        <Item Type="normal" Text="列表" ActionId="append-att-list">
+          <Stroke Key="^ D7" Memo="添加列表属性"/>
+          <Stroke Key="^ NumPad7" Memo="添加列表属性"/>
+        </Item>
+        <Item Type="normal" Text="附注" ActionId="append-att-memo">
+          <Stroke Key="^ D8" Memo="添加附注属性"/>
+          <Stroke Key="^ NumPad8" Memo="添加附注属性"/>
+        </Item>
+        <Item Type="normal" Text="文件" ActionId="append-att-file">
+          <Stroke Key="^ D9" Memo="添加文件属性"/>
+          <Stroke Key="^ NumPad9" Memo="添加文件属性"/>
+        </Item>
+        <Item Type="normal" Text="标记" ActionId="append-att-line">
+          <Stroke Key="^ D0" Memo="添加标记属性"/>
+          <Stroke Key="^ NumPad0" Memo="添加标记属性"/>
+        </Item>
+      </Menu>
+      <Menu Id="update-att" Text="转换属性" Group="att-edit">
+        <Item Type="normal" Text="文本" ActionId="change-att-text">
+          <Stroke Key="% D1" Memo="转换文本属性"/>
+          <Stroke Key="% NumPad1" Memo="转换文本属性"/>
+        </Item>
+        <Item Type="normal" Text="口令" ActionId="change-att-pass">
+          <Stroke Key="% D2" Memo="转换口令属性"/>
+          <Stroke Key="% NumPad2" Memo="转换口令属性"/>
+        </Item>
+        <Item Type="normal" Text="链接" ActionId="change-att-link">
+          <Stroke Key="% D3" Memo="转换链接属性"/>
+          <Stroke Key="% NumPad3" Memo="转换链接属性"/>
+        </Item>
+        <Item Type="normal" Text="邮件" ActionId="change-att-mail">
+          <Stroke Key="% D4" Memo="转换邮件属性"/>
+          <Stroke Key="% NumPad4" Memo="转换邮件属性"/>
+        </Item>
+        <Item Type="normal" Text="日期" ActionId="change-att-date">
+          <Stroke Key="% D5" Memo="转换日期属性"/>
+          <Stroke Key="% NumPad5" Memo="转换日期属性"/>
+        </Item>
+        <Item Type="normal" Text="数值" ActionId="change-att-data">
+          <Stroke Key="% D6" Memo="转换数值属性"/>
+          <Stroke Key="% NumPad6" Memo="转换数值属性"/>
+        </Item>
+        <Item Type="normal" Text="列表" ActionId="change-att-list">
+          <Stroke Key="% D7" Memo="转换列表属性"/>
+          <Stroke Key="% NumPad7" Memo="转换列表属性"/>
+        </Item>
+        <Item Type="normal" Text="附注" ActionId="change-att-memo">
+          <Stroke Key="% D8" Memo="转换附注属性"/>
+          <Stroke Key="% NumPad8" Memo="转换附注属性"/>
+        </Item>
+        <Item Type="normal" Text="文件" ActionId="change-att-file">
+          <Stroke Key="% D9" Memo="转换文件属性"/>
+          <Stroke Key="% NumPad9" Memo="转换文件属性"/>
+        </Item>
+        <Item Type="normal" Text="标记" ActionId="change-att-line">
+          <Stroke Key="% D0" Memo="转换标记属性"/>
+          <Stroke Key="% NumPad0" Memo="转换标记属性"/>
+        </Item>
+      </Menu>
+      <Item Type="normal" Text="删除属性" ActionId="delete-att" Group="att-edit">
+        <Stroke Key="% D" Memo="移除当前属性"/>
+      </Item>
+      <Item Type="normal" Text="选择上一属性" ActionId="att-edit-select-prev" Group="att-edit">
+        <Stroke Key="^ U" Memo="选择上一个属性"/>
+        <Stroke Key="^ Up" Memo="选择上一个属性"/>
+      </Item>
+      <Item Type="normal" Text="选择下一属性" ActionId="att-edit-select-next" Group="att-edit">
+        <Stroke Key="^ D" Memo="选择下一个属性"/>
+        <Stroke Key="^ Down" Memo="选择下一个属性"/>
+      </Item>
+      <Item Type="normal" Text="向上移动一行" ActionId="att-edit-move-up" Group="att-edit">
+        <Stroke Key="^ + U" Memo="向上移动一行"/>
+        <Stroke Key="^ + Up" Memo="向上移动一行"/>
+      </Item>
+      <Item Type="normal" Text="向下移动一行" ActionId="att-edit-move-down" Group="att-edit">
+        <Stroke Key="^ + D" Memo="向下移动一行"/>
+        <Stroke Key="^ + Down" Memo="向下移动一行"/>
+      </Item>
+      <Line Group="att-edit"/>
+      <Item Type="normal" Text="添加类别" ActionId="append-cat">
+        <Stroke Key="^ Add" Memo="添加类别"/>
+      </Item>
+      <Item Type="normal" Text="更新类别" ActionId="update-cat">
+        <Stroke Key="^ Decimal" Memo="更新类别"/>
+      </Item>
+      <Item Type="normal" Text="删除类别" ActionId="delete-cat">
+        <Stroke Key="^ Subtract" Memo="删除类别"/>
+      </Item>
+    </Menu>
+    <Menu Id="edit" Text="编辑(&amp;E)">
+      <Item Id="keylist-visible" Type="toggle" Text="剪切" ActionId="keylist-visible">
+        <Stroke Key="^ K" Memo="剪切"/>
+      </Item>
+    </Menu>
+      <Item Type="normal" Text="查找(&amp;F)" ActionId="find-key">
+        <Stroke Key="^ F" Memo="快速查找"/>
+      </Item>
+      <Line/>
+      <Item Type="normal" Text="同步" Enabled="false" ActionId="sync"/>
+      <Line/>
+      <Menu Type="normal" Text="导出">
+        <Item Type="normal" Text="TXT格式" ActionId="export-txt"/>
+        <Item Type="normal" Text="XML格式" ActionId="export-xml"/>
+      </Menu>
+      <Menu Type="normal" Text="导入">
+        <Item Type="normal" Text="TXT格式" ActionId="import-txt"/>
+        <Item Type="normal" Text="XML格式" ActionId="import-xml"/>
+      </Menu>
+      <!--Line/>
+      <Item Type="normal" Text="备份到本地" ActionId="native-backup">
+        <Stroke Key="^ B" Memo="备份到本地"/>
+      </Item>
+      <Item Type="normal" Text="从本地恢复" ActionId="native-resume">
+        <Stroke Key="^ R" Memo="从本地恢复"/>
+      </Item>
+      <Item Type="normal" Text="配置本地路径" ActionId="native-config" Enabled="false"/>
+      <Line/>
+      <Item Type="normal" Text="备份到云端" ActionId="remote-backup">
+        <Stroke Key="^ + B" Memo="备份到云端"/>
+      </Item>
+      <Item Type="normal" Text="从云端恢复" ActionId="remote-resume">
+        <Stroke Key="^ + R" Memo="从云端恢复"/>
+      </Item>
+      <Item Type="normal" Text="配置云端帐户" ActionId="remote-config" Enabled="false"/-->
+    </Menu>
+    <Menu Id="user" Text="用户(&amp;I)">
+      <Item Type="normal" Text="修改解锁口令">
+        <Action Class="Me.Amon.Pwd.E.User.LkeyAction"/>
+      </Item>
+      <Item Type="normal" Text="更改登录口令">
+        <Action Class="Me.Amon.Pwd.E.User.PkeyAction"/>
+      </Item>
+      <Item Type="normal" Text="设置安全口令" Id="mpro-skey" Enabled="false">
+        <Action Class="Me.Amon.Pwd.E.User.SkeyAction"/>
+      </Item>
+      <Line/>
+      <Item Type="normal" Text="常规设置" Visible="false">
+        <Action Class="Me.Amon.Pwd.E.User.OptionsAction"/>
+      </Item>
+      <Item Type="normal" Text="口令设置" Visible="false">
+        <Action Class="Me.Amon.Pwd.E.User.PasswordAction"/>
+      </Item>
+      <Item Type="normal" Text="字符管理">
+        <Action Class="Me.Amon.Pwd.E.User.UdcEditAction"/>
+      </Item>
+      <Item Type="normal" Text="图标管理">
+        <Action Class="Me.Amon.Pwd.E.User.IcoEditAction"/>
+      </Item>
+      <Item Type="normal" Text="模板管理">
+        <Action Class="Me.Amon.Pwd.E.User.LibEditAction"/>
+      </Item>
+    </Menu>
+    <Menu Id="skin" Text="皮肤(&amp;S)">
+	  <Item Type="normal" Text="默认"/>
+    </Menu>
+    <Menu Id="help" Text="帮助(&amp;H)">
+      <Item Type="normal" Text="帮助" ActionId="help">
+        <Stroke Key="F1" Memo="使用帮助"/>
+      </Item>
+      <Line/>
+      <Item Type="normal" Text="快捷键" ActionId="shortcuts">
+        <Stroke Key="F6" Memo="快捷键列表"/>
+      </Item>
+      <Line/>
+      <Item Type="normal" Text="软件首页">
+        <Action Class="Me.Amon.Pwd.E.Help.WebhostAction"/>
+      </Item>
+      <Item Type="normal" Text="项目首页">
+        <Action Class="Me.Amon.Pwd.E.Help.ProjectAction"/>
+      </Item>
+      <Line/>
+      <Item Type="normal" Text="特别致谢" Visible="false">
+        <Action Class="Me.Amon.Pwd.E.Help.IdioAction"/>
+        <!--Stroke Key="F8" Memo="特别致谢"/-->
+      </Item>
+      <Item Type="normal" Text="关于" ActionId="about"/>
+    </Menu>
+  </Menubar>
+
+  <!--魔方密码工具栏-->
+  <Toolbar Id="WPwd">
+    <Item Type="normal" Tips="新增" IconId="" ActionId="append-key">
+      <Icon Id="file-new" Path="var:menu-key-append"/>
+    </Item>
+    <Item Type="normal" Tips="保存" ActionId="update-key">
+      <Icon Id="file-save" Path="var:menu-key-update"/>
+    </Item>
+    <Item Type="normal" Tips="删除" ActionId="delete-key">
+      <Icon Id="file-save" Path="var:menu-key-delete"/>
+    </Item>
+    <Line/>
+    <Item Type="normal" Tips="剪切" ActionId="att-edit-cut">
+      <Icon Id="file-save" Path="var:att-cut"/>
+    </Item>
+    <Item Type="normal" Tips="复制" ActionId="att-edit-copy">
+      <Icon Id="file-save" Path="var:att-copy"/>
+    </Item>
+    <Item Type="normal" Tips="粘贴" ActionId="att-edit-paste">
+      <Icon Id="file-save" Path="var:att-paste"/>
+    </Item>
+    <Item Type="normal" Tips="清除" ActionId="att-edit-clear">
+      <Icon Id="file-save" Path="var:att-clear"/>
+    </Item>
+    <Line/>
+  </Toolbar>
+
+  <!--魔方密码弹出菜单-->
+  <Popmenu Id="ACat">
+    <Item Type="normal" Text="更改图标">
+      <Action Class="Me.Amon.Pwd.E._Cat.ChangeIcoAction"/>
+    </Item>
+  </Popmenu>
+</Amon>

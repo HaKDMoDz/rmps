@@ -10,11 +10,10 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
 {
     public partial class KeyHead : UserControl, IKeyEditer
     {
-        private AWiz _AWiz;
+        private WWiz _AWiz;
         private UserModel _UserModel;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
-        private Panel _TlPanel;
         private TextBox _TBox;
 
         #region 构造函数
@@ -23,7 +22,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             InitializeComponent();
         }
 
-        public KeyHead(AWiz awiz, UserModel userModel, SafeModel safeModel)
+        public KeyHead(WWiz awiz, UserModel userModel, SafeModel safeModel)
         {
             _AWiz = awiz;
             _UserModel = userModel;
@@ -32,9 +31,8 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             InitializeComponent();
         }
 
-        public void Init(Panel panel, DataModel dataModel, ViewModel viewModel)
+        public void Init(DataModel dataModel, ViewModel viewModel)
         {
-            _TlPanel = panel;
             _DataModel = dataModel;
 
             TbName.GotFocus += new EventHandler(TbName_GotFocus);
@@ -44,16 +42,16 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
         #endregion
 
         #region 接口实现
-        public void InitView()
+        public void InitView(Panel panel)
         {
-            _TlPanel.Controls.Add(this);
+            panel.Controls.Add(this);
             Dock = DockStyle.Fill;
             TabIndex = 0;
         }
 
-        public void HideView()
+        public void HideView(Panel panel)
         {
-            _TlPanel.Controls.Remove(this);
+            panel.Controls.Remove(this);
         }
 
         public void ShowData()

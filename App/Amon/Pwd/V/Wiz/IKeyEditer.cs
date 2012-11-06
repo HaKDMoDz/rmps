@@ -4,9 +4,9 @@
     {
         string Name { get; set; }
 
-        void InitView();
+        void InitView(System.Windows.Forms.Panel panel);
 
-        void HideView();
+        void HideView(System.Windows.Forms.Panel panel);
 
         bool Focus();
 

@@ -226,6 +226,8 @@ namespace Me.Amon.Pwd.M
 
         public bool EchoBarVisible { get; set; }
 
+        public int LayoutStyle { get; set; }
+
         public bool KeyGuidVisible { get; set; }
 
         public int KeyGuidWidth
@@ -257,7 +259,6 @@ namespace Me.Amon.Pwd.M
         private int _CatTreeHeight = 152;
 
         public bool KeyListVisible { get; set; }
-        public bool KeyListLocation { get; set; }
         public bool KeyListHeight { get; set; }
 
         public bool AttViewVisible { get; set; }

@@ -48,8 +48,9 @@ namespace Me.Amon.Pwd
         private bool _IsSearch;
         private IPwd _PwdView;
         private WPro _ProView;
-        private AWiz _WizView;
+        private WWiz _WizView;
         private APad _PadView;
+        private KeyInfo _KeyInfo;
         private XmlMenu<WPwd> _XmlMenu;
         #endregion
 
@@ -127,21 +128,22 @@ namespace Me.Amon.Pwd
 
             LoadLayout();
 
+            ShowInfo();
             // 视图模式
-            switch (_ViewModel.Pattern)
-            {
-                case CPwd.PATTERN_PRO:
-                    ShowAPro();
-                    break;
-                case CPwd.PATTERN_WIZ:
-                    ShowAWiz();
-                    break;
-                case CPwd.PATTERN_PAD:
-                    ShowAPad();
-                    break;
-                default:
-                    break;
-            }
+            //switch (_ViewModel.Pattern)
+            //{
+            //    case CPwd.PATTERN_PRO:
+            //        ShowAPro();
+            //        break;
+            //    case CPwd.PATTERN_WIZ:
+            //        ShowAWiz();
+            //        break;
+            //    case CPwd.PATTERN_PAD:
+            //        ShowAPad();
+            //        break;
+            //    default:
+            //        break;
+            //}
 
             _CatTree.Init();
 
@@ -208,7 +210,7 @@ namespace Me.Amon.Pwd
 
         public new bool Focus()
         {
-            return _PwdView.Focus();
+            return UcFind.Focus();
         }
 
         public bool CanExit()
@@ -1143,9 +1145,9 @@ namespace Me.Amon.Pwd
         {
             if (_WizView == null)
             {
-                _WizView = new AWiz();
+                _WizView = new WWiz(this, _UserModel, _SafeModel);
                 _WizView.Name = CPwd.PATTERN_WIZ;
-                _WizView.Init(this, _UserModel, _SafeModel, _DataModel, _ViewModel);
+                _WizView.Init(_DataModel, _ViewModel);
             }
 
             if (_PwdView != null)
@@ -1158,7 +1160,7 @@ namespace Me.Amon.Pwd
             }
 
             _PwdView = _WizView;
-            //_PwdView.InitView(ScData.Panel2);
+            _PwdView.InitView(ScData.Panel2);
             ShowKey(_SafeModel.Key);
 
             ItemGroup group = _XmlMenu.GetGroup("att-edit");
@@ -1196,6 +1198,24 @@ namespace Me.Amon.Pwd
 
         public void ShowInfo()
         {
+            if (_KeyInfo == null)
+            {
+                _KeyInfo = new KeyInfo(_SafeModel);
+                _KeyInfo.Name = CPwd.PATTERN_INF;
+                _KeyInfo.Init(_DataModel);
+            }
+
+            if (_PwdView != null)
+            {
+                if (_PwdView.Name == _KeyInfo.Name)
+                {
+                    return;
+                }
+                _PwdView.HideView(ScData.Panel2);
+            }
+
+            _PwdView = _KeyInfo;
+            _PwdView.InitView(ScData.Panel2);
         }
         #endregion
 
@@ -2079,16 +2099,18 @@ namespace Me.Amon.Pwd
             ScGuid.Panel1Collapsed = !_ViewModel.CatTreeVisible;
             ScGuid.SplitterDistance = _ViewModel.CatTreeHeight;
 
-            if (!_ViewModel.KeyListLocation)
+            if (_ViewModel.LayoutStyle == 1)
             {
                 ScGuid.Panel2Collapsed = !_ViewModel.KeyListVisible;
                 ScGuid.Panel2.Controls.Add(_KeyList.Control);
+                ScData.Panel1Collapsed = _ViewModel.KeyListVisible;
             }
             else
             {
                 ScData.Panel1Collapsed = !_ViewModel.KeyListVisible;
                 ScData.Panel1.Controls.Add(_KeyList.Control);
                 ScData.SplitterDistance = _ViewModel.CatTreeHeight;
+                ScGuid.Panel2Collapsed = _ViewModel.KeyListVisible;
             }
         }
 

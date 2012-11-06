@@ -11,7 +11,7 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
 {
     public partial class KeyGuid : UserControl, IKeyViewer
     {
-        private AWiz _AWiz;
+        private WWiz _AWiz;
         private UserModel _UserModel;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
@@ -22,7 +22,7 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
             InitializeComponent();
         }
 
-        public void Init(AWiz awiz, UserModel userModel, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
+        public void Init(WWiz awiz, UserModel userModel, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
         {
             _AWiz = awiz;
             _UserModel = userModel;

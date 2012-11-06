@@ -48,6 +48,9 @@ namespace Me.Amon.Pwd.V.Pro
 
             _CmpList = new Dictionary<int, IAttEditer>(Att.TYPE_SIZE + 2);
 
+            BtFill.Image = _ViewModel.GetImage("script-fill-16");
+            _WPwd.ShowTips(BtFill, "填充");
+
             BtSave.Image = _ViewModel.GetImage("att-save");
             _WPwd.ShowTips(BtSave, "保存属性");
 
@@ -381,28 +384,19 @@ namespace Me.Amon.Pwd.V.Pro
             ShowView(_AAtt);
         }
 
-        private void BtOpt1_Click(object sender, EventArgs e)
+        private void BtFill_Click(object sender, EventArgs e)
         {
-            if (_SafeModel.EditMode)
-            {
-                SaveAtt();
-            }
-            else
-            {
-                CopyAtt();
-            }
+            FillAtt();
         }
 
-        private void BtOpt2_Click(object sender, EventArgs e)
+        private void BtSave_Click(object sender, EventArgs e)
         {
-            if (_SafeModel.EditMode)
-            {
-                DropAtt();
-            }
-            else
-            {
-                FillAtt();
-            }
+            SaveAtt();
+        }
+
+        private void BtDrop_Click(object sender, EventArgs e)
+        {
+            DropAtt();
         }
         #endregion
 

@@ -96,41 +96,47 @@ namespace Me.Amon.Pwd.V.Pro
             this.BtDrop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtDrop.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.BtDrop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtDrop.Location = new System.Drawing.Point(354, 88);
+            this.BtDrop.Location = new System.Drawing.Point(352, 86);
+            this.BtDrop.Margin = new System.Windows.Forms.Padding(2);
             this.BtDrop.Name = "BtDrop";
-            this.BtDrop.Size = new System.Drawing.Size(16, 16);
+            this.BtDrop.Size = new System.Drawing.Size(19, 19);
             this.BtDrop.TabIndex = 2;
             this.BtDrop.UseVisualStyleBackColor = true;
+            this.BtDrop.Click += new System.EventHandler(this.BtDrop_Click);
             // 
             // BtSave
             // 
             this.BtSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtSave.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.BtSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtSave.Location = new System.Drawing.Point(354, 66);
+            this.BtSave.Location = new System.Drawing.Point(352, 63);
+            this.BtSave.Margin = new System.Windows.Forms.Padding(2);
             this.BtSave.Name = "BtSave";
-            this.BtSave.Size = new System.Drawing.Size(16, 16);
+            this.BtSave.Size = new System.Drawing.Size(19, 19);
             this.BtSave.TabIndex = 1;
             this.BtSave.UseVisualStyleBackColor = true;
+            this.BtSave.Click += new System.EventHandler(this.BtSave_Click);
             // 
             // BtFill
             // 
             this.BtFill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtFill.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.BtFill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtFill.Location = new System.Drawing.Point(354, 44);
+            this.BtFill.Location = new System.Drawing.Point(352, 40);
+            this.BtFill.Margin = new System.Windows.Forms.Padding(2);
             this.BtFill.Name = "BtFill";
-            this.BtFill.Size = new System.Drawing.Size(16, 16);
+            this.BtFill.Size = new System.Drawing.Size(19, 19);
             this.BtFill.TabIndex = 0;
             this.BtFill.UseVisualStyleBackColor = true;
+            this.BtFill.Click += new System.EventHandler(this.BtFill_Click);
             // 
-            // APro
+            // WPro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.GbGroup);
             this.Controls.Add(this.GvAttList);
-            this.Name = "APro";
+            this.Name = "WPro";
             this.Size = new System.Drawing.Size(382, 282);
             ((System.ComponentModel.ISupportInitialize)(this.GvAttList)).EndInit();
             this.GbGroup.ResumeLayout(false);

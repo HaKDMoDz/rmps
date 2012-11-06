@@ -5,7 +5,7 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
 {
     public partial class AttViewer : UserControl, IAttView
     {
-        private AWiz _AWiz;
+        private WWiz _AWiz;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
 
@@ -15,7 +15,7 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
             InitializeComponent();
         }
 
-        public void Init(AWiz aWiz, UserModel userModel, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
+        public void Init(WWiz aWiz, UserModel userModel, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
         {
             _AWiz = aWiz;
             _SafeModel = safeModel;

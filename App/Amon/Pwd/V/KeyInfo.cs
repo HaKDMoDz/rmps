@@ -4,10 +4,9 @@ using Me.Amon.Pwd.M;
 
 namespace Me.Amon.Pwd.V
 {
-    public partial class KeyInfo : UserControl
+    public partial class KeyInfo : UserControl, IPwd
     {
         private SafeModel _SafeModel;
-        private TableLayoutPanel _TlPanel;
 
         #region 构造函数
         public KeyInfo()
@@ -22,35 +21,86 @@ namespace Me.Amon.Pwd.V
             InitializeComponent();
         }
 
-        public void Init(TableLayoutPanel grid, DataModel dataModel)
+        public void Init(DataModel dataModel)
         {
-            _TlPanel = grid;
         }
         #endregion
 
         #region 接口实现
-        public void InitView()
+        public void InitView(Panel panel)
         {
-            _TlPanel.Controls.Add(this, 0, 0);
+            panel.Controls.Add(this);
             Dock = DockStyle.Fill;
             TabIndex = 0;
         }
 
-        public void HideView()
+        public void HideView(Panel panel)
         {
-            _TlPanel.Controls.Remove(this);
+            panel.Controls.Remove(this);
         }
 
         public void ShowData()
         {
-            _TlPanel.RowStyles[1].Height = 0;
         }
 
-        public void CopyData()
+        public void AppendKey()
         {
         }
 
-        public void FillData()
+        public bool UpdateKey()
+        {
+            return false;
+        }
+
+        public void DeleteKey()
+        {
+        }
+
+        public void AppendAtt(int type)
+        {
+        }
+
+        public void ChangeAtt(int type)
+        {
+        }
+
+        public void SelectPrev()
+        {
+        }
+
+        public void SelectNext()
+        {
+        }
+
+        public void MoveUp()
+        {
+        }
+
+        public void MoveDown()
+        {
+        }
+
+        public void CutAtt()
+        {
+        }
+
+        public void CopyAtt()
+        {
+        }
+
+        public void PasteAtt()
+        {
+        }
+
+        public void ClearAtt()
+        {
+        }
+
+        public void SaveAtt()
+        {
+        }
+
+        public void DropAtt()
         {
         }
         #endregion

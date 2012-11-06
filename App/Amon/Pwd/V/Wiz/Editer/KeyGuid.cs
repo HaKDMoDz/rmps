@@ -11,7 +11,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
 {
     public partial class KeyGuid : UserControl, IKeyEditer
     {
-        private AWiz _AWiz;
+        private WWiz _AWiz;
         private UserModel _UserModel;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
@@ -22,11 +22,17 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             InitializeComponent();
         }
 
-        public void Init(AWiz awiz, UserModel userModel, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
+        public KeyGuid(WWiz awiz, UserModel userModel, SafeModel safeModel)
         {
             _AWiz = awiz;
             _UserModel = userModel;
             _SafeModel = safeModel;
+
+            InitializeComponent();
+        }
+
+        public void Init(DataModel dataModel, ViewModel viewModel)
+        {
             _DataModel = dataModel;
 
             PbFill.Image = viewModel.GetImage("script-fill-24");
@@ -238,15 +244,15 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
         }
         #endregion
 
-
-        public void InitView()
+        public void InitView(Panel panel)
         {
-            throw new NotImplementedException();
+            panel.Controls.Add(this);
+            Dock = DockStyle.Fill;
         }
 
-        public void HideView()
+        public void HideView(Panel panel)
         {
-            throw new NotImplementedException();
+            panel.Controls.Remove(this);
         }
 
         public bool SaveData()
