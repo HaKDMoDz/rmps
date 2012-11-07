@@ -6,9 +6,11 @@ namespace Me.Amon.Open
 {
     public interface OAuthPcs
     {
-        Image Icon { get; set; }
+        string Name { get; set; }
 
         string Path { get; set; }
+
+        Image Icon { get; set; }
 
         /// <summary>
         /// 数据列表
