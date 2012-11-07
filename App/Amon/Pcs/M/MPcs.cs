@@ -6,16 +6,22 @@ namespace Me.Amon.Pcs.M
 {
     public class MPcs : Vcs
     {
-        public string Server;
+        public string ServerType;
 
-        public string Account;
+        public string ServerName;
 
-        public string DisplayName;
+        public string UserId;
+
+        public string UserName;
+
+        public string LogoId;
 
         [NonSerialized]
-        public string Logo;
+        public Image Logo;
 
-        public Image Icon;
+        public string Token;
+
+        public string TokenSecret;
 
         public override bool FromXml(System.Xml.XmlReader reader)
         {

@@ -28,13 +28,13 @@ namespace Me.Amon.Pcs.V
         public void Init()
         {
             MPcs mPcs = new MPcs();
-            mPcs.Server = CPcs.PCS_TYPE_NATIVE;
-            mPcs.DisplayName = "本地管理";
+            mPcs.ServerType = CPcs.PCS_TYPE_NATIVE;
+            mPcs.ServerName = "本地管理";
             LbItem.Items.Add(mPcs);
 
             mPcs = new MPcs();
-            mPcs.Server = CPcs.PCS_TYPE_KUAIPAN;
-            mPcs.DisplayName = "金山快盘";
+            mPcs.ServerType = CPcs.PCS_TYPE_KUAIPAN;
+            mPcs.ServerName = "金山快盘";
             LbItem.Items.Add(mPcs);
         }
 
@@ -58,10 +58,10 @@ namespace Me.Amon.Pcs.V
 
             //最后把要显示的文字画在背景图片上
             int y = e.Bounds.Y + 2;
-            e.Graphics.DrawString(key.Server, LbItem.Font, new SolidBrush(e.ForeColor), e.Bounds.X + 30, y);
+            e.Graphics.DrawString(key.ServerType, LbItem.Font, new SolidBrush(e.ForeColor), e.Bounds.X + 30, y);
 
             y = e.Bounds.Y + e.Bounds.Height;
-            e.Graphics.DrawString(key.Account, LbItem.Font, Brushes.Gray, e.Bounds.X + 30, y - 14);
+            e.Graphics.DrawString(key.UserName, LbItem.Font, Brushes.Gray, e.Bounds.X + 30, y - 14);
         }
 
         private void LbItem_SelectedIndexChanged(object sender, EventArgs e)

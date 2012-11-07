@@ -133,13 +133,13 @@ namespace Me.Amon.Pcs
         public void OpenPcs(MPcs mPcs)
         {
             switch
-                (mPcs.Server)
+                (mPcs.ServerType)
             {
                 case "native":
                     NewNative();
                     break;
                 case "kuaipan":
-                    NewKuaipan();
+                    NewKuaipan(mPcs);
                     break;
                 default:
                     break;
@@ -165,13 +165,20 @@ namespace Me.Amon.Pcs
             NativeIndex += 1;
         }
 
-        public void NewKuaipan()
+        private void NewKuaipan(MPcs mPcs)
         {
             OAuthConsumer consumer = new OAuthConsumer();
             consumer.consumer_key = "xcWPaz75PSRDOWBM";
             consumer.consumer_secret = "DU5ZYaCK0cRlsMTj";
+            OAuthToken token = new OAuthToken();
+            token.oauth_token = mPcs.Token;
+            token.oauth_token_secret = mPcs.TokenSecret;
+            token.UserId = mPcs.UserId;
             KuaipanClient client = new KuaipanClient(consumer);
-            client.Verify();
+            if (token.oauth_token.Length != 24 && token.oauth_token_secret.Length != 32)
+            {
+                client.Verify();
+            }
 
             TabPage ntp = new TabPage();
             ntp.Text = "Demo";
