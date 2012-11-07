@@ -110,16 +110,15 @@ namespace Me.Amon.Open.V1.App.Pcs
         #endregion
 
         #region 业务函数
-        public Image Icon
-        {
-            get;
-            set;
-        }
+        public string Name { get; set; }
 
-        public string Path
+        public string Root { get; set; }
+
+        public Image Icon { get; set; }
+
+        public string GetPath(string key)
         {
-            get;
-            set;
+            return key;
         }
 
         public List<CsMeta> ListMeta(CsMeta meta)
@@ -139,11 +138,6 @@ namespace Me.Amon.Open.V1.App.Pcs
 
             t = GetString(r);
             // Jason
-            return null;
-        }
-
-        public List<CsMeta> ListMeta(string key)
-        {
             return null;
         }
 
@@ -213,11 +207,11 @@ namespace Me.Amon.Open.V1.App.Pcs
             return true;
         }
 
-        public bool Moveto(string srcMeta, string dstMeta)
+        public bool Moveto(CsMeta meta, string dstMeta)
         {
             PrepareParams();
             AddParam("root", "kuaipan");
-            AddParam("from_path", srcMeta);
+            AddParam("from_path", meta.Path);
             AddParam("to_path", dstMeta);
             _Params.Sort(new NameValueComparer());
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.RequestTokenUrl)));
@@ -234,7 +228,7 @@ namespace Me.Amon.Open.V1.App.Pcs
             return true;
         }
 
-        public bool Copyto(string srcMeta, string dstMeta)
+        public bool Copyto(CsMeta meta, string dstMeta)
         {
             return true;
         }
@@ -280,6 +274,11 @@ namespace Me.Amon.Open.V1.App.Pcs
                 path += '/';
             }
             return path + meta;
+        }
+
+        public string Display(string path)
+        {
+            return "kuaipan://" + path;
         }
         #endregion
 

@@ -34,11 +34,11 @@
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.MbMenu = new System.Windows.Forms.MenuStrip();
             this.TcMain = new System.Windows.Forms.ToolStripContainer();
-            this.TbTool = new System.Windows.Forms.ToolStrip();
-            this.TtTips = new System.Windows.Forms.ToolTip(this.components);
             this.TcMeta = new System.Windows.Forms.ATabControl();
             this.TpDef = new System.Windows.Forms.TabPage();
-            this.metaUri1 = new Me.Amon.Pcs.V.MetaUri();
+            this.UcUri = new Me.Amon.Pcs.V.MetaUri();
+            this.TbTool = new System.Windows.Forms.ToolStrip();
+            this.TtTips = new System.Windows.Forms.ToolTip(this.components);
             this.SbEcho.SuspendLayout();
             this.TcMain.ContentPanel.SuspendLayout();
             this.TcMain.TopToolStripPanel.SuspendLayout();
@@ -85,7 +85,7 @@
             // TcMain.ContentPanel
             // 
             this.TcMain.ContentPanel.Controls.Add(this.TcMeta);
-            this.TcMain.ContentPanel.Controls.Add(this.metaUri1);
+            this.TcMain.ContentPanel.Controls.Add(this.UcUri);
             this.TcMain.ContentPanel.Size = new System.Drawing.Size(624, 371);
             this.TcMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TcMain.Location = new System.Drawing.Point(0, 24);
@@ -97,14 +97,6 @@
             // TcMain.TopToolStripPanel
             // 
             this.TcMain.TopToolStripPanel.Controls.Add(this.TbTool);
-            // 
-            // TbTool
-            // 
-            this.TbTool.Dock = System.Windows.Forms.DockStyle.None;
-            this.TbTool.Location = new System.Drawing.Point(3, 0);
-            this.TbTool.Name = "TbTool";
-            this.TbTool.Size = new System.Drawing.Size(111, 25);
-            this.TbTool.TabIndex = 0;
             // 
             // TcMeta
             // 
@@ -128,10 +120,10 @@
             this.TcMeta.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.TcMeta.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
             this.TcMeta.HotTrack = true;
-            this.TcMeta.Location = new System.Drawing.Point(12, 41);
+            this.TcMeta.Location = new System.Drawing.Point(3, 41);
             this.TcMeta.Name = "TcMeta";
             this.TcMeta.SelectedIndex = 0;
-            this.TcMeta.Size = new System.Drawing.Size(600, 327);
+            this.TcMeta.Size = new System.Drawing.Size(618, 327);
             this.TcMeta.TabIndex = 1;
             // 
             // TpDef
@@ -139,18 +131,27 @@
             this.TpDef.Location = new System.Drawing.Point(4, 23);
             this.TpDef.Name = "TpDef";
             this.TpDef.Padding = new System.Windows.Forms.Padding(3);
-            this.TpDef.Size = new System.Drawing.Size(592, 300);
+            this.TpDef.Size = new System.Drawing.Size(610, 300);
             this.TpDef.TabIndex = 0;
             this.TpDef.Text = "首页";
             this.TpDef.UseVisualStyleBackColor = true;
             // 
-            // metaUri1
+            // UcUri
             // 
-            this.metaUri1.Icon = null;
-            this.metaUri1.Location = new System.Drawing.Point(12, 3);
-            this.metaUri1.Name = "metaUri1";
-            this.metaUri1.Size = new System.Drawing.Size(600, 32);
-            this.metaUri1.TabIndex = 0;
+            this.UcUri.Icon = null;
+            this.UcUri.Location = new System.Drawing.Point(3, 3);
+            this.UcUri.Name = "UcUri";
+            this.UcUri.Path = "http://abc.com/";
+            this.UcUri.Size = new System.Drawing.Size(618, 32);
+            this.UcUri.TabIndex = 0;
+            // 
+            // TbTool
+            // 
+            this.TbTool.Dock = System.Windows.Forms.DockStyle.None;
+            this.TbTool.Location = new System.Drawing.Point(3, 0);
+            this.TbTool.Name = "TbTool";
+            this.TbTool.Size = new System.Drawing.Size(111, 25);
+            this.TbTool.TabIndex = 0;
             // 
             // WPcs
             // 
@@ -186,7 +187,7 @@
         private System.Windows.Forms.ToolStrip TbTool;
         private System.Windows.Forms.ATabControl TcMeta;
         private System.Windows.Forms.TabPage TpDef;
-        private V.MetaUri metaUri1;
+        private V.MetaUri UcUri;
         private System.Windows.Forms.ToolTip TtTips;
     }
 }
