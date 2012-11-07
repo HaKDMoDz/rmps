@@ -1,4 +1,4 @@
-﻿using System;
+ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -69,7 +69,7 @@ namespace Me.Amon.M
             }
 
             ResHome = SysHome;
-            DatHome = Path.Combine(SysHome, "Dat/A0000000");
+            DatHome = Path.Combine(SysHome, "Dat", "A0000000");
         }
 
         public virtual void Load()
