@@ -1,4 +1,4 @@
-﻿using System;
+ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -51,7 +51,7 @@ namespace Me.Amon.Pcs.M
         /// </summary>
         public bool IsDeleted { get; set; }
 
-        public Image Icon { get; set; }
+        public string Display { get; set; }
 
         public List<CsFile> Files { get; set; }
     }
