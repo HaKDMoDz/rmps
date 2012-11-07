@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Windows.Forms;
 using Me.Amon.M;
 using Me.Amon.Open;
@@ -16,7 +16,9 @@ namespace Me.Amon.Pcs
         private AUserModel _UserModel;
         private IViewModel _ViewModel;
         private XmlMenu<WPcs> _XmlMenu;
+        private PcsView _CurView;
 
+        #region 构造函数
         public WPcs()
         {
             InitializeComponent();
@@ -29,6 +31,7 @@ namespace Me.Amon.Pcs
 
             InitializeComponent();
         }
+        #endregion
 
         public void Init()
         {
@@ -38,11 +41,8 @@ namespace Me.Amon.Pcs
             {
                 _XmlMenu.GetMenuBar("WPcs", MbMenu);
                 _XmlMenu.GetToolBar("WPcs", TbTool);
-                ContextMenuStrip CmKey = new ContextMenuStrip();
-                _XmlMenu.GetPopMenu("WPcs", CmKey);
-                //_KeyList.PopupMenu = CmKey;
-
-                //_XmlMenu.GetPopMenu("WAtt", CmAtt);
+                PopupMenu = new ContextMenuStrip();
+                _XmlMenu.GetPopMenu("WPcs", PopupMenu);
                 _XmlMenu.GetStrokes("WPcs", this);
             }
             #endregion
@@ -83,47 +83,55 @@ namespace Me.Amon.Pcs
 
         public EPcs Operation { get; set; }
 
-        public void CutMeta()
+        public ContextMenuStrip PopupMenu { get; set; }
+
+        public void SetPasteEnabled()
         {
-            //if (_UcTab.SelectedPage != null)
-            //{
-            //    _UcTab.SelectedPage.CutMeta();
-            //}
+            var group = _XmlMenu.GetGroup("paste-meta-enabled");
+            if (group != null)
+            {
+                group.Enabled(SelectedMeta != null);
+            }
         }
 
-        public void CopyMeta()
+        public void SetEnabled(string name, bool enabled)
         {
-            //if (_UcTab.SelectedPage != null)
-            //{
-            //    _UcTab.SelectedPage.CopyMeta();
-            //}
+            var group = _XmlMenu.GetGroup(name);
+            if (group != null)
+            {
+                group.Enabled(enabled);
+            }
         }
 
-        public void PasteMeta()
+        public void SetVisible(string name, bool visible)
         {
-            //if (_UcTab.SelectedPage != null)
-            //{
-            //    _UcTab.SelectedPage.PasteMeta();
-            //}
+            var group = _XmlMenu.GetGroup(name);
+            if (group != null)
+            {
+                group.Visible(visible);
+            }
         }
-        #endregion
 
-        #region 私有函数
-        private void AddNative()
+        private int NativeIndex = 0;
+        public void NewNative()
         {
             var client = new NativeClient();
 
             TabPage ntp = new TabPage();
-            ntp.Text = "Demo";
+            ntp.Text = NativeIndex < 1 ? "本地" : string.Format("本地 ({0})", NativeIndex);
             TcMeta.TabPages.Add(ntp);
 
             var pcs = new PcsView(this, client);
-            pcs.Dock = DockStyle.Fill;
             pcs.Init();
+            pcs.MetaUri = UcUri;
+            pcs.Dock = DockStyle.Fill;
             ntp.Controls.Add(pcs);
+
+            TcMeta.SelectedTab = ntp;
+            NativeIndex += 1;
         }
 
-        private void AddKuaipan()
+        public void NewKuaipan()
         {
             OAuthConsumer consumer = new OAuthConsumer();
             consumer.consumer_key = "xcWPaz75PSRDOWBM";
@@ -136,10 +144,94 @@ namespace Me.Amon.Pcs
             TcMeta.TabPages.Add(ntp);
 
             var pcs = new PcsView(this, client);
-            pcs.Dock = DockStyle.Fill;
             pcs.Init();
+            pcs.MetaUri = UcUri;
+            pcs.Dock = DockStyle.Fill;
             ntp.Controls.Add(pcs);
         }
+
+        public void CutMeta()
+        {
+            if (TcMeta.SelectedTab == null)
+            {
+                return;
+            }
+            PcsView pcs = TcMeta.SelectedTab.Controls[0] as PcsView;
+            if (pcs == null)
+            {
+                return;
+            }
+            pcs.CutMeta();
+        }
+
+        public void CopyMeta()
+        {
+            if (_CurView != null)
+            {
+                _CurView.CopyMeta();
+            }
+        }
+
+        public void PasteMeta()
+        {
+            if (_CurView != null)
+            {
+                _CurView.PasteMeta();
+            }
+        }
+
+        public void DeleteMeta()
+        {
+            if (_CurView != null)
+            {
+                _CurView.DeleteMeta();
+            }
+        }
+
+        public void RenameMeta()
+        {
+            if (_CurView != null)
+            {
+                _CurView.RenameMeta();
+            }
+        }
+
+        public void AddFav()
+        {
+            if (_CurView != null)
+            {
+                _CurView.AddFav();
+            }
+        }
         #endregion
+
+        #region 私有函数
+        #endregion
+
+        private void TcMeta_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            bool isOk = TcMeta.SelectedIndex != 0;
+
+            var item = _XmlMenu.GetMenuItem("edit");
+            if (item != null)
+            {
+                item.Visible = isOk;
+            }
+
+            if (isOk)
+            {
+                var tab = TcMeta.SelectedTab;
+                _CurView = tab.Controls[0] as PcsView;
+                _CurView.ShowInfo();
+            }
+            else
+            {
+                UcUri.Text = "首页";
+                UcUri.Path = "pcs://首页";
+                UcUri.Icon = null;
+
+                _CurView = null;
+            }
+        }
     }
 }
