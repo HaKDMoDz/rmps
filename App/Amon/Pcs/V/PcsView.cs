@@ -1,5 +1,8 @@
-﻿using System.Drawing;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
+using Me.Amon.M;
 using Me.Amon.Open;
 using Me.Amon.Pcs.C;
 using Me.Amon.Pcs.M;
@@ -19,20 +22,25 @@ namespace Me.Amon.Pcs.V
         private static ImageList IlMetaLarge;
         private static ImageList IlMetaSmall;
         private PcEngine _PcEngine;
-        private Image _Unknown;
-        private Image _File;
+        private ADataModel _DataModel;
 
         #region 构造函数
         static PcsView()
         {
-            IlPath.ColorDepth = ColorDepth.Depth8Bit;
+            IlPath = new ImageList();
+            IlPath.ColorDepth = ColorDepth.Depth32Bit;
             IlPath.ImageSize = new Size(16, 16);
 
+            IlMetaLarge = new ImageList();
             IlMetaLarge.ColorDepth = ColorDepth.Depth32Bit;
             IlMetaLarge.ImageSize = new Size(48, 48);
 
+            IlMetaSmall = new ImageList();
             IlMetaSmall.ColorDepth = ColorDepth.Depth32Bit;
             IlMetaSmall.ImageSize = new Size(16, 16);
+
+            LoadIcon(@"D:\i1", IlPath);
+            LoadIcon(@"D:\i2", IlMetaLarge);
         }
 
         public PcsView()
@@ -46,59 +54,80 @@ namespace Me.Amon.Pcs.V
             _OPcs = oPcs;
 
             InitializeComponent();
-
-            TvPath.ImageList = IlPath;
-            LvMeta.LargeImageList = IlMetaLarge;
-            LvMeta.SmallImageList = IlMetaSmall;
         }
         #endregion
 
         public void Init()
         {
+            TvPath.ImageList = IlPath;
+            LvMeta.LargeImageList = IlMetaLarge;
+            LvMeta.SmallImageList = IlMetaSmall;
+
             _TnFav = new TreeNode();
             _TnFav.Text = "收藏";
-            _TnFav.Tag = "<favorites>";
+            _TnFav.ImageKey = "_fav";
+            _TnFav.Tag = new CsMeta { Path = CPcs.PATH_FAVORITES, Name = "收藏" };
             TvPath.Nodes.Add(_TnFav);
 
             _TnPub = new TreeNode();
             _TnPub.Text = "公共";
-            _TnPub.Tag = "<libraries>";
+            _TnPub.ImageKey = "_lib";
+            _TnPub.Tag = new CsMeta { Path = CPcs.PATH_LIBRARIES, Name = "公共" };
             TvPath.Nodes.Add(_TnPub);
 
             TreeNode node = new TreeNode();
             node.Text = "文档";
-            node.Tag = CPcs.PATH_DOCUMENTS;
+            node.ImageKey = "icon";
+            node.Tag = new CsMeta { Path = _OPcs.GetPath(CPcs.PATH_DOCUMENTS), Name = "文档" };
             _TnPub.Nodes.Add(node);
 
             node = new TreeNode();
             node.Text = "图片";
-            node.Tag = CPcs.PATH_PICTURES;
+            node.ImageKey = "icon";
+            node.Tag = new CsMeta { Path = _OPcs.GetPath(CPcs.PATH_PICTURES), Name = "图片" };
             _TnPub.Nodes.Add(node);
 
             node = new TreeNode();
             node.Text = "音乐";
-            node.Tag = CPcs.PATH_AUDIOS;
+            node.ImageKey = "icon";
+            node.Tag = new CsMeta { Path = _OPcs.GetPath(CPcs.PATH_AUDIOS), Name = "音乐" };
             _TnPub.Nodes.Add(node);
 
             node = new TreeNode();
             node.Text = "视频";
-            node.Tag = CPcs.PATH_VIDEOS;
+            node.ImageKey = "icon";
+            node.Tag = new CsMeta { Path = _OPcs.GetPath(CPcs.PATH_VIDEOS), Name = "视频" };
             _TnPub.Nodes.Add(node);
 
             _TnAll = new TreeNode();
             _TnAll.Text = "所有";
-            _TnAll.Tag = "<storage>";
+            _TnAll.ImageKey = "_all";
+            _TnAll.Tag = new CsMeta { Path = CPcs.PATH_STORAGE, Name = "所有" };
             TvPath.Nodes.Add(_TnAll);
 
             _TnSns = new TreeNode();
             _TnSns.Text = "分享";
-            _TnSns.Tag = CPcs.PATH_SHARES;
+            _TnSns.ImageKey = "_sns";
+            _TnSns.Tag = new CsMeta { Path = _OPcs.GetPath(CPcs.PATH_SHARES), Name = "分享" };
             TvPath.Nodes.Add(_TnSns);
 
             _TnBin = new TreeNode();
             _TnBin.Text = "回收站";
-            _TnBin.Tag = CPcs.PATH_RECYCLE;
+            _TnBin.ImageKey = "_bin";
+            _TnBin.Tag = new CsMeta { Path = _OPcs.GetPath(CPcs.PATH_RECYCLE), Name = "回收站" };
             TvPath.Nodes.Add(_TnBin);
+        }
+
+        public MetaUri MetaUri { get; set; }
+
+        public void ShowInfo()
+        {
+            if (MetaUri != null)
+            {
+                MetaUri.Text = _OPcs.Name;
+                MetaUri.Path = _OPcs.Display(_WPcs.SelectedMeta.Path);
+                MetaUri.Icon = _OPcs.Icon;
+            }
         }
 
         #region 公共函数
@@ -122,7 +151,7 @@ namespace Me.Amon.Pcs.V
                 return;
             }
 
-            LvMeta.Items.Remove(list[0]);
+            LvMeta.Items.Remove(item);
             _WPcs.SelectedMeta = meta;
             _WPcs.Operation = EPcs.Cut;
         }
@@ -157,67 +186,231 @@ namespace Me.Amon.Pcs.V
             {
                 CsMeta meta = _WPcs.SelectedMeta;
 
-                if (_OPcs.Parent(meta.Path) == _OPcs.Path)
+                if (_OPcs.Parent(meta.Path) != _OPcs.Root)
                 {
-                    return;
+                    string path = _OPcs.Combine(_OPcs.Root, meta.Name);
+                    _OPcs.Moveto(meta, _OPcs.Root);
                 }
 
-                string path = _OPcs.Combine(_OPcs.Path, meta.Name);
-                _OPcs.Moveto(meta.Path, path);
-                meta.Path = path;
-
-                var item = new ListViewItem();
-                item.Text = meta.Name;
-                item.ImageKey = GetIcon(meta.Name);
+                var item = GenItem(meta);
                 LvMeta.Items.Add(item);
                 item.Selected = true;
+
+                _WPcs.SelectedMeta = null;
                 return;
             }
             if (_WPcs.Operation == EPcs.Copy)
             {
                 CsMeta meta = _WPcs.SelectedMeta;
 
-                if (_OPcs.Parent(meta.Path) == _OPcs.Path)
+                if (_OPcs.Parent(meta.Path) == _OPcs.Root)
                 {
                     meta.Name = "复件 " + _WPcs.SelectedMeta.Name;
                 }
 
-                string path = _OPcs.Combine(_OPcs.Path, meta.Name);
-                _OPcs.Copyto(meta.Path, path);
+                string path = _OPcs.Combine(_OPcs.Root, meta.Name);
+                _OPcs.Copyto(meta, path);
                 meta.Path = path;
 
-                var item = new ListViewItem();
-                item.Text = meta.Name;
-                item.ImageKey = GetIcon(meta.Name);
+                var item = GenItem(meta);
                 LvMeta.Items.Add(item);
                 item.Selected = true;
                 return;
             }
         }
-        #endregion
 
-        private string GetIcon(string key)
+        public void DeleteMeta()
         {
-            if (string.IsNullOrEmpty(key) || !IlMetaLarge.Images.ContainsKey(key))
+            var list = LvMeta.SelectedItems;
+            if (list.Count < 1)
             {
-                return "";
+                return;
             }
 
-            int idx = 0;
-            string ext;
-            while (true)
+            var item = list[0] as ListViewItem;
+            if (item == null)
             {
-                idx = key.IndexOf('.', idx);
-                if (idx < 0)
+                return;
+            }
+
+            var meta = item.Tag as CsMeta;
+            if (meta == null)
+            {
+                return;
+            }
+
+            _OPcs.Delete(meta.Path);
+            LvMeta.Items.Remove(item);
+        }
+
+        public void RenameMeta()
+        {
+        }
+
+        public void AddFav()
+        {
+            _TnFav.Nodes.Add(GenNode(_WPcs.SelectedMeta));
+            //_DataModel.SaveVcs(null);
+        }
+        #endregion
+
+        #region 事件处理
+        private void TvPath_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            var node = TvPath.SelectedNode;
+            if (node == null)
+            {
+                return;
+            }
+
+            var meta = node.Tag as CsMeta;
+            if (meta == null)
+            {
+                return;
+            }
+
+            _WPcs.SelectedMeta = meta;
+            ShowInfo();
+
+            if (meta.Path[0] != '?')
+            {
+                node.Nodes.Clear();
+            }
+            if (!string.IsNullOrEmpty(meta.Path))
+            {
+                ShowMeta(_OPcs.ListMeta(meta), node);
+            }
+        }
+
+        private void LvMeta_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (LvMeta.SelectedItems.Count < 1)
+            {
+                return;
+            }
+            ListViewItem item = LvMeta.SelectedItems[0];
+            var meta = item.Tag as CsMeta;
+            if (meta == null)
+            {
+                return;
+            }
+            _WPcs.SelectedMeta = meta;
+        }
+
+        private void LvMeta_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Right)
+            {
+                return;
+            }
+
+            _WPcs.SetPasteEnabled();
+
+            var item = LvMeta.GetItemAt(e.X, e.Y);
+            if (item == null)
+            {
+                _WPcs.SetEnabled("item-edit-enabled", false);
+                _WPcs.SetVisible("item-edit-visible", false);
+                _WPcs.SetVisible("none-edit-visible", true);
+            }
+            else
+            {
+                _WPcs.SetEnabled("item-edit-enabled", true);
+                _WPcs.SetVisible("none-edit-visible", false);
+                _WPcs.SetVisible("item-edit-visible", true);
+            }
+            _WPcs.PopupMenu.Show(LvMeta, e.Location);
+        }
+
+        private void LvMeta_DoubleClick(object sender, System.EventArgs e)
+        {
+            var meta = _WPcs.SelectedMeta;
+            if (meta.Type == CPcs.META_TYPE_FOLDER)
+            {
+                ShowMeta(_OPcs.ListMeta(meta), TvPath.SelectedNode);
+            }
+        }
+        #endregion
+
+        #region 视图更新
+        private static void LoadIcon(string path, ImageList list)
+        {
+            Image img;
+            string ext;
+            foreach (string tmp in Directory.GetFiles(path, "*.png"))
+            {
+                ext = Path.GetFileNameWithoutExtension(tmp);
+                if (string.IsNullOrWhiteSpace(ext))
                 {
-                    return "file";
+                    continue;
                 }
-                ext = key.Substring(idx + 1);
-                if (IlMetaLarge.Images.ContainsKey(ext))
+                img = Image.FromFile(tmp);
+                list.Images.Add(ext, img);
+            }
+        }
+
+        private void ShowMeta(List<CsMeta> metas, TreeNode root)
+        {
+            LvMeta.Items.Clear();
+
+            foreach (CsMeta meta in metas)
+            {
+                LvMeta.Items.Add(GenItem(meta));
+                if (meta.Type == CPcs.META_TYPE_FOLDER)
                 {
-                    return ext;
+                    root.Nodes.Add(GenNode(meta));
                 }
             }
         }
+
+        private TreeNode GenNode(CsMeta meta)
+        {
+            var node = new TreeNode();
+            node.Text = meta.Name;
+            node.ImageKey = "folder";
+            node.Tag = meta;
+            return node;
+        }
+
+        private ListViewItem GenItem(CsMeta meta)
+        {
+            var item = new ListViewItem();
+            item.Text = meta.Name;
+            item.ImageKey = GetIcon(meta);
+            item.Tag = meta;
+            return item;
+        }
+
+        private string GetIcon(CsMeta meta)
+        {
+            if (meta == null || string.IsNullOrEmpty(meta.Name))
+            {
+                return "unknown";
+            }
+            if (meta.Type == CPcs.META_TYPE_FOLDER)
+            {
+                return "folder";
+            }
+            if (meta.Type == CPcs.META_TYPE_FILE)
+            {
+                int idx = 0;
+                string ext;
+                while (true)
+                {
+                    idx = meta.Name.IndexOf('.', idx);
+                    if (idx < 0)
+                    {
+                        return "file";
+                    }
+                    ext = meta.Name.Substring(++idx);
+                    if (IlMetaLarge.Images.ContainsKey(ext))
+                    {
+                        return ext;
+                    }
+                }
+            }
+            return "unknown";
+        }
+        #endregion
     }
 }
