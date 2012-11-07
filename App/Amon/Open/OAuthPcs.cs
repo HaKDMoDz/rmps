@@ -1,4 +1,4 @@
- using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Drawing;
 using Me.Amon.Pcs.M;
 
@@ -8,7 +8,7 @@ namespace Me.Amon.Open
     {
         string Name { get; set; }
 
-        string Path { get; set; }
+        string Root { get; set; }
 
         Image Icon { get; set; }
 
@@ -18,7 +18,7 @@ namespace Me.Amon.Open
         /// <param name="path"></param>
         List<CsMeta> ListMeta(CsMeta meta);
 
-        List<CsMeta> ListMeta(string key);
+        string GetPath(string key);
 
         /// <summary>
         /// 获取文件外链
@@ -34,9 +34,9 @@ namespace Me.Amon.Open
 
         bool Delete(string meta);
 
-        bool Moveto(CsMeta meta, string dstPath);
+        bool Moveto(CsMeta meta, string dstMeta);
 
-        bool Copyto(CsMeta meta, string dstPath);
+        bool Copyto(CsMeta meta, string dstMeta);
 
         void CopyRef(CsMeta meta);
 
