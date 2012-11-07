@@ -14,7 +14,9 @@ namespace Me.Amon.Open.PC
         #region 构造函数
         public NativeClient()
         {
-            Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            Name = "本地";
+            Root = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            Icon = Image.FromFile(@"D:\i1\Icon.png");
             _Server = new NativeServer();
         }
         #endregion
@@ -26,12 +28,12 @@ namespace Me.Amon.Open.PC
             set;
         }
 
-        public string Path
+        public string Root
         {
             get;
             set;
         }
-        
+
         public Image Icon
         {
             get;
@@ -40,14 +42,16 @@ namespace Me.Amon.Open.PC
 
         public List<CsMeta> ListMeta(CsMeta meta)
         {
+            string path = meta.Path;
+
             List<CsMeta> metas = new List<CsMeta>();
-            if (!Directory.Exists(meta.Path))
+            if (!Directory.Exists(path))
             {
                 return metas;
             }
 
             CsMeta temp;
-            foreach (string obj in Directory.GetDirectories(meta.Path))
+            foreach (string obj in Directory.GetDirectories(path))
             {
                 temp = new CsMeta();
                 temp.Path = obj;
@@ -58,7 +62,7 @@ namespace Me.Amon.Open.PC
                 metas.Add(temp);
             }
 
-            foreach (string obj in Directory.GetFiles(meta.Path))
+            foreach (string obj in Directory.GetFiles(path))
             {
                 temp = new CsMeta();
                 temp.Path = obj;
@@ -69,7 +73,6 @@ namespace Me.Amon.Open.PC
                 metas.Add(temp);
             }
 
-            Path = meta.Path;
             return metas;
         }
 
@@ -85,8 +88,10 @@ namespace Me.Amon.Open.PC
                     return Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
                 case CPcs.PATH_VIDEOS:
                     return Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+                case CPcs.PATH_RECYCLE:
+                    return @"C:\Recycled";
                 default:
-                    return null;
+                    return key;
             }
         }
 
@@ -117,7 +122,6 @@ namespace Me.Amon.Open.PC
                 metas.Add(temp);
             }
 
-            Path = path;
             return metas;
         }
 
@@ -214,7 +218,7 @@ namespace Me.Amon.Open.PC
 
         public string Display(string path)
         {
-            return "file:///" + path;
+            return "file:///" + path.Replace(Path.DirectorySeparatorChar, '/');
         }
         #endregion
     }
