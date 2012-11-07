@@ -228,6 +228,54 @@ namespace Me.Amon.Uc
         {
             return _Groups.ContainsKey(id) ? _Groups[id] : null;
         }
+
+        public void SetGroupEnabled(string id, bool enabled)
+        {
+            if (_Groups.ContainsKey(id))
+            {
+                _Groups[id].Enabled(enabled);
+            }
+        }
+
+        public void SetGroupVisible(string id, bool visible)
+        {
+            if (_Groups.ContainsKey(id))
+            {
+                _Groups[id].Visible(visible);
+            }
+        }
+
+        public void SetButtonEnabled(string id, bool enabled)
+        {
+            if (_ToolItems.ContainsKey(id))
+            {
+                _ToolItems[id].Enabled = enabled;
+            }
+        }
+
+        public void SetButtonVisible(string id, bool visible)
+        {
+            if (_ToolItems.ContainsKey(id))
+            {
+                _ToolItems[id].Visible = visible;
+            }
+        }
+
+        public void SetItemEnabled(string id, bool enabled)
+        {
+            if (_MenuItems.ContainsKey(id))
+            {
+                _MenuItems[id].Enabled = enabled;
+            }
+        }
+
+        public void SetItemVisible(string id, bool visible)
+        {
+            if (_MenuItems.ContainsKey(id))
+            {
+                _MenuItems[id].Visible = visible;
+            }
+        }
         #endregion
 
         #region 组件初始化
