@@ -20,13 +20,19 @@ namespace Me.Amon.Open.PC
         #endregion
 
         #region 接口实现
-        public Image Icon
+        public string Name
         {
             get;
             set;
         }
 
         public string Path
+        {
+            get;
+            set;
+        }
+        
+        public Image Icon
         {
             get;
             set;
@@ -204,6 +210,11 @@ namespace Me.Amon.Open.PC
         public string Combine(string path, string meta)
         {
             return System.IO.Path.Combine(path, meta);
+        }
+
+        public string Display(string path)
+        {
+            return "file:///" + path;
         }
         #endregion
     }
