@@ -49,5 +49,7 @@ namespace Me.Amon.Open
         string Parent(string path);
 
         string Combine(string path, string meta);
+
+        string Display(string path);
     }
 }
