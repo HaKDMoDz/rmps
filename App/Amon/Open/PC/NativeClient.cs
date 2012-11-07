@@ -9,11 +9,17 @@ namespace Me.Amon.Open.PC
 {
     public class NativeClient : OAuthPcs
     {
+        private NativeServer _Server;
+
+        #region 构造函数
         public NativeClient()
         {
             Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            _Server = new NativeServer();
         }
+        #endregion
 
+        #region 接口实现
         public Image Icon
         {
             get;
@@ -61,22 +67,52 @@ namespace Me.Amon.Open.PC
             return metas;
         }
 
-        public List<CsMeta> ListMeta(string key)
+        public string GetPath(string key)
         {
-            //switch (key)
-            //{
-            //    case NativeServer.PATH_DOCUMENTS:
-            //        return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            //    case NativeServer.PATH_AUDIOS:
-            //        return Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
-            //    case NativeServer.PATH_PICTURES:
-            //        return Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-            //    case NativeServer.PATH_VIDEOS:
-            //        return Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
-            //    default:
-            //        return "";
-            //}
-            return null;
+            switch (key)
+            {
+                case CPcs.PATH_DOCUMENTS:
+                    return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                case CPcs.PATH_AUDIOS:
+                    return Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+                case CPcs.PATH_PICTURES:
+                    return Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+                case CPcs.PATH_VIDEOS:
+                    return Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+                default:
+                    return null;
+            }
+        }
+
+        public List<CsMeta> ListMeta(string path)
+        {
+            List<CsMeta> metas = new List<CsMeta>();
+
+            CsMeta temp;
+            foreach (string obj in Directory.GetDirectories(path))
+            {
+                temp = new CsMeta();
+                temp.Path = obj;
+                temp.Type = CPcs.META_TYPE_FOLDER;
+                temp.Name = System.IO.Path.GetFileName(obj);
+                temp.CreateTime = Directory.GetCreationTime(obj);
+                temp.ModifyTime = Directory.GetLastWriteTime(obj);
+                metas.Add(temp);
+            }
+
+            foreach (string obj in Directory.GetFiles(path))
+            {
+                temp = new CsMeta();
+                temp.Path = obj;
+                temp.Type = CPcs.META_TYPE_FILE;
+                temp.Name = System.IO.Path.GetFileName(obj);
+                temp.CreateTime = File.GetCreationTime(obj);
+                temp.ModifyTime = File.GetLastWriteTime(obj);
+                metas.Add(temp);
+            }
+
+            Path = path;
+            return metas;
         }
 
         public string ShareMeta(CsMeta meta)
@@ -100,35 +136,39 @@ namespace Me.Amon.Open.PC
             return true;
         }
 
-        public bool Moveto(string srcMeta, string dstMeta)
+        public bool Moveto(CsMeta meta, string dstPath)
         {
-            string name = System.IO.Path.GetFileName(srcMeta);
-            string path = System.IO.Path.Combine(dstMeta, name);
+            string path = System.IO.Path.Combine(dstPath, meta.Name);
             if (System.IO.File.Exists(path))
             {
-                path = GenDupName(dstMeta, name);
+                path = GenDupName(meta, dstPath);
             }
-            File.Move(srcMeta, path);
+            File.Move(meta.Path, path);
+            meta.Path = path;
             return true;
         }
 
-        private string GenDupName(string path, string name)
+        private string GenDupName(CsMeta meta, string path)
         {
-            string fn = System.IO.Path.GetFileNameWithoutExtension(name);
-            string fe = System.IO.Path.GetExtension(name);
+            string fn = System.IO.Path.GetFileNameWithoutExtension(meta.Name);
+            string fe = System.IO.Path.GetExtension(meta.Name);
             int i = 0;
+            string name;
             string temp;
             do
             {
                 i += 1;
-                temp = System.IO.Path.Combine(path, fn + string.Format(" ({0})", i) + fe);
+                name = fn + string.Format(" ({0})", i) + fe;
+                temp = System.IO.Path.Combine(path, name);
             } while (System.IO.File.Exists(temp));
+
+            meta.Name = name;
             return temp;
         }
 
-        public bool Copyto(string srcMeta, string dstMeta)
+        public bool Copyto(CsMeta meta, string dstPath)
         {
-            File.Copy(srcMeta, dstMeta);
+            File.Copy(meta.Path, dstPath);
             return true;
         }
 
@@ -165,5 +205,6 @@ namespace Me.Amon.Open.PC
         {
             return System.IO.Path.Combine(path, meta);
         }
+        #endregion
     }
 }
