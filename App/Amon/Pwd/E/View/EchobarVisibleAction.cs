@@ -4,7 +4,7 @@ using Me.Amon.M;
 
 namespace Me.Amon.Pwd.E.View
 {
-    public class EchobarVisibleAction : WPwdAction
+    public class EchobarVisibleAction : APwdAction
     {
         public override void Add(ToolStripItem item, IViewModel viewModel)
         {

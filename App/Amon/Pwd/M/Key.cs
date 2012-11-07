@@ -16,96 +16,96 @@ namespace Me.Amon.Pwd.M
         /// <summary>
         /// 显示排序
         /// </summary>
-        public int Order { get; set; }
+        public int Order;
         /// <summary>
         /// 使用状态
         /// </summary>
-        public int Label { get; set; }
+        public int Label;
         [NonSerialized]
         public Image LabelIcon;
         /// <summary>
         /// 紧要程度
         /// </summary>
-        public int Major { get; set; }
+        public int Major;
         [NonSerialized]
         public Image MajorIcon;
         /// <summary>
         /// 所属类别
         /// </summary>
-        public string CatId { get; set; }
+        public string CatId;
         /// <summary>
         /// 注册日期
         /// </summary>
-        public string RegTime { get; set; }
+        public string RegTime;
         /// <summary>
         /// 模板索引
         /// </summary>
-        public string LibId { get; set; }
+        public string LibId;
         /// <summary>
         /// 口令标题
         /// </summary>
-        public string Title { get; set; }
+        public string Title;
         /// <summary>
         /// 关键搜索
         /// </summary>
-        public string MetaKey { get; set; }
+        public string MetaKey;
         /// <summary>
         /// 口令图标
         /// </summary>
-        public string IcoName { get; set; }
+        public string IcoName;
         /// <summary>
         /// 图标路径
         /// </summary>
-        public string IcoPath { get; set; }
+        public string IcoPath;
         /// <summary>
         /// 图标说明
         /// </summary>
-        public string IcoMemo { get; set; }
+        public string IcoMemo;
         [NonSerialized]
         public Image Icon;
         /// <summary>
         /// 提醒索引
         /// </summary>
-        public string GtdId { get; set; }
+        public string GtdId;
         /// <summary>
         /// 提醒备注
         /// </summary>
-        public string GtdMemo { get; set; }
-        public MGtd Gtd { get; set; }
+        public string GtdMemo;
+        public MGtd Gtd;
         [NonSerialized]
         public Image GtdIcon;
         /// <summary>
         /// 相关说明
         /// </summary>
-        public string Memo { get; set; }
+        public string Memo;
         /// <summary>
         /// 访问日期
         /// </summary>
-        public string AccessTime { get; set; }
+        public string AccessTime;
         /// <summary>
         /// 是否备份
         /// </summary>
-        public bool Backup { get; set; }
+        public bool Backup;
         /// <summary>
         /// 加密版本
         /// </summary>
-        public int CipherVer { get; set; }
+        public int CipherVer;
         /// <summary>
         /// 索性索引
         /// </summary>
-        public int AttIndex { get; set; }
+        public int AttIndex;
         /// <summary>
         /// 用户数据
         /// </summary>
-        public string Password { get; set; }
+        public string Password;
         /// <summary>
         /// 窗口对象
         /// </summary>
-        public string Window { get; set; }
+        public string Window;
         /// <summary>
         /// 执行脚本
         /// </summary>
-        public string Script { get; set; }
+        public string Script;
 
         /// <summary>
         /// 恢复默认值

@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E.Data
 {
-    public class FindAction : WPwdAction
+    public class FindAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

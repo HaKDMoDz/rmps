@@ -5,7 +5,7 @@ using Me.Amon.M;
 
 namespace Me.Amon.Pwd.E
 {
-    public abstract class WPwdAction : IAction<WPwd>
+    public abstract class APwdAction : IAction<WPwd>
     {
         protected List<ToolStripItem> _Items;
 

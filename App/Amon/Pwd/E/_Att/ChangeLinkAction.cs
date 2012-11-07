@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E._Att
 {
-    public class ChangeLinkAction : WPwdAction
+    public class ChangeLinkAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E._Key
 {
-    public class MovetoAction : WPwdAction
+    public class MovetoAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

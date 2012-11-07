@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Pwd.E._Cat
 {
-    public class ChangeIcoAction : WPwdAction
+    public class ChangeIcoAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

@@ -5,7 +5,7 @@ using Me.Amon.M;
 
 namespace Me.Amon.Img.E
 {
-    public abstract class WImgAction : IAction<WImg>
+    public abstract class AImgAction : IAction<WImg>
     {
         protected List<ToolStripItem> _Items;
 

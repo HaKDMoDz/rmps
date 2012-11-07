@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Pwd.E.View
 {
-    public class TopMostAction : WPwdAction
+    public class TopMostAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

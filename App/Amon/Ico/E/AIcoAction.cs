@@ -5,7 +5,7 @@ using Me.Amon.M;
 
 namespace Me.Amon.Ico.E
 {
-    public abstract class WIcoAction : IAction<WIco>
+    public abstract class AIcoAction : IAction<WIco>
     {
         protected List<ToolStripItem> _Items;
 

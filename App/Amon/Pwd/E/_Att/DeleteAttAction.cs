@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E._Att
 {
-    public class DeleteAttAction : WPwdAction
+    public class DeleteAttAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

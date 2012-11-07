@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E.Data
 {
-    public class RemoteBackupAction : WPwdAction
+    public class RemoteBackupAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

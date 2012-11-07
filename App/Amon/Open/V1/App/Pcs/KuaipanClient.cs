@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Text;
 using Me.Amon.Pcs.M;
+using Newtonsoft.Json;
 
 namespace Me.Amon.Open.V1.App.Pcs
 {
@@ -224,7 +225,8 @@ namespace Me.Amon.Open.V1.App.Pcs
             }
 
             t = GetString(r);
-            // Jason
+
+            JsonConvert.DeserializeObject<CsMeta>(t);
             return true;
         }
 

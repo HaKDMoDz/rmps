@@ -34,11 +34,11 @@
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.MbMenu = new System.Windows.Forms.MenuStrip();
             this.TcMain = new System.Windows.Forms.ToolStripContainer();
+            this.TbTool = new System.Windows.Forms.ToolStrip();
+            this.TtTips = new System.Windows.Forms.ToolTip(this.components);
             this.TcMeta = new System.Windows.Forms.ATabControl();
             this.TpDef = new System.Windows.Forms.TabPage();
             this.UcUri = new Me.Amon.Pcs.V.MetaUri();
-            this.TbTool = new System.Windows.Forms.ToolStrip();
-            this.TtTips = new System.Windows.Forms.ToolTip(this.components);
             this.SbEcho.SuspendLayout();
             this.TcMain.ContentPanel.SuspendLayout();
             this.TcMain.TopToolStripPanel.SuspendLayout();
@@ -98,8 +98,19 @@
             // 
             this.TcMain.TopToolStripPanel.Controls.Add(this.TbTool);
             // 
+            // TbTool
+            // 
+            this.TbTool.Dock = System.Windows.Forms.DockStyle.None;
+            this.TbTool.Location = new System.Drawing.Point(3, 0);
+            this.TbTool.Name = "TbTool";
+            this.TbTool.Size = new System.Drawing.Size(111, 25);
+            this.TbTool.TabIndex = 0;
+            // 
             // TcMeta
             // 
+            this.TcMeta.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.TcMeta.Controls.Add(this.TpDef);
             // 
             // 
@@ -120,10 +131,10 @@
             this.TcMeta.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.TcMeta.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
             this.TcMeta.HotTrack = true;
-            this.TcMeta.Location = new System.Drawing.Point(3, 41);
+            this.TcMeta.Location = new System.Drawing.Point(6, 41);
             this.TcMeta.Name = "TcMeta";
             this.TcMeta.SelectedIndex = 0;
-            this.TcMeta.Size = new System.Drawing.Size(618, 327);
+            this.TcMeta.Size = new System.Drawing.Size(612, 327);
             this.TcMeta.TabIndex = 1;
             // 
             // TpDef
@@ -131,27 +142,21 @@
             this.TpDef.Location = new System.Drawing.Point(4, 23);
             this.TpDef.Name = "TpDef";
             this.TpDef.Padding = new System.Windows.Forms.Padding(3);
-            this.TpDef.Size = new System.Drawing.Size(610, 300);
+            this.TpDef.Size = new System.Drawing.Size(604, 300);
             this.TpDef.TabIndex = 0;
             this.TpDef.Text = "首页";
             this.TpDef.UseVisualStyleBackColor = true;
             // 
             // UcUri
             // 
+            this.UcUri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.UcUri.Icon = null;
-            this.UcUri.Location = new System.Drawing.Point(3, 3);
+            this.UcUri.Location = new System.Drawing.Point(6, 3);
             this.UcUri.Name = "UcUri";
-            this.UcUri.Path = "http://abc.com/";
-            this.UcUri.Size = new System.Drawing.Size(618, 32);
+            this.UcUri.Path = "pcs://首页";
+            this.UcUri.Size = new System.Drawing.Size(612, 32);
             this.UcUri.TabIndex = 0;
-            // 
-            // TbTool
-            // 
-            this.TbTool.Dock = System.Windows.Forms.DockStyle.None;
-            this.TbTool.Location = new System.Drawing.Point(3, 0);
-            this.TbTool.Name = "TbTool";
-            this.TbTool.Size = new System.Drawing.Size(111, 25);
-            this.TbTool.TabIndex = 0;
             // 
             // WPcs
             // 
@@ -163,7 +168,8 @@
             this.Controls.Add(this.MbMenu);
             this.MainMenuStrip = this.MbMenu;
             this.Name = "WPcs";
-            this.Text = "WPcs";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "阿木云存储";
             this.SbEcho.ResumeLayout(false);
             this.SbEcho.PerformLayout();
             this.TcMain.ContentPanel.ResumeLayout(false);

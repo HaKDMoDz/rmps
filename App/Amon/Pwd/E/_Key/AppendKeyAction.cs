@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E._Key
 {
-    public class AppendKeyAction : WPwdAction
+    public class AppendKeyAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

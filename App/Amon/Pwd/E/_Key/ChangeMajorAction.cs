@@ -4,7 +4,7 @@ using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.E._Key
 {
-    public class ChangeMajorAction : WPwdAction
+    public class ChangeMajorAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E.User
 {
-    public class IcoEditAction : WPwdAction
+    public class IcoEditAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

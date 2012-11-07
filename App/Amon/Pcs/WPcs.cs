@@ -1,5 +1,8 @@
+using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using Me.Amon.Auth;
 using Me.Amon.M;
 using Me.Amon.Open;
 using Me.Amon.Open.PC;
@@ -30,6 +33,8 @@ namespace Me.Amon.Pcs
             _UserModel = userModel;
 
             InitializeComponent();
+
+            this.Icon = Me.Amon.Properties.Resources.Icon;
         }
         #endregion
 
@@ -196,11 +201,72 @@ namespace Me.Amon.Pcs
             }
         }
 
-        public void AddFav()
+        public void AddFav(string name)
         {
             if (_CurView != null)
             {
-                _CurView.AddFav();
+                _CurView.AddFav(name);
+            }
+        }
+
+        public void HideForm()
+        {
+            Visible = false;
+        }
+
+        public void LockForm()
+        {
+            new AuthLs(_UserModel, this).ShowDialog(this);
+        }
+
+        public void ExitForm()
+        {
+            _Main.ExitSystem();
+        }
+
+        #region 记录安全
+        public void PkeyEdit()
+        {
+            AuthAc authAc = new AuthAc(_UserModel);
+            authAc.InitOnce();
+            authAc.ShowView(EAuthAc.AuthPc);
+            authAc.ShowDialog(this);
+        }
+
+        public void LkeyEdit()
+        {
+            AuthAc authAc = new AuthAc(_UserModel);
+            authAc.InitOnce();
+            authAc.ShowView(EAuthAc.AuthLk);
+            authAc.ShowDialog(this);
+        }
+
+        public void SkeyEdit()
+        {
+            MessageBox.Show("安全口令功能尚在完善中，敬请期待！");
+        }
+        #endregion
+
+        /// <summary>
+        /// 关于
+        /// </summary>
+        public void ShowAbout()
+        {
+            Main.ShowAbout(this);
+        }
+
+        /// <summary>
+        /// 帮助
+        /// </summary>
+        public void ShowHelp()
+        {
+            try
+            {
+                Process.Start("http://amon.me/blog");
+            }
+            catch (Exception exp)
+            {
+                Main.ShowError(exp);
             }
         }
         #endregion

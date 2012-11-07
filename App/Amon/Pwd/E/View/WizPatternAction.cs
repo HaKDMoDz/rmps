@@ -5,7 +5,7 @@ using Me.Amon.Uc;
 
 namespace Me.Amon.Pwd.E.View
 {
-    public class WizPatternAction : WPwdAction
+    public class WizPatternAction : APwdAction
     {
         public override void Add(ToolStripItem item, IViewModel viewModel)
         {

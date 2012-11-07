@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E._Att
 {
-    public class ChangeFileAction : WPwdAction
+    public class ChangeFileAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

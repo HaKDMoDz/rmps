@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E._Att
 {
-    public class SelectPrevAction : WPwdAction
+    public class SelectPrevAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

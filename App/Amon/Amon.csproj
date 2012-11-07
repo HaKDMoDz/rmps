@@ -432,8 +432,35 @@
     <Compile Include="Pcs\CPcs.cs" />
     <Compile Include="Pcs\C\PcEngine.cs" />
     <Compile Include="Pcs\EPcs.cs" />
+    <Compile Include="Pcs\E\APcsAction.cs" />
+    <Compile Include="Pcs\E\Edit\CopyAction.cs" />
+    <Compile Include="Pcs\E\Edit\CutAction.cs" />
+    <Compile Include="Pcs\E\Edit\DeleteAction.cs" />
+    <Compile Include="Pcs\E\Edit\FavNewAction.cs" />
+    <Compile Include="Pcs\E\Edit\PasteAction.cs" />
+    <Compile Include="Pcs\E\Edit\RenameAction.cs" />
+    <Compile Include="Pcs\E\File\ExitAction.cs" />
+    <Compile Include="Pcs\E\File\HideAction.cs" />
+    <Compile Include="Pcs\E\File\KuaipanAction.cs" />
+    <Compile Include="Pcs\E\File\LockAction.cs" />
+    <Compile Include="Pcs\E\File\NativeAction.cs" />
+    <Compile Include="Pcs\E\Help\AboutAction.cs" />
+    <Compile Include="Pcs\E\Help\HelpAction.cs" />
+    <Compile Include="Pcs\E\Help\ProjectAction.cs" />
+    <Compile Include="Pcs\E\Help\ShortCutsAction.cs" />
+    <Compile Include="Pcs\E\Help\WebHostAction.cs" />
+    <Compile Include="Pcs\E\User\LkeyAction.cs" />
+    <Compile Include="Pcs\E\User\PkeyAction.cs" />
+    <Compile Include="Pcs\E\User\SkeyAction.cs" />
     <Compile Include="Pcs\M\CsFile.cs" />
     <Compile Include="Pcs\M\CsMeta.cs" />
+    <Compile Include="Pcs\M\DataModel.cs" />
+    <Compile Include="Pcs\V\FavMgr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pcs\V\FavMgr.Designer.cs">
+      <DependentUpon>FavMgr.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pcs\V\MetaUri.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1488,6 +1515,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Open\UI\Auth.resx">
       <DependentUpon>Auth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pcs\V\FavMgr.resx">
+      <DependentUpon>FavMgr.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pcs\V\MetaUri.resx">
       <DependentUpon>MetaUri.cs</DependentUpon>

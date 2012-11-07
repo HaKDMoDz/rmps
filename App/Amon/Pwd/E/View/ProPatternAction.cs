@@ -5,7 +5,7 @@ using Me.Amon.Uc;
 
 namespace Me.Amon.Pwd.E.View
 {
-    public class ProPatternAction : WPwdAction
+    public class ProPatternAction : APwdAction
     {
         public override void Add(ToolStripItem item, IViewModel viewModel)
         {

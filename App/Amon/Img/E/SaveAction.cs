@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Img.E
 {
-    public class SaveAction : WImgAction
+    public class SaveAction : AImgAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

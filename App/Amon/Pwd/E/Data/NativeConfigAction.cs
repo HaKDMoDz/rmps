@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Pwd.E.Data
 {
-    public class NativeConfigAction : WPwdAction
+    public class NativeConfigAction : APwdAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Img.E
 {
-    public class OpenAction : WImgAction
+    public class OpenAction : AImgAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

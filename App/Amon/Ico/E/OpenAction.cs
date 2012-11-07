@@ -2,7 +2,7 @@
 
 namespace Me.Amon.Ico.E
 {
-    public class OpenAction : WIcoAction
+    public class OpenAction : AIcoAction
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {

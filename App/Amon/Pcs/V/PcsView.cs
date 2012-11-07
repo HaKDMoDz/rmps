@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using Me.Amon.M;
 using Me.Amon.Open;
 using Me.Amon.Pcs.C;
 using Me.Amon.Pcs.M;
@@ -22,7 +21,7 @@ namespace Me.Amon.Pcs.V
         private static ImageList IlMetaLarge;
         private static ImageList IlMetaSmall;
         private PcEngine _PcEngine;
-        private ADataModel _DataModel;
+        private DataModel _DataModel;
 
         #region 构造函数
         static PcsView()
@@ -247,10 +246,17 @@ namespace Me.Amon.Pcs.V
         {
         }
 
-        public void AddFav()
+        public void AddFav(string name)
         {
-            _TnFav.Nodes.Add(GenNode(_WPcs.SelectedMeta));
-            //_DataModel.SaveVcs(null);
+            var meta = new CsMeta();
+            meta.Name = name;
+            meta.Path = _WPcs.SelectedMeta.Path;
+            meta.FileId = _WPcs.SelectedMeta.FileId;
+            meta.Type = _WPcs.SelectedMeta.Type;
+            meta.Rev = _WPcs.SelectedMeta.Rev;
+
+            _TnFav.Nodes.Add(GenNode(meta));
+            _DataModel.SaveMeta(meta);
         }
         #endregion
 
