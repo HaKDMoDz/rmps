@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+ using System.Collections.Generic;
 using System.Drawing;
 using Me.Amon.Pcs.M;
 
@@ -32,9 +32,9 @@ namespace Me.Amon.Open
 
         bool Delete(string meta);
 
-        bool Moveto(string srcMeta, string dstMeta);
+        bool Moveto(CsMeta meta, string dstPath);
 
-        bool Copyto(string srcMeta, string dstMeta);
+        bool Copyto(CsMeta meta, string dstPath);
 
         void CopyRef(CsMeta meta);
 
