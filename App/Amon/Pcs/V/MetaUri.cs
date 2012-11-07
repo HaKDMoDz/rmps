@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Me.Amon.Pcs.V
@@ -23,6 +17,18 @@ namespace Me.Amon.Pcs.V
 
         #region 公共属性
         public string Text
+        {
+            get
+            {
+                return LlUri.Text;
+            }
+            set
+            {
+                LlUri.Text = value;
+            }
+        }
+
+        public string Path
         {
             get
             {
