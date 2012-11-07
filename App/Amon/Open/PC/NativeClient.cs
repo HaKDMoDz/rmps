@@ -16,7 +16,7 @@ namespace Me.Amon.Open.PC
         {
             Name = "本地";
             Root = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            Icon = Image.FromFile(@"D:\i1\Icon.png");
+            Icon = Image.FromFile(@"D:\Temp\i1\Icon.png");
             _Server = new NativeServer();
         }
         #endregion
@@ -51,26 +51,38 @@ namespace Me.Amon.Open.PC
             }
 
             CsMeta temp;
-            foreach (string obj in Directory.GetDirectories(path))
+            try
             {
-                temp = new CsMeta();
-                temp.Path = obj;
-                temp.Type = CPcs.META_TYPE_FOLDER;
-                temp.Name = System.IO.Path.GetFileName(obj);
-                temp.CreateTime = Directory.GetCreationTime(obj);
-                temp.ModifyTime = Directory.GetLastWriteTime(obj);
-                metas.Add(temp);
+                foreach (string obj in Directory.GetDirectories(path))
+                {
+                    temp = new CsMeta();
+                    temp.Path = obj;
+                    temp.Type = CPcs.META_TYPE_FOLDER;
+                    temp.Name = System.IO.Path.GetFileName(obj);
+                    temp.CreateTime = Directory.GetCreationTime(obj);
+                    temp.ModifyTime = Directory.GetLastWriteTime(obj);
+                    metas.Add(temp);
+                }
+            }
+            catch (Exception)
+            {
             }
 
-            foreach (string obj in Directory.GetFiles(path))
+            try
             {
-                temp = new CsMeta();
-                temp.Path = obj;
-                temp.Type = CPcs.META_TYPE_FILE;
-                temp.Name = System.IO.Path.GetFileName(obj);
-                temp.CreateTime = File.GetCreationTime(obj);
-                temp.ModifyTime = File.GetLastWriteTime(obj);
-                metas.Add(temp);
+                foreach (string obj in Directory.GetFiles(path))
+                {
+                    temp = new CsMeta();
+                    temp.Path = obj;
+                    temp.Type = CPcs.META_TYPE_FILE;
+                    temp.Name = System.IO.Path.GetFileName(obj);
+                    temp.CreateTime = File.GetCreationTime(obj);
+                    temp.ModifyTime = File.GetLastWriteTime(obj);
+                    metas.Add(temp);
+                }
+            }
+            catch (Exception)
+            {
             }
 
             return metas;

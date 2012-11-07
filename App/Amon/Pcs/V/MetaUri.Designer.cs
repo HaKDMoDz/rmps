@@ -30,7 +30,8 @@
         {
             this.LlUri = new System.Windows.Forms.Label();
             this.TbUri = new System.Windows.Forms.TextBox();
-            this.BnUri = new System.Windows.Forms.Button();
+            this.PbUri = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.PbUri)).BeginInit();
             this.SuspendLayout();
             // 
             // LlUri
@@ -53,25 +54,26 @@
             this.TbUri.TabIndex = 1;
             this.TbUri.Text = "pcs://首页";
             // 
-            // BnUri
+            // PbUri
             // 
-            this.BnUri.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BnUri.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BnUri.Location = new System.Drawing.Point(388, 6);
-            this.BnUri.Name = "BnUri";
-            this.BnUri.Size = new System.Drawing.Size(20, 20);
-            this.BnUri.TabIndex = 2;
-            this.BnUri.UseVisualStyleBackColor = true;
+            this.PbUri.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.PbUri.Location = new System.Drawing.Point(388, 6);
+            this.PbUri.Name = "PbUri";
+            this.PbUri.Size = new System.Drawing.Size(20, 20);
+            this.PbUri.TabIndex = 2;
+            this.PbUri.TabStop = false;
+            this.PbUri.Click += new System.EventHandler(this.PbUri_Click);
             // 
             // MetaUri
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.BnUri);
+            this.Controls.Add(this.PbUri);
             this.Controls.Add(this.TbUri);
             this.Controls.Add(this.LlUri);
             this.Name = "MetaUri";
             this.Size = new System.Drawing.Size(411, 32);
+            ((System.ComponentModel.ISupportInitialize)(this.PbUri)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -81,6 +83,6 @@
 
         private System.Windows.Forms.Label LlUri;
         private System.Windows.Forms.TextBox TbUri;
-        private System.Windows.Forms.Button BnUri;
+        private System.Windows.Forms.PictureBox PbUri;
     }
 }

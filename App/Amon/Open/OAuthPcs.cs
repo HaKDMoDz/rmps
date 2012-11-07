@@ -6,10 +6,17 @@ namespace Me.Amon.Open
 {
     public interface OAuthPcs
     {
+        /// <summary>
+        /// 显示名称
+        /// </summary>
         string Name { get; set; }
-
+        /// <summary>
+        /// 相对目录
+        /// </summary>
         string Root { get; set; }
-
+        /// <summary>
+        /// 显示图标
+        /// </summary>
         Image Icon { get; set; }
 
         /// <summary>

@@ -17,9 +17,11 @@ namespace Me.Amon.Pcs
     {
         private Main _Main;
         private AUserModel _UserModel;
+        private DataModel _DataModel;
         private IViewModel _ViewModel;
         private XmlMenu<WPcs> _XmlMenu;
         private PcsView _CurView;
+        private TabPage _DefPage;
 
         #region 构造函数
         public WPcs()
@@ -51,6 +53,17 @@ namespace Me.Amon.Pcs
                 _XmlMenu.GetStrokes("WPcs", this);
             }
             #endregion
+
+            _DefPage = new TabPage();
+            _DefPage.Text = "首页";
+            //_DefPage.Location = new System.Drawing.Point(4, 23);
+            //_DefPage.Padding = new System.Windows.Forms.Padding(3);
+            //_DefPage.Size = new System.Drawing.Size(604, 300);
+            PcsList list = new PcsList(this, _DataModel);
+            list.Init();
+            list.Dock = DockStyle.Fill;
+            _DefPage.Controls.Add(list);
+            TcMeta.TabPages.Add(_DefPage);
         }
 
         #region 接口实现
@@ -114,6 +127,22 @@ namespace Me.Amon.Pcs
             if (group != null)
             {
                 group.Visible(visible);
+            }
+        }
+
+        public void OpenPcs(MPcs mPcs)
+        {
+            switch
+                (mPcs.Server)
+            {
+                case "native":
+                    NewNative();
+                    break;
+                case "kuaipan":
+                    NewKuaipan();
+                    break;
+                default:
+                    break;
             }
         }
 

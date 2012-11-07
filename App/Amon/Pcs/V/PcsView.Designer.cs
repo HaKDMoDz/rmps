@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.ScMain = new System.Windows.Forms.SplitContainer();
             this.ScView = new System.Windows.Forms.SplitContainer();
             this.TvPath = new System.Windows.Forms.TreeView();
@@ -46,8 +45,10 @@
             // 
             // ScMain
             // 
-            this.ScMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ScMain.Location = new System.Drawing.Point(0, 0);
+            this.ScMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ScMain.Location = new System.Drawing.Point(3, 3);
             this.ScMain.Name = "ScMain";
             this.ScMain.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -58,8 +59,8 @@
             // ScMain.Panel2
             // 
             this.ScMain.Panel2.Controls.Add(this.LbInfo);
-            this.ScMain.Size = new System.Drawing.Size(400, 300);
-            this.ScMain.SplitterDistance = 209;
+            this.ScMain.Size = new System.Drawing.Size(394, 294);
+            this.ScMain.SplitterDistance = 204;
             this.ScMain.TabIndex = 0;
             // 
             // ScView
@@ -75,28 +76,32 @@
             // ScView.Panel2
             // 
             this.ScView.Panel2.Controls.Add(this.LvMeta);
-            this.ScView.Size = new System.Drawing.Size(400, 209);
-            this.ScView.SplitterDistance = 133;
+            this.ScView.Size = new System.Drawing.Size(394, 204);
+            this.ScView.SplitterDistance = 131;
             this.ScView.TabIndex = 0;
             // 
             // TvPath
             // 
             this.TvPath.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TvPath.ImageIndex = 0;
             this.TvPath.Location = new System.Drawing.Point(0, 0);
             this.TvPath.Name = "TvPath";
-            this.TvPath.SelectedImageIndex = 0;
-            this.TvPath.Size = new System.Drawing.Size(133, 209);
+            this.TvPath.Size = new System.Drawing.Size(131, 204);
             this.TvPath.TabIndex = 0;
+            this.TvPath.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvPath_AfterSelect);
             // 
             // LvMeta
             // 
+            this.LvMeta.AllowDrop = true;
             this.LvMeta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LvMeta.Location = new System.Drawing.Point(0, 0);
             this.LvMeta.Name = "LvMeta";
-            this.LvMeta.Size = new System.Drawing.Size(263, 209);
+            this.LvMeta.Size = new System.Drawing.Size(259, 204);
             this.LvMeta.TabIndex = 0;
             this.LvMeta.UseCompatibleStateImageBehavior = false;
+            this.LvMeta.SelectedIndexChanged += new System.EventHandler(this.LvMeta_SelectedIndexChanged);
+            this.LvMeta.DragDrop += new System.Windows.Forms.DragEventHandler(this.LvMeta_DragDrop);
+            this.LvMeta.DragEnter += new System.Windows.Forms.DragEventHandler(this.LvMeta_DragEnter);
+            this.LvMeta.DoubleClick += new System.EventHandler(this.LvMeta_DoubleClick);
             // 
             // LbInfo
             // 
@@ -105,15 +110,15 @@
             this.LbInfo.ItemHeight = 12;
             this.LbInfo.Location = new System.Drawing.Point(0, 0);
             this.LbInfo.Name = "LbInfo";
-            this.LbInfo.Size = new System.Drawing.Size(400, 87);
+            this.LbInfo.Size = new System.Drawing.Size(394, 86);
             this.LbInfo.TabIndex = 0;
             // 
-            // TabPage
+            // PcsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.ScMain);
-            this.Name = "TabPage";
+            this.Name = "PcsView";
             this.Size = new System.Drawing.Size(400, 300);
             this.ScMain.Panel1.ResumeLayout(false);
             this.ScMain.Panel2.ResumeLayout(false);

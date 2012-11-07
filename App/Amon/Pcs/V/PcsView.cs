@@ -38,8 +38,8 @@ namespace Me.Amon.Pcs.V
             IlMetaSmall.ColorDepth = ColorDepth.Depth32Bit;
             IlMetaSmall.ImageSize = new Size(16, 16);
 
-            LoadIcon(@"D:\i1", IlPath);
-            LoadIcon(@"D:\i2", IlMetaLarge);
+            LoadIcon(@"D:\Temp\i1", IlPath);
+            LoadIcon(@"D:\Temp\i2", IlMetaLarge);
         }
 
         public PcsView()
@@ -335,6 +335,16 @@ namespace Me.Amon.Pcs.V
             {
                 ShowMeta(_OPcs.ListMeta(meta), TvPath.SelectedNode);
             }
+        }
+
+        private void LvMeta_DragEnter(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void LvMeta_DragDrop(object sender, DragEventArgs e)
+        {
+
         }
         #endregion
 

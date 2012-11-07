@@ -455,6 +455,7 @@
     <Compile Include="Pcs\M\CsFile.cs" />
     <Compile Include="Pcs\M\CsMeta.cs" />
     <Compile Include="Pcs\M\DataModel.cs" />
+    <Compile Include="Pcs\M\MPcs.cs" />
     <Compile Include="Pcs\V\FavMgr.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -466,6 +467,12 @@
     </Compile>
     <Compile Include="Pcs\V\MetaUri.Designer.cs">
       <DependentUpon>MetaUri.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pcs\V\PcsList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pcs\V\PcsList.Designer.cs">
+      <DependentUpon>PcsList.cs</DependentUpon>
     </Compile>
     <Compile Include="Pcs\V\PcsView.cs">
       <SubType>UserControl</SubType>
@@ -1521,6 +1528,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pcs\V\MetaUri.resx">
       <DependentUpon>MetaUri.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pcs\V\PcsList.resx">
+      <DependentUpon>PcsList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pcs\V\PcsView.resx">
       <DependentUpon>PcsView.cs</DependentUpon>

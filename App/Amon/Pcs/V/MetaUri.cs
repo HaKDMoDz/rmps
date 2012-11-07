@@ -44,13 +44,18 @@ namespace Me.Amon.Pcs.V
         {
             get
             {
-                return BnUri.Image;
+                return PbUri.Image;
             }
             set
             {
-                BnUri.Image = value;
+                PbUri.Image = value;
             }
         }
         #endregion
+
+        private void PbUri_Click(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
