@@ -19,11 +19,15 @@ namespace Me.Amon.Open
         /// </summary>
         Image Icon { get; set; }
 
+        OAuthPcsAccount Account();
+
         /// <summary>
         /// 数据列表
         /// </summary>
         /// <param name="path"></param>
         List<CsMeta> ListMeta(CsMeta meta);
+
+        List<CsMeta> ListMeta(string path);
 
         string GetPath(string key);
 
@@ -47,9 +51,13 @@ namespace Me.Amon.Open
 
         void CopyRef(CsMeta meta);
 
-        void Upload(string nativeFile, string remotePath);
+        bool BeginWrite(string remoteMeta);
+        int Write(byte[] buffer, int offset, int length);
+        bool EndWrite();
 
-        void Download(string remoteMeta, string nativePath);
+        bool BeginRead(string remoteMeta);
+        int Read(byte[] buffer, int offset, int length);
+        bool EndRead();
 
         void Thumbnail();
 

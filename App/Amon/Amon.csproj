@@ -392,13 +392,16 @@
     </Compile>
     <Compile Include="M\ADataModel.cs" />
     <Compile Include="Open\NameValueComparer.cs" />
+    <Compile Include="Open\OAuthAccount.cs" />
     <Compile Include="Open\OAuthClient.cs" />
     <Compile Include="Open\OAuthConsumer.cs" />
     <Compile Include="Open\OAuthPcs.cs" />
+    <Compile Include="Open\OAuthPcsAccount.cs" />
     <Compile Include="Open\OAuthSns.cs" />
     <Compile Include="Open\OAuthToken.cs" />
     <Compile Include="Open\OAuthUtility.cs" />
     <Compile Include="Open\OAuthVersion.cs" />
+    <Compile Include="Open\PC\NativeAccount.cs" />
     <Compile Include="Open\PC\NativeClient.cs" />
     <Compile Include="Open\PC\NativeServer.cs" />
     <Compile Include="Open\UI\Auth.cs">
@@ -409,6 +412,7 @@
     </Compile>
     <Compile Include="Open\V1\App\OAuthV1Client.cs" />
     <Compile Include="Open\V1\App\OAuthV1Server.cs" />
+    <Compile Include="Open\V1\App\Pcs\KuaipanAccount.cs" />
     <Compile Include="Open\V1\App\Pcs\KuaipanClient.cs" />
     <Compile Include="Open\V1\App\Pcs\KuaipanHttpStatus.cs" />
     <Compile Include="Open\V1\App\Pcs\KuaipanServer.cs" />
@@ -430,7 +434,7 @@
     <Compile Include="Open\V2\OAuthPhrases.cs" />
     <Compile Include="Open\V2\OAuthTokenV2.cs" />
     <Compile Include="Pcs\CPcs.cs" />
-    <Compile Include="Pcs\C\PcEngine.cs" />
+    <Compile Include="Pcs\C\NddEngine.cs" />
     <Compile Include="Pcs\EPcs.cs" />
     <Compile Include="Pcs\E\APcsAction.cs" />
     <Compile Include="Pcs\E\Edit\CopyAction.cs" />
@@ -455,7 +459,9 @@
     <Compile Include="Pcs\M\CsFile.cs" />
     <Compile Include="Pcs\M\CsMeta.cs" />
     <Compile Include="Pcs\M\DataModel.cs" />
+    <Compile Include="Pcs\M\KuaipanMeta.cs" />
     <Compile Include="Pcs\M\MPcs.cs" />
+    <Compile Include="Pcs\M\NativeMeta.cs" />
     <Compile Include="Pcs\V\FavMgr.cs">
       <SubType>Form</SubType>
     </Compile>

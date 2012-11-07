@@ -17,5 +17,8 @@ namespace Me.Amon.Pcs
         public const string PATH_RECYCLE = "?recycle";
 
         public const string XML_MENU = "WPcs.xml";
+
+        public const string PCS_TYPE_NATIVE = "native";
+        public const string PCS_TYPE_KUAIPAN = "kuaipan";
     }
 }

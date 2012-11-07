@@ -28,8 +28,13 @@ namespace Me.Amon.Pcs.V
         public void Init()
         {
             MPcs mPcs = new MPcs();
-            mPcs.Server = "native";
+            mPcs.Server = CPcs.PCS_TYPE_NATIVE;
             mPcs.DisplayName = "本地管理";
+            LbItem.Items.Add(mPcs);
+
+            mPcs = new MPcs();
+            mPcs.Server = CPcs.PCS_TYPE_KUAIPAN;
+            mPcs.DisplayName = "金山快盘";
             LbItem.Items.Add(mPcs);
         }
 

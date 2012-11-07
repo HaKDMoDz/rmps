@@ -40,52 +40,9 @@ namespace Me.Amon.Open.PC
             set;
         }
 
-        public List<CsMeta> ListMeta(CsMeta meta)
+        public OAuthPcsAccount Account()
         {
-            string path = meta.Path;
-
-            List<CsMeta> metas = new List<CsMeta>();
-            if (!Directory.Exists(path))
-            {
-                return metas;
-            }
-
-            CsMeta temp;
-            try
-            {
-                foreach (string obj in Directory.GetDirectories(path))
-                {
-                    temp = new CsMeta();
-                    temp.Path = obj;
-                    temp.Type = CPcs.META_TYPE_FOLDER;
-                    temp.Name = System.IO.Path.GetFileName(obj);
-                    temp.CreateTime = Directory.GetCreationTime(obj);
-                    temp.ModifyTime = Directory.GetLastWriteTime(obj);
-                    metas.Add(temp);
-                }
-            }
-            catch (Exception)
-            {
-            }
-
-            try
-            {
-                foreach (string obj in Directory.GetFiles(path))
-                {
-                    temp = new CsMeta();
-                    temp.Path = obj;
-                    temp.Type = CPcs.META_TYPE_FILE;
-                    temp.Name = System.IO.Path.GetFileName(obj);
-                    temp.CreateTime = File.GetCreationTime(obj);
-                    temp.ModifyTime = File.GetLastWriteTime(obj);
-                    metas.Add(temp);
-                }
-            }
-            catch (Exception)
-            {
-            }
-
-            return metas;
+            return new NativeAccount();
         }
 
         public string GetPath(string key)
@@ -107,31 +64,53 @@ namespace Me.Amon.Open.PC
             }
         }
 
+        public List<CsMeta> ListMeta(CsMeta meta)
+        {
+            return ListMeta(meta.Path);
+        }
+
         public List<CsMeta> ListMeta(string path)
         {
             List<CsMeta> metas = new List<CsMeta>();
 
-            CsMeta temp;
-            foreach (string obj in Directory.GetDirectories(path))
+            if (!Directory.Exists(path))
             {
-                temp = new CsMeta();
-                temp.Path = obj;
-                temp.Type = CPcs.META_TYPE_FOLDER;
-                temp.Name = System.IO.Path.GetFileName(obj);
-                temp.CreateTime = Directory.GetCreationTime(obj);
-                temp.ModifyTime = Directory.GetLastWriteTime(obj);
-                metas.Add(temp);
+                return metas;
             }
 
-            foreach (string obj in Directory.GetFiles(path))
+            CsMeta temp;
+            try
             {
-                temp = new CsMeta();
-                temp.Path = obj;
-                temp.Type = CPcs.META_TYPE_FILE;
-                temp.Name = System.IO.Path.GetFileName(obj);
-                temp.CreateTime = File.GetCreationTime(obj);
-                temp.ModifyTime = File.GetLastWriteTime(obj);
-                metas.Add(temp);
+                foreach (string obj in Directory.GetDirectories(path))
+                {
+                    temp = new NativeMeta();
+                    temp.Path = obj;
+                    temp.Type = CPcs.META_TYPE_FOLDER;
+                    temp.Name = System.IO.Path.GetFileName(obj);
+                    temp.CreateTime = Directory.GetCreationTime(obj);
+                    temp.ModifyTime = Directory.GetLastWriteTime(obj);
+                    metas.Add(temp);
+                }
+            }
+            catch (Exception)
+            {
+            }
+
+            try
+            {
+                foreach (string obj in Directory.GetFiles(path))
+                {
+                    temp = new NativeMeta();
+                    temp.Path = obj;
+                    temp.Type = CPcs.META_TYPE_FILE;
+                    temp.Name = System.IO.Path.GetFileName(obj);
+                    temp.CreateTime = File.GetCreationTime(obj);
+                    temp.ModifyTime = File.GetLastWriteTime(obj);
+                    metas.Add(temp);
+                }
+            }
+            catch (Exception)
+            {
             }
 
             return metas;
@@ -198,20 +177,34 @@ namespace Me.Amon.Open.PC
         {
         }
 
-        public void Upload(string nativeFile, string remotePath)
+        public bool BeginWrite(string remoteMeta)
         {
+            return true;
         }
 
-        public void Download(string remoteMeta, string nativePath)
+        public int Write(byte[] buffer, int offset, int length)
         {
-            if (!File.Exists(remoteMeta))
-            {
-                return;
-            }
-            if (!Directory.Exists(nativePath))
-            {
-                Directory.CreateDirectory(nativePath);
-            }
+            return 0;
+        }
+
+        public bool EndWrite()
+        {
+            return true;
+        }
+
+        public bool BeginRead(string meta)
+        {
+            return true;
+        }
+
+        public int Read(byte[] buffer, int offset, int length)
+        {
+            return 0;
+        }
+
+        public bool EndRead()
+        {
+            return true;
         }
 
         public void Thumbnail()

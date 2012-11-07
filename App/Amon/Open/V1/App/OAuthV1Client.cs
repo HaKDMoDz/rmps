@@ -12,7 +12,7 @@ namespace Me.Amon.Open.V1.App
         protected List<KeyValuePair<string, string>> _Params;
 
         public OAuthConsumer Consumer { get; private set; }
-        public OAuthTokenV1 Token { get; private set; }
+        public OAuthTokenV1 Token { get; protected set; }
         public string HttpMethod { get; private set; }
         #endregion
 
@@ -33,7 +33,6 @@ namespace Me.Amon.Open.V1.App
             RequestToken();
             Authorize();
             AccessToken();
-            AccountInfo();
             return true;
         }
         #endregion
@@ -56,8 +55,6 @@ namespace Me.Amon.Open.V1.App
         protected abstract bool Authorize();
 
         protected abstract bool AccessToken();
-
-        protected abstract bool AccountInfo();
         #endregion
 
         #region 私有函数

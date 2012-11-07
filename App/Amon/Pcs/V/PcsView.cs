@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using Me.Amon.M;
 using Me.Amon.Open;
 using Me.Amon.Pcs.C;
 using Me.Amon.Pcs.M;
@@ -20,7 +21,7 @@ namespace Me.Amon.Pcs.V
         private static ImageList IlPath;
         private static ImageList IlMetaLarge;
         private static ImageList IlMetaSmall;
-        private PcEngine _PcEngine;
+        private NddEngine _PcEngine;
         private DataModel _DataModel;
 
         #region 构造函数
@@ -65,56 +66,58 @@ namespace Me.Amon.Pcs.V
             _TnFav = new TreeNode();
             _TnFav.Text = "收藏";
             _TnFav.ImageKey = "_fav";
-            _TnFav.Tag = new CsMeta { Path = CPcs.PATH_FAVORITES, Name = "收藏" };
+            _TnFav.Tag = new Cat { Meta = CPcs.PATH_FAVORITES, Text = "收藏" };
             TvPath.Nodes.Add(_TnFav);
 
             _TnPub = new TreeNode();
             _TnPub.Text = "公共";
             _TnPub.ImageKey = "_lib";
-            _TnPub.Tag = new CsMeta { Path = CPcs.PATH_LIBRARIES, Name = "公共" };
+            _TnPub.Tag = new Cat { Meta = CPcs.PATH_LIBRARIES, Text = "公共" };
             TvPath.Nodes.Add(_TnPub);
 
             TreeNode node = new TreeNode();
             node.Text = "文档";
             node.ImageKey = "icon";
-            node.Tag = new CsMeta { Path = _OPcs.GetPath(CPcs.PATH_DOCUMENTS), Name = "文档" };
+            node.Tag = new Cat { Meta = _OPcs.GetPath(CPcs.PATH_DOCUMENTS), Text = "文档" };
             _TnPub.Nodes.Add(node);
 
             node = new TreeNode();
             node.Text = "图片";
             node.ImageKey = "icon";
-            node.Tag = new CsMeta { Path = _OPcs.GetPath(CPcs.PATH_PICTURES), Name = "图片" };
+            node.Tag = new Cat { Meta = _OPcs.GetPath(CPcs.PATH_PICTURES), Text = "图片" };
             _TnPub.Nodes.Add(node);
 
             node = new TreeNode();
             node.Text = "音乐";
             node.ImageKey = "icon";
-            node.Tag = new CsMeta { Path = _OPcs.GetPath(CPcs.PATH_AUDIOS), Name = "音乐" };
+            node.Tag = new Cat { Meta = _OPcs.GetPath(CPcs.PATH_AUDIOS), Text = "音乐" };
             _TnPub.Nodes.Add(node);
 
             node = new TreeNode();
             node.Text = "视频";
             node.ImageKey = "icon";
-            node.Tag = new CsMeta { Path = _OPcs.GetPath(CPcs.PATH_VIDEOS), Name = "视频" };
+            node.Tag = new Cat { Meta = _OPcs.GetPath(CPcs.PATH_VIDEOS), Text = "视频" };
             _TnPub.Nodes.Add(node);
 
             _TnAll = new TreeNode();
             _TnAll.Text = "所有";
             _TnAll.ImageKey = "_all";
-            _TnAll.Tag = new CsMeta { Path = CPcs.PATH_STORAGE, Name = "所有" };
+            _TnAll.Tag = new Cat { Meta = CPcs.PATH_STORAGE, Text = "所有" };
             TvPath.Nodes.Add(_TnAll);
 
             _TnSns = new TreeNode();
             _TnSns.Text = "分享";
             _TnSns.ImageKey = "_sns";
-            _TnSns.Tag = new CsMeta { Path = _OPcs.GetPath(CPcs.PATH_SHARES), Name = "分享" };
+            _TnSns.Tag = new Cat { Meta = _OPcs.GetPath(CPcs.PATH_SHARES), Text = "分享" };
             TvPath.Nodes.Add(_TnSns);
 
             _TnBin = new TreeNode();
             _TnBin.Text = "回收站";
             _TnBin.ImageKey = "_bin";
-            _TnBin.Tag = new CsMeta { Path = _OPcs.GetPath(CPcs.PATH_RECYCLE), Name = "回收站" };
+            _TnBin.Tag = new Cat { Meta = _OPcs.GetPath(CPcs.PATH_RECYCLE), Text = "回收站" };
             TvPath.Nodes.Add(_TnBin);
+
+            OAuthPcsAccount account = _OPcs.Account();
         }
 
         public MetaUri MetaUri { get; set; }
@@ -248,15 +251,15 @@ namespace Me.Amon.Pcs.V
 
         public void AddFav(string name)
         {
-            var meta = new CsMeta();
-            meta.Name = name;
-            meta.Path = _WPcs.SelectedMeta.Path;
-            meta.FileId = _WPcs.SelectedMeta.FileId;
-            meta.Type = _WPcs.SelectedMeta.Type;
-            meta.Rev = _WPcs.SelectedMeta.Rev;
+            //var meta = new Cat();
+            //meta.Text = name;
+            //meta.Meta = _WPcs.SelectedMeta.Path;
+            //meta.FileId = _WPcs.SelectedMeta.FileId;
+            //meta.Type = _WPcs.SelectedMeta.Type;
+            //meta.Rev = _WPcs.SelectedMeta.Rev;
 
-            _TnFav.Nodes.Add(GenNode(meta));
-            _DataModel.SaveMeta(meta);
+            //_TnFav.Nodes.Add(GenNode(meta));
+            //_DataModel.SaveMeta(meta);
         }
         #endregion
 
@@ -269,22 +272,21 @@ namespace Me.Amon.Pcs.V
                 return;
             }
 
-            var meta = node.Tag as CsMeta;
-            if (meta == null)
+            var cat = node.Tag as Cat;
+            if (cat == null)
             {
                 return;
             }
 
-            _WPcs.SelectedMeta = meta;
             ShowInfo();
 
-            if (meta.Path[0] != '?')
+            if (cat.Meta[0] != '?')
             {
                 node.Nodes.Clear();
             }
-            if (!string.IsNullOrEmpty(meta.Path))
+            if (!string.IsNullOrEmpty(cat.Meta))
             {
-                ShowMeta(_OPcs.ListMeta(meta), node);
+                ShowMeta(_OPcs.ListMeta(cat.Meta), node);
             }
         }
 
@@ -428,5 +430,22 @@ namespace Me.Amon.Pcs.V
             return "unknown";
         }
         #endregion
+
+        private void StartDownload()
+        {
+            _OPcs.BeginRead("");
+            byte[] buffer = new byte[1024];
+            int length;
+            while (true)
+            {
+                length = _OPcs.Read(buffer, 0, buffer.Length);
+                if (length < 1)
+                {
+                    break;
+                }
+                _PcEngine.Write(buffer, 0, length);
+            }
+            _OPcs.EndRead();
+        }
     }
 }

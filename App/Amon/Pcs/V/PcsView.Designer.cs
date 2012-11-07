@@ -107,6 +107,7 @@
             // 
             this.LbInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LbInfo.FormattingEnabled = true;
+            this.LbInfo.IntegralHeight = false;
             this.LbInfo.ItemHeight = 12;
             this.LbInfo.Location = new System.Drawing.Point(0, 0);
             this.LbInfo.Name = "LbInfo";

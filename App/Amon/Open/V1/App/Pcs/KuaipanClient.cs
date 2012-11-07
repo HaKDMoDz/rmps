@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
+using System.Windows.Forms;
 using Me.Amon.Pcs.M;
 using Newtonsoft.Json;
 
@@ -31,12 +32,21 @@ namespace Me.Amon.Open.V1.App.Pcs
             }
 
             t = GetString(r);
-            // Jason
+            Token = JsonConvert.DeserializeObject<OAuthTokenV1>(t);
+            ResetParams();
+
             return true;
         }
 
         protected override bool Authorize()
         {
+            string url = string.Format(_Server.VerifierUrl, Token.oauth_token);
+            UI.Auth auth = new UI.Auth(url);
+            if (DialogResult.OK != auth.ShowDialog())
+            {
+                return false;
+            }
+            //Token.oauth_token = auth.Token;
             return true;
         }
 
@@ -49,7 +59,7 @@ namespace Me.Amon.Open.V1.App.Pcs
             }
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
             _Params.Sort(new NameValueComparer());
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.RequestTokenUrl)));
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.AccessTokenUrl)));
 
             string t = GenBaseParams();
             byte[] r = _Server.Get(_Server.AccessTokenUrl, t);
@@ -59,26 +69,9 @@ namespace Me.Amon.Open.V1.App.Pcs
             }
 
             t = GetString(r);
-            // Jason
-            return true;
-        }
+            Token = JsonConvert.DeserializeObject<OAuthTokenV1>(t);
+            ResetParams();
 
-        protected override bool AccountInfo()
-        {
-            PrepareParams();
-            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
-            _Params.Sort(new NameValueComparer());
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.RequestTokenUrl)));
-
-            string t = GenBaseParams();
-            byte[] r = _Server.Get(_Server.ProfileUrl, t);
-            if (r == null || r.Length < 1)
-            {
-                return false;
-            }
-
-            t = GetString(r);
-            // Jason
             return true;
         }
         #endregion
@@ -117,6 +110,27 @@ namespace Me.Amon.Open.V1.App.Pcs
 
         public Image Icon { get; set; }
 
+        public OAuthPcsAccount Account()
+        {
+            PrepareParams();
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+            _Params.Sort(new NameValueComparer());
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.ProfileUrl)));
+
+            string t = GenBaseParams();
+            byte[] r = _Server.Get(_Server.ProfileUrl, t);
+            if (r == null || r.Length < 1)
+            {
+                return null;
+            }
+
+            t = GetString(r);
+            var a = JsonConvert.DeserializeObject<KuaipanAccount>(t);
+            ResetParams();
+
+            return a;
+        }
+
         public string GetPath(string key)
         {
             return key;
@@ -125,21 +139,24 @@ namespace Me.Amon.Open.V1.App.Pcs
         public List<CsMeta> ListMeta(CsMeta meta)
         {
             string url = string.Format(KuaipanServer.LIST_META, meta.Path);
+            return ListMeta(url);
+        }
 
+        public List<CsMeta> ListMeta(string path)
+        {
             PrepareParams();
             _Params.Sort(new NameValueComparer());
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.RequestTokenUrl)));
 
             string t = GenBaseParams();
-            byte[] r = _Server.Get(url, t);
+            byte[] r = _Server.Get(path, t);
             if (r == null || r.Length < 1)
             {
                 return null;
             }
 
             t = GetString(r);
-            // Jason
-            return null;
+            return JsonConvert.DeserializeObject<List<CsMeta>>(t);
         }
 
         public string ShareMeta(CsMeta meta)
@@ -239,14 +256,34 @@ namespace Me.Amon.Open.V1.App.Pcs
         {
         }
 
-        public void Upload(string nativeFile, string remotePath)
+        public bool BeginWrite(string remoteMeta)
         {
-            throw new System.NotImplementedException();
+            return true;
         }
 
-        public void Download(string remoteMeta, string nativePath)
+        public int Write(byte[] buffer, int offset, int length)
         {
-            throw new System.NotImplementedException();
+            return 0;
+        }
+
+        public bool EndWrite()
+        {
+            return true;
+        }
+
+        public bool BeginRead(string meta)
+        {
+            return true;
+        }
+
+        public int Read(byte[] buffer, int offset, int length)
+        {
+            return 0;
+        }
+
+        public bool EndRead()
+        {
+            return true;
         }
 
         public void Thumbnail()
