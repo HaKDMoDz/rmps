@@ -51,8 +51,21 @@ namespace Me.Amon.Pcs.M
         /// </summary>
         public bool IsDeleted { get; set; }
 
-        public string Display { get; set; }
-
         public List<CsFile> Files { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Path.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Path != null ? Path.GetHashCode() : 0;
+        }
     }
 }
