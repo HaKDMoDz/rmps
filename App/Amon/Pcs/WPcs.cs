@@ -36,6 +36,7 @@ namespace Me.Amon.Pcs
 
             InitializeComponent();
 
+            CheckForIllegalCrossThreadCalls = false;
             this.Icon = Me.Amon.Properties.Resources.Icon;
         }
         #endregion

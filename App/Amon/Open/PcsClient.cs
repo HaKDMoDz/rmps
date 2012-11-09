@@ -4,7 +4,7 @@ using Me.Amon.Pcs.M;
 
 namespace Me.Amon.Open
 {
-    public interface OAuthPcs
+    public interface PcsClient
     {
         /// <summary>
         /// 显示名称
@@ -51,13 +51,17 @@ namespace Me.Amon.Open
 
         void CopyRef(CsMeta meta);
 
-        bool BeginWrite(string remoteMeta);
-        int Write(byte[] buffer, int offset, int length);
-        bool EndWrite();
+        long BeginWrite(long key, string remoteMeta);
 
-        bool BeginRead(string remoteMeta);
-        int Read(byte[] buffer, int offset, int length);
-        bool EndRead();
+        int Write(long key, byte[] buffer, int offset, int length);
+
+        void EndWrite(long key);
+
+        long BeginRead(long key, string url, long range);
+
+        int Read(long key, byte[] buffer, int offset, int length);
+
+        void EndRead(long key);
 
         void Thumbnail();
 

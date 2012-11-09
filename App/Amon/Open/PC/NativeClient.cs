@@ -2,14 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 using Me.Amon.Pcs;
 using Me.Amon.Pcs.M;
 
 namespace Me.Amon.Open.PC
 {
-    public class NativeClient : OAuthPcs
+    public class NativeClient : PcsClient
     {
         private NativeServer _Server;
+        private Dictionary<long, FileStream> _Streams;
+        private Random _Random;
 
         #region 构造函数
         public NativeClient()
@@ -17,28 +20,19 @@ namespace Me.Amon.Open.PC
             Name = "本地";
             Root = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             Icon = Image.FromFile(@"D:\Temp\i1\Icon.png");
+
             _Server = new NativeServer();
+            _Streams = new Dictionary<long, FileStream>();
+            _Random = new Random();
         }
         #endregion
 
         #region 接口实现
-        public string Name
-        {
-            get;
-            set;
-        }
+        public string Root { get; set; }
 
-        public string Root
-        {
-            get;
-            set;
-        }
+        public string Name { get; set; }
 
-        public Image Icon
-        {
-            get;
-            set;
-        }
+        public Image Icon { get; set; }
 
         public OAuthPcsAccount Account()
         {
@@ -177,35 +171,63 @@ namespace Me.Amon.Open.PC
         {
         }
 
-        public bool BeginWrite(string remoteMeta)
-        {
-            return true;
-        }
-
-        public int Write(byte[] buffer, int offset, int length)
+        #region 上传
+        public long BeginWrite(long key, string remoteMeta)
         {
             return 0;
         }
 
-        public bool EndWrite()
-        {
-            return true;
-        }
-
-        public bool BeginRead(string meta)
-        {
-            return true;
-        }
-
-        public int Read(byte[] buffer, int offset, int length)
+        public int Write(long key, byte[] buffer, int offset, int length)
         {
             return 0;
         }
 
-        public bool EndRead()
+        public void EndWrite(long key)
         {
-            return true;
         }
+        #endregion
+
+        #region 下载
+        public long BeginRead(long key, string url, long range)
+        {
+            if (!Path.IsPathRooted(url))
+            {
+                url = Path.Combine(Root, url);
+            }
+            if (!File.Exists(url))
+            {
+                return -1;
+            }
+
+            var stream = File.OpenRead(url);
+            if (range < 0 || range > stream.Length)
+            {
+                return -1;
+            }
+
+            if (range > 0)
+            {
+                stream.Seek(range, SeekOrigin.Current);
+            }
+            _Streams[key] = stream;
+            return stream.Length;
+        }
+
+        public int Read(long key, byte[] buffer, int offset, int length)
+        {
+            Thread.Sleep(_Random.Next(10) * 100 + 100);
+            return _Streams[key].Read(buffer, offset, length);
+        }
+
+        public void EndRead(long key)
+        {
+            var stream = _Streams[key];
+            if (stream != null)
+            {
+                stream.Close();
+            }
+        }
+        #endregion
 
         public void Thumbnail()
         {

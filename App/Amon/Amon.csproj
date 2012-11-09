@@ -395,9 +395,9 @@
     <Compile Include="Open\OAuthAccount.cs" />
     <Compile Include="Open\OAuthClient.cs" />
     <Compile Include="Open\OAuthConsumer.cs" />
-    <Compile Include="Open\OAuthPcs.cs" />
+    <Compile Include="Open\PcsClient.cs" />
     <Compile Include="Open\OAuthPcsAccount.cs" />
-    <Compile Include="Open\OAuthSns.cs" />
+    <Compile Include="Open\SnsClient.cs" />
     <Compile Include="Open\OAuthToken.cs" />
     <Compile Include="Open\OAuthUtility.cs" />
     <Compile Include="Open\OAuthVersion.cs" />
@@ -485,6 +485,17 @@
     </Compile>
     <Compile Include="Pcs\V\PcsView.Designer.cs">
       <DependentUpon>PcsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pcs\V\TaskList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pcs\V\TaskList.Designer.cs">
+      <DependentUpon>TaskList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pcs\V\TaskStatus.cs" />
+    <Compile Include="Pcs\V\TaskThread.cs" />
+    <Compile Include="Pcs\V\WListView.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Pcs\WPcs.cs">
       <SubType>Form</SubType>
@@ -1540,6 +1551,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pcs\V\PcsView.resx">
       <DependentUpon>PcsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pcs\V\TaskList.resx">
+      <DependentUpon>TaskList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pcs\WPcs.resx">
       <DependentUpon>WPcs.cs</DependentUpon>

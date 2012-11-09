@@ -32,7 +32,7 @@
             this.ScView = new System.Windows.Forms.SplitContainer();
             this.TvPath = new System.Windows.Forms.TreeView();
             this.LvMeta = new System.Windows.Forms.ListView();
-            this.LbInfo = new System.Windows.Forms.ListBox();
+            this.LvTask = new Me.Amon.Pcs.V.TaskList();
             ((System.ComponentModel.ISupportInitialize)(this.ScMain)).BeginInit();
             this.ScMain.Panel1.SuspendLayout();
             this.ScMain.Panel2.SuspendLayout();
@@ -58,7 +58,7 @@
             // 
             // ScMain.Panel2
             // 
-            this.ScMain.Panel2.Controls.Add(this.LbInfo);
+            this.ScMain.Panel2.Controls.Add(this.LvTask);
             this.ScMain.Size = new System.Drawing.Size(394, 294);
             this.ScMain.SplitterDistance = 204;
             this.ScMain.TabIndex = 0;
@@ -103,16 +103,13 @@
             this.LvMeta.DragEnter += new System.Windows.Forms.DragEventHandler(this.LvMeta_DragEnter);
             this.LvMeta.DoubleClick += new System.EventHandler(this.LvMeta_DoubleClick);
             // 
-            // LbInfo
+            // LvTask
             // 
-            this.LbInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LbInfo.FormattingEnabled = true;
-            this.LbInfo.IntegralHeight = false;
-            this.LbInfo.ItemHeight = 12;
-            this.LbInfo.Location = new System.Drawing.Point(0, 0);
-            this.LbInfo.Name = "LbInfo";
-            this.LbInfo.Size = new System.Drawing.Size(394, 86);
-            this.LbInfo.TabIndex = 0;
+            this.LvTask.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LvTask.Location = new System.Drawing.Point(0, 0);
+            this.LvTask.Name = "LvTask";
+            this.LvTask.Size = new System.Drawing.Size(394, 86);
+            this.LvTask.TabIndex = 0;
             // 
             // PcsView
             // 
@@ -137,8 +134,8 @@
 
         private System.Windows.Forms.SplitContainer ScMain;
         private System.Windows.Forms.SplitContainer ScView;
-        private System.Windows.Forms.ListBox LbInfo;
         private System.Windows.Forms.TreeView TvPath;
         private System.Windows.Forms.ListView LvMeta;
+        private TaskList LvTask;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Open
 {
-    public interface OAuthSns
+    public interface SnsClient
     {
     }
 }

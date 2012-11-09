@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -8,18 +9,20 @@ namespace Me.Amon.Pcs.C
 {
     public class NddEngine
     {
-        private DFA _DFA;
         private string _Root;
+        private DFA _DFA;
+        private Dictionary<long, FileStream> _Streams;
 
         public NddEngine()
         {
-            _DFA = new DFEngine();
         }
 
         public void Init(string root)
         {
             _Root = root;
+            _DFA = new DFEngine();
             _DFA.Load(Path.Combine(root, "amon.sync"));
+            _Streams = new Dictionary<long, FileStream>();
         }
 
         public int CompareVersion(string file, string ver)
@@ -32,28 +35,42 @@ namespace Me.Amon.Pcs.C
             _DFA.Set(file, ver);
         }
 
-        private FileStream _Stream;
-        public bool BeginWrite(string file)
+        public long BeginDownload(long key, string path, bool append)
         {
-            file = Path.Combine(_Root, file);
-            _Stream = File.OpenWrite(file);
-            return true;
+            if (!Path.IsPathRooted(path))
+            {
+                path = Path.Combine(_Root, path);
+            }
+
+            string folder = Path.GetDirectoryName(path);
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+            var stream = new FileStream(path, append ? FileMode.Append : FileMode.Create);
+            _Streams[key] = stream;
+            return stream.Length;
         }
 
-        public int Write(byte[] buffer, int offset, int length)
+        public int Write(long key, byte[] buffer, int offset, int length)
         {
+            _Streams[key].Write(buffer, offset, length);
             return 0;
         }
 
-        public bool EndWrite()
+        public void EndDownload(long key)
         {
-            return true;
+            var stream = _Streams[key];
+            if (stream != null)
+            {
+                stream.Close();
+            }
         }
 
         public bool BeginRead(string file)
         {
-            file = Path.Combine(_Root, file);
-            _Stream = File.OpenRead(file);
+            //file = Path.Combine(_Root, file);
+            //_Stream = File.OpenRead(file);
             return true;
         }
 

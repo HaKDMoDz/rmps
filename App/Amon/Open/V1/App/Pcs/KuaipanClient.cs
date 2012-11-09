@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Me.Amon.Open.V1.App.Pcs
 {
-    public class KuaipanClient : OAuthV1Client, OAuthPcs
+    public class KuaipanClient : OAuthV1Client, PcsClient
     {
         #region 构造函数
         public KuaipanClient(OAuthConsumer consumer)
@@ -256,35 +256,37 @@ namespace Me.Amon.Open.V1.App.Pcs
         {
         }
 
-        public bool BeginWrite(string remoteMeta)
-        {
-            return true;
-        }
-
-        public int Write(byte[] buffer, int offset, int length)
+        #region 上传
+        public long BeginWrite(long key, string remoteMeta)
         {
             return 0;
         }
 
-        public bool EndWrite()
-        {
-            return true;
-        }
-
-        public bool BeginRead(string meta)
-        {
-            return true;
-        }
-
-        public int Read(byte[] buffer, int offset, int length)
+        public int Write(long key, byte[] buffer, int offset, int length)
         {
             return 0;
         }
 
-        public bool EndRead()
+        public void EndWrite(long key)
         {
-            return true;
         }
+        #endregion
+
+        #region 下载
+        public long BeginRead(long key, string meta, long range)
+        {
+            return 0;
+        }
+
+        public int Read(long key, byte[] buffer, int offset, int length)
+        {
+            return 0;
+        }
+
+        public void EndRead(long key)
+        {
+        }
+        #endregion
 
         public void Thumbnail()
         {

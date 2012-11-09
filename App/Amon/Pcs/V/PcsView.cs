@@ -12,7 +12,7 @@ namespace Me.Amon.Pcs.V
     public partial class PcsView : UserControl
     {
         private WPcs _WPcs;
-        private OAuthPcs _OPcs;
+        private PcsClient _OPcs;
         private TreeNode _TnFav;
         private TreeNode _TnPub;
         private TreeNode _TnAll;
@@ -48,7 +48,7 @@ namespace Me.Amon.Pcs.V
             InitializeComponent();
         }
 
-        public PcsView(WPcs wPcs, OAuthPcs oPcs)
+        public PcsView(WPcs wPcs, PcsClient oPcs)
         {
             _WPcs = wPcs;
             _OPcs = oPcs;
@@ -116,8 +116,6 @@ namespace Me.Amon.Pcs.V
             _TnBin.ImageKey = "_bin";
             _TnBin.Tag = new Cat { Meta = _OPcs.GetPath(CPcs.PATH_RECYCLE), Text = "回收站" };
             TvPath.Nodes.Add(_TnBin);
-
-            OAuthPcsAccount account = _OPcs.Account();
         }
 
         public MetaUri MetaUri { get; set; }
@@ -260,6 +258,27 @@ namespace Me.Amon.Pcs.V
 
             //_TnFav.Nodes.Add(GenNode(meta));
             //_DataModel.SaveMeta(meta);
+        }
+
+        public void DownloadMeta()
+        {
+            var list = LvMeta.SelectedItems;
+            if (list.Count < 1)
+            {
+                return;
+            }
+
+            var item = list[0] as ListViewItem;
+            if (item == null)
+            {
+                return;
+            }
+
+            var meta = item.Tag as CsMeta;
+            if (meta == null)
+            {
+                return;
+            }
         }
         #endregion
 
@@ -430,22 +449,5 @@ namespace Me.Amon.Pcs.V
             return "unknown";
         }
         #endregion
-
-        private void StartDownload()
-        {
-            _OPcs.BeginRead("");
-            byte[] buffer = new byte[1024];
-            int length;
-            while (true)
-            {
-                length = _OPcs.Read(buffer, 0, buffer.Length);
-                if (length < 1)
-                {
-                    break;
-                }
-                _PcEngine.Write(buffer, 0, length);
-            }
-            _OPcs.EndRead();
-        }
     }
 }
