@@ -20,5 +20,7 @@ namespace Me.Amon.Pcs
 
         public const string PCS_TYPE_NATIVE = "native";
         public const string PCS_TYPE_KUAIPAN = "kuaipan";
+        public const string PCS_TYPE_DROPBOX = "dropbox";
+        public const string PCS_TYPE_SKYDRIVE = "skydrive";
     }
 }

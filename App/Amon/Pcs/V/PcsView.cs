@@ -23,6 +23,7 @@ namespace Me.Amon.Pcs.V
         private static ImageList IlMetaSmall;
         private NddEngine _PcEngine;
         private DataModel _DataModel;
+        private Cat _SelectedCat;
 
         #region 构造函数
         static PcsView()
@@ -122,10 +123,10 @@ namespace Me.Amon.Pcs.V
 
         public void ShowInfo()
         {
-            if (MetaUri != null)
+            if (MetaUri != null && _SelectedCat != null)
             {
                 MetaUri.Text = _OPcs.Name;
-                MetaUri.Path = _OPcs.Display(_WPcs.SelectedMeta.Path);
+                MetaUri.Path = _OPcs.Display(_SelectedCat.Meta);
                 MetaUri.Icon = _OPcs.Icon;
             }
         }
@@ -245,6 +246,33 @@ namespace Me.Amon.Pcs.V
 
         public void RenameMeta()
         {
+            var list = LvMeta.SelectedItems;
+            if (list.Count < 1)
+            {
+                return;
+            }
+
+            var item = list[0] as ListViewItem;
+            if (item == null)
+            {
+                return;
+            }
+
+            var meta = item.Tag as CsMeta;
+            if (meta == null)
+            {
+                return;
+            }
+
+            string name = Main.ShowInput("请输入新的文件名称：", meta.Name);
+            if (string.IsNullOrWhiteSpace(name) || name == meta.Name)
+            {
+                return;
+            }
+            _OPcs.Moveto(meta, name);
+            _PcEngine.Moveto(meta.Path, name);
+            meta.Name = name;
+            item.Text = name;
         }
 
         public void AddFav(string name)
@@ -291,21 +319,22 @@ namespace Me.Amon.Pcs.V
                 return;
             }
 
-            var cat = node.Tag as Cat;
-            if (cat == null)
+            _SelectedCat = node.Tag as Cat;
+            if (_SelectedCat == null)
             {
                 return;
             }
 
             ShowInfo();
 
-            if (cat.Meta[0] != '?')
+            if (_SelectedCat.Meta[0] != '?')
             {
                 node.Nodes.Clear();
             }
-            if (!string.IsNullOrEmpty(cat.Meta))
+            if (!string.IsNullOrEmpty(_SelectedCat.Meta))
             {
-                ShowMeta(_OPcs.ListMeta(cat.Meta), node);
+                _OPcs.ListMeta(_SelectedCat.Meta);
+                ShowMeta(_OPcs.ListMeta(_SelectedCat.Meta), node);
             }
         }
 

@@ -30,11 +30,26 @@ namespace Me.Amon.Open.V1.App
         #region 接口实现
         public bool Verify()
         {
-            RequestToken();
-            Authorize();
-            AccessToken();
+            if (!RequestToken())
+            {
+                return false;
+            }
+            if (!Authorize())
+            {
+                return false;
+            }
+            if (!AccessToken())
+            {
+                return false;
+            }
             return true;
         }
+
+        public abstract bool RequestToken();
+
+        public abstract string AuthorizeUrl { get; }
+
+        public abstract bool AccessToken();
         #endregion
 
         #region 公共函数
@@ -50,11 +65,7 @@ namespace Me.Amon.Open.V1.App
         #endregion
 
         #region 权限认证
-        protected abstract bool RequestToken();
-
-        protected abstract bool Authorize();
-
-        protected abstract bool AccessToken();
+        public abstract bool Authorize();
         #endregion
 
         #region 私有函数

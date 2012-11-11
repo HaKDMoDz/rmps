@@ -35,6 +35,11 @@ namespace Me.Amon.Pcs.C
             _DFA.Set(file, ver);
         }
 
+        public void Moveto(string srcPath, string dstPath)
+        {
+        }
+
+        #region ÏÂÔØ
         public long BeginDownload(long key, string path, bool append)
         {
             if (!Path.IsPathRooted(path))
@@ -66,7 +71,9 @@ namespace Me.Amon.Pcs.C
                 stream.Close();
             }
         }
+        #endregion
 
+        #region ÉÏ´«
         public bool BeginRead(string file)
         {
             //file = Path.Combine(_Root, file);
@@ -83,6 +90,7 @@ namespace Me.Amon.Pcs.C
         {
             return true;
         }
+        #endregion
 
         public string ComputeHash(string file)
         {

@@ -32,10 +32,8 @@
             this.ScView = new System.Windows.Forms.SplitContainer();
             this.TvPath = new System.Windows.Forms.TreeView();
             this.LvMeta = new System.Windows.Forms.ListView();
-            this.LvTask = new Me.Amon.Pcs.V.TaskList();
             ((System.ComponentModel.ISupportInitialize)(this.ScMain)).BeginInit();
             this.ScMain.Panel1.SuspendLayout();
-            this.ScMain.Panel2.SuspendLayout();
             this.ScMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ScView)).BeginInit();
             this.ScView.Panel1.SuspendLayout();
@@ -55,10 +53,7 @@
             // ScMain.Panel1
             // 
             this.ScMain.Panel1.Controls.Add(this.ScView);
-            // 
-            // ScMain.Panel2
-            // 
-            this.ScMain.Panel2.Controls.Add(this.LvTask);
+            this.ScMain.Panel2Collapsed = true;
             this.ScMain.Size = new System.Drawing.Size(394, 294);
             this.ScMain.SplitterDistance = 204;
             this.ScMain.TabIndex = 0;
@@ -76,7 +71,7 @@
             // ScView.Panel2
             // 
             this.ScView.Panel2.Controls.Add(this.LvMeta);
-            this.ScView.Size = new System.Drawing.Size(394, 204);
+            this.ScView.Size = new System.Drawing.Size(394, 294);
             this.ScView.SplitterDistance = 131;
             this.ScView.TabIndex = 0;
             // 
@@ -85,7 +80,7 @@
             this.TvPath.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TvPath.Location = new System.Drawing.Point(0, 0);
             this.TvPath.Name = "TvPath";
-            this.TvPath.Size = new System.Drawing.Size(131, 204);
+            this.TvPath.Size = new System.Drawing.Size(131, 294);
             this.TvPath.TabIndex = 0;
             this.TvPath.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvPath_AfterSelect);
             // 
@@ -95,21 +90,13 @@
             this.LvMeta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LvMeta.Location = new System.Drawing.Point(0, 0);
             this.LvMeta.Name = "LvMeta";
-            this.LvMeta.Size = new System.Drawing.Size(259, 204);
+            this.LvMeta.Size = new System.Drawing.Size(259, 294);
             this.LvMeta.TabIndex = 0;
             this.LvMeta.UseCompatibleStateImageBehavior = false;
             this.LvMeta.SelectedIndexChanged += new System.EventHandler(this.LvMeta_SelectedIndexChanged);
             this.LvMeta.DragDrop += new System.Windows.Forms.DragEventHandler(this.LvMeta_DragDrop);
             this.LvMeta.DragEnter += new System.Windows.Forms.DragEventHandler(this.LvMeta_DragEnter);
             this.LvMeta.DoubleClick += new System.EventHandler(this.LvMeta_DoubleClick);
-            // 
-            // LvTask
-            // 
-            this.LvTask.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LvTask.Location = new System.Drawing.Point(0, 0);
-            this.LvTask.Name = "LvTask";
-            this.LvTask.Size = new System.Drawing.Size(394, 86);
-            this.LvTask.TabIndex = 0;
             // 
             // PcsView
             // 
@@ -119,7 +106,6 @@
             this.Name = "PcsView";
             this.Size = new System.Drawing.Size(400, 300);
             this.ScMain.Panel1.ResumeLayout(false);
-            this.ScMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ScMain)).EndInit();
             this.ScMain.ResumeLayout(false);
             this.ScView.Panel1.ResumeLayout(false);
@@ -136,6 +122,5 @@
         private System.Windows.Forms.SplitContainer ScView;
         private System.Windows.Forms.TreeView TvPath;
         private System.Windows.Forms.ListView LvMeta;
-        private TaskList LvTask;
     }
 }

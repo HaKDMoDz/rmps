@@ -35,10 +35,10 @@
             this.MbMenu = new System.Windows.Forms.MenuStrip();
             this.TcMain = new System.Windows.Forms.ToolStripContainer();
             this.ScMain = new System.Windows.Forms.SplitContainer();
-            this.UcUri = new Me.Amon.Pcs.V.MetaUri();
-            this.TbTool = new System.Windows.Forms.ToolStrip();
             this.TcMeta = new System.Windows.Forms.ATabControl();
             this.wListView1 = new Me.Amon.Pcs.V.WListView();
+            this.UcUri = new Me.Amon.Pcs.V.MetaUri();
+            this.TbTool = new System.Windows.Forms.ToolStrip();
             this.TtTips = new System.Windows.Forms.ToolTip(this.components);
             this.SbEcho.SuspendLayout();
             this.TcMain.ContentPanel.SuspendLayout();
@@ -123,25 +123,6 @@
             this.ScMain.SplitterDistance = 227;
             this.ScMain.TabIndex = 1;
             // 
-            // UcUri
-            // 
-            this.UcUri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.UcUri.Icon = null;
-            this.UcUri.Location = new System.Drawing.Point(6, 3);
-            this.UcUri.Name = "UcUri";
-            this.UcUri.Path = "pcs://首页";
-            this.UcUri.Size = new System.Drawing.Size(612, 32);
-            this.UcUri.TabIndex = 0;
-            // 
-            // TbTool
-            // 
-            this.TbTool.Dock = System.Windows.Forms.DockStyle.None;
-            this.TbTool.Location = new System.Drawing.Point(3, 0);
-            this.TbTool.Name = "TbTool";
-            this.TbTool.Size = new System.Drawing.Size(111, 25);
-            this.TbTool.TabIndex = 0;
-            // 
             // TcMeta
             // 
             // 
@@ -185,6 +166,25 @@
             this.wListView1.UseCompatibleStateImageBehavior = false;
             this.wListView1.View = System.Windows.Forms.View.Details;
             // 
+            // UcUri
+            // 
+            this.UcUri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.UcUri.Icon = null;
+            this.UcUri.Location = new System.Drawing.Point(6, 3);
+            this.UcUri.Name = "UcUri";
+            this.UcUri.Path = "pcs://首页";
+            this.UcUri.Size = new System.Drawing.Size(612, 32);
+            this.UcUri.TabIndex = 0;
+            // 
+            // TbTool
+            // 
+            this.TbTool.Dock = System.Windows.Forms.DockStyle.None;
+            this.TbTool.Location = new System.Drawing.Point(3, 0);
+            this.TbTool.Name = "TbTool";
+            this.TbTool.Size = new System.Drawing.Size(111, 25);
+            this.TbTool.TabIndex = 0;
+            // 
             // WPcs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -195,7 +195,7 @@
             this.Controls.Add(this.MbMenu);
             this.MainMenuStrip = this.MbMenu;
             this.Name = "WPcs";
-            this.Text = "阿木密码箱";
+            this.Text = "阿木云存储";
             this.SbEcho.ResumeLayout(false);
             this.SbEcho.PerformLayout();
             this.TcMain.ContentPanel.ResumeLayout(false);

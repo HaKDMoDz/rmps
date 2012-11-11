@@ -197,7 +197,8 @@ namespace Me.Amon.Pcs.V
                             return;
                         }
                         //string msg = "文件大小超过10M，下载时间会比较长，建议使用厂家客户端，确认要继续吗？";
-                        string msg = string.Format("文件大小超过10M，为了不影响您的使用体验，建议使用原版客户端下载。{0}仍然要继续下载吗？", Environment.NewLine);
+                        //string msg = string.Format("文件大小超过10M，为了不影响您的使用体验，建议使用原版客户端下载。{0}仍然要继续下载吗？", Environment.NewLine);
+                        string msg = string.Format("您要下载的文件过大，为了获得最佳的体验效果建议使用官方客户端下载。{0}仍然要继续下载吗？", Environment.NewLine);
                         if (DialogResult.Yes == MessageBox.Show(null, msg, "提示", MessageBoxButtons.YesNoCancel))
                         {
                             thread.Start(now, cs, ts);

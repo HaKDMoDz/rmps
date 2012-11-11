@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using Me.Amon.Pcs;
 using Me.Amon.Pcs.M;
 using Newtonsoft.Json;
 
@@ -15,10 +16,17 @@ namespace Me.Amon.Open.V1.App.Pcs
         {
             _Server = new KuaipanServer();
         }
+
+        public KuaipanClient(OAuthConsumer consumer, OAuthTokenV1 token)
+            : base(consumer)
+        {
+            Token = token;
+            _Server = new KuaipanServer();
+        }
         #endregion
 
         #region 权限认证
-        protected override bool RequestToken()
+        public override bool RequestToken()
         {
             PrepareParams();
             _Params.Sort(new NameValueComparer());
@@ -38,7 +46,7 @@ namespace Me.Amon.Open.V1.App.Pcs
             return true;
         }
 
-        protected override bool Authorize()
+        public override bool Authorize()
         {
             string url = string.Format(_Server.VerifierUrl, Token.oauth_token);
             UI.Auth auth = new UI.Auth(url);
@@ -50,7 +58,15 @@ namespace Me.Amon.Open.V1.App.Pcs
             return true;
         }
 
-        protected override bool AccessToken()
+        public override string AuthorizeUrl
+        {
+            get
+            {
+                return string.Format(_Server.VerifierUrl, Token.oauth_token);
+            }
+        }
+
+        public override bool AccessToken()
         {
             PrepareParams();
             if (Token == null)
@@ -133,7 +149,23 @@ namespace Me.Amon.Open.V1.App.Pcs
 
         public string GetPath(string key)
         {
-            return key;
+            switch (key)
+            {
+                case CPcs.PATH_DOCUMENTS:
+                    return key;
+                case CPcs.PATH_AUDIOS:
+                    return key;
+                case CPcs.PATH_PICTURES:
+                    return key;
+                case CPcs.PATH_VIDEOS:
+                    return key;
+                case CPcs.PATH_STORAGE:
+                    return "/";
+                case CPcs.PATH_RECYCLE:
+                    return @"C:\Recycled";
+                default:
+                    return key;
+            }
         }
 
         public List<CsMeta> ListMeta(CsMeta meta)
@@ -144,9 +176,12 @@ namespace Me.Amon.Open.V1.App.Pcs
 
         public List<CsMeta> ListMeta(string path)
         {
+            path = KuaipanServer.LIST_META + GetPath(path);
+
             PrepareParams();
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
             _Params.Sort(new NameValueComparer());
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.RequestTokenUrl)));
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(path)));
 
             string t = GenBaseParams();
             byte[] r = _Server.Get(path, t);
@@ -156,7 +191,9 @@ namespace Me.Amon.Open.V1.App.Pcs
             }
 
             t = GetString(r);
-            return JsonConvert.DeserializeObject<List<CsMeta>>(t);
+            var meta = JsonConvert.DeserializeObject<KuaipanMeta>(t);
+            ResetParams();
+            return meta.SubMetas();
         }
 
         public string ShareMeta(CsMeta meta)

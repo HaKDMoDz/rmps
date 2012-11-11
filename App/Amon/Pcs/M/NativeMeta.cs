@@ -7,54 +7,52 @@ namespace Me.Amon.Pcs.M
 {
     public class NativeMeta : CsMeta
     {
+        #region 属性
         /// <summary>
         /// kuaipan 或 app_folder
         /// </summary>
-        public string Root;
+        public override string Root { get; set; }
         /// <summary>
         /// 文件或文件夹相对<root>的路径
         /// </summary>
-        public string Path;
+        public override string Path { get; set; }
         /// <summary>
         /// path=/，root=kuaipan时不返回。文件名。
         /// </summary>
-        public string Name;
+        public override string Name { get; set; }
         /// <summary>
         /// list=true才返回,当前这级文件夹的哈希值。
         /// </summary>
-        public string Hash;
+        public override string Hash { get; set; }
         /// <summary>
         /// enum(file,folder)	path=/,root=kuaipan时不返回。folder为文件夹，file为文件。
         /// </summary>
-        public int Type;
+        public override int Type { get; set; }
         /// <summary>
         /// path=/,root=kuaipan时不返回。文件大小。
         /// </summary>
-        public int Size;
+        public override int Size { get; set; }
         /// <summary>
         /// path=/,root=kuaipan时不返回。YYYY-MM-DD hh:mm:ss。
         /// </summary>
-        public DateTime CreateTime;
+        public override DateTime CreateTime { get; set; }
         /// <summary>
         /// path=/,root=kuaipan时不返回。YYYY-MM-DD hh:mm:ss。
         /// </summary>
-        public DateTime ModifyTime;
+        public override DateTime ModifyTime { get; set; }
         /// <summary>
         /// path=/,root=kuaipan时不返回。文件唯一标识id。
         /// </summary>
-        public string FileId;
+        public override string FileId { get; set; }
         /// <summary>
         /// path=/,root=kuaipan时不返回。
         /// </summary>
-        public string Rev;
+        public override string Rev { get; set; }
         /// <summary>
         /// path=/，root=kuaipan时不返回。是否被删除的文件。
         /// </summary>
-        [NonSerialized]
-        public bool IsDeleted;
-
-        [NonSerialized]
-        public List<CsFile> Files;
+        public override bool IsDeleted { get; set; }
+        #endregion
 
         public override string ToString()
         {
@@ -69,6 +67,11 @@ namespace Me.Amon.Pcs.M
         public override int GetHashCode()
         {
             return Path != null ? Path.GetHashCode() : 0;
+        }
+
+        public override List<CsMeta> SubMetas()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -443,6 +443,7 @@
     <Compile Include="Pcs\E\Edit\FavNewAction.cs" />
     <Compile Include="Pcs\E\Edit\PasteAction.cs" />
     <Compile Include="Pcs\E\Edit\RenameAction.cs" />
+    <Compile Include="Pcs\E\File\CreateAction.cs" />
     <Compile Include="Pcs\E\File\ExitAction.cs" />
     <Compile Include="Pcs\E\File\HideAction.cs" />
     <Compile Include="Pcs\E\File\KuaipanAction.cs" />
@@ -462,6 +463,25 @@
     <Compile Include="Pcs\M\KuaipanMeta.cs" />
     <Compile Include="Pcs\M\MPcs.cs" />
     <Compile Include="Pcs\M\NativeMeta.cs" />
+    <Compile Include="Pcs\V\Mgr\Config.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pcs\V\Mgr\Config.Designer.cs">
+      <DependentUpon>Config.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pcs\V\Mgr\IMgr.cs" />
+    <Compile Include="Pcs\V\Mgr\PcsConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pcs\V\Mgr\PcsConfig.Designer.cs">
+      <DependentUpon>PcsConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pcs\V\Mgr\PcsCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pcs\V\Mgr\PcsCreate.Designer.cs">
+      <DependentUpon>PcsCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pcs\V\FavMgr.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -473,6 +493,24 @@
     </Compile>
     <Compile Include="Pcs\V\MetaUri.Designer.cs">
       <DependentUpon>MetaUri.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pcs\V\Mgr\PcsVerify.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pcs\V\Mgr\PcsVerify.Designer.cs">
+      <DependentUpon>PcsVerify.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pcs\V\Mgr\Server.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pcs\V\Mgr\Server.Designer.cs">
+      <DependentUpon>Server.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pcs\V\Mgr\Verify.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pcs\V\Mgr\Verify.Designer.cs">
+      <DependentUpon>Verify.cs</DependentUpon>
     </Compile>
     <Compile Include="Pcs\V\PcsList.cs">
       <SubType>UserControl</SubType>
@@ -1545,6 +1583,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pcs\V\MetaUri.resx">
       <DependentUpon>MetaUri.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pcs\V\Mgr\Config.resx">
+      <DependentUpon>Config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pcs\V\Mgr\PcsCreate.resx">
+      <DependentUpon>PcsCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pcs\V\Mgr\Server.resx">
+      <DependentUpon>Server.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pcs\V\Mgr\Verify.resx">
+      <DependentUpon>Verify.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pcs\V\PcsList.resx">
       <DependentUpon>PcsList.cs</DependentUpon>

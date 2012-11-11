@@ -9,6 +9,7 @@ using Me.Amon.Open.PC;
 using Me.Amon.Open.V1.App.Pcs;
 using Me.Amon.Pcs.M;
 using Me.Amon.Pcs.V;
+using Me.Amon.Pcs.V.Mgr;
 using Me.Amon.Uc;
 
 namespace Me.Amon.Pcs
@@ -131,10 +132,20 @@ namespace Me.Amon.Pcs
             }
         }
 
+        public void CreatePcs()
+        {
+            var pcsMgr = new PcsCreate();
+            pcsMgr.Init();
+            if (DialogResult.OK != pcsMgr.ShowDialog(this))
+            {
+                return;
+            }
+            var mPcs = pcsMgr.MPcs;
+        }
+
         public void OpenPcs(MPcs mPcs)
         {
-            switch
-                (mPcs.ServerType)
+            switch (mPcs.ServerType)
             {
                 case "native":
                     NewNative();
@@ -168,21 +179,18 @@ namespace Me.Amon.Pcs
 
         private void NewKuaipan(MPcs mPcs)
         {
-            OAuthConsumer consumer = new OAuthConsumer();
-            consumer.consumer_key = "xcWPaz75PSRDOWBM";
-            consumer.consumer_secret = "DU5ZYaCK0cRlsMTj";
-            OAuthToken token = new OAuthToken();
+            var token = new Me.Amon.Open.V1.OAuthTokenV1();
             token.oauth_token = mPcs.Token;
             token.oauth_token_secret = mPcs.TokenSecret;
             token.UserId = mPcs.UserId;
-            KuaipanClient client = new KuaipanClient(consumer);
+            KuaipanClient client = new KuaipanClient(OAuthConsumer.KuaipanConsumer(), token);
             if (token.oauth_token.Length != 24 && token.oauth_token_secret.Length != 32)
             {
                 client.Verify();
             }
 
             TabPage ntp = new TabPage();
-            ntp.Text = "Demo";
+            ntp.Text = mPcs.UserName;
             TcMeta.TabPages.Add(ntp);
 
             var pcs = new PcsView(this, client);
