@@ -120,9 +120,9 @@ namespace Me.Amon.Open.PC
             return null;
         }
 
-        public bool CreateFolder(CsMeta meta)
+        public CsMeta CreateFolder(string path, string name)
         {
-            return true;
+            return null;
         }
 
         public bool Delete(string meta)

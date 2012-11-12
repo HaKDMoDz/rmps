@@ -41,7 +41,7 @@ namespace Me.Amon.Open
         /// </summary>
         List<CsMeta> History(CsMeta meta);
 
-        bool CreateFolder(CsMeta meta);
+        CsMeta CreateFolder(string path, string name);
 
         bool Delete(string meta);
 

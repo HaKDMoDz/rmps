@@ -44,6 +44,19 @@ namespace Me.Amon.Pcs.M
 
         public string TokenSecret;
 
+        public void Init()
+        {
+            switch (ServerType)
+            {
+                case CPcs.PCS_TYPE_KUAIPAN:
+                    ServerName = "金山快盘";
+                    break;
+                default:
+                    ServerName = "未知";
+                    break;
+            }
+        }
+
         public override bool FromXml(System.Xml.XmlReader reader)
         {
             return true;

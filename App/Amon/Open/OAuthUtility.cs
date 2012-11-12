@@ -54,15 +54,6 @@ namespace Me.Amon.Open
 
         public static string GetOAuthNonce()
         {
-            //StringBuilder nonceData = new StringBuilder();
-            //byte[] data = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(GetOAuthTimestamp()));
-
-            //foreach (byte d in data)
-            //{
-            //    nonceData.Append(d.ToString("x2").ToLower());
-            //}
-
-            //return nonceData.ToString();
             return new Random().Next(123400, 9999999).ToString();
         }
 
@@ -70,13 +61,6 @@ namespace Me.Amon.Open
         {
             TimeSpan span = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0);
             return Math.Ceiling(span.TotalSeconds).ToString();
-            //DateTime dt = new DateTime(1970, 1, 1);
-            //if (dt.Kind == DateTimeKind.Unspecified)
-            //{
-            //    dt = DateTime.SpecifyKind(dt, DateTimeKind.Local);
-            //}
-            //TimeSpan ts = DateTime.Now - dt;
-            //return Convert.ToInt64(ts.TotalSeconds).ToString();
         }
 
         public static string ComputeHMACSHA1Hash(string Key, string HashData)

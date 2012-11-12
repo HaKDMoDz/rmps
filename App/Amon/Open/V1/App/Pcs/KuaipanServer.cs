@@ -2,6 +2,8 @@
 {
     public class KuaipanServer : OAuthV1Server
     {
+        public const string ROOT_NAME = "kuaipan";
+
         public const string LIST_META = "http://openapi.kuaipan.cn/1/metadata/kuaipan";
 
         public const string SHARE_META = "http://openapi.kuaipan.cn/1/shares/kuaipan";

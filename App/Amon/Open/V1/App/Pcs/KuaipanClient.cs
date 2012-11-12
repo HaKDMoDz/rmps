@@ -201,6 +201,7 @@ namespace Me.Amon.Open.V1.App.Pcs
             string url = string.Format(KuaipanServer.SHARE_META, meta.Path);
 
             PrepareParams();
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
             _Params.Sort(new NameValueComparer());
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.RequestTokenUrl)));
 
@@ -213,6 +214,8 @@ namespace Me.Amon.Open.V1.App.Pcs
 
             t = GetString(r);
             // Jason
+            ResetParams();
+
             return "";
         }
 
@@ -221,37 +224,48 @@ namespace Me.Amon.Open.V1.App.Pcs
             return null;
         }
 
-        public bool CreateFolder(CsMeta meta)
+        public CsMeta CreateFolder(string path, string name)
         {
+            string url = KuaipanServer.CREATE_FOLDER;
+
             PrepareParams();
-            AddParam("root", "kuaipan");
-            AddParam("path", meta.Path);
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+            AddParam("root", KuaipanServer.ROOT_NAME);
+            AddParam("path", Combine(path, OAuthUtility.UrlEncode(name)));
             _Params.Sort(new NameValueComparer());
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.RequestTokenUrl)));
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
 
             string t = GenBaseParams();
-            byte[] r = _Server.Get(KuaipanServer.CREATE_FOLDER, t);
+            byte[] r = _Server.Get(url, t);
             if (r == null || r.Length < 1)
             {
-                return false;
+                return null;
             }
 
             t = GetString(r);
-            // Jason
-            return true;
+            KuaipanMeta meta = JsonConvert.DeserializeObject<KuaipanMeta>(t);
+            meta.name = name;
+            meta.path = path;
+            meta.type = "folder";
+            ResetParams();
+
+            return meta;
         }
 
-        public bool Delete(string meta)
+        public bool Delete(string path)
         {
+            string url = KuaipanServer.DELETE;
+
             PrepareParams();
-            AddParam("root", "kuaipan");
-            AddParam("path", meta);
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+            AddParam("root", KuaipanServer.ROOT_NAME);
+            AddParam("path", path);
             AddParam("to_recycle", "true");
             _Params.Sort(new NameValueComparer());
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.RequestTokenUrl)));
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
 
             string t = GenBaseParams();
-            byte[] r = _Server.Get(KuaipanServer.CREATE_FOLDER, t);
+            byte[] r = _Server.Get(url, t);
             if (r == null || r.Length < 1)
             {
                 return false;
@@ -259,12 +273,15 @@ namespace Me.Amon.Open.V1.App.Pcs
 
             t = GetString(r);
             // Jason
+            ResetParams();
+
             return true;
         }
 
         public bool Moveto(CsMeta meta, string dstMeta)
         {
             PrepareParams();
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
             AddParam("root", "kuaipan");
             AddParam("from_path", meta.Path);
             AddParam("to_path", dstMeta);
@@ -279,18 +296,23 @@ namespace Me.Amon.Open.V1.App.Pcs
             }
 
             t = GetString(r);
-
             JsonConvert.DeserializeObject<CsMeta>(t);
+            ResetParams();
+
             return true;
         }
 
         public bool Copyto(CsMeta meta, string dstMeta)
         {
+            ResetParams();
+
             return true;
         }
 
         public void CopyRef(CsMeta meta)
         {
+            ResetParams();
+
         }
 
         #region 上传
@@ -347,6 +369,11 @@ namespace Me.Amon.Open.V1.App.Pcs
 
         public string Combine(string path, string meta)
         {
+            if (path == CPcs.PATH_STORAGE)
+            {
+                path = "/";
+            }
+
             if (path[path.Length - 1] != '/')
             {
                 path += '/';

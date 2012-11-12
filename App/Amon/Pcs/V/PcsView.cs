@@ -288,6 +288,28 @@ namespace Me.Amon.Pcs.V
             //_DataModel.SaveMeta(meta);
         }
 
+        public void CreateFolder()
+        {
+            string name = "";
+            while (true)
+            {
+                name = Main.ShowInput("请输入目录名称：", name);
+                if (name == null)
+                {
+                    return;
+                }
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    break;
+                }
+            }
+            CsMeta meta = _OPcs.CreateFolder(_SelectedCat.Meta, name);
+            if (meta != null)
+            {
+                LvMeta.Items.Add(GenItem(meta));
+            }
+        }
+
         public void DownloadMeta()
         {
             var list = LvMeta.SelectedItems;
@@ -422,10 +444,10 @@ namespace Me.Amon.Pcs.V
             foreach (CsMeta meta in metas)
             {
                 LvMeta.Items.Add(GenItem(meta));
-                if (meta.Type == CPcs.META_TYPE_FOLDER)
-                {
-                    root.Nodes.Add(GenNode(meta));
-                }
+                //if (meta.Type == CPcs.META_TYPE_FOLDER)
+                //{
+                //    root.Nodes.Add(GenNode(meta));
+                //}
             }
         }
 

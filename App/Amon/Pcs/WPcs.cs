@@ -9,7 +9,6 @@ using Me.Amon.Open.PC;
 using Me.Amon.Open.V1.App.Pcs;
 using Me.Amon.Pcs.M;
 using Me.Amon.Pcs.V;
-using Me.Amon.Pcs.V.Mgr;
 using Me.Amon.Uc;
 
 namespace Me.Amon.Pcs
@@ -21,6 +20,7 @@ namespace Me.Amon.Pcs
         private DataModel _DataModel;
         private IViewModel _ViewModel;
         private XmlMenu<WPcs> _XmlMenu;
+        private PcsList _PcsList;
         private PcsView _CurView;
         private TabPage _DefPage;
 
@@ -34,6 +34,9 @@ namespace Me.Amon.Pcs
         {
             _Main = main;
             _UserModel = userModel;
+
+            _DataModel = new DataModel(userModel);
+            _DataModel.Init();
 
             InitializeComponent();
 
@@ -61,17 +64,17 @@ namespace Me.Amon.Pcs
             //_DefPage.Location = new System.Drawing.Point(4, 23);
             //_DefPage.Padding = new System.Windows.Forms.Padding(3);
             //_DefPage.Size = new System.Drawing.Size(604, 300);
-            PcsList list = new PcsList(this, _DataModel);
-            list.Init();
-            list.Dock = DockStyle.Fill;
-            _DefPage.Controls.Add(list);
+            _PcsList = new PcsList(this, _DataModel);
+            _PcsList.Init();
+            _PcsList.Dock = DockStyle.Fill;
+            _DefPage.Controls.Add(_PcsList);
             TcMeta.TabPages.Add(_DefPage);
         }
 
         #region 接口实现
         public int AppId { get; set; }
 
-        public new Form Form { get { return this; } }
+        public Form Form { get { return this; } }
 
         public void ShowTips(Control control, string caption)
         {
@@ -134,13 +137,12 @@ namespace Me.Amon.Pcs
 
         public void CreatePcs()
         {
-            var pcsMgr = new PcsCreate();
-            pcsMgr.Init();
-            if (DialogResult.OK != pcsMgr.ShowDialog(this))
-            {
-                return;
-            }
-            var mPcs = pcsMgr.MPcs;
+            _PcsList.CreatePcs();
+        }
+
+        public void DeletePcs()
+        {
+            _PcsList.DeletePcs();
         }
 
         public void OpenPcs(MPcs mPcs)
@@ -227,6 +229,14 @@ namespace Me.Amon.Pcs
             if (_CurView != null)
             {
                 _CurView.PasteMeta();
+            }
+        }
+
+        public void CreateFolder()
+        {
+            if (_CurView != null)
+            {
+                _CurView.CreateFolder();
             }
         }
 

@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Me.Amon.Pcs.M;
+using Me.Amon.Pcs.V.Mgr;
 
 namespace Me.Amon.Pcs.V
 {
@@ -34,15 +35,47 @@ namespace Me.Amon.Pcs.V
             mPcs.UserName = Environment.UserName;
             LbItem.Items.Add(mPcs);
 
-            mPcs = new MPcs();
-            mPcs.ServerType = CPcs.PCS_TYPE_KUAIPAN;
-            mPcs.ServerName = "金山快盘";
-            mPcs.Token = "00ecf6192d45e0ec90af333a";
-            mPcs.TokenSecret = "01f300a7cfa64ae090f8ea6054705148";
-            mPcs.LocalRoot = @"D:\kp";
-            mPcs.UserId = "15529497";
-            mPcs.UserName = "Demosss";
-            LbItem.Items.Add(mPcs);
+            foreach (var pcs in _DataModel.ListPcs())
+            {
+                pcs.Init();
+                LbItem.Items.Add(pcs);
+            }
+
+            //mPcs = new MPcs();
+            //mPcs.ServerType = CPcs.PCS_TYPE_KUAIPAN;
+            //mPcs.ServerName = "金山快盘";
+            //mPcs.Token = "00ecf6192d45e0ec90af333a";
+            //mPcs.TokenSecret = "01f300a7cfa64ae090f8ea6054705148";
+            //mPcs.LocalRoot = @"D:\kp";
+            //mPcs.UserId = "15529497";
+            //mPcs.UserName = "amonyao@gmail.com";
+            //_DataModel.SavePcs(mPcs);
+            //LbItem.Items.Add(mPcs);
+        }
+
+        public void CreatePcs()
+        {
+            var pcsMgr = new PcsCreate();
+            pcsMgr.Init();
+            if (DialogResult.OK != pcsMgr.ShowDialog(_WPcs))
+            {
+                return;
+            }
+            var pcs = pcsMgr.MPcs;
+            _DataModel.SavePcs(pcs);
+            LbItem.Items.Add(pcs);
+            _WPcs.OpenPcs(pcs);
+        }
+
+        public void DeletePcs()
+        {
+            var pcs = LbItem.SelectedItem as MPcs;
+            if (pcs == null)
+            {
+                return;
+            }
+            _DataModel.DeletePcs(pcs);
+            LbItem.Items.Remove(pcs);
         }
 
         #region 事件处理

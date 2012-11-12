@@ -150,6 +150,7 @@
             this.TcMeta.SelectedIndex = 0;
             this.TcMeta.Size = new System.Drawing.Size(612, 227);
             this.TcMeta.TabIndex = 0;
+            this.TcMeta.SelectedIndexChanged += new System.EventHandler(this.TcMeta_SelectedIndexChanged);
             // 
             // wListView1
             // 

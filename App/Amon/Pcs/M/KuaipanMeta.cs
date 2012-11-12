@@ -7,6 +7,10 @@ namespace Me.Amon.Pcs.M
     {
         #region 属性
         /// <summary>
+        /// 提示信息
+        /// </summary>
+        public string msg;
+        /// <summary>
         /// kuaipan 或 app_folder
         /// </summary>
         public string root;
@@ -92,6 +96,7 @@ namespace Me.Amon.Pcs.M
             }
             set
             {
+                path = value;
             }
         }
 
@@ -103,6 +108,7 @@ namespace Me.Amon.Pcs.M
             }
             set
             {
+                name = value;
             }
         }
 
@@ -114,6 +120,7 @@ namespace Me.Amon.Pcs.M
             }
             set
             {
+                hash = value;
             }
         }
 
@@ -134,6 +141,7 @@ namespace Me.Amon.Pcs.M
             }
             set
             {
+                type = "folder";
             }
         }
 
@@ -145,6 +153,7 @@ namespace Me.Amon.Pcs.M
             }
             set
             {
+                size = value;
             }
         }
 
@@ -156,6 +165,7 @@ namespace Me.Amon.Pcs.M
             }
             set
             {
+                create_time = value;
             }
         }
 
@@ -167,6 +177,7 @@ namespace Me.Amon.Pcs.M
             }
             set
             {
+                modify_time = value;
             }
         }
 
@@ -178,6 +189,7 @@ namespace Me.Amon.Pcs.M
             }
             set
             {
+                file_id = value;
             }
         }
 
@@ -189,6 +201,7 @@ namespace Me.Amon.Pcs.M
             }
             set
             {
+                rev = value;
             }
         }
 
@@ -200,6 +213,7 @@ namespace Me.Amon.Pcs.M
             }
             set
             {
+                IsDeleted = value;
             }
         }
 
