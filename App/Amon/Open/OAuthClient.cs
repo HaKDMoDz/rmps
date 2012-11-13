@@ -1,13 +1,26 @@
-﻿namespace Me.Amon.Open
+﻿using System;
+
+namespace Me.Amon.Open
 {
-    public interface OAuthClient
+    public abstract class OAuthClient
     {
-        bool RequestToken();
+        public abstract bool RequestToken();
 
-        string AuthorizeUrl { get; }
+        public abstract string GetAuthorizeUrl();
 
-        bool AccessToken();
+        public abstract bool AccessToken();
 
-        bool Verify();
+        public abstract bool Verify();
+
+        public static string GetOAuthNonce()
+        {
+            return new Random().Next(123400, 9999999).ToString();
+        }
+
+        public static string GetOAuthTimestamp()
+        {
+            TimeSpan span = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0);
+            return Math.Ceiling(span.TotalSeconds).ToString();
+        }
     }
 }

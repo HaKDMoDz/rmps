@@ -125,9 +125,9 @@ namespace Me.Amon.Open.PC
             return null;
         }
 
-        public bool Delete(string meta)
+        public bool Delete(string path, string meta)
         {
-            File.Delete(meta);
+            File.Delete(Combine(path, meta));
             return true;
         }
 

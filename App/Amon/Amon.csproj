@@ -399,7 +399,6 @@
     <Compile Include="Open\OAuthPcsAccount.cs" />
     <Compile Include="Open\SnsClient.cs" />
     <Compile Include="Open\OAuthToken.cs" />
-    <Compile Include="Open\OAuthUtility.cs" />
     <Compile Include="Open\OAuthVersion.cs" />
     <Compile Include="Open\PC\NativeAccount.cs" />
     <Compile Include="Open\PC\NativeClient.cs" />

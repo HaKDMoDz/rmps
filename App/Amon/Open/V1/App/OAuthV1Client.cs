@@ -28,7 +28,7 @@ namespace Me.Amon.Open.V1.App
         #endregion
 
         #region 接口实现
-        public bool Verify()
+        public override bool Verify()
         {
             if (!RequestToken())
             {
@@ -44,12 +44,6 @@ namespace Me.Amon.Open.V1.App
             }
             return true;
         }
-
-        public abstract bool RequestToken();
-
-        public abstract string AuthorizeUrl { get; }
-
-        public abstract bool AccessToken();
         #endregion
 
         #region 公共函数

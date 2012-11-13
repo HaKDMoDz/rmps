@@ -224,6 +224,7 @@ namespace Me.Amon.Pcs.M
             {
                 foreach (var meta in files)
                 {
+                    meta.path = path;
                     metas.Add(meta);
                 }
             }

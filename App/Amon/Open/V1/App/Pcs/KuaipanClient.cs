@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -58,12 +59,9 @@ namespace Me.Amon.Open.V1.App.Pcs
             return true;
         }
 
-        public override string AuthorizeUrl
+        public override string GetAuthorizeUrl()
         {
-            get
-            {
-                return string.Format(_Server.VerifierUrl, Token.oauth_token);
-            }
+            return string.Format(_Server.VerifierUrl, Token.oauth_token);
         }
 
         public override bool AccessToken()
@@ -103,14 +101,14 @@ namespace Me.Amon.Open.V1.App.Pcs
                     continue;
                 }
 
-                builder.Append(OAuthUtility.UrlEncode(item.Key));
+                builder.Append(Uri.EscapeDataString(item.Key));
                 builder.Append('=');
-                builder.Append(OAuthUtility.UrlEncode(item.Value));
+                builder.Append(Uri.EscapeDataString(item.Value));
                 builder.Append('&');
             }
 
-            string temp = OAuthUtility.UrlEncode(builder.ToString(0, builder.Length - 1));
-            return string.Format("{0}&{1}&{2}", HttpMethod, OAuthUtility.UrlEncode(uri), temp);
+            string temp = Uri.EscapeDataString(builder.ToString(0, builder.Length - 1));
+            return string.Format("{0}&{1}&{2}", HttpMethod, Uri.EscapeDataString(uri), temp);
         }
 
         protected override string GetString(byte[] buffer)
@@ -231,7 +229,7 @@ namespace Me.Amon.Open.V1.App.Pcs
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
             AddParam("root", KuaipanServer.ROOT_NAME);
-            AddParam("path", Combine(path, OAuthUtility.UrlEncode(name)));
+            AddParam("path", Combine(path, name));
             _Params.Sort(new NameValueComparer());
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
 
@@ -252,14 +250,14 @@ namespace Me.Amon.Open.V1.App.Pcs
             return meta;
         }
 
-        public bool Delete(string path)
+        public bool Delete(string path, string meta)
         {
             string url = KuaipanServer.DELETE;
 
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
             AddParam("root", KuaipanServer.ROOT_NAME);
-            AddParam("path", path);
+            AddParam("path", Combine(path, meta));
             AddParam("to_recycle", "true");
             _Params.Sort(new NameValueComparer());
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
@@ -392,9 +390,9 @@ namespace Me.Amon.Open.V1.App.Pcs
         {
             AddParam(OAuthConstants.OAUTH_SIGNATURE_METHOD, "HMAC-SHA1");
 
-            AddParam(OAuthConstants.OAUTH_NONCE, OAuthUtility.GetOAuthNonce());
+            AddParam(OAuthConstants.OAUTH_NONCE, KuaipanClient.GetOAuthNonce());
             //AddParam(OAuthConstants.OAUTH_NONCE, "6Gb4JdQh");
-            AddParam(OAuthConstants.OAUTH_TIMESTAMP, OAuthUtility.GetOAuthTimestamp());
+            AddParam(OAuthConstants.OAUTH_TIMESTAMP, KuaipanClient.GetOAuthTimestamp());
             //AddParam(OAuthConstants.OAUTH_TIMESTAMP, "1348192130");
             AddParam(OAuthConstants.OAUTH_CONSUMER_KEY, Consumer.consumer_key);
             AddParam(OAuthConstants.OAUTH_VERSION, "1.0");
@@ -414,9 +412,9 @@ namespace Me.Amon.Open.V1.App.Pcs
 
             foreach (KeyValuePair<string, string> item in _Params)
             {
-                builder.Append(OAuthUtility.UrlEncode(item.Key));
+                builder.Append(Uri.EscapeDataString(item.Key));
                 builder.Append('=');
-                builder.Append(OAuthUtility.UrlEncode(item.Value));
+                builder.Append(Uri.EscapeDataString(item.Value));
                 builder.Append('&');
             }
 

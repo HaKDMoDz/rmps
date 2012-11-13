@@ -28,7 +28,7 @@ namespace Me.Amon.Pcs.V.Mgr
                     {
                         return;
                     }
-                    WbBrowser.Navigate(_Client.AuthorizeUrl);
+                    WbBrowser.Navigate(_Client.GetAuthorizeUrl());
                     break;
             }
         }

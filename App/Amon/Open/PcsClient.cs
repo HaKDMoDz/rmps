@@ -43,7 +43,7 @@ namespace Me.Amon.Open
 
         CsMeta CreateFolder(string path, string name);
 
-        bool Delete(string meta);
+        bool Delete(string path, string meta);
 
         bool Moveto(CsMeta meta, string dstMeta);
 

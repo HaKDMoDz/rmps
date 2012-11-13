@@ -240,7 +240,7 @@ namespace Me.Amon.Pcs.V
                 return;
             }
 
-            _OPcs.Delete(meta.Path);
+            _OPcs.Delete(meta.Path, meta.Name);
             LvMeta.Items.Remove(item);
         }
 
