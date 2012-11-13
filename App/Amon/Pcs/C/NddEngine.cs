@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Me.Amon.Da;
 using Me.Amon.Da.Df;
+using Me.Amon.Pcs.M;
 
 namespace Me.Amon.Pcs.C
 {
@@ -35,8 +36,42 @@ namespace Me.Amon.Pcs.C
             _DFA.Set(file, ver);
         }
 
-        public void Moveto(string srcPath, string dstPath)
+        public void CreateFolder(string path, string name)
         {
+            if (path == CPcs.PATH_STORAGE)
+            {
+                path = "/";
+            }
+
+            path = Path.Combine(_Root, path.Substring(1), name);
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+        }
+
+        public void Delete(string path, string name)
+        {
+            path = Path.Combine(_Root, path, name);
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+        }
+
+        public void Moveto(CsMeta meta, string name)
+        {
+            string src = Path.Combine(_Root, meta.Path, meta.Name);
+            if (!File.Exists(src))
+            {
+                return;
+            }
+            string dst = Path.Combine(meta.Path, name);
+            if (File.Exists(dst))
+            {
+                dst = GenDupName(meta.Path, name);
+            }
+            File.Move(src, dst);
         }
 
         #region обть
@@ -105,6 +140,22 @@ namespace Me.Amon.Pcs.C
                 builder.Append(b.ToString("x2"));
             }
             return builder.ToString();
+        }
+
+        private string GenDupName(string path, string name)
+        {
+            string fn = System.IO.Path.GetFileNameWithoutExtension(name);
+            string fe = System.IO.Path.GetExtension(name);
+            int i = 0;
+            string temp;
+            do
+            {
+                i += 1;
+                name = fn + string.Format(" ({0})", i) + fe;
+                temp = System.IO.Path.Combine(path, name);
+            } while (System.IO.File.Exists(temp));
+
+            return temp;
         }
     }
 }

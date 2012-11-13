@@ -395,6 +395,7 @@
     <Compile Include="Open\OAuthAccount.cs" />
     <Compile Include="Open\OAuthClient.cs" />
     <Compile Include="Open\OAuthConsumer.cs" />
+    <Compile Include="Open\OAuthServer.cs" />
     <Compile Include="Open\PcsClient.cs" />
     <Compile Include="Open\OAuthPcsAccount.cs" />
     <Compile Include="Open\SnsClient.cs" />

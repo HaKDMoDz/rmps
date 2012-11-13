@@ -3,7 +3,7 @@ using System.Net;
 
 namespace Me.Amon.Open.V1.App
 {
-    public class OAuthV1Server
+    public class OAuthV1Server : OAuthServer
     {
         public string RequestTokenUrl { get; protected set; }
         public string VerifierUrl { get; protected set; }
@@ -95,15 +95,6 @@ namespace Me.Amon.Open.V1.App
             //}
 
             //return resultData;
-        }
-
-        public byte[] Get(string url, string data)
-        {
-            url += url.IndexOf("?") >= 0 ? '&' : '?';
-            url += data;
-
-            WebClient client = new WebClient();
-            return client.DownloadData(url);
         }
     }
 }

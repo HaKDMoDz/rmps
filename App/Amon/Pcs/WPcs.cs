@@ -150,7 +150,7 @@ namespace Me.Amon.Pcs
             switch (mPcs.ServerType)
             {
                 case "native":
-                    NewNative();
+                    NewNative(mPcs);
                     break;
                 case "kuaipan":
                     NewKuaipan(mPcs);
@@ -161,7 +161,7 @@ namespace Me.Amon.Pcs
         }
 
         private int NativeIndex = 0;
-        public void NewNative()
+        private void NewNative(MPcs mPcs)
         {
             var client = new NativeClient();
 
@@ -169,7 +169,7 @@ namespace Me.Amon.Pcs
             ntp.Text = NativeIndex < 1 ? "本地" : string.Format("本地 ({0})", NativeIndex);
             TcMeta.TabPages.Add(ntp);
 
-            var pcs = new PcsView(this, client);
+            var pcs = new PcsView(this, mPcs, client);
             pcs.Init();
             pcs.MetaUri = UcUri;
             pcs.Dock = DockStyle.Fill;
@@ -195,7 +195,7 @@ namespace Me.Amon.Pcs
             ntp.Text = mPcs.UserName;
             TcMeta.TabPages.Add(ntp);
 
-            var pcs = new PcsView(this, client);
+            var pcs = new PcsView(this, mPcs, client);
             pcs.Init();
             pcs.MetaUri = UcUri;
             pcs.Dock = DockStyle.Fill;

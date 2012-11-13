@@ -8,7 +8,7 @@ namespace Me.Amon.Pcs.E.File
         {
             if (IApp != null)
             {
-                IApp.NewNative();
+                //IApp.NewNative();
             }
         }
     }

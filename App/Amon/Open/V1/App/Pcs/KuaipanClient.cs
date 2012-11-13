@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using Me.Amon.Pcs;
@@ -11,6 +12,8 @@ namespace Me.Amon.Open.V1.App.Pcs
 {
     public class KuaipanClient : OAuthV1Client, PcsClient
     {
+        private Dictionary<long, KVItem> _Items;
+
         #region 构造函数
         public KuaipanClient(OAuthConsumer consumer)
             : base(consumer)
@@ -276,25 +279,28 @@ namespace Me.Amon.Open.V1.App.Pcs
             return true;
         }
 
-        public bool Moveto(CsMeta meta, string dstMeta)
+        public bool Moveto(CsMeta meta, string name)
         {
+            string url = KuaipanServer.MOVETO;
+
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
-            AddParam("root", "kuaipan");
-            AddParam("from_path", meta.Path);
-            AddParam("to_path", dstMeta);
+            AddParam("root", KuaipanServer.ROOT_NAME);
+            AddParam("from_path", Combine(meta.Path, meta.Name));
+            AddParam("to_path", Combine(meta.Path, name));
             _Params.Sort(new NameValueComparer());
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.RequestTokenUrl)));
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
 
             string t = GenBaseParams();
-            byte[] r = _Server.Get(KuaipanServer.CREATE_FOLDER, t);
+            byte[] r = _Server.Get(url, t);
             if (r == null || r.Length < 1)
             {
                 return false;
             }
 
             t = GetString(r);
-            JsonConvert.DeserializeObject<CsMeta>(t);
+            //JsonConvert.DeserializeObject<CsMeta>(t);
+            meta.Name = name;
             ResetParams();
 
             return true;
@@ -330,24 +336,51 @@ namespace Me.Amon.Open.V1.App.Pcs
         #endregion
 
         #region 下载
-        public long BeginRead(long key, string meta, long range)
+        public long BeginRead(long key, string url, long range)
         {
-            return 0;
+            var reqeust = (HttpWebRequest)WebRequest.Create(url);
+            if (range > 0)
+            {
+                reqeust.AddRange(range); //设置Range值
+            }
+
+            var response = reqeust.GetResponse() as HttpWebResponse;
+            if (response.StatusCode == HttpStatusCode.Accepted)
+            {
+                return -1;
+            }
+            long size = response.ContentLength;
+            if (size >= 10485760)//10M=1024*1024*10;
+            {
+                MessageBox.Show("");
+                return -1;
+            }
+            var stream = response.GetResponseStream();
+            _Items[key] = new KVItem { Response = response, Stream = stream };
+            return response.ContentLength;
         }
 
         public int Read(long key, byte[] buffer, int offset, int length)
         {
-            return 0;
+            return _Items[key].Stream.Read(buffer, offset, length);
         }
 
         public void EndRead(long key)
         {
+            if (_Items.ContainsKey(key))
+            {
+                var item = _Items[key];
+                if (item != null)
+                {
+                    item.Stream.Close();
+                    item.Response.Close();
+                }
+            }
         }
         #endregion
 
         public void Thumbnail()
         {
-            throw new System.NotImplementedException();
         }
 
         public string Parent(string path)

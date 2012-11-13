@@ -79,6 +79,18 @@ namespace Me.Amon.Open.V1.App
         {
             return Encoding.Default.GetString(buffer);
         }
+
+        protected virtual byte[] GetBytes(string text)
+        {
+            return Encoding.Default.GetBytes(text);
+        }
         #endregion
+
+        public class KVItem
+        {
+            public System.Net.HttpWebResponse Response { get; set; }
+
+            public System.IO.Stream Stream { get; set; }
+        }
     }
 }
