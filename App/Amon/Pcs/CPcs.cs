@@ -6,15 +6,21 @@ namespace Me.Amon.Pcs
         public const int META_TYPE_FOLDER = 1;
         public const int META_TYPE_FILE = 2;
 
-        public const string PATH_FAVORITES = "?fav";
-        public const string PATH_LIBRARIES = "?lib";
-        public const string PATH_DOCUMENTS = "?documents";
-        public const string PATH_PICTURES = "?pictures";
-        public const string PATH_AUDIOS = "?audios";
-        public const string PATH_VIDEOS = "?videos";
-        public const string PATH_STORAGE = "?storage";
-        public const string PATH_SHARES = "?shares";
-        public const string PATH_RECYCLE = "?recycle";
+        /// <summary>
+        /// Favourites
+        /// </summary>
+        public const string PATH_FAV = "*fav";
+        /// <summary>
+        /// Liberates
+        /// </summary>
+        public const string PATH_LIB = "*lib";
+        public const string PATH_LIB_DOCUMENTS = ":documents";
+        public const string PATH_LIB_PICTURES = ":pictures";
+        public const string PATH_LIB_AUDIOS = ":audios";
+        public const string PATH_LIB_VIDEOS = ":videos";
+        public const string PATH_ALL = "*all";
+        public const string PATH_SNS = "*sns";
+        public const string PATH_BIN = "*bin";
 
         public const string XML_MENU = "WPcs.xml";
 

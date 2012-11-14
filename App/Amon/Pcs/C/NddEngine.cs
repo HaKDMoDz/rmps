@@ -38,7 +38,7 @@ namespace Me.Amon.Pcs.C
 
         public void CreateFolder(string path, string name)
         {
-            if (path == CPcs.PATH_STORAGE)
+            if (path == CPcs.PATH_ALL)
             {
                 path = "/";
             }

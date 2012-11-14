@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Auth;
@@ -16,7 +17,7 @@ namespace Me.Amon.Pcs
     public partial class WPcs : Form, IApp
     {
         private Main _Main;
-        private AUserModel _UserModel;
+        private UserModel _UserModel;
         private DataModel _DataModel;
         private IViewModel _ViewModel;
         private XmlMenu<WPcs> _XmlMenu;
@@ -33,7 +34,7 @@ namespace Me.Amon.Pcs
         public WPcs(Main main, AUserModel userModel)
         {
             _Main = main;
-            _UserModel = userModel;
+            _UserModel = userModel as UserModel;
 
             _DataModel = new DataModel(userModel);
             _DataModel.Init();
@@ -59,12 +60,25 @@ namespace Me.Amon.Pcs
             }
             #endregion
 
+            string path = Path.Combine(_UserModel.SysHome, "Pcs");
+            if (Directory.Exists(path))
+            {
+                string key;
+                foreach (string file in Directory.GetFiles(path, "*16.png"))
+                {
+                    key = Path.GetFileNameWithoutExtension(file);
+                    key = key.Substring(0, key.Length - 2);
+                    IlPcsList.Images.Add(key, Image.FromFile(file));
+                }
+            }
+
             _DefPage = new TabPage();
             _DefPage.Text = "首页";
+            _DefPage.ImageKey = "main";
             //_DefPage.Location = new System.Drawing.Point(4, 23);
             //_DefPage.Padding = new System.Windows.Forms.Padding(3);
             //_DefPage.Size = new System.Drawing.Size(604, 300);
-            _PcsList = new PcsList(this, _DataModel);
+            _PcsList = new PcsList(this, _UserModel, _DataModel);
             _PcsList.Init();
             _PcsList.Dock = DockStyle.Fill;
             _DefPage.Controls.Add(_PcsList);
@@ -167,6 +181,7 @@ namespace Me.Amon.Pcs
 
             TabPage ntp = new TabPage();
             ntp.Text = NativeIndex < 1 ? "本地" : string.Format("本地 ({0})", NativeIndex);
+            ntp.ImageKey = CPcs.PCS_TYPE_NATIVE;
             TcMeta.TabPages.Add(ntp);
 
             var pcs = new PcsView(this, mPcs, client);
@@ -193,6 +208,7 @@ namespace Me.Amon.Pcs
 
             TabPage ntp = new TabPage();
             ntp.Text = mPcs.UserName;
+            ntp.ImageKey = CPcs.PCS_TYPE_KUAIPAN;
             TcMeta.TabPages.Add(ntp);
 
             var pcs = new PcsView(this, mPcs, client);
@@ -200,6 +216,8 @@ namespace Me.Amon.Pcs
             pcs.MetaUri = UcUri;
             pcs.Dock = DockStyle.Fill;
             ntp.Controls.Add(pcs);
+
+            TcMeta.SelectedTab = ntp;
         }
 
         public void CutMeta()
@@ -329,9 +347,15 @@ namespace Me.Amon.Pcs
         #region 私有函数
         #endregion
 
+        #region 事件处理
         private void TcMeta_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            bool isOk = TcMeta.SelectedIndex != 0;
+            int idx = TcMeta.SelectedIndex;
+            if (idx < 0)
+            {
+                return;
+            }
+            bool isOk = idx != 0;
 
             var item = _XmlMenu.GetMenuItem("edit");
             if (item != null)
@@ -354,5 +378,14 @@ namespace Me.Amon.Pcs
                 _CurView = null;
             }
         }
+
+        private void TcMeta_TabClosing(object sender, TabControlCancelEventArgs e)
+        {
+            if (e.TabPage == _DefPage)
+            {
+                e.Cancel = true;
+            }
+        }
+        #endregion
     }
 }

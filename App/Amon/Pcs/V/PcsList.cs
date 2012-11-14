@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Pcs.M;
 using Me.Amon.Pcs.V.Mgr;
@@ -9,6 +10,7 @@ namespace Me.Amon.Pcs.V
     public partial class PcsList : UserControl
     {
         private WPcs _WPcs;
+        private UserModel _UserModel;
         private DataModel _DataModel;
 
         #region 构造函数
@@ -17,9 +19,10 @@ namespace Me.Amon.Pcs.V
             InitializeComponent();
         }
 
-        public PcsList(WPcs wPcs, DataModel dataModel)
+        public PcsList(WPcs wPcs, UserModel userModel, DataModel dataModel)
         {
             _WPcs = wPcs;
+            _UserModel = userModel;
             _DataModel = dataModel;
 
             InitializeComponent();
@@ -28,29 +31,29 @@ namespace Me.Amon.Pcs.V
 
         public void Init()
         {
+            string path = Path.Combine(_UserModel.SysHome, "Pcs");
+            string file = Path.Combine(path, "native24.png");
             MPcs mPcs = new MPcs();
             mPcs.ServerType = CPcs.PCS_TYPE_NATIVE;
             mPcs.ServerName = "本地演示";
             mPcs.UserId = "0";
             mPcs.UserName = Environment.UserName;
+            if (File.Exists(file))
+            {
+                mPcs.Logo = Image.FromFile(file);
+            }
             LbItem.Items.Add(mPcs);
 
             foreach (var pcs in _DataModel.ListPcs())
             {
                 pcs.Init();
+                file = Path.Combine(path, pcs.ServerType + "24.png");
+                if (File.Exists(file))
+                {
+                    pcs.Logo = Image.FromFile(file);
+                }
                 LbItem.Items.Add(pcs);
             }
-
-            //mPcs = new MPcs();
-            //mPcs.ServerType = CPcs.PCS_TYPE_KUAIPAN;
-            //mPcs.ServerName = "金山快盘";
-            //mPcs.Token = "00ecf6192d45e0ec90af333a";
-            //mPcs.TokenSecret = "01f300a7cfa64ae090f8ea6054705148";
-            //mPcs.LocalRoot = @"D:\kp";
-            //mPcs.UserId = "15529497";
-            //mPcs.UserName = "amonyao@gmail.com";
-            //_DataModel.SavePcs(mPcs);
-            //LbItem.Items.Add(mPcs);
         }
 
         public void CreatePcs()
@@ -88,20 +91,23 @@ namespace Me.Amon.Pcs.V
                 return;
             }
 
-            MPcs key = LbItem.Items[e.Index] as MPcs;
-            if (key == null)
+            MPcs pcs = LbItem.Items[e.Index] as MPcs;
+            if (pcs == null)
             {
                 return;
             }
 
-            //e.Graphics.DrawImage(key.Icon, e.Bounds.X + 3, e.Bounds.Y + 3, 24, 24);
+            if (pcs.Logo != null)
+            {
+                e.Graphics.DrawImage(pcs.Logo, e.Bounds.X + 3, e.Bounds.Y + 3, 24, 24);
+            }
 
             //最后把要显示的文字画在背景图片上
             int y = e.Bounds.Y + 2;
-            e.Graphics.DrawString(key.ServerName, LbItem.Font, new SolidBrush(e.ForeColor), e.Bounds.X + 30, y);
+            e.Graphics.DrawString(pcs.ServerName, LbItem.Font, new SolidBrush(e.ForeColor), e.Bounds.X + 30, y);
 
             y = e.Bounds.Y + e.Bounds.Height;
-            e.Graphics.DrawString(key.UserName, LbItem.Font, Brushes.Gray, e.Bounds.X + 30, y - 14);
+            e.Graphics.DrawString(pcs.UserName, LbItem.Font, Brushes.Gray, e.Bounds.X + 30, y - 14);
         }
 
         private void LbItem_SelectedIndexChanged(object sender, EventArgs e)

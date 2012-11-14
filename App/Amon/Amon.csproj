@@ -441,7 +441,9 @@
     <Compile Include="Pcs\E\Edit\CreateAction.cs" />
     <Compile Include="Pcs\E\Edit\CutAction.cs" />
     <Compile Include="Pcs\E\Edit\DeleteAction.cs" />
+    <Compile Include="Pcs\E\Edit\EditAction.cs" />
     <Compile Include="Pcs\E\Edit\FavNewAction.cs" />
+    <Compile Include="Pcs\E\Edit\OpenAction.cs" />
     <Compile Include="Pcs\E\Edit\PasteAction.cs" />
     <Compile Include="Pcs\E\Edit\RenameAction.cs" />
     <Compile Include="Pcs\E\File\CreateAction.cs" />

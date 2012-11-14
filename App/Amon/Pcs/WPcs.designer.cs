@@ -40,6 +40,7 @@
             this.UcUri = new Me.Amon.Pcs.V.MetaUri();
             this.TbTool = new System.Windows.Forms.ToolStrip();
             this.TtTips = new System.Windows.Forms.ToolTip(this.components);
+            this.IlPcsList = new System.Windows.Forms.ImageList(this.components);
             this.SbEcho.SuspendLayout();
             this.TcMain.ContentPanel.SuspendLayout();
             this.TcMain.TopToolStripPanel.SuspendLayout();
@@ -139,17 +140,20 @@
             this.TcMeta.DisplayStyleProvider.Overlap = 0;
             this.TcMeta.DisplayStyleProvider.Padding = new System.Drawing.Point(6, 3);
             this.TcMeta.DisplayStyleProvider.Radius = 2;
-            this.TcMeta.DisplayStyleProvider.ShowTabCloser = false;
+            this.TcMeta.DisplayStyleProvider.ShowTabCloser = true;
             this.TcMeta.DisplayStyleProvider.TextColor = System.Drawing.SystemColors.ControlText;
             this.TcMeta.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.TcMeta.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
             this.TcMeta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TcMeta.HotTrack = true;
+            this.TcMeta.ImageList = this.IlPcsList;
             this.TcMeta.Location = new System.Drawing.Point(0, 0);
             this.TcMeta.Name = "TcMeta";
             this.TcMeta.SelectedIndex = 0;
+            this.TcMeta.ShowToolTips = true;
             this.TcMeta.Size = new System.Drawing.Size(612, 227);
             this.TcMeta.TabIndex = 0;
+            this.TcMeta.TabClosing += new System.EventHandler<System.Windows.Forms.TabControlCancelEventArgs>(this.TcMeta_TabClosing);
             this.TcMeta.SelectedIndexChanged += new System.EventHandler(this.TcMeta_SelectedIndexChanged);
             // 
             // wListView1
@@ -185,6 +189,12 @@
             this.TbTool.Name = "TbTool";
             this.TbTool.Size = new System.Drawing.Size(111, 25);
             this.TbTool.TabIndex = 0;
+            // 
+            // IlPcsList
+            // 
+            this.IlPcsList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.IlPcsList.ImageSize = new System.Drawing.Size(16, 16);
+            this.IlPcsList.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // WPcs
             // 
@@ -226,5 +236,6 @@
         private System.Windows.Forms.ATabControl TcMeta;
         private V.WListView wListView1;
         private System.Windows.Forms.ToolTip TtTips;
+        private System.Windows.Forms.ImageList IlPcsList;
     }
 }

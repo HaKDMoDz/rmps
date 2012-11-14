@@ -994,6 +994,7 @@ namespace Me.Amon.Uc
         private static ToolStripItem processText(XmlNode node, ToolStripItem button)
         {
             string text = Attribute(node, "Text", "");
+            text = text.Replace('@', '&');
             button.Text = string.IsNullOrEmpty(text) ? "..." : text;
             return button;
         }

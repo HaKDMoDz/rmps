@@ -152,17 +152,17 @@ namespace Me.Amon.Open.V1.App.Pcs
         {
             switch (key)
             {
-                case CPcs.PATH_DOCUMENTS:
+                case CPcs.PATH_LIB_DOCUMENTS:
                     return key;
-                case CPcs.PATH_AUDIOS:
+                case CPcs.PATH_LIB_AUDIOS:
                     return key;
-                case CPcs.PATH_PICTURES:
+                case CPcs.PATH_LIB_PICTURES:
                     return key;
-                case CPcs.PATH_VIDEOS:
+                case CPcs.PATH_LIB_VIDEOS:
                     return key;
-                case CPcs.PATH_STORAGE:
+                case CPcs.PATH_ALL:
                     return "/";
-                case CPcs.PATH_RECYCLE:
+                case CPcs.PATH_BIN:
                     return @"C:\Recycled";
                 default:
                     return key;
@@ -400,7 +400,7 @@ namespace Me.Amon.Open.V1.App.Pcs
 
         public string Combine(string path, string meta)
         {
-            if (path == CPcs.PATH_STORAGE)
+            if (path == CPcs.PATH_ALL)
             {
                 path = "/";
             }

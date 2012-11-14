@@ -68,56 +68,56 @@ namespace Me.Amon.Pcs.V
 
             _TnFav = new TreeNode();
             _TnFav.Text = "收藏";
-            _TnFav.ImageKey = "_fav";
-            _TnFav.Tag = new Cat { Meta = CPcs.PATH_FAVORITES, Text = "收藏" };
+            _TnFav.ImageKey = CPcs.PATH_FAV;
+            _TnFav.Tag = new Cat { Meta = CPcs.PATH_FAV, Text = "收藏" };
             TvPath.Nodes.Add(_TnFav);
 
             _TnPub = new TreeNode();
             _TnPub.Text = "公共";
-            _TnPub.ImageKey = "_lib";
-            _TnPub.Tag = new Cat { Meta = CPcs.PATH_LIBRARIES, Text = "公共" };
+            _TnPub.ImageKey = CPcs.PATH_LIB;
+            _TnPub.Tag = new Cat { Meta = CPcs.PATH_LIB, Text = "公共" };
             TvPath.Nodes.Add(_TnPub);
 
             TreeNode node = new TreeNode();
             node.Text = "文档";
             node.ImageKey = "icon";
-            node.Tag = new Cat { Meta = _PcsClient.GetPath(CPcs.PATH_DOCUMENTS), Text = "文档" };
+            node.Tag = new Cat { Meta = _PcsClient.GetPath(CPcs.PATH_LIB_DOCUMENTS), Text = "文档" };
             _TnPub.Nodes.Add(node);
 
             node = new TreeNode();
             node.Text = "图片";
             node.ImageKey = "icon";
-            node.Tag = new Cat { Meta = _PcsClient.GetPath(CPcs.PATH_PICTURES), Text = "图片" };
+            node.Tag = new Cat { Meta = _PcsClient.GetPath(CPcs.PATH_LIB_PICTURES), Text = "图片" };
             _TnPub.Nodes.Add(node);
 
             node = new TreeNode();
             node.Text = "音乐";
             node.ImageKey = "icon";
-            node.Tag = new Cat { Meta = _PcsClient.GetPath(CPcs.PATH_AUDIOS), Text = "音乐" };
+            node.Tag = new Cat { Meta = _PcsClient.GetPath(CPcs.PATH_LIB_AUDIOS), Text = "音乐" };
             _TnPub.Nodes.Add(node);
 
             node = new TreeNode();
             node.Text = "视频";
             node.ImageKey = "icon";
-            node.Tag = new Cat { Meta = _PcsClient.GetPath(CPcs.PATH_VIDEOS), Text = "视频" };
+            node.Tag = new Cat { Meta = _PcsClient.GetPath(CPcs.PATH_LIB_VIDEOS), Text = "视频" };
             _TnPub.Nodes.Add(node);
 
             _TnAll = new TreeNode();
             _TnAll.Text = "所有";
-            _TnAll.ImageKey = "_all";
-            _TnAll.Tag = new Cat { Meta = CPcs.PATH_STORAGE, Text = "所有" };
+            _TnAll.ImageKey = CPcs.PATH_ALL;
+            _TnAll.Tag = new Cat { Meta = CPcs.PATH_ALL, Text = "所有" };
             TvPath.Nodes.Add(_TnAll);
 
             _TnSns = new TreeNode();
             _TnSns.Text = "分享";
-            _TnSns.ImageKey = "_sns";
-            _TnSns.Tag = new Cat { Meta = _PcsClient.GetPath(CPcs.PATH_SHARES), Text = "分享" };
+            _TnSns.ImageKey = CPcs.PATH_SNS;
+            _TnSns.Tag = new Cat { Meta = _PcsClient.GetPath(CPcs.PATH_SNS), Text = "分享" };
             TvPath.Nodes.Add(_TnSns);
 
             _TnBin = new TreeNode();
             _TnBin.Text = "回收站";
-            _TnBin.ImageKey = "_bin";
-            _TnBin.Tag = new Cat { Meta = _PcsClient.GetPath(CPcs.PATH_RECYCLE), Text = "回收站" };
+            _TnBin.ImageKey = CPcs.PATH_BIN;
+            _TnBin.Tag = new Cat { Meta = _PcsClient.GetPath(CPcs.PATH_BIN), Text = "回收站" };
             TvPath.Nodes.Add(_TnBin);
 
             _NddEngine = new NddEngine();
@@ -369,11 +369,11 @@ namespace Me.Amon.Pcs.V
             {
                 switch (_SelectedCat.Meta)
                 {
-                    case CPcs.PATH_FAVORITES:
+                    case CPcs.PATH_FAV:
                         break;
-                    case CPcs.PATH_LIBRARIES:
+                    case CPcs.PATH_LIB:
                         break;
-                    case CPcs.PATH_STORAGE:
+                    case CPcs.PATH_ALL:
                         ShowMeta(_PcsClient.ListMeta(_SelectedCat.Meta), node);
                         break;
                     default:

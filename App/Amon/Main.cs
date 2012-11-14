@@ -8,7 +8,6 @@ using Me.Amon.Auth;
 using Me.Amon.C;
 using Me.Amon.M;
 using Me.Amon.Properties;
-using Me.Amon.Pwd.M;
 using Me.Amon.User;
 using Me.Amon.Util;
 using Me.Amon.Uw;
@@ -217,7 +216,7 @@ namespace Me.Amon
         {
             Icon = Me.Amon.Properties.Resources.Icon;
 
-            _UserModel = new UserModel();
+            _UserModel = new Pcs.M.UserModel();
             _UserModel.Init();
 
             // 系统日志

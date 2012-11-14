@@ -97,6 +97,7 @@
             this.LvMeta.DragDrop += new System.Windows.Forms.DragEventHandler(this.LvMeta_DragDrop);
             this.LvMeta.DragEnter += new System.Windows.Forms.DragEventHandler(this.LvMeta_DragEnter);
             this.LvMeta.DoubleClick += new System.EventHandler(this.LvMeta_DoubleClick);
+            this.LvMeta.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LvMeta_MouseUp);
             // 
             // PcsView
             // 

@@ -29,5 +29,13 @@
             consumer.consumer_secret = "qu9zeUeXgIJVClxaJr6tplLBolpXrw8A";
             return consumer;
         }
+
+        public static OAuthConsumer KanboxConsumer()
+        {
+            var consumer = new OAuthConsumer();
+            consumer.consumer_key = "b00631e8019dd71afd23423da813fd3b";
+            consumer.consumer_secret = "2553032e836e4de9d2e6a6bc2628c437";
+            return consumer;
+        }
     }
 }

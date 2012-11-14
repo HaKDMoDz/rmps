@@ -43,15 +43,15 @@ namespace Me.Amon.Open.PC
         {
             switch (key)
             {
-                case CPcs.PATH_DOCUMENTS:
+                case CPcs.PATH_LIB_DOCUMENTS:
                     return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                case CPcs.PATH_AUDIOS:
+                case CPcs.PATH_LIB_AUDIOS:
                     return Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
-                case CPcs.PATH_PICTURES:
+                case CPcs.PATH_LIB_PICTURES:
                     return Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-                case CPcs.PATH_VIDEOS:
+                case CPcs.PATH_LIB_VIDEOS:
                     return Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
-                case CPcs.PATH_RECYCLE:
+                case CPcs.PATH_BIN:
                     return @"C:\Recycled";
                 default:
                     return key;
