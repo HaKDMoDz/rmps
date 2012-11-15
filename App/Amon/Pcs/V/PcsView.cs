@@ -50,10 +50,11 @@ namespace Me.Amon.Pcs.V
             InitializeComponent();
         }
 
-        public PcsView(WPcs wPcs, MPcs mPcs, PcsClient pcsClient)
+        public PcsView(WPcs wPcs, MPcs mPcs, DataModel dataModel, PcsClient pcsClient)
         {
             _WPcs = wPcs;
             _MPcs = mPcs;
+            _DataModel = dataModel;
             _PcsClient = pcsClient;
 
             InitializeComponent();
@@ -291,6 +292,8 @@ namespace Me.Amon.Pcs.V
 
         public void AddFav(string name)
         {
+            string oldName = _WPcs.SelectedMeta.Name;
+            _DataModel.SaveMeta(_WPcs.SelectedMeta);
             //var meta = new Cat();
             //meta.Text = name;
             //meta.Meta = _WPcs.SelectedMeta.Path;
@@ -298,8 +301,7 @@ namespace Me.Amon.Pcs.V
             //meta.Type = _WPcs.SelectedMeta.Type;
             //meta.Rev = _WPcs.SelectedMeta.Rev;
 
-            //_TnFav.Nodes.Add(GenNode(meta));
-            //_DataModel.SaveMeta(meta);
+            _TnFav.Nodes.Add(GenNode(_WPcs.SelectedMeta));
         }
 
         public void CreateFolder()
@@ -365,7 +367,12 @@ namespace Me.Amon.Pcs.V
 
             ShowInfo();
 
-            if (_SelectedCat.Meta[0] == '?')
+            if (string.IsNullOrWhiteSpace(_SelectedCat.Meta))
+            {
+                return;
+            }
+
+            if (_SelectedCat.Meta[0] == '*')
             {
                 switch (_SelectedCat.Meta)
                 {
@@ -381,7 +388,10 @@ namespace Me.Amon.Pcs.V
                 }
                 //node.Nodes.Clear();
             }
-            else if (!string.IsNullOrEmpty(_SelectedCat.Meta))
+            else if (_SelectedCat.Meta[0] == ':')
+            {
+            }
+            else
             {
                 ShowMeta(_PcsClient.ListMeta(_SelectedCat.Meta), node);
             }

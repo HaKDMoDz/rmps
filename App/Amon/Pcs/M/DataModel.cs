@@ -31,6 +31,10 @@ namespace Me.Amon.Pcs.M
             _DbEngine.Store(pcs);
         }
 
+        public void SaveMeta(CsMeta meta)
+        {
+        }
+
         public void RemovePcs(MPcs pcs)
         {
         }

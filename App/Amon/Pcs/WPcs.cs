@@ -184,7 +184,7 @@ namespace Me.Amon.Pcs
             ntp.ImageKey = CPcs.PCS_TYPE_NATIVE;
             TcMeta.TabPages.Add(ntp);
 
-            var pcs = new PcsView(this, mPcs, client);
+            var pcs = new PcsView(this, mPcs, _DataModel, client);
             pcs.Init();
             pcs.MetaUri = UcUri;
             pcs.Dock = DockStyle.Fill;
@@ -211,7 +211,7 @@ namespace Me.Amon.Pcs
             ntp.ImageKey = CPcs.PCS_TYPE_KUAIPAN;
             TcMeta.TabPages.Add(ntp);
 
-            var pcs = new PcsView(this, mPcs, client);
+            var pcs = new PcsView(this, mPcs, _DataModel, client);
             pcs.Init();
             pcs.MetaUri = UcUri;
             pcs.Dock = DockStyle.Fill;
@@ -272,6 +272,14 @@ namespace Me.Amon.Pcs
             {
                 _CurView.RenameMeta();
             }
+        }
+
+        public void DownloadMeta()
+        {
+        }
+
+        public void UploadMeta()
+        {
         }
 
         public void AddFav(string name)

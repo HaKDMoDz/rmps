@@ -6,6 +6,11 @@ namespace Me.Amon.Pcs.M
     public abstract class CsMeta
     {
         /// <summary>
+        /// 系统提示
+        /// </summary>
+        public string Message { get; set; }
+
+        /// <summary>
         /// kuaipan 或 app_folder
         /// </summary>
         public abstract string Root { get; set; }

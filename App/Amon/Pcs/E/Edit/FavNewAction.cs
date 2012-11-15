@@ -11,10 +11,18 @@ namespace Me.Amon.Pcs.E.Edit
                 return;
             }
 
-            string name = Main.ShowInput("", IApp.SelectedMeta.Name);
-            if (string.IsNullOrWhiteSpace(name))
+            string name = IApp.SelectedMeta.Name;
+            while (true)
             {
-                return;
+                name = Main.ShowInput("«Î ‰»Î ’≤ÿ√˚≥∆£∫", IApp.SelectedMeta.Name);
+                if (name == null)
+                {
+                    return;
+                }
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    break;
+                }
             }
             IApp.AddFav(name);
         }

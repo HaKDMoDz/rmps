@@ -463,6 +463,7 @@
     <Compile Include="Pcs\M\CsFile.cs" />
     <Compile Include="Pcs\M\CsMeta.cs" />
     <Compile Include="Pcs\M\DataModel.cs" />
+    <Compile Include="Pcs\M\DropboxMeta.cs" />
     <Compile Include="Pcs\M\KuaipanMeta.cs" />
     <Compile Include="Pcs\M\MPcs.cs" />
     <Compile Include="Pcs\M\NativeMeta.cs" />
