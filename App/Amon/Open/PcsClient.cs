@@ -25,31 +25,31 @@ namespace Me.Amon.Open
         /// 数据列表
         /// </summary>
         /// <param name="path"></param>
-        List<CsMeta> ListMeta(CsMeta meta);
+        List<AMeta> ListMeta(AMeta meta);
 
-        List<CsMeta> ListMeta(string path);
+        List<AMeta> ListMeta(string path);
 
         string GetPath(string key);
 
         /// <summary>
         /// 获取文件外链
         /// </summary>
-        string ShareMeta(CsMeta meta);
+        string ShareMeta(AMeta meta);
 
         /// <summary>
         /// 文件历史版本
         /// </summary>
-        List<CsMeta> History(CsMeta meta);
+        List<AMeta> History(AMeta meta);
 
-        CsMeta CreateFolder(string path, string name);
+        AMeta CreateFolder(string path, string name);
 
         bool Delete(string path, string meta);
 
-        bool Moveto(CsMeta meta, string dstMeta);
+        bool Moveto(AMeta meta, string dstMeta);
 
-        bool Copyto(CsMeta meta, string dstMeta);
+        bool Copyto(AMeta meta, string dstMeta);
 
-        void CopyRef(CsMeta meta);
+        void CopyRef(AMeta meta);
 
         long BeginWrite(long key, string remoteMeta);
 

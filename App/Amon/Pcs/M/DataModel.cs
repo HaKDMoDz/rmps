@@ -31,8 +31,18 @@ namespace Me.Amon.Pcs.M
             _DbEngine.Store(pcs);
         }
 
-        public void SaveMeta(CsMeta meta)
+        public void SaveMeta(FolderMeta meta)
         {
+            _DbEngine.Store(meta);
+        }
+
+        public IList<FolderMeta> ListMeta(string type, string user)
+        {
+            return _DbEngine.Query<FolderMeta>(
+                delegate(FolderMeta meta)
+                {
+                    return meta.ServerType == type && meta.ServerUser == user;
+                });
         }
 
         public void RemovePcs(MPcs pcs)

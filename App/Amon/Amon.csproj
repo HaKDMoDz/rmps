@@ -460,8 +460,8 @@
     <Compile Include="Pcs\E\User\LkeyAction.cs" />
     <Compile Include="Pcs\E\User\PkeyAction.cs" />
     <Compile Include="Pcs\E\User\SkeyAction.cs" />
-    <Compile Include="Pcs\M\CsFile.cs" />
-    <Compile Include="Pcs\M\CsMeta.cs" />
+    <Compile Include="Pcs\M\FolderMeta.cs" />
+    <Compile Include="Pcs\M\AMeta.cs" />
     <Compile Include="Pcs\M\DataModel.cs" />
     <Compile Include="Pcs\M\DropboxMeta.cs" />
     <Compile Include="Pcs\M\KuaipanMeta.cs" />

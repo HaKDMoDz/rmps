@@ -11,10 +11,10 @@ namespace Me.Amon.Pcs.E.Edit
                 return;
             }
 
-            string name = IApp.SelectedMeta.Name;
+            string name = IApp.SelectedMeta.GetName();
             while (true)
             {
-                name = Main.ShowInput("请输入收藏名称：", IApp.SelectedMeta.Name);
+                name = Main.ShowInput("请输入收藏名称：", name);
                 if (name == null)
                 {
                     return;

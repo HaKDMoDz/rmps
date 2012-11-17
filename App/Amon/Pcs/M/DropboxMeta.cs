@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Me.Amon.Pcs.M
 {
-    public class DropboxMeta : CsMeta
+    public class DropboxMeta : AMeta
     {
         /// <summary>
         /// A human-readable description of the file size (translated by locale).
@@ -53,156 +53,83 @@ namespace Me.Amon.Pcs.M
         /// The root or top-level folder depending on your access level. All paths returned are relative to this root level. Permitted values are either dropbox or app_folder.
         /// </summary>
         public string root;
-        /// <summary>
-        /// A deprecated field that semi-uniquely identifies a file. Use rev instead.
-        /// </summary>
-        public string revision;
 
         public string mime_type;
 
         public DropboxMeta[] contents;
 
         #region 属性重写
-        public override string Root
+        public override string GetMessage()
         {
-            get
-            {
-                return root;
-            }
-            set
-            {
-                root = value;
-            }
+            return "";
         }
 
-        public override string Path
+        public override string GetRoot()
         {
-            get
-            {
-                return path;
-            }
-            set
-            {
-                path = value;
-            }
+            return root;
         }
 
-        public override string Name
+        public override string GetPath()
         {
-            get
-            {
-                return "";
-            }
-            set
-            {
-            }
+            return path;
         }
 
-        public override string Hash
+        public override void SetPath(string path)
         {
-            get
-            {
-                return is_dir ? hash : rev;
-            }
-            set
-            {
-                if (is_dir)
-                {
-                    hash = value;
-                }
-                else
-                {
-                    rev = value;
-                }
-            }
         }
 
-        public override int Type
+        public override string GetName()
         {
-            get
-            {
-                return is_dir ? CPcs.META_TYPE_FOLDER : CPcs.META_TYPE_FILE;
-            }
-            set
-            {
-                is_dir = value == CPcs.META_TYPE_FOLDER;
-            }
+            return "";
         }
 
-        public override int Size
+        public override void SetName(string name)
         {
-            get
-            {
-                return bytes;
-            }
-            set
-            {
-                bytes = value;
-            }
         }
 
-        public override DateTime CreateTime
+        public override string GetHash()
         {
-            get
-            {
-                return modified;
-            }
-            set
-            {
-            }
+            return is_dir ? hash : rev;
         }
 
-        public override DateTime ModifyTime
+        public override int GetMetaType()
         {
-            get
-            {
-                return modified;
-            }
-            set
-            {
-                modified = value;
-            }
+            return is_dir ? CPcs.META_TYPE_FOLDER : CPcs.META_TYPE_FILE;
         }
 
-        public override string FileId
+        public override int GetSize()
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            return bytes;
         }
 
-        public override string Rev
+        public override DateTime GetCreateTime()
         {
-            get
-            {
-                return rev;
-            }
-            set
-            {
-                rev = value;
-            }
+            return modified;
         }
 
-        public override bool IsDeleted
+        public override DateTime GetModifyTime()
         {
-            get
-            {
-                return is_deleted;
-            }
-            set
-            {
-                is_deleted = value;
-            }
+            return modified;
         }
 
-        public override List<CsMeta> SubMetas()
+        public override string GetMetaId()
         {
-            return new List<CsMeta>();
+            return "";
+        }
+
+        public override string GetRevison()
+        {
+            return rev;
+        }
+
+        public override bool IsDeleted()
+        {
+            return is_deleted;
+        }
+
+        public override List<AMeta> SubMetas()
+        {
+            return new List<AMeta>();
         }
         #endregion
     }

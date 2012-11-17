@@ -59,17 +59,17 @@ namespace Me.Amon.Pcs.C
             }
         }
 
-        public void Moveto(CsMeta meta, string name)
+        public void Moveto(AMeta meta, string name)
         {
-            string src = Path.Combine(_Root, meta.Path, meta.Name);
+            string src = Path.Combine(_Root, meta.GetPath(), meta.GetName());
             if (!File.Exists(src))
             {
                 return;
             }
-            string dst = Path.Combine(meta.Path, name);
+            string dst = Path.Combine(meta.GetPath(), name);
             if (File.Exists(dst))
             {
-                dst = GenDupName(meta.Path, name);
+                dst = GenDupName(meta.GetPath(), name);
             }
             File.Move(src, dst);
         }

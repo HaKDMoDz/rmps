@@ -32,6 +32,7 @@
             this.ScView = new System.Windows.Forms.SplitContainer();
             this.TvPath = new System.Windows.Forms.TreeView();
             this.LvMeta = new System.Windows.Forms.ListView();
+            this.BwWorker = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.ScMain)).BeginInit();
             this.ScMain.Panel1.SuspendLayout();
             this.ScMain.SuspendLayout();
@@ -99,6 +100,14 @@
             this.LvMeta.DoubleClick += new System.EventHandler(this.LvMeta_DoubleClick);
             this.LvMeta.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LvMeta_MouseUp);
             // 
+            // BwWorker
+            // 
+            this.BwWorker.WorkerReportsProgress = true;
+            this.BwWorker.WorkerSupportsCancellation = true;
+            this.BwWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BwWorker_DoWork);
+            this.BwWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BwWorker_ProgressChanged);
+            this.BwWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BwWorker_RunWorkerCompleted);
+            // 
             // PcsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -123,5 +132,6 @@
         private System.Windows.Forms.SplitContainer ScView;
         private System.Windows.Forms.TreeView TvPath;
         private System.Windows.Forms.ListView LvMeta;
+        private System.ComponentModel.BackgroundWorker BwWorker;
     }
 }

@@ -169,13 +169,13 @@ namespace Me.Amon.Open.V1.App.Pcs
             }
         }
 
-        public List<CsMeta> ListMeta(CsMeta meta)
+        public List<AMeta> ListMeta(AMeta meta)
         {
-            string url = string.Format(KuaipanServer.LIST_META, meta.Path);
+            string url = string.Format(KuaipanServer.LIST_META, meta.GetPath());
             return ListMeta(url);
         }
 
-        public List<CsMeta> ListMeta(string path)
+        public List<AMeta> ListMeta(string path)
         {
             path = KuaipanServer.LIST_META + GetPath(path);
 
@@ -197,9 +197,9 @@ namespace Me.Amon.Open.V1.App.Pcs
             return meta.SubMetas();
         }
 
-        public string ShareMeta(CsMeta meta)
+        public string ShareMeta(AMeta meta)
         {
-            string url = string.Format(KuaipanServer.SHARE_META, meta.Path);
+            string url = string.Format(KuaipanServer.SHARE_META, meta.GetPath());
 
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
@@ -220,12 +220,12 @@ namespace Me.Amon.Open.V1.App.Pcs
             return "";
         }
 
-        public List<CsMeta> History(CsMeta meta)
+        public List<AMeta> History(AMeta meta)
         {
             return null;
         }
 
-        public CsMeta CreateFolder(string path, string name)
+        public AMeta CreateFolder(string path, string name)
         {
             string url = KuaipanServer.CREATE_FOLDER;
 
@@ -279,15 +279,15 @@ namespace Me.Amon.Open.V1.App.Pcs
             return true;
         }
 
-        public bool Moveto(CsMeta meta, string name)
+        public bool Moveto(AMeta meta, string name)
         {
             string url = KuaipanServer.MOVETO;
 
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
             AddParam("root", KuaipanServer.ROOT_NAME);
-            AddParam("from_path", Combine(meta.Path, meta.Name));
-            AddParam("to_path", Combine(meta.Path, name));
+            AddParam("from_path", Combine(meta.GetPath(), meta.GetName()));
+            AddParam("to_path", Combine(meta.GetPath(), name));
             _Params.Sort(new NameValueComparer());
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
 
@@ -300,20 +300,20 @@ namespace Me.Amon.Open.V1.App.Pcs
 
             t = GetString(r);
             //JsonConvert.DeserializeObject<CsMeta>(t);
-            meta.Name = name;
+            meta.SetName(name);
             ResetParams();
 
             return true;
         }
 
-        public bool Copyto(CsMeta meta, string dstMeta)
+        public bool Copyto(AMeta meta, string dstMeta)
         {
             ResetParams();
 
             return true;
         }
 
-        public void CopyRef(CsMeta meta)
+        public void CopyRef(AMeta meta)
         {
             ResetParams();
 

@@ -116,7 +116,7 @@ namespace Me.Amon.Pcs
         #endregion
 
         #region 公共函数
-        public CsMeta SelectedMeta { get; set; }
+        public AMeta SelectedMeta { get; set; }
 
         public EPcs Operation { get; set; }
 
@@ -184,7 +184,7 @@ namespace Me.Amon.Pcs
             ntp.ImageKey = CPcs.PCS_TYPE_NATIVE;
             TcMeta.TabPages.Add(ntp);
 
-            var pcs = new PcsView(this, mPcs, _DataModel, client);
+            var pcs = new PcsView(this, mPcs, client, _UserModel, _DataModel);
             pcs.Init();
             pcs.MetaUri = UcUri;
             pcs.Dock = DockStyle.Fill;
@@ -211,7 +211,7 @@ namespace Me.Amon.Pcs
             ntp.ImageKey = CPcs.PCS_TYPE_KUAIPAN;
             TcMeta.TabPages.Add(ntp);
 
-            var pcs = new PcsView(this, mPcs, _DataModel, client);
+            var pcs = new PcsView(this, mPcs, client, _UserModel, _DataModel);
             pcs.Init();
             pcs.MetaUri = UcUri;
             pcs.Dock = DockStyle.Fill;

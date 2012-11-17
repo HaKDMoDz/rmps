@@ -58,31 +58,31 @@ namespace Me.Amon.Open.PC
             }
         }
 
-        public List<CsMeta> ListMeta(CsMeta meta)
+        public List<AMeta> ListMeta(AMeta meta)
         {
-            return ListMeta(meta.Path);
+            return ListMeta(meta.GetPath());
         }
 
-        public List<CsMeta> ListMeta(string path)
+        public List<AMeta> ListMeta(string path)
         {
-            List<CsMeta> metas = new List<CsMeta>();
+            List<AMeta> metas = new List<AMeta>();
 
             if (!Directory.Exists(path))
             {
                 return metas;
             }
 
-            CsMeta temp;
+            NativeMeta temp;
             try
             {
                 foreach (string obj in Directory.GetDirectories(path))
                 {
                     temp = new NativeMeta();
-                    temp.Path = obj;
-                    temp.Type = CPcs.META_TYPE_FOLDER;
-                    temp.Name = System.IO.Path.GetFileName(obj);
-                    temp.CreateTime = Directory.GetCreationTime(obj);
-                    temp.ModifyTime = Directory.GetLastWriteTime(obj);
+                    temp.path = obj;
+                    temp.type = CPcs.META_TYPE_FOLDER;
+                    temp.name = System.IO.Path.GetFileName(obj);
+                    temp.createTime = Directory.GetCreationTime(obj);
+                    temp.modifyTime = Directory.GetLastWriteTime(obj);
                     metas.Add(temp);
                 }
             }
@@ -95,11 +95,11 @@ namespace Me.Amon.Open.PC
                 foreach (string obj in Directory.GetFiles(path))
                 {
                     temp = new NativeMeta();
-                    temp.Path = obj;
-                    temp.Type = CPcs.META_TYPE_FILE;
-                    temp.Name = System.IO.Path.GetFileName(obj);
-                    temp.CreateTime = File.GetCreationTime(obj);
-                    temp.ModifyTime = File.GetLastWriteTime(obj);
+                    temp.path = obj;
+                    temp.type = CPcs.META_TYPE_FILE;
+                    temp.name = System.IO.Path.GetFileName(obj);
+                    temp.createTime = File.GetCreationTime(obj);
+                    temp.modifyTime = File.GetLastWriteTime(obj);
                     metas.Add(temp);
                 }
             }
@@ -110,17 +110,17 @@ namespace Me.Amon.Open.PC
             return metas;
         }
 
-        public string ShareMeta(CsMeta meta)
+        public string ShareMeta(AMeta meta)
         {
             return "";
         }
 
-        public List<CsMeta> History(CsMeta meta)
+        public List<AMeta> History(AMeta meta)
         {
             return null;
         }
 
-        public CsMeta CreateFolder(string path, string name)
+        public AMeta CreateFolder(string path, string name)
         {
             return null;
         }
@@ -131,22 +131,22 @@ namespace Me.Amon.Open.PC
             return true;
         }
 
-        public bool Moveto(CsMeta meta, string dstPath)
+        public bool Moveto(AMeta meta, string dstPath)
         {
-            string path = System.IO.Path.Combine(dstPath, meta.Name);
+            string path = System.IO.Path.Combine(dstPath, meta.GetName());
             if (System.IO.File.Exists(path))
             {
                 path = GenDupName(meta, dstPath);
             }
-            File.Move(meta.Path, path);
-            meta.Path = path;
+            File.Move(meta.GetPath(), path);
+            meta.SetPath(path);
             return true;
         }
 
-        private string GenDupName(CsMeta meta, string path)
+        private string GenDupName(AMeta meta, string path)
         {
-            string fn = System.IO.Path.GetFileNameWithoutExtension(meta.Name);
-            string fe = System.IO.Path.GetExtension(meta.Name);
+            string fn = System.IO.Path.GetFileNameWithoutExtension(meta.GetName());
+            string fe = System.IO.Path.GetExtension(meta.GetName());
             int i = 0;
             string name;
             string temp;
@@ -157,17 +157,17 @@ namespace Me.Amon.Open.PC
                 temp = System.IO.Path.Combine(path, name);
             } while (System.IO.File.Exists(temp));
 
-            meta.Name = name;
+            meta.SetName(name);
             return temp;
         }
 
-        public bool Copyto(CsMeta meta, string dstPath)
+        public bool Copyto(AMeta meta, string dstPath)
         {
-            File.Copy(meta.Path, dstPath);
+            File.Copy(meta.GetPath(), dstPath);
             return true;
         }
 
-        public void CopyRef(CsMeta meta)
+        public void CopyRef(AMeta meta)
         {
         }
 

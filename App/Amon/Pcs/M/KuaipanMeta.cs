@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Me.Amon.Pcs.M
 {
-    public class KuaipanMeta : CsMeta
+    public class KuaipanMeta : AMeta
     {
         #region 属性
         /// <summary>
@@ -63,163 +63,103 @@ namespace Me.Amon.Pcs.M
         #region 判等重写
         public override string ToString()
         {
-            return Name;
+            return name;
         }
 
         public override bool Equals(object obj)
         {
-            return Path.Equals(obj);
+            return path.Equals(obj);
         }
 
         public override int GetHashCode()
         {
-            return Path != null ? Path.GetHashCode() : 0;
+            return path != null ? path.GetHashCode() : 0;
         }
         #endregion
 
-        public override string Root
+        #region 函数重写
+        public override string GetMessage()
         {
-            get
-            {
-                return root;
-            }
-            set
-            {
-            }
+            return "";
         }
 
-        public override string Path
+        public override string GetRoot()
         {
-            get
-            {
-                return path;
-            }
-            set
-            {
-                path = value;
-            }
+            return root;
         }
 
-        public override string Name
+        public override string GetPath()
         {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                name = value;
-            }
+            return path;
         }
 
-        public override string Hash
+        public override void SetPath(string path)
         {
-            get
-            {
-                return hash;
-            }
-            set
-            {
-                hash = value;
-            }
+            this.path = path;
         }
 
-        public override int Type
+        public override string GetName()
         {
-            get
-            {
-                type = (type ?? "").ToLower();
-                if (type == "folder")
-                {
-                    return CPcs.META_TYPE_FOLDER;
-                }
-                if (type == "file")
-                {
-                    return CPcs.META_TYPE_FILE;
-                }
-                return CPcs.META_TYPE_UNKNOWN;
-            }
-            set
-            {
-                type = "folder";
-            }
+            return name;
         }
 
-        public override int Size
+        public override void SetName(string name)
         {
-            get
-            {
-                return size;
-            }
-            set
-            {
-                size = value;
-            }
+            this.name = name;
         }
 
-        public override DateTime CreateTime
+        public override string GetHash()
         {
-            get
-            {
-                return create_time;
-            }
-            set
-            {
-                create_time = value;
-            }
+            return hash;
         }
 
-        public override DateTime ModifyTime
+        public override int GetMetaType()
         {
-            get
+            type = (type ?? "").ToLower();
+            if (type == "folder")
             {
-                return modify_time;
+                return CPcs.META_TYPE_FOLDER;
             }
-            set
+            if (type == "file")
             {
-                modify_time = value;
+                return CPcs.META_TYPE_FILE;
             }
+            return CPcs.META_TYPE_UNKNOWN;
         }
 
-        public override string FileId
+        public override int GetSize()
         {
-            get
-            {
-                return file_id;
-            }
-            set
-            {
-                file_id = value;
-            }
+            return size;
         }
 
-        public override string Rev
+        public override DateTime GetCreateTime()
         {
-            get
-            {
-                return rev;
-            }
-            set
-            {
-                rev = value;
-            }
+            return create_time;
         }
 
-        public override bool IsDeleted
+        public override DateTime GetModifyTime()
         {
-            get
-            {
-                return is_deleted;
-            }
-            set
-            {
-                IsDeleted = value;
-            }
+            return modify_time;
         }
 
-        public override List<CsMeta> SubMetas()
+        public override string GetMetaId()
         {
-            List<CsMeta> metas = new List<CsMeta>();
+            return file_id;
+        }
+
+        public override string GetRevison()
+        {
+            return rev;
+        }
+
+        public override bool IsDeleted()
+        {
+            return is_deleted;
+        }
+
+        public override List<AMeta> SubMetas()
+        {
+            List<AMeta> metas = new List<AMeta>();
             if (files != null)
             {
                 foreach (var meta in files)
@@ -230,5 +170,6 @@ namespace Me.Amon.Pcs.M
             }
             return metas;
         }
+        #endregion
     }
 }

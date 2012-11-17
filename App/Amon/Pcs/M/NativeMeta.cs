@@ -1,75 +1,109 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Me.Amon.Pcs.M
 {
-    public class NativeMeta : CsMeta
+    public class NativeMeta : AMeta
     {
         #region 属性
-        /// <summary>
-        /// kuaipan 或 app_folder
-        /// </summary>
-        public override string Root { get; set; }
-        /// <summary>
-        /// 文件或文件夹相对<root>的路径
-        /// </summary>
-        public override string Path { get; set; }
-        /// <summary>
-        /// path=/，root=kuaipan时不返回。文件名。
-        /// </summary>
-        public override string Name { get; set; }
-        /// <summary>
-        /// list=true才返回,当前这级文件夹的哈希值。
-        /// </summary>
-        public override string Hash { get; set; }
-        /// <summary>
-        /// enum(file,folder)	path=/,root=kuaipan时不返回。folder为文件夹，file为文件。
-        /// </summary>
-        public override int Type { get; set; }
-        /// <summary>
-        /// path=/,root=kuaipan时不返回。文件大小。
-        /// </summary>
-        public override int Size { get; set; }
-        /// <summary>
-        /// path=/,root=kuaipan时不返回。YYYY-MM-DD hh:mm:ss。
-        /// </summary>
-        public override DateTime CreateTime { get; set; }
-        /// <summary>
-        /// path=/,root=kuaipan时不返回。YYYY-MM-DD hh:mm:ss。
-        /// </summary>
-        public override DateTime ModifyTime { get; set; }
-        /// <summary>
-        /// path=/,root=kuaipan时不返回。文件唯一标识id。
-        /// </summary>
-        public override string FileId { get; set; }
-        /// <summary>
-        /// path=/,root=kuaipan时不返回。
-        /// </summary>
-        public override string Rev { get; set; }
-        /// <summary>
-        /// path=/，root=kuaipan时不返回。是否被删除的文件。
-        /// </summary>
-        public override bool IsDeleted { get; set; }
+        public override string GetMessage()
+        {
+            return "";
+        }
+
+        public string root;
+        public override string GetRoot()
+        {
+            return root;
+        }
+
+        public string path;
+        public override string GetPath()
+        {
+            return path;
+        }
+
+        public override void SetPath(string path)
+        {
+            this.path = path;
+        }
+
+        public string name;
+        public override string GetName()
+        {
+            return name;
+        }
+
+        public override void SetName(string name)
+        {
+            this.name = name;
+        }
+
+        public string hash;
+        public override string GetHash()
+        {
+            return hash;
+        }
+
+        public int type;
+        public override int GetMetaType()
+        {
+            return type;
+        }
+
+        public int size;
+        public override int GetSize()
+        {
+            return size;
+        }
+
+        public DateTime createTime;
+        public override DateTime GetCreateTime()
+        {
+            return createTime;
+        }
+
+        public DateTime modifyTime;
+        public override DateTime GetModifyTime()
+        {
+            return modifyTime;
+        }
+
+        public string fileId;
+        public override string GetMetaId()
+        {
+            return fileId;
+        }
+
+        public string revison;
+        public override string GetRevison()
+        {
+            return revison;
+        }
+
+        public bool isDeleted;
+        public override bool IsDeleted()
+        {
+            return isDeleted;
+        }
         #endregion
 
         public override string ToString()
         {
-            return Name;
+            return name;
         }
 
         public override bool Equals(object obj)
         {
-            return Path.Equals(obj);
+            return path.Equals(obj);
         }
 
         public override int GetHashCode()
         {
-            return Path != null ? Path.GetHashCode() : 0;
+            return path != null ? path.GetHashCode() : 0;
         }
 
-        public override List<CsMeta> SubMetas()
+        public override List<AMeta> SubMetas()
         {
             throw new NotImplementedException();
         }
