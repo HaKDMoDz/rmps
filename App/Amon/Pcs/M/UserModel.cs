@@ -20,9 +20,12 @@ namespace Me.Amon.Pcs.M
             {
                 SysHome = Environment.CurrentDirectory;
             }
+        }
 
+        public override void Load()
+        {
             ResHome = SysHome;
-            DatHome = Path.Combine(SysHome, "Dat", "A0000000");
+            DatHome = Path.Combine(SysHome, "Dat", Code);
         }
     }
 }

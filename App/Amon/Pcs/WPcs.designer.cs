@@ -35,12 +35,13 @@
             this.MbMenu = new System.Windows.Forms.MenuStrip();
             this.TcMain = new System.Windows.Forms.ToolStripContainer();
             this.ScMain = new System.Windows.Forms.SplitContainer();
-            this.TcMeta = new System.Windows.Forms.ATabControl();
-            this.wListView1 = new Me.Amon.Pcs.V.WListView();
-            this.UcUri = new Me.Amon.Pcs.V.MetaUri();
+            this.IlPcsList = new System.Windows.Forms.ImageList(this.components);
             this.TbTool = new System.Windows.Forms.ToolStrip();
             this.TtTips = new System.Windows.Forms.ToolTip(this.components);
-            this.IlPcsList = new System.Windows.Forms.ImageList(this.components);
+            this.TcMeta = new System.Windows.Forms.ATabControl();
+            this.UcTaskList = new Me.Amon.Pcs.V.TaskList();
+            this.UcUri = new Me.Amon.Pcs.V.MetaUri();
+            this.BwWork = new System.ComponentModel.BackgroundWorker();
             this.SbEcho.SuspendLayout();
             this.TcMain.ContentPanel.SuspendLayout();
             this.TcMain.TopToolStripPanel.SuspendLayout();
@@ -60,7 +61,7 @@
             this.SbEcho.Name = "SbEcho";
             this.SbEcho.Size = new System.Drawing.Size(624, 22);
             this.SbEcho.TabIndex = 0;
-            this.SbEcho.Text = "statusStrip1";
+            this.SbEcho.Text = "SbEcho";
             // 
             // TlEcho
             // 
@@ -82,7 +83,7 @@
             this.MbMenu.Name = "MbMenu";
             this.MbMenu.Size = new System.Drawing.Size(624, 24);
             this.MbMenu.TabIndex = 1;
-            this.MbMenu.Text = "menuStrip1";
+            this.MbMenu.Text = "MbMenu";
             // 
             // TcMain
             // 
@@ -97,7 +98,7 @@
             this.TcMain.Name = "TcMain";
             this.TcMain.Size = new System.Drawing.Size(624, 396);
             this.TcMain.TabIndex = 2;
-            this.TcMain.Text = "toolStripContainer1";
+            this.TcMain.Text = "TcMain";
             // 
             // TcMain.TopToolStripPanel
             // 
@@ -119,10 +120,24 @@
             // 
             // ScMain.Panel2
             // 
-            this.ScMain.Panel2.Controls.Add(this.wListView1);
+            this.ScMain.Panel2.Controls.Add(this.UcTaskList);
             this.ScMain.Size = new System.Drawing.Size(612, 327);
-            this.ScMain.SplitterDistance = 227;
+            this.ScMain.SplitterDistance = 223;
             this.ScMain.TabIndex = 1;
+            // 
+            // IlPcsList
+            // 
+            this.IlPcsList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.IlPcsList.ImageSize = new System.Drawing.Size(16, 16);
+            this.IlPcsList.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // TbTool
+            // 
+            this.TbTool.Dock = System.Windows.Forms.DockStyle.None;
+            this.TbTool.Location = new System.Drawing.Point(3, 0);
+            this.TbTool.Name = "TbTool";
+            this.TbTool.Size = new System.Drawing.Size(111, 25);
+            this.TbTool.TabIndex = 0;
             // 
             // TcMeta
             // 
@@ -140,7 +155,7 @@
             this.TcMeta.DisplayStyleProvider.Overlap = 0;
             this.TcMeta.DisplayStyleProvider.Padding = new System.Drawing.Point(6, 3);
             this.TcMeta.DisplayStyleProvider.Radius = 2;
-            this.TcMeta.DisplayStyleProvider.ShowTabCloser = true;
+            this.TcMeta.DisplayStyleProvider.ShowTabCloser = false;
             this.TcMeta.DisplayStyleProvider.TextColor = System.Drawing.SystemColors.ControlText;
             this.TcMeta.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.TcMeta.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
@@ -151,25 +166,18 @@
             this.TcMeta.Name = "TcMeta";
             this.TcMeta.SelectedIndex = 0;
             this.TcMeta.ShowToolTips = true;
-            this.TcMeta.Size = new System.Drawing.Size(612, 227);
+            this.TcMeta.Size = new System.Drawing.Size(612, 223);
             this.TcMeta.TabIndex = 0;
             this.TcMeta.TabClosing += new System.EventHandler<System.Windows.Forms.TabControlCancelEventArgs>(this.TcMeta_TabClosing);
             this.TcMeta.SelectedIndexChanged += new System.EventHandler(this.TcMeta_SelectedIndexChanged);
             // 
-            // wListView1
+            // UcTaskList
             // 
-            this.wListView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wListView1.FullRowSelect = true;
-            this.wListView1.Location = new System.Drawing.Point(0, 0);
-            this.wListView1.Name = "wListView1";
-            this.wListView1.OwnerDraw = true;
-            this.wListView1.ProgressBackColor = System.Drawing.Color.Green;
-            this.wListView1.ProgressColumnIndex = 0;
-            this.wListView1.ProgressForeColor = System.Drawing.Color.Black;
-            this.wListView1.Size = new System.Drawing.Size(612, 96);
-            this.wListView1.TabIndex = 0;
-            this.wListView1.UseCompatibleStateImageBehavior = false;
-            this.wListView1.View = System.Windows.Forms.View.Details;
+            this.UcTaskList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UcTaskList.Location = new System.Drawing.Point(0, 0);
+            this.UcTaskList.Name = "UcTaskList";
+            this.UcTaskList.Size = new System.Drawing.Size(612, 100);
+            this.UcTaskList.TabIndex = 0;
             // 
             // UcUri
             // 
@@ -182,19 +190,11 @@
             this.UcUri.Size = new System.Drawing.Size(612, 32);
             this.UcUri.TabIndex = 0;
             // 
-            // TbTool
+            // BwWork
             // 
-            this.TbTool.Dock = System.Windows.Forms.DockStyle.None;
-            this.TbTool.Location = new System.Drawing.Point(3, 0);
-            this.TbTool.Name = "TbTool";
-            this.TbTool.Size = new System.Drawing.Size(111, 25);
-            this.TbTool.TabIndex = 0;
-            // 
-            // IlPcsList
-            // 
-            this.IlPcsList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.IlPcsList.ImageSize = new System.Drawing.Size(16, 16);
-            this.IlPcsList.TransparentColor = System.Drawing.Color.Transparent;
+            this.BwWork.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BwWork_DoWork);
+            this.BwWork.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BwWork_ProgressChanged);
+            this.BwWork.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BwWork_RunWorkerCompleted);
             // 
             // WPcs
             // 
@@ -206,6 +206,7 @@
             this.Controls.Add(this.MbMenu);
             this.MainMenuStrip = this.MbMenu;
             this.Name = "WPcs";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "阿木云存储";
             this.SbEcho.ResumeLayout(false);
             this.SbEcho.PerformLayout();
@@ -234,8 +235,9 @@
         private V.MetaUri UcUri;
         private System.Windows.Forms.SplitContainer ScMain;
         private System.Windows.Forms.ATabControl TcMeta;
-        private V.WListView wListView1;
+        private V.TaskList UcTaskList;
         private System.Windows.Forms.ToolTip TtTips;
         private System.Windows.Forms.ImageList IlPcsList;
+        private System.ComponentModel.BackgroundWorker BwWork;
     }
 }

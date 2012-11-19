@@ -460,6 +460,7 @@
     <Compile Include="Pcs\E\User\LkeyAction.cs" />
     <Compile Include="Pcs\E\User\PkeyAction.cs" />
     <Compile Include="Pcs\E\User\SkeyAction.cs" />
+    <Compile Include="Pcs\E\View\TaskAction.cs" />
     <Compile Include="Pcs\M\FolderMeta.cs" />
     <Compile Include="Pcs\M\AMeta.cs" />
     <Compile Include="Pcs\M\DataModel.cs" />
@@ -535,8 +536,8 @@
     <Compile Include="Pcs\V\TaskList.Designer.cs">
       <DependentUpon>TaskList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pcs\V\TaskStatus.cs" />
-    <Compile Include="Pcs\V\TaskThread.cs" />
+    <Compile Include="Pcs\C\TaskStatus.cs" />
+    <Compile Include="Pcs\C\TaskThread.cs" />
     <Compile Include="Pcs\V\WListView.cs">
       <SubType>Component</SubType>
     </Compile>

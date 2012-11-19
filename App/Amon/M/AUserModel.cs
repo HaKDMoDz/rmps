@@ -1,4 +1,4 @@
- using System;
+using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -67,13 +67,12 @@ namespace Me.Amon.M
             {
                 SysHome = Environment.CurrentDirectory;
             }
-
-            ResHome = SysHome;
-            DatHome = Path.Combine(SysHome, "Dat", "A0000000");
         }
 
         public virtual void Load()
         {
+            ResHome = SysHome;
+            DatHome = Path.Combine(SysHome, "Dat", Code);
         }
         #endregion
 

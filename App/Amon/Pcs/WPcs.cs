@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 using Me.Amon.Auth;
 using Me.Amon.M;
@@ -24,6 +26,10 @@ namespace Me.Amon.Pcs
         private PcsList _PcsList;
         private PcsView _CurView;
         private TabPage _DefPage;
+        private List<TaskThread> _Threads;
+        private int _MaxThreads = 1;
+        private int _CurThreads = 0;
+
 
         #region 构造函数
         public WPcs()
@@ -83,6 +89,8 @@ namespace Me.Amon.Pcs
             _PcsList.Dock = DockStyle.Fill;
             _DefPage.Controls.Add(_PcsList);
             TcMeta.TabPages.Add(_DefPage);
+
+            _Threads = new List<TaskThread>();
         }
 
         #region 接口实现
@@ -121,6 +129,23 @@ namespace Me.Amon.Pcs
         public EPcs Operation { get; set; }
 
         public ContextMenuStrip PopupMenu { get; set; }
+
+        public bool TaskVisible
+        {
+            get
+            {
+                return !ScMain.Panel2Collapsed;
+            }
+            set
+            {
+                ScMain.Panel2Collapsed = !value;
+            }
+        }
+
+        public void ChangeTaskVisible()
+        {
+            ScMain.Panel2Collapsed = !ScMain.Panel2Collapsed;
+        }
 
         public void SetPasteEnabled()
         {
@@ -276,10 +301,34 @@ namespace Me.Amon.Pcs
 
         public void DownloadMeta()
         {
+            // 10M = 1024*1024*10
+            if (SelectedMeta.GetSize() >= 10485760)
+            {
+                string msg = string.Format("您要下载的文件过大，为了获得最佳的体验效果建议使用官方客户端。{0}仍然要继续下载吗？", Environment.NewLine);
+                if (DialogResult.Yes != MessageBox.Show(this, msg, "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2))
+                {
+                    return;
+                }
+            }
+            var thread = _CurView.NewThread();
+            thread.Init(SelectedMeta.GetPath(), SelectedMeta.GetName());
+            UcTaskList.AddTask(thread, false);
         }
 
         public void UploadMeta()
         {
+            // 5M = 1024*1024*5
+            if (SelectedMeta.GetSize() >= 5242880)
+            {
+                string msg = string.Format("您要上传的文件过大，为了获得最佳的体验效果建议使用官方客户端。{0}仍然要继续上传吗？", Environment.NewLine);
+                if (DialogResult.Yes != MessageBox.Show(this, msg, "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2))
+                {
+                    return;
+                }
+            }
+            var thread = _CurView.NewThread();
+            thread.Init(SelectedMeta.GetPath(), SelectedMeta.GetName());
+            UcTaskList.AddTask(thread, true);
         }
 
         public void AddFav(string name)
@@ -393,6 +442,51 @@ namespace Me.Amon.Pcs
             {
                 e.Cancel = true;
             }
+        }
+
+        private void BwWork_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            bool running = true;
+            while (!BwWork.CancellationPending && running)
+            {
+                if (_CurThreads < _MaxThreads)
+                {
+                    int dos = 0;
+                    foreach (var task in _Threads)
+                    {
+                        if (task.Status == TaskStatus.RUNNING)
+                        {
+                            dos += 1;
+                        }
+                        if (task.Status == TaskStatus.WAIT)
+                        {
+                            task.Start();
+                            dos += 1;
+                        }
+
+                        if (_CurThreads >= _MaxThreads)
+                        {
+                            break;
+                        }
+                    }
+                    if (dos < 1)
+                    {
+                        break;
+                    }
+                }
+
+                Thread.Sleep(100);
+            }
+        }
+
+        private void BwWork_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+
+        }
+
+        private void BwWork_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+
         }
         #endregion
     }

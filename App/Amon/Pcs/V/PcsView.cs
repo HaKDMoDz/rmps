@@ -29,24 +29,6 @@ namespace Me.Amon.Pcs.V
         private AMeta _CurrentMeta;
 
         #region 构造函数
-        static PcsView()
-        {
-            IlPath = new ImageList();
-            IlPath.ColorDepth = ColorDepth.Depth32Bit;
-            IlPath.ImageSize = new Size(16, 16);
-
-            IlMetaLarge = new ImageList();
-            IlMetaLarge.ColorDepth = ColorDepth.Depth32Bit;
-            IlMetaLarge.ImageSize = new Size(48, 48);
-
-            IlMetaSmall = new ImageList();
-            IlMetaSmall.ColorDepth = ColorDepth.Depth32Bit;
-            IlMetaSmall.ImageSize = new Size(16, 16);
-
-            LoadIcon(@"D:\Temp\i1", IlPath);
-            LoadIcon(@"D:\Temp\i2", IlMetaLarge);
-        }
-
         public PcsView()
         {
             InitializeComponent();
@@ -66,6 +48,24 @@ namespace Me.Amon.Pcs.V
 
         public void Init()
         {
+            if (IlPath == null)
+            {
+                IlPath = new ImageList();
+                IlPath.ColorDepth = ColorDepth.Depth32Bit;
+                IlPath.ImageSize = new Size(16, 16);
+
+                IlMetaLarge = new ImageList();
+                IlMetaLarge.ColorDepth = ColorDepth.Depth32Bit;
+                IlMetaLarge.ImageSize = new Size(48, 48);
+
+                IlMetaSmall = new ImageList();
+                IlMetaSmall.ColorDepth = ColorDepth.Depth32Bit;
+                IlMetaSmall.ImageSize = new Size(16, 16);
+
+                LoadIcon(Path.Combine(_UserModel.ResHome, "Meta"), IlPath);
+                LoadIcon(Path.Combine(_UserModel.ResHome, "Mime"), IlMetaLarge);
+            }
+
             TvPath.ImageList = IlPath;
             LvMeta.LargeImageList = IlMetaLarge;
             LvMeta.SmallImageList = IlMetaSmall;
@@ -354,6 +354,15 @@ namespace Me.Amon.Pcs.V
                 return;
             }
         }
+
+        public void UploadMeta()
+        {
+        }
+
+        public TaskThread NewThread()
+        {
+            return new TaskThread(_PcsClient, _NddEngine);
+        }
         #endregion
 
         #region 事件处理
@@ -488,7 +497,7 @@ namespace Me.Amon.Pcs.V
             }
         }
 
-        private TreeNode GenNode(AMeta meta, string icon = "folder")
+        private TreeNode GenNode(AMeta meta, string icon = "_def")
         {
             var node = new TreeNode();
             node.Text = meta.GetName();

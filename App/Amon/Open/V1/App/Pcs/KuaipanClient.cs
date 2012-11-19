@@ -26,6 +26,10 @@ namespace Me.Amon.Open.V1.App.Pcs
         {
             Token = token;
             _Server = new KuaipanServer();
+
+            Name = "金山快盘";
+            Root = "kuaipan:/";
+            //Icon = Image.FromFile(@"D:\Temp\i1\Icon.png");
         }
         #endregion
 
@@ -163,7 +167,7 @@ namespace Me.Amon.Open.V1.App.Pcs
                 case CPcs.PATH_ALL:
                     return "/";
                 case CPcs.PATH_BIN:
-                    return @"C:\Recycled";
+                    return key;
                 default:
                     return key;
             }
