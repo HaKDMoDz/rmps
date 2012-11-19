@@ -10,6 +10,7 @@ using Me.Amon.M;
 using Me.Amon.Open;
 using Me.Amon.Open.PC;
 using Me.Amon.Open.V1.App.Pcs;
+using Me.Amon.Pcs.C;
 using Me.Amon.Pcs.M;
 using Me.Amon.Pcs.V;
 using Me.Amon.Uc;
@@ -27,6 +28,7 @@ namespace Me.Amon.Pcs
         private PcsView _CurView;
         private TabPage _DefPage;
         private List<TaskThread> _Threads;
+        private List<ITaskViewer> _Viewers;
         private int _MaxThreads = 1;
         private int _CurThreads = 0;
 
@@ -452,8 +454,9 @@ namespace Me.Amon.Pcs
                 if (_CurThreads < _MaxThreads)
                 {
                     int dos = 0;
-                    foreach (var task in _Threads)
+                    for (int i = 0; i < _Threads.Count; i += 1)
                     {
+                        var task = _Threads[i];
                         if (task.Status == TaskStatus.RUNNING)
                         {
                             dos += 1;
@@ -462,6 +465,11 @@ namespace Me.Amon.Pcs
                         {
                             task.Start();
                             dos += 1;
+                        }
+
+                        foreach (var viewer in _Viewers)
+                        {
+                            viewer.UpdateTask(task);
                         }
 
                         if (_CurThreads >= _MaxThreads)

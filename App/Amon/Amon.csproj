@@ -469,6 +469,7 @@
     <Compile Include="Pcs\M\MPcs.cs" />
     <Compile Include="Pcs\M\NativeMeta.cs" />
     <Compile Include="Pcs\M\UserModel.cs" />
+    <Compile Include="Pcs\V\ITaskViewer.cs" />
     <Compile Include="Pcs\V\Mgr\Config.cs">
       <SubType>UserControl</SubType>
     </Compile>

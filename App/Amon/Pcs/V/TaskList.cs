@@ -5,7 +5,7 @@ using Me.Amon.Pcs.C;
 
 namespace Me.Amon.Pcs.V
 {
-    public partial class TaskList : UserControl
+    public partial class TaskList : UserControl, ITaskViewer
     {
         public TaskList()
         {
@@ -26,6 +26,16 @@ namespace Me.Amon.Pcs.V
         {
             //removetpath=status
         }
+
+        #region 接口实现
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="thread"></param>
+        public void UpdateTask(TaskThread thread)
+        {
+        }
+        #endregion
 
         #region 公共函数
         public void AddTask(TaskThread thread, bool upload)

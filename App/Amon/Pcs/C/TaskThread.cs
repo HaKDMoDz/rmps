@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Threading;
 using Me.Amon.Open;
-using Me.Amon.Pcs.C;
 
-namespace Me.Amon.Pcs.V
+namespace Me.Amon.Pcs.C
 {
     public class TaskThread
     {
