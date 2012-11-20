@@ -88,22 +88,27 @@ namespace Me.Amon.Pcs.M
             return root;
         }
 
-        public override string GetPath()
+        public override string GetMeta()
+        {
+            return path + name;
+        }
+
+        public override string GetMetaPath()
         {
             return path;
         }
 
-        public override void SetPath(string path)
+        public override void SetMetaPath(string path)
         {
             this.path = path;
         }
 
-        public override string GetName()
+        public override string GetMetaName()
         {
             return name;
         }
 
-        public override void SetName(string name)
+        public override void SetMetaName(string name)
         {
             this.name = name;
         }

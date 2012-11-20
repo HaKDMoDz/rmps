@@ -11,7 +11,7 @@ namespace Me.Amon.Pcs.E.Edit
                 return;
             }
 
-            string name = IApp.SelectedMeta.GetName();
+            string name = IApp.SelectedMeta.GetMetaName();
             while (true)
             {
                 name = Main.ShowInput("«Î ‰»Î ’≤ÿ√˚≥∆£∫", name);

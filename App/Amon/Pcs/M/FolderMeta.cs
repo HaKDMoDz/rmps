@@ -61,22 +61,27 @@ namespace Me.Amon.Pcs.M
             return _Root;
         }
 
-        public override string GetPath()
+        public override string GetMeta()
+        {
+            return "";
+        }
+
+        public override string GetMetaPath()
         {
             return _Path;
         }
 
-        public override void SetPath(string path)
+        public override void SetMetaPath(string path)
         {
             this._Path = path;
         }
 
-        public override string GetName()
+        public override string GetMetaName()
         {
             return _Name;
         }
 
-        public override void SetName(string name)
+        public override void SetMetaName(string name)
         {
             this._Name = name;
         }

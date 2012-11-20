@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using Me.Amon.Pcs;
 using Me.Amon.Pcs.M;
@@ -175,7 +176,7 @@ namespace Me.Amon.Open.V1.App.Pcs
 
         public List<AMeta> ListMeta(AMeta meta)
         {
-            string url = string.Format(KuaipanServer.LIST_META, meta.GetPath());
+            string url = string.Format(KuaipanServer.LIST_META, meta.GetMetaPath());
             return ListMeta(url);
         }
 
@@ -203,7 +204,7 @@ namespace Me.Amon.Open.V1.App.Pcs
 
         public string ShareMeta(AMeta meta)
         {
-            string url = string.Format(KuaipanServer.SHARE_META, meta.GetPath());
+            string url = string.Format(KuaipanServer.SHARE_META, meta.GetMetaPath());
 
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
@@ -290,8 +291,8 @@ namespace Me.Amon.Open.V1.App.Pcs
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
             AddParam("root", KuaipanServer.ROOT_NAME);
-            AddParam("from_path", Combine(meta.GetPath(), meta.GetName()));
-            AddParam("to_path", Combine(meta.GetPath(), name));
+            AddParam("from_path", Combine(meta.GetMetaPath(), meta.GetMetaName()));
+            AddParam("to_path", Combine(meta.GetMetaPath(), name));
             _Params.Sort(new NameValueComparer());
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
 
@@ -304,7 +305,7 @@ namespace Me.Amon.Open.V1.App.Pcs
 
             t = GetString(r);
             //JsonConvert.DeserializeObject<CsMeta>(t);
-            meta.SetName(name);
+            meta.SetMetaName(name);
             ResetParams();
 
             return true;
@@ -324,43 +325,67 @@ namespace Me.Amon.Open.V1.App.Pcs
         }
 
         #region 上传
-        public long BeginWrite(long key, string remoteMeta)
+        public bool BeginUpload(long key, string remoteMeta)
         {
-            return 0;
+            return true;
         }
 
-        public int Write(long key, byte[] buffer, int offset, int length)
+        public void Write(long key, byte[] buffer, int offset, int length)
         {
-            return 0;
         }
 
-        public void EndWrite(long key)
+        public void EndUpload(long key)
         {
         }
         #endregion
 
         #region 下载
-        public long BeginRead(long key, string url, long range)
+        public long BeginDownload(long key, string meta, long range)
         {
+            string url = KuaipanServer.DOWNLOAD;
+
+            PrepareParams();
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+            AddParam("root", KuaipanServer.ROOT_NAME);
+            AddParam("path", meta);
+            _Params.Sort(new NameValueComparer());
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
+
+            string t = GenBaseParams();
+            url += url.IndexOf("?") >= 0 ? '&' : '?';
+            url += t;
+
             var reqeust = (HttpWebRequest)WebRequest.Create(url);
+            reqeust.Method = "GET";
             if (range > 0)
             {
                 reqeust.AddRange(range); //设置Range值
             }
 
-            var response = reqeust.GetResponse() as HttpWebResponse;
-            if (response.StatusCode == HttpStatusCode.Accepted)
+            HttpWebResponse response = null;
+            try
+            {
+                response = reqeust.GetResponse() as HttpWebResponse;
+                if (response.StatusCode == HttpStatusCode.Accepted)
+                {
+                    return -1;
+                }
+            }
+            catch (Exception exp)
             {
                 return -1;
             }
-            long size = response.ContentLength;
-            if (size >= 10485760)//10M=1024*1024*10;
-            {
-                MessageBox.Show("");
-                return -1;
-            }
+
             var stream = response.GetResponseStream();
-            _Items[key] = new KVItem { Response = response, Stream = stream };
+            try
+            {
+                Monitor.Enter(_Items);
+                _Items[key] = new KVItem { Response = response, Stream = stream };
+            }
+            finally
+            {
+                Monitor.Exit(_Items);
+            }
             return response.ContentLength;
         }
 
@@ -369,16 +394,24 @@ namespace Me.Amon.Open.V1.App.Pcs
             return _Items[key].Stream.Read(buffer, offset, length);
         }
 
-        public void EndRead(long key)
+        public void EndDownload(long key)
         {
-            if (_Items.ContainsKey(key))
+            var item = _Items[key];
+            if (item == null)
             {
-                var item = _Items[key];
-                if (item != null)
-                {
-                    item.Stream.Close();
-                    item.Response.Close();
-                }
+                return;
+            }
+
+            try
+            {
+                Monitor.Enter(_Items);
+                item.Stream.Close();
+                item.Response.Close();
+                _Items.Remove(key);
+            }
+            finally
+            {
+                Monitor.Exit(_Items);
             }
         }
         #endregion

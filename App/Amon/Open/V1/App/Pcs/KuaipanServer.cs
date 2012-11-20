@@ -18,6 +18,10 @@
 
         public const string COPYTO = "http://openapi.kuaipan.cn/1/fileops/copy";
 
+        public const string DOWNLOAD = "http://api-content.dfs.kuaipan.cn/1/fileops/download_file";
+
+        public const string UPLOAD = "http://api-content.dfs.kuaipan.cn/1/fileops/upload_locate";
+
         public KuaipanServer()
         {
             RequestTokenUrl = "https://openapi.kuaipan.cn/open/requestToken";

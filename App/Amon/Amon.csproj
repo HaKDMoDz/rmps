@@ -441,11 +441,13 @@
     <Compile Include="Pcs\E\Edit\CreateAction.cs" />
     <Compile Include="Pcs\E\Edit\CutAction.cs" />
     <Compile Include="Pcs\E\Edit\DeleteAction.cs" />
+    <Compile Include="Pcs\E\Edit\DownloadAction.cs" />
     <Compile Include="Pcs\E\Edit\EditAction.cs" />
     <Compile Include="Pcs\E\Edit\FavNewAction.cs" />
     <Compile Include="Pcs\E\Edit\OpenAction.cs" />
     <Compile Include="Pcs\E\Edit\PasteAction.cs" />
     <Compile Include="Pcs\E\Edit\RenameAction.cs" />
+    <Compile Include="Pcs\E\Edit\UploadAction.cs" />
     <Compile Include="Pcs\E\File\CreateAction.cs" />
     <Compile Include="Pcs\E\File\ExitAction.cs" />
     <Compile Include="Pcs\E\File\HideAction.cs" />
@@ -539,9 +541,6 @@
     </Compile>
     <Compile Include="Pcs\C\TaskStatus.cs" />
     <Compile Include="Pcs\C\TaskThread.cs" />
-    <Compile Include="Pcs\V\WListView.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Pcs\WPcs.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -15,27 +15,32 @@ namespace Me.Amon.Pcs.M
         /// </summary>
         public abstract string GetRoot();
         /// <summary>
-        /// 文件或文件夹相对<root>的路径
+        /// Meta资源路径
         /// </summary>
-        public abstract string GetPath();
-        public abstract void SetPath(string path);
-        /// <summary>
-        /// path=/，root=kuaipan时不返回。文件名。
-        /// </summary>
-        public abstract string GetName();
-        public abstract void SetName(string name);
+        /// <returns></returns>
+        public abstract string GetMeta();
         /// <summary>
         /// list=true才返回,当前这级文件夹的哈希值。
         /// </summary>
         public abstract string GetHash();
         /// <summary>
+        /// path=/,root=kuaipan时不返回。文件唯一标识id。
+        /// </summary>
+        public abstract string GetMetaId();
+        /// <summary>
         /// enum(file,folder)	path=/,root=kuaipan时不返回。folder为文件夹，file为文件。
         /// </summary>
         public abstract int GetMetaType();
         /// <summary>
-        /// path=/,root=kuaipan时不返回。文件唯一标识id。
+        /// 文件或文件夹相对<root>的路径
         /// </summary>
-        public abstract string GetMetaId();
+        public abstract string GetMetaPath();
+        public abstract void SetMetaPath(string path);
+        /// <summary>
+        /// path=/，root=kuaipan时不返回。文件名。
+        /// </summary>
+        public abstract string GetMetaName();
+        public abstract void SetMetaName(string name);
         /// <summary>
         /// path=/,root=kuaipan时不返回。文件大小。
         /// </summary>
@@ -63,8 +68,8 @@ namespace Me.Amon.Pcs.M
         {
             var meta = new FolderMeta();
             meta.SetRoot(GetRoot());
-            meta.SetPath(GetPath());
-            meta.SetName(name);
+            meta.SetMetaPath(GetMetaPath());
+            meta.SetMetaName(name);
             meta.SetHash(GetHash());
             meta.SetType(GetMetaType());
             meta.SetId(GetMetaId());

@@ -60,7 +60,7 @@ namespace Me.Amon.Open.PC
 
         public List<AMeta> ListMeta(AMeta meta)
         {
-            return ListMeta(meta.GetPath());
+            return ListMeta(meta.GetMetaPath());
         }
 
         public List<AMeta> ListMeta(string path)
@@ -133,20 +133,20 @@ namespace Me.Amon.Open.PC
 
         public bool Moveto(AMeta meta, string dstPath)
         {
-            string path = System.IO.Path.Combine(dstPath, meta.GetName());
+            string path = System.IO.Path.Combine(dstPath, meta.GetMetaName());
             if (System.IO.File.Exists(path))
             {
                 path = GenDupName(meta, dstPath);
             }
-            File.Move(meta.GetPath(), path);
-            meta.SetPath(path);
+            File.Move(meta.GetMetaPath(), path);
+            meta.SetMetaPath(path);
             return true;
         }
 
         private string GenDupName(AMeta meta, string path)
         {
-            string fn = System.IO.Path.GetFileNameWithoutExtension(meta.GetName());
-            string fe = System.IO.Path.GetExtension(meta.GetName());
+            string fn = System.IO.Path.GetFileNameWithoutExtension(meta.GetMetaName());
+            string fe = System.IO.Path.GetExtension(meta.GetMetaName());
             int i = 0;
             string name;
             string temp;
@@ -157,13 +157,13 @@ namespace Me.Amon.Open.PC
                 temp = System.IO.Path.Combine(path, name);
             } while (System.IO.File.Exists(temp));
 
-            meta.SetName(name);
+            meta.SetMetaName(name);
             return temp;
         }
 
         public bool Copyto(AMeta meta, string dstPath)
         {
-            File.Copy(meta.GetPath(), dstPath);
+            File.Copy(meta.GetMetaPath(), dstPath);
             return true;
         }
 
@@ -172,23 +172,58 @@ namespace Me.Amon.Open.PC
         }
 
         #region 上传
-        public long BeginWrite(long key, string remoteMeta)
+        public bool BeginUpload(long key, string url)
         {
-            return 0;
+            if (!Path.IsPathRooted(url))
+            {
+                url = Path.Combine(Root, url);
+            }
+
+            string folder = Path.GetDirectoryName(url);
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+            var stream = File.OpenWrite(url);
+            try
+            {
+                Monitor.Enter(_Streams);
+                _Streams[key] = stream;
+            }
+            finally
+            {
+                Monitor.Exit(_Streams);
+            }
+            return true;
         }
 
-        public int Write(long key, byte[] buffer, int offset, int length)
+        public void Write(long key, byte[] buffer, int offset, int length)
         {
-            return 0;
+            Thread.Sleep(_Random.Next(10) * 100 + 100);
+            _Streams[key].Write(buffer, offset, length);
         }
 
-        public void EndWrite(long key)
+        public void EndUpload(long key)
         {
+            var stream = _Streams[key];
+            if (stream != null)
+            {
+                try
+                {
+                    Monitor.Enter(_Streams);
+                    stream.Close();
+                    _Streams.Remove(key);
+                }
+                finally
+                {
+                    Monitor.Exit(_Streams);
+                }
+            }
         }
         #endregion
 
         #region 下载
-        public long BeginRead(long key, string url, long range)
+        public long BeginDownload(long key, string url, long range)
         {
             if (!Path.IsPathRooted(url))
             {
@@ -209,7 +244,15 @@ namespace Me.Amon.Open.PC
             {
                 stream.Seek(range, SeekOrigin.Current);
             }
-            _Streams[key] = stream;
+            try
+            {
+                Monitor.Enter(_Streams);
+                _Streams[key] = stream;
+            }
+            finally
+            {
+                Monitor.Exit(_Streams);
+            }
             return stream.Length;
         }
 
@@ -219,12 +262,21 @@ namespace Me.Amon.Open.PC
             return _Streams[key].Read(buffer, offset, length);
         }
 
-        public void EndRead(long key)
+        public void EndDownload(long key)
         {
             var stream = _Streams[key];
             if (stream != null)
             {
-                stream.Close();
+                try
+                {
+                    Monitor.Enter(_Streams);
+                    stream.Close();
+                    _Streams.Remove(key);
+                }
+                finally
+                {
+                    Monitor.Exit(_Streams);
+                }
             }
         }
         #endregion

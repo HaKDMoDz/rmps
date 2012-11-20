@@ -93,6 +93,7 @@ namespace Me.Amon.Pcs
             TcMeta.TabPages.Add(_DefPage);
 
             _Threads = new List<TaskThread>();
+            _Viewers = new List<ITaskViewer>();
         }
 
         #region 接口实现
@@ -140,13 +141,32 @@ namespace Me.Amon.Pcs
             }
             set
             {
-                ScMain.Panel2Collapsed = !value;
+                bool b = !value;
+                ScMain.Panel2Collapsed = b;
+                if (b)
+                {
+                    _Viewers.Remove(UcTaskList);
+                }
+                else
+                {
+                    _Viewers.Add(UcTaskList);
+                }
             }
         }
 
         public void ChangeTaskVisible()
         {
-            ScMain.Panel2Collapsed = !ScMain.Panel2Collapsed;
+            bool b = !ScMain.Panel2Collapsed;
+            ScMain.Panel2Collapsed = b;
+
+            if (b)
+            {
+                _Viewers.Remove(UcTaskList);
+            }
+            else
+            {
+                _Viewers.Add(UcTaskList);
+            }
         }
 
         public void SetPasteEnabled()
@@ -313,8 +333,10 @@ namespace Me.Amon.Pcs
                 }
             }
             var thread = _CurView.NewThread();
-            thread.Init(SelectedMeta.GetPath(), SelectedMeta.GetName());
-            UcTaskList.AddTask(thread, false);
+            var meta = SelectedMeta.GetMeta();
+            thread.Init(meta, meta, false);
+            _Threads.Add(thread);
+            StartAll();
         }
 
         public void UploadMeta()
@@ -329,8 +351,10 @@ namespace Me.Amon.Pcs
                 }
             }
             var thread = _CurView.NewThread();
-            thread.Init(SelectedMeta.GetPath(), SelectedMeta.GetName());
-            UcTaskList.AddTask(thread, true);
+            var meta = SelectedMeta.GetMeta();
+            thread.Init(meta, meta, true);
+            _Threads.Add(thread);
+            StartAll();
         }
 
         public void AddFav(string name)
@@ -356,6 +380,21 @@ namespace Me.Amon.Pcs
             _Main.ExitSystem();
         }
 
+        public void StartAll()
+        {
+            if (!BwWork.IsBusy)
+            {
+                BwWork.RunWorkerAsync();
+            }
+        }
+
+        public void StopAll()
+        {
+            if (BwWork.IsBusy)
+            {
+                BwWork.CancelAsync();
+            }
+        }
         #region 记录安全
         public void PkeyEdit()
         {
@@ -448,41 +487,42 @@ namespace Me.Amon.Pcs
 
         private void BwWork_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            bool running = true;
-            while (!BwWork.CancellationPending && running)
+            while (!BwWork.CancellationPending)
             {
-                if (_CurThreads < _MaxThreads)
+                _CurThreads = 0;
+                for (int i = 0; i < _Threads.Count; i += 1)
                 {
-                    int dos = 0;
-                    for (int i = 0; i < _Threads.Count; i += 1)
+                    var thread = _Threads[i];
+                    if (thread.IsAlive)
                     {
-                        var task = _Threads[i];
-                        if (task.Status == TaskStatus.RUNNING)
-                        {
-                            dos += 1;
-                        }
-                        if (task.Status == TaskStatus.WAIT)
-                        {
-                            task.Start();
-                            dos += 1;
-                        }
-
-                        foreach (var viewer in _Viewers)
-                        {
-                            viewer.UpdateTask(task);
-                        }
-
-                        if (_CurThreads >= _MaxThreads)
-                        {
-                            break;
-                        }
+                        _CurThreads += 1;
                     }
-                    if (dos < 1)
+                    if (thread.Status == TaskStatus.WAIT)
+                    {
+                        thread.Start();
+                        _CurThreads += 1;
+                    }
+
+                    foreach (var moniter in _Viewers)
+                    {
+                        moniter.UpdateTask(thread, i);
+                    }
+
+                    if (_CurThreads >= _MaxThreads)
                     {
                         break;
                     }
                 }
 
+                if (_CurThreads < 1)
+                {
+                    break;
+                }
+
+                foreach (var moniter in _Viewers)
+                {
+                    moniter.Refresh();
+                }
                 Thread.Sleep(100);
             }
         }

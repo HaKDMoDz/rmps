@@ -29,6 +29,11 @@ namespace Me.Amon.Open
 
         List<AMeta> ListMeta(string path);
 
+        /// <summary>
+        /// 特殊目录路径
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         string GetPath(string key);
 
         /// <summary>
@@ -51,17 +56,17 @@ namespace Me.Amon.Open
 
         void CopyRef(AMeta meta);
 
-        long BeginWrite(long key, string remoteMeta);
+        bool BeginUpload(long key, string remoteMeta);
 
-        int Write(long key, byte[] buffer, int offset, int length);
+        void Write(long key, byte[] buffer, int offset, int length);
 
-        void EndWrite(long key);
+        void EndUpload(long key);
 
-        long BeginRead(long key, string url, long range);
+        long BeginDownload(long key, string url, long range);
 
         int Read(long key, byte[] buffer, int offset, int length);
 
-        void EndRead(long key);
+        void EndDownload(long key);
 
         void Thumbnail();
 

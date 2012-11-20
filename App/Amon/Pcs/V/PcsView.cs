@@ -71,58 +71,58 @@ namespace Me.Amon.Pcs.V
             LvMeta.SmallImageList = IlMetaSmall;
 
             var meta = new FolderMeta();
-            meta.SetPath(CPcs.PATH_FAV);
-            meta.SetName("收藏");
+            meta.SetMetaPath(CPcs.PATH_FAV);
+            meta.SetMetaName("收藏");
             _TnFav = GenNode(meta, CPcs.ICON_FAV);
             TvPath.Nodes.Add(_TnFav);
 
             meta = new FolderMeta();
-            meta.SetPath(CPcs.PATH_LIB);
-            meta.SetName("公共");
+            meta.SetMetaPath(CPcs.PATH_LIB);
+            meta.SetMetaName("公共");
             _TnPub = GenNode(meta, CPcs.ICON_LIB);
             TvPath.Nodes.Add(_TnPub);
 
             meta = new FolderMeta();
-            meta.SetPath(_PcsClient.GetPath(CPcs.PATH_LIB_DOCUMENTS));
-            meta.SetName("文档");
+            meta.SetMetaPath(_PcsClient.GetPath(CPcs.PATH_LIB_DOCUMENTS));
+            meta.SetMetaName("文档");
             _TnPub.Nodes.Add(GenNode(meta, CPcs.ICON_LIB_DOCUMENTS));
 
             meta = new FolderMeta();
-            meta.SetPath(_PcsClient.GetPath(CPcs.PATH_LIB_PICTURES));
-            meta.SetName("图片");
+            meta.SetMetaPath(_PcsClient.GetPath(CPcs.PATH_LIB_PICTURES));
+            meta.SetMetaName("图片");
             _TnPub.Nodes.Add(GenNode(meta, CPcs.ICON_LIB_PICTURES));
 
             meta = new FolderMeta();
-            meta.SetPath(_PcsClient.GetPath(CPcs.PATH_LIB_AUDIOS));
-            meta.SetName("音乐");
+            meta.SetMetaPath(_PcsClient.GetPath(CPcs.PATH_LIB_AUDIOS));
+            meta.SetMetaName("音乐");
             _TnPub.Nodes.Add(GenNode(meta, CPcs.ICON_LIB_AUDIOS));
 
             meta = new FolderMeta();
-            meta.SetPath(_PcsClient.GetPath(CPcs.PATH_LIB_VIDEOS));
-            meta.SetName("视频");
+            meta.SetMetaPath(_PcsClient.GetPath(CPcs.PATH_LIB_VIDEOS));
+            meta.SetMetaName("视频");
             _TnPub.Nodes.Add(GenNode(meta, CPcs.ICON_LIB_VIDEOS));
 
             meta = new FolderMeta();
-            meta.SetPath(CPcs.PATH_ALL);
-            meta.SetName("所有");
+            meta.SetMetaPath(CPcs.PATH_ALL);
+            meta.SetMetaName("所有");
             _TnAll = GenNode(meta, CPcs.ICON_ALL);
             TvPath.Nodes.Add(_TnAll);
 
             meta = new FolderMeta();
-            meta.SetPath(_PcsClient.GetPath(CPcs.PATH_SNS));
-            meta.SetName("分享");
+            meta.SetMetaPath(_PcsClient.GetPath(CPcs.PATH_SNS));
+            meta.SetMetaName("分享");
             _TnSns = GenNode(meta, CPcs.ICON_SNS);
             TvPath.Nodes.Add(_TnSns);
 
             meta = new FolderMeta();
-            meta.SetPath(_PcsClient.GetPath(CPcs.PATH_APP));
-            meta.SetName("应用");
+            meta.SetMetaPath(_PcsClient.GetPath(CPcs.PATH_APP));
+            meta.SetMetaName("应用");
             _TnApp = GenNode(meta, CPcs.ICON_APP);
             TvPath.Nodes.Add(_TnApp);
 
             meta = new FolderMeta();
-            meta.SetPath(_PcsClient.GetPath(CPcs.PATH_BIN));
-            meta.SetName("回收站");
+            meta.SetMetaPath(_PcsClient.GetPath(CPcs.PATH_BIN));
+            meta.SetMetaName("回收站");
             _TnBin = GenNode(meta, CPcs.ICON_BIN);
             TvPath.Nodes.Add(_TnBin);
 
@@ -142,7 +142,7 @@ namespace Me.Amon.Pcs.V
             if (MetaUri != null && _CurrentMeta != null)
             {
                 MetaUri.Text = _PcsClient.Name;
-                MetaUri.Path = _PcsClient.Display(_CurrentMeta.GetPath());
+                MetaUri.Path = _PcsClient.Display(_CurrentMeta.GetMetaPath());
                 MetaUri.Icon = _PcsClient.Icon;
             }
         }
@@ -203,9 +203,9 @@ namespace Me.Amon.Pcs.V
             {
                 AMeta meta = _WPcs.SelectedMeta;
 
-                if (_PcsClient.Parent(meta.GetPath()) != _PcsClient.Root)
+                if (_PcsClient.Parent(meta.GetMetaPath()) != _PcsClient.Root)
                 {
-                    string path = _PcsClient.Combine(_PcsClient.Root, meta.GetName());
+                    string path = _PcsClient.Combine(_PcsClient.Root, meta.GetMetaName());
                     _PcsClient.Moveto(meta, _PcsClient.Root);
                 }
 
@@ -220,14 +220,14 @@ namespace Me.Amon.Pcs.V
             {
                 AMeta meta = _WPcs.SelectedMeta;
 
-                if (_PcsClient.Parent(meta.GetPath()) == _PcsClient.Root)
+                if (_PcsClient.Parent(meta.GetMetaPath()) == _PcsClient.Root)
                 {
-                    meta.SetName("复件 " + _WPcs.SelectedMeta.GetName());
+                    meta.SetMetaName("复件 " + _WPcs.SelectedMeta.GetMetaName());
                 }
 
-                string path = _PcsClient.Combine(_PcsClient.Root, meta.GetName());
+                string path = _PcsClient.Combine(_PcsClient.Root, meta.GetMetaName());
                 _PcsClient.Copyto(meta, path);
-                meta.SetPath(path);
+                meta.SetMetaPath(path);
 
                 var item = GenItem(meta);
                 LvMeta.Items.Add(item);
@@ -256,7 +256,7 @@ namespace Me.Amon.Pcs.V
                 return;
             }
 
-            _PcsClient.Delete(meta.GetPath(), meta.GetName());
+            _PcsClient.Delete(meta.GetMetaPath(), meta.GetMetaName());
             LvMeta.Items.Remove(item);
         }
 
@@ -280,7 +280,7 @@ namespace Me.Amon.Pcs.V
                 return;
             }
 
-            string name = meta.GetName();
+            string name = meta.GetMetaName();
             while (true)
             {
                 name = Main.ShowInput("请输入新的文件名称：", name);
@@ -296,7 +296,7 @@ namespace Me.Amon.Pcs.V
 
             _PcsClient.Moveto(meta, name);
             _NddEngine.Moveto(meta, name);
-            meta.SetName(name);
+            meta.SetMetaName(name);
             item.Text = name;
         }
 
@@ -325,13 +325,13 @@ namespace Me.Amon.Pcs.V
                     break;
                 }
             }
-            AMeta meta = _PcsClient.CreateFolder(_CurrentMeta.GetPath(), name);
+            AMeta meta = _PcsClient.CreateFolder(_CurrentMeta.GetMetaPath(), name);
             if (meta == null)
             {
                 return;
             }
             LvMeta.Items.Add(GenItem(meta));
-            _NddEngine.CreateFolder(_CurrentMeta.GetPath(), name);
+            _NddEngine.CreateFolder(_CurrentMeta.GetMetaPath(), name);
         }
 
         public void DownloadMeta()
@@ -382,14 +382,14 @@ namespace Me.Amon.Pcs.V
 
             ShowInfo();
 
-            if (string.IsNullOrWhiteSpace(_CurrentMeta.GetPath()))
+            if (string.IsNullOrWhiteSpace(_CurrentMeta.GetMetaPath()))
             {
                 return;
             }
 
-            if (_CurrentMeta.GetPath()[0] == '*')
+            if (_CurrentMeta.GetMetaPath()[0] == '*')
             {
-                switch (_CurrentMeta.GetPath())
+                switch (_CurrentMeta.GetMetaPath())
                 {
                     case CPcs.PATH_FAV:
                         break;
@@ -404,7 +404,7 @@ namespace Me.Amon.Pcs.V
                 }
                 //node.Nodes.Clear();
             }
-            else if (_CurrentMeta.GetPath()[0] == ':')
+            else if (_CurrentMeta.GetMetaPath()[0] == ':')
             {
             }
             else
@@ -500,7 +500,7 @@ namespace Me.Amon.Pcs.V
         private TreeNode GenNode(AMeta meta, string icon = "_def")
         {
             var node = new TreeNode();
-            node.Text = meta.GetName();
+            node.Text = meta.GetMetaName();
             node.ImageKey = icon;
             node.SelectedImageKey = icon;
             node.Tag = meta;
@@ -510,7 +510,7 @@ namespace Me.Amon.Pcs.V
         private ListViewItem GenItem(AMeta meta)
         {
             var item = new ListViewItem();
-            item.Text = meta.GetName();
+            item.Text = meta.GetMetaName();
             item.ImageKey = GetIcon(meta);
             item.Tag = meta;
             return item;
@@ -518,7 +518,7 @@ namespace Me.Amon.Pcs.V
 
         private string GetIcon(AMeta meta)
         {
-            if (meta == null || string.IsNullOrEmpty(meta.GetName()))
+            if (meta == null || string.IsNullOrEmpty(meta.GetMetaName()))
             {
                 return "unknown";
             }
@@ -532,12 +532,12 @@ namespace Me.Amon.Pcs.V
                 string ext;
                 while (true)
                 {
-                    idx = meta.GetName().IndexOf('.', idx);
+                    idx = meta.GetMetaName().IndexOf('.', idx);
                     if (idx < 0)
                     {
                         return "file";
                     }
-                    ext = meta.GetName().Substring(++idx);
+                    ext = meta.GetMetaName().Substring(++idx);
                     if (IlMetaLarge.Images.ContainsKey(ext))
                     {
                         return ext;
@@ -549,7 +549,8 @@ namespace Me.Amon.Pcs.V
 
         private void ListMeta()
         {
-            var metas = _PcsClient.ListMeta(_CurrentMeta.GetPath());
+            var metas = _PcsClient.ListMeta(_CurrentMeta.GetMetaPath());
+            LvMeta.Items.Clear();
             foreach (AMeta meta in metas)
             {
                 LvMeta.Items.Add(GenItem(meta));
