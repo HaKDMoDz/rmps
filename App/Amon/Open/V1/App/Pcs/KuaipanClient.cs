@@ -1,4 +1,4 @@
-﻿using System;
+ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Net;
@@ -327,6 +327,8 @@ namespace Me.Amon.Open.V1.App.Pcs
         #region 上传
         public bool BeginUpload(long key, string remoteMeta)
         {
+            //http.ServicePoint.Expect100Continue = false;
+            //http.UserAgent = "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0)";
             return true;
         }
 
