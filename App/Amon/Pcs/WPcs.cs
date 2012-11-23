@@ -32,7 +32,6 @@ namespace Me.Amon.Pcs
         private int _MaxThreads = 1;
         private int _CurThreads = 0;
 
-
         #region 构造函数
         public WPcs()
         {
@@ -127,7 +126,7 @@ namespace Me.Amon.Pcs
         #endregion
 
         #region 公共函数
-        public AMeta SelectedMeta { get; set; }
+        public PcsView LastView { get; set; }
 
         public EPcs Operation { get; set; }
 
@@ -150,6 +149,7 @@ namespace Me.Amon.Pcs
                 else
                 {
                     _Viewers.Add(UcTaskList);
+                    UcTaskList.ShowTask(_Threads);
                 }
             }
         }
@@ -166,6 +166,7 @@ namespace Me.Amon.Pcs
             else
             {
                 _Viewers.Add(UcTaskList);
+                UcTaskList.ShowTask(_Threads);
             }
         }
 
@@ -174,7 +175,7 @@ namespace Me.Amon.Pcs
             var group = _XmlMenu.GetGroup("paste-meta-enabled");
             if (group != null)
             {
-                group.Enabled(SelectedMeta != null);
+                group.Enabled(Operation != EPcs.None);
             }
         }
 
@@ -289,11 +290,35 @@ namespace Me.Amon.Pcs
             }
         }
 
+        public void CopyMetaRef()
+        {
+            if (_CurView != null)
+            {
+                _CurView.CopyMetaRef();
+            }
+        }
+
         public void PasteMeta()
         {
             if (_CurView != null)
             {
                 _CurView.PasteMeta();
+            }
+        }
+
+        public void PasteMetaAs()
+        {
+            if (_CurView != null)
+            {
+                _CurView.PasteMetaAs();
+            }
+        }
+
+        public void PasteMetaRef()
+        {
+            if (_CurView != null)
+            {
+                _CurView.PasteMetaRef();
             }
         }
 
@@ -323,45 +348,37 @@ namespace Me.Amon.Pcs
 
         public void DownloadMeta()
         {
-            // 10M = 1024*1024*10
-            if (SelectedMeta.GetSize() >= 10485760)
+            var task = _CurView.NewThread();
+            if (task == null)
             {
-                string msg = string.Format("您要下载的文件过大，为了获得最佳的体验效果建议使用官方客户端。{0}仍然要继续下载吗？", Environment.NewLine);
-                if (DialogResult.Yes != MessageBox.Show(this, msg, "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2))
-                {
-                    return;
-                }
+                return;
             }
-            var thread = _CurView.NewThread();
-            var meta = SelectedMeta.GetMeta();
-            thread.Init(meta, meta, false);
-            _Threads.Add(thread);
+
+            _Threads.Add(task);
+            if (!ScMain.Panel2Collapsed)
+            {
+                UcTaskList.AppendTask(task);
+            }
             StartAll();
         }
 
         public void UploadMeta()
         {
-            // 5M = 1024*1024*5
-            if (SelectedMeta.GetSize() >= 5242880)
+            var task = _CurView.NewThread();
+            if (task == null)
             {
-                string msg = string.Format("您要上传的文件过大，为了获得最佳的体验效果建议使用官方客户端。{0}仍然要继续上传吗？", Environment.NewLine);
-                if (DialogResult.Yes != MessageBox.Show(this, msg, "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2))
-                {
-                    return;
-                }
+                return;
             }
-            var thread = _CurView.NewThread();
-            var meta = SelectedMeta.GetMeta();
-            thread.Init(meta, meta, true);
-            _Threads.Add(thread);
+
+            _Threads.Add(task);
             StartAll();
         }
 
-        public void AddFav(string name)
+        public void AddFav()
         {
             if (_CurView != null)
             {
-                _CurView.AddFav(name);
+                _CurView.AddFav();
             }
         }
 

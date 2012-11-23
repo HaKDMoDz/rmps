@@ -15,7 +15,7 @@ namespace Me.Amon.Pcs.M
         /// </summary>
         public string root;
         /// <summary>
-        /// 文件或文件夹相对<root>的路径
+        /// 文件或文件夹相对root的路径
         /// </summary>
         public string path;
         /// <summary>
@@ -90,6 +90,10 @@ namespace Me.Amon.Pcs.M
 
         public override string GetMeta()
         {
+            if (path[path.Length - 1] != '/')
+            {
+                return path + '/' + name;
+            }
             return path + name;
         }
 
@@ -176,5 +180,21 @@ namespace Me.Amon.Pcs.M
             return metas;
         }
         #endregion
+
+        public void SetMetaType(int type)
+        {
+            if (type == CPcs.META_TYPE_FOLDER)
+            {
+                this.type = "folder";
+            }
+            else if (type == CPcs.META_TYPE_FILE)
+            {
+                this.type = "file";
+            }
+            else
+            {
+                this.type = "unknown";
+            }
+        }
     }
 }

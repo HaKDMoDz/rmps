@@ -438,6 +438,7 @@
     <Compile Include="Pcs\EPcs.cs" />
     <Compile Include="Pcs\E\APcsAction.cs" />
     <Compile Include="Pcs\E\Edit\CopyAction.cs" />
+    <Compile Include="Pcs\E\Edit\CopyRefAction.cs" />
     <Compile Include="Pcs\E\Edit\CreateAction.cs" />
     <Compile Include="Pcs\E\Edit\CutAction.cs" />
     <Compile Include="Pcs\E\Edit\DeleteAction.cs" />
@@ -445,7 +446,9 @@
     <Compile Include="Pcs\E\Edit\EditAction.cs" />
     <Compile Include="Pcs\E\Edit\FavNewAction.cs" />
     <Compile Include="Pcs\E\Edit\OpenAction.cs" />
+    <Compile Include="Pcs\E\Edit\PastAsAction.cs" />
     <Compile Include="Pcs\E\Edit\PasteAction.cs" />
+    <Compile Include="Pcs\E\Edit\PasteRefAction.cs" />
     <Compile Include="Pcs\E\Edit\RenameAction.cs" />
     <Compile Include="Pcs\E\Edit\UploadAction.cs" />
     <Compile Include="Pcs\E\File\CreateAction.cs" />
@@ -463,15 +466,23 @@
     <Compile Include="Pcs\E\User\PkeyAction.cs" />
     <Compile Include="Pcs\E\User\SkeyAction.cs" />
     <Compile Include="Pcs\E\View\TaskAction.cs" />
+    <Compile Include="Pcs\M\AMetaRef.cs" />
     <Compile Include="Pcs\M\FolderMeta.cs" />
     <Compile Include="Pcs\M\AMeta.cs" />
     <Compile Include="Pcs\M\DataModel.cs" />
     <Compile Include="Pcs\M\DropboxMeta.cs" />
     <Compile Include="Pcs\M\KuaipanMeta.cs" />
+    <Compile Include="Pcs\M\KuaipanMetaRef.cs" />
     <Compile Include="Pcs\M\MPcs.cs" />
     <Compile Include="Pcs\M\NativeMeta.cs" />
     <Compile Include="Pcs\M\UserModel.cs" />
     <Compile Include="Pcs\V\ITaskViewer.cs" />
+    <Compile Include="Pcs\V\MetaRef.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pcs\V\MetaRef.Designer.cs">
+      <DependentUpon>MetaRef.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pcs\V\Mgr\Config.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1586,6 +1597,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pcs\V\FavMgr.resx">
       <DependentUpon>FavMgr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pcs\V\MetaRef.resx">
+      <DependentUpon>MetaRef.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pcs\V\MetaUri.resx">
       <DependentUpon>MetaUri.cs</DependentUpon>

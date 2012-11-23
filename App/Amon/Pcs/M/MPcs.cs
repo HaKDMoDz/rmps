@@ -71,5 +71,10 @@ namespace Me.Amon.Pcs.M
         {
             return ServerName;
         }
+
+        public override int GetHashCode()
+        {
+            return (ServerType + UserId).GetHashCode();
+        }
     }
 }

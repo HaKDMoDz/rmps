@@ -131,16 +131,16 @@ namespace Me.Amon.Open.PC
             return true;
         }
 
-        public bool Moveto(AMeta meta, string dstPath)
+        public AMeta Moveto(AMeta meta, string dstPath, string dstName)
         {
-            string path = System.IO.Path.Combine(dstPath, meta.GetMetaName());
+            string path = System.IO.Path.Combine(dstPath, dstName);
             if (System.IO.File.Exists(path))
             {
                 path = GenDupName(meta, dstPath);
             }
             File.Move(meta.GetMetaPath(), path);
             meta.SetMetaPath(path);
-            return true;
+            return meta;
         }
 
         private string GenDupName(AMeta meta, string path)
@@ -161,14 +161,20 @@ namespace Me.Amon.Open.PC
             return temp;
         }
 
-        public bool Copyto(AMeta meta, string dstPath)
+        public AMeta Copyto(AMeta meta, string dstPath, string dstName)
         {
-            File.Copy(meta.GetMetaPath(), dstPath);
-            return true;
+            File.Copy(meta.GetMetaPath(), Path.Combine(dstPath, dstName));
+            return meta;
         }
 
-        public void CopyRef(AMeta meta)
+        public AMeta Copyto(string metaRef, string dstPath, string dstName)
         {
+            return null;
+        }
+
+        public AMetaRef CopyRef(AMeta meta)
+        {
+            return null;
         }
 
         #region 上传

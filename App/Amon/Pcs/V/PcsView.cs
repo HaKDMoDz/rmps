@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -11,7 +13,6 @@ namespace Me.Amon.Pcs.V
     public partial class PcsView : UserControl
     {
         private WPcs _WPcs;
-        private MPcs _MPcs;
         private UserModel _UserModel;
         private DataModel _DataModel;
         private PcsClient _PcsClient;
@@ -25,8 +26,31 @@ namespace Me.Amon.Pcs.V
         private static ImageList IlPath;
         private static ImageList IlMetaLarge;
         private static ImageList IlMetaSmall;
+        private List<AMeta> _Metas;
+        /// <summary>
+        /// 当前选择结点
+        /// </summary>
         private TreeNode _CurrentNode;
+        /// <summary>
+        /// 当前选择元素
+        /// </summary>
+        private ListViewItem _CurrentItem;
+        /// <summary>
+        /// 当前路径
+        /// </summary>
+        private AMeta _CurrentPath;
+        /// <summary>
+        /// 当选选择对象
+        /// </summary>
         private AMeta _CurrentMeta;
+        /// <summary>
+        /// 文件操作对象
+        /// </summary>
+        private AMeta _OperateMeta;
+        /// <summary>
+        /// 文件操作方式
+        /// </summary>
+        private EPcs _OperateType;
 
         #region 构造函数
         public PcsView()
@@ -37,7 +61,7 @@ namespace Me.Amon.Pcs.V
         public PcsView(WPcs wPcs, MPcs mPcs, PcsClient pcsClient, UserModel userModel, DataModel dataModel)
         {
             _WPcs = wPcs;
-            _MPcs = mPcs;
+            MPcs = mPcs;
             _UserModel = userModel;
             _DataModel = dataModel;
             _PcsClient = pcsClient;
@@ -126,23 +150,25 @@ namespace Me.Amon.Pcs.V
             _TnBin = GenNode(meta, CPcs.ICON_BIN);
             TvPath.Nodes.Add(_TnBin);
 
-            foreach (var fav in _DataModel.ListMeta(_MPcs.ServerType, _MPcs.UserId))
+            foreach (var fav in _DataModel.ListMeta(MPcs.ServerType, MPcs.UserId))
             {
                 _TnFav.Nodes.Add(GenNode(fav));
             }
 
             _NddEngine = new NddEngine();
-            _NddEngine.Init(_MPcs.LocalRoot);
+            _NddEngine.Init(MPcs.LocalRoot);
         }
+
+        public MPcs MPcs { get; private set; }
 
         public MetaUri MetaUri { get; set; }
 
         public void ShowInfo()
         {
-            if (MetaUri != null && _CurrentMeta != null)
+            if (MetaUri != null && _CurrentPath != null)
             {
                 MetaUri.Text = _PcsClient.Name;
-                MetaUri.Path = _PcsClient.Display(_CurrentMeta.GetMetaPath());
+                MetaUri.Path = _PcsClient.Display(_CurrentPath.GetMeta());
                 MetaUri.Icon = _PcsClient.Icon;
             }
         }
@@ -150,90 +176,115 @@ namespace Me.Amon.Pcs.V
         #region 公共函数
         public void CutMeta()
         {
-            var list = LvMeta.SelectedItems;
-            if (list.Count < 1)
-            {
-                return;
-            }
+            LvMeta.Items.Remove(_CurrentItem);
 
-            var item = list[0] as ListViewItem;
-            if (item == null)
-            {
-                return;
-            }
-
-            var meta = item.Tag as AMeta;
-            if (meta == null)
-            {
-                return;
-            }
-
-            LvMeta.Items.Remove(item);
-            _WPcs.SelectedMeta = meta;
+            _OperateMeta = _CurrentMeta;
+            _OperateType = EPcs.Cut;
             _WPcs.Operation = EPcs.Cut;
         }
 
         public void CopyMeta()
         {
-            var list = LvMeta.SelectedItems;
-            if (list.Count < 1)
-            {
-                return;
-            }
-
-            var item = list[0] as ListViewItem;
-            if (item == null)
-            {
-                return;
-            }
-
-            var meta = item.Tag as AMeta;
-            if (meta == null)
-            {
-                return;
-            }
-
-            _WPcs.SelectedMeta = meta;
+            _OperateMeta = _CurrentMeta;
+            _OperateType = EPcs.Copy;
             _WPcs.Operation = EPcs.Copy;
         }
 
         public void PasteMeta()
         {
-            if (_WPcs.Operation == EPcs.Cut)
+            if (_OperateType == EPcs.Cut)
             {
-                AMeta meta = _WPcs.SelectedMeta;
-
-                if (_PcsClient.Parent(meta.GetMetaPath()) != _PcsClient.Root)
+                if (_OperateMeta.GetMetaPath() != _CurrentPath.GetMeta())
                 {
-                    string path = _PcsClient.Combine(_PcsClient.Root, meta.GetMetaName());
-                    _PcsClient.Moveto(meta, _PcsClient.Root);
+                    _CurrentMeta = _PcsClient.Moveto(_OperateMeta, _CurrentPath.GetMeta(), _OperateMeta.GetMetaName());
+                    _Metas.Add(_CurrentMeta);
                 }
 
-                var item = GenItem(meta);
+                var item = GenItem(_CurrentMeta);
                 LvMeta.Items.Add(item);
                 item.Selected = true;
 
-                _WPcs.SelectedMeta = null;
+                _OperateMeta = null;
+                _OperateType = EPcs.None;
+                _WPcs.Operation = EPcs.None;
                 return;
             }
             if (_WPcs.Operation == EPcs.Copy)
             {
-                AMeta meta = _WPcs.SelectedMeta;
-
-                if (_PcsClient.Parent(meta.GetMetaPath()) == _PcsClient.Root)
+                string name = _OperateMeta.GetMetaName();
+                if (_OperateMeta.GetMetaPath() == _CurrentPath.GetMeta())
                 {
-                    meta.SetMetaName("复件 " + _WPcs.SelectedMeta.GetMetaName());
+                    name = "复件 " + name;
                 }
+                name = GenDupName(name);
 
-                string path = _PcsClient.Combine(_PcsClient.Root, meta.GetMetaName());
-                _PcsClient.Copyto(meta, path);
-                meta.SetMetaPath(path);
+                _CurrentMeta = _PcsClient.Copyto(_OperateMeta, _CurrentPath.GetMeta(), name);
+                _Metas.Add(_CurrentMeta);
 
-                var item = GenItem(meta);
+                var item = GenItem(_CurrentMeta);
                 LvMeta.Items.Add(item);
                 item.Selected = true;
                 return;
             }
+        }
+
+        public string CopyAs()
+        {
+            return "";
+        }
+
+        public void CopyMetaRef()
+        {
+            var metaRef = _PcsClient.CopyRef(_CurrentMeta);
+
+            if (metaRef != null)
+            {
+                new MetaRef(metaRef.GetMetaRef()).ShowDialog(_WPcs);
+            }
+        }
+        public void PasteMetaAs()
+        {
+            PcsView lastView = _WPcs.LastView;
+            if (lastView == null)
+            {
+                return;
+            }
+            // 冗余判断
+            if (lastView.MPcs == MPcs)
+            {
+                return;
+            }
+
+            // 获取来源引用
+            string metaRef = lastView.CopyAs();
+
+            // 复制引用
+
+            // 移动操作时，需要删除
+            if (_OperateType == EPcs.Cut)
+            {
+                lastView.DeleteMeta();
+            }
+        }
+
+        public void PasteMetaRef()
+        {
+            string metaRef = "";
+            while (true)
+            {
+                metaRef = Main.ShowInput("请输入您的引用：", metaRef);
+                if (metaRef == null)
+                {
+                    return;
+                }
+                if (!string.IsNullOrWhiteSpace(metaRef))
+                {
+                    break;
+                }
+            }
+
+            // 复制引用
+            _PcsClient.Copyto(metaRef, "/", "123.txt");
         }
 
         public void DeleteMeta()
@@ -294,20 +345,34 @@ namespace Me.Amon.Pcs.V
                 }
             }
 
-            _PcsClient.Moveto(meta, name);
-            _NddEngine.Moveto(meta, name);
+            _PcsClient.Moveto(meta, meta.GetMetaPath(), name);
+            _NddEngine.Moveto(meta, meta.GetMetaPath(), name);
             meta.SetMetaName(name);
             item.Text = name;
         }
 
-        public void AddFav(string name)
+        public void AddFav()
         {
-            var meta = _WPcs.SelectedMeta.ToMeta(name);
-            meta.ServerType = _MPcs.ServerType;
-            meta.ServerUser = _MPcs.UserId;
+            string name = _CurrentMeta.GetMetaName();
+            while (true)
+            {
+                name = Main.ShowInput("请输入收藏名称：", name);
+                if (name == null)
+                {
+                    return;
+                }
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    break;
+                }
+            }
+
+            var meta = _CurrentMeta.ToMeta(name);
+            meta.ServerType = MPcs.ServerType;
+            meta.ServerUser = MPcs.UserId;
             meta.UserCode = _UserModel.Code;
             _DataModel.SaveMeta(meta);
-            _TnFav.Nodes.Add(GenNode(_WPcs.SelectedMeta));
+            _TnFav.Nodes.Add(GenNode(_CurrentMeta));
         }
 
         public void CreateFolder()
@@ -361,7 +426,36 @@ namespace Me.Amon.Pcs.V
 
         public TaskThread NewThread()
         {
-            return new TaskThread(_PcsClient, _NddEngine);
+            // 10M = 1024*1024*10
+            if (_CurrentMeta.GetSize() >= 10485760)
+            {
+                string msg = string.Format("您要下载的文件过大，为了获得最佳的体验效果建议使用官方客户端。{0}仍然要继续下载吗？", Environment.NewLine);
+                if (DialogResult.Yes != MessageBox.Show(this, msg, "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2))
+                {
+                    return null;
+                }
+            }
+            var task = new TaskThread(_PcsClient, _NddEngine);
+            var meta = _CurrentMeta.GetMeta();
+            task.Init(meta, meta, false);
+            return task;
+        }
+
+        public TaskThread dd()
+        {
+            // 5M = 1024*1024*5
+            if (_CurrentMeta.GetSize() >= 5242880)
+            {
+                string msg = string.Format("您要上传的文件过大，为了获得最佳的体验效果建议使用官方客户端。{0}仍然要继续上传吗？", Environment.NewLine);
+                if (DialogResult.Yes != MessageBox.Show(this, msg, "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2))
+                {
+                    return null;
+                }
+            }
+            var task = new TaskThread(_PcsClient, _NddEngine);
+            var meta = _CurrentMeta.GetMeta();
+            task.Init(meta, meta, true);
+            return task;
         }
         #endregion
 
@@ -374,22 +468,22 @@ namespace Me.Amon.Pcs.V
                 return;
             }
 
-            _CurrentMeta = _CurrentNode.Tag as AMeta;
-            if (_CurrentMeta == null)
+            _CurrentPath = _CurrentNode.Tag as AMeta;
+            if (_CurrentPath == null)
             {
                 return;
             }
 
             ShowInfo();
 
-            if (string.IsNullOrWhiteSpace(_CurrentMeta.GetMetaPath()))
+            if (string.IsNullOrWhiteSpace(_CurrentPath.GetMetaPath()))
             {
                 return;
             }
 
-            if (_CurrentMeta.GetMetaPath()[0] == '*')
+            if (_CurrentPath.GetMetaPath()[0] == '*')
             {
-                switch (_CurrentMeta.GetMetaPath())
+                switch (_CurrentPath.GetMetaPath())
                 {
                     case CPcs.PATH_FAV:
                         break;
@@ -404,7 +498,7 @@ namespace Me.Amon.Pcs.V
                 }
                 //node.Nodes.Clear();
             }
-            else if (_CurrentMeta.GetMetaPath()[0] == ':')
+            else if (_CurrentPath.GetMetaPath()[0] == ':')
             {
             }
             else
@@ -420,13 +514,8 @@ namespace Me.Amon.Pcs.V
             {
                 return;
             }
-            ListViewItem item = LvMeta.SelectedItems[0];
-            var meta = item.Tag as AMeta;
-            if (meta == null)
-            {
-                return;
-            }
-            _WPcs.SelectedMeta = meta;
+            _CurrentItem = LvMeta.SelectedItems[0];
+            _CurrentMeta = _CurrentItem.Tag as AMeta;
         }
 
         private void LvMeta_MouseUp(object sender, MouseEventArgs e)
@@ -456,9 +545,10 @@ namespace Me.Amon.Pcs.V
 
         private void LvMeta_DoubleClick(object sender, System.EventArgs e)
         {
-            var meta = _WPcs.SelectedMeta;
-            if (meta.GetMetaType() == CPcs.META_TYPE_FOLDER)
+            if (_CurrentMeta.GetMetaType() == CPcs.META_TYPE_FOLDER)
             {
+                _CurrentPath = _CurrentMeta;
+                _CurrentMeta = null;
                 _Handler = new VoidHandler(ListMeta);
                 BwWorker.RunWorkerAsync();
             }
@@ -549,9 +639,9 @@ namespace Me.Amon.Pcs.V
 
         private void ListMeta()
         {
-            var metas = _PcsClient.ListMeta(_CurrentMeta.GetMetaPath());
+            _Metas = _PcsClient.ListMeta(_CurrentPath.GetMeta());
             LvMeta.Items.Clear();
-            foreach (AMeta meta in metas)
+            foreach (AMeta meta in _Metas)
             {
                 LvMeta.Items.Add(GenItem(meta));
                 //if (meta.Type == CPcs.META_TYPE_FOLDER)
@@ -559,6 +649,25 @@ namespace Me.Amon.Pcs.V
                 //    root.Nodes.Add(GenNode(meta));
                 //}
             }
+        }
+        #endregion
+
+        #region 私有函数
+        private string GenDupName(string name)
+        {
+            string fn = System.IO.Path.GetFileNameWithoutExtension(name);
+            string fe = System.IO.Path.GetExtension(name);
+            int i = 0;
+            foreach (var meta in _Metas)
+            {
+                if (meta.GetMetaName() == name)
+                {
+                    i += 1;
+                    name = fn + string.Format(" ({0})", i) + fe;
+                }
+            }
+
+            return name;
         }
         #endregion
 

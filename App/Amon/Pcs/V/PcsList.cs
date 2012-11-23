@@ -56,6 +56,7 @@ namespace Me.Amon.Pcs.V
             }
         }
 
+        #region 公共函数
         public void CreatePcs()
         {
             var pcsMgr = new PcsCreate();
@@ -70,16 +71,23 @@ namespace Me.Amon.Pcs.V
             _WPcs.OpenPcs(pcs);
         }
 
+        public void VerifyPcs()
+        {
+        }
+
         public void DeletePcs()
         {
             var pcs = LbItem.SelectedItem as MPcs;
             if (pcs == null)
             {
+                Main.ShowAlert("请选择您要移除的账户！");
+                LbItem.Focus();
                 return;
             }
             _DataModel.DeletePcs(pcs);
             LbItem.Items.Remove(pcs);
         }
+        #endregion
 
         #region 事件处理
         private void LbItem_DrawItem(object sender, DrawItemEventArgs e)
@@ -116,6 +124,14 @@ namespace Me.Amon.Pcs.V
             TbMemo.Text = "本地文件管理系统";
         }
 
+        private void LbItem_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                CmMenu.Show(LbItem, e.Location);
+            }
+        }
+
         private void LbItem_DoubleClick(object sender, EventArgs e)
         {
             OpenItem();
@@ -125,8 +141,24 @@ namespace Me.Amon.Pcs.V
         {
             OpenItem();
         }
+
+        private void MiCreate_Click(object sender, EventArgs e)
+        {
+            CreatePcs();
+        }
+
+        private void MiVerify_Click(object sender, EventArgs e)
+        {
+            VerifyPcs();
+        }
+
+        private void MiDelete_Click(object sender, EventArgs e)
+        {
+            DeletePcs();
+        }
         #endregion
 
+        #region 私有函数
         private void OpenItem()
         {
             MPcs mPcs = LbItem.SelectedItem as MPcs;
@@ -136,5 +168,6 @@ namespace Me.Amon.Pcs.V
             }
             _WPcs.OpenPcs(mPcs);
         }
+        #endregion
     }
 }

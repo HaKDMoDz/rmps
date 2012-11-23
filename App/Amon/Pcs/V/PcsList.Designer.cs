@@ -28,11 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.LbItem = new System.Windows.Forms.ListBox();
             this.PbLogo = new System.Windows.Forms.PictureBox();
             this.TbMemo = new System.Windows.Forms.TextBox();
             this.BnOpen = new System.Windows.Forms.Button();
+            this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MiCreate = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiVerify = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiDelete = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).BeginInit();
+            this.CmMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // LbItem
@@ -50,6 +56,7 @@
             this.LbItem.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.LbItem_DrawItem);
             this.LbItem.SelectedIndexChanged += new System.EventHandler(this.LbItem_SelectedIndexChanged);
             this.LbItem.DoubleClick += new System.EventHandler(this.LbItem_DoubleClick);
+            this.LbItem.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LbItem_MouseUp);
             // 
             // PbLogo
             // 
@@ -86,6 +93,36 @@
             this.BnOpen.UseVisualStyleBackColor = true;
             this.BnOpen.Click += new System.EventHandler(this.BnOpen_Click);
             // 
+            // CmMenu
+            // 
+            this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MiCreate,
+            this.MiVerify,
+            this.MiDelete});
+            this.CmMenu.Name = "CmMenu";
+            this.CmMenu.Size = new System.Drawing.Size(141, 70);
+            // 
+            // MiCreate
+            // 
+            this.MiCreate.Name = "MiCreate";
+            this.MiCreate.Size = new System.Drawing.Size(152, 22);
+            this.MiCreate.Text = "新建(&N)";
+            this.MiCreate.Click += new System.EventHandler(this.MiCreate_Click);
+            // 
+            // MiVerify
+            // 
+            this.MiVerify.Name = "MiVerify";
+            this.MiVerify.Size = new System.Drawing.Size(152, 22);
+            this.MiVerify.Text = "重新授权(&R)";
+            this.MiVerify.Click += new System.EventHandler(this.MiVerify_Click);
+            // 
+            // MiDelete
+            // 
+            this.MiDelete.Name = "MiDelete";
+            this.MiDelete.Size = new System.Drawing.Size(152, 22);
+            this.MiDelete.Text = "删除(&D)";
+            this.MiDelete.Click += new System.EventHandler(this.MiDelete_Click);
+            // 
             // PcsList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -97,6 +134,7 @@
             this.Name = "PcsList";
             this.Size = new System.Drawing.Size(400, 300);
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).EndInit();
+            this.CmMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -108,5 +146,9 @@
         private System.Windows.Forms.PictureBox PbLogo;
         private System.Windows.Forms.TextBox TbMemo;
         private System.Windows.Forms.Button BnOpen;
+        private System.Windows.Forms.ContextMenuStrip CmMenu;
+        private System.Windows.Forms.ToolStripMenuItem MiCreate;
+        private System.Windows.Forms.ToolStripMenuItem MiVerify;
+        private System.Windows.Forms.ToolStripMenuItem MiDelete;
     }
 }

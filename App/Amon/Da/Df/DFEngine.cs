@@ -116,11 +116,13 @@ namespace Me.Amon.Da.Df
                     }
 
                     int idx = line.IndexOf('=');
-                    if (idx > 0)
+                    if (idx < 0)
                     {
-                        item.K = line.Substring(0, idx);
-                        item.V = line.Substring(idx + 1);
+                        continue;
                     }
+
+                    item.K = line.Substring(0, idx);
+                    item.V = line.Substring(idx + 1);
                     dict[item.K] = item;
                     keys.Add(item.K);
 

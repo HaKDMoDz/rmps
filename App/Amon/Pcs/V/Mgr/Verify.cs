@@ -6,7 +6,7 @@ namespace Me.Amon.Pcs.V.Mgr
 {
     public partial class Verify : UserControl, IMgr
     {
-        private OAuthClient _Client;
+        private Me.Amon.Open.V1.App.OAuthV1Client _Client;
 
         public Verify()
         {
@@ -48,7 +48,13 @@ namespace Me.Amon.Pcs.V.Mgr
             {
                 return false;
             }
-            return _Client.AccessToken();
+            if (!_Client.AccessToken())
+            {
+                return false;
+            }
+            mPcs.Token = _Client.Token.oauth_token;
+            mPcs.TokenSecret = _Client.Token.oauth_token_secret;
+            return true;
         }
         #endregion
     }

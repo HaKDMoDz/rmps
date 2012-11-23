@@ -60,14 +60,14 @@ namespace Me.Amon.Pcs.C
             }
         }
 
-        public void Moveto(AMeta meta, string name)
+        public void Moveto(AMeta meta, string path, string name)
         {
-            string src = Path.Combine(_Root, meta.GetMetaPath(), meta.GetMetaName());
+            string src = Path.Combine(_Root, meta.GetMeta());
             if (!File.Exists(src))
             {
                 return;
             }
-            string dst = Path.Combine(meta.GetMetaPath(), name);
+            string dst = Path.Combine(path, name);
             if (File.Exists(dst))
             {
                 dst = GenDupName(meta.GetMetaPath(), name);

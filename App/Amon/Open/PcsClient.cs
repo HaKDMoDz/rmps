@@ -50,11 +50,19 @@ namespace Me.Amon.Open
 
         bool Delete(string path, string meta);
 
-        bool Moveto(AMeta meta, string dstMeta);
+        AMeta Moveto(AMeta meta, string dstPath, string dstName);
 
-        bool Copyto(AMeta meta, string dstMeta);
+        AMeta Copyto(AMeta meta, string dstPath, string dstName);
 
-        void CopyRef(AMeta meta);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="metaRef"></param>
+        /// <param name="dstMeta"></param>
+        /// <returns></returns>
+        AMeta Copyto(string metaRef, string dstPath, string dstName);
+
+        AMetaRef CopyRef(AMeta meta);
 
         bool BeginUpload(long key, string remoteMeta);
 

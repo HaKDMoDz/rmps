@@ -39,6 +39,7 @@ namespace Me.Amon.Pcs.V.Mgr
             }
 
             mPcs.ServerType = item.K;
+            mPcs.ServerName = item.V;
             return true;
         }
         #endregion

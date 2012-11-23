@@ -42,6 +42,8 @@ namespace Me.Amon.Pcs.C
             _LocalFile = localFile;
             _Upload = upload;
 
+            Status = TaskStatus.WAIT;
+            Message = "等待中";
             MetaName = System.IO.Path.GetFileName(remoteMeta);
         }
 
@@ -51,6 +53,7 @@ namespace Me.Amon.Pcs.C
             Status = TaskStatus.RUNNING;
             if (_Upload)
             {
+                new Thread(DoUploadA).Start();
             }
             else
             {
@@ -162,10 +165,10 @@ namespace Me.Amon.Pcs.C
                             Progress = (double)cs / ts;
                         }
                     }
-                    Status = TaskStatus.DONE;
-                    Message = "下载完成";
-                    Progress = 1d;
                 }
+                Status = TaskStatus.DONE;
+                Message = "下载完成";
+                Progress = 1d;
                 _Client.EndDownload(now);
             }
 

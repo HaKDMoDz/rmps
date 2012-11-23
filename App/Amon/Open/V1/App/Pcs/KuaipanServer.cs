@@ -4,11 +4,11 @@
     {
         public const string ROOT_NAME = "kuaipan";
 
-        public const string LIST_META = "http://openapi.kuaipan.cn/1/metadata/kuaipan";
+        public const string LIST_META = "http://openapi.kuaipan.cn/1/metadata/{0}{1}";
 
-        public const string SHARE_META = "http://openapi.kuaipan.cn/1/shares/kuaipan";
+        public const string SHARE_META = "http://openapi.kuaipan.cn/1/shares/{0}{1}";
 
-        public const string HISTORY = "http://openapi.kuaipan.cn/1/history/kuaipan";
+        public const string HISTORY = "http://openapi.kuaipan.cn/1/history/{0}{1}";
 
         public const string CREATE_FOLDER = "http://openapi.kuaipan.cn/1/fileops/create_folder";
 
@@ -17,6 +17,8 @@
         public const string MOVETO = "http://openapi.kuaipan.cn/1/fileops/move";
 
         public const string COPYTO = "http://openapi.kuaipan.cn/1/fileops/copy";
+
+        public const string COPYREF = "http://openapi.kuaipan.cn/1/copy_ref/{0}{1}";
 
         public const string DOWNLOAD = "http://api-content.dfs.kuaipan.cn/1/fileops/download_file";
 
