@@ -348,7 +348,7 @@ namespace Me.Amon.Pcs
 
         public void DownloadMeta()
         {
-            var task = _CurView.NewThread();
+            var task = _CurView.NewDownloadThread();
             if (task == null)
             {
                 return;
@@ -364,7 +364,7 @@ namespace Me.Amon.Pcs
 
         public void UploadMeta()
         {
-            var task = _CurView.NewThread();
+            var task = _CurView.NewUploadThread();
             if (task == null)
             {
                 return;

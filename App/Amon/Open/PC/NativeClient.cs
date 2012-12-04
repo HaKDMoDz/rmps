@@ -178,19 +178,20 @@ namespace Me.Amon.Open.PC
         }
 
         #region 上传
-        public bool BeginUpload(long key, string url)
+        public bool BeginUpload(long key, string path, string name)
         {
-            if (!Path.IsPathRooted(url))
+            path = Path.Combine(path, name);
+            if (!Path.IsPathRooted(path))
             {
-                url = Path.Combine(Root, url);
+                path = Path.Combine(Root, path);
             }
 
-            string folder = Path.GetDirectoryName(url);
+            string folder = Path.GetDirectoryName(path);
             if (!Directory.Exists(folder))
             {
                 Directory.CreateDirectory(folder);
             }
-            var stream = File.OpenWrite(url);
+            var stream = File.OpenWrite(path);
             try
             {
                 Monitor.Enter(_Streams);
@@ -299,6 +300,11 @@ namespace Me.Amon.Open.PC
         public string Combine(string path, string meta)
         {
             return System.IO.Path.Combine(path, meta);
+        }
+
+        public string GetFileName(string meta)
+        {
+            return System.IO.Path.GetFileName(meta);
         }
 
         public string Display(string path)

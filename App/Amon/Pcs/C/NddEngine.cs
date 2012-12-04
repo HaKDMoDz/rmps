@@ -180,6 +180,11 @@ namespace Me.Amon.Pcs.C
         }
         #endregion
 
+        public string GetFileName(string file)
+        {
+            return Path.GetFileName(file);
+        }
+
         public string ComputeHash(string file)
         {
             FileStream stream = File.OpenRead(file);

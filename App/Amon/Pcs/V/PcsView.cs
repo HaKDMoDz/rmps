@@ -399,6 +399,23 @@ namespace Me.Amon.Pcs.V
             _NddEngine.CreateFolder(_CurrentMeta.GetMetaPath(), name);
         }
 
+        public TaskThread NewDownloadThread()
+        {
+            // 10M = 1024*1024*10
+            if (_CurrentMeta.GetSize() >= 10485760)
+            {
+                string msg = string.Format("您要下载的文件过大，为了获得最佳的体验效果建议使用官方客户端。{0}仍然要继续下载吗？", Environment.NewLine);
+                if (DialogResult.Yes != MessageBox.Show(this, msg, "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2))
+                {
+                    return null;
+                }
+            }
+            var task = new TaskThread(_PcsClient, _NddEngine);
+            var meta = _CurrentMeta.GetMeta();
+            task.InitDownload(meta, meta);
+            return task;
+        }
+
         public void DownloadMeta()
         {
             var list = LvMeta.SelectedItems;
@@ -424,27 +441,17 @@ namespace Me.Amon.Pcs.V
         {
         }
 
-        public TaskThread NewThread()
+        public TaskThread NewUploadThread()
         {
-            // 10M = 1024*1024*10
-            if (_CurrentMeta.GetSize() >= 10485760)
+            if (DialogResult.OK != Main.ShowOpenFileDialog(_WPcs, CApp.FILE_OPEN_ALL, "", false))
             {
-                string msg = string.Format("您要下载的文件过大，为了获得最佳的体验效果建议使用官方客户端。{0}仍然要继续下载吗？", Environment.NewLine);
-                if (DialogResult.Yes != MessageBox.Show(this, msg, "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2))
-                {
-                    return null;
-                }
+                return null;
             }
-            var task = new TaskThread(_PcsClient, _NddEngine);
-            var meta = _CurrentMeta.GetMeta();
-            task.Init(meta, meta, false);
-            return task;
-        }
 
-        public TaskThread dd()
-        {
-            // 5M = 1024*1024*5
-            if (_CurrentMeta.GetSize() >= 5242880)
+            string file = Main.OpenFileDialog.FileName;
+            FileInfo info = new FileInfo(file);
+            // 2M = 1024*1024*2
+            if (info.Length >= 2097152)
             {
                 string msg = string.Format("您要上传的文件过大，为了获得最佳的体验效果建议使用官方客户端。{0}仍然要继续上传吗？", Environment.NewLine);
                 if (DialogResult.Yes != MessageBox.Show(this, msg, "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2))
@@ -453,8 +460,8 @@ namespace Me.Amon.Pcs.V
                 }
             }
             var task = new TaskThread(_PcsClient, _NddEngine);
-            var meta = _CurrentMeta.GetMeta();
-            task.Init(meta, meta, true);
+            var meta = _CurrentPath.GetMeta();
+            task.InitUpload(meta, file);
             return task;
         }
         #endregion

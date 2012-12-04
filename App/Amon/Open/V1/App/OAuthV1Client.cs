@@ -88,6 +88,12 @@ namespace Me.Amon.Open.V1.App
 
         public class KVItem
         {
+            public string Url { get; set; }
+
+            public string Path { get; set; }
+
+            public string Boundary { get; set; }
+
             public System.Net.HttpWebResponse Response { get; set; }
 
             public System.IO.Stream Stream { get; set; }

@@ -7,8 +7,8 @@ using System.Threading;
 using System.Windows.Forms;
 using Me.Amon.Pcs;
 using Me.Amon.Pcs.M;
-using Newtonsoft.Json;
 using Me.Amon.Util;
+using Newtonsoft.Json;
 
 namespace Me.Amon.Open.V1.App.Pcs
 {
@@ -396,13 +396,61 @@ namespace Me.Amon.Open.V1.App.Pcs
         }
 
         #region 上传
-        public bool BeginUpload(long key, string remoteMeta)
+        public bool BeginUpload(long key, string path, string name)
         {
+            ResetParams();
+            string url = KuaipanServer.UPLOAD;
+
+            PrepareParams();
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+            _Params.Sort(new NameValueComparer());
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
+
+            string t = GenBaseParams();
+            byte[] r = _Server.Get(url, t);
+            if (r == null || r.Length < 1)
+            {
+                return false;
+            }
+
+            t = GetString(r);
+            KuaipanMetaUrl uri = JsonConvert.DeserializeObject<KuaipanMetaUrl>(t);
+            if (uri.stat != "OK")
+            {
+                return false;
+            }
+
+            var boundary = "----------ThIs_Is_tHe_bouNdaRY_$";// string.Format("----------{0}", DateTime.Now.Ticks.ToString("x"));
+
+            System.IO.MemoryStream iStream = new System.IO.MemoryStream();
+            // 写入起始边界符
+            string header = string.Format("--{0}\r\n", boundary);
+            byte[] buffer = Encoding.ASCII.GetBytes(header);
+            iStream.Write(buffer, 0, buffer.Length);
+
+            header = string.Format("Content-Disposition: form-data; name=\"file\"; filename=\"{0}\"\r\n", name);
+            buffer = Encoding.UTF8.GetBytes(header);
+            iStream.Write(buffer, 0, buffer.Length);
+
+            header = string.Format("Content-Type: application/octet-stream\r\n\r\n");
+            buffer = Encoding.UTF8.GetBytes(header);
+            iStream.Write(buffer, 0, buffer.Length);
+
+            try
+            {
+                Monitor.Enter(_Items);
+                _Items[key] = new KVItem { Url = uri.url, Path = path + '/' + name, Boundary = boundary, Stream = iStream };
+            }
+            finally
+            {
+                Monitor.Exit(_Items);
+            }
             return true;
         }
 
         public void Write(long key, byte[] buffer, int offset, int length)
         {
+            _Items[key].Stream.Write(buffer, offset, length);
         }
 
         public void EndUpload(long key)
@@ -412,12 +460,64 @@ namespace Me.Amon.Open.V1.App.Pcs
                 return;
             }
 
+            var item = _Items[key];
+            var iStream = item.Stream as System.IO.MemoryStream;
+
+            #region 发送请求
+            // 写入结束边界符
+            var header = string.Format("\r\n--{0}--\r\n", item.Boundary);
+            var buffer = Encoding.ASCII.GetBytes(header);
+            iStream.Write(buffer, 0, buffer.Length);
+
+            ResetParams();
+            var url = string.Format("{0}/1/fileops/upload_file", item.Url);
+
+            PrepareParams();
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+            AddParam("overwrite", "True");
+            AddParam("root", KuaipanServer.ROOT_NAME);
+            AddParam("path", item.Path);
+            _Params.Sort(new NameValueComparer());
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
+
+            url += url.IndexOf('?') >= 0 ? '&' : '?';
+            url += GenBaseParams();
+
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.CookieContainer = new CookieContainer();
+            request.Accept = "identity";
+            request.Method = "POST";
+            request.ContentType = "multipart/form-data; boundary=" + item.Boundary;
+            request.UserAgent = "User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)";
+            request.ServicePoint.Expect100Continue = false;
+            request.ServicePoint.UseNagleAlgorithm = false;
+            request.AllowWriteStreamBuffering = true;
+            request.KeepAlive = false;
+
+            request.ContentLength = iStream.Length;
+            var oStream = request.GetRequestStream();
+            iStream.WriteTo(oStream);
+            iStream.Flush();
+            iStream.Close();
+            oStream.Flush();
+            oStream.Close();
+
+            var response = request.GetResponse();
+            oStream = response.GetResponseStream();
+            byte[] b = new byte[oStream.Length];
+            oStream.Read(b, 0, b.Length);
+            oStream.Close();
+            response.Close();
+
+            var t = GetString(b);
+
+            request.Abort();
+            #endregion
+
             try
             {
                 Monitor.Enter(_Items);
-                var item = _Items[key];
                 item.Stream.Close();
-                item.Response.Close();
                 _Items.Remove(key);
             }
             finally
@@ -444,22 +544,22 @@ namespace Me.Amon.Open.V1.App.Pcs
             url += url.IndexOf("?") >= 0 ? '&' : '?';
             url += t;
 
-            var reqeust = (HttpWebRequest)WebRequest.Create(url);
-            reqeust.CookieContainer = new CookieContainer();
-            reqeust.Method = "GET";
-            reqeust.UserAgent = "User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)";
-            reqeust.ServicePoint.Expect100Continue = false;
-            reqeust.ServicePoint.UseNagleAlgorithm = false;
-            reqeust.AllowWriteStreamBuffering = false;
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.CookieContainer = new CookieContainer();
+            request.Method = "GET";
+            request.UserAgent = "User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)";
+            request.ServicePoint.Expect100Continue = false;
+            request.ServicePoint.UseNagleAlgorithm = false;
+            request.AllowWriteStreamBuffering = false;
             if (range > 0)
             {
-                reqeust.AddRange(range); //设置Range值
+                request.AddRange(range); //设置Range值
             }
 
             HttpWebResponse response = null;
             try
             {
-                response = reqeust.GetResponse() as HttpWebResponse;
+                response = request.GetResponse() as HttpWebResponse;
                 if (response.StatusCode == HttpStatusCode.Accepted)
                 {
                     return -1;
@@ -546,6 +646,11 @@ namespace Me.Amon.Open.V1.App.Pcs
                 path += '/';
             }
             return path + meta;
+        }
+
+        public string GetFileName(string meta)
+        {
+            return System.IO.Path.GetFileName(meta);
         }
 
         public string Display(string path)

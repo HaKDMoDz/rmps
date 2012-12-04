@@ -64,7 +64,7 @@ namespace Me.Amon.Open
 
         AMetaRef CopyRef(AMeta meta);
 
-        bool BeginUpload(long key, string remoteMeta);
+        bool BeginUpload(long key, string path, string name);
 
         void Write(long key, byte[] buffer, int offset, int length);
 
@@ -81,6 +81,8 @@ namespace Me.Amon.Open
         string Parent(string path);
 
         string Combine(string path, string meta);
+
+        string GetFileName(string meta);
 
         string Display(string path);
     }

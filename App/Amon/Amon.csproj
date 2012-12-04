@@ -473,6 +473,7 @@
     <Compile Include="Pcs\M\DropboxMeta.cs" />
     <Compile Include="Pcs\M\KuaipanMeta.cs" />
     <Compile Include="Pcs\M\KuaipanMetaRef.cs" />
+    <Compile Include="Pcs\M\KuaipanMetaUrl.cs" />
     <Compile Include="Pcs\M\MPcs.cs" />
     <Compile Include="Pcs\M\NativeMeta.cs" />
     <Compile Include="Pcs\M\UserModel.cs" />

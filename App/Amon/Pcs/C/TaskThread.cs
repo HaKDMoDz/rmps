@@ -36,15 +36,26 @@ namespace Me.Amon.Pcs.C
             _Engine = engine;
         }
 
-        public void Init(string remoteMeta, string localFile, bool upload)
+        public void InitDownload(string remoteMeta, string localFile)
         {
             _RemoteMeta = remoteMeta;
             _LocalFile = localFile;
-            _Upload = upload;
+            _Upload = false;
 
             Status = TaskStatus.WAIT;
             Message = "等待中";
-            MetaName = System.IO.Path.GetFileName(remoteMeta);
+            MetaName = _Client.GetFileName(remoteMeta);
+        }
+
+        public void InitUpload(string remoteMeta, string localFile)
+        {
+            _RemoteMeta = remoteMeta;
+            _LocalFile = localFile;
+            _Upload = true;
+
+            Status = TaskStatus.WAIT;
+            Message = "等待中";
+            MetaName = _Engine.GetFileName(localFile);
         }
 
         public void Start()
@@ -67,7 +78,7 @@ namespace Me.Amon.Pcs.C
             Message = "上传中";
             long now = DateTime.Now.Ticks;
 
-            if (_Client.BeginUpload(now, _RemoteMeta))
+            if (_Client.BeginUpload(now, _RemoteMeta, MetaName))
             {
                 long ts = _Engine.BeginUpload(now, _LocalFile);
                 if (ts > -1)
@@ -106,7 +117,7 @@ namespace Me.Amon.Pcs.C
             Message = "上传中";
             long now = DateTime.Now.Ticks;
 
-            if (_Client.BeginUpload(now, _RemoteMeta))
+            if (_Client.BeginUpload(now, _RemoteMeta, MetaName))
             {
                 long ts = _Engine.BeginUpload(now, _LocalFile);
                 if (ts > -1)
