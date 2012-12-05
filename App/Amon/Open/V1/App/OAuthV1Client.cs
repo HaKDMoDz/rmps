@@ -13,15 +13,12 @@ namespace Me.Amon.Open.V1.App
 
         public OAuthConsumer Consumer { get; private set; }
         public OAuthTokenV1 Token { get; protected set; }
-        public string HttpMethod { get; private set; }
         #endregion
 
         #region 构造函数
         public OAuthV1Client(OAuthConsumer consumer)
         {
             Consumer = consumer;
-
-            HttpMethod = "GET";
 
             _Params = new List<KeyValuePair<string, string>>();
         }
@@ -54,7 +51,9 @@ namespace Me.Amon.Open.V1.App
 
         public void AddParam(string key, string value)
         {
-            _Params.Add(new KeyValuePair<string, string>(key, value));
+            var pair = new KeyValuePair<string, string>(key, value);
+            _Params.Remove(pair);
+            _Params.Add(pair);
         }
         #endregion
 
@@ -63,7 +62,7 @@ namespace Me.Amon.Open.V1.App
         #endregion
 
         #region 私有函数
-        protected abstract string GenerateBaseString(string uri);
+        protected abstract string GenerateBaseString(string uri, string method = "GET");
 
         protected virtual string Signature(string baseString)
         {
@@ -91,8 +90,6 @@ namespace Me.Amon.Open.V1.App
             public string Url { get; set; }
 
             public string Path { get; set; }
-
-            public string Boundary { get; set; }
 
             public System.Net.HttpWebResponse Response { get; set; }
 

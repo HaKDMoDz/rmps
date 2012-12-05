@@ -434,6 +434,7 @@
     <Compile Include="Open\V2\OAuthPhrases.cs" />
     <Compile Include="Open\V2\OAuthTokenV2.cs" />
     <Compile Include="Pcs\CPcs.cs" />
+    <Compile Include="Pcs\C\MsMultiPartFormData.cs" />
     <Compile Include="Pcs\C\NddEngine.cs" />
     <Compile Include="Pcs\EPcs.cs" />
     <Compile Include="Pcs\E\APcsAction.cs" />

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Me.Amon.Pcs;
+using Me.Amon.Pcs.C;
 using Me.Amon.Pcs.M;
 using Me.Amon.Util;
 using Newtonsoft.Json;
@@ -101,7 +102,7 @@ namespace Me.Amon.Open.V1.App.Pcs
         #endregion
 
         #region 函数重写
-        protected override string GenerateBaseString(string uri)
+        protected override string GenerateBaseString(string uri, string method = "GET")
         {
             StringBuilder builder = new StringBuilder();
             foreach (KeyValuePair<string, string> item in _Params)
@@ -118,7 +119,7 @@ namespace Me.Amon.Open.V1.App.Pcs
             }
 
             string temp = Uri.EscapeDataString(builder.ToString(0, builder.Length - 1));
-            return string.Format("{0}&{1}&{2}", HttpMethod, Uri.EscapeDataString(uri), temp);
+            return string.Format("{0}&{1}&{2}", method, Uri.EscapeDataString(uri), temp);
         }
 
         protected override string GetString(byte[] buffer)
@@ -420,26 +421,12 @@ namespace Me.Amon.Open.V1.App.Pcs
                 return false;
             }
 
-            var boundary = "----------ThIs_Is_tHe_bouNdaRY_$";// string.Format("----------{0}", DateTime.Now.Ticks.ToString("x"));
-
             System.IO.MemoryStream iStream = new System.IO.MemoryStream();
-            // 写入起始边界符
-            string header = string.Format("--{0}\r\n", boundary);
-            byte[] buffer = Encoding.ASCII.GetBytes(header);
-            iStream.Write(buffer, 0, buffer.Length);
-
-            header = string.Format("Content-Disposition: form-data; name=\"file\"; filename=\"{0}\"\r\n", name);
-            buffer = Encoding.UTF8.GetBytes(header);
-            iStream.Write(buffer, 0, buffer.Length);
-
-            header = string.Format("Content-Type: application/octet-stream\r\n\r\n");
-            buffer = Encoding.UTF8.GetBytes(header);
-            iStream.Write(buffer, 0, buffer.Length);
 
             try
             {
                 Monitor.Enter(_Items);
-                _Items[key] = new KVItem { Url = uri.url, Path = path + '/' + name, Boundary = boundary, Stream = iStream };
+                _Items[key] = new KVItem { Url = uri.url, Path = path + '/' + name, Stream = iStream };
             }
             finally
             {
@@ -462,57 +449,34 @@ namespace Me.Amon.Open.V1.App.Pcs
 
             var item = _Items[key];
             var iStream = item.Stream as System.IO.MemoryStream;
+            iStream.Close();
 
-            #region 发送请求
-            // 写入结束边界符
-            var header = string.Format("\r\n--{0}--\r\n", item.Boundary);
-            var buffer = Encoding.ASCII.GetBytes(header);
-            iStream.Write(buffer, 0, buffer.Length);
+            MsMultiPartFormData form = new MsMultiPartFormData();
+            form.AddStreamFile("file", "abc.txt", iStream.ToArray());
+            form.PrepareFormData();
 
             ResetParams();
             var url = string.Format("{0}/1/fileops/upload_file", item.Url);
 
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
-            AddParam("overwrite", "True");
             AddParam("root", KuaipanServer.ROOT_NAME);
+            AddParam("overwrite", "true");
             AddParam("path", item.Path);
             _Params.Sort(new NameValueComparer());
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url, "POST")));
 
             url += url.IndexOf('?') >= 0 ? '&' : '?';
             url += GenBaseParams();
 
-            var request = (HttpWebRequest)WebRequest.Create(url);
-            request.CookieContainer = new CookieContainer();
-            request.Accept = "identity";
-            request.Method = "POST";
-            request.ContentType = "multipart/form-data; boundary=" + item.Boundary;
-            request.UserAgent = "User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)";
-            request.ServicePoint.Expect100Continue = false;
-            request.ServicePoint.UseNagleAlgorithm = false;
-            request.AllowWriteStreamBuffering = true;
-            request.KeepAlive = false;
+            HttpUtil http = new HttpUtil();
+            http.Url = url;
+            http.Method = "POST";
+            http.ContentType = "multipart/form-data; boundary=" + form.Boundary;
+            http.PostDataByte = form.GetFormData();
+            http.Post();
 
-            request.ContentLength = iStream.Length;
-            var oStream = request.GetRequestStream();
-            iStream.WriteTo(oStream);
-            iStream.Flush();
-            iStream.Close();
-            oStream.Flush();
-            oStream.Close();
-
-            var response = request.GetResponse();
-            oStream = response.GetResponseStream();
-            byte[] b = new byte[oStream.Length];
-            oStream.Read(b, 0, b.Length);
-            oStream.Close();
-            response.Close();
-
-            var t = GetString(b);
-
-            request.Abort();
-            #endregion
+            var t = http.Html;
 
             try
             {
@@ -665,9 +629,9 @@ namespace Me.Amon.Open.V1.App.Pcs
             AddParam(OAuthConstants.OAUTH_SIGNATURE_METHOD, "HMAC-SHA1");
 
             AddParam(OAuthConstants.OAUTH_NONCE, KuaipanClient.GetOAuthNonce());
-            //AddParam(OAuthConstants.OAUTH_NONCE, "6Gb4JdQh");
+            //AddParam(OAuthConstants.OAUTH_NONCE, "ChcAPp5A");
             AddParam(OAuthConstants.OAUTH_TIMESTAMP, KuaipanClient.GetOAuthTimestamp());
-            //AddParam(OAuthConstants.OAUTH_TIMESTAMP, "1348192130");
+            //AddParam(OAuthConstants.OAUTH_TIMESTAMP, "1354715324");
             AddParam(OAuthConstants.OAUTH_CONSUMER_KEY, Consumer.consumer_key);
             AddParam(OAuthConstants.OAUTH_VERSION, "1.0");
 
@@ -689,6 +653,7 @@ namespace Me.Amon.Open.V1.App.Pcs
                 builder.Append(HttpUtil.Escape(item.Key));
                 builder.Append('=');
                 builder.Append(HttpUtil.Escape(item.Value));
+                //builder.Append(item.Value);
                 builder.Append('&');
             }
 

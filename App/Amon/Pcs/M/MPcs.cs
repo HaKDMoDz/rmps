@@ -76,5 +76,15 @@ namespace Me.Amon.Pcs.M
         {
             return (ServerType + UserId).GetHashCode();
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is MPcs)
+            {
+                var pcs = obj as MPcs;
+                return pcs.ServerType == ServerType && pcs.UserId == UserId;
+            }
+            return false;
+        }
     }
 }
