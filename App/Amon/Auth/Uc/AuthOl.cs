@@ -5,8 +5,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using Me.Amon.Http;
 using Me.Amon.M;
-using Me.Amon.Util;
 
 namespace Me.Amon.Auth.Uc
 {

@@ -341,6 +341,7 @@
       <DependentUpon>UtDates.cs</DependentUpon>
     </Compile>
     <Compile Include="E\IAction.cs" />
+    <Compile Include="Http\HttpMethod.cs" />
     <Compile Include="Ico\EIco.cs" />
     <Compile Include="Ico\E\AIcoAction.cs" />
     <Compile Include="Ico\E\AppendImgAction.cs" />
@@ -434,7 +435,7 @@
     <Compile Include="Open\V2\OAuthPhrases.cs" />
     <Compile Include="Open\V2\OAuthTokenV2.cs" />
     <Compile Include="Pcs\CPcs.cs" />
-    <Compile Include="Pcs\C\MsMultiPartFormData.cs" />
+    <Compile Include="Http\MsMultiPartFormData.cs" />
     <Compile Include="Pcs\C\NddEngine.cs" />
     <Compile Include="Pcs\EPcs.cs" />
     <Compile Include="Pcs\E\APcsAction.cs" />
@@ -1375,7 +1376,7 @@
     <Compile Include="Util\BeanUtil.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Util\HttpUtil.cs">
+    <Compile Include="Http\HttpUtil.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Util\SafeUtil.cs">

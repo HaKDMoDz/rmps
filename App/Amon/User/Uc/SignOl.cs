@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Xml;
 using Me.Amon.Auth;
 using Me.Amon.Da.Df;
+using Me.Amon.Http;
 using Me.Amon.M;
 using Me.Amon.Pwd.M;
 using Me.Amon.Util;

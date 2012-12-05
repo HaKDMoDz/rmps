@@ -8,11 +8,13 @@ namespace Me.Amon.Open.V1.App
     public abstract class OAuthV1Client : OAuthClient
     {
         #region 全局变量
+        public OAuthConsumer Consumer { get; private set; }
+        public OAuthTokenV1 Token { get; protected set; }
+
         protected OAuthV1Server _Server;
         protected List<KeyValuePair<string, string>> _Params;
 
-        public OAuthConsumer Consumer { get; private set; }
-        public OAuthTokenV1 Token { get; protected set; }
+        private NameValueComparer _Comparer;
         #endregion
 
         #region 构造函数
@@ -54,6 +56,15 @@ namespace Me.Amon.Open.V1.App
             var pair = new KeyValuePair<string, string>(key, value);
             _Params.Remove(pair);
             _Params.Add(pair);
+        }
+
+        public void SortParam()
+        {
+            if (_Comparer == null)
+            {
+                _Comparer = new NameValueComparer();
+            }
+            _Params.Sort(_Comparer);
         }
         #endregion
 

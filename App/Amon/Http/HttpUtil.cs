@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Text;
 
-namespace Me.Amon.Util
+namespace Me.Amon.Http
 {
     public class HttpUtil
     {
@@ -23,11 +22,6 @@ namespace Me.Amon.Util
         /// 是否跳转后的页面
         /// </summary>
         public bool AllowAutoRedirect { get; set; }
-
-        /// <summary>
-        /// Url
-        /// </summary>
-        public string Url { get; set; }
 
         /// <summary>
         /// Referer
@@ -65,19 +59,9 @@ namespace Me.Amon.Util
         public string UserAgent { get; set; }
 
         /// <summary>
-        /// 发送数据
-        /// </summary>
-        public string PostData { get; set; }
-
-        /// <summary>
-        /// 发送数据
-        /// </summary>
-        public List<byte> PostDataByte { get; set; }
-
-        /// <summary>
         /// 模式
         /// </summary>
-        public string Method { get; set; }
+        public HttpMethod Method { get; set; }
 
         /// <summary>
         /// 编码
@@ -94,13 +78,13 @@ namespace Me.Amon.Util
         /// </summary>
         public string Html { get; set; }
 
-        public bool Post()
+        public bool Post(string url, byte[] data)
         {
             HttpWebRequest httpWebRequest = null;
             HttpWebResponse httpWebResponse = null;
             try
             {
-                httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(Url);
+                httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
                 if (!string.IsNullOrEmpty(Referer))
                 {
                     httpWebRequest.Referer = Referer;
@@ -116,26 +100,15 @@ namespace Me.Amon.Util
                 }
                 //httpWebRequest.KeepAlive = KeepAlive;
                 httpWebRequest.UserAgent = UserAgent;
-                httpWebRequest.Method = Method;
+                httpWebRequest.Method = Enum.GetName(typeof(HttpMethod), Method);
                 httpWebRequest.ServicePoint.Expect100Continue = false;
                 httpWebRequest.AllowAutoRedirect = AllowAutoRedirect;
-                if (Method == "POST" && !string.IsNullOrEmpty(PostData))
+                if (Method == HttpMethod.POST && data != null && data.Length > 0)
                 {
                     httpWebRequest.ContentType = ContentType;
-                    byte[] byteRequest = Encoding.GetBytes(PostData);
-                    httpWebRequest.ContentLength = byteRequest.Length;
+                    httpWebRequest.ContentLength = data.Length;
                     Stream stream = httpWebRequest.GetRequestStream();
-                    stream.Write(byteRequest, 0, byteRequest.Length);
-                    stream.Close();
-                }
-                if (Method == "POST" && this.PostDataByte.Count > 0)
-                {
-                    httpWebRequest.ContentType = ContentType;
-                    Stream stream = httpWebRequest.GetRequestStream();
-                    foreach (byte b in this.PostDataByte)
-                    {
-                        stream.WriteByte(b);
-                    }
+                    stream.Write(data, 0, data.Length);
                     stream.Close();
                 }
 

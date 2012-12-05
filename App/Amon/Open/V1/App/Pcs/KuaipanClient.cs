@@ -5,10 +5,9 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using Me.Amon.Http;
 using Me.Amon.Pcs;
-using Me.Amon.Pcs.C;
 using Me.Amon.Pcs.M;
-using Me.Amon.Util;
 using Newtonsoft.Json;
 
 namespace Me.Amon.Open.V1.App.Pcs
@@ -41,7 +40,7 @@ namespace Me.Amon.Open.V1.App.Pcs
         public override bool RequestToken()
         {
             PrepareParams();
-            _Params.Sort(new NameValueComparer());
+            SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.RequestTokenUrl)));
 
             string t = GenBaseParams();
@@ -83,7 +82,7 @@ namespace Me.Amon.Open.V1.App.Pcs
                 return false;
             }
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
-            _Params.Sort(new NameValueComparer());
+            SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.AccessTokenUrl)));
 
             string t = GenBaseParams();
@@ -141,7 +140,7 @@ namespace Me.Amon.Open.V1.App.Pcs
 
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
-            _Params.Sort(new NameValueComparer());
+            SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.ProfileUrl)));
 
             string t = GenBaseParams();
@@ -174,7 +173,7 @@ namespace Me.Amon.Open.V1.App.Pcs
                 case CPcs.PATH_BIN:
                     return key;
                 default:
-                    return key;
+                    return Uri.EscapeUriString(key);
             }
         }
 
@@ -191,7 +190,7 @@ namespace Me.Amon.Open.V1.App.Pcs
 
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
-            _Params.Sort(new NameValueComparer());
+            SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(path)));
 
             string t = GenBaseParams();
@@ -213,7 +212,7 @@ namespace Me.Amon.Open.V1.App.Pcs
 
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
-            _Params.Sort(new NameValueComparer());
+            SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.RequestTokenUrl)));
 
             string t = GenBaseParams();
@@ -243,7 +242,7 @@ namespace Me.Amon.Open.V1.App.Pcs
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
             AddParam("root", KuaipanServer.ROOT_NAME);
             AddParam("path", Combine(path, name));
-            _Params.Sort(new NameValueComparer());
+            SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
 
             string t = GenBaseParams();
@@ -272,7 +271,7 @@ namespace Me.Amon.Open.V1.App.Pcs
             AddParam("root", KuaipanServer.ROOT_NAME);
             AddParam("path", Combine(path, meta));
             AddParam("to_recycle", "true");
-            _Params.Sort(new NameValueComparer());
+            SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
 
             string t = GenBaseParams();
@@ -298,7 +297,7 @@ namespace Me.Amon.Open.V1.App.Pcs
             AddParam("root", KuaipanServer.ROOT_NAME);
             AddParam("from_path", meta.GetMeta());
             AddParam("to_path", Combine(dstPath, dstName));
-            _Params.Sort(new NameValueComparer());
+            SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
 
             string t = GenBaseParams();
@@ -326,7 +325,7 @@ namespace Me.Amon.Open.V1.App.Pcs
             AddParam("root", KuaipanServer.ROOT_NAME);
             AddParam("from_path", meta.GetMeta());
             AddParam("to_path", Combine(dstPath, dstName));
-            _Params.Sort(new NameValueComparer());
+            SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
 
             string t = GenBaseParams();
@@ -360,7 +359,7 @@ namespace Me.Amon.Open.V1.App.Pcs
             AddParam("root", KuaipanServer.ROOT_NAME);
             AddParam("from_copy_ref", metaRef);
             AddParam("to_path", Combine(dstPath, dstName));
-            _Params.Sort(new NameValueComparer());
+            SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
 
             string t = GenBaseParams();
@@ -382,7 +381,7 @@ namespace Me.Amon.Open.V1.App.Pcs
 
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
-            _Params.Sort(new NameValueComparer());
+            SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
 
             string t = GenBaseParams();
@@ -404,7 +403,7 @@ namespace Me.Amon.Open.V1.App.Pcs
 
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
-            _Params.Sort(new NameValueComparer());
+            SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
 
             string t = GenBaseParams();
@@ -463,18 +462,16 @@ namespace Me.Amon.Open.V1.App.Pcs
             AddParam("root", KuaipanServer.ROOT_NAME);
             AddParam("overwrite", "true");
             AddParam("path", item.Path);
-            _Params.Sort(new NameValueComparer());
+            SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url, "POST")));
 
             url += url.IndexOf('?') >= 0 ? '&' : '?';
             url += GenBaseParams();
 
             HttpUtil http = new HttpUtil();
-            http.Url = url;
-            http.Method = "POST";
+            http.Method = HttpMethod.POST;
             http.ContentType = "multipart/form-data; boundary=" + form.Boundary;
-            http.PostDataByte = form.GetFormData();
-            http.Post();
+            http.Post(url, form.GetFormData().ToArray());
 
             var t = http.Html;
 
@@ -501,7 +498,7 @@ namespace Me.Amon.Open.V1.App.Pcs
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
             AddParam("root", KuaipanServer.ROOT_NAME);
             AddParam("path", meta);
-            _Params.Sort(new NameValueComparer());
+            SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
 
             string t = GenBaseParams();

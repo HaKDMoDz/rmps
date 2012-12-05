@@ -353,6 +353,12 @@ namespace Me.Amon.Pcs.V
 
         public void AddFav()
         {
+            if (_CurrentMeta == null || _CurrentMeta.GetMetaType() != CPcs.META_TYPE_FOLDER)
+            {
+                Main.ShowAlert("请选择一个目录！");
+                return;
+            }
+
             string name = _CurrentMeta.GetMetaName();
             while (true)
             {
