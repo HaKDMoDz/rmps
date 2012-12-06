@@ -12,7 +12,10 @@
 	<Action Id="edit-meta" Class="Me.Amon.Pcs.E.Edit.EditAction"/>
 	<Action Id="cut-meta" Class="Me.Amon.Pcs.E.Edit.CutAction"/>
 	<Action Id="copy-meta" Class="Me.Amon.Pcs.E.Edit.CopyAction"/>
+	<Action Id="copy-meta-ref" Class="Me.Amon.Pcs.E.Edit.CopyRefAction"/>
 	<Action Id="paste-meta" Class="Me.Amon.Pcs.E.Edit.PasteAction"/>
+	<Action Id="paste-meta-as" Class="Me.Amon.Pcs.E.Edit.PasteAsAction"/>
+	<Action Id="paste-meta-ref" Class="Me.Amon.Pcs.E.Edit.PasteRefAction"/>
 	<Action Id="create-meta" Class="Me.Amon.Pcs.E.Edit.CreateAction"/>
 	<Action Id="delete-meta" Class="Me.Amon.Pcs.E.Edit.DeleteAction"/>
 	<Action Id="rename-meta" Class="Me.Amon.Pcs.E.Edit.RenameAction"/>
@@ -22,14 +25,16 @@
     <Action Id="sync-meta" Class="Me.Amon.Pcs.E.Edit.SyncAction"/>
 	<Action Id="fav-new" Class="Me.Amon.Pcs.E.Edit.FavNewAction"/>
 	<Action Id="fav-mgr" Class="Me.Amon.Pcs.E.Edit.FavMgrAction"/>
+	<Action Id="task-visible" Class="Me.Amon.Pcs.E.View.TaskAction"/>
   </Actions>
 
   <!--系统快捷键-->
   <Strokes Id="WPcs">
-    <Stroke Key="^ X" ActionId="new-action" Memo="添加账户"/>
+    <Stroke Key="^ N" ActionId="new-action" Memo="添加账户"/>
     <Stroke Key="^ X" ActionId="cut-meta" Memo="剪切"/>
     <Stroke Key="^ C" ActionId="copy-meta" Memo="复制"/>
     <Stroke Key="^ V" ActionId="paste-meta" Memo="粘贴"/>
+	<Stroke Key="^ T" ActionId="paste-meta" Memo="切换任务列表"/>
   </Strokes>
 
   <!--魔方密码菜单栏-->
@@ -79,7 +84,7 @@
         <Stroke Key="^ U" Memo="上传"/>
       </Item>
       <Line/>
-      <Item Text="创建目录" ActionId="create-folder" Group="none-edit-visible">
+      <Item Text="创建目录" ActionId="create-meta" Group="none-edit-visible">
         <Stroke Key="^ F" Memo="创建目录"/>
       </Item>
       <Item Text="删除" ActionId="delete-meta" Group="item-edit-visible">
@@ -93,7 +98,11 @@
         <Stroke Key="Alt Enter" Memo="属性"/>
       </Item>
     </Menu>
-    <Menu Id="user" Text="用户(@I)">
+    <Menu Id="view" Text="视图(@V)">
+      <Item Type="normal" Text="显示任务列表" ActionId="task-visible">
+      </Item>
+	</Menu>
+	<Menu Id="user" Text="用户(@I)">
       <Item Type="normal" Text="修改解锁口令">
         <Action Class="Me.Amon.Pwd.E.User.LkeyAction"/>
       </Item>
@@ -149,22 +158,26 @@
 
   <!--魔方密码工具栏-->
   <Toolbar Id="WPcs">
-    <Item Type="normal" Tips="新增" ActionId="new-action">
-      <!--Icon Id="file-new" Path="var:menu-key-append"/-->
+    <Item Type="normal" Tips="新增" ActionId="create-pcs">
+      <Icon Id="file-new" Path="var:menu-key-append"/>
     </Item>
     <Line/>
     <Item Type="normal" Tips="剪切" ActionId="cut-meta">
-      <!--Icon Id="file-save" Path="var:att-cut"/-->
+      <Icon Id="file-save" Path="var:att-cut"/>
     </Item>
     <Item Type="normal" Tips="复制" ActionId="copy-meta">
-      <!--Icon Id="file-save" Path="var:att-copy"/-->
+      <Icon Id="file-save" Path="var:att-copy"/>
     </Item>
     <Item Type="normal" Tips="粘贴" ActionId="paste-meta" Group="paste-meta-enabled">
-      <!--Icon Id="file-save" Path="var:att-paste"/-->
+      <Icon Id="file-save" Path="var:att-paste"/>
     </Item>
     <Line/>
-    <Item Type="normal" Text="创建目录" ActionId="create-folder" Group="item-edit-visible"/>
-    <Item Type="normal" Text="删除" ActionId="delete-meta" Group="item-edit-visible"/>
+    <Item Type="normal" Text="创建目录" ActionId="create-meta" Group="item-edit-visible">
+		<Icon Id="file-save" Path="var:att-paste"/>
+	</Item>
+    <Item Type="normal" Text="删除" ActionId="delete-meta" Group="item-edit-visible">
+		<Icon Id="file-save" Path="var:att-delete"/>
+	</Item>
     <Item Type="normal" Text="更名" ActionId="rename-meta" Group="item-edit-visible"/>
   </Toolbar>
 
@@ -183,14 +196,17 @@
     <Item Type="normal" Text="剪切" ActionId="cut-meta" Group="item-edit-enabled"/>
     <Item Type="normal" Text="复制" ActionId="copy-meta" Group="item-edit-enabled"/>
     <Item Type="normal" Text="粘贴" ActionId="paste-meta" Group="paste-meta-enabled"/>
+	<Item Type="normal" Text="粘贴自" ActionId="paste-meta-as" Group="paste-meta-as-visible"/>
 	<Line/>
     <Item Type="normal" Text="分享(@S)" Enabled="false"/>
     <Item Type="normal" Text="添加到收藏(@F)" ActionId="fav-new" Group="folder-edit-visible"/>
     <Line/>
+    <Item Type="normal" Text="复制引用(@M)" ActionId="copy-meta-ref"/>
+	<Item Type="normal" Text="粘贴引用(@M)" ActionId="paste-meta-ref"/>
     <Item Type="normal" Text="下载(@W)" ActionId="download-meta"/>
     <Item Type="normal" Text="上传(@U)" ActionId="upload-meta"/>
     <Line/>
-    <Item Type="normal" Text="创建目录(@C)" ActionId="create-folder" Group="none-edit-visible"/>
+	<Item Type="normal" Text="创建目录(@C)" ActionId="create-meta" Group="none-edit-visible"/>
     <Item Type="normal" Text="删除(@D)" ActionId="delete-meta" Group="item-edit-visible"/>
     <Item Type="normal" Text="更名(@R)" ActionId="rename-meta" Group="item-edit-visible"/>
     <Line/>
