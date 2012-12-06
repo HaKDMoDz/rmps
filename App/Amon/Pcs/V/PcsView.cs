@@ -383,26 +383,32 @@ namespace Me.Amon.Pcs.V
 
         public void CreateFolder()
         {
-            string name = "";
+            string name = Main.ShowInput("请输入目录名称：", "");
             while (true)
             {
-                name = Main.ShowInput("请输入目录名称：", name);
                 if (name == null)
                 {
                     return;
                 }
-                if (!string.IsNullOrWhiteSpace(name))
+                if (string.IsNullOrWhiteSpace(name))
                 {
-                    break;
+                    name = Main.ShowInput("请输入一个有效的名称：", name);
+                    continue;
                 }
+                if (FolderExists(name))
+                {
+                    name = Main.ShowInput("已存在同名目录，请重新输入！", name);
+                    continue;
+                }
+                break;
             }
-            AMeta meta = _PcsClient.CreateFolder(_CurrentMeta.GetMetaPath(), name);
+            AMeta meta = _PcsClient.CreateFolder(_CurrentPath.GetMetaPath(), name);
             if (meta == null)
             {
                 return;
             }
             LvMeta.Items.Add(GenItem(meta));
-            _NddEngine.CreateFolder(_CurrentMeta.GetMetaPath(), name);
+            _NddEngine.CreateFolder(_CurrentPath.GetMetaPath(), name);
         }
 
         public TaskThread NewDownloadThread()
@@ -681,6 +687,25 @@ namespace Me.Amon.Pcs.V
             }
 
             return name;
+        }
+
+        private bool FolderExists(string name)
+        {
+            name = name.ToLower();
+            AMeta meta;
+            foreach (ListViewItem item in LvMeta.Items)
+            {
+                meta = item.Tag as AMeta;
+                if (meta == null || meta.GetMetaType() != CPcs.META_TYPE_FOLDER)
+                {
+                    continue;
+                }
+                if (name == meta.GetMetaName().ToLower())
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         #endregion
 

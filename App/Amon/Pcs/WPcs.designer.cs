@@ -171,7 +171,7 @@
             this.UcTaskList.Name = "UcTaskList";
             this.UcTaskList.ProgressBackColor = System.Drawing.Color.Empty;
             this.UcTaskList.ProgressForeColor = System.Drawing.Color.Empty;
-            this.UcTaskList.Size = new System.Drawing.Size(612, 100);
+            this.UcTaskList.Size = new System.Drawing.Size(150, 46);
             this.UcTaskList.TabIndex = 0;
             // 
             // UcUri

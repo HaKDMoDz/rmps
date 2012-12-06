@@ -22,7 +22,7 @@ namespace Me.Amon.Pcs
         private Main _Main;
         private UserModel _UserModel;
         private DataModel _DataModel;
-        private IViewModel _ViewModel;
+        private ViewModel _ViewModel;
         private XmlMenu<WPcs> _XmlMenu;
         private PcsList _PcsList;
         private PcsView _CurView;
@@ -55,6 +55,9 @@ namespace Me.Amon.Pcs
 
         public void Init()
         {
+            _ViewModel = new ViewModel(_UserModel);
+            _ViewModel.LoadLayout();
+
             #region 系统选单
             _XmlMenu = new XmlMenu<WPcs>(this, _ViewModel);
             if (_XmlMenu.Load(Path.Combine(_UserModel.DatHome, CPcs.XML_MENU)))

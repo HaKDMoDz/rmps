@@ -63,7 +63,11 @@ namespace Me.Amon.Pcs.M
 
         public override string GetMeta()
         {
-            return "";
+            if (_Path[0] == '*' || _Path[0] == ':')
+            {
+                return _Path;
+            }
+            return _Path + '/' + _Name;
         }
 
         public override string GetMetaPath()
@@ -136,5 +140,15 @@ namespace Me.Amon.Pcs.M
             return this;
         }
         #endregion
+
+        public override string ToString()
+        {
+            return _Name;
+        }
+
+        public override int GetHashCode()
+        {
+            return (_Path + _Name).GetHashCode();
+        }
     }
 }

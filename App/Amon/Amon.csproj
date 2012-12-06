@@ -392,6 +392,7 @@
       <DependentUpon>ASmall.cs</DependentUpon>
     </Compile>
     <Compile Include="M\ADataModel.cs" />
+    <Compile Include="M\SkinModel.cs" />
     <Compile Include="Open\NameValueComparer.cs" />
     <Compile Include="Open\OAuthAccount.cs" />
     <Compile Include="Open\OAuthClient.cs" />
@@ -479,6 +480,7 @@
     <Compile Include="Pcs\M\MPcs.cs" />
     <Compile Include="Pcs\M\NativeMeta.cs" />
     <Compile Include="Pcs\M\UserModel.cs" />
+    <Compile Include="Pcs\M\ViewModel.cs" />
     <Compile Include="Pcs\V\ITaskViewer.cs" />
     <Compile Include="Pcs\V\MetaRef.cs">
       <SubType>Form</SubType>
