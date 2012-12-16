@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using Me.Amon.Pcs.C;
 
-namespace Me.Amon.Pcs.V
+namespace Me.Amon.Pcs.V.Task
 {
     public partial class TaskList : UserControl, ITaskViewer
     {
@@ -70,34 +68,31 @@ namespace Me.Amon.Pcs.V
         #region 接口实现
         public void ShowTask(List<TaskThread> threads)
         {
-            foreach (var thread in threads)
+            foreach (TaskThread thread in threads)
             {
                 GvTask.Rows.Add(thread.MetaName, "", thread.Message);
             }
         }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="thread"></param>
         public void UpdateTask(TaskThread thread, int index)
         {
-            if (GvTask.Rows.Count < 1)
-            {
-                return;
-            }
-            var cell = GvTask[2, index];
-            if (cell == null)
-            {
-                return;
-            }
-            cell.Value = thread.Message;
+            DataGridViewRow row = GvTask.Rows[index];
 
-            cell = GvTask[3, index] as DataGridViewImageCell;
-            if (cell == null)
+            var cell = row.Cells[2];
+            if (cell != null)
             {
-                return;
+                cell.Value = thread.Message;
             }
-            cell.Value = GenProgress(thread, cell.Size, cell.Value as Image);
+
+            cell = row.Cells[3];
+            if (cell != null)
+            {
+                cell.Value = thread.Progress;
+            }
         }
 
         public void AppendTask(TaskThread thread)
@@ -105,8 +100,9 @@ namespace Me.Amon.Pcs.V
             GvTask.Rows.Add(thread.MetaName, "", thread.Message);
         }
 
-        public void RemoveTask(TaskThread thread)
+        public void RemoveTask(TaskThread thread, int index)
         {
+            GvTask.Rows.RemoveAt(index);
         }
         #endregion
 
@@ -114,14 +110,6 @@ namespace Me.Amon.Pcs.V
         #endregion
 
         #region 事件处理
-        private void BwWork_DoWork(object sender, DoWorkEventArgs e)
-        {
-        }
-
-        private void LvTask_SelectedIndexChanged(object sender, System.EventArgs e)
-        {
-        }
-
         private void MiSuspend_Click(object sender, System.EventArgs e)
         {
             //var item = GetSelectedItem();
@@ -182,37 +170,20 @@ namespace Me.Amon.Pcs.V
         #endregion
 
         #region 私有函数
-        private Image GenProgress(TaskThread thread, Size size, Image image)
-        {
-            if (size.Width < 1 || size.Height < 1)
-            {
-                return null;
-            }
-            if (image == null || image.Width != size.Width)
-            {
-                image = new Bitmap(size.Width, size.Height);
-            }
-
-            double rate = thread.Progress;
-            using (Graphics g = Graphics.FromImage(image))
-            {
-                g.FillRectangle(Brushes.White, 0, 0, image.Width, image.Height);
-
-                int x = 1;
-                int y = 1;
-                if (rate > 0)
-                {
-                    int width = (int)(image.Width * rate);
-                    g.FillRectangle(_ProgressBackBrush, x, y, width - 4, image.Height - 4);
-                }
-                g.DrawRectangle(Pens.RoyalBlue, x, y, image.Width - 4, image.Height - 4);
-                x += image.Width >> 1;
-                y += image.Height >> 1;
-                g.DrawString(rate.ToString("p1"), Font, _ProgressForeBrush, x, y, _Format);
-                g.Save();
-            }
-            return image;
-        }
         #endregion
+
+        private void GvTask_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int idx = e.RowIndex;
+            GvTask.Rows[idx].Selected = true;
+        }
+
+        private void GvTask_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                CmMenu.Show(GvTask, e.Location);
+            }
+        }
     }
 }

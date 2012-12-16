@@ -1,0 +1,1 @@
+{"oauth_token_secret": "be914b8cf8cf491e841c0a923db896d2", "oauth_token": "00ecf6192d45e0ec2ecd4cd3", "user_id": 15529497, "charged_dir": "0"}

@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Pcs.V
+﻿namespace Me.Amon.Pcs.V.Task
 {
     partial class TaskList
     {
@@ -30,18 +30,23 @@
         {
             this.components = new System.ComponentModel.Container();
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.暂停ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.继续ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.取消ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.MiSuspendCur = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiResumeCur = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiCancelCur = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.优先处理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.延后处理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiSep1 = new System.Windows.Forms.ToolStripSeparator();
+            this.MiSuspendAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiResumeAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiCancelAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiSep2 = new System.Windows.Forms.ToolStripSeparator();
+            this.MiClear = new System.Windows.Forms.ToolStripMenuItem();
             this.GvTask = new System.Windows.Forms.DataGridView();
             this.ClName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClProgress = new System.Windows.Forms.DataGridViewImageColumn();
-            this.ClManage = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ClProgress = new Me.Amon.Pcs.V.Task.DataGridViewProgressColumn();
             this.CmMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GvTask)).BeginInit();
             this.SuspendLayout();
@@ -49,62 +54,103 @@
             // CmMenu
             // 
             this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.暂停ToolStripMenuItem,
-            this.继续ToolStripMenuItem,
-            this.取消ToolStripMenuItem,
-            this.toolStripSeparator1,
+            this.MiSuspendCur,
+            this.MiResumeCur,
+            this.MiCancelCur,
+            this.MiSep0,
             this.优先处理ToolStripMenuItem,
-            this.延后处理ToolStripMenuItem});
+            this.延后处理ToolStripMenuItem,
+            this.MiSep1,
+            this.MiSuspendAll,
+            this.MiResumeAll,
+            this.MiCancelAll,
+            this.MiSep2,
+            this.MiClear});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(125, 120);
+            this.CmMenu.Size = new System.Drawing.Size(135, 220);
             // 
-            // 暂停ToolStripMenuItem
+            // MiSuspendCur
             // 
-            this.暂停ToolStripMenuItem.Name = "暂停ToolStripMenuItem";
-            this.暂停ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.暂停ToolStripMenuItem.Text = "暂停";
+            this.MiSuspendCur.Name = "MiSuspendCur";
+            this.MiSuspendCur.Size = new System.Drawing.Size(134, 22);
+            this.MiSuspendCur.Text = "暂停";
             // 
-            // 继续ToolStripMenuItem
+            // MiResumeCur
             // 
-            this.继续ToolStripMenuItem.Name = "继续ToolStripMenuItem";
-            this.继续ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.继续ToolStripMenuItem.Text = "继续";
+            this.MiResumeCur.Name = "MiResumeCur";
+            this.MiResumeCur.Size = new System.Drawing.Size(134, 22);
+            this.MiResumeCur.Text = "继续";
             // 
-            // 取消ToolStripMenuItem
+            // MiCancelCur
             // 
-            this.取消ToolStripMenuItem.Name = "取消ToolStripMenuItem";
-            this.取消ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.取消ToolStripMenuItem.Text = "取消";
+            this.MiCancelCur.Name = "MiCancelCur";
+            this.MiCancelCur.Size = new System.Drawing.Size(134, 22);
+            this.MiCancelCur.Text = "取消";
             // 
-            // toolStripSeparator1
+            // MiSep0
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(121, 6);
+            this.MiSep0.Name = "MiSep0";
+            this.MiSep0.Size = new System.Drawing.Size(131, 6);
             // 
             // 优先处理ToolStripMenuItem
             // 
             this.优先处理ToolStripMenuItem.Name = "优先处理ToolStripMenuItem";
-            this.优先处理ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.优先处理ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.优先处理ToolStripMenuItem.Text = "优先处理";
             // 
             // 延后处理ToolStripMenuItem
             // 
             this.延后处理ToolStripMenuItem.Name = "延后处理ToolStripMenuItem";
-            this.延后处理ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.延后处理ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.延后处理ToolStripMenuItem.Text = "延后处理";
+            // 
+            // MiSep1
+            // 
+            this.MiSep1.Name = "MiSep1";
+            this.MiSep1.Size = new System.Drawing.Size(131, 6);
+            // 
+            // MiSuspendAll
+            // 
+            this.MiSuspendAll.Name = "MiSuspendAll";
+            this.MiSuspendAll.Size = new System.Drawing.Size(134, 22);
+            this.MiSuspendAll.Text = "暂停所有";
+            // 
+            // MiResumeAll
+            // 
+            this.MiResumeAll.Name = "MiResumeAll";
+            this.MiResumeAll.Size = new System.Drawing.Size(134, 22);
+            this.MiResumeAll.Text = "开始所有";
+            // 
+            // MiCancelAll
+            // 
+            this.MiCancelAll.Name = "MiCancelAll";
+            this.MiCancelAll.Size = new System.Drawing.Size(134, 22);
+            this.MiCancelAll.Text = "取消所有";
+            // 
+            // MiSep2
+            // 
+            this.MiSep2.Name = "MiSep2";
+            this.MiSep2.Size = new System.Drawing.Size(131, 6);
+            // 
+            // MiClear
+            // 
+            this.MiClear.Name = "MiClear";
+            this.MiClear.Size = new System.Drawing.Size(134, 22);
+            this.MiClear.Text = "清除已完成";
             // 
             // GvTask
             // 
             this.GvTask.AllowUserToAddRows = false;
             this.GvTask.AllowUserToDeleteRows = false;
+            this.GvTask.AllowUserToResizeColumns = false;
+            this.GvTask.AllowUserToResizeRows = false;
             this.GvTask.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.GvTask.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.GvTask.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ClName,
             this.ClSize,
             this.ClStatus,
-            this.ClProgress,
-            this.ClManage});
+            this.ClProgress});
             this.GvTask.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GvTask.Location = new System.Drawing.Point(0, 0);
             this.GvTask.MultiSelect = false;
@@ -116,6 +162,8 @@
             this.GvTask.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.GvTask.Size = new System.Drawing.Size(361, 132);
             this.GvTask.TabIndex = 0;
+            this.GvTask.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GvTask_CellContentClick);
+            this.GvTask.MouseUp += new System.Windows.Forms.MouseEventHandler(this.GvTask_MouseUp);
             // 
             // ClName
             // 
@@ -145,15 +193,8 @@
             this.ClProgress.HeaderText = "进度";
             this.ClProgress.Name = "ClProgress";
             this.ClProgress.ReadOnly = true;
+            this.ClProgress.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ClProgress.Width = 120;
-            // 
-            // ClManage
-            // 
-            this.ClManage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.ClManage.HeaderText = "操作";
-            this.ClManage.Name = "ClManage";
-            this.ClManage.ReadOnly = true;
-            this.ClManage.Width = 60;
             // 
             // TaskList
             // 
@@ -171,17 +212,22 @@
         #endregion
 
         private System.Windows.Forms.ContextMenuStrip CmMenu;
-        private System.Windows.Forms.ToolStripMenuItem 暂停ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 继续ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 取消ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem MiSuspendCur;
+        private System.Windows.Forms.ToolStripMenuItem MiResumeCur;
+        private System.Windows.Forms.ToolStripMenuItem MiCancelCur;
+        private System.Windows.Forms.ToolStripSeparator MiSep0;
         private System.Windows.Forms.ToolStripMenuItem 优先处理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 延后处理ToolStripMenuItem;
         private System.Windows.Forms.DataGridView GvTask;
+        private System.Windows.Forms.ToolStripSeparator MiSep1;
+        private System.Windows.Forms.ToolStripMenuItem MiSuspendAll;
+        private System.Windows.Forms.ToolStripMenuItem MiResumeAll;
+        private System.Windows.Forms.ToolStripMenuItem MiCancelAll;
+        private System.Windows.Forms.ToolStripSeparator MiSep2;
+        private System.Windows.Forms.ToolStripMenuItem MiClear;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClStatus;
-        private System.Windows.Forms.DataGridViewImageColumn ClProgress;
-        private System.Windows.Forms.DataGridViewButtonColumn ClManage;
+        private Task.DataGridViewProgressColumn ClProgress;
     }
 }
