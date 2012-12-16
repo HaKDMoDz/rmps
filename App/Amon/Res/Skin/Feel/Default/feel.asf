@@ -21,8 +21,8 @@ menu-file-exit=6
 #######################################
 # 编辑图标
 #######################################
-menu-edit-undo=7
-menu-edit-redo=8
+menu-edit-undo=undo.png
+menu-edit-redo=redo.png
 menu-cat-append=0
 menu-cat-update=1
 menu-cat-delete=2
@@ -187,3 +187,11 @@ export-card-16=card16.png
 export-card-24=card24.png
 script-fill-16=fill16.png
 script-fill-24=fill24.png
+
+folder-create=folder-create.png
+rename=rename.png
+delete=delete.png
+tool-edit-moved=tool-edit-moved.png
+tool-edit-movel=tool-edit-movel.png
+tool-edit-mover=tool-edit-mover.png
+tool-edit-moveu=tool-edit-moveu.png

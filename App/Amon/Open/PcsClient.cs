@@ -1,6 +1,6 @@
+using Me.Amon.Pcs.M;
 using System.Collections.Generic;
 using System.Drawing;
-using Me.Amon.Pcs.M;
 
 namespace Me.Amon.Open
 {
@@ -28,6 +28,8 @@ namespace Me.Amon.Open
         List<AMeta> ListMeta(AMeta meta);
 
         List<AMeta> ListMeta(string path);
+
+        AMeta MetaData(string path);
 
         /// <summary>
         /// 特殊目录路径

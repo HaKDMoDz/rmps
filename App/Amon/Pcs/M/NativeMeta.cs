@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Me.Amon.Pcs.M
 {
@@ -107,6 +108,13 @@ namespace Me.Amon.Pcs.M
         {
             return path != null ? path.GetHashCode() : 0;
         }
+
+        //public override AMeta Parent()
+        //{
+        //    path = Path.GetDirectoryName(path);
+        //    name = Path.GetFileName(path);
+        //    return this;
+        //}
 
         public override List<AMeta> SubMetas()
         {

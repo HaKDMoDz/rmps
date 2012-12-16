@@ -1,14 +1,14 @@
-﻿﻿using System;
+﻿﻿using Me.Amon.Http;
+using Me.Amon.Pcs;
+using Me.Amon.Pcs.M;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Net;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using Me.Amon.Http;
-using Me.Amon.Pcs;
-using Me.Amon.Pcs.M;
-using Newtonsoft.Json;
 
 namespace Me.Amon.Open.V1.App.Pcs
 {
@@ -203,6 +203,27 @@ namespace Me.Amon.Open.V1.App.Pcs
             t = GetString(r);
             var meta = JsonConvert.DeserializeObject<KuaipanMeta>(t);
             return meta.SubMetas();
+        }
+
+        public AMeta MetaData(string path)
+        {
+            ResetParams();
+            path = string.Format(KuaipanServer.LIST_META, KuaipanServer.ROOT_NAME, GetPath(path));
+
+            PrepareParams();
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+            SortParam();
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(path)));
+
+            string t = GenBaseParams();
+            byte[] r = _Server.Get(path, t);
+            if (r == null || r.Length < 1)
+            {
+                return null;
+            }
+
+            t = GetString(r);
+            return JsonConvert.DeserializeObject<KuaipanMeta>(t);
         }
 
         public string ShareMeta(AMeta meta)

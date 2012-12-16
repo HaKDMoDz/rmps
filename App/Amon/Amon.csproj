@@ -440,6 +440,7 @@
     <Compile Include="Pcs\C\NddEngine.cs" />
     <Compile Include="Pcs\EPcs.cs" />
     <Compile Include="Pcs\E\APcsAction.cs" />
+    <Compile Include="Pcs\E\Edit\BackwordAction.cs" />
     <Compile Include="Pcs\E\Edit\CopyAction.cs" />
     <Compile Include="Pcs\E\Edit\CopyRefAction.cs" />
     <Compile Include="Pcs\E\Edit\CreateAction.cs" />
@@ -448,12 +449,14 @@
     <Compile Include="Pcs\E\Edit\DownloadAction.cs" />
     <Compile Include="Pcs\E\Edit\EditAction.cs" />
     <Compile Include="Pcs\E\Edit\FavNewAction.cs" />
+    <Compile Include="Pcs\E\Edit\ForewordAction.cs" />
     <Compile Include="Pcs\E\Edit\OpenAction.cs" />
     <Compile Include="Pcs\E\Edit\PastAsAction.cs" />
     <Compile Include="Pcs\E\Edit\PasteAction.cs" />
     <Compile Include="Pcs\E\Edit\PasteRefAction.cs" />
     <Compile Include="Pcs\E\Edit\RenameAction.cs" />
     <Compile Include="Pcs\E\Edit\UploadAction.cs" />
+    <Compile Include="Pcs\E\Edit\UpwordAction.cs" />
     <Compile Include="Pcs\E\File\CreateAction.cs" />
     <Compile Include="Pcs\E\File\ExitAction.cs" />
     <Compile Include="Pcs\E\File\HideAction.cs" />
@@ -549,14 +552,16 @@
     <Compile Include="Pcs\V\PcsView.Designer.cs">
       <DependentUpon>PcsView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pcs\V\TaskList.cs">
+    <Compile Include="Pcs\V\Task\TaskList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pcs\V\TaskList.Designer.cs">
+    <Compile Include="Pcs\V\Task\TaskList.Designer.cs">
       <DependentUpon>TaskList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pcs\C\TaskStatus.cs" />
-    <Compile Include="Pcs\C\TaskThread.cs" />
+    <Compile Include="Pcs\V\Task\TaskStatus.cs" />
+    <Compile Include="Pcs\V\Task\TaskThread.cs" />
+    <Compile Include="Pcs\V\Task\DataGridViewProgressCell.cs" />
+    <Compile Include="Pcs\V\Task\DataGridViewProgressColumn.cs" />
     <Compile Include="Pcs\WPcs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1627,7 +1632,7 @@
     <EmbeddedResource Include="Pcs\V\PcsView.resx">
       <DependentUpon>PcsView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pcs\V\TaskList.resx">
+    <EmbeddedResource Include="Pcs\V\Task\TaskList.resx">
       <DependentUpon>TaskList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pcs\WPcs.resx">

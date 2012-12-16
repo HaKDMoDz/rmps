@@ -45,21 +45,21 @@
             // 
             // TbUri
             // 
-            this.TbUri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.TbUri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TbUri.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.TbUri.Location = new System.Drawing.Point(73, 3);
             this.TbUri.Name = "TbUri";
-            this.TbUri.Size = new System.Drawing.Size(309, 26);
+            this.TbUri.Size = new System.Drawing.Size(305, 26);
             this.TbUri.TabIndex = 1;
             this.TbUri.Text = "pcs://首页";
             // 
             // PbUri
             // 
             this.PbUri.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.PbUri.Location = new System.Drawing.Point(388, 6);
+            this.PbUri.Location = new System.Drawing.Point(384, 4);
             this.PbUri.Name = "PbUri";
-            this.PbUri.Size = new System.Drawing.Size(20, 20);
+            this.PbUri.Size = new System.Drawing.Size(24, 24);
             this.PbUri.TabIndex = 2;
             this.PbUri.TabStop = false;
             this.PbUri.Click += new System.EventHandler(this.PbUri_Click);

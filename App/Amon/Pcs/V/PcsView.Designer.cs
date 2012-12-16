@@ -44,9 +44,9 @@
             // 
             // ScMain
             // 
-            this.ScMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ScMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ScMain.Location = new System.Drawing.Point(3, 3);
             this.ScMain.Name = "ScMain";
             this.ScMain.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -79,6 +79,7 @@
             // TvPath
             // 
             this.TvPath.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TvPath.HideSelection = false;
             this.TvPath.Location = new System.Drawing.Point(0, 0);
             this.TvPath.Name = "TvPath";
             this.TvPath.Size = new System.Drawing.Size(131, 294);

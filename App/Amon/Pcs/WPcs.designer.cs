@@ -37,7 +37,7 @@
             this.ScMain = new System.Windows.Forms.SplitContainer();
             this.TcMeta = new System.Windows.Forms.ATabControl();
             this.IlPcsList = new System.Windows.Forms.ImageList(this.components);
-            this.UcTaskList = new Me.Amon.Pcs.V.TaskList();
+            this.UcTaskList = new Me.Amon.Pcs.V.Task.TaskList();
             this.UcUri = new Me.Amon.Pcs.V.MetaUri();
             this.TbTool = new System.Windows.Forms.ToolStrip();
             this.TtTips = new System.Windows.Forms.ToolTip(this.components);
@@ -238,7 +238,7 @@
         private V.MetaUri UcUri;
         private System.Windows.Forms.SplitContainer ScMain;
         private System.Windows.Forms.ATabControl TcMeta;
-        private V.TaskList UcTaskList;
+        private V.Task.TaskList UcTaskList;
         private System.Windows.Forms.ToolTip TtTips;
         private System.Windows.Forms.ImageList IlPcsList;
         private System.ComponentModel.BackgroundWorker BwWork;

@@ -10,7 +10,7 @@ namespace Me.Amon.Pcs
         /// Favourites
         /// </summary>
         public const string PATH_FAV = "*fav";
-        public const string ICON_FAV = "fav";
+        public const string ICON_FAV = "_fav";
         /// <summary>
         /// Liberates
         /// </summary>

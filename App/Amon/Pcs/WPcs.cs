@@ -1,3 +1,12 @@
+using Me.Amon.Auth;
+using Me.Amon.M;
+using Me.Amon.Open;
+using Me.Amon.Open.PC;
+using Me.Amon.Open.V1.App.Pcs;
+using Me.Amon.Pcs.M;
+using Me.Amon.Pcs.V;
+using Me.Amon.Pcs.V.Task;
+using Me.Amon.Uc;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -5,15 +14,6 @@ using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
-using Me.Amon.Auth;
-using Me.Amon.M;
-using Me.Amon.Open;
-using Me.Amon.Open.PC;
-using Me.Amon.Open.V1.App.Pcs;
-using Me.Amon.Pcs.C;
-using Me.Amon.Pcs.M;
-using Me.Amon.Pcs.V;
-using Me.Amon.Uc;
 
 namespace Me.Amon.Pcs
 {
@@ -374,7 +374,44 @@ namespace Me.Amon.Pcs
             }
 
             _Threads.Add(task);
+            if (!ScMain.Panel2Collapsed)
+            {
+                UcTaskList.AppendTask(task);
+            }
             StartAll();
+        }
+
+        /// <summary>
+        /// 后退
+        /// </summary>
+        public void Backword()
+        {
+            if (_CurView != null)
+            {
+                _CurView.Backword();
+            }
+        }
+
+        /// <summary>
+        /// 前进
+        /// </summary>
+        public void Foreword()
+        {
+            if (_CurView != null)
+            {
+                _CurView.Foreword();
+            }
+        }
+
+        /// <summary>
+        /// 向上
+        /// </summary>
+        public void Upword()
+        {
+            if (_CurView != null)
+            {
+                _CurView.Upword();
+            }
         }
 
         public void AddFav()
@@ -510,14 +547,28 @@ namespace Me.Amon.Pcs
             while (!BwWork.CancellationPending)
             {
                 _CurThreads = 0;
-                for (int i = 0; i < _Threads.Count; i += 1)
+                int i = 0;
+                while (i < _Threads.Count)
                 {
                     var thread = _Threads[i];
-                    if (thread.IsAlive)
+                    // 已完成
+                    if (thread.Status == TaskStatus.DONE)
+                    {
+                        _Threads.RemoveAt(i);
+                        foreach (var moniter in _Viewers)
+                        {
+                            moniter.RemoveTask(thread, i);
+                        }
+                        continue;
+                    }
+
+                    // 进行中
+                    if (thread.Status == TaskStatus.RUNNING)
                     {
                         _CurThreads += 1;
                     }
-                    if (thread.Status == TaskStatus.WAIT)
+                    // 等待中
+                    else if (thread.Status == TaskStatus.WAIT && _CurThreads <= _MaxThreads)
                     {
                         thread.Start();
                         _CurThreads += 1;
@@ -527,11 +578,7 @@ namespace Me.Amon.Pcs
                     {
                         moniter.UpdateTask(thread, i);
                     }
-
-                    if (_CurThreads >= _MaxThreads)
-                    {
-                        break;
-                    }
+                    i += 1;
                 }
 
                 if (_CurThreads < 1)

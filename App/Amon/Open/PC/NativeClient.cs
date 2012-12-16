@@ -19,7 +19,7 @@ namespace Me.Amon.Open.PC
         {
             Name = "本地";
             Root = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            Icon = Image.FromFile(@"D:\Temp\i1\Icon.png");
+            //Icon = Image.FromFile(@"D:\Temp\i1\Icon.png");
 
             _Server = new NativeServer();
             _Streams = new Dictionary<long, FileStream>();
@@ -108,6 +108,11 @@ namespace Me.Amon.Open.PC
             }
 
             return metas;
+        }
+
+        public AMeta MetaData(string path)
+        {
+            return null;
         }
 
         public string ShareMeta(AMeta meta)

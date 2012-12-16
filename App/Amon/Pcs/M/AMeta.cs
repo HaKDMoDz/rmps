@@ -62,6 +62,8 @@ namespace Me.Amon.Pcs.M
         /// </summary>
         public abstract bool IsDeleted();
 
+        //public abstract AMeta Parent();
+
         public abstract List<AMeta> SubMetas();
 
         public virtual FolderMeta ToMeta(string name)
