@@ -12,6 +12,9 @@ using Me.Amon.Util;
 
 namespace Me.Amon.User.Uc
 {
+    /// <summary>
+    /// 用户登录
+    /// </summary>
     public partial class SignIn : UserControl, ISignAc
     {
         private string _Name;

@@ -12,6 +12,12 @@ namespace Me.Amon.M
     public class AUserModel
     {
         #region 全局变量
+        #region 用户信息
+        public string Code { get; protected set; }
+        public string Name { get; protected set; }
+        #endregion
+
+        #region 安全信息
         private string _Info;
         private string _Lock;
         private byte[] _Data;
@@ -19,9 +25,9 @@ namespace Me.Amon.M
         private byte[] _Keys;
         private byte[] _Salt;
         private char[] _Mask;
+        #endregion
 
-        public string Code { get; protected set; }
-        public string Name { get; protected set; }
+        #region 路径信息
         /// <summary>
         /// 系统配置所在目录
         /// </summary>
@@ -38,6 +44,20 @@ namespace Me.Amon.M
         /// 资源文件所在目录
         /// </summary>
         public string ResHome { get; protected set; }
+        #endregion
+
+        #region 存储信息
+        /// <summary>
+        /// 云存储类型
+        /// </summary>
+        public string CsType { get; set; }
+        /// <summary>
+        /// 云存储授权
+        /// </summary>
+        public string CsAuth { get; set; }
+        #endregion
+
+        #region 皮肤信息
         /// <summary>
         /// 外观文件
         /// </summary>
@@ -46,6 +66,19 @@ namespace Me.Amon.M
         /// 风格文件
         /// </summary>
         public string Feel { get; set; }
+        #endregion
+
+        #region 应用信息
+        /// <summary>
+        /// 上次登录应用
+        /// </summary>
+        public string LastApps { get; set; }
+        /// <summary>
+        /// 上次登录用户
+        /// </summary>
+        public string LastUser { get; set; }
+        #endregion
+
         /// <summary>
         /// 提醒检测间隔
         /// </summary>

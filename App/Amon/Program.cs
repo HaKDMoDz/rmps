@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Me.Amon.Spy;
 
 namespace Me.Amon
 {

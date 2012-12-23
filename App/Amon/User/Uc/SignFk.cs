@@ -4,6 +4,9 @@ using Me.Amon.M;
 
 namespace Me.Amon.User.Uc
 {
+    /// <summary>
+    /// 找回密码
+    /// </summary>
     public partial class SignFk : UserControl, ISignAc
     {
         private SignAc _SignAc;

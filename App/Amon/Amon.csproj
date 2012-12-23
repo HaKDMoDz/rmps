@@ -707,7 +707,7 @@
     <Compile Include="Rcg\WRcg.Designer.cs">
       <DependentUpon>WRcg.cs</DependentUpon>
     </Compile>
-    <Compile Include="M\AUserModel.cs" />
+    <Compile Include="M\WUserModel.cs" />
     <Compile Include="M\Cat.cs" />
     <Compile Include="M\Dbv.cs" />
     <Compile Include="M\Dto.cs" />
