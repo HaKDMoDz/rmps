@@ -1,5 +1,4 @@
-﻿using Me.Amon.Hosts.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -7,6 +6,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Me.Amon.Hosts.Properties;
 
 namespace Me.Amon.Hosts
 {
@@ -208,6 +208,11 @@ namespace Me.Amon.Hosts
             }
 
             AppendSolution(_Solution);
+        }
+
+        private void MiCreateSln_Click(object sender, EventArgs e)
+        {
+            CreateSolution();
         }
 
         /// <summary>
@@ -749,7 +754,35 @@ namespace Me.Amon.Hosts
                 return;
             }
 
-            string sln = editer.Solution;
+            Backup();
+
+            _Solution.Text = editer.Solution;
+            StreamWriter writer = new StreamWriter(_HostsFile);
+            _Solution.Save(writer);
+            writer.WriteLine("# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.");
+            writer.WriteLine("#");
+            writer.WriteLine("# This file contains the mappings of IP addresses to host names. Each");
+            writer.WriteLine("# entry should be kept on an individual line. The IP address should");
+            writer.WriteLine("# be placed in the first column followed by the corresponding host name.");
+            writer.WriteLine("# The IP address and the host name should be separated by at least one");
+            writer.WriteLine("# space.");
+            writer.WriteLine("#");
+            writer.WriteLine("# Additionally, comments (such as these) may be inserted on individual");
+            writer.WriteLine("# lines or following the machine name denoted by a '#' symbol.");
+            writer.WriteLine("#");
+            writer.WriteLine("# For example:");
+            writer.WriteLine("#");
+            writer.WriteLine("#      102.54.94.97     rhino.acme.com          # source server");
+            writer.WriteLine("#       38.25.63.10     x.acme.com              # x client host");
+            writer.WriteLine("#");
+            writer.WriteLine("# localhost name resolution is handled within DNS itself.");
+            writer.WriteLine("#	127.0.0.1       localhost");
+            writer.WriteLine("#	::1             localhost");
+            writer.Close();
+
+            LvItem.Groups.Clear();
+            LvItem.Items.Clear();
+            AppendGroup(_Group);
         }
 
         public void ChangeSolution(string solution)
@@ -803,7 +836,7 @@ namespace Me.Amon.Hosts
         {
             StringBuilder buffer = new StringBuilder();
             buffer.Append("软件名称：MyHosts").Append(Environment.NewLine);
-            buffer.Append("当前版本：V1.0.0.0").Append(Environment.NewLine);
+            buffer.Append("当前版本：V1.0.1.2").Append(Environment.NewLine);
             buffer.Append("软件作者：Amon").Append(Environment.NewLine);
             buffer.Append("作者博客：http://amon.me/").Append(Environment.NewLine);
             MessageBox.Show(this, buffer.ToString(), "关于");

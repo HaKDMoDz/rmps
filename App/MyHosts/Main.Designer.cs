@@ -88,6 +88,7 @@
             this.TiHide = new System.Windows.Forms.ToolStripMenuItem();
             this.TiSep3 = new System.Windows.Forms.ToolStripSeparator();
             this.TiExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiCreateSln = new System.Windows.Forms.ToolStripMenuItem();
             this.CbMenu.SuspendLayout();
             this.TbTool.SuspendLayout();
             this.CmMenu.SuspendLayout();
@@ -243,6 +244,7 @@
             // 
             this.MuData.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MiSaveasSln,
+            this.MiCreateSln,
             this.MiManageSln,
             this.MiData0});
             this.MuData.Name = "MuData";
@@ -253,7 +255,7 @@
             // 
             this.MiSaveasSln.Name = "MiSaveasSln";
             this.MiSaveasSln.Size = new System.Drawing.Size(164, 22);
-            this.MiSaveasSln.Text = "另存为新方案(&N)";
+            this.MiSaveasSln.Text = "另存为新方案(&S)";
             this.MiSaveasSln.Click += new System.EventHandler(this.MiSaveasSlnClick);
             // 
             // MiManageSln
@@ -563,6 +565,13 @@
             this.TiExit.Text = "退出(&X)";
             this.TiExit.Click += new System.EventHandler(this.TiExitClick);
             // 
+            // MiCreateSln
+            // 
+            this.MiCreateSln.Name = "MiCreateSln";
+            this.MiCreateSln.Size = new System.Drawing.Size(164, 22);
+            this.MiCreateSln.Text = "新建空白方案(&N)";
+            this.MiCreateSln.Click += new System.EventHandler(this.MiCreateSln_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -648,6 +657,7 @@
         private System.Windows.Forms.ToolStripMenuItem MiSite;
         private System.Windows.Forms.ToolStripMenuItem TiHide;
         private System.Windows.Forms.ToolStripSeparator TiSep3;
+        private System.Windows.Forms.ToolStripMenuItem MiCreateSln;
     }
 }
 
