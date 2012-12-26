@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -69,6 +70,194 @@ namespace Me.Amon.Pwd._Cat
         #endregion
 
         #region 公共函数
+        public void AppendCat(Cat cat)
+        {
+            if (cat == null || _LastNode == null)
+            {
+                return;
+            }
+            Cat parent = SelectedCat;
+            if (parent == null)
+            {
+                return;
+            }
+
+            cat.Parent = parent.Id;
+            cat.Order = _LastNode.Nodes.Count;
+            cat.AppId = CApp.IAPP_WPWD;
+            _DataModel.SaveVcs(cat);
+            if (parent.IsLeaf)
+            {
+                parent.IsLeaf = false;
+                _DataModel.SaveVcs(parent);
+            }
+
+            TreeNode node = new TreeNode();
+            node.Name = cat.Id;
+            node.Text = cat.Text;
+            node.ToolTipText = cat.Tips;
+            node.Tag = cat;
+            if (CharUtil.IsValidateHash(cat.Icon))
+            {
+                node.ImageKey = cat.Icon;
+            }
+            node.SelectedImageKey = node.ImageKey;
+            _LastNode.Nodes.Add(node);
+            _LastNode.Expand();
+        }
+
+        public void UpdateCat(Cat cat)
+        {
+            if (cat == null)
+            {
+                return;
+            }
+
+            Cat cur = SelectedCat;
+            if (cur == null)
+            {
+                Main.ShowAlert("请选择您要更新的类别！");
+                //TvCatTree.Focus();
+                return;
+            }
+
+            if (cur.Id == CPwd.DEF_CAT_ID)
+            {
+                return;
+            }
+
+            cur.Text = cat.Text;
+            cur.Tips = cat.Tips;
+            cur.Memo = cat.Memo;
+            _DataModel.SaveVcs(cur);
+
+            _LastNode.Text = cat.Text;
+            _LastNode.ToolTipText = cat.Tips;
+        }
+
+        public void DeleteCat()
+        {
+            Cat cat = SelectedCat;
+            if (cat == null)
+            {
+                Main.ShowAlert("请选择您要删除的类别！");
+                //TvCatTree.Focus();
+                return;
+            }
+
+            if (cat.Id == CPwd.DEF_CAT_ID)
+            {
+                return;
+            }
+
+            if (_LastNode.Nodes.Count > 0)
+            {
+                Main.ShowAlert("下级类别不为空，不能删除！");
+                return;
+            }
+
+            if (DialogResult.Yes != Main.ShowConfirm("确认要删除选中的类别吗，此操作将不可恢复？"))
+            {
+                return;
+            }
+
+            IList<Key> keys = _DataModel.ListKey(cat.Id);
+            if (keys.Count > 0)
+            {
+                Main.ShowAlert("类别数据不为空，不能删除！");
+                return;
+            }
+
+            _DataModel.DeleteVcs(cat);
+
+            TreeNode parent = _LastNode.Parent;
+            if (parent != null)
+            {
+                parent.Nodes.Remove(_LastNode);
+            }
+
+            cat = parent.Tag as Cat;
+            if (cat != null && !cat.IsLeaf && parent.Nodes.Count == 0)
+            {
+                cat.IsLeaf = true;
+                _DataModel.SaveVcs(cat);
+            }
+        }
+
+        public void SortUp()
+        {
+            Cat currCat = SelectedCat;
+            if (currCat == null || currCat.Id == CPwd.DEF_CAT_ID)
+            {
+                return;
+            }
+
+            TreeNode prevNode = _LastNode.PrevNode;
+            if (prevNode == null)
+            {
+                return;
+            }
+
+            Cat prevCat = prevNode.Tag as Cat;
+            if (prevCat == null || prevCat.Id == CPwd.DEF_CAT_ID)
+            {
+                return;
+            }
+
+            TreeNode parent = _LastNode.Parent;
+            if (parent == null)
+            {
+                return;
+            }
+
+            prevCat.Order += 1;
+            _DataModel.SaveVcs(prevCat);
+            currCat.Order -= 1;
+            _DataModel.SaveVcs(currCat);
+
+            //TvCatTree.SelectedNode = null;
+            parent.Nodes.Remove(_LastNode);
+            parent.Nodes.Insert(prevNode.Index, _LastNode);
+            //TvCatTree.SelectedNode = _LastNode;
+        }
+
+        public void SortDown()
+        {
+            Cat currCat = SelectedCat;
+            if (currCat == null || currCat.Id == CPwd.DEF_CAT_ID)
+            {
+                return;
+            }
+
+            TreeNode nextNode = _LastNode.NextNode;
+            if (nextNode == null)
+            {
+                return;
+            }
+
+            Cat nextCat = nextNode.Tag as Cat;
+            if (nextCat == null || nextCat.Id == CPwd.DEF_CAT_ID)
+            {
+                return;
+            }
+
+            TreeNode parent = _LastNode.Parent;
+            if (parent == null)
+            {
+                return;
+            }
+
+            currCat.Order += 1;
+            _DataModel.SaveVcs(currCat);
+            nextCat.Order -= 1;
+            _DataModel.SaveVcs(nextCat);
+
+            //TvCatTree.SelectedNode = null;
+            parent.Nodes.Remove(_LastNode);
+            parent.Nodes.Insert(nextNode.Index + 1, _LastNode);
+            //TvCatTree.SelectedNode = _LastNode;
+        }
+
         /// <summary>
         /// 提升一级
         /// </summary>
@@ -203,10 +392,10 @@ namespace Me.Amon.Pwd._Cat
             }
             _LastNode = node;
 
-            Cat cat = node.Tag as Cat;
-            if (cat != null && !string.IsNullOrWhiteSpace(cat.Meta))
+            SelectedCat = node.Tag as Cat;
+            if (SelectedCat != null && !string.IsNullOrWhiteSpace(SelectedCat.Meta))
             {
-                string meta = cat.Meta.ToLower();
+                string meta = SelectedCat.Meta.ToLower();
                 // 待提示
                 if (meta == CPwd.KEY_TASK)
                 {

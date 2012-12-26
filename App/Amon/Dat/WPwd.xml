@@ -279,14 +279,14 @@
         <Item Type="normal" Text="TXT格式" ActionId="import-txt"/>
         <Item Type="normal" Text="XML格式" ActionId="import-xml"/>
       </Menu>
-      <!--Line/>
+      <Line/>
       <Item Type="normal" Text="备份到本地" ActionId="native-backup">
         <Stroke Key="^ B" Memo="备份到本地"/>
       </Item>
       <Item Type="normal" Text="从本地恢复" ActionId="native-resume">
         <Stroke Key="^ R" Memo="从本地恢复"/>
       </Item>
-      <Item Type="normal" Text="配置本地路径" ActionId="native-config" Enabled="false"/>
+      <Item Type="normal" Text="配置本地路径" ActionId="native-config"/>
       <Line/>
       <Item Type="normal" Text="备份到云端" ActionId="remote-backup">
         <Stroke Key="^ + B" Memo="备份到云端"/>
@@ -294,7 +294,7 @@
       <Item Type="normal" Text="从云端恢复" ActionId="remote-resume">
         <Stroke Key="^ + R" Memo="从云端恢复"/>
       </Item>
-      <Item Type="normal" Text="配置云端帐户" ActionId="remote-config" Enabled="false"/-->
+      <Item Type="normal" Text="配置云端帐户" ActionId="remote-config"/>
     </Menu>
     <Menu Id="user" Text="用户(&amp;I)">
       <Item Type="normal" Text="修改解锁口令">

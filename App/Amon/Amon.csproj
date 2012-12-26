@@ -406,11 +406,11 @@
     <Compile Include="Open\PC\NativeAccount.cs" />
     <Compile Include="Open\PC\NativeClient.cs" />
     <Compile Include="Open\PC\NativeServer.cs" />
-    <Compile Include="Open\UI\Auth.cs">
+    <Compile Include="Open\UI\OAuth.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Open\UI\Auth.Designer.cs">
-      <DependentUpon>Auth.cs</DependentUpon>
+    <Compile Include="Open\UI\OAuth.Designer.cs">
+      <DependentUpon>OAuth.cs</DependentUpon>
     </Compile>
     <Compile Include="Open\V1\App\OAuthV1Client.cs" />
     <Compile Include="Open\V1\App\OAuthV1Server.cs" />
@@ -569,6 +569,7 @@
       <DependentUpon>WPcs.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\EKeyType.cs" />
+    <Compile Include="Pwd\E\Data\SyncAction.cs" />
     <Compile Include="Pwd\V\IAttView.cs" />
     <Compile Include="Pwd\V\Wiz\Editer\AttEditer.cs">
       <SubType>Form</SubType>
@@ -707,7 +708,7 @@
     <Compile Include="Rcg\WRcg.Designer.cs">
       <DependentUpon>WRcg.cs</DependentUpon>
     </Compile>
-    <Compile Include="M\WUserModel.cs" />
+    <Compile Include="M\AUserModel.cs" />
     <Compile Include="M\Cat.cs" />
     <Compile Include="M\Dbv.cs" />
     <Compile Include="M\Dto.cs" />
@@ -853,7 +854,6 @@
     <Compile Include="Pwd\E\Data\RemoteBackupAction.cs" />
     <Compile Include="Pwd\E\Data\RemoteConfigAction.cs" />
     <Compile Include="Pwd\E\Data\RemoteResumeAction.cs" />
-    <Compile Include="Pwd\E\Data\SyncAction.cs" />
     <Compile Include="Pwd\E\Help\WebhostAction.cs" />
     <Compile Include="Pwd\E\Help\ProjectAction.cs" />
     <Compile Include="Pwd\E\_Att\AppendCallAction.cs" />
@@ -1602,8 +1602,8 @@
     <EmbeddedResource Include="Img\V\ASmall.resx">
       <DependentUpon>ASmall.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Open\UI\Auth.resx">
-      <DependentUpon>Auth.cs</DependentUpon>
+    <EmbeddedResource Include="Open\UI\OAuth.resx">
+      <DependentUpon>OAuth.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pcs\V\FavMgr.resx">
       <DependentUpon>FavMgr.cs</DependentUpon>

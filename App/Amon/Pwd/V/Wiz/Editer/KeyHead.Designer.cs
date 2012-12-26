@@ -91,18 +91,18 @@
             // 
             // TbMeta
             // 
-            this.TbMeta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.TbMeta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TbMeta.Location = new System.Drawing.Point(63, 56);
             this.TbMeta.Multiline = true;
             this.TbMeta.Name = "TbMeta";
-            this.TbMeta.Size = new System.Drawing.Size(284, 60);
+            this.TbMeta.Size = new System.Drawing.Size(284, 54);
             this.TbMeta.TabIndex = 5;
             // 
             // LbIcon
             // 
             this.LbIcon.AutoSize = true;
-            this.LbIcon.Location = new System.Drawing.Point(10, 124);
+            this.LbIcon.Location = new System.Drawing.Point(10, 118);
             this.LbIcon.Name = "LbIcon";
             this.LbIcon.Size = new System.Drawing.Size(47, 12);
             this.LbIcon.TabIndex = 6;
@@ -113,7 +113,7 @@
             this.PbLogo.BackColor = System.Drawing.SystemColors.Window;
             this.PbLogo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PbLogo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PbLogo.Location = new System.Drawing.Point(63, 122);
+            this.PbLogo.Location = new System.Drawing.Point(63, 116);
             this.PbLogo.Name = "PbLogo";
             this.PbLogo.Size = new System.Drawing.Size(18, 18);
             this.PbLogo.TabIndex = 7;
@@ -123,7 +123,7 @@
             // LbHint
             // 
             this.LbHint.AutoSize = true;
-            this.LbHint.Location = new System.Drawing.Point(10, 149);
+            this.LbHint.Location = new System.Drawing.Point(10, 143);
             this.LbHint.Name = "LbHint";
             this.LbHint.Size = new System.Drawing.Size(47, 12);
             this.LbHint.TabIndex = 8;
@@ -134,7 +134,7 @@
             this.PbHint.BackColor = System.Drawing.SystemColors.Window;
             this.PbHint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PbHint.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PbHint.Location = new System.Drawing.Point(63, 146);
+            this.PbHint.Location = new System.Drawing.Point(63, 140);
             this.PbHint.Name = "PbHint";
             this.PbHint.Size = new System.Drawing.Size(18, 18);
             this.PbHint.TabIndex = 9;
@@ -152,7 +152,7 @@
             // LbAuto
             // 
             this.LbAuto.AutoSize = true;
-            this.LbAuto.Location = new System.Drawing.Point(10, 173);
+            this.LbAuto.Location = new System.Drawing.Point(10, 167);
             this.LbAuto.Name = "LbAuto";
             this.LbAuto.Size = new System.Drawing.Size(47, 12);
             this.LbAuto.TabIndex = 11;
@@ -160,18 +160,19 @@
             // 
             // TbAuto
             // 
-            this.TbAuto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.TbAuto.Location = new System.Drawing.Point(63, 170);
+            this.TbAuto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TbAuto.Location = new System.Drawing.Point(63, 164);
             this.TbAuto.Multiline = true;
             this.TbAuto.Name = "TbAuto";
-            this.TbAuto.Size = new System.Drawing.Size(284, 60);
+            this.TbAuto.Size = new System.Drawing.Size(284, 54);
             this.TbAuto.TabIndex = 12;
             // 
             // KeyHead
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.Controls.Add(this.TbAuto);
             this.Controls.Add(this.LbAuto);
             this.Controls.Add(this.TbHint);

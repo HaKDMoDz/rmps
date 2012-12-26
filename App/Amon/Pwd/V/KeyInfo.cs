@@ -27,6 +27,8 @@ namespace Me.Amon.Pwd.V
         #endregion
 
         #region 接口实现
+        public string Model { get; set; }
+
         public void InitView(Panel panel)
         {
             panel.Controls.Add(this);

@@ -28,6 +28,8 @@ namespace Me.Amon.Pwd.V.Pad
         public IKeyList KeyList { get; set; }
         public IFindBar FindBar { get; set; }
 
+        public string Model { get; set; }
+
         public void InitView(Panel panel)
         {
             panel.Controls.Add(this);
@@ -113,7 +115,7 @@ namespace Me.Amon.Pwd.V.Pad
         {
             _WPwd.ShowTips(control, caption);
         }
-        
+
         public bool NavPaneVisible
         {
             get

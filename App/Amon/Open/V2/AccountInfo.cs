@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.OAuth.V2
+﻿namespace Me.Amon.Open.V2
 {
     public class AccountInfo
     {

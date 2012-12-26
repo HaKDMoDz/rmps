@@ -1,6 +1,6 @@
 ﻿namespace Me.Amon.Open.UI
 {
-    partial class Auth
+    partial class OAuth
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Auth));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OAuth));
             this.PbOAuth = new System.Windows.Forms.PictureBox();
             this.LlOAuth = new System.Windows.Forms.Label();
             this.PlBrowser = new System.Windows.Forms.Panel();

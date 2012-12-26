@@ -55,6 +55,10 @@ namespace Me.Amon.M
         /// 云存储授权
         /// </summary>
         public string CsAuth { get; set; }
+        /// <summary>
+        /// 云存储用户显示名称
+        /// </summary>
+        public string CsUser { get; set; }
         #endregion
 
         #region 皮肤信息

@@ -69,7 +69,7 @@
             // TlEcho
             // 
             this.TlEcho.Name = "TlEcho";
-            this.TlEcho.Size = new System.Drawing.Size(513, 17);
+            this.TlEcho.Size = new System.Drawing.Size(514, 17);
             this.TlEcho.Spring = true;
             this.TlEcho.Text = "系统处理中，请稍候……";
             this.TlEcho.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -78,7 +78,7 @@
             // TlTime
             // 
             this.TlTime.Name = "TlTime";
-            this.TlTime.Size = new System.Drawing.Size(56, 17);
+            this.TlTime.Size = new System.Drawing.Size(55, 17);
             this.TlTime.Text = "当前时间";
             this.TlTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.TlTime.ToolTipText = "当前时间";
@@ -111,9 +111,9 @@
             // 
             // ScMain
             // 
-            this.ScMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ScMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ScMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.ScMain.Location = new System.Drawing.Point(3, 3);
             this.ScMain.Name = "ScMain";
@@ -149,7 +149,7 @@
             this.ScData.Name = "ScData";
             this.ScData.Orientation = System.Windows.Forms.Orientation.Horizontal;
             this.ScData.Size = new System.Drawing.Size(374, 336);
-            this.ScData.SplitterDistance = 120;
+            this.ScData.SplitterDistance = 80;
             this.ScData.TabIndex = 1;
             // 
             // UcFind

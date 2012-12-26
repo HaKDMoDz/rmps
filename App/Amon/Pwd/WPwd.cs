@@ -14,6 +14,9 @@ using Me.Amon.Api.User32;
 using Me.Amon.Auth;
 using Me.Amon.C;
 using Me.Amon.M;
+using Me.Amon.Open;
+using Me.Amon.Open.UI;
+using Me.Amon.Open.V1.App.Pcs;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd._Cat;
 using Me.Amon.Pwd._Key;
@@ -42,7 +45,6 @@ namespace Me.Amon.Pwd
         private DataModel _DataModel;
         private ViewModel _ViewModel;
         private TreeNode _RootNode;
-        private TreeNode _LastNode;
         private string _LastHash;
         private string _LastMeta;
         private bool _IsSearch;
@@ -106,6 +108,7 @@ namespace Me.Amon.Pwd
             _CatTree = new CatTree(this, _DataModel);
             _CatTree.Control.Dock = DockStyle.Fill;
             _CatTree.KeyList = _KeyList;
+            UcFind.KeyList = _KeyList;
 
             #region 系统选单
             _XmlMenu = new XmlMenu<WPwd>(this, _ViewModel);
@@ -390,11 +393,28 @@ namespace Me.Amon.Pwd
         {
         }
 
+        public void ShowKey()
+        {
+            ShowKey(_SafeModel.Key);
+        }
+
         public void ShowKey(Key key)
         {
             if (key == null)
             {
                 return;
+            }
+
+            if (_PwdView == _KeyInfo)
+            {
+                if (_ViewModel.Pattern == CPwd.PATTERN_WIZ)
+                {
+                    ShowAWiz();
+                }
+                else if (_ViewModel.Pattern == CPwd.PATTERN_PRO)
+                {
+                    ShowAPro();
+                }
             }
             _PwdView.ShowData();
 
@@ -539,9 +559,7 @@ namespace Me.Amon.Pwd
         {
             get
             {
-                //TreeNode node = TvCatTree.SelectedNode;
-                //return node != null ? node.Tag as Cat : null;
-                return null;
+                return _CatTree.SelectedCat;
             }
         }
 
@@ -551,38 +569,7 @@ namespace Me.Amon.Pwd
         /// <param name="cat"></param>
         public void AppendCat(Cat cat)
         {
-            if (cat == null || _LastNode == null)
-            {
-                return;
-            }
-            Cat parent = SelectedCat;
-            if (parent == null)
-            {
-                return;
-            }
-
-            cat.Parent = parent.Id;
-            cat.Order = _LastNode.Nodes.Count;
-            cat.AppId = CApp.IAPP_WPWD;
-            _DataModel.SaveVcs(cat);
-            if (parent.IsLeaf)
-            {
-                parent.IsLeaf = false;
-                _DataModel.SaveVcs(parent);
-            }
-
-            TreeNode node = new TreeNode();
-            node.Name = cat.Id;
-            node.Text = cat.Text;
-            node.ToolTipText = cat.Tips;
-            node.Tag = cat;
-            if (CharUtil.IsValidateHash(cat.Icon))
-            {
-                node.ImageKey = cat.Icon;
-            }
-            node.SelectedImageKey = node.ImageKey;
-            _LastNode.Nodes.Add(node);
-            _LastNode.Expand();
+            _CatTree.AppendCat(cat);
         }
 
         /// <summary>
@@ -591,154 +578,22 @@ namespace Me.Amon.Pwd
         /// <param name="cat"></param>
         public void UpdateCat(Cat cat)
         {
-            if (cat == null)
-            {
-                return;
-            }
-
-            Cat cur = SelectedCat;
-            if (cur == null)
-            {
-                Main.ShowAlert("请选择您要更新的类别！");
-                //TvCatTree.Focus();
-                return;
-            }
-
-            if (cur.Id == CPwd.DEF_CAT_ID)
-            {
-                return;
-            }
-
-            cur.Text = cat.Text;
-            cur.Tips = cat.Tips;
-            cur.Memo = cat.Memo;
-            _DataModel.SaveVcs(cur);
-
-            _LastNode.Text = cat.Text;
-            _LastNode.ToolTipText = cat.Tips;
+            _CatTree.UpdateCat(cat);
         }
 
         public void DeleteCat()
         {
-            Cat cat = SelectedCat;
-            if (cat == null)
-            {
-                Main.ShowAlert("请选择您要删除的类别！");
-                //TvCatTree.Focus();
-                return;
-            }
-
-            if (cat.Id == CPwd.DEF_CAT_ID)
-            {
-                return;
-            }
-
-            if (_LastNode.Nodes.Count > 0)
-            {
-                Main.ShowAlert("下级类别不为空，不能删除！");
-                return;
-            }
-
-            if (DialogResult.Yes != Main.ShowConfirm("确认要删除选中的类别吗，此操作将不可恢复？"))
-            {
-                return;
-            }
-
-            IList<Key> keys = _DataModel.ListKey(cat.Id);
-            if (keys.Count > 0)
-            {
-                Main.ShowAlert("类别数据不为空，不能删除！");
-                return;
-            }
-
-            _DataModel.DeleteVcs(cat);
-
-            TreeNode parent = _LastNode.Parent;
-            if (parent != null)
-            {
-                parent.Nodes.Remove(_LastNode);
-            }
-
-            cat = parent.Tag as Cat;
-            if (cat != null && !cat.IsLeaf && parent.Nodes.Count == 0)
-            {
-                cat.IsLeaf = true;
-                _DataModel.SaveVcs(cat);
-            }
+            _CatTree.DeleteCat();
         }
 
         public void CatMoveUp()
         {
-            Cat currCat = SelectedCat;
-            if (currCat == null || currCat.Id == CPwd.DEF_CAT_ID)
-            {
-                return;
-            }
-
-            TreeNode prevNode = _LastNode.PrevNode;
-            if (prevNode == null)
-            {
-                return;
-            }
-
-            Cat prevCat = prevNode.Tag as Cat;
-            if (prevCat == null || prevCat.Id == CPwd.DEF_CAT_ID)
-            {
-                return;
-            }
-
-            TreeNode parent = _LastNode.Parent;
-            if (parent == null)
-            {
-                return;
-            }
-
-            prevCat.Order += 1;
-            _DataModel.SaveVcs(prevCat);
-            currCat.Order -= 1;
-            _DataModel.SaveVcs(currCat);
-
-            //TvCatTree.SelectedNode = null;
-            parent.Nodes.Remove(_LastNode);
-            parent.Nodes.Insert(prevNode.Index, _LastNode);
-            //TvCatTree.SelectedNode = _LastNode;
+            _CatTree.SortUp();
         }
 
         public void CatMoveDown()
         {
-            Cat currCat = SelectedCat;
-            if (currCat == null || currCat.Id == CPwd.DEF_CAT_ID)
-            {
-                return;
-            }
-
-            TreeNode nextNode = _LastNode.NextNode;
-            if (nextNode == null)
-            {
-                return;
-            }
-
-            Cat nextCat = nextNode.Tag as Cat;
-            if (nextCat == null || nextCat.Id == CPwd.DEF_CAT_ID)
-            {
-                return;
-            }
-
-            TreeNode parent = _LastNode.Parent;
-            if (parent == null)
-            {
-                return;
-            }
-
-            currCat.Order += 1;
-            _DataModel.SaveVcs(currCat);
-            nextCat.Order -= 1;
-            _DataModel.SaveVcs(nextCat);
-
-            //TvCatTree.SelectedNode = null;
-            parent.Nodes.Remove(_LastNode);
-            parent.Nodes.Insert(nextNode.Index + 1, _LastNode);
-            //TvCatTree.SelectedNode = _LastNode;
+            _CatTree.SortDown();
         }
 
         /// <summary>
@@ -746,6 +601,7 @@ namespace Me.Amon.Pwd
         /// </summary>
         public void CatPromotion()
         {
+            _CatTree.CatPromotion();
         }
 
         /// <summary>
@@ -753,10 +609,17 @@ namespace Me.Amon.Pwd
         /// </summary>
         public void CatDemotion()
         {
+            _CatTree.CatDemotion();
         }
 
         public void ChangeCatIcon()
         {
+            Cat cat = _CatTree.SelectedCat;
+            if (cat == null || cat.Id == CPwd.DEF_CAT_ID)
+            {
+                return;
+            }
+
             CatIcon editor = new CatIcon(_UserModel, _DataModel.CatDir);
             editor.InitOnce(16);
             editor.CallBackHandler = new AmonHandler<Png>(ChangeCatIcon);
@@ -781,7 +644,24 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            _PwdView.AppendKey();
+            if (_PwdView != _KeyInfo)
+            {
+                _PwdView.AppendKey();
+                return;
+            }
+
+            if (_ViewModel.Pattern == CPwd.PATTERN_WIZ)
+            {
+                ShowAWiz();
+                _WizView.AppendKey();
+                return;
+            }
+            if (_ViewModel.Pattern == CPwd.PATTERN_PRO)
+            {
+                ShowAPro();
+                _ProView.AppendKey();
+                return;
+            }
         }
 
         /// <summary>
@@ -1114,13 +994,13 @@ namespace Me.Amon.Pwd
             if (_ProView == null)
             {
                 _ProView = new WPro();
-                _ProView.Name = CPwd.PATTERN_PRO;
+                _ProView.Model = CPwd.PATTERN_PRO;
                 _ProView.Init(this, _SafeModel, _DataModel, _ViewModel);
             }
 
             if (_PwdView != null)
             {
-                if (_PwdView.Name == _ProView.Name)
+                if (_PwdView.Model == _ProView.Model)
                 {
                     return;
                 }
@@ -1146,13 +1026,13 @@ namespace Me.Amon.Pwd
             if (_WizView == null)
             {
                 _WizView = new WWiz(this, _UserModel, _SafeModel);
-                _WizView.Name = CPwd.PATTERN_WIZ;
+                _WizView.Model = CPwd.PATTERN_WIZ;
                 _WizView.Init(_DataModel, _ViewModel);
             }
 
             if (_PwdView != null)
             {
-                if (_PwdView.Name == _WizView.Name)
+                if (_PwdView.Model == _WizView.Model)
                 {
                     return;
                 }
@@ -1178,14 +1058,14 @@ namespace Me.Amon.Pwd
             if (_PadView == null)
             {
                 _PadView = new APad();
-                _PadView.Name = CPwd.PATTERN_PAD;
+                _PadView.Model = CPwd.PATTERN_PAD;
                 _PadView.Init(this, _SafeModel, _DataModel);
                 _PadView.Dock = DockStyle.Fill;
             }
 
             if (_PwdView != null)
             {
-                if (_PwdView.Name == _PadView.Name)
+                if (_PwdView.Model == _PadView.Model)
                 {
                     return;
                 }
@@ -1201,13 +1081,13 @@ namespace Me.Amon.Pwd
             if (_KeyInfo == null)
             {
                 _KeyInfo = new KeyInfo(_SafeModel);
-                _KeyInfo.Name = CPwd.PATTERN_INF;
+                _KeyInfo.Model = CPwd.PATTERN_INF;
                 _KeyInfo.Init(_DataModel);
             }
 
             if (_PwdView != null)
             {
-                if (_PwdView.Name == _KeyInfo.Name)
+                if (_PwdView.Model == _KeyInfo.Model)
                 {
                     return;
                 }
@@ -1358,7 +1238,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            _LastNode = null;
+            //_CatTree.SelectedCat = null;
             //TvCatTree.SelectedNode = null;
             //LbKeyList.Items.Clear();
 
@@ -1404,7 +1284,6 @@ namespace Me.Amon.Pwd
         /// </summary>
         public void RemoteBackup()
         {
-            Main.ShowAlert("远程备份功能尚在完善中，敬请期待！");
         }
 
         /// <summary>
@@ -1417,7 +1296,18 @@ namespace Me.Amon.Pwd
 
         public void RemoteConfig()
         {
-            Main.ShowAlert("远程配置功能尚在完善中，敬请期待！");
+            OAuthConsumer consumer = new OAuthConsumer();
+            consumer.consumer_key = "xcWPaz75PSRDOWBM";
+            consumer.consumer_secret = "DU5ZYaCK0cRlsMTj";
+
+            KuaipanClient client = new KuaipanClient(consumer);
+            if (!client.Verify())
+            {
+                return;
+            }
+            var account = client.Account();
+            _UserModel.CsAuth = client.Token.oauth_token;
+            _UserModel.CsUser = account.Name;
         }
 
         #region 数据导出
@@ -2109,7 +1999,7 @@ namespace Me.Amon.Pwd
             {
                 ScData.Panel1Collapsed = !_ViewModel.KeyListVisible;
                 ScData.Panel1.Controls.Add(_KeyList.Control);
-                ScData.SplitterDistance = _ViewModel.CatTreeHeight;
+                ScData.SplitterDistance = _ViewModel.KeyListHeight;
                 ScGuid.Panel2Collapsed = _ViewModel.KeyListVisible;
             }
         }
@@ -2153,11 +2043,15 @@ namespace Me.Amon.Pwd
 
             _ViewModel.CatTreeHeight = ScGuid.SplitterDistance;
             _ViewModel.CatTreeVisible = !ScGuid.Panel1Collapsed;
-            _ViewModel.KeyListVisible = !ScGuid.Panel2Collapsed;
-
-            _ViewModel.CatTreeHeight = ScData.SplitterDistance;
-            _ViewModel.CatTreeVisible = !ScData.Panel1Collapsed;
-            _ViewModel.KeyListVisible = !ScData.Panel2Collapsed;
+            if (_ViewModel.LayoutStyle == 1)
+            {
+                _ViewModel.KeyListVisible = !ScGuid.Panel2Collapsed;
+            }
+            else
+            {
+                _ViewModel.KeyListHeight = ScData.SplitterDistance;
+                _ViewModel.KeyListVisible = !ScData.Panel1Collapsed;
+            }
 
             _ViewModel.SaveLayout();
         }

@@ -60,6 +60,7 @@ namespace Me.Amon.Pwd._Key
                 return;
             }
 
+            DoInitKey(_DataModel.FindKey(meta));
             //TvCatTree.SelectedNode = null;
         }
 
@@ -179,10 +180,7 @@ namespace Me.Amon.Pwd._Key
             }
 
             SelectedKey = key;
-            if (AttView != null)
-            {
-                AttView.ShowData();
-            }
+            _WPwd.ShowKey();
         }
 
         private void LbKey_MouseDown(object sender, MouseEventArgs e)

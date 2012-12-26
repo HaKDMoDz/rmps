@@ -257,22 +257,19 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
 
         public bool SaveData()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public void CutData()
         {
-            throw new NotImplementedException();
         }
 
         public void PasteData()
         {
-            throw new NotImplementedException();
         }
 
         public void ClearData()
         {
-            throw new NotImplementedException();
         }
     }
 }

@@ -259,7 +259,18 @@ namespace Me.Amon.Pwd.M
         private int _CatTreeHeight = 152;
 
         public bool KeyListVisible { get; set; }
-        public bool KeyListHeight { get; set; }
+        public int KeyListHeight
+        {
+            get
+            {
+                return _KeyListHeight;
+            }
+            set
+            {
+                _KeyListHeight = value < 0 ? 80 : value;
+            }
+        }
+        private int _KeyListHeight = 80;
 
         public bool AttViewVisible { get; set; }
 

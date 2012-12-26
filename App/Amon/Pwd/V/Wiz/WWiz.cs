@@ -15,9 +15,9 @@ namespace Me.Amon.Pwd.V.Wiz
         private ViewModel _ViewModel;
         private IKeyEditer _LastView;
         private Panel TpGrid;
-        private KeyGuid _GuidBean;
-        private KeyHead _HeadBean;
-        private KeyBody _BodyBean;
+        private KeyGuid _KeyGuid;
+        private KeyHead _KeyHead;
+        private KeyBody _KeyBody;
 
         #region
         public WWiz()
@@ -57,6 +57,8 @@ namespace Me.Amon.Pwd.V.Wiz
         }
 
         #region 接口实现
+        public string Model { get; set; }
+
         public void InitView(Panel panel)
         {
             Dock = DockStyle.Fill;
@@ -78,22 +80,28 @@ namespace Me.Amon.Pwd.V.Wiz
 
         public void ShowData()
         {
-            throw new System.NotImplementedException();
         }
 
         public void AppendKey()
         {
-            throw new System.NotImplementedException();
+            _SafeModel.Clear();
+            _SafeModel.Key = new Key();
+            _SafeModel.InitGuid();
+            _SafeModel.InitMeta();
+            _SafeModel.InitLogo();
+            _SafeModel.InitHint();
+            _SafeModel.InitAuto();
+
+            ShowHead();
         }
 
         public bool UpdateKey()
         {
-            throw new System.NotImplementedException();
+            return _LastView.SaveData();
         }
 
         public void DeleteKey()
         {
-            throw new System.NotImplementedException();
         }
 
         public void AppendAtt(int type)
@@ -180,6 +188,11 @@ namespace Me.Amon.Pwd.V.Wiz
                 return;
             }
 
+            if (_LastView.Name == "body")
+            {
+                UpdateKey();
+                return;
+            }
             if (_LastView.Name == "head")
             {
                 ShowBody();
@@ -193,65 +206,65 @@ namespace Me.Amon.Pwd.V.Wiz
         #region 私有函数
         private void ShowGuid()
         {
-            if (_GuidBean == null)
+            if (_KeyGuid == null)
             {
-                _GuidBean = new KeyGuid(this, _UserModel, _SafeModel);
-                _GuidBean.Init(_DataModel, _ViewModel);
-                _GuidBean.Name = "guid";
+                _KeyGuid = new KeyGuid(this, _UserModel, _SafeModel);
+                _KeyGuid.Init(_DataModel, _ViewModel);
+                _KeyGuid.Name = "guid";
             }
 
-            if (_LastView != null && _LastView != _GuidBean)
+            if (_LastView != null && _LastView != _KeyGuid)
             {
                 _LastView.HideView(PlMain);
-                _GuidBean.InitView(PlMain);
+                _KeyGuid.InitView(PlMain);
 
                 BtPrevStep.Enabled = false;
                 BtNextStep.Enabled = true;
             }
 
-            _LastView = _GuidBean;
+            _LastView = _KeyGuid;
             _LastView.ShowData();
         }
 
         private void ShowHead()
         {
-            if (_HeadBean == null)
+            if (_KeyHead == null)
             {
-                _HeadBean = new KeyHead(this, _UserModel, _SafeModel);
-                _HeadBean.Init(_DataModel, _ViewModel);
-                _HeadBean.Name = "head";
+                _KeyHead = new KeyHead(this, _UserModel, _SafeModel);
+                _KeyHead.Init(_DataModel, _ViewModel);
+                _KeyHead.Name = "head";
             }
-            if (_LastView != null && _LastView != _HeadBean)
+            if (_LastView != null && _LastView != _KeyHead)
             {
                 _LastView.HideView(PlMain);
-                _HeadBean.InitView(PlMain);
+                _KeyHead.InitView(PlMain);
 
                 BtPrevStep.Enabled = true;
-                BtNextStep.Enabled = true;
+                BtNextStep.Text = "下一步(&N)";
             }
 
-            _LastView = _HeadBean;
+            _LastView = _KeyHead;
             _LastView.ShowData();
         }
 
         private void ShowBody()
         {
-            if (_BodyBean == null)
+            if (_KeyBody == null)
             {
-                _BodyBean = new KeyBody(this, _UserModel, _SafeModel);
-                _BodyBean.Init(_DataModel, _ViewModel);
-                _BodyBean.Name = "body";
+                _KeyBody = new KeyBody(this, _UserModel, _SafeModel);
+                _KeyBody.Init(_DataModel, _ViewModel);
+                _KeyBody.Name = "body";
             }
-            if (_LastView != null && _LastView != _BodyBean)
+            if (_LastView != null && _LastView != _KeyBody)
             {
                 _LastView.HideView(PlMain);
-                _BodyBean.InitView(PlMain);
+                _KeyBody.InitView(PlMain);
 
                 BtPrevStep.Enabled = true;
-                BtNextStep.Enabled = false;
+                BtNextStep.Text = "保存(&S)";
             }
 
-            _LastView = _BodyBean;
+            _LastView = _KeyBody;
             _LastView.ShowData();
         }
         #endregion

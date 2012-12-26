@@ -4,7 +4,7 @@ namespace Me.Amon.Pwd
 {
     public interface IPwd
     {
-        string Name { get; }
+        string Model { get; }
 
         void InitView(Panel panel);
 

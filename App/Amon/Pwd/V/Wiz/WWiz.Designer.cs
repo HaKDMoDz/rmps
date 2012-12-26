@@ -38,9 +38,9 @@ namespace Me.Amon.Pwd.V.Wiz
             // 
             // PlMain
             // 
-            this.PlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.PlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.PlMain.AutoScroll = true;
             this.PlMain.Location = new System.Drawing.Point(3, 3);
             this.PlMain.Name = "PlMain";
@@ -58,6 +58,7 @@ namespace Me.Amon.Pwd.V.Wiz
             this.BtPrevStep.TabIndex = 1;
             this.BtPrevStep.Text = "上一步(&P)";
             this.BtPrevStep.UseVisualStyleBackColor = true;
+            this.BtPrevStep.Click += new System.EventHandler(this.BtPrev_Click);
             // 
             // BtNextStep
             // 
@@ -70,6 +71,7 @@ namespace Me.Amon.Pwd.V.Wiz
             this.BtNextStep.TabIndex = 2;
             this.BtNextStep.Text = "下一步(&N)";
             this.BtNextStep.UseVisualStyleBackColor = true;
+            this.BtNextStep.Click += new System.EventHandler(this.BtNext_Click);
             // 
             // BtCancel
             // 
@@ -83,7 +85,7 @@ namespace Me.Amon.Pwd.V.Wiz
             this.BtCancel.Text = "取消(&C)";
             this.BtCancel.UseVisualStyleBackColor = true;
             // 
-            // AWiz
+            // WWiz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -91,7 +93,7 @@ namespace Me.Amon.Pwd.V.Wiz
             this.Controls.Add(this.BtNextStep);
             this.Controls.Add(this.BtPrevStep);
             this.Controls.Add(this.PlMain);
-            this.Name = "AWiz";
+            this.Name = "WWiz";
             this.Size = new System.Drawing.Size(382, 282);
             this.ResumeLayout(false);
 

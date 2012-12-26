@@ -60,7 +60,7 @@ namespace Me.Amon.Open.V1.App.Pcs
         public override bool Authorize()
         {
             string url = string.Format(_Server.VerifierUrl, Token.oauth_token);
-            UI.Auth auth = new UI.Auth(url);
+            UI.OAuth auth = new UI.OAuth(url);
             if (DialogResult.OK != auth.ShowDialog())
             {
                 return false;

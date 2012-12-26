@@ -60,7 +60,7 @@ namespace Me.Amon.Open.V2.App
         public void Verify()
         {
             string url = GenerateAuthorizeUrl();
-            UI.Auth auth = new UI.Auth(url);
+            UI.OAuth auth = new UI.OAuth(url);
             auth.Width = 640;
             auth.Height = 580;
             if (auth.ShowDialog() == null)

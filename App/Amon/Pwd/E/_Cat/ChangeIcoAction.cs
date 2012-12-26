@@ -8,11 +8,6 @@ namespace Me.Amon.Pwd.E._Cat
         {
             if (IApp != null)
             {
-                Cat cat = IApp.SelectedCat;
-                if (cat == null || cat.Id == CPwd.DEF_CAT_ID)
-                {
-                    return;
-                }
                 IApp.ChangeCatIcon();
             }
         }

@@ -2,24 +2,24 @@
 
 namespace Me.Amon.Open.UI
 {
-    public partial class Auth : Form
+    public partial class OAuth : Form
     {
         public string Token { get; private set; }
 
         #region 构造函数
-        public Auth()
+        public OAuth()
         {
             InitializeComponent();
         }
 
-        public Auth(string url)
+        public OAuth(string url)
         {
             InitializeComponent();
 
             this.WbBrowser.Navigate(url);
         }
 
-        public Auth(string url, bool req)
+        public OAuth(string url, bool req)
         {
             InitializeComponent();
 

@@ -13,6 +13,20 @@ namespace Me.Amon.Pwd.V
 
         IKeyList KeyList { get; set; }
 
+        void AppendCat(Cat cat);
+
+        void UpdateCat(Cat cat);
+
+        void DeleteCat();
+
+        void SortUp();
+
+        void SortDown();
+
+        void CatPromotion();
+
+        void CatDemotion();
+
         bool Focus();
 
         void Init();
