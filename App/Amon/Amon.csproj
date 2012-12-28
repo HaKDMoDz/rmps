@@ -1982,9 +1982,7 @@
     <Content Include="Amon.tag">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Amon.ver">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Amon.ver" />
     <Content Include="Logo\logo.icns" />
     <Content Include="Logo\logo.ico" />
     <Content Include="Logo\logo.svg" />

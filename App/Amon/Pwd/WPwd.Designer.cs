@@ -31,7 +31,12 @@
             this.components = new System.ComponentModel.Container();
             this.SbEcho = new System.Windows.Forms.StatusStrip();
             this.TlEcho = new System.Windows.Forms.ToolStripStatusLabel();
+            this.TlSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.TlTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.TlSep1 = new System.Windows.Forms.ToolStripSeparator();
+            this.TlLayout0 = new System.Windows.Forms.ToolStripButton();
+            this.TlLayout1 = new System.Windows.Forms.ToolStripButton();
+            this.TlLayout2 = new System.Windows.Forms.ToolStripButton();
             this.MbMenu = new System.Windows.Forms.MenuStrip();
             this.TcMain = new System.Windows.Forms.ToolStripContainer();
             this.ScMain = new System.Windows.Forms.SplitContainer();
@@ -59,29 +64,71 @@
             // 
             this.SbEcho.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TlEcho,
-            this.TlTime});
-            this.SbEcho.Location = new System.Drawing.Point(0, 420);
+            this.TlSep0,
+            this.TlTime,
+            this.TlSep1,
+            this.TlLayout0,
+            this.TlLayout1,
+            this.TlLayout2});
+            this.SbEcho.Location = new System.Drawing.Point(0, 419);
             this.SbEcho.Name = "SbEcho";
-            this.SbEcho.Size = new System.Drawing.Size(584, 22);
+            this.SbEcho.Size = new System.Drawing.Size(584, 23);
             this.SbEcho.TabIndex = 0;
             this.SbEcho.Text = "状态栏";
             // 
             // TlEcho
             // 
             this.TlEcho.Name = "TlEcho";
-            this.TlEcho.Size = new System.Drawing.Size(514, 17);
+            this.TlEcho.Size = new System.Drawing.Size(402, 18);
             this.TlEcho.Spring = true;
             this.TlEcho.Text = "系统处理中，请稍候……";
             this.TlEcho.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.TlEcho.Click += new System.EventHandler(this.TlEcho_DoubleClick);
             // 
+            // TlSep0
+            // 
+            this.TlSep0.Name = "TlSep0";
+            this.TlSep0.Size = new System.Drawing.Size(6, 23);
+            // 
             // TlTime
             // 
             this.TlTime.Name = "TlTime";
-            this.TlTime.Size = new System.Drawing.Size(55, 17);
+            this.TlTime.Size = new System.Drawing.Size(55, 18);
             this.TlTime.Text = "当前时间";
             this.TlTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.TlTime.ToolTipText = "当前时间";
+            // 
+            // TlSep1
+            // 
+            this.TlSep1.Name = "TlSep1";
+            this.TlSep1.Size = new System.Drawing.Size(6, 23);
+            // 
+            // TlLayout0
+            // 
+            this.TlLayout0.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TlLayout0.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TlLayout0.Name = "TlLayout0";
+            this.TlLayout0.Size = new System.Drawing.Size(23, 21);
+            this.TlLayout0.Text = "默认视图";
+            this.TlLayout0.Click += new System.EventHandler(this.TlLayout0_Click);
+            // 
+            // TlLayout1
+            // 
+            this.TlLayout1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TlLayout1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TlLayout1.Name = "TlLayout1";
+            this.TlLayout1.Size = new System.Drawing.Size(23, 21);
+            this.TlLayout1.Text = "紧凑视图";
+            this.TlLayout1.Click += new System.EventHandler(this.TlLayout1_Click);
+            // 
+            // TlLayout2
+            // 
+            this.TlLayout2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TlLayout2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TlLayout2.Name = "TlLayout2";
+            this.TlLayout2.Size = new System.Drawing.Size(23, 21);
+            this.TlLayout2.Text = "三列视图";
+            this.TlLayout2.Click += new System.EventHandler(this.TlLayout2_Click);
             // 
             // MbMenu
             // 
@@ -97,11 +144,11 @@
             // TcMain.ContentPanel
             // 
             this.TcMain.ContentPanel.Controls.Add(this.ScMain);
-            this.TcMain.ContentPanel.Size = new System.Drawing.Size(584, 371);
+            this.TcMain.ContentPanel.Size = new System.Drawing.Size(584, 370);
             this.TcMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TcMain.Location = new System.Drawing.Point(0, 24);
             this.TcMain.Name = "TcMain";
-            this.TcMain.Size = new System.Drawing.Size(584, 396);
+            this.TcMain.Size = new System.Drawing.Size(584, 395);
             this.TcMain.TabIndex = 2;
             this.TcMain.Text = "toolStripContainer1";
             // 
@@ -127,7 +174,7 @@
             // 
             this.ScMain.Panel2.Controls.Add(this.ScData);
             this.ScMain.Panel2.Controls.Add(this.UcFind);
-            this.ScMain.Size = new System.Drawing.Size(578, 365);
+            this.ScMain.Size = new System.Drawing.Size(578, 364);
             this.ScMain.SplitterDistance = 200;
             this.ScMain.TabIndex = 0;
             // 
@@ -137,8 +184,8 @@
             this.ScGuid.Location = new System.Drawing.Point(0, 0);
             this.ScGuid.Name = "ScGuid";
             this.ScGuid.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.ScGuid.Size = new System.Drawing.Size(200, 365);
-            this.ScGuid.SplitterDistance = 180;
+            this.ScGuid.Size = new System.Drawing.Size(200, 364);
+            this.ScGuid.SplitterDistance = 179;
             this.ScGuid.TabIndex = 0;
             // 
             // ScData
@@ -148,7 +195,7 @@
             this.ScData.Location = new System.Drawing.Point(0, 29);
             this.ScData.Name = "ScData";
             this.ScData.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.ScData.Size = new System.Drawing.Size(374, 336);
+            this.ScData.Size = new System.Drawing.Size(374, 335);
             this.ScData.SplitterDistance = 80;
             this.ScData.TabIndex = 1;
             // 
@@ -221,5 +268,10 @@
         private System.ComponentModel.BackgroundWorker BgWorker;
         private System.Windows.Forms.ToolStripStatusLabel TlEcho;
         private System.Windows.Forms.ToolStripStatusLabel TlTime;
+        private System.Windows.Forms.ToolStripSeparator TlSep0;
+        private System.Windows.Forms.ToolStripSeparator TlSep1;
+        private System.Windows.Forms.ToolStripButton TlLayout0;
+        private System.Windows.Forms.ToolStripButton TlLayout1;
+        private System.Windows.Forms.ToolStripButton TlLayout2;
     }
 }

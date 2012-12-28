@@ -15,7 +15,6 @@ using Me.Amon.Auth;
 using Me.Amon.C;
 using Me.Amon.M;
 using Me.Amon.Open;
-using Me.Amon.Open.UI;
 using Me.Amon.Open.V1.App.Pcs;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd._Cat;
@@ -44,7 +43,6 @@ namespace Me.Amon.Pwd
         private SafeModel _SafeModel;
         private DataModel _DataModel;
         private ViewModel _ViewModel;
-        private TreeNode _RootNode;
         private string _LastHash;
         private string _LastMeta;
         private bool _IsSearch;
@@ -105,6 +103,10 @@ namespace Me.Amon.Pwd
 
             _KeyList = new KeyList(this, _DataModel, _ViewModel);
             _KeyList.Control.Dock = DockStyle.Fill;
+            //_KeyList.Control.Location = new System.Drawing.Point(0, 0);
+            _KeyList.Control.Name = "KeyList";
+            //_KeyList.Control.Size = new System.Drawing.Size(374, 29);
+            //_KeyList.Control.TabIndex = 0;
             _CatTree = new CatTree(this, _DataModel);
             _CatTree.Control.Dock = DockStyle.Fill;
             _CatTree.KeyList = _KeyList;
@@ -1206,6 +1208,7 @@ namespace Me.Amon.Pwd
             set
             {
                 ScData.Panel1Collapsed = !value;
+                _ViewModel.KeyListVisible = value;
             }
         }
         #endregion
@@ -1962,6 +1965,10 @@ namespace Me.Amon.Pwd
         /// </summary>
         public void LoadLayout()
         {
+            this.TlLayout0.Image = _ViewModel.GetImage("view-layout0");
+            this.TlLayout1.Image = _ViewModel.GetImage("view-layout1");
+            this.TlLayout2.Image = _ViewModel.GetImage("view-layout2");
+
             if (_ViewModel.WindowState == CPwd.WINDOW_STATE_MAXIMIZED)
             {
                 WindowState = FormWindowState.Maximized;
@@ -1989,18 +1996,21 @@ namespace Me.Amon.Pwd
             ScGuid.Panel1Collapsed = !_ViewModel.CatTreeVisible;
             ScGuid.SplitterDistance = _ViewModel.CatTreeHeight;
 
-            if (_ViewModel.LayoutStyle == 1)
+            switch (_ViewModel.LayoutStyle)
             {
-                ScGuid.Panel2Collapsed = !_ViewModel.KeyListVisible;
-                ScGuid.Panel2.Controls.Add(_KeyList.Control);
-                ScData.Panel1Collapsed = _ViewModel.KeyListVisible;
-            }
-            else
-            {
-                ScData.Panel1Collapsed = !_ViewModel.KeyListVisible;
-                ScData.Panel1.Controls.Add(_KeyList.Control);
-                ScData.SplitterDistance = _ViewModel.KeyListHeight;
-                ScGuid.Panel2Collapsed = _ViewModel.KeyListVisible;
+                case CPwd.LAYOUT_STYLE_0:
+                    ShowLayout0();
+                    break;
+                case CPwd.LAYOUT_STYLE_1:
+                    ShowLayout1();
+                    break;
+                case CPwd.LAYOUT_STYLE_2:
+                    ShowLayout2();
+                    break;
+                default:
+                    _ViewModel.LayoutStyle = CPwd.LAYOUT_STYLE_0;
+                    ShowLayout0();
+                    break;
             }
         }
 
@@ -2043,7 +2053,7 @@ namespace Me.Amon.Pwd
 
             _ViewModel.CatTreeHeight = ScGuid.SplitterDistance;
             _ViewModel.CatTreeVisible = !ScGuid.Panel1Collapsed;
-            if (_ViewModel.LayoutStyle == 1)
+            if (_ViewModel.LayoutStyle == CPwd.LAYOUT_STYLE_1)
             {
                 _ViewModel.KeyListVisible = !ScGuid.Panel2Collapsed;
             }
@@ -2085,6 +2095,52 @@ namespace Me.Amon.Pwd
             //{
             //    TvCatTree.SelectedNode = _TaskNode;
             //}
+        }
+
+        private void TlLayout0_Click(object sender, EventArgs e)
+        {
+            ShowLayout0();
+        }
+
+        private void TlLayout1_Click(object sender, EventArgs e)
+        {
+            ShowLayout1();
+        }
+
+        private void TlLayout2_Click(object sender, EventArgs e)
+        {
+            ShowLayout2();
+        }
+
+        private void ShowLayout0()
+        {
+            ScGuid.Panel2.Controls.Add(_KeyList.Control);
+            ScGuid.SplitterDistance = _ViewModel.CatTreeHeight;
+            ScGuid.Panel2Collapsed = !_ViewModel.KeyListVisible;
+
+            ScData.Panel1Collapsed = true;
+        }
+
+        private void ShowLayout1()
+        {
+            ScData.Orientation = Orientation.Horizontal;
+
+            ScData.Panel1.Controls.Add(_KeyList.Control);
+            ScData.SplitterDistance = _ViewModel.KeyListHeight;
+            ScData.Panel1Collapsed = !_ViewModel.KeyListVisible;
+
+            ScGuid.Panel2Collapsed = true;
+        }
+
+        private void ShowLayout2()
+        {
+            ScData.Orientation = Orientation.Vertical;
+
+            ScData.Panel1.Controls.Add(_KeyList.Control);
+            ScData.SplitterDistance = _ViewModel.KeyListWidth;
+            ScData.Panel1Collapsed = !_ViewModel.KeyListVisible;
+
+            ScGuid.Panel2Collapsed = true;
         }
     }
 }

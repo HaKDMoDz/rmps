@@ -257,6 +257,18 @@ namespace Me.Amon.Pwd.M
             }
         }
         private int _CatTreeHeight = 152;
+        public int CatTreeWidth
+        {
+            get
+            {
+                return _CatTreeWidth;
+            }
+            set
+            {
+                _CatTreeWidth = value < 0 ? 120 : value;
+            }
+        }
+        private int _CatTreeWidth = 120;
 
         public bool KeyListVisible { get; set; }
         public int KeyListHeight
@@ -267,10 +279,22 @@ namespace Me.Amon.Pwd.M
             }
             set
             {
-                _KeyListHeight = value < 0 ? 80 : value;
+                _KeyListHeight = value < 0 ? 60 : value;
             }
         }
-        private int _KeyListHeight = 80;
+        private int _KeyListHeight = 60;
+        public int KeyListWidth
+        {
+            get
+            {
+                return _KeyListWidth;
+            }
+            set
+            {
+                _KeyListWidth = value < 0 ? 188 : value;
+            }
+        }
+        private int _KeyListWidth = 188;
 
         public bool AttViewVisible { get; set; }
 

@@ -34,5 +34,18 @@ namespace Me.Amon.Pwd
         public const string KEY_TASK_VAL_EXPIRED = KEY_TASK + ":expired";
         public const string KEY_MAIL = "mail";
         public const string KEY_LINK = "link";
+
+        /// <summary>
+        /// 紧凑视图
+        /// </summary>
+        public const int LAYOUT_STYLE_0 = 0;
+        /// <summary>
+        /// 未知
+        /// </summary>
+        public const int LAYOUT_STYLE_1 = 1;
+        /// <summary>
+        /// 三列视图
+        /// </summary>
+        public const int LAYOUT_STYLE_2 = 2;
     }
 }

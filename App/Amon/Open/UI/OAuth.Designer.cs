@@ -53,24 +53,24 @@
             // 
             // LlOAuth
             // 
-            this.LlOAuth.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.LlOAuth.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.LlOAuth.Location = new System.Drawing.Point(82, 12);
             this.LlOAuth.Name = "LlOAuth";
-            this.LlOAuth.Size = new System.Drawing.Size(490, 66);
+            this.LlOAuth.Size = new System.Drawing.Size(690, 66);
             this.LlOAuth.TabIndex = 1;
             this.LlOAuth.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // PlBrowser
             // 
-            this.PlBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.PlBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.PlBrowser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PlBrowser.Controls.Add(this.WbBrowser);
             this.PlBrowser.Location = new System.Drawing.Point(12, 84);
             this.PlBrowser.Name = "PlBrowser";
-            this.PlBrowser.Size = new System.Drawing.Size(560, 257);
+            this.PlBrowser.Size = new System.Drawing.Size(760, 376);
             this.PlBrowser.TabIndex = 2;
             // 
             // WbBrowser
@@ -79,14 +79,14 @@
             this.WbBrowser.Location = new System.Drawing.Point(0, 0);
             this.WbBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.WbBrowser.Name = "WbBrowser";
-            this.WbBrowser.Size = new System.Drawing.Size(558, 255);
+            this.WbBrowser.Size = new System.Drawing.Size(758, 374);
             this.WbBrowser.TabIndex = 0;
             // 
             // LlToken
             // 
             this.LlToken.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LlToken.AutoSize = true;
-            this.LlToken.Location = new System.Drawing.Point(12, 352);
+            this.LlToken.Location = new System.Drawing.Point(12, 471);
             this.LlToken.Name = "LlToken";
             this.LlToken.Size = new System.Drawing.Size(59, 12);
             this.LlToken.TabIndex = 3;
@@ -94,17 +94,17 @@
             // 
             // TbToken
             // 
-            this.TbToken.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.TbToken.Location = new System.Drawing.Point(77, 348);
+            this.TbToken.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TbToken.Location = new System.Drawing.Point(77, 467);
             this.TbToken.Name = "TbToken";
-            this.TbToken.Size = new System.Drawing.Size(333, 21);
+            this.TbToken.Size = new System.Drawing.Size(533, 21);
             this.TbToken.TabIndex = 4;
             // 
             // BtOk
             // 
             this.BtOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtOk.Location = new System.Drawing.Point(416, 347);
+            this.BtOk.Location = new System.Drawing.Point(616, 466);
             this.BtOk.Name = "BtOk";
             this.BtOk.Size = new System.Drawing.Size(75, 23);
             this.BtOk.TabIndex = 5;
@@ -116,7 +116,7 @@
             // 
             this.BtNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtNo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.BtNo.Location = new System.Drawing.Point(497, 347);
+            this.BtNo.Location = new System.Drawing.Point(697, 466);
             this.BtNo.Name = "BtNo";
             this.BtNo.Size = new System.Drawing.Size(75, 23);
             this.BtNo.TabIndex = 6;
@@ -124,13 +124,13 @@
             this.BtNo.UseVisualStyleBackColor = true;
             this.BtNo.Click += new System.EventHandler(this.BtNo_Click);
             // 
-            // Auth
+            // OAuth
             // 
             this.AcceptButton = this.BtOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.BtNo;
-            this.ClientSize = new System.Drawing.Size(584, 382);
+            this.ClientSize = new System.Drawing.Size(784, 501);
             this.Controls.Add(this.BtNo);
             this.Controls.Add(this.BtOk);
             this.Controls.Add(this.TbToken);
@@ -138,7 +138,7 @@
             this.Controls.Add(this.PlBrowser);
             this.Controls.Add(this.LlOAuth);
             this.Controls.Add(this.PbOAuth);
-            this.Name = "Auth";
+            this.Name = "OAuth";
             this.Text = "oAuth";
             this.Load += new System.EventHandler(this.Auth_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PbOAuth)).EndInit();
