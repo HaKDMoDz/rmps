@@ -244,7 +244,6 @@ namespace Me.Amon.Pwd.M
         private int _KeyGuidWidth = 188;
 
         public bool CatTreeVisible { get; set; }
-
         public int CatTreeHeight
         {
             get

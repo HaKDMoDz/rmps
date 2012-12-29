@@ -33,22 +33,22 @@
             // 
             // TbData
             // 
-            this.TbData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.TbData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TbData.Location = new System.Drawing.Point(0, 0);
             this.TbData.Multiline = true;
             this.TbData.Name = "TbData";
-            this.TbData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TbData.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.TbData.Size = new System.Drawing.Size(350, 45);
             this.TbData.TabIndex = 0;
             // 
-            // AttMemo
+            // UcMemoAtt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.TbData);
-            this.Name = "AttMemo";
+            this.Name = "UcMemoAtt";
             this.Size = new System.Drawing.Size(350, 48);
             this.ResumeLayout(false);
             this.PerformLayout();

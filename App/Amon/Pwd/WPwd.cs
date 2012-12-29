@@ -2053,14 +2053,23 @@ namespace Me.Amon.Pwd
 
             _ViewModel.CatTreeHeight = ScGuid.SplitterDistance;
             _ViewModel.CatTreeVisible = !ScGuid.Panel1Collapsed;
-            if (_ViewModel.LayoutStyle == CPwd.LAYOUT_STYLE_1)
+            switch (_ViewModel.LayoutStyle)
             {
-                _ViewModel.KeyListVisible = !ScGuid.Panel2Collapsed;
-            }
-            else
-            {
-                _ViewModel.KeyListHeight = ScData.SplitterDistance;
-                _ViewModel.KeyListVisible = !ScData.Panel1Collapsed;
+                case CPwd.LAYOUT_STYLE_0:
+                    _ViewModel.KeyListVisible = !ScGuid.Panel2Collapsed;
+                    break;
+                case CPwd.LAYOUT_STYLE_1:
+                    _ViewModel.KeyListVisible = !ScData.Panel1Collapsed;
+                    _ViewModel.KeyListHeight = ScData.SplitterDistance;
+                    break;
+                case CPwd.LAYOUT_STYLE_2:
+                    _ViewModel.KeyListWidth = ScData.SplitterDistance;
+                    _ViewModel.KeyListVisible = !ScData.Panel1Collapsed;
+                    break;
+                default:
+                    _ViewModel.LayoutStyle = CPwd.LAYOUT_STYLE_0;
+                    _ViewModel.KeyListVisible = !ScGuid.Panel2Collapsed;
+                    break;
             }
 
             _ViewModel.SaveLayout();

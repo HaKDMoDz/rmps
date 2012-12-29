@@ -64,8 +64,6 @@ namespace Me.Amon.Pwd.V.Wiz
             Dock = DockStyle.Fill;
             panel.Controls.Add(this);
             Dock = DockStyle.Fill;
-
-            ShowGuid();
         }
 
         public void HideView(Panel panel)
@@ -80,6 +78,7 @@ namespace Me.Amon.Pwd.V.Wiz
 
         public void ShowData()
         {
+            ShowGuid();
         }
 
         public void AppendKey()

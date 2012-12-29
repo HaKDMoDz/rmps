@@ -484,11 +484,11 @@ namespace Me.Amon
 
         public void ExitSystem()
         {
-            if (_Guid != null)
+            if (CurrentApp != null)
             {
-                if (_Guid.WillExit())
+                if (CurrentApp.App.CanExit())
                 {
-                    _Guid.Visible = false;
+                    CurrentApp.App.Dispose();
                 }
             }
 

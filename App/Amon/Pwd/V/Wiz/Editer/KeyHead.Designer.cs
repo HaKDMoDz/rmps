@@ -96,6 +96,7 @@
             this.TbMeta.Location = new System.Drawing.Point(63, 56);
             this.TbMeta.Multiline = true;
             this.TbMeta.Name = "TbMeta";
+            this.TbMeta.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.TbMeta.Size = new System.Drawing.Size(284, 54);
             this.TbMeta.TabIndex = 5;
             // 
@@ -144,7 +145,7 @@
             // TbHint
             // 
             this.TbHint.AutoSize = true;
-            this.TbHint.Location = new System.Drawing.Point(87, 149);
+            this.TbHint.Location = new System.Drawing.Point(87, 143);
             this.TbHint.Name = "TbHint";
             this.TbHint.Size = new System.Drawing.Size(0, 12);
             this.TbHint.TabIndex = 10;
@@ -165,6 +166,7 @@
             this.TbAuto.Location = new System.Drawing.Point(63, 164);
             this.TbAuto.Multiline = true;
             this.TbAuto.Name = "TbAuto";
+            this.TbAuto.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.TbAuto.Size = new System.Drawing.Size(284, 54);
             this.TbAuto.TabIndex = 12;
             // 
