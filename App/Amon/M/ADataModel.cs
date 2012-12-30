@@ -85,6 +85,19 @@ namespace Me.Amon.M
         #endregion
 
         #region 任务提醒
+        public void Start()
+        {
+            if (_Timer == null)
+            {
+                _Timer = new Timer(Timer_Callback);
+            }
+            _Timer.Change(5000, 1000);
+        }
+
+        public void Stop()
+        {
+        }
+
         private List<AmonHandler<string>> _Hints = new List<AmonHandler<string>>();
         public void AppendHandler(AmonHandler<string> handler)
         {

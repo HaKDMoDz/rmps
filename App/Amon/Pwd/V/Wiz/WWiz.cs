@@ -189,7 +189,10 @@ namespace Me.Amon.Pwd.V.Wiz
 
             if (_LastView.Name == "body")
             {
-                UpdateKey();
+                if (DialogResult.Yes == Main.ShowConfirm("确认要保存数据吗？"))
+                {
+                    _WPwd.SaveKey();
+                }
                 return;
             }
             if (_LastView.Name == "head")
@@ -210,6 +213,7 @@ namespace Me.Amon.Pwd.V.Wiz
                 _KeyGuid = new KeyGuid(this, _UserModel, _SafeModel);
                 _KeyGuid.Init(_DataModel, _ViewModel);
                 _KeyGuid.Name = "guid";
+                _KeyGuid.InitView(PlMain);
             }
 
             if (_LastView != null && _LastView != _KeyGuid)
@@ -219,6 +223,7 @@ namespace Me.Amon.Pwd.V.Wiz
 
                 BtPrevStep.Enabled = false;
                 BtNextStep.Enabled = true;
+                BtNextStep.Text = "下一步(&N)";
             }
 
             _LastView = _KeyGuid;
@@ -232,7 +237,9 @@ namespace Me.Amon.Pwd.V.Wiz
                 _KeyHead = new KeyHead(this, _UserModel, _SafeModel);
                 _KeyHead.Init(_DataModel, _ViewModel);
                 _KeyHead.Name = "head";
+                _KeyHead.InitView(PlMain);
             }
+
             if (_LastView != null && _LastView != _KeyHead)
             {
                 _LastView.HideView(PlMain);
@@ -253,7 +260,9 @@ namespace Me.Amon.Pwd.V.Wiz
                 _KeyBody = new KeyBody(this, _UserModel, _SafeModel);
                 _KeyBody.Init(_DataModel, _ViewModel);
                 _KeyBody.Name = "body";
+                _KeyBody.InitView(PlMain);
             }
+
             if (_LastView != null && _LastView != _KeyBody)
             {
                 _LastView.HideView(PlMain);

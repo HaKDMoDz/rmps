@@ -37,6 +37,7 @@
             // 
             // PlHint
             // 
+            this.PlHint.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.PlHint.BackgroundImage = global::Me.Amon.Properties.Resources.Tips;
             this.PlHint.Controls.Add(this.PbHide);
             this.PlHint.Controls.Add(this.TbTips);

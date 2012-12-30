@@ -341,7 +341,7 @@ namespace Me.Amon.Util
             zipEntry.Crc = crc.Value;
         }
 
-        public static void UnZip(string zipFile, string dstPath)
+        public static void UnZip(string zipFile, string dstPath, string egnore = ".db")
         {
             if (!File.Exists(zipFile))
             {
@@ -352,6 +352,7 @@ namespace Me.Amon.Util
                 Directory.CreateDirectory(dstPath);
             }
 
+            bool hasEgnore = !string.IsNullOrWhiteSpace(egnore);
             ZipInputStream iStream = new ZipInputStream(File.OpenRead(zipFile));
             while (true)
             {
@@ -362,7 +363,7 @@ namespace Me.Amon.Util
                 }
 
                 string zipName = zipEntry.Name;
-                if (string.IsNullOrEmpty(zipName))
+                if (string.IsNullOrEmpty(zipName) || (hasEgnore && zipName.EndsWith(egnore)))
                 {
                     continue;
                 }

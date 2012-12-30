@@ -397,19 +397,19 @@ namespace Me.Amon.Pwd._Cat
             {
                 string meta = SelectedCat.Meta.ToLower();
                 // 待提示
-                if (meta == CPwd.KEY_TASK)
+                if (meta == CPwd.TAG_TASK)
                 {
                     KeyList.ListKeysWithGtd(DateTime.Now, 43200);
                     return;
                 }
                 // 已过期
-                if (meta == CPwd.KEY_TASK_VAL_EXPIRED)
+                if (meta == CPwd.TAG_TASK_VAL_EXPIRED)
                 {
                     KeyList.ListKeysWithGtd(Gtd.CGtd.STATUS_EXPIRED);
                     return;
                 }
                 // 未过期
-                if (meta.StartsWith(CPwd.KEY_TASK_VAR))
+                if (meta.StartsWith(CPwd.TAG_TASK_VAR))
                 {
                     ProcessGtdMeta(meta.Substring(5));
                     return;
@@ -691,12 +691,12 @@ namespace Me.Amon.Pwd._Cat
                     DoInitCat(node);
                 }
 
-                if (cat.Meta == CPwd.KEY_TASK)
+                if (cat.Meta == CPwd.TAG_TASK)
                 {
                     _TaskNode = node;
                     continue;
                 }
-                if (cat.Meta == CPwd.KEY_TASK_VAL_EXPIRED)
+                if (cat.Meta == CPwd.TAG_TASK_VAL_EXPIRED)
                 {
                     _TaskExpiredNode = node;
                     continue;

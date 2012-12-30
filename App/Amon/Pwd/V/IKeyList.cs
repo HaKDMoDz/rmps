@@ -15,6 +15,8 @@ namespace Me.Amon.Pwd.V
 
         void FindKeys(string meta);
 
+        void RemoveSelected();
+
         void ListKeysWithGtd(int status);
 
         void ListKeysWithGtd(DateTime time, int seconds);

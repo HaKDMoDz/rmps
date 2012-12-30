@@ -64,6 +64,12 @@ namespace Me.Amon.Pwd._Key
             //TvCatTree.SelectedNode = null;
         }
 
+        public void RemoveSelected()
+        {
+            LbKey.Items.RemoveAt(LbKey.SelectedIndex);
+            SelectedKey = null;
+        }
+
         public void ListGtdExpired()
         {
             IList<Gtd.M.MGtd> gtds = _DataModel.FindGtdExpired();

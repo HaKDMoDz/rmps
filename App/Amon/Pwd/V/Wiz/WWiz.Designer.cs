@@ -50,6 +50,7 @@ namespace Me.Amon.Pwd.V.Wiz
             // BtPrevStep
             // 
             this.BtPrevStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtPrevStep.Enabled = false;
             this.BtPrevStep.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.BtPrevStep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtPrevStep.Location = new System.Drawing.Point(142, 256);

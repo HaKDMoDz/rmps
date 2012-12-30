@@ -48,6 +48,10 @@ namespace Me.Amon.M
 
         #region 存储信息
         /// <summary>
+        /// 本地存储路径
+        /// </summary>
+        public string NsPath { get; set; }
+        /// <summary>
         /// 云存储类型
         /// </summary>
         public string CsType { get; set; }

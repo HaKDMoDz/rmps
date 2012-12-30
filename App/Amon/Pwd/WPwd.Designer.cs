@@ -39,6 +39,7 @@
             this.TlLayout2 = new System.Windows.Forms.ToolStripButton();
             this.MbMenu = new System.Windows.Forms.MenuStrip();
             this.TcMain = new System.Windows.Forms.ToolStripContainer();
+            this.UcHint = new Me.Amon.Uc.GtdHint();
             this.ScMain = new System.Windows.Forms.SplitContainer();
             this.ScGuid = new System.Windows.Forms.SplitContainer();
             this.ScData = new System.Windows.Forms.SplitContainer();
@@ -46,6 +47,7 @@
             this.TbTool = new System.Windows.Forms.ToolStrip();
             this.TpTips = new System.Windows.Forms.ToolTip(this.components);
             this.BgWorker = new System.ComponentModel.BackgroundWorker();
+            this.UcTimer = new System.Windows.Forms.Timer(this.components);
             this.SbEcho.SuspendLayout();
             this.TcMain.ContentPanel.SuspendLayout();
             this.TcMain.TopToolStripPanel.SuspendLayout();
@@ -79,7 +81,7 @@
             // TlEcho
             // 
             this.TlEcho.Name = "TlEcho";
-            this.TlEcho.Size = new System.Drawing.Size(402, 18);
+            this.TlEcho.Size = new System.Drawing.Size(433, 18);
             this.TlEcho.Spring = true;
             this.TlEcho.Text = "系统处理中，请稍候……";
             this.TlEcho.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -143,6 +145,7 @@
             // 
             // TcMain.ContentPanel
             // 
+            this.TcMain.ContentPanel.Controls.Add(this.UcHint);
             this.TcMain.ContentPanel.Controls.Add(this.ScMain);
             this.TcMain.ContentPanel.Size = new System.Drawing.Size(584, 370);
             this.TcMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -155,6 +158,17 @@
             // TcMain.TopToolStripPanel
             // 
             this.TcMain.TopToolStripPanel.Controls.Add(this.TbTool);
+            // 
+            // UcHint
+            // 
+            this.UcHint.BackColor = System.Drawing.Color.Transparent;
+            this.UcHint.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UcHint.Handler = new System.EventHandler(Hint_Click);
+            this.UcHint.Location = new System.Drawing.Point(0, 0);
+            this.UcHint.Name = "UcHint";
+            this.UcHint.Size = new System.Drawing.Size(584, 370);
+            this.UcHint.TabIndex = 0;
+            this.UcHint.Visible = false;
             // 
             // ScMain
             // 
@@ -221,6 +235,11 @@
             // 
             this.BgWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BgWorker_DoWork);
             // 
+            // UcTimer
+            // 
+            this.UcTimer.Interval = 200;
+            this.UcTimer.Tick += new System.EventHandler(this.UcTimer_Tick);
+            // 
             // WPwd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -260,6 +279,7 @@
         private System.Windows.Forms.MenuStrip MbMenu;
         private System.Windows.Forms.ToolStripContainer TcMain;
         private System.Windows.Forms.ToolStrip TbTool;
+        private Me.Amon.Uc.GtdHint UcHint;
         private System.Windows.Forms.SplitContainer ScMain;
         private System.Windows.Forms.SplitContainer ScGuid;
         private Me.Amon.Pwd.V.FindBar UcFind;
@@ -273,5 +293,6 @@
         private System.Windows.Forms.ToolStripButton TlLayout0;
         private System.Windows.Forms.ToolStripButton TlLayout1;
         private System.Windows.Forms.ToolStripButton TlLayout2;
+        private System.Windows.Forms.Timer UcTimer;
     }
 }

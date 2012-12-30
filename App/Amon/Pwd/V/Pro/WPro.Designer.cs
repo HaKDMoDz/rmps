@@ -31,12 +31,12 @@ namespace Me.Amon.Pwd.V.Pro
         private void InitializeComponent()
         {
             this.GvAttList = new System.Windows.Forms.DataGridView();
-            this.OrderCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GbGroup = new System.Windows.Forms.GroupBox();
             this.BtDrop = new System.Windows.Forms.Button();
             this.BtSave = new System.Windows.Forms.Button();
             this.BtFill = new System.Windows.Forms.Button();
+            this.OrderCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GvAttList)).BeginInit();
             this.GbGroup.SuspendLayout();
             this.SuspendLayout();
@@ -45,9 +45,10 @@ namespace Me.Amon.Pwd.V.Pro
             // 
             this.GvAttList.AllowUserToAddRows = false;
             this.GvAttList.AllowUserToDeleteRows = false;
-            this.GvAttList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.GvAttList.AllowUserToResizeRows = false;
+            this.GvAttList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.GvAttList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GvAttList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GvAttList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -62,25 +63,13 @@ namespace Me.Amon.Pwd.V.Pro
             this.GvAttList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.GvAttList.Size = new System.Drawing.Size(376, 160);
             this.GvAttList.TabIndex = 0;
-            // 
-            // OrderCol
-            // 
-            this.OrderCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.OrderCol.HeaderText = "排序";
-            this.OrderCol.Name = "OrderCol";
-            this.OrderCol.ReadOnly = true;
-            this.OrderCol.Width = 54;
-            // 
-            // ValueCol
-            // 
-            this.ValueCol.HeaderText = "属性";
-            this.ValueCol.Name = "ValueCol";
-            this.ValueCol.ReadOnly = true;
+            this.GvAttList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GvAttList_CellMouseDown);
+            this.GvAttList.SelectionChanged += new System.EventHandler(this.GvAttList_SelectionChanged);
             // 
             // GbGroup
             // 
-            this.GbGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.GbGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.GbGroup.Controls.Add(this.BtDrop);
             this.GbGroup.Controls.Add(this.BtSave);
             this.GbGroup.Controls.Add(this.BtFill);
@@ -130,6 +119,22 @@ namespace Me.Amon.Pwd.V.Pro
             this.BtFill.UseVisualStyleBackColor = true;
             this.BtFill.Click += new System.EventHandler(this.BtFill_Click);
             // 
+            // OrderCol
+            // 
+            this.OrderCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.OrderCol.HeaderText = "排序";
+            this.OrderCol.Name = "OrderCol";
+            this.OrderCol.ReadOnly = true;
+            this.OrderCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.OrderCol.Width = 35;
+            // 
+            // ValueCol
+            // 
+            this.ValueCol.HeaderText = "属性";
+            this.ValueCol.Name = "ValueCol";
+            this.ValueCol.ReadOnly = true;
+            this.ValueCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // WPro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -147,11 +152,11 @@ namespace Me.Amon.Pwd.V.Pro
         #endregion
 
         private System.Windows.Forms.DataGridView GvAttList;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OrderCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ValueCol;
         private System.Windows.Forms.GroupBox GbGroup;
         private System.Windows.Forms.Button BtFill;
         private System.Windows.Forms.Button BtSave;
         private System.Windows.Forms.Button BtDrop;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OrderCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ValueCol;
     }
 }

@@ -134,27 +134,13 @@ namespace Me.Amon.Pwd
             LoadLayout();
 
             ShowInfo();
-            // 视图模式
-            //switch (_ViewModel.Pattern)
-            //{
-            //    case CPwd.PATTERN_PRO:
-            //        ShowAPro();
-            //        break;
-            //    case CPwd.PATTERN_WIZ:
-            //        ShowAWiz();
-            //        break;
-            //    case CPwd.PATTERN_PAD:
-            //        ShowAPad();
-            //        break;
-            //    default:
-            //        break;
-            //}
 
             _CatTree.Init();
 
             // 当前时间
-            //UcTimer.Start();
-            //_UserModel.AppendHandler(new AmonHandler<string>(ShowEcho));
+            UcTimer.Start();
+            _DataModel.Start();
+            _DataModel.AppendHandler(new AmonHandler<string>(ShowEcho));
 
             User32.RegisterHotKey(this.Handle, this.Handle.ToInt32(), 0, (int)VirtualKey.F2);
         }
@@ -168,20 +154,12 @@ namespace Me.Amon.Pwd
             get { return this; }
         }
 
-        private GtdHint _UcHint;
         public void ShowHint(string hints)
         {
-            if (_UcHint == null)
-            {
-                _UcHint = new GtdHint();
-                _UcHint.Dock = DockStyle.Fill;
-                _UcHint.Handler = new EventHandler(Hint_Click);
-                _UcHint.TabIndex = 1;
-                TcMain.ContentPanel.Controls.Add(_UcHint);
-            }
-
             ScMain.Enabled = false;
-            _UcHint.Visible = true;
+
+            UcHint.Visible = true;
+            UcHint.Text = hints;
         }
 
         public void ShowTips(Control control, string caption)
@@ -303,7 +281,11 @@ namespace Me.Amon.Pwd
                     int t = m.WParam.ToInt32();
                     if (t == this.Handle.ToInt32())
                     {
-                        FillData();
+                        IntPtr hWnd = User32.GetForegroundWindow();
+                        if (hWnd != IntPtr.Zero && hWnd != this.Handle)
+                        {
+                            DoFillData();
+                        }
                     }
                 }
             }
@@ -315,7 +297,7 @@ namespace Me.Amon.Pwd
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void UcTime_Tick(object sender, EventArgs e)
+        private void UcTimer_Tick(object sender, EventArgs e)
         {
             DateTime now = DateTime.Now;
             TlTime.Text = now.ToString(CApp.DATEIME_FORMAT);
@@ -323,6 +305,66 @@ namespace Me.Amon.Pwd
             {
                 _EchoDelay -= 1;
             }
+        }
+
+        private void Hint_Click(object sender, EventArgs e)
+        {
+            Gtd.M.MGtd gtd = _SafeModel.Key.Gtd;
+            if (gtd != null)
+            {
+                DateTime now = DateTime.Now;
+                gtd.LastTime = now;
+                if (gtd.Next(now, 0))
+                {
+                    _DataModel.SaveVcs(gtd);
+                    _DataModel.ReloadGtds();
+                }
+            }
+            UcHint.Visible = false;
+            ScMain.Enabled = true;
+        }
+
+        private void BgWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+
+        }
+
+        private void TlEcho_DoubleClick(object sender, EventArgs e)
+        {
+            //if (_TaskNode != null)
+            //{
+            //    TvCatTree.SelectedNode = _TaskNode;
+            //}
+        }
+
+        /// <summary>
+        /// 默认布局
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TlLayout0_Click(object sender, EventArgs e)
+        {
+            ShowLayout0();
+        }
+
+        /// <summary>
+        /// 紧凑布局
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TlLayout1_Click(object sender, EventArgs e)
+        {
+            ShowLayout1();
+        }
+
+        /// <summary>
+        /// 多列布局
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TlLayout2_Click(object sender, EventArgs e)
+        {
+            ShowLayout2();
         }
         #endregion
 
@@ -432,6 +474,9 @@ namespace Me.Amon.Pwd
             }
         }
 
+        /// <summary>
+        /// 自动填充脚本事件
+        /// </summary>
         public void FillData()
         {
             if (_SafeModel.Key == null || string.IsNullOrEmpty(_SafeModel.Key.Script))
@@ -439,19 +484,24 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            bool visible = Visible;
-            if (visible)
-            {
-                Visible = false;
-                Thread.Sleep(300);
-            }
-
             IntPtr hWnd = User32.GetForegroundWindow();
-            if (hWnd == IntPtr.Zero || hWnd == this.Handle)
-            {
-                return;
-            }
+            //if (hWnd != IntPtr.Zero && hWnd != this.Handle)
 
+            var state = WindowState;
+            WindowState = FormWindowState.Minimized;
+            Thread.Sleep(300);
+
+            DoFillData();
+
+            WindowState = state;
+            Activate();
+        }
+
+        /// <summary>
+        /// 快捷键方式填充
+        /// </summary>
+        private void DoFillData()
+        {
             int i1 = 0;
             int i2;
             string s1;
@@ -494,10 +544,12 @@ namespace Me.Amon.Pwd
                 i1 = i2 + s1.Length;
                 SendKeys.SendWait(s2);
             }
-
-            Visible = visible;
         }
 
+        /// <summary>
+        /// 用户手动填充事件
+        /// </summary>
+        /// <param name="data"></param>
         public void FillData(string data)
         {
             if (string.IsNullOrEmpty(data))
@@ -755,7 +807,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            //LbKeyList.Items.RemoveAt(LbKeyList.SelectedIndex);
+            _KeyList.RemoveSelected();
 
             _DataModel.RemoveVcs(_SafeModel.Key);
             _SafeModel.Modified = false;
@@ -1012,6 +1064,7 @@ namespace Me.Amon.Pwd
             _PwdView = _ProView;
             _PwdView.InitView(ScData.Panel2);
             ShowKey(_SafeModel.Key);
+            _ViewModel.Pattern = CPwd.PATTERN_PRO;
 
             ItemGroup group = _XmlMenu.GetGroup("att-edit");
             if (group != null)
@@ -1044,6 +1097,7 @@ namespace Me.Amon.Pwd
             _PwdView = _WizView;
             _PwdView.InitView(ScData.Panel2);
             ShowKey(_SafeModel.Key);
+            _ViewModel.Pattern = CPwd.PATTERN_WIZ;
 
             ItemGroup group = _XmlMenu.GetGroup("att-edit");
             if (group != null)
@@ -1076,6 +1130,7 @@ namespace Me.Amon.Pwd
 
             //PlMain.Controls.Remove(TcTool);
             //PlMain.Controls.Add(_PadView);
+            _ViewModel.Pattern = CPwd.PATTERN_PAD;
         }
 
         public void ShowInfo()
@@ -1236,21 +1291,25 @@ namespace Me.Amon.Pwd
         /// </summary>
         public void NativeBackup()
         {
+            // 是否保存
             if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
             {
                 return;
             }
 
-            //_CatTree.SelectedCat = null;
-            //TvCatTree.SelectedNode = null;
-            //LbKeyList.Items.Clear();
-
-            if (DialogResult.OK != Main.ShowSaveFileDialog(this, "密码箱备份文件|*.apbak", ""))
+            if (string.IsNullOrWhiteSpace(_UserModel.NsPath) && !NativeConfig())
             {
                 return;
             }
+
+            if (!Directory.Exists(_UserModel.NsPath))
+            {
+                Directory.CreateDirectory(_UserModel.NsPath);
+            }
+            string file = DateTime.Now.ToString("yyyyMMddHHmmss") + ".apbak";
+
             _DataModel.Suspend();
-            BeanUtil.DoZip(Main.SaveFileDialog.FileName, _UserModel.DatHome);
+            BeanUtil.DoZip(Path.Combine(_UserModel.NsPath, file), _UserModel.DatHome);
             _DataModel.Resume();
         }
 
@@ -1259,6 +1318,17 @@ namespace Me.Amon.Pwd
         /// </summary>
         public void NativeResume()
         {
+            if (string.IsNullOrWhiteSpace(_UserModel.NsPath))
+            {
+                Main.ShowAlert("您尚未配置本地备份路径！");
+                return;
+            }
+            if (!Directory.Exists(_UserModel.NsPath))
+            {
+                Main.ShowAlert("本地备份路径不存在，请确认配置是否正确！");
+                return;
+            }
+
             if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
             {
                 return;
@@ -1267,7 +1337,7 @@ namespace Me.Amon.Pwd
             _DataModel.Suspend();
             SaveData();
 
-            if (DialogResult.OK != Main.ShowOpenFileDialog(this, "密码箱备份文件|*.apbak", "", false))
+            if (DialogResult.OK != Main.ShowOpenFileDialog(this, "密码箱备份文件|*.apbak", "", _UserModel.NsPath, false))
             {
                 return;
             }
@@ -1277,9 +1347,18 @@ namespace Me.Amon.Pwd
             _Main.ExitSystem();
         }
 
-        public void NativeConfig()
+        public bool NativeConfig()
         {
-            Main.ShowAlert("本地配置功能尚在完善中，敬请期待！");
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.Description = "请选择本地备份路径：";
+            dialog.SelectedPath = _UserModel.NsPath;
+            if (DialogResult.OK != dialog.ShowDialog(this))
+            {
+                return false;
+            }
+
+            _UserModel.NsPath = dialog.SelectedPath;
+            return true;
         }
 
         /// <summary>
@@ -1297,7 +1376,7 @@ namespace Me.Amon.Pwd
             Main.ShowAlert("远程恢复功能尚在完善中，敬请期待！");
         }
 
-        public void RemoteConfig()
+        public bool RemoteConfig()
         {
             OAuthConsumer consumer = new OAuthConsumer();
             consumer.consumer_key = "xcWPaz75PSRDOWBM";
@@ -1306,11 +1385,12 @@ namespace Me.Amon.Pwd
             KuaipanClient client = new KuaipanClient(consumer);
             if (!client.Verify())
             {
-                return;
+                return false;
             }
             var account = client.Account();
             _UserModel.CsAuth = client.Token.oauth_token;
             _UserModel.CsUser = account.Name;
+            return true;
         }
 
         #region 数据导出
@@ -1959,7 +2039,9 @@ namespace Me.Amon.Pwd
             _SafeModel.Key.AccessTime = DateTime.Now.ToString(CApp.DATEIME_FORMAT);
             _DataModel.SaveVcs(_SafeModel.Key);
         }
+        #endregion
 
+        #region 布局管理
         /// <summary>
         /// 布局加载
         /// </summary>
@@ -2074,52 +2156,6 @@ namespace Me.Amon.Pwd
 
             _ViewModel.SaveLayout();
         }
-        #endregion
-
-        private void Hint_Click(object sender, EventArgs e)
-        {
-            Gtd.M.MGtd gtd = _SafeModel.Key.Gtd;
-            if (gtd != null)
-            {
-                DateTime now = DateTime.Now;
-                gtd.LastTime = now;
-                if (gtd.Next(now, 0))
-                {
-                    _DataModel.SaveVcs(gtd);
-                    _DataModel.ReloadGtds();
-                }
-            }
-            _UcHint.Visible = false;
-            //PlMain.Enabled = true;
-        }
-
-        private void BgWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-
-        }
-
-        private void TlEcho_DoubleClick(object sender, EventArgs e)
-        {
-            //if (_TaskNode != null)
-            //{
-            //    TvCatTree.SelectedNode = _TaskNode;
-            //}
-        }
-
-        private void TlLayout0_Click(object sender, EventArgs e)
-        {
-            ShowLayout0();
-        }
-
-        private void TlLayout1_Click(object sender, EventArgs e)
-        {
-            ShowLayout1();
-        }
-
-        private void TlLayout2_Click(object sender, EventArgs e)
-        {
-            ShowLayout2();
-        }
 
         private void ShowLayout0()
         {
@@ -2151,5 +2187,6 @@ namespace Me.Amon.Pwd
 
             ScGuid.Panel2Collapsed = true;
         }
+        #endregion
     }
 }

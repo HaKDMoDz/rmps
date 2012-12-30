@@ -403,7 +403,7 @@
   </Toolbar>
 
   <!--魔方密码弹出菜单-->
-  <Popmenu Id="ACat">
+  <Popmenu Id="WCat">
     <Item Type="normal" Text="更改图标">
       <Action Class="Me.Amon.Pwd.E._Cat.ChangeIcoAction"/>
     </Item>
@@ -425,7 +425,7 @@
       <Action Class="Me.Amon.Pwd.E._Cat.DemotionAction"/>
     </Item>
   </Popmenu>
-  <Popmenu Id="AKey">
+  <Popmenu Id="WKey">
     <Item Type="normal" Text="添加记录" ActionId="append-key"/>
     <Item Type="normal" Text="删除记录" ActionId="delete-key"/>
     <Line/>
@@ -498,7 +498,7 @@
       <Action Class="Me.Amon.Pwd.E._Key.HistoryAction"/>
     </Item>
   </Popmenu>
-  <Popmenu Id="AAtt">
+  <Popmenu Id="WAtt">
     <Item Type="normal" Text="复制数据">
       <Action Class="Me.Amon.Pwd.E.grid.CopyAction"/>
     </Item>

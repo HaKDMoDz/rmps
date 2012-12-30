@@ -16,25 +16,21 @@ namespace Me.Amon.Pwd
         public const string KEY_LABEL = "key-label";
         public const string KEY_MAJOR = "key-major";
 
+        /// <summary>
+        /// 菜单配置文件
+        /// </summary>
         public const string XML_MENU = "WPwd.xml";
 
+        #region 视图风格
         /// <summary>
         /// 视图类型
         /// </summary>
         public const int KEY_APRO = 0x1;
         public const int KEY_AWIZ = 0x2;
         public const int KEY_APAD = 0x4;
+        #endregion
 
-        public const int WINDOW_STATE_NORMAL = 0;
-        public const int WINDOW_STATE_MINIMIZED = 1;
-        public const int WINDOW_STATE_MAXIMIZED = 2;
-
-        public const string KEY_TASK = "task";
-        public const string KEY_TASK_VAR = KEY_TASK + ":";
-        public const string KEY_TASK_VAL_EXPIRED = KEY_TASK + ":expired";
-        public const string KEY_MAIL = "mail";
-        public const string KEY_LINK = "link";
-
+        #region 界面布局
         /// <summary>
         /// 紧凑视图
         /// </summary>
@@ -47,5 +43,20 @@ namespace Me.Amon.Pwd
         /// 三列视图
         /// </summary>
         public const int LAYOUT_STYLE_2 = 2;
+        #endregion
+
+        #region 窗口状态
+        public const int WINDOW_STATE_NORMAL = 0;
+        public const int WINDOW_STATE_MINIMIZED = 1;
+        public const int WINDOW_STATE_MAXIMIZED = 2;
+        #endregion
+
+        #region 特殊目录键值
+        public const string TAG_TASK = "task";
+        public const string TAG_TASK_VAR = TAG_TASK + ":";
+        public const string TAG_TASK_VAL_EXPIRED = TAG_TASK + ":expired";
+        public const string TAG_MAIL = "mail";
+        public const string TAG_LINK = "link";
+        #endregion
     }
 }

@@ -147,6 +147,15 @@ namespace Me.Amon
             OpenFileDialog.Multiselect = multi;
             return OpenFileDialog.ShowDialog(owner);
         }
+
+        public static DialogResult ShowOpenFileDialog(IWin32Window owner, string filter, string file, string folder, bool multi)
+        {
+            OpenFileDialog.Filter = filter;
+            OpenFileDialog.FileName = file;
+            OpenFileDialog.InitialDirectory = folder;
+            OpenFileDialog.Multiselect = multi;
+            return OpenFileDialog.ShowDialog(owner);
+        }
         #endregion
 
         #region 文件保存对话框

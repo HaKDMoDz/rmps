@@ -36,7 +36,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             _DataModel = dataModel;
 
             PbFill.Image = viewModel.GetImage("script-fill-24");
-            _AWiz.ShowTips(PbFill, "执行脚本");
+            _AWiz.ShowTips(PbFill, "执行填充脚本");
             PbCard.Image = viewModel.GetImage("export-card-24");
             _AWiz.ShowTips(PbCard, "导出为卡片");
 
