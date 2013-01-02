@@ -47,13 +47,13 @@
             // 
             this.TbGroup.Location = new System.Drawing.Point(12, 42);
             this.TbGroup.Name = "TbGroup";
-            this.TbGroup.Size = new System.Drawing.Size(220, 21);
+            this.TbGroup.Size = new System.Drawing.Size(240, 21);
             this.TbGroup.TabIndex = 1;
             // 
             // BtOk
             // 
             this.BtOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtOk.Location = new System.Drawing.Point(76, 83);
+            this.BtOk.Location = new System.Drawing.Point(96, 83);
             this.BtOk.Name = "BtOk";
             this.BtOk.Size = new System.Drawing.Size(75, 23);
             this.BtOk.TabIndex = 2;
@@ -65,7 +65,7 @@
             // 
             this.BtNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtNo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.BtNo.Location = new System.Drawing.Point(157, 83);
+            this.BtNo.Location = new System.Drawing.Point(177, 83);
             this.BtNo.Name = "BtNo";
             this.BtNo.Size = new System.Drawing.Size(75, 23);
             this.BtNo.TabIndex = 3;
@@ -79,7 +79,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.BtNo;
-            this.ClientSize = new System.Drawing.Size(244, 118);
+            this.ClientSize = new System.Drawing.Size(264, 118);
             this.Controls.Add(this.BtNo);
             this.Controls.Add(this.BtOk);
             this.Controls.Add(this.TbGroup);

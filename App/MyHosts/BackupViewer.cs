@@ -7,10 +7,18 @@ namespace Me.Amon.Hosts
 {
     public partial class BackupViewer : Form
     {
+        private Main _Main;
+
         public BackupViewer()
         {
             InitializeComponent();
+        }
 
+        public BackupViewer(Main main)
+        {
+            InitializeComponent();
+
+            _Main = main;
             this.Icon = Me.Amon.Hosts.Properties.Resources.Icon;
 
             if (Directory.Exists(Main.BAK_DIR))
@@ -52,8 +60,11 @@ namespace Me.Amon.Hosts
 
         private void BtOk_Click(object sender, EventArgs e)
         {
-            File.WriteAllText(Main.HOSTS_FILE, TbBak.Text);
-            DialogResult = System.Windows.Forms.DialogResult.OK;
+            if (LbBak.SelectedItem == null)
+            {
+                return;
+            }
+            _Main.Resume(TbBak.Text);
         }
 
         private void BtNo_Click(object sender, EventArgs e)

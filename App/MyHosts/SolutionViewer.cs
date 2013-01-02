@@ -6,10 +6,18 @@ namespace Me.Amon.Hosts
 {
     public partial class SolutionViewer : Form
     {
+        private Main _Main;
+
         public SolutionViewer()
         {
             InitializeComponent();
+        }
 
+        public SolutionViewer(Main main)
+        {
+            InitializeComponent();
+
+            _Main = main;
             this.Icon = Me.Amon.Hosts.Properties.Resources.Icon;
 
             if (Directory.Exists(Main.DAT_DIR))
@@ -39,8 +47,11 @@ namespace Me.Amon.Hosts
 
         private void BtOk_Click(object sender, EventArgs e)
         {
-            File.WriteAllText(Main.HOSTS_FILE, TbSln.Text);
-            DialogResult = System.Windows.Forms.DialogResult.OK;
+            if (LbSln.SelectedItem == null)
+            {
+                return;
+            }
+            _Main.Resume(TbSln.Text);
         }
 
         private void BtNo_Click(object sender, EventArgs e)

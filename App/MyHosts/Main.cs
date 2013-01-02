@@ -28,18 +28,45 @@ namespace Me.Amon.Hosts
         private string _HostsFile;
         private string _Comment;
 
-        private Group _Group;
-        private List<Group> _Groups;
-        private Solution _Solution;
-        private List<Solution> _Solutions;
-
+        #region 记录
         private Color _EnabledBackColor;
         private Color _EnabledForeColor;
         private Color _DisabledBackColor;
         private Color _DisabledForeColor;
         private Color _DefaultColor;
         private Color _ChangedColor;
-        private ListViewItem _SelectedItem;
+        private ListViewItem _SelectedHost;
+        #endregion
+
+        #region 分组
+        /// <summary>
+        /// 默认分组
+        /// </summary>
+        private Group _DefGroup;
+        private List<Group> _Groups;
+        private ToolStripSeparator _CreateGroupSep;
+        private ToolStripMenuItem _CreateGroupItem;
+        private ToolStripMenuItem _SelectedGroupItem;
+        private Dictionary<string, ToolStripMenuItem> _GroupItems;
+        #endregion
+
+        #region 方案
+        /// <summary>
+        /// 当前方案
+        /// </summary>
+        private Solution _Solution;
+        private List<Solution> _Solutions;
+        /// <summary>
+        /// 菜单选中项方案
+        /// </summary>
+        private ToolStripMenuItem _SelectedSlnMItem;
+        private Dictionary<string, ToolStripMenuItem> _SolutionMItems;
+        /// <summary>
+        /// 拖盘选中项方案
+        /// </summary>
+        private ToolStripMenuItem _SelectedSlnTItem;
+        private Dictionary<string, ToolStripMenuItem> _SolutionTItems;
+        #endregion
         #endregion
 
         #region 构造函数
@@ -47,9 +74,20 @@ namespace Me.Amon.Hosts
         {
             InitializeComponent();
 
+            Init();
+        }
+
+        public void Init()
+        {
             NiTray.Icon = Me.Amon.Hosts.Properties.Resources.Icon;
             TiHide.Checked = Settings.Default.HideMain;
 
+            KeyPreview = true;
+
+            _HostsDir = FindHostsDir();
+            _HostsFile = Path.Combine(_HostsDir, "hosts");
+
+            // 记录
             LvItem.BackColor = Color.White;
             _EnabledBackColor = LvItem.BackColor;
             _EnabledForeColor = LvItem.ForeColor;
@@ -58,20 +96,24 @@ namespace Me.Amon.Hosts
             _DefaultColor = LvItem.ForeColor;
             _ChangedColor = Color.Green;
 
-            _Group = new Group { Key = "", Text = "默认" };
+            // 分组
+            _DefGroup = new Group { Key = "", Text = "<默认>" };
             _Groups = new List<Group>();
-            _Groups.Add(_Group);
+            _Groups.Add(_DefGroup);
+            _GroupItems = new Dictionary<string, ToolStripMenuItem>();
+            _CreateGroupSep = new ToolStripSeparator();
+            _CreateGroupItem = new ToolStripMenuItem();
+            _CreateGroupItem.Text = "创建新组";
+            _CreateGroupItem.Click += CiCreateGroupClick;
 
-            _HostsDir = FindHostsDir();
-            _HostsFile = Path.Combine(_HostsDir, "hosts");
-
+            // 方案
             _Solution = new Solution();
             _Solutions = new List<Solution>();
-
-            KeyPreview = true;
+            _SolutionMItems = new Dictionary<string, ToolStripMenuItem>();
+            _SolutionTItems = new Dictionary<string, ToolStripMenuItem>();
+            ListSolution();
 
             Reload();
-            ListSolution();
         }
         #endregion
 
@@ -127,13 +169,7 @@ namespace Me.Amon.Hosts
         /// <param name="e"></param>
         void MiPickupClick(object sender, EventArgs e)
         {
-            BackupViewer viewer = new BackupViewer();
-            if (DialogResult.OK != viewer.ShowDialog(this))
-            {
-                return;
-            }
-
-            Reload();
+            new BackupViewer(this).ShowDialog(this);
         }
 
         /// <summary>
@@ -178,9 +214,17 @@ namespace Me.Amon.Hosts
             DoRemove();
         }
 
-        void MiCreateGroupClick(object sender, EventArgs e)
+        void CiCreateGroupClick(object sender, EventArgs e)
         {
-            CreateGroup();
+            GroupEditer editer = new GroupEditer(_Groups, "");
+            if (DialogResult.OK != editer.ShowDialog(this))
+            {
+                return;
+            }
+
+            string key = editer.Group;
+            AppendGroup(new Group { Key = key, Text = key });
+            _SelectedHost.Group = LvItem.Groups[key];
         }
         #endregion
 
@@ -202,12 +246,12 @@ namespace Me.Amon.Hosts
             Saveas(_HostsFile);
             Backup();
 
-            if (string.IsNullOrWhiteSpace(_Solution.Text))
+            if (!string.IsNullOrWhiteSpace(_Solution.Text))
             {
                 Text = _Solution.Text + " - MyHosts";
             }
 
-            AppendSolution(_Solution);
+            AppendSolution(_Solution, true);
         }
 
         private void MiCreateSln_Click(object sender, EventArgs e)
@@ -222,13 +266,7 @@ namespace Me.Amon.Hosts
         /// <param name="e"></param>
         void MiManageSlnClick(object sender, EventArgs e)
         {
-            SolutionViewer viewer = new SolutionViewer();
-            if (DialogResult.OK != viewer.ShowDialog(this))
-            {
-                return;
-            }
-
-            Reload();
+            new SolutionViewer(this).ShowDialog(this);
         }
 
         /// <summary>
@@ -253,6 +291,25 @@ namespace Me.Amon.Hosts
             {
                 File.Copy(Path.Combine(DAT_DIR, string.Format(HOSTS_FILE, sln)), _HostsFile, true);
                 Reload();
+
+                MiSlnDef.Visible = false;
+                TiSlnDef.Visible = false;
+                if (_SelectedSlnMItem != null)
+                {
+                    _SelectedSlnMItem.Checked = false;
+                }
+                _SelectedSlnMItem = item;
+                _SelectedSlnMItem.Checked = true;
+
+                if (_SelectedSlnTItem != null)
+                {
+                    _SelectedSlnTItem.Checked = false;
+                }
+                if (_SolutionTItems.ContainsKey(item.Text))
+                {
+                    _SelectedSlnTItem = _SolutionTItems[item.Text];
+                    _SelectedSlnTItem.Checked = true;
+                }
             }
             catch (Exception exp)
             {
@@ -380,7 +437,24 @@ namespace Me.Amon.Hosts
 
         void CiGroupClick(object sender, EventArgs e)
         {
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            if (item == null)
+            {
+                return;
+            }
+            if (_SelectedHost == null)
+            {
+                return;
+            }
 
+            string key = item.Tag as string;
+            _SelectedHost.Group = LvItem.Groups[key];
+
+            var host = _SelectedHost.Tag as Host;
+            if (host != null)
+            {
+                host.Group = key;
+            }
         }
         #endregion
 
@@ -413,15 +487,30 @@ namespace Me.Amon.Hosts
             try
             {
                 File.Copy(Path.Combine(DAT_DIR, string.Format(HOSTS_FILE, sln)), _HostsFile, true);
+                Reload();
 
-                if (Visible)
+                MiSlnDef.Visible = false;
+                TiSlnDef.Visible = false;
+                if (_SelectedSlnTItem != null)
                 {
-                    Reload();
+                    _SelectedSlnTItem.Checked = false;
+                }
+                _SelectedSlnTItem = item;
+                _SelectedSlnTItem.Checked = true;
+
+                if (_SelectedSlnMItem != null)
+                {
+                    _SelectedSlnMItem.Checked = false;
+                }
+                if (_SolutionMItems.ContainsKey(item.Text))
+                {
+                    _SelectedSlnMItem = _SolutionMItems[item.Text];
+                    _SelectedSlnMItem.Checked = true;
                 }
             }
             catch (Exception exp)
             {
-                MessageBox.Show(this, exp.Message, "异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Visible ? this : null, exp.Message, "异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -473,12 +562,29 @@ namespace Me.Amon.Hosts
 
         private void LvItem_MouseClick(object sender, MouseEventArgs e)
         {
-            _SelectedItem = LvItem.GetItemAt(e.X, e.Y);
+            _SelectedHost = LvItem.GetItemAt(e.X, e.Y);
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
-                CiUpdate.Enabled = _SelectedItem != null;
+                var host = _SelectedHost.Tag as Host;
+                if (_GroupItems.ContainsKey(host.Group))
+                {
+                    if (_SelectedGroupItem != null)
+                    {
+                        _SelectedGroupItem.Checked = false;
+                    }
+                    _SelectedGroupItem = _GroupItems[host.Group];
+                    _SelectedGroupItem.Checked = true;
+                }
+
+                CiUpdate.Enabled = _SelectedHost != null;
                 CmMenu.Show(LvItem, e.Location);
             }
+        }
+
+        private void LvItem_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            _SelectedHost = LvItem.GetItemAt(e.X, e.Y);
+            DoUpdate();
         }
 
         void LvItemItemChecked(object sender, ItemCheckedEventArgs e)
@@ -498,6 +604,36 @@ namespace Me.Amon.Hosts
         #region 公共函数
         public void Reload()
         {
+            _Modified = false;
+            _Solution.Key = "";
+            _Solution.Text = "当前";
+            _Comment = "";
+            LvItem.Items.Clear();
+            _Groups.Clear();
+            _GroupItems.Clear();
+            LvItem.Groups.Clear();
+            CuGroups.DropDownItems.Clear();
+
+            // 分组操作
+            CuGroups.DropDownItems.Add(_CreateGroupItem);
+            CuGroups.DropDownItems.Add(_CreateGroupSep);
+
+            // 默认分组
+            Group group = _DefGroup;
+            AppendGroup(group);
+
+            // 文件处理
+            DoReload(group);
+
+            if (_Comment.Length > 1)
+            {
+                _Comment = _Comment.Substring(Environment.NewLine.Length);
+            }
+            Text = (string.IsNullOrWhiteSpace(_Solution.Text) ? "<未知>" : _Solution.Text) + " - MyHosts";
+        }
+
+        private void DoReload(Group group)
+        {
             if (!File.Exists(_HostsFile))
             {
                 return;
@@ -508,16 +644,6 @@ namespace Me.Amon.Hosts
             {
                 return;
             }
-
-            _Modified = false;
-            _Comment = "";
-            _Solution.Text = "";
-            LvItem.Items.Clear();
-            LvItem.Groups.Clear();
-            _Groups.Clear();
-
-            Group group = _Group;
-            AppendGroup(group);
 
             string line;
             int row = -1;
@@ -542,7 +668,35 @@ namespace Me.Amon.Hosts
                 // 方案
                 if (row == 0 && Solution.IsMatch(line))
                 {
-                    _Solution.FromString(line);
+                    if (_Solution.FromString(line))
+                    {
+                        string key = _Solution.Text;
+                        bool def = string.IsNullOrWhiteSpace(key) || !_SolutionMItems.ContainsKey(key);
+                        MiSlnDef.Visible = def;
+                        TiSlnDef.Visible = def;
+
+                        if (_SelectedSlnMItem != null)
+                        {
+                            _SelectedSlnMItem.Checked = false;
+                        }
+                        if (_SelectedSlnTItem != null)
+                        {
+                            _SelectedSlnTItem.Checked = false;
+                        }
+
+                        if (def)
+                        {
+                            _SelectedSlnMItem = MiSlnDef;
+                            _SelectedSlnTItem = TiSlnDef;
+                        }
+                        else
+                        {
+                            _SelectedSlnMItem = _SolutionMItems[key];
+                            _SelectedSlnTItem = _SolutionTItems[key];
+                        }
+                        _SelectedSlnMItem.Checked = true;
+                        _SelectedSlnTItem.Checked = true;
+                    }
                     continue;
                 }
 
@@ -553,17 +707,29 @@ namespace Me.Amon.Hosts
                     if (g.FromString(line))
                     {
                         AppendGroup(g);
+                        group = g;
                     }
                     continue;
                 }
 
+                // 注释
+                if (inCmt && Regex.IsMatch(line, "^#[^.]*"))
+                {
+                    if (inCmt)
+                    {
+                        _Comment += Environment.NewLine;
+                        _Comment += line.Substring(1);
+                        continue;
+                    }
+                }
+
                 // 配置
-                if (Host.IsMatch(line) && !inCmt)
+                if (Host.IsMatch(line))
                 {
                     var h = new Host();
                     if (h.FromString(line))
                     {
-                        h.Group = group.Text;
+                        h.Group = group.Key;
 
                         var item = new ListViewItem();
                         item.Text = h.IP;
@@ -581,23 +747,9 @@ namespace Me.Amon.Hosts
                     continue;
                 }
 
-                // 注释
-                if (Regex.IsMatch(line, "^#[^.]*"))
-                {
-                    if (inCmt)
-                    {
-                        _Comment += Environment.NewLine;
-                        _Comment += line.Substring(1);
-                        continue;
-                    }
-                }
-
                 inCmt = false;
             }
             reader.Close();
-
-            _Comment = _Comment.Substring(Environment.NewLine.Length);
-            Text = (string.IsNullOrWhiteSpace(_Solution.Text) ? "当前" : _Solution.Text) + " - MyHosts";
         }
 
         public void Saveas(string file)
@@ -687,24 +839,35 @@ namespace Me.Amon.Hosts
             }
         }
 
-        public void Resume()
+        public void Resume(string text)
         {
+            Backup();
+
+            try
+            {
+                File.WriteAllText(_HostsFile, text);
+                Reload();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(this, exp.Message, "异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public void DoUpdate()
         {
-            if (_SelectedItem == null)
+            if (_SelectedHost == null)
             {
                 return;
             }
 
-            HostEditer editer = new HostEditer(_Groups, _SelectedItem.Tag as Host);
+            HostEditer editer = new HostEditer(_Groups, _SelectedHost.Tag as Host);
             if (DialogResult.OK != editer.ShowDialog(this))
             {
                 return;
             }
 
-            UpdateItem(_SelectedItem, editer.Host);
+            UpdateItem(_SelectedHost, editer.Host);
             _Modified = true;
         }
 
@@ -726,29 +889,13 @@ namespace Me.Amon.Hosts
                 return;
             }
 
-            LvItem.Items.Remove(_SelectedItem);
-            _SelectedItem = null;
-        }
-
-        public void CreateGroup()
-        {
-            GroupEditer editer = new GroupEditer();
-            if (DialogResult.OK != editer.ShowDialog(this))
-            {
-                return;
-            }
-
-            var g = new Group { Text = editer.Group };
-            _Groups.Add(g);
-
-            ListViewGroup group = new ListViewGroup(g.Text, g.Text);
-            LvItem.Groups.Add(group);
-            group.Tag = g;
+            LvItem.Items.Remove(_SelectedHost);
+            _SelectedHost = null;
         }
 
         public void CreateSolution()
         {
-            SolutionEditer editer = new SolutionEditer();
+            SolutionEditer editer = new SolutionEditer(_Solutions);
             if (DialogResult.OK != editer.ShowDialog(this))
             {
                 return;
@@ -756,7 +903,9 @@ namespace Me.Amon.Hosts
 
             Backup();
 
-            _Solution.Text = editer.Solution;
+            string key = editer.Solution;
+            _Solution.Key = key;
+            _Solution.Text = key;
             StreamWriter writer = new StreamWriter(_HostsFile);
             _Solution.Save(writer);
             writer.WriteLine("# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.");
@@ -780,9 +929,8 @@ namespace Me.Amon.Hosts
             writer.WriteLine("#	::1             localhost");
             writer.Close();
 
-            LvItem.Groups.Clear();
-            LvItem.Items.Clear();
-            AppendGroup(_Group);
+            AppendSolution(_Solution, true);
+            Reload();
         }
 
         public void ChangeSolution(string solution)
@@ -836,10 +984,10 @@ namespace Me.Amon.Hosts
         {
             StringBuilder buffer = new StringBuilder();
             buffer.Append("软件名称：MyHosts").Append(Environment.NewLine);
-            buffer.Append("当前版本：V1.0.1.2").Append(Environment.NewLine);
+            buffer.Append("当前版本：V1.0.2.3").Append(Environment.NewLine);
             buffer.Append("软件作者：Amon").Append(Environment.NewLine);
             buffer.Append("作者博客：http://amon.me/").Append(Environment.NewLine);
-            MessageBox.Show(this, buffer.ToString(), "关于");
+            MessageBox.Show(this, buffer.ToString(), "关于", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion
 
@@ -863,10 +1011,10 @@ namespace Me.Amon.Hosts
             {
                 name = Path.GetFileName(file);
                 name = name.Substring(6);
-                sln = new Solution { Text = name };
+                sln = new Solution { Key = name, Text = name };
                 _Solutions.Add(sln);
 
-                AppendSolution(sln);
+                AppendSolution(sln, false);
             }
         }
 
@@ -884,11 +1032,34 @@ namespace Me.Amon.Hosts
             }
         }
 
+        private string CheckGroup(string group)
+        {
+            if (string.IsNullOrWhiteSpace(group))
+            {
+                return "";
+            }
+            group = group.Trim();
+
+            foreach (var g in _Groups)
+            {
+                if (g.Key == group)
+                {
+                    return g.Key;
+                }
+            }
+
+            AppendGroup(new Group { Key = group, Text = group });
+            return group;
+        }
+
         private void CreateItem(Host host)
         {
+            string group = CheckGroup(host.Group);
+
             ListViewItem item = new ListViewItem();
+            item.Checked = host.Enabled;
+            item.Group = LvItem.Groups[group];
             item.Text = host.IP;
-            item.Group = LvItem.Groups[host.Group];
             item.Tag = host;
 
             var sub = new ListViewItem.ListViewSubItem();
@@ -901,11 +1072,14 @@ namespace Me.Amon.Hosts
 
             LvItem.Items.Add(item);
             item.Selected = true;
-            _SelectedItem = item;
+            _SelectedHost = item;
         }
 
         private void UpdateItem(ListViewItem item, Host host)
         {
+            string group = CheckGroup(host.Group);
+
+            item.Group = LvItem.Groups[group];
             item.Text = host.IP;
             item.SubItems[1].Text = host.Domain;
             item.SubItems[2].Text = host.Comment;
@@ -916,29 +1090,51 @@ namespace Me.Amon.Hosts
         {
             _Groups.Add(group);
 
-            ListViewGroup g = new ListViewGroup(group.Text, group.Text);
+            ListViewGroup g = new ListViewGroup(group.Key, group.Text);
             g.Tag = group;
             LvItem.Groups.Add(g);
 
             ToolStripMenuItem i = new ToolStripMenuItem();
             i.Text = group.Text;
+            i.Tag = group.Key;
             i.Click += new EventHandler(CiGroupClick);
-            CmGroups.DropDownItems.Add(i);
+            CuGroups.DropDownItems.Add(i);
+            _GroupItems[group.Key] = i;
         }
 
-        private void AppendSolution(Solution solution)
+        private void AppendSolution(Solution solution, bool selected)
         {
             // 菜单栏
             var item = new ToolStripMenuItem();
             item.Text = solution.Text;
             item.Click += new EventHandler(MiSlnItemClick);
             MuData.DropDownItems.Add(item);
+            _SolutionMItems[solution.Text] = item;
+            if (selected)
+            {
+                if (_SelectedSlnMItem != null)
+                {
+                    _SelectedSlnMItem.Checked = false;
+                }
+                _SelectedSlnMItem = item;
+                _SelectedSlnMItem.Checked = true;
+            }
 
             // 状态栏
             item = new ToolStripMenuItem();
             item.Text = solution.Text;
             item.Click += new EventHandler(TiSlnItemClick);
             TuSln.DropDownItems.Add(item);
+            _SolutionTItems[solution.Text] = item;
+            if (selected)
+            {
+                if (_SelectedSlnTItem != null)
+                {
+                    _SelectedSlnTItem.Checked = false;
+                }
+                _SelectedSlnTItem = item;
+                _SelectedSlnTItem.Checked = true;
+            }
         }
         #endregion
 

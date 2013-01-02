@@ -55,8 +55,8 @@
             // ScBak.Panel2
             // 
             this.ScBak.Panel2.Controls.Add(this.TbBak);
-            this.ScBak.Size = new System.Drawing.Size(500, 268);
-            this.ScBak.SplitterDistance = 157;
+            this.ScBak.Size = new System.Drawing.Size(600, 268);
+            this.ScBak.SplitterDistance = 130;
             this.ScBak.TabIndex = 0;
             // 
             // LbBak
@@ -67,7 +67,7 @@
             this.LbBak.ItemHeight = 12;
             this.LbBak.Location = new System.Drawing.Point(0, 0);
             this.LbBak.Name = "LbBak";
-            this.LbBak.Size = new System.Drawing.Size(157, 268);
+            this.LbBak.Size = new System.Drawing.Size(130, 268);
             this.LbBak.TabIndex = 0;
             this.LbBak.SelectedIndexChanged += new System.EventHandler(this.LbSln_SelectedIndexChanged);
             // 
@@ -80,14 +80,14 @@
             this.TbBak.Name = "TbBak";
             this.TbBak.ReadOnly = true;
             this.TbBak.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TbBak.Size = new System.Drawing.Size(339, 268);
+            this.TbBak.Size = new System.Drawing.Size(466, 268);
             this.TbBak.TabIndex = 0;
             this.TbBak.WordWrap = false;
             // 
             // BtOk
             // 
             this.BtOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtOk.Location = new System.Drawing.Point(356, 286);
+            this.BtOk.Location = new System.Drawing.Point(456, 286);
             this.BtOk.Name = "BtOk";
             this.BtOk.Size = new System.Drawing.Size(75, 23);
             this.BtOk.TabIndex = 1;
@@ -99,7 +99,7 @@
             // 
             this.BtNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtNo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.BtNo.Location = new System.Drawing.Point(437, 286);
+            this.BtNo.Location = new System.Drawing.Point(537, 286);
             this.BtNo.Name = "BtNo";
             this.BtNo.Size = new System.Drawing.Size(75, 23);
             this.BtNo.TabIndex = 2;
@@ -113,11 +113,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.BtNo;
-            this.ClientSize = new System.Drawing.Size(524, 321);
+            this.ClientSize = new System.Drawing.Size(624, 321);
             this.Controls.Add(this.BtNo);
             this.Controls.Add(this.BtOk);
             this.Controls.Add(this.ScBak);
             this.Name = "BackupViewer";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "恢复";
             this.ScBak.Panel1.ResumeLayout(false);

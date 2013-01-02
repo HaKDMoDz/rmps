@@ -8,6 +8,7 @@ namespace Me.Amon.Hosts
     {
         private List<Solution> _Solutions;
 
+        #region 构造函数
         public SolutionEditer()
         {
             InitializeComponent();
@@ -23,6 +24,7 @@ namespace Me.Amon.Hosts
 
             this.Icon = Me.Amon.Hosts.Properties.Resources.Icon;
         }
+        #endregion
 
         public string Solution { get; private set; }
 
@@ -31,7 +33,7 @@ namespace Me.Amon.Hosts
             Solution = TbGroup.Text.Trim();
             if (string.IsNullOrEmpty(Solution))
             {
-                LlGroup.Text = "请输入一个有效的分组名称：";
+                LlGroup.Text = "请输入一个有效的方案名称：";
                 TbGroup.Focus();
                 return;
             }
@@ -41,7 +43,7 @@ namespace Me.Amon.Hosts
                 {
                     if (Solution == solution.Text)
                     {
-                        LlGroup.Text = "您输入的分组名称已存在，请重新输入：";
+                        LlGroup.Text = "您输入的方案名称已存在，请重新输入：";
                         TbGroup.Focus();
                         return;
                     }

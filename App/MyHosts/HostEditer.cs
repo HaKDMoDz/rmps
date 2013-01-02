@@ -22,14 +22,22 @@ namespace Me.Amon.Hosts
 
             this.Icon = Me.Amon.Hosts.Properties.Resources.Icon;
 
-            foreach (Group group in groups)
+            int idx = 0;
+            string key = host == null ? "" : host.Group;
+            Group group;
+            for (int i = 0; i < groups.Count; i += 1)
             {
-                CbGroup.Items.Add(group.Text);
+                group = groups[i];
+                CbGroup.Items.Add(group);
+                if (key == group.Key)
+                {
+                    idx = i;
+                }
             }
 
             if (host != null)
             {
-                CbGroup.SelectedItem = host.Group;
+                CbGroup.SelectedIndex = idx;
                 TbIp.Text = host.IP;
                 TbDomain.Text = host.Domain;
                 TbMemo.Text = host.Comment;
@@ -42,10 +50,10 @@ namespace Me.Amon.Hosts
         #region 事件处理
         private void BtOk_Click(object sender, EventArgs e)
         {
-            string group = CbGroup.SelectedItem as string;
+            var group = CbGroup.Text;
             if (string.IsNullOrWhiteSpace(group))
             {
-                MessageBox.Show("请选择分组信息！");
+                MessageBox.Show("请输入或选择分组信息！");
                 CbGroup.Focus();
                 return;
             }
@@ -58,7 +66,7 @@ namespace Me.Amon.Hosts
                 return;
             }
 
-            if (Regex.IsMatch(ip, "^\\d{1,3}(.\\d{1,3}){3}$"))
+            if (Regex.IsMatch(ip, "^\\d{1,3}([.]\\d{1,3}){3}$"))
             {
                 if (!IsIPv4(ip))
                 {
@@ -67,10 +75,12 @@ namespace Me.Amon.Hosts
                     return;
                 }
             }
-            else if (Regex.IsMatch(ip, "^[:0-9a-fA-F]+$"))
+            else if (Regex.IsMatch(ip, "^(:[0-9a-zA-Z]{0,2})+$"))
             {
                 if (!IsIPv6(ip))
                 {
+                    MessageBox.Show("请输入一个有效的IPv6地址！");
+                    TbIp.Focus();
                     return;
                 }
             }
@@ -78,10 +88,11 @@ namespace Me.Amon.Hosts
             {
                 MessageBox.Show("请输入一个有效的IP地址！");
                 TbIp.Focus();
+                return;
             }
 
             string domain = TbDomain.Text.Trim();
-            if (!Regex.IsMatch(domain, "^[-0-1a-zA-Z]+([.][-0-1a-zA-Z]+)*$"))
+            if (!Regex.IsMatch(domain, "^[0-9a-zA-Z]+([.][0-9a-zA-Z-]+)*$"))
             {
                 MessageBox.Show("请输入一个有效的域名！");
                 TbDomain.Focus();
@@ -92,7 +103,7 @@ namespace Me.Amon.Hosts
             {
                 Host = new Host();
             }
-            Host.Group = group;
+            Host.Group = group == "<默认>" ? "" : group;
             Host.IP = ip;
             Host.Domain = domain;
             Host.Comment = TbMemo.Text;
@@ -126,7 +137,7 @@ namespace Me.Amon.Hosts
 
         private bool IsIPv6(string text)
         {
-            return true;
+            return Regex.IsMatch(text, "(:[0-9a-fA-F]{0,2})+(:[0-9a-fA-F]{0,2})");
         }
     }
 }

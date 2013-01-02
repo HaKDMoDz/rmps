@@ -6,7 +6,7 @@ namespace Me.Amon.Hosts
 {
     public partial class GroupEditer : Form
     {
-        private List<ListViewGroup> _Groups;
+        private List<Group> _Groups;
 
         public GroupEditer()
         {
@@ -15,7 +15,7 @@ namespace Me.Amon.Hosts
             this.Icon = Me.Amon.Hosts.Properties.Resources.Icon;
         }
 
-        public GroupEditer(List<ListViewGroup> groups, string group)
+        public GroupEditer(List<Group> groups, string group)
         {
             _Groups = groups;
             Group = group;
@@ -42,7 +42,7 @@ namespace Me.Amon.Hosts
             {
                 foreach (var group in _Groups)
                 {
-                    if (Group == group.Header)
+                    if (Group == group.Key)
                     {
                         LlGroup.Text = "您输入的分组名称已存在，请重新输入：";
                         TbGroup.Focus();

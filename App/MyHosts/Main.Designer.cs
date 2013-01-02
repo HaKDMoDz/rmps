@@ -35,8 +35,8 @@
             this.MuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.MiSaveas = new System.Windows.Forms.ToolStripMenuItem();
             this.MiFile0 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiReload = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiOpenas = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiSaveasSln = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiCreateSln = new System.Windows.Forms.ToolStripMenuItem();
             this.MiFile1 = new System.Windows.Forms.ToolStripSeparator();
             this.MiBackup = new System.Windows.Forms.ToolStripMenuItem();
             this.MiResume = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,11 +47,12 @@
             this.MiUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.MiRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.MiEdit0 = new System.Windows.Forms.ToolStripSeparator();
-            this.MiCreateGroup = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiReload = new System.Windows.Forms.ToolStripMenuItem();
+            this.MiOpenas = new System.Windows.Forms.ToolStripMenuItem();
             this.MuData = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiSaveasSln = new System.Windows.Forms.ToolStripMenuItem();
             this.MiManageSln = new System.Windows.Forms.ToolStripMenuItem();
             this.MiData0 = new System.Windows.Forms.ToolStripSeparator();
+            this.MiSlnDef = new System.Windows.Forms.ToolStripMenuItem();
             this.MuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.MiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.MiHelp0 = new System.Windows.Forms.ToolStripSeparator();
@@ -75,7 +76,7 @@
             this.CmMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CiUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.CmGroups = new System.Windows.Forms.ToolStripMenuItem();
+            this.CuGroups = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.CiCreate = new System.Windows.Forms.ToolStripMenuItem();
             this.CiRemove = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,11 +85,11 @@
             this.TiOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.SiSep0 = new System.Windows.Forms.ToolStripSeparator();
             this.TuSln = new System.Windows.Forms.ToolStripMenuItem();
+            this.TiSlnDef = new System.Windows.Forms.ToolStripMenuItem();
             this.TiSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.TiHide = new System.Windows.Forms.ToolStripMenuItem();
             this.TiSep3 = new System.Windows.Forms.ToolStripSeparator();
             this.TiExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.MiCreateSln = new System.Windows.Forms.ToolStripMenuItem();
             this.CbMenu.SuspendLayout();
             this.TbTool.SuspendLayout();
             this.CmMenu.SuspendLayout();
@@ -119,10 +120,10 @@
             // MuFile
             // 
             this.MuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MiSaveas,
+            this.MiCreateSln,
             this.MiFile0,
-            this.MiReload,
-            this.MiOpenas,
+            this.MiSaveas,
+            this.MiSaveasSln,
             this.MiFile1,
             this.MiBackup,
             this.MiResume,
@@ -145,21 +146,19 @@
             this.MiFile0.Name = "MiFile0";
             this.MiFile0.Size = new System.Drawing.Size(161, 6);
             // 
-            // MiReload
+            // MiSaveasSln
             // 
-            this.MiReload.Name = "MiReload";
-            this.MiReload.ShortcutKeyDisplayString = "F5";
-            this.MiReload.Size = new System.Drawing.Size(164, 22);
-            this.MiReload.Text = "重新加载(&R)";
-            this.MiReload.Click += new System.EventHandler(this.MiReloadClick);
+            this.MiSaveasSln.Name = "MiSaveasSln";
+            this.MiSaveasSln.Size = new System.Drawing.Size(164, 22);
+            this.MiSaveasSln.Text = "另存为新方案(&S)";
+            this.MiSaveasSln.Click += new System.EventHandler(this.MiSaveasSlnClick);
             // 
-            // MiOpenas
+            // MiCreateSln
             // 
-            this.MiOpenas.Name = "MiOpenas";
-            this.MiOpenas.ShortcutKeyDisplayString = "F12";
-            this.MiOpenas.Size = new System.Drawing.Size(164, 22);
-            this.MiOpenas.Text = "手动编辑(&E)";
-            this.MiOpenas.Click += new System.EventHandler(this.MiOpenasClick);
+            this.MiCreateSln.Name = "MiCreateSln";
+            this.MiCreateSln.Size = new System.Drawing.Size(164, 22);
+            this.MiCreateSln.Text = "新建空白方案(&N)";
+            this.MiCreateSln.Click += new System.EventHandler(this.MiCreateSln_Click);
             // 
             // MiFile1
             // 
@@ -199,7 +198,8 @@
             this.MiUpdate,
             this.MiRemove,
             this.MiEdit0,
-            this.MiCreateGroup});
+            this.MiReload,
+            this.MiOpenas});
             this.MuEdit.Name = "MuEdit";
             this.MuEdit.Size = new System.Drawing.Size(58, 20);
             this.MuEdit.Text = "编辑(&E)";
@@ -233,42 +233,49 @@
             this.MiEdit0.Name = "MiEdit0";
             this.MiEdit0.Size = new System.Drawing.Size(167, 6);
             // 
-            // MiCreateGroup
+            // MiReload
             // 
-            this.MiCreateGroup.Name = "MiCreateGroup";
-            this.MiCreateGroup.Size = new System.Drawing.Size(170, 22);
-            this.MiCreateGroup.Text = "创建分组(&G)";
-            this.MiCreateGroup.Click += new System.EventHandler(this.MiCreateGroupClick);
+            this.MiReload.Name = "MiReload";
+            this.MiReload.ShortcutKeyDisplayString = "F5";
+            this.MiReload.Size = new System.Drawing.Size(170, 22);
+            this.MiReload.Text = "重新加载(&R)";
+            this.MiReload.Click += new System.EventHandler(this.MiReloadClick);
+            // 
+            // MiOpenas
+            // 
+            this.MiOpenas.Name = "MiOpenas";
+            this.MiOpenas.ShortcutKeyDisplayString = "F12";
+            this.MiOpenas.Size = new System.Drawing.Size(170, 22);
+            this.MiOpenas.Text = "手动编辑(&E)";
+            this.MiOpenas.Click += new System.EventHandler(this.MiOpenasClick);
             // 
             // MuData
             // 
             this.MuData.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MiSaveasSln,
-            this.MiCreateSln,
             this.MiManageSln,
-            this.MiData0});
+            this.MiData0,
+            this.MiSlnDef});
             this.MuData.Name = "MuData";
             this.MuData.Size = new System.Drawing.Size(58, 20);
             this.MuData.Text = "方案(&S)";
             // 
-            // MiSaveasSln
-            // 
-            this.MiSaveasSln.Name = "MiSaveasSln";
-            this.MiSaveasSln.Size = new System.Drawing.Size(164, 22);
-            this.MiSaveasSln.Text = "另存为新方案(&S)";
-            this.MiSaveasSln.Click += new System.EventHandler(this.MiSaveasSlnClick);
-            // 
             // MiManageSln
             // 
             this.MiManageSln.Name = "MiManageSln";
-            this.MiManageSln.Size = new System.Drawing.Size(164, 22);
+            this.MiManageSln.Size = new System.Drawing.Size(142, 22);
             this.MiManageSln.Text = "管理方案(&M)";
             this.MiManageSln.Click += new System.EventHandler(this.MiManageSlnClick);
             // 
             // MiData0
             // 
             this.MiData0.Name = "MiData0";
-            this.MiData0.Size = new System.Drawing.Size(161, 6);
+            this.MiData0.Size = new System.Drawing.Size(139, 6);
+            // 
+            // MiSlnDef
+            // 
+            this.MiSlnDef.Name = "MiSlnDef";
+            this.MiSlnDef.Size = new System.Drawing.Size(142, 22);
+            this.MiSlnDef.Text = "<默认>";
             // 
             // MuHelp
             // 
@@ -456,48 +463,48 @@
             this.CmMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CiUpdate,
             this.toolStripSeparator1,
-            this.CmGroups,
+            this.CuGroups,
             this.toolStripSeparator2,
             this.CiCreate,
             this.CiRemove});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(117, 104);
+            this.CmMenu.Size = new System.Drawing.Size(153, 126);
             this.CmMenu.Text = "右键选单";
             // 
             // CiUpdate
             // 
             this.CiUpdate.Name = "CiUpdate";
-            this.CiUpdate.Size = new System.Drawing.Size(116, 22);
+            this.CiUpdate.Size = new System.Drawing.Size(152, 22);
             this.CiUpdate.Text = "编辑(&E)";
             this.CiUpdate.Click += new System.EventHandler(this.CiUpdateClick);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(113, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
-            // CmGroups
+            // CuGroups
             // 
-            this.CmGroups.Name = "CmGroups";
-            this.CmGroups.Size = new System.Drawing.Size(116, 22);
-            this.CmGroups.Text = "分组(&G)";
+            this.CuGroups.Name = "CuGroups";
+            this.CuGroups.Size = new System.Drawing.Size(152, 22);
+            this.CuGroups.Text = "分组(&G)";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(113, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // CiCreate
             // 
             this.CiCreate.Name = "CiCreate";
-            this.CiCreate.Size = new System.Drawing.Size(116, 22);
+            this.CiCreate.Size = new System.Drawing.Size(152, 22);
             this.CiCreate.Text = "添加(&N)";
             this.CiCreate.Click += new System.EventHandler(this.CiCreateClick);
             // 
             // CiRemove
             // 
             this.CiRemove.Name = "CiRemove";
-            this.CiRemove.Size = new System.Drawing.Size(116, 22);
+            this.CiRemove.Size = new System.Drawing.Size(152, 22);
             this.CiRemove.Text = "删除(&D)";
             this.CiRemove.Click += new System.EventHandler(this.CiRemoveClick);
             // 
@@ -537,9 +544,17 @@
             // 
             // TuSln
             // 
+            this.TuSln.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TiSlnDef});
             this.TuSln.Name = "TuSln";
             this.TuSln.Size = new System.Drawing.Size(163, 22);
             this.TuSln.Text = "方案(&S)";
+            // 
+            // TiSlnDef
+            // 
+            this.TiSlnDef.Name = "TiSlnDef";
+            this.TiSlnDef.Size = new System.Drawing.Size(116, 22);
+            this.TiSlnDef.Text = "<默认>";
             // 
             // TiSep1
             // 
@@ -565,13 +580,6 @@
             this.TiExit.Text = "退出(&X)";
             this.TiExit.Click += new System.EventHandler(this.TiExitClick);
             // 
-            // MiCreateSln
-            // 
-            this.MiCreateSln.Name = "MiCreateSln";
-            this.MiCreateSln.Size = new System.Drawing.Size(164, 22);
-            this.MiCreateSln.Text = "新建空白方案(&N)";
-            this.MiCreateSln.Click += new System.EventHandler(this.MiCreateSln_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -584,6 +592,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.CbMenu;
             this.Name = "Main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MyHosts";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Main_KeyDown);
             this.CbMenu.ResumeLayout(false);
@@ -611,7 +620,7 @@
         private System.Windows.Forms.ColumnHeader ChComment;
         private System.Windows.Forms.ToolStripMenuItem CiUpdate;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem CmGroups;
+        private System.Windows.Forms.ToolStripMenuItem CuGroups;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem CiCreate;
         private System.Windows.Forms.ToolStripMenuItem CiRemove;
@@ -643,7 +652,6 @@
         private System.Windows.Forms.ToolStripMenuItem MiUpdate;
         private System.Windows.Forms.ToolStripMenuItem MiRemove;
         private System.Windows.Forms.ToolStripSeparator MiEdit0;
-        private System.Windows.Forms.ToolStripMenuItem MiCreateGroup;
         private System.Windows.Forms.ToolStripMenuItem MiSaveasSln;
         private System.Windows.Forms.ToolStripMenuItem MiManageSln;
         private System.Windows.Forms.ToolStripSeparator MiData0;
@@ -658,6 +666,8 @@
         private System.Windows.Forms.ToolStripMenuItem TiHide;
         private System.Windows.Forms.ToolStripSeparator TiSep3;
         private System.Windows.Forms.ToolStripMenuItem MiCreateSln;
+        private System.Windows.Forms.ToolStripMenuItem MiSlnDef;
+        private System.Windows.Forms.ToolStripMenuItem TiSlnDef;
     }
 }
 

@@ -17,3 +17,11 @@
 # localhost name resolution is handled within DNS itself.
 #	127.0.0.1       localhost
 #	::1             localhost
+
+127.0.0.1		localhost
+
+# --------------------123--------------------
+# 1.1.1.1		abc.me	Demo
+
+# --------------------abc--------------------
+# ::1		a.b	

@@ -118,6 +118,7 @@
             this.Controls.Add(this.BtOk);
             this.Controls.Add(this.ScSln);
             this.Name = "SolutionViewer";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "方案";
             this.ScSln.Panel1.ResumeLayout(false);

@@ -36,10 +36,10 @@
             this.TbDomain = new System.Windows.Forms.TextBox();
             this.LlMemo = new System.Windows.Forms.Label();
             this.TbMemo = new System.Windows.Forms.TextBox();
-            this.BtOk = new System.Windows.Forms.Button();
-            this.BtNo = new System.Windows.Forms.Button();
             this.LlEnabled = new System.Windows.Forms.Label();
             this.CbEnabled = new System.Windows.Forms.CheckBox();
+            this.BtOk = new System.Windows.Forms.Button();
+            this.BtNo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LlGroup
@@ -53,7 +53,6 @@
             // 
             // CbGroup
             // 
-            this.CbGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CbGroup.FormattingEnabled = true;
             this.CbGroup.Location = new System.Drawing.Point(65, 12);
             this.CbGroup.Name = "CbGroup";
@@ -108,13 +107,32 @@
             this.TbMemo.Size = new System.Drawing.Size(176, 21);
             this.TbMemo.TabIndex = 7;
             // 
+            // LlEnabled
+            // 
+            this.LlEnabled.AutoSize = true;
+            this.LlEnabled.Location = new System.Drawing.Point(12, 120);
+            this.LlEnabled.Name = "LlEnabled";
+            this.LlEnabled.Size = new System.Drawing.Size(47, 12);
+            this.LlEnabled.TabIndex = 8;
+            this.LlEnabled.Text = "状态(&S)";
+            // 
+            // CbEnabled
+            // 
+            this.CbEnabled.AutoSize = true;
+            this.CbEnabled.Location = new System.Drawing.Point(65, 119);
+            this.CbEnabled.Name = "CbEnabled";
+            this.CbEnabled.Size = new System.Drawing.Size(66, 16);
+            this.CbEnabled.TabIndex = 9;
+            this.CbEnabled.Text = "启用(&E)";
+            this.CbEnabled.UseVisualStyleBackColor = true;
+            // 
             // BtOk
             // 
             this.BtOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtOk.Location = new System.Drawing.Point(86, 141);
             this.BtOk.Name = "BtOk";
             this.BtOk.Size = new System.Drawing.Size(75, 23);
-            this.BtOk.TabIndex = 8;
+            this.BtOk.TabIndex = 10;
             this.BtOk.Text = "确定(&O)";
             this.BtOk.UseVisualStyleBackColor = true;
             this.BtOk.Click += new System.EventHandler(this.BtOk_Click);
@@ -126,29 +144,10 @@
             this.BtNo.Location = new System.Drawing.Point(167, 141);
             this.BtNo.Name = "BtNo";
             this.BtNo.Size = new System.Drawing.Size(75, 23);
-            this.BtNo.TabIndex = 9;
+            this.BtNo.TabIndex = 11;
             this.BtNo.Text = "取消(&C)";
             this.BtNo.UseVisualStyleBackColor = true;
             this.BtNo.Click += new System.EventHandler(this.BtNo_Click);
-            // 
-            // LlEnabled
-            // 
-            this.LlEnabled.AutoSize = true;
-            this.LlEnabled.Location = new System.Drawing.Point(12, 120);
-            this.LlEnabled.Name = "LlEnabled";
-            this.LlEnabled.Size = new System.Drawing.Size(47, 12);
-            this.LlEnabled.TabIndex = 10;
-            this.LlEnabled.Text = "状态(&S)";
-            // 
-            // CbEnabled
-            // 
-            this.CbEnabled.AutoSize = true;
-            this.CbEnabled.Location = new System.Drawing.Point(65, 119);
-            this.CbEnabled.Name = "CbEnabled";
-            this.CbEnabled.Size = new System.Drawing.Size(66, 16);
-            this.CbEnabled.TabIndex = 11;
-            this.CbEnabled.Text = "启用(&E)";
-            this.CbEnabled.UseVisualStyleBackColor = true;
             // 
             // HostEditer
             // 
@@ -157,10 +156,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.BtNo;
             this.ClientSize = new System.Drawing.Size(254, 176);
-            this.Controls.Add(this.CbEnabled);
-            this.Controls.Add(this.LlEnabled);
             this.Controls.Add(this.BtNo);
             this.Controls.Add(this.BtOk);
+            this.Controls.Add(this.CbEnabled);
+            this.Controls.Add(this.LlEnabled);
             this.Controls.Add(this.TbMemo);
             this.Controls.Add(this.LlMemo);
             this.Controls.Add(this.TbDomain);
@@ -173,6 +172,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "HostEditer";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "主机";
             this.ResumeLayout(false);
@@ -185,14 +185,14 @@
         private System.Windows.Forms.Label LlGroup;
         private System.Windows.Forms.ComboBox CbGroup;
         private System.Windows.Forms.Label LlIp;
+        private System.Windows.Forms.TextBox TbIp;
         private System.Windows.Forms.Label LlDomain;
         private System.Windows.Forms.TextBox TbDomain;
         private System.Windows.Forms.Label LlMemo;
         private System.Windows.Forms.TextBox TbMemo;
-        private System.Windows.Forms.Button BtOk;
-        private System.Windows.Forms.Button BtNo;
-        private System.Windows.Forms.TextBox TbIp;
         private System.Windows.Forms.Label LlEnabled;
         private System.Windows.Forms.CheckBox CbEnabled;
+        private System.Windows.Forms.Button BtOk;
+        private System.Windows.Forms.Button BtNo;
     }
 }
