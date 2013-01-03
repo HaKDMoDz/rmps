@@ -17,7 +17,7 @@ namespace Me.Amon.User.Uc
     public partial class SignPc : UserControl, ISignAc
     {
         private AUserModel _UserModel;
-        private DataModel _DataModel;
+        private ADataModel _DataModel;
         private DFEngine _Prop;
         private SignAc _SignAc;
 
@@ -206,6 +206,8 @@ namespace Me.Amon.User.Uc
         {
             _UserModel.Load();
             BeanUtil.UnZip(CApp.FILE_DAT, _UserModel.DatHome);
+            _DataModel = new ADataModel(_UserModel);
+            _DataModel.Init();
 
             string file;
             StreamReader stream;
@@ -299,6 +301,7 @@ namespace Me.Amon.User.Uc
             }
             #endregion
 
+            _DataModel.Dispose();
             _SignAc.CallBack(CApp.IAPP_WPWD);
         }
         #endregion

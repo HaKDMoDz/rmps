@@ -533,6 +533,8 @@ namespace Me.Amon.Api.User32
         /// <summary>
         /// 该函数改变指定窗口的属性
         /// </summary>
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
         [DllImport("user32.dll")]
         public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 

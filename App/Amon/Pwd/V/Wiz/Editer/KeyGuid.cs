@@ -138,12 +138,12 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
 
             if (gtd.Status == Gtd.CGtd.STATUS_EXPIRED)
             {
-                _AWiz.ShowHint(string.Format("您有一个过期提醒：{0}{0}　　{1}{0}{0}{2}", Environment.NewLine, gtd.Title, gtd.NextTime.ToString(CApp.DATEIME_FORMAT)));
+                ShowHint(string.Format("您有一个过期提醒：{0}{0}　　{1}{0}{0}{2}", Environment.NewLine, gtd.Title, gtd.NextTime.ToString(CApp.DATEIME_FORMAT)));
                 return;
             }
             if (gtd.Status == Gtd.CGtd.STATUS_ONTIME)
             {
-                _AWiz.ShowHint(string.Format("您有一个待办提醒：{0}{0}　　{1}{0}{0}{2}", Environment.NewLine, gtd.Title, gtd.NextTime.ToString(CApp.DATEIME_FORMAT)));
+                ShowHint(string.Format("您有一个待办提醒：{0}{0}　　{1}{0}{0}{2}", Environment.NewLine, gtd.Title, gtd.NextTime.ToString(CApp.DATEIME_FORMAT)));
                 return;
             }
         }
@@ -156,6 +156,12 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
         {
         }
         #endregion
+
+        public void ShowHint(string hints)
+        {
+            UcHint.Visible = true;
+            UcHint.Text = hints;
+        }
 
         #region 事件处理
         private void PbFill_Click(object sender, EventArgs e)
@@ -270,6 +276,22 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
 
         public void ClearData()
         {
+        }
+
+        private void Hint_Click(object sender, EventArgs e)
+        {
+            Gtd.M.MGtd gtd = _SafeModel.Key.Gtd;
+            if (gtd != null)
+            {
+                DateTime now = DateTime.Now;
+                gtd.LastTime = now;
+                if (gtd.Next(now, 0))
+                {
+                    _DataModel.SaveVcs(gtd);
+                    _DataModel.ReloadGtds();
+                }
+            }
+            UcHint.Visible = false;
         }
     }
 }

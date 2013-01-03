@@ -114,7 +114,9 @@
     <Compile Include="Api\Enums\StockObjects.cs" />
     <Compile Include="Api\Enums\SystemMetrics.cs" />
     <Compile Include="Api\Enums\VirtualKey.cs" />
+    <Compile Include="Api\Enums\WindowLongFlags.cs" />
     <Compile Include="Api\Enums\WindowMessage.cs" />
+    <Compile Include="Api\Enums\WindowStyles.cs" />
     <Compile Include="Api\Enums\WMHotKeys.cs" />
     <Compile Include="Api\Enums\XButton.cs" />
     <Compile Include="Api\Gdi32\Gdi32.cs" />

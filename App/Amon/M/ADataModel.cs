@@ -3,17 +3,33 @@ using System.Collections.Generic;
 using System.Threading;
 using Me.Amon.C;
 using Me.Amon.Da;
+using Me.Amon.Da.Db;
 using Me.Amon.Gtd;
 using Me.Amon.Gtd.M;
 using Me.Amon.Util;
 
 namespace Me.Amon.M
 {
-    public abstract class ADataModel
+    public class ADataModel
     {
         protected AUserModel _UserModel;
         protected DBA _DbEngine;
         private bool IsStartup;
+
+        public ADataModel()
+        {
+        }
+
+        public ADataModel(AUserModel userModel)
+        {
+            _UserModel = userModel;
+        }
+
+        public void Init()
+        {
+            _DbEngine = new ODBEngine();
+            _DbEngine.DbInit(_UserModel);
+        }
 
         #region 数据更新
         public void SaveVcs(Vcs vcs)
@@ -81,6 +97,11 @@ namespace Me.Amon.M
         {
             _DbEngine.Resume();
             Monitor.Exit(_SyncObj);
+        }
+
+        public void Dispose()
+        {
+            _DbEngine.CloseConnect();
         }
         #endregion
 

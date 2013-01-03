@@ -53,7 +53,6 @@ namespace Me.Amon.Pwd.V.Wiz
 
         public void ShowHint(string hints)
         {
-            _WPwd.ShowHint(hints);
         }
 
         #region 接口实现

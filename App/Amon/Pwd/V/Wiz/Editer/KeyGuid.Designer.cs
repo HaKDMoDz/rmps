@@ -38,6 +38,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.CcAll = new System.Windows.Forms.ToolStripMenuItem();
             this.PbFill = new System.Windows.Forms.PictureBox();
+            this.UcHint = new Me.Amon.Uc.GtdHint();
             ((System.ComponentModel.ISupportInitialize)(this.PbCard)).BeginInit();
             this.CmCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbFill)).BeginInit();
@@ -72,35 +73,35 @@
             this.toolStripSeparator1,
             this.CcAll});
             this.CmCard.Name = "CmCard";
-            this.CmCard.Size = new System.Drawing.Size(143, 98);
+            this.CmCard.Size = new System.Drawing.Size(141, 98);
             // 
             // CcHtm
             // 
             this.CcHtm.Name = "CcHtm";
-            this.CcHtm.Size = new System.Drawing.Size(142, 22);
+            this.CcHtm.Size = new System.Drawing.Size(140, 22);
             this.CcHtm.Text = "网页格式(&H)";
             // 
             // CcTxt
             // 
             this.CcTxt.Name = "CcTxt";
-            this.CcTxt.Size = new System.Drawing.Size(142, 22);
+            this.CcTxt.Size = new System.Drawing.Size(140, 22);
             this.CcTxt.Text = "文本格式(&T)";
             // 
             // CcImg
             // 
             this.CcImg.Name = "CcImg";
-            this.CcImg.Size = new System.Drawing.Size(142, 22);
+            this.CcImg.Size = new System.Drawing.Size(140, 22);
             this.CcImg.Text = "图像格式(&I)";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(139, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(137, 6);
             // 
             // CcAll
             // 
             this.CcAll.Name = "CcAll";
-            this.CcAll.Size = new System.Drawing.Size(142, 22);
+            this.CcAll.Size = new System.Drawing.Size(140, 22);
             this.CcAll.Text = "其它格式(&O)";
             // 
             // PbFill
@@ -114,14 +115,25 @@
             this.PbFill.TabStop = false;
             this.PbFill.Click += new System.EventHandler(this.PbFill_Click);
             // 
-            // BeanGuid
+            // UcHint
+            // 
+            this.UcHint.BackColor = System.Drawing.Color.Transparent;
+            this.UcHint.Handler = new System.EventHandler(Hint_Click);
+            this.UcHint.Location = new System.Drawing.Point(31, 60);
+            this.UcHint.Name = "UcHint";
+            this.UcHint.Size = new System.Drawing.Size(300, 300);
+            this.UcHint.TabIndex = 7;
+            this.UcHint.Visible = false;
+            // 
+            // KeyGuid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.UcHint);
             this.Controls.Add(this.PbFill);
             this.Controls.Add(this.PbCard);
             this.Controls.Add(this.LbLib);
-            this.Name = "BeanGuid";
+            this.Name = "KeyGuid";
             this.Size = new System.Drawing.Size(350, 250);
             ((System.ComponentModel.ISupportInitialize)(this.PbCard)).EndInit();
             this.CmCard.ResumeLayout(false);
@@ -142,5 +154,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem CcAll;
         private System.Windows.Forms.PictureBox PbFill;
+        private Uc.GtdHint UcHint;
     }
 }

@@ -39,7 +39,6 @@
             this.TlLayout2 = new System.Windows.Forms.ToolStripButton();
             this.MbMenu = new System.Windows.Forms.MenuStrip();
             this.TcMain = new System.Windows.Forms.ToolStripContainer();
-            this.UcHint = new Me.Amon.Uc.GtdHint();
             this.ScMain = new System.Windows.Forms.SplitContainer();
             this.ScGuid = new System.Windows.Forms.SplitContainer();
             this.ScData = new System.Windows.Forms.SplitContainer();
@@ -145,7 +144,6 @@
             // 
             // TcMain.ContentPanel
             // 
-            this.TcMain.ContentPanel.Controls.Add(this.UcHint);
             this.TcMain.ContentPanel.Controls.Add(this.ScMain);
             this.TcMain.ContentPanel.Size = new System.Drawing.Size(584, 370);
             this.TcMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -158,17 +156,6 @@
             // TcMain.TopToolStripPanel
             // 
             this.TcMain.TopToolStripPanel.Controls.Add(this.TbTool);
-            // 
-            // UcHint
-            // 
-            this.UcHint.BackColor = System.Drawing.Color.Transparent;
-            this.UcHint.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.UcHint.Handler = new System.EventHandler(Hint_Click);
-            this.UcHint.Location = new System.Drawing.Point(0, 0);
-            this.UcHint.Name = "UcHint";
-            this.UcHint.Size = new System.Drawing.Size(584, 370);
-            this.UcHint.TabIndex = 0;
-            this.UcHint.Visible = false;
             // 
             // ScMain
             // 
@@ -279,7 +266,6 @@
         private System.Windows.Forms.MenuStrip MbMenu;
         private System.Windows.Forms.ToolStripContainer TcMain;
         private System.Windows.Forms.ToolStrip TbTool;
-        private Me.Amon.Uc.GtdHint UcHint;
         private System.Windows.Forms.SplitContainer ScMain;
         private System.Windows.Forms.SplitContainer ScGuid;
         private Me.Amon.Pwd.V.FindBar UcFind;

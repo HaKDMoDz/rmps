@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Me.Amon.Pwd.M;
 
 namespace Me.Amon.Pwd.V
 {
@@ -11,11 +12,15 @@ namespace Me.Amon.Pwd.V
 
         IAttView AttView { get; set; }
 
+        Key SelectedKey { get; set; }
+
         void ListKeys(string catId);
 
         void FindKeys(string meta);
 
         void RemoveSelected();
+
+        void UpdateSelected(Key key);
 
         void ListKeysWithGtd(int status);
 

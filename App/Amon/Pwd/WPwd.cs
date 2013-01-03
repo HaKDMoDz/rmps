@@ -154,14 +154,6 @@ namespace Me.Amon.Pwd
             get { return this; }
         }
 
-        public void ShowHint(string hints)
-        {
-            ScMain.Enabled = false;
-
-            UcHint.Visible = true;
-            UcHint.Text = hints;
-        }
-
         public void ShowTips(Control control, string caption)
         {
             TpTips.SetToolTip(control, caption);
@@ -305,23 +297,6 @@ namespace Me.Amon.Pwd
             {
                 _EchoDelay -= 1;
             }
-        }
-
-        private void Hint_Click(object sender, EventArgs e)
-        {
-            Gtd.M.MGtd gtd = _SafeModel.Key.Gtd;
-            if (gtd != null)
-            {
-                DateTime now = DateTime.Now;
-                gtd.LastTime = now;
-                if (gtd.Next(now, 0))
-                {
-                    _DataModel.SaveVcs(gtd);
-                    _DataModel.ReloadGtds();
-                }
-            }
-            UcHint.Visible = false;
-            ScMain.Enabled = true;
         }
 
         private void BgWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -772,6 +747,7 @@ namespace Me.Amon.Pwd
 
             if (_SafeModel.IsUpdate)
             {
+                _KeyList.UpdateSelected(_SafeModel.Key);
                 //Key key = LbKeyList.SelectedItem as Key;
                 //if (key != null && _SafeModel.Key == key)
                 //{
@@ -785,6 +761,7 @@ namespace Me.Amon.Pwd
             }
 
             _SafeModel.Key = null;
+            _KeyList.SelectedKey = null;
         }
 
         /// <summary>

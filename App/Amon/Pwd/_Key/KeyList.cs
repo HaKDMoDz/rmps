@@ -70,6 +70,13 @@ namespace Me.Amon.Pwd._Key
             SelectedKey = null;
         }
 
+        public void UpdateSelected(Key key)
+        {
+            LbKey.Items[LbKey.SelectedIndex] = key;
+            //SelectedKey = key;
+            this.UpdateBounds();
+        }
+
         public void ListGtdExpired()
         {
             IList<Gtd.M.MGtd> gtds = _DataModel.FindGtdExpired();
