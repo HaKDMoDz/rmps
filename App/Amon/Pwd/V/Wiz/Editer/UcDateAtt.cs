@@ -46,8 +46,10 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             BtOpt.Image = viewModel.GetImage("att-date-options");
             _Body.ShowTips(BtOpt, "选项");
 
-            BtFill.Image = viewModel.GetImage("att-copy");
-            _Body.ShowTips(BtFill, "复制");
+            //BtFill.Image = viewModel.GetImage("att-copy");
+            //_Body.ShowTips(BtFill, "复制");
+            BtFill.Image = viewModel.GetImage("script-fill-16");
+            _Body.ShowTips(BtFill, "填充");
 
             InitSpec(DtData);
         }
@@ -150,7 +152,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
 
         private void BtFill_Click(object sender, EventArgs e)
         {
-            SafeUtil.Copy(DtData.Text);
+            _Body.FillData(DtData.Text);
             DtData.Focus();
         }
         #endregion

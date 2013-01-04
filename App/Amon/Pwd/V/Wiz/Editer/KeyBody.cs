@@ -213,6 +213,11 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
         {
             _AWiz.ShowTips(control, caption);
         }
+
+        public void FillData(string data)
+        {
+            _AWiz.FillData(data);
+        }
         #endregion
 
         private Dictionary<int, int> _IdxList = new Dictionary<int, int>();

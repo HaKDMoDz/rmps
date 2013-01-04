@@ -45,6 +45,9 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             BtOpt.Image = viewModel.GetImage("att-line-options");
             _Body.ShowTips(BtOpt, "选项");
 
+            //BtFill.Image = viewModel.GetImage("script-fill-16");
+            //_Body.ShowTips(BtFill, "填充");
+
             InitSpec(TbData);
         }
         #endregion
@@ -129,7 +132,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
 
         private void BtFill_Click(object sender, EventArgs e)
         {
-            SafeUtil.Copy(TbData.Text);
+            _Body.FillData(TbData.Text);
             TbData.Focus();
         }
         #endregion

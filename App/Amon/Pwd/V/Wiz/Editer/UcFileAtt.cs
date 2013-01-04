@@ -45,8 +45,10 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             BtOpen.Image = viewModel.GetImage("att-file-append");
             _Body.ShowTips(BtOpen, "添加文件");
 
-            BtFill.Image = viewModel.GetImage("att-copy");
-            _Body.ShowTips(BtFill, "复制");
+            //BtFill.Image = viewModel.GetImage("att-copy");
+            //_Body.ShowTips(BtFill, "复制");
+            BtCopy.Image = viewModel.GetImage("script-fill-16");
+            _Body.ShowTips(BtCopy, "填充");
 
             InitSpec(TbData);
         }

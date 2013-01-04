@@ -40,8 +40,10 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
 
             TbData.GotFocus += new EventHandler(TbData_GotFocus);
 
-            BtFill.Image = viewModel.GetImage("att-copy");
-            _Body.ShowTips(BtFill, "复制");
+            //BtFill.Image = viewModel.GetImage("att-copy");
+            //_Body.ShowTips(BtFill, "复制");
+            BtFill.Image = viewModel.GetImage("script-fill-16");
+            _Body.ShowTips(BtFill, "填充");
 
             InitSpec(TbData);
         }
@@ -121,7 +123,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
 
         private void BtFill_Click(object sender, EventArgs e)
         {
-            SafeUtil.Copy(TbData.Text);
+            _Body.FillData(TbData.Text);
             TbData.Focus();
         }
         #endregion

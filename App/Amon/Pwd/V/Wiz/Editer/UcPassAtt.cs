@@ -49,8 +49,10 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             BtGen.Image = viewModel.GetImage("att-pass-gen");
             _Body.ShowTips(BtGen, "生成随机口令");
 
-            BtFill.Image = viewModel.GetImage("att-copy");
-            _Body.ShowTips(BtFill, "复制");
+            //BtFill.Image = viewModel.GetImage("att-copy");
+            //_Body.ShowTips(BtFill, "复制");
+            BtFill.Image = viewModel.GetImage("script-fill-16");
+            _Body.ShowTips(BtFill, "填充");
         }
         #endregion
 
@@ -175,7 +177,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
 
         private void BtFill_Click(object sender, EventArgs e)
         {
-            SafeUtil.Copy(TbData.Text, 60);
+            _Body.FillData(TbData.Text);
             TbData.Focus();
         }
         #endregion
