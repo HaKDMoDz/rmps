@@ -49,6 +49,7 @@
             this.TvCat.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvCat_AfterSelect);
             this.TvCat.DragDrop += new System.Windows.Forms.DragEventHandler(this.TvCat_DragDrop);
             this.TvCat.DragOver += new System.Windows.Forms.DragEventHandler(this.TvCat_DragOver);
+            this.TvCat.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TvCat_MouseUp);
             // 
             // IlCat
             // 

@@ -18,6 +18,9 @@ namespace Me.Amon.Pwd._Key
         private WPwd _WPwd;
         private DataModel _DataModel;
         private ViewModel _ViewModel;
+        private bool _IsSearch;
+        private string _LastHash;
+        private string _LastMeta;
         #endregion
 
         #region 构造函数
@@ -49,6 +52,9 @@ namespace Me.Amon.Pwd._Key
         public void ListKeys(string catId)
         {
             DoInitKey(_DataModel.ListKey(catId));
+
+            _IsSearch = false;
+            _LastHash = catId;
         }
 
         public void FindKeys(string meta)
@@ -62,6 +68,22 @@ namespace Me.Amon.Pwd._Key
 
             DoInitKey(_DataModel.FindKey(meta));
             //TvCatTree.SelectedNode = null;
+
+            _IsSearch = true;
+            _LastMeta = meta;
+        }
+
+        public void LastKeys()
+        {
+            if (_IsSearch)
+            {
+                FindKeys(_LastMeta);
+            }
+            else
+            {
+                ListKeys(_LastHash);
+            }
+            LbKey.SelectedItem = SelectedKey;
         }
 
         public void RemoveSelected()

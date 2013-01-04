@@ -43,9 +43,6 @@ namespace Me.Amon.Pwd
         private SafeModel _SafeModel;
         private DataModel _DataModel;
         private ViewModel _ViewModel;
-        private string _LastHash;
-        private string _LastMeta;
-        private bool _IsSearch;
         private IPwd _PwdView;
         private WPro _ProView;
         private WWiz _WizView;
@@ -745,20 +742,7 @@ namespace Me.Amon.Pwd
 
             ShowInfo();
 
-            if (_SafeModel.IsUpdate)
-            {
-                _KeyList.UpdateSelected(_SafeModel.Key);
-                //Key key = LbKeyList.SelectedItem as Key;
-                //if (key != null && _SafeModel.Key == key)
-                //{
-                //    LbKeyList.Items[LbKeyList.SelectedIndex] = _SafeModel.Key;
-                //}
-                //LbKeyList.Refresh();
-            }
-            else
-            {
-                LastOpt();
-            }
+            _KeyList.LastKeys();
 
             _SafeModel.Key = null;
             _KeyList.SelectedKey = null;
@@ -808,30 +792,12 @@ namespace Me.Amon.Pwd
                 catId = CPwd.DEF_CAT_ID;
             }
 
-            DoListKey(catId);
-
-            _IsSearch = false;
-            _LastHash = catId;
+            _KeyList.ListKeys(catId);
         }
 
         public void FindKey(string meta)
         {
             _KeyList.FindKeys(meta);
-
-            _IsSearch = true;
-            _LastMeta = meta;
-        }
-
-        public void LastOpt()
-        {
-            if (_IsSearch)
-            {
-                _KeyList.FindKeys(_LastMeta);
-            }
-            else
-            {
-                _KeyList.ListKeys(_LastHash);
-            }
         }
 
         /// <summary>
@@ -1549,7 +1515,7 @@ namespace Me.Amon.Pwd
                 reader.Close();
             }
 
-            DoListKey(cat.Id);
+            _KeyList.ListKeys(cat.Id);
             _SafeModel.Key = null;
 
             Main.ShowAlert(string.Format("数据导入结果：{0}成功，{1}失败！", suc, err));
@@ -1620,7 +1586,7 @@ namespace Me.Amon.Pwd
             reader.Close();
             stream.Close();
 
-            DoListKey(cat.Id);
+            _KeyList.ListKeys(cat.Id);
             _SafeModel.Key = null;
 
             Main.ShowAlert(string.Format("数据导入结果：{0}成功，{1}失败！", suc, err));
@@ -1840,7 +1806,7 @@ namespace Me.Amon.Pwd
             }
 
             DoImportKey();
-            DoListKey(cat.Id);
+            _KeyList.ListKeys(cat.Id);
             _SafeModel.Key = null;
         }
 
@@ -1896,7 +1862,7 @@ namespace Me.Amon.Pwd
                 reader.Close();
             }
 
-            DoListKey(cat.Id);
+            _KeyList.ListKeys(cat.Id);
             _SafeModel.Key = null;
 
             Main.ShowAlert(string.Format("数据导入结果：{0}成功，{1}失败！", suc, err));
@@ -2000,10 +1966,6 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 私有函数
-        private void DoListKey(string catId)
-        {
-        }
-
         private void DoImportKey()
         {
             if (_SafeModel.Count < Att.HEAD_SIZE)

@@ -18,6 +18,8 @@ namespace Me.Amon.Pwd.V
 
         void FindKeys(string meta);
 
+        void LastKeys();
+
         void RemoveSelected();
 
         void UpdateSelected(Key key);

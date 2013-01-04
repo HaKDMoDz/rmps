@@ -213,8 +213,30 @@ namespace Me.Amon.User.Uc
             StreamReader stream;
             XmlReaderSettings setting = new XmlReaderSettings { IgnoreWhitespace = true };
 
+            #region 字符
+            file = Path.Combine(_UserModel.DatHome, "App-Udc.xml");
+            if (File.Exists(file))
+            {
+                stream = new StreamReader(file);
+                using (XmlReader reader = XmlReader.Create(stream, setting))
+                {
+                    Udc udc;
+                    while (reader.Name == "Udc" || reader.ReadToFollowing("Udc"))
+                    {
+                        udc = new Udc();
+                        if (!udc.FromXml(reader))
+                        {
+                            continue;
+                        }
+                        _DataModel.SaveVcs(udc);
+                    }
+                }
+                stream.Close();
+            }
+            #endregion
+
             #region 类别
-            file = Path.Combine(_UserModel.DatHome, "WPwd-Cat.xml");
+            file = Path.Combine(_UserModel.DatHome, "App-Cat.xml");
             if (File.Exists(file))
             {
                 stream = new StreamReader(file);
@@ -251,28 +273,6 @@ namespace Me.Amon.User.Uc
                             continue;
                         }
                         _DataModel.SaveVcs(header);
-                    }
-                }
-                stream.Close();
-            }
-            #endregion
-
-            #region 字符
-            file = Path.Combine(_UserModel.DatHome, "WPwd-Udc.xml");
-            if (File.Exists(file))
-            {
-                stream = new StreamReader(file);
-                using (XmlReader reader = XmlReader.Create(stream, setting))
-                {
-                    Udc udc;
-                    while (reader.Name == "Udc" || reader.ReadToFollowing("Udc"))
-                    {
-                        udc = new Udc();
-                        if (!udc.FromXml(reader))
-                        {
-                            continue;
-                        }
-                        _DataModel.SaveVcs(udc);
                     }
                 }
                 stream.Close();

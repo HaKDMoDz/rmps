@@ -703,5 +703,20 @@ namespace Me.Amon.Pwd._Cat
                 }
             }
         }
+
+        private void TvCat_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button != System.Windows.Forms.MouseButtons.Right)
+            {
+                return;
+            }
+            var node = TvCat.GetNodeAt(e.Location);
+            if (node == null)
+            {
+                return;
+            }
+            TvCat.SelectedNode = node;
+            PopupMenu.Show(this, e.Location);
+        }
     }
 }

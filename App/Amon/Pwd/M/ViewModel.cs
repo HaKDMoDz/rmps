@@ -278,10 +278,10 @@ namespace Me.Amon.Pwd.M
             }
             set
             {
-                _KeyListHeight = value < 0 ? 60 : value;
+                _KeyListHeight = value < 0 ? 80 : value;
             }
         }
-        private int _KeyListHeight = 60;
+        private int _KeyListHeight = 80;
         public int KeyListWidth
         {
             get
