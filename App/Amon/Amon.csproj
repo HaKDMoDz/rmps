@@ -101,6 +101,7 @@
   <ItemGroup>
     <Compile Include="Api\Delegates\EnumWindowsProc.cs" />
     <Compile Include="Api\Delegates\HookProc.cs" />
+    <Compile Include="Api\Delegates\WndProcDelegate.cs" />
     <Compile Include="Api\Enums\FileAttributes.cs" />
     <Compile Include="Api\Enums\FileInfoFlags.cs" />
     <Compile Include="Api\Enums\GetWindow.cs" />

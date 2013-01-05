@@ -37,7 +37,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
 
             TbName.GotFocus += new EventHandler(TbName_GotFocus);
             TbMeta.GotFocus += new EventHandler(TbMeta_GotFocus);
-            TbAuto.GotFocus += new EventHandler(TbMemo_GotFocus);
+            TbMemo.GotFocus += new EventHandler(TbMemo_GotFocus);
         }
         #endregion
 
@@ -108,11 +108,8 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             TbHint.Text = hint.Text;
             PbHint.Image = hint.Icon;
 
-            AutoAtt auto = _SafeModel.Auto;
-            if (auto != null)
-            {
-                TbAuto.Text = auto.Data;
-            }
+            TbMemo.Text = _SafeModel.Key.Memo;
+
             Focus();
         }
 
@@ -165,12 +162,14 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             _SafeModel.Modified |= meta.Modified;
 
             AutoAtt auto = _SafeModel.Auto;
-            if (auto.Data != TbAuto.Text)
+            auto.Text = "";
+            auto.Data = lib.Script;
+
+            if (_SafeModel.Key.Memo != TbMemo.Text)
             {
-                auto.Data = TbAuto.Text;
-                auto.Modified = true;
+                _SafeModel.Key.Memo = TbMemo.Text;
+                _SafeModel.Modified = true;
             }
-            _SafeModel.Modified |= auto.Modified;
 
             return true;
         }
@@ -250,7 +249,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
 
         private void TbMemo_GotFocus(object sender, EventArgs e)
         {
-            _TBox = TbAuto;
+            _TBox = TbMemo;
         }
         #endregion
 

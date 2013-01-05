@@ -530,6 +530,7 @@ namespace Me.Amon.Pwd.V.Pro
             {
                 GbGroup.Controls.Remove(_CmpLast.Control);
             }
+            BtFill.Visible = att.Type < Att.TYPE_GUID;
 
             _CmpLast = GetCtl(att.Type);
             GbGroup.Text = _CmpLast.Title;

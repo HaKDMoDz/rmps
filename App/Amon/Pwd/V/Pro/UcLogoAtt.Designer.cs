@@ -43,7 +43,7 @@
             this.TbData.Location = new System.Drawing.Point(56, 30);
             this.TbData.Multiline = true;
             this.TbData.Name = "TbData";
-            this.TbData.Size = new System.Drawing.Size(309, 50);
+            this.TbData.Size = new System.Drawing.Size(309, 48);
             this.TbData.TabIndex = 3;
             // 
             // LbData
@@ -76,7 +76,7 @@
             this.LbText.TabIndex = 0;
             this.LbText.Text = "徽标(&N)";
             // 
-            // BeanLogo
+            // UcLogoAtt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -84,7 +84,7 @@
             this.Controls.Add(this.LbData);
             this.Controls.Add(this.PbLogo);
             this.Controls.Add(this.LbText);
-            this.Name = "BeanLogo";
+            this.Name = "UcLogoAtt";
             this.Size = new System.Drawing.Size(366, 81);
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).EndInit();
             this.ResumeLayout(false);

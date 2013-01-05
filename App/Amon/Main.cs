@@ -110,11 +110,12 @@ namespace Me.Amon
         private static StreamWriter _Writer;
         public static void LogInfo(string msg)
         {
-            if (_Writer != null)
-            {
-                _Writer.WriteLine(msg);
-                _Writer.Flush();
-            }
+            //if (_Writer != null)
+            //{
+            //    _Writer.WriteLine(msg);
+            //    _Writer.Flush();
+            //}
+            System.Diagnostics.Debug.WriteLine(msg);
         }
         #endregion
 

@@ -39,8 +39,8 @@
             this.LbHint = new System.Windows.Forms.Label();
             this.PbHint = new System.Windows.Forms.PictureBox();
             this.TbHint = new System.Windows.Forms.Label();
-            this.LbAuto = new System.Windows.Forms.Label();
-            this.TbAuto = new System.Windows.Forms.TextBox();
+            this.LbMemo = new System.Windows.Forms.Label();
+            this.TbMemo = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbHint)).BeginInit();
             this.SuspendLayout();
@@ -150,33 +150,33 @@
             this.TbHint.Size = new System.Drawing.Size(0, 12);
             this.TbHint.TabIndex = 10;
             // 
-            // LbAuto
+            // LbMemo
             // 
-            this.LbAuto.AutoSize = true;
-            this.LbAuto.Location = new System.Drawing.Point(10, 167);
-            this.LbAuto.Name = "LbAuto";
-            this.LbAuto.Size = new System.Drawing.Size(47, 12);
-            this.LbAuto.TabIndex = 11;
-            this.LbAuto.Text = "填充(&R)";
+            this.LbMemo.AutoSize = true;
+            this.LbMemo.Location = new System.Drawing.Point(10, 167);
+            this.LbMemo.Name = "LbMemo";
+            this.LbMemo.Size = new System.Drawing.Size(47, 12);
+            this.LbMemo.TabIndex = 11;
+            this.LbMemo.Text = "填充(&R)";
             // 
-            // TbAuto
+            // TbMemo
             // 
-            this.TbAuto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.TbMemo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TbAuto.Location = new System.Drawing.Point(63, 164);
-            this.TbAuto.Multiline = true;
-            this.TbAuto.Name = "TbAuto";
-            this.TbAuto.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TbAuto.Size = new System.Drawing.Size(284, 54);
-            this.TbAuto.TabIndex = 12;
+            this.TbMemo.Location = new System.Drawing.Point(63, 164);
+            this.TbMemo.Multiline = true;
+            this.TbMemo.Name = "TbMemo";
+            this.TbMemo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.TbMemo.Size = new System.Drawing.Size(284, 54);
+            this.TbMemo.TabIndex = 12;
             // 
             // KeyHead
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.Controls.Add(this.TbAuto);
-            this.Controls.Add(this.LbAuto);
+            this.Controls.Add(this.TbMemo);
+            this.Controls.Add(this.LbMemo);
             this.Controls.Add(this.TbHint);
             this.Controls.Add(this.PbHint);
             this.Controls.Add(this.LbHint);
@@ -210,8 +210,8 @@
         private System.Windows.Forms.Label LbHint;
         private System.Windows.Forms.PictureBox PbHint;
         private System.Windows.Forms.Label TbHint;
-        private System.Windows.Forms.Label LbAuto;
-        private System.Windows.Forms.TextBox TbAuto;
+        private System.Windows.Forms.Label LbMemo;
+        private System.Windows.Forms.TextBox TbMemo;
 
     }
 }

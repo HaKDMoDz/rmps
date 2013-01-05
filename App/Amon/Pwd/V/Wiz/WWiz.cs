@@ -70,11 +70,6 @@ namespace Me.Amon.Pwd.V.Wiz
             panel.Controls.Remove(this);
         }
 
-        public void ShowInfo()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void ShowData()
         {
             ShowGuid();
@@ -201,6 +196,13 @@ namespace Me.Amon.Pwd.V.Wiz
             }
 
             ShowHead();
+        }
+
+        private void BtCancel_Click(object sender, EventArgs e)
+        {
+            _WPwd.ShowInfo();
+            _SafeModel.Key = null;
+            _SafeModel.Modified = false;
         }
         #endregion
 

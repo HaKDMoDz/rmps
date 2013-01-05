@@ -85,6 +85,7 @@ namespace Me.Amon.Pwd.V.Wiz
             this.BtCancel.TabIndex = 3;
             this.BtCancel.Text = "取消(&C)";
             this.BtCancel.UseVisualStyleBackColor = true;
+            this.BtCancel.Click += new System.EventHandler(this.BtCancel_Click);
             // 
             // WWiz
             // 
