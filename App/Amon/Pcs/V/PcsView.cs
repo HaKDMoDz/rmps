@@ -1,12 +1,12 @@
-using Me.Amon.C;
-using Me.Amon.Open;
-using Me.Amon.Pcs.C;
-using Me.Amon.Pcs.M;
-using Me.Amon.Pcs.V.Task;
 using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using Me.Amon.C;
+using Me.Amon.Http;
+using Me.Amon.Open;
+using Me.Amon.Pcs.C;
+using Me.Amon.Pcs.M;
 
 namespace Me.Amon.Pcs.V
 {
@@ -383,10 +383,9 @@ namespace Me.Amon.Pcs.V
         public void Upword()
         {
             _MetaPath = _PcsClient.Parent(_CurrentPath.GetMeta());
-            _Handler = new VoidHandler(ListMeta);
             _CurrentMeta = null;
 
-            BwWorker.RunWorkerAsync();
+            StartAll(new VoidHandler(ListMeta));
         }
 
         public void AddFav()
@@ -449,7 +448,7 @@ namespace Me.Amon.Pcs.V
             _NddEngine.CreateFolder(_CurrentPath.GetMeta(), name);
         }
 
-        public TaskThread NewDownloadThread()
+        public TaskInfo NewDownloadThread()
         {
             // 10M = 1024*1024*10
             if (_CurrentMeta.GetSize() >= 10485760)
@@ -460,38 +459,34 @@ namespace Me.Amon.Pcs.V
                     return null;
                 }
             }
-            var task = new TaskThread(_PcsClient, _NddEngine);
-            var meta = _CurrentMeta.GetMeta();
-            task.InitDownload(meta, meta);
-            return task;
-        }
 
-        public void DownloadMeta()
-        {
-            var list = LvMeta.SelectedItems;
-            if (list.Count < 1)
+            bool append = true;
+            if (_NddEngine.Exists(_CurrentMeta.GetMeta()))
             {
-                return;
+                string msg = string.Format("已存在名为 {0} 的文件，确认要覆盖已有文件吗？", _CurrentMeta.GetMetaName());
+                if (DialogResult.Yes != MessageBox.Show(this, msg, "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2))
+                {
+                    return null;
+                }
+                append = false;
             }
 
-            var item = list[0] as ListViewItem;
-            if (item == null)
+            // 创建下载对象
+            var task = _PcsClient.NewDownloadTask();
+            task.Meta = _CurrentMeta.GetMeta();
+            task.MetaName = _CurrentMeta.GetMetaName();
+            task.MetaSize = _CurrentMeta.GetSize();
+            task.File = task.Meta;
+            task.FileName = task.MetaName;
+            task.IsAppend = append;
+            if (_NddEngine.BeginDownload(task))
             {
-                return;
+                return task;
             }
-
-            var meta = item.Tag as AMeta;
-            if (meta == null)
-            {
-                return;
-            }
+            return null;
         }
 
-        public void UploadMeta()
-        {
-        }
-
-        public TaskThread NewUploadThread()
+        public TaskInfo NewUploadThread()
         {
             if (DialogResult.OK != Main.ShowOpenFileDialog(_WPcs, CApp.FILE_OPEN_ALL, "", false))
             {
@@ -509,9 +504,28 @@ namespace Me.Amon.Pcs.V
                     return null;
                 }
             }
-            var task = new TaskThread(_PcsClient, _NddEngine);
-            var meta = _CurrentPath.GetMeta();
-            task.InitUpload(meta, file);
+
+            string name = info.Name;
+            foreach (ListViewItem item in LvMeta.Items)
+            {
+                var meta = item.Tag as AMeta;
+                if (meta != null && meta.GetMetaName() == name)
+                {
+                    string msg = string.Format("已存在名为 {0} 的文件，确认要覆盖已有文件吗？", name);
+                    if (DialogResult.Yes != MessageBox.Show(this, msg, "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2))
+                    {
+                        return null;
+                    }
+                    break;
+                }
+            }
+
+            var task = _PcsClient.NewUploadTask();
+            task.File = file;
+            _NddEngine.BeginUpload(task);
+            task.Meta = _CurrentPath.GetMeta() + task.File;
+            task.MetaName = task.FileName;
+            task.IsAppend = false;
             return task;
         }
         #endregion
@@ -548,8 +562,7 @@ namespace Me.Amon.Pcs.V
                     case CPcs.PATH_LIB:
                         break;
                     case CPcs.PATH_ALL:
-                        _Handler = new VoidHandler(ListMeta);
-                        BwWorker.RunWorkerAsync();
+                        StartAll(new VoidHandler(ListMeta));
                         break;
                     default:
                         break;
@@ -561,8 +574,7 @@ namespace Me.Amon.Pcs.V
             }
             else
             {
-                _Handler = new VoidHandler(ListMeta);
-                BwWorker.RunWorkerAsync();
+                StartAll(new VoidHandler(ListMeta));
             }
         }
 
@@ -606,10 +618,9 @@ namespace Me.Amon.Pcs.V
             if (_CurrentMeta.GetMetaType() == CPcs.META_TYPE_FOLDER)
             {
                 _MetaPath = _CurrentMeta.GetMeta();
-                _Handler = new VoidHandler(ListMeta);
                 _CurrentMeta = null;
 
-                BwWorker.RunWorkerAsync();
+                StartAll(new VoidHandler(ListMeta));
 
                 TvPath.SelectedNode = null;
             }
@@ -764,6 +775,15 @@ namespace Me.Amon.Pcs.V
         #endregion
 
         #region 线程
+        private void StartAll(VoidHandler handler)
+        {
+            _Handler = handler;
+            if (!BwWorker.IsBusy)
+            {
+                BwWorker.RunWorkerAsync();
+            }
+        }
+
         private VoidHandler _Handler;
         private void BwWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
@@ -776,7 +796,6 @@ namespace Me.Amon.Pcs.V
 
         private void BwWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
-
         }
 
         private void BwWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)

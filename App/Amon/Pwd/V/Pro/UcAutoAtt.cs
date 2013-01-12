@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Me.Amon.Api.User32;
 using Me.Amon.Pwd.M;
 
 namespace Me.Amon.Pwd.V.Pro
@@ -9,6 +10,7 @@ namespace Me.Amon.Pwd.V.Pro
         private WPro _APro;
         private Att _Att;
         private TextBox _Ctl;
+        private IntPtr _LastWindow = IntPtr.Zero;
 
         #region 构造函数
         public UcAutoAtt()
@@ -134,5 +136,68 @@ namespace Me.Amon.Pwd.V.Pro
             TbData.SelectAll();
         }
         #endregion
+
+        private void PbText_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                //Stream stream = File.OpenRead(@"ico\_cur.png");
+                //var bmp = (Bitmap)Image.FromStream(stream);
+                //stream.Close();
+                //Cursor = new Cursor(Properties.Resources._cu.GetHicon());
+                Cursor = Cursors.Hand;
+                //PbApp.Image = Resources.AppNan;
+            }
+        }
+
+        private void PbText_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (Cursor != Cursors.Default)
+            {
+                IntPtr FoundWindow = User32.ChildWindowFromPoint(Cursor.Position);
+
+                Control control = FromHandle(FoundWindow);
+                if (control == null)
+                {
+                    if (FoundWindow != _LastWindow)
+                    {
+                        // clear old window
+                        User32.ShowInvertRectTracker(_LastWindow);
+                        // set new window
+                        _LastWindow = FoundWindow;
+                        // paint new window
+                        User32.ShowInvertRectTracker(_LastWindow);
+                    }
+                    DisplayInfo(_LastWindow);
+                }
+            }
+        }
+
+        private void PbText_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (Cursor != Cursors.Default)
+            {
+                User32.ShowInvertRectTracker(_LastWindow);
+                _LastWindow = IntPtr.Zero;
+
+                Cursor = Cursors.Default;
+            }
+        }
+
+        /// <summary>
+        /// Show informations about the given window
+        /// </summary>
+        /// <param name="window"></param>
+        private void DisplayInfo(IntPtr window)
+        {
+            if (window == IntPtr.Zero)
+            {
+                TbText.Text = "";
+            }
+            else
+            {
+                TbText.Text = User32.GetWindowText(window);
+            }
+        }
     }
 }

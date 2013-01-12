@@ -456,12 +456,25 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            IntPtr hWnd = User32.GetForegroundWindow();
-            //if (hWnd != IntPtr.Zero && hWnd != this.Handle)
-
             var state = WindowState;
             WindowState = FormWindowState.Minimized;
-            Thread.Sleep(300);
+            Thread.Sleep(80);
+            if (!string.IsNullOrWhiteSpace(_SafeModel.Key.Window))
+            {
+                IntPtr hWnd = User32.GetForegroundWindow();
+                if (hWnd != IntPtr.Zero)
+                {
+                    string[] arr = _SafeModel.Key.Window.Split(',');
+                    string clz = arr[0].Trim();
+                    string ctl = arr.Length > 1 ? arr[1].Trim() : null;
+                    IntPtr hCtl = User32.FindWindowEx(hWnd, IntPtr.Zero, clz, ctl);
+                    if (hCtl != IntPtr.Zero)
+                    {
+                        User32.SetFocus(hCtl);
+                        Thread.Sleep(10);
+                    }
+                }
+            }
 
             DoFillData();
 
@@ -1309,6 +1322,33 @@ namespace Me.Amon.Pwd
         /// </summary>
         public void RemoteBackup()
         {
+            // 是否保存
+            if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
+            {
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(_UserModel.NsPath) && !RemoteConfig())
+            {
+                return;
+            }
+
+            string path = _UserModel.NsPath;
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                path = Path.GetTempPath();
+            }
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            OAuthConsumer consumer = new OAuthConsumer();
+            consumer.consumer_key = "xcWPaz75PSRDOWBM";
+            consumer.consumer_secret = "DU5ZYaCK0cRlsMTj";
+
+            //KuaipanClient client = new KuaipanClient(consumer);
+            //client.BeginDownload(0L, "", 0);
         }
 
         /// <summary>

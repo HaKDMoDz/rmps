@@ -20,6 +20,8 @@ namespace Me.Amon.Img
         public WImg()
         {
             InitializeComponent();
+
+            this.Icon = Me.Amon.Properties.Resources.Icon;
         }
 
         public WImg(AUserModel userModel)

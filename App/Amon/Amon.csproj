@@ -425,8 +425,10 @@
     <Compile Include="Open\V1\App\OAuthV1Server.cs" />
     <Compile Include="Open\V1\App\Pcs\KuaipanAccount.cs" />
     <Compile Include="Open\V1\App\Pcs\KuaipanClient.cs" />
+    <Compile Include="Open\V1\App\Pcs\KuaipanDownload.cs" />
     <Compile Include="Open\V1\App\Pcs\KuaipanHttpStatus.cs" />
     <Compile Include="Open\V1\App\Pcs\KuaipanServer.cs" />
+    <Compile Include="Open\V1\App\Pcs\KuaipanUpload.cs" />
     <Compile Include="Open\V1\OAuthConstants.cs" />
     <Compile Include="Open\V1\OAuthPhrases.cs" />
     <Compile Include="Open\V1\OAuthTokenV1.cs" />
@@ -447,6 +449,7 @@
     <Compile Include="Pcs\CPcs.cs" />
     <Compile Include="Http\MsMultiPartFormData.cs" />
     <Compile Include="Pcs\C\NddEngine.cs" />
+    <Compile Include="Http\TaskInfo.cs" />
     <Compile Include="Pcs\EPcs.cs" />
     <Compile Include="Pcs\E\APcsAction.cs" />
     <Compile Include="Pcs\E\Edit\BackwordAction.cs" />
@@ -493,7 +496,7 @@
     <Compile Include="Pcs\M\NativeMeta.cs" />
     <Compile Include="Pcs\M\UserModel.cs" />
     <Compile Include="Pcs\M\ViewModel.cs" />
-    <Compile Include="Pcs\V\ITaskViewer.cs" />
+    <Compile Include="Http\ITaskViewer.cs" />
     <Compile Include="Pcs\V\MetaRef.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -561,16 +564,15 @@
     <Compile Include="Pcs\V\PcsView.Designer.cs">
       <DependentUpon>PcsView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pcs\V\Task\TaskList.cs">
+    <Compile Include="Http\Task\TaskList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pcs\V\Task\TaskList.Designer.cs">
+    <Compile Include="Http\Task\TaskList.Designer.cs">
       <DependentUpon>TaskList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pcs\V\Task\TaskStatus.cs" />
-    <Compile Include="Pcs\V\Task\TaskThread.cs" />
-    <Compile Include="Pcs\V\Task\DataGridViewProgressCell.cs" />
-    <Compile Include="Pcs\V\Task\DataGridViewProgressColumn.cs" />
+    <Compile Include="Http\TaskStatus.cs" />
+    <Compile Include="Http\Task\DataGridViewProgressCell.cs" />
+    <Compile Include="Http\Task\DataGridViewProgressColumn.cs" />
     <Compile Include="Pcs\WPcs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1644,7 +1646,7 @@
     <EmbeddedResource Include="Pcs\V\PcsView.resx">
       <DependentUpon>PcsView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pcs\V\Task\TaskList.resx">
+    <EmbeddedResource Include="Http\Task\TaskList.resx">
       <DependentUpon>TaskList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pcs\WPcs.resx">

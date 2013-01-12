@@ -57,6 +57,14 @@ namespace Me.Amon.Pwd.M
         /// </summary>
         public string GtdMemo { get; set; }
         /// <summary>
+        /// 窗口对象
+        /// </summary>
+        public string Window;
+        /// <summary>
+        /// 执行脚本
+        /// </summary>
+        public string Script;
+        /// <summary>
         /// 相关说明
         /// </summary>
         public string Memo { get; set; }

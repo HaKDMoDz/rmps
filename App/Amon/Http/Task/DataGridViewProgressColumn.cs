@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Me.Amon.Pcs.V.Task
+namespace Me.Amon.Http.Task
 {
     public class DataGridViewProgressColumn : DataGridViewColumn
     {

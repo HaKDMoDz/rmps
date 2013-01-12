@@ -65,7 +65,7 @@ namespace Me.Amon.Spy
         #endregion
 
         #region 鼠标事件处理
-        private IntPtr _lastWindow = IntPtr.Zero;
+        private IntPtr _LastWindow = IntPtr.Zero;
         private void PbApp_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -88,16 +88,16 @@ namespace Me.Amon.Spy
                 Control control = FromHandle(FoundWindow);
                 if (control == null)
                 {
-                    if (FoundWindow != _lastWindow)
+                    if (FoundWindow != _LastWindow)
                     {
                         // clear old window
-                        User32.ShowInvertRectTracker(_lastWindow);
+                        User32.ShowInvertRectTracker(_LastWindow);
                         // set new window
-                        _lastWindow = FoundWindow;
+                        _LastWindow = FoundWindow;
                         // paint new window
-                        User32.ShowInvertRectTracker(_lastWindow);
+                        User32.ShowInvertRectTracker(_LastWindow);
                     }
-                    DisplayInfo(_lastWindow);
+                    DisplayInfo(_LastWindow);
                 }
             }
         }
@@ -106,8 +106,8 @@ namespace Me.Amon.Spy
         {
             if (Cursor != Cursors.Default)
             {
-                User32.ShowInvertRectTracker(_lastWindow);
-                _lastWindow = IntPtr.Zero;
+                User32.ShowInvertRectTracker(_LastWindow);
+                _LastWindow = IntPtr.Zero;
 
                 Cursor = Cursors.Default;
             }

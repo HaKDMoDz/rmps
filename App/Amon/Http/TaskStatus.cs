@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Pcs.V.Task
+﻿namespace Me.Amon.Http
 {
     public class TaskStatus
     {

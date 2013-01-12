@@ -6,13 +6,13 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using Me.Amon.Auth;
+using Me.Amon.Http;
 using Me.Amon.M;
 using Me.Amon.Open;
 using Me.Amon.Open.PC;
 using Me.Amon.Open.V1.App.Pcs;
 using Me.Amon.Pcs.M;
 using Me.Amon.Pcs.V;
-using Me.Amon.Pcs.V.Task;
 using Me.Amon.Uc;
 
 namespace Me.Amon.Pcs
@@ -27,7 +27,7 @@ namespace Me.Amon.Pcs
         private PcsList _PcsList;
         private PcsView _CurView;
         private TabPage _DefPage;
-        private List<TaskThread> _Threads;
+        private List<TaskInfo> _Threads;
         private List<ITaskViewer> _Viewers;
         private int _MaxThreads = 1;
         private int _CurThreads = 0;
@@ -94,7 +94,7 @@ namespace Me.Amon.Pcs
             _DefPage.Controls.Add(_PcsList);
             TcMeta.TabPages.Add(_DefPage);
 
-            _Threads = new List<TaskThread>();
+            _Threads = new List<TaskInfo>();
             _Viewers = new List<ITaskViewer>();
         }
 
@@ -357,6 +357,7 @@ namespace Me.Amon.Pcs
                 return;
             }
 
+            task.Start();
             _Threads.Add(task);
             if (!ScMain.Panel2Collapsed)
             {
@@ -373,6 +374,7 @@ namespace Me.Amon.Pcs
                 return;
             }
 
+            task.Start();
             _Threads.Add(task);
             if (!ScMain.Panel2Collapsed)
             {
@@ -452,6 +454,7 @@ namespace Me.Amon.Pcs
                 BwWork.CancelAsync();
             }
         }
+
         #region 记录安全
         public void PkeyEdit()
         {

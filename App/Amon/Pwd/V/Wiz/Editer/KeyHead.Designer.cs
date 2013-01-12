@@ -157,7 +157,7 @@
             this.LbMemo.Name = "LbMemo";
             this.LbMemo.Size = new System.Drawing.Size(47, 12);
             this.LbMemo.TabIndex = 11;
-            this.LbMemo.Text = "填充(&R)";
+            this.LbMemo.Text = "备注(&R)";
             // 
             // TbMemo
             // 

@@ -1,10 +1,9 @@
-using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading;
 using Me.Amon.Da;
 using Me.Amon.Da.Df;
+using Me.Amon.Http;
 using Me.Amon.Pcs.M;
 
 namespace Me.Amon.Pcs.C
@@ -13,7 +12,6 @@ namespace Me.Amon.Pcs.C
     {
         private string _Root;
         private DFA _DFA;
-        private Dictionary<long, FileStream> _Streams;
 
         public NddEngine()
         {
@@ -24,7 +22,6 @@ namespace Me.Amon.Pcs.C
             _Root = root;
             _DFA = new DFEngine();
             _DFA.Load(Path.Combine(root, "amon.sync"));
-            _Streams = new Dictionary<long, FileStream>();
         }
 
         public int CompareVersion(string file, string ver)
@@ -51,6 +48,11 @@ namespace Me.Amon.Pcs.C
             }
         }
 
+        public bool Exists(string file)
+        {
+            return File.Exists(GetPhysicalPath(file));
+        }
+
         public void Delete(string path, string name)
         {
             path = Path.Combine(_Root, path, name);
@@ -75,110 +77,60 @@ namespace Me.Amon.Pcs.C
             File.Move(src, dst);
         }
 
-        #region ÏÂÔØ
-        public long BeginDownload(long key, string path, bool append)
+        public bool BeginDownload(TaskInfo task)
         {
-            if (path[0] == '/')
+            if (task == null)
             {
-                path = path.Substring(1);
-            }
-            if (!Path.IsPathRooted(path))
-            {
-                path = Path.Combine(_Root, path);
+                return false;
             }
 
-            string folder = Path.GetDirectoryName(path);
+            var file = GetPhysicalPath(task.File);
+            string folder = Path.GetDirectoryName(file);
             if (!Directory.Exists(folder))
             {
                 Directory.CreateDirectory(folder);
             }
-            var stream = new FileStream(path, append ? FileMode.Append : FileMode.Create);
-            try
+            if (task.IsAppend)
             {
-                Monitor.Enter(_Streams);
-                _Streams[key] = stream;
-            }
-            finally
-            {
-                Monitor.Exit(_Streams);
-            }
-            return stream.Length;
-        }
-
-        public int Write(long key, byte[] buffer, int offset, int length)
-        {
-            _Streams[key].Write(buffer, offset, length);
-            return 0;
-        }
-
-        public void EndDownload(long key)
-        {
-            var stream = _Streams[key];
-            if (stream != null)
-            {
-                try
+                task.FileSize = new FileInfo(file).Length;
+                if (task.FileSize >= task.MetaSize)
                 {
-                    Monitor.Enter(_Streams);
-                    stream.Close();
-                    _Streams.Remove(key);
+                    return false;
                 }
-                finally
-                {
-                    Monitor.Exit(_Streams);
-                }
+                task.FileStream = new FileStream(file, FileMode.Append);
             }
+            else
+            {
+                task.FileStream = new FileStream(file, FileMode.Create);
+            }
+            return true;
         }
-        #endregion
 
-        #region ÉÏ´«
-        public long BeginUpload(long key, string path)
+        public bool BeginUpload(TaskInfo task)
         {
-            if (!Path.IsPathRooted(path))
+            if (!Path.IsPathRooted(task.File))
             {
-                path = Path.Combine(_Root, path);
+                task.File = Path.Combine(_Root, task.File);
             }
 
-            if (!File.Exists(path))
+            if (!File.Exists(task.File))
             {
-                return -1;
+                return false;
             }
 
-            var stream = File.OpenRead(path);
-            try
+            task.FileStream = File.OpenRead(task.File);
+            task.FileSize = task.FileStream.Length;
+            task.FileName = Path.GetFileName(task.File);
+            if (task.File.StartsWith(_Root))
             {
-                Monitor.Enter(_Streams);
-                _Streams[key] = stream;
+                task.File = task.File.Substring(_Root.Length);
             }
-            finally
+            else
             {
-                Monitor.Exit(_Streams);
+                task.File = task.FileName;
             }
-            return stream.Length;
+            return true;
         }
-
-        public int Read(long key, byte[] buffer, int offset, int length)
-        {
-            return _Streams[key].Read(buffer, offset, length);
-        }
-
-        public void EndUpload(long key)
-        {
-            var stream = _Streams[key];
-            if (stream != null)
-            {
-                try
-                {
-                    Monitor.Enter(_Streams);
-                    stream.Close();
-                    _Streams.Remove(key);
-                }
-                finally
-                {
-                    Monitor.Exit(_Streams);
-                }
-            }
-        }
-        #endregion
 
         public string GetFileName(string file)
         {
@@ -214,6 +166,20 @@ namespace Me.Amon.Pcs.C
             } while (System.IO.File.Exists(temp));
 
             return temp;
+        }
+
+        private string GetPhysicalPath(string path)
+        {
+            if (path[0] == '/')
+            {
+                path = _Root + path;
+            }
+            return path;
+        }
+
+        private string GetVirtualPath(string path)
+        {
+            return path.Replace(_Root, "");
         }
     }
 }

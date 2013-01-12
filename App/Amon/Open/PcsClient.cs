@@ -1,6 +1,7 @@
-using Me.Amon.Pcs.M;
 using System.Collections.Generic;
 using System.Drawing;
+using Me.Amon.Http;
+using Me.Amon.Pcs.M;
 
 namespace Me.Amon.Open
 {
@@ -66,18 +67,6 @@ namespace Me.Amon.Open
 
         AMetaRef CopyRef(AMeta meta);
 
-        bool BeginUpload(long key, string path, string name);
-
-        void Write(long key, byte[] buffer, int offset, int length);
-
-        void EndUpload(long key);
-
-        long BeginDownload(long key, string url, long range);
-
-        int Read(long key, byte[] buffer, int offset, int length);
-
-        void EndDownload(long key);
-
         void Thumbnail();
 
         string Parent(string path);
@@ -87,5 +76,9 @@ namespace Me.Amon.Open
         string GetFileName(string meta);
 
         string Display(string path);
+
+        TaskInfo NewDownloadTask();
+
+        TaskInfo NewUploadTask();
     }
 }

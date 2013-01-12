@@ -1,21 +1,18 @@
-﻿﻿using Me.Amon.Http;
-using Me.Amon.Pcs;
-using Me.Amon.Pcs.M;
-using Newtonsoft.Json;
-using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Net;
 using System.Text;
-using System.Threading;
 using System.Windows.Forms;
+using Me.Amon.Http;
+using Me.Amon.Pcs;
+using Me.Amon.Pcs.M;
+using Newtonsoft.Json;
 
 namespace Me.Amon.Open.V1.App.Pcs
 {
     public class KuaipanClient : OAuthV1Client, PcsClient
     {
-        private Dictionary<long, KVItem> _Items;
-
         #region 构造函数
         public KuaipanClient(OAuthConsumer consumer)
             : base(consumer)
@@ -31,7 +28,6 @@ namespace Me.Amon.Open.V1.App.Pcs
 
             Name = "金山快盘";
             Root = "kuaipan:/";
-            _Items = new Dictionary<long, KVItem>();
             //Icon = Image.FromFile(@"D:\Temp\i1\Icon.png");
         }
         #endregion
@@ -416,181 +412,96 @@ namespace Me.Amon.Open.V1.App.Pcs
             return JsonConvert.DeserializeObject<KuaipanMetaRef>(t);
         }
 
-        #region 上传
-        public bool BeginUpload(long key, string path, string name)
+        public TaskInfo NewUploadTask()
         {
-            ResetParams();
-            string url = KuaipanServer.UPLOAD;
-
-            PrepareParams();
-            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
-            SortParam();
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
-
-            string t = GenBaseParams();
-            byte[] r = _Server.Get(url, t);
-            if (r == null || r.Length < 1)
-            {
-                return false;
-            }
-
-            t = GetString(r);
-            KuaipanMetaUrl uri = JsonConvert.DeserializeObject<KuaipanMetaUrl>(t);
-            if (uri.stat != "OK")
-            {
-                return false;
-            }
-
-            System.IO.MemoryStream iStream = new System.IO.MemoryStream();
-
-            try
-            {
-                Monitor.Enter(_Items);
-                _Items[key] = new KVItem { Url = uri.url, Path = path + '/' + name, Stream = iStream };
-            }
-            finally
-            {
-                Monitor.Exit(_Items);
-            }
-            return true;
+            return new KuaipanUpload(this);
         }
 
-        public void Write(long key, byte[] buffer, int offset, int length)
+        public string BeginUpload(TaskInfo info)
         {
-            _Items[key].Stream.Write(buffer, offset, length);
-        }
-
-        public void EndUpload(long key)
-        {
-            if (!_Items.ContainsKey(key))
+            lock (_Params)
             {
-                return;
-            }
+                ResetParams();
+                string url = KuaipanServer.UPLOAD;
 
-            var item = _Items[key];
-            var iStream = item.Stream as System.IO.MemoryStream;
-            iStream.Close();
+                PrepareParams();
+                AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+                SortParam();
+                AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
 
-            MsMultiPartFormData form = new MsMultiPartFormData();
-            form.AddStreamFile("file", "abc.txt", iStream.ToArray());
-            form.PrepareFormData();
-
-            ResetParams();
-            var url = string.Format("{0}/1/fileops/upload_file", item.Url);
-
-            PrepareParams();
-            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
-            AddParam("root", KuaipanServer.ROOT_NAME);
-            AddParam("overwrite", "true");
-            AddParam("path", item.Path);
-            SortParam();
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url, "POST")));
-
-            url += url.IndexOf('?') >= 0 ? '&' : '?';
-            url += GenBaseParams();
-
-            HttpUtil http = new HttpUtil();
-            http.Method = HttpMethod.POST;
-            http.ContentType = "multipart/form-data; boundary=" + form.Boundary;
-            http.Post(url, form.GetFormData().ToArray());
-
-            var t = http.Html;
-
-            try
-            {
-                Monitor.Enter(_Items);
-                item.Stream.Close();
-                _Items.Remove(key);
-            }
-            finally
-            {
-                Monitor.Exit(_Items);
-            }
-        }
-        #endregion
-
-        #region 下载
-        public long BeginDownload(long key, string meta, long range)
-        {
-            ResetParams();
-            string url = KuaipanServer.DOWNLOAD;
-
-            PrepareParams();
-            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
-            AddParam("root", KuaipanServer.ROOT_NAME);
-            AddParam("path", meta);
-            SortParam();
-            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
-
-            string t = GenBaseParams();
-            url += url.IndexOf("?") >= 0 ? '&' : '?';
-            url += t;
-
-            var request = (HttpWebRequest)WebRequest.Create(url);
-            request.CookieContainer = new CookieContainer();
-            request.Method = "GET";
-            request.UserAgent = "User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)";
-            request.ServicePoint.Expect100Continue = false;
-            request.ServicePoint.UseNagleAlgorithm = false;
-            request.AllowWriteStreamBuffering = false;
-            if (range > 0)
-            {
-                request.AddRange(range); //设置Range值
-            }
-
-            HttpWebResponse response = null;
-            try
-            {
-                response = request.GetResponse() as HttpWebResponse;
-                if (response.StatusCode == HttpStatusCode.Accepted)
+                string t = GenBaseParams();
+                byte[] r = _Server.Get(url, t);
+                if (r == null || r.Length < 1)
                 {
-                    return -1;
+                    return null;
                 }
-            }
-            catch (Exception exp)
-            {
-                return -1;
-            }
 
-            var stream = response.GetResponseStream();
-            try
-            {
-                Monitor.Enter(_Items);
-                _Items[key] = new KVItem { Response = response, Stream = stream };
+                t = GetString(r);
+                KuaipanMetaUrl uri = JsonConvert.DeserializeObject<KuaipanMetaUrl>(t);
+                if (uri.stat != "OK")
+                {
+                    info.Message = uri.stat;
+                    return null;
+                }
+                return uri.url;
             }
-            finally
-            {
-                Monitor.Exit(_Items);
-            }
-            return response.ContentLength;
         }
 
-        public int Read(long key, byte[] buffer, int offset, int length)
+        public string ChangeUploadUrl(string url, string path)
         {
-            return _Items[key].Stream.Read(buffer, offset, length);
+            lock (_Params)
+            {
+                ResetParams();
+                url = string.Format("{0}/1/fileops/upload_file", url);
+
+                PrepareParams();
+                AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+                AddParam("root", KuaipanServer.ROOT_NAME);
+                AddParam("overwrite", "true");
+                AddParam("path", path);
+                SortParam();
+                AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url, "POST")));
+
+                url += url.IndexOf('?') >= 0 ? '&' : '?';
+                url += GenBaseParams();
+
+                return url;
+            }
         }
 
-        public void EndDownload(long key)
+        public TaskInfo NewDownloadTask()
         {
-            if (!_Items.ContainsKey(key))
-            {
-                return;
-            }
+            return new KuaipanDownload(this);
+        }
 
-            try
+        public HttpWebRequest BeginDownload(KuaipanDownload task)
+        {
+            lock (_Params)
             {
-                Monitor.Enter(_Items);
-                var item = _Items[key];
-                item.Stream.Close();
-                item.Response.Close();
-                _Items.Remove(key);
-            }
-            finally
-            {
-                Monitor.Exit(_Items);
+                ResetParams();
+                string url = KuaipanServer.DOWNLOAD;
+
+                PrepareParams();
+                AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+                AddParam("root", KuaipanServer.ROOT_NAME);
+                AddParam("path", task.Meta);
+                SortParam();
+                AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
+
+                string t = GenBaseParams();
+                url += url.IndexOf("?") >= 0 ? '&' : '?';
+                url += t;
+
+                var request = (HttpWebRequest)WebRequest.Create(url);
+                request.CookieContainer = new CookieContainer();
+                request.Method = "GET";
+                request.UserAgent = "User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)";
+                request.ServicePoint.Expect100Continue = false;
+                request.ServicePoint.UseNagleAlgorithm = false;
+                request.AllowWriteStreamBuffering = false;
+                return request;
             }
         }
-        #endregion
 
         public void Thumbnail()
         {

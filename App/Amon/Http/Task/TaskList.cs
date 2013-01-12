@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Me.Amon.Http;
 
-namespace Me.Amon.Pcs.V.Task
+namespace Me.Amon.Http.Task
 {
     public partial class TaskList : UserControl, ITaskViewer
     {
@@ -66,11 +67,11 @@ namespace Me.Amon.Pcs.V.Task
         }
 
         #region 接口实现
-        public void ShowTask(List<TaskThread> threads)
+        public void ShowTask(List<TaskInfo> threads)
         {
-            foreach (TaskThread thread in threads)
+            foreach (TaskInfo thread in threads)
             {
-                GvTask.Rows.Add(thread.MetaName, "", thread.Message);
+                GvTask.Rows.Add(thread.FileName, "", thread.Message);
             }
         }
 
@@ -78,7 +79,7 @@ namespace Me.Amon.Pcs.V.Task
         /// 
         /// </summary>
         /// <param name="thread"></param>
-        public void UpdateTask(TaskThread thread, int index)
+        public void UpdateTask(TaskInfo thread, int index)
         {
             DataGridViewRow row = GvTask.Rows[index];
 
@@ -91,16 +92,16 @@ namespace Me.Amon.Pcs.V.Task
             cell = row.Cells[3];
             if (cell != null)
             {
-                cell.Value = thread.Progress;
+                cell.Value = thread.Percent;
             }
         }
 
-        public void AppendTask(TaskThread thread)
+        public void AppendTask(TaskInfo thread)
         {
-            GvTask.Rows.Add(thread.MetaName, "", thread.Message);
+            GvTask.Rows.Add(thread.FileName, "", thread.Message);
         }
 
-        public void RemoveTask(TaskThread thread, int index)
+        public void RemoveTask(TaskInfo thread, int index)
         {
             GvTask.Rows.RemoveAt(index);
         }

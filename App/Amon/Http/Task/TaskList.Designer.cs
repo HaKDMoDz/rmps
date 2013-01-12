@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Pcs.V.Task
+﻿namespace Me.Amon.Http.Task
 {
     partial class TaskList
     {
@@ -46,7 +46,7 @@
             this.ClName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClProgress = new Me.Amon.Pcs.V.Task.DataGridViewProgressColumn();
+            this.ClProgress = new Me.Amon.Http.Task.DataGridViewProgressColumn();
             this.CmMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GvTask)).BeginInit();
             this.SuspendLayout();

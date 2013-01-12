@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Threading;
+using Me.Amon.Http;
 using Me.Amon.Pcs;
 using Me.Amon.Pcs.M;
 
@@ -11,8 +11,6 @@ namespace Me.Amon.Open.PC
     public class NativeClient : PcsClient
     {
         private NativeServer _Server;
-        private Dictionary<long, FileStream> _Streams;
-        private Random _Random;
 
         #region 构造函数
         public NativeClient()
@@ -22,8 +20,6 @@ namespace Me.Amon.Open.PC
             //Icon = Image.FromFile(@"D:\Temp\i1\Icon.png");
 
             _Server = new NativeServer();
-            _Streams = new Dictionary<long, FileStream>();
-            _Random = new Random();
         }
         #endregion
 
@@ -182,116 +178,47 @@ namespace Me.Amon.Open.PC
             return null;
         }
 
-        #region 上传
-        public bool BeginUpload(long key, string path, string name)
-        {
-            path = Path.Combine(path, name);
-            if (!Path.IsPathRooted(path))
-            {
-                path = Path.Combine(Root, path);
-            }
+        //public bool BeginUpload(TaskInfo info)
+        //{
+        //    if (!Path.IsPathRooted(info.FilePath))
+        //    {
+        //        info.FilePath = Path.Combine(Root, info.FilePath);
+        //    }
 
-            string folder = Path.GetDirectoryName(path);
-            if (!Directory.Exists(folder))
-            {
-                Directory.CreateDirectory(folder);
-            }
-            var stream = File.OpenWrite(path);
-            try
-            {
-                Monitor.Enter(_Streams);
-                _Streams[key] = stream;
-            }
-            finally
-            {
-                Monitor.Exit(_Streams);
-            }
-            return true;
-        }
+        //    string folder = Path.GetDirectoryName(info.FilePath);
+        //    if (!Directory.Exists(folder))
+        //    {
+        //        Directory.CreateDirectory(folder);
+        //    }
+        //    info.MetaStream = File.OpenWrite(info.FilePath);
+        //    return true;
+        //}
 
-        public void Write(long key, byte[] buffer, int offset, int length)
-        {
-            Thread.Sleep(_Random.Next(10) * 100 + 100);
-            _Streams[key].Write(buffer, offset, length);
-        }
+        //public bool BeginDownload(TaskInfo info)
+        //{
+        //    if (!Path.IsPathRooted(info.FilePath))
+        //    {
+        //        info.FilePath = Path.Combine(Root, info.FilePath);
+        //    }
+        //    if (!File.Exists(info.FilePath))
+        //    {
+        //        return false;
+        //    }
 
-        public void EndUpload(long key)
-        {
-            var stream = _Streams[key];
-            if (stream != null)
-            {
-                try
-                {
-                    Monitor.Enter(_Streams);
-                    stream.Close();
-                    _Streams.Remove(key);
-                }
-                finally
-                {
-                    Monitor.Exit(_Streams);
-                }
-            }
-        }
-        #endregion
+        //    var stream = File.OpenRead(info.FilePath);
+        //    var length = info.FileStream.Length;
+        //    if (length > stream.Length)
+        //    {
+        //        return false;
+        //    }
 
-        #region 下载
-        public long BeginDownload(long key, string url, long range)
-        {
-            if (!Path.IsPathRooted(url))
-            {
-                url = Path.Combine(Root, url);
-            }
-            if (!File.Exists(url))
-            {
-                return -1;
-            }
-
-            var stream = File.OpenRead(url);
-            if (range < 0 || range > stream.Length)
-            {
-                return -1;
-            }
-
-            if (range > 0)
-            {
-                stream.Seek(range, SeekOrigin.Current);
-            }
-            try
-            {
-                Monitor.Enter(_Streams);
-                _Streams[key] = stream;
-            }
-            finally
-            {
-                Monitor.Exit(_Streams);
-            }
-            return stream.Length;
-        }
-
-        public int Read(long key, byte[] buffer, int offset, int length)
-        {
-            Thread.Sleep(_Random.Next(10) * 100 + 100);
-            return _Streams[key].Read(buffer, offset, length);
-        }
-
-        public void EndDownload(long key)
-        {
-            var stream = _Streams[key];
-            if (stream != null)
-            {
-                try
-                {
-                    Monitor.Enter(_Streams);
-                    stream.Close();
-                    _Streams.Remove(key);
-                }
-                finally
-                {
-                    Monitor.Exit(_Streams);
-                }
-            }
-        }
-        #endregion
+        //    if (length > 0)
+        //    {
+        //        stream.Seek(length, SeekOrigin.Current);
+        //    }
+        //    info.MetaStream = stream;
+        //    return true;
+        //}
 
         public void Thumbnail()
         {
@@ -317,5 +244,25 @@ namespace Me.Amon.Open.PC
             return "file:///" + path.Replace(Path.DirectorySeparatorChar, '/');
         }
         #endregion
+
+        public TaskInfo NewDownloadTask()
+        {
+            return null;
+        }
+
+        public TaskInfo BeginDownload()
+        {
+            return null;
+        }
+
+        public TaskInfo NewUploadTask()
+        {
+            return null;
+        }
+
+        public TaskInfo BeginUpload()
+        {
+            return null;
+        }
     }
 }

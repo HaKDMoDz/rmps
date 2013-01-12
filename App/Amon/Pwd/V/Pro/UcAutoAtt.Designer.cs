@@ -28,38 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TbData = new System.Windows.Forms.TextBox();
-            this.LbData = new System.Windows.Forms.Label();
-            this.TbText = new System.Windows.Forms.TextBox();
             this.LbText = new System.Windows.Forms.Label();
+            this.TbText = new System.Windows.Forms.TextBox();
+            this.PbText = new System.Windows.Forms.PictureBox();
+            this.LbData = new System.Windows.Forms.Label();
+            this.TbData = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.PbText)).BeginInit();
             this.SuspendLayout();
-            // 
-            // TbData
-            // 
-            this.TbData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TbData.Location = new System.Drawing.Point(56, 30);
-            this.TbData.Multiline = true;
-            this.TbData.Name = "TbData";
-            this.TbData.Size = new System.Drawing.Size(307, 48);
-            this.TbData.TabIndex = 7;
-            // 
-            // LbData
-            // 
-            this.LbData.AutoSize = true;
-            this.LbData.Location = new System.Drawing.Point(3, 33);
-            this.LbData.Name = "LbData";
-            this.LbData.Size = new System.Drawing.Size(47, 12);
-            this.LbData.TabIndex = 6;
-            this.LbData.Text = "脚本(&D)";
-            // 
-            // TbText
-            // 
-            this.TbText.Location = new System.Drawing.Point(56, 3);
-            this.TbText.Name = "TbText";
-            this.TbText.Size = new System.Drawing.Size(100, 21);
-            this.TbText.TabIndex = 5;
             // 
             // LbText
             // 
@@ -67,19 +42,59 @@
             this.LbText.Location = new System.Drawing.Point(3, 6);
             this.LbText.Name = "LbText";
             this.LbText.Size = new System.Drawing.Size(47, 12);
-            this.LbText.TabIndex = 4;
+            this.LbText.TabIndex = 0;
             this.LbText.Text = "对象(&N)";
             // 
-            // BeanAuto
+            // TbText
+            // 
+            this.TbText.Location = new System.Drawing.Point(56, 3);
+            this.TbText.Name = "TbText";
+            this.TbText.Size = new System.Drawing.Size(100, 21);
+            this.TbText.TabIndex = 1;
+            // 
+            // PbText
+            // 
+            this.PbText.Location = new System.Drawing.Point(162, 6);
+            this.PbText.Name = "PbText";
+            this.PbText.Size = new System.Drawing.Size(16, 16);
+            this.PbText.TabIndex = 3;
+            this.PbText.TabStop = false;
+            this.PbText.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PbText_MouseDown);
+            this.PbText.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PbText_MouseMove);
+            this.PbText.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PbText_MouseUp);
+            // 
+            // LbData
+            // 
+            this.LbData.AutoSize = true;
+            this.LbData.Location = new System.Drawing.Point(3, 33);
+            this.LbData.Name = "LbData";
+            this.LbData.Size = new System.Drawing.Size(47, 12);
+            this.LbData.TabIndex = 3;
+            this.LbData.Text = "脚本(&D)";
+            // 
+            // TbData
+            // 
+            this.TbData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TbData.Location = new System.Drawing.Point(56, 30);
+            this.TbData.Multiline = true;
+            this.TbData.Name = "TbData";
+            this.TbData.Size = new System.Drawing.Size(307, 48);
+            this.TbData.TabIndex = 4;
+            // 
+            // UcAutoAtt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.TbData);
             this.Controls.Add(this.LbData);
+            this.Controls.Add(this.PbText);
             this.Controls.Add(this.TbText);
             this.Controls.Add(this.LbText);
-            this.Name = "BeanAuto";
+            this.Name = "UcAutoAtt";
             this.Size = new System.Drawing.Size(366, 81);
+            ((System.ComponentModel.ISupportInitialize)(this.PbText)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -87,9 +102,10 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox TbData;
-        private System.Windows.Forms.Label LbData;
-        private System.Windows.Forms.TextBox TbText;
         private System.Windows.Forms.Label LbText;
+        private System.Windows.Forms.TextBox TbText;
+        private System.Windows.Forms.PictureBox PbText;
+        private System.Windows.Forms.Label LbData;
+        private System.Windows.Forms.TextBox TbData;
     }
 }

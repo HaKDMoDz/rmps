@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
-namespace Me.Amon.Pcs.V.Task
+namespace Me.Amon.Http.Task
 {
     public class DataGridViewProgressCell : DataGridViewImageCell
     {

@@ -75,6 +75,14 @@ namespace Me.Amon.Pwd.M
         [NonSerialized]
         public Image GtdIcon;
         /// <summary>
+        /// 窗口对象
+        /// </summary>
+        public string Window;
+        /// <summary>
+        /// 执行脚本
+        /// </summary>
+        public string Script;
+        /// <summary>
         /// 相关说明
         /// </summary>
         public string Memo;
@@ -98,14 +106,6 @@ namespace Me.Amon.Pwd.M
         /// 用户数据
         /// </summary>
         public string Password;
-        /// <summary>
-        /// 窗口对象
-        /// </summary>
-        public string Window;
-        /// <summary>
-        /// 执行脚本
-        /// </summary>
-        public string Script;
 
         /// <summary>
         /// 恢复默认值
@@ -160,6 +160,8 @@ namespace Me.Amon.Pwd.M
                 writer.WriteElementString("IcoMemo", IcoMemo);
                 writer.WriteElementString("GtdId", GtdId);
                 writer.WriteElementString("GtdMemo", GtdMemo);
+                writer.WriteElementString("Window", Window);
+                writer.WriteElementString("Script", Script);
                 writer.WriteElementString("Memo", Memo);
                 writer.WriteElementString("VisitDate", AccessTime);
                 writer.WriteElementString("CipherVer", CipherVer.ToString());
@@ -236,6 +238,14 @@ namespace Me.Amon.Pwd.M
             {
                 GtdMemo = reader.ReadElementContentAsString();
             }
+            if (reader.Name == "Window" || reader.ReadToNextSibling("Window"))
+            {
+                Window = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Script" || reader.ReadToNextSibling("Script"))
+            {
+                Script = reader.ReadElementContentAsString();
+            }
             if (reader.Name == "Memo" || reader.ReadToNextSibling("Memo"))
             {
                 Memo = reader.ReadElementContentAsString();
@@ -274,6 +284,8 @@ namespace Me.Amon.Pwd.M
             log.IcoMemo = IcoMemo;
             log.GtdId = GtdId;
             log.GtdMemo = GtdMemo;
+            log.Window = Window;
+            log.Script = Script;
             log.Memo = Memo;
             log.AccessTime = AccessTime;
             log.Backup = Backup;
@@ -304,6 +316,8 @@ namespace Me.Amon.Pwd.M
             IcoMemo = log.IcoMemo;
             GtdId = log.GtdId;
             GtdMemo = log.GtdMemo;
+            Window = log.Window;
+            Script = log.Script;
             Memo = log.Memo;
             AccessTime = log.AccessTime;
             Backup = log.Backup;
