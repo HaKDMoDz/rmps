@@ -506,6 +506,24 @@ namespace Me.Amon.Pcs
         #endregion
 
         #region 事件处理
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void WPcs_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (BwWork.IsBusy)
+            {
+                var msg = "您有未完成的任务，确认要退出吗？";
+                if (DialogResult.OK != Main.ShowConfirm(msg))
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+        }
+
         private void TcMeta_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             int idx = TcMeta.SelectedIndex;

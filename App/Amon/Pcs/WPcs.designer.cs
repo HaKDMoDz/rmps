@@ -66,7 +66,7 @@
             // TlEcho
             // 
             this.TlEcho.Name = "TlEcho";
-            this.TlEcho.Size = new System.Drawing.Size(553, 17);
+            this.TlEcho.Size = new System.Drawing.Size(554, 17);
             this.TlEcho.Spring = true;
             this.TlEcho.Text = "系统加载中,请稍候……";
             this.TlEcho.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -74,7 +74,7 @@
             // TlTime
             // 
             this.TlTime.Name = "TlTime";
-            this.TlTime.Size = new System.Drawing.Size(56, 17);
+            this.TlTime.Size = new System.Drawing.Size(55, 17);
             this.TlTime.Text = "当前时间";
             // 
             // MbMenu
@@ -106,9 +106,9 @@
             // 
             // ScMain
             // 
-            this.ScMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ScMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ScMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.ScMain.Location = new System.Drawing.Point(6, 41);
             this.ScMain.Name = "ScMain";
@@ -176,8 +176,8 @@
             // 
             // UcUri
             // 
-            this.UcUri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.UcUri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.UcUri.Icon = null;
             this.UcUri.Location = new System.Drawing.Point(6, 3);
             this.UcUri.Name = "UcUri";
@@ -211,6 +211,7 @@
             this.Name = "WPcs";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "阿木云存储";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WPcs_FormClosing);
             this.SbEcho.ResumeLayout(false);
             this.SbEcho.PerformLayout();
             this.TcMain.ContentPanel.ResumeLayout(false);

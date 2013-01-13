@@ -16,6 +16,8 @@ using Me.Amon.C;
 using Me.Amon.M;
 using Me.Amon.Open;
 using Me.Amon.Open.V1.App.Pcs;
+using Me.Amon.Pcs.C;
+using Me.Amon.Pcs.V.Dlg;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd._Cat;
 using Me.Amon.Pwd._Key;
@@ -1344,8 +1346,8 @@ namespace Me.Amon.Pwd
             }
 
             OAuthConsumer consumer = new OAuthConsumer();
-            consumer.consumer_key = "xcWPaz75PSRDOWBM";
-            consumer.consumer_secret = "DU5ZYaCK0cRlsMTj";
+            consumer.consumer_key = "xcLegJ8HLq7ZoQ0U";
+            consumer.consumer_secret = "psaBwFH0Z0r2PEPI";
 
             //KuaipanClient client = new KuaipanClient(consumer);
             //client.BeginDownload(0L, "", 0);
@@ -1356,7 +1358,39 @@ namespace Me.Amon.Pwd
         /// </summary>
         public void RemoteResume()
         {
-            Main.ShowAlert("远程恢复功能尚在完善中，敬请期待！");
+            OAuthConsumer consumer = new OAuthConsumer();
+            consumer.consumer_key = "xcLegJ8HLq7ZoQ0U";
+            consumer.consumer_secret = "psaBwFH0Z0r2PEPI";
+
+            var client = new KuaipanClient(consumer);
+            if (!client.Verify())
+            {
+                return;
+            }
+            var metas = client.ListMeta("/");
+            if (metas == null || metas.Count < 1)
+            {
+                return;
+            }
+            PcsViewer viewer = new PcsViewer(metas);
+            if (DialogResult.OK != viewer.ShowDialog(this))
+            {
+                return;
+            }
+            var meta = viewer.SelectedMeta;
+            NddEngine engine = new NddEngine();
+            engine.Init("");
+            var task = client.NewDownloadTask();
+            task.Meta = meta.GetMeta();
+            task.MetaName = meta.GetMetaName();
+            task.MetaSize = meta.GetSize();
+            task.File = task.Meta;
+            task.FileName = task.MetaName;
+            if (engine.BeginDownload(task))
+            {
+                return;
+            }
+            task.Start();
         }
 
         public bool RemoteConfig()

@@ -503,23 +503,23 @@
     <Compile Include="Pcs\V\MetaRef.Designer.cs">
       <DependentUpon>MetaRef.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pcs\V\Mgr\Config.cs">
+    <Compile Include="Pcs\V\Cfg\Config.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pcs\V\Mgr\Config.Designer.cs">
+    <Compile Include="Pcs\V\Cfg\Config.Designer.cs">
       <DependentUpon>Config.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pcs\V\Mgr\IMgr.cs" />
-    <Compile Include="Pcs\V\Mgr\PcsConfig.cs">
+    <Compile Include="Pcs\V\Cfg\IMgr.cs" />
+    <Compile Include="Pcs\V\Cfg\PcsConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pcs\V\Mgr\PcsConfig.Designer.cs">
+    <Compile Include="Pcs\V\Cfg\PcsConfig.Designer.cs">
       <DependentUpon>PcsConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pcs\V\Mgr\PcsCreate.cs">
+    <Compile Include="Pcs\V\Cfg\PcsCreate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pcs\V\Mgr\PcsCreate.Designer.cs">
+    <Compile Include="Pcs\V\Cfg\PcsCreate.Designer.cs">
       <DependentUpon>PcsCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Pcs\V\FavMgr.cs">
@@ -534,22 +534,22 @@
     <Compile Include="Pcs\V\MetaUri.Designer.cs">
       <DependentUpon>MetaUri.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pcs\V\Mgr\PcsVerify.cs">
+    <Compile Include="Pcs\V\Cfg\PcsVerify.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pcs\V\Mgr\PcsVerify.Designer.cs">
+    <Compile Include="Pcs\V\Cfg\PcsVerify.Designer.cs">
       <DependentUpon>PcsVerify.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pcs\V\Mgr\Server.cs">
+    <Compile Include="Pcs\V\Cfg\Server.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pcs\V\Mgr\Server.Designer.cs">
+    <Compile Include="Pcs\V\Cfg\Server.Designer.cs">
       <DependentUpon>Server.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pcs\V\Mgr\Verify.cs">
+    <Compile Include="Pcs\V\Cfg\Verify.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pcs\V\Mgr\Verify.Designer.cs">
+    <Compile Include="Pcs\V\Cfg\Verify.Designer.cs">
       <DependentUpon>Verify.cs</DependentUpon>
     </Compile>
     <Compile Include="Pcs\V\PcsList.cs">
@@ -1628,16 +1628,16 @@
     <EmbeddedResource Include="Pcs\V\MetaUri.resx">
       <DependentUpon>MetaUri.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pcs\V\Mgr\Config.resx">
+    <EmbeddedResource Include="Pcs\V\Cfg\Config.resx">
       <DependentUpon>Config.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pcs\V\Mgr\PcsCreate.resx">
+    <EmbeddedResource Include="Pcs\V\Cfg\PcsCreate.resx">
       <DependentUpon>PcsCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pcs\V\Mgr\Server.resx">
+    <EmbeddedResource Include="Pcs\V\Cfg\Server.resx">
       <DependentUpon>Server.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pcs\V\Mgr\Verify.resx">
+    <EmbeddedResource Include="Pcs\V\Cfg\Verify.resx">
       <DependentUpon>Verify.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pcs\V\PcsList.resx">
@@ -2119,6 +2119,8 @@
     <Folder Include="Open\V1\Web\" />
     <Folder Include="Open\V2\App\Sns\" />
     <Folder Include="Open\V2\Web\" />
+    <Folder Include="Pcs\V\Pro\" />
+    <Folder Include="Pcs\V\Wiz\" />
     <Folder Include="Pwd\C\" />
     <Folder Include="Pwd\E\Edit\" />
     <Folder Include="Pwd\E\Skin\" />
