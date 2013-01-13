@@ -3,7 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 using Me.Amon.Pcs.M;
 
-namespace Me.Amon.Pcs.V.Mgr
+namespace Me.Amon.Pcs.V.Cfg
 {
     public partial class Config : UserControl, IMgr
     {

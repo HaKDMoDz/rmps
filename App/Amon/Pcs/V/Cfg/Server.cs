@@ -2,7 +2,7 @@
 using Me.Amon.Pcs.M;
 using Me.Amon.Uc;
 
-namespace Me.Amon.Pcs.V.Mgr
+namespace Me.Amon.Pcs.V.Cfg
 {
     public partial class Server : UserControl, IMgr
     {

@@ -56,12 +56,13 @@
             this.ScMain.Panel1.Controls.Add(this.ScView);
             this.ScMain.Panel2Collapsed = true;
             this.ScMain.Size = new System.Drawing.Size(394, 294);
-            this.ScMain.SplitterDistance = 204;
+            this.ScMain.SplitterDistance = 240;
             this.ScMain.TabIndex = 0;
             // 
             // ScView
             // 
             this.ScView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ScView.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.ScView.Location = new System.Drawing.Point(0, 0);
             this.ScView.Name = "ScView";
             // 
@@ -73,7 +74,7 @@
             // 
             this.ScView.Panel2.Controls.Add(this.LvMeta);
             this.ScView.Size = new System.Drawing.Size(394, 294);
-            this.ScView.SplitterDistance = 131;
+            this.ScView.SplitterDistance = 160;
             this.ScView.TabIndex = 0;
             // 
             // TvPath
@@ -82,7 +83,7 @@
             this.TvPath.HideSelection = false;
             this.TvPath.Location = new System.Drawing.Point(0, 0);
             this.TvPath.Name = "TvPath";
-            this.TvPath.Size = new System.Drawing.Size(131, 294);
+            this.TvPath.Size = new System.Drawing.Size(160, 294);
             this.TvPath.TabIndex = 0;
             this.TvPath.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvPath_AfterSelect);
             // 
@@ -92,7 +93,7 @@
             this.LvMeta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LvMeta.Location = new System.Drawing.Point(0, 0);
             this.LvMeta.Name = "LvMeta";
-            this.LvMeta.Size = new System.Drawing.Size(259, 294);
+            this.LvMeta.Size = new System.Drawing.Size(230, 294);
             this.LvMeta.TabIndex = 0;
             this.LvMeta.UseCompatibleStateImageBehavior = false;
             this.LvMeta.SelectedIndexChanged += new System.EventHandler(this.LvMeta_SelectedIndexChanged);

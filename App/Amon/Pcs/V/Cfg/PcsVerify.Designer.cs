@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Pcs.V.Mgr
+﻿namespace Me.Amon.Pcs.V.Cfg
 {
     partial class PcsVerify
     {

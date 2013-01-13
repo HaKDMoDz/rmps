@@ -43,15 +43,15 @@
             // 
             // LbItem
             // 
-            this.LbItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.LbItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.LbItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.LbItem.FormattingEnabled = true;
             this.LbItem.IntegralHeight = false;
             this.LbItem.ItemHeight = 32;
             this.LbItem.Location = new System.Drawing.Point(3, 3);
             this.LbItem.Name = "LbItem";
-            this.LbItem.Size = new System.Drawing.Size(169, 294);
+            this.LbItem.Size = new System.Drawing.Size(160, 294);
             this.LbItem.TabIndex = 0;
             this.LbItem.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.LbItem_DrawItem);
             this.LbItem.SelectedIndexChanged += new System.EventHandler(this.LbItem_SelectedIndexChanged);
@@ -60,26 +60,26 @@
             // 
             // PbLogo
             // 
-            this.PbLogo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.PbLogo.Location = new System.Drawing.Point(178, 3);
+            this.PbLogo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PbLogo.Location = new System.Drawing.Point(169, 3);
             this.PbLogo.Name = "PbLogo";
-            this.PbLogo.Size = new System.Drawing.Size(219, 128);
+            this.PbLogo.Size = new System.Drawing.Size(228, 128);
             this.PbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PbLogo.TabIndex = 1;
             this.PbLogo.TabStop = false;
             // 
             // TbMemo
             // 
-            this.TbMemo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.TbMemo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TbMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TbMemo.Location = new System.Drawing.Point(178, 137);
+            this.TbMemo.Location = new System.Drawing.Point(169, 137);
             this.TbMemo.Multiline = true;
             this.TbMemo.Name = "TbMemo";
             this.TbMemo.ReadOnly = true;
-            this.TbMemo.Size = new System.Drawing.Size(219, 131);
+            this.TbMemo.Size = new System.Drawing.Size(228, 131);
             this.TbMemo.TabIndex = 2;
             // 
             // BnOpen
@@ -100,26 +100,26 @@
             this.MiVerify,
             this.MiDelete});
             this.CmMenu.Name = "CmMenu";
-            this.CmMenu.Size = new System.Drawing.Size(141, 70);
+            this.CmMenu.Size = new System.Drawing.Size(139, 70);
             // 
             // MiCreate
             // 
             this.MiCreate.Name = "MiCreate";
-            this.MiCreate.Size = new System.Drawing.Size(152, 22);
+            this.MiCreate.Size = new System.Drawing.Size(138, 22);
             this.MiCreate.Text = "新建(&N)";
             this.MiCreate.Click += new System.EventHandler(this.MiCreate_Click);
             // 
             // MiVerify
             // 
             this.MiVerify.Name = "MiVerify";
-            this.MiVerify.Size = new System.Drawing.Size(152, 22);
+            this.MiVerify.Size = new System.Drawing.Size(138, 22);
             this.MiVerify.Text = "重新授权(&R)";
             this.MiVerify.Click += new System.EventHandler(this.MiVerify_Click);
             // 
             // MiDelete
             // 
             this.MiDelete.Name = "MiDelete";
-            this.MiDelete.Size = new System.Drawing.Size(152, 22);
+            this.MiDelete.Size = new System.Drawing.Size(138, 22);
             this.MiDelete.Text = "删除(&D)";
             this.MiDelete.Click += new System.EventHandler(this.MiDelete_Click);
             // 

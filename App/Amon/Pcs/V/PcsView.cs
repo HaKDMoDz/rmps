@@ -600,6 +600,8 @@ namespace Me.Amon.Pcs.V
             var item = LvMeta.GetItemAt(e.X, e.Y);
             if (item == null)
             {
+                _WPcs.SetEnabled("item-edit", false);
+
                 _WPcs.SetEnabled("item-edit-enabled", false);
                 _WPcs.SetVisible("item-edit-visible", false);
                 _WPcs.SetVisible("none-edit-visible", true);
@@ -607,8 +609,18 @@ namespace Me.Amon.Pcs.V
             else
             {
                 _WPcs.SetEnabled("item-edit-enabled", true);
-                _WPcs.SetVisible("none-edit-visible", false);
                 _WPcs.SetVisible("item-edit-visible", true);
+                _WPcs.SetVisible("none-edit-visible", false);
+
+                var meta = item.Tag as AMeta;
+                if (meta != null)
+                {
+                    bool isFile = meta.GetMetaType() == CPcs.META_TYPE_FILE;
+                    _WPcs.SetEnabled("item-edit", isFile);
+                    _WPcs.SetVisible("item-fav", isFile);
+                    bool isDir = meta.GetMetaType() == CPcs.META_TYPE_FOLDER;
+                    _WPcs.SetVisible("item-lib", isDir);
+                }
             }
             _WPcs.PopupMenu.Show(LvMeta, e.Location);
         }

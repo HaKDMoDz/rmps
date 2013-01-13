@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Me.Amon.Pcs.V.Mgr
+namespace Me.Amon.Pcs.V.Cfg
 {
     public partial class PcsConfig : Form
     {

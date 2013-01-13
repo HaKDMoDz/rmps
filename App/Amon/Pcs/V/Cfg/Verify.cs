@@ -2,7 +2,7 @@
 using Me.Amon.Open;
 using Me.Amon.Pcs.M;
 
-namespace Me.Amon.Pcs.V.Mgr
+namespace Me.Amon.Pcs.V.Cfg
 {
     public partial class Verify : UserControl, IMgr
     {
