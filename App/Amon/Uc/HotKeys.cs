@@ -1,24 +1,25 @@
-using System;
+﻿using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Me.Amon.Api.Enums;
 using Me.Amon.E;
 
 namespace Me.Amon.Uc
 {
-    public class KeyStroke<T>
+    public class Hotkey<T>
     {
-        public bool Control { get; set; }
-        public bool Alt { get; set; }
-        public bool Shift { get; set; }
-        public bool Meta { get; set; }
+        public int Id { get; set; }
         public Keys Code { get; set; }
         public string Key { get; set; }
         public string Memo { get; set; }
         public string Command { get; set; }
+        public KeyModifiers Modifiers { get; set; }
         public IAction<T> Action { get; set; }
 
         public bool Decode(string key)
         {
+            Modifiers = KeyModifiers.None;
+
             Key = Regex.Replace(key, "[^-+=`;',./\\[\\]a-zA-Z0-9]+", " ").Trim();
             key = Key.ToUpper();
             foreach (string t in key.Split(' '))
@@ -29,22 +30,22 @@ namespace Me.Amon.Uc
                 }
                 if ("CTRL" == t)
                 {
-                    Control = true;
+                    Modifiers |= KeyModifiers.Ctrl;
                     continue;
                 }
                 if ("ALT" == t)
                 {
-                    Alt = true;
+                    Modifiers |= KeyModifiers.Alt;
                     continue;
                 }
                 if ("SHIFT" == t)
                 {
-                    Shift = true;
+                    Modifiers |= KeyModifiers.Shift;
                     continue;
                 }
                 if ("META" == t)
                 {
-                    Meta = true;
+                    Modifiers |= KeyModifiers.WindowsKey;
                     continue;
                 }
                 key = t;
@@ -60,21 +61,6 @@ namespace Me.Amon.Uc
 
         public override string ToString()
         {
-            //StringBuilder buffer = new StringBuilder();
-            //if (Control)
-            //{
-            //    buffer.Append(Keys.Control.ToString()).Append(' ');
-            //}
-            //if (Shift)
-            //{
-            //    buffer.Append(Keys.Shift.ToString()).Append(' ');
-            //}
-            //if (Alt)
-            //{
-            //    buffer.Append(Keys.Alt.ToString()).Append(' ');
-            //}
-            //buffer.Append(Code.ToString());
-            //return buffer.ToString();
             return Key;
         }
     }

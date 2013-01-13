@@ -53,9 +53,9 @@ namespace Me.Amon.Pwd.E.View
 
                 cmd = obj as string;
             }
-            else if (sender is KeyStroke<WPwd>)
+            else if (sender is Stroke<WPwd>)
             {
-                KeyStroke<WPwd> stroke = sender as KeyStroke<WPwd>;
+                Stroke<WPwd> stroke = sender as Stroke<WPwd>;
                 cmd = stroke.Command;
             }
             else

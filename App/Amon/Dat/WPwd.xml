@@ -60,7 +60,8 @@
     <Action Id="navpane-visible" Class="Me.Amon.Pwd.E.View.NavPaneVisibleAction"/>
     <Action Id="cattree-visible" Class="Me.Amon.Pwd.E.View.CatTreeVisibleAction"/>
     <Action Id="keylist-visible" Class="Me.Amon.Pwd.E.View.KeyListVisibleAction"/>
-    <Action Id="find-key" Class="Me.Amon.Pwd.E.Data.FindAction"/>
+    <Action Id="fill-data" Class="Me.Amon.Pwd.E.Data.FillAction"/>
+	<Action Id="find-key" Class="Me.Amon.Pwd.E.Data.FindAction"/>
     <Action Id="sync" Class="Me.Amon.Pwd.E.Data.SyncAction"/>
     <Action Id="export-txt" Class="Me.Amon.Pwd.E.Data.ExportTxtAction"/>
     <Action Id="export-xml" Class="Me.Amon.Pwd.E.Data.ExportXmlAction"/>
@@ -82,6 +83,11 @@
   </Actions>
 
   <!--系统快捷键-->
+  <Hotkeys Id="WPwd">
+    <Hotkey Key="^ D1" ActionId="fill-data" Memo="填充数据"/>
+  </Hotkeys>
+
+  <!--应用快捷键-->
   <Strokes Id="WPwd">
     <Stroke Key="^ S" ActionId="update-key" Memo="保存记录"/>
     <Stroke Key="% C" ActionId="att-edit-copy" Memo="复制属性"/>

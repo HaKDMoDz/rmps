@@ -23,7 +23,8 @@ namespace Me.Amon.Uc
         private Dictionary<string, ItemGroup> _Groups;
         private Dictionary<string, IAction<T>> _Actions;
         private Dictionary<string, Assembly> _Assemblys;
-        private List<KeyStroke<T>> _Strokes;
+        private List<Stroke<T>> _Strokes;
+        private List<Hotkey<T>> _Hotkeys;
         private T _IApp;
         private IViewModel _ViewModel;
 
@@ -37,7 +38,8 @@ namespace Me.Amon.Uc
             _ToolItems = new Dictionary<string, ToolStripButton>();
             _Groups = new Dictionary<string, ItemGroup>();
             _Actions = new Dictionary<string, IAction<T>>();
-            _Strokes = new List<KeyStroke<T>>();
+            _Strokes = new List<Stroke<T>>();
+            _Hotkeys = new List<Hotkey<T>>();
         }
         #endregion
 
@@ -46,6 +48,7 @@ namespace Me.Amon.Uc
         {
             _Error = null;
             _Strokes.Clear();
+            _Hotkeys.Clear();
 
             _Document = new XmlDocument();
             if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
@@ -64,6 +67,7 @@ namespace Me.Amon.Uc
         {
             _Error = null;
             _Strokes.Clear();
+            _Hotkeys.Clear();
 
             _Document.Load(reader);
             return Load();
@@ -207,7 +211,9 @@ namespace Me.Amon.Uc
             }
         }
 
-        public List<KeyStroke<T>> KeyStrokes { get { return _Strokes; } }
+        public List<Hotkey<T>> Hotkeys { get { return _Hotkeys; } }
+
+        public List<Stroke<T>> Strokes { get { return _Strokes; } }
 
         public ToolStripMenuItem GetMenuItem(string id)
         {
@@ -464,7 +470,7 @@ namespace Me.Amon.Uc
             }
             foreach (XmlNode node in list)
             {
-                KeyStroke<T> stroke = processStrokes(node);
+                Stroke<T> stroke = processStrokes(node);
                 if (stroke == null)
                 {
                     continue;
@@ -480,6 +486,37 @@ namespace Me.Amon.Uc
             {
                 form.KeyPreview = true;
                 form.KeyDown += new KeyEventHandler(FormKeyDown);
+            }
+            return true;
+        }
+
+        public bool GetHotkeys(string hotkeysId, Form form)
+        {
+            if (_Document == null || string.IsNullOrWhiteSpace(hotkeysId))
+            {
+                return false;
+            }
+
+            XmlNodeList list = _Document.SelectNodes(string.Format("/Amon/Hotkeys[@Id='{0}']/Hotkey", hotkeysId));
+            if (list == null || list.Count < 1)
+            {
+                return false;
+            }
+
+            int handle = form.Handle.ToInt32();
+            foreach (XmlNode node in list)
+            {
+                Hotkey<T> hotkey = processHotkeys(node);
+                if (hotkey == null)
+                {
+                    continue;
+                }
+                hotkey.Id = ++handle;
+                string actionId = Attribute(node, "ActionId", null);
+                if (!string.IsNullOrWhiteSpace(actionId) && _Actions.ContainsKey(actionId))
+                {
+                    hotkey.Action = _Actions[actionId];
+                }
             }
             return true;
         }
@@ -559,7 +596,7 @@ namespace Me.Amon.Uc
                     {
                         continue;
                     }
-                    KeyStroke<T> stroke = processStrokes(temp);
+                    Stroke<T> stroke = processStrokes(temp);
                     if (stroke != null)
                     {
                         stroke.Action = action;
@@ -1070,7 +1107,7 @@ namespace Me.Amon.Uc
             return button;
         }
 
-        private KeyStroke<T> processStrokes(XmlNode node)
+        private Hotkey<T> processHotkeys(XmlNode node)
         {
             string key = Attribute(node, "Key", null);
             if (string.IsNullOrWhiteSpace(key))
@@ -1080,7 +1117,28 @@ namespace Me.Amon.Uc
 
             key = key.Replace("^", "Ctrl").Replace("+", "Shift").Replace("%", "Alt").Replace("!", "Meta");
             key = Regex.Replace(key, "Control", "Ctrl", RegexOptions.IgnoreCase);
-            KeyStroke<T> stroke = new KeyStroke<T>();
+            Hotkey<T> hotkeys = new Hotkey<T>();
+            if (!hotkeys.Decode(key))
+            {
+                return null;
+            }
+            hotkeys.Memo = Attribute(node, "Memo", "");
+            hotkeys.Command = Attribute(node, "Command", null);
+            _Hotkeys.Add(hotkeys);
+            return hotkeys;
+        }
+
+        private Stroke<T> processStrokes(XmlNode node)
+        {
+            string key = Attribute(node, "Key", null);
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                return null;
+            }
+
+            key = key.Replace("^", "Ctrl").Replace("+", "Shift").Replace("%", "Alt").Replace("!", "Meta");
+            key = Regex.Replace(key, "Control", "Ctrl", RegexOptions.IgnoreCase);
+            Stroke<T> stroke = new Stroke<T>();
             if (!stroke.Decode(key))
             {
                 return null;
@@ -1125,7 +1183,7 @@ namespace Me.Amon.Uc
 
         private void FormKeyDown(object sender, KeyEventArgs e)
         {
-            foreach (KeyStroke<T> stroke in _Strokes)
+            foreach (Stroke<T> stroke in _Strokes)
             {
                 if (stroke.Action == null ||
                     e.Control ^ stroke.Control ||

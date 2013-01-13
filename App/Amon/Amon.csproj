@@ -107,6 +107,7 @@
     <Compile Include="Api\Enums\GetWindow.cs" />
     <Compile Include="Api\Enums\InputType.cs" />
     <Compile Include="Api\Enums\KeyEvent.cs" />
+    <Compile Include="Api\Enums\KeyModifiers.cs" />
     <Compile Include="Api\Enums\MouseButton.cs" />
     <Compile Include="Api\Enums\MouseEvent.cs" />
     <Compile Include="Api\Enums\PenStyles.cs" />
@@ -586,6 +587,7 @@
       <DependentUpon>WPcs.cs</DependentUpon>
     </Compile>
     <Compile Include="Pwd\EKeyType.cs" />
+    <Compile Include="Pwd\E\Data\FillAction.cs" />
     <Compile Include="Pwd\E\Data\SyncAction.cs" />
     <Compile Include="Pwd\V\IAttView.cs" />
     <Compile Include="Pwd\V\Wiz\Editer\AttEditer.cs">
@@ -1284,6 +1286,7 @@
     <Compile Include="Uc\GtdHint.Designer.cs">
       <DependentUpon>GtdHint.cs</DependentUpon>
     </Compile>
+    <Compile Include="Uc\HotKeys.cs" />
     <Compile Include="Uc\Itemi.cs" />
     <Compile Include="Uc\Items.cs" />
     <Compile Include="Util\CharUtil.cs" />
@@ -1389,7 +1392,7 @@
     <Compile Include="Pwd\_Key\KeyIcon.Designer.cs">
       <DependentUpon>KeyIcon.cs</DependentUpon>
     </Compile>
-    <Compile Include="Uc\KeyStroke.cs" />
+    <Compile Include="Uc\Stroke.cs" />
     <Compile Include="Uc\XmlMenu.cs" />
     <Compile Include="User\Uc\SignOl.cs">
       <SubType>UserControl</SubType>

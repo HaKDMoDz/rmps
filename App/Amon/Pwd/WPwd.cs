@@ -127,6 +127,13 @@ namespace Me.Amon.Pwd
 
                 //_XmlMenu.GetPopMenu("WAtt", CmAtt);
                 _XmlMenu.GetStrokes("WPwd", this);
+                if (_XmlMenu.GetHotkeys("WPwd", this))
+                {
+                    foreach (var hotkey in _XmlMenu.Hotkeys)
+                    {
+                        User32.RegisterHotKey(this.Handle, hotkey.Id, (int)hotkey.Modifiers, (int)hotkey.Code);
+                    }
+                }
             }
             #endregion
 
@@ -140,8 +147,6 @@ namespace Me.Amon.Pwd
             UcTimer.Start();
             _DataModel.Start();
             _DataModel.AppendHandler(new AmonHandler<string>(ShowEcho));
-
-            User32.RegisterHotKey(this.Handle, this.Handle.ToInt32(), 0, (int)VirtualKey.F2);
         }
         #endregion
 
@@ -197,7 +202,10 @@ namespace Me.Amon.Pwd
                 }
             }
 
-            User32.UnregisterHotKey(this.Handle, this.Handle.ToInt32());
+            foreach (var hotkey in _XmlMenu.Hotkeys)
+            {
+                User32.UnregisterHotKey(this.Handle, hotkey.Id);
+            }
 
             SaveLayout();
             _Exit = true;
@@ -241,7 +249,7 @@ namespace Me.Amon.Pwd
             //}
             //if (Width < 360 || Height < 360)
             //{
-            //ShowAPad();
+            //    ShowAPad();
             //}
             //if (WindowState == FormWindowState.Minimized)
             //{
@@ -270,12 +278,15 @@ namespace Me.Amon.Pwd
                 if (Visible && !Modaled)
                 {
                     int t = m.WParam.ToInt32();
-                    if (t == this.Handle.ToInt32())
+                    foreach (var hotkey in _XmlMenu.Hotkeys)
                     {
-                        IntPtr hWnd = User32.GetForegroundWindow();
-                        if (hWnd != IntPtr.Zero && hWnd != this.Handle)
+                        if (t == hotkey.Id)
                         {
-                            DoFillData();
+                            IntPtr hWnd = User32.GetForegroundWindow();
+                            if (hWnd != IntPtr.Zero && hWnd != this.Handle)
+                            {
+                                DoFillData();
+                            }
                         }
                     }
                 }
@@ -505,47 +516,52 @@ namespace Me.Amon.Pwd
         /// </summary>
         private void DoFillData()
         {
-            int i1 = 0;
-            int i2;
-            string s1;
-            string s2;
-            string t;
+            if (_SafeModel.Key == null || string.IsNullOrEmpty(_SafeModel.Key.Script))
+            {
+                return;
+            }
+
+            string s1;//原字符
+            string s2;//大写字符
             string script = _SafeModel.Key.Script;
+            int i1 = 0;//结束位置
+            int i2 = 0;//下一起点位置
             Match match = Regex.Match(script, "{[^}]*}");
             while (match.Success)
             {
                 i2 = match.Index;
-                s1 = match.Value;
-                s2 = s1.ToUpper();
-
-                match = match.NextMatch();
-                if (s2 == "{TAB}"
-                    || s2 == "{BACKSPACE}"
-                    || s2 == "{BKSP}"
-                    || s2 == "{BS}"
-                    || s2 == "{ENTER}")
-                {
-                    if (i2 > i1)
-                    {
-                        t = script.Substring(i1, i2 - i1);
-                        SendKeys.SendWait(t);//已有字符
-                    }
-                    i1 = i2 + s1.Length;
-                    SendKeys.SendWait(s2);// 功能键
-                    Thread.Sleep(200);// 执行等待
-                    continue;
-                }
-
                 if (i2 > i1)
                 {
-                    s2 = script.Substring(i1, i2 - i1) + TrimFillData(s1);
+                    s1 = script.Substring(i1, i2 - i1);
+                    Thread.Sleep(100);// 执行等待
+                    SendKeys.Send(s1);//已有字符
+                    SendKeys.Flush();
                 }
-                else
+
+                s1 = match.Value;
+                s2 = s1.ToUpper();
+                if (s2 != "{TAB}"
+                    && s2 != "{BACKSPACE}"
+                    && s2 != "{BKSP}"
+                    && s2 != "{BS}"
+                    && s2 != "{ENTER}")
                 {
                     s2 = TrimFillData(s1);
                 }
-                i1 = i2 + s1.Length;
+                Thread.Sleep(100);// 执行等待
                 SendKeys.SendWait(s2);
+                SendKeys.Flush();
+
+                i1 = i2 + s1.Length;
+                match = match.NextMatch();
+            }
+
+            if (i1 < script.Length)
+            {
+                s1 = script.Substring(i1);
+                Thread.Sleep(100);// 执行等待
+                SendKeys.SendWait(s1);
+                SendKeys.Flush();
             }
         }
 
@@ -2092,7 +2108,7 @@ namespace Me.Amon.Pwd
             DataTable dt = new DataTable();
             dt.Columns.Add("Key");
             dt.Columns.Add("Memo");
-            foreach (KeyStroke<WPwd> stroke in _XmlMenu.KeyStrokes)
+            foreach (Stroke<WPwd> stroke in _XmlMenu.Strokes)
             {
                 dt.Rows.Add(stroke.Key, stroke.Memo);
             }
