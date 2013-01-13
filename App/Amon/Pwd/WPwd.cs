@@ -533,9 +533,8 @@ namespace Me.Amon.Pwd
                 if (i2 > i1)
                 {
                     s1 = script.Substring(i1, i2 - i1);
-                    Thread.Sleep(100);// 执行等待
+                    Thread.Sleep(300);// 执行等待
                     SendKeys.Send(s1);//已有字符
-                    SendKeys.Flush();
                 }
 
                 s1 = match.Value;
@@ -548,7 +547,7 @@ namespace Me.Amon.Pwd
                 {
                     s2 = TrimFillData(s1);
                 }
-                Thread.Sleep(100);// 执行等待
+                Thread.Sleep(300);// 执行等待
                 SendKeys.SendWait(s2);
                 SendKeys.Flush();
 
@@ -559,9 +558,8 @@ namespace Me.Amon.Pwd
             if (i1 < script.Length)
             {
                 s1 = script.Substring(i1);
-                Thread.Sleep(100);// 执行等待
-                SendKeys.SendWait(s1);
-                SendKeys.Flush();
+                Thread.Sleep(300);// 执行等待
+                SendKeys.Send(s1);
             }
         }
 
