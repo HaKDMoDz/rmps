@@ -16,6 +16,11 @@ namespace Me.Amon.Pwd.V
         public Control Control { get { return this; } }
 
         public IKeyList KeyList { get; set; }
+
+        public new bool Focus()
+        {
+            return TbFind.Focus();
+        }
         #endregion
 
         #region 事件处理

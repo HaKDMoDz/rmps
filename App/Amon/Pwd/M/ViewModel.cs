@@ -107,41 +107,12 @@ namespace Me.Amon.Pwd.M
             #region 视图
             _UserProp = new DFEngine();
             _UserProp.Load(Path.Combine(_UserModel.DatHome, CApp.USER_CFG));
-            Pattern = _UserProp.Get("Pattern", "");
             string tmp = _UserProp.Get("WindowState", "0");
             if (CharUtil.IsValidateLong(tmp))
             {
                 WindowState = int.Parse(tmp);
             }
-            MenuBarVisible = CApp.VALUE_TRUE == _UserProp.Get("MenuBar", CApp.VALUE_TRUE).ToLower();
-            ToolBarVisible = CApp.VALUE_TRUE == _UserProp.Get("ToolBar", CApp.VALUE_TRUE).ToLower();
-            EchoBarVisible = CApp.VALUE_TRUE == _UserProp.Get("EchoBar", CApp.VALUE_TRUE).ToLower();
-            FindBarVisible = CApp.VALUE_TRUE == _UserProp.Get("FindBar", CApp.VALUE_TRUE).ToLower();
-            KeyGuidVisible = CApp.VALUE_TRUE == _UserProp.Get("NavPane", CApp.VALUE_TRUE).ToLower();
-            CatTreeVisible = CApp.VALUE_TRUE == _UserProp.Get("CatTree", CApp.VALUE_TRUE).ToLower();
-            KeyListVisible = CApp.VALUE_TRUE == _UserProp.Get("KeyList", CApp.VALUE_TRUE).ToLower();
 
-            tmp = _UserProp.Get("HSplitDistance", "200");
-            if (CharUtil.IsValidateLong(tmp))
-            {
-                KeyGuidWidth = int.Parse(tmp);
-            }
-            tmp = _UserProp.Get("VSplitDistance", "160");
-            if (CharUtil.IsValidateLong(tmp))
-            {
-                CatTreeHeight = int.Parse(tmp);
-            }
-
-            tmp = _UserProp.Get("DimW", "600");
-            if (CharUtil.IsValidateLong(tmp))
-            {
-                WindowDimW = int.Parse(tmp);
-            }
-            tmp = _UserProp.Get("DimH", "450");
-            if (CharUtil.IsValidateLong(tmp))
-            {
-                WindowDimH = int.Parse(tmp);
-            }
             tmp = _UserProp.Get("LocX", "");
             if (CharUtil.IsValidateLong(tmp))
             {
@@ -160,6 +131,59 @@ namespace Me.Amon.Pwd.M
             {
                 WindowLocY = (SystemInformation.WorkingArea.Height - WindowDimH) >> 1;
             }
+            tmp = _UserProp.Get("DimW", "");
+            if (CharUtil.IsValidateLong(tmp))
+            {
+                WindowDimW = int.Parse(tmp);
+            }
+            tmp = _UserProp.Get("DimH", "");
+            if (CharUtil.IsValidateLong(tmp))
+            {
+                WindowDimH = int.Parse(tmp);
+            }
+
+            Pattern = _UserProp.Get("Pattern", "");
+            MenuBarVisible = CApp.VALUE_TRUE == _UserProp.Get("MenuBar", CApp.VALUE_TRUE).ToLower();
+            ToolBarVisible = CApp.VALUE_TRUE == _UserProp.Get("ToolBar", CApp.VALUE_TRUE).ToLower();
+            EchoBarVisible = CApp.VALUE_TRUE == _UserProp.Get("EchoBar", CApp.VALUE_TRUE).ToLower();
+            FindBarVisible = CApp.VALUE_TRUE == _UserProp.Get("FindBar", CApp.VALUE_TRUE).ToLower();
+
+            tmp = _UserProp.Get("LayoutStyle", "");
+            if (CharUtil.IsValidateLong(tmp))
+            {
+                LayoutStyle = int.Parse(tmp);
+            }
+
+            KeyGuidVisible = CApp.VALUE_TRUE == _UserProp.Get("KeyGuidVisible", CApp.VALUE_TRUE).ToLower();
+            tmp = _UserProp.Get("KeyGuidWidth", "");
+            if (CharUtil.IsValidateLong(tmp))
+            {
+                KeyGuidWidth = int.Parse(tmp);
+            }
+
+            CatTreeVisible = CApp.VALUE_TRUE == _UserProp.Get("CatTreeVisible", CApp.VALUE_TRUE).ToLower();
+            tmp = _UserProp.Get("CatTreeWidth", "");
+            if (CharUtil.IsValidateLong(tmp))
+            {
+                CatTreeWidth = int.Parse(tmp);
+            }
+            tmp = _UserProp.Get("CatTreeHeight", "");
+            if (CharUtil.IsValidateLong(tmp))
+            {
+                CatTreeHeight = int.Parse(tmp);
+            }
+
+            KeyListVisible = CApp.VALUE_TRUE == _UserProp.Get("KeyListVisible", CApp.VALUE_TRUE).ToLower();
+            tmp = _UserProp.Get("KeyListWidth", "");
+            if (CharUtil.IsValidateLong(tmp))
+            {
+                KeyListWidth = int.Parse(tmp);
+            }
+            tmp = _UserProp.Get("KeyListHeight", "");
+            if (CharUtil.IsValidateLong(tmp))
+            {
+                KeyListHeight = int.Parse(tmp);
+            }
             #endregion
         }
 
@@ -168,32 +192,69 @@ namespace Me.Amon.Pwd.M
         /// </summary>
         public void SaveLayout()
         {
-            _UserProp.Set("Pattern", Pattern);
-
             _UserProp.Set("WindowState", WindowState.ToString());
-
             _UserProp.Set("LocX", WindowLocX.ToString());
             _UserProp.Set("LocY", WindowLocY.ToString());
             _UserProp.Set("DimW", WindowDimW.ToString());
             _UserProp.Set("DimH", WindowDimH.ToString());
 
+            _UserProp.Set("Pattern", Pattern);
             _UserProp.Set("MenuBar", MenuBarVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
             _UserProp.Set("ToolBar", ToolBarVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
             _UserProp.Set("EchoBar", EchoBarVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
             _UserProp.Set("FindBar", FindBarVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
 
-            _UserProp.Set("NavPane", KeyGuidVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
-            _UserProp.Set("CatTree", CatTreeVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
-            _UserProp.Set("KeyList", KeyListVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
+            _UserProp.Set("LayoutStyle", LayoutStyle.ToString());
 
-            _UserProp.Set("HSplitDistance", _KeyGuidWidth.ToString());
-            _UserProp.Set("VSplitDistance", _CatTreeHeight.ToString());
+            _UserProp.Set("KeyGuidVisible", KeyGuidVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
+            _UserProp.Set("KeyGuidWidth", KeyGuidWidth.ToString());
+
+            _UserProp.Set("CatTreeVisible", CatTreeVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
+            _UserProp.Set("CatTreeWidth", CatTreeWidth.ToString());
+            _UserProp.Set("CatTreeHeight", CatTreeHeight.ToString());
+
+            _UserProp.Set("KeyListVisible", KeyListVisible ? CApp.VALUE_TRUE : CApp.VALUE_FALSE);
+            _UserProp.Set("KeyListWidth", KeyListWidth.ToString());
+            _UserProp.Set("KeyListHeight", KeyListHeight.ToString());
 
             _UserProp.Save(Path.Combine(_UserModel.DatHome, CApp.USER_CFG));
         }
         #endregion
 
         #region 视图数据
+        public string Skin { get; set; }
+
+        public int WindowState { get; set; }
+
+        public int WindowLocX { get; set; }
+        public int WindowLocY { get; set; }
+
+        public int WindowDimW
+        {
+            get
+            {
+                return _WindowDimW;
+            }
+            set
+            {
+                _WindowDimW = value < 1 ? 584 : value;
+            }
+        }
+        private int _WindowDimW = 600;
+
+        public int WindowDimH
+        {
+            get
+            {
+                return _WindowDimH;
+            }
+            set
+            {
+                _WindowDimH = value < 1 ? 412 : value;
+            }
+        }
+        private int _WindowDimH = 450;
+
         public string Pattern
         {
             get
@@ -214,10 +275,6 @@ namespace Me.Amon.Pwd.M
             }
         }
 
-        public string Skin { get; set; }
-
-        public int WindowState { get; set; }
-
         public bool MenuBarVisible { get; set; }
 
         public bool ToolBarVisible { get; set; }
@@ -229,7 +286,6 @@ namespace Me.Amon.Pwd.M
         public int LayoutStyle { get; set; }
 
         public bool KeyGuidVisible { get; set; }
-
         public int KeyGuidWidth
         {
             get
@@ -244,18 +300,6 @@ namespace Me.Amon.Pwd.M
         private int _KeyGuidWidth = 188;
 
         public bool CatTreeVisible { get; set; }
-        public int CatTreeHeight
-        {
-            get
-            {
-                return _CatTreeHeight;
-            }
-            set
-            {
-                _CatTreeHeight = value < 0 ? 152 : value;
-            }
-        }
-        private int _CatTreeHeight = 152;
         public int CatTreeWidth
         {
             get
@@ -268,20 +312,20 @@ namespace Me.Amon.Pwd.M
             }
         }
         private int _CatTreeWidth = 120;
-
-        public bool KeyListVisible { get; set; }
-        public int KeyListHeight
+        public int CatTreeHeight
         {
             get
             {
-                return _KeyListHeight;
+                return _CatTreeHeight;
             }
             set
             {
-                _KeyListHeight = value < 0 ? 80 : value;
+                _CatTreeHeight = value < 0 ? 152 : value;
             }
         }
-        private int _KeyListHeight = 80;
+        private int _CatTreeHeight = 152;
+
+        public bool KeyListVisible { get; set; }
         public int KeyListWidth
         {
             get
@@ -294,37 +338,18 @@ namespace Me.Amon.Pwd.M
             }
         }
         private int _KeyListWidth = 188;
-
-        public bool AttViewVisible { get; set; }
-
-        public int WindowLocX { get; set; }
-        public int WindowLocY { get; set; }
-
-        public int WindowDimW
+        public int KeyListHeight
         {
             get
             {
-                return _WindowDimW;
+                return _KeyListHeight;
             }
             set
             {
-                _WindowDimW = value < 1 ? 584 : value;
+                _KeyListHeight = value < 0 ? 80 : value;
             }
         }
-        private int _WindowDimW = 584;
-
-        public int WindowDimH
-        {
-            get
-            {
-                return _WindowDimH;
-            }
-            set
-            {
-                _WindowDimH = value < 1 ? 412 : value;
-            }
-        }
-        private int _WindowDimH = 412;
+        private int _KeyListHeight = 80;
         #endregion
     }
 }

@@ -39,8 +39,8 @@ namespace Me.Amon.Pwd.E.View
                 return;
             }
 
-            bool status = !IApp.NavPaneVisible;
-            IApp.NavPaneVisible = status;
+            bool status = !IApp.KeyGuidVisible;
+            IApp.KeyGuidVisible = status;
             foreach (ToolStripItem item in _Items)
             {
                 if (item == sender)
@@ -71,12 +71,12 @@ namespace Me.Amon.Pwd.E.View
             {
                 if (item is ToolStripMenuItem)
                 {
-                    (item as ToolStripMenuItem).Checked = IApp.NavPaneVisible;
+                    (item as ToolStripMenuItem).Checked = IApp.KeyGuidVisible;
                     continue;
                 }
                 if (item is ToolStripButton)
                 {
-                    (item as ToolStripButton).Checked = IApp.NavPaneVisible;
+                    (item as ToolStripButton).Checked = IApp.KeyGuidVisible;
                 }
             }
         }

@@ -16,7 +16,6 @@ using Me.Amon.C;
 using Me.Amon.M;
 using Me.Amon.Open;
 using Me.Amon.Open.V1.App.Pcs;
-using Me.Amon.Pcs.C;
 using Me.Amon.Pcs.V.Dlg;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd._Cat;
@@ -73,6 +72,7 @@ namespace Me.Amon.Pwd
 
             InitializeComponent();
 
+            CheckForIllegalCrossThreadCalls = false;
             this.Icon = Me.Amon.Properties.Resources.Icon;
         }
 
@@ -298,9 +298,22 @@ namespace Me.Amon.Pwd
             }
         }
 
+        private VoidHandler _Handler;
+        private void StartWork(VoidHandler handler)
+        {
+            _Handler = handler;
+            if (!BgWorker.IsBusy)
+            {
+                BgWorker.RunWorkerAsync();
+            }
+        }
+
         private void BgWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-
+            if (_Handler != null)
+            {
+                _Handler();
+            }
         }
 
         private void TlEcho_DoubleClick(object sender, EventArgs e)
@@ -318,6 +331,7 @@ namespace Me.Amon.Pwd
         /// <param name="e"></param>
         private void TlLayout0_Click(object sender, EventArgs e)
         {
+            _ViewModel.LayoutStyle = CPwd.LAYOUT_STYLE_0;
             ShowLayout0();
         }
 
@@ -328,6 +342,7 @@ namespace Me.Amon.Pwd
         /// <param name="e"></param>
         private void TlLayout1_Click(object sender, EventArgs e)
         {
+            _ViewModel.LayoutStyle = CPwd.LAYOUT_STYLE_1;
             ShowLayout1();
         }
 
@@ -338,6 +353,7 @@ namespace Me.Amon.Pwd
         /// <param name="e"></param>
         private void TlLayout2_Click(object sender, EventArgs e)
         {
+            _ViewModel.LayoutStyle = CPwd.LAYOUT_STYLE_2;
             ShowLayout2();
         }
         #endregion
@@ -717,7 +733,7 @@ namespace Me.Amon.Pwd
 
             if (!_SafeModel.IsUpdate)
             {
-                if (NavPaneVisible && CatTreeVisible)
+                if (KeyGuidVisible && CatTreeVisible)
                 {
                     Cat cat = SelectedCat;
                     if (cat == null)
@@ -1122,7 +1138,7 @@ namespace Me.Amon.Pwd
         {
             get
             {
-                return MbMenu.Visible;
+                return _ViewModel.MenuBarVisible;
             }
             set
             {
@@ -1138,7 +1154,7 @@ namespace Me.Amon.Pwd
         {
             get
             {
-                return TbTool.Visible;
+                return _ViewModel.ToolBarVisible;
             }
             set
             {
@@ -1154,7 +1170,7 @@ namespace Me.Amon.Pwd
         {
             get
             {
-                return SbEcho.Visible;
+                return _ViewModel.EchoBarVisible;
             }
             set
             {
@@ -1182,14 +1198,15 @@ namespace Me.Amon.Pwd
         /// <summary>
         /// 导航面板是否可见
         /// </summary>
-        public bool NavPaneVisible
+        public bool KeyGuidVisible
         {
             get
             {
-                return !ScMain.Panel1Collapsed;
+                return _ViewModel.KeyGuidVisible;
             }
             set
             {
+                _ViewModel.KeyGuidVisible = value;
                 ScMain.Panel1Collapsed = !value;
             }
         }
@@ -1201,10 +1218,11 @@ namespace Me.Amon.Pwd
         {
             get
             {
-                return !ScGuid.Panel1Collapsed;
+                return _ViewModel.CatTreeVisible;
             }
             set
             {
+                _ViewModel.CatTreeVisible = value;
                 ScGuid.Panel1Collapsed = !value;
             }
         }
@@ -1216,12 +1234,25 @@ namespace Me.Amon.Pwd
         {
             get
             {
-                return !ScData.Panel1Collapsed;
+                return _ViewModel.KeyListVisible;
             }
             set
             {
-                ScData.Panel1Collapsed = !value;
                 _ViewModel.KeyListVisible = value;
+                switch (_ViewModel.LayoutStyle)
+                {
+                    case CPwd.LAYOUT_STYLE_0:
+                        ScGuid.Panel2Collapsed = !value;
+                        break;
+                    case CPwd.LAYOUT_STYLE_1:
+                        ScData.Panel1Collapsed = !value;
+                        break;
+                    case CPwd.LAYOUT_STYLE_2:
+                        ScData.Panel1Collapsed = !value;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
         #endregion
@@ -1234,6 +1265,7 @@ namespace Me.Amon.Pwd
         public void ShowFind()
         {
             UcFind.Visible = true;
+            UcFind.Focus();
         }
 
         /// <summary>
@@ -1260,6 +1292,12 @@ namespace Me.Amon.Pwd
                 return;
             }
 
+            StartWork(new VoidHandler(DoNativeBackup));
+            Main.ShowWaiting("数据备份中，请稍候……");
+        }
+
+        private void DoNativeBackup()
+        {
             if (!Directory.Exists(_UserModel.NsPath))
             {
                 Directory.CreateDirectory(_UserModel.NsPath);
@@ -1269,6 +1307,8 @@ namespace Me.Amon.Pwd
             _DataModel.Suspend();
             BeanUtil.DoZip(Path.Combine(_UserModel.NsPath, file), _UserModel.DatHome);
             _DataModel.Resume();
+
+            Main.HideWaiting();
         }
 
         /// <summary>
@@ -1292,13 +1332,19 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            _DataModel.Suspend();
-            SaveData();
-
             if (DialogResult.OK != Main.ShowOpenFileDialog(this, "密码箱备份文件|*.apbak", "", _UserModel.NsPath, false))
             {
                 return;
             }
+
+            StartWork(new VoidHandler(DoNativeBackup));
+            Main.ShowWaiting("数据恢复中，请稍候……");
+        }
+
+        private void DoNativeResume()
+        {
+            _DataModel.Suspend();
+            SaveData();
 
             BeanUtil.UnZip(Main.OpenFileDialog.FileName, _UserModel.DatHome);
             Main.ShowAlert("数据恢复成功，请重新启动软件！");
@@ -1330,11 +1376,18 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(_UserModel.NsPath) && !RemoteConfig())
+            // 远程配置
+            if (string.IsNullOrWhiteSpace(_UserModel.CsAuth) && !RemoteConfig())
             {
                 return;
             }
 
+            StartWork(new VoidHandler(DoRemoteBackup));
+            Main.ShowWaiting("数据备份中，请稍候……");
+        }
+
+        private void DoRemoteBackup()
+        {
             string path = _UserModel.NsPath;
             if (string.IsNullOrWhiteSpace(path))
             {
@@ -1345,12 +1398,21 @@ namespace Me.Amon.Pwd
                 Directory.CreateDirectory(path);
             }
 
-            OAuthConsumer consumer = new OAuthConsumer();
-            consumer.consumer_key = "xcLegJ8HLq7ZoQ0U";
-            consumer.consumer_secret = "psaBwFH0Z0r2PEPI";
+            var client = CreateClient();
+            if (!client.Verify())
+            {
+                return;
+            }
 
-            //KuaipanClient client = new KuaipanClient(consumer);
-            //client.BeginDownload(0L, "", 0);
+            string file = DateTime.Now.ToString("yyyyMMddHHmmss") + ".apbak";
+            var task = client.NewUploadTask();
+            task.File = file;
+            task.FileName = file;
+            task.FileSize = 0;
+            task.FileStream = File.OpenRead(Path.Combine(path, file));
+            task.Meta = file;
+            task.MetaName = file;
+            task.Start();
         }
 
         /// <summary>
@@ -1358,11 +1420,19 @@ namespace Me.Amon.Pwd
         /// </summary>
         public void RemoteResume()
         {
-            OAuthConsumer consumer = new OAuthConsumer();
-            consumer.consumer_key = "xcLegJ8HLq7ZoQ0U";
-            consumer.consumer_secret = "psaBwFH0Z0r2PEPI";
+            // 是否保存
+            if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您的数据已修改，确认要丢弃吗？"))
+            {
+                return;
+            }
 
-            var client = new KuaipanClient(consumer);
+            // 远程配置
+            if (string.IsNullOrWhiteSpace(_UserModel.CsAuth) && !RemoteConfig())
+            {
+                return;
+            }
+
+            var client = CreateClient();
             if (!client.Verify())
             {
                 return;
@@ -1372,34 +1442,27 @@ namespace Me.Amon.Pwd
             {
                 return;
             }
+
             PcsViewer viewer = new PcsViewer(metas);
             if (DialogResult.OK != viewer.ShowDialog(this))
             {
                 return;
             }
             var meta = viewer.SelectedMeta;
-            NddEngine engine = new NddEngine();
-            engine.Init("");
+            var file = Path.Combine(Path.GetTempPath(), meta.GetMetaName());
             var task = client.NewDownloadTask();
             task.Meta = meta.GetMeta();
             task.MetaName = meta.GetMetaName();
             task.MetaSize = meta.GetSize();
-            task.File = task.Meta;
+            task.File = file;
             task.FileName = task.MetaName;
-            if (engine.BeginDownload(task))
-            {
-                return;
-            }
+            task.FileStream = new FileStream(file, FileMode.Create);
             task.Start();
         }
 
         public bool RemoteConfig()
         {
-            OAuthConsumer consumer = new OAuthConsumer();
-            consumer.consumer_key = "xcWPaz75PSRDOWBM";
-            consumer.consumer_secret = "DU5ZYaCK0cRlsMTj";
-
-            KuaipanClient client = new KuaipanClient(consumer);
+            var client = CreateClient();
             if (!client.Verify())
             {
                 return false;
@@ -1408,6 +1471,16 @@ namespace Me.Amon.Pwd
             _UserModel.CsAuth = client.Token.oauth_token;
             _UserModel.CsUser = account.Name;
             return true;
+        }
+
+        private KuaipanClient CreateClient()
+        {
+            OAuthConsumer consumer = new OAuthConsumer();
+            consumer.consumer_key = "xcWPaz75PSRDOWBM";
+            consumer.consumer_secret = "DU5ZYaCK0cRlsMTj";
+
+            KuaipanClient client = new KuaipanClient(consumer);
+            return client;
         }
 
         #region 数据导出
@@ -2144,26 +2217,20 @@ namespace Me.Amon.Pwd
             _ViewModel.FindBarVisible = UcFind.Visible;
 
             _ViewModel.KeyGuidWidth = ScMain.SplitterDistance;
-            _ViewModel.KeyGuidVisible = !ScMain.Panel1Collapsed;
 
             _ViewModel.CatTreeHeight = ScGuid.SplitterDistance;
-            _ViewModel.CatTreeVisible = !ScGuid.Panel1Collapsed;
             switch (_ViewModel.LayoutStyle)
             {
                 case CPwd.LAYOUT_STYLE_0:
-                    _ViewModel.KeyListVisible = !ScGuid.Panel2Collapsed;
                     break;
                 case CPwd.LAYOUT_STYLE_1:
-                    _ViewModel.KeyListVisible = !ScData.Panel1Collapsed;
                     _ViewModel.KeyListHeight = ScData.SplitterDistance;
                     break;
                 case CPwd.LAYOUT_STYLE_2:
                     _ViewModel.KeyListWidth = ScData.SplitterDistance;
-                    _ViewModel.KeyListVisible = !ScData.Panel1Collapsed;
                     break;
                 default:
                     _ViewModel.LayoutStyle = CPwd.LAYOUT_STYLE_0;
-                    _ViewModel.KeyListVisible = !ScGuid.Panel2Collapsed;
                     break;
             }
 

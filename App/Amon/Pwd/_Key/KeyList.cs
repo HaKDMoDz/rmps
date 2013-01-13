@@ -51,6 +51,8 @@ namespace Me.Amon.Pwd._Key
 
         public void ListKeys(string catId)
         {
+            LbKey.Items.Clear();
+
             DoInitKey(_DataModel.ListKey(catId));
 
             _IsSearch = false;
@@ -59,6 +61,12 @@ namespace Me.Amon.Pwd._Key
 
         public void FindKeys(string meta)
         {
+            LbKey.Items.Clear();
+            if (string.IsNullOrEmpty(meta))
+            {
+                return;
+            }
+
             meta = Regex.Replace(meta, "[+＋\\s]+", " ");
             if (string.IsNullOrEmpty(meta))
             {
@@ -101,6 +109,8 @@ namespace Me.Amon.Pwd._Key
 
         public void ListGtdExpired()
         {
+            LbKey.Items.Clear();
+
             IList<Gtd.M.MGtd> gtds = _DataModel.FindGtdExpired();
             List<Key> keys = new List<Key>(gtds.Count);
             foreach (Gtd.M.MGtd gtd in gtds)
@@ -112,6 +122,8 @@ namespace Me.Amon.Pwd._Key
 
         public void ListGtd(DateTime time, int seconds)
         {
+            LbKey.Items.Clear();
+
             IList<Gtd.M.MGtd> gtds = _DataModel.ListGtdWithRef();
             List<Key> keys = new List<Key>(gtds.Count);
             foreach (Gtd.M.MGtd gtd in gtds)
@@ -259,8 +271,6 @@ namespace Me.Amon.Pwd._Key
 
         private void DoInitKey(IList<Key> keys)
         {
-            LbKey.Items.Clear();
-
             foreach (Key key in keys)
             {
                 LbKey.Items.Add(key);

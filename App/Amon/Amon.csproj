@@ -497,6 +497,12 @@
     <Compile Include="Pcs\M\UserModel.cs" />
     <Compile Include="Pcs\M\ViewModel.cs" />
     <Compile Include="Http\ITaskViewer.cs" />
+    <Compile Include="Pcs\V\Dlg\PcsViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pcs\V\Dlg\PcsViewer.Designer.cs">
+      <DependentUpon>PcsViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pcs\V\MetaRef.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1618,6 +1624,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Open\UI\OAuth.resx">
       <DependentUpon>OAuth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pcs\V\Dlg\PcsViewer.resx">
+      <DependentUpon>PcsViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pcs\V\FavMgr.resx">
       <DependentUpon>FavMgr.cs</DependentUpon>

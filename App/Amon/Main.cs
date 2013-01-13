@@ -97,13 +97,21 @@ namespace Me.Amon
 
         public static void ShowWaiting(string message)
         {
-            Form window = null;
+            Form window = CurrentApp.App.Form;
             if (_Waiting == null)
             {
                 _Waiting = new Waiting();
             }
             BeanUtil.CenterToParent(_Waiting, window);
             _Waiting.Show(window, message);
+        }
+
+        public static void HideWaiting()
+        {
+            if (_Waiting != null && _Waiting.Visible)
+            {
+                _Waiting.Visible = false;
+            }
         }
 
         #region 日志记录
@@ -226,8 +234,8 @@ namespace Me.Amon
         {
             Icon = Me.Amon.Properties.Resources.Icon;
 
-            //_UserModel = new Pwd.M.UserModel();
-            _UserModel = new Pcs.M.UserModel();
+            _UserModel = new Pwd.M.UserModel();
+            //_UserModel = new Pcs.M.UserModel();
             _UserModel.Init();
 
             // 系统日志
@@ -289,12 +297,13 @@ namespace Me.Amon
         private void DoSignIn(string view)
         {
             DefaultApp = new TApp { Id = "WPwd", Type = "app", NeedAuth = true };
-            Pcs.WPcs wPwd = new Pcs.WPcs(this, _UserModel);
-            //Pwd.WPwd wPwd = new Pwd.WPwd(this, _UserModel);
+            //Pcs.WPcs wPwd = new Pcs.WPcs(this, _UserModel);
+            Pwd.WPwd wPwd = new Pwd.WPwd(this, _UserModel);
             wPwd.Show();
             wPwd.Init();
             DefaultApp.App = wPwd;
             //DefaultApp.App.Show();
+            CurrentApp = DefaultApp;
 
             Visible = false;
 
