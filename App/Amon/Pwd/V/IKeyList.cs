@@ -14,6 +14,8 @@ namespace Me.Amon.Pwd.V
 
         Key SelectedKey { get; set; }
 
+        void Clear();
+
         void ListKeys(string catId);
 
         void FindKeys(string meta);

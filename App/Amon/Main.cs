@@ -505,10 +505,11 @@ namespace Me.Amon
         {
             if (CurrentApp != null)
             {
-                if (CurrentApp.App.CanExit())
+                if (!CurrentApp.App.CanExit())
                 {
-                    CurrentApp.App.Dispose();
+                    return;
                 }
+                CurrentApp.App.SaveData();
             }
 
             if (_Tray != null)

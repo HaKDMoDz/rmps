@@ -15,6 +15,7 @@ using Me.Amon.Auth;
 using Me.Amon.C;
 using Me.Amon.M;
 using Me.Amon.Open;
+using Me.Amon.Open.V1;
 using Me.Amon.Open.V1.App.Pcs;
 using Me.Amon.Pcs.V.Dlg;
 using Me.Amon.Pwd._Att;
@@ -235,7 +236,6 @@ namespace Me.Amon.Pwd
             string file = _UserModel.Code + '-' + DateTime.Now.ToString("yyyyMMddHHmmss") + ".apbak";
             _DataModel.Suspend();
             BeanUtil.DoZip(Path.Combine(_UserModel.BakHome, file), _UserModel.DatHome);
-            _DataModel.Resume();
             return true;
         }
         #endregion
@@ -1312,6 +1312,8 @@ namespace Me.Amon.Pwd
 
         private void DoNativeBackup()
         {
+            _KeyList.Clear();
+
             if (!Directory.Exists(_UserModel.NsPath))
             {
                 Directory.CreateDirectory(_UserModel.NsPath);
@@ -1321,6 +1323,8 @@ namespace Me.Amon.Pwd
             _DataModel.Suspend();
             BeanUtil.DoZip(Path.Combine(_UserModel.NsPath, file), _UserModel.DatHome);
             _DataModel.Resume();
+
+            _KeyList.LastKeys();
 
             Main.HideWaiting();
         }
@@ -1357,8 +1361,8 @@ namespace Me.Amon.Pwd
 
         private void DoNativeResume()
         {
-            _DataModel.Suspend();
             SaveData();
+            _DataModel.Resume();
 
             BeanUtil.UnZip(Main.OpenFileDialog.FileName, _UserModel.DatHome);
             Main.ShowAlert("数据恢复成功，请重新启动软件！");
@@ -1413,20 +1417,25 @@ namespace Me.Amon.Pwd
             }
 
             var client = CreateClient();
-            if (!client.Verify())
-            {
-                return;
-            }
 
+            _KeyList.Clear();
             string file = DateTime.Now.ToString("yyyyMMddHHmmss") + ".apbak";
+            path = Path.Combine(path, file);
+
+            _DataModel.Suspend();
+            BeanUtil.DoZip(path, _UserModel.DatHome);
+            _DataModel.Resume();
+
             var task = client.NewUploadTask();
+            task.FileStream = File.OpenRead(path);
             task.File = file;
             task.FileName = file;
-            task.FileSize = 0;
-            task.FileStream = File.OpenRead(Path.Combine(path, file));
+            task.FileSize = task.FileStream.Length;
             task.Meta = file;
             task.MetaName = file;
-            task.Start();
+            task.Run();
+
+            Main.HideWaiting();
         }
 
         /// <summary>
@@ -1447,10 +1456,6 @@ namespace Me.Amon.Pwd
             }
 
             var client = CreateClient();
-            if (!client.Verify())
-            {
-                return;
-            }
             var metas = client.ListMeta("/");
             if (metas == null || metas.Count < 1)
             {
@@ -1493,7 +1498,9 @@ namespace Me.Amon.Pwd
             consumer.consumer_key = "xcWPaz75PSRDOWBM";
             consumer.consumer_secret = "DU5ZYaCK0cRlsMTj";
 
-            KuaipanClient client = new KuaipanClient(consumer);
+            OAuthTokenV1 token = new OAuthTokenV1();
+            token.oauth_token = _UserModel.CsAuth;
+            KuaipanClient client = new KuaipanClient(consumer, token, false);
             return client;
         }
 

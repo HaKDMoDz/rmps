@@ -14,11 +14,16 @@ namespace Me.Amon.Open.V1.App.Pcs
             _Client = client;
         }
 
-        protected override void DoWork()
+        public override void Run()
         {
+            IsAlive = true;
+            Status = TaskStatus.RUNNING;
+
             var uri = _Client.BeginUpload(this);
             if (string.IsNullOrWhiteSpace(uri))
             {
+                IsAlive = false;
+                Status = TaskStatus.ERROR;
                 return;
             }
             var oStream = new MemoryStream();

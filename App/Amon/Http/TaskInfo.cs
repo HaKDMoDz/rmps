@@ -48,9 +48,7 @@ namespace Me.Amon.Http
         #region 线程控制
         public void Start()
         {
-            IsAlive = true;
-            Status = TaskStatus.RUNNING;
-            new Thread(DoWork).Start();
+            new Thread(Run).Start();
         }
         /// <summary>
         /// 暂停
@@ -89,7 +87,7 @@ namespace Me.Amon.Http
         }
         #endregion
 
-        protected virtual void DoWork() { }
+        public virtual void Run() { }
 
         protected void DoUpload()
         {

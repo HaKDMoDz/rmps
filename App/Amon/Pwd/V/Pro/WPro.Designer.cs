@@ -125,8 +125,8 @@ namespace Me.Amon.Pwd.V.Pro
             this.OrderCol.HeaderText = "排序";
             this.OrderCol.Name = "OrderCol";
             this.OrderCol.ReadOnly = true;
-            this.OrderCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.OrderCol.Width = 35;
+            this.OrderCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.OrderCol.Width = 54;
             // 
             // ValueCol
             // 

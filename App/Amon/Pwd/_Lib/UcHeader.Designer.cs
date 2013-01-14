@@ -30,8 +30,6 @@
         {
             this.LbText = new System.Windows.Forms.Label();
             this.TbText = new System.Windows.Forms.TextBox();
-            this.LbTarget = new System.Windows.Forms.Label();
-            this.TbTarget = new System.Windows.Forms.TextBox();
             this.TbMemo = new System.Windows.Forms.TextBox();
             this.LbMemo = new System.Windows.Forms.Label();
             this.TbScript = new System.Windows.Forms.TextBox();
@@ -54,31 +52,12 @@
             this.TbText.Size = new System.Drawing.Size(100, 21);
             this.TbText.TabIndex = 1;
             // 
-            // LbTarget
-            // 
-            this.LbTarget.AutoSize = true;
-            this.LbTarget.Location = new System.Drawing.Point(3, 33);
-            this.LbTarget.Name = "LbTarget";
-            this.LbTarget.Size = new System.Drawing.Size(71, 12);
-            this.LbTarget.TabIndex = 2;
-            this.LbTarget.Text = "窗体对象(&O)";
-            // 
-            // TbTarget
-            // 
-            this.TbTarget.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TbTarget.Location = new System.Drawing.Point(80, 30);
-            this.TbTarget.Name = "TbTarget";
-            this.TbTarget.Size = new System.Drawing.Size(100, 21);
-            this.TbTarget.TabIndex = 3;
-            // 
             // TbMemo
             // 
             this.TbMemo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TbMemo.Location = new System.Drawing.Point(80, 84);
+            this.TbMemo.Location = new System.Drawing.Point(80, 57);
             this.TbMemo.Multiline = true;
             this.TbMemo.Name = "TbMemo";
             this.TbMemo.Size = new System.Drawing.Size(148, 60);
@@ -87,7 +66,7 @@
             // LbMemo
             // 
             this.LbMemo.AutoSize = true;
-            this.LbMemo.Location = new System.Drawing.Point(3, 92);
+            this.LbMemo.Location = new System.Drawing.Point(3, 65);
             this.LbMemo.Name = "LbMemo";
             this.LbMemo.Size = new System.Drawing.Size(71, 12);
             this.LbMemo.TabIndex = 6;
@@ -95,7 +74,7 @@
             // 
             // TbScript
             // 
-            this.TbScript.Location = new System.Drawing.Point(80, 57);
+            this.TbScript.Location = new System.Drawing.Point(80, 30);
             this.TbScript.Name = "TbScript";
             this.TbScript.Size = new System.Drawing.Size(100, 21);
             this.TbScript.TabIndex = 5;
@@ -103,11 +82,11 @@
             // LbScript
             // 
             this.LbScript.AutoSize = true;
-            this.LbScript.Location = new System.Drawing.Point(3, 60);
+            this.LbScript.Location = new System.Drawing.Point(3, 33);
             this.LbScript.Name = "LbScript";
             this.LbScript.Size = new System.Drawing.Size(71, 12);
             this.LbScript.TabIndex = 4;
-            this.LbScript.Text = "执行脚本(&S)";
+            this.LbScript.Text = "填充脚本(&S)";
             // 
             // UcHeader
             // 
@@ -117,8 +96,6 @@
             this.Controls.Add(this.LbMemo);
             this.Controls.Add(this.TbScript);
             this.Controls.Add(this.LbScript);
-            this.Controls.Add(this.TbTarget);
-            this.Controls.Add(this.LbTarget);
             this.Controls.Add(this.TbText);
             this.Controls.Add(this.LbText);
             this.Name = "UcHeader";
@@ -132,8 +109,6 @@
 
         private System.Windows.Forms.Label LbText;
         private System.Windows.Forms.TextBox TbText;
-        private System.Windows.Forms.Label LbTarget;
-        private System.Windows.Forms.TextBox TbTarget;
         private System.Windows.Forms.TextBox TbMemo;
         private System.Windows.Forms.Label LbMemo;
         private System.Windows.Forms.TextBox TbScript;

@@ -47,7 +47,11 @@ namespace Me.Amon.Pwd._Key
         public IAttView AttView { get; set; }
 
         public Key SelectedKey { get; set; }
-        #endregion
+
+        public void Clear()
+        {
+            LbKey.Items.Clear();
+        }
 
         public void ListKeys(string catId)
         {
@@ -165,6 +169,15 @@ namespace Me.Amon.Pwd._Key
             LbKey.Refresh();
         }
 
+        public void ListKeysWithGtd(int status)
+        {
+        }
+
+        public void ListKeysWithGtd(DateTime time, int seconds)
+        {
+        }
+        #endregion
+
         #region 事件处理
         private void LbKey_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -265,6 +278,7 @@ namespace Me.Amon.Pwd._Key
         }
         #endregion
 
+        #region 私有函数
         private void InitKey()
         {
         }
@@ -296,13 +310,6 @@ namespace Me.Amon.Pwd._Key
                 key.GtdIcon = CharUtil.IsValidateHash(key.GtdId) ? Resources.Hint : BeanUtil.NaN16;
             }
         }
-
-        public void ListKeysWithGtd(int status)
-        {
-        }
-
-        public void ListKeysWithGtd(DateTime time, int seconds)
-        {
-        }
+        #endregion
     }
 }

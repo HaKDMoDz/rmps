@@ -43,7 +43,7 @@ namespace Me.Amon.Pwd.V.Pro
 
             if (_Att != null)
             {
-                TbText.Text = _Att.Text;
+                TbText.Text = "[Window]";
                 TbData.Text = _Att.Data;
             }
 

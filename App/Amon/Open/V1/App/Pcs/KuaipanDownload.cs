@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.Threading;
 using Me.Amon.Http;
 
 namespace Me.Amon.Open.V1.App.Pcs
@@ -15,8 +14,11 @@ namespace Me.Amon.Open.V1.App.Pcs
             _Client = client;
         }
 
-        protected override void DoWork()
+        public override void Run()
         {
+            IsAlive = true;
+            Status = TaskStatus.RUNNING;
+
             var request = _Client.BeginDownload(this);
             if (FileSize > 0)
             {
@@ -31,6 +33,8 @@ namespace Me.Amon.Open.V1.App.Pcs
                 if (response.StatusCode == HttpStatusCode.Accepted)
                 {
                     Message = "Error!!!";
+                    IsAlive = false;
+                    Status = TaskStatus.ERROR;
                     return;
                 }
 
@@ -61,6 +65,7 @@ namespace Me.Amon.Open.V1.App.Pcs
             catch (Exception exp)
             {
                 Message = exp.Message;
+                Status = TaskStatus.ERROR;
             }
             finally
             {

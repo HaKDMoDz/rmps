@@ -23,7 +23,7 @@ namespace Me.Amon.Pcs.V.Cfg
             switch (mPcs.ServerType)
             {
                 case CPcs.PCS_TYPE_KUAIPAN:
-                    _Client = new Me.Amon.Open.V1.App.Pcs.KuaipanClient(OAuthConsumer.KuaipanConsumer());
+                    _Client = new Me.Amon.Open.V1.App.Pcs.KuaipanClient(OAuthConsumer.KuaipanConsumer(), true);
                     if (!_Client.RequestToken())
                     {
                         return;

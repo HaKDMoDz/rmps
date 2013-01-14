@@ -13,16 +13,22 @@ namespace Me.Amon.Open.V1.App.Pcs
 {
     public class KuaipanClient : OAuthV1Client, PcsClient
     {
+        private string _Root;
+
         #region 构造函数
-        public KuaipanClient(OAuthConsumer consumer)
+        public KuaipanClient(OAuthConsumer consumer, bool isRoot)
             : base(consumer)
         {
+            _Root = isRoot ? "kuaipan" : "app_folder";
+
             _Server = new KuaipanServer();
         }
 
-        public KuaipanClient(OAuthConsumer consumer, OAuthTokenV1 token)
+        public KuaipanClient(OAuthConsumer consumer, OAuthTokenV1 token, bool isRoot)
             : base(consumer)
         {
+            _Root = isRoot ? "kuaipan" : "app_folder";
+
             Token = token;
             _Server = new KuaipanServer();
 
@@ -175,14 +181,14 @@ namespace Me.Amon.Open.V1.App.Pcs
 
         public List<AMeta> ListMeta(AMeta meta)
         {
-            string url = string.Format(KuaipanServer.LIST_META, KuaipanServer.ROOT_NAME, meta.GetMetaPath());
+            string url = string.Format(KuaipanServer.LIST_META, _Root, meta.GetMetaPath());
             return ListMeta(url);
         }
 
         public List<AMeta> ListMeta(string path)
         {
             ResetParams();
-            path = string.Format(KuaipanServer.LIST_META, KuaipanServer.ROOT_NAME, GetPath(path));
+            path = string.Format(KuaipanServer.LIST_META, _Root, GetPath(path));
 
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
@@ -204,7 +210,7 @@ namespace Me.Amon.Open.V1.App.Pcs
         public AMeta MetaData(string path)
         {
             ResetParams();
-            path = string.Format(KuaipanServer.LIST_META, KuaipanServer.ROOT_NAME, GetPath(path));
+            path = string.Format(KuaipanServer.LIST_META, _Root, GetPath(path));
 
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
@@ -225,7 +231,7 @@ namespace Me.Amon.Open.V1.App.Pcs
         public string ShareMeta(AMeta meta)
         {
             ResetParams();
-            string url = string.Format(KuaipanServer.SHARE_META, KuaipanServer.ROOT_NAME, meta.GetMetaPath());
+            string url = string.Format(KuaipanServer.SHARE_META, _Root, meta.GetMetaPath());
 
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
@@ -257,7 +263,7 @@ namespace Me.Amon.Open.V1.App.Pcs
 
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
-            AddParam("root", KuaipanServer.ROOT_NAME);
+            AddParam("root", _Root);
             AddParam("path", Combine(path, name));
             SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
@@ -285,7 +291,7 @@ namespace Me.Amon.Open.V1.App.Pcs
 
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
-            AddParam("root", KuaipanServer.ROOT_NAME);
+            AddParam("root", _Root);
             AddParam("path", Combine(path, meta));
             AddParam("to_recycle", "true");
             SortParam();
@@ -311,7 +317,7 @@ namespace Me.Amon.Open.V1.App.Pcs
 
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
-            AddParam("root", KuaipanServer.ROOT_NAME);
+            AddParam("root", _Root);
             AddParam("from_path", meta.GetMeta());
             AddParam("to_path", Combine(dstPath, dstName));
             SortParam();
@@ -339,7 +345,7 @@ namespace Me.Amon.Open.V1.App.Pcs
 
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
-            AddParam("root", KuaipanServer.ROOT_NAME);
+            AddParam("root", _Root);
             AddParam("from_path", meta.GetMeta());
             AddParam("to_path", Combine(dstPath, dstName));
             SortParam();
@@ -373,7 +379,7 @@ namespace Me.Amon.Open.V1.App.Pcs
 
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
-            AddParam("root", KuaipanServer.ROOT_NAME);
+            AddParam("root", _Root);
             AddParam("from_copy_ref", metaRef);
             AddParam("to_path", Combine(dstPath, dstName));
             SortParam();
@@ -394,7 +400,7 @@ namespace Me.Amon.Open.V1.App.Pcs
         public AMetaRef CopyRef(AMeta meta)
         {
             ResetParams();
-            string url = string.Format(KuaipanServer.COPYREF, KuaipanServer.ROOT_NAME, meta.GetMeta());
+            string url = string.Format(KuaipanServer.COPYREF, _Root, meta.GetMeta());
 
             PrepareParams();
             AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
@@ -456,7 +462,7 @@ namespace Me.Amon.Open.V1.App.Pcs
 
                 PrepareParams();
                 AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
-                AddParam("root", KuaipanServer.ROOT_NAME);
+                AddParam("root", _Root);
                 AddParam("overwrite", "true");
                 AddParam("path", path);
                 SortParam();
@@ -483,7 +489,7 @@ namespace Me.Amon.Open.V1.App.Pcs
 
                 PrepareParams();
                 AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
-                AddParam("root", KuaipanServer.ROOT_NAME);
+                AddParam("root", _Root);
                 AddParam("path", task.Meta);
                 SortParam();
                 AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));

@@ -251,7 +251,7 @@ namespace Me.Amon.Pcs
             token.oauth_token = mPcs.Token;
             token.oauth_token_secret = mPcs.TokenSecret;
             token.UserId = mPcs.UserId;
-            KuaipanClient client = new KuaipanClient(OAuthConsumer.KuaipanConsumer(), token);
+            KuaipanClient client = new KuaipanClient(OAuthConsumer.KuaipanConsumer(), token, true);
             if (token.oauth_token.Length != 24 && token.oauth_token_secret.Length != 32)
             {
                 client.Verify();

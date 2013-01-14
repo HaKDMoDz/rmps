@@ -285,8 +285,8 @@ namespace Me.Amon.Pwd.M
             }
 
             Att att = _AttList[Att.PWDS_HEAD_AUTO];
-            att.Text = header.Target;
-            att.Data = header.Script;
+            att.Text = header.Target ?? "";
+            att.Data = header.Script ?? "";
 
             int order = 1;
             foreach (LibDetail detail in header.Details)

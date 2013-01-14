@@ -47,6 +47,7 @@
             // 
             // TbText
             // 
+            this.TbText.Enabled = false;
             this.TbText.Location = new System.Drawing.Point(56, 3);
             this.TbText.Name = "TbText";
             this.TbText.Size = new System.Drawing.Size(100, 21);
@@ -54,6 +55,7 @@
             // 
             // PbText
             // 
+            this.PbText.Enabled = false;
             this.PbText.Location = new System.Drawing.Point(162, 6);
             this.PbText.Name = "PbText";
             this.PbText.Size = new System.Drawing.Size(16, 16);
@@ -74,8 +76,8 @@
             // 
             // TbData
             // 
-            this.TbData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.TbData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TbData.Location = new System.Drawing.Point(56, 30);
             this.TbData.Multiline = true;
