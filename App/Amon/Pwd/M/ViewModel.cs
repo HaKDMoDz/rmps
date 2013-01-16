@@ -142,7 +142,7 @@ namespace Me.Amon.Pwd.M
                 WindowDimH = int.Parse(tmp);
             }
 
-            Pattern = _UserProp.Get("Pattern", "");
+            Pattern = _UserProp.Get("Pattern", CPwd.PATTERN_WIZ);
             MenuBarVisible = CApp.VALUE_TRUE == _UserProp.Get("MenuBar", CApp.VALUE_TRUE).ToLower();
             ToolBarVisible = CApp.VALUE_TRUE == _UserProp.Get("ToolBar", CApp.VALUE_TRUE).ToLower();
             EchoBarVisible = CApp.VALUE_TRUE == _UserProp.Get("EchoBar", CApp.VALUE_TRUE).ToLower();

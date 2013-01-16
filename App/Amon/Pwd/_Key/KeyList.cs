@@ -100,8 +100,11 @@ namespace Me.Amon.Pwd._Key
 
         public void RemoveSelected()
         {
-            LbKey.Items.RemoveAt(LbKey.SelectedIndex);
-            SelectedKey = null;
+            if (LbKey.SelectedIndex > -1)
+            {
+                LbKey.Items.RemoveAt(LbKey.SelectedIndex);
+                SelectedKey = null;
+            }
         }
 
         public void UpdateSelected(Key key)

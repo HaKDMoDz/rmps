@@ -37,7 +37,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
 
             TbName.GotFocus += new EventHandler(TbName_GotFocus);
             TbMeta.GotFocus += new EventHandler(TbMeta_GotFocus);
-            TbMemo.GotFocus += new EventHandler(TbMemo_GotFocus);
+            TbAuto.GotFocus += new EventHandler(TbMemo_GotFocus);
         }
         #endregion
 
@@ -108,7 +108,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             TbHint.Text = hint.Text;
             PbHint.Image = hint.Icon;
 
-            TbMemo.Text = _SafeModel.Key.Memo;
+            TbAuto.Text = _SafeModel.Key.Memo;
 
             Focus();
         }
@@ -162,14 +162,19 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             _SafeModel.Modified |= meta.Modified;
 
             AutoAtt auto = _SafeModel.Auto;
-            auto.Text = "";
-            auto.Data = lib.Script;
-
-            if (_SafeModel.Key.Memo != TbMemo.Text)
+            if (auto.Data != TbAuto.Text)
             {
-                _SafeModel.Key.Memo = TbMemo.Text;
-                _SafeModel.Modified = true;
+                auto.Text = "";
+                auto.Data = TbAuto.Text;
+                auto.Modified = true;
             }
+            _SafeModel.Modified |= auto.Modified;
+
+            //if (_SafeModel.Key.Memo != TbAuto.Text)
+            //{
+            //    _SafeModel.Key.Memo = TbAuto.Text;
+            //    _SafeModel.Modified = true;
+            //}
 
             return true;
         }
@@ -210,6 +215,11 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
         #region 事件处理
         private void CbLib_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var lib = CbLib.SelectedItem as Lib;
+            if (lib != null)
+            {
+                TbAuto.Text = lib.Script;
+            }
         }
 
         private void PbLogo_Click(object sender, EventArgs e)
@@ -249,7 +259,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
 
         private void TbMemo_GotFocus(object sender, EventArgs e)
         {
-            _TBox = TbMemo;
+            _TBox = TbAuto;
         }
         #endregion
 

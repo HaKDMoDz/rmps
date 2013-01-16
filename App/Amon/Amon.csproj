@@ -1630,6 +1630,12 @@
     <EmbeddedResource Include="Open\UI\OAuth.resx">
       <DependentUpon>OAuth.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pcs\V\Cfg\PcsConfig.resx">
+      <DependentUpon>PcsConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pcs\V\Cfg\PcsVerify.resx">
+      <DependentUpon>PcsVerify.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pcs\V\Dlg\PcsViewer.resx">
       <DependentUpon>PcsViewer.cs</DependentUpon>
     </EmbeddedResource>
