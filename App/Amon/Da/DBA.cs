@@ -24,7 +24,7 @@ namespace Me.Amon.Da
 
         void CloseConnect();
 
-        void Store(object obj);
+        void Save(object obj);
 
         void Delete(object obj);
 

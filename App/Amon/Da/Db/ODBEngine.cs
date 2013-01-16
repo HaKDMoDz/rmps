@@ -108,7 +108,7 @@ namespace Me.Amon.Da.Db
         #endregion
 
         #region 数据操作
-        public void Store(object obj)
+        public void Save(object obj)
         {
             Container.Store(obj);
         }

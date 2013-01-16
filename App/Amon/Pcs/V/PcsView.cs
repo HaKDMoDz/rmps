@@ -372,6 +372,11 @@ namespace Me.Amon.Pcs.V
             item.Text = name;
         }
 
+        public void ReloadMeta()
+        {
+            ListMeta();
+        }
+
         public void Backword()
         {
         }
@@ -617,9 +622,9 @@ namespace Me.Amon.Pcs.V
                 {
                     bool isFile = meta.GetMetaType() == CPcs.META_TYPE_FILE;
                     _WPcs.SetEnabled("item-edit", isFile);
-                    _WPcs.SetVisible("item-fav", isFile);
+                    _WPcs.SetVisible("item-lib", isFile);
                     bool isDir = meta.GetMetaType() == CPcs.META_TYPE_FOLDER;
-                    _WPcs.SetVisible("item-lib", isDir);
+                    _WPcs.SetVisible("item-fav", isDir);
                 }
             }
             _WPcs.PopupMenu.Show(LvMeta, e.Location);

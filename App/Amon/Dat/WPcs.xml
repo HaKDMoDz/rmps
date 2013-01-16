@@ -26,6 +26,10 @@
 	<Action Id="fav-new" Class="Me.Amon.Pcs.E.Edit.FavNewAction"/>
 	<Action Id="fav-mgr" Class="Me.Amon.Pcs.E.Edit.FavMgrAction"/>
 	<Action Id="task-visible" Class="Me.Amon.Pcs.E.View.TaskAction"/>
+	<Action Id="back-word" Class="Me.Amon.Pcs.E.Edit.BackwordAction"/>
+	<Action Id="up-word" Class="Me.Amon.Pcs.E.Edit.UpwordAction"/>
+	<Action Id="fore-word" Class="Me.Amon.Pcs.E.Edit.ForewordAction"/>
+	<Action Id="reload-meta" Class="Me.Amon.Pcs.E.View.ReloadAction"/>
   </Actions>
 
   <!--系统快捷键-->
@@ -173,20 +177,33 @@
     </Item>
     <Line/>
     <Item Type="normal" Text="创建目录" ActionId="create-meta" Group="item-edit-visible">
-		<Icon Id="file-save" Path="var:att-paste"/>
+		<Icon Id="folder-create" Path="var:folder-create"/>
 	</Item>
     <Item Type="normal" Text="删除" ActionId="delete-meta" Group="item-edit-visible">
-		<Icon Id="file-save" Path="var:att-delete"/>
+		<Icon Id="delete" Path="var:delete"/>
 	</Item>
-    <Item Type="normal" Text="更名" ActionId="rename-meta" Group="item-edit-visible"/>
+    <Item Type="normal" Text="更名" ActionId="rename-meta" Group="item-edit-visible">
+		<Icon Id="rename" Path="var:rename"/>
+	</Item>
+    <Item Type="normal" Text="后退" ActionId="back-word" Group="item-edit-visible">
+		<Icon Id="step-prev" Path="var:tool-edit-movel"/>
+	</Item>
+	<Item Type="normal" Text="向上" ActionId="fore-word" Group="item-edit-visible">
+		<Icon Id="step-up" Path="var:tool-edit-moveu"/>
+	</Item>
+	<Item Type="normal" Text="前进" ActionId="up-word" Group="item-edit-visible">
+		<Icon Id="step-next" Path="var:tool-edit-mover"/>
+	</Item>
   </Toolbar>
 
   <!--魔方密码弹出菜单-->
   <Popmenu Id="WPcs">
-    <Item Type="normal" Text="打开(@O)" ActionId="open-meta" Group="item-open"/>
+    <Item Type="normal" Text="打开(@O)" ActionId="open-meta" Group="item-edit-enabled"/>
 	<Item Type="normal" Text="编辑(@E)" ActionId="edit-meta" Group="item-edit"/>
+	<Item Type="normal" Text="重新加载(@R)" ActionId="reload-meta"/>
 	<Line/>
-    <Menu Id="skin" Text="发送到(@S)">
+    <Item Type="normal" Text="添加到收藏(@F)" ActionId="fav-new" Group="item-fav"/>
+    <Menu Id="skin" Text="发送到(@S)" Group="item-lib">
 	  <Item Type="normal" Text="文档" ActionId="moveto-meta" Command=":documents"/>
 	  <Item Type="normal" Text="图片" ActionId="moveto-meta" Command=":pictures"/>
 	  <Item Type="normal" Text="音乐" ActionId="moveto-meta" Command=":audios"/>
@@ -199,11 +216,10 @@
 	<Item Type="normal" Text="粘贴自" ActionId="paste-meta-as" Group="paste-meta-as-visible"/>
 	<Line/>
     <Item Type="normal" Text="分享(@S)" Enabled="false"/>
-    <Item Type="normal" Text="添加到收藏(@F)" ActionId="fav-new" Group="folder-edit-visible"/>
     <Line/>
-    <Item Type="normal" Text="复制引用(@M)" ActionId="copy-meta-ref"/>
+    <Item Type="normal" Text="复制引用(@M)" ActionId="copy-meta-ref" Group="item-edit-enabled"/>
 	<Item Type="normal" Text="粘贴引用(@M)" ActionId="paste-meta-ref"/>
-    <Item Type="normal" Text="下载(@W)" ActionId="download-meta"/>
+    <Item Type="normal" Text="下载(@W)" ActionId="download-meta" Group="item-edit-enabled"/>
     <Item Type="normal" Text="上传(@U)" ActionId="upload-meta"/>
     <Line/>
 	<Item Type="normal" Text="创建目录(@C)" ActionId="create-meta" Group="none-edit-visible"/>

@@ -56,6 +56,17 @@ namespace Me.Amon.Pwd.M
             LibModified = 0x7FFFFFFF;
         }
 
+        public void SaveMPwd(MPwd pwd)
+        {
+            _DbEngine.Save(pwd);
+        }
+
+        public MPwd ReadMPwd()
+        {
+            var list = _DbEngine.Query<MPwd>();
+            return list.Count > 0 ? list[0] : new MPwd();
+        }
+
         #region 数据目录
         private string _CatDir;
         public string CatDir { get { return _CatDir; } }

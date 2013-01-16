@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Me.Amon.Http
@@ -31,6 +32,26 @@ namespace Me.Amon.Http
         public void AddStreamFile(string FieldName, string FileName, byte[] FileContent)
         {
             AddFile(FieldName, FileName, FileContent, "application/octet-stream");
+        }
+
+        public void AddStreamFile(string FieldName, string FileName, Stream stream)
+        {
+            formData.AddRange(encode.GetBytes(string.Format("--{0}{1}", Boundary, CRLF)));
+            formData.AddRange(encode.GetBytes(string.Format(CONTENT_DISPOSITION, FieldName, FileName, CRLF)));
+            formData.AddRange(encode.GetBytes(string.Format(CONTENTTYPE, "application/octet-stream", CRLF, CRLF)));
+            int count;
+            byte[] buffer = new byte[10240];
+            while (true)
+            {
+                count = stream.Read(buffer, 0, buffer.Length);
+                if (count < 1)
+                {
+                    break;
+                }
+                formData.AddRange(buffer);
+                //oStream.Write(buffer, 0, count);
+            }
+            formData.AddRange(encode.GetBytes(CRLF));
         }
 
         public void PrepareFormData()

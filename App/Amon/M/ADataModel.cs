@@ -32,6 +32,11 @@ namespace Me.Amon.M
         }
 
         #region 数据更新
+        public void Save(object obj)
+        {
+            _DbEngine.Save(obj);
+        }
+
         public void SaveVcs(Vcs vcs)
         {
             if (vcs.Operate == DBConst.OPT_DEFAULT)
@@ -51,14 +56,14 @@ namespace Me.Amon.M
                 vcs.Id = HashUtil.UtcTimeInEnc(false);
                 vcs.CreateTime = vcs.UpdateTime;
             }
-            _DbEngine.Store(vcs);
+            _DbEngine.Save(vcs);
         }
 
         public void SaveLog(Log log)
         {
             log.Id = HashUtil.UtcTimeInEnc(false);
             log.LogTime = DateTime.Now;
-            _DbEngine.Store(log);
+            _DbEngine.Save(log);
         }
         #endregion
 
@@ -67,7 +72,7 @@ namespace Me.Amon.M
         {
             vcs.Operate = DBConst.OPT_DELETE;
             vcs.Version += 1;
-            _DbEngine.Store(vcs);
+            _DbEngine.Save(vcs);
         }
 
         /// <summary>

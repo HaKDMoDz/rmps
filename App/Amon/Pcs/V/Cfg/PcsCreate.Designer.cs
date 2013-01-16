@@ -36,9 +36,9 @@
             // 
             // PlStep
             // 
-            this.PlStep.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.PlStep.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.PlStep.Location = new System.Drawing.Point(12, 12);
             this.PlStep.Name = "PlStep";
             this.PlStep.Size = new System.Drawing.Size(440, 269);
@@ -90,6 +90,7 @@
             this.Controls.Add(this.BnPrev);
             this.Controls.Add(this.PlStep);
             this.Name = "PcsCreate";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OAuthMgr";
             this.ResumeLayout(false);
 

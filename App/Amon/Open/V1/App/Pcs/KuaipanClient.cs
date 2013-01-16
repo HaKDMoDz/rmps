@@ -569,9 +569,6 @@ namespace Me.Amon.Open.V1.App.Pcs
             //AddParam(OAuthConstants.OAUTH_TIMESTAMP, "1354715324");
             AddParam(OAuthConstants.OAUTH_CONSUMER_KEY, Consumer.consumer_key);
             AddParam(OAuthConstants.OAUTH_VERSION, "1.0");
-
-            //AddParam("path", "/test@kingsoft.com");
-            //AddParam("root", "kuaipan");
         }
 
         private string GenBaseParams()
@@ -588,7 +585,6 @@ namespace Me.Amon.Open.V1.App.Pcs
                 builder.Append(HttpUtil.Escape(item.Key));
                 builder.Append('=');
                 builder.Append(HttpUtil.Escape(item.Value));
-                //builder.Append(item.Value);
                 builder.Append('&');
             }
 

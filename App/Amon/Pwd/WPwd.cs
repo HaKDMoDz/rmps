@@ -342,8 +342,14 @@ namespace Me.Amon.Pwd
         /// <param name="e"></param>
         private void TlLayout0_Click(object sender, EventArgs e)
         {
-            _ViewModel.LayoutStyle = CPwd.LAYOUT_STYLE_0;
+            if (_ViewModel.LayoutStyle == CPwd.LAYOUT_STYLE_0)
+            {
+                return;
+            }
+
             ShowLayout0();
+            HideLayout(_ViewModel.LayoutStyle);
+            _ViewModel.LayoutStyle = CPwd.LAYOUT_STYLE_0;
         }
 
         /// <summary>
@@ -353,8 +359,14 @@ namespace Me.Amon.Pwd
         /// <param name="e"></param>
         private void TlLayout1_Click(object sender, EventArgs e)
         {
-            _ViewModel.LayoutStyle = CPwd.LAYOUT_STYLE_1;
+            if (_ViewModel.LayoutStyle == CPwd.LAYOUT_STYLE_1)
+            {
+                return;
+            }
+
             ShowLayout1();
+            HideLayout(_ViewModel.LayoutStyle);
+            _ViewModel.LayoutStyle = CPwd.LAYOUT_STYLE_1;
         }
 
         /// <summary>
@@ -364,8 +376,14 @@ namespace Me.Amon.Pwd
         /// <param name="e"></param>
         private void TlLayout2_Click(object sender, EventArgs e)
         {
-            _ViewModel.LayoutStyle = CPwd.LAYOUT_STYLE_2;
+            if (_ViewModel.LayoutStyle == CPwd.LAYOUT_STYLE_2)
+            {
+                return;
+            }
+
             ShowLayout2();
+            HideLayout(_ViewModel.LayoutStyle);
+            _ViewModel.LayoutStyle = CPwd.LAYOUT_STYLE_2;
         }
         #endregion
 
@@ -1290,6 +1308,7 @@ namespace Me.Amon.Pwd
             MessageBox.Show("同步功能尚在完善中，敬请期待！");
         }
 
+        private MPwd _MPwd;
         /// <summary>
         /// 本地备份
         /// </summary>
@@ -1301,7 +1320,11 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(_UserModel.NsPath) && !NativeConfig())
+            if (_MPwd == null)
+            {
+                _MPwd = _DataModel.ReadMPwd();
+            }
+            if (string.IsNullOrWhiteSpace(_MPwd.NsPath) && !NativeConfig())
             {
                 return;
             }
@@ -1314,14 +1337,14 @@ namespace Me.Amon.Pwd
         {
             _KeyList.Clear();
 
-            if (!Directory.Exists(_UserModel.NsPath))
+            if (!Directory.Exists(_MPwd.NsPath))
             {
-                Directory.CreateDirectory(_UserModel.NsPath);
+                Directory.CreateDirectory(_MPwd.NsPath);
             }
             string file = DateTime.Now.ToString("yyyyMMddHHmmss") + ".apbak";
 
             _DataModel.Suspend();
-            BeanUtil.DoZip(Path.Combine(_UserModel.NsPath, file), _UserModel.DatHome);
+            BeanUtil.DoZip(Path.Combine(_MPwd.NsPath, file), _UserModel.DatHome);
             _DataModel.Resume();
 
             _KeyList.LastKeys();
@@ -1334,12 +1357,18 @@ namespace Me.Amon.Pwd
         /// </summary>
         public void NativeResume()
         {
-            if (string.IsNullOrWhiteSpace(_UserModel.NsPath))
+            if (_MPwd == null)
+            {
+                _MPwd = _DataModel.ReadMPwd();
+            }
+
+            if (string.IsNullOrWhiteSpace(_MPwd.NsPath))
             {
                 Main.ShowAlert("您尚未配置本地备份路径！");
                 return;
             }
-            if (!Directory.Exists(_UserModel.NsPath))
+
+            if (!Directory.Exists(_MPwd.NsPath))
             {
                 Main.ShowAlert("本地备份路径不存在，请确认配置是否正确！");
                 return;
@@ -1350,7 +1379,7 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            if (DialogResult.OK != Main.ShowOpenFileDialog(this, "密码箱备份文件|*.apbak", "", _UserModel.NsPath, false))
+            if (DialogResult.OK != Main.ShowOpenFileDialog(this, "密码箱备份文件|*.apbak", "", _MPwd.NsPath, false))
             {
                 return;
             }
@@ -1371,15 +1400,20 @@ namespace Me.Amon.Pwd
 
         public bool NativeConfig()
         {
+            if (_MPwd == null)
+            {
+                _MPwd = _DataModel.ReadMPwd();
+            }
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             dialog.Description = "请选择本地备份路径：";
-            dialog.SelectedPath = _UserModel.NsPath;
+            dialog.SelectedPath = _MPwd.NsPath;
             if (DialogResult.OK != dialog.ShowDialog(this))
             {
                 return false;
             }
 
-            _UserModel.NsPath = dialog.SelectedPath;
+            _MPwd.NsPath = dialog.SelectedPath;
+            _DataModel.SaveMPwd(_MPwd);
             return true;
         }
 
@@ -1394,8 +1428,12 @@ namespace Me.Amon.Pwd
                 return;
             }
 
+            if (_MPwd == null)
+            {
+                _MPwd = _DataModel.ReadMPwd();
+            }
             // 远程配置
-            if (string.IsNullOrWhiteSpace(_UserModel.CsAuth) && !RemoteConfig())
+            if (string.IsNullOrWhiteSpace(_MPwd.CsAuth) && !RemoteConfig())
             {
                 return;
             }
@@ -1406,7 +1444,7 @@ namespace Me.Amon.Pwd
 
         private void DoRemoteBackup()
         {
-            string path = _UserModel.NsPath;
+            string path = _MPwd.NsPath;
             if (string.IsNullOrWhiteSpace(path))
             {
                 path = Path.GetTempPath();
@@ -1431,7 +1469,7 @@ namespace Me.Amon.Pwd
             task.File = file;
             task.FileName = file;
             task.FileSize = task.FileStream.Length;
-            task.Meta = file;
+            task.Meta = '/' + file;
             task.MetaName = file;
             task.Run();
 
@@ -1449,8 +1487,12 @@ namespace Me.Amon.Pwd
                 return;
             }
 
+            if (_MPwd == null)
+            {
+                _MPwd = _DataModel.ReadMPwd();
+            }
             // 远程配置
-            if (string.IsNullOrWhiteSpace(_UserModel.CsAuth) && !RemoteConfig())
+            if (string.IsNullOrWhiteSpace(_MPwd.CsAuth) && !RemoteConfig())
             {
                 return;
             }
@@ -1486,20 +1528,31 @@ namespace Me.Amon.Pwd
             {
                 return false;
             }
+
             var account = client.Account();
-            _UserModel.CsAuth = client.Token.oauth_token;
-            _UserModel.CsUser = account.Name;
+            if (_MPwd == null)
+            {
+                _MPwd = _DataModel.ReadMPwd();
+            }
+            _MPwd.CsType = "kuaipan";
+            _MPwd.CsAuth = client.Token.oauth_token;
+            _MPwd.CsUser = account.Name;
+            _DataModel.SaveMPwd(_MPwd);
             return true;
         }
 
         private KuaipanClient CreateClient()
         {
+            if (_MPwd == null)
+            {
+                _MPwd = _DataModel.ReadMPwd();
+            }
             OAuthConsumer consumer = new OAuthConsumer();
-            consumer.consumer_key = "xcWPaz75PSRDOWBM";
-            consumer.consumer_secret = "DU5ZYaCK0cRlsMTj";
+            consumer.consumer_key = "xcLegJ8HLq7ZoQ0U";
+            consumer.consumer_secret = "psaBwFH0Z0r2PEPI";
 
             OAuthTokenV1 token = new OAuthTokenV1();
-            token.oauth_token = _UserModel.CsAuth;
+            token.oauth_token = _MPwd.CsAuth;
             KuaipanClient client = new KuaipanClient(consumer, token, false);
             return client;
         }
@@ -2258,6 +2311,22 @@ namespace Me.Amon.Pwd
             _ViewModel.SaveLayout();
         }
 
+        private void HideLayout(int layout)
+        {
+            switch (layout)
+            {
+                case CPwd.LAYOUT_STYLE_0:
+                    TlLayout0.Checked = false;
+                    break;
+                case CPwd.LAYOUT_STYLE_1:
+                    TlLayout1.Checked = false;
+                    break;
+                case CPwd.LAYOUT_STYLE_2:
+                    TlLayout2.Checked = false;
+                    break;
+            }
+        }
+
         private void ShowLayout0()
         {
             ScGuid.Panel2.Controls.Add(_KeyList.Control);
@@ -2265,6 +2334,7 @@ namespace Me.Amon.Pwd
             ScGuid.Panel2Collapsed = !_ViewModel.KeyListVisible;
 
             ScData.Panel1Collapsed = true;
+            TlLayout0.Checked = true;
         }
 
         private void ShowLayout1()
@@ -2276,6 +2346,7 @@ namespace Me.Amon.Pwd
             ScData.Panel1Collapsed = !_ViewModel.KeyListVisible;
 
             ScGuid.Panel2Collapsed = true;
+            TlLayout1.Checked = true;
         }
 
         private void ShowLayout2()
@@ -2287,6 +2358,7 @@ namespace Me.Amon.Pwd
             ScData.Panel1Collapsed = !_ViewModel.KeyListVisible;
 
             ScGuid.Panel2Collapsed = true;
+            TlLayout2.Checked = true;
         }
         #endregion
     }

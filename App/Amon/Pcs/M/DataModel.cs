@@ -28,12 +28,12 @@ namespace Me.Amon.Pcs.M
             {
                 pcs.UserCode = _UserModel.Code;
             }
-            _DbEngine.Store(pcs);
+            _DbEngine.Save(pcs);
         }
 
         public void SaveMeta(FolderMeta meta)
         {
-            _DbEngine.Store(meta);
+            _DbEngine.Save(meta);
         }
 
         public IList<FolderMeta> ListMeta(string type, string user)

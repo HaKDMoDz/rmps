@@ -402,6 +402,7 @@
       <DependentUpon>ASmall.cs</DependentUpon>
     </Compile>
     <Compile Include="M\ADataModel.cs" />
+    <Compile Include="M\MPwd.cs" />
     <Compile Include="M\SkinModel.cs" />
     <Compile Include="Open\NameValueComparer.cs" />
     <Compile Include="Open\OAuthAccount.cs" />
@@ -484,6 +485,7 @@
     <Compile Include="Pcs\E\User\LkeyAction.cs" />
     <Compile Include="Pcs\E\User\PkeyAction.cs" />
     <Compile Include="Pcs\E\User\SkeyAction.cs" />
+    <Compile Include="Pcs\E\View\ReloadAction.cs" />
     <Compile Include="Pcs\E\View\TaskAction.cs" />
     <Compile Include="Pcs\M\AMetaRef.cs" />
     <Compile Include="Pcs\M\FolderMeta.cs" />

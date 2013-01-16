@@ -46,25 +46,6 @@ namespace Me.Amon.M
         public string ResHome { get; protected set; }
         #endregion
 
-        #region 存储信息
-        /// <summary>
-        /// 本地存储路径
-        /// </summary>
-        public string NsPath { get; set; }
-        /// <summary>
-        /// 云存储类型
-        /// </summary>
-        public string CsType { get; set; }
-        /// <summary>
-        /// 云存储授权
-        /// </summary>
-        public string CsAuth { get; set; }
-        /// <summary>
-        /// 云存储用户显示名称
-        /// </summary>
-        public string CsUser { get; set; }
-        #endregion
-
         #region 皮肤信息
         /// <summary>
         /// 外观文件

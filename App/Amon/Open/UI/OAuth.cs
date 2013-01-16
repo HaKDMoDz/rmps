@@ -16,6 +16,7 @@ namespace Me.Amon.Open.UI
         {
             InitializeComponent();
 
+            this.Icon = Me.Amon.Properties.Resources.Icon;
             this.WbBrowser.Navigate(url);
         }
 
@@ -23,6 +24,7 @@ namespace Me.Amon.Open.UI
         {
             InitializeComponent();
 
+            this.Icon = Me.Amon.Properties.Resources.Icon;
             this.WbBrowser.Navigate(url);
             this.TbToken.Enabled = req;
         }
