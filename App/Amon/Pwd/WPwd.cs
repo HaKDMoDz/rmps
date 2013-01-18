@@ -142,7 +142,7 @@ namespace Me.Amon.Pwd
 
             ShowInfo();
 
-            _CatTree.Init();
+            _CatTree.Init(null);
 
             // 当前时间
             UcTimer.Start();
@@ -910,7 +910,7 @@ namespace Me.Amon.Pwd
         public void KeyMoveto()
         {
             CatDialog view = new CatDialog(_DataModel);
-            //view.Init(IlCatTree);
+            view.Init(_CatTree.ImageList);
             view.CallBack = new AmonHandler<string>(ChangeKeyCat);
             BeanUtil.CenterToParent(view, this);
             view.ShowDialog(this);

@@ -82,6 +82,8 @@ namespace Me.Amon.Uw
             TbName.Text = _Item.Name;
             TbTips.Text = _Item.Tips;
             TbChar.Text = _Item.Data;
+
+            BtUpdate.Enabled = !_Item.IsSys;
         }
 
         private void SaveData()

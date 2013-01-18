@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System;
+using System.Xml;
 
 namespace Me.Amon.M
 {
@@ -24,6 +25,9 @@ namespace Me.Amon.M
         /// 相关说明
         /// </summary>
         public string Memo { get; set; }
+
+        [NonSerialized]
+        public bool IsSys;
 
         #region 方法重写
         public override string ToString()

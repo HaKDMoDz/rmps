@@ -265,12 +265,11 @@ namespace Me.Amon.Pwd._Key
             }
             if (LbKey.SelectedIndex != idx)
             {
-                //if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您当前的数据尚未保存，要丢弃吗？"))
-                //{
-                //    return;
-                //}
+                if (!_WPwd.CanChange(SelectedKey))
+                {
+                    return;
+                }
 
-                //_SafeModel.Modified = false;
                 LbKey.SelectedIndex = idx;
             }
 

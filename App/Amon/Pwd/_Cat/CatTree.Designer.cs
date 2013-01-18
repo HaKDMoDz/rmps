@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.TvCat = new System.Windows.Forms.TreeView();
-            this.IlCat = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
             // 
             // TvCat
@@ -38,11 +36,8 @@
             this.TvCat.AllowDrop = true;
             this.TvCat.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TvCat.HideSelection = false;
-            this.TvCat.ImageIndex = 0;
-            this.TvCat.ImageList = this.IlCat;
             this.TvCat.Location = new System.Drawing.Point(0, 0);
             this.TvCat.Name = "TvCat";
-            this.TvCat.SelectedImageIndex = 0;
             this.TvCat.Size = new System.Drawing.Size(150, 150);
             this.TvCat.TabIndex = 0;
             this.TvCat.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.TvCat_ItemDrag);
@@ -50,12 +45,6 @@
             this.TvCat.DragDrop += new System.Windows.Forms.DragEventHandler(this.TvCat_DragDrop);
             this.TvCat.DragOver += new System.Windows.Forms.DragEventHandler(this.TvCat_DragOver);
             this.TvCat.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TvCat_MouseUp);
-            // 
-            // IlCat
-            // 
-            this.IlCat.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.IlCat.ImageSize = new System.Drawing.Size(16, 16);
-            this.IlCat.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // CatTree
             // 
@@ -70,6 +59,5 @@
         #endregion
 
         private System.Windows.Forms.TreeView TvCat;
-        private System.Windows.Forms.ImageList IlCat;
     }
 }

@@ -13,6 +13,8 @@ namespace Me.Amon.Pwd.V
 
         IKeyList KeyList { get; set; }
 
+        ImageList ImageList { get; }
+
         void AppendCat(Cat cat);
 
         void UpdateCat(Cat cat);
@@ -29,7 +31,7 @@ namespace Me.Amon.Pwd.V
 
         bool Focus();
 
-        void Init();
+        void Init(ImageList images);
 
         void ChangeIcon(Png png);
     }

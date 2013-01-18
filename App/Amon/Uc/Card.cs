@@ -17,11 +17,13 @@ namespace Me.Amon.Uc
 {
     public class Card
     {
+        private string _Root;
         private SafeModel _SafeModel;
 
-        public Card(SafeModel gridMdl)
+        public Card(SafeModel gridMdl, string root)
         {
             this._SafeModel = gridMdl;
+            this._Root = root;
         }
 
         public string ExportHtm(string src, string dst)
@@ -31,6 +33,10 @@ namespace Me.Amon.Uc
 
             XmlNode node = doc.SelectSingleNode("/amon/card/base");
             string path = ReadString(node, "path", "Card");
+            if (!Path.IsPathRooted(path))
+            {
+                path = Path.Combine(_Root, path);
+            }
 
             node = doc.SelectSingleNode("/amon/card/template-uri");
             if (node == null)
@@ -42,7 +48,9 @@ namespace Me.Amon.Uc
             {
                 return null;
             }
-            StringBuilder buffer = _Text(path, src);
+
+            StringBuilder buffer = new StringBuilder();
+            _Text(buffer, Path.Combine(path, src));
             _Trim(buffer);
             string file = _File(buffer.ToString(), dst, ".htm", Encoding.UTF8);
 
@@ -73,6 +81,10 @@ namespace Me.Amon.Uc
 
             XmlNode node = doc.SelectSingleNode("/amon/card/base");
             string path = ReadString(node, "path", "Card");
+            if (!Path.IsPathRooted(path))
+            {
+                path = Path.Combine(_Root, path);
+            }
 
             node = doc.SelectSingleNode("/amon/card/template-uri");
             if (node == null)
@@ -85,7 +97,8 @@ namespace Me.Amon.Uc
                 return null;
             }
 
-            StringBuilder buffer = _Text(path, src);
+            StringBuilder buffer = new StringBuilder();
+            _Text(buffer, Path.Combine(path, src));
             _Trim(buffer);
             return _File(buffer.ToString(), dst, ".svg", Encoding.UTF8);
         }
@@ -97,6 +110,10 @@ namespace Me.Amon.Uc
 
             XmlNode node = doc.SelectSingleNode("/amon/card/base");
             string path = ReadString(node, "path", "Card");
+            if (!Path.IsPathRooted(path))
+            {
+                path = Path.Combine(_Root, path);
+            }
 
             node = doc.SelectSingleNode("/amon/card/template-uri");
             if (node == null)
@@ -109,7 +126,8 @@ namespace Me.Amon.Uc
                 return null;
             }
 
-            StringBuilder buffer = _Text(path, src);
+            StringBuilder buffer = new StringBuilder();
+            _Text(buffer, Path.Combine(path, src));
             _Trim(buffer);
             return _File(buffer.ToString(), dst, ".txt", Encoding.Default);
         }
@@ -121,6 +139,10 @@ namespace Me.Amon.Uc
 
             XmlNode node = doc.SelectSingleNode("/amon/card/base");
             string path = ReadString(node, "path", "Card");
+            if (!Path.IsPathRooted(path))
+            {
+                path = Path.Combine(_Root, path);
+            }
 
             node = doc.SelectSingleNode("/amon/card/template-uri");
             if (node == null)
@@ -133,7 +155,8 @@ namespace Me.Amon.Uc
                 return null;
             }
 
-            StringBuilder buffer = _Text(path, src);
+            StringBuilder buffer = new StringBuilder();
+            _Text(buffer, Path.Combine(path, src));
             _Trim(buffer);
             buffer.Replace("#REV#", DateTime.UtcNow.ToString("yyyyMMddTHHmmssZ"));
             return _File(buffer.ToString(), dst, ".vcf", Encoding.Default);
@@ -170,6 +193,10 @@ namespace Me.Amon.Uc
 
             XmlNode node = doc.SelectSingleNode("/amon/card/base");
             string path = ReadString(node, "path", "Card");
+            if (!Path.IsPathRooted(path))
+            {
+                path = Path.Combine(_Root, path);
+            }
 
             node = doc.SelectSingleNode("/amon/card/template-uri");
             if (node == null)
@@ -182,7 +209,8 @@ namespace Me.Amon.Uc
                 return null;
             }
 
-            StringBuilder buffer = _Text(path, src);
+            StringBuilder buffer = new StringBuilder();
+            _Text(buffer, Path.Combine(path, src));
             _Trim(buffer);
 
             try
@@ -217,6 +245,10 @@ namespace Me.Amon.Uc
 
             XmlNode node = doc.SelectSingleNode("/amon/card/base");
             string path = ReadString(node, "path", "Card");
+            if (!Path.IsPathRooted(path))
+            {
+                path = Path.Combine(_Root, path);
+            }
 
             node = doc.SelectSingleNode("/amon/card/template-uri");
             if (node == null)
@@ -229,7 +261,8 @@ namespace Me.Amon.Uc
                 return null;
             }
 
-            StringBuilder buffer = _Text(path, src);
+            StringBuilder buffer = new StringBuilder();
+            _Text(buffer, Path.Combine(path, src));
             _Trim(buffer);
             string file = _File(buffer.ToString(), dst, Path.GetExtension(src), Encoding.Default);
 
@@ -265,21 +298,11 @@ namespace Me.Amon.Uc
             return path;
         }
 
-        private StringBuilder _Text(string path, string src)
+        private bool _Text(StringBuilder buffer, string src)
         {
-            if (!Path.IsPathRooted(src))
-            {
-                src = Path.Combine(path, src);
-            }
-            if (!File.Exists(src))
-            {
-                return null;
-            }
-
             FileStream stream = File.OpenRead(src);
             StreamReader reader = new StreamReader(stream);
 
-            StringBuilder buffer = new StringBuilder();
             char[] buf = new char[1024];
             int len = reader.Read(buf, 0, buf.Length);
             while (len > 0)
@@ -291,7 +314,7 @@ namespace Me.Amon.Uc
             reader.Close();
             stream.Close();
 
-            return buffer;
+            return false;
         }
 
         private void _Trim(StringBuilder buffer)
@@ -620,7 +643,7 @@ namespace Me.Amon.Uc
 
         internal static String ReadString(XmlNode node, string prop, string dval)
         {
-            String t = dval;
+            string t = dval;
             if (node != null)
             {
                 XmlAttribute attr = node.Attributes[prop];

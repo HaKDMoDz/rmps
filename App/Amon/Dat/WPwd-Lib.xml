@@ -8,6 +8,8 @@
       <Id>qqqqqaacbrrtysww</Id>
       <Name/>
       <Text>普通账号</Text>
+	  <Target/>
+	  <Script>{登录用户}{TAB}{登录口令}</Script>
       <Memo/>
       <Items>
         <Item>
@@ -24,7 +26,7 @@
           <Id>qqqqqaacbrrtysse</Id>
           <Type>2</Type>
           <Name/>
-          <Text>登录密码</Text>
+          <Text>登录口令</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -44,6 +46,8 @@
       <Id>qqqqqaaratyvddxc</Id>
       <Name/>
       <Text>网络账号</Text>
+	  <Target/>
+	  <Script>{登录用户}{TAB}{登录口令}</Script>
       <Memo/>
       <Items>
         <Item>
@@ -69,7 +73,7 @@
           <Id>qqqqqaaratybrffa</Id>
           <Type>2</Type>
           <Name/>
-          <Text>登录密码</Text>
+          <Text>登录口令</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -152,6 +156,8 @@
       <Id>qqqqqaacbrrtyswe</Id>
       <Name/>
       <Text>游戏娱乐</Text>
+	  <Target/>
+	  <Script>{登录用户}{TAB}{登录口令}</Script>
       <Memo/>
       <Items>
         <Item>
@@ -186,7 +192,7 @@
           <Id>qqqqqazqqqyrtaez</Id>
           <Type>2</Type>
           <Name/>
-          <Text>登录密码</Text>
+          <Text>登录口令</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -305,6 +311,8 @@
       <Id>qqqqqaacbrrtyswx</Id>
       <Name/>
       <Text>电子邮件</Text>
+	  <Target/>
+	  <Script>{登录用户}{TAB}{登录口令}</Script>
       <Memo/>
       <Items>
         <Item>
@@ -339,7 +347,7 @@
           <Id>qqqqqaacbrrtyswt</Id>
           <Type>2</Type>
           <Name/>
-          <Text>邮箱密码</Text>
+          <Text>登录口令</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -422,6 +430,8 @@
       <Id>qqqqqaacbrrtysws</Id>
       <Name/>
       <Text>即时通讯</Text>
+	  <Target/>
+	  <Script>{登录用户}{TAB}{登录口令}</Script>
       <Memo/>
       <Items>
         <Item>
@@ -447,7 +457,7 @@
           <Id>qqqqqazqqaqxvcey</Id>
           <Type>2</Type>
           <Name/>
-          <Text>登录密码</Text>
+          <Text>登录口令</Text>
           <Data/>
           <Memo/>
         </Item>
@@ -548,6 +558,8 @@
       <Id>qqqqqaacbrrtyswd</Id>
       <Name/>
       <Text>软件注册</Text>
+	  <Target/>
+	  <Script>{注册用户}{TAB}{注册号码}</Script>
       <Memo/>
       <Items>
         <Item>
@@ -629,6 +641,8 @@
       <Id>qqqqqaacbrrtyswc</Id>
       <Name/>
       <Text>银行账号</Text>
+	  <Target/>
+	  <Script/>
       <Memo/>
       <Items>
         <Item>
@@ -719,6 +733,8 @@
       <Id>qqqqqaavaqdfscdv</Id>
       <Name/>
       <Text>通讯名录</Text>
+	  <Target/>
+	  <Script/>
       <Memo/>
       <Items>
         <Item>
@@ -926,6 +942,8 @@
       <Id>qqqqqaavaqdyfbzw</Id>
       <Name/>
       <Text>记事便签</Text>
+	  <Target/>
+	  <Script/>
       <Memo/>
       <Items>
         <Item>
@@ -944,6 +962,8 @@
       <Id>qqqqqazdqdfztrgq</Id>
       <Name/>
       <Text>FTP 账号</Text>
+	  <Target/>
+	  <Script>{登录用户}{TAB}{登录口令}</Script>
       <Memo/>
       <Items>
         <Item>
@@ -1034,6 +1054,8 @@
       <Id>qqqqqazdvqbargat</Id>
       <Name/>
       <Text>文件加密</Text>
+	  <Target/>
+	  <Script/>
       <Memo/>
       <Items>
         <Item>
@@ -1061,6 +1083,8 @@
       <Id>qqqqqazttgrvcztr</Id>
       <Name/>
       <Text>数值类型</Text>
+	  <Target/>
+	  <Script/>
       <Memo/>
       <Items>
         <Item>

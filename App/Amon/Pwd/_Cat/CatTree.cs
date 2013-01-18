@@ -53,14 +53,25 @@ namespace Me.Amon.Pwd._Cat
 
         public IKeyList KeyList { get; set; }
 
+        public ImageList ImageList { get; private set; }
+
         public Cat SelectedCat { get; set; }
 
-        public void Init()
+        public void Init(ImageList images)
         {
-            IlCat.Images.Add(CPwd.DEF_CAT_IMG, BeanUtil.NaN16);
+            ImageList = images;
+            if (ImageList == null)
+            {
+                ImageList = new ImageList();
+                ImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+                ImageList.ImageSize = new System.Drawing.Size(16, 16);
+                ImageList.TransparentColor = System.Drawing.Color.Transparent;
+            }
+            this.TvCat.ImageList = ImageList;
+            ImageList.Images.Add(CPwd.DEF_CAT_IMG, BeanUtil.NaN16);
 
             Cat cat = new Cat { Id = CPwd.DEF_CAT_ID, Text = "默认类别", Tips = "默认类别", Icon = "Amon" };
-            IlCat.Images.Add(cat.Icon, Resources.Logo);
+            ImageList.Images.Add(cat.Icon, Resources.Logo);
             _RootNode = new TreeNode { Name = cat.Id, Text = cat.Text, ToolTipText = cat.Tips, ImageKey = cat.Icon, SelectedImageKey = cat.Icon };
             _RootNode.Tag = cat;
             TvCat.Nodes.Add(_RootNode);
@@ -358,9 +369,9 @@ namespace Me.Amon.Pwd._Cat
             {
                 png.File = CPwd.DEF_CAT_IMG;
             }
-            if (!IlCat.Images.ContainsKey(png.File))
+            if (!ImageList.Images.ContainsKey(png.File))
             {
-                IlCat.Images.Add(png.File, png.LargeImage);
+                ImageList.Images.Add(png.File, png.LargeImage);
             }
             _LastNode.ImageKey = png.File;
             _LastNode.SelectedImageKey = png.File;
@@ -676,7 +687,7 @@ namespace Me.Amon.Pwd._Cat
                 node.Tag = cat;
                 if (CharUtil.IsValidateHash(cat.Icon))
                 {
-                    IlCat.Images.Add(cat.Icon, BeanUtil.ReadImage(Path.Combine(_DataModel.CatDir, cat.Icon + ".png"), BeanUtil.NaN16));
+                    ImageList.Images.Add(cat.Icon, BeanUtil.ReadImage(Path.Combine(_DataModel.CatDir, cat.Icon + ".png"), BeanUtil.NaN16));
                     node.ImageKey = cat.Icon;
                 }
                 else

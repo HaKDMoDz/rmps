@@ -29,6 +29,29 @@ namespace Me.Amon.M
         {
             _DbEngine = new ODBEngine();
             _DbEngine.DbInit(_UserModel);
+
+            UdcList = new List<Udc>();
+            UdcList.Add(new Udc { IsSys = true, Id = "AUDC000000000001", Name = "仅数字", Tips = "仅数字", Data = "0123456789" });
+            UdcList.Add(new Udc { IsSys = true, Id = "AUDC000000000002", Name = "大写字母", Tips = "大写字母", Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
+            UdcList.Add(new Udc { IsSys = true, Id = "AUDC000000000003", Name = "小写字母", Tips = "小写字母", Data = "abcdefghijklmnopqrstuvwxyz" });
+            UdcList.Add(new Udc { IsSys = true, Id = "AUDC000000000004", Name = "大小写字母", Tips = "大小写字母", Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
+            UdcList.Add(new Udc { IsSys = true, Id = "AUDC000000000005", Name = "数字及字母", Tips = "数字及字母", Data = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
+            UdcList.Add(new Udc { IsSys = true, Id = "AUDC000000000006", Name = "可输入英文符号", Tips = "可输入英文符号", Data = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" });
+            foreach (Udc udc in _DbEngine.Query<Udc>())
+            {
+                UdcList.Add(udc);
+            }
+
+            string _UdcKey = "AUDC000000000005";
+            foreach (Udc item in UdcList)
+            {
+                if (item.Id == _UdcKey)
+                {
+                    DefaultUdc = item;
+                }
+            }
+
+            UdcModified = 0x7FFFFFFF;
         }
 
         #region 数据更新
@@ -304,41 +327,10 @@ namespace Me.Amon.M
         #endregion
 
         #region 字符操作
-        public IList<Udc> ListUdc()
-        {
-            return _DbEngine.Query<Udc>();
-        }
-
         /// <summary>
         /// 字符集列表
         /// </summary>
         public IList<Udc> UdcList { get; private set; }
-
-        private void InitUdc()
-        {
-            UdcList = new List<Udc>();
-            UdcList.Add(new Udc { Id = "AUDC000000000001", Name = "仅数字", Tips = "仅数字", Data = "0123456789" });
-            UdcList.Add(new Udc { Id = "AUDC000000000002", Name = "大写字母", Tips = "大写字母", Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" });
-            UdcList.Add(new Udc { Id = "AUDC000000000003", Name = "小写字母", Tips = "小写字母", Data = "abcdefghijklmnopqrstuvwxyz" });
-            UdcList.Add(new Udc { Id = "AUDC000000000004", Name = "大小写字母", Tips = "大小写字母", Data = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
-            UdcList.Add(new Udc { Id = "AUDC000000000005", Name = "数字及字母", Tips = "数字及字母", Data = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" });
-            UdcList.Add(new Udc { Id = "AUDC000000000006", Name = "可输入英文符号", Tips = "可输入英文符号", Data = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" });
-            foreach (Udc udc in ListUdc())
-            {
-                UdcList.Add(udc);
-            }
-
-            string _UdcKey = "AUDC000000000005";
-            foreach (Udc item in UdcList)
-            {
-                if (item.Id == _UdcKey)
-                {
-                    DefaultUdc = item;
-                }
-            }
-
-            UdcModified = 0x7FFFFFFF;
-        }
 
         /// <summary>
         /// 字符集长度

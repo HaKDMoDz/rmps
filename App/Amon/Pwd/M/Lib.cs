@@ -68,6 +68,14 @@ namespace Me.Amon.Pwd.M
             {
                 Text = reader.ReadElementContentAsString();
             }
+            if (reader.Name == "Target" || reader.ReadToNextSibling("Target"))
+            {
+                Target = reader.ReadElementContentAsString();
+            }
+            if (reader.Name == "Script" || reader.ReadToNextSibling("Script"))
+            {
+                Script = reader.ReadElementContentAsString();
+            }
             if (reader.Name == "Memo" || reader.ReadToNextSibling("Memo"))
             {
                 Memo = reader.ReadElementContentAsString();
@@ -105,6 +113,8 @@ namespace Me.Amon.Pwd.M
             writer.WriteElementString("Id", Id);
             writer.WriteElementString("Name", Name);
             writer.WriteElementString("Text", Text);
+            writer.WriteElementString("Target", Target);
+            writer.WriteElementString("Script", Script);
             writer.WriteElementString("Memo", Memo);
 
             writer.WriteStartElement("Items");

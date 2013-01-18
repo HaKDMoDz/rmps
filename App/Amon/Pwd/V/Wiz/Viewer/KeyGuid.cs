@@ -208,7 +208,7 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
                 return;
             }
 
-            Card card = new Card(_SafeModel);
+            Card card = new Card(_SafeModel, _UserModel.SysHome);
             switch (key)
             {
                 case "htm":

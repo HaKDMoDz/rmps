@@ -40,7 +40,8 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             PbCard.Image = viewModel.GetImage("export-card-24");
             _AWiz.ShowTips(PbCard, "导出为卡片");
 
-            if (!Directory.Exists("Card"))
+            string path = Path.Combine(_UserModel.SysHome, "Card");
+            if (!Directory.Exists(path))
             {
                 return;
             }
@@ -50,7 +51,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             XmlDocument doc = new XmlDocument();
             ToolStripMenuItem item;
             XmlNode node;
-            foreach (string cardFile in Directory.GetFiles("Card", "*.acxml"))
+            foreach (string cardFile in Directory.GetFiles(path, "*.acxml"))
             {
                 try
                 {
@@ -220,7 +221,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
                 return;
             }
 
-            Card card = new Card(_SafeModel);
+            Card card = new Card(_SafeModel, _UserModel.SysHome);
             switch (key)
             {
                 case "htm":

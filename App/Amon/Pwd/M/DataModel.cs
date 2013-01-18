@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Me.Amon.Da;
-using Me.Amon.Da.Db;
 using Me.Amon.Gtd;
 using Me.Amon.Gtd.M;
 using Me.Amon.M;
@@ -16,8 +15,10 @@ namespace Me.Amon.Pwd.M
             _UserModel = userModel;
         }
 
-        public void Init()
+        public new void Init()
         {
+            base.Init();
+
             #region 数据目录
             _CatDir = Path.Combine(_UserModel.DatHome, "CAT");
             if (!Directory.Exists(_CatDir))
@@ -40,13 +41,6 @@ namespace Me.Amon.Pwd.M
                 Directory.CreateDirectory(_AcfDir);
             }
             #endregion
-
-            _DbEngine = new ODBEngine();
-            _DbEngine.DbInit(_UserModel);
-            if (_DbEngine.DbVersion.Version != 2)
-            {
-                _DbEngine.Upgrade();
-            }
 
             _LibList = new List<Lib>();
             foreach (Lib lib in ListLib())
