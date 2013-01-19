@@ -1062,7 +1062,7 @@ namespace Me.Amon.Pwd
             {
                 _ProView = new WPro();
                 _ProView.Model = CPwd.PATTERN_PRO;
-                _ProView.Init(this, _SafeModel, _DataModel, _ViewModel);
+                _ProView.Init(this, _UserModel, _SafeModel, _DataModel, _ViewModel);
             }
 
             if (_PwdView != null)
@@ -1716,6 +1716,7 @@ namespace Me.Amon.Pwd
                     _CatTree.Focus();
                     return;
                 }
+                catId = cat.Id;
             }
 
             if (DialogResult.OK != Main.ShowOpenFileDialog(this, "文件|*.aptxt", "", false))
@@ -1786,6 +1787,7 @@ namespace Me.Amon.Pwd
                     _CatTree.Focus();
                     return;
                 }
+                catId = cat.Id;
             }
 
             if (DialogResult.OK != Main.ShowOpenFileDialog(this, "文件|*.apxml", "", false))
@@ -1862,6 +1864,7 @@ namespace Me.Amon.Pwd
                     _CatTree.Focus();
                     return;
                 }
+                catId = cat.Id;
             }
 
             if (DialogResult.OK != Main.ShowOpenFileDialog(this, "文件|*.vcf", "", false))
@@ -2083,6 +2086,7 @@ namespace Me.Amon.Pwd
                     _CatTree.Focus();
                     return;
                 }
+                catId = cat.Id;
             }
 
             if (DialogResult.OK != Main.ShowOpenFileDialog(this, CApp.FILE_OPEN_ALL, "", false))

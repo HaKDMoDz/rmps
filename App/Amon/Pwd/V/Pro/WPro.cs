@@ -13,6 +13,7 @@ namespace Me.Amon.Pwd.V.Pro
     public partial class WPro : UserControl, IPwd
     {
         private WPwd _WPwd;
+        private UserModel _UserModel;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
         private ViewModel _ViewModel;
@@ -29,9 +30,10 @@ namespace Me.Amon.Pwd.V.Pro
             InitializeComponent();
         }
 
-        public void Init(WPwd wPwd, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
+        public void Init(WPwd wPwd, UserModel userModel, SafeModel safeModel, DataModel dataModel, ViewModel viewModel)
         {
             _WPwd = wPwd;
+            _UserModel = userModel;
             _SafeModel = safeModel;
             _DataModel = dataModel;
             _ViewModel = viewModel;
@@ -341,6 +343,11 @@ namespace Me.Amon.Pwd.V.Pro
 
         public void FillAtt()
         {
+            var att = _SafeModel.GetAtt(_LastIndex);
+            if (att != null)
+            {
+                _WPwd.FillData(att.Data);
+            }
         }
 
         public Cat SelectedCat
@@ -554,7 +561,7 @@ namespace Me.Amon.Pwd.V.Pro
                     ctl = new UcTextAtt(this);
                     break;
                 case Att.TYPE_PASS:
-                    ctl = new UcPassAtt(this);
+                    ctl = new UcPassAtt(this, _UserModel);
                     break;
                 case Att.TYPE_LINK:
                     ctl = new UcLinkAtt(this);

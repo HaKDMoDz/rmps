@@ -30,9 +30,10 @@ namespace Me.Amon.Pwd.V.Pro
             InitializeComponent();
         }
 
-        public UcPassAtt(WPro aPro)
+        public UcPassAtt(WPro aPro, UserModel userModel)
         {
             _APro = aPro;
+            _UserModel = userModel;
 
             InitializeComponent();
         }

@@ -281,7 +281,6 @@ namespace Me.Amon
                 _SignRc.Show();
             }
             _SignRc.CallBackHandler = handler;
-            Activate();
         }
 
         /// <summary>
