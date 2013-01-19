@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Windows.Forms;
 using Me.Amon.Pwd.M;
+using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.V.Pro
 {
@@ -11,6 +12,7 @@ namespace Me.Amon.Pwd.V.Pro
         private SafeModel _SafeModel;
         private DataModel _DataModel;
         private DataTable _DataTable;
+        private Lib _DefLib;
 
         #region 构造函数
         public UcGuidAtt()
@@ -32,6 +34,7 @@ namespace Me.Amon.Pwd.V.Pro
         public void InitOnce(DataModel dataModel, ViewModel viewModel)
         {
             _DataModel = dataModel;
+            _DefLib = new Lib { Id = "", Text = "请选择", Target = "", Script = "" };
         }
 
         public Control Control { get { return this; } }
@@ -43,6 +46,7 @@ namespace Me.Amon.Pwd.V.Pro
             if ((_DataModel.LibModified & CPwd.KEY_APRO) > 0)
             {
                 CbName.Items.Clear();
+                CbName.Items.Add(_DefLib);
                 foreach (Lib header in _DataModel.LibList)
                 {
                     CbName.Items.Add(header);
@@ -52,7 +56,7 @@ namespace Me.Amon.Pwd.V.Pro
 
             _Att = att;
 
-            CbName.SelectedItem = new Lib { Id = _Att.Data };
+            CbName.SelectedItem = new Lib { Id = _Att.Data ?? "" };
             return true;
         }
 
@@ -80,8 +84,10 @@ namespace Me.Amon.Pwd.V.Pro
         public bool Save()
         {
             Lib header = CbName.SelectedItem as Lib;
-            if (header == null || header.Id == "0")
+            if (header == null || !CharUtil.IsValidateHash(header.Id))
             {
+                Main.ShowAlert("请选择您要使用的模板！");
+                CbName.Focus();
                 return false;
             }
 

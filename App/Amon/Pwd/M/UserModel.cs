@@ -18,10 +18,6 @@ namespace Me.Amon.Pwd.M
         /// </summary>
         public int BackFileCount { get; set; }
         /// <summary>
-        /// 自动填充快捷键
-        /// </summary>
-        public string AutoFillKey { get; set; }
-        /// <summary>
         /// 口令长度
         /// </summary>
         public int PasswordLength { get; set; }
@@ -66,7 +62,7 @@ namespace Me.Amon.Pwd.M
         {
             BackFileCount = 3;
             NoticeInterval = 5;
-            //_Timer = new Timer(new TimerCallback(Timer_Callback), null, 5000, 1000);
+            PasswordLength = 8;
         }
         #endregion
 

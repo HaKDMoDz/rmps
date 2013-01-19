@@ -14,6 +14,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
         private UserModel _UserModel;
         private SafeModel _SafeModel;
         private DataModel _DataModel;
+        private Lib _DefLib;
         private TextBox _TBox;
 
         #region 构造函数
@@ -38,6 +39,8 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             TbName.GotFocus += new EventHandler(TbName_GotFocus);
             TbMeta.GotFocus += new EventHandler(TbMeta_GotFocus);
             TbAuto.GotFocus += new EventHandler(TbMemo_GotFocus);
+
+            _DefLib = new Lib { Id = "", Text = "请选择", Target = "", Script = "" };
         }
         #endregion
 
@@ -59,6 +62,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             if ((_DataModel.LibModified & CPwd.KEY_AWIZ) > 0)
             {
                 CbLib.Items.Clear();
+                CbLib.Items.Add(_DefLib);
                 foreach (Lib header in _DataModel.LibList)
                 {
                     CbLib.Items.Add(header);
@@ -72,7 +76,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
                 CbLib.Enabled = true;
                 return;
             }
-            CbLib.SelectedItem = new Lib { Id = guid.Data };
+            CbLib.SelectedItem = new Lib { Id = guid.Data ?? "" };
 
             MetaAtt meta = _SafeModel.Meta;
             if (meta == null)
@@ -108,7 +112,12 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             TbHint.Text = hint.Text;
             PbHint.Image = hint.Icon;
 
-            TbAuto.Text = _SafeModel.Key.Memo;
+            AutoAtt auto = _SafeModel.Auto;
+            if (auto == null)
+            {
+                return;
+            }
+            TbAuto.Text = auto.Data;
 
             Focus();
         }
@@ -215,6 +224,10 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
         #region 事件处理
         private void CbLib_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (_SafeModel.IsUpdate)
+            {
+                return;
+            }
             var lib = CbLib.SelectedItem as Lib;
             if (lib != null)
             {

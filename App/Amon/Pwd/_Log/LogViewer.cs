@@ -83,13 +83,17 @@ namespace Me.Amon.Pwd._Log
                 return;
             }
 
-            KeyLog newLog = _SafeModel.Key.ToLog();
+            var key = _SafeModel.Key;
+            var newLog = key.ToLog();
+            if (!key.FromLog(oldLog))
+            {
+                return;
+            }
+
             _DataModel.SaveLog(newLog);
 
-            _SafeModel.Key.FromLog(oldLog);
-            _SafeModel.Decode();
-            _WPwd.ShowKey(_SafeModel.Key);
-            _DataModel.SaveVcs(_SafeModel.Key);
+            _WPwd.ShowKey(key);
+            _DataModel.SaveVcs(key);
 
             LbLog.Items.Insert(0, newLog);
         }

@@ -9,7 +9,10 @@ namespace Me.Amon
         public const int SEC_BASE64 = 1;
         public const int SEC_AES = 2;
 
-        public const string VER_DB = "1";
+        /// <summary>
+        /// 数据结构版本
+        /// </summary>
+        public const string VER_DB = "2";
 
         /// <summary>
         /// 默认数据目录
@@ -107,6 +110,9 @@ namespace Me.Amon
 
         public const string LIB_CARD = "qqqqqaavaqdfscdv";
 
+        /// <summary>
+        /// 导航动画
+        /// </summary>
         public const int EMOTION_EYE = 0;
         public const int EMOTION_ICO = 1;
     }

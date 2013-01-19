@@ -236,14 +236,13 @@ namespace Me.Amon.Pwd._Key
                 return;
             }
 
-            if (!_WPwd.CanChange(key))
+            if (!_WPwd.CanChange())
             {
                 LbKey.SelectedItem = SelectedKey;
                 return;
             }
 
-            SelectedKey = key;
-            _WPwd.ShowKey();
+            _WPwd.ShowKey(key);
         }
 
         private void LbKey_MouseDown(object sender, MouseEventArgs e)
@@ -265,7 +264,7 @@ namespace Me.Amon.Pwd._Key
             }
             if (LbKey.SelectedIndex != idx)
             {
-                if (!_WPwd.CanChange(SelectedKey))
+                if (!_WPwd.CanChange())
                 {
                     return;
                 }

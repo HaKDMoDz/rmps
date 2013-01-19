@@ -563,7 +563,7 @@ namespace Me.Amon.Pwd.M
             return true;
         }
 
-        public bool ImportByOld(string data, string ver)
+        public bool ImportByOld1(string data, string ver)
         {
             if (string.IsNullOrEmpty(data))
             {
@@ -614,6 +614,58 @@ namespace Me.Amon.Pwd.M
                 if (idx == Att.TYPE_HINT)
                 {
                     _AttList.Add(item);
+                    continue;
+                }
+                if (item.ImportByTxt(tmp1.Substring(tmp2.Length), ver))
+                {
+                    item.Id = (_Key.AttIndex++).ToString();
+                    _AttList.Add(item);
+                    continue;
+                }
+            }
+            return true;
+        }
+
+        public bool ImportByOld2(string data, string ver)
+        {
+            if (string.IsNullOrEmpty(data))
+            {
+                return false;
+            }
+
+            string[] list = data.Replace("\\;", "\b").Split(';');
+            if (list == null || list.Length < Att.HEAD_SIZE)
+            {
+                return false;
+            }
+
+            Clear();
+            Key = new Key();
+
+            foreach (string tmp in list)
+            {
+                if (string.IsNullOrEmpty(tmp))
+                {
+                    continue;
+                }
+
+                string tmp1 = tmp.Replace("\b", "\\;").Trim();
+                Match matche = Regex.Match(tmp1, "^\\d+:");
+                if (!matche.Success)
+                {
+                    continue;
+                }
+                string tmp2 = matche.Value;
+                int idx = int.Parse(tmp2.Substring(0, tmp2.Length - 1));
+                Att item = Att.GetInstance(idx);
+                if (item == null)
+                {
+                    return false;
+                }
+                if (idx == Att.TYPE_HINT)
+                {
+                    _AttList.Add(item);
+                    _AttList.Add(new AutoAtt());
                     continue;
                 }
                 if (item.ImportByTxt(tmp1.Substring(tmp2.Length), ver))

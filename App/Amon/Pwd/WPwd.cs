@@ -429,14 +429,12 @@ namespace Me.Amon.Pwd
         {
         }
 
-        public bool CanChange(Key key)
+        public bool CanChange()
         {
             if (_SafeModel.Modified && DialogResult.Yes != Main.ShowConfirm("您当前的数据尚未保存，要丢弃吗？"))
             {
                 return false;
             }
-            _SafeModel.Key = key;
-            _SafeModel.Decode();
             return true;
         }
 
@@ -458,16 +456,25 @@ namespace Me.Amon.Pwd
 
         public void ShowKey()
         {
-            ShowKey(_SafeModel.Key);
+            if (_SafeModel.Key != null)
+            {
+                DoShowKey(_SafeModel.Key);
+            }
         }
 
         public void ShowKey(Key key)
         {
-            if (key == null)
+            if (key != null)
             {
-                return;
-            }
+                _SafeModel.Key = key;
+                _SafeModel.Decode();
 
+                DoShowKey(key);
+            }
+        }
+
+        private void DoShowKey(Key key)
+        {
             if (_PwdView == _KeyInfo)
             {
                 if (_ViewModel.Pattern == CPwd.PATTERN_WIZ)
@@ -1069,7 +1076,7 @@ namespace Me.Amon.Pwd
 
             _PwdView = _ProView;
             _PwdView.InitView(ScData.Panel2);
-            ShowKey(_SafeModel.Key);
+            DoShowKey(_SafeModel.Key);
             _ViewModel.Pattern = CPwd.PATTERN_PRO;
 
             ItemGroup group = _XmlMenu.GetGroup("att-edit");
@@ -1102,7 +1109,7 @@ namespace Me.Amon.Pwd
 
             _PwdView = _WizView;
             _PwdView.InitView(ScData.Panel2);
-            ShowKey(_SafeModel.Key);
+            DoShowKey(_SafeModel.Key);
             _ViewModel.Pattern = CPwd.PATTERN_WIZ;
 
             ItemGroup group = _XmlMenu.GetGroup("att-edit");
@@ -1255,7 +1262,20 @@ namespace Me.Amon.Pwd
             set
             {
                 _ViewModel.CatTreeVisible = value;
-                ScGuid.Panel1Collapsed = !value;
+                switch (_ViewModel.LayoutStyle)
+                {
+                    case CPwd.LAYOUT_STYLE_0:
+                        ScGuid.Panel1Collapsed = !value;
+                        break;
+                    case CPwd.LAYOUT_STYLE_1:
+                        ScMain.Panel1Collapsed = !value;
+                        break;
+                    case CPwd.LAYOUT_STYLE_2:
+                        ScMain.Panel1Collapsed = !value;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -1686,12 +1706,16 @@ namespace Me.Amon.Pwd
                 }
             }
 
-            Cat cat = _CatTree.SelectedCat;
-            if (cat == null)
+            var catId = CPwd.DEF_CAT_ID;
+            if (KeyGuidVisible && CatTreeVisible)
             {
-                Main.ShowAlert("请选择您要导入的类别！");
-                _CatTree.Focus();
-                return;
+                Cat cat = _CatTree.SelectedCat;
+                if (cat == null)
+                {
+                    Main.ShowAlert("请选择您要导入的类别！");
+                    _CatTree.Focus();
+                    return;
+                }
             }
 
             if (DialogResult.OK != Main.ShowOpenFileDialog(this, "文件|*.aptxt", "", false))
@@ -1727,7 +1751,7 @@ namespace Me.Amon.Pwd
                             continue;
                         }
 
-                        _SafeModel.Key.CatId = cat.Id;
+                        _SafeModel.Key.CatId = catId;
                         DoImportKey();
                         suc += 1;
                     }
@@ -1736,7 +1760,7 @@ namespace Me.Amon.Pwd
                 reader.Close();
             }
 
-            _KeyList.ListKeys(cat.Id);
+            _KeyList.ListKeys(catId);
             _SafeModel.Key = null;
 
             Main.ShowAlert(string.Format("数据导入结果：{0}成功，{1}失败！", suc, err));
@@ -1752,12 +1776,16 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            Cat cat = _CatTree.SelectedCat;
-            if (cat == null)
+            var catId = CPwd.DEF_CAT_ID;
+            if (KeyGuidVisible && CatTreeVisible)
             {
-                Main.ShowAlert("请选择您要导入的类别！");
-                _CatTree.Focus();
-                return;
+                Cat cat = _CatTree.SelectedCat;
+                if (cat == null)
+                {
+                    Main.ShowAlert("请选择您要导入的类别！");
+                    _CatTree.Focus();
+                    return;
+                }
             }
 
             if (DialogResult.OK != Main.ShowOpenFileDialog(this, "文件|*.apxml", "", false))
@@ -1800,14 +1828,14 @@ namespace Me.Amon.Pwd
                     continue;
                 }
 
-                _SafeModel.Key.CatId = cat.Id;
+                _SafeModel.Key.CatId = catId;
                 DoImportKey();
                 suc += 1;
             }
             reader.Close();
             stream.Close();
 
-            _KeyList.ListKeys(cat.Id);
+            _KeyList.ListKeys(catId);
             _SafeModel.Key = null;
 
             Main.ShowAlert(string.Format("数据导入结果：{0}成功，{1}失败！", suc, err));
@@ -1815,7 +1843,7 @@ namespace Me.Amon.Pwd
         }
 
         /// <summary>
-        /// 导出VCF数据
+        /// 导入VCF数据
         /// </summary>
         public void ImportVcf()
         {
@@ -1824,12 +1852,16 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            Cat cat = _CatTree.SelectedCat;
-            if (cat == null)
+            var catId = CPwd.DEF_CAT_ID;
+            if (KeyGuidVisible && CatTreeVisible)
             {
-                Main.ShowAlert("请选择您要导入的类别！");
-                _CatTree.Focus();
-                return;
+                Cat cat = _CatTree.SelectedCat;
+                if (cat == null)
+                {
+                    Main.ShowAlert("请选择您要导入的类别！");
+                    _CatTree.Focus();
+                    return;
+                }
             }
 
             if (DialogResult.OK != Main.ShowOpenFileDialog(this, "文件|*.vcf", "", false))
@@ -1849,7 +1881,7 @@ namespace Me.Amon.Pwd
             _SafeModel.Key = new Key();
             _SafeModel.Clear();
             GuidAtt guid = _SafeModel.InitGuid();
-            guid.Data = cat.Id;
+            guid.Data = catId;
             MetaAtt meta = _SafeModel.InitMeta();
             meta.Name = "演示";
             _SafeModel.InitLogo();
@@ -2027,7 +2059,7 @@ namespace Me.Amon.Pwd
             }
 
             DoImportKey();
-            _KeyList.ListKeys(cat.Id);
+            _KeyList.ListKeys(catId);
             _SafeModel.Key = null;
         }
 
@@ -2041,12 +2073,16 @@ namespace Me.Amon.Pwd
                 }
             }
 
-            Cat cat = _CatTree.SelectedCat;
-            if (cat == null)
+            var catId = CPwd.DEF_CAT_ID;
+            if (KeyGuidVisible && CatTreeVisible)
             {
-                Main.ShowAlert("请选择您要导入的类别！");
-                _CatTree.Focus();
-                return;
+                Cat cat = _CatTree.SelectedCat;
+                if (cat == null)
+                {
+                    Main.ShowAlert("请选择您要导入的类别！");
+                    _CatTree.Focus();
+                    return;
+                }
             }
 
             if (DialogResult.OK != Main.ShowOpenFileDialog(this, CApp.FILE_OPEN_ALL, "", false))
@@ -2068,13 +2104,14 @@ namespace Me.Amon.Pwd
                 {
                     if (!string.IsNullOrWhiteSpace(line))
                     {
-                        if (!_SafeModel.ImportByOld(line, "0"))
+                        if (!_SafeModel.ImportByOld2(line, "2"))
                         {
                             err += 1;
+                            line = reader.ReadLine();
                             continue;
                         }
 
-                        _SafeModel.Key.CatId = cat.Id;
+                        _SafeModel.Key.CatId = catId;
                         DoImportKey();
                         suc += 1;
                     }
@@ -2083,7 +2120,7 @@ namespace Me.Amon.Pwd
                 reader.Close();
             }
 
-            _KeyList.ListKeys(cat.Id);
+            _KeyList.ListKeys(catId);
             _SafeModel.Key = null;
 
             Main.ShowAlert(string.Format("数据导入结果：{0}成功，{1}失败！", suc, err));
@@ -2150,7 +2187,7 @@ namespace Me.Amon.Pwd
         {
             try
             {
-                Process.Start("http://amon.me/blog");
+                Process.Start("http://amon.me/");
             }
             catch (Exception exp)
             {

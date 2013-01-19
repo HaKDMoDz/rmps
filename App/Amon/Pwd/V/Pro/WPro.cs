@@ -7,7 +7,6 @@ using Me.Amon.C;
 using Me.Amon.M;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd.M;
-using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.V.Pro
 {
@@ -311,6 +310,7 @@ namespace Me.Amon.Pwd.V.Pro
 
             if (!_SafeModel.IsUpdate && _LastIndex < _SafeModel.Count - 1)
             {
+                GvAttList.FirstDisplayedScrollingRowIndex = _LastIndex;
                 _LastIndex += 1;
             }
             GvAttList.Rows[_LastIndex].Selected = true;
@@ -394,11 +394,13 @@ namespace Me.Amon.Pwd.V.Pro
         private void BtSave_Click(object sender, EventArgs e)
         {
             SaveAtt();
+            _CmpLast.Focus();
         }
 
         private void BtDrop_Click(object sender, EventArgs e)
         {
             DropAtt();
+            _CmpLast.Focus();
         }
         #endregion
 
