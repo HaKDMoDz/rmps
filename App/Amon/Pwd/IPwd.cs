@@ -32,7 +32,7 @@ namespace Me.Amon.Pwd
 
         void CutAtt();
 
-        void CopyAtt();
+        void CopyAtt(CopyType type);
 
         void PasteAtt();
 

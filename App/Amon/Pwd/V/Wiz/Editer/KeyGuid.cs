@@ -150,7 +150,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             }
         }
 
-        public void CopyData()
+        public void CopyData(CopyType type)
         {
         }
 

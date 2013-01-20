@@ -24,7 +24,7 @@
 
         void CutData();
 
-        void CopyData();
+        void CopyData(CopyType type);
 
         void PasteData();
 

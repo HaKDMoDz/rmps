@@ -505,7 +505,9 @@
     </Item>
   </Popmenu>
   <Popmenu Id="WAtt">
-    <Item Type="normal" Text="复制数据" ActionId="att-edit-copy"/>
+    <Item Type="normal" Text="复制数据">
+      <Action Class="Me.Amon.Pwd.E._Att.CopyDataAction"/>
+	</Item>
     <Line/>
     <Menu Text="添加属性">
       <Item Type="normal" Text="文本" ActionId="append-att-text"/>

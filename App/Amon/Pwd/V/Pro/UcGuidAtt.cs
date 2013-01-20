@@ -69,7 +69,7 @@ namespace Me.Amon.Pwd.V.Pro
         {
         }
 
-        public void Copy()
+        public void Copy(CopyType type)
         {
         }
 

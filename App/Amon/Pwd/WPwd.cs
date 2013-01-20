@@ -970,11 +970,11 @@ namespace Me.Amon.Pwd
             }
         }
 
-        public void AttCopy()
+        public void AttCopy(CopyType type)
         {
             if (_PwdView != null)
             {
-                _PwdView.CopyAtt();
+                _PwdView.CopyAtt(type);
             }
         }
 

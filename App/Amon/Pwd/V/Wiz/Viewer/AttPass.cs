@@ -80,7 +80,7 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
 
         public void Copy()
         {
-            SafeUtil.Copy(TbData.Text, 60);
+            SafeUtil.Copy(TbData.Text);
         }
         #endregion
 
@@ -99,7 +99,7 @@ namespace Me.Amon.Pwd.V.Wiz.Viewer
 
         private void BtCopy_Click(object sender, EventArgs e)
         {
-            SafeUtil.Copy(TbData.Text, 60);
+            SafeUtil.Copy(TbData.Text);
             TbData.Focus();
         }
 

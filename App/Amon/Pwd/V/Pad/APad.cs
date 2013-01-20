@@ -90,7 +90,7 @@ namespace Me.Amon.Pwd.V.Pad
         {
         }
 
-        public void CopyAtt()
+        public void CopyAtt(CopyType type)
         {
         }
 

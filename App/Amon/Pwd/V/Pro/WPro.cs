@@ -282,9 +282,9 @@ namespace Me.Amon.Pwd.V.Pro
             _CmpLast.Cut();
         }
 
-        public void CopyAtt()
+        public void CopyAtt(CopyType type)
         {
-            _CmpLast.Copy();
+            _CmpLast.Copy(type);
         }
 
         public void PasteAtt()

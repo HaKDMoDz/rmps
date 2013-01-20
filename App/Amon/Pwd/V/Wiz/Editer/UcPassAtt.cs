@@ -85,13 +85,22 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
 
         public void Cut()
         {
-            SafeUtil.Copy(TbData.Text, 60);
+            SafeUtil.Copy(TbData.Text);
             TbData.Clear();
         }
 
-        public void Copy()
+        public void Copy(CopyType type)
         {
-            SafeUtil.Copy(TbData.Text, 60);
+            if (type == CopyType.Data)
+            {
+                if (!string.IsNullOrEmpty(TbData.Text))
+                {
+                    Clipboard.SetText(TbData.Text);
+                }
+                return;
+            }
+
+            SafeUtil.Copy(TbData.Text);
         }
 
         public void Paste()
@@ -171,7 +180,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
 
         private void BtCopy_Click(object sender, EventArgs e)
         {
-            SafeUtil.Copy(TbData.Text, 60);
+            SafeUtil.Copy(TbData.Text);
             TbData.Focus();
         }
 

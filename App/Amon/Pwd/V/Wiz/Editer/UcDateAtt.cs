@@ -98,9 +98,9 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
         {
         }
 
-        public void Copy()
+        public void Copy(CopyType type)
         {
-            SafeUtil.Copy(DtData.Text);
+            Clipboard.SetText(DtData.Text);
         }
 
         public void Paste()

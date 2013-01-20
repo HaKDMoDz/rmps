@@ -129,11 +129,11 @@ namespace Me.Amon.Pwd.V.Wiz
             }
         }
 
-        public void CopyAtt()
+        public void CopyAtt(CopyType type)
         {
             if (_LastView != null)
             {
-                _LastView.CopyData();
+                _LastView.CopyData(type);
             }
         }
 

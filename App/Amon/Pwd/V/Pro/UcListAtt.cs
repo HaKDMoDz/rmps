@@ -69,8 +69,21 @@ namespace Me.Amon.Pwd.V.Pro
             }
         }
 
-        public void Copy()
+        public void Copy(CopyType type)
         {
+            if (type == CopyType.Data)
+            {
+                return;
+            }
+            if (type == CopyType.Name)
+            {
+                if (!string.IsNullOrEmpty(TbText.Text))
+                {
+                    Clipboard.SetText(TbText.Text);
+                }
+                return;
+            }
+
             if (!string.IsNullOrEmpty(TbText.SelectedText))
             {
                 TbText.Copy();

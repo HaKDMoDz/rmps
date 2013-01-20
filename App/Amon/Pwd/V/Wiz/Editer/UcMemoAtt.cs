@@ -72,8 +72,22 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             TbData.Cut();
         }
 
-        public void Copy()
+        public void Copy(CopyType type)
         {
+            if (type == CopyType.Data)
+            {
+                if (!string.IsNullOrEmpty(TbData.Text))
+                {
+                    Clipboard.SetText(TbData.Text);
+                }
+                return;
+            }
+
+            if (type == CopyType.Name)
+            {
+                return;
+            }
+
             TbData.Copy();
         }
 

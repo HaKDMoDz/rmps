@@ -60,8 +60,21 @@ namespace Me.Amon.Pwd.V.Pro
             TbData.Cut();
         }
 
-        public void Copy()
+        public void Copy(CopyType type)
         {
+            if (type == CopyType.Data)
+            {
+                if (!string.IsNullOrEmpty(TbData.Text))
+                {
+                    Clipboard.SetText(TbData.Text);
+                }
+                return;
+            }
+            if (type == CopyType.Name)
+            {
+                return;
+            }
+
             if (!string.IsNullOrEmpty(TbData.SelectedText))
             {
                 TbData.Copy();

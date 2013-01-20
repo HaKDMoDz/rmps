@@ -31,7 +31,7 @@
     <SuiteName>阿木密码箱</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>7.3.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -588,9 +588,11 @@
     <Compile Include="Pcs\WPcs.designer.cs">
       <DependentUpon>WPcs.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pwd\EKeyType.cs" />
+    <Compile Include="Pwd\CopyType.cs" />
     <Compile Include="Pwd\E\Data\FillAction.cs" />
     <Compile Include="Pwd\E\Data\SyncAction.cs" />
+    <Compile Include="Pwd\E\_Att\CopyDataAction.cs" />
+    <Compile Include="Pwd\E\_Att\FillDataAction.cs" />
     <Compile Include="Pwd\V\IAttView.cs" />
     <Compile Include="Pwd\V\Wiz\Editer\AttEditer.cs">
       <SubType>Form</SubType>

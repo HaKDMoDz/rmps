@@ -17,7 +17,7 @@ namespace Me.Amon.Pwd.V.Pro
 
         void Cut();
 
-        void Copy();
+        void Copy(CopyType type);
 
         void Paste();
 

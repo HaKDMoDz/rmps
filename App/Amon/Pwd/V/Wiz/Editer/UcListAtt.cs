@@ -71,7 +71,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
         {
         }
 
-        public void Copy()
+        public void Copy(CopyType type)
         {
         }
 

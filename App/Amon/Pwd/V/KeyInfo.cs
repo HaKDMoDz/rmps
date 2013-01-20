@@ -86,7 +86,7 @@ namespace Me.Amon.Pwd.V
         {
         }
 
-        public void CopyAtt()
+        public void CopyAtt(CopyType type)
         {
         }
 
