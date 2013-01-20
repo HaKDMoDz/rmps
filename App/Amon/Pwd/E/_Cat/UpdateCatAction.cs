@@ -8,12 +8,19 @@ namespace Me.Amon.Pwd.E._Cat
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
-            if (IApp != null)
+            if (IApp == null)
             {
-                CatEditer catEdit = new CatEditer();
-                catEdit.CallBackHandler = new AmonHandler<Cat>(IApp.UpdateCat);
-                catEdit.Show(IApp.Form, IApp.SelectedCat);
+                return;
             }
+            var cat = IApp.SelectedCat;
+            if (cat == null || cat.Id == CPwd.DEF_CAT_ID)
+            {
+                return;
+            }
+
+            CatEditer catEdit = new CatEditer();
+            catEdit.CallBackHandler = new AmonHandler<Cat>(IApp.UpdateCat);
+            catEdit.Show(IApp.Form, cat);
         }
     }
 }

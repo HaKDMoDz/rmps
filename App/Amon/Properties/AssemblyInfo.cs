@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Winshine")]
 [assembly: AssemblyProduct("阿木密码箱")]
-[assembly: AssemblyCopyright("Copyright © Amon 2012")]
+[assembly: AssemblyCopyright("Copyright © Amon 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

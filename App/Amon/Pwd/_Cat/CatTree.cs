@@ -124,7 +124,8 @@ namespace Me.Amon.Pwd._Cat
             }
             node.SelectedImageKey = node.ImageKey;
             _LastNode.Nodes.Add(node);
-            _LastNode.Expand();
+            //_LastNode.Expand();
+            TvCat.SelectedNode = node;
         }
 
         public void UpdateCat(Cat cat)

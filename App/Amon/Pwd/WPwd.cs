@@ -737,6 +737,8 @@ namespace Me.Amon.Pwd
                 return;
             }
 
+            _KeyList.SelectedKey = null;
+
             if (_PwdView != _KeyInfo)
             {
                 _PwdView.AppendKey();
@@ -1101,7 +1103,6 @@ namespace Me.Amon.Pwd
 
             _PwdView = _WizView;
             _PwdView.InitView(ScData.Panel2);
-            DoShowKey(_SafeModel.Key);
             _ViewModel.Pattern = CPwd.PATTERN_WIZ;
 
             ItemGroup group = _XmlMenu.GetGroup("att-edit");

@@ -4,10 +4,17 @@
     {
         public override void EventHandler(object sender, System.EventArgs e)
         {
-            if (IApp != null)
+            if (IApp == null)
             {
-                IApp.DeleteCat();
+                return;
             }
+            var cat = IApp.SelectedCat;
+            if (cat == null || cat.Id == CPwd.DEF_CAT_ID)
+            {
+                return;
+            }
+
+            IApp.DeleteCat();
         }
     }
 }
