@@ -415,7 +415,7 @@ namespace Me.Amon.Pwd
 
         public void ShowIcoSeeker(string rootDir, AmonHandler<Png> handler)
         {
-            KeyIcon seeker = new KeyIcon(_DataModel, rootDir);
+            KeyIcon seeker = new KeyIcon(_DataModel, rootDir, false);
             seeker.IcoSize = 24;
             seeker.CallBackHandler = handler;
             BeanUtil.CenterToParent(seeker, this);
@@ -2149,7 +2149,7 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 系统管理
-        public void ShowLibEdit()
+        public void ShowLibEditer()
         {
             LibEditer edit = new LibEditer(_DataModel);
             edit.Init(_DataModel);
@@ -2157,7 +2157,7 @@ namespace Me.Amon.Pwd
             edit.Show(this);
         }
 
-        public void ShowUdcEdit()
+        public void ShowUdcEditer()
         {
             UdcEditor edit = new UdcEditor(_DataModel);
             edit.Init(new Udc());
@@ -2165,9 +2165,9 @@ namespace Me.Amon.Pwd
             edit.Show(this);
         }
 
-        public void ShowIcoEdit()
+        public void ShowIcoEditer()
         {
-            KeyIcon edit = new KeyIcon(_DataModel, _DataModel.KeyDir);
+            KeyIcon edit = new KeyIcon(_DataModel, _DataModel.KeyDir, true);
             edit.IcoSize = CApp.IMG_KEY_LIST_DIM;
             BeanUtil.CenterToParent(edit, this);
             edit.Show(this);

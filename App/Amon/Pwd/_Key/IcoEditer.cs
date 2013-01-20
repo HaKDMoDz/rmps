@@ -12,6 +12,8 @@ namespace Me.Amon.Pwd._Key
     public partial class IcoEditer : UserControl
     {
         private KeyIcon _KeyIcon;
+        private string _Path;
+        private bool _IsUpdate;
 
         #region 构造函数
         public IcoEditer()
@@ -19,9 +21,10 @@ namespace Me.Amon.Pwd._Key
             InitializeComponent();
         }
 
-        public IcoEditer(KeyIcon icoEdit)
+        public IcoEditer(KeyIcon icoEdit, bool isEdit)
         {
             _KeyIcon = icoEdit;
+            _IsUpdate = isEdit;
 
             InitializeComponent();
         }
@@ -30,6 +33,7 @@ namespace Me.Amon.Pwd._Key
         {
             IlIco.ImageSize = new Size(_KeyIcon.IcoSize, _KeyIcon.IcoSize);
 
+            BtChoose.Text = _IsUpdate ? "删除(&D)" : "选择(&C)";
             _KeyIcon.AcceptButton = BtChoose;
             _KeyIcon.CancelButton = BtCancel;
         }
@@ -38,13 +42,15 @@ namespace Me.Amon.Pwd._Key
         #region 公共函数
         public void ShowData(string path)
         {
+            _Path = path;
+
             int i = 1;
             LvIco.Items.Clear();
             IlIco.Images.Clear();
             IlIco.Images.Add(BeanUtil.NaN32);
             int index;
             string name;
-            foreach (string file in Directory.GetFiles(path, '*' + CApp.IMG_KEY_LIST_EXT))
+            foreach (string file in Directory.GetFiles(_Path, '*' + CApp.IMG_KEY_LIST_EXT))
             {
                 index = file.LastIndexOf(Path.DirectorySeparatorChar);
                 if (index == file.Length - 1)
@@ -58,7 +64,12 @@ namespace Me.Amon.Pwd._Key
                     continue;
                 }
                 name = name.Substring(0, 16);
-                IlIco.Images.Add(name, BeanUtil.ReadImage(file, BeanUtil.NaN32));
+
+                var stream = File.OpenRead(file);
+                var image = Image.FromStream(stream);
+                stream.Close();
+
+                IlIco.Images.Add(name, image);
                 LvIco.Items.Add(new ListViewItem((i++).ToString(), name));
             }
         }
@@ -74,9 +85,22 @@ namespace Me.Amon.Pwd._Key
                 return;
             }
 
-            Png png = new Png { File = LvIco.SelectedItems[0].ImageKey };
-            png.LargeImage = IlIco.Images[png.File];
-            _KeyIcon.CallBack(png);
+            ListViewItem item = LvIco.SelectedItems[0];
+
+            if (_IsUpdate)
+            {
+                foreach (var file in Directory.GetFiles(_Path, item.ImageKey + "*"))
+                {
+                    File.Delete(file);
+                }
+                LvIco.Items.Remove(item);
+            }
+            else
+            {
+                Png png = new Png { File = item.ImageKey };
+                png.LargeImage = IlIco.Images[png.File];
+                _KeyIcon.CallBack(png);
+            }
         }
 
         private void BtAppend_Click(object sender, EventArgs e)

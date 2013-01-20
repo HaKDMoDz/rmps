@@ -18,6 +18,7 @@ namespace Me.Amon.Pwd._Key
         private string _RootDir;
         private string _HomeDir;
         private int _LastIdx;
+        private bool _IsEdit;
         #endregion
 
         #region 构造函数
@@ -26,11 +27,12 @@ namespace Me.Amon.Pwd._Key
             InitializeComponent();
         }
 
-        public KeyIcon(DataModel dataModel, string rootDir)
+        public KeyIcon(DataModel dataModel, string rootDir, bool isEdit)
         {
             _DataModel = dataModel;
             _RootDir = rootDir;
             _HomeDir = rootDir;
+            _IsEdit = isEdit;
 
             InitializeComponent();
 
@@ -209,7 +211,7 @@ namespace Me.Amon.Pwd._Key
         {
             if (_IcoView == null)
             {
-                _IcoView = new IcoEditer(this);
+                _IcoView = new IcoEditer(this, _IsEdit);
                 _IcoView.InitOnce();
                 _IcoView.Location = new Point(138, 12);
                 _IcoView.Size = new Size(248, 249);
