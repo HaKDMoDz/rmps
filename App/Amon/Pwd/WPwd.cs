@@ -329,10 +329,7 @@ namespace Me.Amon.Pwd
 
         private void TlEcho_DoubleClick(object sender, EventArgs e)
         {
-            //if (_TaskNode != null)
-            //{
-            //    TvCatTree.SelectedNode = _TaskNode;
-            //}
+            _CatTree.TaskSelected();
         }
 
         /// <summary>

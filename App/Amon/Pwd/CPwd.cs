@@ -52,11 +52,12 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region ÌØÊâÄ¿Â¼¼üÖµ
+        public const string TAG_MAIL = "mail";
+        public const string TAG_LINK = "link";
+        public const string TAG_NOTE = "note";
         public const string TAG_TASK = "task";
         public const string TAG_TASK_VAR = TAG_TASK + ":";
         public const string TAG_TASK_VAL_EXPIRED = TAG_TASK + ":expired";
-        public const string TAG_MAIL = "mail";
-        public const string TAG_LINK = "link";
         #endregion
     }
 }

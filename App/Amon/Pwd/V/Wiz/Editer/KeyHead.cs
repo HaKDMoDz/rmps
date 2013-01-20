@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Me.Amon.C;
 using Me.Amon.Gtd.V;
 using Me.Amon.Properties;
 using Me.Amon.Pwd._Att;
@@ -237,7 +238,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
 
         private void PbLogo_Click(object sender, EventArgs e)
         {
-            //_AWiz.ShowIcoSeeker(_DataModel.KeyDir, new AmonHandler<Png>(ChangeImgByKey));
+            _AWiz.ShowIcoSeeker(_DataModel.KeyDir, new AmonHandler<Png>(ChangeImgByKey));
         }
 
         private void BtHint_Click(object sender, EventArgs e)

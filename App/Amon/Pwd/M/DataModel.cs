@@ -176,20 +176,6 @@ namespace Me.Amon.Pwd.M
             });
             return keys;
         }
-
-        public IList<MGtd> FindGtdExpired()
-        {
-            IList<MGtd> gtds = _DbEngine.Query<MGtd>(
-                delegate(MGtd gtd)
-                {
-                    if (gtd.UserCode != _UserModel.Code)
-                    {
-                        return false;
-                    }
-                    return gtd.Status == CGtd.STATUS_EXPIRED && CharUtil.IsValidateHash(gtd.RefId);
-                });
-            return gtds;
-        }
         #endregion
 
         #region 日志操作

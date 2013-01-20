@@ -21,13 +21,23 @@ namespace Me.Amon.Pwd._Cat
         private TreeNode _RootNode;
         private TreeNode _LastNode;
         /// <summary>
-        /// 待提示节点
+        /// 邮件节点
+        /// </summary>
+        private TreeNode _MailNode;
+        private TreeNode _LinkNode;
+        /// <summary>
+        /// 记事节点
+        /// </summary>
+        private TreeNode _NoteNode;
+        /// <summary>
+        /// 任务节点
         /// </summary>
         private TreeNode _TaskNode;
         /// <summary>
-        /// 快过期节点
+        /// 单件节点
         /// </summary>
-        private TreeNode _TaskExpiredNode;
+        private TreeNode _UnitNode;
+
         private TreeNode _LastDnDNode;
         #endregion
 
@@ -385,6 +395,14 @@ namespace Me.Amon.Pwd._Cat
             cat.Icon = png.File;
             _DataModel.SaveVcs(cat);
         }
+
+        public void TaskSelected()
+        {
+            if (_TaskNode != null)
+            {
+                TvCat.SelectedNode = _TaskNode;
+            }
+        }
         #endregion
 
         #region 事件处理
@@ -410,13 +428,13 @@ namespace Me.Amon.Pwd._Cat
                 // 待提示
                 if (meta == CPwd.TAG_TASK)
                 {
-                    KeyList.ListKeysWithGtd(DateTime.Now, 43200);
+                    KeyList.ListKeysByGtd();
                     return;
                 }
                 // 已过期
                 if (meta == CPwd.TAG_TASK_VAL_EXPIRED)
                 {
-                    KeyList.ListKeysWithGtd(Gtd.CGtd.STATUS_EXPIRED);
+                    KeyList.ListKeysByGtd(Gtd.CGtd.STATUS_EXPIRED);
                     return;
                 }
                 // 未过期
@@ -650,7 +668,7 @@ namespace Me.Amon.Pwd._Cat
                     return;
             }
 
-            KeyList.ListKeysWithGtd(now, (int)Math.Ceiling((end - now).TotalSeconds));
+            KeyList.ListKeysByGtd(now, (int)Math.Ceiling((end - now).TotalSeconds));
         }
 
         private void SortCat(TreeNode root)
@@ -702,15 +720,20 @@ namespace Me.Amon.Pwd._Cat
                     DoInitCat(node);
                 }
 
-                if (cat.Meta == CPwd.TAG_TASK)
+                switch (cat.Meta)
                 {
-                    _TaskNode = node;
-                    continue;
-                }
-                if (cat.Meta == CPwd.TAG_TASK_VAL_EXPIRED)
-                {
-                    _TaskExpiredNode = node;
-                    continue;
+                    case CPwd.TAG_MAIL:
+                        _MailNode = node;
+                        break;
+                    case CPwd.TAG_LINK:
+                        _LinkNode = node;
+                        break;
+                    case CPwd.TAG_NOTE:
+                        _NoteNode = node;
+                        break;
+                    case CPwd.TAG_TASK:
+                        _TaskNode = node;
+                        break;
                 }
             }
         }

@@ -34,5 +34,7 @@ namespace Me.Amon.Pwd.V
         void Init(ImageList images);
 
         void ChangeIcon(Png png);
+
+        void TaskSelected();
     }
 }

@@ -63,6 +63,69 @@ namespace Me.Amon.Pwd._Key
             _LastHash = catId;
         }
 
+        public void ListKeysByLabel(int label)
+        {
+        }
+
+        public void ListKeysByMajor(int major)
+        {
+        }
+
+        public void ListKeysByGtd()
+        {
+            DateTime now = DateTime.Now;
+
+            LbKey.Items.Clear();
+
+            IList<Gtd.M.MGtd> gtds = _DataModel.ListGtdWithRef();
+            List<Key> keys = new List<Key>(gtds.Count);
+            foreach (Gtd.M.MGtd gtd in gtds)
+            {
+                gtd.Test(now, 43200);// 60 * 60 * 12
+                if (gtd.Status > CGtd.STATUS_NORMAL)
+                {
+                    keys.Add(_DataModel.ReadKey(gtd.RefId));
+                }
+            }
+            DoInitKey(keys);
+        }
+
+        public void ListKeysByGtd(int status)
+        {
+            DateTime now = DateTime.Now;
+
+            LbKey.Items.Clear();
+
+            IList<Gtd.M.MGtd> gtds = _DataModel.ListGtdWithRef();
+            List<Key> keys = new List<Key>(gtds.Count);
+            foreach (Gtd.M.MGtd gtd in gtds)
+            {
+                gtd.Test(now, 0);
+                if (gtd.Status == status)
+                {
+                    keys.Add(_DataModel.ReadKey(gtd.RefId));
+                }
+            }
+            DoInitKey(keys);
+        }
+
+        public void ListKeysByGtd(DateTime time, int seconds)
+        {
+            LbKey.Items.Clear();
+
+            IList<Gtd.M.MGtd> gtds = _DataModel.ListGtdWithRef();
+            List<Key> keys = new List<Key>(gtds.Count);
+            foreach (Gtd.M.MGtd gtd in gtds)
+            {
+                gtd.Test(time, seconds);
+                if (gtd.Status == CGtd.STATUS_ONTIME)
+                {
+                    keys.Add(_DataModel.ReadKey(gtd.RefId));
+                }
+            }
+            DoInitKey(keys);
+        }
+
         public void FindKeys(string meta)
         {
             LbKey.Items.Clear();
@@ -114,36 +177,6 @@ namespace Me.Amon.Pwd._Key
             this.UpdateBounds();
         }
 
-        public void ListGtdExpired()
-        {
-            LbKey.Items.Clear();
-
-            IList<Gtd.M.MGtd> gtds = _DataModel.FindGtdExpired();
-            List<Key> keys = new List<Key>(gtds.Count);
-            foreach (Gtd.M.MGtd gtd in gtds)
-            {
-                keys.Add(_DataModel.ReadKey(gtd.RefId));
-            }
-            DoInitKey(keys);
-        }
-
-        public void ListGtd(DateTime time, int seconds)
-        {
-            LbKey.Items.Clear();
-
-            IList<Gtd.M.MGtd> gtds = _DataModel.ListGtdWithRef();
-            List<Key> keys = new List<Key>(gtds.Count);
-            foreach (Gtd.M.MGtd gtd in gtds)
-            {
-                gtd.Test(time, seconds);
-                if (gtd.Status == CGtd.STATUS_ONTIME)
-                {
-                    keys.Add(_DataModel.ReadKey(gtd.RefId));
-                }
-            }
-            DoInitKey(keys);
-        }
-
         public void ChangeKeyLabel(int label)
         {
             if (SelectedKey == null || label < 0 || label > 9)
@@ -170,14 +203,6 @@ namespace Me.Amon.Pwd._Key
             _DataModel.SaveVcs(SelectedKey);
 
             LbKey.Refresh();
-        }
-
-        public void ListKeysWithGtd(int status)
-        {
-        }
-
-        public void ListKeysWithGtd(DateTime time, int seconds)
-        {
         }
         #endregion
 

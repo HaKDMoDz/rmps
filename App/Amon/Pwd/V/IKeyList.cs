@@ -18,6 +18,28 @@ namespace Me.Amon.Pwd.V
 
         void ListKeys(string catId);
 
+        void ListKeysByLabel(int label);
+
+        void ListKeysByMajor(int major);
+
+        /// <summary>
+        /// 当前需要处理的任务
+        /// </summary>
+        void ListKeysByGtd();
+
+        /// <summary>
+        /// 指定状态的任务
+        /// </summary>
+        /// <param name="status"></param>
+        void ListKeysByGtd(int status);
+
+        /// <summary>
+        /// 在指定时间内需要处理的任务
+        /// </summary>
+        /// <param name="time"></param>
+        /// <param name="seconds"></param>
+        void ListKeysByGtd(DateTime time, int seconds);
+
         void FindKeys(string meta);
 
         void LastKeys();
@@ -25,10 +47,6 @@ namespace Me.Amon.Pwd.V
         void RemoveSelected();
 
         void UpdateSelected(Key key);
-
-        void ListKeysWithGtd(int status);
-
-        void ListKeysWithGtd(DateTime time, int seconds);
 
         void ChangeKeyLabel(int label);
 

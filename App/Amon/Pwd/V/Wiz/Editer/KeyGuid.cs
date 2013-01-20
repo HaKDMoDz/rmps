@@ -130,6 +130,7 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
             }
 
             PbCard.Visible = guid.Data == CApp.LIB_CARD;
+            UcHint.Visible = false;
 
             Gtd.M.MGtd gtd = _SafeModel.Key.Gtd;
             if (gtd == null)

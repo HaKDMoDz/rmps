@@ -41,7 +41,7 @@
             this.PlHint.BackgroundImage = global::Me.Amon.Properties.Resources.Tips;
             this.PlHint.Controls.Add(this.PbHide);
             this.PlHint.Controls.Add(this.TbTips);
-            this.PlHint.Location = new System.Drawing.Point(15, 46);
+            this.PlHint.Location = new System.Drawing.Point(15, 6);
             this.PlHint.Name = "PlHint";
             this.PlHint.Size = new System.Drawing.Size(270, 208);
             this.PlHint.TabIndex = 0;
@@ -76,7 +76,7 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.PlHint);
             this.Name = "GtdHint";
-            this.Size = new System.Drawing.Size(300, 300);
+            this.Size = new System.Drawing.Size(300, 220);
             this.PlHint.ResumeLayout(false);
             this.PlHint.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbHide)).EndInit();
