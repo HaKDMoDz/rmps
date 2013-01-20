@@ -1,5 +1,4 @@
 ﻿using System.Windows.Forms;
-using Me.Amon.Uc;
 using Me.Amon.Util;
 
 namespace Me.Amon.Pwd.E._Key
@@ -30,12 +29,8 @@ namespace Me.Amon.Pwd.E._Key
                 {
                     continue;
                 }
-                ItemGroup group = IApp.GetItemGroup(arr[0]);
-                if (group == null)
-                {
-                    continue;
-                }
-                group.Checked(arr[1]);
+
+                IApp.SetGroupChecked(arr[0], arr[1]);
                 if (CharUtil.IsValidateLong(arr[2]))
                 {
                     IApp.ChangeKeyMajor(int.Parse(arr[2]));

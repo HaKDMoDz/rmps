@@ -45,6 +45,7 @@
             // 
             // PbImg
             // 
+            this.PbImg.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.PbImg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.PbImg.Location = new System.Drawing.Point(78, 62);
             this.PbImg.Name = "PbImg";

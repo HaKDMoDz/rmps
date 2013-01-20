@@ -51,6 +51,7 @@ namespace Me.Amon.Pwd
         private APad _PadView;
         private KeyInfo _KeyInfo;
         private XmlMenu<WPwd> _XmlMenu;
+        private ContextMenuStrip _AttMenu;
         #endregion
 
         /// <summary>
@@ -126,7 +127,8 @@ namespace Me.Amon.Pwd
                 _XmlMenu.GetPopMenu("WKey", CmKey);
                 _KeyList.PopupMenu = CmKey;
 
-                //_XmlMenu.GetPopMenu("WAtt", CmAtt);
+                _AttMenu = new ContextMenuStrip();
+                _XmlMenu.GetPopMenu("WAtt", _AttMenu);
                 _XmlMenu.GetStrokes("WPwd", this);
                 if (_XmlMenu.GetHotkeys("WPwd", this))
                 {
@@ -386,31 +388,34 @@ namespace Me.Amon.Pwd
 
         #region 公共函数
         #region 公共方法
-        public ToolStripMenuItem GetMenuItem(string key)
+        public void ShowAttMenu(Point point, Control control = null)
         {
-            if (_XmlMenu != null)
+            if (_AttMenu == null || point == null)
             {
-                return _XmlMenu.GetMenuItem(key);
+                return;
             }
-            return null;
+            if (control != null)
+            {
+                _AttMenu.Show(control, point);
+            }
+            else
+            {
+                _AttMenu.Show(point);
+            }
         }
 
-        public ToolStripButton GetToolItem(string key)
+        public void SetGroupChecked(string key, string value)
         {
-            if (_XmlMenu != null)
+            if (_XmlMenu == null)
             {
-                return _XmlMenu.GetToolItem(key);
+                return;
             }
-            return null;
-        }
-
-        public ItemGroup GetItemGroup(string key)
-        {
-            if (_XmlMenu != null)
+            var group = _XmlMenu.GetGroup(key);
+            if (group == null)
             {
-                return _XmlMenu.GetGroup(key);
+                return;
             }
-            return null;
+            group.Checked(value);
         }
 
         public void ShowIcoSeeker(string rootDir, AmonHandler<Png> handler)
@@ -933,12 +938,18 @@ namespace Me.Amon.Pwd
         #region 属性处理
         public void AppendAtt(int att)
         {
-            _PwdView.AppendAtt(att);
+            if (att != Att.TYPE_LIST || att != Att.TYPE_LINE)
+            {
+                _PwdView.AppendAtt(att);
+            }
         }
 
         public void ChangeAtt(int att)
         {
-            _PwdView.ChangeAtt(att);
+            if (att != Att.TYPE_LIST || att != Att.TYPE_LINE)
+            {
+                _PwdView.ChangeAtt(att);
+            }
         }
 
         public void UpdateAtt()

@@ -632,7 +632,7 @@ namespace Me.Amon.Pwd.V.Pro
                         GvAttList.ClearSelection();
                         GvAttList.Rows[e.RowIndex].Selected = true;
                     }
-                    //CmAtt.Show(MousePosition);
+                    _WPwd.ShowAttMenu(MousePosition);
                 }
             }
         }

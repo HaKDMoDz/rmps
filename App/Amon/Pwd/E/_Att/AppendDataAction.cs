@@ -6,7 +6,7 @@
         {
             if (IApp != null)
             {
-                IApp.AppendAtt(Att.TYPE_DATE);
+                IApp.AppendAtt(Att.TYPE_DATA);
             }
         }
     }

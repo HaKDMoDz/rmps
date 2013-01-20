@@ -110,7 +110,7 @@ namespace Me.Amon.Img
 
             _ALarge.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             _ALarge.Location = new System.Drawing.Point(12, 12);
-            _ALarge.Size = new System.Drawing.Size(360, 238);
+            _ALarge.Size = new System.Drawing.Size(504, 340);
             _ALarge.TabIndex = 0;
             Controls.Add(_ALarge);
 

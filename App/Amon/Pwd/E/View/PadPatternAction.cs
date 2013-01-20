@@ -71,12 +71,7 @@ namespace Me.Amon.Pwd.E.View
                     continue;
                 }
 
-                ItemGroup group = IApp.GetItemGroup(arr[0]);
-                if (group == null)
-                {
-                    continue;
-                }
-                group.Checked(arr[1]);
+                IApp.SetGroupChecked(arr[0], arr[1]);
             }
         }
     }

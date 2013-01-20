@@ -96,7 +96,7 @@ namespace Me.Amon.Pwd.Bean
                     viewer.OpenFile(dstFile);
                     return;
                 }
-                if (exts == ".txt" || exts == ".ini")
+                if (exts == ".txt" || exts == ".ini" || exts == ".xml" || exts == ".log")
                 {
                     TxtEditor editor = new TxtEditor();
                     editor.Init(dstFile);
