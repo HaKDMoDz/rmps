@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Amon version="1">
+  <App>WPcs</App>
+  <Ver>1</Ver>
+
+  <Actions>
+    <Action Id="create-pcs" Class="Me.Amon.Pcs.E.File.CreateAction"/>
+	<Action Id="hind-window" Class="Me.Amon.Pcs.E.File.HideAction"/>
+    <Action Id="lock-window" Class="Me.Amon.Pcs.E.File.LockAction"/>
+    <Action Id="exit-window" Class="Me.Amon.Pcs.E.File.ExitAction"/>
+	<Action Id="open-meta" Class="Me.Amon.Pcs.E.Edit.OpenAction"/>
+	<Action Id="edit-meta" Class="Me.Amon.Pcs.E.Edit.EditAction"/>
+	<Action Id="cut-meta" Class="Me.Amon.Pcs.E.Edit.CutAction"/>
+	<Action Id="copy-meta" Class="Me.Amon.Pcs.E.Edit.CopyAction"/>
+	<Action Id="copy-meta-ref" Class="Me.Amon.Pcs.E.Edit.CopyRefAction"/>
+	<Action Id="paste-meta" Class="Me.Amon.Pcs.E.Edit.PasteAction"/>
+	<Action Id="paste-meta-as" Class="Me.Amon.Pcs.E.Edit.PasteAsAction"/>
+	<Action Id="paste-meta-ref" Class="Me.Amon.Pcs.E.Edit.PasteRefAction"/>
+	<Action Id="create-meta" Class="Me.Amon.Pcs.E.Edit.CreateAction"/>
+	<Action Id="delete-meta" Class="Me.Amon.Pcs.E.Edit.DeleteAction"/>
+	<Action Id="rename-meta" Class="Me.Amon.Pcs.E.Edit.RenameAction"/>
+	<Action Id="download-meta" Class="Me.Amon.Pcs.E.Edit.DownloadAction"/>
+    <Action Id="upload-meta" Class="Me.Amon.Pcs.E.Edit.UploadAction"/>
+    <Action Id="properties" Class="Me.Amon.Pcs.E.Edit.PropertiesAction"/>
+    <Action Id="sync-meta" Class="Me.Amon.Pcs.E.Edit.SyncAction"/>
+	<Action Id="fav-new" Class="Me.Amon.Pcs.E.Edit.FavNewAction"/>
+	<Action Id="fav-mgr" Class="Me.Amon.Pcs.E.Edit.FavMgrAction"/>
+	<Action Id="task-visible" Class="Me.Amon.Pcs.E.View.TaskAction"/>
+	<Action Id="back-word" Class="Me.Amon.Pcs.E.Edit.BackwordAction"/>
+	<Action Id="up-word" Class="Me.Amon.Pcs.E.Edit.UpwordAction"/>
+	<Action Id="fore-word" Class="Me.Amon.Pcs.E.Edit.ForewordAction"/>
+	<Action Id="reload-meta" Class="Me.Amon.Pcs.E.View.ReloadAction"/>
+  </Actions>
+
+  <!--系统快捷键-->
+  <Strokes Id="WPcs">
+    <Stroke Key="^ N" ActionId="new-action" Memo="添加账户"/>
+    <Stroke Key="^ X" ActionId="cut-meta" Memo="剪切"/>
+    <Stroke Key="^ C" ActionId="copy-meta" Memo="复制"/>
+    <Stroke Key="^ V" ActionId="paste-meta" Memo="粘贴"/>
+	<Stroke Key="^ T" ActionId="paste-meta" Memo="切换任务列表"/>
+  </Strokes>
+
+  <!--魔方密码菜单栏-->
+  <Menubar Id="WPcs">
+    <Menu Id="file" Text="文件(@F)">
+      <Item Type="normal" Text="新建(@N)" ActionId="create-pcs">
+        <Stroke Key="^ N" Memo="新建"/>
+      </Item>
+	  <Line/>
+      <Item Type="normal" Text="锁定窗口(@L)" ActionId="lock-window">
+        <Stroke Key="^ L" Memo="锁定窗口"/>
+      </Item>
+      <Item Type="normal" Text="隐藏窗口(@H)" ActionId="hind-window">
+        <Stroke Key="^ H" Memo="隐藏窗口"/>
+        <Stroke Key="^ Enter" Memo="隐藏窗口"/>
+      </Item>
+      <Line/>
+      <Item Type="normal" Text="退出(@X)" ActionId="exit-window">
+        <Stroke Key="^ Q" Memo="退出"/>
+      </Item>
+    </Menu>
+    <Menu Id="edit" Text="编辑(@E)">
+      <Item Type="normal" Text="打开(@O)" ActionId="open-meta">
+        <Stroke Key="^ O" Memo="打开"/>
+      </Item>
+      <Item Type="normal" Text="编辑(@E)" ActionId="edit-meta">
+        <Stroke Key="^ E" Memo="编辑"/>
+      </Item>
+	  <Line/>
+      <Item Type="normal" Text="剪切(@X)" ActionId="cut-meta">
+        <Stroke Key="^ X" Memo="剪切"/>
+      </Item>
+      <Item Type="normal" Text="复制(@C)" ActionId="copy-meta">
+        <Stroke Key="^ C" Memo="复制"/>
+      </Item>
+      <Item Type="normal" Text="粘贴(@V)" ActionId="paste-meta">
+        <Stroke Key="^ V" Memo="粘贴"/>
+      </Item>
+      <Line/>
+      <Item Text="同步(@S)" ActionId="sync-meta">
+        <Stroke Key="^ S" Memo="同步"/>
+      </Item>
+      <Item Text="下载(@D)" ActionId="download-meta">
+        <Stroke Key="^ S" Memo="下载"/>
+      </Item>
+      <Item Text="上传(@U)" ActionId="upload-meta">
+        <Stroke Key="^ U" Memo="上传"/>
+      </Item>
+      <Line/>
+      <Item Text="创建目录" ActionId="create-meta" Group="none-edit-visible">
+        <Stroke Key="^ F" Memo="创建目录"/>
+      </Item>
+      <Item Text="删除" ActionId="delete-meta" Group="item-edit-visible">
+        <Stroke Key="Delete" Memo="删除"/>
+      </Item>
+      <Item Text="更名" ActionId="rename-meta" Group="item-edit-visible">
+        <Stroke Key="^ R" Memo="更名"/>
+      </Item>
+      <Line/>
+      <Item Text="属性" ActionId="properties">
+        <Stroke Key="Alt Enter" Memo="属性"/>
+      </Item>
+    </Menu>
+    <Menu Id="view" Text="视图(@V)">
+      <Item Type="normal" Text="显示任务列表" ActionId="task-visible">
+      </Item>
+	</Menu>
+	<Menu Id="user" Text="用户(@I)">
+      <Item Type="normal" Text="修改解锁口令">
+        <Action Class="Me.Amon.Pwd.E.User.LkeyAction"/>
+      </Item>
+      <Item Type="normal" Text="更改登录口令">
+        <Action Class="Me.Amon.Pwd.E.User.PkeyAction"/>
+      </Item>
+      <Item Type="normal" Text="设置安全口令" Enabled="false">
+        <Action Class="Me.Amon.Pwd.E.User.SkeyAction"/>
+      </Item>
+      <Line/>
+      <Item Type="normal" Text="常规设置" Visible="false">
+        <Action Class="Me.Amon.Pwd.E.User.OptionsAction"/>
+      </Item>
+      <Item Type="normal" Text="口令设置" Visible="false">
+        <Action Class="Me.Amon.Pwd.E.User.PasswordAction"/>
+      </Item>
+      <Item Type="normal" Text="字符管理">
+        <Action Class="Me.Amon.Pwd.E.User.UdcEditAction"/>
+      </Item>
+      <Item Type="normal" Text="图标管理">
+        <Action Class="Me.Amon.Pwd.E.User.IcoEditAction"/>
+      </Item>
+      <Item Type="normal" Text="模板管理">
+        <Action Class="Me.Amon.Pwd.E.User.LibEditAction"/>
+      </Item>
+    </Menu>
+    <Menu Id="skin" Text="皮肤(@S)">
+	  <Item Type="normal" Text="默认"/>
+    </Menu>
+    <Menu Id="help" Text="帮助(@H)">
+      <Item Type="normal" Text="帮助" ActionId="help">
+        <Stroke Key="F1" Memo="使用帮助"/>
+      </Item>
+      <Line/>
+      <Item Type="normal" Text="快捷键" ActionId="shortcuts">
+        <Stroke Key="F6" Memo="快捷键列表"/>
+      </Item>
+      <Line/>
+      <Item Type="normal" Text="软件首页">
+        <Action Class="Me.Amon.Pwd.E.Help.WebhostAction"/>
+      </Item>
+      <Item Type="normal" Text="项目首页">
+        <Action Class="Me.Amon.Pwd.E.Help.ProjectAction"/>
+      </Item>
+      <Line/>
+      <Item Type="normal" Text="特别致谢" Visible="false">
+        <Action Class="Me.Amon.Pwd.E.Help.IdioAction"/>
+        <!--Stroke Key="F8" Memo="特别致谢"/-->
+      </Item>
+      <Item Type="normal" Text="关于" ActionId="about"/>
+    </Menu>
+  </Menubar>
+
+  <!--魔方密码工具栏-->
+  <Toolbar Id="WPcs">
+    <Item Type="normal" Tips="新增" ActionId="create-pcs">
+      <Icon Id="file-new" Path="var:menu-key-append"/>
+    </Item>
+    <Line/>
+    <Item Type="normal" Tips="剪切" ActionId="cut-meta">
+      <Icon Id="file-save" Path="var:att-cut"/>
+    </Item>
+    <Item Type="normal" Tips="复制" ActionId="copy-meta">
+      <Icon Id="file-save" Path="var:att-copy"/>
+    </Item>
+    <Item Type="normal" Tips="粘贴" ActionId="paste-meta" Group="paste-meta-enabled">
+      <Icon Id="file-save" Path="var:att-paste"/>
+    </Item>
+    <Line/>
+    <Item Type="normal" Text="创建目录" ActionId="create-meta" Group="item-edit-visible">
+		<Icon Id="folder-create" Path="var:folder-create"/>
+	</Item>
+    <Item Type="normal" Text="删除" ActionId="delete-meta" Group="item-edit-visible">
+		<Icon Id="delete" Path="var:delete"/>
+	</Item>
+    <Item Type="normal" Text="更名" ActionId="rename-meta" Group="item-edit-visible">
+		<Icon Id="rename" Path="var:rename"/>
+	</Item>
+    <Item Type="normal" Text="后退" ActionId="back-word" Group="item-edit-visible">
+		<Icon Id="step-prev" Path="var:tool-edit-movel"/>
+	</Item>
+	<Item Type="normal" Text="向上" ActionId="fore-word" Group="item-edit-visible">
+		<Icon Id="step-up" Path="var:tool-edit-moveu"/>
+	</Item>
+	<Item Type="normal" Text="前进" ActionId="up-word" Group="item-edit-visible">
+		<Icon Id="step-next" Path="var:tool-edit-mover"/>
+	</Item>
+  </Toolbar>
+
+  <!--魔方密码弹出菜单-->
+  <Popmenu Id="WPcs">
+    <Item Type="normal" Text="打开(@O)" ActionId="open-meta" Group="item-edit-enabled"/>
+	<Item Type="normal" Text="编辑(@E)" ActionId="edit-meta" Group="item-edit"/>
+	<Item Type="normal" Text="重新加载(@R)" ActionId="reload-meta"/>
+	<Line/>
+    <Item Type="normal" Text="添加到收藏(@F)" ActionId="fav-new" Group="item-fav"/>
+    <Menu Id="skin" Text="发送到(@S)" Group="item-lib">
+	  <Item Type="normal" Text="文档" ActionId="moveto-meta" Command=":documents"/>
+	  <Item Type="normal" Text="图片" ActionId="moveto-meta" Command=":pictures"/>
+	  <Item Type="normal" Text="音乐" ActionId="moveto-meta" Command=":audios"/>
+	  <Item Type="normal" Text="视频" ActionId="moveto-meta" Command=":vedios"/>
+    </Menu>
+    <Line Group="item-edit-visible"/>
+    <Item Type="normal" Text="剪切" ActionId="cut-meta" Group="item-edit-enabled"/>
+    <Item Type="normal" Text="复制" ActionId="copy-meta" Group="item-edit-enabled"/>
+    <Item Type="normal" Text="粘贴" ActionId="paste-meta" Group="paste-meta-enabled"/>
+	<Item Type="normal" Text="粘贴自" ActionId="paste-meta-as" Group="paste-meta-as-visible"/>
+	<Line/>
+    <Item Type="normal" Text="分享(@S)" Enabled="false"/>
+    <Line/>
+    <Item Type="normal" Text="复制引用(@M)" ActionId="copy-meta-ref" Group="item-edit-enabled"/>
+	<Item Type="normal" Text="粘贴引用(@M)" ActionId="paste-meta-ref"/>
+    <Item Type="normal" Text="下载(@W)" ActionId="download-meta" Group="item-edit-enabled"/>
+    <Item Type="normal" Text="上传(@U)" ActionId="upload-meta"/>
+    <Line/>
+	<Item Type="normal" Text="创建目录(@C)" ActionId="create-meta" Group="none-edit-visible"/>
+    <Item Type="normal" Text="删除(@D)" ActionId="delete-meta" Group="item-edit-visible"/>
+    <Item Type="normal" Text="更名(@R)" ActionId="rename-meta" Group="item-edit-visible"/>
+    <Line/>
+    <Item Type="normal" Text="属性(@P)" ActionId="properties"/>
+  </Popmenu>
+</Amon>

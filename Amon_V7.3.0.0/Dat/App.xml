@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Amon>
+  <App>Amon</App>
+  <Ver>1</Ver>
+  <Apps>
+    <!--App Type="app" Id="APwd" Logo="Logo\logo32.png" Text="加密器" Tips="加密器" Default="true"/>
+    <App Type="app" Id="ASec" Logo="Logo\logo32.png" Text="加密器" Tips="加密器"/-->
+    <App Type="app" Id="ABar" Logo="Logo\logo32.png" Text="二维码" Tips="二维码"/>
+    <!--App Type="app" Id="ASql" Logo="Logo\logo32.png" Text="数据库管理" Tips="数据库管理"/-->
+    <App Type="app" Id="AIco" Logo="Logo\logo32.png" Text="图标编辑器" Tips="图标编辑器"/>
+    <App Rype="app" Id="ARen" Logo="Logo\logo32.png" Text="文件重命名" Tips="文件重命名"/>
+  </Apps>
+</Amon>
