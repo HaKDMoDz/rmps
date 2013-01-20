@@ -119,7 +119,7 @@
             // 
             this.UcHint.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.UcHint.BackColor = System.Drawing.Color.Transparent;
-            this.UcHint.Handler = null;
+            this.UcHint.Handler = new System.EventHandler(Hint_Click);
             this.UcHint.Location = new System.Drawing.Point(25, 32);
             this.UcHint.Name = "UcHint";
             this.UcHint.Size = new System.Drawing.Size(300, 220);

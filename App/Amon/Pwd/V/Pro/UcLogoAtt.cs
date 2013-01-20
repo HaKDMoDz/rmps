@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using Me.Amon.C;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd.M;
 using Me.Amon.Util;
@@ -114,7 +115,7 @@ namespace Me.Amon.Pwd.V.Pro
         #region 事件处理
         private void PbName_Click(object sender, System.EventArgs e)
         {
-            //_Editer.ShowIcoSeeker(new AmonHandler<Png>(ChangeImgByKey));
+            _APro.ShowIcoSeeker(new AmonHandler<Png>(ChangeImgByKey));
         }
         #endregion
 

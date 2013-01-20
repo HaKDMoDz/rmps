@@ -290,7 +290,6 @@ namespace Me.Amon.Pwd.V.Wiz.Editer
                 if (gtd.Next(now, 0))
                 {
                     _DataModel.SaveVcs(gtd);
-                    _DataModel.ReloadGtds();
                 }
             }
             UcHint.Visible = false;

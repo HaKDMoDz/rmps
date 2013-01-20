@@ -885,12 +885,7 @@ namespace Me.Amon.Pwd
             _SafeModel.Key.CatId = catId;
             _DataModel.SaveVcs(_SafeModel.Key);
 
-            //Key key = LbKeyList.SelectedItem as Key;
-            //if (key == null || key.Id != _SafeModel.Key.Id)
-            //{
-            //    return;
-            //}
-            //LbKeyList.Items.RemoveAt(LbKeyList.SelectedIndex);
+            _KeyList.RemoveSelected();
         }
 
         /// <summary>

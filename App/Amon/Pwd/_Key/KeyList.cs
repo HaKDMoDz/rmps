@@ -18,9 +18,17 @@ namespace Me.Amon.Pwd._Key
         private WPwd _WPwd;
         private DataModel _DataModel;
         private ViewModel _ViewModel;
-        private bool _IsSearch;
-        private string _LastHash;
+
+        #region 上次操作
+        private const int LAST_OPT_LIST = 0;
+        private const int LAST_OPT_FIND = 1;
+        private const int LAST_OPT_TASK = 10;
+        private const int LAST_OPT_TASK_EXP = 11;
+        private const int LAST_OPT_TASK_FIX = 12;
+        private int _LastOpt;
         private string _LastMeta;
+        private int _LastData;
+        #endregion
         #endregion
 
         #region 构造函数
@@ -59,8 +67,8 @@ namespace Me.Amon.Pwd._Key
 
             DoInitKey(_DataModel.ListKey(catId));
 
-            _IsSearch = false;
-            _LastHash = catId;
+            _LastOpt = LAST_OPT_LIST;
+            _LastMeta = catId;
         }
 
         public void ListKeysByLabel(int label)
@@ -88,6 +96,8 @@ namespace Me.Amon.Pwd._Key
                 }
             }
             DoInitKey(keys);
+
+            _LastOpt = LAST_OPT_TASK;
         }
 
         public void ListKeysByGtd(int status)
@@ -107,6 +117,9 @@ namespace Me.Amon.Pwd._Key
                 }
             }
             DoInitKey(keys);
+
+            _LastOpt = LAST_OPT_TASK_EXP;
+            _LastData = status;
         }
 
         public void ListKeysByGtd(DateTime time, int seconds)
@@ -124,6 +137,9 @@ namespace Me.Amon.Pwd._Key
                 }
             }
             DoInitKey(keys);
+
+            _LastOpt = LAST_OPT_TASK_FIX;
+            _LastData = seconds;
         }
 
         public void FindKeys(string meta)
@@ -142,21 +158,30 @@ namespace Me.Amon.Pwd._Key
             }
 
             DoInitKey(_DataModel.FindKey(meta));
-            //TvCatTree.SelectedNode = null;
 
-            _IsSearch = true;
+            _LastOpt = LAST_OPT_FIND;
             _LastMeta = meta;
         }
 
         public void LastKeys()
         {
-            if (_IsSearch)
+            switch (_LastOpt)
             {
-                FindKeys(_LastMeta);
-            }
-            else
-            {
-                ListKeys(_LastHash);
+                case LAST_OPT_LIST:
+                    ListKeys(_LastMeta);
+                    break;
+                case LAST_OPT_FIND:
+                    FindKeys(_LastMeta);
+                    break;
+                case LAST_OPT_TASK:
+                    ListKeysByGtd();
+                    break;
+                case LAST_OPT_TASK_EXP:
+                    ListKeysByGtd(_LastData);
+                    break;
+                case LAST_OPT_TASK_FIX:
+                    ListKeysByGtd(DateTime.Now, _LastData);
+                    break;
             }
             LbKey.SelectedItem = SelectedKey;
         }
@@ -254,6 +279,7 @@ namespace Me.Amon.Pwd._Key
             {
                 return;
             }
+            SelectedKey = key;
 
             if (!CharUtil.IsValidateHash(key.Id))
             {
