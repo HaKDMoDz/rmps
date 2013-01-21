@@ -137,6 +137,11 @@ namespace Me.Amon.User.Uc
                 DFEngine prop = new DFEngine();
                 prop.Load(sysFile);
                 prop.Set(string.Format(CApp.AMON_SYS_CODE, name), _UserModel.Code);
+                path = _UserModel.DatHome;
+                if (path.StartsWith(Application.StartupPath))
+                {
+                    path = path.Substring(Application.StartupPath.Length + 1);
+                }
                 prop.Set(string.Format(CApp.AMON_SYS_HOME, name), _UserModel.DatHome);
                 prop.Save(sysFile);
 

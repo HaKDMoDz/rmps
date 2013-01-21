@@ -144,7 +144,12 @@ namespace Me.Amon.User.Uc
                 }
 
                 _Prop.Set(string.Format(CApp.AMON_SYS_CODE, name), _UserModel.Code);
-                _Prop.Set(string.Format(CApp.AMON_SYS_HOME, name), _UserModel.DatHome);
+                home = _UserModel.DatHome;
+                if (home.StartsWith(Application.StartupPath))
+                {
+                    home = home.Substring(Application.StartupPath.Length + 1);
+                }
+                _Prop.Set(string.Format(CApp.AMON_SYS_HOME, name), home);
                 _Prop.Save(sysFile);
 
                 InitDat();

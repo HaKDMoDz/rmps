@@ -197,7 +197,12 @@ namespace Me.Amon.Auth
             string sysFile = Path.Combine(_UserModel.SysHome, CApp.AMON_SYS);
             prop.Load(sysFile);
             prop.Set(string.Format(CApp.AMON_SYS_CODE, name), code);
-            prop.Set(string.Format(CApp.AMON_SYS_HOME, name), Path.GetDirectoryName(path));
+            path = Path.GetDirectoryName(path);
+            if (path.StartsWith(Application.StartupPath))
+            {
+                path = path.Substring(Application.StartupPath.Length + 1);
+            }
+            prop.Set(string.Format(CApp.AMON_SYS_HOME, name), path);
             prop.Save(sysFile);
         }
 

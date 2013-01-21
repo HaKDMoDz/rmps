@@ -98,19 +98,27 @@ namespace Me.Amon.User.Uc
             #region 已有用户首次登录
             if (!CharUtil.IsValidateCode(code))
             {
-                _Home = CApp.DIR_DATA;
+                //_Home = CApp.DIR_DATA;
 
-                WebClient client = new WebClient();
-                client.Credentials = CredentialCache.DefaultCredentials;
-                client.Headers["Content-type"] = "application/x-www-form-urlencoded";
-                client.Encoding = Encoding.UTF8;
-                client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignIn_UploadStringCompleted);
-                client.UploadStringAsync(new Uri(CApp.SERVER_PATH), "POST", "&o=sin&d=" + _Name);
+                //WebClient client = new WebClient();
+                //client.Credentials = CredentialCache.DefaultCredentials;
+                //client.Headers["Content-type"] = "application/x-www-form-urlencoded";
+                //client.Encoding = Encoding.UTF8;
+                //client.UploadStringCompleted += new UploadStringCompletedEventHandler(SignIn_UploadStringCompleted);
+                //client.UploadStringAsync(new Uri(CApp.SERVER_PATH), "POST", "&o=sin&d=" + _Name);
+
+                _SignAc.HideWaiting();
+                Main.ShowAlert("身份验证错误，请确认您的用户及口令输入是否正确！");
+                TbName.Focus();
                 return;
             }
             #endregion
 
             #region 已有用户正常登录
+            if (!_Home.StartsWith(_UserModel.SysHome))
+            {
+                _Home = Path.Combine(_UserModel.SysHome, _Home);
+            }
             if (!_UserModel.CaSignIn(_Home, code, _Name, _Pass))
             {
                 _SignAc.HideWaiting();
