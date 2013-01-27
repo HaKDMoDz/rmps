@@ -778,11 +778,11 @@ namespace Me.Amon.Pwd
             {
                 if (KeyGuidVisible && CatTreeVisible)
                 {
-                    Cat cat = SelectedCat;
+                    Cat cat = _CatTree.SelectedCat;
                     if (cat == null)
                     {
                         Main.ShowAlert("请选择类别！");
-                        //TvCatTree.Focus();
+                        _CatTree.Focus();
                         return;
                     }
 
@@ -799,24 +799,26 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            if (_SafeModel.IsUpdate && _SafeModel.Key.Backup)
+            var key = _SafeModel.Key;
+            if (_SafeModel.IsUpdate && key.Backup)
             {
-                KeyLog keyLog = _SafeModel.Key.ToLog();
-                _DataModel.SaveLog(keyLog);
+                _DataModel.SaveLog(key.ToLog());
             }
             _SafeModel.Encode();
-            _SafeModel.Key.AccessTime = DateTime.Now.ToString(CApp.DATEIME_FORMAT);
-            _DataModel.SaveVcs(_SafeModel.Key);
-            if (_SafeModel.Key.Gtd != null)
+            key.AccessTime = DateTime.Now.ToString(CApp.DATEIME_FORMAT);
+            _DataModel.SaveVcs(key);
+
+            var gtd = key.Gtd;
+            if (gtd != null)
             {
-                _SafeModel.Key.Gtd.RefId = _SafeModel.Key.Id;
-                _DataModel.SaveVcs(_SafeModel.Key.Gtd);
+                gtd.RefId = key.Id;
+                _DataModel.SaveVcs(gtd);
             }
             _SafeModel.Modified = false;
 
-            ShowInfo();
-
             _KeyList.LastKeys();
+
+            ShowInfo();
 
             _SafeModel.Key = null;
             _KeyList.SelectedKey = null;
@@ -1745,6 +1747,9 @@ namespace Me.Amon.Pwd
                     return;
                 }
 
+                DateTime now = DateTime.Now;
+                string time = now.ToString(CApp.DATEIME_FORMAT);
+                long hash = now.ToFileTimeUtc();
                 string line = reader.ReadLine();
                 while (line != null)
                 {
@@ -1757,7 +1762,7 @@ namespace Me.Amon.Pwd
                         }
 
                         _SafeModel.Key.CatId = catId;
-                        DoImportKey();
+                        DoImportKey(now, time, hash++);
                         suc += 1;
                     }
                     line = reader.ReadLine();
@@ -1825,6 +1830,9 @@ namespace Me.Amon.Pwd
 
             int suc = 0;
             int err = 0;
+            DateTime now = DateTime.Now;
+            string time = now.ToString(CApp.DATEIME_FORMAT);
+            long hash = now.ToFileTimeUtc();
             reader.ReadToFollowing("Key");
             while (reader.Name == "Key")
             {
@@ -1835,7 +1843,7 @@ namespace Me.Amon.Pwd
                 }
 
                 _SafeModel.Key.CatId = catId;
-                DoImportKey();
+                DoImportKey(now, time, hash++);
                 suc += 1;
             }
             reader.Close();
@@ -2065,7 +2073,10 @@ namespace Me.Amon.Pwd
                 _SafeModel.Append(att);
             }
 
-            DoImportKey();
+            DateTime now = DateTime.Now;
+            string time = now.ToString(CApp.DATEIME_FORMAT);
+            long hash = now.ToFileTimeUtc();
+            DoImportKey(now, time, hash);
             _KeyList.ListKeys(catId);
             _SafeModel.Key = null;
         }
@@ -2107,6 +2118,9 @@ namespace Me.Amon.Pwd
             int err = 0;
             using (StreamReader reader = File.OpenText(file))
             {
+                DateTime now = DateTime.Now;
+                string time = now.ToString(CApp.DATEIME_FORMAT);
+                long hash = now.ToFileTimeUtc();
                 string line = reader.ReadLine();
                 while (line != null)
                 {
@@ -2120,7 +2134,7 @@ namespace Me.Amon.Pwd
                         }
 
                         _SafeModel.Key.CatId = catId;
-                        DoImportKey();
+                        DoImportKey(now, time, hash++);
                         suc += 1;
                     }
                     line = reader.ReadLine();
@@ -2232,7 +2246,7 @@ namespace Me.Amon.Pwd
         #endregion
 
         #region 私有函数
-        private void DoImportKey()
+        private void DoImportKey(DateTime now, string time, long hash)
         {
             if (_SafeModel.Count < Att.HEAD_SIZE)
             {
@@ -2241,7 +2255,9 @@ namespace Me.Amon.Pwd
 
             _SafeModel.Encode();
 
-            _SafeModel.Key.AccessTime = DateTime.Now.ToString(CApp.DATEIME_FORMAT);
+            _SafeModel.Key.Id = CharUtil.EncodeLong(hash, false);
+            _SafeModel.Key.CreateTime = now;
+            _SafeModel.Key.AccessTime = time;
             _DataModel.SaveVcs(_SafeModel.Key);
         }
         #endregion

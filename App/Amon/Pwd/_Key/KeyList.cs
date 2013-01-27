@@ -182,6 +182,8 @@ namespace Me.Amon.Pwd._Key
                 case LAST_OPT_TASK_FIX:
                     ListKeysByGtd(DateTime.Now, _LastData);
                     break;
+                default:
+                    return;
             }
             LbKey.SelectedItem = SelectedKey;
         }

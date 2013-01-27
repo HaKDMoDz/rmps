@@ -159,6 +159,16 @@ namespace Me.Amon.Pwd.M
             return keys;
         }
 
+        public IList<Key> ListKey()
+        {
+            return _DbEngine.Query<Key>();
+        }
+
+        public void SaveKey(Vcs vcs)
+        {
+            _DbEngine.Save(vcs);
+        }
+
         public IList<Key> FindKeyByLabel(int label)
         {
             IList<Key> keys = _DbEngine.Query<Key>(delegate(Key key)

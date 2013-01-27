@@ -215,6 +215,18 @@
     <Compile Include="Bar\Opt\Vcard.Designer.cs">
       <DependentUpon>Vcard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Bms\Bookmark.cs" />
+    <Compile Include="Bms\Chrome\ChromeItem.cs" />
+    <Compile Include="Bms\Chrome\ChromeObj.cs" />
+    <Compile Include="Bms\Chrome\ChromeRoot.cs" />
+    <Compile Include="Bms\Dirs.cs" />
+    <Compile Include="Bms\Sync.cs" />
+    <Compile Include="Bms\WBms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bms\WBms.Designer.cs">
+      <DependentUpon>WBms.cs</DependentUpon>
+    </Compile>
     <Compile Include="C\VoidHandler.cs" />
     <Compile Include="Da\DBA.cs" />
     <Compile Include="Da\Db\ODBUpgradeConfig.cs" />
@@ -1555,6 +1567,9 @@
     <EmbeddedResource Include="Bar\Opt\Vcard.resx">
       <DependentUpon>Vcard.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bms\WBms.resx">
+      <DependentUpon>WBms.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Demo.resx">
       <DependentUpon>Demo.cs</DependentUpon>
