@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Uw
+﻿namespace Me.Amon.Txt.V.Dlg
 {
     partial class TxtEditor
     {

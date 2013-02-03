@@ -8,9 +8,7 @@ using System.Windows.Forms;
 using Me.Amon.Auth;
 using Me.Amon.Http;
 using Me.Amon.M;
-using Me.Amon.Open;
 using Me.Amon.Open.PC;
-using Me.Amon.Open.V1.App.Pcs;
 using Me.Amon.Pcs.M;
 using Me.Amon.Pcs.V;
 using Me.Amon.Uc;
@@ -247,15 +245,7 @@ namespace Me.Amon.Pcs
 
         private void NewKuaipan(MPcs mPcs)
         {
-            var token = new Me.Amon.Open.V1.OAuthTokenV1();
-            token.oauth_token = mPcs.Token;
-            token.oauth_token_secret = mPcs.TokenSecret;
-            token.UserId = mPcs.UserId;
-            KuaipanClient client = new KuaipanClient(OAuthConsumer.KuaipanConsumer(), token, false);
-            if (token.oauth_token.Length != 24 && token.oauth_token_secret.Length != 32)
-            {
-                client.Verify();
-            }
+            var client = _PcsList.GetClient(mPcs);
 
             TabPage ntp = new TabPage();
             ntp.Text = mPcs.UserName;

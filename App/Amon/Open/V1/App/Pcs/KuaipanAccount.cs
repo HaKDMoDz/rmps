@@ -27,6 +27,11 @@
         /// </summary>
         public long quota_recycled;
 
+        public override string Id
+        {
+            get { return user_id; }
+        }
+
         public override string Name
         {
             get { return user_name; }

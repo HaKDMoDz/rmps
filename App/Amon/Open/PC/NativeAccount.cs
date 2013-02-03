@@ -4,6 +4,11 @@ namespace Me.Amon.Open.PC
 {
     public class NativeAccount : OAuthPcsAccount
     {
+        public override string Id
+        {
+            get { return ""; }
+        }
+
         public override string Name
         {
             get { return Environment.UserName; }

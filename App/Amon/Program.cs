@@ -13,8 +13,8 @@ namespace Me.Amon
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Main());
-            Application.Run(new Bms.WBms());
+            Application.Run(new Main());
+            //Application.Run(new Bms.WBms());
             //Application.Run(new Gtd.V.GtdEditor());
             //Application.Run(new Demo());
             //Application.Run(new WSpy());

@@ -352,12 +352,12 @@ namespace Me.Amon
         {
         }
 
-        private AGuid _Guid;
+        private V.Guid.AGuid _Guid;
         public void ShowGuid()
         {
             if (_Guid == null)
             {
-                _Guid = new AGuid(this);
+                _Guid = new V.Guid.AGuid(this);
                 _Guid.Location = new System.Drawing.Point(0, 0);
                 //_Guid.Name = "panel1";
 
@@ -411,12 +411,12 @@ namespace Me.Amon
             _Amon.LoadMenu(_Apps);
         }
 
-        private ATray _Tray;
+        private V.Tray.ATray _Tray;
         public void ShowTray()
         {
             if (_Tray == null)
             {
-                _Tray = new ATray(this);
+                _Tray = new V.Tray.ATray(this);
                 _Tray.InitData();
                 //_Tray.Init(_Apps);
             }
@@ -499,6 +499,21 @@ namespace Me.Amon
             }
         }
         #endregion
+
+        public void ShowBubbleTips(string tips)
+        {
+            _Amon.ShowBubbleTips(tips);
+        }
+
+        public void ShowFlicker()
+        {
+            _Amon.ShowFlicker();
+        }
+
+        public void HideFlicker()
+        {
+            _Amon.HideFlicker();
+        }
 
         public void ExitSystem()
         {

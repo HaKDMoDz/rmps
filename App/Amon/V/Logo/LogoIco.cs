@@ -2,7 +2,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using Me.Amon.Properties;
 
-namespace Me.Amon.V.Uc
+namespace Me.Amon.V.Logo
 {
     public class LogoIco : ILogo
     {

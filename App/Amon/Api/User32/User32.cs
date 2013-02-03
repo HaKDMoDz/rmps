@@ -13,6 +13,26 @@ namespace Me.Amon.Api.User32
 {
     public class User32 : User32API
     {
+        [DllImport("Psapi.dll", SetLastError = true)]
+        public static extern bool EnumProcesses(
+            [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U4)] [In][Out] UInt32[] processIds,
+              UInt32 arraySizeBytes,
+              [MarshalAs(UnmanagedType.U4)] out UInt32 bytesCopied
+           );
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr OpenProcess(ProcessAccessFlags dwDesiredAccess, bool bInheritHandle, int dwProcessId);
+
+        [DllImport("psapi.dll")]
+        public static extern uint GetModuleBaseName(IntPtr hProcess, IntPtr hModule, out StringBuilder lpBaseName, uint nSize);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool CloseHandle(IntPtr hObject);
+
+        [DllImport("psapi.dll", SetLastError = true)]
+        public static extern bool EnumProcessModules(IntPtr hProcess,
+        [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U4)] [In][Out] uint[] lphModule, uint cb, [MarshalAs(UnmanagedType.U4)] out uint lpcbNeeded);
+
         public static List<IntPtr> EnumWindows()
         {
             List<IntPtr> windows = new List<IntPtr>();

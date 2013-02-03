@@ -3,7 +3,7 @@
   <PropertyGroup>
     <PublishUrlHistory>F:\Pub\Web\down\|F:\Web\Web\down\|publish\</PublishUrlHistory>
     <InstallUrlHistory>http://amon.me/down/</InstallUrlHistory>
-    <SupportUrlHistory>http://amon.me/blog</SupportUrlHistory>
+    <SupportUrlHistory>http://amon.me/|http://amon.me/blog</SupportUrlHistory>
     <UpdateUrlHistory />
     <BootstrapperUrlHistory />
     <ErrorReportUrlHistory />

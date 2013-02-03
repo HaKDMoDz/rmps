@@ -131,7 +131,7 @@ namespace Me.Amon.Pwd._Key
             foreach (Gtd.M.MGtd gtd in gtds)
             {
                 gtd.Test(time, seconds);
-                if (gtd.Status == CGtd.STATUS_ONTIME)
+                if (gtd.Status == CGtd.STATUS_NOTICE)
                 {
                     keys.Add(_DataModel.ReadKey(gtd.RefId));
                 }

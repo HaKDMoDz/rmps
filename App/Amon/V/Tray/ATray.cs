@@ -4,12 +4,17 @@ using System.Reflection;
 using System.Windows.Forms;
 using Me.Amon.Properties;
 
-namespace Me.Amon.V
+namespace Me.Amon.V.Tray
 {
     public class ATray : IAmon
     {
         private Main _Main;
         private NotifyIcon _Tray;
+
+        private Timer _Timer;
+        private int _Index;
+        private bool _Running;
+        private string _Tips;
 
         public ATray(Main main)
         {
@@ -21,7 +26,12 @@ namespace Me.Amon.V
             _Tray.Text = "阿木密码箱";
             _Tray.Visible = true;
             _Tray.DoubleClick += new System.EventHandler(Tray_DoubleClick);
+            _Tray.MouseClick += TrayMouseClick;
             //_Tray.MouseUp += new MouseEventHandler(Tray_MouseUp);
+
+            _Timer = new Timer();
+            _Timer.Interval = 400;
+            _Timer.Tick += new System.EventHandler(this.Timer_Tick);
         }
 
         #region 接口实现
@@ -57,6 +67,31 @@ namespace Me.Amon.V
         public void Close()
         {
         }
+
+        public void ShowBubbleTips(string tips)
+        {
+            _Tips = tips;
+            _Tray.ShowBalloonTip(0, "阿木密码箱", tips, ToolTipIcon.Info);
+        }
+
+        public void ShowFlicker()
+        {
+            if (!_Running)
+            {
+                _Timer.Start();
+                _Running = true;
+            }
+        }
+
+        public void HideFlicker()
+        {
+            if (_Running)
+            {
+                _Timer.Stop();
+                _Running = false;
+                _Tray.Icon = Resources.Icon;
+            }
+        }
         #endregion
 
         public bool Visible
@@ -74,7 +109,16 @@ namespace Me.Amon.V
         #region 事件处理
         private void Tray_DoubleClick(object sender, System.EventArgs e)
         {
+            HideFlicker();
             _Main.ShowDefaultApp();
+        }
+
+        private void TrayMouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                _Tray.ShowBalloonTip(0, "阿木密码箱", _Tips, ToolTipIcon.Info);
+            }
         }
 
         private void Tray_MouseUp(object sender, MouseEventArgs e)
@@ -86,6 +130,7 @@ namespace Me.Amon.V
                 {
                     mi.Invoke(_Tray, null);
                 }
+                return;
             }
         }
 
@@ -180,7 +225,7 @@ namespace Me.Amon.V
         }
         #endregion
 
-        #region
+        #region 其它
         private void MiInfo_Click(object sender, EventArgs e)
         {
             if (Main.DefaultApp.App.Visible)
@@ -198,6 +243,24 @@ namespace Me.Amon.V
             _Main.ExitSystem();
         }
         #endregion
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            switch (_Index)
+            {
+                case 0:
+                    _Tray.Icon = Resources.Icon;
+                    break;
+                case 1:
+                    _Tray.Icon = Resources.None;
+                    break;
+                default:
+                    _Index = 0;
+                    _Tray.Icon = Resources.Icon;
+                    break;
+            }
+            _Index = 1 - _Index;
+        }
         #endregion
 
         #region 私有函数

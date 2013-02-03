@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Me.Amon.Uw
+namespace Me.Amon.Txt.V.Dlg
 {
     public partial class TxtEditor : Form
     {
@@ -14,7 +14,7 @@ namespace Me.Amon.Uw
             this.Icon = Me.Amon.Properties.Resources.Icon;
         }
 
-        public void Init(string file)
+        public void ShowTxt(string file)
         {
             if (!File.Exists(file))
             {

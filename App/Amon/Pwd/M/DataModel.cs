@@ -10,9 +10,10 @@ namespace Me.Amon.Pwd.M
 {
     public sealed class DataModel : ADataModel
     {
-        public DataModel(UserModel userModel)
+        public DataModel(UserModel userModel, Main main)
         {
             _UserModel = userModel;
+            _Main = main;
         }
 
         public new void Init()

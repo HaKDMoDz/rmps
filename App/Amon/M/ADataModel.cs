@@ -12,6 +12,7 @@ namespace Me.Amon.M
 {
     public class ADataModel
     {
+        protected Main _Main;
         protected AUserModel _UserModel;
         protected DBA _DbEngine;
         private bool IsStartup;
@@ -220,6 +221,16 @@ namespace Me.Amon.M
                         SaveVcs(gtd);
                     }
                     if (gtd.Status == Gtd.CGtd.STATUS_ONTIME)
+                    {
+                        _TodoCnt += 1;
+                        if (_Main != null)
+                        {
+                            _Main.ShowFlicker();
+                            _Main.ShowBubbleTips(gtd.Title);
+                        }
+                        continue;
+                    }
+                    if (gtd.Status == Gtd.CGtd.STATUS_NOTICE)
                     {
                         _TodoCnt += 1;
                         continue;

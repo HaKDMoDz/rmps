@@ -25,14 +25,14 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>http://amon.me/down/</InstallUrl>
-    <SupportUrl>http://amon.me/blog</SupportUrl>
+    <SupportUrl>http://amon.me/</SupportUrl>
     <ProductName>阿木密码箱</ProductName>
     <PublisherName>Amon</PublisherName>
     <SuiteName>阿木密码箱</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>5</ApplicationRevision>
-    <ApplicationVersion>7.3.0.%2a</ApplicationVersion>
+    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationVersion>7.3.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -111,6 +111,7 @@
     <Compile Include="Api\Enums\MouseButton.cs" />
     <Compile Include="Api\Enums\MouseEvent.cs" />
     <Compile Include="Api\Enums\PenStyles.cs" />
+    <Compile Include="Api\Enums\ProcessAccessFlags.cs" />
     <Compile Include="Api\Enums\RopMode.cs" />
     <Compile Include="Api\Enums\ShowWindow.cs" />
     <Compile Include="Api\Enums\StockObjects.cs" />
@@ -381,11 +382,17 @@
     <Compile Include="Ico\M\MIco.cs" />
     <Compile Include="Ico\M\UserModel.cs" />
     <Compile Include="Ico\TIco.cs" />
-    <Compile Include="Img\AImg.cs">
+    <Compile Include="Img\V\Dlg\DImg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Img\AImg.Designer.cs">
-      <DependentUpon>AImg.cs</DependentUpon>
+    <Compile Include="Img\V\Dlg\DImg.Designer.cs">
+      <DependentUpon>DImg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Img\WImg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Img\WImg.Designer.cs">
+      <DependentUpon>WImg.cs</DependentUpon>
     </Compile>
     <Compile Include="Img\C\Animator.cs" />
     <Compile Include="Img\EImg.cs" />
@@ -1374,7 +1381,13 @@
     <Compile Include="Uw\Waiting.Designer.cs">
       <DependentUpon>Waiting.cs</DependentUpon>
     </Compile>
-    <Compile Include="V\ATray.cs" />
+    <Compile Include="V\Guid\Tips.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="V\Guid\Tips.Designer.cs">
+      <DependentUpon>Tips.cs</DependentUpon>
+    </Compile>
+    <Compile Include="V\Tray\ATray.cs" />
     <Compile Include="V\Reset.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1507,10 +1520,10 @@
     <Compile Include="User\Uc\SignPc.Designer.cs">
       <DependentUpon>SignPc.cs</DependentUpon>
     </Compile>
-    <Compile Include="Uw\TxtEditor.cs">
+    <Compile Include="Txt\V\Dlg\TxtEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Uw\TxtEditor.Designer.cs">
+    <Compile Include="Txt\V\Dlg\TxtEditor.Designer.cs">
       <DependentUpon>TxtEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="User\SignAc.cs">
@@ -1520,14 +1533,14 @@
       <DependentUpon>SignAc.cs</DependentUpon>
     </Compile>
     <Compile Include="V\IAmon.cs" />
-    <Compile Include="V\AGuid.cs">
+    <Compile Include="V\Guid\AGuid.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="V\AGuid.Designer.cs">
+    <Compile Include="V\Guid\AGuid.Designer.cs">
       <DependentUpon>AGuid.cs</DependentUpon>
     </Compile>
-    <Compile Include="V\Uc\LogoEye.cs" />
-    <Compile Include="V\Uc\LogoIco.cs" />
+    <Compile Include="V\Logo\LogoEye.cs" />
+    <Compile Include="V\Logo\LogoIco.cs" />
     <Compile Include="V\ILogo.cs" />
     <EmbeddedResource Include="Bar\WBar.resx">
       <DependentUpon>WBar.cs</DependentUpon>
@@ -1632,8 +1645,11 @@
       <DependentUpon>About.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Img\AImg.resx">
-      <DependentUpon>AImg.cs</DependentUpon>
+    <EmbeddedResource Include="Img\V\Dlg\DImg.resx">
+      <DependentUpon>DImg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Img\WImg.resx">
+      <DependentUpon>WImg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ico\V\IcoEditor.resx">
       <DependentUpon>IcoEditor.cs</DependentUpon>
@@ -1945,6 +1961,9 @@
     <EmbeddedResource Include="Uw\Waiting.resx">
       <DependentUpon>Waiting.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="V\Guid\Tips.resx">
+      <DependentUpon>Tips.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="V\Reset.resx">
       <DependentUpon>Reset.cs</DependentUpon>
     </EmbeddedResource>
@@ -1999,13 +2018,13 @@
     <EmbeddedResource Include="User\Uc\SignPc.resx">
       <DependentUpon>SignPc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Uw\TxtEditor.resx">
+    <EmbeddedResource Include="Txt\V\Dlg\TxtEditor.resx">
       <DependentUpon>TxtEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\SignAc.resx">
       <DependentUpon>SignAc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="V\AGuid.resx">
+    <EmbeddedResource Include="V\Guid\AGuid.resx">
       <DependentUpon>AGuid.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Amon_TemporaryKey.pfx" />
@@ -2045,47 +2064,16 @@
     <Content Include="Logo\logo48.png" />
     <Content Include="Logo\logo64.png" />
     <Content Include="Logo\logo96.png" />
+    <None Include="Resources\None.ico" />
     <None Include="Resources\Waiting.gif" />
     <None Include="Resources\Input.png" />
     <None Include="Resources\Error.png" />
     <None Include="Resources\Alert.png" />
-    <None Include="Resources\vote.png" />
-    <None Include="Resources\open.png" />
-    <None Include="Resources\no.png" />
-    <None Include="Resources\na.png" />
-    <None Include="Resources\MenuP.png" />
-    <None Include="Resources\MenuD.png" />
-    <None Include="Resources\HideP.png" />
-    <None Include="Resources\HideD.png" />
-    <None Include="Resources\Hand.png" />
-    <None Include="Resources\ExitP.png" />
-    <None Include="Resources\ExitD.png" />
-    <None Include="Resources\exit.png" />
-    <None Include="Resources\edit.png" />
-    <None Include="Resources\doc.png" />
-    <None Include="Resources\chat.png" />
-    <None Include="Resources\au.png" />
-    <None Include="Resources\ar.png" />
-    <None Include="Resources\al.png" />
-    <None Include="Resources\ad.png" />
-    <None Include="Resources\_win.png" />
-    <None Include="Resources\_tag.png" />
-    <None Include="Resources\_sub.png" />
-    <None Include="Resources\_run.png" />
-    <None Include="Resources\_opt.png" />
-    <None Include="Resources\_new.png" />
-    <None Include="Resources\_fav.png" />
-    <None Include="Resources\_del.png" />
-    <None Include="Resources\_def.png" />
-    <None Include="Resources\_cur.png" />
-    <None Include="Resources\_add.png" />
     <None Include="Resources\OK.png" />
     <None Include="Resources\Tips.png" />
     <None Include="Resources\Logo25.png" />
     <None Include="Resources\Icon.ico" />
     <None Include="Resources\Logo16.png" />
-    <None Include="Resources\AppCur.png" />
-    <None Include="Resources\AppNan.png" />
     <None Include="Resources\Logo32.png" />
     <None Include="Resources\PosSel.png" />
     <None Include="Resources\PosDef.png" />
@@ -2127,16 +2115,16 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <FileAssociation Include=".aptxt">
+      <Visible>False</Visible>
+      <Description>阿木密码箱文件</Description>
+      <Progid>WPwd</Progid>
+      <DefaultIcon>Logo\logo.ico</DefaultIcon>
+    </FileAssociation>
     <FileAssociation Include=".apxml">
       <Visible>False</Visible>
       <Description>阿木密码箱文件</Description>
-      <Progid>Apwd</Progid>
-      <DefaultIcon>Logo\logo.ico</DefaultIcon>
-    </FileAssociation>
-    <FileAssociation Include=".asxml">
-      <Visible>False</Visible>
-      <Description>阿木加密器文件</Description>
-      <Progid>Asec</Progid>
+      <Progid>WPwd</Progid>
       <DefaultIcon>Logo\logo.ico</DefaultIcon>
     </FileAssociation>
   </ItemGroup>

@@ -92,11 +92,15 @@ namespace Me.Amon.Gtd
         /// <summary>
         /// 过期
         /// </summary>
-        public const int STATUS_EXPIRED = 2;
+        public const int STATUS_EXPIRED = 3;
         /// <summary>
         /// 到点
         /// </summary>
-        public const int STATUS_ONTIME = 1;
+        public const int STATUS_ONTIME = 2;
+        /// <summary>
+        /// 提示
+        /// </summary>
+        public const int STATUS_NOTICE = 1;
         /// <summary>
         /// 未到
         /// </summary>

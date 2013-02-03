@@ -2,11 +2,11 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
-using Me.Amon.Img;
+using Me.Amon.Img.V.Dlg;
 using Me.Amon.Pwd._Att;
 using Me.Amon.Pwd.M;
+using Me.Amon.Txt.V.Dlg;
 using Me.Amon.Util;
-using Me.Amon.Uw;
 
 namespace Me.Amon.Pwd.Bean
 {
@@ -91,15 +91,15 @@ namespace Me.Amon.Pwd.Bean
                 string exts = _Att.GetSpec(FileAtt.SPEC_FILE_EXTS);
                 if (exts == ".png" || exts == ".jpg" || exts == ".jpeg" || exts == ".bmp")
                 {
-                    WImg viewer = new WImg();
+                    DImg viewer = new DImg();
                     viewer.Show(this);
-                    viewer.OpenFile(dstFile);
+                    viewer.ShowImg(dstFile);
                     return;
                 }
                 if (exts == ".txt" || exts == ".ini" || exts == ".xml" || exts == ".log")
                 {
                     TxtEditor editor = new TxtEditor();
-                    editor.Init(dstFile);
+                    editor.ShowTxt(dstFile);
                     editor.Show(this);
                     return;
                 }

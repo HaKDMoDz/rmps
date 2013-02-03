@@ -95,7 +95,7 @@ namespace Me.Amon.Pwd
             #region 数据模型
             _SafeModel = new SafeModel(_UserModel);
             _SafeModel.Init();
-            _DataModel = new DataModel(_UserModel);
+            _DataModel = new DataModel(_UserModel, _Main);
             _DataModel.Init();
             _ViewModel = new ViewModel(_UserModel);
             _ViewModel.Init();
@@ -512,8 +512,11 @@ namespace Me.Amon.Pwd
                 return;
             }
 
-            var state = WindowState;
-            WindowState = FormWindowState.Minimized;
+            var state = this.WindowState;
+            this.WindowState = FormWindowState.Minimized;
+            var imeMode = this.ImeMode;
+            this.ImeMode = System.Windows.Forms.ImeMode.Off;
+
             Thread.Sleep(80);
             if (!string.IsNullOrWhiteSpace(_SafeModel.Key.Window))
             {
@@ -534,6 +537,7 @@ namespace Me.Amon.Pwd
 
             DoFillData();
 
+            ImeMode = imeMode;
             WindowState = state;
             Activate();
         }
@@ -606,11 +610,16 @@ namespace Me.Amon.Pwd
             {
                 return;
             }
+            var imeMode = this.ImeMode;
+            this.ImeMode = System.Windows.Forms.ImeMode.Off;
+
             User32.BringWindowToTop(hWnd);
             Thread.Sleep(100);
 
             SendKeys.SendWait(data);
             Thread.Sleep(100);
+
+            this.ImeMode = imeMode;
             Activate();
         }
 
@@ -2082,6 +2091,12 @@ namespace Me.Amon.Pwd
         }
 
         public void ImportOld()
+        {
+            _Main.ShowFlicker();
+            _Main.ShowBubbleTips("OK");
+        }
+
+        private void abc()
         {
             if (_SafeModel.Modified)
             {

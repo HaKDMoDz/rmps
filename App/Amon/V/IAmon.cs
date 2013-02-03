@@ -19,5 +19,11 @@ namespace Me.Amon
         //void ChangeEmotion(int i);
 
         //void ChangeAppVisible(bool b);
+
+        void ShowBubbleTips(string tips);
+
+        void ShowFlicker();
+
+        void HideFlicker();
     }
 }

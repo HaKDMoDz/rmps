@@ -9,10 +9,10 @@
         public static OAuthConsumer KuaipanConsumer()
         {
             var consumer = new OAuthConsumer();
-            //consumer.consumer_key = "xcWPaz75PSRDOWBM";
-            //consumer.consumer_secret = "DU5ZYaCK0cRlsMTj";
-            consumer.consumer_key = "xcLegJ8HLq7ZoQ0U";
-            consumer.consumer_secret = "psaBwFH0Z0r2PEPI";
+            consumer.consumer_key = "xcWPaz75PSRDOWBM";
+            consumer.consumer_secret = "DU5ZYaCK0cRlsMTj";
+            //consumer.consumer_key = "xcLegJ8HLq7ZoQ0U";
+            //consumer.consumer_secret = "psaBwFH0Z0r2PEPI";
             return consumer;
         }
 

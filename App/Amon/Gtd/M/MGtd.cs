@@ -112,7 +112,7 @@ namespace Me.Amon.Gtd.M
         /// <returns>状态是否发生改变：true是，false否</returns>
         public bool Test(DateTime time, int opt)
         {
-            if (Status != CGtd.STATUS_NORMAL && Status != CGtd.STATUS_ONTIME)
+            if (Status != CGtd.STATUS_NORMAL && Status != CGtd.STATUS_NOTICE)
             {
                 return false;
             }
@@ -134,7 +134,7 @@ namespace Me.Amon.Gtd.M
 
         public bool Next(DateTime time, int opt)
         {
-            if (Status < CGtd.STATUS_ONTIME)
+            if (Status < CGtd.STATUS_NOTICE)
             {
                 return false;
             }
@@ -182,7 +182,7 @@ namespace Me.Amon.Gtd.M
             }
 
             // 判断是否过期
-            if (Status == CGtd.STATUS_ONTIME)
+            if (Status == CGtd.STATUS_NOTICE)
             {
                 if (time > NextTime)
                 {
@@ -196,32 +196,37 @@ namespace Me.Amon.Gtd.M
             switch (PrePose)
             {
                 case CGtd.UNIT_SECOND:
-                    time.AddSeconds(PreTime);
+                    time = time.AddSeconds(PreTime);
                     break;
                 case CGtd.UNIT_MINUTE:
-                    time.AddMinutes(PreTime);
+                    time = time.AddMinutes(PreTime);
                     break;
                 case CGtd.UNIT_HOUR:
-                    time.AddHours(PreTime);
+                    time = time.AddHours(PreTime);
                     break;
                 case CGtd.UNIT_DAY:
-                    time.AddDays(PreTime);
+                    time = time.AddDays(PreTime);
                     break;
                 case CGtd.UNIT_WEEK:
-                    time.AddDays(PreTime * 7);
+                    time = time.AddDays(PreTime * 7);
                     break;
                 case CGtd.UNIT_MONTH:
-                    time.AddMonths(PreTime);
+                    time = time.AddMonths(PreTime);
                     break;
                 case CGtd.UNIT_YEAR:
-                    time.AddYears(PreTime);
+                    time = time.AddYears(PreTime);
                     break;
             }
             #endregion
 
-            if (time >= NextTime.AddSeconds(-length))
+            if (time >= NextTime)
             {
                 Status = CGtd.STATUS_ONTIME;
+                return true;
+            }
+            if (time >= NextTime.AddSeconds(-length))
+            {
+                Status = CGtd.STATUS_NOTICE;
                 return true;
             }
             return false;
@@ -263,7 +268,7 @@ namespace Me.Amon.Gtd.M
             }
 
             // 到点，取下次时间
-            if (Status == CGtd.STATUS_ONTIME)
+            if (Status == CGtd.STATUS_NOTICE)
             {
                 time = NextTime;
             }
@@ -320,20 +325,20 @@ namespace Me.Amon.Gtd.M
                 if (EndType == CGtd.END_TYPE_EVER)
                 {
                     NextTime = time;
-                    Status = CGtd.STATUS_ONTIME;
+                    Status = CGtd.STATUS_NOTICE;
                     return true;
                 }
                 if (EndType == CGtd.END_TYPE_LOOP)
                 {
                     ExeCount -= 1;
                     NextTime = time;
-                    Status = ExeCount < 0 ? CGtd.STATUS_FINISHED : CGtd.STATUS_ONTIME;
+                    Status = ExeCount < 0 ? CGtd.STATUS_FINISHED : CGtd.STATUS_NOTICE;
                     return true;
                 }
                 if (EndType == CGtd.END_TYPE_TIME)
                 {
                     NextTime = time;
-                    Status = time > EndTime ? CGtd.STATUS_FINISHED : CGtd.STATUS_ONTIME;
+                    Status = time > EndTime ? CGtd.STATUS_FINISHED : CGtd.STATUS_NOTICE;
                     return true;
                 }
             }

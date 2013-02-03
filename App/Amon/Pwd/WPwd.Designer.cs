@@ -238,6 +238,7 @@
             this.MainMenuStrip = this.MbMenu;
             this.Name = "WPwd";
             this.Text = "阿木密码箱";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WPwd_FormClosing);
             this.Load += new System.EventHandler(this.WPwd_Load);
             this.Resize += new System.EventHandler(this.WPwd_Resize);
             this.SbEcho.ResumeLayout(false);

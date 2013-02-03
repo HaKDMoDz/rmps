@@ -6,14 +6,16 @@ using System.Windows.Forms;
 using Me.Amon.C;
 using Me.Amon.Properties;
 using Me.Amon.Util;
-using Me.Amon.V.Uc;
+using Me.Amon.V.Logo;
 
-namespace Me.Amon.V
+namespace Me.Amon.V.Guid
 {
     public partial class AGuid : UserControl, IAmon
     {
         private Main _Main;
+        private Tips _Tips;
         private ILogo _ILogo;
+
         #region 窗口移动
         private bool _IsMouseDown;
         private Point _MouseOffset;
@@ -111,6 +113,36 @@ namespace Me.Amon.V
         }
 
         public void Close()
+        {
+        }
+
+        public void ShowBubbleTips(string tips)
+        {
+            if (_Tips == null)
+            {
+                _Tips = new Tips();
+            }
+
+            var loc = _Main.Location;
+            var dim = Screen.PrimaryScreen.WorkingArea.Size;
+            if (dim.Height - loc.Y < 300)
+            {
+                loc.Y -= _Tips.Height;
+            }
+            else
+            {
+                loc.Y += 32;
+            }
+            _Tips.Location = loc;
+            _Tips.Visible = true;
+            _Tips.ShowTips(tips);
+        }
+
+        public void ShowFlicker()
+        {
+        }
+
+        public void HideFlicker()
         {
         }
         #endregion

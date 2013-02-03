@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Me.Amon.M;
+using Me.Amon.Open;
 
 namespace Me.Amon.Pcs.M
 {
@@ -43,6 +44,12 @@ namespace Me.Amon.Pcs.M
         public string Token;
 
         public string TokenSecret;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [NonSerialized]
+        public OAuthPcsAccount Account;
 
         public void Init()
         {

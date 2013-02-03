@@ -2,6 +2,9 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using Me.Amon.Open;
+using Me.Amon.Open.PC;
+using Me.Amon.Open.V1.App.Pcs;
 using Me.Amon.Pcs.M;
 using Me.Amon.Pcs.V.Cfg;
 
@@ -10,6 +13,7 @@ namespace Me.Amon.Pcs.V
     public partial class PcsList : UserControl
     {
         private WPcs _WPcs;
+        private MPcs _MPcs;
         private UserModel _UserModel;
         private DataModel _DataModel;
 
@@ -120,8 +124,23 @@ namespace Me.Amon.Pcs.V
 
         private void LbItem_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PbLogo.Image = null;
-            TbMemo.Text = "本地文件管理系统";
+            var pcs = LbItem.SelectedItem as MPcs;
+            if (pcs == null)
+            {
+                return;
+            }
+            if (pcs.Account != null)
+            {
+                return;
+            }
+
+            if (BwWorker.IsBusy)
+            {
+                BwWorker.CancelAsync();
+            }
+            _MPcs = pcs;
+            BwWorker.RunWorkerAsync();
+            BtUpdate.Enabled = false;
         }
 
         private void LbItem_MouseUp(object sender, MouseEventArgs e)
@@ -169,5 +188,96 @@ namespace Me.Amon.Pcs.V
             _WPcs.OpenPcs(mPcs);
         }
         #endregion
+
+        public PcsClient GetClient(MPcs pcs)
+        {
+            switch (pcs.ServerType)
+            {
+                case "native":
+                    return NewNative(pcs);
+                case "kuaipan":
+                    return NewKuaipan(pcs);
+                default:
+                    return null;
+            }
+        }
+
+        private PcsClient NewNative(MPcs mPcs)
+        {
+            return new NativeClient();
+        }
+
+        private PcsClient NewKuaipan(MPcs pcs)
+        {
+            var token = new Me.Amon.Open.V1.OAuthTokenV1();
+            token.oauth_token = pcs.Token;
+            token.oauth_token_secret = pcs.TokenSecret;
+            token.UserId = pcs.UserId;
+            KuaipanClient client = new KuaipanClient(OAuthConsumer.KuaipanConsumer(), token, false);
+            if (token.oauth_token.Length != 24 && token.oauth_token_secret.Length != 32)
+            {
+                client.Verify();
+            }
+            return client;
+        }
+
+        private void BwWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            var client = GetClient(_MPcs);
+            if (client == null)
+            {
+                return;
+            }
+
+            var account = client.Account();
+            if (account == null)
+            {
+                return;
+            }
+
+            _MPcs.UserId = account.Id;
+            _MPcs.UserName = account.Name;
+            TbMemo.Text = "总空间：" + GetSize(account.Size) + Environment.NewLine;
+            TbMemo.Text += "已使用：" + GetSize(account.Used) + Environment.NewLine;
+
+            BtUpdate.Enabled = true;
+            _DataModel.SavePcs(_MPcs);
+        }
+
+        private string GetSize(long size)
+        {
+            // 1024
+            if (size < 1024)
+            {
+                return string.Format("{0} B", size);
+            }
+            // 1024* 1024
+            if (size < 1048576)
+            {
+                return (size / 1024d).ToString("f2") + " KB";
+            }
+            // 1024 * 1024 * 1024
+            if (size < 1073741824)
+            {
+                return (size / 1048576d).ToString("f2") + " MB";
+            }
+            // 1024 * 1024 * 1024 * 1024
+            if (size < 1099511627776)
+            {
+                return (size / 1073741824d).ToString("f2") + " GB";
+            }
+            // 1099511627776 1G
+            return (size / 1099511627776d).ToString("f2") + " TB";
+        }
+
+        private void BtUpdate_Click(object sender, EventArgs e)
+        {
+            if (BwWorker.IsBusy)
+            {
+                BwWorker.CancelAsync();
+            }
+            BwWorker.RunWorkerAsync();
+            BtUpdate.Enabled = false;
+        }
     }
 }

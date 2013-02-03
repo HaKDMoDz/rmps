@@ -37,6 +37,8 @@
             this.MiCreate = new System.Windows.Forms.ToolStripMenuItem();
             this.MiVerify = new System.Windows.Forms.ToolStripMenuItem();
             this.MiDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.BwWorker = new System.ComponentModel.BackgroundWorker();
+            this.BtUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PbLogo)).BeginInit();
             this.CmMenu.SuspendLayout();
             this.SuspendLayout();
@@ -62,6 +64,7 @@
             // 
             this.PbLogo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.PbLogo.BackColor = System.Drawing.Color.White;
             this.PbLogo.Location = new System.Drawing.Point(169, 3);
             this.PbLogo.Name = "PbLogo";
             this.PbLogo.Size = new System.Drawing.Size(228, 128);
@@ -85,7 +88,7 @@
             // BnOpen
             // 
             this.BnOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BnOpen.Location = new System.Drawing.Point(322, 274);
+            this.BnOpen.Location = new System.Drawing.Point(241, 274);
             this.BnOpen.Name = "BnOpen";
             this.BnOpen.Size = new System.Drawing.Size(75, 23);
             this.BnOpen.TabIndex = 3;
@@ -123,10 +126,27 @@
             this.MiDelete.Text = "删除(&D)";
             this.MiDelete.Click += new System.EventHandler(this.MiDelete_Click);
             // 
+            // BwWorker
+            // 
+            this.BwWorker.WorkerSupportsCancellation = true;
+            this.BwWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BwWorker_DoWork);
+            // 
+            // BtUpdate
+            // 
+            this.BtUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtUpdate.Location = new System.Drawing.Point(322, 274);
+            this.BtUpdate.Name = "BtUpdate";
+            this.BtUpdate.Size = new System.Drawing.Size(75, 23);
+            this.BtUpdate.TabIndex = 4;
+            this.BtUpdate.Text = "更新(&U)";
+            this.BtUpdate.UseVisualStyleBackColor = true;
+            this.BtUpdate.Click += new System.EventHandler(this.BtUpdate_Click);
+            // 
             // PcsList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.BtUpdate);
             this.Controls.Add(this.BnOpen);
             this.Controls.Add(this.TbMemo);
             this.Controls.Add(this.PbLogo);
@@ -150,5 +170,7 @@
         private System.Windows.Forms.ToolStripMenuItem MiCreate;
         private System.Windows.Forms.ToolStripMenuItem MiVerify;
         private System.Windows.Forms.ToolStripMenuItem MiDelete;
+        private System.ComponentModel.BackgroundWorker BwWorker;
+        private System.Windows.Forms.Button BtUpdate;
     }
 }
