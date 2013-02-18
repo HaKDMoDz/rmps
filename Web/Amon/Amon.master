@@ -5,7 +5,7 @@
 <head id="Head1" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <link href="~/Styles/Amon.css" rel="stylesheet" type="text/css" />
+    <link href="~/_css/Amon.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="AmonHead" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -15,22 +15,16 @@
         <table width="100%" cellpadding="0" cellspacing="0">
             <tr>
                 <td align="left" height="42" valign="middle">
-                    <asp:Image ID="Logo" runat="server" ImageUrl="~/logo/amon/logo.png" ToolTip="阿木密码箱"
-                        AlternateText="阿木密码箱" />
+                    <asp:Image ID="Logo" runat="server" ImageUrl="~/logo/amon/logo.png" ToolTip="阿木密码箱" AlternateText="阿木密码箱" />
                 </td>
                 <td align="right">
                     <div class="menu">
                         <ul class="level1 static" style="position: relative; width: auto; float: left;">
-                            <li class="static" style="position: relative; float: left;"><a class="level1 static"
-                                href="/Index.aspx" tabindex="-1">首页</a></li>
-                            <li class="static" style="position: relative; float: left;"><a class="level1 static"
-                                href="/blog" tabindex="-1">博客</a></li>
-                            <li class="static" style="position: relative; float: left;"><a class="level1 static"
-                                href="http://rmps.googlecode.com/" tabindex="-1">源码</a></li>
-                            <li class="static" style="position: relative; float: left;"><a class="level1 static"
-                                href="/down" tabindex="-1">关于</a></li>
-                            <li class="static" style="position: relative; float: left;"><a class="level1 static"
-                                href="/idea" tabindex="-1">交流</a></li>
+                            <li class="static" style="position: relative; float: left;"><a class="level1 static" href="/Index.aspx" tabindex="-1">首页</a></li>
+                            <li class="static" style="position: relative; float: left;"><a class="level1 static" href="/blog" tabindex="-1">博客</a></li>
+                            <li class="static" style="position: relative; float: left;"><a class="level1 static" href="http://rmps.googlecode.com/" tabindex="-1">源码</a></li>
+                            <li class="static" style="position: relative; float: left;"><a class="level1 static" href="/down" tabindex="-1">关于</a></li>
+                            <li class="static" style="position: relative; float: left;"><a class="level1 static" href="/idea" tabindex="-1">交流</a></li>
                         </ul>
                     </div>
                 </td>
