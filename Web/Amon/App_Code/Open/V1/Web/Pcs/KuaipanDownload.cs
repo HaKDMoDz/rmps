@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using Me.Amon.Http;
 
-namespace Me.Amon.Open.V1.App.Pcs
+namespace Me.Amon.Open.V1.Web.Pcs
 {
     public class KuaipanDownload : TaskInfo
     {

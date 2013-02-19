@@ -1,15 +1,15 @@
-﻿﻿using Me.Amon.Http;
-using Me.Amon.Open.M;
-using Me.Amon.Pcs;
-using Me.Amon.Pcs.M;
-using Newtonsoft.Json;
-using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Net;
 using System.Text;
+using Me.Amon.Http;
+using Me.Amon.Open.M;
+using Me.Amon.Pcs;
+using Me.Amon.Pcs.M;
+using Newtonsoft.Json;
 
-namespace Me.Amon.Open.V1.App.Pcs
+namespace Me.Amon.Open.V1.Web.Pcs
 {
     public class KuaipanClient : OAuthV1Client, PcsClient
     {
@@ -56,11 +56,6 @@ namespace Me.Amon.Open.V1.App.Pcs
             Token = JsonConvert.DeserializeObject<OAuthTokenV1>(t);
             ResetParams();
 
-            return true;
-        }
-
-        public override bool Authorize()
-        {
             return true;
         }
 

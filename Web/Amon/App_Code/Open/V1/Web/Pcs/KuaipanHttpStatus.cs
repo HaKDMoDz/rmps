@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Open.V1.App.Pcs
+﻿namespace Me.Amon.Open.V1.Web.Pcs
 {
     class KuaipanHttpStatus
     {

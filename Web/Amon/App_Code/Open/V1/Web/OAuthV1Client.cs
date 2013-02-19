@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Me.Amon.Open.V1.App
+namespace Me.Amon.Open.V1.Web
 {
     public abstract class OAuthV1Client : OAuthClient
     {
@@ -23,25 +23,6 @@ namespace Me.Amon.Open.V1.App
             Consumer = consumer;
 
             _Params = new List<KeyValuePair<string, string>>();
-        }
-        #endregion
-
-        #region 接口实现
-        public override bool Verify()
-        {
-            if (!RequestToken())
-            {
-                return false;
-            }
-            if (!Authorize())
-            {
-                return false;
-            }
-            if (!AccessToken())
-            {
-                return false;
-            }
-            return true;
         }
         #endregion
 
@@ -66,10 +47,6 @@ namespace Me.Amon.Open.V1.App
             }
             _Params.Sort(_Comparer);
         }
-        #endregion
-
-        #region 权限认证
-        public abstract bool Authorize();
         #endregion
 
         #region 私有函数

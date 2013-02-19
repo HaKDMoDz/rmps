@@ -10,8 +10,6 @@ namespace Me.Amon.Open
 
         public abstract bool AccessToken();
 
-        public abstract bool Verify();
-
         public static string GetOAuthNonce()
         {
             return new Random().Next(123400, 9999999).ToString();

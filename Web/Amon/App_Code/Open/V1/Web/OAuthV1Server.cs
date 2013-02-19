@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 
-namespace Me.Amon.Open.V1.App
+namespace Me.Amon.Open.V1.Web
 {
     public class OAuthV1Server : OAuthServer
     {

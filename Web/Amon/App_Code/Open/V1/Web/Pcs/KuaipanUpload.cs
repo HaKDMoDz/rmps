@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace Me.Amon.Open.V1.App.Pcs
+namespace Me.Amon.Open.V1.Web.Pcs
 {
     public class KuaipanUpload : TaskInfo
     {

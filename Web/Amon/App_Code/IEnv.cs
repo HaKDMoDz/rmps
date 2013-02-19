@@ -11,5 +11,7 @@
         public const string DATEIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
         public const string SESSION_USER = "amon_user";
+
+        public const string PREFIX = "/Amon";
     }
 }

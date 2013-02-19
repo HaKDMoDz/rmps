@@ -1,5 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Amon.master" AutoEventWireup="true"
-    CodeFile="Index.aspx.cs" Inherits="User_Index" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Amon.master" AutoEventWireup="true" CodeFile="Index.aspx.cs" Inherits="User_Index" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="AmonHead" runat="server">
 </asp:Content>
@@ -21,13 +20,18 @@
         </tr>
         <tr>
             <td align="center">
+                <a href="/Auth/Kuaipan.aspx">开通密码箱</a>
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
                 <asp:TreeView ID="TvCatTree" runat="server" ImageSet="Arrows">
                     <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
-                    <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="5px"
-                        NodeSpacing="0px" VerticalPadding="0px" />
+                    <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
                     <ParentNodeStyle Font-Bold="False" />
-                    <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="0px"
-                        VerticalPadding="0px" />
+                    <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="0px" VerticalPadding="0px" />
                 </asp:TreeView>
             </td>
             <td>

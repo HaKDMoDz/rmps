@@ -71,7 +71,7 @@ namespace Me.Amon.Da
             _OrderList = new StringBuilder();
             _BatchList = new List<string>();
 
-            _Connection = new MySqlConnection(string.Format(ConfigurationManager.ConnectionStrings["SQLServer"].ConnectionString, "amon", "amonyao", "amonyao123"));
+            _Connection = new MySqlConnection(string.Format(ConfigurationManager.ConnectionStrings["SQLServer"].ConnectionString, "amonyao", "amonyao", "amonyao123"));
             _Connection.Open();
         }
 
