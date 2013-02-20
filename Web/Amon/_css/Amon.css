@@ -122,7 +122,18 @@ first child of the left and right table columns */
     -moz-box-shadow: 0 1px 3px rgba(34,25,25,.4);
     -webkit-box-shadow: 0 1px 3px rgba(34,25,25,.4); /*text-align: center;*/
 }
-
+.load
+{
+    width: 300px;
+    height: 80px;
+    z-index: 99999;
+    position: fixed;
+    background-color: #b6b7bc;
+    border: 1px solid #999999;
+    box-shadow: 0 1px 3px rgba(34,25,25,.4);
+    -moz-box-shadow: 0 1px 3px rgba(34,25,25,.4);
+    -webkit-box-shadow: 0 1px 3px rgba(34,25,25,.4);
+}
 .leftCol
 {
     padding: 6px 0px;

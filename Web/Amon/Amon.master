@@ -6,6 +6,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <link href="~/_css/Amon.css" rel="stylesheet" type="text/css" />
+    <link href="~/_css/smoothness/jquery-ui-1.10.1.custom.css" rel="stylesheet" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
     <asp:ContentPlaceHolder ID="AmonHead" runat="server">
     </asp:ContentPlaceHolder>
     <script type="text/javascript"></script>

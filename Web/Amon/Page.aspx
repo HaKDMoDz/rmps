@@ -4,8 +4,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>网页</title>
+    <title>爱梦·网志</title>
     <link type="text/css" rel="stylesheet" href="_css/Amon.css" />
+    <link rel="stylesheet" href="~/_js/zt/themes/zTreeStyle.css" type="text/css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/Amon/_js/zt/jquery.ztree.core-3.5.min.js"></script>
     <style type="text/css">
         #log
         {
@@ -34,7 +38,8 @@
     </div>
     <div id="DvBody" runat="server" class="body">
         <div id="DvList" runat="server" class="list">
-            这是一个演示！
+            <ul id="UlTree" class="ztree">
+            </ul>
         </div>
         <div id="DvPage" runat="server" class="page">
             <iframe id="Iframe1" style="width: 960px; border: 0px;" src="Page.ashx"></iframe>
@@ -42,9 +47,24 @@
         <div class="clear">
         </div>
     </div>
+    <div id="DvLoad" class="load">
+        <img alt="Loading" src="" width="10" height="10" /><br />
+        正在努力为您加载，请稍候……
+    </div>
     </form>
 </body>
 <script type="text/javascript">
+    var zTreeObj;
+    var setting = {};
+    $.ajax({
+        type: "POST",
+        url: "Page.ashx?t=cat",
+        data: { name: "John", location: "Boston" },
+        success: function (data) {
+            $.fn.zTree.init($("#UlTree"), setting, data);
+            $("#DvLoad").hide();
+        }
+    });
     //$("#main").load(function(){
     //var mainheight = $(this).contents().find("body").height()+30;
     //$(this).height(mainheight);
