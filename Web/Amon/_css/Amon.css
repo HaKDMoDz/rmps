@@ -1,5 +1,18 @@
 ﻿/* DEFAULTS
 ----------------------------------------------------------*/
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td
+{
+    margin: 0;
+    padding: 0;
+}
+body
+{
+    /*background: #b6b7bc;*/
+    background: #f0f0f0;
+    font-size: .80em;
+    font-family: 宋体, 新宋体, 微软雅黑, "Helvetica Neue" , "Lucida Grande" , "Segoe UI" , Arial, Helvetica, Verdana, sans-serif;
+    color: #696969;
+}
 a:link, a:visited
 {
     color: #034af3;
@@ -13,49 +26,17 @@ a:active
 {
     color: #034af3;
 }
-body, table, id
-{
-    font-size: 12px; /*font-size: 12px;*/
-    font-family: "Helvetica Neue" , "Lucida Grande" , "Segoe UI" , Arial, Helvetica, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-body
-{
-    /*background: #b6b7bc;*/
-    color: #696969;
-}
-div
-{
-}
-#footer
-{
-    color: #6D787D;
-    width: 100%; /*margin: 15px auto 0 auto; 	line-height: 50px; 	clear: both;*/
-    text-align: center;
-}
-#header
-{
-    height: 42px;
-    width: 100%; /*border-top: 1px solid #5C9EC8; 	border-bottom: 1px solid #2F5B87; 	background-color: #1E75B0;*/
-    background-color: #484848; /*background-image: -webkit-linear-gradient(top,#1e75b0,#125288);*/
-}
 p
 {
     margin-bottom: 10px;
     line-height: 1.6em;
 }
-#content
-{
-    display: block;
-    text-align: center;
-    horizontal-align: center;
-}
+
 /* HEADINGS   
 ----------------------------------------------------------*/
 h1, h2, h3, h4, h5, h6
 {
-    font-family: "Simsun" , "Helvetica Neue" , "Lucida Grande" , "Segoe UI" , Arial, Helvetica, Verdana, sans-serif;
+    font-size: 1.5em;
     color: #666666;
     font-variant: small-caps;
     text-transform: none;
@@ -64,15 +45,14 @@ h1, h2, h3, h4, h5, h6
 }
 h1
 {
-    font-size: 32px;
+    font-size: 1.6em;
     padding-bottom: 0px;
     margin-bottom: 0px;
 }
 h2
 {
-    font-size: 24px;
+    font-size: 1.5em;
     font-weight: 600;
-    color: #333333;
 }
 h3
 {
@@ -86,14 +66,63 @@ h5, h6
 {
     font-size: 1em;
 }
+
 /* this rule styles <h1> and <h2> tags that are the 
 first child of the left and right table columns */
 .rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
 {
     margin-top: 0px;
 }
+
+
 /* PRIMARY LAYOUT ELEMENTS   
 ----------------------------------------------------------*/
+.head
+{
+    position: fixed;
+    z-index: 99997;
+    width: 100%;
+    background-color: #4b6c9e; /*background-color: #f7f7f7;     border-bottom: 1px solid #e0dede;     background-color: #f7f7f7;     background: url(/_img/hbg.png) 0 0 repeat-x;     background: linear-gradient(#fff, #f7f6f5);     background: -moz-linear-gradient(#fff, #f7f6f5);     background: -o-linear-gradient(#fff, #f7f6f5);     background: -webkit-linear-gradient(#fff, #f7f6f5);     box-shadow: 0 -1px 0 #fefcfc inset,0 0 4px rgba(0,0,0,.15);     -moz-shadow: 0 -1px 0 #fefcfc inset,0 0 4px rgba(0,0,0,.15);     -webkit-shadow: 0 -1px 0 #fefcfc inset,0 0 4px rgba(0,0,0,.15);*/
+}
+.head h1
+{
+    font-weight: 700;
+    margin: 0px;
+    padding: 0px 0px 0px 20px;
+    color: #f9f9f9;
+    border: none;
+    line-height: 2em;
+    font-size: 2em;
+}
+.body
+{
+    position: relative;
+    margin: 50px auto 0px auto;
+}
+.list
+{
+    position: absolute;
+    padding: 0px;
+    margin: 0px 700px 0px 0px;
+    border: 1px solid #999999;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(34,25,25,.4);
+    -moz-box-shadow: 0 1px 3px rgba(34,25,25,.4);
+    -webkit-box-shadow: 0 1px 3px rgba(34,25,25,.4); /*text-align: center;*/
+}
+.page
+{
+    position: relative;
+    padding: 0px;
+    margin: 0px 0px 0px 260px;
+    min-height: 420px;
+    border: 1px solid #999999;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(34,25,25,.4);
+    -moz-box-shadow: 0 1px 3px rgba(34,25,25,.4);
+    -webkit-box-shadow: 0 1px 3px rgba(34,25,25,.4); /*text-align: center;*/
+}
+
 .leftCol
 {
     padding: 6px 0px;
@@ -101,17 +130,31 @@ first child of the left and right table columns */
     width: 200px;
     min-height: 200px;
 }
+
+.footer
+{
+    color: #4e5766;
+    padding: 8px 0px 0px 0px;
+    margin: 0px auto;
+    text-align: center;
+    line-height: normal;
+}
+
+
 /* TAB MENU   
 ----------------------------------------------------------*/
+
 div.hideSkiplink
 {
     background-color: #3a4f63;
     width: 100%;
 }
+
 div.menu
 {
     padding: 4px 0px 4px 8px;
 }
+
 div.menu ul
 {
     list-style: none;
@@ -119,9 +162,11 @@ div.menu ul
     padding: 0px;
     width: auto;
 }
+
 div.menu ul li a, div.menu ul li a:visited
 {
-    background-color: #484848; /*border: 1px #4e667d solid;*/
+    background-color: #465c71;
+    border: 1px #4e667d solid;
     color: #dde4ec;
     display: block;
     line-height: 1.35em;
@@ -129,12 +174,14 @@ div.menu ul li a, div.menu ul li a:visited
     text-decoration: none;
     white-space: nowrap;
 }
+
 div.menu ul li a:hover
 {
     background-color: #bfcbd6;
     color: #465c71;
     text-decoration: none;
 }
+
 div.menu ul li a:active
 {
     background-color: #465c71;
@@ -144,218 +191,106 @@ div.menu ul li a:active
 
 /* FORM ELEMENTS   
 ----------------------------------------------------------*/
+
 fieldset
 {
     margin: 1em 0px;
     padding: 1em;
     border: 1px solid #ccc;
 }
+
 fieldset p
 {
     margin: 2px 12px 10px 10px;
 }
+
 fieldset.login label, fieldset.register label, fieldset.changePassword label
 {
     display: block;
 }
+
 fieldset label.inline
 {
     display: inline;
 }
+
 legend
 {
     font-size: 1.1em;
     font-weight: 600;
     padding: 2px 4px 8px 4px;
 }
+
+input.textEntry
+{
+    width: 320px;
+    border: 1px solid #ccc;
+}
+
+input.passwordEntry
+{
+    width: 320px;
+    border: 1px solid #ccc;
+}
+
+div.accountInfo
+{
+    width: 42%;
+}
+
 /* MISC  
 ----------------------------------------------------------*/
-.bold
-{
-    font-weight: bold;
-}
+
 .clear
 {
     clear: both;
 }
+
 .title
 {
-    font-family: "微软雅黑";
-    font-weight: 700;
-    font-size: 2em;
-    margin: 0px;
-    padding: 0px;
-    color: #FFFFFF;
-    border: none;
-}
-/* AMON  
-----------------------------------------------------------*/
-.TEXT_NOTE1
-{
-    color: #FF0000;
-}
-.TEXT_NOTE2
-{
-    color: #ff6600;
-    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
-}
-.TEXT_NOTE3
-{
-    color: #0000FF;
-}
-.TEXT_NOTE4
-{
-    color: #999999;
+    display: block;
+    float: left;
+    text-align: left;
+    width: auto;
 }
 
-/*=========================================================
- * 表格风格定义
- *=========================================================*/
-/*边框风格*/
-.DV_DataList
+.loginDisplay
 {
-    padding: 4px;
-    border: solid 2px #A0A0A0;
+    font-size: 1.1em;
+    display: block;
+    text-align: right;
+    padding: 10px;
+    color: White;
 }
 
-/*含上下左右边框的表格*/
-.TB_DataList
+.loginDisplay a:link
 {
-    border: dashed 1px #CCCCCC;
-}
-.TD_DataHead_L
-{
-    background-color: #EEEEEE;
-    border-bottom: dashed 1px #CCCCCC;
-    padding-left: 4px;
-    padding-right: 4px;
-}
-.TD_DataHead_N
-{
-    background-color: #EEEEEE;
-    padding-left: 4px;
-    padding-right: 4px;
-}
-.TD_DataItem_L
-{
-    border-bottom: dashed 1px #CCCCCC;
-    padding-left: 4px;
-    padding-right: 4px;
-}
-.TD_DataItem_N
-{
-    padding-left: 4px;
-    padding-right: 4px;
-}
-.TD_DataFoot_L
-{
-    border-bottom: dashed 1px #CCCCCC;
-    padding-left: 4px;
-    padding-right: 4px;
-}
-.TD_DataFoot_N
-{
-    padding-left: 4px;
-    padding-right: 4px;
+    color: white;
 }
 
-/*仅上左边框的表格*/
-.TB_DataList_TL
+.loginDisplay a:visited
 {
-    border-top: dashed 1px #CCCCCC;
-    border-left: dashed 1px #CCCCCC;
+    color: white;
 }
-.TD_DataHead_TL_N
+
+.loginDisplay a:hover
 {
-    background-color: #EEEEEE;
-    border-bottom: dashed 0px #CCCCCC;
-    border-right: dashed 0px #CCCCCC;
+    color: white;
 }
-.TD_DataHead_TL_L
+
+.failureNotification
 {
-    background-color: #EEEEEE;
-    border-bottom: dashed 1px #CCCCCC;
-    border-right: dashed 1px #CCCCCC;
+    font-size: 1.2em;
+    color: Red;
 }
-.TD_DataItem_TL_N
+
+.bold
 {
-    border-bottom: dashed 0px #CCCCCC;
-    border-right: dashed 0px #CCCCCC;
+    font-weight: bold;
 }
-.TD_DataItem_TL_L
+
+.submitButton
 {
-    border-bottom: dashed 1px #CCCCCC;
-    border-right: dashed 1px #CCCCCC;
-    padding-left: 3px;
-    padding-right: 3px;
-}
-.TD_DataFoot_TL_N
-{
-    border-bottom: dashed 0px #CCCCCC;
-    border-right: dashed 0px #CCCCCC;
-}
-.TD_DataFoot_TL_L
-{
-    border-bottom: dashed 1px #CCCCCC;
-    border-right: dashed 1px #CCCCCC;
-}
-/*仅下右边框的表格*/
-.TB_DataList_BR
-{
-    border-bottom: dashed 1px #CCCCCC;
-    border-right: dashed 1px #CCCCCC;
-}
-.TD_DataHead_BR_N
-{
-    border-top: dashed 0px #CCCCCC;
-    border-left: dashed 0px #CCCCCC;
-}
-.TD_DataHead_BR_L
-{
-    border-top: dashed 1px #CCCCCC;
-    border-left: dashed 1px #CCCCCC;
-}
-.TD_DataItem_BR_N
-{
-    border-top: dashed 0px #CCCCCC;
-    border-left: dashed 0px #CCCCCC;
-}
-.TD_DataItem_BR_L
-{
-    border-top: dashed 1px #CCCCCC;
-    border-left: dashed 1px #CCCCCC;
-}
-.TD_DataFoot_BR_N
-{
-    border-top: dashed 0px #CCCCCC;
-    border-left: dashed 0px #CCCCCC;
-}
-.TD_DataFoot_BR_L
-{
-    border-top: dashed 1px #CCCCCC;
-    border-left: dashed 1px #CCCCCC;
-}
-.Down
-{
-    height: 35px;
-    width: 102px;
-    text-align: center;
-    cursor: pointer;
-    border: 0;
-    padding: 0;
-    font-weight: 700;
-    font-size: 14px;
-    display: inline-block;
-    vertical-align: baseline;
-    line-height: 35px;
-    outline: 0;
-    text-decoration: none;
-}
-.Ins
-{
-    background-image: url(/Images/i0.png);
-}
-.Grn
-{
-    background-image: url(/Images/g0.png);
+    text-align: right;
+    padding-right: 10px;
 }

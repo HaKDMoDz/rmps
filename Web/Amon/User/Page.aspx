@@ -1,8 +1,12 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Amon.master" AutoEventWireup="true" CodeFile="Page.aspx.cs" Inherits="User_Page" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Amon.master" AutoEventWireup="true"
+    CodeFile="Page.aspx.cs" Inherits="User_Page" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="AmonHead" runat="Server">
+    <script type="text/javascript">
+        window.UEDITOR_HOME_URL = "/Amon/_js/ue/";
+    </script>
     <script type="text/javascript" charset="utf-8" src="../_js/ue/editor_config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../_js/ue/editor_all_min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../_js/ue/editor_all.js"></script>
     <style type="text/css">
         .clear
         {
