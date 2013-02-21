@@ -2,8 +2,7 @@
 using System.Drawing;
 using System.Text;
 using System.Xml;
-using Me.Amon.Da;
-using System.Collections.Generic;
+using Me.Amon.Da.Db;
 
 namespace Me.Amon.Bean
 {

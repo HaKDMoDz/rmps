@@ -1,5 +1,5 @@
 ﻿using System.Data;
-using Me.Amon.Da;
+using Me.Amon.Da.Db;
 
 namespace Me.Amon.Bean
 {

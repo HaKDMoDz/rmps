@@ -122,6 +122,17 @@ first child of the left and right table columns */
     -moz-box-shadow: 0 1px 3px rgba(34,25,25,.4);
     -webkit-box-shadow: 0 1px 3px rgba(34,25,25,.4); /*text-align: center;*/
 }
+.idea
+{
+    position: absolute;
+    padding: 0px;
+    margin: 0px 0px 0px 900px;
+    border: 1px solid #999999;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(34,25,25,.4);
+    -moz-box-shadow: 0 1px 3px rgba(34,25,25,.4);
+    -webkit-box-shadow: 0 1px 3px rgba(34,25,25,.4); /*text-align: center;*/
+}
 .load
 {
     width: 300px;
@@ -130,6 +141,12 @@ first child of the left and right table columns */
     position: fixed;
     background-color: #b6b7bc;
     border: 1px solid #999999;
+    position: absolute;
+    width: 280px;
+    height: 130px;
+    left: 50px;
+    top: 30px;
+    padding: 10px;
     box-shadow: 0 1px 3px rgba(34,25,25,.4);
     -moz-box-shadow: 0 1px 3px rgba(34,25,25,.4);
     -webkit-box-shadow: 0 1px 3px rgba(34,25,25,.4);

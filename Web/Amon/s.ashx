@@ -7,7 +7,7 @@ using System.Text;
 using System.Web;
 using System.Xml;
 using Me.Amon.Bean;
-using Me.Amon.Da;
+using Me.Amon.Da.Db;
 using Me.Amon.Model;
 using Me.Amon.Util;
 

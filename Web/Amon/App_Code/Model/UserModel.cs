@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web.SessionState;
 using System.Xml;
-using Me.Amon.Da;
+using Me.Amon.Da.Db;
 using Me.Amon.Util;
 
 namespace Me.Amon.Model

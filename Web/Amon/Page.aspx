@@ -6,7 +6,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>爱梦·网志</title>
     <link type="text/css" rel="stylesheet" href="_css/Amon.css" />
-    <link rel="stylesheet" href="~/_js/zt/themes/zTreeStyle.css" type="text/css" />
+    <link type="text/css" rel="stylesheet" href="~/_css/smoothness/jquery-ui-1.10.1.custom.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/_js/zt/themes/zTreeStyle.css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/Amon/_js/zt/jquery.ztree.core-3.5.min.js"></script>
@@ -47,7 +48,12 @@
         <div class="clear">
         </div>
     </div>
-    <div id="DvLoad" class="load">
+    <div id="DvIdea" class="idea" style="width: 500px">
+        abc
+    </div>
+    <div class="ui-widget-shadow ui-corner-all" style="width: 302px; height: 152px; position: absolute; left: 50px; top: 30px;">
+    </div>
+    <div id="DvLoad" style="position: absolute; width: 280px; height: 130px; left: 50px; top: 30px; padding: 10px;" class="ui-widget ui-widget-content ui-corner-all">
         <img alt="Loading" src="" width="10" height="10" /><br />
         正在努力为您加载，请稍候……
     </div>

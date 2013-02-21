@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using System.Xml;
-using Me.Amon.Da;
+using Me.Amon.Da.Db;
 
 namespace Me.Amon.Bean
 {

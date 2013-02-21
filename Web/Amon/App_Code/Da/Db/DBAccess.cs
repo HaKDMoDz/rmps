@@ -6,7 +6,7 @@ using Me.Amon.Bean;
 using Me.Amon.Util;
 using MySql.Data.MySqlClient;
 
-namespace Me.Amon.Da
+namespace Me.Amon.Da.Db
 {
     /// <summary>
     /// 数据库

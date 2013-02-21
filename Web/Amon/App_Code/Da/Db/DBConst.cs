@@ -1,4 +1,4 @@
-﻿namespace Me.Amon.Da
+﻿namespace Me.Amon.Da.Db
 {
     public class DBConst
     {

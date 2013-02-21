@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Text.RegularExpressions;
-using Me.Amon.Util;
-using Me.Amon.Da;
 using System.Data;
+using System.Text.RegularExpressions;
+using Me.Amon.Da.Db;
 using Me.Amon.Model;
+using Me.Amon.Util;
 
 public partial class User_SignUp : System.Web.UI.Page
 {

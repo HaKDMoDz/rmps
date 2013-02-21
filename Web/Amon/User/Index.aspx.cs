@@ -10,7 +10,7 @@ public partial class User_Index : System.Web.UI.Page
     {
         if (UserModel.Current(Session).Rank < IUser.LEVEL_01)
         {
-            Response.Redirect("~/Index.aspx");
+            //Response.Redirect("~/Index.aspx");
             return;
         }
 
