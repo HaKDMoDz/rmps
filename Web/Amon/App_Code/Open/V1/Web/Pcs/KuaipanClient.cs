@@ -56,7 +56,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
             }
 
             t = GetString(r);
-            Token = JsonConvert.DeserializeObject<OAuthToken>(t);
+            Token = JsonConvert.DeserializeObject<KuaipanToken>(t);
             ResetParams();
 
             return true;
@@ -87,7 +87,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
 
             t = GetString(r);
             _Result = t;
-            Token = JsonConvert.DeserializeObject<OAuthToken>(t);
+            Token = JsonConvert.DeserializeObject<KuaipanToken>(t);
             ResetParams();
 
             return true;
