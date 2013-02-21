@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Me.Amon.Open.V1
+﻿namespace Me.Amon.Open.V1
 {
     public class OAuthTokenV1 : OAuthToken
     {

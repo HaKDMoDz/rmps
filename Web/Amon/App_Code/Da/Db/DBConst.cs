@@ -494,6 +494,64 @@
         public const string C3010611 = "C3010611";
         #endregion
 
+        #region 开放授权信息
+        /// <summary>
+        /// 用户安全登录信息
+        /// </summary>
+        public const string C3010A00 = "C3010A00";
+        /// <summary>
+        /// 显示排序
+        /// </summary>
+        public const string C3010A01 = "C3010A01";
+        /// <summary>
+        /// 授权索引
+        /// </summary>
+        public const string C3010A02 = "C3010A02";
+        public const int C3010A02_SIZE = 16;
+        /// <summary>
+        /// 用户索引
+        /// </summary>
+        public const string C3010A03 = "C3010A03";
+        public const int C3010A03_SIZE = 16;
+        /// <summary>
+        /// 授权类型
+        /// </summary>
+        public const string C3010A04 = "C3010A04";
+        public const int C3010A04_SIZE = 16;
+        /// <summary>
+        /// AppKey
+        /// </summary>
+        public const string C3010A05 = "C3010A05";
+        public const int C3010A05_SIZE = 128;
+        /// <summary>
+        /// AppSecret
+        /// </summary>
+        public const string C3010A06 = "C3010A06";
+        public const int C3010A06_SIZE = 256;
+        /// <summary>
+        /// Token
+        /// </summary>
+        public const string C3010A07 = "C3010A07";
+        public const int C3010A07_SIZE = 256;
+        /// <summary>
+        /// TokenSecret
+        /// </summary>
+        public const string C3010A08 = "C3010A08";
+        public const int C3010A08_SIZE = 256;
+        /// <summary>
+        /// 使用状态
+        /// </summary>
+        public const string C3010A09 = "C3010A09";
+        /// <summary>
+        /// 更新时间
+        /// </summary>
+        public const string C3010A0A = "C3010A0A";
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public const string C3010A0B = "C3010A0B";
+        #endregion
+
         #region 通讯类别
         /// <summary>
         /// 通讯类别

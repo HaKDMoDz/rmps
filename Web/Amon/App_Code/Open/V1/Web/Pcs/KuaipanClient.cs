@@ -557,6 +557,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
             //AddParam(OAuthConstants.OAUTH_TIMESTAMP, "1354715324");
             AddParam(OAuthConstants.OAUTH_CONSUMER_KEY, Consumer.consumer_key);
             AddParam(OAuthConstants.OAUTH_VERSION, "1.0");
+            AddParam(OAuthConstants.OAUTH_CALLBACK, "http://amon.me/Auth/kuaipan.aspx");
         }
 
         private string GenBaseParams()
