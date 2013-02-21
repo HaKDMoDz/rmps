@@ -23,8 +23,8 @@
         public const string UPLOAD = "http://api-content.dfs.kuaipan.cn/1/fileops/upload_locate";
 
         public const string TYPE = "kuaipan";
-        public const string CONSUMER_KEY = "";
-        public const string CONSUMER_SECRET = "";
+        public const string CONSUMER_KEY = "xcWPaz75PSRDOWBM";
+        public const string CONSUMER_SECRET = "DU5ZYaCK0cRlsMTj";
 
         public KuaipanServer()
         {

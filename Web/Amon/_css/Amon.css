@@ -93,17 +93,18 @@ first child of the left and right table columns */
     line-height: 2em;
     font-size: 2em;
 }
+.base
+{
+}
 .body
 {
-    position: relative;
-    margin: 50px auto 0px auto;
+    margin-top: 50px;
 }
 .list
 {
-    position:fixed;
-    top:50px;
-    left:0px;
-	
+    position: fixed;
+    top: 50px;
+    left: 0px;
     border: 1px solid #999999;
     background-color: #fff;
     box-shadow: 0 1px 3px rgba(34,25,25,.4);
@@ -114,8 +115,8 @@ first child of the left and right table columns */
 {
     position: relative;
     padding: 0px;
+    min-width: 300px;
     min-height: 420px;
-	
     border: 1px solid #999999;
     background-color: #fff;
     box-shadow: 0 1px 3px rgba(34,25,25,.4);
@@ -124,10 +125,9 @@ first child of the left and right table columns */
 }
 .idea
 {
-    position:fixed;
-    top:50px;
-    right:0px;
-	
+    position: fixed;
+    top: 50px;
+    right: 0px;
     border: 1px solid #999999;
     background-color: #fff;
     box-shadow: 0 1px 3px rgba(34,25,25,.4);
@@ -136,14 +136,12 @@ first child of the left and right table columns */
 }
 .load
 {
-	position: fixed;
-	left: 50%;
-	top: 50%;
+    position: fixed;
+    left: 50%;
+    top: 50%;
     padding: 10px;
-    
-	z-index: 99999;
-	overflow: hidden;
-	
+    z-index: 99999;
+    overflow: hidden;
     border: 1px solid #999999;
     background-color: #b6b7bc;
     box-shadow: 0 1px 3px rgba(34,25,25,.4);

@@ -29,7 +29,7 @@ public class Page : IHttpHandler
     private void LoadCat(HttpResponse response)
     {
         response.ContentType = "text/javascript";
-        response.Write("[{name:\"test1\", open:true, children:[{name:\"test1_1\"}, {name:\"test1_2\"}]},{name:\"test2\", open:true, children:[{name:\"test2_1\"}, {name:\"test2_2\"}]}];");
+        response.Write("{\"json_data\" : {\"data\" : [{\"data\" : \"A node\",\"metadata\" : { id : 23 },\"children\" : [ \"Child 1\", \"A Child 2\" ]},{\"attr\" : { \"id\" : \"li.node.id1\" },\"data\" : {\"title\" : \"Long format demo\",\"attr\" : { \"href\" : \"#\" }}}]},\"plugins\" : [ \"themes\", \"json_data\", \"ui\" ]}");
         response.End();
     }
 

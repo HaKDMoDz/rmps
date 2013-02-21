@@ -1,9 +1,7 @@
-﻿
-/*
+﻿/*
  * jsTree default theme 2.0.0
  * Supported features: dots/no-dots, icons/no-icons, loading, clicked, hovered, checkbox, search
   */
-
 .jstree-default li, 
 .jstree-default i { background-image:url("d.png"); background-repeat:no-repeat; background-color:transparent; }
 .jstree-default li { background-position:-90px 0; background-repeat:repeat-y; }
