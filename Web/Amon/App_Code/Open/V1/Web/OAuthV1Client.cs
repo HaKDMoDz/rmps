@@ -7,9 +7,11 @@ namespace Me.Amon.Open.V1.Web
 {
     public abstract class OAuthV1Client : OAuthClient
     {
+        public abstract string DebugResult { get; }
+
         #region 全局变量
         public OAuthConsumer Consumer { get; private set; }
-        public OAuthTokenV1 Token { get; protected set; }
+        public OAuthToken Token { get; protected set; }
 
         protected OAuthV1Server _Server;
         protected List<KeyValuePair<string, string>> _Params;
@@ -54,7 +56,7 @@ namespace Me.Amon.Open.V1.Web
 
         protected virtual string Signature(string baseString)
         {
-            string key = string.Format("{0}&{1}", Consumer.consumer_secret, Token != null ? Token.oauth_token_secret ?? "" : "");
+            string key = string.Format("{0}&{1}", Consumer.consumer_secret, Token != null ? Token.Secret ?? "" : "");
             using (HMACSHA1 alg = new HMACSHA1(Encoding.UTF8.GetBytes(key)))
             {
                 byte[] data = alg.ComputeHash(Encoding.UTF8.GetBytes(baseString));

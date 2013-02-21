@@ -14,6 +14,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
     public class KuaipanClient : OAuthV1Client, PcsClient
     {
         private string _Root;
+        private string _Result;
 
         #region 构造函数
         public KuaipanClient(OAuthConsumer consumer, bool isRoot)
@@ -24,7 +25,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
             _Server = new KuaipanServer();
         }
 
-        public KuaipanClient(OAuthConsumer consumer, OAuthTokenV1 token, bool isRoot)
+        public KuaipanClient(OAuthConsumer consumer, OAuthToken token, bool isRoot)
             : base(consumer)
         {
             _Root = isRoot ? "kuaipan" : "app_folder";
@@ -37,6 +38,8 @@ namespace Me.Amon.Open.V1.Web.Pcs
             //Icon = Image.FromFile(@"D:\Temp\i1\Icon.png");
         }
         #endregion
+
+        public override string DebugResult { get { return _Result; } }
 
         #region 权限认证
         public override bool RequestToken()
@@ -53,7 +56,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
             }
 
             t = GetString(r);
-            Token = JsonConvert.DeserializeObject<OAuthTokenV1>(t);
+            Token = JsonConvert.DeserializeObject<OAuthToken>(t);
             ResetParams();
 
             return true;
@@ -61,7 +64,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
 
         public override string GetAuthorizeUrl()
         {
-            return string.Format(_Server.VerifierUrl, Token.oauth_token);
+            return string.Format(_Server.VerifierUrl, Token.Token);
         }
 
         public override bool AccessToken()
@@ -71,7 +74,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
             {
                 return false;
             }
-            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.AccessTokenUrl)));
 
@@ -83,7 +86,8 @@ namespace Me.Amon.Open.V1.Web.Pcs
             }
 
             t = GetString(r);
-            Token = JsonConvert.DeserializeObject<OAuthTokenV1>(t);
+            _Result = t;
+            Token = JsonConvert.DeserializeObject<OAuthToken>(t);
             ResetParams();
 
             return true;
@@ -129,7 +133,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
             ResetParams();
 
             PrepareParams();
-            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.ProfileUrl)));
 
@@ -179,7 +183,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
             path = string.Format(KuaipanServer.LIST_META, _Root, GetPath(path));
 
             PrepareParams();
-            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(path)));
 
@@ -201,7 +205,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
             path = string.Format(KuaipanServer.LIST_META, _Root, GetPath(path));
 
             PrepareParams();
-            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(path)));
 
@@ -222,7 +226,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
             string url = string.Format(KuaipanServer.SHARE_META, _Root, meta.GetMetaPath());
 
             PrepareParams();
-            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(_Server.RequestTokenUrl)));
 
@@ -250,7 +254,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
             string url = KuaipanServer.CREATE_FOLDER;
 
             PrepareParams();
-            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             AddParam("root", _Root);
             AddParam("path", Combine(path, name));
             SortParam();
@@ -278,7 +282,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
             string url = KuaipanServer.DELETE;
 
             PrepareParams();
-            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             AddParam("root", _Root);
             AddParam("path", Combine(path, meta));
             AddParam("to_recycle", "true");
@@ -304,7 +308,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
             string url = KuaipanServer.MOVETO;
 
             PrepareParams();
-            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             AddParam("root", _Root);
             AddParam("from_path", meta.GetMeta());
             AddParam("to_path", Combine(dstPath, dstName));
@@ -332,7 +336,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
             string url = KuaipanServer.COPYTO;
 
             PrepareParams();
-            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             AddParam("root", _Root);
             AddParam("from_path", meta.GetMeta());
             AddParam("to_path", Combine(dstPath, dstName));
@@ -366,7 +370,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
             string url = KuaipanServer.COPYTO;
 
             PrepareParams();
-            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             AddParam("root", _Root);
             AddParam("from_copy_ref", metaRef);
             AddParam("to_path", Combine(dstPath, dstName));
@@ -391,7 +395,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
             string url = string.Format(KuaipanServer.COPYREF, _Root, meta.GetMeta());
 
             PrepareParams();
-            AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
             SortParam();
             AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
 
@@ -419,7 +423,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
                 string url = KuaipanServer.UPLOAD;
 
                 PrepareParams();
-                AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+                AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
                 SortParam();
                 AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
 
@@ -449,7 +453,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
                 url = string.Format("{0}/1/fileops/upload_file", url);
 
                 PrepareParams();
-                AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+                AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
                 AddParam("root", _Root);
                 AddParam("overwrite", "true");
                 AddParam("path", path);
@@ -476,7 +480,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
                 string url = KuaipanServer.DOWNLOAD;
 
                 PrepareParams();
-                AddParam(OAuthConstants.OAUTH_TOKEN, Token.oauth_token);
+                AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
                 AddParam("root", _Root);
                 AddParam("path", task.Meta);
                 SortParam();

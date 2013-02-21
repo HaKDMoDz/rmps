@@ -1,11 +1,11 @@
 ﻿namespace Me.Amon.Open
 {
-    public class OAuthToken
+    public abstract class OAuthToken
     {
-        public string oauth_token { get; set; }
+        public abstract string Token { get; set; }
 
-        public string oauth_token_secret { get; set; }
+        public abstract string Secret { get; set; }
 
-        public string UserId { get; set; }
+        public abstract string UserId { get; set; }
     }
 }
