@@ -1,0 +1,381 @@
+﻿/* DEFAULTS
+----------------------------------------------------------*/
+a:link, a:visited
+{
+    color: #034af3;
+}
+a:hover
+{
+    color: #1d60ff;
+    text-decoration: none;
+}
+a:active
+{
+    color: #034af3;
+}
+body, table, id
+{
+    font-size: 12px; /*font-size: 12px;*/
+    font-family: "Helvetica Neue" , "Lucida Grande" , "Segoe UI" , Arial, Helvetica, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+body
+{
+    /*background: #b6b7bc;*/
+    color: #696969;
+}
+div
+{
+}
+#footer
+{
+    color: #6D787D;
+    width: 100%; /*margin: 15px auto 0 auto; 	line-height: 50px; 	clear: both;*/
+    text-align: center;
+}
+#header
+{
+    height: 42px;
+    width: 100%; /*border-top: 1px solid #5C9EC8; 	border-bottom: 1px solid #2F5B87; 	background-color: #1E75B0;*/
+    background-color: #484848; /*background-image: -webkit-linear-gradient(top,#1e75b0,#125288);*/
+}
+p
+{
+    margin-bottom: 10px;
+    line-height: 1.6em;
+}
+#content
+{
+    display: block;
+    text-align: center;
+    horizontal-align: center;
+}
+/* HEADINGS   
+----------------------------------------------------------*/
+h1, h2, h3, h4, h5, h6
+{
+    font-family: "Simsun" , "Helvetica Neue" , "Lucida Grande" , "Segoe UI" , Arial, Helvetica, Verdana, sans-serif;
+    color: #666666;
+    font-variant: small-caps;
+    text-transform: none;
+    font-weight: 200;
+    margin-bottom: 0px;
+}
+h1
+{
+    font-size: 32px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+h2
+{
+    font-size: 24px;
+    font-weight: 600;
+    color: #333333;
+}
+h3
+{
+    font-size: 1.2em;
+}
+h4
+{
+    font-size: 1.1em;
+}
+h5, h6
+{
+    font-size: 1em;
+}
+/* this rule styles <h1> and <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+    margin-top: 0px;
+}
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+.leftCol
+{
+    padding: 6px 0px;
+    margin: 12px 8px 8px 8px;
+    width: 200px;
+    min-height: 200px;
+}
+/* TAB MENU   
+----------------------------------------------------------*/
+div.hideSkiplink
+{
+    background-color: #3a4f63;
+    width: 100%;
+}
+div.menu
+{
+    padding: 4px 0px 4px 8px;
+}
+div.menu ul
+{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+}
+div.menu ul li a, div.menu ul li a:visited
+{
+    background-color: #484848; /*border: 1px #4e667d solid;*/
+    color: #dde4ec;
+    display: block;
+    line-height: 1.35em;
+    padding: 4px 20px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+div.menu ul li a:hover
+{
+    background-color: #bfcbd6;
+    color: #465c71;
+    text-decoration: none;
+}
+div.menu ul li a:active
+{
+    background-color: #465c71;
+    color: #cfdbe6;
+    text-decoration: none;
+}
+
+/* FORM ELEMENTS   
+----------------------------------------------------------*/
+fieldset
+{
+    margin: 1em 0px;
+    padding: 1em;
+    border: 1px solid #ccc;
+}
+fieldset p
+{
+    margin: 2px 12px 10px 10px;
+}
+fieldset.login label, fieldset.register label, fieldset.changePassword label
+{
+    display: block;
+}
+fieldset label.inline
+{
+    display: inline;
+}
+legend
+{
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 2px 4px 8px 4px;
+}
+/* MISC  
+----------------------------------------------------------*/
+.bold
+{
+    font-weight: bold;
+}
+.clear
+{
+    clear: both;
+}
+.title
+{
+    font-family: "微软雅黑";
+    font-weight: 700;
+    font-size: 2em;
+    margin: 0px;
+    padding: 0px;
+    color: #FFFFFF;
+    border: none;
+}
+/* AMON  
+----------------------------------------------------------*/
+.TEXT_NOTE1
+{
+    color: #FF0000;
+}
+.TEXT_NOTE2
+{
+    color: #ff6600;
+    font-family: "宋体" , "微软雅黑" , simsun, Arial, "Times New Roman";
+}
+.TEXT_NOTE3
+{
+    color: #0000FF;
+}
+.TEXT_NOTE4
+{
+    color: #999999;
+}
+
+/*=========================================================
+ * 表格风格定义
+ *=========================================================*/
+/*边框风格*/
+.DV_DataList
+{
+    padding: 4px;
+    border: solid 2px #A0A0A0;
+}
+
+/*含上下左右边框的表格*/
+.TB_DataList
+{
+    border: dashed 1px #CCCCCC;
+}
+.TD_DataHead_L
+{
+    background-color: #EEEEEE;
+    border-bottom: dashed 1px #CCCCCC;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.TD_DataHead_N
+{
+    background-color: #EEEEEE;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.TD_DataItem_L
+{
+    border-bottom: dashed 1px #CCCCCC;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.TD_DataItem_N
+{
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.TD_DataFoot_L
+{
+    border-bottom: dashed 1px #CCCCCC;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.TD_DataFoot_N
+{
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+/*仅上左边框的表格*/
+.TB_DataList_TL
+{
+    border-top: dashed 1px #CCCCCC;
+    border-left: dashed 1px #CCCCCC;
+}
+.TD_DataHead_TL_N
+{
+    background-color: #EEEEEE;
+    border-bottom: dashed 0px #CCCCCC;
+    border-right: dashed 0px #CCCCCC;
+}
+.TD_DataHead_TL_L
+{
+    background-color: #EEEEEE;
+    border-bottom: dashed 1px #CCCCCC;
+    border-right: dashed 1px #CCCCCC;
+}
+.TD_DataItem_TL_N
+{
+    border-bottom: dashed 0px #CCCCCC;
+    border-right: dashed 0px #CCCCCC;
+}
+.TD_DataItem_TL_L
+{
+    border-bottom: dashed 1px #CCCCCC;
+    border-right: dashed 1px #CCCCCC;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+.TD_DataFoot_TL_N
+{
+    border-bottom: dashed 0px #CCCCCC;
+    border-right: dashed 0px #CCCCCC;
+}
+.TD_DataFoot_TL_L
+{
+    border-bottom: dashed 1px #CCCCCC;
+    border-right: dashed 1px #CCCCCC;
+}
+/*仅下右边框的表格*/
+.TB_DataList_BR
+{
+    border-bottom: dashed 1px #CCCCCC;
+    border-right: dashed 1px #CCCCCC;
+}
+.TD_DataHead_BR_N
+{
+    border-top: dashed 0px #CCCCCC;
+    border-left: dashed 0px #CCCCCC;
+}
+.TD_DataHead_BR_L
+{
+    border-top: dashed 1px #CCCCCC;
+    border-left: dashed 1px #CCCCCC;
+}
+.TD_DataItem_BR_N
+{
+    border-top: dashed 0px #CCCCCC;
+    border-left: dashed 0px #CCCCCC;
+}
+.TD_DataItem_BR_L
+{
+    border-top: dashed 1px #CCCCCC;
+    border-left: dashed 1px #CCCCCC;
+}
+.TD_DataFoot_BR_N
+{
+    border-top: dashed 0px #CCCCCC;
+    border-left: dashed 0px #CCCCCC;
+}
+.TD_DataFoot_BR_L
+{
+    border-top: dashed 1px #CCCCCC;
+    border-left: dashed 1px #CCCCCC;
+}
+.Down
+{
+    height: 35px;
+    width: 102px;
+    text-align: center;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    font-weight: 700;
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: baseline;
+    line-height: 35px;
+    outline: 0;
+    text-decoration: none;
+}
+.Ins
+{
+    background-image: url(/Images/i0.png);
+}
+.Grn
+{
+    background-image: url(/Images/g0.png);
+}
+
+.wp{
+position: relative;
+width:900px;
+margin: 20 auto;
+background-color: #fff;
+box-shadow: 0 1px 3px rgba(34,25,25,.4);
+-moz-box-shadow: 0 1px 3px rgba(34,25,25,.4);
+-webkit-box-shadow: 0 1px 3px rgba(34,25,25,.4);
+text-align:center;
+}
+.wt {
+position: relative;
+margin: 60px auto 112px;
+padding: 0 18px 10px;
+background-color: #fff;
+box-shadow: 0 1px 3px rgba(34,25,25,.4);
+-moz-box-shadow: 0 1px 3px rgba(34,25,25,.4);
+-webkit-box-shadow: 0 1px 3px rgba(34,25,25,.4);
+}

@@ -1,0 +1,52 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Me.Amon.Site" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head id="Head1" runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="~/_css/Amon.css" rel="stylesheet" type="text/css" />
+    <link href="~/_css/smoothness/jquery-ui-1.10.1.custom.css" rel="stylesheet" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+    <asp:ContentPlaceHolder ID="AmonHead" runat="server">
+    </asp:ContentPlaceHolder>
+    <script type="text/javascript"></script>
+</head>
+<body>
+    <form id="Form1" runat="server">
+    <div id="header">
+        <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+                <td align="left" height="42" valign="middle">
+                    <asp:Image ID="Logo" runat="server" ImageUrl="~/logo/amon/logo.png" ToolTip="阿木密码箱" AlternateText="阿木密码箱" />
+                </td>
+                <td align="right">
+                    <div class="menu">
+                        <ul class="level1 static" style="position: relative; width: auto; float: left;">
+                            <li class="static" style="position: relative; float: left;"><a class="level1 static" href="<%= Me.Amon.IEnv.PREFIX %>/Index.aspx" tabindex="-1">首页</a></li>
+                            <li class="static" style="position: relative; float: left;"><a class="level1 static" href="<%= Me.Amon.IEnv.PREFIX %>/blog" tabindex="-1">博客</a></li>
+                            <li class="static" style="position: relative; float: left;"><a class="level1 static" href="<%= Me.Amon.IEnv.PREFIX %>/Ideas.aspx" tabindex="-1">交流</a></li>
+                            <li class="static" style="position: relative; float: left;"><a class="level1 static" href="<%= Me.Amon.IEnv.PREFIX %>/About.aspx" tabindex="-1">关于</a></li>
+                        </ul>
+                    </div>
+                </td>
+                <td align="right">
+                    <asp:HyperLink ID="HlSignIn" runat="server" NavigateUrl="~/User/SignIn.aspx">登录</asp:HyperLink>
+                    <asp:HyperLink ID="HlSignUp" runat="server" NavigateUrl="~/User/SignUp.aspx">注册</asp:HyperLink>
+                    <asp:Label ID="LbUser" runat="server">欢迎您：</asp:Label>
+                    <asp:HyperLink ID="HlUser" runat="server" NavigateUrl="~/User/Index.aspx"></asp:HyperLink>&nbsp;
+                    <asp:LinkButton ID="LbSignOf" runat="server" OnClick="LbSignOf_Click">注销</asp:LinkButton>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="content">
+        <asp:ContentPlaceHolder ID="AmonView" runat="server" />
+    </div>
+    <div id="footer">
+        <span>&copy;2012 Amon.Me</span>
+    </div>
+    </form>
+</body>
+</html>
