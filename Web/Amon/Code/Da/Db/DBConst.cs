@@ -519,37 +519,42 @@
         public const string C3010A04 = "C3010A04";
         public const int C3010A04_SIZE = 16;
         /// <summary>
-        /// AppKey
+        /// 用户索引
         /// </summary>
         public const string C3010A05 = "C3010A05";
-        public const int C3010A05_SIZE = 128;
+        public const int C3010A05_SIZE = 16;
         /// <summary>
-        /// AppSecret
+        /// AppKey
         /// </summary>
         public const string C3010A06 = "C3010A06";
-        public const int C3010A06_SIZE = 256;
+        public const int C3010A06_SIZE = 128;
         /// <summary>
-        /// Token
+        /// AppSecret
         /// </summary>
         public const string C3010A07 = "C3010A07";
         public const int C3010A07_SIZE = 256;
         /// <summary>
-        /// TokenSecret
+        /// Token
         /// </summary>
         public const string C3010A08 = "C3010A08";
         public const int C3010A08_SIZE = 256;
         /// <summary>
-        /// 使用状态
+        /// TokenSecret
         /// </summary>
         public const string C3010A09 = "C3010A09";
+        public const int C3010A09_SIZE = 256;
         /// <summary>
-        /// 更新时间
+        /// 使用状态
         /// </summary>
         public const string C3010A0A = "C3010A0A";
         /// <summary>
-        /// 创建时间
+        /// 更新时间
         /// </summary>
         public const string C3010A0B = "C3010A0B";
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public const string C3010A0C = "C3010A0C";
         #endregion
 
         #region 通讯类别
