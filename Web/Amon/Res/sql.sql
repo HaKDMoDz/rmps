@@ -124,11 +124,12 @@ CREATE TABLE c3010a00 (
   C3010A03 varchar(16) default NULL,
   C3010A04 varchar(16) default NULL,
   C3010A05 varchar(128) default NULL,
-  C3010A06 varchar(256) default NULL,
+  C3010A06 varchar(128) default NULL,
   C3010A07 varchar(256) default NULL,
   C3010A08 varchar(256) default NULL,
-  C3010A09 int(11) default NULL,
-  C3010A0A datetime default NULL,
+  C3010A09 varchar(256) default NULL,
+  C3010A0A int(11) default NULL,
   C3010A0B datetime default NULL,
+  C3010A0C datetime default NULL,
   PRIMARY KEY  (C3010A02)
 );
