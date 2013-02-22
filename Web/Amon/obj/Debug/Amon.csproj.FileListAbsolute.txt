@@ -1,7 +1,0 @@
-F:\Web\Amon\bin\Amon.dll
-F:\Web\Amon\bin\Amon.pdb
-F:\Web\Amon\bin\MySql.Data.dll
-F:\Web\Amon\bin\Newtonsoft.Json.dll
-F:\Web\Amon\obj\Debug\ResolveAssemblyReference.cache
-F:\Web\Amon\obj\Debug\Amon.dll
-F:\Web\Amon\obj\Debug\Amon.pdb
