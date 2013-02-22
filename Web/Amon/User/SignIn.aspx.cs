@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Me.Amon.Util;
 using Me.Amon.Model;
+using Me.Amon.Open;
 
 namespace Me.Amon.User
 {
@@ -64,6 +65,7 @@ namespace Me.Amon.User
                 LbErrMsg.Text = "登录错误：请检查您输入的【登录用户】或【登录口令】是否正确！";
                 return;
             }
+            userModel.LoadToken(OAuthClient.KUAIPAN);
 
             Response.Redirect("~/User/Index.aspx");
         }

@@ -519,7 +519,7 @@
         public const string C3010A04 = "C3010A04";
         public const int C3010A04_SIZE = 16;
         /// <summary>
-        /// 用户索引
+        /// 授权用户
         /// </summary>
         public const string C3010A05 = "C3010A05";
         public const int C3010A05_SIZE = 16;

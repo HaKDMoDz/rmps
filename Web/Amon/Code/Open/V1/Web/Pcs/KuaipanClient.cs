@@ -1,6 +1,7 @@
 ﻿﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Net;
 using System.Text;
 using Me.Amon.Http;
@@ -467,37 +468,74 @@ namespace Me.Amon.Open.V1.Web.Pcs
             }
         }
 
-        public TaskInfo NewDownloadTask()
+        public bool Download(string meta, StringBuilder buffers)
         {
-            return new KuaipanDownload(this);
-        }
+            ResetParams();
+            string url = KuaipanServer.DOWNLOAD;
 
-        public HttpWebRequest BeginDownload(KuaipanDownload task)
-        {
-            lock (_Params)
+            PrepareParams();
+            AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
+            AddParam("root", _Root);
+            AddParam("path", meta);
+            SortParam();
+            AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
+
+            string t = GenBaseParams();
+            url += url.IndexOf("?") >= 0 ? '&' : '?';
+            url += t;
+
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.CookieContainer = new CookieContainer();
+            request.Method = "GET";
+            request.UserAgent = "User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)";
+            request.ServicePoint.Expect100Continue = false;
+            request.ServicePoint.UseNagleAlgorithm = false;
+            request.AllowWriteStreamBuffering = false;
+
+            HttpWebResponse response = null;
+            Stream iStream = null;
+            try
             {
-                ResetParams();
-                string url = KuaipanServer.DOWNLOAD;
+                response = request.GetResponse() as HttpWebResponse;
+                if (response.StatusCode == HttpStatusCode.Accepted)
+                {
+                    _Result = "Error!!!";
+                    return false;
+                }
 
-                PrepareParams();
-                AddParam(OAuthConstants.OAUTH_TOKEN, Token.Token);
-                AddParam("root", _Root);
-                AddParam("path", task.Meta);
-                SortParam();
-                AddParam(OAuthConstants.OAUTH_SIGNATURE, Signature(GenerateBaseString(url)));
+                var MetaSize = response.ContentLength;
+                if (MetaSize > -1)
+                {
+                    iStream = response.GetResponseStream();
 
-                string t = GenBaseParams();
-                url += url.IndexOf("?") >= 0 ? '&' : '?';
-                url += t;
+                    int count;
+                    byte[] buffer = new byte[10240];
+                    count = iStream.Read(buffer, 0, buffer.Length);
+                    while (count > 0)
+                    {
+                        buffers.Append("");
+                        count = iStream.Read(buffer, 0, buffer.Length);
+                    }
+                }
 
-                var request = (HttpWebRequest)WebRequest.Create(url);
-                request.CookieContainer = new CookieContainer();
-                request.Method = "GET";
-                request.UserAgent = "User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)";
-                request.ServicePoint.Expect100Continue = false;
-                request.ServicePoint.UseNagleAlgorithm = false;
-                request.AllowWriteStreamBuffering = false;
-                return request;
+                _Result = "下载完成";
+                return true;
+            }
+            catch (Exception exp)
+            {
+                _Result = exp.Message;
+                return false;
+            }
+            finally
+            {
+                if (iStream != null)
+                {
+                    iStream.Close();
+                }
+                if (response != null)
+                {
+                    response.Close();
+                }
             }
         }
 

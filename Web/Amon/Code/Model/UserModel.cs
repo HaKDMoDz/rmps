@@ -7,6 +7,7 @@ using System.Web.SessionState;
 using System.Xml;
 using Me.Amon.Da.Db;
 using Me.Amon.Util;
+using Me.Amon.Open;
 
 namespace Me.Amon.Model
 {
@@ -124,6 +125,36 @@ namespace Me.Amon.Model
             _Code = tmpCode;
             _Hash = tmpHash;
             _Rank = (int)dt.Rows[0][DBConst.C3010F02];
+
+            return true;
+        }
+
+        public bool LoadToken(string type)
+        {
+            var dba = new DBAccess();
+
+            // 登录用户验证
+            dba.ReInit();
+            dba.AddTable(DBConst.C3010A00);
+            dba.AddColumn(DBConst.C3010A06);
+            dba.AddColumn(DBConst.C3010A07);
+            dba.AddColumn(DBConst.C3010A08);
+            dba.AddColumn(DBConst.C3010A09);
+            dba.AddWhere(DBConst.C3010A03, Code);
+            dba.AddWhere(DBConst.C3010A04, type);
+            dba.AddSort(DBConst.C3010A01, false);
+
+            var dt = dba.ExecuteSelect();
+            if (dt == null || dt.Rows.Count != 1)
+            {
+                return false;
+            }
+
+            var row = dt.Rows[0];
+            Token = new Me.Amon.Open.V1.Web.Pcs.KuaipanToken();
+            Token.Token = row[DBConst.C3010A08] + "";
+            Token.Secret = row[DBConst.C3010A09] + "";
+            Token.UserId = row[DBConst.C3010A05] + "";
 
             return true;
         }
@@ -803,5 +834,7 @@ namespace Me.Amon.Model
             return CharUtil.EncodeString(buf, _Mask);
         }
         #endregion
+
+        public OAuthToken Token { get; set; }
     }
 }

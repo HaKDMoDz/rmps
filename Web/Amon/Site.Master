@@ -7,41 +7,39 @@
     <title></title>
     <link href="~/_css/Amon.css" rel="stylesheet" type="text/css" />
     <link href="~/_css/smoothness/jquery-ui-1.10.1.custom.css" rel="stylesheet" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
     <asp:ContentPlaceHolder ID="AmonHead" runat="server">
     </asp:ContentPlaceHolder>
     <script type="text/javascript"></script>
 </head>
 <body>
     <form id="Form1" runat="server">
-    <div id="header">
-        <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-                <td align="left" height="42" valign="middle">
-                    <asp:Image ID="Logo" runat="server" ImageUrl="~/logo/amon/logo.png" ToolTip="阿木密码箱" AlternateText="阿木密码箱" />
-                </td>
-                <td align="right">
-                    <div class="menu">
-                        <ul class="level1 static" style="position: relative; width: auto; float: left;">
-                            <li class="static" style="position: relative; float: left;"><a class="level1 static" href="<%= Me.Amon.IEnv.PREFIX %>/Index.aspx" tabindex="-1">首页</a></li>
-                            <li class="static" style="position: relative; float: left;"><a class="level1 static" href="<%= Me.Amon.IEnv.PREFIX %>/blog" tabindex="-1">博客</a></li>
-                            <li class="static" style="position: relative; float: left;"><a class="level1 static" href="<%= Me.Amon.IEnv.PREFIX %>/Ideas.aspx" tabindex="-1">交流</a></li>
-                            <li class="static" style="position: relative; float: left;"><a class="level1 static" href="<%= Me.Amon.IEnv.PREFIX %>/About.aspx" tabindex="-1">关于</a></li>
-                        </ul>
-                    </div>
-                </td>
-                <td align="right">
-                    <asp:HyperLink ID="HlSignIn" runat="server" NavigateUrl="~/User/SignIn.aspx">登录</asp:HyperLink>
-                    <asp:HyperLink ID="HlSignUp" runat="server" NavigateUrl="~/User/SignUp.aspx">注册</asp:HyperLink>
-                    <asp:Label ID="LbUser" runat="server">欢迎您：</asp:Label>
-                    <asp:HyperLink ID="HlUser" runat="server" NavigateUrl="~/User/Index.aspx"></asp:HyperLink>&nbsp;
-                    <asp:LinkButton ID="LbSignOf" runat="server" OnClick="LbSignOf_Click">注销</asp:LinkButton>
-                </td>
-            </tr>
-        </table>
+    <div id="base">
+        <div id="DvHead" runat="server" class="head">
+            <div class="clear hideSkiplink">
+                <a href="#NavigationMenu_SkipLink">
+                    <img alt="跳过导航链接" src="" width="0" height="0" style="border-width: 0px;" />
+                </a>
+                <div class="menu" id="NavigationMenu" style="float: left;">
+                    <ul class="level1 static" tabindex="0" style="position: relative; width: auto; float: left;" role="menubar">
+                        <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="Index.aspx" tabindex="-1">主页</a></li>
+                        <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="blog" tabindex="-1">博客</a></li>
+                        <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="Ideas.aspx" tabindex="-1">留言</a></li>
+                        <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="About.aspx" tabindex="-1">关于</a></li>
+                    </ul>
+                </div>
+                <div style="clear: left;">
+                </div>
+            </div>
+        </div>
     </div>
     <div id="content">
+        <asp:HyperLink ID="HlSignIn" runat="server" NavigateUrl="~/User/SignIn.aspx">登录</asp:HyperLink>
+        <asp:HyperLink ID="HlSignUp" runat="server" NavigateUrl="~/User/SignUp.aspx">注册</asp:HyperLink>
+        <asp:Label ID="LbUser" runat="server">欢迎您：</asp:Label>
+        <asp:HyperLink ID="HlUser" runat="server" NavigateUrl="~/User/Index.aspx"></asp:HyperLink>&nbsp;
+        <asp:LinkButton ID="LbSignOf" runat="server" OnClick="LbSignOf_Click">注销</asp:LinkButton>
         <asp:ContentPlaceHolder ID="AmonView" runat="server" />
     </div>
     <div id="footer">

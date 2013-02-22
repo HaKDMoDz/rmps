@@ -58,8 +58,9 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Auth\Kuaipan.aspx" />
+    <Content Include="blog\Index.htm" />
     <Content Include="Card.aspx" />
-    <Content Include="Default.aspx" />
+    <Content Include="docs\Page.htm" />
     <Content Include="Global.asax" />
     <Content Include="Ideas.aspx" />
     <Content Include="Imgd.aspx" />
@@ -540,7 +541,6 @@
     <Compile Include="Code\Open\V1\Web\OAuthV1Server.cs" />
     <Compile Include="Code\Open\V1\Web\Pcs\KuaipanAccount.cs" />
     <Compile Include="Code\Open\V1\Web\Pcs\KuaipanClient.cs" />
-    <Compile Include="Code\Open\V1\Web\Pcs\KuaipanDownload.cs" />
     <Compile Include="Code\Open\V1\Web\Pcs\KuaipanHttpStatus.cs" />
     <Compile Include="Code\Open\V1\Web\Pcs\KuaipanServer.cs" />
     <Compile Include="Code\Open\V1\Web\Pcs\KuaipanToken.cs" />
@@ -563,13 +563,6 @@
     <Compile Include="Code\Util\HashUtil.cs" />
     <Compile Include="Code\Util\HttpUtil.cs" />
     <Compile Include="Code\Util\SafeUtil.cs" />
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -674,7 +667,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="blog\" />
     <Folder Include="Code\Open\V1\App\" />
     <Folder Include="Code\Open\V1\Enums\" />
     <Folder Include="Code\Open\V1\Web\Sns\" />

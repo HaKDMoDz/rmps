@@ -4,6 +4,8 @@ namespace Me.Amon.Open
 {
     public abstract class OAuthClient
     {
+        public const string KUAIPAN = "kuaipan";
+
         public abstract bool RequestToken();
 
         public abstract string GetAuthorizeUrl();

@@ -10,14 +10,7 @@
     <link type="text/css" rel="stylesheet" href="~/_js/jstree/themes/default/style.css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/Amon/_js/jstree/jstree.min.js"></script>
-    <style type="text/css">
-        #log
-        {
-            border: 0;
-            width: 900px;
-        }
-    </style>
+    <script type="text/javascript" src="~/_js/jstree/jstree.min.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
