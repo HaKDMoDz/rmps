@@ -1,6 +1,7 @@
-using Me.Amon.Open.M;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Net;
+using Me.Amon.Open.M;
 
 namespace Me.Amon.Open
 {
@@ -75,5 +76,7 @@ namespace Me.Amon.Open
         string GetFileName(string meta);
 
         string Display(string path);
+
+        HttpWebRequest Download(string meta);
     }
 }

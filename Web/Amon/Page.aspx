@@ -56,7 +56,6 @@
         type: "POST",
         url: "Page.ashx?t=cat",
         success: function (data) {
-            alert(data);
             //$("#DvList").jstree(data).bind("select_node.jstree", function (e, data) { alert(data.rslt.obj.data("id")); });
             $("#DvLoad").hide();
         }

@@ -468,7 +468,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
             }
         }
 
-        public bool Download(string meta, StringBuilder buffers)
+        public HttpWebRequest Download(string meta)
         {
             ResetParams();
             string url = KuaipanServer.DOWNLOAD;
@@ -492,51 +492,7 @@ namespace Me.Amon.Open.V1.Web.Pcs
             request.ServicePoint.UseNagleAlgorithm = false;
             request.AllowWriteStreamBuffering = false;
 
-            HttpWebResponse response = null;
-            Stream iStream = null;
-            try
-            {
-                response = request.GetResponse() as HttpWebResponse;
-                if (response.StatusCode == HttpStatusCode.Accepted)
-                {
-                    _Result = "Error!!!";
-                    return false;
-                }
-
-                var MetaSize = response.ContentLength;
-                if (MetaSize > -1)
-                {
-                    iStream = response.GetResponseStream();
-
-                    int count;
-                    byte[] buffer = new byte[10240];
-                    count = iStream.Read(buffer, 0, buffer.Length);
-                    while (count > 0)
-                    {
-                        buffers.Append("");
-                        count = iStream.Read(buffer, 0, buffer.Length);
-                    }
-                }
-
-                _Result = "下载完成";
-                return true;
-            }
-            catch (Exception exp)
-            {
-                _Result = exp.Message;
-                return false;
-            }
-            finally
-            {
-                if (iStream != null)
-                {
-                    iStream.Close();
-                }
-                if (response != null)
-                {
-                    response.Close();
-                }
-            }
+            return request;
         }
 
         public void Thumbnail()

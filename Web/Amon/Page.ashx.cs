@@ -1,97 +1,229 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Net;
+using System.Text;
 using System.Web;
-using Me.Amon.Da.Db;
+using System.Web.SessionState;
+using System.Xml;
+using Me.Amon.Code.Model;
+using Me.Amon.Model;
 using Me.Amon.Open;
+using Me.Amon.Open.V1.Web.Pcs;
+using Me.Amon.Util;
 
 namespace Me.Amon
 {
     /// <summary>
     /// Pages 的摘要说明
     /// </summary>
-    public class Pages : IHttpHandler
+    public class Pages : IHttpHandler, IRequiresSessionState
     {
+        private const string ROOT = "/我的博客";
+
         public void ProcessRequest(HttpContext context)
         {
-            var type = context.Request["t"];
-            if (type == "cat")
-            {
-                LoadCat(context.Response);
-                return;
-            }
-
-            var file = context.Request["f"];
-            if (!string.IsNullOrEmpty(file))
-            {
-                LoadLog(context, "");
-                return;
-            }
-
-            context.Response.ContentType = "text/html";
-            context.Response.Write("<html><head><title>您好！</title></head><body>Hello World!</body></html>");
-        }
-
-        private void LoadCat(HttpResponse response)
-        {
-            response.ContentType = "text/javascript";
-            response.Write("{\"json_data\" : {\"data\" : [{\"data\" : \"A node\",\"metadata\" : { id : 23 },\"children\" : [ \"Child 1\", \"A Child 2\" ]},{\"attr\" : { \"id\" : \"li.node.id1\" },\"data\" : {\"title\" : \"Long format demo\",\"attr\" : { \"href\" : \"#\" }}}]},\"plugins\" : [ \"themes\", \"json_data\", \"ui\" ]}");
-            response.End();
-        }
-
-        private void LoadLog(HttpContext context, string code)
-        {
             var response = context.Response;
-            response.ContentType = "text/html";
-            var token = LoadToken(code, OAuthClient.KUAIPAN);
-            if (token == null)
+
+            // 目标用户判断
+            var code = context.Request["c"];
+            if (!CharUtil.IsValidateCode(code))
             {
-                response.Write(LoadDefault(context));
+                LoadDef(context);
                 response.End();
                 return;
             }
 
-            //var consumer = OAuthConsumer.KuaipanConsumer();
-            //var client = new KuaipanClient(consumer, token, true);
+            // 加载用户授权
+            var user = UserModel.Current(context.Session);
+            var page = context.Session["amon_page"] as MPage;
+            if (page == null)
+            {
+                page = new MPage();
+                context.Session["amon_page"] = page;
+            }
+            if (page.Token == null || page.Token.Code != code)
+            {
+                var token = Web.LoadToken(code, OAuthClient.KUAIPAN);
+                if (token == null)
+                {
+                    LoadDef(context);
+                    response.End();
+                    return;
+                }
+                page.Token = token;
+            }
 
-            //client.Download("", null);
-            response.Write("<html><head><title>Hello World</title></head><body>Hello World!</body></html>");
+            var consumer = OAuthConsumer.KuaipanConsumer();
+            var client = new KuaipanClient(consumer, page.Token, true);
+
+            // 加载页面目录
+            var type = context.Request["t"];
+            if (type == "cat")
+            {
+                LoadCat(response, client);
+                response.End();
+                return;
+            }
+
+            //if (type == "log")
+            //{
+            //}
+
+            // 获取要显示的页面
+            var file = context.Request["f"];
+            if (string.IsNullOrEmpty(file))
+            {
+                file = page.Default;
+                if (string.IsNullOrWhiteSpace(file))
+                {
+                    file = LoadCfg(context, client);
+                    if (string.IsNullOrWhiteSpace(file))
+                    {
+                        file = "/index.html";
+                    }
+                }
+                page.Default = file;
+            }
+            if (file[0] != '/')
+            {
+                file = '/' + file;
+            }
+
+            // 加载用户指定页面
+            if (!LoadLog(context, client, file))
+            {
+                LoadDef(context);
+            }
             response.End();
         }
 
-        private string LoadDefault(HttpContext context)
+        /// <summary>
+        /// 加载目录信息
+        /// </summary>
+        /// <param name="response"></param>
+        private void LoadCat(HttpResponse response, PcsClient client)
+        {
+            response.ContentType = "text/javascript";
+
+            StringBuilder buffer = new StringBuilder();
+            var metas = client.ListMeta(ROOT);
+            string path;
+            foreach (var meta in metas)
+            {
+                path = meta.GetMeta();
+                if (path != null)
+                {
+                    buffer.Append(path.Substring(ROOT.Length)).Append(',');
+                }
+            }
+            response.Write(buffer.ToString());
+        }
+
+        /// <summary>
+        /// 加载用户配置文件
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="code"></param>
+        private string LoadCfg(HttpContext context, PcsClient client)
+        {
+            var pcsRequest = client.Download(ROOT + "/Page.Me");
+
+            HttpWebResponse pcsResponse = null;
+            try
+            {
+                string page = "";
+                pcsResponse = pcsRequest.GetResponse() as HttpWebResponse;
+                if (pcsResponse.ContentLength > -1)
+                {
+                    XmlDocument xmlReader = new XmlDocument();
+                    xmlReader.Load(pcsResponse.GetResponseStream());
+                    var node = xmlReader.SelectSingleNode("/Amon");
+                    if (node == null || node.Attributes["Ver"].InnerText != "1")
+                    {
+                        return page;
+                    }
+                    node = node.SelectSingleNode("Page");
+                    if (node == null)
+                    {
+                        return page;
+                    }
+                    page = node.Attributes["Default"].InnerText;
+                }
+                return page;
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+            finally
+            {
+                if (pcsResponse != null)
+                {
+                    pcsResponse.Close();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 加载系统默认页面
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        private void LoadDef(HttpContext context)
         {
             var file = context.Server.MapPath("/docs/Page.htm");
             string page = File.ReadAllText(file);
-            return page;
+            context.Response.Write(page);
         }
 
-        private OAuthToken LoadToken(string code, string type)
+        /// <summary>
+        /// 加载用户页面
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="code"></param>
+        private bool LoadLog(HttpContext context, PcsClient client, string file)
         {
-            var dba = new DBAccess();
+            var response = context.Response;
+            response.ContentType = "text/html";
 
-            // 登录用户验证
-            dba.ReInit();
-            dba.AddTable(DBConst.C3010A00);
-            dba.AddColumn(DBConst.C3010A06);
-            dba.AddColumn(DBConst.C3010A07);
-            dba.AddColumn(DBConst.C3010A08);
-            dba.AddColumn(DBConst.C3010A09);
-            dba.AddWhere(DBConst.C3010A03, code);
-            dba.AddWhere(DBConst.C3010A04, type);
-            dba.AddSort(DBConst.C3010A01, false);
+            var pcsRequest = client.Download(ROOT + file);
 
-            var dt = dba.ExecuteSelect();
-            if (dt == null || dt.Rows.Count != 1)
+            HttpWebResponse pcsResponse = null;
+            StreamReader pcsReader = null;
+            try
             {
-                return null;
+                pcsResponse = pcsRequest.GetResponse() as HttpWebResponse;
+                if (pcsResponse.ContentLength > -1)
+                {
+                    pcsReader = new StreamReader(pcsResponse.GetResponseStream());
+
+                    int count;
+                    char[] buffer = new char[10240];
+                    count = pcsReader.Read(buffer, 0, buffer.Length);
+                    while (count > 0)
+                    {
+                        response.Write(buffer, 0, count);
+                        count = pcsReader.Read(buffer, 0, buffer.Length);
+                    }
+                }
+                return true;
             }
-
-            var row = dt.Rows[0];
-            var token = new Me.Amon.Open.V1.Web.Pcs.KuaipanToken();
-            token.Token = row[DBConst.C3010A08] + "";
-            token.Secret = row[DBConst.C3010A09] + "";
-            token.UserId = row[DBConst.C3010A05] + "";
-
-            return token;
+            catch (Exception)
+            {
+                //response.Write(exp.Message);
+                return false;
+            }
+            finally
+            {
+                if (pcsReader != null)
+                {
+                    pcsReader.Close();
+                }
+                if (pcsResponse != null)
+                {
+                    pcsResponse.Close();
+                }
+            }
         }
 
         public bool IsReusable

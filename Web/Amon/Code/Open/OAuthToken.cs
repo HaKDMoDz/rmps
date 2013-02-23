@@ -4,6 +4,8 @@
     {
         public string Type { get; set; }
 
+        public string Code { get; set; }
+
         public abstract string Token { get; set; }
 
         public abstract string Secret { get; set; }
