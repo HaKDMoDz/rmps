@@ -7,59 +7,73 @@
     <title>爱梦·网志</title>
     <link type="text/css" rel="stylesheet" href="_css/Amon.css" />
     <link type="text/css" rel="stylesheet" href="~/_css/smoothness/jquery-ui-1.10.1.custom.min.css" />
-    <link type="text/css" rel="stylesheet" href="~/_js/jstree/themes/default/style.css" />
+    <link type="text/css" rel="stylesheet" href="_js/zt/themes/zTreeStyle.css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="~/_js/jstree/jstree.min.js"></script>
+    <script type="text/javascript" src="_js/zt/jquery.ztree.core-3.5.min.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
     <div id="DbBase" class="base">
-        <img alt="" src="" width="0" height="0" style="border-width: 0px;" />
-        <div id="DvHead" runat="server" class="head">
-            <div class="clear hideSkiplink">
-                <a href="#NavigationMenu_SkipLink">
-                    <img alt="跳过导航链接" src="" width="0" height="0" style="border-width: 0px;" />
-                </a>
-                <div class="menu" id="NavigationMenu" style="float: left;">
-                    <ul class="level1 static" tabindex="0" style="position: relative; width: auto; float: left;" role="menubar">
-                        <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="Default.aspx" tabindex="-1">主页</a></li>
-                        <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="About.aspx" tabindex="-1">关于</a></li>
-                    </ul>
-                </div>
-                <div style="clear: left;">
-                </div>
-            </div>
-        </div>
         <div id="DvBody" runat="server" class="body">
-            <div id="DvList" runat="server" class="list">
-                123
+            <div id="DvList" runat="server" class="list shadow">
+                <ul id="UlList" class="ztree">
+                </ul>
             </div>
-            <div id="DvPage" runat="server" class="page">
-                <iframe id="Iframe1" style="width: 960px; border: 0px;" src="Page.ashx"></iframe>
+            <div id="DvPage" runat="server" class="page shadow">
+                <iframe id="IfPage" runat="server" style="width: 960px; border: 0px;"></iframe>
             </div>
             <div class="clear">
             </div>
         </div>
-        <div id="DvIdea" runat="server" class="idea">
+        <div id="DvIdea" runat="server" class="idea shadow">
             abc
         </div>
-        <div id="DvLoad" class="load" style="width: 300px; height: 80px; margin-left: -150px; margin-top: -40px;">
-            <img alt="Loading" src="" width="10" height="10" /><br />
-            正在努力为您加载，请稍候……
+        <div id="DvLoad" class="load corner" style="width: 300px; height: 80px; margin-left: -150px; margin-top: -40px; text-align: center">
+            <br />
+            <img alt="Loading" src="_img/Loading.gif" /><br />
+            <br />
+            正在努力为您加载中……
         </div>
     </div>
     </form>
 </body>
 <script type="text/javascript">
+    var zTree;
+    var setting = {
+        data: {
+            key: {
+                title: "t"
+            },
+            simpleData: {
+                enable: true,
+                idKey: "id",
+                pIdKey: "pId",
+                rootPId: ""
+            }
+        },
+        callback: {
+            onClick: onClick
+        }
+    };
+    var zNodes = [];
+    var t = $("#UlList");
+    var code = 'A0000020';
+
+    function onClick(event, treeId, treeNode, clickFlag) {
+        $('#IfPage').attr("src", "Page.ashx?c=" + code + "&f=" + escape(treeNode.name));
+    }
+
     $.ajax({
         type: "POST",
-        url: "Page.ashx?t=cat",
+        url: "Page.ashx?c=" + code + "&t=cat",
         success: function (data) {
-            //$("#DvList").jstree(data).bind("select_node.jstree", function (e, data) { alert(data.rslt.obj.data("id")); });
+            zNodes = eval(data);
+            $.fn.zTree.init(t, setting, zNodes);
             $("#DvLoad").hide();
         }
     });
+    $('#IfPage').attr("src", "Page.ashx?c=" + code + "&f=/index.html");
     //$("#main").load(function(){
     //var mainheight = $(this).contents().find("body").height()+30;
     //$(this).height(mainheight);

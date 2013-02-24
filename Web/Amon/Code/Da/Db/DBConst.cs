@@ -1295,5 +1295,38 @@
         public const int AGTD0206_SIZE = 512;
         #endregion
         #endregion
+
+        #region
+        public const string LOGS0100 = "LOGS0100";
+        /// <summary>
+        /// 显示排序
+        /// </summary>
+        public const string LOGS0101 = "LOGS0101";
+        /// <summary>
+        /// 索引
+        /// </summary>
+        public const string LOGS0102 = "LOGS0102";
+        public const int LOGS0102_SIZE = 16;
+        /// <summary>
+        /// 应用
+        /// </summary>
+        public const string LOGS0103 = "LOGS0103";
+        public const int LOGS0103_SIZE = 16;
+        /// <summary>
+        /// 版本
+        /// </summary>
+        public const string LOGS0104 = "LOGS0104";
+        public const int LOGS0104_SIZE = 16;
+        /// <summary>
+        /// 日期
+        /// </summary>
+        public const string LOGS0105 = "LOGS0105";
+        public const int LOGS0105_SIZE = 16;
+        /// <summary>
+        /// 事项
+        /// </summary>
+        public const string LOGS0106 = "LOGS0106";
+        public const int LOGS0106_SIZE = 16;
+        #endregion
     }
 }

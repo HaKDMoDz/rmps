@@ -2,7 +2,6 @@
 using Me.Amon.Da.Db;
 using Me.Amon.Model;
 using Me.Amon.Open;
-using Me.Amon.Open.V1.Web;
 using Me.Amon.Open.V1.Web.Pcs;
 using Me.Amon.Util;
 
@@ -27,7 +26,7 @@ namespace Me.Amon.Auth
                 return;
             }
 
-            var client = Session["oAuth"] as OAuthV1Client;
+            var client = Session["oAuth"] as KuaipanClient;
             if (client == null)
             {
                 return;
@@ -42,13 +41,15 @@ namespace Me.Amon.Auth
             client.Token.Type = OAuthClient.KUAIPAN;
             SaveToken(client.Token, userModel.Code);
 
+            client.CreateFolder("/", "我的网站");
+
             Response.Redirect("~/Page.aspx");
         }
 
         private void RequestToken()
         {
             OAuthConsumer consumer = OAuthConsumer.KuaipanConsumer();
-            OAuthV1Client client = new KuaipanClient(consumer, true);
+            KuaipanClient client = new KuaipanClient(consumer, true);
             if (!client.RequestToken())
             {
                 return;

@@ -18,7 +18,7 @@ namespace Me.Amon
     /// </summary>
     public class Pages : IHttpHandler, IRequiresSessionState
     {
-        private const string ROOT = "/我的博客";
+        private const string ROOT = "/我的网站";
 
         public void ProcessRequest(HttpContext context)
         {
@@ -106,16 +106,26 @@ namespace Me.Amon
             response.ContentType = "text/javascript";
 
             StringBuilder buffer = new StringBuilder();
+            buffer.Append("[{ id:0, pId:0, name:\"我的文档列表\", t:\"我的文档列表\", open:true}");
             var metas = client.ListMeta(ROOT);
             string path;
+            var id = 1;
             foreach (var meta in metas)
             {
                 path = meta.GetMeta();
                 if (path != null)
                 {
-                    buffer.Append(path.Substring(ROOT.Length)).Append(',');
+                    path = path.Substring(ROOT.Length);
+                    buffer.Append(",{");
+                    buffer.Append("id:").Append(id++).Append(",");
+                    buffer.Append("pId:0,");
+                    buffer.Append("name:\"").Append(path).Append("\",");
+                    buffer.Append("t:\"").Append(path).Append("\",");
+                    buffer.Append("open:true");
+                    buffer.Append("}");
                 }
             }
+            buffer.Append("];");
             response.Write(buffer.ToString());
         }
 

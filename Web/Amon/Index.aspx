@@ -1,34 +1,44 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="Me.Amon.Index" %>
+﻿<%@ Page Title="爱梦·我的云梦空间！" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="Me.Amon.Index" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>爱梦·我的云梦空间！</title>
-    <link href="~/_css/Amon.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div id="DbBase" class="base">
-        <img alt="" src="" width="0" height="0" style="border-width: 0px;" />
-        <div id="DvHead" runat="server" class="head">
-            <div class="clear hideSkiplink">
-                <a href="#NavigationMenu_SkipLink">
-                    <img alt="跳过导航链接" src="" width="0" height="0" style="border-width: 0px;" />
-                </a>
-                <div class="menu" id="NavigationMenu" style="float: left;">
-                    <ul class="level1 static" tabindex="0" style="position: relative; width: auto; float: left;" role="menubar">
-                        <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="Index.aspx" tabindex="-1">主页</a></li>
-                        <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="blog" tabindex="-1">博客</a></li>
-                        <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="Ideas.aspx" tabindex="-1">留言</a></li>
-                        <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="About.aspx" tabindex="-1">关于</a></li>
-                    </ul>
-                </div>
-                <div style="clear: left;">
-                </div>
-            </div>
-        </div>
+<asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="AmonHead">
+</asp:Content>
+<asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="AmonView">
+    <div id="DvBody" style="position: absolute; width: 820px; height: 300px; line-height: 300px; left: 50%; top: 150px; margin-left: -410px; text-align: center; overflow: hidden;">
+        <table width="820">
+            <tr>
+                <td width="400" align="right">
+                </td>
+                <td width="20" align="center" rowspan="2">
+                    <div class="line" />
+                </td>
+                <td width="400" style="height: 160px;" align="left">
+                    <table width="360">
+                        <tr>
+                            <th align="left">
+                                最近更新
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="LbVer" runat="server"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="LbDsp" runat="server"></asp:Label>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" style="height: 42px">
+                    <a href="/User/SignUp.aspx" class="button submit" style="color: #fff; padding: 10px 20px; font-size: 18px;">开启我的追梦之旅</a>
+                </td>
+                <td align="center" style="height: 42px">
+                    <a href="/About.aspx" class="button cancel" style="color: #666; padding: 10px 20px; font-size: 18px;">了解更多</a> <a href="http://demo.amon.me/Page.aspx" class="button cancel" style="color: #666; padding: 10px 20px; font-size: 18px;">使用说明</a>
+                </td>
+            </tr>
+        </table>
     </div>
-    </form>
-</body>
-</html>
+</asp:Content>

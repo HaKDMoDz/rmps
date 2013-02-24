@@ -10,8 +10,7 @@ namespace Me.Amon
             UserModel userModel = UserModel.Current(Session);
             if (userModel.Rank < IUser.LEVEL_02)
             {
-                HlSignIn.Visible = true;
-                HlSignUp.Visible = true;
+                LbSignIn.Visible = true;
                 LbSignOf.Visible = false;
 
                 LbUser.Visible = false;
@@ -20,14 +19,18 @@ namespace Me.Amon
             }
             else
             {
-                HlSignIn.Visible = false;
-                HlSignUp.Visible = false;
+                LbSignIn.Visible = false;
                 LbSignOf.Visible = true;
 
                 LbUser.Visible = true;
                 HlUser.Visible = true;
                 HlUser.Text = userModel.Name;
             }
+        }
+
+        protected void LbSignIn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/User/SignIn.aspx");
         }
 
         protected void LbSignOf_Click(object sender, EventArgs e)

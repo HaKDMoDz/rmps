@@ -13,7 +13,8 @@ namespace Me.Amon
 
             DvList.Style.Add("width", "220px");
             DvIdea.Style.Add("width", "300px");
-            DvPage.Style.Add("margin", "0px 310px 0px 230px");
+            DvPage.Style.Add("margin", "0px 0px 0px 246px");
+            DvIdea.Style.Add("display", "none");
         }
     }
 }

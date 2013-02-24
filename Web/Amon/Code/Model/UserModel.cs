@@ -6,8 +6,8 @@ using System.Text;
 using System.Web.SessionState;
 using System.Xml;
 using Me.Amon.Da.Db;
-using Me.Amon.Util;
 using Me.Amon.Open;
+using Me.Amon.Util;
 
 namespace Me.Amon.Model
 {
@@ -136,6 +136,7 @@ namespace Me.Amon.Model
             // 登录用户验证
             dba.ReInit();
             dba.AddTable(DBConst.C3010A00);
+            dba.AddColumn(DBConst.C3010A05);
             dba.AddColumn(DBConst.C3010A06);
             dba.AddColumn(DBConst.C3010A07);
             dba.AddColumn(DBConst.C3010A08);
