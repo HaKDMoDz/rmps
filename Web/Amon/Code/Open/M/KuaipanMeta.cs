@@ -128,13 +128,13 @@ namespace Me.Amon.Pcs.M
             type = (type ?? "").ToLower();
             if (type == "folder")
             {
-                return CPcs.META_TYPE_FOLDER;
+                return META_TYPE_FOLDER;
             }
             if (type == "file")
             {
-                return CPcs.META_TYPE_FILE;
+                return META_TYPE_FILE;
             }
-            return CPcs.META_TYPE_UNKNOWN;
+            return META_TYPE_UNKNOWN;
         }
 
         public override int GetSize()
@@ -184,11 +184,11 @@ namespace Me.Amon.Pcs.M
 
         public void SetMetaType(int type)
         {
-            if (type == CPcs.META_TYPE_FOLDER)
+            if (type == META_TYPE_FOLDER)
             {
                 this.type = "folder";
             }
-            else if (type == CPcs.META_TYPE_FILE)
+            else if (type == META_TYPE_FILE)
             {
                 this.type = "file";
             }

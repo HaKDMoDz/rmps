@@ -5,6 +5,10 @@ namespace Me.Amon.Open.M
 {
     public abstract class AMeta
     {
+        public const int META_TYPE_UNKNOWN = 0;
+        public const int META_TYPE_FILE = 1;
+        public const int META_TYPE_FOLDER = 2;
+
         /// <summary>
         /// 系统提示
         /// </summary>

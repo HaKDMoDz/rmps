@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -8,6 +9,7 @@ using System.Xml;
 using Me.Amon.Code.Model;
 using Me.Amon.Model;
 using Me.Amon.Open;
+using Me.Amon.Open.M;
 using Me.Amon.Open.V1.Web.Pcs;
 using Me.Amon.Util;
 
@@ -107,26 +109,65 @@ namespace Me.Amon
 
             StringBuilder buffer = new StringBuilder();
             buffer.Append("[{ id:0, pId:0, name:\"我的文档列表\", t:\"我的文档列表\", open:true}");
-            var metas = client.ListMeta(ROOT);
-            string path;
-            var id = 1;
+            LoadSub(buffer, client, ROOT, 1);
+            buffer.Append("];");
+            response.Write(buffer.ToString());
+        }
+
+        private void LoadSub(StringBuilder buffer, PcsClient client, string path, int root)
+        {
+            var metas = client.ListMeta(path);
+            SortCat(metas);
+
+            int id = root * 10;
             foreach (var meta in metas)
             {
+                if (meta.GetMetaName().ToLower() == "amon.me")
+                {
+                    continue;
+                }
+
+                id += 1;
+
                 path = meta.GetMeta();
                 if (path != null)
                 {
                     path = path.Substring(ROOT.Length);
                     buffer.Append(",{");
-                    buffer.Append("id:").Append(id++).Append(",");
-                    buffer.Append("pId:0,");
+                    buffer.Append("id:").Append(id).Append(",");
+                    buffer.Append("pId:").Append(root).Append(",");
                     buffer.Append("name:\"").Append(path).Append("\",");
                     buffer.Append("t:\"").Append(path).Append("\",");
                     buffer.Append("open:true");
                     buffer.Append("}");
                 }
+                if (meta.GetMetaType() == AMeta.META_TYPE_FOLDER)
+                {
+                    LoadSub(buffer, client, meta.GetMeta(), id);
+                }
             }
-            buffer.Append("];");
-            response.Write(buffer.ToString());
+        }
+
+        private void SortCat(List<AMeta> metas)
+        {
+            AMeta meta;
+            AMeta temp;
+            string name;
+            for (int i = 0, j = metas.Count; i < j; i += 1)
+            {
+                meta = metas[i];
+                name = meta.GetMetaName().ToLower();
+                for (int m = i; m < j; m += 1)
+                {
+                    temp = metas[m];
+                    if (meta.GetMetaType() > temp.GetMetaType() || name.CompareTo(temp.GetMetaName().ToLower()) > 0)
+                    {
+                        metas[i] = metas[m];
+                        metas[m] = meta;
+                        meta = metas[i];
+                    }
+                }
+            }
         }
 
         /// <summary>

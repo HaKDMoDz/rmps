@@ -2,10 +2,6 @@ namespace Me.Amon.Pcs
 {
     public class CPcs
     {
-        public const int META_TYPE_UNKNOWN = 0;
-        public const int META_TYPE_FOLDER = 1;
-        public const int META_TYPE_FILE = 2;
-
         /// <summary>
         /// Favourites
         /// </summary>

@@ -21,7 +21,7 @@
                 </ul>
             </div>
             <div id="DvPage" runat="server" class="page shadow">
-                <iframe id="IfPage" runat="server" style="width: 960px; border: 0px;"></iframe>
+                <iframe id="IfPage" runat="server" style="width: 100%; height:100%; border: 0px;"></iframe>
             </div>
             <div class="clear">
             </div>
