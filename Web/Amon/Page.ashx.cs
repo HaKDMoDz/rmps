@@ -108,18 +108,18 @@ namespace Me.Amon
             response.ContentType = "text/javascript";
 
             StringBuilder buffer = new StringBuilder();
-            buffer.Append("[{ id:0, pId:0, name:\"我的文档列表\", t:\"我的文档列表\", open:true}");
-            LoadSub(buffer, client, ROOT, 1);
+            buffer.Append("[{ id:\"0\", pId:\"0\", name:\"我的网站\", t:\"我的网站\", open:true}");
+            LoadSub(buffer, client, ROOT, "0");
             buffer.Append("];");
             response.Write(buffer.ToString());
         }
 
-        private void LoadSub(StringBuilder buffer, PcsClient client, string path, int root)
+        private void LoadSub(StringBuilder buffer, PcsClient client, string path, string root)
         {
             var metas = client.ListMeta(path);
             SortCat(metas);
 
-            int id = root * 10;
+            int id = 0;
             foreach (var meta in metas)
             {
                 if (meta.GetMetaName().ToLower() == "amon.me")
@@ -134,16 +134,19 @@ namespace Me.Amon
                 {
                     path = path.Substring(ROOT.Length);
                     buffer.Append(",{");
-                    buffer.Append("id:").Append(id).Append(",");
-                    buffer.Append("pId:").Append(root).Append(",");
+                    buffer.Append("id:\"").Append(root).Append('-').Append(id).Append("\",");
+                    buffer.Append("pId:\"").Append(root).Append("\",");
                     buffer.Append("name:\"").Append(path).Append("\",");
-                    buffer.Append("t:\"").Append(path).Append("\",");
-                    buffer.Append("open:true");
+                    buffer.Append("t:\"").Append(path).Append("\"");
+                    if (meta.GetMetaType() == AMeta.META_TYPE_FOLDER)
+                    {
+                        buffer.Append(",open:true");
+                    }
                     buffer.Append("}");
                 }
                 if (meta.GetMetaType() == AMeta.META_TYPE_FOLDER)
                 {
-                    LoadSub(buffer, client, meta.GetMeta(), id);
+                    LoadSub(buffer, client, meta.GetMeta(), root + "-" + id);
                 }
             }
         }
@@ -157,10 +160,10 @@ namespace Me.Amon
             {
                 meta = metas[i];
                 name = meta.GetMetaName().ToLower();
-                for (int m = i; m < j; m += 1)
+                for (int m = i + 1; m < j; m += 1)
                 {
                     temp = metas[m];
-                    if (meta.GetMetaType() > temp.GetMetaType() || name.CompareTo(temp.GetMetaName().ToLower()) > 0)
+                    if (meta.GetMetaType() < temp.GetMetaType() || name.CompareTo(temp.GetMetaName().ToLower()) > 0)
                     {
                         metas[i] = metas[m];
                         metas[m] = meta;

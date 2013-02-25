@@ -11,7 +11,7 @@ namespace Me.Amon
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Label1.Text = Page.RouteData.Values["Id"] + "";
         }
     }
 }

@@ -12,16 +12,16 @@
                 <td>
                 </td>
             </tr>
-            <tr>
+            <!--tr>
                 <td align="center">
                     <a href="SignWs.aspx">开通密码箱</a>
                 </td>
                 <td>
                 </td>
-            </tr>
+            </tr-->
             <tr>
                 <td align="center">
-                    <a href="/Auth/Kuaipan.aspx">开通密码箱</a>
+                    <a href="/Auth/Kuaipan.aspx">绑定金山快盘账号</a>
                 </td>
                 <td>
                 </td>

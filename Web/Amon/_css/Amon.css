@@ -114,6 +114,7 @@ first child of the left and right table columns */
     position: fixed;
     top: 10px;
     left: 10px;
+    overflow: hidden;
 }
 .page
 {
@@ -145,14 +146,6 @@ first child of the left and right table columns */
     margin: 0px auto;
     text-align: center;
     line-height: normal;
-}
-.line
-{
-    position: absolute;
-    left: 50%;
-    top: 0%;
-    bottom: 0%;
-    border-left: 1px solid #E3E9EE;
 }
 .cancel
 {
@@ -320,11 +313,6 @@ div.accountInfo
 .bold
 {
     font-weight: bold;
-}
-.submitButton
-{
-    text-align: right;
-    padding-right: 10px;
 }
 .corner
 {

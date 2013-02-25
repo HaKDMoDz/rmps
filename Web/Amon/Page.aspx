@@ -21,7 +21,7 @@
                 </ul>
             </div>
             <div id="DvPage" runat="server" class="page shadow">
-                <iframe id="IfPage" runat="server" style="width: 100%; height:100%; border: 0px;"></iframe>
+                <iframe id="IfPage" runat="server" style="width: 100%; height: 800px; border: 0px;"></iframe>
             </div>
             <div class="clear">
             </div>
@@ -49,7 +49,7 @@
                 enable: true,
                 idKey: "id",
                 pIdKey: "pId",
-                rootPId: ""
+                rootPId: "0"
             }
         },
         callback: {
@@ -59,6 +59,7 @@
     var zNodes = [];
     var t = $("#UlList");
     var code = 'A0000020';
+    $.fn.zTree.init(t, setting, zNodes);
 
     function onClick(event, treeId, treeNode, clickFlag) {
         $('#IfPage').attr("src", "Page.ashx?c=" + code + "&f=" + escape(treeNode.name));
@@ -73,7 +74,7 @@
             $("#DvLoad").hide();
         }
     });
-    $('#IfPage').attr("src", "Page.ashx?c=" + code + "&f=/index.html");
+    //$('#IfPage').attr("src", "Page.ashx?c=" + code + "&f=/index.html");
     //$("#main").load(function(){
     //var mainheight = $(this).contents().find("body").height()+30;
     //$(this).height(mainheight);
