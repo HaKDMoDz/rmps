@@ -31,7 +31,7 @@
         </div>
         <div id="DvLoad" class="load corner" style="width: 300px; height: 80px; margin-left: -150px; margin-top: -40px; text-align: center">
             <br />
-            <img alt="Loading" src="_img/Loading.gif" /><br />
+            <img alt="Loading" src="/_img/Loading.gif" /><br />
             <br />
             正在努力为您加载中……
         </div>

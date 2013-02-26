@@ -36,7 +36,7 @@
                     <a href="/User/SignUp.aspx" class="button submit" style="color: #fff; padding: 10px 20px; font-size: 18px;">开启我的追梦之旅</a>
                 </td>
                 <td align="center" style="height: 42px">
-                    <a href="/About.aspx" class="button cancel" style="color: #666; padding: 10px 20px; font-size: 18px;">了解更多</a> <a href="http://amon.me/Page.aspx" class="button cancel" style="color: #666; padding: 10px 20px; font-size: 18px;">使用说明</a>
+                    <a href="/About.aspx" class="button cancel" style="color: #666; padding: 10px 20px; font-size: 18px;">了解更多</a> <a href="http://amon.me/p/demo" class="button cancel" style="color: #666; padding: 10px 20px; font-size: 18px;">使用说明</a>
                 </td>
             </tr>
         </table>
