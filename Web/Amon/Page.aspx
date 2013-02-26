@@ -5,12 +5,12 @@
 <head id="Head1" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>爱梦·网志</title>
-    <link type="text/css" rel="stylesheet" href="_css/Amon.css" />
-    <link type="text/css" rel="stylesheet" href="~/_css/smoothness/jquery-ui-1.10.1.custom.min.css" />
-    <link type="text/css" rel="stylesheet" href="_js/zt/themes/zTreeStyle.css" />
+    <link type="text/css" rel="stylesheet" href="/_css/Amon.css" />
+    <link type="text/css" rel="stylesheet" href="/_css/smoothness/jquery-ui-1.10.1.custom.min.css" />
+    <link type="text/css" rel="stylesheet" href="/_js/zt/themes/zTreeStyle.css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="_js/zt/jquery.ztree.core-3.5.min.js"></script>
+    <script type="text/javascript" src="/_js/zt/jquery.ztree.core-3.5.min.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -63,19 +63,19 @@
     $.fn.zTree.init(t, setting, zNodes);
 
     function onClick(event, treeId, treeNode, clickFlag) {
-        $('#IfPage').attr("src", "Page.ashx?c=" + code + "&f=" + escape(treeNode.name));
+        $('#IfPage').attr("src", "/Page.ashx?c=" + code + "&f=" + escape(treeNode.name));
     }
 
     $.ajax({
         type: "POST",
-        url: "Page.ashx?c=" + code + "&t=cat",
+        url: "/Page.ashx?t=cat&c=" + code,
         success: function (data) {
             zNodes = eval(data);
             $.fn.zTree.init(t, setting, zNodes);
             $("#DvLoad").hide();
         }
     });
-    //$('#IfPage').attr("src", "Page.ashx?c=" + code + "&f=/index.html");
+    //$('#IfPage').attr("src", "/Page.ashx?c=" + code + "&f=" + escape("/index.html"));
     //$("#main").load(function(){
     //var mainheight = $(this).contents().find("body").height()+30;
     //$(this).height(mainheight);
