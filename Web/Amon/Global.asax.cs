@@ -9,7 +9,7 @@ namespace Amon
         void Application_Start(object sender, EventArgs e)
         {
             // 在应用程序启动时运行的代码
-
+            RegisterRoutes(RouteTable.Routes);
         }
 
         void Application_End(object sender, EventArgs e)
@@ -39,12 +39,17 @@ namespace Amon
 
         }
 
-        public static void RegisterRoutes(RouteCollection routeCollection)
+        public static void RegisterRoutes(RouteCollection routes)
         {
-            //routeCollection.MapPageRoute("RouteForCustomer", "Customer/{Id}", "~/Customer.aspx")
-
-            // 可以使用上面的，但是最好使用下面的，这样可以限制Id为数字
-            routeCollection.MapPageRoute("RouteForCustomer", "Customer/{Id}", "~/Ideas.aspx", true, null, new RouteValueDictionary(new { Id = "\\d+" }));
+            // Register a route for Page/{User}
+            routes.MapPageRoute(
+               "user-page", // Route name
+               "p/{user}", // Route URL
+               "~/Page.aspx", // Web page to handle route
+               true,
+               new RouteValueDictionary(new { user = "demo" }),
+               new RouteValueDictionary(new { user = "\\w+" })
+            );
         }
     }
 }

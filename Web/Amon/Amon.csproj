@@ -60,6 +60,7 @@
     <Content Include="Auth\Kuaipan.aspx" />
     <Content Include="blog\Index.htm" />
     <Content Include="Card.aspx" />
+    <Content Include="Demo.aspx" />
     <Content Include="docs\Amon.Me.xml" />
     <Content Include="docs\Page.htm" />
     <Content Include="Global.asax" />
@@ -570,6 +571,13 @@
     <Compile Include="Code\Util\HttpUtil.cs" />
     <Compile Include="Code\Util\SafeUtil.cs" />
     <Compile Include="Code\Web.cs" />
+    <Compile Include="Demo.aspx.cs">
+      <DependentUpon>Demo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Demo.aspx.designer.cs">
+      <DependentUpon>Demo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

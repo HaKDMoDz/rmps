@@ -36,6 +36,7 @@
             正在努力为您加载中……
         </div>
     </div>
+    <asp:HiddenField ID="HdCode" runat="server" />
     </form>
 </body>
 <script type="text/javascript">
@@ -58,7 +59,7 @@
     };
     var zNodes = [];
     var t = $("#UlList");
-    var code = 'A0000020';
+    var code = $('#HdCode').val();
     $.fn.zTree.init(t, setting, zNodes);
 
     function onClick(event, treeId, treeNode, clickFlag) {

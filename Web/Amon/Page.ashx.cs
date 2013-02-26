@@ -163,7 +163,8 @@ namespace Me.Amon
                 for (int m = i + 1; m < j; m += 1)
                 {
                     temp = metas[m];
-                    if (meta.GetMetaType() < temp.GetMetaType() || name.CompareTo(temp.GetMetaName().ToLower()) > 0)
+                    if (meta.GetMetaType() < temp.GetMetaType()
+                        || (meta.GetMetaType() == temp.GetMetaType() && name.CompareTo(temp.GetMetaName().ToLower()) > 0))
                     {
                         metas[i] = metas[m];
                         metas[m] = meta;
