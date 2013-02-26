@@ -63,7 +63,7 @@
     $.fn.zTree.init(t, setting, zNodes);
 
     function onClick(event, treeId, treeNode, clickFlag) {
-        $('#IfPage').attr("src", "/Page.ashx?c=" + code + "&f=" + escape(treeNode.name));
+        $('#IfPage').attr("src", "/Page.ashx?c=" + code + "&f=" + escape(treeNode.v));
     }
 
     $.ajax({

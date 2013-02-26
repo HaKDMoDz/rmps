@@ -132,12 +132,12 @@ namespace Me.Amon
                 path = meta.GetMeta();
                 if (path != null)
                 {
-                    path = path.Substring(ROOT.Length);
                     buffer.Append(",{");
                     buffer.Append("id:\"").Append(root).Append('-').Append(id).Append("\",");
                     buffer.Append("pId:\"").Append(root).Append("\",");
-                    buffer.Append("name:\"").Append(path).Append("\",");
-                    buffer.Append("t:\"").Append(path).Append("\"");
+                    buffer.Append("name:\"").Append(meta.GetMetaName()).Append("\",");
+                    buffer.Append("t:\"").Append(meta.GetMetaName()).Append("\",");
+                    buffer.Append("v:\"").Append(path.Substring(ROOT.Length)).Append("\"");
                     if (meta.GetMetaType() == AMeta.META_TYPE_FOLDER)
                     {
                         buffer.Append(",open:true");
