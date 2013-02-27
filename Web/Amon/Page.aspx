@@ -40,6 +40,19 @@
     </form>
 </body>
 <script type="text/javascript">
+    function reload(url) {
+        $('#IfPage').attr("src", "/Page.ashx?c=" + code + "&f=" + escape(url));
+        $("#IfPage").load(function () {
+            var h = $(this).contents().find("body").height() + 30;
+            if (h < 420) { h = 420; }
+            $(this).height(h);
+        });
+    }
+    reload("/index.html");
+    function onClick(event, treeId, treeNode, clickFlag) {
+        $('#IfPage').attr("src", "/Page.ashx?c=" + code + "&f=" + escape(treeNode.v));
+    }
+
     var zTree;
     var setting = {
         data: {
@@ -62,18 +75,6 @@
     var code = $('#HdCode').val();
     $.fn.zTree.init(t, setting, zNodes);
 
-	function reload(url) {
-		$('#IfPage').attr("src", "/Page.ashx?c=" + code + "&f=" + escape(url));
-		$("#IfPage").load(function(){
-			var h = $(this).contents().find("body").height() + 30;
-			if (h < 420) { h = 420; }
-			$(this).height(h);
-		}); 
-	}
-    function onClick(event, treeId, treeNode, clickFlag) {
-        $('#IfPage').attr("src", "/Page.ashx?c=" + code + "&f=" + escape(treeNode.v));
-    }
-
     $.ajax({
         type: "POST",
         url: "/Page.ashx?t=cat&c=" + code,
@@ -83,7 +84,5 @@
             $("#DvLoad").hide();
         }
     });
-	
-	reload("/index.html");
 </script>
 </html>
