@@ -62,6 +62,7 @@
     <Content Include="Card.aspx" />
     <Content Include="Demo.aspx" />
     <Content Include="docs\Amon.Me.xml" />
+    <Content Include="docs\Code.htm" />
     <Content Include="docs\Page.htm" />
     <Content Include="Global.asax" />
     <Content Include="Ideas.aspx" />

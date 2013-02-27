@@ -96,7 +96,7 @@ namespace Me.Amon
             }
 
             // 加载用户指定页面
-            if (!LoadLog(context, client, file))
+            if (!LoadTxt(context, client, file))
             {
                 LoadDef(context);
             }
@@ -239,11 +239,11 @@ namespace Me.Amon
         }
 
         /// <summary>
-        /// 加载用户页面
+        /// 加载文本
         /// </summary>
         /// <param name="context"></param>
         /// <param name="code"></param>
-        private bool LoadLog(HttpContext context, PcsClient client, string file)
+        private bool LoadTxt(HttpContext context, PcsClient client, string file)
         {
             var response = context.Response;
             response.ContentType = "text/html";
@@ -288,7 +288,20 @@ namespace Me.Amon
             }
         }
 
-        private bool LoadTxt()
+        /// <summary>
+        /// 加载网志
+        /// </summary>
+        /// <returns></returns>
+        private bool LoadHtm()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// 加载代码
+        /// </summary>
+        /// <returns></returns>
+        private bool LoadSrc()
         {
             return true;
         }
