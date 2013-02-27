@@ -38,51 +38,59 @@
     </div>
     <asp:HiddenField ID="HdCode" runat="server" />
     </form>
-</body>
-<script type="text/javascript">
-    function reload(url) {
-        $('#IfPage').attr("src", "/Page.ashx?c=" + code + "&f=" + escape(url));
-        $("#IfPage").load(function () {
-            var h = $(this).contents().find("body").height() + 30;
-            if (h < 420) { h = 420; }
-            $(this).height(h);
-        });
-    }
-    reload("/index.html");
-    function onClick(event, treeId, treeNode, clickFlag) {
-        $('#IfPage').attr("src", "/Page.ashx?c=" + code + "&f=" + escape(treeNode.v));
-    }
+    <script type="text/javascript">
+        function reload(url) {
+            $('#IfPage').attr("src", "/Page.ashx?c=" + code + "&f=" + escape(url));
+            $("#IfPage").load(function () {
+                var h = $(this).contents().find("body").height() + 30;
+                if (h < 420) { h = 420; }
+                $(this).height(h);
+            });
+        }
+        reload("/index.html");
+        function onClick(event, treeId, treeNode, clickFlag) {
+            $('#IfPage').attr("src", "/Page.ashx?c=" + code + "&f=" + escape(treeNode.v));
+        }
 
-    var zTree;
-    var setting = {
-        data: {
-            key: {
-                title: "t"
+        var zTree;
+        var setting = {
+            data: {
+                key: {
+                    title: "t"
+                },
+                simpleData: {
+                    enable: true,
+                    idKey: "id",
+                    pIdKey: "pId",
+                    rootPId: "0"
+                }
             },
-            simpleData: {
-                enable: true,
-                idKey: "id",
-                pIdKey: "pId",
-                rootPId: "0"
+            callback: {
+                onClick: onClick
             }
-        },
-        callback: {
-            onClick: onClick
-        }
-    };
-    var zNodes = [];
-    var t = $("#UlList");
-    var code = $('#HdCode').val();
-    $.fn.zTree.init(t, setting, zNodes);
+        };
+        var zNodes = [];
+        var t = $("#UlList");
+        var code = $('#HdCode').val();
+        $.fn.zTree.init(t, setting, zNodes);
 
-    $.ajax({
-        type: "POST",
-        url: "/Page.ashx?t=cat&c=" + code,
-        success: function (data) {
-            zNodes = eval(data);
-            $.fn.zTree.init(t, setting, zNodes);
-            $("#DvLoad").hide();
-        }
-    });
-</script>
+        $.ajax({
+            type: "POST",
+            url: "/Page.ashx?t=cat&c=" + code,
+            success: function (data) {
+                zNodes = eval(data);
+                $.fn.zTree.init(t, setting, zNodes);
+                $("#DvLoad").hide();
+            }
+        });
+    </script>
+    <!-- Baidu Button BEGIN -->
+    <script type="text/javascript" id="bdshare_js" data="type=slide&amp;img=5&amp;pos=right&amp;uid=6614751"></script>
+    <script type="text/javascript" id="bdshell_js"></script>
+    <script type="text/javascript">
+        var bds_config = { "bdTop": 80 };
+        document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date() / 3600000);
+    </script>
+    <!-- Baidu Button END -->
+</body>
 </html>

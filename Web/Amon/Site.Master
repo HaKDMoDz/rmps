@@ -21,6 +21,7 @@
                     <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="/Index.aspx" tabindex="-1">主页</a></li>
                     <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="/blog" tabindex="-1">博客</a></li>
                     <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="/Ideas.aspx" tabindex="-1">留言</a></li>
+                    <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="/p/Help" tabindex="-1">帮助</a></li>
                     <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="/About.aspx" tabindex="-1">关于</a></li>
                 </ul>
             </div>

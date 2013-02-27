@@ -11,6 +11,7 @@ using Me.Amon.Model;
 using Me.Amon.Open;
 using Me.Amon.Open.M;
 using Me.Amon.Open.V1.Web.Pcs;
+using Me.Amon.Util;
 
 namespace Me.Amon
 {
@@ -29,18 +30,35 @@ namespace Me.Amon
         {
             var response = context.Response;
 
-            // 加载用户授权
-            var user = UserModel.Current(context.Session);
-            var page = context.Session["amon_page"] as MPage;
-            if (page == null || page.Token == null)
+            OAuthToken token;
+
+            var c = context.Request["c"];
+            // 间接访问当前地址
+            if (string.IsNullOrWhiteSpace(c))
             {
-                LoadDef(context);
-                response.End();
+                // 加载用户授权
+                var user = UserModel.Current(context.Session);
+                var page = context.Session["amon_page"] as MPage;
+                if (page == null || page.Token == null)
+                {
+                    LoadDef(context);
+                    response.End();
+                    return;
+                }
+                token = page.Token;
+            }
+            // 直接访问当前地址
+            else if (CharUtil.IsValidateCode(c))
+            {
+                token = Web.LoadToken(c, "kuaipan");
+            }
+            else
+            {
                 return;
             }
 
             var consumer = OAuthConsumer.KuaipanConsumer();
-            var client = new KuaipanClient(consumer, page.Token, true);
+            var client = new KuaipanClient(consumer, token, true);
 
             // 加载页面目录
             var type = context.Request["t"];
