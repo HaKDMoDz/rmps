@@ -22,6 +22,10 @@ namespace Me.Amon
     {
         private const string ROOT = "/我的网站";
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public void ProcessRequest(HttpContext context)
         {
             var response = context.Response;
@@ -99,6 +103,7 @@ namespace Me.Amon
             response.End();
         }
 
+        #region 目录相关
         /// <summary>
         /// 加载目录信息
         /// </summary>
@@ -173,7 +178,9 @@ namespace Me.Amon
                 }
             }
         }
+        #endregion
 
+        #region 文件相关
         /// <summary>
         /// 加载用户配置文件
         /// </summary>
@@ -280,6 +287,12 @@ namespace Me.Amon
                 }
             }
         }
+
+        private bool LoadTxt()
+        {
+            return true;
+        }
+        #endregion
 
         public bool IsReusable
         {

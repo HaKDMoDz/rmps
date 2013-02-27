@@ -21,7 +21,7 @@
                 </ul>
             </div>
             <div id="DvPage" runat="server" class="page shadow">
-                <iframe id="IfPage" runat="server" style="width: 100%; height: 800px; border: 0px;"></iframe>
+                <iframe id="IfPage" runat="server" style="width: 100%; height: 420px; min-width: 300px; min-height: 420px; border: 0px;"></iframe>
             </div>
             <div class="clear">
             </div>
@@ -62,6 +62,14 @@
     var code = $('#HdCode').val();
     $.fn.zTree.init(t, setting, zNodes);
 
+	function reload(url) {
+		$('#IfPage').attr("src", "/Page.ashx?c=" + code + "&f=" + escape(url));
+		$("#IfPage").load(function(){
+			var h = $(this).contents().find("body").height() + 30;
+			if (h < 420) { h = 420; }
+			$(this).height(h);
+		}); 
+	}
     function onClick(event, treeId, treeNode, clickFlag) {
         $('#IfPage').attr("src", "/Page.ashx?c=" + code + "&f=" + escape(treeNode.v));
     }
@@ -75,10 +83,7 @@
             $("#DvLoad").hide();
         }
     });
-    //$('#IfPage').attr("src", "/Page.ashx?c=" + code + "&f=" + escape("/index.html"));
-    //$("#main").load(function(){
-    //var mainheight = $(this).contents().find("body").height()+30;
-    //$(this).height(mainheight);
-    //}); 
+	
+	reload("/index.html");
 </script>
 </html>
