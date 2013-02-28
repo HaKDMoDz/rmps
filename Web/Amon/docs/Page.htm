@@ -1,7 +1,20 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>建站说明</title>
+    <script type="text/javascript" src="/_js/sh/scripts/shCore.js"></script>
+    <script type="text/javascript" src="/_js/sh/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="/_js/sh/styles/shCoreDefault.css" />
+    <style type="text/css">
+        body
+        {
+            background: #fff;
+            color: #000;
+            font-size: 12px;
+            font-family: 宋体, 新宋体, 微软雅黑, "Helvetica Neue" , "Lucida Grande" , "Segoe UI" , Arial, Helvetica, Verdana, sans-serif;
+        }
+    </style>
 </head>
 <body>
     <p>
@@ -9,12 +22,17 @@
         <br />
         您可以通过以下的方式：
         <br />
-        1、创建一个页面；
+        1、<a href="/User/Page.aspx">创建一个页面</a>；
         <br />
         2、在【我的网志】目录中放置一个index.html文件；
         <br />
-        3、添加配置文件：
-        <br />
+        3、添加一个指向自定义目录的配置文件：
+<pre class="brush:xml;toolbar:false;">
+&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Amon Ver="1"&gt;
+    &lt;Page Page="/我的网志"/&gt;
+&lt;/Amon&gt;
+</pre>
     </p>
 </body>
 </html>
