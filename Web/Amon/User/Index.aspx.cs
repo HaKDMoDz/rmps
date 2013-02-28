@@ -10,11 +10,18 @@ namespace Me.Amon.User
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (UserModel.Current(Session).Rank < IUser.LEVEL_01)
+            var user = UserModel.Current(Session);
+            if (user.Rank < IUser.LEVEL_01)
             {
-                //Response.Redirect("~/Index.aspx");
+                Response.Redirect("~/Index.aspx");
                 return;
             }
+
+            DvLoad.Visible = (user.Token == null);
+            LbUserName.Text = user.Name;
+            HlUserPage.NavigateUrl = "/w/" + user.Name;
+            HlUserCard.NavigateUrl = "/c/" + user.Name;
+            HlUserImgs.NavigateUrl = "/p/" + user.Name;
 
             if (IsPostBack)
             {

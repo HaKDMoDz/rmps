@@ -41,14 +41,35 @@ namespace Amon
 
         public static void RegisterRoutes(RouteCollection routes)
         {
+            var def = new RouteValueDictionary(new { user = "demo" });
+            var reg = new RouteValueDictionary(new { user = "\\w+" });
+
             // Register a route for Page/{User}
             routes.MapPageRoute(
                "user-page", // Route name
-               "p/{user}", // Route URL
+               "w/{user}", // Route URL
                "~/Page.aspx", // Web page to handle route
                true,
-               new RouteValueDictionary(new { user = "demo" }),
-               new RouteValueDictionary(new { user = "\\w+" })
+               def,
+               reg
+            );
+            // Register a route for Page/{User}
+            routes.MapPageRoute(
+               "user-card", // Route name
+               "c/{user}", // Route URL
+               "~/Card.aspx", // Web page to handle route
+               true,
+               def,
+               reg
+            );
+            // Register a route for Page/{User}
+            routes.MapPageRoute(
+               "user-imgs", // Route name
+               "p/{user}", // Route URL
+               "~/Imgs.aspx", // Web page to handle route
+               true,
+               def,
+               reg
             );
         }
     }

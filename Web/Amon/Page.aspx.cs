@@ -17,7 +17,7 @@ namespace Me.Amon
 
             // 获取参数
             var user = (Page.RouteData.Values["user"] as string) ?? Request["user"];
-            if (user == null || Regex.IsMatch(user, "^\\w{4,}$"))
+            if (user == null || !Regex.IsMatch(user, "^\\w{4,}$"))
             {
                 user = "Demo";
             }

@@ -49,14 +49,16 @@
         }
         reload("/index.html");
         function onClick(event, treeId, treeNode, clickFlag) {
-            $('#IfPage').attr("src", "/Page.ashx?c=" + code + "&f=" + escape(treeNode.v));
+            if (treeNode.v) {
+                $('#IfPage').attr("src", "/Page.ashx?c=" + code + "&f=" + escape(treeNode.v));
+            }
         }
 
         var zTree;
         var setting = {
             data: {
                 key: {
-                    title: "t"
+                    title: "name"
                 },
                 simpleData: {
                     enable: true,
@@ -85,7 +87,7 @@
         });
     </script>
     <!-- Baidu Button BEGIN -->
-    <script type="text/javascript" id="bdshare_js" data="type=slide&amp;img=5&amp;pos=right&amp;uid=6614751"></script>
+    <script type="text/javascript" id="bdshare_js" data="type=slide&amp;img=3&amp;pos=right&amp;uid=6614751"></script>
     <script type="text/javascript" id="bdshell_js"></script>
     <script type="text/javascript">
         var bds_config = { "bdTop": 80 };

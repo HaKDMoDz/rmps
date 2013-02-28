@@ -170,6 +170,7 @@ namespace Me.Amon.Model
             _Code = "A0000000";
             _Name = "用户";
             _Mail = "user@amonsoft.cn";
+            Token = null;
         }
 
         /// <summary>
@@ -836,6 +837,6 @@ namespace Me.Amon.Model
         }
         #endregion
 
-        public OAuthToken Token { get; set; }
+        public OAuthToken Token { get; private set; }
     }
 }

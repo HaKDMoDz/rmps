@@ -4,53 +4,21 @@
 </asp:Content>
 <asp:Content ID="AmonData" ContentPlaceHolderID="AmonView" runat="Server">
     <div class="body" style="width: 960px; margin: 50px auto 0px auto;">
-        <table border="0" cellpadding="0" cellspacing="0" width="100%">
-            <tr>
-                <td align="center">
-                    <a href="SignPk.aspx">修改登录口令</a>
-                </td>
-                <td>
-                </td>
-            </tr>
-            <!--tr>
-                <td align="center">
-                    <a href="SignWs.aspx">开通密码箱</a>
-                </td>
-                <td>
-                </td>
-            </tr-->
-            <tr>
-                <td align="center">
-                    <a href="/Auth/Kuaipan.aspx">绑定金山快盘账号</a>
-                </td>
-                <td>
-                </td>
-            </tr>
-            <tr>
-                <td align="center">
-                    <asp:TreeView ID="TvCatTree" runat="server" ImageSet="Arrows">
-                        <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
-                        <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
-                        <ParentNodeStyle Font-Bold="False" />
-                        <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="0px" VerticalPadding="0px" />
-                    </asp:TreeView>
-                </td>
-                <td>
-                    <asp:GridView ID="GvKeyList" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None">
-                        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-                        <EditRowStyle BackColor="#999999" />
-                        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-                        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-                        <SortedAscendingCellStyle BackColor="#E9E7E2" />
-                        <SortedAscendingHeaderStyle BackColor="#506C8C" />
-                        <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
-                    </asp:GridView>
-                </td>
-            </tr>
-        </table>
+        <div id="DvPage" runat="server" class="page shadow">
+            <div style="margin: 10px;">
+                您好，<asp:Label ID="LbUserName" runat="server"></asp:Label>：<br />
+                <br />
+                欢迎您加入爱梦，我们会尽最大努力为您打造属于您的简易、高效、个性的空间，在这里您可以进行如下的操作：<br />
+                1、展示您的<asp:HyperLink ID="HlUserPage" runat="server" ToolTip="点击进行查看">个人网志</asp:HyperLink>；<br />
+                2、维护您的<asp:HyperLink ID="HlUserCard" runat="server" ToolTip="点击进行查看">个性卡片</asp:HyperLink>；<br />
+                3、展示您的<asp:HyperLink ID="HlUserImgs" runat="server" ToolTip="点击进行查看">精彩图册</asp:HyperLink>。<br />
+            </div>
+        </div>
+        <div id="DvLoad" runat="server" class="load corner" style="width: 300px; height: 80px; margin-left: -150px; margin-top: -40px; text-align: center">
+            <a href="/Auth/Kuaipan.aspx" target="_self" title="绑定金山快盘账户">
+                <img src="/_img/kuaipan_o.png" alt="绑定金山快盘账户" /></a><br />
+            <br />
+            您尚未绑定金山快盘账号，点击此处进行<a href="/Auth/Kuaipan.aspx" title="绑定金山快盘账户">绑定</a>！
+        </div>
     </div>
 </asp:Content>

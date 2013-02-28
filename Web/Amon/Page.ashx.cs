@@ -29,39 +29,46 @@ namespace Me.Amon
         public void ProcessRequest(HttpContext context)
         {
             var response = context.Response;
+            var type = context.Request["t"];
 
             OAuthToken token;
 
-            var c = context.Request["c"];
-            // 间接访问当前地址
-            if (string.IsNullOrWhiteSpace(c))
+            //var c = context.Request["c"];
+            //// 间接访问当前地址
+            //if (string.IsNullOrWhiteSpace(c))
+            //{
+            // 加载用户授权
+            var user = UserModel.Current(context.Session);
+            var page = context.Session["amon_page"] as MPage;
+            if (page == null || page.Token == null)
             {
-                // 加载用户授权
-                var user = UserModel.Current(context.Session);
-                var page = context.Session["amon_page"] as MPage;
-                if (page == null || page.Token == null)
+                if (type == "cat")
+                {
+                    context.Response.Write("[{ id:\"0\", pId:\"0\", name:\"我的网志\", t:\"我的网志\", isParent:true}]");
+                }
+                else
                 {
                     LoadDef(context);
-                    response.End();
-                    return;
                 }
-                token = page.Token;
-            }
-            // 直接访问当前地址
-            else if (CharUtil.IsValidateCode(c))
-            {
-                token = Web.LoadToken(c, "kuaipan");
-            }
-            else
-            {
+                response.End();
                 return;
             }
+            token = page.Token;
+            //}
+            //// 直接访问当前地址
+            //else if (CharUtil.IsValidateCode(c))
+            //{
+            //    token = Web.LoadToken(c, "kuaipan");
+            //}
+            //else
+            //{
+            //    return;
+            //}
 
             var consumer = OAuthConsumer.KuaipanConsumer();
             var client = new KuaipanClient(consumer, token, true);
 
             // 加载页面目录
-            var type = context.Request["t"];
             if (type == "cat")
             {
                 LoadCat(response, client);
@@ -216,13 +223,13 @@ namespace Me.Amon
             response.ContentType = "text/javascript";
 
             StringBuilder buffer = new StringBuilder();
-            buffer.Append("[{ id:\"0\", pId:\"0\", name:\"我的网站\", t:\"我的网站\", open:true}");
-            LoadSub(buffer, client, ROOT, "0");
+            buffer.Append("[{ id:\"0\", pId:\"0\", name:\"我的网志\", t:\"我的网志\", isParent:true, open:true}");
+            LoadSub(buffer, client, ROOT, "0", false);
             buffer.Append("];");
             response.Write(buffer.ToString());
         }
 
-        private void LoadSub(StringBuilder buffer, PcsClient client, string path, string root)
+        private void LoadSub(StringBuilder buffer, PcsClient client, string path, string root, bool open)
         {
             var metas = client.ListMeta(path);
             SortCat(metas);
@@ -244,17 +251,19 @@ namespace Me.Amon
                     buffer.Append("id:\"").Append(root).Append('-').Append(id).Append("\",");
                     buffer.Append("pId:\"").Append(root).Append("\",");
                     buffer.Append("name:\"").Append(meta.GetMetaName()).Append("\",");
-                    buffer.Append("t:\"").Append(meta.GetMetaName()).Append("\",");
-                    buffer.Append("v:\"").Append(path.Substring(ROOT.Length)).Append("\"");
                     if (meta.GetMetaType() == AMeta.META_TYPE_FOLDER)
                     {
-                        buffer.Append(",open:true");
+                        buffer.Append("isParent:true, open:").Append(open);
+                    }
+                    else
+                    {
+                        buffer.Append("v:\"").Append(path.Substring(ROOT.Length)).Append("\"");
                     }
                     buffer.Append("}");
                 }
                 if (meta.GetMetaType() == AMeta.META_TYPE_FOLDER)
                 {
-                    LoadSub(buffer, client, meta.GetMeta(), root + "-" + id);
+                    LoadSub(buffer, client, meta.GetMeta(), root + "-" + id, false);
                 }
             }
         }
@@ -361,7 +370,7 @@ namespace Me.Amon
                 long size = pcsResponse.ContentLength;
                 if (size > -1)
                 {
-                    if (size > 1073741824)
+                    if (size > 2097152)
                     {
                         response.Write("您要查看的文件过大！");
                         return true;
@@ -483,7 +492,7 @@ namespace Me.Amon
                 long size = pcsResponse.ContentLength;
                 if (size > -1)
                 {
-                    if (size > 1073741824)
+                    if (size > 2097152)
                     {
                         response.Write("您要查看的文件过大！");
                         return true;
