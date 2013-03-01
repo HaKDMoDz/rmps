@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Me.Amon
 {
-    public partial class Demo : System.Web.UI.Page
+    public partial class Users : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -194,9 +194,11 @@
     <Content Include="logo\soft\logo96.png" />
     <Content Include="logo\soft\logo_2.svg" />
     <Content Include="Page.aspx" />
+    <Content Include="User\Auth.aspx" />
     <Content Include="User\Card.aspx" />
     <Content Include="User\Index.aspx" />
     <Content Include="User\Page.aspx" />
+    <Content Include="User\Safe.aspx" />
     <Content Include="User\SignIn.aspx" />
     <Content Include="User\SignPk.aspx" />
     <Content Include="User\SignUp.aspx" />
@@ -265,6 +267,15 @@
     <Content Include="_js\jstree\themes\default\dots_rtl.gif" />
     <Content Include="_js\jstree\themes\default\style.css" />
     <Content Include="_js\jstree\themes\default\throbber.gif" />
+    <Content Include="_js\sf\css\superfish-navbar.css" />
+    <Content Include="_js\sf\css\superfish-vertical.css" />
+    <Content Include="_js\sf\css\superfish.css" />
+    <Content Include="_js\sf\images\arrows-ffffff.png" />
+    <Content Include="_js\sf\js\hoverIntent.js" />
+    <Content Include="_js\sf\js\jquery-1.9.0.min.js" />
+    <Content Include="_js\sf\js\jquery.bgiframe.min.js" />
+    <Content Include="_js\sf\js\superfish.js" />
+    <Content Include="_js\sf\js\supersubs.js" />
     <Content Include="_js\sh\scripts\shAutoloader.js" />
     <Content Include="_js\sh\scripts\shBrushAppleScript.js" />
     <Content Include="_js\sh\scripts\shBrushAS3.js" />
@@ -677,6 +688,20 @@
     <Compile Include="s.ashx.cs">
       <DependentUpon>s.ashx</DependentUpon>
     </Compile>
+    <Compile Include="User.Master.cs">
+      <DependentUpon>User.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User.Master.designer.cs">
+      <DependentUpon>User.Master</DependentUpon>
+    </Compile>
+    <Compile Include="User\Auth.aspx.cs">
+      <DependentUpon>Auth.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\Auth.aspx.designer.cs">
+      <DependentUpon>Auth.aspx</DependentUpon>
+    </Compile>
     <Compile Include="User\Card.aspx.cs">
       <DependentUpon>Card.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -697,6 +722,13 @@
     </Compile>
     <Compile Include="User\Page.aspx.designer.cs">
       <DependentUpon>Page.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\Safe.aspx.cs">
+      <DependentUpon>Safe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\Safe.aspx.designer.cs">
+      <DependentUpon>Safe.aspx</DependentUpon>
     </Compile>
     <Compile Include="User\SignIn.aspx.cs">
       <DependentUpon>SignIn.aspx</DependentUpon>
@@ -783,6 +815,7 @@
     <Content Include="s.ashx" />
     <None Include="logo\soft\logo.icns" />
     <None Include="logo\soft\logo.psd" />
+    <Content Include="User.Master" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

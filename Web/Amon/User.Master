@@ -1,0 +1,42 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="User.master.cs" Inherits="Me.Amon.Users" %>
+
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head id="Head1" runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="~/_css/Amon.css" rel="stylesheet" type="text/css" />
+    <link href="~/_css/smoothness/jquery-ui-1.10.1.custom.css" rel="stylesheet" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+    <asp:ContentPlaceHolder ID="AmonHead" runat="server" />
+</head>
+<body>
+    <form id="Form1" runat="server">
+    <div id="DbBase" class="base">
+        <img alt="" src="" width="0" height="0" style="border-width: 0px;" />
+        <div id="DvHead" runat="server" class="head">
+            <div class="menu" style="float: left;">
+                <ul class="level1 static" tabindex="0" style="position: relative; width: auto; float: left;" role="menubar">
+                    <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="/Index.aspx" tabindex="-1">主页</a></li>
+                    <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="/User/Index.aspx" tabindex="-1">自我展示</a></li>
+                    <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="/User/Auth.aspx" tabindex="-1">授权管理</a></li>
+                    <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="/User/Safe.aspx" tabindex="-1">账户安全</a></li>
+                    <li role="menuitem" class="static" style="position: relative; float: left;"><a class="level1 static" href="/p/Help" tabindex="-1">帮助</a></li>
+                </ul>
+            </div>
+            <div style="float: right; padding: 4px 0px 4px 8px; margin-right: 8px; padding-top: 10px;">
+                <asp:Label ID="LbUser" runat="server" ForeColor="White">您好：</asp:Label>
+                <asp:HyperLink ID="HlUser" runat="server" ForeColor="White">Amon</asp:HyperLink>
+                <asp:LinkButton ID="LbSignIn" runat="server" CssClass="button login" ForeColor="Black" OnClick="LbSignIn_Click">登录</asp:LinkButton>
+                <asp:LinkButton ID="LbSignOf" runat="server" CssClass="button login" ForeColor="Black" OnClick="LbSignOf_Click">注销</asp:LinkButton>
+            </div>
+        </div>
+        <asp:ContentPlaceHolder ID="AmonView" runat="server" />
+        <!--div id="foot" class="foot">
+            <span>&copy;2012 Amon.Me</span>
+        </div-->
+    </div>
+    </form>
+</body>
+</html>
