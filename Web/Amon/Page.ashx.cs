@@ -72,7 +72,7 @@ namespace Me.Amon
             if (type == "cat")
             {
                 LoadCat(response, client);
-                response.End();
+                //response.End();
                 return;
             }
 
@@ -223,7 +223,7 @@ namespace Me.Amon
             response.ContentType = "text/javascript";
 
             StringBuilder buffer = new StringBuilder();
-            buffer.Append("[{ id:\"0\", pId:\"0\", name:\"我的网志\", t:\"我的网志\", isParent:true, open:true}");
+            buffer.Append("[{id:'0', pId:'0', name:'我的网志', t:'我的网志', isParent:true, open:true}");
             LoadSub(buffer, client, ROOT, "0", false);
             buffer.Append("];");
             response.Write(buffer.ToString());
@@ -248,16 +248,16 @@ namespace Me.Amon
                 if (path != null)
                 {
                     buffer.Append(",{");
-                    buffer.Append("id:\"").Append(root).Append('-').Append(id).Append("\",");
-                    buffer.Append("pId:\"").Append(root).Append("\",");
-                    buffer.Append("name:\"").Append(meta.GetMetaName()).Append("\",");
+                    buffer.Append("id:'").Append(root).Append('-').Append(id).Append("',");
+                    buffer.Append("pId:'").Append(root).Append("',");
+                    buffer.Append("name:'").Append(meta.GetMetaName()).Append("',");
                     if (meta.GetMetaType() == AMeta.META_TYPE_FOLDER)
                     {
-                        buffer.Append("isParent:true, open:").Append(open);
+                        buffer.Append("isParent:true, open:").Append(open ? "true" : "false");
                     }
                     else
                     {
-                        buffer.Append("v:\"").Append(path.Substring(ROOT.Length)).Append("\"");
+                        buffer.Append("v:'").Append(path.Substring(ROOT.Length)).Append("'");
                     }
                     buffer.Append("}");
                 }

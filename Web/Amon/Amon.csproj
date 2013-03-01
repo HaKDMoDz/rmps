@@ -258,6 +258,7 @@
     <Content Include="_img\t4.png" />
     <Content Include="_img\wrap.png" />
     <Content Include="_js\Cube.js" />
+    <Content Include="_js\Demo.js" />
     <Content Include="_js\jquery-1.4.1-vsdoc.js" />
     <Content Include="_js\jquery-1.4.1.js" />
     <Content Include="_js\jquery-1.4.1.min.js" />

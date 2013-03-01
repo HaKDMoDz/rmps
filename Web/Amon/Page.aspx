@@ -58,6 +58,7 @@
         var setting = {
             data: {
                 key: {
+                    name: "name",
                     title: "name"
                 },
                 simpleData: {
@@ -74,7 +75,6 @@
         var zNodes = [];
         var t = $("#UlList");
         var code = $('#HdCode').val();
-        $.fn.zTree.init(t, setting, zNodes);
 
         $.ajax({
             type: "POST",
@@ -83,6 +83,12 @@
                 zNodes = eval(data);
                 $.fn.zTree.init(t, setting, zNodes);
                 $("#DvLoad").hide();
+            },
+            error: function (data) {
+                $("#DvLoad").hide();
+                $.fn.zTree.init(t, setting, data);
+                alert(data.toString());
+                //alert('数据加载出错，请稍后尝试！');
             }
         });
     </script>

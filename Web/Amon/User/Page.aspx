@@ -2,10 +2,10 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="AmonHead" runat="Server">
     <script type="text/javascript">
-        window.UEDITOR_HOME_URL = "/Amon/_js/ue/";
+        window.UEDITOR_HOME_URL = "/_js/ue/";
     </script>
-    <script type="text/javascript" charset="utf-8" src="../_js/ue/editor_config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../_js/ue/editor_all.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/_js/ue/editor_config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/_js/ue/editor_all.js"></script>
     <style type="text/css">
         .clear
         {
@@ -14,8 +14,12 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="AmonView" runat="Server">
-    <div>
-        <script id="editor" type="text/plain">这里可以书写，编辑器的初始内容</script>
+    <div class="body" style="margin: 50px auto 0px auto;">
+        <div class="page shadow">
+            <div style="margin: 10px">
+                <script id="editor" type="text/plain">这里可以书写，编辑器的初始内容</script>
+            </div>
+        </div>
     </div>
     <script type="text/javascript">
         //实例化编辑器
